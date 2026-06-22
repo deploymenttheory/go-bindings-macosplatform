@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a pairing of a source and destination.
-//
 // NetworkSession is an idiomatic wrapper over the Objective-C class MIDINetworkSession.
+//
+// An object that represents a pairing of a source and destination.
 type NetworkSession struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NetworkSessionFromID(id objc.ID) *NetworkSession {
 	if id == 0 {
 		return nil
 	}
-	x := &NetworkSession{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NetworkSession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func networkSessionAdopt(id objc.ID) *NetworkSession {
 	if id == 0 {
 		return nil
 	}
-	x := &NetworkSession{Handle: objref.Wrap(id)}
+	x := &NetworkSession{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,90 +60,96 @@ func (x *NetworkSession) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NetworkSession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNetworkSession creates a new NetworkSession.
 func NewNetworkSession() *NetworkSession {
 	_id := objc.Send[objc.ID](objc.ID(_class("MIDINetworkSession")), objc.RegisterName("new"))
 	return networkSessionAdopt(_id)
 }
 
-// A Boolean value that determines whether the session is enabled.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that determines whether the session is enabled.
 func (x *NetworkSession) WithEnabled(enabled bool) *NetworkSession {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The policy that determines who can connect to this session.
-//
-// WithConnectionPolicy sets connectionPolicy and returns the receiver so calls can be chained.
+// WithConnectionPolicy the policy that determines who can connect to this session.
 func (x *NetworkSession) WithConnectionPolicy(connectionPolicy NetworkConnectionPolicy) *NetworkSession {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionPolicy:"), connectionPolicy)
 	return x
 }
 
-// Returns the array of network hosts.
+// Contacts returns the array of network hosts.
 func (x *NetworkSession) Contacts() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contacts"))
 	return obj.Wrap(_r)
 }
 
-// Adds a host as a contact.
+// AddContact adds a host as a contact.
 func (x *NetworkSession) AddContact(contact *NetworkHost) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addContact:"), objref.IDOf(contact))
 	return _r
 }
 
-// Removes a host as a contact.
+// RemoveContact removes a host as a contact.
 func (x *NetworkSession) RemoveContact(contact *NetworkHost) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeContact:"), objref.IDOf(contact))
 	return _r
 }
 
-// Returns the session’s set of MIDI network connections.
+// Connections returns the session’s set of MIDI network connections.
 func (x *NetworkSession) Connections() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connections"))
 	return obj.Wrap(_r)
 }
 
-// Adds a new connection to this session.
+// AddConnection adds a new connection to this session.
 func (x *NetworkSession) AddConnection(connection *NetworkConnection) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addConnection:"), objref.IDOf(connection))
 	return _r
 }
 
-// Removes a connection from this session.
+// RemoveConnection removes a connection from this session.
 func (x *NetworkSession) RemoveConnection(connection *NetworkConnection) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeConnection:"), objref.IDOf(connection))
 	return _r
 }
 
-// Returns the session’s source endpoint.
+// SourceEndpoint returns the session’s source endpoint.
 func (x *NetworkSession) SourceEndpoint() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceEndpoint"))
 	return _r
 }
 
-// Returns the session’s destination endpoint.
+// DestinationEndpoint returns the session’s destination endpoint.
 func (x *NetworkSession) DestinationEndpoint() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("destinationEndpoint"))
 	return _r
 }
 
+// IsEnabled wraps the corresponding Objective-C method.
 func (x *NetworkSession) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r
 }
 
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *NetworkSession) SetEnabled(enabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
+// NetworkPort wraps the corresponding Objective-C method.
 func (x *NetworkSession) NetworkPort() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("networkPort"))
 	return _r
 }
 
+// NetworkName wraps the corresponding Objective-C method.
 func (x *NetworkSession) NetworkName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkName"))
 	if _r == 0 {
@@ -150,6 +158,7 @@ func (x *NetworkSession) NetworkName() string {
 	return purego.GoString(_r)
 }
 
+// LocalName wraps the corresponding Objective-C method.
 func (x *NetworkSession) LocalName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localName"))
 	if _r == 0 {
@@ -158,11 +167,13 @@ func (x *NetworkSession) LocalName() string {
 	return purego.GoString(_r)
 }
 
+// ConnectionPolicy wraps the corresponding Objective-C method.
 func (x *NetworkSession) ConnectionPolicy() NetworkConnectionPolicy {
 	_r := objc.Send[NetworkConnectionPolicy](objref.IDOf(x), objc.RegisterName("connectionPolicy"))
 	return _r
 }
 
+// SetConnectionPolicy wraps the corresponding Objective-C method.
 func (x *NetworkSession) SetConnectionPolicy(connectionPolicy NetworkConnectionPolicy) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionPolicy:"), connectionPolicy)
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object encapsulating the metrics for a session task.
-//
 // URLSessionTaskMetrics is an idiomatic wrapper over the Objective-C class NSURLSessionTaskMetrics.
+//
+// An object encapsulating the metrics for a session task.
 type URLSessionTaskMetrics struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func URLSessionTaskMetricsFromID(id objc.ID) *URLSessionTaskMetrics {
 	if id == 0 {
 		return nil
 	}
-	x := &URLSessionTaskMetrics{Handle: objref.Wrap(purego.Retain(id))}
+	x := &URLSessionTaskMetrics{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func uRLSessionTaskMetricsAdopt(id objc.ID) *URLSessionTaskMetrics {
 	if id == 0 {
 		return nil
 	}
-	x := &URLSessionTaskMetrics{Handle: objref.Wrap(id)}
+	x := &URLSessionTaskMetrics{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +60,26 @@ func (x *URLSessionTaskMetrics) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *URLSessionTaskMetrics) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewURLSessionTaskMetrics creates a new URLSessionTaskMetrics.
 func NewURLSessionTaskMetrics() *URLSessionTaskMetrics {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSURLSessionTaskMetrics")), objc.RegisterName("new"))
 	return uRLSessionTaskMetricsAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionTaskMetrics) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionTaskMetrics {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// TransactionMetrics wraps the corresponding Objective-C method.
+//
 // TransactionMetrics returns the collection as a Go slice.
 func (x *URLSessionTaskMetrics) TransactionMetrics() []*URLSessionTaskTransactionMetrics {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactionMetrics"))
@@ -78,11 +88,13 @@ func (x *URLSessionTaskMetrics) TransactionMetrics() []*URLSessionTaskTransactio
 	})
 }
 
+// TaskInterval wraps the corresponding Objective-C method.
 func (x *URLSessionTaskMetrics) TaskInterval() *DateInterval {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("taskInterval"))
 	return DateIntervalFromID(_r)
 }
 
+// RedirectCount wraps the corresponding Objective-C method.
 func (x *URLSessionTaskMetrics) RedirectCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("redirectCount"))
 	return _r

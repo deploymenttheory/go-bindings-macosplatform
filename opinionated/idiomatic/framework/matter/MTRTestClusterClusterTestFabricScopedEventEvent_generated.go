@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRTestClusterClusterTestFabricScopedEventEvent is an idiomatic wrapper over the Objective-C class MTRTestClusterClusterTestFabricScopedEventEvent.
+//
+// It embeds [MTRUnitTestingClusterTestFabricScopedEventEvent], promoting that type's methods.
 type MTRTestClusterClusterTestFabricScopedEventEvent struct {
-	objref.Handle
+	MTRUnitTestingClusterTestFabricScopedEventEvent
 }
 
 // MTRTestClusterClusterTestFabricScopedEventEventFromID adopts an existing Objective-C object as a MTRTestClusterClusterTestFabricScopedEventEvent
@@ -23,7 +24,8 @@ func MTRTestClusterClusterTestFabricScopedEventEventFromID(id objc.ID) *MTRTestC
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTestClusterClusterTestFabricScopedEventEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRTestClusterClusterTestFabricScopedEventEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRTestClusterClusterTestFabricScopedEventEventAdopt(id objc.ID) *MTRTestCl
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTestClusterClusterTestFabricScopedEventEvent{Handle: objref.Wrap(id)}
+	x := &MTRTestClusterClusterTestFabricScopedEventEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRTestClusterClusterTestFabricScopedEventEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRTestClusterClusterTestFabricScopedEventEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRTestClusterClusterTestFabricScopedEventEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRTestClusterClusterTestFabricScopedEventEvent creates a new MTRTestClusterClusterTestFabricScopedEventEvent.
@@ -62,7 +50,7 @@ func NewMTRTestClusterClusterTestFabricScopedEventEvent() *MTRTestClusterCluster
 	return mTRTestClusterClusterTestFabricScopedEventEventAdopt(_id)
 }
 
-// WithFabricIndex sets fabricIndex and returns the receiver so calls can be chained.
+// WithFabricIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRTestClusterClusterTestFabricScopedEventEvent) WithFabricIndex(fabricIndex obj.Object) *MTRTestClusterClusterTestFabricScopedEventEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return x
@@ -75,3 +63,5 @@ type MTRTestClusterClusterTestFabricScopedEventEventable interface {
 }
 
 var _ MTRTestClusterClusterTestFabricScopedEventEventable = (*MTRTestClusterClusterTestFabricScopedEventEvent)(nil)
+
+var _ MTRUnitTestingClusterTestFabricScopedEventEventProvider = (*MTRTestClusterClusterTestFabricScopedEventEvent)(nil)

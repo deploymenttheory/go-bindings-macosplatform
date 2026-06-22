@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes a series of models suitable for lightweight migration.
-//
 // LightweightMigrationStage is an idiomatic wrapper over the Objective-C class NSLightweightMigrationStage.
+//
+// It embeds [MigrationStage], promoting that type's methods.
+//
+// An object that describes a series of models suitable for lightweight migration.
 type LightweightMigrationStage struct {
-	objref.Handle
+	MigrationStage
 }
 
 // LightweightMigrationStageFromID adopts an existing Objective-C object as a LightweightMigrationStage
@@ -25,7 +26,8 @@ func LightweightMigrationStageFromID(id objc.ID) *LightweightMigrationStage {
 	if id == 0 {
 		return nil
 	}
-	x := &LightweightMigrationStage{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LightweightMigrationStage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,43 +40,27 @@ func lightweightMigrationStageAdopt(id objc.ID) *LightweightMigrationStage {
 	if id == 0 {
 		return nil
 	}
-	x := &LightweightMigrationStage{Handle: objref.Wrap(id)}
+	x := &LightweightMigrationStage{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *LightweightMigrationStage) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LightweightMigrationStage) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LightweightMigrationStage) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a lightweight migration stage with the specified version checksums.
-//
-// NewLightweightMigrationStageWithVersionChecksums creates a new LightweightMigrationStage.
+// NewLightweightMigrationStageWithVersionChecksums creates a lightweight migration stage with the specified version checksums.
 func NewLightweightMigrationStageWithVersionChecksums(versionChecksums []string) *LightweightMigrationStage {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSLightweightMigrationStage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVersionChecksums:"), purego.SliceToNSArray(versionChecksums, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return lightweightMigrationStageAdopt(_id)
 }
 
-// The textual description of the migration stage’s purpose.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the textual description of the migration stage’s purpose.
 func (x *LightweightMigrationStage) WithLabel(label string) *LightweightMigrationStage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// VersionChecksums wraps the corresponding Objective-C method.
+//
 // VersionChecksums returns the collection as a Go slice.
 func (x *LightweightMigrationStage) VersionChecksums() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("versionChecksums"))
@@ -89,3 +75,5 @@ type LightweightMigrationStageable interface {
 }
 
 var _ LightweightMigrationStageable = (*LightweightMigrationStage)(nil)
+
+var _ MigrationStageProvider = (*LightweightMigrationStage)(nil)

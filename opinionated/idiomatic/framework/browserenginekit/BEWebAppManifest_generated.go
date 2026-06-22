@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a web app manifest.
-//
 // WebAppManifest is an idiomatic wrapper over the Objective-C class BEWebAppManifest.
+//
+// An object that represents a web app manifest.
 type WebAppManifest struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WebAppManifestFromID(id objc.ID) *WebAppManifest {
 	if id == 0 {
 		return nil
 	}
-	x := &WebAppManifest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WebAppManifest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func webAppManifestAdopt(id objc.ID) *WebAppManifest {
 	if id == 0 {
 		return nil
 	}
-	x := &WebAppManifest{Handle: objref.Wrap(id)}
+	x := &WebAppManifest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,20 +60,26 @@ func (x *WebAppManifest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns nil if manifestURL is invalid or jsonData cannot be parsed.
-//
-// NewWebAppManifestWithJSONDataManifestURL creates a new WebAppManifest.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WebAppManifest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWebAppManifestWithJSONDataManifestURL returns nil if manifestURL is invalid or jsonData cannot be parsed.
 func NewWebAppManifestWithJSONDataManifestURL(jsonData obj.Object, manifestURL string) *WebAppManifest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("BEWebAppManifest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithJSONData:manifestURL:"), objref.IDOf(jsonData), rt.FileURL(manifestURL))
 	return webAppManifestAdopt(_id)
 }
 
+// JsonData wraps the corresponding Objective-C method.
 func (x *WebAppManifest) JsonData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jsonData"))
 	return obj.Wrap(_r)
 }
 
+// ManifestURL wraps the corresponding Objective-C method.
 func (x *WebAppManifest) ManifestURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manifestURL"))
 	return obj.Wrap(_r)

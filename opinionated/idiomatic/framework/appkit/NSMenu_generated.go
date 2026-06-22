@@ -6,15 +6,16 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages an app’s menus.
-//
 // Menu is an idiomatic wrapper over the Objective-C class NSMenu.
+//
+// An object that manages an app’s menus.
 type Menu struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func MenuFromID(id objc.ID) *Menu {
 	if id == 0 {
 		return nil
 	}
-	x := &Menu{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Menu{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func menuAdopt(id objc.ID) *Menu {
 	if id == 0 {
 		return nil
 	}
-	x := &Menu{Handle: objref.Wrap(id)}
+	x := &Menu{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,9 +61,13 @@ func (x *Menu) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes and returns a menu having the specified title and with autoenabling of menu items turned on.
-//
-// NewMenuWithTitle creates a new Menu.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Menu) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMenuWithTitle initializes and returns a menu having the specified title and with autoenabling of menu items turned on.
 func NewMenuWithTitle(title string) *Menu {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMenu")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:"), purego.NSString(title))
@@ -74,227 +81,208 @@ func NewMenuWithCoder(coder obj.Object) *Menu {
 	return menuAdopt(_id)
 }
 
-// The title of the menu.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the title of the menu.
 func (x *Menu) WithTitle(title string) *Menu {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The parent menu that contains the menu as a submenu.
-//
-// WithSupermenu sets supermenu and returns the receiver so calls can be chained.
+// WithSupermenu the parent menu that contains the menu as a submenu.
 func (x *Menu) WithSupermenu(supermenu *Menu) *Menu {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupermenu:"), objref.IDOf(supermenu))
 	return x
 }
 
-// An array containing the menu items in the menu.
-//
-// WithItemArray sets the collection and returns the receiver so calls can be chained.
+// WithItemArray an array containing the menu items in the menu.
 func (x *Menu) WithItemArray(items ...*MenuItem) *Menu {
 	_arr := purego.SliceToNSArray(items, func(_v *MenuItem) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItemArray:"), _arr)
 	return x
 }
 
-// Indicates whether the menu automatically enables and disables its menu items.
-//
-// WithAutoenablesItems sets autoenablesItems and returns the receiver so calls can be chained.
+// WithAutoenablesItems indicates whether the menu automatically enables and disables its menu items.
 func (x *Menu) WithAutoenablesItems(autoenablesItems bool) *Menu {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoenablesItems:"), autoenablesItems)
 	return x
 }
 
-// The minimum width of the menu in screen coordinates.
-//
-// WithMinimumWidth sets minimumWidth and returns the receiver so calls can be chained.
+// WithMinimumWidth the minimum width of the menu in screen coordinates.
 func (x *Menu) WithMinimumWidth(minimumWidth float64) *Menu {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumWidth:"), minimumWidth)
 	return x
 }
 
-// The font of the menu and its submenus.
-//
-// WithFont sets font and returns the receiver so calls can be chained.
+// WithFont the font of the menu and its submenus.
 func (x *Menu) WithFont(font *Font) *Menu {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
-// Indicates whether the pop-up menu allows appending of contextual menu plug-in items.
-//
-// WithAllowsContextMenuPlugIns sets allowsContextMenuPlugIns and returns the receiver so calls can be chained.
+// WithAllowsContextMenuPlugIns indicates whether the pop-up menu allows appending of contextual menu plug-in items.
 func (x *Menu) WithAllowsContextMenuPlugIns(allowsContextMenuPlugIns bool) *Menu {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsContextMenuPlugIns:"), allowsContextMenuPlugIns)
 	return x
 }
 
-// WithAutomaticallyInsertsWritingToolsItems sets automaticallyInsertsWritingToolsItems and returns the receiver so calls can be chained.
+// WithAutomaticallyInsertsWritingToolsItems sets the property and returns the receiver so calls can be chained.
 func (x *Menu) WithAutomaticallyInsertsWritingToolsItems(automaticallyInsertsWritingToolsItems bool) *Menu {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyInsertsWritingToolsItems:"), automaticallyInsertsWritingToolsItems)
 	return x
 }
 
-// Indicates whether the menu displays the state column.
-//
-// WithShowsStateColumn sets showsStateColumn and returns the receiver so calls can be chained.
+// WithShowsStateColumn indicates whether the menu displays the state column.
 func (x *Menu) WithShowsStateColumn(showsStateColumn bool) *Menu {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsStateColumn:"), showsStateColumn)
 	return x
 }
 
-// Configures the layout direction of menu items in the menu.
-//
-// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection configures the layout direction of menu items in the menu.
 func (x *Menu) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Menu {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// The presentation style of the menu.
-//
-// WithPresentationStyle sets presentationStyle and returns the receiver so calls can be chained.
+// WithPresentationStyle the presentation style of the menu.
 func (x *Menu) WithPresentationStyle(presentationStyle MenuPresentationStyle) *Menu {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresentationStyle:"), presentationStyle)
 	return x
 }
 
-// The selection mode of the menu.
-//
-// WithSelectionMode sets selectionMode and returns the receiver so calls can be chained.
+// WithSelectionMode the selection mode of the menu.
 func (x *Menu) WithSelectionMode(selectionMode MenuSelectionMode) *Menu {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionMode:"), selectionMode)
 	return x
 }
 
-// The menu items that are currently selected.
-//
-// WithSelectedItems sets the collection and returns the receiver so calls can be chained.
+// WithSelectedItems the menu items that are currently selected.
 func (x *Menu) WithSelectedItems(items ...*MenuItem) *Menu {
 	_arr := purego.SliceToNSArray(items, func(_v *MenuItem) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedItems:"), _arr)
 	return x
 }
 
-// Indicates whether messages are sent to the application’s windows each time the menu changes.
-//
-// WithMenuChangedMessagesEnabled sets menuChangedMessagesEnabled and returns the receiver so calls can be chained.
+// WithMenuChangedMessagesEnabled indicates whether messages are sent to the application’s windows each time the menu changes.
 func (x *Menu) WithMenuChangedMessagesEnabled(menuChangedMessagesEnabled bool) *Menu {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenuChangedMessagesEnabled:"), menuChangedMessagesEnabled)
 	return x
 }
 
-// Inserts a menu item into the menu at a specific location.
+// PopUpMenuPositioningItemAtLocationInView pops up the menu at the specified location.
+func (x *Menu) PopUpMenuPositioningItemAtLocationInView(item *MenuItem, location corefoundation.CGPoint, view *View) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("popUpMenuPositioningItem:atLocation:inView:"), objref.IDOf(item), location, objref.IDOf(view))
+	return _r
+}
+
+// InsertItemAtIndex inserts a menu item into the menu at a specific location.
 func (x *Menu) InsertItemAtIndex(newItem *MenuItem, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertItem:atIndex:"), objref.IDOf(newItem), index)
 }
 
-// Adds a menu item to the end of the menu.
+// AddItem adds a menu item to the end of the menu.
 func (x *Menu) AddItem(newItem *MenuItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addItem:"), objref.IDOf(newItem))
 }
 
-// Removes the menu item at a specified location in the menu.
+// RemoveItemAtIndex removes the menu item at a specified location in the menu.
 func (x *Menu) RemoveItemAtIndex(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeItemAtIndex:"), index)
 }
 
-// Removes a menu item from the menu.
+// RemoveItem removes a menu item from the menu.
 func (x *Menu) RemoveItem(item *MenuItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeItem:"), objref.IDOf(item))
 }
 
-// Assigns a menu to be a submenu of the menu controlled by a given menu item.
+// SetSubmenuForItem assigns a menu to be a submenu of the menu controlled by a given menu item.
 func (x *Menu) SetSubmenuForItem(menu *Menu, item *MenuItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubmenu:forItem:"), objref.IDOf(menu), objref.IDOf(item))
 }
 
-// Removes all the menu items in the menu.
+// RemoveAllItems removes all the menu items in the menu.
 func (x *Menu) RemoveAllItems() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllItems"))
 }
 
-// Returns the menu item at a specific location of the menu.
+// ItemAtIndex returns the menu item at a specific location of the menu.
 func (x *Menu) ItemAtIndex(index int) *MenuItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemAtIndex:"), index)
 	return MenuItemFromID(_r)
 }
 
-// Returns the index identifying the location of a specified menu item in the menu.
+// IndexOfItem returns the index identifying the location of a specified menu item in the menu.
 func (x *Menu) IndexOfItem(item *MenuItem) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfItem:"), objref.IDOf(item))
 	return _r
 }
 
-// Returns the index of the first menu item in the menu that has a specified title.
+// IndexOfItemWithTitle returns the index of the first menu item in the menu that has a specified title.
 func (x *Menu) IndexOfItemWithTitle(title string) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfItemWithTitle:"), purego.NSString(title))
 	return _r
 }
 
-// Returns the index of the first menu item in the menu identified by a tag.
+// IndexOfItemWithTag returns the index of the first menu item in the menu identified by a tag.
 func (x *Menu) IndexOfItemWithTag(tag int) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfItemWithTag:"), tag)
 	return _r
 }
 
-// Returns the index of the first menu item in the menu that has a given represented object.
+// IndexOfItemWithRepresentedObject returns the index of the first menu item in the menu that has a given represented object.
 func (x *Menu) IndexOfItemWithRepresentedObject(object obj.Object) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfItemWithRepresentedObject:"), objref.IDOf(object))
 	return _r
 }
 
-// Returns the index of the menu item in the menu with the given submenu.
+// IndexOfItemWithSubmenu returns the index of the menu item in the menu with the given submenu.
 func (x *Menu) IndexOfItemWithSubmenu(submenu *Menu) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfItemWithSubmenu:"), objref.IDOf(submenu))
 	return _r
 }
 
-// Returns the first menu item in the menu with a specified title.
+// ItemWithTitle returns the first menu item in the menu with a specified title.
 func (x *Menu) ItemWithTitle(title string) *MenuItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemWithTitle:"), purego.NSString(title))
 	return MenuItemFromID(_r)
 }
 
-// Returns the first menu item in the menu with the specified tag.
+// ItemWithTag returns the first menu item in the menu with the specified tag.
 func (x *Menu) ItemWithTag(tag int) *MenuItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemWithTag:"), tag)
 	return MenuItemFromID(_r)
 }
 
-// Enables or disables the menu items of the menu based on the NSMenuValidation informal protocol and sizes the menu to fit its current menu items if necessary.
+// Update enables or disables the menu items of the menu based on the NSMenuValidation informal protocol and sizes the menu to fit its current menu items if necessary.
 func (x *Menu) Update() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("update"))
 }
 
-// Performs the action for the menu item that corresponds to the given key equivalent.
+// PerformKeyEquivalent performs the action for the menu item that corresponds to the given key equivalent.
 func (x *Menu) PerformKeyEquivalent(event *Event) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("performKeyEquivalent:"), objref.IDOf(event))
 	return _r
 }
 
-// Invoked when a menu item is modified visually (for example, its title changes).
+// ItemChanged invoked when a menu item is modified visually (for example, its title changes).
 func (x *Menu) ItemChanged(item *MenuItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemChanged:"), objref.IDOf(item))
 }
 
-// Causes the application to send the action message of a specified menu item to its target.
+// PerformActionForItemAtIndex causes the application to send the action message of a specified menu item to its target.
 func (x *Menu) PerformActionForItemAtIndex(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performActionForItemAtIndex:"), index)
 }
 
-// Dismisses the menu and ends all menu tracking.
+// CancelTracking dismisses the menu and ends all menu tracking.
 func (x *Menu) CancelTracking() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelTracking"))
 }
 
-// Dismisses the menu and ends all menu tracking without displaying the associated animation.
+// CancelTrackingWithoutAnimation dismisses the menu and ends all menu tracking without displaying the associated animation.
 func (x *Menu) CancelTrackingWithoutAnimation() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelTrackingWithoutAnimation"))
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *Menu) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -303,130 +291,159 @@ func (x *Menu) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *Menu) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
+// Supermenu wraps the corresponding Objective-C method.
 func (x *Menu) Supermenu() *Menu {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supermenu"))
 	return MenuFromID(_r)
 }
 
+// SetSupermenu wraps the corresponding Objective-C method.
 func (x *Menu) SetSupermenu(supermenu *Menu) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupermenu:"), objref.IDOf(supermenu))
 }
 
+// ItemArray wraps the corresponding Objective-C method.
+//
 // ItemArray returns the collection as a Go slice.
 func (x *Menu) ItemArray() []*MenuItem {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemArray"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MenuItem { return MenuItemFromID(_id) })
 }
 
+// SetItemArray wraps the corresponding Objective-C method.
 func (x *Menu) SetItemArray(itemArray []*MenuItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItemArray:"), purego.SliceToNSArray(itemArray, func(_v *MenuItem) objc.ID { return objref.IDOf(_v) }))
 }
 
+// NumberOfItems wraps the corresponding Objective-C method.
 func (x *Menu) NumberOfItems() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfItems"))
 	return _r
 }
 
+// AutoenablesItems wraps the corresponding Objective-C method.
 func (x *Menu) AutoenablesItems() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autoenablesItems"))
 	return _r
 }
 
+// SetAutoenablesItems wraps the corresponding Objective-C method.
 func (x *Menu) SetAutoenablesItems(autoenablesItems bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoenablesItems:"), autoenablesItems)
 }
 
+// MenuBarHeight wraps the corresponding Objective-C method.
 func (x *Menu) MenuBarHeight() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("menuBarHeight"))
 	return _r
 }
 
+// HighlightedItem wraps the corresponding Objective-C method.
 func (x *Menu) HighlightedItem() *MenuItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("highlightedItem"))
 	return MenuItemFromID(_r)
 }
 
+// MinimumWidth wraps the corresponding Objective-C method.
 func (x *Menu) MinimumWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumWidth"))
 	return _r
 }
 
+// SetMinimumWidth wraps the corresponding Objective-C method.
 func (x *Menu) SetMinimumWidth(minimumWidth float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumWidth:"), minimumWidth)
 }
 
+// Size wraps the corresponding Objective-C method.
+func (x *Menu) Size() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("size"))
+	return _r
+}
+
+// Font wraps the corresponding Objective-C method.
 func (x *Menu) Font() *Font {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("font"))
 	return FontFromID(_r)
 }
 
+// SetFont wraps the corresponding Objective-C method.
 func (x *Menu) SetFont(font *Font) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 }
 
+// AllowsContextMenuPlugIns wraps the corresponding Objective-C method.
 func (x *Menu) AllowsContextMenuPlugIns() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsContextMenuPlugIns"))
 	return _r
 }
 
+// SetAllowsContextMenuPlugIns wraps the corresponding Objective-C method.
 func (x *Menu) SetAllowsContextMenuPlugIns(allowsContextMenuPlugIns bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsContextMenuPlugIns:"), allowsContextMenuPlugIns)
 }
 
+// AutomaticallyInsertsWritingToolsItems wraps the corresponding Objective-C method.
 func (x *Menu) AutomaticallyInsertsWritingToolsItems() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallyInsertsWritingToolsItems"))
 	return _r
 }
 
+// SetAutomaticallyInsertsWritingToolsItems wraps the corresponding Objective-C method.
 func (x *Menu) SetAutomaticallyInsertsWritingToolsItems(automaticallyInsertsWritingToolsItems bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyInsertsWritingToolsItems:"), automaticallyInsertsWritingToolsItems)
 }
 
+// ShowsStateColumn wraps the corresponding Objective-C method.
 func (x *Menu) ShowsStateColumn() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsStateColumn"))
 	return _r
 }
 
+// SetShowsStateColumn wraps the corresponding Objective-C method.
 func (x *Menu) SetShowsStateColumn(showsStateColumn bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsStateColumn:"), showsStateColumn)
 }
 
+// UserInterfaceLayoutDirection wraps the corresponding Objective-C method.
 func (x *Menu) UserInterfaceLayoutDirection() UserInterfaceLayoutDirection {
 	_r := objc.Send[UserInterfaceLayoutDirection](objref.IDOf(x), objc.RegisterName("userInterfaceLayoutDirection"))
 	return _r
 }
 
+// SetUserInterfaceLayoutDirection wraps the corresponding Objective-C method.
 func (x *Menu) SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 }
 
-// The presentation style of the menu.
+// PresentationStyle the presentation style of the menu.
 func (x *Menu) PresentationStyle() MenuPresentationStyle {
 	_r := objc.Send[MenuPresentationStyle](objref.IDOf(x), objc.RegisterName("presentationStyle"))
 	return _r
 }
 
-// The presentation style of the menu.
+// SetPresentationStyle the presentation style of the menu.
 func (x *Menu) SetPresentationStyle(presentationStyle MenuPresentationStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresentationStyle:"), presentationStyle)
 }
 
-// The selection mode of the menu. Note the selection mode only has effect on menu items that belong to the same selection group. A selection group consists of the items with the same target/action.
+// SelectionMode the selection mode of the menu. Note the selection mode only has effect on menu items that belong to the same selection group. A selection group consists of the items with the same target/action.
 func (x *Menu) SelectionMode() MenuSelectionMode {
 	_r := objc.Send[MenuSelectionMode](objref.IDOf(x), objc.RegisterName("selectionMode"))
 	return _r
 }
 
-// The selection mode of the menu. Note the selection mode only has effect on menu items that belong to the same selection group. A selection group consists of the items with the same target/action.
+// SetSelectionMode the selection mode of the menu. Note the selection mode only has effect on menu items that belong to the same selection group. A selection group consists of the items with the same target/action.
 func (x *Menu) SetSelectionMode(selectionMode MenuSelectionMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionMode:"), selectionMode)
 }
 
-// The menu items that are selected. An item is selected when its state is `NSControl.StateValue.on`.
+// SelectedItems the menu items that are selected. An item is selected when its state is `NSControl.StateValue.on`.
 //
 // SelectedItems returns the collection as a Go slice.
 func (x *Menu) SelectedItems() []*MenuItem {
@@ -434,85 +451,95 @@ func (x *Menu) SelectedItems() []*MenuItem {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MenuItem { return MenuItemFromID(_id) })
 }
 
-// The menu items that are selected. An item is selected when its state is `NSControl.StateValue.on`.
+// SetSelectedItems the menu items that are selected. An item is selected when its state is `NSControl.StateValue.on`.
 func (x *Menu) SetSelectedItems(selectedItems []*MenuItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedItems:"), purego.SliceToNSArray(selectedItems, func(_v *MenuItem) objc.ID { return objref.IDOf(_v) }))
 }
 
-// The action method assigned to menu items that open submenus.
+// SubmenuAction the action method assigned to menu items that open submenus.
 func (x *Menu) SubmenuAction(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("submenuAction:"), objref.IDOf(sender))
 }
 
+// PropertiesToUpdate wraps the corresponding Objective-C method.
 func (x *Menu) PropertiesToUpdate() MenuProperties {
 	_r := objc.Send[MenuProperties](objref.IDOf(x), objc.RegisterName("propertiesToUpdate"))
 	return _r
 }
 
-// Deprecated.
+// SetMenuRepresentation deprecated.
 func (x *Menu) SetMenuRepresentation(menuRep obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenuRepresentation:"), objref.IDOf(menuRep))
 }
 
-// Deprecated.
+// MenuRepresentation deprecated.
 func (x *Menu) MenuRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// Deprecated.
+// SetContextMenuRepresentation deprecated.
 func (x *Menu) SetContextMenuRepresentation(menuRep obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContextMenuRepresentation:"), objref.IDOf(menuRep))
 }
 
-// Deprecated.
+// ContextMenuRepresentation deprecated.
 func (x *Menu) ContextMenuRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contextMenuRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// Deprecated.
+// SetTearOffMenuRepresentation deprecated.
 func (x *Menu) SetTearOffMenuRepresentation(menuRep obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTearOffMenuRepresentation:"), objref.IDOf(menuRep))
 }
 
-// Deprecated.
+// TearOffMenuRepresentation deprecated.
 func (x *Menu) TearOffMenuRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tearOffMenuRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// Returns the menu currently attached to the menu.
+// AttachedMenu returns the menu currently attached to the menu.
 func (x *Menu) AttachedMenu() *Menu {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachedMenu"))
 	return MenuFromID(_r)
 }
 
-// Returns a Boolean value that indicates whether the menu is currently attached to another menu.
+// IsAttached returns a Boolean value that indicates whether the menu is currently attached to another menu.
 func (x *Menu) IsAttached() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAttached"))
 	return _r
 }
 
-// Resizes the menu to exactly fit its items.
+// SizeToFit resizes the menu to exactly fit its items.
 func (x *Menu) SizeToFit() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sizeToFit"))
 }
 
-// Overridden by subclasses to implement specialized context-sensitive help behavior.
+// LocationForSubmenu returns the location in screen coordinates where the given submenu is displayed when opened as a submenu of the menu.
+func (x *Menu) LocationForSubmenu(submenu *Menu) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("locationForSubmenu:"), objref.IDOf(submenu))
+	return _r
+}
+
+// HelpRequested overridden by subclasses to implement specialized context-sensitive help behavior.
 func (x *Menu) HelpRequested(eventPtr *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("helpRequested:"), objref.IDOf(eventPtr))
 }
 
+// MenuChangedMessagesEnabled wraps the corresponding Objective-C method.
 func (x *Menu) MenuChangedMessagesEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("menuChangedMessagesEnabled"))
 	return _r
 }
 
+// SetMenuChangedMessagesEnabled wraps the corresponding Objective-C method.
 func (x *Menu) SetMenuChangedMessagesEnabled(menuChangedMessagesEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenuChangedMessagesEnabled:"), menuChangedMessagesEnabled)
 }
 
+// IsTornOff wraps the corresponding Objective-C method.
 func (x *Menu) IsTornOff() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTornOff"))
 	return _r
@@ -535,6 +562,7 @@ type Menuable interface {
 	WithSelectionMode(selectionMode MenuSelectionMode) *Menu
 	WithSelectedItems(items ...*MenuItem) *Menu
 	WithMenuChangedMessagesEnabled(menuChangedMessagesEnabled bool) *Menu
+	PopUpMenuPositioningItemAtLocationInView(item *MenuItem, location corefoundation.CGPoint, view *View) bool
 	InsertItemAtIndex(newItem *MenuItem, index int)
 	AddItem(newItem *MenuItem)
 	RemoveItemAtIndex(index int)
@@ -568,6 +596,7 @@ type Menuable interface {
 	HighlightedItem() *MenuItem
 	MinimumWidth() float64
 	SetMinimumWidth(minimumWidth float64)
+	Size() corefoundation.CGSize
 	Font() *Font
 	SetFont(font *Font)
 	AllowsContextMenuPlugIns() bool
@@ -595,6 +624,7 @@ type Menuable interface {
 	AttachedMenu() *Menu
 	IsAttached() bool
 	SizeToFit()
+	LocationForSubmenu(submenu *Menu) corefoundation.CGPoint
 	HelpRequested(eventPtr *Event)
 	MenuChangedMessagesEnabled() bool
 	SetMenuChangedMessagesEnabled(menuChangedMessagesEnabled bool)

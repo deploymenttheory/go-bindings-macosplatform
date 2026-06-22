@@ -25,7 +25,8 @@ func MTRGeneralDiagnosticsClusterPayloadTestResponseParamsFromID(id objc.ID) *MT
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGeneralDiagnosticsClusterPayloadTestResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRGeneralDiagnosticsClusterPayloadTestResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRGeneralDiagnosticsClusterPayloadTestResponseParamsAdopt(id objc.ID) *MTR
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGeneralDiagnosticsClusterPayloadTestResponseParams{Handle: objref.Wrap(id)}
+	x := &MTRGeneralDiagnosticsClusterPayloadTestResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) IsKind(className
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRGeneralDiagnosticsClusterPayloadTestResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-//
-// NewMTRGeneralDiagnosticsClusterPayloadTestResponseParamsWithResponseValueError creates a new MTRGeneralDiagnosticsClusterPayloadTestResponseParams.
-func NewMTRGeneralDiagnosticsClusterPayloadTestResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRGeneralDiagnosticsClusterPayloadTestResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRGeneralDiagnosticsClusterPayloadTestResponseParamsWithResponseValueError initialize an MTRGeneralDiagnosticsClusterPayloadTestResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRGeneralDiagnosticsClusterPayloadTestResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRGeneralDiagnosticsClusterPayloadTestResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRGeneralDiagnosticsClusterPayloadTestResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,17 +77,19 @@ func NewMTRGeneralDiagnosticsClusterPayloadTestResponseParamsWithResponseValueEr
 	return mTRGeneralDiagnosticsClusterPayloadTestResponseParamsAdopt(_id), nil
 }
 
-// WithPayload sets payload and returns the receiver so calls can be chained.
+// WithPayload sets the property and returns the receiver so calls can be chained.
 func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) WithPayload(payload obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPayload:"), objref.IDOf(payload))
 	return x
 }
 
+// Payload wraps the corresponding Objective-C method.
 func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) Payload() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("payload"))
 	return obj.Wrap(_r)
 }
 
+// SetPayload wraps the corresponding Objective-C method.
 func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) SetPayload(payload obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPayload:"), objref.IDOf(payload))
 }

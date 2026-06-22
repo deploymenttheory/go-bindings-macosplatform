@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the space around the edges of items in a collection view.
-//
 // CollectionLayoutEdgeSpacing is an idiomatic wrapper over the Objective-C class NSCollectionLayoutEdgeSpacing.
+//
+// An object that defines the space around the edges of items in a collection view.
 type CollectionLayoutEdgeSpacing struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CollectionLayoutEdgeSpacingFromID(id objc.ID) *CollectionLayoutEdgeSpacing 
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionLayoutEdgeSpacing{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollectionLayoutEdgeSpacing{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func collectionLayoutEdgeSpacingAdopt(id objc.ID) *CollectionLayoutEdgeSpacing {
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionLayoutEdgeSpacing{Handle: objref.Wrap(id)}
+	x := &CollectionLayoutEdgeSpacing{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,27 +60,37 @@ func (x *CollectionLayoutEdgeSpacing) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CollectionLayoutEdgeSpacing) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCollectionLayoutEdgeSpacing creates a new CollectionLayoutEdgeSpacing.
 func NewCollectionLayoutEdgeSpacing() *CollectionLayoutEdgeSpacing {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutEdgeSpacing")), objc.RegisterName("new"))
 	return collectionLayoutEdgeSpacingAdopt(_id)
 }
 
+// Leading wraps the corresponding Objective-C method.
 func (x *CollectionLayoutEdgeSpacing) Leading() *CollectionLayoutSpacing {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leading"))
 	return CollectionLayoutSpacingFromID(_r)
 }
 
+// Top wraps the corresponding Objective-C method.
 func (x *CollectionLayoutEdgeSpacing) Top() *CollectionLayoutSpacing {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("top"))
 	return CollectionLayoutSpacingFromID(_r)
 }
 
+// Trailing wraps the corresponding Objective-C method.
 func (x *CollectionLayoutEdgeSpacing) Trailing() *CollectionLayoutSpacing {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trailing"))
 	return CollectionLayoutSpacingFromID(_r)
 }
 
+// Bottom wraps the corresponding Objective-C method.
 func (x *CollectionLayoutEdgeSpacing) Bottom() *CollectionLayoutSpacing {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bottom"))
 	return CollectionLayoutSpacingFromID(_r)

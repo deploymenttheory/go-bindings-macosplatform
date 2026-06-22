@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of changes that occurred in the set of asset or collection objects listed in a fetch result.
-//
 // FetchResultChangeDetails is an idiomatic wrapper over the Objective-C class PHFetchResultChangeDetails.
+//
+// A description of changes that occurred in the set of asset or collection objects listed in a fetch result.
 type FetchResultChangeDetails struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FetchResultChangeDetailsFromID(id objc.ID) *FetchResultChangeDetails {
 	if id == 0 {
 		return nil
 	}
-	x := &FetchResultChangeDetails{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FetchResultChangeDetails{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func fetchResultChangeDetailsAdopt(id objc.ID) *FetchResultChangeDetails {
 	if id == 0 {
 		return nil
 	}
-	x := &FetchResultChangeDetails{Handle: objref.Wrap(id)}
+	x := &FetchResultChangeDetails{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,62 +60,78 @@ func (x *FetchResultChangeDetails) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FetchResultChangeDetails) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFetchResultChangeDetails creates a new FetchResultChangeDetails.
 func NewFetchResultChangeDetails() *FetchResultChangeDetails {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHFetchResultChangeDetails")), objc.RegisterName("new"))
 	return fetchResultChangeDetailsAdopt(_id)
 }
 
-// Runs the specified block for each case where an object has moved from one index to another in the fetch result.
+// EnumerateMovesWith runs the specified block for each case where an object has moved from one index to another in the fetch result.
 func (x *FetchResultChangeDetails) EnumerateMovesWith(handler func(int, int)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateMovesWithBlock:"), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 int) { handler(_b0, _b1) }))
 }
 
+// FetchResultBeforeChanges wraps the corresponding Objective-C method.
 func (x *FetchResultChangeDetails) FetchResultBeforeChanges() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchResultBeforeChanges"))
 	return obj.Wrap(_r)
 }
 
+// FetchResultAfterChanges wraps the corresponding Objective-C method.
 func (x *FetchResultChangeDetails) FetchResultAfterChanges() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchResultAfterChanges"))
 	return obj.Wrap(_r)
 }
 
+// HasIncrementalChanges wraps the corresponding Objective-C method.
 func (x *FetchResultChangeDetails) HasIncrementalChanges() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasIncrementalChanges"))
 	return _r
 }
 
+// RemovedIndexes wraps the corresponding Objective-C method.
 func (x *FetchResultChangeDetails) RemovedIndexes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removedIndexes"))
 	return obj.Wrap(_r)
 }
 
+// RemovedObjects wraps the corresponding Objective-C method.
 func (x *FetchResultChangeDetails) RemovedObjects() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removedObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// InsertedIndexes wraps the corresponding Objective-C method.
 func (x *FetchResultChangeDetails) InsertedIndexes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertedIndexes"))
 	return obj.Wrap(_r)
 }
 
+// InsertedObjects wraps the corresponding Objective-C method.
 func (x *FetchResultChangeDetails) InsertedObjects() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertedObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// ChangedIndexes wraps the corresponding Objective-C method.
 func (x *FetchResultChangeDetails) ChangedIndexes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changedIndexes"))
 	return obj.Wrap(_r)
 }
 
+// ChangedObjects wraps the corresponding Objective-C method.
 func (x *FetchResultChangeDetails) ChangedObjects() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changedObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// HasMoves wraps the corresponding Objective-C method.
 func (x *FetchResultChangeDetails) HasMoves() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasMoves"))
 	return _r

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that creates timed metadata group objects for an asset track.
-//
 // AssetReaderOutputMetadataAdaptor is an idiomatic wrapper over the Objective-C class AVAssetReaderOutputMetadataAdaptor.
+//
+// An object that creates timed metadata group objects for an asset track.
 type AssetReaderOutputMetadataAdaptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetReaderOutputMetadataAdaptorFromID(id objc.ID) *AssetReaderOutputMetada
 	if id == 0 {
 		return nil
 	}
-	x := &AssetReaderOutputMetadataAdaptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetReaderOutputMetadataAdaptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetReaderOutputMetadataAdaptorAdopt(id objc.ID) *AssetReaderOutputMetadat
 	if id == 0 {
 		return nil
 	}
-	x := &AssetReaderOutputMetadataAdaptor{Handle: objref.Wrap(id)}
+	x := &AssetReaderOutputMetadataAdaptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,26 @@ func (x *AssetReaderOutputMetadataAdaptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an object that reads timed metadata groups from an asset reader output.
-//
-// NewAssetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput creates a new AssetReaderOutputMetadataAdaptor.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetReaderOutputMetadataAdaptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput creates an object that reads timed metadata groups from an asset reader output.
 func NewAssetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput(trackOutput *AssetReaderTrackOutput) *AssetReaderOutputMetadataAdaptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetReaderOutputMetadataAdaptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetReaderTrackOutput:"), objref.IDOf(trackOutput))
 	return assetReaderOutputMetadataAdaptorAdopt(_id)
 }
 
-// Returns the next timed metadata group for the asset reader output.
+// NextTimedMetadataGroup returns the next timed metadata group for the asset reader output.
 func (x *AssetReaderOutputMetadataAdaptor) NextTimedMetadataGroup() *TimedMetadataGroup {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextTimedMetadataGroup"))
 	return TimedMetadataGroupFromID(_r)
 }
 
-// The asset reader track output from which the receiver pulls timed metadata groups.
+// AssetReaderTrackOutput the asset reader track output from which the receiver pulls timed metadata groups.
 func (x *AssetReaderOutputMetadataAdaptor) AssetReaderTrackOutput() *AssetReaderTrackOutput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetReaderTrackOutput"))
 	return AssetReaderTrackOutputFromID(_r)

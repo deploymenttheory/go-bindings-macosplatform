@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that specifies a mixer for sound events and orients them in 3D space.
-//
 // MixerParameters is an idiomatic wrapper over the Objective-C class PHASEMixerParameters.
+//
+// An object that specifies a mixer for sound events and orients them in 3D space.
 type MixerParameters struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MixerParametersFromID(id objc.ID) *MixerParameters {
 	if id == 0 {
 		return nil
 	}
-	x := &MixerParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MixerParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mixerParametersAdopt(id objc.ID) *MixerParameters {
 	if id == 0 {
 		return nil
 	}
-	x := &MixerParameters{Handle: objref.Wrap(id)}
+	x := &MixerParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +60,24 @@ func (x *MixerParameters) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MixerParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMixerParameters creates a new MixerParameters.
 func NewMixerParameters() *MixerParameters {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHASEMixerParameters")), objc.RegisterName("new"))
 	return mixerParametersAdopt(_id)
 }
 
-// Adds runtime parameters for a spatial mixer.
+// AddSpatialMixerParametersWithIdentifierSourceListener adds runtime parameters for a spatial mixer.
 func (x *MixerParameters) AddSpatialMixerParametersWithIdentifierSourceListener(identifier string, source *Source, listener *Listener) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSpatialMixerParametersWithIdentifier:source:listener:"), purego.NSString(identifier), objref.IDOf(source), objref.IDOf(listener))
 }
 
-// Adds runtime parameters for an ambient mixer.
+// AddAmbientMixerParametersWithIdentifierListener adds runtime parameters for an ambient mixer.
 func (x *MixerParameters) AddAmbientMixerParametersWithIdentifierListener(identifier string, listener *Listener) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAmbientMixerParametersWithIdentifier:listener:"), purego.NSString(identifier), objref.IDOf(listener))
 }

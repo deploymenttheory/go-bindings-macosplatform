@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains the move, exercise, and stand data for a given day.
-//
 // ActivitySummary is an idiomatic wrapper over the Objective-C class HKActivitySummary.
+//
+// An object that contains the move, exercise, and stand data for a given day.
 type ActivitySummary struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ActivitySummaryFromID(id objc.ID) *ActivitySummary {
 	if id == 0 {
 		return nil
 	}
-	x := &ActivitySummary{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ActivitySummary{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func activitySummaryAdopt(id objc.ID) *ActivitySummary {
 	if id == 0 {
 		return nil
 	}
-	x := &ActivitySummary{Handle: objref.Wrap(id)}
+	x := &ActivitySummary{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,230 +60,224 @@ func (x *ActivitySummary) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ActivitySummary) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewActivitySummary creates a new ActivitySummary.
 func NewActivitySummary() *ActivitySummary {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKActivitySummary")), objc.RegisterName("new"))
 	return activitySummaryAdopt(_id)
 }
 
-// The move mode that they system used for this activity summary.
-//
-// WithActivityMoveMode sets activityMoveMode and returns the receiver so calls can be chained.
+// WithActivityMoveMode the move mode that they system used for this activity summary.
 func (x *ActivitySummary) WithActivityMoveMode(activityMoveMode ActivityMoveMode) *ActivitySummary {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivityMoveMode:"), activityMoveMode)
 	return x
 }
 
-// The paused state of this activity summary The paused state of an activity summary indicates if the user is tracking their rings for the given day.
-//
-// WithPaused sets paused and returns the receiver so calls can be chained.
+// WithPaused the paused state of this activity summary The paused state of an activity summary indicates if the user is tracking their rings for the given day.
 func (x *ActivitySummary) WithPaused(paused bool) *ActivitySummary {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
-// The amount of active energy the user burned during the specified day.
-//
-// WithActiveEnergyBurned sets activeEnergyBurned and returns the receiver so calls can be chained.
+// WithActiveEnergyBurned the amount of active energy the user burned during the specified day.
 func (x *ActivitySummary) WithActiveEnergyBurned(activeEnergyBurned *Quantity) *ActivitySummary {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActiveEnergyBurned:"), objref.IDOf(activeEnergyBurned))
 	return x
 }
 
-// The amount of time the user spent performing activities that involve full-body movements during the specified day.
-//
-// WithAppleMoveTime sets appleMoveTime and returns the receiver so calls can be chained.
+// WithAppleMoveTime the amount of time the user spent performing activities that involve full-body movements during the specified day.
 func (x *ActivitySummary) WithAppleMoveTime(appleMoveTime *Quantity) *ActivitySummary {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleMoveTime:"), objref.IDOf(appleMoveTime))
 	return x
 }
 
-// The amount of time that the user has spent exercising during the specified day.
-//
-// WithAppleExerciseTime sets appleExerciseTime and returns the receiver so calls can be chained.
+// WithAppleExerciseTime the amount of time that the user has spent exercising during the specified day.
 func (x *ActivitySummary) WithAppleExerciseTime(appleExerciseTime *Quantity) *ActivitySummary {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleExerciseTime:"), objref.IDOf(appleExerciseTime))
 	return x
 }
 
-// The number hours in the specified day during which the user has stood and moved for at least a minute per hour.
-//
-// WithAppleStandHours sets appleStandHours and returns the receiver so calls can be chained.
+// WithAppleStandHours the number hours in the specified day during which the user has stood and moved for at least a minute per hour.
 func (x *ActivitySummary) WithAppleStandHours(appleStandHours *Quantity) *ActivitySummary {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleStandHours:"), objref.IDOf(appleStandHours))
 	return x
 }
 
-// The user’s daily goal for active energy burned.
-//
-// WithActiveEnergyBurnedGoal sets activeEnergyBurnedGoal and returns the receiver so calls can be chained.
+// WithActiveEnergyBurnedGoal the user’s daily goal for active energy burned.
 func (x *ActivitySummary) WithActiveEnergyBurnedGoal(activeEnergyBurnedGoal *Quantity) *ActivitySummary {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActiveEnergyBurnedGoal:"), objref.IDOf(activeEnergyBurnedGoal))
 	return x
 }
 
-// The user’s daily goal for move time.
-//
-// WithAppleMoveTimeGoal sets appleMoveTimeGoal and returns the receiver so calls can be chained.
+// WithAppleMoveTimeGoal the user’s daily goal for move time.
 func (x *ActivitySummary) WithAppleMoveTimeGoal(appleMoveTimeGoal *Quantity) *ActivitySummary {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleMoveTimeGoal:"), objref.IDOf(appleMoveTimeGoal))
 	return x
 }
 
-// The user’s daily exercise goal.
-//
-// WithAppleExerciseTimeGoal sets appleExerciseTimeGoal and returns the receiver so calls can be chained.
+// WithAppleExerciseTimeGoal the user’s daily exercise goal.
 func (x *ActivitySummary) WithAppleExerciseTimeGoal(appleExerciseTimeGoal *Quantity) *ActivitySummary {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleExerciseTimeGoal:"), objref.IDOf(appleExerciseTimeGoal))
 	return x
 }
 
-// The user’s daily goal for exercise time.
-//
-// WithExerciseTimeGoal sets exerciseTimeGoal and returns the receiver so calls can be chained.
+// WithExerciseTimeGoal the user’s daily goal for exercise time.
 func (x *ActivitySummary) WithExerciseTimeGoal(exerciseTimeGoal *Quantity) *ActivitySummary {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExerciseTimeGoal:"), objref.IDOf(exerciseTimeGoal))
 	return x
 }
 
-// The user’s daily goal for stand hours.
-//
-// WithAppleStandHoursGoal sets appleStandHoursGoal and returns the receiver so calls can be chained.
+// WithAppleStandHoursGoal the user’s daily goal for stand hours.
 func (x *ActivitySummary) WithAppleStandHoursGoal(appleStandHoursGoal *Quantity) *ActivitySummary {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleStandHoursGoal:"), objref.IDOf(appleStandHoursGoal))
 	return x
 }
 
-// The user’s daily goal for stand hours.
-//
-// WithStandHoursGoal sets standHoursGoal and returns the receiver so calls can be chained.
+// WithStandHoursGoal the user’s daily goal for stand hours.
 func (x *ActivitySummary) WithStandHoursGoal(standHoursGoal *Quantity) *ActivitySummary {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandHoursGoal:"), objref.IDOf(standHoursGoal))
 	return x
 }
 
-// Date components that uniquely identify the day represented by the summary object.
+// DateComponentsForCalendar date components that uniquely identify the day represented by the summary object.
 func (x *ActivitySummary) DateComponentsForCalendar(calendar obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateComponentsForCalendar:"), objref.IDOf(calendar))
 	return obj.Wrap(_r)
 }
 
-// The move mode of this activity summary The move mode of an activity summary determines if activeEnergyBurned or appleMoveTime are used for the move ring.
+// ActivityMoveMode the move mode of this activity summary The move mode of an activity summary determines if activeEnergyBurned or appleMoveTime are used for the move ring.
 func (x *ActivitySummary) ActivityMoveMode() ActivityMoveMode {
 	_r := objc.Send[ActivityMoveMode](objref.IDOf(x), objc.RegisterName("activityMoveMode"))
 	return _r
 }
 
+// SetActivityMoveMode wraps the corresponding Objective-C method.
 func (x *ActivitySummary) SetActivityMoveMode(activityMoveMode ActivityMoveMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivityMoveMode:"), activityMoveMode)
 }
 
-// The paused state of this activity summary The paused state of an activity summary indicates if the user is tracking their rings for the given day.
+// IsPaused the paused state of this activity summary The paused state of an activity summary indicates if the user is tracking their rings for the given day.
 func (x *ActivitySummary) IsPaused() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaused"))
 	return _r
 }
 
+// SetPaused wraps the corresponding Objective-C method.
 func (x *ActivitySummary) SetPaused(paused bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 }
 
-// The amount of active energy that the user burned. This quantity is compatible with energy units.
+// ActiveEnergyBurned the amount of active energy that the user burned. This quantity is compatible with energy units.
 func (x *ActivitySummary) ActiveEnergyBurned() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activeEnergyBurned"))
 	return QuantityFromID(_r)
 }
 
+// SetActiveEnergyBurned wraps the corresponding Objective-C method.
 func (x *ActivitySummary) SetActiveEnergyBurned(activeEnergyBurned *Quantity) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActiveEnergyBurned:"), objref.IDOf(activeEnergyBurned))
 }
 
-// The amount of move time that the user performed. This quantity is compatible with time units. The measurement criteria of move time time is defined by Apple.
+// AppleMoveTime the amount of move time that the user performed. This quantity is compatible with time units. The measurement criteria of move time time is defined by Apple.
 func (x *ActivitySummary) AppleMoveTime() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appleMoveTime"))
 	return QuantityFromID(_r)
 }
 
+// SetAppleMoveTime wraps the corresponding Objective-C method.
 func (x *ActivitySummary) SetAppleMoveTime(appleMoveTime *Quantity) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleMoveTime:"), objref.IDOf(appleMoveTime))
 }
 
-// The amount of exercise time that the user performed. This quantity is compatible with time units. The measurement criteria of exercise time is defined by Apple.
+// AppleExerciseTime the amount of exercise time that the user performed. This quantity is compatible with time units. The measurement criteria of exercise time is defined by Apple.
 func (x *ActivitySummary) AppleExerciseTime() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appleExerciseTime"))
 	return QuantityFromID(_r)
 }
 
+// SetAppleExerciseTime wraps the corresponding Objective-C method.
 func (x *ActivitySummary) SetAppleExerciseTime(appleExerciseTime *Quantity) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleExerciseTime:"), objref.IDOf(appleExerciseTime))
 }
 
-// The number of stand hours that the user earned. This quantity is compatible with the count unit. The measurement criteria of stand hours is defined by Apple.
+// AppleStandHours the number of stand hours that the user earned. This quantity is compatible with the count unit. The measurement criteria of stand hours is defined by Apple.
 func (x *ActivitySummary) AppleStandHours() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appleStandHours"))
 	return QuantityFromID(_r)
 }
 
+// SetAppleStandHours wraps the corresponding Objective-C method.
 func (x *ActivitySummary) SetAppleStandHours(appleStandHours *Quantity) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleStandHours:"), objref.IDOf(appleStandHours))
 }
 
-// The user's active energy goal for the day. This quantity is compatible with energy units.
+// ActiveEnergyBurnedGoal the user's active energy goal for the day. This quantity is compatible with energy units.
 func (x *ActivitySummary) ActiveEnergyBurnedGoal() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activeEnergyBurnedGoal"))
 	return QuantityFromID(_r)
 }
 
+// SetActiveEnergyBurnedGoal wraps the corresponding Objective-C method.
 func (x *ActivitySummary) SetActiveEnergyBurnedGoal(activeEnergyBurnedGoal *Quantity) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActiveEnergyBurnedGoal:"), objref.IDOf(activeEnergyBurnedGoal))
 }
 
-// The user's move time goal for the day. This quantity is compatible with time units.
+// AppleMoveTimeGoal the user's move time goal for the day. This quantity is compatible with time units.
 func (x *ActivitySummary) AppleMoveTimeGoal() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appleMoveTimeGoal"))
 	return QuantityFromID(_r)
 }
 
+// SetAppleMoveTimeGoal wraps the corresponding Objective-C method.
 func (x *ActivitySummary) SetAppleMoveTimeGoal(appleMoveTimeGoal *Quantity) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleMoveTimeGoal:"), objref.IDOf(appleMoveTimeGoal))
 }
 
-// The user's exercise time goal for the day. This quantity is compatible with time units.
+// AppleExerciseTimeGoal the user's exercise time goal for the day. This quantity is compatible with time units.
 func (x *ActivitySummary) AppleExerciseTimeGoal() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appleExerciseTimeGoal"))
 	return QuantityFromID(_r)
 }
 
+// SetAppleExerciseTimeGoal wraps the corresponding Objective-C method.
 func (x *ActivitySummary) SetAppleExerciseTimeGoal(appleExerciseTimeGoal *Quantity) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleExerciseTimeGoal:"), objref.IDOf(appleExerciseTimeGoal))
 }
 
-// The user's exercise time goal for the day. This quantity is compatible with time units.
+// ExerciseTimeGoal the user's exercise time goal for the day. This quantity is compatible with time units.
 func (x *ActivitySummary) ExerciseTimeGoal() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exerciseTimeGoal"))
 	return QuantityFromID(_r)
 }
 
+// SetExerciseTimeGoal wraps the corresponding Objective-C method.
 func (x *ActivitySummary) SetExerciseTimeGoal(exerciseTimeGoal *Quantity) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExerciseTimeGoal:"), objref.IDOf(exerciseTimeGoal))
 }
 
-// The user's active stand hours goal for the day. This quantity is compatible with the count unit.
+// AppleStandHoursGoal the user's active stand hours goal for the day. This quantity is compatible with the count unit.
 func (x *ActivitySummary) AppleStandHoursGoal() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appleStandHoursGoal"))
 	return QuantityFromID(_r)
 }
 
+// SetAppleStandHoursGoal wraps the corresponding Objective-C method.
 func (x *ActivitySummary) SetAppleStandHoursGoal(appleStandHoursGoal *Quantity) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleStandHoursGoal:"), objref.IDOf(appleStandHoursGoal))
 }
 
-// The user's active stand hours goal for the day. This quantity is compatible with the count unit.
+// StandHoursGoal the user's active stand hours goal for the day. This quantity is compatible with the count unit.
 func (x *ActivitySummary) StandHoursGoal() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standHoursGoal"))
 	return QuantityFromID(_r)
 }
 
+// SetStandHoursGoal wraps the corresponding Objective-C method.
 func (x *ActivitySummary) SetStandHoursGoal(standHoursGoal *Quantity) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandHoursGoal:"), objref.IDOf(standHoursGoal))
 }

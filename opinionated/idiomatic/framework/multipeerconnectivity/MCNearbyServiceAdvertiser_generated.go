@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The MCNearbyServiceAdvertiser class publishes an advertisement for a specific service that your app provides through the Multipeer Connectivity framework and notifies its delegate about invitations from nearby peers.
-//
 // NearbyServiceAdvertiser is an idiomatic wrapper over the Objective-C class MCNearbyServiceAdvertiser.
+//
+// The MCNearbyServiceAdvertiser class publishes an advertisement for a specific service that your app provides through the Multipeer Connectivity framework and notifies its delegate about invitations from nearby peers.
 type NearbyServiceAdvertiser struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NearbyServiceAdvertiserFromID(id objc.ID) *NearbyServiceAdvertiser {
 	if id == 0 {
 		return nil
 	}
-	x := &NearbyServiceAdvertiser{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NearbyServiceAdvertiser{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nearbyServiceAdvertiserAdopt(id objc.ID) *NearbyServiceAdvertiser {
 	if id == 0 {
 		return nil
 	}
-	x := &NearbyServiceAdvertiser{Handle: objref.Wrap(id)}
+	x := &NearbyServiceAdvertiser{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,35 +60,42 @@ func (x *NearbyServiceAdvertiser) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes an advertiser object.
-//
-// NewNearbyServiceAdvertiserWithPeerDiscoveryInfoServiceType creates a new NearbyServiceAdvertiser.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NearbyServiceAdvertiser) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNearbyServiceAdvertiserWithPeerDiscoveryInfoServiceType initializes an advertiser object.
 func NewNearbyServiceAdvertiserWithPeerDiscoveryInfoServiceType(myPeerID *PeerID, info obj.Object, serviceType string) *NearbyServiceAdvertiser {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MCNearbyServiceAdvertiser")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPeer:discoveryInfo:serviceType:"), objref.IDOf(myPeerID), objref.IDOf(info), purego.NSString(serviceType))
 	return nearbyServiceAdvertiserAdopt(_id)
 }
 
-// Begins advertising the service provided by a local peer.
+// StartAdvertisingPeer begins advertising the service provided by a local peer.
 func (x *NearbyServiceAdvertiser) StartAdvertisingPeer() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startAdvertisingPeer"))
 }
 
-// Stops advertising the service provided by a local peer.
+// StopAdvertisingPeer stops advertising the service provided by a local peer.
 func (x *NearbyServiceAdvertiser) StopAdvertisingPeer() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopAdvertisingPeer"))
 }
 
+// MyPeerID wraps the corresponding Objective-C method.
 func (x *NearbyServiceAdvertiser) MyPeerID() *PeerID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("myPeerID"))
 	return PeerIDFromID(_r)
 }
 
+// DiscoveryInfo wraps the corresponding Objective-C method.
 func (x *NearbyServiceAdvertiser) DiscoveryInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discoveryInfo"))
 	return obj.Wrap(_r)
 }
 
+// ServiceType wraps the corresponding Objective-C method.
 func (x *NearbyServiceAdvertiser) ServiceType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceType"))
 	if _r == 0 {

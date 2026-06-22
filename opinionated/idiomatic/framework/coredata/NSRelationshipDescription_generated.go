@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of a relationship between two entities.
-//
 // RelationshipDescription is an idiomatic wrapper over the Objective-C class NSRelationshipDescription.
+//
+// It embeds [PropertyDescription], promoting that type's methods.
+//
+// A description of a relationship between two entities.
 type RelationshipDescription struct {
-	objref.Handle
+	PropertyDescription
 }
 
 // RelationshipDescriptionFromID adopts an existing Objective-C object as a RelationshipDescription
@@ -25,7 +26,8 @@ func RelationshipDescriptionFromID(id objc.ID) *RelationshipDescription {
 	if id == 0 {
 		return nil
 	}
-	x := &RelationshipDescription{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RelationshipDescription{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func relationshipDescriptionAdopt(id objc.ID) *RelationshipDescription {
 	if id == 0 {
 		return nil
 	}
-	x := &RelationshipDescription{Handle: objref.Wrap(id)}
+	x := &RelationshipDescription{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RelationshipDescription) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RelationshipDescription) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RelationshipDescription) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRelationshipDescription creates a new RelationshipDescription.
@@ -64,181 +52,164 @@ func NewRelationshipDescription() *RelationshipDescription {
 	return relationshipDescriptionAdopt(_id)
 }
 
-// The type of object the relationship contains.
-//
-// WithDestinationEntity sets destinationEntity and returns the receiver so calls can be chained.
+// WithDestinationEntity the type of object the relationship contains.
 func (x *RelationshipDescription) WithDestinationEntity(destinationEntity *EntityDescription) *RelationshipDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationEntity:"), objref.IDOf(destinationEntity))
 	return x
 }
 
-// The relationship that represents the inverse of the current relationship.
-//
-// WithInverseRelationship sets inverseRelationship and returns the receiver so calls can be chained.
+// WithInverseRelationship the relationship that represents the inverse of the current relationship.
 func (x *RelationshipDescription) WithInverseRelationship(inverseRelationship *RelationshipDescription) *RelationshipDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInverseRelationship:"), objref.IDOf(inverseRelationship))
 	return x
 }
 
-// The maximum number of managed objects the relationship can reference.
-//
-// WithMaxCount sets maxCount and returns the receiver so calls can be chained.
+// WithMaxCount the maximum number of managed objects the relationship can reference.
 func (x *RelationshipDescription) WithMaxCount(maxCount int) *RelationshipDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCount:"), maxCount)
 	return x
 }
 
-// The minimum number of managed objects the relationship can reference.
-//
-// WithMinCount sets minCount and returns the receiver so calls can be chained.
+// WithMinCount the minimum number of managed objects the relationship can reference.
 func (x *RelationshipDescription) WithMinCount(minCount int) *RelationshipDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinCount:"), minCount)
 	return x
 }
 
-// The rule to apply when you delete the relationship’s owning managed object.
-//
-// WithDeleteRule sets deleteRule and returns the receiver so calls can be chained.
+// WithDeleteRule the rule to apply when you delete the relationship’s owning managed object.
 func (x *RelationshipDescription) WithDeleteRule(deleteRule DeleteRule) *RelationshipDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeleteRule:"), deleteRule)
 	return x
 }
 
-// A Boolean value that determines whether the relationship preserves the order of the referenced managed objects.
-//
-// WithOrdered sets ordered and returns the receiver so calls can be chained.
+// WithOrdered a Boolean value that determines whether the relationship preserves the order of the referenced managed objects.
 func (x *RelationshipDescription) WithOrdered(ordered bool) *RelationshipDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrdered:"), ordered)
 	return x
 }
 
-// The name of the receiver.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the name of the receiver.
 func (x *RelationshipDescription) WithName(name string) *RelationshipDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// A Boolean value that indicates whether the receiver is optional.
-//
-// WithOptional sets optional and returns the receiver so calls can be chained.
+// WithOptional a Boolean value that indicates whether the receiver is optional.
 func (x *RelationshipDescription) WithOptional(optional bool) *RelationshipDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptional:"), optional)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver is transient.
-//
-// WithTransient sets transient and returns the receiver so calls can be chained.
+// WithTransient a Boolean value that indicates whether the receiver is transient.
 func (x *RelationshipDescription) WithTransient(transient bool) *RelationshipDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransient:"), transient)
 	return x
 }
 
-// The user info dictionary of the receiver.
-//
-// WithUserInfo sets userInfo and returns the receiver so calls can be chained.
+// WithUserInfo the user info dictionary of the receiver.
 func (x *RelationshipDescription) WithUserInfo(userInfo obj.Object) *RelationshipDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return x
 }
 
-// A Boolean value that indicates whether the receiver should be indexed for searching.
-//
-// WithIndexed sets indexed and returns the receiver so calls can be chained.
+// WithIndexed a Boolean value that indicates whether the receiver should be indexed for searching.
 func (x *RelationshipDescription) WithIndexed(indexed bool) *RelationshipDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexed:"), indexed)
 	return x
 }
 
-// The version hash modifier for the receiver.
-//
-// WithVersionHashModifier sets versionHashModifier and returns the receiver so calls can be chained.
+// WithVersionHashModifier the version hash modifier for the receiver.
 func (x *RelationshipDescription) WithVersionHashModifier(versionHashModifier string) *RelationshipDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVersionHashModifier:"), purego.NSString(versionHashModifier))
 	return x
 }
 
-// A Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
-//
-// WithIndexedBySpotlight sets indexedBySpotlight and returns the receiver so calls can be chained.
+// WithIndexedBySpotlight a Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
 func (x *RelationshipDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *RelationshipDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexedBySpotlight:"), indexedBySpotlight)
 	return x
 }
 
-// A Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
-//
-// WithStoredInExternalRecord sets storedInExternalRecord and returns the receiver so calls can be chained.
+// WithStoredInExternalRecord a Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
 func (x *RelationshipDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *RelationshipDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoredInExternalRecord:"), storedInExternalRecord)
 	return x
 }
 
-// The renaming identifier for the receiver.
-//
-// WithRenamingIdentifier sets renamingIdentifier and returns the receiver so calls can be chained.
+// WithRenamingIdentifier the renaming identifier for the receiver.
 func (x *RelationshipDescription) WithRenamingIdentifier(renamingIdentifier string) *RelationshipDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenamingIdentifier:"), purego.NSString(renamingIdentifier))
 	return x
 }
 
+// DestinationEntity wraps the corresponding Objective-C method.
 func (x *RelationshipDescription) DestinationEntity() *EntityDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationEntity"))
 	return EntityDescriptionFromID(_r)
 }
 
+// SetDestinationEntity wraps the corresponding Objective-C method.
 func (x *RelationshipDescription) SetDestinationEntity(destinationEntity *EntityDescription) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationEntity:"), objref.IDOf(destinationEntity))
 }
 
+// InverseRelationship wraps the corresponding Objective-C method.
 func (x *RelationshipDescription) InverseRelationship() *RelationshipDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inverseRelationship"))
 	return RelationshipDescriptionFromID(_r)
 }
 
+// SetInverseRelationship wraps the corresponding Objective-C method.
 func (x *RelationshipDescription) SetInverseRelationship(inverseRelationship *RelationshipDescription) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInverseRelationship:"), objref.IDOf(inverseRelationship))
 }
 
+// MaxCount wraps the corresponding Objective-C method.
 func (x *RelationshipDescription) MaxCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxCount"))
 	return _r
 }
 
+// SetMaxCount wraps the corresponding Objective-C method.
 func (x *RelationshipDescription) SetMaxCount(maxCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCount:"), maxCount)
 }
 
+// MinCount wraps the corresponding Objective-C method.
 func (x *RelationshipDescription) MinCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minCount"))
 	return _r
 }
 
+// SetMinCount wraps the corresponding Objective-C method.
 func (x *RelationshipDescription) SetMinCount(minCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinCount:"), minCount)
 }
 
+// DeleteRule wraps the corresponding Objective-C method.
 func (x *RelationshipDescription) DeleteRule() DeleteRule {
 	_r := objc.Send[DeleteRule](objref.IDOf(x), objc.RegisterName("deleteRule"))
 	return _r
 }
 
+// SetDeleteRule wraps the corresponding Objective-C method.
 func (x *RelationshipDescription) SetDeleteRule(deleteRule DeleteRule) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeleteRule:"), deleteRule)
 }
 
+// IsToMany wraps the corresponding Objective-C method.
 func (x *RelationshipDescription) IsToMany() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isToMany"))
 	return _r
 }
 
+// IsOrdered wraps the corresponding Objective-C method.
 func (x *RelationshipDescription) IsOrdered() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOrdered"))
 	return _r
 }
 
+// SetOrdered wraps the corresponding Objective-C method.
 func (x *RelationshipDescription) SetOrdered(ordered bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrdered:"), ordered)
 }
@@ -277,3 +248,5 @@ type RelationshipDescriptionable interface {
 }
 
 var _ RelationshipDescriptionable = (*RelationshipDescription)(nil)
+
+var _ PropertyDescriptionProvider = (*RelationshipDescription)(nil)

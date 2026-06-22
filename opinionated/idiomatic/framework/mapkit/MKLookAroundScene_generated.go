@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A utility class that encapsulates information the framework requires to retrieve and display a specific Look Around location’s imagery.
-//
 // LookAroundScene is an idiomatic wrapper over the Objective-C class MKLookAroundScene.
+//
+// A utility class that encapsulates information the framework requires to retrieve and display a specific Look Around location’s imagery.
 type LookAroundScene struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LookAroundSceneFromID(id objc.ID) *LookAroundScene {
 	if id == 0 {
 		return nil
 	}
-	x := &LookAroundScene{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LookAroundScene{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func lookAroundSceneAdopt(id objc.ID) *LookAroundScene {
 	if id == 0 {
 		return nil
 	}
-	x := &LookAroundScene{Handle: objref.Wrap(id)}
+	x := &LookAroundScene{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *LookAroundScene) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *LookAroundScene) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LookAroundScene) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewLookAroundScene creates a new LookAroundScene.

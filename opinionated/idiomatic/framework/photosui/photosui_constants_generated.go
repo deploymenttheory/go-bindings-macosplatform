@@ -49,7 +49,6 @@ func PHProjectCategoryOther() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("PHProjectCategoryOther")))
 }
 
-// PHProjectCategoryUndefined is used to indicate that -[PHProjectExtensionController typeDescriptionDataSourceForCategory:invalidator:] should return the data source which provides all project types descriptions.
 // PHProjectCategoryUndefined returns the string constant PHProjectCategoryUndefined, for use as a dictionary key or argument.
 func PHProjectCategoryUndefined() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("PHProjectCategoryUndefined")))

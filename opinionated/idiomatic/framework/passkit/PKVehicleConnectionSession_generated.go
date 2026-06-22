@@ -25,7 +25,8 @@ func VehicleConnectionSessionFromID(id objc.ID) *VehicleConnectionSession {
 	if id == 0 {
 		return nil
 	}
-	x := &VehicleConnectionSession{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VehicleConnectionSession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func vehicleConnectionSessionAdopt(id objc.ID) *VehicleConnectionSession {
 	if id == 0 {
 		return nil
 	}
-	x := &VehicleConnectionSession{Handle: objref.Wrap(id)}
+	x := &VehicleConnectionSession{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *VehicleConnectionSession) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VehicleConnectionSession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVehicleConnectionSession creates a new VehicleConnectionSession.
 func NewVehicleConnectionSession() *VehicleConnectionSession {
 	_id := objc.Send[objc.ID](objc.ID(_class("PKVehicleConnectionSession")), objc.RegisterName("new"))
 	return vehicleConnectionSessionAdopt(_id)
 }
 
+// SendData wraps the corresponding Objective-C method.
 func (x *VehicleConnectionSession) SendData(message obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendData:error:"), objref.IDOf(message), unsafe.Pointer(&_nsErr))
@@ -73,10 +82,12 @@ func (x *VehicleConnectionSession) SendData(message obj.Object) error {
 	return nil
 }
 
+// Invalidate wraps the corresponding Objective-C method.
 func (x *VehicleConnectionSession) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
+// ConnectionStatus wraps the corresponding Objective-C method.
 func (x *VehicleConnectionSession) ConnectionStatus() VehicleConnectionSessionConnectionState {
 	_r := objc.Send[VehicleConnectionSessionConnectionState](objref.IDOf(x), objc.RegisterName("connectionStatus"))
 	return _r

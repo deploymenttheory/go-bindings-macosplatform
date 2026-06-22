@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the text to synthesize and the voice to use.
-//
 // SpeechSynthesisProviderRequest is an idiomatic wrapper over the Objective-C class AVSpeechSynthesisProviderRequest.
+//
+// An object that represents the text to synthesize and the voice to use.
 type SpeechSynthesisProviderRequest struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SpeechSynthesisProviderRequestFromID(id objc.ID) *SpeechSynthesisProviderRe
 	if id == 0 {
 		return nil
 	}
-	x := &SpeechSynthesisProviderRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SpeechSynthesisProviderRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func speechSynthesisProviderRequestAdopt(id objc.ID) *SpeechSynthesisProviderReq
 	if id == 0 {
 		return nil
 	}
-	x := &SpeechSynthesisProviderRequest{Handle: objref.Wrap(id)}
+	x := &SpeechSynthesisProviderRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,16 +60,20 @@ func (x *SpeechSynthesisProviderRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a request with a voice and a description.
-//
-// NewSpeechSynthesisProviderRequestWithSSMLRepresentationVoice creates a new SpeechSynthesisProviderRequest.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpeechSynthesisProviderRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSpeechSynthesisProviderRequestWithSSMLRepresentationVoice creates a request with a voice and a description.
 func NewSpeechSynthesisProviderRequestWithSSMLRepresentationVoice(text string, voice *SpeechSynthesisProviderVoice) *SpeechSynthesisProviderRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVSpeechSynthesisProviderRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSSMLRepresentation:voice:"), purego.NSString(text), objref.IDOf(voice))
 	return speechSynthesisProviderRequestAdopt(_id)
 }
 
-// The SSML representation of the text to be synthesized with the corresponding speech synthesis attributes for customization of pitch, rate, intonation, and more.
+// SsmlRepresentation the SSML representation of the text to be synthesized with the corresponding speech synthesis attributes for customization of pitch, rate, intonation, and more.
 func (x *SpeechSynthesisProviderRequest) SsmlRepresentation() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ssmlRepresentation"))
 	if _r == 0 {
@@ -76,7 +82,7 @@ func (x *SpeechSynthesisProviderRequest) SsmlRepresentation() string {
 	return purego.GoString(_r)
 }
 
-// The voice to be used in this speech request
+// Voice the voice to be used in this speech request
 func (x *SpeechSynthesisProviderRequest) Voice() *SpeechSynthesisProviderVoice {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("voice"))
 	return SpeechSynthesisProviderVoiceFromID(_r)

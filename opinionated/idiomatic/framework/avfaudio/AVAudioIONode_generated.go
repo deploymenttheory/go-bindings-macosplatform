@@ -9,16 +9,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object that performs audio input or output in the engine.
-//
 // AudioIONode is an idiomatic wrapper over the Objective-C class AVAudioIONode.
+//
+// AudioIONode is an abstract base — you do not construct it directly. Construct one of [AudioInputNode], [AudioOutputNode] and pass it where a AudioIONode is accepted.
+//
+// An object that performs audio input or output in the engine.
 type AudioIONode struct {
-	objref.Handle
+	AudioNode
 }
 
 // AudioIONodeFromID adopts an existing Objective-C object as a AudioIONode
@@ -27,7 +28,8 @@ func AudioIONodeFromID(id objc.ID) *AudioIONode {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioIONode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioIONode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,33 +42,13 @@ func audioIONodeAdopt(id objc.ID) *AudioIONode {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioIONode{Handle: objref.Wrap(id)}
+	x := &AudioIONode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *AudioIONode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioIONode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioIONode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewAudioIONode creates a new AudioIONode.
-func NewAudioIONode() *AudioIONode {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioIONode")), objc.RegisterName("new"))
-	return audioIONodeAdopt(_id)
-}
-
-// Enables or disables voice processing on the I/O node.
+// SetVoiceProcessingEnabled enables or disables voice processing on the I/O node.
 func (x *AudioIONode) SetVoiceProcessingEnabled(enabled bool) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setVoiceProcessingEnabled:error:"), enabled, unsafe.Pointer(&_nsErr))
@@ -76,13 +58,13 @@ func (x *AudioIONode) SetVoiceProcessingEnabled(enabled bool) error {
 	return nil
 }
 
-// The presentation or hardware latency, applicable when the engine is rendering to/from an audio device. This corresponds to kAudioDevicePropertyLatency and kAudioStreamPropertyLatency. See <CoreAudio/AudioHardwareBase.h>.
+// PresentationLatency the presentation or hardware latency, applicable when the engine is rendering to/from an audio device. This corresponds to kAudioDevicePropertyLatency and kAudioStreamPropertyLatency. See <CoreAudio/AudioHardwareBase.h>.
 func (x *AudioIONode) PresentationLatency() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("presentationLatency"))
 	return _r
 }
 
-// Indicates whether voice processing is enabled.
+// IsVoiceProcessingEnabled indicates whether voice processing is enabled.
 func (x *AudioIONode) IsVoiceProcessingEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVoiceProcessingEnabled"))
 	return _r
@@ -97,3 +79,12 @@ type AudioIONodeable interface {
 }
 
 var _ AudioIONodeable = (*AudioIONode)(nil)
+
+// isAudioIONode marks AudioIONode — and, by embedding promotion, its
+// subclasses — as a member of the AudioIONode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AudioIONode) isAudioIONode() {}
+
+var _ AudioIONodeProvider = (*AudioIONode)(nil)
+
+var _ AudioNodeProvider = (*AudioIONode)(nil)

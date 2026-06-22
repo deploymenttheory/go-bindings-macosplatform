@@ -13,6 +13,8 @@ import (
 )
 
 // MTRBasicInformationClusterLeaveEvent is an idiomatic wrapper over the Objective-C class MTRBasicInformationClusterLeaveEvent.
+//
+// MTRBasicInformationClusterLeaveEvent is an abstract base — you do not construct it directly. Construct one of [MTRBasicClusterLeaveEvent] and pass it where a MTRBasicInformationClusterLeaveEvent is accepted.
 type MTRBasicInformationClusterLeaveEvent struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRBasicInformationClusterLeaveEventFromID(id objc.ID) *MTRBasicInformation
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBasicInformationClusterLeaveEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBasicInformationClusterLeaveEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRBasicInformationClusterLeaveEventAdopt(id objc.ID) *MTRBasicInformationC
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBasicInformationClusterLeaveEvent{Handle: objref.Wrap(id)}
+	x := &MTRBasicInformationClusterLeaveEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +60,25 @@ func (x *MTRBasicInformationClusterLeaveEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRBasicInformationClusterLeaveEvent creates a new MTRBasicInformationClusterLeaveEvent.
-func NewMTRBasicInformationClusterLeaveEvent() *MTRBasicInformationClusterLeaveEvent {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRBasicInformationClusterLeaveEvent")), objc.RegisterName("new"))
-	return mTRBasicInformationClusterLeaveEventAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRBasicInformationClusterLeaveEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithFabricIndex sets fabricIndex and returns the receiver so calls can be chained.
+// WithFabricIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRBasicInformationClusterLeaveEvent) WithFabricIndex(fabricIndex obj.Object) *MTRBasicInformationClusterLeaveEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return x
 }
 
+// FabricIndex wraps the corresponding Objective-C method.
 func (x *MTRBasicInformationClusterLeaveEvent) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)
 }
 
+// SetFabricIndex wraps the corresponding Objective-C method.
 func (x *MTRBasicInformationClusterLeaveEvent) SetFabricIndex(fabricIndex obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 }
@@ -86,3 +92,10 @@ type MTRBasicInformationClusterLeaveEventable interface {
 }
 
 var _ MTRBasicInformationClusterLeaveEventable = (*MTRBasicInformationClusterLeaveEvent)(nil)
+
+// isMTRBasicInformationClusterLeaveEvent marks MTRBasicInformationClusterLeaveEvent — and, by embedding promotion, its
+// subclasses — as a member of the MTRBasicInformationClusterLeaveEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRBasicInformationClusterLeaveEvent) isMTRBasicInformationClusterLeaveEvent() {}
+
+var _ MTRBasicInformationClusterLeaveEventProvider = (*MTRBasicInformationClusterLeaveEvent)(nil)

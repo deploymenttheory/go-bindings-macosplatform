@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A recurrent neural network layer for inference on Metal Performance Shaders matrices.
-//
 // RNNMatrixInferenceLayer is an idiomatic wrapper over the Objective-C class MPSRNNMatrixInferenceLayer.
+//
+// It embeds [Kernel], promoting that type's methods.
+//
+// A recurrent neural network layer for inference on Metal Performance Shaders matrices.
 type RNNMatrixInferenceLayer struct {
-	objref.Handle
+	Kernel
 }
 
 // RNNMatrixInferenceLayerFromID adopts an existing Objective-C object as a RNNMatrixInferenceLayer
@@ -25,7 +26,8 @@ func RNNMatrixInferenceLayerFromID(id objc.ID) *RNNMatrixInferenceLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &RNNMatrixInferenceLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RNNMatrixInferenceLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func rNNMatrixInferenceLayerAdopt(id objc.ID) *RNNMatrixInferenceLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &RNNMatrixInferenceLayer{Handle: objref.Wrap(id)}
+	x := &RNNMatrixInferenceLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RNNMatrixInferenceLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RNNMatrixInferenceLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RNNMatrixInferenceLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRNNMatrixInferenceLayer creates a new RNNMatrixInferenceLayer.
@@ -64,64 +52,60 @@ func NewRNNMatrixInferenceLayer() *RNNMatrixInferenceLayer {
 	return rNNMatrixInferenceLayerAdopt(_id)
 }
 
-// How output states from
-//
-// WithRecurrentOutputIsTemporary sets recurrentOutputIsTemporary and returns the receiver so calls can be chained.
+// WithRecurrentOutputIsTemporary how output states from
 func (x *RNNMatrixInferenceLayer) WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNMatrixInferenceLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrentOutputIsTemporary:"), recurrentOutputIsTemporary)
 	return x
 }
 
-// If YES then calls to
-//
-// WithStoreAllIntermediateStates sets storeAllIntermediateStates and returns the receiver so calls can be chained.
+// WithStoreAllIntermediateStates if YES then calls to
 func (x *RNNMatrixInferenceLayer) WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNMatrixInferenceLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAllIntermediateStates:"), storeAllIntermediateStates)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *RNNMatrixInferenceLayer) WithLabel(label string) *RNNMatrixInferenceLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The number of feature channels input vector/matrix.
+// InputFeatureChannels the number of feature channels input vector/matrix.
 func (x *RNNMatrixInferenceLayer) InputFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputFeatureChannels"))
 	return _r
 }
 
-// The number of feature channels in the output vector/matrix.
+// OutputFeatureChannels the number of feature channels in the output vector/matrix.
 func (x *RNNMatrixInferenceLayer) OutputFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputFeatureChannels"))
 	return _r
 }
 
-// Number of layers in the filter-stack. This will be one when using initWithDevice:rnnDescriptor to initialize this filter and the number of entries in the array 'rnnDescriptors' when initializing this filter with initWithDevice:rnnDescriptors.
+// NumberOfLayers number of layers in the filter-stack. This will be one when using initWithDevice:rnnDescriptor to initialize this filter and the number of entries in the array 'rnnDescriptors' when initializing this filter with initWithDevice:rnnDescriptors.
 func (x *RNNMatrixInferenceLayer) NumberOfLayers() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfLayers"))
 	return _r
 }
 
-// How output states from
+// RecurrentOutputIsTemporary how output states from
 func (x *RNNMatrixInferenceLayer) RecurrentOutputIsTemporary() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("recurrentOutputIsTemporary"))
 	return _r
 }
 
+// SetRecurrentOutputIsTemporary wraps the corresponding Objective-C method.
 func (x *RNNMatrixInferenceLayer) SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrentOutputIsTemporary:"), recurrentOutputIsTemporary)
 }
 
-// If YES then calls to
+// StoreAllIntermediateStates if YES then calls to
 func (x *RNNMatrixInferenceLayer) StoreAllIntermediateStates() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("storeAllIntermediateStates"))
 	return _r
 }
 
+// SetStoreAllIntermediateStates wraps the corresponding Objective-C method.
 func (x *RNNMatrixInferenceLayer) SetStoreAllIntermediateStates(storeAllIntermediateStates bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAllIntermediateStates:"), storeAllIntermediateStates)
 }
@@ -142,3 +126,5 @@ type RNNMatrixInferenceLayerable interface {
 }
 
 var _ RNNMatrixInferenceLayerable = (*RNNMatrixInferenceLayer)(nil)
+
+var _ KernelProvider = (*RNNMatrixInferenceLayer)(nil)

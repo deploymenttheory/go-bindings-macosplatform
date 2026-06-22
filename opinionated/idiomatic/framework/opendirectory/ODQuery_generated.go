@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An ODQuery object serves as a Cocoa wrapper for an Open Directory query.
-//
 // Query is an idiomatic wrapper over the Objective-C class ODQuery.
+//
+// An ODQuery object serves as a Cocoa wrapper for an Open Directory query.
 type Query struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func QueryFromID(id objc.ID) *Query {
 	if id == 0 {
 		return nil
 	}
-	x := &Query{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Query{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func queryAdopt(id objc.ID) *Query {
 	if id == 0 {
 		return nil
 	}
-	x := &Query{Handle: objref.Wrap(id)}
+	x := &Query{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,10 +62,14 @@ func (x *Query) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a query object with provided parameters.
-//
-// NewQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError creates a new Query.
-func NewQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError(inNode *Node, inRecordTypeOrList obj.Object, inAttribute obj.Object, inMatchType uint32, inQueryValueOrList obj.Object, inReturnAttributeOrList obj.Object, inMaximumResults int) (*Query, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Query) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError creates a query object with provided parameters.
+func NewQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError(inNode *Node, inRecordTypeOrList obj.Object, inAttribute obj.Object, inMatchType uint32, inQueryValueOrList obj.Object, inReturnAttributeOrList obj.Object, inMaximumResults int) (result *Query, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ODQuery")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNode:forRecordTypes:attribute:matchType:queryValues:returnAttributes:maximumResults:error:"), objref.IDOf(inNode), objref.IDOf(inRecordTypeOrList), objref.IDOf(inAttribute), inMatchType, objref.IDOf(inQueryValueOrList), objref.IDOf(inReturnAttributeOrList), inMaximumResults, unsafe.Pointer(&_nsErr))
@@ -73,16 +79,14 @@ func NewQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributes
 	return queryAdopt(_id), nil
 }
 
-// The queue on which asynchronous results are delivered to the delegate.
-//
-// WithOperationQueue sets operationQueue and returns the receiver so calls can be chained.
+// WithOperationQueue the queue on which asynchronous results are delivered to the delegate.
 func (x *Query) WithOperationQueue(operationQueue obj.Object) *Query {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationQueue:"), objref.IDOf(operationQueue))
 	return x
 }
 
-// Returns results from a query synchronously.
-func (x *Query) ResultsAllowingPartialError(inAllowPartialResults bool) (obj.Object, error) {
+// ResultsAllowingPartialError returns results from a query synchronously.
+func (x *Query) ResultsAllowingPartialError(inAllowPartialResults bool) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultsAllowingPartial:error:"), inAllowPartialResults, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -91,27 +95,28 @@ func (x *Query) ResultsAllowingPartialError(inAllowPartialResults bool) (obj.Obj
 	return obj.Wrap(_r), nil
 }
 
-// Retrieves results from a query asynchronously by scheduling the query in a run loop.
+// ScheduleInRunLoopForMode retrieves results from a query asynchronously by scheduling the query in a run loop.
 func (x *Query) ScheduleInRunLoopForMode(inRunLoop obj.Object, inMode string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(inRunLoop), purego.NSString(inMode))
 }
 
-// Removes the query from a specified run loop.
+// RemoveFromRunLoopForMode removes the query from a specified run loop.
 func (x *Query) RemoveFromRunLoopForMode(inRunLoop obj.Object, inMode string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(inRunLoop), purego.NSString(inMode))
 }
 
-// Restarts a query, disposing of any results it has obtained.
+// Synchronize restarts a query, disposing of any results it has obtained.
 func (x *Query) Synchronize() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("synchronize"))
 }
 
-// The NSOperationQueue on which asynchronous results are delivered to the delegate. The NSOperationQueue on which asynchronous results are delivered to the delegate.
+// OperationQueue the NSOperationQueue on which asynchronous results are delivered to the delegate. The NSOperationQueue on which asynchronous results are delivered to the delegate.
 func (x *Query) OperationQueue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationQueue"))
 	return obj.Wrap(_r)
 }
 
+// SetOperationQueue wraps the corresponding Objective-C method.
 func (x *Query) SetOperationQueue(operationQueue obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationQueue:"), objref.IDOf(operationQueue))
 }
@@ -120,7 +125,7 @@ func (x *Query) SetOperationQueue(operationQueue obj.Object) {
 type Queryable interface {
 	obj.Object
 	WithOperationQueue(operationQueue obj.Object) *Query
-	ResultsAllowingPartialError(inAllowPartialResults bool) (obj.Object, error)
+	ResultsAllowingPartialError(inAllowPartialResults bool) (result obj.Object, err error)
 	ScheduleInRunLoopForMode(inRunLoop obj.Object, inMode string)
 	RemoveFromRunLoopForMode(inRunLoop obj.Object, inMode string)
 	Synchronize()

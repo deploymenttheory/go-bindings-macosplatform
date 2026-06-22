@@ -15,6 +15,8 @@ import (
 )
 
 // MTRUnitTestingClusterTestListInt8UReverseResponseParams is an idiomatic wrapper over the Objective-C class MTRUnitTestingClusterTestListInt8UReverseResponseParams.
+//
+// MTRUnitTestingClusterTestListInt8UReverseResponseParams is an abstract base — you do not construct it directly. Construct one of [MTRTestClusterClusterTestListInt8UReverseResponseParams] and pass it where a MTRUnitTestingClusterTestListInt8UReverseResponseParams is accepted.
 type MTRUnitTestingClusterTestListInt8UReverseResponseParams struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func MTRUnitTestingClusterTestListInt8UReverseResponseParamsFromID(id objc.ID) *
 	if id == 0 {
 		return nil
 	}
-	x := &MTRUnitTestingClusterTestListInt8UReverseResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRUnitTestingClusterTestListInt8UReverseResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func mTRUnitTestingClusterTestListInt8UReverseResponseParamsAdopt(id objc.ID) *M
 	if id == 0 {
 		return nil
 	}
-	x := &MTRUnitTestingClusterTestListInt8UReverseResponseParams{Handle: objref.Wrap(id)}
+	x := &MTRUnitTestingClusterTestListInt8UReverseResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,14 @@ func (x *MTRUnitTestingClusterTestListInt8UReverseResponseParams) IsKind(classNa
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRUnitTestingClusterTestListInt8UReverseResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTRUnitTestingClusterTestListInt8UReverseResponseParamsWithResponseValueError creates a new MTRUnitTestingClusterTestListInt8UReverseResponseParams.
-func NewMTRUnitTestingClusterTestListInt8UReverseResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRUnitTestingClusterTestListInt8UReverseResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRUnitTestingClusterTestListInt8UReverseResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRUnitTestingClusterTestListInt8UReverseResponseParamsWithResponseValueError initialize an MTRUnitTestingClusterTestListInt8UReverseResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRUnitTestingClusterTestListInt8UReverseResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRUnitTestingClusterTestListInt8UReverseResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRUnitTestingClusterTestListInt8UReverseResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,29 +79,30 @@ func NewMTRUnitTestingClusterTestListInt8UReverseResponseParamsWithResponseValue
 	return mTRUnitTestingClusterTestListInt8UReverseResponseParamsAdopt(_id), nil
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRUnitTestingClusterTestListInt8UReverseResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestListInt8UReverseResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
+// Arg1 wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestListInt8UReverseResponseParams) Arg1() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arg1"))
 	return obj.Wrap(_r)
 }
 
+// SetArg1 wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestListInt8UReverseResponseParams) SetArg1(arg1 obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRUnitTestingClusterTestListInt8UReverseResponseParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestListInt8UReverseResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
@@ -109,3 +118,11 @@ type MTRUnitTestingClusterTestListInt8UReverseResponseParamsable interface {
 }
 
 var _ MTRUnitTestingClusterTestListInt8UReverseResponseParamsable = (*MTRUnitTestingClusterTestListInt8UReverseResponseParams)(nil)
+
+// isMTRUnitTestingClusterTestListInt8UReverseResponseParams marks MTRUnitTestingClusterTestListInt8UReverseResponseParams — and, by embedding promotion, its
+// subclasses — as a member of the MTRUnitTestingClusterTestListInt8UReverseResponseParams hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRUnitTestingClusterTestListInt8UReverseResponseParams) isMTRUnitTestingClusterTestListInt8UReverseResponseParams() {
+}
+
+var _ MTRUnitTestingClusterTestListInt8UReverseResponseParamsProvider = (*MTRUnitTestingClusterTestListInt8UReverseResponseParams)(nil)

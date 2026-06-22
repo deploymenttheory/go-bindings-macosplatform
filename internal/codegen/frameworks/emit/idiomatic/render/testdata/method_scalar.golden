@@ -1,0 +1,5 @@
+func (x *Array) Count() int {
+_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+return _r
+}
+

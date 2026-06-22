@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of how to convert between units using a linear equation.
-//
 // UnitConverterLinear is an idiomatic wrapper over the Objective-C class NSUnitConverterLinear.
+//
+// It embeds [UnitConverter], promoting that type's methods.
+//
+// A description of how to convert between units using a linear equation.
 type UnitConverterLinear struct {
-	objref.Handle
+	UnitConverter
 }
 
 // UnitConverterLinearFromID adopts an existing Objective-C object as a UnitConverterLinear
@@ -25,7 +26,8 @@ func UnitConverterLinearFromID(id objc.ID) *UnitConverterLinear {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitConverterLinear{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UnitConverterLinear{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func unitConverterLinearAdopt(id objc.ID) *UnitConverterLinear {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitConverterLinear{Handle: objref.Wrap(id)}
+	x := &UnitConverterLinear{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UnitConverterLinear) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UnitConverterLinear) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UnitConverterLinear) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUnitConverterLinearWithCoefficient creates a new UnitConverterLinear.
@@ -72,17 +60,19 @@ func NewUnitConverterLinearWithCoefficientConstant(coefficient float64, constant
 	return unitConverterLinearAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UnitConverterLinear) WithScriptingProperties(scriptingProperties obj.Object) *UnitConverterLinear {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Coefficient wraps the corresponding Objective-C method.
 func (x *UnitConverterLinear) Coefficient() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("coefficient"))
 	return _r
 }
 
+// Constant wraps the corresponding Objective-C method.
 func (x *UnitConverterLinear) Constant() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("constant"))
 	return _r
@@ -97,3 +87,5 @@ type UnitConverterLinearable interface {
 }
 
 var _ UnitConverterLinearable = (*UnitConverterLinear)(nil)
+
+var _ UnitConverterProvider = (*UnitConverterLinear)(nil)

@@ -6,15 +6,16 @@ package quicklookthumbnailing
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information about the thumbnail that the thumbnail generator returns.
-//
 // ThumbnailRepresentation is an idiomatic wrapper over the Objective-C class QLThumbnailRepresentation.
+//
+// Information about the thumbnail that the thumbnail generator returns.
 type ThumbnailRepresentation struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func ThumbnailRepresentationFromID(id objc.ID) *ThumbnailRepresentation {
 	if id == 0 {
 		return nil
 	}
-	x := &ThumbnailRepresentation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ThumbnailRepresentation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func thumbnailRepresentationAdopt(id objc.ID) *ThumbnailRepresentation {
 	if id == 0 {
 		return nil
 	}
-	x := &ThumbnailRepresentation{Handle: objref.Wrap(id)}
+	x := &ThumbnailRepresentation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +61,34 @@ func (x *ThumbnailRepresentation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ThumbnailRepresentation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewThumbnailRepresentation creates a new ThumbnailRepresentation.
 func NewThumbnailRepresentation() *ThumbnailRepresentation {
 	_id := objc.Send[objc.ID](objc.ID(_class("QLThumbnailRepresentation")), objc.RegisterName("new"))
 	return thumbnailRepresentationAdopt(_id)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *ThumbnailRepresentation) Type() ThumbnailRepresentationType {
 	_r := objc.Send[ThumbnailRepresentationType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
-// Returns the CGImage representation of the thumbnail.
+// CGImage returns the CGImage representation of the thumbnail.
 func (x *ThumbnailRepresentation) CGImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CGImage"))
 	return obj.Wrap(_r)
+}
+
+// ContentRect returns the the effective rect within the thumbnail image representing the content of the document. In icon mode, this is the part of the image without all the image decorations.
+func (x *ThumbnailRepresentation) ContentRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("contentRect"))
+	return _r
 }
 
 // ThumbnailRepresentationable is the interface implemented by [ThumbnailRepresentation], for mocking and DI.
@@ -80,6 +96,7 @@ type ThumbnailRepresentationable interface {
 	obj.Object
 	Type() ThumbnailRepresentationType
 	CGImage() obj.Object
+	ContentRect() corefoundation.CGRect
 }
 
 var _ ThumbnailRepresentationable = (*ThumbnailRepresentation)(nil)

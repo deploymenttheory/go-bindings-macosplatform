@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event requesting a change in the current skip interval.
-//
 // SkipIntervalCommandEvent is an idiomatic wrapper over the Objective-C class MPSkipIntervalCommandEvent.
+//
+// It embeds [RemoteCommandEvent], promoting that type's methods.
+//
+// An event requesting a change in the current skip interval.
 type SkipIntervalCommandEvent struct {
-	objref.Handle
+	RemoteCommandEvent
 }
 
 // SkipIntervalCommandEventFromID adopts an existing Objective-C object as a SkipIntervalCommandEvent
@@ -25,7 +26,8 @@ func SkipIntervalCommandEventFromID(id objc.ID) *SkipIntervalCommandEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &SkipIntervalCommandEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SkipIntervalCommandEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func skipIntervalCommandEventAdopt(id objc.ID) *SkipIntervalCommandEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &SkipIntervalCommandEvent{Handle: objref.Wrap(id)}
+	x := &SkipIntervalCommandEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SkipIntervalCommandEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SkipIntervalCommandEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SkipIntervalCommandEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSkipIntervalCommandEvent creates a new SkipIntervalCommandEvent.
@@ -64,6 +52,7 @@ func NewSkipIntervalCommandEvent() *SkipIntervalCommandEvent {
 	return skipIntervalCommandEventAdopt(_id)
 }
 
+// Interval wraps the corresponding Objective-C method.
 func (x *SkipIntervalCommandEvent) Interval() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("interval"))
 	return _r
@@ -76,3 +65,5 @@ type SkipIntervalCommandEventable interface {
 }
 
 var _ SkipIntervalCommandEventable = (*SkipIntervalCommandEvent)(nil)
+
+var _ RemoteCommandEventProvider = (*SkipIntervalCommandEvent)(nil)

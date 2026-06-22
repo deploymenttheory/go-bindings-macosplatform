@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing metrics about the responsiveness of the app to user interaction.
-//
 // AppResponsivenessMetric is an idiomatic wrapper over the Objective-C class MXAppResponsivenessMetric.
+//
+// It embeds [Metric], promoting that type's methods.
+//
+// An object representing metrics about the responsiveness of the app to user interaction.
 type AppResponsivenessMetric struct {
-	objref.Handle
+	Metric
 }
 
 // AppResponsivenessMetricFromID adopts an existing Objective-C object as a AppResponsivenessMetric
@@ -25,7 +26,8 @@ func AppResponsivenessMetricFromID(id objc.ID) *AppResponsivenessMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &AppResponsivenessMetric{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AppResponsivenessMetric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func appResponsivenessMetricAdopt(id objc.ID) *AppResponsivenessMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &AppResponsivenessMetric{Handle: objref.Wrap(id)}
+	x := &AppResponsivenessMetric{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AppResponsivenessMetric) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AppResponsivenessMetric) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AppResponsivenessMetric) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAppResponsivenessMetric creates a new AppResponsivenessMetric.
@@ -64,6 +52,7 @@ func NewAppResponsivenessMetric() *AppResponsivenessMetric {
 	return appResponsivenessMetricAdopt(_id)
 }
 
+// HistogrammedApplicationHangTime wraps the corresponding Objective-C method.
 func (x *AppResponsivenessMetric) HistogrammedApplicationHangTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("histogrammedApplicationHangTime"))
 	return obj.Wrap(_r)
@@ -76,3 +65,5 @@ type AppResponsivenessMetricable interface {
 }
 
 var _ AppResponsivenessMetricable = (*AppResponsivenessMetric)(nil)
+
+var _ MetricProvider = (*AppResponsivenessMetric)(nil)

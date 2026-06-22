@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A plane that can optionally display a reflection of the scene above it.
-//
 // Floor is an idiomatic wrapper over the Objective-C class SCNFloor.
+//
+// It embeds [Geometry], promoting that type's methods.
+//
+// A plane that can optionally display a reflection of the scene above it.
 type Floor struct {
-	objref.Handle
+	Geometry
 }
 
 // FloorFromID adopts an existing Objective-C object as a Floor
@@ -25,7 +26,8 @@ func FloorFromID(id objc.ID) *Floor {
 	if id == 0 {
 		return nil
 	}
-	x := &Floor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Floor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func floorAdopt(id objc.ID) *Floor {
 	if id == 0 {
 		return nil
 	}
-	x := &Floor{Handle: objref.Wrap(id)}
+	x := &Floor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *Floor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Floor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Floor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewFloor creates a new Floor.
@@ -64,200 +52,177 @@ func NewFloor() *Floor {
 	return floorAdopt(_id)
 }
 
-// The intensity of the scene’s reflection on the floor. Animatable.
-//
-// WithReflectivity sets reflectivity and returns the receiver so calls can be chained.
+// WithReflectivity the intensity of the scene’s reflection on the floor. Animatable.
 func (x *Floor) WithReflectivity(reflectivity float64) *Floor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReflectivity:"), reflectivity)
 	return x
 }
 
-// The distance from the floor at which scene contents are reflected at full intensity. Animatable.
-//
-// WithReflectionFalloffStart sets reflectionFalloffStart and returns the receiver so calls can be chained.
+// WithReflectionFalloffStart the distance from the floor at which scene contents are reflected at full intensity. Animatable.
 func (x *Floor) WithReflectionFalloffStart(reflectionFalloffStart float64) *Floor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReflectionFalloffStart:"), reflectionFalloffStart)
 	return x
 }
 
-// The distance from the floor at which scene contents are no longer reflected. Animatable.
-//
-// WithReflectionFalloffEnd sets reflectionFalloffEnd and returns the receiver so calls can be chained.
+// WithReflectionFalloffEnd the distance from the floor at which scene contents are no longer reflected. Animatable.
 func (x *Floor) WithReflectionFalloffEnd(reflectionFalloffEnd float64) *Floor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReflectionFalloffEnd:"), reflectionFalloffEnd)
 	return x
 }
 
-// A mask that defines which categories of other objects show reflections on the floor.
-//
-// WithReflectionCategoryBitMask sets reflectionCategoryBitMask and returns the receiver so calls can be chained.
+// WithReflectionCategoryBitMask a mask that defines which categories of other objects show reflections on the floor.
 func (x *Floor) WithReflectionCategoryBitMask(reflectionCategoryBitMask int) *Floor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReflectionCategoryBitMask:"), reflectionCategoryBitMask)
 	return x
 }
 
-// The extent of the floor along its x-axis. Animatable.
-//
-// WithWidth sets width and returns the receiver so calls can be chained.
+// WithWidth the extent of the floor along its x-axis. Animatable.
 func (x *Floor) WithWidth(width float64) *Floor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
 	return x
 }
 
-// The extent of the floor along its z-axis. Animatable.
-//
-// WithLength sets length and returns the receiver so calls can be chained.
+// WithLength the extent of the floor along its z-axis. Animatable.
 func (x *Floor) WithLength(length float64) *Floor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
 	return x
 }
 
-// The resolution scale factor of the offscreen buffer that SceneKit uses to render reflections.
-//
-// WithReflectionResolutionScaleFactor sets reflectionResolutionScaleFactor and returns the receiver so calls can be chained.
+// WithReflectionResolutionScaleFactor the resolution scale factor of the offscreen buffer that SceneKit uses to render reflections.
 func (x *Floor) WithReflectionResolutionScaleFactor(reflectionResolutionScaleFactor float64) *Floor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReflectionResolutionScaleFactor:"), reflectionResolutionScaleFactor)
 	return x
 }
 
-// A name associated with the geometry object.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName a name associated with the geometry object.
 func (x *Floor) WithName(name string) *Floor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// An array of SCNMaterial objects that determine the geometry’s appearance when rendered.
-//
-// WithMaterials sets the collection and returns the receiver so calls can be chained.
+// WithMaterials an array of SCNMaterial objects that determine the geometry’s appearance when rendered.
 func (x *Floor) WithMaterials(items ...*Material) *Floor {
 	_arr := purego.SliceToNSArray(items, func(_v *Material) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterials:"), _arr)
 	return x
 }
 
-// The first material attached to the geometry.
-//
-// WithFirstMaterial sets firstMaterial and returns the receiver so calls can be chained.
+// WithFirstMaterial the first material attached to the geometry.
 func (x *Floor) WithFirstMaterial(firstMaterial *Material) *Floor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return x
 }
 
-// An array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
-//
-// WithLevelsOfDetail sets the collection and returns the receiver so calls can be chained.
+// WithLevelsOfDetail an array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
 func (x *Floor) WithLevelsOfDetail(items ...*LevelOfDetail) *Floor {
 	_arr := purego.SliceToNSArray(items, func(_v *LevelOfDetail) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelsOfDetail:"), _arr)
 	return x
 }
 
-// WithTessellator sets tessellator and returns the receiver so calls can be chained.
+// WithTessellator sets the property and returns the receiver so calls can be chained.
 func (x *Floor) WithTessellator(tessellator *GeometryTessellator) *Floor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return x
 }
 
-// The number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
-//
-// WithSubdivisionLevel sets subdivisionLevel and returns the receiver so calls can be chained.
+// WithSubdivisionLevel the number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
 func (x *Floor) WithSubdivisionLevel(subdivisionLevel int) *Floor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubdivisionLevel:"), subdivisionLevel)
 	return x
 }
 
-// Specifies if the subdivision is adaptive or uniform. Defaults to YES. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
-//
-// WithWantsAdaptiveSubdivision sets wantsAdaptiveSubdivision and returns the receiver so calls can be chained.
+// WithWantsAdaptiveSubdivision specifies if the subdivision is adaptive or uniform. Defaults to YES. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
 func (x *Floor) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Floor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsAdaptiveSubdivision:"), wantsAdaptiveSubdivision)
 	return x
 }
 
-// The geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
-//
-// WithEdgeCreasesElement sets edgeCreasesElement and returns the receiver so calls can be chained.
+// WithEdgeCreasesElement the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 func (x *Floor) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Floor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return x
 }
 
-// The geometry source specifying the smoothness or sharpness of edges after surface subdivision.
-//
-// WithEdgeCreasesSource sets edgeCreasesSource and returns the receiver so calls can be chained.
+// WithEdgeCreasesSource the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 func (x *Floor) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Floor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return x
 }
 
-// Specifies the reflectivity of the floor. Animatable. If the value is greater than zero then the surface will reflect other objects in the scene. The default value is 0.25.
+// Reflectivity specifies the reflectivity of the floor. Animatable. If the value is greater than zero then the surface will reflect other objects in the scene. The default value is 0.25.
 func (x *Floor) Reflectivity() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("reflectivity"))
 	return _r
 }
 
+// SetReflectivity wraps the corresponding Objective-C method.
 func (x *Floor) SetReflectivity(reflectivity float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReflectivity:"), reflectivity)
 }
 
-// Specifies the distance from the floor where the falloff begins. Animatable. The default value is 0.
+// ReflectionFalloffStart specifies the distance from the floor where the falloff begins. Animatable. The default value is 0.
 func (x *Floor) ReflectionFalloffStart() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("reflectionFalloffStart"))
 	return _r
 }
 
+// SetReflectionFalloffStart wraps the corresponding Objective-C method.
 func (x *Floor) SetReflectionFalloffStart(reflectionFalloffStart float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReflectionFalloffStart:"), reflectionFalloffStart)
 }
 
-// Specifies the distance from the floor where the falloff finishes. Animatable. If the value is 0 then there is no falloff. The default value is 0.
+// ReflectionFalloffEnd specifies the distance from the floor where the falloff finishes. Animatable. If the value is 0 then there is no falloff. The default value is 0.
 func (x *Floor) ReflectionFalloffEnd() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("reflectionFalloffEnd"))
 	return _r
 }
 
+// SetReflectionFalloffEnd wraps the corresponding Objective-C method.
 func (x *Floor) SetReflectionFalloffEnd(reflectionFalloffEnd float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReflectionFalloffEnd:"), reflectionFalloffEnd)
 }
 
-// Determines the node categories to reflect. Defaults to all bits set.
+// ReflectionCategoryBitMask determines the node categories to reflect. Defaults to all bits set.
 func (x *Floor) ReflectionCategoryBitMask() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("reflectionCategoryBitMask"))
 	return _r
 }
 
+// SetReflectionCategoryBitMask wraps the corresponding Objective-C method.
 func (x *Floor) SetReflectionCategoryBitMask(reflectionCategoryBitMask int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReflectionCategoryBitMask:"), reflectionCategoryBitMask)
 }
 
-// The floor extent along the X axis. Animatable. If the value is equal to 0, the floor is infinite on the X axis. The default value is 0.
+// Width the floor extent along the X axis. Animatable. If the value is equal to 0, the floor is infinite on the X axis. The default value is 0.
 func (x *Floor) Width() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("width"))
 	return _r
 }
 
+// SetWidth wraps the corresponding Objective-C method.
 func (x *Floor) SetWidth(width float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
 }
 
-// The floor extent along the Z axis. Animatable. If the value is equal to 0, the floor is infinite on the Z axis. The default value is 0.
+// Length the floor extent along the Z axis. Animatable. If the value is equal to 0, the floor is infinite on the Z axis. The default value is 0.
 func (x *Floor) Length() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("length"))
 	return _r
 }
 
+// SetLength wraps the corresponding Objective-C method.
 func (x *Floor) SetLength(length float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
 }
 
-// Specifies the resolution scale factor of the buffer used to render the reflection. Defaults to 1.0.
+// ReflectionResolutionScaleFactor specifies the resolution scale factor of the buffer used to render the reflection. Defaults to 1.0.
 func (x *Floor) ReflectionResolutionScaleFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("reflectionResolutionScaleFactor"))
 	return _r
 }
 
+// SetReflectionResolutionScaleFactor wraps the corresponding Objective-C method.
 func (x *Floor) SetReflectionResolutionScaleFactor(reflectionResolutionScaleFactor float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReflectionResolutionScaleFactor:"), reflectionResolutionScaleFactor)
 }
@@ -298,3 +263,5 @@ type Floorable interface {
 }
 
 var _ Floorable = (*Floor)(nil)
+
+var _ GeometryProvider = (*Floor)(nil)

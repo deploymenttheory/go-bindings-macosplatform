@@ -11,19 +11,23 @@ import (
 // ConstraintProvider is accepted wherever a SCNConstraint (or one of its subclasses) is expected.
 type ConstraintProvider interface {
 	objref.Object
+	isConstraint()
 }
 
 // GeometryProvider is accepted wherever a SCNGeometry (or one of its subclasses) is expected.
 type GeometryProvider interface {
 	objref.Object
+	isGeometry()
 }
 
 // NodeProvider is accepted wherever a SCNNode (or one of its subclasses) is expected.
 type NodeProvider interface {
 	objref.Object
+	isNode()
 }
 
 // PhysicsBehaviorProvider is accepted wherever a SCNPhysicsBehavior (or one of its subclasses) is expected.
 type PhysicsBehaviorProvider interface {
 	objref.Object
+	isPhysicsBehavior()
 }

@@ -14,9 +14,11 @@ import (
 	"unsafe"
 )
 
-// A class that defines a host’s interface to an audio unit.
-//
 // AudioUnit is an idiomatic wrapper over the Objective-C class AUAudioUnit.
+//
+// AudioUnit is an abstract base — you do not construct it directly. Construct one of [AudioUnitV2Bridge] and pass it where a AudioUnit is accepted.
+//
+// A class that defines a host’s interface to an audio unit.
 type AudioUnit struct {
 	objref.Handle
 }
@@ -27,7 +29,8 @@ func AudioUnitFromID(id objc.ID) *AudioUnit {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnit{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioUnit{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +43,8 @@ func audioUnitAdopt(id objc.ID) *AudioUnit {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnit{Handle: objref.Wrap(id)}
+	x := &AudioUnit{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,134 +64,104 @@ func (x *AudioUnit) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewAudioUnit creates a new AudioUnit.
-func NewAudioUnit() *AudioUnit {
-	_id := objc.Send[objc.ID](objc.ID(_class("AUAudioUnit")), objc.RegisterName("new"))
-	return audioUnitAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioUnit) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Determines whether the audio unit has allocated render resources.
-//
-// WithRenderResourcesAllocated sets renderResourcesAllocated and returns the receiver so calls can be chained.
+// WithRenderResourcesAllocated determines whether the audio unit has allocated render resources.
 func (x *AudioUnit) WithRenderResourcesAllocated(renderResourcesAllocated bool) *AudioUnit {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderResourcesAllocated:"), renderResourcesAllocated)
 	return x
 }
 
-// The maximum number of frames that the audio unit can render at once.
-//
-// WithMaximumFramesToRender sets maximumFramesToRender and returns the receiver so calls can be chained.
+// WithMaximumFramesToRender the maximum number of frames that the audio unit can render at once.
 func (x *AudioUnit) WithMaximumFramesToRender(maximumFramesToRender uint32) *AudioUnit {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumFramesToRender:"), maximumFramesToRender)
 	return x
 }
 
-// An audio unit’s parameters, organized in a tree hierarchy.
-//
-// WithParameterTree sets parameterTree and returns the receiver so calls can be chained.
+// WithParameterTree an audio unit’s parameters, organized in a tree hierarchy.
 func (x *AudioUnit) WithParameterTree(parameterTree *ParameterTree) *AudioUnit {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParameterTree:"), objref.IDOf(parameterTree))
 	return x
 }
 
-// The MIDI protocol to be used by the host for receiving MIDIEventList data. Hosts should set this property to the protocol they wish to receive MIDIEventList data from the Audio Unit. This should be set prior to initialization, all translatable messages will be converted  (if necessary) to this property's protocol prior to delivery to the host. Host should setup in the following order: - Set hostMIDIProtocol - Set MIDIOutputEventListBlock - Call allocateRenderResourcesAndReturnError This is bridged to the v2 API property kAudioUnitProperty_HostMIDIProtocol. Notes: - If overriding this property, subclassers must call [super setHostMIDIProtocol:] - hostMIDIProtocol should be set before attempting to query AudioUnitMIDIProtocol or calling allocateRenderResourcesAndReturnError to allow Audio Units to optionally match their input MIDI protocol to the desired host protocol and prevent protocol conversion.
-//
-// WithHostMIDIProtocol sets hostMIDIProtocol and returns the receiver so calls can be chained.
+// WithHostMIDIProtocol the MIDI protocol to be used by the host for receiving MIDIEventList data. Hosts should set this property to the protocol they wish to receive MIDIEventList data from the Audio Unit. This should be set prior to initialization, all translatable messages will be converted  (if necessary) to this property's protocol prior to delivery to the host. Host should setup in the following order: - Set hostMIDIProtocol - Set MIDIOutputEventListBlock - Call allocateRenderResourcesAndReturnError This is bridged to the v2 API property kAudioUnitProperty_HostMIDIProtocol. Notes: - If overriding this property, subclassers must call [super setHostMIDIProtocol:] - hostMIDIProtocol should be set before attempting to query AudioUnitMIDIProtocol or calling allocateRenderResourcesAndReturnError to allow Audio Units to optionally match their input MIDI protocol to the desired host protocol and prevent protocol conversion.
 func (x *AudioUnit) WithHostMIDIProtocol(hostMIDIProtocol obj.Object) *AudioUnit {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHostMIDIProtocol:"), objref.IDOf(hostMIDIProtocol))
 	return x
 }
 
-// A persistable snapshot of the audio unit’s properties and parameters, suitable for saving as a user preset.
-//
-// WithFullState sets fullState and returns the receiver so calls can be chained.
+// WithFullState a persistable snapshot of the audio unit’s properties and parameters, suitable for saving as a user preset.
 func (x *AudioUnit) WithFullState(fullState obj.Object) *AudioUnit {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFullState:"), objref.IDOf(fullState))
 	return x
 }
 
-// A persistable snapshot of the audio unit’s properties and parameters, suitable for saving in a user’s document.
-//
-// WithFullStateForDocument sets fullStateForDocument and returns the receiver so calls can be chained.
+// WithFullStateForDocument a persistable snapshot of the audio unit’s properties and parameters, suitable for saving in a user’s document.
 func (x *AudioUnit) WithFullStateForDocument(fullStateForDocument obj.Object) *AudioUnit {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFullStateForDocument:"), objref.IDOf(fullStateForDocument))
 	return x
 }
 
-// The audio unit’s last-selected preset.
-//
-// WithCurrentPreset sets currentPreset and returns the receiver so calls can be chained.
+// WithCurrentPreset the audio unit’s last-selected preset.
 func (x *AudioUnit) WithCurrentPreset(currentPreset *AudioUnitPreset) *AudioUnit {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentPreset:"), objref.IDOf(currentPreset))
 	return x
 }
 
-// Provides a trade-off between rendering quality and CPU load.
-//
-// WithRenderQuality sets renderQuality and returns the receiver so calls can be chained.
+// WithRenderQuality provides a trade-off between rendering quality and CPU load.
 func (x *AudioUnit) WithRenderQuality(renderQuality int) *AudioUnit {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderQuality:"), renderQuality)
 	return x
 }
 
-// Determines whether an effect should route input directly to output, without any processing.
-//
-// WithShouldBypassEffect sets shouldBypassEffect and returns the receiver so calls can be chained.
+// WithShouldBypassEffect determines whether an effect should route input directly to output, without any processing.
 func (x *AudioUnit) WithShouldBypassEffect(shouldBypassEffect bool) *AudioUnit {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldBypassEffect:"), shouldBypassEffect)
 	return x
 }
 
-// Communicates to an audio unit that it is rendering offline.
-//
-// WithRenderingOffline sets renderingOffline and returns the receiver so calls can be chained.
+// WithRenderingOffline communicates to an audio unit that it is rendering offline.
 func (x *AudioUnit) WithRenderingOffline(renderingOffline bool) *AudioUnit {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderingOffline:"), renderingOffline)
 	return x
 }
 
-// Information about the host context in which the audio unit is connected, for display in the audio unit’s view.
-//
-// WithContextName sets contextName and returns the receiver so calls can be chained.
+// WithContextName information about the host context in which the audio unit is connected, for display in the audio unit’s view.
 func (x *AudioUnit) WithContextName(contextName string) *AudioUnit {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContextName:"), purego.NSString(contextName))
 	return x
 }
 
-// Specify a mapping of input channels to output channels. Converter and input/output audio units may support re-ordering or splitting of input channels to output channels. The number of channels in the channel map is the number of channels of the destination (output format). The channel map entries contain a channel number of the source channel that should be mapped to that destination channel. If -1 is specified, then that destination channel will not contain any channel from the source (so it will be silent). If the property value is nil, then the audio unit does not support this property. Bridged to the v2 property kAudioOutputUnitProperty_ChannelMap.
-//
-// WithChannelMap sets the collection and returns the receiver so calls can be chained.
+// WithChannelMap specify a mapping of input channels to output channels. Converter and input/output audio units may support re-ordering or splitting of input channels to output channels. The number of channels in the channel map is the number of channels of the destination (output format). The channel map entries contain a channel number of the source channel that should be mapped to that destination channel. If -1 is specified, then that destination channel will not contain any channel from the source (so it will be silent). If the property value is nil, then the audio unit does not support this property. Bridged to the v2 property kAudioOutputUnitProperty_ChannelMap.
 func (x *AudioUnit) WithChannelMap(items ...obj.Object) *AudioUnit {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannelMap:"), _arr)
 	return x
 }
 
-// A flag enabling audio input from the unit.
-//
-// WithInputEnabled sets inputEnabled and returns the receiver so calls can be chained.
+// WithInputEnabled a flag enabling audio input from the unit.
 func (x *AudioUnit) WithInputEnabled(inputEnabled bool) *AudioUnit {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputEnabled:"), inputEnabled)
 	return x
 }
 
-// A flag enabling audio output from the unit.
-//
-// WithOutputEnabled sets outputEnabled and returns the receiver so calls can be chained.
+// WithOutputEnabled a flag enabling audio output from the unit.
 func (x *AudioUnit) WithOutputEnabled(outputEnabled bool) *AudioUnit {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputEnabled:"), outputEnabled)
 	return x
 }
 
-// Hint to control the size of the allocated buffer for outgoing MIDI events. This property allows the plug-in to provide a hint to the framework regarding the size of its outgoing MIDI data buffer. If the plug-in produces more MIDI output data than the default size of the allocated buffer, then the plug-in can provide this property to increase the size of this buffer. The value represents the number of 3-byte Legacy MIDI messages that fit into the buffer or a single MIDIEventList containing 1 MIDIEventPacket of 2 words when using MIDI 2.0 (MIDIEventList based API's). This property is set to the default value by the framework. In case of kAudioUnitErr_MIDIOutputBufferFull errors caused by producing too much MIDI output in one render call, set this property to increase the buffer. This only provides a recommendation to the framework. Bridged to kAudioUnitProperty_MIDIOutputBufferSizeHint.
-//
-// WithMIDIOutputBufferSizeHint sets mIDIOutputBufferSizeHint and returns the receiver so calls can be chained.
+// WithMIDIOutputBufferSizeHint hint to control the size of the allocated buffer for outgoing MIDI events. This property allows the plug-in to provide a hint to the framework regarding the size of its outgoing MIDI data buffer. If the plug-in produces more MIDI output data than the default size of the allocated buffer, then the plug-in can provide this property to increase the size of this buffer. The value represents the number of 3-byte Legacy MIDI messages that fit into the buffer or a single MIDIEventList containing 1 MIDIEventPacket of 2 words when using MIDI 2.0 (MIDIEventList based API's). This property is set to the default value by the framework. In case of kAudioUnitErr_MIDIOutputBufferFull errors caused by producing too much MIDI output in one render call, set this property to increase the buffer. This only provides a recommendation to the framework. Bridged to kAudioUnitProperty_MIDIOutputBufferSizeHint.
 func (x *AudioUnit) WithMIDIOutputBufferSizeHint(mIDIOutputBufferSizeHint int) *AudioUnit {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMIDIOutputBufferSizeHint:"), mIDIOutputBufferSizeHint)
 	return x
 }
 
-// Allocates resources required to render audio.
+// AllocateRenderResourcesAndReturnError allocates resources required to render audio.
 //
 // AllocateRenderResourcesAndReturnError returns an error if the operation did not succeed.
 func (x *AudioUnit) AllocateRenderResourcesAndReturnError() error {
@@ -199,28 +173,28 @@ func (x *AudioUnit) AllocateRenderResourcesAndReturnError() error {
 	return nil
 }
 
-// Deallocates resources required to render audio.
+// DeallocateRenderResources deallocates resources required to render audio.
 func (x *AudioUnit) DeallocateRenderResources() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deallocateRenderResources"))
 }
 
-// Resets transitory rendering state to its initial state.
+// Reset resets transitory rendering state to its initial state.
 func (x *AudioUnit) Reset() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
-// Removes an observer block previously added to the render cycle.
+// RemoveRenderObserver removes an observer block previously added to the render cycle.
 func (x *AudioUnit) RemoveRenderObserver(token int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeRenderObserver:"), token)
 }
 
-// Returns the audio unit’s most important parameters.
+// ParametersForOverviewWithCount returns the audio unit’s most important parameters.
 func (x *AudioUnit) ParametersForOverviewWithCount(count int) []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parametersForOverviewWithCount:"), count)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Persistently save the current state of the audio unit into a userPreset The new preset will be added to userPresets and will become selectable by assigning it to the currentPreset property. If a preset with the provided name already exists then it will be overwritten. For user presets, the preset number is required to be negative. If a positive number is passed, the sign will be changed to negative. If zero is passed, the number will be set to -1. These changes will be reflected on the userPreset argument. The default implementation of this method will save the user preset to an internal location. Audio Units are free to override this method to operate on a different location (e.g. their iCloud container).
+// SaveUserPreset persistently save the current state of the audio unit into a userPreset The new preset will be added to userPresets and will become selectable by assigning it to the currentPreset property. If a preset with the provided name already exists then it will be overwritten. For user presets, the preset number is required to be negative. If a positive number is passed, the sign will be changed to negative. If zero is passed, the number will be set to -1. These changes will be reflected on the userPreset argument. The default implementation of this method will save the user preset to an internal location. Audio Units are free to override this method to operate on a different location (e.g. their iCloud container).
 func (x *AudioUnit) SaveUserPreset(userPreset *AudioUnitPreset) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("saveUserPreset:error:"), objref.IDOf(userPreset), unsafe.Pointer(&_nsErr))
@@ -230,7 +204,7 @@ func (x *AudioUnit) SaveUserPreset(userPreset *AudioUnitPreset) error {
 	return nil
 }
 
-// Remove a user preset. The user preset will be removed from userPresets and will be permanently deleted. The default implementation of this method will delete the user preset from an internal location. Audio Units are free to override this method to operate on a different location (e.g. their iCloud container).
+// DeleteUserPreset remove a user preset. The user preset will be removed from userPresets and will be permanently deleted. The default implementation of this method will delete the user preset from an internal location. Audio Units are free to override this method to operate on a different location (e.g. their iCloud container).
 func (x *AudioUnit) DeleteUserPreset(userPreset *AudioUnitPreset) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("deleteUserPreset:error:"), objref.IDOf(userPreset), unsafe.Pointer(&_nsErr))
@@ -240,8 +214,8 @@ func (x *AudioUnit) DeleteUserPreset(userPreset *AudioUnitPreset) error {
 	return nil
 }
 
-// Retrieve the state stored in a user preset This method allows access to the contents of a preset without having to set that preset as current. The returned dictionary is assignable to the audio unit's fullState and/or fullStateForDocument properties. Audio units can override this method in order to vend user presets from a different location (e.g. their iCloud container). In order to restore the state from a user preset, the audio unit should override the setter for the currentPreset property and check the preset number to determine the type of preset. If the preset number is >= 0 then the preset is a factory preset. If the preset number is < 0 then it is a user preset. This method can then be called to retrieve the state stored in a user preset and the audio unit can assign this to fullState or fullStateForDocument.
-func (x *AudioUnit) PresetStateForError(userPreset *AudioUnitPreset) (obj.Object, error) {
+// PresetStateForError retrieve the state stored in a user preset This method allows access to the contents of a preset without having to set that preset as current. The returned dictionary is assignable to the audio unit's fullState and/or fullStateForDocument properties. Audio units can override this method in order to vend user presets from a different location (e.g. their iCloud container). In order to restore the state from a user preset, the audio unit should override the setter for the currentPreset property and check the preset number to determine the type of preset. If the preset number is >= 0 then the preset is a factory preset. If the preset number is < 0 then it is a user preset. This method can then be called to retrieve the state stored in a user preset and the audio unit can assign this to fullState or fullStateForDocument.
+func (x *AudioUnit) PresetStateForError(userPreset *AudioUnitPreset) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presetStateFor:error:"), objref.IDOf(userPreset), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -250,13 +224,13 @@ func (x *AudioUnit) PresetStateForError(userPreset *AudioUnitPreset) (obj.Object
 	return obj.Wrap(_r), nil
 }
 
-// Given a MIDI cable and channel number, return the supported MIDI-CI Profiles.
+// ProfileStateForCableChannel given a MIDI cable and channel number, return the supported MIDI-CI Profiles.
 func (x *AudioUnit) ProfileStateForCableChannel(cable uint8, channel uint8) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("profileStateForCable:channel:"), cable, channel)
 	return obj.Wrap(_r)
 }
 
-// Enable a MIDI-CI Profile on the specified cable/channel.
+// EnableProfileCableOnChannel enable a MIDI-CI Profile on the specified cable/channel.
 func (x *AudioUnit) EnableProfileCableOnChannel(profile obj.Object, cable uint8, channel uint8) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("enableProfile:cable:onChannel:error:"), objref.IDOf(profile), cable, channel, unsafe.Pointer(&_nsErr))
@@ -266,7 +240,7 @@ func (x *AudioUnit) EnableProfileCableOnChannel(profile obj.Object, cable uint8,
 	return nil
 }
 
-// Disable a MIDI-CI Profile on the specified cable/channel.
+// DisableProfileCableOnChannel disable a MIDI-CI Profile on the specified cable/channel.
 func (x *AudioUnit) DisableProfileCableOnChannel(profile obj.Object, cable uint8, channel uint8) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("disableProfile:cable:onChannel:error:"), objref.IDOf(profile), cable, channel, unsafe.Pointer(&_nsErr))
@@ -276,13 +250,13 @@ func (x *AudioUnit) DisableProfileCableOnChannel(profile obj.Object, cable uint8
 	return nil
 }
 
-// The AudioComponent which was found based on componentDescription when the audio unit was created.
+// Component the AudioComponent which was found based on componentDescription when the audio unit was created.
 func (x *AudioUnit) Component() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("component"))
 	return obj.Wrap(_r)
 }
 
-// The unit's component's name. By convention, an audio unit's component name is its manufacturer's name, plus ": ", plus the audio unit's name. The audioUnitName and manufacturerName properties are derived from the component name.
+// ComponentName the unit's component's name. By convention, an audio unit's component name is its manufacturer's name, plus ": ", plus the audio unit's name. The audioUnitName and manufacturerName properties are derived from the component name.
 func (x *AudioUnit) ComponentName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("componentName"))
 	if _r == 0 {
@@ -291,7 +265,7 @@ func (x *AudioUnit) ComponentName() string {
 	return purego.GoString(_r)
 }
 
-// The audio unit's name.
+// AudioUnitName the audio unit's name.
 func (x *AudioUnit) AudioUnitName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioUnitName"))
 	if _r == 0 {
@@ -300,7 +274,7 @@ func (x *AudioUnit) AudioUnitName() string {
 	return purego.GoString(_r)
 }
 
-// The manufacturer's name.
+// ManufacturerName the manufacturer's name.
 func (x *AudioUnit) ManufacturerName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manufacturerName"))
 	if _r == 0 {
@@ -309,7 +283,7 @@ func (x *AudioUnit) ManufacturerName() string {
 	return purego.GoString(_r)
 }
 
-// A short name for the audio unit. Audio unit host applications can display this name in situations where the audioUnitName might be too long. The recommended length is up to 16 characters. Host applications may truncate it.
+// AudioUnitShortName a short name for the audio unit. Audio unit host applications can display this name in situations where the audioUnitName might be too long. The recommended length is up to 16 characters. Host applications may truncate it.
 func (x *AudioUnit) AudioUnitShortName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioUnitShortName"))
 	if _r == 0 {
@@ -318,68 +292,71 @@ func (x *AudioUnit) AudioUnitShortName() string {
 	return purego.GoString(_r)
 }
 
-// The unit's component's version.
+// ComponentVersion the unit's component's version.
 func (x *AudioUnit) ComponentVersion() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("componentVersion"))
 	return _r
 }
 
-// returns YES if the unit has render resources allocated.
+// RenderResourcesAllocated returns YES if the unit has render resources allocated.
 func (x *AudioUnit) RenderResourcesAllocated() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("renderResourcesAllocated"))
 	return _r
 }
 
-// An audio unit's audio input connection points. Subclassers must override this property's getter. The implementation should return the same object every time it is asked for it, since clients can install KVO observers on it.
+// InputBusses an audio unit's audio input connection points. Subclassers must override this property's getter. The implementation should return the same object every time it is asked for it, since clients can install KVO observers on it.
 func (x *AudioUnit) InputBusses() *AudioUnitBusArray {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputBusses"))
 	return AudioUnitBusArrayFromID(_r)
 }
 
-// An audio unit's audio output connection points. Subclassers must override this property's getter. The implementation should return the same object every time it is asked for it, since clients can install KVO observers on it.
+// OutputBusses an audio unit's audio output connection points. Subclassers must override this property's getter. The implementation should return the same object every time it is asked for it, since clients can install KVO observers on it.
 func (x *AudioUnit) OutputBusses() *AudioUnitBusArray {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputBusses"))
 	return AudioUnitBusArrayFromID(_r)
 }
 
-// The maximum number of frames which the audio unit can render at once. This must be set by the host before render resources are allocated. It cannot be changed while render resources are allocated. Bridged to the v2 property kAudioUnitProperty_MaximumFramesPerSlice.
+// MaximumFramesToRender the maximum number of frames which the audio unit can render at once. This must be set by the host before render resources are allocated. It cannot be changed while render resources are allocated. Bridged to the v2 property kAudioUnitProperty_MaximumFramesPerSlice.
 func (x *AudioUnit) MaximumFramesToRender() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("maximumFramesToRender"))
 	return _r
 }
 
+// SetMaximumFramesToRender wraps the corresponding Objective-C method.
 func (x *AudioUnit) SetMaximumFramesToRender(maximumFramesToRender uint32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumFramesToRender:"), maximumFramesToRender)
 }
 
-// An audio unit's parameters, organized in a hierarchy. Audio unit hosts can fetch this property to discover a unit's parameters. KVO notifications are issued on this member to notify the host of changes to the set of available parameters. AUAudioUnit has an additional pseudo-property, "allParameterValues", on which KVO notifications are issued in response to certain events where potentially all parameter values are invalidated. This includes changes to currentPreset, fullState, and fullStateForDocument. Hosts should not attempt to set this property. Subclassers should implement the parameterTree getter to expose parameters to hosts. They should cache as much as possible and send KVO notifications on "parameterTree" when altering the structure of the tree or the static information (ranges, etc) of parameters. This is similar to the v2 properties kAudioUnitProperty_ParameterList and kAudioUnitProperty_ParameterInfo. Note that it is not safe to modify this property in a real-time context.
+// ParameterTree an audio unit's parameters, organized in a hierarchy. Audio unit hosts can fetch this property to discover a unit's parameters. KVO notifications are issued on this member to notify the host of changes to the set of available parameters. AUAudioUnit has an additional pseudo-property, "allParameterValues", on which KVO notifications are issued in response to certain events where potentially all parameter values are invalidated. This includes changes to currentPreset, fullState, and fullStateForDocument. Hosts should not attempt to set this property. Subclassers should implement the parameterTree getter to expose parameters to hosts. They should cache as much as possible and send KVO notifications on "parameterTree" when altering the structure of the tree or the static information (ranges, etc) of parameters. This is similar to the v2 properties kAudioUnitProperty_ParameterList and kAudioUnitProperty_ParameterInfo. Note that it is not safe to modify this property in a real-time context.
 func (x *AudioUnit) ParameterTree() *ParameterTree {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameterTree"))
 	return ParameterTreeFromID(_r)
 }
 
+// SetParameterTree wraps the corresponding Objective-C method.
 func (x *AudioUnit) SetParameterTree(parameterTree *ParameterTree) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParameterTree:"), objref.IDOf(parameterTree))
 }
 
+// AllParameterValues wraps the corresponding Objective-C method.
 func (x *AudioUnit) AllParameterValues() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allParameterValues"))
 	return _r
 }
 
-// Specifies whether an audio unit responds to MIDI events. This is implemented in the base class and returns YES if the component type is music device or music effect.
+// IsMusicDeviceOrEffect specifies whether an audio unit responds to MIDI events. This is implemented in the base class and returns YES if the component type is music device or music effect.
 func (x *AudioUnit) IsMusicDeviceOrEffect() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMusicDeviceOrEffect"))
 	return _r
 }
 
-// The number of virtual MIDI cables implemented by a music device or effect. A music device or MIDI effect can support up to 256 virtual MIDI cables of input; this property expresses the number of cables supported by the audio unit.
+// VirtualMIDICableCount the number of virtual MIDI cables implemented by a music device or effect. A music device or MIDI effect can support up to 256 virtual MIDI cables of input; this property expresses the number of cables supported by the audio unit.
 func (x *AudioUnit) VirtualMIDICableCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("virtualMIDICableCount"))
 	return _r
 }
 
-// Count, and names of, a plug-in's MIDI outputs. A plug-in may override this method to inform hosts about its MIDI outputs. The size of the array is the number of outputs the Audio Unit supports. Each item in the array is the name of the MIDI output at that index. This is bridged to the v2 API property kAudioUnitProperty_MIDIOutputCallbackInfo.
+// MIDIOutputNames count, and names of, a plug-in's MIDI outputs. A plug-in may override this method to inform hosts about its MIDI outputs. The size of the array is the number of outputs the Audio Unit supports. Each item in the array is the name of the MIDI output at that index. This is bridged to the v2 API property kAudioUnitProperty_MIDIOutputCallbackInfo.
 //
 // MIDIOutputNames returns the collection as a Go slice.
 func (x *AudioUnit) MIDIOutputNames() []string {
@@ -387,49 +364,52 @@ func (x *AudioUnit) MIDIOutputNames() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Specifies whether an audio unit provides UI (normally in the form of a view controller). Implemented in the framework and should not be overridden by implementators. The framework detects whether any subclass has implemented `requestViewControllerWithCompletionHandler:` or is implemented by an AU extension whose extension point identifier is `com.apple.AudioUnit-UI`. See also `requestViewControllerWithCompletionHandler:` in <CoreAudioKit/AUViewController.h>
+// ProvidesUserInterface specifies whether an audio unit provides UI (normally in the form of a view controller). Implemented in the framework and should not be overridden by implementators. The framework detects whether any subclass has implemented `requestViewControllerWithCompletionHandler:` or is implemented by an AU extension whose extension point identifier is `com.apple.AudioUnit-UI`. See also `requestViewControllerWithCompletionHandler:` in <CoreAudioKit/AUViewController.h>
 func (x *AudioUnit) ProvidesUserInterface() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("providesUserInterface"))
 	return _r
 }
 
-// The MIDI protocol used by the Audio Unit for receiving MIDIEventList data. Subclassers should override to return the desired protocol in which the Audio Unit wants to receive input MIDI data, otherwise the Audio Unit will default to receiving legacy MIDI. All translatable messages will be converted (if necessary) to this protocol prior to delivery to the Audio Unit. This is bridged to the v2 API property kAudioUnitProperty_AudioUnitMIDIProtocol.
+// AudioUnitMIDIProtocol the MIDI protocol used by the Audio Unit for receiving MIDIEventList data. Subclassers should override to return the desired protocol in which the Audio Unit wants to receive input MIDI data, otherwise the Audio Unit will default to receiving legacy MIDI. All translatable messages will be converted (if necessary) to this protocol prior to delivery to the Audio Unit. This is bridged to the v2 API property kAudioUnitProperty_AudioUnitMIDIProtocol.
 func (x *AudioUnit) AudioUnitMIDIProtocol() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("AudioUnitMIDIProtocol"))
 	return obj.Wrap(_r)
 }
 
-// The MIDI protocol to be used by the host for receiving MIDIEventList data. Hosts should set this property to the protocol they wish to receive MIDIEventList data from the Audio Unit. This should be set prior to initialization, all translatable messages will be converted  (if necessary) to this property's protocol prior to delivery to the host. Host should setup in the following order: - Set hostMIDIProtocol - Set MIDIOutputEventListBlock - Call allocateRenderResourcesAndReturnError This is bridged to the v2 API property kAudioUnitProperty_HostMIDIProtocol. Notes: - If overriding this property, subclassers must call [super setHostMIDIProtocol:] - hostMIDIProtocol should be set before attempting to query AudioUnitMIDIProtocol or calling allocateRenderResourcesAndReturnError to allow Audio Units to optionally match their input MIDI protocol to the desired host protocol and prevent protocol conversion.
+// HostMIDIProtocol the MIDI protocol to be used by the host for receiving MIDIEventList data. Hosts should set this property to the protocol they wish to receive MIDIEventList data from the Audio Unit. This should be set prior to initialization, all translatable messages will be converted  (if necessary) to this property's protocol prior to delivery to the host. Host should setup in the following order: - Set hostMIDIProtocol - Set MIDIOutputEventListBlock - Call allocateRenderResourcesAndReturnError This is bridged to the v2 API property kAudioUnitProperty_HostMIDIProtocol. Notes: - If overriding this property, subclassers must call [super setHostMIDIProtocol:] - hostMIDIProtocol should be set before attempting to query AudioUnitMIDIProtocol or calling allocateRenderResourcesAndReturnError to allow Audio Units to optionally match their input MIDI protocol to the desired host protocol and prevent protocol conversion.
 func (x *AudioUnit) HostMIDIProtocol() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hostMIDIProtocol"))
 	return obj.Wrap(_r)
 }
 
+// SetHostMIDIProtocol wraps the corresponding Objective-C method.
 func (x *AudioUnit) SetHostMIDIProtocol(hostMIDIProtocol obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHostMIDIProtocol:"), objref.IDOf(hostMIDIProtocol))
 }
 
-// A persistable snapshot of the Audio Unit's properties and parameters, suitable for saving as a user preset. Hosts may use this property to save and restore the state of an Audio Unit being used in a user preset or document. The Audio Unit should not persist transitory properties such as stream formats, but should save and restore all parameters and custom properties. The base class implementation of this property saves the values of all parameters currently in the parameter tree. A subclass which dynamically produces multiple variants of the parameter tree needs to be aware that the serialization method does a depth-first preorder traversal of the tree. Bridged to the v2 property kAudioUnitProperty_ClassInfo.
+// FullState a persistable snapshot of the Audio Unit's properties and parameters, suitable for saving as a user preset. Hosts may use this property to save and restore the state of an Audio Unit being used in a user preset or document. The Audio Unit should not persist transitory properties such as stream formats, but should save and restore all parameters and custom properties. The base class implementation of this property saves the values of all parameters currently in the parameter tree. A subclass which dynamically produces multiple variants of the parameter tree needs to be aware that the serialization method does a depth-first preorder traversal of the tree. Bridged to the v2 property kAudioUnitProperty_ClassInfo.
 func (x *AudioUnit) FullState() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullState"))
 	return obj.Wrap(_r)
 }
 
+// SetFullState wraps the corresponding Objective-C method.
 func (x *AudioUnit) SetFullState(fullState obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFullState:"), objref.IDOf(fullState))
 }
 
-// A persistable snapshot of the audio unit's properties and parameters, suitable for saving in a user's document. This property is distinct from fullState in that some state is suitable for saving in user presets, while other state is not. For example, a synthesizer's master tuning setting could be considered global state, inappropriate for storing in reusable presets, but desirable for storing in a document for a specific live performance. Hosts saving documents should use this property. If the audio unit does not implement it, the base class simply sets/gets fullState. Bridged to the v2 property kAudioUnitProperty_ClassInfoFromDocument.
+// FullStateForDocument a persistable snapshot of the audio unit's properties and parameters, suitable for saving in a user's document. This property is distinct from fullState in that some state is suitable for saving in user presets, while other state is not. For example, a synthesizer's master tuning setting could be considered global state, inappropriate for storing in reusable presets, but desirable for storing in a document for a specific live performance. Hosts saving documents should use this property. If the audio unit does not implement it, the base class simply sets/gets fullState. Bridged to the v2 property kAudioUnitProperty_ClassInfoFromDocument.
 func (x *AudioUnit) FullStateForDocument() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullStateForDocument"))
 	return obj.Wrap(_r)
 }
 
+// SetFullStateForDocument wraps the corresponding Objective-C method.
 func (x *AudioUnit) SetFullStateForDocument(fullStateForDocument obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFullStateForDocument:"), objref.IDOf(fullStateForDocument))
 }
 
-// A collection of presets provided by the audio unit's developer. A preset provides users of an audio unit with an easily-selectable, fine-tuned set of parameters provided by the developer. This property returns all of the available factory presets. Bridged to the v2 property kAudioUnitProperty_FactoryPresets.
+// FactoryPresets a collection of presets provided by the audio unit's developer. A preset provides users of an audio unit with an easily-selectable, fine-tuned set of parameters provided by the developer. This property returns all of the available factory presets. Bridged to the v2 property kAudioUnitProperty_FactoryPresets.
 //
 // FactoryPresets returns the collection as a Go slice.
 func (x *AudioUnit) FactoryPresets() []*AudioUnitPreset {
@@ -437,7 +417,7 @@ func (x *AudioUnit) FactoryPresets() []*AudioUnitPreset {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AudioUnitPreset { return AudioUnitPresetFromID(_id) })
 }
 
-// A collection of presets saved by the user In addition to factory presets, provided by the audio unit vendor, users have the ability to save the values of the parameters of an audio unit into a user preset. These users presets can be accessed using this property. The default implementation of this method will load the user presets from an internal location that might not be directly accessible to the audio unit host application or to the audio unit. Instead of accessing this path directly, the audio unit should rely on the superclass implementation of this method to retrieve the presets. Audio Units are free to override this method to load their user presets via different means (e.g. from their iCloud container).
+// UserPresets a collection of presets saved by the user In addition to factory presets, provided by the audio unit vendor, users have the ability to save the values of the parameters of an audio unit into a user preset. These users presets can be accessed using this property. The default implementation of this method will load the user presets from an internal location that might not be directly accessible to the audio unit host application or to the audio unit. Instead of accessing this path directly, the audio unit should rely on the superclass implementation of this method to retrieve the presets. Audio Units are free to override this method to load their user presets via different means (e.g. from their iCloud container).
 //
 // UserPresets returns the collection as a Go slice.
 func (x *AudioUnit) UserPresets() []*AudioUnitPreset {
@@ -445,77 +425,81 @@ func (x *AudioUnit) UserPresets() []*AudioUnitPreset {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AudioUnitPreset { return AudioUnitPresetFromID(_id) })
 }
 
-// Specifies whether an audio unit supports loading and saving user presets The audio unit should set this property to YES if a user preset can be assigned to currentPreset. Audio unit host applications should query this property to determine whether the audio unit supports user presets. Assigning a user preset to the currentPreset property of an audio unit that does not support restoring state from user presets may result in incorrect behavior.
+// SupportsUserPresets specifies whether an audio unit supports loading and saving user presets The audio unit should set this property to YES if a user preset can be assigned to currentPreset. Audio unit host applications should query this property to determine whether the audio unit supports user presets. Assigning a user preset to the currentPreset property of an audio unit that does not support restoring state from user presets may result in incorrect behavior.
 func (x *AudioUnit) SupportsUserPresets() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsUserPresets"))
 	return _r
 }
 
-// Set to YES when an AUAudioUnit is loaded in-process If the AUAudioUnit is instantiated with kAudioComponentInstantiation_LoadInProcess, but the audio unit is not packaged properly to support loading in-process, the system will silently fall back to loading the audio unit out-of-process. This property can be used to determine whether the instantiation succeeded as intended and the audio unit is running in-process. The presence of an extension process is not sufficient indication that the audio unit failed to load in-process, since the framework might launch the audio unit extension process to fulfill auxiliary functionality. If the audio unit is loaded in-process then rendering is done in the host process. Other operations that are not essential to rendering audio, might be done in the audio unit's extension process.
+// IsLoadedInProcess set to YES when an AUAudioUnit is loaded in-process If the AUAudioUnit is instantiated with kAudioComponentInstantiation_LoadInProcess, but the audio unit is not packaged properly to support loading in-process, the system will silently fall back to loading the audio unit out-of-process. This property can be used to determine whether the instantiation succeeded as intended and the audio unit is running in-process. The presence of an extension process is not sufficient indication that the audio unit failed to load in-process, since the framework might launch the audio unit extension process to fulfill auxiliary functionality. If the audio unit is loaded in-process then rendering is done in the host process. Other operations that are not essential to rendering audio, might be done in the audio unit's extension process.
 func (x *AudioUnit) IsLoadedInProcess() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLoadedInProcess"))
 	return _r
 }
 
-// The audio unit's last-selected preset. Hosts can let the user select a preset by setting this property. Note that when getting this property, it does not reflect whether parameters may have been modified since the preset was selected. Bridged to the v2 property kAudioUnitProperty_PresentPreset.
+// CurrentPreset the audio unit's last-selected preset. Hosts can let the user select a preset by setting this property. Note that when getting this property, it does not reflect whether parameters may have been modified since the preset was selected. Bridged to the v2 property kAudioUnitProperty_PresentPreset.
 func (x *AudioUnit) CurrentPreset() *AudioUnitPreset {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentPreset"))
 	return AudioUnitPresetFromID(_r)
 }
 
+// SetCurrentPreset wraps the corresponding Objective-C method.
 func (x *AudioUnit) SetCurrentPreset(currentPreset *AudioUnitPreset) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentPreset:"), objref.IDOf(currentPreset))
 }
 
-// The audio unit's processing latency, in seconds. This property reflects the delay between when an impulse in the unit's audio unit stream arrives in the input vs. output streams. This should reflect the delay due to signal processing (e.g. filters, FFT's, etc.), not delay or reverberation which is being applied as an effect. Note that a latency that varies with parameter settings, including bypass, is generally not useful to hosts. A host is usually only prepared to add delays before starting to render and those delays need to be fixed. A variable delay would introduce artifacts even if the host could track it. If an algorithm has a variable latency it should be adjusted upwards to some fixed latency within the audio unit. If for some reason this is not possible, then latency could be regarded as an unavoidable consequence of the algorithm and left unreported (i.e. with a value of 0). Bridged to the v2 property kAudioUnitProperty_Latency.
+// Latency the audio unit's processing latency, in seconds. This property reflects the delay between when an impulse in the unit's audio unit stream arrives in the input vs. output streams. This should reflect the delay due to signal processing (e.g. filters, FFT's, etc.), not delay or reverberation which is being applied as an effect. Note that a latency that varies with parameter settings, including bypass, is generally not useful to hosts. A host is usually only prepared to add delays before starting to render and those delays need to be fixed. A variable delay would introduce artifacts even if the host could track it. If an algorithm has a variable latency it should be adjusted upwards to some fixed latency within the audio unit. If for some reason this is not possible, then latency could be regarded as an unavoidable consequence of the algorithm and left unreported (i.e. with a value of 0). Bridged to the v2 property kAudioUnitProperty_Latency.
 func (x *AudioUnit) Latency() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("latency"))
 	return _r
 }
 
-// The audio unit's tail time, in seconds. This property reflects the time interval between when the input stream ends or otherwise transitions to silence, and when the output stream becomes silent. Unlike latency, this should reflect the duration of a delay or reverb effect. Bridged to the v2 property kAudioUnitProperty_TailTime.
+// TailTime the audio unit's tail time, in seconds. This property reflects the time interval between when the input stream ends or otherwise transitions to silence, and when the output stream becomes silent. Unlike latency, this should reflect the duration of a delay or reverb effect. Bridged to the v2 property kAudioUnitProperty_TailTime.
 func (x *AudioUnit) TailTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("tailTime"))
 	return _r
 }
 
-// Provides a trade-off between rendering quality and CPU load. The range of valid values is 0-127. Bridged to the v2 property kAudioUnitProperty_RenderQuality.
+// RenderQuality provides a trade-off between rendering quality and CPU load. The range of valid values is 0-127. Bridged to the v2 property kAudioUnitProperty_RenderQuality.
 func (x *AudioUnit) RenderQuality() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("renderQuality"))
 	return _r
 }
 
+// SetRenderQuality wraps the corresponding Objective-C method.
 func (x *AudioUnit) SetRenderQuality(renderQuality int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderQuality:"), renderQuality)
 }
 
-// Directs an effect to route input directly to output, without any processing. Bridged to the v2 property kAudioUnitProperty_BypassEffect.
+// ShouldBypassEffect directs an effect to route input directly to output, without any processing. Bridged to the v2 property kAudioUnitProperty_BypassEffect.
 func (x *AudioUnit) ShouldBypassEffect() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldBypassEffect"))
 	return _r
 }
 
+// SetShouldBypassEffect wraps the corresponding Objective-C method.
 func (x *AudioUnit) SetShouldBypassEffect(shouldBypassEffect bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldBypassEffect:"), shouldBypassEffect)
 }
 
-// Expresses whether an audio unit can process in place. In-place processing is the ability for an audio unit to transform an input signal to an output signal in-place in the input buffer, without requiring a separate output buffer. A host can express its desire to process in place by using null mData pointers in the output buffer list. The audio unit may process in-place in the input buffers. See the discussion of renderBlock. Partially bridged to the v2 property kAudioUnitProperty_InPlaceProcessing; in v3 it is not settable. Defaults to NO. Subclassers can override to return YES.
+// CanProcessInPlace expresses whether an audio unit can process in place. In-place processing is the ability for an audio unit to transform an input signal to an output signal in-place in the input buffer, without requiring a separate output buffer. A host can express its desire to process in place by using null mData pointers in the output buffer list. The audio unit may process in-place in the input buffers. See the discussion of renderBlock. Partially bridged to the v2 property kAudioUnitProperty_InPlaceProcessing; in v3 it is not settable. Defaults to NO. Subclassers can override to return YES.
 func (x *AudioUnit) CanProcessInPlace() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canProcessInPlace"))
 	return _r
 }
 
-// Communicates to an audio unit that it is rendering offline. A host should set this property when using an audio unit in a context where there are no realtime deadlines, before asking the unit to allocate render resources. An audio unit may respond by using a more expensive signal processing algorithm, or allowing itself to block at render time if data being generated on secondary work threads is not ready in time. (Normally, in a realtime thread, this data would have to be dropped). Bridged to the v2 property kAudioUnitProperty_OfflineRender.
+// IsRenderingOffline communicates to an audio unit that it is rendering offline. A host should set this property when using an audio unit in a context where there are no realtime deadlines, before asking the unit to allocate render resources. An audio unit may respond by using a more expensive signal processing algorithm, or allowing itself to block at render time if data being generated on secondary work threads is not ready in time. (Normally, in a realtime thread, this data would have to be dropped). Bridged to the v2 property kAudioUnitProperty_OfflineRender.
 func (x *AudioUnit) IsRenderingOffline() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRenderingOffline"))
 	return _r
 }
 
+// SetRenderingOffline wraps the corresponding Objective-C method.
 func (x *AudioUnit) SetRenderingOffline(renderingOffline bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderingOffline:"), renderingOffline)
 }
 
-// Expresses valid combinations of input and output channel counts. Elements are NSNumber containing integers; [0]=input count, [1]=output count, [2]=2nd input count, [3]=2nd output count, etc. An input, output count of (2, 2) signifies that the audio unit can process 2 input channels to 2 output channels. Negative numbers (-1, -2) indicate *any* number of channels. (-1, -1) means any number of channels on input and output as long as they are the same. (-1, -2) means any number of channels on input or output, without the requirement that the counts are the same. A negative number less than -2 is used to indicate a total number of channels across every bus in that scope, regardless of how many channels are set on any particular bus. For example, (-16, 2) indicates that a unit can accept up to 16 channels of input across its input busses, but will only produce 2 channels of output. Zero on either side (though typically input) means "not applicable", because there are no elements on that side. Bridged to the v2 property kAudioUnitProperty_SupportedNumChannels.
+// ChannelCapabilities expresses valid combinations of input and output channel counts. Elements are NSNumber containing integers; [0]=input count, [1]=output count, [2]=2nd input count, [3]=2nd output count, etc. An input, output count of (2, 2) signifies that the audio unit can process 2 input channels to 2 output channels. Negative numbers (-1, -2) indicate *any* number of channels. (-1, -1) means any number of channels on input and output as long as they are the same. (-1, -2) means any number of channels on input or output, without the requirement that the counts are the same. A negative number less than -2 is used to indicate a total number of channels across every bus in that scope, regardless of how many channels are set on any particular bus. For example, (-16, 2) indicates that a unit can accept up to 16 channels of input across its input busses, but will only produce 2 channels of output. Zero on either side (though typically input) means "not applicable", because there are no elements on that side. Bridged to the v2 property kAudioUnitProperty_SupportedNumChannels.
 //
 // ChannelCapabilities returns the collection as a Go slice.
 func (x *AudioUnit) ChannelCapabilities() []obj.Object {
@@ -523,7 +507,7 @@ func (x *AudioUnit) ChannelCapabilities() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Information about the host context in which the audio unit is connected, for display in the audio unit's view. For example, a host could set "track 3" as the context, so that the audio unit's view could then display to the user "My audio unit on track 3". Bridged to the v2 property kAudioUnitProperty_ContextName.
+// ContextName information about the host context in which the audio unit is connected, for display in the audio unit's view. For example, a host could set "track 3" as the context, so that the audio unit's view could then display to the user "My audio unit on track 3". Bridged to the v2 property kAudioUnitProperty_ContextName.
 func (x *AudioUnit) ContextName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contextName"))
 	if _r == 0 {
@@ -532,23 +516,24 @@ func (x *AudioUnit) ContextName() string {
 	return purego.GoString(_r)
 }
 
+// SetContextName wraps the corresponding Objective-C method.
 func (x *AudioUnit) SetContextName(contextName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContextName:"), purego.NSString(contextName))
 }
 
-// Information for migrating data from other audio plug-ins to the v3 Audio Unit architecture. This can be used to migrate settings from an older Audio Unit; this allows manufacturers to deprecate older Audio Units and replace them with new ones. The data for the older Audio Unit is an array of NSData representing byte encoded AudioUnitOtherPluginDescs to migrate from. Can also be used to migrate from a v2 to a v3 Audio Unit. Bridged to the v2 property kAudioUnitMigrateProperty_FromPlugin.
+// MigrateFromPlugin information for migrating data from other audio plug-ins to the v3 Audio Unit architecture. This can be used to migrate settings from an older Audio Unit; this allows manufacturers to deprecate older Audio Units and replace them with new ones. The data for the older Audio Unit is an array of NSData representing byte encoded AudioUnitOtherPluginDescs to migrate from. Can also be used to migrate from a v2 to a v3 Audio Unit. Bridged to the v2 property kAudioUnitMigrateProperty_FromPlugin.
 func (x *AudioUnit) MigrateFromPlugin() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("migrateFromPlugin"))
 	return obj.Wrap(_r)
 }
 
-// Specifies whether an audio unit supports Multi-dimensional Polyphonic Expression. Bridged to the v2 property kAudioUnitProperty_SupportsMPE.
+// SupportsMPE specifies whether an audio unit supports Multi-dimensional Polyphonic Expression. Bridged to the v2 property kAudioUnitProperty_SupportsMPE.
 func (x *AudioUnit) SupportsMPE() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsMPE"))
 	return _r
 }
 
-// Specify a mapping of input channels to output channels. Converter and input/output audio units may support re-ordering or splitting of input channels to output channels. The number of channels in the channel map is the number of channels of the destination (output format). The channel map entries contain a channel number of the source channel that should be mapped to that destination channel. If -1 is specified, then that destination channel will not contain any channel from the source (so it will be silent). If the property value is nil, then the audio unit does not support this property. Bridged to the v2 property kAudioOutputUnitProperty_ChannelMap.
+// ChannelMap specify a mapping of input channels to output channels. Converter and input/output audio units may support re-ordering or splitting of input channels to output channels. The number of channels in the channel map is the number of channels of the destination (output format). The channel map entries contain a channel number of the source channel that should be mapped to that destination channel. If -1 is specified, then that destination channel will not contain any channel from the source (so it will be silent). If the property value is nil, then the audio unit does not support this property. Bridged to the v2 property kAudioOutputUnitProperty_ChannelMap.
 //
 // ChannelMap returns the collection as a Go slice.
 func (x *AudioUnit) ChannelMap() []obj.Object {
@@ -556,11 +541,12 @@ func (x *AudioUnit) ChannelMap() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetChannelMap wraps the corresponding Objective-C method.
 func (x *AudioUnit) SetChannelMap(channelMap []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannelMap:"), purego.SliceToNSArray(channelMap, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Sets the I/O hardware device.
+// SetDeviceID sets the I/O hardware device.
 func (x *AudioUnit) SetDeviceID(deviceID int) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setDeviceID:error:"), deviceID, unsafe.Pointer(&_nsErr))
@@ -570,7 +556,7 @@ func (x *AudioUnit) SetDeviceID(deviceID int) error {
 	return nil
 }
 
-// Starts the audio hardware.
+// StartHardwareAndReturnError starts the audio hardware.
 //
 // StartHardwareAndReturnError returns an error if the operation did not succeed.
 func (x *AudioUnit) StartHardwareAndReturnError() error {
@@ -582,84 +568,87 @@ func (x *AudioUnit) StartHardwareAndReturnError() error {
 	return nil
 }
 
-// Stops the audio hardware.
+// StopHardware stops the audio hardware.
 func (x *AudioUnit) StopHardware() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopHardware"))
 }
 
-// Whether the I/O device can perform input.
+// CanPerformInput whether the I/O device can perform input.
 func (x *AudioUnit) CanPerformInput() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPerformInput"))
 	return _r
 }
 
-// Whether the I/O device can perform output.
+// CanPerformOutput whether the I/O device can perform output.
 func (x *AudioUnit) CanPerformOutput() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPerformOutput"))
 	return _r
 }
 
-// Flag enabling audio input from the unit. Input is disabled by default. This must be set to YES if input audio is desired. Setting to YES will have no effect if canPerformInput is false.
+// IsInputEnabled flag enabling audio input from the unit. Input is disabled by default. This must be set to YES if input audio is desired. Setting to YES will have no effect if canPerformInput is false.
 func (x *AudioUnit) IsInputEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInputEnabled"))
 	return _r
 }
 
+// SetInputEnabled wraps the corresponding Objective-C method.
 func (x *AudioUnit) SetInputEnabled(inputEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputEnabled:"), inputEnabled)
 }
 
-// Flag enabling audio output from the unit. Output is enabled by default. Setting to YES will have no effect if canPerformOutput is false.
+// IsOutputEnabled flag enabling audio output from the unit. Output is enabled by default. Setting to YES will have no effect if canPerformOutput is false.
 func (x *AudioUnit) IsOutputEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOutputEnabled"))
 	return _r
 }
 
+// SetOutputEnabled wraps the corresponding Objective-C method.
 func (x *AudioUnit) SetOutputEnabled(outputEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputEnabled:"), outputEnabled)
 }
 
-// Get the I/O hardware device.
+// DeviceID get the I/O hardware device.
 func (x *AudioUnit) DeviceID() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("deviceID"))
 	return _r
 }
 
-// The audio device's input latency, in seconds. Bridged to the HAL property kAudioDevicePropertyLatency, which is implemented by v2 input/output units.
+// DeviceInputLatency the audio device's input latency, in seconds. Bridged to the HAL property kAudioDevicePropertyLatency, which is implemented by v2 input/output units.
 func (x *AudioUnit) DeviceInputLatency() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("deviceInputLatency"))
 	return _r
 }
 
-// The audio device's output latency, in seconds. Bridged to the HAL property kAudioDevicePropertyLatency, which is implemented by v2 input/output units.
+// DeviceOutputLatency the audio device's output latency, in seconds. Bridged to the HAL property kAudioDevicePropertyLatency, which is implemented by v2 input/output units.
 func (x *AudioUnit) DeviceOutputLatency() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("deviceOutputLatency"))
 	return _r
 }
 
-// The audio device's running state.
+// IsRunning the audio device's running state.
 func (x *AudioUnit) IsRunning() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRunning"))
 	return _r
 }
 
-// This is called when you set the format on a bus.
+// ShouldChangeToFormatForBus this is called when you set the format on a bus.
 func (x *AudioUnit) ShouldChangeToFormatForBus(format obj.Object, bus *AudioUnitBus) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldChangeToFormat:forBus:"), objref.IDOf(format), objref.IDOf(bus))
 	return _r
 }
 
-// Sets the Boolean value of the renderResourcesAllocated property.
+// SetRenderResourcesAllocated sets the Boolean value of the renderResourcesAllocated property.
 func (x *AudioUnit) SetRenderResourcesAllocated(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderResourcesAllocated:"), flag)
 }
 
-// Hint to control the size of the allocated buffer for outgoing MIDI events. This property allows the plug-in to provide a hint to the framework regarding the size of its outgoing MIDI data buffer. If the plug-in produces more MIDI output data than the default size of the allocated buffer, then the plug-in can provide this property to increase the size of this buffer. The value represents the number of 3-byte Legacy MIDI messages that fit into the buffer or a single MIDIEventList containing 1 MIDIEventPacket of 2 words when using MIDI 2.0 (MIDIEventList based API's). This property is set to the default value by the framework. In case of kAudioUnitErr_MIDIOutputBufferFull errors caused by producing too much MIDI output in one render call, set this property to increase the buffer. This only provides a recommendation to the framework. Bridged to kAudioUnitProperty_MIDIOutputBufferSizeHint.
+// MIDIOutputBufferSizeHint hint to control the size of the allocated buffer for outgoing MIDI events. This property allows the plug-in to provide a hint to the framework regarding the size of its outgoing MIDI data buffer. If the plug-in produces more MIDI output data than the default size of the allocated buffer, then the plug-in can provide this property to increase the size of this buffer. The value represents the number of 3-byte Legacy MIDI messages that fit into the buffer or a single MIDIEventList containing 1 MIDIEventPacket of 2 words when using MIDI 2.0 (MIDIEventList based API's). This property is set to the default value by the framework. In case of kAudioUnitErr_MIDIOutputBufferFull errors caused by producing too much MIDI output in one render call, set this property to increase the buffer. This only provides a recommendation to the framework. Bridged to kAudioUnitProperty_MIDIOutputBufferSizeHint.
 func (x *AudioUnit) MIDIOutputBufferSizeHint() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("MIDIOutputBufferSizeHint"))
 	return _r
 }
 
+// SetMIDIOutputBufferSizeHint wraps the corresponding Objective-C method.
 func (x *AudioUnit) SetMIDIOutputBufferSizeHint(mIDIOutputBufferSizeHint int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMIDIOutputBufferSizeHint:"), mIDIOutputBufferSizeHint)
 }
@@ -689,7 +678,7 @@ type AudioUnitable interface {
 	ParametersForOverviewWithCount(count int) []obj.Object
 	SaveUserPreset(userPreset *AudioUnitPreset) error
 	DeleteUserPreset(userPreset *AudioUnitPreset) error
-	PresetStateForError(userPreset *AudioUnitPreset) (obj.Object, error)
+	PresetStateForError(userPreset *AudioUnitPreset) (result obj.Object, err error)
 	ProfileStateForCableChannel(cable uint8, channel uint8) obj.Object
 	EnableProfileCableOnChannel(profile obj.Object, cable uint8, channel uint8) error
 	DisableProfileCableOnChannel(profile obj.Object, cable uint8, channel uint8) error
@@ -760,3 +749,10 @@ type AudioUnitable interface {
 }
 
 var _ AudioUnitable = (*AudioUnit)(nil)
+
+// isAudioUnit marks AudioUnit — and, by embedding promotion, its
+// subclasses — as a member of the AudioUnit hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AudioUnit) isAudioUnit() {}
+
+var _ AudioUnitProvider = (*AudioUnit)(nil)

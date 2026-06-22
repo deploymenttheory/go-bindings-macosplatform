@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A query to access the location data stored in a workout route.
-//
 // WorkoutRouteQuery is an idiomatic wrapper over the Objective-C class HKWorkoutRouteQuery.
+//
+// It embeds [Query], promoting that type's methods.
+//
+// A query to access the location data stored in a workout route.
 type WorkoutRouteQuery struct {
-	objref.Handle
+	Query
 }
 
 // WorkoutRouteQueryFromID adopts an existing Objective-C object as a WorkoutRouteQuery
@@ -25,7 +26,8 @@ func WorkoutRouteQueryFromID(id objc.ID) *WorkoutRouteQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &WorkoutRouteQuery{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WorkoutRouteQuery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func workoutRouteQueryAdopt(id objc.ID) *WorkoutRouteQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &WorkoutRouteQuery{Handle: objref.Wrap(id)}
+	x := &WorkoutRouteQuery{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *WorkoutRouteQuery) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WorkoutRouteQuery) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WorkoutRouteQuery) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewWorkoutRouteQuery creates a new WorkoutRouteQuery.
@@ -70,3 +58,5 @@ type WorkoutRouteQueryable interface {
 }
 
 var _ WorkoutRouteQueryable = (*WorkoutRouteQuery)(nil)
+
+var _ QueryProvider = (*WorkoutRouteQuery)(nil)

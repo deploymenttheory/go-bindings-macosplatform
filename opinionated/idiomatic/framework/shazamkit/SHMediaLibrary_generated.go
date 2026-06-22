@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the user’s Shazam library.
-//
 // MediaLibrary is an idiomatic wrapper over the Objective-C class SHMediaLibrary.
+//
+// An object that represents the user’s Shazam library.
 type MediaLibrary struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func MediaLibraryFromID(id objc.ID) *MediaLibrary {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaLibrary{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MediaLibrary{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func mediaLibraryAdopt(id objc.ID) *MediaLibrary {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaLibrary{Handle: objref.Wrap(id)}
+	x := &MediaLibrary{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,13 +62,19 @@ func (x *MediaLibrary) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MediaLibrary) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMediaLibrary creates a new MediaLibrary.
 func NewMediaLibrary() *MediaLibrary {
 	_id := objc.Send[objc.ID](objc.ID(_class("SHMediaLibrary")), objc.RegisterName("new"))
 	return mediaLibraryAdopt(_id)
 }
 
-// Adds an array of songs to the user’s Shazam library.
+// AddMediaItems adds an array of songs to the user’s Shazam library.
 //
 // AddMediaItems blocks until the operation completes or ctx is cancelled.
 func (x *MediaLibrary) AddMediaItems(ctx context.Context, mediaItems []*MediaItem) error {

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages access to a memory buffer used for the data storage of a Model I/O mesh.
-//
 // MeshBufferMap is an idiomatic wrapper over the Objective-C class MDLMeshBufferMap.
+//
+// An object that manages access to a memory buffer used for the data storage of a Model I/O mesh.
 type MeshBufferMap struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MeshBufferMapFromID(id objc.ID) *MeshBufferMap {
 	if id == 0 {
 		return nil
 	}
-	x := &MeshBufferMap{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MeshBufferMap{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func meshBufferMapAdopt(id objc.ID) *MeshBufferMap {
 	if id == 0 {
 		return nil
 	}
-	x := &MeshBufferMap{Handle: objref.Wrap(id)}
+	x := &MeshBufferMap{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *MeshBufferMap) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MeshBufferMap) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MeshBufferMap) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMeshBufferMap creates a new MeshBufferMap.

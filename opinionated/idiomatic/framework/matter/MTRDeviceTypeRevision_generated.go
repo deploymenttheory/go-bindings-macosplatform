@@ -23,7 +23,8 @@ func MTRDeviceTypeRevisionFromID(id objc.ID) *MTRDeviceTypeRevision {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceTypeRevision{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDeviceTypeRevision{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDeviceTypeRevisionAdopt(id objc.ID) *MTRDeviceTypeRevision {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceTypeRevision{Handle: objref.Wrap(id)}
+	x := &MTRDeviceTypeRevision{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,35 +58,39 @@ func (x *MTRDeviceTypeRevision) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// The provided deviceTypeID must be in the range 0xVVVV0000-0xVVVVBFFF, where VVVV is the vendor identifier (0 for standard device types). The provided deviceTypeRevision must be in the range 1-65535.
-//
-// NewMTRDeviceTypeRevisionWithDeviceTypeIDRevision creates a new MTRDeviceTypeRevision.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceTypeRevision) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRDeviceTypeRevisionWithDeviceTypeIDRevision the provided deviceTypeID must be in the range 0xVVVV0000-0xVVVVBFFF, where VVVV is the vendor identifier (0 for standard device types). The provided deviceTypeRevision must be in the range 1-65535.
 func NewMTRDeviceTypeRevisionWithDeviceTypeIDRevision(deviceTypeID obj.Object, revision obj.Object) *MTRDeviceTypeRevision {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRDeviceTypeRevision")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDeviceTypeID:revision:"), objref.IDOf(deviceTypeID), objref.IDOf(revision))
 	return mTRDeviceTypeRevisionAdopt(_id)
 }
 
-// Initializes the receiver based on the values in the specified struct.
-//
-// NewMTRDeviceTypeRevisionWithDeviceTypeStruct creates a new MTRDeviceTypeRevision.
+// NewMTRDeviceTypeRevisionWithDeviceTypeStruct initializes the receiver based on the values in the specified struct.
 func NewMTRDeviceTypeRevisionWithDeviceTypeStruct(deviceTypeStruct *MTRDescriptorClusterDeviceTypeStruct) *MTRDeviceTypeRevision {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRDeviceTypeRevision")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDeviceTypeStruct:"), objref.IDOf(deviceTypeStruct))
 	return mTRDeviceTypeRevisionAdopt(_id)
 }
 
+// DeviceTypeID wraps the corresponding Objective-C method.
 func (x *MTRDeviceTypeRevision) DeviceTypeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceTypeID"))
 	return obj.Wrap(_r)
 }
 
+// DeviceTypeRevision wraps the corresponding Objective-C method.
 func (x *MTRDeviceTypeRevision) DeviceTypeRevision() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceTypeRevision"))
 	return obj.Wrap(_r)
 }
 
-// Returns the MTRDeviceType corresponding to deviceTypeID, or nil if deviceTypeID does not represent a known device type.
+// TypeInformation returns the MTRDeviceType corresponding to deviceTypeID, or nil if deviceTypeID does not represent a known device type.
 func (x *MTRDeviceTypeRevision) TypeInformation() *MTRDeviceType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typeInformation"))
 	return MTRDeviceTypeFromID(_r)

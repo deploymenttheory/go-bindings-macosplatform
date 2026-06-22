@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages a view for compose session and message security handlers.
-//
 // ExtensionViewController is an idiomatic wrapper over the Objective-C class MEExtensionViewController.
+//
+// An object that manages a view for compose session and message security handlers.
 type ExtensionViewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ExtensionViewControllerFromID(id objc.ID) *ExtensionViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExtensionViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func extensionViewControllerAdopt(id objc.ID) *ExtensionViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionViewController{Handle: objref.Wrap(id)}
+	x := &ExtensionViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *ExtensionViewController) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *ExtensionViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExtensionViewController) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewExtensionViewController creates a new ExtensionViewController.

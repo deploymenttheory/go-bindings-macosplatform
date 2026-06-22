@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A concrete metadata object subclass representing a cat head.
-//
 // MetadataCatHeadObject is an idiomatic wrapper over the Objective-C class AVMetadataCatHeadObject.
+//
+// It embeds [MetadataObject], promoting that type's methods.
+//
+// A concrete metadata object subclass representing a cat head.
 type MetadataCatHeadObject struct {
-	objref.Handle
+	MetadataObject
 }
 
 // MetadataCatHeadObjectFromID adopts an existing Objective-C object as a MetadataCatHeadObject
@@ -25,7 +26,8 @@ func MetadataCatHeadObjectFromID(id objc.ID) *MetadataCatHeadObject {
 	if id == 0 {
 		return nil
 	}
-	x := &MetadataCatHeadObject{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetadataCatHeadObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func metadataCatHeadObjectAdopt(id objc.ID) *MetadataCatHeadObject {
 	if id == 0 {
 		return nil
 	}
-	x := &MetadataCatHeadObject{Handle: objref.Wrap(id)}
+	x := &MetadataCatHeadObject{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MetadataCatHeadObject) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetadataCatHeadObject) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetadataCatHeadObject) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMetadataCatHeadObject creates a new MetadataCatHeadObject.
@@ -70,3 +58,5 @@ type MetadataCatHeadObjectable interface {
 }
 
 var _ MetadataCatHeadObjectable = (*MetadataCatHeadObject)(nil)
+
+var _ MetadataObjectProvider = (*MetadataCatHeadObject)(nil)

@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MathExpressionMultiscript is an idiomatic wrapper over the Objective-C class AXMathExpressionMultiscript.
+//
+// It embeds [MathExpression], promoting that type's methods.
 type MathExpressionMultiscript struct {
-	objref.Handle
+	MathExpression
 }
 
 // MathExpressionMultiscriptFromID adopts an existing Objective-C object as a MathExpressionMultiscript
@@ -23,7 +24,8 @@ func MathExpressionMultiscriptFromID(id objc.ID) *MathExpressionMultiscript {
 	if id == 0 {
 		return nil
 	}
-	x := &MathExpressionMultiscript{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MathExpressionMultiscript{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mathExpressionMultiscriptAdopt(id objc.ID) *MathExpressionMultiscript {
 	if id == 0 {
 		return nil
 	}
-	x := &MathExpressionMultiscript{Handle: objref.Wrap(id)}
+	x := &MathExpressionMultiscript{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MathExpressionMultiscript) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MathExpressionMultiscript) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MathExpressionMultiscript) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMathExpressionMultiscriptWithBaseExpressionPrescriptExpressionsPostscriptExpressions creates a new MathExpressionMultiscript.
@@ -63,17 +51,22 @@ func NewMathExpressionMultiscriptWithBaseExpressionPrescriptExpressionsPostscrip
 	return mathExpressionMultiscriptAdopt(_id)
 }
 
+// BaseExpression wraps the corresponding Objective-C method.
 func (x *MathExpressionMultiscript) BaseExpression() *MathExpression {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseExpression"))
 	return MathExpressionFromID(_r)
 }
 
+// PrescriptExpressions wraps the corresponding Objective-C method.
+//
 // PrescriptExpressions returns the collection as a Go slice.
 func (x *MathExpressionMultiscript) PrescriptExpressions() []*MathExpressionSubSuperscript {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prescriptExpressions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpressionSubSuperscript { return MathExpressionSubSuperscriptFromID(_id) })
 }
 
+// PostscriptExpressions wraps the corresponding Objective-C method.
+//
 // PostscriptExpressions returns the collection as a Go slice.
 func (x *MathExpressionMultiscript) PostscriptExpressions() []*MathExpressionSubSuperscript {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postscriptExpressions"))
@@ -89,3 +82,5 @@ type MathExpressionMultiscriptable interface {
 }
 
 var _ MathExpressionMultiscriptable = (*MathExpressionMultiscript)(nil)
+
+var _ MathExpressionProvider = (*MathExpressionMultiscript)(nil)

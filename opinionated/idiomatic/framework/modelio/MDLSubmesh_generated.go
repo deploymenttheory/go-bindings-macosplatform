@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container for index buffer data and material information to be used in rendering all or part of a 3D object.
-//
 // Submesh is an idiomatic wrapper over the Objective-C class MDLSubmesh.
+//
+// A container for index buffer data and material information to be used in rendering all or part of a 3D object.
 type Submesh struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SubmeshFromID(id objc.ID) *Submesh {
 	if id == 0 {
 		return nil
 	}
-	x := &Submesh{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Submesh{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func submeshAdopt(id objc.ID) *Submesh {
 	if id == 0 {
 		return nil
 	}
-	x := &Submesh{Handle: objref.Wrap(id)}
+	x := &Submesh{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,78 +60,78 @@ func (x *Submesh) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a submesh by copying or converting another submesh.
-//
-// NewSubmeshWithMDLSubmeshIndexTypeGeometryType creates a new Submesh.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Submesh) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSubmeshWithMDLSubmeshIndexTypeGeometryType initializes a submesh by copying or converting another submesh.
 func NewSubmeshWithMDLSubmeshIndexTypeGeometryType(submesh *Submesh, indexType IndexBitDepth, geometryType GeometryType) *Submesh {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLSubmesh")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMDLSubmesh:indexType:geometryType:"), objref.IDOf(submesh), indexType, geometryType)
 	return submeshAdopt(_id)
 }
 
-// An object that describes the intended surface appearance of the submesh for rendering.
-//
-// WithMaterial sets material and returns the receiver so calls can be chained.
+// WithMaterial an object that describes the intended surface appearance of the submesh for rendering.
 func (x *Submesh) WithMaterial(material *Material) *Submesh {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterial:"), objref.IDOf(material))
 	return x
 }
 
-// A description of how the non-uniform layout of the submesh’s index buffer defines the shape of the mesh.
-//
-// WithTopology sets topology and returns the receiver so calls can be chained.
+// WithTopology a description of how the non-uniform layout of the submesh’s index buffer defines the shape of the mesh.
 func (x *Submesh) WithTopology(topology *SubmeshTopology) *Submesh {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTopology:"), objref.IDOf(topology))
 	return x
 }
 
-// A descriptive name for the submesh.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName a descriptive name for the submesh.
 func (x *Submesh) WithName(name string) *Submesh {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// Number of indices in the indexBuffer
+// IndexCount number of indices in the indexBuffer
 func (x *Submesh) IndexCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexCount"))
 	return _r
 }
 
-// Data type of indices in indexBuffer Support 8, 16, and 32 bit unsigned integer values
+// IndexType data type of indices in indexBuffer Support 8, 16, and 32 bit unsigned integer values
 func (x *Submesh) IndexType() IndexBitDepth {
 	_r := objc.Send[IndexBitDepth](objref.IDOf(x), objc.RegisterName("indexType"))
 	return _r
 }
 
-// Type of primitive that vertices referenced by the indexBuffer are assembled into
+// GeometryType type of primitive that vertices referenced by the indexBuffer are assembled into
 func (x *Submesh) GeometryType() GeometryType {
 	_r := objc.Send[GeometryType](objref.IDOf(x), objc.RegisterName("geometryType"))
 	return _r
 }
 
-// Material to apply when rendering this object
+// Material material to apply when rendering this object
 func (x *Submesh) Material() *Material {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("material"))
 	return MaterialFromID(_r)
 }
 
+// SetMaterial wraps the corresponding Objective-C method.
 func (x *Submesh) SetMaterial(material *Material) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterial:"), objref.IDOf(material))
 }
 
-// Topology data structure for use with MDLGeometryTypeVariableTopology ignored for geometry types other than MDLGeometryTypeVariableTopology. A submesh of type MDLGeometryTypeVariableTopology with no topology data is an empty submesh.
+// Topology topology data structure for use with MDLGeometryTypeVariableTopology ignored for geometry types other than MDLGeometryTypeVariableTopology. A submesh of type MDLGeometryTypeVariableTopology with no topology data is an empty submesh.
 func (x *Submesh) Topology() *SubmeshTopology {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topology"))
 	return SubmeshTopologyFromID(_r)
 }
 
+// SetTopology wraps the corresponding Objective-C method.
 func (x *Submesh) SetTopology(topology *SubmeshTopology) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTopology:"), objref.IDOf(topology))
 }
 
-// Identifying name for this object
+// Name identifying name for this object
 func (x *Submesh) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -138,6 +140,7 @@ func (x *Submesh) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *Submesh) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }

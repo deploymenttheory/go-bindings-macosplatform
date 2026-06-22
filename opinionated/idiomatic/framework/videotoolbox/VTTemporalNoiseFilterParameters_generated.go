@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Encapsulates the frame-level parameters necessary for processing a source frame using temporal noise-filter processor.
-//
 // TemporalNoiseFilterParameters is an idiomatic wrapper over the Objective-C class VTTemporalNoiseFilterParameters.
+//
+// Encapsulates the frame-level parameters necessary for processing a source frame using temporal noise-filter processor.
 type TemporalNoiseFilterParameters struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TemporalNoiseFilterParametersFromID(id objc.ID) *TemporalNoiseFilterParamet
 	if id == 0 {
 		return nil
 	}
-	x := &TemporalNoiseFilterParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TemporalNoiseFilterParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func temporalNoiseFilterParametersAdopt(id objc.ID) *TemporalNoiseFilterParamete
 	if id == 0 {
 		return nil
 	}
-	x := &TemporalNoiseFilterParameters{Handle: objref.Wrap(id)}
+	x := &TemporalNoiseFilterParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,38 +60,38 @@ func (x *TemporalNoiseFilterParameters) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new VTTemporalNoiseFilterParameters object.
-//
-// NewTemporalNoiseFilterParametersWithSourceFrameNextFramesPreviousFramesDestinationFrameFilterStrengthHasDiscontinuity creates a new TemporalNoiseFilterParameters.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TemporalNoiseFilterParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTemporalNoiseFilterParametersWithSourceFrameNextFramesPreviousFramesDestinationFrameFilterStrengthHasDiscontinuity creates a new VTTemporalNoiseFilterParameters object.
 func NewTemporalNoiseFilterParametersWithSourceFrameNextFramesPreviousFramesDestinationFrameFilterStrengthHasDiscontinuity(sourceFrame *FrameProcessorFrame, nextFrames []*FrameProcessorFrame, previousFrames []*FrameProcessorFrame, destinationFrame *FrameProcessorFrame, filterStrength float32, hasDiscontinuity uint8) *TemporalNoiseFilterParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VTTemporalNoiseFilterParameters")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:nextFrames:previousFrames:destinationFrame:filterStrength:hasDiscontinuity:"), objref.IDOf(sourceFrame), purego.SliceToNSArray(nextFrames, func(_v *FrameProcessorFrame) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(previousFrames, func(_v *FrameProcessorFrame) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationFrame), filterStrength, hasDiscontinuity)
 	return temporalNoiseFilterParametersAdopt(_id)
 }
 
-// A parameter to control the strength of noise-filtering. The value can range from the minimum strength of 0.0 to the maximum strength of 1.0. Change in filter strength causes the processor to flush all frames in the queue prior to processing the source frame.
-//
-// WithFilterStrength sets filterStrength and returns the receiver so calls can be chained.
+// WithFilterStrength a parameter to control the strength of noise-filtering. The value can range from the minimum strength of 0.0 to the maximum strength of 1.0. Change in filter strength causes the processor to flush all frames in the queue prior to processing the source frame.
 func (x *TemporalNoiseFilterParameters) WithFilterStrength(filterStrength float32) *TemporalNoiseFilterParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterStrength:"), filterStrength)
 	return x
 }
 
-// A Boolean that indicates sequence discontinuity, forcing the processor to reset prior to processing the source frame.
-//
-// WithHasDiscontinuity sets hasDiscontinuity and returns the receiver so calls can be chained.
+// WithHasDiscontinuity a Boolean that indicates sequence discontinuity, forcing the processor to reset prior to processing the source frame.
 func (x *TemporalNoiseFilterParameters) WithHasDiscontinuity(hasDiscontinuity bool) *TemporalNoiseFilterParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDiscontinuity:"), hasDiscontinuity)
 	return x
 }
 
-// Current source frame; must be non `nil`.
+// SourceFrame current source frame; must be non `nil`.
 func (x *TemporalNoiseFilterParameters) SourceFrame() *FrameProcessorFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// Future reference frames in presentation time order that you use to process the source frame. The number of frames can vary from 0 to the number specified by the `nextFrameCount` property in `VTTemporalNoiseFilterConfiguration`.
+// NextFrames future reference frames in presentation time order that you use to process the source frame. The number of frames can vary from 0 to the number specified by the `nextFrameCount` property in `VTTemporalNoiseFilterConfiguration`.
 //
 // NextFrames returns the collection as a Go slice.
 func (x *TemporalNoiseFilterParameters) NextFrames() []*FrameProcessorFrame {
@@ -97,7 +99,7 @@ func (x *TemporalNoiseFilterParameters) NextFrames() []*FrameProcessorFrame {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FrameProcessorFrame { return FrameProcessorFrameFromID(_id) })
 }
 
-// Past reference frames in presentation time order that you use to process the source frame. The number of frames can vary from 0 to the number specified by the `previousFrameCount` property in `VTTemporalNoiseFilterConfiguration`.
+// PreviousFrames past reference frames in presentation time order that you use to process the source frame. The number of frames can vary from 0 to the number specified by the `previousFrameCount` property in `VTTemporalNoiseFilterConfiguration`.
 //
 // PreviousFrames returns the collection as a Go slice.
 func (x *TemporalNoiseFilterParameters) PreviousFrames() []*FrameProcessorFrame {
@@ -105,27 +107,29 @@ func (x *TemporalNoiseFilterParameters) PreviousFrames() []*FrameProcessorFrame 
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FrameProcessorFrame { return FrameProcessorFrameFromID(_id) })
 }
 
-// A parameter to control the strength of noise-filtering. The value can range from the minimum strength of 0.0 to the maximum strength of 1.0. Change in filter strength causes the processor to flush all frames in the queue prior to processing the source frame.
+// FilterStrength a parameter to control the strength of noise-filtering. The value can range from the minimum strength of 0.0 to the maximum strength of 1.0. Change in filter strength causes the processor to flush all frames in the queue prior to processing the source frame.
 func (x *TemporalNoiseFilterParameters) FilterStrength() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("filterStrength"))
 	return _r
 }
 
+// SetFilterStrength wraps the corresponding Objective-C method.
 func (x *TemporalNoiseFilterParameters) SetFilterStrength(filterStrength float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterStrength:"), filterStrength)
 }
 
-// A Boolean that indicates sequence discontinuity, forcing the processor to reset prior to processing the source frame.
+// HasDiscontinuity a Boolean that indicates sequence discontinuity, forcing the processor to reset prior to processing the source frame.
 func (x *TemporalNoiseFilterParameters) HasDiscontinuity() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasDiscontinuity"))
 	return _r
 }
 
+// SetHasDiscontinuity wraps the corresponding Objective-C method.
 func (x *TemporalNoiseFilterParameters) SetHasDiscontinuity(hasDiscontinuity bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDiscontinuity:"), hasDiscontinuity)
 }
 
-// Destination frame that contains a user-allocated pixel buffer that receives the output frame.
+// DestinationFrame destination frame that contains a user-allocated pixel buffer that receives the output frame.
 func (x *TemporalNoiseFilterParameters) DestinationFrame() *FrameProcessorFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationFrame"))
 	return FrameProcessorFrameFromID(_r)

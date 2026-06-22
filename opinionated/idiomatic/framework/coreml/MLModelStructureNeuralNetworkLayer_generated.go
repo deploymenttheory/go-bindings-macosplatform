@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class representing a layer in a NeuralNetwork.
-//
 // ModelStructureNeuralNetworkLayer is an idiomatic wrapper over the Objective-C class MLModelStructureNeuralNetworkLayer.
+//
+// A class representing a layer in a NeuralNetwork.
 type ModelStructureNeuralNetworkLayer struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ModelStructureNeuralNetworkLayerFromID(id objc.ID) *ModelStructureNeuralNet
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructureNeuralNetworkLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ModelStructureNeuralNetworkLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func modelStructureNeuralNetworkLayerAdopt(id objc.ID) *ModelStructureNeuralNetw
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructureNeuralNetworkLayer{Handle: objref.Wrap(id)}
+	x := &ModelStructureNeuralNetworkLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *ModelStructureNeuralNetworkLayer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ModelStructureNeuralNetworkLayer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewModelStructureNeuralNetworkLayer creates a new ModelStructureNeuralNetworkLayer.
 func NewModelStructureNeuralNetworkLayer() *ModelStructureNeuralNetworkLayer {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLModelStructureNeuralNetworkLayer")), objc.RegisterName("new"))
 	return modelStructureNeuralNetworkLayerAdopt(_id)
 }
 
-// The layer name.
+// Name the layer name.
 func (x *ModelStructureNeuralNetworkLayer) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *ModelStructureNeuralNetworkLayer) Name() string {
 	return purego.GoString(_r)
 }
 
-// The type of the layer, e,g, "elementwise", "pooling", etc.
+// Type the type of the layer, e,g, "elementwise", "pooling", etc.
 func (x *ModelStructureNeuralNetworkLayer) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
 	if _r == 0 {
@@ -82,7 +90,7 @@ func (x *ModelStructureNeuralNetworkLayer) Type() string {
 	return purego.GoString(_r)
 }
 
-// The input names.
+// InputNames the input names.
 //
 // InputNames returns the collection as a Go slice.
 func (x *ModelStructureNeuralNetworkLayer) InputNames() []string {
@@ -90,7 +98,7 @@ func (x *ModelStructureNeuralNetworkLayer) InputNames() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// The output names.
+// OutputNames the output names.
 //
 // OutputNames returns the collection as a Go slice.
 func (x *ModelStructureNeuralNetworkLayer) OutputNames() []string {

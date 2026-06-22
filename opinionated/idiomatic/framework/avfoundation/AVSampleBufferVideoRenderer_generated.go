@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that enqueues video sample buffers for rendering.
-//
 // SampleBufferVideoRenderer is an idiomatic wrapper over the Objective-C class AVSampleBufferVideoRenderer.
+//
+// An object that enqueues video sample buffers for rendering.
 type SampleBufferVideoRenderer struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func SampleBufferVideoRendererFromID(id objc.ID) *SampleBufferVideoRenderer {
 	if id == 0 {
 		return nil
 	}
-	x := &SampleBufferVideoRenderer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SampleBufferVideoRenderer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func sampleBufferVideoRendererAdopt(id objc.ID) *SampleBufferVideoRenderer {
 	if id == 0 {
 		return nil
 	}
-	x := &SampleBufferVideoRenderer{Handle: objref.Wrap(id)}
+	x := &SampleBufferVideoRenderer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,13 +61,19 @@ func (x *SampleBufferVideoRenderer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SampleBufferVideoRenderer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSampleBufferVideoRenderer creates a new SampleBufferVideoRenderer.
 func NewSampleBufferVideoRenderer() *SampleBufferVideoRenderer {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVSampleBufferVideoRenderer")), objc.RegisterName("new"))
 	return sampleBufferVideoRendererAdopt(_id)
 }
 
-// Tells the video renderer to discard pending enqueued sample buffers.
+// FlushWithRemovalOfDisplayedImage tells the video renderer to discard pending enqueued sample buffers.
 //
 // FlushWithRemovalOfDisplayedImage blocks until the operation completes or ctx is cancelled.
 func (x *SampleBufferVideoRenderer) FlushWithRemovalOfDisplayedImage(ctx context.Context, removeDisplayedImage bool) error {
@@ -82,28 +90,29 @@ func (x *SampleBufferVideoRenderer) FlushWithRemovalOfDisplayedImage(ctx context
 	}
 }
 
-// The ability of the video renderer to be used for enqueueing sample buffers. The value of this property is an AVQueuedSampleBufferRenderingStatus that indicates whether the receiver can be used for enqueueing and rendering sample buffers. When the value of this property is AVQueuedSampleBufferRenderingStatusFailed, clients can check the value of the error property to determine the failure. To resume rendering sample buffers using the video renderer after a failure, clients must first reset the status to AVQueuedSampleBufferRenderingStatusUnknown. This can be achieved by invoking -flush on the video renderer. This property is key value observable.
+// Status the ability of the video renderer to be used for enqueueing sample buffers. The value of this property is an AVQueuedSampleBufferRenderingStatus that indicates whether the receiver can be used for enqueueing and rendering sample buffers. When the value of this property is AVQueuedSampleBufferRenderingStatusFailed, clients can check the value of the error property to determine the failure. To resume rendering sample buffers using the video renderer after a failure, clients must first reset the status to AVQueuedSampleBufferRenderingStatusUnknown. This can be achieved by invoking -flush on the video renderer. This property is key value observable.
 func (x *SampleBufferVideoRenderer) Status() QueuedSampleBufferRenderingStatus {
 	_r := objc.Send[QueuedSampleBufferRenderingStatus](objref.IDOf(x), objc.RegisterName("status"))
 	return _r
 }
 
-// Indicates that the receiver is in a state where it requires a call to -flush to continue decoding frames. When the application enters a state where use of video decoder resources is not permissible, the value of this property changes to YES along with the video renderer's status changing to AVQueuedSampleBufferRenderingStatusFailed. To resume rendering sample buffers using the video renderer after this property's value is YES, clients must first reset the video renderer by calling flush or flushWithRemovalOfDisplayedImage:completionHandler:. Clients can track changes to this property via AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification. This property is not key value observable.
+// RequiresFlushToResumeDecoding indicates that the receiver is in a state where it requires a call to -flush to continue decoding frames. When the application enters a state where use of video decoder resources is not permissible, the value of this property changes to YES along with the video renderer's status changing to AVQueuedSampleBufferRenderingStatusFailed. To resume rendering sample buffers using the video renderer after this property's value is YES, clients must first reset the video renderer by calling flush or flushWithRemovalOfDisplayedImage:completionHandler:. Clients can track changes to this property via AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification. This property is not key value observable.
 func (x *SampleBufferVideoRenderer) RequiresFlushToResumeDecoding() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresFlushToResumeDecoding"))
 	return _r
 }
 
-// Promises, for the purpose of enabling power optimizations, that future sample buffers will have monotonically increasing PTS values. Only applicable for forward playback. Sending this message and later calling -enqueueSampleBuffer: with a buffer with a lower PTS than any previously enqueued PTS has the potential to lead to dropped buffers. Messaging -flush resets such expectations.
+// ExpectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes promises, for the purpose of enabling power optimizations, that future sample buffers will have monotonically increasing PTS values. Only applicable for forward playback. Sending this message and later calling -enqueueSampleBuffer: with a buffer with a lower PTS than any previously enqueued PTS has the potential to lead to dropped buffers. Messaging -flush resets such expectations.
 func (x *SampleBufferVideoRenderer) ExpectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes"))
 }
 
-// Resets previously-promised expectations about upcoming sample buffer PTSs. This undoes the state set by messaging -expectMinimumUpcomingSampleBufferPresentationTime: or -expectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes. If you didn't use either of those, you don't have to use this.
+// ResetUpcomingSampleBufferPresentationTimeExpectations resets previously-promised expectations about upcoming sample buffer PTSs. This undoes the state set by messaging -expectMinimumUpcomingSampleBufferPresentationTime: or -expectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes. If you didn't use either of those, you don't have to use this.
 func (x *SampleBufferVideoRenderer) ResetUpcomingSampleBufferPresentationTimeExpectations() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetUpcomingSampleBufferPresentationTimeExpectations"))
 }
 
+// RecommendedPixelBufferAttributes wraps the corresponding Objective-C method.
 func (x *SampleBufferVideoRenderer) RecommendedPixelBufferAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recommendedPixelBufferAttributes"))
 	return obj.Wrap(_r)

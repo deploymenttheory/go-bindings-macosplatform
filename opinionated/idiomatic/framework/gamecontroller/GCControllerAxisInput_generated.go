@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A control element that tracks movement along an axis.
-//
 // ControllerAxisInput is an idiomatic wrapper over the Objective-C class GCControllerAxisInput.
+//
+// It embeds [ControllerElement], promoting that type's methods.
+//
+// A control element that tracks movement along an axis.
 type ControllerAxisInput struct {
-	objref.Handle
+	ControllerElement
 }
 
 // ControllerAxisInputFromID adopts an existing Objective-C object as a ControllerAxisInput
@@ -25,7 +26,8 @@ func ControllerAxisInputFromID(id objc.ID) *ControllerAxisInput {
 	if id == 0 {
 		return nil
 	}
-	x := &ControllerAxisInput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ControllerAxisInput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func controllerAxisInputAdopt(id objc.ID) *ControllerAxisInput {
 	if id == 0 {
 		return nil
 	}
-	x := &ControllerAxisInput{Handle: objref.Wrap(id)}
+	x := &ControllerAxisInput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ControllerAxisInput) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ControllerAxisInput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ControllerAxisInput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewControllerAxisInput creates a new ControllerAxisInput.
@@ -64,60 +52,48 @@ func NewControllerAxisInput() *ControllerAxisInput {
 	return controllerAxisInputAdopt(_id)
 }
 
-// The current value of the axis.
-//
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue the current value of the axis.
 func (x *ControllerAxisInput) WithValue(value float32) *ControllerAxisInput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 	return x
 }
 
-// The preferred state for handling input when the user binds the element to a system gesture.
-//
-// WithPreferredSystemGestureState sets preferredSystemGestureState and returns the receiver so calls can be chained.
+// WithPreferredSystemGestureState the preferred state for handling input when the user binds the element to a system gesture.
 func (x *ControllerAxisInput) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerAxisInput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
 	return x
 }
 
-// A system symbol for the element or the remapped element.
-//
-// WithSfSymbolsName sets sfSymbolsName and returns the receiver so calls can be chained.
+// WithSfSymbolsName a system symbol for the element or the remapped element.
 func (x *ControllerAxisInput) WithSfSymbolsName(sfSymbolsName string) *ControllerAxisInput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
 	return x
 }
 
-// The localized name for the element or the remapped element.
-//
-// WithLocalizedName sets localizedName and returns the receiver so calls can be chained.
+// WithLocalizedName the localized name for the element or the remapped element.
 func (x *ControllerAxisInput) WithLocalizedName(localizedName string) *ControllerAxisInput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedName:"), purego.NSString(localizedName))
 	return x
 }
 
-// The element’s system symbol, not the remapped symbol.
-//
-// WithUnmappedSfSymbolsName sets unmappedSfSymbolsName and returns the receiver so calls can be chained.
+// WithUnmappedSfSymbolsName the element’s system symbol, not the remapped symbol.
 func (x *ControllerAxisInput) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerAxisInput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedSfSymbolsName:"), purego.NSString(unmappedSfSymbolsName))
 	return x
 }
 
-// The element’s localized name, not the remapped name.
-//
-// WithUnmappedLocalizedName sets unmappedLocalizedName and returns the receiver so calls can be chained.
+// WithUnmappedLocalizedName the element’s localized name, not the remapped name.
 func (x *ControllerAxisInput) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerAxisInput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
 	return x
 }
 
-// Sets the normalized value of the axis.
+// SetValue sets the normalized value of the axis.
 func (x *ControllerAxisInput) SetValue(value float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 }
 
-// A normalized value for the input, between -1 and 1 for axis inputs. The values are deadzoned and saturated before they are returned so there is no value ouside the range. Deadzoning does not remove values from the range, the full 0 to 1 magnitude of values are possible from the input. As an axis is often used in a digital sense, you can rely on a value of 0 meaning the axis is inside the deadzone. Any value greater than or less than zero is not in the deadzone.
+// Value a normalized value for the input, between -1 and 1 for axis inputs. The values are deadzoned and saturated before they are returned so there is no value ouside the range. Deadzoning does not remove values from the range, the full 0 to 1 magnitude of values are possible from the input. As an axis is often used in a digital sense, you can rely on a value of 0 meaning the axis is inside the deadzone. Any value greater than or less than zero is not in the deadzone.
 func (x *ControllerAxisInput) Value() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("value"))
 	return _r
@@ -137,3 +113,5 @@ type ControllerAxisInputable interface {
 }
 
 var _ ControllerAxisInputable = (*ControllerAxisInput)(nil)
+
+var _ ControllerElementProvider = (*ControllerAxisInput)(nil)

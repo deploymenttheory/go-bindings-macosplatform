@@ -10,19 +10,19 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns the shared instance representing the target application specified by its bundle identifier.
+// ApplicationWithBundleIdentifier returns the shared instance representing the target application specified by its bundle identifier.
 func ApplicationWithBundleIdentifier(ident string) *Application {
 	_r := objc.Send[objc.ID](objc.ID(_class("SBApplication")), objc.RegisterName("applicationWithBundleIdentifier:"), purego.NSString(ident))
 	return ApplicationFromID(_r)
 }
 
-// Returns the shared instance representing a target application specified by the given URL.
+// ApplicationWithURL returns the shared instance representing a target application specified by the given URL.
 func ApplicationWithURL(url string) *Application {
 	_r := objc.Send[objc.ID](objc.ID(_class("SBApplication")), objc.RegisterName("applicationWithURL:"), rt.FileURL(url))
 	return ApplicationFromID(_r)
 }
 
-// Returns the shared instance representing a target application specified by its process identifier.
+// ApplicationWithProcessIdentifier returns the shared instance representing a target application specified by its process identifier.
 func ApplicationWithProcessIdentifier(pid int) *Application {
 	_r := objc.Send[objc.ID](objc.ID(_class("SBApplication")), objc.RegisterName("applicationWithProcessIdentifier:"), pid)
 	return ApplicationFromID(_r)

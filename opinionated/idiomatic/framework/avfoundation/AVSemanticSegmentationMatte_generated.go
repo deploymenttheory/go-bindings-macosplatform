@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that wraps a matting image for a particular semantic segmentation.
-//
 // SemanticSegmentationMatte is an idiomatic wrapper over the Objective-C class AVSemanticSegmentationMatte.
+//
+// An object that wraps a matting image for a particular semantic segmentation.
 type SemanticSegmentationMatte struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SemanticSegmentationMatteFromID(id objc.ID) *SemanticSegmentationMatte {
 	if id == 0 {
 		return nil
 	}
-	x := &SemanticSegmentationMatte{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SemanticSegmentationMatte{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func semanticSegmentationMatteAdopt(id objc.ID) *SemanticSegmentationMatte {
 	if id == 0 {
 		return nil
 	}
-	x := &SemanticSegmentationMatte{Handle: objref.Wrap(id)}
+	x := &SemanticSegmentationMatte{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *SemanticSegmentationMatte) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SemanticSegmentationMatte) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSemanticSegmentationMatte creates a new SemanticSegmentationMatte.
 func NewSemanticSegmentationMatte() *SemanticSegmentationMatte {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVSemanticSegmentationMatte")), objc.RegisterName("new"))
 	return semanticSegmentationMatteAdopt(_id)
 }
 
-// Returns a dictionary of primitive map information to use when writing an image file with a semantic segmentation matte.
+// DictionaryRepresentationForAuxiliaryDataType returns a dictionary of primitive map information to use when writing an image file with a semantic segmentation matte.
 func (x *SemanticSegmentationMatte) DictionaryRepresentationForAuxiliaryDataType(outAuxDataType string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentationForAuxiliaryDataType:"), purego.NSString(outAuxDataType))
 	return obj.Wrap(_r)
 }
 
-// Specifies the receiver's semantic segmentation matting image type. An AVSemanticSegmentationMatte's matteType is immutable for the life of the object.
+// MatteType specifies the receiver's semantic segmentation matting image type. An AVSemanticSegmentationMatte's matteType is immutable for the life of the object.
 func (x *SemanticSegmentationMatte) MatteType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matteType"))
 	return obj.Wrap(_r)
 }
 
-// Specifies the pixel format type of this object's internal matting image. Currently the only supported CV pixel format type for the matting image is kCVPixelFormatType_OneComponent8.
+// PixelFormatType specifies the pixel format type of this object's internal matting image. Currently the only supported CV pixel format type for the matting image is kCVPixelFormatType_OneComponent8.
 func (x *SemanticSegmentationMatte) PixelFormatType() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelFormatType"))
 	return _r

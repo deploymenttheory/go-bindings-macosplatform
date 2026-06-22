@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object used to add an extra visual decoration to an item in a collection view.
-//
 // CollectionLayoutSupplementaryItem is an idiomatic wrapper over the Objective-C class NSCollectionLayoutSupplementaryItem.
+//
+// CollectionLayoutSupplementaryItem is an abstract base — you do not construct it directly. Construct one of [CollectionLayoutBoundarySupplementaryItem] and pass it where a CollectionLayoutSupplementaryItem is accepted.
+//
+// An object used to add an extra visual decoration to an item in a collection view.
 type CollectionLayoutSupplementaryItem struct {
-	objref.Handle
+	CollectionLayoutItem
 }
 
 // CollectionLayoutSupplementaryItemFromID adopts an existing Objective-C object as a CollectionLayoutSupplementaryItem
@@ -25,7 +26,8 @@ func CollectionLayoutSupplementaryItemFromID(id objc.ID) *CollectionLayoutSupple
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionLayoutSupplementaryItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollectionLayoutSupplementaryItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,57 +40,36 @@ func collectionLayoutSupplementaryItemAdopt(id objc.ID) *CollectionLayoutSupplem
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionLayoutSupplementaryItem{Handle: objref.Wrap(id)}
+	x := &CollectionLayoutSupplementaryItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CollectionLayoutSupplementaryItem) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CollectionLayoutSupplementaryItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CollectionLayoutSupplementaryItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewCollectionLayoutSupplementaryItem creates a new CollectionLayoutSupplementaryItem.
-func NewCollectionLayoutSupplementaryItem() *CollectionLayoutSupplementaryItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutSupplementaryItem")), objc.RegisterName("new"))
-	return collectionLayoutSupplementaryItemAdopt(_id)
-}
-
-// The vertical stacking order of the supplementary item in relation to other items in the section.
-//
-// WithZIndex sets zIndex and returns the receiver so calls can be chained.
+// WithZIndex the vertical stacking order of the supplementary item in relation to other items in the section.
 func (x *CollectionLayoutSupplementaryItem) WithZIndex(zIndex int) *CollectionLayoutSupplementaryItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZIndex:"), zIndex)
 	return x
 }
 
-// The amount of space added around the boundaries of the item between other items and this item’s container.
-//
-// WithEdgeSpacing sets edgeSpacing and returns the receiver so calls can be chained.
+// WithEdgeSpacing the amount of space added around the boundaries of the item between other items and this item’s container.
 func (x *CollectionLayoutSupplementaryItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutSupplementaryItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
 	return x
 }
 
+// ZIndex wraps the corresponding Objective-C method.
 func (x *CollectionLayoutSupplementaryItem) ZIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("zIndex"))
 	return _r
 }
 
+// SetZIndex wraps the corresponding Objective-C method.
 func (x *CollectionLayoutSupplementaryItem) SetZIndex(zIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZIndex:"), zIndex)
 }
 
+// ElementKind wraps the corresponding Objective-C method.
 func (x *CollectionLayoutSupplementaryItem) ElementKind() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementKind"))
 	if _r == 0 {
@@ -97,11 +78,13 @@ func (x *CollectionLayoutSupplementaryItem) ElementKind() string {
 	return purego.GoString(_r)
 }
 
+// ContainerAnchor wraps the corresponding Objective-C method.
 func (x *CollectionLayoutSupplementaryItem) ContainerAnchor() *CollectionLayoutAnchor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containerAnchor"))
 	return CollectionLayoutAnchorFromID(_r)
 }
 
+// ItemAnchor wraps the corresponding Objective-C method.
 func (x *CollectionLayoutSupplementaryItem) ItemAnchor() *CollectionLayoutAnchor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemAnchor"))
 	return CollectionLayoutAnchorFromID(_r)
@@ -120,3 +103,12 @@ type CollectionLayoutSupplementaryItemable interface {
 }
 
 var _ CollectionLayoutSupplementaryItemable = (*CollectionLayoutSupplementaryItem)(nil)
+
+// isCollectionLayoutSupplementaryItem marks CollectionLayoutSupplementaryItem — and, by embedding promotion, its
+// subclasses — as a member of the CollectionLayoutSupplementaryItem hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CollectionLayoutSupplementaryItem) isCollectionLayoutSupplementaryItem() {}
+
+var _ CollectionLayoutSupplementaryItemProvider = (*CollectionLayoutSupplementaryItem)(nil)
+
+var _ CollectionLayoutItemProvider = (*CollectionLayoutSupplementaryItem)(nil)

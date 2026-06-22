@@ -17,6 +17,8 @@ const (
 	KSKIndexInvertedVector SKIndexType = 3
 )
 
+// String returns the SKIndexType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SKIndexType) String() string {
 	switch e {
 	case KSKIndexUnknown:
@@ -41,6 +43,8 @@ const (
 	KSKSearchPrefixRanked   SKSearchType = 3
 )
 
+// String returns the SKSearchType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SKSearchType) String() string {
 	switch e {
 	case KSKSearchRanked:

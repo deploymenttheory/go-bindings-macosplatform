@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing a single name/value pair for an item in the query portion of a URL.
-//
 // URLQueryItem is an idiomatic wrapper over the Objective-C class NSURLQueryItem.
+//
+// An object representing a single name/value pair for an item in the query portion of a URL.
 type URLQueryItem struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func URLQueryItemFromID(id objc.ID) *URLQueryItem {
 	if id == 0 {
 		return nil
 	}
-	x := &URLQueryItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &URLQueryItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func uRLQueryItemAdopt(id objc.ID) *URLQueryItem {
 	if id == 0 {
 		return nil
 	}
-	x := &URLQueryItem{Handle: objref.Wrap(id)}
+	x := &URLQueryItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +60,26 @@ func (x *URLQueryItem) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a newly allocated query item with the specified name and value.
-//
-// NewURLQueryItemWithNameValue creates a new URLQueryItem.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *URLQueryItem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewURLQueryItemWithNameValue initializes a newly allocated query item with the specified name and value.
 func NewURLQueryItemWithNameValue(name string, value string) *URLQueryItem {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLQueryItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:value:"), purego.NSString(name), purego.NSString(value))
 	return uRLQueryItemAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *URLQueryItem) WithScriptingProperties(scriptingProperties obj.Object) *URLQueryItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *URLQueryItem) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -81,6 +88,7 @@ func (x *URLQueryItem) Name() string {
 	return purego.GoString(_r)
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *URLQueryItem) Value() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	if _r == 0 {

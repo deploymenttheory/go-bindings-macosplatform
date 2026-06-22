@@ -18,6 +18,8 @@ const (
 	ExtensionErrorCodeFailed ExtensionErrorCode = 1
 )
 
+// String returns the ExtensionErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ExtensionErrorCode) String() string {
 	switch e {
 	case ExtensionErrorCodeUserCancelled:

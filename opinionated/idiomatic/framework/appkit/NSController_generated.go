@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that implements the NSEditor and NSEditorRegistration informal protocols required for controller classes.
-//
 // Controller is an idiomatic wrapper over the Objective-C class NSController.
+//
+// Controller is an abstract base — you do not construct it directly. Construct one of [ObjectController], [UserDefaultsController] and pass it where a Controller is accepted.
+//
+// An abstract class that implements the NSEditor and NSEditorRegistration informal protocols required for controller classes.
 type Controller struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ControllerFromID(id objc.ID) *Controller {
 	if id == 0 {
 		return nil
 	}
-	x := &Controller{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Controller{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func controllerAdopt(id objc.ID) *Controller {
 	if id == 0 {
 		return nil
 	}
-	x := &Controller{Handle: objref.Wrap(id)}
+	x := &Controller{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *Controller) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewController creates a new Controller.
-func NewController() *Controller {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSController")), objc.RegisterName("new"))
-	return controllerAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Controller) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewControllerWithCoder creates a new Controller.
@@ -71,17 +75,18 @@ func NewControllerWithCoder(coder obj.Object) *Controller {
 	return controllerAdopt(_id)
 }
 
-// Discards any pending changes by registered editors.
+// DiscardEditing discards any pending changes by registered editors.
 func (x *Controller) DiscardEditing() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discardEditing"))
 }
 
-// Attempts to commit any pending edits.
+// CommitEditing attempts to commit any pending edits.
 func (x *Controller) CommitEditing() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("commitEditing"))
 	return _r
 }
 
+// IsEditing wraps the corresponding Objective-C method.
 func (x *Controller) IsEditing() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEditing"))
 	return _r
@@ -96,3 +101,10 @@ type Controllerable interface {
 }
 
 var _ Controllerable = (*Controller)(nil)
+
+// isController marks Controller — and, by embedding promotion, its
+// subclasses — as a member of the Controller hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Controller) isController() {}
+
+var _ ControllerProvider = (*Controller)(nil)

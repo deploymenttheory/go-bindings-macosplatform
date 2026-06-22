@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A cloud-synced directory for game-save data.
-//
 // SyncedDirectory is an idiomatic wrapper over the Objective-C class GSSyncedDirectory.
+//
+// A cloud-synced directory for game-save data.
 type SyncedDirectory struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func SyncedDirectoryFromID(id objc.ID) *SyncedDirectory {
 	if id == 0 {
 		return nil
 	}
-	x := &SyncedDirectory{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SyncedDirectory{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func syncedDirectoryAdopt(id objc.ID) *SyncedDirectory {
 	if id == 0 {
 		return nil
 	}
-	x := &SyncedDirectory{Handle: objref.Wrap(id)}
+	x := &SyncedDirectory{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,28 +61,34 @@ func (x *SyncedDirectory) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncedDirectory) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSyncedDirectory creates a new SyncedDirectory.
 func NewSyncedDirectory() *SyncedDirectory {
 	_id := objc.Send[objc.ID](objc.ID(_class("GSSyncedDirectory")), objc.RegisterName("new"))
 	return syncedDirectoryAdopt(_id)
 }
 
-// Closes the directory, and resumes syncing the directory to the cloud.
+// Close closes the directory, and resumes syncing the directory to the cloud.
 func (x *SyncedDirectory) Close() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
 }
 
-// Triggers an upload of the directory for any changes that were pending.
+// TriggerPendingUploadWithCompletionHandler triggers an upload of the directory for any changes that were pending.
 func (x *SyncedDirectory) TriggerPendingUploadWithCompletionHandler(completion func(bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("triggerPendingUploadWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
 }
 
-// Indicates that you resolved a conflict.
+// ResolveConflictsWithVersion indicates that you resolved a conflict.
 func (x *SyncedDirectory) ResolveConflictsWithVersion(version *SyncedDirectoryVersion) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resolveConflictsWithVersion:"), objref.IDOf(version))
 }
 
-// Waits for the directory sync to complete, without showing any user interface.
+// FinishSyncing waits for the directory sync to complete, without showing any user interface.
 //
 // FinishSyncing blocks until the operation completes or ctx is cancelled.
 func (x *SyncedDirectory) FinishSyncing(ctx context.Context) error {
@@ -97,7 +105,7 @@ func (x *SyncedDirectory) FinishSyncing(ctx context.Context) error {
 	}
 }
 
-// The state of the directory.
+// DirectoryState the state of the directory.
 func (x *SyncedDirectory) DirectoryState() *SyncedDirectoryState {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("directoryState"))
 	return SyncedDirectoryStateFromID(_r)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a custom extension of a MIDI note on event.
-//
 // ExtendedNoteOnEvent is an idiomatic wrapper over the Objective-C class AVExtendedNoteOnEvent.
+//
+// It embeds [MusicEvent], promoting that type's methods.
+//
+// An object that represents a custom extension of a MIDI note on event.
 type ExtendedNoteOnEvent struct {
-	objref.Handle
+	MusicEvent
 }
 
 // ExtendedNoteOnEventFromID adopts an existing Objective-C object as a ExtendedNoteOnEvent
@@ -25,7 +26,8 @@ func ExtendedNoteOnEventFromID(id objc.ID) *ExtendedNoteOnEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtendedNoteOnEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExtendedNoteOnEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,125 +40,107 @@ func extendedNoteOnEventAdopt(id objc.ID) *ExtendedNoteOnEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtendedNoteOnEvent{Handle: objref.Wrap(id)}
+	x := &ExtendedNoteOnEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ExtendedNoteOnEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExtendedNoteOnEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExtendedNoteOnEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates an event with a MIDI note, velocity, group identifier, and duration.
-//
-// NewExtendedNoteOnEventWithMIDINoteVelocityGroupIDDuration creates a new ExtendedNoteOnEvent.
+// NewExtendedNoteOnEventWithMIDINoteVelocityGroupIDDuration creates an event with a MIDI note, velocity, group identifier, and duration.
 func NewExtendedNoteOnEventWithMIDINoteVelocityGroupIDDuration(midiNote float32, velocity float32, groupID int, duration float64) *ExtendedNoteOnEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVExtendedNoteOnEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMIDINote:velocity:groupID:duration:"), midiNote, velocity, groupID, duration)
 	return extendedNoteOnEventAdopt(_id)
 }
 
-// Creates a note on event with the default instrument.
-//
-// NewExtendedNoteOnEventWithMIDINoteVelocityInstrumentIDGroupIDDuration creates a new ExtendedNoteOnEvent.
+// NewExtendedNoteOnEventWithMIDINoteVelocityInstrumentIDGroupIDDuration creates a note on event with the default instrument.
 func NewExtendedNoteOnEventWithMIDINoteVelocityInstrumentIDGroupIDDuration(midiNote float32, velocity float32, instrumentID int, groupID int, duration float64) *ExtendedNoteOnEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVExtendedNoteOnEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMIDINote:velocity:instrumentID:groupID:duration:"), midiNote, velocity, instrumentID, groupID, duration)
 	return extendedNoteOnEventAdopt(_id)
 }
 
-// The MIDI note number.
-//
-// WithMidiNote sets midiNote and returns the receiver so calls can be chained.
+// WithMidiNote the MIDI note number.
 func (x *ExtendedNoteOnEvent) WithMidiNote(midiNote float32) *ExtendedNoteOnEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMidiNote:"), midiNote)
 	return x
 }
 
-// The MDI velocity.
-//
-// WithVelocity sets velocity and returns the receiver so calls can be chained.
+// WithVelocity the MDI velocity.
 func (x *ExtendedNoteOnEvent) WithVelocity(velocity float32) *ExtendedNoteOnEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVelocity:"), velocity)
 	return x
 }
 
-// The instrument identifier.
-//
-// WithInstrumentID sets instrumentID and returns the receiver so calls can be chained.
+// WithInstrumentID the instrument identifier.
 func (x *ExtendedNoteOnEvent) WithInstrumentID(instrumentID int) *ExtendedNoteOnEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstrumentID:"), instrumentID)
 	return x
 }
 
-// The audio unit channel that handles the event.
-//
-// WithGroupID sets groupID and returns the receiver so calls can be chained.
+// WithGroupID the audio unit channel that handles the event.
 func (x *ExtendedNoteOnEvent) WithGroupID(groupID int) *ExtendedNoteOnEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupID:"), groupID)
 	return x
 }
 
-// The duration of the event, in beats.
-//
-// WithDuration sets duration and returns the receiver so calls can be chained.
+// WithDuration the duration of the event, in beats.
 func (x *ExtendedNoteOnEvent) WithDuration(duration float64) *ExtendedNoteOnEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
 	return x
 }
 
+// MidiNote wraps the corresponding Objective-C method.
 func (x *ExtendedNoteOnEvent) MidiNote() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("midiNote"))
 	return _r
 }
 
+// SetMidiNote wraps the corresponding Objective-C method.
 func (x *ExtendedNoteOnEvent) SetMidiNote(midiNote float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMidiNote:"), midiNote)
 }
 
+// Velocity wraps the corresponding Objective-C method.
 func (x *ExtendedNoteOnEvent) Velocity() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("velocity"))
 	return _r
 }
 
+// SetVelocity wraps the corresponding Objective-C method.
 func (x *ExtendedNoteOnEvent) SetVelocity(velocity float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVelocity:"), velocity)
 }
 
+// InstrumentID wraps the corresponding Objective-C method.
 func (x *ExtendedNoteOnEvent) InstrumentID() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("instrumentID"))
 	return _r
 }
 
+// SetInstrumentID wraps the corresponding Objective-C method.
 func (x *ExtendedNoteOnEvent) SetInstrumentID(instrumentID int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstrumentID:"), instrumentID)
 }
 
+// GroupID wraps the corresponding Objective-C method.
 func (x *ExtendedNoteOnEvent) GroupID() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("groupID"))
 	return _r
 }
 
+// SetGroupID wraps the corresponding Objective-C method.
 func (x *ExtendedNoteOnEvent) SetGroupID(groupID int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupID:"), groupID)
 }
 
+// Duration wraps the corresponding Objective-C method.
 func (x *ExtendedNoteOnEvent) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
 	return _r
 }
 
+// SetDuration wraps the corresponding Objective-C method.
 func (x *ExtendedNoteOnEvent) SetDuration(duration float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
 }
@@ -182,3 +166,5 @@ type ExtendedNoteOnEventable interface {
 }
 
 var _ ExtendedNoteOnEventable = (*ExtendedNoteOnEvent)(nil)
+
+var _ MusicEventProvider = (*ExtendedNoteOnEvent)(nil)

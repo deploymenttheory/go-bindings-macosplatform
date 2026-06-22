@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class that adds a name to framework definitions.
-//
 // Definition is an idiomatic wrapper over the Objective-C class PHASEDefinition.
+//
+// Definition is an abstract base — you do not construct it directly. Construct one of [MetaParameterDefinition], [MixerDefinition], [SoundEventNodeDefinition] and pass it where a Definition is accepted.
+//
+// A base class that adds a name to framework definitions.
 type Definition struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func DefinitionFromID(id objc.ID) *Definition {
 	if id == 0 {
 		return nil
 	}
-	x := &Definition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Definition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func definitionAdopt(id objc.ID) *Definition {
 	if id == 0 {
 		return nil
 	}
-	x := &Definition{Handle: objref.Wrap(id)}
+	x := &Definition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +62,13 @@ func (x *Definition) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewDefinition creates a new Definition.
-func NewDefinition() *Definition {
-	_id := objc.Send[objc.ID](objc.ID(_class("PHASEDefinition")), objc.RegisterName("new"))
-	return definitionAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Definition) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *Definition) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -79,3 +84,10 @@ type Definitionable interface {
 }
 
 var _ Definitionable = (*Definition)(nil)
+
+// isDefinition marks Definition — and, by embedding promotion, its
+// subclasses — as a member of the Definition hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Definition) isDefinition() {}
+
+var _ DefinitionProvider = (*Definition)(nil)

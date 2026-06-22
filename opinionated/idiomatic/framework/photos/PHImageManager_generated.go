@@ -6,15 +6,18 @@ package photos
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that facilitates retrieving or generating preview thumbnails and asset data.
-//
 // ImageManager is an idiomatic wrapper over the Objective-C class PHImageManager.
+//
+// ImageManager is an abstract base — you do not construct it directly. Construct one of [CachingImageManager] and pass it where a ImageManager is accepted.
+//
+// An object that facilitates retrieving or generating preview thumbnails and asset data.
 type ImageManager struct {
 	objref.Handle
 }
@@ -25,7 +28,8 @@ func ImageManagerFromID(id objc.ID) *ImageManager {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +42,8 @@ func imageManagerAdopt(id objc.ID) *ImageManager {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageManager{Handle: objref.Wrap(id)}
+	x := &ImageManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,30 +63,42 @@ func (x *ImageManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewImageManager creates a new ImageManager.
-func NewImageManager() *ImageManager {
-	_id := objc.Send[objc.ID](objc.ID(_class("PHImageManager")), objc.RegisterName("new"))
-	return imageManagerAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ImageManager) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Cancels an asynchronous request
+// RequestImageForAssetTargetSizeContentModeOptionsResultHandler requests an image representation for the specified asset.
+func (x *ImageManager) RequestImageForAssetTargetSizeContentModeOptionsResultHandler(asset *Asset, targetSize corefoundation.CGSize, contentMode ImageContentMode, options *ImageRequestOptions, resultHandler func(obj.Object, obj.Object)) int32 {
+	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("requestImageForAsset:targetSize:contentMode:options:resultHandler:"), objref.IDOf(asset), targetSize, contentMode, objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { resultHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return _r
+}
+
+// CancelImageRequest cancels an asynchronous request
 func (x *ImageManager) CancelImageRequest(requestID int32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelImageRequest:"), requestID)
 }
 
-// Requests a representation of the video asset for playback, to be loaded asynchronously.
+// RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler requests a Live Photo representation for the specified asset.
+func (x *ImageManager) RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler(asset *Asset, targetSize corefoundation.CGSize, contentMode ImageContentMode, options *LivePhotoRequestOptions, resultHandler func(obj.Object, obj.Object)) int32 {
+	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("requestLivePhotoForAsset:targetSize:contentMode:options:resultHandler:"), objref.IDOf(asset), targetSize, contentMode, objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { resultHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return _r
+}
+
+// RequestPlayerItemForVideoOptionsResultHandler requests a representation of the video asset for playback, to be loaded asynchronously.
 func (x *ImageManager) RequestPlayerItemForVideoOptionsResultHandler(asset *Asset, options *VideoRequestOptions, resultHandler func(obj.Object, obj.Object)) int32 {
 	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("requestPlayerItemForVideo:options:resultHandler:"), objref.IDOf(asset), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { resultHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return _r
 }
 
-// Requests an export session for writing the video asset’s data to a file, to be loaded asynchronously.
+// RequestExportSessionForVideoOptionsExportPresetResultHandler requests an export session for writing the video asset’s data to a file, to be loaded asynchronously.
 func (x *ImageManager) RequestExportSessionForVideoOptionsExportPresetResultHandler(asset *Asset, options *VideoRequestOptions, exportPreset string, resultHandler func(obj.Object, obj.Object)) int32 {
 	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("requestExportSessionForVideo:options:exportPreset:resultHandler:"), objref.IDOf(asset), objref.IDOf(options), purego.NSString(exportPreset), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { resultHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return _r
 }
 
-// Requests AVFoundation objects representing the video asset’s content and state, to be loaded asynchronously.
+// RequestAVAssetForVideoOptionsResultHandler requests AVFoundation objects representing the video asset’s content and state, to be loaded asynchronously.
 func (x *ImageManager) RequestAVAssetForVideoOptionsResultHandler(asset *Asset, options *VideoRequestOptions, resultHandler func(obj.Object, obj.Object, obj.Object)) int32 {
 	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("requestAVAssetForVideo:options:resultHandler:"), objref.IDOf(asset), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID) {
 		resultHandler(obj.Wrap(_b0), obj.Wrap(_b1), obj.Wrap(_b2))
@@ -92,10 +109,19 @@ func (x *ImageManager) RequestAVAssetForVideoOptionsResultHandler(asset *Asset, 
 // ImageManagerable is the interface implemented by [ImageManager], for mocking and DI.
 type ImageManagerable interface {
 	obj.Object
+	RequestImageForAssetTargetSizeContentModeOptionsResultHandler(asset *Asset, targetSize corefoundation.CGSize, contentMode ImageContentMode, options *ImageRequestOptions, resultHandler func(obj.Object, obj.Object)) int32
 	CancelImageRequest(requestID int32)
+	RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler(asset *Asset, targetSize corefoundation.CGSize, contentMode ImageContentMode, options *LivePhotoRequestOptions, resultHandler func(obj.Object, obj.Object)) int32
 	RequestPlayerItemForVideoOptionsResultHandler(asset *Asset, options *VideoRequestOptions, resultHandler func(obj.Object, obj.Object)) int32
 	RequestExportSessionForVideoOptionsExportPresetResultHandler(asset *Asset, options *VideoRequestOptions, exportPreset string, resultHandler func(obj.Object, obj.Object)) int32
 	RequestAVAssetForVideoOptionsResultHandler(asset *Asset, options *VideoRequestOptions, resultHandler func(obj.Object, obj.Object, obj.Object)) int32
 }
 
 var _ ImageManagerable = (*ImageManager)(nil)
+
+// isImageManager marks ImageManager — and, by embedding promotion, its
+// subclasses — as a member of the ImageManager hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ImageManager) isImageManager() {}
+
+var _ ImageManagerProvider = (*ImageManager)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The details of an introductory offer or a promotional offer for an auto-renewable subscription.
-//
 // ProductDiscount is an idiomatic wrapper over the Objective-C class SKProductDiscount.
+//
+// The details of an introductory offer or a promotional offer for an auto-renewable subscription.
 type ProductDiscount struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ProductDiscountFromID(id objc.ID) *ProductDiscount {
 	if id == 0 {
 		return nil
 	}
-	x := &ProductDiscount{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ProductDiscount{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func productDiscountAdopt(id objc.ID) *ProductDiscount {
 	if id == 0 {
 		return nil
 	}
-	x := &ProductDiscount{Handle: objref.Wrap(id)}
+	x := &ProductDiscount{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,31 @@ func (x *ProductDiscount) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ProductDiscount) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewProductDiscount creates a new ProductDiscount.
 func NewProductDiscount() *ProductDiscount {
 	_id := objc.Send[objc.ID](objc.ID(_class("SKProductDiscount")), objc.RegisterName("new"))
 	return productDiscountAdopt(_id)
 }
 
+// Price wraps the corresponding Objective-C method.
 func (x *ProductDiscount) Price() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("price"))
 	return obj.Wrap(_r)
 }
 
+// PriceLocale wraps the corresponding Objective-C method.
 func (x *ProductDiscount) PriceLocale() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("priceLocale"))
 	return obj.Wrap(_r)
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *ProductDiscount) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -82,21 +93,25 @@ func (x *ProductDiscount) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// SubscriptionPeriod wraps the corresponding Objective-C method.
 func (x *ProductDiscount) SubscriptionPeriod() *ProductSubscriptionPeriod {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptionPeriod"))
 	return ProductSubscriptionPeriodFromID(_r)
 }
 
+// NumberOfPeriods wraps the corresponding Objective-C method.
 func (x *ProductDiscount) NumberOfPeriods() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfPeriods"))
 	return _r
 }
 
+// PaymentMode wraps the corresponding Objective-C method.
 func (x *ProductDiscount) PaymentMode() ProductDiscountPaymentMode {
 	_r := objc.Send[ProductDiscountPaymentMode](objref.IDOf(x), objc.RegisterName("paymentMode"))
 	return _r
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *ProductDiscount) Type() ProductDiscountType {
 	_r := objc.Send[ProductDiscountType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r

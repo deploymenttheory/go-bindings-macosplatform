@@ -12,11 +12,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the first action sent to an app when the user shares a collaboration.
-//
 // StartCollaborationAction is an idiomatic wrapper over the Objective-C class SWStartCollaborationAction.
+//
+// It embeds [Action], promoting that type's methods.
+//
+// An object that represents the first action sent to an app when the user shares a collaboration.
 type StartCollaborationAction struct {
-	objref.Handle
+	Action
 }
 
 // StartCollaborationActionFromID adopts an existing Objective-C object as a StartCollaborationAction
@@ -25,7 +27,8 @@ func StartCollaborationActionFromID(id objc.ID) *StartCollaborationAction {
 	if id == 0 {
 		return nil
 	}
-	x := &StartCollaborationAction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StartCollaborationAction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func startCollaborationActionAdopt(id objc.ID) *StartCollaborationAction {
 	if id == 0 {
 		return nil
 	}
-	x := &StartCollaborationAction{Handle: objref.Wrap(id)}
+	x := &StartCollaborationAction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *StartCollaborationAction) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StartCollaborationAction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StartCollaborationAction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewStartCollaborationAction creates a new StartCollaborationAction.
@@ -64,11 +53,12 @@ func NewStartCollaborationAction() *StartCollaborationAction {
 	return startCollaborationActionAdopt(_id)
 }
 
-// Informs an app to set up the universal link and device independent identifier to provide to the system.
+// FulfillUsingURLCollaborationIdentifier informs an app to set up the universal link and device independent identifier to provide to the system.
 func (x *StartCollaborationAction) FulfillUsingURLCollaborationIdentifier(url string, collaborationIdentifier obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fulfillUsingURL:collaborationIdentifier:"), rt.FileURL(url), objref.IDOf(collaborationIdentifier))
 }
 
+// CollaborationMetadata wraps the corresponding Objective-C method.
 func (x *StartCollaborationAction) CollaborationMetadata() *CollaborationMetadata {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collaborationMetadata"))
 	return CollaborationMetadataFromID(_r)
@@ -82,3 +72,5 @@ type StartCollaborationActionable interface {
 }
 
 var _ StartCollaborationActionable = (*StartCollaborationAction)(nil)
+
+var _ ActionProvider = (*StartCollaborationAction)(nil)

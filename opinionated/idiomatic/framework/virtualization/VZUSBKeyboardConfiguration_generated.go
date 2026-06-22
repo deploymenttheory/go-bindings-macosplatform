@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A device that defines the configuration for a USB keyboard.
-//
 // USBKeyboardConfiguration is an idiomatic wrapper over the Objective-C class VZUSBKeyboardConfiguration.
+//
+// It embeds [KeyboardConfiguration], promoting that type's methods.
+//
+// A device that defines the configuration for a USB keyboard.
 type USBKeyboardConfiguration struct {
-	objref.Handle
+	KeyboardConfiguration
 }
 
 // USBKeyboardConfigurationFromID adopts an existing Objective-C object as a USBKeyboardConfiguration
@@ -25,7 +26,8 @@ func USBKeyboardConfigurationFromID(id objc.ID) *USBKeyboardConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &USBKeyboardConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &USBKeyboardConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func uSBKeyboardConfigurationAdopt(id objc.ID) *USBKeyboardConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &USBKeyboardConfiguration{Handle: objref.Wrap(id)}
+	x := &USBKeyboardConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *USBKeyboardConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *USBKeyboardConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *USBKeyboardConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUSBKeyboardConfiguration creates a new USBKeyboardConfiguration.
@@ -70,3 +58,5 @@ type USBKeyboardConfigurationable interface {
 }
 
 var _ USBKeyboardConfigurationable = (*USBKeyboardConfiguration)(nil)
+
+var _ KeyboardConfigurationProvider = (*USBKeyboardConfiguration)(nil)

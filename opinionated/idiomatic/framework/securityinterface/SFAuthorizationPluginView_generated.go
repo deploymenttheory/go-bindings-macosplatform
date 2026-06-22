@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Allows authorization plug-in developers to create a custom view their plug-in can display.
-//
 // AuthorizationPluginView is an idiomatic wrapper over the Objective-C class SFAuthorizationPluginView.
+//
+// Allows authorization plug-in developers to create a custom view their plug-in can display.
 type AuthorizationPluginView struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationPluginViewFromID(id objc.ID) *AuthorizationPluginView {
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPluginView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationPluginView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationPluginViewAdopt(id objc.ID) *AuthorizationPluginView {
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPluginView{Handle: objref.Wrap(id)}
+	x := &AuthorizationPluginView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,72 +60,78 @@ func (x *AuthorizationPluginView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationPluginView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAuthorizationPluginView creates a new AuthorizationPluginView.
 func NewAuthorizationPluginView() *AuthorizationPluginView {
 	_id := objc.Send[objc.ID](objc.ID(_class("SFAuthorizationPluginView")), objc.RegisterName("new"))
 	return authorizationPluginViewAdopt(_id)
 }
 
-// Tells the authorization plug-in that the user pressed a button in the custom view.
+// ButtonPressed tells the authorization plug-in that the user pressed a button in the custom view.
 func (x *AuthorizationPluginView) ButtonPressed(inButtonType ButtonType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonPressed:"), inButtonType)
 }
 
-// Tells the authorization plug-in when its user interface has become active.
+// DidActivate tells the authorization plug-in when its user interface has become active.
 func (x *AuthorizationPluginView) DidActivate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didActivate"))
 }
 
-// Tells the authorization plug-in that its user interface is about to be made active by the Apple-provided Security Agent.
+// WillActivateWithUser tells the authorization plug-in that its user interface is about to be made active by the Apple-provided Security Agent.
 func (x *AuthorizationPluginView) WillActivateWithUser(inUserInformation obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willActivateWithUser:"), objref.IDOf(inUserInformation))
 }
 
-// Tells the authorization plug-in that its user interface has been deactivated.
+// DidDeactivate tells the authorization plug-in that its user interface has been deactivated.
 func (x *AuthorizationPluginView) DidDeactivate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didDeactivate"))
 }
 
-// Returns the first view in the keyboard loop of the view.
+// FirstKeyView returns the first view in the keyboard loop of the view.
 func (x *AuthorizationPluginView) FirstKeyView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstKeyView"))
 	return obj.Wrap(_r)
 }
 
-// Returns the view that should get focus for keyboard events.
+// FirstResponder returns the view that should get focus for keyboard events.
 func (x *AuthorizationPluginView) FirstResponder() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstResponder"))
 	return obj.Wrap(_r)
 }
 
-// Returns the last view in the keyboard loop of the view.
+// LastKeyView returns the last view in the keyboard loop of the view.
 func (x *AuthorizationPluginView) LastKeyView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastKeyView"))
 	return obj.Wrap(_r)
 }
 
-// Enables or disables the controls in the authorization plug-in’s view.
+// SetEnabled enables or disables the controls in the authorization plug-in’s view.
 func (x *AuthorizationPluginView) SetEnabled(inEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), inEnabled)
 }
 
-// Returns the appropriate view object for the specified view type.
+// ViewForType returns the appropriate view object for the specified view type.
 func (x *AuthorizationPluginView) ViewForType(inType ViewType) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewForType:"), inType)
 	return obj.Wrap(_r)
 }
 
-// Displays the user interface provided by the authorization plug-in view subclass.
+// DisplayView displays the user interface provided by the authorization plug-in view subclass.
 func (x *AuthorizationPluginView) DisplayView() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayView"))
 }
 
-// Enables or disables a button in the authorization plug-in’s user interface.
+// SetButtonEnabled enables or disables a button in the authorization plug-in’s user interface.
 func (x *AuthorizationPluginView) SetButtonEnabled(inButtonType ButtonType, inEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButton:enabled:"), inButtonType, inEnabled)
 }
 
-// Tells the authorization plug-in to get and display the appropriate view in the authorization plug-in’s user interface.
+// UpdateView tells the authorization plug-in to get and display the appropriate view in the authorization plug-in’s user interface.
 func (x *AuthorizationPluginView) UpdateView() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateView"))
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A Quick Look preview request that indicates the content to preview.
-//
 // FilePreviewRequest is an idiomatic wrapper over the Objective-C class QLFilePreviewRequest.
+//
+// A Quick Look preview request that indicates the content to preview.
 type FilePreviewRequest struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FilePreviewRequestFromID(id objc.ID) *FilePreviewRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &FilePreviewRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FilePreviewRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func filePreviewRequestAdopt(id objc.ID) *FilePreviewRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &FilePreviewRequest{Handle: objref.Wrap(id)}
+	x := &FilePreviewRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *FilePreviewRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FilePreviewRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFilePreviewRequest creates a new FilePreviewRequest.
 func NewFilePreviewRequest() *FilePreviewRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("QLFilePreviewRequest")), objc.RegisterName("new"))
 	return filePreviewRequestAdopt(_id)
 }
 
+// FileURL wraps the corresponding Objective-C method.
 func (x *FilePreviewRequest) FileURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileURL"))
 	return obj.Wrap(_r)

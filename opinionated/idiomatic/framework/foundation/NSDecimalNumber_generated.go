@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object for representing and performing arithmetic on base-10 numbers.
-//
 // DecimalNumber is an idiomatic wrapper over the Objective-C class NSDecimalNumber.
+//
+// It embeds [Number], promoting that type's methods.
+//
+// An object for representing and performing arithmetic on base-10 numbers.
 type DecimalNumber struct {
-	objref.Handle
+	Number
 }
 
 // DecimalNumberFromID adopts an existing Objective-C object as a DecimalNumber
@@ -25,7 +26,8 @@ func DecimalNumberFromID(id objc.ID) *DecimalNumber {
 	if id == 0 {
 		return nil
 	}
-	x := &DecimalNumber{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DecimalNumber{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,90 +40,70 @@ func decimalNumberAdopt(id objc.ID) *DecimalNumber {
 	if id == 0 {
 		return nil
 	}
-	x := &DecimalNumber{Handle: objref.Wrap(id)}
+	x := &DecimalNumber{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *DecimalNumber) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DecimalNumber) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DecimalNumber) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a decimal number using the given mantissa, exponent, and sign.
-//
-// NewDecimalNumberWithMantissaExponentIsNegative creates a new DecimalNumber.
+// NewDecimalNumberWithMantissaExponentIsNegative initializes a decimal number using the given mantissa, exponent, and sign.
 func NewDecimalNumberWithMantissaExponentIsNegative(mantissa uint64, exponent int16, flag bool) *DecimalNumber {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMantissa:exponent:isNegative:"), mantissa, exponent, flag)
 	return decimalNumberAdopt(_id)
 }
 
-// Initializes a decimal number so that its value is equivalent to that in a given numeric string.
-//
-// NewDecimalNumberWithString creates a new DecimalNumber.
+// NewDecimalNumberWithString initializes a decimal number so that its value is equivalent to that in a given numeric string.
 func NewDecimalNumberWithString(numberValue string) *DecimalNumber {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(numberValue))
 	return decimalNumberAdopt(_id)
 }
 
-// Initializes a decimal number so that its value is equivalent to that in a given numeric string, interpreted using a given locale.
-//
-// NewDecimalNumberWithStringLocale creates a new DecimalNumber.
+// NewDecimalNumberWithStringLocale initializes a decimal number so that its value is equivalent to that in a given numeric string, interpreted using a given locale.
 func NewDecimalNumberWithStringLocale(numberValue string, locale obj.Object) *DecimalNumber {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:locale:"), purego.NSString(numberValue), objref.IDOf(locale))
 	return decimalNumberAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *DecimalNumber) WithScriptingProperties(scriptingProperties obj.Object) *DecimalNumber {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Adds this number to another given number.
+// DecimalNumberByAdding adds this number to another given number.
 func (x *DecimalNumber) DecimalNumberByAdding(decimalNumber *DecimalNumber) *DecimalNumber {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalNumberByAdding:"), objref.IDOf(decimalNumber))
 	return DecimalNumberFromID(_r)
 }
 
-// Subtracts another given number from this one.
+// DecimalNumberBySubtracting subtracts another given number from this one.
 func (x *DecimalNumber) DecimalNumberBySubtracting(decimalNumber *DecimalNumber) *DecimalNumber {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalNumberBySubtracting:"), objref.IDOf(decimalNumber))
 	return DecimalNumberFromID(_r)
 }
 
-// Multiplies the number by another given number.
+// DecimalNumberByMultiplyingBy multiplies the number by another given number.
 func (x *DecimalNumber) DecimalNumberByMultiplyingBy(decimalNumber *DecimalNumber) *DecimalNumber {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalNumberByMultiplyingBy:"), objref.IDOf(decimalNumber))
 	return DecimalNumberFromID(_r)
 }
 
-// Divides the number by another given number.
+// DecimalNumberByDividingBy divides the number by another given number.
 func (x *DecimalNumber) DecimalNumberByDividingBy(decimalNumber *DecimalNumber) *DecimalNumber {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalNumberByDividingBy:"), objref.IDOf(decimalNumber))
 	return DecimalNumberFromID(_r)
 }
 
-// Raises the number to a given power.
+// DecimalNumberByRaisingToPower raises the number to a given power.
 func (x *DecimalNumber) DecimalNumberByRaisingToPower(power int) *DecimalNumber {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalNumberByRaisingToPower:"), power)
 	return DecimalNumberFromID(_r)
 }
 
-// Multiplies the number by 10 raised to the given power.
+// DecimalNumberByMultiplyingByPowerOf10 multiplies the number by 10 raised to the given power.
 func (x *DecimalNumber) DecimalNumberByMultiplyingByPowerOf10(power int16) *DecimalNumber {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalNumberByMultiplyingByPowerOf10:"), power)
 	return DecimalNumberFromID(_r)
@@ -140,3 +122,7 @@ type DecimalNumberable interface {
 }
 
 var _ DecimalNumberable = (*DecimalNumber)(nil)
+
+var _ NumberProvider = (*DecimalNumber)(nil)
+
+var _ ValueProvider = (*DecimalNumber)(nil)

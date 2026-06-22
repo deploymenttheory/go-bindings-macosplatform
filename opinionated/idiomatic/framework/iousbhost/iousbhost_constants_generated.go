@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// NSErrorDomain for IOUSBHostFamily. Error codes are IOKit IOReturn codes.
 // IOUSBHostErrorDomain returns the string constant IOUSBHostErrorDomain, for use as a dictionary key or argument.
 func IOUSBHostErrorDomain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostErrorDomain")))

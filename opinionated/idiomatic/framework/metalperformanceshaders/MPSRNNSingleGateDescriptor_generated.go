@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of a simple recurrent block or layer.
-//
 // RNNSingleGateDescriptor is an idiomatic wrapper over the Objective-C class MPSRNNSingleGateDescriptor.
+//
+// It embeds [RNNDescriptor], promoting that type's methods.
+//
+// A description of a simple recurrent block or layer.
 type RNNSingleGateDescriptor struct {
-	objref.Handle
+	RNNDescriptor
 }
 
 // RNNSingleGateDescriptorFromID adopts an existing Objective-C object as a RNNSingleGateDescriptor
@@ -25,7 +26,8 @@ func RNNSingleGateDescriptorFromID(id objc.ID) *RNNSingleGateDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &RNNSingleGateDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RNNSingleGateDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func rNNSingleGateDescriptorAdopt(id objc.ID) *RNNSingleGateDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &RNNSingleGateDescriptor{Handle: objref.Wrap(id)}
+	x := &RNNSingleGateDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RNNSingleGateDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RNNSingleGateDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RNNSingleGateDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRNNSingleGateDescriptor creates a new RNNSingleGateDescriptor.
@@ -64,33 +52,25 @@ func NewRNNSingleGateDescriptor() *RNNSingleGateDescriptor {
 	return rNNSingleGateDescriptorAdopt(_id)
 }
 
-// The number of feature channels per pixel in the input image or number of rows in the input matrix.
-//
-// WithInputFeatureChannels sets inputFeatureChannels and returns the receiver so calls can be chained.
+// WithInputFeatureChannels the number of feature channels per pixel in the input image or number of rows in the input matrix.
 func (x *RNNSingleGateDescriptor) WithInputFeatureChannels(inputFeatureChannels int) *RNNSingleGateDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputFeatureChannels:"), inputFeatureChannels)
 	return x
 }
 
-// The number of feature channels per pixel in the destination image or number of rows in the destination matrix.
-//
-// WithOutputFeatureChannels sets outputFeatureChannels and returns the receiver so calls can be chained.
+// WithOutputFeatureChannels the number of feature channels per pixel in the destination image or number of rows in the destination matrix.
 func (x *RNNSingleGateDescriptor) WithOutputFeatureChannels(outputFeatureChannels int) *RNNSingleGateDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFeatureChannels:"), outputFeatureChannels)
 	return x
 }
 
-// if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in
-//
-// WithUseLayerInputUnitTransformMode sets useLayerInputUnitTransformMode and returns the receiver so calls can be chained.
+// WithUseLayerInputUnitTransformMode if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in
 func (x *RNNSingleGateDescriptor) WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *RNNSingleGateDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseLayerInputUnitTransformMode:"), useLayerInputUnitTransformMode)
 	return x
 }
 
-// If YES, then
-//
-// WithUseFloat32Weights sets useFloat32Weights and returns the receiver so calls can be chained.
+// WithUseFloat32Weights if YES, then
 func (x *RNNSingleGateDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *RNNSingleGateDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseFloat32Weights:"), useFloat32Weights)
 	return x
@@ -106,3 +86,5 @@ type RNNSingleGateDescriptorable interface {
 }
 
 var _ RNNSingleGateDescriptorable = (*RNNSingleGateDescriptor)(nil)
+
+var _ RNNDescriptorProvider = (*RNNSingleGateDescriptor)(nil)

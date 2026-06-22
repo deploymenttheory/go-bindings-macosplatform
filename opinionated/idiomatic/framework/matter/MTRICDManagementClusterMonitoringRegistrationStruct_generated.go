@@ -23,7 +23,8 @@ func MTRICDManagementClusterMonitoringRegistrationStructFromID(id objc.ID) *MTRI
 	if id == 0 {
 		return nil
 	}
-	x := &MTRICDManagementClusterMonitoringRegistrationStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRICDManagementClusterMonitoringRegistrationStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRICDManagementClusterMonitoringRegistrationStructAdopt(id objc.ID) *MTRIC
 	if id == 0 {
 		return nil
 	}
-	x := &MTRICDManagementClusterMonitoringRegistrationStruct{Handle: objref.Wrap(id)}
+	x := &MTRICDManagementClusterMonitoringRegistrationStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,68 +58,82 @@ func (x *MTRICDManagementClusterMonitoringRegistrationStruct) IsKind(className s
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRICDManagementClusterMonitoringRegistrationStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRICDManagementClusterMonitoringRegistrationStruct creates a new MTRICDManagementClusterMonitoringRegistrationStruct.
 func NewMTRICDManagementClusterMonitoringRegistrationStruct() *MTRICDManagementClusterMonitoringRegistrationStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRICDManagementClusterMonitoringRegistrationStruct")), objc.RegisterName("new"))
 	return mTRICDManagementClusterMonitoringRegistrationStructAdopt(_id)
 }
 
-// WithCheckInNodeID sets checkInNodeID and returns the receiver so calls can be chained.
+// WithCheckInNodeID sets the property and returns the receiver so calls can be chained.
 func (x *MTRICDManagementClusterMonitoringRegistrationStruct) WithCheckInNodeID(checkInNodeID obj.Object) *MTRICDManagementClusterMonitoringRegistrationStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCheckInNodeID:"), objref.IDOf(checkInNodeID))
 	return x
 }
 
-// WithMonitoredSubject sets monitoredSubject and returns the receiver so calls can be chained.
+// WithMonitoredSubject sets the property and returns the receiver so calls can be chained.
 func (x *MTRICDManagementClusterMonitoringRegistrationStruct) WithMonitoredSubject(monitoredSubject obj.Object) *MTRICDManagementClusterMonitoringRegistrationStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMonitoredSubject:"), objref.IDOf(monitoredSubject))
 	return x
 }
 
-// WithClientType sets clientType and returns the receiver so calls can be chained.
+// WithClientType sets the property and returns the receiver so calls can be chained.
 func (x *MTRICDManagementClusterMonitoringRegistrationStruct) WithClientType(clientType obj.Object) *MTRICDManagementClusterMonitoringRegistrationStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClientType:"), objref.IDOf(clientType))
 	return x
 }
 
-// WithFabricIndex sets fabricIndex and returns the receiver so calls can be chained.
+// WithFabricIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRICDManagementClusterMonitoringRegistrationStruct) WithFabricIndex(fabricIndex obj.Object) *MTRICDManagementClusterMonitoringRegistrationStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return x
 }
 
+// CheckInNodeID wraps the corresponding Objective-C method.
 func (x *MTRICDManagementClusterMonitoringRegistrationStruct) CheckInNodeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("checkInNodeID"))
 	return obj.Wrap(_r)
 }
 
+// SetCheckInNodeID wraps the corresponding Objective-C method.
 func (x *MTRICDManagementClusterMonitoringRegistrationStruct) SetCheckInNodeID(checkInNodeID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCheckInNodeID:"), objref.IDOf(checkInNodeID))
 }
 
+// MonitoredSubject wraps the corresponding Objective-C method.
 func (x *MTRICDManagementClusterMonitoringRegistrationStruct) MonitoredSubject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("monitoredSubject"))
 	return obj.Wrap(_r)
 }
 
+// SetMonitoredSubject wraps the corresponding Objective-C method.
 func (x *MTRICDManagementClusterMonitoringRegistrationStruct) SetMonitoredSubject(monitoredSubject obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMonitoredSubject:"), objref.IDOf(monitoredSubject))
 }
 
+// ClientType wraps the corresponding Objective-C method.
 func (x *MTRICDManagementClusterMonitoringRegistrationStruct) ClientType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientType"))
 	return obj.Wrap(_r)
 }
 
+// SetClientType wraps the corresponding Objective-C method.
 func (x *MTRICDManagementClusterMonitoringRegistrationStruct) SetClientType(clientType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClientType:"), objref.IDOf(clientType))
 }
 
+// FabricIndex wraps the corresponding Objective-C method.
 func (x *MTRICDManagementClusterMonitoringRegistrationStruct) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)
 }
 
+// SetFabricIndex wraps the corresponding Objective-C method.
 func (x *MTRICDManagementClusterMonitoringRegistrationStruct) SetFabricIndex(fabricIndex obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 }

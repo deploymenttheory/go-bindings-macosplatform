@@ -6,17 +6,20 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that clamps the return value to an upper specified value.
-//
 // ImageThresholdTruncate is an idiomatic wrapper over the Objective-C class MPSImageThresholdTruncate.
+//
+// It embeds [UnaryImageKernel], promoting that type's methods.
+//
+// A filter that clamps the return value to an upper specified value.
 type ImageThresholdTruncate struct {
-	objref.Handle
+	UnaryImageKernel
 }
 
 // ImageThresholdTruncateFromID adopts an existing Objective-C object as a ImageThresholdTruncate
@@ -25,7 +28,8 @@ func ImageThresholdTruncateFromID(id objc.ID) *ImageThresholdTruncate {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageThresholdTruncate{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageThresholdTruncate{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func imageThresholdTruncateAdopt(id objc.ID) *ImageThresholdTruncate {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageThresholdTruncate{Handle: objref.Wrap(id)}
+	x := &ImageThresholdTruncate{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ImageThresholdTruncate) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageThresholdTruncate) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageThresholdTruncate) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewImageThresholdTruncate creates a new ImageThresholdTruncate.
@@ -64,15 +54,25 @@ func NewImageThresholdTruncate() *ImageThresholdTruncate {
 	return imageThresholdTruncateAdopt(_id)
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
+func (x *ImageThresholdTruncate) WithOffset(offset mpscore.MPSOffset) *ImageThresholdTruncate {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (x *ImageThresholdTruncate) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdTruncate {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
+// WithLabel the string that identifies the kernel.
 func (x *ImageThresholdTruncate) WithLabel(label string) *ImageThresholdTruncate {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The threshold value used to init the threshold filter
+// ThresholdValue the threshold value used to init the threshold filter
 func (x *ImageThresholdTruncate) ThresholdValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("thresholdValue"))
 	return _r
@@ -81,8 +81,14 @@ func (x *ImageThresholdTruncate) ThresholdValue() float32 {
 // ImageThresholdTruncateable is the interface implemented by [ImageThresholdTruncate], for mocking and DI.
 type ImageThresholdTruncateable interface {
 	obj.Object
+	WithOffset(offset mpscore.MPSOffset) *ImageThresholdTruncate
+	WithClipRect(clipRect metal.MTLRegion) *ImageThresholdTruncate
 	WithLabel(label string) *ImageThresholdTruncate
 	ThresholdValue() float32
 }
 
 var _ ImageThresholdTruncateable = (*ImageThresholdTruncate)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageThresholdTruncate)(nil)
+
+var _ KernelProvider = (*ImageThresholdTruncate)(nil)

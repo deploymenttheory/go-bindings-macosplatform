@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMHTMLButtonElement is an idiomatic wrapper over the Objective-C class DOMHTMLButtonElement.
+//
+// It embeds [DOMHTMLElement], promoting that type's methods.
 type DOMHTMLButtonElement struct {
-	objref.Handle
+	DOMHTMLElement
 }
 
 // DOMHTMLButtonElementFromID adopts an existing Objective-C object as a DOMHTMLButtonElement
@@ -23,7 +24,8 @@ func DOMHTMLButtonElementFromID(id objc.ID) *DOMHTMLButtonElement {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMHTMLButtonElement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMHTMLButtonElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMHTMLButtonElementAdopt(id objc.ID) *DOMHTMLButtonElement {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMHTMLButtonElement{Handle: objref.Wrap(id)}
+	x := &DOMHTMLButtonElement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMHTMLButtonElement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMHTMLButtonElement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMHTMLButtonElement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMHTMLButtonElement creates a new DOMHTMLButtonElement.
@@ -62,161 +50,167 @@ func NewDOMHTMLButtonElement() *DOMHTMLButtonElement {
 	return dOMHTMLButtonElementAdopt(_id)
 }
 
-// WithAutofocus sets autofocus and returns the receiver so calls can be chained.
+// WithAutofocus sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLButtonElement) WithAutofocus(autofocus bool) *DOMHTMLButtonElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutofocus:"), autofocus)
 	return x
 }
 
-// WithDisabled sets disabled and returns the receiver so calls can be chained.
+// WithDisabled sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLButtonElement) WithDisabled(disabled bool) *DOMHTMLButtonElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabled:"), disabled)
 	return x
 }
 
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithType sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLButtonElement) WithType(type_ string) *DOMHTMLButtonElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
 	return x
 }
 
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLButtonElement) WithName(name string) *DOMHTMLButtonElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLButtonElement) WithValue(value string) *DOMHTMLButtonElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 	return x
 }
 
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLButtonElement) WithTitle(title string) *DOMHTMLButtonElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// WithLang sets lang and returns the receiver so calls can be chained.
+// WithLang sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLButtonElement) WithLang(lang string) *DOMHTMLButtonElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return x
 }
 
-// WithDir sets dir and returns the receiver so calls can be chained.
+// WithDir sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLButtonElement) WithDir(dir string) *DOMHTMLButtonElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return x
 }
 
-// WithTabIndex sets tabIndex and returns the receiver so calls can be chained.
+// WithTabIndex sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLButtonElement) WithTabIndex(tabIndex int) *DOMHTMLButtonElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
 	return x
 }
 
-// WithAccessKey sets accessKey and returns the receiver so calls can be chained.
+// WithAccessKey sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLButtonElement) WithAccessKey(accessKey string) *DOMHTMLButtonElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return x
 }
 
-// WithInnerText sets innerText and returns the receiver so calls can be chained.
+// WithInnerText sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLButtonElement) WithInnerText(innerText string) *DOMHTMLButtonElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return x
 }
 
-// WithOuterText sets outerText and returns the receiver so calls can be chained.
+// WithOuterText sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLButtonElement) WithOuterText(outerText string) *DOMHTMLButtonElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return x
 }
 
-// WithContentEditable sets contentEditable and returns the receiver so calls can be chained.
+// WithContentEditable sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLButtonElement) WithContentEditable(contentEditable string) *DOMHTMLButtonElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return x
 }
 
-// WithIdName sets idName and returns the receiver so calls can be chained.
+// WithIdName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLButtonElement) WithIdName(idName string) *DOMHTMLButtonElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return x
 }
 
-// WithScrollLeft sets scrollLeft and returns the receiver so calls can be chained.
+// WithScrollLeft sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLButtonElement) WithScrollLeft(scrollLeft int) *DOMHTMLButtonElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return x
 }
 
-// WithScrollTop sets scrollTop and returns the receiver so calls can be chained.
+// WithScrollTop sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLButtonElement) WithScrollTop(scrollTop int) *DOMHTMLButtonElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
 	return x
 }
 
-// WithInnerHTML sets innerHTML and returns the receiver so calls can be chained.
+// WithInnerHTML sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLButtonElement) WithInnerHTML(innerHTML string) *DOMHTMLButtonElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return x
 }
 
-// WithOuterHTML sets outerHTML and returns the receiver so calls can be chained.
+// WithOuterHTML sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLButtonElement) WithOuterHTML(outerHTML string) *DOMHTMLButtonElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return x
 }
 
-// WithClassName sets className and returns the receiver so calls can be chained.
+// WithClassName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLButtonElement) WithClassName(className string) *DOMHTMLButtonElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return x
 }
 
-// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLButtonElement) WithNodeValue(nodeValue string) *DOMHTMLButtonElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets prefix and returns the receiver so calls can be chained.
+// WithPrefix sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLButtonElement) WithPrefix(prefix string) *DOMHTMLButtonElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets textContent and returns the receiver so calls can be chained.
+// WithTextContent sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLButtonElement) WithTextContent(textContent string) *DOMHTMLButtonElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
+// Autofocus wraps the corresponding Objective-C method.
 func (x *DOMHTMLButtonElement) Autofocus() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autofocus"))
 	return _r
 }
 
+// SetAutofocus wraps the corresponding Objective-C method.
 func (x *DOMHTMLButtonElement) SetAutofocus(autofocus bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutofocus:"), autofocus)
 }
 
+// Disabled wraps the corresponding Objective-C method.
 func (x *DOMHTMLButtonElement) Disabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("disabled"))
 	return _r
 }
 
+// SetDisabled wraps the corresponding Objective-C method.
 func (x *DOMHTMLButtonElement) SetDisabled(disabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabled:"), disabled)
 }
 
+// Form wraps the corresponding Objective-C method.
 func (x *DOMHTMLButtonElement) Form() *DOMHTMLFormElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("form"))
 	return DOMHTMLFormElementFromID(_r)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *DOMHTMLButtonElement) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
 	if _r == 0 {
@@ -225,10 +219,12 @@ func (x *DOMHTMLButtonElement) Type() string {
 	return purego.GoString(_r)
 }
 
+// SetType wraps the corresponding Objective-C method.
 func (x *DOMHTMLButtonElement) SetType(type_ string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *DOMHTMLButtonElement) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -237,10 +233,12 @@ func (x *DOMHTMLButtonElement) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *DOMHTMLButtonElement) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *DOMHTMLButtonElement) Value() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	if _r == 0 {
@@ -249,10 +247,12 @@ func (x *DOMHTMLButtonElement) Value() string {
 	return purego.GoString(_r)
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *DOMHTMLButtonElement) SetValue(value string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 }
 
+// WillValidate wraps the corresponding Objective-C method.
 func (x *DOMHTMLButtonElement) WillValidate() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("willValidate"))
 	return _r
@@ -298,3 +298,13 @@ type DOMHTMLButtonElementable interface {
 }
 
 var _ DOMHTMLButtonElementable = (*DOMHTMLButtonElement)(nil)
+
+var _ DOMHTMLElementProvider = (*DOMHTMLButtonElement)(nil)
+
+var _ DOMElementProvider = (*DOMHTMLButtonElement)(nil)
+
+var _ DOMNodeProvider = (*DOMHTMLButtonElement)(nil)
+
+var _ DOMObjectProvider = (*DOMHTMLButtonElement)(nil)
+
+var _ WebScriptObjectProvider = (*DOMHTMLButtonElement)(nil)

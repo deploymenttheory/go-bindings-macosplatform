@@ -10,13 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// A dynamic ordered collection of objects.
-//
 // MutableArray is an idiomatic wrapper over the Objective-C class NSMutableArray.
+//
+// It embeds [Array], promoting that type's methods.
+//
+// A dynamic ordered collection of objects.
 type MutableArray struct {
-	objref.Handle
+	Array
 }
 
 // MutableArrayFromID adopts an existing Objective-C object as a MutableArray
@@ -25,7 +28,8 @@ func MutableArrayFromID(id objc.ID) *MutableArray {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func mutableArrayAdopt(id objc.ID) *MutableArray {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableArray{Handle: objref.Wrap(id)}
+	x := &MutableArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MutableArray) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMutableArray creates a new MutableArray.
@@ -64,9 +54,7 @@ func NewMutableArray() *MutableArray {
 	return mutableArrayAdopt(_id)
 }
 
-// Returns an array, initialized with enough memory to initially hold a given number of objects.
-//
-// NewMutableArrayWithCapacity creates a new MutableArray.
+// NewMutableArrayWithCapacity returns an array, initialized with enough memory to initially hold a given number of objects.
 func NewMutableArrayWithCapacity(numItems int) *MutableArray {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableArray")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCapacity:"), numItems)
@@ -80,120 +68,124 @@ func NewMutableArrayWithCoder(coder *Coder) *MutableArray {
 	return mutableArrayAdopt(_id)
 }
 
-// Initializes a newly allocated mutable array with the contents of the file specified by a given path
-//
-// NewMutableArrayWithContentsOfFile creates a new MutableArray.
+// NewMutableArrayWithContentsOfFile initializes a newly allocated mutable array with the contents of the file specified by a given path
 func NewMutableArrayWithContentsOfFile(path string) *MutableArray {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableArray")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfFile:"), purego.NSString(path))
 	return mutableArrayAdopt(_id)
 }
 
-// Initialized a newly allocated mutable array with the contents of the location specified by a given URL.
-//
-// NewMutableArrayWithContentsOfURL creates a new MutableArray.
+// NewMutableArrayWithContentsOfURL initialized a newly allocated mutable array with the contents of the location specified by a given URL.
 func NewMutableArrayWithContentsOfURL(url string) *MutableArray {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableArray")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), rt.FileURL(url))
 	return mutableArrayAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *MutableArray) WithScriptingProperties(scriptingProperties obj.Object) *MutableArray {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Inserts a given object at the end of the array.
+// AddObject inserts a given object at the end of the array.
 func (x *MutableArray) AddObject(anObject obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObject:"), objref.IDOf(anObject))
 }
 
-// Inserts a given object into the array’s contents at a given index.
+// InsertObjectAtIndex inserts a given object into the array’s contents at a given index.
 func (x *MutableArray) InsertObjectAtIndex(anObject obj.Object, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertObject:atIndex:"), objref.IDOf(anObject), index)
 }
 
-// Removes the object with the highest-valued index in the array
+// RemoveLastObject removes the object with the highest-valued index in the array
 func (x *MutableArray) RemoveLastObject() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeLastObject"))
 }
 
-// Removes the object at index .
+// RemoveObjectAtIndex removes the object at index .
 func (x *MutableArray) RemoveObjectAtIndex(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectAtIndex:"), index)
 }
 
-// Replaces the object at index with anObject.
+// ReplaceObjectAtIndexWithObject replaces the object at index with anObject.
 func (x *MutableArray) ReplaceObjectAtIndexWithObject(index int, anObject obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceObjectAtIndex:withObject:"), index, objref.IDOf(anObject))
 }
 
-// Adds the objects contained in another given array to the end of the receiving array’s content.
+// AddObjectsFromArray adds the objects contained in another given array to the end of the receiving array’s content.
 func (x *MutableArray) AddObjectsFromArray(otherArray []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObjectsFromArray:"), purego.SliceToNSArray(otherArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Exchanges the objects in the array at given indexes.
+// ExchangeObjectAtIndexWithObjectAtIndex exchanges the objects in the array at given indexes.
 func (x *MutableArray) ExchangeObjectAtIndexWithObjectAtIndex(idx1 int, idx2 int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exchangeObjectAtIndex:withObjectAtIndex:"), idx1, idx2)
 }
 
-// Empties the array of all its elements.
+// RemoveAllObjects empties the array of all its elements.
 func (x *MutableArray) RemoveAllObjects() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllObjects"))
 }
 
-// Removes all occurrences in the array of a given object.
+// RemoveObject removes all occurrences in the array of a given object.
 func (x *MutableArray) RemoveObject(anObject obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObject:"), objref.IDOf(anObject))
 }
 
-// Removes all occurrences of a given object in the array.
+// RemoveObjectIdenticalTo removes all occurrences of a given object in the array.
 func (x *MutableArray) RemoveObjectIdenticalTo(anObject obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectIdenticalTo:"), objref.IDOf(anObject))
 }
 
-// Removes from the receiving array the objects in another given array.
+// RemoveObjectsFromIndicesNumIndices removes the specified number of objects from the array, beginning at the specified index.
+func (x *MutableArray) RemoveObjectsFromIndicesNumIndices(cnt int) (indices int) {
+	var _out0 int
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectsFromIndices:numIndices:"), unsafe.Pointer(&_out0), cnt)
+	return _out0
+}
+
+// RemoveObjectsInArray removes from the receiving array the objects in another given array.
 func (x *MutableArray) RemoveObjectsInArray(otherArray []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectsInArray:"), purego.SliceToNSArray(otherArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Sets the receiving array’s elements to those in another given array.
+// SetArray sets the receiving array’s elements to those in another given array.
 func (x *MutableArray) SetArray(otherArray []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArray:"), purego.SliceToNSArray(otherArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Inserts the objects in the provided array into the receiving array at the specified indexes.
+// InsertObjectsAtIndexes inserts the objects in the provided array into the receiving array at the specified indexes.
 func (x *MutableArray) InsertObjectsAtIndexes(objects []obj.Object, indexes *IndexSet) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertObjects:atIndexes:"), purego.SliceToNSArray(objects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(indexes))
 }
 
-// Removes the objects at the specified indexes from the array.
+// RemoveObjectsAtIndexes removes the objects at the specified indexes from the array.
 func (x *MutableArray) RemoveObjectsAtIndexes(indexes *IndexSet) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectsAtIndexes:"), objref.IDOf(indexes))
 }
 
-// Replaces the objects in the receiving array at locations specified with the objects from a given array.
+// ReplaceObjectsAtIndexesWithObjects replaces the objects in the receiving array at locations specified with the objects from a given array.
 func (x *MutableArray) ReplaceObjectsAtIndexesWithObjects(indexes *IndexSet, objects []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceObjectsAtIndexes:withObjects:"), objref.IDOf(indexes), purego.SliceToNSArray(objects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Replaces the object at the index with the new object, possibly adding the object.
+// SetObjectAtIndexedSubscript replaces the object at the index with the new object, possibly adding the object.
 func (x *MutableArray) SetObjectAtIndexedSubscript(obj_ obj.Object, idx int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(obj_), idx)
 }
 
+// ApplyDifference wraps the corresponding Objective-C method.
 func (x *MutableArray) ApplyDifference(difference obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyDifference:"), objref.IDOf(difference))
 }
 
-// Sorts the receiver using a given array of sort descriptors.
+// SortUsingDescriptors sorts the receiver using a given array of sort descriptors.
 func (x *MutableArray) SortUsingDescriptors(sortDescriptors []*SortDescriptor) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortUsingDescriptors:"), purego.SliceToNSArray(sortDescriptors, func(_v *SortDescriptor) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Evaluates a given predicate against the array’s content and leaves only objects that match.
+// FilterUsingPredicate evaluates a given predicate against the array’s content and leaves only objects that match.
 func (x *MutableArray) FilterUsingPredicate(predicate *Predicate) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterUsingPredicate:"), objref.IDOf(predicate))
 }
@@ -212,6 +204,7 @@ type MutableArrayable interface {
 	RemoveAllObjects()
 	RemoveObject(anObject obj.Object)
 	RemoveObjectIdenticalTo(anObject obj.Object)
+	RemoveObjectsFromIndicesNumIndices(cnt int) (indices int)
 	RemoveObjectsInArray(otherArray []obj.Object)
 	SetArray(otherArray []obj.Object)
 	InsertObjectsAtIndexes(objects []obj.Object, indexes *IndexSet)
@@ -224,3 +217,5 @@ type MutableArrayable interface {
 }
 
 var _ MutableArrayable = (*MutableArray)(nil)
+
+var _ ArrayProvider = (*MutableArray)(nil)

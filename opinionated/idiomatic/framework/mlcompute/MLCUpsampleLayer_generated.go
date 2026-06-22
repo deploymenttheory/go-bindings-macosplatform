@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that applies upsampling with the shape you specify.
-//
 // UpsampleLayer is an idiomatic wrapper over the Objective-C class MLCUpsampleLayer.
+//
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that applies upsampling with the shape you specify.
 type UpsampleLayer struct {
-	objref.Handle
+	Layer
 }
 
 // UpsampleLayerFromID adopts an existing Objective-C object as a UpsampleLayer
@@ -25,7 +26,8 @@ func UpsampleLayerFromID(id objc.ID) *UpsampleLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &UpsampleLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UpsampleLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func upsampleLayerAdopt(id objc.ID) *UpsampleLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &UpsampleLayer{Handle: objref.Wrap(id)}
+	x := &UpsampleLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UpsampleLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UpsampleLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UpsampleLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUpsampleLayer creates a new UpsampleLayer.
@@ -64,23 +52,19 @@ func NewUpsampleLayer() *UpsampleLayer {
 	return upsampleLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string that helps identify this layer.
 func (x *UpsampleLayer) WithLabel(label string) *UpsampleLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *UpsampleLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *UpsampleLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// A NSArray<NSNumber *> representing just the width if number of entries in shape array is 1 or the height followed by width of result tensor if the number of entries in shape array is 2.
+// Shape a NSArray<NSNumber *> representing just the width if number of entries in shape array is 1 or the height followed by width of result tensor if the number of entries in shape array is 2.
 //
 // Shape returns the collection as a Go slice.
 func (x *UpsampleLayer) Shape() []obj.Object {
@@ -88,13 +72,13 @@ func (x *UpsampleLayer) Shape() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The sampling mode to use when performing the upsample.
+// SampleMode the sampling mode to use when performing the upsample.
 func (x *UpsampleLayer) SampleMode() SampleMode {
 	_r := objc.Send[SampleMode](objref.IDOf(x), objc.RegisterName("sampleMode"))
 	return _r
 }
 
-// A boolean that specifies whether the corner pixels of the source and result tensors are aligned. If True, the corner pixels of the source and result tensors are aligned, and thus preserving the values at those pixels. This only has effect when mode is 'bilinear'. Default is NO.
+// AlignsCorners a boolean that specifies whether the corner pixels of the source and result tensors are aligned. If True, the corner pixels of the source and result tensors are aligned, and thus preserving the values at those pixels. This only has effect when mode is 'bilinear'. Default is NO.
 func (x *UpsampleLayer) AlignsCorners() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("alignsCorners"))
 	return _r
@@ -111,3 +95,5 @@ type UpsampleLayerable interface {
 }
 
 var _ UpsampleLayerable = (*UpsampleLayer)(nil)
+
+var _ LayerProvider = (*UpsampleLayer)(nil)

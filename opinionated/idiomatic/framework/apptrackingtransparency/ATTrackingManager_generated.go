@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that provides a tracking authorization request and the tracking authorization status of the app.
-//
 // TrackingManager is an idiomatic wrapper over the Objective-C class ATTrackingManager.
+//
+// A class that provides a tracking authorization request and the tracking authorization status of the app.
 type TrackingManager struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TrackingManagerFromID(id objc.ID) *TrackingManager {
 	if id == 0 {
 		return nil
 	}
-	x := &TrackingManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TrackingManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func trackingManagerAdopt(id objc.ID) *TrackingManager {
 	if id == 0 {
 		return nil
 	}
-	x := &TrackingManager{Handle: objref.Wrap(id)}
+	x := &TrackingManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *TrackingManager) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *TrackingManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TrackingManager) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewTrackingManager creates a new TrackingManager.

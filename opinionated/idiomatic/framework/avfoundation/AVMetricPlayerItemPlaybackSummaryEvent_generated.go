@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event that represents the combined metrics for the entire playback session.
-//
 // MetricPlayerItemPlaybackSummaryEvent is an idiomatic wrapper over the Objective-C class AVMetricPlayerItemPlaybackSummaryEvent.
+//
+// It embeds [MetricEvent], promoting that type's methods.
+//
+// An event that represents the combined metrics for the entire playback session.
 type MetricPlayerItemPlaybackSummaryEvent struct {
-	objref.Handle
+	MetricEvent
 }
 
 // MetricPlayerItemPlaybackSummaryEventFromID adopts an existing Objective-C object as a MetricPlayerItemPlaybackSummaryEvent
@@ -25,7 +26,8 @@ func MetricPlayerItemPlaybackSummaryEventFromID(id objc.ID) *MetricPlayerItemPla
 	if id == 0 {
 		return nil
 	}
-	x := &MetricPlayerItemPlaybackSummaryEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetricPlayerItemPlaybackSummaryEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func metricPlayerItemPlaybackSummaryEventAdopt(id objc.ID) *MetricPlayerItemPlay
 	if id == 0 {
 		return nil
 	}
-	x := &MetricPlayerItemPlaybackSummaryEvent{Handle: objref.Wrap(id)}
+	x := &MetricPlayerItemPlaybackSummaryEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MetricPlayerItemPlaybackSummaryEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetricPlayerItemPlaybackSummaryEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetricPlayerItemPlaybackSummaryEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMetricPlayerItemPlaybackSummaryEvent creates a new MetricPlayerItemPlaybackSummaryEvent.
@@ -64,61 +52,61 @@ func NewMetricPlayerItemPlaybackSummaryEvent() *MetricPlayerItemPlaybackSummaryE
 	return metricPlayerItemPlaybackSummaryEventAdopt(_id)
 }
 
-// Returns the error event if any. If no value is available, returns nil.
+// ErrorEvent returns the error event if any. If no value is available, returns nil.
 func (x *MetricPlayerItemPlaybackSummaryEvent) ErrorEvent() *MetricErrorEvent {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorEvent"))
 	return MetricErrorEventFromID(_r)
 }
 
-// Returns the total count of recoverable errors encountered during playback. If no errors were encountered, returns 0.
+// RecoverableErrorCount returns the total count of recoverable errors encountered during playback. If no errors were encountered, returns 0.
 func (x *MetricPlayerItemPlaybackSummaryEvent) RecoverableErrorCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("recoverableErrorCount"))
 	return _r
 }
 
-// Returns the total count of stalls encountered during playback. If no stalls were encountered, returns 0.
+// StallCount returns the total count of stalls encountered during playback. If no stalls were encountered, returns 0.
 func (x *MetricPlayerItemPlaybackSummaryEvent) StallCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stallCount"))
 	return _r
 }
 
-// Returns the total count of variant switch encountered during playback.
+// VariantSwitchCount returns the total count of variant switch encountered during playback.
 func (x *MetricPlayerItemPlaybackSummaryEvent) VariantSwitchCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("variantSwitchCount"))
 	return _r
 }
 
-// Returns the total duration of playback in seconds.
+// PlaybackDuration returns the total duration of playback in seconds.
 func (x *MetricPlayerItemPlaybackSummaryEvent) PlaybackDuration() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("playbackDuration"))
 	return _r
 }
 
-// Returns the total number of media requests performed by the player. This includes playlist requests, media segment requests, and content key requests.
+// MediaResourceRequestCount returns the total number of media requests performed by the player. This includes playlist requests, media segment requests, and content key requests.
 func (x *MetricPlayerItemPlaybackSummaryEvent) MediaResourceRequestCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("mediaResourceRequestCount"))
 	return _r
 }
 
-// Returns the total time spent recovering from a stall event.
+// TimeSpentRecoveringFromStall returns the total time spent recovering from a stall event.
 func (x *MetricPlayerItemPlaybackSummaryEvent) TimeSpentRecoveringFromStall() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeSpentRecoveringFromStall"))
 	return _r
 }
 
-// Returns the total time spent in initial startup of playback.
+// TimeSpentInInitialStartup returns the total time spent in initial startup of playback.
 func (x *MetricPlayerItemPlaybackSummaryEvent) TimeSpentInInitialStartup() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeSpentInInitialStartup"))
 	return _r
 }
 
-// Returns the playtime weighted average bitrate played in bits / second.
+// TimeWeightedAverageBitrate returns the playtime weighted average bitrate played in bits / second.
 func (x *MetricPlayerItemPlaybackSummaryEvent) TimeWeightedAverageBitrate() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("timeWeightedAverageBitrate"))
 	return _r
 }
 
-// Returns the playtime weighted peak bitrate played in bits / second.
+// TimeWeightedPeakBitrate returns the playtime weighted peak bitrate played in bits / second.
 func (x *MetricPlayerItemPlaybackSummaryEvent) TimeWeightedPeakBitrate() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("timeWeightedPeakBitrate"))
 	return _r
@@ -140,3 +128,5 @@ type MetricPlayerItemPlaybackSummaryEventable interface {
 }
 
 var _ MetricPlayerItemPlaybackSummaryEventable = (*MetricPlayerItemPlaybackSummaryEvent)(nil)
+
+var _ MetricEventProvider = (*MetricPlayerItemPlaybackSummaryEvent)(nil)

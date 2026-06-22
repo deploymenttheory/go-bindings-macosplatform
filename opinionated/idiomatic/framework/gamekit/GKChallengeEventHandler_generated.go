@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The GKChallengeEventHandler class is used to respond to events related to challenges sent or received by the local player.
-//
 // ChallengeEventHandler is an idiomatic wrapper over the Objective-C class GKChallengeEventHandler.
+//
+// The GKChallengeEventHandler class is used to respond to events related to challenges sent or received by the local player.
 type ChallengeEventHandler struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ChallengeEventHandlerFromID(id objc.ID) *ChallengeEventHandler {
 	if id == 0 {
 		return nil
 	}
-	x := &ChallengeEventHandler{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ChallengeEventHandler{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func challengeEventHandlerAdopt(id objc.ID) *ChallengeEventHandler {
 	if id == 0 {
 		return nil
 	}
-	x := &ChallengeEventHandler{Handle: objref.Wrap(id)}
+	x := &ChallengeEventHandler{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *ChallengeEventHandler) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *ChallengeEventHandler) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ChallengeEventHandler) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewChallengeEventHandler creates a new ChallengeEventHandler.

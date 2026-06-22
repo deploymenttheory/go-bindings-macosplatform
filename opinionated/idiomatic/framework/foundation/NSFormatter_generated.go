@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that declares an interface for objects that create, interpret, and validate the textual representation of values.
-//
 // Formatter is an idiomatic wrapper over the Objective-C class NSFormatter.
+//
+// Formatter is an abstract base — you do not construct it directly. Construct one of [ByteCountFormatter], [DateComponentsFormatter], [DateFormatter], [DateIntervalFormatter], [EnergyFormatter], [ISO8601DateFormatter], [LengthFormatter], [ListFormatter], [MassFormatter], [MeasurementFormatter], [NumberFormatter], [PersonNameComponentsFormatter], [RelativeDateTimeFormatter] and pass it where a Formatter is accepted.
+//
+// An abstract class that declares an interface for objects that create, interpret, and validate the textual representation of values.
 type Formatter struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func FormatterFromID(id objc.ID) *Formatter {
 	if id == 0 {
 		return nil
 	}
-	x := &Formatter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Formatter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func formatterAdopt(id objc.ID) *Formatter {
 	if id == 0 {
 		return nil
 	}
-	x := &Formatter{Handle: objref.Wrap(id)}
+	x := &Formatter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +62,19 @@ func (x *Formatter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewFormatter creates a new Formatter.
-func NewFormatter() *Formatter {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSFormatter")), objc.RegisterName("new"))
-	return formatterAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Formatter) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Formatter) WithScriptingProperties(scriptingProperties obj.Object) *Formatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// StringForObjectValue wraps the corresponding Objective-C method.
 func (x *Formatter) StringForObjectValue(obj_ obj.Object) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringForObjectValue:"), objref.IDOf(obj_))
 	if _r == 0 {
@@ -78,11 +83,13 @@ func (x *Formatter) StringForObjectValue(obj_ obj.Object) string {
 	return purego.GoString(_r)
 }
 
+// AttributedStringForObjectValueWithDefaultAttributes wraps the corresponding Objective-C method.
 func (x *Formatter) AttributedStringForObjectValueWithDefaultAttributes(obj_ obj.Object, attrs obj.Object) *AttributedString {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedStringForObjectValue:withDefaultAttributes:"), objref.IDOf(obj_), objref.IDOf(attrs))
 	return AttributedStringFromID(_r)
 }
 
+// EditingStringForObjectValue wraps the corresponding Objective-C method.
 func (x *Formatter) EditingStringForObjectValue(obj_ obj.Object) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("editingStringForObjectValue:"), objref.IDOf(obj_))
 	if _r == 0 {
@@ -91,6 +98,7 @@ func (x *Formatter) EditingStringForObjectValue(obj_ obj.Object) string {
 	return purego.GoString(_r)
 }
 
+// IsPartialStringValidNewEditingStringErrorDescription wraps the corresponding Objective-C method.
 func (x *Formatter) IsPartialStringValidNewEditingStringErrorDescription(partialString string, newString string, error_ string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPartialStringValid:newEditingString:errorDescription:"), purego.NSString(partialString), purego.NSString(newString), purego.NSString(error_))
 	return _r
@@ -107,3 +115,10 @@ type Formatterable interface {
 }
 
 var _ Formatterable = (*Formatter)(nil)
+
+// isFormatter marks Formatter — and, by embedding promotion, its
+// subclasses — as a member of the Formatter hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Formatter) isFormatter() {}
+
+var _ FormatterProvider = (*Formatter)(nil)

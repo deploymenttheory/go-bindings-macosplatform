@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class holds all the data that’s passed from one sequence iteration of the matrix-based recurrent neural network layer to the next.
-//
 // RNNRecurrentMatrixState is an idiomatic wrapper over the Objective-C class MPSRNNRecurrentMatrixState.
+//
+// It embeds [State], promoting that type's methods.
+//
+// A class holds all the data that’s passed from one sequence iteration of the matrix-based recurrent neural network layer to the next.
 type RNNRecurrentMatrixState struct {
-	objref.Handle
+	State
 }
 
 // RNNRecurrentMatrixStateFromID adopts an existing Objective-C object as a RNNRecurrentMatrixState
@@ -25,7 +26,8 @@ func RNNRecurrentMatrixStateFromID(id objc.ID) *RNNRecurrentMatrixState {
 	if id == 0 {
 		return nil
 	}
-	x := &RNNRecurrentMatrixState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RNNRecurrentMatrixState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func rNNRecurrentMatrixStateAdopt(id objc.ID) *RNNRecurrentMatrixState {
 	if id == 0 {
 		return nil
 	}
-	x := &RNNRecurrentMatrixState{Handle: objref.Wrap(id)}
+	x := &RNNRecurrentMatrixState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RNNRecurrentMatrixState) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RNNRecurrentMatrixState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RNNRecurrentMatrixState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRNNRecurrentMatrixState creates a new RNNRecurrentMatrixState.
@@ -64,27 +52,25 @@ func NewRNNRecurrentMatrixState() *RNNRecurrentMatrixState {
 	return rNNRecurrentMatrixStateAdopt(_id)
 }
 
-// WithReadCount sets readCount and returns the receiver so calls can be chained.
+// WithReadCount sets the property and returns the receiver so calls can be chained.
 func (x *RNNRecurrentMatrixState) WithReadCount(readCount int) *RNNRecurrentMatrixState {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *RNNRecurrentMatrixState) WithLabel(label string) *RNNRecurrentMatrixState {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Access the stored recurrent matrix data.
+// GetRecurrentOutputMatrixForLayerIndex access the stored recurrent matrix data.
 func (x *RNNRecurrentMatrixState) GetRecurrentOutputMatrixForLayerIndex(layerIndex int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getRecurrentOutputMatrixForLayerIndex:"), layerIndex)
 	return obj.Wrap(_r)
 }
 
-// Access the stored memory cell matrix data (if present).
+// GetMemoryCellMatrixForLayerIndex access the stored memory cell matrix data (if present).
 func (x *RNNRecurrentMatrixState) GetMemoryCellMatrixForLayerIndex(layerIndex int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getMemoryCellMatrixForLayerIndex:"), layerIndex)
 	return obj.Wrap(_r)
@@ -100,3 +86,5 @@ type RNNRecurrentMatrixStateable interface {
 }
 
 var _ RNNRecurrentMatrixStateable = (*RNNRecurrentMatrixState)(nil)
+
+var _ StateProvider = (*RNNRecurrentMatrixState)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a normalized point in an image, along with an identifier label and a confidence value.
-//
 // RecognizedPoint is an idiomatic wrapper over the Objective-C class VNRecognizedPoint.
+//
+// It embeds [DetectedPoint], promoting that type's methods.
+//
+// An object that represents a normalized point in an image, along with an identifier label and a confidence value.
 type RecognizedPoint struct {
-	objref.Handle
+	DetectedPoint
 }
 
 // RecognizedPointFromID adopts an existing Objective-C object as a RecognizedPoint
@@ -25,7 +26,8 @@ func RecognizedPointFromID(id objc.ID) *RecognizedPoint {
 	if id == 0 {
 		return nil
 	}
-	x := &RecognizedPoint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RecognizedPoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func recognizedPointAdopt(id objc.ID) *RecognizedPoint {
 	if id == 0 {
 		return nil
 	}
-	x := &RecognizedPoint{Handle: objref.Wrap(id)}
+	x := &RecognizedPoint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RecognizedPoint) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RecognizedPoint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RecognizedPoint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRecognizedPoint creates a new RecognizedPoint.
@@ -64,6 +52,7 @@ func NewRecognizedPoint() *RecognizedPoint {
 	return recognizedPointAdopt(_id)
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *RecognizedPoint) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
@@ -76,3 +65,7 @@ type RecognizedPointable interface {
 }
 
 var _ RecognizedPointable = (*RecognizedPoint)(nil)
+
+var _ DetectedPointProvider = (*RecognizedPoint)(nil)
+
+var _ PointProvider = (*RecognizedPoint)(nil)

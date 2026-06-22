@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mutable request to the App Store to process payment for additional functionality that your app offers.
-//
 // MutablePayment is an idiomatic wrapper over the Objective-C class SKMutablePayment.
+//
+// It embeds [Payment], promoting that type's methods.
+//
+// A mutable request to the App Store to process payment for additional functionality that your app offers.
 type MutablePayment struct {
-	objref.Handle
+	Payment
 }
 
 // MutablePaymentFromID adopts an existing Objective-C object as a MutablePayment
@@ -25,7 +26,8 @@ func MutablePaymentFromID(id objc.ID) *MutablePayment {
 	if id == 0 {
 		return nil
 	}
-	x := &MutablePayment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutablePayment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func mutablePaymentAdopt(id objc.ID) *MutablePayment {
 	if id == 0 {
 		return nil
 	}
-	x := &MutablePayment{Handle: objref.Wrap(id)}
+	x := &MutablePayment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MutablePayment) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutablePayment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutablePayment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMutablePayment creates a new MutablePayment.
@@ -64,62 +52,53 @@ func NewMutablePayment() *MutablePayment {
 	return mutablePaymentAdopt(_id)
 }
 
-// A string that associates the transaction with a user account on your service.
-//
-// WithApplicationUsername sets applicationUsername and returns the receiver so calls can be chained.
+// WithApplicationUsername a string that associates the transaction with a user account on your service.
 func (x *MutablePayment) WithApplicationUsername(applicationUsername string) *MutablePayment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationUsername:"), purego.NSString(applicationUsername))
 	return x
 }
 
-// The details of the discount offer to apply to the payment.
-//
-// WithPaymentDiscount sets paymentDiscount and returns the receiver so calls can be chained.
+// WithPaymentDiscount the details of the discount offer to apply to the payment.
 func (x *MutablePayment) WithPaymentDiscount(paymentDiscount *PaymentDiscount) *MutablePayment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentDiscount:"), objref.IDOf(paymentDiscount))
 	return x
 }
 
-// A string that identifies a product that can be purchased from within your app.
-//
-// WithProductIdentifier sets productIdentifier and returns the receiver so calls can be chained.
+// WithProductIdentifier a string that identifies a product that can be purchased from within your app.
 func (x *MutablePayment) WithProductIdentifier(productIdentifier string) *MutablePayment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductIdentifier:"), purego.NSString(productIdentifier))
 	return x
 }
 
-// The number of items the user wants to purchase.
-//
-// WithQuantity sets quantity and returns the receiver so calls can be chained.
+// WithQuantity the number of items the user wants to purchase.
 func (x *MutablePayment) WithQuantity(quantity int) *MutablePayment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuantity:"), quantity)
 	return x
 }
 
-// Reserved for future use.
-//
-// WithRequestData sets requestData and returns the receiver so calls can be chained.
+// WithRequestData reserved for future use.
 func (x *MutablePayment) WithRequestData(requestData obj.Object) *MutablePayment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestData:"), objref.IDOf(requestData))
 	return x
 }
 
-// A Boolean value that produces an “ask to buy” flow for this payment in the sandbox.
-//
-// WithSimulatesAskToBuyInSandbox sets simulatesAskToBuyInSandbox and returns the receiver so calls can be chained.
+// WithSimulatesAskToBuyInSandbox a Boolean value that produces an “ask to buy” flow for this payment in the sandbox.
 func (x *MutablePayment) WithSimulatesAskToBuyInSandbox(simulatesAskToBuyInSandbox bool) *MutablePayment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSimulatesAskToBuyInSandbox:"), simulatesAskToBuyInSandbox)
 	return x
 }
 
+// SetApplicationUsername wraps the corresponding Objective-C method.
 func (x *MutablePayment) SetApplicationUsername(applicationUsername string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationUsername:"), purego.NSString(applicationUsername))
 }
 
+// SetPaymentDiscount wraps the corresponding Objective-C method.
 func (x *MutablePayment) SetPaymentDiscount(paymentDiscount *PaymentDiscount) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentDiscount:"), objref.IDOf(paymentDiscount))
 }
 
+// ProductIdentifier wraps the corresponding Objective-C method.
 func (x *MutablePayment) ProductIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productIdentifier"))
 	if _r == 0 {
@@ -128,18 +107,22 @@ func (x *MutablePayment) ProductIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// SetProductIdentifier wraps the corresponding Objective-C method.
 func (x *MutablePayment) SetProductIdentifier(productIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductIdentifier:"), purego.NSString(productIdentifier))
 }
 
+// SetQuantity wraps the corresponding Objective-C method.
 func (x *MutablePayment) SetQuantity(quantity int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuantity:"), quantity)
 }
 
+// SetRequestData wraps the corresponding Objective-C method.
 func (x *MutablePayment) SetRequestData(requestData obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestData:"), objref.IDOf(requestData))
 }
 
+// SetSimulatesAskToBuyInSandbox wraps the corresponding Objective-C method.
 func (x *MutablePayment) SetSimulatesAskToBuyInSandbox(simulatesAskToBuyInSandbox bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSimulatesAskToBuyInSandbox:"), simulatesAskToBuyInSandbox)
 }
@@ -163,3 +146,5 @@ type MutablePaymentable interface {
 }
 
 var _ MutablePaymentable = (*MutablePayment)(nil)
+
+var _ PaymentProvider = (*MutablePayment)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A query that performs multiple statistics queries over a series of fixed-length time intervals.
-//
 // StatisticsCollectionQuery is an idiomatic wrapper over the Objective-C class HKStatisticsCollectionQuery.
+//
+// It embeds [Query], promoting that type's methods.
+//
+// A query that performs multiple statistics queries over a series of fixed-length time intervals.
 type StatisticsCollectionQuery struct {
-	objref.Handle
+	Query
 }
 
 // StatisticsCollectionQueryFromID adopts an existing Objective-C object as a StatisticsCollectionQuery
@@ -25,7 +26,8 @@ func StatisticsCollectionQueryFromID(id objc.ID) *StatisticsCollectionQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &StatisticsCollectionQuery{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StatisticsCollectionQuery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func statisticsCollectionQueryAdopt(id objc.ID) *StatisticsCollectionQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &StatisticsCollectionQuery{Handle: objref.Wrap(id)}
+	x := &StatisticsCollectionQuery{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *StatisticsCollectionQuery) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StatisticsCollectionQuery) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StatisticsCollectionQuery) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewStatisticsCollectionQuery creates a new StatisticsCollectionQuery.
@@ -64,25 +52,26 @@ func NewStatisticsCollectionQuery() *StatisticsCollectionQuery {
 	return statisticsCollectionQueryAdopt(_id)
 }
 
-// Initializes a statistics collection query to perform the specified calculations over a set of time intervals.
-//
-// NewStatisticsCollectionQueryWithQuantityTypeQuantitySamplePredicateOptionsAnchorDateIntervalComponents creates a new StatisticsCollectionQuery.
+// NewStatisticsCollectionQueryWithQuantityTypeQuantitySamplePredicateOptionsAnchorDateIntervalComponents initializes a statistics collection query to perform the specified calculations over a set of time intervals.
 func NewStatisticsCollectionQueryWithQuantityTypeQuantitySamplePredicateOptionsAnchorDateIntervalComponents(quantityType *QuantityType, quantitySamplePredicate obj.Object, options StatisticsOptions, anchorDate obj.Object, intervalComponents obj.Object) *StatisticsCollectionQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKStatisticsCollectionQuery")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQuantityType:quantitySamplePredicate:options:anchorDate:intervalComponents:"), objref.IDOf(quantityType), objref.IDOf(quantitySamplePredicate), options, objref.IDOf(anchorDate), objref.IDOf(intervalComponents))
 	return statisticsCollectionQueryAdopt(_id)
 }
 
+// AnchorDate wraps the corresponding Objective-C method.
 func (x *StatisticsCollectionQuery) AnchorDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("anchorDate"))
 	return obj.Wrap(_r)
 }
 
+// Options wraps the corresponding Objective-C method.
 func (x *StatisticsCollectionQuery) Options() StatisticsOptions {
 	_r := objc.Send[StatisticsOptions](objref.IDOf(x), objc.RegisterName("options"))
 	return _r
 }
 
+// IntervalComponents wraps the corresponding Objective-C method.
 func (x *StatisticsCollectionQuery) IntervalComponents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intervalComponents"))
 	return obj.Wrap(_r)
@@ -97,3 +86,5 @@ type StatisticsCollectionQueryable interface {
 }
 
 var _ StatisticsCollectionQueryable = (*StatisticsCollectionQuery)(nil)
+
+var _ QueryProvider = (*StatisticsCollectionQuery)(nil)

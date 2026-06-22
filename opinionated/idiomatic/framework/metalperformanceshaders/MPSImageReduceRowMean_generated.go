@@ -6,17 +6,20 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that returns the mean value for each row in an image.
-//
 // ImageReduceRowMean is an idiomatic wrapper over the Objective-C class MPSImageReduceRowMean.
+//
+// It embeds [ImageReduceUnary], promoting that type's methods.
+//
+// A filter that returns the mean value for each row in an image.
 type ImageReduceRowMean struct {
-	objref.Handle
+	ImageReduceUnary
 }
 
 // ImageReduceRowMeanFromID adopts an existing Objective-C object as a ImageReduceRowMean
@@ -25,7 +28,8 @@ func ImageReduceRowMeanFromID(id objc.ID) *ImageReduceRowMean {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageReduceRowMean{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageReduceRowMean{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func imageReduceRowMeanAdopt(id objc.ID) *ImageReduceRowMean {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageReduceRowMean{Handle: objref.Wrap(id)}
+	x := &ImageReduceRowMean{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ImageReduceRowMean) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageReduceRowMean) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageReduceRowMean) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewImageReduceRowMean creates a new ImageReduceRowMean.
@@ -64,9 +54,25 @@ func NewImageReduceRowMean() *ImageReduceRowMean {
 	return imageReduceRowMeanAdopt(_id)
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
+func (x *ImageReduceRowMean) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowMean {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return x
+}
+
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
+func (x *ImageReduceRowMean) WithOffset(offset mpscore.MPSOffset) *ImageReduceRowMean {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (x *ImageReduceRowMean) WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowMean {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
+// WithLabel the string that identifies the kernel.
 func (x *ImageReduceRowMean) WithLabel(label string) *ImageReduceRowMean {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -75,7 +81,16 @@ func (x *ImageReduceRowMean) WithLabel(label string) *ImageReduceRowMean {
 // ImageReduceRowMeanable is the interface implemented by [ImageReduceRowMean], for mocking and DI.
 type ImageReduceRowMeanable interface {
 	obj.Object
+	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowMean
+	WithOffset(offset mpscore.MPSOffset) *ImageReduceRowMean
+	WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowMean
 	WithLabel(label string) *ImageReduceRowMean
 }
 
 var _ ImageReduceRowMeanable = (*ImageReduceRowMean)(nil)
+
+var _ ImageReduceUnaryProvider = (*ImageReduceRowMean)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageReduceRowMean)(nil)
+
+var _ KernelProvider = (*ImageReduceRowMean)(nil)

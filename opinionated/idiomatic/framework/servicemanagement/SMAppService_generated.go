@@ -15,9 +15,9 @@ import (
 	"unsafe"
 )
 
-// An object the framework uses to control helper executables that live inside an app’s main bundle.
-//
 // AppService is an idiomatic wrapper over the Objective-C class SMAppService.
+//
+// An object the framework uses to control helper executables that live inside an app’s main bundle.
 type AppService struct {
 	objref.Handle
 }
@@ -28,7 +28,8 @@ func AppServiceFromID(id objc.ID) *AppService {
 	if id == 0 {
 		return nil
 	}
-	x := &AppService{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AppService{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -41,7 +42,8 @@ func appServiceAdopt(id objc.ID) *AppService {
 	if id == 0 {
 		return nil
 	}
-	x := &AppService{Handle: objref.Wrap(id)}
+	x := &AppService{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -61,13 +63,19 @@ func (x *AppService) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AppService) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAppService creates a new AppService.
 func NewAppService() *AppService {
 	_id := objc.Send[objc.ID](objc.ID(_class("SMAppService")), objc.RegisterName("new"))
 	return appServiceAdopt(_id)
 }
 
-// Registers the service so it can begin launching subject to user approval.
+// RegisterAndReturnError registers the service so it can begin launching subject to user approval.
 //
 // RegisterAndReturnError returns an error if the operation did not succeed.
 func (x *AppService) RegisterAndReturnError() error {
@@ -79,7 +87,7 @@ func (x *AppService) RegisterAndReturnError() error {
 	return nil
 }
 
-// Unregisters the service so the system no longer launches it.
+// UnregisterAndReturnError unregisters the service so the system no longer launches it.
 //
 // UnregisterAndReturnError returns an error if the operation did not succeed.
 func (x *AppService) UnregisterAndReturnError() error {
@@ -91,7 +99,7 @@ func (x *AppService) UnregisterAndReturnError() error {
 	return nil
 }
 
-// Unregisters the service so the system no longer launches it and calls a completion handler you provide with the resulting error value.
+// Unregister unregisters the service so the system no longer launches it and calls a completion handler you provide with the resulting error value.
 //
 // Unregister blocks until the operation completes or ctx is cancelled.
 func (x *AppService) Unregister(ctx context.Context) error {
@@ -110,7 +118,7 @@ func (x *AppService) Unregister(ctx context.Context) error {
 	}
 }
 
-// Returns the status for the service The status API can be used to check what selection a user has made regarding allowing the service to launch. If the user has denied execution, the return value will be SMAppServiceRequiresApproval. If the service has been unregistered, the return value will be SMAppServiceNotRegistered
+// Status returns the status for the service The status API can be used to check what selection a user has made regarding allowing the service to launch. If the user has denied execution, the return value will be SMAppServiceRequiresApproval. If the service has been unregistered, the return value will be SMAppServiceNotRegistered
 func (x *AppService) Status() AppServiceStatus {
 	_r := objc.Send[AppServiceStatus](objref.IDOf(x), objc.RegisterName("status"))
 	return _r

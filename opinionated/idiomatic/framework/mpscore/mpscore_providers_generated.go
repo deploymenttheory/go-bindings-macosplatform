@@ -11,19 +11,23 @@ import (
 // ImageProvider is accepted wherever a MPSImage (or one of its subclasses) is expected.
 type ImageProvider interface {
 	objref.Object
+	isImage()
 }
 
 // MatrixProvider is accepted wherever a MPSMatrix (or one of its subclasses) is expected.
 type MatrixProvider interface {
 	objref.Object
+	isMatrix()
 }
 
 // NDArrayProvider is accepted wherever a MPSNDArray (or one of its subclasses) is expected.
 type NDArrayProvider interface {
 	objref.Object
+	isNDArray()
 }
 
 // VectorProvider is accepted wherever a MPSVector (or one of its subclasses) is expected.
 type VectorProvider interface {
 	objref.Object
+	isVector()
 }

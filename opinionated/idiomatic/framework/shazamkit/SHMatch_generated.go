@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the catalog media items that match a query.
-//
 // Match is an idiomatic wrapper over the Objective-C class SHMatch.
+//
+// An object that represents the catalog media items that match a query.
 type Match struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MatchFromID(id objc.ID) *Match {
 	if id == 0 {
 		return nil
 	}
-	x := &Match{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Match{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func matchAdopt(id objc.ID) *Match {
 	if id == 0 {
 		return nil
 	}
-	x := &Match{Handle: objref.Wrap(id)}
+	x := &Match{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *Match) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Match) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMatch creates a new Match.
 func NewMatch() *Match {
 	_id := objc.Send[objc.ID](objc.ID(_class("SHMatch")), objc.RegisterName("new"))
 	return matchAdopt(_id)
 }
 
-// An array of the media items in the catalog that match the query signature, in order of the quality of the match.
+// MediaItems an array of the media items in the catalog that match the query signature, in order of the quality of the match.
 //
 // MediaItems returns the collection as a Go slice.
 func (x *Match) MediaItems() []*MatchedMediaItem {
@@ -72,7 +80,7 @@ func (x *Match) MediaItems() []*MatchedMediaItem {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MatchedMediaItem { return MatchedMediaItemFromID(_id) })
 }
 
-// The query signature for the match.
+// QuerySignature the query signature for the match.
 func (x *Match) QuerySignature() *Signature {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("querySignature"))
 	return SignatureFromID(_r)

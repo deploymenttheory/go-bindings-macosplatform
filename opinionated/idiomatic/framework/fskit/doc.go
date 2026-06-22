@@ -3,4 +3,13 @@
 //go:build darwin
 
 // Package fskit provides a fluent Go API over the macOS FSKit framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - EntityIdentifier: [ContainerIdentifier], [VolumeIdentifier]
+//   - ItemAttributes: [ItemSetAttributesRequest]
+//   - Resource: [BlockDeviceResource], [GenericURLResource], [PathURLResource]
 package fskit

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for a directory sharing device configuration.
-//
 // DirectorySharingDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZDirectorySharingDeviceConfiguration.
+//
+// DirectorySharingDeviceConfiguration is an abstract base — you do not construct it directly. Construct one of [VirtioFileSystemDeviceConfiguration] and pass it where a DirectorySharingDeviceConfiguration is accepted.
+//
+// The base class for a directory sharing device configuration.
 type DirectorySharingDeviceConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func DirectorySharingDeviceConfigurationFromID(id objc.ID) *DirectorySharingDevi
 	if id == 0 {
 		return nil
 	}
-	x := &DirectorySharingDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DirectorySharingDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func directorySharingDeviceConfigurationAdopt(id objc.ID) *DirectorySharingDevic
 	if id == 0 {
 		return nil
 	}
-	x := &DirectorySharingDeviceConfiguration{Handle: objref.Wrap(id)}
+	x := &DirectorySharingDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *DirectorySharingDeviceConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewDirectorySharingDeviceConfiguration creates a new DirectorySharingDeviceConfiguration.
-func NewDirectorySharingDeviceConfiguration() *DirectorySharingDeviceConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZDirectorySharingDeviceConfiguration")), objc.RegisterName("new"))
-	return directorySharingDeviceConfigurationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DirectorySharingDeviceConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // DirectorySharingDeviceConfigurationable is the interface implemented by [DirectorySharingDeviceConfiguration], for mocking and DI.
@@ -70,3 +74,10 @@ type DirectorySharingDeviceConfigurationable interface {
 }
 
 var _ DirectorySharingDeviceConfigurationable = (*DirectorySharingDeviceConfiguration)(nil)
+
+// isDirectorySharingDeviceConfiguration marks DirectorySharingDeviceConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the DirectorySharingDeviceConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DirectorySharingDeviceConfiguration) isDirectorySharingDeviceConfiguration() {}
+
+var _ DirectorySharingDeviceConfigurationProvider = (*DirectorySharingDeviceConfiguration)(nil)

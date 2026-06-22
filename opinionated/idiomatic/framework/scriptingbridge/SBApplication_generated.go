@@ -12,11 +12,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The SBApplication class provides a mechanism enabling an Objective-C program to send Apple events to a scriptable application and receive Apple events in response. It thereby makes it possible for that program to control the application and exchange data with it. Scripting Bridge works by bridging data types between Apple event descriptors and Cocoa objects.
-//
 // Application is an idiomatic wrapper over the Objective-C class SBApplication.
+//
+// It embeds [Object], promoting that type's methods.
+//
+// The SBApplication class provides a mechanism enabling an Objective-C program to send Apple events to a scriptable application and receive Apple events in response. It thereby makes it possible for that program to control the application and exchange data with it. Scripting Bridge works by bridging data types between Apple event descriptors and Cocoa objects.
 type Application struct {
-	objref.Handle
+	Object
 }
 
 // ApplicationFromID adopts an existing Objective-C object as a Application
@@ -25,7 +27,8 @@ func ApplicationFromID(id objc.ID) *Application {
 	if id == 0 {
 		return nil
 	}
-	x := &Application{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Application{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,96 +41,74 @@ func applicationAdopt(id objc.ID) *Application {
 	if id == 0 {
 		return nil
 	}
-	x := &Application{Handle: objref.Wrap(id)}
+	x := &Application{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *Application) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Application) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Application) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Returns an instance of an SBApplication subclass that represents the target application identified by the given bundle identifier.
-//
-// NewApplicationWithBundleIdentifier creates a new Application.
+// NewApplicationWithBundleIdentifier returns an instance of an SBApplication subclass that represents the target application identified by the given bundle identifier.
 func NewApplicationWithBundleIdentifier(ident string) *Application {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SBApplication")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBundleIdentifier:"), purego.NSString(ident))
 	return applicationAdopt(_id)
 }
 
-// Returns an instance of an SBApplication subclass that represents the target application identified by the given URL.
-//
-// NewApplicationWithURL creates a new Application.
+// NewApplicationWithURL returns an instance of an SBApplication subclass that represents the target application identified by the given URL.
 func NewApplicationWithURL(url string) *Application {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SBApplication")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
 	return applicationAdopt(_id)
 }
 
-// Returns an instance of an SBApplication subclass that represents the target application identified by the given process identifier.
-//
-// NewApplicationWithProcessIdentifier creates a new Application.
+// NewApplicationWithProcessIdentifier returns an instance of an SBApplication subclass that represents the target application identified by the given process identifier.
 func NewApplicationWithProcessIdentifier(pid int) *Application {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SBApplication")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProcessIdentifier:"), pid)
 	return applicationAdopt(_id)
 }
 
-// The mode for sending Apple events to the target application.
-//
-// WithSendMode sets sendMode and returns the receiver so calls can be chained.
+// WithSendMode the mode for sending Apple events to the target application.
 func (x *Application) WithSendMode(sendMode int) *Application {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendMode:"), sendMode)
 	return x
 }
 
-// The period the application will wait to receive reply Apple events.
-//
-// WithTimeout sets timeout and returns the receiver so calls can be chained.
+// WithTimeout the period the application will wait to receive reply Apple events.
 func (x *Application) WithTimeout(timeout int) *Application {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeout:"), timeout)
 	return x
 }
 
-// Moves the target application to the foreground immediately.
+// Activate moves the target application to the foreground immediately.
 func (x *Application) Activate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activate"))
 }
 
-// A Boolean that indicates whether the target application represented by the receiver is running. <doc://com.apple.documentation/documentation/swift/true> if the application is running, <doc://com.apple.documentation/documentation/swift/false> otherwise. This may be <doc://com.apple.documentation/documentation/swift/true> for instances initialized with a bundle identifier or URL because `SBApplication` launches the application only when it's necessary to send it an event.
+// IsRunning a Boolean that indicates whether the target application represented by the receiver is running. <doc://com.apple.documentation/documentation/swift/true> if the application is running, <doc://com.apple.documentation/documentation/swift/false> otherwise. This may be <doc://com.apple.documentation/documentation/swift/true> for instances initialized with a bundle identifier or URL because `SBApplication` launches the application only when it's necessary to send it an event.
 func (x *Application) IsRunning() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRunning"))
 	return _r
 }
 
-// The mode for sending Apple events to the target application. For more information, see <doc://com.apple.documentation/documentation/applicationservices/apple_event_manager>. The default send mode is <doc://com.apple.documentation/documentation/coreservices/1542914-anonymous/kaewaitreply>. If the send mode is something other than `kAEWaitReply`, the receiver might not correctly handle reply events from the target application.
+// SendMode the mode for sending Apple events to the target application. For more information, see <doc://com.apple.documentation/documentation/applicationservices/apple_event_manager>. The default send mode is <doc://com.apple.documentation/documentation/coreservices/1542914-anonymous/kaewaitreply>. If the send mode is something other than `kAEWaitReply`, the receiver might not correctly handle reply events from the target application.
 func (x *Application) SendMode() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sendMode"))
 	return _r
 }
 
+// SetSendMode wraps the corresponding Objective-C method.
 func (x *Application) SetSendMode(sendMode int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendMode:"), sendMode)
 }
 
-// The period the application will wait to receive reply Apple events. For more information, see <doc://com.apple.documentation/documentation/applicationservices/apple_event_manager>. The default timeout value is <doc://com.apple.documentation/documentation/coreservices/1542814-timeout_constants/kaedefaulttimeout>, which is about a minute. If you want the receiver to wait indefinitely for reply Apple events, use <doc://com.apple.documentation/documentation/coreservices/1542814-timeout_constants/knotimeout>. For more information, see <doc://com.apple.documentation/documentation/applicationservices/apple_event_manager>.
+// Timeout the period the application will wait to receive reply Apple events. For more information, see <doc://com.apple.documentation/documentation/applicationservices/apple_event_manager>. The default timeout value is <doc://com.apple.documentation/documentation/coreservices/1542814-timeout_constants/kaedefaulttimeout>, which is about a minute. If you want the receiver to wait indefinitely for reply Apple events, use <doc://com.apple.documentation/documentation/coreservices/1542814-timeout_constants/knotimeout>. For more information, see <doc://com.apple.documentation/documentation/applicationservices/apple_event_manager>.
 func (x *Application) Timeout() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("timeout"))
 	return _r
 }
 
+// SetTimeout wraps the corresponding Objective-C method.
 func (x *Application) SetTimeout(timeout int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeout:"), timeout)
 }
@@ -146,3 +127,5 @@ type Applicationable interface {
 }
 
 var _ Applicationable = (*Application)(nil)
+
+var _ ObjectProvider = (*Application)(nil)

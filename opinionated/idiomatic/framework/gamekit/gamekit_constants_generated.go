@@ -12,13 +12,11 @@ import (
 // GKErrorDomain returns the string constant GKErrorDomain, for use as a dictionary key or argument.
 func GKErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GKErrorDomain"))) }
 
-// Deprecated methods that previously returned player IDs will return GKPlayerIDNoLongerAvailable instead.
 // GKPlayerIDNoLongerAvailable returns the string constant GKPlayerIDNoLongerAvailable, for use as a dictionary key or argument.
 func GKPlayerIDNoLongerAvailable() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GKPlayerIDNoLongerAvailable")))
 }
 
-// Notification will be posted whenever the player details changes. The object of the notification will be the player.
 // GKPlayerDidChangeNotificationName returns the string constant GKPlayerDidChangeNotificationName, for use as a dictionary key or argument.
 func GKPlayerDidChangeNotificationName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GKPlayerDidChangeNotificationName")))
@@ -29,7 +27,6 @@ func GKGameSessionErrorDomain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GKGameSessionErrorDomain")))
 }
 
-// Notification will be posted whenever authentication status changes.
 // GKPlayerAuthenticationDidChangeNotificationName returns the string constant GKPlayerAuthenticationDidChangeNotificationName, for use as a dictionary key or argument.
 func GKPlayerAuthenticationDidChangeNotificationName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GKPlayerAuthenticationDidChangeNotificationName")))

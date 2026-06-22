@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that encapsulates information about all accounts of a particular type.
-//
 // AccountType is an idiomatic wrapper over the Objective-C class ACAccountType.
+//
+// An object that encapsulates information about all accounts of a particular type.
 type AccountType struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AccountTypeFromID(id objc.ID) *AccountType {
 	if id == 0 {
 		return nil
 	}
-	x := &AccountType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AccountType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func accountTypeAdopt(id objc.ID) *AccountType {
 	if id == 0 {
 		return nil
 	}
-	x := &AccountType{Handle: objref.Wrap(id)}
+	x := &AccountType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *AccountType) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AccountType) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAccountType creates a new AccountType.
 func NewAccountType() *AccountType {
 	_id := objc.Send[objc.ID](objc.ID(_class("ACAccountType")), objc.RegisterName("new"))
 	return accountTypeAdopt(_id)
 }
 
+// AccountTypeDescription wraps the corresponding Objective-C method.
 func (x *AccountType) AccountTypeDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountTypeDescription"))
 	if _r == 0 {
@@ -72,6 +81,7 @@ func (x *AccountType) AccountTypeDescription() string {
 	return purego.GoString(_r)
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *AccountType) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -80,6 +90,7 @@ func (x *AccountType) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// AccessGranted wraps the corresponding Objective-C method.
 func (x *AccountType) AccessGranted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("accessGranted"))
 	return _r

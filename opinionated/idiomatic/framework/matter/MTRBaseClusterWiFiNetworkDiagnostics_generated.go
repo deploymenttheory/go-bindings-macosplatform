@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBaseClusterWiFiNetworkDiagnostics is an idiomatic wrapper over the Objective-C class MTRBaseClusterWiFiNetworkDiagnostics.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
 type MTRBaseClusterWiFiNetworkDiagnostics struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterWiFiNetworkDiagnosticsFromID adopts an existing Objective-C object as a MTRBaseClusterWiFiNetworkDiagnostics
@@ -25,7 +26,8 @@ func MTRBaseClusterWiFiNetworkDiagnosticsFromID(id objc.ID) *MTRBaseClusterWiFiN
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterWiFiNetworkDiagnostics{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterWiFiNetworkDiagnostics{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func mTRBaseClusterWiFiNetworkDiagnosticsAdopt(id objc.ID) *MTRBaseClusterWiFiNe
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterWiFiNetworkDiagnostics{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterWiFiNetworkDiagnostics{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterWiFiNetworkDiagnosticsWithDeviceEndpointIDQueue creates a new MTRBaseClusterWiFiNetworkDiagnostics.
+// NewMTRBaseClusterWiFiNetworkDiagnosticsWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterWiFiNetworkDiagnosticsWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterWiFiNetworkDiagnostics {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterWiFiNetworkDiagnostics")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -74,8 +60,10 @@ func NewMTRBaseClusterWiFiNetworkDiagnosticsWithDeviceEndpointQueue(device *MTRB
 	return mTRBaseClusterWiFiNetworkDiagnosticsAdopt(_id)
 }
 
+// ReadAttributeBSSIDWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeBSSIDWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeBSSIDWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeBSSIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -97,8 +85,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeBSSIDWithCompletion(
 	}
 }
 
+// SubscribeAttributeBSSIDWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeBSSIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeBSSIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeBSSIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -120,8 +110,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeBSSIDWithParams
 	}
 }
 
+// ReadAttributeSecurityTypeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSecurityTypeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeSecurityTypeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeSecurityTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -143,8 +135,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeSecurityTypeWithComp
 	}
 }
 
+// SubscribeAttributeSecurityTypeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSecurityTypeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeSecurityTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeSecurityTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -166,8 +160,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeSecurityTypeWit
 	}
 }
 
+// ReadAttributeWiFiVersionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeWiFiVersionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeWiFiVersionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeWiFiVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -189,8 +185,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeWiFiVersionWithCompl
 	}
 }
 
+// SubscribeAttributeWiFiVersionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeWiFiVersionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeWiFiVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeWiFiVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -212,8 +210,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeWiFiVersionWith
 	}
 }
 
+// ReadAttributeChannelNumberWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeChannelNumberWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeChannelNumberWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeChannelNumberWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -235,8 +235,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeChannelNumberWithCom
 	}
 }
 
+// SubscribeAttributeChannelNumberWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeChannelNumberWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeChannelNumberWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeChannelNumberWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -258,8 +260,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeChannelNumberWi
 	}
 }
 
+// ReadAttributeRSSIWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRSSIWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeRSSIWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeRSSIWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -281,8 +285,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeRSSIWithCompletion(c
 	}
 }
 
+// SubscribeAttributeRSSIWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRSSIWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeRSSIWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeRSSIWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -304,8 +310,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeRSSIWithParamsS
 	}
 }
 
+// ReadAttributeBeaconLostCountWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeBeaconLostCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeBeaconLostCountWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeBeaconLostCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -327,8 +335,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeBeaconLostCountWithC
 	}
 }
 
+// SubscribeAttributeBeaconLostCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeBeaconLostCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeBeaconLostCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeBeaconLostCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -350,8 +360,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeBeaconLostCount
 	}
 }
 
+// ReadAttributeBeaconRxCountWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeBeaconRxCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeBeaconRxCountWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeBeaconRxCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -373,8 +385,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeBeaconRxCountWithCom
 	}
 }
 
+// SubscribeAttributeBeaconRxCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeBeaconRxCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeBeaconRxCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeBeaconRxCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -396,8 +410,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeBeaconRxCountWi
 	}
 }
 
+// ReadAttributePacketMulticastRxCountWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePacketMulticastRxCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketMulticastRxCountWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketMulticastRxCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -419,8 +435,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketMulticastRxCou
 	}
 }
 
+// SubscribeAttributePacketMulticastRxCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePacketMulticastRxCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketMulticastRxCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketMulticastRxCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -442,8 +460,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketMulticast
 	}
 }
 
+// ReadAttributePacketMulticastTxCountWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePacketMulticastTxCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketMulticastTxCountWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketMulticastTxCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,8 +485,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketMulticastTxCou
 	}
 }
 
+// SubscribeAttributePacketMulticastTxCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePacketMulticastTxCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketMulticastTxCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketMulticastTxCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -488,8 +510,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketMulticast
 	}
 }
 
+// ReadAttributePacketUnicastRxCountWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePacketUnicastRxCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketUnicastRxCountWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketUnicastRxCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -511,8 +535,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketUnicastRxCount
 	}
 }
 
+// SubscribeAttributePacketUnicastRxCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePacketUnicastRxCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketUnicastRxCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketUnicastRxCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -534,8 +560,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketUnicastRx
 	}
 }
 
+// ReadAttributePacketUnicastTxCountWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePacketUnicastTxCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketUnicastTxCountWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketUnicastTxCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -557,8 +585,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketUnicastTxCount
 	}
 }
 
+// SubscribeAttributePacketUnicastTxCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePacketUnicastTxCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketUnicastTxCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketUnicastTxCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -580,8 +610,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketUnicastTx
 	}
 }
 
+// ReadAttributeCurrentMaxRateWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentMaxRateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeCurrentMaxRateWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeCurrentMaxRateWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -603,8 +635,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeCurrentMaxRateWithCo
 	}
 }
 
+// SubscribeAttributeCurrentMaxRateWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentMaxRateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeCurrentMaxRateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeCurrentMaxRateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -626,8 +660,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeCurrentMaxRateW
 	}
 }
 
+// ReadAttributeOverrunCountWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeOverrunCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeOverrunCountWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeOverrunCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -649,8 +685,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeOverrunCountWithComp
 	}
 }
 
+// SubscribeAttributeOverrunCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOverrunCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeOverrunCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeOverrunCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -672,8 +710,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeOverrunCountWit
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -695,8 +735,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeGeneratedCommandList
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -718,8 +760,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeGeneratedComman
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -741,8 +785,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeAcceptedCommandListW
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -764,8 +810,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeAcceptedCommand
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -787,8 +835,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeAttributeListWithCom
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -810,8 +860,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeAttributeListWi
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -833,8 +885,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeFeatureMapWithComple
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -856,8 +910,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeFeatureMapWithP
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -879,8 +935,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeClusterRevisionWithC
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -902,8 +960,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeClusterRevision
 	}
 }
 
+// ReadAttributeBssid wraps the corresponding Objective-C method.
+//
 // ReadAttributeBssid blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeBssid(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeBssid(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -925,8 +985,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeBssid(ctx context.Co
 	}
 }
 
+// SubscribeAttributeBssidWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeBssidWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeBssidWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeBssidWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -948,8 +1010,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeBssidWithMinInt
 	}
 }
 
+// ReadAttributeSecurityType wraps the corresponding Objective-C method.
+//
 // ReadAttributeSecurityType blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeSecurityType(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeSecurityType(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -971,8 +1035,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeSecurityType(ctx con
 	}
 }
 
+// SubscribeAttributeSecurityTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSecurityTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeSecurityTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeSecurityTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -994,8 +1060,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeSecurityTypeWit
 	}
 }
 
+// ReadAttributeWiFiVersion wraps the corresponding Objective-C method.
+//
 // ReadAttributeWiFiVersion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeWiFiVersion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeWiFiVersion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1017,8 +1085,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeWiFiVersion(ctx cont
 	}
 }
 
+// SubscribeAttributeWiFiVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeWiFiVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeWiFiVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeWiFiVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1040,8 +1110,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeWiFiVersionWith
 	}
 }
 
+// ReadAttributeChannelNumber wraps the corresponding Objective-C method.
+//
 // ReadAttributeChannelNumber blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeChannelNumber(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeChannelNumber(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1063,8 +1135,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeChannelNumber(ctx co
 	}
 }
 
+// SubscribeAttributeChannelNumberWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeChannelNumberWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeChannelNumberWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeChannelNumberWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1086,8 +1160,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeChannelNumberWi
 	}
 }
 
+// ReadAttributeRssi wraps the corresponding Objective-C method.
+//
 // ReadAttributeRssi blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeRssi(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeRssi(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1109,8 +1185,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeRssi(ctx context.Con
 	}
 }
 
+// SubscribeAttributeRssiWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRssiWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeRssiWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeRssiWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1132,8 +1210,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeRssiWithMinInte
 	}
 }
 
+// ReadAttributeBeaconLostCount wraps the corresponding Objective-C method.
+//
 // ReadAttributeBeaconLostCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeBeaconLostCount(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeBeaconLostCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1155,8 +1235,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeBeaconLostCount(ctx 
 	}
 }
 
+// SubscribeAttributeBeaconLostCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeBeaconLostCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeBeaconLostCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeBeaconLostCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1178,8 +1260,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeBeaconLostCount
 	}
 }
 
+// ReadAttributeBeaconRxCount wraps the corresponding Objective-C method.
+//
 // ReadAttributeBeaconRxCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeBeaconRxCount(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeBeaconRxCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1201,8 +1285,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeBeaconRxCount(ctx co
 	}
 }
 
+// SubscribeAttributeBeaconRxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeBeaconRxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeBeaconRxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeBeaconRxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1224,8 +1310,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeBeaconRxCountWi
 	}
 }
 
+// ReadAttributePacketMulticastRxCount wraps the corresponding Objective-C method.
+//
 // ReadAttributePacketMulticastRxCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketMulticastRxCount(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketMulticastRxCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1247,8 +1335,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketMulticastRxCou
 	}
 }
 
+// SubscribeAttributePacketMulticastRxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePacketMulticastRxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketMulticastRxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketMulticastRxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1270,8 +1360,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketMulticast
 	}
 }
 
+// ReadAttributePacketMulticastTxCount wraps the corresponding Objective-C method.
+//
 // ReadAttributePacketMulticastTxCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketMulticastTxCount(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketMulticastTxCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1293,8 +1385,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketMulticastTxCou
 	}
 }
 
+// SubscribeAttributePacketMulticastTxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePacketMulticastTxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketMulticastTxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketMulticastTxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1316,8 +1410,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketMulticast
 	}
 }
 
+// ReadAttributePacketUnicastRxCount wraps the corresponding Objective-C method.
+//
 // ReadAttributePacketUnicastRxCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketUnicastRxCount(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketUnicastRxCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1339,8 +1435,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketUnicastRxCount
 	}
 }
 
+// SubscribeAttributePacketUnicastRxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePacketUnicastRxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketUnicastRxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketUnicastRxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1362,8 +1460,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketUnicastRx
 	}
 }
 
+// ReadAttributePacketUnicastTxCount wraps the corresponding Objective-C method.
+//
 // ReadAttributePacketUnicastTxCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketUnicastTxCount(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketUnicastTxCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1385,8 +1485,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributePacketUnicastTxCount
 	}
 }
 
+// SubscribeAttributePacketUnicastTxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePacketUnicastTxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketUnicastTxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketUnicastTxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1408,8 +1510,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributePacketUnicastTx
 	}
 }
 
+// ReadAttributeCurrentMaxRate wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentMaxRate blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeCurrentMaxRate(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeCurrentMaxRate(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1431,8 +1535,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeCurrentMaxRate(ctx c
 	}
 }
 
+// SubscribeAttributeCurrentMaxRateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentMaxRateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeCurrentMaxRateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeCurrentMaxRateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1454,8 +1560,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeCurrentMaxRateW
 	}
 }
 
+// ReadAttributeOverrunCount wraps the corresponding Objective-C method.
+//
 // ReadAttributeOverrunCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeOverrunCount(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeOverrunCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1477,8 +1585,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeOverrunCount(ctx con
 	}
 }
 
+// SubscribeAttributeOverrunCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOverrunCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeOverrunCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeOverrunCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1500,8 +1610,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeOverrunCountWit
 	}
 }
 
+// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1523,8 +1635,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeGeneratedCommandList
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1546,8 +1660,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeGeneratedComman
 	}
 }
 
+// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1569,8 +1685,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeAcceptedCommandList(
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1592,8 +1710,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeAcceptedCommand
 	}
 }
 
+// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeAttributeList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1615,8 +1735,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeAttributeList(ctx co
 	}
 }
 
+// SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1638,8 +1760,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeAttributeListWi
 	}
 }
 
+// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1661,8 +1785,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeFeatureMap(ctx conte
 	}
 }
 
+// SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1684,8 +1810,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeFeatureMapWithM
 	}
 }
 
+// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1707,8 +1835,10 @@ func (x *MTRBaseClusterWiFiNetworkDiagnostics) ReadAttributeClusterRevision(ctx 
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkDiagnostics) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1808,3 +1938,7 @@ type MTRBaseClusterWiFiNetworkDiagnosticsable interface {
 }
 
 var _ MTRBaseClusterWiFiNetworkDiagnosticsable = (*MTRBaseClusterWiFiNetworkDiagnostics)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterWiFiNetworkDiagnostics)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterWiFiNetworkDiagnostics)(nil)

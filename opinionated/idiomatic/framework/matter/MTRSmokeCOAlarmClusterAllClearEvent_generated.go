@@ -23,7 +23,8 @@ func MTRSmokeCOAlarmClusterAllClearEventFromID(id objc.ID) *MTRSmokeCOAlarmClust
 	if id == 0 {
 		return nil
 	}
-	x := &MTRSmokeCOAlarmClusterAllClearEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRSmokeCOAlarmClusterAllClearEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRSmokeCOAlarmClusterAllClearEventAdopt(id objc.ID) *MTRSmokeCOAlarmCluste
 	if id == 0 {
 		return nil
 	}
-	x := &MTRSmokeCOAlarmClusterAllClearEvent{Handle: objref.Wrap(id)}
+	x := &MTRSmokeCOAlarmClusterAllClearEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *MTRSmokeCOAlarmClusterAllClearEvent) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MTRSmokeCOAlarmClusterAllClearEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRSmokeCOAlarmClusterAllClearEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMTRSmokeCOAlarmClusterAllClearEvent creates a new MTRSmokeCOAlarmClusterAllClearEvent.

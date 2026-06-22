@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that represents data that doesn’t typically change over time.
-//
 // CharacteristicType is an idiomatic wrapper over the Objective-C class HKCharacteristicType.
+//
+// It embeds [ObjectType], promoting that type's methods.
+//
+// A type that represents data that doesn’t typically change over time.
 type CharacteristicType struct {
-	objref.Handle
+	ObjectType
 }
 
 // CharacteristicTypeFromID adopts an existing Objective-C object as a CharacteristicType
@@ -25,7 +26,8 @@ func CharacteristicTypeFromID(id objc.ID) *CharacteristicType {
 	if id == 0 {
 		return nil
 	}
-	x := &CharacteristicType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CharacteristicType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func characteristicTypeAdopt(id objc.ID) *CharacteristicType {
 	if id == 0 {
 		return nil
 	}
-	x := &CharacteristicType{Handle: objref.Wrap(id)}
+	x := &CharacteristicType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CharacteristicType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CharacteristicType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CharacteristicType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCharacteristicType creates a new CharacteristicType.
@@ -70,3 +58,5 @@ type CharacteristicTypeable interface {
 }
 
 var _ CharacteristicTypeable = (*CharacteristicType)(nil)
+
+var _ ObjectTypeProvider = (*CharacteristicType)(nil)

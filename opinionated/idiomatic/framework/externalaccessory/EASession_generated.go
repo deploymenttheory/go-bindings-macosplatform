@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The object you use to manage communications between your app and a connected hardware accessory.
-//
 // Session is an idiomatic wrapper over the Objective-C class EASession.
+//
+// The object you use to manage communications between your app and a connected hardware accessory.
 type Session struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SessionFromID(id objc.ID) *Session {
 	if id == 0 {
 		return nil
 	}
-	x := &Session{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Session{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func sessionAdopt(id objc.ID) *Session {
 	if id == 0 {
 		return nil
 	}
-	x := &Session{Handle: objref.Wrap(id)}
+	x := &Session{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,9 +60,13 @@ func (x *Session) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes the session for the specified accessory and protocol.
-//
-// NewSessionWithAccessoryForProtocol creates a new Session.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Session) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSessionWithAccessoryForProtocol initializes the session for the specified accessory and protocol.
 func NewSessionWithAccessoryForProtocol(accessory *Accessory, protocolString string) *Session {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("EASession")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAccessory:forProtocol:"), objref.IDOf(accessory), purego.NSString(protocolString))

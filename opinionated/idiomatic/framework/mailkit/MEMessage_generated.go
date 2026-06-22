@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains information about a mail message, such as the subject, addressees, date sent, and the message contents.
-//
 // Message is an idiomatic wrapper over the Objective-C class MEMessage.
+//
+// An object that contains information about a mail message, such as the subject, addressees, date sent, and the message contents.
 type Message struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MessageFromID(id objc.ID) *Message {
 	if id == 0 {
 		return nil
 	}
-	x := &Message{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Message{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func messageAdopt(id objc.ID) *Message {
 	if id == 0 {
 		return nil
 	}
-	x := &Message{Handle: objref.Wrap(id)}
+	x := &Message{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *Message) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Message) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMessage creates a new Message.
 func NewMessage() *Message {
 	_id := objc.Send[objc.ID](objc.ID(_class("MEMessage")), objc.RegisterName("new"))
 	return messageAdopt(_id)
 }
 
-// The state of the mail message.
+// State the state of the mail message.
 func (x *Message) State() MessageState {
 	_r := objc.Send[MessageState](objref.IDOf(x), objc.RegisterName("state"))
 	return _r
 }
 
-// The encryption state of the mail message.
+// EncryptionState the encryption state of the mail message.
 func (x *Message) EncryptionState() MessageEncryptionState {
 	_r := objc.Send[MessageEncryptionState](objref.IDOf(x), objc.RegisterName("encryptionState"))
 	return _r
 }
 
-// The subject of the mail message.
+// Subject the subject of the mail message.
 func (x *Message) Subject() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subject"))
 	if _r == 0 {
@@ -85,13 +93,13 @@ func (x *Message) Subject() string {
 	return purego.GoString(_r)
 }
 
-// Message sender's email address.
+// FromAddress message sender's email address.
 func (x *Message) FromAddress() *EmailAddress {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fromAddress"))
 	return EmailAddressFromID(_r)
 }
 
-// Recipient email addresses in the "To" address field of the message.
+// ToAddresses recipient email addresses in the "To" address field of the message.
 //
 // ToAddresses returns the collection as a Go slice.
 func (x *Message) ToAddresses() []*EmailAddress {
@@ -99,7 +107,7 @@ func (x *Message) ToAddresses() []*EmailAddress {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
 
-// Recipient email addresses in the "Cc" address field of the message.
+// CcAddresses recipient email addresses in the "Cc" address field of the message.
 //
 // CcAddresses returns the collection as a Go slice.
 func (x *Message) CcAddresses() []*EmailAddress {
@@ -107,7 +115,7 @@ func (x *Message) CcAddresses() []*EmailAddress {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
 
-// Recipient email addresses in the "Bcc" address field of the message.
+// BccAddresses recipient email addresses in the "Bcc" address field of the message.
 //
 // BccAddresses returns the collection as a Go slice.
 func (x *Message) BccAddresses() []*EmailAddress {
@@ -115,7 +123,7 @@ func (x *Message) BccAddresses() []*EmailAddress {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
 
-// Recipient email addresses in the "Reply-To" field of the message.
+// ReplyToAddresses recipient email addresses in the "Reply-To" field of the message.
 //
 // ReplyToAddresses returns the collection as a Go slice.
 func (x *Message) ReplyToAddresses() []*EmailAddress {
@@ -123,7 +131,7 @@ func (x *Message) ReplyToAddresses() []*EmailAddress {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
 
-// An array containing all recipients of the message.
+// AllRecipientAddresses an array containing all recipients of the message.
 //
 // AllRecipientAddresses returns the collection as a Go slice.
 func (x *Message) AllRecipientAddresses() []*EmailAddress {
@@ -131,25 +139,25 @@ func (x *Message) AllRecipientAddresses() []*EmailAddress {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
 
-// The date the mail message was sent. Optionally set by the by the sender.
+// DateSent the date the mail message was sent. Optionally set by the by the sender.
 func (x *Message) DateSent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateSent"))
 	return obj.Wrap(_r)
 }
 
-// The date the mail message was received. Only present if the message has been received.
+// DateReceived the date the mail message was received. Only present if the message has been received.
 func (x *Message) DateReceived() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateReceived"))
 	return obj.Wrap(_r)
 }
 
-// The headers for the message. Might only be a subset if the full body has not been downloaded.
+// Headers the headers for the message. Might only be a subset if the full body has not been downloaded.
 func (x *Message) Headers() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("headers"))
 	return obj.Wrap(_r)
 }
 
-// The full raw RFC822 message data if it has been downloaded and the extension has permissions to access.
+// RawData the full raw RFC822 message data if it has been downloaded and the extension has permissions to access.
 func (x *Message) RawData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rawData"))
 	return obj.Wrap(_r)

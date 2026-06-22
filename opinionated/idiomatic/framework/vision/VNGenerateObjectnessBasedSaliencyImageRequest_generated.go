@@ -6,17 +6,19 @@ package vision
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request that generates a heat map that identifies the parts of an image most likely to represent objects.
-//
 // GenerateObjectnessBasedSaliencyImageRequest is an idiomatic wrapper over the Objective-C class VNGenerateObjectnessBasedSaliencyImageRequest.
+//
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// A request that generates a heat map that identifies the parts of an image most likely to represent objects.
 type GenerateObjectnessBasedSaliencyImageRequest struct {
-	objref.Handle
+	ImageBasedRequest
 }
 
 // GenerateObjectnessBasedSaliencyImageRequestFromID adopts an existing Objective-C object as a GenerateObjectnessBasedSaliencyImageRequest
@@ -25,7 +27,8 @@ func GenerateObjectnessBasedSaliencyImageRequestFromID(id objc.ID) *GenerateObje
 	if id == 0 {
 		return nil
 	}
-	x := &GenerateObjectnessBasedSaliencyImageRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GenerateObjectnessBasedSaliencyImageRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func generateObjectnessBasedSaliencyImageRequestAdopt(id objc.ID) *GenerateObjec
 	if id == 0 {
 		return nil
 	}
-	x := &GenerateObjectnessBasedSaliencyImageRequest{Handle: objref.Wrap(id)}
+	x := &GenerateObjectnessBasedSaliencyImageRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GenerateObjectnessBasedSaliencyImageRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GenerateObjectnessBasedSaliencyImageRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GenerateObjectnessBasedSaliencyImageRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGenerateObjectnessBasedSaliencyImageRequest creates a new GenerateObjectnessBasedSaliencyImageRequest.
@@ -64,25 +53,25 @@ func NewGenerateObjectnessBasedSaliencyImageRequest() *GenerateObjectnessBasedSa
 	return generateObjectnessBasedSaliencyImageRequestAdopt(_id)
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets preferBackgroundProcessing and returns the receiver so calls can be chained.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
+func (x *GenerateObjectnessBasedSaliencyImageRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateObjectnessBasedSaliencyImageRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *GenerateObjectnessBasedSaliencyImageRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateObjectnessBasedSaliencyImageRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets usesCPUOnly and returns the receiver so calls can be chained.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *GenerateObjectnessBasedSaliencyImageRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateObjectnessBasedSaliencyImageRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets revision and returns the receiver so calls can be chained.
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
 func (x *GenerateObjectnessBasedSaliencyImageRequest) WithRevision(revision int) *GenerateObjectnessBasedSaliencyImageRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
@@ -91,9 +80,14 @@ func (x *GenerateObjectnessBasedSaliencyImageRequest) WithRevision(revision int)
 // GenerateObjectnessBasedSaliencyImageRequestable is the interface implemented by [GenerateObjectnessBasedSaliencyImageRequest], for mocking and DI.
 type GenerateObjectnessBasedSaliencyImageRequestable interface {
 	obj.Object
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateObjectnessBasedSaliencyImageRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateObjectnessBasedSaliencyImageRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *GenerateObjectnessBasedSaliencyImageRequest
 	WithRevision(revision int) *GenerateObjectnessBasedSaliencyImageRequest
 }
 
 var _ GenerateObjectnessBasedSaliencyImageRequestable = (*GenerateObjectnessBasedSaliencyImageRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*GenerateObjectnessBasedSaliencyImageRequest)(nil)
+
+var _ RequestProvider = (*GenerateObjectnessBasedSaliencyImageRequest)(nil)

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for a pointing device configuration.
-//
 // PointingDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZPointingDeviceConfiguration.
+//
+// PointingDeviceConfiguration is an abstract base — you do not construct it directly. Construct one of [MacTrackpadConfiguration], [USBScreenCoordinatePointingDeviceConfiguration] and pass it where a PointingDeviceConfiguration is accepted.
+//
+// The base class for a pointing device configuration.
 type PointingDeviceConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func PointingDeviceConfigurationFromID(id objc.ID) *PointingDeviceConfiguration 
 	if id == 0 {
 		return nil
 	}
-	x := &PointingDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PointingDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func pointingDeviceConfigurationAdopt(id objc.ID) *PointingDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &PointingDeviceConfiguration{Handle: objref.Wrap(id)}
+	x := &PointingDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *PointingDeviceConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewPointingDeviceConfiguration creates a new PointingDeviceConfiguration.
-func NewPointingDeviceConfiguration() *PointingDeviceConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZPointingDeviceConfiguration")), objc.RegisterName("new"))
-	return pointingDeviceConfigurationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PointingDeviceConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // PointingDeviceConfigurationable is the interface implemented by [PointingDeviceConfiguration], for mocking and DI.
@@ -70,3 +74,10 @@ type PointingDeviceConfigurationable interface {
 }
 
 var _ PointingDeviceConfigurationable = (*PointingDeviceConfiguration)(nil)
+
+// isPointingDeviceConfiguration marks PointingDeviceConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the PointingDeviceConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *PointingDeviceConfiguration) isPointingDeviceConfiguration() {}
+
+var _ PointingDeviceConfigurationProvider = (*PointingDeviceConfiguration)(nil)

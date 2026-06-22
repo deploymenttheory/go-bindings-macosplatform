@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that you use to format a contact’s postal addresses.
-//
 // PostalAddressFormatter is an idiomatic wrapper over the Objective-C class CNPostalAddressFormatter.
+//
+// An object that you use to format a contact’s postal addresses.
 type PostalAddressFormatter struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PostalAddressFormatterFromID(id objc.ID) *PostalAddressFormatter {
 	if id == 0 {
 		return nil
 	}
-	x := &PostalAddressFormatter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PostalAddressFormatter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func postalAddressFormatterAdopt(id objc.ID) *PostalAddressFormatter {
 	if id == 0 {
 		return nil
 	}
-	x := &PostalAddressFormatter{Handle: objref.Wrap(id)}
+	x := &PostalAddressFormatter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +60,25 @@ func (x *PostalAddressFormatter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PostalAddressFormatter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPostalAddressFormatter creates a new PostalAddressFormatter.
 func NewPostalAddressFormatter() *PostalAddressFormatter {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNPostalAddressFormatter")), objc.RegisterName("new"))
 	return postalAddressFormatterAdopt(_id)
 }
 
-// The style to apply when formatting strings.
-//
-// WithStyle sets style and returns the receiver so calls can be chained.
+// WithStyle the style to apply when formatting strings.
 func (x *PostalAddressFormatter) WithStyle(style PostalAddressFormatterStyle) *PostalAddressFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 	return x
 }
 
-// Returns a formatted postal address.
+// StringFromPostalAddress returns a formatted postal address.
 func (x *PostalAddressFormatter) StringFromPostalAddress(postalAddress *PostalAddress) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromPostalAddress:"), objref.IDOf(postalAddress))
 	if _r == 0 {
@@ -81,18 +87,19 @@ func (x *PostalAddressFormatter) StringFromPostalAddress(postalAddress *PostalAd
 	return purego.GoString(_r)
 }
 
-// Returns a formatted postal address as an attributed string.
+// AttributedStringFromPostalAddressWithDefaultAttributes returns a formatted postal address as an attributed string.
 func (x *PostalAddressFormatter) AttributedStringFromPostalAddressWithDefaultAttributes(postalAddress *PostalAddress, attributes obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedStringFromPostalAddress:withDefaultAttributes:"), objref.IDOf(postalAddress), objref.IDOf(attributes))
 	return obj.Wrap(_r)
 }
 
-// The style for a postal address formatter instance. The default value is CNPostalAddressFormatterStyleMailingAddress.
+// Style the style for a postal address formatter instance. The default value is CNPostalAddressFormatterStyleMailingAddress.
 func (x *PostalAddressFormatter) Style() PostalAddressFormatterStyle {
 	_r := objc.Send[PostalAddressFormatterStyle](objref.IDOf(x), objc.RegisterName("style"))
 	return _r
 }
 
+// SetStyle wraps the corresponding Objective-C method.
 func (x *PostalAddressFormatter) SetStyle(style PostalAddressFormatterStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container for uniform shader data.
-//
 // Uniform is an idiomatic wrapper over the Objective-C class SKUniform.
+//
+// A container for uniform shader data.
 type Uniform struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func UniformFromID(id objc.ID) *Uniform {
 	if id == 0 {
 		return nil
 	}
-	x := &Uniform{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Uniform{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func uniformAdopt(id objc.ID) *Uniform {
 	if id == 0 {
 		return nil
 	}
-	x := &Uniform{Handle: objref.Wrap(id)}
+	x := &Uniform{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,49 +60,46 @@ func (x *Uniform) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a new uniform object.
-//
-// NewUniformWithName creates a new Uniform.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Uniform) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewUniformWithName initializes a new uniform object.
 func NewUniformWithName(name string) *Uniform {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:"), purego.NSString(name))
 	return uniformAdopt(_id)
 }
 
-// Initializes a new uniform object that holds a reference to a texture.
-//
-// NewUniformWithNameTexture creates a new Uniform.
+// NewUniformWithNameTexture initializes a new uniform object that holds a reference to a texture.
 func NewUniformWithNameTexture(name string, texture *Texture) *Uniform {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:texture:"), purego.NSString(name), objref.IDOf(texture))
 	return uniformAdopt(_id)
 }
 
-// Initializes a new uniform object that holds a floating-point number.
-//
-// NewUniformWithNameFloat creates a new Uniform.
+// NewUniformWithNameFloat initializes a new uniform object that holds a floating-point number.
 func NewUniformWithNameFloat(name string, value float32) *Uniform {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:float:"), purego.NSString(name), value)
 	return uniformAdopt(_id)
 }
 
-// The receiver’s value as a SpriteKit texture.
-//
-// WithTextureValue sets textureValue and returns the receiver so calls can be chained.
+// WithTextureValue the receiver’s value as a SpriteKit texture.
 func (x *Uniform) WithTextureValue(textureValue TextureProvider) *Uniform {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureValue:"), objref.IDOf(textureValue))
 	return x
 }
 
-// The receiver’s value as a floating-point value.
-//
-// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
+// WithFloatValue the receiver’s value as a floating-point value.
 func (x *Uniform) WithFloatValue(floatValue float32) *Uniform {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *Uniform) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -109,25 +108,30 @@ func (x *Uniform) Name() string {
 	return purego.GoString(_r)
 }
 
+// UniformType wraps the corresponding Objective-C method.
 func (x *Uniform) UniformType() UniformType {
 	_r := objc.Send[UniformType](objref.IDOf(x), objc.RegisterName("uniformType"))
 	return _r
 }
 
+// TextureValue wraps the corresponding Objective-C method.
 func (x *Uniform) TextureValue() *Texture {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textureValue"))
 	return TextureFromID(_r)
 }
 
+// SetTextureValue wraps the corresponding Objective-C method.
 func (x *Uniform) SetTextureValue(textureValue *Texture) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureValue:"), objref.IDOf(textureValue))
 }
 
+// FloatValue wraps the corresponding Objective-C method.
 func (x *Uniform) FloatValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("floatValue"))
 	return _r
 }
 
+// SetFloatValue wraps the corresponding Objective-C method.
 func (x *Uniform) SetFloatValue(floatValue float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 }

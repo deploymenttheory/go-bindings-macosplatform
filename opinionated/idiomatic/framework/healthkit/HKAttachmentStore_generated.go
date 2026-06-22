@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The access point for attachments associated with samples in the HealthKit store.
-//
 // AttachmentStore is an idiomatic wrapper over the Objective-C class HKAttachmentStore.
+//
+// The access point for attachments associated with samples in the HealthKit store.
 type AttachmentStore struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func AttachmentStoreFromID(id objc.ID) *AttachmentStore {
 	if id == 0 {
 		return nil
 	}
-	x := &AttachmentStore{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AttachmentStore{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func attachmentStoreAdopt(id objc.ID) *AttachmentStore {
 	if id == 0 {
 		return nil
 	}
-	x := &AttachmentStore{Handle: objref.Wrap(id)}
+	x := &AttachmentStore{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,19 +62,23 @@ func (x *AttachmentStore) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an attachment store for the provided HealthKit store.
-//
-// NewAttachmentStoreWithHealthStore creates a new AttachmentStore.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AttachmentStore) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAttachmentStoreWithHealthStore creates an attachment store for the provided HealthKit store.
 func NewAttachmentStoreWithHealthStore(healthStore *HealthStore) *AttachmentStore {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKAttachmentStore")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:"), objref.IDOf(healthStore))
 	return attachmentStoreAdopt(_id)
 }
 
-// Adds an attachment to the specified object.
+// AddAttachmentToObjectNameContentTypeURLMetadataCompletion adds an attachment to the specified object.
 //
 // AddAttachmentToObjectNameContentTypeURLMetadataCompletion blocks until the operation completes or ctx is cancelled.
-func (x *AttachmentStore) AddAttachmentToObjectNameContentTypeURLMetadataCompletion(ctx context.Context, object *Object, name string, contentType obj.Object, uRL string, metadata obj.Object) (*Attachment, error) {
+func (x *AttachmentStore) AddAttachmentToObjectNameContentTypeURLMetadataCompletion(ctx context.Context, object *Object, name string, contentType obj.Object, uRL string, metadata obj.Object) (result *Attachment, err error) {
 	type _result struct {
 		val *Attachment
 		err error
@@ -94,10 +100,10 @@ func (x *AttachmentStore) AddAttachmentToObjectNameContentTypeURLMetadataComplet
 	}
 }
 
-// Returns all the attachments for the specified object.
+// GetAttachmentsForObjectCompletion returns all the attachments for the specified object.
 //
 // GetAttachmentsForObjectCompletion blocks until the operation completes or ctx is cancelled.
-func (x *AttachmentStore) GetAttachmentsForObjectCompletion(ctx context.Context, object *Object) (obj.Object, error) {
+func (x *AttachmentStore) GetAttachmentsForObjectCompletion(ctx context.Context, object *Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error

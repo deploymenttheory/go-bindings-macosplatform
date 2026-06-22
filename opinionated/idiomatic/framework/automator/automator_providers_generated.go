@@ -11,9 +11,11 @@ import (
 // ActionProvider is accepted wherever a AMAction (or one of its subclasses) is expected.
 type ActionProvider interface {
 	objref.Object
+	isAction()
 }
 
 // BundleActionProvider is accepted wherever a AMBundleAction (or one of its subclasses) is expected.
 type BundleActionProvider interface {
 	objref.Object
+	isBundleAction()
 }

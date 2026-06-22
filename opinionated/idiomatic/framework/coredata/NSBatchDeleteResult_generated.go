@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes the result of a batch delete request.
-//
 // BatchDeleteResult is an idiomatic wrapper over the Objective-C class NSBatchDeleteResult.
+//
+// It embeds [PersistentStoreResult], promoting that type's methods.
+//
+// An object that describes the result of a batch delete request.
 type BatchDeleteResult struct {
-	objref.Handle
+	PersistentStoreResult
 }
 
 // BatchDeleteResultFromID adopts an existing Objective-C object as a BatchDeleteResult
@@ -25,7 +26,8 @@ func BatchDeleteResultFromID(id objc.ID) *BatchDeleteResult {
 	if id == 0 {
 		return nil
 	}
-	x := &BatchDeleteResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BatchDeleteResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func batchDeleteResultAdopt(id objc.ID) *BatchDeleteResult {
 	if id == 0 {
 		return nil
 	}
-	x := &BatchDeleteResult{Handle: objref.Wrap(id)}
+	x := &BatchDeleteResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *BatchDeleteResult) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BatchDeleteResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BatchDeleteResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewBatchDeleteResult creates a new BatchDeleteResult.
@@ -64,11 +52,13 @@ func NewBatchDeleteResult() *BatchDeleteResult {
 	return batchDeleteResultAdopt(_id)
 }
 
+// Result wraps the corresponding Objective-C method.
 func (x *BatchDeleteResult) Result() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("result"))
 	return obj.Wrap(_r)
 }
 
+// ResultType wraps the corresponding Objective-C method.
 func (x *BatchDeleteResult) ResultType() BatchDeleteRequestResultType {
 	_r := objc.Send[BatchDeleteRequestResultType](objref.IDOf(x), objc.RegisterName("resultType"))
 	return _r
@@ -82,3 +72,5 @@ type BatchDeleteResultable interface {
 }
 
 var _ BatchDeleteResultable = (*BatchDeleteResult)(nil)
+
+var _ PersistentStoreResultProvider = (*BatchDeleteResult)(nil)

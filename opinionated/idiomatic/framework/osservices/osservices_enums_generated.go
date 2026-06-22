@@ -23,6 +23,8 @@ const (
 	EWSDictionaryType WSTypeID = 9
 )
 
+// String returns the WSTypeID constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WSTypeID) String() string {
 	switch e {
 	case EWSUnknownType:

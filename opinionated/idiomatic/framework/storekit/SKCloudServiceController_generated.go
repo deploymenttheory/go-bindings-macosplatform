@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that determines the current capabilities of a person’s Music library.
-//
 // CloudServiceController is an idiomatic wrapper over the Objective-C class SKCloudServiceController.
+//
+// An object that determines the current capabilities of a person’s Music library.
 type CloudServiceController struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func CloudServiceControllerFromID(id objc.ID) *CloudServiceController {
 	if id == 0 {
 		return nil
 	}
-	x := &CloudServiceController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CloudServiceController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func cloudServiceControllerAdopt(id objc.ID) *CloudServiceController {
 	if id == 0 {
 		return nil
 	}
-	x := &CloudServiceController{Handle: objref.Wrap(id)}
+	x := &CloudServiceController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,22 @@ func (x *CloudServiceController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CloudServiceController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCloudServiceController creates a new CloudServiceController.
 func NewCloudServiceController() *CloudServiceController {
 	_id := objc.Send[objc.ID](objc.ID(_class("SKCloudServiceController")), objc.RegisterName("new"))
 	return cloudServiceControllerAdopt(_id)
 }
 
-// Gets the country code for the storefront associated with a customer’s iTunes account.
+// RequestStorefrontCountryCode gets the country code for the storefront associated with a customer’s iTunes account.
 //
 // RequestStorefrontCountryCode blocks until the operation completes or ctx is cancelled.
-func (x *CloudServiceController) RequestStorefrontCountryCode(ctx context.Context) (string, error) {
+func (x *CloudServiceController) RequestStorefrontCountryCode(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -91,10 +99,10 @@ func (x *CloudServiceController) RequestStorefrontCountryCode(ctx context.Contex
 	}
 }
 
-// Gets the device’s storefront identifier.
+// RequestStorefrontIdentifier gets the device’s storefront identifier.
 //
 // RequestStorefrontIdentifier blocks until the operation completes or ctx is cancelled.
-func (x *CloudServiceController) RequestStorefrontIdentifier(ctx context.Context) (string, error) {
+func (x *CloudServiceController) RequestStorefrontIdentifier(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -116,10 +124,10 @@ func (x *CloudServiceController) RequestStorefrontIdentifier(ctx context.Context
 	}
 }
 
-// Returns a user token that you use to access personalized Apple Music content.
+// RequestUserTokenForDeveloperToken returns a user token that you use to access personalized Apple Music content.
 //
 // RequestUserTokenForDeveloperToken blocks until the operation completes or ctx is cancelled.
-func (x *CloudServiceController) RequestUserTokenForDeveloperToken(ctx context.Context, developerToken string) (string, error) {
+func (x *CloudServiceController) RequestUserTokenForDeveloperToken(ctx context.Context, developerToken string) (result string, err error) {
 	type _result struct {
 		val string
 		err error

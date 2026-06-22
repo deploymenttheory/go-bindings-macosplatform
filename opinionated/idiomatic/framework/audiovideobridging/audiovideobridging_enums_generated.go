@@ -37,6 +37,8 @@ const (
 	AVB17221ACMPFlagsStreamingUsingUDP AVB17221ACMPFlags = 512
 )
 
+// String returns the AVB17221ACMPFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AVB17221ACMPFlags) String() string {
 	var parts []string
 	if e&AVB17221ACMPFlagsClassB != 0 {
@@ -83,6 +85,8 @@ const (
 	AVB17221ACMPIPFlagNone AVB17221ACMPIPFlag = 0
 )
 
+// String returns the AVB17221ACMPIPFlag constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AVB17221ACMPIPFlag) String() string {
 	var parts []string
 	if len(parts) == 0 {
@@ -124,6 +128,8 @@ const (
 	AVB17221ACMPMessageTypeGetTXConnectionResponse AVB17221ACMPMessageType = 13
 )
 
+// String returns the AVB17221ACMPMessageType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AVB17221ACMPMessageType) String() string {
 	switch e {
 	case AVB17221ACMPMessageTypeConnectTXCommand:
@@ -206,6 +212,8 @@ const (
 	AVB17221ACMPStatusNotSupported AVB17221ACMPStatusCode = 31
 )
 
+// String returns the AVB17221ACMPStatusCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AVB17221ACMPStatusCode) String() string {
 	switch e {
 	case AVB17221ACMPStatusSuccess:
@@ -263,6 +271,8 @@ const (
 	AVB17221ADPControllerCapabilitiesImplemented AVB17221ADPControllerCapabilities = 1
 )
 
+// String returns the AVB17221ADPControllerCapabilities constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AVB17221ADPControllerCapabilities) String() string {
 	var parts []string
 	if e&AVB17221ADPControllerCapabilitiesImplemented != 0 {
@@ -335,6 +345,8 @@ const (
 	AVB17221ADPEntityCapabilitiesAEMConfigurationIndexValid AVB17221ADPEntityCapabilities = 33554432
 )
 
+// String returns the AVB17221ADPEntityCapabilities constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AVB17221ADPEntityCapabilities) String() string {
 	switch e {
 	case AVB17221ADPEntityCapabilitiesDFUMode:
@@ -416,6 +428,8 @@ const (
 	AVB17221ADPListenerCapabilitiesHasVideoSink AVB17221ADPListenerCapabilities = 32768
 )
 
+// String returns the AVB17221ADPListenerCapabilities constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AVB17221ADPListenerCapabilities) String() string {
 	var parts []string
 	if e&AVB17221ADPListenerCapabilitiesImplemented != 0 {
@@ -470,6 +484,8 @@ const (
 	AVB17221ADPTalkerCapabilitiesHasVideoSource AVB17221ADPTalkerCapabilities = 32768
 )
 
+// String returns the AVB17221ADPTalkerCapabilities constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AVB17221ADPTalkerCapabilities) String() string {
 	var parts []string
 	if e&AVB17221ADPTalkerCapabilitiesImplemented != 0 {
@@ -513,6 +529,8 @@ const (
 	AVB17221AECPAddressAccessTLVModeExecute AVB17221AECPAddressAccessTLVMode = 2
 )
 
+// String returns the AVB17221AECPAddressAccessTLVMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AVB17221AECPAddressAccessTLVMode) String() string {
 	switch e {
 	case AVB17221AECPAddressAccessTLVModeRead:
@@ -547,6 +565,8 @@ const (
 	AVB17221AECPMessageTypeVendorUniqueResponse AVB17221AECPMessageType = 7
 )
 
+// String returns the AVB17221AECPMessageType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AVB17221AECPMessageType) String() string {
 	switch e {
 	case AVB17221AECPMessageTypeAEMCommand:
@@ -615,6 +635,8 @@ const (
 	AVB17221AECPStatusAVCFailure AVB17221AECPStatusCode = 2
 )
 
+// String returns the AVB17221AECPStatusCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AVB17221AECPStatusCode) String() string {
 	switch e {
 	case AVB17221AECPStatusSuccess:
@@ -861,6 +883,8 @@ const (
 	AVB17221AEMCommandTypeAuthenticationAddKeyNonce AVB17221AEMCommandType = 104
 )
 
+// String returns the AVB17221AEMCommandType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AVB17221AEMCommandType) String() string {
 	switch e {
 	case AVB17221AEMCommandTypeAcquireEntity:

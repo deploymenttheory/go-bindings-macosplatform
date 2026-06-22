@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRMediaInputClusterInputInfo is an idiomatic wrapper over the Objective-C class MTRMediaInputClusterInputInfo.
+//
+// It embeds [MTRMediaInputClusterInputInfoStruct], promoting that type's methods.
 type MTRMediaInputClusterInputInfo struct {
-	objref.Handle
+	MTRMediaInputClusterInputInfoStruct
 }
 
 // MTRMediaInputClusterInputInfoFromID adopts an existing Objective-C object as a MTRMediaInputClusterInputInfo
@@ -23,7 +24,8 @@ func MTRMediaInputClusterInputInfoFromID(id objc.ID) *MTRMediaInputClusterInputI
 	if id == 0 {
 		return nil
 	}
-	x := &MTRMediaInputClusterInputInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRMediaInputClusterInputInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRMediaInputClusterInputInfoAdopt(id objc.ID) *MTRMediaInputClusterInputIn
 	if id == 0 {
 		return nil
 	}
-	x := &MTRMediaInputClusterInputInfo{Handle: objref.Wrap(id)}
+	x := &MTRMediaInputClusterInputInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRMediaInputClusterInputInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRMediaInputClusterInputInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRMediaInputClusterInputInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRMediaInputClusterInputInfo creates a new MTRMediaInputClusterInputInfo.
@@ -62,25 +50,25 @@ func NewMTRMediaInputClusterInputInfo() *MTRMediaInputClusterInputInfo {
 	return mTRMediaInputClusterInputInfoAdopt(_id)
 }
 
-// WithIndex sets index and returns the receiver so calls can be chained.
+// WithIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRMediaInputClusterInputInfo) WithIndex(index obj.Object) *MTRMediaInputClusterInputInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), objref.IDOf(index))
 	return x
 }
 
-// WithInputType sets inputType and returns the receiver so calls can be chained.
+// WithInputType sets the property and returns the receiver so calls can be chained.
 func (x *MTRMediaInputClusterInputInfo) WithInputType(inputType obj.Object) *MTRMediaInputClusterInputInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputType:"), objref.IDOf(inputType))
 	return x
 }
 
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *MTRMediaInputClusterInputInfo) WithName(name string) *MTRMediaInputClusterInputInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// WithDescriptionString sets descriptionString and returns the receiver so calls can be chained.
+// WithDescriptionString sets the property and returns the receiver so calls can be chained.
 func (x *MTRMediaInputClusterInputInfo) WithDescriptionString(descriptionString string) *MTRMediaInputClusterInputInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDescriptionString:"), purego.NSString(descriptionString))
 	return x
@@ -96,3 +84,5 @@ type MTRMediaInputClusterInputInfoable interface {
 }
 
 var _ MTRMediaInputClusterInputInfoable = (*MTRMediaInputClusterInputInfo)(nil)
+
+var _ MTRMediaInputClusterInputInfoStructProvider = (*MTRMediaInputClusterInputInfo)(nil)

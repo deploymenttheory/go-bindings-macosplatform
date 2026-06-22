@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A memory buffer that stores vertex or index data for a Model I/O mesh.
-//
 // MeshBufferData is an idiomatic wrapper over the Objective-C class MDLMeshBufferData.
+//
+// A memory buffer that stores vertex or index data for a Model I/O mesh.
 type MeshBufferData struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MeshBufferDataFromID(id objc.ID) *MeshBufferData {
 	if id == 0 {
 		return nil
 	}
-	x := &MeshBufferData{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MeshBufferData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func meshBufferDataAdopt(id objc.ID) *MeshBufferData {
 	if id == 0 {
 		return nil
 	}
-	x := &MeshBufferData{Handle: objref.Wrap(id)}
+	x := &MeshBufferData{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +60,27 @@ func (x *MeshBufferData) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a buffer of the specified length.
-//
-// NewMeshBufferDataWithTypeLength creates a new MeshBufferData.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MeshBufferData) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMeshBufferDataWithTypeLength initializes a buffer of the specified length.
 func NewMeshBufferDataWithTypeLength(type_ MeshBufferType, length int) *MeshBufferData {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMeshBufferData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:length:"), type_, length)
 	return meshBufferDataAdopt(_id)
 }
 
-// Initializes a buffer containing the specified data.
-//
-// NewMeshBufferDataWithTypeData creates a new MeshBufferData.
+// NewMeshBufferDataWithTypeData initializes a buffer containing the specified data.
 func NewMeshBufferDataWithTypeData(type_ MeshBufferType, data obj.Object) *MeshBufferData {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMeshBufferData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:data:"), type_, objref.IDOf(data))
 	return meshBufferDataAdopt(_id)
 }
 
+// Data wraps the corresponding Objective-C method.
 func (x *MeshBufferData) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)

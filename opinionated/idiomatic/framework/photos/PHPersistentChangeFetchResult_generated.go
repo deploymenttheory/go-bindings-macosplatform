@@ -13,9 +13,9 @@ import (
 	"unsafe"
 )
 
-// An object that represents a fetch result and allows you to enumerate a very large set of change records.
-//
 // PersistentChangeFetchResult is an idiomatic wrapper over the Objective-C class PHPersistentChangeFetchResult.
+//
+// An object that represents a fetch result and allows you to enumerate a very large set of change records.
 type PersistentChangeFetchResult struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func PersistentChangeFetchResultFromID(id objc.ID) *PersistentChangeFetchResult 
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentChangeFetchResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PersistentChangeFetchResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func persistentChangeFetchResultAdopt(id objc.ID) *PersistentChangeFetchResult {
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentChangeFetchResult{Handle: objref.Wrap(id)}
+	x := &PersistentChangeFetchResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,13 +61,19 @@ func (x *PersistentChangeFetchResult) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PersistentChangeFetchResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPersistentChangeFetchResult creates a new PersistentChangeFetchResult.
 func NewPersistentChangeFetchResult() *PersistentChangeFetchResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHPersistentChangeFetchResult")), objc.RegisterName("new"))
 	return persistentChangeFetchResultAdopt(_id)
 }
 
-// Executes the block you specify by using the objects in the fetch result.
+// EnumerateChangesWith executes the block you specify by using the objects in the fetch result.
 func (x *PersistentChangeFetchResult) EnumerateChangesWith(block func(obj.Object, *bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateChangesWithBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }

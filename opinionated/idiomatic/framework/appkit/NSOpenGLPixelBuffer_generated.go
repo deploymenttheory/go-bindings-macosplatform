@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides access to accelerated offscreen rendering.
-//
 // OpenGLPixelBuffer is an idiomatic wrapper over the Objective-C class NSOpenGLPixelBuffer.
+//
+// An object that provides access to accelerated offscreen rendering.
 type OpenGLPixelBuffer struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func OpenGLPixelBufferFromID(id objc.ID) *OpenGLPixelBuffer {
 	if id == 0 {
 		return nil
 	}
-	x := &OpenGLPixelBuffer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OpenGLPixelBuffer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func openGLPixelBufferAdopt(id objc.ID) *OpenGLPixelBuffer {
 	if id == 0 {
 		return nil
 	}
-	x := &OpenGLPixelBuffer{Handle: objref.Wrap(id)}
+	x := &OpenGLPixelBuffer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,49 +60,57 @@ func (x *OpenGLPixelBuffer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns an NSOpenGLPixelBuffer object initialized with the specified parameters.
-//
-// NewOpenGLPixelBufferWithTextureTargetTextureInternalFormatTextureMaxMipMapLevelPixelsWidePixelsHigh creates a new OpenGLPixelBuffer.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OpenGLPixelBuffer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewOpenGLPixelBufferWithTextureTargetTextureInternalFormatTextureMaxMipMapLevelPixelsWidePixelsHigh returns an NSOpenGLPixelBuffer object initialized with the specified parameters.
 func NewOpenGLPixelBufferWithTextureTargetTextureInternalFormatTextureMaxMipMapLevelPixelsWidePixelsHigh(target uint32, format uint32, maxLevel int32, pixelsWide int32, pixelsHigh int32) *OpenGLPixelBuffer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOpenGLPixelBuffer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextureTarget:textureInternalFormat:textureMaxMipMapLevel:pixelsWide:pixelsHigh:"), target, format, maxLevel, pixelsWide, pixelsHigh)
 	return openGLPixelBufferAdopt(_id)
 }
 
-// Initializes and returns an OpenGL pixel buffer object that encapsulates an existing CGL pixel buffer object.
-//
-// NewOpenGLPixelBufferWithCGLPBufferObj creates a new OpenGLPixelBuffer.
+// NewOpenGLPixelBufferWithCGLPBufferObj initializes and returns an OpenGL pixel buffer object that encapsulates an existing CGL pixel buffer object.
 func NewOpenGLPixelBufferWithCGLPBufferObj(pbuffer obj.Object) *OpenGLPixelBuffer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOpenGLPixelBuffer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGLPBufferObj:"), objref.IDOf(pbuffer))
 	return openGLPixelBufferAdopt(_id)
 }
 
+// CGLPBufferObj wraps the corresponding Objective-C method.
 func (x *OpenGLPixelBuffer) CGLPBufferObj() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CGLPBufferObj"))
 	return obj.Wrap(_r)
 }
 
+// PixelsWide wraps the corresponding Objective-C method.
 func (x *OpenGLPixelBuffer) PixelsWide() int32 {
 	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("pixelsWide"))
 	return _r
 }
 
+// PixelsHigh wraps the corresponding Objective-C method.
 func (x *OpenGLPixelBuffer) PixelsHigh() int32 {
 	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("pixelsHigh"))
 	return _r
 }
 
+// TextureTarget wraps the corresponding Objective-C method.
 func (x *OpenGLPixelBuffer) TextureTarget() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("textureTarget"))
 	return _r
 }
 
+// TextureInternalFormat wraps the corresponding Objective-C method.
 func (x *OpenGLPixelBuffer) TextureInternalFormat() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("textureInternalFormat"))
 	return _r
 }
 
+// TextureMaxMipMapLevel wraps the corresponding Objective-C method.
 func (x *OpenGLPixelBuffer) TextureMaxMipMapLevel() int32 {
 	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("textureMaxMipMapLevel"))
 	return _r

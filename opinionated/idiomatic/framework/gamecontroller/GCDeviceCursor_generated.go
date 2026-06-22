@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A control element for the cursor used as a directional pad.
-//
 // DeviceCursor is an idiomatic wrapper over the Objective-C class GCDeviceCursor.
+//
+// It embeds [ControllerDirectionPad], promoting that type's methods.
+//
+// A control element for the cursor used as a directional pad.
 type DeviceCursor struct {
-	objref.Handle
+	ControllerDirectionPad
 }
 
 // DeviceCursorFromID adopts an existing Objective-C object as a DeviceCursor
@@ -25,7 +26,8 @@ func DeviceCursorFromID(id objc.ID) *DeviceCursor {
 	if id == 0 {
 		return nil
 	}
-	x := &DeviceCursor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DeviceCursor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func deviceCursorAdopt(id objc.ID) *DeviceCursor {
 	if id == 0 {
 		return nil
 	}
-	x := &DeviceCursor{Handle: objref.Wrap(id)}
+	x := &DeviceCursor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DeviceCursor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DeviceCursor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DeviceCursor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDeviceCursor creates a new DeviceCursor.
@@ -64,41 +52,31 @@ func NewDeviceCursor() *DeviceCursor {
 	return deviceCursorAdopt(_id)
 }
 
-// The preferred state for handling input when the user binds the element to a system gesture.
-//
-// WithPreferredSystemGestureState sets preferredSystemGestureState and returns the receiver so calls can be chained.
+// WithPreferredSystemGestureState the preferred state for handling input when the user binds the element to a system gesture.
 func (x *DeviceCursor) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *DeviceCursor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
 	return x
 }
 
-// A system symbol for the element or the remapped element.
-//
-// WithSfSymbolsName sets sfSymbolsName and returns the receiver so calls can be chained.
+// WithSfSymbolsName a system symbol for the element or the remapped element.
 func (x *DeviceCursor) WithSfSymbolsName(sfSymbolsName string) *DeviceCursor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
 	return x
 }
 
-// The localized name for the element or the remapped element.
-//
-// WithLocalizedName sets localizedName and returns the receiver so calls can be chained.
+// WithLocalizedName the localized name for the element or the remapped element.
 func (x *DeviceCursor) WithLocalizedName(localizedName string) *DeviceCursor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedName:"), purego.NSString(localizedName))
 	return x
 }
 
-// The element’s system symbol, not the remapped symbol.
-//
-// WithUnmappedSfSymbolsName sets unmappedSfSymbolsName and returns the receiver so calls can be chained.
+// WithUnmappedSfSymbolsName the element’s system symbol, not the remapped symbol.
 func (x *DeviceCursor) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *DeviceCursor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedSfSymbolsName:"), purego.NSString(unmappedSfSymbolsName))
 	return x
 }
 
-// The element’s localized name, not the remapped name.
-//
-// WithUnmappedLocalizedName sets unmappedLocalizedName and returns the receiver so calls can be chained.
+// WithUnmappedLocalizedName the element’s localized name, not the remapped name.
 func (x *DeviceCursor) WithUnmappedLocalizedName(unmappedLocalizedName string) *DeviceCursor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
 	return x
@@ -115,3 +93,7 @@ type DeviceCursorable interface {
 }
 
 var _ DeviceCursorable = (*DeviceCursor)(nil)
+
+var _ ControllerDirectionPadProvider = (*DeviceCursor)(nil)
+
+var _ ControllerElementProvider = (*DeviceCursor)(nil)

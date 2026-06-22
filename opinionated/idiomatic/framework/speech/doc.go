@@ -3,4 +3,11 @@
 //go:build darwin
 
 // Package speech provides a fluent Go API over the macOS Speech framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - SpeechRecognitionRequest: [SpeechAudioBufferRecognitionRequest], [SpeechURLRecognitionRequest]
 package speech

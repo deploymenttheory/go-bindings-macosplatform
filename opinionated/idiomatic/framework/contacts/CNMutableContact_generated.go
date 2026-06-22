@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mutable object that stores information about a single contact, such as the contact’s first name, phone numbers, and addresses.
-//
 // MutableContact is an idiomatic wrapper over the Objective-C class CNMutableContact.
+//
+// It embeds [Contact], promoting that type's methods.
+//
+// A mutable object that stores information about a single contact, such as the contact’s first name, phone numbers, and addresses.
 type MutableContact struct {
-	objref.Handle
+	Contact
 }
 
 // MutableContactFromID adopts an existing Objective-C object as a MutableContact
@@ -25,7 +26,8 @@ func MutableContactFromID(id objc.ID) *MutableContact {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableContact{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableContact{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func mutableContactAdopt(id objc.ID) *MutableContact {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableContact{Handle: objref.Wrap(id)}
+	x := &MutableContact{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MutableContact) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableContact) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableContact) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMutableContact creates a new MutableContact.
@@ -64,334 +52,307 @@ func NewMutableContact() *MutableContact {
 	return mutableContactAdopt(_id)
 }
 
-// An enum identifying the contact type.
-//
-// WithContactType sets contactType and returns the receiver so calls can be chained.
+// WithContactType an enum identifying the contact type.
 func (x *MutableContact) WithContactType(contactType ContactType) *MutableContact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContactType:"), contactType)
 	return x
 }
 
-// The name prefix of the contact.
-//
-// WithNamePrefix sets namePrefix and returns the receiver so calls can be chained.
+// WithNamePrefix the name prefix of the contact.
 func (x *MutableContact) WithNamePrefix(namePrefix string) *MutableContact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNamePrefix:"), purego.NSString(namePrefix))
 	return x
 }
 
-// The given name of the contact.
-//
-// WithGivenName sets givenName and returns the receiver so calls can be chained.
+// WithGivenName the given name of the contact.
 func (x *MutableContact) WithGivenName(givenName string) *MutableContact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGivenName:"), purego.NSString(givenName))
 	return x
 }
 
-// The middle name of the contact.
-//
-// WithMiddleName sets middleName and returns the receiver so calls can be chained.
+// WithMiddleName the middle name of the contact.
 func (x *MutableContact) WithMiddleName(middleName string) *MutableContact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiddleName:"), purego.NSString(middleName))
 	return x
 }
 
-// The family name of the contact.
-//
-// WithFamilyName sets familyName and returns the receiver so calls can be chained.
+// WithFamilyName the family name of the contact.
 func (x *MutableContact) WithFamilyName(familyName string) *MutableContact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFamilyName:"), purego.NSString(familyName))
 	return x
 }
 
-// The previous family name of the contact.
-//
-// WithPreviousFamilyName sets previousFamilyName and returns the receiver so calls can be chained.
+// WithPreviousFamilyName the previous family name of the contact.
 func (x *MutableContact) WithPreviousFamilyName(previousFamilyName string) *MutableContact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousFamilyName:"), purego.NSString(previousFamilyName))
 	return x
 }
 
-// The name suffix of the contact.
-//
-// WithNameSuffix sets nameSuffix and returns the receiver so calls can be chained.
+// WithNameSuffix the name suffix of the contact.
 func (x *MutableContact) WithNameSuffix(nameSuffix string) *MutableContact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNameSuffix:"), purego.NSString(nameSuffix))
 	return x
 }
 
-// The nickname of the contact.
-//
-// WithNickname sets nickname and returns the receiver so calls can be chained.
+// WithNickname the nickname of the contact.
 func (x *MutableContact) WithNickname(nickname string) *MutableContact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNickname:"), purego.NSString(nickname))
 	return x
 }
 
-// The name of the organization associated with the contact.
-//
-// WithOrganizationName sets organizationName and returns the receiver so calls can be chained.
+// WithOrganizationName the name of the organization associated with the contact.
 func (x *MutableContact) WithOrganizationName(organizationName string) *MutableContact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrganizationName:"), purego.NSString(organizationName))
 	return x
 }
 
-// The name of the department associated with the contact.
-//
-// WithDepartmentName sets departmentName and returns the receiver so calls can be chained.
+// WithDepartmentName the name of the department associated with the contact.
 func (x *MutableContact) WithDepartmentName(departmentName string) *MutableContact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepartmentName:"), purego.NSString(departmentName))
 	return x
 }
 
-// The contact’s job title.
-//
-// WithJobTitle sets jobTitle and returns the receiver so calls can be chained.
+// WithJobTitle the contact’s job title.
 func (x *MutableContact) WithJobTitle(jobTitle string) *MutableContact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJobTitle:"), purego.NSString(jobTitle))
 	return x
 }
 
-// The phonetic given name of the contact.
-//
-// WithPhoneticGivenName sets phoneticGivenName and returns the receiver so calls can be chained.
+// WithPhoneticGivenName the phonetic given name of the contact.
 func (x *MutableContact) WithPhoneticGivenName(phoneticGivenName string) *MutableContact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneticGivenName:"), purego.NSString(phoneticGivenName))
 	return x
 }
 
-// The phonetic middle name of the contact.
-//
-// WithPhoneticMiddleName sets phoneticMiddleName and returns the receiver so calls can be chained.
+// WithPhoneticMiddleName the phonetic middle name of the contact.
 func (x *MutableContact) WithPhoneticMiddleName(phoneticMiddleName string) *MutableContact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneticMiddleName:"), purego.NSString(phoneticMiddleName))
 	return x
 }
 
-// The phonetic family name of the contact.
-//
-// WithPhoneticFamilyName sets phoneticFamilyName and returns the receiver so calls can be chained.
+// WithPhoneticFamilyName the phonetic family name of the contact.
 func (x *MutableContact) WithPhoneticFamilyName(phoneticFamilyName string) *MutableContact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneticFamilyName:"), purego.NSString(phoneticFamilyName))
 	return x
 }
 
-// The phonetic name of the organization associated with the contact.
-//
-// WithPhoneticOrganizationName sets phoneticOrganizationName and returns the receiver so calls can be chained.
+// WithPhoneticOrganizationName the phonetic name of the organization associated with the contact.
 func (x *MutableContact) WithPhoneticOrganizationName(phoneticOrganizationName string) *MutableContact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneticOrganizationName:"), purego.NSString(phoneticOrganizationName))
 	return x
 }
 
-// A string containing notes for the contact.
-//
-// WithNote sets note and returns the receiver so calls can be chained.
+// WithNote a string containing notes for the contact.
 func (x *MutableContact) WithNote(note string) *MutableContact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNote:"), purego.NSString(note))
 	return x
 }
 
-// The profile picture of a contact.
-//
-// WithImageData sets imageData and returns the receiver so calls can be chained.
+// WithImageData the profile picture of a contact.
 func (x *MutableContact) WithImageData(imageData obj.Object) *MutableContact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageData:"), objref.IDOf(imageData))
 	return x
 }
 
-// An array of labeled phone numbers for a contact.
-//
-// WithPhoneNumbers sets the collection and returns the receiver so calls can be chained.
+// WithPhoneNumbers an array of labeled phone numbers for a contact.
 func (x *MutableContact) WithPhoneNumbers(items ...obj.Object) *MutableContact {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneNumbers:"), _arr)
 	return x
 }
 
-// An array of labeled email addresses for the contact.
-//
-// WithEmailAddresses sets the collection and returns the receiver so calls can be chained.
+// WithEmailAddresses an array of labeled email addresses for the contact.
 func (x *MutableContact) WithEmailAddresses(items ...obj.Object) *MutableContact {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmailAddresses:"), _arr)
 	return x
 }
 
-// An array of labeled postal addresses for a contact.
-//
-// WithPostalAddresses sets the collection and returns the receiver so calls can be chained.
+// WithPostalAddresses an array of labeled postal addresses for a contact.
 func (x *MutableContact) WithPostalAddresses(items ...obj.Object) *MutableContact {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostalAddresses:"), _arr)
 	return x
 }
 
-// An array of labeled URL addresses for a contact.
-//
-// WithUrlAddresses sets the collection and returns the receiver so calls can be chained.
+// WithUrlAddresses an array of labeled URL addresses for a contact.
 func (x *MutableContact) WithUrlAddresses(items ...obj.Object) *MutableContact {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrlAddresses:"), _arr)
 	return x
 }
 
-// An array of labeled contact relations for the contact.
-//
-// WithContactRelations sets the collection and returns the receiver so calls can be chained.
+// WithContactRelations an array of labeled contact relations for the contact.
 func (x *MutableContact) WithContactRelations(items ...obj.Object) *MutableContact {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContactRelations:"), _arr)
 	return x
 }
 
-// An array of labeled social profiles for a contact.
-//
-// WithSocialProfiles sets the collection and returns the receiver so calls can be chained.
+// WithSocialProfiles an array of labeled social profiles for a contact.
 func (x *MutableContact) WithSocialProfiles(items ...obj.Object) *MutableContact {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSocialProfiles:"), _arr)
 	return x
 }
 
-// An array of labeled IM addresses for the contact.
-//
-// WithInstantMessageAddresses sets the collection and returns the receiver so calls can be chained.
+// WithInstantMessageAddresses an array of labeled IM addresses for the contact.
 func (x *MutableContact) WithInstantMessageAddresses(items ...obj.Object) *MutableContact {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstantMessageAddresses:"), _arr)
 	return x
 }
 
-// A date component for the Gregorian birthday of the contact.
-//
-// WithBirthday sets birthday and returns the receiver so calls can be chained.
+// WithBirthday a date component for the Gregorian birthday of the contact.
 func (x *MutableContact) WithBirthday(birthday obj.Object) *MutableContact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBirthday:"), objref.IDOf(birthday))
 	return x
 }
 
-// A date component for the non-Gregorian birthday of the contact.
-//
-// WithNonGregorianBirthday sets nonGregorianBirthday and returns the receiver so calls can be chained.
+// WithNonGregorianBirthday a date component for the non-Gregorian birthday of the contact.
 func (x *MutableContact) WithNonGregorianBirthday(nonGregorianBirthday obj.Object) *MutableContact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNonGregorianBirthday:"), objref.IDOf(nonGregorianBirthday))
 	return x
 }
 
-// An array containing labeled Gregorian dates.
-//
-// WithDates sets the collection and returns the receiver so calls can be chained.
+// WithDates an array containing labeled Gregorian dates.
 func (x *MutableContact) WithDates(items ...obj.Object) *MutableContact {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDates:"), _arr)
 	return x
 }
 
+// SetContactType wraps the corresponding Objective-C method.
 func (x *MutableContact) SetContactType(contactType ContactType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContactType:"), contactType)
 }
 
+// SetNamePrefix wraps the corresponding Objective-C method.
 func (x *MutableContact) SetNamePrefix(namePrefix string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNamePrefix:"), purego.NSString(namePrefix))
 }
 
+// SetGivenName wraps the corresponding Objective-C method.
 func (x *MutableContact) SetGivenName(givenName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGivenName:"), purego.NSString(givenName))
 }
 
+// SetMiddleName wraps the corresponding Objective-C method.
 func (x *MutableContact) SetMiddleName(middleName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiddleName:"), purego.NSString(middleName))
 }
 
+// SetFamilyName wraps the corresponding Objective-C method.
 func (x *MutableContact) SetFamilyName(familyName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFamilyName:"), purego.NSString(familyName))
 }
 
+// SetPreviousFamilyName wraps the corresponding Objective-C method.
 func (x *MutableContact) SetPreviousFamilyName(previousFamilyName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousFamilyName:"), purego.NSString(previousFamilyName))
 }
 
+// SetNameSuffix wraps the corresponding Objective-C method.
 func (x *MutableContact) SetNameSuffix(nameSuffix string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNameSuffix:"), purego.NSString(nameSuffix))
 }
 
+// SetNickname wraps the corresponding Objective-C method.
 func (x *MutableContact) SetNickname(nickname string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNickname:"), purego.NSString(nickname))
 }
 
+// SetOrganizationName wraps the corresponding Objective-C method.
 func (x *MutableContact) SetOrganizationName(organizationName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrganizationName:"), purego.NSString(organizationName))
 }
 
+// SetDepartmentName wraps the corresponding Objective-C method.
 func (x *MutableContact) SetDepartmentName(departmentName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepartmentName:"), purego.NSString(departmentName))
 }
 
+// SetJobTitle wraps the corresponding Objective-C method.
 func (x *MutableContact) SetJobTitle(jobTitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJobTitle:"), purego.NSString(jobTitle))
 }
 
+// SetPhoneticGivenName wraps the corresponding Objective-C method.
 func (x *MutableContact) SetPhoneticGivenName(phoneticGivenName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneticGivenName:"), purego.NSString(phoneticGivenName))
 }
 
+// SetPhoneticMiddleName wraps the corresponding Objective-C method.
 func (x *MutableContact) SetPhoneticMiddleName(phoneticMiddleName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneticMiddleName:"), purego.NSString(phoneticMiddleName))
 }
 
+// SetPhoneticFamilyName wraps the corresponding Objective-C method.
 func (x *MutableContact) SetPhoneticFamilyName(phoneticFamilyName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneticFamilyName:"), purego.NSString(phoneticFamilyName))
 }
 
+// SetPhoneticOrganizationName wraps the corresponding Objective-C method.
 func (x *MutableContact) SetPhoneticOrganizationName(phoneticOrganizationName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneticOrganizationName:"), purego.NSString(phoneticOrganizationName))
 }
 
+// SetNote wraps the corresponding Objective-C method.
 func (x *MutableContact) SetNote(note string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNote:"), purego.NSString(note))
 }
 
+// SetImageData wraps the corresponding Objective-C method.
 func (x *MutableContact) SetImageData(imageData obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageData:"), objref.IDOf(imageData))
 }
 
+// SetPhoneNumbers wraps the corresponding Objective-C method.
 func (x *MutableContact) SetPhoneNumbers(phoneNumbers []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneNumbers:"), purego.SliceToNSArray(phoneNumbers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SetEmailAddresses wraps the corresponding Objective-C method.
 func (x *MutableContact) SetEmailAddresses(emailAddresses []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmailAddresses:"), purego.SliceToNSArray(emailAddresses, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SetPostalAddresses wraps the corresponding Objective-C method.
 func (x *MutableContact) SetPostalAddresses(postalAddresses []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostalAddresses:"), purego.SliceToNSArray(postalAddresses, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SetUrlAddresses wraps the corresponding Objective-C method.
 func (x *MutableContact) SetUrlAddresses(urlAddresses []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrlAddresses:"), purego.SliceToNSArray(urlAddresses, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SetContactRelations wraps the corresponding Objective-C method.
 func (x *MutableContact) SetContactRelations(contactRelations []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContactRelations:"), purego.SliceToNSArray(contactRelations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SetSocialProfiles wraps the corresponding Objective-C method.
 func (x *MutableContact) SetSocialProfiles(socialProfiles []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSocialProfiles:"), purego.SliceToNSArray(socialProfiles, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SetInstantMessageAddresses wraps the corresponding Objective-C method.
 func (x *MutableContact) SetInstantMessageAddresses(instantMessageAddresses []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstantMessageAddresses:"), purego.SliceToNSArray(instantMessageAddresses, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SetBirthday wraps the corresponding Objective-C method.
 func (x *MutableContact) SetBirthday(birthday obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBirthday:"), objref.IDOf(birthday))
 }
 
+// SetNonGregorianBirthday wraps the corresponding Objective-C method.
 func (x *MutableContact) SetNonGregorianBirthday(nonGregorianBirthday obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNonGregorianBirthday:"), objref.IDOf(nonGregorianBirthday))
 }
 
+// SetDates wraps the corresponding Objective-C method.
 func (x *MutableContact) SetDates(dates []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDates:"), purego.SliceToNSArray(dates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
@@ -456,3 +417,5 @@ type MutableContactable interface {
 }
 
 var _ MutableContactable = (*MutableContact)(nil)
+
+var _ ContactProvider = (*MutableContact)(nil)

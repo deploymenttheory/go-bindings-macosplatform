@@ -6,17 +6,19 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The programmatic interface for text fields that are used for text-based searches.
-//
 // SearchFieldCell is an idiomatic wrapper over the Objective-C class NSSearchFieldCell.
+//
+// It embeds [TextFieldCell], promoting that type's methods.
+//
+// The programmatic interface for text fields that are used for text-based searches.
 type SearchFieldCell struct {
-	objref.Handle
+	TextFieldCell
 }
 
 // SearchFieldCellFromID adopts an existing Objective-C object as a SearchFieldCell
@@ -25,7 +27,8 @@ func SearchFieldCellFromID(id objc.ID) *SearchFieldCell {
 	if id == 0 {
 		return nil
 	}
-	x := &SearchFieldCell{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SearchFieldCell{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func searchFieldCellAdopt(id objc.ID) *SearchFieldCell {
 	if id == 0 {
 		return nil
 	}
-	x := &SearchFieldCell{Handle: objref.Wrap(id)}
+	x := &SearchFieldCell{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SearchFieldCell) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SearchFieldCell) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SearchFieldCell) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSearchFieldCellTextCell creates a new SearchFieldCell.
@@ -72,559 +61,476 @@ func NewSearchFieldCellWithCoder(coder obj.Object) *SearchFieldCell {
 	return searchFieldCellAdopt(_id)
 }
 
-// The button cell used to display the search-button image.
-//
-// WithSearchButtonCell sets searchButtonCell and returns the receiver so calls can be chained.
+// WithSearchButtonCell the button cell used to display the search-button image.
 func (x *SearchFieldCell) WithSearchButtonCell(searchButtonCell ButtonCellProvider) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchButtonCell:"), objref.IDOf(searchButtonCell))
 	return x
 }
 
-// The button cell used to display the cancel-button image.
-//
-// WithCancelButtonCell sets cancelButtonCell and returns the receiver so calls can be chained.
+// WithCancelButtonCell the button cell used to display the cancel-button image.
 func (x *SearchFieldCell) WithCancelButtonCell(cancelButtonCell ButtonCellProvider) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelButtonCell:"), objref.IDOf(cancelButtonCell))
 	return x
 }
 
-// The menu object used to dynamically construct the search field’s pop-up icon menu.
-//
-// WithSearchMenuTemplate sets searchMenuTemplate and returns the receiver so calls can be chained.
+// WithSearchMenuTemplate the menu object used to dynamically construct the search field’s pop-up icon menu.
 func (x *SearchFieldCell) WithSearchMenuTemplate(searchMenuTemplate *Menu) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchMenuTemplate:"), objref.IDOf(searchMenuTemplate))
 	return x
 }
 
-// A Boolean value indicating whether the cell calls its search action method when the user clicks the search button (or presses Return) or after each keystroke.
-//
-// WithSendsWholeSearchString sets sendsWholeSearchString and returns the receiver so calls can be chained.
+// WithSendsWholeSearchString a Boolean value indicating whether the cell calls its search action method when the user clicks the search button (or presses Return) or after each keystroke.
 func (x *SearchFieldCell) WithSendsWholeSearchString(sendsWholeSearchString bool) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsWholeSearchString:"), sendsWholeSearchString)
 	return x
 }
 
-// The maximum number of search strings that can appear in the search menu.
-//
-// WithMaximumRecents sets maximumRecents and returns the receiver so calls can be chained.
+// WithMaximumRecents the maximum number of search strings that can appear in the search menu.
 func (x *SearchFieldCell) WithMaximumRecents(maximumRecents int) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumRecents:"), maximumRecents)
 	return x
 }
 
-// An array of the recent search strings to display in the pop-up icon menu of the search field.
-//
-// WithRecentSearches sets the collection and returns the receiver so calls can be chained.
+// WithRecentSearches an array of the recent search strings to display in the pop-up icon menu of the search field.
 func (x *SearchFieldCell) WithRecentSearches(items ...obj.Object) *SearchFieldCell {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecentSearches:"), _arr)
 	return x
 }
 
-// The autosave name under which the search field automatically saves the list of recent search strings.
-//
-// WithRecentsAutosaveName sets recentsAutosaveName and returns the receiver so calls can be chained.
+// WithRecentsAutosaveName the autosave name under which the search field automatically saves the list of recent search strings.
 func (x *SearchFieldCell) WithRecentsAutosaveName(recentsAutosaveName obj.Object) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecentsAutosaveName:"), objref.IDOf(recentsAutosaveName))
 	return x
 }
 
-// A Boolean value indicating whether the cell calls its action method immediately when an appropriate action occurs.
-//
-// WithSendsSearchStringImmediately sets sendsSearchStringImmediately and returns the receiver so calls can be chained.
+// WithSendsSearchStringImmediately a Boolean value indicating whether the cell calls its action method immediately when an appropriate action occurs.
 func (x *SearchFieldCell) WithSendsSearchStringImmediately(sendsSearchStringImmediately bool) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsSearchStringImmediately:"), sendsSearchStringImmediately)
 	return x
 }
 
-// The color of the cell’s background.
-//
-// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+// WithBackgroundColor the color of the cell’s background.
 func (x *SearchFieldCell) WithBackgroundColor(backgroundColor *Color) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// A Boolean value that indicates whether the cell draws its background color.
-//
-// WithDrawsBackground sets drawsBackground and returns the receiver so calls can be chained.
+// WithDrawsBackground a Boolean value that indicates whether the cell draws its background color.
 func (x *SearchFieldCell) WithDrawsBackground(drawsBackground bool) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
 	return x
 }
 
-// The color to use to draw the cell’s text.
-//
-// WithTextColor sets textColor and returns the receiver so calls can be chained.
+// WithTextColor the color to use to draw the cell’s text.
 func (x *SearchFieldCell) WithTextColor(textColor *Color) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 	return x
 }
 
-// The bezel style to use when drawing the text field.
-//
-// WithBezelStyle sets bezelStyle and returns the receiver so calls can be chained.
+// WithBezelStyle the bezel style to use when drawing the text field.
 func (x *SearchFieldCell) WithBezelStyle(bezelStyle TextFieldBezelStyle) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelStyle:"), bezelStyle)
 	return x
 }
 
-// The placeholder text for the cell, specified as a plain text string.
-//
-// WithPlaceholderString sets placeholderString and returns the receiver so calls can be chained.
+// WithPlaceholderString the placeholder text for the cell, specified as a plain text string.
 func (x *SearchFieldCell) WithPlaceholderString(placeholderString string) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
 	return x
 }
 
-// The placeholder text for the cell, specified as an attributed string.
-//
-// WithPlaceholderAttributedString sets placeholderAttributedString and returns the receiver so calls can be chained.
+// WithPlaceholderAttributedString the placeholder text for the cell, specified as an attributed string.
 func (x *SearchFieldCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 	return x
 }
 
-// An array of locale identifiers that represent the allowed input sources when the text field has the keyboard focus.
-//
-// WithAllowedInputSourceLocales sets the collection and returns the receiver so calls can be chained.
+// WithAllowedInputSourceLocales an array of locale identifiers that represent the allowed input sources when the text field has the keyboard focus.
 func (x *SearchFieldCell) WithAllowedInputSourceLocales(items ...obj.Object) *SearchFieldCell {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedInputSourceLocales:"), _arr)
 	return x
 }
 
-// The view associated with the cell.
-//
-// WithControlView sets controlView and returns the receiver so calls can be chained.
+// WithControlView the view associated with the cell.
 func (x *SearchFieldCell) WithControlView(controlView ViewProvider) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	return x
 }
 
-// The type of the cell.
-//
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithType the type of the cell.
 func (x *SearchFieldCell) WithType(type_ CellType) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
-// The cell’s current state.
-//
-// WithState sets state and returns the receiver so calls can be chained.
+// WithState the cell’s current state.
 func (x *SearchFieldCell) WithState(state int) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 	return x
 }
 
-// The object that receives the cell’s action messages.
-//
-// WithTarget sets target and returns the receiver so calls can be chained.
+// WithTarget the object that receives the cell’s action messages.
 func (x *SearchFieldCell) WithTarget(target obj.Object) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// A tag for identifying the cell.
-//
-// WithTag sets tag and returns the receiver so calls can be chained.
+// WithTag a tag for identifying the cell.
 func (x *SearchFieldCell) WithTag(tag int) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// The cell’s title text.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the cell’s title text.
 func (x *SearchFieldCell) WithTitle(title string) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A Boolean value indicating whether the cell is currently enabled.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value indicating whether the cell is currently enabled.
 func (x *SearchFieldCell) WithEnabled(enabled bool) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
-//
-// WithContinuous sets continuous and returns the receiver so calls can be chained.
+// WithContinuous a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 func (x *SearchFieldCell) WithContinuous(continuous bool) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
-// A Boolean value indicating whether the cell is editable.
-//
-// WithEditable sets editable and returns the receiver so calls can be chained.
+// WithEditable a Boolean value indicating whether the cell is editable.
 func (x *SearchFieldCell) WithEditable(editable bool) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
-// A Boolean value indicating whether the cell’s text can be selected.
-//
-// WithSelectable sets selectable and returns the receiver so calls can be chained.
+// WithSelectable a Boolean value indicating whether the cell’s text can be selected.
 func (x *SearchFieldCell) WithSelectable(selectable bool) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 	return x
 }
 
-// A Boolean value indicating whether the cell draws itself outlined with a plain border.
-//
-// WithBordered sets bordered and returns the receiver so calls can be chained.
+// WithBordered a Boolean value indicating whether the cell draws itself outlined with a plain border.
 func (x *SearchFieldCell) WithBordered(bordered bool) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
-// A Boolean value indicating whether the cell has a bezeled border.
-//
-// WithBezeled sets bezeled and returns the receiver so calls can be chained.
+// WithBezeled a Boolean value indicating whether the cell has a bezeled border.
 func (x *SearchFieldCell) WithBezeled(bezeled bool) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 	return x
 }
 
-// A Boolean value indicating whether excess text scrolls past the cell’s bounds.
-//
-// WithScrollable sets scrollable and returns the receiver so calls can be chained.
+// WithScrollable a Boolean value indicating whether excess text scrolls past the cell’s bounds.
 func (x *SearchFieldCell) WithScrollable(scrollable bool) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
 	return x
 }
 
-// A Boolean value indicating whether the cell has a highlighted appearance.
-//
-// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
+// WithHighlighted a Boolean value indicating whether the cell has a highlighted appearance.
 func (x *SearchFieldCell) WithHighlighted(highlighted bool) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// The alignment of the cell’s text.
-//
-// WithAlignment sets alignment and returns the receiver so calls can be chained.
+// WithAlignment the alignment of the cell’s text.
 func (x *SearchFieldCell) WithAlignment(alignment TextAlignment) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
-// A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
-//
-// WithWraps sets wraps and returns the receiver so calls can be chained.
+// WithWraps a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 func (x *SearchFieldCell) WithWraps(wraps bool) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
 	return x
 }
 
-// The font that the cell uses to display text.
-//
-// WithFont sets font and returns the receiver so calls can be chained.
+// WithFont the font that the cell uses to display text.
 func (x *SearchFieldCell) WithFont(font *Font) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
-// The cell’s formatter object.
-//
-// WithFormatter sets formatter and returns the receiver so calls can be chained.
+// WithFormatter the cell’s formatter object.
 func (x *SearchFieldCell) WithFormatter(formatter obj.Object) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
-// The cell’s value as an Objective-C object.
-//
-// WithObjectValue sets objectValue and returns the receiver so calls can be chained.
+// WithObjectValue the cell’s value as an Objective-C object.
 func (x *SearchFieldCell) WithObjectValue(objectValue obj.Object) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
-// The cell’s value as a string.
-//
-// WithStringValue sets stringValue and returns the receiver so calls can be chained.
+// WithStringValue the cell’s value as a string.
 func (x *SearchFieldCell) WithStringValue(stringValue string) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
-// The cell’s value as an integer.
-//
-// WithIntValue sets intValue and returns the receiver so calls can be chained.
+// WithIntValue the cell’s value as an integer.
 func (x *SearchFieldCell) WithIntValue(intValue int) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
-// The cell’s value as a single-precision floating-point number.
-//
-// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
+// WithFloatValue the cell’s value as a single-precision floating-point number.
 func (x *SearchFieldCell) WithFloatValue(floatValue float32) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
-// The cell’s value as a double-precision floating-point number.
-//
-// WithDoubleValue sets doubleValue and returns the receiver so calls can be chained.
+// WithDoubleValue the cell’s value as a double-precision floating-point number.
 func (x *SearchFieldCell) WithDoubleValue(doubleValue float64) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
-// The cell’s value as an integer value.
-//
-// WithIntegerValue sets integerValue and returns the receiver so calls can be chained.
+// WithIntegerValue the cell’s value as an integer value.
 func (x *SearchFieldCell) WithIntegerValue(integerValue int) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
-// The image displayed by the cell, if any.
-//
-// WithImage sets image and returns the receiver so calls can be chained.
+// WithImage the image displayed by the cell, if any.
 func (x *SearchFieldCell) WithImage(image *Image) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
-// The size of the cell.
-//
-// WithControlSize sets controlSize and returns the receiver so calls can be chained.
+// WithControlSize the size of the cell.
 func (x *SearchFieldCell) WithControlSize(controlSize ControlSize) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
-// The object represented by the cell.
-//
-// WithRepresentedObject sets representedObject and returns the receiver so calls can be chained.
+// WithRepresentedObject the object represented by the cell.
 func (x *SearchFieldCell) WithRepresentedObject(representedObject obj.Object) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return x
 }
 
-// The cell’s contextual menu.
-//
-// WithMenu sets menu and returns the receiver so calls can be chained.
+// WithMenu the cell’s contextual menu.
 func (x *SearchFieldCell) WithMenu(menu *Menu) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
-//
-// WithSendsActionOnEndEditing sets sendsActionOnEndEditing and returns the receiver so calls can be chained.
+// WithSendsActionOnEndEditing a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 func (x *SearchFieldCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
 	return x
 }
 
-// The initial writing direction used to determine the actual writing direction for text.
-//
-// WithBaseWritingDirection sets baseWritingDirection and returns the receiver so calls can be chained.
+// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
 func (x *SearchFieldCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
-// The line break mode to use when drawing text in the cell.
-//
-// WithLineBreakMode sets lineBreakMode and returns the receiver so calls can be chained.
+// WithLineBreakMode the line break mode to use when drawing text in the cell.
 func (x *SearchFieldCell) WithLineBreakMode(lineBreakMode LineBreakMode) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
-// A Boolean value indicating whether the cell assumes responsibility for undo operations.
-//
-// WithAllowsUndo sets allowsUndo and returns the receiver so calls can be chained.
+// WithAllowsUndo a Boolean value indicating whether the cell assumes responsibility for undo operations.
 func (x *SearchFieldCell) WithAllowsUndo(allowsUndo bool) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
 	return x
 }
 
-// A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
-//
-// WithTruncatesLastVisibleLine sets truncatesLastVisibleLine and returns the receiver so calls can be chained.
+// WithTruncatesLastVisibleLine a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 func (x *SearchFieldCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
 	return x
 }
 
-// The layout direction of the user interface.
-//
-// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection the layout direction of the user interface.
 func (x *SearchFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
-//
-// WithUsesSingleLineMode sets usesSingleLineMode and returns the receiver so calls can be chained.
+// WithUsesSingleLineMode a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 func (x *SearchFieldCell) WithUsesSingleLineMode(usesSingleLineMode bool) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
-// A Boolean value indicating whether the cell refuses the first responder status.
-//
-// WithRefusesFirstResponder sets refusesFirstResponder and returns the receiver so calls can be chained.
+// WithRefusesFirstResponder a Boolean value indicating whether the cell refuses the first responder status.
 func (x *SearchFieldCell) WithRefusesFirstResponder(refusesFirstResponder bool) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
-// A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
-//
-// WithShowsFirstResponder sets showsFirstResponder and returns the receiver so calls can be chained.
+// WithShowsFirstResponder a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 func (x *SearchFieldCell) WithShowsFirstResponder(showsFirstResponder bool) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
 	return x
 }
 
-// The type of focus ring to use with the associated view.
-//
-// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+// WithFocusRingType the type of focus ring to use with the associated view.
 func (x *SearchFieldCell) WithFocusRingType(focusRingType FocusRingType) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// The cell’s value as an attributed string.
-//
-// WithAttributedStringValue sets attributedStringValue and returns the receiver so calls can be chained.
+// WithAttributedStringValue the cell’s value as an attributed string.
 func (x *SearchFieldCell) WithAttributedStringValue(attributedStringValue obj.Object) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
-// A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
-//
-// WithAllowsEditingTextAttributes sets allowsEditingTextAttributes and returns the receiver so calls can be chained.
+// WithAllowsEditingTextAttributes a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 func (x *SearchFieldCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
 	return x
 }
 
-// A Boolean value indicating whether the cell supports the importation of images into its text.
-//
-// WithImportsGraphics sets importsGraphics and returns the receiver so calls can be chained.
+// WithImportsGraphics a Boolean value indicating whether the cell supports the importation of images into its text.
 func (x *SearchFieldCell) WithImportsGraphics(importsGraphics bool) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
 	return x
 }
 
-// A Boolean value indicating whether the cell supports three states instead of two.
-//
-// WithAllowsMixedState sets allowsMixedState and returns the receiver so calls can be chained.
+// WithAllowsMixedState a Boolean value indicating whether the cell supports three states instead of two.
 func (x *SearchFieldCell) WithAllowsMixedState(allowsMixedState bool) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
 	return x
 }
 
-// The cell’s background style.
-//
-// WithBackgroundStyle sets backgroundStyle and returns the receiver so calls can be chained.
+// WithBackgroundStyle the cell’s background style.
 func (x *SearchFieldCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
 	return x
 }
 
-// The cell’s control tint.
-//
-// WithControlTint sets controlTint and returns the receiver so calls can be chained.
+// WithControlTint the cell’s control tint.
 func (x *SearchFieldCell) WithControlTint(controlTint ControlTint) *SearchFieldCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
 	return x
 }
 
-// Resets the search button cell to its default attributes.
+// ResetSearchButtonCell resets the search button cell to its default attributes.
 func (x *SearchFieldCell) ResetSearchButtonCell() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetSearchButtonCell"))
 }
 
-// Resets the cancel button cell to its default attributes.
+// ResetCancelButtonCell resets the cancel button cell to its default attributes.
 func (x *SearchFieldCell) ResetCancelButtonCell() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetCancelButtonCell"))
 }
 
+// SearchTextRectForBounds modifies the bounding rectangle for the search-text field cell.
+func (x *SearchFieldCell) SearchTextRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("searchTextRectForBounds:"), rect)
+	return _r
+}
+
+// SearchButtonRectForBounds modifies the bounding rectangle for the search button cell.
+func (x *SearchFieldCell) SearchButtonRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("searchButtonRectForBounds:"), rect)
+	return _r
+}
+
+// CancelButtonRectForBounds modifies the bounding rectangle for the cancel button cell.
+func (x *SearchFieldCell) CancelButtonRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("cancelButtonRectForBounds:"), rect)
+	return _r
+}
+
+// SearchButtonCell wraps the corresponding Objective-C method.
 func (x *SearchFieldCell) SearchButtonCell() *ButtonCell {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("searchButtonCell"))
 	return ButtonCellFromID(_r)
 }
 
+// SetSearchButtonCell wraps the corresponding Objective-C method.
 func (x *SearchFieldCell) SetSearchButtonCell(searchButtonCell *ButtonCell) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchButtonCell:"), objref.IDOf(searchButtonCell))
 }
 
+// CancelButtonCell wraps the corresponding Objective-C method.
 func (x *SearchFieldCell) CancelButtonCell() *ButtonCell {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelButtonCell"))
 	return ButtonCellFromID(_r)
 }
 
+// SetCancelButtonCell wraps the corresponding Objective-C method.
 func (x *SearchFieldCell) SetCancelButtonCell(cancelButtonCell *ButtonCell) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelButtonCell:"), objref.IDOf(cancelButtonCell))
 }
 
+// SearchMenuTemplate wraps the corresponding Objective-C method.
 func (x *SearchFieldCell) SearchMenuTemplate() *Menu {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("searchMenuTemplate"))
 	return MenuFromID(_r)
 }
 
+// SetSearchMenuTemplate wraps the corresponding Objective-C method.
 func (x *SearchFieldCell) SetSearchMenuTemplate(searchMenuTemplate *Menu) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchMenuTemplate:"), objref.IDOf(searchMenuTemplate))
 }
 
+// SendsWholeSearchString wraps the corresponding Objective-C method.
 func (x *SearchFieldCell) SendsWholeSearchString() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendsWholeSearchString"))
 	return _r
 }
 
+// SetSendsWholeSearchString wraps the corresponding Objective-C method.
 func (x *SearchFieldCell) SetSendsWholeSearchString(sendsWholeSearchString bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsWholeSearchString:"), sendsWholeSearchString)
 }
 
+// MaximumRecents wraps the corresponding Objective-C method.
 func (x *SearchFieldCell) MaximumRecents() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumRecents"))
 	return _r
 }
 
+// SetMaximumRecents wraps the corresponding Objective-C method.
 func (x *SearchFieldCell) SetMaximumRecents(maximumRecents int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumRecents:"), maximumRecents)
 }
 
+// RecentSearches wraps the corresponding Objective-C method.
+//
 // RecentSearches returns the collection as a Go slice.
 func (x *SearchFieldCell) RecentSearches() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recentSearches"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetRecentSearches wraps the corresponding Objective-C method.
 func (x *SearchFieldCell) SetRecentSearches(recentSearches []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecentSearches:"), purego.SliceToNSArray(recentSearches, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// RecentsAutosaveName wraps the corresponding Objective-C method.
 func (x *SearchFieldCell) RecentsAutosaveName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recentsAutosaveName"))
 	return obj.Wrap(_r)
 }
 
+// SetRecentsAutosaveName wraps the corresponding Objective-C method.
 func (x *SearchFieldCell) SetRecentsAutosaveName(recentsAutosaveName obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecentsAutosaveName:"), objref.IDOf(recentsAutosaveName))
 }
 
+// SendsSearchStringImmediately wraps the corresponding Objective-C method.
 func (x *SearchFieldCell) SendsSearchStringImmediately() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendsSearchStringImmediately"))
 	return _r
 }
 
+// SetSendsSearchStringImmediately wraps the corresponding Objective-C method.
 func (x *SearchFieldCell) SetSendsSearchStringImmediately(sendsSearchStringImmediately bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsSearchStringImmediately:"), sendsSearchStringImmediately)
 }
@@ -693,6 +599,9 @@ type SearchFieldCellable interface {
 	WithControlTint(controlTint ControlTint) *SearchFieldCell
 	ResetSearchButtonCell()
 	ResetCancelButtonCell()
+	SearchTextRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect
+	SearchButtonRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect
+	CancelButtonRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect
 	SearchButtonCell() *ButtonCell
 	SetSearchButtonCell(searchButtonCell *ButtonCell)
 	CancelButtonCell() *ButtonCell
@@ -712,3 +621,9 @@ type SearchFieldCellable interface {
 }
 
 var _ SearchFieldCellable = (*SearchFieldCell)(nil)
+
+var _ TextFieldCellProvider = (*SearchFieldCell)(nil)
+
+var _ ActionCellProvider = (*SearchFieldCell)(nil)
+
+var _ CellProvider = (*SearchFieldCell)(nil)

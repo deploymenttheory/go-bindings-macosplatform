@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that you use to inspect locally cached media data.
-//
 // AssetCache is an idiomatic wrapper over the Objective-C class AVAssetCache.
+//
+// An object that you use to inspect locally cached media data.
 type AssetCache struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetCacheFromID(id objc.ID) *AssetCache {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetCache{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetCache{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetCacheAdopt(id objc.ID) *AssetCache {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetCache{Handle: objref.Wrap(id)}
+	x := &AssetCache{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,37 @@ func (x *AssetCache) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetCache) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetCache creates a new AssetCache.
 func NewAssetCache() *AssetCache {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetCache")), objc.RegisterName("new"))
 	return assetCacheAdopt(_id)
 }
 
-// Returns an array of locally cached media selection options that are available for offline use.
+// MediaSelectionOptionsInMediaSelectionGroup returns an array of locally cached media selection options that are available for offline use.
 func (x *AssetCache) MediaSelectionOptionsInMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) []*MediaSelectionOption {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSelectionOptionsInMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MediaSelectionOption { return MediaSelectionOptionFromID(_id) })
 }
 
-// Returns YES if a complete rendition of an AVAsset is available to be played without a network connection. An answer of YES does not indicate that any given media selection is available for offline playback. To determine if a specific media selection is available offline, see mediaSelectionOptionsInMediaSelectionGroup:.
+// IsPlayableOffline returns YES if a complete rendition of an AVAsset is available to be played without a network connection. An answer of YES does not indicate that any given media selection is available for offline playback. To determine if a specific media selection is available offline, see mediaSelectionOptionsInMediaSelectionGroup:.
 func (x *AssetCache) IsPlayableOffline() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPlayableOffline"))
 	return _r
 }
 
-// For each AVMediaPresentationSelector defined by the AVCustomMediaSelectionScheme of an AVMediaSelectionGroup, returns the AVMediaPresentationSettings that can be satisfied for offline operations, e.g. playback.
+// MediaPresentationSettingsForMediaSelectionGroup for each AVMediaPresentationSelector defined by the AVCustomMediaSelectionScheme of an AVMediaSelectionGroup, returns the AVMediaPresentationSettings that can be satisfied for offline operations, e.g. playback.
 func (x *AssetCache) MediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaPresentationSettingsForMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
 	return obj.Wrap(_r)
 }
 
-// Returns an array of extended language tags for languages that can be selected for offline operations via use of the AVMediaSelectionGroup’s AVCustomMediaSelectionScheme.
+// MediaPresentationLanguagesForMediaSelectionGroup returns an array of extended language tags for languages that can be selected for offline operations via use of the AVMediaSelectionGroup’s AVCustomMediaSelectionScheme.
 func (x *AssetCache) MediaPresentationLanguagesForMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) []string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaPresentationLanguagesForMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })

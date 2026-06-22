@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Metadata describing how extended dynamic range (EDR) values should be tone mapped.
-//
 // EDRMetadata is an idiomatic wrapper over the Objective-C class CAEDRMetadata.
+//
+// Metadata describing how extended dynamic range (EDR) values should be tone mapped.
 type EDRMetadata struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func EDRMetadataFromID(id objc.ID) *EDRMetadata {
 	if id == 0 {
 		return nil
 	}
-	x := &EDRMetadata{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EDRMetadata{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func eDRMetadataAdopt(id objc.ID) *EDRMetadata {
 	if id == 0 {
 		return nil
 	}
-	x := &EDRMetadata{Handle: objref.Wrap(id)}
+	x := &EDRMetadata{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *EDRMetadata) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *EDRMetadata) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *EDRMetadata) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewEDRMetadata creates a new EDRMetadata.

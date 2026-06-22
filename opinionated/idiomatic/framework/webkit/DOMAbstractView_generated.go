@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMAbstractView is an idiomatic wrapper over the Objective-C class DOMAbstractView.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMAbstractView struct {
-	objref.Handle
+	DOMObject
 }
 
 // DOMAbstractViewFromID adopts an existing Objective-C object as a DOMAbstractView
@@ -23,7 +24,8 @@ func DOMAbstractViewFromID(id objc.ID) *DOMAbstractView {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMAbstractView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMAbstractView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMAbstractViewAdopt(id objc.ID) *DOMAbstractView {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMAbstractView{Handle: objref.Wrap(id)}
+	x := &DOMAbstractView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMAbstractView) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMAbstractView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMAbstractView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMAbstractView creates a new DOMAbstractView.
@@ -62,6 +50,7 @@ func NewDOMAbstractView() *DOMAbstractView {
 	return dOMAbstractViewAdopt(_id)
 }
 
+// Document wraps the corresponding Objective-C method.
 func (x *DOMAbstractView) Document() *DOMDocument {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("document"))
 	return DOMDocumentFromID(_r)
@@ -74,3 +63,7 @@ type DOMAbstractViewable interface {
 }
 
 var _ DOMAbstractViewable = (*DOMAbstractView)(nil)
+
+var _ DOMObjectProvider = (*DOMAbstractView)(nil)
+
+var _ WebScriptObjectProvider = (*DOMAbstractView)(nil)

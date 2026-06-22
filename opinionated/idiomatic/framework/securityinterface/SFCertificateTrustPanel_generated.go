@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A panel or sheet that lets the user edit the trust settings in any of the certificates in a certificate chain.
-//
 // CertificateTrustPanel is an idiomatic wrapper over the Objective-C class SFCertificateTrustPanel.
+//
+// It embeds [CertificatePanel], promoting that type's methods.
+//
+// A panel or sheet that lets the user edit the trust settings in any of the certificates in a certificate chain.
 type CertificateTrustPanel struct {
-	objref.Handle
+	CertificatePanel
 }
 
 // CertificateTrustPanelFromID adopts an existing Objective-C object as a CertificateTrustPanel
@@ -25,7 +26,8 @@ func CertificateTrustPanelFromID(id objc.ID) *CertificateTrustPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &CertificateTrustPanel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CertificateTrustPanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func certificateTrustPanelAdopt(id objc.ID) *CertificateTrustPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &CertificateTrustPanel{Handle: objref.Wrap(id)}
+	x := &CertificateTrustPanel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CertificateTrustPanel) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CertificateTrustPanel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CertificateTrustPanel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCertificateTrustPanel creates a new CertificateTrustPanel.
@@ -64,18 +52,18 @@ func NewCertificateTrustPanel() *CertificateTrustPanel {
 	return certificateTrustPanelAdopt(_id)
 }
 
-// Displays a modal panel that shows the results of a certificate trust evaluation and that allows the user to edit trust settings.
+// RunModalForTrustMessage displays a modal panel that shows the results of a certificate trust evaluation and that allows the user to edit trust settings.
 func (x *CertificateTrustPanel) RunModalForTrustMessage(trust obj.Object, message string) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalForTrust:message:"), objref.IDOf(trust), purego.NSString(message))
 	return _r
 }
 
-// Sets the (optional) informative text displayed in the panel.
+// SetInformativeText sets the (optional) informative text displayed in the panel.
 func (x *CertificateTrustPanel) SetInformativeText(informativeText string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInformativeText:"), purego.NSString(informativeText))
 }
 
-// Returns the (optional) informative text currently displayed in the panel.
+// InformativeText returns the (optional) informative text currently displayed in the panel.
 func (x *CertificateTrustPanel) InformativeText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("informativeText"))
 	if _r == 0 {
@@ -93,3 +81,5 @@ type CertificateTrustPanelable interface {
 }
 
 var _ CertificateTrustPanelable = (*CertificateTrustPanel)(nil)
+
+var _ CertificatePanelProvider = (*CertificateTrustPanel)(nil)

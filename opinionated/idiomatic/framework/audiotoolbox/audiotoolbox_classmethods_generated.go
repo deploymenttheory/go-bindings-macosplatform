@@ -11,31 +11,31 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Creates a single parameter object.
+// CreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStringsDependentParameters creates a single parameter object.
 func CreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStringsDependentParameters(identifier string, name string, address uint64, min float32, max float32, unit AudioUnitParameterUnit, unitName string, flags AudioUnitParameterOptions, valueStrings []string, dependentParameters []obj.Object) *Parameter {
 	_r := objc.Send[objc.ID](objc.ID(_class("AUParameterTree")), objc.RegisterName("createParameterWithIdentifier:name:address:min:max:unit:unitName:flags:valueStrings:dependentParameters:"), purego.NSString(identifier), purego.NSString(name), address, min, max, unit, purego.NSString(unitName), flags, purego.SliceToNSArray(valueStrings, func(_v string) objc.ID { return purego.NSString(_v) }), purego.SliceToNSArray(dependentParameters, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ParameterFromID(_r)
 }
 
-// Creates a parameter group object.
+// CreateGroupWithIdentifierNameChildren creates a parameter group object.
 func CreateGroupWithIdentifierNameChildren(identifier string, name string, children []*ParameterNode) *ParameterGroup {
 	_r := objc.Send[objc.ID](objc.ID(_class("AUParameterTree")), objc.RegisterName("createGroupWithIdentifier:name:children:"), purego.NSString(identifier), purego.NSString(name), purego.SliceToNSArray(children, func(_v *ParameterNode) objc.ID { return objref.IDOf(_v) }))
 	return ParameterGroupFromID(_r)
 }
 
-// Creates a template group which may be used as a prototype for further group instances.
+// CreateGroupTemplate creates a template group which may be used as a prototype for further group instances.
 func CreateGroupTemplate(children []*ParameterNode) *ParameterGroup {
 	_r := objc.Send[objc.ID](objc.ID(_class("AUParameterTree")), objc.RegisterName("createGroupTemplate:"), purego.SliceToNSArray(children, func(_v *ParameterNode) objc.ID { return objref.IDOf(_v) }))
 	return ParameterGroupFromID(_r)
 }
 
-// Initializes a group as a copied instance of a template group.
+// CreateGroupFromTemplateIdentifierNameAddressOffset initializes a group as a copied instance of a template group.
 func CreateGroupFromTemplateIdentifierNameAddressOffset(templateGroup *ParameterGroup, identifier string, name string, addressOffset uint64) *ParameterGroup {
 	_r := objc.Send[objc.ID](objc.ID(_class("AUParameterTree")), objc.RegisterName("createGroupFromTemplate:identifier:name:addressOffset:"), objref.IDOf(templateGroup), purego.NSString(identifier), purego.NSString(name), addressOffset)
 	return ParameterGroupFromID(_r)
 }
 
-// Creates a parameter tree object.
+// CreateTreeWithChildren creates a parameter tree object.
 func CreateTreeWithChildren(children []*ParameterNode) *ParameterTree {
 	_r := objc.Send[objc.ID](objc.ID(_class("AUParameterTree")), objc.RegisterName("createTreeWithChildren:"), purego.SliceToNSArray(children, func(_v *ParameterNode) objc.ID { return objref.IDOf(_v) }))
 	return ParameterTreeFromID(_r)

@@ -15,9 +15,9 @@ import (
 	"unsafe"
 )
 
-// An instance that represents a stream of shareable content.
-//
 // Stream is an idiomatic wrapper over the Objective-C class SCStream.
+//
+// An instance that represents a stream of shareable content.
 type Stream struct {
 	objref.Handle
 }
@@ -28,7 +28,8 @@ func StreamFromID(id objc.ID) *Stream {
 	if id == 0 {
 		return nil
 	}
-	x := &Stream{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Stream{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -41,7 +42,8 @@ func streamAdopt(id objc.ID) *Stream {
 	if id == 0 {
 		return nil
 	}
-	x := &Stream{Handle: objref.Wrap(id)}
+	x := &Stream{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -61,13 +63,19 @@ func (x *Stream) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Stream) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewStream creates a new Stream.
 func NewStream() *Stream {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCStream")), objc.RegisterName("new"))
 	return streamAdopt(_id)
 }
 
-// Updates the stream by applying a new content filter.
+// UpdateContentFilter updates the stream by applying a new content filter.
 //
 // UpdateContentFilter blocks until the operation completes or ctx is cancelled.
 func (x *Stream) UpdateContentFilter(ctx context.Context, contentFilter *ContentFilter) error {
@@ -86,7 +94,7 @@ func (x *Stream) UpdateContentFilter(ctx context.Context, contentFilter *Content
 	}
 }
 
-// Updates the stream with a new configuration.
+// UpdateConfiguration updates the stream with a new configuration.
 //
 // UpdateConfiguration blocks until the operation completes or ctx is cancelled.
 func (x *Stream) UpdateConfiguration(ctx context.Context, streamConfig *StreamConfiguration) error {
@@ -105,7 +113,7 @@ func (x *Stream) UpdateConfiguration(ctx context.Context, streamConfig *StreamCo
 	}
 }
 
-// Starts the stream with a callback to indicate whether it successfully starts.
+// StartCapture starts the stream with a callback to indicate whether it successfully starts.
 //
 // StartCapture blocks until the operation completes or ctx is cancelled.
 func (x *Stream) StartCapture(ctx context.Context) error {
@@ -124,7 +132,7 @@ func (x *Stream) StartCapture(ctx context.Context) error {
 	}
 }
 
-// Stops the stream.
+// StopCapture stops the stream.
 //
 // StopCapture blocks until the operation completes or ctx is cancelled.
 func (x *Stream) StopCapture(ctx context.Context) error {
@@ -143,7 +151,7 @@ func (x *Stream) StopCapture(ctx context.Context) error {
 	}
 }
 
-// Add a SCRecordingOutput to the SCStream. Starts Recording if stream is already capturing, otherwise recording will be started after capture starts. Recording will be written into a file url specified in SCRecordingOutput. Media(Screen/Audio/Microphone) to be recorded will be based on the SCStream configuration. Returns a BOOL denoting if the add was successful. Currently only support one recordingOutput on a stream. To guarantee the first sample captured in the stream to be written into the recording file, client need to add recordingOutput before startCapture. Delegate for recordingDidStart will be notified in SCRecordingOutput or recordingDidFinishWithError will be notified with an error associated if recording failed to start.
+// AddRecordingOutput add a SCRecordingOutput to the SCStream. Starts Recording if stream is already capturing, otherwise recording will be started after capture starts. Recording will be written into a file url specified in SCRecordingOutput. Media(Screen/Audio/Microphone) to be recorded will be based on the SCStream configuration. Returns a BOOL denoting if the add was successful. Currently only support one recordingOutput on a stream. To guarantee the first sample captured in the stream to be written into the recording file, client need to add recordingOutput before startCapture. Delegate for recordingDidStart will be notified in SCRecordingOutput or recordingDidFinishWithError will be notified with an error associated if recording failed to start.
 func (x *Stream) AddRecordingOutput(recordingOutput *RecordingOutput) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addRecordingOutput:error:"), objref.IDOf(recordingOutput), unsafe.Pointer(&_nsErr))
@@ -153,7 +161,7 @@ func (x *Stream) AddRecordingOutput(recordingOutput *RecordingOutput) error {
 	return nil
 }
 
-// Remove SCRecordingOutput from the SCStream. Stops Recording if the stream is currently recording. Returns a BOOL denoting if the remove was successful. Delegate for recordingDidFinishWithError will be notified in SCRecordingOutput, associate with an error code if recording failed to finish written to the file. If stopCapture is called without removing recordingOutput, recording will be stopped and finish writting into the file. In case client update the stream configuration during recording, recording will be stopped as well.
+// RemoveRecordingOutput remove SCRecordingOutput from the SCStream. Stops Recording if the stream is currently recording. Returns a BOOL denoting if the remove was successful. Delegate for recordingDidFinishWithError will be notified in SCRecordingOutput, associate with an error code if recording failed to finish written to the file. If stopCapture is called without removing recordingOutput, recording will be stopped and finish writting into the file. In case client update the stream configuration during recording, recording will be stopped as well.
 func (x *Stream) RemoveRecordingOutput(recordingOutput *RecordingOutput) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeRecordingOutput:error:"), objref.IDOf(recordingOutput), unsafe.Pointer(&_nsErr))
@@ -163,7 +171,7 @@ func (x *Stream) RemoveRecordingOutput(recordingOutput *RecordingOutput) error {
 	return nil
 }
 
-// Synchronization clock used for media capture.
+// SynchronizationClock synchronization clock used for media capture.
 func (x *Stream) SynchronizationClock() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("synchronizationClock"))
 	return obj.Wrap(_r)

@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRGeneralDiagnosticsClusterNetworkInterfaceType is an idiomatic wrapper over the Objective-C class MTRGeneralDiagnosticsClusterNetworkInterfaceType.
+//
+// It embeds [MTRGeneralDiagnosticsClusterNetworkInterface], promoting that type's methods.
 type MTRGeneralDiagnosticsClusterNetworkInterfaceType struct {
-	objref.Handle
+	MTRGeneralDiagnosticsClusterNetworkInterface
 }
 
 // MTRGeneralDiagnosticsClusterNetworkInterfaceTypeFromID adopts an existing Objective-C object as a MTRGeneralDiagnosticsClusterNetworkInterfaceType
@@ -23,7 +24,8 @@ func MTRGeneralDiagnosticsClusterNetworkInterfaceTypeFromID(id objc.ID) *MTRGene
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGeneralDiagnosticsClusterNetworkInterfaceType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRGeneralDiagnosticsClusterNetworkInterfaceType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRGeneralDiagnosticsClusterNetworkInterfaceTypeAdopt(id objc.ID) *MTRGener
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGeneralDiagnosticsClusterNetworkInterfaceType{Handle: objref.Wrap(id)}
+	x := &MTRGeneralDiagnosticsClusterNetworkInterfaceType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterfaceType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterfaceType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterfaceType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRGeneralDiagnosticsClusterNetworkInterfaceType creates a new MTRGeneralDiagnosticsClusterNetworkInterfaceType.
@@ -62,37 +50,37 @@ func NewMTRGeneralDiagnosticsClusterNetworkInterfaceType() *MTRGeneralDiagnostic
 	return mTRGeneralDiagnosticsClusterNetworkInterfaceTypeAdopt(_id)
 }
 
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithName(name string) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// WithIsOperational sets isOperational and returns the receiver so calls can be chained.
+// WithIsOperational sets the property and returns the receiver so calls can be chained.
 func (x *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithIsOperational(isOperational obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsOperational:"), objref.IDOf(isOperational))
 	return x
 }
 
-// WithOffPremiseServicesReachableIPv4 sets offPremiseServicesReachableIPv4 and returns the receiver so calls can be chained.
+// WithOffPremiseServicesReachableIPv4 sets the property and returns the receiver so calls can be chained.
 func (x *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithOffPremiseServicesReachableIPv4(offPremiseServicesReachableIPv4 obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffPremiseServicesReachableIPv4:"), objref.IDOf(offPremiseServicesReachableIPv4))
 	return x
 }
 
-// WithOffPremiseServicesReachableIPv6 sets offPremiseServicesReachableIPv6 and returns the receiver so calls can be chained.
+// WithOffPremiseServicesReachableIPv6 sets the property and returns the receiver so calls can be chained.
 func (x *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithOffPremiseServicesReachableIPv6(offPremiseServicesReachableIPv6 obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffPremiseServicesReachableIPv6:"), objref.IDOf(offPremiseServicesReachableIPv6))
 	return x
 }
 
-// WithHardwareAddress sets hardwareAddress and returns the receiver so calls can be chained.
+// WithHardwareAddress sets the property and returns the receiver so calls can be chained.
 func (x *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithHardwareAddress(hardwareAddress obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHardwareAddress:"), objref.IDOf(hardwareAddress))
 	return x
 }
 
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithType sets the property and returns the receiver so calls can be chained.
 func (x *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithType(type_ obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return x
@@ -110,3 +98,5 @@ type MTRGeneralDiagnosticsClusterNetworkInterfaceTypeable interface {
 }
 
 var _ MTRGeneralDiagnosticsClusterNetworkInterfaceTypeable = (*MTRGeneralDiagnosticsClusterNetworkInterfaceType)(nil)
+
+var _ MTRGeneralDiagnosticsClusterNetworkInterfaceProvider = (*MTRGeneralDiagnosticsClusterNetworkInterfaceType)(nil)

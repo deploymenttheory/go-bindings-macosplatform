@@ -23,6 +23,8 @@ const (
 	SupportsEventHandling LanguageFeatures = 256
 )
 
+// String returns the LanguageFeatures constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LanguageFeatures) String() string {
 	var parts []string
 	if e&SupportsCompiling != 0 {
@@ -63,6 +65,8 @@ const (
 	ScriptRecording ScriptState = 2
 )
 
+// String returns the ScriptState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ScriptState) String() string {
 	switch e {
 	case ScriptStopped:
@@ -88,6 +92,8 @@ const (
 	ShowStartupScreen     StorageOptions = 536870912
 )
 
+// String returns the StorageOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StorageOptions) String() string {
 	var parts []string
 	if e&PreventGetSource != 0 {

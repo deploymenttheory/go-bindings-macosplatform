@@ -6,15 +6,16 @@ package quartz
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Input parameters for filtering core image filters.
-//
 // IKFilterUIView is an idiomatic wrapper over the Objective-C class IKFilterUIView.
+//
+// Input parameters for filtering core image filters.
 type IKFilterUIView struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func IKFilterUIViewFromID(id objc.ID) *IKFilterUIView {
 	if id == 0 {
 		return nil
 	}
-	x := &IKFilterUIView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IKFilterUIView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func iKFilterUIViewAdopt(id objc.ID) *IKFilterUIView {
 	if id == 0 {
 		return nil
 	}
-	x := &IKFilterUIView{Handle: objref.Wrap(id)}
+	x := &IKFilterUIView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +61,26 @@ func (x *IKFilterUIView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewIKFilterUIView creates a new IKFilterUIView.
-func NewIKFilterUIView() *IKFilterUIView {
-	_id := objc.Send[objc.ID](objc.ID(_class("IKFilterUIView")), objc.RegisterName("new"))
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IKFilterUIView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewIKFilterUIViewWithFrameFilter initializes a view that contains controls for the input parameters of a filter.
+func NewIKFilterUIViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter obj.Object) *IKFilterUIView {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("IKFilterUIView")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:filter:"), frameRect, objref.IDOf(inFilter))
 	return iKFilterUIViewAdopt(_id)
 }
 
-// Returns the Core Image filter associated with the view.
+// Filter returns the Core Image filter associated with the view.
 func (x *IKFilterUIView) Filter() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filter"))
 	return obj.Wrap(_r)
 }
 
-// Returns the object controller for the bindings between the filter and its view.
+// ObjectController returns the object controller for the bindings between the filter and its view.
 func (x *IKFilterUIView) ObjectController() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectController"))
 	return obj.Wrap(_r)

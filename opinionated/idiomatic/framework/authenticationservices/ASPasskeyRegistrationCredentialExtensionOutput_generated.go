@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that encapsulates output for various WebAuthn extensions during passkey assertion.
-//
 // PasskeyRegistrationCredentialExtensionOutput is an idiomatic wrapper over the Objective-C class ASPasskeyRegistrationCredentialExtensionOutput.
+//
+// A type that encapsulates output for various WebAuthn extensions during passkey assertion.
 type PasskeyRegistrationCredentialExtensionOutput struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PasskeyRegistrationCredentialExtensionOutputFromID(id objc.ID) *PasskeyRegi
 	if id == 0 {
 		return nil
 	}
-	x := &PasskeyRegistrationCredentialExtensionOutput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PasskeyRegistrationCredentialExtensionOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func passkeyRegistrationCredentialExtensionOutputAdopt(id objc.ID) *PasskeyRegis
 	if id == 0 {
 		return nil
 	}
-	x := &PasskeyRegistrationCredentialExtensionOutput{Handle: objref.Wrap(id)}
+	x := &PasskeyRegistrationCredentialExtensionOutput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +60,12 @@ func (x *PasskeyRegistrationCredentialExtensionOutput) IsKind(className string) 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PasskeyRegistrationCredentialExtensionOutput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPasskeyRegistrationCredentialExtensionOutputWithLargeBlobOutput creates a new PasskeyRegistrationCredentialExtensionOutput.
 func NewPasskeyRegistrationCredentialExtensionOutputWithLargeBlobOutput(largeBlob *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) *PasskeyRegistrationCredentialExtensionOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasskeyRegistrationCredentialExtensionOutput")), objc.RegisterName("alloc"))
@@ -65,6 +73,7 @@ func NewPasskeyRegistrationCredentialExtensionOutputWithLargeBlobOutput(largeBlo
 	return passkeyRegistrationCredentialExtensionOutputAdopt(_id)
 }
 
+// LargeBlobRegistrationOutput wraps the corresponding Objective-C method.
 func (x *PasskeyRegistrationCredentialExtensionOutput) LargeBlobRegistrationOutput() *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("largeBlobRegistrationOutput"))
 	return AuthorizationPublicKeyCredentialLargeBlobRegistrationOutputFromID(_r)

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The common configuration traits for serial port requests.
-//
 // SerialPortConfiguration is an idiomatic wrapper over the Objective-C class VZSerialPortConfiguration.
+//
+// SerialPortConfiguration is an abstract base — you do not construct it directly. Construct one of [VirtioConsoleDeviceSerialPortConfiguration] and pass it where a SerialPortConfiguration is accepted.
+//
+// The common configuration traits for serial port requests.
 type SerialPortConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func SerialPortConfigurationFromID(id objc.ID) *SerialPortConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &SerialPortConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SerialPortConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func serialPortConfigurationAdopt(id objc.ID) *SerialPortConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &SerialPortConfiguration{Handle: objref.Wrap(id)}
+	x := &SerialPortConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +62,25 @@ func (x *SerialPortConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewSerialPortConfiguration creates a new SerialPortConfiguration.
-func NewSerialPortConfiguration() *SerialPortConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZSerialPortConfiguration")), objc.RegisterName("new"))
-	return serialPortConfigurationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SerialPortConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The object that defines how the configuration of the virtual machine’s serial port interfaces.
-//
-// WithAttachment sets attachment and returns the receiver so calls can be chained.
+// WithAttachment the object that defines how the configuration of the virtual machine’s serial port interfaces.
 func (x *SerialPortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *SerialPortConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 	return x
 }
 
+// Attachment wraps the corresponding Objective-C method.
 func (x *SerialPortConfiguration) Attachment() *SerialPortAttachment {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachment"))
 	return SerialPortAttachmentFromID(_r)
 }
 
+// SetAttachment wraps the corresponding Objective-C method.
 func (x *SerialPortConfiguration) SetAttachment(attachment *SerialPortAttachment) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 }
@@ -90,3 +94,10 @@ type SerialPortConfigurationable interface {
 }
 
 var _ SerialPortConfigurationable = (*SerialPortConfiguration)(nil)
+
+// isSerialPortConfiguration marks SerialPortConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the SerialPortConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SerialPortConfiguration) isSerialPortConfiguration() {}
+
+var _ SerialPortConfigurationProvider = (*SerialPortConfiguration)(nil)

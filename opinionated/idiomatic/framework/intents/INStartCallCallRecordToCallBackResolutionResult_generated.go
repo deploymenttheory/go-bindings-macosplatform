@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resolution result for the redial capabilities of a missed call.
-//
 // StartCallCallRecordToCallBackResolutionResult is an idiomatic wrapper over the Objective-C class INStartCallCallRecordToCallBackResolutionResult.
+//
+// It embeds [CallRecordResolutionResult], promoting that type's methods.
+//
+// A resolution result for the redial capabilities of a missed call.
 type StartCallCallRecordToCallBackResolutionResult struct {
-	objref.Handle
+	CallRecordResolutionResult
 }
 
 // StartCallCallRecordToCallBackResolutionResultFromID adopts an existing Objective-C object as a StartCallCallRecordToCallBackResolutionResult
@@ -25,7 +26,8 @@ func StartCallCallRecordToCallBackResolutionResultFromID(id objc.ID) *StartCallC
 	if id == 0 {
 		return nil
 	}
-	x := &StartCallCallRecordToCallBackResolutionResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StartCallCallRecordToCallBackResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func startCallCallRecordToCallBackResolutionResultAdopt(id objc.ID) *StartCallCa
 	if id == 0 {
 		return nil
 	}
-	x := &StartCallCallRecordToCallBackResolutionResult{Handle: objref.Wrap(id)}
+	x := &StartCallCallRecordToCallBackResolutionResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *StartCallCallRecordToCallBackResolutionResult) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StartCallCallRecordToCallBackResolutionResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StartCallCallRecordToCallBackResolutionResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates an object whose resolution involves successfully redialing a call.
-//
-// NewStartCallCallRecordToCallBackResolutionResultWithCallRecordResolutionResult creates a new StartCallCallRecordToCallBackResolutionResult.
+// NewStartCallCallRecordToCallBackResolutionResultWithCallRecordResolutionResult creates an object whose resolution involves successfully redialing a call.
 func NewStartCallCallRecordToCallBackResolutionResultWithCallRecordResolutionResult(callRecordResolutionResult *CallRecordResolutionResult) *StartCallCallRecordToCallBackResolutionResult {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INStartCallCallRecordToCallBackResolutionResult")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCallRecordResolutionResult:"), objref.IDOf(callRecordResolutionResult))
@@ -73,3 +59,7 @@ type StartCallCallRecordToCallBackResolutionResultable interface {
 }
 
 var _ StartCallCallRecordToCallBackResolutionResultable = (*StartCallCallRecordToCallBackResolutionResult)(nil)
+
+var _ CallRecordResolutionResultProvider = (*StartCallCallRecordToCallBackResolutionResult)(nil)
+
+var _ IntentResolutionResultProvider = (*StartCallCallRecordToCallBackResolutionResult)(nil)

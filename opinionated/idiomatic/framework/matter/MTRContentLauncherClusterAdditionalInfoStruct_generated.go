@@ -13,6 +13,8 @@ import (
 )
 
 // MTRContentLauncherClusterAdditionalInfoStruct is an idiomatic wrapper over the Objective-C class MTRContentLauncherClusterAdditionalInfoStruct.
+//
+// MTRContentLauncherClusterAdditionalInfoStruct is an abstract base — you do not construct it directly. Construct one of [MTRContentLauncherClusterAdditionalInfo] and pass it where a MTRContentLauncherClusterAdditionalInfoStruct is accepted.
 type MTRContentLauncherClusterAdditionalInfoStruct struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRContentLauncherClusterAdditionalInfoStructFromID(id objc.ID) *MTRContent
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterAdditionalInfoStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRContentLauncherClusterAdditionalInfoStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRContentLauncherClusterAdditionalInfoStructAdopt(id objc.ID) *MTRContentL
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterAdditionalInfoStruct{Handle: objref.Wrap(id)}
+	x := &MTRContentLauncherClusterAdditionalInfoStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,24 +60,25 @@ func (x *MTRContentLauncherClusterAdditionalInfoStruct) IsKind(className string)
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRContentLauncherClusterAdditionalInfoStruct creates a new MTRContentLauncherClusterAdditionalInfoStruct.
-func NewMTRContentLauncherClusterAdditionalInfoStruct() *MTRContentLauncherClusterAdditionalInfoStruct {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRContentLauncherClusterAdditionalInfoStruct")), objc.RegisterName("new"))
-	return mTRContentLauncherClusterAdditionalInfoStructAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRContentLauncherClusterAdditionalInfoStruct) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterAdditionalInfoStruct) WithName(name string) *MTRContentLauncherClusterAdditionalInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterAdditionalInfoStruct) WithValue(value string) *MTRContentLauncherClusterAdditionalInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 	return x
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterAdditionalInfoStruct) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -82,10 +87,12 @@ func (x *MTRContentLauncherClusterAdditionalInfoStruct) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterAdditionalInfoStruct) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterAdditionalInfoStruct) Value() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	if _r == 0 {
@@ -94,6 +101,7 @@ func (x *MTRContentLauncherClusterAdditionalInfoStruct) Value() string {
 	return purego.GoString(_r)
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterAdditionalInfoStruct) SetValue(value string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 }
@@ -110,3 +118,11 @@ type MTRContentLauncherClusterAdditionalInfoStructable interface {
 }
 
 var _ MTRContentLauncherClusterAdditionalInfoStructable = (*MTRContentLauncherClusterAdditionalInfoStruct)(nil)
+
+// isMTRContentLauncherClusterAdditionalInfoStruct marks MTRContentLauncherClusterAdditionalInfoStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRContentLauncherClusterAdditionalInfoStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRContentLauncherClusterAdditionalInfoStruct) isMTRContentLauncherClusterAdditionalInfoStruct() {
+}
+
+var _ MTRContentLauncherClusterAdditionalInfoStructProvider = (*MTRContentLauncherClusterAdditionalInfoStruct)(nil)

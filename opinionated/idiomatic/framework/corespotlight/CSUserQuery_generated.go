@@ -9,15 +9,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type you use to initiate searches from your interface and offer suggested text completions.
-//
 // UserQuery is an idiomatic wrapper over the Objective-C class CSUserQuery.
+//
+// It embeds [SearchQuery], promoting that type's methods.
+//
+// A type you use to initiate searches from your interface and offer suggested text completions.
 type UserQuery struct {
-	objref.Handle
+	SearchQuery
 }
 
 // UserQueryFromID adopts an existing Objective-C object as a UserQuery
@@ -26,7 +27,8 @@ func UserQueryFromID(id objc.ID) *UserQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &UserQuery{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UserQuery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,75 +41,58 @@ func userQueryAdopt(id objc.ID) *UserQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &UserQuery{Handle: objref.Wrap(id)}
+	x := &UserQuery{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *UserQuery) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UserQuery) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UserQuery) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a new user query that searches for the specified term.
-//
-// NewUserQueryWithUserQueryStringUserQueryContext creates a new UserQuery.
+// NewUserQueryWithUserQueryStringUserQueryContext creates a new user query that searches for the specified term.
 func NewUserQueryWithUserQueryStringUserQueryContext(userQueryString string, userQueryContext *UserQueryContext) *UserQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CSUserQuery")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUserQueryString:userQueryContext:"), purego.NSString(userQueryString), objref.IDOf(userQueryContext))
 	return userQueryAdopt(_id)
 }
 
-// The block to execute when the query delivers a new batch of suggested items.
-//
-// WithFoundSuggestionsHandler sets foundSuggestionsHandler and returns the receiver so calls can be chained.
+// WithFoundSuggestionsHandler the block to execute when the query delivers a new batch of suggested items.
 func (x *UserQuery) WithFoundSuggestionsHandler(foundSuggestionsHandler func(obj.Object)) *UserQuery {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFoundSuggestionsHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { foundSuggestionsHandler(obj.Wrap(_b0)) }))
 	return x
 }
 
-// The block to execute when the query delivers a new batch of matching items.
-//
-// WithFoundItemsHandler sets foundItemsHandler and returns the receiver so calls can be chained.
+// WithFoundItemsHandler the block to execute when the query delivers a new batch of matching items.
 func (x *UserQuery) WithFoundItemsHandler(foundItemsHandler func(obj.Object)) *UserQuery {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFoundItemsHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { foundItemsHandler(obj.Wrap(_b0)) }))
 	return x
 }
 
-// The protection types of the indexes you want to search.
-//
-// WithProtectionClasses sets the collection and returns the receiver so calls can be chained.
+// WithProtectionClasses the protection types of the indexes you want to search.
 func (x *UserQuery) WithProtectionClasses(items ...obj.Object) *UserQuery {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtectionClasses:"), _arr)
 	return x
 }
 
+// UserEngagedWithItemVisibleItemsUserInteractionType wraps the corresponding Objective-C method.
 func (x *UserQuery) UserEngagedWithItemVisibleItemsUserInteractionType(item *SearchableItem, visibleItems []*SearchableItem, userInteractionType UserInteraction) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userEngagedWithItem:visibleItems:userInteractionType:"), objref.IDOf(item), purego.SliceToNSArray(visibleItems, func(_v *SearchableItem) objc.ID { return objref.IDOf(_v) }), userInteractionType)
 }
 
+// UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType wraps the corresponding Objective-C method.
 func (x *UserQuery) UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType(suggestion *Suggestion, visibleSuggestions []*Suggestion, userInteractionType UserInteraction) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userEngagedWithSuggestion:visibleSuggestions:userInteractionType:"), objref.IDOf(suggestion), purego.SliceToNSArray(visibleSuggestions, func(_v *Suggestion) objc.ID { return objref.IDOf(_v) }), userInteractionType)
 }
 
+// FoundSuggestionCount wraps the corresponding Objective-C method.
 func (x *UserQuery) FoundSuggestionCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("foundSuggestionCount"))
 	return _r
 }
 
+// SetFoundSuggestionsHandler wraps the corresponding Objective-C method.
+//
 // SetFoundSuggestionsHandler blocks until the operation completes or ctx is cancelled.
-func (x *UserQuery) SetFoundSuggestionsHandler(ctx context.Context) (obj.Object, error) {
+func (x *UserQuery) SetFoundSuggestionsHandler(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -141,3 +126,5 @@ type UserQueryable interface {
 }
 
 var _ UserQueryable = (*UserQuery)(nil)
+
+var _ SearchQueryProvider = (*UserQuery)(nil)

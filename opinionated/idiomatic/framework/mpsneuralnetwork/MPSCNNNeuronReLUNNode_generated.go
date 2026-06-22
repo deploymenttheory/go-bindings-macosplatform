@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A node representing a MPSCNNNeuronReLUN kernel For each pixel, applies the following function:
-//
 // CNNNeuronReLUNNode is an idiomatic wrapper over the Objective-C class MPSCNNNeuronReLUNNode.
+//
+// It embeds [CNNNeuronNode], promoting that type's methods.
+//
+// A node representing a MPSCNNNeuronReLUN kernel For each pixel, applies the following function:
 type CNNNeuronReLUNNode struct {
-	objref.Handle
+	CNNNeuronNode
 }
 
 // CNNNeuronReLUNNodeFromID adopts an existing Objective-C object as a CNNNeuronReLUNNode
@@ -25,7 +26,8 @@ func CNNNeuronReLUNNodeFromID(id objc.ID) *CNNNeuronReLUNNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNeuronReLUNNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNNeuronReLUNNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func cNNNeuronReLUNNodeAdopt(id objc.ID) *CNNNeuronReLUNNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNeuronReLUNNode{Handle: objref.Wrap(id)}
+	x := &CNNNeuronReLUNNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNNeuronReLUNNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNNeuronReLUNNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNNeuronReLUNNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNNeuronReLUNNodeWithSourceAB creates a new CNNNeuronReLUNNode.
@@ -65,18 +53,14 @@ func NewCNNNeuronReLUNNodeWithSourceAB(sourceNode *NNImageNode, a float32, b flo
 	return cNNNeuronReLUNNodeAdopt(_id)
 }
 
-// Create an autoreleased node with default values for parameters a & b
-//
-// NewCNNNeuronReLUNNodeWithSource creates a new CNNNeuronReLUNNode.
+// NewCNNNeuronReLUNNodeWithSource create an autoreleased node with default values for parameters a & b
 func NewCNNNeuronReLUNNodeWithSource(sourceNode *NNImageNode) *CNNNeuronReLUNNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronReLUNNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return cNNNeuronReLUNNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNNeuronReLUNNode) WithLabel(label string) *CNNNeuronReLUNNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -89,3 +73,7 @@ type CNNNeuronReLUNNodeable interface {
 }
 
 var _ CNNNeuronReLUNNodeable = (*CNNNeuronReLUNNode)(nil)
+
+var _ CNNNeuronNodeProvider = (*CNNNeuronReLUNNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNNeuronReLUNNode)(nil)

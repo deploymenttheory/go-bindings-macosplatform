@@ -23,7 +23,8 @@ func AccelerationStructureGroupFromID(id objc.ID) *AccelerationStructureGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &AccelerationStructureGroup{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AccelerationStructureGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func accelerationStructureGroupAdopt(id objc.ID) *AccelerationStructureGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &AccelerationStructureGroup{Handle: objref.Wrap(id)}
+	x := &AccelerationStructureGroup{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *AccelerationStructureGroup) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *AccelerationStructureGroup) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AccelerationStructureGroup) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewAccelerationStructureGroup creates a new AccelerationStructureGroup.

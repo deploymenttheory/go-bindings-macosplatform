@@ -23,7 +23,8 @@ func DomainStateCompanionFromID(id objc.ID) *DomainStateCompanion {
 	if id == 0 {
 		return nil
 	}
-	x := &DomainStateCompanion{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DomainStateCompanion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func domainStateCompanionAdopt(id objc.ID) *DomainStateCompanion {
 	if id == 0 {
 		return nil
 	}
-	x := &DomainStateCompanion{Handle: objref.Wrap(id)}
+	x := &DomainStateCompanion{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,25 +58,31 @@ func (x *DomainStateCompanion) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DomainStateCompanion) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDomainStateCompanion creates a new DomainStateCompanion.
 func NewDomainStateCompanion() *DomainStateCompanion {
 	_id := objc.Send[objc.ID](objc.ID(_class("LADomainStateCompanion")), objc.RegisterName("new"))
 	return domainStateCompanionAdopt(_id)
 }
 
-// Returns state hash data for the given companion type.
+// StateHashForCompanionType returns state hash data for the given companion type.
 func (x *DomainStateCompanion) StateHashForCompanionType(companionType CompanionType) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateHashForCompanionType:"), companionType)
 	return obj.Wrap(_r)
 }
 
-// Indicates types of companions paired with the device. The elements are NSNumber-wrapped instances of
+// AvailableCompanionTypes indicates types of companions paired with the device. The elements are NSNumber-wrapped instances of
 func (x *DomainStateCompanion) AvailableCompanionTypes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableCompanionTypes"))
 	return obj.Wrap(_r)
 }
 
-// Contains combined state hash data for all available companion types. . Returns `nil` if no companion devices are paired. As long as database of paired companion devices doesn't change, `stateHash` stays the same for the same set of `availableCompanions`. If database of paired companion devices was modified, `stateHash` data will change. Nature of such database changes cannot be determined but comparing data of `stateHash` after different policy evaluation will reveal the fact database was changed between calls. If you are interested in a state hash for a specific companion type you can use `stateHashForCompanionType` method.
+// StateHash contains combined state hash data for all available companion types. . Returns `nil` if no companion devices are paired. As long as database of paired companion devices doesn't change, `stateHash` stays the same for the same set of `availableCompanions`. If database of paired companion devices was modified, `stateHash` data will change. Nature of such database changes cannot be determined but comparing data of `stateHash` after different policy evaluation will reveal the fact database was changed between calls. If you are interested in a state hash for a specific companion type you can use `stateHashForCompanionType` method.
 func (x *DomainStateCompanion) StateHash() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateHash"))
 	return obj.Wrap(_r)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A factory class for creating vertical layout constraint objects using a fluent API.
-//
 // LayoutYAxisAnchor is an idiomatic wrapper over the Objective-C class NSLayoutYAxisAnchor.
+//
+// It embeds [LayoutAnchor], promoting that type's methods.
+//
+// A factory class for creating vertical layout constraint objects using a fluent API.
 type LayoutYAxisAnchor struct {
-	objref.Handle
+	LayoutAnchor
 }
 
 // LayoutYAxisAnchorFromID adopts an existing Objective-C object as a LayoutYAxisAnchor
@@ -25,7 +26,8 @@ func LayoutYAxisAnchorFromID(id objc.ID) *LayoutYAxisAnchor {
 	if id == 0 {
 		return nil
 	}
-	x := &LayoutYAxisAnchor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LayoutYAxisAnchor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func layoutYAxisAnchorAdopt(id objc.ID) *LayoutYAxisAnchor {
 	if id == 0 {
 		return nil
 	}
-	x := &LayoutYAxisAnchor{Handle: objref.Wrap(id)}
+	x := &LayoutYAxisAnchor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *LayoutYAxisAnchor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LayoutYAxisAnchor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LayoutYAxisAnchor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewLayoutYAxisAnchor creates a new LayoutYAxisAnchor.
@@ -64,25 +52,25 @@ func NewLayoutYAxisAnchor() *LayoutYAxisAnchor {
 	return layoutYAxisAnchorAdopt(_id)
 }
 
-// Creates a layout dimension object from two anchors.
+// AnchorWithOffsetToAnchor creates a layout dimension object from two anchors.
 func (x *LayoutYAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor *LayoutYAxisAnchor) *LayoutDimension {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("anchorWithOffsetToAnchor:"), objref.IDOf(otherAnchor))
 	return LayoutDimensionFromID(_r)
 }
 
-// Returns a constraint that defines the specific distance at which the current anchor is positioned below the specified anchor.
+// ConstraintEqualToSystemSpacingBelowAnchorMultiplier returns a constraint that defines the specific distance at which the current anchor is positioned below the specified anchor.
 func (x *LayoutYAxisAnchor) ConstraintEqualToSystemSpacingBelowAnchorMultiplier(anchor *LayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintEqualToSystemSpacingBelowAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
 	return LayoutConstraintFromID(_r)
 }
 
-// Returns a constraint that defines the minimum distance by which the current anchor is positioned below the specified anchor.
+// ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier returns a constraint that defines the minimum distance by which the current anchor is positioned below the specified anchor.
 func (x *LayoutYAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *LayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintGreaterThanOrEqualToSystemSpacingBelowAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
 	return LayoutConstraintFromID(_r)
 }
 
-// Returns a constraint that defines the maximum distance by which the current anchor is positioned below the specified anchor.
+// ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier returns a constraint that defines the maximum distance by which the current anchor is positioned below the specified anchor.
 func (x *LayoutYAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *LayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintLessThanOrEqualToSystemSpacingBelowAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
 	return LayoutConstraintFromID(_r)
@@ -98,3 +86,5 @@ type LayoutYAxisAnchorable interface {
 }
 
 var _ LayoutYAxisAnchorable = (*LayoutYAxisAnchor)(nil)
+
+var _ LayoutAnchorProvider = (*LayoutYAxisAnchor)(nil)

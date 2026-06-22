@@ -19,6 +19,8 @@ const (
 	LivePhotoViewContentModeAspectFill LivePhotoViewContentMode = 1
 )
 
+// String returns the LivePhotoViewContentMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LivePhotoViewContentMode) String() string {
 	switch e {
 	case LivePhotoViewContentModeAspectFit:
@@ -42,6 +44,8 @@ const (
 	LivePhotoViewPlaybackStyleHint LivePhotoViewPlaybackStyle = 2
 )
 
+// String returns the LivePhotoViewPlaybackStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LivePhotoViewPlaybackStyle) String() string {
 	switch e {
 	case LivePhotoViewPlaybackStyleUndefined:
@@ -74,6 +78,8 @@ const (
 	PickerCapabilitiesSensitivityAnalysisIntervention PickerCapabilities = 16
 )
 
+// String returns the PickerCapabilities constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PickerCapabilities) String() string {
 	var parts []string
 	if e&PickerCapabilitiesSearch != 0 {
@@ -109,6 +115,8 @@ const (
 	PickerConfigurationAssetRepresentationModeCompatible PickerConfigurationAssetRepresentationMode = 2
 )
 
+// String returns the PickerConfigurationAssetRepresentationMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PickerConfigurationAssetRepresentationMode) String() string {
 	switch e {
 	case PickerConfigurationAssetRepresentationModeAutomatic:
@@ -136,6 +144,8 @@ const (
 	PickerConfigurationSelectionContinuousAndOrdered PickerConfigurationSelection = 3
 )
 
+// String returns the PickerConfigurationSelection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PickerConfigurationSelection) String() string {
 	switch e {
 	case PickerConfigurationSelectionDefault:
@@ -160,6 +170,8 @@ const (
 	PickerModeCompact PickerMode = 1
 )
 
+// String returns the PickerMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PickerMode) String() string {
 	switch e {
 	case PickerModeDefault:
@@ -189,6 +201,8 @@ const (
 	ProjectCreationSourceProjectExtension  ProjectCreationSource = 26
 )
 
+// String returns the ProjectCreationSource constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ProjectCreationSource) String() string {
 	switch e {
 	case ProjectCreationSourceUndefined:
@@ -230,6 +244,8 @@ const (
 	ProjectSectionTypeAuxiliary ProjectSectionType = 3
 )
 
+// String returns the ProjectSectionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ProjectSectionType) String() string {
 	switch e {
 	case ProjectSectionTypeUndefined:
@@ -254,6 +270,8 @@ const (
 	ProjectTextElementTypeSubtitle ProjectTextElementType = 2
 )
 
+// String returns the ProjectTextElementType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ProjectTextElementType) String() string {
 	switch e {
 	case ProjectTextElementTypeBody:

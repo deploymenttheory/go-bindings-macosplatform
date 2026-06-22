@@ -33,91 +33,76 @@ func KUTTypeUniversalSceneDescriptionMobile() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeUniversalSceneDescriptionMobile")))
 }
 
-// The attribute data describes the degree to which a surface’s appearance changes in appearance when rotated about its normal vector.
 // MDLVertexAttributeAnisotropy returns the string constant MDLVertexAttributeAnisotropy, for use as a dictionary key or argument.
 func MDLVertexAttributeAnisotropy() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeAnisotropy")))
 }
 
-// The normal to a curve at a vertex position
 // MDLVertexAttributeBinormal returns the string constant MDLVertexAttributeBinormal, for use as a dictionary key or argument.
 func MDLVertexAttributeBinormal() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeBinormal")))
 }
 
-// The vector completing a tangent basis at a vertex
 // MDLVertexAttributeBitangent returns the string constant MDLVertexAttributeBitangent, for use as a dictionary key or argument.
 func MDLVertexAttributeBitangent() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeBitangent")))
 }
 
-// Color of a vertex
 // MDLVertexAttributeColor returns the string constant MDLVertexAttributeColor, for use as a dictionary key or argument.
 func MDLVertexAttributeColor() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeColor")))
 }
 
-// A crease value along an edge to be applied during subdivision. A zero value indicates an edge is smooth, one is sharply creased.
 // MDLVertexAttributeEdgeCrease returns the string constant MDLVertexAttributeEdgeCrease, for use as a dictionary key or argument.
 func MDLVertexAttributeEdgeCrease() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeEdgeCrease")))
 }
 
-// Indices of joints in an animation rig corresponding to weighting information
 // MDLVertexAttributeJointIndices returns the string constant MDLVertexAttributeJointIndices, for use as a dictionary key or argument.
 func MDLVertexAttributeJointIndices() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeJointIndices")))
 }
 
-// Weights corresponding to joints for the purpose of blending animation
 // MDLVertexAttributeJointWeights returns the string constant MDLVertexAttributeJointWeights, for use as a dictionary key or argument.
 func MDLVertexAttributeJointWeights() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeJointWeights")))
 }
 
-// The direction of a normal at a vertex
 // MDLVertexAttributeNormal returns the string constant MDLVertexAttributeNormal, for use as a dictionary key or argument.
 func MDLVertexAttributeNormal() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeNormal")))
 }
 
-// A value indicating the degree to which a vertex is occluded by surrounding geometry
 // MDLVertexAttributeOcclusionValue returns the string constant MDLVertexAttributeOcclusionValue, for use as a dictionary key or argument.
 func MDLVertexAttributeOcclusionValue() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeOcclusionValue")))
 }
 
-// The position of a vertex
 // MDLVertexAttributePosition returns the string constant MDLVertexAttributePosition, for use as a dictionary key or argument.
 func MDLVertexAttributePosition() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributePosition")))
 }
 
-// The u direction of a shading basis at a vertex
 // MDLVertexAttributeShadingBasisU returns the string constant MDLVertexAttributeShadingBasisU, for use as a dictionary key or argument.
 func MDLVertexAttributeShadingBasisU() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeShadingBasisU")))
 }
 
-// The v direction of a shading basis at a vertex
 // MDLVertexAttributeShadingBasisV returns the string constant MDLVertexAttributeShadingBasisV, for use as a dictionary key or argument.
 func MDLVertexAttributeShadingBasisV() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeShadingBasisV")))
 }
 
-// Stencil values for subdivision at a vertex
 // MDLVertexAttributeSubdivisionStencil returns the string constant MDLVertexAttributeSubdivisionStencil, for use as a dictionary key or argument.
 func MDLVertexAttributeSubdivisionStencil() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeSubdivisionStencil")))
 }
 
-// A vector tangent to a vertex
 // MDLVertexAttributeTangent returns the string constant MDLVertexAttributeTangent, for use as a dictionary key or argument.
 func MDLVertexAttributeTangent() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeTangent")))
 }
 
-// Texture coordinate mapping at a vertex
 // MDLVertexAttributeTextureCoordinate returns the string constant MDLVertexAttributeTextureCoordinate, for use as a dictionary key or argument.
 func MDLVertexAttributeTextureCoordinate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeTextureCoordinate")))

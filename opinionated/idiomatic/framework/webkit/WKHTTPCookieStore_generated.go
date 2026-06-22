@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages the HTTP cookies associated with a particular web view.
-//
 // WKHTTPCookieStore is an idiomatic wrapper over the Objective-C class WKHTTPCookieStore.
+//
+// An object that manages the HTTP cookies associated with a particular web view.
 type WKHTTPCookieStore struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKHTTPCookieStoreFromID(id objc.ID) *WKHTTPCookieStore {
 	if id == 0 {
 		return nil
 	}
-	x := &WKHTTPCookieStore{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKHTTPCookieStore{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKHTTPCookieStoreAdopt(id objc.ID) *WKHTTPCookieStore {
 	if id == 0 {
 		return nil
 	}
-	x := &WKHTTPCookieStore{Handle: objref.Wrap(id)}
+	x := &WKHTTPCookieStore{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,33 +60,39 @@ func (x *WKHTTPCookieStore) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKHTTPCookieStore) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKHTTPCookieStore creates a new WKHTTPCookieStore.
 func NewWKHTTPCookieStore() *WKHTTPCookieStore {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKHTTPCookieStore")), objc.RegisterName("new"))
 	return wKHTTPCookieStoreAdopt(_id)
 }
 
-// Fetches all stored cookies asynchronously and delivers them to the specified completion handler.
+// GetAllCookies fetches all stored cookies asynchronously and delivers them to the specified completion handler.
 func (x *WKHTTPCookieStore) GetAllCookies(completionHandler func(obj.Object) int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getAllCookies:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
 }
 
-// Adds a cookie to the cookie store.
+// SetCookieCompletionHandler adds a cookie to the cookie store.
 func (x *WKHTTPCookieStore) SetCookieCompletionHandler(cookie obj.Object, completionHandler func() int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCookie:completionHandler:"), objref.IDOf(cookie), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
 }
 
-// Set multiple cookies.
+// SetCookiesCompletionHandler set multiple cookies.
 func (x *WKHTTPCookieStore) SetCookiesCompletionHandler(cookies []obj.Object, completionHandler func() int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCookies:completionHandler:"), purego.SliceToNSArray(cookies, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
 }
 
-// Deletes the specified cookie.
+// DeleteCookieCompletionHandler deletes the specified cookie.
 func (x *WKHTTPCookieStore) DeleteCookieCompletionHandler(cookie obj.Object, completionHandler func() int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteCookie:completionHandler:"), objref.IDOf(cookie), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
 }
 
-// Sets a cookie policy that indicates whether the cookie store allows cookie storage.
+// SetCookiePolicyCompletionHandler sets a cookie policy that indicates whether the cookie store allows cookie storage.
 func (x *WKHTTPCookieStore) SetCookiePolicyCompletionHandler(policy WKCookiePolicy, completionHandler func() int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCookiePolicy:completionHandler:"), policy, objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
 }

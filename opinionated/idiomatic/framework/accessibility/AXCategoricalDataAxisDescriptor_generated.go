@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents an axis of categorical data.
-//
 // CategoricalDataAxisDescriptor is an idiomatic wrapper over the Objective-C class AXCategoricalDataAxisDescriptor.
+//
+// An object that represents an axis of categorical data.
 type CategoricalDataAxisDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CategoricalDataAxisDescriptorFromID(id objc.ID) *CategoricalDataAxisDescrip
 	if id == 0 {
 		return nil
 	}
-	x := &CategoricalDataAxisDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CategoricalDataAxisDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func categoricalDataAxisDescriptorAdopt(id objc.ID) *CategoricalDataAxisDescript
 	if id == 0 {
 		return nil
 	}
-	x := &CategoricalDataAxisDescriptor{Handle: objref.Wrap(id)}
+	x := &CategoricalDataAxisDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,34 +60,34 @@ func (x *CategoricalDataAxisDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a categorical data axis with the specified title and an array of categories in the specified order.
-//
-// NewCategoricalDataAxisDescriptorWithTitleCategoryOrder creates a new CategoricalDataAxisDescriptor.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CategoricalDataAxisDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCategoricalDataAxisDescriptorWithTitleCategoryOrder creates a categorical data axis with the specified title and an array of categories in the specified order.
 func NewCategoricalDataAxisDescriptorWithTitleCategoryOrder(title string, categoryOrder []string) *CategoricalDataAxisDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AXCategoricalDataAxisDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:categoryOrder:"), purego.NSString(title), purego.SliceToNSArray(categoryOrder, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return categoricalDataAxisDescriptorAdopt(_id)
 }
 
-// Creates a categorical data axis with the specified attributed title and an array of categories in the specified order.
-//
-// NewCategoricalDataAxisDescriptorWithAttributedTitleCategoryOrder creates a new CategoricalDataAxisDescriptor.
+// NewCategoricalDataAxisDescriptorWithAttributedTitleCategoryOrder creates a categorical data axis with the specified attributed title and an array of categories in the specified order.
 func NewCategoricalDataAxisDescriptorWithAttributedTitleCategoryOrder(attributedTitle obj.Object, categoryOrder []string) *CategoricalDataAxisDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AXCategoricalDataAxisDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttributedTitle:categoryOrder:"), objref.IDOf(attributedTitle), purego.SliceToNSArray(categoryOrder, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return categoricalDataAxisDescriptorAdopt(_id)
 }
 
-// A list of every category value for the axis in the order they appear visually in the graph or legend.
-//
-// WithCategoryOrder sets the collection and returns the receiver so calls can be chained.
+// WithCategoryOrder a list of every category value for the axis in the order they appear visually in the graph or legend.
 func (x *CategoricalDataAxisDescriptor) WithCategoryOrder(items ...obj.Object) *CategoricalDataAxisDescriptor {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryOrder:"), _arr)
 	return x
 }
 
-// The order of the category values for this axis. This list should contain every possible category value for this axis, in the order they are displayed visually in the graph or legend. For example, if your categorical axis represented 'blood type', and the legend contained 'AB, A, B, O' in that order, you would provide an array containing "AB", "A", "B" and "O" in the same order.
+// CategoryOrder the order of the category values for this axis. This list should contain every possible category value for this axis, in the order they are displayed visually in the graph or legend. For example, if your categorical axis represented 'blood type', and the legend contained 'AB, A, B, O' in that order, you would provide an array containing "AB", "A", "B" and "O" in the same order.
 //
 // CategoryOrder returns the collection as a Go slice.
 func (x *CategoricalDataAxisDescriptor) CategoryOrder() []string {
@@ -93,6 +95,7 @@ func (x *CategoricalDataAxisDescriptor) CategoryOrder() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetCategoryOrder wraps the corresponding Objective-C method.
 func (x *CategoricalDataAxisDescriptor) SetCategoryOrder(categoryOrder []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryOrder:"), purego.SliceToNSArray(categoryOrder, func(_v string) objc.ID { return purego.NSString(_v) }))
 }

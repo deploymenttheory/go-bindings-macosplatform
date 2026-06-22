@@ -11,39 +11,47 @@ import (
 // SmartCardUserInteractionProvider is accepted wherever a TKSmartCardUserInteraction (or one of its subclasses) is expected.
 type SmartCardUserInteractionProvider interface {
 	objref.Object
+	isSmartCardUserInteraction()
 }
 
 // SmartCardUserInteractionForPINOperationProvider is accepted wherever a TKSmartCardUserInteractionForPINOperation (or one of its subclasses) is expected.
 type SmartCardUserInteractionForPINOperationProvider interface {
 	objref.Object
+	isSmartCardUserInteractionForPINOperation()
 }
 
 // TLVRecordProvider is accepted wherever a TKTLVRecord (or one of its subclasses) is expected.
 type TLVRecordProvider interface {
 	objref.Object
+	isTLVRecord()
 }
 
 // TokenProvider is accepted wherever a TKToken (or one of its subclasses) is expected.
 type TokenProvider interface {
 	objref.Object
+	isToken()
 }
 
 // TokenAuthOperationProvider is accepted wherever a TKTokenAuthOperation (or one of its subclasses) is expected.
 type TokenAuthOperationProvider interface {
 	objref.Object
+	isTokenAuthOperation()
 }
 
 // TokenDriverProvider is accepted wherever a TKTokenDriver (or one of its subclasses) is expected.
 type TokenDriverProvider interface {
 	objref.Object
+	isTokenDriver()
 }
 
 // TokenKeychainItemProvider is accepted wherever a TKTokenKeychainItem (or one of its subclasses) is expected.
 type TokenKeychainItemProvider interface {
 	objref.Object
+	isTokenKeychainItem()
 }
 
 // TokenSessionProvider is accepted wherever a TKTokenSession (or one of its subclasses) is expected.
 type TokenSessionProvider interface {
 	objref.Object
+	isTokenSession()
 }

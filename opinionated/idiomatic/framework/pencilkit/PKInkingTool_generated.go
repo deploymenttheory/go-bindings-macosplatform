@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A structure that defines the drawing characteristics (width, color, pen style) to use when drawing lines on a canvas view.
-//
 // InkingTool is an idiomatic wrapper over the Objective-C class PKInkingTool.
+//
+// It embeds [Tool], promoting that type's methods.
+//
+// A structure that defines the drawing characteristics (width, color, pen style) to use when drawing lines on a canvas view.
 type InkingTool struct {
-	objref.Handle
+	Tool
 }
 
 // InkingToolFromID adopts an existing Objective-C object as a InkingTool
@@ -25,7 +26,8 @@ func InkingToolFromID(id objc.ID) *InkingTool {
 	if id == 0 {
 		return nil
 	}
-	x := &InkingTool{Handle: objref.Wrap(purego.Retain(id))}
+	x := &InkingTool{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func inkingToolAdopt(id objc.ID) *InkingTool {
 	if id == 0 {
 		return nil
 	}
-	x := &InkingTool{Handle: objref.Wrap(id)}
+	x := &InkingTool{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *InkingTool) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *InkingTool) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *InkingTool) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewInkingToolWithInkTypeColorWidth creates a new InkingTool.
@@ -79,45 +67,44 @@ func NewInkingToolWithInkTypeColor(type_ obj.Object, color obj.Object) *InkingTo
 	return inkingToolAdopt(_id)
 }
 
-// Create a new inking tool for the provided ink.
-//
-// NewInkingToolWithInkWidth creates a new InkingTool.
+// NewInkingToolWithInkWidth create a new inking tool for the provided ink.
 func NewInkingToolWithInkWidth(ink *Ink, width float64) *InkingTool {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKInkingTool")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInk:width:"), objref.IDOf(ink), width)
 	return inkingToolAdopt(_id)
 }
 
-// The type of ink, eg. pen, pencil...
+// InkType the type of ink, eg. pen, pencil...
 func (x *InkingTool) InkType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inkType"))
 	return obj.Wrap(_r)
 }
 
+// Color wraps the corresponding Objective-C method.
 func (x *InkingTool) Color() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }
 
-// The base width of the ink.
+// Width the base width of the ink.
 func (x *InkingTool) Width() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("width"))
 	return _r
 }
 
-// The base angle of the ink.
+// Azimuth the base angle of the ink.
 func (x *InkingTool) Azimuth() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("azimuth"))
 	return _r
 }
 
-// The ink that this tool will create strokes with.
+// Ink the ink that this tool will create strokes with.
 func (x *InkingTool) Ink() *Ink {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ink"))
 	return InkFromID(_r)
 }
 
-// The PencilKit version required to use this inking tool.
+// RequiredContentVersion the PencilKit version required to use this inking tool.
 func (x *InkingTool) RequiredContentVersion() ContentVersion {
 	_r := objc.Send[ContentVersion](objref.IDOf(x), objc.RegisterName("requiredContentVersion"))
 	return _r
@@ -135,3 +122,5 @@ type InkingToolable interface {
 }
 
 var _ InkingToolable = (*InkingTool)(nil)
+
+var _ ToolProvider = (*InkingTool)(nil)

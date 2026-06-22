@@ -15,6 +15,8 @@ import (
 )
 
 // MTRUnitTestingClusterSimpleStructResponseParams is an idiomatic wrapper over the Objective-C class MTRUnitTestingClusterSimpleStructResponseParams.
+//
+// MTRUnitTestingClusterSimpleStructResponseParams is an abstract base — you do not construct it directly. Construct one of [MTRTestClusterClusterSimpleStructResponseParams] and pass it where a MTRUnitTestingClusterSimpleStructResponseParams is accepted.
 type MTRUnitTestingClusterSimpleStructResponseParams struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func MTRUnitTestingClusterSimpleStructResponseParamsFromID(id objc.ID) *MTRUnitT
 	if id == 0 {
 		return nil
 	}
-	x := &MTRUnitTestingClusterSimpleStructResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRUnitTestingClusterSimpleStructResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func mTRUnitTestingClusterSimpleStructResponseParamsAdopt(id objc.ID) *MTRUnitTe
 	if id == 0 {
 		return nil
 	}
-	x := &MTRUnitTestingClusterSimpleStructResponseParams{Handle: objref.Wrap(id)}
+	x := &MTRUnitTestingClusterSimpleStructResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,14 @@ func (x *MTRUnitTestingClusterSimpleStructResponseParams) IsKind(className strin
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRUnitTestingClusterSimpleStructResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTRUnitTestingClusterSimpleStructResponseParamsWithResponseValueError creates a new MTRUnitTestingClusterSimpleStructResponseParams.
-func NewMTRUnitTestingClusterSimpleStructResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRUnitTestingClusterSimpleStructResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRUnitTestingClusterSimpleStructResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRUnitTestingClusterSimpleStructResponseParamsWithResponseValueError initialize an MTRUnitTestingClusterSimpleStructResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRUnitTestingClusterSimpleStructResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRUnitTestingClusterSimpleStructResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRUnitTestingClusterSimpleStructResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,35 +79,36 @@ func NewMTRUnitTestingClusterSimpleStructResponseParamsWithResponseValueError(re
 	return mTRUnitTestingClusterSimpleStructResponseParamsAdopt(_id), nil
 }
 
-// WithArg1 sets arg1 and returns the receiver so calls can be chained.
+// WithArg1 sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterSimpleStructResponseParams) WithArg1(arg1 MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterSimpleStructResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRUnitTestingClusterSimpleStructResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterSimpleStructResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
+// Arg1 wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterSimpleStructResponseParams) Arg1() *MTRUnitTestingClusterSimpleStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arg1"))
 	return MTRUnitTestingClusterSimpleStructFromID(_r)
 }
 
+// SetArg1 wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterSimpleStructResponseParams) SetArg1(arg1 *MTRUnitTestingClusterSimpleStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRUnitTestingClusterSimpleStructResponseParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterSimpleStructResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
@@ -116,3 +125,11 @@ type MTRUnitTestingClusterSimpleStructResponseParamsable interface {
 }
 
 var _ MTRUnitTestingClusterSimpleStructResponseParamsable = (*MTRUnitTestingClusterSimpleStructResponseParams)(nil)
+
+// isMTRUnitTestingClusterSimpleStructResponseParams marks MTRUnitTestingClusterSimpleStructResponseParams — and, by embedding promotion, its
+// subclasses — as a member of the MTRUnitTestingClusterSimpleStructResponseParams hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRUnitTestingClusterSimpleStructResponseParams) isMTRUnitTestingClusterSimpleStructResponseParams() {
+}
+
+var _ MTRUnitTestingClusterSimpleStructResponseParamsProvider = (*MTRUnitTestingClusterSimpleStructResponseParams)(nil)

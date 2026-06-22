@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A network service browser that finds published services on a network using multicast DNS.
-//
 // NetServiceBrowser is an idiomatic wrapper over the Objective-C class NSNetServiceBrowser.
+//
+// A network service browser that finds published services on a network using multicast DNS.
 type NetServiceBrowser struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NetServiceBrowserFromID(id objc.ID) *NetServiceBrowser {
 	if id == 0 {
 		return nil
 	}
-	x := &NetServiceBrowser{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NetServiceBrowser{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func netServiceBrowserAdopt(id objc.ID) *NetServiceBrowser {
 	if id == 0 {
 		return nil
 	}
-	x := &NetServiceBrowser{Handle: objref.Wrap(id)}
+	x := &NetServiceBrowser{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,53 +60,67 @@ func (x *NetServiceBrowser) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NetServiceBrowser) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNetServiceBrowser creates a new NetServiceBrowser.
 func NewNetServiceBrowser() *NetServiceBrowser {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSNetServiceBrowser")), objc.RegisterName("new"))
 	return netServiceBrowserAdopt(_id)
 }
 
-// WithIncludesPeerToPeer sets includesPeerToPeer and returns the receiver so calls can be chained.
+// WithIncludesPeerToPeer sets the property and returns the receiver so calls can be chained.
 func (x *NetServiceBrowser) WithIncludesPeerToPeer(includesPeerToPeer bool) *NetServiceBrowser {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesPeerToPeer:"), includesPeerToPeer)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *NetServiceBrowser) WithScriptingProperties(scriptingProperties obj.Object) *NetServiceBrowser {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// ScheduleInRunLoopForMode wraps the corresponding Objective-C method.
 func (x *NetServiceBrowser) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
+// RemoveFromRunLoopForMode wraps the corresponding Objective-C method.
 func (x *NetServiceBrowser) RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
+// SearchForBrowsableDomains wraps the corresponding Objective-C method.
 func (x *NetServiceBrowser) SearchForBrowsableDomains() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("searchForBrowsableDomains"))
 }
 
+// SearchForRegistrationDomains wraps the corresponding Objective-C method.
 func (x *NetServiceBrowser) SearchForRegistrationDomains() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("searchForRegistrationDomains"))
 }
 
+// SearchForServicesOfTypeInDomain wraps the corresponding Objective-C method.
 func (x *NetServiceBrowser) SearchForServicesOfTypeInDomain(type_ string, domainString string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("searchForServicesOfType:inDomain:"), purego.NSString(type_), purego.NSString(domainString))
 }
 
+// Stop wraps the corresponding Objective-C method.
 func (x *NetServiceBrowser) Stop() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
+// IncludesPeerToPeer wraps the corresponding Objective-C method.
 func (x *NetServiceBrowser) IncludesPeerToPeer() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesPeerToPeer"))
 	return _r
 }
 
+// SetIncludesPeerToPeer wraps the corresponding Objective-C method.
 func (x *NetServiceBrowser) SetIncludesPeerToPeer(includesPeerToPeer bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesPeerToPeer:"), includesPeerToPeer)
 }

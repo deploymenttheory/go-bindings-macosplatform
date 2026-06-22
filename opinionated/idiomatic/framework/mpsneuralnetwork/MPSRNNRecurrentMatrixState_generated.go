@@ -23,7 +23,8 @@ func RNNRecurrentMatrixStateFromID(id objc.ID) *RNNRecurrentMatrixState {
 	if id == 0 {
 		return nil
 	}
-	x := &RNNRecurrentMatrixState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RNNRecurrentMatrixState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func rNNRecurrentMatrixStateAdopt(id objc.ID) *RNNRecurrentMatrixState {
 	if id == 0 {
 		return nil
 	}
-	x := &RNNRecurrentMatrixState{Handle: objref.Wrap(id)}
+	x := &RNNRecurrentMatrixState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,19 +58,25 @@ func (x *RNNRecurrentMatrixState) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RNNRecurrentMatrixState) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRNNRecurrentMatrixState creates a new RNNRecurrentMatrixState.
 func NewRNNRecurrentMatrixState() *RNNRecurrentMatrixState {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSRNNRecurrentMatrixState")), objc.RegisterName("new"))
 	return rNNRecurrentMatrixStateAdopt(_id)
 }
 
-// Access the stored recurrent matrix data.
+// GetRecurrentOutputMatrixForLayerIndex access the stored recurrent matrix data.
 func (x *RNNRecurrentMatrixState) GetRecurrentOutputMatrixForLayerIndex(layerIndex int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getRecurrentOutputMatrixForLayerIndex:"), layerIndex)
 	return obj.Wrap(_r)
 }
 
-// Access the stored memory cell matrix data (if present).
+// GetMemoryCellMatrixForLayerIndex access the stored memory cell matrix data (if present).
 func (x *RNNRecurrentMatrixState) GetMemoryCellMatrixForLayerIndex(layerIndex int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getMemoryCellMatrixForLayerIndex:"), layerIndex)
 	return obj.Wrap(_r)

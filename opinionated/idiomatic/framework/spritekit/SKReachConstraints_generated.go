@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specification of the degree of freedom when solving inverse kinematics.
-//
 // ReachConstraints is an idiomatic wrapper over the Objective-C class SKReachConstraints.
+//
+// A specification of the degree of freedom when solving inverse kinematics.
 type ReachConstraints struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ReachConstraintsFromID(id objc.ID) *ReachConstraints {
 	if id == 0 {
 		return nil
 	}
-	x := &ReachConstraints{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ReachConstraints{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func reachConstraintsAdopt(id objc.ID) *ReachConstraints {
 	if id == 0 {
 		return nil
 	}
-	x := &ReachConstraints{Handle: objref.Wrap(id)}
+	x := &ReachConstraints{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,47 +60,49 @@ func (x *ReachConstraints) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a new reach constraint object.
-//
-// NewReachConstraintsWithLowerAngleLimitUpperAngleLimit creates a new ReachConstraints.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ReachConstraints) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewReachConstraintsWithLowerAngleLimitUpperAngleLimit initializes a new reach constraint object.
 func NewReachConstraintsWithLowerAngleLimitUpperAngleLimit(lowerAngleLimit float64, upperAngleLimit float64) *ReachConstraints {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKReachConstraints")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLowerAngleLimit:upperAngleLimit:"), lowerAngleLimit, upperAngleLimit)
 	return reachConstraintsAdopt(_id)
 }
 
-// The minimum angle that the node can have after it is rotated by a reach event.
-//
-// WithLowerAngleLimit sets lowerAngleLimit and returns the receiver so calls can be chained.
+// WithLowerAngleLimit the minimum angle that the node can have after it is rotated by a reach event.
 func (x *ReachConstraints) WithLowerAngleLimit(lowerAngleLimit float64) *ReachConstraints {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowerAngleLimit:"), lowerAngleLimit)
 	return x
 }
 
-// The maximum angle that the node can have after it is rotated by a reach event.
-//
-// WithUpperAngleLimit sets upperAngleLimit and returns the receiver so calls can be chained.
+// WithUpperAngleLimit the maximum angle that the node can have after it is rotated by a reach event.
 func (x *ReachConstraints) WithUpperAngleLimit(upperAngleLimit float64) *ReachConstraints {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperAngleLimit:"), upperAngleLimit)
 	return x
 }
 
-// Lower angle limit in radians
+// LowerAngleLimit lower angle limit in radians
 func (x *ReachConstraints) LowerAngleLimit() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lowerAngleLimit"))
 	return _r
 }
 
+// SetLowerAngleLimit wraps the corresponding Objective-C method.
 func (x *ReachConstraints) SetLowerAngleLimit(lowerAngleLimit float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowerAngleLimit:"), lowerAngleLimit)
 }
 
-// Upper angle limit in radians
+// UpperAngleLimit upper angle limit in radians
 func (x *ReachConstraints) UpperAngleLimit() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("upperAngleLimit"))
 	return _r
 }
 
+// SetUpperAngleLimit wraps the corresponding Objective-C method.
 func (x *ReachConstraints) SetUpperAngleLimit(upperAngleLimit float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperAngleLimit:"), upperAngleLimit)
 }

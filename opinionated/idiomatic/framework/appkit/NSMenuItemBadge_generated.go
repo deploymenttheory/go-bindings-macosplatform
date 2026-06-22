@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A control that provides additional quantitative information specific to a menu item, such as the number of available updates.
-//
 // MenuItemBadge is an idiomatic wrapper over the Objective-C class NSMenuItemBadge.
+//
+// A control that provides additional quantitative information specific to a menu item, such as the number of available updates.
 type MenuItemBadge struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MenuItemBadgeFromID(id objc.ID) *MenuItemBadge {
 	if id == 0 {
 		return nil
 	}
-	x := &MenuItemBadge{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MenuItemBadge{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func menuItemBadgeAdopt(id objc.ID) *MenuItemBadge {
 	if id == 0 {
 		return nil
 	}
-	x := &MenuItemBadge{Handle: objref.Wrap(id)}
+	x := &MenuItemBadge{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,46 +60,46 @@ func (x *MenuItemBadge) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes the badge with a count and a pre-defined badge type.
-//
-// NewMenuItemBadgeWithCountType creates a new MenuItemBadge.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MenuItemBadge) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMenuItemBadgeWithCountType initializes the badge with a count and a pre-defined badge type.
 func NewMenuItemBadgeWithCountType(itemCount int, type_ MenuItemBadgeType) *MenuItemBadge {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMenuItemBadge")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCount:type:"), itemCount, type_)
 	return menuItemBadgeAdopt(_id)
 }
 
-// Creates a badge with a count and an empty string.
-//
-// NewMenuItemBadgeWithCount creates a new MenuItemBadge.
+// NewMenuItemBadgeWithCount creates a badge with a count and an empty string.
 func NewMenuItemBadgeWithCount(itemCount int) *MenuItemBadge {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMenuItemBadge")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCount:"), itemCount)
 	return menuItemBadgeAdopt(_id)
 }
 
-// Creates a badge with the provided custom string.
-//
-// NewMenuItemBadgeWithString creates a new MenuItemBadge.
+// NewMenuItemBadgeWithString creates a badge with the provided custom string.
 func NewMenuItemBadgeWithString(string_ string) *MenuItemBadge {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMenuItemBadge")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(string_))
 	return menuItemBadgeAdopt(_id)
 }
 
-// The count of items the badge displays. If a custom string was used to create a badge, the value is 0.
+// ItemCount the count of items the badge displays. If a custom string was used to create a badge, the value is 0.
 func (x *MenuItemBadge) ItemCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("itemCount"))
 	return _r
 }
 
-// The type of items the badge displays. If a custom string was used to create a badge, this value is
+// Type the type of items the badge displays. If a custom string was used to create a badge, this value is
 func (x *MenuItemBadge) Type() MenuItemBadgeType {
 	_r := objc.Send[MenuItemBadgeType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
-// The string representation of the badge as it would appear when the badge is displayed.
+// StringValue the string representation of the badge as it would appear when the badge is displayed.
 func (x *MenuItemBadge) StringValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
 	if _r == 0 {

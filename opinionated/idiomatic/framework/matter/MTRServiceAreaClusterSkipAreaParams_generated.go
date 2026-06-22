@@ -23,7 +23,8 @@ func MTRServiceAreaClusterSkipAreaParamsFromID(id objc.ID) *MTRServiceAreaCluste
 	if id == 0 {
 		return nil
 	}
-	x := &MTRServiceAreaClusterSkipAreaParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRServiceAreaClusterSkipAreaParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRServiceAreaClusterSkipAreaParamsAdopt(id objc.ID) *MTRServiceAreaCluster
 	if id == 0 {
 		return nil
 	}
-	x := &MTRServiceAreaClusterSkipAreaParams{Handle: objref.Wrap(id)}
+	x := &MTRServiceAreaClusterSkipAreaParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,59 +58,65 @@ func (x *MTRServiceAreaClusterSkipAreaParams) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRServiceAreaClusterSkipAreaParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRServiceAreaClusterSkipAreaParams creates a new MTRServiceAreaClusterSkipAreaParams.
 func NewMTRServiceAreaClusterSkipAreaParams() *MTRServiceAreaClusterSkipAreaParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRServiceAreaClusterSkipAreaParams")), objc.RegisterName("new"))
 	return mTRServiceAreaClusterSkipAreaParamsAdopt(_id)
 }
 
-// WithSkippedArea sets skippedArea and returns the receiver so calls can be chained.
+// WithSkippedArea sets the property and returns the receiver so calls can be chained.
 func (x *MTRServiceAreaClusterSkipAreaParams) WithSkippedArea(skippedArea obj.Object) *MTRServiceAreaClusterSkipAreaParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSkippedArea:"), objref.IDOf(skippedArea))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke).
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
 func (x *MTRServiceAreaClusterSkipAreaParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRServiceAreaClusterSkipAreaParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
 func (x *MTRServiceAreaClusterSkipAreaParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRServiceAreaClusterSkipAreaParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// SkippedArea wraps the corresponding Objective-C method.
 func (x *MTRServiceAreaClusterSkipAreaParams) SkippedArea() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skippedArea"))
 	return obj.Wrap(_r)
 }
 
+// SetSkippedArea wraps the corresponding Objective-C method.
 func (x *MTRServiceAreaClusterSkipAreaParams) SetSkippedArea(skippedArea obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSkippedArea:"), objref.IDOf(skippedArea))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRServiceAreaClusterSkipAreaParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRServiceAreaClusterSkipAreaParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRServiceAreaClusterSkipAreaParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRServiceAreaClusterSkipAreaParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

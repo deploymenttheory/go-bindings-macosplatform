@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A rule for translating print text to Braille, and back-translating Braille to print text.
-//
 // BrailleTable is an idiomatic wrapper over the Objective-C class AXBrailleTable.
+//
+// A rule for translating print text to Braille, and back-translating Braille to print text.
 type BrailleTable struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func BrailleTableFromID(id objc.ID) *BrailleTable {
 	if id == 0 {
 		return nil
 	}
-	x := &BrailleTable{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BrailleTable{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func brailleTableAdopt(id objc.ID) *BrailleTable {
 	if id == 0 {
 		return nil
 	}
-	x := &BrailleTable{Handle: objref.Wrap(id)}
+	x := &BrailleTable{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,16 +60,20 @@ func (x *BrailleTable) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns nil if there is no table with the given identifier.
-//
-// NewBrailleTableWithIdentifier creates a new BrailleTable.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BrailleTable) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewBrailleTableWithIdentifier returns nil if there is no table with the given identifier.
 func NewBrailleTableWithIdentifier(identifier string) *BrailleTable {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AXBrailleTable")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), purego.NSString(identifier))
 	return brailleTableAdopt(_id)
 }
 
-// A unique string that identifies this table.
+// Identifier a unique string that identifies this table.
 func (x *BrailleTable) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -76,7 +82,7 @@ func (x *BrailleTable) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// The localized name of this table for user display.
+// LocalizedName the localized name of this table for user display.
 func (x *BrailleTable) LocalizedName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
 	if _r == 0 {
@@ -85,7 +91,7 @@ func (x *BrailleTable) LocalizedName() string {
 	return purego.GoString(_r)
 }
 
-// The identifier of the provider of this table.
+// ProviderIdentifier the identifier of the provider of this table.
 func (x *BrailleTable) ProviderIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("providerIdentifier"))
 	if _r == 0 {
@@ -94,7 +100,7 @@ func (x *BrailleTable) ProviderIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// The localized name of the provider of this table for user display.
+// LocalizedProviderName the localized name of the provider of this table for user display.
 func (x *BrailleTable) LocalizedProviderName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedProviderName"))
 	if _r == 0 {
@@ -103,7 +109,7 @@ func (x *BrailleTable) LocalizedProviderName() string {
 	return purego.GoString(_r)
 }
 
-// The 3-character code from ISO 639-2 for the language this Braille table pertains to.
+// Language the 3-character code from ISO 639-2 for the language this Braille table pertains to.
 func (x *BrailleTable) Language() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
 	if _r == 0 {
@@ -112,13 +118,13 @@ func (x *BrailleTable) Language() string {
 	return purego.GoString(_r)
 }
 
-// All locales this table supports.
+// Locales all locales this table supports.
 func (x *BrailleTable) Locales() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locales"))
 	return obj.Wrap(_r)
 }
 
-// Returns true if this table makes use of eight dots as opposed to six dots.
+// IsEightDot returns true if this table makes use of eight dots as opposed to six dots.
 func (x *BrailleTable) IsEightDot() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEightDot"))
 	return _r

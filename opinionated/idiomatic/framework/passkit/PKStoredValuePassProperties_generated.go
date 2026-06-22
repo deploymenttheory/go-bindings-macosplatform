@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the properties of a pass that contains a balance used for specific transactions, such as a transit pass or loyalty card.
-//
 // StoredValuePassProperties is an idiomatic wrapper over the Objective-C class PKStoredValuePassProperties.
+//
+// StoredValuePassProperties is an abstract base — you do not construct it directly. Construct one of [TransitPassProperties] and pass it where a StoredValuePassProperties is accepted.
+//
+// An object that represents the properties of a pass that contains a balance used for specific transactions, such as a transit pass or loyalty card.
 type StoredValuePassProperties struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func StoredValuePassPropertiesFromID(id objc.ID) *StoredValuePassProperties {
 	if id == 0 {
 		return nil
 	}
-	x := &StoredValuePassProperties{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StoredValuePassProperties{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func storedValuePassPropertiesAdopt(id objc.ID) *StoredValuePassProperties {
 	if id == 0 {
 		return nil
 	}
-	x := &StoredValuePassProperties{Handle: objref.Wrap(id)}
+	x := &StoredValuePassProperties{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,27 +62,32 @@ func (x *StoredValuePassProperties) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewStoredValuePassProperties creates a new StoredValuePassProperties.
-func NewStoredValuePassProperties() *StoredValuePassProperties {
-	_id := objc.Send[objc.ID](objc.ID(_class("PKStoredValuePassProperties")), objc.RegisterName("new"))
-	return storedValuePassPropertiesAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StoredValuePassProperties) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// IsBlacklisted wraps the corresponding Objective-C method.
 func (x *StoredValuePassProperties) IsBlacklisted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBlacklisted"))
 	return _r
 }
 
+// IsBlocked wraps the corresponding Objective-C method.
 func (x *StoredValuePassProperties) IsBlocked() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBlocked"))
 	return _r
 }
 
+// ExpirationDate wraps the corresponding Objective-C method.
 func (x *StoredValuePassProperties) ExpirationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expirationDate"))
 	return obj.Wrap(_r)
 }
 
+// Balances wraps the corresponding Objective-C method.
+//
 // Balances returns the collection as a Go slice.
 func (x *StoredValuePassProperties) Balances() []*StoredValuePassBalance {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("balances"))
@@ -95,3 +104,10 @@ type StoredValuePassPropertiesable interface {
 }
 
 var _ StoredValuePassPropertiesable = (*StoredValuePassProperties)(nil)
+
+// isStoredValuePassProperties marks StoredValuePassProperties — and, by embedding promotion, its
+// subclasses — as a member of the StoredValuePassProperties hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *StoredValuePassProperties) isStoredValuePassProperties() {}
+
+var _ StoredValuePassPropertiesProvider = (*StoredValuePassProperties)(nil)

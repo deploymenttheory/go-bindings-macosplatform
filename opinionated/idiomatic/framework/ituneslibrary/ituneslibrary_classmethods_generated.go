@@ -11,8 +11,8 @@ import (
 	"unsafe"
 )
 
-// Creates and initializes an instance of ITLibrary that can retrieve media entities.
-func LibraryWithAPIVersionError(requestedAPIVersion string) (*Library, error) {
+// LibraryWithAPIVersionError creates and initializes an instance of ITLibrary that can retrieve media entities.
+func LibraryWithAPIVersionError(requestedAPIVersion string) (result *Library, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("ITLibrary")), objc.RegisterName("libraryWithAPIVersion:error:"), purego.NSString(requestedAPIVersion), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -21,8 +21,8 @@ func LibraryWithAPIVersionError(requestedAPIVersion string) (*Library, error) {
 	return LibraryFromID(_r), nil
 }
 
-// Creates and initializes an instance of ITLibrary that can retrieve media entities.
-func LibraryWithAPIVersionOptionsError(requestedAPIVersion string, options LibInitOptions) (*Library, error) {
+// LibraryWithAPIVersionOptionsError creates and initializes an instance of ITLibrary that can retrieve media entities.
+func LibraryWithAPIVersionOptionsError(requestedAPIVersion string, options LibInitOptions) (result *Library, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("ITLibrary")), objc.RegisterName("libraryWithAPIVersion:options:error:"), purego.NSString(requestedAPIVersion), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

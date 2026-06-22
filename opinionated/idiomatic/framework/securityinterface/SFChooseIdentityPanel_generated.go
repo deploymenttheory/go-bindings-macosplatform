@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A panel or sheet containing a list of identities that a user can choose from.
-//
 // ChooseIdentityPanel is an idiomatic wrapper over the Objective-C class SFChooseIdentityPanel.
+//
+// A panel or sheet containing a list of identities that a user can choose from.
 type ChooseIdentityPanel struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ChooseIdentityPanelFromID(id objc.ID) *ChooseIdentityPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &ChooseIdentityPanel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ChooseIdentityPanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func chooseIdentityPanelAdopt(id objc.ID) *ChooseIdentityPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &ChooseIdentityPanel{Handle: objref.Wrap(id)}
+	x := &ChooseIdentityPanel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,62 +60,68 @@ func (x *ChooseIdentityPanel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ChooseIdentityPanel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewChooseIdentityPanel creates a new ChooseIdentityPanel.
 func NewChooseIdentityPanel() *ChooseIdentityPanel {
 	_id := objc.Send[objc.ID](objc.ID(_class("SFChooseIdentityPanel")), objc.RegisterName("new"))
 	return chooseIdentityPanelAdopt(_id)
 }
 
-// Displays a list of identities in a modal panel.
+// RunModalForIdentitiesMessage displays a list of identities in a modal panel.
 func (x *ChooseIdentityPanel) RunModalForIdentitiesMessage(identities obj.Object, message string) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalForIdentities:message:"), objref.IDOf(identities), purego.NSString(message))
 	return _r
 }
 
-// Returns the identity that the user chose in the panel or sheet.
+// Identity returns the identity that the user chose in the panel or sheet.
 func (x *ChooseIdentityPanel) Identity() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identity"))
 	return obj.Wrap(_r)
 }
 
-// Specifies one or more policies that apply to the displayed certificates.
+// SetPolicies specifies one or more policies that apply to the displayed certificates.
 func (x *ChooseIdentityPanel) SetPolicies(policies obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolicies:"), objref.IDOf(policies))
 }
 
-// Returns an array of policies used to evaluate the status of the displayed certificates.
+// Policies returns an array of policies used to evaluate the status of the displayed certificates.
 func (x *ChooseIdentityPanel) Policies() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("policies"))
 	return obj.Wrap(_r)
 }
 
-// Customizes the title of the default button.
+// SetDefaultButtonTitle customizes the title of the default button.
 func (x *ChooseIdentityPanel) SetDefaultButtonTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultButtonTitle:"), purego.NSString(title))
 }
 
-// Customizes the title of the alternate button.
+// SetAlternateButtonTitle customizes the title of the alternate button.
 func (x *ChooseIdentityPanel) SetAlternateButtonTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateButtonTitle:"), purego.NSString(title))
 }
 
-// Displays a Help button in the sheet or panel.
+// SetShowsHelp displays a Help button in the sheet or panel.
 func (x *ChooseIdentityPanel) SetShowsHelp(showsHelp bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsHelp:"), showsHelp)
 }
 
-// Indicates whether the help button is currently set to be displayed.
+// ShowsHelp indicates whether the help button is currently set to be displayed.
 func (x *ChooseIdentityPanel) ShowsHelp() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsHelp"))
 	return _r
 }
 
-// Sets the help anchor string for the sheet or modal panel.
+// SetHelpAnchor sets the help anchor string for the sheet or modal panel.
 func (x *ChooseIdentityPanel) SetHelpAnchor(anchor string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHelpAnchor:"), purego.NSString(anchor))
 }
 
-// Returns the current help anchor string for the sheet or panel.
+// HelpAnchor returns the current help anchor string for the sheet or panel.
 func (x *ChooseIdentityPanel) HelpAnchor() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("helpAnchor"))
 	if _r == 0 {
@@ -122,12 +130,12 @@ func (x *ChooseIdentityPanel) HelpAnchor() string {
 	return purego.GoString(_r)
 }
 
-// Sets the optional informative text displayed in the panel.
+// SetInformativeText sets the optional informative text displayed in the panel.
 func (x *ChooseIdentityPanel) SetInformativeText(informativeText string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInformativeText:"), purego.NSString(informativeText))
 }
 
-// Returns the informative text currently displayed in the panel.
+// InformativeText returns the informative text currently displayed in the panel.
 func (x *ChooseIdentityPanel) InformativeText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("informativeText"))
 	if _r == 0 {
@@ -136,12 +144,12 @@ func (x *ChooseIdentityPanel) InformativeText() string {
 	return purego.GoString(_r)
 }
 
-// Sets an optional domain in which the identity is to be used.
+// SetDomain sets an optional domain in which the identity is to be used.
 func (x *ChooseIdentityPanel) SetDomain(domainString string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDomain:"), purego.NSString(domainString))
 }
 
-// Returns the domain that will be associated with the chosen identity.
+// Domain returns the domain that will be associated with the chosen identity.
 func (x *ChooseIdentityPanel) Domain() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domain"))
 	if _r == 0 {

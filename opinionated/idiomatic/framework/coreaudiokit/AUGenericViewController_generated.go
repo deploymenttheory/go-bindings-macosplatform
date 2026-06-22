@@ -23,7 +23,8 @@ func AUGenericViewControllerFromID(id objc.ID) *AUGenericViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &AUGenericViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AUGenericViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func aUGenericViewControllerAdopt(id objc.ID) *AUGenericViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &AUGenericViewController{Handle: objref.Wrap(id)}
+	x := &AUGenericViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *AUGenericViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AUGenericViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAUGenericViewController creates a new AUGenericViewController.
 func NewAUGenericViewController() *AUGenericViewController {
 	_id := objc.Send[objc.ID](objc.ID(_class("AUGenericViewController")), objc.RegisterName("new"))
 	return aUGenericViewControllerAdopt(_id)
 }
 
-// WithAuAudioUnit sets auAudioUnit and returns the receiver so calls can be chained.
+// WithAuAudioUnit sets the property and returns the receiver so calls can be chained.
 func (x *AUGenericViewController) WithAuAudioUnit(auAudioUnit obj.Object) *AUGenericViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuAudioUnit:"), objref.IDOf(auAudioUnit))
 	return x
 }
 
+// AuAudioUnit wraps the corresponding Objective-C method.
 func (x *AUGenericViewController) AuAudioUnit() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("auAudioUnit"))
 	return obj.Wrap(_r)
 }
 
+// SetAuAudioUnit wraps the corresponding Objective-C method.
 func (x *AUGenericViewController) SetAuAudioUnit(auAudioUnit obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuAudioUnit:"), objref.IDOf(auAudioUnit))
 }

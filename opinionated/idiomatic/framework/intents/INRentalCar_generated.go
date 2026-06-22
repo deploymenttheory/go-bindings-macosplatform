@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The information that describes a rental car.
-//
 // RentalCar is an idiomatic wrapper over the Objective-C class INRentalCar.
+//
+// The information that describes a rental car.
 type RentalCar struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RentalCarFromID(id objc.ID) *RentalCar {
 	if id == 0 {
 		return nil
 	}
-	x := &RentalCar{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RentalCar{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func rentalCarAdopt(id objc.ID) *RentalCar {
 	if id == 0 {
 		return nil
 	}
-	x := &RentalCar{Handle: objref.Wrap(id)}
+	x := &RentalCar{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *RentalCar) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new rental car object with the specified contents and attributes.
-//
-// NewRentalCarWithRentalCompanyNameTypeMakeModelRentalCarDescription creates a new RentalCar.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RentalCar) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRentalCarWithRentalCompanyNameTypeMakeModelRentalCarDescription creates a new rental car object with the specified contents and attributes.
 func NewRentalCarWithRentalCompanyNameTypeMakeModelRentalCarDescription(rentalCompanyName string, type_ string, make_ string, model string, rentalCarDescription string) *RentalCar {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INRentalCar")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRentalCompanyName:type:make:model:rentalCarDescription:"), purego.NSString(rentalCompanyName), purego.NSString(type_), purego.NSString(make_), purego.NSString(model), purego.NSString(rentalCarDescription))
 	return rentalCarAdopt(_id)
 }
 
+// RentalCompanyName wraps the corresponding Objective-C method.
 func (x *RentalCar) RentalCompanyName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rentalCompanyName"))
 	if _r == 0 {
@@ -75,6 +82,7 @@ func (x *RentalCar) RentalCompanyName() string {
 	return purego.GoString(_r)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *RentalCar) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
 	if _r == 0 {
@@ -83,6 +91,7 @@ func (x *RentalCar) Type() string {
 	return purego.GoString(_r)
 }
 
+// Make wraps the corresponding Objective-C method.
 func (x *RentalCar) Make() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("make"))
 	if _r == 0 {
@@ -91,6 +100,7 @@ func (x *RentalCar) Make() string {
 	return purego.GoString(_r)
 }
 
+// Model wraps the corresponding Objective-C method.
 func (x *RentalCar) Model() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("model"))
 	if _r == 0 {
@@ -99,6 +109,7 @@ func (x *RentalCar) Model() string {
 	return purego.GoString(_r)
 }
 
+// RentalCarDescription wraps the corresponding Objective-C method.
 func (x *RentalCar) RentalCarDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rentalCarDescription"))
 	if _r == 0 {

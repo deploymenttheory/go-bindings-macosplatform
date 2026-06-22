@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information about upcoming composition requests, such as composition start time and end time.
-//
 // VideoCompositionRenderHint is an idiomatic wrapper over the Objective-C class AVVideoCompositionRenderHint.
+//
+// Information about upcoming composition requests, such as composition start time and end time.
 type VideoCompositionRenderHint struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VideoCompositionRenderHintFromID(id objc.ID) *VideoCompositionRenderHint {
 	if id == 0 {
 		return nil
 	}
-	x := &VideoCompositionRenderHint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VideoCompositionRenderHint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func videoCompositionRenderHintAdopt(id objc.ID) *VideoCompositionRenderHint {
 	if id == 0 {
 		return nil
 	}
-	x := &VideoCompositionRenderHint{Handle: objref.Wrap(id)}
+	x := &VideoCompositionRenderHint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *VideoCompositionRenderHint) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *VideoCompositionRenderHint) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VideoCompositionRenderHint) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewVideoCompositionRenderHint creates a new VideoCompositionRenderHint.

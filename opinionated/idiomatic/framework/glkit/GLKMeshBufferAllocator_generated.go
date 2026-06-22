@@ -23,7 +23,8 @@ func MeshBufferAllocatorFromID(id objc.ID) *MeshBufferAllocator {
 	if id == 0 {
 		return nil
 	}
-	x := &MeshBufferAllocator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MeshBufferAllocator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func meshBufferAllocatorAdopt(id objc.ID) *MeshBufferAllocator {
 	if id == 0 {
 		return nil
 	}
-	x := &MeshBufferAllocator{Handle: objref.Wrap(id)}
+	x := &MeshBufferAllocator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *MeshBufferAllocator) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MeshBufferAllocator) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MeshBufferAllocator) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMeshBufferAllocator creates a new MeshBufferAllocator.

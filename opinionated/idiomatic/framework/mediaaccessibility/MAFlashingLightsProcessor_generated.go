@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that processes a framebuffer object to detect and dim sequences of flashing lights.
-//
 // FlashingLightsProcessor is an idiomatic wrapper over the Objective-C class MAFlashingLightsProcessor.
+//
+// A class that processes a framebuffer object to detect and dim sequences of flashing lights.
 type FlashingLightsProcessor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FlashingLightsProcessorFromID(id objc.ID) *FlashingLightsProcessor {
 	if id == 0 {
 		return nil
 	}
-	x := &FlashingLightsProcessor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FlashingLightsProcessor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func flashingLightsProcessorAdopt(id objc.ID) *FlashingLightsProcessor {
 	if id == 0 {
 		return nil
 	}
-	x := &FlashingLightsProcessor{Handle: objref.Wrap(id)}
+	x := &FlashingLightsProcessor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *FlashingLightsProcessor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FlashingLightsProcessor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFlashingLightsProcessor creates a new FlashingLightsProcessor.
 func NewFlashingLightsProcessor() *FlashingLightsProcessor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MAFlashingLightsProcessor")), objc.RegisterName("new"))
 	return flashingLightsProcessorAdopt(_id)
 }
 
-// Returns a Boolean value that indicates whether the flashing lights processor can process the content in the surface for sequences of flashing lights.
+// CanProcessSurface returns a Boolean value that indicates whether the flashing lights processor can process the content in the surface for sequences of flashing lights.
 func (x *FlashingLightsProcessor) CanProcessSurface(surface obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canProcessSurface:"), objref.IDOf(surface))
 	return _r
 }
 
-// Processes a surface by analyzing pixels for sequences of flashing lights and mitigates them by dimming the content.
+// ProcessSurfaceOutSurfaceTimestampOptions processes a surface by analyzing pixels for sequences of flashing lights and mitigates them by dimming the content.
 func (x *FlashingLightsProcessor) ProcessSurfaceOutSurfaceTimestampOptions(inSurface obj.Object, outSurface obj.Object, timestamp float64, options obj.Object) *FlashingLightsProcessorResult {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processSurface:outSurface:timestamp:options:"), objref.IDOf(inSurface), objref.IDOf(outSurface), timestamp, objref.IDOf(options))
 	return FlashingLightsProcessorResultFromID(_r)

@@ -6,17 +6,19 @@ package vision
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the four vertices of a detected rectangle.
-//
 // RectangleObservation is an idiomatic wrapper over the Objective-C class VNRectangleObservation.
+//
+// RectangleObservation is an abstract base — you do not construct it directly. Construct one of [BarcodeObservation], [RecognizedTextObservation], [TextObservation] and pass it where a RectangleObservation is accepted.
+//
+// An object that represents the four vertices of a detected rectangle.
 type RectangleObservation struct {
-	objref.Handle
+	DetectedObjectObservation
 }
 
 // RectangleObservationFromID adopts an existing Objective-C object as a RectangleObservation
@@ -25,7 +27,8 @@ func RectangleObservationFromID(id objc.ID) *RectangleObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &RectangleObservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RectangleObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,35 +41,54 @@ func rectangleObservationAdopt(id objc.ID) *RectangleObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &RectangleObservation{Handle: objref.Wrap(id)}
+	x := &RectangleObservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *RectangleObservation) Description() string {
-	return rt.Description(objref.IDOf(x))
+// TopLeft wraps the corresponding Objective-C method.
+func (x *RectangleObservation) TopLeft() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("topLeft"))
+	return _r
 }
 
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RectangleObservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+// TopRight wraps the corresponding Objective-C method.
+func (x *RectangleObservation) TopRight() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("topRight"))
+	return _r
 }
 
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RectangleObservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+// BottomLeft wraps the corresponding Objective-C method.
+func (x *RectangleObservation) BottomLeft() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("bottomLeft"))
+	return _r
 }
 
-// NewRectangleObservation creates a new RectangleObservation.
-func NewRectangleObservation() *RectangleObservation {
-	_id := objc.Send[objc.ID](objc.ID(_class("VNRectangleObservation")), objc.RegisterName("new"))
-	return rectangleObservationAdopt(_id)
+// BottomRight wraps the corresponding Objective-C method.
+func (x *RectangleObservation) BottomRight() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("bottomRight"))
+	return _r
 }
 
 // RectangleObservationable is the interface implemented by [RectangleObservation], for mocking and DI.
 type RectangleObservationable interface {
 	obj.Object
+	TopLeft() corefoundation.CGPoint
+	TopRight() corefoundation.CGPoint
+	BottomLeft() corefoundation.CGPoint
+	BottomRight() corefoundation.CGPoint
 }
 
 var _ RectangleObservationable = (*RectangleObservation)(nil)
+
+// isRectangleObservation marks RectangleObservation — and, by embedding promotion, its
+// subclasses — as a member of the RectangleObservation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *RectangleObservation) isRectangleObservation() {}
+
+var _ RectangleObservationProvider = (*RectangleObservation)(nil)
+
+var _ DetectedObjectObservationProvider = (*RectangleObservation)(nil)
+
+var _ ObservationProvider = (*RectangleObservation)(nil)

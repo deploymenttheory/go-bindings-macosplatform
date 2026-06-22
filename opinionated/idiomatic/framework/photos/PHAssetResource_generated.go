@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An underlying data resource associated with a photo, video, or Live Photo asset in the Photos library.
-//
 // AssetResource is an idiomatic wrapper over the Objective-C class PHAssetResource.
+//
+// An underlying data resource associated with a photo, video, or Live Photo asset in the Photos library.
 type AssetResource struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetResourceFromID(id objc.ID) *AssetResource {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetResource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetResource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetResourceAdopt(id objc.ID) *AssetResource {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetResource{Handle: objref.Wrap(id)}
+	x := &AssetResource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,25 @@ func (x *AssetResource) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetResource) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetResource creates a new AssetResource.
 func NewAssetResource() *AssetResource {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHAssetResource")), objc.RegisterName("new"))
 	return assetResourceAdopt(_id)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *AssetResource) Type() AssetResourceType {
 	_r := objc.Send[AssetResourceType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
+// AssetLocalIdentifier wraps the corresponding Objective-C method.
 func (x *AssetResource) AssetLocalIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetLocalIdentifier"))
 	if _r == 0 {
@@ -77,6 +87,7 @@ func (x *AssetResource) AssetLocalIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// OriginalFilename wraps the corresponding Objective-C method.
 func (x *AssetResource) OriginalFilename() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalFilename"))
 	if _r == 0 {
@@ -85,12 +96,13 @@ func (x *AssetResource) OriginalFilename() string {
 	return purego.GoString(_r)
 }
 
-// The type of data associated with this asset resource (the data can be retrieved via PHAssetResourceManager)
+// ContentType the type of data associated with this asset resource (the data can be retrieved via PHAssetResourceManager)
 func (x *AssetResource) ContentType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
 	return obj.Wrap(_r)
 }
 
+// UniformTypeIdentifier wraps the corresponding Objective-C method.
 func (x *AssetResource) UniformTypeIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniformTypeIdentifier"))
 	if _r == 0 {
@@ -99,11 +111,13 @@ func (x *AssetResource) UniformTypeIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// PixelWidth wraps the corresponding Objective-C method.
 func (x *AssetResource) PixelWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelWidth"))
 	return _r
 }
 
+// PixelHeight wraps the corresponding Objective-C method.
 func (x *AssetResource) PixelHeight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelHeight"))
 	return _r

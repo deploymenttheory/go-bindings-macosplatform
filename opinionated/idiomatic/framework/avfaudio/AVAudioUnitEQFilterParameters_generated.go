@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that encapsulates the parameters that the equalizer uses.
-//
 // AudioUnitEQFilterParameters is an idiomatic wrapper over the Objective-C class AVAudioUnitEQFilterParameters.
+//
+// An object that encapsulates the parameters that the equalizer uses.
 type AudioUnitEQFilterParameters struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AudioUnitEQFilterParametersFromID(id objc.ID) *AudioUnitEQFilterParameters 
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitEQFilterParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioUnitEQFilterParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func audioUnitEQFilterParametersAdopt(id objc.ID) *AudioUnitEQFilterParameters {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitEQFilterParameters{Handle: objref.Wrap(id)}
+	x := &AudioUnitEQFilterParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,98 +60,99 @@ func (x *AudioUnitEQFilterParameters) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioUnitEQFilterParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAudioUnitEQFilterParameters creates a new AudioUnitEQFilterParameters.
 func NewAudioUnitEQFilterParameters() *AudioUnitEQFilterParameters {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioUnitEQFilterParameters")), objc.RegisterName("new"))
 	return audioUnitEQFilterParametersAdopt(_id)
 }
 
-// The equalizer filter type.
-//
-// WithFilterType sets filterType and returns the receiver so calls can be chained.
+// WithFilterType the equalizer filter type.
 func (x *AudioUnitEQFilterParameters) WithFilterType(filterType AudioUnitEQFilterType) *AudioUnitEQFilterParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterType:"), filterType)
 	return x
 }
 
-// The frequency of the equalizer filter, in hertz.
-//
-// WithFrequency sets frequency and returns the receiver so calls can be chained.
+// WithFrequency the frequency of the equalizer filter, in hertz.
 func (x *AudioUnitEQFilterParameters) WithFrequency(frequency float32) *AudioUnitEQFilterParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
 	return x
 }
 
-// The bandwidth of the equalizer filter, in octaves.
-//
-// WithBandwidth sets bandwidth and returns the receiver so calls can be chained.
+// WithBandwidth the bandwidth of the equalizer filter, in octaves.
 func (x *AudioUnitEQFilterParameters) WithBandwidth(bandwidth float32) *AudioUnitEQFilterParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBandwidth:"), bandwidth)
 	return x
 }
 
-// The gain of the equalizer filter, in decibels.
-//
-// WithGain sets gain and returns the receiver so calls can be chained.
+// WithGain the gain of the equalizer filter, in decibels.
 func (x *AudioUnitEQFilterParameters) WithGain(gain float32) *AudioUnitEQFilterParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
 	return x
 }
 
-// The bypass state of the equalizer filter band.
-//
-// WithBypass sets bypass and returns the receiver so calls can be chained.
+// WithBypass the bypass state of the equalizer filter band.
 func (x *AudioUnitEQFilterParameters) WithBypass(bypass bool) *AudioUnitEQFilterParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
 	return x
 }
 
-// AVAudioUnitEQFilterType Default:    AVAudioUnitEQFilterTypeParametric
+// FilterType AVAudioUnitEQFilterType Default:    AVAudioUnitEQFilterTypeParametric
 func (x *AudioUnitEQFilterParameters) FilterType() AudioUnitEQFilterType {
 	_r := objc.Send[AudioUnitEQFilterType](objref.IDOf(x), objc.RegisterName("filterType"))
 	return _r
 }
 
+// SetFilterType wraps the corresponding Objective-C method.
 func (x *AudioUnitEQFilterParameters) SetFilterType(filterType AudioUnitEQFilterType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterType:"), filterType)
 }
 
-// Frequency in Hertz. Range:      20 -> (SampleRate/2) Unit:       Hertz
+// Frequency frequency in Hertz. Range:      20 -> (SampleRate/2) Unit:       Hertz
 func (x *AudioUnitEQFilterParameters) Frequency() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("frequency"))
 	return _r
 }
 
+// SetFrequency wraps the corresponding Objective-C method.
 func (x *AudioUnitEQFilterParameters) SetFrequency(frequency float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
 }
 
-// Bandwidth in octaves. Range:      0.05 -> 5.0 Unit:       Octaves
+// Bandwidth bandwidth in octaves. Range:      0.05 -> 5.0 Unit:       Octaves
 func (x *AudioUnitEQFilterParameters) Bandwidth() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("bandwidth"))
 	return _r
 }
 
+// SetBandwidth wraps the corresponding Objective-C method.
 func (x *AudioUnitEQFilterParameters) SetBandwidth(bandwidth float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBandwidth:"), bandwidth)
 }
 
-// Gain in dB. Range:      -96 -> 24 Default:    0 Unit:       dB
+// Gain gain in dB. Range:      -96 -> 24 Default:    0 Unit:       dB
 func (x *AudioUnitEQFilterParameters) Gain() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gain"))
 	return _r
 }
 
+// SetGain wraps the corresponding Objective-C method.
 func (x *AudioUnitEQFilterParameters) SetGain(gain float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
 }
 
-// bypass state of band. Default:    YES
+// Bypass bypass state of band. Default:    YES
 func (x *AudioUnitEQFilterParameters) Bypass() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bypass"))
 	return _r
 }
 
+// SetBypass wraps the corresponding Objective-C method.
 func (x *AudioUnitEQFilterParameters) SetBypass(bypass bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
 }

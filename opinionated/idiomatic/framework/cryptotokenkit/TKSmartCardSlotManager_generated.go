@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An interface to all available smart card reader slots.
-//
 // SmartCardSlotManager is an idiomatic wrapper over the Objective-C class TKSmartCardSlotManager.
+//
+// An interface to all available smart card reader slots.
 type SmartCardSlotManager struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func SmartCardSlotManagerFromID(id objc.ID) *SmartCardSlotManager {
 	if id == 0 {
 		return nil
 	}
-	x := &SmartCardSlotManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SmartCardSlotManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func smartCardSlotManagerAdopt(id objc.ID) *SmartCardSlotManager {
 	if id == 0 {
 		return nil
 	}
-	x := &SmartCardSlotManager{Handle: objref.Wrap(id)}
+	x := &SmartCardSlotManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,16 +61,22 @@ func (x *SmartCardSlotManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SmartCardSlotManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSmartCardSlotManager creates a new SmartCardSlotManager.
 func NewSmartCardSlotManager() *SmartCardSlotManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("TKSmartCardSlotManager")), objc.RegisterName("new"))
 	return smartCardSlotManagerAdopt(_id)
 }
 
-// Asynchronously calls a block with a Smart Card reader slot for a specified name.
+// GetSlotWithNameReply asynchronously calls a block with a Smart Card reader slot for a specified name.
 //
 // GetSlotWithNameReply blocks until the operation completes or ctx is cancelled.
-func (x *SmartCardSlotManager) GetSlotWithNameReply(ctx context.Context, name string) (*SmartCardSlot, error) {
+func (x *SmartCardSlotManager) GetSlotWithNameReply(ctx context.Context, name string) (result *SmartCardSlot, err error) {
 	type _result struct {
 		val *SmartCardSlot
 		err error
@@ -89,13 +97,13 @@ func (x *SmartCardSlotManager) GetSlotWithNameReply(ctx context.Context, name st
 	}
 }
 
-// Returns the Smart Card slot with a given name.
+// SlotNamed returns the Smart Card slot with a given name.
 func (x *SmartCardSlotManager) SlotNamed(name string) *SmartCardSlot {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("slotNamed:"), purego.NSString(name))
 	return SmartCardSlotFromID(_r)
 }
 
-// Array of currently known slots in the system.  Slots are identified by NSString name instances.  Use KVO to be notified about slots arrivals and removals.
+// SlotNames array of currently known slots in the system.  Slots are identified by NSString name instances.  Use KVO to be notified about slots arrivals and removals.
 //
 // SlotNames returns the collection as a Go slice.
 func (x *SmartCardSlotManager) SlotNames() []string {

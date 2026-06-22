@@ -6,15 +6,16 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the video attributes for an asset variant.
-//
 // AssetVariantVideoAttributes is an idiomatic wrapper over the Objective-C class AVAssetVariantVideoAttributes.
+//
+// An object that defines the video attributes for an asset variant.
 type AssetVariantVideoAttributes struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func AssetVariantVideoAttributesFromID(id objc.ID) *AssetVariantVideoAttributes 
 	if id == 0 {
 		return nil
 	}
-	x := &AssetVariantVideoAttributes{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetVariantVideoAttributes{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func assetVariantVideoAttributesAdopt(id objc.ID) *AssetVariantVideoAttributes {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetVariantVideoAttributes{Handle: objref.Wrap(id)}
+	x := &AssetVariantVideoAttributes{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +61,25 @@ func (x *AssetVariantVideoAttributes) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetVariantVideoAttributes) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetVariantVideoAttributes creates a new AssetVariantVideoAttributes.
 func NewAssetVariantVideoAttributes() *AssetVariantVideoAttributes {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetVariantVideoAttributes")), objc.RegisterName("new"))
 	return assetVariantVideoAttributesAdopt(_id)
 }
 
-// Provides the video range of the variant. If it is not declared, it will be AVVideoRangeSDR.
+// VideoRange provides the video range of the variant. If it is not declared, it will be AVVideoRangeSDR.
 func (x *AssetVariantVideoAttributes) VideoRange() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoRange"))
 	return obj.Wrap(_r)
 }
 
-// Provides an array of video sample codec types present in the variant's renditions if any are declared. Each value in the array is a NSNumber representation of CMVideoCodecType.
+// CodecTypes provides an array of video sample codec types present in the variant's renditions if any are declared. Each value in the array is a NSNumber representation of CMVideoCodecType.
 //
 // CodecTypes returns the collection as a Go slice.
 func (x *AssetVariantVideoAttributes) CodecTypes() []obj.Object {
@@ -78,13 +87,19 @@ func (x *AssetVariantVideoAttributes) CodecTypes() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// If it is not declared, the value will be negative.
+// PresentationSize if it is not declared, it will be CGSizeZero.
+func (x *AssetVariantVideoAttributes) PresentationSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("presentationSize"))
+	return _r
+}
+
+// NominalFrameRate if it is not declared, the value will be negative.
 func (x *AssetVariantVideoAttributes) NominalFrameRate() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("nominalFrameRate"))
 	return _r
 }
 
-// Describes the video layout attributes. videoLayoutAttributes' count may be greater than one if this variant contains a collection of differing video layout media attributes over time.
+// VideoLayoutAttributes describes the video layout attributes. videoLayoutAttributes' count may be greater than one if this variant contains a collection of differing video layout media attributes over time.
 //
 // VideoLayoutAttributes returns the collection as a Go slice.
 func (x *AssetVariantVideoAttributes) VideoLayoutAttributes() []*AssetVariantVideoLayoutAttributes {
@@ -99,6 +114,7 @@ type AssetVariantVideoAttributesable interface {
 	obj.Object
 	VideoRange() obj.Object
 	CodecTypes() []obj.Object
+	PresentationSize() corefoundation.CGSize
 	NominalFrameRate() float64
 	VideoLayoutAttributes() []*AssetVariantVideoLayoutAttributes
 }

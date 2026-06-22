@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mutable object that represents a group of contacts.
-//
 // MutableGroup is an idiomatic wrapper over the Objective-C class CNMutableGroup.
+//
+// It embeds [Group], promoting that type's methods.
+//
+// A mutable object that represents a group of contacts.
 type MutableGroup struct {
-	objref.Handle
+	Group
 }
 
 // MutableGroupFromID adopts an existing Objective-C object as a MutableGroup
@@ -25,7 +26,8 @@ func MutableGroupFromID(id objc.ID) *MutableGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableGroup{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func mutableGroupAdopt(id objc.ID) *MutableGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableGroup{Handle: objref.Wrap(id)}
+	x := &MutableGroup{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MutableGroup) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableGroup) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableGroup) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMutableGroup creates a new MutableGroup.
@@ -64,14 +52,13 @@ func NewMutableGroup() *MutableGroup {
 	return mutableGroupAdopt(_id)
 }
 
-// The name of the group.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the name of the group.
 func (x *MutableGroup) WithName(name string) *MutableGroup {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *MutableGroup) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
@@ -84,3 +71,5 @@ type MutableGroupable interface {
 }
 
 var _ MutableGroupable = (*MutableGroup)(nil)
+
+var _ GroupProvider = (*MutableGroup)(nil)

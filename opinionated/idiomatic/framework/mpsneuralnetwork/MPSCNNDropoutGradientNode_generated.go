@@ -6,15 +6,17 @@ package mpsneuralnetwork
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // CNNDropoutGradientNode is an idiomatic wrapper over the Objective-C class MPSCNNDropoutGradientNode.
+//
+// It embeds [NNGradientFilterNode], promoting that type's methods.
 type CNNDropoutGradientNode struct {
-	objref.Handle
+	NNGradientFilterNode
 }
 
 // CNNDropoutGradientNodeFromID adopts an existing Objective-C object as a CNNDropoutGradientNode
@@ -23,7 +25,8 @@ func CNNDropoutGradientNodeFromID(id objc.ID) *CNNDropoutGradientNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNDropoutGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNDropoutGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,47 +39,40 @@ func cNNDropoutGradientNodeAdopt(id objc.ID) *CNNDropoutGradientNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNDropoutGradientNode{Handle: objref.Wrap(id)}
+	x := &CNNDropoutGradientNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNDropoutGradientNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNDropoutGradientNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNDropoutGradientNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewCNNDropoutGradientNode creates a new CNNDropoutGradientNode.
-func NewCNNDropoutGradientNode() *CNNDropoutGradientNode {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNDropoutGradientNode")), objc.RegisterName("new"))
+// NewCNNDropoutGradientNodeWithSourceGradientSourceImageGradientStateKeepProbabilitySeedMaskStrideInPixels create a new dropout gradient node See also -[MPSCNNNeuronNode gradientFilterNodeWithSources:] for an easier way to do this
+func NewCNNDropoutGradientNodeWithSourceGradientSourceImageGradientStateKeepProbabilitySeedMaskStrideInPixels(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode, keepProbability float32, seed int, maskStrideInPixels metal.MTLSize) *CNNDropoutGradientNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNDropoutGradientNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:keepProbability:seed:maskStrideInPixels:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), keepProbability, seed, maskStrideInPixels)
 	return cNNDropoutGradientNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNDropoutGradientNode) WithLabel(label string) *CNNDropoutGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// KeepProbability wraps the corresponding Objective-C method.
 func (x *CNNDropoutGradientNode) KeepProbability() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("keepProbability"))
 	return _r
 }
 
+// Seed wraps the corresponding Objective-C method.
 func (x *CNNDropoutGradientNode) Seed() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("seed"))
+	return _r
+}
+
+// MaskStrideInPixels wraps the corresponding Objective-C method.
+func (x *CNNDropoutGradientNode) MaskStrideInPixels() metal.MTLSize {
+	_r := objc.Send[metal.MTLSize](objref.IDOf(x), objc.RegisterName("maskStrideInPixels"))
 	return _r
 }
 
@@ -86,6 +82,11 @@ type CNNDropoutGradientNodeable interface {
 	WithLabel(label string) *CNNDropoutGradientNode
 	KeepProbability() float32
 	Seed() int
+	MaskStrideInPixels() metal.MTLSize
 }
 
 var _ CNNDropoutGradientNodeable = (*CNNDropoutGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*CNNDropoutGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNDropoutGradientNode)(nil)

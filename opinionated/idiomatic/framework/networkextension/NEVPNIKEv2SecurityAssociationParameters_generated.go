@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Parameters for an IKEv2 Security Association.
-//
 // NEVPNIKEv2SecurityAssociationParameters is an idiomatic wrapper over the Objective-C class NEVPNIKEv2SecurityAssociationParameters.
+//
+// Parameters for an IKEv2 Security Association.
 type NEVPNIKEv2SecurityAssociationParameters struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NEVPNIKEv2SecurityAssociationParametersFromID(id objc.ID) *NEVPNIKEv2Securi
 	if id == 0 {
 		return nil
 	}
-	x := &NEVPNIKEv2SecurityAssociationParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEVPNIKEv2SecurityAssociationParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nEVPNIKEv2SecurityAssociationParametersAdopt(id objc.ID) *NEVPNIKEv2Securit
 	if id == 0 {
 		return nil
 	}
-	x := &NEVPNIKEv2SecurityAssociationParameters{Handle: objref.Wrap(id)}
+	x := &NEVPNIKEv2SecurityAssociationParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,84 +60,83 @@ func (x *NEVPNIKEv2SecurityAssociationParameters) IsKind(className string) bool 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEVPNIKEv2SecurityAssociationParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNEVPNIKEv2SecurityAssociationParameters creates a new NEVPNIKEv2SecurityAssociationParameters.
 func NewNEVPNIKEv2SecurityAssociationParameters() *NEVPNIKEv2SecurityAssociationParameters {
 	_id := objc.Send[objc.ID](objc.ID(_class("NEVPNIKEv2SecurityAssociationParameters")), objc.RegisterName("new"))
 	return nEVPNIKEv2SecurityAssociationParametersAdopt(_id)
 }
 
-// The algorithm used by the Security Association to encrypt and decrypt data.
-//
-// WithEncryptionAlgorithm sets encryptionAlgorithm and returns the receiver so calls can be chained.
+// WithEncryptionAlgorithm the algorithm used by the Security Association to encrypt and decrypt data.
 func (x *NEVPNIKEv2SecurityAssociationParameters) WithEncryptionAlgorithm(encryptionAlgorithm NEVPNIKEv2EncryptionAlgorithm) *NEVPNIKEv2SecurityAssociationParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncryptionAlgorithm:"), encryptionAlgorithm)
 	return x
 }
 
-// The algorithm used by the Security Association to verify the integrity of data.
-//
-// WithIntegrityAlgorithm sets integrityAlgorithm and returns the receiver so calls can be chained.
+// WithIntegrityAlgorithm the algorithm used by the Security Association to verify the integrity of data.
 func (x *NEVPNIKEv2SecurityAssociationParameters) WithIntegrityAlgorithm(integrityAlgorithm NEVPNIKEv2IntegrityAlgorithm) *NEVPNIKEv2SecurityAssociationParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegrityAlgorithm:"), integrityAlgorithm)
 	return x
 }
 
-// The Diffie Hellman group used by the Security Association.
-//
-// WithDiffieHellmanGroup sets diffieHellmanGroup and returns the receiver so calls can be chained.
+// WithDiffieHellmanGroup the Diffie Hellman group used by the Security Association.
 func (x *NEVPNIKEv2SecurityAssociationParameters) WithDiffieHellmanGroup(diffieHellmanGroup NEVPNIKEv2DiffieHellmanGroup) *NEVPNIKEv2SecurityAssociationParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiffieHellmanGroup:"), diffieHellmanGroup)
 	return x
 }
 
-// A list of the quantum-secure key exchange methods the Security Association uses.
-//
-// WithPostQuantumKeyExchangeMethods sets the collection and returns the receiver so calls can be chained.
+// WithPostQuantumKeyExchangeMethods a list of the quantum-secure key exchange methods the Security Association uses.
 func (x *NEVPNIKEv2SecurityAssociationParameters) WithPostQuantumKeyExchangeMethods(items ...obj.Object) *NEVPNIKEv2SecurityAssociationParameters {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostQuantumKeyExchangeMethods:"), _arr)
 	return x
 }
 
-// The duration of the lifetime of the Security Association, in minutes.
-//
-// WithLifetimeMinutes sets lifetimeMinutes and returns the receiver so calls can be chained.
+// WithLifetimeMinutes the duration of the lifetime of the Security Association, in minutes.
 func (x *NEVPNIKEv2SecurityAssociationParameters) WithLifetimeMinutes(lifetimeMinutes int32) *NEVPNIKEv2SecurityAssociationParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLifetimeMinutes:"), lifetimeMinutes)
 	return x
 }
 
-// The algorithm used by the Security Association to encrypt and decrypt data. On macOS and iOS, the default is NEVPNIKEv2EncryptionAlgorithmAES256 starting in macOS 11 and iOS 14. Prior to that the default was NEVPNIKEv2EncryptionAlgorithm3DES. On tvOS, the default is NEVPNIKEv2EncryptionAlgorithmAES256GCM.
+// EncryptionAlgorithm the algorithm used by the Security Association to encrypt and decrypt data. On macOS and iOS, the default is NEVPNIKEv2EncryptionAlgorithmAES256 starting in macOS 11 and iOS 14. Prior to that the default was NEVPNIKEv2EncryptionAlgorithm3DES. On tvOS, the default is NEVPNIKEv2EncryptionAlgorithmAES256GCM.
 func (x *NEVPNIKEv2SecurityAssociationParameters) EncryptionAlgorithm() NEVPNIKEv2EncryptionAlgorithm {
 	_r := objc.Send[NEVPNIKEv2EncryptionAlgorithm](objref.IDOf(x), objc.RegisterName("encryptionAlgorithm"))
 	return _r
 }
 
+// SetEncryptionAlgorithm wraps the corresponding Objective-C method.
 func (x *NEVPNIKEv2SecurityAssociationParameters) SetEncryptionAlgorithm(encryptionAlgorithm NEVPNIKEv2EncryptionAlgorithm) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncryptionAlgorithm:"), encryptionAlgorithm)
 }
 
-// The algorithm used by the Security Association to verify the integrity of data.  The IKE psedo-random function algorithm will be inferred based on the integrity algorithm. Default is NEVPNIKEv2IntegrityAlgorithmSHA256 starting in macOS 11, iOS 14, and tvOS 17.  Prior to that the default was NEVPNIKEv2IntegrityAlgorithmSHA96.
+// IntegrityAlgorithm the algorithm used by the Security Association to verify the integrity of data.  The IKE psedo-random function algorithm will be inferred based on the integrity algorithm. Default is NEVPNIKEv2IntegrityAlgorithmSHA256 starting in macOS 11, iOS 14, and tvOS 17.  Prior to that the default was NEVPNIKEv2IntegrityAlgorithmSHA96.
 func (x *NEVPNIKEv2SecurityAssociationParameters) IntegrityAlgorithm() NEVPNIKEv2IntegrityAlgorithm {
 	_r := objc.Send[NEVPNIKEv2IntegrityAlgorithm](objref.IDOf(x), objc.RegisterName("integrityAlgorithm"))
 	return _r
 }
 
+// SetIntegrityAlgorithm wraps the corresponding Objective-C method.
 func (x *NEVPNIKEv2SecurityAssociationParameters) SetIntegrityAlgorithm(integrityAlgorithm NEVPNIKEv2IntegrityAlgorithm) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegrityAlgorithm:"), integrityAlgorithm)
 }
 
-// The Diffie Hellman group used by the Security Association. Default is NEVPNIKEv2DiffieHellmanGroup14 starting in macOS 11, iOS 14, and tvOS 17. Prior to that the default was NEVPNIKEv2DiffieHellmanGroup2.
+// DiffieHellmanGroup the Diffie Hellman group used by the Security Association. Default is NEVPNIKEv2DiffieHellmanGroup14 starting in macOS 11, iOS 14, and tvOS 17. Prior to that the default was NEVPNIKEv2DiffieHellmanGroup2.
 func (x *NEVPNIKEv2SecurityAssociationParameters) DiffieHellmanGroup() NEVPNIKEv2DiffieHellmanGroup {
 	_r := objc.Send[NEVPNIKEv2DiffieHellmanGroup](objref.IDOf(x), objc.RegisterName("diffieHellmanGroup"))
 	return _r
 }
 
+// SetDiffieHellmanGroup wraps the corresponding Objective-C method.
 func (x *NEVPNIKEv2SecurityAssociationParameters) SetDiffieHellmanGroup(diffieHellmanGroup NEVPNIKEv2DiffieHellmanGroup) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiffieHellmanGroup:"), diffieHellmanGroup)
 }
 
-// The post-quantum key exchange method(s) used by the Security Association, if any. Values are taken from NEVPNIKEv2PostQuantumKeyExchangeMethod. Up to 7 methods may be specified, mapping to ADDKE1 - ADDKE7 from RFC 9370.
+// PostQuantumKeyExchangeMethods the post-quantum key exchange method(s) used by the Security Association, if any. Values are taken from NEVPNIKEv2PostQuantumKeyExchangeMethod. Up to 7 methods may be specified, mapping to ADDKE1 - ADDKE7 from RFC 9370.
 //
 // PostQuantumKeyExchangeMethods returns the collection as a Go slice.
 func (x *NEVPNIKEv2SecurityAssociationParameters) PostQuantumKeyExchangeMethods() []obj.Object {
@@ -143,16 +144,18 @@ func (x *NEVPNIKEv2SecurityAssociationParameters) PostQuantumKeyExchangeMethods(
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetPostQuantumKeyExchangeMethods wraps the corresponding Objective-C method.
 func (x *NEVPNIKEv2SecurityAssociationParameters) SetPostQuantumKeyExchangeMethods(postQuantumKeyExchangeMethods []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostQuantumKeyExchangeMethods:"), purego.SliceToNSArray(postQuantumKeyExchangeMethods, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// The life time of the Security Association, in minutes. Default is 60 for IKE Security Associations, and 30 for Child Security Associations. Before the lifetime is reached, IKEv2 will attempt to rekey the Security Association to maintain the connection.
+// LifetimeMinutes the life time of the Security Association, in minutes. Default is 60 for IKE Security Associations, and 30 for Child Security Associations. Before the lifetime is reached, IKEv2 will attempt to rekey the Security Association to maintain the connection.
 func (x *NEVPNIKEv2SecurityAssociationParameters) LifetimeMinutes() int32 {
 	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("lifetimeMinutes"))
 	return _r
 }
 
+// SetLifetimeMinutes wraps the corresponding Objective-C method.
 func (x *NEVPNIKEv2SecurityAssociationParameters) SetLifetimeMinutes(lifetimeMinutes int32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLifetimeMinutes:"), lifetimeMinutes)
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A numeric quantity labeled with a unit of measure, with support for unit conversion and unit-aware calculations.
-//
 // Measurement is an idiomatic wrapper over the Objective-C class NSMeasurement.
+//
+// A numeric quantity labeled with a unit of measure, with support for unit conversion and unit-aware calculations.
 type Measurement struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MeasurementFromID(id objc.ID) *Measurement {
 	if id == 0 {
 		return nil
 	}
-	x := &Measurement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Measurement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func measurementAdopt(id objc.ID) *Measurement {
 	if id == 0 {
 		return nil
 	}
-	x := &Measurement{Handle: objref.Wrap(id)}
+	x := &Measurement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,50 +60,56 @@ func (x *Measurement) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a new measurement with a specified double-precision floating-point value and unit.
-//
-// NewMeasurementWithDoubleValueUnit creates a new Measurement.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Measurement) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMeasurementWithDoubleValueUnit initializes a new measurement with a specified double-precision floating-point value and unit.
 func NewMeasurementWithDoubleValueUnit(doubleValue float64, unit obj.Object) *Measurement {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMeasurement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDoubleValue:unit:"), doubleValue, objref.IDOf(unit))
 	return measurementAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Measurement) WithScriptingProperties(scriptingProperties obj.Object) *Measurement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Indicates whether the measurement can be converted to the given unit.
+// CanBeConvertedToUnit indicates whether the measurement can be converted to the given unit.
 func (x *Measurement) CanBeConvertedToUnit(unit *Unit) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canBeConvertedToUnit:"), objref.IDOf(unit))
 	return _r
 }
 
-// Returns a measurement created by converting the receiver to the specified unit.
+// MeasurementByConvertingToUnit returns a measurement created by converting the receiver to the specified unit.
 func (x *Measurement) MeasurementByConvertingToUnit(unit *Unit) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("measurementByConvertingToUnit:"), objref.IDOf(unit))
 	return obj.Wrap(_r)
 }
 
-// Returns a new measurement by adding the receiver to the specified measurement.
+// MeasurementByAddingMeasurement returns a new measurement by adding the receiver to the specified measurement.
 func (x *Measurement) MeasurementByAddingMeasurement(measurement obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("measurementByAddingMeasurement:"), objref.IDOf(measurement))
 	return obj.Wrap(_r)
 }
 
-// Returns a new measurement by subtracting the specified measurement from the receiver.
+// MeasurementBySubtractingMeasurement returns a new measurement by subtracting the specified measurement from the receiver.
 func (x *Measurement) MeasurementBySubtractingMeasurement(measurement obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("measurementBySubtractingMeasurement:"), objref.IDOf(measurement))
 	return obj.Wrap(_r)
 }
 
+// Unit wraps the corresponding Objective-C method.
 func (x *Measurement) Unit() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unit"))
 	return obj.Wrap(_r)
 }
 
+// DoubleValue wraps the corresponding Objective-C method.
 func (x *Measurement) DoubleValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("doubleValue"))
 	return _r

@@ -18,6 +18,8 @@ const (
 	CameraPositionBack CameraPosition = 2
 )
 
+// String returns the CameraPosition constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CameraPosition) String() string {
 	switch e {
 	case CameraPositionFront:
@@ -110,6 +112,8 @@ const (
 	RecordingErrorCodeSuccessful RecordingErrorCode = 0
 )
 
+// String returns the RecordingErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RecordingErrorCode) String() string {
 	switch e {
 	case RecordingErrorUnknown:
@@ -205,6 +209,8 @@ const (
 	SampleBufferTypeAudioMic SampleBufferType = 3
 )
 
+// String returns the SampleBufferType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SampleBufferType) String() string {
 	switch e {
 	case SampleBufferTypeVideo:

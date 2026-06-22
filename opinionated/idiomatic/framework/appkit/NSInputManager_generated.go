@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -23,7 +24,8 @@ func InputManagerFromID(id objc.ID) *InputManager {
 	if id == 0 {
 		return nil
 	}
-	x := &InputManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &InputManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +38,8 @@ func inputManagerAdopt(id objc.ID) *InputManager {
 	if id == 0 {
 		return nil
 	}
-	x := &InputManager{Handle: objref.Wrap(id)}
+	x := &InputManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +59,12 @@ func (x *InputManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *InputManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewInputManagerWithNameHost creates a new InputManager.
 func NewInputManagerWithNameHost(inputServerName string, hostName string) *InputManager {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSInputManager")), objc.RegisterName("alloc"))
@@ -63,6 +72,7 @@ func NewInputManagerWithNameHost(inputServerName string, hostName string) *Input
 	return inputManagerAdopt(_id)
 }
 
+// LocalizedInputManagerName wraps the corresponding Objective-C method.
 func (x *InputManager) LocalizedInputManagerName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedInputManagerName"))
 	if _r == 0 {
@@ -71,15 +81,23 @@ func (x *InputManager) LocalizedInputManagerName() string {
 	return purego.GoString(_r)
 }
 
+// MarkedTextAbandoned wraps the corresponding Objective-C method.
 func (x *InputManager) MarkedTextAbandoned(cli obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markedTextAbandoned:"), objref.IDOf(cli))
 }
 
+// MarkedTextSelectionChangedClient wraps the corresponding Objective-C method.
+func (x *InputManager) MarkedTextSelectionChangedClient(newSel foundation.NSRange, cli obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markedTextSelectionChanged:client:"), newSel, objref.IDOf(cli))
+}
+
+// WantsToInterpretAllKeystrokes wraps the corresponding Objective-C method.
 func (x *InputManager) WantsToInterpretAllKeystrokes() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsToInterpretAllKeystrokes"))
 	return _r
 }
 
+// Language wraps the corresponding Objective-C method.
 func (x *InputManager) Language() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
 	if _r == 0 {
@@ -88,26 +106,31 @@ func (x *InputManager) Language() string {
 	return purego.GoString(_r)
 }
 
+// Image wraps the corresponding Objective-C method.
 func (x *InputManager) Image() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
+// Server wraps the corresponding Objective-C method.
 func (x *InputManager) Server() *InputServer {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("server"))
 	return InputServerFromID(_r)
 }
 
+// WantsToHandleMouseEvents wraps the corresponding Objective-C method.
 func (x *InputManager) WantsToHandleMouseEvents() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsToHandleMouseEvents"))
 	return _r
 }
 
+// HandleMouseEvent wraps the corresponding Objective-C method.
 func (x *InputManager) HandleMouseEvent(mouseEvent *Event) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("handleMouseEvent:"), objref.IDOf(mouseEvent))
 	return _r
 }
 
+// WantsToDelayTextChangeNotifications wraps the corresponding Objective-C method.
 func (x *InputManager) WantsToDelayTextChangeNotifications() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsToDelayTextChangeNotifications"))
 	return _r
@@ -118,6 +141,7 @@ type InputManagerable interface {
 	obj.Object
 	LocalizedInputManagerName() string
 	MarkedTextAbandoned(cli obj.Object)
+	MarkedTextSelectionChangedClient(newSel foundation.NSRange, cli obj.Object)
 	WantsToInterpretAllKeystrokes() bool
 	Language() string
 	Image() *Image

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Options to configure a command buffer before encoding work into it.
-//
 // MTL4CommandBufferOptions is an idiomatic wrapper over the Objective-C class MTL4CommandBufferOptions.
+//
+// Options to configure a command buffer before encoding work into it.
 type MTL4CommandBufferOptions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MTL4CommandBufferOptionsFromID(id objc.ID) *MTL4CommandBufferOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4CommandBufferOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTL4CommandBufferOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTL4CommandBufferOptionsAdopt(id objc.ID) *MTL4CommandBufferOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4CommandBufferOptions{Handle: objref.Wrap(id)}
+	x := &MTL4CommandBufferOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *MTL4CommandBufferOptions) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MTL4CommandBufferOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTL4CommandBufferOptions) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMTL4CommandBufferOptions creates a new MTL4CommandBufferOptions.

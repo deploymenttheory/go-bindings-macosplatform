@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A group of one or more rectangular scan areas that can be used with a scanner functional unit.
-//
 // ScannerFeatureTemplate is an idiomatic wrapper over the Objective-C class ICScannerFeatureTemplate.
+//
+// It embeds [ScannerFeature], promoting that type's methods.
+//
+// A group of one or more rectangular scan areas that can be used with a scanner functional unit.
 type ScannerFeatureTemplate struct {
-	objref.Handle
+	ScannerFeature
 }
 
 // ScannerFeatureTemplateFromID adopts an existing Objective-C object as a ScannerFeatureTemplate
@@ -25,7 +26,8 @@ func ScannerFeatureTemplateFromID(id objc.ID) *ScannerFeatureTemplate {
 	if id == 0 {
 		return nil
 	}
-	x := &ScannerFeatureTemplate{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScannerFeatureTemplate{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func scannerFeatureTemplateAdopt(id objc.ID) *ScannerFeatureTemplate {
 	if id == 0 {
 		return nil
 	}
-	x := &ScannerFeatureTemplate{Handle: objref.Wrap(id)}
+	x := &ScannerFeatureTemplate{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ScannerFeatureTemplate) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ScannerFeatureTemplate) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ScannerFeatureTemplate) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewScannerFeatureTemplate creates a new ScannerFeatureTemplate.
@@ -64,6 +52,8 @@ func NewScannerFeatureTemplate() *ScannerFeatureTemplate {
 	return scannerFeatureTemplateAdopt(_id)
 }
 
+// Targets wraps the corresponding Objective-C method.
+//
 // Targets returns the collection as a Go slice.
 func (x *ScannerFeatureTemplate) Targets() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targets"))
@@ -77,3 +67,5 @@ type ScannerFeatureTemplateable interface {
 }
 
 var _ ScannerFeatureTemplateable = (*ScannerFeatureTemplate)(nil)
+
+var _ ScannerFeatureProvider = (*ScannerFeatureTemplate)(nil)

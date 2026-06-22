@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object for setting the Now Playing information for media that your app plays.
-//
 // NowPlayingInfoCenter is an idiomatic wrapper over the Objective-C class MPNowPlayingInfoCenter.
+//
+// An object for setting the Now Playing information for media that your app plays.
 type NowPlayingInfoCenter struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NowPlayingInfoCenterFromID(id objc.ID) *NowPlayingInfoCenter {
 	if id == 0 {
 		return nil
 	}
-	x := &NowPlayingInfoCenter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NowPlayingInfoCenter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nowPlayingInfoCenterAdopt(id objc.ID) *NowPlayingInfoCenter {
 	if id == 0 {
 		return nil
 	}
-	x := &NowPlayingInfoCenter{Handle: objref.Wrap(id)}
+	x := &NowPlayingInfoCenter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,44 +60,48 @@ func (x *NowPlayingInfoCenter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NowPlayingInfoCenter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNowPlayingInfoCenter creates a new NowPlayingInfoCenter.
 func NewNowPlayingInfoCenter() *NowPlayingInfoCenter {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPNowPlayingInfoCenter")), objc.RegisterName("new"))
 	return nowPlayingInfoCenterAdopt(_id)
 }
 
-// The current Now Playing information for the default Now Playing info center.
-//
-// WithNowPlayingInfo sets nowPlayingInfo and returns the receiver so calls can be chained.
+// WithNowPlayingInfo the current Now Playing information for the default Now Playing info center.
 func (x *NowPlayingInfoCenter) WithNowPlayingInfo(nowPlayingInfo obj.Object) *NowPlayingInfoCenter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNowPlayingInfo:"), objref.IDOf(nowPlayingInfo))
 	return x
 }
 
-// The current playback state of the app.
-//
-// WithPlaybackState sets playbackState and returns the receiver so calls can be chained.
+// WithPlaybackState the current playback state of the app.
 func (x *NowPlayingInfoCenter) WithPlaybackState(playbackState NowPlayingPlaybackState) *NowPlayingInfoCenter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaybackState:"), playbackState)
 	return x
 }
 
-// The current now playing info for the center. Setting the info to nil will clear it.
+// NowPlayingInfo the current now playing info for the center. Setting the info to nil will clear it.
 func (x *NowPlayingInfoCenter) NowPlayingInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nowPlayingInfo"))
 	return obj.Wrap(_r)
 }
 
+// SetNowPlayingInfo wraps the corresponding Objective-C method.
 func (x *NowPlayingInfoCenter) SetNowPlayingInfo(nowPlayingInfo obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNowPlayingInfo:"), objref.IDOf(nowPlayingInfo))
 }
 
-// The current playback state of the app. This only applies on macOS, where playback state cannot be determined by the application's audio session. This property must be set every time the app begins or halts playback, otherwise remote control functionality may not work as expected.
+// PlaybackState the current playback state of the app. This only applies on macOS, where playback state cannot be determined by the application's audio session. This property must be set every time the app begins or halts playback, otherwise remote control functionality may not work as expected.
 func (x *NowPlayingInfoCenter) PlaybackState() NowPlayingPlaybackState {
 	_r := objc.Send[NowPlayingPlaybackState](objref.IDOf(x), objc.RegisterName("playbackState"))
 	return _r
 }
 
+// SetPlaybackState wraps the corresponding Objective-C method.
 func (x *NowPlayingInfoCenter) SetPlaybackState(playbackState NowPlayingPlaybackState) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaybackState:"), playbackState)
 }

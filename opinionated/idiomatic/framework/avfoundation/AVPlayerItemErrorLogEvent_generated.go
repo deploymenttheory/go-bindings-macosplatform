@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A single item in a player item’s error log.
-//
 // PlayerItemErrorLogEvent is an idiomatic wrapper over the Objective-C class AVPlayerItemErrorLogEvent.
+//
+// A single item in a player item’s error log.
 type PlayerItemErrorLogEvent struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PlayerItemErrorLogEventFromID(id objc.ID) *PlayerItemErrorLogEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemErrorLogEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlayerItemErrorLogEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func playerItemErrorLogEventAdopt(id objc.ID) *PlayerItemErrorLogEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemErrorLogEvent{Handle: objref.Wrap(id)}
+	x := &PlayerItemErrorLogEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *PlayerItemErrorLogEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerItemErrorLogEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPlayerItemErrorLogEvent creates a new PlayerItemErrorLogEvent.
 func NewPlayerItemErrorLogEvent() *PlayerItemErrorLogEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemErrorLogEvent")), objc.RegisterName("new"))
 	return playerItemErrorLogEventAdopt(_id)
 }
 
-// The date and time when the error occured. Can be nil. If nil is returned the date is unknown. Corresponds to "date". This property is not observable.
+// Date the date and time when the error occured. Can be nil. If nil is returned the date is unknown. Corresponds to "date". This property is not observable.
 func (x *PlayerItemErrorLogEvent) Date() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
 
-// The URI of the playback item. Can be nil. If nil is returned the URI is unknown. Corresponds to "uri". This property is not observable.
+// URI the URI of the playback item. Can be nil. If nil is returned the URI is unknown. Corresponds to "uri". This property is not observable.
 func (x *PlayerItemErrorLogEvent) URI() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URI"))
 	if _r == 0 {
@@ -79,7 +87,7 @@ func (x *PlayerItemErrorLogEvent) URI() string {
 	return purego.GoString(_r)
 }
 
-// The IP address of the server that was the source of the error. Can be nil. If nil is returned the address is unknown. Can be either an IPv4 or IPv6 address. Corresponds to "s-ip". This property is not observable.
+// ServerAddress the IP address of the server that was the source of the error. Can be nil. If nil is returned the address is unknown. Can be either an IPv4 or IPv6 address. Corresponds to "s-ip". This property is not observable.
 func (x *PlayerItemErrorLogEvent) ServerAddress() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverAddress"))
 	if _r == 0 {
@@ -88,7 +96,7 @@ func (x *PlayerItemErrorLogEvent) ServerAddress() string {
 	return purego.GoString(_r)
 }
 
-// A GUID that identifies the playback session. This value is used in HTTP requests. Can be nil. If nil is returned the GUID is unknown. Corresponds to "cs-guid". This property is not observable.
+// PlaybackSessionID a GUID that identifies the playback session. This value is used in HTTP requests. Can be nil. If nil is returned the GUID is unknown. Corresponds to "cs-guid". This property is not observable.
 func (x *PlayerItemErrorLogEvent) PlaybackSessionID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playbackSessionID"))
 	if _r == 0 {
@@ -97,13 +105,13 @@ func (x *PlayerItemErrorLogEvent) PlaybackSessionID() string {
 	return purego.GoString(_r)
 }
 
-// A unique error code identifier. Corresponds to "status". This property is not observable.
+// ErrorStatusCode a unique error code identifier. Corresponds to "status". This property is not observable.
 func (x *PlayerItemErrorLogEvent) ErrorStatusCode() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("errorStatusCode"))
 	return _r
 }
 
-// The domain of the error. Corresponds to "domain". This property is not observable.
+// ErrorDomain the domain of the error. Corresponds to "domain". This property is not observable.
 func (x *PlayerItemErrorLogEvent) ErrorDomain() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorDomain"))
 	if _r == 0 {
@@ -112,7 +120,7 @@ func (x *PlayerItemErrorLogEvent) ErrorDomain() string {
 	return purego.GoString(_r)
 }
 
-// A description of the error encountered. Can be nil. If nil is returned further information is not available. Corresponds to "comment". This property is not observable.
+// ErrorComment a description of the error encountered. Can be nil. If nil is returned further information is not available. Corresponds to "comment". This property is not observable.
 func (x *PlayerItemErrorLogEvent) ErrorComment() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorComment"))
 	if _r == 0 {
@@ -121,7 +129,7 @@ func (x *PlayerItemErrorLogEvent) ErrorComment() string {
 	return purego.GoString(_r)
 }
 
-// The HTTP header fields returned by the server, if an HTTP response was received as part of this error. See -[NSHTTPURLResponse allHeaderFields] for more information.
+// AllHTTPResponseHeaderFields the HTTP header fields returned by the server, if an HTTP response was received as part of this error. See -[NSHTTPURLResponse allHeaderFields] for more information.
 func (x *PlayerItemErrorLogEvent) AllHTTPResponseHeaderFields() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allHTTPResponseHeaderFields"))
 	return obj.Wrap(_r)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of options that affect the filtering, sorting, and management of results that Photos returns when you fetch asset or collection objects.
-//
 // FetchOptions is an idiomatic wrapper over the Objective-C class PHFetchOptions.
+//
+// A set of options that affect the filtering, sorting, and management of results that Photos returns when you fetch asset or collection objects.
 type FetchOptions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FetchOptionsFromID(id objc.ID) *FetchOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &FetchOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FetchOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func fetchOptionsAdopt(id objc.ID) *FetchOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &FetchOptions{Handle: objref.Wrap(id)}
+	x := &FetchOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,129 +60,136 @@ func (x *FetchOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FetchOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFetchOptions creates a new FetchOptions.
 func NewFetchOptions() *FetchOptions {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHFetchOptions")), objc.RegisterName("new"))
 	return fetchOptionsAdopt(_id)
 }
 
-// A predicate that specifies which properties to select results by and that also specifies any constraints on selection.
-//
-// WithPredicate sets predicate and returns the receiver so calls can be chained.
+// WithPredicate a predicate that specifies which properties to select results by and that also specifies any constraints on selection.
 func (x *FetchOptions) WithPredicate(predicate obj.Object) *FetchOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
 	return x
 }
 
-// A list of sort descriptors, specifying an order for the fetched objects.
-//
-// WithSortDescriptors sets the collection and returns the receiver so calls can be chained.
+// WithSortDescriptors a list of sort descriptors, specifying an order for the fetched objects.
 func (x *FetchOptions) WithSortDescriptors(items ...obj.Object) *FetchOptions {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortDescriptors:"), _arr)
 	return x
 }
 
-// A Boolean value that determines whether the fetch result includes assets marked as hidden.
-//
-// WithIncludeHiddenAssets sets includeHiddenAssets and returns the receiver so calls can be chained.
+// WithIncludeHiddenAssets a Boolean value that determines whether the fetch result includes assets marked as hidden.
 func (x *FetchOptions) WithIncludeHiddenAssets(includeHiddenAssets bool) *FetchOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeHiddenAssets:"), includeHiddenAssets)
 	return x
 }
 
-// A Boolean value that determines whether the fetch result includes all assets from burst photo sequences.
-//
-// WithIncludeAllBurstAssets sets includeAllBurstAssets and returns the receiver so calls can be chained.
+// WithIncludeAllBurstAssets a Boolean value that determines whether the fetch result includes all assets from burst photo sequences.
 func (x *FetchOptions) WithIncludeAllBurstAssets(includeAllBurstAssets bool) *FetchOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeAllBurstAssets:"), includeAllBurstAssets)
 	return x
 }
 
-// The set of source types for which to include assets in the fetch result.
-//
-// WithIncludeAssetSourceTypes sets includeAssetSourceTypes and returns the receiver so calls can be chained.
+// WithIncludeAssetSourceTypes the set of source types for which to include assets in the fetch result.
 func (x *FetchOptions) WithIncludeAssetSourceTypes(includeAssetSourceTypes AssetSourceType) *FetchOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeAssetSourceTypes:"), includeAssetSourceTypes)
 	return x
 }
 
-// The maximum number of objects to include in the fetch result.
-//
-// WithFetchLimit sets fetchLimit and returns the receiver so calls can be chained.
+// WithFetchLimit the maximum number of objects to include in the fetch result.
 func (x *FetchOptions) WithFetchLimit(fetchLimit int) *FetchOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchLimit:"), fetchLimit)
 	return x
 }
 
-// A Boolean value that determines whether your app receives detailed change information for the objects in the fetch result.
-//
-// WithWantsIncrementalChangeDetails sets wantsIncrementalChangeDetails and returns the receiver so calls can be chained.
+// WithWantsIncrementalChangeDetails a Boolean value that determines whether your app receives detailed change information for the objects in the fetch result.
 func (x *FetchOptions) WithWantsIncrementalChangeDetails(wantsIncrementalChangeDetails bool) *FetchOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsIncrementalChangeDetails:"), wantsIncrementalChangeDetails)
 	return x
 }
 
+// Predicate wraps the corresponding Objective-C method.
 func (x *FetchOptions) Predicate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
 	return obj.Wrap(_r)
 }
 
+// SetPredicate wraps the corresponding Objective-C method.
 func (x *FetchOptions) SetPredicate(predicate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
 }
 
+// SortDescriptors wraps the corresponding Objective-C method.
+//
 // SortDescriptors returns the collection as a Go slice.
 func (x *FetchOptions) SortDescriptors() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetSortDescriptors wraps the corresponding Objective-C method.
 func (x *FetchOptions) SetSortDescriptors(sortDescriptors []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortDescriptors:"), purego.SliceToNSArray(sortDescriptors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// IncludeHiddenAssets wraps the corresponding Objective-C method.
 func (x *FetchOptions) IncludeHiddenAssets() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includeHiddenAssets"))
 	return _r
 }
 
+// SetIncludeHiddenAssets wraps the corresponding Objective-C method.
 func (x *FetchOptions) SetIncludeHiddenAssets(includeHiddenAssets bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeHiddenAssets:"), includeHiddenAssets)
 }
 
+// IncludeAllBurstAssets wraps the corresponding Objective-C method.
 func (x *FetchOptions) IncludeAllBurstAssets() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includeAllBurstAssets"))
 	return _r
 }
 
+// SetIncludeAllBurstAssets wraps the corresponding Objective-C method.
 func (x *FetchOptions) SetIncludeAllBurstAssets(includeAllBurstAssets bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeAllBurstAssets:"), includeAllBurstAssets)
 }
 
+// IncludeAssetSourceTypes wraps the corresponding Objective-C method.
 func (x *FetchOptions) IncludeAssetSourceTypes() AssetSourceType {
 	_r := objc.Send[AssetSourceType](objref.IDOf(x), objc.RegisterName("includeAssetSourceTypes"))
 	return _r
 }
 
+// SetIncludeAssetSourceTypes wraps the corresponding Objective-C method.
 func (x *FetchOptions) SetIncludeAssetSourceTypes(includeAssetSourceTypes AssetSourceType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeAssetSourceTypes:"), includeAssetSourceTypes)
 }
 
+// FetchLimit wraps the corresponding Objective-C method.
 func (x *FetchOptions) FetchLimit() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fetchLimit"))
 	return _r
 }
 
+// SetFetchLimit wraps the corresponding Objective-C method.
 func (x *FetchOptions) SetFetchLimit(fetchLimit int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchLimit:"), fetchLimit)
 }
 
+// WantsIncrementalChangeDetails wraps the corresponding Objective-C method.
 func (x *FetchOptions) WantsIncrementalChangeDetails() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsIncrementalChangeDetails"))
 	return _r
 }
 
+// SetWantsIncrementalChangeDetails wraps the corresponding Objective-C method.
 func (x *FetchOptions) SetWantsIncrementalChangeDetails(wantsIncrementalChangeDetails bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsIncrementalChangeDetails:"), wantsIncrementalChangeDetails)
 }

@@ -17,6 +17,8 @@ const (
 	MTRAccessControlEntryAuthModeGroup MTRAccessControlEntryAuthMode = 3
 )
 
+// String returns the MTRAccessControlEntryAuthMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTRAccessControlEntryAuthMode) String() string {
 	switch e {
 	case MTRAccessControlEntryAuthModePASE:
@@ -40,6 +42,8 @@ const (
 	MTRAccessControlEntryPrivilegeAdminister MTRAccessControlEntryPrivilege = 5
 )
 
+// String returns the MTRAccessControlEntryPrivilege constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTRAccessControlEntryPrivilege) String() string {
 	switch e {
 	case MTRAccessControlEntryPrivilegeView:
@@ -2859,6 +2863,8 @@ const (
 	MTRAttributeIDTypeClusterOnOffSwitchConfigurationAttributeClusterRevisionID                                         MTRAttributeIDType = 65533
 )
 
+// String returns the MTRAttributeIDType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTRAttributeIDType) String() string {
 	switch e {
 	case MTRClusterGlobalAttributeGeneratedCommandListID:
@@ -3576,6 +3582,8 @@ const (
 	MTRClusterIDTypeOnOffSwitchConfigurationID                              MTRClusterIDType = 7
 )
 
+// String returns the MTRClusterIDType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTRClusterIDType) String() string {
 	switch e {
 	case MTRClusterIdentifyID:
@@ -4379,6 +4387,8 @@ const (
 	MTRCommandIDTypeClusterElectricalMeasurementCommandGetMeasurementProfileCommandID                   MTRCommandIDType = 1
 )
 
+// String returns the MTRCommandIDType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTRCommandIDType) String() string {
 	switch e {
 	case MTRClusterIdentifyCommandIdentifyID:
@@ -4487,6 +4497,8 @@ const (
 	MTRCommissioningFlowInvalid            MTRCommissioningFlow = 3
 )
 
+// String returns the MTRCommissioningFlow constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTRCommissioningFlow) String() string {
 	switch e {
 	case MTRCommissioningFlowStandard:
@@ -4510,6 +4522,8 @@ const (
 	MTRDeviceStateUnreachable MTRDeviceState = 2
 )
 
+// String returns the MTRDeviceState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTRDeviceState) String() string {
 	switch e {
 	case MTRDeviceStateUnknown:
@@ -4531,6 +4545,8 @@ const (
 	MTRDiagnosticLogTypeCrash              MTRDiagnosticLogType = 2
 )
 
+// String returns the MTRDiagnosticLogType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTRDiagnosticLogType) String() string {
 	switch e {
 	case MTRDiagnosticLogTypeEndUserSupport:
@@ -4556,6 +4572,8 @@ const (
 	MTRDiscoveryCapabilitiesAllMask   MTRDiscoveryCapabilities = 7
 )
 
+// String returns the MTRDiscoveryCapabilities constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTRDiscoveryCapabilities) String() string {
 	var parts []string
 	if e&MTRDiscoveryCapabilitiesSoftAP != 0 {
@@ -4610,6 +4628,8 @@ const (
 	MTRErrorCodeNotFound MTRErrorCode = 19
 )
 
+// String returns the MTRErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTRErrorCode) String() string {
 	switch e {
 	case MTRErrorCodeGeneralError:
@@ -4830,6 +4850,8 @@ const (
 	MTREventIDTypeClusterUnitTestingEventTestFabricScopedEventID                     MTREventIDType = 2
 )
 
+// String returns the MTREventIDType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTREventIDType) String() string {
 	switch e {
 	case MTRClusterAccessControlEventAccessControlEntryChangedID:
@@ -4880,6 +4902,8 @@ const (
 	MTREventTimeTypeTimestampDate MTREventTimeType = 1
 )
 
+// String returns the MTREventTimeType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTREventTimeType) String() string {
 	switch e {
 	case MTREventTimeTypeSystemUpTime:
@@ -4924,6 +4948,8 @@ const (
 	MTRInteractionErrorCodeNoCommandResponse      MTRInteractionErrorCode = 204
 )
 
+// String returns the MTRInteractionErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTRInteractionErrorCode) String() string {
 	switch e {
 	case MTRInteractionErrorCodeFailure:
@@ -4995,6 +5021,8 @@ const (
 	MTRLogTypeDetail   MTRLogType = 3
 )
 
+// String returns the MTRLogType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTRLogType) String() string {
 	switch e {
 	case MTRLogTypeError:
@@ -5017,6 +5045,8 @@ const (
 	MTRNetworkCommissioningFeatureEthernetNetworkInterface MTRNetworkCommissioningFeature = 4
 )
 
+// String returns the MTRNetworkCommissioningFeature constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTRNetworkCommissioningFeature) String() string {
 	var parts []string
 	if e&MTRNetworkCommissioningFeatureWiFiNetworkInterface != 0 {
@@ -5051,6 +5081,8 @@ const (
 	MTROTAImageDigestTypeSha3_512   MTROTAImageDigestType = 12
 )
 
+// String returns the MTROTAImageDigestType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTROTAImageDigestType) String() string {
 	switch e {
 	case MTROTAImageDigestTypeSha256:
@@ -5090,6 +5122,8 @@ const (
 	MTROptionalQRCodeInfoTypeInt32   MTROptionalQRCodeInfoType = 2
 )
 
+// String returns the MTROptionalQRCodeInfoType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTROptionalQRCodeInfoType) String() string {
 	switch e {
 	case MTROptionalQRCodeInfoTypeUnknown:
@@ -5112,6 +5146,8 @@ const (
 	MTRTransportTypeTCP       MTRTransportType = 3
 )
 
+// String returns the MTRTransportType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTRTransportType) String() string {
 	switch e {
 	case MTRTransportTypeUndefined:

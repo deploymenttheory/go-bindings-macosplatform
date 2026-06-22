@@ -15,10 +15,10 @@ import (
 	"unsafe"
 )
 
-// Construct the compute plan of a model asynchronously given the location of its on-disk representation.
+// LoadContentsOfURLConfiguration construct the compute plan of a model asynchronously given the location of its on-disk representation.
 //
 // LoadContentsOfURLConfiguration blocks until the operation completes or ctx is cancelled.
-func LoadContentsOfURLConfiguration(ctx context.Context, url string, configuration *ModelConfiguration) (*ComputePlan, error) {
+func LoadContentsOfURLConfiguration(ctx context.Context, url string, configuration *ModelConfiguration) (result *ComputePlan, err error) {
 	type _result struct {
 		val *ComputePlan
 		err error
@@ -40,10 +40,10 @@ func LoadContentsOfURLConfiguration(ctx context.Context, url string, configurati
 	}
 }
 
-// Construct the compute plan of a model asynchronously given the model asset.
+// LoadModelAssetConfiguration construct the compute plan of a model asynchronously given the model asset.
 //
 // LoadModelAssetConfiguration blocks until the operation completes or ctx is cancelled.
-func LoadModelAssetConfiguration(ctx context.Context, asset *ModelAsset, configuration *ModelConfiguration) (*ComputePlan, error) {
+func LoadModelAssetConfiguration(ctx context.Context, asset *ModelAsset, configuration *ModelConfiguration) (result *ComputePlan, err error) {
 	type _result struct {
 		val *ComputePlan
 		err error
@@ -65,44 +65,44 @@ func LoadModelAssetConfiguration(ctx context.Context, asset *ModelAsset, configu
 	}
 }
 
-// Creates a feature value that contains an integer.
+// FeatureValueWithInt64 creates a feature value that contains an integer.
 func FeatureValueWithInt64(value int64) *FeatureValue {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLFeatureValue")), objc.RegisterName("featureValueWithInt64:"), value)
 	return FeatureValueFromID(_r)
 }
 
-// Creates a feature value that contains a double.
+// FeatureValueWithDouble creates a feature value that contains a double.
 func FeatureValueWithDouble(value float64) *FeatureValue {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLFeatureValue")), objc.RegisterName("featureValueWithDouble:"), value)
 	return FeatureValueFromID(_r)
 }
 
-// Creates a feature value that contains a string.
+// FeatureValueWithString creates a feature value that contains a string.
 func FeatureValueWithString(value string) *FeatureValue {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLFeatureValue")), objc.RegisterName("featureValueWithString:"), purego.NSString(value))
 	return FeatureValueFromID(_r)
 }
 
-// Creates a feature value that contains a multidimensional array.
+// FeatureValueWithMultiArray creates a feature value that contains a multidimensional array.
 func FeatureValueWithMultiArray(value *MultiArray) *FeatureValue {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLFeatureValue")), objc.RegisterName("featureValueWithMultiArray:"), objref.IDOf(value))
 	return FeatureValueFromID(_r)
 }
 
-// Creates a feature value that contains a sequence.
+// FeatureValueWithSequence creates a feature value that contains a sequence.
 func FeatureValueWithSequence(sequence *Sequence) *FeatureValue {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLFeatureValue")), objc.RegisterName("featureValueWithSequence:"), objref.IDOf(sequence))
 	return FeatureValueFromID(_r)
 }
 
-// Creates a feature value with a type that represents an undefined or missing value.
+// UndefinedFeatureValueWithType creates a feature value with a type that represents an undefined or missing value.
 func UndefinedFeatureValueWithType(type_ FeatureType) *FeatureValue {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLFeatureValue")), objc.RegisterName("undefinedFeatureValueWithType:"), type_)
 	return FeatureValueFromID(_r)
 }
 
-// Creates a feature value that contains a dictionary of numbers.
-func FeatureValueWithDictionaryError(value obj.Object) (*FeatureValue, error) {
+// FeatureValueWithDictionaryError creates a feature value that contains a dictionary of numbers.
+func FeatureValueWithDictionaryError(value obj.Object) (result *FeatureValue, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("MLFeatureValue")), objc.RegisterName("featureValueWithDictionary:error:"), objref.IDOf(value), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -111,8 +111,8 @@ func FeatureValueWithDictionaryError(value obj.Object) (*FeatureValue, error) {
 	return FeatureValueFromID(_r), nil
 }
 
-// Construct image feature value from an image on disk. Orientation is read from Exif if avaiable
-func FeatureValueWithImageAtURLPixelsWidePixelsHighPixelFormatTypeOptionsError(url string, pixelsWide int, pixelsHigh int, pixelFormatType int, options obj.Object) (*FeatureValue, error) {
+// FeatureValueWithImageAtURLPixelsWidePixelsHighPixelFormatTypeOptionsError construct image feature value from an image on disk. Orientation is read from Exif if avaiable
+func FeatureValueWithImageAtURLPixelsWidePixelsHighPixelFormatTypeOptionsError(url string, pixelsWide int, pixelsHigh int, pixelFormatType int, options obj.Object) (result *FeatureValue, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("MLFeatureValue")), objc.RegisterName("featureValueWithImageAtURL:pixelsWide:pixelsHigh:pixelFormatType:options:error:"), rt.FileURL(url), pixelsWide, pixelsHigh, pixelFormatType, objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -121,8 +121,8 @@ func FeatureValueWithImageAtURLPixelsWidePixelsHighPixelFormatTypeOptionsError(u
 	return FeatureValueFromID(_r), nil
 }
 
-// Construct image feature value from an image on disk, using a model specified image constraint. Orientation is read from Exif if avaiable
-func FeatureValueWithImageAtURLConstraintOptionsError(url string, constraint *ImageConstraint, options obj.Object) (*FeatureValue, error) {
+// FeatureValueWithImageAtURLConstraintOptionsError construct image feature value from an image on disk, using a model specified image constraint. Orientation is read from Exif if avaiable
+func FeatureValueWithImageAtURLConstraintOptionsError(url string, constraint *ImageConstraint, options obj.Object) (result *FeatureValue, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("MLFeatureValue")), objc.RegisterName("featureValueWithImageAtURL:constraint:options:error:"), rt.FileURL(url), objref.IDOf(constraint), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -131,8 +131,8 @@ func FeatureValueWithImageAtURLConstraintOptionsError(url string, constraint *Im
 	return FeatureValueFromID(_r), nil
 }
 
-// Construct image feature value from CGImage (orientation is assumed to be kCGImagePropertyOrientationUp)
-func FeatureValueWithCGImagePixelsWidePixelsHighPixelFormatTypeOptionsError(cgImage obj.Object, pixelsWide int, pixelsHigh int, pixelFormatType int, options obj.Object) (*FeatureValue, error) {
+// FeatureValueWithCGImagePixelsWidePixelsHighPixelFormatTypeOptionsError construct image feature value from CGImage (orientation is assumed to be kCGImagePropertyOrientationUp)
+func FeatureValueWithCGImagePixelsWidePixelsHighPixelFormatTypeOptionsError(cgImage obj.Object, pixelsWide int, pixelsHigh int, pixelFormatType int, options obj.Object) (result *FeatureValue, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("MLFeatureValue")), objc.RegisterName("featureValueWithCGImage:pixelsWide:pixelsHigh:pixelFormatType:options:error:"), objref.IDOf(cgImage), pixelsWide, pixelsHigh, pixelFormatType, objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -141,8 +141,8 @@ func FeatureValueWithCGImagePixelsWidePixelsHighPixelFormatTypeOptionsError(cgIm
 	return FeatureValueFromID(_r), nil
 }
 
-// Construct image feature value from CGImage, using the size and type information required by feature description (orientation is assumed to be kCGImagePropertyOrientationUp)
-func FeatureValueWithCGImageConstraintOptionsError(cgImage obj.Object, constraint *ImageConstraint, options obj.Object) (*FeatureValue, error) {
+// FeatureValueWithCGImageConstraintOptionsError construct image feature value from CGImage, using the size and type information required by feature description (orientation is assumed to be kCGImagePropertyOrientationUp)
+func FeatureValueWithCGImageConstraintOptionsError(cgImage obj.Object, constraint *ImageConstraint, options obj.Object) (result *FeatureValue, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("MLFeatureValue")), objc.RegisterName("featureValueWithCGImage:constraint:options:error:"), objref.IDOf(cgImage), objref.IDOf(constraint), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -151,23 +151,26 @@ func FeatureValueWithCGImageConstraintOptionsError(cgImage obj.Object, constrain
 	return FeatureValueFromID(_r), nil
 }
 
+// LossValue wraps the corresponding Objective-C method.
 func LossValue() *MetricKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLMetricKey")), objc.RegisterName("lossValue"))
 	return MetricKeyFromID(_r)
 }
 
+// EpochIndex wraps the corresponding Objective-C method.
 func EpochIndex() *MetricKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLMetricKey")), objc.RegisterName("epochIndex"))
 	return MetricKeyFromID(_r)
 }
 
+// MiniBatchIndex wraps the corresponding Objective-C method.
 func MiniBatchIndex() *MetricKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLMetricKey")), objc.RegisterName("miniBatchIndex"))
 	return MetricKeyFromID(_r)
 }
 
-// Creates a Core ML model instance from a compiled model file.
-func ModelWithContentsOfURLError(url string) (*Model, error) {
+// ModelWithContentsOfURLError creates a Core ML model instance from a compiled model file.
+func ModelWithContentsOfURLError(url string) (result *Model, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("MLModel")), objc.RegisterName("modelWithContentsOfURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -176,8 +179,8 @@ func ModelWithContentsOfURLError(url string) (*Model, error) {
 	return ModelFromID(_r), nil
 }
 
-// Creates a Core ML model instance from a compiled model file and a custom configuration.
-func ModelWithContentsOfURLConfigurationError(url string, configuration *ModelConfiguration) (*Model, error) {
+// ModelWithContentsOfURLConfigurationError creates a Core ML model instance from a compiled model file and a custom configuration.
+func ModelWithContentsOfURLConfigurationError(url string, configuration *ModelConfiguration) (result *Model, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("MLModel")), objc.RegisterName("modelWithContentsOfURL:configuration:error:"), rt.FileURL(url), objref.IDOf(configuration), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -186,10 +189,10 @@ func ModelWithContentsOfURLConfigurationError(url string, configuration *ModelCo
 	return ModelFromID(_r), nil
 }
 
-// Creates a Core ML model instance asynchronously from a compiled model file, a custom configuration, and a completion handler.
+// MLModelLoadContentsOfURLConfiguration creates a Core ML model instance asynchronously from a compiled model file, a custom configuration, and a completion handler.
 //
 // MLModelLoadContentsOfURLConfiguration blocks until the operation completes or ctx is cancelled.
-func MLModelLoadContentsOfURLConfiguration(ctx context.Context, url string, configuration *ModelConfiguration) (*Model, error) {
+func MLModelLoadContentsOfURLConfiguration(ctx context.Context, url string, configuration *ModelConfiguration) (result *Model, err error) {
 	type _result struct {
 		val *Model
 		err error
@@ -211,10 +214,10 @@ func MLModelLoadContentsOfURLConfiguration(ctx context.Context, url string, conf
 	}
 }
 
-// Construct a model asynchronously from a compiled model asset.
+// MLModelLoadModelAssetConfiguration construct a model asynchronously from a compiled model asset.
 //
 // MLModelLoadModelAssetConfiguration blocks until the operation completes or ctx is cancelled.
-func MLModelLoadModelAssetConfiguration(ctx context.Context, asset *ModelAsset, configuration *ModelConfiguration) (*Model, error) {
+func MLModelLoadModelAssetConfiguration(ctx context.Context, asset *ModelAsset, configuration *ModelConfiguration) (result *Model, err error) {
 	type _result struct {
 		val *Model
 		err error
@@ -236,8 +239,8 @@ func MLModelLoadModelAssetConfiguration(ctx context.Context, asset *ModelAsset, 
 	}
 }
 
-// Compile a .mlmodel for this device The returned model can be loaded using:
-func CompileModelAtURLError(modelURL string) (obj.Object, error) {
+// CompileModelAtURLError compile a .mlmodel for this device The returned model can be loaded using:
+func CompileModelAtURLError(modelURL string) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("MLModel")), objc.RegisterName("compileModelAtURL:error:"), rt.FileURL(modelURL), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -246,8 +249,10 @@ func CompileModelAtURLError(modelURL string) (obj.Object, error) {
 	return obj.Wrap(_r), nil
 }
 
+// CompileModelAtURL wraps the corresponding Objective-C method.
+//
 // CompileModelAtURL blocks until the operation completes or ctx is cancelled.
-func CompileModelAtURL(ctx context.Context, modelURL string) (obj.Object, error) {
+func CompileModelAtURL(ctx context.Context, modelURL string) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -269,13 +274,14 @@ func CompileModelAtURL(ctx context.Context, modelURL string) (obj.Object, error)
 	}
 }
 
+// AvailableComputeDevices wraps the corresponding Objective-C method.
 func AvailableComputeDevices() []obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLModel")), objc.RegisterName("availableComputeDevices"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Creates a model asset from an in-memory model specification.
-func ModelAssetWithSpecificationDataError(specificationData obj.Object) (*ModelAsset, error) {
+// ModelAssetWithSpecificationDataError creates a model asset from an in-memory model specification.
+func ModelAssetWithSpecificationDataError(specificationData obj.Object) (result *ModelAsset, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("MLModelAsset")), objc.RegisterName("modelAssetWithSpecificationData:error:"), objref.IDOf(specificationData), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -284,8 +290,8 @@ func ModelAssetWithSpecificationDataError(specificationData obj.Object) (*ModelA
 	return ModelAssetFromID(_r), nil
 }
 
-// Construct a model asset from an ML Program specification by replacing blob file references with corresponding in-memory blobs.
-func ModelAssetWithSpecificationDataBlobMappingError(specificationData obj.Object, blobMapping obj.Object) (*ModelAsset, error) {
+// ModelAssetWithSpecificationDataBlobMappingError construct a model asset from an ML Program specification by replacing blob file references with corresponding in-memory blobs.
+func ModelAssetWithSpecificationDataBlobMappingError(specificationData obj.Object, blobMapping obj.Object) (result *ModelAsset, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("MLModelAsset")), objc.RegisterName("modelAssetWithSpecificationData:blobMapping:error:"), objref.IDOf(specificationData), objref.IDOf(blobMapping), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -294,8 +300,8 @@ func ModelAssetWithSpecificationDataBlobMappingError(specificationData obj.Objec
 	return ModelAssetFromID(_r), nil
 }
 
-// Constructs a ModelAsset from a compiled model URL.
-func ModelAssetWithURLError(compiledModelURL string) (*ModelAsset, error) {
+// ModelAssetWithURLError constructs a ModelAsset from a compiled model URL.
+func ModelAssetWithURLError(compiledModelURL string) (result *ModelAsset, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("MLModelAsset")), objc.RegisterName("modelAssetWithURL:error:"), rt.FileURL(compiledModelURL), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -304,10 +310,10 @@ func ModelAssetWithURLError(compiledModelURL string) (*ModelAsset, error) {
 	return ModelAssetFromID(_r), nil
 }
 
-// Construct the model structure asynchronously given the location of its on-disk representation.
+// LoadContentsOfURL construct the model structure asynchronously given the location of its on-disk representation.
 //
 // LoadContentsOfURL blocks until the operation completes or ctx is cancelled.
-func LoadContentsOfURL(ctx context.Context, url string) (*ModelStructure, error) {
+func LoadContentsOfURL(ctx context.Context, url string) (result *ModelStructure, err error) {
 	type _result struct {
 		val *ModelStructure
 		err error
@@ -329,10 +335,10 @@ func LoadContentsOfURL(ctx context.Context, url string) (*ModelStructure, error)
 	}
 }
 
-// Construct the model structure asynchronously  given the model asset.
+// LoadModelAsset construct the model structure asynchronously  given the model asset.
 //
 // LoadModelAsset blocks until the operation completes or ctx is cancelled.
-func LoadModelAsset(ctx context.Context, asset *ModelAsset) (*ModelStructure, error) {
+func LoadModelAsset(ctx context.Context, asset *ModelAsset) (result *ModelStructure, err error) {
 	type _result struct {
 		val *ModelStructure
 		err error
@@ -354,95 +360,109 @@ func LoadModelAsset(ctx context.Context, asset *ModelAsset) (*ModelStructure, er
 	}
 }
 
-// Concatenate MLMultiArrays to form a new MLMultiArray.
+// MultiArrayByConcatenatingMultiArraysAlongAxisDataType concatenate MLMultiArrays to form a new MLMultiArray.
 func MultiArrayByConcatenatingMultiArraysAlongAxisDataType(multiArrays []*MultiArray, axis int, dataType MultiArrayDataType) *MultiArray {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLMultiArray")), objc.RegisterName("multiArrayByConcatenatingMultiArrays:alongAxis:dataType:"), purego.SliceToNSArray(multiArrays, func(_v *MultiArray) objc.ID { return objref.IDOf(_v) }), axis, dataType)
 	return MultiArrayFromID(_r)
 }
 
+// LearningRate wraps the corresponding Objective-C method.
 func LearningRate() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("learningRate"))
 	return ParameterKeyFromID(_r)
 }
 
+// Momentum wraps the corresponding Objective-C method.
 func Momentum() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("momentum"))
 	return ParameterKeyFromID(_r)
 }
 
+// MiniBatchSize wraps the corresponding Objective-C method.
 func MiniBatchSize() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("miniBatchSize"))
 	return ParameterKeyFromID(_r)
 }
 
+// Beta1 wraps the corresponding Objective-C method.
 func Beta1() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("beta1"))
 	return ParameterKeyFromID(_r)
 }
 
+// Beta2 wraps the corresponding Objective-C method.
 func Beta2() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("beta2"))
 	return ParameterKeyFromID(_r)
 }
 
+// Eps wraps the corresponding Objective-C method.
 func Eps() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("eps"))
 	return ParameterKeyFromID(_r)
 }
 
+// Epochs wraps the corresponding Objective-C method.
 func Epochs() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("epochs"))
 	return ParameterKeyFromID(_r)
 }
 
+// Shuffle wraps the corresponding Objective-C method.
 func Shuffle() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("shuffle"))
 	return ParameterKeyFromID(_r)
 }
 
+// Seed wraps the corresponding Objective-C method.
 func Seed() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("seed"))
 	return ParameterKeyFromID(_r)
 }
 
+// NumberOfNeighbors wraps the corresponding Objective-C method.
 func NumberOfNeighbors() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("numberOfNeighbors"))
 	return ParameterKeyFromID(_r)
 }
 
+// LinkedModelFileName wraps the corresponding Objective-C method.
 func LinkedModelFileName() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("linkedModelFileName"))
 	return ParameterKeyFromID(_r)
 }
 
+// LinkedModelSearchPath wraps the corresponding Objective-C method.
 func LinkedModelSearchPath() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("linkedModelSearchPath"))
 	return ParameterKeyFromID(_r)
 }
 
+// Weights wraps the corresponding Objective-C method.
 func Weights() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("weights"))
 	return ParameterKeyFromID(_r)
 }
 
+// Biases wraps the corresponding Objective-C method.
 func Biases() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("biases"))
 	return ParameterKeyFromID(_r)
 }
 
-// Creates an empty sequence of strings or integers.
+// EmptySequenceWithType creates an empty sequence of strings or integers.
 func EmptySequenceWithType(type_ FeatureType) *Sequence {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLSequence")), objc.RegisterName("emptySequenceWithType:"), type_)
 	return SequenceFromID(_r)
 }
 
-// Creates a sequence of strings from a string array.
+// SequenceWithStringArray creates a sequence of strings from a string array.
 func SequenceWithStringArray(stringValues []string) *Sequence {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLSequence")), objc.RegisterName("sequenceWithStringArray:"), purego.SliceToNSArray(stringValues, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return SequenceFromID(_r)
 }
 
-// Creates a sequence of integers from an array of numbers.
+// SequenceWithInt64Array creates a sequence of integers from an array of numbers.
 func SequenceWithInt64Array(int64Values []obj.Object) *Sequence {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLSequence")), objc.RegisterName("sequenceWithInt64Array:"), purego.SliceToNSArray(int64Values, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return SequenceFromID(_r)

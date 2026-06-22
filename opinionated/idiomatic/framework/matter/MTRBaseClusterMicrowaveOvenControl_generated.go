@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Microwave Oven Control
-//
 // MTRBaseClusterMicrowaveOvenControl is an idiomatic wrapper over the Objective-C class MTRBaseClusterMicrowaveOvenControl.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
+//
+// Cluster Microwave Oven Control
 type MTRBaseClusterMicrowaveOvenControl struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterMicrowaveOvenControlFromID adopts an existing Objective-C object as a MTRBaseClusterMicrowaveOvenControl
@@ -27,7 +28,8 @@ func MTRBaseClusterMicrowaveOvenControlFromID(id objc.ID) *MTRBaseClusterMicrowa
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterMicrowaveOvenControl{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterMicrowaveOvenControl{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,37 +42,23 @@ func mTRBaseClusterMicrowaveOvenControlAdopt(id objc.ID) *MTRBaseClusterMicrowav
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterMicrowaveOvenControl{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterMicrowaveOvenControl{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterMicrowaveOvenControl) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterMicrowaveOvenControl) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterMicrowaveOvenControl) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterMicrowaveOvenControlWithDeviceEndpointIDQueue creates a new MTRBaseClusterMicrowaveOvenControl.
+// NewMTRBaseClusterMicrowaveOvenControlWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterMicrowaveOvenControlWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterMicrowaveOvenControl {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterMicrowaveOvenControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterMicrowaveOvenControlAdopt(_id)
 }
 
+// ReadAttributeCookTimeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCookTimeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeCookTimeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeCookTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -92,8 +80,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeCookTimeWithCompletion
 	}
 }
 
+// SubscribeAttributeCookTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCookTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeCookTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeCookTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -115,8 +105,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeCookTimeWithParam
 	}
 }
 
+// ReadAttributeMaxCookTimeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMaxCookTimeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeMaxCookTimeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeMaxCookTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -138,8 +130,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeMaxCookTimeWithComplet
 	}
 }
 
+// SubscribeAttributeMaxCookTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMaxCookTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeMaxCookTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeMaxCookTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -161,8 +155,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeMaxCookTimeWithPa
 	}
 }
 
+// ReadAttributePowerSettingWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePowerSettingWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributePowerSettingWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributePowerSettingWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -184,8 +180,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributePowerSettingWithComple
 	}
 }
 
+// SubscribeAttributePowerSettingWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePowerSettingWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributePowerSettingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributePowerSettingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -207,8 +205,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributePowerSettingWithP
 	}
 }
 
+// ReadAttributeMinPowerWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMinPowerWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeMinPowerWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeMinPowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -230,8 +230,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeMinPowerWithCompletion
 	}
 }
 
+// SubscribeAttributeMinPowerWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMinPowerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeMinPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeMinPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -253,8 +255,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeMinPowerWithParam
 	}
 }
 
+// ReadAttributeMaxPowerWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMaxPowerWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeMaxPowerWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeMaxPowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -276,8 +280,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeMaxPowerWithCompletion
 	}
 }
 
+// SubscribeAttributeMaxPowerWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMaxPowerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeMaxPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeMaxPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -299,8 +305,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeMaxPowerWithParam
 	}
 }
 
+// ReadAttributePowerStepWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePowerStepWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributePowerStepWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributePowerStepWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -322,8 +330,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributePowerStepWithCompletio
 	}
 }
 
+// SubscribeAttributePowerStepWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePowerStepWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributePowerStepWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributePowerStepWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -345,8 +355,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributePowerStepWithPara
 	}
 }
 
+// ReadAttributeWattRatingWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeWattRatingWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeWattRatingWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeWattRatingWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -368,8 +380,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeWattRatingWithCompleti
 	}
 }
 
+// SubscribeAttributeWattRatingWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeWattRatingWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeWattRatingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeWattRatingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -391,8 +405,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeWattRatingWithPar
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -414,8 +430,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeGeneratedCommandListWi
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -437,8 +455,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeGeneratedCommandL
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -460,8 +480,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeAcceptedCommandListWit
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -483,8 +505,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeAcceptedCommandLi
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -506,8 +530,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeAttributeListWithCompl
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -529,8 +555,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeAttributeListWith
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -552,8 +580,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeFeatureMapWithCompleti
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -575,8 +605,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeFeatureMapWithPar
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -598,8 +630,10 @@ func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeClusterRevisionWithCom
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -651,3 +685,7 @@ type MTRBaseClusterMicrowaveOvenControlable interface {
 }
 
 var _ MTRBaseClusterMicrowaveOvenControlable = (*MTRBaseClusterMicrowaveOvenControl)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterMicrowaveOvenControl)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterMicrowaveOvenControl)(nil)

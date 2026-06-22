@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that provides the interface for querying the relationships and properties of a class.
-//
 // ClassDescription is an idiomatic wrapper over the Objective-C class NSClassDescription.
+//
+// ClassDescription is an abstract base — you do not construct it directly. Construct one of [ScriptClassDescription] and pass it where a ClassDescription is accepted.
+//
+// An abstract class that provides the interface for querying the relationships and properties of a class.
 type ClassDescription struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ClassDescriptionFromID(id objc.ID) *ClassDescription {
 	if id == 0 {
 		return nil
 	}
-	x := &ClassDescription{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ClassDescription{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func classDescriptionAdopt(id objc.ID) *ClassDescription {
 	if id == 0 {
 		return nil
 	}
-	x := &ClassDescription{Handle: objref.Wrap(id)}
+	x := &ClassDescription{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +62,13 @@ func (x *ClassDescription) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewClassDescription creates a new ClassDescription.
-func NewClassDescription() *ClassDescription {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSClassDescription")), objc.RegisterName("new"))
-	return classDescriptionAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ClassDescription) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *ClassDescription) WithScriptingProperties(scriptingProperties obj.Object) *ClassDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
@@ -77,3 +81,10 @@ type ClassDescriptionable interface {
 }
 
 var _ ClassDescriptionable = (*ClassDescription)(nil)
+
+// isClassDescription marks ClassDescription — and, by embedding promotion, its
+// subclasses — as a member of the ClassDescription hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ClassDescription) isClassDescription() {}
+
+var _ ClassDescriptionProvider = (*ClassDescription)(nil)

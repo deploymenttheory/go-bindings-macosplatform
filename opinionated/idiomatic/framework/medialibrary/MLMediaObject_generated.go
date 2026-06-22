@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The MLMediaObject class describes a single media file, such as a photo, song, or movie. Each media object contains basic metadata including a name, media type, URL, and so on. Additional information about each object is stored in its list of attributes. For a list of possible object attribute keys, see Media Object Attribute Keys.
-//
 // MediaObject is an idiomatic wrapper over the Objective-C class MLMediaObject.
+//
+// The MLMediaObject class describes a single media file, such as a photo, song, or movie. Each media object contains basic metadata including a name, media type, URL, and so on. Additional information about each object is stored in its list of attributes. For a list of possible object attribute keys, see Media Object Attribute Keys.
 type MediaObject struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MediaObjectFromID(id objc.ID) *MediaObject {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaObject{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MediaObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mediaObjectAdopt(id objc.ID) *MediaObject {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaObject{Handle: objref.Wrap(id)}
+	x := &MediaObject{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,25 @@ func (x *MediaObject) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MediaObject) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMediaObject creates a new MediaObject.
 func NewMediaObject() *MediaObject {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLMediaObject")), objc.RegisterName("new"))
 	return mediaObjectAdopt(_id)
 }
 
+// MediaLibrary wraps the corresponding Objective-C method.
 func (x *MediaObject) MediaLibrary() *MediaLibrary {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaLibrary"))
 	return MediaLibraryFromID(_r)
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *MediaObject) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -77,6 +87,7 @@ func (x *MediaObject) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// MediaSourceIdentifier wraps the corresponding Objective-C method.
 func (x *MediaObject) MediaSourceIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSourceIdentifier"))
 	if _r == 0 {
@@ -85,16 +96,19 @@ func (x *MediaObject) MediaSourceIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// Attributes wraps the corresponding Objective-C method.
 func (x *MediaObject) Attributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
+// MediaType wraps the corresponding Objective-C method.
 func (x *MediaObject) MediaType() MediaType {
 	_r := objc.Send[MediaType](objref.IDOf(x), objc.RegisterName("mediaType"))
 	return _r
 }
 
+// ContentType wraps the corresponding Objective-C method.
 func (x *MediaObject) ContentType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
 	if _r == 0 {
@@ -103,6 +117,7 @@ func (x *MediaObject) ContentType() string {
 	return purego.GoString(_r)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *MediaObject) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -111,31 +126,37 @@ func (x *MediaObject) Name() string {
 	return purego.GoString(_r)
 }
 
+// URL wraps the corresponding Objective-C method.
 func (x *MediaObject) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
+// OriginalURL wraps the corresponding Objective-C method.
 func (x *MediaObject) OriginalURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalURL"))
 	return obj.Wrap(_r)
 }
 
+// FileSize wraps the corresponding Objective-C method.
 func (x *MediaObject) FileSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fileSize"))
 	return _r
 }
 
+// ModificationDate wraps the corresponding Objective-C method.
 func (x *MediaObject) ModificationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modificationDate"))
 	return obj.Wrap(_r)
 }
 
+// ThumbnailURL wraps the corresponding Objective-C method.
 func (x *MediaObject) ThumbnailURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("thumbnailURL"))
 	return obj.Wrap(_r)
 }
 
+// ArtworkImage wraps the corresponding Objective-C method.
 func (x *MediaObject) ArtworkImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("artworkImage"))
 	return obj.Wrap(_r)

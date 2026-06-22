@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request that detects and recognizes regions of text in an image.
-//
 // RecognizedTextObservation is an idiomatic wrapper over the Objective-C class VNRecognizedTextObservation.
+//
+// It embeds [RectangleObservation], promoting that type's methods.
+//
+// A request that detects and recognizes regions of text in an image.
 type RecognizedTextObservation struct {
-	objref.Handle
+	RectangleObservation
 }
 
 // RecognizedTextObservationFromID adopts an existing Objective-C object as a RecognizedTextObservation
@@ -25,7 +26,8 @@ func RecognizedTextObservationFromID(id objc.ID) *RecognizedTextObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &RecognizedTextObservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RecognizedTextObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func recognizedTextObservationAdopt(id objc.ID) *RecognizedTextObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &RecognizedTextObservation{Handle: objref.Wrap(id)}
+	x := &RecognizedTextObservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RecognizedTextObservation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RecognizedTextObservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RecognizedTextObservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRecognizedTextObservation creates a new RecognizedTextObservation.
@@ -64,7 +52,7 @@ func NewRecognizedTextObservation() *RecognizedTextObservation {
 	return recognizedTextObservationAdopt(_id)
 }
 
-// Requests the n top candidates for a recognized text string.
+// TopCandidates requests the n top candidates for a recognized text string.
 func (x *RecognizedTextObservation) TopCandidates(maxCandidateCount int) []*RecognizedText {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topCandidates:"), maxCandidateCount)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *RecognizedText { return RecognizedTextFromID(_id) })
@@ -77,3 +65,9 @@ type RecognizedTextObservationable interface {
 }
 
 var _ RecognizedTextObservationable = (*RecognizedTextObservation)(nil)
+
+var _ RectangleObservationProvider = (*RecognizedTextObservation)(nil)
+
+var _ DetectedObjectObservationProvider = (*RecognizedTextObservation)(nil)
+
+var _ ObservationProvider = (*RecognizedTextObservation)(nil)

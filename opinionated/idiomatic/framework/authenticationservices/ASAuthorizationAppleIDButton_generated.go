@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A control you add to your interface that enables users to initiate the Sign In with Apple flow.
-//
 // AuthorizationAppleIDButton is an idiomatic wrapper over the Objective-C class ASAuthorizationAppleIDButton.
+//
+// A control you add to your interface that enables users to initiate the Sign In with Apple flow.
 type AuthorizationAppleIDButton struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationAppleIDButtonFromID(id objc.ID) *AuthorizationAppleIDButton {
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationAppleIDButton{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationAppleIDButton{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationAppleIDButtonAdopt(id objc.ID) *AuthorizationAppleIDButton {
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationAppleIDButton{Handle: objref.Wrap(id)}
+	x := &AuthorizationAppleIDButton{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,32 @@ func (x *AuthorizationAppleIDButton) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new Sign In with Apple authorization button with the given type and style.
-//
-// NewAuthorizationAppleIDButtonWithAuthorizationButtonTypeAuthorizationButtonStyle creates a new AuthorizationAppleIDButton.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationAppleIDButton) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAuthorizationAppleIDButtonWithAuthorizationButtonTypeAuthorizationButtonStyle creates a new Sign In with Apple authorization button with the given type and style.
 func NewAuthorizationAppleIDButtonWithAuthorizationButtonTypeAuthorizationButtonStyle(type_ AuthorizationAppleIDButtonType, style AuthorizationAppleIDButtonStyle) *AuthorizationAppleIDButton {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationAppleIDButton")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAuthorizationButtonType:authorizationButtonStyle:"), type_, style)
 	return authorizationAppleIDButtonAdopt(_id)
 }
 
-// The radius, in points, for the rounded corners on the Apple ID sign-in button.
-//
-// WithCornerRadius sets cornerRadius and returns the receiver so calls can be chained.
+// WithCornerRadius the radius, in points, for the rounded corners on the Apple ID sign-in button.
 func (x *AuthorizationAppleIDButton) WithCornerRadius(cornerRadius float64) *AuthorizationAppleIDButton {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
 	return x
 }
 
+// CornerRadius wraps the corresponding Objective-C method.
 func (x *AuthorizationAppleIDButton) CornerRadius() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("cornerRadius"))
 	return _r
 }
 
+// SetCornerRadius wraps the corresponding Objective-C method.
 func (x *AuthorizationAppleIDButton) SetCornerRadius(cornerRadius float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
 }

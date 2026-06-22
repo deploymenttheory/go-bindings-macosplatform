@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The symbolic representation of a compute data type.
-//
 // GraphTensor is an idiomatic wrapper over the Objective-C class MPSGraphTensor.
+//
+// It embeds [GraphObject], promoting that type's methods.
+//
+// The symbolic representation of a compute data type.
 type GraphTensor struct {
-	objref.Handle
+	GraphObject
 }
 
 // GraphTensorFromID adopts an existing Objective-C object as a GraphTensor
@@ -25,7 +26,8 @@ func GraphTensorFromID(id objc.ID) *GraphTensor {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphTensor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphTensor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func graphTensorAdopt(id objc.ID) *GraphTensor {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphTensor{Handle: objref.Wrap(id)}
+	x := &GraphTensor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GraphTensor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphTensor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphTensor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGraphTensor creates a new GraphTensor.
@@ -64,7 +52,7 @@ func NewGraphTensor() *GraphTensor {
 	return graphTensorAdopt(_id)
 }
 
-// The operation responsible for creating this tensor.
+// Operation the operation responsible for creating this tensor.
 func (x *GraphTensor) Operation() *GraphOperation {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operation"))
 	return GraphOperationFromID(_r)
@@ -77,3 +65,5 @@ type GraphTensorable interface {
 }
 
 var _ GraphTensorable = (*GraphTensor)(nil)
+
+var _ GraphObjectProvider = (*GraphTensor)(nil)

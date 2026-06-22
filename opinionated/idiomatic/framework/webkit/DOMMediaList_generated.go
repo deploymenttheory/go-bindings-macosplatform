@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMMediaList is an idiomatic wrapper over the Objective-C class DOMMediaList.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMMediaList struct {
-	objref.Handle
+	DOMObject
 }
 
 // DOMMediaListFromID adopts an existing Objective-C object as a DOMMediaList
@@ -23,7 +24,8 @@ func DOMMediaListFromID(id objc.ID) *DOMMediaList {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMMediaList{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMMediaList{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMMediaListAdopt(id objc.ID) *DOMMediaList {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMMediaList{Handle: objref.Wrap(id)}
+	x := &DOMMediaList{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMMediaList) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMMediaList) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMMediaList) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMMediaList creates a new DOMMediaList.
@@ -62,12 +50,13 @@ func NewDOMMediaList() *DOMMediaList {
 	return dOMMediaListAdopt(_id)
 }
 
-// WithMediaText sets mediaText and returns the receiver so calls can be chained.
+// WithMediaText sets the property and returns the receiver so calls can be chained.
 func (x *DOMMediaList) WithMediaText(mediaText string) *DOMMediaList {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaText:"), purego.NSString(mediaText))
 	return x
 }
 
+// Item wraps the corresponding Objective-C method.
 func (x *DOMMediaList) Item(index int) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
 	if _r == 0 {
@@ -76,14 +65,17 @@ func (x *DOMMediaList) Item(index int) string {
 	return purego.GoString(_r)
 }
 
+// DeleteMedium wraps the corresponding Objective-C method.
 func (x *DOMMediaList) DeleteMedium(oldMedium string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteMedium:"), purego.NSString(oldMedium))
 }
 
+// AppendMedium wraps the corresponding Objective-C method.
 func (x *DOMMediaList) AppendMedium(newMedium string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendMedium:"), purego.NSString(newMedium))
 }
 
+// MediaText wraps the corresponding Objective-C method.
 func (x *DOMMediaList) MediaText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaText"))
 	if _r == 0 {
@@ -92,10 +84,12 @@ func (x *DOMMediaList) MediaText() string {
 	return purego.GoString(_r)
 }
 
+// SetMediaText wraps the corresponding Objective-C method.
 func (x *DOMMediaList) SetMediaText(mediaText string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaText:"), purego.NSString(mediaText))
 }
 
+// Length wraps the corresponding Objective-C method.
 func (x *DOMMediaList) Length() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
 	return _r
@@ -114,3 +108,7 @@ type DOMMediaListable interface {
 }
 
 var _ DOMMediaListable = (*DOMMediaList)(nil)
+
+var _ DOMObjectProvider = (*DOMMediaList)(nil)
+
+var _ WebScriptObjectProvider = (*DOMMediaList)(nil)

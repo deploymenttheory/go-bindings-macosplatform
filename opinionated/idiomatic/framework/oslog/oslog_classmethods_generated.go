@@ -12,8 +12,8 @@ import (
 	"unsafe"
 )
 
-// Creates a log store representing the Mac’s local store.
-func LocalStoreAndReturnError() (*LogStore, error) {
+// LocalStoreAndReturnError creates a log store representing the Mac’s local store.
+func LocalStoreAndReturnError() (result *LogStore, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("OSLogStore")), objc.RegisterName("localStoreAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -22,8 +22,8 @@ func LocalStoreAndReturnError() (*LogStore, error) {
 	return LogStoreFromID(_r), nil
 }
 
-// Create an OSLogStore for a subset of entries in the local store.
-func StoreWithScopeError(scope LogStoreScope) (*LogStore, error) {
+// StoreWithScopeError create an OSLogStore for a subset of entries in the local store.
+func StoreWithScopeError(scope LogStoreScope) (result *LogStore, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("OSLogStore")), objc.RegisterName("storeWithScope:error:"), scope, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -32,8 +32,8 @@ func StoreWithScopeError(scope LogStoreScope) (*LogStore, error) {
 	return LogStoreFromID(_r), nil
 }
 
-// Creates a log store based on a log archive.
-func StoreWithURLError(url string) (*LogStore, error) {
+// StoreWithURLError creates a log store based on a log archive.
+func StoreWithURLError(url string) (result *LogStore, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("OSLogStore")), objc.RegisterName("storeWithURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // TemporaryImage is an idiomatic wrapper over the Objective-C class MPSTemporaryImage.
+//
+// It embeds [Image], promoting that type's methods.
 type TemporaryImage struct {
-	objref.Handle
+	Image
 }
 
 // TemporaryImageFromID adopts an existing Objective-C object as a TemporaryImage
@@ -23,7 +24,8 @@ func TemporaryImageFromID(id objc.ID) *TemporaryImage {
 	if id == 0 {
 		return nil
 	}
-	x := &TemporaryImage{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TemporaryImage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func temporaryImageAdopt(id objc.ID) *TemporaryImage {
 	if id == 0 {
 		return nil
 	}
-	x := &TemporaryImage{Handle: objref.Wrap(id)}
+	x := &TemporaryImage{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *TemporaryImage) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TemporaryImage) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TemporaryImage) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewTemporaryImage creates a new TemporaryImage.
@@ -62,25 +50,25 @@ func NewTemporaryImage() *TemporaryImage {
 	return temporaryImageAdopt(_id)
 }
 
-// WithReadCount sets readCount and returns the receiver so calls can be chained.
+// WithReadCount sets the property and returns the receiver so calls can be chained.
 func (x *TemporaryImage) WithReadCount(readCount int) *TemporaryImage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *TemporaryImage) WithLabel(label string) *TemporaryImage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// ReadCount wraps the corresponding Objective-C method.
 func (x *TemporaryImage) ReadCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("readCount"))
 	return _r
 }
 
+// SetReadCount wraps the corresponding Objective-C method.
 func (x *TemporaryImage) SetReadCount(readCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 }
@@ -95,3 +83,5 @@ type TemporaryImageable interface {
 }
 
 var _ TemporaryImageable = (*TemporaryImage)(nil)
+
+var _ ImageProvider = (*TemporaryImage)(nil)

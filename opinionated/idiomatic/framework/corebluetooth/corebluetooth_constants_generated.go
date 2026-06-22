@@ -9,121 +9,101 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// A <code>NSString</code> containing the local name of a peripheral.
 // CBAdvertisementDataLocalNameKey returns the string constant CBAdvertisementDataLocalNameKey, for use as a dictionary key or argument.
 func CBAdvertisementDataLocalNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBAdvertisementDataLocalNameKey")))
 }
 
-// A <code>NSNumber</code> containing the transmit power of a peripheral.
 // CBAdvertisementDataTxPowerLevelKey returns the string constant CBAdvertisementDataTxPowerLevelKey, for use as a dictionary key or argument.
 func CBAdvertisementDataTxPowerLevelKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBAdvertisementDataTxPowerLevelKey")))
 }
 
-// A list of one or more <code>CBUUID</code> objects, representing <code>CBService</code> UUIDs.
 // CBAdvertisementDataServiceUUIDsKey returns the string constant CBAdvertisementDataServiceUUIDsKey, for use as a dictionary key or argument.
 func CBAdvertisementDataServiceUUIDsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBAdvertisementDataServiceUUIDsKey")))
 }
 
-// A dictionary containing service-specific advertisement data. Keys are <code>CBUUID</code> objects, representing <code>CBService</code> UUIDs. Values are <code>NSData</code> objects.
 // CBAdvertisementDataServiceDataKey returns the string constant CBAdvertisementDataServiceDataKey, for use as a dictionary key or argument.
 func CBAdvertisementDataServiceDataKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBAdvertisementDataServiceDataKey")))
 }
 
-// A <code>NSData</code> object containing the manufacturer data of a peripheral.
 // CBAdvertisementDataManufacturerDataKey returns the string constant CBAdvertisementDataManufacturerDataKey, for use as a dictionary key or argument.
 func CBAdvertisementDataManufacturerDataKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBAdvertisementDataManufacturerDataKey")))
 }
 
-// A list of one or more <code>CBUUID</code> objects, representing <code>CBService</code> UUIDs that were found in the "overflow" area of the advertising data. Due to the nature of the data stored in this area, UUIDs listed here are "best effort" and may not always be accurate.
 // CBAdvertisementDataOverflowServiceUUIDsKey returns the string constant CBAdvertisementDataOverflowServiceUUIDsKey, for use as a dictionary key or argument.
 func CBAdvertisementDataOverflowServiceUUIDsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBAdvertisementDataOverflowServiceUUIDsKey")))
 }
 
-// An NSNumber (Boolean) indicating whether or not the advertising event type was connectable. This can be used to determine whether or not a peripheral is connectable in that instant.
 // CBAdvertisementDataIsConnectable returns the string constant CBAdvertisementDataIsConnectable, for use as a dictionary key or argument.
 func CBAdvertisementDataIsConnectable() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBAdvertisementDataIsConnectable")))
 }
 
-// A list of one or more <code>CBUUID</code> objects, representing <code>CBService</code> UUIDs.
 // CBAdvertisementDataSolicitedServiceUUIDsKey returns the string constant CBAdvertisementDataSolicitedServiceUUIDsKey, for use as a dictionary key or argument.
 func CBAdvertisementDataSolicitedServiceUUIDsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBAdvertisementDataSolicitedServiceUUIDsKey")))
 }
 
-// An NSNumber (Boolean) indicating that the system should, if Bluetooth is powered off when <code>CBCentralManager</code> is instantiated, display a warning dialog to the user.
 // CBCentralManagerOptionShowPowerAlertKey returns the string constant CBCentralManagerOptionShowPowerAlertKey, for use as a dictionary key or argument.
 func CBCentralManagerOptionShowPowerAlertKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBCentralManagerOptionShowPowerAlertKey")))
 }
 
-// An NSString containing a unique identifier (UID) for the <code>CBCentralManager</code> that is being instantiated. This UID is used by the system to identify a specific <code>CBCentralManager</code> instance for restoration and, therefore, must remain the same for subsequent application executions in order for the manager to be restored.
 // CBCentralManagerOptionRestoreIdentifierKey returns the string constant CBCentralManagerOptionRestoreIdentifierKey, for use as a dictionary key or argument.
 func CBCentralManagerOptionRestoreIdentifierKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBCentralManagerOptionRestoreIdentifierKey")))
 }
 
-// An NSNumber (Boolean) indicating that the scan should run without duplicate filtering. By default, multiple discoveries of the same peripheral are coalesced into a single discovery event. Specifying this option will cause a discovery event to be generated every time the peripheral is seen, which may be many times per second. This can be useful in specific situations, such as making a connection based on a peripheral's RSSI, but may have an adverse affect on battery-life and application performance.
 // CBCentralManagerScanOptionAllowDuplicatesKey returns the string constant CBCentralManagerScanOptionAllowDuplicatesKey, for use as a dictionary key or argument.
 func CBCentralManagerScanOptionAllowDuplicatesKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBCentralManagerScanOptionAllowDuplicatesKey")))
 }
 
-// An NSArray of <code>CBUUID</code> objects respresenting service UUIDs. Causes the scan to also look for peripherals soliciting any of the services contained in the list.
 // CBCentralManagerScanOptionSolicitedServiceUUIDsKey returns the string constant CBCentralManagerScanOptionSolicitedServiceUUIDsKey, for use as a dictionary key or argument.
 func CBCentralManagerScanOptionSolicitedServiceUUIDsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBCentralManagerScanOptionSolicitedServiceUUIDsKey")))
 }
 
-// An NSNumber (Boolean) indicating that the system should display a connection alert for a given peripheral, if the application is suspended when a successful connection is made. This is useful for applications that have not specified the <code>bluetooth-central</code> background mode and cannot display their own alert. If more than one application has requested notification for a given peripheral, the one that was most recently in the foreground will receive the alert.
 // CBConnectPeripheralOptionNotifyOnConnectionKey returns the string constant CBConnectPeripheralOptionNotifyOnConnectionKey, for use as a dictionary key or argument.
 func CBConnectPeripheralOptionNotifyOnConnectionKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBConnectPeripheralOptionNotifyOnConnectionKey")))
 }
 
-// An NSNumber (Boolean) indicating that the system should display a disconnection alert for a given peripheral, if the application is suspended at the time of the disconnection. This is useful for applications that have not specified the <code>bluetooth-central</code> background mode and cannot display their own alert. If more than one application has requested notification for a given peripheral, the one that was most recently in the foreground will receive the alert.
 // CBConnectPeripheralOptionNotifyOnDisconnectionKey returns the string constant CBConnectPeripheralOptionNotifyOnDisconnectionKey, for use as a dictionary key or argument.
 func CBConnectPeripheralOptionNotifyOnDisconnectionKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBConnectPeripheralOptionNotifyOnDisconnectionKey")))
 }
 
-// An NSNumber (Boolean) indicating that the system should display an alert for all notifications received from a given peripheral, if the application is suspended at the time. This is useful for applications that have not specified the <code>bluetooth-central</code> background mode and cannot display their own alert. If more than one application has requested notification for a given peripheral, the one that was most recently in the foreground will receive the alert.
 // CBConnectPeripheralOptionNotifyOnNotificationKey returns the string constant CBConnectPeripheralOptionNotifyOnNotificationKey, for use as a dictionary key or argument.
 func CBConnectPeripheralOptionNotifyOnNotificationKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBConnectPeripheralOptionNotifyOnNotificationKey")))
 }
 
-// An NSNumber indicating the number of seconds for the system to wait before starting a connection.
 // CBConnectPeripheralOptionStartDelayKey returns the string constant CBConnectPeripheralOptionStartDelayKey, for use as a dictionary key or argument.
 func CBConnectPeripheralOptionStartDelayKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBConnectPeripheralOptionStartDelayKey")))
 }
 
-// An NSArray of <code>CBPeripheral</code> objects containing all peripherals that were connected or pending connection at the time the application was terminated by the system. When possible, all known information for each peripheral will be restored, including any discovered services, characteristics and descriptors, as well as characteristic notification states.
 // CBCentralManagerRestoredStatePeripheralsKey returns the string constant CBCentralManagerRestoredStatePeripheralsKey, for use as a dictionary key or argument.
 func CBCentralManagerRestoredStatePeripheralsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBCentralManagerRestoredStatePeripheralsKey")))
 }
 
-// An NSArray of <code>CBUUID</code> objects containing the service(s) being scanned for at the time the application was terminated by the system.
 // CBCentralManagerRestoredStateScanServicesKey returns the string constant CBCentralManagerRestoredStateScanServicesKey, for use as a dictionary key or argument.
 func CBCentralManagerRestoredStateScanServicesKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBCentralManagerRestoredStateScanServicesKey")))
 }
 
-// An NSDictionary containing the scan options at the time the application was terminated by the system.
 // CBCentralManagerRestoredStateScanOptionsKey returns the string constant CBCentralManagerRestoredStateScanOptionsKey, for use as a dictionary key or argument.
 func CBCentralManagerRestoredStateScanOptionsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBCentralManagerRestoredStateScanOptionsKey")))
 }
 
-// An NSNumber (Boolean) indicating that the AutoReconnect is enabled for the peripheral is connected. After peripheral device is connected, this will allow the system to initiate connect to the peer device automatically when link is dropped. Caller will get notified about the disconnection with potential delay via {
 // CBConnectPeripheralOptionEnableAutoReconnect returns the string constant CBConnectPeripheralOptionEnableAutoReconnect, for use as a dictionary key or argument.
 func CBConnectPeripheralOptionEnableAutoReconnect() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBConnectPeripheralOptionEnableAutoReconnect")))
@@ -132,79 +112,66 @@ func CBConnectPeripheralOptionEnableAutoReconnect() obj.Object {
 // CBErrorDomain returns the string constant CBErrorDomain, for use as a dictionary key or argument.
 func CBErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CBErrorDomain"))) }
 
-// An NSNumber (Boolean) indicating that the system should, if Bluetooth is powered off when <code>CBPeripheralManager</code> is instantiated, display a warning dialog to the user.
 // CBPeripheralManagerOptionShowPowerAlertKey returns the string constant CBPeripheralManagerOptionShowPowerAlertKey, for use as a dictionary key or argument.
 func CBPeripheralManagerOptionShowPowerAlertKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBPeripheralManagerOptionShowPowerAlertKey")))
 }
 
-// An NSString containing a unique identifier (UID) for the <code>CBPeripheralManager</code> that is being instantiated. This UID is used by the system to identify a specific <code>CBPeripheralManager</code> instance for restoration and, therefore, must remain the same for subsequent application executions in order for the manager to be restored.
 // CBPeripheralManagerOptionRestoreIdentifierKey returns the string constant CBPeripheralManagerOptionRestoreIdentifierKey, for use as a dictionary key or argument.
 func CBPeripheralManagerOptionRestoreIdentifierKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBPeripheralManagerOptionRestoreIdentifierKey")))
 }
 
-// An NSArray of <code>CBMutableService</code> objects containing all services that were published to the local database at the time the application was terminated by the system. All information for each service will be restored, including all discovered services, characteristics and descriptors, as well as characteristic notification states.
 // CBPeripheralManagerRestoredStateServicesKey returns the string constant CBPeripheralManagerRestoredStateServicesKey, for use as a dictionary key or argument.
 func CBPeripheralManagerRestoredStateServicesKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBPeripheralManagerRestoredStateServicesKey")))
 }
 
-// An NSDictionary containing the data being advertised at the time the application was terminated by the system.
 // CBPeripheralManagerRestoredStateAdvertisementDataKey returns the string constant CBPeripheralManagerRestoredStateAdvertisementDataKey, for use as a dictionary key or argument.
 func CBPeripheralManagerRestoredStateAdvertisementDataKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBPeripheralManagerRestoredStateAdvertisementDataKey")))
 }
 
-// The string representation of the UUID for the extended properties descriptor. The corresponding value for this descriptor is an <code>NSNumber</code> object.
 // CBUUIDCharacteristicExtendedPropertiesString returns the string constant CBUUIDCharacteristicExtendedPropertiesString, for use as a dictionary key or argument.
 func CBUUIDCharacteristicExtendedPropertiesString() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBUUIDCharacteristicExtendedPropertiesString")))
 }
 
-// The string representation of the UUID for the user description descriptor. The corresponding value for this descriptor is an <code>NSString</code> object.
 // CBUUIDCharacteristicUserDescriptionString returns the string constant CBUUIDCharacteristicUserDescriptionString, for use as a dictionary key or argument.
 func CBUUIDCharacteristicUserDescriptionString() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBUUIDCharacteristicUserDescriptionString")))
 }
 
-// The string representation of the UUID for the client configuration descriptor. The corresponding value for this descriptor is an <code>NSNumber</code> object.
 // CBUUIDClientCharacteristicConfigurationString returns the string constant CBUUIDClientCharacteristicConfigurationString, for use as a dictionary key or argument.
 func CBUUIDClientCharacteristicConfigurationString() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBUUIDClientCharacteristicConfigurationString")))
 }
 
-// The string representation of the UUID for the server configuration descriptor. The corresponding value for this descriptor is an <code>NSNumber</code> object.
 // CBUUIDServerCharacteristicConfigurationString returns the string constant CBUUIDServerCharacteristicConfigurationString, for use as a dictionary key or argument.
 func CBUUIDServerCharacteristicConfigurationString() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBUUIDServerCharacteristicConfigurationString")))
 }
 
-// The string representation of the UUID for the presentation format descriptor. The corresponding value for this descriptor is an <code>NSData</code> object.
 // CBUUIDCharacteristicFormatString returns the string constant CBUUIDCharacteristicFormatString, for use as a dictionary key or argument.
 func CBUUIDCharacteristicFormatString() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBUUIDCharacteristicFormatString")))
 }
 
-// The string representation of the UUID for the aggregate descriptor.
 // CBUUIDCharacteristicAggregateFormatString returns the string constant CBUUIDCharacteristicAggregateFormatString, for use as a dictionary key or argument.
 func CBUUIDCharacteristicAggregateFormatString() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBUUIDCharacteristicAggregateFormatString")))
 }
 
-// Data representing the valid min/max values accepted for a characteristic.
 // CBUUIDCharacteristicValidRangeString returns the string constant CBUUIDCharacteristicValidRangeString, for use as a dictionary key or argument.
 func CBUUIDCharacteristicValidRangeString() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBUUIDCharacteristicValidRangeString")))
 }
 
-// Data representing the observation schedule for a characteristic.
 // CBUUIDCharacteristicObservationScheduleString returns the string constant CBUUIDCharacteristicObservationScheduleString, for use as a dictionary key or argument.
 func CBUUIDCharacteristicObservationScheduleString() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBUUIDCharacteristicObservationScheduleString")))
 }
 
-// The PSM (a little endian uint16_t) of an L2CAP Channel associated with the GATT service containing this characteristic.  Servers can publish this characteristic with the UUID ABDD3056-28FA-441D-A470-55A75A52553A
 // CBUUIDL2CAPPSMCharacteristicString returns the string constant CBUUIDL2CAPPSMCharacteristicString, for use as a dictionary key or argument.
 func CBUUIDL2CAPPSMCharacteristicString() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CBUUIDL2CAPPSMCharacteristicString")))

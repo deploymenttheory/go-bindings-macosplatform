@@ -23,7 +23,8 @@ func MTRThermostatClusterPresetTypeStructFromID(id objc.ID) *MTRThermostatCluste
 	if id == 0 {
 		return nil
 	}
-	x := &MTRThermostatClusterPresetTypeStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRThermostatClusterPresetTypeStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRThermostatClusterPresetTypeStructAdopt(id objc.ID) *MTRThermostatCluster
 	if id == 0 {
 		return nil
 	}
-	x := &MTRThermostatClusterPresetTypeStruct{Handle: objref.Wrap(id)}
+	x := &MTRThermostatClusterPresetTypeStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,53 +58,65 @@ func (x *MTRThermostatClusterPresetTypeStruct) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRThermostatClusterPresetTypeStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRThermostatClusterPresetTypeStruct creates a new MTRThermostatClusterPresetTypeStruct.
 func NewMTRThermostatClusterPresetTypeStruct() *MTRThermostatClusterPresetTypeStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRThermostatClusterPresetTypeStruct")), objc.RegisterName("new"))
 	return mTRThermostatClusterPresetTypeStructAdopt(_id)
 }
 
-// WithPresetScenario sets presetScenario and returns the receiver so calls can be chained.
+// WithPresetScenario sets the property and returns the receiver so calls can be chained.
 func (x *MTRThermostatClusterPresetTypeStruct) WithPresetScenario(presetScenario obj.Object) *MTRThermostatClusterPresetTypeStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresetScenario:"), objref.IDOf(presetScenario))
 	return x
 }
 
-// WithNumberOfPresets sets numberOfPresets and returns the receiver so calls can be chained.
+// WithNumberOfPresets sets the property and returns the receiver so calls can be chained.
 func (x *MTRThermostatClusterPresetTypeStruct) WithNumberOfPresets(numberOfPresets obj.Object) *MTRThermostatClusterPresetTypeStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfPresets:"), objref.IDOf(numberOfPresets))
 	return x
 }
 
-// WithPresetTypeFeatures sets presetTypeFeatures and returns the receiver so calls can be chained.
+// WithPresetTypeFeatures sets the property and returns the receiver so calls can be chained.
 func (x *MTRThermostatClusterPresetTypeStruct) WithPresetTypeFeatures(presetTypeFeatures obj.Object) *MTRThermostatClusterPresetTypeStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresetTypeFeatures:"), objref.IDOf(presetTypeFeatures))
 	return x
 }
 
+// PresetScenario wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterPresetTypeStruct) PresetScenario() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presetScenario"))
 	return obj.Wrap(_r)
 }
 
+// SetPresetScenario wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterPresetTypeStruct) SetPresetScenario(presetScenario obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresetScenario:"), objref.IDOf(presetScenario))
 }
 
+// NumberOfPresets wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterPresetTypeStruct) NumberOfPresets() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberOfPresets"))
 	return obj.Wrap(_r)
 }
 
+// SetNumberOfPresets wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterPresetTypeStruct) SetNumberOfPresets(numberOfPresets obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfPresets:"), objref.IDOf(numberOfPresets))
 }
 
+// PresetTypeFeatures wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterPresetTypeStruct) PresetTypeFeatures() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presetTypeFeatures"))
 	return obj.Wrap(_r)
 }
 
+// SetPresetTypeFeatures wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterPresetTypeStruct) SetPresetTypeFeatures(presetTypeFeatures obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresetTypeFeatures:"), objref.IDOf(presetTypeFeatures))
 }

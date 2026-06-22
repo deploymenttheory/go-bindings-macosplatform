@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of a change that occurred in the photo library.
-//
 // Change is an idiomatic wrapper over the Objective-C class PHChange.
+//
+// A description of a change that occurred in the photo library.
 type Change struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ChangeFromID(id objc.ID) *Change {
 	if id == 0 {
 		return nil
 	}
-	x := &Change{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Change{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func changeAdopt(id objc.ID) *Change {
 	if id == 0 {
 		return nil
 	}
-	x := &Change{Handle: objref.Wrap(id)}
+	x := &Change{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *Change) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Change) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewChange creates a new Change.
 func NewChange() *Change {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHChange")), objc.RegisterName("new"))
 	return changeAdopt(_id)
 }
 
-// Returns detailed change information for the specified asset or collection.
+// ChangeDetailsForObject returns detailed change information for the specified asset or collection.
 func (x *Change) ChangeDetailsForObject(object *Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeDetailsForObject:"), objref.IDOf(object))
 	return obj.Wrap(_r)
 }
 
-// Returns detailed change information for a fetch result.
+// ChangeDetailsForFetchResult returns detailed change information for a fetch result.
 func (x *Change) ChangeDetailsForFetchResult(object obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeDetailsForFetchResult:"), objref.IDOf(object))
 	return obj.Wrap(_r)

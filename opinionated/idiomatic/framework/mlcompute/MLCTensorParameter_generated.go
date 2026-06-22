@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A tensor parameter object.
-//
 // TensorParameter is an idiomatic wrapper over the Objective-C class MLCTensorParameter.
+//
+// A tensor parameter object.
 type TensorParameter struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TensorParameterFromID(id objc.ID) *TensorParameter {
 	if id == 0 {
 		return nil
 	}
-	x := &TensorParameter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TensorParameter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func tensorParameterAdopt(id objc.ID) *TensorParameter {
 	if id == 0 {
 		return nil
 	}
-	x := &TensorParameter{Handle: objref.Wrap(id)}
+	x := &TensorParameter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,32 +60,37 @@ func (x *TensorParameter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TensorParameter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTensorParameter creates a new TensorParameter.
 func NewTensorParameter() *TensorParameter {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLCTensorParameter")), objc.RegisterName("new"))
 	return tensorParameterAdopt(_id)
 }
 
-// A Boolean that indicates whether this tensor parameter is updatable.
-//
-// WithIsUpdatable sets isUpdatable and returns the receiver so calls can be chained.
+// WithIsUpdatable a Boolean that indicates whether this tensor parameter is updatable.
 func (x *TensorParameter) WithIsUpdatable(isUpdatable bool) *TensorParameter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsUpdatable:"), isUpdatable)
 	return x
 }
 
-// The underlying tensor
+// Tensor the underlying tensor
 func (x *TensorParameter) Tensor() *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tensor"))
 	return TensorFromID(_r)
 }
 
-// Specifies whether this tensor parameter is updatable
+// IsUpdatable specifies whether this tensor parameter is updatable
 func (x *TensorParameter) IsUpdatable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUpdatable"))
 	return _r
 }
 
+// SetIsUpdatable wraps the corresponding Objective-C method.
 func (x *TensorParameter) SetIsUpdatable(isUpdatable bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsUpdatable:"), isUpdatable)
 }

@@ -23,7 +23,8 @@ func CalCalendarFromID(id objc.ID) *CalCalendar {
 	if id == 0 {
 		return nil
 	}
-	x := &CalCalendar{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CalCalendar{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func calCalendarAdopt(id objc.ID) *CalCalendar {
 	if id == 0 {
 		return nil
 	}
-	x := &CalCalendar{Handle: objref.Wrap(id)}
+	x := &CalCalendar{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,39 +58,48 @@ func (x *CalCalendar) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CalCalendar) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCalCalendar creates a new CalCalendar.
 func NewCalCalendar() *CalCalendar {
 	_id := objc.Send[objc.ID](objc.ID(_class("CalCalendar")), objc.RegisterName("new"))
 	return calCalendarAdopt(_id)
 }
 
-// WithColor sets color and returns the receiver so calls can be chained.
+// WithColor sets the property and returns the receiver so calls can be chained.
 func (x *CalCalendar) WithColor(color obj.Object) *CalCalendar {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 	return x
 }
 
-// WithNotes sets notes and returns the receiver so calls can be chained.
+// WithNotes sets the property and returns the receiver so calls can be chained.
 func (x *CalCalendar) WithNotes(notes string) *CalCalendar {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotes:"), purego.NSString(notes))
 	return x
 }
 
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle sets the property and returns the receiver so calls can be chained.
 func (x *CalCalendar) WithTitle(title string) *CalCalendar {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
+// Color wraps the corresponding Objective-C method.
 func (x *CalCalendar) Color() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }
 
+// SetColor wraps the corresponding Objective-C method.
 func (x *CalCalendar) SetColor(color obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 }
 
+// Notes wraps the corresponding Objective-C method.
 func (x *CalCalendar) Notes() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notes"))
 	if _r == 0 {
@@ -97,10 +108,12 @@ func (x *CalCalendar) Notes() string {
 	return purego.GoString(_r)
 }
 
+// SetNotes wraps the corresponding Objective-C method.
 func (x *CalCalendar) SetNotes(notes string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotes:"), purego.NSString(notes))
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *CalCalendar) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -109,10 +122,12 @@ func (x *CalCalendar) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *CalCalendar) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *CalCalendar) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
 	if _r == 0 {
@@ -121,6 +136,7 @@ func (x *CalCalendar) Type() string {
 	return purego.GoString(_r)
 }
 
+// Uid wraps the corresponding Objective-C method.
 func (x *CalCalendar) Uid() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uid"))
 	if _r == 0 {
@@ -129,6 +145,7 @@ func (x *CalCalendar) Uid() string {
 	return purego.GoString(_r)
 }
 
+// IsEditable wraps the corresponding Objective-C method.
 func (x *CalCalendar) IsEditable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEditable"))
 	return _r

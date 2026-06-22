@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a specific option for the presentation of media within a group of options.
-//
 // MediaSelectionOption is an idiomatic wrapper over the Objective-C class AVMediaSelectionOption.
+//
+// An object that represents a specific option for the presentation of media within a group of options.
 type MediaSelectionOption struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MediaSelectionOptionFromID(id objc.ID) *MediaSelectionOption {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaSelectionOption{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MediaSelectionOption{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mediaSelectionOptionAdopt(id objc.ID) *MediaSelectionOption {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaSelectionOption{Handle: objref.Wrap(id)}
+	x := &MediaSelectionOption{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,43 @@ func (x *MediaSelectionOption) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MediaSelectionOption) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMediaSelectionOption creates a new MediaSelectionOption.
 func NewMediaSelectionOption() *MediaSelectionOption {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVMediaSelectionOption")), objc.RegisterName("new"))
 	return mediaSelectionOptionAdopt(_id)
 }
 
-// Returns a Boolean value that indicates whether the receiver has media with the given media characteristic.
+// HasMediaCharacteristic returns a Boolean value that indicates whether the receiver has media with the given media characteristic.
 func (x *MediaSelectionOption) HasMediaCharacteristic(mediaCharacteristic obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasMediaCharacteristic:"), objref.IDOf(mediaCharacteristic))
 	return _r
 }
 
-// Returns an array of metadata items—one for each metadata item in the container of a given format.
+// MetadataForFormat returns an array of metadata items—one for each metadata item in the container of a given format.
 func (x *MediaSelectionOption) MetadataForFormat(format string) []*MetadataItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadataForFormat:"), purego.NSString(format))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
-// Returns a media selection option associated with the receiver in a given group.
+// AssociatedMediaSelectionOptionInMediaSelectionGroup returns a media selection option associated with the receiver in a given group.
 func (x *MediaSelectionOption) AssociatedMediaSelectionOptionInMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) *MediaSelectionOption {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("associatedMediaSelectionOptionInMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
 	return MediaSelectionOptionFromID(_r)
 }
 
-// Returns a serializable property list that’s sufficient to identify the option within its group.
+// PropertyList returns a serializable property list that’s sufficient to identify the option within its group.
 func (x *MediaSelectionOption) PropertyList() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyList"))
 	return obj.Wrap(_r)
 }
 
-// Returns a string suitable for display using the specified locale.
+// DisplayNameWithLocale returns a string suitable for display using the specified locale.
 func (x *MediaSelectionOption) DisplayNameWithLocale(locale obj.Object) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayNameWithLocale:"), objref.IDOf(locale))
 	if _r == 0 {
@@ -97,13 +105,13 @@ func (x *MediaSelectionOption) DisplayNameWithLocale(locale obj.Object) string {
 	return purego.GoString(_r)
 }
 
-// The media type of the media data, e.g. AVMediaTypeAudio, AVMediaTypeSubtitle, etc.
+// MediaType the media type of the media data, e.g. AVMediaTypeAudio, AVMediaTypeSubtitle, etc.
 func (x *MediaSelectionOption) MediaType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaType"))
 	return obj.Wrap(_r)
 }
 
-// The mediaSubTypes of the media data associated with the option. An NSArray of NSNumbers carrying four character codes (of type FourCharCode) as defined in CoreAudioTypes.h for audio media and in CMFormatDescription.h for video media. Also see CMFormatDescriptionGetMediaSubType in CMFormatDescription.h for more information about media subtypes. Note that if no information is available about the encoding of the media presented when a media option is selected, the value of mediaSubTypes will be an empty array. This can occur, for example, with streaming media. In these cases the value of mediaSubTypes should simply not be used as a criteria for selection.
+// MediaSubTypes the mediaSubTypes of the media data associated with the option. An NSArray of NSNumbers carrying four character codes (of type FourCharCode) as defined in CoreAudioTypes.h for audio media and in CMFormatDescription.h for video media. Also see CMFormatDescriptionGetMediaSubType in CMFormatDescription.h for more information about media subtypes. Note that if no information is available about the encoding of the media presented when a media option is selected, the value of mediaSubTypes will be an empty array. This can occur, for example, with streaming media. In these cases the value of mediaSubTypes should simply not be used as a criteria for selection.
 //
 // MediaSubTypes returns the collection as a Go slice.
 func (x *MediaSelectionOption) MediaSubTypes() []obj.Object {
@@ -111,13 +119,13 @@ func (x *MediaSelectionOption) MediaSubTypes() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Indicates whether a media selection option is playable. If the media data associated with the option cannot be decoded or otherwise rendered, playable is NO.
+// IsPlayable indicates whether a media selection option is playable. If the media data associated with the option cannot be decoded or otherwise rendered, playable is NO.
 func (x *MediaSelectionOption) IsPlayable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPlayable"))
 	return _r
 }
 
-// Indicates the RFC 4646 language tag associated with the option. May be nil.
+// ExtendedLanguageTag indicates the RFC 4646 language tag associated with the option. May be nil.
 func (x *MediaSelectionOption) ExtendedLanguageTag() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendedLanguageTag"))
 	if _r == 0 {
@@ -126,13 +134,13 @@ func (x *MediaSelectionOption) ExtendedLanguageTag() string {
 	return purego.GoString(_r)
 }
 
-// Indicates the locale for which the media option was authored. Use -[NSLocale objectForKey:NSLocaleLanguageCode] to obtain the language code of the locale. See NSLocale.h for additional information.
+// Locale indicates the locale for which the media option was authored. Use -[NSLocale objectForKey:NSLocaleLanguageCode] to obtain the language code of the locale. See NSLocale.h for additional information.
 func (x *MediaSelectionOption) Locale() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locale"))
 	return obj.Wrap(_r)
 }
 
-// Provides an array of AVMetadataItems for each common metadata key for which a value is available. The array of AVMetadataItems can be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:], according to locale via +[AVMetadataItem metadataItemsFromArray:withLocale:], or according to key via +[AVMetadataItem metadataItemsFromArray:withKey:keySpace:]. Example: to obtain the name (or title) of a media selection option in any of the user's preferred languages. ```objc NSString *title = nil; NSArray *titles = [AVMetadataItem metadataItemsFromArray:[mediaSelectionOption commonMetadata] withKey:AVMetadataCommonKeyTitle keySpace:AVMetadataKeySpaceCommon]; if ([titles count] > 0) { // Try to get a title that matches one of the user's preferred languages. NSArray *titlesForPreferredLanguages = [AVMetadataItem metadataItemsFromArray:titles filteredAndSortedAccordingToPreferredLanguages:[NSLocale preferredLanguages]]; if ([titlesForPreferredLanguages count] > 0) { title = [[titlesForPreferredLanguages objectAtIndex:0] stringValue]; } // No matches in any of the preferred languages. Just use the primary title metadata we find. if (title == nil) { title = [[titles objectAtIndex:0] stringValue]; } } ```
+// CommonMetadata provides an array of AVMetadataItems for each common metadata key for which a value is available. The array of AVMetadataItems can be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:], according to locale via +[AVMetadataItem metadataItemsFromArray:withLocale:], or according to key via +[AVMetadataItem metadataItemsFromArray:withKey:keySpace:]. Example: to obtain the name (or title) of a media selection option in any of the user's preferred languages. ```objc NSString *title = nil; NSArray *titles = [AVMetadataItem metadataItemsFromArray:[mediaSelectionOption commonMetadata] withKey:AVMetadataCommonKeyTitle keySpace:AVMetadataKeySpaceCommon]; if ([titles count] > 0) { // Try to get a title that matches one of the user's preferred languages. NSArray *titlesForPreferredLanguages = [AVMetadataItem metadataItemsFromArray:titles filteredAndSortedAccordingToPreferredLanguages:[NSLocale preferredLanguages]]; if ([titlesForPreferredLanguages count] > 0) { title = [[titlesForPreferredLanguages objectAtIndex:0] stringValue]; } // No matches in any of the preferred languages. Just use the primary title metadata we find. if (title == nil) { title = [[titles objectAtIndex:0] stringValue]; } } ```
 //
 // CommonMetadata returns the collection as a Go slice.
 func (x *MediaSelectionOption) CommonMetadata() []*MetadataItem {
@@ -140,7 +148,7 @@ func (x *MediaSelectionOption) CommonMetadata() []*MetadataItem {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
-// Provides an NSArray of NSStrings, each representing a metadata format that contains metadata associated with the option (e.g. ID3, iTunes metadata, etc.). Metadata formats are defined in AVMetadataFormat.h.
+// AvailableMetadataFormats provides an NSArray of NSStrings, each representing a metadata format that contains metadata associated with the option (e.g. ID3, iTunes metadata, etc.). Metadata formats are defined in AVMetadataFormat.h.
 //
 // AvailableMetadataFormats returns the collection as a Go slice.
 func (x *MediaSelectionOption) AvailableMetadataFormats() []string {
@@ -148,7 +156,7 @@ func (x *MediaSelectionOption) AvailableMetadataFormats() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Provides an NSString suitable for display using the current system locale. May use this option's common metadata, media characteristics and locale properties in addition to the current system locale to formulate an NSString intended for display. In the event that common metadata is not available in the specified locale, displayName will fall back to considering locales with the multilingual ("mul") then undetermined ("und") locale identifiers. For a display name strictly with the specified locale use displayNameWithLocale: instead.
+// DisplayName provides an NSString suitable for display using the current system locale. May use this option's common metadata, media characteristics and locale properties in addition to the current system locale to formulate an NSString intended for display. In the event that common metadata is not available in the specified locale, displayName will fall back to considering locales with the multilingual ("mul") then undetermined ("und") locale identifiers. For a display name strictly with the specified locale use displayNameWithLocale: instead.
 func (x *MediaSelectionOption) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
 	if _r == 0 {

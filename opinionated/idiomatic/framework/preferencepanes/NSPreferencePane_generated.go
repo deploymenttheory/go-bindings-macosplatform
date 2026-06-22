@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The interface for providing preference panes to System Preferences or other apps.
-//
 // PreferencePane is an idiomatic wrapper over the Objective-C class NSPreferencePane.
+//
+// The interface for providing preference panes to System Preferences or other apps.
 type PreferencePane struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PreferencePaneFromID(id objc.ID) *PreferencePane {
 	if id == 0 {
 		return nil
 	}
-	x := &PreferencePane{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PreferencePane{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func preferencePaneAdopt(id objc.ID) *PreferencePane {
 	if id == 0 {
 		return nil
 	}
-	x := &PreferencePane{Handle: objref.Wrap(id)}
+	x := &PreferencePane{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,104 +60,102 @@ func (x *PreferencePane) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PreferencePane) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPreferencePane creates a new PreferencePane.
 func NewPreferencePane() *PreferencePane {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSPreferencePane")), objc.RegisterName("new"))
 	return preferencePaneAdopt(_id)
 }
 
-// Initializes a preference pane with the specified bundle.
-//
-// NewPreferencePaneWithBundle creates a new PreferencePane.
+// NewPreferencePaneWithBundle initializes a preference pane with the specified bundle.
 func NewPreferencePaneWithBundle(bundle obj.Object) *PreferencePane {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPreferencePane")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBundle:"), objref.IDOf(bundle))
 	return preferencePaneAdopt(_id)
 }
 
-// The main view of the preference pane.
-//
-// WithMainView sets mainView and returns the receiver so calls can be chained.
+// WithMainView the main view of the preference pane.
 func (x *PreferencePane) WithMainView(mainView obj.Object) *PreferencePane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMainView:"), objref.IDOf(mainView))
 	return x
 }
 
-// The view that should have keyboard focus when the pane is selected.
-//
-// WithInitialKeyView sets initialKeyView and returns the receiver so calls can be chained.
+// WithInitialKeyView the view that should have keyboard focus when the pane is selected.
 func (x *PreferencePane) WithInitialKeyView(initialKeyView obj.Object) *PreferencePane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialKeyView:"), objref.IDOf(initialKeyView))
 	return x
 }
 
-// The first view in the keyboard focus chain.
-//
-// WithFirstKeyView sets firstKeyView and returns the receiver so calls can be chained.
+// WithFirstKeyView the first view in the keyboard focus chain.
 func (x *PreferencePane) WithFirstKeyView(firstKeyView obj.Object) *PreferencePane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirstKeyView:"), objref.IDOf(firstKeyView))
 	return x
 }
 
-// The last view in the keyboard focus chain.
-//
-// WithLastKeyView sets lastKeyView and returns the receiver so calls can be chained.
+// WithLastKeyView the last view in the keyboard focus chain.
 func (x *PreferencePane) WithLastKeyView(lastKeyView obj.Object) *PreferencePane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLastKeyView:"), objref.IDOf(lastKeyView))
 	return x
 }
 
-// Loads the preference pane’s user interface into its main view.
+// LoadMainView loads the preference pane’s user interface into its main view.
 func (x *PreferencePane) LoadMainView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadMainView"))
 	return obj.Wrap(_r)
 }
 
-// Notifies the preference pane that the main view is set up and prepared to be displayed.
+// MainViewDidLoad notifies the preference pane that the main view is set up and prepared to be displayed.
 func (x *PreferencePane) MainViewDidLoad() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainViewDidLoad"))
 }
 
-// Locates and assigns the preference pane’s main view from the nib file loaded by loadMainView.
+// AssignMainView locates and assigns the preference pane’s main view from the nib file loaded by loadMainView.
 func (x *PreferencePane) AssignMainView() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assignMainView"))
 }
 
-// Notifies the preference pane that the main app is about to display the preference pane’s main view.
+// WillSelect notifies the preference pane that the main app is about to display the preference pane’s main view.
 func (x *PreferencePane) WillSelect() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willSelect"))
 }
 
-// Notifies the preference pane that the main app has just displayed the preference pane’s main view.
+// DidSelect notifies the preference pane that the main app has just displayed the preference pane’s main view.
 func (x *PreferencePane) DidSelect() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didSelect"))
 }
 
-// Notifies the main application of the preference pane’s ability to be deselected.
+// ReplyToShouldUnselect notifies the main application of the preference pane’s ability to be deselected.
 func (x *PreferencePane) ReplyToShouldUnselect(shouldUnselect bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replyToShouldUnselect:"), shouldUnselect)
 }
 
-// Notifies the preference pane that the main app is about to stop displaying the preference pane’s main view.
+// WillUnselect notifies the preference pane that the main app is about to stop displaying the preference pane’s main view.
 func (x *PreferencePane) WillUnselect() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willUnselect"))
 }
 
-// Notifies the preference pane that the main app has just stopped displaying the preference pane’s main view.
+// DidUnselect notifies the preference pane that the main app has just stopped displaying the preference pane’s main view.
 func (x *PreferencePane) DidUnselect() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didUnselect"))
 }
 
-// Updates the help menu.
+// UpdateHelpMenuWithArray updates the help menu.
 func (x *PreferencePane) UpdateHelpMenuWithArray(inArrayOfMenuItems []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateHelpMenuWithArray:"), purego.SliceToNSArray(inArrayOfMenuItems, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// Bundle wraps the corresponding Objective-C method.
 func (x *PreferencePane) Bundle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundle"))
 	return obj.Wrap(_r)
 }
 
+// MainNibName wraps the corresponding Objective-C method.
 func (x *PreferencePane) MainNibName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainNibName"))
 	if _r == 0 {
@@ -164,47 +164,57 @@ func (x *PreferencePane) MainNibName() string {
 	return purego.GoString(_r)
 }
 
+// ShouldUnselect wraps the corresponding Objective-C method.
 func (x *PreferencePane) ShouldUnselect() PreferencePaneUnselectReply {
 	_r := objc.Send[PreferencePaneUnselectReply](objref.IDOf(x), objc.RegisterName("shouldUnselect"))
 	return _r
 }
 
+// MainView wraps the corresponding Objective-C method.
 func (x *PreferencePane) MainView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainView"))
 	return obj.Wrap(_r)
 }
 
+// SetMainView wraps the corresponding Objective-C method.
 func (x *PreferencePane) SetMainView(mainView obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMainView:"), objref.IDOf(mainView))
 }
 
+// SetInitialKeyView wraps the corresponding Objective-C method.
 func (x *PreferencePane) SetInitialKeyView(initialKeyView obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialKeyView:"), objref.IDOf(initialKeyView))
 }
 
+// FirstKeyView wraps the corresponding Objective-C method.
 func (x *PreferencePane) FirstKeyView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstKeyView"))
 	return obj.Wrap(_r)
 }
 
+// SetFirstKeyView wraps the corresponding Objective-C method.
 func (x *PreferencePane) SetFirstKeyView(firstKeyView obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirstKeyView:"), objref.IDOf(firstKeyView))
 }
 
+// LastKeyView wraps the corresponding Objective-C method.
 func (x *PreferencePane) LastKeyView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastKeyView"))
 	return obj.Wrap(_r)
 }
 
+// SetLastKeyView wraps the corresponding Objective-C method.
 func (x *PreferencePane) SetLastKeyView(lastKeyView obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLastKeyView:"), objref.IDOf(lastKeyView))
 }
 
+// AutoSaveTextFields wraps the corresponding Objective-C method.
 func (x *PreferencePane) AutoSaveTextFields() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autoSaveTextFields"))
 	return _r
 }
 
+// IsSelected wraps the corresponding Objective-C method.
 func (x *PreferencePane) IsSelected() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSelected"))
 	return _r

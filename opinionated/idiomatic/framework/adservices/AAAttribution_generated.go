@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The parent class that the framework uses to request a token.
-//
 // Attribution is an idiomatic wrapper over the Objective-C class AAAttribution.
+//
+// The parent class that the framework uses to request a token.
 type Attribution struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AttributionFromID(id objc.ID) *Attribution {
 	if id == 0 {
 		return nil
 	}
-	x := &Attribution{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Attribution{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func attributionAdopt(id objc.ID) *Attribution {
 	if id == 0 {
 		return nil
 	}
-	x := &Attribution{Handle: objref.Wrap(id)}
+	x := &Attribution{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *Attribution) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *Attribution) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Attribution) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewAttribution creates a new Attribution.

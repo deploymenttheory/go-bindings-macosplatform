@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A server that your app uses to provide a spell checker service to other apps running in the system.
-//
 // SpellServer is an idiomatic wrapper over the Objective-C class NSSpellServer.
+//
+// A server that your app uses to provide a spell checker service to other apps running in the system.
 type SpellServer struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SpellServerFromID(id objc.ID) *SpellServer {
 	if id == 0 {
 		return nil
 	}
-	x := &SpellServer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SpellServer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func spellServerAdopt(id objc.ID) *SpellServer {
 	if id == 0 {
 		return nil
 	}
-	x := &SpellServer{Handle: objref.Wrap(id)}
+	x := &SpellServer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,37 @@ func (x *SpellServer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpellServer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSpellServer creates a new SpellServer.
 func NewSpellServer() *SpellServer {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSSpellServer")), objc.RegisterName("new"))
 	return spellServerAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *SpellServer) WithScriptingProperties(scriptingProperties obj.Object) *SpellServer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Notifies the receiver of a language your spelling checker can check.
+// RegisterLanguageByVendor notifies the receiver of a language your spelling checker can check.
 func (x *SpellServer) RegisterLanguageByVendor(language string, vendor string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("registerLanguage:byVendor:"), purego.NSString(language), purego.NSString(vendor))
 	return _r
 }
 
-// Indicates whether a given word is in the user’s list of learned words or the document’s list of words to ignore.
+// IsWordInUserDictionariesCaseSensitive indicates whether a given word is in the user’s list of learned words or the document’s list of words to ignore.
 func (x *SpellServer) IsWordInUserDictionariesCaseSensitive(word string, flag bool) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isWordInUserDictionaries:caseSensitive:"), purego.NSString(word), flag)
 	return _r
 }
 
-// Causes the receiver to start listening for spell-checking requests.
+// Run causes the receiver to start listening for spell-checking requests.
 func (x *SpellServer) Run() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("run"))
 }

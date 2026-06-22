@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specification of what traffic to route through a transparent proxy.
-//
 // NETransparentProxyNetworkSettings is an idiomatic wrapper over the Objective-C class NETransparentProxyNetworkSettings.
+//
+// It embeds [NETunnelNetworkSettings], promoting that type's methods.
+//
+// A specification of what traffic to route through a transparent proxy.
 type NETransparentProxyNetworkSettings struct {
-	objref.Handle
+	NETunnelNetworkSettings
 }
 
 // NETransparentProxyNetworkSettingsFromID adopts an existing Objective-C object as a NETransparentProxyNetworkSettings
@@ -25,7 +26,8 @@ func NETransparentProxyNetworkSettingsFromID(id objc.ID) *NETransparentProxyNetw
 	if id == 0 {
 		return nil
 	}
-	x := &NETransparentProxyNetworkSettings{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NETransparentProxyNetworkSettings{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func nETransparentProxyNetworkSettingsAdopt(id objc.ID) *NETransparentProxyNetwo
 	if id == 0 {
 		return nil
 	}
-	x := &NETransparentProxyNetworkSettings{Handle: objref.Wrap(id)}
+	x := &NETransparentProxyNetworkSettings{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NETransparentProxyNetworkSettings) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NETransparentProxyNetworkSettings) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NETransparentProxyNetworkSettings) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNETransparentProxyNetworkSettings creates a new NETransparentProxyNetworkSettings.
@@ -64,41 +52,33 @@ func NewNETransparentProxyNetworkSettings() *NETransparentProxyNetworkSettings {
 	return nETransparentProxyNetworkSettingsAdopt(_id)
 }
 
-// An array of rules that collectively specify what traffic to route through the transparent proxy.
-//
-// WithIncludedNetworkRules sets the collection and returns the receiver so calls can be chained.
+// WithIncludedNetworkRules an array of rules that collectively specify what traffic to route through the transparent proxy.
 func (x *NETransparentProxyNetworkSettings) WithIncludedNetworkRules(items ...*NENetworkRule) *NETransparentProxyNetworkSettings {
 	_arr := purego.SliceToNSArray(items, func(_v *NENetworkRule) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludedNetworkRules:"), _arr)
 	return x
 }
 
-// An array of rules that collectively specify what traffic to not route through the transparent proxy.
-//
-// WithExcludedNetworkRules sets the collection and returns the receiver so calls can be chained.
+// WithExcludedNetworkRules an array of rules that collectively specify what traffic to not route through the transparent proxy.
 func (x *NETransparentProxyNetworkSettings) WithExcludedNetworkRules(items ...*NENetworkRule) *NETransparentProxyNetworkSettings {
 	_arr := purego.SliceToNSArray(items, func(_v *NENetworkRule) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedNetworkRules:"), _arr)
 	return x
 }
 
-// The tunnel DNS settings.
-//
-// WithDNSSettings sets dNSSettings and returns the receiver so calls can be chained.
+// WithDNSSettings the tunnel DNS settings.
 func (x *NETransparentProxyNetworkSettings) WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NETransparentProxyNetworkSettings {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSSettings:"), objref.IDOf(dNSSettings))
 	return x
 }
 
-// The tunnel HTTP proxy settings.
-//
-// WithProxySettings sets proxySettings and returns the receiver so calls can be chained.
+// WithProxySettings the tunnel HTTP proxy settings.
 func (x *NETransparentProxyNetworkSettings) WithProxySettings(proxySettings *NEProxySettings) *NETransparentProxyNetworkSettings {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProxySettings:"), objref.IDOf(proxySettings))
 	return x
 }
 
-// An array of NENetworkRule objects that collectively specify the traffic that will be routed through the transparent proxy. The following restrictions apply to each NENetworkRule in this list: Restrictions for rules with an address endpoint: If the port string of the endpoint is "0" or is the empty string, then the address of the endpoint must be a non-wildcard address (i.e. "0.0.0.0" or "::"). If the address is a wildcard address (i.e. "0.0.0.0" or "::"), then the port string of the endpoint must be non-empty and must not be "0". A port string of "53" is not allowed. Destination Domain-based rules must be used to match DNS traffic. The matchLocalNetwork property must be nil. The matchDirection property must be NETrafficDirectionOutbound.
+// IncludedNetworkRules an array of NENetworkRule objects that collectively specify the traffic that will be routed through the transparent proxy. The following restrictions apply to each NENetworkRule in this list: Restrictions for rules with an address endpoint: If the port string of the endpoint is "0" or is the empty string, then the address of the endpoint must be a non-wildcard address (i.e. "0.0.0.0" or "::"). If the address is a wildcard address (i.e. "0.0.0.0" or "::"), then the port string of the endpoint must be non-empty and must not be "0". A port string of "53" is not allowed. Destination Domain-based rules must be used to match DNS traffic. The matchLocalNetwork property must be nil. The matchDirection property must be NETrafficDirectionOutbound.
 //
 // IncludedNetworkRules returns the collection as a Go slice.
 func (x *NETransparentProxyNetworkSettings) IncludedNetworkRules() []*NENetworkRule {
@@ -106,11 +86,12 @@ func (x *NETransparentProxyNetworkSettings) IncludedNetworkRules() []*NENetworkR
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NENetworkRule { return NENetworkRuleFromID(_id) })
 }
 
+// SetIncludedNetworkRules wraps the corresponding Objective-C method.
 func (x *NETransparentProxyNetworkSettings) SetIncludedNetworkRules(includedNetworkRules []*NENetworkRule) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludedNetworkRules:"), purego.SliceToNSArray(includedNetworkRules, func(_v *NENetworkRule) objc.ID { return objref.IDOf(_v) }))
 }
 
-// An array of NENetworkRule objects that collectively specify the traffic that will not be routed through the transparent proxy. The following restrictions apply to each NENetworkRule in this list: Restrictions for rules with an address endpoint: If the port string of the endpoint is "0" or is the empty string, then the address of the endpoint must be a non-wildcard address (i.e. "0.0.0.0" or "::"). If the address is a wildcard address (i.e. "0.0.0.0" or "::"), then the port string of the endpoint must be non-empty and must not be "0". A port string of "53" is not allowed. Destination Domain-based rules must be used to match DNS traffic. The matchLocalNetwork property must be nil. The matchDirection property must be NETrafficDirectionOutbound.
+// ExcludedNetworkRules an array of NENetworkRule objects that collectively specify the traffic that will not be routed through the transparent proxy. The following restrictions apply to each NENetworkRule in this list: Restrictions for rules with an address endpoint: If the port string of the endpoint is "0" or is the empty string, then the address of the endpoint must be a non-wildcard address (i.e. "0.0.0.0" or "::"). If the address is a wildcard address (i.e. "0.0.0.0" or "::"), then the port string of the endpoint must be non-empty and must not be "0". A port string of "53" is not allowed. Destination Domain-based rules must be used to match DNS traffic. The matchLocalNetwork property must be nil. The matchDirection property must be NETrafficDirectionOutbound.
 //
 // ExcludedNetworkRules returns the collection as a Go slice.
 func (x *NETransparentProxyNetworkSettings) ExcludedNetworkRules() []*NENetworkRule {
@@ -118,6 +99,7 @@ func (x *NETransparentProxyNetworkSettings) ExcludedNetworkRules() []*NENetworkR
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NENetworkRule { return NENetworkRuleFromID(_id) })
 }
 
+// SetExcludedNetworkRules wraps the corresponding Objective-C method.
 func (x *NETransparentProxyNetworkSettings) SetExcludedNetworkRules(excludedNetworkRules []*NENetworkRule) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedNetworkRules:"), purego.SliceToNSArray(excludedNetworkRules, func(_v *NENetworkRule) objc.ID { return objref.IDOf(_v) }))
 }
@@ -136,3 +118,5 @@ type NETransparentProxyNetworkSettingsable interface {
 }
 
 var _ NETransparentProxyNetworkSettingsable = (*NETransparentProxyNetworkSettings)(nil)
+
+var _ NETunnelNetworkSettingsProvider = (*NETransparentProxyNetworkSettings)(nil)

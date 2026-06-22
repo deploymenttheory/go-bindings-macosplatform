@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that retrieves metadata for a URL.
-//
 // MetadataProvider is an idiomatic wrapper over the Objective-C class LPMetadataProvider.
+//
+// An object that retrieves metadata for a URL.
 type MetadataProvider struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func MetadataProviderFromID(id objc.ID) *MetadataProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &MetadataProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetadataProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func metadataProviderAdopt(id objc.ID) *MetadataProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &MetadataProvider{Handle: objref.Wrap(id)}
+	x := &MetadataProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,32 +62,34 @@ func (x *MetadataProvider) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetadataProvider) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMetadataProvider creates a new MetadataProvider.
 func NewMetadataProvider() *MetadataProvider {
 	_id := objc.Send[objc.ID](objc.ID(_class("LPMetadataProvider")), objc.RegisterName("new"))
 	return metadataProviderAdopt(_id)
 }
 
-// A Boolean value indicating whether to download subresources specified by the metadata.
-//
-// WithShouldFetchSubresources sets shouldFetchSubresources and returns the receiver so calls can be chained.
+// WithShouldFetchSubresources a Boolean value indicating whether to download subresources specified by the metadata.
 func (x *MetadataProvider) WithShouldFetchSubresources(shouldFetchSubresources bool) *MetadataProvider {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldFetchSubresources:"), shouldFetchSubresources)
 	return x
 }
 
-// The time interval after which the request automatically fails if it hasn’t already completed.
-//
-// WithTimeout sets timeout and returns the receiver so calls can be chained.
+// WithTimeout the time interval after which the request automatically fails if it hasn’t already completed.
 func (x *MetadataProvider) WithTimeout(timeout float64) *MetadataProvider {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeout:"), timeout)
 	return x
 }
 
-// Fetches metadata for the given URL.
+// StartFetchingMetadataForURL fetches metadata for the given URL.
 //
 // StartFetchingMetadataForURL blocks until the operation completes or ctx is cancelled.
-func (x *MetadataProvider) StartFetchingMetadataForURL(ctx context.Context, uRL string) (*LinkMetadata, error) {
+func (x *MetadataProvider) StartFetchingMetadataForURL(ctx context.Context, uRL string) (result *LinkMetadata, err error) {
 	type _result struct {
 		val *LinkMetadata
 		err error
@@ -107,10 +111,10 @@ func (x *MetadataProvider) StartFetchingMetadataForURL(ctx context.Context, uRL 
 	}
 }
 
-// Fetches metadata for the given NSURLRequest.
+// StartFetchingMetadataForRequest fetches metadata for the given NSURLRequest.
 //
 // StartFetchingMetadataForRequest blocks until the operation completes or ctx is cancelled.
-func (x *MetadataProvider) StartFetchingMetadataForRequest(ctx context.Context, request obj.Object) (*LinkMetadata, error) {
+func (x *MetadataProvider) StartFetchingMetadataForRequest(ctx context.Context, request obj.Object) (result *LinkMetadata, err error) {
 	type _result struct {
 		val *LinkMetadata
 		err error
@@ -132,27 +136,29 @@ func (x *MetadataProvider) StartFetchingMetadataForRequest(ctx context.Context, 
 	}
 }
 
-// Cancels a metadata request.
+// Cancel cancels a metadata request.
 func (x *MetadataProvider) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// A Boolean value indicating whether to download subresources specified by the metadata. Subresources include the icon, image, or video. When set to `false`, the returned “LPLinkMetadata“ object consists only of metadata retrieved from the main resource identified by the url passed to “LPMetadataProvider/startFetchingMetadataForURL:completionHandler:“. The default value is `true`.
+// ShouldFetchSubresources a Boolean value indicating whether to download subresources specified by the metadata. Subresources include the icon, image, or video. When set to `false`, the returned “LPLinkMetadata“ object consists only of metadata retrieved from the main resource identified by the url passed to “LPMetadataProvider/startFetchingMetadataForURL:completionHandler:“. The default value is `true`.
 func (x *MetadataProvider) ShouldFetchSubresources() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldFetchSubresources"))
 	return _r
 }
 
+// SetShouldFetchSubresources wraps the corresponding Objective-C method.
 func (x *MetadataProvider) SetShouldFetchSubresources(shouldFetchSubresources bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldFetchSubresources:"), shouldFetchSubresources)
 }
 
-// The time interval after which the request automatically fails if it hasn’t already completed. The default timeout interval is 30 seconds. If a metadata fetch takes longer than the timeout interval, the completion handler is called with the error code “LPErrorCode/LPErrorMetadataFetchTimedOut“.
+// Timeout the time interval after which the request automatically fails if it hasn’t already completed. The default timeout interval is 30 seconds. If a metadata fetch takes longer than the timeout interval, the completion handler is called with the error code “LPErrorCode/LPErrorMetadataFetchTimedOut“.
 func (x *MetadataProvider) Timeout() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeout"))
 	return _r
 }
 
+// SetTimeout wraps the corresponding Objective-C method.
 func (x *MetadataProvider) SetTimeout(timeout float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeout:"), timeout)
 }

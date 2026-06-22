@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Water Heater Mode Attributes and commands for selecting a mode from a list of supported options.
-//
 // MTRClusterWaterHeaterMode is an idiomatic wrapper over the Objective-C class MTRClusterWaterHeaterMode.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
+//
+// Cluster Water Heater Mode Attributes and commands for selecting a mode from a list of supported options.
 type MTRClusterWaterHeaterMode struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterWaterHeaterModeFromID adopts an existing Objective-C object as a MTRClusterWaterHeaterMode
@@ -27,7 +28,8 @@ func MTRClusterWaterHeaterModeFromID(id objc.ID) *MTRClusterWaterHeaterMode {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterWaterHeaterMode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterWaterHeaterMode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,37 +42,23 @@ func mTRClusterWaterHeaterModeAdopt(id objc.ID) *MTRClusterWaterHeaterMode {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterWaterHeaterMode{Handle: objref.Wrap(id)}
+	x := &MTRClusterWaterHeaterMode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterWaterHeaterMode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterWaterHeaterMode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterWaterHeaterMode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterWaterHeaterModeWithDeviceEndpointIDQueue creates a new MTRClusterWaterHeaterMode.
+// NewMTRClusterWaterHeaterModeWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterWaterHeaterModeWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterWaterHeaterMode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterWaterHeaterMode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterWaterHeaterModeAdopt(_id)
 }
 
+// ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterWaterHeaterMode) ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRWaterHeaterModeClusterChangeToModeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRWaterHeaterModeClusterChangeToModeResponseParams, error) {
+func (x *MTRClusterWaterHeaterMode) ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRWaterHeaterModeClusterChangeToModeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRWaterHeaterModeClusterChangeToModeResponseParams, err error) {
 	type _result struct {
 		val *MTRWaterHeaterModeClusterChangeToModeResponseParams
 		err error
@@ -92,36 +80,43 @@ func (x *MTRClusterWaterHeaterMode) ChangeToModeWithParamsExpectedValuesExpected
 	}
 }
 
+// ReadAttributeSupportedModesWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterWaterHeaterMode) ReadAttributeSupportedModesWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedModesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeCurrentModeWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterWaterHeaterMode) ReadAttributeCurrentModeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterWaterHeaterMode) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterWaterHeaterMode) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterWaterHeaterMode) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterWaterHeaterMode) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterWaterHeaterMode) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -141,3 +136,7 @@ type MTRClusterWaterHeaterModeable interface {
 }
 
 var _ MTRClusterWaterHeaterModeable = (*MTRClusterWaterHeaterMode)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterWaterHeaterMode)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterWaterHeaterMode)(nil)

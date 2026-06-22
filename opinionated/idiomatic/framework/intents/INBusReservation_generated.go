@@ -12,11 +12,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The information that describes a bus reservation.
-//
 // BusReservation is an idiomatic wrapper over the Objective-C class INBusReservation.
+//
+// It embeds [Reservation], promoting that type's methods.
+//
+// The information that describes a bus reservation.
 type BusReservation struct {
-	objref.Handle
+	Reservation
 }
 
 // BusReservationFromID adopts an existing Objective-C object as a BusReservation
@@ -25,7 +27,8 @@ func BusReservationFromID(id objc.ID) *BusReservation {
 	if id == 0 {
 		return nil
 	}
-	x := &BusReservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BusReservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,40 +41,26 @@ func busReservationAdopt(id objc.ID) *BusReservation {
 	if id == 0 {
 		return nil
 	}
-	x := &BusReservation{Handle: objref.Wrap(id)}
+	x := &BusReservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *BusReservation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BusReservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BusReservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a bus reservation with the specified contents and attributes.
-//
-// NewBusReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBusTrip creates a new BusReservation.
+// NewBusReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBusTrip creates a bus reservation with the specified contents and attributes.
 func NewBusReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBusTrip(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, uRL string, reservedSeat *Seat, busTrip *BusTrip) *BusReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INBusReservation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:busTrip:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(uRL), objref.IDOf(reservedSeat), objref.IDOf(busTrip))
 	return busReservationAdopt(_id)
 }
 
+// ReservedSeat wraps the corresponding Objective-C method.
 func (x *BusReservation) ReservedSeat() *Seat {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservedSeat"))
 	return SeatFromID(_r)
 }
 
+// BusTrip wraps the corresponding Objective-C method.
 func (x *BusReservation) BusTrip() *BusTrip {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("busTrip"))
 	return BusTripFromID(_r)
@@ -85,3 +74,5 @@ type BusReservationable interface {
 }
 
 var _ BusReservationable = (*BusReservation)(nil)
+
+var _ ReservationProvider = (*BusReservation)(nil)

@@ -3,4 +3,24 @@
 //go:build darwin
 
 // Package healthkit provides a fluent Go API over the macOS HealthKit framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - CumulativeQuantitySample: [CumulativeQuantitySeriesSample]
+//   - DocumentSample: [CDADocumentSample]
+//   - LensSpecification: [ContactsLensSpecification], [GlassesLensSpecification]
+//   - Object: [Sample]
+//   - ObjectType: [ActivitySummaryType], [CharacteristicType], [SampleType], [UserAnnotatedMedicationType]
+//   - QuantitySample: [CumulativeQuantitySample], [DiscreteQuantitySample]
+//   - Query: [ActivitySummaryQuery], [AnchoredObjectQuery], [CorrelationQuery], [DocumentQuery], [ElectrocardiogramQuery], [HeartbeatSeriesQuery], [ObserverQuery], [QuantitySeriesSampleQuery], [SampleQuery], [SourceQuery], [StatisticsCollectionQuery], [StatisticsQuery], [UserAnnotatedMedicationQuery], [VerifiableClinicalRecordQuery], [WorkoutEffortRelationshipQuery], [WorkoutRouteQuery]
+//   - Sample: [AudiogramSample], [CategorySample], [ClinicalRecord], [Correlation], [DocumentSample], [Electrocardiogram], [MedicationDoseEvent], [QuantitySample], [ScoredAssessment], [SeriesSample], [StateOfMind], [VerifiableClinicalRecord], [VisionPrescription], [Workout]
+//   - SampleType: [AudiogramSampleType], [CategoryType], [ClinicalType], [CorrelationType], [DocumentType], [ElectrocardiogramType], [MedicationDoseEventType], [PrescriptionType], [QuantityType], [ScoredAssessmentType], [SeriesType], [StateOfMindType], [WorkoutType]
+//   - ScoredAssessment: [GAD7Assessment], [PHQ9Assessment]
+//   - SeriesBuilder: [HeartbeatSeriesBuilder], [WorkoutRouteBuilder]
+//   - SeriesSample: [HeartbeatSeriesSample], [WorkoutRoute]
+//   - VisionPrescription: [ContactsPrescription], [GlassesPrescription]
+//   - WorkoutBuilder: [LiveWorkoutBuilder]
 package healthkit

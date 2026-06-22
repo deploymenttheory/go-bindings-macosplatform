@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A constraint that applies inverse kinematics to make a chain of nodes “reach” toward a target point.
-//
 // IKConstraint is an idiomatic wrapper over the Objective-C class SCNIKConstraint.
+//
+// It embeds [Constraint], promoting that type's methods.
+//
+// A constraint that applies inverse kinematics to make a chain of nodes “reach” toward a target point.
 type IKConstraint struct {
-	objref.Handle
+	Constraint
 }
 
 // IKConstraintFromID adopts an existing Objective-C object as a IKConstraint
@@ -25,7 +26,8 @@ func IKConstraintFromID(id objc.ID) *IKConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &IKConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IKConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,71 +40,49 @@ func iKConstraintAdopt(id objc.ID) *IKConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &IKConstraint{Handle: objref.Wrap(id)}
+	x := &IKConstraint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *IKConstraint) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IKConstraint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IKConstraint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes an inverse kinematics constraint whose chain of nodes begins with the specified node.
-//
-// NewIKConstraintWithChainRootNode creates a new IKConstraint.
+// NewIKConstraintWithChainRootNode initializes an inverse kinematics constraint whose chain of nodes begins with the specified node.
 func NewIKConstraintWithChainRootNode(chainRootNode *Node) *IKConstraint {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCNIKConstraint")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChainRootNode:"), objref.IDOf(chainRootNode))
 	return iKConstraintAdopt(_id)
 }
 
-// Determines whether the constraint is enabled or not. Defaults to YES.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled determines whether the constraint is enabled or not. Defaults to YES.
 func (x *IKConstraint) WithEnabled(enabled bool) *IKConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The influence of the constraint on the node’s transformation.
-//
-// WithInfluenceFactor sets influenceFactor and returns the receiver so calls can be chained.
+// WithInfluenceFactor the influence of the constraint on the node’s transformation.
 func (x *IKConstraint) WithInfluenceFactor(influenceFactor float64) *IKConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
 	return x
 }
 
-// Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
-//
-// WithIncremental sets incremental and returns the receiver so calls can be chained.
+// WithIncremental specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
 func (x *IKConstraint) WithIncremental(incremental bool) *IKConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
 	return x
 }
 
-// Sets the rotation limit, in degrees, for the specified node.
+// SetMaxAllowedRotationAngleForJoint sets the rotation limit, in degrees, for the specified node.
 func (x *IKConstraint) SetMaxAllowedRotationAngleForJoint(angle float64, node *Node) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxAllowedRotationAngle:forJoint:"), angle, objref.IDOf(node))
 }
 
-// Returns the rotation limit, in degrees, for the specified node.
+// MaxAllowedRotationAngleForJoint returns the rotation limit, in degrees, for the specified node.
 func (x *IKConstraint) MaxAllowedRotationAngleForJoint(node *Node) float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxAllowedRotationAngleForJoint:"), objref.IDOf(node))
 	return _r
 }
 
-// Specifies the root node of the kinematic chain.
+// ChainRootNode specifies the root node of the kinematic chain.
 func (x *IKConstraint) ChainRootNode() *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("chainRootNode"))
 	return NodeFromID(_r)
@@ -120,3 +100,5 @@ type IKConstraintable interface {
 }
 
 var _ IKConstraintable = (*IKConstraint)(nil)
+
+var _ ConstraintProvider = (*IKConstraint)(nil)

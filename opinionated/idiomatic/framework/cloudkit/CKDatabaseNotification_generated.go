@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A notification that triggers when the contents of a database change.
-//
 // DatabaseNotification is an idiomatic wrapper over the Objective-C class CKDatabaseNotification.
+//
+// It embeds [Notification], promoting that type's methods.
+//
+// A notification that triggers when the contents of a database change.
 type DatabaseNotification struct {
-	objref.Handle
+	Notification
 }
 
 // DatabaseNotificationFromID adopts an existing Objective-C object as a DatabaseNotification
@@ -25,7 +26,8 @@ func DatabaseNotificationFromID(id objc.ID) *DatabaseNotification {
 	if id == 0 {
 		return nil
 	}
-	x := &DatabaseNotification{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DatabaseNotification{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func databaseNotificationAdopt(id objc.ID) *DatabaseNotification {
 	if id == 0 {
 		return nil
 	}
-	x := &DatabaseNotification{Handle: objref.Wrap(id)}
+	x := &DatabaseNotification{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DatabaseNotification) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DatabaseNotification) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DatabaseNotification) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDatabaseNotification creates a new DatabaseNotification.
@@ -64,6 +52,7 @@ func NewDatabaseNotification() *DatabaseNotification {
 	return databaseNotificationAdopt(_id)
 }
 
+// DatabaseScope wraps the corresponding Objective-C method.
 func (x *DatabaseNotification) DatabaseScope() DatabaseScope {
 	_r := objc.Send[DatabaseScope](objref.IDOf(x), objc.RegisterName("databaseScope"))
 	return _r
@@ -76,3 +65,5 @@ type DatabaseNotificationable interface {
 }
 
 var _ DatabaseNotificationable = (*DatabaseNotification)(nil)
+
+var _ NotificationProvider = (*DatabaseNotification)(nil)

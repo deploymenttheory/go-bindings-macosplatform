@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that replaces the opacity of variable layers in a symbol-based image in a repeatable sequence.
-//
 // SymbolVariableColorEffect is an idiomatic wrapper over the Objective-C class NSSymbolVariableColorEffect.
+//
+// It embeds [SymbolEffect], promoting that type's methods.
+//
+// A type that replaces the opacity of variable layers in a symbol-based image in a repeatable sequence.
 type SymbolVariableColorEffect struct {
-	objref.Handle
+	SymbolEffect
 }
 
 // SymbolVariableColorEffectFromID adopts an existing Objective-C object as a SymbolVariableColorEffect
@@ -25,7 +26,8 @@ func SymbolVariableColorEffectFromID(id objc.ID) *SymbolVariableColorEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolVariableColorEffect{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SymbolVariableColorEffect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func symbolVariableColorEffectAdopt(id objc.ID) *SymbolVariableColorEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolVariableColorEffect{Handle: objref.Wrap(id)}
+	x := &SymbolVariableColorEffect{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SymbolVariableColorEffect) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SymbolVariableColorEffect) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SymbolVariableColorEffect) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSymbolVariableColorEffect creates a new SymbolVariableColorEffect.
@@ -64,37 +52,37 @@ func NewSymbolVariableColorEffect() *SymbolVariableColorEffect {
 	return symbolVariableColorEffectAdopt(_id)
 }
 
-// An effect that momentarily enables each layer of a symbol-based image in sequence.
+// EffectWithIterative an effect that momentarily enables each layer of a symbol-based image in sequence.
 func (x *SymbolVariableColorEffect) EffectWithIterative() *SymbolVariableColorEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithIterative"))
 	return SymbolVariableColorEffectFromID(_r)
 }
 
-// An effect that enables each layer of a symbol-based image in sequence.
+// EffectWithCumulative an effect that enables each layer of a symbol-based image in sequence.
 func (x *SymbolVariableColorEffect) EffectWithCumulative() *SymbolVariableColorEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithCumulative"))
 	return SymbolVariableColorEffectFromID(_r)
 }
 
-// An effect that reverses each time it repeats.
+// EffectWithReversing an effect that reverses each time it repeats.
 func (x *SymbolVariableColorEffect) EffectWithReversing() *SymbolVariableColorEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithReversing"))
 	return SymbolVariableColorEffectFromID(_r)
 }
 
-// An effect that doesn’t reverse each time it repeats.
+// EffectWithNonReversing an effect that doesn’t reverse each time it repeats.
 func (x *SymbolVariableColorEffect) EffectWithNonReversing() *SymbolVariableColorEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithNonReversing"))
 	return SymbolVariableColorEffectFromID(_r)
 }
 
-// An effect that hides inactive layers in a symbol-based image.
+// EffectWithHideInactiveLayers an effect that hides inactive layers in a symbol-based image.
 func (x *SymbolVariableColorEffect) EffectWithHideInactiveLayers() *SymbolVariableColorEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithHideInactiveLayers"))
 	return SymbolVariableColorEffectFromID(_r)
 }
 
-// An effect that dims inactive layers in a symbol-based image.
+// EffectWithDimInactiveLayers an effect that dims inactive layers in a symbol-based image.
 func (x *SymbolVariableColorEffect) EffectWithDimInactiveLayers() *SymbolVariableColorEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithDimInactiveLayers"))
 	return SymbolVariableColorEffectFromID(_r)
@@ -112,3 +100,5 @@ type SymbolVariableColorEffectable interface {
 }
 
 var _ SymbolVariableColorEffectable = (*SymbolVariableColorEffect)(nil)
+
+var _ SymbolEffectProvider = (*SymbolVariableColorEffect)(nil)

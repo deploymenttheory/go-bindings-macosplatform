@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// The base class that all Core Data model objects inherit from.
-//
 // ManagedObject is an idiomatic wrapper over the Objective-C class NSManagedObject.
+//
+// The base class that all Core Data model objects inherit from.
 type ManagedObject struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func ManagedObjectFromID(id objc.ID) *ManagedObject {
 	if id == 0 {
 		return nil
 	}
-	x := &ManagedObject{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ManagedObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func managedObjectAdopt(id objc.ID) *ManagedObject {
 	if id == 0 {
 		return nil
 	}
-	x := &ManagedObject{Handle: objref.Wrap(id)}
+	x := &ManagedObject{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,116 +62,118 @@ func (x *ManagedObject) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a managed object from an entity description and inserts it into the specified managed object context.
-//
-// NewManagedObjectWithEntityInsertIntoManagedObjectContext creates a new ManagedObject.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ManagedObject) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewManagedObjectWithEntityInsertIntoManagedObjectContext initializes a managed object from an entity description and inserts it into the specified managed object context.
 func NewManagedObjectWithEntityInsertIntoManagedObjectContext(entity *EntityDescription, context_ *ManagedObjectContext) *ManagedObject {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSManagedObject")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntity:insertIntoManagedObjectContext:"), objref.IDOf(entity), objref.IDOf(context_))
 	return managedObjectAdopt(_id)
 }
 
-// Initializes a managed object subclass and inserts it into the specified managed object context.
-//
-// NewManagedObjectWithContext creates a new ManagedObject.
+// NewManagedObjectWithContext initializes a managed object subclass and inserts it into the specified managed object context.
 func NewManagedObjectWithContext(moc *ManagedObjectContext) *ManagedObject {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSManagedObject")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContext:"), objref.IDOf(moc))
 	return managedObjectAdopt(_id)
 }
 
-// Returns a Boolean value that indicates whether the relationship for a given key is a fault.
+// HasFaultForRelationshipNamed returns a Boolean value that indicates whether the relationship for a given key is a fault.
 func (x *ManagedObject) HasFaultForRelationshipNamed(key string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasFaultForRelationshipNamed:"), purego.NSString(key))
 	return _r
 }
 
-// Returns the object IDs for all of the managed objects that are in the named relationship.
+// ObjectIDsForRelationshipNamed returns the object IDs for all of the managed objects that are in the named relationship.
 func (x *ManagedObject) ObjectIDsForRelationshipNamed(key string) []*ManagedObjectID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectIDsForRelationshipNamed:"), purego.NSString(key))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *ManagedObjectID { return ManagedObjectIDFromID(_id) })
 }
 
-// Provides support for key-value observing access notification.
+// WillAccessValueForKey provides support for key-value observing access notification.
 func (x *ManagedObject) WillAccessValueForKey(key string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willAccessValueForKey:"), purego.NSString(key))
 }
 
-// Provides support for key-value observing access notification.
+// DidAccessValueForKey provides support for key-value observing access notification.
 func (x *ManagedObject) DidAccessValueForKey(key string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didAccessValueForKey:"), purego.NSString(key))
 }
 
-// Provides an opportunity to add code into the life cycle of the managed object when fufilling it from a fault.
+// AwakeFromFetch provides an opportunity to add code into the life cycle of the managed object when fufilling it from a fault.
 func (x *ManagedObject) AwakeFromFetch() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("awakeFromFetch"))
 }
 
-// Provides an opportunity to add code into the life cycle of the managed object when initially creating it.
+// AwakeFromInsert provides an opportunity to add code into the life cycle of the managed object when initially creating it.
 func (x *ManagedObject) AwakeFromInsert() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("awakeFromInsert"))
 }
 
-// Provides an opportunity to add code into the life cycle of the managed object when fulfilling it from a snapshot.
+// AwakeFromSnapshotEvents provides an opportunity to add code into the life cycle of the managed object when fulfilling it from a snapshot.
 func (x *ManagedObject) AwakeFromSnapshotEvents(flags SnapshotEventType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("awakeFromSnapshotEvents:"), flags)
 }
 
-// Provides an opportunity to add code into the life cycle of the managed object before deleting it.
+// PrepareForDeletion provides an opportunity to add code into the life cycle of the managed object before deleting it.
 func (x *ManagedObject) PrepareForDeletion() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareForDeletion"))
 }
 
-// Provides an opportunity to add code into the life cycle of the managed object before saving it.
+// WillSave provides an opportunity to add code into the life cycle of the managed object before saving it.
 func (x *ManagedObject) WillSave() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willSave"))
 }
 
-// Provides an opportunity to add code into the life cycle of the managed object after the managed object’s context completes a save operation.
+// DidSave provides an opportunity to add code into the life cycle of the managed object after the managed object’s context completes a save operation.
 func (x *ManagedObject) DidSave() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didSave"))
 }
 
-// Provides an opportunity to add code into the life cycle of the managed object before converting it to a fault.
+// WillTurnIntoFault provides an opportunity to add code into the life cycle of the managed object before converting it to a fault.
 func (x *ManagedObject) WillTurnIntoFault() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willTurnIntoFault"))
 }
 
-// Provides an opportunity to add code into the life cycle of the managed object after converting it to a fault.
+// DidTurnIntoFault provides an opportunity to add code into the life cycle of the managed object after converting it to a fault.
 func (x *ManagedObject) DidTurnIntoFault() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didTurnIntoFault"))
 }
 
-// Returns the value for the specified property from the managed object’s private internal storage .
+// PrimitiveValueForKey returns the value for the specified property from the managed object’s private internal storage .
 func (x *ManagedObject) PrimitiveValueForKey(key string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primitiveValueForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
-// Sets the value of a given property in the managed object’s private internal storage.
+// SetPrimitiveValueForKey sets the value of a given property in the managed object’s private internal storage.
 func (x *ManagedObject) SetPrimitiveValueForKey(value obj.Object, key string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveValue:forKey:"), objref.IDOf(value), purego.NSString(key))
 }
 
-// Returns a dictionary of the most recent fetched or saved values of the managed object for the properties of the specified keys.
+// CommittedValuesForKeys returns a dictionary of the most recent fetched or saved values of the managed object for the properties of the specified keys.
 func (x *ManagedObject) CommittedValuesForKeys(keys []string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("committedValuesForKeys:"), purego.SliceToNSArray(keys, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return obj.Wrap(_r)
 }
 
-// Returns a dictionary containing the keys and new values of persistent properties with changes since the last fetching or saving of the managed object.
+// ChangedValues returns a dictionary containing the keys and new values of persistent properties with changes since the last fetching or saving of the managed object.
 func (x *ManagedObject) ChangedValues() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changedValues"))
 	return obj.Wrap(_r)
 }
 
-// Returns a dictionary containing the keys and new values of persistent properties with changes since the last fetching or saving of the managed object.
+// ChangedValuesForCurrentEvent returns a dictionary containing the keys and new values of persistent properties with changes since the last fetching or saving of the managed object.
 func (x *ManagedObject) ChangedValuesForCurrentEvent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changedValuesForCurrentEvent"))
 	return obj.Wrap(_r)
 }
 
-// Determines whether the managed object can be deleted in its current state.
+// ValidateForDelete determines whether the managed object can be deleted in its current state.
 //
 // ValidateForDelete returns an error if the operation did not succeed.
 func (x *ManagedObject) ValidateForDelete() error {
@@ -181,7 +185,7 @@ func (x *ManagedObject) ValidateForDelete() error {
 	return nil
 }
 
-// Determines whether the managed object can be inserted in its current state.
+// ValidateForInsert determines whether the managed object can be inserted in its current state.
 //
 // ValidateForInsert returns an error if the operation did not succeed.
 func (x *ManagedObject) ValidateForInsert() error {
@@ -193,7 +197,7 @@ func (x *ManagedObject) ValidateForInsert() error {
 	return nil
 }
 
-// Determines whether the managed object’s current state is valid.
+// ValidateForUpdate determines whether the managed object’s current state is valid.
 //
 // ValidateForUpdate returns an error if the operation did not succeed.
 func (x *ManagedObject) ValidateForUpdate() error {
@@ -205,51 +209,61 @@ func (x *ManagedObject) ValidateForUpdate() error {
 	return nil
 }
 
+// ManagedObjectContext wraps the corresponding Objective-C method.
 func (x *ManagedObject) ManagedObjectContext() *ManagedObjectContext {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("managedObjectContext"))
 	return ManagedObjectContextFromID(_r)
 }
 
+// Entity wraps the corresponding Objective-C method.
 func (x *ManagedObject) Entity() *EntityDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entity"))
 	return EntityDescriptionFromID(_r)
 }
 
+// ObjectID wraps the corresponding Objective-C method.
 func (x *ManagedObject) ObjectID() *ManagedObjectID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectID"))
 	return ManagedObjectIDFromID(_r)
 }
 
+// IsInserted wraps the corresponding Objective-C method.
 func (x *ManagedObject) IsInserted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInserted"))
 	return _r
 }
 
+// IsUpdated wraps the corresponding Objective-C method.
 func (x *ManagedObject) IsUpdated() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUpdated"))
 	return _r
 }
 
+// IsDeleted wraps the corresponding Objective-C method.
 func (x *ManagedObject) IsDeleted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDeleted"))
 	return _r
 }
 
+// HasChanges wraps the corresponding Objective-C method.
 func (x *ManagedObject) HasChanges() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasChanges"))
 	return _r
 }
 
+// HasPersistentChangedValues wraps the corresponding Objective-C method.
 func (x *ManagedObject) HasPersistentChangedValues() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasPersistentChangedValues"))
 	return _r
 }
 
+// IsFault wraps the corresponding Objective-C method.
 func (x *ManagedObject) IsFault() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFault"))
 	return _r
 }
 
+// FaultingState wraps the corresponding Objective-C method.
 func (x *ManagedObject) FaultingState() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("faultingState"))
 	return _r

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A tool for selecting stroked lines and shapes in a canvas view.
-//
 // LassoTool is an idiomatic wrapper over the Objective-C class PKLassoTool.
+//
+// It embeds [Tool], promoting that type's methods.
+//
+// A tool for selecting stroked lines and shapes in a canvas view.
 type LassoTool struct {
-	objref.Handle
+	Tool
 }
 
 // LassoToolFromID adopts an existing Objective-C object as a LassoTool
@@ -25,7 +26,8 @@ func LassoToolFromID(id objc.ID) *LassoTool {
 	if id == 0 {
 		return nil
 	}
-	x := &LassoTool{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LassoTool{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func lassoToolAdopt(id objc.ID) *LassoTool {
 	if id == 0 {
 		return nil
 	}
-	x := &LassoTool{Handle: objref.Wrap(id)}
+	x := &LassoTool{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *LassoTool) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LassoTool) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LassoTool) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewLassoTool creates a new LassoTool.
@@ -70,3 +58,5 @@ type LassoToolable interface {
 }
 
 var _ LassoToolable = (*LassoTool)(nil)
+
+var _ ToolProvider = (*LassoTool)(nil)

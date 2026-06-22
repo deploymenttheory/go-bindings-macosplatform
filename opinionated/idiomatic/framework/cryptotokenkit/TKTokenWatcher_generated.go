@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that tracks the tokens available in the system.
-//
 // TokenWatcher is an idiomatic wrapper over the Objective-C class TKTokenWatcher.
+//
+// An object that tracks the tokens available in the system.
 type TokenWatcher struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func TokenWatcherFromID(id objc.ID) *TokenWatcher {
 	if id == 0 {
 		return nil
 	}
-	x := &TokenWatcher{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TokenWatcher{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func tokenWatcherAdopt(id objc.ID) *TokenWatcher {
 	if id == 0 {
 		return nil
 	}
-	x := &TokenWatcher{Handle: objref.Wrap(id)}
+	x := &TokenWatcher{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,25 +61,29 @@ func (x *TokenWatcher) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TokenWatcher) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTokenWatcher creates a new TokenWatcher.
 func NewTokenWatcher() *TokenWatcher {
 	_id := objc.Send[objc.ID](objc.ID(_class("TKTokenWatcher")), objc.RegisterName("new"))
 	return tokenWatcherAdopt(_id)
 }
 
-// Initializes a token watcher with the specified insertion handler.
-//
-// NewTokenWatcherWithInsertionHandler creates a new TokenWatcher.
+// NewTokenWatcherWithInsertionHandler initializes a token watcher with the specified insertion handler.
 func NewTokenWatcherWithInsertionHandler(insertionHandler func(obj.Object)) *TokenWatcher {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("TKTokenWatcher")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInsertionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { insertionHandler(obj.Wrap(_b0)) }))
 	return tokenWatcherAdopt(_id)
 }
 
-// Sets an insertion handler closure to be called when a new token is inserted into the system.
+// SetInsertionHandler sets an insertion handler closure to be called when a new token is inserted into the system.
 //
 // SetInsertionHandler blocks until the operation completes or ctx is cancelled.
-func (x *TokenWatcher) SetInsertionHandler(ctx context.Context) (string, error) {
+func (x *TokenWatcher) SetInsertionHandler(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -98,18 +104,18 @@ func (x *TokenWatcher) SetInsertionHandler(ctx context.Context) (string, error) 
 	}
 }
 
-// Adds a removal handler for the specified token ID.
+// AddRemovalHandlerForTokenID adds a removal handler for the specified token ID.
 func (x *TokenWatcher) AddRemovalHandlerForTokenID(removalHandler func(obj.Object), tokenID string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRemovalHandler:forTokenID:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { removalHandler(obj.Wrap(_b0)) }), purego.NSString(tokenID))
 }
 
-// Return TokenInfo for specific tokenID
+// TokenInfoForTokenID return TokenInfo for specific tokenID
 func (x *TokenWatcher) TokenInfoForTokenID(tokenID string) *TokenWatcherTokenInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tokenInfoForTokenID:"), purego.NSString(tokenID))
 	return TokenWatcherTokenInfoFromID(_r)
 }
 
-// Array of currently known TokenIDs in the system.  Tokens are identified by instance's names. It is possible to use KVO to be notified about token arrivals and removals.
+// TokenIDs array of currently known TokenIDs in the system.  Tokens are identified by instance's names. It is possible to use KVO to be notified about token arrivals and removals.
 //
 // TokenIDs returns the collection as a Go slice.
 func (x *TokenWatcher) TokenIDs() []string {

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The object that provides a thumbnail for a custom file type.
-//
 // ThumbnailReply is an idiomatic wrapper over the Objective-C class QLThumbnailReply.
+//
+// The object that provides a thumbnail for a custom file type.
 type ThumbnailReply struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ThumbnailReplyFromID(id objc.ID) *ThumbnailReply {
 	if id == 0 {
 		return nil
 	}
-	x := &ThumbnailReply{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ThumbnailReply{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func thumbnailReplyAdopt(id objc.ID) *ThumbnailReply {
 	if id == 0 {
 		return nil
 	}
-	x := &ThumbnailReply{Handle: objref.Wrap(id)}
+	x := &ThumbnailReply{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +60,25 @@ func (x *ThumbnailReply) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ThumbnailReply) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewThumbnailReply creates a new ThumbnailReply.
 func NewThumbnailReply() *ThumbnailReply {
 	_id := objc.Send[objc.ID](objc.ID(_class("QLThumbnailReply")), objc.RegisterName("new"))
 	return thumbnailReplyAdopt(_id)
 }
 
-// A short string that identifies the file type that the system uses as a badge when producing an icon thumbnail.
-//
-// WithExtensionBadge sets extensionBadge and returns the receiver so calls can be chained.
+// WithExtensionBadge a short string that identifies the file type that the system uses as a badge when producing an icon thumbnail.
 func (x *ThumbnailReply) WithExtensionBadge(extensionBadge string) *ThumbnailReply {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtensionBadge:"), purego.NSString(extensionBadge))
 	return x
 }
 
-// The extensionBadge is a short string identifying the file type used as a badge when producing an icon.
+// ExtensionBadge the extensionBadge is a short string identifying the file type used as a badge when producing an icon.
 func (x *ThumbnailReply) ExtensionBadge() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionBadge"))
 	if _r == 0 {
@@ -81,6 +87,7 @@ func (x *ThumbnailReply) ExtensionBadge() string {
 	return purego.GoString(_r)
 }
 
+// SetExtensionBadge wraps the corresponding Objective-C method.
 func (x *ThumbnailReply) SetExtensionBadge(extensionBadge string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtensionBadge:"), purego.NSString(extensionBadge))
 }

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract data class for a metric.
-//
 // Metric is an idiomatic wrapper over the Objective-C class MXMetric.
+//
+// Metric is an abstract base — you do not construct it directly. Construct one of [AnimationMetric], [AppExitMetric], [AppLaunchMetric], [AppResponsivenessMetric], [AppRunTimeMetric], [CPUMetric], [CellularConditionMetric], [DiskIOMetric], [DiskSpaceUsageMetric], [DisplayMetric], [GPUMetric], [LocationActivityMetric], [MemoryMetric], [NetworkTransferMetric], [SignpostMetric] and pass it where a Metric is accepted.
+//
+// An abstract data class for a metric.
 type Metric struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func MetricFromID(id objc.ID) *Metric {
 	if id == 0 {
 		return nil
 	}
-	x := &Metric{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Metric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func metricAdopt(id objc.ID) *Metric {
 	if id == 0 {
 		return nil
 	}
-	x := &Metric{Handle: objref.Wrap(id)}
+	x := &Metric{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +62,19 @@ func (x *Metric) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMetric creates a new Metric.
-func NewMetric() *Metric {
-	_id := objc.Send[objc.ID](objc.ID(_class("MXMetric")), objc.RegisterName("new"))
-	return metricAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Metric) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns the contents of the metric in JSON format.
+// JSONRepresentation returns the contents of the metric in JSON format.
 func (x *Metric) JSONRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSONRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// Returns the contents of a metric as a dictionary.
+// DictionaryRepresentation returns the contents of a metric as a dictionary.
 func (x *Metric) DictionaryRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)
@@ -84,3 +88,10 @@ type Metricable interface {
 }
 
 var _ Metricable = (*Metric)(nil)
+
+// isMetric marks Metric — and, by embedding promotion, its
+// subclasses — as a member of the Metric hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Metric) isMetric() {}
+
+var _ MetricProvider = (*Metric)(nil)

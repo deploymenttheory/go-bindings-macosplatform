@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An individual content area within a grid view, typically at the intersection of a row and a column.
-//
 // GridCell is an idiomatic wrapper over the Objective-C class NSGridCell.
+//
+// An individual content area within a grid view, typically at the intersection of a row and a column.
 type GridCell struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func GridCellFromID(id objc.ID) *GridCell {
 	if id == 0 {
 		return nil
 	}
-	x := &GridCell{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GridCell{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func gridCellAdopt(id objc.ID) *GridCell {
 	if id == 0 {
 		return nil
 	}
-	x := &GridCell{Handle: objref.Wrap(id)}
+	x := &GridCell{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,95 +60,114 @@ func (x *GridCell) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GridCell) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewGridCell creates a new GridCell.
 func NewGridCell() *GridCell {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSGridCell")), objc.RegisterName("new"))
 	return gridCellAdopt(_id)
 }
 
-// WithContentView sets contentView and returns the receiver so calls can be chained.
+// WithContentView sets the property and returns the receiver so calls can be chained.
 func (x *GridCell) WithContentView(contentView ViewProvider) *GridCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	return x
 }
 
-// WithXPlacement sets xPlacement and returns the receiver so calls can be chained.
+// WithXPlacement sets the property and returns the receiver so calls can be chained.
 func (x *GridCell) WithXPlacement(xPlacement GridCellPlacement) *GridCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXPlacement:"), xPlacement)
 	return x
 }
 
-// WithYPlacement sets yPlacement and returns the receiver so calls can be chained.
+// WithYPlacement sets the property and returns the receiver so calls can be chained.
 func (x *GridCell) WithYPlacement(yPlacement GridCellPlacement) *GridCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYPlacement:"), yPlacement)
 	return x
 }
 
-// WithRowAlignment sets rowAlignment and returns the receiver so calls can be chained.
+// WithRowAlignment sets the property and returns the receiver so calls can be chained.
 func (x *GridCell) WithRowAlignment(rowAlignment GridRowAlignment) *GridCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowAlignment:"), rowAlignment)
 	return x
 }
 
-// WithCustomPlacementConstraints sets the collection and returns the receiver so calls can be chained.
+// WithCustomPlacementConstraints sets the property and returns the receiver so calls can be chained.
 func (x *GridCell) WithCustomPlacementConstraints(items ...*LayoutConstraint) *GridCell {
 	_arr := purego.SliceToNSArray(items, func(_v *LayoutConstraint) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomPlacementConstraints:"), _arr)
 	return x
 }
 
+// ContentView wraps the corresponding Objective-C method.
 func (x *GridCell) ContentView() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentView"))
 	return ViewFromID(_r)
 }
 
+// SetContentView wraps the corresponding Objective-C method.
 func (x *GridCell) SetContentView(contentView *View) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 }
 
+// Row wraps the corresponding Objective-C method.
 func (x *GridCell) Row() *GridRow {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("row"))
 	return GridRowFromID(_r)
 }
 
+// Column wraps the corresponding Objective-C method.
 func (x *GridCell) Column() *GridColumn {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("column"))
 	return GridColumnFromID(_r)
 }
 
+// XPlacement wraps the corresponding Objective-C method.
 func (x *GridCell) XPlacement() GridCellPlacement {
 	_r := objc.Send[GridCellPlacement](objref.IDOf(x), objc.RegisterName("xPlacement"))
 	return _r
 }
 
+// SetXPlacement wraps the corresponding Objective-C method.
 func (x *GridCell) SetXPlacement(xPlacement GridCellPlacement) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXPlacement:"), xPlacement)
 }
 
+// YPlacement wraps the corresponding Objective-C method.
 func (x *GridCell) YPlacement() GridCellPlacement {
 	_r := objc.Send[GridCellPlacement](objref.IDOf(x), objc.RegisterName("yPlacement"))
 	return _r
 }
 
+// SetYPlacement wraps the corresponding Objective-C method.
 func (x *GridCell) SetYPlacement(yPlacement GridCellPlacement) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYPlacement:"), yPlacement)
 }
 
+// RowAlignment wraps the corresponding Objective-C method.
 func (x *GridCell) RowAlignment() GridRowAlignment {
 	_r := objc.Send[GridRowAlignment](objref.IDOf(x), objc.RegisterName("rowAlignment"))
 	return _r
 }
 
+// SetRowAlignment wraps the corresponding Objective-C method.
 func (x *GridCell) SetRowAlignment(rowAlignment GridRowAlignment) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowAlignment:"), rowAlignment)
 }
 
+// CustomPlacementConstraints wraps the corresponding Objective-C method.
+//
 // CustomPlacementConstraints returns the collection as a Go slice.
 func (x *GridCell) CustomPlacementConstraints() []*LayoutConstraint {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customPlacementConstraints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *LayoutConstraint { return LayoutConstraintFromID(_id) })
 }
 
+// SetCustomPlacementConstraints wraps the corresponding Objective-C method.
 func (x *GridCell) SetCustomPlacementConstraints(customPlacementConstraints []*LayoutConstraint) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomPlacementConstraints:"), purego.SliceToNSArray(customPlacementConstraints, func(_v *LayoutConstraint) objc.ID { return objref.IDOf(_v) }))
 }

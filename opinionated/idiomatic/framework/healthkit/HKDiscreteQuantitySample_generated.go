@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A sample that represents a discrete quantity.
-//
 // DiscreteQuantitySample is an idiomatic wrapper over the Objective-C class HKDiscreteQuantitySample.
+//
+// It embeds [QuantitySample], promoting that type's methods.
+//
+// A sample that represents a discrete quantity.
 type DiscreteQuantitySample struct {
-	objref.Handle
+	QuantitySample
 }
 
 // DiscreteQuantitySampleFromID adopts an existing Objective-C object as a DiscreteQuantitySample
@@ -25,7 +26,8 @@ func DiscreteQuantitySampleFromID(id objc.ID) *DiscreteQuantitySample {
 	if id == 0 {
 		return nil
 	}
-	x := &DiscreteQuantitySample{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DiscreteQuantitySample{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func discreteQuantitySampleAdopt(id objc.ID) *DiscreteQuantitySample {
 	if id == 0 {
 		return nil
 	}
-	x := &DiscreteQuantitySample{Handle: objref.Wrap(id)}
+	x := &DiscreteQuantitySample{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DiscreteQuantitySample) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DiscreteQuantitySample) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DiscreteQuantitySample) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDiscreteQuantitySample creates a new DiscreteQuantitySample.
@@ -64,31 +52,31 @@ func NewDiscreteQuantitySample() *DiscreteQuantitySample {
 	return discreteQuantitySampleAdopt(_id)
 }
 
-// The minimum of the receiver's quantities
+// MinimumQuantity the minimum of the receiver's quantities
 func (x *DiscreteQuantitySample) MinimumQuantity() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minimumQuantity"))
 	return QuantityFromID(_r)
 }
 
-// The average of the receiver's quantities
+// AverageQuantity the average of the receiver's quantities
 func (x *DiscreteQuantitySample) AverageQuantity() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("averageQuantity"))
 	return QuantityFromID(_r)
 }
 
-// The maximum of the receiver's quantities
+// MaximumQuantity the maximum of the receiver's quantities
 func (x *DiscreteQuantitySample) MaximumQuantity() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maximumQuantity"))
 	return QuantityFromID(_r)
 }
 
-// The receiver's quantity with most recent date interval
+// MostRecentQuantity the receiver's quantity with most recent date interval
 func (x *DiscreteQuantitySample) MostRecentQuantity() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mostRecentQuantity"))
 	return QuantityFromID(_r)
 }
 
-// The date interval for the receiver's most recent quantity
+// MostRecentQuantityDateInterval the date interval for the receiver's most recent quantity
 func (x *DiscreteQuantitySample) MostRecentQuantityDateInterval() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mostRecentQuantityDateInterval"))
 	return obj.Wrap(_r)
@@ -105,3 +93,9 @@ type DiscreteQuantitySampleable interface {
 }
 
 var _ DiscreteQuantitySampleable = (*DiscreteQuantitySample)(nil)
+
+var _ QuantitySampleProvider = (*DiscreteQuantitySample)(nil)
+
+var _ SampleProvider = (*DiscreteQuantitySample)(nil)
+
+var _ ObjectProvider = (*DiscreteQuantitySample)(nil)

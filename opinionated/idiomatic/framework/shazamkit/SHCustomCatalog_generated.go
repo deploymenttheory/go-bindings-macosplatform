@@ -14,11 +14,13 @@ import (
 	"unsafe"
 )
 
-// An object for storing the reference signatures for custom audio recordings and their associated metadata.
-//
 // CustomCatalog is an idiomatic wrapper over the Objective-C class SHCustomCatalog.
+//
+// It embeds [Catalog], promoting that type's methods.
+//
+// An object for storing the reference signatures for custom audio recordings and their associated metadata.
 type CustomCatalog struct {
-	objref.Handle
+	Catalog
 }
 
 // CustomCatalogFromID adopts an existing Objective-C object as a CustomCatalog
@@ -27,7 +29,8 @@ func CustomCatalogFromID(id objc.ID) *CustomCatalog {
 	if id == 0 {
 		return nil
 	}
-	x := &CustomCatalog{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CustomCatalog{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,24 +43,10 @@ func customCatalogAdopt(id objc.ID) *CustomCatalog {
 	if id == 0 {
 		return nil
 	}
-	x := &CustomCatalog{Handle: objref.Wrap(id)}
+	x := &CustomCatalog{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CustomCatalog) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CustomCatalog) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CustomCatalog) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCustomCatalog creates a new CustomCatalog.
@@ -66,10 +55,8 @@ func NewCustomCatalog() *CustomCatalog {
 	return customCatalogAdopt(_id)
 }
 
-// Load a
-//
-// NewCustomCatalogWithDataRepresentationError creates a new CustomCatalog.
-func NewCustomCatalogWithDataRepresentationError(dataRepresentation obj.Object) (*CustomCatalog, error) {
+// NewCustomCatalogWithDataRepresentationError load a
+func NewCustomCatalogWithDataRepresentationError(dataRepresentation obj.Object) (result *CustomCatalog, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SHCustomCatalog")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:error:"), objref.IDOf(dataRepresentation), unsafe.Pointer(&_nsErr))
@@ -79,7 +66,7 @@ func NewCustomCatalogWithDataRepresentationError(dataRepresentation obj.Object) 
 	return customCatalogAdopt(_id), nil
 }
 
-// Adds a reference signature and its associated metadata to a catalog.
+// AddReferenceSignatureRepresentingMediaItems adds a reference signature and its associated metadata to a catalog.
 func (x *CustomCatalog) AddReferenceSignatureRepresentingMediaItems(signature *Signature, mediaItems []*MediaItem) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addReferenceSignature:representingMediaItems:error:"), objref.IDOf(signature), purego.SliceToNSArray(mediaItems, func(_v *MediaItem) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
@@ -89,7 +76,7 @@ func (x *CustomCatalog) AddReferenceSignatureRepresentingMediaItems(signature *S
 	return nil
 }
 
-// Loads a saved custom catalog from a file.
+// AddCustomCatalogFromURL loads a saved custom catalog from a file.
 func (x *CustomCatalog) AddCustomCatalogFromURL(customCatalogURL string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addCustomCatalogFromURL:error:"), rt.FileURL(customCatalogURL), unsafe.Pointer(&_nsErr))
@@ -99,7 +86,7 @@ func (x *CustomCatalog) AddCustomCatalogFromURL(customCatalogURL string) error {
 	return nil
 }
 
-// Saves the custom catalog to a local file.
+// WriteToURL saves the custom catalog to a local file.
 func (x *CustomCatalog) WriteToURL(destinationURL string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:error:"), rt.FileURL(destinationURL), unsafe.Pointer(&_nsErr))
@@ -109,7 +96,7 @@ func (x *CustomCatalog) WriteToURL(destinationURL string) error {
 	return nil
 }
 
-// The data representation of this file, it can be written to disk
+// DataRepresentation the data representation of this file, it can be written to disk
 func (x *CustomCatalog) DataRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
 	return obj.Wrap(_r)
@@ -125,3 +112,5 @@ type CustomCatalogable interface {
 }
 
 var _ CustomCatalogable = (*CustomCatalog)(nil)
+
+var _ CatalogProvider = (*CustomCatalog)(nil)

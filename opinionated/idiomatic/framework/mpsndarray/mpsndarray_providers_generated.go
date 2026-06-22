@@ -11,49 +11,59 @@ import (
 // ArrayBinaryKernelProvider is accepted wherever a MPSNDArrayBinaryKernel (or one of its subclasses) is expected.
 type ArrayBinaryKernelProvider interface {
 	objref.Object
+	isArrayBinaryKernel()
 }
 
 // ArrayBinaryPrimaryGradientKernelProvider is accepted wherever a MPSNDArrayBinaryPrimaryGradientKernel (or one of its subclasses) is expected.
 type ArrayBinaryPrimaryGradientKernelProvider interface {
 	objref.Object
+	isArrayBinaryPrimaryGradientKernel()
 }
 
 // ArrayGradientStateProvider is accepted wherever a MPSNDArrayGradientState (or one of its subclasses) is expected.
 type ArrayGradientStateProvider interface {
 	objref.Object
+	isArrayGradientState()
 }
 
 // ArrayMatrixMultiplicationProvider is accepted wherever a MPSNDArrayMatrixMultiplication (or one of its subclasses) is expected.
 type ArrayMatrixMultiplicationProvider interface {
 	objref.Object
+	isArrayMatrixMultiplication()
 }
 
 // ArrayMultiaryBaseProvider is accepted wherever a MPSNDArrayMultiaryBase (or one of its subclasses) is expected.
 type ArrayMultiaryBaseProvider interface {
 	objref.Object
+	isArrayMultiaryBase()
 }
 
 // ArrayMultiaryGradientKernelProvider is accepted wherever a MPSNDArrayMultiaryGradientKernel (or one of its subclasses) is expected.
 type ArrayMultiaryGradientKernelProvider interface {
 	objref.Object
+	isArrayMultiaryGradientKernel()
 }
 
 // ArrayMultiaryKernelProvider is accepted wherever a MPSNDArrayMultiaryKernel (or one of its subclasses) is expected.
 type ArrayMultiaryKernelProvider interface {
 	objref.Object
+	isArrayMultiaryKernel()
 }
 
 // ArrayQuantizationDescriptorProvider is accepted wherever a MPSNDArrayQuantizationDescriptor (or one of its subclasses) is expected.
 type ArrayQuantizationDescriptorProvider interface {
 	objref.Object
+	isArrayQuantizationDescriptor()
 }
 
 // ArrayUnaryGradientKernelProvider is accepted wherever a MPSNDArrayUnaryGradientKernel (or one of its subclasses) is expected.
 type ArrayUnaryGradientKernelProvider interface {
 	objref.Object
+	isArrayUnaryGradientKernel()
 }
 
 // ArrayUnaryKernelProvider is accepted wherever a MPSNDArrayUnaryKernel (or one of its subclasses) is expected.
 type ArrayUnaryKernelProvider interface {
 	objref.Object
+	isArrayUnaryKernel()
 }

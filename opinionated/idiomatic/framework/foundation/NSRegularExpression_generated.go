@@ -14,9 +14,11 @@ import (
 	"unsafe"
 )
 
-// An immutable representation of a compiled regular expression that you apply to Unicode strings.
-//
 // RegularExpression is an idiomatic wrapper over the Objective-C class NSRegularExpression.
+//
+// RegularExpression is an abstract base — you do not construct it directly. Construct one of [DataDetector] and pass it where a RegularExpression is accepted.
+//
+// An immutable representation of a compiled regular expression that you apply to Unicode strings.
 type RegularExpression struct {
 	objref.Handle
 }
@@ -27,7 +29,8 @@ func RegularExpressionFromID(id objc.ID) *RegularExpression {
 	if id == 0 {
 		return nil
 	}
-	x := &RegularExpression{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RegularExpression{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +43,8 @@ func regularExpressionAdopt(id objc.ID) *RegularExpression {
 	if id == 0 {
 		return nil
 	}
-	x := &RegularExpression{Handle: objref.Wrap(id)}
+	x := &RegularExpression{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,10 +64,14 @@ func (x *RegularExpression) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns an initialized NSRegularExpression instance with the specified regular expression pattern and options.
-//
-// NewRegularExpressionWithPatternOptionsError creates a new RegularExpression.
-func NewRegularExpressionWithPatternOptionsError(pattern string, options RegularExpressionOptions) (*RegularExpression, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RegularExpression) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRegularExpressionWithPatternOptionsError returns an initialized NSRegularExpression instance with the specified regular expression pattern and options.
+func NewRegularExpressionWithPatternOptionsError(pattern string, options RegularExpressionOptions) (result *RegularExpression, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSRegularExpression")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPattern:options:error:"), purego.NSString(pattern), options, unsafe.Pointer(&_nsErr))
@@ -73,12 +81,13 @@ func NewRegularExpressionWithPatternOptionsError(pattern string, options Regular
 	return regularExpressionAdopt(_id), nil
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *RegularExpression) WithScriptingProperties(scriptingProperties obj.Object) *RegularExpression {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Pattern wraps the corresponding Objective-C method.
 func (x *RegularExpression) Pattern() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pattern"))
 	if _r == 0 {
@@ -87,17 +96,19 @@ func (x *RegularExpression) Pattern() string {
 	return purego.GoString(_r)
 }
 
+// Options wraps the corresponding Objective-C method.
 func (x *RegularExpression) Options() RegularExpressionOptions {
 	_r := objc.Send[RegularExpressionOptions](objref.IDOf(x), objc.RegisterName("options"))
 	return _r
 }
 
+// NumberOfCaptureGroups wraps the corresponding Objective-C method.
 func (x *RegularExpression) NumberOfCaptureGroups() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfCaptureGroups"))
 	return _r
 }
 
-// Used to perform template substitution for a single result for clients implementing their own replace functionality.
+// ReplacementStringForResultInStringOffsetTemplate used to perform template substitution for a single result for clients implementing their own replace functionality.
 func (x *RegularExpression) ReplacementStringForResultInStringOffsetTemplate(result *TextCheckingResult, string_ string, offset int, templ string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replacementStringForResult:inString:offset:template:"), objref.IDOf(result), purego.NSString(string_), offset, purego.NSString(templ))
 	if _r == 0 {
@@ -117,3 +128,10 @@ type RegularExpressionable interface {
 }
 
 var _ RegularExpressionable = (*RegularExpression)(nil)
+
+// isRegularExpression marks RegularExpression — and, by embedding promotion, its
+// subclasses — as a member of the RegularExpression hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *RegularExpression) isRegularExpression() {}
+
+var _ RegularExpressionProvider = (*RegularExpression)(nil)

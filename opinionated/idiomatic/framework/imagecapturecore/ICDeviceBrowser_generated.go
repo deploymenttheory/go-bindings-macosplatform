@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object for finding digital cameras and scanners.
-//
 // DeviceBrowser is an idiomatic wrapper over the Objective-C class ICDeviceBrowser.
+//
+// An object for finding digital cameras and scanners.
 type DeviceBrowser struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DeviceBrowserFromID(id objc.ID) *DeviceBrowser {
 	if id == 0 {
 		return nil
 	}
-	x := &DeviceBrowser{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DeviceBrowser{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func deviceBrowserAdopt(id objc.ID) *DeviceBrowser {
 	if id == 0 {
 		return nil
 	}
-	x := &DeviceBrowser{Handle: objref.Wrap(id)}
+	x := &DeviceBrowser{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,47 +60,52 @@ func (x *DeviceBrowser) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DeviceBrowser) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDeviceBrowser creates a new DeviceBrowser.
 func NewDeviceBrowser() *DeviceBrowser {
 	_id := objc.Send[objc.ID](objc.ID(_class("ICDeviceBrowser")), objc.RegisterName("new"))
 	return deviceBrowserAdopt(_id)
 }
 
-// A mask whose set bits indicate the type of devices being browsed after the delegate receives the start message.
-//
-// WithBrowsedDeviceTypeMask sets browsedDeviceTypeMask and returns the receiver so calls can be chained.
+// WithBrowsedDeviceTypeMask a mask whose set bits indicate the type of devices being browsed after the delegate receives the start message.
 func (x *DeviceBrowser) WithBrowsedDeviceTypeMask(browsedDeviceTypeMask DeviceTypeMask) *DeviceBrowser {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBrowsedDeviceTypeMask:"), browsedDeviceTypeMask)
 	return x
 }
 
-// Tells the delegate to start looking for devices.
+// Start tells the delegate to start looking for devices.
 func (x *DeviceBrowser) Start() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
 }
 
-// Tells the delegate to stop looking for devices.
+// Stop tells the delegate to stop looking for devices.
 func (x *DeviceBrowser) Stop() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
-// Indicates whether the device browser is browsing for devices.
+// IsBrowsing indicates whether the device browser is browsing for devices.
 func (x *DeviceBrowser) IsBrowsing() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBrowsing"))
 	return _r
 }
 
-// A mask whose set bits indicate the type of device(s) being browsed after the receiver receives the start message. This property can be changed while the browser is browsing for devices. This property can be constructed by OR'd values of ICDeviceTypeMask with values of ICDeviceLocationTypeMask.
+// BrowsedDeviceTypeMask a mask whose set bits indicate the type of device(s) being browsed after the receiver receives the start message. This property can be changed while the browser is browsing for devices. This property can be constructed by OR'd values of ICDeviceTypeMask with values of ICDeviceLocationTypeMask.
 func (x *DeviceBrowser) BrowsedDeviceTypeMask() DeviceTypeMask {
 	_r := objc.Send[DeviceTypeMask](objref.IDOf(x), objc.RegisterName("browsedDeviceTypeMask"))
 	return _r
 }
 
+// SetBrowsedDeviceTypeMask wraps the corresponding Objective-C method.
 func (x *DeviceBrowser) SetBrowsedDeviceTypeMask(browsedDeviceTypeMask DeviceTypeMask) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBrowsedDeviceTypeMask:"), browsedDeviceTypeMask)
 }
 
-// All devices found by the browser. This property will change as devices appear and disappear. This array is empty before the first invocation of the delegate method 'deviceBrowser:didAddDevice:moreComing:'.
+// Devices all devices found by the browser. This property will change as devices appear and disappear. This array is empty before the first invocation of the delegate method 'deviceBrowser:didAddDevice:moreComing:'.
 //
 // Devices returns the collection as a Go slice.
 func (x *DeviceBrowser) Devices() []*Device {

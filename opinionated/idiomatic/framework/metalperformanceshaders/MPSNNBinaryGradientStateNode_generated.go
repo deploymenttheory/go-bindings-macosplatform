@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of the state created to record the properties of a binary gradient kernel.
-//
 // NNBinaryGradientStateNode is an idiomatic wrapper over the Objective-C class MPSNNBinaryGradientStateNode.
+//
+// NNBinaryGradientStateNode is an abstract base — you do not construct it directly. Construct one of [NNArithmeticGradientStateNode] and pass it where a NNBinaryGradientStateNode is accepted.
+//
+// A representation of the state created to record the properties of a binary gradient kernel.
 type NNBinaryGradientStateNode struct {
-	objref.Handle
+	NNStateNode
 }
 
 // NNBinaryGradientStateNodeFromID adopts an existing Objective-C object as a NNBinaryGradientStateNode
@@ -25,7 +26,8 @@ func NNBinaryGradientStateNodeFromID(id objc.ID) *NNBinaryGradientStateNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNBinaryGradientStateNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNBinaryGradientStateNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,43 +40,19 @@ func nNBinaryGradientStateNodeAdopt(id objc.ID) *NNBinaryGradientStateNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNBinaryGradientStateNode{Handle: objref.Wrap(id)}
+	x := &NNBinaryGradientStateNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NNBinaryGradientStateNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNBinaryGradientStateNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNBinaryGradientStateNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewNNBinaryGradientStateNode creates a new NNBinaryGradientStateNode.
-func NewNNBinaryGradientStateNode() *NNBinaryGradientStateNode {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNBinaryGradientStateNode")), objc.RegisterName("new"))
-	return nNBinaryGradientStateNodeAdopt(_id)
-}
-
-// Tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
-//
-// WithExportFromGraph sets exportFromGraph and returns the receiver so calls can be chained.
+// WithExportFromGraph tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
 func (x *NNBinaryGradientStateNode) WithExportFromGraph(exportFromGraph bool) *NNBinaryGradientStateNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
 	return x
 }
 
-// Set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
-//
-// WithSynchronizeResource sets synchronizeResource and returns the receiver so calls can be chained.
+// WithSynchronizeResource set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
 func (x *NNBinaryGradientStateNode) WithSynchronizeResource(synchronizeResource bool) *NNBinaryGradientStateNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
 	return x
@@ -88,3 +66,12 @@ type NNBinaryGradientStateNodeable interface {
 }
 
 var _ NNBinaryGradientStateNodeable = (*NNBinaryGradientStateNode)(nil)
+
+// isNNBinaryGradientStateNode marks NNBinaryGradientStateNode — and, by embedding promotion, its
+// subclasses — as a member of the NNBinaryGradientStateNode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NNBinaryGradientStateNode) isNNBinaryGradientStateNode() {}
+
+var _ NNBinaryGradientStateNodeProvider = (*NNBinaryGradientStateNode)(nil)
+
+var _ NNStateNodeProvider = (*NNBinaryGradientStateNode)(nil)

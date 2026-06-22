@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Defines the time duration windows the request’s underlying sound classifier accepts with a range, or an array, of durations.
-//
 // TimeDurationConstraint is an idiomatic wrapper over the Objective-C class SNTimeDurationConstraint.
+//
+// Defines the time duration windows the request’s underlying sound classifier accepts with a range, or an array, of durations.
 type TimeDurationConstraint struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TimeDurationConstraintFromID(id objc.ID) *TimeDurationConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &TimeDurationConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TimeDurationConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func timeDurationConstraintAdopt(id objc.ID) *TimeDurationConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &TimeDurationConstraint{Handle: objref.Wrap(id)}
+	x := &TimeDurationConstraint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,26 @@ func (x *TimeDurationConstraint) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes an enumerated-type constraint. - Parameter enumeratedDurations: A discrete set of duration values (represented as CMTime values boxed in NSValue instances) permitted by this constraint. - Returns: An instance whose `type` is `SNTimeDurationConstraintTypeEnumerated`, and which constrains duration values to the provided set of discrete values.
-//
-// NewTimeDurationConstraintWithEnumeratedDurations creates a new TimeDurationConstraint.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TimeDurationConstraint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTimeDurationConstraintWithEnumeratedDurations initializes an enumerated-type constraint. - Parameter enumeratedDurations: A discrete set of duration values (represented as CMTime values boxed in NSValue instances) permitted by this constraint. - Returns: An instance whose `type` is `SNTimeDurationConstraintTypeEnumerated`, and which constrains duration values to the provided set of discrete values.
 func NewTimeDurationConstraintWithEnumeratedDurations(enumeratedDurations []obj.Object) *TimeDurationConstraint {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SNTimeDurationConstraint")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEnumeratedDurations:"), purego.SliceToNSArray(enumeratedDurations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return timeDurationConstraintAdopt(_id)
 }
 
-// The time constraint type. The value of this property dictates whether or not other properties associated with this class can be validly accessed. Please refer to the documentation of other individual properties to understand their relationship to this one. This property is always valid to access.
+// Type the time constraint type. The value of this property dictates whether or not other properties associated with this class can be validly accessed. Please refer to the documentation of other individual properties to understand their relationship to this one. This property is always valid to access.
 func (x *TimeDurationConstraint) Type() TimeDurationConstraintType {
 	_r := objc.Send[TimeDurationConstraintType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
-// If the constraint type is enumerated, then the set of discrete allowable time durations. - Returns: If the constraint type is enumerated, an array of CMTime structures (boxed in NSValue instances) representing the set of allowable time durations. The durations will always be provided sorted in order of ascending time. If the constraint type is not enumerated, an empty array will be returned. The `type` property should be queried before this property is accessed. This property will only yield meaningful values if the constraint type is considered to be 'enumerated'. The constraint type is considered to be 'enumerated' if the `type` property is equal to `SNTimeDurationConstraintTypeEnumerated`.
+// EnumeratedDurations if the constraint type is enumerated, then the set of discrete allowable time durations. - Returns: If the constraint type is enumerated, an array of CMTime structures (boxed in NSValue instances) representing the set of allowable time durations. The durations will always be provided sorted in order of ascending time. If the constraint type is not enumerated, an empty array will be returned. The `type` property should be queried before this property is accessed. This property will only yield meaningful values if the constraint type is considered to be 'enumerated'. The constraint type is considered to be 'enumerated' if the `type` property is equal to `SNTimeDurationConstraintTypeEnumerated`.
 //
 // EnumeratedDurations returns the collection as a Go slice.
 func (x *TimeDurationConstraint) EnumeratedDurations() []obj.Object {

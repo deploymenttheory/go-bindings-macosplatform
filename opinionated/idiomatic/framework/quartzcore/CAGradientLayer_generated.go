@@ -6,17 +6,19 @@ package quartzcore
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that draws a color gradient over its background color, filling the shape of the layer.
-//
 // GradientLayer is an idiomatic wrapper over the Objective-C class CAGradientLayer.
+//
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that draws a color gradient over its background color, filling the shape of the layer.
 type GradientLayer struct {
-	objref.Handle
+	Layer
 }
 
 // GradientLayerFromID adopts an existing Objective-C object as a GradientLayer
@@ -25,7 +27,8 @@ func GradientLayerFromID(id objc.ID) *GradientLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &GradientLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GradientLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func gradientLayerAdopt(id objc.ID) *GradientLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &GradientLayer{Handle: objref.Wrap(id)}
+	x := &GradientLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GradientLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GradientLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GradientLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGradientLayer creates a new GradientLayer.
@@ -64,389 +53,392 @@ func NewGradientLayer() *GradientLayer {
 	return gradientLayerAdopt(_id)
 }
 
-// An optional array of NSNumber objects defining the location of each gradient stop. Animatable.
-//
-// WithLocations sets the collection and returns the receiver so calls can be chained.
+// WithLocations an optional array of NSNumber objects defining the location of each gradient stop. Animatable.
 func (x *GradientLayer) WithLocations(items ...obj.Object) *GradientLayer {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocations:"), _arr)
 	return x
 }
 
-// Style of gradient drawn by the layer.
-//
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithStartPoint the start point of the gradient when drawn in the layer’s coordinate space. Animatable.
+func (x *GradientLayer) WithStartPoint(startPoint corefoundation.CGPoint) *GradientLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartPoint:"), startPoint)
+	return x
+}
+
+// WithEndPoint the end point of the gradient when drawn in the layer’s coordinate space. Animatable.
+func (x *GradientLayer) WithEndPoint(endPoint corefoundation.CGPoint) *GradientLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndPoint:"), endPoint)
+	return x
+}
+
+// WithType style of gradient drawn by the layer.
 func (x *GradientLayer) WithType(type_ obj.Object) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return x
 }
 
-// The layer’s position on the z axis. Animatable.
-//
-// WithZPosition sets zPosition and returns the receiver so calls can be chained.
+// WithBounds the layer’s bounds rectangle. Animatable.
+func (x *GradientLayer) WithBounds(bounds corefoundation.CGRect) *GradientLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
+	return x
+}
+
+// WithPosition the layer’s position in its superlayer’s coordinate space. Animatable.
+func (x *GradientLayer) WithPosition(position corefoundation.CGPoint) *GradientLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
+	return x
+}
+
+// WithZPosition the layer’s position on the z axis. Animatable.
 func (x *GradientLayer) WithZPosition(zPosition float64) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
 	return x
 }
 
-// The anchor point for the layer’s position along the z axis. Animatable.
-//
-// WithAnchorPointZ sets anchorPointZ and returns the receiver so calls can be chained.
+// WithAnchorPoint defines the anchor point of the layer’s bounds rectangle. Animatable.
+func (x *GradientLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *GradientLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPoint:"), anchorPoint)
+	return x
+}
+
+// WithAnchorPointZ the anchor point for the layer’s position along the z axis. Animatable.
 func (x *GradientLayer) WithAnchorPointZ(anchorPointZ float64) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPointZ:"), anchorPointZ)
 	return x
 }
 
-// A Boolean indicating whether the layer is displayed. Animatable.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithFrame the layer’s frame rectangle.
+func (x *GradientLayer) WithFrame(frame corefoundation.CGRect) *GradientLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
+	return x
+}
+
+// WithHidden a Boolean indicating whether the layer is displayed. Animatable.
 func (x *GradientLayer) WithHidden(hidden bool) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// A Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
-//
-// WithDoubleSided sets doubleSided and returns the receiver so calls can be chained.
+// WithDoubleSided a Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
 func (x *GradientLayer) WithDoubleSided(doubleSided bool) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleSided:"), doubleSided)
 	return x
 }
 
-// A Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
-//
-// WithGeometryFlipped sets geometryFlipped and returns the receiver so calls can be chained.
+// WithGeometryFlipped a Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
 func (x *GradientLayer) WithGeometryFlipped(geometryFlipped bool) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeometryFlipped:"), geometryFlipped)
 	return x
 }
 
-// An array containing the layer’s sublayers.
-//
-// WithSublayers sets the collection and returns the receiver so calls can be chained.
+// WithSublayers an array containing the layer’s sublayers.
 func (x *GradientLayer) WithSublayers(items ...LayerProvider) *GradientLayer {
 	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSublayers:"), _arr)
 	return x
 }
 
-// An optional layer whose alpha channel is used to mask the layer’s content.
-//
-// WithMask sets mask and returns the receiver so calls can be chained.
+// WithMask an optional layer whose alpha channel is used to mask the layer’s content.
 func (x *GradientLayer) WithMask(mask LayerProvider) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMask:"), objref.IDOf(mask))
 	return x
 }
 
-// A Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
-//
-// WithMasksToBounds sets masksToBounds and returns the receiver so calls can be chained.
+// WithMasksToBounds a Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
 func (x *GradientLayer) WithMasksToBounds(masksToBounds bool) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMasksToBounds:"), masksToBounds)
 	return x
 }
 
-// An object that provides the contents of the layer. Animatable.
-//
-// WithContents sets contents and returns the receiver so calls can be chained.
+// WithContents an object that provides the contents of the layer. Animatable.
 func (x *GradientLayer) WithContents(contents obj.Object) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), objref.IDOf(contents))
 	return x
 }
 
-// A constant that specifies how the layer’s contents are positioned or scaled within its bounds.
-//
-// WithContentsGravity sets contentsGravity and returns the receiver so calls can be chained.
+// WithContentsRect the rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
+func (x *GradientLayer) WithContentsRect(contentsRect corefoundation.CGRect) *GradientLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsRect:"), contentsRect)
+	return x
+}
+
+// WithContentsGravity a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
 func (x *GradientLayer) WithContentsGravity(contentsGravity obj.Object) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
 	return x
 }
 
-// The scale factor applied to the layer.
-//
-// WithContentsScale sets contentsScale and returns the receiver so calls can be chained.
+// WithContentsScale the scale factor applied to the layer.
 func (x *GradientLayer) WithContentsScale(contentsScale float64) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsScale:"), contentsScale)
 	return x
 }
 
-// A hint for the desired storage format of the layer contents.
-//
-// WithContentsFormat sets contentsFormat and returns the receiver so calls can be chained.
+// WithContentsCenter the rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
+func (x *GradientLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *GradientLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsCenter:"), contentsCenter)
+	return x
+}
+
+// WithContentsFormat a hint for the desired storage format of the layer contents.
 func (x *GradientLayer) WithContentsFormat(contentsFormat obj.Object) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
 	return x
 }
 
-// WithWantsExtendedDynamicRangeContent sets wantsExtendedDynamicRangeContent and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeContent sets the property and returns the receiver so calls can be chained.
 func (x *GradientLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
 	return x
 }
 
-// WithToneMapMode sets toneMapMode and returns the receiver so calls can be chained.
+// WithToneMapMode sets the property and returns the receiver so calls can be chained.
 func (x *GradientLayer) WithToneMapMode(toneMapMode obj.Object) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 	return x
 }
 
-// WithPreferredDynamicRange sets preferredDynamicRange and returns the receiver so calls can be chained.
+// WithPreferredDynamicRange sets the property and returns the receiver so calls can be chained.
 func (x *GradientLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 	return x
 }
 
-// WithContentsHeadroom sets contentsHeadroom and returns the receiver so calls can be chained.
+// WithContentsHeadroom sets the property and returns the receiver so calls can be chained.
 func (x *GradientLayer) WithContentsHeadroom(contentsHeadroom float64) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
 	return x
 }
 
-// The filter used when reducing the size of the content.
-//
-// WithMinificationFilter sets minificationFilter and returns the receiver so calls can be chained.
+// WithMinificationFilter the filter used when reducing the size of the content.
 func (x *GradientLayer) WithMinificationFilter(minificationFilter obj.Object) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
 	return x
 }
 
-// The filter used when increasing the size of the content.
-//
-// WithMagnificationFilter sets magnificationFilter and returns the receiver so calls can be chained.
+// WithMagnificationFilter the filter used when increasing the size of the content.
 func (x *GradientLayer) WithMagnificationFilter(magnificationFilter obj.Object) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
 	return x
 }
 
-// The bias factor used by the minification filter to determine the levels of detail.
-//
-// WithMinificationFilterBias sets minificationFilterBias and returns the receiver so calls can be chained.
+// WithMinificationFilterBias the bias factor used by the minification filter to determine the levels of detail.
 func (x *GradientLayer) WithMinificationFilterBias(minificationFilterBias float32) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilterBias:"), minificationFilterBias)
 	return x
 }
 
-// A Boolean value indicating whether the layer contains completely opaque content.
-//
-// WithOpaque sets opaque and returns the receiver so calls can be chained.
+// WithOpaque a Boolean value indicating whether the layer contains completely opaque content.
 func (x *GradientLayer) WithOpaque(opaque bool) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
 	return x
 }
 
-// A Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
-//
-// WithNeedsDisplayOnBoundsChange sets needsDisplayOnBoundsChange and returns the receiver so calls can be chained.
+// WithNeedsDisplayOnBoundsChange a Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
 func (x *GradientLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplayOnBoundsChange:"), needsDisplayOnBoundsChange)
 	return x
 }
 
-// A Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
-//
-// WithDrawsAsynchronously sets drawsAsynchronously and returns the receiver so calls can be chained.
+// WithDrawsAsynchronously a Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
 func (x *GradientLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsAsynchronously:"), drawsAsynchronously)
 	return x
 }
 
-// A bitmask defining how the edges of the receiver are rasterized.
-//
-// WithEdgeAntialiasingMask sets edgeAntialiasingMask and returns the receiver so calls can be chained.
+// WithEdgeAntialiasingMask a bitmask defining how the edges of the receiver are rasterized.
 func (x *GradientLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeAntialiasingMask:"), edgeAntialiasingMask)
 	return x
 }
 
-// A Boolean indicating whether the layer is allowed to perform edge antialiasing.
-//
-// WithAllowsEdgeAntialiasing sets allowsEdgeAntialiasing and returns the receiver so calls can be chained.
+// WithAllowsEdgeAntialiasing a Boolean indicating whether the layer is allowed to perform edge antialiasing.
 func (x *GradientLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEdgeAntialiasing:"), allowsEdgeAntialiasing)
 	return x
 }
 
-// The background color of the receiver. Animatable.
-//
-// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+// WithBackgroundColor the background color of the receiver. Animatable.
 func (x *GradientLayer) WithBackgroundColor(backgroundColor obj.Object) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// The radius to use when drawing rounded corners for the layer’s background. Animatable.
-//
-// WithCornerRadius sets cornerRadius and returns the receiver so calls can be chained.
+// WithCornerRadius the radius to use when drawing rounded corners for the layer’s background. Animatable.
 func (x *GradientLayer) WithCornerRadius(cornerRadius float64) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
 	return x
 }
 
-// WithMaskedCorners sets maskedCorners and returns the receiver so calls can be chained.
+// WithMaskedCorners sets the property and returns the receiver so calls can be chained.
 func (x *GradientLayer) WithMaskedCorners(maskedCorners CornerMask) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskedCorners:"), maskedCorners)
 	return x
 }
 
-// WithCornerCurve sets cornerCurve and returns the receiver so calls can be chained.
+// WithCornerCurve sets the property and returns the receiver so calls can be chained.
 func (x *GradientLayer) WithCornerCurve(cornerCurve obj.Object) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 	return x
 }
 
-// The width of the layer’s border. Animatable.
-//
-// WithBorderWidth sets borderWidth and returns the receiver so calls can be chained.
+// WithBorderWidth the width of the layer’s border. Animatable.
 func (x *GradientLayer) WithBorderWidth(borderWidth float64) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderWidth:"), borderWidth)
 	return x
 }
 
-// The color of the layer’s border. Animatable.
-//
-// WithBorderColor sets borderColor and returns the receiver so calls can be chained.
+// WithBorderColor the color of the layer’s border. Animatable.
 func (x *GradientLayer) WithBorderColor(borderColor obj.Object) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 	return x
 }
 
-// The opacity of the receiver. Animatable.
-//
-// WithOpacity sets opacity and returns the receiver so calls can be chained.
+// WithOpacity the opacity of the receiver. Animatable.
 func (x *GradientLayer) WithOpacity(opacity float32) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpacity:"), opacity)
 	return x
 }
 
-// A Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
-//
-// WithAllowsGroupOpacity sets allowsGroupOpacity and returns the receiver so calls can be chained.
+// WithAllowsGroupOpacity a Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
 func (x *GradientLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsGroupOpacity:"), allowsGroupOpacity)
 	return x
 }
 
-// A CoreImage filter used to composite the layer and the content behind it. Animatable.
-//
-// WithCompositingFilter sets compositingFilter and returns the receiver so calls can be chained.
+// WithCompositingFilter a CoreImage filter used to composite the layer and the content behind it. Animatable.
 func (x *GradientLayer) WithCompositingFilter(compositingFilter obj.Object) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// A Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
-//
-// WithShouldRasterize sets shouldRasterize and returns the receiver so calls can be chained.
+// WithShouldRasterize a Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
 func (x *GradientLayer) WithShouldRasterize(shouldRasterize bool) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
 	return x
 }
 
-// The scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
-//
-// WithRasterizationScale sets rasterizationScale and returns the receiver so calls can be chained.
+// WithRasterizationScale the scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
 func (x *GradientLayer) WithRasterizationScale(rasterizationScale float64) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterizationScale:"), rasterizationScale)
 	return x
 }
 
-// The color of the layer’s shadow. Animatable.
-//
-// WithShadowColor sets shadowColor and returns the receiver so calls can be chained.
+// WithShadowColor the color of the layer’s shadow. Animatable.
 func (x *GradientLayer) WithShadowColor(shadowColor obj.Object) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
 	return x
 }
 
-// The opacity of the layer’s shadow. Animatable.
-//
-// WithShadowOpacity sets shadowOpacity and returns the receiver so calls can be chained.
+// WithShadowOpacity the opacity of the layer’s shadow. Animatable.
 func (x *GradientLayer) WithShadowOpacity(shadowOpacity float32) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOpacity:"), shadowOpacity)
 	return x
 }
 
-// The blur radius (in points) used to render the layer’s shadow. Animatable.
-//
-// WithShadowRadius sets shadowRadius and returns the receiver so calls can be chained.
+// WithShadowOffset the offset (in points) of the layer’s shadow. Animatable.
+func (x *GradientLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *GradientLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOffset:"), shadowOffset)
+	return x
+}
+
+// WithShadowRadius the blur radius (in points) used to render the layer’s shadow. Animatable.
 func (x *GradientLayer) WithShadowRadius(shadowRadius float64) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowRadius:"), shadowRadius)
 	return x
 }
 
-// The shape of the layer’s shadow. Animatable.
-//
-// WithShadowPath sets shadowPath and returns the receiver so calls can be chained.
+// WithShadowPath the shape of the layer’s shadow. Animatable.
 func (x *GradientLayer) WithShadowPath(shadowPath obj.Object) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
 	return x
 }
 
-// A bitmask defining how the layer is resized when the bounds of its superlayer changes.
-//
-// WithAutoresizingMask sets autoresizingMask and returns the receiver so calls can be chained.
+// WithAutoresizingMask a bitmask defining how the layer is resized when the bounds of its superlayer changes.
 func (x *GradientLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// A dictionary containing layer actions.
-//
-// WithActions sets actions and returns the receiver so calls can be chained.
+// WithActions a dictionary containing layer actions.
 func (x *GradientLayer) WithActions(actions obj.Object) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActions:"), objref.IDOf(actions))
 	return x
 }
 
-// The name of the receiver.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the name of the receiver.
 func (x *GradientLayer) WithName(name string) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// An optional dictionary used to store property values that aren’t explicitly defined by the layer.
-//
-// WithStyle sets style and returns the receiver so calls can be chained.
+// WithStyle an optional dictionary used to store property values that aren’t explicitly defined by the layer.
 func (x *GradientLayer) WithStyle(style obj.Object) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), objref.IDOf(style))
 	return x
 }
 
-// The constraints used to position current layer’s sublayers.
-//
-// WithConstraints sets the collection and returns the receiver so calls can be chained.
+// WithConstraints the constraints used to position current layer’s sublayers.
 func (x *GradientLayer) WithConstraints(items ...*Constraint) *GradientLayer {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
+// Colors wraps the corresponding Objective-C method.
 func (x *GradientLayer) Colors() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colors"))
 	return obj.Wrap(_r)
 }
 
+// SetColors wraps the corresponding Objective-C method.
 func (x *GradientLayer) SetColors(colors obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColors:"), objref.IDOf(colors))
 }
 
+// Locations wraps the corresponding Objective-C method.
+//
 // Locations returns the collection as a Go slice.
 func (x *GradientLayer) Locations() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetLocations wraps the corresponding Objective-C method.
 func (x *GradientLayer) SetLocations(locations []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocations:"), purego.SliceToNSArray(locations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// StartPoint wraps the corresponding Objective-C method.
+func (x *GradientLayer) StartPoint() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("startPoint"))
+	return _r
+}
+
+// SetStartPoint wraps the corresponding Objective-C method.
+func (x *GradientLayer) SetStartPoint(startPoint corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartPoint:"), startPoint)
+}
+
+// EndPoint wraps the corresponding Objective-C method.
+func (x *GradientLayer) EndPoint() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("endPoint"))
+	return _r
+}
+
+// SetEndPoint wraps the corresponding Objective-C method.
+func (x *GradientLayer) SetEndPoint(endPoint corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndPoint:"), endPoint)
+}
+
+// Type wraps the corresponding Objective-C method.
 func (x *GradientLayer) Type() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
 	return obj.Wrap(_r)
 }
 
+// SetType wraps the corresponding Objective-C method.
 func (x *GradientLayer) SetType(type_ obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
 }
@@ -455,9 +447,15 @@ func (x *GradientLayer) SetType(type_ obj.Object) {
 type GradientLayerable interface {
 	obj.Object
 	WithLocations(items ...obj.Object) *GradientLayer
+	WithStartPoint(startPoint corefoundation.CGPoint) *GradientLayer
+	WithEndPoint(endPoint corefoundation.CGPoint) *GradientLayer
 	WithType(type_ obj.Object) *GradientLayer
+	WithBounds(bounds corefoundation.CGRect) *GradientLayer
+	WithPosition(position corefoundation.CGPoint) *GradientLayer
 	WithZPosition(zPosition float64) *GradientLayer
+	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *GradientLayer
 	WithAnchorPointZ(anchorPointZ float64) *GradientLayer
+	WithFrame(frame corefoundation.CGRect) *GradientLayer
 	WithHidden(hidden bool) *GradientLayer
 	WithDoubleSided(doubleSided bool) *GradientLayer
 	WithGeometryFlipped(geometryFlipped bool) *GradientLayer
@@ -465,8 +463,10 @@ type GradientLayerable interface {
 	WithMask(mask LayerProvider) *GradientLayer
 	WithMasksToBounds(masksToBounds bool) *GradientLayer
 	WithContents(contents obj.Object) *GradientLayer
+	WithContentsRect(contentsRect corefoundation.CGRect) *GradientLayer
 	WithContentsGravity(contentsGravity obj.Object) *GradientLayer
 	WithContentsScale(contentsScale float64) *GradientLayer
+	WithContentsCenter(contentsCenter corefoundation.CGRect) *GradientLayer
 	WithContentsFormat(contentsFormat obj.Object) *GradientLayer
 	WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *GradientLayer
 	WithToneMapMode(toneMapMode obj.Object) *GradientLayer
@@ -493,6 +493,7 @@ type GradientLayerable interface {
 	WithRasterizationScale(rasterizationScale float64) *GradientLayer
 	WithShadowColor(shadowColor obj.Object) *GradientLayer
 	WithShadowOpacity(shadowOpacity float32) *GradientLayer
+	WithShadowOffset(shadowOffset corefoundation.CGSize) *GradientLayer
 	WithShadowRadius(shadowRadius float64) *GradientLayer
 	WithShadowPath(shadowPath obj.Object) *GradientLayer
 	WithAutoresizingMask(autoresizingMask AutoresizingMask) *GradientLayer
@@ -504,8 +505,14 @@ type GradientLayerable interface {
 	SetColors(colors obj.Object)
 	Locations() []obj.Object
 	SetLocations(locations []obj.Object)
+	StartPoint() corefoundation.CGPoint
+	SetStartPoint(startPoint corefoundation.CGPoint)
+	EndPoint() corefoundation.CGPoint
+	SetEndPoint(endPoint corefoundation.CGPoint)
 	Type() obj.Object
 	SetType(type_ obj.Object)
 }
 
 var _ GradientLayerable = (*GradientLayer)(nil)
+
+var _ LayerProvider = (*GradientLayer)(nil)

@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that generates thumbnail images based on provided requirements.
-//
 // ThumbnailGenerator is an idiomatic wrapper over the Objective-C class QLThumbnailGenerator.
+//
+// An object that generates thumbnail images based on provided requirements.
 type ThumbnailGenerator struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func ThumbnailGeneratorFromID(id objc.ID) *ThumbnailGenerator {
 	if id == 0 {
 		return nil
 	}
-	x := &ThumbnailGenerator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ThumbnailGenerator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func thumbnailGeneratorAdopt(id objc.ID) *ThumbnailGenerator {
 	if id == 0 {
 		return nil
 	}
-	x := &ThumbnailGenerator{Handle: objref.Wrap(id)}
+	x := &ThumbnailGenerator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,22 @@ func (x *ThumbnailGenerator) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ThumbnailGenerator) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewThumbnailGenerator creates a new ThumbnailGenerator.
 func NewThumbnailGenerator() *ThumbnailGenerator {
 	_id := objc.Send[objc.ID](objc.ID(_class("QLThumbnailGenerator")), objc.RegisterName("new"))
 	return thumbnailGeneratorAdopt(_id)
 }
 
-// Generates the best possible thumbnail representation for a file and calls a handler upon completion.
+// GenerateBestRepresentationForRequest generates the best possible thumbnail representation for a file and calls a handler upon completion.
 //
 // GenerateBestRepresentationForRequest blocks until the operation completes or ctx is cancelled.
-func (x *ThumbnailGenerator) GenerateBestRepresentationForRequest(ctx context.Context, request *ThumbnailGenerationRequest) (*ThumbnailRepresentation, error) {
+func (x *ThumbnailGenerator) GenerateBestRepresentationForRequest(ctx context.Context, request *ThumbnailGenerationRequest) (result *ThumbnailRepresentation, err error) {
 	type _result struct {
 		val *ThumbnailRepresentation
 		err error
@@ -91,12 +99,12 @@ func (x *ThumbnailGenerator) GenerateBestRepresentationForRequest(ctx context.Co
 	}
 }
 
-// Cancels the generation of a thumbnail for a given request.
+// CancelRequest cancels the generation of a thumbnail for a given request.
 func (x *ThumbnailGenerator) CancelRequest(request *ThumbnailGenerationRequest) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelRequest:"), objref.IDOf(request))
 }
 
-// Saves a thumbnail for the request on disk at fileURL. The file saved at fileURL has to be deleted when it is not used anymore. This is primarily intended for file provider extensions which need to upload thumbnails and have a small memory limit.
+// SaveBestRepresentationForRequestToFileAtURLAsContentType saves a thumbnail for the request on disk at fileURL. The file saved at fileURL has to be deleted when it is not used anymore. This is primarily intended for file provider extensions which need to upload thumbnails and have a small memory limit.
 //
 // SaveBestRepresentationForRequestToFileAtURLAsContentType blocks until the operation completes or ctx is cancelled.
 func (x *ThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLAsContentType(ctx context.Context, request *ThumbnailGenerationRequest, fileURL string, contentType obj.Object) error {
@@ -115,7 +123,7 @@ func (x *ThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLAsConten
 	}
 }
 
-// Saves the best representation of thumbnail for a specific request to the specified URL.
+// SaveBestRepresentationForRequestToFileAtURLWithContentType saves the best representation of thumbnail for a specific request to the specified URL.
 //
 // SaveBestRepresentationForRequestToFileAtURLWithContentType blocks until the operation completes or ctx is cancelled.
 func (x *ThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLWithContentType(ctx context.Context, request *ThumbnailGenerationRequest, fileURL string, contentType string) error {

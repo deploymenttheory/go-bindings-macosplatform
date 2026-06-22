@@ -6,15 +6,17 @@ package pdfkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A PDFSelection object identifies a contiguous or noncontiguous selection of text in a PDF document.
-//
 // Selection is an idiomatic wrapper over the Objective-C class PDFSelection.
+//
+// A PDFSelection object identifies a contiguous or noncontiguous selection of text in a PDF document.
 type Selection struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func SelectionFromID(id objc.ID) *Selection {
 	if id == 0 {
 		return nil
 	}
-	x := &Selection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Selection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func selectionAdopt(id objc.ID) *Selection {
 	if id == 0 {
 		return nil
 	}
-	x := &Selection{Handle: objref.Wrap(id)}
+	x := &Selection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +62,38 @@ func (x *Selection) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns an empty PDFSelection object.
-//
-// NewSelectionWithDocument creates a new Selection.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Selection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSelectionWithDocument returns an empty PDFSelection object.
 func NewSelectionWithDocument(document *Document) *Selection {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFSelection")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDocument:"), objref.IDOf(document))
 	return selectionAdopt(_id)
 }
 
+// BoundsForPage returns the bounds of the selection on the specified page.
+func (x *Selection) BoundsForPage(page *Page) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("boundsForPage:"), objref.IDOf(page))
+	return _r
+}
+
+// NumberOfTextRangesOnPage wraps the corresponding Objective-C method.
 func (x *Selection) NumberOfTextRangesOnPage(page *Page) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfTextRangesOnPage:"), objref.IDOf(page))
 	return _r
 }
 
-// Returns an array of selections, one for each line of text covered by the receiver.
+// RangeAtIndexOnPage wraps the corresponding Objective-C method.
+func (x *Selection) RangeAtIndexOnPage(index int, page *Page) foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("rangeAtIndex:onPage:"), index, objref.IDOf(page))
+	return _r
+}
+
+// SelectionsByLine returns an array of selections, one for each line of text covered by the receiver.
 //
 // SelectionsByLine returns the collection as a Go slice.
 func (x *Selection) SelectionsByLine() []*Selection {
@@ -80,54 +101,50 @@ func (x *Selection) SelectionsByLine() []*Selection {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Selection { return SelectionFromID(_id) })
 }
 
-// Adds the specified selection to the receiving selection.
+// AddSelection adds the specified selection to the receiving selection.
 func (x *Selection) AddSelection(selection *Selection) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSelection:"), objref.IDOf(selection))
 }
 
-// Adds the specified array of selections to the receiving selection.
+// AddSelections adds the specified array of selections to the receiving selection.
 func (x *Selection) AddSelections(selections []*Selection) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSelections:"), purego.SliceToNSArray(selections, func(_v *Selection) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Extends the selection from its end toward the end of the document.
+// ExtendSelectionAtEnd extends the selection from its end toward the end of the document.
 func (x *Selection) ExtendSelectionAtEnd(succeed int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendSelectionAtEnd:"), succeed)
 }
 
-// Extends the selection from its start toward the beginning of the document.
+// ExtendSelectionAtStart extends the selection from its start toward the beginning of the document.
 func (x *Selection) ExtendSelectionAtStart(precede int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendSelectionAtStart:"), precede)
 }
 
+// ExtendSelectionForLineBoundaries wraps the corresponding Objective-C method.
 func (x *Selection) ExtendSelectionForLineBoundaries() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendSelectionForLineBoundaries"))
 }
 
-// Calls drawForPage:withBox:active: with a default value for box parameter.
+// DrawForPageActive calls drawForPage:withBox:active: with a default value for box parameter.
 func (x *Selection) DrawForPageActive(page *Page, active bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawForPage:active:"), objref.IDOf(page), active)
 }
 
-// Draws the selection relative to the origin of the specified box in page space.
+// DrawForPageWithBoxActive draws the selection relative to the origin of the specified box in page space.
 func (x *Selection) DrawForPageWithBoxActive(page *Page, box DisplayBox, active bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawForPage:withBox:active:"), objref.IDOf(page), box, active)
 }
 
+// Pages wraps the corresponding Objective-C method.
+//
 // Pages returns the collection as a Go slice.
 func (x *Selection) Pages() []*Page {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Page { return PageFromID(_id) })
 }
 
-func (x *Selection) String() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("string"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
-}
-
+// AttributedString wraps the corresponding Objective-C method.
 func (x *Selection) AttributedString() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedString"))
 	return obj.Wrap(_r)
@@ -136,7 +153,9 @@ func (x *Selection) AttributedString() obj.Object {
 // Selectionable is the interface implemented by [Selection], for mocking and DI.
 type Selectionable interface {
 	obj.Object
+	BoundsForPage(page *Page) corefoundation.CGRect
 	NumberOfTextRangesOnPage(page *Page) int
+	RangeAtIndexOnPage(index int, page *Page) foundation.NSRange
 	SelectionsByLine() []*Selection
 	AddSelection(selection *Selection)
 	AddSelections(selections []*Selection)
@@ -146,7 +165,6 @@ type Selectionable interface {
 	DrawForPageActive(page *Page, active bool)
 	DrawForPageWithBoxActive(page *Page, box DisplayBox, active bool)
 	Pages() []*Page
-	String() string
 	AttributedString() obj.Object
 }
 

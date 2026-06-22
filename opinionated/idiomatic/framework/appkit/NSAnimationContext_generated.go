@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An animation context, which contains information about environment and state.
-//
 // AnimationContext is an idiomatic wrapper over the Objective-C class NSAnimationContext.
+//
+// An animation context, which contains information about environment and state.
 type AnimationContext struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func AnimationContextFromID(id objc.ID) *AnimationContext {
 	if id == 0 {
 		return nil
 	}
-	x := &AnimationContext{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AnimationContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func animationContextAdopt(id objc.ID) *AnimationContext {
 	if id == 0 {
 		return nil
 	}
-	x := &AnimationContext{Handle: objref.Wrap(id)}
+	x := &AnimationContext{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,62 +61,66 @@ func (x *AnimationContext) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AnimationContext) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAnimationContext creates a new AnimationContext.
 func NewAnimationContext() *AnimationContext {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSAnimationContext")), objc.RegisterName("new"))
 	return animationContextAdopt(_id)
 }
 
-// The duration used by animations created as a result of setting new values for an animatable property.
-//
-// WithDuration sets duration and returns the receiver so calls can be chained.
+// WithDuration the duration used by animations created as a result of setting new values for an animatable property.
 func (x *AnimationContext) WithDuration(duration float64) *AnimationContext {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
 	return x
 }
 
-// The timing function used for all animations within this animation proxy group.
-//
-// WithTimingFunction sets timingFunction and returns the receiver so calls can be chained.
+// WithTimingFunction the timing function used for all animations within this animation proxy group.
 func (x *AnimationContext) WithTimingFunction(timingFunction obj.Object) *AnimationContext {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
 	return x
 }
 
-// A completion Block that is called when the animations in the grouping are completed.
-//
-// WithCompletionHandler sets completionHandler and returns the receiver so calls can be chained.
+// WithCompletionHandler a completion Block that is called when the animations in the grouping are completed.
 func (x *AnimationContext) WithCompletionHandler(completionHandler func()) *AnimationContext {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionHandler:"), objc.NewBlock(func(_ objc.Block) { completionHandler() }))
 	return x
 }
 
-// Determine if animations are enabled or not for animations that occur as a result of another property change.
-//
-// WithAllowsImplicitAnimation sets allowsImplicitAnimation and returns the receiver so calls can be chained.
+// WithAllowsImplicitAnimation determine if animations are enabled or not for animations that occur as a result of another property change.
 func (x *AnimationContext) WithAllowsImplicitAnimation(allowsImplicitAnimation bool) *AnimationContext {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsImplicitAnimation:"), allowsImplicitAnimation)
 	return x
 }
 
+// Duration wraps the corresponding Objective-C method.
 func (x *AnimationContext) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
 	return _r
 }
 
+// SetDuration wraps the corresponding Objective-C method.
 func (x *AnimationContext) SetDuration(duration float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
 }
 
+// TimingFunction wraps the corresponding Objective-C method.
 func (x *AnimationContext) TimingFunction() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timingFunction"))
 	return obj.Wrap(_r)
 }
 
+// SetTimingFunction wraps the corresponding Objective-C method.
 func (x *AnimationContext) SetTimingFunction(timingFunction obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
 }
 
+// Set wraps the corresponding Objective-C method.
+//
 // Set blocks until the operation completes or ctx is cancelled.
 func (x *AnimationContext) Set(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -130,11 +136,13 @@ func (x *AnimationContext) Set(ctx context.Context) error {
 	}
 }
 
+// AllowsImplicitAnimation wraps the corresponding Objective-C method.
 func (x *AnimationContext) AllowsImplicitAnimation() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsImplicitAnimation"))
 	return _r
 }
 
+// SetAllowsImplicitAnimation wraps the corresponding Objective-C method.
 func (x *AnimationContext) SetAllowsImplicitAnimation(allowsImplicitAnimation bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsImplicitAnimation:"), allowsImplicitAnimation)
 }

@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMRect is an idiomatic wrapper over the Objective-C class DOMRect.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMRect struct {
-	objref.Handle
+	DOMObject
 }
 
 // DOMRectFromID adopts an existing Objective-C object as a DOMRect
@@ -23,7 +24,8 @@ func DOMRectFromID(id objc.ID) *DOMRect {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMRect{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMRect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMRectAdopt(id objc.ID) *DOMRect {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMRect{Handle: objref.Wrap(id)}
+	x := &DOMRect{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMRect) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMRect) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMRect) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMRect creates a new DOMRect.
@@ -62,21 +50,25 @@ func NewDOMRect() *DOMRect {
 	return dOMRectAdopt(_id)
 }
 
+// Top wraps the corresponding Objective-C method.
 func (x *DOMRect) Top() *DOMCSSPrimitiveValue {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("top"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
+// Right wraps the corresponding Objective-C method.
 func (x *DOMRect) Right() *DOMCSSPrimitiveValue {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("right"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
+// Bottom wraps the corresponding Objective-C method.
 func (x *DOMRect) Bottom() *DOMCSSPrimitiveValue {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bottom"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
+// Left wraps the corresponding Objective-C method.
 func (x *DOMRect) Left() *DOMCSSPrimitiveValue {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("left"))
 	return DOMCSSPrimitiveValueFromID(_r)
@@ -92,3 +84,7 @@ type DOMRectable interface {
 }
 
 var _ DOMRectable = (*DOMRect)(nil)
+
+var _ DOMObjectProvider = (*DOMRect)(nil)
+
+var _ WebScriptObjectProvider = (*DOMRect)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that represents a container’s status.
-//
 // ContainerStatus is an idiomatic wrapper over the Objective-C class FSContainerStatus.
+//
+// A type that represents a container’s status.
 type ContainerStatus struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ContainerStatusFromID(id objc.ID) *ContainerStatus {
 	if id == 0 {
 		return nil
 	}
-	x := &ContainerStatus{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContainerStatus{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func containerStatusAdopt(id objc.ID) *ContainerStatus {
 	if id == 0 {
 		return nil
 	}
-	x := &ContainerStatus{Handle: objref.Wrap(id)}
+	x := &ContainerStatus{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *ContainerStatus) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContainerStatus) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewContainerStatus creates a new ContainerStatus.
 func NewContainerStatus() *ContainerStatus {
 	_id := objc.Send[objc.ID](objc.ID(_class("FSContainerStatus")), objc.RegisterName("new"))
 	return containerStatusAdopt(_id)
 }
 
-// A value that represents the container state, such as ready, active, or blocked.
+// State a value that represents the container state, such as ready, active, or blocked.
 func (x *ContainerStatus) State() ContainerState {
 	_r := objc.Send[ContainerState](objref.IDOf(x), objc.RegisterName("state"))
 	return _r

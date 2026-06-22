@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Manages a panel that displays progress while burning data to media. A DRBurnProgressPanel object manages a panel that displays and updates burn progress. The burn panel is responsible for begining the burn. The burn is begun and a progress panel is displayed on screen by calling
-//
 // BurnProgressPanel is an idiomatic wrapper over the Objective-C class DRBurnProgressPanel.
+//
+// Manages a panel that displays progress while burning data to media. A DRBurnProgressPanel object manages a panel that displays and updates burn progress. The burn panel is responsible for begining the burn. The burn is begun and a progress panel is displayed on screen by calling
 type BurnProgressPanel struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func BurnProgressPanelFromID(id objc.ID) *BurnProgressPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &BurnProgressPanel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BurnProgressPanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func burnProgressPanelAdopt(id objc.ID) *BurnProgressPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &BurnProgressPanel{Handle: objref.Wrap(id)}
+	x := &BurnProgressPanel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,39 +60,45 @@ func (x *BurnProgressPanel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BurnProgressPanel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBurnProgressPanel creates a new BurnProgressPanel.
 func NewBurnProgressPanel() *BurnProgressPanel {
 	_id := objc.Send[objc.ID](objc.ID(_class("DRBurnProgressPanel")), objc.RegisterName("new"))
 	return burnProgressPanelAdopt(_id)
 }
 
-// Presents the progress panel as a sheet and begins the burn process. This method returns control to the caller after it has displayed the progress sheet and begun the burn. Once the method has returned the caller can perform other operations while the burn continues.
+// BeginProgressSheetForBurnLayoutModalForWindow presents the progress panel as a sheet and begins the burn process. This method returns control to the caller after it has displayed the progress sheet and begun the burn. Once the method has returned the caller can perform other operations while the burn continues.
 func (x *BurnProgressPanel) BeginProgressSheetForBurnLayoutModalForWindow(burn obj.Object, layout obj.Object, docWindow obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginProgressSheetForBurn:layout:modalForWindow:"), objref.IDOf(burn), objref.IDOf(layout), objref.IDOf(docWindow))
 }
 
-// Presents the progress panel on screen and begins the burn process. This method returns control to the caller after it has displayed the progress sheet and begun the burn. Once the method has returned the caller can perform other operations while the burn continues.
+// BeginProgressPanelForBurnLayout presents the progress panel on screen and begins the burn process. This method returns control to the caller after it has displayed the progress sheet and begun the burn. Once the method has returned the caller can perform other operations while the burn continues.
 func (x *BurnProgressPanel) BeginProgressPanelForBurnLayout(burn obj.Object, layout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginProgressPanelForBurn:layout:"), objref.IDOf(burn), objref.IDOf(layout))
 }
 
-// Sets the panel text displayed to the user. The panel's description is typically a short text string that gives an indication to the user what operation is being performed. If no description is explicitly set, the progress panel uses a standard text string suitable to the burn.
+// SetDescription sets the panel text displayed to the user. The panel's description is typically a short text string that gives an indication to the user what operation is being performed. If no description is explicitly set, the progress panel uses a standard text string suitable to the burn.
 func (x *BurnProgressPanel) SetDescription(description string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDescription:"), purego.NSString(description))
 }
 
-// Sets the vebosity of the progress feedback. If verbose is <i>YES</i>, the panel will update status for every change. If verbose is <i>NO</i>, the panel will filter some status messages and only update for major changes. The default for the panel is filter the status messages.
+// SetVerboseProgressStatus sets the vebosity of the progress feedback. If verbose is <i>YES</i>, the panel will update status for every change. If verbose is <i>NO</i>, the panel will filter some status messages and only update for major changes. The default for the panel is filter the status messages.
 func (x *BurnProgressPanel) SetVerboseProgressStatus(verbose bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerboseProgressStatus:"), verbose)
 }
 
-// Returns the vebosity of the panel. This method will return <i>YES</i> if the panel will update status for every change and <i>NO</i> if the panel will filter some status messages and only update for major changes.
+// VerboseProgressStatus returns the vebosity of the panel. This method will return <i>YES</i> if the panel will update status for every change and <i>NO</i> if the panel will filter some status messages and only update for major changes.
 func (x *BurnProgressPanel) VerboseProgressStatus() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("verboseProgressStatus"))
 	return _r
 }
 
-// Invoked when the user clicks the panel's stop button.
+// StopBurn invoked when the user clicks the panel's stop button.
 func (x *BurnProgressPanel) StopBurn(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopBurn:"), objref.IDOf(sender))
 }

@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of methods that enable integration with Core Spotlight.
-//
 // CoreDataCoreSpotlightDelegate is an idiomatic wrapper over the Objective-C class NSCoreDataCoreSpotlightDelegate.
+//
+// A set of methods that enable integration with Core Spotlight.
 type CoreDataCoreSpotlightDelegate struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func CoreDataCoreSpotlightDelegateFromID(id objc.ID) *CoreDataCoreSpotlightDeleg
 	if id == 0 {
 		return nil
 	}
-	x := &CoreDataCoreSpotlightDelegate{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CoreDataCoreSpotlightDelegate{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func coreDataCoreSpotlightDelegateAdopt(id objc.ID) *CoreDataCoreSpotlightDelega
 	if id == 0 {
 		return nil
 	}
-	x := &CoreDataCoreSpotlightDelegate{Handle: objref.Wrap(id)}
+	x := &CoreDataCoreSpotlightDelegate{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,25 +62,27 @@ func (x *CoreDataCoreSpotlightDelegate) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a Core Spotlight delegate with the specified store description and coordinator.
-//
-// NewCoreDataCoreSpotlightDelegateForStoreWithDescriptionCoordinator creates a new CoreDataCoreSpotlightDelegate.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CoreDataCoreSpotlightDelegate) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCoreDataCoreSpotlightDelegateForStoreWithDescriptionCoordinator creates a Core Spotlight delegate with the specified store description and coordinator.
 func NewCoreDataCoreSpotlightDelegateForStoreWithDescriptionCoordinator(description *PersistentStoreDescription, psc *PersistentStoreCoordinator) *CoreDataCoreSpotlightDelegate {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCoreDataCoreSpotlightDelegate")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForStoreWithDescription:coordinator:"), objref.IDOf(description), objref.IDOf(psc))
 	return coreDataCoreSpotlightDelegateAdopt(_id)
 }
 
-// Creates a Core Spotlight delegate with the specified store description and managed object model.
-//
-// NewCoreDataCoreSpotlightDelegateForStoreWithDescriptionModel creates a new CoreDataCoreSpotlightDelegate.
+// NewCoreDataCoreSpotlightDelegateForStoreWithDescriptionModel creates a Core Spotlight delegate with the specified store description and managed object model.
 func NewCoreDataCoreSpotlightDelegateForStoreWithDescriptionModel(description *PersistentStoreDescription, model *ManagedObjectModel) *CoreDataCoreSpotlightDelegate {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCoreDataCoreSpotlightDelegate")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForStoreWithDescription:model:"), objref.IDOf(description), objref.IDOf(model))
 	return coreDataCoreSpotlightDelegateAdopt(_id)
 }
 
-// Returns the domain identifier.
+// DomainIdentifier returns the domain identifier.
 func (x *CoreDataCoreSpotlightDelegate) DomainIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domainIdentifier"))
 	if _r == 0 {
@@ -87,7 +91,7 @@ func (x *CoreDataCoreSpotlightDelegate) DomainIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Returns the index’s name.
+// IndexName returns the index’s name.
 func (x *CoreDataCoreSpotlightDelegate) IndexName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexName"))
 	if _r == 0 {
@@ -96,17 +100,17 @@ func (x *CoreDataCoreSpotlightDelegate) IndexName() string {
 	return purego.GoString(_r)
 }
 
-// Starts the indexing of the store’s entities.
+// StartSpotlightIndexing starts the indexing of the store’s entities.
 func (x *CoreDataCoreSpotlightDelegate) StartSpotlightIndexing() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startSpotlightIndexing"))
 }
 
-// Stops the indexing of the store’s entities.
+// StopSpotlightIndexing stops the indexing of the store’s entities.
 func (x *CoreDataCoreSpotlightDelegate) StopSpotlightIndexing() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopSpotlightIndexing"))
 }
 
-// Deletes all searchable items from the configured index.
+// DeleteSpotlightIndex deletes all searchable items from the configured index.
 //
 // DeleteSpotlightIndex blocks until the operation completes or ctx is cancelled.
 func (x *CoreDataCoreSpotlightDelegate) DeleteSpotlightIndex(ctx context.Context) error {
@@ -125,13 +129,13 @@ func (x *CoreDataCoreSpotlightDelegate) DeleteSpotlightIndex(ctx context.Context
 	}
 }
 
-// Returns the searchable attributes for the specified managed object.
+// AttributeSetForObject returns the searchable attributes for the specified managed object.
 func (x *CoreDataCoreSpotlightDelegate) AttributeSetForObject(object *ManagedObject) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeSetForObject:"), objref.IDOf(object))
 	return obj.Wrap(_r)
 }
 
-// Reindexes all searchable items and clears any local state.
+// SearchableIndexReindexAllSearchableItemsWithAcknowledgementHandler reindexes all searchable items and clears any local state.
 //
 // SearchableIndexReindexAllSearchableItemsWithAcknowledgementHandler blocks until the operation completes or ctx is cancelled.
 func (x *CoreDataCoreSpotlightDelegate) SearchableIndexReindexAllSearchableItemsWithAcknowledgementHandler(ctx context.Context, searchableIndex obj.Object) error {
@@ -148,7 +152,7 @@ func (x *CoreDataCoreSpotlightDelegate) SearchableIndexReindexAllSearchableItems
 	}
 }
 
-// Reindexes the searchable items for the specified identifiers.
+// SearchableIndexReindexSearchableItemsWithIdentifiersAcknowledgementHandler reindexes the searchable items for the specified identifiers.
 //
 // SearchableIndexReindexSearchableItemsWithIdentifiersAcknowledgementHandler blocks until the operation completes or ctx is cancelled.
 func (x *CoreDataCoreSpotlightDelegate) SearchableIndexReindexSearchableItemsWithIdentifiersAcknowledgementHandler(ctx context.Context, searchableIndex obj.Object, identifiers []string) error {
@@ -165,6 +169,7 @@ func (x *CoreDataCoreSpotlightDelegate) SearchableIndexReindexSearchableItemsWit
 	}
 }
 
+// IsIndexingEnabled wraps the corresponding Objective-C method.
 func (x *CoreDataCoreSpotlightDelegate) IsIndexingEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isIndexingEnabled"))
 	return _r

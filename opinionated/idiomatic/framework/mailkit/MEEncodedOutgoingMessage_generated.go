@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains the signed or encrypted representation of a message’s RFC 2822 data.
-//
 // EncodedOutgoingMessage is an idiomatic wrapper over the Objective-C class MEEncodedOutgoingMessage.
+//
+// An object that contains the signed or encrypted representation of a message’s RFC 2822 data.
 type EncodedOutgoingMessage struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func EncodedOutgoingMessageFromID(id objc.ID) *EncodedOutgoingMessage {
 	if id == 0 {
 		return nil
 	}
-	x := &EncodedOutgoingMessage{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EncodedOutgoingMessage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func encodedOutgoingMessageAdopt(id objc.ID) *EncodedOutgoingMessage {
 	if id == 0 {
 		return nil
 	}
-	x := &EncodedOutgoingMessage{Handle: objref.Wrap(id)}
+	x := &EncodedOutgoingMessage{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,32 @@ func (x *EncodedOutgoingMessage) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an object that contains the outgoing message’s encoded data, and indicates if the encoder encrypted or signed the message.
-//
-// NewEncodedOutgoingMessageWithRawDataIsSignedIsEncrypted creates a new EncodedOutgoingMessage.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *EncodedOutgoingMessage) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewEncodedOutgoingMessageWithRawDataIsSignedIsEncrypted creates an object that contains the outgoing message’s encoded data, and indicates if the encoder encrypted or signed the message.
 func NewEncodedOutgoingMessageWithRawDataIsSignedIsEncrypted(rawData obj.Object, isSigned bool, isEncrypted bool) *EncodedOutgoingMessage {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MEEncodedOutgoingMessage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRawData:isSigned:isEncrypted:"), objref.IDOf(rawData), isSigned, isEncrypted)
 	return encodedOutgoingMessageAdopt(_id)
 }
 
-// The full encoded RFC822 message including headers and body.
+// RawData the full encoded RFC822 message including headers and body.
 func (x *EncodedOutgoingMessage) RawData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rawData"))
 	return obj.Wrap(_r)
 }
 
-// Whether or not the encoded message is signed
+// IsSigned whether or not the encoded message is signed
 func (x *EncodedOutgoingMessage) IsSigned() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSigned"))
 	return _r
 }
 
-// Whether or not the encoded message is encrypted
+// IsEncrypted whether or not the encoded message is encrypted
 func (x *EncodedOutgoingMessage) IsEncrypted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEncrypted"))
 	return _r

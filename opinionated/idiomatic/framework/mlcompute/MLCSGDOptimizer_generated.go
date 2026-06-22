@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An optimizer that represents the stochastic gradient decent algorithm.
-//
 // SGDOptimizer is an idiomatic wrapper over the Objective-C class MLCSGDOptimizer.
+//
+// It embeds [Optimizer], promoting that type's methods.
+//
+// An optimizer that represents the stochastic gradient decent algorithm.
 type SGDOptimizer struct {
-	objref.Handle
+	Optimizer
 }
 
 // SGDOptimizerFromID adopts an existing Objective-C object as a SGDOptimizer
@@ -25,7 +26,8 @@ func SGDOptimizerFromID(id objc.ID) *SGDOptimizer {
 	if id == 0 {
 		return nil
 	}
-	x := &SGDOptimizer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SGDOptimizer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func sGDOptimizerAdopt(id objc.ID) *SGDOptimizer {
 	if id == 0 {
 		return nil
 	}
-	x := &SGDOptimizer{Handle: objref.Wrap(id)}
+	x := &SGDOptimizer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SGDOptimizer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SGDOptimizer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SGDOptimizer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSGDOptimizer creates a new SGDOptimizer.
@@ -64,29 +52,25 @@ func NewSGDOptimizer() *SGDOptimizer {
 	return sGDOptimizerAdopt(_id)
 }
 
-// The learning rate.
-//
-// WithLearningRate sets learningRate and returns the receiver so calls can be chained.
+// WithLearningRate the learning rate.
 func (x *SGDOptimizer) WithLearningRate(learningRate float32) *SGDOptimizer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
 	return x
 }
 
-// A Boolean value that indicates whether you apply gradient clipping.
-//
-// WithAppliesGradientClipping sets appliesGradientClipping and returns the receiver so calls can be chained.
+// WithAppliesGradientClipping a Boolean value that indicates whether you apply gradient clipping.
 func (x *SGDOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *SGDOptimizer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesGradientClipping:"), appliesGradientClipping)
 	return x
 }
 
-// The momentum factor.  A hyper-parameter. The default is 0.0.
+// MomentumScale the momentum factor.  A hyper-parameter. The default is 0.0.
 func (x *SGDOptimizer) MomentumScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("momentumScale"))
 	return _r
 }
 
-// A boolean that specifies whether to apply nesterov momentum or not. The default is false.
+// UsesNesterovMomentum a boolean that specifies whether to apply nesterov momentum or not. The default is false.
 func (x *SGDOptimizer) UsesNesterovMomentum() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesNesterovMomentum"))
 	return _r
@@ -102,3 +86,5 @@ type SGDOptimizerable interface {
 }
 
 var _ SGDOptimizerable = (*SGDOptimizer)(nil)
+
+var _ OptimizerProvider = (*SGDOptimizer)(nil)

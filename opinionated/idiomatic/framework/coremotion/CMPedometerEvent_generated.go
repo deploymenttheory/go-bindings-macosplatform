@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A change in the user’s pedestrian activity.
-//
 // PedometerEvent is an idiomatic wrapper over the Objective-C class CMPedometerEvent.
+//
+// A change in the user’s pedestrian activity.
 type PedometerEvent struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PedometerEventFromID(id objc.ID) *PedometerEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &PedometerEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PedometerEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func pedometerEventAdopt(id objc.ID) *PedometerEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &PedometerEvent{Handle: objref.Wrap(id)}
+	x := &PedometerEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,25 @@ func (x *PedometerEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PedometerEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPedometerEvent creates a new PedometerEvent.
 func NewPedometerEvent() *PedometerEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("CMPedometerEvent")), objc.RegisterName("new"))
 	return pedometerEventAdopt(_id)
 }
 
+// Date wraps the corresponding Objective-C method.
 func (x *PedometerEvent) Date() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *PedometerEvent) Type() PedometerEventType {
 	_r := objc.Send[PedometerEventType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r

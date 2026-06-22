@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A component that encapsulates a SceneKit node.
-//
 // SCNNodeComponent is an idiomatic wrapper over the Objective-C class GKSCNNodeComponent.
+//
+// It embeds [Component], promoting that type's methods.
+//
+// A component that encapsulates a SceneKit node.
 type SCNNodeComponent struct {
-	objref.Handle
+	Component
 }
 
 // SCNNodeComponentFromID adopts an existing Objective-C object as a SCNNodeComponent
@@ -25,7 +26,8 @@ func SCNNodeComponentFromID(id objc.ID) *SCNNodeComponent {
 	if id == 0 {
 		return nil
 	}
-	x := &SCNNodeComponent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SCNNodeComponent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,35 +40,20 @@ func sCNNodeComponentAdopt(id objc.ID) *SCNNodeComponent {
 	if id == 0 {
 		return nil
 	}
-	x := &SCNNodeComponent{Handle: objref.Wrap(id)}
+	x := &SCNNodeComponent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *SCNNodeComponent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SCNNodeComponent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SCNNodeComponent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes component to encapsulate the given SceneKit node. When the component is added to an entity, the SCNNode's entity property will be set.
-//
-// NewSCNNodeComponentWithNode creates a new SCNNodeComponent.
+// NewSCNNodeComponentWithNode initializes component to encapsulate the given SceneKit node. When the component is added to an entity, the SCNNode's entity property will be set.
 func NewSCNNodeComponentWithNode(node obj.Object) *SCNNodeComponent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKSCNNodeComponent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNode:"), objref.IDOf(node))
 	return sCNNodeComponentAdopt(_id)
 }
 
+// Node wraps the corresponding Objective-C method.
 func (x *SCNNodeComponent) Node() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("node"))
 	return obj.Wrap(_r)
@@ -79,3 +66,5 @@ type SCNNodeComponentable interface {
 }
 
 var _ SCNNodeComponentable = (*SCNNodeComponent)(nil)
+
+var _ ComponentProvider = (*SCNNodeComponent)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The type for representing grammatical gender in localized text.
-//
 // TermOfAddress is an idiomatic wrapper over the Objective-C class NSTermOfAddress.
+//
+// The type for representing grammatical gender in localized text.
 type TermOfAddress struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TermOfAddressFromID(id objc.ID) *TermOfAddress {
 	if id == 0 {
 		return nil
 	}
-	x := &TermOfAddress{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TermOfAddress{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func termOfAddressAdopt(id objc.ID) *TermOfAddress {
 	if id == 0 {
 		return nil
 	}
-	x := &TermOfAddress{Handle: objref.Wrap(id)}
+	x := &TermOfAddress{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *TermOfAddress) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TermOfAddress) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTermOfAddress creates a new TermOfAddress.
 func NewTermOfAddress() *TermOfAddress {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSTermOfAddress")), objc.RegisterName("new"))
 	return termOfAddressAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *TermOfAddress) WithScriptingProperties(scriptingProperties obj.Object) *TermOfAddress {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// The ISO language code if this is a localized term of address
+// LanguageIdentifier the ISO language code if this is a localized term of address
 func (x *TermOfAddress) LanguageIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageIdentifier"))
 	if _r == 0 {
@@ -79,7 +87,7 @@ func (x *TermOfAddress) LanguageIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// A list of pronouns for a localized term of address
+// Pronouns a list of pronouns for a localized term of address
 //
 // Pronouns returns the collection as a Go slice.
 func (x *TermOfAddress) Pronouns() []*MorphologyPronoun {

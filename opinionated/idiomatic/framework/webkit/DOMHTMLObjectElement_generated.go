@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMHTMLObjectElement is an idiomatic wrapper over the Objective-C class DOMHTMLObjectElement.
+//
+// It embeds [DOMHTMLElement], promoting that type's methods.
 type DOMHTMLObjectElement struct {
-	objref.Handle
+	DOMHTMLElement
 }
 
 // DOMHTMLObjectElementFromID adopts an existing Objective-C object as a DOMHTMLObjectElement
@@ -23,7 +24,8 @@ func DOMHTMLObjectElementFromID(id objc.ID) *DOMHTMLObjectElement {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMHTMLObjectElement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMHTMLObjectElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMHTMLObjectElementAdopt(id objc.ID) *DOMHTMLObjectElement {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMHTMLObjectElement{Handle: objref.Wrap(id)}
+	x := &DOMHTMLObjectElement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMHTMLObjectElement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMHTMLObjectElement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMHTMLObjectElement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMHTMLObjectElement creates a new DOMHTMLObjectElement.
@@ -62,209 +50,211 @@ func NewDOMHTMLObjectElement() *DOMHTMLObjectElement {
 	return dOMHTMLObjectElementAdopt(_id)
 }
 
-// WithCode sets code and returns the receiver so calls can be chained.
+// WithCode sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithCode(code string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCode:"), purego.NSString(code))
 	return x
 }
 
-// WithAlign sets align and returns the receiver so calls can be chained.
+// WithAlign sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithAlign(align string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlign:"), purego.NSString(align))
 	return x
 }
 
-// WithArchive sets archive and returns the receiver so calls can be chained.
+// WithArchive sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithArchive(archive string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArchive:"), purego.NSString(archive))
 	return x
 }
 
-// WithBorder sets border and returns the receiver so calls can be chained.
+// WithBorder sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithBorder(border string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorder:"), purego.NSString(border))
 	return x
 }
 
-// WithCodeBase sets codeBase and returns the receiver so calls can be chained.
+// WithCodeBase sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithCodeBase(codeBase string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCodeBase:"), purego.NSString(codeBase))
 	return x
 }
 
-// WithCodeType sets codeType and returns the receiver so calls can be chained.
+// WithCodeType sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithCodeType(codeType string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCodeType:"), purego.NSString(codeType))
 	return x
 }
 
-// WithData sets data and returns the receiver so calls can be chained.
+// WithData sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithData(data string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 	return x
 }
 
-// WithDeclare sets declare and returns the receiver so calls can be chained.
+// WithDeclare sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithDeclare(declare bool) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeclare:"), declare)
 	return x
 }
 
-// WithHeight sets height and returns the receiver so calls can be chained.
+// WithHeight sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithHeight(height string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), purego.NSString(height))
 	return x
 }
 
-// WithHspace sets hspace and returns the receiver so calls can be chained.
+// WithHspace sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithHspace(hspace int) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHspace:"), hspace)
 	return x
 }
 
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithName(name string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// WithStandby sets standby and returns the receiver so calls can be chained.
+// WithStandby sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithStandby(standby string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandby:"), purego.NSString(standby))
 	return x
 }
 
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithType sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithType(type_ string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
 	return x
 }
 
-// WithUseMap sets useMap and returns the receiver so calls can be chained.
+// WithUseMap sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithUseMap(useMap string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseMap:"), purego.NSString(useMap))
 	return x
 }
 
-// WithVspace sets vspace and returns the receiver so calls can be chained.
+// WithVspace sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithVspace(vspace int) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVspace:"), vspace)
 	return x
 }
 
-// WithWidth sets width and returns the receiver so calls can be chained.
+// WithWidth sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithWidth(width string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), purego.NSString(width))
 	return x
 }
 
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithTitle(title string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// WithLang sets lang and returns the receiver so calls can be chained.
+// WithLang sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithLang(lang string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return x
 }
 
-// WithDir sets dir and returns the receiver so calls can be chained.
+// WithDir sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithDir(dir string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return x
 }
 
-// WithTabIndex sets tabIndex and returns the receiver so calls can be chained.
+// WithTabIndex sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithTabIndex(tabIndex int) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
 	return x
 }
 
-// WithAccessKey sets accessKey and returns the receiver so calls can be chained.
+// WithAccessKey sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithAccessKey(accessKey string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return x
 }
 
-// WithInnerText sets innerText and returns the receiver so calls can be chained.
+// WithInnerText sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithInnerText(innerText string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return x
 }
 
-// WithOuterText sets outerText and returns the receiver so calls can be chained.
+// WithOuterText sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithOuterText(outerText string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return x
 }
 
-// WithContentEditable sets contentEditable and returns the receiver so calls can be chained.
+// WithContentEditable sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithContentEditable(contentEditable string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return x
 }
 
-// WithIdName sets idName and returns the receiver so calls can be chained.
+// WithIdName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithIdName(idName string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return x
 }
 
-// WithScrollLeft sets scrollLeft and returns the receiver so calls can be chained.
+// WithScrollLeft sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithScrollLeft(scrollLeft int) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return x
 }
 
-// WithScrollTop sets scrollTop and returns the receiver so calls can be chained.
+// WithScrollTop sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithScrollTop(scrollTop int) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
 	return x
 }
 
-// WithInnerHTML sets innerHTML and returns the receiver so calls can be chained.
+// WithInnerHTML sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithInnerHTML(innerHTML string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return x
 }
 
-// WithOuterHTML sets outerHTML and returns the receiver so calls can be chained.
+// WithOuterHTML sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithOuterHTML(outerHTML string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return x
 }
 
-// WithClassName sets className and returns the receiver so calls can be chained.
+// WithClassName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithClassName(className string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return x
 }
 
-// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithNodeValue(nodeValue string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets prefix and returns the receiver so calls can be chained.
+// WithPrefix sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithPrefix(prefix string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets textContent and returns the receiver so calls can be chained.
+// WithTextContent sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLObjectElement) WithTextContent(textContent string) *DOMHTMLObjectElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
+// Form wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) Form() *DOMHTMLFormElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("form"))
 	return DOMHTMLFormElementFromID(_r)
 }
 
+// Code wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) Code() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("code"))
 	if _r == 0 {
@@ -273,10 +263,12 @@ func (x *DOMHTMLObjectElement) Code() string {
 	return purego.GoString(_r)
 }
 
+// SetCode wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) SetCode(code string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCode:"), purego.NSString(code))
 }
 
+// Align wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) Align() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("align"))
 	if _r == 0 {
@@ -285,10 +277,12 @@ func (x *DOMHTMLObjectElement) Align() string {
 	return purego.GoString(_r)
 }
 
+// SetAlign wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) SetAlign(align string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlign:"), purego.NSString(align))
 }
 
+// Archive wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) Archive() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("archive"))
 	if _r == 0 {
@@ -297,10 +291,12 @@ func (x *DOMHTMLObjectElement) Archive() string {
 	return purego.GoString(_r)
 }
 
+// SetArchive wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) SetArchive(archive string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArchive:"), purego.NSString(archive))
 }
 
+// Border wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) Border() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("border"))
 	if _r == 0 {
@@ -309,10 +305,12 @@ func (x *DOMHTMLObjectElement) Border() string {
 	return purego.GoString(_r)
 }
 
+// SetBorder wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) SetBorder(border string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorder:"), purego.NSString(border))
 }
 
+// CodeBase wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) CodeBase() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("codeBase"))
 	if _r == 0 {
@@ -321,10 +319,12 @@ func (x *DOMHTMLObjectElement) CodeBase() string {
 	return purego.GoString(_r)
 }
 
+// SetCodeBase wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) SetCodeBase(codeBase string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCodeBase:"), purego.NSString(codeBase))
 }
 
+// CodeType wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) CodeType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("codeType"))
 	if _r == 0 {
@@ -333,10 +333,12 @@ func (x *DOMHTMLObjectElement) CodeType() string {
 	return purego.GoString(_r)
 }
 
+// SetCodeType wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) SetCodeType(codeType string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCodeType:"), purego.NSString(codeType))
 }
 
+// Data wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) Data() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	if _r == 0 {
@@ -345,19 +347,23 @@ func (x *DOMHTMLObjectElement) Data() string {
 	return purego.GoString(_r)
 }
 
+// SetData wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) SetData(data string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 }
 
+// Declare wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) Declare() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("declare"))
 	return _r
 }
 
+// SetDeclare wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) SetDeclare(declare bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeclare:"), declare)
 }
 
+// Height wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) Height() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("height"))
 	if _r == 0 {
@@ -366,19 +372,23 @@ func (x *DOMHTMLObjectElement) Height() string {
 	return purego.GoString(_r)
 }
 
+// SetHeight wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) SetHeight(height string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), purego.NSString(height))
 }
 
+// Hspace wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) Hspace() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("hspace"))
 	return _r
 }
 
+// SetHspace wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) SetHspace(hspace int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHspace:"), hspace)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -387,10 +397,12 @@ func (x *DOMHTMLObjectElement) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
+// Standby wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) Standby() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standby"))
 	if _r == 0 {
@@ -399,10 +411,12 @@ func (x *DOMHTMLObjectElement) Standby() string {
 	return purego.GoString(_r)
 }
 
+// SetStandby wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) SetStandby(standby string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandby:"), purego.NSString(standby))
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
 	if _r == 0 {
@@ -411,10 +425,12 @@ func (x *DOMHTMLObjectElement) Type() string {
 	return purego.GoString(_r)
 }
 
+// SetType wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) SetType(type_ string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
 }
 
+// UseMap wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) UseMap() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("useMap"))
 	if _r == 0 {
@@ -423,19 +439,23 @@ func (x *DOMHTMLObjectElement) UseMap() string {
 	return purego.GoString(_r)
 }
 
+// SetUseMap wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) SetUseMap(useMap string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseMap:"), purego.NSString(useMap))
 }
 
+// Vspace wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) Vspace() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vspace"))
 	return _r
 }
 
+// SetVspace wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) SetVspace(vspace int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVspace:"), vspace)
 }
 
+// Width wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) Width() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("width"))
 	if _r == 0 {
@@ -444,20 +464,24 @@ func (x *DOMHTMLObjectElement) Width() string {
 	return purego.GoString(_r)
 }
 
+// SetWidth wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) SetWidth(width string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), purego.NSString(width))
 }
 
+// ContentDocument wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) ContentDocument() *DOMDocument {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentDocument"))
 	return DOMDocumentFromID(_r)
 }
 
+// AbsoluteImageURL wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) AbsoluteImageURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("absoluteImageURL"))
 	return obj.Wrap(_r)
 }
 
+// ContentFrame wraps the corresponding Objective-C method.
 func (x *DOMHTMLObjectElement) ContentFrame() *WebFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentFrame"))
 	return WebFrameFromID(_r)
@@ -538,3 +562,13 @@ type DOMHTMLObjectElementable interface {
 }
 
 var _ DOMHTMLObjectElementable = (*DOMHTMLObjectElement)(nil)
+
+var _ DOMHTMLElementProvider = (*DOMHTMLObjectElement)(nil)
+
+var _ DOMElementProvider = (*DOMHTMLObjectElement)(nil)
+
+var _ DOMNodeProvider = (*DOMHTMLObjectElement)(nil)
+
+var _ DOMObjectProvider = (*DOMHTMLObjectElement)(nil)
+
+var _ WebScriptObjectProvider = (*DOMHTMLObjectElement)(nil)

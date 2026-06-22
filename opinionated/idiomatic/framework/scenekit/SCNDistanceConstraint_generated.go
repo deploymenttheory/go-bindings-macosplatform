@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DistanceConstraint is an idiomatic wrapper over the Objective-C class SCNDistanceConstraint.
+//
+// It embeds [Constraint], promoting that type's methods.
 type DistanceConstraint struct {
-	objref.Handle
+	Constraint
 }
 
 // DistanceConstraintFromID adopts an existing Objective-C object as a DistanceConstraint
@@ -23,7 +24,8 @@ func DistanceConstraintFromID(id objc.ID) *DistanceConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &DistanceConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DistanceConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func distanceConstraintAdopt(id objc.ID) *DistanceConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &DistanceConstraint{Handle: objref.Wrap(id)}
+	x := &DistanceConstraint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DistanceConstraint) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DistanceConstraint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DistanceConstraint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDistanceConstraint creates a new DistanceConstraint.
@@ -62,80 +50,71 @@ func NewDistanceConstraint() *DistanceConstraint {
 	return distanceConstraintAdopt(_id)
 }
 
-// Defines the target node to keep distance with.
-//
-// WithTarget sets target and returns the receiver so calls can be chained.
+// WithTarget defines the target node to keep distance with.
 func (x *DistanceConstraint) WithTarget(target NodeProvider) *DistanceConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// The minimum distance. Defaults to 0. Animatable.
-//
-// WithMinimumDistance sets minimumDistance and returns the receiver so calls can be chained.
+// WithMinimumDistance the minimum distance. Defaults to 0. Animatable.
 func (x *DistanceConstraint) WithMinimumDistance(minimumDistance float64) *DistanceConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumDistance:"), minimumDistance)
 	return x
 }
 
-// The minimum distance. Defaults to MAXFLOAT. Animatable.
-//
-// WithMaximumDistance sets maximumDistance and returns the receiver so calls can be chained.
+// WithMaximumDistance the minimum distance. Defaults to MAXFLOAT. Animatable.
 func (x *DistanceConstraint) WithMaximumDistance(maximumDistance float64) *DistanceConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumDistance:"), maximumDistance)
 	return x
 }
 
-// Determines whether the constraint is enabled or not. Defaults to YES.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled determines whether the constraint is enabled or not. Defaults to YES.
 func (x *DistanceConstraint) WithEnabled(enabled bool) *DistanceConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The influence of the constraint on the node’s transformation.
-//
-// WithInfluenceFactor sets influenceFactor and returns the receiver so calls can be chained.
+// WithInfluenceFactor the influence of the constraint on the node’s transformation.
 func (x *DistanceConstraint) WithInfluenceFactor(influenceFactor float64) *DistanceConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
 	return x
 }
 
-// Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
-//
-// WithIncremental sets incremental and returns the receiver so calls can be chained.
+// WithIncremental specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
 func (x *DistanceConstraint) WithIncremental(incremental bool) *DistanceConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
 	return x
 }
 
-// Defines the target node to keep distance with.
+// Target defines the target node to keep distance with.
 func (x *DistanceConstraint) Target() *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
 	return NodeFromID(_r)
 }
 
+// SetTarget wraps the corresponding Objective-C method.
 func (x *DistanceConstraint) SetTarget(target *Node) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 }
 
-// The minimum distance. Defaults to 0. Animatable.
+// MinimumDistance the minimum distance. Defaults to 0. Animatable.
 func (x *DistanceConstraint) MinimumDistance() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumDistance"))
 	return _r
 }
 
+// SetMinimumDistance wraps the corresponding Objective-C method.
 func (x *DistanceConstraint) SetMinimumDistance(minimumDistance float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumDistance:"), minimumDistance)
 }
 
-// The minimum distance. Defaults to MAXFLOAT. Animatable.
+// MaximumDistance the minimum distance. Defaults to MAXFLOAT. Animatable.
 func (x *DistanceConstraint) MaximumDistance() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumDistance"))
 	return _r
 }
 
+// SetMaximumDistance wraps the corresponding Objective-C method.
 func (x *DistanceConstraint) SetMaximumDistance(maximumDistance float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumDistance:"), maximumDistance)
 }
@@ -158,3 +137,5 @@ type DistanceConstraintable interface {
 }
 
 var _ DistanceConstraintable = (*DistanceConstraint)(nil)
+
+var _ ConstraintProvider = (*DistanceConstraint)(nil)

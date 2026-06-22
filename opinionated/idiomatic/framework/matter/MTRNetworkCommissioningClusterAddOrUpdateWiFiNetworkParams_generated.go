@@ -23,7 +23,8 @@ func MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsFromID(id objc.ID
 	if id == 0 {
 		return nil
 	}
-	x := &MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsAdopt(id objc.ID)
 	if id == 0 {
 		return nil
 	}
-	x := &MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams{Handle: objref.Wrap(id)}
+	x := &MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,89 +58,99 @@ func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) IsKind(clas
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams creates a new MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams.
 func NewMTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams() *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams")), objc.RegisterName("new"))
 	return mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsAdopt(_id)
 }
 
-// WithSsid sets ssid and returns the receiver so calls can be chained.
+// WithSsid sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithSsid(ssid obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSsid:"), objref.IDOf(ssid))
 	return x
 }
 
-// WithCredentials sets credentials and returns the receiver so calls can be chained.
+// WithCredentials sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithCredentials(credentials obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentials:"), objref.IDOf(credentials))
 	return x
 }
 
-// WithBreadcrumb sets breadcrumb and returns the receiver so calls can be chained.
+// WithBreadcrumb sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithBreadcrumb(breadcrumb obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// Ssid wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Ssid() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ssid"))
 	return obj.Wrap(_r)
 }
 
+// SetSsid wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetSsid(ssid obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSsid:"), objref.IDOf(ssid))
 }
 
+// Credentials wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Credentials() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentials"))
 	return obj.Wrap(_r)
 }
 
+// SetCredentials wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetCredentials(credentials obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentials:"), objref.IDOf(credentials))
 }
 
+// Breadcrumb wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Breadcrumb() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("breadcrumb"))
 	return obj.Wrap(_r)
 }
 
+// SetBreadcrumb wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetBreadcrumb(breadcrumb obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

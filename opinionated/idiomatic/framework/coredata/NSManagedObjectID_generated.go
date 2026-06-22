@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A compact, universal identifier for a managed object.
-//
 // ManagedObjectID is an idiomatic wrapper over the Objective-C class NSManagedObjectID.
+//
+// A compact, universal identifier for a managed object.
 type ManagedObjectID struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ManagedObjectIDFromID(id objc.ID) *ManagedObjectID {
 	if id == 0 {
 		return nil
 	}
-	x := &ManagedObjectID{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ManagedObjectID{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func managedObjectIDAdopt(id objc.ID) *ManagedObjectID {
 	if id == 0 {
 		return nil
 	}
-	x := &ManagedObjectID{Handle: objref.Wrap(id)}
+	x := &ManagedObjectID{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,37 @@ func (x *ManagedObjectID) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ManagedObjectID) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewManagedObjectID creates a new ManagedObjectID.
 func NewManagedObjectID() *ManagedObjectID {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectID")), objc.RegisterName("new"))
 	return managedObjectIDAdopt(_id)
 }
 
-// Returns a URI that provides an archiveable reference to the object for the object ID.
+// URIRepresentation returns a URI that provides an archiveable reference to the object for the object ID.
 func (x *ManagedObjectID) URIRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URIRepresentation"))
 	return obj.Wrap(_r)
 }
 
+// Entity wraps the corresponding Objective-C method.
 func (x *ManagedObjectID) Entity() *EntityDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entity"))
 	return EntityDescriptionFromID(_r)
 }
 
+// PersistentStore wraps the corresponding Objective-C method.
 func (x *ManagedObjectID) PersistentStore() *PersistentStore {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentStore"))
 	return PersistentStoreFromID(_r)
 }
 
+// IsTemporaryID wraps the corresponding Objective-C method.
 func (x *ManagedObjectID) IsTemporaryID() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTemporaryID"))
 	return _r

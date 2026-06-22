@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	ebipurego "github.com/ebitengine/purego"
 )
 
@@ -17,4 +18,103 @@ func VNElementTypeSize(elementType ElementType) int {
 		ebipurego.RegisterLibFunc(&_fnVNElementTypeSize, _lib, "VNElementTypeSize")
 	}
 	return _fnVNElementTypeSize(elementType)
+}
+
+var _fnVNImagePointForNormalizedPoint func(corefoundation.CGPoint, int, int) corefoundation.CGPoint
+
+// VNImagePointForNormalizedPoint calls the Vision framework function VNImagePointForNormalizedPoint.
+func VNImagePointForNormalizedPoint(normalizedPoint corefoundation.CGPoint, imageWidth int, imageHeight int) corefoundation.CGPoint {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVNImagePointForNormalizedPoint == nil {
+		ebipurego.RegisterLibFunc(&_fnVNImagePointForNormalizedPoint, _lib, "VNImagePointForNormalizedPoint")
+	}
+	return _fnVNImagePointForNormalizedPoint(normalizedPoint, imageWidth, imageHeight)
+}
+
+var _fnVNImagePointForNormalizedPointUsingRegionOfInterest func(corefoundation.CGPoint, int, int, corefoundation.CGRect) corefoundation.CGPoint
+
+// VNImagePointForNormalizedPointUsingRegionOfInterest calls the Vision framework function VNImagePointForNormalizedPointUsingRegionOfInterest.
+func VNImagePointForNormalizedPointUsingRegionOfInterest(normalizedPoint corefoundation.CGPoint, imageWidth int, imageHeight int, roi corefoundation.CGRect) corefoundation.CGPoint {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVNImagePointForNormalizedPointUsingRegionOfInterest == nil {
+		ebipurego.RegisterLibFunc(&_fnVNImagePointForNormalizedPointUsingRegionOfInterest, _lib, "VNImagePointForNormalizedPointUsingRegionOfInterest")
+	}
+	return _fnVNImagePointForNormalizedPointUsingRegionOfInterest(normalizedPoint, imageWidth, imageHeight, roi)
+}
+
+var _fnVNImageRectForNormalizedRect func(corefoundation.CGRect, int, int) corefoundation.CGRect
+
+// VNImageRectForNormalizedRect calls the Vision framework function VNImageRectForNormalizedRect.
+func VNImageRectForNormalizedRect(normalizedRect corefoundation.CGRect, imageWidth int, imageHeight int) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVNImageRectForNormalizedRect == nil {
+		ebipurego.RegisterLibFunc(&_fnVNImageRectForNormalizedRect, _lib, "VNImageRectForNormalizedRect")
+	}
+	return _fnVNImageRectForNormalizedRect(normalizedRect, imageWidth, imageHeight)
+}
+
+var _fnVNImageRectForNormalizedRectUsingRegionOfInterest func(corefoundation.CGRect, int, int, corefoundation.CGRect) corefoundation.CGRect
+
+// VNImageRectForNormalizedRectUsingRegionOfInterest calls the Vision framework function VNImageRectForNormalizedRectUsingRegionOfInterest.
+func VNImageRectForNormalizedRectUsingRegionOfInterest(normalizedRect corefoundation.CGRect, imageWidth int, imageHeight int, roi corefoundation.CGRect) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVNImageRectForNormalizedRectUsingRegionOfInterest == nil {
+		ebipurego.RegisterLibFunc(&_fnVNImageRectForNormalizedRectUsingRegionOfInterest, _lib, "VNImageRectForNormalizedRectUsingRegionOfInterest")
+	}
+	return _fnVNImageRectForNormalizedRectUsingRegionOfInterest(normalizedRect, imageWidth, imageHeight, roi)
+}
+
+var _fnVNNormalizedPointForImagePoint func(corefoundation.CGPoint, int, int) corefoundation.CGPoint
+
+// VNNormalizedPointForImagePoint calls the Vision framework function VNNormalizedPointForImagePoint.
+func VNNormalizedPointForImagePoint(imagePoint corefoundation.CGPoint, imageWidth int, imageHeight int) corefoundation.CGPoint {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVNNormalizedPointForImagePoint == nil {
+		ebipurego.RegisterLibFunc(&_fnVNNormalizedPointForImagePoint, _lib, "VNNormalizedPointForImagePoint")
+	}
+	return _fnVNNormalizedPointForImagePoint(imagePoint, imageWidth, imageHeight)
+}
+
+var _fnVNNormalizedPointForImagePointUsingRegionOfInterest func(corefoundation.CGPoint, int, int, corefoundation.CGRect) corefoundation.CGPoint
+
+// VNNormalizedPointForImagePointUsingRegionOfInterest calls the Vision framework function VNNormalizedPointForImagePointUsingRegionOfInterest.
+func VNNormalizedPointForImagePointUsingRegionOfInterest(imagePoint corefoundation.CGPoint, imageWidth int, imageHeight int, roi corefoundation.CGRect) corefoundation.CGPoint {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVNNormalizedPointForImagePointUsingRegionOfInterest == nil {
+		ebipurego.RegisterLibFunc(&_fnVNNormalizedPointForImagePointUsingRegionOfInterest, _lib, "VNNormalizedPointForImagePointUsingRegionOfInterest")
+	}
+	return _fnVNNormalizedPointForImagePointUsingRegionOfInterest(imagePoint, imageWidth, imageHeight, roi)
+}
+
+var _fnVNNormalizedRectForImageRect func(corefoundation.CGRect, int, int) corefoundation.CGRect
+
+// VNNormalizedRectForImageRect calls the Vision framework function VNNormalizedRectForImageRect.
+func VNNormalizedRectForImageRect(imageRect corefoundation.CGRect, imageWidth int, imageHeight int) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVNNormalizedRectForImageRect == nil {
+		ebipurego.RegisterLibFunc(&_fnVNNormalizedRectForImageRect, _lib, "VNNormalizedRectForImageRect")
+	}
+	return _fnVNNormalizedRectForImageRect(imageRect, imageWidth, imageHeight)
+}
+
+var _fnVNNormalizedRectForImageRectUsingRegionOfInterest func(corefoundation.CGRect, int, int, corefoundation.CGRect) corefoundation.CGRect
+
+// VNNormalizedRectForImageRectUsingRegionOfInterest calls the Vision framework function VNNormalizedRectForImageRectUsingRegionOfInterest.
+func VNNormalizedRectForImageRectUsingRegionOfInterest(imageRect corefoundation.CGRect, imageWidth int, imageHeight int, roi corefoundation.CGRect) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVNNormalizedRectForImageRectUsingRegionOfInterest == nil {
+		ebipurego.RegisterLibFunc(&_fnVNNormalizedRectForImageRectUsingRegionOfInterest, _lib, "VNNormalizedRectForImageRectUsingRegionOfInterest")
+	}
+	return _fnVNNormalizedRectForImageRectUsingRegionOfInterest(imageRect, imageWidth, imageHeight, roi)
+}
+
+var _fnVNNormalizedRectIsIdentityRect func(corefoundation.CGRect) bool
+
+// VNNormalizedRectIsIdentityRect calls the Vision framework function VNNormalizedRectIsIdentityRect.
+func VNNormalizedRectIsIdentityRect(normalizedRect corefoundation.CGRect) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVNNormalizedRectIsIdentityRect == nil {
+		ebipurego.RegisterLibFunc(&_fnVNNormalizedRectIsIdentityRect, _lib, "VNNormalizedRectIsIdentityRect")
+	}
+	return _fnVNNormalizedRectIsIdentityRect(normalizedRect)
 }

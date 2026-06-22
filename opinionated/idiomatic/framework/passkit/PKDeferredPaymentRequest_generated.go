@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a request to set up a deferred payment, such as a hotel booking or a pre-order.
-//
 // DeferredPaymentRequest is an idiomatic wrapper over the Objective-C class PKDeferredPaymentRequest.
+//
+// An object that represents a request to set up a deferred payment, such as a hotel booking or a pre-order.
 type DeferredPaymentRequest struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DeferredPaymentRequestFromID(id objc.ID) *DeferredPaymentRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &DeferredPaymentRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DeferredPaymentRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func deferredPaymentRequestAdopt(id objc.ID) *DeferredPaymentRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &DeferredPaymentRequest{Handle: objref.Wrap(id)}
+	x := &DeferredPaymentRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,71 +60,62 @@ func (x *DeferredPaymentRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a deferred payment request with the payment description, deferred billing summary, and management URL you provide.
-//
-// NewDeferredPaymentRequestWithPaymentDescriptionDeferredBillingManagementURL creates a new DeferredPaymentRequest.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DeferredPaymentRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDeferredPaymentRequestWithPaymentDescriptionDeferredBillingManagementURL creates a deferred payment request with the payment description, deferred billing summary, and management URL you provide.
 func NewDeferredPaymentRequestWithPaymentDescriptionDeferredBillingManagementURL(paymentDescription string, deferredBilling *DeferredPaymentSummaryItem, managementURL string) *DeferredPaymentRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKDeferredPaymentRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentDescription:deferredBilling:managementURL:"), purego.NSString(paymentDescription), objref.IDOf(deferredBilling), rt.FileURL(managementURL))
 	return deferredPaymentRequestAdopt(_id)
 }
 
-// A description of the deferred payment.
-//
-// WithPaymentDescription sets paymentDescription and returns the receiver so calls can be chained.
+// WithPaymentDescription a description of the deferred payment.
 func (x *DeferredPaymentRequest) WithPaymentDescription(paymentDescription string) *DeferredPaymentRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentDescription:"), purego.NSString(paymentDescription))
 	return x
 }
 
-// An object that contains details about the deferred payment.
-//
-// WithDeferredBilling sets deferredBilling and returns the receiver so calls can be chained.
+// WithDeferredBilling an object that contains details about the deferred payment.
 func (x *DeferredPaymentRequest) WithDeferredBilling(deferredBilling *DeferredPaymentSummaryItem) *DeferredPaymentRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredBilling:"), objref.IDOf(deferredBilling))
 	return x
 }
 
-// The localized billing agreement the framework displays to the user prior to payment authorization.
-//
-// WithBillingAgreement sets billingAgreement and returns the receiver so calls can be chained.
+// WithBillingAgreement the localized billing agreement the framework displays to the user prior to payment authorization.
 func (x *DeferredPaymentRequest) WithBillingAgreement(billingAgreement string) *DeferredPaymentRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBillingAgreement:"), purego.NSString(billingAgreement))
 	return x
 }
 
-// A URL that links to a page on your web site where the user can manage the payment method for the deferred payment, including deleting it.
-//
-// WithManagementURL sets managementURL and returns the receiver so calls can be chained.
+// WithManagementURL a URL that links to a page on your web site where the user can manage the payment method for the deferred payment, including deleting it.
 func (x *DeferredPaymentRequest) WithManagementURL(managementURL string) *DeferredPaymentRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManagementURL:"), rt.FileURL(managementURL))
 	return x
 }
 
-// A URL to receive life-cycle notifications for the merchant-specific payment token the system issues for the request, if applicable.
-//
-// WithTokenNotificationURL sets tokenNotificationURL and returns the receiver so calls can be chained.
+// WithTokenNotificationURL a URL to receive life-cycle notifications for the merchant-specific payment token the system issues for the request, if applicable.
 func (x *DeferredPaymentRequest) WithTokenNotificationURL(tokenNotificationURL string) *DeferredPaymentRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTokenNotificationURL:"), rt.FileURL(tokenNotificationURL))
 	return x
 }
 
-// The date before which you must cancel a deferred payment without incurring any cancellation charges.
-//
-// WithFreeCancellationDate sets freeCancellationDate and returns the receiver so calls can be chained.
+// WithFreeCancellationDate the date before which you must cancel a deferred payment without incurring any cancellation charges.
 func (x *DeferredPaymentRequest) WithFreeCancellationDate(freeCancellationDate obj.Object) *DeferredPaymentRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFreeCancellationDate:"), objref.IDOf(freeCancellationDate))
 	return x
 }
 
-// The time zone at the destination location of the payment.
-//
-// WithFreeCancellationDateTimeZone sets freeCancellationDateTimeZone and returns the receiver so calls can be chained.
+// WithFreeCancellationDateTimeZone the time zone at the destination location of the payment.
 func (x *DeferredPaymentRequest) WithFreeCancellationDateTimeZone(freeCancellationDateTimeZone obj.Object) *DeferredPaymentRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFreeCancellationDateTimeZone:"), objref.IDOf(freeCancellationDateTimeZone))
 	return x
 }
 
+// PaymentDescription wraps the corresponding Objective-C method.
 func (x *DeferredPaymentRequest) PaymentDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentDescription"))
 	if _r == 0 {
@@ -131,19 +124,23 @@ func (x *DeferredPaymentRequest) PaymentDescription() string {
 	return purego.GoString(_r)
 }
 
+// SetPaymentDescription wraps the corresponding Objective-C method.
 func (x *DeferredPaymentRequest) SetPaymentDescription(paymentDescription string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentDescription:"), purego.NSString(paymentDescription))
 }
 
+// DeferredBilling wraps the corresponding Objective-C method.
 func (x *DeferredPaymentRequest) DeferredBilling() *DeferredPaymentSummaryItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deferredBilling"))
 	return DeferredPaymentSummaryItemFromID(_r)
 }
 
+// SetDeferredBilling wraps the corresponding Objective-C method.
 func (x *DeferredPaymentRequest) SetDeferredBilling(deferredBilling *DeferredPaymentSummaryItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredBilling:"), objref.IDOf(deferredBilling))
 }
 
+// BillingAgreement wraps the corresponding Objective-C method.
 func (x *DeferredPaymentRequest) BillingAgreement() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("billingAgreement"))
 	if _r == 0 {
@@ -152,42 +149,51 @@ func (x *DeferredPaymentRequest) BillingAgreement() string {
 	return purego.GoString(_r)
 }
 
+// SetBillingAgreement wraps the corresponding Objective-C method.
 func (x *DeferredPaymentRequest) SetBillingAgreement(billingAgreement string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBillingAgreement:"), purego.NSString(billingAgreement))
 }
 
+// ManagementURL wraps the corresponding Objective-C method.
 func (x *DeferredPaymentRequest) ManagementURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("managementURL"))
 	return obj.Wrap(_r)
 }
 
+// SetManagementURL wraps the corresponding Objective-C method.
 func (x *DeferredPaymentRequest) SetManagementURL(managementURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManagementURL:"), rt.FileURL(managementURL))
 }
 
+// TokenNotificationURL wraps the corresponding Objective-C method.
 func (x *DeferredPaymentRequest) TokenNotificationURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tokenNotificationURL"))
 	return obj.Wrap(_r)
 }
 
+// SetTokenNotificationURL wraps the corresponding Objective-C method.
 func (x *DeferredPaymentRequest) SetTokenNotificationURL(tokenNotificationURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTokenNotificationURL:"), rt.FileURL(tokenNotificationURL))
 }
 
+// FreeCancellationDate wraps the corresponding Objective-C method.
 func (x *DeferredPaymentRequest) FreeCancellationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("freeCancellationDate"))
 	return obj.Wrap(_r)
 }
 
+// SetFreeCancellationDate wraps the corresponding Objective-C method.
 func (x *DeferredPaymentRequest) SetFreeCancellationDate(freeCancellationDate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFreeCancellationDate:"), objref.IDOf(freeCancellationDate))
 }
 
+// FreeCancellationDateTimeZone wraps the corresponding Objective-C method.
 func (x *DeferredPaymentRequest) FreeCancellationDateTimeZone() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("freeCancellationDateTimeZone"))
 	return obj.Wrap(_r)
 }
 
+// SetFreeCancellationDateTimeZone wraps the corresponding Objective-C method.
 func (x *DeferredPaymentRequest) SetFreeCancellationDateTimeZone(freeCancellationDateTimeZone obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFreeCancellationDateTimeZone:"), objref.IDOf(freeCancellationDateTimeZone))
 }

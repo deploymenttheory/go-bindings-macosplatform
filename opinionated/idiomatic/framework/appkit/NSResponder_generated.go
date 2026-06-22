@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that forms the basis of event and command processing in AppKit.
-//
 // Responder is an idiomatic wrapper over the Objective-C class NSResponder.
+//
+// Responder is an abstract base — you do not construct it directly. Construct one of [Application], [Drawer], [Popover], [ViewController], [View], [WindowController], [Window] and pass it where a Responder is accepted.
+//
+// An abstract class that forms the basis of event and command processing in AppKit.
 type Responder struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ResponderFromID(id objc.ID) *Responder {
 	if id == 0 {
 		return nil
 	}
-	x := &Responder{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Responder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func responderAdopt(id objc.ID) *Responder {
 	if id == 0 {
 		return nil
 	}
-	x := &Responder{Handle: objref.Wrap(id)}
+	x := &Responder{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,393 +62,396 @@ func (x *Responder) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewResponder creates a new Responder.
-func NewResponder() *Responder {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSResponder")), objc.RegisterName("new"))
-	return responderAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Responder) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Creates a new responder object with data in an unarchiver.
-//
-// NewResponderWithCoder creates a new Responder.
+// NewResponderWithCoder creates a new responder object with data in an unarchiver.
 func NewResponderWithCoder(coder obj.Object) *Responder {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSResponder")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return responderAdopt(_id)
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *Responder) WithNextResponder(nextResponder ResponderProvider) *Responder {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets menu and returns the receiver so calls can be chained.
+// WithMenu returns the responder’s menu.
 func (x *Responder) WithMenu(menu *Menu) *Responder {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity an object encapsulating a user activity supported by this responder.
 func (x *Responder) WithUserActivity(userActivity obj.Object) *Responder {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *Responder) WithTouchBar(touchBar *TouchBar) *Responder {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// Handle a key equivalent.
+// PerformKeyEquivalent handle a key equivalent.
 func (x *Responder) PerformKeyEquivalent(event *Event) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("performKeyEquivalent:"), objref.IDOf(event))
 	return _r
 }
 
-// Overridden by subclasses to determine what services are available.
+// ValidRequestorForSendTypeReturnType overridden by subclasses to determine what services are available.
 func (x *Responder) ValidRequestorForSendTypeReturnType(sendType obj.Object, returnType obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validRequestorForSendType:returnType:"), objref.IDOf(sendType), objref.IDOf(returnType))
 	return obj.Wrap(_r)
 }
 
-// Informs the receiver that the user has pressed the left mouse button.
+// MouseDown informs the receiver that the user has pressed the left mouse button.
 func (x *Responder) MouseDown(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseDown:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has pressed the right mouse button.
+// RightMouseDown informs the receiver that the user has pressed the right mouse button.
 func (x *Responder) RightMouseDown(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightMouseDown:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has pressed a mouse button other than the left or right one.
+// OtherMouseDown informs the receiver that the user has pressed a mouse button other than the left or right one.
 func (x *Responder) OtherMouseDown(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("otherMouseDown:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has released the left mouse button.
+// MouseUp informs the receiver that the user has released the left mouse button.
 func (x *Responder) MouseUp(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseUp:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has released the right mouse button.
+// RightMouseUp informs the receiver that the user has released the right mouse button.
 func (x *Responder) RightMouseUp(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightMouseUp:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has released a mouse button other than the left or right button.
+// OtherMouseUp informs the receiver that the user has released a mouse button other than the left or right button.
 func (x *Responder) OtherMouseUp(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("otherMouseUp:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the mouse has moved.
+// MouseMoved informs the receiver that the mouse has moved.
 func (x *Responder) MouseMoved(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseMoved:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has moved the mouse with the left button pressed.
+// MouseDragged informs the receiver that the user has moved the mouse with the left button pressed.
 func (x *Responder) MouseDragged(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseDragged:"), objref.IDOf(event))
 }
 
+// MouseCancelled wraps the corresponding Objective-C method.
 func (x *Responder) MouseCancelled(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseCancelled:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the mouse’s scroll wheel has moved.
+// ScrollWheel informs the receiver that the mouse’s scroll wheel has moved.
 func (x *Responder) ScrollWheel(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollWheel:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has moved the mouse with the right button pressed.
+// RightMouseDragged informs the receiver that the user has moved the mouse with the right button pressed.
 func (x *Responder) RightMouseDragged(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightMouseDragged:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has moved the mouse with a button other than the left or right button pressed.
+// OtherMouseDragged informs the receiver that the user has moved the mouse with a button other than the left or right button pressed.
 func (x *Responder) OtherMouseDragged(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("otherMouseDragged:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the cursor has entered a tracking rectangle.
+// MouseEntered informs the receiver that the cursor has entered a tracking rectangle.
 func (x *Responder) MouseEntered(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseEntered:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the cursor has exited a tracking rectangle.
+// MouseExited informs the receiver that the cursor has exited a tracking rectangle.
 func (x *Responder) MouseExited(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseExited:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has pressed a key.
+// KeyDown informs the receiver that the user has pressed a key.
 func (x *Responder) KeyDown(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyDown:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has released a key.
+// KeyUp informs the receiver that the user has released a key.
 func (x *Responder) KeyUp(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyUp:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has pressed or released a modifier key (Shift, Control, and so on).
+// FlagsChanged informs the receiver that the user has pressed or released a modifier key (Shift, Control, and so on).
 func (x *Responder) FlagsChanged(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flagsChanged:"), objref.IDOf(event))
 }
 
-// Informs the receiver that a tablet-point event has occurred.
+// TabletPoint informs the receiver that a tablet-point event has occurred.
 func (x *Responder) TabletPoint(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tabletPoint:"), objref.IDOf(event))
 }
 
-// Informs the receiver that a tablet-proximity event has occurred.
+// TabletProximity informs the receiver that a tablet-proximity event has occurred.
 func (x *Responder) TabletProximity(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tabletProximity:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the mouse cursor has moved into a cursor rectangle.
+// CursorUpdate informs the receiver that the mouse cursor has moved into a cursor rectangle.
 func (x *Responder) CursorUpdate(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cursorUpdate:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has begun a pinch gesture.
+// MagnifyWithEvent informs the receiver that the user has begun a pinch gesture.
 func (x *Responder) MagnifyWithEvent(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("magnifyWithEvent:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has begun a rotation gesture.
+// RotateWithEvent informs the receiver that the user has begun a rotation gesture.
 func (x *Responder) RotateWithEvent(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rotateWithEvent:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has begun a swipe gesture.
+// SwipeWithEvent informs the receiver that the user has begun a swipe gesture.
 func (x *Responder) SwipeWithEvent(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("swipeWithEvent:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has begun a touch gesture.
+// BeginGestureWithEvent informs the receiver that the user has begun a touch gesture.
 func (x *Responder) BeginGestureWithEvent(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginGestureWithEvent:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has ended a touch gesture.
+// EndGestureWithEvent informs the receiver that the user has ended a touch gesture.
 func (x *Responder) EndGestureWithEvent(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endGestureWithEvent:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user performed a smart zoom gesture.
+// SmartMagnifyWithEvent informs the receiver that the user performed a smart zoom gesture.
 func (x *Responder) SmartMagnifyWithEvent(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("smartMagnifyWithEvent:"), objref.IDOf(event))
 }
 
-// Informs the responder that performed a double-tap on the side of an Apple Pencil.
+// ChangeModeWithEvent informs the responder that performed a double-tap on the side of an Apple Pencil.
 func (x *Responder) ChangeModeWithEvent(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeModeWithEvent:"), objref.IDOf(event))
 }
 
-// Informs the receiver that new set of touches has been recognized.
+// TouchesBeganWithEvent informs the receiver that new set of touches has been recognized.
 func (x *Responder) TouchesBeganWithEvent(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchesBeganWithEvent:"), objref.IDOf(event))
 }
 
-// Informs the receiver that one or more touches has moved.
+// TouchesMovedWithEvent informs the receiver that one or more touches has moved.
 func (x *Responder) TouchesMovedWithEvent(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchesMovedWithEvent:"), objref.IDOf(event))
 }
 
-// Returns that a set of touches have been removed.
+// TouchesEndedWithEvent returns that a set of touches have been removed.
 func (x *Responder) TouchesEndedWithEvent(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchesEndedWithEvent:"), objref.IDOf(event))
 }
 
-// Informs the receiver that tracking of touches has been cancelled for any reason.
+// TouchesCancelledWithEvent informs the receiver that tracking of touches has been cancelled for any reason.
 func (x *Responder) TouchesCancelledWithEvent(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchesCancelledWithEvent:"), objref.IDOf(event))
 }
 
-// Performs a Quick Look on the content at the location specified by the supplied event.
+// QuickLookWithEvent performs a Quick Look on the content at the location specified by the supplied event.
 func (x *Responder) QuickLookWithEvent(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("quickLookWithEvent:"), objref.IDOf(event))
 }
 
-// Indicates a pressure change as the result of a user input event on a system that supports pressure sensitivity.
+// PressureChangeWithEvent indicates a pressure change as the result of a user input event on a system that supports pressure sensitivity.
 func (x *Responder) PressureChangeWithEvent(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pressureChangeWithEvent:"), objref.IDOf(event))
 }
 
-// Handle a key event that should present a context menu at the user focus. Most applications should not override this method. Instead, you should customize the context menu displayed from a keyboard event by implementing `menuForEvent:` and `selectionAnchorRect`, or `showContextMenuForSelection:`, rather than this method. You should only override this method when you do not want the system-provided default behavior for the context menu hotkey, either for a specific key combination, or for the hotkey in general. For example, if your application already provides a different behavior for control-Return (the default context menu hotkey definition), and you want to preserve that behavior, you should override this method to handle that specific key combination, and then return without calling `super`. Note that the user may customize the hotkey to a different key combination, so in this example, if any other key combination is passed to your method, you would call `super`. An implementation of this method should call `[super contextMenuKeyDown:event]` to pass the request up the responder chain. If the message reaches the application object, NSApplication's implementation of this method will send `showContextMenuForSelection:` to the responder chain. If you do not call `super`, then no further handling of the key event will be performed.
+// ContextMenuKeyDown handle a key event that should present a context menu at the user focus. Most applications should not override this method. Instead, you should customize the context menu displayed from a keyboard event by implementing `menuForEvent:` and `selectionAnchorRect`, or `showContextMenuForSelection:`, rather than this method. You should only override this method when you do not want the system-provided default behavior for the context menu hotkey, either for a specific key combination, or for the hotkey in general. For example, if your application already provides a different behavior for control-Return (the default context menu hotkey definition), and you want to preserve that behavior, you should override this method to handle that specific key combination, and then return without calling `super`. Note that the user may customize the hotkey to a different key combination, so in this example, if any other key combination is passed to your method, you would call `super`. An implementation of this method should call `[super contextMenuKeyDown:event]` to pass the request up the responder chain. If the message reaches the application object, NSApplication's implementation of this method will send `showContextMenuForSelection:` to the responder chain. If you do not call `super`, then no further handling of the key event will be performed.
 func (x *Responder) ContextMenuKeyDown(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contextMenuKeyDown:"), objref.IDOf(event))
 }
 
-// Notifies the receiver that it’s about to become first responder in its NSWindow.
+// BecomeFirstResponder notifies the receiver that it’s about to become first responder in its NSWindow.
 func (x *Responder) BecomeFirstResponder() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("becomeFirstResponder"))
 	return _r
 }
 
-// Notifies the receiver that it’s been asked to relinquish its status as first responder in its window.
+// ResignFirstResponder notifies the receiver that it’s been asked to relinquish its status as first responder in its window.
 func (x *Responder) ResignFirstResponder() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("resignFirstResponder"))
 	return _r
 }
 
-// Handles a series of key events.
+// InterpretKeyEvents handles a series of key events.
 func (x *Responder) InterpretKeyEvents(eventArray []*Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interpretKeyEvents:"), purego.SliceToNSArray(eventArray, func(_v *Event) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Clears any unprocessed key events when overridden by subclasses.
+// FlushBufferedKeyEvents clears any unprocessed key events when overridden by subclasses.
 func (x *Responder) FlushBufferedKeyEvents() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flushBufferedKeyEvents"))
 }
 
+// ShowContextHelp wraps the corresponding Objective-C method.
 func (x *Responder) ShowContextHelp(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showContextHelp:"), objref.IDOf(sender))
 }
 
-// Displays context-sensitive help for the receiver if help has been registered.
+// HelpRequested displays context-sensitive help for the receiver if help has been registered.
 func (x *Responder) HelpRequested(eventPtr *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("helpRequested:"), objref.IDOf(eventPtr))
 }
 
-// Indicates whether a pen-down event should be treated as an ink event.
+// ShouldBeTreatedAsInkEvent indicates whether a pen-down event should be treated as an ink event.
 func (x *Responder) ShouldBeTreatedAsInkEvent(event *Event) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldBeTreatedAsInkEvent:"), objref.IDOf(event))
 	return _r
 }
 
-// Implement this method to track gesture scroll events such as a swipe.
+// WantsScrollEventsForSwipeTrackingOnAxis implement this method to track gesture scroll events such as a swipe.
 func (x *Responder) WantsScrollEventsForSwipeTrackingOnAxis(axis EventGestureAxis) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsScrollEventsForSwipeTrackingOnAxis:"), axis)
 	return _r
 }
 
-// Returns whether to forward elastic scrolling gesture events up the responder.
+// WantsForwardedScrollEventsForAxis returns whether to forward elastic scrolling gesture events up the responder.
 func (x *Responder) WantsForwardedScrollEventsForAxis(axis EventGestureAxis) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsForwardedScrollEventsForAxis:"), axis)
 	return _r
 }
 
+// NextResponder wraps the corresponding Objective-C method.
 func (x *Responder) NextResponder() *Responder {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextResponder"))
 	return ResponderFromID(_r)
 }
 
+// SetNextResponder wraps the corresponding Objective-C method.
 func (x *Responder) SetNextResponder(nextResponder *Responder) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 }
 
+// AcceptsFirstResponder wraps the corresponding Objective-C method.
 func (x *Responder) AcceptsFirstResponder() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("acceptsFirstResponder"))
 	return _r
 }
 
+// Menu wraps the corresponding Objective-C method.
 func (x *Responder) Menu() *Menu {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menu"))
 	return MenuFromID(_r)
 }
 
+// SetMenu wraps the corresponding Objective-C method.
 func (x *Responder) SetMenu(menu *Menu) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 }
 
+// UndoManager wraps the corresponding Objective-C method.
 func (x *Responder) UndoManager() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("undoManager"))
 	return obj.Wrap(_r)
 }
 
-// Allows controls to determine when they should become first responder.
+// ValidateProposedFirstResponderForEvent allows controls to determine when they should become first responder.
 func (x *Responder) ValidateProposedFirstResponderForEvent(responder *Responder, event *Event) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("validateProposedFirstResponder:forEvent:"), objref.IDOf(responder), objref.IDOf(event))
 	return _r
 }
 
-// Performs all find oriented actions.
+// PerformTextFinderAction performs all find oriented actions.
 func (x *Responder) PerformTextFinderAction(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performTextFinderAction:"), objref.IDOf(sender))
 }
 
-// Creates a new window to show as a tab in a tabbed window.
+// NewWindowForTab creates a new window to show as a tab in a tabbed window.
 func (x *Responder) NewWindowForTab(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("newWindowForTab:"), objref.IDOf(sender))
 }
 
+// ShowWritingTools wraps the corresponding Objective-C method.
 func (x *Responder) ShowWritingTools(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showWritingTools:"), objref.IDOf(sender))
 }
 
-// Handle a mnemonic.
+// PerformMnemonic handle a mnemonic.
 func (x *Responder) PerformMnemonic(string_ string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("performMnemonic:"), purego.NSString(string_))
 	return _r
 }
 
-// Updates the state of the given user activity.
+// UpdateUserActivityState updates the state of the given user activity.
 func (x *Responder) UpdateUserActivityState(userActivity obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateUserActivityState:"), objref.IDOf(userActivity))
 }
 
+// UserActivity wraps the corresponding Objective-C method.
 func (x *Responder) UserActivity() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userActivity"))
 	return obj.Wrap(_r)
 }
 
+// SetUserActivity wraps the corresponding Objective-C method.
 func (x *Responder) SetUserActivity(userActivity obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 }
 
-// Your custom subclass of the NSResponder class should override this method to create and configure your subclass’s default NSTouchBar object.
+// MakeTouchBar your custom subclass of the NSResponder class should override this method to create and configure your subclass’s default NSTouchBar object.
 func (x *Responder) MakeTouchBar() *TouchBar {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeTouchBar"))
 	return TouchBarFromID(_r)
 }
 
+// TouchBar wraps the corresponding Objective-C method.
 func (x *Responder) TouchBar() *TouchBar {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchBar"))
 	return TouchBarFromID(_r)
 }
 
+// SetTouchBar wraps the corresponding Objective-C method.
 func (x *Responder) SetTouchBar(touchBar *TouchBar) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 }
 
-// Returns the receiver’s interface style.
+// InterfaceStyle returns the receiver’s interface style.
 func (x *Responder) InterfaceStyle() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("interfaceStyle"))
 	return _r
 }
 
-// Sets the receiver’s style to the style specified by interfaceStyle, such as NSMacintoshInterfaceStyle or NSWindows95InterfaceStyle.
+// SetInterfaceStyle sets the receiver’s style to the style specified by interfaceStyle, such as NSMacintoshInterfaceStyle or NSWindows95InterfaceStyle.
 func (x *Responder) SetInterfaceStyle(interfaceStyle int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterfaceStyle:"), interfaceStyle)
 }
 
-// Saves the interface-related state of the responder.
+// EncodeRestorableStateWithCoder saves the interface-related state of the responder.
 func (x *Responder) EncodeRestorableStateWithCoder(coder obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeRestorableStateWithCoder:"), objref.IDOf(coder))
 }
 
-// Saves the interface-related state of the responder to a keyed archiver either synchronously or asynchronously on the given operation queue.
+// EncodeRestorableStateWithCoderBackgroundQueue saves the interface-related state of the responder to a keyed archiver either synchronously or asynchronously on the given operation queue.
 func (x *Responder) EncodeRestorableStateWithCoderBackgroundQueue(coder obj.Object, queue obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeRestorableStateWithCoder:backgroundQueue:"), objref.IDOf(coder), objref.IDOf(queue))
 }
 
-// Restores the interface-related state of the responder.
+// RestoreStateWithCoder restores the interface-related state of the responder.
 func (x *Responder) RestoreStateWithCoder(coder obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restoreStateWithCoder:"), objref.IDOf(coder))
 }
 
-// Marks the responder’s interface-related state as dirty.
+// InvalidateRestorableState marks the responder’s interface-related state as dirty.
 func (x *Responder) InvalidateRestorableState() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateRestorableState"))
 }
@@ -527,3 +534,10 @@ type Responderable interface {
 }
 
 var _ Responderable = (*Responder)(nil)
+
+// isResponder marks Responder — and, by embedding promotion, its
+// subclasses — as a member of the Responder hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Responder) isResponder() {}
+
+var _ ResponderProvider = (*Responder)(nil)

@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ItemSetAttributesRequest is an idiomatic wrapper over the Objective-C class FSItemSetAttributesRequest.
+//
+// It embeds [ItemAttributes], promoting that type's methods.
 type ItemSetAttributesRequest struct {
-	objref.Handle
+	ItemAttributes
 }
 
 // ItemSetAttributesRequestFromID adopts an existing Objective-C object as a ItemSetAttributesRequest
@@ -23,7 +24,8 @@ func ItemSetAttributesRequestFromID(id objc.ID) *ItemSetAttributesRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &ItemSetAttributesRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ItemSetAttributesRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func itemSetAttributesRequestAdopt(id objc.ID) *ItemSetAttributesRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &ItemSetAttributesRequest{Handle: objref.Wrap(id)}
+	x := &ItemSetAttributesRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ItemSetAttributesRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ItemSetAttributesRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ItemSetAttributesRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewItemSetAttributesRequest creates a new ItemSetAttributesRequest.
@@ -62,122 +50,97 @@ func NewItemSetAttributesRequest() *ItemSetAttributesRequest {
 	return itemSetAttributesRequestAdopt(_id)
 }
 
-// The attributes successfully used by the file system. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
-//
-// WithConsumedAttributes sets consumedAttributes and returns the receiver so calls can be chained.
+// WithConsumedAttributes the attributes successfully used by the file system. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
 func (x *ItemSetAttributesRequest) WithConsumedAttributes(consumedAttributes ItemAttribute) *ItemSetAttributesRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConsumedAttributes:"), consumedAttributes)
 	return x
 }
 
-// The user identifier.
-//
-// WithUid sets uid and returns the receiver so calls can be chained.
+// WithUid the user identifier.
 func (x *ItemSetAttributesRequest) WithUid(uid uint32) *ItemSetAttributesRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUid:"), uid)
 	return x
 }
 
-// The group identifier.
-//
-// WithGid sets gid and returns the receiver so calls can be chained.
+// WithGid the group identifier.
 func (x *ItemSetAttributesRequest) WithGid(gid uint32) *ItemSetAttributesRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGid:"), gid)
 	return x
 }
 
-// The mode of the item. The mode is often used for `setuid`, `setgid`, and `sticky` bits.
-//
-// WithMode sets mode and returns the receiver so calls can be chained.
+// WithMode the mode of the item. The mode is often used for `setuid`, `setgid`, and `sticky` bits.
 func (x *ItemSetAttributesRequest) WithMode(mode uint32) *ItemSetAttributesRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 	return x
 }
 
-// The item type, such as a regular file, directory, or symbolic link.
-//
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithType the item type, such as a regular file, directory, or symbolic link.
 func (x *ItemSetAttributesRequest) WithType(type_ ItemType) *ItemSetAttributesRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
-// The number of hard links to the item.
-//
-// WithLinkCount sets linkCount and returns the receiver so calls can be chained.
+// WithLinkCount the number of hard links to the item.
 func (x *ItemSetAttributesRequest) WithLinkCount(linkCount uint32) *ItemSetAttributesRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinkCount:"), linkCount)
 	return x
 }
 
-// The item's behavior flags. See `st_flags` in `stat.h` for flag definitions.
-//
-// WithFlags sets flags and returns the receiver so calls can be chained.
+// WithFlags the item's behavior flags. See `st_flags` in `stat.h` for flag definitions.
 func (x *ItemSetAttributesRequest) WithFlags(flags uint32) *ItemSetAttributesRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlags:"), flags)
 	return x
 }
 
-// The item's size.
-//
-// WithSize sets size and returns the receiver so calls can be chained.
+// WithSize the item's size.
 func (x *ItemSetAttributesRequest) WithSize(size uint64) *ItemSetAttributesRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
 	return x
 }
 
-// The item's allocated size.
-//
-// WithAllocSize sets allocSize and returns the receiver so calls can be chained.
+// WithAllocSize the item's allocated size.
 func (x *ItemSetAttributesRequest) WithAllocSize(allocSize uint64) *ItemSetAttributesRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllocSize:"), allocSize)
 	return x
 }
 
-// The item's file identifier.
-//
-// WithFileID sets fileID and returns the receiver so calls can be chained.
+// WithFileID the item's file identifier.
 func (x *ItemSetAttributesRequest) WithFileID(fileID ItemID) *ItemSetAttributesRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileID:"), fileID)
 	return x
 }
 
-// The identifier of the item's parent.
-//
-// WithParentID sets parentID and returns the receiver so calls can be chained.
+// WithParentID the identifier of the item's parent.
 func (x *ItemSetAttributesRequest) WithParentID(parentID ItemID) *ItemSetAttributesRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentID:"), parentID)
 	return x
 }
 
-// A Boolean value that indicates whether the item supports a limited set of extended attributes.
-//
-// WithSupportsLimitedXAttrs sets supportsLimitedXAttrs and returns the receiver so calls can be chained.
+// WithSupportsLimitedXAttrs a Boolean value that indicates whether the item supports a limited set of extended attributes.
 func (x *ItemSetAttributesRequest) WithSupportsLimitedXAttrs(supportsLimitedXAttrs bool) *ItemSetAttributesRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsLimitedXAttrs:"), supportsLimitedXAttrs)
 	return x
 }
 
-// A Boolean value that indicates whether the file system overrides the per-volume settings for kernel offloaded I/O for a specific file. This property has no meaning if the volume doesn't conform to “FSVolumeKernelOffloadedIOOperations“.
-//
-// WithInhibitKernelOffloadedIO sets inhibitKernelOffloadedIO and returns the receiver so calls can be chained.
+// WithInhibitKernelOffloadedIO a Boolean value that indicates whether the file system overrides the per-volume settings for kernel offloaded I/O for a specific file. This property has no meaning if the volume doesn't conform to “FSVolumeKernelOffloadedIOOperations“.
 func (x *ItemSetAttributesRequest) WithInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool) *ItemSetAttributesRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInhibitKernelOffloadedIO:"), inhibitKernelOffloadedIO)
 	return x
 }
 
-// A method that indicates whether the file system used the given attribute. - Parameter attribute: The “FSItemAttribute“ to check.
+// WasAttributeConsumed a method that indicates whether the file system used the given attribute. - Parameter attribute: The “FSItemAttribute“ to check.
 func (x *ItemSetAttributesRequest) WasAttributeConsumed(attribute ItemAttribute) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wasAttributeConsumed:"), attribute)
 	return _r
 }
 
-// The attributes successfully used by the file system. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
+// ConsumedAttributes the attributes successfully used by the file system. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
 func (x *ItemSetAttributesRequest) ConsumedAttributes() ItemAttribute {
 	_r := objc.Send[ItemAttribute](objref.IDOf(x), objc.RegisterName("consumedAttributes"))
 	return _r
 }
 
+// SetConsumedAttributes wraps the corresponding Objective-C method.
 func (x *ItemSetAttributesRequest) SetConsumedAttributes(consumedAttributes ItemAttribute) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConsumedAttributes:"), consumedAttributes)
 }
@@ -204,3 +167,5 @@ type ItemSetAttributesRequestable interface {
 }
 
 var _ ItemSetAttributesRequestable = (*ItemSetAttributesRequest)(nil)
+
+var _ ItemAttributesProvider = (*ItemSetAttributesRequest)(nil)

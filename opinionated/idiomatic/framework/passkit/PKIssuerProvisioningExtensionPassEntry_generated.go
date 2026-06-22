@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents an item available to add to as a Wallet pass.
-//
 // IssuerProvisioningExtensionPassEntry is an idiomatic wrapper over the Objective-C class PKIssuerProvisioningExtensionPassEntry.
+//
+// IssuerProvisioningExtensionPassEntry is an abstract base — you do not construct it directly. Construct one of [IssuerProvisioningExtensionPaymentPassEntry] and pass it where a IssuerProvisioningExtensionPassEntry is accepted.
+//
+// An object that represents an item available to add to as a Wallet pass.
 type IssuerProvisioningExtensionPassEntry struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func IssuerProvisioningExtensionPassEntryFromID(id objc.ID) *IssuerProvisioningE
 	if id == 0 {
 		return nil
 	}
-	x := &IssuerProvisioningExtensionPassEntry{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IssuerProvisioningExtensionPassEntry{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func issuerProvisioningExtensionPassEntryAdopt(id objc.ID) *IssuerProvisioningEx
 	if id == 0 {
 		return nil
 	}
-	x := &IssuerProvisioningExtensionPassEntry{Handle: objref.Wrap(id)}
+	x := &IssuerProvisioningExtensionPassEntry{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +62,13 @@ func (x *IssuerProvisioningExtensionPassEntry) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewIssuerProvisioningExtensionPassEntry creates a new IssuerProvisioningExtensionPassEntry.
-func NewIssuerProvisioningExtensionPassEntry() *IssuerProvisioningExtensionPassEntry {
-	_id := objc.Send[objc.ID](objc.ID(_class("PKIssuerProvisioningExtensionPassEntry")), objc.RegisterName("new"))
-	return issuerProvisioningExtensionPassEntryAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IssuerProvisioningExtensionPassEntry) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *IssuerProvisioningExtensionPassEntry) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -72,6 +77,7 @@ func (x *IssuerProvisioningExtensionPassEntry) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *IssuerProvisioningExtensionPassEntry) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -80,6 +86,7 @@ func (x *IssuerProvisioningExtensionPassEntry) Title() string {
 	return purego.GoString(_r)
 }
 
+// Art wraps the corresponding Objective-C method.
 func (x *IssuerProvisioningExtensionPassEntry) Art() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("art"))
 	return obj.Wrap(_r)
@@ -94,3 +101,10 @@ type IssuerProvisioningExtensionPassEntryable interface {
 }
 
 var _ IssuerProvisioningExtensionPassEntryable = (*IssuerProvisioningExtensionPassEntry)(nil)
+
+// isIssuerProvisioningExtensionPassEntry marks IssuerProvisioningExtensionPassEntry — and, by embedding promotion, its
+// subclasses — as a member of the IssuerProvisioningExtensionPassEntry hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *IssuerProvisioningExtensionPassEntry) isIssuerProvisioningExtensionPassEntry() {}
+
+var _ IssuerProvisioningExtensionPassEntryProvider = (*IssuerProvisioningExtensionPassEntry)(nil)

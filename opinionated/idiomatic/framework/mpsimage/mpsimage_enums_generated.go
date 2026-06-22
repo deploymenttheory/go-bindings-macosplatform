@@ -16,6 +16,8 @@ const (
 	AlphaTypePremultiplied    AlphaType = 2
 )
 
+// String returns the AlphaType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AlphaType) String() string {
 	switch e {
 	case AlphaTypeNonPremultiplied:

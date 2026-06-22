@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides a promise for the pasteboard.
-//
 // FilePromiseProvider is an idiomatic wrapper over the Objective-C class NSFilePromiseProvider.
+//
+// An object that provides a promise for the pasteboard.
 type FilePromiseProvider struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FilePromiseProviderFromID(id objc.ID) *FilePromiseProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &FilePromiseProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FilePromiseProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func filePromiseProviderAdopt(id objc.ID) *FilePromiseProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &FilePromiseProvider{Handle: objref.Wrap(id)}
+	x := &FilePromiseProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,31 @@ func (x *FilePromiseProvider) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FilePromiseProvider) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFilePromiseProvider creates a new FilePromiseProvider.
 func NewFilePromiseProvider() *FilePromiseProvider {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSFilePromiseProvider")), objc.RegisterName("new"))
 	return filePromiseProviderAdopt(_id)
 }
 
-// The file type of the file promise provider.
-//
-// WithFileType sets fileType and returns the receiver so calls can be chained.
+// WithFileType the file type of the file promise provider.
 func (x *FilePromiseProvider) WithFileType(fileType string) *FilePromiseProvider {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileType:"), purego.NSString(fileType))
 	return x
 }
 
-// Optional user information to pass to the file promise provider.
-//
-// WithUserInfo sets userInfo and returns the receiver so calls can be chained.
+// WithUserInfo optional user information to pass to the file promise provider.
 func (x *FilePromiseProvider) WithUserInfo(userInfo obj.Object) *FilePromiseProvider {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return x
 }
 
+// FileType wraps the corresponding Objective-C method.
 func (x *FilePromiseProvider) FileType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileType"))
 	if _r == 0 {
@@ -88,15 +93,18 @@ func (x *FilePromiseProvider) FileType() string {
 	return purego.GoString(_r)
 }
 
+// SetFileType wraps the corresponding Objective-C method.
 func (x *FilePromiseProvider) SetFileType(fileType string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileType:"), purego.NSString(fileType))
 }
 
+// UserInfo wraps the corresponding Objective-C method.
 func (x *FilePromiseProvider) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
+// SetUserInfo wraps the corresponding Objective-C method.
 func (x *FilePromiseProvider) SetUserInfo(userInfo obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 }

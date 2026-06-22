@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An operation that confirms a user’s participation in a share.
-//
 // AcceptSharesOperation is an idiomatic wrapper over the Objective-C class CKAcceptSharesOperation.
+//
+// It embeds [Operation], promoting that type's methods.
+//
+// An operation that confirms a user’s participation in a share.
 type AcceptSharesOperation struct {
-	objref.Handle
+	Operation
 }
 
 // AcceptSharesOperationFromID adopts an existing Objective-C object as a AcceptSharesOperation
@@ -27,7 +28,8 @@ func AcceptSharesOperationFromID(id objc.ID) *AcceptSharesOperation {
 	if id == 0 {
 		return nil
 	}
-	x := &AcceptSharesOperation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AcceptSharesOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,24 +42,10 @@ func acceptSharesOperationAdopt(id objc.ID) *AcceptSharesOperation {
 	if id == 0 {
 		return nil
 	}
-	x := &AcceptSharesOperation{Handle: objref.Wrap(id)}
+	x := &AcceptSharesOperation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AcceptSharesOperation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AcceptSharesOperation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AcceptSharesOperation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAcceptSharesOperation creates a new AcceptSharesOperation.
@@ -66,89 +54,69 @@ func NewAcceptSharesOperation() *AcceptSharesOperation {
 	return acceptSharesOperationAdopt(_id)
 }
 
-// Creates an operation for accepting the specified shares.
-//
-// NewAcceptSharesOperationWithShareMetadatas creates a new AcceptSharesOperation.
+// NewAcceptSharesOperationWithShareMetadatas creates an operation for accepting the specified shares.
 func NewAcceptSharesOperationWithShareMetadatas(shareMetadatas []*ShareMetadata) *AcceptSharesOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKAcceptSharesOperation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShareMetadatas:"), purego.SliceToNSArray(shareMetadatas, func(_v *ShareMetadata) objc.ID { return objref.IDOf(_v) }))
 	return acceptSharesOperationAdopt(_id)
 }
 
-// The share metadatas to process.
-//
-// WithShareMetadatas sets the collection and returns the receiver so calls can be chained.
+// WithShareMetadatas the share metadatas to process.
 func (x *AcceptSharesOperation) WithShareMetadatas(items ...*ShareMetadata) *AcceptSharesOperation {
 	_arr := purego.SliceToNSArray(items, func(_v *ShareMetadata) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShareMetadatas:"), _arr)
 	return x
 }
 
-// The operation’s configuration.
-//
-// WithConfiguration sets configuration and returns the receiver so calls can be chained.
+// WithConfiguration the operation’s configuration.
 func (x *AcceptSharesOperation) WithConfiguration(configuration *OperationConfiguration) *AcceptSharesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
-// The operation’s group.
-//
-// WithGroup sets group and returns the receiver so calls can be chained.
+// WithGroup the operation’s group.
 func (x *AcceptSharesOperation) WithGroup(group *OperationGroup) *AcceptSharesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation.
-//
-// WithLongLivedOperationWasPersistedBlock sets longLivedOperationWasPersistedBlock and returns the receiver so calls can be chained.
+// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
 func (x *AcceptSharesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *AcceptSharesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
 	return x
 }
 
-// The operation's container.
-//
-// WithContainer sets container and returns the receiver so calls can be chained.
+// WithContainer the operation's container.
 func (x *AcceptSharesOperation) WithContainer(container *Container) *AcceptSharesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network.
-//
-// WithAllowsCellularAccess sets allowsCellularAccess and returns the receiver so calls can be chained.
+// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
 func (x *AcceptSharesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *AcceptSharesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived.
-//
-// WithLongLived sets longLived and returns the receiver so calls can be chained.
+// WithLongLived a Boolean value that indicates whether the operation is long-lived.
 func (x *AcceptSharesOperation) WithLongLived(longLived bool) *AcceptSharesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The timeout interval when waiting for additional data.
-//
-// WithTimeoutIntervalForRequest sets timeoutIntervalForRequest and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
 func (x *AcceptSharesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *AcceptSharesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can use.
-//
-// WithTimeoutIntervalForResource sets timeoutIntervalForResource and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
 func (x *AcceptSharesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *AcceptSharesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
-// The share metadatas to process. Use this property to view or change the metadata of the shares you want to process. If you intend to specify or change the value of this property, do so before you execute the operation or submit it to a queue.
+// ShareMetadatas the share metadatas to process. Use this property to view or change the metadata of the shares you want to process. If you intend to specify or change the value of this property, do so before you execute the operation or submit it to a queue.
 //
 // ShareMetadatas returns the collection as a Go slice.
 func (x *AcceptSharesOperation) ShareMetadatas() []*ShareMetadata {
@@ -156,10 +124,13 @@ func (x *AcceptSharesOperation) ShareMetadatas() []*ShareMetadata {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ShareMetadata { return ShareMetadataFromID(_id) })
 }
 
+// SetShareMetadatas wraps the corresponding Objective-C method.
 func (x *AcceptSharesOperation) SetShareMetadatas(shareMetadatas []*ShareMetadata) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShareMetadatas:"), purego.SliceToNSArray(shareMetadatas, func(_v *ShareMetadata) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SetAcceptSharesCompletionBlock wraps the corresponding Objective-C method.
+//
 // SetAcceptSharesCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (x *AcceptSharesOperation) SetAcceptSharesCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -195,3 +166,5 @@ type AcceptSharesOperationable interface {
 }
 
 var _ AcceptSharesOperationable = (*AcceptSharesOperation)(nil)
+
+var _ OperationProvider = (*AcceptSharesOperation)(nil)

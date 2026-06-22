@@ -23,7 +23,8 @@ func EnvironmentStateFromID(id objc.ID) *EnvironmentState {
 	if id == 0 {
 		return nil
 	}
-	x := &EnvironmentState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EnvironmentState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func environmentStateAdopt(id objc.ID) *EnvironmentState {
 	if id == 0 {
 		return nil
 	}
-	x := &EnvironmentState{Handle: objref.Wrap(id)}
+	x := &EnvironmentState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,25 +58,31 @@ func (x *EnvironmentState) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *EnvironmentState) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewEnvironmentState creates a new EnvironmentState.
 func NewEnvironmentState() *EnvironmentState {
 	_id := objc.Send[objc.ID](objc.ID(_class("LAEnvironmentState")), objc.RegisterName("new"))
 	return environmentStateAdopt(_id)
 }
 
-// Information about biometric authentication (Touch ID, Face ID or Optic ID).
+// Biometry information about biometric authentication (Touch ID, Face ID or Optic ID).
 func (x *EnvironmentState) Biometry() *EnvironmentMechanismBiometry {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biometry"))
 	return EnvironmentMechanismBiometryFromID(_r)
 }
 
-// Information about local user password (on macOS) or passcode (on embedded platforms).
+// UserPassword information about local user password (on macOS) or passcode (on embedded platforms).
 func (x *EnvironmentState) UserPassword() *EnvironmentMechanismUserPassword {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userPassword"))
 	return EnvironmentMechanismUserPasswordFromID(_r)
 }
 
-// Companion authentication mechanisms. Companion mechanisms such as Apple Watch can appear and disappear as they get in and out of reach, but this property enumerates paired companions, even if they are not reachable at the moment. Check
+// Companions companion authentication mechanisms. Companion mechanisms such as Apple Watch can appear and disappear as they get in and out of reach, but this property enumerates paired companions, even if they are not reachable at the moment. Check
 //
 // Companions returns the collection as a Go slice.
 func (x *EnvironmentState) Companions() []*EnvironmentMechanismCompanion {
@@ -82,7 +90,7 @@ func (x *EnvironmentState) Companions() []*EnvironmentMechanismCompanion {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EnvironmentMechanismCompanion { return EnvironmentMechanismCompanionFromID(_id) })
 }
 
-// Information about all authentication mechanisms. This property aggregates
+// AllMechanisms information about all authentication mechanisms. This property aggregates
 //
 // AllMechanisms returns the collection as a Go slice.
 func (x *EnvironmentState) AllMechanisms() []*EnvironmentMechanism {

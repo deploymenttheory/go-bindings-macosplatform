@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A distinct object in a file hierarchy, such as a file, directory, symlink, socket, and more.
-//
 // Item is an idiomatic wrapper over the Objective-C class FSItem.
+//
+// A distinct object in a file hierarchy, such as a file, directory, symlink, socket, and more.
 type Item struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ItemFromID(id objc.ID) *Item {
 	if id == 0 {
 		return nil
 	}
-	x := &Item{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Item{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func itemAdopt(id objc.ID) *Item {
 	if id == 0 {
 		return nil
 	}
-	x := &Item{Handle: objref.Wrap(id)}
+	x := &Item{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *Item) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *Item) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Item) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewItem creates a new Item.

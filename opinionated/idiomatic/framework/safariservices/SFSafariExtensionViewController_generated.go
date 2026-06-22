@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The view controller for a popover associated with your app extension.
-//
 // SafariExtensionViewController is an idiomatic wrapper over the Objective-C class SFSafariExtensionViewController.
+//
+// The view controller for a popover associated with your app extension.
 type SafariExtensionViewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SafariExtensionViewControllerFromID(id objc.ID) *SafariExtensionViewControl
 	if id == 0 {
 		return nil
 	}
-	x := &SafariExtensionViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SafariExtensionViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func safariExtensionViewControllerAdopt(id objc.ID) *SafariExtensionViewControll
 	if id == 0 {
 		return nil
 	}
-	x := &SafariExtensionViewController{Handle: objref.Wrap(id)}
+	x := &SafariExtensionViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *SafariExtensionViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SafariExtensionViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSafariExtensionViewController creates a new SafariExtensionViewController.
 func NewSafariExtensionViewController() *SafariExtensionViewController {
 	_id := objc.Send[objc.ID](objc.ID(_class("SFSafariExtensionViewController")), objc.RegisterName("new"))
 	return safariExtensionViewControllerAdopt(_id)
 }
 
+// DismissPopover wraps the corresponding Objective-C method.
 func (x *SafariExtensionViewController) DismissPopover() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dismissPopover"))
 }

@@ -26,6 +26,8 @@ const (
 	ActivityUserInteractive                      ActivityOptions = 1095233437695
 )
 
+// String returns the ActivityOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ActivityOptions) String() string {
 	var parts []string
 	if e&ActivityIdleDisplaySleepDisabled != 0 {
@@ -67,6 +69,111 @@ func (e ActivityOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Values representing alignment operations.
+// Bitmask — values may be combined with |.
+type AlignmentOptions uint64
+
+const (
+	AlignMinXInward      AlignmentOptions = 1
+	AlignMinYInward      AlignmentOptions = 2
+	AlignMaxXInward      AlignmentOptions = 4
+	AlignMaxYInward      AlignmentOptions = 8
+	AlignWidthInward     AlignmentOptions = 16
+	AlignHeightInward    AlignmentOptions = 32
+	AlignMinXOutward     AlignmentOptions = 256
+	AlignMinYOutward     AlignmentOptions = 512
+	AlignMaxXOutward     AlignmentOptions = 1024
+	AlignMaxYOutward     AlignmentOptions = 2048
+	AlignWidthOutward    AlignmentOptions = 4096
+	AlignHeightOutward   AlignmentOptions = 8192
+	AlignMinXNearest     AlignmentOptions = 65536
+	AlignMinYNearest     AlignmentOptions = 131072
+	AlignMaxXNearest     AlignmentOptions = 262144
+	AlignMaxYNearest     AlignmentOptions = 524288
+	AlignWidthNearest    AlignmentOptions = 1048576
+	AlignHeightNearest   AlignmentOptions = 2097152
+	AlignRectFlipped     AlignmentOptions = 9223372036854775808
+	AlignAllEdgesInward  AlignmentOptions = 15
+	AlignAllEdgesOutward AlignmentOptions = 3840
+	AlignAllEdgesNearest AlignmentOptions = 983040
+)
+
+// String returns the AlignmentOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AlignmentOptions) String() string {
+	var parts []string
+	if e&AlignMinXInward != 0 {
+		parts = append(parts, "AlignMinXInward")
+	}
+	if e&AlignMinYInward != 0 {
+		parts = append(parts, "AlignMinYInward")
+	}
+	if e&AlignMaxXInward != 0 {
+		parts = append(parts, "AlignMaxXInward")
+	}
+	if e&AlignMaxYInward != 0 {
+		parts = append(parts, "AlignMaxYInward")
+	}
+	if e&AlignWidthInward != 0 {
+		parts = append(parts, "AlignWidthInward")
+	}
+	if e&AlignHeightInward != 0 {
+		parts = append(parts, "AlignHeightInward")
+	}
+	if e&AlignMinXOutward != 0 {
+		parts = append(parts, "AlignMinXOutward")
+	}
+	if e&AlignMinYOutward != 0 {
+		parts = append(parts, "AlignMinYOutward")
+	}
+	if e&AlignMaxXOutward != 0 {
+		parts = append(parts, "AlignMaxXOutward")
+	}
+	if e&AlignMaxYOutward != 0 {
+		parts = append(parts, "AlignMaxYOutward")
+	}
+	if e&AlignWidthOutward != 0 {
+		parts = append(parts, "AlignWidthOutward")
+	}
+	if e&AlignHeightOutward != 0 {
+		parts = append(parts, "AlignHeightOutward")
+	}
+	if e&AlignMinXNearest != 0 {
+		parts = append(parts, "AlignMinXNearest")
+	}
+	if e&AlignMinYNearest != 0 {
+		parts = append(parts, "AlignMinYNearest")
+	}
+	if e&AlignMaxXNearest != 0 {
+		parts = append(parts, "AlignMaxXNearest")
+	}
+	if e&AlignMaxYNearest != 0 {
+		parts = append(parts, "AlignMaxYNearest")
+	}
+	if e&AlignWidthNearest != 0 {
+		parts = append(parts, "AlignWidthNearest")
+	}
+	if e&AlignHeightNearest != 0 {
+		parts = append(parts, "AlignHeightNearest")
+	}
+	if e&AlignRectFlipped != 0 {
+		parts = append(parts, "AlignRectFlipped")
+	}
+	if e&AlignAllEdgesInward != 0 {
+		parts = append(parts, "AlignAllEdgesInward")
+	}
+	if e&AlignAllEdgesOutward != 0 {
+		parts = append(parts, "AlignAllEdgesOutward")
+	}
+	if e&AlignAllEdgesNearest != 0 {
+		parts = append(parts, "AlignAllEdgesNearest")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // Bitmask — values may be combined with |.
 type AppleEventSendOptions uint64
 
@@ -84,6 +191,8 @@ const (
 	AppleEventSendDefaultOptions AppleEventSendOptions = 35
 )
 
+// String returns the AppleEventSendOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AppleEventSendOptions) String() string {
 	var parts []string
 	if e&AppleEventSendNoReply != 0 {
@@ -136,6 +245,8 @@ const (
 	AttributedStringFormattingApplyReplacementIndexAttribute AttributedStringFormattingOptions = 2
 )
 
+// String returns the AttributedStringFormattingOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AttributedStringFormattingOptions) String() string {
 	var parts []string
 	if e&AttributedStringFormattingInsertArgumentAttributesWithoutMerging != 0 {
@@ -162,6 +273,8 @@ const (
 	AttributedStringMarkdownInterpretedSyntaxInlineOnlyPreservingWhitespace AttributedStringMarkdownInterpretedSyntax = 2
 )
 
+// String returns the AttributedStringMarkdownInterpretedSyntax constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AttributedStringMarkdownInterpretedSyntax) String() string {
 	switch e {
 	case AttributedStringMarkdownInterpretedSyntaxFull:
@@ -185,6 +298,8 @@ const (
 	AttributedStringMarkdownParsingFailureReturnPartiallyParsedIfPossible AttributedStringMarkdownParsingFailurePolicy = 1
 )
 
+// String returns the AttributedStringMarkdownParsingFailurePolicy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AttributedStringMarkdownParsingFailurePolicy) String() string {
 	switch e {
 	case AttributedStringMarkdownParsingFailureReturnError:
@@ -206,6 +321,8 @@ const (
 	ByteCountFormatterCountStyleBinary  ByteCountFormatterCountStyle = 3
 )
 
+// String returns the ByteCountFormatterCountStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ByteCountFormatterCountStyle) String() string {
 	switch e {
 	case ByteCountFormatterCountStyleFile:
@@ -240,6 +357,8 @@ const (
 	ByteCountFormatterUseAll        ByteCountFormatterUnits = 65535
 )
 
+// String returns the ByteCountFormatterUnits constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ByteCountFormatterUnits) String() string {
 	var parts []string
 	if e&ByteCountFormatterUseBytes != 0 {
@@ -293,6 +412,8 @@ const (
 	CalendarMatchLast                               CalendarOptions = 8192
 )
 
+// String returns the CalendarOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CalendarOptions) String() string {
 	var parts []string
 	if e&CalendarWrapComponents != 0 {
@@ -383,6 +504,8 @@ const (
 	TimeZoneCalendarUnit CalendarUnit = 2097152
 )
 
+// String returns the CalendarUnit constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CalendarUnit) String() string {
 	var parts []string
 	if e&CalendarUnitEra != 0 {
@@ -506,6 +629,8 @@ const (
 	CollectionChangeRemove CollectionChangeType = 1
 )
 
+// String returns the CollectionChangeType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CollectionChangeType) String() string {
 	switch e {
 	case CollectionChangeInsert:
@@ -526,6 +651,8 @@ const (
 	AnyPredicateModifier    ComparisonPredicateModifier = 2
 )
 
+// String returns the ComparisonPredicateModifier constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ComparisonPredicateModifier) String() string {
 	switch e {
 	case DirectPredicateModifier:
@@ -549,6 +676,8 @@ const (
 	NormalizedPredicateOption           ComparisonPredicateOptions = 4
 )
 
+// String returns the ComparisonPredicateOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ComparisonPredicateOptions) String() string {
 	var parts []string
 	if e&CaseInsensitivePredicateOption != 0 {
@@ -575,6 +704,8 @@ const (
 	OrderedDescending ComparisonResult = 1
 )
 
+// String returns the ComparisonResult constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ComparisonResult) String() string {
 	switch e {
 	case OrderedAscending:
@@ -597,6 +728,8 @@ const (
 	OrPredicateType  CompoundPredicateType = 2
 )
 
+// String returns the CompoundPredicateType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CompoundPredicateType) String() string {
 	switch e {
 	case NotPredicateType:
@@ -618,6 +751,8 @@ const (
 	DataBase64DecodingIgnoreUnknownCharacters DataBase64DecodingOptions = 1
 )
 
+// String returns the DataBase64DecodingOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DataBase64DecodingOptions) String() string {
 	var parts []string
 	if e&DataBase64DecodingIgnoreUnknownCharacters != 0 {
@@ -640,6 +775,8 @@ const (
 	DataBase64EncodingEndLineWithLineFeed       DataBase64EncodingOptions = 32
 )
 
+// String returns the DataBase64EncodingOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DataBase64EncodingOptions) String() string {
 	var parts []string
 	if e&DataBase64Encoding64CharacterLineLength != 0 {
@@ -670,6 +807,8 @@ const (
 	DataCompressionAlgorithmZlib  DataCompressionAlgorithm = 3
 )
 
+// String returns the DataCompressionAlgorithm constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DataCompressionAlgorithm) String() string {
 	switch e {
 	case DataCompressionAlgorithmLZFSE:
@@ -701,6 +840,8 @@ const (
 	UncachedRead DataReadingOptions = 2
 )
 
+// String returns the DataReadingOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DataReadingOptions) String() string {
 	var parts []string
 	if e&DataReadingMappedIfSafe != 0 {
@@ -736,6 +877,8 @@ const (
 	DataSearchAnchored  DataSearchOptions = 2
 )
 
+// String returns the DataSearchOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DataSearchOptions) String() string {
 	var parts []string
 	if e&DataSearchBackwards != 0 {
@@ -767,6 +910,8 @@ const (
 	AtomicWrite DataWritingOptions = 1
 )
 
+// String returns the DataWritingOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DataWritingOptions) String() string {
 	var parts []string
 	if e&DataWritingAtomic != 0 {
@@ -811,6 +956,8 @@ const (
 	DateComponentsFormatterUnitsStyleBrief       DateComponentsFormatterUnitsStyle = 5
 )
 
+// String returns the DateComponentsFormatterUnitsStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DateComponentsFormatterUnitsStyle) String() string {
 	switch e {
 	case DateComponentsFormatterUnitsStylePositional:
@@ -845,6 +992,8 @@ const (
 	DateComponentsFormatterZeroFormattingBehaviorPad          DateComponentsFormatterZeroFormattingBehavior = 65536
 )
 
+// String returns the DateComponentsFormatterZeroFormattingBehavior constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DateComponentsFormatterZeroFormattingBehavior) String() string {
 	var parts []string
 	if e&DateComponentsFormatterZeroFormattingBehaviorDefault != 0 {
@@ -880,6 +1029,8 @@ const (
 	DateFormatterBehavior10_4    DateFormatterBehavior = 1040
 )
 
+// String returns the DateFormatterBehavior constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DateFormatterBehavior) String() string {
 	switch e {
 	case DateFormatterBehaviorDefault:
@@ -904,6 +1055,8 @@ const (
 	DateFormatterFullStyle   DateFormatterStyle = 4
 )
 
+// String returns the DateFormatterStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DateFormatterStyle) String() string {
 	switch e {
 	case DateFormatterNoStyle:
@@ -932,6 +1085,8 @@ const (
 	DateIntervalFormatterFullStyle   DateIntervalFormatterStyle = 4
 )
 
+// String returns the DateIntervalFormatterStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DateIntervalFormatterStyle) String() string {
 	switch e {
 	case DateIntervalFormatterNoStyle:
@@ -957,6 +1112,8 @@ const (
 	DecodingFailurePolicySetErrorAndReturn DecodingFailurePolicy = 1
 )
 
+// String returns the DecodingFailurePolicy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DecodingFailurePolicy) String() string {
 	switch e {
 	case DecodingFailurePolicyRaiseException:
@@ -980,6 +1137,8 @@ const (
 	DirectoryEnumerationProducesRelativePathURLs     DirectoryEnumerationOptions = 16
 )
 
+// String returns the DirectoryEnumerationOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DirectoryEnumerationOptions) String() string {
 	var parts []string
 	if e&DirectoryEnumerationSkipsSubdirectoryDescendants != 0 {
@@ -1011,6 +1170,8 @@ const (
 	DistributedNotificationPostToAllSessions  DistributedNotificationOptions = 2
 )
 
+// String returns the DistributedNotificationOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DistributedNotificationOptions) String() string {
 	var parts []string
 	if e&DistributedNotificationDeliverImmediately != 0 {
@@ -1035,6 +1196,8 @@ const (
 	EnergyFormatterUnitKilocalorie EnergyFormatterUnit = 1794
 )
 
+// String returns the EnergyFormatterUnit constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EnergyFormatterUnit) String() string {
 	switch e {
 	case EnergyFormatterUnitJoule:
@@ -1061,6 +1224,8 @@ const (
 	EnumerationReverse EnumerationOptions = 2
 )
 
+// String returns the EnumerationOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EnumerationOptions) String() string {
 	var parts []string
 	if e&EnumerationConcurrent != 0 {
@@ -1094,6 +1259,8 @@ const (
 	ConditionalExpressionType     ExpressionType = 20
 )
 
+// String returns the ExpressionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ExpressionType) String() string {
 	switch e {
 	case ConstantValueExpressionType:
@@ -1138,6 +1305,8 @@ const (
 	FileCoordinatorReadingForUploading                     FileCoordinatorReadingOptions = 8
 )
 
+// String returns the FileCoordinatorReadingOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FileCoordinatorReadingOptions) String() string {
 	var parts []string
 	if e&FileCoordinatorReadingWithoutChanges != 0 {
@@ -1170,6 +1339,8 @@ const (
 	FileCoordinatorWritingContentIndependentMetadataOnly FileCoordinatorWritingOptions = 16
 )
 
+// String returns the FileCoordinatorWritingOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FileCoordinatorWritingOptions) String() string {
 	var parts []string
 	if e&FileCoordinatorWritingForDeleting != 0 {
@@ -1202,6 +1373,8 @@ const (
 	FileManagerItemReplacementWithoutDeletingBackupItem FileManagerItemReplacementOptions = 2
 )
 
+// String returns the FileManagerItemReplacementOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FileManagerItemReplacementOptions) String() string {
 	var parts []string
 	if e&FileManagerItemReplacementUsingNewMetadataOnly != 0 {
@@ -1228,6 +1401,8 @@ const (
 	FileManagerResumeSyncBehaviorDropLocalChanges FileManagerResumeSyncBehavior = 2
 )
 
+// String returns the FileManagerResumeSyncBehavior constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FileManagerResumeSyncBehavior) String() string {
 	switch e {
 	case FileManagerResumeSyncBehaviorPreserveLocalChanges:
@@ -1249,6 +1424,8 @@ const (
 	FileManagerUnmountWithoutUI                 FileManagerUnmountOptions = 2
 )
 
+// String returns the FileManagerUnmountOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FileManagerUnmountOptions) String() string {
 	var parts []string
 	if e&FileManagerUnmountAllPartitionsAndEjectDisk != 0 {
@@ -1273,6 +1450,8 @@ const (
 	FileManagerUploadConflictPolicyFailOnConflict FileManagerUploadLocalVersionConflictPolicy = 1
 )
 
+// String returns the FileManagerUploadLocalVersionConflictPolicy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FileManagerUploadLocalVersionConflictPolicy) String() string {
 	switch e {
 	case FileManagerUploadConflictPolicyDefault:
@@ -1292,6 +1471,8 @@ const (
 	FileVersionAddingByMoving FileVersionAddingOptions = 1
 )
 
+// String returns the FileVersionAddingOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FileVersionAddingOptions) String() string {
 	var parts []string
 	if e&FileVersionAddingByMoving != 0 {
@@ -1311,6 +1492,8 @@ const (
 	FileVersionReplacingByMoving FileVersionReplacingOptions = 1
 )
 
+// String returns the FileVersionReplacingOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FileVersionReplacingOptions) String() string {
 	var parts []string
 	if e&FileVersionReplacingByMoving != 0 {
@@ -1331,6 +1514,8 @@ const (
 	FileWrapperReadingWithoutMapping FileWrapperReadingOptions = 2
 )
 
+// String returns the FileWrapperReadingOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FileWrapperReadingOptions) String() string {
 	var parts []string
 	if e&FileWrapperReadingImmediate != 0 {
@@ -1354,6 +1539,8 @@ const (
 	FileWrapperWritingWithNameUpdating FileWrapperWritingOptions = 2
 )
 
+// String returns the FileWrapperWritingOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FileWrapperWritingOptions) String() string {
 	var parts []string
 	if e&FileWrapperWritingAtomic != 0 {
@@ -1380,6 +1567,8 @@ const (
 	FormattingContextMiddleOfSentence    FormattingContext = 5
 )
 
+// String returns the FormattingContext constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FormattingContext) String() string {
 	switch e {
 	case FormattingContextUnknown:
@@ -1408,6 +1597,8 @@ const (
 	FormattingUnitStyleLong   FormattingUnitStyle = 3
 )
 
+// String returns the FormattingUnitStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FormattingUnitStyle) String() string {
 	switch e {
 	case FormattingUnitStyleShort:
@@ -1441,6 +1632,8 @@ const (
 	GrammaticalCaseTranslative   GrammaticalCase = 14
 )
 
+// String returns the GrammaticalCase constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GrammaticalCase) String() string {
 	switch e {
 	case GrammaticalCaseNotSet:
@@ -1486,6 +1679,8 @@ const (
 	GrammaticalDefinitenessDefinite   GrammaticalDefiniteness = 2
 )
 
+// String returns the GrammaticalDefiniteness constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GrammaticalDefiniteness) String() string {
 	switch e {
 	case GrammaticalDefinitenessNotSet:
@@ -1507,6 +1702,8 @@ const (
 	GrammaticalDeterminationDependent   GrammaticalDetermination = 2
 )
 
+// String returns the GrammaticalDetermination constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GrammaticalDetermination) String() string {
 	switch e {
 	case GrammaticalDeterminationNotSet:
@@ -1534,6 +1731,8 @@ const (
 	GrammaticalGenderNeuter GrammaticalGender = 3
 )
 
+// String returns the GrammaticalGender constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GrammaticalGender) String() string {
 	switch e {
 	case GrammaticalGenderNotSet:
@@ -1569,6 +1768,8 @@ const (
 	GrammaticalNumberPluralMany GrammaticalNumber = 6
 )
 
+// String returns the GrammaticalNumber constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GrammaticalNumber) String() string {
 	switch e {
 	case GrammaticalNumberNotSet:
@@ -1626,6 +1827,8 @@ const (
 	GrammaticalPartOfSpeechAbbreviation GrammaticalPartOfSpeech = 14
 )
 
+// String returns the GrammaticalPartOfSpeech constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GrammaticalPartOfSpeech) String() string {
 	switch e {
 	case GrammaticalPartOfSpeechNotSet:
@@ -1672,6 +1875,8 @@ const (
 	GrammaticalPersonThird  GrammaticalPerson = 3
 )
 
+// String returns the GrammaticalPerson constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GrammaticalPerson) String() string {
 	switch e {
 	case GrammaticalPersonNotSet:
@@ -1696,6 +1901,8 @@ const (
 	GrammaticalPronounTypePossessive GrammaticalPronounType = 3
 )
 
+// String returns the GrammaticalPronounType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GrammaticalPronounType) String() string {
 	switch e {
 	case GrammaticalPronounTypeNotSet:
@@ -1720,6 +1927,8 @@ const (
 	HTTPCookieAcceptPolicyOnlyFromMainDocumentDomain HTTPCookieAcceptPolicy = 2
 )
 
+// String returns the HTTPCookieAcceptPolicy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HTTPCookieAcceptPolicy) String() string {
 	switch e {
 	case HTTPCookieAcceptPolicyAlways:
@@ -1754,6 +1963,8 @@ const (
 	ISO8601DateFormatWithInternetDateTime         ISO8601DateFormatOptions = 1907
 )
 
+// String returns the ISO8601DateFormatOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ISO8601DateFormatOptions) String() string {
 	var parts []string
 	if e&ISO8601DateFormatWithYear != 0 {
@@ -1815,6 +2026,8 @@ const (
 	PositionReplace   InsertionPosition = 4
 )
 
+// String returns the InsertionPosition constant's name, or its numeric form when the
+// value is not a known constant.
 func (e InsertionPosition) String() string {
 	switch e {
 	case PositionAfter:
@@ -1842,6 +2055,8 @@ const (
 	ItemProviderUnavailableCoercionError  ItemProviderErrorCode = -1200
 )
 
+// String returns the ItemProviderErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ItemProviderErrorCode) String() string {
 	switch e {
 	case ItemProviderUnknownError:
@@ -1866,6 +2081,8 @@ const (
 	ItemProviderFileOptionOpenInPlace ItemProviderFileOptions = 1
 )
 
+// String returns the ItemProviderFileOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ItemProviderFileOptions) String() string {
 	var parts []string
 	if e&ItemProviderFileOptionOpenInPlace != 0 {
@@ -1889,6 +2106,8 @@ const (
 	ItemProviderRepresentationVisibilityOwnProcess ItemProviderRepresentationVisibility = 3
 )
 
+// String returns the ItemProviderRepresentationVisibility constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ItemProviderRepresentationVisibility) String() string {
 	switch e {
 	case ItemProviderRepresentationVisibilityAll:
@@ -1916,6 +2135,8 @@ const (
 	JSONReadingAllowFragments JSONReadingOptions = 4
 )
 
+// String returns the JSONReadingOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e JSONReadingOptions) String() string {
 	var parts []string
 	if e&JSONReadingMutableContainers != 0 {
@@ -1953,6 +2174,8 @@ const (
 	JSONWritingWithoutEscapingSlashes JSONWritingOptions = 8
 )
 
+// String returns the JSONWritingOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e JSONWritingOptions) String() string {
 	var parts []string
 	if e&JSONWritingPrettyPrinted != 0 {
@@ -1987,6 +2210,8 @@ const (
 	KeyValueChangeReplacement KeyValueChange = 4
 )
 
+// String returns the KeyValueChange constant's name, or its numeric form when the
+// value is not a known constant.
 func (e KeyValueChange) String() string {
 	switch e {
 	case KeyValueChangeSetting:
@@ -2017,6 +2242,8 @@ const (
 	KeyValueObservingOptionPrior KeyValueObservingOptions = 8
 )
 
+// String returns the KeyValueObservingOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e KeyValueObservingOptions) String() string {
 	var parts []string
 	if e&KeyValueObservingOptionNew != 0 {
@@ -2046,6 +2273,8 @@ const (
 	KeyValueSetSetMutation       KeyValueSetMutationKind = 4
 )
 
+// String returns the KeyValueSetMutationKind constant's name, or its numeric form when the
+// value is not a known constant.
 func (e KeyValueSetMutationKind) String() string {
 	switch e {
 	case KeyValueUnionSetMutation:
@@ -2075,6 +2304,8 @@ const (
 	LengthFormatterUnitMile       LengthFormatterUnit = 1284
 )
 
+// String returns the LengthFormatterUnit constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LengthFormatterUnit) String() string {
 	switch e {
 	case LengthFormatterUnitMillimeter:
@@ -2112,6 +2343,8 @@ const (
 	LinguisticTaggerUnitDocument LinguisticTaggerUnit = 3
 )
 
+// String returns the LinguisticTaggerUnit constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LinguisticTaggerUnit) String() string {
 	switch e {
 	case LinguisticTaggerUnitWord:
@@ -2138,6 +2371,8 @@ const (
 	LocaleLanguageDirectionBottomToTop LocaleLanguageDirection = 4
 )
 
+// String returns the LocaleLanguageDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LocaleLanguageDirection) String() string {
 	switch e {
 	case LocaleLanguageDirectionUnknown:
@@ -2166,6 +2401,8 @@ const (
 	MachPortDeallocateReceiveRight MachPortOptions = 2
 )
 
+// String returns the MachPortOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MachPortOptions) String() string {
 	var parts []string
 	if e&MachPortDeallocateSendRight != 0 {
@@ -2191,6 +2428,8 @@ const (
 	MassFormatterUnitStone    MassFormatterUnit = 1539
 )
 
+// String returns the MassFormatterUnit constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MassFormatterUnit) String() string {
 	switch e {
 	case MassFormatterUnitGram:
@@ -2220,6 +2459,8 @@ const (
 	MatchingWithoutAnchoringBounds MatchingOptions = 16
 )
 
+// String returns the MatchingOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MatchingOptions) String() string {
 	var parts []string
 	if e&MatchingReportProgress != 0 {
@@ -2253,6 +2494,8 @@ const (
 	MeasurementFormatterUnitOptionsTemperatureWithoutUnit MeasurementFormatterUnitOptions = 4
 )
 
+// String returns the MeasurementFormatterUnitOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MeasurementFormatterUnitOptions) String() string {
 	var parts []string
 	if e&MeasurementFormatterUnitOptionsProvidedUnit != 0 {
@@ -2279,6 +2522,8 @@ const (
 	NetServiceListenForConnections NetServiceOptions = 2
 )
 
+// String returns the NetServiceOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NetServiceOptions) String() string {
 	var parts []string
 	if e&NetServiceNoAutoRename != 0 {
@@ -2303,6 +2548,8 @@ const (
 	NotificationCoalescingOnSender NotificationCoalescing = 2
 )
 
+// String returns the NotificationCoalescing constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NotificationCoalescing) String() string {
 	var parts []string
 	if e&NotificationCoalescingOnName != 0 {
@@ -2326,6 +2573,8 @@ const (
 	NumberFormatterBehavior10_4    NumberFormatterBehavior = 1040
 )
 
+// String returns the NumberFormatterBehavior constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NumberFormatterBehavior) String() string {
 	switch e {
 	case NumberFormatterBehaviorDefault:
@@ -2349,6 +2598,8 @@ const (
 	NumberFormatterPadAfterSuffix  NumberFormatterPadPosition = 3
 )
 
+// String returns the NumberFormatterPadPosition constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NumberFormatterPadPosition) String() string {
 	switch e {
 	case NumberFormatterPadBeforePrefix:
@@ -2377,6 +2628,8 @@ const (
 	NumberFormatterRoundHalfUp   NumberFormatterRoundingMode = 6
 )
 
+// String returns the NumberFormatterRoundingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NumberFormatterRoundingMode) String() string {
 	switch e {
 	case NumberFormatterRoundCeiling:
@@ -2414,6 +2667,8 @@ const (
 	NumberFormatterCurrencyAccountingStyle NumberFormatterStyle = 10
 )
 
+// String returns the NumberFormatterStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NumberFormatterStyle) String() string {
 	switch e {
 	case NumberFormatterNoStyle:
@@ -2452,6 +2707,8 @@ const (
 	OperationQueuePriorityVeryHigh OperationQueuePriority = 8
 )
 
+// String returns the OperationQueuePriority constant's name, or its numeric form when the
+// value is not a known constant.
 func (e OperationQueuePriority) String() string {
 	switch e {
 	case OperationQueuePriorityVeryLow:
@@ -2482,6 +2739,8 @@ const (
 	OrderedCollectionDifferenceCalculationInferMoves OrderedCollectionDifferenceCalculationOptions = 4
 )
 
+// String returns the OrderedCollectionDifferenceCalculationOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e OrderedCollectionDifferenceCalculationOptions) String() string {
 	var parts []string
 	if e&OrderedCollectionDifferenceCalculationOmitInsertedObjects != 0 {
@@ -2507,6 +2766,8 @@ const (
 	PersonNameComponentsFormatterPhonetic PersonNameComponentsFormatterOptions = 2
 )
 
+// String returns the PersonNameComponentsFormatterOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PersonNameComponentsFormatterOptions) String() string {
 	var parts []string
 	if e&PersonNameComponentsFormatterPhonetic != 0 {
@@ -2529,6 +2790,8 @@ const (
 	PersonNameComponentsFormatterStyleAbbreviated PersonNameComponentsFormatterStyle = 4
 )
 
+// String returns the PersonNameComponentsFormatterStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PersonNameComponentsFormatterStyle) String() string {
 	switch e {
 	case PersonNameComponentsFormatterStyleDefault:
@@ -2569,6 +2832,8 @@ const (
 	PointerFunctionsCopyIn                   PointerFunctionsOptions = 65536
 )
 
+// String returns the PointerFunctionsOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PointerFunctionsOptions) String() string {
 	var parts []string
 	if e&PointerFunctionsZeroingWeakMemory != 0 {
@@ -2619,6 +2884,8 @@ const (
 	PostNow      PostingStyle = 3
 )
 
+// String returns the PostingStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PostingStyle) String() string {
 	switch e {
 	case PostWhenIdle:
@@ -2652,6 +2919,8 @@ const (
 	BetweenPredicateOperatorType              PredicateOperatorType = 100
 )
 
+// String returns the PredicateOperatorType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PredicateOperatorType) String() string {
 	switch e {
 	case LessThanPredicateOperatorType:
@@ -2717,6 +2986,8 @@ const (
 	PresentationIntentKindTableCell PresentationIntentKind = 11
 )
 
+// String returns the PresentationIntentKind constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PresentationIntentKind) String() string {
 	switch e {
 	case PresentationIntentKindParagraph:
@@ -2758,6 +3029,8 @@ const (
 	ProcessInfoThermalStateCritical ProcessInfoThermalState = 3
 )
 
+// String returns the ProcessInfoThermalState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ProcessInfoThermalState) String() string {
 	switch e {
 	case ProcessInfoThermalStateNominal:
@@ -2782,6 +3055,8 @@ const (
 	PropertyListBinaryFormat_v1_0 PropertyListFormat = 200
 )
 
+// String returns the PropertyListFormat constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PropertyListFormat) String() string {
 	switch e {
 	case PropertyListOpenStepFormat:
@@ -2806,6 +3081,8 @@ const (
 	PropertyListMutableContainersAndLeaves PropertyListMutabilityOptions = 2
 )
 
+// String returns the PropertyListMutabilityOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PropertyListMutabilityOptions) String() string {
 	var parts []string
 	if e&PropertyListMutableContainers != 0 {
@@ -2831,6 +3108,8 @@ const (
 	QualityOfServiceDefault         QualityOfService = -1
 )
 
+// String returns the QualityOfService constant's name, or its numeric form when the
+// value is not a known constant.
 func (e QualityOfService) String() string {
 	switch e {
 	case QualityOfServiceUserInteractive:
@@ -2861,6 +3140,8 @@ const (
 	RegularExpressionUseUnicodeWordBoundaries   RegularExpressionOptions = 64
 )
 
+// String returns the RegularExpressionOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RegularExpressionOptions) String() string {
 	var parts []string
 	if e&RegularExpressionCaseInsensitive != 0 {
@@ -2898,6 +3179,8 @@ const (
 	RelativeDateTimeFormatterStyleNamed   RelativeDateTimeFormatterStyle = 1
 )
 
+// String returns the RelativeDateTimeFormatterStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RelativeDateTimeFormatterStyle) String() string {
 	switch e {
 	case RelativeDateTimeFormatterStyleNumeric:
@@ -2919,6 +3202,8 @@ const (
 	RelativeDateTimeFormatterUnitsStyleAbbreviated RelativeDateTimeFormatterUnitsStyle = 3
 )
 
+// String returns the RelativeDateTimeFormatterUnitsStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RelativeDateTimeFormatterUnitsStyle) String() string {
 	switch e {
 	case RelativeDateTimeFormatterUnitsStyleFull:
@@ -2942,6 +3227,8 @@ const (
 	RelativeBefore RelativePosition = 1
 )
 
+// String returns the RelativePosition constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RelativePosition) String() string {
 	switch e {
 	case RelativeAfter:
@@ -2963,6 +3250,8 @@ const (
 	RoundBankers RoundingMode = 3
 )
 
+// String returns the RoundingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RoundingMode) String() string {
 	switch e {
 	case RoundPlain:
@@ -2990,6 +3279,8 @@ const (
 	SaveOptionsAsk SaveOptions = 2
 )
 
+// String returns the SaveOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SaveOptions) String() string {
 	switch e {
 	case SaveOptionsYes:
@@ -3036,6 +3327,8 @@ const (
 	TrashDirectory                SearchPathDirectory = 102
 )
 
+// String returns the SearchPathDirectory constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SearchPathDirectory) String() string {
 	switch e {
 	case ApplicationDirectory:
@@ -3109,6 +3402,8 @@ const (
 	AllDomainsMask    SearchPathDomainMask = 65535
 )
 
+// String returns the SearchPathDomainMask constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SearchPathDomainMask) String() string {
 	var parts []string
 	if e&UserDomainMask != 0 {
@@ -3143,6 +3438,8 @@ const (
 	SortStable SortOptions = 16
 )
 
+// String returns the SortOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SortOptions) String() string {
 	var parts []string
 	if e&SortConcurrent != 0 {
@@ -3171,6 +3468,8 @@ const (
 	StreamStatusError   StreamStatus = 7
 )
 
+// String returns the StreamStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StreamStatus) String() string {
 	switch e {
 	case StreamStatusNotOpen:
@@ -3210,6 +3509,8 @@ const (
 	RegularExpressionSearch    StringCompareOptions = 1024
 )
 
+// String returns the StringCompareOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StringCompareOptions) String() string {
 	var parts []string
 	if e&CaseInsensitiveSearch != 0 {
@@ -3253,6 +3554,8 @@ const (
 	TaskTerminationReasonUncaughtSignal TaskTerminationReason = 2
 )
 
+// String returns the TaskTerminationReason constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TaskTerminationReason) String() string {
 	switch e {
 	case TaskTerminationReasonExit:
@@ -3278,6 +3581,8 @@ const (
 	ContainsComparison             TestComparisonOperation = 7
 )
 
+// String returns the TestComparisonOperation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TestComparisonOperation) String() string {
 	switch e {
 	case EqualToComparison:
@@ -3320,6 +3625,8 @@ const (
 	TextCheckingTypeTransitInformation TextCheckingType = 4096
 )
 
+// String returns the TextCheckingType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextCheckingType) String() string {
 	var parts []string
 	if e&TextCheckingTypeOrthography != 0 {
@@ -3379,6 +3686,8 @@ const (
 	TimeZoneNameStyleShortGeneric        TimeZoneNameStyle = 5
 )
 
+// String returns the TimeZoneNameStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TimeZoneNameStyle) String() string {
 	switch e {
 	case TimeZoneNameStyleStandard:
@@ -3414,6 +3723,8 @@ const (
 	URLBookmarkCreationWithoutImplicitSecurityScope     URLBookmarkCreationOptions = 536870912
 )
 
+// String returns the URLBookmarkCreationOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e URLBookmarkCreationOptions) String() string {
 	var parts []string
 	if e&URLBookmarkCreationPreferFileIDResolution != 0 {
@@ -3451,6 +3762,8 @@ const (
 	URLBookmarkResolutionWithoutImplicitStartAccessing URLBookmarkResolutionOptions = 32768
 )
 
+// String returns the URLBookmarkResolutionOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e URLBookmarkResolutionOptions) String() string {
 	var parts []string
 	if e&URLBookmarkResolutionWithoutUI != 0 {
@@ -3480,6 +3793,8 @@ const (
 	URLCacheStorageNotAllowed          URLCacheStoragePolicy = 2
 )
 
+// String returns the URLCacheStoragePolicy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e URLCacheStoragePolicy) String() string {
 	switch e {
 	case URLCacheStorageAllowed:
@@ -3503,6 +3818,8 @@ const (
 	URLCredentialPersistenceSynchronizable URLCredentialPersistence = 3
 )
 
+// String returns the URLCredentialPersistence constant's name, or its numeric form when the
+// value is not a known constant.
 func (e URLCredentialPersistence) String() string {
 	switch e {
 	case URLCredentialPersistenceNone:
@@ -3528,6 +3845,8 @@ const (
 	URLHandleLoadFailed     URLHandleStatus = 3
 )
 
+// String returns the URLHandleStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e URLHandleStatus) String() string {
 	switch e {
 	case URLHandleNotLoaded:
@@ -3543,6 +3862,30 @@ func (e URLHandleStatus) String() string {
 	}
 }
 
+// Constants indicating the relationship between a directory and an item.
+type URLRelationship int64
+
+const (
+	URLRelationshipContains URLRelationship = 0
+	URLRelationshipSame     URLRelationship = 1
+	URLRelationshipOther    URLRelationship = 2
+)
+
+// String returns the URLRelationship constant's name, or its numeric form when the
+// value is not a known constant.
+func (e URLRelationship) String() string {
+	switch e {
+	case URLRelationshipContains:
+		return "URLRelationshipContains"
+	case URLRelationshipSame:
+		return "URLRelationshipSame"
+	case URLRelationshipOther:
+		return "URLRelationshipOther"
+	default:
+		return fmt.Sprintf("URLRelationship(%d)", int64(e))
+	}
+}
+
 // The entities that can make a network request.
 type URLRequestAttribution uint64
 
@@ -3551,6 +3894,8 @@ const (
 	URLRequestAttributionUser      URLRequestAttribution = 1
 )
 
+// String returns the URLRequestAttribution constant's name, or its numeric form when the
+// value is not a known constant.
 func (e URLRequestAttribution) String() string {
 	switch e {
 	case URLRequestAttributionDeveloper:
@@ -3575,6 +3920,8 @@ const (
 	URLRequestReloadRevalidatingCacheData           URLRequestCachePolicy = 5
 )
 
+// String returns the URLRequestCachePolicy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e URLRequestCachePolicy) String() string {
 	switch e {
 	case URLRequestUseProtocolCachePolicy:
@@ -3614,6 +3961,8 @@ const (
 	URLNetworkServiceTypeCallSignaling  URLRequestNetworkServiceType = 11
 )
 
+// String returns the URLRequestNetworkServiceType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e URLRequestNetworkServiceType) String() string {
 	switch e {
 	case URLNetworkServiceTypeDefault:
@@ -3649,6 +3998,8 @@ const (
 	URLSessionTaskMetricsDomainResolutionProtocolHTTPS   URLSessionTaskMetricsDomainResolutionProtocol = 4
 )
 
+// String returns the URLSessionTaskMetricsDomainResolutionProtocol constant's name, or its numeric form when the
+// value is not a known constant.
 func (e URLSessionTaskMetricsDomainResolutionProtocol) String() string {
 	switch e {
 	case URLSessionTaskMetricsDomainResolutionProtocolUnknown:
@@ -3678,6 +4029,8 @@ const (
 	URLSessionTaskMetricsResourceFetchTypeLocalCache URLSessionTaskMetricsResourceFetchType = 3
 )
 
+// String returns the URLSessionTaskMetricsResourceFetchType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e URLSessionTaskMetricsResourceFetchType) String() string {
 	switch e {
 	case URLSessionTaskMetricsResourceFetchTypeUnknown:
@@ -3703,6 +4056,8 @@ const (
 	URLSessionTaskStateCompleted URLSessionTaskState = 3
 )
 
+// String returns the URLSessionTaskState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e URLSessionTaskState) String() string {
 	switch e {
 	case URLSessionTaskStateRunning:
@@ -3737,6 +4092,8 @@ const (
 	URLSessionWebSocketCloseCodeTLSHandshakeFailure       URLSessionWebSocketCloseCode = 1015
 )
 
+// String returns the URLSessionWebSocketCloseCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e URLSessionWebSocketCloseCode) String() string {
 	switch e {
 	case URLSessionWebSocketCloseCodeInvalid:
@@ -3778,6 +4135,8 @@ const (
 	URLSessionWebSocketMessageTypeString URLSessionWebSocketMessageType = 1
 )
 
+// String returns the URLSessionWebSocketMessageType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e URLSessionWebSocketMessageType) String() string {
 	switch e {
 	case URLSessionWebSocketMessageTypeData:
@@ -3802,6 +4161,8 @@ const (
 	UserNotificationActivationTypeAdditionalActionClicked UserNotificationActivationType = 4
 )
 
+// String returns the UserNotificationActivationType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e UserNotificationActivationType) String() string {
 	switch e {
 	case UserNotificationActivationTypeNone:
@@ -3827,6 +4188,8 @@ const (
 	VolumeEnumerationProduceFileReferenceURLs VolumeEnumerationOptions = 4
 )
 
+// String returns the VolumeEnumerationOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VolumeEnumerationOptions) String() string {
 	var parts []string
 	if e&VolumeEnumerationSkipHiddenVolumes != 0 {
@@ -3852,6 +4215,8 @@ const (
 	NoSubelement     WhoseSubelementIdentifier = 4
 )
 
+// String returns the WhoseSubelementIdentifier constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WhoseSubelementIdentifier) String() string {
 	switch e {
 	case IndexSubelement:
@@ -3895,6 +4260,8 @@ const (
 	XMLElementDeclarationElementKind   XMLDTDNodeKind = 20
 )
 
+// String returns the XMLDTDNodeKind constant's name, or its numeric form when the
+// value is not a known constant.
 func (e XMLDTDNodeKind) String() string {
 	switch e {
 	case XMLEntityGeneralKind:
@@ -3952,6 +4319,8 @@ const (
 	XMLDocumentTextKind  XMLDocumentContentKind = 3
 )
 
+// String returns the XMLDocumentContentKind constant's name, or its numeric form when the
+// value is not a known constant.
 func (e XMLDocumentContentKind) String() string {
 	switch e {
 	case XMLDocumentXMLKind:
@@ -3986,6 +4355,8 @@ const (
 	XMLNotationDeclarationKind   XMLNodeKind = 12
 )
 
+// String returns the XMLNodeKind constant's name, or its numeric form when the
+// value is not a known constant.
 func (e XMLNodeKind) String() string {
 	switch e {
 	case XMLInvalidKind:
@@ -4055,6 +4426,8 @@ const (
 	XMLNodePreserveAll                        XMLNodeOptions = 4293918750
 )
 
+// String returns the XMLNodeOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e XMLNodeOptions) String() string {
 	var parts []string
 	if e&XMLNodeIsCDATA != 0 {
@@ -4154,6 +4527,8 @@ const (
 	XMLParserResolveExternalEntitiesAlways         XMLParserExternalEntityResolvingPolicy = 3
 )
 
+// String returns the XMLParserExternalEntityResolvingPolicy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e XMLParserExternalEntityResolvingPolicy) String() string {
 	switch e {
 	case XMLParserResolveExternalEntitiesNever:
@@ -4177,6 +4552,8 @@ const (
 	XPCConnectionPrivileged XPCConnectionOptions = 4096
 )
 
+// String returns the XPCConnectionOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e XPCConnectionOptions) String() string {
 	var parts []string
 	if e&XPCConnectionPrivileged != 0 {

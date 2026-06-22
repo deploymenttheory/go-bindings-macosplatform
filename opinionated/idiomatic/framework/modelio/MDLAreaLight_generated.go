@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A light source that illuminates a 3D scene from an area with a specific shape.
-//
 // AreaLight is an idiomatic wrapper over the Objective-C class MDLAreaLight.
+//
+// It embeds [PhysicallyPlausibleLight], promoting that type's methods.
+//
+// A light source that illuminates a 3D scene from an area with a specific shape.
 type AreaLight struct {
-	objref.Handle
+	PhysicallyPlausibleLight
 }
 
 // AreaLightFromID adopts an existing Objective-C object as a AreaLight
@@ -25,7 +26,8 @@ func AreaLightFromID(id objc.ID) *AreaLight {
 	if id == 0 {
 		return nil
 	}
-	x := &AreaLight{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AreaLight{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func areaLightAdopt(id objc.ID) *AreaLight {
 	if id == 0 {
 		return nil
 	}
-	x := &AreaLight{Handle: objref.Wrap(id)}
+	x := &AreaLight{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AreaLight) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AreaLight) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AreaLight) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAreaLight creates a new AreaLight.
@@ -64,124 +52,102 @@ func NewAreaLight() *AreaLight {
 	return areaLightAdopt(_id)
 }
 
-// The radius, in units of local coordinate space, of the area from which light emanates.
-//
-// WithAreaRadius sets areaRadius and returns the receiver so calls can be chained.
+// WithAreaRadius the radius, in units of local coordinate space, of the area from which light emanates.
 func (x *AreaLight) WithAreaRadius(areaRadius float32) *AreaLight {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaRadius:"), areaRadius)
 	return x
 }
 
-// The aspect ratio of the light’s shape.
-//
-// WithAspect sets aspect and returns the receiver so calls can be chained.
+// WithAspect the aspect ratio of the light’s shape.
 func (x *AreaLight) WithAspect(aspect float32) *AreaLight {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAspect:"), aspect)
 	return x
 }
 
-// The color of the light source.
-//
-// WithColor sets color and returns the receiver so calls can be chained.
+// WithColor the color of the light source.
 func (x *AreaLight) WithColor(color obj.Object) *AreaLight {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 	return x
 }
 
-// The total visible intensity of the light source, in lumens.
-//
-// WithLumens sets lumens and returns the receiver so calls can be chained.
+// WithLumens the total visible intensity of the light source, in lumens.
 func (x *AreaLight) WithLumens(lumens float32) *AreaLight {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLumens:"), lumens)
 	return x
 }
 
-// The radial angle, in degrees, of the area fully illuminated by the light.
-//
-// WithInnerConeAngle sets innerConeAngle and returns the receiver so calls can be chained.
+// WithInnerConeAngle the radial angle, in degrees, of the area fully illuminated by the light.
 func (x *AreaLight) WithInnerConeAngle(innerConeAngle float32) *AreaLight {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerConeAngle:"), innerConeAngle)
 	return x
 }
 
-// The radial angle, in degrees, at which the illumination from a spotlight becomes zero.
-//
-// WithOuterConeAngle sets outerConeAngle and returns the receiver so calls can be chained.
+// WithOuterConeAngle the radial angle, in degrees, at which the illumination from a spotlight becomes zero.
 func (x *AreaLight) WithOuterConeAngle(outerConeAngle float32) *AreaLight {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterConeAngle:"), outerConeAngle)
 	return x
 }
 
-// The distance from the light source, in units of local coordinate space, at which its illumination begins to diminish.
-//
-// WithAttenuationStartDistance sets attenuationStartDistance and returns the receiver so calls can be chained.
+// WithAttenuationStartDistance the distance from the light source, in units of local coordinate space, at which its illumination begins to diminish.
 func (x *AreaLight) WithAttenuationStartDistance(attenuationStartDistance float32) *AreaLight {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttenuationStartDistance:"), attenuationStartDistance)
 	return x
 }
 
-// The distance from the light source, in units of local coordinate space, at which its illumination becomes zero.
-//
-// WithAttenuationEndDistance sets attenuationEndDistance and returns the receiver so calls can be chained.
+// WithAttenuationEndDistance the distance from the light source, in units of local coordinate space, at which its illumination becomes zero.
 func (x *AreaLight) WithAttenuationEndDistance(attenuationEndDistance float32) *AreaLight {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttenuationEndDistance:"), attenuationEndDistance)
 	return x
 }
 
-// The type of the light.
-//
-// WithLightType sets lightType and returns the receiver so calls can be chained.
+// WithLightType the type of the light.
 func (x *AreaLight) WithLightType(lightType LightType) *AreaLight {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightType:"), lightType)
 	return x
 }
 
-// The name of the Core Graphics color space to be used for interpreting the light’s color information.
-//
-// WithColorSpace sets colorSpace and returns the receiver so calls can be chained.
+// WithColorSpace the name of the Core Graphics color space to be used for interpreting the light’s color information.
 func (x *AreaLight) WithColorSpace(colorSpace string) *AreaLight {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), purego.NSString(colorSpace))
 	return x
 }
 
-// The parent object that contains this object.
-//
-// WithParent sets parent and returns the receiver so calls can be chained.
+// WithParent the parent object that contains this object.
 func (x *AreaLight) WithParent(parent ObjectProvider) *AreaLight {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return x
 }
 
-// The primary object, if applicable, of which this object is an instance.
-//
-// WithInstance sets instance and returns the receiver so calls can be chained.
+// WithInstance the primary object, if applicable, of which this object is an instance.
 func (x *AreaLight) WithInstance(instance ObjectProvider) *AreaLight {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return x
 }
 
-// A Boolean value indicating whether this object should be used in rendering.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden a Boolean value indicating whether this object should be used in rendering.
 func (x *AreaLight) WithHidden(hidden bool) *AreaLight {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
+// AreaRadius wraps the corresponding Objective-C method.
 func (x *AreaLight) AreaRadius() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("areaRadius"))
 	return _r
 }
 
+// SetAreaRadius wraps the corresponding Objective-C method.
 func (x *AreaLight) SetAreaRadius(areaRadius float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaRadius:"), areaRadius)
 }
 
+// Aspect wraps the corresponding Objective-C method.
 func (x *AreaLight) Aspect() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("aspect"))
 	return _r
 }
 
+// SetAspect wraps the corresponding Objective-C method.
 func (x *AreaLight) SetAspect(aspect float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAspect:"), aspect)
 }
@@ -209,3 +175,9 @@ type AreaLightable interface {
 }
 
 var _ AreaLightable = (*AreaLight)(nil)
+
+var _ PhysicallyPlausibleLightProvider = (*AreaLight)(nil)
+
+var _ LightProvider = (*AreaLight)(nil)
+
+var _ ObjectProvider = (*AreaLight)(nil)

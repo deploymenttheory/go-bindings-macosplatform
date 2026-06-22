@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A file to include in a message.
-//
 // SendMessageAttachment is an idiomatic wrapper over the Objective-C class INSendMessageAttachment.
+//
+// A file to include in a message.
 type SendMessageAttachment struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SendMessageAttachmentFromID(id objc.ID) *SendMessageAttachment {
 	if id == 0 {
 		return nil
 	}
-	x := &SendMessageAttachment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SendMessageAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func sendMessageAttachmentAdopt(id objc.ID) *SendMessageAttachment {
 	if id == 0 {
 		return nil
 	}
-	x := &SendMessageAttachment{Handle: objref.Wrap(id)}
+	x := &SendMessageAttachment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *SendMessageAttachment) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SendMessageAttachment) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSendMessageAttachment creates a new SendMessageAttachment.
 func NewSendMessageAttachment() *SendMessageAttachment {
 	_id := objc.Send[objc.ID](objc.ID(_class("INSendMessageAttachment")), objc.RegisterName("new"))
 	return sendMessageAttachmentAdopt(_id)
 }
 
+// AudioMessageFile wraps the corresponding Objective-C method.
 func (x *SendMessageAttachment) AudioMessageFile() *File {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioMessageFile"))
 	return FileFromID(_r)

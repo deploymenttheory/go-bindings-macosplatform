@@ -23,7 +23,8 @@ func InstallerPaneFromID(id objc.ID) *InstallerPane {
 	if id == 0 {
 		return nil
 	}
-	x := &InstallerPane{Handle: objref.Wrap(purego.Retain(id))}
+	x := &InstallerPane{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func installerPaneAdopt(id objc.ID) *InstallerPane {
 	if id == 0 {
 		return nil
 	}
-	x := &InstallerPane{Handle: objref.Wrap(id)}
+	x := &InstallerPane{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,138 +58,143 @@ func (x *InstallerPane) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *InstallerPane) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewInstallerPane creates a new InstallerPane.
 func NewInstallerPane() *InstallerPane {
 	_id := objc.Send[objc.ID](objc.ID(_class("InstallerPane")), objc.RegisterName("new"))
 	return installerPaneAdopt(_id)
 }
 
-// Init method for InstallerPane.  This method takes it's parent section as an argument.
-//
-// NewInstallerPaneWithSection creates a new InstallerPane.
+// NewInstallerPaneWithSection init method for InstallerPane.  This method takes it's parent section as an argument.
 func NewInstallerPaneWithSection(parent obj.Object) *InstallerPane {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("InstallerPane")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSection:"), objref.IDOf(parent))
 	return installerPaneAdopt(_id)
 }
 
-// WithContentView sets contentView and returns the receiver so calls can be chained.
+// WithContentView sets the property and returns the receiver so calls can be chained.
 func (x *InstallerPane) WithContentView(contentView obj.Object) *InstallerPane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	return x
 }
 
-// WithInitialKeyView sets initialKeyView and returns the receiver so calls can be chained.
+// WithInitialKeyView sets the property and returns the receiver so calls can be chained.
 func (x *InstallerPane) WithInitialKeyView(initialKeyView obj.Object) *InstallerPane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialKeyView:"), objref.IDOf(initialKeyView))
 	return x
 }
 
-// WithFirstKeyView sets firstKeyView and returns the receiver so calls can be chained.
+// WithFirstKeyView sets the property and returns the receiver so calls can be chained.
 func (x *InstallerPane) WithFirstKeyView(firstKeyView obj.Object) *InstallerPane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirstKeyView:"), objref.IDOf(firstKeyView))
 	return x
 }
 
-// WithLastKeyView sets lastKeyView and returns the receiver so calls can be chained.
+// WithLastKeyView sets the property and returns the receiver so calls can be chained.
 func (x *InstallerPane) WithLastKeyView(lastKeyView obj.Object) *InstallerPane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLastKeyView:"), objref.IDOf(lastKeyView))
 	return x
 }
 
-// WithNextPane sets nextPane and returns the receiver so calls can be chained.
+// WithNextPane sets the property and returns the receiver so calls can be chained.
 func (x *InstallerPane) WithNextPane(nextPane *InstallerPane) *InstallerPane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextPane:"), objref.IDOf(nextPane))
 	return x
 }
 
-// Specifies whether going to the next pane is enabled in the UI.
-//
-// WithNextEnabled sets nextEnabled and returns the receiver so calls can be chained.
+// WithNextEnabled specifies whether going to the next pane is enabled in the UI.
 func (x *InstallerPane) WithNextEnabled(nextEnabled bool) *InstallerPane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextEnabled:"), nextEnabled)
 	return x
 }
 
-// Specifies whether going to the previous pane is enabled in the UI.
-//
-// WithPreviousEnabled sets previousEnabled and returns the receiver so calls can be chained.
+// WithPreviousEnabled specifies whether going to the previous pane is enabled in the UI.
 func (x *InstallerPane) WithPreviousEnabled(previousEnabled bool) *InstallerPane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousEnabled:"), previousEnabled)
 	return x
 }
 
-// Returns the contentView outlet.  ContentView is used to determine what is to be displayed on screen when this pane is active.  The contentView must be the same view when the pane is exited, as when the pane is first entered. Subclasses can override this method to return dynamic views which are not loaded from a nib.
+// ContentView returns the contentView outlet.  ContentView is used to determine what is to be displayed on screen when this pane is active.  The contentView must be the same view when the pane is exited, as when the pane is first entered. Subclasses can override this method to return dynamic views which are not loaded from a nib.
 func (x *InstallerPane) ContentView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentView"))
 	return obj.Wrap(_r)
 }
 
-// Returns the view that should first have keyboard focus when the content view of the pane first becomes key.  This method returns the firstKeyView outlet.  This outlet should be connected in the nib containing the pane. A subclass can override this method to return a dynamically defined firstKeyView.
+// FirstKeyView returns the view that should first have keyboard focus when the content view of the pane first becomes key.  This method returns the firstKeyView outlet.  This outlet should be connected in the nib containing the pane. A subclass can override this method to return a dynamically defined firstKeyView.
 func (x *InstallerPane) FirstKeyView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstKeyView"))
 	return obj.Wrap(_r)
 }
 
-// Returns the lastKeyView which has focus before the contentView of the pane is no longer the key view. A subclass can override this method to return a dynamically defined lastKeyView.
+// LastKeyView returns the lastKeyView which has focus before the contentView of the pane is no longer the key view. A subclass can override this method to return a dynamically defined lastKeyView.
 func (x *InstallerPane) LastKeyView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastKeyView"))
 	return obj.Wrap(_r)
 }
 
-// Returns the next InstallerPane to follow this one.  Set the nextPane outlet in a nib to define a default nextPane. A subclass may want to override nextPane if the pane determines it's nextPane dynamically.
+// NextPane returns the next InstallerPane to follow this one.  Set the nextPane outlet in a nib to define a default nextPane. A subclass may want to override nextPane if the pane determines it's nextPane dynamically.
 func (x *InstallerPane) NextPane() *InstallerPane {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextPane"))
 	return InstallerPaneFromID(_r)
 }
 
-// Called immediatly before the InstallerPane is displayed on the screen.
+// WillEnterPane called immediatly before the InstallerPane is displayed on the screen.
 func (x *InstallerPane) WillEnterPane(dir InstallerSectionDirection) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willEnterPane:"), dir)
 }
 
-// Called immediatly after the InstallerPane is displayed on the screen.
+// DidEnterPane called immediatly after the InstallerPane is displayed on the screen.
 func (x *InstallerPane) DidEnterPane(dir InstallerSectionDirection) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didEnterPane:"), dir)
 }
 
-// Called to determine if a pane should exit and allow another pane to be display on screen. A subclass should override this method if it needs to prevent the InstallerPane from exiting. Once the InstallerPane decides it is time to exit, it can call gotoNextPane or gotoPreviousPane to exit without calling shouldExitPane again.
+// ShouldExitPane called to determine if a pane should exit and allow another pane to be display on screen. A subclass should override this method if it needs to prevent the InstallerPane from exiting. Once the InstallerPane decides it is time to exit, it can call gotoNextPane or gotoPreviousPane to exit without calling shouldExitPane again.
 func (x *InstallerPane) ShouldExitPane(dir InstallerSectionDirection) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldExitPane:"), dir)
 	return _r
 }
 
-// Called immediatly before the InstallerPane will exit and be removed from the screen.
+// WillExitPane called immediatly before the InstallerPane will exit and be removed from the screen.
 func (x *InstallerPane) WillExitPane(dir InstallerSectionDirection) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willExitPane:"), dir)
 }
 
-// Called immediatly after the InstallerPane has exited and has been removed from the screen.
+// DidExitPane called immediatly after the InstallerPane has exited and has been removed from the screen.
 func (x *InstallerPane) DidExitPane(dir InstallerSectionDirection) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didExitPane:"), dir)
 }
 
+// SetContentView wraps the corresponding Objective-C method.
 func (x *InstallerPane) SetContentView(contentView obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 }
 
+// SetInitialKeyView wraps the corresponding Objective-C method.
 func (x *InstallerPane) SetInitialKeyView(initialKeyView obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialKeyView:"), objref.IDOf(initialKeyView))
 }
 
+// SetFirstKeyView wraps the corresponding Objective-C method.
 func (x *InstallerPane) SetFirstKeyView(firstKeyView obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirstKeyView:"), objref.IDOf(firstKeyView))
 }
 
+// SetLastKeyView wraps the corresponding Objective-C method.
 func (x *InstallerPane) SetLastKeyView(lastKeyView obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLastKeyView:"), objref.IDOf(lastKeyView))
 }
 
+// SetNextPane wraps the corresponding Objective-C method.
 func (x *InstallerPane) SetNextPane(nextPane *InstallerPane) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextPane:"), objref.IDOf(nextPane))
 }
 
-// Title text for the pane while being displayed.  The title is retrieved and displayed every time a pane is entered.  The title must be vaild after the willEnter method is called. You must override this method if you would like a title for a custom pane.
+// Title title text for the pane while being displayed.  The title is retrieved and displayed every time a pane is entered.  The title must be vaild after the willEnter method is called. You must override this method if you would like a title for a custom pane.
 func (x *InstallerPane) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -196,39 +203,41 @@ func (x *InstallerPane) Title() string {
 	return purego.GoString(_r)
 }
 
-// The parent section for this pane.
+// Section the parent section for this pane.
 func (x *InstallerPane) Section() *InstallerSection {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("section"))
 	return InstallerSectionFromID(_r)
 }
 
-// Specifies whether going to the next pane is enabled in the UI.
+// NextEnabled specifies whether going to the next pane is enabled in the UI.
 func (x *InstallerPane) NextEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("nextEnabled"))
 	return _r
 }
 
+// SetNextEnabled wraps the corresponding Objective-C method.
 func (x *InstallerPane) SetNextEnabled(nextEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextEnabled:"), nextEnabled)
 }
 
-// Specifies whether going to the previous pane is enabled in the UI.
+// PreviousEnabled specifies whether going to the previous pane is enabled in the UI.
 func (x *InstallerPane) PreviousEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("previousEnabled"))
 	return _r
 }
 
+// SetPreviousEnabled wraps the corresponding Objective-C method.
 func (x *InstallerPane) SetPreviousEnabled(previousEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousEnabled:"), previousEnabled)
 }
 
-// Causes the current pane to exit and the following pane available to be loaded.  gotoNextPane causes this pane's shouldExit: method to be skipped.
+// GotoNextPane causes the current pane to exit and the following pane available to be loaded.  gotoNextPane causes this pane's shouldExit: method to be skipped.
 func (x *InstallerPane) GotoNextPane() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("gotoNextPane"))
 	return _r
 }
 
-// Causes the current pane to exit and the previous pane in the Installer's Pane Stack to be displayed. gotoNextPane causes this pane's shouldExit: method to be skipped.
+// GotoPreviousPane causes the current pane to exit and the previous pane in the Installer's Pane Stack to be displayed. gotoNextPane causes this pane's shouldExit: method to be skipped.
 func (x *InstallerPane) GotoPreviousPane() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("gotoPreviousPane"))
 	return _r

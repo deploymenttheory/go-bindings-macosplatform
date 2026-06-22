@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for all motion-related data objects.
-//
 // LogItem is an idiomatic wrapper over the Objective-C class CMLogItem.
+//
+// LogItem is an abstract base — you do not construct it directly. Construct one of [AccelerometerData], [AmbientPressureData], [DeviceMotion], [GyroData], [MagnetometerData], [MotionActivity], [RotationRateData] and pass it where a LogItem is accepted.
+//
+// The base class for all motion-related data objects.
 type LogItem struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func LogItemFromID(id objc.ID) *LogItem {
 	if id == 0 {
 		return nil
 	}
-	x := &LogItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LogItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func logItemAdopt(id objc.ID) *LogItem {
 	if id == 0 {
 		return nil
 	}
-	x := &LogItem{Handle: objref.Wrap(id)}
+	x := &LogItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +62,13 @@ func (x *LogItem) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewLogItem creates a new LogItem.
-func NewLogItem() *LogItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("CMLogItem")), objc.RegisterName("new"))
-	return logItemAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LogItem) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// Timestamp wraps the corresponding Objective-C method.
 func (x *LogItem) Timestamp() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timestamp"))
 	return _r
@@ -76,3 +81,10 @@ type LogItemable interface {
 }
 
 var _ LogItemable = (*LogItem)(nil)
+
+// isLogItem marks LogItem — and, by embedding promotion, its
+// subclasses — as a member of the LogItem hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *LogItem) isLogItem() {}
+
+var _ LogItemProvider = (*LogItem)(nil)

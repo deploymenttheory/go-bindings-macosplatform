@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract base class that represents a machine-readable code’s attributes.
-//
 // BarcodeDescriptor is an idiomatic wrapper over the Objective-C class CIBarcodeDescriptor.
+//
+// BarcodeDescriptor is an abstract base — you do not construct it directly. Construct one of [AztecCodeDescriptor], [DataMatrixCodeDescriptor], [PDF417CodeDescriptor], [QRCodeDescriptor] and pass it where a BarcodeDescriptor is accepted.
+//
+// An abstract base class that represents a machine-readable code’s attributes.
 type BarcodeDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func BarcodeDescriptorFromID(id objc.ID) *BarcodeDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &BarcodeDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BarcodeDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func barcodeDescriptorAdopt(id objc.ID) *BarcodeDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &BarcodeDescriptor{Handle: objref.Wrap(id)}
+	x := &BarcodeDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *BarcodeDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewBarcodeDescriptor creates a new BarcodeDescriptor.
-func NewBarcodeDescriptor() *BarcodeDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(_class("CIBarcodeDescriptor")), objc.RegisterName("new"))
-	return barcodeDescriptorAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BarcodeDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // BarcodeDescriptorable is the interface implemented by [BarcodeDescriptor], for mocking and DI.
@@ -70,3 +74,10 @@ type BarcodeDescriptorable interface {
 }
 
 var _ BarcodeDescriptorable = (*BarcodeDescriptor)(nil)
+
+// isBarcodeDescriptor marks BarcodeDescriptor — and, by embedding promotion, its
+// subclasses — as a member of the BarcodeDescriptor hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *BarcodeDescriptor) isBarcodeDescriptor() {}
+
+var _ BarcodeDescriptorProvider = (*BarcodeDescriptor)(nil)

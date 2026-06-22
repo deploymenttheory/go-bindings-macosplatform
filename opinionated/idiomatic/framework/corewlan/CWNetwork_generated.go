@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Encapsulates an IEEE 802.11 network, providing read-only accessors to various properties of the network.
-//
 // Network is an idiomatic wrapper over the Objective-C class CWNetwork.
+//
+// Encapsulates an IEEE 802.11 network, providing read-only accessors to various properties of the network.
 type Network struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NetworkFromID(id objc.ID) *Network {
 	if id == 0 {
 		return nil
 	}
-	x := &Network{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Network{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func networkAdopt(id objc.ID) *Network {
 	if id == 0 {
 		return nil
 	}
-	x := &Network{Handle: objref.Wrap(id)}
+	x := &Network{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,37 @@ func (x *Network) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Network) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNetwork creates a new Network.
 func NewNetwork() *Network {
 	_id := objc.Send[objc.ID](objc.ID(_class("CWNetwork")), objc.RegisterName("new"))
 	return networkAdopt(_id)
 }
 
-// Method for determining CWNetwork object equality.
+// IsEqualToNetwork method for determining CWNetwork object equality.
 func (x *Network) IsEqualToNetwork(network *Network) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToNetwork:"), objref.IDOf(network))
 	return _r
 }
 
-// Method for determining which security types a network supports.
+// SupportsSecurity method for determining which security types a network supports.
 func (x *Network) SupportsSecurity(security Security) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsSecurity:"), security)
 	return _r
 }
 
-// Method for determining which PHY modes a network supports.
+// SupportsPHYMode method for determining which PHY modes a network supports.
 func (x *Network) SupportsPHYMode(phyMode PHYMode) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsPHYMode:"), phyMode)
 	return _r
 }
 
-// Returns the service set identifier (SSID) for the Wi-Fi network device, encoded as a string. Returns nil if the SSID can not be encoded as a valid UTF-8 or WinLatin1 string.
+// Ssid returns the service set identifier (SSID) for the Wi-Fi network device, encoded as a string. Returns nil if the SSID can not be encoded as a valid UTF-8 or WinLatin1 string.
 func (x *Network) Ssid() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ssid"))
 	if _r == 0 {
@@ -91,13 +99,13 @@ func (x *Network) Ssid() string {
 	return purego.GoString(_r)
 }
 
-// Returns the service set identifier (SSID) for the Wi-Fi network device, encapsulated in an NSData object. The SSID is defined as 1-32 octets.
+// SsidData returns the service set identifier (SSID) for the Wi-Fi network device, encapsulated in an NSData object. The SSID is defined as 1-32 octets.
 func (x *Network) SsidData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ssidData"))
 	return obj.Wrap(_r)
 }
 
-// Returns the basic service set identifier (BSSID) for the Wi-Fi network device, returned as UTF-8 string. Returns a UTF-8 string using hexadecimal characters formatted as XX:XX:XX:XX:XX:XX.
+// Bssid returns the basic service set identifier (BSSID) for the Wi-Fi network device, returned as UTF-8 string. Returns a UTF-8 string using hexadecimal characters formatted as XX:XX:XX:XX:XX:XX.
 func (x *Network) Bssid() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bssid"))
 	if _r == 0 {
@@ -106,31 +114,31 @@ func (x *Network) Bssid() string {
 	return purego.GoString(_r)
 }
 
-// The operating channel of the Wi-Fi device.
+// WlanChannel the operating channel of the Wi-Fi device.
 func (x *Network) WlanChannel() *Channel {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wlanChannel"))
 	return ChannelFromID(_r)
 }
 
-// Returns the received signal strength indication (RSSI) measurement (dBm) for the Wi-Fi device.
+// RssiValue returns the received signal strength indication (RSSI) measurement (dBm) for the Wi-Fi device.
 func (x *Network) RssiValue() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rssiValue"))
 	return _r
 }
 
-// Returns the noise measurement (dBm) for the Wi-Fi device.
+// NoiseMeasurement returns the noise measurement (dBm) for the Wi-Fi device.
 func (x *Network) NoiseMeasurement() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("noiseMeasurement"))
 	return _r
 }
 
-// Returns information element data included in beacon or probe response frames.
+// InformationElementData returns information element data included in beacon or probe response frames.
 func (x *Network) InformationElementData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("informationElementData"))
 	return obj.Wrap(_r)
 }
 
-// Returns the advertised country code (ISO/IEC 3166-1:1997) for the Wi-Fi device.
+// CountryCode returns the advertised country code (ISO/IEC 3166-1:1997) for the Wi-Fi device.
 func (x *Network) CountryCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("countryCode"))
 	if _r == 0 {
@@ -139,13 +147,13 @@ func (x *Network) CountryCode() string {
 	return purego.GoString(_r)
 }
 
-// Returns the beacon interval (ms) for the Wi-Fi device.
+// BeaconInterval returns the beacon interval (ms) for the Wi-Fi device.
 func (x *Network) BeaconInterval() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("beaconInterval"))
 	return _r
 }
 
-// Indicates whether or not the Wi-Fi device is participating in an independent basic service set (IBSS), or ad-hoc Wi-Fi network.
+// Ibss indicates whether or not the Wi-Fi device is participating in an independent basic service set (IBSS), or ad-hoc Wi-Fi network.
 func (x *Network) Ibss() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ibss"))
 	return _r

@@ -3,4 +3,11 @@
 //go:build darwin
 
 // Package photosui provides a fluent Go API over the macOS PhotosUI framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - ProjectElement: [ProjectAssetElement], [ProjectJournalEntryElement], [ProjectMapElement], [ProjectTextElement]
 package photosui

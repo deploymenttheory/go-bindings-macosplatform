@@ -3,13 +3,14 @@
 package idiomatic
 
 import (
-	"bytes"
 	"fmt"
 	"path/filepath"
 	"sort"
 	"strings"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/idiomatic/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/idiomatic/view"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 )
@@ -37,7 +38,7 @@ func emitErrorSentinels(
 	}
 	sort.Strings(keys)
 
-	var body bytes.Buffer
+	var sentinels []view.ErrorSentinel
 	for _, key := range keys {
 		e := fw.Enums[key]
 		if e.Availability.IsUnavailable || e.IsAnon {
@@ -47,8 +48,8 @@ func emitErrorSentinels(
 		if !strings.HasSuffix(goType, "ErrorCode") {
 			continue
 		}
-		domain := strings.TrimSuffix(goType, "Code") + "Domain"   // VZErrorCode -> VZErrorDomain
-		memberPrefix := strings.TrimSuffix(goType, "Code")        // VZError
+		domain := strings.TrimSuffix(goType, "Code") + "Domain" // VZErrorCode -> VZErrorDomain
+		memberPrefix := strings.TrimSuffix(goType, "Code")      // VZError
 
 		seenValue := map[string]bool{}
 		for _, mem := range e.Members {
@@ -66,15 +67,28 @@ func emitErrorSentinels(
 				continue
 			}
 			takenNames[sentinel] = true
-			fmt.Fprintf(&body, "// %s matches the %s error %s.\n", sentinel, fw.Framework, mem.Name)
-			fmt.Fprintf(&body, "var %s = errkit.New(%q, %s)\n\n", sentinel, domain, mem.Value)
+			sentinels = append(sentinels, view.ErrorSentinel{
+				GoName: sentinel,
+				CommentBlock: fmt.Sprintf(
+					"// %s matches the %s error %s.\n",
+					sentinel,
+					fw.Framework,
+					mem.Name,
+				),
+				Domain: domain,
+				Code:   mem.Value,
+			})
 		}
 	}
 
-	if body.Len() == 0 {
+	if len(sentinels) == 0 {
 		return nil
+	}
+	body, err := render.Sentinels(sentinels)
+	if err != nil {
+		return err
 	}
 	imports := map[string]string{"errkit": errkitImportPath}
 	fname := pkgName + "_errors_generated.go"
-	return emit.WriteGoFile(filepath.Join(outDir, fname), assembleFile(pkgName, imports, body.Bytes()))
+	return emit.WriteGoFile(filepath.Join(outDir, fname), assembleFile(pkgName, imports, body))
 }

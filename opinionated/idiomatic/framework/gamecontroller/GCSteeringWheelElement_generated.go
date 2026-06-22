@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The element that represents the wheel of a racing wheel controller.
-//
 // SteeringWheelElement is an idiomatic wrapper over the Objective-C class GCSteeringWheelElement.
+//
+// The element that represents the wheel of a racing wheel controller.
 type SteeringWheelElement struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SteeringWheelElementFromID(id objc.ID) *SteeringWheelElement {
 	if id == 0 {
 		return nil
 	}
-	x := &SteeringWheelElement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SteeringWheelElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func steeringWheelElementAdopt(id objc.ID) *SteeringWheelElement {
 	if id == 0 {
 		return nil
 	}
-	x := &SteeringWheelElement{Handle: objref.Wrap(id)}
+	x := &SteeringWheelElement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *SteeringWheelElement) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SteeringWheelElement) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSteeringWheelElement creates a new SteeringWheelElement.
 func NewSteeringWheelElement() *SteeringWheelElement {
 	_id := objc.Send[objc.ID](objc.ID(_class("GCSteeringWheelElement")), objc.RegisterName("new"))
 	return steeringWheelElementAdopt(_id)
 }
 
+// MaximumDegreesOfRotation wraps the corresponding Objective-C method.
 func (x *SteeringWheelElement) MaximumDegreesOfRotation() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumDegreesOfRotation"))
 	return _r

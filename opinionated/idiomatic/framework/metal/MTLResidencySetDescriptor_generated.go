@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration that customizes the behavior for a residency set.
-//
 // ResidencySetDescriptor is an idiomatic wrapper over the Objective-C class MTLResidencySetDescriptor.
+//
+// A configuration that customizes the behavior for a residency set.
 type ResidencySetDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ResidencySetDescriptorFromID(id objc.ID) *ResidencySetDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &ResidencySetDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ResidencySetDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func residencySetDescriptorAdopt(id objc.ID) *ResidencySetDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &ResidencySetDescriptor{Handle: objref.Wrap(id)}
+	x := &ResidencySetDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,29 +60,31 @@ func (x *ResidencySetDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ResidencySetDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewResidencySetDescriptor creates a new ResidencySetDescriptor.
 func NewResidencySetDescriptor() *ResidencySetDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLResidencySetDescriptor")), objc.RegisterName("new"))
 	return residencySetDescriptorAdopt(_id)
 }
 
-// An optional name that can help you identify a residency set you create with the descriptor.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel an optional name that can help you identify a residency set you create with the descriptor.
 func (x *ResidencySetDescriptor) WithLabel(label string) *ResidencySetDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The number of allocations a new residency set can store without reallocating memory.
-//
-// WithInitialCapacity sets initialCapacity and returns the receiver so calls can be chained.
+// WithInitialCapacity the number of allocations a new residency set can store without reallocating memory.
 func (x *ResidencySetDescriptor) WithInitialCapacity(initialCapacity int) *ResidencySetDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialCapacity:"), initialCapacity)
 	return x
 }
 
-// An optional label for the MTLResidencySet.
+// Label an optional label for the MTLResidencySet.
 func (x *ResidencySetDescriptor) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -89,10 +93,12 @@ func (x *ResidencySetDescriptor) Label() string {
 	return purego.GoString(_r)
 }
 
+// SetLabel wraps the corresponding Objective-C method.
 func (x *ResidencySetDescriptor) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
+// SetInitialCapacity wraps the corresponding Objective-C method.
 func (x *ResidencySetDescriptor) SetInitialCapacity(initialCapacity int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialCapacity:"), initialCapacity)
 }

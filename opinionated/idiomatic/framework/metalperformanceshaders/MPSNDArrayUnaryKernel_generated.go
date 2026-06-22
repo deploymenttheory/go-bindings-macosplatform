@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NDArrayUnaryKernel is an idiomatic wrapper over the Objective-C class MPSNDArrayUnaryKernel.
+//
+// NDArrayUnaryKernel is an abstract base — you do not construct it directly. Construct one of [NDArrayIdentity], [NDArrayStridedSlice] and pass it where a NDArrayUnaryKernel is accepted.
 type NDArrayUnaryKernel struct {
-	objref.Handle
+	NDArrayMultiaryKernel
 }
 
 // NDArrayUnaryKernelFromID adopts an existing Objective-C object as a NDArrayUnaryKernel
@@ -23,7 +24,8 @@ func NDArrayUnaryKernelFromID(id objc.ID) *NDArrayUnaryKernel {
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayUnaryKernel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NDArrayUnaryKernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,35 +38,13 @@ func nDArrayUnaryKernelAdopt(id objc.ID) *NDArrayUnaryKernel {
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayUnaryKernel{Handle: objref.Wrap(id)}
+	x := &NDArrayUnaryKernel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NDArrayUnaryKernel) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NDArrayUnaryKernel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NDArrayUnaryKernel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewNDArrayUnaryKernel creates a new NDArrayUnaryKernel.
-func NewNDArrayUnaryKernel() *NDArrayUnaryKernel {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayUnaryKernel")), objc.RegisterName("new"))
-	return nDArrayUnaryKernelAdopt(_id)
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayUnaryKernel) WithLabel(label string) *NDArrayUnaryKernel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -77,3 +57,16 @@ type NDArrayUnaryKernelable interface {
 }
 
 var _ NDArrayUnaryKernelable = (*NDArrayUnaryKernel)(nil)
+
+// isNDArrayUnaryKernel marks NDArrayUnaryKernel — and, by embedding promotion, its
+// subclasses — as a member of the NDArrayUnaryKernel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NDArrayUnaryKernel) isNDArrayUnaryKernel() {}
+
+var _ NDArrayUnaryKernelProvider = (*NDArrayUnaryKernel)(nil)
+
+var _ NDArrayMultiaryKernelProvider = (*NDArrayUnaryKernel)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayUnaryKernel)(nil)
+
+var _ KernelProvider = (*NDArrayUnaryKernel)(nil)

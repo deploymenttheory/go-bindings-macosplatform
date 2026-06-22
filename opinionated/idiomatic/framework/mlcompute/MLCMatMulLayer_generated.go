@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that multiplies matrices.
-//
 // MatMulLayer is an idiomatic wrapper over the Objective-C class MLCMatMulLayer.
+//
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that multiplies matrices.
 type MatMulLayer struct {
-	objref.Handle
+	Layer
 }
 
 // MatMulLayerFromID adopts an existing Objective-C object as a MatMulLayer
@@ -25,7 +26,8 @@ func MatMulLayerFromID(id objc.ID) *MatMulLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &MatMulLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatMulLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func matMulLayerAdopt(id objc.ID) *MatMulLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &MatMulLayer{Handle: objref.Wrap(id)}
+	x := &MatMulLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MatMulLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatMulLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatMulLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMatMulLayer creates a new MatMulLayer.
@@ -64,23 +52,19 @@ func NewMatMulLayer() *MatMulLayer {
 	return matMulLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string that helps identify this layer.
 func (x *MatMulLayer) WithLabel(label string) *MatMulLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *MatMulLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *MatMulLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// The matrix multiplication descriptor
+// Descriptor the matrix multiplication descriptor
 func (x *MatMulLayer) Descriptor() *MatMulDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
 	return MatMulDescriptorFromID(_r)
@@ -95,3 +79,5 @@ type MatMulLayerable interface {
 }
 
 var _ MatMulLayerable = (*MatMulLayer)(nil)
+
+var _ LayerProvider = (*MatMulLayer)(nil)

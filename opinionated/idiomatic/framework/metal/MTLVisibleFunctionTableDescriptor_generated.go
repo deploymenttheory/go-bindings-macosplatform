@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specification of how to create a visible function table.
-//
 // VisibleFunctionTableDescriptor is an idiomatic wrapper over the Objective-C class MTLVisibleFunctionTableDescriptor.
+//
+// A specification of how to create a visible function table.
 type VisibleFunctionTableDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VisibleFunctionTableDescriptorFromID(id objc.ID) *VisibleFunctionTableDescr
 	if id == 0 {
 		return nil
 	}
-	x := &VisibleFunctionTableDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VisibleFunctionTableDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func visibleFunctionTableDescriptorAdopt(id objc.ID) *VisibleFunctionTableDescri
 	if id == 0 {
 		return nil
 	}
-	x := &VisibleFunctionTableDescriptor{Handle: objref.Wrap(id)}
+	x := &VisibleFunctionTableDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *VisibleFunctionTableDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VisibleFunctionTableDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVisibleFunctionTableDescriptor creates a new VisibleFunctionTableDescriptor.
 func NewVisibleFunctionTableDescriptor() *VisibleFunctionTableDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLVisibleFunctionTableDescriptor")), objc.RegisterName("new"))
 	return visibleFunctionTableDescriptorAdopt(_id)
 }
 
-// The number of entries in the function table.
-//
-// WithFunctionCount sets functionCount and returns the receiver so calls can be chained.
+// WithFunctionCount the number of entries in the function table.
 func (x *VisibleFunctionTableDescriptor) WithFunctionCount(functionCount int) *VisibleFunctionTableDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionCount:"), functionCount)
 	return x
 }
 
+// FunctionCount wraps the corresponding Objective-C method.
 func (x *VisibleFunctionTableDescriptor) FunctionCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("functionCount"))
 	return _r
 }
 
+// SetFunctionCount wraps the corresponding Objective-C method.
 func (x *VisibleFunctionTableDescriptor) SetFunctionCount(functionCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionCount:"), functionCount)
 }

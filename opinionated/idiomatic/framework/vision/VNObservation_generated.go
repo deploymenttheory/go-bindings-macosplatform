@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for analysis results.
-//
 // Observation is an idiomatic wrapper over the Objective-C class VNObservation.
+//
+// Observation is an abstract base — you do not construct it directly. Construct one of [ClassificationObservation], [ContoursObservation], [CoreMLFeatureValueObservation], [DetectedObjectObservation], [FeaturePrintObservation], [HorizonObservation], [ImageAestheticsScoresObservation], [ImageAlignmentObservation], [InstanceMaskObservation], [PixelBufferObservation], [RecognizedPoints3DObservation], [RecognizedPointsObservation], [TrajectoryObservation] and pass it where a Observation is accepted.
+//
+// The abstract superclass for analysis results.
 type Observation struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ObservationFromID(id objc.ID) *Observation {
 	if id == 0 {
 		return nil
 	}
-	x := &Observation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Observation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func observationAdopt(id objc.ID) *Observation {
 	if id == 0 {
 		return nil
 	}
-	x := &Observation{Handle: objref.Wrap(id)}
+	x := &Observation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +62,19 @@ func (x *Observation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewObservation creates a new Observation.
-func NewObservation() *Observation {
-	_id := objc.Send[objc.ID](objc.ID(_class("VNObservation")), objc.RegisterName("new"))
-	return observationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Observation) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The unique identifier assigned to an observation.
+// Uuid the unique identifier assigned to an observation.
 func (x *Observation) Uuid() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uuid"))
 	return obj.Wrap(_r)
 }
 
-// The level of confidence normalized to [0, 1] where 1 is most confident. The only exception is results coming from VNCoreMLRequest, where confidence values are forwarded as is from relevant CoreML models Confidence can always be returned as 1.0 if confidence is not supported or has no meaning
+// Confidence the level of confidence normalized to [0, 1] where 1 is most confident. The only exception is results coming from VNCoreMLRequest, where confidence values are forwarded as is from relevant CoreML models Confidence can always be returned as 1.0 if confidence is not supported or has no meaning
 func (x *Observation) Confidence() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("confidence"))
 	return _r
@@ -84,3 +88,10 @@ type Observationable interface {
 }
 
 var _ Observationable = (*Observation)(nil)
+
+// isObservation marks Observation — and, by embedding promotion, its
+// subclasses — as a member of the Observation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Observation) isObservation() {}
+
+var _ ObservationProvider = (*Observation)(nil)

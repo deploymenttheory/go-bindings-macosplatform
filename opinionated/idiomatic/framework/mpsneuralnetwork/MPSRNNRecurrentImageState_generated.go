@@ -23,7 +23,8 @@ func RNNRecurrentImageStateFromID(id objc.ID) *RNNRecurrentImageState {
 	if id == 0 {
 		return nil
 	}
-	x := &RNNRecurrentImageState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RNNRecurrentImageState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func rNNRecurrentImageStateAdopt(id objc.ID) *RNNRecurrentImageState {
 	if id == 0 {
 		return nil
 	}
-	x := &RNNRecurrentImageState{Handle: objref.Wrap(id)}
+	x := &RNNRecurrentImageState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,19 +58,25 @@ func (x *RNNRecurrentImageState) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RNNRecurrentImageState) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRNNRecurrentImageState creates a new RNNRecurrentImageState.
 func NewRNNRecurrentImageState() *RNNRecurrentImageState {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSRNNRecurrentImageState")), objc.RegisterName("new"))
 	return rNNRecurrentImageStateAdopt(_id)
 }
 
-// Access the stored recurrent image data.
+// GetRecurrentOutputImageForLayerIndex access the stored recurrent image data.
 func (x *RNNRecurrentImageState) GetRecurrentOutputImageForLayerIndex(layerIndex int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getRecurrentOutputImageForLayerIndex:"), layerIndex)
 	return obj.Wrap(_r)
 }
 
-// Access the stored memory cell image data (if present).
+// GetMemoryCellImageForLayerIndex access the stored memory cell image data (if present).
 func (x *RNNRecurrentImageState) GetMemoryCellImageForLayerIndex(layerIndex int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getMemoryCellImageForLayerIndex:"), layerIndex)
 	return obj.Wrap(_r)

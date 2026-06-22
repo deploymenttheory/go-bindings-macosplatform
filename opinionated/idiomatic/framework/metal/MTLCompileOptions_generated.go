@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Compilation settings for a Metal shader library.
-//
 // CompileOptions is an idiomatic wrapper over the Objective-C class MTLCompileOptions.
+//
+// Compilation settings for a Metal shader library.
 type CompileOptions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CompileOptionsFromID(id objc.ID) *CompileOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &CompileOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CompileOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func compileOptionsAdopt(id objc.ID) *CompileOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &CompileOptions{Handle: objref.Wrap(id)}
+	x := &CompileOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,177 +60,163 @@ func (x *CompileOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CompileOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCompileOptions creates a new CompileOptions.
 func NewCompileOptions() *CompileOptions {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLCompileOptions")), objc.RegisterName("new"))
 	return compileOptionsAdopt(_id)
 }
 
-// A list of preprocessor macros to apply when compiling the library source.
-//
-// WithPreprocessorMacros sets preprocessorMacros and returns the receiver so calls can be chained.
+// WithPreprocessorMacros a list of preprocessor macros to apply when compiling the library source.
 func (x *CompileOptions) WithPreprocessorMacros(preprocessorMacros obj.Object) *CompileOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreprocessorMacros:"), objref.IDOf(preprocessorMacros))
 	return x
 }
 
-// A Boolean value that indicates whether the compiler can perform optimizations for floating-point arithmetic that may violate the IEEE 754 standard.
-//
-// WithFastMathEnabled sets fastMathEnabled and returns the receiver so calls can be chained.
+// WithFastMathEnabled a Boolean value that indicates whether the compiler can perform optimizations for floating-point arithmetic that may violate the IEEE 754 standard.
 func (x *CompileOptions) WithFastMathEnabled(fastMathEnabled bool) *CompileOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFastMathEnabled:"), fastMathEnabled)
 	return x
 }
 
-// An indication of whether the compiler can perform optimizations for floating-point arithmetic that may violate the IEEE 754 standard.
-//
-// WithMathMode sets mathMode and returns the receiver so calls can be chained.
+// WithMathMode an indication of whether the compiler can perform optimizations for floating-point arithmetic that may violate the IEEE 754 standard.
 func (x *CompileOptions) WithMathMode(mathMode MathMode) *CompileOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMathMode:"), mathMode)
 	return x
 }
 
-// The FP32 math functions Metal uses.
-//
-// WithMathFloatingPointFunctions sets mathFloatingPointFunctions and returns the receiver so calls can be chained.
+// WithMathFloatingPointFunctions the FP32 math functions Metal uses.
 func (x *CompileOptions) WithMathFloatingPointFunctions(mathFloatingPointFunctions MathFloatingPointFunctions) *CompileOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMathFloatingPointFunctions:"), mathFloatingPointFunctions)
 	return x
 }
 
-// The language version for interpreting the library source code.
-//
-// WithLanguageVersion sets languageVersion and returns the receiver so calls can be chained.
+// WithLanguageVersion the language version for interpreting the library source code.
 func (x *CompileOptions) WithLanguageVersion(languageVersion LanguageVersion) *CompileOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguageVersion:"), languageVersion)
 	return x
 }
 
-// The kind of library to create.
-//
-// WithLibraryType sets libraryType and returns the receiver so calls can be chained.
+// WithLibraryType the kind of library to create.
 func (x *CompileOptions) WithLibraryType(libraryType LibraryType) *CompileOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLibraryType:"), libraryType)
 	return x
 }
 
-// For a dynamic library, the name to use when installing the library.
-//
-// WithInstallName sets installName and returns the receiver so calls can be chained.
+// WithInstallName for a dynamic library, the name to use when installing the library.
 func (x *CompileOptions) WithInstallName(installName string) *CompileOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstallName:"), purego.NSString(installName))
 	return x
 }
 
-// A Boolean value that indicates whether the compiler compiles vertex shaders conservatively to generate consistent position calculations.
-//
-// WithPreserveInvariance sets preserveInvariance and returns the receiver so calls can be chained.
+// WithPreserveInvariance a Boolean value that indicates whether the compiler compiles vertex shaders conservatively to generate consistent position calculations.
 func (x *CompileOptions) WithPreserveInvariance(preserveInvariance bool) *CompileOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreserveInvariance:"), preserveInvariance)
 	return x
 }
 
-// An option that tells the compiler what to prioritize when it compiles Metal shader code.
-//
-// WithOptimizationLevel sets optimizationLevel and returns the receiver so calls can be chained.
+// WithOptimizationLevel an option that tells the compiler what to prioritize when it compiles Metal shader code.
 func (x *CompileOptions) WithOptimizationLevel(optimizationLevel LibraryOptimizationLevel) *CompileOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptimizationLevel:"), optimizationLevel)
 	return x
 }
 
-// Adds a compiler command to force the default visibility of symbols to be hidden
-//
-// WithCompileSymbolVisibility sets compileSymbolVisibility and returns the receiver so calls can be chained.
+// WithCompileSymbolVisibility adds a compiler command to force the default visibility of symbols to be hidden
 func (x *CompileOptions) WithCompileSymbolVisibility(compileSymbolVisibility CompileSymbolVisibility) *CompileOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompileSymbolVisibility:"), compileSymbolVisibility)
 	return x
 }
 
-// Adds a compiler command to allow the reference of undefined symbols
-//
-// WithAllowReferencingUndefinedSymbols sets allowReferencingUndefinedSymbols and returns the receiver so calls can be chained.
+// WithAllowReferencingUndefinedSymbols adds a compiler command to allow the reference of undefined symbols
 func (x *CompileOptions) WithAllowReferencingUndefinedSymbols(allowReferencingUndefinedSymbols bool) *CompileOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowReferencingUndefinedSymbols:"), allowReferencingUndefinedSymbols)
 	return x
 }
 
-// Adds a compiler command to specify the total threads per threadgroup
-//
-// WithMaxTotalThreadsPerThreadgroup sets maxTotalThreadsPerThreadgroup and returns the receiver so calls can be chained.
+// WithMaxTotalThreadsPerThreadgroup adds a compiler command to specify the total threads per threadgroup
 func (x *CompileOptions) WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup int) *CompileOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxTotalThreadsPerThreadgroup:"), maxTotalThreadsPerThreadgroup)
 	return x
 }
 
-// A Boolean value that enables shader logging.
-//
-// WithEnableLogging sets enableLogging and returns the receiver so calls can be chained.
+// WithEnableLogging a Boolean value that enables shader logging.
 func (x *CompileOptions) WithEnableLogging(enableLogging bool) *CompileOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableLogging:"), enableLogging)
 	return x
 }
 
-// List of preprocessor macros to consider to when compiling this program. Specified as key value pairs, using a NSDictionary. The keys must be NSString objects and values can be either NSString or NSNumber objects. The default value is nil.
+// PreprocessorMacros list of preprocessor macros to consider to when compiling this program. Specified as key value pairs, using a NSDictionary. The keys must be NSString objects and values can be either NSString or NSNumber objects. The default value is nil.
 func (x *CompileOptions) PreprocessorMacros() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preprocessorMacros"))
 	return obj.Wrap(_r)
 }
 
+// SetPreprocessorMacros wraps the corresponding Objective-C method.
 func (x *CompileOptions) SetPreprocessorMacros(preprocessorMacros obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreprocessorMacros:"), objref.IDOf(preprocessorMacros))
 }
 
-// If YES, enables the compiler to perform optimizations for floating-point arithmetic that may violate the IEEE 754 standard. It also enables the high precision variant of math functions for single precision floating-point scalar and vector types. fastMathEnabled defaults to YES.
+// FastMathEnabled if YES, enables the compiler to perform optimizations for floating-point arithmetic that may violate the IEEE 754 standard. It also enables the high precision variant of math functions for single precision floating-point scalar and vector types. fastMathEnabled defaults to YES.
 func (x *CompileOptions) FastMathEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("fastMathEnabled"))
 	return _r
 }
 
+// SetFastMathEnabled wraps the corresponding Objective-C method.
 func (x *CompileOptions) SetFastMathEnabled(fastMathEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFastMathEnabled:"), fastMathEnabled)
 }
 
-// Sets the floating-point arithmetic optimizations. Default depends on the language standard version.
+// MathMode sets the floating-point arithmetic optimizations. Default depends on the language standard version.
 func (x *CompileOptions) MathMode() MathMode {
 	_r := objc.Send[MathMode](objref.IDOf(x), objc.RegisterName("mathMode"))
 	return _r
 }
 
+// SetMathMode wraps the corresponding Objective-C method.
 func (x *CompileOptions) SetMathMode(mathMode MathMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMathMode:"), mathMode)
 }
 
-// Sets the default math functions for single precision floating-point. Default is `MTLMathFloatingPointFunctionsFast`.
+// MathFloatingPointFunctions sets the default math functions for single precision floating-point. Default is `MTLMathFloatingPointFunctionsFast`.
 func (x *CompileOptions) MathFloatingPointFunctions() MathFloatingPointFunctions {
 	_r := objc.Send[MathFloatingPointFunctions](objref.IDOf(x), objc.RegisterName("mathFloatingPointFunctions"))
 	return _r
 }
 
+// SetMathFloatingPointFunctions wraps the corresponding Objective-C method.
 func (x *CompileOptions) SetMathFloatingPointFunctions(mathFloatingPointFunctions MathFloatingPointFunctions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMathFloatingPointFunctions:"), mathFloatingPointFunctions)
 }
 
-// set the metal language version used to interpret the source.
+// LanguageVersion set the metal language version used to interpret the source.
 func (x *CompileOptions) LanguageVersion() LanguageVersion {
 	_r := objc.Send[LanguageVersion](objref.IDOf(x), objc.RegisterName("languageVersion"))
 	return _r
 }
 
+// SetLanguageVersion wraps the corresponding Objective-C method.
 func (x *CompileOptions) SetLanguageVersion(languageVersion LanguageVersion) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguageVersion:"), languageVersion)
 }
 
-// Which type the library should be compiled as. The default value is MTLLibraryTypeExecutable. MTLLibraryTypeExecutable is suitable to build a library of "kernel", "vertex" and "fragment" qualified functions. MTLLibraryType is suitable when the compilation result will instead be used to instantiate a MTLDynamicLibrary. MTLDynamicLibrary contains no qualified functions, but it's unqualified functions and variables can be used as an external dependency for compiling other libraries.
+// LibraryType which type the library should be compiled as. The default value is MTLLibraryTypeExecutable. MTLLibraryTypeExecutable is suitable to build a library of "kernel", "vertex" and "fragment" qualified functions. MTLLibraryType is suitable when the compilation result will instead be used to instantiate a MTLDynamicLibrary. MTLDynamicLibrary contains no qualified functions, but it's unqualified functions and variables can be used as an external dependency for compiling other libraries.
 func (x *CompileOptions) LibraryType() LibraryType {
 	_r := objc.Send[LibraryType](objref.IDOf(x), objc.RegisterName("libraryType"))
 	return _r
 }
 
+// SetLibraryType wraps the corresponding Objective-C method.
 func (x *CompileOptions) SetLibraryType(libraryType LibraryType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLibraryType:"), libraryType)
 }
 
-// The install name of this dynamic library. The install name is used when a pipeline state is created that depends, directly or indirectly, on a dynamic library. The installName is embedded into any other MTLLibrary that links against the compilation result. This property should be set such that the dynamic library can be found in the file system at the time a pipeline state is created. Specify one of: - an absolute path to a file from which the dynamic library can be loaded, or - a path relative to \
+// InstallName the install name of this dynamic library. The install name is used when a pipeline state is created that depends, directly or indirectly, on a dynamic library. The installName is embedded into any other MTLLibrary that links against the compilation result. This property should be set such that the dynamic library can be found in the file system at the time a pipeline state is created. Specify one of: - an absolute path to a file from which the dynamic library can be loaded, or - a path relative to \
 func (x *CompileOptions) InstallName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("installName"))
 	if _r == 0 {
@@ -237,76 +225,84 @@ func (x *CompileOptions) InstallName() string {
 	return purego.GoString(_r)
 }
 
+// SetInstallName wraps the corresponding Objective-C method.
 func (x *CompileOptions) SetInstallName(installName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstallName:"), purego.NSString(installName))
 }
 
-// A set of MTLDynamicLibrary instances to link against. The installName of the provided MTLDynamicLibrary is embedded into the compilation result. When a function from the resulting MTLLibrary is used (either as an MTLFunction, or as an to create a pipeline state, the embedded install names are used to automatically load the MTLDynamicLibrary instances. This property can be null if no libraries should be automatically loaded, either because the MTLLibrary has no external dependencies, or because you will use preloadedLibraries to specify the libraries to use at pipeline creation time.
+// Libraries a set of MTLDynamicLibrary instances to link against. The installName of the provided MTLDynamicLibrary is embedded into the compilation result. When a function from the resulting MTLLibrary is used (either as an MTLFunction, or as an to create a pipeline state, the embedded install names are used to automatically load the MTLDynamicLibrary instances. This property can be null if no libraries should be automatically loaded, either because the MTLLibrary has no external dependencies, or because you will use preloadedLibraries to specify the libraries to use at pipeline creation time.
 func (x *CompileOptions) Libraries() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("libraries"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetLibraries wraps the corresponding Objective-C method.
 func (x *CompileOptions) SetLibraries(libraries []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLibraries:"), purego.SliceToNSArray(libraries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// If YES,  set the compiler to compile shaders to preserve invariance.  The default is false.
+// PreserveInvariance if YES,  set the compiler to compile shaders to preserve invariance.  The default is false.
 func (x *CompileOptions) PreserveInvariance() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preserveInvariance"))
 	return _r
 }
 
+// SetPreserveInvariance wraps the corresponding Objective-C method.
 func (x *CompileOptions) SetPreserveInvariance(preserveInvariance bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreserveInvariance:"), preserveInvariance)
 }
 
-// Sets the compiler optimization level.
+// OptimizationLevel sets the compiler optimization level.
 func (x *CompileOptions) OptimizationLevel() LibraryOptimizationLevel {
 	_r := objc.Send[LibraryOptimizationLevel](objref.IDOf(x), objc.RegisterName("optimizationLevel"))
 	return _r
 }
 
+// SetOptimizationLevel wraps the corresponding Objective-C method.
 func (x *CompileOptions) SetOptimizationLevel(optimizationLevel LibraryOptimizationLevel) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptimizationLevel:"), optimizationLevel)
 }
 
-// Adds a compiler command to force the default visibility of symbols to be hidden
+// CompileSymbolVisibility adds a compiler command to force the default visibility of symbols to be hidden
 func (x *CompileOptions) CompileSymbolVisibility() CompileSymbolVisibility {
 	_r := objc.Send[CompileSymbolVisibility](objref.IDOf(x), objc.RegisterName("compileSymbolVisibility"))
 	return _r
 }
 
+// SetCompileSymbolVisibility wraps the corresponding Objective-C method.
 func (x *CompileOptions) SetCompileSymbolVisibility(compileSymbolVisibility CompileSymbolVisibility) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompileSymbolVisibility:"), compileSymbolVisibility)
 }
 
-// Adds a compiler command to allow the reference of undefined symbols
+// AllowReferencingUndefinedSymbols adds a compiler command to allow the reference of undefined symbols
 func (x *CompileOptions) AllowReferencingUndefinedSymbols() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowReferencingUndefinedSymbols"))
 	return _r
 }
 
+// SetAllowReferencingUndefinedSymbols wraps the corresponding Objective-C method.
 func (x *CompileOptions) SetAllowReferencingUndefinedSymbols(allowReferencingUndefinedSymbols bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowReferencingUndefinedSymbols:"), allowReferencingUndefinedSymbols)
 }
 
-// Adds a compiler command to specify the total threads per threadgroup
+// MaxTotalThreadsPerThreadgroup adds a compiler command to specify the total threads per threadgroup
 func (x *CompileOptions) MaxTotalThreadsPerThreadgroup() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxTotalThreadsPerThreadgroup"))
 	return _r
 }
 
+// SetMaxTotalThreadsPerThreadgroup wraps the corresponding Objective-C method.
 func (x *CompileOptions) SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxTotalThreadsPerThreadgroup:"), maxTotalThreadsPerThreadgroup)
 }
 
-// If YES,  set the compiler to enable any logging in the shader. The default is false.
+// EnableLogging if YES,  set the compiler to enable any logging in the shader. The default is false.
 func (x *CompileOptions) EnableLogging() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enableLogging"))
 	return _r
 }
 
+// SetEnableLogging wraps the corresponding Objective-C method.
 func (x *CompileOptions) SetEnableLogging(enableLogging bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableLogging:"), enableLogging)
 }

@@ -14,25 +14,21 @@ func ODFrameworkErrorDomain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("ODFrameworkErrorDomain")))
 }
 
-// the address to connect to via proxy, used when making the options dictionary the address to connect to via proxy, used when making the options dictionary
 // ODSessionProxyAddress returns the string constant ODSessionProxyAddress, for use as a dictionary key or argument.
 func ODSessionProxyAddress() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("ODSessionProxyAddress")))
 }
 
-// the port to connect to via proxy, used when making the options dictionary the port to connect to via proxy, used when making the options dictionary.  This parameter is optional and should not be passed normally.
 // ODSessionProxyPort returns the string constant ODSessionProxyPort, for use as a dictionary key or argument.
 func ODSessionProxyPort() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("ODSessionProxyPort")))
 }
 
-// the username to connect with via proxy, used when making the options dictionary the username to connect with via proxy, used when making the options dictionary
 // ODSessionProxyUsername returns the string constant ODSessionProxyUsername, for use as a dictionary key or argument.
 func ODSessionProxyUsername() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("ODSessionProxyUsername")))
 }
 
-// the password to connect with via proxy, used when making the options dictionary the password to connect with via proxy, used when making the options dictionary
 // ODSessionProxyPassword returns the string constant ODSessionProxyPassword, for use as a dictionary key or argument.
 func ODSessionProxyPassword() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("ODSessionProxyPassword")))

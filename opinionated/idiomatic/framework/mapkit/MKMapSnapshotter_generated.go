@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A utility class for capturing a map and its content into an image.
-//
 // MapSnapshotter is an idiomatic wrapper over the Objective-C class MKMapSnapshotter.
+//
+// A utility class for capturing a map and its content into an image.
 type MapSnapshotter struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MapSnapshotterFromID(id objc.ID) *MapSnapshotter {
 	if id == 0 {
 		return nil
 	}
-	x := &MapSnapshotter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MapSnapshotter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mapSnapshotterAdopt(id objc.ID) *MapSnapshotter {
 	if id == 0 {
 		return nil
 	}
-	x := &MapSnapshotter{Handle: objref.Wrap(id)}
+	x := &MapSnapshotter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,20 +60,25 @@ func (x *MapSnapshotter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates and returns a snapshotter object based on the specified options.
-//
-// NewMapSnapshotterWithOptions creates a new MapSnapshotter.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MapSnapshotter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMapSnapshotterWithOptions creates and returns a snapshotter object based on the specified options.
 func NewMapSnapshotterWithOptions(options *MapSnapshotOptions) *MapSnapshotter {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapSnapshotter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), objref.IDOf(options))
 	return mapSnapshotterAdopt(_id)
 }
 
-// Cancels the request to create a snapshot.
+// Cancel cancels the request to create a snapshot.
 func (x *MapSnapshotter) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
+// IsLoading wraps the corresponding Objective-C method.
 func (x *MapSnapshotter) IsLoading() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLoading"))
 	return _r

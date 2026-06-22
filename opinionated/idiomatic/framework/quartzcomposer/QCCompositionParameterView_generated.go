@@ -23,7 +23,8 @@ func CompositionParameterViewFromID(id objc.ID) *CompositionParameterView {
 	if id == 0 {
 		return nil
 	}
-	x := &CompositionParameterView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CompositionParameterView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func compositionParameterViewAdopt(id objc.ID) *CompositionParameterView {
 	if id == 0 {
 		return nil
 	}
-	x := &CompositionParameterView{Handle: objref.Wrap(id)}
+	x := &CompositionParameterView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,39 +58,52 @@ func (x *CompositionParameterView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CompositionParameterView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCompositionParameterView creates a new CompositionParameterView.
 func NewCompositionParameterView() *CompositionParameterView {
 	_id := objc.Send[objc.ID](objc.ID(_class("QCCompositionParameterView")), objc.RegisterName("new"))
 	return compositionParameterViewAdopt(_id)
 }
 
+// HasParameters wraps the corresponding Objective-C method.
 func (x *CompositionParameterView) HasParameters() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasParameters"))
 	return _r
 }
 
+// SetBackgroundColor wraps the corresponding Objective-C method.
 func (x *CompositionParameterView) SetBackgroundColor(color obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(color))
 }
 
+// BackgroundColor wraps the corresponding Objective-C method.
 func (x *CompositionParameterView) BackgroundColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
 }
 
+// SetDrawsBackground wraps the corresponding Objective-C method.
 func (x *CompositionParameterView) SetDrawsBackground(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), flag)
 }
 
+// DrawsBackground wraps the corresponding Objective-C method.
 func (x *CompositionParameterView) DrawsBackground() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawsBackground"))
 	return _r
 }
 
+// SetDelegate wraps the corresponding Objective-C method.
 func (x *CompositionParameterView) SetDelegate(delegate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
+// Delegate wraps the corresponding Objective-C method.
 func (x *CompositionParameterView) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)

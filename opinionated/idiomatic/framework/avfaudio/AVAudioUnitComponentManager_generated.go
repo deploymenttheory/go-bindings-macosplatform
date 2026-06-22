@@ -13,9 +13,9 @@ import (
 	"unsafe"
 )
 
-// An object that provides a way to search and query audio components that the system registers.
-//
 // AudioUnitComponentManager is an idiomatic wrapper over the Objective-C class AVAudioUnitComponentManager.
+//
+// An object that provides a way to search and query audio components that the system registers.
 type AudioUnitComponentManager struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func AudioUnitComponentManagerFromID(id objc.ID) *AudioUnitComponentManager {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitComponentManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioUnitComponentManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func audioUnitComponentManagerAdopt(id objc.ID) *AudioUnitComponentManager {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitComponentManager{Handle: objref.Wrap(id)}
+	x := &AudioUnitComponentManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,19 +61,25 @@ func (x *AudioUnitComponentManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioUnitComponentManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAudioUnitComponentManager creates a new AudioUnitComponentManager.
 func NewAudioUnitComponentManager() *AudioUnitComponentManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioUnitComponentManager")), objc.RegisterName("new"))
 	return audioUnitComponentManagerAdopt(_id)
 }
 
-// Gets an array of audio component objects that match the search predicate.
+// ComponentsMatchingPredicate gets an array of audio component objects that match the search predicate.
 func (x *AudioUnitComponentManager) ComponentsMatchingPredicate(predicate obj.Object) []*AudioUnitComponent {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("componentsMatchingPredicate:"), objref.IDOf(predicate))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *AudioUnitComponent { return AudioUnitComponentFromID(_id) })
 }
 
-// Gets an array of audio components that pass the block method.
+// ComponentsPassingTest gets an array of audio components that pass the block method.
 func (x *AudioUnitComponentManager) ComponentsPassingTest(testHandler func(obj.Object, *bool) bool) []*AudioUnitComponent {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("componentsPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) bool {
 		return testHandler(obj.Wrap(_b0), (*bool)(_b1))
@@ -79,13 +87,13 @@ func (x *AudioUnitComponentManager) ComponentsPassingTest(testHandler func(obj.O
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *AudioUnitComponent { return AudioUnitComponentFromID(_id) })
 }
 
-// Gets an array of audio component objects that match the description.
+// ComponentsMatchingDescription gets an array of audio component objects that match the description.
 func (x *AudioUnitComponentManager) ComponentsMatchingDescription(desc obj.Object) []*AudioUnitComponent {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("componentsMatchingDescription:"), objref.IDOf(desc))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *AudioUnitComponent { return AudioUnitComponentFromID(_id) })
 }
 
-// returns all tags associated with the current user as well as all system tags defined by the audio unit(s).
+// TagNames returns all tags associated with the current user as well as all system tags defined by the audio unit(s).
 //
 // TagNames returns the collection as a Go slice.
 func (x *AudioUnitComponentManager) TagNames() []string {
@@ -93,6 +101,8 @@ func (x *AudioUnitComponentManager) TagNames() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// StandardLocalizedTagNames wraps the corresponding Objective-C method.
+//
 // StandardLocalizedTagNames returns the collection as a Go slice.
 func (x *AudioUnitComponentManager) StandardLocalizedTagNames() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standardLocalizedTagNames"))

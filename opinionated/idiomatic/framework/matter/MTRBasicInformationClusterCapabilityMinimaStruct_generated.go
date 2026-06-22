@@ -13,6 +13,8 @@ import (
 )
 
 // MTRBasicInformationClusterCapabilityMinimaStruct is an idiomatic wrapper over the Objective-C class MTRBasicInformationClusterCapabilityMinimaStruct.
+//
+// MTRBasicInformationClusterCapabilityMinimaStruct is an abstract base — you do not construct it directly. Construct one of [MTRBasicClusterCapabilityMinimaStruct] and pass it where a MTRBasicInformationClusterCapabilityMinimaStruct is accepted.
 type MTRBasicInformationClusterCapabilityMinimaStruct struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRBasicInformationClusterCapabilityMinimaStructFromID(id objc.ID) *MTRBasi
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBasicInformationClusterCapabilityMinimaStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBasicInformationClusterCapabilityMinimaStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRBasicInformationClusterCapabilityMinimaStructAdopt(id objc.ID) *MTRBasic
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBasicInformationClusterCapabilityMinimaStruct{Handle: objref.Wrap(id)}
+	x := &MTRBasicInformationClusterCapabilityMinimaStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,38 +60,42 @@ func (x *MTRBasicInformationClusterCapabilityMinimaStruct) IsKind(className stri
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRBasicInformationClusterCapabilityMinimaStruct creates a new MTRBasicInformationClusterCapabilityMinimaStruct.
-func NewMTRBasicInformationClusterCapabilityMinimaStruct() *MTRBasicInformationClusterCapabilityMinimaStruct {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRBasicInformationClusterCapabilityMinimaStruct")), objc.RegisterName("new"))
-	return mTRBasicInformationClusterCapabilityMinimaStructAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRBasicInformationClusterCapabilityMinimaStruct) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithCaseSessionsPerFabric sets caseSessionsPerFabric and returns the receiver so calls can be chained.
+// WithCaseSessionsPerFabric sets the property and returns the receiver so calls can be chained.
 func (x *MTRBasicInformationClusterCapabilityMinimaStruct) WithCaseSessionsPerFabric(caseSessionsPerFabric obj.Object) *MTRBasicInformationClusterCapabilityMinimaStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaseSessionsPerFabric:"), objref.IDOf(caseSessionsPerFabric))
 	return x
 }
 
-// WithSubscriptionsPerFabric sets subscriptionsPerFabric and returns the receiver so calls can be chained.
+// WithSubscriptionsPerFabric sets the property and returns the receiver so calls can be chained.
 func (x *MTRBasicInformationClusterCapabilityMinimaStruct) WithSubscriptionsPerFabric(subscriptionsPerFabric obj.Object) *MTRBasicInformationClusterCapabilityMinimaStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionsPerFabric:"), objref.IDOf(subscriptionsPerFabric))
 	return x
 }
 
+// CaseSessionsPerFabric wraps the corresponding Objective-C method.
 func (x *MTRBasicInformationClusterCapabilityMinimaStruct) CaseSessionsPerFabric() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("caseSessionsPerFabric"))
 	return obj.Wrap(_r)
 }
 
+// SetCaseSessionsPerFabric wraps the corresponding Objective-C method.
 func (x *MTRBasicInformationClusterCapabilityMinimaStruct) SetCaseSessionsPerFabric(caseSessionsPerFabric obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaseSessionsPerFabric:"), objref.IDOf(caseSessionsPerFabric))
 }
 
+// SubscriptionsPerFabric wraps the corresponding Objective-C method.
 func (x *MTRBasicInformationClusterCapabilityMinimaStruct) SubscriptionsPerFabric() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptionsPerFabric"))
 	return obj.Wrap(_r)
 }
 
+// SetSubscriptionsPerFabric wraps the corresponding Objective-C method.
 func (x *MTRBasicInformationClusterCapabilityMinimaStruct) SetSubscriptionsPerFabric(subscriptionsPerFabric obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionsPerFabric:"), objref.IDOf(subscriptionsPerFabric))
 }
@@ -104,3 +112,11 @@ type MTRBasicInformationClusterCapabilityMinimaStructable interface {
 }
 
 var _ MTRBasicInformationClusterCapabilityMinimaStructable = (*MTRBasicInformationClusterCapabilityMinimaStruct)(nil)
+
+// isMTRBasicInformationClusterCapabilityMinimaStruct marks MTRBasicInformationClusterCapabilityMinimaStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRBasicInformationClusterCapabilityMinimaStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRBasicInformationClusterCapabilityMinimaStruct) isMTRBasicInformationClusterCapabilityMinimaStruct() {
+}
+
+var _ MTRBasicInformationClusterCapabilityMinimaStructProvider = (*MTRBasicInformationClusterCapabilityMinimaStruct)(nil)

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for a graphics display configuration.
-//
 // GraphicsDisplayConfiguration is an idiomatic wrapper over the Objective-C class VZGraphicsDisplayConfiguration.
+//
+// GraphicsDisplayConfiguration is an abstract base — you do not construct it directly. Construct one of [MacGraphicsDisplayConfiguration], [VirtioGraphicsScanoutConfiguration] and pass it where a GraphicsDisplayConfiguration is accepted.
+//
+// The base class for a graphics display configuration.
 type GraphicsDisplayConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func GraphicsDisplayConfigurationFromID(id objc.ID) *GraphicsDisplayConfiguratio
 	if id == 0 {
 		return nil
 	}
-	x := &GraphicsDisplayConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphicsDisplayConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func graphicsDisplayConfigurationAdopt(id objc.ID) *GraphicsDisplayConfiguration
 	if id == 0 {
 		return nil
 	}
-	x := &GraphicsDisplayConfiguration{Handle: objref.Wrap(id)}
+	x := &GraphicsDisplayConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *GraphicsDisplayConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewGraphicsDisplayConfiguration creates a new GraphicsDisplayConfiguration.
-func NewGraphicsDisplayConfiguration() *GraphicsDisplayConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZGraphicsDisplayConfiguration")), objc.RegisterName("new"))
-	return graphicsDisplayConfigurationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GraphicsDisplayConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // GraphicsDisplayConfigurationable is the interface implemented by [GraphicsDisplayConfiguration], for mocking and DI.
@@ -70,3 +74,10 @@ type GraphicsDisplayConfigurationable interface {
 }
 
 var _ GraphicsDisplayConfigurationable = (*GraphicsDisplayConfiguration)(nil)
+
+// isGraphicsDisplayConfiguration marks GraphicsDisplayConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the GraphicsDisplayConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *GraphicsDisplayConfiguration) isGraphicsDisplayConfiguration() {}
+
+var _ GraphicsDisplayConfigurationProvider = (*GraphicsDisplayConfiguration)(nil)

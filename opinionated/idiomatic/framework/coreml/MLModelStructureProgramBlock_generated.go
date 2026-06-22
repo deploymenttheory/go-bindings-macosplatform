@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class representing a block in the Program.
-//
 // ModelStructureProgramBlock is an idiomatic wrapper over the Objective-C class MLModelStructureProgramBlock.
+//
+// A class representing a block in the Program.
 type ModelStructureProgramBlock struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ModelStructureProgramBlockFromID(id objc.ID) *ModelStructureProgramBlock {
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructureProgramBlock{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ModelStructureProgramBlock{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func modelStructureProgramBlockAdopt(id objc.ID) *ModelStructureProgramBlock {
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructureProgramBlock{Handle: objref.Wrap(id)}
+	x := &ModelStructureProgramBlock{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *ModelStructureProgramBlock) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ModelStructureProgramBlock) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewModelStructureProgramBlock creates a new ModelStructureProgramBlock.
 func NewModelStructureProgramBlock() *ModelStructureProgramBlock {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLModelStructureProgramBlock")), objc.RegisterName("new"))
 	return modelStructureProgramBlockAdopt(_id)
 }
 
-// The named inputs to the block.
+// Inputs the named inputs to the block.
 //
 // Inputs returns the collection as a Go slice.
 func (x *ModelStructureProgramBlock) Inputs() []*ModelStructureProgramNamedValueType {
@@ -74,7 +82,7 @@ func (x *ModelStructureProgramBlock) Inputs() []*ModelStructureProgramNamedValue
 	})
 }
 
-// The output names.
+// OutputNames the output names.
 //
 // OutputNames returns the collection as a Go slice.
 func (x *ModelStructureProgramBlock) OutputNames() []string {
@@ -82,7 +90,7 @@ func (x *ModelStructureProgramBlock) OutputNames() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// The list of topologically sorted operations in the block.
+// Operations the list of topologically sorted operations in the block.
 //
 // Operations returns the collection as a Go slice.
 func (x *ModelStructureProgramBlock) Operations() []*ModelStructureProgramOperation {

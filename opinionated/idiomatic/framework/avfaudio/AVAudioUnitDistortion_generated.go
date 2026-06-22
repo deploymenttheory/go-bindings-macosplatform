@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that implements a multistage distortion effect.
-//
 // AudioUnitDistortion is an idiomatic wrapper over the Objective-C class AVAudioUnitDistortion.
+//
+// It embeds [AudioUnitEffect], promoting that type's methods.
+//
+// An object that implements a multistage distortion effect.
 type AudioUnitDistortion struct {
-	objref.Handle
+	AudioUnitEffect
 }
 
 // AudioUnitDistortionFromID adopts an existing Objective-C object as a AudioUnitDistortion
@@ -25,7 +26,8 @@ func AudioUnitDistortionFromID(id objc.ID) *AudioUnitDistortion {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitDistortion{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioUnitDistortion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func audioUnitDistortionAdopt(id objc.ID) *AudioUnitDistortion {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitDistortion{Handle: objref.Wrap(id)}
+	x := &AudioUnitDistortion{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AudioUnitDistortion) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioUnitDistortion) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioUnitDistortion) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAudioUnitDistortion creates a new AudioUnitDistortion.
@@ -64,51 +52,47 @@ func NewAudioUnitDistortion() *AudioUnitDistortion {
 	return audioUnitDistortionAdopt(_id)
 }
 
-// The gain that the audio unit applies to the signal before distortion, in decibels.
-//
-// WithPreGain sets preGain and returns the receiver so calls can be chained.
+// WithPreGain the gain that the audio unit applies to the signal before distortion, in decibels.
 func (x *AudioUnitDistortion) WithPreGain(preGain float32) *AudioUnitDistortion {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreGain:"), preGain)
 	return x
 }
 
-// The blend of the distorted and dry signals.
-//
-// WithWetDryMix sets wetDryMix and returns the receiver so calls can be chained.
+// WithWetDryMix the blend of the distorted and dry signals.
 func (x *AudioUnitDistortion) WithWetDryMix(wetDryMix float32) *AudioUnitDistortion {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWetDryMix:"), wetDryMix)
 	return x
 }
 
-// The bypass state of the audio unit.
-//
-// WithBypass sets bypass and returns the receiver so calls can be chained.
+// WithBypass the bypass state of the audio unit.
 func (x *AudioUnitDistortion) WithBypass(bypass bool) *AudioUnitDistortion {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
 	return x
 }
 
-// Configures the audio distortion unit by loading a distortion preset.
+// LoadFactoryPreset configures the audio distortion unit by loading a distortion preset.
 func (x *AudioUnitDistortion) LoadFactoryPreset(preset AudioUnitDistortionPreset) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadFactoryPreset:"), preset)
 }
 
-// Gain applied to the signal before being distorted Range:      -80 -> 20 Default:    -6 Unit:       dB
+// PreGain gain applied to the signal before being distorted Range:      -80 -> 20 Default:    -6 Unit:       dB
 func (x *AudioUnitDistortion) PreGain() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("preGain"))
 	return _r
 }
 
+// SetPreGain wraps the corresponding Objective-C method.
 func (x *AudioUnitDistortion) SetPreGain(preGain float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreGain:"), preGain)
 }
 
-// Blend of the distorted and dry signals Range:      0 (all dry) -> 100 (all distorted) Default:    50 Unit:       Percent
+// WetDryMix blend of the distorted and dry signals Range:      0 (all dry) -> 100 (all distorted) Default:    50 Unit:       Percent
 func (x *AudioUnitDistortion) WetDryMix() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("wetDryMix"))
 	return _r
 }
 
+// SetWetDryMix wraps the corresponding Objective-C method.
 func (x *AudioUnitDistortion) SetWetDryMix(wetDryMix float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWetDryMix:"), wetDryMix)
 }
@@ -127,3 +111,9 @@ type AudioUnitDistortionable interface {
 }
 
 var _ AudioUnitDistortionable = (*AudioUnitDistortion)(nil)
+
+var _ AudioUnitEffectProvider = (*AudioUnitDistortion)(nil)
+
+var _ AudioUnitProvider = (*AudioUnitDistortion)(nil)
+
+var _ AudioNodeProvider = (*AudioUnitDistortion)(nil)

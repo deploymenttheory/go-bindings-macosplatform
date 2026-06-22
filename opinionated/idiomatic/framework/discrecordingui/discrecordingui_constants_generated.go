@@ -9,19 +9,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// Type of notification sent when the device selection changes.
 // DRSetupPanelDeviceSelectionChangedNotification returns the string constant DRSetupPanelDeviceSelectionChangedNotification, for use as a dictionary key or argument.
 func DRSetupPanelDeviceSelectionChangedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRSetupPanelDeviceSelectionChangedNotification")))
 }
 
-// Key in the userInfo dictionary when the
 // DRSetupPanelSelectedDeviceKey returns the string constant DRSetupPanelSelectedDeviceKey, for use as a dictionary key or argument.
 func DRSetupPanelSelectedDeviceKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRSetupPanelSelectedDeviceKey")))
 }
 
-// Passing this to
 // DRBurnSetupPanelDefaultButtonDefaultTitle returns the string constant DRBurnSetupPanelDefaultButtonDefaultTitle, for use as a dictionary key or argument.
 func DRBurnSetupPanelDefaultButtonDefaultTitle() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRBurnSetupPanelDefaultButtonDefaultTitle")))
@@ -32,28 +29,23 @@ func DRBurnProgressPanelWillBeginNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRBurnProgressPanelWillBeginNotification")))
 }
 
-// Posted when the This notification contains a notification object but no userInfo dictionary. The notification object is the
 // DRBurnProgressPanelDidFinishNotification returns the string constant DRBurnProgressPanelDidFinishNotification, for use as a dictionary key or argument.
 func DRBurnProgressPanelDidFinishNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRBurnProgressPanelDidFinishNotification")))
 }
 
-// Posted when the This notification contains a notification object but no userInfo dictionary. The notification object is the
 // DREraseProgressPanelWillBeginNotification returns the string constant DREraseProgressPanelWillBeginNotification, for use as a dictionary key or argument.
 func DREraseProgressPanelWillBeginNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DREraseProgressPanelWillBeginNotification")))
 }
 
-// Posted when the This notification contains a notification object but no userInfo dictionary. The notification object is the
 // DREraseProgressPanelDidFinishNotification returns the string constant DREraseProgressPanelDidFinishNotification, for use as a dictionary key or argument.
 func DREraseProgressPanelDidFinishNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DREraseProgressPanelDidFinishNotification")))
 }
 
-// The name of the burn icon image. The icon is available to applications through the
 // DRBurnIcon returns the string constant DRBurnIcon, for use as a dictionary key or argument.
 func DRBurnIcon() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRBurnIcon"))) }
 
-// The name of the erase icon image. The icon is available to applications through the
 // DREraseIcon returns the string constant DREraseIcon, for use as a dictionary key or argument.
 func DREraseIcon() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DREraseIcon"))) }

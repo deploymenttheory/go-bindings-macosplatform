@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The class that represents the default map presentation, which is a street map that shows the position of all roads and some road names.
-//
 // StandardMapConfiguration is an idiomatic wrapper over the Objective-C class MKStandardMapConfiguration.
+//
+// It embeds [MapConfiguration], promoting that type's methods.
+//
+// The class that represents the default map presentation, which is a street map that shows the position of all roads and some road names.
 type StandardMapConfiguration struct {
-	objref.Handle
+	MapConfiguration
 }
 
 // StandardMapConfigurationFromID adopts an existing Objective-C object as a StandardMapConfiguration
@@ -25,7 +26,8 @@ func StandardMapConfigurationFromID(id objc.ID) *StandardMapConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &StandardMapConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StandardMapConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func standardMapConfigurationAdopt(id objc.ID) *StandardMapConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &StandardMapConfiguration{Handle: objref.Wrap(id)}
+	x := &StandardMapConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *StandardMapConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StandardMapConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StandardMapConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewStandardMapConfiguration creates a new StandardMapConfiguration.
@@ -64,88 +52,80 @@ func NewStandardMapConfiguration() *StandardMapConfiguration {
 	return standardMapConfigurationAdopt(_id)
 }
 
-// Creates a new standard map configuration with the specified elevation style.
-//
-// NewStandardMapConfigurationWithElevationStyle creates a new StandardMapConfiguration.
+// NewStandardMapConfigurationWithElevationStyle creates a new standard map configuration with the specified elevation style.
 func NewStandardMapConfigurationWithElevationStyle(elevationStyle MapElevationStyle) *StandardMapConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKStandardMapConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElevationStyle:"), elevationStyle)
 	return standardMapConfigurationAdopt(_id)
 }
 
-// Creates a standard map configuration with the specified elevation and emphasis styles.
-//
-// NewStandardMapConfigurationWithElevationStyleEmphasisStyle creates a new StandardMapConfiguration.
+// NewStandardMapConfigurationWithElevationStyleEmphasisStyle creates a standard map configuration with the specified elevation and emphasis styles.
 func NewStandardMapConfigurationWithElevationStyleEmphasisStyle(elevationStyle MapElevationStyle, emphasisStyle StandardMapEmphasisStyle) *StandardMapConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKStandardMapConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElevationStyle:emphasisStyle:"), elevationStyle, emphasisStyle)
 	return standardMapConfigurationAdopt(_id)
 }
 
-// Creates a standard map configuration with the specified emphasis style.
-//
-// NewStandardMapConfigurationWithEmphasisStyle creates a new StandardMapConfiguration.
+// NewStandardMapConfigurationWithEmphasisStyle creates a standard map configuration with the specified emphasis style.
 func NewStandardMapConfigurationWithEmphasisStyle(emphasisStyle StandardMapEmphasisStyle) *StandardMapConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKStandardMapConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEmphasisStyle:"), emphasisStyle)
 	return standardMapConfigurationAdopt(_id)
 }
 
-// The value that indicates how the framework emphasizes map features.
-//
-// WithEmphasisStyle sets emphasisStyle and returns the receiver so calls can be chained.
+// WithEmphasisStyle the value that indicates how the framework emphasizes map features.
 func (x *StandardMapConfiguration) WithEmphasisStyle(emphasisStyle StandardMapEmphasisStyle) *StandardMapConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmphasisStyle:"), emphasisStyle)
 	return x
 }
 
-// The filter used to determine the points of interest shown on the map.
-//
-// WithPointOfInterestFilter sets pointOfInterestFilter and returns the receiver so calls can be chained.
+// WithPointOfInterestFilter the filter used to determine the points of interest shown on the map.
 func (x *StandardMapConfiguration) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *StandardMapConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 	return x
 }
 
-// A Boolean value that controls whether the map displays traffic conditions.
-//
-// WithShowsTraffic sets showsTraffic and returns the receiver so calls can be chained.
+// WithShowsTraffic a Boolean value that controls whether the map displays traffic conditions.
 func (x *StandardMapConfiguration) WithShowsTraffic(showsTraffic bool) *StandardMapConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsTraffic:"), showsTraffic)
 	return x
 }
 
-// The value that indicates the map’s elevation style.
-//
-// WithElevationStyle sets elevationStyle and returns the receiver so calls can be chained.
+// WithElevationStyle the value that indicates the map’s elevation style.
 func (x *StandardMapConfiguration) WithElevationStyle(elevationStyle MapElevationStyle) *StandardMapConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElevationStyle:"), elevationStyle)
 	return x
 }
 
+// EmphasisStyle wraps the corresponding Objective-C method.
 func (x *StandardMapConfiguration) EmphasisStyle() StandardMapEmphasisStyle {
 	_r := objc.Send[StandardMapEmphasisStyle](objref.IDOf(x), objc.RegisterName("emphasisStyle"))
 	return _r
 }
 
+// SetEmphasisStyle wraps the corresponding Objective-C method.
 func (x *StandardMapConfiguration) SetEmphasisStyle(emphasisStyle StandardMapEmphasisStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmphasisStyle:"), emphasisStyle)
 }
 
+// PointOfInterestFilter wraps the corresponding Objective-C method.
 func (x *StandardMapConfiguration) PointOfInterestFilter() *PointOfInterestFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }
 
+// SetPointOfInterestFilter wraps the corresponding Objective-C method.
 func (x *StandardMapConfiguration) SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 }
 
+// ShowsTraffic wraps the corresponding Objective-C method.
 func (x *StandardMapConfiguration) ShowsTraffic() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsTraffic"))
 	return _r
 }
 
+// SetShowsTraffic wraps the corresponding Objective-C method.
 func (x *StandardMapConfiguration) SetShowsTraffic(showsTraffic bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsTraffic:"), showsTraffic)
 }
@@ -166,3 +146,5 @@ type StandardMapConfigurationable interface {
 }
 
 var _ StandardMapConfigurationable = (*StandardMapConfiguration)(nil)
+
+var _ MapConfigurationProvider = (*StandardMapConfiguration)(nil)

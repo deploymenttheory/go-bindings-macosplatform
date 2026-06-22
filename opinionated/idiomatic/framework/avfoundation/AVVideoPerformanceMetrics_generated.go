@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides metrics related to video playback quality.
-//
 // VideoPerformanceMetrics is an idiomatic wrapper over the Objective-C class AVVideoPerformanceMetrics.
+//
+// An object that provides metrics related to video playback quality.
 type VideoPerformanceMetrics struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VideoPerformanceMetricsFromID(id objc.ID) *VideoPerformanceMetrics {
 	if id == 0 {
 		return nil
 	}
-	x := &VideoPerformanceMetrics{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VideoPerformanceMetrics{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func videoPerformanceMetricsAdopt(id objc.ID) *VideoPerformanceMetrics {
 	if id == 0 {
 		return nil
 	}
-	x := &VideoPerformanceMetrics{Handle: objref.Wrap(id)}
+	x := &VideoPerformanceMetrics{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,43 @@ func (x *VideoPerformanceMetrics) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VideoPerformanceMetrics) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVideoPerformanceMetrics creates a new VideoPerformanceMetrics.
 func NewVideoPerformanceMetrics() *VideoPerformanceMetrics {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVVideoPerformanceMetrics")), objc.RegisterName("new"))
 	return videoPerformanceMetricsAdopt(_id)
 }
 
-// [SPI] The total number of frames that would have been displayed if no frames are dropped.
+// TotalNumberOfFrames [SPI] The total number of frames that would have been displayed if no frames are dropped.
 func (x *VideoPerformanceMetrics) TotalNumberOfFrames() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("totalNumberOfFrames"))
 	return _r
 }
 
-// [SPI] The total number of frames dropped prior to decoding or dropped because a frame missed its display deadline.
+// NumberOfDroppedFrames [SPI] The total number of frames dropped prior to decoding or dropped because a frame missed its display deadline.
 func (x *VideoPerformanceMetrics) NumberOfDroppedFrames() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfDroppedFrames"))
 	return _r
 }
 
-// [SPI] The total number of corrupted frames that have been detected.
+// NumberOfCorruptedFrames [SPI] The total number of corrupted frames that have been detected.
 func (x *VideoPerformanceMetrics) NumberOfCorruptedFrames() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfCorruptedFrames"))
 	return _r
 }
 
-// [SPI] The total number of full screen frames that were rendered in a special power-efficient mode that didn't require the frame to be composited with other UI elements.
+// NumberOfFramesDisplayedUsingOptimizedCompositing [SPI] The total number of full screen frames that were rendered in a special power-efficient mode that didn't require the frame to be composited with other UI elements.
 func (x *VideoPerformanceMetrics) NumberOfFramesDisplayedUsingOptimizedCompositing() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfFramesDisplayedUsingOptimizedCompositing"))
 	return _r
 }
 
-// [SPI] The accumulated amount of time between the prescribed presentation times of displayed video frames and the actual time at which they were displayed. This delay is always greater than or equal to zero since frames must never be displayed before their presentation time. Non-zero delays are a sign of playback jitter and possible loss of A/V sync.
+// TotalAccumulatedFrameDelay [SPI] The accumulated amount of time between the prescribed presentation times of displayed video frames and the actual time at which they were displayed. This delay is always greater than or equal to zero since frames must never be displayed before their presentation time. Non-zero delays are a sign of playback jitter and possible loss of A/V sync.
 func (x *VideoPerformanceMetrics) TotalAccumulatedFrameDelay() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("totalAccumulatedFrameDelay"))
 	return _r

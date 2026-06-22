@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract base class for building series samples.
-//
 // SeriesBuilder is an idiomatic wrapper over the Objective-C class HKSeriesBuilder.
+//
+// SeriesBuilder is an abstract base — you do not construct it directly. Construct one of [HeartbeatSeriesBuilder], [WorkoutRouteBuilder] and pass it where a SeriesBuilder is accepted.
+//
+// An abstract base class for building series samples.
 type SeriesBuilder struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func SeriesBuilderFromID(id objc.ID) *SeriesBuilder {
 	if id == 0 {
 		return nil
 	}
-	x := &SeriesBuilder{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SeriesBuilder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func seriesBuilderAdopt(id objc.ID) *SeriesBuilder {
 	if id == 0 {
 		return nil
 	}
-	x := &SeriesBuilder{Handle: objref.Wrap(id)}
+	x := &SeriesBuilder{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +62,13 @@ func (x *SeriesBuilder) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewSeriesBuilder creates a new SeriesBuilder.
-func NewSeriesBuilder() *SeriesBuilder {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKSeriesBuilder")), objc.RegisterName("new"))
-	return seriesBuilderAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SeriesBuilder) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Invalidates the builder and discards the collected data.
+// Discard invalidates the builder and discards the collected data.
 func (x *SeriesBuilder) Discard() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discard"))
 }
@@ -76,3 +80,10 @@ type SeriesBuilderable interface {
 }
 
 var _ SeriesBuilderable = (*SeriesBuilder)(nil)
+
+// isSeriesBuilder marks SeriesBuilder — and, by embedding promotion, its
+// subclasses — as a member of the SeriesBuilder hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SeriesBuilder) isSeriesBuilder() {}
+
+var _ SeriesBuilderProvider = (*SeriesBuilder)(nil)

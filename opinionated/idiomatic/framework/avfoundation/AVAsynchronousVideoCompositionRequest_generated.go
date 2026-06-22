@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains information a video compositor needs to render an output pixel buffer.
-//
 // AsynchronousVideoCompositionRequest is an idiomatic wrapper over the Objective-C class AVAsynchronousVideoCompositionRequest.
+//
+// An object that contains information a video compositor needs to render an output pixel buffer.
 type AsynchronousVideoCompositionRequest struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AsynchronousVideoCompositionRequestFromID(id objc.ID) *AsynchronousVideoCom
 	if id == 0 {
 		return nil
 	}
-	x := &AsynchronousVideoCompositionRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AsynchronousVideoCompositionRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func asynchronousVideoCompositionRequestAdopt(id objc.ID) *AsynchronousVideoComp
 	if id == 0 {
 		return nil
 	}
-	x := &AsynchronousVideoCompositionRequest{Handle: objref.Wrap(id)}
+	x := &AsynchronousVideoCompositionRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,47 +60,53 @@ func (x *AsynchronousVideoCompositionRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AsynchronousVideoCompositionRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAsynchronousVideoCompositionRequest creates a new AsynchronousVideoCompositionRequest.
 func NewAsynchronousVideoCompositionRequest() *AsynchronousVideoCompositionRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAsynchronousVideoCompositionRequest")), objc.RegisterName("new"))
 	return asynchronousVideoCompositionRequestAdopt(_id)
 }
 
-// Returns a source sample buffer for the track that contains the specified identifier.
+// SourceSampleBufferByTrackID returns a source sample buffer for the track that contains the specified identifier.
 func (x *AsynchronousVideoCompositionRequest) SourceSampleBufferByTrackID(trackID int32) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceSampleBufferByTrackID:"), trackID)
 	return obj.Wrap(_r)
 }
 
-// Returns a source timed metadata group for the track that contains the specified identifier.
+// SourceTimedMetadataByTrackID returns a source timed metadata group for the track that contains the specified identifier.
 func (x *AsynchronousVideoCompositionRequest) SourceTimedMetadataByTrackID(trackID int32) *TimedMetadataGroup {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceTimedMetadataByTrackID:"), trackID)
 	return TimedMetadataGroupFromID(_r)
 }
 
-// Cancels the request to compose a video frame.
+// FinishCancelledRequest cancels the request to compose a video frame.
 func (x *AsynchronousVideoCompositionRequest) FinishCancelledRequest() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishCancelledRequest"))
 }
 
-// Returns the source CMTaggedBufferGroupRef for the given track ID.
+// SourceTaggedBufferGroupByTrackID returns the source CMTaggedBufferGroupRef for the given track ID.
 func (x *AsynchronousVideoCompositionRequest) SourceTaggedBufferGroupByTrackID(trackID int32) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceTaggedBufferGroupByTrackID:"), trackID)
 	return obj.Wrap(_r)
 }
 
-// The method that the custom compositor calls when composition succeeds.
+// FinishWithComposedTaggedBufferGroup the method that the custom compositor calls when composition succeeds.
 func (x *AsynchronousVideoCompositionRequest) FinishWithComposedTaggedBufferGroup(taggedBufferGroup obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishWithComposedTaggedBufferGroup:"), objref.IDOf(taggedBufferGroup))
 }
 
-// The AVVideoCompositionRenderContext making the request
+// RenderContext the AVVideoCompositionRenderContext making the request
 func (x *AsynchronousVideoCompositionRequest) RenderContext() *VideoCompositionRenderContext {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("renderContext"))
 	return VideoCompositionRenderContextFromID(_r)
 }
 
-// Track IDs of all the source video buffers that are available to compose the frame.
+// SourceTrackIDs track IDs of all the source video buffers that are available to compose the frame.
 //
 // SourceTrackIDs returns the collection as a Go slice.
 func (x *AsynchronousVideoCompositionRequest) SourceTrackIDs() []obj.Object {
@@ -106,7 +114,7 @@ func (x *AsynchronousVideoCompositionRequest) SourceTrackIDs() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Track IDs of all the source sample data buffers that are available to compose the frame.
+// SourceSampleDataTrackIDs track IDs of all the source sample data buffers that are available to compose the frame.
 //
 // SourceSampleDataTrackIDs returns the collection as a Go slice.
 func (x *AsynchronousVideoCompositionRequest) SourceSampleDataTrackIDs() []obj.Object {

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes an adjustment to correct a problem found during validation of a caption conversion.
-//
 // CaptionConversionAdjustment is an idiomatic wrapper over the Objective-C class AVCaptionConversionAdjustment.
+//
+// CaptionConversionAdjustment is an abstract base — you do not construct it directly. Construct one of [CaptionConversionTimeRangeAdjustment] and pass it where a CaptionConversionAdjustment is accepted.
+//
+// An object that describes an adjustment to correct a problem found during validation of a caption conversion.
 type CaptionConversionAdjustment struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func CaptionConversionAdjustmentFromID(id objc.ID) *CaptionConversionAdjustment 
 	if id == 0 {
 		return nil
 	}
-	x := &CaptionConversionAdjustment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptionConversionAdjustment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func captionConversionAdjustmentAdopt(id objc.ID) *CaptionConversionAdjustment {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptionConversionAdjustment{Handle: objref.Wrap(id)}
+	x := &CaptionConversionAdjustment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +62,13 @@ func (x *CaptionConversionAdjustment) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewCaptionConversionAdjustment creates a new CaptionConversionAdjustment.
-func NewCaptionConversionAdjustment() *CaptionConversionAdjustment {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptionConversionAdjustment")), objc.RegisterName("new"))
-	return captionConversionAdjustmentAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptionConversionAdjustment) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// AdjustmentType wraps the corresponding Objective-C method.
 func (x *CaptionConversionAdjustment) AdjustmentType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adjustmentType"))
 	return obj.Wrap(_r)
@@ -76,3 +81,10 @@ type CaptionConversionAdjustmentable interface {
 }
 
 var _ CaptionConversionAdjustmentable = (*CaptionConversionAdjustment)(nil)
+
+// isCaptionConversionAdjustment marks CaptionConversionAdjustment — and, by embedding promotion, its
+// subclasses — as a member of the CaptionConversionAdjustment hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CaptionConversionAdjustment) isCaptionConversionAdjustment() {}
+
+var _ CaptionConversionAdjustmentProvider = (*CaptionConversionAdjustment)(nil)

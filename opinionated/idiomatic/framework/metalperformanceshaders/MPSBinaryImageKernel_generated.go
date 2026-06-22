@@ -6,17 +6,20 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A kernel that consumes two textures and produces one texture.
-//
 // BinaryImageKernel is an idiomatic wrapper over the Objective-C class MPSBinaryImageKernel.
+//
+// BinaryImageKernel is an abstract base — you do not construct it directly. Construct one of [ImageArithmetic] and pass it where a BinaryImageKernel is accepted.
+//
+// A kernel that consumes two textures and produces one texture.
 type BinaryImageKernel struct {
-	objref.Handle
+	Kernel
 }
 
 // BinaryImageKernelFromID adopts an existing Objective-C object as a BinaryImageKernel
@@ -25,7 +28,8 @@ func BinaryImageKernelFromID(id objc.ID) *BinaryImageKernel {
 	if id == 0 {
 		return nil
 	}
-	x := &BinaryImageKernel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BinaryImageKernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,44 +42,105 @@ func binaryImageKernelAdopt(id objc.ID) *BinaryImageKernel {
 	if id == 0 {
 		return nil
 	}
-	x := &BinaryImageKernel{Handle: objref.Wrap(id)}
+	x := &BinaryImageKernel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *BinaryImageKernel) Description() string {
-	return rt.Description(objref.IDOf(x))
+// WithPrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer.
+func (x *BinaryImageKernel) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *BinaryImageKernel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
+	return x
 }
 
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BinaryImageKernel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+// WithSecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer.
+func (x *BinaryImageKernel) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *BinaryImageKernel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
+	return x
 }
 
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BinaryImageKernel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (x *BinaryImageKernel) WithClipRect(clipRect metal.MTLRegion) *BinaryImageKernel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
 }
 
-// NewBinaryImageKernel creates a new BinaryImageKernel.
-func NewBinaryImageKernel() *BinaryImageKernel {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSBinaryImageKernel")), objc.RegisterName("new"))
-	return binaryImageKernelAdopt(_id)
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *BinaryImageKernel) WithLabel(label string) *BinaryImageKernel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// PrimarySourceRegionForDestinationSize determines the region of the primary source texture that will be read for an encode operation.
+func (x *BinaryImageKernel) PrimarySourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion {
+	_r := objc.Send[mpscore.MPSRegion](objref.IDOf(x), objc.RegisterName("primarySourceRegionForDestinationSize:"), destinationSize)
+	return _r
+}
+
+// SecondarySourceRegionForDestinationSize determines the region of the secondary source texture that will be read for an encode operation.
+func (x *BinaryImageKernel) SecondarySourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion {
+	_r := objc.Send[mpscore.MPSRegion](objref.IDOf(x), objc.RegisterName("secondarySourceRegionForDestinationSize:"), destinationSize)
+	return _r
+}
+
+// PrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. See Also:
+func (x *BinaryImageKernel) PrimaryOffset() mpscore.MPSOffset {
+	_r := objc.Send[mpscore.MPSOffset](objref.IDOf(x), objc.RegisterName("primaryOffset"))
+	return _r
+}
+
+// SetPrimaryOffset wraps the corresponding Objective-C method.
+func (x *BinaryImageKernel) SetPrimaryOffset(primaryOffset mpscore.MPSOffset) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
+}
+
+// SecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. See Also:
+func (x *BinaryImageKernel) SecondaryOffset() mpscore.MPSOffset {
+	_r := objc.Send[mpscore.MPSOffset](objref.IDOf(x), objc.RegisterName("secondaryOffset"))
+	return _r
+}
+
+// SetSecondaryOffset wraps the corresponding Objective-C method.
+func (x *BinaryImageKernel) SetSecondaryOffset(secondaryOffset mpscore.MPSOffset) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
+}
+
+// ClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (x *BinaryImageKernel) ClipRect() metal.MTLRegion {
+	_r := objc.Send[metal.MTLRegion](objref.IDOf(x), objc.RegisterName("clipRect"))
+	return _r
+}
+
+// SetClipRect wraps the corresponding Objective-C method.
+func (x *BinaryImageKernel) SetClipRect(clipRect metal.MTLRegion) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+}
+
 // BinaryImageKernelable is the interface implemented by [BinaryImageKernel], for mocking and DI.
 type BinaryImageKernelable interface {
 	obj.Object
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *BinaryImageKernel
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *BinaryImageKernel
+	WithClipRect(clipRect metal.MTLRegion) *BinaryImageKernel
 	WithLabel(label string) *BinaryImageKernel
+	PrimarySourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion
+	SecondarySourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion
+	PrimaryOffset() mpscore.MPSOffset
+	SetPrimaryOffset(primaryOffset mpscore.MPSOffset)
+	SecondaryOffset() mpscore.MPSOffset
+	SetSecondaryOffset(secondaryOffset mpscore.MPSOffset)
+	ClipRect() metal.MTLRegion
+	SetClipRect(clipRect metal.MTLRegion)
 }
 
 var _ BinaryImageKernelable = (*BinaryImageKernel)(nil)
+
+// isBinaryImageKernel marks BinaryImageKernel — and, by embedding promotion, its
+// subclasses — as a member of the BinaryImageKernel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *BinaryImageKernel) isBinaryImageKernel() {}
+
+var _ BinaryImageKernelProvider = (*BinaryImageKernel)(nil)
+
+var _ KernelProvider = (*BinaryImageKernel)(nil)

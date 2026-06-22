@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBaseClusterFanControl is an idiomatic wrapper over the Objective-C class MTRBaseClusterFanControl.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
 type MTRBaseClusterFanControl struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterFanControlFromID adopts an existing Objective-C object as a MTRBaseClusterFanControl
@@ -25,7 +26,8 @@ func MTRBaseClusterFanControlFromID(id objc.ID) *MTRBaseClusterFanControl {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterFanControl{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterFanControl{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func mTRBaseClusterFanControlAdopt(id objc.ID) *MTRBaseClusterFanControl {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterFanControl{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterFanControl{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterFanControl) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterFanControl) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterFanControl) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterFanControlWithDeviceEndpointIDQueue creates a new MTRBaseClusterFanControl.
+// NewMTRBaseClusterFanControlWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterFanControlWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterFanControl {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterFanControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -74,8 +60,10 @@ func NewMTRBaseClusterFanControlWithDeviceEndpointQueue(device *MTRBaseDevice, e
 	return mTRBaseClusterFanControlAdopt(_id)
 }
 
+// ReadAttributeFanModeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFanModeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeFanModeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeFanModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -97,8 +85,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeFanModeWithCompletion(ctx contex
 	}
 }
 
+// SubscribeAttributeFanModeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFanModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeFanModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeFanModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -120,8 +110,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeFanModeWithParamsSubscripti
 	}
 }
 
+// ReadAttributeFanModeSequenceWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFanModeSequenceWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeFanModeSequenceWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeFanModeSequenceWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -143,8 +135,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeFanModeSequenceWithCompletion(ct
 	}
 }
 
+// SubscribeAttributeFanModeSequenceWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFanModeSequenceWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeFanModeSequenceWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeFanModeSequenceWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -166,8 +160,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeFanModeSequenceWithParamsSu
 	}
 }
 
+// ReadAttributePercentSettingWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePercentSettingWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributePercentSettingWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributePercentSettingWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -189,8 +185,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributePercentSettingWithCompletion(ctx
 	}
 }
 
+// SubscribeAttributePercentSettingWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePercentSettingWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributePercentSettingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributePercentSettingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -212,8 +210,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributePercentSettingWithParamsSub
 	}
 }
 
+// ReadAttributePercentCurrentWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePercentCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributePercentCurrentWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributePercentCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -235,8 +235,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributePercentCurrentWithCompletion(ctx
 	}
 }
 
+// SubscribeAttributePercentCurrentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePercentCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributePercentCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributePercentCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -258,8 +260,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributePercentCurrentWithParamsSub
 	}
 }
 
+// ReadAttributeSpeedMaxWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSpeedMaxWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeSpeedMaxWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeSpeedMaxWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -281,8 +285,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeSpeedMaxWithCompletion(ctx conte
 	}
 }
 
+// SubscribeAttributeSpeedMaxWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSpeedMaxWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeSpeedMaxWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeSpeedMaxWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -304,8 +310,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeSpeedMaxWithParamsSubscript
 	}
 }
 
+// ReadAttributeSpeedSettingWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSpeedSettingWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeSpeedSettingWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeSpeedSettingWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -327,8 +335,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeSpeedSettingWithCompletion(ctx c
 	}
 }
 
+// SubscribeAttributeSpeedSettingWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSpeedSettingWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeSpeedSettingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeSpeedSettingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -350,8 +360,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeSpeedSettingWithParamsSubsc
 	}
 }
 
+// ReadAttributeSpeedCurrentWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSpeedCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeSpeedCurrentWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeSpeedCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -373,8 +385,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeSpeedCurrentWithCompletion(ctx c
 	}
 }
 
+// SubscribeAttributeSpeedCurrentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSpeedCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeSpeedCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeSpeedCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -396,8 +410,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeSpeedCurrentWithParamsSubsc
 	}
 }
 
+// ReadAttributeRockSupportWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRockSupportWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeRockSupportWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeRockSupportWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -419,8 +435,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeRockSupportWithCompletion(ctx co
 	}
 }
 
+// SubscribeAttributeRockSupportWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRockSupportWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeRockSupportWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeRockSupportWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -442,8 +460,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeRockSupportWithParamsSubscr
 	}
 }
 
+// ReadAttributeRockSettingWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRockSettingWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeRockSettingWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeRockSettingWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,8 +485,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeRockSettingWithCompletion(ctx co
 	}
 }
 
+// SubscribeAttributeRockSettingWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRockSettingWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeRockSettingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeRockSettingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -488,8 +510,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeRockSettingWithParamsSubscr
 	}
 }
 
+// ReadAttributeWindSupportWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeWindSupportWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeWindSupportWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeWindSupportWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -511,8 +535,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeWindSupportWithCompletion(ctx co
 	}
 }
 
+// SubscribeAttributeWindSupportWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeWindSupportWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeWindSupportWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeWindSupportWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -534,8 +560,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeWindSupportWithParamsSubscr
 	}
 }
 
+// ReadAttributeWindSettingWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeWindSettingWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeWindSettingWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeWindSettingWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -557,8 +585,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeWindSettingWithCompletion(ctx co
 	}
 }
 
+// SubscribeAttributeWindSettingWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeWindSettingWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeWindSettingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeWindSettingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -580,8 +610,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeWindSettingWithParamsSubscr
 	}
 }
 
+// ReadAttributeAirflowDirectionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAirflowDirectionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeAirflowDirectionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeAirflowDirectionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -603,8 +635,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeAirflowDirectionWithCompletion(c
 	}
 }
 
+// SubscribeAttributeAirflowDirectionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAirflowDirectionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeAirflowDirectionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeAirflowDirectionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -626,8 +660,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeAirflowDirectionWithParamsS
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -649,8 +685,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeGeneratedCommandListWithCompleti
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -672,8 +710,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeGeneratedCommandListWithPar
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -695,8 +735,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeAcceptedCommandListWithCompletio
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -718,8 +760,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeAcceptedCommandListWithPara
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -741,8 +785,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeAttributeListWithCompletion(ctx 
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -764,8 +810,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeAttributeListWithParamsSubs
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -787,8 +835,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeFeatureMapWithCompletion(ctx con
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -810,8 +860,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeFeatureMapWithParamsSubscri
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -833,8 +885,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeClusterRevisionWithCompletion(ct
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -856,8 +910,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeClusterRevisionWithParamsSu
 	}
 }
 
+// ReadAttributeFanMode wraps the corresponding Objective-C method.
+//
 // ReadAttributeFanMode blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeFanMode(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeFanMode(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -879,8 +935,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeFanMode(ctx context.Context) (ob
 	}
 }
 
+// SubscribeAttributeFanModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFanModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeFanModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeFanModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -902,8 +960,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeFanModeWithMinIntervalMaxIn
 	}
 }
 
+// ReadAttributeFanModeSequence wraps the corresponding Objective-C method.
+//
 // ReadAttributeFanModeSequence blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeFanModeSequence(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeFanModeSequence(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -925,8 +985,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeFanModeSequence(ctx context.Cont
 	}
 }
 
+// SubscribeAttributeFanModeSequenceWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFanModeSequenceWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeFanModeSequenceWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeFanModeSequenceWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -948,8 +1010,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeFanModeSequenceWithMinInter
 	}
 }
 
+// ReadAttributePercentSetting wraps the corresponding Objective-C method.
+//
 // ReadAttributePercentSetting blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributePercentSetting(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributePercentSetting(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -971,8 +1035,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributePercentSetting(ctx context.Conte
 	}
 }
 
+// SubscribeAttributePercentSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePercentSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributePercentSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributePercentSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -994,8 +1060,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributePercentSettingWithMinInterv
 	}
 }
 
+// ReadAttributePercentCurrent wraps the corresponding Objective-C method.
+//
 // ReadAttributePercentCurrent blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributePercentCurrent(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributePercentCurrent(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1017,8 +1085,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributePercentCurrent(ctx context.Conte
 	}
 }
 
+// SubscribeAttributePercentCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePercentCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributePercentCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributePercentCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1040,8 +1110,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributePercentCurrentWithMinInterv
 	}
 }
 
+// ReadAttributeSpeedMax wraps the corresponding Objective-C method.
+//
 // ReadAttributeSpeedMax blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeSpeedMax(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeSpeedMax(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1063,8 +1135,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeSpeedMax(ctx context.Context) (o
 	}
 }
 
+// SubscribeAttributeSpeedMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSpeedMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeSpeedMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeSpeedMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1086,8 +1160,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeSpeedMaxWithMinIntervalMaxI
 	}
 }
 
+// ReadAttributeSpeedSetting wraps the corresponding Objective-C method.
+//
 // ReadAttributeSpeedSetting blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeSpeedSetting(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeSpeedSetting(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1109,8 +1185,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeSpeedSetting(ctx context.Context
 	}
 }
 
+// SubscribeAttributeSpeedSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSpeedSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeSpeedSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeSpeedSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1132,8 +1210,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeSpeedSettingWithMinInterval
 	}
 }
 
+// ReadAttributeSpeedCurrent wraps the corresponding Objective-C method.
+//
 // ReadAttributeSpeedCurrent blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeSpeedCurrent(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeSpeedCurrent(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1155,8 +1235,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeSpeedCurrent(ctx context.Context
 	}
 }
 
+// SubscribeAttributeSpeedCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSpeedCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeSpeedCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeSpeedCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1178,8 +1260,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeSpeedCurrentWithMinInterval
 	}
 }
 
+// ReadAttributeRockSupport wraps the corresponding Objective-C method.
+//
 // ReadAttributeRockSupport blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeRockSupport(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeRockSupport(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1201,8 +1285,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeRockSupport(ctx context.Context)
 	}
 }
 
+// SubscribeAttributeRockSupportWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRockSupportWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeRockSupportWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeRockSupportWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1224,8 +1310,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeRockSupportWithMinIntervalM
 	}
 }
 
+// ReadAttributeRockSetting wraps the corresponding Objective-C method.
+//
 // ReadAttributeRockSetting blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeRockSetting(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeRockSetting(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1247,8 +1335,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeRockSetting(ctx context.Context)
 	}
 }
 
+// SubscribeAttributeRockSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRockSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeRockSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeRockSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1270,8 +1360,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeRockSettingWithMinIntervalM
 	}
 }
 
+// ReadAttributeWindSupport wraps the corresponding Objective-C method.
+//
 // ReadAttributeWindSupport blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeWindSupport(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeWindSupport(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1293,8 +1385,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeWindSupport(ctx context.Context)
 	}
 }
 
+// SubscribeAttributeWindSupportWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeWindSupportWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeWindSupportWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeWindSupportWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1316,8 +1410,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeWindSupportWithMinIntervalM
 	}
 }
 
+// ReadAttributeWindSetting wraps the corresponding Objective-C method.
+//
 // ReadAttributeWindSetting blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeWindSetting(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeWindSetting(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1339,8 +1435,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeWindSetting(ctx context.Context)
 	}
 }
 
+// SubscribeAttributeWindSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeWindSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeWindSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeWindSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1362,8 +1460,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeWindSettingWithMinIntervalM
 	}
 }
 
+// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1385,8 +1485,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeGeneratedCommandList(ctx context
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1408,8 +1510,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeGeneratedCommandListWithMin
 	}
 }
 
+// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1431,8 +1535,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeAcceptedCommandList(ctx context.
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1454,8 +1560,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeAcceptedCommandListWithMinI
 	}
 }
 
+// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeAttributeList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1477,8 +1585,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeAttributeList(ctx context.Contex
 	}
 }
 
+// SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1500,8 +1610,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeAttributeListWithMinInterva
 	}
 }
 
+// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1523,8 +1635,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeFeatureMap(ctx context.Context) 
 	}
 }
 
+// SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1546,8 +1660,10 @@ func (x *MTRBaseClusterFanControl) SubscribeAttributeFeatureMapWithMinIntervalMa
 	}
 }
 
+// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1569,8 +1685,10 @@ func (x *MTRBaseClusterFanControl) ReadAttributeClusterRevision(ctx context.Cont
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterFanControl) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterFanControl) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1664,3 +1782,7 @@ type MTRBaseClusterFanControlable interface {
 }
 
 var _ MTRBaseClusterFanControlable = (*MTRBaseClusterFanControl)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterFanControl)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterFanControl)(nil)

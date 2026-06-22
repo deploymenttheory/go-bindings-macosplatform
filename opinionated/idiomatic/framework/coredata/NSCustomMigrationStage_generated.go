@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that enables you to participate in the migration between two versions of the same model.
-//
 // CustomMigrationStage is an idiomatic wrapper over the Objective-C class NSCustomMigrationStage.
+//
+// It embeds [MigrationStage], promoting that type's methods.
+//
+// An object that enables you to participate in the migration between two versions of the same model.
 type CustomMigrationStage struct {
-	objref.Handle
+	MigrationStage
 }
 
 // CustomMigrationStageFromID adopts an existing Objective-C object as a CustomMigrationStage
@@ -25,7 +26,8 @@ func CustomMigrationStageFromID(id objc.ID) *CustomMigrationStage {
 	if id == 0 {
 		return nil
 	}
-	x := &CustomMigrationStage{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CustomMigrationStage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,48 +40,32 @@ func customMigrationStageAdopt(id objc.ID) *CustomMigrationStage {
 	if id == 0 {
 		return nil
 	}
-	x := &CustomMigrationStage{Handle: objref.Wrap(id)}
+	x := &CustomMigrationStage{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CustomMigrationStage) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CustomMigrationStage) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CustomMigrationStage) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a custom migration stage with the specified source and destination model references.
-//
-// NewCustomMigrationStageWithCurrentModelReferenceNextModelReference creates a new CustomMigrationStage.
+// NewCustomMigrationStageWithCurrentModelReferenceNextModelReference creates a custom migration stage with the specified source and destination model references.
 func NewCustomMigrationStageWithCurrentModelReferenceNextModelReference(currentModel *ManagedObjectModelReference, nextModel *ManagedObjectModelReference) *CustomMigrationStage {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCustomMigrationStage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCurrentModelReference:nextModelReference:"), objref.IDOf(currentModel), objref.IDOf(nextModel))
 	return customMigrationStageAdopt(_id)
 }
 
-// The textual description of the migration stage’s purpose.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the textual description of the migration stage’s purpose.
 func (x *CustomMigrationStage) WithLabel(label string) *CustomMigrationStage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// CurrentModel wraps the corresponding Objective-C method.
 func (x *CustomMigrationStage) CurrentModel() *ManagedObjectModelReference {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentModel"))
 	return ManagedObjectModelReferenceFromID(_r)
 }
 
+// NextModel wraps the corresponding Objective-C method.
 func (x *CustomMigrationStage) NextModel() *ManagedObjectModelReference {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextModel"))
 	return ManagedObjectModelReferenceFromID(_r)
@@ -94,3 +80,5 @@ type CustomMigrationStageable interface {
 }
 
 var _ CustomMigrationStageable = (*CustomMigrationStage)(nil)
+
+var _ MigrationStageProvider = (*CustomMigrationStage)(nil)

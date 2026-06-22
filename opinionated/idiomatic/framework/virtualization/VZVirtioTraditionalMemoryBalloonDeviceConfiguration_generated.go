@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration object that provides a way to reclaim memory from the guest system.
-//
 // VirtioTraditionalMemoryBalloonDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZVirtioTraditionalMemoryBalloonDeviceConfiguration.
+//
+// It embeds [MemoryBalloonDeviceConfiguration], promoting that type's methods.
+//
+// A configuration object that provides a way to reclaim memory from the guest system.
 type VirtioTraditionalMemoryBalloonDeviceConfiguration struct {
-	objref.Handle
+	MemoryBalloonDeviceConfiguration
 }
 
 // VirtioTraditionalMemoryBalloonDeviceConfigurationFromID adopts an existing Objective-C object as a VirtioTraditionalMemoryBalloonDeviceConfiguration
@@ -25,7 +26,8 @@ func VirtioTraditionalMemoryBalloonDeviceConfigurationFromID(id objc.ID) *Virtio
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioTraditionalMemoryBalloonDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VirtioTraditionalMemoryBalloonDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func virtioTraditionalMemoryBalloonDeviceConfigurationAdopt(id objc.ID) *VirtioT
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioTraditionalMemoryBalloonDeviceConfiguration{Handle: objref.Wrap(id)}
+	x := &VirtioTraditionalMemoryBalloonDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *VirtioTraditionalMemoryBalloonDeviceConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VirtioTraditionalMemoryBalloonDeviceConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VirtioTraditionalMemoryBalloonDeviceConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewVirtioTraditionalMemoryBalloonDeviceConfiguration creates a new VirtioTraditionalMemoryBalloonDeviceConfiguration.
@@ -70,3 +58,5 @@ type VirtioTraditionalMemoryBalloonDeviceConfigurationable interface {
 }
 
 var _ VirtioTraditionalMemoryBalloonDeviceConfigurationable = (*VirtioTraditionalMemoryBalloonDeviceConfiguration)(nil)
+
+var _ MemoryBalloonDeviceConfigurationProvider = (*VirtioTraditionalMemoryBalloonDeviceConfiguration)(nil)

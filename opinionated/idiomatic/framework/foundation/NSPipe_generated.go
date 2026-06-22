@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A one-way communications channel between related processes.
-//
 // Pipe is an idiomatic wrapper over the Objective-C class NSPipe.
+//
+// A one-way communications channel between related processes.
 type Pipe struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PipeFromID(id objc.ID) *Pipe {
 	if id == 0 {
 		return nil
 	}
-	x := &Pipe{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Pipe{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func pipeAdopt(id objc.ID) *Pipe {
 	if id == 0 {
 		return nil
 	}
-	x := &Pipe{Handle: objref.Wrap(id)}
+	x := &Pipe{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,23 +60,31 @@ func (x *Pipe) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Pipe) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPipe creates a new Pipe.
 func NewPipe() *Pipe {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSPipe")), objc.RegisterName("new"))
 	return pipeAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Pipe) WithScriptingProperties(scriptingProperties obj.Object) *Pipe {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// FileHandleForReading wraps the corresponding Objective-C method.
 func (x *Pipe) FileHandleForReading() *FileHandle {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileHandleForReading"))
 	return FileHandleFromID(_r)
 }
 
+// FileHandleForWriting wraps the corresponding Objective-C method.
 func (x *Pipe) FileHandleForWriting() *FileHandle {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileHandleForWriting"))
 	return FileHandleFromID(_r)

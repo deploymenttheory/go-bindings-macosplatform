@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An external sync device connected to a host device that can be used to drive the timing of an internal component, such as a camera sensor.
-//
 // ExternalSyncDevice is an idiomatic wrapper over the Objective-C class AVExternalSyncDevice.
+//
+// An external sync device connected to a host device that can be used to drive the timing of an internal component, such as a camera sensor.
 type ExternalSyncDevice struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ExternalSyncDeviceFromID(id objc.ID) *ExternalSyncDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &ExternalSyncDevice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExternalSyncDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func externalSyncDeviceAdopt(id objc.ID) *ExternalSyncDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &ExternalSyncDevice{Handle: objref.Wrap(id)}
+	x := &ExternalSyncDevice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,43 @@ func (x *ExternalSyncDevice) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExternalSyncDevice) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewExternalSyncDevice creates a new ExternalSyncDevice.
 func NewExternalSyncDevice() *ExternalSyncDevice {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVExternalSyncDevice")), objc.RegisterName("new"))
 	return externalSyncDeviceAdopt(_id)
 }
 
-// The status of the externally connected device. Use this property to query the current connection status of the external sync device. This property is key-value observable.
+// Status the status of the externally connected device. Use this property to query the current connection status of the external sync device. This property is key-value observable.
 func (x *ExternalSyncDevice) Status() ExternalSyncDeviceStatus {
 	_r := objc.Send[ExternalSyncDeviceStatus](objref.IDOf(x), objc.RegisterName("status"))
 	return _r
 }
 
-// A clock representing the source of time from the external sync device. This property returns `NULL` until the “status“ reaches “AVExternalSyncDeviceStatusActiveSync“.
+// Clock a clock representing the source of time from the external sync device. This property returns `NULL` until the “status“ reaches “AVExternalSyncDeviceStatusActiveSync“.
 func (x *ExternalSyncDevice) Clock() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clock"))
 	return obj.Wrap(_r)
 }
 
-// A unique identifier for an external sync device. Use this property to select a specific external sync device.
+// Uuid a unique identifier for an external sync device. Use this property to select a specific external sync device.
 func (x *ExternalSyncDevice) Uuid() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uuid"))
 	return obj.Wrap(_r)
 }
 
-// The USB vendor identifier associated with the external sync device. This `UInt32` value is provided by the hardware vendor, and returns 0 if not available.
+// VendorID the USB vendor identifier associated with the external sync device. This `UInt32` value is provided by the hardware vendor, and returns 0 if not available.
 func (x *ExternalSyncDevice) VendorID() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vendorID"))
 	return _r
 }
 
-// The USB product identifier associated with the external sync device. This `UInt32` value comes from the hardware vendor, and returns 0 if not available. Use this value in conjunction with the “vendorID“ to determine a specific product.
+// ProductID the USB product identifier associated with the external sync device. This `UInt32` value comes from the hardware vendor, and returns 0 if not available. Use this value in conjunction with the “vendorID“ to determine a specific product.
 func (x *ExternalSyncDevice) ProductID() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("productID"))
 	return _r

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A lock that may be acquired multiple times by the same thread without causing a deadlock.
-//
 // RecursiveLock is an idiomatic wrapper over the Objective-C class NSRecursiveLock.
+//
+// A lock that may be acquired multiple times by the same thread without causing a deadlock.
 type RecursiveLock struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RecursiveLockFromID(id objc.ID) *RecursiveLock {
 	if id == 0 {
 		return nil
 	}
-	x := &RecursiveLock{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RecursiveLock{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func recursiveLockAdopt(id objc.ID) *RecursiveLock {
 	if id == 0 {
 		return nil
 	}
-	x := &RecursiveLock{Handle: objref.Wrap(id)}
+	x := &RecursiveLock{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,38 +60,43 @@ func (x *RecursiveLock) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RecursiveLock) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRecursiveLock creates a new RecursiveLock.
 func NewRecursiveLock() *RecursiveLock {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSRecursiveLock")), objc.RegisterName("new"))
 	return recursiveLockAdopt(_id)
 }
 
-// The name associated with the receiver.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the name associated with the receiver.
 func (x *RecursiveLock) WithName(name StringProvider) *RecursiveLock {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *RecursiveLock) WithScriptingProperties(scriptingProperties obj.Object) *RecursiveLock {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Attempts to acquire a lock, and immediately returns a Boolean value that indicates whether the attempt was successful.
+// TryLock attempts to acquire a lock, and immediately returns a Boolean value that indicates whether the attempt was successful.
 func (x *RecursiveLock) TryLock() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("tryLock"))
 	return _r
 }
 
-// Attempts to acquire a lock before a given date.
+// LockBeforeDate attempts to acquire a lock before a given date.
 func (x *RecursiveLock) LockBeforeDate(limit *Date) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("lockBeforeDate:"), objref.IDOf(limit))
 	return _r
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *RecursiveLock) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -98,6 +105,7 @@ func (x *RecursiveLock) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *RecursiveLock) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }

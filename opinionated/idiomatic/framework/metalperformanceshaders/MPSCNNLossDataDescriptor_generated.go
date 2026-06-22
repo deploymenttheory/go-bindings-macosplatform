@@ -6,15 +6,16 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that specifies properties used by a loss data descriptor.
-//
 // CNNLossDataDescriptor is an idiomatic wrapper over the Objective-C class MPSCNNLossDataDescriptor.
+//
+// An object that specifies properties used by a loss data descriptor.
 type CNNLossDataDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func CNNLossDataDescriptorFromID(id objc.ID) *CNNLossDataDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNLossDataDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNLossDataDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func cNNLossDataDescriptorAdopt(id objc.ID) *CNNLossDataDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNLossDataDescriptor{Handle: objref.Wrap(id)}
+	x := &CNNLossDataDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,44 +61,54 @@ func (x *CNNLossDataDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CNNLossDataDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCNNLossDataDescriptor creates a new CNNLossDataDescriptor.
 func NewCNNLossDataDescriptor() *CNNLossDataDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNLossDataDescriptor")), objc.RegisterName("new"))
 	return cNNLossDataDescriptorAdopt(_id)
 }
 
-// Row bytes of loss data. This parameter specifies the row bytes of loss data.
-//
-// WithBytesPerRow sets bytesPerRow and returns the receiver so calls can be chained.
+// WithBytesPerRow row bytes of loss data. This parameter specifies the row bytes of loss data.
 func (x *CNNLossDataDescriptor) WithBytesPerRow(bytesPerRow int) *CNNLossDataDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBytesPerRow:"), bytesPerRow)
 	return x
 }
 
-// Slice bytes of loss data. This parameter specifies the slice bytes of loss data.
-//
-// WithBytesPerImage sets bytesPerImage and returns the receiver so calls can be chained.
+// WithBytesPerImage slice bytes of loss data. This parameter specifies the slice bytes of loss data.
 func (x *CNNLossDataDescriptor) WithBytesPerImage(bytesPerImage int) *CNNLossDataDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBytesPerImage:"), bytesPerImage)
 	return x
 }
 
-// Row bytes of loss data. This parameter specifies the row bytes of loss data.
+// Size size of loss data: (width, height, feature channels}. This parameter specifies the size of loss data.
+func (x *CNNLossDataDescriptor) Size() metal.MTLSize {
+	_r := objc.Send[metal.MTLSize](objref.IDOf(x), objc.RegisterName("size"))
+	return _r
+}
+
+// BytesPerRow row bytes of loss data. This parameter specifies the row bytes of loss data.
 func (x *CNNLossDataDescriptor) BytesPerRow() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bytesPerRow"))
 	return _r
 }
 
+// SetBytesPerRow wraps the corresponding Objective-C method.
 func (x *CNNLossDataDescriptor) SetBytesPerRow(bytesPerRow int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBytesPerRow:"), bytesPerRow)
 }
 
-// Slice bytes of loss data. This parameter specifies the slice bytes of loss data.
+// BytesPerImage slice bytes of loss data. This parameter specifies the slice bytes of loss data.
 func (x *CNNLossDataDescriptor) BytesPerImage() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bytesPerImage"))
 	return _r
 }
 
+// SetBytesPerImage wraps the corresponding Objective-C method.
 func (x *CNNLossDataDescriptor) SetBytesPerImage(bytesPerImage int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBytesPerImage:"), bytesPerImage)
 }
@@ -105,6 +118,7 @@ type CNNLossDataDescriptorable interface {
 	obj.Object
 	WithBytesPerRow(bytesPerRow int) *CNNLossDataDescriptor
 	WithBytesPerImage(bytesPerImage int) *CNNLossDataDescriptor
+	Size() metal.MTLSize
 	BytesPerRow() int
 	SetBytesPerRow(bytesPerRow int)
 	BytesPerImage() int

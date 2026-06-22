@@ -8,31 +8,31 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns a fully initialized, singleton certificate panel object.
+// SharedCertificatePanel returns a fully initialized, singleton certificate panel object.
 func SharedCertificatePanel() *CertificatePanel {
 	_r := objc.Send[objc.ID](objc.ID(_class("SFCertificatePanel")), objc.RegisterName("sharedCertificatePanel"))
 	return CertificatePanelFromID(_r)
 }
 
-// Returns a fully initialized, singleton certificate trust panel object.
+// SharedCertificateTrustPanel returns a fully initialized, singleton certificate trust panel object.
 func SharedCertificateTrustPanel() *CertificateTrustPanel {
 	_r := objc.Send[objc.ID](objc.ID(_class("SFCertificateTrustPanel")), objc.RegisterName("sharedCertificateTrustPanel"))
 	return CertificateTrustPanelFromID(_r)
 }
 
-// Returns a fully initialized, singleton choose identity panel object.
+// SharedChooseIdentityPanel returns a fully initialized, singleton choose identity panel object.
 func SharedChooseIdentityPanel() *ChooseIdentityPanel {
 	_r := objc.Send[objc.ID](objc.ID(_class("SFChooseIdentityPanel")), objc.RegisterName("sharedChooseIdentityPanel"))
 	return ChooseIdentityPanelFromID(_r)
 }
 
-// Returns a shared keychain save panel object.
+// SharedKeychainSavePanel returns a shared keychain save panel object.
 func SharedKeychainSavePanel() *KeychainSavePanel {
 	_r := objc.Send[objc.ID](objc.ID(_class("SFKeychainSavePanel")), objc.RegisterName("sharedKeychainSavePanel"))
 	return KeychainSavePanelFromID(_r)
 }
 
-// Returns a shared keychain settings panel object.
+// SharedKeychainSettingsPanel returns a shared keychain settings panel object.
 func SharedKeychainSettingsPanel() *KeychainSettingsPanel {
 	_r := objc.Send[objc.ID](objc.ID(_class("SFKeychainSettingsPanel")), objc.RegisterName("sharedKeychainSettingsPanel"))
 	return KeychainSettingsPanelFromID(_r)

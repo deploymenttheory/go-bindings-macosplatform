@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of focus decisions, focus transitions, detections, and detection tracks associated with a movie captured in Cinematic mode and methods to change them.
-//
 // Script is an idiomatic wrapper over the Objective-C class CNScript.
+//
+// A collection of focus decisions, focus transitions, detections, and detection tracks associated with a movie captured in Cinematic mode and methods to change them.
 type Script struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ScriptFromID(id objc.ID) *Script {
 	if id == 0 {
 		return nil
 	}
-	x := &Script{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Script{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func scriptAdopt(id objc.ID) *Script {
 	if id == 0 {
 		return nil
 	}
-	x := &Script{Handle: objref.Wrap(id)}
+	x := &Script{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,83 +60,88 @@ func (x *Script) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Script) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewScript creates a new Script.
 func NewScript() *Script {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNScript")), objc.RegisterName("new"))
 	return scriptAdopt(_id)
 }
 
-// The f/number to apply to the entire movie, initially set to that of the recorded movie. Pass this to the rendering session in the rendering frame attributes to match the selected aperture. Change this property when the user selects a different aperture for the edited movie. Changes to this property are reflected in the script changes for later restoration.
-//
-// WithFNumber sets fNumber and returns the receiver so calls can be chained.
+// WithFNumber the f/number to apply to the entire movie, initially set to that of the recorded movie. Pass this to the rendering session in the rendering frame attributes to match the selected aperture. Change this property when the user selects a different aperture for the edited movie. Changes to this property are reflected in the script changes for later restoration.
 func (x *Script) WithFNumber(fNumber float32) *Script {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFNumber:"), fNumber)
 	return x
 }
 
-// Reload the cinematic script with optional changes applied, removing any previous changes made. This can be more efficient than loading the asset from scratch. - Parameters: - changes: optional changes since asset was recorded. Can be obtained from a previous editing session. If `nil`, the asset is reloaded as originally recorded.
+// ReloadWithChanges reload the cinematic script with optional changes applied, removing any previous changes made. This can be more efficient than loading the asset from scratch. - Parameters: - changes: optional changes since asset was recorded. Can be obtained from a previous editing session. If `nil`, the asset is reloaded as originally recorded.
 func (x *Script) ReloadWithChanges(changes *ScriptChanges) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadWithChanges:"), objref.IDOf(changes))
 }
 
-// Changes made since cinematic asset was recorded. Can be used to checkpoint and later restore changes made so far.
+// Changes changes made since cinematic asset was recorded. Can be used to checkpoint and later restore changes made so far.
 func (x *Script) Changes() *ScriptChanges {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changes"))
 	return ScriptChangesFromID(_r)
 }
 
-// A detection track representing all detections with the given detectionID over the entire cinematic script.
+// DetectionTrackForID a detection track representing all detections with the given detectionID over the entire cinematic script.
 func (x *Script) DetectionTrackForID(detectionID int64) *DetectionTrack {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("detectionTrackForID:"), detectionID)
 	return DetectionTrackFromID(_r)
 }
 
-// A detection track representing all detections that would be chosen by a given decision.
+// DetectionTrackForDecision a detection track representing all detections that would be chosen by a given decision.
 func (x *Script) DetectionTrackForDecision(decision *Decision) *DetectionTrack {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("detectionTrackForDecision:"), objref.IDOf(decision))
 	return DetectionTrackFromID(_r)
 }
 
-// Add a new user decision. Replaces an existing user decision if the times are identical. Adding a decision can fail if the decision focuses on an detection or group that does not exist or if its time is not within the time range of the cinematic script. - Returns: whether adding was successful
+// AddUserDecision add a new user decision. Replaces an existing user decision if the times are identical. Adding a decision can fail if the decision focuses on an detection or group that does not exist or if its time is not within the time range of the cinematic script. - Returns: whether adding was successful
 func (x *Script) AddUserDecision(decision *Decision) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addUserDecision:"), objref.IDOf(decision))
 	return _r
 }
 
-// Remove an existing user decision. User decisions added to the script or those made at recording time (by tapping during recording) can be removed. Decisions that are not user decisions cannot be removed. - Returns: whether removal was successful
+// RemoveUserDecision remove an existing user decision. User decisions added to the script or those made at recording time (by tapping during recording) can be removed. Decisions that are not user decisions cannot be removed. - Returns: whether removal was successful
 func (x *Script) RemoveUserDecision(decision *Decision) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeUserDecision:"), objref.IDOf(decision))
 	return _r
 }
 
-// Remove all user decisions and revert to base decisions only.
+// RemoveAllUserDecisions remove all user decisions and revert to base decisions only.
 func (x *Script) RemoveAllUserDecisions() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllUserDecisions"))
 }
 
-// Add user created detection track. - Returns: the detectionID assigned to the added track, which can be used for later lookup or decision creation.
+// AddDetectionTrack add user created detection track. - Returns: the detectionID assigned to the added track, which can be used for later lookup or decision creation.
 func (x *Script) AddDetectionTrack(detectionTrack *DetectionTrack) int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("addDetectionTrack:"), objref.IDOf(detectionTrack))
 	return _r
 }
 
-// Remove user created detection track. Tracks created at recording time cannot be removed. - Returns: whether removal was successful
+// RemoveDetectionTrack remove user created detection track. Tracks created at recording time cannot be removed. - Returns: whether removal was successful
 func (x *Script) RemoveDetectionTrack(detectionTrack *DetectionTrack) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeDetectionTrack:"), objref.IDOf(detectionTrack))
 	return _r
 }
 
-// The f/number to apply to the entire movie, initially set to that of the recorded movie. Pass this to the rendering session in the rendering frame attributes to match the selected aperture. Change this property when the user selects a different aperture for the edited movie. Changes to this property are reflected in the script changes for later restoration.
+// FNumber the f/number to apply to the entire movie, initially set to that of the recorded movie. Pass this to the rendering session in the rendering frame attributes to match the selected aperture. Change this property when the user selects a different aperture for the edited movie. Changes to this property are reflected in the script changes for later restoration.
 func (x *Script) FNumber() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("fNumber"))
 	return _r
 }
 
+// SetFNumber wraps the corresponding Objective-C method.
 func (x *Script) SetFNumber(fNumber float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFNumber:"), fNumber)
 }
 
-// All detection tracks that have been added since recording.
+// AddedDetectionTracks all detection tracks that have been added since recording.
 //
 // AddedDetectionTracks returns the collection as a Go slice.
 func (x *Script) AddedDetectionTracks() []*DetectionTrack {

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes the characteristics of a physical surface.
-//
 // ShapeElement is an idiomatic wrapper over the Objective-C class PHASEShapeElement.
+//
+// An object that describes the characteristics of a physical surface.
 type ShapeElement struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ShapeElementFromID(id objc.ID) *ShapeElement {
 	if id == 0 {
 		return nil
 	}
-	x := &ShapeElement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ShapeElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func shapeElementAdopt(id objc.ID) *ShapeElement {
 	if id == 0 {
 		return nil
 	}
-	x := &ShapeElement{Handle: objref.Wrap(id)}
+	x := &ShapeElement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *ShapeElement) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ShapeElement) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewShapeElement creates a new ShapeElement.
 func NewShapeElement() *ShapeElement {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHASEShapeElement")), objc.RegisterName("new"))
 	return shapeElementAdopt(_id)
 }
 
-// The shape's material defines the acoustical properties of this element.
-//
-// WithMaterial sets material and returns the receiver so calls can be chained.
+// WithMaterial the shape's material defines the acoustical properties of this element.
 func (x *ShapeElement) WithMaterial(material *Material) *ShapeElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterial:"), objref.IDOf(material))
 	return x
 }
 
+// Material wraps the corresponding Objective-C method.
 func (x *ShapeElement) Material() *Material {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("material"))
 	return MaterialFromID(_r)
 }
 
+// SetMaterial wraps the corresponding Objective-C method.
 func (x *ShapeElement) SetMaterial(material *Material) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterial:"), objref.IDOf(material))
 }

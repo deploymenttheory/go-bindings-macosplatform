@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that relays device discovery events from the extension to the system.
-//
 // DDDiscoverySession is an idiomatic wrapper over the Objective-C class DDDiscoverySession.
+//
+// An object that relays device discovery events from the extension to the system.
 type DDDiscoverySession struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DDDiscoverySessionFromID(id objc.ID) *DDDiscoverySession {
 	if id == 0 {
 		return nil
 	}
-	x := &DDDiscoverySession{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DDDiscoverySession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func dDDiscoverySessionAdopt(id objc.ID) *DDDiscoverySession {
 	if id == 0 {
 		return nil
 	}
-	x := &DDDiscoverySession{Handle: objref.Wrap(id)}
+	x := &DDDiscoverySession{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *DDDiscoverySession) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DDDiscoverySession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDDDiscoverySession creates a new DDDiscoverySession.
 func NewDDDiscoverySession() *DDDiscoverySession {
 	_id := objc.Send[objc.ID](objc.ID(_class("DDDiscoverySession")), objc.RegisterName("new"))
 	return dDDiscoverySessionAdopt(_id)
 }
 
-// Reports an event to the system.
+// ReportEvent reports an event to the system.
 func (x *DDDiscoverySession) ReportEvent(inEvent *DDDeviceEvent) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reportEvent:"), objref.IDOf(inEvent))
 }

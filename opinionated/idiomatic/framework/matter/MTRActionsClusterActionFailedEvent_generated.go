@@ -23,7 +23,8 @@ func MTRActionsClusterActionFailedEventFromID(id objc.ID) *MTRActionsClusterActi
 	if id == 0 {
 		return nil
 	}
-	x := &MTRActionsClusterActionFailedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRActionsClusterActionFailedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRActionsClusterActionFailedEventAdopt(id objc.ID) *MTRActionsClusterActio
 	if id == 0 {
 		return nil
 	}
-	x := &MTRActionsClusterActionFailedEvent{Handle: objref.Wrap(id)}
+	x := &MTRActionsClusterActionFailedEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,68 +58,82 @@ func (x *MTRActionsClusterActionFailedEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRActionsClusterActionFailedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRActionsClusterActionFailedEvent creates a new MTRActionsClusterActionFailedEvent.
 func NewMTRActionsClusterActionFailedEvent() *MTRActionsClusterActionFailedEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRActionsClusterActionFailedEvent")), objc.RegisterName("new"))
 	return mTRActionsClusterActionFailedEventAdopt(_id)
 }
 
-// WithActionID sets actionID and returns the receiver so calls can be chained.
+// WithActionID sets the property and returns the receiver so calls can be chained.
 func (x *MTRActionsClusterActionFailedEvent) WithActionID(actionID obj.Object) *MTRActionsClusterActionFailedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 	return x
 }
 
-// WithInvokeID sets invokeID and returns the receiver so calls can be chained.
+// WithInvokeID sets the property and returns the receiver so calls can be chained.
 func (x *MTRActionsClusterActionFailedEvent) WithInvokeID(invokeID obj.Object) *MTRActionsClusterActionFailedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
 	return x
 }
 
-// WithNewState sets newState and returns the receiver so calls can be chained.
+// WithNewState sets the property and returns the receiver so calls can be chained.
 func (x *MTRActionsClusterActionFailedEvent) WithNewState(newState obj.Object) *MTRActionsClusterActionFailedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewState:"), objref.IDOf(newState))
 	return x
 }
 
-// WithError sets error_ and returns the receiver so calls can be chained.
+// WithError sets the property and returns the receiver so calls can be chained.
 func (x *MTRActionsClusterActionFailedEvent) WithError(error_ obj.Object) *MTRActionsClusterActionFailedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setError:"), objref.IDOf(error_))
 	return x
 }
 
+// ActionID wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterActionFailedEvent) ActionID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actionID"))
 	return obj.Wrap(_r)
 }
 
+// SetActionID wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterActionFailedEvent) SetActionID(actionID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 }
 
+// InvokeID wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterActionFailedEvent) InvokeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invokeID"))
 	return obj.Wrap(_r)
 }
 
+// SetInvokeID wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterActionFailedEvent) SetInvokeID(invokeID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
 }
 
+// GetNewState wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterActionFailedEvent) GetNewState() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewState"))
 	return obj.Wrap(_r)
 }
 
+// SetNewState wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterActionFailedEvent) SetNewState(newState obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewState:"), objref.IDOf(newState))
 }
 
+// Error wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterActionFailedEvent) Error() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("error"))
 	return obj.Wrap(_r)
 }
 
+// SetError wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterActionFailedEvent) SetError(error_ obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setError:"), objref.IDOf(error_))
 }

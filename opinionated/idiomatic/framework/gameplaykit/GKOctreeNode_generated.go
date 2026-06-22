@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A helper class for managing the objects you organize in an octree.
-//
 // OctreeNode is an idiomatic wrapper over the Objective-C class GKOctreeNode.
+//
+// A helper class for managing the objects you organize in an octree.
 type OctreeNode struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func OctreeNodeFromID(id objc.ID) *OctreeNode {
 	if id == 0 {
 		return nil
 	}
-	x := &OctreeNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OctreeNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func octreeNodeAdopt(id objc.ID) *OctreeNode {
 	if id == 0 {
 		return nil
 	}
-	x := &OctreeNode{Handle: objref.Wrap(id)}
+	x := &OctreeNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *OctreeNode) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *OctreeNode) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OctreeNode) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewOctreeNode creates a new OctreeNode.

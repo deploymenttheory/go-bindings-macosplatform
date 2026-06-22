@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration object you use to create a multi-head attention layer.
-//
 // MultiheadAttentionDescriptor is an idiomatic wrapper over the Objective-C class MLCMultiheadAttentionDescriptor.
+//
+// A configuration object you use to create a multi-head attention layer.
 type MultiheadAttentionDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MultiheadAttentionDescriptorFromID(id objc.ID) *MultiheadAttentionDescripto
 	if id == 0 {
 		return nil
 	}
-	x := &MultiheadAttentionDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MultiheadAttentionDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func multiheadAttentionDescriptorAdopt(id objc.ID) *MultiheadAttentionDescriptor
 	if id == 0 {
 		return nil
 	}
-	x := &MultiheadAttentionDescriptor{Handle: objref.Wrap(id)}
+	x := &MultiheadAttentionDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,55 +60,61 @@ func (x *MultiheadAttentionDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MultiheadAttentionDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMultiheadAttentionDescriptor creates a new MultiheadAttentionDescriptor.
 func NewMultiheadAttentionDescriptor() *MultiheadAttentionDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLCMultiheadAttentionDescriptor")), objc.RegisterName("new"))
 	return multiheadAttentionDescriptorAdopt(_id)
 }
 
-// model or embedding dimension
+// ModelDimension model or embedding dimension
 func (x *MultiheadAttentionDescriptor) ModelDimension() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("modelDimension"))
 	return _r
 }
 
-// total dimension of key space, Default = modelDimension
+// KeyDimension total dimension of key space, Default = modelDimension
 func (x *MultiheadAttentionDescriptor) KeyDimension() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("keyDimension"))
 	return _r
 }
 
-// total dimension of value space, Default = modelDimension
+// ValueDimension total dimension of value space, Default = modelDimension
 func (x *MultiheadAttentionDescriptor) ValueDimension() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("valueDimension"))
 	return _r
 }
 
-// number of parallel attention heads
+// HeadCount number of parallel attention heads
 func (x *MultiheadAttentionDescriptor) HeadCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("headCount"))
 	return _r
 }
 
-// a droupout layer applied to the output projection weights. Default = 0.0
+// Dropout a droupout layer applied to the output projection weights. Default = 0.0
 func (x *MultiheadAttentionDescriptor) Dropout() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("dropout"))
 	return _r
 }
 
-// if true, bias is used for query/key/value/output projections. Default = true
+// HasBiases if true, bias is used for query/key/value/output projections. Default = true
 func (x *MultiheadAttentionDescriptor) HasBiases() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasBiases"))
 	return _r
 }
 
-// if true, an array of biases is added to key and value respectively. Default = false
+// HasAttentionBiases if true, an array of biases is added to key and value respectively. Default = false
 func (x *MultiheadAttentionDescriptor) HasAttentionBiases() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasAttentionBiases"))
 	return _r
 }
 
-// if true, a row of zeroes is added to projected key and value. Default = false
+// AddsZeroAttention if true, a row of zeroes is added to projected key and value. Default = false
 func (x *MultiheadAttentionDescriptor) AddsZeroAttention() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addsZeroAttention"))
 	return _r

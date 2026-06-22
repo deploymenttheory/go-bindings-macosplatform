@@ -14,9 +14,11 @@ import (
 	"unsafe"
 )
 
-// An abstract class that defines the common properties for all Address Book records.
-//
 // Record is an idiomatic wrapper over the Objective-C class ABRecord.
+//
+// Record is an abstract base — you do not construct it directly. Construct one of [Group], [Person] and pass it where a Record is accepted.
+//
+// An abstract class that defines the common properties for all Address Book records.
 type Record struct {
 	objref.Handle
 }
@@ -27,7 +29,8 @@ func RecordFromID(id objc.ID) *Record {
 	if id == 0 {
 		return nil
 	}
-	x := &Record{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Record{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +43,8 @@ func recordAdopt(id objc.ID) *Record {
 	if id == 0 {
 		return nil
 	}
-	x := &Record{Handle: objref.Wrap(id)}
+	x := &Record{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,28 +64,26 @@ func (x *Record) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewRecord creates a new Record.
-func NewRecord() *Record {
-	_id := objc.Send[objc.ID](objc.ID(_class("ABRecord")), objc.RegisterName("new"))
-	return recordAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Record) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Initializes a record using the given address book.
-//
-// NewRecordWithAddressBook creates a new Record.
+// NewRecordWithAddressBook initializes a record using the given address book.
 func NewRecordWithAddressBook(addressBook *AddressBook) *Record {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ABRecord")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAddressBook:"), objref.IDOf(addressBook))
 	return recordAdopt(_id)
 }
 
-// Returns the value of a given property for a record.
+// ValueForProperty returns the value of a given property for a record.
 func (x *Record) ValueForProperty(property string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForProperty:"), purego.NSString(property))
 	return obj.Wrap(_r)
 }
 
-// Sets the value of a given property for a record, returning error information.
+// SetValueForProperty sets the value of a given property for a record, returning error information.
 func (x *Record) SetValueForProperty(value obj.Object, property string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setValue:forProperty:error:"), objref.IDOf(value), purego.NSString(property), unsafe.Pointer(&_nsErr))
@@ -91,18 +93,19 @@ func (x *Record) SetValueForProperty(value obj.Object, property string) error {
 	return nil
 }
 
-// Removes the value for a given property.
+// RemoveValueForProperty removes the value for a given property.
 func (x *Record) RemoveValueForProperty(property string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeValueForProperty:"), purego.NSString(property))
 	return _r
 }
 
-// Returns whether a record is read-only.
+// IsReadOnly returns whether a record is read-only.
 func (x *Record) IsReadOnly() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadOnly"))
 	return _r
 }
 
+// UniqueId wraps the corresponding Objective-C method.
 func (x *Record) UniqueId() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniqueId"))
 	if _r == 0 {
@@ -111,6 +114,7 @@ func (x *Record) UniqueId() string {
 	return purego.GoString(_r)
 }
 
+// DisplayName wraps the corresponding Objective-C method.
 func (x *Record) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
 	if _r == 0 {
@@ -131,3 +135,10 @@ type Recordable interface {
 }
 
 var _ Recordable = (*Record)(nil)
+
+// isRecord marks Record — and, by embedding promotion, its
+// subclasses — as a member of the Record hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Record) isRecord() {}
+
+var _ RecordProvider = (*Record)(nil)

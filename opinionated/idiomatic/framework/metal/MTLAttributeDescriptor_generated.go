@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A descriptor of an argument’s format and where its data is in memory.
-//
 // AttributeDescriptor is an idiomatic wrapper over the Objective-C class MTLAttributeDescriptor.
+//
+// A descriptor of an argument’s format and where its data is in memory.
 type AttributeDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AttributeDescriptorFromID(id objc.ID) *AttributeDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &AttributeDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AttributeDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func attributeDescriptorAdopt(id objc.ID) *AttributeDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &AttributeDescriptor{Handle: objref.Wrap(id)}
+	x := &AttributeDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,59 +60,65 @@ func (x *AttributeDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AttributeDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAttributeDescriptor creates a new AttributeDescriptor.
 func NewAttributeDescriptor() *AttributeDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLAttributeDescriptor")), objc.RegisterName("new"))
 	return attributeDescriptorAdopt(_id)
 }
 
-// The format of the attribute’s data.
-//
-// WithFormat sets format and returns the receiver so calls can be chained.
+// WithFormat the format of the attribute’s data.
 func (x *AttributeDescriptor) WithFormat(format AttributeFormat) *AttributeDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormat:"), format)
 	return x
 }
 
-// The offset, in bytes, from the start of the buffer that contains the attribute data to the start of the data itself.
-//
-// WithOffset sets offset and returns the receiver so calls can be chained.
+// WithOffset the offset, in bytes, from the start of the buffer that contains the attribute data to the start of the data itself.
 func (x *AttributeDescriptor) WithOffset(offset int) *AttributeDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// The index in the buffer argument table for the buffer that contains the data for this attribute.
-//
-// WithBufferIndex sets bufferIndex and returns the receiver so calls can be chained.
+// WithBufferIndex the index in the buffer argument table for the buffer that contains the data for this attribute.
 func (x *AttributeDescriptor) WithBufferIndex(bufferIndex int) *AttributeDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferIndex:"), bufferIndex)
 	return x
 }
 
+// Format wraps the corresponding Objective-C method.
 func (x *AttributeDescriptor) Format() AttributeFormat {
 	_r := objc.Send[AttributeFormat](objref.IDOf(x), objc.RegisterName("format"))
 	return _r
 }
 
+// SetFormat wraps the corresponding Objective-C method.
 func (x *AttributeDescriptor) SetFormat(format AttributeFormat) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormat:"), format)
 }
 
+// Offset wraps the corresponding Objective-C method.
 func (x *AttributeDescriptor) Offset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
 	return _r
 }
 
+// SetOffset wraps the corresponding Objective-C method.
 func (x *AttributeDescriptor) SetOffset(offset int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 }
 
+// BufferIndex wraps the corresponding Objective-C method.
 func (x *AttributeDescriptor) BufferIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bufferIndex"))
 	return _r
 }
 
+// SetBufferIndex wraps the corresponding Objective-C method.
 func (x *AttributeDescriptor) SetBufferIndex(bufferIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferIndex:"), bufferIndex)
 }

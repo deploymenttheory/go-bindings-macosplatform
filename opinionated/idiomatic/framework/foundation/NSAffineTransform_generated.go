@@ -6,15 +6,16 @@ package foundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A graphics coordinate transformation.
-//
 // AffineTransform is an idiomatic wrapper over the Objective-C class NSAffineTransform.
+//
+// A graphics coordinate transformation.
 type AffineTransform struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func AffineTransformFromID(id objc.ID) *AffineTransform {
 	if id == 0 {
 		return nil
 	}
-	x := &AffineTransform{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AffineTransform{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func affineTransformAdopt(id objc.ID) *AffineTransform {
 	if id == 0 {
 		return nil
 	}
-	x := &AffineTransform{Handle: objref.Wrap(id)}
+	x := &AffineTransform{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,65 +61,81 @@ func (x *AffineTransform) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AffineTransform) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAffineTransform creates a new AffineTransform.
 func NewAffineTransform() *AffineTransform {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSAffineTransform")), objc.RegisterName("new"))
 	return affineTransformAdopt(_id)
 }
 
-// Initializes the receiver’s matrix using another transform object.
-//
-// NewAffineTransformWithTransform creates a new AffineTransform.
+// NewAffineTransformWithTransform initializes the receiver’s matrix using another transform object.
 func NewAffineTransformWithTransform(transform *AffineTransform) *AffineTransform {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAffineTransform")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTransform:"), objref.IDOf(transform))
 	return affineTransformAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *AffineTransform) WithScriptingProperties(scriptingProperties obj.Object) *AffineTransform {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Applies the specified translation factors to the receiver’s transformation matrix.
+// TranslateXByYBy applies the specified translation factors to the receiver’s transformation matrix.
 func (x *AffineTransform) TranslateXByYBy(deltaX float64, deltaY float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("translateXBy:yBy:"), deltaX, deltaY)
 }
 
-// Applies a rotation factor (measured in degrees) to the receiver’s transformation matrix.
+// RotateByDegrees applies a rotation factor (measured in degrees) to the receiver’s transformation matrix.
 func (x *AffineTransform) RotateByDegrees(angle float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rotateByDegrees:"), angle)
 }
 
-// Applies a rotation factor (measured in radians) to the receiver’s transformation matrix.
+// RotateByRadians applies a rotation factor (measured in radians) to the receiver’s transformation matrix.
 func (x *AffineTransform) RotateByRadians(angle float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rotateByRadians:"), angle)
 }
 
-// Applies the specified scaling factor along both x and y axes to the receiver’s transformation matrix.
+// ScaleBy applies the specified scaling factor along both x and y axes to the receiver’s transformation matrix.
 func (x *AffineTransform) ScaleBy(scale float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scaleBy:"), scale)
 }
 
-// Applies scaling factors to each axis of the receiver’s transformation matrix.
+// ScaleXByYBy applies scaling factors to each axis of the receiver’s transformation matrix.
 func (x *AffineTransform) ScaleXByYBy(scaleX float64, scaleY float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scaleXBy:yBy:"), scaleX, scaleY)
 }
 
-// Replaces the receiver’s matrix with its inverse matrix.
+// Invert replaces the receiver’s matrix with its inverse matrix.
 func (x *AffineTransform) Invert() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invert"))
 }
 
-// Appends the specified matrix to the receiver’s matrix.
+// AppendTransform appends the specified matrix to the receiver’s matrix.
 func (x *AffineTransform) AppendTransform(transform *AffineTransform) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendTransform:"), objref.IDOf(transform))
 }
 
-// Prepends the specified matrix to the receiver’s matrix.
+// PrependTransform prepends the specified matrix to the receiver’s matrix.
 func (x *AffineTransform) PrependTransform(transform *AffineTransform) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prependTransform:"), objref.IDOf(transform))
+}
+
+// TransformPoint applies the receiver’s transform to the specified point and returns the result.
+func (x *AffineTransform) TransformPoint(aPoint corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("transformPoint:"), aPoint)
+	return _r
+}
+
+// TransformSize applies the receiver’s transform to the specified size and returns the results.
+func (x *AffineTransform) TransformSize(aSize corefoundation.CGSize) corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("transformSize:"), aSize)
+	return _r
 }
 
 // AffineTransformable is the interface implemented by [AffineTransform], for mocking and DI.
@@ -131,6 +150,8 @@ type AffineTransformable interface {
 	Invert()
 	AppendTransform(transform *AffineTransform)
 	PrependTransform(transform *AffineTransform)
+	TransformPoint(aPoint corefoundation.CGPoint) corefoundation.CGPoint
+	TransformSize(aSize corefoundation.CGSize) corefoundation.CGSize
 }
 
 var _ AffineTransformable = (*AffineTransform)(nil)

@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// A view controller that hosts remote views provided by an app extension.
-//
 // HostViewController is an idiomatic wrapper over the Objective-C class EXHostViewController.
+//
+// A view controller that hosts remote views provided by an app extension.
 type HostViewController struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func HostViewControllerFromID(id objc.ID) *HostViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &HostViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HostViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func hostViewControllerAdopt(id objc.ID) *HostViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &HostViewController{Handle: objref.Wrap(id)}
+	x := &HostViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,22 +62,26 @@ func (x *HostViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HostViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewHostViewController creates a new HostViewController.
 func NewHostViewController() *HostViewController {
 	_id := objc.Send[objc.ID](objc.ID(_class("EXHostViewController")), objc.RegisterName("new"))
 	return hostViewControllerAdopt(_id)
 }
 
-// The view to display when the view controller has no app extension content to display.
-//
-// WithPlaceholderView sets placeholderView and returns the receiver so calls can be chained.
+// WithPlaceholderView the view to display when the view controller has no app extension content to display.
 func (x *HostViewController) WithPlaceholderView(placeholderView obj.Object) *HostViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderView:"), objref.IDOf(placeholderView))
 	return x
 }
 
-// Initiates an XPC connection to the app extension’s scene. Call this method from your delegate's “EXHostViewControllerDelegate/hostViewControllerDidActivate:“ method to initiate a scene-specific connection to the app extension. - Returns: An object representing the connection.
-func (x *HostViewController) MakeXPCConnectionWithError() (obj.Object, error) {
+// MakeXPCConnectionWithError initiates an XPC connection to the app extension’s scene. Call this method from your delegate's “EXHostViewControllerDelegate/hostViewControllerDidActivate:“ method to initiate a scene-specific connection to the app extension. - Returns: An object representing the connection.
+func (x *HostViewController) MakeXPCConnectionWithError() (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeXPCConnectionWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -84,12 +90,13 @@ func (x *HostViewController) MakeXPCConnectionWithError() (obj.Object, error) {
 	return obj.Wrap(_r), nil
 }
 
-// The view to display when the view controller has no app extension content to display.
+// PlaceholderView the view to display when the view controller has no app extension content to display.
 func (x *HostViewController) PlaceholderView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderView"))
 	return obj.Wrap(_r)
 }
 
+// SetPlaceholderView wraps the corresponding Objective-C method.
 func (x *HostViewController) SetPlaceholderView(placeholderView obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderView:"), objref.IDOf(placeholderView))
 }
@@ -98,7 +105,7 @@ func (x *HostViewController) SetPlaceholderView(placeholderView obj.Object) {
 type HostViewControllerable interface {
 	obj.Object
 	WithPlaceholderView(placeholderView obj.Object) *HostViewController
-	MakeXPCConnectionWithError() (obj.Object, error)
+	MakeXPCConnectionWithError() (result obj.Object, err error)
 	PlaceholderView() obj.Object
 	SetPlaceholderView(placeholderView obj.Object)
 }

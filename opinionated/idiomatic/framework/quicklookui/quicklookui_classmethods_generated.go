@@ -8,13 +8,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns the shared Quick Look preview panel instance.
+// SharedPreviewPanel returns the shared Quick Look preview panel instance.
 func SharedPreviewPanel() *PreviewPanel {
 	_r := objc.Send[objc.ID](objc.ID(_class("QLPreviewPanel")), objc.RegisterName("sharedPreviewPanel"))
 	return PreviewPanelFromID(_r)
 }
 
-// Returns a Boolean value that indicates whether the system has created a shared Quick Look preview panel.
+// SharedPreviewPanelExists returns a Boolean value that indicates whether the system has created a shared Quick Look preview panel.
 func SharedPreviewPanelExists() bool {
 	_r := objc.Send[bool](objc.ID(_class("QLPreviewPanel")), objc.RegisterName("sharedPreviewPanelExists"))
 	return _r

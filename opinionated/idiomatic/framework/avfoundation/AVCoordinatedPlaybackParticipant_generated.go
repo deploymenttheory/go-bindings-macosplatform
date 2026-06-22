@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a participant in a coordinated playback session.
-//
 // CoordinatedPlaybackParticipant is an idiomatic wrapper over the Objective-C class AVCoordinatedPlaybackParticipant.
+//
+// An object that represents a participant in a coordinated playback session.
 type CoordinatedPlaybackParticipant struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CoordinatedPlaybackParticipantFromID(id objc.ID) *CoordinatedPlaybackPartic
 	if id == 0 {
 		return nil
 	}
-	x := &CoordinatedPlaybackParticipant{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CoordinatedPlaybackParticipant{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func coordinatedPlaybackParticipantAdopt(id objc.ID) *CoordinatedPlaybackPartici
 	if id == 0 {
 		return nil
 	}
-	x := &CoordinatedPlaybackParticipant{Handle: objref.Wrap(id)}
+	x := &CoordinatedPlaybackParticipant{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *CoordinatedPlaybackParticipant) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CoordinatedPlaybackParticipant) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCoordinatedPlaybackParticipant creates a new CoordinatedPlaybackParticipant.
 func NewCoordinatedPlaybackParticipant() *CoordinatedPlaybackParticipant {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVCoordinatedPlaybackParticipant")), objc.RegisterName("new"))
 	return coordinatedPlaybackParticipantAdopt(_id)
 }
 
-// The reason, if any, this participant is currently not participating in coordinated playback.
+// SuspensionReasons the reason, if any, this participant is currently not participating in coordinated playback.
 //
 // SuspensionReasons returns the collection as a Go slice.
 func (x *CoordinatedPlaybackParticipant) SuspensionReasons() []obj.Object {
@@ -72,13 +80,13 @@ func (x *CoordinatedPlaybackParticipant) SuspensionReasons() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// YES if the participant is ready to play.
+// IsReadyToPlay YES if the participant is ready to play.
 func (x *CoordinatedPlaybackParticipant) IsReadyToPlay() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadyToPlay"))
 	return _r
 }
 
-// A unique id for the participant. Use this identifier to distinguish participants.
+// Identifier a unique id for the participant. Use this identifier to distinguish participants.
 func (x *CoordinatedPlaybackParticipant) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)

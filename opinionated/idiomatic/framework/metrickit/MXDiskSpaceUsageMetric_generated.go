@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing metrics about your app’s disk space usage.
-//
 // DiskSpaceUsageMetric is an idiomatic wrapper over the Objective-C class MXDiskSpaceUsageMetric.
+//
+// It embeds [Metric], promoting that type's methods.
+//
+// An object representing metrics about your app’s disk space usage.
 type DiskSpaceUsageMetric struct {
-	objref.Handle
+	Metric
 }
 
 // DiskSpaceUsageMetricFromID adopts an existing Objective-C object as a DiskSpaceUsageMetric
@@ -25,7 +26,8 @@ func DiskSpaceUsageMetricFromID(id objc.ID) *DiskSpaceUsageMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &DiskSpaceUsageMetric{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DiskSpaceUsageMetric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func diskSpaceUsageMetricAdopt(id objc.ID) *DiskSpaceUsageMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &DiskSpaceUsageMetric{Handle: objref.Wrap(id)}
+	x := &DiskSpaceUsageMetric{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DiskSpaceUsageMetric) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DiskSpaceUsageMetric) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DiskSpaceUsageMetric) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDiskSpaceUsageMetric creates a new DiskSpaceUsageMetric.
@@ -64,49 +52,49 @@ func NewDiskSpaceUsageMetric() *DiskSpaceUsageMetric {
 	return diskSpaceUsageMetricAdopt(_id)
 }
 
-// Total fixed size used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
+// TotalBinaryFileSize total fixed size used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
 func (x *DiskSpaceUsageMetric) TotalBinaryFileSize() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalBinaryFileSize"))
 	return obj.Wrap(_r)
 }
 
-// Total count of fixed files owned by the app.
+// TotalBinaryFileCount total count of fixed files owned by the app.
 func (x *DiskSpaceUsageMetric) TotalBinaryFileCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("totalBinaryFileCount"))
 	return _r
 }
 
-// Total data file size used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
+// TotalDataFileSize total data file size used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
 func (x *DiskSpaceUsageMetric) TotalDataFileSize() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalDataFileSize"))
 	return obj.Wrap(_r)
 }
 
-// Total count of data files owned by the app.
+// TotalDataFileCount total count of data files owned by the app.
 func (x *DiskSpaceUsageMetric) TotalDataFileCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("totalDataFileCount"))
 	return _r
 }
 
-// Total file size contained within the apps cache folder. Dimensioned as NSUnitInformationStorage, base unit is bytes.
+// TotalCacheFolderSize total file size contained within the apps cache folder. Dimensioned as NSUnitInformationStorage, base unit is bytes.
 func (x *DiskSpaceUsageMetric) TotalCacheFolderSize() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalCacheFolderSize"))
 	return obj.Wrap(_r)
 }
 
-// Total clone size used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
+// TotalCloneSize total clone size used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
 func (x *DiskSpaceUsageMetric) TotalCloneSize() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalCloneSize"))
 	return obj.Wrap(_r)
 }
 
-// Total disk space used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
+// TotalDiskSpaceUsedSize total disk space used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
 func (x *DiskSpaceUsageMetric) TotalDiskSpaceUsedSize() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalDiskSpaceUsedSize"))
 	return obj.Wrap(_r)
 }
 
-// Total disk space capacity of the device Dimensioned as NSUnitInformationStorage, base unit is bytes.
+// TotalDiskSpaceCapacity total disk space capacity of the device Dimensioned as NSUnitInformationStorage, base unit is bytes.
 func (x *DiskSpaceUsageMetric) TotalDiskSpaceCapacity() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalDiskSpaceCapacity"))
 	return obj.Wrap(_r)
@@ -126,3 +114,5 @@ type DiskSpaceUsageMetricable interface {
 }
 
 var _ DiskSpaceUsageMetricable = (*DiskSpaceUsageMetric)(nil)
+
+var _ MetricProvider = (*DiskSpaceUsageMetric)(nil)

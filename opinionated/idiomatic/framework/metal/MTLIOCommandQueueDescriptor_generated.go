@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration template you use to create a new input/output command queue.
-//
 // IOCommandQueueDescriptor is an idiomatic wrapper over the Objective-C class MTLIOCommandQueueDescriptor.
+//
+// A configuration template you use to create a new input/output command queue.
 type IOCommandQueueDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func IOCommandQueueDescriptorFromID(id objc.ID) *IOCommandQueueDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &IOCommandQueueDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IOCommandQueueDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func iOCommandQueueDescriptorAdopt(id objc.ID) *IOCommandQueueDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &IOCommandQueueDescriptor{Handle: objref.Wrap(id)}
+	x := &IOCommandQueueDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,80 +60,82 @@ func (x *IOCommandQueueDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IOCommandQueueDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewIOCommandQueueDescriptor creates a new IOCommandQueueDescriptor.
 func NewIOCommandQueueDescriptor() *IOCommandQueueDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLIOCommandQueueDescriptor")), objc.RegisterName("new"))
 	return iOCommandQueueDescriptorAdopt(_id)
 }
 
-// Sets the largest number of outstanding input/output command buffers a queue can have at any point in time.
-//
-// WithMaxCommandBufferCount sets maxCommandBufferCount and returns the receiver so calls can be chained.
+// WithMaxCommandBufferCount sets the largest number of outstanding input/output command buffers a queue can have at any point in time.
 func (x *IOCommandQueueDescriptor) WithMaxCommandBufferCount(maxCommandBufferCount int) *IOCommandQueueDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCommandBufferCount:"), maxCommandBufferCount)
 	return x
 }
 
-// Configures the priority for a new input/output command queue.
-//
-// WithPriority sets priority and returns the receiver so calls can be chained.
+// WithPriority configures the priority for a new input/output command queue.
 func (x *IOCommandQueueDescriptor) WithPriority(priority IOPriority) *IOCommandQueueDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
 	return x
 }
 
-// Configures the queue type for a new input/output command queue.
-//
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithType configures the queue type for a new input/output command queue.
 func (x *IOCommandQueueDescriptor) WithType(type_ IOCommandQueueType) *IOCommandQueueDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
-// Sets the largest number of individual commands that an input/output command queue can run at a time.
-//
-// WithMaxCommandsInFlight sets maxCommandsInFlight and returns the receiver so calls can be chained.
+// WithMaxCommandsInFlight sets the largest number of individual commands that an input/output command queue can run at a time.
 func (x *IOCommandQueueDescriptor) WithMaxCommandsInFlight(maxCommandsInFlight int) *IOCommandQueueDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCommandsInFlight:"), maxCommandsInFlight)
 	return x
 }
 
-// The maximum number of commandBuffers that can be in flight at a given time for the queue.
+// MaxCommandBufferCount the maximum number of commandBuffers that can be in flight at a given time for the queue.
 func (x *IOCommandQueueDescriptor) MaxCommandBufferCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxCommandBufferCount"))
 	return _r
 }
 
+// SetMaxCommandBufferCount wraps the corresponding Objective-C method.
 func (x *IOCommandQueueDescriptor) SetMaxCommandBufferCount(maxCommandBufferCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCommandBufferCount:"), maxCommandBufferCount)
 }
 
-// The priority of the commands executed by this queue.
+// Priority the priority of the commands executed by this queue.
 func (x *IOCommandQueueDescriptor) Priority() IOPriority {
 	_r := objc.Send[IOPriority](objref.IDOf(x), objc.RegisterName("priority"))
 	return _r
 }
 
+// SetPriority wraps the corresponding Objective-C method.
 func (x *IOCommandQueueDescriptor) SetPriority(priority IOPriority) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
 }
 
-// The type (serial or concurrent) of the queue.
+// Type the type (serial or concurrent) of the queue.
 func (x *IOCommandQueueDescriptor) Type() IOCommandQueueType {
 	_r := objc.Send[IOCommandQueueType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
+// SetType wraps the corresponding Objective-C method.
 func (x *IOCommandQueueDescriptor) SetType(type_ IOCommandQueueType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 }
 
-// The maximum number of IO commands that can be in flight at a given time for the queue. A zero value defaults to the system dependent maximum value, a smaller number can be provided to bound the utilization of the storage device.
+// MaxCommandsInFlight the maximum number of IO commands that can be in flight at a given time for the queue. A zero value defaults to the system dependent maximum value, a smaller number can be provided to bound the utilization of the storage device.
 func (x *IOCommandQueueDescriptor) MaxCommandsInFlight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxCommandsInFlight"))
 	return _r
 }
 
+// SetMaxCommandsInFlight wraps the corresponding Objective-C method.
 func (x *IOCommandQueueDescriptor) SetMaxCommandsInFlight(maxCommandsInFlight int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCommandsInFlight:"), maxCommandsInFlight)
 }

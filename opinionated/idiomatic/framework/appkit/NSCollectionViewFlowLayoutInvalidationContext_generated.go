@@ -6,17 +6,19 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that identifies the portions of a flow layout object that need to be updated.
-//
 // CollectionViewFlowLayoutInvalidationContext is an idiomatic wrapper over the Objective-C class NSCollectionViewFlowLayoutInvalidationContext.
+//
+// It embeds [CollectionViewLayoutInvalidationContext], promoting that type's methods.
+//
+// An object that identifies the portions of a flow layout object that need to be updated.
 type CollectionViewFlowLayoutInvalidationContext struct {
-	objref.Handle
+	CollectionViewLayoutInvalidationContext
 }
 
 // CollectionViewFlowLayoutInvalidationContextFromID adopts an existing Objective-C object as a CollectionViewFlowLayoutInvalidationContext
@@ -25,7 +27,8 @@ func CollectionViewFlowLayoutInvalidationContextFromID(id objc.ID) *CollectionVi
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionViewFlowLayoutInvalidationContext{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollectionViewFlowLayoutInvalidationContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func collectionViewFlowLayoutInvalidationContextAdopt(id objc.ID) *CollectionVie
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionViewFlowLayoutInvalidationContext{Handle: objref.Wrap(id)}
+	x := &CollectionViewFlowLayoutInvalidationContext{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CollectionViewFlowLayoutInvalidationContext) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CollectionViewFlowLayoutInvalidationContext) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CollectionViewFlowLayoutInvalidationContext) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCollectionViewFlowLayoutInvalidationContext creates a new CollectionViewFlowLayoutInvalidationContext.
@@ -64,36 +53,48 @@ func NewCollectionViewFlowLayoutInvalidationContext() *CollectionViewFlowLayoutI
 	return collectionViewFlowLayoutInvalidationContextAdopt(_id)
 }
 
-// A Boolean value indicating whether the flow layout object should fetch new size information from its delegate.
-//
-// WithInvalidateFlowLayoutDelegateMetrics sets invalidateFlowLayoutDelegateMetrics and returns the receiver so calls can be chained.
+// WithInvalidateFlowLayoutDelegateMetrics a Boolean value indicating whether the flow layout object should fetch new size information from its delegate.
 func (x *CollectionViewFlowLayoutInvalidationContext) WithInvalidateFlowLayoutDelegateMetrics(invalidateFlowLayoutDelegateMetrics bool) *CollectionViewFlowLayoutInvalidationContext {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInvalidateFlowLayoutDelegateMetrics:"), invalidateFlowLayoutDelegateMetrics)
 	return x
 }
 
-// A Boolean value indicating whether the flow layout object should invalidate its current attributes.
-//
-// WithInvalidateFlowLayoutAttributes sets invalidateFlowLayoutAttributes and returns the receiver so calls can be chained.
+// WithInvalidateFlowLayoutAttributes a Boolean value indicating whether the flow layout object should invalidate its current attributes.
 func (x *CollectionViewFlowLayoutInvalidationContext) WithInvalidateFlowLayoutAttributes(invalidateFlowLayoutAttributes bool) *CollectionViewFlowLayoutInvalidationContext {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInvalidateFlowLayoutAttributes:"), invalidateFlowLayoutAttributes)
 	return x
 }
 
+// WithContentOffsetAdjustment the delta value to add to the collection view’s content offset.
+func (x *CollectionViewFlowLayoutInvalidationContext) WithContentOffsetAdjustment(contentOffsetAdjustment corefoundation.CGPoint) *CollectionViewFlowLayoutInvalidationContext {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentOffsetAdjustment:"), contentOffsetAdjustment)
+	return x
+}
+
+// WithContentSizeAdjustment the delta value to add to the collection view’s content size.
+func (x *CollectionViewFlowLayoutInvalidationContext) WithContentSizeAdjustment(contentSizeAdjustment corefoundation.CGSize) *CollectionViewFlowLayoutInvalidationContext {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentSizeAdjustment:"), contentSizeAdjustment)
+	return x
+}
+
+// InvalidateFlowLayoutDelegateMetrics wraps the corresponding Objective-C method.
 func (x *CollectionViewFlowLayoutInvalidationContext) InvalidateFlowLayoutDelegateMetrics() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("invalidateFlowLayoutDelegateMetrics"))
 	return _r
 }
 
+// SetInvalidateFlowLayoutDelegateMetrics wraps the corresponding Objective-C method.
 func (x *CollectionViewFlowLayoutInvalidationContext) SetInvalidateFlowLayoutDelegateMetrics(invalidateFlowLayoutDelegateMetrics bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInvalidateFlowLayoutDelegateMetrics:"), invalidateFlowLayoutDelegateMetrics)
 }
 
+// InvalidateFlowLayoutAttributes wraps the corresponding Objective-C method.
 func (x *CollectionViewFlowLayoutInvalidationContext) InvalidateFlowLayoutAttributes() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("invalidateFlowLayoutAttributes"))
 	return _r
 }
 
+// SetInvalidateFlowLayoutAttributes wraps the corresponding Objective-C method.
 func (x *CollectionViewFlowLayoutInvalidationContext) SetInvalidateFlowLayoutAttributes(invalidateFlowLayoutAttributes bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInvalidateFlowLayoutAttributes:"), invalidateFlowLayoutAttributes)
 }
@@ -103,6 +104,8 @@ type CollectionViewFlowLayoutInvalidationContextable interface {
 	obj.Object
 	WithInvalidateFlowLayoutDelegateMetrics(invalidateFlowLayoutDelegateMetrics bool) *CollectionViewFlowLayoutInvalidationContext
 	WithInvalidateFlowLayoutAttributes(invalidateFlowLayoutAttributes bool) *CollectionViewFlowLayoutInvalidationContext
+	WithContentOffsetAdjustment(contentOffsetAdjustment corefoundation.CGPoint) *CollectionViewFlowLayoutInvalidationContext
+	WithContentSizeAdjustment(contentSizeAdjustment corefoundation.CGSize) *CollectionViewFlowLayoutInvalidationContext
 	InvalidateFlowLayoutDelegateMetrics() bool
 	SetInvalidateFlowLayoutDelegateMetrics(invalidateFlowLayoutDelegateMetrics bool)
 	InvalidateFlowLayoutAttributes() bool
@@ -110,3 +113,5 @@ type CollectionViewFlowLayoutInvalidationContextable interface {
 }
 
 var _ CollectionViewFlowLayoutInvalidationContextable = (*CollectionViewFlowLayoutInvalidationContext)(nil)
+
+var _ CollectionViewLayoutInvalidationContextProvider = (*CollectionViewFlowLayoutInvalidationContext)(nil)

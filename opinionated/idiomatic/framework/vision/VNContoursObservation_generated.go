@@ -9,16 +9,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object that represents the detected contours in an image.
-//
 // ContoursObservation is an idiomatic wrapper over the Objective-C class VNContoursObservation.
+//
+// It embeds [Observation], promoting that type's methods.
+//
+// An object that represents the detected contours in an image.
 type ContoursObservation struct {
-	objref.Handle
+	Observation
 }
 
 // ContoursObservationFromID adopts an existing Objective-C object as a ContoursObservation
@@ -27,7 +28,8 @@ func ContoursObservationFromID(id objc.ID) *ContoursObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &ContoursObservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContoursObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,24 +42,10 @@ func contoursObservationAdopt(id objc.ID) *ContoursObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &ContoursObservation{Handle: objref.Wrap(id)}
+	x := &ContoursObservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ContoursObservation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContoursObservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContoursObservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewContoursObservation creates a new ContoursObservation.
@@ -66,8 +54,8 @@ func NewContoursObservation() *ContoursObservation {
 	return contoursObservationAdopt(_id)
 }
 
-// Retrieves the contour object at the specified index, irrespective of hierarchy.
-func (x *ContoursObservation) ContourAtIndexError(contourIndex int) (*Contour, error) {
+// ContourAtIndexError retrieves the contour object at the specified index, irrespective of hierarchy.
+func (x *ContoursObservation) ContourAtIndexError(contourIndex int) (result *Contour, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contourAtIndex:error:"), contourIndex, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -76,8 +64,8 @@ func (x *ContoursObservation) ContourAtIndexError(contourIndex int) (*Contour, e
 	return ContourFromID(_r), nil
 }
 
-// Retrieves the contour object at the specified index path.
-func (x *ContoursObservation) ContourAtIndexPathError(indexPath obj.Object) (*Contour, error) {
+// ContourAtIndexPathError retrieves the contour object at the specified index path.
+func (x *ContoursObservation) ContourAtIndexPathError(indexPath obj.Object) (result *Contour, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contourAtIndexPath:error:"), objref.IDOf(indexPath), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -86,19 +74,19 @@ func (x *ContoursObservation) ContourAtIndexPathError(indexPath obj.Object) (*Co
 	return ContourFromID(_r), nil
 }
 
-// The total number of contours detected.
+// ContourCount the total number of contours detected.
 func (x *ContoursObservation) ContourCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("contourCount"))
 	return _r
 }
 
-// The total number of top-level contours detected.
+// TopLevelContourCount the total number of top-level contours detected.
 func (x *ContoursObservation) TopLevelContourCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("topLevelContourCount"))
 	return _r
 }
 
-// An array of the top level contours (i.e. contours that are not enclosed inside another contour),. This array constitutes the top of the contour hierarchy. Each contour object can be further iterated to determine its children.
+// TopLevelContours an array of the top level contours (i.e. contours that are not enclosed inside another contour),. This array constitutes the top of the contour hierarchy. Each contour object can be further iterated to determine its children.
 //
 // TopLevelContours returns the collection as a Go slice.
 func (x *ContoursObservation) TopLevelContours() []*Contour {
@@ -106,7 +94,7 @@ func (x *ContoursObservation) TopLevelContours() []*Contour {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Contour { return ContourFromID(_id) })
 }
 
-// Obtain all of the contours represented as a CGPath in normalized coordinates. The path is owned by the observation and therefore will be alive as long as the the observation is alive.
+// NormalizedPath obtain all of the contours represented as a CGPath in normalized coordinates. The path is owned by the observation and therefore will be alive as long as the the observation is alive.
 func (x *ContoursObservation) NormalizedPath() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("normalizedPath"))
 	return obj.Wrap(_r)
@@ -115,8 +103,8 @@ func (x *ContoursObservation) NormalizedPath() obj.Object {
 // ContoursObservationable is the interface implemented by [ContoursObservation], for mocking and DI.
 type ContoursObservationable interface {
 	obj.Object
-	ContourAtIndexError(contourIndex int) (*Contour, error)
-	ContourAtIndexPathError(indexPath obj.Object) (*Contour, error)
+	ContourAtIndexError(contourIndex int) (result *Contour, err error)
+	ContourAtIndexPathError(indexPath obj.Object) (result *Contour, err error)
 	ContourCount() int
 	TopLevelContourCount() int
 	TopLevelContours() []*Contour
@@ -124,3 +112,5 @@ type ContoursObservationable interface {
 }
 
 var _ ContoursObservationable = (*ContoursObservation)(nil)
+
+var _ ObservationProvider = (*ContoursObservation)(nil)

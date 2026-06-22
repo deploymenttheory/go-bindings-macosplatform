@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The constraint on the keys for a dictionary feature.
-//
 // DictionaryConstraint is an idiomatic wrapper over the Objective-C class MLDictionaryConstraint.
+//
+// The constraint on the keys for a dictionary feature.
 type DictionaryConstraint struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DictionaryConstraintFromID(id objc.ID) *DictionaryConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &DictionaryConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DictionaryConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func dictionaryConstraintAdopt(id objc.ID) *DictionaryConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &DictionaryConstraint{Handle: objref.Wrap(id)}
+	x := &DictionaryConstraint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *DictionaryConstraint) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DictionaryConstraint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDictionaryConstraint creates a new DictionaryConstraint.
 func NewDictionaryConstraint() *DictionaryConstraint {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLDictionaryConstraint")), objc.RegisterName("new"))
 	return dictionaryConstraintAdopt(_id)
 }
 
+// KeyType wraps the corresponding Objective-C method.
 func (x *DictionaryConstraint) KeyType() FeatureType {
 	_r := objc.Send[FeatureType](objref.IDOf(x), objc.RegisterName("keyType"))
 	return _r

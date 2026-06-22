@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A timer object that allows your app to synchronize its drawing to the refresh rate of the display.
-//
 // DisplayLink is an idiomatic wrapper over the Objective-C class CADisplayLink.
+//
+// A timer object that allows your app to synchronize its drawing to the refresh rate of the display.
 type DisplayLink struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DisplayLinkFromID(id objc.ID) *DisplayLink {
 	if id == 0 {
 		return nil
 	}
-	x := &DisplayLink{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DisplayLink{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func displayLinkAdopt(id objc.ID) *DisplayLink {
 	if id == 0 {
 		return nil
 	}
-	x := &DisplayLink{Handle: objref.Wrap(id)}
+	x := &DisplayLink{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,55 +60,64 @@ func (x *DisplayLink) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DisplayLink) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDisplayLink creates a new DisplayLink.
 func NewDisplayLink() *DisplayLink {
 	_id := objc.Send[objc.ID](objc.ID(_class("CADisplayLink")), objc.RegisterName("new"))
 	return displayLinkAdopt(_id)
 }
 
-// A Boolean value that indicates whether the system suspends the display link’s notifications to the target.
-//
-// WithPaused sets paused and returns the receiver so calls can be chained.
+// WithPaused a Boolean value that indicates whether the system suspends the display link’s notifications to the target.
 func (x *DisplayLink) WithPaused(paused bool) *DisplayLink {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
-// Registers the display link with a run loop.
+// AddToRunLoopForMode registers the display link with a run loop.
 func (x *DisplayLink) AddToRunLoopForMode(runloop obj.Object, mode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addToRunLoop:forMode:"), objref.IDOf(runloop), objref.IDOf(mode))
 }
 
-// Removes the display link from the run loop for the given mode.
+// RemoveFromRunLoopForMode removes the display link from the run loop for the given mode.
 func (x *DisplayLink) RemoveFromRunLoopForMode(runloop obj.Object, mode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(runloop), objref.IDOf(mode))
 }
 
-// Removes the display link from all run loop modes.
+// Invalidate removes the display link from all run loop modes.
 func (x *DisplayLink) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
+// Timestamp wraps the corresponding Objective-C method.
 func (x *DisplayLink) Timestamp() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timestamp"))
 	return _r
 }
 
+// Duration wraps the corresponding Objective-C method.
 func (x *DisplayLink) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
 	return _r
 }
 
+// TargetTimestamp wraps the corresponding Objective-C method.
 func (x *DisplayLink) TargetTimestamp() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("targetTimestamp"))
 	return _r
 }
 
+// IsPaused wraps the corresponding Objective-C method.
 func (x *DisplayLink) IsPaused() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaused"))
 	return _r
 }
 
+// SetPaused wraps the corresponding Objective-C method.
 func (x *DisplayLink) SetPaused(paused bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 }

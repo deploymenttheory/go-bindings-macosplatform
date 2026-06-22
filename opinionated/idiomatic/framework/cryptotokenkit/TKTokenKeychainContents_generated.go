@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// A representation of the state of the keychain for a particular token.
-//
 // TokenKeychainContents is an idiomatic wrapper over the Objective-C class TKTokenKeychainContents.
+//
+// A representation of the state of the keychain for a particular token.
 type TokenKeychainContents struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func TokenKeychainContentsFromID(id objc.ID) *TokenKeychainContents {
 	if id == 0 {
 		return nil
 	}
-	x := &TokenKeychainContents{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TokenKeychainContents{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func tokenKeychainContentsAdopt(id objc.ID) *TokenKeychainContents {
 	if id == 0 {
 		return nil
 	}
-	x := &TokenKeychainContents{Handle: objref.Wrap(id)}
+	x := &TokenKeychainContents{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,19 +62,25 @@ func (x *TokenKeychainContents) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TokenKeychainContents) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTokenKeychainContents creates a new TokenKeychainContents.
 func NewTokenKeychainContents() *TokenKeychainContents {
 	_id := objc.Send[objc.ID](objc.ID(_class("TKTokenKeychainContents")), objc.RegisterName("new"))
 	return tokenKeychainContentsAdopt(_id)
 }
 
-// Fills the keychain with the specified items.
+// FillWithItems fills the keychain with the specified items.
 func (x *TokenKeychainContents) FillWithItems(items []*TokenKeychainItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fillWithItems:"), purego.SliceToNSArray(items, func(_v *TokenKeychainItem) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Returns the key for a specified object identifier.
-func (x *TokenKeychainContents) KeyForObjectIDError(objectID obj.Object) (*TokenKeychainKey, error) {
+// KeyForObjectIDError returns the key for a specified object identifier.
+func (x *TokenKeychainContents) KeyForObjectIDError(objectID obj.Object) (result *TokenKeychainKey, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyForObjectID:error:"), objref.IDOf(objectID), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -81,8 +89,8 @@ func (x *TokenKeychainContents) KeyForObjectIDError(objectID obj.Object) (*Token
 	return TokenKeychainKeyFromID(_r), nil
 }
 
-// Returns the key for a specified object identifier.
-func (x *TokenKeychainContents) CertificateForObjectIDError(objectID obj.Object) (*TokenKeychainCertificate, error) {
+// CertificateForObjectIDError returns the key for a specified object identifier.
+func (x *TokenKeychainContents) CertificateForObjectIDError(objectID obj.Object) (result *TokenKeychainCertificate, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificateForObjectID:error:"), objref.IDOf(objectID), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -91,7 +99,7 @@ func (x *TokenKeychainContents) CertificateForObjectIDError(objectID obj.Object)
 	return TokenKeychainCertificateFromID(_r), nil
 }
 
-// All items related to this token in the keychain.
+// Items all items related to this token in the keychain.
 //
 // Items returns the collection as a Go slice.
 func (x *TokenKeychainContents) Items() []*TokenKeychainItem {
@@ -103,8 +111,8 @@ func (x *TokenKeychainContents) Items() []*TokenKeychainItem {
 type TokenKeychainContentsable interface {
 	obj.Object
 	FillWithItems(items []*TokenKeychainItem)
-	KeyForObjectIDError(objectID obj.Object) (*TokenKeychainKey, error)
-	CertificateForObjectIDError(objectID obj.Object) (*TokenKeychainCertificate, error)
+	KeyForObjectIDError(objectID obj.Object) (result *TokenKeychainKey, err error)
+	CertificateForObjectIDError(objectID obj.Object) (result *TokenKeychainCertificate, err error)
 	Items() []*TokenKeychainItem
 }
 

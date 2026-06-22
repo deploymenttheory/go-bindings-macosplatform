@@ -23,7 +23,8 @@ func MTRDiagnosticLogsClusterRetrieveLogsRequestParamsFromID(id objc.ID) *MTRDia
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDiagnosticLogsClusterRetrieveLogsRequestParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDiagnosticLogsClusterRetrieveLogsRequestParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDiagnosticLogsClusterRetrieveLogsRequestParamsAdopt(id objc.ID) *MTRDiag
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDiagnosticLogsClusterRetrieveLogsRequestParams{Handle: objref.Wrap(id)}
+	x := &MTRDiagnosticLogsClusterRetrieveLogsRequestParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,64 +58,71 @@ func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) IsKind(className str
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDiagnosticLogsClusterRetrieveLogsRequestParams creates a new MTRDiagnosticLogsClusterRetrieveLogsRequestParams.
 func NewMTRDiagnosticLogsClusterRetrieveLogsRequestParams() *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDiagnosticLogsClusterRetrieveLogsRequestParams")), objc.RegisterName("new"))
 	return mTRDiagnosticLogsClusterRetrieveLogsRequestParamsAdopt(_id)
 }
 
-// WithIntent sets intent and returns the receiver so calls can be chained.
+// WithIntent sets the property and returns the receiver so calls can be chained.
 func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithIntent(intent obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntent:"), objref.IDOf(intent))
 	return x
 }
 
-// WithRequestedProtocol sets requestedProtocol and returns the receiver so calls can be chained.
+// WithRequestedProtocol sets the property and returns the receiver so calls can be chained.
 func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithRequestedProtocol(requestedProtocol obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestedProtocol:"), objref.IDOf(requestedProtocol))
 	return x
 }
 
-// WithTransferFileDesignator sets transferFileDesignator and returns the receiver so calls can be chained.
+// WithTransferFileDesignator sets the property and returns the receiver so calls can be chained.
 func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithTransferFileDesignator(transferFileDesignator string) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransferFileDesignator:"), purego.NSString(transferFileDesignator))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// Intent wraps the corresponding Objective-C method.
 func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) Intent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intent"))
 	return obj.Wrap(_r)
 }
 
+// SetIntent wraps the corresponding Objective-C method.
 func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) SetIntent(intent obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntent:"), objref.IDOf(intent))
 }
 
+// RequestedProtocol wraps the corresponding Objective-C method.
 func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) RequestedProtocol() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestedProtocol"))
 	return obj.Wrap(_r)
 }
 
+// SetRequestedProtocol wraps the corresponding Objective-C method.
 func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) SetRequestedProtocol(requestedProtocol obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestedProtocol:"), objref.IDOf(requestedProtocol))
 }
 
+// TransferFileDesignator wraps the corresponding Objective-C method.
 func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) TransferFileDesignator() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transferFileDesignator"))
 	if _r == 0 {
@@ -122,26 +131,29 @@ func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) TransferFileDesignat
 	return purego.GoString(_r)
 }
 
+// SetTransferFileDesignator wraps the corresponding Objective-C method.
 func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) SetTransferFileDesignator(transferFileDesignator string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransferFileDesignator:"), purego.NSString(transferFileDesignator))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

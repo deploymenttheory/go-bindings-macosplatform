@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// WebHistory objects are used to maintain the pages visited by users. Visited pages are represented by WebHistoryItem objects. You add and remove history items using the addItems: and removeItems: methods. These methods post appropriate notifications when items are added or removed so you can update the display. WebHistory organizes the WebHistoryItem objects by the day they were visited, ordered from most recent to oldest. You can request all the days that contain history items using the orderedLastVisitedDays method or request the items visited on a particular day using the orderedItemsLastVisitedOnDay: method. WebHistory objects can be loaded and saved by specifying a file URL (see loadFromURL:error:).
-//
 // WebHistory is an idiomatic wrapper over the Objective-C class WebHistory.
+//
+// WebHistory objects are used to maintain the pages visited by users. Visited pages are represented by WebHistoryItem objects. You add and remove history items using the addItems: and removeItems: methods. These methods post appropriate notifications when items are added or removed so you can update the display. WebHistory organizes the WebHistoryItem objects by the day they were visited, ordered from most recent to oldest. You can request all the days that contain history items using the orderedLastVisitedDays method or request the items visited on a particular day using the orderedItemsLastVisitedOnDay: method. WebHistory objects can be loaded and saved by specifying a file URL (see loadFromURL:error:).
 type WebHistory struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func WebHistoryFromID(id objc.ID) *WebHistory {
 	if id == 0 {
 		return nil
 	}
-	x := &WebHistory{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WebHistory{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func webHistoryAdopt(id objc.ID) *WebHistory {
 	if id == 0 {
 		return nil
 	}
-	x := &WebHistory{Handle: objref.Wrap(id)}
+	x := &WebHistory{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,29 +62,31 @@ func (x *WebHistory) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WebHistory) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWebHistory creates a new WebHistory.
 func NewWebHistory() *WebHistory {
 	_id := objc.Send[objc.ID](objc.ID(_class("WebHistory")), objc.RegisterName("new"))
 	return webHistoryAdopt(_id)
 }
 
-// The maximum number of web history items that can be stored.
-//
-// WithHistoryItemLimit sets historyItemLimit and returns the receiver so calls can be chained.
+// WithHistoryItemLimit the maximum number of web history items that can be stored.
 func (x *WebHistory) WithHistoryItemLimit(historyItemLimit int) *WebHistory {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHistoryItemLimit:"), historyItemLimit)
 	return x
 }
 
-// The maximum age of web history items that can be retrieved.
-//
-// WithHistoryAgeInDaysLimit sets historyAgeInDaysLimit and returns the receiver so calls can be chained.
+// WithHistoryAgeInDaysLimit the maximum age of web history items that can be retrieved.
 func (x *WebHistory) WithHistoryAgeInDaysLimit(historyAgeInDaysLimit int) *WebHistory {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHistoryAgeInDaysLimit:"), historyAgeInDaysLimit)
 	return x
 }
 
-// Loads the contents of the specified web history file.
+// LoadFromURL loads the contents of the specified web history file.
 func (x *WebHistory) LoadFromURL(uRL string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadFromURL:error:"), rt.FileURL(uRL), unsafe.Pointer(&_nsErr))
@@ -92,7 +96,7 @@ func (x *WebHistory) LoadFromURL(uRL string) error {
 	return nil
 }
 
-// Saves the web history to the specified file.
+// SaveToURL saves the web history to the specified file.
 func (x *WebHistory) SaveToURL(uRL string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("saveToURL:error:"), rt.FileURL(uRL), unsafe.Pointer(&_nsErr))
@@ -102,55 +106,57 @@ func (x *WebHistory) SaveToURL(uRL string) error {
 	return nil
 }
 
-// Inserts or updates the specified items in the web history.
+// AddItems inserts or updates the specified items in the web history.
 func (x *WebHistory) AddItems(newItems obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addItems:"), objref.IDOf(newItems))
 }
 
-// Removes the specified items from the web history.
+// RemoveItems removes the specified items from the web history.
 func (x *WebHistory) RemoveItems(items obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeItems:"), objref.IDOf(items))
 }
 
-// Removes all items from the web history.
+// RemoveAllItems removes all items from the web history.
 func (x *WebHistory) RemoveAllItems() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllItems"))
 }
 
-// Returns web history items that were last visited on the specified date.
+// OrderedItemsLastVisitedOnDay returns web history items that were last visited on the specified date.
 func (x *WebHistory) OrderedItemsLastVisitedOnDay(calendarDate obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderedItemsLastVisitedOnDay:"), objref.IDOf(calendarDate))
 	return obj.Wrap(_r)
 }
 
-// Returns the web history item that corresponds to the specified web location.
+// ItemForURL returns the web history item that corresponds to the specified web location.
 func (x *WebHistory) ItemForURL(uRL string) *WebHistoryItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemForURL:"), rt.FileURL(uRL))
 	return WebHistoryItemFromID(_r)
 }
 
-// An array of NSCalendarDates for which history items exist in the WebHistory. An array of NSCalendarDates, each one representing a unique day that contains one or more history items, ordered from most recent to oldest.
+// OrderedLastVisitedDays an array of NSCalendarDates for which history items exist in the WebHistory. An array of NSCalendarDates, each one representing a unique day that contains one or more history items, ordered from most recent to oldest.
 func (x *WebHistory) OrderedLastVisitedDays() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderedLastVisitedDays"))
 	return obj.Wrap(_r)
 }
 
-// The maximum number of items that will be stored by the WebHistory.
+// HistoryItemLimit the maximum number of items that will be stored by the WebHistory.
 func (x *WebHistory) HistoryItemLimit() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("historyItemLimit"))
 	return _r
 }
 
+// SetHistoryItemLimit wraps the corresponding Objective-C method.
 func (x *WebHistory) SetHistoryItemLimit(historyItemLimit int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHistoryItemLimit:"), historyItemLimit)
 }
 
-// The maximum number of days to be read from stored history.
+// HistoryAgeInDaysLimit the maximum number of days to be read from stored history.
 func (x *WebHistory) HistoryAgeInDaysLimit() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("historyAgeInDaysLimit"))
 	return _r
 }
 
+// SetHistoryAgeInDaysLimit wraps the corresponding Objective-C method.
 func (x *WebHistory) SetHistoryAgeInDaysLimit(historyAgeInDaysLimit int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHistoryAgeInDaysLimit:"), historyAgeInDaysLimit)
 }

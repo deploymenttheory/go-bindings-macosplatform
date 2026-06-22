@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A circular overlay with a configurable radius that you center on a geographic coordinate.
-//
 // Circle is an idiomatic wrapper over the Objective-C class MKCircle.
+//
+// It embeds [Shape], promoting that type's methods.
+//
+// A circular overlay with a configurable radius that you center on a geographic coordinate.
 type Circle struct {
-	objref.Handle
+	Shape
 }
 
 // CircleFromID adopts an existing Objective-C object as a Circle
@@ -25,7 +26,8 @@ func CircleFromID(id objc.ID) *Circle {
 	if id == 0 {
 		return nil
 	}
-	x := &Circle{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Circle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func circleAdopt(id objc.ID) *Circle {
 	if id == 0 {
 		return nil
 	}
-	x := &Circle{Handle: objref.Wrap(id)}
+	x := &Circle{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *Circle) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Circle) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Circle) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCircle creates a new Circle.
@@ -64,17 +52,13 @@ func NewCircle() *Circle {
 	return circleAdopt(_id)
 }
 
-// The title of the shape annotation.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the title of the shape annotation.
 func (x *Circle) WithTitle(title string) *Circle {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The subtitle of the shape annotation.
-//
-// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
+// WithSubtitle the subtitle of the shape annotation.
 func (x *Circle) WithSubtitle(subtitle string) *Circle {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
@@ -88,3 +72,5 @@ type Circleable interface {
 }
 
 var _ Circleable = (*Circle)(nil)
+
+var _ ShapeProvider = (*Circle)(nil)

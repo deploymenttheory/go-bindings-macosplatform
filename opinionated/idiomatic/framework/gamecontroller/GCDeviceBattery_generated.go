@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The charge level and state of a device’s battery.
-//
 // DeviceBattery is an idiomatic wrapper over the Objective-C class GCDeviceBattery.
+//
+// The charge level and state of a device’s battery.
 type DeviceBattery struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DeviceBatteryFromID(id objc.ID) *DeviceBattery {
 	if id == 0 {
 		return nil
 	}
-	x := &DeviceBattery{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DeviceBattery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func deviceBatteryAdopt(id objc.ID) *DeviceBattery {
 	if id == 0 {
 		return nil
 	}
-	x := &DeviceBattery{Handle: objref.Wrap(id)}
+	x := &DeviceBattery{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *DeviceBattery) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DeviceBattery) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDeviceBattery creates a new DeviceBattery.
 func NewDeviceBattery() *DeviceBattery {
 	_id := objc.Send[objc.ID](objc.ID(_class("GCDeviceBattery")), objc.RegisterName("new"))
 	return deviceBatteryAdopt(_id)
 }
 
-// This is the battery level for controller. Battery level ranges from 0.0 (fully discharged) to 1.0 (100% charged) and defaults to 0
+// BatteryLevel this is the battery level for controller. Battery level ranges from 0.0 (fully discharged) to 1.0 (100% charged) and defaults to 0
 func (x *DeviceBattery) BatteryLevel() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("batteryLevel"))
 	return _r
 }
 
-// A battery state for controller, defaults to GCControllerBatteryStateUnknown
+// BatteryState a battery state for controller, defaults to GCControllerBatteryStateUnknown
 func (x *DeviceBattery) BatteryState() DeviceBatteryState {
 	_r := objc.Send[DeviceBatteryState](objref.IDOf(x), objc.RegisterName("batteryState"))
 	return _r

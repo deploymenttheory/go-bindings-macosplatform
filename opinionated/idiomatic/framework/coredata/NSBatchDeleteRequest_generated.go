@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request that deletes objects in the SQLite persistent store without loading them into memory.
-//
 // BatchDeleteRequest is an idiomatic wrapper over the Objective-C class NSBatchDeleteRequest.
+//
+// It embeds [PersistentStoreRequest], promoting that type's methods.
+//
+// A request that deletes objects in the SQLite persistent store without loading them into memory.
 type BatchDeleteRequest struct {
-	objref.Handle
+	PersistentStoreRequest
 }
 
 // BatchDeleteRequestFromID adopts an existing Objective-C object as a BatchDeleteRequest
@@ -25,7 +26,8 @@ func BatchDeleteRequestFromID(id objc.ID) *BatchDeleteRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &BatchDeleteRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BatchDeleteRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,70 +40,51 @@ func batchDeleteRequestAdopt(id objc.ID) *BatchDeleteRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &BatchDeleteRequest{Handle: objref.Wrap(id)}
+	x := &BatchDeleteRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *BatchDeleteRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BatchDeleteRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BatchDeleteRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a request that deletes the results of the specified fetch request.
-//
-// NewBatchDeleteRequestWithFetchRequest creates a new BatchDeleteRequest.
+// NewBatchDeleteRequestWithFetchRequest creates a request that deletes the results of the specified fetch request.
 func NewBatchDeleteRequestWithFetchRequest(fetch obj.Object) *BatchDeleteRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBatchDeleteRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFetchRequest:"), objref.IDOf(fetch))
 	return batchDeleteRequestAdopt(_id)
 }
 
-// Creates a request that deletes the managed objects with the specified identifiers.
-//
-// NewBatchDeleteRequestWithObjectIDs creates a new BatchDeleteRequest.
+// NewBatchDeleteRequestWithObjectIDs creates a request that deletes the managed objects with the specified identifiers.
 func NewBatchDeleteRequestWithObjectIDs(objects []*ManagedObjectID) *BatchDeleteRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBatchDeleteRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjectIDs:"), purego.SliceToNSArray(objects, func(_v *ManagedObjectID) objc.ID { return objref.IDOf(_v) }))
 	return batchDeleteRequestAdopt(_id)
 }
 
-// The type of result the request provides when it executes.
-//
-// WithResultType sets resultType and returns the receiver so calls can be chained.
+// WithResultType the type of result the request provides when it executes.
 func (x *BatchDeleteRequest) WithResultType(resultType BatchDeleteRequestResultType) *BatchDeleteRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
 	return x
 }
 
-// The stores the request should be sent to.
-//
-// WithAffectedStores sets the collection and returns the receiver so calls can be chained.
+// WithAffectedStores the stores the request should be sent to.
 func (x *BatchDeleteRequest) WithAffectedStores(items ...PersistentStoreProvider) *BatchDeleteRequest {
 	_arr := purego.SliceToNSArray(items, func(_v PersistentStoreProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), _arr)
 	return x
 }
 
+// ResultType wraps the corresponding Objective-C method.
 func (x *BatchDeleteRequest) ResultType() BatchDeleteRequestResultType {
 	_r := objc.Send[BatchDeleteRequestResultType](objref.IDOf(x), objc.RegisterName("resultType"))
 	return _r
 }
 
+// SetResultType wraps the corresponding Objective-C method.
 func (x *BatchDeleteRequest) SetResultType(resultType BatchDeleteRequestResultType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
 }
 
+// FetchRequest wraps the corresponding Objective-C method.
 func (x *BatchDeleteRequest) FetchRequest() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)
@@ -118,3 +101,5 @@ type BatchDeleteRequestable interface {
 }
 
 var _ BatchDeleteRequestable = (*BatchDeleteRequest)(nil)
+
+var _ PersistentStoreRequestProvider = (*BatchDeleteRequest)(nil)

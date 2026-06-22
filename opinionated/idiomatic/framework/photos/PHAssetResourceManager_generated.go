@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resource manager for the data storage underlying a Photos asset.
-//
 // AssetResourceManager is an idiomatic wrapper over the Objective-C class PHAssetResourceManager.
+//
+// A resource manager for the data storage underlying a Photos asset.
 type AssetResourceManager struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func AssetResourceManagerFromID(id objc.ID) *AssetResourceManager {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetResourceManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetResourceManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func assetResourceManagerAdopt(id objc.ID) *AssetResourceManager {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetResourceManager{Handle: objref.Wrap(id)}
+	x := &AssetResourceManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,13 +62,19 @@ func (x *AssetResourceManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetResourceManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetResourceManager creates a new AssetResourceManager.
 func NewAssetResourceManager() *AssetResourceManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHAssetResourceManager")), objc.RegisterName("new"))
 	return assetResourceManagerAdopt(_id)
 }
 
-// Requests the underlying data for the specified asset resource, to be asynchronously written to a local file.
+// WriteDataForAssetResourceToFileOptions requests the underlying data for the specified asset resource, to be asynchronously written to a local file.
 //
 // WriteDataForAssetResourceToFileOptions blocks until the operation completes or ctx is cancelled.
 func (x *AssetResourceManager) WriteDataForAssetResourceToFileOptions(ctx context.Context, resource *AssetResource, fileURL string, options *AssetResourceRequestOptions) error {
@@ -85,7 +93,7 @@ func (x *AssetResourceManager) WriteDataForAssetResourceToFileOptions(ctx contex
 	}
 }
 
-// Cancels an asynchronous request.
+// CancelDataRequest cancels an asynchronous request.
 func (x *AssetResourceManager) CancelDataRequest(requestID int32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelDataRequest:"), requestID)
 }

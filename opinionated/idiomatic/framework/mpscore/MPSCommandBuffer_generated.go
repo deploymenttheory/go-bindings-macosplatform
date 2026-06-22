@@ -23,7 +23,8 @@ func CommandBufferFromID(id objc.ID) *CommandBuffer {
 	if id == 0 {
 		return nil
 	}
-	x := &CommandBuffer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CommandBuffer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func commandBufferAdopt(id objc.ID) *CommandBuffer {
 	if id == 0 {
 		return nil
 	}
-	x := &CommandBuffer{Handle: objref.Wrap(id)}
+	x := &CommandBuffer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,36 +58,41 @@ func (x *CommandBuffer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CommandBuffer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCommandBuffer creates a new CommandBuffer.
 func NewCommandBuffer() *CommandBuffer {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSCommandBuffer")), objc.RegisterName("new"))
 	return commandBufferAdopt(_id)
 }
 
-// A GPU predicate object. Default: nil.
-//
-// WithPredicate sets predicate and returns the receiver so calls can be chained.
+// WithPredicate a GPU predicate object. Default: nil.
 func (x *CommandBuffer) WithPredicate(predicate *Predicate) *CommandBuffer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
 	return x
 }
 
-// Commit work encoded so far and continue with a new underlying command buffer This method commits the underlying root MTLCommandBuffer, and makes a new one on the same command queue. The MPS heap is moved forward to the new command buffer such that temporary objects used by the previous command buffer can be still be used with the new one. This provides a way to move work already encoded into consideration by the Metal back end sooner. For large workloads, e.g. a neural networking graph periodically calling -commitAndContinue may allow you to improve CPU / GPU parallelism without the substantial memory increases associated with double buffering. It will also help decrease overall latency. Any Metal schedule or completion callbacks previously attached to this object will remain attached to the old command buffer and will fire as expected as the old command buffer is scheduled and completes. If your application is relying on such callbacks to coordinate retain / release of important objects that are needed for work encoded after -commitAndContinue, your application should retain these objects before calling commitAndContinue, and attach new release callbacks to this object with a new completion handler so that they persist through the lifetime of the new underlying command buffer. You may do this, for example by adding the objects to a mutable array before calling -commitAndContinue, then release the mutable array in a new completion callback added after -commitAndContinue. Because -commitAndContinue commits the old command buffer then switches to a new one, some aspects of command buffer completion may surprise unwary developers. For example, -waitUntilCompleted called immediately after -commitAndContinue asks Metal to wait for the new command buffer to finish, not the old one. Since the new command buffer presumably hasn't been committed yet, it is formally a deadlock, resources may leak and Metal may complain. Your application should ether call -commit before -waitUntilCompleted, or capture the -rootCommandBuffer from before the call to -commitAndContinue and wait on that.  Similarly, your application should be sure to use the appropriate command buffer when querying the [MTLCommandBuffer status] property. If the underlying MTLCommandBuffer also implements -commitAndContinue, then the message will be forwarded to that object instead. In this way, underlying predicate objects and other state will be preserved.
+// CommitAndContinue commit work encoded so far and continue with a new underlying command buffer This method commits the underlying root MTLCommandBuffer, and makes a new one on the same command queue. The MPS heap is moved forward to the new command buffer such that temporary objects used by the previous command buffer can be still be used with the new one. This provides a way to move work already encoded into consideration by the Metal back end sooner. For large workloads, e.g. a neural networking graph periodically calling -commitAndContinue may allow you to improve CPU / GPU parallelism without the substantial memory increases associated with double buffering. It will also help decrease overall latency. Any Metal schedule or completion callbacks previously attached to this object will remain attached to the old command buffer and will fire as expected as the old command buffer is scheduled and completes. If your application is relying on such callbacks to coordinate retain / release of important objects that are needed for work encoded after -commitAndContinue, your application should retain these objects before calling commitAndContinue, and attach new release callbacks to this object with a new completion handler so that they persist through the lifetime of the new underlying command buffer. You may do this, for example by adding the objects to a mutable array before calling -commitAndContinue, then release the mutable array in a new completion callback added after -commitAndContinue. Because -commitAndContinue commits the old command buffer then switches to a new one, some aspects of command buffer completion may surprise unwary developers. For example, -waitUntilCompleted called immediately after -commitAndContinue asks Metal to wait for the new command buffer to finish, not the old one. Since the new command buffer presumably hasn't been committed yet, it is formally a deadlock, resources may leak and Metal may complain. Your application should ether call -commit before -waitUntilCompleted, or capture the -rootCommandBuffer from before the call to -commitAndContinue and wait on that.  Similarly, your application should be sure to use the appropriate command buffer when querying the [MTLCommandBuffer status] property. If the underlying MTLCommandBuffer also implements -commitAndContinue, then the message will be forwarded to that object instead. In this way, underlying predicate objects and other state will be preserved.
 func (x *CommandBuffer) CommitAndContinue() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commitAndContinue"))
 }
 
-// Prefetch heap into the MPS command buffer heap cache. If there is not sufficient free storage in the MPS heap for the command buffer for allocations of total size size, pre-warm the MPS heap with a new MTLHeap allocation of sufficient size.  If this size turns out to be too small MPS may ask for more heaps later to cover additional allocations. If heapProvider is not nil, the heapProvider will be used.
+// PrefetchHeapForWorkloadSize prefetch heap into the MPS command buffer heap cache. If there is not sufficient free storage in the MPS heap for the command buffer for allocations of total size size, pre-warm the MPS heap with a new MTLHeap allocation of sufficient size.  If this size turns out to be too small MPS may ask for more heaps later to cover additional allocations. If heapProvider is not nil, the heapProvider will be used.
 func (x *CommandBuffer) PrefetchHeapForWorkloadSize(size int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prefetchHeapForWorkloadSize:"), size)
 }
 
-// A GPU predicate object. Default: nil.
+// Predicate a GPU predicate object. Default: nil.
 func (x *CommandBuffer) Predicate() *Predicate {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
 	return PredicateFromID(_r)
 }
 
+// SetPredicate wraps the corresponding Objective-C method.
 func (x *CommandBuffer) SetPredicate(predicate *Predicate) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
 }

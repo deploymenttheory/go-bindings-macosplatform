@@ -6,15 +6,16 @@ package coreimage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages feedback-based image processing for tasks such as painting or fluid simulation.
-//
 // ImageAccumulator is an idiomatic wrapper over the Objective-C class CIImageAccumulator.
+//
+// An object that manages feedback-based image processing for tasks such as painting or fluid simulation.
 type ImageAccumulator struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func ImageAccumulatorFromID(id objc.ID) *ImageAccumulator {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageAccumulator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageAccumulator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func imageAccumulatorAdopt(id objc.ID) *ImageAccumulator {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageAccumulator{Handle: objref.Wrap(id)}
+	x := &ImageAccumulator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +61,54 @@ func (x *ImageAccumulator) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewImageAccumulator creates a new ImageAccumulator.
-func NewImageAccumulator() *ImageAccumulator {
-	_id := objc.Send[objc.ID](objc.ID(_class("CIImageAccumulator")), objc.RegisterName("new"))
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ImageAccumulator) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewImageAccumulatorWithExtentFormat initializes an image accumulator with the specified extent and pixel format.
+func NewImageAccumulatorWithExtentFormat(extent corefoundation.CGRect, format int) *ImageAccumulator {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImageAccumulator")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExtent:format:"), extent, format)
 	return imageAccumulatorAdopt(_id)
 }
 
-// Returns the current contents of the image accumulator.
+// NewImageAccumulatorWithExtentFormatColorSpace initializes an image accumulator with the specified extent, pixel format, and color space.
+func NewImageAccumulatorWithExtentFormatColorSpace(extent corefoundation.CGRect, format int, colorSpace obj.Object) *ImageAccumulator {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImageAccumulator")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExtent:format:colorSpace:"), extent, format, objref.IDOf(colorSpace))
+	return imageAccumulatorAdopt(_id)
+}
+
+// Image returns the current contents of the image accumulator.
 func (x *ImageAccumulator) Image() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
-// Sets the contents of the image accumulator to the contents of the specified image object.
+// SetImage sets the contents of the image accumulator to the contents of the specified image object.
 func (x *ImageAccumulator) SetImage(image *Image) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 }
 
-// Resets the accumulator, discarding any pending updates and the current content.
+// SetImageDirtyRect updates an image accumulator with a subregion of an image object.
+func (x *ImageAccumulator) SetImageDirtyRect(image *Image, dirtyRect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:dirtyRect:"), objref.IDOf(image), dirtyRect)
+}
+
+// Clear resets the accumulator, discarding any pending updates and the current content.
 func (x *ImageAccumulator) Clear() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clear"))
 }
 
+// Extent wraps the corresponding Objective-C method.
+func (x *ImageAccumulator) Extent() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("extent"))
+	return _r
+}
+
+// Format wraps the corresponding Objective-C method.
 func (x *ImageAccumulator) Format() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("format"))
 	return _r
@@ -90,7 +119,9 @@ type ImageAccumulatorable interface {
 	obj.Object
 	Image() *Image
 	SetImage(image *Image)
+	SetImageDirtyRect(image *Image, dirtyRect corefoundation.CGRect)
 	Clear()
+	Extent() corefoundation.CGRect
 	Format() int
 }
 

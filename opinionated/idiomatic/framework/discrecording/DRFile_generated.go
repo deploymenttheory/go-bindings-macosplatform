@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Represents a file to be created on the disc. A file can be either a pointer to an exiting file (residing on a hard drive for example) or can be created at burn time from data passed into the file object as requested. DRFiles can only exist inside of virtual
-//
 // File is an idiomatic wrapper over the Objective-C class DRFile.
+//
+// It embeds [FSObject], promoting that type's methods.
+//
+// Represents a file to be created on the disc. A file can be either a pointer to an exiting file (residing on a hard drive for example) or can be created at burn time from data passed into the file object as requested. DRFiles can only exist inside of virtual
 type File struct {
-	objref.Handle
+	FSObject
 }
 
 // FileFromID adopts an existing Objective-C object as a File
@@ -25,7 +26,8 @@ func FileFromID(id objc.ID) *File {
 	if id == 0 {
 		return nil
 	}
-	x := &File{Handle: objref.Wrap(purego.Retain(id))}
+	x := &File{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,56 +40,34 @@ func fileAdopt(id objc.ID) *File {
 	if id == 0 {
 		return nil
 	}
-	x := &File{Handle: objref.Wrap(id)}
+	x := &File{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *File) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *File) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *File) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a real file object This type of DRFile reads in data from an existing file located at path and burns that data to disc.
-//
-// NewFileWithPath creates a new File.
+// NewFileWithPath initializes a real file object This type of DRFile reads in data from an existing file located at path and burns that data to disc.
 func NewFileWithPath(path string) *File {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:"), purego.NSString(path))
 	return fileAdopt(_id)
 }
 
-// Initializes a virtual file object This type of DRFile burns the data passed in to the output disc, creating a file with the passed in name.
-//
-// NewFileWithNameData creates a new File.
+// NewFileWithNameData initializes a virtual file object This type of DRFile burns the data passed in to the output disc, creating a file with the passed in name.
 func NewFileWithNameData(name string, data obj.Object) *File {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:data:"), purego.NSString(name), objref.IDOf(data))
 	return fileAdopt(_id)
 }
 
-// Initializes a virtual file object This type of DRFile burns the data produced to the output disc, creating a file with the passed in name.
-//
-// NewFileWithNameDataProducer creates a new File.
+// NewFileWithNameDataProducer initializes a virtual file object This type of DRFile burns the data produced to the output disc, creating a file with the passed in name.
 func NewFileWithNameDataProducer(name string, producer obj.Object) *File {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:dataProducer:"), purego.NSString(name), objref.IDOf(producer))
 	return fileAdopt(_id)
 }
 
-// Initializes a file object to point to another file on the output disc.
-//
-// NewFileWithLinkTypePointingToInFilesystem creates a new File.
+// NewFileWithLinkTypePointingToInFilesystem initializes a file object to point to another file on the output disc.
 func NewFileWithLinkTypePointingToInFilesystem(linkType string, original *FSObject, filesystem string) *File {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLinkType:pointingTo:inFilesystem:"), purego.NSString(linkType), objref.IDOf(original), purego.NSString(filesystem))
@@ -100,3 +80,5 @@ type Fileable interface {
 }
 
 var _ Fileable = (*File)(nil)
+
+var _ FSObjectProvider = (*File)(nil)

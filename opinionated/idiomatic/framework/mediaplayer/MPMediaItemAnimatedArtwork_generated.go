@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An animated image, such as an animated music album cover art, for a media item.
-//
 // MediaItemAnimatedArtwork is an idiomatic wrapper over the Objective-C class MPMediaItemAnimatedArtwork.
+//
+// An animated image, such as an animated music album cover art, for a media item.
 type MediaItemAnimatedArtwork struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MediaItemAnimatedArtworkFromID(id objc.ID) *MediaItemAnimatedArtwork {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaItemAnimatedArtwork{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MediaItemAnimatedArtwork{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mediaItemAnimatedArtworkAdopt(id objc.ID) *MediaItemAnimatedArtwork {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaItemAnimatedArtwork{Handle: objref.Wrap(id)}
+	x := &MediaItemAnimatedArtwork{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *MediaItemAnimatedArtwork) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MediaItemAnimatedArtwork) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MediaItemAnimatedArtwork) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMediaItemAnimatedArtwork creates a new MediaItemAnimatedArtwork.

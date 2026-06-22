@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class for different kinds of authorization requests.
-//
 // AuthorizationRequest is an idiomatic wrapper over the Objective-C class ASAuthorizationRequest.
+//
+// AuthorizationRequest is an abstract base — you do not construct it directly. Construct one of [AuthorizationOpenIDRequest], [AuthorizationPasswordRequest], [AuthorizationPlatformPublicKeyCredentialAssertionRequest], [AuthorizationPlatformPublicKeyCredentialRegistrationRequest], [AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest], [AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest] and pass it where a AuthorizationRequest is accepted.
+//
+// A base class for different kinds of authorization requests.
 type AuthorizationRequest struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func AuthorizationRequestFromID(id objc.ID) *AuthorizationRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func authorizationRequestAdopt(id objc.ID) *AuthorizationRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationRequest{Handle: objref.Wrap(id)}
+	x := &AuthorizationRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *AuthorizationRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewAuthorizationRequest creates a new AuthorizationRequest.
-func NewAuthorizationRequest() *AuthorizationRequest {
-	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationRequest")), objc.RegisterName("new"))
-	return authorizationRequestAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationRequest) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // AuthorizationRequestable is the interface implemented by [AuthorizationRequest], for mocking and DI.
@@ -70,3 +74,10 @@ type AuthorizationRequestable interface {
 }
 
 var _ AuthorizationRequestable = (*AuthorizationRequest)(nil)
+
+// isAuthorizationRequest marks AuthorizationRequest — and, by embedding promotion, its
+// subclasses — as a member of the AuthorizationRequest hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AuthorizationRequest) isAuthorizationRequest() {}
+
+var _ AuthorizationRequestProvider = (*AuthorizationRequest)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A text block that appears as a cell in a text table.
-//
 // TextTableBlock is an idiomatic wrapper over the Objective-C class NSTextTableBlock.
+//
+// It embeds [TextBlock], promoting that type's methods.
+//
+// A text block that appears as a cell in a text table.
 type TextTableBlock struct {
-	objref.Handle
+	TextBlock
 }
 
 // TextTableBlockFromID adopts an existing Objective-C object as a TextTableBlock
@@ -25,7 +26,8 @@ func TextTableBlockFromID(id objc.ID) *TextTableBlock {
 	if id == 0 {
 		return nil
 	}
-	x := &TextTableBlock{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextTableBlock{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,71 +40,56 @@ func textTableBlockAdopt(id objc.ID) *TextTableBlock {
 	if id == 0 {
 		return nil
 	}
-	x := &TextTableBlock{Handle: objref.Wrap(id)}
+	x := &TextTableBlock{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *TextTableBlock) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextTableBlock) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextTableBlock) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Returns an initialized text table block.
-//
-// NewTextTableBlockWithTableStartingRowRowSpanStartingColumnColumnSpan creates a new TextTableBlock.
+// NewTextTableBlockWithTableStartingRowRowSpanStartingColumnColumnSpan returns an initialized text table block.
 func NewTextTableBlockWithTableStartingRowRowSpanStartingColumnColumnSpan(table *TextTable, row int, rowSpan int, col int, colSpan int) *TextTableBlock {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextTableBlock")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTable:startingRow:rowSpan:startingColumn:columnSpan:"), objref.IDOf(table), row, rowSpan, col, colSpan)
 	return textTableBlockAdopt(_id)
 }
 
-// The vertical alignment of the text block.
-//
-// WithVerticalAlignment sets verticalAlignment and returns the receiver so calls can be chained.
+// WithVerticalAlignment the vertical alignment of the text block.
 func (x *TextTableBlock) WithVerticalAlignment(verticalAlignment TextBlockVerticalAlignment) *TextTableBlock {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalAlignment:"), verticalAlignment)
 	return x
 }
 
-// The background color of the text block.
-//
-// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+// WithBackgroundColor the background color of the text block.
 func (x *TextTableBlock) WithBackgroundColor(backgroundColor *Color) *TextTableBlock {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
+// Table wraps the corresponding Objective-C method.
 func (x *TextTableBlock) Table() *TextTable {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("table"))
 	return TextTableFromID(_r)
 }
 
+// StartingRow wraps the corresponding Objective-C method.
 func (x *TextTableBlock) StartingRow() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("startingRow"))
 	return _r
 }
 
+// RowSpan wraps the corresponding Objective-C method.
 func (x *TextTableBlock) RowSpan() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowSpan"))
 	return _r
 }
 
+// StartingColumn wraps the corresponding Objective-C method.
 func (x *TextTableBlock) StartingColumn() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("startingColumn"))
 	return _r
 }
 
+// ColumnSpan wraps the corresponding Objective-C method.
 func (x *TextTableBlock) ColumnSpan() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columnSpan"))
 	return _r
@@ -121,3 +108,5 @@ type TextTableBlockable interface {
 }
 
 var _ TextTableBlockable = (*TextTableBlock)(nil)
+
+var _ TextBlockProvider = (*TextTableBlock)(nil)

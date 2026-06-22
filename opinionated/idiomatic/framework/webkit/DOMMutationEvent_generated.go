@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMMutationEvent is an idiomatic wrapper over the Objective-C class DOMMutationEvent.
+//
+// It embeds [DOMEvent], promoting that type's methods.
 type DOMMutationEvent struct {
-	objref.Handle
+	DOMEvent
 }
 
 // DOMMutationEventFromID adopts an existing Objective-C object as a DOMMutationEvent
@@ -23,7 +24,8 @@ func DOMMutationEventFromID(id objc.ID) *DOMMutationEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMMutationEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMMutationEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMMutationEventAdopt(id objc.ID) *DOMMutationEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMMutationEvent{Handle: objref.Wrap(id)}
+	x := &DOMMutationEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMMutationEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMMutationEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMMutationEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMMutationEventMutationEventCanBubbleCancelableRelatedNodePrevValueNewValueAttrNameAttrChange creates a new DOMMutationEvent.
@@ -70,18 +58,19 @@ func NewDOMMutationEventMutationEvent(type_ string, canBubble bool, cancelable b
 	return dOMMutationEventAdopt(_id)
 }
 
-// WithReturnValue sets returnValue and returns the receiver so calls can be chained.
+// WithReturnValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMMutationEvent) WithReturnValue(returnValue bool) *DOMMutationEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnValue:"), returnValue)
 	return x
 }
 
-// WithCancelBubble sets cancelBubble and returns the receiver so calls can be chained.
+// WithCancelBubble sets the property and returns the receiver so calls can be chained.
 func (x *DOMMutationEvent) WithCancelBubble(cancelBubble bool) *DOMMutationEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelBubble:"), cancelBubble)
 	return x
 }
 
+// NewValue wraps the corresponding Objective-C method.
 func (x *DOMMutationEvent) NewValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("newValue"))
 	if _r == 0 {
@@ -90,11 +79,13 @@ func (x *DOMMutationEvent) NewValue() string {
 	return purego.GoString(_r)
 }
 
+// RelatedNode wraps the corresponding Objective-C method.
 func (x *DOMMutationEvent) RelatedNode() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relatedNode"))
 	return DOMNodeFromID(_r)
 }
 
+// PrevValue wraps the corresponding Objective-C method.
 func (x *DOMMutationEvent) PrevValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prevValue"))
 	if _r == 0 {
@@ -103,6 +94,7 @@ func (x *DOMMutationEvent) PrevValue() string {
 	return purego.GoString(_r)
 }
 
+// AttrName wraps the corresponding Objective-C method.
 func (x *DOMMutationEvent) AttrName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attrName"))
 	if _r == 0 {
@@ -111,6 +103,7 @@ func (x *DOMMutationEvent) AttrName() string {
 	return purego.GoString(_r)
 }
 
+// AttrChange wraps the corresponding Objective-C method.
 func (x *DOMMutationEvent) AttrChange() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("attrChange"))
 	return _r
@@ -129,3 +122,9 @@ type DOMMutationEventable interface {
 }
 
 var _ DOMMutationEventable = (*DOMMutationEvent)(nil)
+
+var _ DOMEventProvider = (*DOMMutationEvent)(nil)
+
+var _ DOMObjectProvider = (*DOMMutationEvent)(nil)
+
+var _ WebScriptObjectProvider = (*DOMMutationEvent)(nil)

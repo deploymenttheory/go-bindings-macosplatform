@@ -6,15 +6,16 @@ package quartz
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class for low-level rendering.
-//
 // QCRenderer is an idiomatic wrapper over the Objective-C class QCRenderer.
+//
+// A base class for low-level rendering.
 type QCRenderer struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func QCRendererFromID(id objc.ID) *QCRenderer {
 	if id == 0 {
 		return nil
 	}
-	x := &QCRenderer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QCRenderer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func qCRendererAdopt(id objc.ID) *QCRenderer {
 	if id == 0 {
 		return nil
 	}
-	x := &QCRenderer{Handle: objref.Wrap(id)}
+	x := &QCRenderer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,57 +61,65 @@ func (x *QCRenderer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a renderer object with a composition object and a color space.
-//
-// NewQCRendererWithCompositionColorSpace creates a new QCRenderer.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *QCRenderer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewQCRendererWithCompositionColorSpace creates a renderer object with a composition object and a color space.
 func NewQCRendererWithCompositionColorSpace(composition *QCComposition, colorSpace obj.Object) *QCRenderer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("QCRenderer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithComposition:colorSpace:"), objref.IDOf(composition), objref.IDOf(colorSpace))
 	return qCRendererAdopt(_id)
 }
 
-// Creates a renderer object with a CGLContextObj object, a pixel format, a color space, and a composition object.
-//
-// NewQCRendererWithCGLContextPixelFormatColorSpaceComposition creates a new QCRenderer.
+// NewQCRendererWithCGLContextPixelFormatColorSpaceComposition creates a renderer object with a CGLContextObj object, a pixel format, a color space, and a composition object.
 func NewQCRendererWithCGLContextPixelFormatColorSpaceComposition(context_ obj.Object, format obj.Object, colorSpace obj.Object, composition *QCComposition) *QCRenderer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("QCRenderer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGLContext:pixelFormat:colorSpace:composition:"), objref.IDOf(context_), objref.IDOf(format), objref.IDOf(colorSpace), objref.IDOf(composition))
 	return qCRendererAdopt(_id)
 }
 
-// Creates a renderer object with an NSOpenGLContext object and a composition file.
-//
-// NewQCRendererWithOpenGLContextPixelFormatFile creates a new QCRenderer.
+// NewQCRendererOffScreenWithSizeColorSpaceComposition creates an offscreen renderer of a given size with the provided color space and composition object.
+func NewQCRendererOffScreenWithSizeColorSpaceComposition(size corefoundation.CGSize, colorSpace obj.Object, composition *QCComposition) *QCRenderer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("QCRenderer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initOffScreenWithSize:colorSpace:composition:"), size, objref.IDOf(colorSpace), objref.IDOf(composition))
+	return qCRendererAdopt(_id)
+}
+
+// NewQCRendererWithOpenGLContextPixelFormatFile creates a renderer object with an NSOpenGLContext object and a composition file.
 func NewQCRendererWithOpenGLContextPixelFormatFile(context_ obj.Object, format obj.Object, path string) *QCRenderer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("QCRenderer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOpenGLContext:pixelFormat:file:"), objref.IDOf(context_), objref.IDOf(format), purego.NSString(path))
 	return qCRendererAdopt(_id)
 }
 
-// Renders a frame of a composition at the specified time.
+// RenderAtTimeArguments renders a frame of a composition at the specified time.
 func (x *QCRenderer) RenderAtTimeArguments(time_ float64, arguments obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("renderAtTime:arguments:"), time_, objref.IDOf(arguments))
 	return _r
 }
 
+// RenderingTimeForTimeArguments wraps the corresponding Objective-C method.
 func (x *QCRenderer) RenderingTimeForTimeArguments(time_ float64, arguments obj.Object) float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("renderingTimeForTime:arguments:"), time_, objref.IDOf(arguments))
 	return _r
 }
 
-// Returns the composition object associated with the renderer.
+// Composition returns the composition object associated with the renderer.
 func (x *QCRenderer) Composition() *QCComposition {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("composition"))
 	return QCCompositionFromID(_r)
 }
 
-// Returns an NSImage object of the current image in the OpenGL context associated with the renderer.
+// SnapshotImage returns an NSImage object of the current image in the OpenGL context associated with the renderer.
 func (x *QCRenderer) SnapshotImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotImage"))
 	return obj.Wrap(_r)
 }
 
-// Returns the current image in the OpenGL context associated with the renderer, as an image object of the provided image type.
+// CreateSnapshotImageOfType returns the current image in the OpenGL context associated with the renderer, as an image object of the provided image type.
 func (x *QCRenderer) CreateSnapshotImageOfType(type_ string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createSnapshotImageOfType:"), purego.NSString(type_))
 	return obj.Wrap(_r)

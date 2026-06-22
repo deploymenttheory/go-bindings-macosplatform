@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterBridgedDeviceBasic is an idiomatic wrapper over the Objective-C class MTRClusterBridgedDeviceBasic.
+//
+// It embeds [MTRClusterBridgedDeviceBasicInformation], promoting that type's methods.
 type MTRClusterBridgedDeviceBasic struct {
-	objref.Handle
+	MTRClusterBridgedDeviceBasicInformation
 }
 
 // MTRClusterBridgedDeviceBasicFromID adopts an existing Objective-C object as a MTRClusterBridgedDeviceBasic
@@ -23,7 +24,8 @@ func MTRClusterBridgedDeviceBasicFromID(id objc.ID) *MTRClusterBridgedDeviceBasi
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterBridgedDeviceBasic{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterBridgedDeviceBasic{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRClusterBridgedDeviceBasicAdopt(id objc.ID) *MTRClusterBridgedDeviceBasic
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterBridgedDeviceBasic{Handle: objref.Wrap(id)}
+	x := &MTRClusterBridgedDeviceBasic{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRClusterBridgedDeviceBasic) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterBridgedDeviceBasic) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterBridgedDeviceBasic) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRClusterBridgedDeviceBasicWithDeviceEndpointQueue creates a new MTRClusterBridgedDeviceBasic.
@@ -69,3 +57,9 @@ type MTRClusterBridgedDeviceBasicable interface {
 }
 
 var _ MTRClusterBridgedDeviceBasicable = (*MTRClusterBridgedDeviceBasic)(nil)
+
+var _ MTRClusterBridgedDeviceBasicInformationProvider = (*MTRClusterBridgedDeviceBasic)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterBridgedDeviceBasic)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterBridgedDeviceBasic)(nil)

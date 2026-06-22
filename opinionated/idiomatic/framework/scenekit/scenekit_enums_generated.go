@@ -23,6 +23,8 @@ const (
 	ActionTimingModeEaseInEaseOut ActionTimingMode = 3
 )
 
+// String returns the ActionTimingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ActionTimingMode) String() string {
 	switch e {
 	case ActionTimingModeLinear:
@@ -54,6 +56,8 @@ const (
 	AntialiasingModeMultisampling16X AntialiasingMode = 4
 )
 
+// String returns the AntialiasingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AntialiasingMode) String() string {
 	switch e {
 	case AntialiasingModeNone:
@@ -86,6 +90,8 @@ const (
 	BillboardAxisAll BillboardAxis = 7
 )
 
+// String returns the BillboardAxis constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BillboardAxis) String() string {
 	var parts []string
 	if e&BillboardAxisX != 0 {
@@ -125,6 +131,8 @@ const (
 	BlendModeMax     BlendMode = 6
 )
 
+// String returns the BlendMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BlendMode) String() string {
 	switch e {
 	case BlendModeAlpha:
@@ -158,6 +166,8 @@ const (
 	BufferFrequencyPerShadable BufferFrequency = 2
 )
 
+// String returns the BufferFrequency constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BufferFrequency) String() string {
 	switch e {
 	case BufferFrequencyPerFrame:
@@ -181,6 +191,8 @@ const (
 	CameraProjectionDirectionHorizontal CameraProjectionDirection = 1
 )
 
+// String returns the CameraProjectionDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CameraProjectionDirection) String() string {
 	switch e {
 	case CameraProjectionDirectionVertical:
@@ -204,6 +216,8 @@ const (
 	ChamferModeBack ChamferMode = 2
 )
 
+// String returns the ChamferMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ChamferMode) String() string {
 	switch e {
 	case ChamferModeBoth:
@@ -229,6 +243,8 @@ const (
 	ColorMaskAll   ColorMask = 15
 )
 
+// String returns the ColorMask constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ColorMask) String() string {
 	var parts []string
 	if e&ColorMaskRed != 0 {
@@ -260,6 +276,8 @@ const (
 	CullModeFront CullMode = 1
 )
 
+// String returns the CullMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CullMode) String() string {
 	switch e {
 	case CullModeBack:
@@ -278,6 +296,8 @@ const (
 	FillModeLines FillMode = 1
 )
 
+// String returns the FillMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FillMode) String() string {
 	switch e {
 	case FillModeFill:
@@ -301,6 +321,8 @@ const (
 	FilterModeLinear FilterMode = 2
 )
 
+// String returns the FilterMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FilterMode) String() string {
 	switch e {
 	case FilterModeNone:
@@ -329,6 +351,8 @@ const (
 	GeometryPrimitiveTypePolygon GeometryPrimitiveType = 4
 )
 
+// String returns the GeometryPrimitiveType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GeometryPrimitiveType) String() string {
 	switch e {
 	case GeometryPrimitiveTypeTriangles:
@@ -358,6 +382,8 @@ const (
 	InteractionModeTruck                InteractionMode = 6
 )
 
+// String returns the InteractionMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e InteractionMode) String() string {
 	switch e {
 	case InteractionModeFly:
@@ -386,6 +412,8 @@ const (
 	LightAreaTypePolygon   LightAreaType = 4
 )
 
+// String returns the LightAreaType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LightAreaType) String() string {
 	switch e {
 	case LightAreaTypeRectangle:
@@ -404,6 +432,8 @@ const (
 	LightProbeTypeRadiance   LightProbeType = 1
 )
 
+// String returns the LightProbeType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LightProbeType) String() string {
 	switch e {
 	case LightProbeTypeIrradiance:
@@ -422,6 +452,8 @@ const (
 	LightProbeUpdateTypeRealtime LightProbeUpdateType = 1
 )
 
+// String returns the LightProbeUpdateType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LightProbeUpdateType) String() string {
 	switch e {
 	case LightProbeUpdateTypeNever:
@@ -443,6 +475,8 @@ const (
 	MorpherCalculationModeAdditive MorpherCalculationMode = 1
 )
 
+// String returns the MorpherCalculationMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MorpherCalculationMode) String() string {
 	switch e {
 	case MorpherCalculationModeNormalized:
@@ -464,6 +498,8 @@ const (
 	MovabilityHintMovable MovabilityHint = 1
 )
 
+// String returns the MovabilityHint constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MovabilityHint) String() string {
 	switch e {
 	case MovabilityHintFixed:
@@ -487,6 +523,8 @@ const (
 	NodeFocusBehaviorFocusable NodeFocusBehavior = 2
 )
 
+// String returns the NodeFocusBehavior constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NodeFocusBehavior) String() string {
 	switch e {
 	case NodeFocusBehaviorNone:
@@ -512,6 +550,8 @@ const (
 	ParticleBirthDirectionRandom ParticleBirthDirection = 2
 )
 
+// String returns the ParticleBirthDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ParticleBirthDirection) String() string {
 	switch e {
 	case ParticleBirthDirectionConstant:
@@ -537,6 +577,8 @@ const (
 	ParticleBirthLocationVertex ParticleBirthLocation = 2
 )
 
+// String returns the ParticleBirthLocation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ParticleBirthLocation) String() string {
 	switch e {
 	case ParticleBirthLocationSurface:
@@ -568,6 +610,8 @@ const (
 	ParticleBlendModeReplace ParticleBlendMode = 5
 )
 
+// String returns the ParticleBlendMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ParticleBlendMode) String() string {
 	switch e {
 	case ParticleBlendModeAdditive:
@@ -599,6 +643,8 @@ const (
 	ParticleEventCollision ParticleEvent = 2
 )
 
+// String returns the ParticleEvent constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ParticleEvent) String() string {
 	switch e {
 	case ParticleEventBirth:
@@ -624,6 +670,8 @@ const (
 	ParticleImageSequenceAnimationModeAutoReverse ParticleImageSequenceAnimationMode = 2
 )
 
+// String returns the ParticleImageSequenceAnimationMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ParticleImageSequenceAnimationMode) String() string {
 	switch e {
 	case ParticleImageSequenceAnimationModeRepeat:
@@ -649,6 +697,8 @@ const (
 	ParticleInputModeOverOtherProperty ParticleInputMode = 2
 )
 
+// String returns the ParticleInputMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ParticleInputMode) String() string {
 	switch e {
 	case ParticleInputModeOverLife:
@@ -676,6 +726,8 @@ const (
 	ParticleModifierStagePostCollision ParticleModifierStage = 3
 )
 
+// String returns the ParticleModifierStage constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ParticleModifierStage) String() string {
 	switch e {
 	case ParticleModifierStagePreDynamics:
@@ -705,6 +757,8 @@ const (
 	ParticleOrientationModeBillboardYAligned ParticleOrientationMode = 3
 )
 
+// String returns the ParticleOrientationMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ParticleOrientationMode) String() string {
 	switch e {
 	case ParticleOrientationModeBillboardScreenAligned:
@@ -736,6 +790,8 @@ const (
 	ParticleSortingModeYoungestFirst ParticleSortingMode = 4
 )
 
+// String returns the ParticleSortingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ParticleSortingMode) String() string {
 	switch e {
 	case ParticleSortingModeNone:
@@ -765,6 +821,8 @@ const (
 	PhysicsBodyTypeKinematic PhysicsBodyType = 2
 )
 
+// String returns the PhysicsBodyType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PhysicsBodyType) String() string {
 	switch e {
 	case PhysicsBodyTypeStatic:
@@ -788,6 +846,8 @@ const (
 	PhysicsFieldScopeOutsideExtent PhysicsFieldScope = 1
 )
 
+// String returns the PhysicsFieldScope constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PhysicsFieldScope) String() string {
 	switch e {
 	case PhysicsFieldScopeInsideExtent:
@@ -809,6 +869,8 @@ const (
 	ReferenceLoadingPolicyOnDemand ReferenceLoadingPolicy = 1
 )
 
+// String returns the ReferenceLoadingPolicy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ReferenceLoadingPolicy) String() string {
 	switch e {
 	case ReferenceLoadingPolicyImmediate:
@@ -832,6 +894,8 @@ const (
 	ShadowModeModulated ShadowMode = 2
 )
 
+// String returns the ShadowMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ShadowMode) String() string {
 	switch e {
 	case ShadowModeForward:
@@ -853,6 +917,8 @@ const (
 	TessellationSmoothingModePhong       TessellationSmoothingMode = 2
 )
 
+// String returns the TessellationSmoothingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TessellationSmoothingMode) String() string {
 	switch e {
 	case TessellationSmoothingModeNone:
@@ -879,6 +945,8 @@ const (
 	TransparencyModeDefault     TransparencyMode = 0
 )
 
+// String returns the TransparencyMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TransparencyMode) String() string {
 	switch e {
 	case TransparencyModeAOne:
@@ -908,6 +976,8 @@ const (
 	WrapModeMirror WrapMode = 4
 )
 
+// String returns the WrapMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WrapMode) String() string {
 	switch e {
 	case WrapModeClamp:

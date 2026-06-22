@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Groups together properties for creating a compiler context.
-//
 // MTL4CompilerDescriptor is an idiomatic wrapper over the Objective-C class MTL4CompilerDescriptor.
+//
+// Groups together properties for creating a compiler context.
 type MTL4CompilerDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MTL4CompilerDescriptorFromID(id objc.ID) *MTL4CompilerDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4CompilerDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTL4CompilerDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTL4CompilerDescriptorAdopt(id objc.ID) *MTL4CompilerDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4CompilerDescriptor{Handle: objref.Wrap(id)}
+	x := &MTL4CompilerDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +60,25 @@ func (x *MTL4CompilerDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTL4CompilerDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTL4CompilerDescriptor creates a new MTL4CompilerDescriptor.
 func NewMTL4CompilerDescriptor() *MTL4CompilerDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTL4CompilerDescriptor")), objc.RegisterName("new"))
 	return mTL4CompilerDescriptorAdopt(_id)
 }
 
-// Assigns an optional descriptor label to the compiler for debugging purposes.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel assigns an optional descriptor label to the compiler for debugging purposes.
 func (x *MTL4CompilerDescriptor) WithLabel(label string) *MTL4CompilerDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Assigns an optional descriptor label to the compiler for debugging purposes.
+// Label assigns an optional descriptor label to the compiler for debugging purposes.
 func (x *MTL4CompilerDescriptor) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -81,6 +87,7 @@ func (x *MTL4CompilerDescriptor) Label() string {
 	return purego.GoString(_r)
 }
 
+// SetLabel wraps the corresponding Objective-C method.
 func (x *MTL4CompilerDescriptor) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }

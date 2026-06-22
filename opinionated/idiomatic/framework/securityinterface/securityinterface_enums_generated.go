@@ -18,6 +18,8 @@ const (
 	AuthorizationViewUnlockedState   AuthorizationViewState = 3
 )
 
+// String returns the AuthorizationViewState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationViewState) String() string {
 	switch e {
 	case AuthorizationStartupState:
@@ -43,6 +45,8 @@ const (
 	ButtonTypeLogin  ButtonType = 1
 )
 
+// String returns the ButtonType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ButtonType) String() string {
 	switch e {
 	case ButtonTypeCancel:
@@ -62,6 +66,8 @@ const (
 	ViewTypeCredentials            ViewType = 1
 )
 
+// String returns the ViewType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ViewType) String() string {
 	switch e {
 	case ViewTypeIdentityAndCredentials:

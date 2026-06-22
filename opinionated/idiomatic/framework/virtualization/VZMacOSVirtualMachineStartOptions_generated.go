@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that describes start options for macOS VMs.
-//
 // MacOSVirtualMachineStartOptions is an idiomatic wrapper over the Objective-C class VZMacOSVirtualMachineStartOptions.
+//
+// It embeds [VirtualMachineStartOptions], promoting that type's methods.
+//
+// A class that describes start options for macOS VMs.
 type MacOSVirtualMachineStartOptions struct {
-	objref.Handle
+	VirtualMachineStartOptions
 }
 
 // MacOSVirtualMachineStartOptionsFromID adopts an existing Objective-C object as a MacOSVirtualMachineStartOptions
@@ -25,7 +26,8 @@ func MacOSVirtualMachineStartOptionsFromID(id objc.ID) *MacOSVirtualMachineStart
 	if id == 0 {
 		return nil
 	}
-	x := &MacOSVirtualMachineStartOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MacOSVirtualMachineStartOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func macOSVirtualMachineStartOptionsAdopt(id objc.ID) *MacOSVirtualMachineStartO
 	if id == 0 {
 		return nil
 	}
-	x := &MacOSVirtualMachineStartOptions{Handle: objref.Wrap(id)}
+	x := &MacOSVirtualMachineStartOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MacOSVirtualMachineStartOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MacOSVirtualMachineStartOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MacOSVirtualMachineStartOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMacOSVirtualMachineStartOptions creates a new MacOSVirtualMachineStartOptions.
@@ -64,19 +52,19 @@ func NewMacOSVirtualMachineStartOptions() *MacOSVirtualMachineStartOptions {
 	return macOSVirtualMachineStartOptionsAdopt(_id)
 }
 
-// A Boolean value that indicates whether the macOS guest should start in recovery mode.
-//
-// WithStartUpFromMacOSRecovery sets startUpFromMacOSRecovery and returns the receiver so calls can be chained.
+// WithStartUpFromMacOSRecovery a Boolean value that indicates whether the macOS guest should start in recovery mode.
 func (x *MacOSVirtualMachineStartOptions) WithStartUpFromMacOSRecovery(startUpFromMacOSRecovery bool) *MacOSVirtualMachineStartOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartUpFromMacOSRecovery:"), startUpFromMacOSRecovery)
 	return x
 }
 
+// StartUpFromMacOSRecovery wraps the corresponding Objective-C method.
 func (x *MacOSVirtualMachineStartOptions) StartUpFromMacOSRecovery() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startUpFromMacOSRecovery"))
 	return _r
 }
 
+// SetStartUpFromMacOSRecovery wraps the corresponding Objective-C method.
 func (x *MacOSVirtualMachineStartOptions) SetStartUpFromMacOSRecovery(startUpFromMacOSRecovery bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartUpFromMacOSRecovery:"), startUpFromMacOSRecovery)
 }
@@ -90,3 +78,5 @@ type MacOSVirtualMachineStartOptionsable interface {
 }
 
 var _ MacOSVirtualMachineStartOptionsable = (*MacOSVirtualMachineStartOptions)(nil)
+
+var _ VirtualMachineStartOptionsProvider = (*MacOSVirtualMachineStartOptions)(nil)

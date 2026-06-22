@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A single node in a navigation graph for use in pathfinding.
-//
 // GraphNode is an idiomatic wrapper over the Objective-C class GKGraphNode.
+//
+// GraphNode is an abstract base — you do not construct it directly. Construct one of [GraphNode2D], [GraphNode3D], [GridGraphNode] and pass it where a GraphNode is accepted.
+//
+// A single node in a navigation graph for use in pathfinding.
 type GraphNode struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func GraphNodeFromID(id objc.ID) *GraphNode {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func graphNodeAdopt(id objc.ID) *GraphNode {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphNode{Handle: objref.Wrap(id)}
+	x := &GraphNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,47 +62,47 @@ func (x *GraphNode) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewGraphNode creates a new GraphNode.
-func NewGraphNode() *GraphNode {
-	_id := objc.Send[objc.ID](objc.ID(_class("GKGraphNode")), objc.RegisterName("new"))
-	return graphNodeAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GraphNode) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Connects this node to all nodes in the specified list.
+// AddConnectionsToNodesBidirectional connects this node to all nodes in the specified list.
 func (x *GraphNode) AddConnectionsToNodesBidirectional(nodes []*GraphNode, bidirectional bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addConnectionsToNodes:bidirectional:"), purego.SliceToNSArray(nodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }), bidirectional)
 }
 
-// Removes the connections from this node to the specified nodes.
+// RemoveConnectionsToNodesBidirectional removes the connections from this node to the specified nodes.
 func (x *GraphNode) RemoveConnectionsToNodesBidirectional(nodes []*GraphNode, bidirectional bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeConnectionsToNodes:bidirectional:"), purego.SliceToNSArray(nodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }), bidirectional)
 }
 
-// Returns an underestimate of the cost of travel from this node to the specified node.
+// EstimatedCostToNode returns an underestimate of the cost of travel from this node to the specified node.
 func (x *GraphNode) EstimatedCostToNode(node *GraphNode) float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("estimatedCostToNode:"), objref.IDOf(node))
 	return _r
 }
 
-// Returns the cost to travel from this node to the specified, directly connected, node.
+// CostToNode returns the cost to travel from this node to the specified, directly connected, node.
 func (x *GraphNode) CostToNode(node *GraphNode) float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("costToNode:"), objref.IDOf(node))
 	return _r
 }
 
-// Computes and returns a sequence of nodes that represents the lowest-cost graph traversal from this node to the specified node.
+// FindPathToNode computes and returns a sequence of nodes that represents the lowest-cost graph traversal from this node to the specified node.
 func (x *GraphNode) FindPathToNode(goalNode *GraphNode) []*GraphNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("findPathToNode:"), objref.IDOf(goalNode))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphNode { return GraphNodeFromID(_id) })
 }
 
-// Computes and returns a sequence of nodes that represents the lowest-cost graph traversal from the specified node to this node.
+// FindPathFromNode computes and returns a sequence of nodes that represents the lowest-cost graph traversal from the specified node to this node.
 func (x *GraphNode) FindPathFromNode(startNode *GraphNode) []*GraphNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("findPathFromNode:"), objref.IDOf(startNode))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphNode { return GraphNodeFromID(_id) })
 }
 
-// List of other graph nodes that this node has an edge leading to.
+// ConnectedNodes list of other graph nodes that this node has an edge leading to.
 //
 // ConnectedNodes returns the collection as a Go slice.
 func (x *GraphNode) ConnectedNodes() []*GraphNode {
@@ -119,3 +123,10 @@ type GraphNodeable interface {
 }
 
 var _ GraphNodeable = (*GraphNode)(nil)
+
+// isGraphNode marks GraphNode — and, by embedding promotion, its
+// subclasses — as a member of the GraphNode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *GraphNode) isGraphNode() {}
+
+var _ GraphNodeProvider = (*GraphNode)(nil)

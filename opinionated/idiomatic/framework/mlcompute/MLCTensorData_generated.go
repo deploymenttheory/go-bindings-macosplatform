@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An encapsulation of the memory that tensor data uses.
-//
 // TensorData is an idiomatic wrapper over the Objective-C class MLCTensorData.
+//
+// An encapsulation of the memory that tensor data uses.
 type TensorData struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TensorDataFromID(id objc.ID) *TensorData {
 	if id == 0 {
 		return nil
 	}
-	x := &TensorData{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TensorData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func tensorDataAdopt(id objc.ID) *TensorData {
 	if id == 0 {
 		return nil
 	}
-	x := &TensorData{Handle: objref.Wrap(id)}
+	x := &TensorData{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *TensorData) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TensorData) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTensorData creates a new TensorData.
 func NewTensorData() *TensorData {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLCTensorData")), objc.RegisterName("new"))
 	return tensorDataAdopt(_id)
 }
 
-// The size in bytes of the tensor data
+// Length the size in bytes of the tensor data
 func (x *TensorData) Length() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
 	return _r

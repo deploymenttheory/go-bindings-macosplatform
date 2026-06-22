@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // CNNInstanceNormalizationGradientState is an idiomatic wrapper over the Objective-C class MPSCNNInstanceNormalizationGradientState.
+//
+// It embeds [NNGradientState], promoting that type's methods.
 type CNNInstanceNormalizationGradientState struct {
-	objref.Handle
+	NNGradientState
 }
 
 // CNNInstanceNormalizationGradientStateFromID adopts an existing Objective-C object as a CNNInstanceNormalizationGradientState
@@ -23,7 +24,8 @@ func CNNInstanceNormalizationGradientStateFromID(id objc.ID) *CNNInstanceNormali
 	if id == 0 {
 		return nil
 	}
-	x := &CNNInstanceNormalizationGradientState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNInstanceNormalizationGradientState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func cNNInstanceNormalizationGradientStateAdopt(id objc.ID) *CNNInstanceNormaliz
 	if id == 0 {
 		return nil
 	}
-	x := &CNNInstanceNormalizationGradientState{Handle: objref.Wrap(id)}
+	x := &CNNInstanceNormalizationGradientState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNInstanceNormalizationGradientState) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNInstanceNormalizationGradientState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNInstanceNormalizationGradientState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNInstanceNormalizationGradientState creates a new CNNInstanceNormalizationGradientState.
@@ -62,7 +50,7 @@ func NewCNNInstanceNormalizationGradientState() *CNNInstanceNormalizationGradien
 	return cNNInstanceNormalizationGradientStateAdopt(_id)
 }
 
-// The MPSCNNInstanceNormalization object that created this state object.
+// InstanceNormalization the MPSCNNInstanceNormalization object that created this state object.
 func (x *CNNInstanceNormalizationGradientState) InstanceNormalization() *CNNInstanceNormalization {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instanceNormalization"))
 	return CNNInstanceNormalizationFromID(_r)
@@ -75,3 +63,5 @@ type CNNInstanceNormalizationGradientStateable interface {
 }
 
 var _ CNNInstanceNormalizationGradientStateable = (*CNNInstanceNormalizationGradientState)(nil)
+
+var _ NNGradientStateProvider = (*CNNInstanceNormalizationGradientState)(nil)

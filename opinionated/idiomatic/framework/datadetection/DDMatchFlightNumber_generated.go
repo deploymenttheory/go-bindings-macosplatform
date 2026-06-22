@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains a flight number that the data detection system matches.
-//
 // MatchFlightNumber is an idiomatic wrapper over the Objective-C class DDMatchFlightNumber.
+//
+// It embeds [Match], promoting that type's methods.
+//
+// An object that contains a flight number that the data detection system matches.
 type MatchFlightNumber struct {
-	objref.Handle
+	Match
 }
 
 // MatchFlightNumberFromID adopts an existing Objective-C object as a MatchFlightNumber
@@ -25,7 +26,8 @@ func MatchFlightNumberFromID(id objc.ID) *MatchFlightNumber {
 	if id == 0 {
 		return nil
 	}
-	x := &MatchFlightNumber{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatchFlightNumber{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func matchFlightNumberAdopt(id objc.ID) *MatchFlightNumber {
 	if id == 0 {
 		return nil
 	}
-	x := &MatchFlightNumber{Handle: objref.Wrap(id)}
+	x := &MatchFlightNumber{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MatchFlightNumber) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatchFlightNumber) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatchFlightNumber) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMatchFlightNumber creates a new MatchFlightNumber.
@@ -64,7 +52,7 @@ func NewMatchFlightNumber() *MatchFlightNumber {
 	return matchFlightNumberAdopt(_id)
 }
 
-// The name of an airline.
+// Airline the name of an airline.
 func (x *MatchFlightNumber) Airline() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("airline"))
 	if _r == 0 {
@@ -73,7 +61,7 @@ func (x *MatchFlightNumber) Airline() string {
 	return purego.GoString(_r)
 }
 
-// A string that represents a flight number.
+// FlightNumber a string that represents a flight number.
 func (x *MatchFlightNumber) FlightNumber() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flightNumber"))
 	if _r == 0 {
@@ -90,3 +78,5 @@ type MatchFlightNumberable interface {
 }
 
 var _ MatchFlightNumberable = (*MatchFlightNumber)(nil)
+
+var _ MatchProvider = (*MatchFlightNumber)(nil)

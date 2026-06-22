@@ -13,6 +13,8 @@ import (
 )
 
 // MTRBasicInformationClusterShutDownEvent is an idiomatic wrapper over the Objective-C class MTRBasicInformationClusterShutDownEvent.
+//
+// MTRBasicInformationClusterShutDownEvent is an abstract base — you do not construct it directly. Construct one of [MTRBasicClusterShutDownEvent] and pass it where a MTRBasicInformationClusterShutDownEvent is accepted.
 type MTRBasicInformationClusterShutDownEvent struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRBasicInformationClusterShutDownEventFromID(id objc.ID) *MTRBasicInformat
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBasicInformationClusterShutDownEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBasicInformationClusterShutDownEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRBasicInformationClusterShutDownEventAdopt(id objc.ID) *MTRBasicInformati
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBasicInformationClusterShutDownEvent{Handle: objref.Wrap(id)}
+	x := &MTRBasicInformationClusterShutDownEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,10 +60,10 @@ func (x *MTRBasicInformationClusterShutDownEvent) IsKind(className string) bool 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRBasicInformationClusterShutDownEvent creates a new MTRBasicInformationClusterShutDownEvent.
-func NewMTRBasicInformationClusterShutDownEvent() *MTRBasicInformationClusterShutDownEvent {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRBasicInformationClusterShutDownEvent")), objc.RegisterName("new"))
-	return mTRBasicInformationClusterShutDownEventAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRBasicInformationClusterShutDownEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // MTRBasicInformationClusterShutDownEventable is the interface implemented by [MTRBasicInformationClusterShutDownEvent], for mocking and DI.
@@ -68,3 +72,10 @@ type MTRBasicInformationClusterShutDownEventable interface {
 }
 
 var _ MTRBasicInformationClusterShutDownEventable = (*MTRBasicInformationClusterShutDownEvent)(nil)
+
+// isMTRBasicInformationClusterShutDownEvent marks MTRBasicInformationClusterShutDownEvent — and, by embedding promotion, its
+// subclasses — as a member of the MTRBasicInformationClusterShutDownEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRBasicInformationClusterShutDownEvent) isMTRBasicInformationClusterShutDownEvent() {}
+
+var _ MTRBasicInformationClusterShutDownEventProvider = (*MTRBasicInformationClusterShutDownEvent)(nil)

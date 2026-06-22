@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The renderer for a tile overlay that handles the drawing of bitmap images on the map surface.
-//
 // TileOverlayRenderer is an idiomatic wrapper over the Objective-C class MKTileOverlayRenderer.
+//
+// It embeds [OverlayRenderer], promoting that type's methods.
+//
+// The renderer for a tile overlay that handles the drawing of bitmap images on the map surface.
 type TileOverlayRenderer struct {
-	objref.Handle
+	OverlayRenderer
 }
 
 // TileOverlayRendererFromID adopts an existing Objective-C object as a TileOverlayRenderer
@@ -25,7 +26,8 @@ func TileOverlayRendererFromID(id objc.ID) *TileOverlayRenderer {
 	if id == 0 {
 		return nil
 	}
-	x := &TileOverlayRenderer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TileOverlayRenderer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,44 +40,26 @@ func tileOverlayRendererAdopt(id objc.ID) *TileOverlayRenderer {
 	if id == 0 {
 		return nil
 	}
-	x := &TileOverlayRenderer{Handle: objref.Wrap(id)}
+	x := &TileOverlayRenderer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *TileOverlayRenderer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TileOverlayRenderer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TileOverlayRenderer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes and returns a tile renderer with the specified overlay object.
-//
-// NewTileOverlayRendererWithTileOverlay creates a new TileOverlayRenderer.
+// NewTileOverlayRendererWithTileOverlay initializes and returns a tile renderer with the specified overlay object.
 func NewTileOverlayRendererWithTileOverlay(overlay *TileOverlay) *TileOverlayRenderer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKTileOverlayRenderer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTileOverlay:"), objref.IDOf(overlay))
 	return tileOverlayRendererAdopt(_id)
 }
 
-// The amount of transparency to apply to the overlay.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the amount of transparency to apply to the overlay.
 func (x *TileOverlayRenderer) WithAlpha(alpha float64) *TileOverlayRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// Forces the tile overlay renderer to reload and redisplay the tiles.
+// ReloadData forces the tile overlay renderer to reload and redisplay the tiles.
 func (x *TileOverlayRenderer) ReloadData() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadData"))
 }
@@ -88,3 +72,5 @@ type TileOverlayRendererable interface {
 }
 
 var _ TileOverlayRendererable = (*TileOverlayRenderer)(nil)
+
+var _ OverlayRendererProvider = (*TileOverlayRenderer)(nil)

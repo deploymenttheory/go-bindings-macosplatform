@@ -17,6 +17,8 @@ const (
 	BluetoothRFCOMMLineStatusFramingError BluetoothRFCOMMLineStatus = 3
 )
 
+// String returns the BluetoothRFCOMMLineStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BluetoothRFCOMMLineStatus) String() string {
 	switch e {
 	case BluetoothRFCOMMLineStatusNoError:
@@ -41,6 +43,8 @@ const (
 	KBluetoothRFCOMMParityTypeMaxParity  BluetoothRFCOMMParityType = 3
 )
 
+// String returns the BluetoothRFCOMMParityType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BluetoothRFCOMMParityType) String() string {
 	switch e {
 	case KBluetoothRFCOMMParityTypeNoParity:
@@ -63,6 +67,8 @@ const (
 	IOBluetoothSMSModeText IOBluetoothSMSMode = 1
 )
 
+// String returns the IOBluetoothSMSMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e IOBluetoothSMSMode) String() string {
 	switch e {
 	case IOBluetoothSMSModePDU:

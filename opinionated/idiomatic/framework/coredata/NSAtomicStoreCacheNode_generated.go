@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A concrete class that you use to represent basic nodes in a Core Data atomic store.
-//
 // AtomicStoreCacheNode is an idiomatic wrapper over the Objective-C class NSAtomicStoreCacheNode.
+//
+// A concrete class that you use to represent basic nodes in a Core Data atomic store.
 type AtomicStoreCacheNode struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AtomicStoreCacheNodeFromID(id objc.ID) *AtomicStoreCacheNode {
 	if id == 0 {
 		return nil
 	}
-	x := &AtomicStoreCacheNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AtomicStoreCacheNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func atomicStoreCacheNodeAdopt(id objc.ID) *AtomicStoreCacheNode {
 	if id == 0 {
 		return nil
 	}
-	x := &AtomicStoreCacheNode{Handle: objref.Wrap(id)}
+	x := &AtomicStoreCacheNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,33 +60,38 @@ func (x *AtomicStoreCacheNode) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns a cache node for the given managed object ID.
-//
-// NewAtomicStoreCacheNodeWithObjectID creates a new AtomicStoreCacheNode.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AtomicStoreCacheNode) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAtomicStoreCacheNodeWithObjectID returns a cache node for the given managed object ID.
 func NewAtomicStoreCacheNodeWithObjectID(moid *ManagedObjectID) *AtomicStoreCacheNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAtomicStoreCacheNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjectID:"), objref.IDOf(moid))
 	return atomicStoreCacheNodeAdopt(_id)
 }
 
-// The property cache dictionary of the node.
-//
-// WithPropertyCache sets propertyCache and returns the receiver so calls can be chained.
+// WithPropertyCache the property cache dictionary of the node.
 func (x *AtomicStoreCacheNode) WithPropertyCache(propertyCache obj.Object) *AtomicStoreCacheNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertyCache:"), objref.IDOf(propertyCache))
 	return x
 }
 
+// ObjectID wraps the corresponding Objective-C method.
 func (x *AtomicStoreCacheNode) ObjectID() *ManagedObjectID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectID"))
 	return ManagedObjectIDFromID(_r)
 }
 
+// PropertyCache wraps the corresponding Objective-C method.
 func (x *AtomicStoreCacheNode) PropertyCache() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyCache"))
 	return obj.Wrap(_r)
 }
 
+// SetPropertyCache wraps the corresponding Objective-C method.
 func (x *AtomicStoreCacheNode) SetPropertyCache(propertyCache obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertyCache:"), objref.IDOf(propertyCache))
 }

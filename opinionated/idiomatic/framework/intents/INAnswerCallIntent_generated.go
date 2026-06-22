@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // AnswerCallIntent is an idiomatic wrapper over the Objective-C class INAnswerCallIntent.
+//
+// It embeds [Intent], promoting that type's methods.
 type AnswerCallIntent struct {
-	objref.Handle
+	Intent
 }
 
 // AnswerCallIntentFromID adopts an existing Objective-C object as a AnswerCallIntent
@@ -23,7 +24,8 @@ func AnswerCallIntentFromID(id objc.ID) *AnswerCallIntent {
 	if id == 0 {
 		return nil
 	}
-	x := &AnswerCallIntent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AnswerCallIntent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func answerCallIntentAdopt(id objc.ID) *AnswerCallIntent {
 	if id == 0 {
 		return nil
 	}
-	x := &AnswerCallIntent{Handle: objref.Wrap(id)}
+	x := &AnswerCallIntent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AnswerCallIntent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AnswerCallIntent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AnswerCallIntent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAnswerCallIntentWithAudioRouteCallIdentifier creates a new AnswerCallIntent.
@@ -63,25 +51,25 @@ func NewAnswerCallIntentWithAudioRouteCallIdentifier(audioRoute CallAudioRoute, 
 	return answerCallIntentAdopt(_id)
 }
 
-// The intent’s display name.
-//
-// WithSuggestedInvocationPhrase sets suggestedInvocationPhrase and returns the receiver so calls can be chained.
+// WithSuggestedInvocationPhrase the intent’s display name.
 func (x *AnswerCallIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *AnswerCallIntent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
 	return x
 }
 
-// WithDonationMetadata sets donationMetadata and returns the receiver so calls can be chained.
+// WithDonationMetadata sets the property and returns the receiver so calls can be chained.
 func (x *AnswerCallIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *AnswerCallIntent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return x
 }
 
+// AudioRoute wraps the corresponding Objective-C method.
 func (x *AnswerCallIntent) AudioRoute() CallAudioRoute {
 	_r := objc.Send[CallAudioRoute](objref.IDOf(x), objc.RegisterName("audioRoute"))
 	return _r
 }
 
+// CallIdentifier wraps the corresponding Objective-C method.
 func (x *AnswerCallIntent) CallIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callIdentifier"))
 	if _r == 0 {
@@ -100,3 +88,5 @@ type AnswerCallIntentable interface {
 }
 
 var _ AnswerCallIntentable = (*AnswerCallIntent)(nil)
+
+var _ IntentProvider = (*AnswerCallIntent)(nil)

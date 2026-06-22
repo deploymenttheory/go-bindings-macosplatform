@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A graphical representation of the state of biometric authentication.
-//
 // AuthenticationView is an idiomatic wrapper over the Objective-C class LAAuthenticationView.
+//
+// A graphical representation of the state of biometric authentication.
 type AuthenticationView struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthenticationViewFromID(id objc.ID) *AuthenticationView {
 	if id == 0 {
 		return nil
 	}
-	x := &AuthenticationView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthenticationView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authenticationViewAdopt(id objc.ID) *AuthenticationView {
 	if id == 0 {
 		return nil
 	}
-	x := &AuthenticationView{Handle: objref.Wrap(id)}
+	x := &AuthenticationView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *AuthenticationView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new authentication icon that reflects the current authentication state.
-//
-// NewAuthenticationViewWithContext creates a new AuthenticationView.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthenticationView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAuthenticationViewWithContext creates a new authentication icon that reflects the current authentication state.
 func NewAuthenticationViewWithContext(context_ obj.Object) *AuthenticationView {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("LAAuthenticationView")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContext:"), objref.IDOf(context_))
 	return authenticationViewAdopt(_id)
 }
 
+// Context wraps the corresponding Objective-C method.
 func (x *AuthenticationView) Context() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("context"))
 	return obj.Wrap(_r)

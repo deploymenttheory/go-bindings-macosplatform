@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract base class for gathering information about an activity.
-//
 // ActivityItem is an idiomatic wrapper over the Objective-C class CLSActivityItem.
+//
+// ActivityItem is an abstract base — you do not construct it directly. Construct one of [BinaryItem], [QuantityItem], [ScoreItem] and pass it where a ActivityItem is accepted.
+//
+// An abstract base class for gathering information about an activity.
 type ActivityItem struct {
-	objref.Handle
+	Object
 }
 
 // ActivityItemFromID adopts an existing Objective-C object as a ActivityItem
@@ -25,7 +26,8 @@ func ActivityItemFromID(id objc.ID) *ActivityItem {
 	if id == 0 {
 		return nil
 	}
-	x := &ActivityItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ActivityItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,41 +40,19 @@ func activityItemAdopt(id objc.ID) *ActivityItem {
 	if id == 0 {
 		return nil
 	}
-	x := &ActivityItem{Handle: objref.Wrap(id)}
+	x := &ActivityItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ActivityItem) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ActivityItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ActivityItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewActivityItem creates a new ActivityItem.
-func NewActivityItem() *ActivityItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("CLSActivityItem")), objc.RegisterName("new"))
-	return activityItemAdopt(_id)
-}
-
-// A human readable name for the activity item.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle a human readable name for the activity item.
 func (x *ActivityItem) WithTitle(title string) *ActivityItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// Title of what this ActivityItem represents. This will be the title associated with the activity item in the generated progress report.
+// Title title of what this ActivityItem represents. This will be the title associated with the activity item in the generated progress report.
 func (x *ActivityItem) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -81,11 +61,12 @@ func (x *ActivityItem) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *ActivityItem) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// An identifier that is unique within its owning activity The identifier can be used to look up existing activityItems in a given activity.
+// Identifier an identifier that is unique within its owning activity The identifier can be used to look up existing activityItems in a given activity.
 func (x *ActivityItem) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -104,3 +85,12 @@ type ActivityItemable interface {
 }
 
 var _ ActivityItemable = (*ActivityItem)(nil)
+
+// isActivityItem marks ActivityItem — and, by embedding promotion, its
+// subclasses — as a member of the ActivityItem hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ActivityItem) isActivityItem() {}
+
+var _ ActivityItemProvider = (*ActivityItem)(nil)
+
+var _ ObjectProvider = (*ActivityItem)(nil)

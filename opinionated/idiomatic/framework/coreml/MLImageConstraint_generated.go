@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The width, height, and pixel format constraints of an image feature.
-//
 // ImageConstraint is an idiomatic wrapper over the Objective-C class MLImageConstraint.
+//
+// The width, height, and pixel format constraints of an image feature.
 type ImageConstraint struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ImageConstraintFromID(id objc.ID) *ImageConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func imageConstraintAdopt(id objc.ID) *ImageConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageConstraint{Handle: objref.Wrap(id)}
+	x := &ImageConstraint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,37 @@ func (x *ImageConstraint) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ImageConstraint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewImageConstraint creates a new ImageConstraint.
 func NewImageConstraint() *ImageConstraint {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLImageConstraint")), objc.RegisterName("new"))
 	return imageConstraintAdopt(_id)
 }
 
-// The required or default height of the image
+// PixelsHigh the required or default height of the image
 func (x *ImageConstraint) PixelsHigh() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelsHigh"))
 	return _r
 }
 
-// The required or default width of the image
+// PixelsWide the required or default width of the image
 func (x *ImageConstraint) PixelsWide() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelsWide"))
 	return _r
 }
 
-// The accepted kCVPixelFormatType for the image.
+// PixelFormatType the accepted kCVPixelFormatType for the image.
 func (x *ImageConstraint) PixelFormatType() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelFormatType"))
 	return _r
 }
 
-// Detailed image size constraint
+// SizeConstraint detailed image size constraint
 func (x *ImageConstraint) SizeConstraint() *ImageSizeConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sizeConstraint"))
 	return ImageSizeConstraintFromID(_r)

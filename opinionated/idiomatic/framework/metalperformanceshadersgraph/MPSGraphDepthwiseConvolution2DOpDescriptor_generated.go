@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that defines the parameters for a 2D-depthwise convolution operation.
-//
 // GraphDepthwiseConvolution2DOpDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphDepthwiseConvolution2DOpDescriptor.
+//
+// It embeds [GraphObject], promoting that type's methods.
+//
+// A class that defines the parameters for a 2D-depthwise convolution operation.
 type GraphDepthwiseConvolution2DOpDescriptor struct {
-	objref.Handle
+	GraphObject
 }
 
 // GraphDepthwiseConvolution2DOpDescriptorFromID adopts an existing Objective-C object as a GraphDepthwiseConvolution2DOpDescriptor
@@ -25,7 +26,8 @@ func GraphDepthwiseConvolution2DOpDescriptorFromID(id objc.ID) *GraphDepthwiseCo
 	if id == 0 {
 		return nil
 	}
-	x := &GraphDepthwiseConvolution2DOpDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphDepthwiseConvolution2DOpDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func graphDepthwiseConvolution2DOpDescriptorAdopt(id objc.ID) *GraphDepthwiseCon
 	if id == 0 {
 		return nil
 	}
-	x := &GraphDepthwiseConvolution2DOpDescriptor{Handle: objref.Wrap(id)}
+	x := &GraphDepthwiseConvolution2DOpDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GraphDepthwiseConvolution2DOpDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphDepthwiseConvolution2DOpDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphDepthwiseConvolution2DOpDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGraphDepthwiseConvolution2DOpDescriptor creates a new GraphDepthwiseConvolution2DOpDescriptor.
@@ -64,205 +52,194 @@ func NewGraphDepthwiseConvolution2DOpDescriptor() *GraphDepthwiseConvolution2DOp
 	return graphDepthwiseConvolution2DOpDescriptorAdopt(_id)
 }
 
-// The stride for the x dimension.
-//
-// WithStrideInX sets strideInX and returns the receiver so calls can be chained.
+// WithStrideInX the stride for the x dimension.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithStrideInX(strideInX int) *GraphDepthwiseConvolution2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInX:"), strideInX)
 	return x
 }
 
-// The stride for the y dimension.
-//
-// WithStrideInY sets strideInY and returns the receiver so calls can be chained.
+// WithStrideInY the stride for the y dimension.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithStrideInY(strideInY int) *GraphDepthwiseConvolution2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInY:"), strideInY)
 	return x
 }
 
-// The dilation rate for the x dimension.
-//
-// WithDilationRateInX sets dilationRateInX and returns the receiver so calls can be chained.
+// WithDilationRateInX the dilation rate for the x dimension.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithDilationRateInX(dilationRateInX int) *GraphDepthwiseConvolution2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateInX:"), dilationRateInX)
 	return x
 }
 
-// The dilation rate for the y dimension.
-//
-// WithDilationRateInY sets dilationRateInY and returns the receiver so calls can be chained.
+// WithDilationRateInY the dilation rate for the y dimension.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithDilationRateInY(dilationRateInY int) *GraphDepthwiseConvolution2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateInY:"), dilationRateInY)
 	return x
 }
 
-// The explicit padding value for the x dimension the operation adds before the data.
-//
-// WithPaddingLeft sets paddingLeft and returns the receiver so calls can be chained.
+// WithPaddingLeft the explicit padding value for the x dimension the operation adds before the data.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingLeft(paddingLeft int) *GraphDepthwiseConvolution2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingLeft:"), paddingLeft)
 	return x
 }
 
-// The explicit padding value for the x dimension operation adds after the data.
-//
-// WithPaddingRight sets paddingRight and returns the receiver so calls can be chained.
+// WithPaddingRight the explicit padding value for the x dimension operation adds after the data.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingRight(paddingRight int) *GraphDepthwiseConvolution2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingRight:"), paddingRight)
 	return x
 }
 
-// The explicit padding value for the y dimension operation adds before the data.
-//
-// WithPaddingTop sets paddingTop and returns the receiver so calls can be chained.
+// WithPaddingTop the explicit padding value for the y dimension operation adds before the data.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingTop(paddingTop int) *GraphDepthwiseConvolution2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingTop:"), paddingTop)
 	return x
 }
 
-// The explicit padding value for the y dimension operation adds after the data.
-//
-// WithPaddingBottom sets paddingBottom and returns the receiver so calls can be chained.
+// WithPaddingBottom the explicit padding value for the y dimension operation adds after the data.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingBottom(paddingBottom int) *GraphDepthwiseConvolution2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingBottom:"), paddingBottom)
 	return x
 }
 
-// The padding style for the operation.
-//
-// WithPaddingStyle sets paddingStyle and returns the receiver so calls can be chained.
+// WithPaddingStyle the padding style for the operation.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingStyle(paddingStyle GraphPaddingStyle) *GraphDepthwiseConvolution2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingStyle:"), paddingStyle)
 	return x
 }
 
-// The data layout of the input data in the forward pass.
-//
-// WithDataLayout sets dataLayout and returns the receiver so calls can be chained.
+// WithDataLayout the data layout of the input data in the forward pass.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithDataLayout(dataLayout GraphTensorNamedDataLayout) *GraphDepthwiseConvolution2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataLayout:"), dataLayout)
 	return x
 }
 
-// The data layout of the weights.
-//
-// WithWeightsLayout sets weightsLayout and returns the receiver so calls can be chained.
+// WithWeightsLayout the data layout of the weights.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithWeightsLayout(weightsLayout GraphTensorNamedDataLayout) *GraphDepthwiseConvolution2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeightsLayout:"), weightsLayout)
 	return x
 }
 
-// Sets the explicit padding values.
+// SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom sets the explicit padding values.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft int, paddingRight int, paddingTop int, paddingBottom int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExplicitPaddingWithPaddingLeft:paddingRight:paddingTop:paddingBottom:"), paddingLeft, paddingRight, paddingTop, paddingBottom)
 }
 
-// The stride for the x dimension. Default value: 1.
+// StrideInX the stride for the x dimension. Default value: 1.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) StrideInX() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInX"))
 	return _r
 }
 
+// SetStrideInX wraps the corresponding Objective-C method.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) SetStrideInX(strideInX int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInX:"), strideInX)
 }
 
-// The stride for the y dimension. Default value: 1.
+// StrideInY the stride for the y dimension. Default value: 1.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) StrideInY() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInY"))
 	return _r
 }
 
+// SetStrideInY wraps the corresponding Objective-C method.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) SetStrideInY(strideInY int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInY:"), strideInY)
 }
 
-// The dilation rate for the x dimension. Default value: 1.
+// DilationRateInX the dilation rate for the x dimension. Default value: 1.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) DilationRateInX() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateInX"))
 	return _r
 }
 
+// SetDilationRateInX wraps the corresponding Objective-C method.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) SetDilationRateInX(dilationRateInX int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateInX:"), dilationRateInX)
 }
 
-// The dilation rate for the y dimension. Default value: 1.
+// DilationRateInY the dilation rate for the y dimension. Default value: 1.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) DilationRateInY() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateInY"))
 	return _r
 }
 
+// SetDilationRateInY wraps the corresponding Objective-C method.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) SetDilationRateInY(dilationRateInY int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateInY:"), dilationRateInY)
 }
 
-// The explicit padding value for the x dimension the operation adds before the data. Default value: 0.
+// PaddingLeft the explicit padding value for the x dimension the operation adds before the data. Default value: 0.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) PaddingLeft() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingLeft"))
 	return _r
 }
 
+// SetPaddingLeft wraps the corresponding Objective-C method.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) SetPaddingLeft(paddingLeft int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingLeft:"), paddingLeft)
 }
 
-// The explicit padding value for the x dimension operation adds after the data. Default value: 0.
+// PaddingRight the explicit padding value for the x dimension operation adds after the data. Default value: 0.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) PaddingRight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingRight"))
 	return _r
 }
 
+// SetPaddingRight wraps the corresponding Objective-C method.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) SetPaddingRight(paddingRight int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingRight:"), paddingRight)
 }
 
-// The explicit padding value for the y dimension operation adds before the data. Default value: 0.
+// PaddingTop the explicit padding value for the y dimension operation adds before the data. Default value: 0.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) PaddingTop() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingTop"))
 	return _r
 }
 
+// SetPaddingTop wraps the corresponding Objective-C method.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) SetPaddingTop(paddingTop int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingTop:"), paddingTop)
 }
 
-// The explicit padding value for the y dimension operation adds after the data. Default value: 0.
+// PaddingBottom the explicit padding value for the y dimension operation adds after the data. Default value: 0.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) PaddingBottom() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingBottom"))
 	return _r
 }
 
+// SetPaddingBottom wraps the corresponding Objective-C method.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) SetPaddingBottom(paddingBottom int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingBottom:"), paddingBottom)
 }
 
-// The padding style for the operation. Default value is `MPSGraphPaddingStyleExplicit`.
+// PaddingStyle the padding style for the operation. Default value is `MPSGraphPaddingStyleExplicit`.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) PaddingStyle() GraphPaddingStyle {
 	_r := objc.Send[GraphPaddingStyle](objref.IDOf(x), objc.RegisterName("paddingStyle"))
 	return _r
 }
 
+// SetPaddingStyle wraps the corresponding Objective-C method.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) SetPaddingStyle(paddingStyle GraphPaddingStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingStyle:"), paddingStyle)
 }
 
-// The data layout of the input data in the forward pass. See: “MPSGraphTensorNamedDataLayout“.
+// DataLayout the data layout of the input data in the forward pass. See: “MPSGraphTensorNamedDataLayout“.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) DataLayout() GraphTensorNamedDataLayout {
 	_r := objc.Send[GraphTensorNamedDataLayout](objref.IDOf(x), objc.RegisterName("dataLayout"))
 	return _r
 }
 
+// SetDataLayout wraps the corresponding Objective-C method.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) SetDataLayout(dataLayout GraphTensorNamedDataLayout) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataLayout:"), dataLayout)
 }
 
-// The data layout of the weights. NOTE: 'O' index is channel multiplier index. See: “MPSGraphTensorNamedDataLayout“.
+// WeightsLayout the data layout of the weights. NOTE: 'O' index is channel multiplier index. See: “MPSGraphTensorNamedDataLayout“.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WeightsLayout() GraphTensorNamedDataLayout {
 	_r := objc.Send[GraphTensorNamedDataLayout](objref.IDOf(x), objc.RegisterName("weightsLayout"))
 	return _r
 }
 
+// SetWeightsLayout wraps the corresponding Objective-C method.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) SetWeightsLayout(weightsLayout GraphTensorNamedDataLayout) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeightsLayout:"), weightsLayout)
 }
@@ -307,3 +284,5 @@ type GraphDepthwiseConvolution2DOpDescriptorable interface {
 }
 
 var _ GraphDepthwiseConvolution2DOpDescriptorable = (*GraphDepthwiseConvolution2DOpDescriptor)(nil)
+
+var _ GraphObjectProvider = (*GraphDepthwiseConvolution2DOpDescriptor)(nil)

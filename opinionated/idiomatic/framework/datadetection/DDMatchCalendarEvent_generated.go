@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a calendar date or date range that the data detection system matches.
-//
 // MatchCalendarEvent is an idiomatic wrapper over the Objective-C class DDMatchCalendarEvent.
+//
+// It embeds [Match], promoting that type's methods.
+//
+// An object that represents a calendar date or date range that the data detection system matches.
 type MatchCalendarEvent struct {
-	objref.Handle
+	Match
 }
 
 // MatchCalendarEventFromID adopts an existing Objective-C object as a MatchCalendarEvent
@@ -25,7 +26,8 @@ func MatchCalendarEventFromID(id objc.ID) *MatchCalendarEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MatchCalendarEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatchCalendarEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func matchCalendarEventAdopt(id objc.ID) *MatchCalendarEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MatchCalendarEvent{Handle: objref.Wrap(id)}
+	x := &MatchCalendarEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MatchCalendarEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatchCalendarEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatchCalendarEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMatchCalendarEvent creates a new MatchCalendarEvent.
@@ -64,31 +52,31 @@ func NewMatchCalendarEvent() *MatchCalendarEvent {
 	return matchCalendarEventAdopt(_id)
 }
 
-// A Boolean value that indicates whether the event is an all-day event.
+// IsAllDay a Boolean value that indicates whether the event is an all-day event.
 func (x *MatchCalendarEvent) IsAllDay() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAllDay"))
 	return _r
 }
 
-// A date that represents the start of the event.
+// StartDate a date that represents the start of the event.
 func (x *MatchCalendarEvent) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
-// The time zone for the event’s start date.
+// StartTimeZone the time zone for the event’s start date.
 func (x *MatchCalendarEvent) StartTimeZone() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startTimeZone"))
 	return obj.Wrap(_r)
 }
 
-// A date that represents the end of the event.
+// EndDate a date that represents the end of the event.
 func (x *MatchCalendarEvent) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
-// The time zone for the event’s end date.
+// EndTimeZone the time zone for the event’s end date.
 func (x *MatchCalendarEvent) EndTimeZone() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endTimeZone"))
 	return obj.Wrap(_r)
@@ -105,3 +93,5 @@ type MatchCalendarEventable interface {
 }
 
 var _ MatchCalendarEventable = (*MatchCalendarEvent)(nil)
+
+var _ MatchProvider = (*MatchCalendarEvent)(nil)

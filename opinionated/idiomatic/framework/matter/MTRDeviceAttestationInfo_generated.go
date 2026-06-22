@@ -23,7 +23,8 @@ func MTRDeviceAttestationInfoFromID(id objc.ID) *MTRDeviceAttestationInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceAttestationInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDeviceAttestationInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDeviceAttestationInfoAdopt(id objc.ID) *MTRDeviceAttestationInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceAttestationInfo{Handle: objref.Wrap(id)}
+	x := &MTRDeviceAttestationInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *MTRDeviceAttestationInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceAttestationInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDeviceAttestationInfoWithDeviceAttestationChallengeNonceElementsTLVElementsSignatureDeviceAttestationCertificateProductAttestationIntermediateCertificateCertificationDeclarationFirmwareInfo creates a new MTRDeviceAttestationInfo.
 func NewMTRDeviceAttestationInfoWithDeviceAttestationChallengeNonceElementsTLVElementsSignatureDeviceAttestationCertificateProductAttestationIntermediateCertificateCertificationDeclarationFirmwareInfo(challenge obj.Object, nonce obj.Object, elementsTLV obj.Object, elementsSignature obj.Object, deviceAttestationCertificate obj.Object, processAttestationIntermediateCertificate obj.Object, certificationDeclaration obj.Object, firmwareInfo obj.Object) *MTRDeviceAttestationInfo {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRDeviceAttestationInfo")), objc.RegisterName("alloc"))
@@ -63,48 +71,49 @@ func NewMTRDeviceAttestationInfoWithDeviceAttestationChallengeNonceElementsTLVEl
 	return mTRDeviceAttestationInfoAdopt(_id)
 }
 
-// The attestation challenge from the secure session.
+// Challenge the attestation challenge from the secure session.
 func (x *MTRDeviceAttestationInfo) Challenge() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("challenge"))
 	return obj.Wrap(_r)
 }
 
-// The attestation nonce from the AttestationRequest command.
+// Nonce the attestation nonce from the AttestationRequest command.
 func (x *MTRDeviceAttestationInfo) Nonce() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nonce"))
 	return obj.Wrap(_r)
 }
 
-// The TLV-encoded attestation_elements_message that was used to find the certificationDeclaration and firmwareInfo.
+// ElementsTLV the TLV-encoded attestation_elements_message that was used to find the certificationDeclaration and firmwareInfo.
 func (x *MTRDeviceAttestationInfo) ElementsTLV() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementsTLV"))
 	return obj.Wrap(_r)
 }
 
-// A signature, using the device attestation private key of the device that sent the attestation information, over the concatenation of elementsTLV and the attestation challenge from the secure session.
+// ElementsSignature a signature, using the device attestation private key of the device that sent the attestation information, over the concatenation of elementsTLV and the attestation challenge from the secure session.
 func (x *MTRDeviceAttestationInfo) ElementsSignature() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementsSignature"))
 	return obj.Wrap(_r)
 }
 
-// The device attestation certificate for the device.  This can be used to verify signatures created with the device attestation private key.
+// DeviceAttestationCertificate the device attestation certificate for the device.  This can be used to verify signatures created with the device attestation private key.
 func (x *MTRDeviceAttestationInfo) DeviceAttestationCertificate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceAttestationCertificate"))
 	return obj.Wrap(_r)
 }
 
-// The product attestation intermediate certificate that can be used to verify the authenticity of the device attestation certificate.
+// ProductAttestationIntermediateCertificate the product attestation intermediate certificate that can be used to verify the authenticity of the device attestation certificate.
 func (x *MTRDeviceAttestationInfo) ProductAttestationIntermediateCertificate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productAttestationIntermediateCertificate"))
 	return obj.Wrap(_r)
 }
 
-// The certification declaration of the device.  This is a DER-encoded string representing a CMS-formatted certification declaration.
+// CertificationDeclaration the certification declaration of the device.  This is a DER-encoded string representing a CMS-formatted certification declaration.
 func (x *MTRDeviceAttestationInfo) CertificationDeclaration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificationDeclaration"))
 	return obj.Wrap(_r)
 }
 
+// FirmwareInfo wraps the corresponding Objective-C method.
 func (x *MTRDeviceAttestationInfo) FirmwareInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firmwareInfo"))
 	return obj.Wrap(_r)

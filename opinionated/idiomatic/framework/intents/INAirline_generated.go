@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The information that describes an airline.
-//
 // Airline is an idiomatic wrapper over the Objective-C class INAirline.
+//
+// The information that describes an airline.
 type Airline struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AirlineFromID(id objc.ID) *Airline {
 	if id == 0 {
 		return nil
 	}
-	x := &Airline{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Airline{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func airlineAdopt(id objc.ID) *Airline {
 	if id == 0 {
 		return nil
 	}
-	x := &Airline{Handle: objref.Wrap(id)}
+	x := &Airline{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *Airline) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new airline object with the specified contents and attributes.
-//
-// NewAirlineWithNameIataCodeIcaoCode creates a new Airline.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Airline) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAirlineWithNameIataCodeIcaoCode creates a new airline object with the specified contents and attributes.
 func NewAirlineWithNameIataCodeIcaoCode(name string, iataCode string, icaoCode string) *Airline {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INAirline")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:iataCode:icaoCode:"), purego.NSString(name), purego.NSString(iataCode), purego.NSString(icaoCode))
 	return airlineAdopt(_id)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *Airline) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -75,6 +82,7 @@ func (x *Airline) Name() string {
 	return purego.GoString(_r)
 }
 
+// IataCode wraps the corresponding Objective-C method.
 func (x *Airline) IataCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iataCode"))
 	if _r == 0 {
@@ -83,6 +91,7 @@ func (x *Airline) IataCode() string {
 	return purego.GoString(_r)
 }
 
+// IcaoCode wraps the corresponding Objective-C method.
 func (x *Airline) IcaoCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("icaoCode"))
 	if _r == 0 {

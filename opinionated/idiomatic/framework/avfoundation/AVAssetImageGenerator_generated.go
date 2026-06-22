@@ -6,15 +6,16 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that generates images from a video asset.
-//
 // AssetImageGenerator is an idiomatic wrapper over the Objective-C class AVAssetImageGenerator.
+//
+// An object that generates images from a video asset.
 type AssetImageGenerator struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func AssetImageGeneratorFromID(id objc.ID) *AssetImageGenerator {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetImageGenerator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetImageGenerator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func assetImageGeneratorAdopt(id objc.ID) *AssetImageGenerator {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetImageGenerator{Handle: objref.Wrap(id)}
+	x := &AssetImageGenerator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,91 +61,111 @@ func (x *AssetImageGenerator) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an object that generates images for times within a video asset.
-//
-// NewAssetImageGeneratorWithAsset creates a new AssetImageGenerator.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetImageGenerator) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetImageGeneratorWithAsset creates an object that generates images for times within a video asset.
 func NewAssetImageGeneratorWithAsset(asset *Asset) *AssetImageGenerator {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetImageGenerator")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:"), objref.IDOf(asset))
 	return assetImageGeneratorAdopt(_id)
 }
 
-// A Boolean value that specifies whether to apply the track matrix or matrices when generating an image from the asset.
-//
-// WithAppliesPreferredTrackTransform sets appliesPreferredTrackTransform and returns the receiver so calls can be chained.
+// WithAppliesPreferredTrackTransform a Boolean value that specifies whether to apply the track matrix or matrices when generating an image from the asset.
 func (x *AssetImageGenerator) WithAppliesPreferredTrackTransform(appliesPreferredTrackTransform bool) *AssetImageGenerator {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesPreferredTrackTransform:"), appliesPreferredTrackTransform)
 	return x
 }
 
-// Specifies the aperture mode for the generated image.
-//
-// WithApertureMode sets apertureMode and returns the receiver so calls can be chained.
+// WithMaximumSize the maximum size of images to generate.
+func (x *AssetImageGenerator) WithMaximumSize(maximumSize corefoundation.CGSize) *AssetImageGenerator {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumSize:"), maximumSize)
+	return x
+}
+
+// WithApertureMode specifies the aperture mode for the generated image.
 func (x *AssetImageGenerator) WithApertureMode(apertureMode obj.Object) *AssetImageGenerator {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApertureMode:"), objref.IDOf(apertureMode))
 	return x
 }
 
-// The dynamic range policy to use when generating images.
-//
-// WithDynamicRangePolicy sets dynamicRangePolicy and returns the receiver so calls can be chained.
+// WithDynamicRangePolicy the dynamic range policy to use when generating images.
 func (x *AssetImageGenerator) WithDynamicRangePolicy(dynamicRangePolicy obj.Object) *AssetImageGenerator {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDynamicRangePolicy:"), objref.IDOf(dynamicRangePolicy))
 	return x
 }
 
-// A video composition to use when extracting images from assets with multiple video tracks.
-//
-// WithVideoComposition sets videoComposition and returns the receiver so calls can be chained.
+// WithVideoComposition a video composition to use when extracting images from assets with multiple video tracks.
 func (x *AssetImageGenerator) WithVideoComposition(videoComposition VideoCompositionProvider) *AssetImageGenerator {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoComposition:"), objref.IDOf(videoComposition))
 	return x
 }
 
-// Cancels all pending image generation requests.
+// CancelAllCGImageGeneration cancels all pending image generation requests.
 func (x *AssetImageGenerator) CancelAllCGImageGeneration() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelAllCGImageGeneration"))
 }
 
+// Asset wraps the corresponding Objective-C method.
 func (x *AssetImageGenerator) Asset() *Asset {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("asset"))
 	return AssetFromID(_r)
 }
 
+// AppliesPreferredTrackTransform wraps the corresponding Objective-C method.
 func (x *AssetImageGenerator) AppliesPreferredTrackTransform() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appliesPreferredTrackTransform"))
 	return _r
 }
 
+// SetAppliesPreferredTrackTransform wraps the corresponding Objective-C method.
 func (x *AssetImageGenerator) SetAppliesPreferredTrackTransform(appliesPreferredTrackTransform bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesPreferredTrackTransform:"), appliesPreferredTrackTransform)
 }
 
+// MaximumSize wraps the corresponding Objective-C method.
+func (x *AssetImageGenerator) MaximumSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("maximumSize"))
+	return _r
+}
+
+// SetMaximumSize wraps the corresponding Objective-C method.
+func (x *AssetImageGenerator) SetMaximumSize(maximumSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumSize:"), maximumSize)
+}
+
+// ApertureMode wraps the corresponding Objective-C method.
 func (x *AssetImageGenerator) ApertureMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("apertureMode"))
 	return obj.Wrap(_r)
 }
 
+// SetApertureMode wraps the corresponding Objective-C method.
 func (x *AssetImageGenerator) SetApertureMode(apertureMode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApertureMode:"), objref.IDOf(apertureMode))
 }
 
-// Configures the video dynamic range for the output CGImage Default is AVAssetImageGeneratorDynamicRangePolicyForceSDR
+// DynamicRangePolicy configures the video dynamic range for the output CGImage Default is AVAssetImageGeneratorDynamicRangePolicyForceSDR
 func (x *AssetImageGenerator) DynamicRangePolicy() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dynamicRangePolicy"))
 	return obj.Wrap(_r)
 }
 
+// SetDynamicRangePolicy wraps the corresponding Objective-C method.
 func (x *AssetImageGenerator) SetDynamicRangePolicy(dynamicRangePolicy obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDynamicRangePolicy:"), objref.IDOf(dynamicRangePolicy))
 }
 
-// Specifies the video composition to use when extracting images from assets with multiple video tracks. If no videoComposition is specified, only the first enabled video track will be used. If a videoComposition is specified, the value of appliesPreferredTrackTransform is ignored. This property throws an exception if a video composition is set with any of the following property values: - "renderScale" is not equal to one - "renderSize" width or height is less than zero - "frameDuration" is invalid or less than or equal to zero - "sourceTrackIDForFrameTiming" is less than zero - "outputBufferDescription" is non-nil
+// VideoComposition specifies the video composition to use when extracting images from assets with multiple video tracks. If no videoComposition is specified, only the first enabled video track will be used. If a videoComposition is specified, the value of appliesPreferredTrackTransform is ignored. This property throws an exception if a video composition is set with any of the following property values: - "renderScale" is not equal to one - "renderSize" width or height is less than zero - "frameDuration" is invalid or less than or equal to zero - "sourceTrackIDForFrameTiming" is less than zero - "outputBufferDescription" is non-nil
 func (x *AssetImageGenerator) VideoComposition() *VideoComposition {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoComposition"))
 	return VideoCompositionFromID(_r)
 }
 
+// SetVideoComposition wraps the corresponding Objective-C method.
 func (x *AssetImageGenerator) SetVideoComposition(videoComposition *VideoComposition) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoComposition:"), objref.IDOf(videoComposition))
 }
@@ -151,6 +174,7 @@ func (x *AssetImageGenerator) SetVideoComposition(videoComposition *VideoComposi
 type AssetImageGeneratorable interface {
 	obj.Object
 	WithAppliesPreferredTrackTransform(appliesPreferredTrackTransform bool) *AssetImageGenerator
+	WithMaximumSize(maximumSize corefoundation.CGSize) *AssetImageGenerator
 	WithApertureMode(apertureMode obj.Object) *AssetImageGenerator
 	WithDynamicRangePolicy(dynamicRangePolicy obj.Object) *AssetImageGenerator
 	WithVideoComposition(videoComposition VideoCompositionProvider) *AssetImageGenerator
@@ -158,6 +182,8 @@ type AssetImageGeneratorable interface {
 	Asset() *Asset
 	AppliesPreferredTrackTransform() bool
 	SetAppliesPreferredTrackTransform(appliesPreferredTrackTransform bool)
+	MaximumSize() corefoundation.CGSize
+	SetMaximumSize(maximumSize corefoundation.CGSize)
 	ApertureMode() obj.Object
 	SetApertureMode(apertureMode obj.Object)
 	DynamicRangePolicy() obj.Object

@@ -8,13 +8,15 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // RAWProcessingIntegerParameter is an idiomatic wrapper over the Objective-C class MERAWProcessingIntegerParameter.
+//
+// It embeds [RAWProcessingParameter], promoting that type's methods.
 type RAWProcessingIntegerParameter struct {
-	objref.Handle
+	RAWProcessingParameter
 }
 
 // RAWProcessingIntegerParameterFromID adopts an existing Objective-C object as a RAWProcessingIntegerParameter
@@ -23,7 +25,8 @@ func RAWProcessingIntegerParameterFromID(id objc.ID) *RAWProcessingIntegerParame
 	if id == 0 {
 		return nil
 	}
-	x := &RAWProcessingIntegerParameter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RAWProcessingIntegerParameter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +39,10 @@ func rAWProcessingIntegerParameterAdopt(id objc.ID) *RAWProcessingIntegerParamet
 	if id == 0 {
 		return nil
 	}
-	x := &RAWProcessingIntegerParameter{Handle: objref.Wrap(id)}
+	x := &RAWProcessingIntegerParameter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RAWProcessingIntegerParameter) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RAWProcessingIntegerParameter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RAWProcessingIntegerParameter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRAWProcessingIntegerParameter creates a new RAWProcessingIntegerParameter.
@@ -90,40 +79,51 @@ func NewRAWProcessingIntegerParameterWithNameKeyDescriptionInitialValueMaximumMi
 	return rAWProcessingIntegerParameterAdopt(_id)
 }
 
-// Get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
-//
-// WithCurrentValue sets currentValue and returns the receiver so calls can be chained.
+// WithCurrentValue get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
 func (x *RAWProcessingIntegerParameter) WithCurrentValue(currentValue int) *RAWProcessingIntegerParameter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), currentValue)
 	return x
 }
 
-// A Boolean value that indicates whether the extension enables the parameter.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether the extension enables the parameter.
 func (x *RAWProcessingIntegerParameter) WithEnabled(enabled bool) *RAWProcessingIntegerParameter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The maximum value for this parameter.
+// HasNeutralValue return value indicates whether the MERAWProcessingIntegerParameter has an optional declared Neutral value. If the return value is YES and outNeutralValue is not nil, the value held by outNeutralValue will be set to the neutral value. If the return value is NO and outNeutralValue is not nil, the value held by outNeutralValue will be set to 0.
+func (x *RAWProcessingIntegerParameter) HasNeutralValue() (ok bool, outNeutralValue int64) {
+	var _out0 int64
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasNeutralValue:"), unsafe.Pointer(&_out0))
+	return _r, _out0
+}
+
+// HasCameraValue return value indicates whether the MERAWProcessingIntegerParameter has an optional declared Camera value. If the return value is YES and outCameraValue is not nil, the value held by outCameraValue will be set to the camera value. If the return value is NO and outCameraValue is not nil, the value held by outCameraValue will be set to 0.
+func (x *RAWProcessingIntegerParameter) HasCameraValue() (ok bool, outCameraValue int64) {
+	var _out0 int64
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasCameraValue:"), unsafe.Pointer(&_out0))
+	return _r, _out0
+}
+
+// MaximumValue the maximum value for this parameter.
 func (x *RAWProcessingIntegerParameter) MaximumValue() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumValue"))
 	return _r
 }
 
-// The minimum value for this parameter.
+// MinimumValue the minimum value for this parameter.
 func (x *RAWProcessingIntegerParameter) MinimumValue() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumValue"))
 	return _r
 }
 
-// Get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
+// CurrentValue get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
 func (x *RAWProcessingIntegerParameter) CurrentValue() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("currentValue"))
 	return _r
 }
 
+// SetCurrentValue wraps the corresponding Objective-C method.
 func (x *RAWProcessingIntegerParameter) SetCurrentValue(currentValue int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), currentValue)
 }
@@ -133,6 +133,8 @@ type RAWProcessingIntegerParameterable interface {
 	obj.Object
 	WithCurrentValue(currentValue int) *RAWProcessingIntegerParameter
 	WithEnabled(enabled bool) *RAWProcessingIntegerParameter
+	HasNeutralValue() (ok bool, outNeutralValue int64)
+	HasCameraValue() (ok bool, outCameraValue int64)
 	MaximumValue() int
 	MinimumValue() int
 	CurrentValue() int
@@ -140,3 +142,5 @@ type RAWProcessingIntegerParameterable interface {
 }
 
 var _ RAWProcessingIntegerParameterable = (*RAWProcessingIntegerParameter)(nil)
+
+var _ RAWProcessingParameterProvider = (*RAWProcessingIntegerParameter)(nil)

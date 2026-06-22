@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides access to the haptic feedback management attributes on a system with a Force Touch trackpad.
-//
 // HapticFeedbackManager is an idiomatic wrapper over the Objective-C class NSHapticFeedbackManager.
+//
+// An object that provides access to the haptic feedback management attributes on a system with a Force Touch trackpad.
 type HapticFeedbackManager struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func HapticFeedbackManagerFromID(id objc.ID) *HapticFeedbackManager {
 	if id == 0 {
 		return nil
 	}
-	x := &HapticFeedbackManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HapticFeedbackManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func hapticFeedbackManagerAdopt(id objc.ID) *HapticFeedbackManager {
 	if id == 0 {
 		return nil
 	}
-	x := &HapticFeedbackManager{Handle: objref.Wrap(id)}
+	x := &HapticFeedbackManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *HapticFeedbackManager) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *HapticFeedbackManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HapticFeedbackManager) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewHapticFeedbackManager creates a new HapticFeedbackManager.

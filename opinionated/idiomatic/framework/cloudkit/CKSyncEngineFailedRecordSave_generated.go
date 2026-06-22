@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that describes an unsuccessful attempt to modify an individual record.
-//
 // SyncEngineFailedRecordSave is an idiomatic wrapper over the Objective-C class CKSyncEngineFailedRecordSave.
+//
+// A type that describes an unsuccessful attempt to modify an individual record.
 type SyncEngineFailedRecordSave struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SyncEngineFailedRecordSaveFromID(id objc.ID) *SyncEngineFailedRecordSave {
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineFailedRecordSave{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SyncEngineFailedRecordSave{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func syncEngineFailedRecordSaveAdopt(id objc.ID) *SyncEngineFailedRecordSave {
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineFailedRecordSave{Handle: objref.Wrap(id)}
+	x := &SyncEngineFailedRecordSave{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *SyncEngineFailedRecordSave) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncEngineFailedRecordSave) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSyncEngineFailedRecordSave creates a new SyncEngineFailedRecordSave.
 func NewSyncEngineFailedRecordSave() *SyncEngineFailedRecordSave {
 	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineFailedRecordSave")), objc.RegisterName("new"))
 	return syncEngineFailedRecordSaveAdopt(_id)
 }
 
-// The record that CloudKit is unable to modify.
+// Record the record that CloudKit is unable to modify.
 func (x *SyncEngineFailedRecordSave) Record() *Record {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("record"))
 	return RecordFromID(_r)

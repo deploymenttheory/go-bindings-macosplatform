@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The mutability options for a buffer that a render or compute pipeline uses.
-//
 // PipelineBufferDescriptor is an idiomatic wrapper over the Objective-C class MTLPipelineBufferDescriptor.
+//
+// The mutability options for a buffer that a render or compute pipeline uses.
 type PipelineBufferDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PipelineBufferDescriptorFromID(id objc.ID) *PipelineBufferDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &PipelineBufferDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PipelineBufferDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func pipelineBufferDescriptorAdopt(id objc.ID) *PipelineBufferDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &PipelineBufferDescriptor{Handle: objref.Wrap(id)}
+	x := &PipelineBufferDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *PipelineBufferDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PipelineBufferDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPipelineBufferDescriptor creates a new PipelineBufferDescriptor.
 func NewPipelineBufferDescriptor() *PipelineBufferDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLPipelineBufferDescriptor")), objc.RegisterName("new"))
 	return pipelineBufferDescriptorAdopt(_id)
 }
 
-// A mutability option that determines whether you can update a buffer’s contents before related commands use the buffer.
-//
-// WithMutability sets mutability and returns the receiver so calls can be chained.
+// WithMutability a mutability option that determines whether you can update a buffer’s contents before related commands use the buffer.
 func (x *PipelineBufferDescriptor) WithMutability(mutability Mutability) *PipelineBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMutability:"), mutability)
 	return x
 }
 
+// Mutability wraps the corresponding Objective-C method.
 func (x *PipelineBufferDescriptor) Mutability() Mutability {
 	_r := objc.Send[Mutability](objref.IDOf(x), objc.RegisterName("mutability"))
 	return _r
 }
 
+// SetMutability wraps the corresponding Objective-C method.
 func (x *PipelineBufferDescriptor) SetMutability(mutability Mutability) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMutability:"), mutability)
 }

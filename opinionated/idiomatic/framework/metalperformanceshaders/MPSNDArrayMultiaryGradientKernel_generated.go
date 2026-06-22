@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NDArrayMultiaryGradientKernel is an idiomatic wrapper over the Objective-C class MPSNDArrayMultiaryGradientKernel.
+//
+// NDArrayMultiaryGradientKernel is an abstract base — you do not construct it directly. Construct one of [NDArrayBinaryPrimaryGradientKernel], [NDArrayBinarySecondaryGradientKernel], [NDArrayUnaryGradientKernel] and pass it where a NDArrayMultiaryGradientKernel is accepted.
 type NDArrayMultiaryGradientKernel struct {
-	objref.Handle
+	NDArrayMultiaryBase
 }
 
 // NDArrayMultiaryGradientKernelFromID adopts an existing Objective-C object as a NDArrayMultiaryGradientKernel
@@ -23,7 +24,8 @@ func NDArrayMultiaryGradientKernelFromID(id objc.ID) *NDArrayMultiaryGradientKer
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayMultiaryGradientKernel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NDArrayMultiaryGradientKernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,35 +38,13 @@ func nDArrayMultiaryGradientKernelAdopt(id objc.ID) *NDArrayMultiaryGradientKern
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayMultiaryGradientKernel{Handle: objref.Wrap(id)}
+	x := &NDArrayMultiaryGradientKernel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NDArrayMultiaryGradientKernel) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NDArrayMultiaryGradientKernel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NDArrayMultiaryGradientKernel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewNDArrayMultiaryGradientKernel creates a new NDArrayMultiaryGradientKernel.
-func NewNDArrayMultiaryGradientKernel() *NDArrayMultiaryGradientKernel {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayMultiaryGradientKernel")), objc.RegisterName("new"))
-	return nDArrayMultiaryGradientKernelAdopt(_id)
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayMultiaryGradientKernel) WithLabel(label string) *NDArrayMultiaryGradientKernel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -77,3 +57,14 @@ type NDArrayMultiaryGradientKernelable interface {
 }
 
 var _ NDArrayMultiaryGradientKernelable = (*NDArrayMultiaryGradientKernel)(nil)
+
+// isNDArrayMultiaryGradientKernel marks NDArrayMultiaryGradientKernel — and, by embedding promotion, its
+// subclasses — as a member of the NDArrayMultiaryGradientKernel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NDArrayMultiaryGradientKernel) isNDArrayMultiaryGradientKernel() {}
+
+var _ NDArrayMultiaryGradientKernelProvider = (*NDArrayMultiaryGradientKernel)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayMultiaryGradientKernel)(nil)
+
+var _ KernelProvider = (*NDArrayMultiaryGradientKernel)(nil)

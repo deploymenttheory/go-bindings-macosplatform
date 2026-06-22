@@ -3,4 +3,22 @@
 //go:build darwin
 
 // Package phase provides a fluent Go API over the macOS PHASE framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - Asset: [GlobalMetaParameterAsset], [SoundAsset], [SoundEventNodeAsset]
+//   - Definition: [MetaParameterDefinition], [MixerDefinition], [SoundEventNodeDefinition]
+//   - DirectivityModelParameters: [CardioidDirectivityModelParameters], [ConeDirectivityModelParameters]
+//   - DistanceModelParameters: [EnvelopeDistanceModelParameters], [GeometricSpreadingDistanceModelParameters]
+//   - GeneratorNodeDefinition: [PullStreamNodeDefinition], [PushStreamNodeDefinition], [SamplerNodeDefinition]
+//   - MetaParameter: [NumberMetaParameter], [StringMetaParameter]
+//   - MetaParameterDefinition: [NumberMetaParameterDefinition], [StringMetaParameterDefinition]
+//   - MixerDefinition: [AmbientMixerDefinition], [ChannelMixerDefinition], [SpatialMixerDefinition]
+//   - NumberMetaParameterDefinition: [MappedMetaParameterDefinition]
+//   - Object: [Listener], [Occluder], [Source]
+//   - SoundEventNodeDefinition: [BlendNodeDefinition], [ContainerNodeDefinition], [GeneratorNodeDefinition], [RandomNodeDefinition], [SwitchNodeDefinition]
+//   - StreamNode: [PullStreamNode], [PushStreamNode]
 package phase

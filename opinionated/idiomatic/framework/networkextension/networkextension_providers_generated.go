@@ -11,84 +11,101 @@ import (
 // NEAppProxyFlowProvider is accepted wherever a NEAppProxyFlow (or one of its subclasses) is expected.
 type NEAppProxyFlowProvider interface {
 	objref.Object
+	isNEAppProxyFlow()
 }
 
 // NEAppProxyProviderProvider is accepted wherever a NEAppProxyProvider (or one of its subclasses) is expected.
 type NEAppProxyProviderProvider interface {
 	objref.Object
+	isNEAppProxyProvider()
 }
 
 // NEDNSSettingsProvider is accepted wherever a NEDNSSettings (or one of its subclasses) is expected.
 type NEDNSSettingsProvider interface {
 	objref.Object
+	isNEDNSSettings()
 }
 
 // NEFilterFlowProvider is accepted wherever a NEFilterFlow (or one of its subclasses) is expected.
 type NEFilterFlowProvider interface {
 	objref.Object
+	isNEFilterFlow()
 }
 
 // NEFilterProviderProvider is accepted wherever a NEFilterProvider (or one of its subclasses) is expected.
 type NEFilterProviderProvider interface {
 	objref.Object
+	isNEFilterProvider()
 }
 
 // NEFilterVerdictProvider is accepted wherever a NEFilterVerdict (or one of its subclasses) is expected.
 type NEFilterVerdictProvider interface {
 	objref.Object
+	isNEFilterVerdict()
 }
 
 // NEOnDemandRuleProvider is accepted wherever a NEOnDemandRule (or one of its subclasses) is expected.
 type NEOnDemandRuleProvider interface {
 	objref.Object
+	isNEOnDemandRule()
 }
 
 // NEPacketTunnelNetworkSettingsProvider is accepted wherever a NEPacketTunnelNetworkSettings (or one of its subclasses) is expected.
 type NEPacketTunnelNetworkSettingsProvider interface {
 	objref.Object
+	isNEPacketTunnelNetworkSettings()
 }
 
 // NEPacketTunnelProviderProvider is accepted wherever a NEPacketTunnelProvider (or one of its subclasses) is expected.
 type NEPacketTunnelProviderProvider interface {
 	objref.Object
+	isNEPacketTunnelProvider()
 }
 
 // NEProviderProvider is accepted wherever a NEProvider (or one of its subclasses) is expected.
 type NEProviderProvider interface {
 	objref.Object
+	isNEProvider()
 }
 
 // NETunnelNetworkSettingsProvider is accepted wherever a NETunnelNetworkSettings (or one of its subclasses) is expected.
 type NETunnelNetworkSettingsProvider interface {
 	objref.Object
+	isNETunnelNetworkSettings()
 }
 
 // NETunnelProviderProvider is accepted wherever a NETunnelProvider (or one of its subclasses) is expected.
 type NETunnelProviderProvider interface {
 	objref.Object
+	isNETunnelProvider()
 }
 
 // NETunnelProviderManagerProvider is accepted wherever a NETunnelProviderManager (or one of its subclasses) is expected.
 type NETunnelProviderManagerProvider interface {
 	objref.Object
+	isNETunnelProviderManager()
 }
 
 // NEVPNConnectionProvider is accepted wherever a NEVPNConnection (or one of its subclasses) is expected.
 type NEVPNConnectionProvider interface {
 	objref.Object
+	isNEVPNConnection()
 }
 
 // NEVPNManagerProvider is accepted wherever a NEVPNManager (or one of its subclasses) is expected.
 type NEVPNManagerProvider interface {
 	objref.Object
+	isNEVPNManager()
 }
 
 // NEVPNProtocolProvider is accepted wherever a NEVPNProtocol (or one of its subclasses) is expected.
 type NEVPNProtocolProvider interface {
 	objref.Object
+	isNEVPNProtocol()
 }
 
 // NEVPNProtocolIPSecProvider is accepted wherever a NEVPNProtocolIPSec (or one of its subclasses) is expected.
 type NEVPNProtocolIPSecProvider interface {
 	objref.Object
+	isNEVPNProtocolIPSec()
 }

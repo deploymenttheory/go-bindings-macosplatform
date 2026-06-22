@@ -23,7 +23,8 @@ func Matrix4x4ArrayFromID(id objc.ID) *Matrix4x4Array {
 	if id == 0 {
 		return nil
 	}
-	x := &Matrix4x4Array{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Matrix4x4Array{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func matrix4x4ArrayAdopt(id objc.ID) *Matrix4x4Array {
 	if id == 0 {
 		return nil
 	}
-	x := &Matrix4x4Array{Handle: objref.Wrap(id)}
+	x := &Matrix4x4Array{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *Matrix4x4Array) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Matrix4x4Array) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMatrix4x4ArrayWithElementCount creates a new Matrix4x4Array.
 func NewMatrix4x4ArrayWithElementCount(arrayElementCount int) *Matrix4x4Array {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMatrix4x4Array")), objc.RegisterName("alloc"))
@@ -63,15 +71,18 @@ func NewMatrix4x4ArrayWithElementCount(arrayElementCount int) *Matrix4x4Array {
 	return matrix4x4ArrayAdopt(_id)
 }
 
+// Clear wraps the corresponding Objective-C method.
 func (x *Matrix4x4Array) Clear() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clear"))
 }
 
+// ElementCount wraps the corresponding Objective-C method.
 func (x *Matrix4x4Array) ElementCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("elementCount"))
 	return _r
 }
 
+// Precision wraps the corresponding Objective-C method.
 func (x *Matrix4x4Array) Precision() DataPrecision {
 	_r := objc.Send[DataPrecision](objref.IDOf(x), objc.RegisterName("precision"))
 	return _r

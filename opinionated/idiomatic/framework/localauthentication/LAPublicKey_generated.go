@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The public portion of an asymmetric key pair.
-//
 // PublicKey is an idiomatic wrapper over the Objective-C class LAPublicKey.
+//
+// The public portion of an asymmetric key pair.
 type PublicKey struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func PublicKeyFromID(id objc.ID) *PublicKey {
 	if id == 0 {
 		return nil
 	}
-	x := &PublicKey{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PublicKey{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func publicKeyAdopt(id objc.ID) *PublicKey {
 	if id == 0 {
 		return nil
 	}
-	x := &PublicKey{Handle: objref.Wrap(id)}
+	x := &PublicKey{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,22 @@ func (x *PublicKey) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PublicKey) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPublicKey creates a new PublicKey.
 func NewPublicKey() *PublicKey {
 	_id := objc.Send[objc.ID](objc.ID(_class("LAPublicKey")), objc.RegisterName("new"))
 	return publicKeyAdopt(_id)
 }
 
-// Exports the data that represents a public key.
+// ExportBytesWithCompletion exports the data that represents a public key.
 //
 // ExportBytesWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *PublicKey) ExportBytesWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *PublicKey) ExportBytesWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error

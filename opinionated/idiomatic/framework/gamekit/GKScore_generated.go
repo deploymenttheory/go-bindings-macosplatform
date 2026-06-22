@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object containing information for a score that was earned by the player.
-//
 // Score is an idiomatic wrapper over the Objective-C class GKScore.
+//
+// An object containing information for a score that was earned by the player.
 type Score struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func ScoreFromID(id objc.ID) *Score {
 	if id == 0 {
 		return nil
 	}
-	x := &Score{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Score{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func scoreAdopt(id objc.ID) *Score {
 	if id == 0 {
 		return nil
 	}
-	x := &Score{Handle: objref.Wrap(id)}
+	x := &Score{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,93 +62,82 @@ func (x *Score) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns an initialized score object using the local player and the current date.
-//
-// NewScoreWithLeaderboardIdentifier creates a new Score.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Score) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewScoreWithLeaderboardIdentifier returns an initialized score object using the local player and the current date.
 func NewScoreWithLeaderboardIdentifier(identifier string) *Score {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKScore")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeaderboardIdentifier:"), purego.NSString(identifier))
 	return scoreAdopt(_id)
 }
 
-// Returns an initialized score object for the specified leaderboard and player.
-//
-// NewScoreWithLeaderboardIdentifierPlayer creates a new Score.
+// NewScoreWithLeaderboardIdentifierPlayer returns an initialized score object for the specified leaderboard and player.
 func NewScoreWithLeaderboardIdentifierPlayer(identifier string, player *Player) *Score {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKScore")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeaderboardIdentifier:player:"), purego.NSString(identifier), objref.IDOf(player))
 	return scoreAdopt(_id)
 }
 
-// Returns an initialized score object.
-//
-// NewScoreWithCategory creates a new Score.
+// NewScoreWithCategory returns an initialized score object.
 func NewScoreWithCategory(category string) *Score {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKScore")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCategory:"), purego.NSString(category))
 	return scoreAdopt(_id)
 }
 
-// Returns an initialized score object for the specified leaderboard and player.
-//
-// NewScoreWithLeaderboardIdentifierForPlayer creates a new Score.
+// NewScoreWithLeaderboardIdentifierForPlayer returns an initialized score object for the specified leaderboard and player.
 func NewScoreWithLeaderboardIdentifierForPlayer(identifier string, playerID string) *Score {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKScore")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeaderboardIdentifier:forPlayer:"), purego.NSString(identifier), purego.NSString(playerID))
 	return scoreAdopt(_id)
 }
 
-// The score earned by the player.
-//
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue the score earned by the player.
 func (x *Score) WithValue(value int64) *Score {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 	return x
 }
 
-// The identifier for the leaderboard.
-//
-// WithLeaderboardIdentifier sets leaderboardIdentifier and returns the receiver so calls can be chained.
+// WithLeaderboardIdentifier the identifier for the leaderboard.
 func (x *Score) WithLeaderboardIdentifier(leaderboardIdentifier string) *Score {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
 	return x
 }
 
-// An integer value used by your game.
-//
-// WithContext sets context_ and returns the receiver so calls can be chained.
+// WithContext an integer value used by your game.
 func (x *Score) WithContext(context_ uint64) *Score {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContext:"), context_)
 	return x
 }
 
-// A Boolean value that indicates whether this score should also update the default leaderboard.
-//
-// WithShouldSetDefaultLeaderboard sets shouldSetDefaultLeaderboard and returns the receiver so calls can be chained.
+// WithShouldSetDefaultLeaderboard a Boolean value that indicates whether this score should also update the default leaderboard.
 func (x *Score) WithShouldSetDefaultLeaderboard(shouldSetDefaultLeaderboard bool) *Score {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldSetDefaultLeaderboard:"), shouldSetDefaultLeaderboard)
 	return x
 }
 
-// The leaderboard that this score belongs to.
-//
-// WithCategory sets category and returns the receiver so calls can be chained.
+// WithCategory the leaderboard that this score belongs to.
 func (x *Score) WithCategory(category string) *Score {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategory:"), purego.NSString(category))
 	return x
 }
 
-// The score value as a 64bit integer.
+// Value the score value as a 64bit integer.
 func (x *Score) Value() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("value"))
 	return _r
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *Score) SetValue(value int64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 }
 
-// The score formatted as a string, localized with a label
+// FormattedValue the score formatted as a string, localized with a label
 func (x *Score) FormattedValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formattedValue"))
 	if _r == 0 {
@@ -155,7 +146,7 @@ func (x *Score) FormattedValue() string {
 	return purego.GoString(_r)
 }
 
-// leaderboard identifier (required)
+// LeaderboardIdentifier leaderboard identifier (required)
 func (x *Score) LeaderboardIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leaderboardIdentifier"))
 	if _r == 0 {
@@ -164,49 +155,52 @@ func (x *Score) LeaderboardIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// SetLeaderboardIdentifier wraps the corresponding Objective-C method.
 func (x *Score) SetLeaderboardIdentifier(leaderboardIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
 }
 
-// optional additional context that allows a game to store and retrieve additional data associated with the store.  Default value of zero is returned if no value is set.
+// Context optional additional context that allows a game to store and retrieve additional data associated with the store.  Default value of zero is returned if no value is set.
 func (x *Score) Context() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("context"))
 	return _r
 }
 
+// SetContext wraps the corresponding Objective-C method.
 func (x *Score) SetContext(context_ uint64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContext:"), context_)
 }
 
-// The date this score was recorded. A newly initialized, unsubmitted GKScore records the current date at init time.
+// Date the date this score was recorded. A newly initialized, unsubmitted GKScore records the current date at init time.
 func (x *Score) Date() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
 
-// The player that recorded the score.
+// Player the player that recorded the score.
 func (x *Score) Player() *Player {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("player"))
 	return PlayerFromID(_r)
 }
 
-// The rank of the player within the leaderboard, only valid when returned from GKLeaderboard
+// Rank the rank of the player within the leaderboard, only valid when returned from GKLeaderboard
 func (x *Score) Rank() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rank"))
 	return _r
 }
 
-// Convenience property to make the leaderboard associated with this GKScore, the default leaderboard for this player. Default value is false. If true, reporting that score will make the category this score belongs to, the default leaderboard for this user
+// ShouldSetDefaultLeaderboard convenience property to make the leaderboard associated with this GKScore, the default leaderboard for this player. Default value is false. If true, reporting that score will make the category this score belongs to, the default leaderboard for this user
 func (x *Score) ShouldSetDefaultLeaderboard() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldSetDefaultLeaderboard"))
 	return _r
 }
 
+// SetShouldSetDefaultLeaderboard wraps the corresponding Objective-C method.
 func (x *Score) SetShouldSetDefaultLeaderboard(shouldSetDefaultLeaderboard bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldSetDefaultLeaderboard:"), shouldSetDefaultLeaderboard)
 }
 
-// Reports a score to Game Center.
+// ReportScore reports a score to Game Center.
 //
 // ReportScore blocks until the operation completes or ctx is cancelled.
 func (x *Score) ReportScore(ctx context.Context) error {
@@ -225,6 +219,7 @@ func (x *Score) ReportScore(ctx context.Context) error {
 	}
 }
 
+// Category wraps the corresponding Objective-C method.
 func (x *Score) Category() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("category"))
 	if _r == 0 {
@@ -233,10 +228,12 @@ func (x *Score) Category() string {
 	return purego.GoString(_r)
 }
 
+// SetCategory wraps the corresponding Objective-C method.
 func (x *Score) SetCategory(category string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategory:"), purego.NSString(category))
 }
 
+// PlayerID wraps the corresponding Objective-C method.
 func (x *Score) PlayerID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerID"))
 	if _r == 0 {
@@ -245,7 +242,7 @@ func (x *Score) PlayerID() string {
 	return purego.GoString(_r)
 }
 
-// Issues a score challenge to a set of players.
+// IssueChallengeToPlayersMessage issues a score challenge to a set of players.
 func (x *Score) IssueChallengeToPlayersMessage(playerIDs []string, message string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issueChallengeToPlayers:message:"), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }), purego.NSString(message))
 }

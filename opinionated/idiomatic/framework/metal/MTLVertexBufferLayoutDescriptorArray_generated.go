@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An array of vertex buffer layout descriptor instances.
-//
 // VertexBufferLayoutDescriptorArray is an idiomatic wrapper over the Objective-C class MTLVertexBufferLayoutDescriptorArray.
+//
+// An array of vertex buffer layout descriptor instances.
 type VertexBufferLayoutDescriptorArray struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VertexBufferLayoutDescriptorArrayFromID(id objc.ID) *VertexBufferLayoutDesc
 	if id == 0 {
 		return nil
 	}
-	x := &VertexBufferLayoutDescriptorArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VertexBufferLayoutDescriptorArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func vertexBufferLayoutDescriptorArrayAdopt(id objc.ID) *VertexBufferLayoutDescr
 	if id == 0 {
 		return nil
 	}
-	x := &VertexBufferLayoutDescriptorArray{Handle: objref.Wrap(id)}
+	x := &VertexBufferLayoutDescriptorArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *VertexBufferLayoutDescriptorArray) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VertexBufferLayoutDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVertexBufferLayoutDescriptorArray creates a new VertexBufferLayoutDescriptorArray.
 func NewVertexBufferLayoutDescriptorArray() *VertexBufferLayoutDescriptorArray {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLVertexBufferLayoutDescriptorArray")), objc.RegisterName("new"))
 	return vertexBufferLayoutDescriptorArrayAdopt(_id)
 }
 
-// Returns the state of the specified vertex buffer layout.
+// ObjectAtIndexedSubscript returns the state of the specified vertex buffer layout.
 func (x *VertexBufferLayoutDescriptorArray) ObjectAtIndexedSubscript(index int) *VertexBufferLayoutDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), index)
 	return VertexBufferLayoutDescriptorFromID(_r)
 }
 
-// Sets the state of the specified vertex buffer layout.
+// SetObjectAtIndexedSubscript sets the state of the specified vertex buffer layout.
 func (x *VertexBufferLayoutDescriptorArray) SetObjectAtIndexedSubscript(bufferDesc *VertexBufferLayoutDescriptor, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(bufferDesc), index)
 }

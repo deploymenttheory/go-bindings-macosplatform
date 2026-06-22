@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a sigmoid neuron filter.
-//
 // CNNNeuronSigmoidNode is an idiomatic wrapper over the Objective-C class MPSCNNNeuronSigmoidNode.
+//
+// It embeds [CNNNeuronNode], promoting that type's methods.
+//
+// A representation of a sigmoid neuron filter.
 type CNNNeuronSigmoidNode struct {
-	objref.Handle
+	CNNNeuronNode
 }
 
 // CNNNeuronSigmoidNodeFromID adopts an existing Objective-C object as a CNNNeuronSigmoidNode
@@ -25,7 +26,8 @@ func CNNNeuronSigmoidNodeFromID(id objc.ID) *CNNNeuronSigmoidNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNeuronSigmoidNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNNeuronSigmoidNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,38 +40,20 @@ func cNNNeuronSigmoidNodeAdopt(id objc.ID) *CNNNeuronSigmoidNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNeuronSigmoidNode{Handle: objref.Wrap(id)}
+	x := &CNNNeuronSigmoidNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNNeuronSigmoidNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNNeuronSigmoidNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNNeuronSigmoidNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Init a node with default values for parameters a & b
-//
-// NewCNNNeuronSigmoidNodeWithSource creates a new CNNNeuronSigmoidNode.
+// NewCNNNeuronSigmoidNodeWithSource init a node with default values for parameters a & b
 func NewCNNNeuronSigmoidNodeWithSource(sourceNode obj.Object) *CNNNeuronSigmoidNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronSigmoidNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return cNNNeuronSigmoidNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNNeuronSigmoidNode) WithLabel(label string) *CNNNeuronSigmoidNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -82,3 +66,7 @@ type CNNNeuronSigmoidNodeable interface {
 }
 
 var _ CNNNeuronSigmoidNodeable = (*CNNNeuronSigmoidNode)(nil)
+
+var _ CNNNeuronNodeProvider = (*CNNNeuronSigmoidNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNNeuronSigmoidNode)(nil)

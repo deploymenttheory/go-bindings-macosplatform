@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A context-sensitive function that helps VoiceOver users find the next instance of a related accessibility element.
-//
 // AccessibilityCustomRotor is an idiomatic wrapper over the Objective-C class NSAccessibilityCustomRotor.
+//
+// A context-sensitive function that helps VoiceOver users find the next instance of a related accessibility element.
 type AccessibilityCustomRotor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AccessibilityCustomRotorFromID(id objc.ID) *AccessibilityCustomRotor {
 	if id == 0 {
 		return nil
 	}
-	x := &AccessibilityCustomRotor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AccessibilityCustomRotor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func accessibilityCustomRotorAdopt(id objc.ID) *AccessibilityCustomRotor {
 	if id == 0 {
 		return nil
 	}
-	x := &AccessibilityCustomRotor{Handle: objref.Wrap(id)}
+	x := &AccessibilityCustomRotor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,40 +60,42 @@ func (x *AccessibilityCustomRotor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AccessibilityCustomRotor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAccessibilityCustomRotor creates a new AccessibilityCustomRotor.
 func NewAccessibilityCustomRotor() *AccessibilityCustomRotor {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSAccessibilityCustomRotor")), objc.RegisterName("new"))
 	return accessibilityCustomRotorAdopt(_id)
 }
 
-// The type of content that the rotor represents.
-//
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithType the type of content that the rotor represents.
 func (x *AccessibilityCustomRotor) WithType(type_ AccessibilityCustomRotorType) *AccessibilityCustomRotor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
-// The localized label that assistive apps use to describe the custom rotor.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the localized label that assistive apps use to describe the custom rotor.
 func (x *AccessibilityCustomRotor) WithLabel(label string) *AccessibilityCustomRotor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The rotor type to provide results for.
+// Type the rotor type to provide results for.
 func (x *AccessibilityCustomRotor) Type() AccessibilityCustomRotorType {
 	_r := objc.Send[AccessibilityCustomRotorType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
-// The rotor type to provide results for.
+// SetType the rotor type to provide results for.
 func (x *AccessibilityCustomRotor) SetType(type_ AccessibilityCustomRotorType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 }
 
-// The localized label assistive technologies will use to describe the custom rotor.
+// Label the localized label assistive technologies will use to describe the custom rotor.
 func (x *AccessibilityCustomRotor) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -100,7 +104,7 @@ func (x *AccessibilityCustomRotor) Label() string {
 	return purego.GoString(_r)
 }
 
-// The localized label assistive technologies will use to describe the custom rotor.
+// SetLabel the localized label assistive technologies will use to describe the custom rotor.
 func (x *AccessibilityCustomRotor) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }

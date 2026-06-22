@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mechanism for providing public key credential requests to an app or service with a physical security key.
-//
 // AuthorizationSecurityKeyPublicKeyCredentialProvider is an idiomatic wrapper over the Objective-C class ASAuthorizationSecurityKeyPublicKeyCredentialProvider.
+//
+// A mechanism for providing public key credential requests to an app or service with a physical security key.
 type AuthorizationSecurityKeyPublicKeyCredentialProvider struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationSecurityKeyPublicKeyCredentialProviderFromID(id objc.ID) *Auth
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationSecurityKeyPublicKeyCredentialProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationSecurityKeyPublicKeyCredentialProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationSecurityKeyPublicKeyCredentialProviderAdopt(id objc.ID) *Autho
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationSecurityKeyPublicKeyCredentialProvider{Handle: objref.Wrap(id)}
+	x := &AuthorizationSecurityKeyPublicKeyCredentialProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,32 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) IsKind(className s
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates the object with a relying party identifier.
-//
-// NewAuthorizationSecurityKeyPublicKeyCredentialProviderWithRelyingPartyIdentifier creates a new AuthorizationSecurityKeyPublicKeyCredentialProvider.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAuthorizationSecurityKeyPublicKeyCredentialProviderWithRelyingPartyIdentifier creates the object with a relying party identifier.
 func NewAuthorizationSecurityKeyPublicKeyCredentialProviderWithRelyingPartyIdentifier(relyingPartyIdentifier string) *AuthorizationSecurityKeyPublicKeyCredentialProvider {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationSecurityKeyPublicKeyCredentialProvider")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRelyingPartyIdentifier:"), purego.NSString(relyingPartyIdentifier))
 	return authorizationSecurityKeyPublicKeyCredentialProviderAdopt(_id)
 }
 
-// Creates a registration request with a challenge, display name, and user ID.
+// CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID creates a registration request with a challenge, display name, and user ID.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID(challenge obj.Object, displayName string, name string, userID obj.Object) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createCredentialRegistrationRequestWithChallenge:displayName:name:userID:"), objref.IDOf(challenge), purego.NSString(displayName), purego.NSString(name), objref.IDOf(userID))
 	return AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestFromID(_r)
 }
 
-// Creates an assertion request with a challenge.
+// CreateCredentialAssertionRequestWithChallenge creates an assertion request with a challenge.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialAssertionRequestWithChallenge(challenge obj.Object) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createCredentialAssertionRequestWithChallenge:"), objref.IDOf(challenge))
 	return AuthorizationSecurityKeyPublicKeyCredentialAssertionRequestFromID(_r)
 }
 
-// The Relying Party identifier used for all requests created by this object.
+// RelyingPartyIdentifier the Relying Party identifier used for all requests created by this object.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) RelyingPartyIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relyingPartyIdentifier"))
 	if _r == 0 {

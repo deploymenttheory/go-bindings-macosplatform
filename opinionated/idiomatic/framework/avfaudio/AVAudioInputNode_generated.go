@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that connects to the system’s audio input.
-//
 // AudioInputNode is an idiomatic wrapper over the Objective-C class AVAudioInputNode.
+//
+// It embeds [AudioIONode], promoting that type's methods.
+//
+// An object that connects to the system’s audio input.
 type AudioInputNode struct {
-	objref.Handle
+	AudioIONode
 }
 
 // AudioInputNodeFromID adopts an existing Objective-C object as a AudioInputNode
@@ -25,7 +26,8 @@ func AudioInputNodeFromID(id objc.ID) *AudioInputNode {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioInputNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioInputNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func audioInputNodeAdopt(id objc.ID) *AudioInputNode {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioInputNode{Handle: objref.Wrap(id)}
+	x := &AudioInputNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AudioInputNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioInputNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioInputNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAudioInputNode creates a new AudioInputNode.
@@ -64,56 +52,53 @@ func NewAudioInputNode() *AudioInputNode {
 	return audioInputNodeAdopt(_id)
 }
 
-// A Boolean that indicates whether the node bypasses all microphone uplink processing of the voice-processing unit.
-//
-// WithVoiceProcessingBypassed sets voiceProcessingBypassed and returns the receiver so calls can be chained.
+// WithVoiceProcessingBypassed a Boolean that indicates whether the node bypasses all microphone uplink processing of the voice-processing unit.
 func (x *AudioInputNode) WithVoiceProcessingBypassed(voiceProcessingBypassed bool) *AudioInputNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoiceProcessingBypassed:"), voiceProcessingBypassed)
 	return x
 }
 
-// A Boolean that indicates whether automatic gain control on the processed microphone uplink signal is active.
-//
-// WithVoiceProcessingAGCEnabled sets voiceProcessingAGCEnabled and returns the receiver so calls can be chained.
+// WithVoiceProcessingAGCEnabled a Boolean that indicates whether automatic gain control on the processed microphone uplink signal is active.
 func (x *AudioInputNode) WithVoiceProcessingAGCEnabled(voiceProcessingAGCEnabled bool) *AudioInputNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoiceProcessingAGCEnabled:"), voiceProcessingAGCEnabled)
 	return x
 }
 
-// A Boolean that indicates whether the input of the voice processing unit is in a muted state.
-//
-// WithVoiceProcessingInputMuted sets voiceProcessingInputMuted and returns the receiver so calls can be chained.
+// WithVoiceProcessingInputMuted a Boolean that indicates whether the input of the voice processing unit is in a muted state.
 func (x *AudioInputNode) WithVoiceProcessingInputMuted(voiceProcessingInputMuted bool) *AudioInputNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoiceProcessingInputMuted:"), voiceProcessingInputMuted)
 	return x
 }
 
-// Bypass all processing for microphone uplink done by the voice processing unit. Querying this property when voice processing is disabled will return false.
+// IsVoiceProcessingBypassed bypass all processing for microphone uplink done by the voice processing unit. Querying this property when voice processing is disabled will return false.
 func (x *AudioInputNode) IsVoiceProcessingBypassed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVoiceProcessingBypassed"))
 	return _r
 }
 
+// SetVoiceProcessingBypassed wraps the corresponding Objective-C method.
 func (x *AudioInputNode) SetVoiceProcessingBypassed(voiceProcessingBypassed bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoiceProcessingBypassed:"), voiceProcessingBypassed)
 }
 
-// Enable automatic gain control on the processed microphone uplink. signal. Enabled by default. Querying this property when voice processing is disabled will return false.
+// IsVoiceProcessingAGCEnabled enable automatic gain control on the processed microphone uplink. signal. Enabled by default. Querying this property when voice processing is disabled will return false.
 func (x *AudioInputNode) IsVoiceProcessingAGCEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVoiceProcessingAGCEnabled"))
 	return _r
 }
 
+// SetVoiceProcessingAGCEnabled wraps the corresponding Objective-C method.
 func (x *AudioInputNode) SetVoiceProcessingAGCEnabled(voiceProcessingAGCEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoiceProcessingAGCEnabled:"), voiceProcessingAGCEnabled)
 }
 
-// Mutes the input of the voice processing unit. Querying this property when voice processing is disabled will return false.
+// IsVoiceProcessingInputMuted mutes the input of the voice processing unit. Querying this property when voice processing is disabled will return false.
 func (x *AudioInputNode) IsVoiceProcessingInputMuted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVoiceProcessingInputMuted"))
 	return _r
 }
 
+// SetVoiceProcessingInputMuted wraps the corresponding Objective-C method.
 func (x *AudioInputNode) SetVoiceProcessingInputMuted(voiceProcessingInputMuted bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoiceProcessingInputMuted:"), voiceProcessingInputMuted)
 }
@@ -133,3 +118,7 @@ type AudioInputNodeable interface {
 }
 
 var _ AudioInputNodeable = (*AudioInputNode)(nil)
+
+var _ AudioIONodeProvider = (*AudioInputNode)(nil)
+
+var _ AudioNodeProvider = (*AudioInputNode)(nil)

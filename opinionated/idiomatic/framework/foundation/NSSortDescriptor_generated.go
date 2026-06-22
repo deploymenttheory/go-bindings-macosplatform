@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable description of how to order a collection of objects according to a property common to all the objects.
-//
 // SortDescriptor is an idiomatic wrapper over the Objective-C class NSSortDescriptor.
+//
+// An immutable description of how to order a collection of objects according to a property common to all the objects.
 type SortDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SortDescriptorFromID(id objc.ID) *SortDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &SortDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SortDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func sortDescriptorAdopt(id objc.ID) *SortDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &SortDescriptor{Handle: objref.Wrap(id)}
+	x := &SortDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,41 +60,44 @@ func (x *SortDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a sort descriptor with a specified string key path and sort order.
-//
-// NewSortDescriptorWithKeyAscending creates a new SortDescriptor.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SortDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSortDescriptorWithKeyAscending creates a sort descriptor with a specified string key path and sort order.
 func NewSortDescriptorWithKeyAscending(key string, ascending bool) *SortDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSortDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKey:ascending:"), purego.NSString(key), ascending)
 	return sortDescriptorAdopt(_id)
 }
 
-// Creates a sort descriptor by decoding from the coder you specify.
-//
-// NewSortDescriptorWithCoder creates a new SortDescriptor.
+// NewSortDescriptorWithCoder creates a sort descriptor by decoding from the coder you specify.
 func NewSortDescriptorWithCoder(coder *Coder) *SortDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSortDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return sortDescriptorAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *SortDescriptor) WithScriptingProperties(scriptingProperties obj.Object) *SortDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Forces a securely decoded sort descriptor to allow evaluation.
+// AllowEvaluation forces a securely decoded sort descriptor to allow evaluation.
 func (x *SortDescriptor) AllowEvaluation() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowEvaluation"))
 }
 
-// Returns a comparison result value that indicates the sort order of two objects.
+// CompareObjectToObject returns a comparison result value that indicates the sort order of two objects.
 func (x *SortDescriptor) CompareObjectToObject(object1 obj.Object, object2 obj.Object) ComparisonResult {
 	_r := objc.Send[ComparisonResult](objref.IDOf(x), objc.RegisterName("compareObject:toObject:"), objref.IDOf(object1), objref.IDOf(object2))
 	return _r
 }
 
+// Key wraps the corresponding Objective-C method.
 func (x *SortDescriptor) Key() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("key"))
 	if _r == 0 {
@@ -101,11 +106,13 @@ func (x *SortDescriptor) Key() string {
 	return purego.GoString(_r)
 }
 
+// Ascending wraps the corresponding Objective-C method.
 func (x *SortDescriptor) Ascending() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ascending"))
 	return _r
 }
 
+// ReversedSortDescriptor wraps the corresponding Objective-C method.
 func (x *SortDescriptor) ReversedSortDescriptor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reversedSortDescriptor"))
 	return obj.Wrap(_r)

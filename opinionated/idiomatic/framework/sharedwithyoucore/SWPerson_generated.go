@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that tracks participants in a collaboration.
-//
 // Person is an idiomatic wrapper over the Objective-C class SWPerson.
+//
+// An object that tracks participants in a collaboration.
 type Person struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PersonFromID(id objc.ID) *Person {
 	if id == 0 {
 		return nil
 	}
-	x := &Person{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Person{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func personAdopt(id objc.ID) *Person {
 	if id == 0 {
 		return nil
 	}
-	x := &Person{Handle: objref.Wrap(id)}
+	x := &Person{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,9 +60,13 @@ func (x *Person) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates and initializes a person object.
-//
-// NewPersonWithHandleIdentityDisplayNameThumbnailImageData creates a new Person.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Person) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPersonWithHandleIdentityDisplayNameThumbnailImageData creates and initializes a person object.
 func NewPersonWithHandleIdentityDisplayNameThumbnailImageData(handle string, identity *PersonIdentity, displayName string, thumbnailImageData obj.Object) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWPerson")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHandle:identity:displayName:thumbnailImageData:"), purego.NSString(handle), objref.IDOf(identity), purego.NSString(displayName), objref.IDOf(thumbnailImageData))

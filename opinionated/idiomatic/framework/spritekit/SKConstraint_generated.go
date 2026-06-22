@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specification for constraining a node’s position or rotation.
-//
 // Constraint is an idiomatic wrapper over the Objective-C class SKConstraint.
+//
+// A specification for constraining a node’s position or rotation.
 type Constraint struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ConstraintFromID(id objc.ID) *Constraint {
 	if id == 0 {
 		return nil
 	}
-	x := &Constraint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Constraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func constraintAdopt(id objc.ID) *Constraint {
 	if id == 0 {
 		return nil
 	}
-	x := &Constraint{Handle: objref.Wrap(id)}
+	x := &Constraint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,42 +60,48 @@ func (x *Constraint) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Constraint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewConstraint creates a new Constraint.
 func NewConstraint() *Constraint {
 	_id := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("new"))
 	return constraintAdopt(_id)
 }
 
-// A Boolean value that specifies whether the constraint is applied.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that specifies whether the constraint is applied.
 func (x *Constraint) WithEnabled(enabled bool) *Constraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The node whose coordinate system should be used to apply the constraint.
-//
-// WithReferenceNode sets referenceNode and returns the receiver so calls can be chained.
+// WithReferenceNode the node whose coordinate system should be used to apply the constraint.
 func (x *Constraint) WithReferenceNode(referenceNode NodeProvider) *Constraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReferenceNode:"), objref.IDOf(referenceNode))
 	return x
 }
 
+// Enabled wraps the corresponding Objective-C method.
 func (x *Constraint) Enabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enabled"))
 	return _r
 }
 
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *Constraint) SetEnabled(enabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
+// ReferenceNode wraps the corresponding Objective-C method.
 func (x *Constraint) ReferenceNode() *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("referenceNode"))
 	return NodeFromID(_r)
 }
 
+// SetReferenceNode wraps the corresponding Objective-C method.
 func (x *Constraint) SetReferenceNode(referenceNode *Node) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReferenceNode:"), objref.IDOf(referenceNode))
 }

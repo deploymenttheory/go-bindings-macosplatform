@@ -23,7 +23,8 @@ func ImageGuidedFilterFromID(id objc.ID) *ImageGuidedFilter {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageGuidedFilter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageGuidedFilter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func imageGuidedFilterAdopt(id objc.ID) *ImageGuidedFilter {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageGuidedFilter{Handle: objref.Wrap(id)}
+	x := &ImageGuidedFilter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,68 +58,71 @@ func (x *ImageGuidedFilter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ImageGuidedFilter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewImageGuidedFilter creates a new ImageGuidedFilter.
 func NewImageGuidedFilter() *ImageGuidedFilter {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageGuidedFilter")), objc.RegisterName("new"))
 	return imageGuidedFilterAdopt(_id)
 }
 
-// The regularization parameter The parameter used when computing the linear coefficients a and b.
-//
-// WithEpsilon sets epsilon and returns the receiver so calls can be chained.
+// WithEpsilon the regularization parameter The parameter used when computing the linear coefficients a and b.
 func (x *ImageGuidedFilter) WithEpsilon(epsilon float32) *ImageGuidedFilter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpsilon:"), epsilon)
 	return x
 }
 
-// The scale parameter The parameter used to scale the result of the reconstruction operation. The default value is 1.0f.
-//
-// WithReconstructScale sets reconstructScale and returns the receiver so calls can be chained.
+// WithReconstructScale the scale parameter The parameter used to scale the result of the reconstruction operation. The default value is 1.0f.
 func (x *ImageGuidedFilter) WithReconstructScale(reconstructScale float32) *ImageGuidedFilter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReconstructScale:"), reconstructScale)
 	return x
 }
 
-// The offset parameter The offset parameter added to the result of the scaled reconstructed value. The default value is 0.0f.
-//
-// WithReconstructOffset sets reconstructOffset and returns the receiver so calls can be chained.
+// WithReconstructOffset the offset parameter The offset parameter added to the result of the scaled reconstructed value. The default value is 0.0f.
 func (x *ImageGuidedFilter) WithReconstructOffset(reconstructOffset float32) *ImageGuidedFilter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReconstructOffset:"), reconstructOffset)
 	return x
 }
 
-// The local window size The local window size.
+// KernelDiameter the local window size The local window size.
 func (x *ImageGuidedFilter) KernelDiameter() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelDiameter"))
 	return _r
 }
 
-// The regularization parameter The parameter used when computing the linear coefficients a and b.
+// Epsilon the regularization parameter The parameter used when computing the linear coefficients a and b.
 func (x *ImageGuidedFilter) Epsilon() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
 	return _r
 }
 
+// SetEpsilon wraps the corresponding Objective-C method.
 func (x *ImageGuidedFilter) SetEpsilon(epsilon float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpsilon:"), epsilon)
 }
 
-// The scale parameter The parameter used to scale the result of the reconstruction operation. The default value is 1.0f.
+// ReconstructScale the scale parameter The parameter used to scale the result of the reconstruction operation. The default value is 1.0f.
 func (x *ImageGuidedFilter) ReconstructScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("reconstructScale"))
 	return _r
 }
 
+// SetReconstructScale wraps the corresponding Objective-C method.
 func (x *ImageGuidedFilter) SetReconstructScale(reconstructScale float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReconstructScale:"), reconstructScale)
 }
 
-// The offset parameter The offset parameter added to the result of the scaled reconstructed value. The default value is 0.0f.
+// ReconstructOffset the offset parameter The offset parameter added to the result of the scaled reconstructed value. The default value is 0.0f.
 func (x *ImageGuidedFilter) ReconstructOffset() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("reconstructOffset"))
 	return _r
 }
 
+// SetReconstructOffset wraps the corresponding Objective-C method.
 func (x *ImageGuidedFilter) SetReconstructOffset(reconstructOffset float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReconstructOffset:"), reconstructOffset)
 }

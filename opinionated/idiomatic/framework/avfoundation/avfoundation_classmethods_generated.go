@@ -8,6 +8,7 @@ import (
 	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -15,31 +16,31 @@ import (
 	"unsafe"
 )
 
-// Creates an asset that models the media at the specified URL.
+// AssetWithURL creates an asset that models the media at the specified URL.
 func AssetWithURL(uRL string) *Asset {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAsset")), objc.RegisterName("assetWithURL:"), rt.FileURL(uRL))
 	return AssetFromID(_r)
 }
 
-// Creates a download configuration for a media asset.
+// DownloadConfigurationWithAssetTitle creates a download configuration for a media asset.
 func DownloadConfigurationWithAssetTitle(asset *URLAsset, title string) *AssetDownloadConfiguration {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetDownloadConfiguration")), objc.RegisterName("downloadConfigurationWithAsset:title:"), objref.IDOf(asset), purego.NSString(title))
 	return AssetDownloadConfigurationFromID(_r)
 }
 
-// Returns the shared storage manager instance.
+// SharedDownloadStorageManager returns the shared storage manager instance.
 func SharedDownloadStorageManager() *AssetDownloadStorageManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetDownloadStorageManager")), objc.RegisterName("sharedDownloadStorageManager"))
 	return AssetDownloadStorageManagerFromID(_r)
 }
 
-// Returns a new asset export session that uses the specified preset.
+// ExportSessionWithAssetPresetName returns a new asset export session that uses the specified preset.
 func ExportSessionWithAssetPresetName(asset *Asset, presetName string) *AssetExportSession {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetExportSession")), objc.RegisterName("exportSessionWithAsset:presetName:"), objref.IDOf(asset), purego.NSString(presetName))
 	return AssetExportSessionFromID(_r)
 }
 
-// Returns all available export preset names.
+// AllExportPresets returns all available export preset names.
 //
 // AllExportPresets returns the collection as a Go slice.
 func AllExportPresets() []string {
@@ -47,31 +48,31 @@ func AllExportPresets() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Returns compatible export presets for the asset.
+// ExportPresetsCompatibleWithAsset returns compatible export presets for the asset.
 func ExportPresetsCompatibleWithAsset(asset *Asset) []string {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetExportSession")), objc.RegisterName("exportPresetsCompatibleWithAsset:"), objref.IDOf(asset))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Determines an export preset’s compatibility to export the asset in a container of the output file type.
+// DetermineCompatibilityOfExportPresetWithAssetOutputFileTypeCompletionHandler determines an export preset’s compatibility to export the asset in a container of the output file type.
 func DetermineCompatibilityOfExportPresetWithAssetOutputFileTypeCompletionHandler(presetName string, asset *Asset, outputFileType obj.Object, handler func(bool)) {
 	objc.Send[objc.ID](objc.ID(_class("AVAssetExportSession")), objc.RegisterName("determineCompatibilityOfExportPreset:withAsset:outputFileType:completionHandler:"), purego.NSString(presetName), objref.IDOf(asset), objref.IDOf(outputFileType), objc.NewBlock(func(_ objc.Block, _b0 bool) { handler(_b0) }))
 }
 
-// Returns a new object that generates images for times within a video asset.
+// AssetImageGeneratorWithAsset returns a new object that generates images for times within a video asset.
 func AssetImageGeneratorWithAsset(asset *Asset) *AssetImageGenerator {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetImageGenerator")), objc.RegisterName("assetImageGeneratorWithAsset:"), objref.IDOf(asset))
 	return AssetImageGeneratorFromID(_r)
 }
 
-// Creates a playback assistant to inspect the specified asset.
+// AssetPlaybackAssistantWithAsset creates a playback assistant to inspect the specified asset.
 func AssetPlaybackAssistantWithAsset(asset *Asset) *AssetPlaybackAssistant {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetPlaybackAssistant")), objc.RegisterName("assetPlaybackAssistantWithAsset:"), objref.IDOf(asset))
 	return AssetPlaybackAssistantFromID(_r)
 }
 
-// Returns a new object to read media data from an asset.
-func AssetReaderWithAssetError(asset *Asset) (*AssetReader, error) {
+// AssetReaderWithAssetError returns a new object to read media data from an asset.
+func AssetReaderWithAssetError(asset *Asset) (result *AssetReader, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetReader")), objc.RegisterName("assetReaderWithAsset:error:"), objref.IDOf(asset), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -80,92 +81,92 @@ func AssetReaderWithAssetError(asset *Asset) (*AssetReader, error) {
 	return AssetReaderFromID(_r), nil
 }
 
-// Creates an object that reads mixed audio from the specified audio tracks.
+// AssetReaderAudioMixOutputWithAudioTracksAudioSettings creates an object that reads mixed audio from the specified audio tracks.
 func AssetReaderAudioMixOutputWithAudioTracksAudioSettings(audioTracks []*AssetTrack, audioSettings obj.Object) *AssetReaderAudioMixOutput {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetReaderAudioMixOutput")), objc.RegisterName("assetReaderAudioMixOutputWithAudioTracks:audioSettings:"), purego.SliceToNSArray(audioTracks, func(_v *AssetTrack) objc.ID { return objref.IDOf(_v) }), objref.IDOf(audioSettings))
 	return AssetReaderAudioMixOutputFromID(_r)
 }
 
-// A class method that creates a caption adaptor that reads from a track output.
+// AssetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput a class method that creates a caption adaptor that reads from a track output.
 func AssetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput(trackOutput *AssetReaderTrackOutput) *AssetReaderOutputCaptionAdaptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetReaderOutputCaptionAdaptor")), objc.RegisterName("assetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput:"), objref.IDOf(trackOutput))
 	return AssetReaderOutputCaptionAdaptorFromID(_r)
 }
 
-// Returns a new object that reads timed metadata groups from an asset reader output.
+// AssetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput returns a new object that reads timed metadata groups from an asset reader output.
 func AssetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput(trackOutput *AssetReaderTrackOutput) *AssetReaderOutputMetadataAdaptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetReaderOutputMetadataAdaptor")), objc.RegisterName("assetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput:"), objref.IDOf(trackOutput))
 	return AssetReaderOutputMetadataAdaptorFromID(_r)
 }
 
-// Returns a new object that supplies sample references.
+// AssetReaderSampleReferenceOutputWithTrack returns a new object that supplies sample references.
 func AssetReaderSampleReferenceOutputWithTrack(track *AssetTrack) *AssetReaderSampleReferenceOutput {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetReaderSampleReferenceOutput")), objc.RegisterName("assetReaderSampleReferenceOutputWithTrack:"), objref.IDOf(track))
 	return AssetReaderSampleReferenceOutputFromID(_r)
 }
 
-// Returns a new object that reads media data from an asset track.
+// AssetReaderTrackOutputWithTrackOutputSettings returns a new object that reads media data from an asset track.
 func AssetReaderTrackOutputWithTrackOutputSettings(track *AssetTrack, outputSettings obj.Object) *AssetReaderTrackOutput {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetReaderTrackOutput")), objc.RegisterName("assetReaderTrackOutputWithTrack:outputSettings:"), objref.IDOf(track), objref.IDOf(outputSettings))
 	return AssetReaderTrackOutputFromID(_r)
 }
 
-// Returns a new object that reads composited video from the specified video tracks.
+// AssetReaderVideoCompositionOutputWithVideoTracksVideoSettings returns a new object that reads composited video from the specified video tracks.
 func AssetReaderVideoCompositionOutputWithVideoTracksVideoSettings(videoTracks []*AssetTrack, videoSettings obj.Object) *AssetReaderVideoCompositionOutput {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetReaderVideoCompositionOutput")), objc.RegisterName("assetReaderVideoCompositionOutputWithVideoTracks:videoSettings:"), purego.SliceToNSArray(videoTracks, func(_v *AssetTrack) objc.ID { return objref.IDOf(_v) }), objref.IDOf(videoSettings))
 	return AssetReaderVideoCompositionOutputFromID(_r)
 }
 
-// Creates a variant qualifier with a predicate.
+// AssetVariantQualifierWithPredicate creates a variant qualifier with a predicate.
 func AssetVariantQualifierWithPredicate(predicate obj.Object) *AssetVariantQualifier {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetVariantQualifier")), objc.RegisterName("assetVariantQualifierWithPredicate:"), objref.IDOf(predicate))
 	return AssetVariantQualifierFromID(_r)
 }
 
-// Creates a variant qualifier with an asset variant.
+// AssetVariantQualifierWithVariant creates a variant qualifier with an asset variant.
 func AssetVariantQualifierWithVariant(variant *AssetVariant) *AssetVariantQualifier {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetVariantQualifier")), objc.RegisterName("assetVariantQualifierWithVariant:"), objref.IDOf(variant))
 	return AssetVariantQualifierFromID(_r)
 }
 
-// Creates a predicate for binaural audio.
+// PredicateForBinauralAudioMediaSelectionOption creates a predicate for binaural audio.
 func PredicateForBinauralAudioMediaSelectionOption(isBinauralAudio bool, mediaSelectionOption *MediaSelectionOption) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetVariantQualifier")), objc.RegisterName("predicateForBinauralAudio:mediaSelectionOption:"), isBinauralAudio, objref.IDOf(mediaSelectionOption))
 	return obj.Wrap(_r)
 }
 
-// Creates a predicate for immersive audio.
+// PredicateForImmersiveAudioMediaSelectionOption creates a predicate for immersive audio.
 func PredicateForImmersiveAudioMediaSelectionOption(isImmersiveAudio bool, mediaSelectionOption *MediaSelectionOption) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetVariantQualifier")), objc.RegisterName("predicateForImmersiveAudio:mediaSelectionOption:"), isImmersiveAudio, objref.IDOf(mediaSelectionOption))
 	return obj.Wrap(_r)
 }
 
-// Creates a predicate for downmix audio.
+// PredicateForDownmixAudioMediaSelectionOption creates a predicate for downmix audio.
 func PredicateForDownmixAudioMediaSelectionOption(isDownmixAudio bool, mediaSelectionOption *MediaSelectionOption) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetVariantQualifier")), objc.RegisterName("predicateForDownmixAudio:mediaSelectionOption:"), isDownmixAudio, objref.IDOf(mediaSelectionOption))
 	return obj.Wrap(_r)
 }
 
-// Creates a NSPredicate for binaural which can be used with other NSPredicates to express variant preferences.
+// PredicateForBinauralAudio creates a NSPredicate for binaural which can be used with other NSPredicates to express variant preferences.
 func PredicateForBinauralAudio(isBinauralAudio bool) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetVariantQualifier")), objc.RegisterName("predicateForBinauralAudio:"), isBinauralAudio)
 	return obj.Wrap(_r)
 }
 
-// Creates a NSPredicate for immersive audio which can be used with other NSPredicates to express variant preferences.
+// PredicateForImmersiveAudio creates a NSPredicate for immersive audio which can be used with other NSPredicates to express variant preferences.
 func PredicateForImmersiveAudio(isImmersiveAudio bool) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetVariantQualifier")), objc.RegisterName("predicateForImmersiveAudio:"), isImmersiveAudio)
 	return obj.Wrap(_r)
 }
 
-// Creates a NSPredicate for immersive audio which can be used with other NSPredicates to express variant preferences.
+// PredicateForDownmixAudio creates a NSPredicate for immersive audio which can be used with other NSPredicates to express variant preferences.
 func PredicateForDownmixAudio(isDownmixAudio bool) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetVariantQualifier")), objc.RegisterName("predicateForDownmixAudio:"), isDownmixAudio)
 	return obj.Wrap(_r)
 }
 
-// Returns a new object that writes media data to a container file at the output URL.
-func AssetWriterWithURLFileTypeError(outputURL string, outputFileType obj.Object) (*AssetWriter, error) {
+// AssetWriterWithURLFileTypeError returns a new object that writes media data to a container file at the output URL.
+func AssetWriterWithURLFileTypeError(outputURL string, outputFileType obj.Object) (result *AssetWriter, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetWriter")), objc.RegisterName("assetWriterWithURL:fileType:error:"), rt.FileURL(outputURL), objref.IDOf(outputFileType), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -174,97 +175,103 @@ func AssetWriterWithURLFileTypeError(outputURL string, outputFileType obj.Object
 	return AssetWriterFromID(_r), nil
 }
 
-// Returns a new input to append sample buffers of the specified type to the output file.
+// AssetWriterInputWithMediaTypeOutputSettings returns a new input to append sample buffers of the specified type to the output file.
 func AssetWriterInputWithMediaTypeOutputSettings(mediaType obj.Object, outputSettings obj.Object) *AssetWriterInput {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInput")), objc.RegisterName("assetWriterInputWithMediaType:outputSettings:"), objref.IDOf(mediaType), objref.IDOf(outputSettings))
 	return AssetWriterInputFromID(_r)
 }
 
-// Returns a new input that appends sample buffers of the specified type and format hint to the output file.
+// AssetWriterInputWithMediaTypeOutputSettingsSourceFormatHint returns a new input that appends sample buffers of the specified type and format hint to the output file.
 func AssetWriterInputWithMediaTypeOutputSettingsSourceFormatHint(mediaType obj.Object, outputSettings obj.Object, sourceFormatHint obj.Object) *AssetWriterInput {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInput")), objc.RegisterName("assetWriterInputWithMediaType:outputSettings:sourceFormatHint:"), objref.IDOf(mediaType), objref.IDOf(outputSettings), objref.IDOf(sourceFormatHint))
 	return AssetWriterInputFromID(_r)
 }
 
-// A class method that creates a new caption adaptor that writes to the specified asset writer input.
+// AssetWriterInputCaptionAdaptorWithAssetWriterInput a class method that creates a new caption adaptor that writes to the specified asset writer input.
 func AssetWriterInputCaptionAdaptorWithAssetWriterInput(input *AssetWriterInput) *AssetWriterInputCaptionAdaptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInputCaptionAdaptor")), objc.RegisterName("assetWriterInputCaptionAdaptorWithAssetWriterInput:"), objref.IDOf(input))
 	return AssetWriterInputCaptionAdaptorFromID(_r)
 }
 
-// Returns a new group for the asset writer inputs.
+// AssetWriterInputGroupWithInputsDefaultInput returns a new group for the asset writer inputs.
 func AssetWriterInputGroupWithInputsDefaultInput(inputs []*AssetWriterInput, defaultInput *AssetWriterInput) *AssetWriterInputGroup {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInputGroup")), objc.RegisterName("assetWriterInputGroupWithInputs:defaultInput:"), purego.SliceToNSArray(inputs, func(_v *AssetWriterInput) objc.ID { return objref.IDOf(_v) }), objref.IDOf(defaultInput))
 	return AssetWriterInputGroupFromID(_r)
 }
 
-// Returns a new metadata adaptor to append timed metadata groups to write to an output file.
+// AssetWriterInputMetadataAdaptorWithAssetWriterInput returns a new metadata adaptor to append timed metadata groups to write to an output file.
 func AssetWriterInputMetadataAdaptorWithAssetWriterInput(input *AssetWriterInput) *AssetWriterInputMetadataAdaptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInputMetadataAdaptor")), objc.RegisterName("assetWriterInputMetadataAdaptorWithAssetWriterInput:"), objref.IDOf(input))
 	return AssetWriterInputMetadataAdaptorFromID(_r)
 }
 
-// Returns a new pixel buffer adaptor that appends pixel buffers to write to the output file.
+// AssetWriterInputPixelBufferAdaptorWithAssetWriterInputSourcePixelBufferAttributes returns a new pixel buffer adaptor that appends pixel buffers to write to the output file.
 func AssetWriterInputPixelBufferAdaptorWithAssetWriterInputSourcePixelBufferAttributes(input *AssetWriterInput, sourcePixelBufferAttributes obj.Object) *AssetWriterInputPixelBufferAdaptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInputPixelBufferAdaptor")), objc.RegisterName("assetWriterInputPixelBufferAdaptorWithAssetWriterInput:sourcePixelBufferAttributes:"), objref.IDOf(input), objref.IDOf(sourcePixelBufferAttributes))
 	return AssetWriterInputPixelBufferAdaptorFromID(_r)
 }
 
-// Returns a new object that appends tagged buffer groups to an asset writer input.
+// AssetWriterInputTaggedPixelBufferGroupAdaptorWithAssetWriterInputSourcePixelBufferAttributes returns a new object that appends tagged buffer groups to an asset writer input.
 func AssetWriterInputTaggedPixelBufferGroupAdaptorWithAssetWriterInputSourcePixelBufferAttributes(input *AssetWriterInput, sourcePixelBufferAttributes obj.Object) *AssetWriterInputTaggedPixelBufferGroupAdaptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInputTaggedPixelBufferGroupAdaptor")), objc.RegisterName("assetWriterInputTaggedPixelBufferGroupAdaptorWithAssetWriterInput:sourcePixelBufferAttributes:"), objref.IDOf(input), objref.IDOf(sourcePixelBufferAttributes))
 	return AssetWriterInputTaggedPixelBufferGroupAdaptorFromID(_r)
 }
 
-// A class method that creates a new object with format conversion settings.
+// CaptionFormatConformerWithConversionSettings a class method that creates a new object with format conversion settings.
 func CaptionFormatConformerWithConversionSettings(conversionSettings obj.Object) *CaptionFormatConformer {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptionFormatConformer")), objc.RegisterName("captionFormatConformerWithConversionSettings:"), objref.IDOf(conversionSettings))
 	return CaptionFormatConformerFromID(_r)
 }
 
-// The top region for iTT format This region can be used in iTT format and it occupies the top 15% of the display area. The region uses LRTB, a line progresses left to right and the block extends from top to bottom. Each line is stacked with top justified.
+// AppleITTTopRegion the top region for iTT format This region can be used in iTT format and it occupies the top 15% of the display area. The region uses LRTB, a line progresses left to right and the block extends from top to bottom. Each line is stacked with top justified.
 func AppleITTTopRegion() *CaptionRegion {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptionRegion")), objc.RegisterName("appleITTTopRegion"))
 	return CaptionRegionFromID(_r)
 }
 
-// The bottom region for iTT format This region can be used in iTT format and it occupies the bottom 15% of the display area. The region uses LRTB, a line progresses left to right and the block extends from top to bottom. Each line is stacked with bottom justified.
+// AppleITTBottomRegion the bottom region for iTT format This region can be used in iTT format and it occupies the bottom 15% of the display area. The region uses LRTB, a line progresses left to right and the block extends from top to bottom. Each line is stacked with bottom justified.
 func AppleITTBottomRegion() *CaptionRegion {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptionRegion")), objc.RegisterName("appleITTBottomRegion"))
 	return CaptionRegionFromID(_r)
 }
 
-// The  left region for iTT format This region can be used in iTT format and it occupies the left 15% of the display area. The region uses TBRL, a line progresses top to bottom and the block extends from right to left. Each line is stacked with right justified.
+// AppleITTLeftRegion the  left region for iTT format This region can be used in iTT format and it occupies the left 15% of the display area. The region uses TBRL, a line progresses top to bottom and the block extends from right to left. Each line is stacked with right justified.
 func AppleITTLeftRegion() *CaptionRegion {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptionRegion")), objc.RegisterName("appleITTLeftRegion"))
 	return CaptionRegionFromID(_r)
 }
 
-// The right region for iTT format This region can be used in iTT format and it occupies the right 15% of the display area. The region uses TBRL, a line progresses top to bottom and the block extends from right to left. Each line is stacked with right justified.
+// AppleITTRightRegion the right region for iTT format This region can be used in iTT format and it occupies the right 15% of the display area. The region uses TBRL, a line progresses top to bottom and the block extends from right to left. Each line is stacked with right justified.
 func AppleITTRightRegion() *CaptionRegion {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptionRegion")), objc.RegisterName("appleITTRightRegion"))
 	return CaptionRegionFromID(_r)
 }
 
-// The bottom region for SubRip Text (SRT) format This region can be used in SRT format and it occupies the entire video display area. The region uses LRTB, a line progresses left to right and the block extends from top to bottom. Each line is stacked with bottom justified.
+// SubRipTextBottomRegion the bottom region for SubRip Text (SRT) format This region can be used in SRT format and it occupies the entire video display area. The region uses LRTB, a line progresses left to right and the block extends from top to bottom. Each line is stacked with bottom justified.
 func SubRipTextBottomRegion() *CaptionRegion {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptionRegion")), objc.RegisterName("subRipTextBottomRegion"))
 	return CaptionRegionFromID(_r)
 }
 
-// Provides a convenience initializer to create an instance of audio data output.
+// CaptionPreviewForProfileIDExtendedLanguageTagRenderSize generate a caption preview attributed string for the specified profile ID. Returns an attributed string containing a preview of captions rendered using the specified profile ID. It is strongly recommended that the caller take appropriate measures to prevent blocking essential services such as the user interface, for example, by avoiding calling this method in the main thread.
+func CaptionPreviewForProfileIDExtendedLanguageTagRenderSize(profileID string, extendedLanguageTag string, renderSize corefoundation.CGSize) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptionRenderer")), objc.RegisterName("captionPreviewForProfileID:extendedLanguageTag:renderSize:"), purego.NSString(profileID), purego.NSString(extendedLanguageTag), renderSize)
+	return obj.Wrap(_r)
+}
+
+// New provides a convenience initializer to create an instance of audio data output.
 func New() *CaptureAudioDataOutput {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureAudioDataOutput")), objc.RegisterName("new"))
 	return CaptureAudioDataOutputFromID(_r)
 }
 
-// Creates a new audio file output.
+// AVCaptureAudioFileOutputNew creates a new audio file output.
 func AVCaptureAudioFileOutputNew() *CaptureAudioFileOutput {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureAudioFileOutput")), objc.RegisterName("new"))
 	return CaptureAudioFileOutputFromID(_r)
 }
 
-// Returns an array containing UTIs identifying the file types AVCaptureAudioFileOutput can write.
+// AvailableOutputFileTypes returns an array containing UTIs identifying the file types AVCaptureAudioFileOutput can write.
 //
 // AvailableOutputFileTypes returns the collection as a Go slice.
 func AvailableOutputFileTypes() []obj.Object {
@@ -272,25 +279,25 @@ func AvailableOutputFileTypes() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Returns a new audio preview output object.
+// AVCaptureAudioPreviewOutputNew returns a new audio preview output object.
 func AVCaptureAudioPreviewOutputNew() *CaptureAudioPreviewOutput {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureAudioPreviewOutput")), objc.RegisterName("new"))
 	return CaptureAudioPreviewOutputFromID(_r)
 }
 
-// Returns a capture connection that represents a connection between multiple input ports and an output.
+// ConnectionWithInputPortsOutput returns a capture connection that represents a connection between multiple input ports and an output.
 func ConnectionWithInputPortsOutput(ports []*CaptureInputPort, output *CaptureOutput) *CaptureConnection {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureConnection")), objc.RegisterName("connectionWithInputPorts:output:"), purego.SliceToNSArray(ports, func(_v *CaptureInputPort) objc.ID { return objref.IDOf(_v) }), objref.IDOf(output))
 	return CaptureConnectionFromID(_r)
 }
 
-// Returns a capture connection that represents a connection between an input port and a video preview layer.
+// ConnectionWithInputPortVideoPreviewLayer returns a capture connection that represents a connection between an input port and a video preview layer.
 func ConnectionWithInputPortVideoPreviewLayer(port *CaptureInputPort, layer *CaptureVideoPreviewLayer) *CaptureConnection {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureConnection")), objc.RegisterName("connectionWithInputPort:videoPreviewLayer:"), objref.IDOf(port), objref.IDOf(layer))
 	return CaptureConnectionFromID(_r)
 }
 
-// Returns all available capture devices on the system.
+// Devices returns all available capture devices on the system.
 //
 // Devices returns the collection as a Go slice.
 func Devices() []*CaptureDevice {
@@ -298,144 +305,147 @@ func Devices() []*CaptureDevice {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptureDevice { return CaptureDeviceFromID(_id) })
 }
 
-// Returns devices capable of capturing media of the specified type.
+// DevicesWithMediaType returns devices capable of capturing media of the specified type.
 func DevicesWithMediaType(mediaType obj.Object) []*CaptureDevice {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("devicesWithMediaType:"), objref.IDOf(mediaType))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *CaptureDevice { return CaptureDeviceFromID(_id) })
 }
 
-// Returns the default device that captures the specified media type.
+// DefaultDeviceWithMediaType returns the default device that captures the specified media type.
 func DefaultDeviceWithMediaType(mediaType obj.Object) *CaptureDevice {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("defaultDeviceWithMediaType:"), objref.IDOf(mediaType))
 	return CaptureDeviceFromID(_r)
 }
 
-// Creates an object that represents a device with the specified identifier.
+// DeviceWithUniqueID creates an object that represents a device with the specified identifier.
 func DeviceWithUniqueID(deviceUniqueID string) *CaptureDevice {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("deviceWithUniqueID:"), purego.NSString(deviceUniqueID))
 	return CaptureDeviceFromID(_r)
 }
 
-// Returns the default device for the specified device type, media type, and position.
+// DefaultDeviceWithDeviceTypeMediaTypePosition returns the default device for the specified device type, media type, and position.
 func DefaultDeviceWithDeviceTypeMediaTypePosition(deviceType obj.Object, mediaType obj.Object, position CaptureDevicePosition) *CaptureDevice {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("defaultDeviceWithDeviceType:mediaType:position:"), objref.IDOf(deviceType), objref.IDOf(mediaType), position)
 	return CaptureDeviceFromID(_r)
 }
 
-// Settable property that specifies a user preferred camera. Setting this property allows an application to persist its user’s preferred camera across app launches and reboots. The property internally maintains a short history, so if your user’s most recent preferred camera is not currently connected, it still reports the next best choice. This property always returns a device that is present. If no camera is available nil is returned. Setting the property to nil has no effect.
+// UserPreferredCamera settable property that specifies a user preferred camera. Setting this property allows an application to persist its user’s preferred camera across app launches and reboots. The property internally maintains a short history, so if your user’s most recent preferred camera is not currently connected, it still reports the next best choice. This property always returns a device that is present. If no camera is available nil is returned. Setting the property to nil has no effect.
 func UserPreferredCamera() *CaptureDevice {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("userPreferredCamera"))
 	return CaptureDeviceFromID(_r)
 }
 
+// SetUserPreferredCamera wraps the corresponding Objective-C method.
 func SetUserPreferredCamera(userPreferredCamera *CaptureDevice) {
 	objc.Send[objc.ID](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("setUserPreferredCamera:"), objref.IDOf(userPreferredCamera))
 }
 
-// Specifies the best camera to use as determined by the system. Apple chooses the default value. This property incorporates userPreferredCamera as well as other factors, such as camera suspension and Apple cameras appearing that should be automatically chosen. The property may change spontaneously, such as when the preferred camera goes away. This property always returns a device that is present. If no camera is available nil is returned. Applications that adopt this API should always key-value observe this property and update their AVCaptureSession’s input device to reflect changes to the systemPreferredCamera. The application can still offer users the ability to pick a camera by setting userPreferredCamera, which will cause the systemPreferredCamera API to put the user’s choice first until either another Apple-preferred device becomes available or the machine is rebooted (after which it reverts to its original behavior of returning the internally determined best camera to use). If the application wishes to offer users a fully manual camera selection mode in addition to automatic camera selection, it is recommended to call setUserPreferredCamera: each time the user makes a camera selection, but ignore key-value observer updates to systemPreferredCamera while in manual selection mode.
+// SystemPreferredCamera specifies the best camera to use as determined by the system. Apple chooses the default value. This property incorporates userPreferredCamera as well as other factors, such as camera suspension and Apple cameras appearing that should be automatically chosen. The property may change spontaneously, such as when the preferred camera goes away. This property always returns a device that is present. If no camera is available nil is returned. Applications that adopt this API should always key-value observe this property and update their AVCaptureSession’s input device to reflect changes to the systemPreferredCamera. The application can still offer users the ability to pick a camera by setting userPreferredCamera, which will cause the systemPreferredCamera API to put the user’s choice first until either another Apple-preferred device becomes available or the machine is rebooted (after which it reverts to its original behavior of returning the internally determined best camera to use). If the application wishes to offer users a fully manual camera selection mode in addition to automatic camera selection, it is recommended to call setUserPreferredCamera: each time the user makes a camera selection, but ignore key-value observer updates to systemPreferredCamera while in manual selection mode.
 func SystemPreferredCamera() *CaptureDevice {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("systemPreferredCamera"))
 	return CaptureDeviceFromID(_r)
 }
 
-// Returns an authorization status that indicates whether the user grants the app permission to capture media of a particular type.
+// AuthorizationStatusForMediaType returns an authorization status that indicates whether the user grants the app permission to capture media of a particular type.
 func AuthorizationStatusForMediaType(mediaType obj.Object) AuthorizationStatus {
 	_r := objc.Send[AuthorizationStatus](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("authorizationStatusForMediaType:"), objref.IDOf(mediaType))
 	return _r
 }
 
-// Requests the user’s permission to allow the app to capture media of a particular type.
+// RequestAccessForMediaTypeCompletionHandler requests the user’s permission to allow the app to capture media of a particular type.
 func RequestAccessForMediaTypeCompletionHandler(mediaType obj.Object, handler func(bool)) {
 	objc.Send[objc.ID](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("requestAccessForMediaType:completionHandler:"), objref.IDOf(mediaType), objc.NewBlock(func(_ objc.Block, _b0 bool) { handler(_b0) }))
 }
 
-// A class property indicating the current mode of Center Stage control (user, app, or cooperative). This class property determines how the Center Stage feature is controlled. When set to the default value of AVCaptureCenterStageControlModeUser, centerStageEnabled may not be set programmatically and throws an NSInvalidArgumentException. In User mode, the feature may only be set by the user in Control Center. If you wish to take Center Stage control away from the user and exclusively enable / disable it programmatically, set this property to AVCaptureCenterStageControlModeApp. When under exclusive app control, Center Stage user control is disallowed (for instance, the toggle is grayed out in Control Center). If you wish to take control of Center Stage, but also cooperate with the user by listening for and appropriately reacting to their changes to the centerStageEnabled property, set this property to AVCaptureCenterStageControlModeCooperative. Note that in this mode, the onus is on you, the app developer, to honor user intent and conform your AVCaptureSession configuration to make Center Stage active (see the AVCaptureDevice instance property centerStageActive). In cooperative mode, the centerStageEnabled property may change at any time (such as when the user enables / disables the feature in Control Center).
+// CenterStageControlMode a class property indicating the current mode of Center Stage control (user, app, or cooperative). This class property determines how the Center Stage feature is controlled. When set to the default value of AVCaptureCenterStageControlModeUser, centerStageEnabled may not be set programmatically and throws an NSInvalidArgumentException. In User mode, the feature may only be set by the user in Control Center. If you wish to take Center Stage control away from the user and exclusively enable / disable it programmatically, set this property to AVCaptureCenterStageControlModeApp. When under exclusive app control, Center Stage user control is disallowed (for instance, the toggle is grayed out in Control Center). If you wish to take control of Center Stage, but also cooperate with the user by listening for and appropriately reacting to their changes to the centerStageEnabled property, set this property to AVCaptureCenterStageControlModeCooperative. Note that in this mode, the onus is on you, the app developer, to honor user intent and conform your AVCaptureSession configuration to make Center Stage active (see the AVCaptureDevice instance property centerStageActive). In cooperative mode, the centerStageEnabled property may change at any time (such as when the user enables / disables the feature in Control Center).
 func CenterStageControlMode() CaptureCenterStageControlMode {
 	_r := objc.Send[CaptureCenterStageControlMode](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("centerStageControlMode"))
 	return _r
 }
 
+// SetCenterStageControlMode wraps the corresponding Objective-C method.
 func SetCenterStageControlMode(centerStageControlMode CaptureCenterStageControlMode) {
 	objc.Send[objc.ID](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("setCenterStageControlMode:"), centerStageControlMode)
 }
 
-// A class property indicating whether the Center Stage feature is currently enabled or disabled (such as in Control Center or programmatically via your app). This property may only be set if centerStageControlMode is AVCaptureCenterStageControlModeApp or AVCaptureCenterStageControlModeCooperative, and otherwise throws an NSInvalidArgumentException. When centerStageControlMode is AVCaptureCenterStageControlModeUser or AVCaptureCenterStageControlModeCooperative, this property may change according to user desire (such as enabling / disabling the feature in Control Center), so you should key-value observe it.
+// IsCenterStageEnabled a class property indicating whether the Center Stage feature is currently enabled or disabled (such as in Control Center or programmatically via your app). This property may only be set if centerStageControlMode is AVCaptureCenterStageControlModeApp or AVCaptureCenterStageControlModeCooperative, and otherwise throws an NSInvalidArgumentException. When centerStageControlMode is AVCaptureCenterStageControlModeUser or AVCaptureCenterStageControlModeCooperative, this property may change according to user desire (such as enabling / disabling the feature in Control Center), so you should key-value observe it.
 func IsCenterStageEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("isCenterStageEnabled"))
 	return _r
 }
 
+// SetCenterStageEnabled wraps the corresponding Objective-C method.
 func SetCenterStageEnabled(centerStageEnabled bool) {
 	objc.Send[objc.ID](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("setCenterStageEnabled:"), centerStageEnabled)
 }
 
-// A class property indicating whether the Portrait Effect feature is currently enabled in Control Center. This property changes to reflect the Portrait Effect state in Control Center. It is key-value observable. On iOS, Portrait Effect only applies to video conferencing apps by default (apps that use "voip" as one of their UIBackgroundModes). Non video conferencing apps may opt in for the Portrait Effect by adding the following key to their Info.plist: <key>NSCameraPortraitEffectEnabled</key> <true/>
+// IsPortraitEffectEnabled a class property indicating whether the Portrait Effect feature is currently enabled in Control Center. This property changes to reflect the Portrait Effect state in Control Center. It is key-value observable. On iOS, Portrait Effect only applies to video conferencing apps by default (apps that use "voip" as one of their UIBackgroundModes). Non video conferencing apps may opt in for the Portrait Effect by adding the following key to their Info.plist: <key>NSCameraPortraitEffectEnabled</key> <true/>
 func IsPortraitEffectEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("isPortraitEffectEnabled"))
 	return _r
 }
 
-// A class property indicating whether the application is suitable for reaction effects, either by automatic gesture detection, or by calls to -[AVCaptureDevice performEffectForReaction:]. Reactions are only rendered when the device's activeFormat.reactionEffectsSupported is also YES, which will be reflected by canPerformReactionEffects when the feature is both enabled and supported. On macOS, Reaction Effects are enabled by default for all applications. On iOS, Reaction Effects are enabled by default for video conferencing applications (apps that use "voip" as one of their UIBackgroundModes). Non video conferencing applications may opt in for Reaction Effects by adding the following key to their Info.plist: <key>NSCameraReactionEffectsEnabled</key> <true/>
+// ReactionEffectsEnabled a class property indicating whether the application is suitable for reaction effects, either by automatic gesture detection, or by calls to -[AVCaptureDevice performEffectForReaction:]. Reactions are only rendered when the device's activeFormat.reactionEffectsSupported is also YES, which will be reflected by canPerformReactionEffects when the feature is both enabled and supported. On macOS, Reaction Effects are enabled by default for all applications. On iOS, Reaction Effects are enabled by default for video conferencing applications (apps that use "voip" as one of their UIBackgroundModes). Non video conferencing applications may opt in for Reaction Effects by adding the following key to their Info.plist: <key>NSCameraReactionEffectsEnabled</key> <true/>
 func ReactionEffectsEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("reactionEffectsEnabled"))
 	return _r
 }
 
-// A class property indicating whether gesture detection will trigger reaction effects on the video stream. Gesture detection will only run when the device's activeFormat.reactionEffectsSupported is also YES, which will be reflected by canPerformReactionEffects. This property changes to reflect the Gestures state in Control Center. It is key-value observable. Clients can call performEffectForReaction: independently of whether gesture detection is enabled, reaction effects from either source will be intermixed. By default, gesture detection is enabled.  As of iOS 17.4 and macOS 14.4, applications can control the default value of this property by adding the following key to their Info.plist: <key>NSCameraReactionEffectGesturesEnabledDefault</key> A value of true enables gesture detection and a value of false disables it, until such time that the user makes their own selection in Control Center.
+// ReactionEffectGesturesEnabled a class property indicating whether gesture detection will trigger reaction effects on the video stream. Gesture detection will only run when the device's activeFormat.reactionEffectsSupported is also YES, which will be reflected by canPerformReactionEffects. This property changes to reflect the Gestures state in Control Center. It is key-value observable. Clients can call performEffectForReaction: independently of whether gesture detection is enabled, reaction effects from either source will be intermixed. By default, gesture detection is enabled.  As of iOS 17.4 and macOS 14.4, applications can control the default value of this property by adding the following key to their Info.plist: <key>NSCameraReactionEffectGesturesEnabledDefault</key> A value of true enables gesture detection and a value of false disables it, until such time that the user makes their own selection in Control Center.
 func ReactionEffectGesturesEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("reactionEffectGesturesEnabled"))
 	return _r
 }
 
-// A class property indicating whether the user has enabled the Background Replacement feature for this application.
+// IsBackgroundReplacementEnabled a class property indicating whether the user has enabled the Background Replacement feature for this application.
 func IsBackgroundReplacementEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("isBackgroundReplacementEnabled"))
 	return _r
 }
 
-// Indicates the microphone mode that has been selected by the user in Control Center. This readonly property returns the microphone mode selected by the user in Control Center. It is key-value observable.
+// PreferredMicrophoneMode indicates the microphone mode that has been selected by the user in Control Center. This readonly property returns the microphone mode selected by the user in Control Center. It is key-value observable.
 func PreferredMicrophoneMode() CaptureMicrophoneMode {
 	_r := objc.Send[CaptureMicrophoneMode](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("preferredMicrophoneMode"))
 	return _r
 }
 
-// Indicates the currently active microphone mode. This readonly property returns the currently active microphone mode, which may differ from the preferredMicrophoneMode if the application's active audio route does not support the preferred microphone mode. This property is key-value observable.
+// ActiveMicrophoneMode indicates the currently active microphone mode. This readonly property returns the currently active microphone mode, which may differ from the preferredMicrophoneMode if the application's active audio route does not support the preferred microphone mode. This property is key-value observable.
 func ActiveMicrophoneMode() CaptureMicrophoneMode {
 	_r := objc.Send[CaptureMicrophoneMode](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("activeMicrophoneMode"))
 	return _r
 }
 
-// Displays the system's user interface for video effects or microphone modes. This method allows the calling application to prompt the user to make changes to Video Effects (such as Center Stage or the Portrait Effect) or Microphone Modes. It brings up the system user interface and deep links to the appropriate module. This method is non-blocking. After presenting the desired system user interface, control returns immediately to the application.
+// ShowSystemUserInterface displays the system's user interface for video effects or microphone modes. This method allows the calling application to prompt the user to make changes to Video Effects (such as Center Stage or the Portrait Effect) or Microphone Modes. It brings up the system user interface and deep links to the appropriate module. This method is non-blocking. After presenting the desired system user interface, control returns immediately to the application.
 func ShowSystemUserInterface(systemUserInterface CaptureSystemUserInterface) {
 	objc.Send[objc.ID](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("showSystemUserInterface:"), systemUserInterface)
 }
 
-// A class property indicating whether the Studio Light feature is currently enabled in Control Center. This property changes to reflect the Studio Light state in Control Center. It is key-value observable.  On iOS, Studio Light only applies to video conferencing apps by default (apps that use "voip" as one of their UIBackgroundModes). Non video conferencing apps may opt in for Studio Light by adding the following key to their Info.plist: <key>NSCameraStudioLightEnabled</key> <true/>
+// IsStudioLightEnabled a class property indicating whether the Studio Light feature is currently enabled in Control Center. This property changes to reflect the Studio Light state in Control Center. It is key-value observable.  On iOS, Studio Light only applies to video conferencing apps by default (apps that use "voip" as one of their UIBackgroundModes). Non video conferencing apps may opt in for Studio Light by adding the following key to their Info.plist: <key>NSCameraStudioLightEnabled</key> <true/>
 func IsStudioLightEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("isStudioLightEnabled"))
 	return _r
 }
 
-// A class property indicating whether the Edge Light feature is currently enabled in Control Center. This readonly property changes to reflect the Edge Light state in Control Center. It is key-value observable.
+// IsEdgeLightEnabled a class property indicating whether the Edge Light feature is currently enabled in Control Center. This readonly property changes to reflect the Edge Light state in Control Center. It is key-value observable.
 func IsEdgeLightEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("isEdgeLightEnabled"))
 	return _r
 }
 
-// A class property indicating whether the edge light UI is actively being shown on a screen. This readonly property reflects whether the edge light UI is actively being shown on a screen. It is key-value observable.
+// IsEdgeLightActive a class property indicating whether the edge light UI is actively being shown on a screen. This readonly property reflects whether the edge light UI is actively being shown on a screen. It is key-value observable.
 func IsEdgeLightActive() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("isEdgeLightActive"))
 	return _r
 }
 
-// Returns an AVCaptureDeviceDiscoverySession instance for the given device types, media type, and position. The list of device types is mandatory. This is used to make sure that clients only get access to devices of types they expect. This prevents new device types from automatically being included in the list of devices.
+// DiscoverySessionWithDeviceTypesMediaTypePosition returns an AVCaptureDeviceDiscoverySession instance for the given device types, media type, and position. The list of device types is mandatory. This is used to make sure that clients only get access to devices of types they expect. This prevents new device types from automatically being included in the list of devices.
 func DiscoverySessionWithDeviceTypesMediaTypePosition(deviceTypes []obj.Object, mediaType obj.Object, position CaptureDevicePosition) *CaptureDeviceDiscoverySession {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureDeviceDiscoverySession")), objc.RegisterName("discoverySessionWithDeviceTypes:mediaType:position:"), purego.SliceToNSArray(deviceTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(mediaType), position)
 	return CaptureDeviceDiscoverySessionFromID(_r)
 }
 
-// Returns a new input for the specified capture device.
-func DeviceInputWithDeviceError(device *CaptureDevice) (*CaptureDeviceInput, error) {
+// DeviceInputWithDeviceError returns a new input for the specified capture device.
+func DeviceInputWithDeviceError(device *CaptureDevice) (result *CaptureDeviceInput, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureDeviceInput")), objc.RegisterName("deviceInputWithDevice:error:"), objref.IDOf(device), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -444,157 +454,157 @@ func DeviceInputWithDeviceError(device *CaptureDevice) (*CaptureDeviceInput, err
 	return CaptureDeviceInputFromID(_r), nil
 }
 
-// Whether the external display supports matching frame rate to a capture device. If `true`, you may instantiate a configurator with a configuration specifying “AVCaptureExternalDisplayConfiguration/shouldMatchFrameRate“ set to `true`.
+// IsMatchingFrameRateSupported whether the external display supports matching frame rate to a capture device. If `true`, you may instantiate a configurator with a configuration specifying “AVCaptureExternalDisplayConfiguration/shouldMatchFrameRate“ set to `true`.
 func IsMatchingFrameRateSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVCaptureExternalDisplayConfigurator")), objc.RegisterName("isMatchingFrameRateSupported"))
 	return _r
 }
 
-// Whether the external display supports bypassing color space conversion. If `true`, you may instantiate a configurator with a configuration specifying “AVCaptureExternalDisplayConfiguration/bypassColorSpaceConversion“ set to `true`.
+// IsBypassingColorSpaceConversionSupported whether the external display supports bypassing color space conversion. If `true`, you may instantiate a configurator with a configuration specifying “AVCaptureExternalDisplayConfiguration/bypassColorSpaceConversion“ set to `true`.
 func IsBypassingColorSpaceConversionSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVCaptureExternalDisplayConfigurator")), objc.RegisterName("isBypassingColorSpaceConversionSupported"))
 	return _r
 }
 
-// Whether the external display supports configuration to your preferred resolution. If `true`, you may instantiate a configurator with a configuration specifying “AVCaptureExternalDisplayConfiguration/preferredResolution“ set to `true`.
+// IsPreferredResolutionSupported whether the external display supports configuration to your preferred resolution. If `true`, you may instantiate a configurator with a configuration specifying “AVCaptureExternalDisplayConfiguration/preferredResolution“ set to `true`.
 func IsPreferredResolutionSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVCaptureExternalDisplayConfigurator")), objc.RegisterName("isPreferredResolutionSupported"))
 	return _r
 }
 
-// Creates a new capture metadata output.
+// AVCaptureMetadataOutputNew creates a new capture metadata output.
 func AVCaptureMetadataOutputNew() *CaptureMetadataOutput {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureMetadataOutput")), objc.RegisterName("new"))
 	return CaptureMetadataOutputFromID(_r)
 }
 
-// Returns a new movie file output object.
+// AVCaptureMovieFileOutputNew returns a new movie file output object.
 func AVCaptureMovieFileOutputNew() *CaptureMovieFileOutput {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureMovieFileOutput")), objc.RegisterName("new"))
 	return CaptureMovieFileOutputFromID(_r)
 }
 
-// Creates a new photo capture output object.
+// AVCapturePhotoOutputNew creates a new photo capture output object.
 func AVCapturePhotoOutputNew() *CapturePhotoOutput {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCapturePhotoOutput")), objc.RegisterName("new"))
 	return CapturePhotoOutputFromID(_r)
 }
 
-// Creates a photo settings object with default settings.
+// PhotoSettings creates a photo settings object with default settings.
 func PhotoSettings() *CapturePhotoSettings {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCapturePhotoSettings")), objc.RegisterName("photoSettings"))
 	return CapturePhotoSettingsFromID(_r)
 }
 
-// Creates a photo settings object with the specified output format.
+// PhotoSettingsWithFormat creates a photo settings object with the specified output format.
 func PhotoSettingsWithFormat(format obj.Object) *CapturePhotoSettings {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCapturePhotoSettings")), objc.RegisterName("photoSettingsWithFormat:"), objref.IDOf(format))
 	return CapturePhotoSettingsFromID(_r)
 }
 
-// Creates a unique photo settings object, copying all settings values from the specified photo settings object.
+// PhotoSettingsFromPhotoSettings creates a unique photo settings object, copying all settings values from the specified photo settings object.
 func PhotoSettingsFromPhotoSettings(photoSettings *CapturePhotoSettings) *CapturePhotoSettings {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCapturePhotoSettings")), objc.RegisterName("photoSettingsFromPhotoSettings:"), objref.IDOf(photoSettings))
 	return CapturePhotoSettingsFromID(_r)
 }
 
-// Creates a capture screen input that provides media data from the main screen.
+// AVCaptureScreenInputNew creates a capture screen input that provides media data from the main screen.
 func AVCaptureScreenInputNew() *CaptureScreenInput {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureScreenInput")), objc.RegisterName("new"))
 	return CaptureScreenInputFromID(_r)
 }
 
-// Creates new still image output.
+// AVCaptureStillImageOutputNew creates new still image output.
 func AVCaptureStillImageOutputNew() *CaptureStillImageOutput {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureStillImageOutput")), objc.RegisterName("new"))
 	return CaptureStillImageOutputFromID(_r)
 }
 
-// Returns an NSData representation of a still image data and metadata attachments in a JPEG sample buffer.
+// JpegStillImageNSDataRepresentation returns an NSData representation of a still image data and metadata attachments in a JPEG sample buffer.
 func JpegStillImageNSDataRepresentation(jpegSampleBuffer obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureStillImageOutput")), objc.RegisterName("jpegStillImageNSDataRepresentation:"), objref.IDOf(jpegSampleBuffer))
 	return obj.Wrap(_r)
 }
 
-// A frame counter timecode source that operates independently of any internal or external synchronization. This class property represents a standalone timecode source that advances based purely on frame count, independent of any real-time or external synchronization. It is ideal for scenarios where a simple, self-contained timing reference is sufficient, without requiring alignment to system clocks or external devices.
+// FrameCountSource a frame counter timecode source that operates independently of any internal or external synchronization. This class property represents a standalone timecode source that advances based purely on frame count, independent of any real-time or external synchronization. It is ideal for scenarios where a simple, self-contained timing reference is sufficient, without requiring alignment to system clocks or external devices.
 func FrameCountSource() *CaptureTimecodeSource {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureTimecodeGenerator")), objc.RegisterName("frameCountSource"))
 	return CaptureTimecodeSourceFromID(_r)
 }
 
-// A predefined timecode source synchronized to the real-time system clock. This class property provides a default timecode source based on the real-time system clock, requiring no external device. It is ideal for live events or scenarios where alignment with the current time of day is necessary.
+// RealTimeClockSource a predefined timecode source synchronized to the real-time system clock. This class property provides a default timecode source based on the real-time system clock, requiring no external device. It is ideal for live events or scenarios where alignment with the current time of day is necessary.
 func RealTimeClockSource() *CaptureTimecodeSource {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureTimecodeGenerator")), objc.RegisterName("realTimeClockSource"))
 	return CaptureTimecodeSourceFromID(_r)
 }
 
-// Creates a new video file output.
+// AVCaptureVideoDataOutputNew creates a new video file output.
 func AVCaptureVideoDataOutputNew() *CaptureVideoDataOutput {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureVideoDataOutput")), objc.RegisterName("new"))
 	return CaptureVideoDataOutputFromID(_r)
 }
 
-// Returns a new layer to preview the visual output of a capture session.
+// LayerWithSession returns a new layer to preview the visual output of a capture session.
 func LayerWithSession(session *CaptureSession) *CaptureVideoPreviewLayer {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureVideoPreviewLayer")), objc.RegisterName("layerWithSession:"), objref.IDOf(session))
 	return CaptureVideoPreviewLayerFromID(_r)
 }
 
-// Returns a new layer to preview the visual output of a capture session, without making connections to eligible video inputs.
+// LayerWithSessionWithNoConnection returns a new layer to preview the visual output of a capture session, without making connections to eligible video inputs.
 func LayerWithSessionWithNoConnection(session *CaptureSession) *CaptureVideoPreviewLayer {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureVideoPreviewLayer")), objc.RegisterName("layerWithSessionWithNoConnection:"), objref.IDOf(session))
 	return CaptureVideoPreviewLayerFromID(_r)
 }
 
-// Creates a content key response with an encrypted key response data blob when FairPlay Streaming is the key delivery method.
+// ContentKeyResponseWithFairPlayStreamingKeyResponseData creates a content key response with an encrypted key response data blob when FairPlay Streaming is the key delivery method.
 func ContentKeyResponseWithFairPlayStreamingKeyResponseData(keyResponseData obj.Object) *ContentKeyResponse {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVContentKeyResponse")), objc.RegisterName("contentKeyResponseWithFairPlayStreamingKeyResponseData:"), objref.IDOf(keyResponseData))
 	return ContentKeyResponseFromID(_r)
 }
 
-// Creates a new key response object for key data and initialization vector sent in the clear.
+// ContentKeyResponseWithClearKeyDataInitializationVector creates a new key response object for key data and initialization vector sent in the clear.
 func ContentKeyResponseWithClearKeyDataInitializationVector(keyData obj.Object, initializationVector obj.Object) *ContentKeyResponse {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVContentKeyResponse")), objc.RegisterName("contentKeyResponseWithClearKeyData:initializationVector:"), objref.IDOf(keyData), objref.IDOf(initializationVector))
 	return ContentKeyResponseFromID(_r)
 }
 
-// Creates a content key response with an authorization token.
+// ContentKeyResponseWithAuthorizationTokenData creates a content key response with an authorization token.
 func ContentKeyResponseWithAuthorizationTokenData(authorizationTokenData obj.Object) *ContentKeyResponse {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVContentKeyResponse")), objc.RegisterName("contentKeyResponseWithAuthorizationTokenData:"), objref.IDOf(authorizationTokenData))
 	return ContentKeyResponseFromID(_r)
 }
 
-// Creates a content key session to manage a collection of content decryption keys.
+// ContentKeySessionWithKeySystem creates a content key session to manage a collection of content decryption keys.
 func ContentKeySessionWithKeySystem(keySystem obj.Object) *ContentKeySession {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVContentKeySession")), objc.RegisterName("contentKeySessionWithKeySystem:"), objref.IDOf(keySystem))
 	return ContentKeySessionFromID(_r)
 }
 
-// Creates a content key session to manage a collection of content decryption keys; points to a directory that stores abnormal session termination reports.
+// ContentKeySessionWithKeySystemStorageDirectoryAtURL creates a content key session to manage a collection of content decryption keys; points to a directory that stores abnormal session termination reports.
 func ContentKeySessionWithKeySystemStorageDirectoryAtURL(keySystem obj.Object, storageURL string) *ContentKeySession {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVContentKeySession")), objc.RegisterName("contentKeySessionWithKeySystem:storageDirectoryAtURL:"), objref.IDOf(keySystem), rt.FileURL(storageURL))
 	return ContentKeySessionFromID(_r)
 }
 
-// Returns the expired session reports for content key sessions created with the specified app identifier.
+// PendingExpiredSessionReportsWithAppIdentifierStorageDirectoryAtURL returns the expired session reports for content key sessions created with the specified app identifier.
 func PendingExpiredSessionReportsWithAppIdentifierStorageDirectoryAtURL(appIdentifier obj.Object, storageURL string) []obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVContentKeySession")), objc.RegisterName("pendingExpiredSessionReportsWithAppIdentifier:storageDirectoryAtURL:"), objref.IDOf(appIdentifier), rt.FileURL(storageURL))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Removes expired session reports from storage.
+// RemovePendingExpiredSessionReportsWithAppIdentifierStorageDirectoryAtURL removes expired session reports from storage.
 func RemovePendingExpiredSessionReportsWithAppIdentifierStorageDirectoryAtURL(expiredSessionReports []obj.Object, appIdentifier obj.Object, storageURL string) {
 	objc.Send[objc.ID](objc.ID(_class("AVContentKeySession")), objc.RegisterName("removePendingExpiredSessionReports:withAppIdentifier:storageDirectoryAtURL:"), purego.SliceToNSArray(expiredSessionReports, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(appIdentifier), rt.FileURL(storageURL))
 }
 
-// A convenience initializer to create a content key specifier.
+// ContentKeySpecifierForKeySystemIdentifierOptions a convenience initializer to create a content key specifier.
 func ContentKeySpecifierForKeySystemIdentifierOptions(keySystem obj.Object, contentKeyIdentifier obj.Object, options obj.Object) *ContentKeySpecifier {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVContentKeySpecifier")), objc.RegisterName("contentKeySpecifierForKeySystem:identifier:options:"), objref.IDOf(keySystem), objref.IDOf(contentKeyIdentifier), objref.IDOf(options))
 	return ContentKeySpecifierFromID(_r)
 }
 
-// Creates a depth data object from depth information such as that found in an image file.
-func DepthDataFromDictionaryRepresentationError(imageSourceAuxDataInfoDictionary obj.Object) (*DepthData, error) {
+// DepthDataFromDictionaryRepresentationError creates a depth data object from depth information such as that found in an image file.
+func DepthDataFromDictionaryRepresentationError(imageSourceAuxDataInfoDictionary obj.Object) (result *DepthData, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("AVDepthData")), objc.RegisterName("depthDataFromDictionaryRepresentation:error:"), objref.IDOf(imageSourceAuxDataInfoDictionary), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -603,156 +613,156 @@ func DepthDataFromDictionaryRepresentationError(imageSourceAuxDataInfoDictionary
 	return DepthDataFromID(_r), nil
 }
 
-// Requests access to an external storage device on behalf of your app, which can present a dialog to a person on their device’s display.
+// RequestAccessWithCompletionHandler requests access to an external storage device on behalf of your app, which can present a dialog to a person on their device’s display.
 func RequestAccessWithCompletionHandler(handler func(bool)) {
 	objc.Send[objc.ID](objc.ID(_class("AVExternalStorageDevice")), objc.RegisterName("requestAccessWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { handler(_b0) }))
 }
 
-// Returns the client's authorization status for capturing onto an external storage device connected to this device. This method returns the AVAuthorizationStatus of the client for capturing onto an external storage device connected to this device. If the status is AVAuthorizationStatusNotDetermined, you may use the +requestAccessWithCompletionHandler: method to request access by prompting the user.
+// AVExternalStorageDeviceAuthorizationStatus returns the client's authorization status for capturing onto an external storage device connected to this device. This method returns the AVAuthorizationStatus of the client for capturing onto an external storage device connected to this device. If the status is AVAuthorizationStatusNotDetermined, you may use the +requestAccessWithCompletionHandler: method to request access by prompting the user.
 func AVExternalStorageDeviceAuthorizationStatus() AuthorizationStatus {
 	_r := objc.Send[AuthorizationStatus](objc.ID(_class("AVExternalStorageDevice")), objc.RegisterName("authorizationStatus"))
 	return _r
 }
 
-// Returns the singleton instance of the external storage device discovery session. There is only one external storage device discovery session for each host device which can be accessed using this method. Will return nil if the device doesn't support external storage devices.
+// SharedSession returns the singleton instance of the external storage device discovery session. There is only one external storage device discovery session for each host device which can be accessed using this method. Will return nil if the device doesn't support external storage devices.
 func SharedSession() *ExternalStorageDeviceDiscoverySession {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVExternalStorageDeviceDiscoverySession")), objc.RegisterName("sharedSession"))
 	return ExternalStorageDeviceDiscoverySessionFromID(_r)
 }
 
-// Whether the external storage devices are supported by this device. A value of YES indicates that external storage devices are supported while NO indicates it is not.
+// IsSupported whether the external storage devices are supported by this device. A value of YES indicates that external storage devices are supported while NO indicates it is not.
 func IsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVExternalStorageDeviceDiscoverySession")), objc.RegisterName("isSupported"))
 	return _r
 }
 
-// The singleton instance of the external sync source device discovery session. Access the one and only external sync device discovery session on this host device using this method. “sharedSession“ returns `nil` if the host device doesn't support external sync devices.
+// AVExternalSyncDeviceDiscoverySessionSharedSession the singleton instance of the external sync source device discovery session. Access the one and only external sync device discovery session on this host device using this method. “sharedSession“ returns `nil` if the host device doesn't support external sync devices.
 func AVExternalSyncDeviceDiscoverySessionSharedSession() *ExternalSyncDeviceDiscoverySession {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVExternalSyncDeviceDiscoverySession")), objc.RegisterName("sharedSession"))
 	return ExternalSyncDeviceDiscoverySessionFromID(_r)
 }
 
-// Whether external sync devices are supported by this device. A value of `true` indicates that external sync devices are supported while `false` indicates they are not.
+// AVExternalSyncDeviceDiscoverySessionIsSupported whether external sync devices are supported by this device. A value of `true` indicates that external sync devices are supported while `false` indicates they are not.
 func AVExternalSyncDeviceDiscoverySessionIsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVExternalSyncDeviceDiscoverySession")), objc.RegisterName("isSupported"))
 	return _r
 }
 
-// Creates a fragmented asset for the media at the specified URL.
+// FragmentedAssetWithURLOptions creates a fragmented asset for the media at the specified URL.
 func FragmentedAssetWithURLOptions(uRL string, options obj.Object) *FragmentedAsset {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVFragmentedAsset")), objc.RegisterName("fragmentedAssetWithURL:options:"), rt.FileURL(uRL), objref.IDOf(options))
 	return FragmentedAssetFromID(_r)
 }
 
-// Creates a fragmented asset minder containing the specified asset and minding interval.
+// FragmentedAssetMinderWithAssetMindingInterval creates a fragmented asset minder containing the specified asset and minding interval.
 func FragmentedAssetMinderWithAssetMindingInterval(asset *Asset, mindingInterval float64) *FragmentedAssetMinder {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVFragmentedAssetMinder")), objc.RegisterName("fragmentedAssetMinderWithAsset:mindingInterval:"), objref.IDOf(asset), mindingInterval)
 	return FragmentedAssetMinderFromID(_r)
 }
 
-// Creates a movie minder and adds a movie with a minding interval.
+// FragmentedMovieMinderWithMovieMindingInterval creates a movie minder and adds a movie with a minding interval.
 func FragmentedMovieMinderWithMovieMindingInterval(movie *FragmentedMovie, mindingInterval float64) *FragmentedMovieMinder {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVFragmentedMovieMinder")), objc.RegisterName("fragmentedMovieMinderWithMovie:mindingInterval:"), objref.IDOf(movie), mindingInterval)
 	return FragmentedMovieMinderFromID(_r)
 }
 
-// Returns an array containing the media selection options from a given array that are playable.
+// PlayableMediaSelectionOptionsFromArray returns an array containing the media selection options from a given array that are playable.
 func PlayableMediaSelectionOptionsFromArray(mediaSelectionOptions []*MediaSelectionOption) []*MediaSelectionOption {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMediaSelectionGroup")), objc.RegisterName("playableMediaSelectionOptionsFromArray:"), purego.SliceToNSArray(mediaSelectionOptions, func(_v *MediaSelectionOption) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MediaSelectionOption { return MediaSelectionOptionFromID(_id) })
 }
 
-// Returns an array of media selection options, filtering them according to whether their locales match one of the specified languages.
+// MediaSelectionOptionsFromArrayFilteredAndSortedAccordingToPreferredLanguages returns an array of media selection options, filtering them according to whether their locales match one of the specified languages.
 func MediaSelectionOptionsFromArrayFilteredAndSortedAccordingToPreferredLanguages(mediaSelectionOptions []*MediaSelectionOption, preferredLanguages []string) []*MediaSelectionOption {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMediaSelectionGroup")), objc.RegisterName("mediaSelectionOptionsFromArray:filteredAndSortedAccordingToPreferredLanguages:"), purego.SliceToNSArray(mediaSelectionOptions, func(_v *MediaSelectionOption) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(preferredLanguages, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MediaSelectionOption { return MediaSelectionOptionFromID(_id) })
 }
 
-// Returns an array containing the media selection options from a given array that match the specified locale.
+// MediaSelectionOptionsFromArrayWithLocale returns an array containing the media selection options from a given array that match the specified locale.
 func MediaSelectionOptionsFromArrayWithLocale(mediaSelectionOptions []*MediaSelectionOption, locale obj.Object) []*MediaSelectionOption {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMediaSelectionGroup")), objc.RegisterName("mediaSelectionOptionsFromArray:withLocale:"), purego.SliceToNSArray(mediaSelectionOptions, func(_v *MediaSelectionOption) objc.ID { return objref.IDOf(_v) }), objref.IDOf(locale))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MediaSelectionOption { return MediaSelectionOptionFromID(_id) })
 }
 
-// Returns an array containing the media selection options from a given array that match given media characteristics.
+// MediaSelectionOptionsFromArrayWithMediaCharacteristics returns an array containing the media selection options from a given array that match given media characteristics.
 func MediaSelectionOptionsFromArrayWithMediaCharacteristics(mediaSelectionOptions []*MediaSelectionOption, mediaCharacteristics []obj.Object) []*MediaSelectionOption {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMediaSelectionGroup")), objc.RegisterName("mediaSelectionOptionsFromArray:withMediaCharacteristics:"), purego.SliceToNSArray(mediaSelectionOptions, func(_v *MediaSelectionOption) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(mediaCharacteristics, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MediaSelectionOption { return MediaSelectionOptionFromID(_id) })
 }
 
-// Returns an array containing the media selection options from a given array that do not match given media characteristics.
+// MediaSelectionOptionsFromArrayWithoutMediaCharacteristics returns an array containing the media selection options from a given array that do not match given media characteristics.
 func MediaSelectionOptionsFromArrayWithoutMediaCharacteristics(mediaSelectionOptions []*MediaSelectionOption, mediaCharacteristics []obj.Object) []*MediaSelectionOption {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMediaSelectionGroup")), objc.RegisterName("mediaSelectionOptionsFromArray:withoutMediaCharacteristics:"), purego.SliceToNSArray(mediaSelectionOptions, func(_v *MediaSelectionOption) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(mediaCharacteristics, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MediaSelectionOption { return MediaSelectionOptionFromID(_id) })
 }
 
-// Returns metadata items whose locales match one of the specified language identifiers.
+// MetadataItemsFromArrayFilteredAndSortedAccordingToPreferredLanguages returns metadata items whose locales match one of the specified language identifiers.
 func MetadataItemsFromArrayFilteredAndSortedAccordingToPreferredLanguages(metadataItems []*MetadataItem, preferredLanguages []string) []*MetadataItem {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMetadataItem")), objc.RegisterName("metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:"), purego.SliceToNSArray(metadataItems, func(_v *MetadataItem) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(preferredLanguages, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
-// Returns metadata items for the specified identifier.
+// MetadataItemsFromArrayFilteredByIdentifier returns metadata items for the specified identifier.
 func MetadataItemsFromArrayFilteredByIdentifier(metadataItems []*MetadataItem, identifier obj.Object) []*MetadataItem {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMetadataItem")), objc.RegisterName("metadataItemsFromArray:filteredByIdentifier:"), purego.SliceToNSArray(metadataItems, func(_v *MetadataItem) objc.ID { return objref.IDOf(_v) }), objref.IDOf(identifier))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
-// Returns filtered metadata items.
+// MetadataItemsFromArrayFilteredByMetadataItemFilter returns filtered metadata items.
 func MetadataItemsFromArrayFilteredByMetadataItemFilter(metadataItems []*MetadataItem, metadataItemFilter *MetadataItemFilter) []*MetadataItem {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMetadataItem")), objc.RegisterName("metadataItemsFromArray:filteredByMetadataItemFilter:"), purego.SliceToNSArray(metadataItems, func(_v *MetadataItem) objc.ID { return objref.IDOf(_v) }), objref.IDOf(metadataItemFilter))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
-// Returns a metadata identifier for the specified key and key space.
+// IdentifierForKeyKeySpace returns a metadata identifier for the specified key and key space.
 func IdentifierForKeyKeySpace(key obj.Object, keySpace obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMetadataItem")), objc.RegisterName("identifierForKey:keySpace:"), objref.IDOf(key), objref.IDOf(keySpace))
 	return obj.Wrap(_r)
 }
 
-// Returns a metadata key space for the specified identifier.
+// KeySpaceForIdentifier returns a metadata key space for the specified identifier.
 func KeySpaceForIdentifier(identifier obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMetadataItem")), objc.RegisterName("keySpaceForIdentifier:"), objref.IDOf(identifier))
 	return obj.Wrap(_r)
 }
 
-// Returns a metadata key for the specified identifier.
+// KeyForIdentifier returns a metadata key for the specified identifier.
 func KeyForIdentifier(identifier obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMetadataItem")), objc.RegisterName("keyForIdentifier:"), objref.IDOf(identifier))
 	return obj.Wrap(_r)
 }
 
-// Creates an instance of AVMutableMetadataItem with a value that you do not wish to load unless required, e.g. a large image value that needn't be loaded into memory until another module wants to display it. This method is intended for the creation of metadata items for optional display purposes, when there is no immediate need to load specific metadata values. For example, see the interface for navigation markers as consumed by AVPlayerViewController. It's not intended for the creation of metadata items with values that are required immediately, such as metadata items that are provided for impending serialization operations (e.g. via -[AVAssetExportSession setMetadata:] and other similar methods defined on AVAssetWriter and AVAssetWriterInput). When -loadValuesAsynchronouslyForKeys:completionHandler: is invoked on an AVMetadataItem created via +metadataItemWithPropertiesOfMetadataItem:valueLoadingHandler: and
+// MetadataItemWithPropertiesOfMetadataItemValueLoadingHandler creates an instance of AVMutableMetadataItem with a value that you do not wish to load unless required, e.g. a large image value that needn't be loaded into memory until another module wants to display it. This method is intended for the creation of metadata items for optional display purposes, when there is no immediate need to load specific metadata values. For example, see the interface for navigation markers as consumed by AVPlayerViewController. It's not intended for the creation of metadata items with values that are required immediately, such as metadata items that are provided for impending serialization operations (e.g. via -[AVAssetExportSession setMetadata:] and other similar methods defined on AVAssetWriter and AVAssetWriterInput). When -loadValuesAsynchronouslyForKeys:completionHandler: is invoked on an AVMetadataItem created via +metadataItemWithPropertiesOfMetadataItem:valueLoadingHandler: and
 func MetadataItemWithPropertiesOfMetadataItemValueLoadingHandler(metadataItem *MetadataItem, handler func(obj.Object)) *MetadataItem {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMetadataItem")), objc.RegisterName("metadataItemWithPropertiesOfMetadataItem:valueLoadingHandler:"), objref.IDOf(metadataItem), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { handler(obj.Wrap(_b0)) }))
 	return MetadataItemFromID(_r)
 }
 
-// Returns metadata items that match a specified locale.
+// MetadataItemsFromArrayWithLocale returns metadata items that match a specified locale.
 func MetadataItemsFromArrayWithLocale(metadataItems []*MetadataItem, locale obj.Object) []*MetadataItem {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMetadataItem")), objc.RegisterName("metadataItemsFromArray:withLocale:"), purego.SliceToNSArray(metadataItems, func(_v *MetadataItem) objc.ID { return objref.IDOf(_v) }), objref.IDOf(locale))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
-// Returns metadata items that match a specified key or key space.
+// MetadataItemsFromArrayWithKeyKeySpace returns metadata items that match a specified key or key space.
 func MetadataItemsFromArrayWithKeyKeySpace(metadataItems []*MetadataItem, key obj.Object, keySpace obj.Object) []*MetadataItem {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMetadataItem")), objc.RegisterName("metadataItemsFromArray:withKey:keySpace:"), purego.SliceToNSArray(metadataItems, func(_v *MetadataItem) objc.ID { return objref.IDOf(_v) }), objref.IDOf(key), objref.IDOf(keySpace))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
-// Returns a metadata filter to use for sharing assets.
+// MetadataItemFilterForSharing returns a metadata filter to use for sharing assets.
 func MetadataItemFilterForSharing() *MetadataItemFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMetadataItemFilter")), objc.RegisterName("metadataItemFilterForSharing"))
 	return MetadataItemFilterFromID(_r)
 }
 
-// Returns an autoreleased instance.
+// EventStream returns an autoreleased instance.
 func EventStream() *MetricEventStream {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMetricEventStream")), objc.RegisterName("eventStream"))
 	return MetricEventStreamFromID(_r)
 }
 
-// Returns the file types that a movie supports.
+// MovieTypes returns the file types that a movie supports.
 //
 // MovieTypes returns the collection as a Go slice.
 func MovieTypes() []obj.Object {
@@ -760,56 +770,56 @@ func MovieTypes() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Returns a new movie object from a movie header stored in a QuickTime movie file of ISO base media file.
+// MovieWithURLOptions returns a new movie object from a movie header stored in a QuickTime movie file of ISO base media file.
 func MovieWithURLOptions(uRL string, options obj.Object) *Movie {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMovie")), objc.RegisterName("movieWithURL:options:"), rt.FileURL(uRL), objref.IDOf(options))
 	return MovieFromID(_r)
 }
 
-// Returns a new movie object from a movie file’s data.
+// MovieWithDataOptions returns a new movie object from a movie file’s data.
 func MovieWithDataOptions(data obj.Object, options obj.Object) *Movie {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMovie")), objc.RegisterName("movieWithData:options:"), objref.IDOf(data), objref.IDOf(options))
 	return MovieFromID(_r)
 }
 
-// Returns a new mutable audio mix.
+// AVMutableAudioMixAudioMix returns a new mutable audio mix.
 func AVMutableAudioMixAudioMix() *MutableAudioMix {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMutableAudioMix")), objc.RegisterName("audioMix"))
 	return MutableAudioMixFromID(_r)
 }
 
-// Creates a mutable input parameters object for a given track.
+// AudioMixInputParametersWithTrack creates a mutable input parameters object for a given track.
 func AudioMixInputParametersWithTrack(track *AssetTrack) *MutableAudioMixInputParameters {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMutableAudioMixInputParameters")), objc.RegisterName("audioMixInputParametersWithTrack:"), objref.IDOf(track))
 	return MutableAudioMixInputParametersFromID(_r)
 }
 
-// Creates a mutable input parameters object.
+// AVMutableAudioMixInputParametersAudioMixInputParameters creates a mutable input parameters object.
 func AVMutableAudioMixInputParametersAudioMixInputParameters() *MutableAudioMixInputParameters {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMutableAudioMixInputParameters")), objc.RegisterName("audioMixInputParameters"))
 	return MutableAudioMixInputParametersFromID(_r)
 }
 
-// Returns a new mutable composition.
+// AVMutableCompositionComposition returns a new mutable composition.
 func AVMutableCompositionComposition() *MutableComposition {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMutableComposition")), objc.RegisterName("composition"))
 	return MutableCompositionFromID(_r)
 }
 
-// Creates a mutable composition that uses the specified initialization options.
+// CompositionWithURLAssetInitializationOptions creates a mutable composition that uses the specified initialization options.
 func CompositionWithURLAssetInitializationOptions(uRLAssetInitializationOptions obj.Object) *MutableComposition {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMutableComposition")), objc.RegisterName("compositionWithURLAssetInitializationOptions:"), objref.IDOf(uRLAssetInitializationOptions))
 	return MutableCompositionFromID(_r)
 }
 
-// Returns a new mutable metadata item.
+// AVMutableMetadataItemMetadataItem returns a new mutable metadata item.
 func AVMutableMetadataItemMetadataItem() *MutableMetadataItem {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMutableMetadataItem")), objc.RegisterName("metadataItem"))
 	return MutableMetadataItemFromID(_r)
 }
 
-// Returns a new mutable movie object from a movie header stored in a QuickTime movie file of ISO base media file.
-func MovieWithURLOptionsError(uRL string, options obj.Object) (*MutableMovie, error) {
+// MovieWithURLOptionsError returns a new mutable movie object from a movie header stored in a QuickTime movie file of ISO base media file.
+func MovieWithURLOptionsError(uRL string, options obj.Object) (result *MutableMovie, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMutableMovie")), objc.RegisterName("movieWithURL:options:error:"), rt.FileURL(uRL), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -818,8 +828,8 @@ func MovieWithURLOptionsError(uRL string, options obj.Object) (*MutableMovie, er
 	return MutableMovieFromID(_r), nil
 }
 
-// Returns a new mutable movie object from a movie stored in a data object.
-func MovieWithDataOptionsError(data obj.Object, options obj.Object) (*MutableMovie, error) {
+// MovieWithDataOptionsError returns a new mutable movie object from a movie stored in a data object.
+func MovieWithDataOptionsError(data obj.Object, options obj.Object) (result *MutableMovie, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMutableMovie")), objc.RegisterName("movieWithData:options:error:"), objref.IDOf(data), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -828,8 +838,8 @@ func MovieWithDataOptionsError(data obj.Object, options obj.Object) (*MutableMov
 	return MutableMovieFromID(_r), nil
 }
 
-// Returns a new mutable movie object without tracks.
-func MovieWithSettingsFromMovieOptionsError(movie *Movie, options obj.Object) (*MutableMovie, error) {
+// MovieWithSettingsFromMovieOptionsError returns a new mutable movie object without tracks.
+func MovieWithSettingsFromMovieOptionsError(movie *Movie, options obj.Object) (result *MutableMovie, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMutableMovie")), objc.RegisterName("movieWithSettingsFromMovie:options:error:"), objref.IDOf(movie), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -838,22 +848,22 @@ func MovieWithSettingsFromMovieOptionsError(movie *Movie, options obj.Object) (*
 	return MutableMovieFromID(_r), nil
 }
 
-// Creates a new mutable video composition.
+// AVMutableVideoCompositionVideoComposition creates a new mutable video composition.
 func AVMutableVideoCompositionVideoComposition() *MutableVideoComposition {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMutableVideoComposition")), objc.RegisterName("videoComposition"))
 	return MutableVideoCompositionFromID(_r)
 }
 
-// Creates a mutable video composition with the specified asset properties.
+// VideoCompositionWithPropertiesOfAsset creates a mutable video composition with the specified asset properties.
 func VideoCompositionWithPropertiesOfAsset(asset *Asset) *MutableVideoComposition {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMutableVideoComposition")), objc.RegisterName("videoCompositionWithPropertiesOfAsset:"), objref.IDOf(asset))
 	return MutableVideoCompositionFromID(_r)
 }
 
-// Returns a new video composition that’s configured to present the video tracks of the specified asset.
+// AVMutableVideoCompositionVideoCompositionWithPropertiesOfAsset returns a new video composition that’s configured to present the video tracks of the specified asset.
 //
 // AVMutableVideoCompositionVideoCompositionWithPropertiesOfAsset blocks until the operation completes or ctx is cancelled.
-func AVMutableVideoCompositionVideoCompositionWithPropertiesOfAsset(ctx context.Context, asset *Asset) (*MutableVideoComposition, error) {
+func AVMutableVideoCompositionVideoCompositionWithPropertiesOfAsset(ctx context.Context, asset *Asset) (result *MutableVideoComposition, err error) {
 	type _result struct {
 		val *MutableVideoComposition
 		err error
@@ -875,16 +885,16 @@ func AVMutableVideoCompositionVideoCompositionWithPropertiesOfAsset(ctx context.
 	}
 }
 
-// Creates a mutable video composition with the specified asset properties and a prototype video composition instruction.
+// VideoCompositionWithPropertiesOfAssetPrototypeInstruction creates a mutable video composition with the specified asset properties and a prototype video composition instruction.
 func VideoCompositionWithPropertiesOfAssetPrototypeInstruction(asset *Asset, prototypeInstruction *VideoCompositionInstruction) *MutableVideoComposition {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMutableVideoComposition")), objc.RegisterName("videoCompositionWithPropertiesOfAsset:prototypeInstruction:"), objref.IDOf(asset), objref.IDOf(prototypeInstruction))
 	return MutableVideoCompositionFromID(_r)
 }
 
-// Returns a new mutable video composition with the specified asset properties and a prototype video composition instruction.
+// AVMutableVideoCompositionVideoCompositionWithPropertiesOfAssetPrototypeInstruction returns a new mutable video composition with the specified asset properties and a prototype video composition instruction.
 //
 // AVMutableVideoCompositionVideoCompositionWithPropertiesOfAssetPrototypeInstruction blocks until the operation completes or ctx is cancelled.
-func AVMutableVideoCompositionVideoCompositionWithPropertiesOfAssetPrototypeInstruction(ctx context.Context, asset *Asset, prototypeInstruction *VideoCompositionInstruction) (*MutableVideoComposition, error) {
+func AVMutableVideoCompositionVideoCompositionWithPropertiesOfAssetPrototypeInstruction(ctx context.Context, asset *Asset, prototypeInstruction *VideoCompositionInstruction) (result *MutableVideoComposition, err error) {
 	type _result struct {
 		val *MutableVideoComposition
 		err error
@@ -906,16 +916,16 @@ func AVMutableVideoCompositionVideoCompositionWithPropertiesOfAssetPrototypeInst
 	}
 }
 
-// Creates a mutable video composition configured to apply Core Image filters to each video frame of the specified asset.
+// VideoCompositionWithAssetApplyingCIFiltersWithHandler creates a mutable video composition configured to apply Core Image filters to each video frame of the specified asset.
 func VideoCompositionWithAssetApplyingCIFiltersWithHandler(asset *Asset, applier func(obj.Object)) *MutableVideoComposition {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMutableVideoComposition")), objc.RegisterName("videoCompositionWithAsset:applyingCIFiltersWithHandler:"), objref.IDOf(asset), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { applier(obj.Wrap(_b0)) }))
 	return MutableVideoCompositionFromID(_r)
 }
 
-// Returns a new video composition that’s configured to apply Core Image filters to each video frame of the specified asset.
+// AVMutableVideoCompositionVideoCompositionWithAssetApplyingCIFiltersWithHandler returns a new video composition that’s configured to apply Core Image filters to each video frame of the specified asset.
 //
 // AVMutableVideoCompositionVideoCompositionWithAssetApplyingCIFiltersWithHandler blocks until the operation completes or ctx is cancelled.
-func AVMutableVideoCompositionVideoCompositionWithAssetApplyingCIFiltersWithHandler(ctx context.Context, asset *Asset, applier func(obj.Object)) (*MutableVideoComposition, error) {
+func AVMutableVideoCompositionVideoCompositionWithAssetApplyingCIFiltersWithHandler(ctx context.Context, asset *Asset, applier func(obj.Object)) (result *MutableVideoComposition, err error) {
 	type _result struct {
 		val *MutableVideoComposition
 		err error
@@ -937,25 +947,25 @@ func AVMutableVideoCompositionVideoCompositionWithAssetApplyingCIFiltersWithHand
 	}
 }
 
-// Returns a new mutable video composition instruction.
+// AVMutableVideoCompositionInstructionVideoCompositionInstruction returns a new mutable video composition instruction.
 func AVMutableVideoCompositionInstructionVideoCompositionInstruction() *MutableVideoCompositionInstruction {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMutableVideoCompositionInstruction")), objc.RegisterName("videoCompositionInstruction"))
 	return MutableVideoCompositionInstructionFromID(_r)
 }
 
-// Creates a new mutable video composition layer instruction for the given track.
+// VideoCompositionLayerInstructionWithAssetTrack creates a new mutable video composition layer instruction for the given track.
 func VideoCompositionLayerInstructionWithAssetTrack(track *AssetTrack) *MutableVideoCompositionLayerInstruction {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMutableVideoCompositionLayerInstruction")), objc.RegisterName("videoCompositionLayerInstructionWithAssetTrack:"), objref.IDOf(track))
 	return MutableVideoCompositionLayerInstructionFromID(_r)
 }
 
-// Returns a new mutable video composition layer instruction.
+// AVMutableVideoCompositionLayerInstructionVideoCompositionLayerInstruction returns a new mutable video composition layer instruction.
 func AVMutableVideoCompositionLayerInstructionVideoCompositionLayerInstruction() *MutableVideoCompositionLayerInstruction {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVMutableVideoCompositionLayerInstruction")), objc.RegisterName("videoCompositionLayerInstruction"))
 	return MutableVideoCompositionLayerInstructionFromID(_r)
 }
 
-// Returns an array of preset values to use to initialize an output settings assistant.
+// AvailableOutputSettingsPresets returns an array of preset values to use to initialize an output settings assistant.
 //
 // AvailableOutputSettingsPresets returns the collection as a Go slice.
 func AvailableOutputSettingsPresets() []obj.Object {
@@ -963,89 +973,91 @@ func AvailableOutputSettingsPresets() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Creates an output setting assistant with a preset configuration.
+// OutputSettingsAssistantWithPreset creates an output setting assistant with a preset configuration.
 func OutputSettingsAssistantWithPreset(presetIdentifier obj.Object) *OutputSettingsAssistant {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVOutputSettingsAssistant")), objc.RegisterName("outputSettingsAssistantWithPreset:"), objref.IDOf(presetIdentifier))
 	return OutputSettingsAssistantFromID(_r)
 }
 
-// Returns a new player to play a single audiovisual resource referenced by a given URL.
+// PlayerWithURL returns a new player to play a single audiovisual resource referenced by a given URL.
 func PlayerWithURL(uRL string) *Player {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVPlayer")), objc.RegisterName("playerWithURL:"), rt.FileURL(uRL))
 	return PlayerFromID(_r)
 }
 
-// Returns a new player initialized to play the specified player item.
+// PlayerWithPlayerItem returns a new player initialized to play the specified player item.
 func PlayerWithPlayerItem(item *PlayerItem) *Player {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVPlayer")), objc.RegisterName("playerWithPlayerItem:"), objref.IDOf(item))
 	return PlayerFromID(_r)
 }
 
-// Indicates whether HDR content can be played to an appropriate display. This property is YES if an HDR display is available and the device is capable of playing HDR content from an appropriate AVAsset, NO otherwise. This property does not indicate whether video contains HDR content, whether HDR video is currently playing, or whether video is playing on an HDR display. This property is not KVO observable.
+// EligibleForHDRPlayback indicates whether HDR content can be played to an appropriate display. This property is YES if an HDR display is available and the device is capable of playing HDR content from an appropriate AVAsset, NO otherwise. This property does not indicate whether video contains HDR content, whether HDR video is currently playing, or whether video is playing on an HDR display. This property is not KVO observable.
 func EligibleForHDRPlayback() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVPlayer")), objc.RegisterName("eligibleForHDRPlayback"))
 	return _r
 }
 
+// IsObservationEnabled wraps the corresponding Objective-C method.
 func IsObservationEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVPlayer")), objc.RegisterName("isObservationEnabled"))
 	return _r
 }
 
+// SetObservationEnabled wraps the corresponding Objective-C method.
 func SetObservationEnabled(observationEnabled bool) {
 	objc.Send[objc.ID](objc.ID(_class("AVPlayer")), objc.RegisterName("setObservationEnabled:"), observationEnabled)
 }
 
-// Creates an interstitial event for the specified date.
+// InterstitialEventWithPrimaryItemDate creates an interstitial event for the specified date.
 func InterstitialEventWithPrimaryItemDate(primaryItem *PlayerItem, date obj.Object) *PlayerInterstitialEvent {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVPlayerInterstitialEvent")), objc.RegisterName("interstitialEventWithPrimaryItem:date:"), objref.IDOf(primaryItem), objref.IDOf(date))
 	return PlayerInterstitialEventFromID(_r)
 }
 
-// A convenience initializer that creates an event controller with a player item.
+// InterstitialEventControllerWithPrimaryPlayer a convenience initializer that creates an event controller with a player item.
 func InterstitialEventControllerWithPrimaryPlayer(primaryPlayer *Player) *PlayerInterstitialEventController {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVPlayerInterstitialEventController")), objc.RegisterName("interstitialEventControllerWithPrimaryPlayer:"), objref.IDOf(primaryPlayer))
 	return PlayerInterstitialEventControllerFromID(_r)
 }
 
-// A convenience initializer that creates an observer with a player item.
+// InterstitialEventMonitorWithPrimaryPlayer a convenience initializer that creates an observer with a player item.
 func InterstitialEventMonitorWithPrimaryPlayer(primaryPlayer *Player) *PlayerInterstitialEventMonitor {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVPlayerInterstitialEventMonitor")), objc.RegisterName("interstitialEventMonitorWithPrimaryPlayer:"), objref.IDOf(primaryPlayer))
 	return PlayerInterstitialEventMonitorFromID(_r)
 }
 
-// Returns a new player item with a specified URL.
+// PlayerItemWithURL returns a new player item with a specified URL.
 func PlayerItemWithURL(uRL string) *PlayerItem {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVPlayerItem")), objc.RegisterName("playerItemWithURL:"), rt.FileURL(uRL))
 	return PlayerItemFromID(_r)
 }
 
-// Returns a new player item for a specified asset.
+// PlayerItemWithAsset returns a new player item for a specified asset.
 func PlayerItemWithAsset(asset *Asset) *PlayerItem {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVPlayerItem")), objc.RegisterName("playerItemWithAsset:"), objref.IDOf(asset))
 	return PlayerItemFromID(_r)
 }
 
-// Creates a player item with the specified asset and the asset keys to automatically load.
+// PlayerItemWithAssetAutomaticallyLoadedAssetKeys creates a player item with the specified asset and the asset keys to automatically load.
 func PlayerItemWithAssetAutomaticallyLoadedAssetKeys(asset *Asset, automaticallyLoadedAssetKeys []string) *PlayerItem {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVPlayerItem")), objc.RegisterName("playerItemWithAsset:automaticallyLoadedAssetKeys:"), objref.IDOf(asset), purego.SliceToNSArray(automaticallyLoadedAssetKeys, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return PlayerItemFromID(_r)
 }
 
-// Creates a layer object to present the visual contents of a player’s current item.
+// PlayerLayerWithPlayer creates a layer object to present the visual contents of a player’s current item.
 func PlayerLayerWithPlayer(player *Player) *PlayerLayer {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVPlayerLayer")), objc.RegisterName("playerLayerWithPlayer:"), objref.IDOf(player))
 	return PlayerLayerFromID(_r)
 }
 
-// Creates a player looper that continuously plays the full duration of a player item.
+// PlayerLooperWithPlayerTemplateItem creates a player looper that continuously plays the full duration of a player item.
 func PlayerLooperWithPlayerTemplateItem(player *QueuePlayer, itemToLoop *PlayerItem) *PlayerLooper {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVPlayerLooper")), objc.RegisterName("playerLooperWithPlayer:templateItem:"), objref.IDOf(player), objref.IDOf(itemToLoop))
 	return PlayerLooperFromID(_r)
 }
 
-// Initializes a portrait effects matte instance from auxiliary image information in an image file.
-func PortraitEffectsMatteFromDictionaryRepresentationError(imageSourceAuxDataInfoDictionary obj.Object) (*PortraitEffectsMatte, error) {
+// PortraitEffectsMatteFromDictionaryRepresentationError initializes a portrait effects matte instance from auxiliary image information in an image file.
+func PortraitEffectsMatteFromDictionaryRepresentationError(imageSourceAuxDataInfoDictionary obj.Object) (result *PortraitEffectsMatte, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("AVPortraitEffectsMatte")), objc.RegisterName("portraitEffectsMatteFromDictionaryRepresentation:error:"), objref.IDOf(imageSourceAuxDataInfoDictionary), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -1054,14 +1066,14 @@ func PortraitEffectsMatteFromDictionaryRepresentationError(imageSourceAuxDataInf
 	return PortraitEffectsMatteFromID(_r), nil
 }
 
-// Returns an object that plays a queue of items.
+// QueuePlayerWithItems returns an object that plays a queue of items.
 func QueuePlayerWithItems(items []*PlayerItem) *QueuePlayer {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVQueuePlayer")), objc.RegisterName("queuePlayerWithItems:"), purego.SliceToNSArray(items, func(_v *PlayerItem) objc.ID { return objref.IDOf(_v) }))
 	return QueuePlayerFromID(_r)
 }
 
-// Returns a new semantic segmentation matte instance from auxiliary image information in an image file.
-func SemanticSegmentationMatteFromImageSourceAuxiliaryDataTypeDictionaryRepresentationError(imageSourceAuxiliaryDataType obj.Object, imageSourceAuxiliaryDataInfoDictionary obj.Object) (*SemanticSegmentationMatte, error) {
+// SemanticSegmentationMatteFromImageSourceAuxiliaryDataTypeDictionaryRepresentationError returns a new semantic segmentation matte instance from auxiliary image information in an image file.
+func SemanticSegmentationMatteFromImageSourceAuxiliaryDataTypeDictionaryRepresentationError(imageSourceAuxiliaryDataType obj.Object, imageSourceAuxiliaryDataInfoDictionary obj.Object) (result *SemanticSegmentationMatte, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("AVSemanticSegmentationMatte")), objc.RegisterName("semanticSegmentationMatteFromImageSourceAuxiliaryDataType:dictionaryRepresentation:error:"), objref.IDOf(imageSourceAuxiliaryDataType), objref.IDOf(imageSourceAuxiliaryDataInfoDictionary), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -1070,37 +1082,37 @@ func SemanticSegmentationMatteFromImageSourceAuxiliaryDataTypeDictionaryRepresen
 	return SemanticSegmentationMatteFromID(_r), nil
 }
 
-// Creates a new synchronized layer with timing synchronized with a given player item.
+// SynchronizedLayerWithPlayerItem creates a new synchronized layer with timing synchronized with a given player item.
 func SynchronizedLayerWithPlayerItem(playerItem *PlayerItem) *SynchronizedLayer {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVSynchronizedLayer")), objc.RegisterName("synchronizedLayerWithPlayerItem:"), objref.IDOf(playerItem))
 	return SynchronizedLayerFromID(_r)
 }
 
-// Converts one or more text style rules into a serializable property list object.
+// PropertyListForTextStyleRules converts one or more text style rules into a serializable property list object.
 func PropertyListForTextStyleRules(textStyleRules []*TextStyleRule) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVTextStyleRule")), objc.RegisterName("propertyListForTextStyleRules:"), purego.SliceToNSArray(textStyleRules, func(_v *TextStyleRule) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
-// Creates an array of text style rule objects from the specified property-list object.
+// TextStyleRulesFromPropertyList creates an array of text style rule objects from the specified property-list object.
 func TextStyleRulesFromPropertyList(plist obj.Object) []*TextStyleRule {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVTextStyleRule")), objc.RegisterName("textStyleRulesFromPropertyList:"), objref.IDOf(plist))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *TextStyleRule { return TextStyleRuleFromID(_id) })
 }
 
-// Creates a new text style rule object using the style attributes in the specified dictionary.
+// TextStyleRuleWithTextMarkupAttributes creates a new text style rule object using the style attributes in the specified dictionary.
 func TextStyleRuleWithTextMarkupAttributes(textMarkupAttributes obj.Object) *TextStyleRule {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVTextStyleRule")), objc.RegisterName("textStyleRuleWithTextMarkupAttributes:"), objref.IDOf(textMarkupAttributes))
 	return TextStyleRuleFromID(_r)
 }
 
-// Creates a new text style rule object using the specified style attributes and text range information.
+// TextStyleRuleWithTextMarkupAttributesTextSelector creates a new text style rule object using the specified style attributes and text range information.
 func TextStyleRuleWithTextMarkupAttributesTextSelector(textMarkupAttributes obj.Object, textSelector string) *TextStyleRule {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVTextStyleRule")), objc.RegisterName("textStyleRuleWithTextMarkupAttributes:textSelector:"), objref.IDOf(textMarkupAttributes), purego.NSString(textSelector))
 	return TextStyleRuleFromID(_r)
 }
 
-// Returns an array of the file types the asset supports.
+// AudiovisualTypes returns an array of the file types the asset supports.
 //
 // AudiovisualTypes returns the collection as a Go slice.
 func AudiovisualTypes() []obj.Object {
@@ -1108,7 +1120,7 @@ func AudiovisualTypes() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Returns an array of the MIME types the asset supports.
+// AudiovisualMIMETypes returns an array of the MIME types the asset supports.
 //
 // AudiovisualMIMETypes returns the collection as a Go slice.
 func AudiovisualMIMETypes() []string {
@@ -1116,19 +1128,19 @@ func AudiovisualMIMETypes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Returns a Boolean value that indicates whether the asset is playable with the specified codecs and container type.
+// IsPlayableExtendedMIMEType returns a Boolean value that indicates whether the asset is playable with the specified codecs and container type.
 func IsPlayableExtendedMIMEType(extendedMIMEType string) bool {
 	_r := objc.Send[bool](objc.ID(_class("AVURLAsset")), objc.RegisterName("isPlayableExtendedMIMEType:"), purego.NSString(extendedMIMEType))
 	return _r
 }
 
-// Returns an asset that models the media resource found at the specified URL.
+// URLAssetWithURLOptions returns an asset that models the media resource found at the specified URL.
 func URLAssetWithURLOptions(uRL string, options obj.Object) *URLAsset {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVURLAsset")), objc.RegisterName("URLAssetWithURL:options:"), rt.FileURL(uRL), objref.IDOf(options))
 	return URLAssetFromID(_r)
 }
 
-// Provides the content types the AVURLAsset class understands. - Returns: An NSArray of UTTypes identifying the content types the AVURLAsset class understands.
+// AudiovisualContentTypes provides the content types the AVURLAsset class understands. - Returns: An NSArray of UTTypes identifying the content types the AVURLAsset class understands.
 //
 // AudiovisualContentTypes returns the collection as a Go slice.
 func AudiovisualContentTypes() []obj.Object {
@@ -1136,31 +1148,31 @@ func AudiovisualContentTypes() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Creates a video composition object configured to present the video tracks of the specified asset.
+// AVVideoCompositionVideoCompositionWithPropertiesOfAsset creates a video composition object configured to present the video tracks of the specified asset.
 func AVVideoCompositionVideoCompositionWithPropertiesOfAsset(asset *Asset) *VideoComposition {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVVideoComposition")), objc.RegisterName("videoCompositionWithPropertiesOfAsset:"), objref.IDOf(asset))
 	return VideoCompositionFromID(_r)
 }
 
-// Creates a video composition configured to apply Core Image filters to each video frame of the specified asset.
+// AVVideoCompositionVideoCompositionWithAssetApplyingCIFiltersWithHandler creates a video composition configured to apply Core Image filters to each video frame of the specified asset.
 func AVVideoCompositionVideoCompositionWithAssetApplyingCIFiltersWithHandler(asset *Asset, applier func(obj.Object)) *VideoComposition {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVVideoComposition")), objc.RegisterName("videoCompositionWithAsset:applyingCIFiltersWithHandler:"), objref.IDOf(asset), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { applier(obj.Wrap(_b0)) }))
 	return VideoCompositionFromID(_r)
 }
 
-// Adds a Core Animation layer to the video composition.
+// VideoCompositionCoreAnimationToolWithAdditionalLayerAsTrackID adds a Core Animation layer to the video composition.
 func VideoCompositionCoreAnimationToolWithAdditionalLayerAsTrackID(layer obj.Object, trackID int32) *VideoCompositionCoreAnimationTool {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVVideoCompositionCoreAnimationTool")), objc.RegisterName("videoCompositionCoreAnimationToolWithAdditionalLayer:asTrackID:"), objref.IDOf(layer), trackID)
 	return VideoCompositionCoreAnimationToolFromID(_r)
 }
 
-// Composes the composited video frame with a Core Animation layer.
+// VideoCompositionCoreAnimationToolWithPostProcessingAsVideoLayerInLayer composes the composited video frame with a Core Animation layer.
 func VideoCompositionCoreAnimationToolWithPostProcessingAsVideoLayerInLayer(videoLayer obj.Object, animationLayer obj.Object) *VideoCompositionCoreAnimationTool {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVVideoCompositionCoreAnimationTool")), objc.RegisterName("videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:inLayer:"), objref.IDOf(videoLayer), objref.IDOf(animationLayer))
 	return VideoCompositionCoreAnimationToolFromID(_r)
 }
 
-// Composes the composited video frames with the Core Animation layer.
+// VideoCompositionCoreAnimationToolWithPostProcessingAsVideoLayersInLayer composes the composited video frames with the Core Animation layer.
 func VideoCompositionCoreAnimationToolWithPostProcessingAsVideoLayersInLayer(videoLayers []obj.Object, animationLayer obj.Object) *VideoCompositionCoreAnimationTool {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVVideoCompositionCoreAnimationTool")), objc.RegisterName("videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayers:inLayer:"), purego.SliceToNSArray(videoLayers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(animationLayer))
 	return VideoCompositionCoreAnimationToolFromID(_r)

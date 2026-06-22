@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container that stores an array of sample buffer attachments for a blit pass.
-//
 // BlitPassSampleBufferAttachmentDescriptorArray is an idiomatic wrapper over the Objective-C class MTLBlitPassSampleBufferAttachmentDescriptorArray.
+//
+// A container that stores an array of sample buffer attachments for a blit pass.
 type BlitPassSampleBufferAttachmentDescriptorArray struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func BlitPassSampleBufferAttachmentDescriptorArrayFromID(id objc.ID) *BlitPassSa
 	if id == 0 {
 		return nil
 	}
-	x := &BlitPassSampleBufferAttachmentDescriptorArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BlitPassSampleBufferAttachmentDescriptorArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func blitPassSampleBufferAttachmentDescriptorArrayAdopt(id objc.ID) *BlitPassSam
 	if id == 0 {
 		return nil
 	}
-	x := &BlitPassSampleBufferAttachmentDescriptorArray{Handle: objref.Wrap(id)}
+	x := &BlitPassSampleBufferAttachmentDescriptorArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *BlitPassSampleBufferAttachmentDescriptorArray) IsKind(className string)
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BlitPassSampleBufferAttachmentDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBlitPassSampleBufferAttachmentDescriptorArray creates a new BlitPassSampleBufferAttachmentDescriptorArray.
 func NewBlitPassSampleBufferAttachmentDescriptorArray() *BlitPassSampleBufferAttachmentDescriptorArray {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLBlitPassSampleBufferAttachmentDescriptorArray")), objc.RegisterName("new"))
 	return blitPassSampleBufferAttachmentDescriptorArrayAdopt(_id)
 }
 
-// Accesses one of the array’s blit pass sample buffer attachment descriptor instances.
+// ObjectAtIndexedSubscript accesses one of the array’s blit pass sample buffer attachment descriptor instances.
 func (x *BlitPassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *BlitPassSampleBufferAttachmentDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return BlitPassSampleBufferAttachmentDescriptorFromID(_r)
 }
 
-// Copies the properties of a blit pass sample buffer attachment descriptor instance to the properties of one of the array’s instances.
+// SetObjectAtIndexedSubscript copies the properties of a blit pass sample buffer attachment descriptor instance to the properties of one of the array’s instances.
 func (x *BlitPassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *BlitPassSampleBufferAttachmentDescriptor, attachmentIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }

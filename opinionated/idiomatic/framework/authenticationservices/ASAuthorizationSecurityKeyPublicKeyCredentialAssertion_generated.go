@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents the security key credential assertion type.
-//
 // AuthorizationSecurityKeyPublicKeyCredentialAssertion is an idiomatic wrapper over the Objective-C class ASAuthorizationSecurityKeyPublicKeyCredentialAssertion.
+//
+// A class that represents the security key credential assertion type.
 type AuthorizationSecurityKeyPublicKeyCredentialAssertion struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationSecurityKeyPublicKeyCredentialAssertionFromID(id objc.ID) *Aut
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationSecurityKeyPublicKeyCredentialAssertion{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationSecurityKeyPublicKeyCredentialAssertion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationSecurityKeyPublicKeyCredentialAssertionAdopt(id objc.ID) *Auth
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationSecurityKeyPublicKeyCredentialAssertion{Handle: objref.Wrap(id)}
+	x := &AuthorizationSecurityKeyPublicKeyCredentialAssertion{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +60,25 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertion) IsKind(className 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertion) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAuthorizationSecurityKeyPublicKeyCredentialAssertion creates a new AuthorizationSecurityKeyPublicKeyCredentialAssertion.
 func NewAuthorizationSecurityKeyPublicKeyCredentialAssertion() *AuthorizationSecurityKeyPublicKeyCredentialAssertion {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationSecurityKeyPublicKeyCredentialAssertion")), objc.RegisterName("new"))
 	return authorizationSecurityKeyPublicKeyCredentialAssertionAdopt(_id)
 }
 
-// Indicates that this assertion used the appid WebAuthn extension. This can only happen if the requesting app is a web browser and requested to use this extension.
+// AppID indicates that this assertion used the appid WebAuthn extension. This can only happen if the requesting app is a web browser and requested to use this extension.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertion) AppID() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appID"))
 	return _r
 }
 
+// Prf wraps the corresponding Objective-C method.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertion) Prf() *AuthorizationPublicKeyCredentialPRFAssertionOutput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFAssertionOutputFromID(_r)

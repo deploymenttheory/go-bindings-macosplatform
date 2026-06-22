@@ -14,8 +14,8 @@ import (
 	"unsafe"
 )
 
-// Loads and runs the specified workflow file.
-func RunWorkflowAtURLWithInputError(fileURL string, input obj.Object) (obj.Object, error) {
+// RunWorkflowAtURLWithInputError loads and runs the specified workflow file.
+func RunWorkflowAtURLWithInputError(fileURL string, input obj.Object) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("AMWorkflow")), objc.RegisterName("runWorkflowAtURL:withInput:error:"), rt.FileURL(fileURL), objref.IDOf(input), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -24,6 +24,7 @@ func RunWorkflowAtURLWithInputError(fileURL string, input obj.Object) (obj.Objec
 	return obj.Wrap(_r), nil
 }
 
+// SharedWorkspace wraps the corresponding Objective-C method.
 func SharedWorkspace() *Workspace {
 	_r := objc.Send[objc.ID](objc.ID(_class("AMWorkspace")), objc.RegisterName("sharedWorkspace"))
 	return WorkspaceFromID(_r)

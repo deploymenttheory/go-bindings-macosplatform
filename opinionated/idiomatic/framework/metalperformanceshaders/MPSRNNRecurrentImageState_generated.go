@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that holds all the data that’s passed from one sequence iteration of the image-based recurrent neural network layer (stack) to the next.
-//
 // RNNRecurrentImageState is an idiomatic wrapper over the Objective-C class MPSRNNRecurrentImageState.
+//
+// It embeds [State], promoting that type's methods.
+//
+// A class that holds all the data that’s passed from one sequence iteration of the image-based recurrent neural network layer (stack) to the next.
 type RNNRecurrentImageState struct {
-	objref.Handle
+	State
 }
 
 // RNNRecurrentImageStateFromID adopts an existing Objective-C object as a RNNRecurrentImageState
@@ -25,7 +26,8 @@ func RNNRecurrentImageStateFromID(id objc.ID) *RNNRecurrentImageState {
 	if id == 0 {
 		return nil
 	}
-	x := &RNNRecurrentImageState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RNNRecurrentImageState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func rNNRecurrentImageStateAdopt(id objc.ID) *RNNRecurrentImageState {
 	if id == 0 {
 		return nil
 	}
-	x := &RNNRecurrentImageState{Handle: objref.Wrap(id)}
+	x := &RNNRecurrentImageState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RNNRecurrentImageState) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RNNRecurrentImageState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RNNRecurrentImageState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRNNRecurrentImageState creates a new RNNRecurrentImageState.
@@ -64,27 +52,25 @@ func NewRNNRecurrentImageState() *RNNRecurrentImageState {
 	return rNNRecurrentImageStateAdopt(_id)
 }
 
-// WithReadCount sets readCount and returns the receiver so calls can be chained.
+// WithReadCount sets the property and returns the receiver so calls can be chained.
 func (x *RNNRecurrentImageState) WithReadCount(readCount int) *RNNRecurrentImageState {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *RNNRecurrentImageState) WithLabel(label string) *RNNRecurrentImageState {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Access the stored recurrent image data.
+// GetRecurrentOutputImageForLayerIndex access the stored recurrent image data.
 func (x *RNNRecurrentImageState) GetRecurrentOutputImageForLayerIndex(layerIndex int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getRecurrentOutputImageForLayerIndex:"), layerIndex)
 	return obj.Wrap(_r)
 }
 
-// Access the stored memory cell image data (if present).
+// GetMemoryCellImageForLayerIndex access the stored memory cell image data (if present).
 func (x *RNNRecurrentImageState) GetMemoryCellImageForLayerIndex(layerIndex int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getMemoryCellImageForLayerIndex:"), layerIndex)
 	return obj.Wrap(_r)
@@ -100,3 +86,5 @@ type RNNRecurrentImageStateable interface {
 }
 
 var _ RNNRecurrentImageStateable = (*RNNRecurrentImageState)(nil)
+
+var _ StateProvider = (*RNNRecurrentImageState)(nil)

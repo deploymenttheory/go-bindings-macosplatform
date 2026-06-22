@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that directs sound in a heart-shaped curve surrounding a sound source.
-//
 // CardioidDirectivityModelParameters is an idiomatic wrapper over the Objective-C class PHASECardioidDirectivityModelParameters.
+//
+// It embeds [DirectivityModelParameters], promoting that type's methods.
+//
+// An object that directs sound in a heart-shaped curve surrounding a sound source.
 type CardioidDirectivityModelParameters struct {
-	objref.Handle
+	DirectivityModelParameters
 }
 
 // CardioidDirectivityModelParametersFromID adopts an existing Objective-C object as a CardioidDirectivityModelParameters
@@ -25,7 +26,8 @@ func CardioidDirectivityModelParametersFromID(id objc.ID) *CardioidDirectivityMo
 	if id == 0 {
 		return nil
 	}
-	x := &CardioidDirectivityModelParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CardioidDirectivityModelParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,35 +40,21 @@ func cardioidDirectivityModelParametersAdopt(id objc.ID) *CardioidDirectivityMod
 	if id == 0 {
 		return nil
 	}
-	x := &CardioidDirectivityModelParameters{Handle: objref.Wrap(id)}
+	x := &CardioidDirectivityModelParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CardioidDirectivityModelParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CardioidDirectivityModelParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CardioidDirectivityModelParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates an object that directs sound in a heart-shaped curve surrounding a sound source.
-//
-// NewCardioidDirectivityModelParametersWithSubbandParameters creates a new CardioidDirectivityModelParameters.
+// NewCardioidDirectivityModelParametersWithSubbandParameters creates an object that directs sound in a heart-shaped curve surrounding a sound source.
 func NewCardioidDirectivityModelParametersWithSubbandParameters(subbandParameters []*CardioidDirectivityModelSubbandParameters) *CardioidDirectivityModelParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASECardioidDirectivityModelParameters")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSubbandParameters:"), purego.SliceToNSArray(subbandParameters, func(_v *CardioidDirectivityModelSubbandParameters) objc.ID { return objref.IDOf(_v) }))
 	return cardioidDirectivityModelParametersAdopt(_id)
 }
 
+// SubbandParameters wraps the corresponding Objective-C method.
+//
 // SubbandParameters returns the collection as a Go slice.
 func (x *CardioidDirectivityModelParameters) SubbandParameters() []*CardioidDirectivityModelSubbandParameters {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subbandParameters"))
@@ -82,3 +70,5 @@ type CardioidDirectivityModelParametersable interface {
 }
 
 var _ CardioidDirectivityModelParametersable = (*CardioidDirectivityModelParameters)(nil)
+
+var _ DirectivityModelParametersProvider = (*CardioidDirectivityModelParameters)(nil)

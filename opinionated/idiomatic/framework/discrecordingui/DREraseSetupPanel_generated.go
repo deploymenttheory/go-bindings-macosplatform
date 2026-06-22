@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Manages a panel that allows users to specify the parameters of an erase. This class supports choosing the device to use and what sort of erase to perform. When the panel is closed by the user choosing to erase the media in the device, the device is exclusively held by the application for its own use to prevent possible bad or corrupt media from causing problem for the rest of the system. This means that if the erase object obtained from the panel is not used to do an erase, the device will remain unavailable to other applications until the exclusive access is released.
-//
 // EraseSetupPanel is an idiomatic wrapper over the Objective-C class DREraseSetupPanel.
+//
+// It embeds [SetupPanel], promoting that type's methods.
+//
+// Manages a panel that allows users to specify the parameters of an erase. This class supports choosing the device to use and what sort of erase to perform. When the panel is closed by the user choosing to erase the media in the device, the device is exclusively held by the application for its own use to prevent possible bad or corrupt media from causing problem for the rest of the system. This means that if the erase object obtained from the panel is not used to do an erase, the device will remain unavailable to other applications until the exclusive access is released.
 type EraseSetupPanel struct {
-	objref.Handle
+	SetupPanel
 }
 
 // EraseSetupPanelFromID adopts an existing Objective-C object as a EraseSetupPanel
@@ -25,7 +26,8 @@ func EraseSetupPanelFromID(id objc.ID) *EraseSetupPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &EraseSetupPanel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EraseSetupPanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func eraseSetupPanelAdopt(id objc.ID) *EraseSetupPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &EraseSetupPanel{Handle: objref.Wrap(id)}
+	x := &EraseSetupPanel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *EraseSetupPanel) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EraseSetupPanel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EraseSetupPanel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewEraseSetupPanel creates a new EraseSetupPanel.
@@ -64,13 +52,13 @@ func NewEraseSetupPanel() *EraseSetupPanel {
 	return eraseSetupPanelAdopt(_id)
 }
 
-// Creates and returns a new DRErase object that's configured to erase the disc in the currently selected device. The new DRErase object is configured based on the settings in the setup panel when the user clicks the OK button. Do not invoke this method within a modal session (
+// EraseObject creates and returns a new DRErase object that's configured to erase the disc in the currently selected device. The new DRErase object is configured based on the settings in the setup panel when the user clicks the OK button. Do not invoke this method within a modal session (
 func (x *EraseSetupPanel) EraseObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eraseObject"))
 	return obj.Wrap(_r)
 }
 
-// Invoked when the user clicks one of the panel's erase type radio buttons.
+// EraseType invoked when the user clicks one of the panel's erase type radio buttons.
 func (x *EraseSetupPanel) EraseType(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eraseType:"), objref.IDOf(sender))
 }
@@ -83,3 +71,5 @@ type EraseSetupPanelable interface {
 }
 
 var _ EraseSetupPanelable = (*EraseSetupPanel)(nil)
+
+var _ SetupPanelProvider = (*EraseSetupPanel)(nil)

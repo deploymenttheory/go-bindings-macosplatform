@@ -6,15 +6,17 @@ package scenekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // PhysicsConeTwistJoint is an idiomatic wrapper over the Objective-C class SCNPhysicsConeTwistJoint.
+//
+// It embeds [PhysicsBehavior], promoting that type's methods.
 type PhysicsConeTwistJoint struct {
-	objref.Handle
+	PhysicsBehavior
 }
 
 // PhysicsConeTwistJointFromID adopts an existing Objective-C object as a PhysicsConeTwistJoint
@@ -23,7 +25,8 @@ func PhysicsConeTwistJointFromID(id objc.ID) *PhysicsConeTwistJoint {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsConeTwistJoint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PhysicsConeTwistJoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +39,10 @@ func physicsConeTwistJointAdopt(id objc.ID) *PhysicsConeTwistJoint {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsConeTwistJoint{Handle: objref.Wrap(id)}
+	x := &PhysicsConeTwistJoint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PhysicsConeTwistJoint) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PhysicsConeTwistJoint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PhysicsConeTwistJoint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPhysicsConeTwistJoint creates a new PhysicsConeTwistJoint.
@@ -62,57 +51,99 @@ func NewPhysicsConeTwistJoint() *PhysicsConeTwistJoint {
 	return physicsConeTwistJointAdopt(_id)
 }
 
-// WithMaximumAngularLimit1 sets maximumAngularLimit1 and returns the receiver so calls can be chained.
+// WithFrameA sets the property and returns the receiver so calls can be chained.
+func (x *PhysicsConeTwistJoint) WithFrameA(frameA quartzcore.CATransform3D) *PhysicsConeTwistJoint {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameA:"), frameA)
+	return x
+}
+
+// WithFrameB sets the property and returns the receiver so calls can be chained.
+func (x *PhysicsConeTwistJoint) WithFrameB(frameB quartzcore.CATransform3D) *PhysicsConeTwistJoint {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameB:"), frameB)
+	return x
+}
+
+// WithMaximumAngularLimit1 sets the property and returns the receiver so calls can be chained.
 func (x *PhysicsConeTwistJoint) WithMaximumAngularLimit1(maximumAngularLimit1 float64) *PhysicsConeTwistJoint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumAngularLimit1:"), maximumAngularLimit1)
 	return x
 }
 
-// WithMaximumAngularLimit2 sets maximumAngularLimit2 and returns the receiver so calls can be chained.
+// WithMaximumAngularLimit2 sets the property and returns the receiver so calls can be chained.
 func (x *PhysicsConeTwistJoint) WithMaximumAngularLimit2(maximumAngularLimit2 float64) *PhysicsConeTwistJoint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumAngularLimit2:"), maximumAngularLimit2)
 	return x
 }
 
-// WithMaximumTwistAngle sets maximumTwistAngle and returns the receiver so calls can be chained.
+// WithMaximumTwistAngle sets the property and returns the receiver so calls can be chained.
 func (x *PhysicsConeTwistJoint) WithMaximumTwistAngle(maximumTwistAngle float64) *PhysicsConeTwistJoint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumTwistAngle:"), maximumTwistAngle)
 	return x
 }
 
+// BodyA wraps the corresponding Objective-C method.
 func (x *PhysicsConeTwistJoint) BodyA() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyA"))
 	return PhysicsBodyFromID(_r)
 }
 
+// FrameA wraps the corresponding Objective-C method.
+func (x *PhysicsConeTwistJoint) FrameA() quartzcore.CATransform3D {
+	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(x), objc.RegisterName("frameA"))
+	return _r
+}
+
+// SetFrameA wraps the corresponding Objective-C method.
+func (x *PhysicsConeTwistJoint) SetFrameA(frameA quartzcore.CATransform3D) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameA:"), frameA)
+}
+
+// BodyB wraps the corresponding Objective-C method.
 func (x *PhysicsConeTwistJoint) BodyB() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyB"))
 	return PhysicsBodyFromID(_r)
 }
 
+// FrameB wraps the corresponding Objective-C method.
+func (x *PhysicsConeTwistJoint) FrameB() quartzcore.CATransform3D {
+	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(x), objc.RegisterName("frameB"))
+	return _r
+}
+
+// SetFrameB wraps the corresponding Objective-C method.
+func (x *PhysicsConeTwistJoint) SetFrameB(frameB quartzcore.CATransform3D) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameB:"), frameB)
+}
+
+// MaximumAngularLimit1 wraps the corresponding Objective-C method.
 func (x *PhysicsConeTwistJoint) MaximumAngularLimit1() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumAngularLimit1"))
 	return _r
 }
 
+// SetMaximumAngularLimit1 wraps the corresponding Objective-C method.
 func (x *PhysicsConeTwistJoint) SetMaximumAngularLimit1(maximumAngularLimit1 float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumAngularLimit1:"), maximumAngularLimit1)
 }
 
+// MaximumAngularLimit2 wraps the corresponding Objective-C method.
 func (x *PhysicsConeTwistJoint) MaximumAngularLimit2() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumAngularLimit2"))
 	return _r
 }
 
+// SetMaximumAngularLimit2 wraps the corresponding Objective-C method.
 func (x *PhysicsConeTwistJoint) SetMaximumAngularLimit2(maximumAngularLimit2 float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumAngularLimit2:"), maximumAngularLimit2)
 }
 
+// MaximumTwistAngle wraps the corresponding Objective-C method.
 func (x *PhysicsConeTwistJoint) MaximumTwistAngle() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumTwistAngle"))
 	return _r
 }
 
+// SetMaximumTwistAngle wraps the corresponding Objective-C method.
 func (x *PhysicsConeTwistJoint) SetMaximumTwistAngle(maximumTwistAngle float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumTwistAngle:"), maximumTwistAngle)
 }
@@ -120,11 +151,17 @@ func (x *PhysicsConeTwistJoint) SetMaximumTwistAngle(maximumTwistAngle float64) 
 // PhysicsConeTwistJointable is the interface implemented by [PhysicsConeTwistJoint], for mocking and DI.
 type PhysicsConeTwistJointable interface {
 	obj.Object
+	WithFrameA(frameA quartzcore.CATransform3D) *PhysicsConeTwistJoint
+	WithFrameB(frameB quartzcore.CATransform3D) *PhysicsConeTwistJoint
 	WithMaximumAngularLimit1(maximumAngularLimit1 float64) *PhysicsConeTwistJoint
 	WithMaximumAngularLimit2(maximumAngularLimit2 float64) *PhysicsConeTwistJoint
 	WithMaximumTwistAngle(maximumTwistAngle float64) *PhysicsConeTwistJoint
 	BodyA() *PhysicsBody
+	FrameA() quartzcore.CATransform3D
+	SetFrameA(frameA quartzcore.CATransform3D)
 	BodyB() *PhysicsBody
+	FrameB() quartzcore.CATransform3D
+	SetFrameB(frameB quartzcore.CATransform3D)
 	MaximumAngularLimit1() float64
 	SetMaximumAngularLimit1(maximumAngularLimit1 float64)
 	MaximumAngularLimit2() float64
@@ -134,3 +171,5 @@ type PhysicsConeTwistJointable interface {
 }
 
 var _ PhysicsConeTwistJointable = (*PhysicsConeTwistJoint)(nil)
+
+var _ PhysicsBehaviorProvider = (*PhysicsConeTwistJoint)(nil)

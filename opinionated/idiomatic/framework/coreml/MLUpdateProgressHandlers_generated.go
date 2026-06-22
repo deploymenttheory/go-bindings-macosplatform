@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of closures an update task uses to notify your app of its progress.
-//
 // UpdateProgressHandlers is an idiomatic wrapper over the Objective-C class MLUpdateProgressHandlers.
+//
+// A collection of closures an update task uses to notify your app of its progress.
 type UpdateProgressHandlers struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func UpdateProgressHandlersFromID(id objc.ID) *UpdateProgressHandlers {
 	if id == 0 {
 		return nil
 	}
-	x := &UpdateProgressHandlers{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UpdateProgressHandlers{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func updateProgressHandlersAdopt(id objc.ID) *UpdateProgressHandlers {
 	if id == 0 {
 		return nil
 	}
-	x := &UpdateProgressHandlers{Handle: objref.Wrap(id)}
+	x := &UpdateProgressHandlers{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,9 +60,13 @@ func (x *UpdateProgressHandlers) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates the collection of closures an update task uses to notify your app of its progress.
-//
-// NewUpdateProgressHandlersForEventsProgressHandlerCompletionHandler creates a new UpdateProgressHandlers.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UpdateProgressHandlers) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewUpdateProgressHandlersForEventsProgressHandlerCompletionHandler creates the collection of closures an update task uses to notify your app of its progress.
 func NewUpdateProgressHandlersForEventsProgressHandlerCompletionHandler(interestedEvents UpdateProgressEvent, progressHandler func(obj.Object), completionHandler func(obj.Object)) *UpdateProgressHandlers {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MLUpdateProgressHandlers")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForEvents:progressHandler:completionHandler:"), interestedEvents, objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { progressHandler(obj.Wrap(_b0)) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completionHandler(obj.Wrap(_b0)) }))

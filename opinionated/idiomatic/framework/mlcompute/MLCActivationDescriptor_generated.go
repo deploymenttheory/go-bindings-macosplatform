@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration object you use to create an activation layer.
-//
 // ActivationDescriptor is an idiomatic wrapper over the Objective-C class MLCActivationDescriptor.
+//
+// A configuration object you use to create an activation layer.
 type ActivationDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ActivationDescriptorFromID(id objc.ID) *ActivationDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &ActivationDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ActivationDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func activationDescriptorAdopt(id objc.ID) *ActivationDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &ActivationDescriptor{Handle: objref.Wrap(id)}
+	x := &ActivationDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,37 @@ func (x *ActivationDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ActivationDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewActivationDescriptor creates a new ActivationDescriptor.
 func NewActivationDescriptor() *ActivationDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLCActivationDescriptor")), objc.RegisterName("new"))
 	return activationDescriptorAdopt(_id)
 }
 
-// The type of activation function
+// ActivationType the type of activation function
 func (x *ActivationDescriptor) ActivationType() ActivationType {
 	_r := objc.Send[ActivationType](objref.IDOf(x), objc.RegisterName("activationType"))
 	return _r
 }
 
-// Parameter to the activation function
+// A parameter to the activation function
 func (x *ActivationDescriptor) A() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("a"))
 	return _r
 }
 
-// Parameter to the activation function
+// B parameter to the activation function
 func (x *ActivationDescriptor) B() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("b"))
 	return _r
 }
 
-// Parameter to the activation function
+// C parameter to the activation function
 func (x *ActivationDescriptor) C() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("c"))
 	return _r

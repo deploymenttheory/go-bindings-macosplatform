@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container for information broadcast through a notification center to all registered observers.
-//
 // Notification is an idiomatic wrapper over the Objective-C class NSNotification.
+//
+// A container for information broadcast through a notification center to all registered observers.
 type Notification struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NotificationFromID(id objc.ID) *Notification {
 	if id == 0 {
 		return nil
 	}
-	x := &Notification{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Notification{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func notificationAdopt(id objc.ID) *Notification {
 	if id == 0 {
 		return nil
 	}
-	x := &Notification{Handle: objref.Wrap(id)}
+	x := &Notification{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,40 +60,45 @@ func (x *Notification) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a notification with a specified name, object, and user information.
-//
-// NewNotificationWithNameObjectUserInfo creates a new Notification.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Notification) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNotificationWithNameObjectUserInfo initializes a notification with a specified name, object, and user information.
 func NewNotificationWithNameObjectUserInfo(name *String, object obj.Object, userInfo obj.Object) *Notification {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNotification")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:object:userInfo:"), objref.IDOf(name), objref.IDOf(object), objref.IDOf(userInfo))
 	return notificationAdopt(_id)
 }
 
-// Initializes a notification with the data from an unarchiver.
-//
-// NewNotificationWithCoder creates a new Notification.
+// NewNotificationWithCoder initializes a notification with the data from an unarchiver.
 func NewNotificationWithCoder(coder *Coder) *Notification {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNotification")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return notificationAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Notification) WithScriptingProperties(scriptingProperties obj.Object) *Notification {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *Notification) Name() *String {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	return StringFromID(_r)
 }
 
+// Object wraps the corresponding Objective-C method.
 func (x *Notification) Object() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("object"))
 	return obj.Wrap(_r)
 }
 
+// UserInfo wraps the corresponding Objective-C method.
 func (x *Notification) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)

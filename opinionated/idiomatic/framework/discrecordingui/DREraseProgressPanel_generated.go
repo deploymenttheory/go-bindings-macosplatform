@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Manages a panel that displays progress while erasing media. A DREraseProgressPanel object manages a panel that displays and updates erase progress. The erase panel is responsible for begining the erase. The erase is begun and a progress panel is displayed on screen by calling
-//
 // EraseProgressPanel is an idiomatic wrapper over the Objective-C class DREraseProgressPanel.
+//
+// Manages a panel that displays progress while erasing media. A DREraseProgressPanel object manages a panel that displays and updates erase progress. The erase panel is responsible for begining the erase. The erase is begun and a progress panel is displayed on screen by calling
 type EraseProgressPanel struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func EraseProgressPanelFromID(id objc.ID) *EraseProgressPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &EraseProgressPanel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EraseProgressPanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func eraseProgressPanelAdopt(id objc.ID) *EraseProgressPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &EraseProgressPanel{Handle: objref.Wrap(id)}
+	x := &EraseProgressPanel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,23 +60,29 @@ func (x *EraseProgressPanel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *EraseProgressPanel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewEraseProgressPanel creates a new EraseProgressPanel.
 func NewEraseProgressPanel() *EraseProgressPanel {
 	_id := objc.Send[objc.ID](objc.ID(_class("DREraseProgressPanel")), objc.RegisterName("new"))
 	return eraseProgressPanelAdopt(_id)
 }
 
-// Presents the progress panel as a sheet and begins the erase process. This method returns control to the caller after it has displayed the progress sheet and begun the erase. Once the method has returned the caller can perform other operations while the erase continues.
+// BeginProgressSheetForEraseModalForWindow presents the progress panel as a sheet and begins the erase process. This method returns control to the caller after it has displayed the progress sheet and begun the erase. Once the method has returned the caller can perform other operations while the erase continues.
 func (x *EraseProgressPanel) BeginProgressSheetForEraseModalForWindow(erase obj.Object, docWindow obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginProgressSheetForErase:modalForWindow:"), objref.IDOf(erase), objref.IDOf(docWindow))
 }
 
-// Presents the progress panel on screen and begins the erase process. This method returns control to the caller after it has displayed the progress sheet and begun the erase. Once the method has returned the caller can perform other operations while the erase continues.
+// BeginProgressPanelForErase presents the progress panel on screen and begins the erase process. This method returns control to the caller after it has displayed the progress sheet and begun the erase. Once the method has returned the caller can perform other operations while the erase continues.
 func (x *EraseProgressPanel) BeginProgressPanelForErase(erase obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginProgressPanelForErase:"), objref.IDOf(erase))
 }
 
-// Sets the panel text displayed to the user. The panel's description is typically a short text string that gives an indication to the user what operation is being performed. If no description is explicitly set, the progress panel uses a standard text string suitable to the erase.
+// SetDescription sets the panel text displayed to the user. The panel's description is typically a short text string that gives an indication to the user what operation is being performed. If no description is explicitly set, the progress panel uses a standard text string suitable to the erase.
 func (x *EraseProgressPanel) SetDescription(description string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDescription:"), purego.NSString(description))
 }

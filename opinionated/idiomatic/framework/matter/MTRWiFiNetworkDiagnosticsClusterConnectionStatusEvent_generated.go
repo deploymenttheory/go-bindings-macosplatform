@@ -23,7 +23,8 @@ func MTRWiFiNetworkDiagnosticsClusterConnectionStatusEventFromID(id objc.ID) *MT
 	if id == 0 {
 		return nil
 	}
-	x := &MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRWiFiNetworkDiagnosticsClusterConnectionStatusEventAdopt(id objc.ID) *MTR
 	if id == 0 {
 		return nil
 	}
-	x := &MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent{Handle: objref.Wrap(id)}
+	x := &MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) IsKind(className
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent creates a new MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent.
 func NewMTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent() *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent")), objc.RegisterName("new"))
 	return mTRWiFiNetworkDiagnosticsClusterConnectionStatusEventAdopt(_id)
 }
 
-// WithConnectionStatus sets connectionStatus and returns the receiver so calls can be chained.
+// WithConnectionStatus sets the property and returns the receiver so calls can be chained.
 func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) WithConnectionStatus(connectionStatus obj.Object) *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionStatus:"), objref.IDOf(connectionStatus))
 	return x
 }
 
+// ConnectionStatus wraps the corresponding Objective-C method.
 func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) ConnectionStatus() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectionStatus"))
 	return obj.Wrap(_r)
 }
 
+// SetConnectionStatus wraps the corresponding Objective-C method.
 func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) SetConnectionStatus(connectionStatus obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionStatus:"), objref.IDOf(connectionStatus))
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A standard implementation of the MDLMeshBufferZone protocol.
-//
 // MeshBufferZoneDefault is an idiomatic wrapper over the Objective-C class MDLMeshBufferZoneDefault.
+//
+// A standard implementation of the MDLMeshBufferZone protocol.
 type MeshBufferZoneDefault struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MeshBufferZoneDefaultFromID(id objc.ID) *MeshBufferZoneDefault {
 	if id == 0 {
 		return nil
 	}
-	x := &MeshBufferZoneDefault{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MeshBufferZoneDefault{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func meshBufferZoneDefaultAdopt(id objc.ID) *MeshBufferZoneDefault {
 	if id == 0 {
 		return nil
 	}
-	x := &MeshBufferZoneDefault{Handle: objref.Wrap(id)}
+	x := &MeshBufferZoneDefault{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *MeshBufferZoneDefault) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MeshBufferZoneDefault) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMeshBufferZoneDefault creates a new MeshBufferZoneDefault.
 func NewMeshBufferZoneDefault() *MeshBufferZoneDefault {
 	_id := objc.Send[objc.ID](objc.ID(_class("MDLMeshBufferZoneDefault")), objc.RegisterName("new"))
 	return meshBufferZoneDefaultAdopt(_id)
 }
 
+// Capacity wraps the corresponding Objective-C method.
 func (x *MeshBufferZoneDefault) Capacity() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("capacity"))
 	return _r

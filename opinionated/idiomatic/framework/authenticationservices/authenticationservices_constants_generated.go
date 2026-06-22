@@ -64,13 +64,11 @@ func ASAuthorizationErrorDomain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationErrorDomain")))
 }
 
-// Operation which is invoked when the extension configuration is removed from the system.
 // ASAuthorizationProviderAuthorizationOperationConfigurationRemoved returns the string constant ASAuthorizationProviderAuthorizationOperationConfigurationRemoved, for use as a dictionary key or argument.
 func ASAuthorizationProviderAuthorizationOperationConfigurationRemoved() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationProviderAuthorizationOperationConfigurationRemoved")))
 }
 
-// Operation which is invoked when a request is sent direct to the extension instead of loaded in an ASWebAuthenticationSession.
 // ASAuthorizationProviderAuthorizationOperationDirectRequest returns the string constant ASAuthorizationProviderAuthorizationOperationDirectRequest, for use as a dictionary key or argument.
 func ASAuthorizationProviderAuthorizationOperationDirectRequest() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationProviderAuthorizationOperationDirectRequest")))

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract superclass defining an API for objects that act as stand-ins for other objects or for objects that don’t exist yet.
-//
 // Proxy is an idiomatic wrapper over the Objective-C class NSProxy.
+//
+// Proxy is an abstract base — you do not construct it directly. Construct one of [DistantObject], [ProtocolChecker] and pass it where a Proxy is accepted.
+//
+// An abstract superclass defining an API for objects that act as stand-ins for other objects or for objects that don’t exist yet.
 type Proxy struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ProxyFromID(id objc.ID) *Proxy {
 	if id == 0 {
 		return nil
 	}
-	x := &Proxy{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Proxy{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func proxyAdopt(id objc.ID) *Proxy {
 	if id == 0 {
 		return nil
 	}
-	x := &Proxy{Handle: objref.Wrap(id)}
+	x := &Proxy{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,27 +62,28 @@ func (x *Proxy) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewProxy creates a new Proxy.
-func NewProxy() *Proxy {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSProxy")), objc.RegisterName("new"))
-	return proxyAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Proxy) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Passes a given invocation to the real object the proxy represents.
+// ForwardInvocation passes a given invocation to the real object the proxy represents.
 func (x *Proxy) ForwardInvocation(invocation *Invocation) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("forwardInvocation:"), objref.IDOf(invocation))
 }
 
-// Deallocates the memory occupied by the receiver.
+// Dealloc deallocates the memory occupied by the receiver.
 func (x *Proxy) Dealloc() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dealloc"))
 }
 
-// The garbage collector invokes this method on the receiver before disposing of the memory it uses.
+// Finalize the garbage collector invokes this method on the receiver before disposing of the memory it uses.
 func (x *Proxy) Finalize() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finalize"))
 }
 
+// DebugDescription wraps the corresponding Objective-C method.
 func (x *Proxy) DebugDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("debugDescription"))
 	if _r == 0 {
@@ -97,3 +102,10 @@ type Proxyable interface {
 }
 
 var _ Proxyable = (*Proxy)(nil)
+
+// isProxy marks Proxy — and, by embedding promotion, its
+// subclasses — as a member of the Proxy hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Proxy) isProxy() {}
+
+var _ ProxyProvider = (*Proxy)(nil)

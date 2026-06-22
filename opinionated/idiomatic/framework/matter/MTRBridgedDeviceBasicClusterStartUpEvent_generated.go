@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBridgedDeviceBasicClusterStartUpEvent is an idiomatic wrapper over the Objective-C class MTRBridgedDeviceBasicClusterStartUpEvent.
+//
+// It embeds [MTRBridgedDeviceBasicInformationClusterStartUpEvent], promoting that type's methods.
 type MTRBridgedDeviceBasicClusterStartUpEvent struct {
-	objref.Handle
+	MTRBridgedDeviceBasicInformationClusterStartUpEvent
 }
 
 // MTRBridgedDeviceBasicClusterStartUpEventFromID adopts an existing Objective-C object as a MTRBridgedDeviceBasicClusterStartUpEvent
@@ -23,7 +24,8 @@ func MTRBridgedDeviceBasicClusterStartUpEventFromID(id objc.ID) *MTRBridgedDevic
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBridgedDeviceBasicClusterStartUpEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBridgedDeviceBasicClusterStartUpEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRBridgedDeviceBasicClusterStartUpEventAdopt(id objc.ID) *MTRBridgedDevice
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBridgedDeviceBasicClusterStartUpEvent{Handle: objref.Wrap(id)}
+	x := &MTRBridgedDeviceBasicClusterStartUpEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRBridgedDeviceBasicClusterStartUpEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBridgedDeviceBasicClusterStartUpEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBridgedDeviceBasicClusterStartUpEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRBridgedDeviceBasicClusterStartUpEvent creates a new MTRBridgedDeviceBasicClusterStartUpEvent.
@@ -62,7 +50,7 @@ func NewMTRBridgedDeviceBasicClusterStartUpEvent() *MTRBridgedDeviceBasicCluster
 	return mTRBridgedDeviceBasicClusterStartUpEventAdopt(_id)
 }
 
-// WithSoftwareVersion sets softwareVersion and returns the receiver so calls can be chained.
+// WithSoftwareVersion sets the property and returns the receiver so calls can be chained.
 func (x *MTRBridgedDeviceBasicClusterStartUpEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTRBridgedDeviceBasicClusterStartUpEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return x
@@ -75,3 +63,5 @@ type MTRBridgedDeviceBasicClusterStartUpEventable interface {
 }
 
 var _ MTRBridgedDeviceBasicClusterStartUpEventable = (*MTRBridgedDeviceBasicClusterStartUpEvent)(nil)
+
+var _ MTRBridgedDeviceBasicInformationClusterStartUpEventProvider = (*MTRBridgedDeviceBasicClusterStartUpEvent)(nil)

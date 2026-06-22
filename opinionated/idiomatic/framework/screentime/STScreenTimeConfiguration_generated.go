@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The configuration for this device.
-//
 // ScreenTimeConfiguration is an idiomatic wrapper over the Objective-C class STScreenTimeConfiguration.
+//
+// The configuration for this device.
 type ScreenTimeConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ScreenTimeConfigurationFromID(id objc.ID) *ScreenTimeConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &ScreenTimeConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScreenTimeConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func screenTimeConfigurationAdopt(id objc.ID) *ScreenTimeConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &ScreenTimeConfiguration{Handle: objref.Wrap(id)}
+	x := &ScreenTimeConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *ScreenTimeConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScreenTimeConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewScreenTimeConfiguration creates a new ScreenTimeConfiguration.
 func NewScreenTimeConfiguration() *ScreenTimeConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("STScreenTimeConfiguration")), objc.RegisterName("new"))
 	return screenTimeConfigurationAdopt(_id)
 }
 
-// A Boolean that indicates whether the device is currently enforcing child restrictions.
+// EnforcesChildRestrictions a Boolean that indicates whether the device is currently enforcing child restrictions.
 func (x *ScreenTimeConfiguration) EnforcesChildRestrictions() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enforcesChildRestrictions"))
 	return _r

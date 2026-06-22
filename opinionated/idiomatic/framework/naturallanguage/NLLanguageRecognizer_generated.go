@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The language of a body of text.
-//
 // LanguageRecognizer is an idiomatic wrapper over the Objective-C class NLLanguageRecognizer.
+//
+// The language of a body of text.
 type LanguageRecognizer struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LanguageRecognizerFromID(id objc.ID) *LanguageRecognizer {
 	if id == 0 {
 		return nil
 	}
-	x := &LanguageRecognizer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LanguageRecognizer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func languageRecognizerAdopt(id objc.ID) *LanguageRecognizer {
 	if id == 0 {
 		return nil
 	}
-	x := &LanguageRecognizer{Handle: objref.Wrap(id)}
+	x := &LanguageRecognizer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,65 +60,73 @@ func (x *LanguageRecognizer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LanguageRecognizer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLanguageRecognizer creates a new LanguageRecognizer.
 func NewLanguageRecognizer() *LanguageRecognizer {
 	_id := objc.Send[objc.ID](objc.ID(_class("NLLanguageRecognizer")), objc.RegisterName("new"))
 	return languageRecognizerAdopt(_id)
 }
 
-// A dictionary that maps languages to their probabilities in the language identification process.
-//
-// WithLanguageHints sets languageHints and returns the receiver so calls can be chained.
+// WithLanguageHints a dictionary that maps languages to their probabilities in the language identification process.
 func (x *LanguageRecognizer) WithLanguageHints(languageHints obj.Object) *LanguageRecognizer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguageHints:"), objref.IDOf(languageHints))
 	return x
 }
 
-// Limits the set of possible languages that the recognizer will return.
-//
-// WithLanguageConstraints sets the collection and returns the receiver so calls can be chained.
+// WithLanguageConstraints limits the set of possible languages that the recognizer will return.
 func (x *LanguageRecognizer) WithLanguageConstraints(items ...obj.Object) *LanguageRecognizer {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguageConstraints:"), _arr)
 	return x
 }
 
-// Analyzes the piece of text to determine its dominant language.
+// ProcessString analyzes the piece of text to determine its dominant language.
 func (x *LanguageRecognizer) ProcessString(string_ string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processString:"), purego.NSString(string_))
 }
 
-// Resets the recognizer to its initial state.
+// Reset resets the recognizer to its initial state.
 func (x *LanguageRecognizer) Reset() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
-// Generates the probabilities of possible languages for the processed text.
+// LanguageHypothesesWithMaximum generates the probabilities of possible languages for the processed text.
 func (x *LanguageRecognizer) LanguageHypothesesWithMaximum(maxHypotheses int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageHypothesesWithMaximum:"), maxHypotheses)
 	return obj.Wrap(_r)
 }
 
+// DominantLanguage wraps the corresponding Objective-C method.
 func (x *LanguageRecognizer) DominantLanguage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dominantLanguage"))
 	return obj.Wrap(_r)
 }
 
+// LanguageHints wraps the corresponding Objective-C method.
 func (x *LanguageRecognizer) LanguageHints() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageHints"))
 	return obj.Wrap(_r)
 }
 
+// SetLanguageHints wraps the corresponding Objective-C method.
 func (x *LanguageRecognizer) SetLanguageHints(languageHints obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguageHints:"), objref.IDOf(languageHints))
 }
 
+// LanguageConstraints wraps the corresponding Objective-C method.
+//
 // LanguageConstraints returns the collection as a Go slice.
 func (x *LanguageRecognizer) LanguageConstraints() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageConstraints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetLanguageConstraints wraps the corresponding Objective-C method.
 func (x *LanguageRecognizer) SetLanguageConstraints(languageConstraints []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguageConstraints:"), purego.SliceToNSArray(languageConstraints, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }

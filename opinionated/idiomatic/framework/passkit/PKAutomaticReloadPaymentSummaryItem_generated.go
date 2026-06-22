@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines a summary item for an automatic reload or refill payment, such as a store card top-up.
-//
 // AutomaticReloadPaymentSummaryItem is an idiomatic wrapper over the Objective-C class PKAutomaticReloadPaymentSummaryItem.
+//
+// It embeds [PaymentSummaryItem], promoting that type's methods.
+//
+// An object that defines a summary item for an automatic reload or refill payment, such as a store card top-up.
 type AutomaticReloadPaymentSummaryItem struct {
-	objref.Handle
+	PaymentSummaryItem
 }
 
 // AutomaticReloadPaymentSummaryItemFromID adopts an existing Objective-C object as a AutomaticReloadPaymentSummaryItem
@@ -25,7 +26,8 @@ func AutomaticReloadPaymentSummaryItemFromID(id objc.ID) *AutomaticReloadPayment
 	if id == 0 {
 		return nil
 	}
-	x := &AutomaticReloadPaymentSummaryItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AutomaticReloadPaymentSummaryItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func automaticReloadPaymentSummaryItemAdopt(id objc.ID) *AutomaticReloadPaymentS
 	if id == 0 {
 		return nil
 	}
-	x := &AutomaticReloadPaymentSummaryItem{Handle: objref.Wrap(id)}
+	x := &AutomaticReloadPaymentSummaryItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AutomaticReloadPaymentSummaryItem) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AutomaticReloadPaymentSummaryItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AutomaticReloadPaymentSummaryItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAutomaticReloadPaymentSummaryItem creates a new AutomaticReloadPaymentSummaryItem.
@@ -64,43 +52,37 @@ func NewAutomaticReloadPaymentSummaryItem() *AutomaticReloadPaymentSummaryItem {
 	return automaticReloadPaymentSummaryItemAdopt(_id)
 }
 
-// The balance an account reaches before you apply the automatic reload amount.
-//
-// WithThresholdAmount sets thresholdAmount and returns the receiver so calls can be chained.
+// WithThresholdAmount the balance an account reaches before you apply the automatic reload amount.
 func (x *AutomaticReloadPaymentSummaryItem) WithThresholdAmount(thresholdAmount obj.Object) *AutomaticReloadPaymentSummaryItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThresholdAmount:"), objref.IDOf(thresholdAmount))
 	return x
 }
 
-// A short, localized description of the item.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a short, localized description of the item.
 func (x *AutomaticReloadPaymentSummaryItem) WithLabel(label string) *AutomaticReloadPaymentSummaryItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The summary item’s amount.
-//
-// WithAmount sets amount and returns the receiver so calls can be chained.
+// WithAmount the summary item’s amount.
 func (x *AutomaticReloadPaymentSummaryItem) WithAmount(amount obj.Object) *AutomaticReloadPaymentSummaryItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 	return x
 }
 
-// The summary item’s type that indicates whether the amount is final.
-//
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithType the summary item’s type that indicates whether the amount is final.
 func (x *AutomaticReloadPaymentSummaryItem) WithType(type_ PaymentSummaryItemType) *AutomaticReloadPaymentSummaryItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
+// ThresholdAmount wraps the corresponding Objective-C method.
 func (x *AutomaticReloadPaymentSummaryItem) ThresholdAmount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("thresholdAmount"))
 	return obj.Wrap(_r)
 }
 
+// SetThresholdAmount wraps the corresponding Objective-C method.
 func (x *AutomaticReloadPaymentSummaryItem) SetThresholdAmount(thresholdAmount obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThresholdAmount:"), objref.IDOf(thresholdAmount))
 }
@@ -117,3 +99,5 @@ type AutomaticReloadPaymentSummaryItemable interface {
 }
 
 var _ AutomaticReloadPaymentSummaryItemable = (*AutomaticReloadPaymentSummaryItem)(nil)
+
+var _ PaymentSummaryItemProvider = (*AutomaticReloadPaymentSummaryItem)(nil)

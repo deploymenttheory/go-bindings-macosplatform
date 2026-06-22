@@ -23,7 +23,8 @@ func MTRRVCCleanModeClusterModeTagStructFromID(id objc.ID) *MTRRVCCleanModeClust
 	if id == 0 {
 		return nil
 	}
-	x := &MTRRVCCleanModeClusterModeTagStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRRVCCleanModeClusterModeTagStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRRVCCleanModeClusterModeTagStructAdopt(id objc.ID) *MTRRVCCleanModeCluste
 	if id == 0 {
 		return nil
 	}
-	x := &MTRRVCCleanModeClusterModeTagStruct{Handle: objref.Wrap(id)}
+	x := &MTRRVCCleanModeClusterModeTagStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,38 +58,48 @@ func (x *MTRRVCCleanModeClusterModeTagStruct) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRRVCCleanModeClusterModeTagStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRRVCCleanModeClusterModeTagStruct creates a new MTRRVCCleanModeClusterModeTagStruct.
 func NewMTRRVCCleanModeClusterModeTagStruct() *MTRRVCCleanModeClusterModeTagStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRRVCCleanModeClusterModeTagStruct")), objc.RegisterName("new"))
 	return mTRRVCCleanModeClusterModeTagStructAdopt(_id)
 }
 
-// WithMfgCode sets mfgCode and returns the receiver so calls can be chained.
+// WithMfgCode sets the property and returns the receiver so calls can be chained.
 func (x *MTRRVCCleanModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRRVCCleanModeClusterModeTagStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 	return x
 }
 
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue sets the property and returns the receiver so calls can be chained.
 func (x *MTRRVCCleanModeClusterModeTagStruct) WithValue(value obj.Object) *MTRRVCCleanModeClusterModeTagStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return x
 }
 
+// MfgCode wraps the corresponding Objective-C method.
 func (x *MTRRVCCleanModeClusterModeTagStruct) MfgCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mfgCode"))
 	return obj.Wrap(_r)
 }
 
+// SetMfgCode wraps the corresponding Objective-C method.
 func (x *MTRRVCCleanModeClusterModeTagStruct) SetMfgCode(mfgCode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *MTRRVCCleanModeClusterModeTagStruct) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *MTRRVCCleanModeClusterModeTagStruct) SetValue(value obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 }

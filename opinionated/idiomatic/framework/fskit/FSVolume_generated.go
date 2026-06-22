@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A directory structure for files and folders.
-//
 // Volume is an idiomatic wrapper over the Objective-C class FSVolume.
+//
+// A directory structure for files and folders.
 type Volume struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VolumeFromID(id objc.ID) *Volume {
 	if id == 0 {
 		return nil
 	}
-	x := &Volume{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Volume{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func volumeAdopt(id objc.ID) *Volume {
 	if id == 0 {
 		return nil
 	}
-	x := &Volume{Handle: objref.Wrap(id)}
+	x := &Volume{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,35 +60,38 @@ func (x *Volume) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a volume with the given identifier and name.
-//
-// NewVolumeWithVolumeIDVolumeName creates a new Volume.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Volume) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVolumeWithVolumeIDVolumeName creates a volume with the given identifier and name.
 func NewVolumeWithVolumeIDVolumeName(volumeID *VolumeIdentifier, volumeName *FileName) *Volume {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("FSVolume")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVolumeID:volumeName:"), objref.IDOf(volumeID), objref.IDOf(volumeName))
 	return volumeAdopt(_id)
 }
 
-// The name of the volume.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the name of the volume.
 func (x *Volume) WithName(name *FileName) *Volume {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 	return x
 }
 
-// An identifier that uniquely identifies the volume.
+// VolumeID an identifier that uniquely identifies the volume.
 func (x *Volume) VolumeID() *VolumeIdentifier {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("volumeID"))
 	return VolumeIdentifierFromID(_r)
 }
 
-// The name of the volume.
+// Name the name of the volume.
 func (x *Volume) Name() *FileName {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	return FileNameFromID(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *Volume) SetName(name *FileName) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 }

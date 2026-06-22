@@ -23,7 +23,8 @@ func MTRAccountLoginClusterLoginParamsFromID(id objc.ID) *MTRAccountLoginCluster
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAccountLoginClusterLoginParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRAccountLoginClusterLoginParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRAccountLoginClusterLoginParamsAdopt(id objc.ID) *MTRAccountLoginClusterL
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAccountLoginClusterLoginParams{Handle: objref.Wrap(id)}
+	x := &MTRAccountLoginClusterLoginParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,46 +58,49 @@ func (x *MTRAccountLoginClusterLoginParams) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRAccountLoginClusterLoginParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRAccountLoginClusterLoginParams creates a new MTRAccountLoginClusterLoginParams.
 func NewMTRAccountLoginClusterLoginParams() *MTRAccountLoginClusterLoginParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRAccountLoginClusterLoginParams")), objc.RegisterName("new"))
 	return mTRAccountLoginClusterLoginParamsAdopt(_id)
 }
 
-// WithTempAccountIdentifier sets tempAccountIdentifier and returns the receiver so calls can be chained.
+// WithTempAccountIdentifier sets the property and returns the receiver so calls can be chained.
 func (x *MTRAccountLoginClusterLoginParams) WithTempAccountIdentifier(tempAccountIdentifier string) *MTRAccountLoginClusterLoginParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTempAccountIdentifier:"), purego.NSString(tempAccountIdentifier))
 	return x
 }
 
-// WithSetupPIN sets setupPIN and returns the receiver so calls can be chained.
+// WithSetupPIN sets the property and returns the receiver so calls can be chained.
 func (x *MTRAccountLoginClusterLoginParams) WithSetupPIN(setupPIN string) *MTRAccountLoginClusterLoginParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSetupPIN:"), purego.NSString(setupPIN))
 	return x
 }
 
-// WithNode sets node and returns the receiver so calls can be chained.
+// WithNode sets the property and returns the receiver so calls can be chained.
 func (x *MTRAccountLoginClusterLoginParams) WithNode(node obj.Object) *MTRAccountLoginClusterLoginParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNode:"), objref.IDOf(node))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRAccountLoginClusterLoginParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAccountLoginClusterLoginParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRAccountLoginClusterLoginParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAccountLoginClusterLoginParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// TempAccountIdentifier wraps the corresponding Objective-C method.
 func (x *MTRAccountLoginClusterLoginParams) TempAccountIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tempAccountIdentifier"))
 	if _r == 0 {
@@ -104,10 +109,12 @@ func (x *MTRAccountLoginClusterLoginParams) TempAccountIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// SetTempAccountIdentifier wraps the corresponding Objective-C method.
 func (x *MTRAccountLoginClusterLoginParams) SetTempAccountIdentifier(tempAccountIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTempAccountIdentifier:"), purego.NSString(tempAccountIdentifier))
 }
 
+// SetupPIN wraps the corresponding Objective-C method.
 func (x *MTRAccountLoginClusterLoginParams) SetupPIN() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setupPIN"))
 	if _r == 0 {
@@ -116,35 +123,40 @@ func (x *MTRAccountLoginClusterLoginParams) SetupPIN() string {
 	return purego.GoString(_r)
 }
 
+// SetSetupPIN wraps the corresponding Objective-C method.
 func (x *MTRAccountLoginClusterLoginParams) SetSetupPIN(setupPIN string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSetupPIN:"), purego.NSString(setupPIN))
 }
 
+// Node wraps the corresponding Objective-C method.
 func (x *MTRAccountLoginClusterLoginParams) Node() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("node"))
 	return obj.Wrap(_r)
 }
 
+// SetNode wraps the corresponding Objective-C method.
 func (x *MTRAccountLoginClusterLoginParams) SetNode(node obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNode:"), objref.IDOf(node))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRAccountLoginClusterLoginParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRAccountLoginClusterLoginParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRAccountLoginClusterLoginParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRAccountLoginClusterLoginParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

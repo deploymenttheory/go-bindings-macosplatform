@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An instance that provides information about a field in a structure.
-//
 // StructMember is an idiomatic wrapper over the Objective-C class MTLStructMember.
+//
+// An instance that provides information about a field in a structure.
 type StructMember struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func StructMemberFromID(id objc.ID) *StructMember {
 	if id == 0 {
 		return nil
 	}
-	x := &StructMember{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StructMember{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func structMemberAdopt(id objc.ID) *StructMember {
 	if id == 0 {
 		return nil
 	}
-	x := &StructMember{Handle: objref.Wrap(id)}
+	x := &StructMember{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,42 +60,49 @@ func (x *StructMember) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StructMember) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewStructMember creates a new StructMember.
 func NewStructMember() *StructMember {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLStructMember")), objc.RegisterName("new"))
 	return structMemberAdopt(_id)
 }
 
-// Provides a description of the underlying struct when the struct member holds a struct.
+// StructType provides a description of the underlying struct when the struct member holds a struct.
 func (x *StructMember) StructType() *StructType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("structType"))
 	return StructTypeFromID(_r)
 }
 
-// Provides a description of the underlying array when the struct member holds an array.
+// ArrayType provides a description of the underlying array when the struct member holds an array.
 func (x *StructMember) ArrayType() *ArrayType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrayType"))
 	return ArrayTypeFromID(_r)
 }
 
-// Provides a description of the underlying texture when the struct member holds a texture.
+// TextureReferenceType provides a description of the underlying texture when the struct member holds a texture.
 func (x *StructMember) TextureReferenceType() *TextureReferenceType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textureReferenceType"))
 	return TextureReferenceTypeFromID(_r)
 }
 
-// Provides a description of the underlying pointer when the struct member holds a pointer.
+// PointerType provides a description of the underlying pointer when the struct member holds a pointer.
 func (x *StructMember) PointerType() *PointerType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointerType"))
 	return PointerTypeFromID(_r)
 }
 
-// Provides a description of the underlying tensor type when this struct member holds a tensor.
+// TensorReferenceType provides a description of the underlying tensor type when this struct member holds a tensor.
 func (x *StructMember) TensorReferenceType() *TensorReferenceType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tensorReferenceType"))
 	return TensorReferenceTypeFromID(_r)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *StructMember) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -102,16 +111,19 @@ func (x *StructMember) Name() string {
 	return purego.GoString(_r)
 }
 
+// Offset wraps the corresponding Objective-C method.
 func (x *StructMember) Offset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
 	return _r
 }
 
+// DataType wraps the corresponding Objective-C method.
 func (x *StructMember) DataType() DataType {
 	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("dataType"))
 	return _r
 }
 
+// ArgumentIndex wraps the corresponding Objective-C method.
 func (x *StructMember) ArgumentIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("argumentIndex"))
 	return _r

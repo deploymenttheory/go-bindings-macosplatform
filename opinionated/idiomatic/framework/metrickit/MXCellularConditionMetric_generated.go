@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing metrics about the condition of the cellular network.
-//
 // CellularConditionMetric is an idiomatic wrapper over the Objective-C class MXCellularConditionMetric.
+//
+// It embeds [Metric], promoting that type's methods.
+//
+// An object representing metrics about the condition of the cellular network.
 type CellularConditionMetric struct {
-	objref.Handle
+	Metric
 }
 
 // CellularConditionMetricFromID adopts an existing Objective-C object as a CellularConditionMetric
@@ -25,7 +26,8 @@ func CellularConditionMetricFromID(id objc.ID) *CellularConditionMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &CellularConditionMetric{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CellularConditionMetric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func cellularConditionMetricAdopt(id objc.ID) *CellularConditionMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &CellularConditionMetric{Handle: objref.Wrap(id)}
+	x := &CellularConditionMetric{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CellularConditionMetric) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CellularConditionMetric) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CellularConditionMetric) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCellularConditionMetric creates a new CellularConditionMetric.
@@ -64,6 +52,7 @@ func NewCellularConditionMetric() *CellularConditionMetric {
 	return cellularConditionMetricAdopt(_id)
 }
 
+// HistogrammedCellularConditionTime wraps the corresponding Objective-C method.
 func (x *CellularConditionMetric) HistogrammedCellularConditionTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("histogrammedCellularConditionTime"))
 	return obj.Wrap(_r)
@@ -76,3 +65,5 @@ type CellularConditionMetricable interface {
 }
 
 var _ CellularConditionMetricable = (*CellularConditionMetric)(nil)
+
+var _ MetricProvider = (*CellularConditionMetric)(nil)

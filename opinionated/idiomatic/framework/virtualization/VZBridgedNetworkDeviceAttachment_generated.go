@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A network device that interacts directly with a physical network interface on the host computer.
-//
 // BridgedNetworkDeviceAttachment is an idiomatic wrapper over the Objective-C class VZBridgedNetworkDeviceAttachment.
+//
+// It embeds [NetworkDeviceAttachment], promoting that type's methods.
+//
+// A network device that interacts directly with a physical network interface on the host computer.
 type BridgedNetworkDeviceAttachment struct {
-	objref.Handle
+	NetworkDeviceAttachment
 }
 
 // BridgedNetworkDeviceAttachmentFromID adopts an existing Objective-C object as a BridgedNetworkDeviceAttachment
@@ -25,7 +26,8 @@ func BridgedNetworkDeviceAttachmentFromID(id objc.ID) *BridgedNetworkDeviceAttac
 	if id == 0 {
 		return nil
 	}
-	x := &BridgedNetworkDeviceAttachment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BridgedNetworkDeviceAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,35 +40,20 @@ func bridgedNetworkDeviceAttachmentAdopt(id objc.ID) *BridgedNetworkDeviceAttach
 	if id == 0 {
 		return nil
 	}
-	x := &BridgedNetworkDeviceAttachment{Handle: objref.Wrap(id)}
+	x := &BridgedNetworkDeviceAttachment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *BridgedNetworkDeviceAttachment) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BridgedNetworkDeviceAttachment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BridgedNetworkDeviceAttachment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates the attachment from a bridged network interface object.
-//
-// NewBridgedNetworkDeviceAttachmentWithInterface creates a new BridgedNetworkDeviceAttachment.
+// NewBridgedNetworkDeviceAttachmentWithInterface creates the attachment from a bridged network interface object.
 func NewBridgedNetworkDeviceAttachmentWithInterface(interface_ *BridgedNetworkInterface) *BridgedNetworkDeviceAttachment {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZBridgedNetworkDeviceAttachment")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterface:"), objref.IDOf(interface_))
 	return bridgedNetworkDeviceAttachmentAdopt(_id)
 }
 
+// Interface wraps the corresponding Objective-C method.
 func (x *BridgedNetworkDeviceAttachment) Interface() *BridgedNetworkInterface {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interface"))
 	return BridgedNetworkInterfaceFromID(_r)
@@ -79,3 +66,5 @@ type BridgedNetworkDeviceAttachmentable interface {
 }
 
 var _ BridgedNetworkDeviceAttachmentable = (*BridgedNetworkDeviceAttachment)(nil)
+
+var _ NetworkDeviceAttachmentProvider = (*BridgedNetworkDeviceAttachment)(nil)

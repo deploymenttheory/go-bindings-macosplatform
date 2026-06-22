@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the options to use when fetching contacts.
-//
 // ContactFetchRequest is an idiomatic wrapper over the Objective-C class CNContactFetchRequest.
+//
+// It embeds [FetchRequest], promoting that type's methods.
+//
+// An object that defines the options to use when fetching contacts.
 type ContactFetchRequest struct {
-	objref.Handle
+	FetchRequest
 }
 
 // ContactFetchRequestFromID adopts an existing Objective-C object as a ContactFetchRequest
@@ -25,7 +26,8 @@ func ContactFetchRequestFromID(id objc.ID) *ContactFetchRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &ContactFetchRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContactFetchRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,113 +40,94 @@ func contactFetchRequestAdopt(id objc.ID) *ContactFetchRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &ContactFetchRequest{Handle: objref.Wrap(id)}
+	x := &ContactFetchRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ContactFetchRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContactFetchRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContactFetchRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a fetch request for the specified keys.
-//
-// NewContactFetchRequestWithKeysToFetch creates a new ContactFetchRequest.
+// NewContactFetchRequestWithKeysToFetch creates a fetch request for the specified keys.
 func NewContactFetchRequestWithKeysToFetch(keysToFetch []obj.Object) *ContactFetchRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CNContactFetchRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKeysToFetch:"), purego.SliceToNSArray(keysToFetch, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return contactFetchRequestAdopt(_id)
 }
 
-// The predicate to match contacts against.
-//
-// WithPredicate sets predicate and returns the receiver so calls can be chained.
+// WithPredicate the predicate to match contacts against.
 func (x *ContactFetchRequest) WithPredicate(predicate obj.Object) *ContactFetchRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
 	return x
 }
 
-// A Boolean value that indicates whether to return mutable contacts.
-//
-// WithMutableObjects sets mutableObjects and returns the receiver so calls can be chained.
+// WithMutableObjects a Boolean value that indicates whether to return mutable contacts.
 func (x *ContactFetchRequest) WithMutableObjects(mutableObjects bool) *ContactFetchRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMutableObjects:"), mutableObjects)
 	return x
 }
 
-// A Boolean value that indicates whether to return linked contacts as unified contacts.
-//
-// WithUnifyResults sets unifyResults and returns the receiver so calls can be chained.
+// WithUnifyResults a Boolean value that indicates whether to return linked contacts as unified contacts.
 func (x *ContactFetchRequest) WithUnifyResults(unifyResults bool) *ContactFetchRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnifyResults:"), unifyResults)
 	return x
 }
 
-// The sort order for contacts.
-//
-// WithSortOrder sets sortOrder and returns the receiver so calls can be chained.
+// WithSortOrder the sort order for contacts.
 func (x *ContactFetchRequest) WithSortOrder(sortOrder ContactSortOrder) *ContactFetchRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortOrder:"), sortOrder)
 	return x
 }
 
-// The predicate to match contacts against. Use only predicates from CNContact+Predicates.h. Compound predicates are not supported. Set to nil to match all contacts.
+// Predicate the predicate to match contacts against. Use only predicates from CNContact+Predicates.h. Compound predicates are not supported. Set to nil to match all contacts.
 func (x *ContactFetchRequest) Predicate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
 	return obj.Wrap(_r)
 }
 
+// SetPredicate wraps the corresponding Objective-C method.
 func (x *ContactFetchRequest) SetPredicate(predicate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
 }
 
-// The properties to fetch in the returned contacts. Should only fetch the properties that will be used. Can combine contact keys and contact key descriptors.
+// KeysToFetch the properties to fetch in the returned contacts. Should only fetch the properties that will be used. Can combine contact keys and contact key descriptors.
 func (x *ContactFetchRequest) KeysToFetch() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keysToFetch"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetKeysToFetch wraps the corresponding Objective-C method.
 func (x *ContactFetchRequest) SetKeysToFetch(keysToFetch []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeysToFetch:"), purego.SliceToNSArray(keysToFetch, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// To return mutable contacts. If YES returns CNMutableContact objects, otherwise returns CNContact objects. Default is NO.
+// MutableObjects to return mutable contacts. If YES returns CNMutableContact objects, otherwise returns CNContact objects. Default is NO.
 func (x *ContactFetchRequest) MutableObjects() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mutableObjects"))
 	return _r
 }
 
+// SetMutableObjects wraps the corresponding Objective-C method.
 func (x *ContactFetchRequest) SetMutableObjects(mutableObjects bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMutableObjects:"), mutableObjects)
 }
 
-// To return linked contacts as unified contacts. If YES returns unified contacts, otherwise returns individual contacts. Default is YES.
+// UnifyResults to return linked contacts as unified contacts. If YES returns unified contacts, otherwise returns individual contacts. Default is YES.
 func (x *ContactFetchRequest) UnifyResults() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("unifyResults"))
 	return _r
 }
 
+// SetUnifyResults wraps the corresponding Objective-C method.
 func (x *ContactFetchRequest) SetUnifyResults(unifyResults bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnifyResults:"), unifyResults)
 }
 
-// To return contacts in a specific sort order. Default is CNContactSortOrderNone.
+// SortOrder to return contacts in a specific sort order. Default is CNContactSortOrderNone.
 func (x *ContactFetchRequest) SortOrder() ContactSortOrder {
 	_r := objc.Send[ContactSortOrder](objref.IDOf(x), objc.RegisterName("sortOrder"))
 	return _r
 }
 
+// SetSortOrder wraps the corresponding Objective-C method.
 func (x *ContactFetchRequest) SetSortOrder(sortOrder ContactSortOrder) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortOrder:"), sortOrder)
 }
@@ -169,3 +152,5 @@ type ContactFetchRequestable interface {
 }
 
 var _ ContactFetchRequestable = (*ContactFetchRequest)(nil)
+
+var _ FetchRequestProvider = (*ContactFetchRequest)(nil)

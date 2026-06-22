@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object you use to convert to and from a vCard representation of the user’s contacts.
-//
 // ContactVCardSerialization is an idiomatic wrapper over the Objective-C class CNContactVCardSerialization.
+//
+// An object you use to convert to and from a vCard representation of the user’s contacts.
 type ContactVCardSerialization struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ContactVCardSerializationFromID(id objc.ID) *ContactVCardSerialization {
 	if id == 0 {
 		return nil
 	}
-	x := &ContactVCardSerialization{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContactVCardSerialization{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func contactVCardSerializationAdopt(id objc.ID) *ContactVCardSerialization {
 	if id == 0 {
 		return nil
 	}
-	x := &ContactVCardSerialization{Handle: objref.Wrap(id)}
+	x := &ContactVCardSerialization{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *ContactVCardSerialization) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *ContactVCardSerialization) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContactVCardSerialization) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewContactVCardSerialization creates a new ContactVCardSerialization.

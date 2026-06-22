@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The metadata of speech in the audio of a speech recognition request.
-//
 // SpeechRecognitionMetadata is an idiomatic wrapper over the Objective-C class SFSpeechRecognitionMetadata.
+//
+// The metadata of speech in the audio of a speech recognition request.
 type SpeechRecognitionMetadata struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SpeechRecognitionMetadataFromID(id objc.ID) *SpeechRecognitionMetadata {
 	if id == 0 {
 		return nil
 	}
-	x := &SpeechRecognitionMetadata{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SpeechRecognitionMetadata{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func speechRecognitionMetadataAdopt(id objc.ID) *SpeechRecognitionMetadata {
 	if id == 0 {
 		return nil
 	}
-	x := &SpeechRecognitionMetadata{Handle: objref.Wrap(id)}
+	x := &SpeechRecognitionMetadata{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,43 @@ func (x *SpeechRecognitionMetadata) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpeechRecognitionMetadata) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSpeechRecognitionMetadata creates a new SpeechRecognitionMetadata.
 func NewSpeechRecognitionMetadata() *SpeechRecognitionMetadata {
 	_id := objc.Send[objc.ID](objc.ID(_class("SFSpeechRecognitionMetadata")), objc.RegisterName("new"))
 	return speechRecognitionMetadataAdopt(_id)
 }
 
-// The number of words spoken per minute.
+// SpeakingRate the number of words spoken per minute.
 func (x *SpeechRecognitionMetadata) SpeakingRate() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speakingRate"))
 	return _r
 }
 
-// The average pause duration between words, measured in seconds.
+// AveragePauseDuration the average pause duration between words, measured in seconds.
 func (x *SpeechRecognitionMetadata) AveragePauseDuration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("averagePauseDuration"))
 	return _r
 }
 
-// The start timestamp of speech in the audio.
+// SpeechStartTimestamp the start timestamp of speech in the audio.
 func (x *SpeechRecognitionMetadata) SpeechStartTimestamp() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speechStartTimestamp"))
 	return _r
 }
 
-// The duration in seconds of speech in the audio.
+// SpeechDuration the duration in seconds of speech in the audio.
 func (x *SpeechRecognitionMetadata) SpeechDuration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speechDuration"))
 	return _r
 }
 
-// An analysis of the transcription segment's vocal properties.
+// VoiceAnalytics an analysis of the transcription segment's vocal properties.
 func (x *SpeechRecognitionMetadata) VoiceAnalytics() *VoiceAnalytics {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("voiceAnalytics"))
 	return VoiceAnalyticsFromID(_r)

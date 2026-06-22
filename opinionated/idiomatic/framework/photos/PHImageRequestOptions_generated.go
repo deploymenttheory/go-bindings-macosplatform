@@ -6,15 +6,16 @@ package photos
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of options affecting the delivery of still image representations of Photos assets you request from an image manager.
-//
 // ImageRequestOptions is an idiomatic wrapper over the Objective-C class PHImageRequestOptions.
+//
+// A set of options affecting the delivery of still image representations of Photos assets you request from an image manager.
 type ImageRequestOptions struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func ImageRequestOptionsFromID(id objc.ID) *ImageRequestOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageRequestOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageRequestOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func imageRequestOptionsAdopt(id objc.ID) *ImageRequestOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageRequestOptions{Handle: objref.Wrap(id)}
+	x := &ImageRequestOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,91 +61,116 @@ func (x *ImageRequestOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ImageRequestOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewImageRequestOptions creates a new ImageRequestOptions.
 func NewImageRequestOptions() *ImageRequestOptions {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHImageRequestOptions")), objc.RegisterName("new"))
 	return imageRequestOptionsAdopt(_id)
 }
 
-// The requested image quality and delivery priority.
-//
-// WithDeliveryMode sets deliveryMode and returns the receiver so calls can be chained.
+// WithDeliveryMode the requested image quality and delivery priority.
 func (x *ImageRequestOptions) WithDeliveryMode(deliveryMode ImageRequestOptionsDeliveryMode) *ImageRequestOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeliveryMode:"), deliveryMode)
 	return x
 }
 
-// A mode that specifies how to resize the requested image.
-//
-// WithResizeMode sets resizeMode and returns the receiver so calls can be chained.
+// WithResizeMode a mode that specifies how to resize the requested image.
 func (x *ImageRequestOptions) WithResizeMode(resizeMode ImageRequestOptionsResizeMode) *ImageRequestOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResizeMode:"), resizeMode)
 	return x
 }
 
-// A Boolean value that specifies whether Photos can download the requested image from iCloud.
-//
-// WithNetworkAccessAllowed sets networkAccessAllowed and returns the receiver so calls can be chained.
+// WithNormalizedCropRect a rectangle for requesting a cropped version of the original image.
+func (x *ImageRequestOptions) WithNormalizedCropRect(normalizedCropRect corefoundation.CGRect) *ImageRequestOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNormalizedCropRect:"), normalizedCropRect)
+	return x
+}
+
+// WithNetworkAccessAllowed a Boolean value that specifies whether Photos can download the requested image from iCloud.
 func (x *ImageRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bool) *ImageRequestOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
 	return x
 }
 
-// A Boolean value that determines whether Photos processes the image request synchronously.
-//
-// WithSynchronous sets synchronous and returns the receiver so calls can be chained.
+// WithSynchronous a Boolean value that determines whether Photos processes the image request synchronously.
 func (x *ImageRequestOptions) WithSynchronous(synchronous bool) *ImageRequestOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronous:"), synchronous)
 	return x
 }
 
-// WithAllowSecondaryDegradedImage sets allowSecondaryDegradedImage and returns the receiver so calls can be chained.
+// WithAllowSecondaryDegradedImage sets the property and returns the receiver so calls can be chained.
 func (x *ImageRequestOptions) WithAllowSecondaryDegradedImage(allowSecondaryDegradedImage bool) *ImageRequestOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowSecondaryDegradedImage:"), allowSecondaryDegradedImage)
 	return x
 }
 
+// DeliveryMode wraps the corresponding Objective-C method.
 func (x *ImageRequestOptions) DeliveryMode() ImageRequestOptionsDeliveryMode {
 	_r := objc.Send[ImageRequestOptionsDeliveryMode](objref.IDOf(x), objc.RegisterName("deliveryMode"))
 	return _r
 }
 
+// SetDeliveryMode wraps the corresponding Objective-C method.
 func (x *ImageRequestOptions) SetDeliveryMode(deliveryMode ImageRequestOptionsDeliveryMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeliveryMode:"), deliveryMode)
 }
 
+// ResizeMode wraps the corresponding Objective-C method.
 func (x *ImageRequestOptions) ResizeMode() ImageRequestOptionsResizeMode {
 	_r := objc.Send[ImageRequestOptionsResizeMode](objref.IDOf(x), objc.RegisterName("resizeMode"))
 	return _r
 }
 
+// SetResizeMode wraps the corresponding Objective-C method.
 func (x *ImageRequestOptions) SetResizeMode(resizeMode ImageRequestOptionsResizeMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResizeMode:"), resizeMode)
 }
 
+// NormalizedCropRect wraps the corresponding Objective-C method.
+func (x *ImageRequestOptions) NormalizedCropRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("normalizedCropRect"))
+	return _r
+}
+
+// SetNormalizedCropRect wraps the corresponding Objective-C method.
+func (x *ImageRequestOptions) SetNormalizedCropRect(normalizedCropRect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNormalizedCropRect:"), normalizedCropRect)
+}
+
+// IsNetworkAccessAllowed wraps the corresponding Objective-C method.
 func (x *ImageRequestOptions) IsNetworkAccessAllowed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNetworkAccessAllowed"))
 	return _r
 }
 
+// SetNetworkAccessAllowed wraps the corresponding Objective-C method.
 func (x *ImageRequestOptions) SetNetworkAccessAllowed(networkAccessAllowed bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
 }
 
+// IsSynchronous wraps the corresponding Objective-C method.
 func (x *ImageRequestOptions) IsSynchronous() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSynchronous"))
 	return _r
 }
 
+// SetSynchronous wraps the corresponding Objective-C method.
 func (x *ImageRequestOptions) SetSynchronous(synchronous bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronous:"), synchronous)
 }
 
+// AllowSecondaryDegradedImage wraps the corresponding Objective-C method.
 func (x *ImageRequestOptions) AllowSecondaryDegradedImage() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowSecondaryDegradedImage"))
 	return _r
 }
 
+// SetAllowSecondaryDegradedImage wraps the corresponding Objective-C method.
 func (x *ImageRequestOptions) SetAllowSecondaryDegradedImage(allowSecondaryDegradedImage bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowSecondaryDegradedImage:"), allowSecondaryDegradedImage)
 }
@@ -152,6 +180,7 @@ type ImageRequestOptionsable interface {
 	obj.Object
 	WithDeliveryMode(deliveryMode ImageRequestOptionsDeliveryMode) *ImageRequestOptions
 	WithResizeMode(resizeMode ImageRequestOptionsResizeMode) *ImageRequestOptions
+	WithNormalizedCropRect(normalizedCropRect corefoundation.CGRect) *ImageRequestOptions
 	WithNetworkAccessAllowed(networkAccessAllowed bool) *ImageRequestOptions
 	WithSynchronous(synchronous bool) *ImageRequestOptions
 	WithAllowSecondaryDegradedImage(allowSecondaryDegradedImage bool) *ImageRequestOptions
@@ -159,6 +188,8 @@ type ImageRequestOptionsable interface {
 	SetDeliveryMode(deliveryMode ImageRequestOptionsDeliveryMode)
 	ResizeMode() ImageRequestOptionsResizeMode
 	SetResizeMode(resizeMode ImageRequestOptionsResizeMode)
+	NormalizedCropRect() corefoundation.CGRect
+	SetNormalizedCropRect(normalizedCropRect corefoundation.CGRect)
 	IsNetworkAccessAllowed() bool
 	SetNetworkAccessAllowed(networkAccessAllowed bool)
 	IsSynchronous() bool

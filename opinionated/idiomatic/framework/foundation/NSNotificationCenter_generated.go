@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A notification dispatch mechanism that enables the broadcast of information to registered observers.
-//
 // NotificationCenter is an idiomatic wrapper over the Objective-C class NSNotificationCenter.
+//
+// NotificationCenter is an abstract base — you do not construct it directly. Construct one of [DistributedNotificationCenter] and pass it where a NotificationCenter is accepted.
+//
+// A notification dispatch mechanism that enables the broadcast of information to registered observers.
 type NotificationCenter struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func NotificationCenterFromID(id objc.ID) *NotificationCenter {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationCenter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NotificationCenter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func notificationCenterAdopt(id objc.ID) *NotificationCenter {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationCenter{Handle: objref.Wrap(id)}
+	x := &NotificationCenter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,34 +62,39 @@ func (x *NotificationCenter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewNotificationCenter creates a new NotificationCenter.
-func NewNotificationCenter() *NotificationCenter {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSNotificationCenter")), objc.RegisterName("new"))
-	return notificationCenterAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationCenter) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *NotificationCenter) WithScriptingProperties(scriptingProperties obj.Object) *NotificationCenter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// PostNotification wraps the corresponding Objective-C method.
 func (x *NotificationCenter) PostNotification(notification *Notification) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postNotification:"), objref.IDOf(notification))
 }
 
+// PostNotificationNameObject wraps the corresponding Objective-C method.
 func (x *NotificationCenter) PostNotificationNameObject(aName *String, anObject obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postNotificationName:object:"), objref.IDOf(aName), objref.IDOf(anObject))
 }
 
+// PostNotificationNameObjectUserInfo wraps the corresponding Objective-C method.
 func (x *NotificationCenter) PostNotificationNameObjectUserInfo(aName *String, anObject obj.Object, aUserInfo obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postNotificationName:object:userInfo:"), objref.IDOf(aName), objref.IDOf(anObject), objref.IDOf(aUserInfo))
 }
 
+// RemoveObserver wraps the corresponding Objective-C method.
 func (x *NotificationCenter) RemoveObserver(observer obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObserver:"), objref.IDOf(observer))
 }
 
+// RemoveObserverNameObject wraps the corresponding Objective-C method.
 func (x *NotificationCenter) RemoveObserverNameObject(observer obj.Object, aName *String, anObject obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObserver:name:object:"), objref.IDOf(observer), objref.IDOf(aName), objref.IDOf(anObject))
 }
@@ -102,3 +111,10 @@ type NotificationCenterable interface {
 }
 
 var _ NotificationCenterable = (*NotificationCenter)(nil)
+
+// isNotificationCenter marks NotificationCenter — and, by embedding promotion, its
+// subclasses — as a member of the NotificationCenter hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NotificationCenter) isNotificationCenter() {}
+
+var _ NotificationCenterProvider = (*NotificationCenter)(nil)

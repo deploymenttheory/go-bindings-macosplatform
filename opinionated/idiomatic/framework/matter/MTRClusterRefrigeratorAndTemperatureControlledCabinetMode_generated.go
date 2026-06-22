@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Refrigerator And Temperature Controlled Cabinet Mode Attributes and commands for selecting a mode from a list of supported options.
-//
 // MTRClusterRefrigeratorAndTemperatureControlledCabinetMode is an idiomatic wrapper over the Objective-C class MTRClusterRefrigeratorAndTemperatureControlledCabinetMode.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
+//
+// Cluster Refrigerator And Temperature Controlled Cabinet Mode Attributes and commands for selecting a mode from a list of supported options.
 type MTRClusterRefrigeratorAndTemperatureControlledCabinetMode struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterRefrigeratorAndTemperatureControlledCabinetModeFromID adopts an existing Objective-C object as a MTRClusterRefrigeratorAndTemperatureControlledCabinetMode
@@ -27,7 +28,8 @@ func MTRClusterRefrigeratorAndTemperatureControlledCabinetModeFromID(id objc.ID)
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterRefrigeratorAndTemperatureControlledCabinetMode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterRefrigeratorAndTemperatureControlledCabinetMode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,37 +42,23 @@ func mTRClusterRefrigeratorAndTemperatureControlledCabinetModeAdopt(id objc.ID) 
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterRefrigeratorAndTemperatureControlledCabinetMode{Handle: objref.Wrap(id)}
+	x := &MTRClusterRefrigeratorAndTemperatureControlledCabinetMode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterRefrigeratorAndTemperatureControlledCabinetModeWithDeviceEndpointIDQueue creates a new MTRClusterRefrigeratorAndTemperatureControlledCabinetMode.
+// NewMTRClusterRefrigeratorAndTemperatureControlledCabinetModeWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterRefrigeratorAndTemperatureControlledCabinetModeWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterRefrigeratorAndTemperatureControlledCabinetMode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterRefrigeratorAndTemperatureControlledCabinetModeAdopt(_id)
 }
 
+// ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams, error) {
+func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams, err error) {
 	type _result struct {
 		val *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams
 		err error
@@ -92,36 +80,43 @@ func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ChangeToMode
 	}
 }
 
+// ReadAttributeSupportedModesWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeSupportedModesWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedModesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeCurrentModeWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeCurrentModeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -141,3 +136,7 @@ type MTRClusterRefrigeratorAndTemperatureControlledCabinetModeable interface {
 }
 
 var _ MTRClusterRefrigeratorAndTemperatureControlledCabinetModeable = (*MTRClusterRefrigeratorAndTemperatureControlledCabinetMode)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterRefrigeratorAndTemperatureControlledCabinetMode)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterRefrigeratorAndTemperatureControlledCabinetMode)(nil)

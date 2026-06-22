@@ -23,6 +23,8 @@ const (
 	ComputeUnitsCPUAndNeuralEngine ComputeUnits = 3
 )
 
+// String returns the ComputeUnits constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ComputeUnits) String() string {
 	switch e {
 	case ComputeUnitsCPUOnly:
@@ -62,6 +64,8 @@ const (
 	FeatureTypeState FeatureType = 8
 )
 
+// String returns the FeatureType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FeatureType) String() string {
 	switch e {
 	case FeatureTypeInvalid:
@@ -99,6 +103,8 @@ const (
 	ImageSizeConstraintTypeRange ImageSizeConstraintType = 3
 )
 
+// String returns the ImageSizeConstraintType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ImageSizeConstraintType) String() string {
 	switch e {
 	case ImageSizeConstraintTypeUnspecified:
@@ -131,6 +137,8 @@ const (
 	MultiArrayDataTypeInt8  MultiArrayDataType = 131080
 )
 
+// String returns the MultiArrayDataType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MultiArrayDataType) String() string {
 	switch e {
 	case MultiArrayDataTypeDouble:
@@ -160,6 +168,8 @@ const (
 	MultiArrayShapeConstraintTypeRange MultiArrayShapeConstraintType = 3
 )
 
+// String returns the MultiArrayShapeConstraintType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MultiArrayShapeConstraintType) String() string {
 	switch e {
 	case MultiArrayShapeConstraintTypeUnspecified:
@@ -182,6 +192,8 @@ const (
 	ReshapeFrequencyHintInfrequent ReshapeFrequencyHint = 1
 )
 
+// String returns the ReshapeFrequencyHint constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ReshapeFrequencyHint) String() string {
 	switch e {
 	case ReshapeFrequencyHintFrequent:
@@ -203,6 +215,8 @@ const (
 	SpecializationStrategyFastPrediction SpecializationStrategy = 1
 )
 
+// String returns the SpecializationStrategy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SpecializationStrategy) String() string {
 	switch e {
 	case SpecializationStrategyDefault:
@@ -230,6 +244,8 @@ const (
 	TaskStateFailed TaskState = 5
 )
 
+// String returns the TaskState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TaskState) String() string {
 	switch e {
 	case TaskStateSuspended:
@@ -260,6 +276,8 @@ const (
 	UpdateProgressEventMiniBatchEnd UpdateProgressEvent = 4
 )
 
+// String returns the UpdateProgressEvent constant's name, or its numeric form when the
+// value is not a known constant.
 func (e UpdateProgressEvent) String() string {
 	var parts []string
 	if e&UpdateProgressEventTrainingBegin != 0 {

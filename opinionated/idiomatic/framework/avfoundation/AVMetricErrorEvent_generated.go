@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a metric event when an error occurs.
-//
 // MetricErrorEvent is an idiomatic wrapper over the Objective-C class AVMetricErrorEvent.
+//
+// It embeds [MetricEvent], promoting that type's methods.
+//
+// An object that represents a metric event when an error occurs.
 type MetricErrorEvent struct {
-	objref.Handle
+	MetricEvent
 }
 
 // MetricErrorEventFromID adopts an existing Objective-C object as a MetricErrorEvent
@@ -25,7 +26,8 @@ func MetricErrorEventFromID(id objc.ID) *MetricErrorEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MetricErrorEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetricErrorEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func metricErrorEventAdopt(id objc.ID) *MetricErrorEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MetricErrorEvent{Handle: objref.Wrap(id)}
+	x := &MetricErrorEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MetricErrorEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetricErrorEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetricErrorEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMetricErrorEvent creates a new MetricErrorEvent.
@@ -64,7 +52,7 @@ func NewMetricErrorEvent() *MetricErrorEvent {
 	return metricErrorEventAdopt(_id)
 }
 
-// Returns whether the error was recoverable.
+// DidRecover returns whether the error was recoverable.
 func (x *MetricErrorEvent) DidRecover() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("didRecover"))
 	return _r
@@ -77,3 +65,5 @@ type MetricErrorEventable interface {
 }
 
 var _ MetricErrorEventable = (*MetricErrorEvent)(nil)
+
+var _ MetricEventProvider = (*MetricErrorEvent)(nil)

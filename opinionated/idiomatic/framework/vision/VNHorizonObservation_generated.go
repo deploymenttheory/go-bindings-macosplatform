@@ -6,17 +6,19 @@ package vision
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The horizon angle information that an image-analysis request detects.
-//
 // HorizonObservation is an idiomatic wrapper over the Objective-C class VNHorizonObservation.
+//
+// It embeds [Observation], promoting that type's methods.
+//
+// The horizon angle information that an image-analysis request detects.
 type HorizonObservation struct {
-	objref.Handle
+	Observation
 }
 
 // HorizonObservationFromID adopts an existing Objective-C object as a HorizonObservation
@@ -25,7 +27,8 @@ func HorizonObservationFromID(id objc.ID) *HorizonObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &HorizonObservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HorizonObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func horizonObservationAdopt(id objc.ID) *HorizonObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &HorizonObservation{Handle: objref.Wrap(id)}
+	x := &HorizonObservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *HorizonObservation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HorizonObservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HorizonObservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewHorizonObservation creates a new HorizonObservation.
@@ -64,7 +53,19 @@ func NewHorizonObservation() *HorizonObservation {
 	return horizonObservationAdopt(_id)
 }
 
-// Angle of the observed horizon.
+// TransformForImageWidthHeight creates an affine transform for the specified image width and height.
+func (x *HorizonObservation) TransformForImageWidthHeight(width int, height int) corefoundation.CGAffineTransform {
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("transformForImageWidth:height:"), width, height)
+	return _r
+}
+
+// Transform transform applied to the detected horizon in image coordinates. This is the transform in image coordinates and not a normalized transform.
+func (x *HorizonObservation) Transform() corefoundation.CGAffineTransform {
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("transform"))
+	return _r
+}
+
+// Angle angle of the observed horizon.
 func (x *HorizonObservation) Angle() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("angle"))
 	return _r
@@ -73,7 +74,11 @@ func (x *HorizonObservation) Angle() float64 {
 // HorizonObservationable is the interface implemented by [HorizonObservation], for mocking and DI.
 type HorizonObservationable interface {
 	obj.Object
+	TransformForImageWidthHeight(width int, height int) corefoundation.CGAffineTransform
+	Transform() corefoundation.CGAffineTransform
 	Angle() float64
 }
 
 var _ HorizonObservationable = (*HorizonObservation)(nil)
+
+var _ ObservationProvider = (*HorizonObservation)(nil)

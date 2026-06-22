@@ -25,7 +25,8 @@ func MTRApplicationLauncherClusterLauncherResponseParamsFromID(id objc.ID) *MTRA
 	if id == 0 {
 		return nil
 	}
-	x := &MTRApplicationLauncherClusterLauncherResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRApplicationLauncherClusterLauncherResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRApplicationLauncherClusterLauncherResponseParamsAdopt(id objc.ID) *MTRAp
 	if id == 0 {
 		return nil
 	}
-	x := &MTRApplicationLauncherClusterLauncherResponseParams{Handle: objref.Wrap(id)}
+	x := &MTRApplicationLauncherClusterLauncherResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTRApplicationLauncherClusterLauncherResponseParams) IsKind(className s
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRApplicationLauncherClusterLauncherResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTRApplicationLauncherClusterLauncherResponseParamsWithResponseValueError creates a new MTRApplicationLauncherClusterLauncherResponseParams.
-func NewMTRApplicationLauncherClusterLauncherResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRApplicationLauncherClusterLauncherResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRApplicationLauncherClusterLauncherResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRApplicationLauncherClusterLauncherResponseParamsWithResponseValueError initialize an MTRApplicationLauncherClusterLauncherResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRApplicationLauncherClusterLauncherResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRApplicationLauncherClusterLauncherResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,50 +77,53 @@ func NewMTRApplicationLauncherClusterLauncherResponseParamsWithResponseValueErro
 	return mTRApplicationLauncherClusterLauncherResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets status and returns the receiver so calls can be chained.
+// WithStatus sets the property and returns the receiver so calls can be chained.
 func (x *MTRApplicationLauncherClusterLauncherResponseParams) WithStatus(status obj.Object) *MTRApplicationLauncherClusterLauncherResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return x
 }
 
-// WithData sets data and returns the receiver so calls can be chained.
+// WithData sets the property and returns the receiver so calls can be chained.
 func (x *MTRApplicationLauncherClusterLauncherResponseParams) WithData(data obj.Object) *MTRApplicationLauncherClusterLauncherResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRApplicationLauncherClusterLauncherResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRApplicationLauncherClusterLauncherResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
+// Status wraps the corresponding Objective-C method.
 func (x *MTRApplicationLauncherClusterLauncherResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
+// SetStatus wraps the corresponding Objective-C method.
 func (x *MTRApplicationLauncherClusterLauncherResponseParams) SetStatus(status obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 }
 
+// Data wraps the corresponding Objective-C method.
 func (x *MTRApplicationLauncherClusterLauncherResponseParams) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
+// SetData wraps the corresponding Objective-C method.
 func (x *MTRApplicationLauncherClusterLauncherResponseParams) SetData(data obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRApplicationLauncherClusterLauncherResponseParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRApplicationLauncherClusterLauncherResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An asset with a duration that the system can extend without modifying its existing media data.
-//
 // FragmentedAsset is an idiomatic wrapper over the Objective-C class AVFragmentedAsset.
+//
+// It embeds [URLAsset], promoting that type's methods.
+//
+// An asset with a duration that the system can extend without modifying its existing media data.
 type FragmentedAsset struct {
-	objref.Handle
+	URLAsset
 }
 
 // FragmentedAssetFromID adopts an existing Objective-C object as a FragmentedAsset
@@ -25,7 +26,8 @@ func FragmentedAssetFromID(id objc.ID) *FragmentedAsset {
 	if id == 0 {
 		return nil
 	}
-	x := &FragmentedAsset{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FragmentedAsset{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func fragmentedAssetAdopt(id objc.ID) *FragmentedAsset {
 	if id == 0 {
 		return nil
 	}
-	x := &FragmentedAsset{Handle: objref.Wrap(id)}
+	x := &FragmentedAsset{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *FragmentedAsset) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FragmentedAsset) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FragmentedAsset) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewFragmentedAsset creates a new FragmentedAsset.
@@ -70,3 +58,7 @@ type FragmentedAssetable interface {
 }
 
 var _ FragmentedAssetable = (*FragmentedAsset)(nil)
+
+var _ URLAssetProvider = (*FragmentedAsset)(nil)
+
+var _ AssetProvider = (*FragmentedAsset)(nil)

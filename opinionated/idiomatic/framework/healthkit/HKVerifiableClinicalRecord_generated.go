@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A sample that represents the contents of a SMART Health Card or EU Digital COVID Certificate.
-//
 // VerifiableClinicalRecord is an idiomatic wrapper over the Objective-C class HKVerifiableClinicalRecord.
+//
+// It embeds [Sample], promoting that type's methods.
+//
+// A sample that represents the contents of a SMART Health Card or EU Digital COVID Certificate.
 type VerifiableClinicalRecord struct {
-	objref.Handle
+	Sample
 }
 
 // VerifiableClinicalRecordFromID adopts an existing Objective-C object as a VerifiableClinicalRecord
@@ -25,7 +26,8 @@ func VerifiableClinicalRecordFromID(id objc.ID) *VerifiableClinicalRecord {
 	if id == 0 {
 		return nil
 	}
-	x := &VerifiableClinicalRecord{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VerifiableClinicalRecord{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func verifiableClinicalRecordAdopt(id objc.ID) *VerifiableClinicalRecord {
 	if id == 0 {
 		return nil
 	}
-	x := &VerifiableClinicalRecord{Handle: objref.Wrap(id)}
+	x := &VerifiableClinicalRecord{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *VerifiableClinicalRecord) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VerifiableClinicalRecord) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VerifiableClinicalRecord) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewVerifiableClinicalRecord creates a new VerifiableClinicalRecord.
@@ -64,7 +52,7 @@ func NewVerifiableClinicalRecord() *VerifiableClinicalRecord {
 	return verifiableClinicalRecordAdopt(_id)
 }
 
-// The types present in this record.
+// RecordTypes the types present in this record.
 //
 // RecordTypes returns the collection as a Go slice.
 func (x *VerifiableClinicalRecord) RecordTypes() []string {
@@ -72,7 +60,7 @@ func (x *VerifiableClinicalRecord) RecordTypes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// The identifier for the issuer of this record.
+// IssuerIdentifier the identifier for the issuer of this record.
 func (x *VerifiableClinicalRecord) IssuerIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issuerIdentifier"))
 	if _r == 0 {
@@ -81,31 +69,31 @@ func (x *VerifiableClinicalRecord) IssuerIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// The subject of this record.
+// Subject the subject of this record.
 func (x *VerifiableClinicalRecord) Subject() *VerifiableClinicalRecordSubject {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subject"))
 	return VerifiableClinicalRecordSubjectFromID(_r)
 }
 
-// The date this record was issued.
+// IssuedDate the date this record was issued.
 func (x *VerifiableClinicalRecord) IssuedDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issuedDate"))
 	return obj.Wrap(_r)
 }
 
-// A date most relevant to this record, like when a vaccine was administered or a test was performed.
+// RelevantDate a date most relevant to this record, like when a vaccine was administered or a test was performed.
 func (x *VerifiableClinicalRecord) RelevantDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relevantDate"))
 	return obj.Wrap(_r)
 }
 
-// The date this record expires.
+// ExpirationDate the date this record expires.
 func (x *VerifiableClinicalRecord) ExpirationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expirationDate"))
 	return obj.Wrap(_r)
 }
 
-// A list of display names for each item contained in this record.
+// ItemNames a list of display names for each item contained in this record.
 //
 // ItemNames returns the collection as a Go slice.
 func (x *VerifiableClinicalRecord) ItemNames() []string {
@@ -113,13 +101,13 @@ func (x *VerifiableClinicalRecord) ItemNames() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// The type of the source leading to this verifiable record.
+// SourceType the type of the source leading to this verifiable record.
 func (x *VerifiableClinicalRecord) SourceType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceType"))
 	return obj.Wrap(_r)
 }
 
-// The record's data representation, determined by source type.
+// DataRepresentation the record's data representation, determined by source type.
 func (x *VerifiableClinicalRecord) DataRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
 	return obj.Wrap(_r)
@@ -140,3 +128,7 @@ type VerifiableClinicalRecordable interface {
 }
 
 var _ VerifiableClinicalRecordable = (*VerifiableClinicalRecord)(nil)
+
+var _ SampleProvider = (*VerifiableClinicalRecord)(nil)
+
+var _ ObjectProvider = (*VerifiableClinicalRecord)(nil)

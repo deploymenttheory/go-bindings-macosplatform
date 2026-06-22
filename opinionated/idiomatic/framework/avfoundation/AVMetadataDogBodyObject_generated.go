@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing a single detected dog body in a picture.
-//
 // MetadataDogBodyObject is an idiomatic wrapper over the Objective-C class AVMetadataDogBodyObject.
+//
+// It embeds [MetadataBodyObject], promoting that type's methods.
+//
+// An object representing a single detected dog body in a picture.
 type MetadataDogBodyObject struct {
-	objref.Handle
+	MetadataBodyObject
 }
 
 // MetadataDogBodyObjectFromID adopts an existing Objective-C object as a MetadataDogBodyObject
@@ -25,7 +26,8 @@ func MetadataDogBodyObjectFromID(id objc.ID) *MetadataDogBodyObject {
 	if id == 0 {
 		return nil
 	}
-	x := &MetadataDogBodyObject{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetadataDogBodyObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func metadataDogBodyObjectAdopt(id objc.ID) *MetadataDogBodyObject {
 	if id == 0 {
 		return nil
 	}
-	x := &MetadataDogBodyObject{Handle: objref.Wrap(id)}
+	x := &MetadataDogBodyObject{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MetadataDogBodyObject) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetadataDogBodyObject) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetadataDogBodyObject) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMetadataDogBodyObject creates a new MetadataDogBodyObject.
@@ -70,3 +58,7 @@ type MetadataDogBodyObjectable interface {
 }
 
 var _ MetadataDogBodyObjectable = (*MetadataDogBodyObject)(nil)
+
+var _ MetadataBodyObjectProvider = (*MetadataDogBodyObject)(nil)
+
+var _ MetadataObjectProvider = (*MetadataDogBodyObject)(nil)

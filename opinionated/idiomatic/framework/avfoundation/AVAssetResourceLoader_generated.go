@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that mediates resource requests from a URL asset.
-//
 // AssetResourceLoader is an idiomatic wrapper over the Objective-C class AVAssetResourceLoader.
+//
+// An object that mediates resource requests from a URL asset.
 type AssetResourceLoader struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetResourceLoaderFromID(id objc.ID) *AssetResourceLoader {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetResourceLoader{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetResourceLoader{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetResourceLoaderAdopt(id objc.ID) *AssetResourceLoader {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetResourceLoader{Handle: objref.Wrap(id)}
+	x := &AssetResourceLoader{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,48 +60,54 @@ func (x *AssetResourceLoader) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetResourceLoader) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetResourceLoader creates a new AssetResourceLoader.
 func NewAssetResourceLoader() *AssetResourceLoader {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetResourceLoader")), objc.RegisterName("new"))
 	return assetResourceLoaderAdopt(_id)
 }
 
-// A Boolean value that indicates whether content keys will be loaded as quickly as possible.
-//
-// WithPreloadsEligibleContentKeys sets preloadsEligibleContentKeys and returns the receiver so calls can be chained.
+// WithPreloadsEligibleContentKeys a Boolean value that indicates whether content keys will be loaded as quickly as possible.
 func (x *AssetResourceLoader) WithPreloadsEligibleContentKeys(preloadsEligibleContentKeys bool) *AssetResourceLoader {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreloadsEligibleContentKeys:"), preloadsEligibleContentKeys)
 	return x
 }
 
-// A Boolean value that indicates whether to enable attaching Common Media Client Data as HTTP request headers.
-//
-// WithSendsCommonMediaClientDataAsHTTPHeaders sets sendsCommonMediaClientDataAsHTTPHeaders and returns the receiver so calls can be chained.
+// WithSendsCommonMediaClientDataAsHTTPHeaders a Boolean value that indicates whether to enable attaching Common Media Client Data as HTTP request headers.
 func (x *AssetResourceLoader) WithSendsCommonMediaClientDataAsHTTPHeaders(sendsCommonMediaClientDataAsHTTPHeaders bool) *AssetResourceLoader {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsCommonMediaClientDataAsHTTPHeaders:"), sendsCommonMediaClientDataAsHTTPHeaders)
 	return x
 }
 
-// The dispatch queue on which all delegate methods will be invoked. The value of this property is a dispatch_queue_t. The queue is set using the setDelegate:queue: method.
+// DelegateQueue the dispatch queue on which all delegate methods will be invoked. The value of this property is a dispatch_queue_t. The queue is set using the setDelegate:queue: method.
 func (x *AssetResourceLoader) DelegateQueue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegateQueue"))
 	return obj.Wrap(_r)
 }
 
+// PreloadsEligibleContentKeys wraps the corresponding Objective-C method.
 func (x *AssetResourceLoader) PreloadsEligibleContentKeys() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preloadsEligibleContentKeys"))
 	return _r
 }
 
+// SetPreloadsEligibleContentKeys wraps the corresponding Objective-C method.
 func (x *AssetResourceLoader) SetPreloadsEligibleContentKeys(preloadsEligibleContentKeys bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreloadsEligibleContentKeys:"), preloadsEligibleContentKeys)
 }
 
+// SendsCommonMediaClientDataAsHTTPHeaders wraps the corresponding Objective-C method.
 func (x *AssetResourceLoader) SendsCommonMediaClientDataAsHTTPHeaders() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendsCommonMediaClientDataAsHTTPHeaders"))
 	return _r
 }
 
+// SetSendsCommonMediaClientDataAsHTTPHeaders wraps the corresponding Objective-C method.
 func (x *AssetResourceLoader) SetSendsCommonMediaClientDataAsHTTPHeaders(sendsCommonMediaClientDataAsHTTPHeaders bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsCommonMediaClientDataAsHTTPHeaders:"), sendsCommonMediaClientDataAsHTTPHeaders)
 }

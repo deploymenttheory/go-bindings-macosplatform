@@ -25,7 +25,8 @@ func MTRGeneralCommissioningClusterCommissioningCompleteResponseParamsFromID(id 
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGeneralCommissioningClusterCommissioningCompleteResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRGeneralCommissioningClusterCommissioningCompleteResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRGeneralCommissioningClusterCommissioningCompleteResponseParamsAdopt(id o
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGeneralCommissioningClusterCommissioningCompleteResponseParams{Handle: objref.Wrap(id)}
+	x := &MTRGeneralCommissioningClusterCommissioningCompleteResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) IsKi
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRGeneralCommissioningClusterCommissioningCompleteResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTRGeneralCommissioningClusterCommissioningCompleteResponseParamsWithResponseValueError creates a new MTRGeneralCommissioningClusterCommissioningCompleteResponseParams.
-func NewMTRGeneralCommissioningClusterCommissioningCompleteResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRGeneralCommissioningClusterCommissioningCompleteResponseParamsWithResponseValueError initialize an MTRGeneralCommissioningClusterCommissioningCompleteResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRGeneralCommissioningClusterCommissioningCompleteResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRGeneralCommissioningClusterCommissioningCompleteResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,35 +77,36 @@ func NewMTRGeneralCommissioningClusterCommissioningCompleteResponseParamsWithRes
 	return mTRGeneralCommissioningClusterCommissioningCompleteResponseParamsAdopt(_id), nil
 }
 
-// WithErrorCode sets errorCode and returns the receiver so calls can be chained.
+// WithErrorCode sets the property and returns the receiver so calls can be chained.
 func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) WithErrorCode(errorCode obj.Object) *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorCode:"), objref.IDOf(errorCode))
 	return x
 }
 
-// WithDebugText sets debugText and returns the receiver so calls can be chained.
+// WithDebugText sets the property and returns the receiver so calls can be chained.
 func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) WithDebugText(debugText string) *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDebugText:"), purego.NSString(debugText))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
+// ErrorCode wraps the corresponding Objective-C method.
 func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) ErrorCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorCode"))
 	return obj.Wrap(_r)
 }
 
+// SetErrorCode wraps the corresponding Objective-C method.
 func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) SetErrorCode(errorCode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorCode:"), objref.IDOf(errorCode))
 }
 
+// DebugText wraps the corresponding Objective-C method.
 func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) DebugText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("debugText"))
 	if _r == 0 {
@@ -108,16 +115,18 @@ func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) Debu
 	return purego.GoString(_r)
 }
 
+// SetDebugText wraps the corresponding Objective-C method.
 func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) SetDebugText(debugText string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDebugText:"), purego.NSString(debugText))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }

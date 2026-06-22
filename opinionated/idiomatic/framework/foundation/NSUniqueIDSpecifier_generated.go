@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specifier for an object in a collection (or container) by unique ID.
-//
 // UniqueIDSpecifier is an idiomatic wrapper over the Objective-C class NSUniqueIDSpecifier.
+//
+// It embeds [ScriptObjectSpecifier], promoting that type's methods.
+//
+// A specifier for an object in a collection (or container) by unique ID.
 type UniqueIDSpecifier struct {
-	objref.Handle
+	ScriptObjectSpecifier
 }
 
 // UniqueIDSpecifierFromID adopts an existing Objective-C object as a UniqueIDSpecifier
@@ -25,7 +26,8 @@ func UniqueIDSpecifierFromID(id objc.ID) *UniqueIDSpecifier {
 	if id == 0 {
 		return nil
 	}
-	x := &UniqueIDSpecifier{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UniqueIDSpecifier{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func uniqueIDSpecifierAdopt(id objc.ID) *UniqueIDSpecifier {
 	if id == 0 {
 		return nil
 	}
-	x := &UniqueIDSpecifier{Handle: objref.Wrap(id)}
+	x := &UniqueIDSpecifier{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UniqueIDSpecifier) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UniqueIDSpecifier) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UniqueIDSpecifier) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUniqueIDSpecifierWithCoder creates a new UniqueIDSpecifier.
@@ -65,90 +53,74 @@ func NewUniqueIDSpecifierWithCoder(inCoder *Coder) *UniqueIDSpecifier {
 	return uniqueIDSpecifierAdopt(_id)
 }
 
-// Returns an NSUniqueIDSpecifier object, initialized with the given arguments.
-//
-// NewUniqueIDSpecifierWithContainerClassDescriptionContainerSpecifierKeyUniqueID creates a new UniqueIDSpecifier.
+// NewUniqueIDSpecifierWithContainerClassDescriptionContainerSpecifierKeyUniqueID returns an NSUniqueIDSpecifier object, initialized with the given arguments.
 func NewUniqueIDSpecifierWithContainerClassDescriptionContainerSpecifierKeyUniqueID(classDesc *ScriptClassDescription, container *ScriptObjectSpecifier, property string, uniqueID obj.Object) *UniqueIDSpecifier {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUniqueIDSpecifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:uniqueID:"), objref.IDOf(classDesc), objref.IDOf(container), purego.NSString(property), objref.IDOf(uniqueID))
 	return uniqueIDSpecifierAdopt(_id)
 }
 
-// Returns the ID encapsulated by the receiver.
-//
-// WithUniqueID sets uniqueID and returns the receiver so calls can be chained.
+// WithUniqueID returns the ID encapsulated by the receiver.
 func (x *UniqueIDSpecifier) WithUniqueID(uniqueID obj.Object) *UniqueIDSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniqueID:"), objref.IDOf(uniqueID))
 	return x
 }
 
-// Sets the receiver’s child reference.
-//
-// WithChildSpecifier sets childSpecifier and returns the receiver so calls can be chained.
+// WithChildSpecifier sets the receiver’s child reference.
 func (x *UniqueIDSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *UniqueIDSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildSpecifier:"), objref.IDOf(childSpecifier))
 	return x
 }
 
-// Sets the container specifier of the receiver.
-//
-// WithContainerSpecifier sets containerSpecifier and returns the receiver so calls can be chained.
+// WithContainerSpecifier sets the container specifier of the receiver.
 func (x *UniqueIDSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *UniqueIDSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerSpecifier:"), objref.IDOf(containerSpecifier))
 	return x
 }
 
-// Sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
-//
-// WithContainerIsObjectBeingTested sets containerIsObjectBeingTested and returns the receiver so calls can be chained.
+// WithContainerIsObjectBeingTested sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
 func (x *UniqueIDSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *UniqueIDSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerIsObjectBeingTested:"), containerIsObjectBeingTested)
 	return x
 }
 
-// Sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
-//
-// WithContainerIsRangeContainerObject sets containerIsRangeContainerObject and returns the receiver so calls can be chained.
+// WithContainerIsRangeContainerObject sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
 func (x *UniqueIDSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *UniqueIDSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerIsRangeContainerObject:"), containerIsRangeContainerObject)
 	return x
 }
 
-// Sets the key of the receiver.
-//
-// WithKey sets key and returns the receiver so calls can be chained.
+// WithKey sets the key of the receiver.
 func (x *UniqueIDSpecifier) WithKey(key StringProvider) *UniqueIDSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), objref.IDOf(key))
 	return x
 }
 
-// Sets the class description of the receiver’s container specifier to a given specifier.
-//
-// WithContainerClassDescription sets containerClassDescription and returns the receiver so calls can be chained.
+// WithContainerClassDescription sets the class description of the receiver’s container specifier to a given specifier.
 func (x *UniqueIDSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *UniqueIDSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerClassDescription:"), objref.IDOf(containerClassDescription))
 	return x
 }
 
-// Sets the value of the evaluation error.
-//
-// WithEvaluationErrorNumber sets evaluationErrorNumber and returns the receiver so calls can be chained.
+// WithEvaluationErrorNumber sets the value of the evaluation error.
 func (x *UniqueIDSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *UniqueIDSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEvaluationErrorNumber:"), evaluationErrorNumber)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UniqueIDSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *UniqueIDSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// UniqueID wraps the corresponding Objective-C method.
 func (x *UniqueIDSpecifier) UniqueID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniqueID"))
 	return obj.Wrap(_r)
 }
 
+// SetUniqueID wraps the corresponding Objective-C method.
 func (x *UniqueIDSpecifier) SetUniqueID(uniqueID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniqueID:"), objref.IDOf(uniqueID))
 }
@@ -170,3 +142,5 @@ type UniqueIDSpecifierable interface {
 }
 
 var _ UniqueIDSpecifierable = (*UniqueIDSpecifier)(nil)
+
+var _ ScriptObjectSpecifierProvider = (*UniqueIDSpecifier)(nil)

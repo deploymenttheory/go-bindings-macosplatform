@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A utility object that computes directions and travel-time information based on the route information you provide.
-//
 // Directions is an idiomatic wrapper over the Objective-C class MKDirections.
+//
+// A utility object that computes directions and travel-time information based on the route information you provide.
 type Directions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DirectionsFromID(id objc.ID) *Directions {
 	if id == 0 {
 		return nil
 	}
-	x := &Directions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Directions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func directionsAdopt(id objc.ID) *Directions {
 	if id == 0 {
 		return nil
 	}
-	x := &Directions{Handle: objref.Wrap(id)}
+	x := &Directions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,20 +60,25 @@ func (x *Directions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates and returns a directions object using the specified request.
-//
-// NewDirectionsWithRequest creates a new Directions.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Directions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDirectionsWithRequest creates and returns a directions object using the specified request.
 func NewDirectionsWithRequest(request *DirectionsRequest) *Directions {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKDirections")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequest:"), objref.IDOf(request))
 	return directionsAdopt(_id)
 }
 
-// Cancels a pending request.
+// Cancel cancels a pending request.
 func (x *Directions) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
+// IsCalculating wraps the corresponding Objective-C method.
 func (x *Directions) IsCalculating() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCalculating"))
 	return _r

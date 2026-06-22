@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An agent that operates in a two-dimensional space.
-//
 // Agent2D is an idiomatic wrapper over the Objective-C class GKAgent2D.
+//
+// It embeds [Agent], promoting that type's methods.
+//
+// An agent that operates in a two-dimensional space.
 type Agent2D struct {
-	objref.Handle
+	Agent
 }
 
 // Agent2DFromID adopts an existing Objective-C object as a Agent2D
@@ -25,7 +26,8 @@ func Agent2DFromID(id objc.ID) *Agent2D {
 	if id == 0 {
 		return nil
 	}
-	x := &Agent2D{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Agent2D{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func agent2DAdopt(id objc.ID) *Agent2D {
 	if id == 0 {
 		return nil
 	}
-	x := &Agent2D{Handle: objref.Wrap(id)}
+	x := &Agent2D{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *Agent2D) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Agent2D) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Agent2D) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAgent2D creates a new Agent2D.
@@ -64,68 +52,55 @@ func NewAgent2D() *Agent2D {
 	return agent2DAdopt(_id)
 }
 
-// The rotation of the agent around the z-axis.
-//
-// WithRotation sets rotation and returns the receiver so calls can be chained.
+// WithRotation the rotation of the agent around the z-axis.
 func (x *Agent2D) WithRotation(rotation float32) *Agent2D {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotation:"), rotation)
 	return x
 }
 
-// A weighted collection of goals that influence the agent’s movement.
-//
-// WithBehavior sets behavior and returns the receiver so calls can be chained.
+// WithBehavior a weighted collection of goals that influence the agent’s movement.
 func (x *Agent2D) WithBehavior(behavior BehaviorProvider) *Agent2D {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBehavior:"), objref.IDOf(behavior))
 	return x
 }
 
-// The resistance of the agent to changes in speed or direction.
-//
-// WithMass sets mass and returns the receiver so calls can be chained.
+// WithMass the resistance of the agent to changes in speed or direction.
 func (x *Agent2D) WithMass(mass float32) *Agent2D {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMass:"), mass)
 	return x
 }
 
-// The agent’s radius.
-//
-// WithRadius sets radius and returns the receiver so calls can be chained.
+// WithRadius the agent’s radius.
 func (x *Agent2D) WithRadius(radius float32) *Agent2D {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 	return x
 }
 
-// The agent’s current forward speed, in units per second.
-//
-// WithSpeed sets speed and returns the receiver so calls can be chained.
+// WithSpeed the agent’s current forward speed, in units per second.
 func (x *Agent2D) WithSpeed(speed float32) *Agent2D {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
-// The upper limit to changes in the agent’s speed or direction.
-//
-// WithMaxAcceleration sets maxAcceleration and returns the receiver so calls can be chained.
+// WithMaxAcceleration the upper limit to changes in the agent’s speed or direction.
 func (x *Agent2D) WithMaxAcceleration(maxAcceleration float32) *Agent2D {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxAcceleration:"), maxAcceleration)
 	return x
 }
 
-// The agent’s maximum forward speed, in units per second.
-//
-// WithMaxSpeed sets maxSpeed and returns the receiver so calls can be chained.
+// WithMaxSpeed the agent’s maximum forward speed, in units per second.
 func (x *Agent2D) WithMaxSpeed(maxSpeed float32) *Agent2D {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSpeed:"), maxSpeed)
 	return x
 }
 
-// Z rotation of the agent on the logical XY plane
+// Rotation z rotation of the agent on the logical XY plane
 func (x *Agent2D) Rotation() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rotation"))
 	return _r
 }
 
+// SetRotation wraps the corresponding Objective-C method.
 func (x *Agent2D) SetRotation(rotation float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotation:"), rotation)
 }
@@ -145,3 +120,7 @@ type Agent2Dable interface {
 }
 
 var _ Agent2Dable = (*Agent2D)(nil)
+
+var _ AgentProvider = (*Agent2D)(nil)
+
+var _ ComponentProvider = (*Agent2D)(nil)

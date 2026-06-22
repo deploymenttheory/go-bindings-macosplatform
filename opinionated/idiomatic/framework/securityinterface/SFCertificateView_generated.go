@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view that displays the contents of a certificate, with options to display certificate details, display trust settings, and allow users to edit a certificate’s trust settings.
-//
 // CertificateView is an idiomatic wrapper over the Objective-C class SFCertificateView.
+//
+// A view that displays the contents of a certificate, with options to display certificate details, display trust settings, and allow users to edit a certificate’s trust settings.
 type CertificateView struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CertificateViewFromID(id objc.ID) *CertificateView {
 	if id == 0 {
 		return nil
 	}
-	x := &CertificateView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CertificateView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func certificateViewAdopt(id objc.ID) *CertificateView {
 	if id == 0 {
 		return nil
 	}
-	x := &CertificateView{Handle: objref.Wrap(id)}
+	x := &CertificateView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,89 +60,95 @@ func (x *CertificateView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CertificateView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCertificateView creates a new CertificateView.
 func NewCertificateView() *CertificateView {
 	_id := objc.Send[objc.ID](objc.ID(_class("SFCertificateView")), objc.RegisterName("new"))
 	return certificateViewAdopt(_id)
 }
 
-// Specifies the certificate that’s displayed in the view.
+// SetCertificate specifies the certificate that’s displayed in the view.
 func (x *CertificateView) SetCertificate(certificate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCertificate:"), objref.IDOf(certificate))
 }
 
-// Returns the certificate currently displayed in the view.
+// Certificate returns the certificate currently displayed in the view.
 func (x *CertificateView) Certificate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificate"))
 	return obj.Wrap(_r)
 }
 
-// Specifies the policies to use when evaluating this certificate’s status.
+// SetPolicies specifies the policies to use when evaluating this certificate’s status.
 func (x *CertificateView) SetPolicies(policies obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolicies:"), objref.IDOf(policies))
 }
 
-// Returns an array of policies used to evaluate the status of the displayed certificate.
+// Policies returns an array of policies used to evaluate the status of the displayed certificate.
 func (x *CertificateView) Policies() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("policies"))
 	return obj.Wrap(_r)
 }
 
-// Specifies whether the user can edit the certificate’s trust settings.
+// SetEditableTrust specifies whether the user can edit the certificate’s trust settings.
 func (x *CertificateView) SetEditableTrust(editable bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditableTrust:"), editable)
 }
 
-// Indicates if the view allows the user to edit the certificate’s trust.
+// IsEditable indicates if the view allows the user to edit the certificate’s trust.
 func (x *CertificateView) IsEditable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEditable"))
 	return _r
 }
 
-// Specifies whether the user can see the certificate’s trust settings.
+// SetDisplayTrust specifies whether the user can see the certificate’s trust settings.
 func (x *CertificateView) SetDisplayTrust(display bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayTrust:"), display)
 }
 
-// Indicates if the view currently shows the certificate’s trust settings.
+// IsTrustDisplayed indicates if the view currently shows the certificate’s trust settings.
 func (x *CertificateView) IsTrustDisplayed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTrustDisplayed"))
 	return _r
 }
 
-// Saves the user’s current trust settings for the displayed certificate.
+// SaveTrustSettings saves the user’s current trust settings for the displayed certificate.
 func (x *CertificateView) SaveTrustSettings() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveTrustSettings"))
 }
 
-// Specifies whether the user can see the certificate details.
+// SetDisplayDetails specifies whether the user can see the certificate details.
 func (x *CertificateView) SetDisplayDetails(display bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayDetails:"), display)
 }
 
-// Indicates if the view currently shows the certificate’s details.
+// DetailsDisplayed indicates if the view currently shows the certificate’s details.
 func (x *CertificateView) DetailsDisplayed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("detailsDisplayed"))
 	return _r
 }
 
-// Sets whether the certificate details subview is disclosed.
+// SetDetailsDisclosed sets whether the certificate details subview is disclosed.
 func (x *CertificateView) SetDetailsDisclosed(disclosed bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetailsDisclosed:"), disclosed)
 }
 
-// Returns whether the view currently shows the certificate’s details.
+// DetailsDisclosed returns whether the view currently shows the certificate’s details.
 func (x *CertificateView) DetailsDisclosed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("detailsDisclosed"))
 	return _r
 }
 
-// Specifies whether the trust policy settings subview is disclosed.
+// SetPoliciesDisclosed specifies whether the trust policy settings subview is disclosed.
 func (x *CertificateView) SetPoliciesDisclosed(disclosed bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPoliciesDisclosed:"), disclosed)
 }
 
-// Returns whether the trust policy subview is disclosed.
+// PoliciesDisclosed returns whether the trust policy subview is disclosed.
 func (x *CertificateView) PoliciesDisclosed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("policiesDisclosed"))
 	return _r

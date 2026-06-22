@@ -23,7 +23,8 @@ func MTRTimeSynchronizationClusterDSTStatusEventFromID(id objc.ID) *MTRTimeSynch
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTimeSynchronizationClusterDSTStatusEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRTimeSynchronizationClusterDSTStatusEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRTimeSynchronizationClusterDSTStatusEventAdopt(id objc.ID) *MTRTimeSynchr
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTimeSynchronizationClusterDSTStatusEvent{Handle: objref.Wrap(id)}
+	x := &MTRTimeSynchronizationClusterDSTStatusEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTRTimeSynchronizationClusterDSTStatusEvent) IsKind(className string) b
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRTimeSynchronizationClusterDSTStatusEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRTimeSynchronizationClusterDSTStatusEvent creates a new MTRTimeSynchronizationClusterDSTStatusEvent.
 func NewMTRTimeSynchronizationClusterDSTStatusEvent() *MTRTimeSynchronizationClusterDSTStatusEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRTimeSynchronizationClusterDSTStatusEvent")), objc.RegisterName("new"))
 	return mTRTimeSynchronizationClusterDSTStatusEventAdopt(_id)
 }
 
-// WithDstOffsetActive sets dstOffsetActive and returns the receiver so calls can be chained.
+// WithDstOffsetActive sets the property and returns the receiver so calls can be chained.
 func (x *MTRTimeSynchronizationClusterDSTStatusEvent) WithDstOffsetActive(dstOffsetActive obj.Object) *MTRTimeSynchronizationClusterDSTStatusEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDstOffsetActive:"), objref.IDOf(dstOffsetActive))
 	return x
 }
 
+// DstOffsetActive wraps the corresponding Objective-C method.
 func (x *MTRTimeSynchronizationClusterDSTStatusEvent) DstOffsetActive() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dstOffsetActive"))
 	return obj.Wrap(_r)
 }
 
+// SetDstOffsetActive wraps the corresponding Objective-C method.
 func (x *MTRTimeSynchronizationClusterDSTStatusEvent) SetDstOffsetActive(dstOffsetActive obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDstOffsetActive:"), objref.IDOf(dstOffsetActive))
 }

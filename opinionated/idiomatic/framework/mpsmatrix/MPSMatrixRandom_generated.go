@@ -13,6 +13,8 @@ import (
 )
 
 // MatrixRandom is an idiomatic wrapper over the Objective-C class MPSMatrixRandom.
+//
+// MatrixRandom is an abstract base — you do not construct it directly. Construct one of [MatrixRandomMTGP32], [MatrixRandomPhilox] and pass it where a MatrixRandom is accepted.
 type MatrixRandom struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MatrixRandomFromID(id objc.ID) *MatrixRandom {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixRandom{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatrixRandom{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func matrixRandomAdopt(id objc.ID) *MatrixRandom {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixRandom{Handle: objref.Wrap(id)}
+	x := &MatrixRandom{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,50 +60,48 @@ func (x *MatrixRandom) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMatrixRandom creates a new MatrixRandom.
-func NewMatrixRandom() *MatrixRandom {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixRandom")), objc.RegisterName("new"))
-	return matrixRandomAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MatrixRandom) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The starting index in the destination batch.
-//
-// WithBatchStart sets batchStart and returns the receiver so calls can be chained.
+// WithBatchStart the starting index in the destination batch.
 func (x *MatrixRandom) WithBatchStart(batchStart int) *MatrixRandom {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 	return x
 }
 
-// The size of the batch to process.
-//
-// WithBatchSize sets batchSize and returns the receiver so calls can be chained.
+// WithBatchSize the size of the batch to process.
 func (x *MatrixRandom) WithBatchSize(batchSize int) *MatrixRandom {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 	return x
 }
 
-// The distribution from which to generate random values. Default is MPSMatrixRandomDistributionDefault
+// DistributionType the distribution from which to generate random values. Default is MPSMatrixRandomDistributionDefault
 func (x *MatrixRandom) DistributionType() MatrixRandomDistribution {
 	_r := objc.Send[MatrixRandomDistribution](objref.IDOf(x), objc.RegisterName("distributionType"))
 	return _r
 }
 
-// The starting index in the destination batch.
+// BatchStart the starting index in the destination batch.
 func (x *MatrixRandom) BatchStart() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("batchStart"))
 	return _r
 }
 
+// SetBatchStart wraps the corresponding Objective-C method.
 func (x *MatrixRandom) SetBatchStart(batchStart int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 }
 
-// The size of the batch to process.
+// BatchSize the size of the batch to process.
 func (x *MatrixRandom) BatchSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("batchSize"))
 	return _r
 }
 
+// SetBatchSize wraps the corresponding Objective-C method.
 func (x *MatrixRandom) SetBatchSize(batchSize int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 }
@@ -117,3 +119,10 @@ type MatrixRandomable interface {
 }
 
 var _ MatrixRandomable = (*MatrixRandom)(nil)
+
+// isMatrixRandom marks MatrixRandom — and, by embedding promotion, its
+// subclasses — as a member of the MatrixRandom hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MatrixRandom) isMatrixRandom() {}
+
+var _ MatrixRandomProvider = (*MatrixRandom)(nil)

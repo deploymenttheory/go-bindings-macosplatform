@@ -6,17 +6,19 @@ package virtualization
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The configuration for a Mac graphics device.
-//
 // MacGraphicsDisplayConfiguration is an idiomatic wrapper over the Objective-C class VZMacGraphicsDisplayConfiguration.
+//
+// It embeds [GraphicsDisplayConfiguration], promoting that type's methods.
+//
+// The configuration for a Mac graphics device.
 type MacGraphicsDisplayConfiguration struct {
-	objref.Handle
+	GraphicsDisplayConfiguration
 }
 
 // MacGraphicsDisplayConfigurationFromID adopts an existing Objective-C object as a MacGraphicsDisplayConfiguration
@@ -25,7 +27,8 @@ func MacGraphicsDisplayConfigurationFromID(id objc.ID) *MacGraphicsDisplayConfig
 	if id == 0 {
 		return nil
 	}
-	x := &MacGraphicsDisplayConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MacGraphicsDisplayConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,85 +41,73 @@ func macGraphicsDisplayConfigurationAdopt(id objc.ID) *MacGraphicsDisplayConfigu
 	if id == 0 {
 		return nil
 	}
-	x := &MacGraphicsDisplayConfiguration{Handle: objref.Wrap(id)}
+	x := &MacGraphicsDisplayConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MacGraphicsDisplayConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MacGraphicsDisplayConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MacGraphicsDisplayConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Create a display configuration with the specified pixel dimensions and pixel density.
-//
-// NewMacGraphicsDisplayConfigurationWithWidthInPixelsHeightInPixelsPixelsPerInch creates a new MacGraphicsDisplayConfiguration.
+// NewMacGraphicsDisplayConfigurationWithWidthInPixelsHeightInPixelsPixelsPerInch create a display configuration with the specified pixel dimensions and pixel density.
 func NewMacGraphicsDisplayConfigurationWithWidthInPixelsHeightInPixelsPixelsPerInch(widthInPixels int, heightInPixels int, pixelsPerInch int) *MacGraphicsDisplayConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMacGraphicsDisplayConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWidthInPixels:heightInPixels:pixelsPerInch:"), widthInPixels, heightInPixels, pixelsPerInch)
 	return macGraphicsDisplayConfigurationAdopt(_id)
 }
 
-// The width of the display, in pixels.
-//
-// WithWidthInPixels sets widthInPixels and returns the receiver so calls can be chained.
+// NewMacGraphicsDisplayConfigurationForScreenSizeInPoints create a display configuration suitable for showing on the specified screen.
+func NewMacGraphicsDisplayConfigurationForScreenSizeInPoints(screen obj.Object, sizeInPoints corefoundation.CGSize) *MacGraphicsDisplayConfiguration {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMacGraphicsDisplayConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForScreen:sizeInPoints:"), objref.IDOf(screen), sizeInPoints)
+	return macGraphicsDisplayConfigurationAdopt(_id)
+}
+
+// WithWidthInPixels the width of the display, in pixels.
 func (x *MacGraphicsDisplayConfiguration) WithWidthInPixels(widthInPixels int) *MacGraphicsDisplayConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidthInPixels:"), widthInPixels)
 	return x
 }
 
-// The height of the display, in pixels.
-//
-// WithHeightInPixels sets heightInPixels and returns the receiver so calls can be chained.
+// WithHeightInPixels the height of the display, in pixels.
 func (x *MacGraphicsDisplayConfiguration) WithHeightInPixels(heightInPixels int) *MacGraphicsDisplayConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightInPixels:"), heightInPixels)
 	return x
 }
 
-// The pixel density in pixels per inch.
-//
-// WithPixelsPerInch sets pixelsPerInch and returns the receiver so calls can be chained.
+// WithPixelsPerInch the pixel density in pixels per inch.
 func (x *MacGraphicsDisplayConfiguration) WithPixelsPerInch(pixelsPerInch int) *MacGraphicsDisplayConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsPerInch:"), pixelsPerInch)
 	return x
 }
 
-// The width of the display, in pixels.
+// WidthInPixels the width of the display, in pixels.
 func (x *MacGraphicsDisplayConfiguration) WidthInPixels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("widthInPixels"))
 	return _r
 }
 
+// SetWidthInPixels wraps the corresponding Objective-C method.
 func (x *MacGraphicsDisplayConfiguration) SetWidthInPixels(widthInPixels int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidthInPixels:"), widthInPixels)
 }
 
-// The height of the display, in pixels.
+// HeightInPixels the height of the display, in pixels.
 func (x *MacGraphicsDisplayConfiguration) HeightInPixels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("heightInPixels"))
 	return _r
 }
 
+// SetHeightInPixels wraps the corresponding Objective-C method.
 func (x *MacGraphicsDisplayConfiguration) SetHeightInPixels(heightInPixels int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightInPixels:"), heightInPixels)
 }
 
-// The pixel density as a number of pixels per inch.
+// PixelsPerInch the pixel density as a number of pixels per inch.
 func (x *MacGraphicsDisplayConfiguration) PixelsPerInch() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelsPerInch"))
 	return _r
 }
 
+// SetPixelsPerInch wraps the corresponding Objective-C method.
 func (x *MacGraphicsDisplayConfiguration) SetPixelsPerInch(pixelsPerInch int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsPerInch:"), pixelsPerInch)
 }
@@ -136,3 +127,5 @@ type MacGraphicsDisplayConfigurationable interface {
 }
 
 var _ MacGraphicsDisplayConfigurationable = (*MacGraphicsDisplayConfiguration)(nil)
+
+var _ GraphicsDisplayConfigurationProvider = (*MacGraphicsDisplayConfiguration)(nil)

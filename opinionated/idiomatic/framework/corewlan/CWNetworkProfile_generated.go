@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Encapsulates an immutable network profile entry.
-//
 // NetworkProfile is an idiomatic wrapper over the Objective-C class CWNetworkProfile.
+//
+// NetworkProfile is an abstract base — you do not construct it directly. Construct one of [MutableNetworkProfile] and pass it where a NetworkProfile is accepted.
+//
+// Encapsulates an immutable network profile entry.
 type NetworkProfile struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func NetworkProfileFromID(id objc.ID) *NetworkProfile {
 	if id == 0 {
 		return nil
 	}
-	x := &NetworkProfile{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NetworkProfile{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func networkProfileAdopt(id objc.ID) *NetworkProfile {
 	if id == 0 {
 		return nil
 	}
-	x := &NetworkProfile{Handle: objref.Wrap(id)}
+	x := &NetworkProfile{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +62,26 @@ func (x *NetworkProfile) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewNetworkProfile creates a new NetworkProfile.
-func NewNetworkProfile() *NetworkProfile {
-	_id := objc.Send[objc.ID](objc.ID(_class("CWNetworkProfile")), objc.RegisterName("new"))
-	return networkProfileAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NetworkProfile) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Creates and returns a CWNetworkProfile object initialized with the given CWNetworkProfile object.
-//
-// NewNetworkProfileWithNetworkProfile creates a new NetworkProfile.
+// NewNetworkProfileWithNetworkProfile creates and returns a CWNetworkProfile object initialized with the given CWNetworkProfile object.
 func NewNetworkProfileWithNetworkProfile(networkProfile *NetworkProfile) *NetworkProfile {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CWNetworkProfile")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNetworkProfile:"), objref.IDOf(networkProfile))
 	return networkProfileAdopt(_id)
 }
 
-// Determine CWNetworkProfile object equality.
+// IsEqualToNetworkProfile determine CWNetworkProfile object equality.
 func (x *NetworkProfile) IsEqualToNetworkProfile(networkProfile *NetworkProfile) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToNetworkProfile:"), objref.IDOf(networkProfile))
 	return _r
 }
 
-// Returns the service set identifier (SSID) for the Wi-Fi network profile, encoded as a string. Returns nil if the SSID can not be encoded as a valid UTF-8 or WinLatin1 string.
+// Ssid returns the service set identifier (SSID) for the Wi-Fi network profile, encoded as a string. Returns nil if the SSID can not be encoded as a valid UTF-8 or WinLatin1 string.
 func (x *NetworkProfile) Ssid() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ssid"))
 	if _r == 0 {
@@ -88,13 +90,13 @@ func (x *NetworkProfile) Ssid() string {
 	return purego.GoString(_r)
 }
 
-// Returns the service set identifier (SSID) for the Wi-Fi network profile, encapsulated in an NSData object. The SSID is 1-32 octets.
+// SsidData returns the service set identifier (SSID) for the Wi-Fi network profile, encapsulated in an NSData object. The SSID is 1-32 octets.
 func (x *NetworkProfile) SsidData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ssidData"))
 	return obj.Wrap(_r)
 }
 
-// Returns the security type of the Wi-Fi network profile.
+// Security returns the security type of the Wi-Fi network profile.
 func (x *NetworkProfile) Security() Security {
 	_r := objc.Send[Security](objref.IDOf(x), objc.RegisterName("security"))
 	return _r
@@ -110,3 +112,10 @@ type NetworkProfileable interface {
 }
 
 var _ NetworkProfileable = (*NetworkProfile)(nil)
+
+// isNetworkProfile marks NetworkProfile — and, by embedding promotion, its
+// subclasses — as a member of the NetworkProfile hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NetworkProfile) isNetworkProfile() {}
+
+var _ NetworkProfileProvider = (*NetworkProfile)(nil)

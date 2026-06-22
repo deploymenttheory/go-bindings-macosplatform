@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that contains the Markdown formatting for blocks of text, like paragraphs, lists, code blocks, and parts of tables.
-//
 // PresentationIntent is an idiomatic wrapper over the Objective-C class NSPresentationIntent.
+//
+// A type that contains the Markdown formatting for blocks of text, like paragraphs, lists, code blocks, and parts of tables.
 type PresentationIntent struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PresentationIntentFromID(id objc.ID) *PresentationIntent {
 	if id == 0 {
 		return nil
 	}
-	x := &PresentationIntent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PresentationIntent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func presentationIntentAdopt(id objc.ID) *PresentationIntent {
 	if id == 0 {
 		return nil
 	}
-	x := &PresentationIntent{Handle: objref.Wrap(id)}
+	x := &PresentationIntent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,47 +60,55 @@ func (x *PresentationIntent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PresentationIntent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPresentationIntent creates a new PresentationIntent.
 func NewPresentationIntent() *PresentationIntent {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("new"))
 	return presentationIntentAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *PresentationIntent) WithScriptingProperties(scriptingProperties obj.Object) *PresentationIntent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Returns a Boolean value that indicates whether the current intent is equivalent to the specified intent.
+// IsEquivalentToPresentationIntent returns a Boolean value that indicates whether the current intent is equivalent to the specified intent.
 func (x *PresentationIntent) IsEquivalentToPresentationIntent(other *PresentationIntent) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEquivalentToPresentationIntent:"), objref.IDOf(other))
 	return _r
 }
 
+// IntentKind wraps the corresponding Objective-C method.
 func (x *PresentationIntent) IntentKind() PresentationIntentKind {
 	_r := objc.Send[PresentationIntentKind](objref.IDOf(x), objc.RegisterName("intentKind"))
 	return _r
 }
 
+// ParentIntent wraps the corresponding Objective-C method.
 func (x *PresentationIntent) ParentIntent() *PresentationIntent {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentIntent"))
 	return PresentationIntentFromID(_r)
 }
 
-// An integer value which uniquely identifies this intent in the document. Identity disambiguates attributes which apply to contiguous text -- for example, two headers in a row with the same level. It can also be used to track the location in an attributed string of a particular part of a document, even after mutation.
+// Identity an integer value which uniquely identifies this intent in the document. Identity disambiguates attributes which apply to contiguous text -- for example, two headers in a row with the same level. It can also be used to track the location in an attributed string of a particular part of a document, even after mutation.
 func (x *PresentationIntent) Identity() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("identity"))
 	return _r
 }
 
-// If the intent is not a list, this value is 0.
+// Ordinal if the intent is not a list, this value is 0.
 func (x *PresentationIntent) Ordinal() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("ordinal"))
 	return _r
 }
 
-// If the intent is not a table, this value is `nil`.
+// ColumnAlignments if the intent is not a table, this value is `nil`.
 //
 // ColumnAlignments returns the collection as a Go slice.
 func (x *PresentationIntent) ColumnAlignments() []*Number {
@@ -106,19 +116,19 @@ func (x *PresentationIntent) ColumnAlignments() []*Number {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Number { return NumberFromID(_id) })
 }
 
-// If the intent is not a table, this value is 0.
+// ColumnCount if the intent is not a table, this value is 0.
 func (x *PresentationIntent) ColumnCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columnCount"))
 	return _r
 }
 
-// If the intent is not a header, this value is 0.
+// HeaderLevel if the intent is not a header, this value is 0.
 func (x *PresentationIntent) HeaderLevel() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("headerLevel"))
 	return _r
 }
 
-// If the intent is not a code block, this value is `nil`.
+// LanguageHint if the intent is not a code block, this value is `nil`.
 func (x *PresentationIntent) LanguageHint() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageHint"))
 	if _r == 0 {
@@ -127,19 +137,19 @@ func (x *PresentationIntent) LanguageHint() string {
 	return purego.GoString(_r)
 }
 
-// The column to which this cell belongs (0-based). If the intent is not a cell, this value is 0.
+// Column the column to which this cell belongs (0-based). If the intent is not a cell, this value is 0.
 func (x *PresentationIntent) Column() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("column"))
 	return _r
 }
 
-// The row to which this cell belongs (0-based). If the intent is not a row, this value is 0. Header rows are always row 0. If the table has more rows, those start at row 1.
+// Row the row to which this cell belongs (0-based). If the intent is not a row, this value is 0. Header rows are always row 0. If the table has more rows, those start at row 1.
 func (x *PresentationIntent) Row() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("row"))
 	return _r
 }
 
-// The indentation level of this intent. Each nested list increases the indentation level by one; all elements within the same list (and not then nested into a child list intent) have the same indentation level. Text outside list intents has an indentation level of 0.
+// IndentationLevel the indentation level of this intent. Each nested list increases the indentation level by one; all elements within the same list (and not then nested into a child list intent) have the same indentation level. Text outside list intents has an indentation level of 0.
 func (x *PresentationIntent) IndentationLevel() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indentationLevel"))
 	return _r

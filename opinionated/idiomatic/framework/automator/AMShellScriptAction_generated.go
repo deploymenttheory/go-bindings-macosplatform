@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents Automator actions whose runtime behavior is driven by a shell script or by a Perl or Python script.
-//
 // ShellScriptAction is an idiomatic wrapper over the Objective-C class AMShellScriptAction.
+//
+// It embeds [BundleAction], promoting that type's methods.
+//
+// An object that represents Automator actions whose runtime behavior is driven by a shell script or by a Perl or Python script.
 type ShellScriptAction struct {
-	objref.Handle
+	BundleAction
 }
 
 // ShellScriptActionFromID adopts an existing Objective-C object as a ShellScriptAction
@@ -25,7 +26,8 @@ func ShellScriptActionFromID(id objc.ID) *ShellScriptAction {
 	if id == 0 {
 		return nil
 	}
-	x := &ShellScriptAction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ShellScriptAction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func shellScriptActionAdopt(id objc.ID) *ShellScriptAction {
 	if id == 0 {
 		return nil
 	}
-	x := &ShellScriptAction{Handle: objref.Wrap(id)}
+	x := &ShellScriptAction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ShellScriptAction) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ShellScriptAction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ShellScriptAction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewShellScriptAction creates a new ShellScriptAction.
@@ -64,27 +52,25 @@ func NewShellScriptAction() *ShellScriptAction {
 	return shellScriptActionAdopt(_id)
 }
 
-// The action’s parameters.
-//
-// WithParameters sets parameters and returns the receiver so calls can be chained.
+// WithParameters the action’s parameters.
 func (x *ShellScriptAction) WithParameters(parameters obj.Object) *ShellScriptAction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
 	return x
 }
 
-// A float value between 0 and 1, which indicates how far along the action is while processing.
-//
-// WithProgressValue sets progressValue and returns the receiver so calls can be chained.
+// WithProgressValue a float value between 0 and 1, which indicates how far along the action is while processing.
 func (x *ShellScriptAction) WithProgressValue(progressValue float64) *ShellScriptAction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressValue:"), progressValue)
 	return x
 }
 
+// RemapLineEndings wraps the corresponding Objective-C method.
 func (x *ShellScriptAction) RemapLineEndings() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("remapLineEndings"))
 	return _r
 }
 
+// InputFieldSeparator wraps the corresponding Objective-C method.
 func (x *ShellScriptAction) InputFieldSeparator() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputFieldSeparator"))
 	if _r == 0 {
@@ -93,6 +79,7 @@ func (x *ShellScriptAction) InputFieldSeparator() string {
 	return purego.GoString(_r)
 }
 
+// OutputFieldSeparator wraps the corresponding Objective-C method.
 func (x *ShellScriptAction) OutputFieldSeparator() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputFieldSeparator"))
 	if _r == 0 {
@@ -112,3 +99,7 @@ type ShellScriptActionable interface {
 }
 
 var _ ShellScriptActionable = (*ShellScriptAction)(nil)
+
+var _ BundleActionProvider = (*ShellScriptAction)(nil)
+
+var _ ActionProvider = (*ShellScriptAction)(nil)

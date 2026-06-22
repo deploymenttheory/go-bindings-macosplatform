@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // CNNConvolutionGradientState is an idiomatic wrapper over the Objective-C class MPSCNNConvolutionGradientState.
+//
+// CNNConvolutionGradientState is an abstract base — you do not construct it directly. Construct one of [CNNConvolutionTransposeGradientState] and pass it where a CNNConvolutionGradientState is accepted.
 type CNNConvolutionGradientState struct {
-	objref.Handle
+	NNGradientState
 }
 
 // CNNConvolutionGradientStateFromID adopts an existing Objective-C object as a CNNConvolutionGradientState
@@ -23,7 +24,8 @@ func CNNConvolutionGradientStateFromID(id objc.ID) *CNNConvolutionGradientState 
 	if id == 0 {
 		return nil
 	}
-	x := &CNNConvolutionGradientState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNConvolutionGradientState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,39 +38,19 @@ func cNNConvolutionGradientStateAdopt(id objc.ID) *CNNConvolutionGradientState {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNConvolutionGradientState{Handle: objref.Wrap(id)}
+	x := &CNNConvolutionGradientState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNConvolutionGradientState) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNConvolutionGradientState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNConvolutionGradientState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewCNNConvolutionGradientState creates a new CNNConvolutionGradientState.
-func NewCNNConvolutionGradientState() *CNNConvolutionGradientState {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNConvolutionGradientState")), objc.RegisterName("new"))
-	return cNNConvolutionGradientStateAdopt(_id)
-}
-
-// The convolution filter that produced the state. For child MPSCNNConvolutionTrasposeGradientState object, convolution below refers to MPSCNNConvolution object that produced MPSCNNConvolutionGradientState object which was used to create MPSCNNConvolutionTransposeGradientState object. See resultStateForSourceImage:sourceStates method of MPSCNNConvolutionTranspose below.
+// Convolution the convolution filter that produced the state. For child MPSCNNConvolutionTrasposeGradientState object, convolution below refers to MPSCNNConvolution object that produced MPSCNNConvolutionGradientState object which was used to create MPSCNNConvolutionTransposeGradientState object. See resultStateForSourceImage:sourceStates method of MPSCNNConvolutionTranspose below.
 func (x *CNNConvolutionGradientState) Convolution() *CNNConvolution {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolution"))
 	return CNNConvolutionFromID(_r)
 }
 
-// Layout of gradient with respect to weights in gradientForWeights buffer. Currently only MPSCNNConvolutionWeightsLayoutOHWI is supported.
+// GradientForWeightsLayout layout of gradient with respect to weights in gradientForWeights buffer. Currently only MPSCNNConvolutionWeightsLayoutOHWI is supported.
 func (x *CNNConvolutionGradientState) GradientForWeightsLayout() CNNConvolutionWeightsLayout {
 	_r := objc.Send[CNNConvolutionWeightsLayout](objref.IDOf(x), objc.RegisterName("gradientForWeightsLayout"))
 	return _r
@@ -82,3 +64,12 @@ type CNNConvolutionGradientStateable interface {
 }
 
 var _ CNNConvolutionGradientStateable = (*CNNConvolutionGradientState)(nil)
+
+// isCNNConvolutionGradientState marks CNNConvolutionGradientState — and, by embedding promotion, its
+// subclasses — as a member of the CNNConvolutionGradientState hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CNNConvolutionGradientState) isCNNConvolutionGradientState() {}
+
+var _ CNNConvolutionGradientStateProvider = (*CNNConvolutionGradientState)(nil)
+
+var _ NNGradientStateProvider = (*CNNConvolutionGradientState)(nil)

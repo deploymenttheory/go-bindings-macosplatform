@@ -6,15 +6,18 @@ package cinematic
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides Cinematic-specific information about an asset, including its tracks.
-//
 // AssetInfo is an idiomatic wrapper over the Objective-C class CNAssetInfo.
+//
+// AssetInfo is an abstract base — you do not construct it directly. Construct one of [CompositionInfo] and pass it where a AssetInfo is accepted.
+//
+// An object that provides Cinematic-specific information about an asset, including its tracks.
 type AssetInfo struct {
 	objref.Handle
 }
@@ -25,7 +28,8 @@ func AssetInfoFromID(id objc.ID) *AssetInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +42,8 @@ func assetInfoAdopt(id objc.ID) *AssetInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetInfo{Handle: objref.Wrap(id)}
+	x := &AssetInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,45 +63,69 @@ func (x *AssetInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewAssetInfo creates a new AssetInfo.
-func NewAssetInfo() *AssetInfo {
-	_id := objc.Send[objc.ID](objc.ID(_class("CNAssetInfo")), objc.RegisterName("new"))
-	return assetInfoAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetInfo) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// Asset wraps the corresponding Objective-C method.
 func (x *AssetInfo) Asset() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("asset"))
 	return obj.Wrap(_r)
 }
 
+// AllCinematicTracks wraps the corresponding Objective-C method.
+//
 // AllCinematicTracks returns the collection as a Go slice.
 func (x *AssetInfo) AllCinematicTracks() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allCinematicTracks"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// CinematicVideoTrack wraps the corresponding Objective-C method.
 func (x *AssetInfo) CinematicVideoTrack() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cinematicVideoTrack"))
 	return obj.Wrap(_r)
 }
 
+// CinematicDisparityTrack wraps the corresponding Objective-C method.
 func (x *AssetInfo) CinematicDisparityTrack() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cinematicDisparityTrack"))
 	return obj.Wrap(_r)
 }
 
+// CinematicMetadataTrack wraps the corresponding Objective-C method.
 func (x *AssetInfo) CinematicMetadataTrack() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cinematicMetadataTrack"))
 	return obj.Wrap(_r)
 }
 
-// Track to be used for frame timing
+// NaturalSize natural size at which cinematic video would be rendered
+func (x *AssetInfo) NaturalSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("naturalSize"))
+	return _r
+}
+
+// PreferredSize natural size at which cinematic video would be displayed. Same as naturalSize with preferredTransform applied.
+func (x *AssetInfo) PreferredSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("preferredSize"))
+	return _r
+}
+
+// PreferredTransform the preferred transform of the rendered image for display purposes. Always the identity transform or a multiple of a 90º rotation with no scaling.
+func (x *AssetInfo) PreferredTransform() corefoundation.CGAffineTransform {
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("preferredTransform"))
+	return _r
+}
+
+// FrameTimingTrack track to be used for frame timing
 func (x *AssetInfo) FrameTimingTrack() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frameTimingTrack"))
 	return obj.Wrap(_r)
 }
 
-// Tracks required to construct AVAssetReaderVideoCompositionOutput.
+// VideoCompositionTracks tracks required to construct AVAssetReaderVideoCompositionOutput.
 //
 // VideoCompositionTracks returns the collection as a Go slice.
 func (x *AssetInfo) VideoCompositionTracks() []obj.Object {
@@ -104,7 +133,7 @@ func (x *AssetInfo) VideoCompositionTracks() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Source video track IDs required to implement AVVideoCompositionInstruction protocol
+// VideoCompositionTrackIDs source video track IDs required to implement AVVideoCompositionInstruction protocol
 //
 // VideoCompositionTrackIDs returns the collection as a Go slice.
 func (x *AssetInfo) VideoCompositionTrackIDs() []obj.Object {
@@ -112,7 +141,7 @@ func (x *AssetInfo) VideoCompositionTrackIDs() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Source metadata track IDs required to implement AVVideoCompositionInstruction protocol
+// SampleDataTrackIDs source metadata track IDs required to implement AVVideoCompositionInstruction protocol
 //
 // SampleDataTrackIDs returns the collection as a Go slice.
 func (x *AssetInfo) SampleDataTrackIDs() []obj.Object {
@@ -128,6 +157,9 @@ type AssetInfoable interface {
 	CinematicVideoTrack() obj.Object
 	CinematicDisparityTrack() obj.Object
 	CinematicMetadataTrack() obj.Object
+	NaturalSize() corefoundation.CGSize
+	PreferredSize() corefoundation.CGSize
+	PreferredTransform() corefoundation.CGAffineTransform
 	FrameTimingTrack() obj.Object
 	VideoCompositionTracks() []obj.Object
 	VideoCompositionTrackIDs() []obj.Object
@@ -135,3 +167,10 @@ type AssetInfoable interface {
 }
 
 var _ AssetInfoable = (*AssetInfo)(nil)
+
+// isAssetInfo marks AssetInfo — and, by embedding promotion, its
+// subclasses — as a member of the AssetInfo hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AssetInfo) isAssetInfo() {}
+
+var _ AssetInfoProvider = (*AssetInfo)(nil)

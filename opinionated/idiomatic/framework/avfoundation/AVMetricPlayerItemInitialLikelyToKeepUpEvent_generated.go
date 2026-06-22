@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event that represents the initial state for whether playback is likely to continue without stalling.
-//
 // MetricPlayerItemInitialLikelyToKeepUpEvent is an idiomatic wrapper over the Objective-C class AVMetricPlayerItemInitialLikelyToKeepUpEvent.
+//
+// It embeds [MetricPlayerItemLikelyToKeepUpEvent], promoting that type's methods.
+//
+// An event that represents the initial state for whether playback is likely to continue without stalling.
 type MetricPlayerItemInitialLikelyToKeepUpEvent struct {
-	objref.Handle
+	MetricPlayerItemLikelyToKeepUpEvent
 }
 
 // MetricPlayerItemInitialLikelyToKeepUpEventFromID adopts an existing Objective-C object as a MetricPlayerItemInitialLikelyToKeepUpEvent
@@ -25,7 +26,8 @@ func MetricPlayerItemInitialLikelyToKeepUpEventFromID(id objc.ID) *MetricPlayerI
 	if id == 0 {
 		return nil
 	}
-	x := &MetricPlayerItemInitialLikelyToKeepUpEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetricPlayerItemInitialLikelyToKeepUpEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func metricPlayerItemInitialLikelyToKeepUpEventAdopt(id objc.ID) *MetricPlayerIt
 	if id == 0 {
 		return nil
 	}
-	x := &MetricPlayerItemInitialLikelyToKeepUpEvent{Handle: objref.Wrap(id)}
+	x := &MetricPlayerItemInitialLikelyToKeepUpEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMetricPlayerItemInitialLikelyToKeepUpEvent creates a new MetricPlayerItemInitialLikelyToKeepUpEvent.
@@ -64,7 +52,7 @@ func NewMetricPlayerItemInitialLikelyToKeepUpEvent() *MetricPlayerItemInitialLik
 	return metricPlayerItemInitialLikelyToKeepUpEventAdopt(_id)
 }
 
-// Returns the playlist request events required to reach likely to keep up.
+// PlaylistRequestEvents returns the playlist request events required to reach likely to keep up.
 //
 // PlaylistRequestEvents returns the collection as a Go slice.
 func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) PlaylistRequestEvents() []*MetricHLSPlaylistRequestEvent {
@@ -72,7 +60,7 @@ func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) PlaylistRequestEvents() []*
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetricHLSPlaylistRequestEvent { return MetricHLSPlaylistRequestEventFromID(_id) })
 }
 
-// Returns the media segment request events required to reach likely to keep up.
+// MediaSegmentRequestEvents returns the media segment request events required to reach likely to keep up.
 //
 // MediaSegmentRequestEvents returns the collection as a Go slice.
 func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) MediaSegmentRequestEvents() []*MetricHLSMediaSegmentRequestEvent {
@@ -82,7 +70,7 @@ func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) MediaSegmentRequestEvents()
 	})
 }
 
-// Returns the content key request required to reach likely to keep up.
+// ContentKeyRequestEvents returns the content key request required to reach likely to keep up.
 //
 // ContentKeyRequestEvents returns the collection as a Go slice.
 func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) ContentKeyRequestEvents() []*MetricContentKeyRequestEvent {
@@ -99,3 +87,7 @@ type MetricPlayerItemInitialLikelyToKeepUpEventable interface {
 }
 
 var _ MetricPlayerItemInitialLikelyToKeepUpEventable = (*MetricPlayerItemInitialLikelyToKeepUpEvent)(nil)
+
+var _ MetricPlayerItemLikelyToKeepUpEventProvider = (*MetricPlayerItemInitialLikelyToKeepUpEvent)(nil)
+
+var _ MetricEventProvider = (*MetricPlayerItemInitialLikelyToKeepUpEvent)(nil)

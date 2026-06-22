@@ -23,7 +23,8 @@ func AccessibilityTextMarkerRangeFromID(id objc.ID) *AccessibilityTextMarkerRang
 	if id == 0 {
 		return nil
 	}
-	x := &AccessibilityTextMarkerRange{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AccessibilityTextMarkerRange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func accessibilityTextMarkerRangeAdopt(id objc.ID) *AccessibilityTextMarkerRange
 	if id == 0 {
 		return nil
 	}
-	x := &AccessibilityTextMarkerRange{Handle: objref.Wrap(id)}
+	x := &AccessibilityTextMarkerRange{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,38 +58,48 @@ func (x *AccessibilityTextMarkerRange) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AccessibilityTextMarkerRange) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAccessibilityTextMarkerRange creates a new AccessibilityTextMarkerRange.
 func NewAccessibilityTextMarkerRange() *AccessibilityTextMarkerRange {
 	_id := objc.Send[objc.ID](objc.ID(_class("BEAccessibilityTextMarkerRange")), objc.RegisterName("new"))
 	return accessibilityTextMarkerRangeAdopt(_id)
 }
 
-// WithStartMarker sets startMarker and returns the receiver so calls can be chained.
+// WithStartMarker sets the property and returns the receiver so calls can be chained.
 func (x *AccessibilityTextMarkerRange) WithStartMarker(startMarker *AccessibilityTextMarker) *AccessibilityTextMarkerRange {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartMarker:"), objref.IDOf(startMarker))
 	return x
 }
 
-// WithEndMarker sets endMarker and returns the receiver so calls can be chained.
+// WithEndMarker sets the property and returns the receiver so calls can be chained.
 func (x *AccessibilityTextMarkerRange) WithEndMarker(endMarker *AccessibilityTextMarker) *AccessibilityTextMarkerRange {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndMarker:"), objref.IDOf(endMarker))
 	return x
 }
 
+// StartMarker wraps the corresponding Objective-C method.
 func (x *AccessibilityTextMarkerRange) StartMarker() *AccessibilityTextMarker {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startMarker"))
 	return AccessibilityTextMarkerFromID(_r)
 }
 
+// SetStartMarker wraps the corresponding Objective-C method.
 func (x *AccessibilityTextMarkerRange) SetStartMarker(startMarker *AccessibilityTextMarker) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartMarker:"), objref.IDOf(startMarker))
 }
 
+// EndMarker wraps the corresponding Objective-C method.
 func (x *AccessibilityTextMarkerRange) EndMarker() *AccessibilityTextMarker {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endMarker"))
 	return AccessibilityTextMarkerFromID(_r)
 }
 
+// SetEndMarker wraps the corresponding Objective-C method.
 func (x *AccessibilityTextMarkerRange) SetEndMarker(endMarker *AccessibilityTextMarker) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndMarker:"), objref.IDOf(endMarker))
 }

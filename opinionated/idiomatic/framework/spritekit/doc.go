@@ -3,4 +3,15 @@
 //go:build darwin
 
 // Package spritekit provides a fluent Go API over the macOS SpriteKit framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - EffectNode: [Scene]
+//   - Node: [AudioNode], [CameraNode], [CropNode], [EffectNode], [EmitterNode], [FieldNode], [LabelNode], [LightNode], [ReferenceNode], [SK3DNode], [ShapeNode], [SpriteNode], [TileMapNode], [TransformNode], [VideoNode]
+//   - PhysicsJoint: [PhysicsJointFixed], [PhysicsJointLimit], [PhysicsJointPin], [PhysicsJointSliding], [PhysicsJointSpring]
+//   - Texture: [MutableTexture]
+//   - WarpGeometry: [WarpGeometryGrid]
 package spritekit

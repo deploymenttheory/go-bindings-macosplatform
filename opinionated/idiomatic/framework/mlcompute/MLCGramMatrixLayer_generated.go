@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that computes the uncentered cross-correlation values between the spacial planes of each feature channel of a tensor.
-//
 // GramMatrixLayer is an idiomatic wrapper over the Objective-C class MLCGramMatrixLayer.
+//
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that computes the uncentered cross-correlation values between the spacial planes of each feature channel of a tensor.
 type GramMatrixLayer struct {
-	objref.Handle
+	Layer
 }
 
 // GramMatrixLayerFromID adopts an existing Objective-C object as a GramMatrixLayer
@@ -25,7 +26,8 @@ func GramMatrixLayerFromID(id objc.ID) *GramMatrixLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &GramMatrixLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GramMatrixLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func gramMatrixLayerAdopt(id objc.ID) *GramMatrixLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &GramMatrixLayer{Handle: objref.Wrap(id)}
+	x := &GramMatrixLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GramMatrixLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GramMatrixLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GramMatrixLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGramMatrixLayer creates a new GramMatrixLayer.
@@ -64,23 +52,19 @@ func NewGramMatrixLayer() *GramMatrixLayer {
 	return gramMatrixLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string that helps identify this layer.
 func (x *GramMatrixLayer) WithLabel(label string) *GramMatrixLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *GramMatrixLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *GramMatrixLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// The scale factor
+// Scale the scale factor
 func (x *GramMatrixLayer) Scale() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("scale"))
 	return _r
@@ -95,3 +79,5 @@ type GramMatrixLayerable interface {
 }
 
 var _ GramMatrixLayerable = (*GramMatrixLayer)(nil)
+
+var _ LayerProvider = (*GramMatrixLayer)(nil)

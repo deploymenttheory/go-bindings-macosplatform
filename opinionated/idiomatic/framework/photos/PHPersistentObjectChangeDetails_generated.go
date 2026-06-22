@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the local identifiers that change between requests using a change token.
-//
 // PersistentObjectChangeDetails is an idiomatic wrapper over the Objective-C class PHPersistentObjectChangeDetails.
+//
+// An object that represents the local identifiers that change between requests using a change token.
 type PersistentObjectChangeDetails struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PersistentObjectChangeDetailsFromID(id objc.ID) *PersistentObjectChangeDeta
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentObjectChangeDetails{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PersistentObjectChangeDetails{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func persistentObjectChangeDetailsAdopt(id objc.ID) *PersistentObjectChangeDetai
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentObjectChangeDetails{Handle: objref.Wrap(id)}
+	x := &PersistentObjectChangeDetails{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,27 +60,37 @@ func (x *PersistentObjectChangeDetails) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PersistentObjectChangeDetails) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPersistentObjectChangeDetails creates a new PersistentObjectChangeDetails.
 func NewPersistentObjectChangeDetails() *PersistentObjectChangeDetails {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHPersistentObjectChangeDetails")), objc.RegisterName("new"))
 	return persistentObjectChangeDetailsAdopt(_id)
 }
 
+// ObjectType wraps the corresponding Objective-C method.
 func (x *PersistentObjectChangeDetails) ObjectType() ObjectType {
 	_r := objc.Send[ObjectType](objref.IDOf(x), objc.RegisterName("objectType"))
 	return _r
 }
 
+// InsertedLocalIdentifiers wraps the corresponding Objective-C method.
 func (x *PersistentObjectChangeDetails) InsertedLocalIdentifiers() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertedLocalIdentifiers"))
 	return obj.Wrap(_r)
 }
 
+// UpdatedLocalIdentifiers wraps the corresponding Objective-C method.
 func (x *PersistentObjectChangeDetails) UpdatedLocalIdentifiers() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updatedLocalIdentifiers"))
 	return obj.Wrap(_r)
 }
 
+// DeletedLocalIdentifiers wraps the corresponding Objective-C method.
 func (x *PersistentObjectChangeDetails) DeletedLocalIdentifiers() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deletedLocalIdentifiers"))
 	return obj.Wrap(_r)

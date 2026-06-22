@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An App Store response to a request for information about a list of products.
-//
 // ProductsResponse is an idiomatic wrapper over the Objective-C class SKProductsResponse.
+//
+// An App Store response to a request for information about a list of products.
 type ProductsResponse struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ProductsResponseFromID(id objc.ID) *ProductsResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &ProductsResponse{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ProductsResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func productsResponseAdopt(id objc.ID) *ProductsResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &ProductsResponse{Handle: objref.Wrap(id)}
+	x := &ProductsResponse{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +60,28 @@ func (x *ProductsResponse) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ProductsResponse) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewProductsResponse creates a new ProductsResponse.
 func NewProductsResponse() *ProductsResponse {
 	_id := objc.Send[objc.ID](objc.ID(_class("SKProductsResponse")), objc.RegisterName("new"))
 	return productsResponseAdopt(_id)
 }
 
+// Products wraps the corresponding Objective-C method.
+//
 // Products returns the collection as a Go slice.
 func (x *ProductsResponse) Products() []*Product {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("products"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Product { return ProductFromID(_id) })
 }
 
+// InvalidProductIdentifiers wraps the corresponding Objective-C method.
+//
 // InvalidProductIdentifiers returns the collection as a Go slice.
 func (x *ProductsResponse) InvalidProductIdentifiers() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidProductIdentifiers"))

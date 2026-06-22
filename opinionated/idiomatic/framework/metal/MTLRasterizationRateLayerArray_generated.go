@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Descriptions for the rasterization rates to apply to the set of layers in a rate map.
-//
 // RasterizationRateLayerArray is an idiomatic wrapper over the Objective-C class MTLRasterizationRateLayerArray.
+//
+// Descriptions for the rasterization rates to apply to the set of layers in a rate map.
 type RasterizationRateLayerArray struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RasterizationRateLayerArrayFromID(id objc.ID) *RasterizationRateLayerArray 
 	if id == 0 {
 		return nil
 	}
-	x := &RasterizationRateLayerArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RasterizationRateLayerArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func rasterizationRateLayerArrayAdopt(id objc.ID) *RasterizationRateLayerArray {
 	if id == 0 {
 		return nil
 	}
-	x := &RasterizationRateLayerArray{Handle: objref.Wrap(id)}
+	x := &RasterizationRateLayerArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *RasterizationRateLayerArray) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RasterizationRateLayerArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRasterizationRateLayerArray creates a new RasterizationRateLayerArray.
 func NewRasterizationRateLayerArray() *RasterizationRateLayerArray {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLRasterizationRateLayerArray")), objc.RegisterName("new"))
 	return rasterizationRateLayerArrayAdopt(_id)
 }
 
-// Retrieves the sample value at the specified index.
+// ObjectAtIndexedSubscript retrieves the sample value at the specified index.
 func (x *RasterizationRateLayerArray) ObjectAtIndexedSubscript(layerIndex int) *RasterizationRateLayerDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), layerIndex)
 	return RasterizationRateLayerDescriptorFromID(_r)
 }
 
-// Stores a sample value at the specified index.
+// SetObjectAtIndexedSubscript stores a sample value at the specified index.
 func (x *RasterizationRateLayerArray) SetObjectAtIndexedSubscript(layer *RasterizationRateLayerDescriptor, layerIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(layer), layerIndex)
 }

@@ -23,7 +23,8 @@ func ScriptControllerFromID(id objc.ID) *ScriptController {
 	if id == 0 {
 		return nil
 	}
-	x := &ScriptController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScriptController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func scriptControllerAdopt(id objc.ID) *ScriptController {
 	if id == 0 {
 		return nil
 	}
-	x := &ScriptController{Handle: objref.Wrap(id)}
+	x := &ScriptController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,93 +58,113 @@ func (x *ScriptController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScriptController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewScriptController creates a new ScriptController.
 func NewScriptController() *ScriptController {
 	_id := objc.Send[objc.ID](objc.ID(_class("OSAScriptController")), objc.RegisterName("new"))
 	return scriptControllerAdopt(_id)
 }
 
-// WithScriptView sets scriptView and returns the receiver so calls can be chained.
+// WithScriptView sets the property and returns the receiver so calls can be chained.
 func (x *ScriptController) WithScriptView(scriptView *ScriptView) *ScriptController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptView:"), objref.IDOf(scriptView))
 	return x
 }
 
-// WithResultView sets resultView and returns the receiver so calls can be chained.
+// WithResultView sets the property and returns the receiver so calls can be chained.
 func (x *ScriptController) WithResultView(resultView obj.Object) *ScriptController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultView:"), objref.IDOf(resultView))
 	return x
 }
 
-// WithScript sets script and returns the receiver so calls can be chained.
+// WithScript sets the property and returns the receiver so calls can be chained.
 func (x *ScriptController) WithScript(script *Script) *ScriptController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScript:"), objref.IDOf(script))
 	return x
 }
 
-// WithLanguage sets language and returns the receiver so calls can be chained.
+// WithLanguage sets the property and returns the receiver so calls can be chained.
 func (x *ScriptController) WithLanguage(language *Language) *ScriptController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguage:"), objref.IDOf(language))
 	return x
 }
 
+// CompileScript wraps the corresponding Objective-C method.
 func (x *ScriptController) CompileScript(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compileScript:"), objref.IDOf(sender))
 }
 
+// RecordScript wraps the corresponding Objective-C method.
 func (x *ScriptController) RecordScript(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordScript:"), objref.IDOf(sender))
 }
 
+// RunScript wraps the corresponding Objective-C method.
 func (x *ScriptController) RunScript(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runScript:"), objref.IDOf(sender))
 }
 
+// StopScript wraps the corresponding Objective-C method.
 func (x *ScriptController) StopScript(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopScript:"), objref.IDOf(sender))
 }
 
+// ScriptView wraps the corresponding Objective-C method.
 func (x *ScriptController) ScriptView() *ScriptView {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scriptView"))
 	return ScriptViewFromID(_r)
 }
 
+// SetScriptView wraps the corresponding Objective-C method.
 func (x *ScriptController) SetScriptView(scriptView *ScriptView) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptView:"), objref.IDOf(scriptView))
 }
 
+// ResultView wraps the corresponding Objective-C method.
 func (x *ScriptController) ResultView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultView"))
 	return obj.Wrap(_r)
 }
 
+// SetResultView wraps the corresponding Objective-C method.
 func (x *ScriptController) SetResultView(resultView obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultView:"), objref.IDOf(resultView))
 }
 
+// Script wraps the corresponding Objective-C method.
 func (x *ScriptController) Script() *Script {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("script"))
 	return ScriptFromID(_r)
 }
 
+// SetScript wraps the corresponding Objective-C method.
 func (x *ScriptController) SetScript(script *Script) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScript:"), objref.IDOf(script))
 }
 
+// Language wraps the corresponding Objective-C method.
 func (x *ScriptController) Language() *Language {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
 	return LanguageFromID(_r)
 }
 
+// SetLanguage wraps the corresponding Objective-C method.
 func (x *ScriptController) SetLanguage(language *Language) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguage:"), objref.IDOf(language))
 }
 
+// ScriptState wraps the corresponding Objective-C method.
 func (x *ScriptController) ScriptState() ScriptState {
 	_r := objc.Send[ScriptState](objref.IDOf(x), objc.RegisterName("scriptState"))
 	return _r
 }
 
+// IsCompiling wraps the corresponding Objective-C method.
 func (x *ScriptController) IsCompiling() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompiling"))
 	return _r

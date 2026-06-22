@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that holds a time range and an associated state which indicates when the renderer draws output.
-//
 // CaptionRendererScene is an idiomatic wrapper over the Objective-C class AVCaptionRendererScene.
+//
+// An object that holds a time range and an associated state which indicates when the renderer draws output.
 type CaptionRendererScene struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CaptionRendererSceneFromID(id objc.ID) *CaptionRendererScene {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptionRendererScene{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptionRendererScene{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func captionRendererSceneAdopt(id objc.ID) *CaptionRendererScene {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptionRendererScene{Handle: objref.Wrap(id)}
+	x := &CaptionRendererScene{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *CaptionRendererScene) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptionRendererScene) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCaptionRendererScene creates a new CaptionRendererScene.
 func NewCaptionRendererScene() *CaptionRendererScene {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptionRendererScene")), objc.RegisterName("new"))
 	return captionRendererSceneAdopt(_id)
 }
 
-// The scene contains one or more active captions. Clients should not use this to restrict their drawing and should call renderInContext:atTime: to draw "emptiness". However, this information may be useful for purposes such as scrubbing to times where captions are present, skipping scenes in which no captions are present.
+// HasActiveCaptions the scene contains one or more active captions. Clients should not use this to restrict their drawing and should call renderInContext:atTime: to draw "emptiness". However, this information may be useful for purposes such as scrubbing to times where captions are present, skipping scenes in which no captions are present.
 func (x *CaptionRendererScene) HasActiveCaptions() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasActiveCaptions"))
 	return _r
 }
 
-// The scene may have embedded animations or other state where periodic redrawing while playing through this scene is needed. This property indicates if refreshing should occur if the client is progressing through the content. If the client is not progressing (i.e., it is treating playback as though the rate is 0.0), a single render at the current render time suffices. This property does not prescribe a refresh rate. A client is free to choose a refresh rate corresponding to rates of associated video frames or other timing appropriate for the client.
+// NeedsPeriodicRefresh the scene may have embedded animations or other state where periodic redrawing while playing through this scene is needed. This property indicates if refreshing should occur if the client is progressing through the content. If the client is not progressing (i.e., it is treating playback as though the rate is 0.0), a single render at the current render time suffices. This property does not prescribe a refresh rate. A client is free to choose a refresh rate corresponding to rates of associated video frames or other timing appropriate for the client.
 func (x *CaptionRendererScene) NeedsPeriodicRefresh() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("needsPeriodicRefresh"))
 	return _r

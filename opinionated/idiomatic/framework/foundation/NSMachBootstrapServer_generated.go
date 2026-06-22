@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A port name server that takes and returns Mach port objects.
-//
 // MachBootstrapServer is an idiomatic wrapper over the Objective-C class NSMachBootstrapServer.
+//
+// It embeds [PortNameServer], promoting that type's methods.
+//
+// A port name server that takes and returns Mach port objects.
 type MachBootstrapServer struct {
-	objref.Handle
+	PortNameServer
 }
 
 // MachBootstrapServerFromID adopts an existing Objective-C object as a MachBootstrapServer
@@ -25,7 +26,8 @@ func MachBootstrapServerFromID(id objc.ID) *MachBootstrapServer {
 	if id == 0 {
 		return nil
 	}
-	x := &MachBootstrapServer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MachBootstrapServer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func machBootstrapServerAdopt(id objc.ID) *MachBootstrapServer {
 	if id == 0 {
 		return nil
 	}
-	x := &MachBootstrapServer{Handle: objref.Wrap(id)}
+	x := &MachBootstrapServer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MachBootstrapServer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MachBootstrapServer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MachBootstrapServer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMachBootstrapServer creates a new MachBootstrapServer.
@@ -64,13 +52,13 @@ func NewMachBootstrapServer() *MachBootstrapServer {
 	return machBootstrapServerAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *MachBootstrapServer) WithScriptingProperties(scriptingProperties obj.Object) *MachBootstrapServer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Looks up and returns the port for the vended service that is registered under the specified name.
+// ServicePortWithName looks up and returns the port for the vended service that is registered under the specified name.
 func (x *MachBootstrapServer) ServicePortWithName(name string) *Port {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("servicePortWithName:"), purego.NSString(name))
 	return PortFromID(_r)
@@ -84,3 +72,5 @@ type MachBootstrapServerable interface {
 }
 
 var _ MachBootstrapServerable = (*MachBootstrapServer)(nil)
+
+var _ PortNameServerProvider = (*MachBootstrapServer)(nil)

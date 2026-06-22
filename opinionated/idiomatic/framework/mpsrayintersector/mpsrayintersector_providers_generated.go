@@ -11,9 +11,11 @@ import (
 // AccelerationStructureProvider is accepted wherever a MPSAccelerationStructure (or one of its subclasses) is expected.
 type AccelerationStructureProvider interface {
 	objref.Object
+	isAccelerationStructure()
 }
 
 // PolygonAccelerationStructureProvider is accepted wherever a MPSPolygonAccelerationStructure (or one of its subclasses) is expected.
 type PolygonAccelerationStructureProvider interface {
 	objref.Object
+	isPolygonAccelerationStructure()
 }

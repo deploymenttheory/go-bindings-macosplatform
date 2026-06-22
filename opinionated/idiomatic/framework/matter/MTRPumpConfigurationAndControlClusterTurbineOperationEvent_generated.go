@@ -23,7 +23,8 @@ func MTRPumpConfigurationAndControlClusterTurbineOperationEventFromID(id objc.ID
 	if id == 0 {
 		return nil
 	}
-	x := &MTRPumpConfigurationAndControlClusterTurbineOperationEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRPumpConfigurationAndControlClusterTurbineOperationEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRPumpConfigurationAndControlClusterTurbineOperationEventAdopt(id objc.ID)
 	if id == 0 {
 		return nil
 	}
-	x := &MTRPumpConfigurationAndControlClusterTurbineOperationEvent{Handle: objref.Wrap(id)}
+	x := &MTRPumpConfigurationAndControlClusterTurbineOperationEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *MTRPumpConfigurationAndControlClusterTurbineOperationEvent) IsEqual(oth
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MTRPumpConfigurationAndControlClusterTurbineOperationEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRPumpConfigurationAndControlClusterTurbineOperationEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMTRPumpConfigurationAndControlClusterTurbineOperationEvent creates a new MTRPumpConfigurationAndControlClusterTurbineOperationEvent.

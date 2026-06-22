@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of how to dispatch execution of pass commands and GPU performance sampling.
-//
 // ComputePassDescriptor is an idiomatic wrapper over the Objective-C class MTLComputePassDescriptor.
+//
+// A description of how to dispatch execution of pass commands and GPU performance sampling.
 type ComputePassDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ComputePassDescriptorFromID(id objc.ID) *ComputePassDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &ComputePassDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ComputePassDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func computePassDescriptorAdopt(id objc.ID) *ComputePassDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &ComputePassDescriptor{Handle: objref.Wrap(id)}
+	x := &ComputePassDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,36 @@ func (x *ComputePassDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ComputePassDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewComputePassDescriptor creates a new ComputePassDescriptor.
 func NewComputePassDescriptor() *ComputePassDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLComputePassDescriptor")), objc.RegisterName("new"))
 	return computePassDescriptorAdopt(_id)
 }
 
-// The strategy for dispatching any compute commands encoded in the compute pass.
-//
-// WithDispatchType sets dispatchType and returns the receiver so calls can be chained.
+// WithDispatchType the strategy for dispatching any compute commands encoded in the compute pass.
 func (x *ComputePassDescriptor) WithDispatchType(dispatchType DispatchType) *ComputePassDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDispatchType:"), dispatchType)
 	return x
 }
 
-// The dispatch type of the compute command encoder.
+// DispatchType the dispatch type of the compute command encoder.
 func (x *ComputePassDescriptor) DispatchType() DispatchType {
 	_r := objc.Send[DispatchType](objref.IDOf(x), objc.RegisterName("dispatchType"))
 	return _r
 }
 
+// SetDispatchType wraps the corresponding Objective-C method.
 func (x *ComputePassDescriptor) SetDispatchType(dispatchType DispatchType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDispatchType:"), dispatchType)
 }
 
-// An array of sample buffers and associated sample indices.
+// SampleBufferAttachments an array of sample buffers and associated sample indices.
 func (x *ComputePassDescriptor) SampleBufferAttachments() *ComputePassSampleBufferAttachmentDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleBufferAttachments"))
 	return ComputePassSampleBufferAttachmentDescriptorArrayFromID(_r)

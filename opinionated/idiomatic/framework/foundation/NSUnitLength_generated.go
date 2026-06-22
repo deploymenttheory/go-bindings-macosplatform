@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for length.
-//
 // UnitLength is an idiomatic wrapper over the Objective-C class NSUnitLength.
+//
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for length.
 type UnitLength struct {
-	objref.Handle
+	Dimension
 }
 
 // UnitLengthFromID adopts an existing Objective-C object as a UnitLength
@@ -25,7 +26,8 @@ func UnitLengthFromID(id objc.ID) *UnitLength {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitLength{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UnitLength{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func unitLengthAdopt(id objc.ID) *UnitLength {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitLength{Handle: objref.Wrap(id)}
+	x := &UnitLength{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UnitLength) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UnitLength) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UnitLength) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUnitLength creates a new UnitLength.
@@ -64,7 +52,7 @@ func NewUnitLength() *UnitLength {
 	return unitLengthAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UnitLength) WithScriptingProperties(scriptingProperties obj.Object) *UnitLength {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
@@ -77,3 +65,7 @@ type UnitLengthable interface {
 }
 
 var _ UnitLengthable = (*UnitLength)(nil)
+
+var _ DimensionProvider = (*UnitLength)(nil)
+
+var _ UnitProvider = (*UnitLength)(nil)

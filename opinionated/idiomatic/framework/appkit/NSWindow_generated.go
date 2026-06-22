@@ -8,6 +8,7 @@ import (
 	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -15,11 +16,13 @@ import (
 	"unsafe"
 )
 
-// A window that an app displays on the screen.
-//
 // Window is an idiomatic wrapper over the Objective-C class NSWindow.
+//
+// Window is an abstract base — you do not construct it directly. Construct one of [Panel] and pass it where a Window is accepted.
+//
+// A window that an app displays on the screen.
 type Window struct {
-	objref.Handle
+	Responder
 }
 
 // WindowFromID adopts an existing Objective-C object as a Window
@@ -28,7 +31,8 @@ func WindowFromID(id objc.ID) *Window {
 	if id == 0 {
 		return nil
 	}
-	x := &Window{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Window{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -41,849 +45,902 @@ func windowAdopt(id objc.ID) *Window {
 	if id == 0 {
 		return nil
 	}
-	x := &Window{Handle: objref.Wrap(id)}
+	x := &Window{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *Window) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Window) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Window) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewWindow creates a new Window.
-func NewWindow() *Window {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSWindow")), objc.RegisterName("new"))
+// NewWindowWithContentRectStyleMaskBackingDefer initializes the window with the specified values.
+func NewWindowWithContentRectStyleMaskBackingDefer(contentRect corefoundation.CGRect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool) *Window {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSWindow")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentRect:styleMask:backing:defer:"), contentRect, style, backingStoreType, flag)
 	return windowAdopt(_id)
 }
 
-// The string that appears in the title bar of the window or the path to the represented file.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// NewWindowWithContentRectStyleMaskBackingDeferScreen initializes an allocated window with the specified values.
+func NewWindowWithContentRectStyleMaskBackingDeferScreen(contentRect corefoundation.CGRect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool, screen *Screen) *Window {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSWindow")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentRect:styleMask:backing:defer:screen:"), contentRect, style, backingStoreType, flag, objref.IDOf(screen))
+	return windowAdopt(_id)
+}
+
+// WithTitle the string that appears in the title bar of the window or the path to the represented file.
 func (x *Window) WithTitle(title string) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A secondary line of text that appears in the title bar of the window.
-//
-// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
+// WithSubtitle a secondary line of text that appears in the title bar of the window.
 func (x *Window) WithSubtitle(subtitle string) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
-// A value that indicates the visibility of the window’s title and title bar buttons.
-//
-// WithTitleVisibility sets titleVisibility and returns the receiver so calls can be chained.
+// WithTitleVisibility a value that indicates the visibility of the window’s title and title bar buttons.
 func (x *Window) WithTitleVisibility(titleVisibility WindowTitleVisibility) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleVisibility:"), titleVisibility)
 	return x
 }
 
-// A Boolean value that indicates whether the title bar draws its background.
-//
-// WithTitlebarAppearsTransparent sets titlebarAppearsTransparent and returns the receiver so calls can be chained.
+// WithTitlebarAppearsTransparent a Boolean value that indicates whether the title bar draws its background.
 func (x *Window) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlebarAppearsTransparent:"), titlebarAppearsTransparent)
 	return x
 }
 
-// The style that determines the appearance and location of the toolbar in relation to the title bar.
-//
-// WithToolbarStyle sets toolbarStyle and returns the receiver so calls can be chained.
+// WithToolbarStyle the style that determines the appearance and location of the toolbar in relation to the title bar.
 func (x *Window) WithToolbarStyle(toolbarStyle WindowToolbarStyle) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolbarStyle:"), toolbarStyle)
 	return x
 }
 
-// An array of title bar accessory view controllers that are currently added to the window.
-//
-// WithTitlebarAccessoryViewControllers sets the collection and returns the receiver so calls can be chained.
+// WithTitlebarAccessoryViewControllers an array of title bar accessory view controllers that are currently added to the window.
 func (x *Window) WithTitlebarAccessoryViewControllers(items ...*TitlebarAccessoryViewController) *Window {
 	_arr := purego.SliceToNSArray(items, func(_v *TitlebarAccessoryViewController) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlebarAccessoryViewControllers:"), _arr)
 	return x
 }
 
-// The URL of the file the window represents.
-//
-// WithRepresentedURL sets representedURL and returns the receiver so calls can be chained.
+// WithRepresentedURL the URL of the file the window represents.
 func (x *Window) WithRepresentedURL(representedURL string) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedURL:"), rt.FileURL(representedURL))
 	return x
 }
 
-// The path to the file of the window’s represented file.
-//
-// WithRepresentedFilename sets representedFilename and returns the receiver so calls can be chained.
+// WithRepresentedFilename the path to the file of the window’s represented file.
 func (x *Window) WithRepresentedFilename(representedFilename string) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedFilename:"), purego.NSString(representedFilename))
 	return x
 }
 
-// A Boolean value that indicates whether the window is excluded from the application’s Windows menu.
-//
-// WithExcludedFromWindowsMenu sets excludedFromWindowsMenu and returns the receiver so calls can be chained.
+// WithExcludedFromWindowsMenu a Boolean value that indicates whether the window is excluded from the application’s Windows menu.
 func (x *Window) WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedFromWindowsMenu:"), excludedFromWindowsMenu)
 	return x
 }
 
-// The window’s content view, the highest accessible view object in the window’s view hierarchy.
-//
-// WithContentView sets contentView and returns the receiver so calls can be chained.
+// WithContentView the window’s content view, the highest accessible view object in the window’s view hierarchy.
 func (x *Window) WithContentView(contentView ViewProvider) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	return x
 }
 
-// Flags that describe the window’s current style, such as if it’s resizable or in full-screen mode.
-//
-// WithStyleMask sets styleMask and returns the receiver so calls can be chained.
+// WithStyleMask flags that describe the window’s current style, such as if it’s resizable or in full-screen mode.
 func (x *Window) WithStyleMask(styleMask WindowStyleMask) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyleMask:"), styleMask)
 	return x
 }
 
-// A Boolean value that indicates whether any of the window’s views need to be displayed.
-//
-// WithViewsNeedDisplay sets viewsNeedDisplay and returns the receiver so calls can be chained.
+// WithResizeIncrements the window’s resizing increments.
+func (x *Window) WithResizeIncrements(resizeIncrements corefoundation.CGSize) *Window {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResizeIncrements:"), resizeIncrements)
+	return x
+}
+
+// WithAspectRatio the window’s aspect ratio, which constrains the size of its frame rectangle to integral multiples of this ratio when the user resizes it.
+func (x *Window) WithAspectRatio(aspectRatio corefoundation.CGSize) *Window {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAspectRatio:"), aspectRatio)
+	return x
+}
+
+// WithContentResizeIncrements the window’s content-view resizing increments.
+func (x *Window) WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *Window {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentResizeIncrements:"), contentResizeIncrements)
+	return x
+}
+
+// WithContentAspectRatio the window’s content aspect ratio.
+func (x *Window) WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *Window {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentAspectRatio:"), contentAspectRatio)
+	return x
+}
+
+// WithViewsNeedDisplay a Boolean value that indicates whether any of the window’s views need to be displayed.
 func (x *Window) WithViewsNeedDisplay(viewsNeedDisplay bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewsNeedDisplay:"), viewsNeedDisplay)
 	return x
 }
 
-// A Boolean value that indicates whether the window tries to optimize user-initiated resize operations by preserving the content of views that have not changed.
-//
-// WithPreservesContentDuringLiveResize sets preservesContentDuringLiveResize and returns the receiver so calls can be chained.
+// WithPreservesContentDuringLiveResize a Boolean value that indicates whether the window tries to optimize user-initiated resize operations by preserving the content of views that have not changed.
 func (x *Window) WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesContentDuringLiveResize:"), preservesContentDuringLiveResize)
 	return x
 }
 
-// A Boolean value that indicates whether the window is released when it receives the close message.
-//
-// WithReleasedWhenClosed sets releasedWhenClosed and returns the receiver so calls can be chained.
+// WithReleasedWhenClosed a Boolean value that indicates whether the window is released when it receives the close message.
 func (x *Window) WithReleasedWhenClosed(releasedWhenClosed bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReleasedWhenClosed:"), releasedWhenClosed)
 	return x
 }
 
-// The color of the window’s background.
-//
-// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+// WithBackgroundColor the color of the window’s background.
 func (x *Window) WithBackgroundColor(backgroundColor *Color) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// A Boolean value that indicates whether the window can be dragged by clicking in its title bar or background.
-//
-// WithMovable sets movable and returns the receiver so calls can be chained.
+// WithMovable a Boolean value that indicates whether the window can be dragged by clicking in its title bar or background.
 func (x *Window) WithMovable(movable bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMovable:"), movable)
 	return x
 }
 
-// A Boolean value that indicates whether the window is movable by clicking and dragging anywhere in its background.
-//
-// WithMovableByWindowBackground sets movableByWindowBackground and returns the receiver so calls can be chained.
+// WithMovableByWindowBackground a Boolean value that indicates whether the window is movable by clicking and dragging anywhere in its background.
 func (x *Window) WithMovableByWindowBackground(movableByWindowBackground bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMovableByWindowBackground:"), movableByWindowBackground)
 	return x
 }
 
-// A Boolean value that indicates whether the window is removed from the screen when its application becomes inactive.
-//
-// WithHidesOnDeactivate sets hidesOnDeactivate and returns the receiver so calls can be chained.
+// WithHidesOnDeactivate a Boolean value that indicates whether the window is removed from the screen when its application becomes inactive.
 func (x *Window) WithHidesOnDeactivate(hidesOnDeactivate bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidesOnDeactivate:"), hidesOnDeactivate)
 	return x
 }
 
-// A Boolean value that indicates whether the window can hide when its application becomes hidden.
-//
-// WithCanHide sets canHide and returns the receiver so calls can be chained.
+// WithCanHide a Boolean value that indicates whether the window can hide when its application becomes hidden.
 func (x *Window) WithCanHide(canHide bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanHide:"), canHide)
 	return x
 }
 
-// The custom miniaturized window image of the window.
-//
-// WithMiniwindowImage sets miniwindowImage and returns the receiver so calls can be chained.
+// WithMiniwindowImage the custom miniaturized window image of the window.
 func (x *Window) WithMiniwindowImage(miniwindowImage *Image) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiniwindowImage:"), objref.IDOf(miniwindowImage))
 	return x
 }
 
-// The title displayed in the window’s minimized window.
-//
-// WithMiniwindowTitle sets miniwindowTitle and returns the receiver so calls can be chained.
+// WithMiniwindowTitle the title displayed in the window’s minimized window.
 func (x *Window) WithMiniwindowTitle(miniwindowTitle string) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiniwindowTitle:"), purego.NSString(miniwindowTitle))
 	return x
 }
 
-// A Boolean value that indicates whether the window’s document has been edited.
-//
-// WithDocumentEdited sets documentEdited and returns the receiver so calls can be chained.
+// WithDocumentEdited a Boolean value that indicates whether the window’s document has been edited.
 func (x *Window) WithDocumentEdited(documentEdited bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentEdited:"), documentEdited)
 	return x
 }
 
-// A Boolean value that indicates whether the window prevents application termination when modal.
-//
-// WithPreventsApplicationTerminationWhenModal sets preventsApplicationTerminationWhenModal and returns the receiver so calls can be chained.
+// WithPreventsApplicationTerminationWhenModal a Boolean value that indicates whether the window prevents application termination when modal.
 func (x *Window) WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreventsApplicationTerminationWhenModal:"), preventsApplicationTerminationWhenModal)
 	return x
 }
 
-// A Boolean value that indicates whether the window can display tooltips even when the application is in the background.
-//
-// WithAllowsToolTipsWhenApplicationIsInactive sets allowsToolTipsWhenApplicationIsInactive and returns the receiver so calls can be chained.
+// WithAllowsToolTipsWhenApplicationIsInactive a Boolean value that indicates whether the window can display tooltips even when the application is in the background.
 func (x *Window) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsToolTipsWhenApplicationIsInactive:"), allowsToolTipsWhenApplicationIsInactive)
 	return x
 }
 
-// The window’s backing store type.
-//
-// WithBackingType sets backingType and returns the receiver so calls can be chained.
+// WithBackingType the window’s backing store type.
 func (x *Window) WithBackingType(backingType BackingStoreType) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackingType:"), backingType)
 	return x
 }
 
-// The window level of the window.
-//
-// WithLevel sets level and returns the receiver so calls can be chained.
+// WithLevel the window level of the window.
 func (x *Window) WithLevel(level int) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevel:"), level)
 	return x
 }
 
-// The depth limit of the window.
-//
-// WithDepthLimit sets depthLimit and returns the receiver so calls can be chained.
+// WithDepthLimit the depth limit of the window.
 func (x *Window) WithDepthLimit(depthLimit WindowDepth) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthLimit:"), depthLimit)
 	return x
 }
 
-// A Boolean value that indicates whether the window has a shadow.
-//
-// WithHasShadow sets hasShadow and returns the receiver so calls can be chained.
+// WithHasShadow a Boolean value that indicates whether the window has a shadow.
 func (x *Window) WithHasShadow(hasShadow bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasShadow:"), hasShadow)
 	return x
 }
 
-// The window’s alpha value.
-//
-// WithAlphaValue sets alphaValue and returns the receiver so calls can be chained.
+// WithAlphaValue the window’s alpha value.
 func (x *Window) WithAlphaValue(alphaValue float64) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// A Boolean value that indicates whether the window is opaque.
-//
-// WithOpaque sets opaque and returns the receiver so calls can be chained.
+// WithOpaque a Boolean value that indicates whether the window is opaque.
 func (x *Window) WithOpaque(opaque bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
 	return x
 }
 
-// A Boolean value that indicates the level of access other processes have to the window’s content.
-//
-// WithSharingType sets sharingType and returns the receiver so calls can be chained.
+// WithSharingType a Boolean value that indicates the level of access other processes have to the window’s content.
 func (x *Window) WithSharingType(sharingType WindowSharingType) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharingType:"), sharingType)
 	return x
 }
 
-// A Boolean value that indicates whether the window allows multithreaded view drawing.
-//
-// WithAllowsConcurrentViewDrawing sets allowsConcurrentViewDrawing and returns the receiver so calls can be chained.
+// WithAllowsConcurrentViewDrawing a Boolean value that indicates whether the window allows multithreaded view drawing.
 func (x *Window) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsConcurrentViewDrawing:"), allowsConcurrentViewDrawing)
 	return x
 }
 
-// A Boolean value that indicates whether the window context should be updated when the screen profile changes or when the window moves to a different screen.
-//
-// WithDisplaysWhenScreenProfileChanges sets displaysWhenScreenProfileChanges and returns the receiver so calls can be chained.
+// WithDisplaysWhenScreenProfileChanges a Boolean value that indicates whether the window context should be updated when the screen profile changes or when the window moves to a different screen.
 func (x *Window) WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysWhenScreenProfileChanges:"), displaysWhenScreenProfileChanges)
 	return x
 }
 
-// A Boolean value that indicates whether the window can be displayed at the login window.
-//
-// WithCanBecomeVisibleWithoutLogin sets canBecomeVisibleWithoutLogin and returns the receiver so calls can be chained.
+// WithCanBecomeVisibleWithoutLogin a Boolean value that indicates whether the window can be displayed at the login window.
 func (x *Window) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanBecomeVisibleWithoutLogin:"), canBecomeVisibleWithoutLogin)
 	return x
 }
 
-// A value that identifies the window’s behavior in window collections.
-//
-// WithCollectionBehavior sets collectionBehavior and returns the receiver so calls can be chained.
+// WithCollectionBehavior a value that identifies the window’s behavior in window collections.
 func (x *Window) WithCollectionBehavior(collectionBehavior WindowCollectionBehavior) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollectionBehavior:"), collectionBehavior)
 	return x
 }
 
-// The window’s automatic animation behavior.
-//
-// WithAnimationBehavior sets animationBehavior and returns the receiver so calls can be chained.
+// WithAnimationBehavior the window’s automatic animation behavior.
 func (x *Window) WithAnimationBehavior(animationBehavior WindowAnimationBehavior) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationBehavior:"), animationBehavior)
 	return x
 }
 
-// The name used to automatically save the window’s frame rectangle data in the defaults system.
-//
-// WithFrameAutosaveName sets frameAutosaveName and returns the receiver so calls can be chained.
+// WithFrameAutosaveName the name used to automatically save the window’s frame rectangle data in the defaults system.
 func (x *Window) WithFrameAutosaveName(frameAutosaveName obj.Object) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameAutosaveName:"), objref.IDOf(frameAutosaveName))
 	return x
 }
 
-// The window’s window controller.
-//
-// WithWindowController sets windowController and returns the receiver so calls can be chained.
+// WithMinSize the minimum size to which the window’s frame (including its title bar) can be sized.
+func (x *Window) WithMinSize(minSize corefoundation.CGSize) *Window {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinSize:"), minSize)
+	return x
+}
+
+// WithMaxSize the maximum size to which the window’s frame (including its title bar) can be sized.
+func (x *Window) WithMaxSize(maxSize corefoundation.CGSize) *Window {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSize:"), maxSize)
+	return x
+}
+
+// WithContentMinSize the minimum size of the window’s content view in the window’s base coordinate system.
+func (x *Window) WithContentMinSize(contentMinSize corefoundation.CGSize) *Window {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentMinSize:"), contentMinSize)
+	return x
+}
+
+// WithContentMaxSize the maximum size of the window’s content view in the window’s base coordinate system.
+func (x *Window) WithContentMaxSize(contentMaxSize corefoundation.CGSize) *Window {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentMaxSize:"), contentMaxSize)
+	return x
+}
+
+// WithMinFullScreenContentSize a minimum size that is used to determine if a window can fit when it is in full screen in a tile.
+func (x *Window) WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *Window {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinFullScreenContentSize:"), minFullScreenContentSize)
+	return x
+}
+
+// WithMaxFullScreenContentSize a maximum size that is used to determine if a window can fit when it is in full screen in a tile.
+func (x *Window) WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *Window {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxFullScreenContentSize:"), maxFullScreenContentSize)
+	return x
+}
+
+// WithWindowController the window’s window controller.
 func (x *Window) WithWindowController(windowController *WindowController) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindowController:"), objref.IDOf(windowController))
 	return x
 }
 
-// The parent window to which the window is attached as a child.
-//
-// WithParentWindow sets parentWindow and returns the receiver so calls can be chained.
+// WithParentWindow the parent window to which the window is attached as a child.
 func (x *Window) WithParentWindow(parentWindow WindowProvider) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
 	return x
 }
 
-// An object that the window inherits its appearance from.
-//
-// WithAppearanceSource sets appearanceSource and returns the receiver so calls can be chained.
+// WithAppearanceSource an object that the window inherits its appearance from.
 func (x *Window) WithAppearanceSource(appearanceSource obj.Object) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppearanceSource:"), objref.IDOf(appearanceSource))
 	return x
 }
 
-// The window’s color space.
-//
-// WithColorSpace sets colorSpace and returns the receiver so calls can be chained.
+// WithColorSpace the window’s color space.
 func (x *Window) WithColorSpace(colorSpace *ColorSpace) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
 	return x
 }
 
-// The type of separator that the app displays between the title bar and content of a window.
-//
-// WithTitlebarSeparatorStyle sets titlebarSeparatorStyle and returns the receiver so calls can be chained.
+// WithTitlebarSeparatorStyle the type of separator that the app displays between the title bar and content of a window.
 func (x *Window) WithTitlebarSeparatorStyle(titlebarSeparatorStyle TitlebarSeparatorStyle) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlebarSeparatorStyle:"), titlebarSeparatorStyle)
 	return x
 }
 
-// The main content view controller for the window.
-//
-// WithContentViewController sets contentViewController and returns the receiver so calls can be chained.
+// WithContentViewController the main content view controller for the window.
 func (x *Window) WithContentViewController(contentViewController ViewControllerProvider) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
 	return x
 }
 
-// The view that’s made first responder (also called the key view) the first time the window is placed onscreen.
-//
-// WithInitialFirstResponder sets initialFirstResponder and returns the receiver so calls can be chained.
+// WithInitialFirstResponder the view that’s made first responder (also called the key view) the first time the window is placed onscreen.
 func (x *Window) WithInitialFirstResponder(initialFirstResponder ViewProvider) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialFirstResponder:"), objref.IDOf(initialFirstResponder))
 	return x
 }
 
-// The button cell that performs as if clicked when the window receives a Return (or Enter) key event.
-//
-// WithDefaultButtonCell sets defaultButtonCell and returns the receiver so calls can be chained.
+// WithDefaultButtonCell the button cell that performs as if clicked when the window receives a Return (or Enter) key event.
 func (x *Window) WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultButtonCell:"), objref.IDOf(defaultButtonCell))
 	return x
 }
 
-// A Boolean value that indicates whether the window automatically recalculates the key view loop when views are added.
-//
-// WithAutorecalculatesKeyViewLoop sets autorecalculatesKeyViewLoop and returns the receiver so calls can be chained.
+// WithAutorecalculatesKeyViewLoop a Boolean value that indicates whether the window automatically recalculates the key view loop when views are added.
 func (x *Window) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutorecalculatesKeyViewLoop:"), autorecalculatesKeyViewLoop)
 	return x
 }
 
-// The window’s toolbar.
-//
-// WithToolbar sets toolbar and returns the receiver so calls can be chained.
+// WithToolbar the window’s toolbar.
 func (x *Window) WithToolbar(toolbar *Toolbar) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolbar:"), objref.IDOf(toolbar))
 	return x
 }
 
-// A Boolean value that indicates whether the toolbar control button is currently displayed.
-//
-// WithShowsToolbarButton sets showsToolbarButton and returns the receiver so calls can be chained.
+// WithShowsToolbarButton a Boolean value that indicates whether the toolbar control button is currently displayed.
 func (x *Window) WithShowsToolbarButton(showsToolbarButton bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsToolbarButton:"), showsToolbarButton)
 	return x
 }
 
-// A value that indicates when a window displays tabs.
-//
-// WithTabbingMode sets tabbingMode and returns the receiver so calls can be chained.
+// WithTabbingMode a value that indicates when a window displays tabs.
 func (x *Window) WithTabbingMode(tabbingMode WindowTabbingMode) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabbingMode:"), tabbingMode)
 	return x
 }
 
-// A value that allows a group of related windows.
-//
-// WithTabbingIdentifier sets tabbingIdentifier and returns the receiver so calls can be chained.
+// WithTabbingIdentifier a value that allows a group of related windows.
 func (x *Window) WithTabbingIdentifier(tabbingIdentifier obj.Object) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabbingIdentifier:"), objref.IDOf(tabbingIdentifier))
 	return x
 }
 
-// A Boolean value that indicates whether the window accepts mouse-moved events.
-//
-// WithAcceptsMouseMovedEvents sets acceptsMouseMovedEvents and returns the receiver so calls can be chained.
+// WithAcceptsMouseMovedEvents a Boolean value that indicates whether the window accepts mouse-moved events.
 func (x *Window) WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsMouseMovedEvents:"), acceptsMouseMovedEvents)
 	return x
 }
 
-// A Boolean value that indicates whether the window is transparent to mouse events.
-//
-// WithIgnoresMouseEvents sets ignoresMouseEvents and returns the receiver so calls can be chained.
+// WithIgnoresMouseEvents a Boolean value that indicates whether the window is transparent to mouse events.
 func (x *Window) WithIgnoresMouseEvents(ignoresMouseEvents bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMouseEvents:"), ignoresMouseEvents)
 	return x
 }
 
-// WithAutodisplay sets autodisplay and returns the receiver so calls can be chained.
+// WithAutodisplay sets the property and returns the receiver so calls can be chained.
 func (x *Window) WithAutodisplay(autodisplay bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutodisplay:"), autodisplay)
 	return x
 }
 
-// WithOneShot sets oneShot and returns the receiver so calls can be chained.
+// WithOneShot sets the property and returns the receiver so calls can be chained.
 func (x *Window) WithOneShot(oneShot bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOneShot:"), oneShot)
 	return x
 }
 
-// WithPreferredBackingLocation sets preferredBackingLocation and returns the receiver so calls can be chained.
+// WithPreferredBackingLocation sets the property and returns the receiver so calls can be chained.
 func (x *Window) WithPreferredBackingLocation(preferredBackingLocation WindowBackingLocation) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredBackingLocation:"), preferredBackingLocation)
 	return x
 }
 
-// WithShowsResizeIndicator sets showsResizeIndicator and returns the receiver so calls can be chained.
+// WithShowsResizeIndicator sets the property and returns the receiver so calls can be chained.
 func (x *Window) WithShowsResizeIndicator(showsResizeIndicator bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsResizeIndicator:"), showsResizeIndicator)
 	return x
 }
 
-// The zero-based position of the window, based on its order from front to back among all visible application windows.
-//
-// WithOrderedIndex sets orderedIndex and returns the receiver so calls can be chained.
+// WithOrderedIndex the zero-based position of the window, based on its order from front to back among all visible application windows.
 func (x *Window) WithOrderedIndex(orderedIndex int) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrderedIndex:"), orderedIndex)
 	return x
 }
 
-// A Boolean value indicating whether the window configuration is preserved between application launches.
-//
-// WithRestorable sets restorable and returns the receiver so calls can be chained.
+// WithRestorable a Boolean value indicating whether the window configuration is preserved between application launches.
 func (x *Window) WithRestorable(restorable bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRestorable:"), restorable)
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *Window) WithNextResponder(nextResponder ResponderProvider) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets menu and returns the receiver so calls can be chained.
+// WithMenu returns the responder’s menu.
 func (x *Window) WithMenu(menu *Menu) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity an object encapsulating a user activity supported by this responder.
 func (x *Window) WithUserActivity(userActivity obj.Object) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *Window) WithTouchBar(touchBar *TouchBar) *Window {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// Adds the specified title bar accessory view controller to the window.
+// FrameRectForContentRect returns the window’s frame rectangle with a given content rectangle.
+func (x *Window) FrameRectForContentRect(contentRect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frameRectForContentRect:"), contentRect)
+	return _r
+}
+
+// ContentRectForFrameRect returns the window’s content rectangle with a given frame rectangle.
+func (x *Window) ContentRectForFrameRect(frameRect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("contentRectForFrameRect:"), frameRect)
+	return _r
+}
+
+// AddTitlebarAccessoryViewController adds the specified title bar accessory view controller to the window.
 func (x *Window) AddTitlebarAccessoryViewController(childViewController *TitlebarAccessoryViewController) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTitlebarAccessoryViewController:"), objref.IDOf(childViewController))
 }
 
-// Inserts the view controller into the window’s array of title bar accessory view controllers at the specified index.
+// InsertTitlebarAccessoryViewControllerAtIndex inserts the view controller into the window’s array of title bar accessory view controllers at the specified index.
 func (x *Window) InsertTitlebarAccessoryViewControllerAtIndex(childViewController *TitlebarAccessoryViewController, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertTitlebarAccessoryViewController:atIndex:"), objref.IDOf(childViewController), index)
 }
 
-// Removes the view controller at the specified index from the window’s array of title bar accessory view controllers.
+// RemoveTitlebarAccessoryViewControllerAtIndex removes the view controller at the specified index from the window’s array of title bar accessory view controllers.
 func (x *Window) RemoveTitlebarAccessoryViewControllerAtIndex(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTitlebarAccessoryViewControllerAtIndex:"), index)
 }
 
-// Sets a given path as the window’s title, formatting it as a file-system path, and records this path as the window’s associated file.
+// SetTitleWithRepresentedFilename sets a given path as the window’s title, formatting it as a file-system path, and records this path as the window’s associated file.
 func (x *Window) SetTitleWithRepresentedFilename(filename string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleWithRepresentedFilename:"), purego.NSString(filename))
 }
 
-// Returns the window’s field editor, creating it if requested.
+// FieldEditorForObject returns the window’s field editor, creating it if requested.
 func (x *Window) FieldEditorForObject(createFlag bool, object obj.Object) *Text {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fieldEditor:forObject:"), createFlag, objref.IDOf(object))
 	return TextFromID(_r)
 }
 
-// Forces the field editor to give up its first responder status and prepares it for its next assignment.
+// EndEditingFor forces the field editor to give up its first responder status and prepares it for its next assignment.
 func (x *Window) EndEditingFor(object obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endEditingFor:"), objref.IDOf(object))
 }
 
-// Passes a display message down the window’s view hierarchy, thus redrawing all views that need displaying.
+// ConstrainFrameRectToScreen modifies and returns a frame rectangle so that its top edge lies on a specific screen.
+func (x *Window) ConstrainFrameRectToScreen(frameRect corefoundation.CGRect, screen *Screen) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("constrainFrameRect:toScreen:"), frameRect, objref.IDOf(screen))
+	return _r
+}
+
+// SetFrameDisplay sets the origin and size of the window’s frame rectangle according to a given frame rectangle, thereby setting its position and size onscreen.
+func (x *Window) SetFrameDisplay(frameRect corefoundation.CGRect, flag bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:display:"), frameRect, flag)
+}
+
+// SetContentSize sets the size of the window’s content view to a given size, which is expressed in the window’s base coordinate system.
+func (x *Window) SetContentSize(size corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentSize:"), size)
+}
+
+// SetFrameOrigin positions the bottom-left corner of the window’s frame rectangle at a given point in screen coordinates.
+func (x *Window) SetFrameOrigin(point corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameOrigin:"), point)
+}
+
+// SetFrameTopLeftPoint positions the top-left corner of the window’s frame rectangle at a given point in screen coordinates.
+func (x *Window) SetFrameTopLeftPoint(point corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameTopLeftPoint:"), point)
+}
+
+// CascadeTopLeftFromPoint positions the window’s top-left to a given point.
+func (x *Window) CascadeTopLeftFromPoint(topLeftPoint corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("cascadeTopLeftFromPoint:"), topLeftPoint)
+	return _r
+}
+
+// AnimationResizeTime specifies the duration of a smooth frame-size change.
+func (x *Window) AnimationResizeTime(newFrame corefoundation.CGRect) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("animationResizeTime:"), newFrame)
+	return _r
+}
+
+// SetFrameDisplayAnimate sets the origin and size of the window’s frame rectangle, with optional animation, according to a given frame rectangle, thereby setting its position and size onscreen.
+func (x *Window) SetFrameDisplayAnimate(frameRect corefoundation.CGRect, displayFlag bool, animateFlag bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:display:animate:"), frameRect, displayFlag, animateFlag)
+}
+
+// DisplayIfNeeded passes a display message down the window’s view hierarchy, thus redrawing all views that need displaying.
 func (x *Window) DisplayIfNeeded() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayIfNeeded"))
 }
 
-// Passes a display message down the window’s view hierarchy, thus redrawing all views within the window.
+// Display passes a display message down the window’s view hierarchy, thus redrawing all views within the window.
 func (x *Window) Display() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("display"))
 }
 
-// Updates the window.
+// Update updates the window.
 func (x *Window) Update() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("update"))
 }
 
-// Attempts to make a given responder the first responder for the window.
+// MakeFirstResponder attempts to make a given responder the first responder for the window.
 func (x *Window) MakeFirstResponder(responder *Responder) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("makeFirstResponder:"), objref.IDOf(responder))
 	return _r
 }
 
-// Removes the window from the screen.
+// Close removes the window from the screen.
 func (x *Window) Close() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
 }
 
-// Removes the window from the screen list and displays the minimized window in the Dock.
+// Miniaturize removes the window from the screen list and displays the minimized window in the Dock.
 func (x *Window) Miniaturize(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("miniaturize:"), objref.IDOf(sender))
 }
 
-// De-minimizes the window.
+// Deminiaturize de-minimizes the window.
 func (x *Window) Deminiaturize(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deminiaturize:"), objref.IDOf(sender))
 }
 
-// Toggles the size and location of the window between its standard state (which the application provides as the best size to display the window’s data) and its user state (a new size and location the user may have set by moving or resizing the window).
+// Zoom toggles the size and location of the window between its standard state (which the application provides as the best size to display the window’s data) and its user state (a new size and location the user may have set by moving or resizing the window).
 func (x *Window) Zoom(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoom:"), objref.IDOf(sender))
 }
 
-// Sets the window’s location to the center of the screen.
+// Center sets the window’s location to the center of the screen.
 func (x *Window) Center() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("center"))
 }
 
-// Moves the window to the front of the screen list, within its level, and makes it the key window; that is, it shows the window.
+// MakeKeyAndOrderFront moves the window to the front of the screen list, within its level, and makes it the key window; that is, it shows the window.
 func (x *Window) MakeKeyAndOrderFront(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeKeyAndOrderFront:"), objref.IDOf(sender))
 }
 
-// Moves the window to the front of its level in the screen list, without changing either the key window or the main window.
+// OrderFront moves the window to the front of its level in the screen list, without changing either the key window or the main window.
 func (x *Window) OrderFront(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderFront:"), objref.IDOf(sender))
 }
 
-// Moves the window to the back of its level in the screen list, without changing either the key window or the main window.
+// OrderBack moves the window to the back of its level in the screen list, without changing either the key window or the main window.
 func (x *Window) OrderBack(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderBack:"), objref.IDOf(sender))
 }
 
-// Removes the window from the screen list, which hides the window.
+// OrderOut removes the window from the screen list, which hides the window.
 func (x *Window) OrderOut(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderOut:"), objref.IDOf(sender))
 }
 
-// Repositions the window’s window device in the window server’s screen list.
+// OrderWindowRelativeTo repositions the window’s window device in the window server’s screen list.
 func (x *Window) OrderWindowRelativeTo(place WindowOrderingMode, otherWin int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderWindow:relativeTo:"), place, otherWin)
 }
 
-// Moves the window to the front of its level, even if its application isn’t active, without changing either the key window or the main window.
+// OrderFrontRegardless moves the window to the front of its level, even if its application isn’t active, without changing either the key window or the main window.
 func (x *Window) OrderFrontRegardless() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderFrontRegardless"))
 }
 
-// Makes the window the key window.
+// MakeKeyWindow makes the window the key window.
 func (x *Window) MakeKeyWindow() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeKeyWindow"))
 }
 
-// Makes the window the main window.
+// MakeMainWindow makes the window the main window.
 func (x *Window) MakeMainWindow() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeMainWindow"))
 }
 
-// Informs the window that it has become the key window.
+// BecomeKeyWindow informs the window that it has become the key window.
 func (x *Window) BecomeKeyWindow() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("becomeKeyWindow"))
 }
 
-// Resigns the window’s key window status.
+// ResignKeyWindow resigns the window’s key window status.
 func (x *Window) ResignKeyWindow() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resignKeyWindow"))
 }
 
-// Informs the window that it has become the main window.
+// BecomeMainWindow informs the window that it has become the main window.
 func (x *Window) BecomeMainWindow() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("becomeMainWindow"))
 }
 
-// Resigns the window’s main window status.
+// ResignMainWindow resigns the window’s main window status.
 func (x *Window) ResignMainWindow() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resignMainWindow"))
 }
 
-// Simulates the user clicking the close button by momentarily highlighting the button and then closing the window.
+// ConvertRectToScreen converts a rectangle to the screen coordinate system from the window’s coordinate system.
+func (x *Window) ConvertRectToScreen(rect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("convertRectToScreen:"), rect)
+	return _r
+}
+
+// ConvertRectFromScreen converts a rectangle from the screen coordinate system to the window’s coordinate system.
+func (x *Window) ConvertRectFromScreen(rect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("convertRectFromScreen:"), rect)
+	return _r
+}
+
+// ConvertPointToScreen converts a point to the screen coordinate system from the window’s coordinate system.
+func (x *Window) ConvertPointToScreen(point corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPointToScreen:"), point)
+	return _r
+}
+
+// ConvertPointFromScreen converts a point from the screen coordinate system to the window’s coordinate system.
+func (x *Window) ConvertPointFromScreen(point corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPointFromScreen:"), point)
+	return _r
+}
+
+// ConvertRectToBacking converts a rectangle from the window’s coordinate system to its pixel-aligned backing store coordinate system.
+func (x *Window) ConvertRectToBacking(rect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("convertRectToBacking:"), rect)
+	return _r
+}
+
+// ConvertRectFromBacking converts a rectangle from its pixel-aligned backing store coordinate system to the window’s coordinate system.
+func (x *Window) ConvertRectFromBacking(rect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("convertRectFromBacking:"), rect)
+	return _r
+}
+
+// ConvertPointToBacking converts a point from the window’s coordinate system to its pixel-aligned backing store coordinate system.
+func (x *Window) ConvertPointToBacking(point corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPointToBacking:"), point)
+	return _r
+}
+
+// ConvertPointFromBacking converts a point from its pixel-aligned backing store coordinate system to the window’s coordinate system.
+func (x *Window) ConvertPointFromBacking(point corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPointFromBacking:"), point)
+	return _r
+}
+
+// PerformClose simulates the user clicking the close button by momentarily highlighting the button and then closing the window.
 func (x *Window) PerformClose(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performClose:"), objref.IDOf(sender))
 }
 
-// Simulates the user clicking the minimize button by momentarily highlighting the button, then minimizing the window.
+// PerformMiniaturize simulates the user clicking the minimize button by momentarily highlighting the button, then minimizing the window.
 func (x *Window) PerformMiniaturize(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performMiniaturize:"), objref.IDOf(sender))
 }
 
-// This action method simulates the user clicking the zoom box by momentarily highlighting the button and then zooming the window.
+// PerformZoom this action method simulates the user clicking the zoom box by momentarily highlighting the button and then zooming the window.
 func (x *Window) PerformZoom(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performZoom:"), objref.IDOf(sender))
 }
 
-// Runs the Print panel, and if the user chooses an option other than canceling, prints the window (its frame view and all subviews).
+// DataWithEPSInsideRect returns EPS data that draws the region of the window within a given rectangle.
+func (x *Window) DataWithEPSInsideRect(rect corefoundation.CGRect) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataWithEPSInsideRect:"), rect)
+	return obj.Wrap(_r)
+}
+
+// DataWithPDFInsideRect returns PDF data that draws the region of the window within a given rectangle.
+func (x *Window) DataWithPDFInsideRect(rect corefoundation.CGRect) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataWithPDFInsideRect:"), rect)
+	return obj.Wrap(_r)
+}
+
+// Print runs the Print panel, and if the user chooses an option other than canceling, prints the window (its frame view and all subviews).
 func (x *Window) Print(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("print:"), objref.IDOf(sender))
 }
 
-// Sets a Boolean value that indicates whether the window’s depth limit can change to match the depth of the screen it’s on.
+// SetDynamicDepthLimit sets a Boolean value that indicates whether the window’s depth limit can change to match the depth of the screen it’s on.
 func (x *Window) SetDynamicDepthLimit(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDynamicDepthLimit:"), flag)
 }
 
-// Invalidates the window shadow so that it is recomputed based on the current window shape.
+// InvalidateShadow invalidates the window shadow so that it is recomputed based on the current window shape.
 func (x *Window) InvalidateShadow() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateShadow"))
 }
 
-// Takes the window into or out of fullscreen mode,
+// ToggleFullScreen takes the window into or out of fullscreen mode,
 func (x *Window) ToggleFullScreen(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toggleFullScreen:"), objref.IDOf(sender))
 }
 
-// Sets the window’s frame rectangle from a given string representation.
+// SetFrameFromString sets the window’s frame rectangle from a given string representation.
 func (x *Window) SetFrameFromString(string_ obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameFromString:"), objref.IDOf(string_))
 }
 
-// Saves the window’s frame rectangle in the user defaults system under a given name.
+// SaveFrameUsingName saves the window’s frame rectangle in the user defaults system under a given name.
 func (x *Window) SaveFrameUsingName(name obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveFrameUsingName:"), objref.IDOf(name))
 }
 
-// Sets the window’s frame rectangle by reading the rectangle data stored under a given name from the defaults system. Can operate on non-resizable windows.
+// SetFrameUsingNameForce sets the window’s frame rectangle by reading the rectangle data stored under a given name from the defaults system. Can operate on non-resizable windows.
 func (x *Window) SetFrameUsingNameForce(name obj.Object, force bool) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setFrameUsingName:force:"), objref.IDOf(name), force)
 	return _r
 }
 
-// Sets the window’s frame rectangle by reading the rectangle data stored under a given name from the defaults system.
+// SetFrameUsingName sets the window’s frame rectangle by reading the rectangle data stored under a given name from the defaults system.
 func (x *Window) SetFrameUsingName(name obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setFrameUsingName:"), objref.IDOf(name))
 	return _r
 }
 
-// Sets the name AppKit uses to automatically save the window’s frame rectangle data in the defaults system.
+// SetFrameAutosaveName sets the name AppKit uses to automatically save the window’s frame rectangle data in the defaults system.
 func (x *Window) SetFrameAutosaveName(name obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setFrameAutosaveName:"), objref.IDOf(name))
 	return _r
 }
 
-// Starts a document-modal session and presents—or queues for presentation—a sheet.
+// BeginSheetCompletionHandler starts a document-modal session and presents—or queues for presentation—a sheet.
 func (x *Window) BeginSheetCompletionHandler(sheetWindow *Window, handler func(int)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginSheet:completionHandler:"), objref.IDOf(sheetWindow), objc.NewBlock(func(_ objc.Block, _b0 int) { handler(_b0) }))
 }
 
-// Starts a document-modal session and presents the specified critical sheet.
+// BeginCriticalSheetCompletionHandler starts a document-modal session and presents the specified critical sheet.
 func (x *Window) BeginCriticalSheetCompletionHandler(sheetWindow *Window, handler func(int)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginCriticalSheet:completionHandler:"), objref.IDOf(sheetWindow), objc.NewBlock(func(_ objc.Block, _b0 int) { handler(_b0) }))
 }
 
-// Ends a document-modal session and dismisses the specified sheet.
+// EndSheet ends a document-modal session and dismisses the specified sheet.
 func (x *Window) EndSheet(sheetWindow *Window) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endSheet:"), objref.IDOf(sheetWindow))
 }
 
-// Ends a document-modal session and dismisses the specified sheet.
+// EndSheetReturnCode ends a document-modal session and dismisses the specified sheet.
 func (x *Window) EndSheetReturnCode(sheetWindow *Window, returnCode int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endSheet:returnCode:"), objref.IDOf(sheetWindow), returnCode)
 }
 
-// Returns the window button of a given window button kind in the window’s view hierarchy.
+// StandardWindowButton returns the window button of a given window button kind in the window’s view hierarchy.
 func (x *Window) StandardWindowButton(b WindowButton) *Button {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standardWindowButton:"), b)
 	return ButtonFromID(_r)
 }
 
-// Adds a given window as a child window of the window.
+// AddChildWindowOrdered adds a given window as a child window of the window.
 func (x *Window) AddChildWindowOrdered(childWin *Window, place WindowOrderingMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addChildWindow:ordered:"), objref.IDOf(childWin), place)
 }
 
-// Detaches a given child window from the window.
+// RemoveChildWindow detaches a given child window from the window.
 func (x *Window) RemoveChildWindow(childWin *Window) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeChildWindow:"), objref.IDOf(childWin))
 }
 
-// A Boolean value that indicates if the window and its screen use a color space that can represent the specified display gamut.
+// CanRepresentDisplayGamut a Boolean value that indicates if the window and its screen use a color space that can represent the specified display gamut.
 func (x *Window) CanRepresentDisplayGamut(displayGamut DisplayGamut) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canRepresentDisplayGamut:"), displayGamut)
 	return _r
 }
 
-// Starts a window drag based on the specified mouse-down event.
+// PerformWindowDragWithEvent starts a window drag based on the specified mouse-down event.
 func (x *Window) PerformWindowDragWithEvent(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performWindowDragWithEvent:"), objref.IDOf(event))
 }
 
-// Searches for a candidate next key view and, if it finds one, tries to make it the first responder.
+// SelectNextKeyView searches for a candidate next key view and, if it finds one, tries to make it the first responder.
 func (x *Window) SelectNextKeyView(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectNextKeyView:"), objref.IDOf(sender))
 }
 
-// Searches for a candidate previous key view and, if it finds one, tries to make it the first responder.
+// SelectPreviousKeyView searches for a candidate previous key view and, if it finds one, tries to make it the first responder.
 func (x *Window) SelectPreviousKeyView(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectPreviousKeyView:"), objref.IDOf(sender))
 }
 
-// Gives key view status to the view that follows the given view.
+// SelectKeyViewFollowingView gives key view status to the view that follows the given view.
 func (x *Window) SelectKeyViewFollowingView(view *View) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectKeyViewFollowingView:"), objref.IDOf(view))
 }
 
-// Gives key view status to the view that precedes the given view.
+// SelectKeyViewPrecedingView gives key view status to the view that precedes the given view.
 func (x *Window) SelectKeyViewPrecedingView(view *View) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectKeyViewPrecedingView:"), objref.IDOf(view))
 }
 
-// Disables the default button cell’s key equivalent, so it doesn’t perform a click when the user presses Return (or Enter).
+// DisableKeyEquivalentForDefaultButtonCell disables the default button cell’s key equivalent, so it doesn’t perform a click when the user presses Return (or Enter).
 func (x *Window) DisableKeyEquivalentForDefaultButtonCell() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disableKeyEquivalentForDefaultButtonCell"))
 }
 
-// Reenables the default button cell’s key equivalent, so it performs a click when the user presses Return (or Enter).
+// EnableKeyEquivalentForDefaultButtonCell reenables the default button cell’s key equivalent, so it performs a click when the user presses Return (or Enter).
 func (x *Window) EnableKeyEquivalentForDefaultButtonCell() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enableKeyEquivalentForDefaultButtonCell"))
 }
 
-// Marks the key view loop as “dirty” and in need of recalculation.
+// RecalculateKeyViewLoop marks the key view loop as “dirty” and in need of recalculation.
 func (x *Window) RecalculateKeyViewLoop() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recalculateKeyViewLoop"))
 }
 
-// Toggles the visibility of the window’s toolbar.
+// ToggleToolbarShown toggles the visibility of the window’s toolbar.
 func (x *Window) ToggleToolbarShown(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toggleToolbarShown:"), objref.IDOf(sender))
 }
 
-// Presents the toolbar customization user interface.
+// RunToolbarCustomizationPalette presents the toolbar customization user interface.
 func (x *Window) RunToolbarCustomizationPalette(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runToolbarCustomizationPalette:"), objref.IDOf(sender))
 }
 
-// Selects the next tab in the tab group in the trailing direction.
+// SelectNextTab selects the next tab in the tab group in the trailing direction.
 func (x *Window) SelectNextTab(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectNextTab:"), objref.IDOf(sender))
 }
 
-// Selects the previous tab in the tab group in the leading direction.
+// SelectPreviousTab selects the previous tab in the tab group in the leading direction.
 func (x *Window) SelectPreviousTab(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectPreviousTab:"), objref.IDOf(sender))
 }
 
-// Moves the tab to a new containing window.
+// MoveTabToNewWindow moves the tab to a new containing window.
 func (x *Window) MoveTabToNewWindow(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveTabToNewWindow:"), objref.IDOf(sender))
 }
 
-// Merges all open windows into a single tabbed window.
+// MergeAllWindows merges all open windows into a single tabbed window.
 func (x *Window) MergeAllWindows(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mergeAllWindows:"), objref.IDOf(sender))
 }
 
-// Shows or hides the tab bar.
+// ToggleTabBar shows or hides the tab bar.
 func (x *Window) ToggleTabBar(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toggleTabBar:"), objref.IDOf(sender))
 }
 
-// Shows or hides the tab overview.
+// ToggleTabOverview shows or hides the tab overview.
 func (x *Window) ToggleTabOverview(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toggleTabOverview:"), objref.IDOf(sender))
 }
 
-// Adds the provided window as a new tab in a tabbed window using the specified ordering instruction.
+// AddTabbedWindowOrdered adds the provided window as a new tab in a tabbed window using the specified ordering instruction.
 func (x *Window) AddTabbedWindowOrdered(window *Window, ordered WindowOrderingMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTabbedWindow:ordered:"), objref.IDOf(window), ordered)
 }
 
-// Attempts to move window sharing (within a SharePlay session) from this window to another window.
+// TransferWindowSharingToWindow attempts to move window sharing (within a SharePlay session) from this window to another window.
 //
 // TransferWindowSharingToWindow blocks until the operation completes or ctx is cancelled.
 func (x *Window) TransferWindowSharingToWindow(ctx context.Context, window *Window) error {
@@ -902,7 +959,7 @@ func (x *Window) TransferWindowSharingToWindow(ctx context.Context, window *Wind
 	}
 }
 
-// Request sharing of window.  If there is an available ScreenCaptureKit sharing session, an alert will be presented asking the user to confirm the share
+// RequestSharingOfWindow request sharing of window.  If there is an available ScreenCaptureKit sharing session, an alert will be presented asking the user to confirm the share
 //
 // RequestSharingOfWindow blocks until the operation completes or ctx is cancelled.
 func (x *Window) RequestSharingOfWindow(ctx context.Context, window *Window) error {
@@ -921,7 +978,7 @@ func (x *Window) RequestSharingOfWindow(ctx context.Context, window *Window) err
 	}
 }
 
-// Request sharing of window to be provided later.  If there is an available ScreenCaptureKit sharing session, an alert will be presented asking the user to confirm the share.  The delegate will be asked to provide the window to share via windowForSharingRequestFromWindow:
+// RequestSharingOfWindowUsingPreviewTitle request sharing of window to be provided later.  If there is an available ScreenCaptureKit sharing session, an alert will be presented asking the user to confirm the share.  The delegate will be asked to provide the window to share via windowForSharingRequestFromWindow:
 //
 // RequestSharingOfWindowUsingPreviewTitle blocks until the operation completes or ctx is cancelled.
 func (x *Window) RequestSharingOfWindowUsingPreviewTitle(ctx context.Context, image *Image, title string) error {
@@ -940,6 +997,7 @@ func (x *Window) RequestSharingOfWindowUsingPreviewTitle(ctx context.Context, im
 	}
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *Window) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -948,11 +1006,12 @@ func (x *Window) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *Window) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// Secondary text that may be displayed adjacent to or below the primary title depending on the configuration of the window. A value of empty string will remove the subtitle from the window layout.
+// Subtitle secondary text that may be displayed adjacent to or below the primary title depending on the configuration of the window. A value of empty string will remove the subtitle from the window layout.
 func (x *Window) Subtitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitle"))
 	if _r == 0 {
@@ -961,71 +1020,81 @@ func (x *Window) Subtitle() string {
 	return purego.GoString(_r)
 }
 
-// Secondary text that may be displayed adjacent to or below the primary title depending on the configuration of the window. A value of empty string will remove the subtitle from the window layout.
+// SetSubtitle secondary text that may be displayed adjacent to or below the primary title depending on the configuration of the window. A value of empty string will remove the subtitle from the window layout.
 func (x *Window) SetSubtitle(subtitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 }
 
-// See the enum values for how this property works.
+// TitleVisibility see the enum values for how this property works.
 func (x *Window) TitleVisibility() WindowTitleVisibility {
 	_r := objc.Send[WindowTitleVisibility](objref.IDOf(x), objc.RegisterName("titleVisibility"))
 	return _r
 }
 
-// See the enum values for how this property works.
+// SetTitleVisibility see the enum values for how this property works.
 func (x *Window) SetTitleVisibility(titleVisibility WindowTitleVisibility) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleVisibility:"), titleVisibility)
 }
 
-// When \c YES, the titlebar doesn't draw its background, allowing all buttons to show through, and "click through" to happen. In general, this is only useful when \c NSFullSizeContentViewWindowMask is set.
+// TitlebarAppearsTransparent when \c YES, the titlebar doesn't draw its background, allowing all buttons to show through, and "click through" to happen. In general, this is only useful when \c NSFullSizeContentViewWindowMask is set.
 func (x *Window) TitlebarAppearsTransparent() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("titlebarAppearsTransparent"))
 	return _r
 }
 
-// When \c YES, the titlebar doesn't draw its background, allowing all buttons to show through, and "click through" to happen. In general, this is only useful when \c NSFullSizeContentViewWindowMask is set.
+// SetTitlebarAppearsTransparent when \c YES, the titlebar doesn't draw its background, allowing all buttons to show through, and "click through" to happen. In general, this is only useful when \c NSFullSizeContentViewWindowMask is set.
 func (x *Window) SetTitlebarAppearsTransparent(titlebarAppearsTransparent bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlebarAppearsTransparent:"), titlebarAppearsTransparent)
 }
 
-// Specifies how the titlebar area of the window should appear when the window displays an NSToolbar
+// ToolbarStyle specifies how the titlebar area of the window should appear when the window displays an NSToolbar
 func (x *Window) ToolbarStyle() WindowToolbarStyle {
 	_r := objc.Send[WindowToolbarStyle](objref.IDOf(x), objc.RegisterName("toolbarStyle"))
 	return _r
 }
 
-// Specifies how the titlebar area of the window should appear when the window displays an NSToolbar
+// SetToolbarStyle specifies how the titlebar area of the window should appear when the window displays an NSToolbar
 func (x *Window) SetToolbarStyle(toolbarStyle WindowToolbarStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolbarStyle:"), toolbarStyle)
 }
 
-// \c contentLayoutGuide is a corollary to \c contentLayoutRect. It can be used by autolayout constraints to automatically bind to the \c contentLayoutRect.
+// ContentLayoutRect the \c contentLayoutRect will return the area inside the window that is for non-obscured content. Typically, this is the same thing as the `contentView`'s frame. However, for windows with the \c NSFullSizeContentViewWindowMask set, there needs to be a way to determine the portion that is not under the toolbar. The \c contentLayoutRect returns the portion of the layout that is not obscured under the toolbar. \c contentLayoutRect is in window coordinates. It is KVO compliant. */
+func (x *Window) ContentLayoutRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("contentLayoutRect"))
+	return _r
+}
+
+// ContentLayoutGuide \c contentLayoutGuide is a corollary to \c contentLayoutRect. It can be used by autolayout constraints to automatically bind to the \c contentLayoutRect.
 func (x *Window) ContentLayoutGuide() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentLayoutGuide"))
 	return obj.Wrap(_r)
 }
 
+// TitlebarAccessoryViewControllers wraps the corresponding Objective-C method.
+//
 // TitlebarAccessoryViewControllers returns the collection as a Go slice.
 func (x *Window) TitlebarAccessoryViewControllers() []*TitlebarAccessoryViewController {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("titlebarAccessoryViewControllers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TitlebarAccessoryViewController { return TitlebarAccessoryViewControllerFromID(_id) })
 }
 
+// SetTitlebarAccessoryViewControllers wraps the corresponding Objective-C method.
 func (x *Window) SetTitlebarAccessoryViewControllers(titlebarAccessoryViewControllers []*TitlebarAccessoryViewController) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlebarAccessoryViewControllers:"), purego.SliceToNSArray(titlebarAccessoryViewControllers, func(_v *TitlebarAccessoryViewController) objc.ID { return objref.IDOf(_v) }))
 }
 
-// If url is not nil and its path is not empty, the window will show a document icon in the titlebar. If the url represents a filename or other resource with a known icon, that icon will be used as the document icon.  Otherwise the default document icon will be used.  The icon can be customized using `-[[NSWindow standardWindowButton:NSWindowDocumentIconButton] setImage:customImage]`.  If url is not nil and its path is not empty, the window will have a pop-up menu which can be shown via command-click on the area containing the document icon and title.  By default, this menu will display the path components of the url.  The presence and contents of this menu can be controlled by the delegate method `-[window:shouldPopUpDocumentPathMenu:]` If the url is nil or has an empty path, the window will not show a document icon and will not have a pop-up menu available via command-click.
+// RepresentedURL if url is not nil and its path is not empty, the window will show a document icon in the titlebar. If the url represents a filename or other resource with a known icon, that icon will be used as the document icon.  Otherwise the default document icon will be used.  The icon can be customized using `-[[NSWindow standardWindowButton:NSWindowDocumentIconButton] setImage:customImage]`.  If url is not nil and its path is not empty, the window will have a pop-up menu which can be shown via command-click on the area containing the document icon and title.  By default, this menu will display the path components of the url.  The presence and contents of this menu can be controlled by the delegate method `-[window:shouldPopUpDocumentPathMenu:]` If the url is nil or has an empty path, the window will not show a document icon and will not have a pop-up menu available via command-click.
 func (x *Window) RepresentedURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("representedURL"))
 	return obj.Wrap(_r)
 }
 
-// If url is not nil and its path is not empty, the window will show a document icon in the titlebar. If the url represents a filename or other resource with a known icon, that icon will be used as the document icon.  Otherwise the default document icon will be used.  The icon can be customized using `-[[NSWindow standardWindowButton:NSWindowDocumentIconButton] setImage:customImage]`.  If url is not nil and its path is not empty, the window will have a pop-up menu which can be shown via command-click on the area containing the document icon and title.  By default, this menu will display the path components of the url.  The presence and contents of this menu can be controlled by the delegate method `-[window:shouldPopUpDocumentPathMenu:]` If the url is nil or has an empty path, the window will not show a document icon and will not have a pop-up menu available via command-click.
+// SetRepresentedURL if url is not nil and its path is not empty, the window will show a document icon in the titlebar. If the url represents a filename or other resource with a known icon, that icon will be used as the document icon.  Otherwise the default document icon will be used.  The icon can be customized using `-[[NSWindow standardWindowButton:NSWindowDocumentIconButton] setImage:customImage]`.  If url is not nil and its path is not empty, the window will have a pop-up menu which can be shown via command-click on the area containing the document icon and title.  By default, this menu will display the path components of the url.  The presence and contents of this menu can be controlled by the delegate method `-[window:shouldPopUpDocumentPathMenu:]` If the url is nil or has an empty path, the window will not show a document icon and will not have a pop-up menu available via command-click.
 func (x *Window) SetRepresentedURL(representedURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedURL:"), rt.FileURL(representedURL))
 }
 
+// RepresentedFilename wraps the corresponding Objective-C method.
 func (x *Window) RepresentedFilename() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("representedFilename"))
 	if _r == 0 {
@@ -1034,150 +1103,236 @@ func (x *Window) RepresentedFilename() string {
 	return purego.GoString(_r)
 }
 
+// SetRepresentedFilename wraps the corresponding Objective-C method.
 func (x *Window) SetRepresentedFilename(representedFilename string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedFilename:"), purego.NSString(representedFilename))
 }
 
+// IsExcludedFromWindowsMenu wraps the corresponding Objective-C method.
 func (x *Window) IsExcludedFromWindowsMenu() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isExcludedFromWindowsMenu"))
 	return _r
 }
 
+// SetExcludedFromWindowsMenu wraps the corresponding Objective-C method.
 func (x *Window) SetExcludedFromWindowsMenu(excludedFromWindowsMenu bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedFromWindowsMenu:"), excludedFromWindowsMenu)
 }
 
+// ContentView wraps the corresponding Objective-C method.
 func (x *Window) ContentView() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentView"))
 	return ViewFromID(_r)
 }
 
+// SetContentView wraps the corresponding Objective-C method.
 func (x *Window) SetContentView(contentView *View) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 }
 
+// WindowNumber wraps the corresponding Objective-C method.
 func (x *Window) WindowNumber() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("windowNumber"))
 	return _r
 }
 
+// StyleMask wraps the corresponding Objective-C method.
 func (x *Window) StyleMask() WindowStyleMask {
 	_r := objc.Send[WindowStyleMask](objref.IDOf(x), objc.RegisterName("styleMask"))
 	return _r
 }
 
+// SetStyleMask wraps the corresponding Objective-C method.
 func (x *Window) SetStyleMask(styleMask WindowStyleMask) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyleMask:"), styleMask)
 }
 
+// CascadingReferenceFrame the frame to use when cascading or sizing a new window based on the receiver's position or size. This may be different from `frame` when the receiver is positioned by the system.
+func (x *Window) CascadingReferenceFrame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("cascadingReferenceFrame"))
+	return _r
+}
+
+// Frame wraps the corresponding Objective-C method.
+func (x *Window) Frame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frame"))
+	return _r
+}
+
+// InLiveResize wraps the corresponding Objective-C method.
 func (x *Window) InLiveResize() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("inLiveResize"))
 	return _r
 }
 
+// ResizeIncrements wraps the corresponding Objective-C method.
+func (x *Window) ResizeIncrements() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("resizeIncrements"))
+	return _r
+}
+
+// SetResizeIncrements wraps the corresponding Objective-C method.
+func (x *Window) SetResizeIncrements(resizeIncrements corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResizeIncrements:"), resizeIncrements)
+}
+
+// AspectRatio wraps the corresponding Objective-C method.
+func (x *Window) AspectRatio() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("aspectRatio"))
+	return _r
+}
+
+// SetAspectRatio wraps the corresponding Objective-C method.
+func (x *Window) SetAspectRatio(aspectRatio corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAspectRatio:"), aspectRatio)
+}
+
+// ContentResizeIncrements wraps the corresponding Objective-C method.
+func (x *Window) ContentResizeIncrements() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("contentResizeIncrements"))
+	return _r
+}
+
+// SetContentResizeIncrements wraps the corresponding Objective-C method.
+func (x *Window) SetContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentResizeIncrements:"), contentResizeIncrements)
+}
+
+// ContentAspectRatio wraps the corresponding Objective-C method.
+func (x *Window) ContentAspectRatio() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("contentAspectRatio"))
+	return _r
+}
+
+// SetContentAspectRatio wraps the corresponding Objective-C method.
+func (x *Window) SetContentAspectRatio(contentAspectRatio corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentAspectRatio:"), contentAspectRatio)
+}
+
+// ViewsNeedDisplay wraps the corresponding Objective-C method.
 func (x *Window) ViewsNeedDisplay() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("viewsNeedDisplay"))
 	return _r
 }
 
+// SetViewsNeedDisplay wraps the corresponding Objective-C method.
 func (x *Window) SetViewsNeedDisplay(viewsNeedDisplay bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewsNeedDisplay:"), viewsNeedDisplay)
 }
 
+// PreservesContentDuringLiveResize wraps the corresponding Objective-C method.
 func (x *Window) PreservesContentDuringLiveResize() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preservesContentDuringLiveResize"))
 	return _r
 }
 
+// SetPreservesContentDuringLiveResize wraps the corresponding Objective-C method.
 func (x *Window) SetPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesContentDuringLiveResize:"), preservesContentDuringLiveResize)
 }
 
+// FirstResponder wraps the corresponding Objective-C method.
 func (x *Window) FirstResponder() *Responder {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstResponder"))
 	return ResponderFromID(_r)
 }
 
+// ResizeFlags wraps the corresponding Objective-C method.
 func (x *Window) ResizeFlags() EventModifierFlags {
 	_r := objc.Send[EventModifierFlags](objref.IDOf(x), objc.RegisterName("resizeFlags"))
 	return _r
 }
 
+// IsReleasedWhenClosed wraps the corresponding Objective-C method.
 func (x *Window) IsReleasedWhenClosed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReleasedWhenClosed"))
 	return _r
 }
 
+// SetReleasedWhenClosed wraps the corresponding Objective-C method.
 func (x *Window) SetReleasedWhenClosed(releasedWhenClosed bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReleasedWhenClosed:"), releasedWhenClosed)
 }
 
+// IsZoomed wraps the corresponding Objective-C method.
 func (x *Window) IsZoomed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isZoomed"))
 	return _r
 }
 
+// IsMiniaturized wraps the corresponding Objective-C method.
 func (x *Window) IsMiniaturized() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMiniaturized"))
 	return _r
 }
 
+// BackgroundColor wraps the corresponding Objective-C method.
 func (x *Window) BackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
 }
 
+// SetBackgroundColor wraps the corresponding Objective-C method.
 func (x *Window) SetBackgroundColor(backgroundColor *Color) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
+// IsMovable wraps the corresponding Objective-C method.
 func (x *Window) IsMovable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMovable"))
 	return _r
 }
 
+// SetMovable wraps the corresponding Objective-C method.
 func (x *Window) SetMovable(movable bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMovable:"), movable)
 }
 
+// IsMovableByWindowBackground wraps the corresponding Objective-C method.
 func (x *Window) IsMovableByWindowBackground() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMovableByWindowBackground"))
 	return _r
 }
 
+// SetMovableByWindowBackground wraps the corresponding Objective-C method.
 func (x *Window) SetMovableByWindowBackground(movableByWindowBackground bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMovableByWindowBackground:"), movableByWindowBackground)
 }
 
+// HidesOnDeactivate wraps the corresponding Objective-C method.
 func (x *Window) HidesOnDeactivate() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hidesOnDeactivate"))
 	return _r
 }
 
+// SetHidesOnDeactivate wraps the corresponding Objective-C method.
 func (x *Window) SetHidesOnDeactivate(hidesOnDeactivate bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidesOnDeactivate:"), hidesOnDeactivate)
 }
 
-// Indicates whether a window can be hidden during `-[NSApplication hide:]`.  Default is \c YES.
+// CanHide indicates whether a window can be hidden during `-[NSApplication hide:]`.  Default is \c YES.
 func (x *Window) CanHide() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canHide"))
 	return _r
 }
 
-// Indicates whether a window can be hidden during `-[NSApplication hide:]`.  Default is \c YES.
+// SetCanHide indicates whether a window can be hidden during `-[NSApplication hide:]`.  Default is \c YES.
 func (x *Window) SetCanHide(canHide bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanHide:"), canHide)
 }
 
+// MiniwindowImage wraps the corresponding Objective-C method.
 func (x *Window) MiniwindowImage() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("miniwindowImage"))
 	return ImageFromID(_r)
 }
 
+// SetMiniwindowImage wraps the corresponding Objective-C method.
 func (x *Window) SetMiniwindowImage(miniwindowImage *Image) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiniwindowImage:"), objref.IDOf(miniwindowImage))
 }
 
+// MiniwindowTitle wraps the corresponding Objective-C method.
 func (x *Window) MiniwindowTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("miniwindowTitle"))
 	if _r == 0 {
@@ -1186,245 +1341,344 @@ func (x *Window) MiniwindowTitle() string {
 	return purego.GoString(_r)
 }
 
+// SetMiniwindowTitle wraps the corresponding Objective-C method.
 func (x *Window) SetMiniwindowTitle(miniwindowTitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiniwindowTitle:"), purego.NSString(miniwindowTitle))
 }
 
+// DockTile wraps the corresponding Objective-C method.
 func (x *Window) DockTile() *DockTile {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dockTile"))
 	return DockTileFromID(_r)
 }
 
+// IsDocumentEdited wraps the corresponding Objective-C method.
 func (x *Window) IsDocumentEdited() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDocumentEdited"))
 	return _r
 }
 
+// SetDocumentEdited wraps the corresponding Objective-C method.
 func (x *Window) SetDocumentEdited(documentEdited bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentEdited:"), documentEdited)
 }
 
+// IsVisible wraps the corresponding Objective-C method.
 func (x *Window) IsVisible() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVisible"))
 	return _r
 }
 
+// IsKeyWindow wraps the corresponding Objective-C method.
 func (x *Window) IsKeyWindow() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isKeyWindow"))
 	return _r
 }
 
+// IsMainWindow wraps the corresponding Objective-C method.
 func (x *Window) IsMainWindow() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMainWindow"))
 	return _r
 }
 
+// CanBecomeKeyWindow wraps the corresponding Objective-C method.
 func (x *Window) CanBecomeKeyWindow() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canBecomeKeyWindow"))
 	return _r
 }
 
+// CanBecomeMainWindow wraps the corresponding Objective-C method.
 func (x *Window) CanBecomeMainWindow() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canBecomeMainWindow"))
 	return _r
 }
 
+// WorksWhenModal wraps the corresponding Objective-C method.
 func (x *Window) WorksWhenModal() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("worksWhenModal"))
 	return _r
 }
 
-// A Boolean value that indicates whether or not to prevent application termination when the receiving window is presented modally. The value of this property is `YES` if the window should prevent application termination when modal; otherwise, `NO`. The default value is `YES`. However, note that some window subclasses and some windows created indirectly (like those created by UI frameworks like AppKit and SwiftUI), may have different default values. For example, the Open panel and toolbar customization sheets should not prevent application termination, so those windows have `preventsApplicationTerminationWhenModal` set to `NO`. Some `NSAlert`s, like those that are simply informational, have windows that do not prevent application termination by default. Setting this property overrides the default behavior.
+// PreventsApplicationTerminationWhenModal a Boolean value that indicates whether or not to prevent application termination when the receiving window is presented modally. The value of this property is `YES` if the window should prevent application termination when modal; otherwise, `NO`. The default value is `YES`. However, note that some window subclasses and some windows created indirectly (like those created by UI frameworks like AppKit and SwiftUI), may have different default values. For example, the Open panel and toolbar customization sheets should not prevent application termination, so those windows have `preventsApplicationTerminationWhenModal` set to `NO`. Some `NSAlert`s, like those that are simply informational, have windows that do not prevent application termination by default. Setting this property overrides the default behavior.
 func (x *Window) PreventsApplicationTerminationWhenModal() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preventsApplicationTerminationWhenModal"))
 	return _r
 }
 
-// A Boolean value that indicates whether or not to prevent application termination when the receiving window is presented modally. The value of this property is `YES` if the window should prevent application termination when modal; otherwise, `NO`. The default value is `YES`. However, note that some window subclasses and some windows created indirectly (like those created by UI frameworks like AppKit and SwiftUI), may have different default values. For example, the Open panel and toolbar customization sheets should not prevent application termination, so those windows have `preventsApplicationTerminationWhenModal` set to `NO`. Some `NSAlert`s, like those that are simply informational, have windows that do not prevent application termination by default. Setting this property overrides the default behavior.
+// SetPreventsApplicationTerminationWhenModal a Boolean value that indicates whether or not to prevent application termination when the receiving window is presented modally. The value of this property is `YES` if the window should prevent application termination when modal; otherwise, `NO`. The default value is `YES`. However, note that some window subclasses and some windows created indirectly (like those created by UI frameworks like AppKit and SwiftUI), may have different default values. For example, the Open panel and toolbar customization sheets should not prevent application termination, so those windows have `preventsApplicationTerminationWhenModal` set to `NO`. Some `NSAlert`s, like those that are simply informational, have windows that do not prevent application termination by default. Setting this property overrides the default behavior.
 func (x *Window) SetPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreventsApplicationTerminationWhenModal:"), preventsApplicationTerminationWhenModal)
 }
 
-// Returns the scale factor representing the number of backing store pixels corresponding to each linear unit in window space on this \c NSWindow. This method is provided for rare cases when the explicit scale factor is needed. Please use `-convert*ToBacking:` methods whenever possible.
+// BackingScaleFactor returns the scale factor representing the number of backing store pixels corresponding to each linear unit in window space on this \c NSWindow. This method is provided for rare cases when the explicit scale factor is needed. Please use `-convert*ToBacking:` methods whenever possible.
 func (x *Window) BackingScaleFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("backingScaleFactor"))
 	return _r
 }
 
-// Default is \c NO. Set to \c YES to allow a window to display tooltips even when the application is in the background.  Note that, enabling tooltips in an inactive application will cause the app to do work any time the mouse passes over the window.  This can degrade system performance. Returns \c YES if this window displays tooltips even when the application is in the background.  To configure this setting you should call `-setAllowsToolTipsWhenApplicationIsInactive:` instead of overriding `-allowsToolTipsWhenApplicationIsInactive`.
+// AllowsToolTipsWhenApplicationIsInactive default is \c NO. Set to \c YES to allow a window to display tooltips even when the application is in the background.  Note that, enabling tooltips in an inactive application will cause the app to do work any time the mouse passes over the window.  This can degrade system performance. Returns \c YES if this window displays tooltips even when the application is in the background.  To configure this setting you should call `-setAllowsToolTipsWhenApplicationIsInactive:` instead of overriding `-allowsToolTipsWhenApplicationIsInactive`.
 func (x *Window) AllowsToolTipsWhenApplicationIsInactive() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsToolTipsWhenApplicationIsInactive"))
 	return _r
 }
 
-// Default is \c NO. Set to \c YES to allow a window to display tooltips even when the application is in the background.  Note that, enabling tooltips in an inactive application will cause the app to do work any time the mouse passes over the window.  This can degrade system performance. Returns \c YES if this window displays tooltips even when the application is in the background.  To configure this setting you should call `-setAllowsToolTipsWhenApplicationIsInactive:` instead of overriding `-allowsToolTipsWhenApplicationIsInactive`.
+// SetAllowsToolTipsWhenApplicationIsInactive default is \c NO. Set to \c YES to allow a window to display tooltips even when the application is in the background.  Note that, enabling tooltips in an inactive application will cause the app to do work any time the mouse passes over the window.  This can degrade system performance. Returns \c YES if this window displays tooltips even when the application is in the background.  To configure this setting you should call `-setAllowsToolTipsWhenApplicationIsInactive:` instead of overriding `-allowsToolTipsWhenApplicationIsInactive`.
 func (x *Window) SetAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsToolTipsWhenApplicationIsInactive:"), allowsToolTipsWhenApplicationIsInactive)
 }
 
+// BackingType wraps the corresponding Objective-C method.
 func (x *Window) BackingType() BackingStoreType {
 	_r := objc.Send[BackingStoreType](objref.IDOf(x), objc.RegisterName("backingType"))
 	return _r
 }
 
+// SetBackingType wraps the corresponding Objective-C method.
 func (x *Window) SetBackingType(backingType BackingStoreType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackingType:"), backingType)
 }
 
+// Level wraps the corresponding Objective-C method.
 func (x *Window) Level() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("level"))
 	return _r
 }
 
+// SetLevel wraps the corresponding Objective-C method.
 func (x *Window) SetLevel(level int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevel:"), level)
 }
 
+// DepthLimit wraps the corresponding Objective-C method.
 func (x *Window) DepthLimit() WindowDepth {
 	_r := objc.Send[WindowDepth](objref.IDOf(x), objc.RegisterName("depthLimit"))
 	return _r
 }
 
+// SetDepthLimit wraps the corresponding Objective-C method.
 func (x *Window) SetDepthLimit(depthLimit WindowDepth) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthLimit:"), depthLimit)
 }
 
+// HasDynamicDepthLimit wraps the corresponding Objective-C method.
 func (x *Window) HasDynamicDepthLimit() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasDynamicDepthLimit"))
 	return _r
 }
 
-// The screen property returns the best screen for the window. If the window only intersects one screen, it returns that screen. If it intersects more than one screen, then it resolves the tie through based on what space it is mostly on. It may return nil if there are no available screens, or it is completely off screen.
+// Screen the screen property returns the best screen for the window. If the window only intersects one screen, it returns that screen. If it intersects more than one screen, then it resolves the tie through based on what space it is mostly on. It may return nil if there are no available screens, or it is completely off screen.
 func (x *Window) Screen() *Screen {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("screen"))
 	return ScreenFromID(_r)
 }
 
+// DeepestScreen wraps the corresponding Objective-C method.
 func (x *Window) DeepestScreen() *Screen {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deepestScreen"))
 	return ScreenFromID(_r)
 }
 
+// HasShadow wraps the corresponding Objective-C method.
 func (x *Window) HasShadow() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasShadow"))
 	return _r
 }
 
+// SetHasShadow wraps the corresponding Objective-C method.
 func (x *Window) SetHasShadow(hasShadow bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasShadow:"), hasShadow)
 }
 
+// AlphaValue wraps the corresponding Objective-C method.
 func (x *Window) AlphaValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alphaValue"))
 	return _r
 }
 
+// SetAlphaValue wraps the corresponding Objective-C method.
 func (x *Window) SetAlphaValue(alphaValue float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 }
 
+// IsOpaque wraps the corresponding Objective-C method.
 func (x *Window) IsOpaque() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOpaque"))
 	return _r
 }
 
+// SetOpaque wraps the corresponding Objective-C method.
 func (x *Window) SetOpaque(opaque bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
 }
 
-// `-setSharingType:` specifies whether the window content can be read from another process.  The default sharing type is \c NSWindowSharingReadOnly, which means other processes can read the window content (eg. for window capture) but cannot modify it.  If you set your window sharing type to \c NSWindowSharingNone, so that the content cannot be captured, your window will also not be able to participate in a number of system services, so this setting should be used with caution.
+// SharingType `-setSharingType:` specifies whether the window content can be read from another process.  The default sharing type is \c NSWindowSharingReadOnly, which means other processes can read the window content (eg. for window capture) but cannot modify it.  If you set your window sharing type to \c NSWindowSharingNone, so that the content cannot be captured, your window will also not be able to participate in a number of system services, so this setting should be used with caution.
 func (x *Window) SharingType() WindowSharingType {
 	_r := objc.Send[WindowSharingType](objref.IDOf(x), objc.RegisterName("sharingType"))
 	return _r
 }
 
-// `-setSharingType:` specifies whether the window content can be read from another process.  The default sharing type is \c NSWindowSharingReadOnly, which means other processes can read the window content (eg. for window capture) but cannot modify it.  If you set your window sharing type to \c NSWindowSharingNone, so that the content cannot be captured, your window will also not be able to participate in a number of system services, so this setting should be used with caution.
+// SetSharingType `-setSharingType:` specifies whether the window content can be read from another process.  The default sharing type is \c NSWindowSharingReadOnly, which means other processes can read the window content (eg. for window capture) but cannot modify it.  If you set your window sharing type to \c NSWindowSharingNone, so that the content cannot be captured, your window will also not be able to participate in a number of system services, so this setting should be used with caution.
 func (x *Window) SetSharingType(sharingType WindowSharingType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharingType:"), sharingType)
 }
 
-// Controls whether threading of view drawing should be enabled for this window.  Defaults to \c YES.  When this is set to \c YES, AppKit's view system is allowed to perform `-drawRect:` activity for the window's views on threads other than the main thread, for views that have `canDrawConcurrently == YES`.  When this is set to \c NO, the window's views will be drawn serially as on 10.5 and earlier, even though some of the views may have `canDrawConcurrently == YES`.
+// AllowsConcurrentViewDrawing controls whether threading of view drawing should be enabled for this window.  Defaults to \c YES.  When this is set to \c YES, AppKit's view system is allowed to perform `-drawRect:` activity for the window's views on threads other than the main thread, for views that have `canDrawConcurrently == YES`.  When this is set to \c NO, the window's views will be drawn serially as on 10.5 and earlier, even though some of the views may have `canDrawConcurrently == YES`.
 func (x *Window) AllowsConcurrentViewDrawing() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsConcurrentViewDrawing"))
 	return _r
 }
 
-// Controls whether threading of view drawing should be enabled for this window.  Defaults to \c YES.  When this is set to \c YES, AppKit's view system is allowed to perform `-drawRect:` activity for the window's views on threads other than the main thread, for views that have `canDrawConcurrently == YES`.  When this is set to \c NO, the window's views will be drawn serially as on 10.5 and earlier, even though some of the views may have `canDrawConcurrently == YES`.
+// SetAllowsConcurrentViewDrawing controls whether threading of view drawing should be enabled for this window.  Defaults to \c YES.  When this is set to \c YES, AppKit's view system is allowed to perform `-drawRect:` activity for the window's views on threads other than the main thread, for views that have `canDrawConcurrently == YES`.  When this is set to \c NO, the window's views will be drawn serially as on 10.5 and earlier, even though some of the views may have `canDrawConcurrently == YES`.
 func (x *Window) SetAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsConcurrentViewDrawing:"), allowsConcurrentViewDrawing)
 }
 
+// DisplaysWhenScreenProfileChanges wraps the corresponding Objective-C method.
 func (x *Window) DisplaysWhenScreenProfileChanges() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysWhenScreenProfileChanges"))
 	return _r
 }
 
+// SetDisplaysWhenScreenProfileChanges wraps the corresponding Objective-C method.
 func (x *Window) SetDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysWhenScreenProfileChanges:"), displaysWhenScreenProfileChanges)
 }
 
-// This API controls whether the receiver is permitted onscreen before the user has logged in.  This property is off by default.  Alert panels and windows presented by input managers are examples of windows which should have this property set.
+// CanBecomeVisibleWithoutLogin this API controls whether the receiver is permitted onscreen before the user has logged in.  This property is off by default.  Alert panels and windows presented by input managers are examples of windows which should have this property set.
 func (x *Window) CanBecomeVisibleWithoutLogin() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canBecomeVisibleWithoutLogin"))
 	return _r
 }
 
-// This API controls whether the receiver is permitted onscreen before the user has logged in.  This property is off by default.  Alert panels and windows presented by input managers are examples of windows which should have this property set.
+// SetCanBecomeVisibleWithoutLogin this API controls whether the receiver is permitted onscreen before the user has logged in.  This property is off by default.  Alert panels and windows presented by input managers are examples of windows which should have this property set.
 func (x *Window) SetCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanBecomeVisibleWithoutLogin:"), canBecomeVisibleWithoutLogin)
 }
 
+// CollectionBehavior wraps the corresponding Objective-C method.
 func (x *Window) CollectionBehavior() WindowCollectionBehavior {
 	_r := objc.Send[WindowCollectionBehavior](objref.IDOf(x), objc.RegisterName("collectionBehavior"))
 	return _r
 }
 
+// SetCollectionBehavior wraps the corresponding Objective-C method.
 func (x *Window) SetCollectionBehavior(collectionBehavior WindowCollectionBehavior) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollectionBehavior:"), collectionBehavior)
 }
 
-// Provides for per-window control over automatic orderFront/orderOut animation behaviors added in 10.7.  Can be set to \c NSWindowAnimationBehaviorNone to disable Appkit's automatic animations for a given window, or to one of the other non-Default \c NSWindowAnimationBehavior values to override AppKit's automatic inference of appropriate animation behavior based on the window's apparent type.
+// AnimationBehavior provides for per-window control over automatic orderFront/orderOut animation behaviors added in 10.7.  Can be set to \c NSWindowAnimationBehaviorNone to disable Appkit's automatic animations for a given window, or to one of the other non-Default \c NSWindowAnimationBehavior values to override AppKit's automatic inference of appropriate animation behavior based on the window's apparent type.
 func (x *Window) AnimationBehavior() WindowAnimationBehavior {
 	_r := objc.Send[WindowAnimationBehavior](objref.IDOf(x), objc.RegisterName("animationBehavior"))
 	return _r
 }
 
-// Provides for per-window control over automatic orderFront/orderOut animation behaviors added in 10.7.  Can be set to \c NSWindowAnimationBehaviorNone to disable Appkit's automatic animations for a given window, or to one of the other non-Default \c NSWindowAnimationBehavior values to override AppKit's automatic inference of appropriate animation behavior based on the window's apparent type.
+// SetAnimationBehavior provides for per-window control over automatic orderFront/orderOut animation behaviors added in 10.7.  Can be set to \c NSWindowAnimationBehaviorNone to disable Appkit's automatic animations for a given window, or to one of the other non-Default \c NSWindowAnimationBehavior values to override AppKit's automatic inference of appropriate animation behavior based on the window's apparent type.
 func (x *Window) SetAnimationBehavior(animationBehavior WindowAnimationBehavior) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationBehavior:"), animationBehavior)
 }
 
-// Returns \c YES if this window is associated with the active space.  For visible windows, this API indicates whether the window is currently visible on the active space.  For offscreen windows, it indicates whether ordering the window onscreen would make it bring it onto the active space
+// IsOnActiveSpace returns \c YES if this window is associated with the active space.  For visible windows, this API indicates whether the window is currently visible on the active space.  For offscreen windows, it indicates whether ordering the window onscreen would make it bring it onto the active space
 func (x *Window) IsOnActiveSpace() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOnActiveSpace"))
 	return _r
 }
 
+// StringWithSavedFrame wraps the corresponding Objective-C method.
 func (x *Window) StringWithSavedFrame() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringWithSavedFrame"))
 	return obj.Wrap(_r)
 }
 
+// FrameAutosaveName wraps the corresponding Objective-C method.
 func (x *Window) FrameAutosaveName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frameAutosaveName"))
 	return obj.Wrap(_r)
 }
 
+// MinSize wraps the corresponding Objective-C method.
+func (x *Window) MinSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("minSize"))
+	return _r
+}
+
+// SetMinSize wraps the corresponding Objective-C method.
+func (x *Window) SetMinSize(minSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinSize:"), minSize)
+}
+
+// MaxSize wraps the corresponding Objective-C method.
+func (x *Window) MaxSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("maxSize"))
+	return _r
+}
+
+// SetMaxSize wraps the corresponding Objective-C method.
+func (x *Window) SetMaxSize(maxSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSize:"), maxSize)
+}
+
+// ContentMinSize wraps the corresponding Objective-C method.
+func (x *Window) ContentMinSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("contentMinSize"))
+	return _r
+}
+
+// SetContentMinSize wraps the corresponding Objective-C method.
+func (x *Window) SetContentMinSize(contentMinSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentMinSize:"), contentMinSize)
+}
+
+// ContentMaxSize wraps the corresponding Objective-C method.
+func (x *Window) ContentMaxSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("contentMaxSize"))
+	return _r
+}
+
+// SetContentMaxSize wraps the corresponding Objective-C method.
+func (x *Window) SetContentMaxSize(contentMaxSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentMaxSize:"), contentMaxSize)
+}
+
+// MinFullScreenContentSize wraps the corresponding Objective-C method.
+func (x *Window) MinFullScreenContentSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("minFullScreenContentSize"))
+	return _r
+}
+
+// SetMinFullScreenContentSize wraps the corresponding Objective-C method.
+func (x *Window) SetMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinFullScreenContentSize:"), minFullScreenContentSize)
+}
+
+// MaxFullScreenContentSize wraps the corresponding Objective-C method.
+func (x *Window) MaxFullScreenContentSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("maxFullScreenContentSize"))
+	return _r
+}
+
+// SetMaxFullScreenContentSize wraps the corresponding Objective-C method.
+func (x *Window) SetMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxFullScreenContentSize:"), maxFullScreenContentSize)
+}
+
+// DeviceDescription wraps the corresponding Objective-C method.
 func (x *Window) DeviceDescription() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceDescription"))
 	return obj.Wrap(_r)
 }
 
+// WindowController wraps the corresponding Objective-C method.
 func (x *Window) WindowController() *WindowController {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("windowController"))
 	return WindowControllerFromID(_r)
 }
 
+// SetWindowController wraps the corresponding Objective-C method.
 func (x *Window) SetWindowController(windowController *WindowController) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindowController:"), objref.IDOf(windowController))
 }
 
-// An ordered array of the sheets on the window. This consists of the presented sheets in top-to-bottom order, followed by queued sheets in the order they were queued. This does not include nested/sub-sheets.
+// Sheets an ordered array of the sheets on the window. This consists of the presented sheets in top-to-bottom order, followed by queued sheets in the order they were queued. This does not include nested/sub-sheets.
 //
 // Sheets returns the collection as a Go slice.
 func (x *Window) Sheets() []*Window {
@@ -1432,153 +1686,171 @@ func (x *Window) Sheets() []*Window {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Window { return WindowFromID(_id) })
 }
 
-// Returns the top-most sheet if there is one or more sheets, or nil if there is no sheet.
+// AttachedSheet returns the top-most sheet if there is one or more sheets, or nil if there is no sheet.
 func (x *Window) AttachedSheet() *Window {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachedSheet"))
 	return WindowFromID(_r)
 }
 
+// IsSheet wraps the corresponding Objective-C method.
 func (x *Window) IsSheet() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSheet"))
 	return _r
 }
 
-// Returns the window that the sheet is directly attached to. This is based on the logical attachment of the sheet, not visual attachment. This relationship exists starting when the sheet is begun (using \c NSApplication's `-beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo: or NSWindow's -beginSheet:completionHandler:`), and ending once it is ordered out. Returns nil if the window is not a sheet or has no sheet parent.
+// SheetParent returns the window that the sheet is directly attached to. This is based on the logical attachment of the sheet, not visual attachment. This relationship exists starting when the sheet is begun (using \c NSApplication's `-beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo: or NSWindow's -beginSheet:completionHandler:`), and ending once it is ordered out. Returns nil if the window is not a sheet or has no sheet parent.
 func (x *Window) SheetParent() *Window {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sheetParent"))
 	return WindowFromID(_r)
 }
 
+// ChildWindows wraps the corresponding Objective-C method.
+//
 // ChildWindows returns the collection as a Go slice.
 func (x *Window) ChildWindows() []*Window {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("childWindows"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Window { return WindowFromID(_id) })
 }
 
+// ParentWindow wraps the corresponding Objective-C method.
 func (x *Window) ParentWindow() *Window {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentWindow"))
 	return WindowFromID(_r)
 }
 
+// SetParentWindow wraps the corresponding Objective-C method.
 func (x *Window) SetParentWindow(parentWindow *Window) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
 }
 
-// If set, the receiver will inherit the appearance of that object, as well as use KVO to observe its effectiveAppearance for changes. Typically this is used for child windows that are shown from a parent window or specific view. Defaults to NSApp.
+// AppearanceSource if set, the receiver will inherit the appearance of that object, as well as use KVO to observe its effectiveAppearance for changes. Typically this is used for child windows that are shown from a parent window or specific view. Defaults to NSApp.
 func (x *Window) AppearanceSource() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appearanceSource"))
 	return obj.Wrap(_r)
 }
 
-// If set, the receiver will inherit the appearance of that object, as well as use KVO to observe its effectiveAppearance for changes. Typically this is used for child windows that are shown from a parent window or specific view. Defaults to NSApp.
+// SetAppearanceSource if set, the receiver will inherit the appearance of that object, as well as use KVO to observe its effectiveAppearance for changes. Typically this is used for child windows that are shown from a parent window or specific view. Defaults to NSApp.
 func (x *Window) SetAppearanceSource(appearanceSource obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppearanceSource:"), objref.IDOf(appearanceSource))
 }
 
+// ColorSpace wraps the corresponding Objective-C method.
 func (x *Window) ColorSpace() *ColorSpace {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorSpace"))
 	return ColorSpaceFromID(_r)
 }
 
+// SetColorSpace wraps the corresponding Objective-C method.
 func (x *Window) SetColorSpace(colorSpace *ColorSpace) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
 }
 
+// OcclusionState wraps the corresponding Objective-C method.
 func (x *Window) OcclusionState() WindowOcclusionState {
 	_r := objc.Send[WindowOcclusionState](objref.IDOf(x), objc.RegisterName("occlusionState"))
 	return _r
 }
 
-// Specifies the style of separator displayed between the window's titlebar and content. The default value is NSTitlebarSeparatorStyleAutomatic. Changing this value will override any preference made by `NSSplitViewItem`.
+// TitlebarSeparatorStyle specifies the style of separator displayed between the window's titlebar and content. The default value is NSTitlebarSeparatorStyleAutomatic. Changing this value will override any preference made by `NSSplitViewItem`.
 func (x *Window) TitlebarSeparatorStyle() TitlebarSeparatorStyle {
 	_r := objc.Send[TitlebarSeparatorStyle](objref.IDOf(x), objc.RegisterName("titlebarSeparatorStyle"))
 	return _r
 }
 
-// Specifies the style of separator displayed between the window's titlebar and content. The default value is NSTitlebarSeparatorStyleAutomatic. Changing this value will override any preference made by `NSSplitViewItem`.
+// SetTitlebarSeparatorStyle specifies the style of separator displayed between the window's titlebar and content. The default value is NSTitlebarSeparatorStyleAutomatic. Changing this value will override any preference made by `NSSplitViewItem`.
 func (x *Window) SetTitlebarSeparatorStyle(titlebarSeparatorStyle TitlebarSeparatorStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlebarSeparatorStyle:"), titlebarSeparatorStyle)
 }
 
-// The main content view controller for the window. This provides the contentView of the window. Assigning this value will remove the existing contentView and will make the contentViewController.view the main contentView for the window. The default value is nil. The contentViewController only controls the contentView, and not the title of the window. The window title can easily be bound to the contentViewController with the following: [window bind:NSTitleBinding toObject:contentViewController withKeyPath:
+// ContentViewController the main content view controller for the window. This provides the contentView of the window. Assigning this value will remove the existing contentView and will make the contentViewController.view the main contentView for the window. The default value is nil. The contentViewController only controls the contentView, and not the title of the window. The window title can easily be bound to the contentViewController with the following: [window bind:NSTitleBinding toObject:contentViewController withKeyPath:
 func (x *Window) ContentViewController() *ViewController {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentViewController"))
 	return ViewControllerFromID(_r)
 }
 
-// The main content view controller for the window. This provides the contentView of the window. Assigning this value will remove the existing contentView and will make the contentViewController.view the main contentView for the window. The default value is nil. The contentViewController only controls the contentView, and not the title of the window. The window title can easily be bound to the contentViewController with the following: [window bind:NSTitleBinding toObject:contentViewController withKeyPath:
+// SetContentViewController the main content view controller for the window. This provides the contentView of the window. Assigning this value will remove the existing contentView and will make the contentViewController.view the main contentView for the window. The default value is nil. The contentViewController only controls the contentView, and not the title of the window. The window title can easily be bound to the contentViewController with the following: [window bind:NSTitleBinding toObject:contentViewController withKeyPath:
 func (x *Window) SetContentViewController(contentViewController *ViewController) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
 }
 
+// SetInitialFirstResponder wraps the corresponding Objective-C method.
 func (x *Window) SetInitialFirstResponder(initialFirstResponder *View) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialFirstResponder:"), objref.IDOf(initialFirstResponder))
 }
 
+// KeyViewSelectionDirection wraps the corresponding Objective-C method.
 func (x *Window) KeyViewSelectionDirection() SelectionDirection {
 	_r := objc.Send[SelectionDirection](objref.IDOf(x), objc.RegisterName("keyViewSelectionDirection"))
 	return _r
 }
 
+// DefaultButtonCell wraps the corresponding Objective-C method.
 func (x *Window) DefaultButtonCell() *ButtonCell {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultButtonCell"))
 	return ButtonCellFromID(_r)
 }
 
+// SetDefaultButtonCell wraps the corresponding Objective-C method.
 func (x *Window) SetDefaultButtonCell(defaultButtonCell *ButtonCell) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultButtonCell:"), objref.IDOf(defaultButtonCell))
 }
 
+// AutorecalculatesKeyViewLoop wraps the corresponding Objective-C method.
 func (x *Window) AutorecalculatesKeyViewLoop() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autorecalculatesKeyViewLoop"))
 	return _r
 }
 
+// SetAutorecalculatesKeyViewLoop wraps the corresponding Objective-C method.
 func (x *Window) SetAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutorecalculatesKeyViewLoop:"), autorecalculatesKeyViewLoop)
 }
 
+// Toolbar wraps the corresponding Objective-C method.
 func (x *Window) Toolbar() *Toolbar {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toolbar"))
 	return ToolbarFromID(_r)
 }
 
+// SetToolbar wraps the corresponding Objective-C method.
 func (x *Window) SetToolbar(toolbar *Toolbar) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolbar:"), objref.IDOf(toolbar))
 }
 
+// ShowsToolbarButton wraps the corresponding Objective-C method.
 func (x *Window) ShowsToolbarButton() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsToolbarButton"))
 	return _r
 }
 
+// SetShowsToolbarButton wraps the corresponding Objective-C method.
 func (x *Window) SetShowsToolbarButton(showsToolbarButton bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsToolbarButton:"), showsToolbarButton)
 }
 
-// Get and set the tabbing mode for this window. This should be set before a window is shown. The default value is \c NSWindowTabbingModeAutomatic. When the value is \c NSWindowTabbingModeAutomatic, the system will look at the \c userTabbingPreference and automatically tab windows together based on the tabbingIdentifier, when it is appropriate to do so.
+// TabbingMode get and set the tabbing mode for this window. This should be set before a window is shown. The default value is \c NSWindowTabbingModeAutomatic. When the value is \c NSWindowTabbingModeAutomatic, the system will look at the \c userTabbingPreference and automatically tab windows together based on the tabbingIdentifier, when it is appropriate to do so.
 func (x *Window) TabbingMode() WindowTabbingMode {
 	_r := objc.Send[WindowTabbingMode](objref.IDOf(x), objc.RegisterName("tabbingMode"))
 	return _r
 }
 
-// Get and set the tabbing mode for this window. This should be set before a window is shown. The default value is \c NSWindowTabbingModeAutomatic. When the value is \c NSWindowTabbingModeAutomatic, the system will look at the \c userTabbingPreference and automatically tab windows together based on the tabbingIdentifier, when it is appropriate to do so.
+// SetTabbingMode get and set the tabbing mode for this window. This should be set before a window is shown. The default value is \c NSWindowTabbingModeAutomatic. When the value is \c NSWindowTabbingModeAutomatic, the system will look at the \c userTabbingPreference and automatically tab windows together based on the tabbingIdentifier, when it is appropriate to do so.
 func (x *Window) SetTabbingMode(tabbingMode WindowTabbingMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabbingMode:"), tabbingMode)
 }
 
-// Windows with the same \c tabbingIdentifier will have the ability to be tabbed together when a window is being shown. This allows aggregation of similar windows. By default, the \c tabbingIdentifier will be generated based on inherent window properties, such as the window class name, the delegate class name, the window controller class name, and some additional state. Windows can be explicitly made to group together by using the same \c tabbingIdentifier.
+// TabbingIdentifier windows with the same \c tabbingIdentifier will have the ability to be tabbed together when a window is being shown. This allows aggregation of similar windows. By default, the \c tabbingIdentifier will be generated based on inherent window properties, such as the window class name, the delegate class name, the window controller class name, and some additional state. Windows can be explicitly made to group together by using the same \c tabbingIdentifier.
 func (x *Window) TabbingIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tabbingIdentifier"))
 	return obj.Wrap(_r)
 }
 
-// Windows with the same \c tabbingIdentifier will have the ability to be tabbed together when a window is being shown. This allows aggregation of similar windows. By default, the \c tabbingIdentifier will be generated based on inherent window properties, such as the window class name, the delegate class name, the window controller class name, and some additional state. Windows can be explicitly made to group together by using the same \c tabbingIdentifier.
+// SetTabbingIdentifier windows with the same \c tabbingIdentifier will have the ability to be tabbed together when a window is being shown. This allows aggregation of similar windows. By default, the \c tabbingIdentifier will be generated based on inherent window properties, such as the window class name, the delegate class name, the window controller class name, and some additional state. Windows can be explicitly made to group together by using the same \c tabbingIdentifier.
 func (x *Window) SetTabbingIdentifier(tabbingIdentifier obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabbingIdentifier:"), objref.IDOf(tabbingIdentifier))
 }
 
-// This is now a cover for `self.tabGroup.windows`, but will return nil if the window is not showing a tab bar.
+// TabbedWindows this is now a cover for `self.tabGroup.windows`, but will return nil if the window is not showing a tab bar.
 //
 // TabbedWindows returns the collection as a Go slice.
 func (x *Window) TabbedWindows() []*Window {
@@ -1586,348 +1858,416 @@ func (x *Window) TabbedWindows() []*Window {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Window { return WindowFromID(_id) })
 }
 
-// Access the properties for this window when it is a tabbed window environment. See the \c NSWindowTab header and comments for more information.
+// Tab access the properties for this window when it is a tabbed window environment. See the \c NSWindowTab header and comments for more information.
 func (x *Window) Tab() *WindowTab {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tab"))
 	return WindowTabFromID(_r)
 }
 
-// Represents a tab group of windows. This \c tabGroup is lazily created on demand.
+// TabGroup represents a tab group of windows. This \c tabGroup is lazily created on demand.
 func (x *Window) TabGroup() *WindowTabGroup {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tabGroup"))
 	return WindowTabGroupFromID(_r)
 }
 
-// Indicates whether the receiver is the subject of an active SharePlay sharing session.
+// HasActiveWindowSharingSession indicates whether the receiver is the subject of an active SharePlay sharing session.
 func (x *Window) HasActiveWindowSharingSession() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasActiveWindowSharingSession"))
 	return _r
 }
 
-// Retrieve the layout direction of the window titlebar: this includes the standard window buttons (close/minimize/maximize buttons) and the title for this window. In general, this will return "right to left" (RTL) if the primary system language is RTL. The layout direction may be RTL even in applications that do not have a RTL language localization. This value should be utilized if an application uses titlebarAppearsTransparent and places controls underneath the titlebar.
+// WindowTitlebarLayoutDirection retrieve the layout direction of the window titlebar: this includes the standard window buttons (close/minimize/maximize buttons) and the title for this window. In general, this will return "right to left" (RTL) if the primary system language is RTL. The layout direction may be RTL even in applications that do not have a RTL language localization. This value should be utilized if an application uses titlebarAppearsTransparent and places controls underneath the titlebar.
 func (x *Window) WindowTitlebarLayoutDirection() UserInterfaceLayoutDirection {
 	_r := objc.Send[UserInterfaceLayoutDirection](objref.IDOf(x), objc.RegisterName("windowTitlebarLayoutDirection"))
 	return _r
 }
 
-// Tracks events that match the specified mask using the specified tracking handler until the tracking handler explicitly terminates tracking.
+// TrackEventsMatchingMaskTimeoutModeHandler tracks events that match the specified mask using the specified tracking handler until the tracking handler explicitly terminates tracking.
 func (x *Window) TrackEventsMatchingMaskTimeoutModeHandler(mask EventMask, timeout float64, mode obj.Object, trackingHandler func(obj.Object, *bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trackEventsMatchingMask:timeout:mode:handler:"), mask, timeout, objref.IDOf(mode), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { trackingHandler(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
-// Returns the next event matching a given mask.
+// NextEventMatchingMask returns the next event matching a given mask.
 func (x *Window) NextEventMatchingMask(mask EventMask) *Event {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextEventMatchingMask:"), mask)
 	return EventFromID(_r)
 }
 
-// Forwards the message to the global application object.
+// NextEventMatchingMaskUntilDateInModeDequeue forwards the message to the global application object.
 func (x *Window) NextEventMatchingMaskUntilDateInModeDequeue(mask EventMask, expiration obj.Object, mode obj.Object, deqFlag bool) *Event {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextEventMatchingMask:untilDate:inMode:dequeue:"), mask, objref.IDOf(expiration), objref.IDOf(mode), deqFlag)
 	return EventFromID(_r)
 }
 
-// Forwards the message to the global application object.
+// DiscardEventsMatchingMaskBeforeEvent forwards the message to the global application object.
 func (x *Window) DiscardEventsMatchingMaskBeforeEvent(mask EventMask, lastEvent *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discardEventsMatchingMask:beforeEvent:"), mask, objref.IDOf(lastEvent))
 }
 
-// Forwards the message to the global application object.
+// PostEventAtStart forwards the message to the global application object.
 func (x *Window) PostEventAtStart(event *Event, flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postEvent:atStart:"), objref.IDOf(event), flag)
 }
 
-// This action method dispatches mouse and keyboard events the global application object sends to the window.
+// SendEvent this action method dispatches mouse and keyboard events the global application object sends to the window.
 func (x *Window) SendEvent(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendEvent:"), objref.IDOf(event))
 }
 
+// CurrentEvent wraps the corresponding Objective-C method.
 func (x *Window) CurrentEvent() *Event {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentEvent"))
 	return EventFromID(_r)
 }
 
+// AcceptsMouseMovedEvents wraps the corresponding Objective-C method.
 func (x *Window) AcceptsMouseMovedEvents() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("acceptsMouseMovedEvents"))
 	return _r
 }
 
+// SetAcceptsMouseMovedEvents wraps the corresponding Objective-C method.
 func (x *Window) SetAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsMouseMovedEvents:"), acceptsMouseMovedEvents)
 }
 
+// IgnoresMouseEvents wraps the corresponding Objective-C method.
 func (x *Window) IgnoresMouseEvents() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ignoresMouseEvents"))
 	return _r
 }
 
+// SetIgnoresMouseEvents wraps the corresponding Objective-C method.
 func (x *Window) SetIgnoresMouseEvents(ignoresMouseEvents bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMouseEvents:"), ignoresMouseEvents)
 }
 
-// Disables all cursor rectangle management within the window.
+// MouseLocationOutsideOfEventStream wraps the corresponding Objective-C method.
+func (x *Window) MouseLocationOutsideOfEventStream() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("mouseLocationOutsideOfEventStream"))
+	return _r
+}
+
+// DisableCursorRects disables all cursor rectangle management within the window.
 func (x *Window) DisableCursorRects() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disableCursorRects"))
 }
 
-// Reenables cursor rectangle management within the window after a disableCursorRects message.
+// EnableCursorRects reenables cursor rectangle management within the window after a disableCursorRects message.
 func (x *Window) EnableCursorRects() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enableCursorRects"))
 }
 
-// Invalidates all cursor rectangles in the window.
+// DiscardCursorRects invalidates all cursor rectangles in the window.
 func (x *Window) DiscardCursorRects() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discardCursorRects"))
 }
 
-// Marks as invalid the cursor rectangles of a given view object in the window, so they’ll be set up again when the window becomes key.
+// InvalidateCursorRectsForView marks as invalid the cursor rectangles of a given view object in the window, so they’ll be set up again when the window becomes key.
 func (x *Window) InvalidateCursorRectsForView(view *View) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateCursorRectsForView:"), objref.IDOf(view))
 }
 
-// Clears the window’s cursor rectangles and the cursor rectangles of the NSView objects in its view hierarchy.
+// ResetCursorRects clears the window’s cursor rectangles and the cursor rectangles of the NSView objects in its view hierarchy.
 func (x *Window) ResetCursorRects() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetCursorRects"))
 }
 
+// AreCursorRectsEnabled wraps the corresponding Objective-C method.
 func (x *Window) AreCursorRectsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("areCursorRectsEnabled"))
 	return _r
 }
 
-// Registers a set of pasteboard types that the window accepts as the destination of an image-dragging session.
+// DragImageAtOffsetEventPasteboardSourceSlideBack begins a dragging session.
+func (x *Window) DragImageAtOffsetEventPasteboardSourceSlideBack(image *Image, baseLocation corefoundation.CGPoint, initialOffset corefoundation.CGSize, event *Event, pboard *Pasteboard, sourceObj obj.Object, slideFlag bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dragImage:at:offset:event:pasteboard:source:slideBack:"), objref.IDOf(image), baseLocation, initialOffset, objref.IDOf(event), objref.IDOf(pboard), objref.IDOf(sourceObj), slideFlag)
+}
+
+// RegisterForDraggedTypes registers a set of pasteboard types that the window accepts as the destination of an image-dragging session.
 func (x *Window) RegisterForDraggedTypes(newTypes []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerForDraggedTypes:"), purego.SliceToNSArray(newTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Unregisters the window as a possible destination for dragging operations.
+// UnregisterDraggedTypes unregisters the window as a possible destination for dragging operations.
 func (x *Window) UnregisterDraggedTypes() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unregisterDraggedTypes"))
 }
 
+// CacheImageInRect wraps the corresponding Objective-C method.
+func (x *Window) CacheImageInRect(rect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cacheImageInRect:"), rect)
+}
+
+// RestoreCachedImage wraps the corresponding Objective-C method.
 func (x *Window) RestoreCachedImage() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restoreCachedImage"))
 }
 
+// DiscardCachedImage wraps the corresponding Objective-C method.
 func (x *Window) DiscardCachedImage() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discardCachedImage"))
 }
 
+// GState wraps the corresponding Objective-C method.
 func (x *Window) GState() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("gState"))
 	return _r
 }
 
+// ConvertBaseToScreen wraps the corresponding Objective-C method.
+func (x *Window) ConvertBaseToScreen(point corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertBaseToScreen:"), point)
+	return _r
+}
+
+// ConvertScreenToBase wraps the corresponding Objective-C method.
+func (x *Window) ConvertScreenToBase(point corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertScreenToBase:"), point)
+	return _r
+}
+
+// UserSpaceScaleFactor wraps the corresponding Objective-C method.
 func (x *Window) UserSpaceScaleFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("userSpaceScaleFactor"))
 	return _r
 }
 
+// UseOptimizedDrawing wraps the corresponding Objective-C method.
 func (x *Window) UseOptimizedDrawing(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("useOptimizedDrawing:"), flag)
 }
 
+// CanStoreColor wraps the corresponding Objective-C method.
 func (x *Window) CanStoreColor() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canStoreColor"))
 	return _r
 }
 
+// DisableFlushWindow wraps the corresponding Objective-C method.
 func (x *Window) DisableFlushWindow() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disableFlushWindow"))
 }
 
+// EnableFlushWindow wraps the corresponding Objective-C method.
 func (x *Window) EnableFlushWindow() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enableFlushWindow"))
 }
 
+// FlushWindow wraps the corresponding Objective-C method.
 func (x *Window) FlushWindow() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flushWindow"))
 }
 
+// FlushWindowIfNeeded wraps the corresponding Objective-C method.
 func (x *Window) FlushWindowIfNeeded() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flushWindowIfNeeded"))
 }
 
-// Disables the window’s screen updates until the window is flushed.
+// DisableScreenUpdatesUntilFlush disables the window’s screen updates until the window is flushed.
 func (x *Window) DisableScreenUpdatesUntilFlush() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disableScreenUpdatesUntilFlush"))
 }
 
+// IsFlushWindowDisabled wraps the corresponding Objective-C method.
 func (x *Window) IsFlushWindowDisabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFlushWindowDisabled"))
 	return _r
 }
 
+// IsAutodisplay wraps the corresponding Objective-C method.
 func (x *Window) IsAutodisplay() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAutodisplay"))
 	return _r
 }
 
+// SetAutodisplay wraps the corresponding Objective-C method.
 func (x *Window) SetAutodisplay(autodisplay bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutodisplay:"), autodisplay)
 }
 
+// GraphicsContext wraps the corresponding Objective-C method.
 func (x *Window) GraphicsContext() *GraphicsContext {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("graphicsContext"))
 	return GraphicsContextFromID(_r)
 }
 
+// IsOneShot wraps the corresponding Objective-C method.
 func (x *Window) IsOneShot() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOneShot"))
 	return _r
 }
 
+// SetOneShot wraps the corresponding Objective-C method.
 func (x *Window) SetOneShot(oneShot bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOneShot:"), oneShot)
 }
 
+// PreferredBackingLocation wraps the corresponding Objective-C method.
 func (x *Window) PreferredBackingLocation() WindowBackingLocation {
 	_r := objc.Send[WindowBackingLocation](objref.IDOf(x), objc.RegisterName("preferredBackingLocation"))
 	return _r
 }
 
+// SetPreferredBackingLocation wraps the corresponding Objective-C method.
 func (x *Window) SetPreferredBackingLocation(preferredBackingLocation WindowBackingLocation) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredBackingLocation:"), preferredBackingLocation)
 }
 
+// BackingLocation wraps the corresponding Objective-C method.
 func (x *Window) BackingLocation() WindowBackingLocation {
 	_r := objc.Send[WindowBackingLocation](objref.IDOf(x), objc.RegisterName("backingLocation"))
 	return _r
 }
 
+// ShowsResizeIndicator wraps the corresponding Objective-C method.
 func (x *Window) ShowsResizeIndicator() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsResizeIndicator"))
 	return _r
 }
 
+// SetShowsResizeIndicator wraps the corresponding Objective-C method.
 func (x *Window) SetShowsResizeIndicator(showsResizeIndicator bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsResizeIndicator:"), showsResizeIndicator)
 }
 
-// Updates the constraints based on changes to views in the window since the last layout.
+// UpdateConstraintsIfNeeded updates the constraints based on changes to views in the window since the last layout.
 func (x *Window) UpdateConstraintsIfNeeded() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateConstraintsIfNeeded"))
 }
 
-// Updates the layout of views in the window based on the current views and constraints.
+// LayoutIfNeeded updates the layout of views in the window based on the current views and constraints.
 func (x *Window) LayoutIfNeeded() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutIfNeeded"))
 }
 
-// Returns the part of the window that stays stationary during constraint-based layout.
+// AnchorAttributeForOrientation returns the part of the window that stays stationary during constraint-based layout.
 func (x *Window) AnchorAttributeForOrientation(orientation LayoutConstraintOrientation) LayoutAttribute {
 	_r := objc.Send[LayoutAttribute](objref.IDOf(x), objc.RegisterName("anchorAttributeForOrientation:"), orientation)
 	return _r
 }
 
-// Sets the part of the window that stays stationary during constraint-based layout.
+// SetAnchorAttributeForOrientation sets the part of the window that stays stationary during constraint-based layout.
 func (x *Window) SetAnchorAttributeForOrientation(attr LayoutAttribute, orientation LayoutConstraintOrientation) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorAttribute:forOrientation:"), attr, orientation)
 }
 
-// Displays a visual representation of the supplied constraints in the window.
+// VisualizeConstraints displays a visual representation of the supplied constraints in the window.
 func (x *Window) VisualizeConstraints(constraints []*LayoutConstraint) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("visualizeConstraints:"), purego.SliceToNSArray(constraints, func(_v *LayoutConstraint) objc.ID { return objref.IDOf(_v) }))
 }
 
+// Drawers wraps the corresponding Objective-C method.
+//
 // Drawers returns the collection as a Go slice.
 func (x *Window) Drawers() []*Drawer {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Drawer { return DrawerFromID(_id) })
 }
 
-// Sets the window’s miniaturized state to the value you specify.
+// SetIsMiniaturized sets the window’s miniaturized state to the value you specify.
 func (x *Window) SetIsMiniaturized(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsMiniaturized:"), flag)
 }
 
-// Sets the window’s visible state to the value you specify.
+// SetIsVisible sets the window’s visible state to the value you specify.
 func (x *Window) SetIsVisible(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsVisible:"), flag)
 }
 
-// Sets the window’s zoomed state to the value you specify.
+// SetIsZoomed sets the window’s zoomed state to the value you specify.
 func (x *Window) SetIsZoomed(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsZoomed:"), flag)
 }
 
-// Handles the AppleScript command to close the window (and its associated document, if any).
+// HandleCloseScriptCommand handles the AppleScript command to close the window (and its associated document, if any).
 func (x *Window) HandleCloseScriptCommand(command obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleCloseScriptCommand:"), objref.IDOf(command))
 	return obj.Wrap(_r)
 }
 
-// Handles the AppleScript command to print the contents of the window (or its associated document, if any).
+// HandlePrintScriptCommand handles the AppleScript command to print the contents of the window (or its associated document, if any).
 func (x *Window) HandlePrintScriptCommand(command obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handlePrintScriptCommand:"), objref.IDOf(command))
 	return obj.Wrap(_r)
 }
 
-// Handles the AppleScript command to save the window (and its associated document, if any).
+// HandleSaveScriptCommand handles the AppleScript command to save the window (and its associated document, if any).
 func (x *Window) HandleSaveScriptCommand(command obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleSaveScriptCommand:"), objref.IDOf(command))
 	return obj.Wrap(_r)
 }
 
+// HasCloseBox wraps the corresponding Objective-C method.
 func (x *Window) HasCloseBox() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasCloseBox"))
 	return _r
 }
 
+// HasTitleBar wraps the corresponding Objective-C method.
 func (x *Window) HasTitleBar() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasTitleBar"))
 	return _r
 }
 
+// IsFloatingPanel wraps the corresponding Objective-C method.
 func (x *Window) IsFloatingPanel() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFloatingPanel"))
 	return _r
 }
 
+// IsMiniaturizable wraps the corresponding Objective-C method.
 func (x *Window) IsMiniaturizable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMiniaturizable"))
 	return _r
 }
 
+// IsModalPanel wraps the corresponding Objective-C method.
 func (x *Window) IsModalPanel() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isModalPanel"))
 	return _r
 }
 
+// IsResizable wraps the corresponding Objective-C method.
 func (x *Window) IsResizable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isResizable"))
 	return _r
 }
 
+// IsZoomable wraps the corresponding Objective-C method.
 func (x *Window) IsZoomable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isZoomable"))
 	return _r
 }
 
+// OrderedIndex wraps the corresponding Objective-C method.
 func (x *Window) OrderedIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("orderedIndex"))
 	return _r
 }
 
+// SetOrderedIndex wraps the corresponding Objective-C method.
 func (x *Window) SetOrderedIndex(orderedIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrderedIndex:"), orderedIndex)
 }
 
-// Disables snapshot restoration.
+// DisableSnapshotRestoration disables snapshot restoration.
 func (x *Window) DisableSnapshotRestoration() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disableSnapshotRestoration"))
 }
 
-// Enables snapshot restoration.
+// EnableSnapshotRestoration enables snapshot restoration.
 func (x *Window) EnableSnapshotRestoration() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enableSnapshotRestoration"))
 }
 
+// IsRestorable wraps the corresponding Objective-C method.
 func (x *Window) IsRestorable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRestorable"))
 	return _r
 }
 
+// SetRestorable wraps the corresponding Objective-C method.
 func (x *Window) SetRestorable(restorable bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRestorable:"), restorable)
 }
@@ -1946,6 +2286,10 @@ type Windowable interface {
 	WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *Window
 	WithContentView(contentView ViewProvider) *Window
 	WithStyleMask(styleMask WindowStyleMask) *Window
+	WithResizeIncrements(resizeIncrements corefoundation.CGSize) *Window
+	WithAspectRatio(aspectRatio corefoundation.CGSize) *Window
+	WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *Window
+	WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *Window
 	WithViewsNeedDisplay(viewsNeedDisplay bool) *Window
 	WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *Window
 	WithReleasedWhenClosed(releasedWhenClosed bool) *Window
@@ -1972,6 +2316,12 @@ type Windowable interface {
 	WithCollectionBehavior(collectionBehavior WindowCollectionBehavior) *Window
 	WithAnimationBehavior(animationBehavior WindowAnimationBehavior) *Window
 	WithFrameAutosaveName(frameAutosaveName obj.Object) *Window
+	WithMinSize(minSize corefoundation.CGSize) *Window
+	WithMaxSize(maxSize corefoundation.CGSize) *Window
+	WithContentMinSize(contentMinSize corefoundation.CGSize) *Window
+	WithContentMaxSize(contentMaxSize corefoundation.CGSize) *Window
+	WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *Window
+	WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *Window
 	WithWindowController(windowController *WindowController) *Window
 	WithParentWindow(parentWindow WindowProvider) *Window
 	WithAppearanceSource(appearanceSource obj.Object) *Window
@@ -1997,12 +2347,22 @@ type Windowable interface {
 	WithMenu(menu *Menu) *Window
 	WithUserActivity(userActivity obj.Object) *Window
 	WithTouchBar(touchBar *TouchBar) *Window
+	FrameRectForContentRect(contentRect corefoundation.CGRect) corefoundation.CGRect
+	ContentRectForFrameRect(frameRect corefoundation.CGRect) corefoundation.CGRect
 	AddTitlebarAccessoryViewController(childViewController *TitlebarAccessoryViewController)
 	InsertTitlebarAccessoryViewControllerAtIndex(childViewController *TitlebarAccessoryViewController, index int)
 	RemoveTitlebarAccessoryViewControllerAtIndex(index int)
 	SetTitleWithRepresentedFilename(filename string)
 	FieldEditorForObject(createFlag bool, object obj.Object) *Text
 	EndEditingFor(object obj.Object)
+	ConstrainFrameRectToScreen(frameRect corefoundation.CGRect, screen *Screen) corefoundation.CGRect
+	SetFrameDisplay(frameRect corefoundation.CGRect, flag bool)
+	SetContentSize(size corefoundation.CGSize)
+	SetFrameOrigin(point corefoundation.CGPoint)
+	SetFrameTopLeftPoint(point corefoundation.CGPoint)
+	CascadeTopLeftFromPoint(topLeftPoint corefoundation.CGPoint) corefoundation.CGPoint
+	AnimationResizeTime(newFrame corefoundation.CGRect) float64
+	SetFrameDisplayAnimate(frameRect corefoundation.CGRect, displayFlag bool, animateFlag bool)
 	DisplayIfNeeded()
 	Display()
 	Update()
@@ -2024,9 +2384,19 @@ type Windowable interface {
 	ResignKeyWindow()
 	BecomeMainWindow()
 	ResignMainWindow()
+	ConvertRectToScreen(rect corefoundation.CGRect) corefoundation.CGRect
+	ConvertRectFromScreen(rect corefoundation.CGRect) corefoundation.CGRect
+	ConvertPointToScreen(point corefoundation.CGPoint) corefoundation.CGPoint
+	ConvertPointFromScreen(point corefoundation.CGPoint) corefoundation.CGPoint
+	ConvertRectToBacking(rect corefoundation.CGRect) corefoundation.CGRect
+	ConvertRectFromBacking(rect corefoundation.CGRect) corefoundation.CGRect
+	ConvertPointToBacking(point corefoundation.CGPoint) corefoundation.CGPoint
+	ConvertPointFromBacking(point corefoundation.CGPoint) corefoundation.CGPoint
 	PerformClose(sender obj.Object)
 	PerformMiniaturize(sender obj.Object)
 	PerformZoom(sender obj.Object)
+	DataWithEPSInsideRect(rect corefoundation.CGRect) obj.Object
+	DataWithPDFInsideRect(rect corefoundation.CGRect) obj.Object
 	Print(sender obj.Object)
 	SetDynamicDepthLimit(flag bool)
 	InvalidateShadow()
@@ -2074,6 +2444,7 @@ type Windowable interface {
 	SetTitlebarAppearsTransparent(titlebarAppearsTransparent bool)
 	ToolbarStyle() WindowToolbarStyle
 	SetToolbarStyle(toolbarStyle WindowToolbarStyle)
+	ContentLayoutRect() corefoundation.CGRect
 	ContentLayoutGuide() obj.Object
 	TitlebarAccessoryViewControllers() []*TitlebarAccessoryViewController
 	SetTitlebarAccessoryViewControllers(titlebarAccessoryViewControllers []*TitlebarAccessoryViewController)
@@ -2088,7 +2459,17 @@ type Windowable interface {
 	WindowNumber() int
 	StyleMask() WindowStyleMask
 	SetStyleMask(styleMask WindowStyleMask)
+	CascadingReferenceFrame() corefoundation.CGRect
+	Frame() corefoundation.CGRect
 	InLiveResize() bool
+	ResizeIncrements() corefoundation.CGSize
+	SetResizeIncrements(resizeIncrements corefoundation.CGSize)
+	AspectRatio() corefoundation.CGSize
+	SetAspectRatio(aspectRatio corefoundation.CGSize)
+	ContentResizeIncrements() corefoundation.CGSize
+	SetContentResizeIncrements(contentResizeIncrements corefoundation.CGSize)
+	ContentAspectRatio() corefoundation.CGSize
+	SetContentAspectRatio(contentAspectRatio corefoundation.CGSize)
 	ViewsNeedDisplay() bool
 	SetViewsNeedDisplay(viewsNeedDisplay bool)
 	PreservesContentDuringLiveResize() bool
@@ -2157,6 +2538,18 @@ type Windowable interface {
 	IsOnActiveSpace() bool
 	StringWithSavedFrame() obj.Object
 	FrameAutosaveName() obj.Object
+	MinSize() corefoundation.CGSize
+	SetMinSize(minSize corefoundation.CGSize)
+	MaxSize() corefoundation.CGSize
+	SetMaxSize(maxSize corefoundation.CGSize)
+	ContentMinSize() corefoundation.CGSize
+	SetContentMinSize(contentMinSize corefoundation.CGSize)
+	ContentMaxSize() corefoundation.CGSize
+	SetContentMaxSize(contentMaxSize corefoundation.CGSize)
+	MinFullScreenContentSize() corefoundation.CGSize
+	SetMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize)
+	MaxFullScreenContentSize() corefoundation.CGSize
+	SetMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize)
 	DeviceDescription() obj.Object
 	WindowController() *WindowController
 	SetWindowController(windowController *WindowController)
@@ -2206,17 +2599,22 @@ type Windowable interface {
 	SetAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool)
 	IgnoresMouseEvents() bool
 	SetIgnoresMouseEvents(ignoresMouseEvents bool)
+	MouseLocationOutsideOfEventStream() corefoundation.CGPoint
 	DisableCursorRects()
 	EnableCursorRects()
 	DiscardCursorRects()
 	InvalidateCursorRectsForView(view *View)
 	ResetCursorRects()
 	AreCursorRectsEnabled() bool
+	DragImageAtOffsetEventPasteboardSourceSlideBack(image *Image, baseLocation corefoundation.CGPoint, initialOffset corefoundation.CGSize, event *Event, pboard *Pasteboard, sourceObj obj.Object, slideFlag bool)
 	RegisterForDraggedTypes(newTypes []obj.Object)
 	UnregisterDraggedTypes()
+	CacheImageInRect(rect corefoundation.CGRect)
 	RestoreCachedImage()
 	DiscardCachedImage()
 	GState() int
+	ConvertBaseToScreen(point corefoundation.CGPoint) corefoundation.CGPoint
+	ConvertScreenToBase(point corefoundation.CGPoint) corefoundation.CGPoint
 	UserSpaceScaleFactor() float64
 	UseOptimizedDrawing(flag bool)
 	CanStoreColor() bool
@@ -2264,3 +2662,12 @@ type Windowable interface {
 }
 
 var _ Windowable = (*Window)(nil)
+
+// isWindow marks Window — and, by embedding promotion, its
+// subclasses — as a member of the Window hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Window) isWindow() {}
+
+var _ WindowProvider = (*Window)(nil)
+
+var _ ResponderProvider = (*Window)(nil)

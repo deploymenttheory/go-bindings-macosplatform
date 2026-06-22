@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that provides formatted address strings.
-//
 // AddressRepresentations is an idiomatic wrapper over the Objective-C class MKAddressRepresentations.
+//
+// A class that provides formatted address strings.
 type AddressRepresentations struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AddressRepresentationsFromID(id objc.ID) *AddressRepresentations {
 	if id == 0 {
 		return nil
 	}
-	x := &AddressRepresentations{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AddressRepresentations{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func addressRepresentationsAdopt(id objc.ID) *AddressRepresentations {
 	if id == 0 {
 		return nil
 	}
-	x := &AddressRepresentations{Handle: objref.Wrap(id)}
+	x := &AddressRepresentations{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *AddressRepresentations) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AddressRepresentations) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAddressRepresentations creates a new AddressRepresentations.
 func NewAddressRepresentations() *AddressRepresentations {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKAddressRepresentations")), objc.RegisterName("new"))
 	return addressRepresentationsAdopt(_id)
 }
 
-// Returns the the location’s full address, optionally including the country or on a single link without line breaks.
+// FullAddressIncludingRegionSingleLine returns the the location’s full address, optionally including the country or on a single link without line breaks.
 func (x *AddressRepresentations) FullAddressIncludingRegionSingleLine(includingRegion bool, singleLine bool) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullAddressIncludingRegion:singleLine:"), includingRegion, singleLine)
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *AddressRepresentations) FullAddressIncludingRegionSingleLine(includingR
 	return purego.GoString(_r)
 }
 
-// The city name and, optionally and if applicable, state and region to provide additional disambiguating context.
+// CityWithContextUsingStyle the city name and, optionally and if applicable, state and region to provide additional disambiguating context.
 func (x *AddressRepresentations) CityWithContextUsingStyle(style AddressRepresentationsContextStyle) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cityWithContextUsingStyle:"), style)
 	if _r == 0 {
@@ -82,6 +90,7 @@ func (x *AddressRepresentations) CityWithContextUsingStyle(style AddressRepresen
 	return purego.GoString(_r)
 }
 
+// CityName wraps the corresponding Objective-C method.
 func (x *AddressRepresentations) CityName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cityName"))
 	if _r == 0 {
@@ -90,6 +99,7 @@ func (x *AddressRepresentations) CityName() string {
 	return purego.GoString(_r)
 }
 
+// CityWithContext wraps the corresponding Objective-C method.
 func (x *AddressRepresentations) CityWithContext() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cityWithContext"))
 	if _r == 0 {
@@ -98,6 +108,7 @@ func (x *AddressRepresentations) CityWithContext() string {
 	return purego.GoString(_r)
 }
 
+// RegionName wraps the corresponding Objective-C method.
 func (x *AddressRepresentations) RegionName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regionName"))
 	if _r == 0 {
@@ -106,6 +117,7 @@ func (x *AddressRepresentations) RegionName() string {
 	return purego.GoString(_r)
 }
 
+// RegionCode wraps the corresponding Objective-C method.
 func (x *AddressRepresentations) RegionCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regionCode"))
 	if _r == 0 {

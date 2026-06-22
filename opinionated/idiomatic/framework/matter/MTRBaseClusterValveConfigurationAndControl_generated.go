@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBaseClusterValveConfigurationAndControl is an idiomatic wrapper over the Objective-C class MTRBaseClusterValveConfigurationAndControl.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
 type MTRBaseClusterValveConfigurationAndControl struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterValveConfigurationAndControlFromID adopts an existing Objective-C object as a MTRBaseClusterValveConfigurationAndControl
@@ -25,7 +26,8 @@ func MTRBaseClusterValveConfigurationAndControlFromID(id objc.ID) *MTRBaseCluste
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterValveConfigurationAndControl{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterValveConfigurationAndControl{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,37 +40,23 @@ func mTRBaseClusterValveConfigurationAndControlAdopt(id objc.ID) *MTRBaseCluster
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterValveConfigurationAndControl{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterValveConfigurationAndControl{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterValveConfigurationAndControl) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterValveConfigurationAndControl) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterValveConfigurationAndControl) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterValveConfigurationAndControlWithDeviceEndpointIDQueue creates a new MTRBaseClusterValveConfigurationAndControl.
+// NewMTRBaseClusterValveConfigurationAndControlWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterValveConfigurationAndControlWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterValveConfigurationAndControl {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterValveConfigurationAndControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterValveConfigurationAndControlAdopt(_id)
 }
 
+// ReadAttributeOpenDurationWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeOpenDurationWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeOpenDurationWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeOpenDurationWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -90,8 +78,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeOpenDurationWi
 	}
 }
 
+// SubscribeAttributeOpenDurationWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOpenDurationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeOpenDurationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeOpenDurationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -113,8 +103,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeOpenDurat
 	}
 }
 
+// ReadAttributeDefaultOpenDurationWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDefaultOpenDurationWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeDefaultOpenDurationWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeDefaultOpenDurationWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -136,8 +128,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeDefaultOpenDur
 	}
 }
 
+// SubscribeAttributeDefaultOpenDurationWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDefaultOpenDurationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeDefaultOpenDurationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeDefaultOpenDurationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -159,8 +153,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeDefaultOp
 	}
 }
 
+// ReadAttributeAutoCloseTimeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAutoCloseTimeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeAutoCloseTimeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeAutoCloseTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -182,8 +178,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeAutoCloseTimeW
 	}
 }
 
+// SubscribeAttributeAutoCloseTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAutoCloseTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeAutoCloseTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeAutoCloseTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -205,8 +203,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeAutoClose
 	}
 }
 
+// ReadAttributeRemainingDurationWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRemainingDurationWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeRemainingDurationWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeRemainingDurationWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -228,8 +228,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeRemainingDurat
 	}
 }
 
+// SubscribeAttributeRemainingDurationWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRemainingDurationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeRemainingDurationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeRemainingDurationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -251,8 +253,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeRemaining
 	}
 }
 
+// ReadAttributeCurrentStateWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentStateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeCurrentStateWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeCurrentStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -274,8 +278,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeCurrentStateWi
 	}
 }
 
+// SubscribeAttributeCurrentStateWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeCurrentStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeCurrentStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -297,8 +303,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeCurrentSt
 	}
 }
 
+// ReadAttributeTargetStateWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeTargetStateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeTargetStateWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeTargetStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -320,8 +328,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeTargetStateWit
 	}
 }
 
+// SubscribeAttributeTargetStateWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTargetStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeTargetStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeTargetStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -343,8 +353,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeTargetSta
 	}
 }
 
+// ReadAttributeCurrentLevelWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentLevelWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeCurrentLevelWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeCurrentLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -366,8 +378,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeCurrentLevelWi
 	}
 }
 
+// SubscribeAttributeCurrentLevelWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeCurrentLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeCurrentLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -389,8 +403,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeCurrentLe
 	}
 }
 
+// ReadAttributeTargetLevelWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeTargetLevelWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeTargetLevelWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeTargetLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -412,8 +428,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeTargetLevelWit
 	}
 }
 
+// SubscribeAttributeTargetLevelWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTargetLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeTargetLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeTargetLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -435,8 +453,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeTargetLev
 	}
 }
 
+// ReadAttributeDefaultOpenLevelWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDefaultOpenLevelWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeDefaultOpenLevelWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeDefaultOpenLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -458,8 +478,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeDefaultOpenLev
 	}
 }
 
+// SubscribeAttributeDefaultOpenLevelWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDefaultOpenLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeDefaultOpenLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeDefaultOpenLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -481,8 +503,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeDefaultOp
 	}
 }
 
+// ReadAttributeValveFaultWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeValveFaultWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeValveFaultWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeValveFaultWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -504,8 +528,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeValveFaultWith
 	}
 }
 
+// SubscribeAttributeValveFaultWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeValveFaultWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeValveFaultWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeValveFaultWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -527,8 +553,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeValveFaul
 	}
 }
 
+// ReadAttributeLevelStepWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeLevelStepWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeLevelStepWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeLevelStepWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -550,8 +578,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeLevelStepWithC
 	}
 }
 
+// SubscribeAttributeLevelStepWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLevelStepWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeLevelStepWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeLevelStepWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -573,8 +603,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeLevelStep
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -596,8 +628,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeGeneratedComma
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -619,8 +653,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeGenerated
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -642,8 +678,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeAcceptedComman
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -665,8 +703,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeAcceptedC
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -688,8 +728,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeAttributeListW
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -711,8 +753,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeAttribute
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -734,8 +778,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeFeatureMapWith
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -757,8 +803,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeFeatureMa
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -780,8 +828,10 @@ func (x *MTRBaseClusterValveConfigurationAndControl) ReadAttributeClusterRevisio
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -841,3 +891,7 @@ type MTRBaseClusterValveConfigurationAndControlable interface {
 }
 
 var _ MTRBaseClusterValveConfigurationAndControlable = (*MTRBaseClusterValveConfigurationAndControl)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterValveConfigurationAndControl)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterValveConfigurationAndControl)(nil)

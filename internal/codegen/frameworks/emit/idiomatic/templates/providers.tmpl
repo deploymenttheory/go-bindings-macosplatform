@@ -1,12 +1,15 @@
 {{/*
-    providers.tmpl renders, for an Objective-C class that has subclasses, an
+    providers.tmpl renders, for an Objective-C class that has subclasses, a sealed
     interface used to accept "any of its subclasses" as a method or property
-    value. The interface is satisfied by any wrapper object, because it embeds
-    objref.Object.
+    value. The interface requires the base's unexported marker method, which only
+    the base class defines and its subclasses promote through embedding — so a
+    setter typed as the provider accepts a real member of the hierarchy and
+    nothing else.
 */}}
 {{define "providers"}}{{range .Items}}// {{.IfaceName}} is accepted wherever a {{.BaseName}} (or one of its subclasses) is expected.
 type {{.IfaceName}} interface {
 objref.Object
+{{.MarkerName}}()
 }
 
 {{end}}{{end}}

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A utility object that converts between a geographic distance and a string-based expression of that distance.
-//
 // DistanceFormatter is an idiomatic wrapper over the Objective-C class MKDistanceFormatter.
+//
+// A utility object that converts between a geographic distance and a string-based expression of that distance.
 type DistanceFormatter struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DistanceFormatterFromID(id objc.ID) *DistanceFormatter {
 	if id == 0 {
 		return nil
 	}
-	x := &DistanceFormatter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DistanceFormatter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func distanceFormatterAdopt(id objc.ID) *DistanceFormatter {
 	if id == 0 {
 		return nil
 	}
-	x := &DistanceFormatter{Handle: objref.Wrap(id)}
+	x := &DistanceFormatter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,59 +60,65 @@ func (x *DistanceFormatter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DistanceFormatter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDistanceFormatter creates a new DistanceFormatter.
 func NewDistanceFormatter() *DistanceFormatter {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKDistanceFormatter")), objc.RegisterName("new"))
 	return distanceFormatterAdopt(_id)
 }
 
-// The locale to use when formatting strings.
-//
-// WithLocale sets locale and returns the receiver so calls can be chained.
+// WithLocale the locale to use when formatting strings.
 func (x *DistanceFormatter) WithLocale(locale obj.Object) *DistanceFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return x
 }
 
-// The measuring system — imperial or metric — to use for units.
-//
-// WithUnits sets units and returns the receiver so calls can be chained.
+// WithUnits the measuring system — imperial or metric — to use for units.
 func (x *DistanceFormatter) WithUnits(units DistanceFormatterUnits) *DistanceFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnits:"), units)
 	return x
 }
 
-// The preferred style for units.
-//
-// WithUnitStyle sets unitStyle and returns the receiver so calls can be chained.
+// WithUnitStyle the preferred style for units.
 func (x *DistanceFormatter) WithUnitStyle(unitStyle DistanceFormatterUnitStyle) *DistanceFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitStyle:"), unitStyle)
 	return x
 }
 
+// Locale wraps the corresponding Objective-C method.
 func (x *DistanceFormatter) Locale() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locale"))
 	return obj.Wrap(_r)
 }
 
+// SetLocale wraps the corresponding Objective-C method.
 func (x *DistanceFormatter) SetLocale(locale obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 }
 
+// Units wraps the corresponding Objective-C method.
 func (x *DistanceFormatter) Units() DistanceFormatterUnits {
 	_r := objc.Send[DistanceFormatterUnits](objref.IDOf(x), objc.RegisterName("units"))
 	return _r
 }
 
+// SetUnits wraps the corresponding Objective-C method.
 func (x *DistanceFormatter) SetUnits(units DistanceFormatterUnits) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnits:"), units)
 }
 
+// UnitStyle wraps the corresponding Objective-C method.
 func (x *DistanceFormatter) UnitStyle() DistanceFormatterUnitStyle {
 	_r := objc.Send[DistanceFormatterUnitStyle](objref.IDOf(x), objc.RegisterName("unitStyle"))
 	return _r
 }
 
+// SetUnitStyle wraps the corresponding Objective-C method.
 func (x *DistanceFormatter) SetUnitStyle(unitStyle DistanceFormatterUnitStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitStyle:"), unitStyle)
 }

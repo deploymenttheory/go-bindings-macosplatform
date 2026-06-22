@@ -3,4 +3,30 @@
 //go:build darwin
 
 // Package vision provides a fluent Go API over the macOS Vision framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - DetectedObjectObservation: [FaceObservation], [HumanObservation], [RecognizedObjectObservation], [RectangleObservation]
+//   - DetectedPoint: [RecognizedPoint]
+//   - FaceLandmarkRegion: [FaceLandmarkRegion2D]
+//   - FaceLandmarks: [FaceLandmarks2D]
+//   - ImageAlignmentObservation: [ImageHomographicAlignmentObservation], [ImageTranslationAlignmentObservation]
+//   - ImageBasedRequest: [CalculateImageAestheticsScoresRequest], [ClassifyImageRequest], [CoreMLRequest], [DetectAnimalBodyPoseRequest], [DetectBarcodesRequest], [DetectContoursRequest], [DetectDocumentSegmentationRequest], [DetectFaceCaptureQualityRequest], [DetectFaceLandmarksRequest], [DetectFaceRectanglesRequest], [DetectHorizonRequest], [DetectHumanBodyPoseRequest], [DetectHumanHandPoseRequest], [DetectHumanRectanglesRequest], [DetectRectanglesRequest], [DetectTextRectanglesRequest], [GenerateAttentionBasedSaliencyImageRequest], [GenerateForegroundInstanceMaskRequest], [GenerateImageFeaturePrintRequest], [GenerateObjectnessBasedSaliencyImageRequest], [GeneratePersonInstanceMaskRequest], [RecognizeAnimalsRequest], [RecognizeTextRequest], [StatefulRequest], [TargetedImageRequest], [TrackingRequest]
+//   - ImageRegistrationRequest: [HomographicImageRegistrationRequest], [TranslationalImageRegistrationRequest]
+//   - Observation: [ClassificationObservation], [ContoursObservation], [CoreMLFeatureValueObservation], [DetectedObjectObservation], [FeaturePrintObservation], [HorizonObservation], [ImageAestheticsScoresObservation], [ImageAlignmentObservation], [InstanceMaskObservation], [PixelBufferObservation], [RecognizedPoints3DObservation], [RecognizedPointsObservation], [TrajectoryObservation]
+//   - PixelBufferObservation: [SaliencyImageObservation]
+//   - Point: [DetectedPoint]
+//   - Point3D: [RecognizedPoint3D]
+//   - RecognizedPoint3D: [HumanBodyRecognizedPoint3D]
+//   - RecognizedPoints3DObservation: [HumanBodyPose3DObservation]
+//   - RecognizedPointsObservation: [AnimalBodyPoseObservation], [HumanBodyPoseObservation], [HumanHandPoseObservation]
+//   - RectangleObservation: [BarcodeObservation], [RecognizedTextObservation], [TextObservation]
+//   - Request: [ImageBasedRequest]
+//   - StatefulRequest: [DetectHumanBodyPose3DRequest], [DetectTrajectoriesRequest], [GeneratePersonSegmentationRequest], [TrackHomographicImageRegistrationRequest], [TrackOpticalFlowRequest], [TrackTranslationalImageRegistrationRequest]
+//   - TargetedImageRequest: [GenerateOpticalFlowRequest], [ImageRegistrationRequest]
+//   - TrackingRequest: [TrackObjectRequest], [TrackRectangleRequest]
+//   - VideoProcessorCadence: [VideoProcessorFrameRateCadence], [VideoProcessorTimeIntervalCadence]
 package vision

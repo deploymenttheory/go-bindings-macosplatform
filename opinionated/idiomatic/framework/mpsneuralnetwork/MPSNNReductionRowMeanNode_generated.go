@@ -6,15 +6,17 @@ package mpsneuralnetwork
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NNReductionRowMeanNode is an idiomatic wrapper over the Objective-C class MPSNNReductionRowMeanNode.
+//
+// It embeds [NNUnaryReductionNode], promoting that type's methods.
 type NNReductionRowMeanNode struct {
-	objref.Handle
+	NNUnaryReductionNode
 }
 
 // NNReductionRowMeanNodeFromID adopts an existing Objective-C object as a NNReductionRowMeanNode
@@ -23,7 +25,8 @@ func NNReductionRowMeanNodeFromID(id objc.ID) *NNReductionRowMeanNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNReductionRowMeanNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNReductionRowMeanNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +39,10 @@ func nNReductionRowMeanNodeAdopt(id objc.ID) *NNReductionRowMeanNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNReductionRowMeanNode{Handle: objref.Wrap(id)}
+	x := &NNReductionRowMeanNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NNReductionRowMeanNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNReductionRowMeanNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNReductionRowMeanNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNNReductionRowMeanNode creates a new NNReductionRowMeanNode.
@@ -62,9 +51,13 @@ func NewNNReductionRowMeanNode() *NNReductionRowMeanNode {
 	return nNReductionRowMeanNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithClipRectSource the clip rectangle to apply to the source image.
+func (x *NNReductionRowMeanNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionRowMeanNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return x
+}
+
+// WithLabel a string to help identify this object.
 func (x *NNReductionRowMeanNode) WithLabel(label string) *NNReductionRowMeanNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -73,7 +66,12 @@ func (x *NNReductionRowMeanNode) WithLabel(label string) *NNReductionRowMeanNode
 // NNReductionRowMeanNodeable is the interface implemented by [NNReductionRowMeanNode], for mocking and DI.
 type NNReductionRowMeanNodeable interface {
 	obj.Object
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionRowMeanNode
 	WithLabel(label string) *NNReductionRowMeanNode
 }
 
 var _ NNReductionRowMeanNodeable = (*NNReductionRowMeanNode)(nil)
+
+var _ NNUnaryReductionNodeProvider = (*NNReductionRowMeanNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNReductionRowMeanNode)(nil)

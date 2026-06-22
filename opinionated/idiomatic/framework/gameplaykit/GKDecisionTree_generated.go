@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A data structure that models a set of specific questions, their possible answers, and the actions that follow from a series of answers.
-//
 // DecisionTree is an idiomatic wrapper over the Objective-C class GKDecisionTree.
+//
+// A data structure that models a set of specific questions, their possible answers, and the actions that follow from a series of answers.
 type DecisionTree struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DecisionTreeFromID(id objc.ID) *DecisionTree {
 	if id == 0 {
 		return nil
 	}
-	x := &DecisionTree{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DecisionTree{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func decisionTreeAdopt(id objc.ID) *DecisionTree {
 	if id == 0 {
 		return nil
 	}
-	x := &DecisionTree{Handle: objref.Wrap(id)}
+	x := &DecisionTree{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,35 +60,38 @@ func (x *DecisionTree) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an automatically learned decision tree using the specified attributes, example items, and actions.
-//
-// NewDecisionTreeWithExamplesActionsAttributes creates a new DecisionTree.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DecisionTree) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDecisionTreeWithExamplesActionsAttributes creates an automatically learned decision tree using the specified attributes, example items, and actions.
 func NewDecisionTreeWithExamplesActionsAttributes(examples []obj.Object, actions []obj.Object, attributes []obj.Object) *DecisionTree {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKDecisionTree")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExamples:actions:attributes:"), purego.SliceToNSArray(examples, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(actions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(attributes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return decisionTreeAdopt(_id)
 }
 
-// The randomizer to be used when evaluating parts of the tree that branch randomly.
-//
-// WithRandomSource sets randomSource and returns the receiver so calls can be chained.
+// WithRandomSource the randomizer to be used when evaluating parts of the tree that branch randomly.
 func (x *DecisionTree) WithRandomSource(randomSource RandomSourceProvider) *DecisionTree {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRandomSource:"), objref.IDOf(randomSource))
 	return x
 }
 
-// The node for the decision tree that all other nodes descend from
+// RootNode the node for the decision tree that all other nodes descend from
 func (x *DecisionTree) RootNode() *DecisionNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootNode"))
 	return DecisionNodeFromID(_r)
 }
 
-// The random source used by the decision tree when descending on a random branch This must be set before creating any weighted branches
+// RandomSource the random source used by the decision tree when descending on a random branch This must be set before creating any weighted branches
 func (x *DecisionTree) RandomSource() *RandomSource {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("randomSource"))
 	return RandomSourceFromID(_r)
 }
 
+// SetRandomSource wraps the corresponding Objective-C method.
 func (x *DecisionTree) SetRandomSource(randomSource *RandomSource) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRandomSource:"), objref.IDOf(randomSource))
 }

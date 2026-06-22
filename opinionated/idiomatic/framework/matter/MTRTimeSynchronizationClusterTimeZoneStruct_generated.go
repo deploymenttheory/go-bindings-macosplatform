@@ -13,6 +13,8 @@ import (
 )
 
 // MTRTimeSynchronizationClusterTimeZoneStruct is an idiomatic wrapper over the Objective-C class MTRTimeSynchronizationClusterTimeZoneStruct.
+//
+// MTRTimeSynchronizationClusterTimeZoneStruct is an abstract base — you do not construct it directly. Construct one of [MTRTimeSynchronizationClusterTimeZoneType] and pass it where a MTRTimeSynchronizationClusterTimeZoneStruct is accepted.
 type MTRTimeSynchronizationClusterTimeZoneStruct struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRTimeSynchronizationClusterTimeZoneStructFromID(id objc.ID) *MTRTimeSynch
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTimeSynchronizationClusterTimeZoneStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRTimeSynchronizationClusterTimeZoneStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRTimeSynchronizationClusterTimeZoneStructAdopt(id objc.ID) *MTRTimeSynchr
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTimeSynchronizationClusterTimeZoneStruct{Handle: objref.Wrap(id)}
+	x := &MTRTimeSynchronizationClusterTimeZoneStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,48 +60,53 @@ func (x *MTRTimeSynchronizationClusterTimeZoneStruct) IsKind(className string) b
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRTimeSynchronizationClusterTimeZoneStruct creates a new MTRTimeSynchronizationClusterTimeZoneStruct.
-func NewMTRTimeSynchronizationClusterTimeZoneStruct() *MTRTimeSynchronizationClusterTimeZoneStruct {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRTimeSynchronizationClusterTimeZoneStruct")), objc.RegisterName("new"))
-	return mTRTimeSynchronizationClusterTimeZoneStructAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRTimeSynchronizationClusterTimeZoneStruct) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithOffset sets offset and returns the receiver so calls can be chained.
+// WithOffset sets the property and returns the receiver so calls can be chained.
 func (x *MTRTimeSynchronizationClusterTimeZoneStruct) WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterTimeZoneStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), objref.IDOf(offset))
 	return x
 }
 
-// WithValidAt sets validAt and returns the receiver so calls can be chained.
+// WithValidAt sets the property and returns the receiver so calls can be chained.
 func (x *MTRTimeSynchronizationClusterTimeZoneStruct) WithValidAt(validAt obj.Object) *MTRTimeSynchronizationClusterTimeZoneStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValidAt:"), objref.IDOf(validAt))
 	return x
 }
 
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *MTRTimeSynchronizationClusterTimeZoneStruct) WithName(name string) *MTRTimeSynchronizationClusterTimeZoneStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
+// Offset wraps the corresponding Objective-C method.
 func (x *MTRTimeSynchronizationClusterTimeZoneStruct) Offset() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("offset"))
 	return obj.Wrap(_r)
 }
 
+// SetOffset wraps the corresponding Objective-C method.
 func (x *MTRTimeSynchronizationClusterTimeZoneStruct) SetOffset(offset obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), objref.IDOf(offset))
 }
 
+// ValidAt wraps the corresponding Objective-C method.
 func (x *MTRTimeSynchronizationClusterTimeZoneStruct) ValidAt() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validAt"))
 	return obj.Wrap(_r)
 }
 
+// SetValidAt wraps the corresponding Objective-C method.
 func (x *MTRTimeSynchronizationClusterTimeZoneStruct) SetValidAt(validAt obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValidAt:"), objref.IDOf(validAt))
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *MTRTimeSynchronizationClusterTimeZoneStruct) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -106,6 +115,7 @@ func (x *MTRTimeSynchronizationClusterTimeZoneStruct) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *MTRTimeSynchronizationClusterTimeZoneStruct) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
@@ -125,3 +135,11 @@ type MTRTimeSynchronizationClusterTimeZoneStructable interface {
 }
 
 var _ MTRTimeSynchronizationClusterTimeZoneStructable = (*MTRTimeSynchronizationClusterTimeZoneStruct)(nil)
+
+// isMTRTimeSynchronizationClusterTimeZoneStruct marks MTRTimeSynchronizationClusterTimeZoneStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRTimeSynchronizationClusterTimeZoneStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRTimeSynchronizationClusterTimeZoneStruct) isMTRTimeSynchronizationClusterTimeZoneStruct() {
+}
+
+var _ MTRTimeSynchronizationClusterTimeZoneStructProvider = (*MTRTimeSynchronizationClusterTimeZoneStruct)(nil)

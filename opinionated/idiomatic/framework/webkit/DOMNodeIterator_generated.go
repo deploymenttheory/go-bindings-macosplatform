@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMNodeIterator is an idiomatic wrapper over the Objective-C class DOMNodeIterator.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMNodeIterator struct {
-	objref.Handle
+	DOMObject
 }
 
 // DOMNodeIteratorFromID adopts an existing Objective-C object as a DOMNodeIterator
@@ -23,7 +24,8 @@ func DOMNodeIteratorFromID(id objc.ID) *DOMNodeIterator {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMNodeIterator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMNodeIterator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMNodeIteratorAdopt(id objc.ID) *DOMNodeIterator {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMNodeIterator{Handle: objref.Wrap(id)}
+	x := &DOMNodeIterator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMNodeIterator) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMNodeIterator) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMNodeIterator) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMNodeIterator creates a new DOMNodeIterator.
@@ -62,40 +50,48 @@ func NewDOMNodeIterator() *DOMNodeIterator {
 	return dOMNodeIteratorAdopt(_id)
 }
 
+// NextNode wraps the corresponding Objective-C method.
 func (x *DOMNodeIterator) NextNode() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextNode"))
 	return DOMNodeFromID(_r)
 }
 
+// PreviousNode wraps the corresponding Objective-C method.
 func (x *DOMNodeIterator) PreviousNode() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousNode"))
 	return DOMNodeFromID(_r)
 }
 
+// Detach wraps the corresponding Objective-C method.
 func (x *DOMNodeIterator) Detach() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("detach"))
 }
 
+// Root wraps the corresponding Objective-C method.
 func (x *DOMNodeIterator) Root() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("root"))
 	return DOMNodeFromID(_r)
 }
 
+// WhatToShow wraps the corresponding Objective-C method.
 func (x *DOMNodeIterator) WhatToShow() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("whatToShow"))
 	return _r
 }
 
+// ExpandEntityReferences wraps the corresponding Objective-C method.
 func (x *DOMNodeIterator) ExpandEntityReferences() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("expandEntityReferences"))
 	return _r
 }
 
+// ReferenceNode wraps the corresponding Objective-C method.
 func (x *DOMNodeIterator) ReferenceNode() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("referenceNode"))
 	return DOMNodeFromID(_r)
 }
 
+// PointerBeforeReferenceNode wraps the corresponding Objective-C method.
 func (x *DOMNodeIterator) PointerBeforeReferenceNode() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("pointerBeforeReferenceNode"))
 	return _r
@@ -115,3 +111,7 @@ type DOMNodeIteratorable interface {
 }
 
 var _ DOMNodeIteratorable = (*DOMNodeIterator)(nil)
+
+var _ DOMObjectProvider = (*DOMNodeIterator)(nil)
+
+var _ WebScriptObjectProvider = (*DOMNodeIterator)(nil)

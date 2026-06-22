@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An AI that chooses moves in turn-based games using a deterministic strategy.
-//
 // MinmaxStrategist is an idiomatic wrapper over the Objective-C class GKMinmaxStrategist.
+//
+// An AI that chooses moves in turn-based games using a deterministic strategy.
 type MinmaxStrategist struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MinmaxStrategistFromID(id objc.ID) *MinmaxStrategist {
 	if id == 0 {
 		return nil
 	}
-	x := &MinmaxStrategist{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MinmaxStrategist{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func minmaxStrategistAdopt(id objc.ID) *MinmaxStrategist {
 	if id == 0 {
 		return nil
 	}
-	x := &MinmaxStrategist{Handle: objref.Wrap(id)}
+	x := &MinmaxStrategist{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,26 +60,31 @@ func (x *MinmaxStrategist) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MinmaxStrategist) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMinmaxStrategist creates a new MinmaxStrategist.
 func NewMinmaxStrategist() *MinmaxStrategist {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKMinmaxStrategist")), objc.RegisterName("new"))
 	return minmaxStrategistAdopt(_id)
 }
 
-// The number of future turns for the strategist to consider when planning moves.
-//
-// WithMaxLookAheadDepth sets maxLookAheadDepth and returns the receiver so calls can be chained.
+// WithMaxLookAheadDepth the number of future turns for the strategist to consider when planning moves.
 func (x *MinmaxStrategist) WithMaxLookAheadDepth(maxLookAheadDepth int) *MinmaxStrategist {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxLookAheadDepth:"), maxLookAheadDepth)
 	return x
 }
 
-// The maximum number of future turns that will be processed when searching for a move.
+// MaxLookAheadDepth the maximum number of future turns that will be processed when searching for a move.
 func (x *MinmaxStrategist) MaxLookAheadDepth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxLookAheadDepth"))
 	return _r
 }
 
+// SetMaxLookAheadDepth wraps the corresponding Objective-C method.
 func (x *MinmaxStrategist) SetMaxLookAheadDepth(maxLookAheadDepth int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxLookAheadDepth:"), maxLookAheadDepth)
 }

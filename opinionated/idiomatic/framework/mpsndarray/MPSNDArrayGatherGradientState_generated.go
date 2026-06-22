@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ArrayGatherGradientState is an idiomatic wrapper over the Objective-C class MPSNDArrayGatherGradientState.
+//
+// It embeds [ArrayGradientState], promoting that type's methods.
 type ArrayGatherGradientState struct {
-	objref.Handle
+	ArrayGradientState
 }
 
 // ArrayGatherGradientStateFromID adopts an existing Objective-C object as a ArrayGatherGradientState
@@ -23,7 +24,8 @@ func ArrayGatherGradientStateFromID(id objc.ID) *ArrayGatherGradientState {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayGatherGradientState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ArrayGatherGradientState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func arrayGatherGradientStateAdopt(id objc.ID) *ArrayGatherGradientState {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayGatherGradientState{Handle: objref.Wrap(id)}
+	x := &ArrayGatherGradientState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ArrayGatherGradientState) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ArrayGatherGradientState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ArrayGatherGradientState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewArrayGatherGradientState creates a new ArrayGatherGradientState.
@@ -68,3 +56,5 @@ type ArrayGatherGradientStateable interface {
 }
 
 var _ ArrayGatherGradientStateable = (*ArrayGatherGradientState)(nil)
+
+var _ ArrayGradientStateProvider = (*ArrayGatherGradientState)(nil)

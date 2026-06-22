@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains the partial or final results of a speech recognition request.
-//
 // SpeechRecognitionResult is an idiomatic wrapper over the Objective-C class SFSpeechRecognitionResult.
+//
+// An object that contains the partial or final results of a speech recognition request.
 type SpeechRecognitionResult struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SpeechRecognitionResultFromID(id objc.ID) *SpeechRecognitionResult {
 	if id == 0 {
 		return nil
 	}
-	x := &SpeechRecognitionResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SpeechRecognitionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func speechRecognitionResultAdopt(id objc.ID) *SpeechRecognitionResult {
 	if id == 0 {
 		return nil
 	}
-	x := &SpeechRecognitionResult{Handle: objref.Wrap(id)}
+	x := &SpeechRecognitionResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *SpeechRecognitionResult) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpeechRecognitionResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSpeechRecognitionResult creates a new SpeechRecognitionResult.
 func NewSpeechRecognitionResult() *SpeechRecognitionResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("SFSpeechRecognitionResult")), objc.RegisterName("new"))
 	return speechRecognitionResultAdopt(_id)
 }
 
-// The transcription with the highest confidence level.
+// BestTranscription the transcription with the highest confidence level.
 func (x *SpeechRecognitionResult) BestTranscription() *Transcription {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bestTranscription"))
 	return TranscriptionFromID(_r)
 }
 
-// An array of potential transcriptions, sorted in descending order of confidence. All transcriptions correspond to the same utterance, which can be a partial or final result of the overall request. The first transcription in the array has the highest confidence rating, followed by transcriptions with decreasing confidence ratings.
+// Transcriptions an array of potential transcriptions, sorted in descending order of confidence. All transcriptions correspond to the same utterance, which can be a partial or final result of the overall request. The first transcription in the array has the highest confidence rating, followed by transcriptions with decreasing confidence ratings.
 //
 // Transcriptions returns the collection as a Go slice.
 func (x *SpeechRecognitionResult) Transcriptions() []*Transcription {
@@ -78,13 +86,13 @@ func (x *SpeechRecognitionResult) Transcriptions() []*Transcription {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Transcription { return TranscriptionFromID(_id) })
 }
 
-// A Boolean value that indicates whether speech recognition is complete and whether the transcriptions are final. When a speech recognition request is final, its transcriptions don't change.
+// IsFinal a Boolean value that indicates whether speech recognition is complete and whether the transcriptions are final. When a speech recognition request is final, its transcriptions don't change.
 func (x *SpeechRecognitionResult) IsFinal() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFinal"))
 	return _r
 }
 
-// An object that contains the metadata results for a speech recognition request.
+// SpeechRecognitionMetadata an object that contains the metadata results for a speech recognition request.
 func (x *SpeechRecognitionResult) SpeechRecognitionMetadata() *SpeechRecognitionMetadata {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("speechRecognitionMetadata"))
 	return SpeechRecognitionMetadataFromID(_r)

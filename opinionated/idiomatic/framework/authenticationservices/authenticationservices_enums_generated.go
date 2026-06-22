@@ -18,6 +18,8 @@ const (
 	AuthorizationAppleIDButtonStyleBlack        AuthorizationAppleIDButtonStyle = 2
 )
 
+// String returns the AuthorizationAppleIDButtonStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationAppleIDButtonStyle) String() string {
 	switch e {
 	case AuthorizationAppleIDButtonStyleWhite:
@@ -41,6 +43,8 @@ const (
 	AuthorizationAppleIDButtonTypeDefault  AuthorizationAppleIDButtonType = 0
 )
 
+// String returns the AuthorizationAppleIDButtonType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationAppleIDButtonType) String() string {
 	switch e {
 	case AuthorizationAppleIDButtonTypeSignIn:
@@ -63,6 +67,8 @@ const (
 	AuthorizationControllerRequestOptionPreferImmediatelyAvailableCredentials AuthorizationControllerRequestOptions = 1
 )
 
+// String returns the AuthorizationControllerRequestOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationControllerRequestOptions) String() string {
 	var parts []string
 	if e&AuthorizationControllerRequestOptionPreferImmediatelyAvailableCredentials != 0 {
@@ -83,6 +89,8 @@ const (
 	AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyleConditional AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle = 1
 )
 
+// String returns the AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) String() string {
 	switch e {
 	case AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyleStandard:
@@ -105,6 +113,8 @@ const (
 	AuthorizationProviderExtensionAuthenticationMethodSmartCard            AuthorizationProviderExtensionAuthenticationMethod = 3
 )
 
+// String returns the AuthorizationProviderExtensionAuthenticationMethod constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationProviderExtensionAuthenticationMethod) String() string {
 	switch e {
 	case AuthorizationProviderExtensionAuthenticationMethodPassword:
@@ -126,6 +136,8 @@ const (
 	AuthorizationProviderExtensionFederationTypeDynamicWSTrust AuthorizationProviderExtensionFederationType = 2
 )
 
+// String returns the AuthorizationProviderExtensionFederationType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationProviderExtensionFederationType) String() string {
 	switch e {
 	case AuthorizationProviderExtensionFederationTypeNone:
@@ -160,6 +172,8 @@ const (
 	AuthorizationProviderExtensionKeyTypeUserSmartCard           AuthorizationProviderExtensionKeyType = 20
 )
 
+// String returns the AuthorizationProviderExtensionKeyType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationProviderExtensionKeyType) String() string {
 	switch e {
 	case AuthorizationProviderExtensionKeyTypeUserDeviceSigning:
@@ -193,6 +207,8 @@ const (
 	AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyPasswordFallback         AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy = 8
 )
 
+// String returns the AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy) String() string {
 	var parts []string
 	if e&AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyTouchIDOrWatchCurrentSet != 0 {
@@ -220,6 +236,8 @@ const (
 	AuthorizationPublicKeyCredentialAttachmentCrossPlatform AuthorizationPublicKeyCredentialAttachment = 1
 )
 
+// String returns the AuthorizationPublicKeyCredentialAttachment constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationPublicKeyCredentialAttachment) String() string {
 	switch e {
 	case AuthorizationPublicKeyCredentialAttachmentPlatform:
@@ -241,6 +259,8 @@ const (
 	AuthorizationPublicKeyCredentialLargeBlobAssertionOperationWrite AuthorizationPublicKeyCredentialLargeBlobAssertionOperation = 1
 )
 
+// String returns the AuthorizationPublicKeyCredentialLargeBlobAssertionOperation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationPublicKeyCredentialLargeBlobAssertionOperation) String() string {
 	switch e {
 	case AuthorizationPublicKeyCredentialLargeBlobAssertionOperationRead:
@@ -262,6 +282,8 @@ const (
 	AuthorizationPublicKeyCredentialLargeBlobSupportRequirementPreferred AuthorizationPublicKeyCredentialLargeBlobSupportRequirement = 1
 )
 
+// String returns the AuthorizationPublicKeyCredentialLargeBlobSupportRequirement constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationPublicKeyCredentialLargeBlobSupportRequirement) String() string {
 	switch e {
 	case AuthorizationPublicKeyCredentialLargeBlobSupportRequirementRequired:
@@ -282,6 +304,8 @@ const (
 	AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateNotDetermined AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState = 2
 )
 
+// String returns the AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState) String() string {
 	switch e {
 	case AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateAuthorized:
@@ -304,6 +328,8 @@ const (
 	CredentialIdentityStoreErrorCodeStoreBusy     CredentialIdentityStoreErrorCode = 2
 )
 
+// String returns the CredentialIdentityStoreErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CredentialIdentityStoreErrorCode) String() string {
 	switch e {
 	case CredentialIdentityStoreErrorCodeInternalError:
@@ -329,6 +355,8 @@ const (
 	CredentialIdentityTypesOneTimeCode CredentialIdentityTypes = 4
 )
 
+// String returns the CredentialIdentityTypes constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CredentialIdentityTypes) String() string {
 	var parts []string
 	if e&CredentialIdentityTypesPassword != 0 {
@@ -356,6 +384,8 @@ const (
 	CredentialServiceIdentifierTypeApp CredentialServiceIdentifierType = 2
 )
 
+// String returns the CredentialServiceIdentifierType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CredentialServiceIdentifierType) String() string {
 	switch e {
 	case CredentialServiceIdentifierTypeDomain:
@@ -381,6 +411,8 @@ const (
 	ExtensionErrorCodeMatchedExcludedCredential ExtensionErrorCode = 102
 )
 
+// String returns the ExtensionErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ExtensionErrorCode) String() string {
 	switch e {
 	case ExtensionErrorCodeFailed:
@@ -406,6 +438,8 @@ const (
 	PublicKeyCredentialClientDataCrossOriginValueSameOriginWithAncestors PublicKeyCredentialClientDataCrossOriginValue = 2
 )
 
+// String returns the PublicKeyCredentialClientDataCrossOriginValue constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PublicKeyCredentialClientDataCrossOriginValue) String() string {
 	switch e {
 	case PublicKeyCredentialClientDataCrossOriginValueNotSet:
@@ -427,6 +461,8 @@ const (
 	UserAgeRangeNotChild UserAgeRange = 2
 )
 
+// String returns the UserAgeRange constant's name, or its numeric form when the
+// value is not a known constant.
 func (e UserAgeRange) String() string {
 	switch e {
 	case UserAgeRangeUnknown:
@@ -452,6 +488,8 @@ const (
 	UserDetectionStatusLikelyReal UserDetectionStatus = 2
 )
 
+// String returns the UserDetectionStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e UserDetectionStatus) String() string {
 	switch e {
 	case UserDetectionStatusUnsupported:
@@ -474,6 +512,8 @@ const (
 	WebAuthenticationSessionErrorCodePresentationContextInvalid     WebAuthenticationSessionErrorCode = 3
 )
 
+// String returns the WebAuthenticationSessionErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WebAuthenticationSessionErrorCode) String() string {
 	switch e {
 	case WebAuthenticationSessionErrorCodeCanceledLogin:

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for an audio input stream source.
-//
 // AudioInputStreamSource is an idiomatic wrapper over the Objective-C class VZAudioInputStreamSource.
+//
+// AudioInputStreamSource is an abstract base — you do not construct it directly. Construct one of [HostAudioInputStreamSource] and pass it where a AudioInputStreamSource is accepted.
+//
+// The base class for an audio input stream source.
 type AudioInputStreamSource struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func AudioInputStreamSourceFromID(id objc.ID) *AudioInputStreamSource {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioInputStreamSource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioInputStreamSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func audioInputStreamSourceAdopt(id objc.ID) *AudioInputStreamSource {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioInputStreamSource{Handle: objref.Wrap(id)}
+	x := &AudioInputStreamSource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *AudioInputStreamSource) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewAudioInputStreamSource creates a new AudioInputStreamSource.
-func NewAudioInputStreamSource() *AudioInputStreamSource {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZAudioInputStreamSource")), objc.RegisterName("new"))
-	return audioInputStreamSourceAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioInputStreamSource) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // AudioInputStreamSourceable is the interface implemented by [AudioInputStreamSource], for mocking and DI.
@@ -70,3 +74,10 @@ type AudioInputStreamSourceable interface {
 }
 
 var _ AudioInputStreamSourceable = (*AudioInputStreamSource)(nil)
+
+// isAudioInputStreamSource marks AudioInputStreamSource — and, by embedding promotion, its
+// subclasses — as a member of the AudioInputStreamSource hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AudioInputStreamSource) isAudioInputStreamSource() {}
+
+var _ AudioInputStreamSourceProvider = (*AudioInputStreamSource)(nil)

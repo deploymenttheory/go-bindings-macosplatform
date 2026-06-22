@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A result that contains the highest-ranking classifications in a time range.
-//
 // ClassificationResult is an idiomatic wrapper over the Objective-C class SNClassificationResult.
+//
+// A result that contains the highest-ranking classifications in a time range.
 type ClassificationResult struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ClassificationResultFromID(id objc.ID) *ClassificationResult {
 	if id == 0 {
 		return nil
 	}
-	x := &ClassificationResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ClassificationResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func classificationResultAdopt(id objc.ID) *ClassificationResult {
 	if id == 0 {
 		return nil
 	}
-	x := &ClassificationResult{Handle: objref.Wrap(id)}
+	x := &ClassificationResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *ClassificationResult) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ClassificationResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewClassificationResult creates a new ClassificationResult.
 func NewClassificationResult() *ClassificationResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("SNClassificationResult")), objc.RegisterName("new"))
 	return classificationResultAdopt(_id)
 }
 
-// Returns the classification for an identifier.
+// ClassificationForIdentifier returns the classification for an identifier.
 func (x *ClassificationResult) ClassificationForIdentifier(identifier string) *Classification {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("classificationForIdentifier:"), purego.NSString(identifier))
 	return ClassificationFromID(_r)
 }
 
-// All classification candidates, sorted with highest confidence first.
+// Classifications all classification candidates, sorted with highest confidence first.
 //
 // Classifications returns the collection as a Go slice.
 func (x *ClassificationResult) Classifications() []*Classification {

@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // CNNFullyConnectedGradientNode is an idiomatic wrapper over the Objective-C class MPSCNNFullyConnectedGradientNode.
+//
+// It embeds [CNNConvolutionGradientNode], promoting that type's methods.
 type CNNFullyConnectedGradientNode struct {
-	objref.Handle
+	CNNConvolutionGradientNode
 }
 
 // CNNFullyConnectedGradientNodeFromID adopts an existing Objective-C object as a CNNFullyConnectedGradientNode
@@ -23,7 +24,8 @@ func CNNFullyConnectedGradientNodeFromID(id objc.ID) *CNNFullyConnectedGradientN
 	if id == 0 {
 		return nil
 	}
-	x := &CNNFullyConnectedGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNFullyConnectedGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func cNNFullyConnectedGradientNodeAdopt(id objc.ID) *CNNFullyConnectedGradientNo
 	if id == 0 {
 		return nil
 	}
-	x := &CNNFullyConnectedGradientNode{Handle: objref.Wrap(id)}
+	x := &CNNFullyConnectedGradientNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNFullyConnectedGradientNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNFullyConnectedGradientNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNFullyConnectedGradientNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNFullyConnectedGradientNode creates a new CNNFullyConnectedGradientNode.
@@ -62,9 +50,7 @@ func NewCNNFullyConnectedGradientNode() *CNNFullyConnectedGradientNode {
 	return cNNFullyConnectedGradientNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNFullyConnectedGradientNode) WithLabel(label string) *CNNFullyConnectedGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -77,3 +63,9 @@ type CNNFullyConnectedGradientNodeable interface {
 }
 
 var _ CNNFullyConnectedGradientNodeable = (*CNNFullyConnectedGradientNode)(nil)
+
+var _ CNNConvolutionGradientNodeProvider = (*CNNFullyConnectedGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*CNNFullyConnectedGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNFullyConnectedGradientNode)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An interface that implements an index-maintenance app extension.
-//
 // IndexExtensionRequestHandler is an idiomatic wrapper over the Objective-C class CSIndexExtensionRequestHandler.
+//
+// An interface that implements an index-maintenance app extension.
 type IndexExtensionRequestHandler struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func IndexExtensionRequestHandlerFromID(id objc.ID) *IndexExtensionRequestHandle
 	if id == 0 {
 		return nil
 	}
-	x := &IndexExtensionRequestHandler{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IndexExtensionRequestHandler{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func indexExtensionRequestHandlerAdopt(id objc.ID) *IndexExtensionRequestHandler
 	if id == 0 {
 		return nil
 	}
-	x := &IndexExtensionRequestHandler{Handle: objref.Wrap(id)}
+	x := &IndexExtensionRequestHandler{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *IndexExtensionRequestHandler) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *IndexExtensionRequestHandler) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IndexExtensionRequestHandler) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewIndexExtensionRequestHandler creates a new IndexExtensionRequestHandler.

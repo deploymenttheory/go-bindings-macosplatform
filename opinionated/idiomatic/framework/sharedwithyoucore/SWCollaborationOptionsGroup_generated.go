@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a group of collaboration options that the system displays together.
-//
 // CollaborationOptionsGroup is an idiomatic wrapper over the Objective-C class SWCollaborationOptionsGroup.
+//
+// CollaborationOptionsGroup is an abstract base — you do not construct it directly. Construct one of [CollaborationOptionsPickerGroup] and pass it where a CollaborationOptionsGroup is accepted.
+//
+// An object that represents a group of collaboration options that the system displays together.
 type CollaborationOptionsGroup struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func CollaborationOptionsGroupFromID(id objc.ID) *CollaborationOptionsGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &CollaborationOptionsGroup{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollaborationOptionsGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func collaborationOptionsGroupAdopt(id objc.ID) *CollaborationOptionsGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &CollaborationOptionsGroup{Handle: objref.Wrap(id)}
+	x := &CollaborationOptionsGroup{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,41 +62,39 @@ func (x *CollaborationOptionsGroup) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates and initializes a collaboration options group object.
-//
-// NewCollaborationOptionsGroupWithIdentifierOptions creates a new CollaborationOptionsGroup.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CollaborationOptionsGroup) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCollaborationOptionsGroupWithIdentifierOptions creates and initializes a collaboration options group object.
 func NewCollaborationOptionsGroupWithIdentifierOptions(identifier string, options []*CollaborationOption) *CollaborationOptionsGroup {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWCollaborationOptionsGroup")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:options:"), purego.NSString(identifier), purego.SliceToNSArray(options, func(_v *CollaborationOption) objc.ID { return objref.IDOf(_v) }))
 	return collaborationOptionsGroupAdopt(_id)
 }
 
-// A localized string the system displays as the title of the group section.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle a localized string the system displays as the title of the group section.
 func (x *CollaborationOptionsGroup) WithTitle(title string) *CollaborationOptionsGroup {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A localized string that provides additional information for the group of options.
-//
-// WithFooter sets footer and returns the receiver so calls can be chained.
+// WithFooter a localized string that provides additional information for the group of options.
 func (x *CollaborationOptionsGroup) WithFooter(footer string) *CollaborationOptionsGroup {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFooter:"), purego.NSString(footer))
 	return x
 }
 
-// An array of collaboration options the system displays as a group.
-//
-// WithOptions sets the collection and returns the receiver so calls can be chained.
+// WithOptions an array of collaboration options the system displays as a group.
 func (x *CollaborationOptionsGroup) WithOptions(items ...*CollaborationOption) *CollaborationOptionsGroup {
 	_arr := purego.SliceToNSArray(items, func(_v *CollaborationOption) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), _arr)
 	return x
 }
 
-// Localized string used to title the section
+// Title localized string used to title the section
 func (x *CollaborationOptionsGroup) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -101,11 +103,12 @@ func (x *CollaborationOptionsGroup) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *CollaborationOptionsGroup) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// A unique identifier
+// Identifier a unique identifier
 func (x *CollaborationOptionsGroup) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -114,7 +117,7 @@ func (x *CollaborationOptionsGroup) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Localized string to describe or provide additional information about the group of options
+// Footer localized string to describe or provide additional information about the group of options
 func (x *CollaborationOptionsGroup) Footer() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("footer"))
 	if _r == 0 {
@@ -123,11 +126,12 @@ func (x *CollaborationOptionsGroup) Footer() string {
 	return purego.GoString(_r)
 }
 
+// SetFooter wraps the corresponding Objective-C method.
 func (x *CollaborationOptionsGroup) SetFooter(footer string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFooter:"), purego.NSString(footer))
 }
 
-// SWCollaborationOptions to be displayed in the group
+// Options SWCollaborationOptions to be displayed in the group
 //
 // Options returns the collection as a Go slice.
 func (x *CollaborationOptionsGroup) Options() []*CollaborationOption {
@@ -135,6 +139,7 @@ func (x *CollaborationOptionsGroup) Options() []*CollaborationOption {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CollaborationOption { return CollaborationOptionFromID(_id) })
 }
 
+// SetOptions wraps the corresponding Objective-C method.
 func (x *CollaborationOptionsGroup) SetOptions(options []*CollaborationOption) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), purego.SliceToNSArray(options, func(_v *CollaborationOption) objc.ID { return objref.IDOf(_v) }))
 }
@@ -155,3 +160,10 @@ type CollaborationOptionsGroupable interface {
 }
 
 var _ CollaborationOptionsGroupable = (*CollaborationOptionsGroup)(nil)
+
+// isCollaborationOptionsGroup marks CollaborationOptionsGroup — and, by embedding promotion, its
+// subclasses — as a member of the CollaborationOptionsGroup hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CollaborationOptionsGroup) isCollaborationOptionsGroup() {}
+
+var _ CollaborationOptionsGroupProvider = (*CollaborationOptionsGroup)(nil)

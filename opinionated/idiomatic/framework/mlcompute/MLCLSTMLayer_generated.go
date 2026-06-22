@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that represents long short-term memory (LSTM) networks.
-//
 // LSTMLayer is an idiomatic wrapper over the Objective-C class MLCLSTMLayer.
+//
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that represents long short-term memory (LSTM) networks.
 type LSTMLayer struct {
-	objref.Handle
+	Layer
 }
 
 // LSTMLayerFromID adopts an existing Objective-C object as a LSTMLayer
@@ -25,7 +26,8 @@ func LSTMLayerFromID(id objc.ID) *LSTMLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &LSTMLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LSTMLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func lSTMLayerAdopt(id objc.ID) *LSTMLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &LSTMLayer{Handle: objref.Wrap(id)}
+	x := &LSTMLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *LSTMLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LSTMLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LSTMLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewLSTMLayer creates a new LSTMLayer.
@@ -64,29 +52,25 @@ func NewLSTMLayer() *LSTMLayer {
 	return lSTMLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string that helps identify this layer.
 func (x *LSTMLayer) WithLabel(label string) *LSTMLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *LSTMLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *LSTMLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// The LSTM descriptor
+// Descriptor the LSTM descriptor
 func (x *LSTMLayer) Descriptor() *LSTMDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
 	return LSTMDescriptorFromID(_r)
 }
 
-// The array of gate activations for input, hidden, cell and output gates The default gate activations are: sigmoid, sigmoid, tanh, sigmoid
+// GateActivations the array of gate activations for input, hidden, cell and output gates The default gate activations are: sigmoid, sigmoid, tanh, sigmoid
 //
 // GateActivations returns the collection as a Go slice.
 func (x *LSTMLayer) GateActivations() []*ActivationDescriptor {
@@ -94,13 +78,13 @@ func (x *LSTMLayer) GateActivations() []*ActivationDescriptor {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ActivationDescriptor { return ActivationDescriptorFromID(_id) })
 }
 
-// The output activation descriptor
+// OutputResultActivation the output activation descriptor
 func (x *LSTMLayer) OutputResultActivation() *ActivationDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputResultActivation"))
 	return ActivationDescriptorFromID(_r)
 }
 
-// The array of tensors describing the input weights for the input, hidden, cell and output gates
+// InputWeights the array of tensors describing the input weights for the input, hidden, cell and output gates
 //
 // InputWeights returns the collection as a Go slice.
 func (x *LSTMLayer) InputWeights() []*Tensor {
@@ -108,7 +92,7 @@ func (x *LSTMLayer) InputWeights() []*Tensor {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
-// The array of tensors describing the hidden weights for the input, hidden, cell and output gates
+// HiddenWeights the array of tensors describing the hidden weights for the input, hidden, cell and output gates
 //
 // HiddenWeights returns the collection as a Go slice.
 func (x *LSTMLayer) HiddenWeights() []*Tensor {
@@ -116,7 +100,7 @@ func (x *LSTMLayer) HiddenWeights() []*Tensor {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
-// The array of tensors describing the peephole weights for the input, hidden, cell and output gates
+// PeepholeWeights the array of tensors describing the peephole weights for the input, hidden, cell and output gates
 //
 // PeepholeWeights returns the collection as a Go slice.
 func (x *LSTMLayer) PeepholeWeights() []*Tensor {
@@ -124,7 +108,7 @@ func (x *LSTMLayer) PeepholeWeights() []*Tensor {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
-// The array of tensors describing the bias terms for the input, hidden, cell and output gates
+// Biases the array of tensors describing the bias terms for the input, hidden, cell and output gates
 //
 // Biases returns the collection as a Go slice.
 func (x *LSTMLayer) Biases() []*Tensor {
@@ -132,7 +116,7 @@ func (x *LSTMLayer) Biases() []*Tensor {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
-// The input weights tensor parameters used for optimizer update
+// InputWeightsParameters the input weights tensor parameters used for optimizer update
 //
 // InputWeightsParameters returns the collection as a Go slice.
 func (x *LSTMLayer) InputWeightsParameters() []*TensorParameter {
@@ -140,7 +124,7 @@ func (x *LSTMLayer) InputWeightsParameters() []*TensorParameter {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TensorParameter { return TensorParameterFromID(_id) })
 }
 
-// The hidden weights tensor parameters used for optimizer update
+// HiddenWeightsParameters the hidden weights tensor parameters used for optimizer update
 //
 // HiddenWeightsParameters returns the collection as a Go slice.
 func (x *LSTMLayer) HiddenWeightsParameters() []*TensorParameter {
@@ -148,7 +132,7 @@ func (x *LSTMLayer) HiddenWeightsParameters() []*TensorParameter {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TensorParameter { return TensorParameterFromID(_id) })
 }
 
-// The peephole weights tensor parameters used for optimizer update
+// PeepholeWeightsParameters the peephole weights tensor parameters used for optimizer update
 //
 // PeepholeWeightsParameters returns the collection as a Go slice.
 func (x *LSTMLayer) PeepholeWeightsParameters() []*TensorParameter {
@@ -156,7 +140,7 @@ func (x *LSTMLayer) PeepholeWeightsParameters() []*TensorParameter {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TensorParameter { return TensorParameterFromID(_id) })
 }
 
-// The bias tensor parameter used for optimizer update
+// BiasesParameters the bias tensor parameter used for optimizer update
 //
 // BiasesParameters returns the collection as a Go slice.
 func (x *LSTMLayer) BiasesParameters() []*TensorParameter {
@@ -183,3 +167,5 @@ type LSTMLayerable interface {
 }
 
 var _ LSTMLayerable = (*LSTMLayer)(nil)
+
+var _ LayerProvider = (*LSTMLayer)(nil)

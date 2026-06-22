@@ -23,7 +23,8 @@ func CompositionFromID(id objc.ID) *Composition {
 	if id == 0 {
 		return nil
 	}
-	x := &Composition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Composition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func compositionAdopt(id objc.ID) *Composition {
 	if id == 0 {
 		return nil
 	}
-	x := &Composition{Handle: objref.Wrap(id)}
+	x := &Composition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,32 +58,43 @@ func (x *Composition) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Composition) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewComposition creates a new Composition.
 func NewComposition() *Composition {
 	_id := objc.Send[objc.ID](objc.ID(_class("QCComposition")), objc.RegisterName("new"))
 	return compositionAdopt(_id)
 }
 
+// Protocols wraps the corresponding Objective-C method.
 func (x *Composition) Protocols() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocols"))
 	return obj.Wrap(_r)
 }
 
+// Attributes wraps the corresponding Objective-C method.
 func (x *Composition) Attributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
+// InputKeys wraps the corresponding Objective-C method.
 func (x *Composition) InputKeys() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputKeys"))
 	return obj.Wrap(_r)
 }
 
+// OutputKeys wraps the corresponding Objective-C method.
 func (x *Composition) OutputKeys() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputKeys"))
 	return obj.Wrap(_r)
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *Composition) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {

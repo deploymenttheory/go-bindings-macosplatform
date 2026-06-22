@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that splits a tensor value into a list of subtensors.
-//
 // SplitLayer is an idiomatic wrapper over the Objective-C class MLCSplitLayer.
+//
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that splits a tensor value into a list of subtensors.
 type SplitLayer struct {
-	objref.Handle
+	Layer
 }
 
 // SplitLayerFromID adopts an existing Objective-C object as a SplitLayer
@@ -25,7 +26,8 @@ func SplitLayerFromID(id objc.ID) *SplitLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &SplitLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SplitLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func splitLayerAdopt(id objc.ID) *SplitLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &SplitLayer{Handle: objref.Wrap(id)}
+	x := &SplitLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SplitLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SplitLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SplitLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSplitLayer creates a new SplitLayer.
@@ -64,35 +52,31 @@ func NewSplitLayer() *SplitLayer {
 	return splitLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string that helps identify this layer.
 func (x *SplitLayer) WithLabel(label string) *SplitLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *SplitLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SplitLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// The dimension (or axis) along which to split tensor
+// Dimension the dimension (or axis) along which to split tensor
 func (x *SplitLayer) Dimension() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dimension"))
 	return _r
 }
 
-// The number of splits. The tensor will be split into equally sized chunks.  The last chunk may be smaller in size.
+// SplitCount the number of splits. The tensor will be split into equally sized chunks.  The last chunk may be smaller in size.
 func (x *SplitLayer) SplitCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("splitCount"))
 	return _r
 }
 
-// Lengths of each split section. The tensor will be split into chunks along dimensions with sizes given in \p splitSectionLengths .
+// SplitSectionLengths lengths of each split section. The tensor will be split into chunks along dimensions with sizes given in \p splitSectionLengths .
 //
 // SplitSectionLengths returns the collection as a Go slice.
 func (x *SplitLayer) SplitSectionLengths() []obj.Object {
@@ -111,3 +95,5 @@ type SplitLayerable interface {
 }
 
 var _ SplitLayerable = (*SplitLayer)(nil)
+
+var _ LayerProvider = (*SplitLayer)(nil)

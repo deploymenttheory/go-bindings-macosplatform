@@ -17,6 +17,8 @@ const (
 	KJSRelationConditionLessThan    RelationCondition = 3
 )
 
+// String returns the RelationCondition constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RelationCondition) String() string {
 	switch e {
 	case KJSRelationConditionUndefined:
@@ -46,6 +48,8 @@ const (
 	KJSTypeBigInt    Type = 7
 )
 
+// String returns the Type constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Type) String() string {
 	switch e {
 	case KJSTypeUndefined:
@@ -88,6 +92,8 @@ const (
 	KJSTypedArrayTypeBigUint64Array    TypedArrayType = 12
 )
 
+// String returns the TypedArrayType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TypedArrayType) String() string {
 	switch e {
 	case KJSTypedArrayTypeInt8Array:

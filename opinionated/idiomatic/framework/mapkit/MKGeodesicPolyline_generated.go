@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An open polygon overlay consisting of line segments that follow the contours of the Earth to create the shortest path between the specified points.
-//
 // GeodesicPolyline is an idiomatic wrapper over the Objective-C class MKGeodesicPolyline.
+//
+// It embeds [Polyline], promoting that type's methods.
+//
+// An open polygon overlay consisting of line segments that follow the contours of the Earth to create the shortest path between the specified points.
 type GeodesicPolyline struct {
-	objref.Handle
+	Polyline
 }
 
 // GeodesicPolylineFromID adopts an existing Objective-C object as a GeodesicPolyline
@@ -25,7 +26,8 @@ func GeodesicPolylineFromID(id objc.ID) *GeodesicPolyline {
 	if id == 0 {
 		return nil
 	}
-	x := &GeodesicPolyline{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GeodesicPolyline{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func geodesicPolylineAdopt(id objc.ID) *GeodesicPolyline {
 	if id == 0 {
 		return nil
 	}
-	x := &GeodesicPolyline{Handle: objref.Wrap(id)}
+	x := &GeodesicPolyline{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GeodesicPolyline) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GeodesicPolyline) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GeodesicPolyline) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGeodesicPolyline creates a new GeodesicPolyline.
@@ -64,17 +52,13 @@ func NewGeodesicPolyline() *GeodesicPolyline {
 	return geodesicPolylineAdopt(_id)
 }
 
-// The title of the shape annotation.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the title of the shape annotation.
 func (x *GeodesicPolyline) WithTitle(title string) *GeodesicPolyline {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The subtitle of the shape annotation.
-//
-// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
+// WithSubtitle the subtitle of the shape annotation.
 func (x *GeodesicPolyline) WithSubtitle(subtitle string) *GeodesicPolyline {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
@@ -88,3 +72,9 @@ type GeodesicPolylineable interface {
 }
 
 var _ GeodesicPolylineable = (*GeodesicPolyline)(nil)
+
+var _ PolylineProvider = (*GeodesicPolyline)(nil)
+
+var _ MultiPointProvider = (*GeodesicPolyline)(nil)
+
+var _ ShapeProvider = (*GeodesicPolyline)(nil)

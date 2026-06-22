@@ -13,6 +13,8 @@ import (
 )
 
 // Matrix is an idiomatic wrapper over the Objective-C class MPSMatrix.
+//
+// Matrix is an abstract base — you do not construct it directly. Construct one of [TemporaryMatrix] and pass it where a Matrix is accepted.
 type Matrix struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MatrixFromID(id objc.ID) *Matrix {
 	if id == 0 {
 		return nil
 	}
-	x := &Matrix{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Matrix{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func matrixAdopt(id objc.ID) *Matrix {
 	if id == 0 {
 		return nil
 	}
-	x := &Matrix{Handle: objref.Wrap(id)}
+	x := &Matrix{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,55 +60,55 @@ func (x *Matrix) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMatrix creates a new Matrix.
-func NewMatrix() *Matrix {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrix")), objc.RegisterName("new"))
-	return matrixAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Matrix) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Get the number of bytes used to allocate underyling MTLResources This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSMatrix instantiation and MTLBuffer is not included. It only measures the size of the allocation used to hold the matrix data in the buffer. This value is subject to change between different devices and operating systems. Except when -initWithBuffer:descriptor: is used, most MPSMatrixes are allocated without a backing store. The backing store is allocated lazily when it is needed, typically when the .texture property is called. Consequently, in most cases, it should be inexpensive to make a MPSImage to see how much memory it will need, and release it if it is too large. This method may fail in certain circumstances, such as when the MPSImage is created with -initWithTexture:featureChannels:. In such cases, 0 will be returned.
+// ResourceSize get the number of bytes used to allocate underyling MTLResources This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSMatrix instantiation and MTLBuffer is not included. It only measures the size of the allocation used to hold the matrix data in the buffer. This value is subject to change between different devices and operating systems. Except when -initWithBuffer:descriptor: is used, most MPSMatrixes are allocated without a backing store. The backing store is allocated lazily when it is needed, typically when the .texture property is called. Consequently, in most cases, it should be inexpensive to make a MPSImage to see how much memory it will need, and release it if it is too large. This method may fail in certain circumstances, such as when the MPSImage is created with -initWithTexture:featureChannels:. In such cases, 0 will be returned.
 func (x *Matrix) ResourceSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resourceSize"))
 	return _r
 }
 
-// The number of rows in a matrix in the MPSMatrix.
+// Rows the number of rows in a matrix in the MPSMatrix.
 func (x *Matrix) Rows() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rows"))
 	return _r
 }
 
-// The number of columns in a matrix in the MPSMatrix.
+// Columns the number of columns in a matrix in the MPSMatrix.
 func (x *Matrix) Columns() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columns"))
 	return _r
 }
 
-// The number of matrices in the MPSMatrix.
+// Matrices the number of matrices in the MPSMatrix.
 func (x *Matrix) Matrices() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("matrices"))
 	return _r
 }
 
-// The type of the MPSMatrix data.
+// DataType the type of the MPSMatrix data.
 func (x *Matrix) DataType() DataType {
 	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("dataType"))
 	return _r
 }
 
-// The stride, in bytes, between corresponding elements of consecutive rows.
+// RowBytes the stride, in bytes, between corresponding elements of consecutive rows.
 func (x *Matrix) RowBytes() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowBytes"))
 	return _r
 }
 
-// The stride, in bytes, between corresponding elements of consecutive matrices.
+// MatrixBytes the stride, in bytes, between corresponding elements of consecutive matrices.
 func (x *Matrix) MatrixBytes() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("matrixBytes"))
 	return _r
 }
 
-// Byte-offset to the buffer where the matrix data begins - see
+// Offset byte-offset to the buffer where the matrix data begins - see
 func (x *Matrix) Offset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
 	return _r
@@ -124,3 +128,10 @@ type Matrixable interface {
 }
 
 var _ Matrixable = (*Matrix)(nil)
+
+// isMatrix marks Matrix — and, by embedding promotion, its
+// subclasses — as a member of the Matrix hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Matrix) isMatrix() {}
+
+var _ MatrixProvider = (*Matrix)(nil)

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A CBIdentity object is used for accessing the attributes of an identity stored in an identity authority. You can use an identity object for finding identities, and storing them in an access control list (ACL). If you need to edit these attributes, take advantage of the CSIdentity class in Core Services.
-//
 // Identity is an idiomatic wrapper over the Objective-C class CBIdentity.
+//
+// Identity is an abstract base — you do not construct it directly. Construct one of [GroupIdentity], [UserIdentity] and pass it where a Identity is accepted.
+//
+// A CBIdentity object is used for accessing the attributes of an identity stored in an identity authority. You can use an identity object for finding identities, and storing them in an access control list (ACL). If you need to edit these attributes, take advantage of the CSIdentity class in Core Services.
 type Identity struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func IdentityFromID(id objc.ID) *Identity {
 	if id == 0 {
 		return nil
 	}
-	x := &Identity{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Identity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func identityAdopt(id objc.ID) *Identity {
 	if id == 0 {
 		return nil
 	}
-	x := &Identity{Handle: objref.Wrap(id)}
+	x := &Identity{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,30 +62,31 @@ func (x *Identity) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewIdentity creates a new Identity.
-func NewIdentity() *Identity {
-	_id := objc.Send[objc.ID](objc.ID(_class("CBIdentity")), objc.RegisterName("new"))
-	return identityAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Identity) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns a Boolean value indicating whether the identity is a member of the specified group.
+// IsMemberOfGroup returns a Boolean value indicating whether the identity is a member of the specified group.
 func (x *Identity) IsMemberOfGroup(group *GroupIdentity) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMemberOfGroup:"), objref.IDOf(group))
 	return _r
 }
 
-// Returns the identity authority where the identity is stored. - Returns: The identity authority where the identity is stored.
+// Authority returns the identity authority where the identity is stored. - Returns: The identity authority where the identity is stored.
 func (x *Identity) Authority() *IdentityAuthority {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authority"))
 	return IdentityAuthorityFromID(_r)
 }
 
+// UniqueIdentifier wraps the corresponding Objective-C method.
 func (x *Identity) UniqueIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniqueIdentifier"))
 	return obj.Wrap(_r)
 }
 
-// Returns the UUID of the identity as a string. The UUID string is generated so it is unique across all identity authorities. When storing ACLs, one method is to store the UUID of each identity. However, it is recommended that you use a persistent data object instead (see “CBIdentity/persistentReference“). - Returns: The UUID string of the identity.
+// UUIDString returns the UUID of the identity as a string. The UUID string is generated so it is unique across all identity authorities. When storing ACLs, one method is to store the UUID of each identity. However, it is recommended that you use a persistent data object instead (see “CBIdentity/persistentReference“). - Returns: The UUID string of the identity.
 func (x *Identity) UUIDString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUIDString"))
 	if _r == 0 {
@@ -90,7 +95,7 @@ func (x *Identity) UUIDString() string {
 	return purego.GoString(_r)
 }
 
-// Returns the full name of the identity. - Returns: The full name for the identity.
+// FullName returns the full name of the identity. - Returns: The full name for the identity.
 func (x *Identity) FullName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullName"))
 	if _r == 0 {
@@ -99,7 +104,7 @@ func (x *Identity) FullName() string {
 	return purego.GoString(_r)
 }
 
-// Returns the POSIX name of the identity. The POSIX name is also referred to as the “short name” for an identity. It can only contain the characters A-Z, a-z, 0-9, -, _, ., and
+// PosixName returns the POSIX name of the identity. The POSIX name is also referred to as the “short name” for an identity. It can only contain the characters A-Z, a-z, 0-9, -, _, ., and
 func (x *Identity) PosixName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("posixName"))
 	if _r == 0 {
@@ -108,7 +113,7 @@ func (x *Identity) PosixName() string {
 	return purego.GoString(_r)
 }
 
-// Returns an array of aliases (alternate names) for the identity. An identity can have zero or more aliases. Like the full and short names, two identities cannot share an alias. - Returns: An array of `NSString` objects containing the alternate names for the identity.
+// Aliases returns an array of aliases (alternate names) for the identity. An identity can have zero or more aliases. Like the full and short names, two identities cannot share an alias. - Returns: An array of `NSString` objects containing the alternate names for the identity.
 //
 // Aliases returns the collection as a Go slice.
 func (x *Identity) Aliases() []string {
@@ -116,7 +121,7 @@ func (x *Identity) Aliases() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Returns the email address of an identity. - Returns: The email address of an identity or `nil` if none exists.
+// EmailAddress returns the email address of an identity. - Returns: The email address of an identity or `nil` if none exists.
 func (x *Identity) EmailAddress() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emailAddress"))
 	if _r == 0 {
@@ -125,25 +130,25 @@ func (x *Identity) EmailAddress() string {
 	return purego.GoString(_r)
 }
 
-// Returns the image associated with an identity. - Returns: The image associated with an identity, or `nil` if none exists.
+// Image returns the image associated with an identity. - Returns: The image associated with an identity, or `nil` if none exists.
 func (x *Identity) Image() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
 	return obj.Wrap(_r)
 }
 
-// Returns a persistent reference to store a reference to an identity. A persistent reference data object is an object generated from an identity. Persistent data objects can be written to and read from a file, making them extremely useful for storing identities in an ACL. - Returns: A data object that uniquely references an identity.
+// PersistentReference returns a persistent reference to store a reference to an identity. A persistent reference data object is an object generated from an identity. Persistent data objects can be written to and read from a file, making them extremely useful for storing identities in an ACL. - Returns: A data object that uniquely references an identity.
 func (x *Identity) PersistentReference() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentReference"))
 	return obj.Wrap(_r)
 }
 
-// Returns a Boolean value indicating the state of the identity’s hidden property. A hidden identity does not show up in the Identity Picker. A hidden identity refers to system identities such as `root`, `www`, and `wheel`. - Returns: <doc://com.apple.documentation/documentation/objectivec/yes> if the identity is hidden; <doc://com.apple.documentation/documentation/objectivec/no> if it is not.
+// IsHidden returns a Boolean value indicating the state of the identity’s hidden property. A hidden identity does not show up in the Identity Picker. A hidden identity refers to system identities such as `root`, `www`, and `wheel`. - Returns: <doc://com.apple.documentation/documentation/objectivec/yes> if the identity is hidden; <doc://com.apple.documentation/documentation/objectivec/no> if it is not.
 func (x *Identity) IsHidden() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
 	return _r
 }
 
-// Returns an opaque object for use with the Core Services Identity API. This method, along with “CBIdentity/identityWithCSIdentity:“, is used for interoperability with the Core Services Identity API. - Returns: The opaque object for use with the Core Services Identity API.
+// CSIdentity returns an opaque object for use with the Core Services Identity API. This method, along with “CBIdentity/identityWithCSIdentity:“, is used for interoperability with the Core Services Identity API. - Returns: The opaque object for use with the Core Services Identity API.
 func (x *Identity) CSIdentity() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CSIdentity"))
 	return obj.Wrap(_r)
@@ -167,3 +172,10 @@ type Identityable interface {
 }
 
 var _ Identityable = (*Identity)(nil)
+
+// isIdentity marks Identity — and, by embedding promotion, its
+// subclasses — as a member of the Identity hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Identity) isIdentity() {}
+
+var _ IdentityProvider = (*Identity)(nil)

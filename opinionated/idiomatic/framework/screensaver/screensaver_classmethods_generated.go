@@ -9,13 +9,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns a screen saver defaults instance that reads and writes defaults for the specified module.
+// DefaultsForModuleWithName returns a screen saver defaults instance that reads and writes defaults for the specified module.
 func DefaultsForModuleWithName(inModuleName string) *ScreenSaverDefaults {
 	_r := objc.Send[objc.ID](objc.ID(_class("ScreenSaverDefaults")), objc.RegisterName("defaultsForModuleWithName:"), purego.NSString(inModuleName))
 	return ScreenSaverDefaultsFromID(_r)
 }
 
-// Indicates whether to perform a gradual screen fade when the system starts and stops your screen saver’s animation.
+// PerformGammaFade indicates whether to perform a gradual screen fade when the system starts and stops your screen saver’s animation.
 func PerformGammaFade() bool {
 	_r := objc.Send[bool](objc.ID(_class("ScreenSaverView")), objc.RegisterName("performGammaFade"))
 	return _r

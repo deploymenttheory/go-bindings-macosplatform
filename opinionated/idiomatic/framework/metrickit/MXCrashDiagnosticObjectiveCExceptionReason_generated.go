@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the exception reason for an uncaught ObjC exception.
-//
 // CrashDiagnosticObjectiveCExceptionReason is an idiomatic wrapper over the Objective-C class MXCrashDiagnosticObjectiveCExceptionReason.
+//
+// An object that represents the exception reason for an uncaught ObjC exception.
 type CrashDiagnosticObjectiveCExceptionReason struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CrashDiagnosticObjectiveCExceptionReasonFromID(id objc.ID) *CrashDiagnostic
 	if id == 0 {
 		return nil
 	}
-	x := &CrashDiagnosticObjectiveCExceptionReason{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CrashDiagnosticObjectiveCExceptionReason{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func crashDiagnosticObjectiveCExceptionReasonAdopt(id objc.ID) *CrashDiagnosticO
 	if id == 0 {
 		return nil
 	}
-	x := &CrashDiagnosticObjectiveCExceptionReason{Handle: objref.Wrap(id)}
+	x := &CrashDiagnosticObjectiveCExceptionReason{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *CrashDiagnosticObjectiveCExceptionReason) IsKind(className string) bool
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CrashDiagnosticObjectiveCExceptionReason) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCrashDiagnosticObjectiveCExceptionReason creates a new CrashDiagnosticObjectiveCExceptionReason.
 func NewCrashDiagnosticObjectiveCExceptionReason() *CrashDiagnosticObjectiveCExceptionReason {
 	_id := objc.Send[objc.ID](objc.ID(_class("MXCrashDiagnosticObjectiveCExceptionReason")), objc.RegisterName("new"))
 	return crashDiagnosticObjectiveCExceptionReasonAdopt(_id)
 }
 
-// Returns the contents of the exception reason in JSON format.
+// JSONRepresentation returns the contents of the exception reason in JSON format.
 func (x *CrashDiagnosticObjectiveCExceptionReason) JSONRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSONRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// Convenience method to return a NSDictionary representation of this MXCrashDiagnosticObjectiveCExceptionReason object.
+// DictionaryRepresentation convenience method to return a NSDictionary representation of this MXCrashDiagnosticObjectiveCExceptionReason object.
 func (x *CrashDiagnosticObjectiveCExceptionReason) DictionaryRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// A human-readable message string summarizing the reason for the exception.
+// ComposedMessage a human-readable message string summarizing the reason for the exception.
 func (x *CrashDiagnosticObjectiveCExceptionReason) ComposedMessage() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("composedMessage"))
 	if _r == 0 {
@@ -85,7 +93,7 @@ func (x *CrashDiagnosticObjectiveCExceptionReason) ComposedMessage() string {
 	return purego.GoString(_r)
 }
 
-// A string representing the exception message before arguments are substituted into the message
+// FormatString a string representing the exception message before arguments are substituted into the message
 func (x *CrashDiagnosticObjectiveCExceptionReason) FormatString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formatString"))
 	if _r == 0 {
@@ -94,7 +102,7 @@ func (x *CrashDiagnosticObjectiveCExceptionReason) FormatString() string {
 	return purego.GoString(_r)
 }
 
-// An NSArray of strings representing arguments passed to the formatString.
+// Arguments an NSArray of strings representing arguments passed to the formatString.
 //
 // Arguments returns the collection as a Go slice.
 func (x *CrashDiagnosticObjectiveCExceptionReason) Arguments() []string {
@@ -102,7 +110,7 @@ func (x *CrashDiagnosticObjectiveCExceptionReason) Arguments() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// A human-readable string denoting type of the exception
+// ExceptionType a human-readable string denoting type of the exception
 func (x *CrashDiagnosticObjectiveCExceptionReason) ExceptionType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exceptionType"))
 	if _r == 0 {
@@ -111,7 +119,7 @@ func (x *CrashDiagnosticObjectiveCExceptionReason) ExceptionType() string {
 	return purego.GoString(_r)
 }
 
-// A string representing name of the exception This will align with the "name" field of the NSException
+// ExceptionName a string representing name of the exception This will align with the "name" field of the NSException
 func (x *CrashDiagnosticObjectiveCExceptionReason) ExceptionName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exceptionName"))
 	if _r == 0 {

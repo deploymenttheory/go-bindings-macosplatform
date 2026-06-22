@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a physical mouse connected to a device.
-//
 // Mouse is an idiomatic wrapper over the Objective-C class GCMouse.
+//
+// An object that represents a physical mouse connected to a device.
 type Mouse struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MouseFromID(id objc.ID) *Mouse {
 	if id == 0 {
 		return nil
 	}
-	x := &Mouse{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Mouse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mouseAdopt(id objc.ID) *Mouse {
 	if id == 0 {
 		return nil
 	}
-	x := &Mouse{Handle: objref.Wrap(id)}
+	x := &Mouse{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *Mouse) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Mouse) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMouse creates a new Mouse.
 func NewMouse() *Mouse {
 	_id := objc.Send[objc.ID](objc.ID(_class("GCMouse")), objc.RegisterName("new"))
 	return mouseAdopt(_id)
 }
 
-// Unlike GCController GCMouse supports only one input profile Profile contains mouse buttons, scroll wheel and  pointer delta.
+// MouseInput unlike GCController GCMouse supports only one input profile Profile contains mouse buttons, scroll wheel and  pointer delta.
 func (x *Mouse) MouseInput() *MouseInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseInput"))
 	return MouseInputFromID(_r)

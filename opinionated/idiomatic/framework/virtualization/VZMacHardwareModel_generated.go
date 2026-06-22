@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specification for the hardware elements and configurations present in a particular Mac hardware model.
-//
 // MacHardwareModel is an idiomatic wrapper over the Objective-C class VZMacHardwareModel.
+//
+// A specification for the hardware elements and configurations present in a particular Mac hardware model.
 type MacHardwareModel struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MacHardwareModelFromID(id objc.ID) *MacHardwareModel {
 	if id == 0 {
 		return nil
 	}
-	x := &MacHardwareModel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MacHardwareModel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func macHardwareModelAdopt(id objc.ID) *MacHardwareModel {
 	if id == 0 {
 		return nil
 	}
-	x := &MacHardwareModel{Handle: objref.Wrap(id)}
+	x := &MacHardwareModel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,26 @@ func (x *MacHardwareModel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an instance of the hardware model described by the specified data representation.
-//
-// NewMacHardwareModelWithDataRepresentation creates a new MacHardwareModel.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MacHardwareModel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMacHardwareModelWithDataRepresentation creates an instance of the hardware model described by the specified data representation.
 func NewMacHardwareModelWithDataRepresentation(dataRepresentation obj.Object) *MacHardwareModel {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMacHardwareModel")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:"), objref.IDOf(dataRepresentation))
 	return macHardwareModelAdopt(_id)
 }
 
-// Opaque data representation of the hardware model. This can be used to recreate the same hardware model with -[VZMacHardwareModel initWithDataRepresentation:].
+// DataRepresentation opaque data representation of the hardware model. This can be used to recreate the same hardware model with -[VZMacHardwareModel initWithDataRepresentation:].
 func (x *MacHardwareModel) DataRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// Indicate whether this hardware model is supported by the host. If this hardware model is not supported by the host, no VZVirtualMachineConfiguration using it will validate. The validation error of the VZVirtualMachineConfiguration provides more information about why the hardware model is unsupported.
+// IsSupported indicate whether this hardware model is supported by the host. If this hardware model is not supported by the host, no VZVirtualMachineConfiguration using it will validate. The validation error of the VZVirtualMachineConfiguration provides more information about why the hardware model is unsupported.
 func (x *MacHardwareModel) IsSupported() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSupported"))
 	return _r

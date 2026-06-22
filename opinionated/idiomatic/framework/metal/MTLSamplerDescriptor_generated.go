@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that you use to configure a texture sampler.
-//
 // SamplerDescriptor is an idiomatic wrapper over the Objective-C class MTLSamplerDescriptor.
+//
+// An object that you use to configure a texture sampler.
 type SamplerDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SamplerDescriptorFromID(id objc.ID) *SamplerDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &SamplerDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SamplerDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func samplerDescriptorAdopt(id objc.ID) *SamplerDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &SamplerDescriptor{Handle: objref.Wrap(id)}
+	x := &SamplerDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,309 +60,297 @@ func (x *SamplerDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SamplerDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSamplerDescriptor creates a new SamplerDescriptor.
 func NewSamplerDescriptor() *SamplerDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLSamplerDescriptor")), objc.RegisterName("new"))
 	return samplerDescriptorAdopt(_id)
 }
 
-// The filtering option for combining pixels within one mipmap level when the sample footprint is larger than a pixel (minification).
-//
-// WithMinFilter sets minFilter and returns the receiver so calls can be chained.
+// WithMinFilter the filtering option for combining pixels within one mipmap level when the sample footprint is larger than a pixel (minification).
 func (x *SamplerDescriptor) WithMinFilter(minFilter SamplerMinMagFilter) *SamplerDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinFilter:"), minFilter)
 	return x
 }
 
-// The filtering operation for combining pixels within one mipmap level when the sample footprint is smaller than a pixel (magnification).
-//
-// WithMagFilter sets magFilter and returns the receiver so calls can be chained.
+// WithMagFilter the filtering operation for combining pixels within one mipmap level when the sample footprint is smaller than a pixel (magnification).
 func (x *SamplerDescriptor) WithMagFilter(magFilter SamplerMinMagFilter) *SamplerDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagFilter:"), magFilter)
 	return x
 }
 
-// The filtering option for combining pixels between two mipmap levels.
-//
-// WithMipFilter sets mipFilter and returns the receiver so calls can be chained.
+// WithMipFilter the filtering option for combining pixels between two mipmap levels.
 func (x *SamplerDescriptor) WithMipFilter(mipFilter SamplerMipFilter) *SamplerDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMipFilter:"), mipFilter)
 	return x
 }
 
-// The number of samples that can be taken to improve the quality of sample footprints that are anisotropic.
-//
-// WithMaxAnisotropy sets maxAnisotropy and returns the receiver so calls can be chained.
+// WithMaxAnisotropy the number of samples that can be taken to improve the quality of sample footprints that are anisotropic.
 func (x *SamplerDescriptor) WithMaxAnisotropy(maxAnisotropy int) *SamplerDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxAnisotropy:"), maxAnisotropy)
 	return x
 }
 
-// The address mode for the texture width (s) coordinate.
-//
-// WithSAddressMode sets sAddressMode and returns the receiver so calls can be chained.
+// WithSAddressMode the address mode for the texture width (s) coordinate.
 func (x *SamplerDescriptor) WithSAddressMode(sAddressMode SamplerAddressMode) *SamplerDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSAddressMode:"), sAddressMode)
 	return x
 }
 
-// The address mode for the texture height (t) coordinate.
-//
-// WithTAddressMode sets tAddressMode and returns the receiver so calls can be chained.
+// WithTAddressMode the address mode for the texture height (t) coordinate.
 func (x *SamplerDescriptor) WithTAddressMode(tAddressMode SamplerAddressMode) *SamplerDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTAddressMode:"), tAddressMode)
 	return x
 }
 
-// The address mode for the texture depth (r) coordinate.
-//
-// WithRAddressMode sets rAddressMode and returns the receiver so calls can be chained.
+// WithRAddressMode the address mode for the texture depth (r) coordinate.
 func (x *SamplerDescriptor) WithRAddressMode(rAddressMode SamplerAddressMode) *SamplerDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRAddressMode:"), rAddressMode)
 	return x
 }
 
-// The border color for clamped texture values.
-//
-// WithBorderColor sets borderColor and returns the receiver so calls can be chained.
+// WithBorderColor the border color for clamped texture values.
 func (x *SamplerDescriptor) WithBorderColor(borderColor SamplerBorderColor) *SamplerDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), borderColor)
 	return x
 }
 
-// Sets the reduction mode for filtering contributing samples.
-//
-// WithReductionMode sets reductionMode and returns the receiver so calls can be chained.
+// WithReductionMode sets the reduction mode for filtering contributing samples.
 func (x *SamplerDescriptor) WithReductionMode(reductionMode SamplerReductionMode) *SamplerDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReductionMode:"), reductionMode)
 	return x
 }
 
-// A Boolean value that indicates whether texture coordinates are normalized to the range [0.0, 1.0].
-//
-// WithNormalizedCoordinates sets normalizedCoordinates and returns the receiver so calls can be chained.
+// WithNormalizedCoordinates a Boolean value that indicates whether texture coordinates are normalized to the range [0.0, 1.0].
 func (x *SamplerDescriptor) WithNormalizedCoordinates(normalizedCoordinates bool) *SamplerDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNormalizedCoordinates:"), normalizedCoordinates)
 	return x
 }
 
-// The minimum level of detail (LOD) to use when sampling from a texture.
-//
-// WithLodMinClamp sets lodMinClamp and returns the receiver so calls can be chained.
+// WithLodMinClamp the minimum level of detail (LOD) to use when sampling from a texture.
 func (x *SamplerDescriptor) WithLodMinClamp(lodMinClamp float32) *SamplerDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLodMinClamp:"), lodMinClamp)
 	return x
 }
 
-// The maximum level of detail (LOD) to use when sampling from a texture.
-//
-// WithLodMaxClamp sets lodMaxClamp and returns the receiver so calls can be chained.
+// WithLodMaxClamp the maximum level of detail (LOD) to use when sampling from a texture.
 func (x *SamplerDescriptor) WithLodMaxClamp(lodMaxClamp float32) *SamplerDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLodMaxClamp:"), lodMaxClamp)
 	return x
 }
 
-// A Boolean value that specifies whether the GPU can use an average level of detail (LOD) when sampling from a texture.
-//
-// WithLodAverage sets lodAverage and returns the receiver so calls can be chained.
+// WithLodAverage a Boolean value that specifies whether the GPU can use an average level of detail (LOD) when sampling from a texture.
 func (x *SamplerDescriptor) WithLodAverage(lodAverage bool) *SamplerDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLodAverage:"), lodAverage)
 	return x
 }
 
-// Sets the level-of-detail (lod) bias when sampling from a texture.
-//
-// WithLodBias sets lodBias and returns the receiver so calls can be chained.
+// WithLodBias sets the level-of-detail (lod) bias when sampling from a texture.
 func (x *SamplerDescriptor) WithLodBias(lodBias float32) *SamplerDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLodBias:"), lodBias)
 	return x
 }
 
-// The sampler comparison function used when performing a sample compare operation on a depth texture.
-//
-// WithCompareFunction sets compareFunction and returns the receiver so calls can be chained.
+// WithCompareFunction the sampler comparison function used when performing a sample compare operation on a depth texture.
 func (x *SamplerDescriptor) WithCompareFunction(compareFunction CompareFunction) *SamplerDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompareFunction:"), compareFunction)
 	return x
 }
 
-// A Boolean value that indicates whether you can reference a sampler, that you make with this descriptor, by its resource ID from an argument buffer.
-//
-// WithSupportArgumentBuffers sets supportArgumentBuffers and returns the receiver so calls can be chained.
+// WithSupportArgumentBuffers a Boolean value that indicates whether you can reference a sampler, that you make with this descriptor, by its resource ID from an argument buffer.
 func (x *SamplerDescriptor) WithSupportArgumentBuffers(supportArgumentBuffers bool) *SamplerDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportArgumentBuffers:"), supportArgumentBuffers)
 	return x
 }
 
-// A string that identifies the sampler.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string that identifies the sampler.
 func (x *SamplerDescriptor) WithLabel(label string) *SamplerDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Filter option for combining texels within a mipmap level the sample footprint is larger than a pixel (minification). The default value is MTLSamplerMinMagFilterNearest.
+// MinFilter filter option for combining texels within a mipmap level the sample footprint is larger than a pixel (minification). The default value is MTLSamplerMinMagFilterNearest.
 func (x *SamplerDescriptor) MinFilter() SamplerMinMagFilter {
 	_r := objc.Send[SamplerMinMagFilter](objref.IDOf(x), objc.RegisterName("minFilter"))
 	return _r
 }
 
+// SetMinFilter wraps the corresponding Objective-C method.
 func (x *SamplerDescriptor) SetMinFilter(minFilter SamplerMinMagFilter) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinFilter:"), minFilter)
 }
 
-// Filter option for combining texels within a mipmap level the sample footprint is smaller than a pixel (magnification). The default value is MTLSamplerMinMagFilterNearest.
+// MagFilter filter option for combining texels within a mipmap level the sample footprint is smaller than a pixel (magnification). The default value is MTLSamplerMinMagFilterNearest.
 func (x *SamplerDescriptor) MagFilter() SamplerMinMagFilter {
 	_r := objc.Send[SamplerMinMagFilter](objref.IDOf(x), objc.RegisterName("magFilter"))
 	return _r
 }
 
+// SetMagFilter wraps the corresponding Objective-C method.
 func (x *SamplerDescriptor) SetMagFilter(magFilter SamplerMinMagFilter) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagFilter:"), magFilter)
 }
 
-// Filter options for filtering between two mipmap levels. The default value is MTLSamplerMipFilterNotMipmapped
+// MipFilter filter options for filtering between two mipmap levels. The default value is MTLSamplerMipFilterNotMipmapped
 func (x *SamplerDescriptor) MipFilter() SamplerMipFilter {
 	_r := objc.Send[SamplerMipFilter](objref.IDOf(x), objc.RegisterName("mipFilter"))
 	return _r
 }
 
+// SetMipFilter wraps the corresponding Objective-C method.
 func (x *SamplerDescriptor) SetMipFilter(mipFilter SamplerMipFilter) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMipFilter:"), mipFilter)
 }
 
-// The number of samples that can be taken to improve quality of sample footprints that are anisotropic. The default value is 1.
+// MaxAnisotropy the number of samples that can be taken to improve quality of sample footprints that are anisotropic. The default value is 1.
 func (x *SamplerDescriptor) MaxAnisotropy() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxAnisotropy"))
 	return _r
 }
 
+// SetMaxAnisotropy wraps the corresponding Objective-C method.
 func (x *SamplerDescriptor) SetMaxAnisotropy(maxAnisotropy int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxAnisotropy:"), maxAnisotropy)
 }
 
-// Set the wrap mode for the S texture coordinate.  The default value is MTLSamplerAddressModeClampToEdge.
+// SAddressMode set the wrap mode for the S texture coordinate.  The default value is MTLSamplerAddressModeClampToEdge.
 func (x *SamplerDescriptor) SAddressMode() SamplerAddressMode {
 	_r := objc.Send[SamplerAddressMode](objref.IDOf(x), objc.RegisterName("sAddressMode"))
 	return _r
 }
 
+// SetSAddressMode wraps the corresponding Objective-C method.
 func (x *SamplerDescriptor) SetSAddressMode(sAddressMode SamplerAddressMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSAddressMode:"), sAddressMode)
 }
 
-// Set the wrap mode for the T texture coordinate.  The default value is MTLSamplerAddressModeClampToEdge.
+// TAddressMode set the wrap mode for the T texture coordinate.  The default value is MTLSamplerAddressModeClampToEdge.
 func (x *SamplerDescriptor) TAddressMode() SamplerAddressMode {
 	_r := objc.Send[SamplerAddressMode](objref.IDOf(x), objc.RegisterName("tAddressMode"))
 	return _r
 }
 
+// SetTAddressMode wraps the corresponding Objective-C method.
 func (x *SamplerDescriptor) SetTAddressMode(tAddressMode SamplerAddressMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTAddressMode:"), tAddressMode)
 }
 
-// Set the wrap mode for the R texture coordinate.  The default value is MTLSamplerAddressModeClampToEdge.
+// RAddressMode set the wrap mode for the R texture coordinate.  The default value is MTLSamplerAddressModeClampToEdge.
 func (x *SamplerDescriptor) RAddressMode() SamplerAddressMode {
 	_r := objc.Send[SamplerAddressMode](objref.IDOf(x), objc.RegisterName("rAddressMode"))
 	return _r
 }
 
+// SetRAddressMode wraps the corresponding Objective-C method.
 func (x *SamplerDescriptor) SetRAddressMode(rAddressMode SamplerAddressMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRAddressMode:"), rAddressMode)
 }
 
-// Set the color for the MTLSamplerAddressMode to one of the predefined in the MTLSamplerBorderColor enum.
+// BorderColor set the color for the MTLSamplerAddressMode to one of the predefined in the MTLSamplerBorderColor enum.
 func (x *SamplerDescriptor) BorderColor() SamplerBorderColor {
 	_r := objc.Send[SamplerBorderColor](objref.IDOf(x), objc.RegisterName("borderColor"))
 	return _r
 }
 
+// SetBorderColor wraps the corresponding Objective-C method.
 func (x *SamplerDescriptor) SetBorderColor(borderColor SamplerBorderColor) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), borderColor)
 }
 
-// Sets the reduction mode for filtering contributing samples. The property's default value is “MTLSamplerReductionModeWeightedAverage“. The sampler ignores this property if any of the following property values are equal to a specific value: - The sampler's “mipFilter“ property is equal to “MTLSamplerMipFilterNotMipmapped“. - The sampler's “mipFilter“ property is equal to “MTLSamplerMipFilterNearest“. - The sampler's “minFilter“ property is equal to “MTLSamplerMinMagFilterNearest“. - The sampler's “magFilter“ property is equal to “MTLSamplerMinMagFilterNearest“.
+// ReductionMode sets the reduction mode for filtering contributing samples. The property's default value is “MTLSamplerReductionModeWeightedAverage“. The sampler ignores this property if any of the following property values are equal to a specific value: - The sampler's “mipFilter“ property is equal to “MTLSamplerMipFilterNotMipmapped“. - The sampler's “mipFilter“ property is equal to “MTLSamplerMipFilterNearest“. - The sampler's “minFilter“ property is equal to “MTLSamplerMinMagFilterNearest“. - The sampler's “magFilter“ property is equal to “MTLSamplerMinMagFilterNearest“.
 func (x *SamplerDescriptor) ReductionMode() SamplerReductionMode {
 	_r := objc.Send[SamplerReductionMode](objref.IDOf(x), objc.RegisterName("reductionMode"))
 	return _r
 }
 
+// SetReductionMode wraps the corresponding Objective-C method.
 func (x *SamplerDescriptor) SetReductionMode(reductionMode SamplerReductionMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReductionMode:"), reductionMode)
 }
 
-// If YES, texture coordates are from 0 to 1.  If NO, texture coordinates are 0..width, 0..height. normalizedCoordinates defaults to YES.  Non-normalized coordinates should only be used with 1D and 2D textures with the ClampToEdge wrap mode, otherwise the results of sampling are undefined.
+// NormalizedCoordinates if YES, texture coordates are from 0 to 1.  If NO, texture coordinates are 0..width, 0..height. normalizedCoordinates defaults to YES.  Non-normalized coordinates should only be used with 1D and 2D textures with the ClampToEdge wrap mode, otherwise the results of sampling are undefined.
 func (x *SamplerDescriptor) NormalizedCoordinates() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("normalizedCoordinates"))
 	return _r
 }
 
+// SetNormalizedCoordinates wraps the corresponding Objective-C method.
 func (x *SamplerDescriptor) SetNormalizedCoordinates(normalizedCoordinates bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNormalizedCoordinates:"), normalizedCoordinates)
 }
 
-// The minimum level of detail that will be used when sampling from a texture. The default value of lodMinClamp is 0.0.  Clamp values are ignored for texture sample variants that specify an explicit level of detail.
+// LodMinClamp the minimum level of detail that will be used when sampling from a texture. The default value of lodMinClamp is 0.0.  Clamp values are ignored for texture sample variants that specify an explicit level of detail.
 func (x *SamplerDescriptor) LodMinClamp() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("lodMinClamp"))
 	return _r
 }
 
+// SetLodMinClamp wraps the corresponding Objective-C method.
 func (x *SamplerDescriptor) SetLodMinClamp(lodMinClamp float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLodMinClamp:"), lodMinClamp)
 }
 
-// The maximum level of detail that will be used when sampling from a texture. The default value of lodMaxClamp is FLT_MAX.  Clamp values are ignored for texture sample variants that specify an explicit level of detail.
+// LodMaxClamp the maximum level of detail that will be used when sampling from a texture. The default value of lodMaxClamp is FLT_MAX.  Clamp values are ignored for texture sample variants that specify an explicit level of detail.
 func (x *SamplerDescriptor) LodMaxClamp() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("lodMaxClamp"))
 	return _r
 }
 
+// SetLodMaxClamp wraps the corresponding Objective-C method.
 func (x *SamplerDescriptor) SetLodMaxClamp(lodMaxClamp float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLodMaxClamp:"), lodMaxClamp)
 }
 
-// If YES, an average level of detail will be used when sampling from a texture. If NO, no averaging is performed. lodAverage defaults to NO. This option is a performance hint. An implementation is free to ignore this property.
+// LodAverage if YES, an average level of detail will be used when sampling from a texture. If NO, no averaging is performed. lodAverage defaults to NO. This option is a performance hint. An implementation is free to ignore this property.
 func (x *SamplerDescriptor) LodAverage() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("lodAverage"))
 	return _r
 }
 
+// SetLodAverage wraps the corresponding Objective-C method.
 func (x *SamplerDescriptor) SetLodAverage(lodAverage bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLodAverage:"), lodAverage)
 }
 
-// Sets the level-of-detail (lod) bias when sampling from a texture. The property's default value is `0.0f`. The precision format is `S4.6`, and the range is `[-16.0, 15.999]`.
+// LodBias sets the level-of-detail (lod) bias when sampling from a texture. The property's default value is `0.0f`. The precision format is `S4.6`, and the range is `[-16.0, 15.999]`.
 func (x *SamplerDescriptor) LodBias() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("lodBias"))
 	return _r
 }
 
+// SetLodBias wraps the corresponding Objective-C method.
 func (x *SamplerDescriptor) SetLodBias(lodBias float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLodBias:"), lodBias)
 }
 
-// Set the comparison function used when sampling shadow maps. The default value is MTLCompareFunctionNever.
+// CompareFunction set the comparison function used when sampling shadow maps. The default value is MTLCompareFunctionNever.
 func (x *SamplerDescriptor) CompareFunction() CompareFunction {
 	_r := objc.Send[CompareFunction](objref.IDOf(x), objc.RegisterName("compareFunction"))
 	return _r
 }
 
+// SetCompareFunction wraps the corresponding Objective-C method.
 func (x *SamplerDescriptor) SetCompareFunction(compareFunction CompareFunction) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompareFunction:"), compareFunction)
 }
 
-// true if the sampler can be used inside an argument buffer
+// SupportArgumentBuffers true if the sampler can be used inside an argument buffer
 func (x *SamplerDescriptor) SupportArgumentBuffers() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportArgumentBuffers"))
 	return _r
 }
 
+// SetSupportArgumentBuffers wraps the corresponding Objective-C method.
 func (x *SamplerDescriptor) SetSupportArgumentBuffers(supportArgumentBuffers bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportArgumentBuffers:"), supportArgumentBuffers)
 }
 
-// A string to help identify the created object.
+// Label a string to help identify the created object.
 func (x *SamplerDescriptor) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -369,6 +359,7 @@ func (x *SamplerDescriptor) Label() string {
 	return purego.GoString(_r)
 }
 
+// SetLabel wraps the corresponding Objective-C method.
 func (x *SamplerDescriptor) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }

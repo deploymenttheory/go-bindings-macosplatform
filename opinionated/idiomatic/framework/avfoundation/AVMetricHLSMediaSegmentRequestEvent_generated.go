@@ -6,17 +6,19 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event that represents a live streaming media segment resource request.
-//
 // MetricHLSMediaSegmentRequestEvent is an idiomatic wrapper over the Objective-C class AVMetricHLSMediaSegmentRequestEvent.
+//
+// It embeds [MetricEvent], promoting that type's methods.
+//
+// An event that represents a live streaming media segment resource request.
 type MetricHLSMediaSegmentRequestEvent struct {
-	objref.Handle
+	MetricEvent
 }
 
 // MetricHLSMediaSegmentRequestEventFromID adopts an existing Objective-C object as a MetricHLSMediaSegmentRequestEvent
@@ -25,7 +27,8 @@ func MetricHLSMediaSegmentRequestEventFromID(id objc.ID) *MetricHLSMediaSegmentR
 	if id == 0 {
 		return nil
 	}
-	x := &MetricHLSMediaSegmentRequestEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetricHLSMediaSegmentRequestEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func metricHLSMediaSegmentRequestEventAdopt(id objc.ID) *MetricHLSMediaSegmentRe
 	if id == 0 {
 		return nil
 	}
-	x := &MetricHLSMediaSegmentRequestEvent{Handle: objref.Wrap(id)}
+	x := &MetricHLSMediaSegmentRequestEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MetricHLSMediaSegmentRequestEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetricHLSMediaSegmentRequestEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetricHLSMediaSegmentRequestEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMetricHLSMediaSegmentRequestEvent creates a new MetricHLSMediaSegmentRequestEvent.
@@ -64,37 +53,43 @@ func NewMetricHLSMediaSegmentRequestEvent() *MetricHLSMediaSegmentRequestEvent {
 	return metricHLSMediaSegmentRequestEventAdopt(_id)
 }
 
-// Returns the URL of the media segment. If no value is available, returns nil.
+// Url returns the URL of the media segment. If no value is available, returns nil.
 func (x *MetricHLSMediaSegmentRequestEvent) Url() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
-// Returns true if the media segment request is for a map segment.
+// IsMapSegment returns true if the media segment request is for a map segment.
 func (x *MetricHLSMediaSegmentRequestEvent) IsMapSegment() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMapSegment"))
 	return _r
 }
 
-// Returns the media type. If the value cannot be determined, returns AVMediaTypeMuxed.
+// MediaType returns the media type. If the value cannot be determined, returns AVMediaTypeMuxed.
 func (x *MetricHLSMediaSegmentRequestEvent) MediaType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaType"))
 	return obj.Wrap(_r)
 }
 
-// Returns the URL of the index file in which this segment was declared. If not available, returns nil.
+// ByteRange returns the byte range for the media segment. If not available, the range start and end will be 0.
+func (x *MetricHLSMediaSegmentRequestEvent) ByteRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("byteRange"))
+	return _r
+}
+
+// IndexFileURL returns the URL of the index file in which this segment was declared. If not available, returns nil.
 func (x *MetricHLSMediaSegmentRequestEvent) IndexFileURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexFileURL"))
 	return obj.Wrap(_r)
 }
 
-// Returns the duration of segment in seconds.
+// SegmentDuration returns the duration of segment in seconds.
 func (x *MetricHLSMediaSegmentRequestEvent) SegmentDuration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("segmentDuration"))
 	return _r
 }
 
-// Returns the media resource request event which was used to satisfy the media segment.
+// MediaResourceRequestEvent returns the media resource request event which was used to satisfy the media segment.
 func (x *MetricHLSMediaSegmentRequestEvent) MediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaResourceRequestEvent"))
 	return MetricMediaResourceRequestEventFromID(_r)
@@ -106,9 +101,12 @@ type MetricHLSMediaSegmentRequestEventable interface {
 	Url() obj.Object
 	IsMapSegment() bool
 	MediaType() obj.Object
+	ByteRange() foundation.NSRange
 	IndexFileURL() obj.Object
 	SegmentDuration() float64
 	MediaResourceRequestEvent() *MetricMediaResourceRequestEvent
 }
 
 var _ MetricHLSMediaSegmentRequestEventable = (*MetricHLSMediaSegmentRequestEvent)(nil)
+
+var _ MetricEventProvider = (*MetricHLSMediaSegmentRequestEvent)(nil)

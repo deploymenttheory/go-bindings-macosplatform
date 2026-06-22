@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A node for a MPSNNPad kernel You should not use this node to zero pad your data in the XY-plane. This node copies the input image and therefore should only be used in special circumstances where the normal padding operation, defined for most filters and nodes through
-//
 // NNPadNode is an idiomatic wrapper over the Objective-C class MPSNNPadNode.
+//
+// It embeds [NNFilterNode], promoting that type's methods.
+//
+// A node for a MPSNNPad kernel You should not use this node to zero pad your data in the XY-plane. This node copies the input image and therefore should only be used in special circumstances where the normal padding operation, defined for most filters and nodes through
 type NNPadNode struct {
-	objref.Handle
+	NNFilterNode
 }
 
 // NNPadNodeFromID adopts an existing Objective-C object as a NNPadNode
@@ -25,7 +26,8 @@ func NNPadNodeFromID(id objc.ID) *NNPadNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNPadNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNPadNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func nNPadNodeAdopt(id objc.ID) *NNPadNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNPadNode{Handle: objref.Wrap(id)}
+	x := &NNPadNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NNPadNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNPadNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNPadNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNNPadNode creates a new NNPadNode.
@@ -64,28 +52,25 @@ func NewNNPadNode() *NNPadNode {
 	return nNPadNodeAdopt(_id)
 }
 
-// Determines the constant value to apply when using
-//
-// WithFillValue sets fillValue and returns the receiver so calls can be chained.
+// WithFillValue determines the constant value to apply when using
 func (x *NNPadNode) WithFillValue(fillValue float32) *NNPadNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillValue:"), fillValue)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *NNPadNode) WithLabel(label string) *NNPadNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Determines the constant value to apply when using
+// FillValue determines the constant value to apply when using
 func (x *NNPadNode) FillValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("fillValue"))
 	return _r
 }
 
+// SetFillValue wraps the corresponding Objective-C method.
 func (x *NNPadNode) SetFillValue(fillValue float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillValue:"), fillValue)
 }
@@ -100,3 +85,5 @@ type NNPadNodeable interface {
 }
 
 var _ NNPadNodeable = (*NNPadNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNPadNode)(nil)

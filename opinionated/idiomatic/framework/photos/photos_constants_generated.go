@@ -14,13 +14,11 @@ func PHPhotosErrorDomain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("PHPhotosErrorDomain")))
 }
 
-// Array of NSString values representing local identifiers related to the specific error
 // PHLocalIdentifiersErrorKey returns the string constant PHLocalIdentifiersErrorKey, for use as a dictionary key or argument.
 func PHLocalIdentifiersErrorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("PHLocalIdentifiersErrorKey")))
 }
 
-// These keys may be found in the info dictionary delivered to a live photo request result handler block.
 // PHLivePhotoInfoErrorKey returns the string constant PHLivePhotoInfoErrorKey, for use as a dictionary key or argument.
 func PHLivePhotoInfoErrorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("PHLivePhotoInfoErrorKey")))
@@ -51,13 +49,11 @@ func PHContentEditingInputErrorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("PHContentEditingInputErrorKey")))
 }
 
-// Indicates whether processing should happen at playback time If set to NO (the default) the live photo will always be rendered before playback If set to YES, the editing context might still choose to render first for performance reasons This option is ignored by the saveLivePhotoToOutput method
 // PHLivePhotoShouldRenderAtPlaybackTime returns the string constant PHLivePhotoShouldRenderAtPlaybackTime, for use as a dictionary key or argument.
 func PHLivePhotoShouldRenderAtPlaybackTime() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("PHLivePhotoShouldRenderAtPlaybackTime")))
 }
 
-// The error domain for all Live Photo Editing errors (Deprecated).
 // PHLivePhotoEditingErrorDomain returns the string constant PHLivePhotoEditingErrorDomain, for use as a dictionary key or argument.
 func PHLivePhotoEditingErrorDomain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("PHLivePhotoEditingErrorDomain")))
@@ -86,7 +82,6 @@ func PHImageCancelledKey() obj.Object {
 // PHImageErrorKey returns the string constant PHImageErrorKey, for use as a dictionary key or argument.
 func PHImageErrorKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("PHImageErrorKey"))) }
 
-// DEPRECATED: If the local object cannot be resolved from a global identifier, PHLocalIdentifierNotFound is provided in that array slot.
 // PHLocalIdentifierNotFound returns the string constant PHLocalIdentifierNotFound, for use as a dictionary key or argument.
 func PHLocalIdentifierNotFound() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("PHLocalIdentifierNotFound")))

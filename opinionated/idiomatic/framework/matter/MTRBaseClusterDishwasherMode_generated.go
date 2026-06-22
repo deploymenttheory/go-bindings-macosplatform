@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Dishwasher Mode
-//
 // MTRBaseClusterDishwasherMode is an idiomatic wrapper over the Objective-C class MTRBaseClusterDishwasherMode.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
+//
+// Cluster Dishwasher Mode
 type MTRBaseClusterDishwasherMode struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterDishwasherModeFromID adopts an existing Objective-C object as a MTRBaseClusterDishwasherMode
@@ -27,7 +28,8 @@ func MTRBaseClusterDishwasherModeFromID(id objc.ID) *MTRBaseClusterDishwasherMod
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterDishwasherMode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterDishwasherMode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,39 +42,23 @@ func mTRBaseClusterDishwasherModeAdopt(id objc.ID) *MTRBaseClusterDishwasherMode
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterDishwasherMode{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterDishwasherMode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterDishwasherMode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterDishwasherMode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterDishwasherMode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterDishwasherModeWithDeviceEndpointIDQueue creates a new MTRBaseClusterDishwasherMode.
+// NewMTRBaseClusterDishwasherModeWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterDishwasherModeWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterDishwasherMode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterDishwasherMode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterDishwasherModeAdopt(_id)
 }
 
-// Command ChangeToMode
+// ChangeToModeWithParamsCompletion command ChangeToMode
 //
 // ChangeToModeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDishwasherMode) ChangeToModeWithParamsCompletion(ctx context.Context, params *MTRDishwasherModeClusterChangeToModeParams) (*MTRDishwasherModeClusterChangeToModeResponseParams, error) {
+func (x *MTRBaseClusterDishwasherMode) ChangeToModeWithParamsCompletion(ctx context.Context, params *MTRDishwasherModeClusterChangeToModeParams) (result *MTRDishwasherModeClusterChangeToModeResponseParams, err error) {
 	type _result struct {
 		val *MTRDishwasherModeClusterChangeToModeResponseParams
 		err error
@@ -94,8 +80,10 @@ func (x *MTRBaseClusterDishwasherMode) ChangeToModeWithParamsCompletion(ctx cont
 	}
 }
 
+// ReadAttributeSupportedModesWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSupportedModesWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDishwasherMode) ReadAttributeSupportedModesWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDishwasherMode) ReadAttributeSupportedModesWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -117,8 +105,10 @@ func (x *MTRBaseClusterDishwasherMode) ReadAttributeSupportedModesWithCompletion
 	}
 }
 
+// SubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDishwasherMode) SubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDishwasherMode) SubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -140,8 +130,10 @@ func (x *MTRBaseClusterDishwasherMode) SubscribeAttributeSupportedModesWithParam
 	}
 }
 
+// ReadAttributeCurrentModeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentModeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDishwasherMode) ReadAttributeCurrentModeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDishwasherMode) ReadAttributeCurrentModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -163,8 +155,10 @@ func (x *MTRBaseClusterDishwasherMode) ReadAttributeCurrentModeWithCompletion(ct
 	}
 }
 
+// SubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDishwasherMode) SubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDishwasherMode) SubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -186,8 +180,10 @@ func (x *MTRBaseClusterDishwasherMode) SubscribeAttributeCurrentModeWithParamsSu
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDishwasherMode) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDishwasherMode) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -209,8 +205,10 @@ func (x *MTRBaseClusterDishwasherMode) ReadAttributeGeneratedCommandListWithComp
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDishwasherMode) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDishwasherMode) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -232,8 +230,10 @@ func (x *MTRBaseClusterDishwasherMode) SubscribeAttributeGeneratedCommandListWit
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDishwasherMode) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDishwasherMode) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -255,8 +255,10 @@ func (x *MTRBaseClusterDishwasherMode) ReadAttributeAcceptedCommandListWithCompl
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDishwasherMode) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDishwasherMode) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -278,8 +280,10 @@ func (x *MTRBaseClusterDishwasherMode) SubscribeAttributeAcceptedCommandListWith
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDishwasherMode) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDishwasherMode) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -301,8 +305,10 @@ func (x *MTRBaseClusterDishwasherMode) ReadAttributeAttributeListWithCompletion(
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDishwasherMode) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDishwasherMode) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -324,8 +330,10 @@ func (x *MTRBaseClusterDishwasherMode) SubscribeAttributeAttributeListWithParams
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDishwasherMode) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDishwasherMode) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -347,8 +355,10 @@ func (x *MTRBaseClusterDishwasherMode) ReadAttributeFeatureMapWithCompletion(ctx
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDishwasherMode) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDishwasherMode) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -370,8 +380,10 @@ func (x *MTRBaseClusterDishwasherMode) SubscribeAttributeFeatureMapWithParamsSub
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDishwasherMode) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDishwasherMode) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -393,8 +405,10 @@ func (x *MTRBaseClusterDishwasherMode) ReadAttributeClusterRevisionWithCompletio
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDishwasherMode) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDishwasherMode) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -437,3 +451,7 @@ type MTRBaseClusterDishwasherModeable interface {
 }
 
 var _ MTRBaseClusterDishwasherModeable = (*MTRBaseClusterDishwasherMode)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterDishwasherMode)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterDishwasherMode)(nil)

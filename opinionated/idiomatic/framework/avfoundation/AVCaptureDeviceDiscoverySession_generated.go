@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that finds capture devices that match specific search criteria.
-//
 // CaptureDeviceDiscoverySession is an idiomatic wrapper over the Objective-C class AVCaptureDeviceDiscoverySession.
+//
+// An object that finds capture devices that match specific search criteria.
 type CaptureDeviceDiscoverySession struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CaptureDeviceDiscoverySessionFromID(id objc.ID) *CaptureDeviceDiscoverySess
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureDeviceDiscoverySession{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptureDeviceDiscoverySession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func captureDeviceDiscoverySessionAdopt(id objc.ID) *CaptureDeviceDiscoverySessi
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureDeviceDiscoverySession{Handle: objref.Wrap(id)}
+	x := &CaptureDeviceDiscoverySession{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *CaptureDeviceDiscoverySession) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptureDeviceDiscoverySession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCaptureDeviceDiscoverySession creates a new CaptureDeviceDiscoverySession.
 func NewCaptureDeviceDiscoverySession() *CaptureDeviceDiscoverySession {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureDeviceDiscoverySession")), objc.RegisterName("new"))
 	return captureDeviceDiscoverySessionAdopt(_id)
 }
 
-// The list of devices that comply to the search criteria specified on the discovery session. The returned array contains only devices that are available at the time the method is called. Applications can key-value observe this property to be notified when the list of available devices has changed. For apps linked against iOS 10, the devices returned are unsorted. For apps linked against iOS 11 or later, the devices are sorted by AVCaptureDeviceType, matching the order specified in the deviceTypes parameter of +[AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:mediaType:position:]. If a position of AVCaptureDevicePositionUnspecified is specified, the results are further ordered by position in the AVCaptureDevicePosition enum. Starting in Mac Catalyst 14.0, clients can key value observe the value of this property to be notified when the devices change.
+// Devices the list of devices that comply to the search criteria specified on the discovery session. The returned array contains only devices that are available at the time the method is called. Applications can key-value observe this property to be notified when the list of available devices has changed. For apps linked against iOS 10, the devices returned are unsorted. For apps linked against iOS 11 or later, the devices are sorted by AVCaptureDeviceType, matching the order specified in the deviceTypes parameter of +[AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:mediaType:position:]. If a position of AVCaptureDevicePositionUnspecified is specified, the results are further ordered by position in the AVCaptureDevicePosition enum. Starting in Mac Catalyst 14.0, clients can key value observe the value of this property to be notified when the devices change.
 //
 // Devices returns the collection as a Go slice.
 func (x *CaptureDeviceDiscoverySession) Devices() []*CaptureDevice {

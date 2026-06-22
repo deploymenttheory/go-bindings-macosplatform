@@ -13,6 +13,8 @@ import (
 )
 
 // MTRBridgedDeviceBasicInformationClusterShutDownEvent is an idiomatic wrapper over the Objective-C class MTRBridgedDeviceBasicInformationClusterShutDownEvent.
+//
+// MTRBridgedDeviceBasicInformationClusterShutDownEvent is an abstract base — you do not construct it directly. Construct one of [MTRBridgedDeviceBasicClusterShutDownEvent] and pass it where a MTRBridgedDeviceBasicInformationClusterShutDownEvent is accepted.
 type MTRBridgedDeviceBasicInformationClusterShutDownEvent struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRBridgedDeviceBasicInformationClusterShutDownEventFromID(id objc.ID) *MTR
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBridgedDeviceBasicInformationClusterShutDownEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBridgedDeviceBasicInformationClusterShutDownEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRBridgedDeviceBasicInformationClusterShutDownEventAdopt(id objc.ID) *MTRB
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBridgedDeviceBasicInformationClusterShutDownEvent{Handle: objref.Wrap(id)}
+	x := &MTRBridgedDeviceBasicInformationClusterShutDownEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,10 +60,10 @@ func (x *MTRBridgedDeviceBasicInformationClusterShutDownEvent) IsKind(className 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRBridgedDeviceBasicInformationClusterShutDownEvent creates a new MTRBridgedDeviceBasicInformationClusterShutDownEvent.
-func NewMTRBridgedDeviceBasicInformationClusterShutDownEvent() *MTRBridgedDeviceBasicInformationClusterShutDownEvent {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRBridgedDeviceBasicInformationClusterShutDownEvent")), objc.RegisterName("new"))
-	return mTRBridgedDeviceBasicInformationClusterShutDownEventAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRBridgedDeviceBasicInformationClusterShutDownEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // MTRBridgedDeviceBasicInformationClusterShutDownEventable is the interface implemented by [MTRBridgedDeviceBasicInformationClusterShutDownEvent], for mocking and DI.
@@ -68,3 +72,11 @@ type MTRBridgedDeviceBasicInformationClusterShutDownEventable interface {
 }
 
 var _ MTRBridgedDeviceBasicInformationClusterShutDownEventable = (*MTRBridgedDeviceBasicInformationClusterShutDownEvent)(nil)
+
+// isMTRBridgedDeviceBasicInformationClusterShutDownEvent marks MTRBridgedDeviceBasicInformationClusterShutDownEvent — and, by embedding promotion, its
+// subclasses — as a member of the MTRBridgedDeviceBasicInformationClusterShutDownEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRBridgedDeviceBasicInformationClusterShutDownEvent) isMTRBridgedDeviceBasicInformationClusterShutDownEvent() {
+}
+
+var _ MTRBridgedDeviceBasicInformationClusterShutDownEventProvider = (*MTRBridgedDeviceBasicInformationClusterShutDownEvent)(nil)

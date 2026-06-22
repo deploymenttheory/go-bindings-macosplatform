@@ -6,15 +6,16 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes a printer’s capabilities.
-//
 // Printer is an idiomatic wrapper over the Objective-C class NSPrinter.
+//
+// An object that describes a printer’s capabilities.
 type Printer struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func PrinterFromID(id objc.ID) *Printer {
 	if id == 0 {
 		return nil
 	}
-	x := &Printer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Printer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func printerAdopt(id objc.ID) *Printer {
 	if id == 0 {
 		return nil
 	}
-	x := &Printer{Handle: objref.Wrap(id)}
+	x := &Printer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +61,25 @@ func (x *Printer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Printer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPrinter creates a new Printer.
 func NewPrinter() *Printer {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSPrinter")), objc.RegisterName("new"))
 	return printerAdopt(_id)
 }
 
+// PageSizeForPaper returns the size of the page for the specified paper type.
+func (x *Printer) PageSizeForPaper(paperName obj.Object) corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("pageSizeForPaper:"), objref.IDOf(paperName))
+	return _r
+}
+
+// Name wraps the corresponding Objective-C method.
 func (x *Printer) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -72,52 +88,67 @@ func (x *Printer) Name() string {
 	return purego.GoString(_r)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *Printer) Type() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
 	return obj.Wrap(_r)
 }
 
+// LanguageLevel wraps the corresponding Objective-C method.
 func (x *Printer) LanguageLevel() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("languageLevel"))
 	return _r
 }
 
+// DeviceDescription wraps the corresponding Objective-C method.
 func (x *Printer) DeviceDescription() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceDescription"))
 	return obj.Wrap(_r)
 }
 
-// Returns the status of the specified table.
+// StatusForTable returns the status of the specified table.
 func (x *Printer) StatusForTable(tableName string) PrinterTableStatus {
 	_r := objc.Send[PrinterTableStatus](objref.IDOf(x), objc.RegisterName("statusForTable:"), purego.NSString(tableName))
 	return _r
 }
 
-// Returns a Boolean value that indicates whether the specified key is in the specified table.
+// IsKeyInTable returns a Boolean value that indicates whether the specified key is in the specified table.
 func (x *Printer) IsKeyInTable(key string, table string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isKey:inTable:"), purego.NSString(key), purego.NSString(table))
 	return _r
 }
 
-// Returns the Boolean value associated with the specified key.
+// BooleanForKeyInTable returns the Boolean value associated with the specified key.
 func (x *Printer) BooleanForKeyInTable(key string, table string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("booleanForKey:inTable:"), purego.NSString(key), purego.NSString(table))
 	return _r
 }
 
-// Returns the floating-point value associated with the specified key.
+// FloatForKeyInTable returns the floating-point value associated with the specified key.
 func (x *Printer) FloatForKeyInTable(key string, table string) float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("floatForKey:inTable:"), purego.NSString(key), purego.NSString(table))
 	return _r
 }
 
-// Returns the integer value associated with the specified key.
+// IntForKeyInTable returns the integer value associated with the specified key.
 func (x *Printer) IntForKeyInTable(key string, table string) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("intForKey:inTable:"), purego.NSString(key), purego.NSString(table))
 	return _r
 }
 
-// Returns the first occurrence of a value associated with specified key.
+// RectForKeyInTable returns the rectangle associated with the specified key.
+func (x *Printer) RectForKeyInTable(key string, table string) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rectForKey:inTable:"), purego.NSString(key), purego.NSString(table))
+	return _r
+}
+
+// SizeForKeyInTable returns the size data type associated with the specified key.
+func (x *Printer) SizeForKeyInTable(key string, table string) corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("sizeForKey:inTable:"), purego.NSString(key), purego.NSString(table))
+	return _r
+}
+
+// StringForKeyInTable returns the first occurrence of a value associated with specified key.
 func (x *Printer) StringForKeyInTable(key string, table string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringForKey:inTable:"), purego.NSString(key), purego.NSString(table))
 	if _r == 0 {
@@ -126,37 +157,43 @@ func (x *Printer) StringForKeyInTable(key string, table string) string {
 	return purego.GoString(_r)
 }
 
-// Returns an array of strings, one for each occurrence, associated with specified key.
+// StringListForKeyInTable returns an array of strings, one for each occurrence, associated with specified key.
 func (x *Printer) StringListForKeyInTable(key string, table string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringListForKey:inTable:"), purego.NSString(key), purego.NSString(table))
 	return obj.Wrap(_r)
 }
 
-// Deprecated.
+// ImageRectForPaper deprecated.
+func (x *Printer) ImageRectForPaper(paperName string) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("imageRectForPaper:"), purego.NSString(paperName))
+	return _r
+}
+
+// AcceptsBinary deprecated.
 func (x *Printer) AcceptsBinary() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("acceptsBinary"))
 	return _r
 }
 
-// Deprecated.
+// IsColor deprecated.
 func (x *Printer) IsColor() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isColor"))
 	return _r
 }
 
-// Deprecated.
+// IsFontAvailable deprecated.
 func (x *Printer) IsFontAvailable(faceName string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFontAvailable:"), purego.NSString(faceName))
 	return _r
 }
 
-// Deprecated.
+// IsOutputStackInReverseOrder deprecated.
 func (x *Printer) IsOutputStackInReverseOrder() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOutputStackInReverseOrder"))
 	return _r
 }
 
-// Deprecated.
+// Domain deprecated.
 func (x *Printer) Domain() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domain"))
 	if _r == 0 {
@@ -165,7 +202,7 @@ func (x *Printer) Domain() string {
 	return purego.GoString(_r)
 }
 
-// Deprecated.
+// Host deprecated.
 func (x *Printer) Host() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("host"))
 	if _r == 0 {
@@ -174,7 +211,7 @@ func (x *Printer) Host() string {
 	return purego.GoString(_r)
 }
 
-// Deprecated.
+// Note deprecated.
 func (x *Printer) Note() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("note"))
 	if _r == 0 {
@@ -186,6 +223,7 @@ func (x *Printer) Note() string {
 // Printerable is the interface implemented by [Printer], for mocking and DI.
 type Printerable interface {
 	obj.Object
+	PageSizeForPaper(paperName obj.Object) corefoundation.CGSize
 	Name() string
 	Type() obj.Object
 	LanguageLevel() int
@@ -195,8 +233,11 @@ type Printerable interface {
 	BooleanForKeyInTable(key string, table string) bool
 	FloatForKeyInTable(key string, table string) float32
 	IntForKeyInTable(key string, table string) int
+	RectForKeyInTable(key string, table string) corefoundation.CGRect
+	SizeForKeyInTable(key string, table string) corefoundation.CGSize
 	StringForKeyInTable(key string, table string) string
 	StringListForKeyInTable(key string, table string) obj.Object
+	ImageRectForPaper(paperName string) corefoundation.CGRect
 	AcceptsBinary() bool
 	IsColor() bool
 	IsFontAvailable(faceName string) bool

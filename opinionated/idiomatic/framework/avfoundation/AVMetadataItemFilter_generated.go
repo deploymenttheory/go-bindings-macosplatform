@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that filters selected information from a metadata item.
-//
 // MetadataItemFilter is an idiomatic wrapper over the Objective-C class AVMetadataItemFilter.
+//
+// An object that filters selected information from a metadata item.
 type MetadataItemFilter struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MetadataItemFilterFromID(id objc.ID) *MetadataItemFilter {
 	if id == 0 {
 		return nil
 	}
-	x := &MetadataItemFilter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetadataItemFilter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func metadataItemFilterAdopt(id objc.ID) *MetadataItemFilter {
 	if id == 0 {
 		return nil
 	}
-	x := &MetadataItemFilter{Handle: objref.Wrap(id)}
+	x := &MetadataItemFilter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *MetadataItemFilter) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MetadataItemFilter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetadataItemFilter) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMetadataItemFilter creates a new MetadataItemFilter.

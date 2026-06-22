@@ -23,7 +23,8 @@ func FileProviderKnownFolderLocationFromID(id objc.ID) *FileProviderKnownFolderL
 	if id == 0 {
 		return nil
 	}
-	x := &FileProviderKnownFolderLocation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FileProviderKnownFolderLocation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func fileProviderKnownFolderLocationAdopt(id objc.ID) *FileProviderKnownFolderLo
 	if id == 0 {
 		return nil
 	}
-	x := &FileProviderKnownFolderLocation{Handle: objref.Wrap(id)}
+	x := &FileProviderKnownFolderLocation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,18 +58,20 @@ func (x *FileProviderKnownFolderLocation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize a location with the filename of the folder in a specified parent. When replicating a known folder the system will reuse a folder located at the specified filename within the parent if one exists, or create a new item at this location if none exists yet.
-//
-// NewFileProviderKnownFolderLocationWithParentItemIdentifierFilename creates a new FileProviderKnownFolderLocation.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FileProviderKnownFolderLocation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFileProviderKnownFolderLocationWithParentItemIdentifierFilename initialize a location with the filename of the folder in a specified parent. When replicating a known folder the system will reuse a folder located at the specified filename within the parent if one exists, or create a new item at this location if none exists yet.
 func NewFileProviderKnownFolderLocationWithParentItemIdentifierFilename(parentItemIdentifier obj.Object, filename string) *FileProviderKnownFolderLocation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileProviderKnownFolderLocation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParentItemIdentifier:filename:"), objref.IDOf(parentItemIdentifier), purego.NSString(filename))
 	return fileProviderKnownFolderLocationAdopt(_id)
 }
 
-// Initialize a location with the item identifier of a folder that already exists on the server. If the known folder already exists on the server, the provider can specify the exact identifier of the item that needs to be used to back the known folder.
-//
-// NewFileProviderKnownFolderLocationWithExistingItemIdentifier creates a new FileProviderKnownFolderLocation.
+// NewFileProviderKnownFolderLocationWithExistingItemIdentifier initialize a location with the item identifier of a folder that already exists on the server. If the known folder already exists on the server, the provider can specify the exact identifier of the item that needs to be used to back the known folder.
 func NewFileProviderKnownFolderLocationWithExistingItemIdentifier(existingItemIdentifier obj.Object) *FileProviderKnownFolderLocation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileProviderKnownFolderLocation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExistingItemIdentifier:"), objref.IDOf(existingItemIdentifier))

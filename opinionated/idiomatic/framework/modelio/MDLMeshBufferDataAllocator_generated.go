@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A basic allocator implementation that allocates from main memory using data objects.
-//
 // MeshBufferDataAllocator is an idiomatic wrapper over the Objective-C class MDLMeshBufferDataAllocator.
+//
+// A basic allocator implementation that allocates from main memory using data objects.
 type MeshBufferDataAllocator struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MeshBufferDataAllocatorFromID(id objc.ID) *MeshBufferDataAllocator {
 	if id == 0 {
 		return nil
 	}
-	x := &MeshBufferDataAllocator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MeshBufferDataAllocator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func meshBufferDataAllocatorAdopt(id objc.ID) *MeshBufferDataAllocator {
 	if id == 0 {
 		return nil
 	}
-	x := &MeshBufferDataAllocator{Handle: objref.Wrap(id)}
+	x := &MeshBufferDataAllocator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *MeshBufferDataAllocator) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MeshBufferDataAllocator) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MeshBufferDataAllocator) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMeshBufferDataAllocator creates a new MeshBufferDataAllocator.

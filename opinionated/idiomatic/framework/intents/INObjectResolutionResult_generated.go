@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resolution result for an Object associated with an intent.
-//
 // ObjectResolutionResult is an idiomatic wrapper over the Objective-C class INObjectResolutionResult.
+//
+// It embeds [IntentResolutionResult], promoting that type's methods.
+//
+// A resolution result for an Object associated with an intent.
 type ObjectResolutionResult struct {
-	objref.Handle
+	IntentResolutionResult
 }
 
 // ObjectResolutionResultFromID adopts an existing Objective-C object as a ObjectResolutionResult
@@ -25,7 +26,8 @@ func ObjectResolutionResultFromID(id objc.ID) *ObjectResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	x := &ObjectResolutionResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ObjectResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func objectResolutionResultAdopt(id objc.ID) *ObjectResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	x := &ObjectResolutionResult{Handle: objref.Wrap(id)}
+	x := &ObjectResolutionResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ObjectResolutionResult) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ObjectResolutionResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ObjectResolutionResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewObjectResolutionResult creates a new ObjectResolutionResult.
@@ -70,3 +58,5 @@ type ObjectResolutionResultable interface {
 }
 
 var _ ObjectResolutionResultable = (*ObjectResolutionResult)(nil)
+
+var _ IntentResolutionResultProvider = (*ObjectResolutionResult)(nil)

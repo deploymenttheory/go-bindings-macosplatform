@@ -9,39 +9,32 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// Key used to obtain an input method's mode dictionary from the input method's bundle.
 // IMKModeDictionary returns the string constant IMKModeDictionary, for use as a dictionary key or argument.
 func IMKModeDictionary() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("IMKModeDictionary"))) }
 
-// Key used to find an input method's input controller class name from the input method's bundle.
 // IMKControllerClass returns the string constant IMKControllerClass, for use as a dictionary key or argument.
 func IMKControllerClass() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("IMKControllerClass")))
 }
 
-// Key used to find an input method's delegate class name from the input method's bundle.
 // IMKDelegateClass returns the string constant IMKDelegateClass, for use as a dictionary key or argument.
 func IMKDelegateClass() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("IMKDelegateClass"))) }
 
-// An NSMenuItem in the infoDictionary passed to menu item actions. Use as a key to find the NSMenuItem in the infoDictionary.
 // KIMKCommandMenuItemName returns the string constant kIMKCommandMenuItemName, for use as a dictionary key or argument.
 func KIMKCommandMenuItemName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kIMKCommandMenuItemName")))
 }
 
-// A client object that conforms to the IMKInputText and NSObject protocols. Use as a key to find the client in the infoDictionary.
 // KIMKCommandClientName returns the string constant kIMKCommandClientName, for use as a dictionary key or argument.
 func KIMKCommandClientName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kIMKCommandClientName")))
 }
 
-// The level of opacity. Value must be a NSNumber with a value from 0 to 1.
 // IMKCandidatesOpacityAttributeName returns the string constant IMKCandidatesOpacityAttributeName, for use as a dictionary key or argument.
 func IMKCandidatesOpacityAttributeName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("IMKCandidatesOpacityAttributeName")))
 }
 
-// Control when key events are sent to a candidate window. Value is a NSNumber with a boolean value of NO (key events are sent to the candidate window first) or YES (key events are sent to the IMKInputController first). Note that this is only applicable when a candidate window is displayed.  The default behavior is to send the key event to the candidate window first, and if it is not processed there, to send it on to the input controller.
 // IMKCandidatesSendServerKeyEventFirst returns the string constant IMKCandidatesSendServerKeyEventFirst, for use as a dictionary key or argument.
 func IMKCandidatesSendServerKeyEventFirst() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("IMKCandidatesSendServerKeyEventFirst")))

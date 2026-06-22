@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that extracts a slice from a tensor.
-//
 // SliceLayer is an idiomatic wrapper over the Objective-C class MLCSliceLayer.
+//
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that extracts a slice from a tensor.
 type SliceLayer struct {
-	objref.Handle
+	Layer
 }
 
 // SliceLayerFromID adopts an existing Objective-C object as a SliceLayer
@@ -25,7 +26,8 @@ func SliceLayerFromID(id objc.ID) *SliceLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &SliceLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SliceLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func sliceLayerAdopt(id objc.ID) *SliceLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &SliceLayer{Handle: objref.Wrap(id)}
+	x := &SliceLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SliceLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SliceLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SliceLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSliceLayer creates a new SliceLayer.
@@ -64,23 +52,19 @@ func NewSliceLayer() *SliceLayer {
 	return sliceLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string that helps identify this layer.
 func (x *SliceLayer) WithLabel(label string) *SliceLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *SliceLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SliceLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// A vector of length equal to that of source. The element at index i specifies the beginning of slice in dimension i.
+// Start a vector of length equal to that of source. The element at index i specifies the beginning of slice in dimension i.
 //
 // Start returns the collection as a Go slice.
 func (x *SliceLayer) Start() []obj.Object {
@@ -88,7 +72,7 @@ func (x *SliceLayer) Start() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// A vector of length equal to that of source. The element at index i specifies the end of slice in dimension i.
+// End a vector of length equal to that of source. The element at index i specifies the end of slice in dimension i.
 //
 // End returns the collection as a Go slice.
 func (x *SliceLayer) End() []obj.Object {
@@ -96,7 +80,7 @@ func (x *SliceLayer) End() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// A vector of length equal to that of source. The element at index i specifies the stride of slice in dimension i.
+// Stride a vector of length equal to that of source. The element at index i specifies the stride of slice in dimension i.
 //
 // Stride returns the collection as a Go slice.
 func (x *SliceLayer) Stride() []obj.Object {
@@ -115,3 +99,5 @@ type SliceLayerable interface {
 }
 
 var _ SliceLayerable = (*SliceLayer)(nil)
+
+var _ LayerProvider = (*SliceLayer)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An opaque object that tracks the state of the Photos library between runs, and that you can copy and serialize for future use.
-//
 // PersistentChangeToken is an idiomatic wrapper over the Objective-C class PHPersistentChangeToken.
+//
+// An opaque object that tracks the state of the Photos library between runs, and that you can copy and serialize for future use.
 type PersistentChangeToken struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PersistentChangeTokenFromID(id objc.ID) *PersistentChangeToken {
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentChangeToken{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PersistentChangeToken{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func persistentChangeTokenAdopt(id objc.ID) *PersistentChangeToken {
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentChangeToken{Handle: objref.Wrap(id)}
+	x := &PersistentChangeToken{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *PersistentChangeToken) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *PersistentChangeToken) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PersistentChangeToken) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewPersistentChangeToken creates a new PersistentChangeToken.

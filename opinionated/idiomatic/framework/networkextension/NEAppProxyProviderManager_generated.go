@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object to create and manage the app proxy provider’s VPN configuration.
-//
 // NEAppProxyProviderManager is an idiomatic wrapper over the Objective-C class NEAppProxyProviderManager.
+//
+// It embeds [NETunnelProviderManager], promoting that type's methods.
+//
+// An object to create and manage the app proxy provider’s VPN configuration.
 type NEAppProxyProviderManager struct {
-	objref.Handle
+	NETunnelProviderManager
 }
 
 // NEAppProxyProviderManagerFromID adopts an existing Objective-C object as a NEAppProxyProviderManager
@@ -25,7 +26,8 @@ func NEAppProxyProviderManagerFromID(id objc.ID) *NEAppProxyProviderManager {
 	if id == 0 {
 		return nil
 	}
-	x := &NEAppProxyProviderManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEAppProxyProviderManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func nEAppProxyProviderManagerAdopt(id objc.ID) *NEAppProxyProviderManager {
 	if id == 0 {
 		return nil
 	}
-	x := &NEAppProxyProviderManager{Handle: objref.Wrap(id)}
+	x := &NEAppProxyProviderManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NEAppProxyProviderManager) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEAppProxyProviderManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEAppProxyProviderManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNEAppProxyProviderManager creates a new NEAppProxyProviderManager.
@@ -64,113 +52,87 @@ func NewNEAppProxyProviderManager() *NEAppProxyProviderManager {
 	return nEAppProxyProviderManagerAdopt(_id)
 }
 
-// The website domains that the system routes connections from the Safari app through a per-app VPN.
-//
-// WithSafariDomains sets the collection and returns the receiver so calls can be chained.
+// WithSafariDomains the website domains that the system routes connections from the Safari app through a per-app VPN.
 func (x *NEAppProxyProviderManager) WithSafariDomains(items ...obj.Object) *NEAppProxyProviderManager {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSafariDomains:"), _arr)
 	return x
 }
 
-// The mail servers that the system routes connections from the Mail app through for a per-app VPN.
-//
-// WithMailDomains sets the collection and returns the receiver so calls can be chained.
+// WithMailDomains the mail servers that the system routes connections from the Mail app through for a per-app VPN.
 func (x *NEAppProxyProviderManager) WithMailDomains(items ...obj.Object) *NEAppProxyProviderManager {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMailDomains:"), _arr)
 	return x
 }
 
-// The calendar servers that the system routes connections from the Calendar app through for a per-app VPN.
-//
-// WithCalendarDomains sets the collection and returns the receiver so calls can be chained.
+// WithCalendarDomains the calendar servers that the system routes connections from the Calendar app through for a per-app VPN.
 func (x *NEAppProxyProviderManager) WithCalendarDomains(items ...obj.Object) *NEAppProxyProviderManager {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendarDomains:"), _arr)
 	return x
 }
 
-// The contacts servers that the system routes connections from the Contacts app through for a per-app VPN.
-//
-// WithContactsDomains sets the collection and returns the receiver so calls can be chained.
+// WithContactsDomains the contacts servers that the system routes connections from the Contacts app through for a per-app VPN.
 func (x *NEAppProxyProviderManager) WithContactsDomains(items ...obj.Object) *NEAppProxyProviderManager {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContactsDomains:"), _arr)
 	return x
 }
 
-// The rules for specific apps in a per-app VPN.
-//
-// WithAppRules sets the collection and returns the receiver so calls can be chained.
+// WithAppRules the rules for specific apps in a per-app VPN.
 func (x *NEAppProxyProviderManager) WithAppRules(items ...*NEAppRule) *NEAppProxyProviderManager {
 	_arr := purego.SliceToNSArray(items, func(_v *NEAppRule) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppRules:"), _arr)
 	return x
 }
 
-// The domains that the system excludes from a per-app VPN.
-//
-// WithExcludedDomains sets the collection and returns the receiver so calls can be chained.
+// WithExcludedDomains the domains that the system excludes from a per-app VPN.
 func (x *NEAppProxyProviderManager) WithExcludedDomains(items ...obj.Object) *NEAppProxyProviderManager {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedDomains:"), _arr)
 	return x
 }
 
-// The domains that the system routes network traffic through for a per-app VPN.
-//
-// WithAssociatedDomains sets the collection and returns the receiver so calls can be chained.
+// WithAssociatedDomains the domains that the system routes network traffic through for a per-app VPN.
 func (x *NEAppProxyProviderManager) WithAssociatedDomains(items ...obj.Object) *NEAppProxyProviderManager {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssociatedDomains:"), _arr)
 	return x
 }
 
-// An ordered list of Connect On Demand rules.
-//
-// WithOnDemandRules sets the collection and returns the receiver so calls can be chained.
+// WithOnDemandRules an ordered list of Connect On Demand rules.
 func (x *NEAppProxyProviderManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NEAppProxyProviderManager {
 	_arr := purego.SliceToNSArray(items, func(_v NEOnDemandRuleProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnDemandRules:"), _arr)
 	return x
 }
 
-// A Boolean used to toggle the Connect On Demand capability.
-//
-// WithOnDemandEnabled sets onDemandEnabled and returns the receiver so calls can be chained.
+// WithOnDemandEnabled a Boolean used to toggle the Connect On Demand capability.
 func (x *NEAppProxyProviderManager) WithOnDemandEnabled(onDemandEnabled bool) *NEAppProxyProviderManager {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnDemandEnabled:"), onDemandEnabled)
 	return x
 }
 
-// A string containing the display name of the VPN configuration.
-//
-// WithLocalizedDescription sets localizedDescription and returns the receiver so calls can be chained.
+// WithLocalizedDescription a string containing the display name of the VPN configuration.
 func (x *NEAppProxyProviderManager) WithLocalizedDescription(localizedDescription string) *NEAppProxyProviderManager {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
 	return x
 }
 
-// An NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
-//
-// WithProtocol sets protocol and returns the receiver so calls can be chained.
+// WithProtocol an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
 func (x *NEAppProxyProviderManager) WithProtocol(protocol NEVPNProtocolProvider) *NEAppProxyProviderManager {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocol:"), objref.IDOf(protocol))
 	return x
 }
 
-// An NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
-//
-// WithProtocolConfiguration sets protocolConfiguration and returns the receiver so calls can be chained.
+// WithProtocolConfiguration an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
 func (x *NEAppProxyProviderManager) WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NEAppProxyProviderManager {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocolConfiguration:"), objref.IDOf(protocolConfiguration))
 	return x
 }
 
-// A Boolean used to toggle the enabled state of the VPN configuration.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean used to toggle the enabled state of the VPN configuration.
 func (x *NEAppProxyProviderManager) WithEnabled(enabled bool) *NEAppProxyProviderManager {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
@@ -195,3 +157,7 @@ type NEAppProxyProviderManagerable interface {
 }
 
 var _ NEAppProxyProviderManagerable = (*NEAppProxyProviderManager)(nil)
+
+var _ NETunnelProviderManagerProvider = (*NEAppProxyProviderManager)(nil)
+
+var _ NEVPNManagerProvider = (*NEAppProxyProviderManager)(nil)

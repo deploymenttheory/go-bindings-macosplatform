@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract base class for objects managed by ClassKit.
-//
 // Object is an idiomatic wrapper over the Objective-C class CLSObject.
+//
+// Object is an abstract base — you do not construct it directly. Construct one of [ActivityItem], [Activity], [Context], [ProgressReportingCapability] and pass it where a Object is accepted.
+//
+// The abstract base class for objects managed by ClassKit.
 type Object struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ObjectFromID(id objc.ID) *Object {
 	if id == 0 {
 		return nil
 	}
-	x := &Object{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Object{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func objectAdopt(id objc.ID) *Object {
 	if id == 0 {
 		return nil
 	}
-	x := &Object{Handle: objref.Wrap(id)}
+	x := &Object{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +62,19 @@ func (x *Object) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewObject creates a new Object.
-func NewObject() *Object {
-	_id := objc.Send[objc.ID](objc.ID(_class("CLSObject")), objc.RegisterName("new"))
-	return objectAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Object) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The date this object was created.
+// DateCreated the date this object was created.
 func (x *Object) DateCreated() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateCreated"))
 	return obj.Wrap(_r)
 }
 
-// The date this object was last modified.
+// DateLastModified the date this object was last modified.
 func (x *Object) DateLastModified() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateLastModified"))
 	return obj.Wrap(_r)
@@ -84,3 +88,10 @@ type Objectable interface {
 }
 
 var _ Objectable = (*Object)(nil)
+
+// isObject marks Object — and, by embedding promotion, its
+// subclasses — as a member of the Object hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Object) isObject() {}
+
+var _ ObjectProvider = (*Object)(nil)

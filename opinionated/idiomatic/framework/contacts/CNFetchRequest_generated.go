@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for contact fetch requests.
-//
 // FetchRequest is an idiomatic wrapper over the Objective-C class CNFetchRequest.
+//
+// FetchRequest is an abstract base — you do not construct it directly. Construct one of [ChangeHistoryFetchRequest], [ContactFetchRequest] and pass it where a FetchRequest is accepted.
+//
+// The base class for contact fetch requests.
 type FetchRequest struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func FetchRequestFromID(id objc.ID) *FetchRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &FetchRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FetchRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func fetchRequestAdopt(id objc.ID) *FetchRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &FetchRequest{Handle: objref.Wrap(id)}
+	x := &FetchRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *FetchRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewFetchRequest creates a new FetchRequest.
-func NewFetchRequest() *FetchRequest {
-	_id := objc.Send[objc.ID](objc.ID(_class("CNFetchRequest")), objc.RegisterName("new"))
-	return fetchRequestAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FetchRequest) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // FetchRequestable is the interface implemented by [FetchRequest], for mocking and DI.
@@ -70,3 +74,10 @@ type FetchRequestable interface {
 }
 
 var _ FetchRequestable = (*FetchRequest)(nil)
+
+// isFetchRequest marks FetchRequest — and, by embedding promotion, its
+// subclasses — as a member of the FetchRequest hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *FetchRequest) isFetchRequest() {}
+
+var _ FetchRequestProvider = (*FetchRequest)(nil)

@@ -9,134 +9,110 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// The system type that identifies a user record. CloudKit automatically creates a user record for each unique user of the app. User records are empty initially. You can add data to the user record using the same rules that apply for all records. Specifically, you must specify a consistent type of data for a particular field name in all user records. However, you can't create new user records using this record type and you can't query for records of this type. To locate user records, you must know the ID of the user record or use the methods that CKContainer provides to discover user records.
 // CKRecordTypeUserRecord returns the string constant CKRecordTypeUserRecord, for use as a dictionary key or argument.
 func CKRecordTypeUserRecord() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CKRecordTypeUserRecord")))
 }
 
-// A key constant that a record uses for its CKRecord.recordID.
 // CKRecordRecordIDKey returns the string constant CKRecordRecordIDKey, for use as a dictionary key or argument.
 func CKRecordRecordIDKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CKRecordRecordIDKey")))
 }
 
-// A key constant that a record uses for its CKRecord.creatorUserRecordID.
 // CKRecordCreatorUserRecordIDKey returns the string constant CKRecordCreatorUserRecordIDKey, for use as a dictionary key or argument.
 func CKRecordCreatorUserRecordIDKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CKRecordCreatorUserRecordIDKey")))
 }
 
-// A key constant that a record uses for its CKRecord.creationDate.
 // CKRecordCreationDateKey returns the string constant CKRecordCreationDateKey, for use as a dictionary key or argument.
 func CKRecordCreationDateKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CKRecordCreationDateKey")))
 }
 
-// A key constant that a record uses for its CKRecord.lastModifiedUserRecordID.
 // CKRecordLastModifiedUserRecordIDKey returns the string constant CKRecordLastModifiedUserRecordIDKey, for use as a dictionary key or argument.
 func CKRecordLastModifiedUserRecordIDKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CKRecordLastModifiedUserRecordIDKey")))
 }
 
-// A key constant that a record uses for its CKRecord.modificationDate.
 // CKRecordModificationDateKey returns the string constant CKRecordModificationDateKey, for use as a dictionary key or argument.
 func CKRecordModificationDateKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CKRecordModificationDateKey")))
 }
 
-// The key constant that a record uses for its CKRecord.parent.
 // CKRecordParentKey returns the string constant CKRecordParentKey, for use as a dictionary key or argument.
 func CKRecordParentKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CKRecordParentKey"))) }
 
-// The key constant that a record uses for its CKRecord.share.
 // CKRecordShareKey returns the string constant CKRecordShareKey, for use as a dictionary key or argument.
 func CKRecordShareKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CKRecordShareKey"))) }
 
-// A constant that provides the current user's default name.
 // CKCurrentUserDefaultName returns the string constant CKCurrentUserDefaultName, for use as a dictionary key or argument.
 func CKCurrentUserDefaultName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CKCurrentUserDefaultName")))
 }
 
-// A constant that provides the default owner's name.
 // CKOwnerDefaultName returns the string constant CKOwnerDefaultName, for use as a dictionary key or argument.
 func CKOwnerDefaultName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CKOwnerDefaultName")))
 }
 
-// A notification that a container posts when the status of an iCloud account changes. Create an instance of “CKContainer“ to receive this notification. The container posts the notification using an arbitrary queue. Use the “CKContainer/accountStatus(completionHandler:)“ method to obtain the account's status.
 // CKAccountChangedNotification returns the string constant CKAccountChangedNotification, for use as a dictionary key or argument.
 func CKAccountChangedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CKAccountChangedNotification")))
 }
 
-// The error domain for CloudKit errors.
 // CKErrorDomain returns the string constant CKErrorDomain, for use as a dictionary key or argument.
 func CKErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CKErrorDomain"))) }
 
-// The key to retrieve partial errors. The value of this key is a dictionary that maps an item ID to an error. The type of each ID depends on where the error occurs. For example, if you receive a partial error when modifying a record, the ID is an instance of “CKRecord/ID“ that corresponds to the record that CloudKit can't modify.
 // CKPartialErrorsByItemIDKey returns the string constant CKPartialErrorsByItemIDKey, for use as a dictionary key or argument.
 func CKPartialErrorsByItemIDKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CKPartialErrorsByItemIDKey")))
 }
 
-// The key to retrieve the original version of the record.
 // CKRecordChangedErrorAncestorRecordKey returns the string constant CKRecordChangedErrorAncestorRecordKey, for use as a dictionary key or argument.
 func CKRecordChangedErrorAncestorRecordKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CKRecordChangedErrorAncestorRecordKey")))
 }
 
-// The key to retrieve the server's version of the record.
 // CKRecordChangedErrorServerRecordKey returns the string constant CKRecordChangedErrorServerRecordKey, for use as a dictionary key or argument.
 func CKRecordChangedErrorServerRecordKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CKRecordChangedErrorServerRecordKey")))
 }
 
-// The key to retrieve the local version of the record.
 // CKRecordChangedErrorClientRecordKey returns the string constant CKRecordChangedErrorClientRecordKey, for use as a dictionary key or argument.
 func CKRecordChangedErrorClientRecordKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CKRecordChangedErrorClientRecordKey")))
 }
 
-// The key that determines whether CloudKit deletes a record zone because of a user action. An <doc://com.apple.documentation/documentation/foundation/nsnumber> that represents a Boolean value you use to determine whether a user action causes CloudKit to delete a record zone. CloudKit adds this key to the error's `userInfo` dictionary when the error code is “CKError/Code/zoneNotFound“.
 // CKErrorUserDidResetEncryptedDataKey returns the string constant CKErrorUserDidResetEncryptedDataKey, for use as a dictionary key or argument.
 func CKErrorUserDidResetEncryptedDataKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CKErrorUserDidResetEncryptedDataKey")))
 }
 
-// The key to retrieve the number of seconds to wait before you retry a request. An <doc://com.apple.documentation/documentation/foundation/nsnumber> that contains the number of seconds until you can retry a request. CloudKit adds this key to the error's <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary when the error code is “CKError/Code/serviceUnavailable“ or “CKError/Code/requestRateLimited“.
 // CKErrorRetryAfterKey returns the string constant CKErrorRetryAfterKey, for use as a dictionary key or argument.
 func CKErrorRetryAfterKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CKErrorRetryAfterKey")))
 }
 
-// The default record zone's name. Use this value when you need to refer to the default zone by name, such as when creating a zone ID. The default zone has no special capabilities.
 // CKRecordZoneDefaultName returns the string constant CKRecordZoneDefaultName, for use as a dictionary key or argument.
 func CKRecordZoneDefaultName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CKRecordZoneDefaultName")))
 }
 
-// The system type that identifies a share record.
 // CKRecordTypeShare returns the string constant CKRecordTypeShare, for use as a dictionary key or argument.
 func CKRecordTypeShare() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CKRecordTypeShare"))) }
 
-// The name of a share record that manages a shared record zone. When you create an instance of “CKShare“ for sharing a record zone, CloudKit automatically assigns this constant as the “CKRecord/ID/recordName“ element of the share record's “CKRecord/recordID“. After you save the share record to iCloud, you can fetch it by reconstructing the record ID using this constant, as the following example shows: ```swift func fetchShare( forZone zone: CKRecordZone, completion:
 // CKRecordNameZoneWideShare returns the string constant CKRecordNameZoneWideShare, for use as a dictionary key or argument.
 func CKRecordNameZoneWideShare() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CKRecordNameZoneWideShare")))
 }
 
-// The system field key for the share's title. This predefined key is part of the `CKRecordTypeShare` schema. The out of process UI flow uses this key to send a share, and as part of the share acceptance flow. It is an optional value on a `CKShare` record.
 // CKShareTitleKey returns the string constant CKShareTitleKey, for use as a dictionary key or argument.
 func CKShareTitleKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CKShareTitleKey"))) }
 
-// The system field key for the share's thumbnail image data. This predefined key is part of the `CKRecordTypeShare` schema.  It is used by the out of process UI flow to send a share, and as part of the share acceptance flow.  It is an optional value on a `CKShare` record.
 // CKShareThumbnailImageDataKey returns the string constant CKShareThumbnailImageDataKey, for use as a dictionary key or argument.
 func CKShareThumbnailImageDataKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CKShareThumbnailImageDataKey")))
 }
 
-// The system field key for the share's type. This predefined key is part of the `CKRecordTypeShare` schema.  It is used by the out of process UI flow to send a share, and as part of the share acceptance flow.  It is an optional value on a `CKShare` record.
 // CKShareTypeKey returns the string constant CKShareTypeKey, for use as a dictionary key or argument.
 func CKShareTypeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CKShareTypeKey"))) }

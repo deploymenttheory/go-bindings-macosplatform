@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request to create, delete, or modify a Photos asset collection, for use in a photo library change block.
-//
 // AssetCollectionChangeRequest is an idiomatic wrapper over the Objective-C class PHAssetCollectionChangeRequest.
+//
+// It embeds [ChangeRequest], promoting that type's methods.
+//
+// A request to create, delete, or modify a Photos asset collection, for use in a photo library change block.
 type AssetCollectionChangeRequest struct {
-	objref.Handle
+	ChangeRequest
 }
 
 // AssetCollectionChangeRequestFromID adopts an existing Objective-C object as a AssetCollectionChangeRequest
@@ -25,7 +26,8 @@ func AssetCollectionChangeRequestFromID(id objc.ID) *AssetCollectionChangeReques
 	if id == 0 {
 		return nil
 	}
-	x := &AssetCollectionChangeRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetCollectionChangeRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func assetCollectionChangeRequestAdopt(id objc.ID) *AssetCollectionChangeRequest
 	if id == 0 {
 		return nil
 	}
-	x := &AssetCollectionChangeRequest{Handle: objref.Wrap(id)}
+	x := &AssetCollectionChangeRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AssetCollectionChangeRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetCollectionChangeRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetCollectionChangeRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAssetCollectionChangeRequest creates a new AssetCollectionChangeRequest.
@@ -64,29 +52,29 @@ func NewAssetCollectionChangeRequest() *AssetCollectionChangeRequest {
 	return assetCollectionChangeRequestAdopt(_id)
 }
 
-// The displayed name of the asset collection.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the displayed name of the asset collection.
 func (x *AssetCollectionChangeRequest) WithTitle(title string) *AssetCollectionChangeRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// Removes the assets at the specified indexes from the asset collection.
+// RemoveAssetsAtIndexes removes the assets at the specified indexes from the asset collection.
 func (x *AssetCollectionChangeRequest) RemoveAssetsAtIndexes(indexes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAssetsAtIndexes:"), objref.IDOf(indexes))
 }
 
-// Moves the assets at the specified indexes in the asset collection to a new index.
+// MoveAssetsAtIndexesToIndex moves the assets at the specified indexes in the asset collection to a new index.
 func (x *AssetCollectionChangeRequest) MoveAssetsAtIndexesToIndex(fromIndexes obj.Object, toIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveAssetsAtIndexes:toIndex:"), objref.IDOf(fromIndexes), toIndex)
 }
 
+// PlaceholderForCreatedAssetCollection wraps the corresponding Objective-C method.
 func (x *AssetCollectionChangeRequest) PlaceholderForCreatedAssetCollection() *ObjectPlaceholder {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderForCreatedAssetCollection"))
 	return ObjectPlaceholderFromID(_r)
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *AssetCollectionChangeRequest) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -95,6 +83,7 @@ func (x *AssetCollectionChangeRequest) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *AssetCollectionChangeRequest) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
@@ -111,3 +100,5 @@ type AssetCollectionChangeRequestable interface {
 }
 
 var _ AssetCollectionChangeRequestable = (*AssetCollectionChangeRequest)(nil)
+
+var _ ChangeRequestProvider = (*AssetCollectionChangeRequest)(nil)

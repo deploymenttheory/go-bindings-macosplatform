@@ -6,9 +6,7 @@
     The Adopt helper wraps the new object; the object was just created, so the Go
     side already owns its reference. Spacing is loose here; gofmt tidies it.
 */}}
-{{define "constructor"}}{{if .DocComment}}{{.DocComment}}//
-{{end}}// {{.GoName}} creates a new {{.GoTypeName}}.
-func {{.GoName}}({{.ParamStr}}) {{.RetStr}} {
+{{define "constructor"}}{{.DocComment}}func {{.GoName}}({{.ParamStr}}) {{.RetStr}} {
 {{- if .Preamble}}
 {{.Preamble}}
 {{- end}}

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes a single haptic or audio event.
-//
 // HapticEvent is an idiomatic wrapper over the Objective-C class CHHapticEvent.
+//
+// An object that describes a single haptic or audio event.
 type HapticEvent struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func HapticEventFromID(id objc.ID) *HapticEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &HapticEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HapticEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func hapticEventAdopt(id objc.ID) *HapticEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &HapticEvent{Handle: objref.Wrap(id)}
+	x := &HapticEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,83 +60,84 @@ func (x *HapticEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a haptic event of the specified type, parameters, and start time.
-//
-// NewHapticEventWithEventTypeParametersRelativeTime creates a new HapticEvent.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HapticEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewHapticEventWithEventTypeParametersRelativeTime initializes a haptic event of the specified type, parameters, and start time.
 func NewHapticEventWithEventTypeParametersRelativeTime(type_ obj.Object, eventParams []*HapticEventParameter, time_ float64) *HapticEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEventType:parameters:relativeTime:"), objref.IDOf(type_), purego.SliceToNSArray(eventParams, func(_v *HapticEventParameter) objc.ID { return objref.IDOf(_v) }), time_)
 	return hapticEventAdopt(_id)
 }
 
-// Initializes a haptic event of the specified type, parameters, start time, and duration.
-//
-// NewHapticEventWithEventTypeParametersRelativeTimeDuration creates a new HapticEvent.
+// NewHapticEventWithEventTypeParametersRelativeTimeDuration initializes a haptic event of the specified type, parameters, start time, and duration.
 func NewHapticEventWithEventTypeParametersRelativeTimeDuration(type_ obj.Object, eventParams []*HapticEventParameter, time_ float64, duration float64) *HapticEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEventType:parameters:relativeTime:duration:"), objref.IDOf(type_), purego.SliceToNSArray(eventParams, func(_v *HapticEventParameter) objc.ID { return objref.IDOf(_v) }), time_, duration)
 	return hapticEventAdopt(_id)
 }
 
-// Initializes a haptic event from a previously loaded audio resource, specifying event parameters and start time.
-//
-// NewHapticEventWithAudioResourceIDParametersRelativeTime creates a new HapticEvent.
+// NewHapticEventWithAudioResourceIDParametersRelativeTime initializes a haptic event from a previously loaded audio resource, specifying event parameters and start time.
 func NewHapticEventWithAudioResourceIDParametersRelativeTime(resID int, eventParams []*HapticEventParameter, time_ float64) *HapticEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioResourceID:parameters:relativeTime:"), resID, purego.SliceToNSArray(eventParams, func(_v *HapticEventParameter) objc.ID { return objref.IDOf(_v) }), time_)
 	return hapticEventAdopt(_id)
 }
 
-// Initializes a haptic event from a previously loaded audio resource, specifying event parameters, start time, and duration.
-//
-// NewHapticEventWithAudioResourceIDParametersRelativeTimeDuration creates a new HapticEvent.
+// NewHapticEventWithAudioResourceIDParametersRelativeTimeDuration initializes a haptic event from a previously loaded audio resource, specifying event parameters, start time, and duration.
 func NewHapticEventWithAudioResourceIDParametersRelativeTimeDuration(resID int, eventParams []*HapticEventParameter, time_ float64, duration float64) *HapticEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioResourceID:parameters:relativeTime:duration:"), resID, purego.SliceToNSArray(eventParams, func(_v *HapticEventParameter) objc.ID { return objref.IDOf(_v) }), time_, duration)
 	return hapticEventAdopt(_id)
 }
 
-// The start time of the event, relative to other events in the same pattern.
-//
-// WithRelativeTime sets relativeTime and returns the receiver so calls can be chained.
+// WithRelativeTime the start time of the event, relative to other events in the same pattern.
 func (x *HapticEvent) WithRelativeTime(relativeTime float64) *HapticEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativeTime:"), relativeTime)
 	return x
 }
 
-// The duration of the haptic event.
-//
-// WithDuration sets duration and returns the receiver so calls can be chained.
+// WithDuration the duration of the haptic event.
 func (x *HapticEvent) WithDuration(duration float64) *HapticEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
 	return x
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *HapticEvent) Type() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
 	return obj.Wrap(_r)
 }
 
+// EventParameters wraps the corresponding Objective-C method.
+//
 // EventParameters returns the collection as a Go slice.
 func (x *HapticEvent) EventParameters() []*HapticEventParameter {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eventParameters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *HapticEventParameter { return HapticEventParameterFromID(_id) })
 }
 
+// RelativeTime wraps the corresponding Objective-C method.
 func (x *HapticEvent) RelativeTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("relativeTime"))
 	return _r
 }
 
+// SetRelativeTime wraps the corresponding Objective-C method.
 func (x *HapticEvent) SetRelativeTime(relativeTime float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativeTime:"), relativeTime)
 }
 
+// Duration wraps the corresponding Objective-C method.
 func (x *HapticEvent) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
 	return _r
 }
 
+// SetDuration wraps the corresponding Objective-C method.
 func (x *HapticEvent) SetDuration(duration float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
 }

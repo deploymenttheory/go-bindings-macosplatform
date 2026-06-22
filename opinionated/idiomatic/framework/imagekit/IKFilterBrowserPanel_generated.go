@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The IKFilterBrowserPanel provides the shared IKFilterBrowser with its runtime model. See information in the introduction.
-//
 // FilterBrowserPanel is an idiomatic wrapper over the Objective-C class IKFilterBrowserPanel.
+//
+// The IKFilterBrowserPanel provides the shared IKFilterBrowser with its runtime model. See information in the introduction.
 type FilterBrowserPanel struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FilterBrowserPanelFromID(id objc.ID) *FilterBrowserPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &FilterBrowserPanel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FilterBrowserPanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func filterBrowserPanelAdopt(id objc.ID) *FilterBrowserPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &FilterBrowserPanel{Handle: objref.Wrap(id)}
+	x := &FilterBrowserPanel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *FilterBrowserPanel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FilterBrowserPanel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFilterBrowserPanel creates a new FilterBrowserPanel.
 func NewFilterBrowserPanel() *FilterBrowserPanel {
 	_id := objc.Send[objc.ID](objc.ID(_class("IKFilterBrowserPanel")), objc.RegisterName("new"))
 	return filterBrowserPanelAdopt(_id)
 }
 
-// Returns the name of the currently selected filter. Use this method in response to a IKFilterBrowserFilterSelectedNotification or IKFilterBrowserFilterDoubleClickNotification or afer returning from a modal session.
+// FilterName returns the name of the currently selected filter. Use this method in response to a IKFilterBrowserFilterSelectedNotification or IKFilterBrowserFilterDoubleClickNotification or afer returning from a modal session.
 func (x *FilterBrowserPanel) FilterName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterName"))
 	if _r == 0 {
@@ -73,19 +81,19 @@ func (x *FilterBrowserPanel) FilterName() string {
 	return purego.GoString(_r)
 }
 
-// Displays the FilterBrowser in a modal dialog. Use this method to run the IKFilterBrowser in a modal dialog. The value passed as returnCode will be either NSCancelButton or NSOKButton.
+// RunModalWithOptions displays the FilterBrowser in a modal dialog. Use this method to run the IKFilterBrowser in a modal dialog. The value passed as returnCode will be either NSCancelButton or NSOKButton.
 func (x *FilterBrowserPanel) RunModalWithOptions(inOptions obj.Object) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalWithOptions:"), objref.IDOf(inOptions))
 	return _r
 }
 
-// Returns a view containing the FilterBrowser. Use this method to run the IKFilterBrowser in your own UI. To dismiss it, invoke the finish action as described below.
+// FilterBrowserViewWithOptions returns a view containing the FilterBrowser. Use this method to run the IKFilterBrowser in your own UI. To dismiss it, invoke the finish action as described below.
 func (x *FilterBrowserPanel) FilterBrowserViewWithOptions(inOptions obj.Object) *FilterBrowserView {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterBrowserViewWithOptions:"), objref.IDOf(inOptions))
 	return FilterBrowserViewFromID(_r)
 }
 
-// Closes the IKFilterBrowser. Invoke this action for instance from your OK or Cancel button when you are running the IKFilterBrowserView modal in your own UI.
+// Finish closes the IKFilterBrowser. Invoke this action for instance from your OK or Cancel button when you are running the IKFilterBrowserView modal in your own UI.
 func (x *FilterBrowserPanel) Finish(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finish:"), objref.IDOf(sender))
 }

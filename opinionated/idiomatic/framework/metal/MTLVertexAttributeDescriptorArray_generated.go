@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An array of vertex attribute descriptor instances.
-//
 // VertexAttributeDescriptorArray is an idiomatic wrapper over the Objective-C class MTLVertexAttributeDescriptorArray.
+//
+// An array of vertex attribute descriptor instances.
 type VertexAttributeDescriptorArray struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VertexAttributeDescriptorArrayFromID(id objc.ID) *VertexAttributeDescriptor
 	if id == 0 {
 		return nil
 	}
-	x := &VertexAttributeDescriptorArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VertexAttributeDescriptorArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func vertexAttributeDescriptorArrayAdopt(id objc.ID) *VertexAttributeDescriptorA
 	if id == 0 {
 		return nil
 	}
-	x := &VertexAttributeDescriptorArray{Handle: objref.Wrap(id)}
+	x := &VertexAttributeDescriptorArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *VertexAttributeDescriptorArray) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VertexAttributeDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVertexAttributeDescriptorArray creates a new VertexAttributeDescriptorArray.
 func NewVertexAttributeDescriptorArray() *VertexAttributeDescriptorArray {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLVertexAttributeDescriptorArray")), objc.RegisterName("new"))
 	return vertexAttributeDescriptorArrayAdopt(_id)
 }
 
-// Returns the state of the specified vertex attribute.
+// ObjectAtIndexedSubscript returns the state of the specified vertex attribute.
 func (x *VertexAttributeDescriptorArray) ObjectAtIndexedSubscript(index int) *VertexAttributeDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), index)
 	return VertexAttributeDescriptorFromID(_r)
 }
 
-// Sets state for the specified vertex attribute.
+// SetObjectAtIndexedSubscript sets state for the specified vertex attribute.
 func (x *VertexAttributeDescriptorArray) SetObjectAtIndexedSubscript(attributeDesc *VertexAttributeDescriptor, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attributeDesc), index)
 }

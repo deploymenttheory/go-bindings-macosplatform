@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes the deletion of a record zone.
-//
 // SyncEngineFetchedZoneDeletion is an idiomatic wrapper over the Objective-C class CKSyncEngineFetchedZoneDeletion.
+//
+// An object that describes the deletion of a record zone.
 type SyncEngineFetchedZoneDeletion struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SyncEngineFetchedZoneDeletionFromID(id objc.ID) *SyncEngineFetchedZoneDelet
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineFetchedZoneDeletion{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SyncEngineFetchedZoneDeletion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func syncEngineFetchedZoneDeletionAdopt(id objc.ID) *SyncEngineFetchedZoneDeleti
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineFetchedZoneDeletion{Handle: objref.Wrap(id)}
+	x := &SyncEngineFetchedZoneDeletion{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *SyncEngineFetchedZoneDeletion) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncEngineFetchedZoneDeletion) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSyncEngineFetchedZoneDeletion creates a new SyncEngineFetchedZoneDeletion.
 func NewSyncEngineFetchedZoneDeletion() *SyncEngineFetchedZoneDeletion {
 	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineFetchedZoneDeletion")), objc.RegisterName("new"))
 	return syncEngineFetchedZoneDeletionAdopt(_id)
 }
 
-// The identifier of the deleted record zone.
+// ZoneID the identifier of the deleted record zone.
 func (x *SyncEngineFetchedZoneDeletion) ZoneID() *RecordZoneID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneID"))
 	return RecordZoneIDFromID(_r)
 }
 
-// The reason for the deletion.
+// Reason the reason for the deletion.
 func (x *SyncEngineFetchedZoneDeletion) Reason() SyncEngineZoneDeletionReason {
 	_r := objc.Send[SyncEngineZoneDeletionReason](objref.IDOf(x), objc.RegisterName("reason"))
 	return _r

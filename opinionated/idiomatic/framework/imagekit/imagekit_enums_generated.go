@@ -16,6 +16,8 @@ const (
 	CameraDeviceViewDisplayModeIcon  CameraDeviceViewDisplayMode = 1
 )
 
+// String returns the CameraDeviceViewDisplayMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CameraDeviceViewDisplayMode) String() string {
 	switch e {
 	case CameraDeviceViewDisplayModeNone:
@@ -36,6 +38,8 @@ const (
 	CameraDeviceViewTransferModeMemoryBased CameraDeviceViewTransferMode = 1
 )
 
+// String returns the CameraDeviceViewTransferMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CameraDeviceViewTransferMode) String() string {
 	switch e {
 	case CameraDeviceViewTransferModeFileBased:
@@ -55,6 +59,8 @@ const (
 	DeviceBrowserViewDisplayModeIcon    DeviceBrowserViewDisplayMode = 2
 )
 
+// String returns the DeviceBrowserViewDisplayMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DeviceBrowserViewDisplayMode) String() string {
 	switch e {
 	case DeviceBrowserViewDisplayModeTable:
@@ -76,6 +82,8 @@ const (
 	ScannerDeviceViewDisplayModeAdvanced ScannerDeviceViewDisplayMode = 1
 )
 
+// String returns the ScannerDeviceViewDisplayMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ScannerDeviceViewDisplayMode) String() string {
 	switch e {
 	case ScannerDeviceViewDisplayModeNone:
@@ -96,6 +104,8 @@ const (
 	ScannerDeviceViewTransferModeMemoryBased ScannerDeviceViewTransferMode = 1
 )
 
+// String returns the ScannerDeviceViewTransferMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ScannerDeviceViewTransferMode) String() string {
 	switch e {
 	case ScannerDeviceViewTransferModeFileBased:

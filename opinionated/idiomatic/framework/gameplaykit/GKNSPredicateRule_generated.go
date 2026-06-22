@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A rule for use in a rule system that uses a Foundation NSPredicate object to evaluate itself.
-//
 // NSPredicateRule is an idiomatic wrapper over the Objective-C class GKNSPredicateRule.
+//
+// It embeds [Rule], promoting that type's methods.
+//
+// A rule for use in a rule system that uses a Foundation NSPredicate object to evaluate itself.
 type NSPredicateRule struct {
-	objref.Handle
+	Rule
 }
 
 // NSPredicateRuleFromID adopts an existing Objective-C object as a NSPredicateRule
@@ -25,7 +26,8 @@ func NSPredicateRuleFromID(id objc.ID) *NSPredicateRule {
 	if id == 0 {
 		return nil
 	}
-	x := &NSPredicateRule{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NSPredicateRule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,44 +40,26 @@ func nSPredicateRuleAdopt(id objc.ID) *NSPredicateRule {
 	if id == 0 {
 		return nil
 	}
-	x := &NSPredicateRule{Handle: objref.Wrap(id)}
+	x := &NSPredicateRule{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NSPredicateRule) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NSPredicateRule) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NSPredicateRule) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a rule with the specified predicate.
-//
-// NewNSPredicateRuleWithPredicate creates a new NSPredicateRule.
+// NewNSPredicateRuleWithPredicate initializes a rule with the specified predicate.
 func NewNSPredicateRuleWithPredicate(predicate obj.Object) *NSPredicateRule {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKNSPredicateRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPredicate:"), objref.IDOf(predicate))
 	return nSPredicateRuleAdopt(_id)
 }
 
-// The importance of the rule relative to others in a rule system’s agenda.
-//
-// WithSalience sets salience and returns the receiver so calls can be chained.
+// WithSalience the importance of the rule relative to others in a rule system’s agenda.
 func (x *NSPredicateRule) WithSalience(salience int) *NSPredicateRule {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSalience:"), salience)
 	return x
 }
 
-// The NSPredicate that is used inside this subclass's implementation of evaluatePredicateWithSystem: In order to effectively use this class you must still override performActionWithSystem:
+// Predicate the NSPredicate that is used inside this subclass's implementation of evaluatePredicateWithSystem: In order to effectively use this class you must still override performActionWithSystem:
 func (x *NSPredicateRule) Predicate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
 	return obj.Wrap(_r)
@@ -89,3 +73,5 @@ type NSPredicateRuleable interface {
 }
 
 var _ NSPredicateRuleable = (*NSPredicateRule)(nil)
+
+var _ RuleProvider = (*NSPredicateRule)(nil)

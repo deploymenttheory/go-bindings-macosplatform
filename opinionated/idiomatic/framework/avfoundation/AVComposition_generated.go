@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that combines and arranges media from multiple assets into a single composite asset that you can play or process.
-//
 // Composition is an idiomatic wrapper over the Objective-C class AVComposition.
+//
+// Composition is an abstract base — you do not construct it directly. Construct one of [MutableComposition] and pass it where a Composition is accepted.
+//
+// An object that combines and arranges media from multiple assets into a single composite asset that you can play or process.
 type Composition struct {
-	objref.Handle
+	Asset
 }
 
 // CompositionFromID adopts an existing Objective-C object as a Composition
@@ -25,7 +26,8 @@ func CompositionFromID(id objc.ID) *Composition {
 	if id == 0 {
 		return nil
 	}
-	x := &Composition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Composition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,33 +40,13 @@ func compositionAdopt(id objc.ID) *Composition {
 	if id == 0 {
 		return nil
 	}
-	x := &Composition{Handle: objref.Wrap(id)}
+	x := &Composition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *Composition) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Composition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Composition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewComposition creates a new Composition.
-func NewComposition() *Composition {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVComposition")), objc.RegisterName("new"))
-	return compositionAdopt(_id)
-}
-
-// Specifies the initialization options for the creation of AVURLAssets by the receiver, e.g. AVURLAssetPreferPreciseDurationAndTimingKey. The default behavior for creation of AVURLAssets by an AVComposition is equivalent to the behavior of +[AVURLAsset URLAssetWithURL:options:] when specifying no initialization options. AVCompositions create AVURLAssets internally for URLs specified by AVCompositionTrackSegments of AVCompositionTracks, as needed, whenever AVCompositionTrackSegments were originally added to a track via -[AVMutableCompositionTrack setSegments:] rather than by inserting timeranges of already existing AVAssets or AVAssetTracks. The value of URLAssetInitializationOptions can be specified at the time an AVMutableComposition is created via +compositionWithURLAssetInitializationOptions:.
+// URLAssetInitializationOptions specifies the initialization options for the creation of AVURLAssets by the receiver, e.g. AVURLAssetPreferPreciseDurationAndTimingKey. The default behavior for creation of AVURLAssets by an AVComposition is equivalent to the behavior of +[AVURLAsset URLAssetWithURL:options:] when specifying no initialization options. AVCompositions create AVURLAssets internally for URLs specified by AVCompositionTrackSegments of AVCompositionTracks, as needed, whenever AVCompositionTrackSegments were originally added to a track via -[AVMutableCompositionTrack setSegments:] rather than by inserting timeranges of already existing AVAssets or AVAssetTracks. The value of URLAssetInitializationOptions can be specified at the time an AVMutableComposition is created via +compositionWithURLAssetInitializationOptions:.
 func (x *Composition) URLAssetInitializationOptions() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLAssetInitializationOptions"))
 	return obj.Wrap(_r)
@@ -77,3 +59,12 @@ type Compositionable interface {
 }
 
 var _ Compositionable = (*Composition)(nil)
+
+// isComposition marks Composition — and, by embedding promotion, its
+// subclasses — as a member of the Composition hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Composition) isComposition() {}
+
+var _ CompositionProvider = (*Composition)(nil)
+
+var _ AssetProvider = (*Composition)(nil)

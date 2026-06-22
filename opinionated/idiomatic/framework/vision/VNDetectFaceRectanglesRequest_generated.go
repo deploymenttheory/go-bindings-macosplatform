@@ -6,17 +6,19 @@ package vision
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request that finds faces within an image.
-//
 // DetectFaceRectanglesRequest is an idiomatic wrapper over the Objective-C class VNDetectFaceRectanglesRequest.
+//
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// A request that finds faces within an image.
 type DetectFaceRectanglesRequest struct {
-	objref.Handle
+	ImageBasedRequest
 }
 
 // DetectFaceRectanglesRequestFromID adopts an existing Objective-C object as a DetectFaceRectanglesRequest
@@ -25,7 +27,8 @@ func DetectFaceRectanglesRequestFromID(id objc.ID) *DetectFaceRectanglesRequest 
 	if id == 0 {
 		return nil
 	}
-	x := &DetectFaceRectanglesRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DetectFaceRectanglesRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func detectFaceRectanglesRequestAdopt(id objc.ID) *DetectFaceRectanglesRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &DetectFaceRectanglesRequest{Handle: objref.Wrap(id)}
+	x := &DetectFaceRectanglesRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DetectFaceRectanglesRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DetectFaceRectanglesRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DetectFaceRectanglesRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDetectFaceRectanglesRequest creates a new DetectFaceRectanglesRequest.
@@ -64,25 +53,25 @@ func NewDetectFaceRectanglesRequest() *DetectFaceRectanglesRequest {
 	return detectFaceRectanglesRequestAdopt(_id)
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets preferBackgroundProcessing and returns the receiver so calls can be chained.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
+func (x *DetectFaceRectanglesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectFaceRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *DetectFaceRectanglesRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectFaceRectanglesRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets usesCPUOnly and returns the receiver so calls can be chained.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *DetectFaceRectanglesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectFaceRectanglesRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets revision and returns the receiver so calls can be chained.
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
 func (x *DetectFaceRectanglesRequest) WithRevision(revision int) *DetectFaceRectanglesRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
@@ -91,9 +80,14 @@ func (x *DetectFaceRectanglesRequest) WithRevision(revision int) *DetectFaceRect
 // DetectFaceRectanglesRequestable is the interface implemented by [DetectFaceRectanglesRequest], for mocking and DI.
 type DetectFaceRectanglesRequestable interface {
 	obj.Object
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectFaceRectanglesRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectFaceRectanglesRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *DetectFaceRectanglesRequest
 	WithRevision(revision int) *DetectFaceRectanglesRequest
 }
 
 var _ DetectFaceRectanglesRequestable = (*DetectFaceRectanglesRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*DetectFaceRectanglesRequest)(nil)
+
+var _ RequestProvider = (*DetectFaceRectanglesRequest)(nil)

@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that accesses a person’s calendar events and reminders and supports the scheduling of new events.
-//
 // EventStore is an idiomatic wrapper over the Objective-C class EKEventStore.
+//
+// An object that accesses a person’s calendar events and reminders and supports the scheduling of new events.
 type EventStore struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func EventStoreFromID(id objc.ID) *EventStore {
 	if id == 0 {
 		return nil
 	}
-	x := &EventStore{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EventStore{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func eventStoreAdopt(id objc.ID) *EventStore {
 	if id == 0 {
 		return nil
 	}
-	x := &EventStore{Handle: objref.Wrap(id)}
+	x := &EventStore{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,55 +62,57 @@ func (x *EventStore) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *EventStore) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewEventStore creates a new EventStore.
 func NewEventStore() *EventStore {
 	_id := objc.Send[objc.ID](objc.ID(_class("EKEventStore")), objc.RegisterName("new"))
 	return eventStoreAdopt(_id)
 }
 
-// Initializes access to the event store with support for the given entity type.
-//
-// NewEventStoreWithAccessToEntityTypes creates a new EventStore.
+// NewEventStoreWithAccessToEntityTypes initializes access to the event store with support for the given entity type.
 func NewEventStoreWithAccessToEntityTypes(entityTypes EntityMask) *EventStore {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("EKEventStore")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAccessToEntityTypes:"), entityTypes)
 	return eventStoreAdopt(_id)
 }
 
-// Creates an event store that contains data for the specified sources.
-//
-// NewEventStoreWithSources creates a new EventStore.
+// NewEventStoreWithSources creates an event store that contains data for the specified sources.
 func NewEventStoreWithSources(sources []*Source) *EventStore {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("EKEventStore")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSources:"), purego.SliceToNSArray(sources, func(_v *Source) objc.ID { return objref.IDOf(_v) }))
 	return eventStoreAdopt(_id)
 }
 
-// Locates an event source with the specified identifier.
+// SourceWithIdentifier locates an event source with the specified identifier.
 func (x *EventStore) SourceWithIdentifier(identifier string) *Source {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceWithIdentifier:"), purego.NSString(identifier))
 	return SourceFromID(_r)
 }
 
-// Identifies the calendars that support a given entity type, such as reminders or events.
+// CalendarsForEntityType identifies the calendars that support a given entity type, such as reminders or events.
 func (x *EventStore) CalendarsForEntityType(entityType EntityType) []*Calendar {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendarsForEntityType:"), entityType)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Calendar { return CalendarFromID(_id) })
 }
 
-// Identifies the default calendar for adding reminders to, as specified by user settings.
+// DefaultCalendarForNewReminders identifies the default calendar for adding reminders to, as specified by user settings.
 func (x *EventStore) DefaultCalendarForNewReminders() *Calendar {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultCalendarForNewReminders"))
 	return CalendarFromID(_r)
 }
 
-// Locates a calendar with the specified identifier.
+// CalendarWithIdentifier locates a calendar with the specified identifier.
 func (x *EventStore) CalendarWithIdentifier(identifier string) *Calendar {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendarWithIdentifier:"), purego.NSString(identifier))
 	return CalendarFromID(_r)
 }
 
-// Saves a calendar to the event store by either committing or batching the changes.
+// SaveCalendarCommit saves a calendar to the event store by either committing or batching the changes.
 func (x *EventStore) SaveCalendarCommit(calendar *Calendar, commit bool) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("saveCalendar:commit:error:"), objref.IDOf(calendar), commit, unsafe.Pointer(&_nsErr))
@@ -118,7 +122,7 @@ func (x *EventStore) SaveCalendarCommit(calendar *Calendar, commit bool) error {
 	return nil
 }
 
-// Removes a calendar from the event store by either committing or batching the changes.
+// RemoveCalendarCommit removes a calendar from the event store by either committing or batching the changes.
 func (x *EventStore) RemoveCalendarCommit(calendar *Calendar, commit bool) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeCalendar:commit:error:"), objref.IDOf(calendar), commit, unsafe.Pointer(&_nsErr))
@@ -128,19 +132,19 @@ func (x *EventStore) RemoveCalendarCommit(calendar *Calendar, commit bool) error
 	return nil
 }
 
-// Locates a reminder or the first occurrence of an event with the specified identifier.
+// CalendarItemWithIdentifier locates a reminder or the first occurrence of an event with the specified identifier.
 func (x *EventStore) CalendarItemWithIdentifier(identifier string) *CalendarItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendarItemWithIdentifier:"), purego.NSString(identifier))
 	return CalendarItemFromID(_r)
 }
 
-// Locates all reminders or the first occurrences of all events with the specified external identifier.
+// CalendarItemsWithExternalIdentifier locates all reminders or the first occurrences of all events with the specified external identifier.
 func (x *EventStore) CalendarItemsWithExternalIdentifier(externalIdentifier string) []*CalendarItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendarItemsWithExternalIdentifier:"), purego.NSString(externalIdentifier))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *CalendarItem { return CalendarItemFromID(_id) })
 }
 
-// Saves changes to an event permanently.
+// SaveEventSpan saves changes to an event permanently.
 func (x *EventStore) SaveEventSpan(event *Event, span Span) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("saveEvent:span:error:"), objref.IDOf(event), span, unsafe.Pointer(&_nsErr))
@@ -150,7 +154,7 @@ func (x *EventStore) SaveEventSpan(event *Event, span Span) error {
 	return nil
 }
 
-// Removes an event from the event store.
+// RemoveEventSpan removes an event from the event store.
 func (x *EventStore) RemoveEventSpan(event *Event, span Span) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeEvent:span:error:"), objref.IDOf(event), span, unsafe.Pointer(&_nsErr))
@@ -160,7 +164,7 @@ func (x *EventStore) RemoveEventSpan(event *Event, span Span) error {
 	return nil
 }
 
-// Saves an event or recurring events to the event store by either committing or batching the changes.
+// SaveEventSpanCommit saves an event or recurring events to the event store by either committing or batching the changes.
 func (x *EventStore) SaveEventSpanCommit(event *Event, span Span, commit bool) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("saveEvent:span:commit:error:"), objref.IDOf(event), span, commit, unsafe.Pointer(&_nsErr))
@@ -170,7 +174,7 @@ func (x *EventStore) SaveEventSpanCommit(event *Event, span Span, commit bool) e
 	return nil
 }
 
-// Removes an event or recurring events from the event store by either committing or batching the changes.
+// RemoveEventSpanCommit removes an event or recurring events from the event store by either committing or batching the changes.
 func (x *EventStore) RemoveEventSpanCommit(event *Event, span Span, commit bool) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeEvent:span:commit:error:"), objref.IDOf(event), span, commit, unsafe.Pointer(&_nsErr))
@@ -180,25 +184,25 @@ func (x *EventStore) RemoveEventSpanCommit(event *Event, span Span, commit bool)
 	return nil
 }
 
-// Locates the first occurrence of an event with a given identifier.
+// EventWithIdentifier locates the first occurrence of an event with a given identifier.
 func (x *EventStore) EventWithIdentifier(identifier string) *Event {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eventWithIdentifier:"), purego.NSString(identifier))
 	return EventFromID(_r)
 }
 
-// Finds all events that match a given predicate.
+// EventsMatchingPredicate finds all events that match a given predicate.
 func (x *EventStore) EventsMatchingPredicate(predicate obj.Object) []*Event {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eventsMatchingPredicate:"), objref.IDOf(predicate))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Event { return EventFromID(_id) })
 }
 
-// Creates a predicate to identify events that occur within a given date range.
+// PredicateForEventsWithStartDateEndDateCalendars creates a predicate to identify events that occur within a given date range.
 func (x *EventStore) PredicateForEventsWithStartDateEndDateCalendars(startDate obj.Object, endDate obj.Object, calendars []*Calendar) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicateForEventsWithStartDate:endDate:calendars:"), objref.IDOf(startDate), objref.IDOf(endDate), purego.SliceToNSArray(calendars, func(_v *Calendar) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
-// Saves changes to a reminder by either committing or batching the changes.
+// SaveReminderCommit saves changes to a reminder by either committing or batching the changes.
 func (x *EventStore) SaveReminderCommit(reminder *Reminder, commit bool) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("saveReminder:commit:error:"), objref.IDOf(reminder), commit, unsafe.Pointer(&_nsErr))
@@ -208,7 +212,7 @@ func (x *EventStore) SaveReminderCommit(reminder *Reminder, commit bool) error {
 	return nil
 }
 
-// Removes a reminder from the event store by either committing or batching the changes.
+// RemoveReminderCommit removes a reminder from the event store by either committing or batching the changes.
 func (x *EventStore) RemoveReminderCommit(reminder *Reminder, commit bool) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeReminder:commit:error:"), objref.IDOf(reminder), commit, unsafe.Pointer(&_nsErr))
@@ -218,36 +222,36 @@ func (x *EventStore) RemoveReminderCommit(reminder *Reminder, commit bool) error
 	return nil
 }
 
-// Fetches reminders that match a given predicate.
+// FetchRemindersMatchingPredicateCompletion fetches reminders that match a given predicate.
 func (x *EventStore) FetchRemindersMatchingPredicateCompletion(predicate obj.Object, completion func(obj.Object)) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchRemindersMatchingPredicate:completion:"), objref.IDOf(predicate), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completion(obj.Wrap(_b0)) }))
 	return obj.Wrap(_r)
 }
 
-// Cancels the request to fetch reminders.
+// CancelFetchRequest cancels the request to fetch reminders.
 func (x *EventStore) CancelFetchRequest(fetchIdentifier obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelFetchRequest:"), objref.IDOf(fetchIdentifier))
 }
 
-// Creates a predicate to identify all reminders in a collection of calendars.
+// PredicateForRemindersInCalendars creates a predicate to identify all reminders in a collection of calendars.
 func (x *EventStore) PredicateForRemindersInCalendars(calendars []*Calendar) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicateForRemindersInCalendars:"), purego.SliceToNSArray(calendars, func(_v *Calendar) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
-// Creates a predicate to identify all incomplete reminders that occur within a given date range.
+// PredicateForIncompleteRemindersWithDueDateStartingEndingCalendars creates a predicate to identify all incomplete reminders that occur within a given date range.
 func (x *EventStore) PredicateForIncompleteRemindersWithDueDateStartingEndingCalendars(startDate obj.Object, endDate obj.Object, calendars []*Calendar) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicateForIncompleteRemindersWithDueDateStarting:ending:calendars:"), objref.IDOf(startDate), objref.IDOf(endDate), purego.SliceToNSArray(calendars, func(_v *Calendar) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
-// Creates a predicate to identify all completed reminders that occur within a given date range.
+// PredicateForCompletedRemindersWithCompletionDateStartingEndingCalendars creates a predicate to identify all completed reminders that occur within a given date range.
 func (x *EventStore) PredicateForCompletedRemindersWithCompletionDateStartingEndingCalendars(startDate obj.Object, endDate obj.Object, calendars []*Calendar) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicateForCompletedRemindersWithCompletionDateStarting:ending:calendars:"), objref.IDOf(startDate), objref.IDOf(endDate), purego.SliceToNSArray(calendars, func(_v *Calendar) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
-// Commits all unsaved changes to the event store.
+// Commit commits all unsaved changes to the event store.
 //
 // Commit returns an error if the operation did not succeed.
 func (x *EventStore) Commit() error {
@@ -259,17 +263,17 @@ func (x *EventStore) Commit() error {
 	return nil
 }
 
-// Reverts the event store to its saved state.
+// Reset reverts the event store to its saved state.
 func (x *EventStore) Reset() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
-// Pulls new data from remote sources, if necessary.
+// RefreshSourcesIfNecessary pulls new data from remote sources, if necessary.
 func (x *EventStore) RefreshSourcesIfNecessary() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("refreshSourcesIfNecessary"))
 }
 
-// Returns a unique identifier string representing this calendar store.
+// EventStoreIdentifier returns a unique identifier string representing this calendar store.
 func (x *EventStore) EventStoreIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eventStoreIdentifier"))
 	if _r == 0 {
@@ -278,7 +282,7 @@ func (x *EventStore) EventStoreIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Returns an unordered array of sources for all available delegates.
+// DelegateSources returns an unordered array of sources for all available delegates.
 //
 // DelegateSources returns the collection as a Go slice.
 func (x *EventStore) DelegateSources() []*Source {
@@ -286,7 +290,7 @@ func (x *EventStore) DelegateSources() []*Source {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Source { return SourceFromID(_id) })
 }
 
-// Returns an unordered array of sources.
+// Sources returns an unordered array of sources.
 //
 // Sources returns the collection as a Go slice.
 func (x *EventStore) Sources() []*Source {
@@ -294,7 +298,7 @@ func (x *EventStore) Sources() []*Source {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Source { return SourceFromID(_id) })
 }
 
-// Returns the calendar that events should be added to by default. This may be nil if there is no default calendar for new events.
+// DefaultCalendarForNewEvents returns the calendar that events should be added to by default. This may be nil if there is no default calendar for new events.
 func (x *EventStore) DefaultCalendarForNewEvents() *Calendar {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultCalendarForNewEvents"))
 	return CalendarFromID(_r)

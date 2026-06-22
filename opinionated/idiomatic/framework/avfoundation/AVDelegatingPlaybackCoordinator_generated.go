@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A playback coordinator subclass that coordinates the playback of custom player objects in a connected group.
-//
 // DelegatingPlaybackCoordinator is an idiomatic wrapper over the Objective-C class AVDelegatingPlaybackCoordinator.
+//
+// It embeds [PlaybackCoordinator], promoting that type's methods.
+//
+// A playback coordinator subclass that coordinates the playback of custom player objects in a connected group.
 type DelegatingPlaybackCoordinator struct {
-	objref.Handle
+	PlaybackCoordinator
 }
 
 // DelegatingPlaybackCoordinatorFromID adopts an existing Objective-C object as a DelegatingPlaybackCoordinator
@@ -25,7 +26,8 @@ func DelegatingPlaybackCoordinatorFromID(id objc.ID) *DelegatingPlaybackCoordina
 	if id == 0 {
 		return nil
 	}
-	x := &DelegatingPlaybackCoordinator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DelegatingPlaybackCoordinator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func delegatingPlaybackCoordinatorAdopt(id objc.ID) *DelegatingPlaybackCoordinat
 	if id == 0 {
 		return nil
 	}
-	x := &DelegatingPlaybackCoordinator{Handle: objref.Wrap(id)}
+	x := &DelegatingPlaybackCoordinator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DelegatingPlaybackCoordinator) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DelegatingPlaybackCoordinator) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DelegatingPlaybackCoordinator) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDelegatingPlaybackCoordinator creates a new DelegatingPlaybackCoordinator.
@@ -64,39 +52,35 @@ func NewDelegatingPlaybackCoordinator() *DelegatingPlaybackCoordinator {
 	return delegatingPlaybackCoordinatorAdopt(_id)
 }
 
-// The reasons that cause a coordinator to suspend playback.
-//
-// WithSuspensionReasonsThatTriggerWaiting sets the collection and returns the receiver so calls can be chained.
+// WithSuspensionReasonsThatTriggerWaiting the reasons that cause a coordinator to suspend playback.
 func (x *DelegatingPlaybackCoordinator) WithSuspensionReasonsThatTriggerWaiting(items ...obj.Object) *DelegatingPlaybackCoordinator {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionReasonsThatTriggerWaiting:"), _arr)
 	return x
 }
 
-// A Boolean value that indicates whether participants mirror the originator’s stop time when they pause.
-//
-// WithPauseSnapsToMediaTimeOfOriginator sets pauseSnapsToMediaTimeOfOriginator and returns the receiver so calls can be chained.
+// WithPauseSnapsToMediaTimeOfOriginator a Boolean value that indicates whether participants mirror the originator’s stop time when they pause.
 func (x *DelegatingPlaybackCoordinator) WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *DelegatingPlaybackCoordinator {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPauseSnapsToMediaTimeOfOriginator:"), pauseSnapsToMediaTimeOfOriginator)
 	return x
 }
 
-// Coordinates a rate change across all participants, waiting for others to become ready, if necessary.
+// CoordinateRateChangeToRateOptions coordinates a rate change across all participants, waiting for others to become ready, if necessary.
 func (x *DelegatingPlaybackCoordinator) CoordinateRateChangeToRateOptions(rate float32, options DelegatingPlaybackCoordinatorRateChangeOptions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coordinateRateChangeToRate:options:"), rate, options)
 }
 
-// Tells the coordinator to transition to a new item.
+// TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase tells the coordinator to transition to a new item.
 func (x *DelegatingPlaybackCoordinator) TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase(itemIdentifier string, snapshotTimebase obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitionToItemWithIdentifier:proposingInitialTimingBasedOnTimebase:"), purego.NSString(itemIdentifier), objref.IDOf(snapshotTimebase))
 }
 
-// Tells the coordinator to reissue current play state commands to synchronize the current item to the state of other participants.
+// ReapplyCurrentItemStateToPlaybackControlDelegate tells the coordinator to reissue current play state commands to synchronize the current item to the state of other participants.
 func (x *DelegatingPlaybackCoordinator) ReapplyCurrentItemStateToPlaybackControlDelegate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reapplyCurrentItemStateToPlaybackControlDelegate"))
 }
 
-// The item identifier of the current item. Previously set by a call to transitionToItemWithIdentifier:proposingInitialTimingBasedOnTimebase:
+// CurrentItemIdentifier the item identifier of the current item. Previously set by a call to transitionToItemWithIdentifier:proposingInitialTimingBasedOnTimebase:
 func (x *DelegatingPlaybackCoordinator) CurrentItemIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentItemIdentifier"))
 	if _r == 0 {
@@ -117,3 +101,5 @@ type DelegatingPlaybackCoordinatorable interface {
 }
 
 var _ DelegatingPlaybackCoordinatorable = (*DelegatingPlaybackCoordinator)(nil)
+
+var _ PlaybackCoordinatorProvider = (*DelegatingPlaybackCoordinator)(nil)

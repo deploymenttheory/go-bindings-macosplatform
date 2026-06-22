@@ -6,17 +6,20 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a text table as a whole.
-//
 // TextTable is an idiomatic wrapper over the Objective-C class NSTextTable.
+//
+// It embeds [TextBlock], promoting that type's methods.
+//
+// An object that represents a text table as a whole.
 type TextTable struct {
-	objref.Handle
+	TextBlock
 }
 
 // TextTableFromID adopts an existing Objective-C object as a TextTable
@@ -25,7 +28,8 @@ func TextTableFromID(id objc.ID) *TextTable {
 	if id == 0 {
 		return nil
 	}
-	x := &TextTable{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextTable{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func textTableAdopt(id objc.ID) *TextTable {
 	if id == 0 {
 		return nil
 	}
-	x := &TextTable{Handle: objref.Wrap(id)}
+	x := &TextTable{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *TextTable) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextTable) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextTable) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewTextTable creates a new TextTable.
@@ -64,86 +54,99 @@ func NewTextTable() *TextTable {
 	return textTableAdopt(_id)
 }
 
-// The number of columns in the text table.
-//
-// WithNumberOfColumns sets numberOfColumns and returns the receiver so calls can be chained.
+// WithNumberOfColumns the number of columns in the text table.
 func (x *TextTable) WithNumberOfColumns(numberOfColumns int) *TextTable {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfColumns:"), numberOfColumns)
 	return x
 }
 
-// The text table layout algorithm.
-//
-// WithLayoutAlgorithm sets layoutAlgorithm and returns the receiver so calls can be chained.
+// WithLayoutAlgorithm the text table layout algorithm.
 func (x *TextTable) WithLayoutAlgorithm(layoutAlgorithm TextTableLayoutAlgorithm) *TextTable {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutAlgorithm:"), layoutAlgorithm)
 	return x
 }
 
-// A Boolean value indicating whether the text table borders are collapsible.
-//
-// WithCollapsesBorders sets collapsesBorders and returns the receiver so calls can be chained.
+// WithCollapsesBorders a Boolean value indicating whether the text table borders are collapsible.
 func (x *TextTable) WithCollapsesBorders(collapsesBorders bool) *TextTable {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapsesBorders:"), collapsesBorders)
 	return x
 }
 
-// A Boolean value indicating whether the text table hides empty cells.
-//
-// WithHidesEmptyCells sets hidesEmptyCells and returns the receiver so calls can be chained.
+// WithHidesEmptyCells a Boolean value indicating whether the text table hides empty cells.
 func (x *TextTable) WithHidesEmptyCells(hidesEmptyCells bool) *TextTable {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidesEmptyCells:"), hidesEmptyCells)
 	return x
 }
 
-// The vertical alignment of the text block.
-//
-// WithVerticalAlignment sets verticalAlignment and returns the receiver so calls can be chained.
+// WithVerticalAlignment the vertical alignment of the text block.
 func (x *TextTable) WithVerticalAlignment(verticalAlignment TextBlockVerticalAlignment) *TextTable {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalAlignment:"), verticalAlignment)
 	return x
 }
 
-// The background color of the text block.
-//
-// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+// WithBackgroundColor the background color of the text block.
 func (x *TextTable) WithBackgroundColor(backgroundColor *Color) *TextTable {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
+// RectForBlockLayoutAtPointInRectTextContainerCharacterRange returns the rectangle within which glyphs should be laid out for a text table block.
+func (x *TextTable) RectForBlockLayoutAtPointInRectTextContainerCharacterRange(block *TextTableBlock, startingPoint corefoundation.CGPoint, rect corefoundation.CGRect, textContainer *TextContainer, charRange foundation.NSRange) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rectForBlock:layoutAtPoint:inRect:textContainer:characterRange:"), objref.IDOf(block), startingPoint, rect, objref.IDOf(textContainer), charRange)
+	return _r
+}
+
+// BoundsRectForBlockContentRectInRectTextContainerCharacterRange returns the rectangle the text table block actually occupies, including padding, borders, and margins.
+func (x *TextTable) BoundsRectForBlockContentRectInRectTextContainerCharacterRange(block *TextTableBlock, contentRect corefoundation.CGRect, rect corefoundation.CGRect, textContainer *TextContainer, charRange foundation.NSRange) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("boundsRectForBlock:contentRect:inRect:textContainer:characterRange:"), objref.IDOf(block), contentRect, rect, objref.IDOf(textContainer), charRange)
+	return _r
+}
+
+// DrawBackgroundForBlockWithFrameInViewCharacterRangeLayoutManager draws any colors and other decorations for a text table block.
+func (x *TextTable) DrawBackgroundForBlockWithFrameInViewCharacterRangeLayoutManager(block *TextTableBlock, frameRect corefoundation.CGRect, controlView *View, charRange foundation.NSRange, layoutManager *LayoutManager) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawBackgroundForBlock:withFrame:inView:characterRange:layoutManager:"), objref.IDOf(block), frameRect, objref.IDOf(controlView), charRange, objref.IDOf(layoutManager))
+}
+
+// NumberOfColumns wraps the corresponding Objective-C method.
 func (x *TextTable) NumberOfColumns() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfColumns"))
 	return _r
 }
 
+// SetNumberOfColumns wraps the corresponding Objective-C method.
 func (x *TextTable) SetNumberOfColumns(numberOfColumns int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfColumns:"), numberOfColumns)
 }
 
+// LayoutAlgorithm wraps the corresponding Objective-C method.
 func (x *TextTable) LayoutAlgorithm() TextTableLayoutAlgorithm {
 	_r := objc.Send[TextTableLayoutAlgorithm](objref.IDOf(x), objc.RegisterName("layoutAlgorithm"))
 	return _r
 }
 
+// SetLayoutAlgorithm wraps the corresponding Objective-C method.
 func (x *TextTable) SetLayoutAlgorithm(layoutAlgorithm TextTableLayoutAlgorithm) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutAlgorithm:"), layoutAlgorithm)
 }
 
+// CollapsesBorders wraps the corresponding Objective-C method.
 func (x *TextTable) CollapsesBorders() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("collapsesBorders"))
 	return _r
 }
 
+// SetCollapsesBorders wraps the corresponding Objective-C method.
 func (x *TextTable) SetCollapsesBorders(collapsesBorders bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapsesBorders:"), collapsesBorders)
 }
 
+// HidesEmptyCells wraps the corresponding Objective-C method.
 func (x *TextTable) HidesEmptyCells() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hidesEmptyCells"))
 	return _r
 }
 
+// SetHidesEmptyCells wraps the corresponding Objective-C method.
 func (x *TextTable) SetHidesEmptyCells(hidesEmptyCells bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidesEmptyCells:"), hidesEmptyCells)
 }
@@ -157,6 +160,9 @@ type TextTableable interface {
 	WithHidesEmptyCells(hidesEmptyCells bool) *TextTable
 	WithVerticalAlignment(verticalAlignment TextBlockVerticalAlignment) *TextTable
 	WithBackgroundColor(backgroundColor *Color) *TextTable
+	RectForBlockLayoutAtPointInRectTextContainerCharacterRange(block *TextTableBlock, startingPoint corefoundation.CGPoint, rect corefoundation.CGRect, textContainer *TextContainer, charRange foundation.NSRange) corefoundation.CGRect
+	BoundsRectForBlockContentRectInRectTextContainerCharacterRange(block *TextTableBlock, contentRect corefoundation.CGRect, rect corefoundation.CGRect, textContainer *TextContainer, charRange foundation.NSRange) corefoundation.CGRect
+	DrawBackgroundForBlockWithFrameInViewCharacterRangeLayoutManager(block *TextTableBlock, frameRect corefoundation.CGRect, controlView *View, charRange foundation.NSRange, layoutManager *LayoutManager)
 	NumberOfColumns() int
 	SetNumberOfColumns(numberOfColumns int)
 	LayoutAlgorithm() TextTableLayoutAlgorithm
@@ -168,3 +174,5 @@ type TextTableable interface {
 }
 
 var _ TextTableable = (*TextTable)(nil)
+
+var _ TextBlockProvider = (*TextTable)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A fetch result object that encompasses the response from an executed asynchronous fetch request.
-//
 // AsynchronousFetchResult is an idiomatic wrapper over the Objective-C class NSAsynchronousFetchResult.
+//
+// It embeds [PersistentStoreAsynchronousResult], promoting that type's methods.
+//
+// A fetch result object that encompasses the response from an executed asynchronous fetch request.
 type AsynchronousFetchResult struct {
-	objref.Handle
+	PersistentStoreAsynchronousResult
 }
 
 // AsynchronousFetchResultFromID adopts an existing Objective-C object as a AsynchronousFetchResult
@@ -25,7 +26,8 @@ func AsynchronousFetchResultFromID(id objc.ID) *AsynchronousFetchResult {
 	if id == 0 {
 		return nil
 	}
-	x := &AsynchronousFetchResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AsynchronousFetchResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func asynchronousFetchResultAdopt(id objc.ID) *AsynchronousFetchResult {
 	if id == 0 {
 		return nil
 	}
-	x := &AsynchronousFetchResult{Handle: objref.Wrap(id)}
+	x := &AsynchronousFetchResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AsynchronousFetchResult) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AsynchronousFetchResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AsynchronousFetchResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAsynchronousFetchResult creates a new AsynchronousFetchResult.
@@ -64,11 +52,13 @@ func NewAsynchronousFetchResult() *AsynchronousFetchResult {
 	return asynchronousFetchResultAdopt(_id)
 }
 
+// FetchRequest wraps the corresponding Objective-C method.
 func (x *AsynchronousFetchResult) FetchRequest() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)
 }
 
+// FinalResult wraps the corresponding Objective-C method.
 func (x *AsynchronousFetchResult) FinalResult() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finalResult"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
@@ -82,3 +72,7 @@ type AsynchronousFetchResultable interface {
 }
 
 var _ AsynchronousFetchResultable = (*AsynchronousFetchResult)(nil)
+
+var _ PersistentStoreAsynchronousResultProvider = (*AsynchronousFetchResult)(nil)
+
+var _ PersistentStoreResultProvider = (*AsynchronousFetchResult)(nil)

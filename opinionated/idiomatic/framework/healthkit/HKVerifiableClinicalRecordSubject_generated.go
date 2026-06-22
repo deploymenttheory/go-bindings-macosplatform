@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The subject associated with a signed clinical record.
-//
 // VerifiableClinicalRecordSubject is an idiomatic wrapper over the Objective-C class HKVerifiableClinicalRecordSubject.
+//
+// The subject associated with a signed clinical record.
 type VerifiableClinicalRecordSubject struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VerifiableClinicalRecordSubjectFromID(id objc.ID) *VerifiableClinicalRecord
 	if id == 0 {
 		return nil
 	}
-	x := &VerifiableClinicalRecordSubject{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VerifiableClinicalRecordSubject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func verifiableClinicalRecordSubjectAdopt(id objc.ID) *VerifiableClinicalRecordS
 	if id == 0 {
 		return nil
 	}
-	x := &VerifiableClinicalRecordSubject{Handle: objref.Wrap(id)}
+	x := &VerifiableClinicalRecordSubject{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *VerifiableClinicalRecordSubject) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VerifiableClinicalRecordSubject) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVerifiableClinicalRecordSubject creates a new VerifiableClinicalRecordSubject.
 func NewVerifiableClinicalRecordSubject() *VerifiableClinicalRecordSubject {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKVerifiableClinicalRecordSubject")), objc.RegisterName("new"))
 	return verifiableClinicalRecordSubjectAdopt(_id)
 }
 
-// The subject's full name.
+// FullName the subject's full name.
 func (x *VerifiableClinicalRecordSubject) FullName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullName"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *VerifiableClinicalRecordSubject) FullName() string {
 	return purego.GoString(_r)
 }
 
-// The subject's date of birth components.
+// DateOfBirthComponents the subject's date of birth components.
 func (x *VerifiableClinicalRecordSubject) DateOfBirthComponents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateOfBirthComponents"))
 	return obj.Wrap(_r)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An OBEX Session with a Bluetooth RFCOMM channel as the transport.
-//
 // IOBluetoothOBEXSession is an idiomatic wrapper over the Objective-C class IOBluetoothOBEXSession.
+//
+// It embeds [OBEXSession], promoting that type's methods.
+//
+// An OBEX Session with a Bluetooth RFCOMM channel as the transport.
 type IOBluetoothOBEXSession struct {
-	objref.Handle
+	OBEXSession
 }
 
 // IOBluetoothOBEXSessionFromID adopts an existing Objective-C object as a IOBluetoothOBEXSession
@@ -25,7 +26,8 @@ func IOBluetoothOBEXSessionFromID(id objc.ID) *IOBluetoothOBEXSession {
 	if id == 0 {
 		return nil
 	}
-	x := &IOBluetoothOBEXSession{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IOBluetoothOBEXSession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,68 +40,50 @@ func iOBluetoothOBEXSessionAdopt(id objc.ID) *IOBluetoothOBEXSession {
 	if id == 0 {
 		return nil
 	}
-	x := &IOBluetoothOBEXSession{Handle: objref.Wrap(id)}
+	x := &IOBluetoothOBEXSession{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *IOBluetoothOBEXSession) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IOBluetoothOBEXSession) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IOBluetoothOBEXSession) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a Bluetooth-based OBEX Session using an SDP service record.
-//
-// NewIOBluetoothOBEXSessionWithSDPServiceRecord creates a new IOBluetoothOBEXSession.
+// NewIOBluetoothOBEXSessionWithSDPServiceRecord initializes a Bluetooth-based OBEX Session using an SDP service record.
 func NewIOBluetoothOBEXSessionWithSDPServiceRecord(inSDPServiceRecord *IOBluetoothSDPServiceRecord) *IOBluetoothOBEXSession {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IOBluetoothOBEXSession")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSDPServiceRecord:"), objref.IDOf(inSDPServiceRecord))
 	return iOBluetoothOBEXSessionAdopt(_id)
 }
 
-// Initializes a Bluetooth-based OBEX Session using a Bluetooth device.
-//
-// NewIOBluetoothOBEXSessionWithDeviceChannelID creates a new IOBluetoothOBEXSession.
+// NewIOBluetoothOBEXSessionWithDeviceChannelID initializes a Bluetooth-based OBEX Session using a Bluetooth device.
 func NewIOBluetoothOBEXSessionWithDeviceChannelID(inDevice *IOBluetoothDevice, inChannelID uint8) *IOBluetoothOBEXSession {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IOBluetoothOBEXSession")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:channelID:"), objref.IDOf(inDevice), inChannelID)
 	return iOBluetoothOBEXSessionAdopt(_id)
 }
 
-// Get the Bluetooth RFCOMM channel being used by the session object.
+// GetRFCOMMChannel get the Bluetooth RFCOMM channel being used by the session object.
 func (x *IOBluetoothOBEXSession) GetRFCOMMChannel() *IOBluetoothRFCOMMChannel {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getRFCOMMChannel"))
 	return IOBluetoothRFCOMMChannelFromID(_r)
 }
 
-// Get the Bluetooth Device being used by the session object.
+// GetDevice get the Bluetooth Device being used by the session object.
 func (x *IOBluetoothOBEXSession) GetDevice() *IOBluetoothDevice {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getDevice"))
 	return IOBluetoothDeviceFromID(_r)
 }
 
-// Sends the next block of data through the rfcomm channel.
+// SendBufferTroughChannel sends the next block of data through the rfcomm channel.
 func (x *IOBluetoothOBEXSession) SendBufferTroughChannel() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sendBufferTroughChannel"))
 	return _r
 }
 
-// If the transmission was stopped due to the lack of buffers this call restarts it.
+// RestartTransmission if the transmission was stopped due to the lack of buffers this call restarts it.
 func (x *IOBluetoothOBEXSession) RestartTransmission() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restartTransmission"))
 }
 
-// Tells whether the target device is a Mac by checking its service record.
+// IsSessionTargetAMac tells whether the target device is a Mac by checking its service record.
 func (x *IOBluetoothOBEXSession) IsSessionTargetAMac() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSessionTargetAMac"))
 	return _r
@@ -116,3 +100,5 @@ type IOBluetoothOBEXSessionable interface {
 }
 
 var _ IOBluetoothOBEXSessionable = (*IOBluetoothOBEXSession)(nil)
+
+var _ OBEXSessionProvider = (*IOBluetoothOBEXSession)(nil)

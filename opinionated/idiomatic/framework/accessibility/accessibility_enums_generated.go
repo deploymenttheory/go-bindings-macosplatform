@@ -20,6 +20,8 @@ const (
 	ChartContentDirectionRadialCounterClockwise ChartDescriptorContentDirection = 5
 )
 
+// String returns the ChartDescriptorContentDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ChartDescriptorContentDirection) String() string {
 	switch e {
 	case ChartContentDirectionLeftToRight:
@@ -47,6 +49,8 @@ const (
 	CustomContentImportanceHigh    CustomContentImportance = 1
 )
 
+// String returns the CustomContentImportance constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CustomContentImportance) String() string {
 	switch e {
 	case CustomContentImportanceDefault:
@@ -67,6 +71,8 @@ const (
 	ScaleTypeLn     NumericDataAxisDescriptorScale = 2
 )
 
+// String returns the NumericDataAxisDescriptorScale constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NumericDataAxisDescriptorScale) String() string {
 	switch e {
 	case ScaleTypeLinear:
@@ -91,6 +97,8 @@ const (
 	SettingsFeatureCaptionStyles                        SettingsFeature = 6
 )
 
+// String returns the SettingsFeature constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SettingsFeature) String() string {
 	switch e {
 	case SettingsFeaturePersonalVoiceAllowAppsToRequestToUse:

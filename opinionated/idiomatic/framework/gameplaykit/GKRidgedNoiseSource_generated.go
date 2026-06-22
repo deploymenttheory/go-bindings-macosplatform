@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A procedural noise generator whose output is a type of multifractal coherent noise with sharply defined features.
-//
 // RidgedNoiseSource is an idiomatic wrapper over the Objective-C class GKRidgedNoiseSource.
+//
+// It embeds [CoherentNoiseSource], promoting that type's methods.
+//
+// A procedural noise generator whose output is a type of multifractal coherent noise with sharply defined features.
 type RidgedNoiseSource struct {
-	objref.Handle
+	CoherentNoiseSource
 }
 
 // RidgedNoiseSourceFromID adopts an existing Objective-C object as a RidgedNoiseSource
@@ -25,7 +26,8 @@ func RidgedNoiseSourceFromID(id objc.ID) *RidgedNoiseSource {
 	if id == 0 {
 		return nil
 	}
-	x := &RidgedNoiseSource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RidgedNoiseSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,62 +40,38 @@ func ridgedNoiseSourceAdopt(id objc.ID) *RidgedNoiseSource {
 	if id == 0 {
 		return nil
 	}
-	x := &RidgedNoiseSource{Handle: objref.Wrap(id)}
+	x := &RidgedNoiseSource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *RidgedNoiseSource) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RidgedNoiseSource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RidgedNoiseSource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a ridged noise source with the specified parameters.
-//
-// NewRidgedNoiseSourceWithFrequencyOctaveCountLacunaritySeed creates a new RidgedNoiseSource.
+// NewRidgedNoiseSourceWithFrequencyOctaveCountLacunaritySeed initializes a ridged noise source with the specified parameters.
 func NewRidgedNoiseSourceWithFrequencyOctaveCountLacunaritySeed(frequency float64, octaveCount int, lacunarity float64, seed int32) *RidgedNoiseSource {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKRidgedNoiseSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrequency:octaveCount:lacunarity:seed:"), frequency, octaveCount, lacunarity, seed)
 	return ridgedNoiseSourceAdopt(_id)
 }
 
-// A value that determines the size and spacing of features in generated noise.
-//
-// WithFrequency sets frequency and returns the receiver so calls can be chained.
+// WithFrequency a value that determines the size and spacing of features in generated noise.
 func (x *RidgedNoiseSource) WithFrequency(frequency float64) *RidgedNoiseSource {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
 	return x
 }
 
-// The number of octaves of the underlying noise function to use for generating noise.
-//
-// WithOctaveCount sets octaveCount and returns the receiver so calls can be chained.
+// WithOctaveCount the number of octaves of the underlying noise function to use for generating noise.
 func (x *RidgedNoiseSource) WithOctaveCount(octaveCount int) *RidgedNoiseSource {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOctaveCount:"), octaveCount)
 	return x
 }
 
-// The rate at which successive octaves of the noise function increase in frequency.
-//
-// WithLacunarity sets lacunarity and returns the receiver so calls can be chained.
+// WithLacunarity the rate at which successive octaves of the noise function increase in frequency.
 func (x *RidgedNoiseSource) WithLacunarity(lacunarity float64) *RidgedNoiseSource {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLacunarity:"), lacunarity)
 	return x
 }
 
-// The value that determines the specific configuration of noise produced by the noise source.
-//
-// WithSeed sets seed and returns the receiver so calls can be chained.
+// WithSeed the value that determines the specific configuration of noise produced by the noise source.
 func (x *RidgedNoiseSource) WithSeed(seed int32) *RidgedNoiseSource {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
 	return x
@@ -109,3 +87,7 @@ type RidgedNoiseSourceable interface {
 }
 
 var _ RidgedNoiseSourceable = (*RidgedNoiseSource)(nil)
+
+var _ CoherentNoiseSourceProvider = (*RidgedNoiseSource)(nil)
+
+var _ NoiseSourceProvider = (*RidgedNoiseSource)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration that customizes the behavior for a new command queue.
-//
 // CommandQueueDescriptor is an idiomatic wrapper over the Objective-C class MTLCommandQueueDescriptor.
+//
+// A configuration that customizes the behavior for a new command queue.
 type CommandQueueDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CommandQueueDescriptorFromID(id objc.ID) *CommandQueueDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &CommandQueueDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CommandQueueDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func commandQueueDescriptorAdopt(id objc.ID) *CommandQueueDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &CommandQueueDescriptor{Handle: objref.Wrap(id)}
+	x := &CommandQueueDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *CommandQueueDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CommandQueueDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCommandQueueDescriptor creates a new CommandQueueDescriptor.
 func NewCommandQueueDescriptor() *CommandQueueDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLCommandQueueDescriptor")), objc.RegisterName("new"))
 	return commandQueueDescriptorAdopt(_id)
 }
 
-// An integer that sets the maximum number of uncompleted command buffers the queue can allow.
-//
-// WithMaxCommandBufferCount sets maxCommandBufferCount and returns the receiver so calls can be chained.
+// WithMaxCommandBufferCount an integer that sets the maximum number of uncompleted command buffers the queue can allow.
 func (x *CommandQueueDescriptor) WithMaxCommandBufferCount(maxCommandBufferCount int) *CommandQueueDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCommandBufferCount:"), maxCommandBufferCount)
 	return x
 }
 
+// MaxCommandBufferCount wraps the corresponding Objective-C method.
 func (x *CommandQueueDescriptor) MaxCommandBufferCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxCommandBufferCount"))
 	return _r
 }
 
+// SetMaxCommandBufferCount wraps the corresponding Objective-C method.
 func (x *CommandQueueDescriptor) SetMaxCommandBufferCount(maxCommandBufferCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCommandBufferCount:"), maxCommandBufferCount)
 }

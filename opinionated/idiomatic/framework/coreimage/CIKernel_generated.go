@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A GPU-based image-processing routine used to create custom Core Image filters.
-//
 // Kernel is an idiomatic wrapper over the Objective-C class CIKernel.
+//
+// Kernel is an abstract base — you do not construct it directly. Construct one of [ColorKernel], [WarpKernel] and pass it where a Kernel is accepted.
+//
+// A GPU-based image-processing routine used to create custom Core Image filters.
 type Kernel struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func KernelFromID(id objc.ID) *Kernel {
 	if id == 0 {
 		return nil
 	}
-	x := &Kernel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Kernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func kernelAdopt(id objc.ID) *Kernel {
 	if id == 0 {
 		return nil
 	}
-	x := &Kernel{Handle: objref.Wrap(id)}
+	x := &Kernel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +62,13 @@ func (x *Kernel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewKernel creates a new Kernel.
-func NewKernel() *Kernel {
-	_id := objc.Send[objc.ID](objc.ID(_class("CIKernel")), objc.RegisterName("new"))
-	return kernelAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Kernel) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *Kernel) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -79,3 +84,10 @@ type Kernelable interface {
 }
 
 var _ Kernelable = (*Kernel)(nil)
+
+// isKernel marks Kernel — and, by embedding promotion, its
+// subclasses — as a member of the Kernel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Kernel) isKernel() {}
+
+var _ KernelProvider = (*Kernel)(nil)

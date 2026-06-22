@@ -6,15 +6,16 @@ package quicklookthumbnailing
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request to generate a thumbnail for a custom file type.
-//
 // FileThumbnailRequest is an idiomatic wrapper over the Objective-C class QLFileThumbnailRequest.
+//
+// A request to generate a thumbnail for a custom file type.
 type FileThumbnailRequest struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func FileThumbnailRequestFromID(id objc.ID) *FileThumbnailRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &FileThumbnailRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FileThumbnailRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func fileThumbnailRequestAdopt(id objc.ID) *FileThumbnailRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &FileThumbnailRequest{Handle: objref.Wrap(id)}
+	x := &FileThumbnailRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +61,37 @@ func (x *FileThumbnailRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FileThumbnailRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFileThumbnailRequest creates a new FileThumbnailRequest.
 func NewFileThumbnailRequest() *FileThumbnailRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("QLFileThumbnailRequest")), objc.RegisterName("new"))
 	return fileThumbnailRequestAdopt(_id)
 }
 
-// The scale of the requested thumbnail.
+// MaximumSize the maximum size of the generated thumbnail that will be accepted. This is also the preferred size, ideally either the width or the height will match the maximumSize's width or height respectively.
+func (x *FileThumbnailRequest) MaximumSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("maximumSize"))
+	return _r
+}
+
+// MinimumSize the minimum size of the generated thumbnail that will be accepted.
+func (x *FileThumbnailRequest) MinimumSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("minimumSize"))
+	return _r
+}
+
+// Scale the scale of the requested thumbnail.
 func (x *FileThumbnailRequest) Scale() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scale"))
 	return _r
 }
 
-// The url of the file for which a thumbnail is being requested.
+// FileURL the url of the file for which a thumbnail is being requested.
 func (x *FileThumbnailRequest) FileURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileURL"))
 	return obj.Wrap(_r)
@@ -79,6 +100,8 @@ func (x *FileThumbnailRequest) FileURL() obj.Object {
 // FileThumbnailRequestable is the interface implemented by [FileThumbnailRequest], for mocking and DI.
 type FileThumbnailRequestable interface {
 	obj.Object
+	MaximumSize() corefoundation.CGSize
+	MinimumSize() corefoundation.CGSize
 	Scale() float64
 	FileURL() obj.Object
 }

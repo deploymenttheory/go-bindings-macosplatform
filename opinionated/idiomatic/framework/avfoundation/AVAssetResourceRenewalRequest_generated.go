@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that encapsulates information about a resource request from a resource loader to renew a previously issued request.
-//
 // AssetResourceRenewalRequest is an idiomatic wrapper over the Objective-C class AVAssetResourceRenewalRequest.
+//
+// It embeds [AssetResourceLoadingRequest], promoting that type's methods.
+//
+// An object that encapsulates information about a resource request from a resource loader to renew a previously issued request.
 type AssetResourceRenewalRequest struct {
-	objref.Handle
+	AssetResourceLoadingRequest
 }
 
 // AssetResourceRenewalRequestFromID adopts an existing Objective-C object as a AssetResourceRenewalRequest
@@ -25,7 +26,8 @@ func AssetResourceRenewalRequestFromID(id objc.ID) *AssetResourceRenewalRequest 
 	if id == 0 {
 		return nil
 	}
-	x := &AssetResourceRenewalRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetResourceRenewalRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func assetResourceRenewalRequestAdopt(id objc.ID) *AssetResourceRenewalRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetResourceRenewalRequest{Handle: objref.Wrap(id)}
+	x := &AssetResourceRenewalRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AssetResourceRenewalRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetResourceRenewalRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetResourceRenewalRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAssetResourceRenewalRequest creates a new AssetResourceRenewalRequest.
@@ -64,17 +52,13 @@ func NewAssetResourceRenewalRequest() *AssetResourceRenewalRequest {
 	return assetResourceRenewalRequestAdopt(_id)
 }
 
-// The URL response for the loading request.
-//
-// WithResponse sets response and returns the receiver so calls can be chained.
+// WithResponse the URL response for the loading request.
 func (x *AssetResourceRenewalRequest) WithResponse(response obj.Object) *AssetResourceRenewalRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResponse:"), objref.IDOf(response))
 	return x
 }
 
-// An URL request instance if the loading request was redirected.
-//
-// WithRedirect sets redirect and returns the receiver so calls can be chained.
+// WithRedirect an URL request instance if the loading request was redirected.
 func (x *AssetResourceRenewalRequest) WithRedirect(redirect obj.Object) *AssetResourceRenewalRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRedirect:"), objref.IDOf(redirect))
 	return x
@@ -88,3 +72,5 @@ type AssetResourceRenewalRequestable interface {
 }
 
 var _ AssetResourceRenewalRequestable = (*AssetResourceRenewalRequest)(nil)
+
+var _ AssetResourceLoadingRequestProvider = (*AssetResourceRenewalRequest)(nil)

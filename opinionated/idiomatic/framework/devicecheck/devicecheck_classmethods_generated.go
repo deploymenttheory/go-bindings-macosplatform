@@ -8,13 +8,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The shared App Attest service that you use to validate your app. Use the shared instance of the service to generate and to certify a cryptographic key, and then to assert your app’s validity using that key.
+// SharedService the shared App Attest service that you use to validate your app. Use the shared instance of the service to generate and to certify a cryptographic key, and then to assert your app’s validity using that key.
 func SharedService() *AppAttestService {
 	_r := objc.Send[objc.ID](objc.ID(_class("DCAppAttestService")), objc.RegisterName("sharedService"))
 	return AppAttestServiceFromID(_r)
 }
 
-// A representation of the device for which you want to query the two bits of data.
+// CurrentDevice a representation of the device for which you want to query the two bits of data.
 func CurrentDevice() *Device {
 	_r := objc.Send[objc.ID](objc.ID(_class("DCDevice")), objc.RegisterName("currentDevice"))
 	return DeviceFromID(_r)

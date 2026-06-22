@@ -11,4 +11,5 @@ import (
 // LibMediaEntityProvider is accepted wherever a ITLibMediaEntity (or one of its subclasses) is expected.
 type LibMediaEntityProvider interface {
 	objref.Object
+	isLibMediaEntity()
 }

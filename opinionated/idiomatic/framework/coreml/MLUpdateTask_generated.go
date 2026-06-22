@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A task that updates a model with additional training data.
-//
 // UpdateTask is an idiomatic wrapper over the Objective-C class MLUpdateTask.
+//
+// It embeds [Task], promoting that type's methods.
+//
+// A task that updates a model with additional training data.
 type UpdateTask struct {
-	objref.Handle
+	Task
 }
 
 // UpdateTaskFromID adopts an existing Objective-C object as a UpdateTask
@@ -25,7 +26,8 @@ func UpdateTaskFromID(id objc.ID) *UpdateTask {
 	if id == 0 {
 		return nil
 	}
-	x := &UpdateTask{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UpdateTask{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func updateTaskAdopt(id objc.ID) *UpdateTask {
 	if id == 0 {
 		return nil
 	}
-	x := &UpdateTask{Handle: objref.Wrap(id)}
+	x := &UpdateTask{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UpdateTask) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UpdateTask) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UpdateTask) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUpdateTask creates a new UpdateTask.
@@ -64,7 +52,7 @@ func NewUpdateTask() *UpdateTask {
 	return updateTaskAdopt(_id)
 }
 
-// Resumes a model update with updated parameter values.
+// ResumeWithParameters resumes a model update with updated parameter values.
 func (x *UpdateTask) ResumeWithParameters(updateParameters obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeWithParameters:"), objref.IDOf(updateParameters))
 }
@@ -76,3 +64,5 @@ type UpdateTaskable interface {
 }
 
 var _ UpdateTaskable = (*UpdateTask)(nil)
+
+var _ TaskProvider = (*UpdateTask)(nil)

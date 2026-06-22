@@ -6,15 +6,17 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A high-level interface for manipulating image data.
-//
 // Image is an idiomatic wrapper over the Objective-C class NSImage.
+//
+// A high-level interface for manipulating image data.
 type Image struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ImageFromID(id objc.ID) *Image {
 	if id == 0 {
 		return nil
 	}
-	x := &Image{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Image{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func imageAdopt(id objc.ID) *Image {
 	if id == 0 {
 		return nil
 	}
-	x := &Image{Handle: objref.Wrap(id)}
+	x := &Image{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,75 +62,79 @@ func (x *Image) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes and returns an image object from data in an unarchiver.
-//
-// NewImageWithCoder creates a new Image.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Image) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewImageWithSize initializes and returns an image object with the specified dimensions.
+func NewImageWithSize(size corefoundation.CGSize) *Image {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSImage")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSize:"), size)
+	return imageAdopt(_id)
+}
+
+// NewImageWithCoder initializes and returns an image object from data in an unarchiver.
 func NewImageWithCoder(coder obj.Object) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return imageAdopt(_id)
 }
 
-// Initializes and returns an image object using the provided image data.
-//
-// NewImageWithData creates a new Image.
+// NewImageWithData initializes and returns an image object using the provided image data.
 func NewImageWithData(data obj.Object) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
 	return imageAdopt(_id)
 }
 
-// Initializes and returns an image object with the contents of the specified file.
-//
-// NewImageWithContentsOfFile creates a new Image.
+// NewImageWithContentsOfFile initializes and returns an image object with the contents of the specified file.
 func NewImageWithContentsOfFile(fileName string) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfFile:"), purego.NSString(fileName))
 	return imageAdopt(_id)
 }
 
-// Initializes and returns an image object with the contents of the specified URL.
-//
-// NewImageWithContentsOfURL creates a new Image.
+// NewImageWithContentsOfURL initializes and returns an image object with the contents of the specified URL.
 func NewImageWithContentsOfURL(url string) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), rt.FileURL(url))
 	return imageAdopt(_id)
 }
 
-// Initializes and returns an image object using the specified file.
-//
-// NewImageByReferencingFile creates a new Image.
+// NewImageByReferencingFile initializes and returns an image object using the specified file.
 func NewImageByReferencingFile(fileName string) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initByReferencingFile:"), purego.NSString(fileName))
 	return imageAdopt(_id)
 }
 
-// Initializes and returns an image object using the specified URL.
-//
-// NewImageByReferencingURL creates a new Image.
+// NewImageByReferencingURL initializes and returns an image object using the specified URL.
 func NewImageByReferencingURL(url string) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initByReferencingURL:"), rt.FileURL(url))
 	return imageAdopt(_id)
 }
 
-// Initializes and returns an image object with data from the specified pasteboard.
-//
-// NewImageWithPasteboard creates a new Image.
+// NewImageWithPasteboard initializes and returns an image object with data from the specified pasteboard.
 func NewImageWithPasteboard(pasteboard *Pasteboard) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPasteboard:"), objref.IDOf(pasteboard))
 	return imageAdopt(_id)
 }
 
-// Initializes and returns an image object using the provided image data and ignoring the EXIF orientation tags.
-//
-// NewImageWithDataIgnoringOrientation creates a new Image.
+// NewImageWithDataIgnoringOrientation initializes and returns an image object using the provided image data and ignoring the EXIF orientation tags.
 func NewImageWithDataIgnoringOrientation(data obj.Object) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataIgnoringOrientation:"), objref.IDOf(data))
+	return imageAdopt(_id)
+}
+
+// NewImageWithCGImageSize creates a new image using the contents of the provided image.
+func NewImageWithCGImageSize(cgImage obj.Object, size corefoundation.CGSize) *Image {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSImage")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImage:size:"), objref.IDOf(cgImage), size)
 	return imageAdopt(_id)
 }
 
@@ -137,219 +145,298 @@ func NewImageWithIconRef(iconRef obj.Object) *Image {
 	return imageAdopt(_id)
 }
 
-// The background color for the image.
-//
-// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+// WithSize the size of the image.
+func (x *Image) WithSize(size corefoundation.CGSize) *Image {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
+	return x
+}
+
+// WithBackgroundColor the background color for the image.
 func (x *Image) WithBackgroundColor(backgroundColor *Color) *Image {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// A Boolean value that indicates whether EPS representations are preferred when no other representations match the resolution of the device.
-//
-// WithUsesEPSOnResolutionMismatch sets usesEPSOnResolutionMismatch and returns the receiver so calls can be chained.
+// WithUsesEPSOnResolutionMismatch a Boolean value that indicates whether EPS representations are preferred when no other representations match the resolution of the device.
 func (x *Image) WithUsesEPSOnResolutionMismatch(usesEPSOnResolutionMismatch bool) *Image {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesEPSOnResolutionMismatch:"), usesEPSOnResolutionMismatch)
 	return x
 }
 
-// A Boolean value that indicates whether the image prefers to choose image representations using color-matching or resolution-matching.
-//
-// WithPrefersColorMatch sets prefersColorMatch and returns the receiver so calls can be chained.
+// WithPrefersColorMatch a Boolean value that indicates whether the image prefers to choose image representations using color-matching or resolution-matching.
 func (x *Image) WithPrefersColorMatch(prefersColorMatch bool) *Image {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersColorMatch:"), prefersColorMatch)
 	return x
 }
 
-// A Boolean value that indicates whether image representations whose resolution is an integral multiple of the device resolution are a match.
-//
-// WithMatchesOnMultipleResolution sets matchesOnMultipleResolution and returns the receiver so calls can be chained.
+// WithMatchesOnMultipleResolution a Boolean value that indicates whether image representations whose resolution is an integral multiple of the device resolution are a match.
 func (x *Image) WithMatchesOnMultipleResolution(matchesOnMultipleResolution bool) *Image {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchesOnMultipleResolution:"), matchesOnMultipleResolution)
 	return x
 }
 
-// A Boolean value that indicates whether the image matches only on the best fitting axis.
-//
-// WithMatchesOnlyOnBestFittingAxis sets matchesOnlyOnBestFittingAxis and returns the receiver so calls can be chained.
+// WithMatchesOnlyOnBestFittingAxis a Boolean value that indicates whether the image matches only on the best fitting axis.
 func (x *Image) WithMatchesOnlyOnBestFittingAxis(matchesOnlyOnBestFittingAxis bool) *Image {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchesOnlyOnBestFittingAxis:"), matchesOnlyOnBestFittingAxis)
 	return x
 }
 
-// The image’s caching mode.
-//
-// WithCacheMode sets cacheMode and returns the receiver so calls can be chained.
+// WithCacheMode the image’s caching mode.
 func (x *Image) WithCacheMode(cacheMode ImageCacheMode) *Image {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCacheMode:"), cacheMode)
 	return x
 }
 
-// A Boolean value that determines whether the image represents a template image.
-//
-// WithTemplate sets template and returns the receiver so calls can be chained.
+// WithAlignmentRect a rectangle that you can use to position the image during layout.
+func (x *Image) WithAlignmentRect(alignmentRect corefoundation.CGRect) *Image {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignmentRect:"), alignmentRect)
+	return x
+}
+
+// WithTemplate a Boolean value that determines whether the image represents a template image.
 func (x *Image) WithTemplate(template bool) *Image {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemplate:"), template)
 	return x
 }
 
-// The image’s accessibility description.
-//
-// WithAccessibilityDescription sets accessibilityDescription and returns the receiver so calls can be chained.
+// WithAccessibilityDescription the image’s accessibility description.
 func (x *Image) WithAccessibilityDescription(accessibilityDescription string) *Image {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityDescription:"), purego.NSString(accessibilityDescription))
 	return x
 }
 
-// The resizing mode for the image.
-//
-// WithResizingMode sets resizingMode and returns the receiver so calls can be chained.
+// WithCapInsets the cap insets for the image.
+func (x *Image) WithCapInsets(capInsets foundation.NSEdgeInsets) *Image {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapInsets:"), capInsets)
+	return x
+}
+
+// WithResizingMode the resizing mode for the image.
 func (x *Image) WithResizingMode(resizingMode ImageResizingMode) *Image {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResizingMode:"), resizingMode)
 	return x
 }
 
-// Registers the image object under the specified name.
+// SetName registers the image object under the specified name.
 func (x *Image) SetName(string_ obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(string_))
 	return _r
 }
 
-// Returns the name associated with the image, if any.
+// Name returns the name associated with the image, if any.
 func (x *Image) Name() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	return obj.Wrap(_r)
 }
 
-// Invalidates and frees offscreen caches of all image representations.
+// DrawAtPointFromRectOperationFraction draws all or part of the image at the specified point in the current coordinate system.
+func (x *Image) DrawAtPointFromRectOperationFraction(point corefoundation.CGPoint, fromRect corefoundation.CGRect, op CompositingOperation, delta float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawAtPoint:fromRect:operation:fraction:"), point, fromRect, op, delta)
+}
+
+// DrawInRectFromRectOperationFraction draws all or part of the image in the specified rectangle in the current coordinate system.
+func (x *Image) DrawInRectFromRectOperationFraction(rect corefoundation.CGRect, fromRect corefoundation.CGRect, op CompositingOperation, delta float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawInRect:fromRect:operation:fraction:"), rect, fromRect, op, delta)
+}
+
+// DrawInRectFromRectOperationFractionRespectFlippedHints draws all or part of the image in the specified rectangle respecting the hints and the orientation of the current coordinate system.
+func (x *Image) DrawInRectFromRectOperationFractionRespectFlippedHints(dstSpacePortionRect corefoundation.CGRect, srcSpacePortionRect corefoundation.CGRect, op CompositingOperation, requestedAlpha float64, respectContextIsFlipped bool, hints obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawInRect:fromRect:operation:fraction:respectFlipped:hints:"), dstSpacePortionRect, srcSpacePortionRect, op, requestedAlpha, respectContextIsFlipped, objref.IDOf(hints))
+}
+
+// DrawRepresentationInRect draws the image using the specified image representation object.
+func (x *Image) DrawRepresentationInRect(imageRep *ImageRep, rect corefoundation.CGRect) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawRepresentation:inRect:"), objref.IDOf(imageRep), rect)
+	return _r
+}
+
+// DrawInRect draws the image in the specified rectangle.
+func (x *Image) DrawInRect(rect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawInRect:"), rect)
+}
+
+// Recache invalidates and frees offscreen caches of all image representations.
 func (x *Image) Recache() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recache"))
 }
 
-// Returns a data object that contains TIFF data with the specified compression settings for all of the image representations in the image.
+// TIFFRepresentationUsingCompressionFactor returns a data object that contains TIFF data with the specified compression settings for all of the image representations in the image.
 func (x *Image) TIFFRepresentationUsingCompressionFactor(comp TIFFCompression, factor float32) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("TIFFRepresentationUsingCompression:factor:"), comp, factor)
 	return obj.Wrap(_r)
 }
 
-// Adds an array of image representation objects to the image.
+// AddRepresentations adds an array of image representation objects to the image.
 func (x *Image) AddRepresentations(imageReps []*ImageRep) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRepresentations:"), purego.SliceToNSArray(imageReps, func(_v *ImageRep) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Adds the specified image representation object to the image.
+// AddRepresentation adds the specified image representation object to the image.
 func (x *Image) AddRepresentation(imageRep *ImageRep) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRepresentation:"), objref.IDOf(imageRep))
 }
 
-// Removes and releases the specified image representation.
+// RemoveRepresentation removes and releases the specified image representation.
 func (x *Image) RemoveRepresentation(imageRep *ImageRep) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeRepresentation:"), objref.IDOf(imageRep))
 }
 
-// Returns the recommended layer contents scale for this image.
+// BestRepresentationForRectContextHints returns the best representation of the image for the specified rectangle using the provided hints.
+func (x *Image) BestRepresentationForRectContextHints(rect corefoundation.CGRect, referenceContext *GraphicsContext, hints obj.Object) *ImageRep {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bestRepresentationForRect:context:hints:"), rect, objref.IDOf(referenceContext), objref.IDOf(hints))
+	return ImageRepFromID(_r)
+}
+
+// HitTestRectWithImageDestinationRectContextHintsFlipped returns whether the destination rectangle would intersect a non-transparent portion of the image.
+func (x *Image) HitTestRectWithImageDestinationRectContextHintsFlipped(testRectDestSpace corefoundation.CGRect, imageRectDestSpace corefoundation.CGRect, context_ *GraphicsContext, hints obj.Object, flipped bool) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hitTestRect:withImageDestinationRect:context:hints:flipped:"), testRectDestSpace, imageRectDestSpace, objref.IDOf(context_), objref.IDOf(hints), flipped)
+	return _r
+}
+
+// RecommendedLayerContentsScale returns the recommended layer contents scale for this image.
 func (x *Image) RecommendedLayerContentsScale(preferredContentsScale float64) float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("recommendedLayerContentsScale:"), preferredContentsScale)
 	return _r
 }
 
-// Returns an object that may be used as the contents of a layer.
+// LayerContentsForContentsScale returns an object that may be used as the contents of a layer.
 func (x *Image) LayerContentsForContentsScale(layerContentsScale float64) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layerContentsForContentsScale:"), layerContentsScale)
 	return obj.Wrap(_r)
 }
 
-// Creates a new symbol image with the specified configuration.
+// ImageWithSymbolConfiguration creates a new symbol image with the specified configuration.
 func (x *Image) ImageWithSymbolConfiguration(configuration *ImageSymbolConfiguration) *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageWithSymbolConfiguration:"), objref.IDOf(configuration))
 	return ImageFromID(_r)
 }
 
-// Creates and returns a new image with the specified locale.
+// ImageWithLocale creates and returns a new image with the specified locale.
 func (x *Image) ImageWithLocale(locale obj.Object) *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageWithLocale:"), objref.IDOf(locale))
 	return ImageFromID(_r)
 }
 
+// Size wraps the corresponding Objective-C method.
+func (x *Image) Size() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("size"))
+	return _r
+}
+
+// SetSize wraps the corresponding Objective-C method.
+func (x *Image) SetSize(size corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
+}
+
+// BackgroundColor wraps the corresponding Objective-C method.
 func (x *Image) BackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
 }
 
+// SetBackgroundColor wraps the corresponding Objective-C method.
 func (x *Image) SetBackgroundColor(backgroundColor *Color) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
+// UsesEPSOnResolutionMismatch wraps the corresponding Objective-C method.
 func (x *Image) UsesEPSOnResolutionMismatch() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesEPSOnResolutionMismatch"))
 	return _r
 }
 
+// SetUsesEPSOnResolutionMismatch wraps the corresponding Objective-C method.
 func (x *Image) SetUsesEPSOnResolutionMismatch(usesEPSOnResolutionMismatch bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesEPSOnResolutionMismatch:"), usesEPSOnResolutionMismatch)
 }
 
+// PrefersColorMatch wraps the corresponding Objective-C method.
 func (x *Image) PrefersColorMatch() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("prefersColorMatch"))
 	return _r
 }
 
+// SetPrefersColorMatch wraps the corresponding Objective-C method.
 func (x *Image) SetPrefersColorMatch(prefersColorMatch bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersColorMatch:"), prefersColorMatch)
 }
 
+// MatchesOnMultipleResolution wraps the corresponding Objective-C method.
 func (x *Image) MatchesOnMultipleResolution() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("matchesOnMultipleResolution"))
 	return _r
 }
 
+// SetMatchesOnMultipleResolution wraps the corresponding Objective-C method.
 func (x *Image) SetMatchesOnMultipleResolution(matchesOnMultipleResolution bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchesOnMultipleResolution:"), matchesOnMultipleResolution)
 }
 
+// MatchesOnlyOnBestFittingAxis wraps the corresponding Objective-C method.
 func (x *Image) MatchesOnlyOnBestFittingAxis() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("matchesOnlyOnBestFittingAxis"))
 	return _r
 }
 
+// SetMatchesOnlyOnBestFittingAxis wraps the corresponding Objective-C method.
 func (x *Image) SetMatchesOnlyOnBestFittingAxis(matchesOnlyOnBestFittingAxis bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchesOnlyOnBestFittingAxis:"), matchesOnlyOnBestFittingAxis)
 }
 
+// TIFFRepresentation wraps the corresponding Objective-C method.
 func (x *Image) TIFFRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("TIFFRepresentation"))
 	return obj.Wrap(_r)
 }
 
+// Representations wraps the corresponding Objective-C method.
+//
 // Representations returns the collection as a Go slice.
 func (x *Image) Representations() []*ImageRep {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("representations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ImageRep { return ImageRepFromID(_id) })
 }
 
+// IsValid wraps the corresponding Objective-C method.
 func (x *Image) IsValid() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isValid"))
 	return _r
 }
 
+// CacheMode wraps the corresponding Objective-C method.
 func (x *Image) CacheMode() ImageCacheMode {
 	_r := objc.Send[ImageCacheMode](objref.IDOf(x), objc.RegisterName("cacheMode"))
 	return _r
 }
 
+// SetCacheMode wraps the corresponding Objective-C method.
 func (x *Image) SetCacheMode(cacheMode ImageCacheMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCacheMode:"), cacheMode)
 }
 
+// AlignmentRect wraps the corresponding Objective-C method.
+func (x *Image) AlignmentRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("alignmentRect"))
+	return _r
+}
+
+// SetAlignmentRect wraps the corresponding Objective-C method.
+func (x *Image) SetAlignmentRect(alignmentRect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignmentRect:"), alignmentRect)
+}
+
+// IsTemplate wraps the corresponding Objective-C method.
 func (x *Image) IsTemplate() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTemplate"))
 	return _r
 }
 
+// SetTemplate wraps the corresponding Objective-C method.
 func (x *Image) SetTemplate(template bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemplate:"), template)
 }
 
+// AccessibilityDescription wraps the corresponding Objective-C method.
 func (x *Image) AccessibilityDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessibilityDescription"))
 	if _r == 0 {
@@ -358,97 +445,157 @@ func (x *Image) AccessibilityDescription() string {
 	return purego.GoString(_r)
 }
 
+// SetAccessibilityDescription wraps the corresponding Objective-C method.
 func (x *Image) SetAccessibilityDescription(accessibilityDescription string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityDescription:"), purego.NSString(accessibilityDescription))
 }
 
+// CapInsets wraps the corresponding Objective-C method.
+func (x *Image) CapInsets() foundation.NSEdgeInsets {
+	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(x), objc.RegisterName("capInsets"))
+	return _r
+}
+
+// SetCapInsets wraps the corresponding Objective-C method.
+func (x *Image) SetCapInsets(capInsets foundation.NSEdgeInsets) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapInsets:"), capInsets)
+}
+
+// ResizingMode wraps the corresponding Objective-C method.
 func (x *Image) ResizingMode() ImageResizingMode {
 	_r := objc.Send[ImageResizingMode](objref.IDOf(x), objc.RegisterName("resizingMode"))
 	return _r
 }
 
+// SetResizingMode wraps the corresponding Objective-C method.
 func (x *Image) SetResizingMode(resizingMode ImageResizingMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResizingMode:"), resizingMode)
 }
 
+// SymbolConfiguration wraps the corresponding Objective-C method.
 func (x *Image) SymbolConfiguration() *ImageSymbolConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("symbolConfiguration"))
 	return ImageSymbolConfigurationFromID(_r)
 }
 
-// The image’s preferred locale for resolving representations, if one has been specified using `-imageWithLocale:`. Otherwise, `nil`.
+// Locale the image’s preferred locale for resolving representations, if one has been specified using `-imageWithLocale:`. Otherwise, `nil`.
 func (x *Image) Locale() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locale"))
 	return obj.Wrap(_r)
 }
 
+// BestRepresentationForDevice wraps the corresponding Objective-C method.
 func (x *Image) BestRepresentationForDevice(deviceDescription obj.Object) *ImageRep {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bestRepresentationForDevice:"), objref.IDOf(deviceDescription))
 	return ImageRepFromID(_r)
 }
 
+// LockFocus wraps the corresponding Objective-C method.
 func (x *Image) LockFocus() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lockFocus"))
 }
 
+// LockFocusFlipped wraps the corresponding Objective-C method.
 func (x *Image) LockFocusFlipped(flipped bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lockFocusFlipped:"), flipped)
 }
 
+// UnlockFocus wraps the corresponding Objective-C method.
 func (x *Image) UnlockFocus() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unlockFocus"))
 }
 
+// SetFlipped wraps the corresponding Objective-C method.
 func (x *Image) SetFlipped(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlipped:"), flag)
 }
 
+// IsFlipped wraps the corresponding Objective-C method.
 func (x *Image) IsFlipped() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFlipped"))
 	return _r
 }
 
+// SetScalesWhenResized wraps the corresponding Objective-C method.
 func (x *Image) SetScalesWhenResized(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScalesWhenResized:"), flag)
 }
 
+// ScalesWhenResized wraps the corresponding Objective-C method.
 func (x *Image) ScalesWhenResized() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scalesWhenResized"))
 	return _r
 }
 
+// SetDataRetained wraps the corresponding Objective-C method.
 func (x *Image) SetDataRetained(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataRetained:"), flag)
 }
 
+// IsDataRetained wraps the corresponding Objective-C method.
 func (x *Image) IsDataRetained() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDataRetained"))
 	return _r
 }
 
+// SetCachedSeparately wraps the corresponding Objective-C method.
 func (x *Image) SetCachedSeparately(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCachedSeparately:"), flag)
 }
 
+// IsCachedSeparately wraps the corresponding Objective-C method.
 func (x *Image) IsCachedSeparately() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCachedSeparately"))
 	return _r
 }
 
+// SetCacheDepthMatchesImageDepth wraps the corresponding Objective-C method.
 func (x *Image) SetCacheDepthMatchesImageDepth(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCacheDepthMatchesImageDepth:"), flag)
 }
 
+// CacheDepthMatchesImageDepth wraps the corresponding Objective-C method.
 func (x *Image) CacheDepthMatchesImageDepth() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("cacheDepthMatchesImageDepth"))
 	return _r
 }
 
+// DissolveToPointFraction wraps the corresponding Objective-C method.
+func (x *Image) DissolveToPointFraction(point corefoundation.CGPoint, fraction float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dissolveToPoint:fraction:"), point, fraction)
+}
+
+// DissolveToPointFromRectFraction wraps the corresponding Objective-C method.
+func (x *Image) DissolveToPointFromRectFraction(point corefoundation.CGPoint, rect corefoundation.CGRect, fraction float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dissolveToPoint:fromRect:fraction:"), point, rect, fraction)
+}
+
+// CompositeToPointOperation wraps the corresponding Objective-C method.
+func (x *Image) CompositeToPointOperation(point corefoundation.CGPoint, operation CompositingOperation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositeToPoint:operation:"), point, operation)
+}
+
+// CompositeToPointFromRectOperation wraps the corresponding Objective-C method.
+func (x *Image) CompositeToPointFromRectOperation(point corefoundation.CGPoint, rect corefoundation.CGRect, operation CompositingOperation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositeToPoint:fromRect:operation:"), point, rect, operation)
+}
+
+// CompositeToPointOperationFraction wraps the corresponding Objective-C method.
+func (x *Image) CompositeToPointOperationFraction(point corefoundation.CGPoint, operation CompositingOperation, fraction float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositeToPoint:operation:fraction:"), point, operation, fraction)
+}
+
+// CompositeToPointFromRectOperationFraction wraps the corresponding Objective-C method.
+func (x *Image) CompositeToPointFromRectOperationFraction(point corefoundation.CGPoint, rect corefoundation.CGRect, operation CompositingOperation, fraction float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositeToPoint:fromRect:operation:fraction:"), point, rect, operation, fraction)
+}
+
+// LockFocusOnRepresentation wraps the corresponding Objective-C method.
 func (x *Image) LockFocusOnRepresentation(imageRepresentation *ImageRep) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lockFocusOnRepresentation:"), objref.IDOf(imageRepresentation))
 }
 
-// Cancels the current download operation, if any, for an incrementally loaded image.
+// CancelIncrementalLoad cancels the current download operation, if any, for an incrementally loaded image.
 func (x *Image) CancelIncrementalLoad() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelIncrementalLoad"))
 }
@@ -456,26 +603,38 @@ func (x *Image) CancelIncrementalLoad() {
 // Imageable is the interface implemented by [Image], for mocking and DI.
 type Imageable interface {
 	obj.Object
+	WithSize(size corefoundation.CGSize) *Image
 	WithBackgroundColor(backgroundColor *Color) *Image
 	WithUsesEPSOnResolutionMismatch(usesEPSOnResolutionMismatch bool) *Image
 	WithPrefersColorMatch(prefersColorMatch bool) *Image
 	WithMatchesOnMultipleResolution(matchesOnMultipleResolution bool) *Image
 	WithMatchesOnlyOnBestFittingAxis(matchesOnlyOnBestFittingAxis bool) *Image
 	WithCacheMode(cacheMode ImageCacheMode) *Image
+	WithAlignmentRect(alignmentRect corefoundation.CGRect) *Image
 	WithTemplate(template bool) *Image
 	WithAccessibilityDescription(accessibilityDescription string) *Image
+	WithCapInsets(capInsets foundation.NSEdgeInsets) *Image
 	WithResizingMode(resizingMode ImageResizingMode) *Image
 	SetName(string_ obj.Object) bool
 	Name() obj.Object
+	DrawAtPointFromRectOperationFraction(point corefoundation.CGPoint, fromRect corefoundation.CGRect, op CompositingOperation, delta float64)
+	DrawInRectFromRectOperationFraction(rect corefoundation.CGRect, fromRect corefoundation.CGRect, op CompositingOperation, delta float64)
+	DrawInRectFromRectOperationFractionRespectFlippedHints(dstSpacePortionRect corefoundation.CGRect, srcSpacePortionRect corefoundation.CGRect, op CompositingOperation, requestedAlpha float64, respectContextIsFlipped bool, hints obj.Object)
+	DrawRepresentationInRect(imageRep *ImageRep, rect corefoundation.CGRect) bool
+	DrawInRect(rect corefoundation.CGRect)
 	Recache()
 	TIFFRepresentationUsingCompressionFactor(comp TIFFCompression, factor float32) obj.Object
 	AddRepresentations(imageReps []*ImageRep)
 	AddRepresentation(imageRep *ImageRep)
 	RemoveRepresentation(imageRep *ImageRep)
+	BestRepresentationForRectContextHints(rect corefoundation.CGRect, referenceContext *GraphicsContext, hints obj.Object) *ImageRep
+	HitTestRectWithImageDestinationRectContextHintsFlipped(testRectDestSpace corefoundation.CGRect, imageRectDestSpace corefoundation.CGRect, context_ *GraphicsContext, hints obj.Object, flipped bool) bool
 	RecommendedLayerContentsScale(preferredContentsScale float64) float64
 	LayerContentsForContentsScale(layerContentsScale float64) obj.Object
 	ImageWithSymbolConfiguration(configuration *ImageSymbolConfiguration) *Image
 	ImageWithLocale(locale obj.Object) *Image
+	Size() corefoundation.CGSize
+	SetSize(size corefoundation.CGSize)
 	BackgroundColor() *Color
 	SetBackgroundColor(backgroundColor *Color)
 	UsesEPSOnResolutionMismatch() bool
@@ -491,10 +650,14 @@ type Imageable interface {
 	IsValid() bool
 	CacheMode() ImageCacheMode
 	SetCacheMode(cacheMode ImageCacheMode)
+	AlignmentRect() corefoundation.CGRect
+	SetAlignmentRect(alignmentRect corefoundation.CGRect)
 	IsTemplate() bool
 	SetTemplate(template bool)
 	AccessibilityDescription() string
 	SetAccessibilityDescription(accessibilityDescription string)
+	CapInsets() foundation.NSEdgeInsets
+	SetCapInsets(capInsets foundation.NSEdgeInsets)
 	ResizingMode() ImageResizingMode
 	SetResizingMode(resizingMode ImageResizingMode)
 	SymbolConfiguration() *ImageSymbolConfiguration
@@ -513,6 +676,12 @@ type Imageable interface {
 	IsCachedSeparately() bool
 	SetCacheDepthMatchesImageDepth(flag bool)
 	CacheDepthMatchesImageDepth() bool
+	DissolveToPointFraction(point corefoundation.CGPoint, fraction float64)
+	DissolveToPointFromRectFraction(point corefoundation.CGPoint, rect corefoundation.CGRect, fraction float64)
+	CompositeToPointOperation(point corefoundation.CGPoint, operation CompositingOperation)
+	CompositeToPointFromRectOperation(point corefoundation.CGPoint, rect corefoundation.CGRect, operation CompositingOperation)
+	CompositeToPointOperationFraction(point corefoundation.CGPoint, operation CompositingOperation, fraction float64)
+	CompositeToPointFromRectOperationFraction(point corefoundation.CGPoint, rect corefoundation.CGRect, operation CompositingOperation, fraction float64)
 	LockFocusOnRepresentation(imageRepresentation *ImageRep)
 	CancelIncrementalLoad()
 }

@@ -23,7 +23,8 @@ func AVB17221AECPAddressAccessTLVFromID(id objc.ID) *AVB17221AECPAddressAccessTL
 	if id == 0 {
 		return nil
 	}
-	x := &AVB17221AECPAddressAccessTLV{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AVB17221AECPAddressAccessTLV{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func aVB17221AECPAddressAccessTLVAdopt(id objc.ID) *AVB17221AECPAddressAccessTLV
 	if id == 0 {
 		return nil
 	}
-	x := &AVB17221AECPAddressAccessTLV{Handle: objref.Wrap(id)}
+	x := &AVB17221AECPAddressAccessTLV{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,62 +58,65 @@ func (x *AVB17221AECPAddressAccessTLV) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AVB17221AECPAddressAccessTLV) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAVB17221AECPAddressAccessTLV creates a new AVB17221AECPAddressAccessTLV.
 func NewAVB17221AECPAddressAccessTLV() *AVB17221AECPAddressAccessTLV {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVB17221AECPAddressAccessTLV")), objc.RegisterName("new"))
 	return aVB17221AECPAddressAccessTLVAdopt(_id)
 }
 
-// The mode field of the Address Access TLV.
-//
-// WithMode sets mode and returns the receiver so calls can be chained.
+// WithMode the mode field of the Address Access TLV.
 func (x *AVB17221AECPAddressAccessTLV) WithMode(mode AVB17221AECPAddressAccessTLVMode) *AVB17221AECPAddressAccessTLV {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 	return x
 }
 
-// The address field of the Address Access TLV.
-//
-// WithAddress sets address and returns the receiver so calls can be chained.
+// WithAddress the address field of the Address Access TLV.
 func (x *AVB17221AECPAddressAccessTLV) WithAddress(address uint64) *AVB17221AECPAddressAccessTLV {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAddress:"), address)
 	return x
 }
 
-// The memory_data field of the Address Access TLV.
-//
-// WithMemoryData sets memoryData and returns the receiver so calls can be chained.
+// WithMemoryData the memory_data field of the Address Access TLV.
 func (x *AVB17221AECPAddressAccessTLV) WithMemoryData(memoryData obj.Object) *AVB17221AECPAddressAccessTLV {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMemoryData:"), objref.IDOf(memoryData))
 	return x
 }
 
-// The mode field of the Address Access TLV.
+// Mode the mode field of the Address Access TLV.
 func (x *AVB17221AECPAddressAccessTLV) Mode() AVB17221AECPAddressAccessTLVMode {
 	_r := objc.Send[AVB17221AECPAddressAccessTLVMode](objref.IDOf(x), objc.RegisterName("mode"))
 	return _r
 }
 
+// SetMode wraps the corresponding Objective-C method.
 func (x *AVB17221AECPAddressAccessTLV) SetMode(mode AVB17221AECPAddressAccessTLVMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 }
 
-// The address field of the Address Access TLV.
+// Address the address field of the Address Access TLV.
 func (x *AVB17221AECPAddressAccessTLV) Address() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("address"))
 	return _r
 }
 
+// SetAddress wraps the corresponding Objective-C method.
 func (x *AVB17221AECPAddressAccessTLV) SetAddress(address uint64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAddress:"), address)
 }
 
-// The memory_data field of the Address Access TLV.
+// MemoryData the memory_data field of the Address Access TLV.
 func (x *AVB17221AECPAddressAccessTLV) MemoryData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("memoryData"))
 	return obj.Wrap(_r)
 }
 
+// SetMemoryData wraps the corresponding Objective-C method.
 func (x *AVB17221AECPAddressAccessTLV) SetMemoryData(memoryData obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMemoryData:"), objref.IDOf(memoryData))
 }

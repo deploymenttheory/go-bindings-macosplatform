@@ -12,36 +12,44 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// AvailableLanguages wraps the corresponding Objective-C method.
+//
 // AvailableLanguages returns the collection as a Go slice.
 func AvailableLanguages() []*Language {
 	_arr := objc.Send[objc.ID](objc.ID(_class("OSALanguage")), objc.RegisterName("availableLanguages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Language { return LanguageFromID(_id) })
 }
 
+// LanguageForName wraps the corresponding Objective-C method.
 func LanguageForName(name string) *Language {
 	_r := objc.Send[objc.ID](objc.ID(_class("OSALanguage")), objc.RegisterName("languageForName:"), purego.NSString(name))
 	return LanguageFromID(_r)
 }
 
+// LanguageForScriptDataDescriptor wraps the corresponding Objective-C method.
 func LanguageForScriptDataDescriptor(descriptor obj.Object) *Language {
 	_r := objc.Send[objc.ID](objc.ID(_class("OSALanguage")), objc.RegisterName("languageForScriptDataDescriptor:"), objref.IDOf(descriptor))
 	return LanguageFromID(_r)
 }
 
+// DefaultLanguage wraps the corresponding Objective-C method.
 func DefaultLanguage() *Language {
 	_r := objc.Send[objc.ID](objc.ID(_class("OSALanguage")), objc.RegisterName("defaultLanguage"))
 	return LanguageFromID(_r)
 }
 
+// SetDefaultLanguage wraps the corresponding Objective-C method.
 func SetDefaultLanguage(defaultLanguage *Language) {
 	objc.Send[objc.ID](objc.ID(_class("OSALanguage")), objc.RegisterName("setDefaultLanguage:"), objref.IDOf(defaultLanguage))
 }
 
+// LanguageInstanceWithLanguage wraps the corresponding Objective-C method.
 func LanguageInstanceWithLanguage(language *Language) *LanguageInstance {
 	_r := objc.Send[objc.ID](objc.ID(_class("OSALanguageInstance")), objc.RegisterName("languageInstanceWithLanguage:"), objref.IDOf(language))
 	return LanguageInstanceFromID(_r)
 }
 
+// ScriptDataDescriptorWithContentsOfURL wraps the corresponding Objective-C method.
 func ScriptDataDescriptorWithContentsOfURL(url string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("OSAScript")), objc.RegisterName("scriptDataDescriptorWithContentsOfURL:"), rt.FileURL(url))
 	return obj.Wrap(_r)

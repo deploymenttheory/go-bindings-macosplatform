@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A rule for filters that combines a rule to match network traffic and an action to take when the rule matches.
-//
 // NEFilterRule is an idiomatic wrapper over the Objective-C class NEFilterRule.
+//
+// A rule for filters that combines a rule to match network traffic and an action to take when the rule matches.
 type NEFilterRule struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NEFilterRuleFromID(id objc.ID) *NEFilterRule {
 	if id == 0 {
 		return nil
 	}
-	x := &NEFilterRule{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEFilterRule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nEFilterRuleAdopt(id objc.ID) *NEFilterRule {
 	if id == 0 {
 		return nil
 	}
-	x := &NEFilterRule{Handle: objref.Wrap(id)}
+	x := &NEFilterRule{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,26 @@ func (x *NEFilterRule) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new filter rule from a network rule and an action to take when network traffic matches.
-//
-// NewNEFilterRuleWithNetworkRuleAction creates a new NEFilterRule.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEFilterRule) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNEFilterRuleWithNetworkRuleAction creates a new filter rule from a network rule and an action to take when network traffic matches.
 func NewNEFilterRuleWithNetworkRuleAction(networkRule *NENetworkRule, action NEFilterAction) *NEFilterRule {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NEFilterRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNetworkRule:action:"), objref.IDOf(networkRule), action)
 	return nEFilterRuleAdopt(_id)
 }
 
-// The NENetworkRule that defines the network traffic characteristics that this rule matches.
+// NetworkRule the NENetworkRule that defines the network traffic characteristics that this rule matches.
 func (x *NEFilterRule) NetworkRule() *NENetworkRule {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkRule"))
 	return NENetworkRuleFromID(_r)
 }
 
-// The action to take when this rule matches network traffic.
+// Action the action to take when this rule matches network traffic.
 func (x *NEFilterRule) Action() NEFilterAction {
 	_r := objc.Send[NEFilterAction](objref.IDOf(x), objc.RegisterName("action"))
 	return _r

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Searches (by service type) for services offered by nearby devices using infrastructure Wi-Fi, peer-to-peer Wi-Fi, and Bluetooth (in iOS) or Ethernet (in macOS and tvOS), and provides the ability to easily invite those devices to a Multipeer Connectivity session (MCSession).
-//
 // NearbyServiceBrowser is an idiomatic wrapper over the Objective-C class MCNearbyServiceBrowser.
+//
+// Searches (by service type) for services offered by nearby devices using infrastructure Wi-Fi, peer-to-peer Wi-Fi, and Bluetooth (in iOS) or Ethernet (in macOS and tvOS), and provides the ability to easily invite those devices to a Multipeer Connectivity session (MCSession).
 type NearbyServiceBrowser struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NearbyServiceBrowserFromID(id objc.ID) *NearbyServiceBrowser {
 	if id == 0 {
 		return nil
 	}
-	x := &NearbyServiceBrowser{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NearbyServiceBrowser{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nearbyServiceBrowserAdopt(id objc.ID) *NearbyServiceBrowser {
 	if id == 0 {
 		return nil
 	}
-	x := &NearbyServiceBrowser{Handle: objref.Wrap(id)}
+	x := &NearbyServiceBrowser{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,35 +60,41 @@ func (x *NearbyServiceBrowser) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes the nearby service browser object.
-//
-// NewNearbyServiceBrowserWithPeerServiceType creates a new NearbyServiceBrowser.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NearbyServiceBrowser) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNearbyServiceBrowserWithPeerServiceType initializes the nearby service browser object.
 func NewNearbyServiceBrowserWithPeerServiceType(myPeerID *PeerID, serviceType string) *NearbyServiceBrowser {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MCNearbyServiceBrowser")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPeer:serviceType:"), objref.IDOf(myPeerID), purego.NSString(serviceType))
 	return nearbyServiceBrowserAdopt(_id)
 }
 
-// Starts browsing for peers.
+// StartBrowsingForPeers starts browsing for peers.
 func (x *NearbyServiceBrowser) StartBrowsingForPeers() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startBrowsingForPeers"))
 }
 
-// Stops browsing for peers.
+// StopBrowsingForPeers stops browsing for peers.
 func (x *NearbyServiceBrowser) StopBrowsingForPeers() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopBrowsingForPeers"))
 }
 
-// Invites a discovered peer to join a Multipeer Connectivity session.
+// InvitePeerToSessionWithContextTimeout invites a discovered peer to join a Multipeer Connectivity session.
 func (x *NearbyServiceBrowser) InvitePeerToSessionWithContextTimeout(peerID *PeerID, session *Session, context_ obj.Object, timeout float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invitePeer:toSession:withContext:timeout:"), objref.IDOf(peerID), objref.IDOf(session), objref.IDOf(context_), timeout)
 }
 
+// MyPeerID wraps the corresponding Objective-C method.
 func (x *NearbyServiceBrowser) MyPeerID() *PeerID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("myPeerID"))
 	return PeerIDFromID(_r)
 }
 
+// ServiceType wraps the corresponding Objective-C method.
 func (x *NearbyServiceBrowser) ServiceType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceType"))
 	if _r == 0 {

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Dishwasher Alarm Attributes and commands for configuring the Dishwasher alarm.
-//
 // MTRClusterDishwasherAlarm is an idiomatic wrapper over the Objective-C class MTRClusterDishwasherAlarm.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
+//
+// Cluster Dishwasher Alarm Attributes and commands for configuring the Dishwasher alarm.
 type MTRClusterDishwasherAlarm struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterDishwasherAlarmFromID adopts an existing Objective-C object as a MTRClusterDishwasherAlarm
@@ -25,7 +26,8 @@ func MTRClusterDishwasherAlarmFromID(id objc.ID) *MTRClusterDishwasherAlarm {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterDishwasherAlarm{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterDishwasherAlarm{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,75 +40,68 @@ func mTRClusterDishwasherAlarmAdopt(id objc.ID) *MTRClusterDishwasherAlarm {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterDishwasherAlarm{Handle: objref.Wrap(id)}
+	x := &MTRClusterDishwasherAlarm{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterDishwasherAlarm) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterDishwasherAlarm) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterDishwasherAlarm) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterDishwasherAlarmWithDeviceEndpointIDQueue creates a new MTRClusterDishwasherAlarm.
+// NewMTRClusterDishwasherAlarmWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterDishwasherAlarmWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterDishwasherAlarm {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterDishwasherAlarm")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterDishwasherAlarmAdopt(_id)
 }
 
+// ReadAttributeMaskWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDishwasherAlarm) ReadAttributeMaskWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaskWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeLatchWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDishwasherAlarm) ReadAttributeLatchWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLatchWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeStateWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDishwasherAlarm) ReadAttributeStateWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeSupportedWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDishwasherAlarm) ReadAttributeSupportedWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDishwasherAlarm) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDishwasherAlarm) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDishwasherAlarm) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDishwasherAlarm) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDishwasherAlarm) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -127,3 +122,7 @@ type MTRClusterDishwasherAlarmable interface {
 }
 
 var _ MTRClusterDishwasherAlarmable = (*MTRClusterDishwasherAlarm)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterDishwasherAlarm)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterDishwasherAlarm)(nil)

@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that represents a running browser rendering extension process.
-//
 // RenderingProcess is an idiomatic wrapper over the Objective-C class BERenderingProcess.
+//
+// An object that represents a running browser rendering extension process.
 type RenderingProcess struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func RenderingProcessFromID(id objc.ID) *RenderingProcess {
 	if id == 0 {
 		return nil
 	}
-	x := &RenderingProcess{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RenderingProcess{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func renderingProcessAdopt(id objc.ID) *RenderingProcess {
 	if id == 0 {
 		return nil
 	}
-	x := &RenderingProcess{Handle: objref.Wrap(id)}
+	x := &RenderingProcess{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,19 +62,25 @@ func (x *RenderingProcess) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RenderingProcess) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRenderingProcess creates a new RenderingProcess.
 func NewRenderingProcess() *RenderingProcess {
 	_id := objc.Send[objc.ID](objc.ID(_class("BERenderingProcess")), objc.RegisterName("new"))
 	return renderingProcessAdopt(_id)
 }
 
-// Stops the rendering process.
+// Invalidate stops the rendering process.
 func (x *RenderingProcess) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
-// Creates a new XPC connection to the extension process.
-func (x *RenderingProcess) MakeLibXPCConnectionError() (obj.Object, error) {
+// MakeLibXPCConnectionError creates a new XPC connection to the extension process.
+func (x *RenderingProcess) MakeLibXPCConnectionError() (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeLibXPCConnectionError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -85,7 +93,7 @@ func (x *RenderingProcess) MakeLibXPCConnectionError() (obj.Object, error) {
 type RenderingProcessable interface {
 	obj.Object
 	Invalidate()
-	MakeLibXPCConnectionError() (obj.Object, error)
+	MakeLibXPCConnectionError() (result obj.Object, err error)
 }
 
 var _ RenderingProcessable = (*RenderingProcess)(nil)

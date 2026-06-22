@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A symbol effect that applies the Rotate animation to symbol images.
-//
 // SymbolRotateEffect is an idiomatic wrapper over the Objective-C class NSSymbolRotateEffect.
+//
+// It embeds [SymbolEffect], promoting that type's methods.
+//
+// A symbol effect that applies the Rotate animation to symbol images.
 type SymbolRotateEffect struct {
-	objref.Handle
+	SymbolEffect
 }
 
 // SymbolRotateEffectFromID adopts an existing Objective-C object as a SymbolRotateEffect
@@ -25,7 +26,8 @@ func SymbolRotateEffectFromID(id objc.ID) *SymbolRotateEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolRotateEffect{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SymbolRotateEffect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func symbolRotateEffectAdopt(id objc.ID) *SymbolRotateEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolRotateEffect{Handle: objref.Wrap(id)}
+	x := &SymbolRotateEffect{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SymbolRotateEffect) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SymbolRotateEffect) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SymbolRotateEffect) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSymbolRotateEffect creates a new SymbolRotateEffect.
@@ -64,13 +52,13 @@ func NewSymbolRotateEffect() *SymbolRotateEffect {
 	return symbolRotateEffectAdopt(_id)
 }
 
-// Returns a copy of the effect that animates incrementally, by layer.
+// EffectWithByLayer returns a copy of the effect that animates incrementally, by layer.
 func (x *SymbolRotateEffect) EffectWithByLayer() *SymbolRotateEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
 	return SymbolRotateEffectFromID(_r)
 }
 
-// Returns a copy of the effect that animates all layers of the symbol simultaneously.
+// EffectWithWholeSymbol returns a copy of the effect that animates all layers of the symbol simultaneously.
 func (x *SymbolRotateEffect) EffectWithWholeSymbol() *SymbolRotateEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolRotateEffectFromID(_r)
@@ -84,3 +72,5 @@ type SymbolRotateEffectable interface {
 }
 
 var _ SymbolRotateEffectable = (*SymbolRotateEffect)(nil)
+
+var _ SymbolEffectProvider = (*SymbolRotateEffect)(nil)

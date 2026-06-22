@@ -23,7 +23,8 @@ func MTRPumpConfigurationAndControlClusterSystemPressureHighEventFromID(id objc.
 	if id == 0 {
 		return nil
 	}
-	x := &MTRPumpConfigurationAndControlClusterSystemPressureHighEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRPumpConfigurationAndControlClusterSystemPressureHighEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRPumpConfigurationAndControlClusterSystemPressureHighEventAdopt(id objc.I
 	if id == 0 {
 		return nil
 	}
-	x := &MTRPumpConfigurationAndControlClusterSystemPressureHighEvent{Handle: objref.Wrap(id)}
+	x := &MTRPumpConfigurationAndControlClusterSystemPressureHighEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *MTRPumpConfigurationAndControlClusterSystemPressureHighEvent) IsEqual(o
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MTRPumpConfigurationAndControlClusterSystemPressureHighEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRPumpConfigurationAndControlClusterSystemPressureHighEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMTRPumpConfigurationAndControlClusterSystemPressureHighEvent creates a new MTRPumpConfigurationAndControlClusterSystemPressureHighEvent.

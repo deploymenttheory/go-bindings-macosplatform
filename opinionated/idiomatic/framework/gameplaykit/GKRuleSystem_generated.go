@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A list of rules, together with a context for evaluating them and interpreting results, for use in constructing data-driven logic or fuzzy logic systems.
-//
 // RuleSystem is an idiomatic wrapper over the Objective-C class GKRuleSystem.
+//
+// A list of rules, together with a context for evaluating them and interpreting results, for use in constructing data-driven logic or fuzzy logic systems.
 type RuleSystem struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RuleSystemFromID(id objc.ID) *RuleSystem {
 	if id == 0 {
 		return nil
 	}
-	x := &RuleSystem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RuleSystem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func ruleSystemAdopt(id objc.ID) *RuleSystem {
 	if id == 0 {
 		return nil
 	}
-	x := &RuleSystem{Handle: objref.Wrap(id)}
+	x := &RuleSystem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,56 +60,62 @@ func (x *RuleSystem) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RuleSystem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRuleSystem creates a new RuleSystem.
 func NewRuleSystem() *RuleSystem {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKRuleSystem")), objc.RegisterName("new"))
 	return ruleSystemAdopt(_id)
 }
 
-// Evaluates the rule system, executing the list of rules in its agenda.
+// Evaluate evaluates the rule system, executing the list of rules in its agenda.
 func (x *RuleSystem) Evaluate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("evaluate"))
 }
 
-// Adds the specified rule to the system.
+// AddRule adds the specified rule to the system.
 func (x *RuleSystem) AddRule(rule *Rule) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRule:"), objref.IDOf(rule))
 }
 
-// Adds the specified list of rules to the system.
+// AddRulesFromArray adds the specified list of rules to the system.
 func (x *RuleSystem) AddRulesFromArray(rules []*Rule) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRulesFromArray:"), purego.SliceToNSArray(rules, func(_v *Rule) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Removes all rules from the system.
+// RemoveAllRules removes all rules from the system.
 func (x *RuleSystem) RemoveAllRules() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllRules"))
 }
 
-// Returns the lowest membership grade among the specified facts.
+// MinimumGradeForFacts returns the lowest membership grade among the specified facts.
 func (x *RuleSystem) MinimumGradeForFacts(facts obj.Object) float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minimumGradeForFacts:"), objref.IDOf(facts))
 	return _r
 }
 
-// Returns the highest membership grade among the specified facts.
+// MaximumGradeForFacts returns the highest membership grade among the specified facts.
 func (x *RuleSystem) MaximumGradeForFacts(facts obj.Object) float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumGradeForFacts:"), objref.IDOf(facts))
 	return _r
 }
 
-// Returns the rule system to its original agenda and clears all facts.
+// Reset returns the rule system to its original agenda and clears all facts.
 func (x *RuleSystem) Reset() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
-// The implementation-defined state. If any changes are made on this outside the system you must call evaluate to have the system take account of the changes.
+// State the implementation-defined state. If any changes are made on this outside the system you must call evaluate to have the system take account of the changes.
 func (x *RuleSystem) State() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
 	return obj.Wrap(_r)
 }
 
-// The current set of rules that will be used to set the agenda when rules are first added to the system. They will also be used to refill the agenda whenever it is set. This is at all times the union of the agenda and executed sets.
+// Rules the current set of rules that will be used to set the agenda when rules are first added to the system. They will also be used to refill the agenda whenever it is set. This is at all times the union of the agenda and executed sets.
 //
 // Rules returns the collection as a Go slice.
 func (x *RuleSystem) Rules() []*Rule {
@@ -115,7 +123,7 @@ func (x *RuleSystem) Rules() []*Rule {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Rule { return RuleFromID(_id) })
 }
 
-// The current set of rules to be evaluated, in salience order, where if the salience is equivalent the order of insertion into the agenda is used to decide which is first. Adjust salience of your rules to adjust the order the next time the agenda is reset. Changing salience on a rule currently in the agenda does not change its order in the agenda. This is at all times the difference between the rules and executed sets.
+// Agenda the current set of rules to be evaluated, in salience order, where if the salience is equivalent the order of insertion into the agenda is used to decide which is first. Adjust salience of your rules to adjust the order the next time the agenda is reset. Changing salience on a rule currently in the agenda does not change its order in the agenda. This is at all times the difference between the rules and executed sets.
 //
 // Agenda returns the collection as a Go slice.
 func (x *RuleSystem) Agenda() []*Rule {
@@ -123,7 +131,7 @@ func (x *RuleSystem) Agenda() []*Rule {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Rule { return RuleFromID(_id) })
 }
 
-// The current set of rules that have already executed. Rules in this set will not be executed again until the system is reset. This is at all times the difference between the rules and agenda sets.
+// Executed the current set of rules that have already executed. Rules in this set will not be executed again until the system is reset. This is at all times the difference between the rules and agenda sets.
 //
 // Executed returns the collection as a Go slice.
 func (x *RuleSystem) Executed() []*Rule {
@@ -131,7 +139,7 @@ func (x *RuleSystem) Executed() []*Rule {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Rule { return RuleFromID(_id) })
 }
 
-// The current set of facts. Facts have a grade of membership that is >= 0.0. Query the system for the individual grades of membership with gradeForFact:
+// Facts the current set of facts. Facts have a grade of membership that is >= 0.0. Query the system for the individual grades of membership with gradeForFact:
 func (x *RuleSystem) Facts() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("facts"))
 	return obj.Wrap(_r)

@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -23,7 +24,8 @@ func TextCheckingControllerFromID(id objc.ID) *TextCheckingController {
 	if id == 0 {
 		return nil
 	}
-	x := &TextCheckingController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextCheckingController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +38,8 @@ func textCheckingControllerAdopt(id objc.ID) *TextCheckingController {
 	if id == 0 {
 		return nil
 	}
-	x := &TextCheckingController{Handle: objref.Wrap(id)}
+	x := &TextCheckingController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,69 +59,109 @@ func (x *TextCheckingController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextCheckingController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTextCheckingController creates a new TextCheckingController.
 func NewTextCheckingController() *TextCheckingController {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSTextCheckingController")), objc.RegisterName("new"))
 	return textCheckingControllerAdopt(_id)
 }
 
-// WithSpellCheckerDocumentTag sets spellCheckerDocumentTag and returns the receiver so calls can be chained.
+// WithSpellCheckerDocumentTag sets the property and returns the receiver so calls can be chained.
 func (x *TextCheckingController) WithSpellCheckerDocumentTag(spellCheckerDocumentTag int) *TextCheckingController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpellCheckerDocumentTag:"), spellCheckerDocumentTag)
 	return x
 }
 
+// Invalidate wraps the corresponding Objective-C method.
 func (x *TextCheckingController) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
+// DidChangeTextInRange wraps the corresponding Objective-C method.
+func (x *TextCheckingController) DidChangeTextInRange(range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didChangeTextInRange:"), range_)
+}
+
+// InsertedTextInRange wraps the corresponding Objective-C method.
+func (x *TextCheckingController) InsertedTextInRange(range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertedTextInRange:"), range_)
+}
+
+// DidChangeSelectedRange wraps the corresponding Objective-C method.
 func (x *TextCheckingController) DidChangeSelectedRange() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didChangeSelectedRange"))
 }
 
+// ConsiderTextCheckingForRange wraps the corresponding Objective-C method.
+func (x *TextCheckingController) ConsiderTextCheckingForRange(range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("considerTextCheckingForRange:"), range_)
+}
+
+// CheckTextInRangeTypesOptions wraps the corresponding Objective-C method.
+func (x *TextCheckingController) CheckTextInRangeTypesOptions(range_ foundation.NSRange, checkingTypes uint64, options obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("checkTextInRange:types:options:"), range_, checkingTypes, objref.IDOf(options))
+}
+
+// CheckTextInSelection wraps the corresponding Objective-C method.
 func (x *TextCheckingController) CheckTextInSelection(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("checkTextInSelection:"), objref.IDOf(sender))
 }
 
+// CheckTextInDocument wraps the corresponding Objective-C method.
 func (x *TextCheckingController) CheckTextInDocument(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("checkTextInDocument:"), objref.IDOf(sender))
 }
 
+// OrderFrontSubstitutionsPanel wraps the corresponding Objective-C method.
 func (x *TextCheckingController) OrderFrontSubstitutionsPanel(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderFrontSubstitutionsPanel:"), objref.IDOf(sender))
 }
 
+// CheckSpelling wraps the corresponding Objective-C method.
 func (x *TextCheckingController) CheckSpelling(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("checkSpelling:"), objref.IDOf(sender))
 }
 
+// ShowGuessPanel wraps the corresponding Objective-C method.
 func (x *TextCheckingController) ShowGuessPanel(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showGuessPanel:"), objref.IDOf(sender))
 }
 
+// ChangeSpelling wraps the corresponding Objective-C method.
 func (x *TextCheckingController) ChangeSpelling(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeSpelling:"), objref.IDOf(sender))
 }
 
+// IgnoreSpelling wraps the corresponding Objective-C method.
 func (x *TextCheckingController) IgnoreSpelling(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ignoreSpelling:"), objref.IDOf(sender))
 }
 
+// UpdateCandidates wraps the corresponding Objective-C method.
 func (x *TextCheckingController) UpdateCandidates() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateCandidates"))
 }
 
+// ValidAnnotations wraps the corresponding Objective-C method.
+//
 // ValidAnnotations returns the collection as a Go slice.
 func (x *TextCheckingController) ValidAnnotations() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validAnnotations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SpellCheckerDocumentTag wraps the corresponding Objective-C method.
 func (x *TextCheckingController) SpellCheckerDocumentTag() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("spellCheckerDocumentTag"))
 	return _r
 }
 
+// SetSpellCheckerDocumentTag wraps the corresponding Objective-C method.
 func (x *TextCheckingController) SetSpellCheckerDocumentTag(spellCheckerDocumentTag int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpellCheckerDocumentTag:"), spellCheckerDocumentTag)
 }
@@ -128,7 +171,11 @@ type TextCheckingControllerable interface {
 	obj.Object
 	WithSpellCheckerDocumentTag(spellCheckerDocumentTag int) *TextCheckingController
 	Invalidate()
+	DidChangeTextInRange(range_ foundation.NSRange)
+	InsertedTextInRange(range_ foundation.NSRange)
 	DidChangeSelectedRange()
+	ConsiderTextCheckingForRange(range_ foundation.NSRange)
+	CheckTextInRangeTypesOptions(range_ foundation.NSRange, checkingTypes uint64, options obj.Object)
 	CheckTextInSelection(sender obj.Object)
 	CheckTextInDocument(sender obj.Object)
 	OrderFrontSubstitutionsPanel(sender obj.Object)

@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of information about the current process.
-//
 // ProcessInfo is an idiomatic wrapper over the Objective-C class NSProcessInfo.
+//
+// A collection of information about the current process.
 type ProcessInfo struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func ProcessInfoFromID(id objc.ID) *ProcessInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &ProcessInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ProcessInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func processInfoAdopt(id objc.ID) *ProcessInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &ProcessInfo{Handle: objref.Wrap(id)}
+	x := &ProcessInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,35 +61,43 @@ func (x *ProcessInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ProcessInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewProcessInfo creates a new ProcessInfo.
 func NewProcessInfo() *ProcessInfo {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSProcessInfo")), objc.RegisterName("new"))
 	return processInfoAdopt(_id)
 }
 
-// WithProcessName sets processName and returns the receiver so calls can be chained.
+// WithProcessName sets the property and returns the receiver so calls can be chained.
 func (x *ProcessInfo) WithProcessName(processName StringProvider) *ProcessInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProcessName:"), objref.IDOf(processName))
 	return x
 }
 
-// WithAutomaticTerminationSupportEnabled sets automaticTerminationSupportEnabled and returns the receiver so calls can be chained.
+// WithAutomaticTerminationSupportEnabled sets the property and returns the receiver so calls can be chained.
 func (x *ProcessInfo) WithAutomaticTerminationSupportEnabled(automaticTerminationSupportEnabled bool) *ProcessInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticTerminationSupportEnabled:"), automaticTerminationSupportEnabled)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *ProcessInfo) WithScriptingProperties(scriptingProperties obj.Object) *ProcessInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// OperatingSystem wraps the corresponding Objective-C method.
 func (x *ProcessInfo) OperatingSystem() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("operatingSystem"))
 	return _r
 }
 
+// OperatingSystemName wraps the corresponding Objective-C method.
 func (x *ProcessInfo) OperatingSystemName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operatingSystemName"))
 	if _r == 0 {
@@ -96,33 +106,41 @@ func (x *ProcessInfo) OperatingSystemName() string {
 	return purego.GoString(_r)
 }
 
+// DisableSuddenTermination wraps the corresponding Objective-C method.
 func (x *ProcessInfo) DisableSuddenTermination() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disableSuddenTermination"))
 }
 
+// EnableSuddenTermination wraps the corresponding Objective-C method.
 func (x *ProcessInfo) EnableSuddenTermination() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enableSuddenTermination"))
 }
 
+// DisableAutomaticTermination wraps the corresponding Objective-C method.
 func (x *ProcessInfo) DisableAutomaticTermination(reason string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disableAutomaticTermination:"), purego.NSString(reason))
 }
 
+// EnableAutomaticTermination wraps the corresponding Objective-C method.
 func (x *ProcessInfo) EnableAutomaticTermination(reason string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enableAutomaticTermination:"), purego.NSString(reason))
 }
 
+// Environment wraps the corresponding Objective-C method.
 func (x *ProcessInfo) Environment() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("environment"))
 	return obj.Wrap(_r)
 }
 
+// Arguments wraps the corresponding Objective-C method.
+//
 // Arguments returns the collection as a Go slice.
 func (x *ProcessInfo) Arguments() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arguments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// HostName wraps the corresponding Objective-C method.
 func (x *ProcessInfo) HostName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hostName"))
 	if _r == 0 {
@@ -131,6 +149,7 @@ func (x *ProcessInfo) HostName() string {
 	return purego.GoString(_r)
 }
 
+// ProcessName wraps the corresponding Objective-C method.
 func (x *ProcessInfo) ProcessName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processName"))
 	if _r == 0 {
@@ -139,15 +158,18 @@ func (x *ProcessInfo) ProcessName() string {
 	return purego.GoString(_r)
 }
 
+// SetProcessName wraps the corresponding Objective-C method.
 func (x *ProcessInfo) SetProcessName(processName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProcessName:"), purego.NSString(processName))
 }
 
+// ProcessIdentifier wraps the corresponding Objective-C method.
 func (x *ProcessInfo) ProcessIdentifier() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("processIdentifier"))
 	return _r
 }
 
+// GloballyUniqueString wraps the corresponding Objective-C method.
 func (x *ProcessInfo) GloballyUniqueString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("globallyUniqueString"))
 	if _r == 0 {
@@ -156,6 +178,7 @@ func (x *ProcessInfo) GloballyUniqueString() string {
 	return purego.GoString(_r)
 }
 
+// OperatingSystemVersionString wraps the corresponding Objective-C method.
 func (x *ProcessInfo) OperatingSystemVersionString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operatingSystemVersionString"))
 	if _r == 0 {
@@ -164,35 +187,43 @@ func (x *ProcessInfo) OperatingSystemVersionString() string {
 	return purego.GoString(_r)
 }
 
+// ProcessorCount wraps the corresponding Objective-C method.
 func (x *ProcessInfo) ProcessorCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("processorCount"))
 	return _r
 }
 
+// ActiveProcessorCount wraps the corresponding Objective-C method.
 func (x *ProcessInfo) ActiveProcessorCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("activeProcessorCount"))
 	return _r
 }
 
+// PhysicalMemory wraps the corresponding Objective-C method.
 func (x *ProcessInfo) PhysicalMemory() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("physicalMemory"))
 	return _r
 }
 
+// SystemUptime wraps the corresponding Objective-C method.
 func (x *ProcessInfo) SystemUptime() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("systemUptime"))
 	return _r
 }
 
+// AutomaticTerminationSupportEnabled wraps the corresponding Objective-C method.
 func (x *ProcessInfo) AutomaticTerminationSupportEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticTerminationSupportEnabled"))
 	return _r
 }
 
+// SetAutomaticTerminationSupportEnabled wraps the corresponding Objective-C method.
 func (x *ProcessInfo) SetAutomaticTerminationSupportEnabled(automaticTerminationSupportEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticTerminationSupportEnabled:"), automaticTerminationSupportEnabled)
 }
 
+// PerformActivityWithOptionsReasonUsing wraps the corresponding Objective-C method.
+//
 // PerformActivityWithOptionsReasonUsing blocks until the operation completes or ctx is cancelled.
 func (x *ProcessInfo) PerformActivityWithOptionsReasonUsing(ctx context.Context, options ActivityOptions, reason string) error {
 	_ch := make(chan error, 1)
@@ -208,6 +239,7 @@ func (x *ProcessInfo) PerformActivityWithOptionsReasonUsing(ctx context.Context,
 	}
 }
 
+// UserName wraps the corresponding Objective-C method.
 func (x *ProcessInfo) UserName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userName"))
 	if _r == 0 {
@@ -216,6 +248,7 @@ func (x *ProcessInfo) UserName() string {
 	return purego.GoString(_r)
 }
 
+// FullUserName wraps the corresponding Objective-C method.
 func (x *ProcessInfo) FullUserName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullUserName"))
 	if _r == 0 {
@@ -224,26 +257,31 @@ func (x *ProcessInfo) FullUserName() string {
 	return purego.GoString(_r)
 }
 
+// ThermalState wraps the corresponding Objective-C method.
 func (x *ProcessInfo) ThermalState() ProcessInfoThermalState {
 	_r := objc.Send[ProcessInfoThermalState](objref.IDOf(x), objc.RegisterName("thermalState"))
 	return _r
 }
 
+// IsLowPowerModeEnabled wraps the corresponding Objective-C method.
 func (x *ProcessInfo) IsLowPowerModeEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLowPowerModeEnabled"))
 	return _r
 }
 
+// IsMacCatalystApp wraps the corresponding Objective-C method.
 func (x *ProcessInfo) IsMacCatalystApp() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMacCatalystApp"))
 	return _r
 }
 
+// IsiOSAppOnMac wraps the corresponding Objective-C method.
 func (x *ProcessInfo) IsiOSAppOnMac() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isiOSAppOnMac"))
 	return _r
 }
 
+// IsiOSAppOnVision wraps the corresponding Objective-C method.
 func (x *ProcessInfo) IsiOSAppOnVision() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isiOSAppOnVision"))
 	return _r

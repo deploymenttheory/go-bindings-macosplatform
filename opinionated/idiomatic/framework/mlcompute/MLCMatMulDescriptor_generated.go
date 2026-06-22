@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration object you use to create a matrix multiplication layer.
-//
 // MatMulDescriptor is an idiomatic wrapper over the Objective-C class MLCMatMulDescriptor.
+//
+// A configuration object you use to create a matrix multiplication layer.
 type MatMulDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MatMulDescriptorFromID(id objc.ID) *MatMulDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &MatMulDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatMulDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func matMulDescriptorAdopt(id objc.ID) *MatMulDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &MatMulDescriptor{Handle: objref.Wrap(id)}
+	x := &MatMulDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *MatMulDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MatMulDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMatMulDescriptor creates a new MatMulDescriptor.
 func NewMatMulDescriptor() *MatMulDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLCMatMulDescriptor")), objc.RegisterName("new"))
 	return matMulDescriptorAdopt(_id)
 }
 
-// a scalar to scale the result in C=alpha x X x Y. Default = 1.0
+// Alpha a scalar to scale the result in C=alpha x X x Y. Default = 1.0
 func (x *MatMulDescriptor) Alpha() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
 	return _r
 }
 
-// if true, transposes the last two dimensions of X. Default = False
+// TransposesX if true, transposes the last two dimensions of X. Default = False
 func (x *MatMulDescriptor) TransposesX() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("transposesX"))
 	return _r
 }
 
-// if true, transposes the last two dimensions of Y. Default = False
+// TransposesY if true, transposes the last two dimensions of Y. Default = False
 func (x *MatMulDescriptor) TransposesY() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("transposesY"))
 	return _r

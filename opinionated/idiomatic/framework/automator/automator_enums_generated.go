@@ -47,6 +47,8 @@ const (
 	ConversionFailedError                  ErrorCode = -302
 )
 
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ErrorCode) String() string {
 	switch e {
 	case WorkflowNewerVersionError:
@@ -136,6 +138,8 @@ const (
 	LogLevelError LogLevel = 3
 )
 
+// String returns the LogLevel constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LogLevel) String() string {
 	switch e {
 	case LogLevelDebug:

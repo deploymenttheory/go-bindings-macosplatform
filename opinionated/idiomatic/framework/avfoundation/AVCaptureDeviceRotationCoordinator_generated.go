@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that monitors the physical orientation of a capture device and provides adjustment angles to keep images level, relative to gravity.
-//
 // CaptureDeviceRotationCoordinator is an idiomatic wrapper over the Objective-C class AVCaptureDeviceRotationCoordinator.
+//
+// A class that monitors the physical orientation of a capture device and provides adjustment angles to keep images level, relative to gravity.
 type CaptureDeviceRotationCoordinator struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CaptureDeviceRotationCoordinatorFromID(id objc.ID) *CaptureDeviceRotationCo
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureDeviceRotationCoordinator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptureDeviceRotationCoordinator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func captureDeviceRotationCoordinatorAdopt(id objc.ID) *CaptureDeviceRotationCoo
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureDeviceRotationCoordinator{Handle: objref.Wrap(id)}
+	x := &CaptureDeviceRotationCoordinator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,34 +60,38 @@ func (x *CaptureDeviceRotationCoordinator) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns an AVCaptureDeviceRotationCoordinator instance that provides updates to the amount of rotation that should be applied for horizon-level preview and capture relative to gravity. An AVCaptureDeviceRotationCoordinator is only applicable to video devices. The given device and layer determine the amount of rotation that should be applied for horizon-level preview and capture.
-//
-// NewCaptureDeviceRotationCoordinatorWithDevicePreviewLayer creates a new CaptureDeviceRotationCoordinator.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptureDeviceRotationCoordinator) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCaptureDeviceRotationCoordinatorWithDevicePreviewLayer returns an AVCaptureDeviceRotationCoordinator instance that provides updates to the amount of rotation that should be applied for horizon-level preview and capture relative to gravity. An AVCaptureDeviceRotationCoordinator is only applicable to video devices. The given device and layer determine the amount of rotation that should be applied for horizon-level preview and capture.
 func NewCaptureDeviceRotationCoordinatorWithDevicePreviewLayer(device *CaptureDevice, previewLayer obj.Object) *CaptureDeviceRotationCoordinator {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptureDeviceRotationCoordinator")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:previewLayer:"), objref.IDOf(device), objref.IDOf(previewLayer))
 	return captureDeviceRotationCoordinatorAdopt(_id)
 }
 
-// The the device for which the coordinator provides video rotation angles. The value of this property is the AVCaptureDevice instance that was used to create the coordinator. The coordinator holds a weak reference to the device.
+// Device the the device for which the coordinator provides video rotation angles. The value of this property is the AVCaptureDevice instance that was used to create the coordinator. The coordinator holds a weak reference to the device.
 func (x *CaptureDeviceRotationCoordinator) Device() *CaptureDevice {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
 	return CaptureDeviceFromID(_r)
 }
 
-// The CALayer for which the coordinator calculates video rotation angles for horizon-level preview. The value of this property is the CALayer instance that was used to create the coordinator. Clients may specify an AVCaptureVideoPreviewLayer or other CALayer instance that displays a camera's video preview. The coordinator holds a weak reference to the layer. The coordinator will return 0 degrees of rotation from -videoRotationAngleForHorizonLevelPreview if a layer was not specified at initialization, the layer is not in a view hierarchy, or the layer has been deallocated.
+// PreviewLayer the CALayer for which the coordinator calculates video rotation angles for horizon-level preview. The value of this property is the CALayer instance that was used to create the coordinator. Clients may specify an AVCaptureVideoPreviewLayer or other CALayer instance that displays a camera's video preview. The coordinator holds a weak reference to the layer. The coordinator will return 0 degrees of rotation from -videoRotationAngleForHorizonLevelPreview if a layer was not specified at initialization, the layer is not in a view hierarchy, or the layer has been deallocated.
 func (x *CaptureDeviceRotationCoordinator) PreviewLayer() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previewLayer"))
 	return obj.Wrap(_r)
 }
 
-// Returns a video rotation angle in degrees for displaying the camera's video preview in the given CALayer. The video rotation angle represents by how much the camera's video preview should be rotated for display in the CALayer to be horizon-level relative to gravity. An angle of 0 degrees means that video will be output in the camera's unrotated, native sensor orientation. The video rotation angle for preview may differ between cameras at different positions. For example when an iOS device is held in portrait orientation, the video preview for built-in cameras may need to be rotated by 90 degrees while the video preview for an external camera should not be rotated. External cameras return 0 degrees of rotation even if they physically rotate when their position in physical space is unknown. This property is key-value observable and delivers updates on the main queue.
+// VideoRotationAngleForHorizonLevelPreview returns a video rotation angle in degrees for displaying the camera's video preview in the given CALayer. The video rotation angle represents by how much the camera's video preview should be rotated for display in the CALayer to be horizon-level relative to gravity. An angle of 0 degrees means that video will be output in the camera's unrotated, native sensor orientation. The video rotation angle for preview may differ between cameras at different positions. For example when an iOS device is held in portrait orientation, the video preview for built-in cameras may need to be rotated by 90 degrees while the video preview for an external camera should not be rotated. External cameras return 0 degrees of rotation even if they physically rotate when their position in physical space is unknown. This property is key-value observable and delivers updates on the main queue.
 func (x *CaptureDeviceRotationCoordinator) VideoRotationAngleForHorizonLevelPreview() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("videoRotationAngleForHorizonLevelPreview"))
 	return _r
 }
 
-// Returns a video rotation angle in degrees for horizon-level capture from this camera. The video rotation angle represents by how much the photos or movies captured from the camera should be rotated to be horizon-level relative to gravity. A video rotation angle of 0 degrees means that the output will be in the camera's unrotated, native sensor orientation. The video rotation angle for capture may differ between cameras. For example when an iOS device is held in portrait orientation, photos and movies captured from built-in cameras may need to be rotated by 90 degrees while the photos and movies from an external camera should not be rotated. External cameras return 0 degrees of rotation even if they physically rotate when their position in physical space is unknown. The video rotation angle returned from this property is distinct from the angle returned by -videoRotationAngleForHorizonLevelPreview because in certain combinations of device and interface orientations, the video rotation angle needed for horizon-level preview may not match the amount of rotation needed for horizon-level capture. This property is key-value observable and delivers updates on the main queue.
+// VideoRotationAngleForHorizonLevelCapture returns a video rotation angle in degrees for horizon-level capture from this camera. The video rotation angle represents by how much the photos or movies captured from the camera should be rotated to be horizon-level relative to gravity. A video rotation angle of 0 degrees means that the output will be in the camera's unrotated, native sensor orientation. The video rotation angle for capture may differ between cameras. For example when an iOS device is held in portrait orientation, photos and movies captured from built-in cameras may need to be rotated by 90 degrees while the photos and movies from an external camera should not be rotated. External cameras return 0 degrees of rotation even if they physically rotate when their position in physical space is unknown. The video rotation angle returned from this property is distinct from the angle returned by -videoRotationAngleForHorizonLevelPreview because in certain combinations of device and interface orientations, the video rotation angle needed for horizon-level preview may not match the amount of rotation needed for horizon-level capture. This property is key-value observable and delivers updates on the main queue.
 func (x *CaptureDeviceRotationCoordinator) VideoRotationAngleForHorizonLevelCapture() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("videoRotationAngleForHorizonLevelCapture"))
 	return _r

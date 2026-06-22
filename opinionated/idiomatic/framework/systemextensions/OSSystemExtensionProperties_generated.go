@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Properties that identify a specific version of a system extension.
-//
 // SystemExtensionProperties is an idiomatic wrapper over the Objective-C class OSSystemExtensionProperties.
+//
+// Properties that identify a specific version of a system extension.
 type SystemExtensionProperties struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SystemExtensionPropertiesFromID(id objc.ID) *SystemExtensionProperties {
 	if id == 0 {
 		return nil
 	}
-	x := &SystemExtensionProperties{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SystemExtensionProperties{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func systemExtensionPropertiesAdopt(id objc.ID) *SystemExtensionProperties {
 	if id == 0 {
 		return nil
 	}
-	x := &SystemExtensionProperties{Handle: objref.Wrap(id)}
+	x := &SystemExtensionProperties{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *SystemExtensionProperties) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SystemExtensionProperties) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSystemExtensionProperties creates a new SystemExtensionProperties.
 func NewSystemExtensionProperties() *SystemExtensionProperties {
 	_id := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionProperties")), objc.RegisterName("new"))
 	return systemExtensionPropertiesAdopt(_id)
 }
 
-// The file URL locating an indicating the extension bundle these properties were retreived from.
+// URL the file URL locating an indicating the extension bundle these properties were retreived from.
 func (x *SystemExtensionProperties) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// The bundle identifier of the extension (CFBundleIdentifier)
+// BundleIdentifier the bundle identifier of the extension (CFBundleIdentifier)
 func (x *SystemExtensionProperties) BundleIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {
@@ -79,7 +87,7 @@ func (x *SystemExtensionProperties) BundleIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// The bundle version of the extension (CFBundleVersion)
+// BundleVersion the bundle version of the extension (CFBundleVersion)
 func (x *SystemExtensionProperties) BundleVersion() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleVersion"))
 	if _r == 0 {
@@ -88,7 +96,7 @@ func (x *SystemExtensionProperties) BundleVersion() string {
 	return purego.GoString(_r)
 }
 
-// The bundle short version string of the extension (CFBundleShortVersionString)
+// BundleShortVersion the bundle short version string of the extension (CFBundleShortVersionString)
 func (x *SystemExtensionProperties) BundleShortVersion() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleShortVersion"))
 	if _r == 0 {
@@ -97,19 +105,19 @@ func (x *SystemExtensionProperties) BundleShortVersion() string {
 	return purego.GoString(_r)
 }
 
-// Returns the enabled state of the extension
+// IsEnabled returns the enabled state of the extension
 func (x *SystemExtensionProperties) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r
 }
 
-// Returns whether an extension is waiting for user approval
+// IsAwaitingUserApproval returns whether an extension is waiting for user approval
 func (x *SystemExtensionProperties) IsAwaitingUserApproval() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAwaitingUserApproval"))
 	return _r
 }
 
-// Returns if an extension is being uninstalled
+// IsUninstalling returns if an extension is being uninstalled
 func (x *SystemExtensionProperties) IsUninstalling() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUninstalling"))
 	return _r

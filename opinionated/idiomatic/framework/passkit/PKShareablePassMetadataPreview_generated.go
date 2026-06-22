@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ShareablePassMetadataPreview is an idiomatic wrapper over the Objective-C class PKShareablePassMetadataPreview.
+//
+// It embeds [AddPassMetadataPreview], promoting that type's methods.
 type ShareablePassMetadataPreview struct {
-	objref.Handle
+	AddPassMetadataPreview
 }
 
 // ShareablePassMetadataPreviewFromID adopts an existing Objective-C object as a ShareablePassMetadataPreview
@@ -23,7 +24,8 @@ func ShareablePassMetadataPreviewFromID(id objc.ID) *ShareablePassMetadataPrevie
 	if id == 0 {
 		return nil
 	}
-	x := &ShareablePassMetadataPreview{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ShareablePassMetadataPreview{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func shareablePassMetadataPreviewAdopt(id objc.ID) *ShareablePassMetadataPreview
 	if id == 0 {
 		return nil
 	}
-	x := &ShareablePassMetadataPreview{Handle: objref.Wrap(id)}
+	x := &ShareablePassMetadataPreview{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ShareablePassMetadataPreview) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ShareablePassMetadataPreview) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ShareablePassMetadataPreview) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewShareablePassMetadataPreviewWithTemplateIdentifier creates a new ShareablePassMetadataPreview.
@@ -63,12 +51,13 @@ func NewShareablePassMetadataPreviewWithTemplateIdentifier(templateIdentifier st
 	return shareablePassMetadataPreviewAdopt(_id)
 }
 
-// WithOwnerDisplayName sets ownerDisplayName and returns the receiver so calls can be chained.
+// WithOwnerDisplayName sets the property and returns the receiver so calls can be chained.
 func (x *ShareablePassMetadataPreview) WithOwnerDisplayName(ownerDisplayName string) *ShareablePassMetadataPreview {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOwnerDisplayName:"), purego.NSString(ownerDisplayName))
 	return x
 }
 
+// OwnerDisplayName wraps the corresponding Objective-C method.
 func (x *ShareablePassMetadataPreview) OwnerDisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ownerDisplayName"))
 	if _r == 0 {
@@ -77,10 +66,12 @@ func (x *ShareablePassMetadataPreview) OwnerDisplayName() string {
 	return purego.GoString(_r)
 }
 
+// SetOwnerDisplayName wraps the corresponding Objective-C method.
 func (x *ShareablePassMetadataPreview) SetOwnerDisplayName(ownerDisplayName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOwnerDisplayName:"), purego.NSString(ownerDisplayName))
 }
 
+// ProvisioningTemplateIdentifier wraps the corresponding Objective-C method.
 func (x *ShareablePassMetadataPreview) ProvisioningTemplateIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("provisioningTemplateIdentifier"))
 	if _r == 0 {
@@ -99,3 +90,5 @@ type ShareablePassMetadataPreviewable interface {
 }
 
 var _ ShareablePassMetadataPreviewable = (*ShareablePassMetadataPreview)(nil)
+
+var _ AddPassMetadataPreviewProvider = (*ShareablePassMetadataPreview)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Encapsulates a mutable configuration for an AirPort WLAN interface.
-//
 // MutableConfiguration is an idiomatic wrapper over the Objective-C class CWMutableConfiguration.
+//
+// It embeds [Configuration], promoting that type's methods.
+//
+// Encapsulates a mutable configuration for an AirPort WLAN interface.
 type MutableConfiguration struct {
-	objref.Handle
+	Configuration
 }
 
 // MutableConfigurationFromID adopts an existing Objective-C object as a MutableConfiguration
@@ -25,7 +26,8 @@ func MutableConfigurationFromID(id objc.ID) *MutableConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func mutableConfigurationAdopt(id objc.ID) *MutableConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableConfiguration{Handle: objref.Wrap(id)}
+	x := &MutableConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MutableConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMutableConfiguration creates a new MutableConfiguration.
@@ -64,62 +52,57 @@ func NewMutableConfiguration() *MutableConfiguration {
 	return mutableConfigurationAdopt(_id)
 }
 
-// The preferred networks list.
-//
-// WithNetworkProfiles sets networkProfiles and returns the receiver so calls can be chained.
+// WithNetworkProfiles the preferred networks list.
 func (x *MutableConfiguration) WithNetworkProfiles(networkProfiles obj.Object) *MutableConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkProfiles:"), objref.IDOf(networkProfiles))
 	return x
 }
 
-// A Boolean value that determines whether to require an administrator password to change networks.
-//
-// WithRequireAdministratorForAssociation sets requireAdministratorForAssociation and returns the receiver so calls can be chained.
+// WithRequireAdministratorForAssociation a Boolean value that determines whether to require an administrator password to change networks.
 func (x *MutableConfiguration) WithRequireAdministratorForAssociation(requireAdministratorForAssociation bool) *MutableConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequireAdministratorForAssociation:"), requireAdministratorForAssociation)
 	return x
 }
 
-// A Boolean value that determines whether to require an administrator password to change the interface power state.
-//
-// WithRequireAdministratorForPower sets requireAdministratorForPower and returns the receiver so calls can be chained.
+// WithRequireAdministratorForPower a Boolean value that determines whether to require an administrator password to change the interface power state.
 func (x *MutableConfiguration) WithRequireAdministratorForPower(requireAdministratorForPower bool) *MutableConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequireAdministratorForPower:"), requireAdministratorForPower)
 	return x
 }
 
-// A Boolean value that determines whether to require an administrator password to create a computer-to-computer network.
-//
-// WithRequireAdministratorForIBSSMode sets requireAdministratorForIBSSMode and returns the receiver so calls can be chained.
+// WithRequireAdministratorForIBSSMode a Boolean value that determines whether to require an administrator password to create a computer-to-computer network.
 func (x *MutableConfiguration) WithRequireAdministratorForIBSSMode(requireAdministratorForIBSSMode bool) *MutableConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequireAdministratorForIBSSMode:"), requireAdministratorForIBSSMode)
 	return x
 }
 
-// A Boolean value that determines whether to remember all joined Wi-Fi networks unless the user specifies otherwise when joining a particular Wi-Fi network.
-//
-// WithRememberJoinedNetworks sets rememberJoinedNetworks and returns the receiver so calls can be chained.
+// WithRememberJoinedNetworks a Boolean value that determines whether to remember all joined Wi-Fi networks unless the user specifies otherwise when joining a particular Wi-Fi network.
 func (x *MutableConfiguration) WithRememberJoinedNetworks(rememberJoinedNetworks bool) *MutableConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRememberJoinedNetworks:"), rememberJoinedNetworks)
 	return x
 }
 
+// SetNetworkProfiles wraps the corresponding Objective-C method.
 func (x *MutableConfiguration) SetNetworkProfiles(networkProfiles obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkProfiles:"), objref.IDOf(networkProfiles))
 }
 
+// SetRequireAdministratorForAssociation wraps the corresponding Objective-C method.
 func (x *MutableConfiguration) SetRequireAdministratorForAssociation(requireAdministratorForAssociation bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequireAdministratorForAssociation:"), requireAdministratorForAssociation)
 }
 
+// SetRequireAdministratorForPower wraps the corresponding Objective-C method.
 func (x *MutableConfiguration) SetRequireAdministratorForPower(requireAdministratorForPower bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequireAdministratorForPower:"), requireAdministratorForPower)
 }
 
+// SetRequireAdministratorForIBSSMode wraps the corresponding Objective-C method.
 func (x *MutableConfiguration) SetRequireAdministratorForIBSSMode(requireAdministratorForIBSSMode bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequireAdministratorForIBSSMode:"), requireAdministratorForIBSSMode)
 }
 
+// SetRememberJoinedNetworks wraps the corresponding Objective-C method.
 func (x *MutableConfiguration) SetRememberJoinedNetworks(rememberJoinedNetworks bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRememberJoinedNetworks:"), rememberJoinedNetworks)
 }
@@ -140,3 +123,5 @@ type MutableConfigurationable interface {
 }
 
 var _ MutableConfigurationable = (*MutableConfiguration)(nil)
+
+var _ ConfigurationProvider = (*MutableConfiguration)(nil)

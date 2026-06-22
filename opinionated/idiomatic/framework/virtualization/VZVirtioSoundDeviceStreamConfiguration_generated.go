@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines a Virtio sound device stream configuration.
-//
 // VirtioSoundDeviceStreamConfiguration is an idiomatic wrapper over the Objective-C class VZVirtioSoundDeviceStreamConfiguration.
+//
+// VirtioSoundDeviceStreamConfiguration is an abstract base — you do not construct it directly. Construct one of [VirtioSoundDeviceInputStreamConfiguration], [VirtioSoundDeviceOutputStreamConfiguration] and pass it where a VirtioSoundDeviceStreamConfiguration is accepted.
+//
+// An object that defines a Virtio sound device stream configuration.
 type VirtioSoundDeviceStreamConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func VirtioSoundDeviceStreamConfigurationFromID(id objc.ID) *VirtioSoundDeviceSt
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioSoundDeviceStreamConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VirtioSoundDeviceStreamConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func virtioSoundDeviceStreamConfigurationAdopt(id objc.ID) *VirtioSoundDeviceStr
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioSoundDeviceStreamConfiguration{Handle: objref.Wrap(id)}
+	x := &VirtioSoundDeviceStreamConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *VirtioSoundDeviceStreamConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewVirtioSoundDeviceStreamConfiguration creates a new VirtioSoundDeviceStreamConfiguration.
-func NewVirtioSoundDeviceStreamConfiguration() *VirtioSoundDeviceStreamConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioSoundDeviceStreamConfiguration")), objc.RegisterName("new"))
-	return virtioSoundDeviceStreamConfigurationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VirtioSoundDeviceStreamConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // VirtioSoundDeviceStreamConfigurationable is the interface implemented by [VirtioSoundDeviceStreamConfiguration], for mocking and DI.
@@ -70,3 +74,10 @@ type VirtioSoundDeviceStreamConfigurationable interface {
 }
 
 var _ VirtioSoundDeviceStreamConfigurationable = (*VirtioSoundDeviceStreamConfiguration)(nil)
+
+// isVirtioSoundDeviceStreamConfiguration marks VirtioSoundDeviceStreamConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the VirtioSoundDeviceStreamConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *VirtioSoundDeviceStreamConfiguration) isVirtioSoundDeviceStreamConfiguration() {}
+
+var _ VirtioSoundDeviceStreamConfigurationProvider = (*VirtioSoundDeviceStreamConfiguration)(nil)

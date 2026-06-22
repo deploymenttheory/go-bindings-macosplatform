@@ -23,7 +23,8 @@ func CNNConvolutionWeightsAndBiasesStateFromID(id objc.ID) *CNNConvolutionWeight
 	if id == 0 {
 		return nil
 	}
-	x := &CNNConvolutionWeightsAndBiasesState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNConvolutionWeightsAndBiasesState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func cNNConvolutionWeightsAndBiasesStateAdopt(id objc.ID) *CNNConvolutionWeights
 	if id == 0 {
 		return nil
 	}
-	x := &CNNConvolutionWeightsAndBiasesState{Handle: objref.Wrap(id)}
+	x := &CNNConvolutionWeightsAndBiasesState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,19 +58,25 @@ func (x *CNNConvolutionWeightsAndBiasesState) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CNNConvolutionWeightsAndBiasesState) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCNNConvolutionWeightsAndBiasesState creates a new CNNConvolutionWeightsAndBiasesState.
 func NewCNNConvolutionWeightsAndBiasesState() *CNNConvolutionWeightsAndBiasesState {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNConvolutionWeightsAndBiasesState")), objc.RegisterName("new"))
 	return cNNConvolutionWeightsAndBiasesStateAdopt(_id)
 }
 
-// Offset at which weights start in weights buffer Default value is 0.
+// WeightsOffset offset at which weights start in weights buffer Default value is 0.
 func (x *CNNConvolutionWeightsAndBiasesState) WeightsOffset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("weightsOffset"))
 	return _r
 }
 
-// Offset at which weights start in biases buffer Default value is 0.
+// BiasesOffset offset at which weights start in biases buffer Default value is 0.
 func (x *CNNConvolutionWeightsAndBiasesState) BiasesOffset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("biasesOffset"))
 	return _r

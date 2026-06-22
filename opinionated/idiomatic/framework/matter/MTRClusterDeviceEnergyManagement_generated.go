@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Device Energy Management This cluster allows a client to manage the power draw of a device. An example of such a client could be an Energy Management System (EMS) which controls an Energy Smart Appliance (ESA).
-//
 // MTRClusterDeviceEnergyManagement is an idiomatic wrapper over the Objective-C class MTRClusterDeviceEnergyManagement.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
+//
+// Cluster Device Energy Management This cluster allows a client to manage the power draw of a device. An example of such a client could be an Energy Management System (EMS) which controls an Energy Smart Appliance (ESA).
 type MTRClusterDeviceEnergyManagement struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterDeviceEnergyManagementFromID adopts an existing Objective-C object as a MTRClusterDeviceEnergyManagement
@@ -25,7 +26,8 @@ func MTRClusterDeviceEnergyManagementFromID(id objc.ID) *MTRClusterDeviceEnergyM
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterDeviceEnergyManagement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterDeviceEnergyManagement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,95 +40,92 @@ func mTRClusterDeviceEnergyManagementAdopt(id objc.ID) *MTRClusterDeviceEnergyMa
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterDeviceEnergyManagement{Handle: objref.Wrap(id)}
+	x := &MTRClusterDeviceEnergyManagement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterDeviceEnergyManagement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterDeviceEnergyManagement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterDeviceEnergyManagement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterDeviceEnergyManagementWithDeviceEndpointIDQueue creates a new MTRClusterDeviceEnergyManagement.
+// NewMTRClusterDeviceEnergyManagementWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterDeviceEnergyManagementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterDeviceEnergyManagement {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterDeviceEnergyManagement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterDeviceEnergyManagementAdopt(_id)
 }
 
+// ReadAttributeESATypeWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDeviceEnergyManagement) ReadAttributeESATypeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeESATypeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeESACanGenerateWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDeviceEnergyManagement) ReadAttributeESACanGenerateWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeESACanGenerateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeESAStateWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDeviceEnergyManagement) ReadAttributeESAStateWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeESAStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAbsMinPowerWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDeviceEnergyManagement) ReadAttributeAbsMinPowerWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAbsMinPowerWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAbsMaxPowerWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDeviceEnergyManagement) ReadAttributeAbsMaxPowerWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAbsMaxPowerWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributePowerAdjustmentCapabilityWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDeviceEnergyManagement) ReadAttributePowerAdjustmentCapabilityWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePowerAdjustmentCapabilityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeForecastWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDeviceEnergyManagement) ReadAttributeForecastWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeForecastWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeOptOutStateWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDeviceEnergyManagement) ReadAttributeOptOutStateWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOptOutStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDeviceEnergyManagement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDeviceEnergyManagement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDeviceEnergyManagement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDeviceEnergyManagement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDeviceEnergyManagement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -151,3 +150,7 @@ type MTRClusterDeviceEnergyManagementable interface {
 }
 
 var _ MTRClusterDeviceEnergyManagementable = (*MTRClusterDeviceEnergyManagement)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterDeviceEnergyManagement)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterDeviceEnergyManagement)(nil)

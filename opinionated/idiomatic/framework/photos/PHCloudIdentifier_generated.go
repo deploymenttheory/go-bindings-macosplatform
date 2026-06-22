@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that identifies an asset or collection that syncs through iCloud Photos.
-//
 // CloudIdentifier is an idiomatic wrapper over the Objective-C class PHCloudIdentifier.
+//
+// An object that identifies an asset or collection that syncs through iCloud Photos.
 type CloudIdentifier struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CloudIdentifierFromID(id objc.ID) *CloudIdentifier {
 	if id == 0 {
 		return nil
 	}
-	x := &CloudIdentifier{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CloudIdentifier{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func cloudIdentifierAdopt(id objc.ID) *CloudIdentifier {
 	if id == 0 {
 		return nil
 	}
-	x := &CloudIdentifier{Handle: objref.Wrap(id)}
+	x := &CloudIdentifier{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,16 +60,20 @@ func (x *CloudIdentifier) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Deserializes a cloud identifier from its string value.
-//
-// NewCloudIdentifierWithStringValue creates a new CloudIdentifier.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CloudIdentifier) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCloudIdentifierWithStringValue deserializes a cloud identifier from its string value.
 func NewCloudIdentifierWithStringValue(stringValue string) *CloudIdentifier {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHCloudIdentifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStringValue:"), purego.NSString(stringValue))
 	return cloudIdentifierAdopt(_id)
 }
 
-// For use in serialization
+// StringValue for use in serialization
 func (x *CloudIdentifier) StringValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
 	if _r == 0 {

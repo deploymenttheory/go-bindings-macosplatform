@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a remote device.
-//
 // Peer is an idiomatic wrapper over the Objective-C class CBPeer.
+//
+// Peer is an abstract base — you do not construct it directly. Construct one of [Central], [Peripheral] and pass it where a Peer is accepted.
+//
+// An object that represents a remote device.
 type Peer struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func PeerFromID(id objc.ID) *Peer {
 	if id == 0 {
 		return nil
 	}
-	x := &Peer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Peer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func peerAdopt(id objc.ID) *Peer {
 	if id == 0 {
 		return nil
 	}
-	x := &Peer{Handle: objref.Wrap(id)}
+	x := &Peer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +62,13 @@ func (x *Peer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewPeer creates a new Peer.
-func NewPeer() *Peer {
-	_id := objc.Send[objc.ID](objc.ID(_class("CBPeer")), objc.RegisterName("new"))
-	return peerAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Peer) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *Peer) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
@@ -76,3 +81,10 @@ type Peerable interface {
 }
 
 var _ Peerable = (*Peer)(nil)
+
+// isPeer marks Peer — and, by embedding promotion, its
+// subclasses — as a member of the Peer hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Peer) isPeer() {}
+
+var _ PeerProvider = (*Peer)(nil)

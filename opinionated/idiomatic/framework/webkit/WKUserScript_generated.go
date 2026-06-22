@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A script that the web view injects into a webpage.
-//
 // WKUserScript is an idiomatic wrapper over the Objective-C class WKUserScript.
+//
+// A script that the web view injects into a webpage.
 type WKUserScript struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKUserScriptFromID(id objc.ID) *WKUserScript {
 	if id == 0 {
 		return nil
 	}
-	x := &WKUserScript{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKUserScript{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKUserScriptAdopt(id objc.ID) *WKUserScript {
 	if id == 0 {
 		return nil
 	}
-	x := &WKUserScript{Handle: objref.Wrap(id)}
+	x := &WKUserScript{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +60,27 @@ func (x *WKUserScript) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a user script object that contains the specified source code and attributes.
-//
-// NewWKUserScriptWithSourceInjectionTimeForMainFrameOnly creates a new WKUserScript.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKUserScript) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWKUserScriptWithSourceInjectionTimeForMainFrameOnly creates a user script object that contains the specified source code and attributes.
 func NewWKUserScriptWithSourceInjectionTimeForMainFrameOnly(source string, injectionTime WKUserScriptInjectionTime, forMainFrameOnly bool) *WKUserScript {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("WKUserScript")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:injectionTime:forMainFrameOnly:"), purego.NSString(source), injectionTime, forMainFrameOnly)
 	return wKUserScriptAdopt(_id)
 }
 
-// Creates a user script object that is scoped to a particular content world.
-//
-// NewWKUserScriptWithSourceInjectionTimeForMainFrameOnlyInContentWorld creates a new WKUserScript.
+// NewWKUserScriptWithSourceInjectionTimeForMainFrameOnlyInContentWorld creates a user script object that is scoped to a particular content world.
 func NewWKUserScriptWithSourceInjectionTimeForMainFrameOnlyInContentWorld(source string, injectionTime WKUserScriptInjectionTime, forMainFrameOnly bool, contentWorld *WKContentWorld) *WKUserScript {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("WKUserScript")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:injectionTime:forMainFrameOnly:inContentWorld:"), purego.NSString(source), injectionTime, forMainFrameOnly, objref.IDOf(contentWorld))
 	return wKUserScriptAdopt(_id)
 }
 
+// Source wraps the corresponding Objective-C method.
 func (x *WKUserScript) Source() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
 	if _r == 0 {
@@ -84,11 +89,13 @@ func (x *WKUserScript) Source() string {
 	return purego.GoString(_r)
 }
 
+// InjectionTime wraps the corresponding Objective-C method.
 func (x *WKUserScript) InjectionTime() WKUserScriptInjectionTime {
 	_r := objc.Send[WKUserScriptInjectionTime](objref.IDOf(x), objc.RegisterName("injectionTime"))
 	return _r
 }
 
+// IsForMainFrameOnly wraps the corresponding Objective-C method.
 func (x *WKUserScript) IsForMainFrameOnly() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isForMainFrameOnly"))
 	return _r

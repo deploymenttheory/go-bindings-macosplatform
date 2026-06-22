@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that manages access and changes to the user’s photo library.
-//
 // PhotoLibrary is an idiomatic wrapper over the Objective-C class PHPhotoLibrary.
+//
+// An object that manages access and changes to the user’s photo library.
 type PhotoLibrary struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func PhotoLibraryFromID(id objc.ID) *PhotoLibrary {
 	if id == 0 {
 		return nil
 	}
-	x := &PhotoLibrary{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PhotoLibrary{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func photoLibraryAdopt(id objc.ID) *PhotoLibrary {
 	if id == 0 {
 		return nil
 	}
-	x := &PhotoLibrary{Handle: objref.Wrap(id)}
+	x := &PhotoLibrary{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,13 +62,19 @@ func (x *PhotoLibrary) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PhotoLibrary) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPhotoLibrary creates a new PhotoLibrary.
 func NewPhotoLibrary() *PhotoLibrary {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHPhotoLibrary")), objc.RegisterName("new"))
 	return photoLibraryAdopt(_id)
 }
 
-// Synchronously runs a block that requests changes to be performed in the photo library.
+// PerformChangesAndWait synchronously runs a block that requests changes to be performed in the photo library.
 func (x *PhotoLibrary) PerformChangesAndWait(changeBlock func()) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("performChangesAndWait:error:"), changeBlock, unsafe.Pointer(&_nsErr))
@@ -76,8 +84,8 @@ func (x *PhotoLibrary) PerformChangesAndWait(changeBlock func()) error {
 	return nil
 }
 
-// Retrieves the Photos library changes since the token you specify.
-func (x *PhotoLibrary) FetchPersistentChangesSinceTokenError(token *PersistentChangeToken) (*PersistentChangeFetchResult, error) {
+// FetchPersistentChangesSinceTokenError retrieves the Photos library changes since the token you specify.
+func (x *PhotoLibrary) FetchPersistentChangesSinceTokenError(token *PersistentChangeToken) (result *PersistentChangeFetchResult, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchPersistentChangesSinceToken:error:"), objref.IDOf(token), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -86,30 +94,31 @@ func (x *PhotoLibrary) FetchPersistentChangesSinceTokenError(token *PersistentCh
 	return PersistentChangeFetchResultFromID(_r), nil
 }
 
+// CurrentChangeToken wraps the corresponding Objective-C method.
 func (x *PhotoLibrary) CurrentChangeToken() *PersistentChangeToken {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentChangeToken"))
 	return PersistentChangeTokenFromID(_r)
 }
 
-// Retrieves the local identifier mappings for the list of cloud identifiers.
+// LocalIdentifierMappingsForCloudIdentifiers retrieves the local identifier mappings for the list of cloud identifiers.
 func (x *PhotoLibrary) LocalIdentifierMappingsForCloudIdentifiers(cloudIdentifiers []*CloudIdentifier) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localIdentifierMappingsForCloudIdentifiers:"), purego.SliceToNSArray(cloudIdentifiers, func(_v *CloudIdentifier) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
-// Retrieves the cloud identifier mappings for the list of local identifiers.
+// CloudIdentifierMappingsForLocalIdentifiers retrieves the cloud identifier mappings for the list of local identifiers.
 func (x *PhotoLibrary) CloudIdentifierMappingsForLocalIdentifiers(localIdentifiers []string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cloudIdentifierMappingsForLocalIdentifiers:"), purego.SliceToNSArray(localIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return obj.Wrap(_r)
 }
 
-// Retrieves the equivalent local identifiers for the list of iCloud identifiers.
+// LocalIdentifiersForCloudIdentifiers retrieves the equivalent local identifiers for the list of iCloud identifiers.
 func (x *PhotoLibrary) LocalIdentifiersForCloudIdentifiers(cloudIdentifiers []*CloudIdentifier) []string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localIdentifiersForCloudIdentifiers:"), purego.SliceToNSArray(cloudIdentifiers, func(_v *CloudIdentifier) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Retrieves the equivalent iCloud identifiers for the list of local identifiers.
+// CloudIdentifiersForLocalIdentifiers retrieves the equivalent iCloud identifiers for the list of local identifiers.
 func (x *PhotoLibrary) CloudIdentifiersForLocalIdentifiers(localIdentifiers []string) []*CloudIdentifier {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cloudIdentifiersForLocalIdentifiers:"), purego.SliceToNSArray(localIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *CloudIdentifier { return CloudIdentifierFromID(_id) })
@@ -119,7 +128,7 @@ func (x *PhotoLibrary) CloudIdentifiersForLocalIdentifiers(localIdentifiers []st
 type PhotoLibraryable interface {
 	obj.Object
 	PerformChangesAndWait(changeBlock func()) error
-	FetchPersistentChangesSinceTokenError(token *PersistentChangeToken) (*PersistentChangeFetchResult, error)
+	FetchPersistentChangesSinceTokenError(token *PersistentChangeToken) (result *PersistentChangeFetchResult, err error)
 	CurrentChangeToken() *PersistentChangeToken
 	LocalIdentifierMappingsForCloudIdentifiers(cloudIdentifiers []*CloudIdentifier) obj.Object
 	CloudIdentifierMappingsForLocalIdentifiers(localIdentifiers []string) obj.Object

@@ -9,6 +9,5 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// LocalAuthentication error domain.
 // LAErrorDomain returns the string constant LAErrorDomain, for use as a dictionary key or argument.
 func LAErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("LAErrorDomain"))) }

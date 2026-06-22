@@ -23,7 +23,8 @@ func MetricMediaRenditionFromID(id objc.ID) *MetricMediaRendition {
 	if id == 0 {
 		return nil
 	}
-	x := &MetricMediaRendition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetricMediaRendition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func metricMediaRenditionAdopt(id objc.ID) *MetricMediaRendition {
 	if id == 0 {
 		return nil
 	}
-	x := &MetricMediaRendition{Handle: objref.Wrap(id)}
+	x := &MetricMediaRendition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,13 +58,19 @@ func (x *MetricMediaRendition) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetricMediaRendition) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMetricMediaRendition creates a new MetricMediaRendition.
 func NewMetricMediaRendition() *MetricMediaRendition {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVMetricMediaRendition")), objc.RegisterName("new"))
 	return metricMediaRenditionAdopt(_id)
 }
 
-// Provides ID corresponding to the rendition. This is equivalent to the STABLE-RENDITION-ID in the HLS playlist. If not available, value is nil.
+// StableID provides ID corresponding to the rendition. This is equivalent to the STABLE-RENDITION-ID in the HLS playlist. If not available, value is nil.
 func (x *MetricMediaRendition) StableID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stableID"))
 	if _r == 0 {
@@ -71,7 +79,7 @@ func (x *MetricMediaRendition) StableID() string {
 	return purego.GoString(_r)
 }
 
-// Provides URL corresponding to the rendition's HLS playlist. If not available, value is nil.
+// URL provides URL corresponding to the rendition's HLS playlist. If not available, value is nil.
 func (x *MetricMediaRendition) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)

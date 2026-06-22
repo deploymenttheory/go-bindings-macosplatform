@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The configuration parameters to use when searching the contents of the web view.
-//
 // WKFindConfiguration is an idiomatic wrapper over the Objective-C class WKFindConfiguration.
+//
+// The configuration parameters to use when searching the contents of the web view.
 type WKFindConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKFindConfigurationFromID(id objc.ID) *WKFindConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &WKFindConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKFindConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKFindConfigurationAdopt(id objc.ID) *WKFindConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &WKFindConfiguration{Handle: objref.Wrap(id)}
+	x := &WKFindConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,59 +60,65 @@ func (x *WKFindConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKFindConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKFindConfiguration creates a new WKFindConfiguration.
 func NewWKFindConfiguration() *WKFindConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKFindConfiguration")), objc.RegisterName("new"))
 	return wKFindConfigurationAdopt(_id)
 }
 
-// A Boolean value that indicates the search direction, relative to the current selection.
-//
-// WithBackwards sets backwards and returns the receiver so calls can be chained.
+// WithBackwards a Boolean value that indicates the search direction, relative to the current selection.
 func (x *WKFindConfiguration) WithBackwards(backwards bool) *WKFindConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackwards:"), backwards)
 	return x
 }
 
-// A Boolean value that indicates whether to consider case when matching the search string.
-//
-// WithCaseSensitive sets caseSensitive and returns the receiver so calls can be chained.
+// WithCaseSensitive a Boolean value that indicates whether to consider case when matching the search string.
 func (x *WKFindConfiguration) WithCaseSensitive(caseSensitive bool) *WKFindConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaseSensitive:"), caseSensitive)
 	return x
 }
 
-// A Boolean value that indicates whether the search wraps around to the other side of the page.
-//
-// WithWraps sets wraps and returns the receiver so calls can be chained.
+// WithWraps a Boolean value that indicates whether the search wraps around to the other side of the page.
 func (x *WKFindConfiguration) WithWraps(wraps bool) *WKFindConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
 	return x
 }
 
+// Backwards wraps the corresponding Objective-C method.
 func (x *WKFindConfiguration) Backwards() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("backwards"))
 	return _r
 }
 
+// SetBackwards wraps the corresponding Objective-C method.
 func (x *WKFindConfiguration) SetBackwards(backwards bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackwards:"), backwards)
 }
 
+// CaseSensitive wraps the corresponding Objective-C method.
 func (x *WKFindConfiguration) CaseSensitive() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("caseSensitive"))
 	return _r
 }
 
+// SetCaseSensitive wraps the corresponding Objective-C method.
 func (x *WKFindConfiguration) SetCaseSensitive(caseSensitive bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaseSensitive:"), caseSensitive)
 }
 
+// Wraps wraps the corresponding Objective-C method.
 func (x *WKFindConfiguration) Wraps() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wraps"))
 	return _r
 }
 
+// SetWraps wraps the corresponding Objective-C method.
 func (x *WKFindConfiguration) SetWraps(wraps bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
 }

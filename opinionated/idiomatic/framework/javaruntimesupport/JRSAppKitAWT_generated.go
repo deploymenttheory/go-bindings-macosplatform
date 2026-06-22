@@ -23,7 +23,8 @@ func AppKitAWTFromID(id objc.ID) *AppKitAWT {
 	if id == 0 {
 		return nil
 	}
-	x := &AppKitAWT{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AppKitAWT{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func appKitAWTAdopt(id objc.ID) *AppKitAWT {
 	if id == 0 {
 		return nil
 	}
-	x := &AppKitAWT{Handle: objref.Wrap(id)}
+	x := &AppKitAWT{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *AppKitAWT) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *AppKitAWT) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AppKitAWT) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewAppKitAWT creates a new AppKitAWT.

@@ -6,17 +6,19 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A gradient neuron activation kernel that operates on matrices.
-//
 // MatrixNeuronGradient is an idiomatic wrapper over the Objective-C class MPSMatrixNeuronGradient.
+//
+// It embeds [MatrixBinaryKernel], promoting that type's methods.
+//
+// A gradient neuron activation kernel that operates on matrices.
 type MatrixNeuronGradient struct {
-	objref.Handle
+	MatrixBinaryKernel
 }
 
 // MatrixNeuronGradientFromID adopts an existing Objective-C object as a MatrixNeuronGradient
@@ -25,7 +27,8 @@ func MatrixNeuronGradientFromID(id objc.ID) *MatrixNeuronGradient {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixNeuronGradient{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatrixNeuronGradient{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func matrixNeuronGradientAdopt(id objc.ID) *MatrixNeuronGradient {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixNeuronGradient{Handle: objref.Wrap(id)}
+	x := &MatrixNeuronGradient{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MatrixNeuronGradient) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatrixNeuronGradient) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatrixNeuronGradient) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMatrixNeuronGradient creates a new MatrixNeuronGradient.
@@ -64,103 +53,112 @@ func NewMatrixNeuronGradient() *MatrixNeuronGradient {
 	return matrixNeuronGradientAdopt(_id)
 }
 
-// The number of input vectors which make up the input array.
-//
-// WithSourceNumberOfFeatureVectors sets sourceNumberOfFeatureVectors and returns the receiver so calls can be chained.
+// WithSourceNumberOfFeatureVectors the number of input vectors which make up the input array.
 func (x *MatrixNeuronGradient) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixNeuronGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
 	return x
 }
 
-// The number of feature channels in the input vectors.
-//
-// WithSourceInputFeatureChannels sets sourceInputFeatureChannels and returns the receiver so calls can be chained.
+// WithSourceInputFeatureChannels the number of feature channels in the input vectors.
 func (x *MatrixNeuronGradient) WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixNeuronGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
 	return x
 }
 
-// The scale factor to apply to the input.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the scale factor to apply to the input.
 func (x *MatrixNeuronGradient) WithAlpha(alpha float64) *MatrixNeuronGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
-//
-// WithBatchStart sets batchStart and returns the receiver so calls can be chained.
+// WithPrimarySourceMatrixOrigin the origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixNeuronGradient) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixNeuronGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceMatrixOrigin:"), primarySourceMatrixOrigin)
+	return x
+}
+
+// WithSecondarySourceMatrixOrigin the origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixNeuronGradient) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixNeuronGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceMatrixOrigin:"), secondarySourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixNeuronGradient) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixNeuronGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
 func (x *MatrixNeuronGradient) WithBatchStart(batchStart int) *MatrixNeuronGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 	return x
 }
 
-// The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
-//
-// WithBatchSize sets batchSize and returns the receiver so calls can be chained.
+// WithBatchSize the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
 func (x *MatrixNeuronGradient) WithBatchSize(batchSize int) *MatrixNeuronGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *MatrixNeuronGradient) WithLabel(label string) *MatrixNeuronGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+// NeuronParameterA getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (x *MatrixNeuronGradient) NeuronParameterA() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterA"))
 	return _r
 }
 
-// Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+// NeuronParameterB getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (x *MatrixNeuronGradient) NeuronParameterB() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterB"))
 	return _r
 }
 
-// Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+// NeuronParameterC getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (x *MatrixNeuronGradient) NeuronParameterC() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterC"))
 	return _r
 }
 
-// Add per output value neuron parameters A for PReLu neuron activation functions. This method sets the neuron to PReLU, zeros parameters A and B and sets the per output value neuron parameters A to an array containing a unique value of A for each output value. If the neuron function is f(v,a,b), it will apply resultMatrix(i, j) = f( input(i, j), A[j], B[j] ) where j in [0, sourceInputFeatureChannels] See https://arxiv.org/pdf/1502.01852.pdf for details. All other neuron types, where parameter A and parameter B are shared across output values must be set using -setNeuronType:parameterA:parameterB:
+// SetNeuronToPReLUWithParametersA add per output value neuron parameters A for PReLu neuron activation functions. This method sets the neuron to PReLU, zeros parameters A and B and sets the per output value neuron parameters A to an array containing a unique value of A for each output value. If the neuron function is f(v,a,b), it will apply resultMatrix(i, j) = f( input(i, j), A[j], B[j] ) where j in [0, sourceInputFeatureChannels] See https://arxiv.org/pdf/1502.01852.pdf for details. All other neuron types, where parameter A and parameter B are shared across output values must be set using -setNeuronType:parameterA:parameterB:
 func (x *MatrixNeuronGradient) SetNeuronToPReLUWithParametersA(a obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeuronToPReLUWithParametersA:"), objref.IDOf(a))
 }
 
-// The number of input vectors which make up the input array.
+// SourceNumberOfFeatureVectors the number of input vectors which make up the input array.
 func (x *MatrixNeuronGradient) SourceNumberOfFeatureVectors() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceNumberOfFeatureVectors"))
 	return _r
 }
 
+// SetSourceNumberOfFeatureVectors wraps the corresponding Objective-C method.
 func (x *MatrixNeuronGradient) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
 }
 
-// The number of feature channels in the input vectors.
+// SourceInputFeatureChannels the number of feature channels in the input vectors.
 func (x *MatrixNeuronGradient) SourceInputFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceInputFeatureChannels"))
 	return _r
 }
 
+// SetSourceInputFeatureChannels wraps the corresponding Objective-C method.
 func (x *MatrixNeuronGradient) SetSourceInputFeatureChannels(sourceInputFeatureChannels int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
 }
 
-// The scale factor to apply to the input.
+// Alpha the scale factor to apply to the input.
 func (x *MatrixNeuronGradient) Alpha() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
 	return _r
 }
 
+// SetAlpha wraps the corresponding Objective-C method.
 func (x *MatrixNeuronGradient) SetAlpha(alpha float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }
@@ -171,6 +169,9 @@ type MatrixNeuronGradientable interface {
 	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixNeuronGradient
 	WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixNeuronGradient
 	WithAlpha(alpha float64) *MatrixNeuronGradient
+	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixNeuronGradient
+	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixNeuronGradient
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixNeuronGradient
 	WithBatchStart(batchStart int) *MatrixNeuronGradient
 	WithBatchSize(batchSize int) *MatrixNeuronGradient
 	WithLabel(label string) *MatrixNeuronGradient
@@ -187,3 +188,7 @@ type MatrixNeuronGradientable interface {
 }
 
 var _ MatrixNeuronGradientable = (*MatrixNeuronGradient)(nil)
+
+var _ MatrixBinaryKernelProvider = (*MatrixNeuronGradient)(nil)
+
+var _ KernelProvider = (*MatrixNeuronGradient)(nil)

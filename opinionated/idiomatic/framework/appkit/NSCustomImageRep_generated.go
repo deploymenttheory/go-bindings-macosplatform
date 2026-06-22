@@ -6,17 +6,19 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that uses a delegate object to render an image from a custom format.
-//
 // CustomImageRep is an idiomatic wrapper over the Objective-C class NSCustomImageRep.
+//
+// It embeds [ImageRep], promoting that type's methods.
+//
+// An object that uses a delegate object to render an image from a custom format.
 type CustomImageRep struct {
-	objref.Handle
+	ImageRep
 }
 
 // CustomImageRepFromID adopts an existing Objective-C object as a CustomImageRep
@@ -25,7 +27,8 @@ func CustomImageRepFromID(id objc.ID) *CustomImageRep {
 	if id == 0 {
 		return nil
 	}
-	x := &CustomImageRep{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CustomImageRep{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func customImageRepAdopt(id objc.ID) *CustomImageRep {
 	if id == 0 {
 		return nil
 	}
-	x := &CustomImageRep{Handle: objref.Wrap(id)}
+	x := &CustomImageRep{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CustomImageRep) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CustomImageRep) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CustomImageRep) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCustomImageRep creates a new CustomImageRep.
@@ -64,62 +53,55 @@ func NewCustomImageRep() *CustomImageRep {
 	return customImageRepAdopt(_id)
 }
 
-// A Boolean value that indicates whether the image data has an alpha channel.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithSize the size of the image representation, measured in points in the user coordinate space.
+func (x *CustomImageRep) WithSize(size corefoundation.CGSize) *CustomImageRep {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
+	return x
+}
+
+// WithAlpha a Boolean value that indicates whether the image data has an alpha channel.
 func (x *CustomImageRep) WithAlpha(alpha bool) *CustomImageRep {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// A Boolean value that indicates whether the image is opaque.
-//
-// WithOpaque sets opaque and returns the receiver so calls can be chained.
+// WithOpaque a Boolean value that indicates whether the image is opaque.
 func (x *CustomImageRep) WithOpaque(opaque bool) *CustomImageRep {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
 	return x
 }
 
-// The name of the color space used by the image data.
-//
-// WithColorSpaceName sets colorSpaceName and returns the receiver so calls can be chained.
+// WithColorSpaceName the name of the color space used by the image data.
 func (x *CustomImageRep) WithColorSpaceName(colorSpaceName obj.Object) *CustomImageRep {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
 	return x
 }
 
-// The number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
-//
-// WithBitsPerSample sets bitsPerSample and returns the receiver so calls can be chained.
+// WithBitsPerSample the number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
 func (x *CustomImageRep) WithBitsPerSample(bitsPerSample int) *CustomImageRep {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitsPerSample:"), bitsPerSample)
 	return x
 }
 
-// The width of the image, measured in pixels.
-//
-// WithPixelsWide sets pixelsWide and returns the receiver so calls can be chained.
+// WithPixelsWide the width of the image, measured in pixels.
 func (x *CustomImageRep) WithPixelsWide(pixelsWide int) *CustomImageRep {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsWide:"), pixelsWide)
 	return x
 }
 
-// The height of the image, measured in pixels.
-//
-// WithPixelsHigh sets pixelsHigh and returns the receiver so calls can be chained.
+// WithPixelsHigh the height of the image, measured in pixels.
 func (x *CustomImageRep) WithPixelsHigh(pixelsHigh int) *CustomImageRep {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsHigh:"), pixelsHigh)
 	return x
 }
 
-// The layout direction for the image.
-//
-// WithLayoutDirection sets layoutDirection and returns the receiver so calls can be chained.
+// WithLayoutDirection the layout direction for the image.
 func (x *CustomImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection) *CustomImageRep {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutDirection:"), layoutDirection)
 	return x
 }
 
+// Delegate wraps the corresponding Objective-C method.
 func (x *CustomImageRep) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
@@ -128,6 +110,7 @@ func (x *CustomImageRep) Delegate() obj.Object {
 // CustomImageRepable is the interface implemented by [CustomImageRep], for mocking and DI.
 type CustomImageRepable interface {
 	obj.Object
+	WithSize(size corefoundation.CGSize) *CustomImageRep
 	WithAlpha(alpha bool) *CustomImageRep
 	WithOpaque(opaque bool) *CustomImageRep
 	WithColorSpaceName(colorSpaceName obj.Object) *CustomImageRep
@@ -139,3 +122,5 @@ type CustomImageRepable interface {
 }
 
 var _ CustomImageRepable = (*CustomImageRep)(nil)
+
+var _ ImageRepProvider = (*CustomImageRep)(nil)

@@ -23,7 +23,8 @@ func SliderAccessoryBehaviorFromID(id objc.ID) *SliderAccessoryBehavior {
 	if id == 0 {
 		return nil
 	}
-	x := &SliderAccessoryBehavior{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SliderAccessoryBehavior{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func sliderAccessoryBehaviorAdopt(id objc.ID) *SliderAccessoryBehavior {
 	if id == 0 {
 		return nil
 	}
-	x := &SliderAccessoryBehavior{Handle: objref.Wrap(id)}
+	x := &SliderAccessoryBehavior{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,13 +58,19 @@ func (x *SliderAccessoryBehavior) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SliderAccessoryBehavior) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSliderAccessoryBehavior creates a new SliderAccessoryBehavior.
 func NewSliderAccessoryBehavior() *SliderAccessoryBehavior {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSSliderAccessoryBehavior")), objc.RegisterName("new"))
 	return sliderAccessoryBehaviorAdopt(_id)
 }
 
-// Override point for custom subclasses to handle interaction.
+// HandleAction override point for custom subclasses to handle interaction.
 func (x *SliderAccessoryBehavior) HandleAction(sender *SliderAccessory) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleAction:"), objref.IDOf(sender))
 }

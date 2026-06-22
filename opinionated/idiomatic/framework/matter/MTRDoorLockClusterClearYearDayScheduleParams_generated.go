@@ -23,7 +23,8 @@ func MTRDoorLockClusterClearYearDayScheduleParamsFromID(id objc.ID) *MTRDoorLock
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDoorLockClusterClearYearDayScheduleParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDoorLockClusterClearYearDayScheduleParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDoorLockClusterClearYearDayScheduleParamsAdopt(id objc.ID) *MTRDoorLockC
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDoorLockClusterClearYearDayScheduleParams{Handle: objref.Wrap(id)}
+	x := &MTRDoorLockClusterClearYearDayScheduleParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,74 +58,82 @@ func (x *MTRDoorLockClusterClearYearDayScheduleParams) IsKind(className string) 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDoorLockClusterClearYearDayScheduleParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDoorLockClusterClearYearDayScheduleParams creates a new MTRDoorLockClusterClearYearDayScheduleParams.
 func NewMTRDoorLockClusterClearYearDayScheduleParams() *MTRDoorLockClusterClearYearDayScheduleParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDoorLockClusterClearYearDayScheduleParams")), objc.RegisterName("new"))
 	return mTRDoorLockClusterClearYearDayScheduleParamsAdopt(_id)
 }
 
-// WithYearDayIndex sets yearDayIndex and returns the receiver so calls can be chained.
+// WithYearDayIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterClearYearDayScheduleParams) WithYearDayIndex(yearDayIndex obj.Object) *MTRDoorLockClusterClearYearDayScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYearDayIndex:"), objref.IDOf(yearDayIndex))
 	return x
 }
 
-// WithUserIndex sets userIndex and returns the receiver so calls can be chained.
+// WithUserIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterClearYearDayScheduleParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterClearYearDayScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRDoorLockClusterClearYearDayScheduleParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterClearYearDayScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRDoorLockClusterClearYearDayScheduleParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterClearYearDayScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// YearDayIndex wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterClearYearDayScheduleParams) YearDayIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("yearDayIndex"))
 	return obj.Wrap(_r)
 }
 
+// SetYearDayIndex wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterClearYearDayScheduleParams) SetYearDayIndex(yearDayIndex obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYearDayIndex:"), objref.IDOf(yearDayIndex))
 }
 
+// UserIndex wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterClearYearDayScheduleParams) UserIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userIndex"))
 	return obj.Wrap(_r)
 }
 
+// SetUserIndex wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterClearYearDayScheduleParams) SetUserIndex(userIndex obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRDoorLockClusterClearYearDayScheduleParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterClearYearDayScheduleParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRDoorLockClusterClearYearDayScheduleParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterClearYearDayScheduleParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

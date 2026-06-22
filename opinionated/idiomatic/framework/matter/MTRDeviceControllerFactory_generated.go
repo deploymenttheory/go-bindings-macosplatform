@@ -25,7 +25,8 @@ func MTRDeviceControllerFactoryFromID(id objc.ID) *MTRDeviceControllerFactory {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceControllerFactory{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDeviceControllerFactory{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRDeviceControllerFactoryAdopt(id objc.ID) *MTRDeviceControllerFactory {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceControllerFactory{Handle: objref.Wrap(id)}
+	x := &MTRDeviceControllerFactory{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *MTRDeviceControllerFactory) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceControllerFactory) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDeviceControllerFactory creates a new MTRDeviceControllerFactory.
 func NewMTRDeviceControllerFactory() *MTRDeviceControllerFactory {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceControllerFactory")), objc.RegisterName("new"))
 	return mTRDeviceControllerFactoryAdopt(_id)
 }
 
-// Start the controller factory. Repeated calls to startControllerFactory without calls to stopControllerFactory in between are NO-OPs. Use the isRunning property to check whether the controller factory needs to be started up.
+// StartControllerFactory start the controller factory. Repeated calls to startControllerFactory without calls to stopControllerFactory in between are NO-OPs. Use the isRunning property to check whether the controller factory needs to be started up.
 func (x *MTRDeviceControllerFactory) StartControllerFactory(startupParams *MTRDeviceControllerFactoryParams) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("startControllerFactory:error:"), objref.IDOf(startupParams), unsafe.Pointer(&_nsErr))
@@ -74,13 +82,13 @@ func (x *MTRDeviceControllerFactory) StartControllerFactory(startupParams *MTRDe
 	return nil
 }
 
-// Stop the controller factory. This will shut down any outstanding controllers as part of the factory stopping. Repeated calls to stopControllerFactory without calls to startControllerFactory in between are NO-OPs.
+// StopControllerFactory stop the controller factory. This will shut down any outstanding controllers as part of the factory stopping. Repeated calls to stopControllerFactory without calls to startControllerFactory in between are NO-OPs.
 func (x *MTRDeviceControllerFactory) StopControllerFactory() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopControllerFactory"))
 }
 
-// Create a MTRDeviceController on an existing fabric.  Returns nil on failure. This method will fail if there is no such fabric or if there is already a controller started for that fabric. The fabric is identified by the root public key and fabric id in the startupParams. This method can only be used if the factory was initialized with storage. When using per-controller storage, use [MTRDeviceController initWithParameters:error:].
-func (x *MTRDeviceControllerFactory) CreateControllerOnExistingFabricError(startupParams *MTRDeviceControllerStartupParams) (*MTRDeviceController, error) {
+// CreateControllerOnExistingFabricError create a MTRDeviceController on an existing fabric.  Returns nil on failure. This method will fail if there is no such fabric or if there is already a controller started for that fabric. The fabric is identified by the root public key and fabric id in the startupParams. This method can only be used if the factory was initialized with storage. When using per-controller storage, use [MTRDeviceController initWithParameters:error:].
+func (x *MTRDeviceControllerFactory) CreateControllerOnExistingFabricError(startupParams *MTRDeviceControllerStartupParams) (result *MTRDeviceController, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createControllerOnExistingFabric:error:"), objref.IDOf(startupParams), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -89,8 +97,8 @@ func (x *MTRDeviceControllerFactory) CreateControllerOnExistingFabricError(start
 	return MTRDeviceControllerFromID(_r), nil
 }
 
-// Create a MTRDeviceController on a new fabric.  Returns nil on failure. This method will fail if the given fabric already exists. The fabric is identified by the root public key and fabric id in the startupParams. This method can only be used if the factory was initialized with storage. When using per-controller storage, use [MTRDeviceController initWithParameters:error:].
-func (x *MTRDeviceControllerFactory) CreateControllerOnNewFabricError(startupParams *MTRDeviceControllerStartupParams) (*MTRDeviceController, error) {
+// CreateControllerOnNewFabricError create a MTRDeviceController on a new fabric.  Returns nil on failure. This method will fail if the given fabric already exists. The fabric is identified by the root public key and fabric id in the startupParams. This method can only be used if the factory was initialized with storage. When using per-controller storage, use [MTRDeviceController initWithParameters:error:].
+func (x *MTRDeviceControllerFactory) CreateControllerOnNewFabricError(startupParams *MTRDeviceControllerStartupParams) (result *MTRDeviceController, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createControllerOnNewFabric:error:"), objref.IDOf(startupParams), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -99,18 +107,18 @@ func (x *MTRDeviceControllerFactory) CreateControllerOnNewFabricError(startupPar
 	return MTRDeviceControllerFromID(_r), nil
 }
 
-// If possible, pre-warm the Matter stack for setting up a commissioning session. This may be called before -[MTRDeviceController setupCommissioningSessionWithPayload:] if it is known that a commissioning attempt will soon take place, but the commissioning payload is not known yet. The controller factory must be running for pre-warming to take place.  Pre-warming can take place before any controllers are started.
+// PreWarmCommissioningSession if possible, pre-warm the Matter stack for setting up a commissioning session. This may be called before -[MTRDeviceController setupCommissioningSessionWithPayload:] if it is known that a commissioning attempt will soon take place, but the commissioning payload is not known yet. The controller factory must be running for pre-warming to take place.  Pre-warming can take place before any controllers are started.
 func (x *MTRDeviceControllerFactory) PreWarmCommissioningSession() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preWarmCommissioningSession"))
 }
 
-// If true, the factory is in a state where it can create controllers: startControllerFactory has been called, but stopControllerFactory has not been called since then.
+// IsRunning if true, the factory is in a state where it can create controllers: startControllerFactory has been called, but stopControllerFactory has not been called since then.
 func (x *MTRDeviceControllerFactory) IsRunning() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRunning"))
 	return _r
 }
 
-// Returns the list of MTRFabricInfo representing the fabrics the MTRDeviceControllerFactory knows about and the corresponding node identities of the controller factory on those fabrics.  Returns nil if the factory is not running or if there is an error reading fabric information. All entries in this list will have a non-nil rootCertificate.
+// KnownFabrics returns the list of MTRFabricInfo representing the fabrics the MTRDeviceControllerFactory knows about and the corresponding node identities of the controller factory on those fabrics.  Returns nil if the factory is not running or if there is an error reading fabric information. All entries in this list will have a non-nil rootCertificate.
 //
 // KnownFabrics returns the collection as a Go slice.
 func (x *MTRDeviceControllerFactory) KnownFabrics() []*MTRFabricInfo {
@@ -123,8 +131,8 @@ type MTRDeviceControllerFactoryable interface {
 	obj.Object
 	StartControllerFactory(startupParams *MTRDeviceControllerFactoryParams) error
 	StopControllerFactory()
-	CreateControllerOnExistingFabricError(startupParams *MTRDeviceControllerStartupParams) (*MTRDeviceController, error)
-	CreateControllerOnNewFabricError(startupParams *MTRDeviceControllerStartupParams) (*MTRDeviceController, error)
+	CreateControllerOnExistingFabricError(startupParams *MTRDeviceControllerStartupParams) (result *MTRDeviceController, err error)
+	CreateControllerOnNewFabricError(startupParams *MTRDeviceControllerStartupParams) (result *MTRDeviceController, err error)
 	PreWarmCommissioningSession()
 	IsRunning() bool
 	KnownFabrics() []*MTRFabricInfo

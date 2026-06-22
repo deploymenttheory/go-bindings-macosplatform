@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMHTMLMarqueeElement is an idiomatic wrapper over the Objective-C class DOMHTMLMarqueeElement.
+//
+// It embeds [DOMHTMLElement], promoting that type's methods.
 type DOMHTMLMarqueeElement struct {
-	objref.Handle
+	DOMHTMLElement
 }
 
 // DOMHTMLMarqueeElementFromID adopts an existing Objective-C object as a DOMHTMLMarqueeElement
@@ -23,7 +24,8 @@ func DOMHTMLMarqueeElementFromID(id objc.ID) *DOMHTMLMarqueeElement {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMHTMLMarqueeElement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMHTMLMarqueeElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMHTMLMarqueeElementAdopt(id objc.ID) *DOMHTMLMarqueeElement {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMHTMLMarqueeElement{Handle: objref.Wrap(id)}
+	x := &DOMHTMLMarqueeElement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMHTMLMarqueeElement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMHTMLMarqueeElement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMHTMLMarqueeElement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMHTMLMarqueeElement creates a new DOMHTMLMarqueeElement.
@@ -62,112 +50,114 @@ func NewDOMHTMLMarqueeElement() *DOMHTMLMarqueeElement {
 	return dOMHTMLMarqueeElementAdopt(_id)
 }
 
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMarqueeElement) WithTitle(title string) *DOMHTMLMarqueeElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// WithLang sets lang and returns the receiver so calls can be chained.
+// WithLang sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMarqueeElement) WithLang(lang string) *DOMHTMLMarqueeElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return x
 }
 
-// WithDir sets dir and returns the receiver so calls can be chained.
+// WithDir sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMarqueeElement) WithDir(dir string) *DOMHTMLMarqueeElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return x
 }
 
-// WithTabIndex sets tabIndex and returns the receiver so calls can be chained.
+// WithTabIndex sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMarqueeElement) WithTabIndex(tabIndex int) *DOMHTMLMarqueeElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
 	return x
 }
 
-// WithAccessKey sets accessKey and returns the receiver so calls can be chained.
+// WithAccessKey sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMarqueeElement) WithAccessKey(accessKey string) *DOMHTMLMarqueeElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return x
 }
 
-// WithInnerText sets innerText and returns the receiver so calls can be chained.
+// WithInnerText sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMarqueeElement) WithInnerText(innerText string) *DOMHTMLMarqueeElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return x
 }
 
-// WithOuterText sets outerText and returns the receiver so calls can be chained.
+// WithOuterText sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMarqueeElement) WithOuterText(outerText string) *DOMHTMLMarqueeElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return x
 }
 
-// WithContentEditable sets contentEditable and returns the receiver so calls can be chained.
+// WithContentEditable sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMarqueeElement) WithContentEditable(contentEditable string) *DOMHTMLMarqueeElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return x
 }
 
-// WithIdName sets idName and returns the receiver so calls can be chained.
+// WithIdName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMarqueeElement) WithIdName(idName string) *DOMHTMLMarqueeElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return x
 }
 
-// WithScrollLeft sets scrollLeft and returns the receiver so calls can be chained.
+// WithScrollLeft sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMarqueeElement) WithScrollLeft(scrollLeft int) *DOMHTMLMarqueeElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return x
 }
 
-// WithScrollTop sets scrollTop and returns the receiver so calls can be chained.
+// WithScrollTop sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMarqueeElement) WithScrollTop(scrollTop int) *DOMHTMLMarqueeElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
 	return x
 }
 
-// WithInnerHTML sets innerHTML and returns the receiver so calls can be chained.
+// WithInnerHTML sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMarqueeElement) WithInnerHTML(innerHTML string) *DOMHTMLMarqueeElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return x
 }
 
-// WithOuterHTML sets outerHTML and returns the receiver so calls can be chained.
+// WithOuterHTML sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMarqueeElement) WithOuterHTML(outerHTML string) *DOMHTMLMarqueeElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return x
 }
 
-// WithClassName sets className and returns the receiver so calls can be chained.
+// WithClassName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMarqueeElement) WithClassName(className string) *DOMHTMLMarqueeElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return x
 }
 
-// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMarqueeElement) WithNodeValue(nodeValue string) *DOMHTMLMarqueeElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets prefix and returns the receiver so calls can be chained.
+// WithPrefix sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMarqueeElement) WithPrefix(prefix string) *DOMHTMLMarqueeElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets textContent and returns the receiver so calls can be chained.
+// WithTextContent sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMarqueeElement) WithTextContent(textContent string) *DOMHTMLMarqueeElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
+// Start wraps the corresponding Objective-C method.
 func (x *DOMHTMLMarqueeElement) Start() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
 }
 
+// Stop wraps the corresponding Objective-C method.
 func (x *DOMHTMLMarqueeElement) Stop() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
@@ -197,3 +187,13 @@ type DOMHTMLMarqueeElementable interface {
 }
 
 var _ DOMHTMLMarqueeElementable = (*DOMHTMLMarqueeElement)(nil)
+
+var _ DOMHTMLElementProvider = (*DOMHTMLMarqueeElement)(nil)
+
+var _ DOMElementProvider = (*DOMHTMLMarqueeElement)(nil)
+
+var _ DOMNodeProvider = (*DOMHTMLMarqueeElement)(nil)
+
+var _ DOMObjectProvider = (*DOMHTMLMarqueeElement)(nil)
+
+var _ WebScriptObjectProvider = (*DOMHTMLMarqueeElement)(nil)

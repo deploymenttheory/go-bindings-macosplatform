@@ -23,7 +23,8 @@ func PickerConfigurationFromID(id objc.ID) *PickerConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &PickerConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PickerConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func pickerConfigurationAdopt(id objc.ID) *PickerConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &PickerConfiguration{Handle: objref.Wrap(id)}
+	x := &PickerConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,123 +58,113 @@ func (x *PickerConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PickerConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPickerConfiguration creates a new PickerConfiguration.
 func NewPickerConfiguration() *PickerConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHPickerConfiguration")), objc.RegisterName("new"))
 	return pickerConfigurationAdopt(_id)
 }
 
-// Initializes a new configuration with the \c photoLibrary the picker should use.
-//
-// NewPickerConfigurationWithPhotoLibrary creates a new PickerConfiguration.
+// NewPickerConfigurationWithPhotoLibrary initializes a new configuration with the \c photoLibrary the picker should use.
 func NewPickerConfigurationWithPhotoLibrary(photoLibrary obj.Object) *PickerConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHPickerConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPhotoLibrary:"), objref.IDOf(photoLibrary))
 	return pickerConfigurationAdopt(_id)
 }
 
-// The preferred representation mode of selected assets. Default is \c PHPickerConfigurationAssetRepresentationModeAutomatic. Setting \c preferredAssetRepresentationMode to \c PHPickerConfigurationAssetRepresentationModeAutomatic means the best representation determined by the system will be used.
-//
-// WithPreferredAssetRepresentationMode sets preferredAssetRepresentationMode and returns the receiver so calls can be chained.
+// WithPreferredAssetRepresentationMode the preferred representation mode of selected assets. Default is \c PHPickerConfigurationAssetRepresentationModeAutomatic. Setting \c preferredAssetRepresentationMode to \c PHPickerConfigurationAssetRepresentationModeAutomatic means the best representation determined by the system will be used.
 func (x *PickerConfiguration) WithPreferredAssetRepresentationMode(preferredAssetRepresentationMode PickerConfigurationAssetRepresentationMode) *PickerConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredAssetRepresentationMode:"), preferredAssetRepresentationMode)
 	return x
 }
 
-// The selection behavior of the picker. Default is \c PHPickerConfigurationSelectionDefault.
-//
-// WithSelection sets selection and returns the receiver so calls can be chained.
+// WithSelection the selection behavior of the picker. Default is \c PHPickerConfigurationSelectionDefault.
 func (x *PickerConfiguration) WithSelection(selection PickerConfigurationSelection) *PickerConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelection:"), selection)
 	return x
 }
 
-// The maximum number of assets that can be selected. Default is 1. Setting \c selectionLimit to 0 means maximum supported by the system.
-//
-// WithSelectionLimit sets selectionLimit and returns the receiver so calls can be chained.
+// WithSelectionLimit the maximum number of assets that can be selected. Default is 1. Setting \c selectionLimit to 0 means maximum supported by the system.
 func (x *PickerConfiguration) WithSelectionLimit(selectionLimit int) *PickerConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionLimit:"), selectionLimit)
 	return x
 }
 
-// Types of assets that can be shown. Default is \c nil. Setting \c filter to \c nil means all asset types can be shown.
-//
-// WithFilter sets filter and returns the receiver so calls can be chained.
+// WithFilter types of assets that can be shown. Default is \c nil. Setting \c filter to \c nil means all asset types can be shown.
 func (x *PickerConfiguration) WithFilter(filter *PickerFilter) *PickerConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilter:"), objref.IDOf(filter))
 	return x
 }
 
-// Local identifiers of assets to be shown as selected when the picker is presented. Default is an empty array. \c preselectedAssetIdentifiers should be an empty array if \c selectionLimit is 1 or \c photoLibrary is not specified. Returned item providers for preselected assets are always empty.
-//
-// WithPreselectedAssetIdentifiers sets the collection and returns the receiver so calls can be chained.
+// WithPreselectedAssetIdentifiers local identifiers of assets to be shown as selected when the picker is presented. Default is an empty array. \c preselectedAssetIdentifiers should be an empty array if \c selectionLimit is 1 or \c photoLibrary is not specified. Returned item providers for preselected assets are always empty.
 func (x *PickerConfiguration) WithPreselectedAssetIdentifiers(items ...obj.Object) *PickerConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreselectedAssetIdentifiers:"), _arr)
 	return x
 }
 
-// The mode of the picker. Default is \c PHPickerModeDefault.
-//
-// WithMode sets mode and returns the receiver so calls can be chained.
+// WithMode the mode of the picker. Default is \c PHPickerModeDefault.
 func (x *PickerConfiguration) WithMode(mode PickerMode) *PickerConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 	return x
 }
 
-// Capabilities of the picker that should be disabled. Default is \c PHPickerCapabilitiesNone.
-//
-// WithDisabledCapabilities sets disabledCapabilities and returns the receiver so calls can be chained.
+// WithDisabledCapabilities capabilities of the picker that should be disabled. Default is \c PHPickerCapabilitiesNone.
 func (x *PickerConfiguration) WithDisabledCapabilities(disabledCapabilities PickerCapabilities) *PickerConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabledCapabilities:"), disabledCapabilities)
 	return x
 }
 
-// The preferred representation mode of selected assets. Default is \c PHPickerConfigurationAssetRepresentationModeAutomatic. Setting \c preferredAssetRepresentationMode to \c PHPickerConfigurationAssetRepresentationModeAutomatic means the best representation determined by the system will be used.
+// PreferredAssetRepresentationMode the preferred representation mode of selected assets. Default is \c PHPickerConfigurationAssetRepresentationModeAutomatic. Setting \c preferredAssetRepresentationMode to \c PHPickerConfigurationAssetRepresentationModeAutomatic means the best representation determined by the system will be used.
 func (x *PickerConfiguration) PreferredAssetRepresentationMode() PickerConfigurationAssetRepresentationMode {
 	_r := objc.Send[PickerConfigurationAssetRepresentationMode](objref.IDOf(x), objc.RegisterName("preferredAssetRepresentationMode"))
 	return _r
 }
 
-// The preferred representation mode of selected assets. Default is \c PHPickerConfigurationAssetRepresentationModeAutomatic. Setting \c preferredAssetRepresentationMode to \c PHPickerConfigurationAssetRepresentationModeAutomatic means the best representation determined by the system will be used.
+// SetPreferredAssetRepresentationMode the preferred representation mode of selected assets. Default is \c PHPickerConfigurationAssetRepresentationModeAutomatic. Setting \c preferredAssetRepresentationMode to \c PHPickerConfigurationAssetRepresentationModeAutomatic means the best representation determined by the system will be used.
 func (x *PickerConfiguration) SetPreferredAssetRepresentationMode(preferredAssetRepresentationMode PickerConfigurationAssetRepresentationMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredAssetRepresentationMode:"), preferredAssetRepresentationMode)
 }
 
-// The selection behavior of the picker. Default is \c PHPickerConfigurationSelectionDefault.
+// Selection the selection behavior of the picker. Default is \c PHPickerConfigurationSelectionDefault.
 func (x *PickerConfiguration) Selection() PickerConfigurationSelection {
 	_r := objc.Send[PickerConfigurationSelection](objref.IDOf(x), objc.RegisterName("selection"))
 	return _r
 }
 
-// The selection behavior of the picker. Default is \c PHPickerConfigurationSelectionDefault.
+// SetSelection the selection behavior of the picker. Default is \c PHPickerConfigurationSelectionDefault.
 func (x *PickerConfiguration) SetSelection(selection PickerConfigurationSelection) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelection:"), selection)
 }
 
-// The maximum number of assets that can be selected. Default is 1. Setting \c selectionLimit to 0 means maximum supported by the system.
+// SelectionLimit the maximum number of assets that can be selected. Default is 1. Setting \c selectionLimit to 0 means maximum supported by the system.
 func (x *PickerConfiguration) SelectionLimit() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectionLimit"))
 	return _r
 }
 
-// The maximum number of assets that can be selected. Default is 1. Setting \c selectionLimit to 0 means maximum supported by the system.
+// SetSelectionLimit the maximum number of assets that can be selected. Default is 1. Setting \c selectionLimit to 0 means maximum supported by the system.
 func (x *PickerConfiguration) SetSelectionLimit(selectionLimit int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionLimit:"), selectionLimit)
 }
 
-// Types of assets that can be shown. Default is \c nil. Setting \c filter to \c nil means all asset types can be shown.
+// Filter types of assets that can be shown. Default is \c nil. Setting \c filter to \c nil means all asset types can be shown.
 func (x *PickerConfiguration) Filter() *PickerFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filter"))
 	return PickerFilterFromID(_r)
 }
 
-// Types of assets that can be shown. Default is \c nil. Setting \c filter to \c nil means all asset types can be shown.
+// SetFilter types of assets that can be shown. Default is \c nil. Setting \c filter to \c nil means all asset types can be shown.
 func (x *PickerConfiguration) SetFilter(filter *PickerFilter) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilter:"), objref.IDOf(filter))
 }
 
-// Local identifiers of assets to be shown as selected when the picker is presented. Default is an empty array. \c preselectedAssetIdentifiers should be an empty array if \c selectionLimit is 1 or \c photoLibrary is not specified. Returned item providers for preselected assets are always empty.
+// PreselectedAssetIdentifiers local identifiers of assets to be shown as selected when the picker is presented. Default is an empty array. \c preselectedAssetIdentifiers should be an empty array if \c selectionLimit is 1 or \c photoLibrary is not specified. Returned item providers for preselected assets are always empty.
 //
 // PreselectedAssetIdentifiers returns the collection as a Go slice.
 func (x *PickerConfiguration) PreselectedAssetIdentifiers() []string {
@@ -180,29 +172,29 @@ func (x *PickerConfiguration) PreselectedAssetIdentifiers() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Local identifiers of assets to be shown as selected when the picker is presented. Default is an empty array. \c preselectedAssetIdentifiers should be an empty array if \c selectionLimit is 1 or \c photoLibrary is not specified. Returned item providers for preselected assets are always empty.
+// SetPreselectedAssetIdentifiers local identifiers of assets to be shown as selected when the picker is presented. Default is an empty array. \c preselectedAssetIdentifiers should be an empty array if \c selectionLimit is 1 or \c photoLibrary is not specified. Returned item providers for preselected assets are always empty.
 func (x *PickerConfiguration) SetPreselectedAssetIdentifiers(preselectedAssetIdentifiers []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreselectedAssetIdentifiers:"), purego.SliceToNSArray(preselectedAssetIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// The mode of the picker. Default is \c PHPickerModeDefault.
+// Mode the mode of the picker. Default is \c PHPickerModeDefault.
 func (x *PickerConfiguration) Mode() PickerMode {
 	_r := objc.Send[PickerMode](objref.IDOf(x), objc.RegisterName("mode"))
 	return _r
 }
 
-// The mode of the picker. Default is \c PHPickerModeDefault.
+// SetMode the mode of the picker. Default is \c PHPickerModeDefault.
 func (x *PickerConfiguration) SetMode(mode PickerMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 }
 
-// Capabilities of the picker that should be disabled. Default is \c PHPickerCapabilitiesNone.
+// DisabledCapabilities capabilities of the picker that should be disabled. Default is \c PHPickerCapabilitiesNone.
 func (x *PickerConfiguration) DisabledCapabilities() PickerCapabilities {
 	_r := objc.Send[PickerCapabilities](objref.IDOf(x), objc.RegisterName("disabledCapabilities"))
 	return _r
 }
 
-// Capabilities of the picker that should be disabled. Default is \c PHPickerCapabilitiesNone.
+// SetDisabledCapabilities capabilities of the picker that should be disabled. Default is \c PHPickerCapabilitiesNone.
 func (x *PickerConfiguration) SetDisabledCapabilities(disabledCapabilities PickerCapabilities) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabledCapabilities:"), disabledCapabilities)
 }

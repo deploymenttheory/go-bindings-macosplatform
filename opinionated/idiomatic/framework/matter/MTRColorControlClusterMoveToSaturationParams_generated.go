@@ -23,7 +23,8 @@ func MTRColorControlClusterMoveToSaturationParamsFromID(id objc.ID) *MTRColorCon
 	if id == 0 {
 		return nil
 	}
-	x := &MTRColorControlClusterMoveToSaturationParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRColorControlClusterMoveToSaturationParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRColorControlClusterMoveToSaturationParamsAdopt(id objc.ID) *MTRColorCont
 	if id == 0 {
 		return nil
 	}
-	x := &MTRColorControlClusterMoveToSaturationParams{Handle: objref.Wrap(id)}
+	x := &MTRColorControlClusterMoveToSaturationParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,104 +58,116 @@ func (x *MTRColorControlClusterMoveToSaturationParams) IsKind(className string) 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRColorControlClusterMoveToSaturationParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRColorControlClusterMoveToSaturationParams creates a new MTRColorControlClusterMoveToSaturationParams.
 func NewMTRColorControlClusterMoveToSaturationParams() *MTRColorControlClusterMoveToSaturationParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRColorControlClusterMoveToSaturationParams")), objc.RegisterName("new"))
 	return mTRColorControlClusterMoveToSaturationParamsAdopt(_id)
 }
 
-// WithSaturation sets saturation and returns the receiver so calls can be chained.
+// WithSaturation sets the property and returns the receiver so calls can be chained.
 func (x *MTRColorControlClusterMoveToSaturationParams) WithSaturation(saturation obj.Object) *MTRColorControlClusterMoveToSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSaturation:"), objref.IDOf(saturation))
 	return x
 }
 
-// WithTransitionTime sets transitionTime and returns the receiver so calls can be chained.
+// WithTransitionTime sets the property and returns the receiver so calls can be chained.
 func (x *MTRColorControlClusterMoveToSaturationParams) WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterMoveToSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return x
 }
 
-// WithOptionsMask sets optionsMask and returns the receiver so calls can be chained.
+// WithOptionsMask sets the property and returns the receiver so calls can be chained.
 func (x *MTRColorControlClusterMoveToSaturationParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterMoveToSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return x
 }
 
-// WithOptionsOverride sets optionsOverride and returns the receiver so calls can be chained.
+// WithOptionsOverride sets the property and returns the receiver so calls can be chained.
 func (x *MTRColorControlClusterMoveToSaturationParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterMoveToSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRColorControlClusterMoveToSaturationParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterMoveToSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRColorControlClusterMoveToSaturationParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterMoveToSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// Saturation wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveToSaturationParams) Saturation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saturation"))
 	return obj.Wrap(_r)
 }
 
+// SetSaturation wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveToSaturationParams) SetSaturation(saturation obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSaturation:"), objref.IDOf(saturation))
 }
 
+// TransitionTime wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveToSaturationParams) TransitionTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitionTime"))
 	return obj.Wrap(_r)
 }
 
+// SetTransitionTime wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveToSaturationParams) SetTransitionTime(transitionTime obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 }
 
+// OptionsMask wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveToSaturationParams) OptionsMask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
 }
 
+// SetOptionsMask wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveToSaturationParams) SetOptionsMask(optionsMask obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 }
 
+// OptionsOverride wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveToSaturationParams) OptionsOverride() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)
 }
 
+// SetOptionsOverride wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveToSaturationParams) SetOptionsOverride(optionsOverride obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRColorControlClusterMoveToSaturationParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveToSaturationParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRColorControlClusterMoveToSaturationParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveToSaturationParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

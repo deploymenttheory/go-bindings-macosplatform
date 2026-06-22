@@ -6,17 +6,19 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that controls swipe navigation and animations between views or view content.
-//
 // PageController is an idiomatic wrapper over the Objective-C class NSPageController.
+//
+// It embeds [ViewController], promoting that type's methods.
+//
+// An object that controls swipe navigation and animations between views or view content.
 type PageController struct {
-	objref.Handle
+	ViewController
 }
 
 // PageControllerFromID adopts an existing Objective-C object as a PageController
@@ -25,7 +27,8 @@ func PageControllerFromID(id objc.ID) *PageController {
 	if id == 0 {
 		return nil
 	}
-	x := &PageController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PageController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func pageControllerAdopt(id objc.ID) *PageController {
 	if id == 0 {
 		return nil
 	}
-	x := &PageController{Handle: objref.Wrap(id)}
+	x := &PageController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PageController) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PageController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PageController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPageController creates a new PageController.
@@ -64,146 +53,145 @@ func NewPageController() *PageController {
 	return pageControllerAdopt(_id)
 }
 
-// The transition style the page controller uses when changing pages.
-//
-// WithTransitionStyle sets transitionStyle and returns the receiver so calls can be chained.
+// WithTransitionStyle the transition style the page controller uses when changing pages.
 func (x *PageController) WithTransitionStyle(transitionStyle PageControllerTransitionStyle) *PageController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionStyle:"), transitionStyle)
 	return x
 }
 
-// The currently selected object in the arranged objects array.
-//
-// WithSelectedIndex sets selectedIndex and returns the receiver so calls can be chained.
+// WithSelectedIndex the currently selected object in the arranged objects array.
 func (x *PageController) WithSelectedIndex(selectedIndex int) *PageController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedIndex:"), selectedIndex)
 	return x
 }
 
-// The object whose value is presented in the receiver’s primary view.
-//
-// WithRepresentedObject sets representedObject and returns the receiver so calls can be chained.
+// WithRepresentedObject the object whose value is presented in the receiver’s primary view.
 func (x *PageController) WithRepresentedObject(representedObject obj.Object) *PageController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return x
 }
 
-// The localized title of the receiver’s primary view.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the localized title of the receiver’s primary view.
 func (x *PageController) WithTitle(title string) *PageController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The view controller’s primary view.
-//
-// WithView sets view and returns the receiver so calls can be chained.
+// WithView the view controller’s primary view.
 func (x *PageController) WithView(view ViewProvider) *PageController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 	return x
 }
 
-// An array of view controllers that are hierarchical children of the view controller.
-//
-// WithChildViewControllers sets the collection and returns the receiver so calls can be chained.
+// WithPreferredContentSize the desired size of the view controller’s view, in screen units.
+func (x *PageController) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *PageController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredContentSize:"), preferredContentSize)
+	return x
+}
+
+// WithChildViewControllers an array of view controllers that are hierarchical children of the view controller.
 func (x *PageController) WithChildViewControllers(items ...ViewControllerProvider) *PageController {
 	_arr := purego.SliceToNSArray(items, func(_v ViewControllerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildViewControllers:"), _arr)
 	return x
 }
 
-// WithSourceItemView sets sourceItemView and returns the receiver so calls can be chained.
+// WithSourceItemView sets the property and returns the receiver so calls can be chained.
 func (x *PageController) WithSourceItemView(sourceItemView ViewProvider) *PageController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
+// WithPreferredScreenOrigin for a view controller that is part of an app extension, the preferred screen origin.
+func (x *PageController) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *PageController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredScreenOrigin:"), preferredScreenOrigin)
+	return x
+}
+
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *PageController) WithNextResponder(nextResponder ResponderProvider) *PageController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets menu and returns the receiver so calls can be chained.
+// WithMenu returns the responder’s menu.
 func (x *PageController) WithMenu(menu *Menu) *PageController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity an object encapsulating a user activity supported by this responder.
 func (x *PageController) WithUserActivity(userActivity obj.Object) *PageController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *PageController) WithTouchBar(touchBar *TouchBar) *PageController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// Navigates to the specific object.
+// NavigateForwardToObject navigates to the specific object.
 func (x *PageController) NavigateForwardToObject(object obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("navigateForwardToObject:"), objref.IDOf(object))
 }
 
-// Invoked when the page transition is completed.
+// CompleteTransition invoked when the page transition is completed.
 func (x *PageController) CompleteTransition() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeTransition"))
 }
 
-// Navigates backwards in the page controller’s arranged objects array.
+// NavigateBack navigates backwards in the page controller’s arranged objects array.
 func (x *PageController) NavigateBack(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("navigateBack:"), objref.IDOf(sender))
 }
 
-// Navigates to the next object in the page controller’s arranged objects array, if appropriate.
+// NavigateForward navigates to the next object in the page controller’s arranged objects array, if appropriate.
 func (x *PageController) NavigateForward(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("navigateForward:"), objref.IDOf(sender))
 }
 
-// Navigates to the selected index, which is taken from the sender.
+// TakeSelectedIndexFrom navigates to the selected index, which is taken from the sender.
 func (x *PageController) TakeSelectedIndexFrom(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeSelectedIndexFrom:"), objref.IDOf(sender))
 }
 
+// SelectedViewController wraps the corresponding Objective-C method.
 func (x *PageController) SelectedViewController() *ViewController {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedViewController"))
 	return ViewControllerFromID(_r)
 }
 
+// TransitionStyle wraps the corresponding Objective-C method.
 func (x *PageController) TransitionStyle() PageControllerTransitionStyle {
 	_r := objc.Send[PageControllerTransitionStyle](objref.IDOf(x), objc.RegisterName("transitionStyle"))
 	return _r
 }
 
+// SetTransitionStyle wraps the corresponding Objective-C method.
 func (x *PageController) SetTransitionStyle(transitionStyle PageControllerTransitionStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionStyle:"), transitionStyle)
 }
 
+// ArrangedObjects wraps the corresponding Objective-C method.
 func (x *PageController) ArrangedObjects() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrangedObjects"))
 	return obj.Wrap(_r)
 }
 
+// SetArrangedObjects wraps the corresponding Objective-C method.
 func (x *PageController) SetArrangedObjects(arrangedObjects obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArrangedObjects:"), objref.IDOf(arrangedObjects))
 }
 
+// SelectedIndex wraps the corresponding Objective-C method.
 func (x *PageController) SelectedIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectedIndex"))
 	return _r
 }
 
+// SetSelectedIndex wraps the corresponding Objective-C method.
 func (x *PageController) SetSelectedIndex(selectedIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedIndex:"), selectedIndex)
 }
@@ -216,8 +204,10 @@ type PageControllerable interface {
 	WithRepresentedObject(representedObject obj.Object) *PageController
 	WithTitle(title string) *PageController
 	WithView(view ViewProvider) *PageController
+	WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *PageController
 	WithChildViewControllers(items ...ViewControllerProvider) *PageController
 	WithSourceItemView(sourceItemView ViewProvider) *PageController
+	WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *PageController
 	WithNextResponder(nextResponder ResponderProvider) *PageController
 	WithMenu(menu *Menu) *PageController
 	WithUserActivity(userActivity obj.Object) *PageController
@@ -237,3 +227,7 @@ type PageControllerable interface {
 }
 
 var _ PageControllerable = (*PageController)(nil)
+
+var _ ViewControllerProvider = (*PageController)(nil)
+
+var _ ResponderProvider = (*PageController)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A query for retrieving essential information about a resource that an asset resource-loading request references.
-//
 // AssetResourceLoadingContentInformationRequest is an idiomatic wrapper over the Objective-C class AVAssetResourceLoadingContentInformationRequest.
+//
+// A query for retrieving essential information about a resource that an asset resource-loading request references.
 type AssetResourceLoadingContentInformationRequest struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetResourceLoadingContentInformationRequestFromID(id objc.ID) *AssetResou
 	if id == 0 {
 		return nil
 	}
-	x := &AssetResourceLoadingContentInformationRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetResourceLoadingContentInformationRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetResourceLoadingContentInformationRequestAdopt(id objc.ID) *AssetResour
 	if id == 0 {
 		return nil
 	}
-	x := &AssetResourceLoadingContentInformationRequest{Handle: objref.Wrap(id)}
+	x := &AssetResourceLoadingContentInformationRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,53 +60,49 @@ func (x *AssetResourceLoadingContentInformationRequest) IsKind(className string)
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetResourceLoadingContentInformationRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetResourceLoadingContentInformationRequest creates a new AssetResourceLoadingContentInformationRequest.
 func NewAssetResourceLoadingContentInformationRequest() *AssetResourceLoadingContentInformationRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetResourceLoadingContentInformationRequest")), objc.RegisterName("new"))
 	return assetResourceLoadingContentInformationRequestAdopt(_id)
 }
 
-// The UTI that specifies the type of data contained by the requested resource.
-//
-// WithContentType sets contentType and returns the receiver so calls can be chained.
+// WithContentType the UTI that specifies the type of data contained by the requested resource.
 func (x *AssetResourceLoadingContentInformationRequest) WithContentType(contentType string) *AssetResourceLoadingContentInformationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentType:"), purego.NSString(contentType))
 	return x
 }
 
-// The length, in bytes, of the requested resource.
-//
-// WithContentLength sets contentLength and returns the receiver so calls can be chained.
+// WithContentLength the length, in bytes, of the requested resource.
 func (x *AssetResourceLoadingContentInformationRequest) WithContentLength(contentLength int64) *AssetResourceLoadingContentInformationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentLength:"), contentLength)
 	return x
 }
 
-// A Boolean value that indicates whether random access to arbitrary ranges of bytes of the resource is supported.
-//
-// WithByteRangeAccessSupported sets byteRangeAccessSupported and returns the receiver so calls can be chained.
+// WithByteRangeAccessSupported a Boolean value that indicates whether random access to arbitrary ranges of bytes of the resource is supported.
 func (x *AssetResourceLoadingContentInformationRequest) WithByteRangeAccessSupported(byteRangeAccessSupported bool) *AssetResourceLoadingContentInformationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setByteRangeAccessSupported:"), byteRangeAccessSupported)
 	return x
 }
 
-// The date at which a new resource loading request will be issued for resources that expire, if the media system still requires it.
-//
-// WithRenewalDate sets renewalDate and returns the receiver so calls can be chained.
+// WithRenewalDate the date at which a new resource loading request will be issued for resources that expire, if the media system still requires it.
 func (x *AssetResourceLoadingContentInformationRequest) WithRenewalDate(renewalDate obj.Object) *AssetResourceLoadingContentInformationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenewalDate:"), objref.IDOf(renewalDate))
 	return x
 }
 
-// A Boolean value that indicates whether asset data loading can expect data immediately.
-//
-// WithEntireLengthAvailableOnDemand sets entireLengthAvailableOnDemand and returns the receiver so calls can be chained.
+// WithEntireLengthAvailableOnDemand a Boolean value that indicates whether asset data loading can expect data immediately.
 func (x *AssetResourceLoadingContentInformationRequest) WithEntireLengthAvailableOnDemand(entireLengthAvailableOnDemand bool) *AssetResourceLoadingContentInformationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntireLengthAvailableOnDemand:"), entireLengthAvailableOnDemand)
 	return x
 }
 
-// A UTI that indicates the type of data contained by the requested resource. Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you should set the value of this property to a UTI indicating the type of data contained by the requested resource.
+// ContentType a UTI that indicates the type of data contained by the requested resource. Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you should set the value of this property to a UTI indicating the type of data contained by the requested resource.
 func (x *AssetResourceLoadingContentInformationRequest) ContentType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
 	if _r == 0 {
@@ -113,11 +111,12 @@ func (x *AssetResourceLoadingContentInformationRequest) ContentType() string {
 	return purego.GoString(_r)
 }
 
+// SetContentType wraps the corresponding Objective-C method.
 func (x *AssetResourceLoadingContentInformationRequest) SetContentType(contentType string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentType:"), purego.NSString(contentType))
 }
 
-// An array showing the types of data which will be accepted as a valid response for the requested resource. If an AVAssetResourceLoadingRequest's contentInformationRequest is not nil, ensure that the value assigned to the contentType property is in this array. Otherwise, calling -finishLoading on the associated request will result in an exception.
+// AllowedContentTypes an array showing the types of data which will be accepted as a valid response for the requested resource. If an AVAssetResourceLoadingRequest's contentInformationRequest is not nil, ensure that the value assigned to the contentType property is in this array. Otherwise, calling -finishLoading on the associated request will result in an exception.
 //
 // AllowedContentTypes returns the collection as a Go slice.
 func (x *AssetResourceLoadingContentInformationRequest) AllowedContentTypes() []string {
@@ -125,42 +124,46 @@ func (x *AssetResourceLoadingContentInformationRequest) AllowedContentTypes() []
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Indicates the length of the requested resource, in bytes. Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you should set the value of this property to the number of bytes contained by the requested resource.
+// ContentLength indicates the length of the requested resource, in bytes. Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you should set the value of this property to the number of bytes contained by the requested resource.
 func (x *AssetResourceLoadingContentInformationRequest) ContentLength() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("contentLength"))
 	return _r
 }
 
+// SetContentLength wraps the corresponding Objective-C method.
 func (x *AssetResourceLoadingContentInformationRequest) SetContentLength(contentLength int64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentLength:"), contentLength)
 }
 
-// Indicates whether random access to arbitrary ranges of bytes of the resource is supported. Such support also allows portions of the resource to be requested more than once. Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you should set the value of this property to YES if you support random access to arbitrary ranges of bytes of the resource. If you do not set this property to YES for resources that must be loaded incrementally, loading of the resource may fail. Such resources include anything that contains media data.
+// IsByteRangeAccessSupported indicates whether random access to arbitrary ranges of bytes of the resource is supported. Such support also allows portions of the resource to be requested more than once. Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you should set the value of this property to YES if you support random access to arbitrary ranges of bytes of the resource. If you do not set this property to YES for resources that must be loaded incrementally, loading of the resource may fail. Such resources include anything that contains media data.
 func (x *AssetResourceLoadingContentInformationRequest) IsByteRangeAccessSupported() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isByteRangeAccessSupported"))
 	return _r
 }
 
+// SetByteRangeAccessSupported wraps the corresponding Objective-C method.
 func (x *AssetResourceLoadingContentInformationRequest) SetByteRangeAccessSupported(byteRangeAccessSupported bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setByteRangeAccessSupported:"), byteRangeAccessSupported)
 }
 
-// For resources that expire, the date at which a new AVAssetResourceLoadingRequest will be issued for a renewal of this resource, if the media system still requires it. Before you finish loading an AVAssetResourceLoadingRequest, if the resource is prone to expiry you should set the value of this property to the date at which a renewal should be triggered. This value should be set sufficiently early enough to allow an AVAssetResourceRenewalRequest, delivered to your delegate via -resourceLoader:shouldWaitForRenewalOfRequestedResource:, to finish before the actual expiry time. Otherwise media playback may fail.
+// RenewalDate for resources that expire, the date at which a new AVAssetResourceLoadingRequest will be issued for a renewal of this resource, if the media system still requires it. Before you finish loading an AVAssetResourceLoadingRequest, if the resource is prone to expiry you should set the value of this property to the date at which a renewal should be triggered. This value should be set sufficiently early enough to allow an AVAssetResourceRenewalRequest, delivered to your delegate via -resourceLoader:shouldWaitForRenewalOfRequestedResource:, to finish before the actual expiry time. Otherwise media playback may fail.
 func (x *AssetResourceLoadingContentInformationRequest) RenewalDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("renewalDate"))
 	return obj.Wrap(_r)
 }
 
+// SetRenewalDate wraps the corresponding Objective-C method.
 func (x *AssetResourceLoadingContentInformationRequest) SetRenewalDate(renewalDate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenewalDate:"), objref.IDOf(renewalDate))
 }
 
-// Indicates whether asset data loading can expect data to be produced immediately. Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you may set this property to YES to indicate that all asset data can be produced immediately, e.g., because the data is fully cached, or because the custom URL scheme ultimately refers to files on local storage. This allows significant data flow optimizations. For backward compatibility, this property defaults to NO.
+// IsEntireLengthAvailableOnDemand indicates whether asset data loading can expect data to be produced immediately. Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you may set this property to YES to indicate that all asset data can be produced immediately, e.g., because the data is fully cached, or because the custom URL scheme ultimately refers to files on local storage. This allows significant data flow optimizations. For backward compatibility, this property defaults to NO.
 func (x *AssetResourceLoadingContentInformationRequest) IsEntireLengthAvailableOnDemand() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEntireLengthAvailableOnDemand"))
 	return _r
 }
 
+// SetEntireLengthAvailableOnDemand wraps the corresponding Objective-C method.
 func (x *AssetResourceLoadingContentInformationRequest) SetEntireLengthAvailableOnDemand(entireLengthAvailableOnDemand bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntireLengthAvailableOnDemand:"), entireLengthAvailableOnDemand)
 }

@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMHTMLModElement is an idiomatic wrapper over the Objective-C class DOMHTMLModElement.
+//
+// It embeds [DOMHTMLElement], promoting that type's methods.
 type DOMHTMLModElement struct {
-	objref.Handle
+	DOMHTMLElement
 }
 
 // DOMHTMLModElementFromID adopts an existing Objective-C object as a DOMHTMLModElement
@@ -23,7 +24,8 @@ func DOMHTMLModElementFromID(id objc.ID) *DOMHTMLModElement {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMHTMLModElement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMHTMLModElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMHTMLModElementAdopt(id objc.ID) *DOMHTMLModElement {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMHTMLModElement{Handle: objref.Wrap(id)}
+	x := &DOMHTMLModElement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMHTMLModElement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMHTMLModElement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMHTMLModElement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMHTMLModElement creates a new DOMHTMLModElement.
@@ -62,120 +50,121 @@ func NewDOMHTMLModElement() *DOMHTMLModElement {
 	return dOMHTMLModElementAdopt(_id)
 }
 
-// WithCite sets cite and returns the receiver so calls can be chained.
+// WithCite sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLModElement) WithCite(cite string) *DOMHTMLModElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCite:"), purego.NSString(cite))
 	return x
 }
 
-// WithDateTime sets dateTime and returns the receiver so calls can be chained.
+// WithDateTime sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLModElement) WithDateTime(dateTime string) *DOMHTMLModElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateTime:"), purego.NSString(dateTime))
 	return x
 }
 
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLModElement) WithTitle(title string) *DOMHTMLModElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// WithLang sets lang and returns the receiver so calls can be chained.
+// WithLang sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLModElement) WithLang(lang string) *DOMHTMLModElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return x
 }
 
-// WithDir sets dir and returns the receiver so calls can be chained.
+// WithDir sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLModElement) WithDir(dir string) *DOMHTMLModElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return x
 }
 
-// WithTabIndex sets tabIndex and returns the receiver so calls can be chained.
+// WithTabIndex sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLModElement) WithTabIndex(tabIndex int) *DOMHTMLModElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
 	return x
 }
 
-// WithAccessKey sets accessKey and returns the receiver so calls can be chained.
+// WithAccessKey sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLModElement) WithAccessKey(accessKey string) *DOMHTMLModElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return x
 }
 
-// WithInnerText sets innerText and returns the receiver so calls can be chained.
+// WithInnerText sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLModElement) WithInnerText(innerText string) *DOMHTMLModElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return x
 }
 
-// WithOuterText sets outerText and returns the receiver so calls can be chained.
+// WithOuterText sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLModElement) WithOuterText(outerText string) *DOMHTMLModElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return x
 }
 
-// WithContentEditable sets contentEditable and returns the receiver so calls can be chained.
+// WithContentEditable sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLModElement) WithContentEditable(contentEditable string) *DOMHTMLModElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return x
 }
 
-// WithIdName sets idName and returns the receiver so calls can be chained.
+// WithIdName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLModElement) WithIdName(idName string) *DOMHTMLModElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return x
 }
 
-// WithScrollLeft sets scrollLeft and returns the receiver so calls can be chained.
+// WithScrollLeft sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLModElement) WithScrollLeft(scrollLeft int) *DOMHTMLModElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return x
 }
 
-// WithScrollTop sets scrollTop and returns the receiver so calls can be chained.
+// WithScrollTop sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLModElement) WithScrollTop(scrollTop int) *DOMHTMLModElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
 	return x
 }
 
-// WithInnerHTML sets innerHTML and returns the receiver so calls can be chained.
+// WithInnerHTML sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLModElement) WithInnerHTML(innerHTML string) *DOMHTMLModElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return x
 }
 
-// WithOuterHTML sets outerHTML and returns the receiver so calls can be chained.
+// WithOuterHTML sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLModElement) WithOuterHTML(outerHTML string) *DOMHTMLModElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return x
 }
 
-// WithClassName sets className and returns the receiver so calls can be chained.
+// WithClassName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLModElement) WithClassName(className string) *DOMHTMLModElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return x
 }
 
-// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLModElement) WithNodeValue(nodeValue string) *DOMHTMLModElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets prefix and returns the receiver so calls can be chained.
+// WithPrefix sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLModElement) WithPrefix(prefix string) *DOMHTMLModElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets textContent and returns the receiver so calls can be chained.
+// WithTextContent sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLModElement) WithTextContent(textContent string) *DOMHTMLModElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
+// Cite wraps the corresponding Objective-C method.
 func (x *DOMHTMLModElement) Cite() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cite"))
 	if _r == 0 {
@@ -184,10 +173,12 @@ func (x *DOMHTMLModElement) Cite() string {
 	return purego.GoString(_r)
 }
 
+// SetCite wraps the corresponding Objective-C method.
 func (x *DOMHTMLModElement) SetCite(cite string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCite:"), purego.NSString(cite))
 }
 
+// DateTime wraps the corresponding Objective-C method.
 func (x *DOMHTMLModElement) DateTime() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateTime"))
 	if _r == 0 {
@@ -196,6 +187,7 @@ func (x *DOMHTMLModElement) DateTime() string {
 	return purego.GoString(_r)
 }
 
+// SetDateTime wraps the corresponding Objective-C method.
 func (x *DOMHTMLModElement) SetDateTime(dateTime string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateTime:"), purego.NSString(dateTime))
 }
@@ -229,3 +221,13 @@ type DOMHTMLModElementable interface {
 }
 
 var _ DOMHTMLModElementable = (*DOMHTMLModElement)(nil)
+
+var _ DOMHTMLElementProvider = (*DOMHTMLModElement)(nil)
+
+var _ DOMElementProvider = (*DOMHTMLModElement)(nil)
+
+var _ DOMNodeProvider = (*DOMHTMLModElement)(nil)
+
+var _ DOMObjectProvider = (*DOMHTMLModElement)(nil)
+
+var _ WebScriptObjectProvider = (*DOMHTMLModElement)(nil)

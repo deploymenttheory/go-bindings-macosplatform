@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines a time-based cadence for processing a video stream.
-//
 // VideoProcessorTimeIntervalCadence is an idiomatic wrapper over the Objective-C class VNVideoProcessorTimeIntervalCadence.
+//
+// It embeds [VideoProcessorCadence], promoting that type's methods.
+//
+// An object that defines a time-based cadence for processing a video stream.
 type VideoProcessorTimeIntervalCadence struct {
-	objref.Handle
+	VideoProcessorCadence
 }
 
 // VideoProcessorTimeIntervalCadenceFromID adopts an existing Objective-C object as a VideoProcessorTimeIntervalCadence
@@ -25,7 +26,8 @@ func VideoProcessorTimeIntervalCadenceFromID(id objc.ID) *VideoProcessorTimeInte
 	if id == 0 {
 		return nil
 	}
-	x := &VideoProcessorTimeIntervalCadence{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VideoProcessorTimeIntervalCadence{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func videoProcessorTimeIntervalCadenceAdopt(id objc.ID) *VideoProcessorTimeInter
 	if id == 0 {
 		return nil
 	}
-	x := &VideoProcessorTimeIntervalCadence{Handle: objref.Wrap(id)}
+	x := &VideoProcessorTimeIntervalCadence{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *VideoProcessorTimeIntervalCadence) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VideoProcessorTimeIntervalCadence) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VideoProcessorTimeIntervalCadence) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewVideoProcessorTimeIntervalCadenceWithTimeInterval creates a new VideoProcessorTimeIntervalCadence.
@@ -65,6 +53,7 @@ func NewVideoProcessorTimeIntervalCadenceWithTimeInterval(timeInterval float64) 
 	return videoProcessorTimeIntervalCadenceAdopt(_id)
 }
 
+// TimeInterval wraps the corresponding Objective-C method.
 func (x *VideoProcessorTimeIntervalCadence) TimeInterval() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeInterval"))
 	return _r
@@ -77,3 +66,5 @@ type VideoProcessorTimeIntervalCadenceable interface {
 }
 
 var _ VideoProcessorTimeIntervalCadenceable = (*VideoProcessorTimeIntervalCadence)(nil)
+
+var _ VideoProcessorCadenceProvider = (*VideoProcessorTimeIntervalCadence)(nil)

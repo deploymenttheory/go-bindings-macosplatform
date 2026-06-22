@@ -11,9 +11,11 @@ import (
 // CalendarItemProvider is accepted wherever a EKCalendarItem (or one of its subclasses) is expected.
 type CalendarItemProvider interface {
 	objref.Object
+	isCalendarItem()
 }
 
 // ObjectProvider is accepted wherever a EKObject (or one of its subclasses) is expected.
 type ObjectProvider interface {
 	objref.Object
+	isObject()
 }

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that enumerates the contents of a directory.
-//
 // DirectoryEnumerator is an idiomatic wrapper over the Objective-C class NSDirectoryEnumerator.
+//
+// It embeds [Enumerator], promoting that type's methods.
+//
+// An object that enumerates the contents of a directory.
 type DirectoryEnumerator struct {
-	objref.Handle
+	Enumerator
 }
 
 // DirectoryEnumeratorFromID adopts an existing Objective-C object as a DirectoryEnumerator
@@ -25,7 +26,8 @@ func DirectoryEnumeratorFromID(id objc.ID) *DirectoryEnumerator {
 	if id == 0 {
 		return nil
 	}
-	x := &DirectoryEnumerator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DirectoryEnumerator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func directoryEnumeratorAdopt(id objc.ID) *DirectoryEnumerator {
 	if id == 0 {
 		return nil
 	}
-	x := &DirectoryEnumerator{Handle: objref.Wrap(id)}
+	x := &DirectoryEnumerator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DirectoryEnumerator) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DirectoryEnumerator) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DirectoryEnumerator) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDirectoryEnumerator creates a new DirectoryEnumerator.
@@ -64,35 +52,41 @@ func NewDirectoryEnumerator() *DirectoryEnumerator {
 	return directoryEnumeratorAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *DirectoryEnumerator) WithScriptingProperties(scriptingProperties obj.Object) *DirectoryEnumerator {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// SkipDescendents wraps the corresponding Objective-C method.
 func (x *DirectoryEnumerator) SkipDescendents() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skipDescendents"))
 }
 
+// SkipDescendants wraps the corresponding Objective-C method.
 func (x *DirectoryEnumerator) SkipDescendants() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skipDescendants"))
 }
 
+// FileAttributes wraps the corresponding Objective-C method.
 func (x *DirectoryEnumerator) FileAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileAttributes"))
 	return obj.Wrap(_r)
 }
 
+// DirectoryAttributes wraps the corresponding Objective-C method.
 func (x *DirectoryEnumerator) DirectoryAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("directoryAttributes"))
 	return obj.Wrap(_r)
 }
 
+// IsEnumeratingDirectoryPostOrder wraps the corresponding Objective-C method.
 func (x *DirectoryEnumerator) IsEnumeratingDirectoryPostOrder() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnumeratingDirectoryPostOrder"))
 	return _r
 }
 
+// Level wraps the corresponding Objective-C method.
 func (x *DirectoryEnumerator) Level() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("level"))
 	return _r
@@ -111,3 +105,5 @@ type DirectoryEnumeratorable interface {
 }
 
 var _ DirectoryEnumeratorable = (*DirectoryEnumerator)(nil)
+
+var _ EnumeratorProvider = (*DirectoryEnumerator)(nil)

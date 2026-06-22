@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for all framework layers.
-//
 // Layer is an idiomatic wrapper over the Objective-C class MLCLayer.
+//
+// Layer is an abstract base — you do not construct it directly. Construct one of [ActivationLayer], [ArithmeticLayer], [BatchNormalizationLayer], [ComparisonLayer], [ConcatenationLayer], [ConvolutionLayer], [DropoutLayer], [EmbeddingLayer], [FullyConnectedLayer], [GatherLayer], [GramMatrixLayer], [GroupNormalizationLayer], [InstanceNormalizationLayer], [LSTMLayer], [LayerNormalizationLayer], [LossLayer], [MatMulLayer], [MultiheadAttentionLayer], [PaddingLayer], [PoolingLayer], [ReductionLayer], [ReshapeLayer], [ScatterLayer], [SelectionLayer], [SliceLayer], [SoftmaxLayer], [SplitLayer], [TransposeLayer], [UpsampleLayer] and pass it where a Layer is accepted.
+//
+// The base class for all framework layers.
 type Layer struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func LayerFromID(id objc.ID) *Layer {
 	if id == 0 {
 		return nil
 	}
-	x := &Layer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Layer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func layerAdopt(id objc.ID) *Layer {
 	if id == 0 {
 		return nil
 	}
-	x := &Layer{Handle: objref.Wrap(id)}
+	x := &Layer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,35 +62,31 @@ func (x *Layer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewLayer creates a new Layer.
-func NewLayer() *Layer {
-	_id := objc.Send[objc.ID](objc.ID(_class("MLCLayer")), objc.RegisterName("new"))
-	return layerAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Layer) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string that helps identify this layer.
 func (x *Layer) WithLabel(label string) *Layer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *Layer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Layer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// The layer ID A unique number to identify each layer.  Assigned when the layer is created.
+// LayerID the layer ID A unique number to identify each layer.  Assigned when the layer is created.
 func (x *Layer) LayerID() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("layerID"))
 	return _r
 }
 
-// A string to help identify this object.
+// Label a string to help identify this object.
 func (x *Layer) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -95,21 +95,23 @@ func (x *Layer) Label() string {
 	return purego.GoString(_r)
 }
 
+// SetLabel wraps the corresponding Objective-C method.
 func (x *Layer) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// A flag to identify if we want to debug this layer when executing a graph that includes this layer If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
+// IsDebuggingEnabled a flag to identify if we want to debug this layer when executing a graph that includes this layer If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
 func (x *Layer) IsDebuggingEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDebuggingEnabled"))
 	return _r
 }
 
+// SetIsDebuggingEnabled wraps the corresponding Objective-C method.
 func (x *Layer) SetIsDebuggingEnabled(isDebuggingEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 }
 
-// The device type where this layer will be executed Typically the MLCDevice passed to compileWithOptions will be the device used to execute layers in the graph. If MLCDeviceTypeANE is selected, it is possible that some of the layers of the graph may not be executed on the ANE but instead on the CPU or GPU.  This property can be used to determine which device type the layer will be executed on.
+// DeviceType the device type where this layer will be executed Typically the MLCDevice passed to compileWithOptions will be the device used to execute layers in the graph. If MLCDeviceTypeANE is selected, it is possible that some of the layers of the graph may not be executed on the ANE but instead on the CPU or GPU.  This property can be used to determine which device type the layer will be executed on.
 func (x *Layer) DeviceType() DeviceType {
 	_r := objc.Send[DeviceType](objref.IDOf(x), objc.RegisterName("deviceType"))
 	return _r
@@ -129,3 +131,10 @@ type Layerable interface {
 }
 
 var _ Layerable = (*Layer)(nil)
+
+// isLayer marks Layer — and, by embedding promotion, its
+// subclasses — as a member of the Layer hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Layer) isLayer() {}
+
+var _ LayerProvider = (*Layer)(nil)

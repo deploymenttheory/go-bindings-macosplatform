@@ -11,66 +11,79 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Alarm wraps the corresponding Objective-C method.
 func Alarm() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("CalAlarm")), objc.RegisterName("alarm"))
 	return obj.Wrap(_r)
 }
 
+// Calendar wraps the corresponding Objective-C method.
 func Calendar() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("CalCalendar")), objc.RegisterName("calendar"))
 	return obj.Wrap(_r)
 }
 
+// DefaultCalendarStore wraps the corresponding Objective-C method.
 func DefaultCalendarStore() *CalCalendarStore {
 	_r := objc.Send[objc.ID](objc.ID(_class("CalCalendarStore")), objc.RegisterName("defaultCalendarStore"))
 	return CalCalendarStoreFromID(_r)
 }
 
+// EventPredicateWithStartDateEndDateCalendars wraps the corresponding Objective-C method.
 func EventPredicateWithStartDateEndDateCalendars(startDate obj.Object, endDate obj.Object, calendars obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("CalCalendarStore")), objc.RegisterName("eventPredicateWithStartDate:endDate:calendars:"), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(calendars))
 	return obj.Wrap(_r)
 }
 
+// EventPredicateWithStartDateEndDateUIDCalendars wraps the corresponding Objective-C method.
 func EventPredicateWithStartDateEndDateUIDCalendars(startDate obj.Object, endDate obj.Object, uID string, calendars obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("CalCalendarStore")), objc.RegisterName("eventPredicateWithStartDate:endDate:UID:calendars:"), objref.IDOf(startDate), objref.IDOf(endDate), purego.NSString(uID), objref.IDOf(calendars))
 	return obj.Wrap(_r)
 }
 
+// TaskPredicateWithCalendars wraps the corresponding Objective-C method.
 func TaskPredicateWithCalendars(calendars obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("CalCalendarStore")), objc.RegisterName("taskPredicateWithCalendars:"), objref.IDOf(calendars))
 	return obj.Wrap(_r)
 }
 
+// TaskPredicateWithUncompletedTasks wraps the corresponding Objective-C method.
 func TaskPredicateWithUncompletedTasks(calendars obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("CalCalendarStore")), objc.RegisterName("taskPredicateWithUncompletedTasks:"), objref.IDOf(calendars))
 	return obj.Wrap(_r)
 }
 
+// TaskPredicateWithUncompletedTasksDueBeforeCalendars wraps the corresponding Objective-C method.
 func TaskPredicateWithUncompletedTasksDueBeforeCalendars(dueDate obj.Object, calendars obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("CalCalendarStore")), objc.RegisterName("taskPredicateWithUncompletedTasksDueBefore:calendars:"), objref.IDOf(dueDate), objref.IDOf(calendars))
 	return obj.Wrap(_r)
 }
 
+// TaskPredicateWithTasksCompletedSinceCalendars wraps the corresponding Objective-C method.
 func TaskPredicateWithTasksCompletedSinceCalendars(completedSince obj.Object, calendars obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("CalCalendarStore")), objc.RegisterName("taskPredicateWithTasksCompletedSince:calendars:"), objref.IDOf(completedSince), objref.IDOf(calendars))
 	return obj.Wrap(_r)
 }
 
+// Event wraps the corresponding Objective-C method.
 func Event() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("CalEvent")), objc.RegisterName("event"))
 	return obj.Wrap(_r)
 }
 
+// RecurrenceEndWithEndDate wraps the corresponding Objective-C method.
 func RecurrenceEndWithEndDate(endDate obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("CalRecurrenceEnd")), objc.RegisterName("recurrenceEndWithEndDate:"), objref.IDOf(endDate))
 	return obj.Wrap(_r)
 }
 
+// RecurrenceEndWithOccurrenceCount wraps the corresponding Objective-C method.
 func RecurrenceEndWithOccurrenceCount(occurrenceCount int) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("CalRecurrenceEnd")), objc.RegisterName("recurrenceEndWithOccurrenceCount:"), occurrenceCount)
 	return obj.Wrap(_r)
 }
 
+// Task wraps the corresponding Objective-C method.
 func Task() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("CalTask")), objc.RegisterName("task"))
 	return obj.Wrap(_r)

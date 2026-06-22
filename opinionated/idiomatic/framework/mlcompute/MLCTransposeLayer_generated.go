@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that permutes the dimensions you specify.
-//
 // TransposeLayer is an idiomatic wrapper over the Objective-C class MLCTransposeLayer.
+//
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that permutes the dimensions you specify.
 type TransposeLayer struct {
-	objref.Handle
+	Layer
 }
 
 // TransposeLayerFromID adopts an existing Objective-C object as a TransposeLayer
@@ -25,7 +26,8 @@ func TransposeLayerFromID(id objc.ID) *TransposeLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &TransposeLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TransposeLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func transposeLayerAdopt(id objc.ID) *TransposeLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &TransposeLayer{Handle: objref.Wrap(id)}
+	x := &TransposeLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *TransposeLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TransposeLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TransposeLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewTransposeLayer creates a new TransposeLayer.
@@ -64,23 +52,19 @@ func NewTransposeLayer() *TransposeLayer {
 	return transposeLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string that helps identify this layer.
 func (x *TransposeLayer) WithLabel(label string) *TransposeLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *TransposeLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *TransposeLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// Permutes the dimensions according to 'dimensions'. The returned tensor's dimension i will correspond to dimensions[i].
+// Dimensions permutes the dimensions according to 'dimensions'. The returned tensor's dimension i will correspond to dimensions[i].
 //
 // Dimensions returns the collection as a Go slice.
 func (x *TransposeLayer) Dimensions() []obj.Object {
@@ -97,3 +81,5 @@ type TransposeLayerable interface {
 }
 
 var _ TransposeLayerable = (*TransposeLayer)(nil)
+
+var _ LayerProvider = (*TransposeLayer)(nil)

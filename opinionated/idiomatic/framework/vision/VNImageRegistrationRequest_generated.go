@@ -6,17 +6,19 @@ package vision
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for image-analysis requests that align images according to their content.
-//
 // ImageRegistrationRequest is an idiomatic wrapper over the Objective-C class VNImageRegistrationRequest.
+//
+// ImageRegistrationRequest is an abstract base — you do not construct it directly. Construct one of [HomographicImageRegistrationRequest], [TranslationalImageRegistrationRequest] and pass it where a ImageRegistrationRequest is accepted.
+//
+// The abstract superclass for image-analysis requests that align images according to their content.
 type ImageRegistrationRequest struct {
-	objref.Handle
+	TargetedImageRequest
 }
 
 // ImageRegistrationRequestFromID adopts an existing Objective-C object as a ImageRegistrationRequest
@@ -25,7 +27,8 @@ func ImageRegistrationRequestFromID(id objc.ID) *ImageRegistrationRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageRegistrationRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageRegistrationRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,51 +41,31 @@ func imageRegistrationRequestAdopt(id objc.ID) *ImageRegistrationRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageRegistrationRequest{Handle: objref.Wrap(id)}
+	x := &ImageRegistrationRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ImageRegistrationRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
+func (x *ImageRegistrationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *ImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return x
 }
 
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageRegistrationRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageRegistrationRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewImageRegistrationRequest creates a new ImageRegistrationRequest.
-func NewImageRegistrationRequest() *ImageRegistrationRequest {
-	_id := objc.Send[objc.ID](objc.ID(_class("VNImageRegistrationRequest")), objc.RegisterName("new"))
-	return imageRegistrationRequestAdopt(_id)
-}
-
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets preferBackgroundProcessing and returns the receiver so calls can be chained.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *ImageRegistrationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *ImageRegistrationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets usesCPUOnly and returns the receiver so calls can be chained.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *ImageRegistrationRequest) WithUsesCPUOnly(usesCPUOnly bool) *ImageRegistrationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets revision and returns the receiver so calls can be chained.
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
 func (x *ImageRegistrationRequest) WithRevision(revision int) *ImageRegistrationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
@@ -91,9 +74,23 @@ func (x *ImageRegistrationRequest) WithRevision(revision int) *ImageRegistration
 // ImageRegistrationRequestable is the interface implemented by [ImageRegistrationRequest], for mocking and DI.
 type ImageRegistrationRequestable interface {
 	obj.Object
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *ImageRegistrationRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *ImageRegistrationRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *ImageRegistrationRequest
 	WithRevision(revision int) *ImageRegistrationRequest
 }
 
 var _ ImageRegistrationRequestable = (*ImageRegistrationRequest)(nil)
+
+// isImageRegistrationRequest marks ImageRegistrationRequest — and, by embedding promotion, its
+// subclasses — as a member of the ImageRegistrationRequest hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ImageRegistrationRequest) isImageRegistrationRequest() {}
+
+var _ ImageRegistrationRequestProvider = (*ImageRegistrationRequest)(nil)
+
+var _ TargetedImageRequestProvider = (*ImageRegistrationRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*ImageRegistrationRequest)(nil)
+
+var _ RequestProvider = (*ImageRegistrationRequest)(nil)

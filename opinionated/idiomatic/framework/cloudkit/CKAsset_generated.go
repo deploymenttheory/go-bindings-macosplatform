@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An external file that belongs to a record.
-//
 // Asset is an idiomatic wrapper over the Objective-C class CKAsset.
+//
+// An external file that belongs to a record.
 type Asset struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetFromID(id objc.ID) *Asset {
 	if id == 0 {
 		return nil
 	}
-	x := &Asset{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Asset{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetAdopt(id objc.ID) *Asset {
 	if id == 0 {
 		return nil
 	}
-	x := &Asset{Handle: objref.Wrap(id)}
+	x := &Asset{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *Asset) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an asset that references a file.
-//
-// NewAssetWithFileURL creates a new Asset.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Asset) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetWithFileURL creates an asset that references a file.
 func NewAssetWithFileURL(fileURL string) *Asset {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKAsset")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileURL:"), rt.FileURL(fileURL))
 	return assetAdopt(_id)
 }
 
+// FileURL wraps the corresponding Objective-C method.
 func (x *Asset) FileURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileURL"))
 	return obj.Wrap(_r)

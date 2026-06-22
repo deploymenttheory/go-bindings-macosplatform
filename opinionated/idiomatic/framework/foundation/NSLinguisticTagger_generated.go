@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Analyze natural language text to tag part of speech and lexical class, identify names, perform lemmatization, and determine the language and script.
-//
 // LinguisticTagger is an idiomatic wrapper over the Objective-C class NSLinguisticTagger.
+//
+// Analyze natural language text to tag part of speech and lexical class, identify names, perform lemmatization, and determine the language and script.
 type LinguisticTagger struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LinguisticTaggerFromID(id objc.ID) *LinguisticTagger {
 	if id == 0 {
 		return nil
 	}
-	x := &LinguisticTagger{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LinguisticTagger{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func linguisticTaggerAdopt(id objc.ID) *LinguisticTagger {
 	if id == 0 {
 		return nil
 	}
-	x := &LinguisticTagger{Handle: objref.Wrap(id)}
+	x := &LinguisticTagger{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,47 +60,45 @@ func (x *LinguisticTagger) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a linguistic tagger instance using the specified tag schemes and options.
-//
-// NewLinguisticTaggerWithTagSchemesOptions creates a new LinguisticTagger.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LinguisticTagger) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLinguisticTaggerWithTagSchemesOptions creates a linguistic tagger instance using the specified tag schemes and options.
 func NewLinguisticTaggerWithTagSchemesOptions(tagSchemes []*String, opts int) *LinguisticTagger {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSLinguisticTagger")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTagSchemes:options:"), purego.SliceToNSArray(tagSchemes, func(_v *String) objc.ID { return objref.IDOf(_v) }), opts)
 	return linguisticTaggerAdopt(_id)
 }
 
-// The string being analyzed by the linguistic tagger.
-//
-// WithString sets string_ and returns the receiver so calls can be chained.
+// WithString the string being analyzed by the linguistic tagger.
 func (x *LinguisticTagger) WithString(string_ StringProvider) *LinguisticTagger {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:"), objref.IDOf(string_))
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *LinguisticTagger) WithScriptingProperties(scriptingProperties obj.Object) *LinguisticTagger {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// TagSchemes wraps the corresponding Objective-C method.
+//
 // TagSchemes returns the collection as a Go slice.
 func (x *LinguisticTagger) TagSchemes() []*String {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tagSchemes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *String { return StringFromID(_id) })
 }
 
-func (x *LinguisticTagger) String() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("string"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
-}
-
+// SetString wraps the corresponding Objective-C method.
 func (x *LinguisticTagger) SetString(string_ string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:"), purego.NSString(string_))
 }
 
+// DominantLanguage wraps the corresponding Objective-C method.
 func (x *LinguisticTagger) DominantLanguage() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dominantLanguage"))
 	if _r == 0 {
@@ -113,7 +113,6 @@ type LinguisticTaggerable interface {
 	WithString(string_ StringProvider) *LinguisticTagger
 	WithScriptingProperties(scriptingProperties obj.Object) *LinguisticTagger
 	TagSchemes() []*String
-	String() string
 	SetString(string_ string)
 	DominantLanguage() string
 }

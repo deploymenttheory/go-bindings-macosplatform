@@ -11,55 +11,55 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Convenience method for getting an empty CWConfiguration object.
+// CWConfigurationConfiguration convenience method for getting an empty CWConfiguration object.
 func CWConfigurationConfiguration() *Configuration {
 	_r := objc.Send[objc.ID](objc.ID(_class("CWConfiguration")), objc.RegisterName("configuration"))
 	return ConfigurationFromID(_r)
 }
 
-// Convenience method for getting a CWConfiguration object initialized with the given CWConfiguration object.
+// ConfigurationWithConfiguration convenience method for getting a CWConfiguration object initialized with the given CWConfiguration object.
 func ConfigurationWithConfiguration(configuration *Configuration) *Configuration {
 	_r := objc.Send[objc.ID](objc.ID(_class("CWConfiguration")), objc.RegisterName("configurationWithConfiguration:"), objref.IDOf(configuration))
 	return ConfigurationFromID(_r)
 }
 
-// Returns the list of BSD names for WLAN interfaces available on the current system.
+// InterfaceNames returns the list of BSD names for WLAN interfaces available on the current system.
 func InterfaceNames() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("CWInterface")), objc.RegisterName("interfaceNames"))
 	return obj.Wrap(_r)
 }
 
-// Convenience method for getting an CWInterface object for the default WLAN interface.
+// CWInterfaceInterface convenience method for getting an CWInterface object for the default WLAN interface.
 func CWInterfaceInterface() *Interface {
 	_r := objc.Send[objc.ID](objc.ID(_class("CWInterface")), objc.RegisterName("interface"))
 	return InterfaceFromID(_r)
 }
 
-// An instance method for obtaining an CWInterface object.
+// InterfaceWithName an instance method for obtaining an CWInterface object.
 func InterfaceWithName(name string) *Interface {
 	_r := objc.Send[objc.ID](objc.ID(_class("CWInterface")), objc.RegisterName("interfaceWithName:"), purego.NSString(name))
 	return InterfaceFromID(_r)
 }
 
-// Convenience method for getting a CWNetworkProfile object.
+// CWNetworkProfileNetworkProfile convenience method for getting a CWNetworkProfile object.
 func CWNetworkProfileNetworkProfile() *NetworkProfile {
 	_r := objc.Send[objc.ID](objc.ID(_class("CWNetworkProfile")), objc.RegisterName("networkProfile"))
 	return NetworkProfileFromID(_r)
 }
 
-// Convenience method for getting a CWNetworkProfile object initialized with the given CWNetworkProfile object.
+// NetworkProfileWithNetworkProfile convenience method for getting a CWNetworkProfile object initialized with the given CWNetworkProfile object.
 func NetworkProfileWithNetworkProfile(networkProfile *NetworkProfile) *NetworkProfile {
 	_r := objc.Send[objc.ID](objc.ID(_class("CWNetworkProfile")), objc.RegisterName("networkProfileWithNetworkProfile:"), objref.IDOf(networkProfile))
 	return NetworkProfileFromID(_r)
 }
 
-// The shared Wi-Fi client object.
+// SharedWiFiClient the shared Wi-Fi client object.
 func SharedWiFiClient() *WiFiClient {
 	_r := objc.Send[objc.ID](objc.ID(_class("CWWiFiClient")), objc.RegisterName("sharedWiFiClient"))
 	return WiFiClientFromID(_r)
 }
 
-// Returns the list of the names of available Wi-Fi interfaces.
+// CWWiFiClientInterfaceNames returns the list of the names of available Wi-Fi interfaces.
 //
 // CWWiFiClientInterfaceNames returns the collection as a Go slice.
 func CWWiFiClientInterfaceNames() []string {

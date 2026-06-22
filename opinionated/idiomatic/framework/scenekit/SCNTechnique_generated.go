@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specification for augmenting or postprocessing SceneKit’s rendering of a scene using additional drawing passes with custom Metal or OpenGL shaders.
-//
 // Technique is an idiomatic wrapper over the Objective-C class SCNTechnique.
+//
+// A specification for augmenting or postprocessing SceneKit’s rendering of a scene using additional drawing passes with custom Metal or OpenGL shaders.
 type Technique struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TechniqueFromID(id objc.ID) *Technique {
 	if id == 0 {
 		return nil
 	}
-	x := &Technique{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Technique{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func techniqueAdopt(id objc.ID) *Technique {
 	if id == 0 {
 		return nil
 	}
-	x := &Technique{Handle: objref.Wrap(id)}
+	x := &Technique{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *Technique) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Technique) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTechnique creates a new Technique.
 func NewTechnique() *Technique {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCNTechnique")), objc.RegisterName("new"))
 	return techniqueAdopt(_id)
 }
 
-// Returns the value associated with the specified GLSL uniform variable or attribute name, using subscript syntax.
+// ObjectForKeyedSubscript returns the value associated with the specified GLSL uniform variable or attribute name, using subscript syntax.
 func (x *Technique) ObjectForKeyedSubscript(key obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(key))
 	return obj.Wrap(_r)
 }
 
-// Returns the dictionary representation of the technique.
+// DictionaryRepresentation returns the dictionary representation of the technique.
 func (x *Technique) DictionaryRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)

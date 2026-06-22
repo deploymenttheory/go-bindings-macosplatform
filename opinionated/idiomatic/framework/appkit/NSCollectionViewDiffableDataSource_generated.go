@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The object you use to manage data and provide items for a collection view.
-//
 // CollectionViewDiffableDataSource is an idiomatic wrapper over the Objective-C class NSCollectionViewDiffableDataSource.
+//
+// The object you use to manage data and provide items for a collection view.
 type CollectionViewDiffableDataSource struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CollectionViewDiffableDataSourceFromID(id objc.ID) *CollectionViewDiffableD
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionViewDiffableDataSource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollectionViewDiffableDataSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func collectionViewDiffableDataSourceAdopt(id objc.ID) *CollectionViewDiffableDa
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionViewDiffableDataSource{Handle: objref.Wrap(id)}
+	x := &CollectionViewDiffableDataSource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,26 +60,36 @@ func (x *CollectionViewDiffableDataSource) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CollectionViewDiffableDataSource) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCollectionViewDiffableDataSource creates a new CollectionViewDiffableDataSource.
 func NewCollectionViewDiffableDataSource() *CollectionViewDiffableDataSource {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewDiffableDataSource")), objc.RegisterName("new"))
 	return collectionViewDiffableDataSourceAdopt(_id)
 }
 
+// Snapshot wraps the corresponding Objective-C method.
 func (x *CollectionViewDiffableDataSource) Snapshot() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshot"))
 	return obj.Wrap(_r)
 }
 
+// ApplySnapshotAnimatingDifferences wraps the corresponding Objective-C method.
 func (x *CollectionViewDiffableDataSource) ApplySnapshotAnimatingDifferences(snapshot obj.Object, animatingDifferences bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applySnapshot:animatingDifferences:"), objref.IDOf(snapshot), animatingDifferences)
 }
 
+// ItemIdentifierForIndexPath wraps the corresponding Objective-C method.
 func (x *CollectionViewDiffableDataSource) ItemIdentifierForIndexPath(indexPath obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemIdentifierForIndexPath:"), objref.IDOf(indexPath))
 	return obj.Wrap(_r)
 }
 
+// IndexPathForItemIdentifier wraps the corresponding Objective-C method.
 func (x *CollectionViewDiffableDataSource) IndexPathForItemIdentifier(identifier obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexPathForItemIdentifier:"), objref.IDOf(identifier))
 	return obj.Wrap(_r)

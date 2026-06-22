@@ -23,7 +23,8 @@ func NotificationAttributedMessageContextFromID(id objc.ID) *NotificationAttribu
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationAttributedMessageContext{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NotificationAttributedMessageContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func notificationAttributedMessageContextAdopt(id objc.ID) *NotificationAttribut
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationAttributedMessageContext{Handle: objref.Wrap(id)}
+	x := &NotificationAttributedMessageContext{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *NotificationAttributedMessageContext) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *NotificationAttributedMessageContext) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationAttributedMessageContext) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewNotificationAttributedMessageContext creates a new NotificationAttributedMessageContext.

@@ -23,7 +23,8 @@ func NNGraphFromID(id objc.ID) *NNGraph {
 	if id == 0 {
 		return nil
 	}
-	x := &NNGraph{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNGraph{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func nNGraphAdopt(id objc.ID) *NNGraph {
 	if id == 0 {
 		return nil
 	}
-	x := &NNGraph{Handle: objref.Wrap(id)}
+	x := &NNGraph{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,72 +58,77 @@ func (x *NNGraph) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NNGraph) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNNGraph creates a new NNGraph.
 func NewNNGraph() *NNGraph {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNGraph")), objc.RegisterName("new"))
 	return nNGraphAdopt(_id)
 }
 
-// Should MPSState objects produced by -encodeToCommandBuffer... be temporary objects. See MPSState description. Default: NO
-//
-// WithOutputStateIsTemporary sets outputStateIsTemporary and returns the receiver so calls can be chained.
+// WithOutputStateIsTemporary should MPSState objects produced by -encodeToCommandBuffer... be temporary objects. See MPSState description. Default: NO
 func (x *NNGraph) WithOutputStateIsTemporary(outputStateIsTemporary bool) *NNGraph {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputStateIsTemporary:"), outputStateIsTemporary)
 	return x
 }
 
-// Reinitialize all graph nodes from data sources A number of the nodes that make up a graph have a data source associated with them, for example a MPSCNNConvolutionDataSource or a MPSCNNBatchNormalizationDataSource. Generally, the data is read from these once at graph initialization time and then not looked at again, except during the weight / parameter update phase of the corresponding gradient nodes and then only if CPU updates are requested.  Otherwise, update occurs on the GPU, and the data in the data source is thereafter ignored. It can happen, though, that your application has determined the graph should load a new set of weights from the data source. When this method is called, the graph will find all nodes that support reloading and direct them to reinitialize themselves based on their data source. This process occurs immediately. Your application will need to make sure any GPU work being done by the graph is complete to ensure data coherency. Most nodes do not have a data source and will not be modified. Nodes that are not used by the graph will not be updated.
+// ReloadFromDataSources reinitialize all graph nodes from data sources A number of the nodes that make up a graph have a data source associated with them, for example a MPSCNNConvolutionDataSource or a MPSCNNBatchNormalizationDataSource. Generally, the data is read from these once at graph initialization time and then not looked at again, except during the weight / parameter update phase of the corresponding gradient nodes and then only if CPU updates are requested.  Otherwise, update occurs on the GPU, and the data in the data source is thereafter ignored. It can happen, though, that your application has determined the graph should load a new set of weights from the data source. When this method is called, the graph will find all nodes that support reloading and direct them to reinitialize themselves based on their data source. This process occurs immediately. Your application will need to make sure any GPU work being done by the graph is complete to ensure data coherency. Most nodes do not have a data source and will not be modified. Nodes that are not used by the graph will not be updated.
 func (x *NNGraph) ReloadFromDataSources() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadFromDataSources"))
 }
 
-// Find the number of times a image will be read by the graph * From the set of images (or image batches) passed in to the graph, find the number of times the graph will read an image.  This may be needed by your application to correctly set the MPSImage.readCount property.
+// ReadCountForSourceImageAtIndex find the number of times a image will be read by the graph * From the set of images (or image batches) passed in to the graph, find the number of times the graph will read an image.  This may be needed by your application to correctly set the MPSImage.readCount property.
 func (x *NNGraph) ReadCountForSourceImageAtIndex(index int) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("readCountForSourceImageAtIndex:"), index)
 	return _r
 }
 
-// Find the number of times a state will be read by the graph * From the set of state (or state batches) passed in to the graph, find the number of times the graph will read a state.  This may be needed by your application to correctly set the MPSState.readCount property.
+// ReadCountForSourceStateAtIndex find the number of times a state will be read by the graph * From the set of state (or state batches) passed in to the graph, find the number of times the graph will read a state.  This may be needed by your application to correctly set the MPSState.readCount property.
 func (x *NNGraph) ReadCountForSourceStateAtIndex(index int) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("readCountForSourceStateAtIndex:"), index)
 	return _r
 }
 
-// Get a list of identifiers for source images needed to calculate the result image
+// SourceImageHandles get a list of identifiers for source images needed to calculate the result image
 func (x *NNGraph) SourceImageHandles() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceImageHandles"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Get a list of identifiers for source state objects needed to calculate the result image Not guaranteed to be in the same order as resultStateHandles
+// SourceStateHandles get a list of identifiers for source state objects needed to calculate the result image Not guaranteed to be in the same order as resultStateHandles
 func (x *NNGraph) SourceStateHandles() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceStateHandles"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Get a list of identifiers for intermediate images objects produced by the graph
+// IntermediateImageHandles get a list of identifiers for intermediate images objects produced by the graph
 func (x *NNGraph) IntermediateImageHandles() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intermediateImageHandles"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Get a list of identifiers for result state objects produced by the graph Not guaranteed to be in the same order as sourceStateHandles
+// ResultStateHandles get a list of identifiers for result state objects produced by the graph Not guaranteed to be in the same order as sourceStateHandles
 func (x *NNGraph) ResultStateHandles() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultStateHandles"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Should MPSState objects produced by -encodeToCommandBuffer... be temporary objects. See MPSState description. Default: NO
+// OutputStateIsTemporary should MPSState objects produced by -encodeToCommandBuffer... be temporary objects. See MPSState description. Default: NO
 func (x *NNGraph) OutputStateIsTemporary() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("outputStateIsTemporary"))
 	return _r
 }
 
+// SetOutputStateIsTemporary wraps the corresponding Objective-C method.
 func (x *NNGraph) SetOutputStateIsTemporary(outputStateIsTemporary bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputStateIsTemporary:"), outputStateIsTemporary)
 }
 
-// Set at -init time. If NO, nil will be returned from -encode calls and some computation may be omitted.
+// ResultImageIsNeeded set at -init time. If NO, nil will be returned from -encode calls and some computation may be omitted.
 func (x *NNGraph) ResultImageIsNeeded() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("resultImageIsNeeded"))
 	return _r

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Your app’s response to a request for reservation details.
-//
 // GetReservationDetailsIntentResponse is an idiomatic wrapper over the Objective-C class INGetReservationDetailsIntentResponse.
+//
+// It embeds [IntentResponse], promoting that type's methods.
+//
+// Your app’s response to a request for reservation details.
 type GetReservationDetailsIntentResponse struct {
-	objref.Handle
+	IntentResponse
 }
 
 // GetReservationDetailsIntentResponseFromID adopts an existing Objective-C object as a GetReservationDetailsIntentResponse
@@ -25,7 +26,8 @@ func GetReservationDetailsIntentResponseFromID(id objc.ID) *GetReservationDetail
 	if id == 0 {
 		return nil
 	}
-	x := &GetReservationDetailsIntentResponse{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GetReservationDetailsIntentResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,63 +40,47 @@ func getReservationDetailsIntentResponseAdopt(id objc.ID) *GetReservationDetails
 	if id == 0 {
 		return nil
 	}
-	x := &GetReservationDetailsIntentResponse{Handle: objref.Wrap(id)}
+	x := &GetReservationDetailsIntentResponse{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *GetReservationDetailsIntentResponse) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GetReservationDetailsIntentResponse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GetReservationDetailsIntentResponse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates the response object with the specified code and user activity object.
-//
-// NewGetReservationDetailsIntentResponseWithCodeUserActivity creates a new GetReservationDetailsIntentResponse.
+// NewGetReservationDetailsIntentResponseWithCodeUserActivity creates the response object with the specified code and user activity object.
 func NewGetReservationDetailsIntentResponseWithCodeUserActivity(code GetReservationDetailsIntentResponseCode, userActivity obj.Object) *GetReservationDetailsIntentResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INGetReservationDetailsIntentResponse")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, objref.IDOf(userActivity))
 	return getReservationDetailsIntentResponseAdopt(_id)
 }
 
-// An array containing reservations reqeusted by the user.
-//
-// WithReservations sets the collection and returns the receiver so calls can be chained.
+// WithReservations an array containing reservations reqeusted by the user.
 func (x *GetReservationDetailsIntentResponse) WithReservations(items ...ReservationProvider) *GetReservationDetailsIntentResponse {
 	_arr := purego.SliceToNSArray(items, func(_v ReservationProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReservations:"), _arr)
 	return x
 }
 
-// The user activity object to use when launching the app.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity the user activity object to use when launching the app.
 func (x *GetReservationDetailsIntentResponse) WithUserActivity(userActivity obj.Object) *GetReservationDetailsIntentResponse {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
+// Code wraps the corresponding Objective-C method.
 func (x *GetReservationDetailsIntentResponse) Code() GetReservationDetailsIntentResponseCode {
 	_r := objc.Send[GetReservationDetailsIntentResponseCode](objref.IDOf(x), objc.RegisterName("code"))
 	return _r
 }
 
+// Reservations wraps the corresponding Objective-C method.
+//
 // Reservations returns the collection as a Go slice.
 func (x *GetReservationDetailsIntentResponse) Reservations() []*Reservation {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Reservation { return ReservationFromID(_id) })
 }
 
+// SetReservations wraps the corresponding Objective-C method.
 func (x *GetReservationDetailsIntentResponse) SetReservations(reservations []*Reservation) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReservations:"), purego.SliceToNSArray(reservations, func(_v *Reservation) objc.ID { return objref.IDOf(_v) }))
 }
@@ -110,3 +96,5 @@ type GetReservationDetailsIntentResponseable interface {
 }
 
 var _ GetReservationDetailsIntentResponseable = (*GetReservationDetailsIntentResponse)(nil)
+
+var _ IntentResponseProvider = (*GetReservationDetailsIntentResponse)(nil)

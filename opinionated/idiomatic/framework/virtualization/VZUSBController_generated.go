@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents a USB controller in a VM.
-//
 // USBController is an idiomatic wrapper over the Objective-C class VZUSBController.
+//
+// USBController is an abstract base — you do not construct it directly. Construct one of [XHCIController] and pass it where a USBController is accepted.
+//
+// A class that represents a USB controller in a VM.
 type USBController struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func USBControllerFromID(id objc.ID) *USBController {
 	if id == 0 {
 		return nil
 	}
-	x := &USBController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &USBController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func uSBControllerAdopt(id objc.ID) *USBController {
 	if id == 0 {
 		return nil
 	}
-	x := &USBController{Handle: objref.Wrap(id)}
+	x := &USBController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +62,13 @@ func (x *USBController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewUSBController creates a new USBController.
-func NewUSBController() *USBController {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZUSBController")), objc.RegisterName("new"))
-	return uSBControllerAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *USBController) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// UsbDevices wraps the corresponding Objective-C method.
 func (x *USBController) UsbDevices() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("usbDevices"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
@@ -76,3 +81,10 @@ type USBControllerable interface {
 }
 
 var _ USBControllerable = (*USBController)(nil)
+
+// isUSBController marks USBController — and, by embedding promotion, its
+// subclasses — as a member of the USBController hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *USBController) isUSBController() {}
+
+var _ USBControllerProvider = (*USBController)(nil)

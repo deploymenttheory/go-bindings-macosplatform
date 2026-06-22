@@ -11,9 +11,11 @@ import (
 // ActivityItemProvider is accepted wherever a CLSActivityItem (or one of its subclasses) is expected.
 type ActivityItemProvider interface {
 	objref.Object
+	isActivityItem()
 }
 
 // ObjectProvider is accepted wherever a CLSObject (or one of its subclasses) is expected.
 type ObjectProvider interface {
 	objref.Object
+	isObject()
 }

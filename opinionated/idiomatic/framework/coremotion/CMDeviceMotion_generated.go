@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Encapsulated measurements of the attitude, rotation rate, and acceleration of a device.
-//
 // DeviceMotion is an idiomatic wrapper over the Objective-C class CMDeviceMotion.
+//
+// It embeds [LogItem], promoting that type's methods.
+//
+// Encapsulated measurements of the attitude, rotation rate, and acceleration of a device.
 type DeviceMotion struct {
-	objref.Handle
+	LogItem
 }
 
 // DeviceMotionFromID adopts an existing Objective-C object as a DeviceMotion
@@ -25,7 +26,8 @@ func DeviceMotionFromID(id objc.ID) *DeviceMotion {
 	if id == 0 {
 		return nil
 	}
-	x := &DeviceMotion{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DeviceMotion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func deviceMotionAdopt(id objc.ID) *DeviceMotion {
 	if id == 0 {
 		return nil
 	}
-	x := &DeviceMotion{Handle: objref.Wrap(id)}
+	x := &DeviceMotion{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DeviceMotion) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DeviceMotion) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DeviceMotion) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDeviceMotion creates a new DeviceMotion.
@@ -64,16 +52,19 @@ func NewDeviceMotion() *DeviceMotion {
 	return deviceMotionAdopt(_id)
 }
 
+// Attitude wraps the corresponding Objective-C method.
 func (x *DeviceMotion) Attitude() *Attitude {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attitude"))
 	return AttitudeFromID(_r)
 }
 
+// Heading wraps the corresponding Objective-C method.
 func (x *DeviceMotion) Heading() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("heading"))
 	return _r
 }
 
+// SensorLocation wraps the corresponding Objective-C method.
 func (x *DeviceMotion) SensorLocation() DeviceMotionSensorLocation {
 	_r := objc.Send[DeviceMotionSensorLocation](objref.IDOf(x), objc.RegisterName("sensorLocation"))
 	return _r
@@ -88,3 +79,5 @@ type DeviceMotionable interface {
 }
 
 var _ DeviceMotionable = (*DeviceMotion)(nil)
+
+var _ LogItemProvider = (*DeviceMotion)(nil)

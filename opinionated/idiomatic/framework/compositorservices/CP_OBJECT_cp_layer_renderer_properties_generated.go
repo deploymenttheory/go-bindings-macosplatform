@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns the type value that specifies how the underlying texture organizes its views. - Parameters: - texture_topology: The texture topology to query. Get the texture topology from the layer properties using the “cp_layer_renderer_properties_get_texture_topology“ function. - Returns: A Metal value that indicates the arrangement of views within the texture. A texture might store the content of one view or multiple views. For example, a single texture might store one or both views for the left and right eyes of a head-mounted display. The texture type indicates this content organization strategy.
-//
 // _cp_layer_renderer_properties is an idiomatic wrapper over the Objective-C class CP_OBJECT_cp_layer_renderer_properties.
+//
+// Returns the type value that specifies how the underlying texture organizes its views. - Parameters: - texture_topology: The texture topology to query. Get the texture topology from the layer properties using the “cp_layer_renderer_properties_get_texture_topology“ function. - Returns: A Metal value that indicates the arrangement of views within the texture. A texture might store the content of one view or multiple views. For example, a single texture might store one or both views for the left and right eyes of a head-mounted display. The texture type indicates this content organization strategy.
 type _cp_layer_renderer_properties struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func _cp_layer_renderer_propertiesFromID(id objc.ID) *_cp_layer_renderer_propert
 	if id == 0 {
 		return nil
 	}
-	x := &_cp_layer_renderer_properties{Handle: objref.Wrap(purego.Retain(id))}
+	x := &_cp_layer_renderer_properties{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func _cp_layer_renderer_propertiesAdopt(id objc.ID) *_cp_layer_renderer_properti
 	if id == 0 {
 		return nil
 	}
-	x := &_cp_layer_renderer_properties{Handle: objref.Wrap(id)}
+	x := &_cp_layer_renderer_properties{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *_cp_layer_renderer_properties) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *_cp_layer_renderer_properties) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *_cp_layer_renderer_properties) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // New_cp_layer_renderer_properties creates a new _cp_layer_renderer_properties.

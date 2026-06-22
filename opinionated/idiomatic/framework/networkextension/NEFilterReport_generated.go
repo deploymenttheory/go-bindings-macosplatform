@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The report of the data provider’s action on a flow.
-//
 // NEFilterReport is an idiomatic wrapper over the Objective-C class NEFilterReport.
+//
+// The report of the data provider’s action on a flow.
 type NEFilterReport struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NEFilterReportFromID(id objc.ID) *NEFilterReport {
 	if id == 0 {
 		return nil
 	}
-	x := &NEFilterReport{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEFilterReport{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nEFilterReportAdopt(id objc.ID) *NEFilterReport {
 	if id == 0 {
 		return nil
 	}
-	x := &NEFilterReport{Handle: objref.Wrap(id)}
+	x := &NEFilterReport{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,43 @@ func (x *NEFilterReport) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEFilterReport) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNEFilterReport creates a new NEFilterReport.
 func NewNEFilterReport() *NEFilterReport {
 	_id := objc.Send[objc.ID](objc.ID(_class("NEFilterReport")), objc.RegisterName("new"))
 	return nEFilterReportAdopt(_id)
 }
 
-// The flow on which the described action was taken.
+// Flow the flow on which the described action was taken.
 func (x *NEFilterReport) Flow() *NEFilterFlow {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flow"))
 	return NEFilterFlowFromID(_r)
 }
 
-// The action taken upon the reported flow.
+// Action the action taken upon the reported flow.
 func (x *NEFilterReport) Action() NEFilterAction {
 	_r := objc.Send[NEFilterAction](objref.IDOf(x), objc.RegisterName("action"))
 	return _r
 }
 
-// The type of event that the report is reporting.
+// Event the type of event that the report is reporting.
 func (x *NEFilterReport) Event() NEFilterReportEvent {
 	_r := objc.Send[NEFilterReportEvent](objref.IDOf(x), objc.RegisterName("event"))
 	return _r
 }
 
-// The number of inbound bytes received from the flow. This property is only non-zero when the report event is NEFilterReportEventFlowClosed or NEFilterReportEventFlowStatistics.
+// BytesInboundCount the number of inbound bytes received from the flow. This property is only non-zero when the report event is NEFilterReportEventFlowClosed or NEFilterReportEventFlowStatistics.
 func (x *NEFilterReport) BytesInboundCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bytesInboundCount"))
 	return _r
 }
 
-// The number of outbound bytes sent on the flow. This property is only non-zero when the report event is NEFilterReportEventFlowClosed or NEFilterReportEventFlowStatistics.
+// BytesOutboundCount the number of outbound bytes sent on the flow. This property is only non-zero when the report event is NEFilterReportEventFlowClosed or NEFilterReportEventFlowStatistics.
 func (x *NEFilterReport) BytesOutboundCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bytesOutboundCount"))
 	return _r

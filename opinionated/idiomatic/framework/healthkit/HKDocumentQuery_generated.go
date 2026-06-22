@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A query that returns a snapshot of all matching documents currently saved in the HealthKit store.
-//
 // DocumentQuery is an idiomatic wrapper over the Objective-C class HKDocumentQuery.
+//
+// It embeds [Query], promoting that type's methods.
+//
+// A query that returns a snapshot of all matching documents currently saved in the HealthKit store.
 type DocumentQuery struct {
-	objref.Handle
+	Query
 }
 
 // DocumentQueryFromID adopts an existing Objective-C object as a DocumentQuery
@@ -25,7 +26,8 @@ func DocumentQueryFromID(id objc.ID) *DocumentQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &DocumentQuery{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DocumentQuery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func documentQueryAdopt(id objc.ID) *DocumentQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &DocumentQuery{Handle: objref.Wrap(id)}
+	x := &DocumentQuery{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DocumentQuery) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DocumentQuery) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DocumentQuery) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDocumentQuery creates a new DocumentQuery.
@@ -64,13 +52,13 @@ func NewDocumentQuery() *DocumentQuery {
 	return documentQueryAdopt(_id)
 }
 
-// The maximum number of documents the receiver will return upon completion.
+// Limit the maximum number of documents the receiver will return upon completion.
 func (x *DocumentQuery) Limit() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("limit"))
 	return _r
 }
 
-// An array of NSSortDescriptors.
+// SortDescriptors an array of NSSortDescriptors.
 //
 // SortDescriptors returns the collection as a Go slice.
 func (x *DocumentQuery) SortDescriptors() []obj.Object {
@@ -78,7 +66,7 @@ func (x *DocumentQuery) SortDescriptors() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The XML content for documents may be large.  This property can be used to control whether the query returns the XML content for each record.
+// IncludeDocumentData the XML content for documents may be large.  This property can be used to control whether the query returns the XML content for each record.
 func (x *DocumentQuery) IncludeDocumentData() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includeDocumentData"))
 	return _r
@@ -93,3 +81,5 @@ type DocumentQueryable interface {
 }
 
 var _ DocumentQueryable = (*DocumentQuery)(nil)
+
+var _ QueryProvider = (*DocumentQuery)(nil)

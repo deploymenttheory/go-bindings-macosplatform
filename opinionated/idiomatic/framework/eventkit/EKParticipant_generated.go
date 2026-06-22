@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents person, group, or room invited to a calendar event.
-//
 // Participant is an idiomatic wrapper over the Objective-C class EKParticipant.
+//
+// It embeds [Object], promoting that type's methods.
+//
+// A class that represents person, group, or room invited to a calendar event.
 type Participant struct {
-	objref.Handle
+	Object
 }
 
 // ParticipantFromID adopts an existing Objective-C object as a Participant
@@ -25,7 +26,8 @@ func ParticipantFromID(id objc.ID) *Participant {
 	if id == 0 {
 		return nil
 	}
-	x := &Participant{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Participant{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func participantAdopt(id objc.ID) *Participant {
 	if id == 0 {
 		return nil
 	}
-	x := &Participant{Handle: objref.Wrap(id)}
+	x := &Participant{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *Participant) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Participant) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Participant) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewParticipant creates a new Participant.
@@ -64,19 +52,19 @@ func NewParticipant() *Participant {
 	return participantAdopt(_id)
 }
 
-// Returns the address book record that represents the participant.
+// ABPersonInAddressBook returns the address book record that represents the participant.
 func (x *Participant) ABPersonInAddressBook(addressBook obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ABPersonInAddressBook:"), objref.IDOf(addressBook))
 	return obj.Wrap(_r)
 }
 
-// URL representing this participant.
+// URL URL representing this participant.
 func (x *Participant) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// Name of this participant.
+// Name name of this participant.
 func (x *Participant) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -85,31 +73,31 @@ func (x *Participant) Name() string {
 	return purego.GoString(_r)
 }
 
-// The status of the attendee. Returns the status of the attendee as a EKParticipantStatus value.
+// ParticipantStatus the status of the attendee. Returns the status of the attendee as a EKParticipantStatus value.
 func (x *Participant) ParticipantStatus() ParticipantStatus {
 	_r := objc.Send[ParticipantStatus](objref.IDOf(x), objc.RegisterName("participantStatus"))
 	return _r
 }
 
-// The role of the attendee. Returns the role of the attendee as a EKParticipantRole value.
+// ParticipantRole the role of the attendee. Returns the role of the attendee as a EKParticipantRole value.
 func (x *Participant) ParticipantRole() ParticipantRole {
 	_r := objc.Send[ParticipantRole](objref.IDOf(x), objc.RegisterName("participantRole"))
 	return _r
 }
 
-// The type of the attendee. Returns the type of the attendee as a EKParticipantType value.
+// ParticipantType the type of the attendee. Returns the type of the attendee as a EKParticipantType value.
 func (x *Participant) ParticipantType() ParticipantType {
 	_r := objc.Send[ParticipantType](objref.IDOf(x), objc.RegisterName("participantType"))
 	return _r
 }
 
-// A boolean indicating whether this participant represents the owner of this account.
+// IsCurrentUser a boolean indicating whether this participant represents the owner of this account.
 func (x *Participant) IsCurrentUser() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCurrentUser"))
 	return _r
 }
 
-// Returns a predicate to use with Contacts.framework to retrieve the corresponding CNContact instance. This method returns a predicate that can be used with a CNContactStore to fetch a CNContact instance for this participant, if one exists.
+// ContactPredicate returns a predicate to use with Contacts.framework to retrieve the corresponding CNContact instance. This method returns a predicate that can be used with a CNContactStore to fetch a CNContact instance for this participant, if one exists.
 func (x *Participant) ContactPredicate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contactPredicate"))
 	return obj.Wrap(_r)
@@ -129,3 +117,5 @@ type Participantable interface {
 }
 
 var _ Participantable = (*Participant)(nil)
+
+var _ ObjectProvider = (*Participant)(nil)

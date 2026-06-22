@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class that represents a network device in a virtual machine.
-//
 // NetworkDevice is an idiomatic wrapper over the Objective-C class VZNetworkDevice.
+//
+// A base class that represents a network device in a virtual machine.
 type NetworkDevice struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NetworkDeviceFromID(id objc.ID) *NetworkDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &NetworkDevice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NetworkDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func networkDeviceAdopt(id objc.ID) *NetworkDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &NetworkDevice{Handle: objref.Wrap(id)}
+	x := &NetworkDevice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *NetworkDevice) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NetworkDevice) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNetworkDevice creates a new NetworkDevice.
 func NewNetworkDevice() *NetworkDevice {
 	_id := objc.Send[objc.ID](objc.ID(_class("VZNetworkDevice")), objc.RegisterName("new"))
 	return networkDeviceAdopt(_id)
 }
 
-// The network attachment that’s connected to this network device.
-//
-// WithAttachment sets attachment and returns the receiver so calls can be chained.
+// WithAttachment the network attachment that’s connected to this network device.
 func (x *NetworkDevice) WithAttachment(attachment NetworkDeviceAttachmentProvider) *NetworkDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 	return x
 }
 
+// Attachment wraps the corresponding Objective-C method.
 func (x *NetworkDevice) Attachment() *NetworkDeviceAttachment {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachment"))
 	return NetworkDeviceAttachmentFromID(_r)
 }
 
+// SetAttachment wraps the corresponding Objective-C method.
 func (x *NetworkDevice) SetAttachment(attachment *NetworkDeviceAttachment) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 }

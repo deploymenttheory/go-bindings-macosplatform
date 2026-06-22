@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information read from the commissionee device during commissioning.
-//
 // MTRCommissioneeInfo is an idiomatic wrapper over the Objective-C class MTRCommissioneeInfo.
+//
+// Information read from the commissionee device during commissioning.
 type MTRCommissioneeInfo struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MTRCommissioneeInfoFromID(id objc.ID) *MTRCommissioneeInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRCommissioneeInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRCommissioneeInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRCommissioneeInfoAdopt(id objc.ID) *MTRCommissioneeInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRCommissioneeInfo{Handle: objref.Wrap(id)}
+	x := &MTRCommissioneeInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,37 @@ func (x *MTRCommissioneeInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRCommissioneeInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRCommissioneeInfo creates a new MTRCommissioneeInfo.
 func NewMTRCommissioneeInfo() *MTRCommissioneeInfo {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRCommissioneeInfo")), objc.RegisterName("new"))
 	return mTRCommissioneeInfoAdopt(_id)
 }
 
-// The product identity (VID / PID) of the commissionee.
+// ProductIdentity the product identity (VID / PID) of the commissionee.
 func (x *MTRCommissioneeInfo) ProductIdentity() *MTRProductIdentity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productIdentity"))
 	return MTRProductIdentityFromID(_r)
 }
 
-// Endpoint information for all endpoints of the commissionee. Will be present only if readEndpointInformation is set to YES on MTRCommissioningParameters. Use `rootEndpoint` and `-[MTREndpointInfo children]` to traverse endpoints in composition order.
+// EndpointsById endpoint information for all endpoints of the commissionee. Will be present only if readEndpointInformation is set to YES on MTRCommissioningParameters. Use `rootEndpoint` and `-[MTREndpointInfo children]` to traverse endpoints in composition order.
 func (x *MTRCommissioneeInfo) EndpointsById() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpointsById"))
 	return obj.Wrap(_r)
 }
 
-// Endpoint information for the root endpoint of the commissionee. Will be present only if readEndpointInformation is set to YES on MTRCommissioningParameters.
+// RootEndpoint endpoint information for the root endpoint of the commissionee. Will be present only if readEndpointInformation is set to YES on MTRCommissioningParameters.
 func (x *MTRCommissioneeInfo) RootEndpoint() *MTREndpointInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootEndpoint"))
 	return MTREndpointInfoFromID(_r)
 }
 
-// Attributes that were read from the commissionee.  This will contain the following, if they are available: 1) The attributes in extraAttributesToRead on MTRCommissioningParameters. 2) The FeatureMap attributes of all Network Commissioning clusters on the commissionee.
+// Attributes attributes that were read from the commissionee.  This will contain the following, if they are available: 1) The attributes in extraAttributesToRead on MTRCommissioningParameters. 2) The FeatureMap attributes of all Network Commissioning clusters on the commissionee.
 func (x *MTRCommissioneeInfo) Attributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)

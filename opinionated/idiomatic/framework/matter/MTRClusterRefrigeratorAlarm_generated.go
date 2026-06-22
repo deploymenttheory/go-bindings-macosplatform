@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Refrigerator Alarm Attributes and commands for configuring the Refrigerator alarm.
-//
 // MTRClusterRefrigeratorAlarm is an idiomatic wrapper over the Objective-C class MTRClusterRefrigeratorAlarm.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
+//
+// Cluster Refrigerator Alarm Attributes and commands for configuring the Refrigerator alarm.
 type MTRClusterRefrigeratorAlarm struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterRefrigeratorAlarmFromID adopts an existing Objective-C object as a MTRClusterRefrigeratorAlarm
@@ -25,7 +26,8 @@ func MTRClusterRefrigeratorAlarmFromID(id objc.ID) *MTRClusterRefrigeratorAlarm 
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterRefrigeratorAlarm{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterRefrigeratorAlarm{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,70 +40,62 @@ func mTRClusterRefrigeratorAlarmAdopt(id objc.ID) *MTRClusterRefrigeratorAlarm {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterRefrigeratorAlarm{Handle: objref.Wrap(id)}
+	x := &MTRClusterRefrigeratorAlarm{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterRefrigeratorAlarm) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterRefrigeratorAlarm) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterRefrigeratorAlarm) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
-//
-// NewMTRClusterRefrigeratorAlarmWithDeviceEndpointIDQueue creates a new MTRClusterRefrigeratorAlarm.
+// NewMTRClusterRefrigeratorAlarmWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func NewMTRClusterRefrigeratorAlarmWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterRefrigeratorAlarm {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterRefrigeratorAlarm")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterRefrigeratorAlarmAdopt(_id)
 }
 
+// ReadAttributeMaskWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRefrigeratorAlarm) ReadAttributeMaskWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaskWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeStateWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRefrigeratorAlarm) ReadAttributeStateWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeSupportedWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRefrigeratorAlarm) ReadAttributeSupportedWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRefrigeratorAlarm) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRefrigeratorAlarm) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRefrigeratorAlarm) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRefrigeratorAlarm) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRefrigeratorAlarm) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -121,3 +115,7 @@ type MTRClusterRefrigeratorAlarmable interface {
 }
 
 var _ MTRClusterRefrigeratorAlarmable = (*MTRClusterRefrigeratorAlarm)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterRefrigeratorAlarm)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterRefrigeratorAlarm)(nil)

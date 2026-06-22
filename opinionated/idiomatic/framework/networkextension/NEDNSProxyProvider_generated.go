@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The principal class for a DNS proxy provider app extension.
-//
 // NEDNSProxyProvider is an idiomatic wrapper over the Objective-C class NEDNSProxyProvider.
+//
+// It embeds [NEProvider], promoting that type's methods.
+//
+// The principal class for a DNS proxy provider app extension.
 type NEDNSProxyProvider struct {
-	objref.Handle
+	NEProvider
 }
 
 // NEDNSProxyProviderFromID adopts an existing Objective-C object as a NEDNSProxyProvider
@@ -27,7 +28,8 @@ func NEDNSProxyProviderFromID(id objc.ID) *NEDNSProxyProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &NEDNSProxyProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEDNSProxyProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,24 +42,10 @@ func nEDNSProxyProviderAdopt(id objc.ID) *NEDNSProxyProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &NEDNSProxyProvider{Handle: objref.Wrap(id)}
+	x := &NEDNSProxyProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NEDNSProxyProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEDNSProxyProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEDNSProxyProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNEDNSProxyProvider creates a new NEDNSProxyProvider.
@@ -66,7 +54,7 @@ func NewNEDNSProxyProvider() *NEDNSProxyProvider {
 	return nEDNSProxyProviderAdopt(_id)
 }
 
-// Starts the DNS proxy.
+// StartProxyWithOptions starts the DNS proxy.
 //
 // StartProxyWithOptions blocks until the operation completes or ctx is cancelled.
 func (x *NEDNSProxyProvider) StartProxyWithOptions(ctx context.Context, options obj.Object) error {
@@ -85,7 +73,7 @@ func (x *NEDNSProxyProvider) StartProxyWithOptions(ctx context.Context, options 
 	}
 }
 
-// Stops the DNS proxy.
+// StopProxyWithReason stops the DNS proxy.
 //
 // StopProxyWithReason blocks until the operation completes or ctx is cancelled.
 func (x *NEDNSProxyProvider) StopProxyWithReason(ctx context.Context, reason NEProviderStopReason) error {
@@ -102,18 +90,20 @@ func (x *NEDNSProxyProvider) StopProxyWithReason(ctx context.Context, reason NEP
 	}
 }
 
-// Handles a new flow of DNS traffic.
+// HandleNewFlow handles a new flow of DNS traffic.
 func (x *NEDNSProxyProvider) HandleNewFlow(flow *NEAppProxyFlow) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("handleNewFlow:"), objref.IDOf(flow))
 	return _r
 }
 
-// This function is called by the framework to deliver a new UDP data flow to the proxy provider implementation. Subclasses can override this method to perform whatever steps are necessary to ready the proxy to receive data from the flow. The proxy provider implementation indicates that the proxy is ready to handle flow data by calling -[NEAppProxyFlow openWithLocalFlowEndpoint:completionHandler:] on the flow. If the proxy implementation decides to not handle the flow and instead terminate it, the subclass implementation of this method should return NO. If the proxy implementation decides to handle the flow, the subclass implementation of this method should return YES. In this case the proxy implementation is responsible for retaining the NEAppProxyUDPFlow object. The default implementation of this method calls -[NEAppProxyProvider handleNewFlow:] and returns its result.
+// HandleNewUDPFlowInitialRemoteFlowEndpoint this function is called by the framework to deliver a new UDP data flow to the proxy provider implementation. Subclasses can override this method to perform whatever steps are necessary to ready the proxy to receive data from the flow. The proxy provider implementation indicates that the proxy is ready to handle flow data by calling -[NEAppProxyFlow openWithLocalFlowEndpoint:completionHandler:] on the flow. If the proxy implementation decides to not handle the flow and instead terminate it, the subclass implementation of this method should return NO. If the proxy implementation decides to handle the flow, the subclass implementation of this method should return YES. In this case the proxy implementation is responsible for retaining the NEAppProxyUDPFlow object. The default implementation of this method calls -[NEAppProxyProvider handleNewFlow:] and returns its result.
 func (x *NEDNSProxyProvider) HandleNewUDPFlowInitialRemoteFlowEndpoint(flow *NEAppProxyUDPFlow, remoteEndpoint obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("handleNewUDPFlow:initialRemoteFlowEndpoint:"), objref.IDOf(flow), objref.IDOf(remoteEndpoint))
 	return _r
 }
 
+// SystemDNSSettings wraps the corresponding Objective-C method.
+//
 // SystemDNSSettings returns the collection as a Go slice.
 func (x *NEDNSProxyProvider) SystemDNSSettings() []*NEDNSSettings {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("systemDNSSettings"))
@@ -131,3 +121,5 @@ type NEDNSProxyProviderable interface {
 }
 
 var _ NEDNSProxyProviderable = (*NEDNSProxyProvider)(nil)
+
+var _ NEProviderProvider = (*NEDNSProxyProvider)(nil)

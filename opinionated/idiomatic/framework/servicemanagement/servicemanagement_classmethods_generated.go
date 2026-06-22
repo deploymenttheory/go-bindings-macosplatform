@@ -10,36 +10,36 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Initializes an app service object for a login item corresponding to the bundle with the identifier you provide.
+// LoginItemServiceWithIdentifier initializes an app service object for a login item corresponding to the bundle with the identifier you provide.
 func LoginItemServiceWithIdentifier(identifier string) *AppService {
 	_r := objc.Send[objc.ID](objc.ID(_class("SMAppService")), objc.RegisterName("loginItemServiceWithIdentifier:"), purego.NSString(identifier))
 	return AppServiceFromID(_r)
 }
 
-// Initializes an app service object with a launch agent with the property list name you provide.
+// AgentServiceWithPlistName initializes an app service object with a launch agent with the property list name you provide.
 func AgentServiceWithPlistName(plistName string) *AppService {
 	_r := objc.Send[objc.ID](objc.ID(_class("SMAppService")), objc.RegisterName("agentServiceWithPlistName:"), purego.NSString(plistName))
 	return AppServiceFromID(_r)
 }
 
-// Initializes an app service object with a launch daemon with the property list name you provide.
+// DaemonServiceWithPlistName initializes an app service object with a launch daemon with the property list name you provide.
 func DaemonServiceWithPlistName(plistName string) *AppService {
 	_r := objc.Send[objc.ID](objc.ID(_class("SMAppService")), objc.RegisterName("daemonServiceWithPlistName:"), purego.NSString(plistName))
 	return AppServiceFromID(_r)
 }
 
-// Check the authorization status of an earlier OS version login item.
+// StatusForLegacyURL check the authorization status of an earlier OS version login item.
 func StatusForLegacyURL(url string) AppServiceStatus {
 	_r := objc.Send[AppServiceStatus](objc.ID(_class("SMAppService")), objc.RegisterName("statusForLegacyURL:"), rt.FileURL(url))
 	return _r
 }
 
-// Opens System Settings to the Login Items control panel.
+// OpenSystemSettingsLoginItems opens System Settings to the Login Items control panel.
 func OpenSystemSettingsLoginItems() {
 	objc.Send[objc.ID](objc.ID(_class("SMAppService")), objc.RegisterName("openSystemSettingsLoginItems"))
 }
 
-// A SMAppService corresponding to the main application as a LoginItem This SMAppService can be used to configure the main app to be launched at login
+// MainAppService a SMAppService corresponding to the main application as a LoginItem This SMAppService can be used to configure the main app to be launched at login
 func MainAppService() *AppService {
 	_r := objc.Send[objc.ID](objc.ID(_class("SMAppService")), objc.RegisterName("mainAppService"))
 	return AppServiceFromID(_r)

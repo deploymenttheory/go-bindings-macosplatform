@@ -17,6 +17,8 @@ const (
 	FileInfoCouldContainButDoesNotContainFragments FileInfoFragmentsStatus = 2
 )
 
+// String returns the FileInfoFragmentsStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FileInfoFragmentsStatus) String() string {
 	switch e {
 	case FileInfoCouldNotContainFragments:

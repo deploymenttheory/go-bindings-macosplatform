@@ -5,6 +5,7 @@
 package quicklook
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -44,6 +45,18 @@ func QLPreviewRequestCopyURL(preview obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestCopyURL, _lib, "QLPreviewRequestCopyURL")
 	}
 	_ret := _fnQLPreviewRequestCopyURL(objref.IDOf(preview))
+	return obj.Wrap(_ret)
+}
+
+var _fnQLPreviewRequestCreateContext func(objc.ID, corefoundation.CGSize, uint8, objc.ID) objc.ID
+
+// QLPreviewRequestCreateContext calls the QuickLook framework function QLPreviewRequestCreateContext.
+func QLPreviewRequestCreateContext(preview obj.Object, size corefoundation.CGSize, isBitmap uint8, properties obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnQLPreviewRequestCreateContext == nil {
+		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestCreateContext, _lib, "QLPreviewRequestCreateContext")
+	}
+	_ret := _fnQLPreviewRequestCreateContext(objref.IDOf(preview), size, isBitmap, objref.IDOf(properties))
 	return obj.Wrap(_ret)
 }
 
@@ -161,6 +174,18 @@ func QLThumbnailCopyOptions(thumbnail obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnQLThumbnailCreate func(objc.ID, objc.ID, corefoundation.CGSize, objc.ID) objc.ID
+
+// QLThumbnailCreate calls the QuickLook framework function QLThumbnailCreate.
+func QLThumbnailCreate(allocator obj.Object, url obj.Object, maxThumbnailSize corefoundation.CGSize, options obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnQLThumbnailCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnQLThumbnailCreate, _lib, "QLThumbnailCreate")
+	}
+	_ret := _fnQLThumbnailCreate(objref.IDOf(allocator), objref.IDOf(url), maxThumbnailSize, objref.IDOf(options))
+	return obj.Wrap(_ret)
+}
+
 var _fnQLThumbnailDispatchAsync func(objc.ID, objc.ID, func())
 
 // QLThumbnailDispatchAsync calls the QuickLook framework function QLThumbnailDispatchAsync.
@@ -172,6 +197,28 @@ func QLThumbnailDispatchAsync(thumbnail obj.Object, queue obj.Object, completion
 	_fnQLThumbnailDispatchAsync(objref.IDOf(thumbnail), objref.IDOf(queue), completion)
 }
 
+var _fnQLThumbnailGetContentRect func(objc.ID) corefoundation.CGRect
+
+// QLThumbnailGetContentRect calls the QuickLook framework function QLThumbnailGetContentRect.
+func QLThumbnailGetContentRect(thumbnail obj.Object) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnQLThumbnailGetContentRect == nil {
+		ebipurego.RegisterLibFunc(&_fnQLThumbnailGetContentRect, _lib, "QLThumbnailGetContentRect")
+	}
+	return _fnQLThumbnailGetContentRect(objref.IDOf(thumbnail))
+}
+
+var _fnQLThumbnailGetMaximumSize func(objc.ID) corefoundation.CGSize
+
+// QLThumbnailGetMaximumSize calls the QuickLook framework function QLThumbnailGetMaximumSize.
+func QLThumbnailGetMaximumSize(thumbnail obj.Object) corefoundation.CGSize {
+	_loadOnce.Do(_loadLibrary)
+	if _fnQLThumbnailGetMaximumSize == nil {
+		ebipurego.RegisterLibFunc(&_fnQLThumbnailGetMaximumSize, _lib, "QLThumbnailGetMaximumSize")
+	}
+	return _fnQLThumbnailGetMaximumSize(objref.IDOf(thumbnail))
+}
+
 var _fnQLThumbnailGetTypeID func() int
 
 // QLThumbnailGetTypeID calls the QuickLook framework function QLThumbnailGetTypeID.
@@ -181,6 +228,18 @@ func QLThumbnailGetTypeID() int {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailGetTypeID, _lib, "QLThumbnailGetTypeID")
 	}
 	return _fnQLThumbnailGetTypeID()
+}
+
+var _fnQLThumbnailImageCreate func(objc.ID, objc.ID, corefoundation.CGSize, objc.ID) objc.ID
+
+// QLThumbnailImageCreate calls the QuickLook framework function QLThumbnailImageCreate.
+func QLThumbnailImageCreate(allocator obj.Object, url obj.Object, maxThumbnailSize corefoundation.CGSize, options obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnQLThumbnailImageCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnQLThumbnailImageCreate, _lib, "QLThumbnailImageCreate")
+	}
+	_ret := _fnQLThumbnailImageCreate(objref.IDOf(allocator), objref.IDOf(url), maxThumbnailSize, objref.IDOf(options))
+	return obj.Wrap(_ret)
 }
 
 var _fnQLThumbnailIsCancelled func(objc.ID) uint8
@@ -230,6 +289,18 @@ func QLThumbnailRequestCopyURL(thumbnail obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnQLThumbnailRequestCreateContext func(objc.ID, corefoundation.CGSize, uint8, objc.ID) objc.ID
+
+// QLThumbnailRequestCreateContext calls the QuickLook framework function QLThumbnailRequestCreateContext.
+func QLThumbnailRequestCreateContext(thumbnail obj.Object, size corefoundation.CGSize, isBitmap uint8, properties obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnQLThumbnailRequestCreateContext == nil {
+		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestCreateContext, _lib, "QLThumbnailRequestCreateContext")
+	}
+	_ret := _fnQLThumbnailRequestCreateContext(objref.IDOf(thumbnail), size, isBitmap, objref.IDOf(properties))
+	return obj.Wrap(_ret)
+}
+
 var _fnQLThumbnailRequestFlushContext func(objc.ID, objc.ID)
 
 // QLThumbnailRequestFlushContext calls the QuickLook framework function QLThumbnailRequestFlushContext.
@@ -251,6 +322,17 @@ func QLThumbnailRequestGetGeneratorBundle(thumbnail obj.Object) obj.Object {
 	}
 	_ret := _fnQLThumbnailRequestGetGeneratorBundle(objref.IDOf(thumbnail))
 	return obj.Wrap(_ret)
+}
+
+var _fnQLThumbnailRequestGetMaximumSize func(objc.ID) corefoundation.CGSize
+
+// QLThumbnailRequestGetMaximumSize calls the QuickLook framework function QLThumbnailRequestGetMaximumSize.
+func QLThumbnailRequestGetMaximumSize(thumbnail obj.Object) corefoundation.CGSize {
+	_loadOnce.Do(_loadLibrary)
+	if _fnQLThumbnailRequestGetMaximumSize == nil {
+		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestGetMaximumSize, _lib, "QLThumbnailRequestGetMaximumSize")
+	}
+	return _fnQLThumbnailRequestGetMaximumSize(objref.IDOf(thumbnail))
 }
 
 var _fnQLThumbnailRequestGetTypeID func() int

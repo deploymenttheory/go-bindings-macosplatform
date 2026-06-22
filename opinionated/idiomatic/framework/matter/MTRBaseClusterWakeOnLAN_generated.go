@@ -10,63 +10,53 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRBaseClusterWakeOnLan is an idiomatic wrapper over the Objective-C class MTRBaseClusterWakeOnLan.
-type MTRBaseClusterWakeOnLan struct {
-	objref.Handle
+// MTRBaseClusterWakeOnLAN is an idiomatic wrapper over the Objective-C class MTRBaseClusterWakeOnLAN.
+//
+// MTRBaseClusterWakeOnLAN is an abstract base — you do not construct it directly. Construct one of [MTRBaseClusterWakeOnLan] and pass it where a MTRBaseClusterWakeOnLAN is accepted.
+type MTRBaseClusterWakeOnLAN struct {
+	MTRGenericBaseCluster
 }
 
-// MTRBaseClusterWakeOnLanFromID adopts an existing Objective-C object as a MTRBaseClusterWakeOnLan
+// MTRBaseClusterWakeOnLANFromID adopts an existing Objective-C object as a MTRBaseClusterWakeOnLAN
 // (nil for 0), retaining it and registering a release finalizer.
-func MTRBaseClusterWakeOnLanFromID(id objc.ID) *MTRBaseClusterWakeOnLan {
+func MTRBaseClusterWakeOnLANFromID(id objc.ID) *MTRBaseClusterWakeOnLAN {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterWakeOnLan{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterWakeOnLAN{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
 
-// mTRBaseClusterWakeOnLanAdopt wraps an Objective-C object that this code just created as a
-// MTRBaseClusterWakeOnLan (nil for 0). The caller already owns the object's reference,
+// mTRBaseClusterWakeOnLANAdopt wraps an Objective-C object that this code just created as a
+// MTRBaseClusterWakeOnLAN (nil for 0). The caller already owns the object's reference,
 // so this does not add another; it only arranges for the object to be released
 // once Go stops using it. Constructors use it.
-func mTRBaseClusterWakeOnLanAdopt(id objc.ID) *MTRBaseClusterWakeOnLan {
+func mTRBaseClusterWakeOnLANAdopt(id objc.ID) *MTRBaseClusterWakeOnLAN {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterWakeOnLan{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterWakeOnLAN{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterWakeOnLan) Description() string {
-	return rt.Description(objref.IDOf(x))
+// NewMTRBaseClusterWakeOnLANWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+func NewMTRBaseClusterWakeOnLANWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterWakeOnLAN {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterWakeOnLAN")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRBaseClusterWakeOnLANAdopt(_id)
 }
 
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterWakeOnLan) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterWakeOnLan) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewMTRBaseClusterWakeOnLanWithDeviceEndpointQueue creates a new MTRBaseClusterWakeOnLan.
-func NewMTRBaseClusterWakeOnLanWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterWakeOnLan {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterWakeOnLan")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
-	return mTRBaseClusterWakeOnLanAdopt(_id)
-}
-
-// ReadAttributeMACAddress blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWakeOnLan) ReadAttributeMACAddress(ctx context.Context) (string, error) {
+// ReadAttributeMACAddressWithCompletion wraps the corresponding Objective-C method.
+//
+// ReadAttributeMACAddressWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterWakeOnLAN) ReadAttributeMACAddressWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -78,7 +68,7 @@ func (x *MTRBaseClusterWakeOnLan) ReadAttributeMACAddress(ctx context.Context) (
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMACAddressWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMACAddressWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -88,8 +78,10 @@ func (x *MTRBaseClusterWakeOnLan) ReadAttributeMACAddress(ctx context.Context) (
 	}
 }
 
-// SubscribeAttributeMACAddressWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWakeOnLan) SubscribeAttributeMACAddressWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (string, error) {
+// SubscribeAttributeMACAddressWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
+// SubscribeAttributeMACAddressWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterWakeOnLAN) SubscribeAttributeMACAddressWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -101,7 +93,7 @@ func (x *MTRBaseClusterWakeOnLan) SubscribeAttributeMACAddressWithMinIntervalMax
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeMACAddressWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeMACAddressWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -111,8 +103,10 @@ func (x *MTRBaseClusterWakeOnLan) SubscribeAttributeMACAddressWithMinIntervalMax
 	}
 }
 
-// ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWakeOnLan) ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error) {
+// ReadAttributeLinkLocalAddressWithCompletion wraps the corresponding Objective-C method.
+//
+// ReadAttributeLinkLocalAddressWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterWakeOnLAN) ReadAttributeLinkLocalAddressWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -124,7 +118,7 @@ func (x *MTRBaseClusterWakeOnLan) ReadAttributeGeneratedCommandList(ctx context.
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLinkLocalAddressWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -134,8 +128,10 @@ func (x *MTRBaseClusterWakeOnLan) ReadAttributeGeneratedCommandList(ctx context.
 	}
 }
 
-// SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWakeOnLan) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+// SubscribeAttributeLinkLocalAddressWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
+// SubscribeAttributeLinkLocalAddressWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterWakeOnLAN) SubscribeAttributeLinkLocalAddressWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -147,7 +143,7 @@ func (x *MTRBaseClusterWakeOnLan) SubscribeAttributeGeneratedCommandListWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeLinkLocalAddressWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -157,8 +153,10 @@ func (x *MTRBaseClusterWakeOnLan) SubscribeAttributeGeneratedCommandListWithMinI
 	}
 }
 
-// ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWakeOnLan) ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error) {
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
+// ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterWakeOnLAN) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -170,7 +168,7 @@ func (x *MTRBaseClusterWakeOnLan) ReadAttributeAcceptedCommandList(ctx context.C
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -180,8 +178,10 @@ func (x *MTRBaseClusterWakeOnLan) ReadAttributeAcceptedCommandList(ctx context.C
 	}
 }
 
-// SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWakeOnLan) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterWakeOnLAN) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -193,7 +193,7 @@ func (x *MTRBaseClusterWakeOnLan) SubscribeAttributeAcceptedCommandListWithMinIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -203,8 +203,10 @@ func (x *MTRBaseClusterWakeOnLan) SubscribeAttributeAcceptedCommandListWithMinIn
 	}
 }
 
-// ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWakeOnLan) ReadAttributeAttributeList(ctx context.Context) (obj.Object, error) {
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
+// ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterWakeOnLAN) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -216,7 +218,7 @@ func (x *MTRBaseClusterWakeOnLan) ReadAttributeAttributeList(ctx context.Context
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -226,8 +228,10 @@ func (x *MTRBaseClusterWakeOnLan) ReadAttributeAttributeList(ctx context.Context
 	}
 }
 
-// SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWakeOnLan) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterWakeOnLAN) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -239,7 +243,7 @@ func (x *MTRBaseClusterWakeOnLan) SubscribeAttributeAttributeListWithMinInterval
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -249,8 +253,10 @@ func (x *MTRBaseClusterWakeOnLan) SubscribeAttributeAttributeListWithMinInterval
 	}
 }
 
-// ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWakeOnLan) ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error) {
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
+// ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterWakeOnLAN) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -262,7 +268,7 @@ func (x *MTRBaseClusterWakeOnLan) ReadAttributeFeatureMap(ctx context.Context) (
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -272,8 +278,10 @@ func (x *MTRBaseClusterWakeOnLan) ReadAttributeFeatureMap(ctx context.Context) (
 	}
 }
 
-// SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWakeOnLan) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterWakeOnLAN) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -285,7 +293,7 @@ func (x *MTRBaseClusterWakeOnLan) SubscribeAttributeFeatureMapWithMinIntervalMax
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -295,8 +303,10 @@ func (x *MTRBaseClusterWakeOnLan) SubscribeAttributeFeatureMapWithMinIntervalMax
 	}
 }
 
-// ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWakeOnLan) ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error) {
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
+// ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterWakeOnLAN) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -308,7 +318,7 @@ func (x *MTRBaseClusterWakeOnLan) ReadAttributeClusterRevision(ctx context.Conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -318,8 +328,10 @@ func (x *MTRBaseClusterWakeOnLan) ReadAttributeClusterRevision(ctx context.Conte
 	}
 }
 
-// SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWakeOnLan) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterWakeOnLAN) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -331,7 +343,7 @@ func (x *MTRBaseClusterWakeOnLan) SubscribeAttributeClusterRevisionWithMinInterv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -341,21 +353,84 @@ func (x *MTRBaseClusterWakeOnLan) SubscribeAttributeClusterRevisionWithMinInterv
 	}
 }
 
-// MTRBaseClusterWakeOnLanable is the interface implemented by [MTRBaseClusterWakeOnLan], for mocking and DI.
-type MTRBaseClusterWakeOnLanable interface {
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
+// ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterWakeOnLAN) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	type _result struct {
+		val obj.Object
+		err error
+	}
+	_ch := make(chan _result, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
+		var _o _result
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
+		_ch <- _o
+	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero obj.Object
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterWakeOnLAN) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	type _result struct {
+		val obj.Object
+		err error
+	}
+	_ch := make(chan _result, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
+		var _o _result
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
+		_ch <- _o
+	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero obj.Object
+		return _zero, ctx.Err()
+	}
+}
+
+// MTRBaseClusterWakeOnLANable is the interface implemented by [MTRBaseClusterWakeOnLAN], for mocking and DI.
+type MTRBaseClusterWakeOnLANable interface {
 	obj.Object
-	ReadAttributeMACAddress(ctx context.Context) (string, error)
-	SubscribeAttributeMACAddressWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (string, error)
-	ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeAttributeList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeMACAddressWithCompletion(ctx context.Context) (string, error)
+	SubscribeAttributeMACAddressWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error)
+	ReadAttributeLinkLocalAddressWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeLinkLocalAddressWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
 }
 
-var _ MTRBaseClusterWakeOnLanable = (*MTRBaseClusterWakeOnLan)(nil)
+var _ MTRBaseClusterWakeOnLANable = (*MTRBaseClusterWakeOnLAN)(nil)
+
+// isMTRBaseClusterWakeOnLAN marks MTRBaseClusterWakeOnLAN — and, by embedding promotion, its
+// subclasses — as a member of the MTRBaseClusterWakeOnLAN hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRBaseClusterWakeOnLAN) isMTRBaseClusterWakeOnLAN() {}
+
+var _ MTRBaseClusterWakeOnLANProvider = (*MTRBaseClusterWakeOnLAN)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterWakeOnLAN)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterWakeOnLAN)(nil)

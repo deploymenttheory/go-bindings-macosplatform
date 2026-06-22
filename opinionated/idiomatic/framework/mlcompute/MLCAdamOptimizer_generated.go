@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An optimizer that represents the adaptive moment estimation algorithm.
-//
 // AdamOptimizer is an idiomatic wrapper over the Objective-C class MLCAdamOptimizer.
+//
+// It embeds [Optimizer], promoting that type's methods.
+//
+// An optimizer that represents the adaptive moment estimation algorithm.
 type AdamOptimizer struct {
-	objref.Handle
+	Optimizer
 }
 
 // AdamOptimizerFromID adopts an existing Objective-C object as a AdamOptimizer
@@ -25,7 +26,8 @@ func AdamOptimizerFromID(id objc.ID) *AdamOptimizer {
 	if id == 0 {
 		return nil
 	}
-	x := &AdamOptimizer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AdamOptimizer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func adamOptimizerAdopt(id objc.ID) *AdamOptimizer {
 	if id == 0 {
 		return nil
 	}
-	x := &AdamOptimizer{Handle: objref.Wrap(id)}
+	x := &AdamOptimizer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AdamOptimizer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AdamOptimizer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AdamOptimizer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAdamOptimizer creates a new AdamOptimizer.
@@ -64,46 +52,43 @@ func NewAdamOptimizer() *AdamOptimizer {
 	return adamOptimizerAdopt(_id)
 }
 
-// The learning rate.
-//
-// WithLearningRate sets learningRate and returns the receiver so calls can be chained.
+// WithLearningRate the learning rate.
 func (x *AdamOptimizer) WithLearningRate(learningRate float32) *AdamOptimizer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
 	return x
 }
 
-// A Boolean value that indicates whether you apply gradient clipping.
-//
-// WithAppliesGradientClipping sets appliesGradientClipping and returns the receiver so calls can be chained.
+// WithAppliesGradientClipping a Boolean value that indicates whether you apply gradient clipping.
 func (x *AdamOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *AdamOptimizer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesGradientClipping:"), appliesGradientClipping)
 	return x
 }
 
-// Coefficent used for computing running averages of gradient. The default is 0.9.
+// Beta1 coefficent used for computing running averages of gradient. The default is 0.9.
 func (x *AdamOptimizer) Beta1() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("beta1"))
 	return _r
 }
 
-// Coefficent used for computing running averages of square of gradient. The default is 0.999.
+// Beta2 coefficent used for computing running averages of square of gradient. The default is 0.999.
 func (x *AdamOptimizer) Beta2() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("beta2"))
 	return _r
 }
 
+// Epsilon wraps the corresponding Objective-C method.
 func (x *AdamOptimizer) Epsilon() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
 	return _r
 }
 
-// Whether to use the AMSGrad variant of this algorithm The default is false
+// UsesAMSGrad whether to use the AMSGrad variant of this algorithm The default is false
 func (x *AdamOptimizer) UsesAMSGrad() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesAMSGrad"))
 	return _r
 }
 
-// The current timestep used for the update. The default is 1.
+// TimeStep the current timestep used for the update. The default is 1.
 func (x *AdamOptimizer) TimeStep() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("timeStep"))
 	return _r
@@ -122,3 +107,5 @@ type AdamOptimizerable interface {
 }
 
 var _ AdamOptimizerable = (*AdamOptimizer)(nil)
+
+var _ OptimizerProvider = (*AdamOptimizer)(nil)

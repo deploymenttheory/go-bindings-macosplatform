@@ -3,4 +3,14 @@
 //go:build darwin
 
 // Package scenekit provides a fluent Go API over the macOS SceneKit framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - Constraint: [AccelerationConstraint], [AvoidOccluderConstraint], [BillboardConstraint], [DistanceConstraint], [IKConstraint], [LookAtConstraint], [ReplicatorConstraint], [SliderConstraint], [TransformConstraint]
+//   - Geometry: [Box], [Capsule], [Cone], [Cylinder], [Floor], [Plane], [Pyramid], [Shape], [Sphere], [Text], [Torus], [Tube]
+//   - Node: [ReferenceNode]
+//   - PhysicsBehavior: [PhysicsBallSocketJoint], [PhysicsConeTwistJoint], [PhysicsHingeJoint], [PhysicsSliderJoint], [PhysicsVehicle]
 package scenekit

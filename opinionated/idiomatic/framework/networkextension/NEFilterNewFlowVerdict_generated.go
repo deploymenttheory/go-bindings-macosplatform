@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The result from a filter data provder after the initial examination of a flow.
-//
 // NEFilterNewFlowVerdict is an idiomatic wrapper over the Objective-C class NEFilterNewFlowVerdict.
+//
+// It embeds [NEFilterVerdict], promoting that type's methods.
+//
+// The result from a filter data provder after the initial examination of a flow.
 type NEFilterNewFlowVerdict struct {
-	objref.Handle
+	NEFilterVerdict
 }
 
 // NEFilterNewFlowVerdictFromID adopts an existing Objective-C object as a NEFilterNewFlowVerdict
@@ -25,7 +26,8 @@ func NEFilterNewFlowVerdictFromID(id objc.ID) *NEFilterNewFlowVerdict {
 	if id == 0 {
 		return nil
 	}
-	x := &NEFilterNewFlowVerdict{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEFilterNewFlowVerdict{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func nEFilterNewFlowVerdictAdopt(id objc.ID) *NEFilterNewFlowVerdict {
 	if id == 0 {
 		return nil
 	}
-	x := &NEFilterNewFlowVerdict{Handle: objref.Wrap(id)}
+	x := &NEFilterNewFlowVerdict{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NEFilterNewFlowVerdict) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEFilterNewFlowVerdict) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEFilterNewFlowVerdict) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNEFilterNewFlowVerdict creates a new NEFilterNewFlowVerdict.
@@ -64,28 +52,25 @@ func NewNEFilterNewFlowVerdict() *NEFilterNewFlowVerdict {
 	return nEFilterNewFlowVerdictAdopt(_id)
 }
 
-// The frequency at which the data provider receives reports.
-//
-// WithStatisticsReportFrequency sets statisticsReportFrequency and returns the receiver so calls can be chained.
+// WithStatisticsReportFrequency the frequency at which the data provider receives reports.
 func (x *NEFilterNewFlowVerdict) WithStatisticsReportFrequency(statisticsReportFrequency NEFilterReportFrequency) *NEFilterNewFlowVerdict {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatisticsReportFrequency:"), statisticsReportFrequency)
 	return x
 }
 
-// A Boolean value that indicates whether to send a report to the control provider when processing this verdict.
-//
-// WithShouldReport sets shouldReport and returns the receiver so calls can be chained.
+// WithShouldReport a Boolean value that indicates whether to send a report to the control provider when processing this verdict.
 func (x *NEFilterNewFlowVerdict) WithShouldReport(shouldReport bool) *NEFilterNewFlowVerdict {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldReport:"), shouldReport)
 	return x
 }
 
-// The frequency at which the data provider's -[NEFilterProvider handleReport:] method is called with a NEFilterReport instance with an event of NEFilterReportEventFlowStatistics. The default value is NEFilterReportFrequencyNone, so by default no statistics are reported.
+// StatisticsReportFrequency the frequency at which the data provider's -[NEFilterProvider handleReport:] method is called with a NEFilterReport instance with an event of NEFilterReportEventFlowStatistics. The default value is NEFilterReportFrequencyNone, so by default no statistics are reported.
 func (x *NEFilterNewFlowVerdict) StatisticsReportFrequency() NEFilterReportFrequency {
 	_r := objc.Send[NEFilterReportFrequency](objref.IDOf(x), objc.RegisterName("statisticsReportFrequency"))
 	return _r
 }
 
+// SetStatisticsReportFrequency wraps the corresponding Objective-C method.
 func (x *NEFilterNewFlowVerdict) SetStatisticsReportFrequency(statisticsReportFrequency NEFilterReportFrequency) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatisticsReportFrequency:"), statisticsReportFrequency)
 }
@@ -100,3 +85,5 @@ type NEFilterNewFlowVerdictable interface {
 }
 
 var _ NEFilterNewFlowVerdictable = (*NEFilterNewFlowVerdict)(nil)
+
+var _ NEFilterVerdictProvider = (*NEFilterNewFlowVerdict)(nil)

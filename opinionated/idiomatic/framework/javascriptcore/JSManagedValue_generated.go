@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A JavaScript value with conditional retain behavior to provide automatic memory management.
-//
 // ManagedValue is an idiomatic wrapper over the Objective-C class JSManagedValue.
+//
+// A JavaScript value with conditional retain behavior to provide automatic memory management.
 type ManagedValue struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ManagedValueFromID(id objc.ID) *ManagedValue {
 	if id == 0 {
 		return nil
 	}
-	x := &ManagedValue{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ManagedValue{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func managedValueAdopt(id objc.ID) *ManagedValue {
 	if id == 0 {
 		return nil
 	}
-	x := &ManagedValue{Handle: objref.Wrap(id)}
+	x := &ManagedValue{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *ManagedValue) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a managed value with the specified JavaScript value.
-//
-// NewManagedValueWithValue creates a new ManagedValue.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ManagedValue) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewManagedValueWithValue initializes a managed value with the specified JavaScript value.
 func NewManagedValueWithValue(value *Value) *ManagedValue {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("JSManagedValue")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:"), objref.IDOf(value))
 	return managedValueAdopt(_id)
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *ManagedValue) Value() *Value {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	return ValueFromID(_r)

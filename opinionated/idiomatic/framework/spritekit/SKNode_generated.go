@@ -7,6 +7,7 @@ package spritekit
 import (
 	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -14,9 +15,11 @@ import (
 	"unsafe"
 )
 
-// The base class of all SpriteKit nodes.
-//
 // Node is an idiomatic wrapper over the Objective-C class SKNode.
+//
+// Node is an abstract base — you do not construct it directly. Construct one of [AudioNode], [CameraNode], [CropNode], [EffectNode], [EmitterNode], [FieldNode], [LabelNode], [LightNode], [ReferenceNode], [SK3DNode], [ShapeNode], [SpriteNode], [TileMapNode], [TransformNode], [VideoNode] and pass it where a Node is accepted.
+//
+// The base class of all SpriteKit nodes.
 type Node struct {
 	objref.Handle
 }
@@ -27,7 +30,8 @@ func NodeFromID(id objc.ID) *Node {
 	if id == 0 {
 		return nil
 	}
-	x := &Node{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Node{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +44,8 @@ func nodeAdopt(id objc.ID) *Node {
 	if id == 0 {
 		return nil
 	}
-	x := &Node{Handle: objref.Wrap(id)}
+	x := &Node{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,281 +65,251 @@ func (x *Node) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewNode creates a new Node.
-func NewNode() *Node {
-	_id := objc.Send[objc.ID](objc.ID(_class("SKNode")), objc.RegisterName("new"))
-	return nodeAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Node) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Called when a node is initialized from an .sks file.
-//
-// NewNodeWithCoder creates a new Node.
+// NewNodeWithCoder called when a node is initialized from an .sks file.
 func NewNodeWithCoder(aDecoder obj.Object) *Node {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return nodeAdopt(_id)
 }
 
-// The height of the node relative to its parent.
-//
-// WithZPosition sets zPosition and returns the receiver so calls can be chained.
+// WithPosition the position of the node in its parent’s coordinate system.
+func (x *Node) WithPosition(position corefoundation.CGPoint) *Node {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
+	return x
+}
+
+// WithZPosition the height of the node relative to its parent.
 func (x *Node) WithZPosition(zPosition float64) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
 	return x
 }
 
-// The Euler rotation about the z axis (in radians).
-//
-// WithZRotation sets zRotation and returns the receiver so calls can be chained.
+// WithZRotation the Euler rotation about the z axis (in radians).
 func (x *Node) WithZRotation(zRotation float64) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
 	return x
 }
 
-// A scaling factor that multiplies the width of a node and its children.
-//
-// WithXScale sets xScale and returns the receiver so calls can be chained.
+// WithXScale a scaling factor that multiplies the width of a node and its children.
 func (x *Node) WithXScale(xScale float64) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
 	return x
 }
 
-// A scaling factor that multiplies the height of a node and its children.
-//
-// WithYScale sets yScale and returns the receiver so calls can be chained.
+// WithYScale a scaling factor that multiplies the height of a node and its children.
 func (x *Node) WithYScale(yScale float64) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
 	return x
 }
 
-// A speed modifier applied to all actions executed by a node and its descendants.
-//
-// WithSpeed sets speed and returns the receiver so calls can be chained.
+// WithSpeed a speed modifier applied to all actions executed by a node and its descendants.
 func (x *Node) WithSpeed(speed float64) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
-// The transparency value applied to the node’s contents.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the transparency value applied to the node’s contents.
 func (x *Node) WithAlpha(alpha float64) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// A Boolean value that determines whether actions on the node and its descendants are processed.
-//
-// WithPaused sets paused and returns the receiver so calls can be chained.
+// WithPaused a Boolean value that determines whether actions on the node and its descendants are processed.
 func (x *Node) WithPaused(paused bool) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
-// A Boolean value that determines whether a node and its descendants are rendered.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden a Boolean value that determines whether a node and its descendants are rendered.
 func (x *Node) WithHidden(hidden bool) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// A Boolean value that indicates whether the node receives touch events.
-//
-// WithUserInteractionEnabled sets userInteractionEnabled and returns the receiver so calls can be chained.
+// WithUserInteractionEnabled a Boolean value that indicates whether the node receives touch events.
 func (x *Node) WithUserInteractionEnabled(userInteractionEnabled bool) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
 	return x
 }
 
-// The node’s assignable name.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the node’s assignable name.
 func (x *Node) WithName(name string) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The physics body associated with the node.
-//
-// WithPhysicsBody sets physicsBody and returns the receiver so calls can be chained.
+// WithPhysicsBody the physics body associated with the node.
 func (x *Node) WithPhysicsBody(physicsBody *PhysicsBody) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	return x
 }
 
-// A dictionary containing arbitrary data.
-//
-// WithUserData sets userData and returns the receiver so calls can be chained.
+// WithUserData a dictionary containing arbitrary data.
 func (x *Node) WithUserData(userData obj.Object) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	return x
 }
 
-// The reach constraints to apply to the node when executing a reach action.
-//
-// WithReachConstraints sets reachConstraints and returns the receiver so calls can be chained.
+// WithReachConstraints the reach constraints to apply to the node when executing a reach action.
 func (x *Node) WithReachConstraints(reachConstraints *ReachConstraints) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	return x
 }
 
-// A list of constraints to apply to the node.
-//
-// WithConstraints sets the collection and returns the receiver so calls can be chained.
+// WithConstraints a list of constraints to apply to the node.
 func (x *Node) WithConstraints(items ...*Constraint) *Node {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
-// The values of each attribute associated with the node’s attached shader.
-//
-// WithAttributeValues sets attributeValues and returns the receiver so calls can be chained.
+// WithAttributeValues the values of each attribute associated with the node’s attached shader.
 func (x *Node) WithAttributeValues(attributeValues obj.Object) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
-//
-// WithAccessibilityElement sets accessibilityElement and returns the receiver so calls can be chained.
+// WithAccessibilityElement a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (x *Node) WithAccessibilityElement(accessibilityElement bool) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
 	return x
 }
 
-// A string value describing the user interface element type; for example, a button.
-//
-// WithAccessibilityRole sets accessibilityRole and returns the receiver so calls can be chained.
+// WithAccessibilityRole a string value describing the user interface element type; for example, a button.
 func (x *Node) WithAccessibilityRole(accessibilityRole string) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
 	return x
 }
 
-// A string value describing the user interface element name and type; for example, the Buy button.
-//
-// WithAccessibilityRoleDescription sets accessibilityRoleDescription and returns the receiver so calls can be chained.
+// WithAccessibilityRoleDescription a string value describing the user interface element name and type; for example, the Buy button.
 func (x *Node) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
 	return x
 }
 
-// A string that defines this user interface element’s subrole; for example, a full-screen button.
-//
-// WithAccessibilitySubrole sets accessibilitySubrole and returns the receiver so calls can be chained.
+// WithAccessibilitySubrole a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (x *Node) WithAccessibilitySubrole(accessibilitySubrole string) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
 	return x
 }
 
-// The user interface element that contains this element.
-//
-// WithAccessibilityParent sets accessibilityParent and returns the receiver so calls can be chained.
+// WithAccessibilityFrame the size of this user interface element, in screen points.
+func (x *Node) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *Node {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	return x
+}
+
+// WithAccessibilityParent the user interface element that contains this element.
 func (x *Node) WithAccessibilityParent(accessibilityParent obj.Object) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	return x
 }
 
-// The help description of this user interface element; for example, the text shown in a tooltip.
-//
-// WithAccessibilityHelp sets accessibilityHelp and returns the receiver so calls can be chained.
+// WithAccessibilityHelp the help description of this user interface element; for example, the text shown in a tooltip.
 func (x *Node) WithAccessibilityHelp(accessibilityHelp string) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
 	return x
 }
 
-// A short description of this user interface element.
-//
-// WithAccessibilityLabel sets accessibilityLabel and returns the receiver so calls can be chained.
+// WithAccessibilityLabel a short description of this user interface element.
 func (x *Node) WithAccessibilityLabel(accessibilityLabel string) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
-//
-// WithAccessibilityEnabled sets accessibilityEnabled and returns the receiver so calls can be chained.
+// WithAccessibilityEnabled a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (x *Node) WithAccessibilityEnabled(accessibilityEnabled bool) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
 	return x
 }
 
-// The value of a shader attribute.
+// CalculateAccumulatedFrame returns a rectangle in the parent’s coordinate system that contains the position and size of itself and all child nodes.
+func (x *Node) CalculateAccumulatedFrame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("calculateAccumulatedFrame"))
+	return _r
+}
+
+// ValueForAttributeNamed the value of a shader attribute.
 func (x *Node) ValueForAttributeNamed(key string) *AttributeValue {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForAttributeNamed:"), purego.NSString(key))
 	return AttributeValueFromID(_r)
 }
 
-// Sets an attribute value for an attached shader
+// SetValueForAttributeNamed sets an attribute value for an attached shader
 func (x *Node) SetValueForAttributeNamed(value *AttributeValue, key string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:forAttributeNamed:"), objref.IDOf(value), purego.NSString(key))
 }
 
-// Sets the xScale and yScale properties of the node.
+// SetScale sets the xScale and yScale properties of the node.
 func (x *Node) SetScale(scale float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScale:"), scale)
 }
 
-// Adds a node to the end of the receiver’s list of child nodes.
+// AddChild adds a node to the end of the receiver’s list of child nodes.
 func (x *Node) AddChild(node *Node) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addChild:"), objref.IDOf(node))
 }
 
-// Inserts a node into a specific position in the receiver’s list of child nodes.
+// InsertChildAtIndex inserts a node into a specific position in the receiver’s list of child nodes.
 func (x *Node) InsertChildAtIndex(node *Node, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertChild:atIndex:"), objref.IDOf(node), index)
 }
 
-// Removes a list of children from the receiving node.
+// RemoveChildrenInArray removes a list of children from the receiving node.
 func (x *Node) RemoveChildrenInArray(nodes []*Node) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeChildrenInArray:"), purego.SliceToNSArray(nodes, func(_v *Node) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Removes all of the node’s children.
+// RemoveAllChildren removes all of the node’s children.
 func (x *Node) RemoveAllChildren() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllChildren"))
 }
 
-// Removes the receiving node from its parent.
+// RemoveFromParent removes the receiving node from its parent.
 func (x *Node) RemoveFromParent() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromParent"))
 }
 
-// Moves the node to a new parent node in the scene.
+// MoveToParent moves the node to a new parent node in the scene.
 func (x *Node) MoveToParent(parent *Node) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveToParent:"), objref.IDOf(parent))
 }
 
-// Searches the children of the receiving node for a node with a specific name.
+// ChildNodeWithName searches the children of the receiving node for a node with a specific name.
 func (x *Node) ChildNodeWithName(name string) *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("childNodeWithName:"), purego.NSString(name))
 	return NodeFromID(_r)
 }
 
-// Searches the children of the receiving node to perform processing for nodes that share a name.
+// EnumerateChildNodesWithNameUsing searches the children of the receiving node to perform processing for nodes that share a name.
 func (x *Node) EnumerateChildNodesWithNameUsing(name string, block func(obj.Object, *bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateChildNodesWithName:usingBlock:"), purego.NSString(name), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
-// Returns an array of nodes that match the name parameter.
+// ObjectForKeyedSubscript returns an array of nodes that match the name parameter.
 func (x *Node) ObjectForKeyedSubscript(name string) []*Node {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKeyedSubscript:"), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Node { return NodeFromID(_id) })
 }
 
-// Returns a Boolean value that indicates whether the node is a descendant of the target node.
+// InParentHierarchy returns a Boolean value that indicates whether the node is a descendant of the target node.
 func (x *Node) InParentHierarchy(parent *Node) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("inParentHierarchy:"), objref.IDOf(parent))
 	return _r
 }
 
-// Adds an action to the list of actions executed by the node.
+// RunAction adds an action to the list of actions executed by the node.
 func (x *Node) RunAction(action *Action) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runAction:"), objref.IDOf(action))
 }
 
-// Adds an action to the list of actions executed by the node and schedules the argument block to be run upon completion of the action.
+// RunActionCompletion adds an action to the list of actions executed by the node and schedules the argument block to be run upon completion of the action.
 //
 // RunActionCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Node) RunActionCompletion(ctx context.Context, action *Action) error {
@@ -351,142 +326,198 @@ func (x *Node) RunActionCompletion(ctx context.Context, action *Action) error {
 	}
 }
 
-// Adds an identifiable action to the list of actions executed by the node.
+// RunActionWithKey adds an identifiable action to the list of actions executed by the node.
 func (x *Node) RunActionWithKey(action *Action, key string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runAction:withKey:"), objref.IDOf(action), purego.NSString(key))
 }
 
-// Returns a Boolean value that indicates whether the node is executing actions.
+// HasActions returns a Boolean value that indicates whether the node is executing actions.
 func (x *Node) HasActions() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasActions"))
 	return _r
 }
 
-// Returns an action associated with a specific key.
+// ActionForKey returns an action associated with a specific key.
 func (x *Node) ActionForKey(key string) *Action {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actionForKey:"), purego.NSString(key))
 	return ActionFromID(_r)
 }
 
-// Removes an action associated with a specific key.
+// RemoveActionForKey removes an action associated with a specific key.
 func (x *Node) RemoveActionForKey(key string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeActionForKey:"), purego.NSString(key))
 }
 
-// Ends and removes all actions from the node.
+// RemoveAllActions ends and removes all actions from the node.
 func (x *Node) RemoveAllActions() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllActions"))
 }
 
-// Returns a Boolean value that indicates whether this node intersects the specified node.
+// ContainsPoint returns a Boolean value that indicates whether a point lies inside the parent’s coordinate system.
+func (x *Node) ContainsPoint(p corefoundation.CGPoint) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsPoint:"), p)
+	return _r
+}
+
+// NodeAtPoint returns the deepest visible descendant that intersects a point.
+func (x *Node) NodeAtPoint(p corefoundation.CGPoint) *Node {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeAtPoint:"), p)
+	return NodeFromID(_r)
+}
+
+// NodesAtPoint returns an array of all visible descendants that intersect a point.
+func (x *Node) NodesAtPoint(p corefoundation.CGPoint) []*Node {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodesAtPoint:"), p)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Node { return NodeFromID(_id) })
+}
+
+// ConvertPointFromNode converts a point from the coordinate system of another node in the node tree to the coordinate system of this node.
+func (x *Node) ConvertPointFromNode(point corefoundation.CGPoint, node *Node) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPoint:fromNode:"), point, objref.IDOf(node))
+	return _r
+}
+
+// ConvertPointToNode converts a point in this node’s coordinate system to the coordinate system of another node in the node tree.
+func (x *Node) ConvertPointToNode(point corefoundation.CGPoint, node *Node) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPoint:toNode:"), point, objref.IDOf(node))
+	return _r
+}
+
+// IntersectsNode returns a Boolean value that indicates whether this node intersects the specified node.
 func (x *Node) IntersectsNode(node *Node) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("intersectsNode:"), objref.IDOf(node))
 	return _r
 }
 
-// Compares the parameter node to the receiving node.
+// IsEqualToNode compares the parameter node to the receiving node.
 func (x *Node) IsEqualToNode(node *Node) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToNode:"), objref.IDOf(node))
 	return _r
 }
 
-// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+// Frame wraps the corresponding Objective-C method.
+func (x *Node) Frame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frame"))
+	return _r
+}
+
+// Position the position of the node in the parent's coordinate system
+func (x *Node) Position() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("position"))
+	return _r
+}
+
+// SetPosition wraps the corresponding Objective-C method.
+func (x *Node) SetPosition(position corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
+}
+
+// ZPosition the z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
 func (x *Node) ZPosition() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("zPosition"))
 	return _r
 }
 
+// SetZPosition wraps the corresponding Objective-C method.
 func (x *Node) SetZPosition(zPosition float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
 }
 
-// The Euler rotation about the z axis (in radians)
+// ZRotation the Euler rotation about the z axis (in radians)
 func (x *Node) ZRotation() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("zRotation"))
 	return _r
 }
 
+// SetZRotation wraps the corresponding Objective-C method.
 func (x *Node) SetZRotation(zRotation float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
 }
 
-// The scaling in the X axis
+// XScale the scaling in the X axis
 func (x *Node) XScale() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("xScale"))
 	return _r
 }
 
+// SetXScale wraps the corresponding Objective-C method.
 func (x *Node) SetXScale(xScale float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
 }
 
-// The scaling in the Y axis
+// YScale the scaling in the Y axis
 func (x *Node) YScale() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("yScale"))
 	return _r
 }
 
+// SetYScale wraps the corresponding Objective-C method.
 func (x *Node) SetYScale(yScale float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
 }
 
-// The speed multiplier applied to all actions run on this node. Inherited by its children.
+// Speed the speed multiplier applied to all actions run on this node. Inherited by its children.
 func (x *Node) Speed() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speed"))
 	return _r
 }
 
+// SetSpeed wraps the corresponding Objective-C method.
 func (x *Node) SetSpeed(speed float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 }
 
-// Alpha of this node (multiplied by the output color to give the final result)
+// Alpha alpha of this node (multiplied by the output color to give the final result)
 func (x *Node) Alpha() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
 	return _r
 }
 
+// SetAlpha wraps the corresponding Objective-C method.
 func (x *Node) SetAlpha(alpha float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }
 
-// Controls whether or not the node's actions is updated or paused.
+// IsPaused controls whether or not the node's actions is updated or paused.
 func (x *Node) IsPaused() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaused"))
 	return _r
 }
 
+// SetPaused wraps the corresponding Objective-C method.
 func (x *Node) SetPaused(paused bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 }
 
-// Controls whether or not the node and its children are rendered.
+// IsHidden controls whether or not the node and its children are rendered.
 func (x *Node) IsHidden() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
 	return _r
 }
 
+// SetHidden wraps the corresponding Objective-C method.
 func (x *Node) SetHidden(hidden bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 }
 
-// Controls whether or not the node receives touch events
+// IsUserInteractionEnabled controls whether or not the node receives touch events
 func (x *Node) IsUserInteractionEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUserInteractionEnabled"))
 	return _r
 }
 
+// SetUserInteractionEnabled wraps the corresponding Objective-C method.
 func (x *Node) SetUserInteractionEnabled(userInteractionEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
 }
 
-// The parent of the node. If this is nil the node has not been added to another group and is thus the root node of its own graph.
+// Parent the parent of the node. If this is nil the node has not been added to another group and is thus the root node of its own graph.
 func (x *Node) Parent() *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parent"))
 	return NodeFromID(_r)
 }
 
-// The children of this node.
+// Children the children of this node.
 //
 // Children returns the collection as a Go slice.
 func (x *Node) Children() []*Node {
@@ -494,7 +525,7 @@ func (x *Node) Children() []*Node {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Node { return NodeFromID(_id) })
 }
 
-// The client assignable name. In general, this should be unique among peers in the scene graph.
+// Name the client assignable name. In general, this should be unique among peers in the scene graph.
 func (x *Node) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -503,47 +534,51 @@ func (x *Node) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *Node) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// The scene that the node is currently in.
+// Scene the scene that the node is currently in.
 func (x *Node) Scene() *Scene {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scene"))
 	return SceneFromID(_r)
 }
 
-// Physics body attached to the node, with synchronized scale, rotation, and position
+// PhysicsBody physics body attached to the node, with synchronized scale, rotation, and position
 func (x *Node) PhysicsBody() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("physicsBody"))
 	return PhysicsBodyFromID(_r)
 }
 
+// SetPhysicsBody wraps the corresponding Objective-C method.
 func (x *Node) SetPhysicsBody(physicsBody *PhysicsBody) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 }
 
-// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+// UserData an optional dictionary that can be used to store your own data in a node. Defaults to nil.
 func (x *Node) UserData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userData"))
 	return obj.Wrap(_r)
 }
 
+// SetUserData wraps the corresponding Objective-C method.
 func (x *Node) SetUserData(userData obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 }
 
-// Kinematic constraints, used in IK solving
+// ReachConstraints kinematic constraints, used in IK solving
 func (x *Node) ReachConstraints() *ReachConstraints {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reachConstraints"))
 	return ReachConstraintsFromID(_r)
 }
 
+// SetReachConstraints wraps the corresponding Objective-C method.
 func (x *Node) SetReachConstraints(reachConstraints *ReachConstraints) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 }
 
-// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+// Constraints optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
 //
 // Constraints returns the collection as a Go slice.
 func (x *Node) Constraints() []*Constraint {
@@ -551,29 +586,40 @@ func (x *Node) Constraints() []*Constraint {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Constraint { return ConstraintFromID(_id) })
 }
 
+// SetConstraints wraps the corresponding Objective-C method.
 func (x *Node) SetConstraints(constraints []*Constraint) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), purego.SliceToNSArray(constraints, func(_v *Constraint) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+// AttributeValues optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
 func (x *Node) AttributeValues() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeValues"))
 	return obj.Wrap(_r)
 }
 
+// SetAttributeValues wraps the corresponding Objective-C method.
 func (x *Node) SetAttributeValues(attributeValues obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
 }
 
+// AccessibilityHitTest returns the frontmost user interface element in the element hierarchy.
+func (x *Node) AccessibilityHitTest(point corefoundation.CGPoint) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessibilityHitTest:"), point)
+	return obj.Wrap(_r)
+}
+
+// IsAccessibilityElement wraps the corresponding Objective-C method.
 func (x *Node) IsAccessibilityElement() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAccessibilityElement"))
 	return _r
 }
 
+// SetAccessibilityElement wraps the corresponding Objective-C method.
 func (x *Node) SetAccessibilityElement(accessibilityElement bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
 }
 
+// AccessibilityRole wraps the corresponding Objective-C method.
 func (x *Node) AccessibilityRole() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessibilityRole"))
 	if _r == 0 {
@@ -582,10 +628,12 @@ func (x *Node) AccessibilityRole() string {
 	return purego.GoString(_r)
 }
 
+// SetAccessibilityRole wraps the corresponding Objective-C method.
 func (x *Node) SetAccessibilityRole(accessibilityRole string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
 }
 
+// AccessibilityRoleDescription wraps the corresponding Objective-C method.
 func (x *Node) AccessibilityRoleDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessibilityRoleDescription"))
 	if _r == 0 {
@@ -594,10 +642,12 @@ func (x *Node) AccessibilityRoleDescription() string {
 	return purego.GoString(_r)
 }
 
+// SetAccessibilityRoleDescription wraps the corresponding Objective-C method.
 func (x *Node) SetAccessibilityRoleDescription(accessibilityRoleDescription string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
 }
 
+// AccessibilitySubrole wraps the corresponding Objective-C method.
 func (x *Node) AccessibilitySubrole() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessibilitySubrole"))
 	if _r == 0 {
@@ -606,28 +656,45 @@ func (x *Node) AccessibilitySubrole() string {
 	return purego.GoString(_r)
 }
 
+// SetAccessibilitySubrole wraps the corresponding Objective-C method.
 func (x *Node) SetAccessibilitySubrole(accessibilitySubrole string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
 }
 
+// AccessibilityFrame wraps the corresponding Objective-C method.
+func (x *Node) AccessibilityFrame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("accessibilityFrame"))
+	return _r
+}
+
+// SetAccessibilityFrame wraps the corresponding Objective-C method.
+func (x *Node) SetAccessibilityFrame(accessibilityFrame corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+}
+
+// AccessibilityParent wraps the corresponding Objective-C method.
 func (x *Node) AccessibilityParent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessibilityParent"))
 	return obj.Wrap(_r)
 }
 
+// SetAccessibilityParent wraps the corresponding Objective-C method.
 func (x *Node) SetAccessibilityParent(accessibilityParent obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 }
 
+// AccessibilityChildren wraps the corresponding Objective-C method.
 func (x *Node) AccessibilityChildren() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessibilityChildren"))
 	return obj.Wrap(_r)
 }
 
+// SetAccessibilityChildren wraps the corresponding Objective-C method.
 func (x *Node) SetAccessibilityChildren(accessibilityChildren obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityChildren:"), objref.IDOf(accessibilityChildren))
 }
 
+// AccessibilityHelp wraps the corresponding Objective-C method.
 func (x *Node) AccessibilityHelp() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessibilityHelp"))
 	if _r == 0 {
@@ -636,10 +703,12 @@ func (x *Node) AccessibilityHelp() string {
 	return purego.GoString(_r)
 }
 
+// SetAccessibilityHelp wraps the corresponding Objective-C method.
 func (x *Node) SetAccessibilityHelp(accessibilityHelp string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
 }
 
+// AccessibilityLabel wraps the corresponding Objective-C method.
 func (x *Node) AccessibilityLabel() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessibilityLabel"))
 	if _r == 0 {
@@ -648,15 +717,18 @@ func (x *Node) AccessibilityLabel() string {
 	return purego.GoString(_r)
 }
 
+// SetAccessibilityLabel wraps the corresponding Objective-C method.
 func (x *Node) SetAccessibilityLabel(accessibilityLabel string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
 }
 
+// IsAccessibilityEnabled wraps the corresponding Objective-C method.
 func (x *Node) IsAccessibilityEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAccessibilityEnabled"))
 	return _r
 }
 
+// SetAccessibilityEnabled wraps the corresponding Objective-C method.
 func (x *Node) SetAccessibilityEnabled(accessibilityEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
 }
@@ -664,6 +736,7 @@ func (x *Node) SetAccessibilityEnabled(accessibilityEnabled bool) {
 // Nodeable is the interface implemented by [Node], for mocking and DI.
 type Nodeable interface {
 	obj.Object
+	WithPosition(position corefoundation.CGPoint) *Node
 	WithZPosition(zPosition float64) *Node
 	WithZRotation(zRotation float64) *Node
 	WithXScale(xScale float64) *Node
@@ -683,10 +756,12 @@ type Nodeable interface {
 	WithAccessibilityRole(accessibilityRole string) *Node
 	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *Node
 	WithAccessibilitySubrole(accessibilitySubrole string) *Node
+	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *Node
 	WithAccessibilityParent(accessibilityParent obj.Object) *Node
 	WithAccessibilityHelp(accessibilityHelp string) *Node
 	WithAccessibilityLabel(accessibilityLabel string) *Node
 	WithAccessibilityEnabled(accessibilityEnabled bool) *Node
+	CalculateAccumulatedFrame() corefoundation.CGRect
 	ValueForAttributeNamed(key string) *AttributeValue
 	SetValueForAttributeNamed(value *AttributeValue, key string)
 	SetScale(scale float64)
@@ -707,8 +782,16 @@ type Nodeable interface {
 	ActionForKey(key string) *Action
 	RemoveActionForKey(key string)
 	RemoveAllActions()
+	ContainsPoint(p corefoundation.CGPoint) bool
+	NodeAtPoint(p corefoundation.CGPoint) *Node
+	NodesAtPoint(p corefoundation.CGPoint) []*Node
+	ConvertPointFromNode(point corefoundation.CGPoint, node *Node) corefoundation.CGPoint
+	ConvertPointToNode(point corefoundation.CGPoint, node *Node) corefoundation.CGPoint
 	IntersectsNode(node *Node) bool
 	IsEqualToNode(node *Node) bool
+	Frame() corefoundation.CGRect
+	Position() corefoundation.CGPoint
+	SetPosition(position corefoundation.CGPoint)
 	ZPosition() float64
 	SetZPosition(zPosition float64)
 	ZRotation() float64
@@ -742,6 +825,7 @@ type Nodeable interface {
 	SetConstraints(constraints []*Constraint)
 	AttributeValues() obj.Object
 	SetAttributeValues(attributeValues obj.Object)
+	AccessibilityHitTest(point corefoundation.CGPoint) obj.Object
 	IsAccessibilityElement() bool
 	SetAccessibilityElement(accessibilityElement bool)
 	AccessibilityRole() string
@@ -750,6 +834,8 @@ type Nodeable interface {
 	SetAccessibilityRoleDescription(accessibilityRoleDescription string)
 	AccessibilitySubrole() string
 	SetAccessibilitySubrole(accessibilitySubrole string)
+	AccessibilityFrame() corefoundation.CGRect
+	SetAccessibilityFrame(accessibilityFrame corefoundation.CGRect)
 	AccessibilityParent() obj.Object
 	SetAccessibilityParent(accessibilityParent obj.Object)
 	AccessibilityChildren() obj.Object
@@ -763,3 +849,10 @@ type Nodeable interface {
 }
 
 var _ Nodeable = (*Node)(nil)
+
+// isNode marks Node — and, by embedding promotion, its
+// subclasses — as a member of the Node hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Node) isNode() {}
+
+var _ NodeProvider = (*Node)(nil)

@@ -6,17 +6,20 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that returns the element-wise sum of its two input images.
-//
 // ImageAdd is an idiomatic wrapper over the Objective-C class MPSImageAdd.
+//
+// It embeds [ImageArithmetic], promoting that type's methods.
+//
+// A filter that returns the element-wise sum of its two input images.
 type ImageAdd struct {
-	objref.Handle
+	ImageArithmetic
 }
 
 // ImageAddFromID adopts an existing Objective-C object as a ImageAdd
@@ -25,7 +28,8 @@ func ImageAddFromID(id objc.ID) *ImageAdd {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageAdd{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageAdd{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func imageAddAdopt(id objc.ID) *ImageAdd {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageAdd{Handle: objref.Wrap(id)}
+	x := &ImageAdd{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ImageAdd) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageAdd) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageAdd) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewImageAdd creates a new ImageAdd.
@@ -64,43 +54,67 @@ func NewImageAdd() *ImageAdd {
 	return imageAddAdopt(_id)
 }
 
-// WithPrimaryScale sets primaryScale and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
 func (x *ImageAdd) WithPrimaryScale(primaryScale float32) *ImageAdd {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return x
 }
 
-// WithSecondaryScale sets secondaryScale and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
 func (x *ImageAdd) WithSecondaryScale(secondaryScale float32) *ImageAdd {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return x
 }
 
-// WithBias sets bias and returns the receiver so calls can be chained.
+// WithBias sets the property and returns the receiver so calls can be chained.
 func (x *ImageAdd) WithBias(bias float32) *ImageAdd {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 	return x
 }
 
-// minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
-//
-// WithMinimumValue sets minimumValue and returns the receiver so calls can be chained.
+// WithPrimaryStrideInPixels the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (x *ImageAdd) WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageAdd {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixels:"), primaryStrideInPixels)
+	return x
+}
+
+// WithSecondaryStrideInPixels the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (x *ImageAdd) WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageAdd {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixels:"), secondaryStrideInPixels)
+	return x
+}
+
+// WithMinimumValue minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
 func (x *ImageAdd) WithMinimumValue(minimumValue float32) *ImageAdd {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
 	return x
 }
 
-// maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
-//
-// WithMaximumValue sets maximumValue and returns the receiver so calls can be chained.
+// WithMaximumValue maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
 func (x *ImageAdd) WithMaximumValue(maximumValue float32) *ImageAdd {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithPrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer.
+func (x *ImageAdd) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageAdd {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer.
+func (x *ImageAdd) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageAdd {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (x *ImageAdd) WithClipRect(clipRect metal.MTLRegion) *ImageAdd {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
+// WithLabel the string that identifies the kernel.
 func (x *ImageAdd) WithLabel(label string) *ImageAdd {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -112,9 +126,20 @@ type ImageAddable interface {
 	WithPrimaryScale(primaryScale float32) *ImageAdd
 	WithSecondaryScale(secondaryScale float32) *ImageAdd
 	WithBias(bias float32) *ImageAdd
+	WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageAdd
+	WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageAdd
 	WithMinimumValue(minimumValue float32) *ImageAdd
 	WithMaximumValue(maximumValue float32) *ImageAdd
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageAdd
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageAdd
+	WithClipRect(clipRect metal.MTLRegion) *ImageAdd
 	WithLabel(label string) *ImageAdd
 }
 
 var _ ImageAddable = (*ImageAdd)(nil)
+
+var _ ImageArithmeticProvider = (*ImageAdd)(nil)
+
+var _ BinaryImageKernelProvider = (*ImageAdd)(nil)
+
+var _ KernelProvider = (*ImageAdd)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that receives audio data.
-//
 // AudioSinkNode is an idiomatic wrapper over the Objective-C class AVAudioSinkNode.
+//
+// It embeds [AudioNode], promoting that type's methods.
+//
+// An object that receives audio data.
 type AudioSinkNode struct {
-	objref.Handle
+	AudioNode
 }
 
 // AudioSinkNodeFromID adopts an existing Objective-C object as a AudioSinkNode
@@ -25,7 +26,8 @@ func AudioSinkNodeFromID(id objc.ID) *AudioSinkNode {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioSinkNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioSinkNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func audioSinkNodeAdopt(id objc.ID) *AudioSinkNode {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioSinkNode{Handle: objref.Wrap(id)}
+	x := &AudioSinkNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AudioSinkNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioSinkNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioSinkNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAudioSinkNode creates a new AudioSinkNode.
@@ -70,3 +58,5 @@ type AudioSinkNodeable interface {
 }
 
 var _ AudioSinkNodeable = (*AudioSinkNode)(nil)
+
+var _ AudioNodeProvider = (*AudioSinkNode)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An authentication credential consisting of information specific to the type of credential and the type of persistent storage to use, if any.
-//
 // URLCredential is an idiomatic wrapper over the Objective-C class NSURLCredential.
+//
+// An authentication credential consisting of information specific to the type of credential and the type of persistent storage to use, if any.
 type URLCredential struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func URLCredentialFromID(id objc.ID) *URLCredential {
 	if id == 0 {
 		return nil
 	}
-	x := &URLCredential{Handle: objref.Wrap(purego.Retain(id))}
+	x := &URLCredential{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func uRLCredentialAdopt(id objc.ID) *URLCredential {
 	if id == 0 {
 		return nil
 	}
-	x := &URLCredential{Handle: objref.Wrap(id)}
+	x := &URLCredential{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,45 +60,46 @@ func (x *URLCredential) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize a NSURLCredential with a user and password
-//
-// NewURLCredentialWithUserPasswordPersistence creates a new URLCredential.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *URLCredential) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewURLCredentialWithUserPasswordPersistence initialize a NSURLCredential with a user and password
 func NewURLCredentialWithUserPasswordPersistence(user string, password string, persistence URLCredentialPersistence) *URLCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLCredential")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUser:password:persistence:"), purego.NSString(user), purego.NSString(password), persistence)
 	return uRLCredentialAdopt(_id)
 }
 
-// Initialize an NSURLCredential with an identity and array of at least 1 client certificates (SecCertificateRef)
-//
-// NewURLCredentialWithIdentityCertificatesPersistence creates a new URLCredential.
+// NewURLCredentialWithIdentityCertificatesPersistence initialize an NSURLCredential with an identity and array of at least 1 client certificates (SecCertificateRef)
 func NewURLCredentialWithIdentityCertificatesPersistence(identity obj.Object, certArray obj.Object, persistence URLCredentialPersistence) *URLCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLCredential")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentity:certificates:persistence:"), objref.IDOf(identity), objref.IDOf(certArray), persistence)
 	return uRLCredentialAdopt(_id)
 }
 
-// Initialize a new NSURLCredential which specifies that the specified trust has been accepted.
-//
-// NewURLCredentialWithTrust creates a new URLCredential.
+// NewURLCredentialWithTrust initialize a new NSURLCredential which specifies that the specified trust has been accepted.
 func NewURLCredentialWithTrust(trust obj.Object) *URLCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLCredential")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTrust:"), objref.IDOf(trust))
 	return uRLCredentialAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *URLCredential) WithScriptingProperties(scriptingProperties obj.Object) *URLCredential {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Persistence wraps the corresponding Objective-C method.
 func (x *URLCredential) Persistence() URLCredentialPersistence {
 	_r := objc.Send[URLCredentialPersistence](objref.IDOf(x), objc.RegisterName("persistence"))
 	return _r
 }
 
-// Get the username
+// User get the username
 func (x *URLCredential) User() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("user"))
 	if _r == 0 {
@@ -105,7 +108,7 @@ func (x *URLCredential) User() string {
 	return purego.GoString(_r)
 }
 
-// Get the password This method might actually attempt to retrieve the password from an external store, possible resulting in prompting, so do not call it unless needed.
+// Password get the password This method might actually attempt to retrieve the password from an external store, possible resulting in prompting, so do not call it unless needed.
 func (x *URLCredential) Password() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("password"))
 	if _r == 0 {
@@ -114,19 +117,19 @@ func (x *URLCredential) Password() string {
 	return purego.GoString(_r)
 }
 
-// Find out if this credential has a password, without trying to get it If this credential's password is actually kept in an external store, the password method may return nil even if this method returns YES, since getting the password may fail, or the user may refuse access.
+// HasPassword find out if this credential has a password, without trying to get it If this credential's password is actually kept in an external store, the password method may return nil even if this method returns YES, since getting the password may fail, or the user may refuse access.
 func (x *URLCredential) HasPassword() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasPassword"))
 	return _r
 }
 
-// Returns the SecIdentityRef of this credential, if it was created with a certificate and identity
+// Identity returns the SecIdentityRef of this credential, if it was created with a certificate and identity
 func (x *URLCredential) Identity() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identity"))
 	return obj.Wrap(_r)
 }
 
-// Returns an NSArray of SecCertificateRef objects representing the client certificate for this credential, if this credential was created with an identity and certificate.
+// Certificates returns an NSArray of SecCertificateRef objects representing the client certificate for this credential, if this credential was created with an identity and certificate.
 func (x *URLCredential) Certificates() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificates"))
 	return obj.Wrap(_r)

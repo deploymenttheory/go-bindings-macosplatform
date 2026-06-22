@@ -11,25 +11,30 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// ChangeWithTypeRecordIdentifierChanges wraps the corresponding Objective-C method.
 func ChangeWithTypeRecordIdentifierChanges(type_ int, recordIdentifier string, changes obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("ISyncChange")), objc.RegisterName("changeWithType:recordIdentifier:changes:"), type_, purego.NSString(recordIdentifier), objref.IDOf(changes))
 	return obj.Wrap(_r)
 }
 
+// SharedManager wraps the corresponding Objective-C method.
 func SharedManager() *ISyncManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("ISyncManager")), objc.RegisterName("sharedManager"))
 	return ISyncManagerFromID(_r)
 }
 
+// BeginSessionWithClientEntityNamesBeforeDate wraps the corresponding Objective-C method.
 func BeginSessionWithClientEntityNamesBeforeDate(client *ISyncClient, entityNames obj.Object, date obj.Object) *ISyncSession {
 	_r := objc.Send[objc.ID](objc.ID(_class("ISyncSession")), objc.RegisterName("beginSessionWithClient:entityNames:beforeDate:"), objref.IDOf(client), objref.IDOf(entityNames), objref.IDOf(date))
 	return ISyncSessionFromID(_r)
 }
 
+// CancelPreviousBeginSessionWithClient wraps the corresponding Objective-C method.
 func CancelPreviousBeginSessionWithClient(client *ISyncClient) {
 	objc.Send[objc.ID](objc.ID(_class("ISyncSession")), objc.RegisterName("cancelPreviousBeginSessionWithClient:"), objref.IDOf(client))
 }
 
+// BeginSessionWithClientEntityNamesBeforeDateLastAnchors wraps the corresponding Objective-C method.
 func BeginSessionWithClientEntityNamesBeforeDateLastAnchors(client *ISyncClient, entityNames obj.Object, date obj.Object, anchors obj.Object) *ISyncSession {
 	_r := objc.Send[objc.ID](objc.ID(_class("ISyncSession")), objc.RegisterName("beginSessionWithClient:entityNames:beforeDate:lastAnchors:"), objref.IDOf(client), objref.IDOf(entityNames), objref.IDOf(date), objref.IDOf(anchors))
 	return ISyncSessionFromID(_r)

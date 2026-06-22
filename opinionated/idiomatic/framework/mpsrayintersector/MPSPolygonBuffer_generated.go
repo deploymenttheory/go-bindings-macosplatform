@@ -23,7 +23,8 @@ func PolygonBufferFromID(id objc.ID) *PolygonBuffer {
 	if id == 0 {
 		return nil
 	}
-	x := &PolygonBuffer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PolygonBuffer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func polygonBufferAdopt(id objc.ID) *PolygonBuffer {
 	if id == 0 {
 		return nil
 	}
-	x := &PolygonBuffer{Handle: objref.Wrap(id)}
+	x := &PolygonBuffer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,89 +58,89 @@ func (x *PolygonBuffer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PolygonBuffer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPolygonBuffer creates a new PolygonBuffer.
 func NewPolygonBuffer() *PolygonBuffer {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSPolygonBuffer")), objc.RegisterName("new"))
 	return polygonBufferAdopt(_id)
 }
 
-// Initialize the polygon buffer with an NSCoder. Buffer properties such as the vertex buffer, instance buffer, etc. are set to nil. Encode and decode these buffers along with the polygon buffer instead.
-//
-// NewPolygonBufferWithCoder creates a new PolygonBuffer.
+// NewPolygonBufferWithCoder initialize the polygon buffer with an NSCoder. Buffer properties such as the vertex buffer, instance buffer, etc. are set to nil. Encode and decode these buffers along with the polygon buffer instead.
 func NewPolygonBufferWithCoder(aDecoder obj.Object) *PolygonBuffer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSPolygonBuffer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return polygonBufferAdopt(_id)
 }
 
-// Offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
-//
-// WithVertexBufferOffset sets vertexBufferOffset and returns the receiver so calls can be chained.
+// WithVertexBufferOffset offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
 func (x *PolygonBuffer) WithVertexBufferOffset(vertexBufferOffset int) *PolygonBuffer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexBufferOffset:"), vertexBufferOffset)
 	return x
 }
 
-// Offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure.
-//
-// WithIndexBufferOffset sets indexBufferOffset and returns the receiver so calls can be chained.
+// WithIndexBufferOffset offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure.
 func (x *PolygonBuffer) WithIndexBufferOffset(indexBufferOffset int) *PolygonBuffer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexBufferOffset:"), indexBufferOffset)
 	return x
 }
 
-// Offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
-//
-// WithMaskBufferOffset sets maskBufferOffset and returns the receiver so calls can be chained.
+// WithMaskBufferOffset offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
 func (x *PolygonBuffer) WithMaskBufferOffset(maskBufferOffset int) *PolygonBuffer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskBufferOffset:"), maskBufferOffset)
 	return x
 }
 
-// Number of polygons. Changes to this property require rebuilding the acceleration structure.
-//
-// WithPolygonCount sets polygonCount and returns the receiver so calls can be chained.
+// WithPolygonCount number of polygons. Changes to this property require rebuilding the acceleration structure.
 func (x *PolygonBuffer) WithPolygonCount(polygonCount int) *PolygonBuffer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolygonCount:"), polygonCount)
 	return x
 }
 
-// Offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
+// VertexBufferOffset offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
 func (x *PolygonBuffer) VertexBufferOffset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vertexBufferOffset"))
 	return _r
 }
 
+// SetVertexBufferOffset wraps the corresponding Objective-C method.
 func (x *PolygonBuffer) SetVertexBufferOffset(vertexBufferOffset int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexBufferOffset:"), vertexBufferOffset)
 }
 
-// Offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure.
+// IndexBufferOffset offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure.
 func (x *PolygonBuffer) IndexBufferOffset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexBufferOffset"))
 	return _r
 }
 
+// SetIndexBufferOffset wraps the corresponding Objective-C method.
 func (x *PolygonBuffer) SetIndexBufferOffset(indexBufferOffset int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexBufferOffset:"), indexBufferOffset)
 }
 
-// Offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
+// MaskBufferOffset offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
 func (x *PolygonBuffer) MaskBufferOffset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maskBufferOffset"))
 	return _r
 }
 
+// SetMaskBufferOffset wraps the corresponding Objective-C method.
 func (x *PolygonBuffer) SetMaskBufferOffset(maskBufferOffset int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskBufferOffset:"), maskBufferOffset)
 }
 
-// Number of polygons. Changes to this property require rebuilding the acceleration structure.
+// PolygonCount number of polygons. Changes to this property require rebuilding the acceleration structure.
 func (x *PolygonBuffer) PolygonCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("polygonCount"))
 	return _r
 }
 
+// SetPolygonCount wraps the corresponding Objective-C method.
 func (x *PolygonBuffer) SetPolygonCount(polygonCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolygonCount:"), polygonCount)
 }

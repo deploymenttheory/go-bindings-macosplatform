@@ -17,6 +17,8 @@ const (
 	DeveloperToolStatusAuthorized    DeveloperToolStatus = 3
 )
 
+// String returns the DeveloperToolStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DeveloperToolStatus) String() string {
 	switch e {
 	case DeveloperToolStatusNotDetermined:

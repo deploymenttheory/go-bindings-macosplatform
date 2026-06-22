@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Geometry data for a specific keyframe to use in a moving instance.
-//
 // MotionKeyframeData is an idiomatic wrapper over the Objective-C class MTLMotionKeyframeData.
+//
+// Geometry data for a specific keyframe to use in a moving instance.
 type MotionKeyframeData struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MotionKeyframeDataFromID(id objc.ID) *MotionKeyframeData {
 	if id == 0 {
 		return nil
 	}
-	x := &MotionKeyframeData{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MotionKeyframeData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func motionKeyframeDataAdopt(id objc.ID) *MotionKeyframeData {
 	if id == 0 {
 		return nil
 	}
-	x := &MotionKeyframeData{Handle: objref.Wrap(id)}
+	x := &MotionKeyframeData{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,26 +60,31 @@ func (x *MotionKeyframeData) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MotionKeyframeData) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMotionKeyframeData creates a new MotionKeyframeData.
 func NewMotionKeyframeData() *MotionKeyframeData {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLMotionKeyframeData")), objc.RegisterName("new"))
 	return motionKeyframeDataAdopt(_id)
 }
 
-// The offset, in bytes, to the keyframe data.
-//
-// WithOffset sets offset and returns the receiver so calls can be chained.
+// WithOffset the offset, in bytes, to the keyframe data.
 func (x *MotionKeyframeData) WithOffset(offset int) *MotionKeyframeData {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// Buffer offset. Must be a multiple of 4 bytes.
+// Offset buffer offset. Must be a multiple of 4 bytes.
 func (x *MotionKeyframeData) Offset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
 	return _r
 }
 
+// SetOffset wraps the corresponding Objective-C method.
 func (x *MotionKeyframeData) SetOffset(offset int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 }

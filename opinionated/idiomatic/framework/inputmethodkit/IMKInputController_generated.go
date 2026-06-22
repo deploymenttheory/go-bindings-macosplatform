@@ -6,15 +6,16 @@ package inputmethodkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The IMKInputController class provides a base class for custom input controller classes. The IMKServer class, which is allocated in the main function of an input method, creates an input controller object for each input session created by a client application. For every input session there is a corresponding IMKInputController object.
-//
 // InputController is an idiomatic wrapper over the Objective-C class IMKInputController.
+//
+// The IMKInputController class provides a base class for custom input controller classes. The IMKServer class, which is allocated in the main function of an input method, creates an input controller object for each input session created by a client application. For every input session there is a corresponding IMKInputController object.
 type InputController struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func InputControllerFromID(id objc.ID) *InputController {
 	if id == 0 {
 		return nil
 	}
-	x := &InputController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &InputController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func inputControllerAdopt(id objc.ID) *InputController {
 	if id == 0 {
 		return nil
 	}
-	x := &InputController{Handle: objref.Wrap(id)}
+	x := &InputController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,75 +61,103 @@ func (x *InputController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes the input control by setting the delegate.
-//
-// NewInputControllerWithServerDelegateClient creates a new InputController.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *InputController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewInputControllerWithServerDelegateClient initializes the input control by setting the delegate.
 func NewInputControllerWithServerDelegateClient(server *Server, delegate obj.Object, inputClient obj.Object) *InputController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IMKInputController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServer:delegate:client:"), objref.IDOf(server), objref.IDOf(delegate), objref.IDOf(inputClient))
 	return inputControllerAdopt(_id)
 }
 
-// Informs the input controller that the composition has changed.
+// UpdateComposition informs the input controller that the composition has changed.
 func (x *InputController) UpdateComposition() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateComposition"))
 }
 
-// Stops the current composition and replaces marked text with the original text.
+// CancelComposition stops the current composition and replaces marked text with the original text.
 func (x *InputController) CancelComposition() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelComposition"))
 }
 
-// Informs an input method that it should close any visible user interface.
+// CompositionAttributesAtRange returns a dictionary of text attributes.
+func (x *InputController) CompositionAttributesAtRange(range_ foundation.NSRange) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositionAttributesAtRange:"), range_)
+	return obj.Wrap(_r)
+}
+
+// SelectionRange returns where the range of the selection that should be placed inside marked text.
+func (x *InputController) SelectionRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("selectionRange"))
+	return _r
+}
+
+// ReplacementRange returns the range in the client document that the text should replace.
+func (x *InputController) ReplacementRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("replacementRange"))
+	return _r
+}
+
+// MarkForStyleAtRange returns a dictionary of text attributes that can mark a range of an attributed string to send to a client.
+func (x *InputController) MarkForStyleAtRange(style int, range_ foundation.NSRange) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markForStyle:atRange:"), style, range_)
+	return obj.Wrap(_r)
+}
+
+// HidePalettes informs an input method that it should close any visible user interface.
 func (x *InputController) HidePalettes() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hidePalettes"))
 }
 
-// Returns a menu of commands that are specific to an input method.
+// Menu returns a menu of commands that are specific to an input method.
 func (x *InputController) Menu() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menu"))
 	return obj.Wrap(_r)
 }
 
-// Returns the delegate for input controller object.
+// Delegate returns the delegate for input controller object.
 func (x *InputController) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
-// Sets the delegate for input controller object.
+// SetDelegate sets the delegate for input controller object.
 func (x *InputController) SetDelegate(newDelegate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(newDelegate))
 }
 
-// Returns the server object that manages the input controller.
+// Server returns the server object that manages the input controller.
 func (x *InputController) Server() *Server {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("server"))
 	return ServerFromID(_r)
 }
 
-// Returns the client object associated with the input controller.
+// Client returns the client object associated with the input controller.
 func (x *InputController) Client() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("client"))
 	return obj.Wrap(_r)
 }
 
-// Called to notify an input controller that it is about to be closed.
+// InputControllerWillClose called to notify an input controller that it is about to be closed.
 func (x *InputController) InputControllerWillClose() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputControllerWillClose"))
 }
 
-// Sends the selected candidate string and annotation string to the input controller.
+// AnnotationSelectedForCandidate sends the selected candidate string and annotation string to the input controller.
 func (x *InputController) AnnotationSelectedForCandidate(annotationString obj.Object, candidateString obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("annotationSelected:forCandidate:"), objref.IDOf(annotationString), objref.IDOf(candidateString))
 }
 
-// Informs an input controller that the current candidate selection in the candidate window has changed.
+// CandidateSelectionChanged informs an input controller that the current candidate selection in the candidate window has changed.
 func (x *InputController) CandidateSelectionChanged(candidateString obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("candidateSelectionChanged:"), objref.IDOf(candidateString))
 }
 
-// Informs an input controller that a new candidate is selected.
+// CandidateSelected informs an input controller that a new candidate is selected.
 func (x *InputController) CandidateSelected(candidateString obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("candidateSelected:"), objref.IDOf(candidateString))
 }
@@ -136,6 +167,10 @@ type InputControllerable interface {
 	obj.Object
 	UpdateComposition()
 	CancelComposition()
+	CompositionAttributesAtRange(range_ foundation.NSRange) obj.Object
+	SelectionRange() foundation.NSRange
+	ReplacementRange() foundation.NSRange
+	MarkForStyleAtRange(style int, range_ foundation.NSRange) obj.Object
 	HidePalettes()
 	Menu() obj.Object
 	Delegate() obj.Object

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The name of a file, expressed as a data buffer.
-//
 // FileName is an idiomatic wrapper over the Objective-C class FSFileName.
+//
+// The name of a file, expressed as a data buffer.
 type FileName struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FileNameFromID(id objc.ID) *FileName {
 	if id == 0 {
 		return nil
 	}
-	x := &FileName{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FileName{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func fileNameAdopt(id objc.ID) *FileName {
 	if id == 0 {
 		return nil
 	}
-	x := &FileName{Handle: objref.Wrap(id)}
+	x := &FileName{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,62 +60,50 @@ func (x *FileName) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a filename from a null-terminated character sequence.
-//
-// NewFileNameWithCString creates a new FileName.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FileName) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFileNameWithCString initializes a filename from a null-terminated character sequence.
 func NewFileNameWithCString(name string) *FileName {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCString:"), name)
 	return fileNameAdopt(_id)
 }
 
-// Initializes a file name by copying a character sequence from a byte array.
-//
-// NewFileNameWithBytesLength creates a new FileName.
+// NewFileNameWithBytesLength initializes a file name by copying a character sequence from a byte array.
 func NewFileNameWithBytesLength(bytes_ string, length int) *FileName {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytes:length:"), bytes_, length)
 	return fileNameAdopt(_id)
 }
 
-// Creates a filename by copying a character sequence data object.
-//
-// NewFileNameWithData creates a new FileName.
+// NewFileNameWithData creates a filename by copying a character sequence data object.
 func NewFileNameWithData(name obj.Object) *FileName {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(name))
 	return fileNameAdopt(_id)
 }
 
-// Creates a filename by copying a character sequence from a string instance.
-//
-// NewFileNameWithString creates a new FileName.
+// NewFileNameWithString creates a filename by copying a character sequence from a string instance.
 func NewFileNameWithString(name string) *FileName {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(name))
 	return fileNameAdopt(_id)
 }
 
-// The byte sequence of the filename, as a data object. This property always provides a value.
+// Data the byte sequence of the filename, as a data object. This property always provides a value.
 func (x *FileName) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
-}
-
-// The filename, represented as a Unicode string. If the value of the filename's “FSFileName/data“ is not a valid UTF-8 byte sequence, this property is empty.
-func (x *FileName) String() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("string"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
 }
 
 // FileNameable is the interface implemented by [FileName], for mocking and DI.
 type FileNameable interface {
 	obj.Object
 	Data() obj.Object
-	String() string
 }
 
 var _ FileNameable = (*FileName)(nil)

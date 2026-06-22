@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that represents a physical or virtual device.
-//
 // ExtensionDevice is an idiomatic wrapper over the Objective-C class CMIOExtensionDevice.
+//
+// An object that represents a physical or virtual device.
 type ExtensionDevice struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func ExtensionDeviceFromID(id objc.ID) *ExtensionDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionDevice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExtensionDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func extensionDeviceAdopt(id objc.ID) *ExtensionDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionDevice{Handle: objref.Wrap(id)}
+	x := &ExtensionDevice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,13 +62,19 @@ func (x *ExtensionDevice) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExtensionDevice) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewExtensionDevice creates a new ExtensionDevice.
 func NewExtensionDevice() *ExtensionDevice {
 	_id := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionDevice")), objc.RegisterName("new"))
 	return extensionDeviceAdopt(_id)
 }
 
-// Adds a stream to a device.
+// AddStream adds a stream to a device.
 func (x *ExtensionDevice) AddStream(stream *ExtensionStream) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addStream:error:"), objref.IDOf(stream), unsafe.Pointer(&_nsErr))
@@ -76,7 +84,7 @@ func (x *ExtensionDevice) AddStream(stream *ExtensionStream) error {
 	return nil
 }
 
-// Removes a stream from the device.
+// RemoveStream removes a stream from the device.
 func (x *ExtensionDevice) RemoveStream(stream *ExtensionStream) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeStream:error:"), objref.IDOf(stream), unsafe.Pointer(&_nsErr))
@@ -86,12 +94,12 @@ func (x *ExtensionDevice) RemoveStream(stream *ExtensionStream) error {
 	return nil
 }
 
-// Notifies clients of property changes.
+// NotifyPropertiesChanged notifies clients of property changes.
 func (x *ExtensionDevice) NotifyPropertiesChanged(propertyStates obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notifyPropertiesChanged:"), objref.IDOf(propertyStates))
 }
 
-// The localized name of the device.
+// LocalizedName the localized name of the device.
 func (x *ExtensionDevice) LocalizedName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
 	if _r == 0 {
@@ -100,13 +108,13 @@ func (x *ExtensionDevice) LocalizedName() string {
 	return purego.GoString(_r)
 }
 
-// The device identifier as UUID.
+// DeviceID the device identifier as UUID.
 func (x *ExtensionDevice) DeviceID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceID"))
 	return obj.Wrap(_r)
 }
 
-// The device identifier as a string (for backward compatibility with AVCaptureDevice.uniqueIdentifier)
+// LegacyDeviceID the device identifier as a string (for backward compatibility with AVCaptureDevice.uniqueIdentifier)
 func (x *ExtensionDevice) LegacyDeviceID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("legacyDeviceID"))
 	if _r == 0 {
@@ -115,7 +123,7 @@ func (x *ExtensionDevice) LegacyDeviceID() string {
 	return purego.GoString(_r)
 }
 
-// The streams array of the device. This property is not key-value observable.
+// Streams the streams array of the device. This property is not key-value observable.
 //
 // Streams returns the collection as a Go slice.
 func (x *ExtensionDevice) Streams() []*ExtensionStream {

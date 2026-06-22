@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A node in a navigation graph, associated with a position on a discrete two-dimensional grid.
-//
 // GridGraphNode is an idiomatic wrapper over the Objective-C class GKGridGraphNode.
+//
+// It embeds [GraphNode], promoting that type's methods.
+//
+// A node in a navigation graph, associated with a position on a discrete two-dimensional grid.
 type GridGraphNode struct {
-	objref.Handle
+	GraphNode
 }
 
 // GridGraphNodeFromID adopts an existing Objective-C object as a GridGraphNode
@@ -25,7 +26,8 @@ func GridGraphNodeFromID(id objc.ID) *GridGraphNode {
 	if id == 0 {
 		return nil
 	}
-	x := &GridGraphNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GridGraphNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func gridGraphNodeAdopt(id objc.ID) *GridGraphNode {
 	if id == 0 {
 		return nil
 	}
-	x := &GridGraphNode{Handle: objref.Wrap(id)}
+	x := &GridGraphNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GridGraphNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GridGraphNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GridGraphNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGridGraphNode creates a new GridGraphNode.
@@ -70,3 +58,5 @@ type GridGraphNodeable interface {
 }
 
 var _ GridGraphNodeable = (*GridGraphNode)(nil)
+
+var _ GraphNodeProvider = (*GridGraphNode)(nil)

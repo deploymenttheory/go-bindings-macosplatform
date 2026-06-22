@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A joint that fuses two physics bodies together at a reference point.
-//
 // PhysicsJointFixed is an idiomatic wrapper over the Objective-C class SKPhysicsJointFixed.
+//
+// It embeds [PhysicsJoint], promoting that type's methods.
+//
+// A joint that fuses two physics bodies together at a reference point.
 type PhysicsJointFixed struct {
-	objref.Handle
+	PhysicsJoint
 }
 
 // PhysicsJointFixedFromID adopts an existing Objective-C object as a PhysicsJointFixed
@@ -25,7 +26,8 @@ func PhysicsJointFixedFromID(id objc.ID) *PhysicsJointFixed {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsJointFixed{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PhysicsJointFixed{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func physicsJointFixedAdopt(id objc.ID) *PhysicsJointFixed {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsJointFixed{Handle: objref.Wrap(id)}
+	x := &PhysicsJointFixed{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PhysicsJointFixed) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PhysicsJointFixed) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PhysicsJointFixed) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPhysicsJointFixed creates a new PhysicsJointFixed.
@@ -64,17 +52,13 @@ func NewPhysicsJointFixed() *PhysicsJointFixed {
 	return physicsJointFixedAdopt(_id)
 }
 
-// The first body connected by the joint.
-//
-// WithBodyA sets bodyA and returns the receiver so calls can be chained.
+// WithBodyA the first body connected by the joint.
 func (x *PhysicsJointFixed) WithBodyA(bodyA *PhysicsBody) *PhysicsJointFixed {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
 	return x
 }
 
-// The second body connected by the joint.
-//
-// WithBodyB sets bodyB and returns the receiver so calls can be chained.
+// WithBodyB the second body connected by the joint.
 func (x *PhysicsJointFixed) WithBodyB(bodyB *PhysicsBody) *PhysicsJointFixed {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
 	return x
@@ -88,3 +72,5 @@ type PhysicsJointFixedable interface {
 }
 
 var _ PhysicsJointFixedable = (*PhysicsJointFixed)(nil)
+
+var _ PhysicsJointProvider = (*PhysicsJointFixed)(nil)

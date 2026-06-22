@@ -8,7 +8,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Creates a container node.
+// New creates a container node.
 func New() *ContainerNodeDefinition {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHASEContainerNodeDefinition")), objc.RegisterName("new"))
 	return ContainerNodeDefinitionFromID(_r)

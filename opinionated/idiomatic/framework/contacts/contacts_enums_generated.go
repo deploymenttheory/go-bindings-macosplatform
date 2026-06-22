@@ -24,6 +24,8 @@ const (
 	AuthorizationStatusLimited AuthorizationStatus = 4
 )
 
+// String returns the AuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationStatus) String() string {
 	switch e {
 	case AuthorizationStatusNotDetermined:
@@ -53,6 +55,8 @@ const (
 	ContactDisplayNameOrderFamilyNameFirst ContactDisplayNameOrder = 2
 )
 
+// String returns the ContactDisplayNameOrder constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ContactDisplayNameOrder) String() string {
 	switch e {
 	case ContactDisplayNameOrderUserDefault:
@@ -76,6 +80,8 @@ const (
 	ContactFormatterStylePhoneticFullName ContactFormatterStyle = 1
 )
 
+// String returns the ContactFormatterStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ContactFormatterStyle) String() string {
 	switch e {
 	case ContactFormatterStyleFullName:
@@ -101,6 +107,8 @@ const (
 	ContactSortOrderFamilyName ContactSortOrder = 3
 )
 
+// String returns the ContactSortOrder constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ContactSortOrder) String() string {
 	switch e {
 	case ContactSortOrderNone:
@@ -126,6 +134,8 @@ const (
 	ContactTypeOrganization ContactType = 1
 )
 
+// String returns the ContactType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ContactType) String() string {
 	switch e {
 	case ContactTypePerson:
@@ -151,6 +161,8 @@ const (
 	ContainerTypeCardDAV ContainerType = 3
 )
 
+// String returns the ContainerType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ContainerType) String() string {
 	switch e {
 	case ContainerTypeUnassigned:
@@ -174,6 +186,8 @@ const (
 	EntityTypeContacts EntityType = 0
 )
 
+// String returns the EntityType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EntityType) String() string {
 	switch e {
 	case EntityTypeContacts:
@@ -217,6 +231,8 @@ const (
 	ErrorCodeVCardSummarizationError          ErrorCode = 701
 )
 
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ErrorCode) String() string {
 	switch e {
 	case ErrorCodeCommunicationError:
@@ -288,6 +304,8 @@ const (
 	PostalAddressFormatterStyleMailingAddress PostalAddressFormatterStyle = 0
 )
 
+// String returns the PostalAddressFormatterStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PostalAddressFormatterStyle) String() string {
 	switch e {
 	case PostalAddressFormatterStyleMailingAddress:

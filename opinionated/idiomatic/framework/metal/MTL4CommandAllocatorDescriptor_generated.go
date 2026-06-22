@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Groups together parameters for creating a command allocator.
-//
 // MTL4CommandAllocatorDescriptor is an idiomatic wrapper over the Objective-C class MTL4CommandAllocatorDescriptor.
+//
+// Groups together parameters for creating a command allocator.
 type MTL4CommandAllocatorDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MTL4CommandAllocatorDescriptorFromID(id objc.ID) *MTL4CommandAllocatorDescr
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4CommandAllocatorDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTL4CommandAllocatorDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTL4CommandAllocatorDescriptorAdopt(id objc.ID) *MTL4CommandAllocatorDescri
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4CommandAllocatorDescriptor{Handle: objref.Wrap(id)}
+	x := &MTL4CommandAllocatorDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,20 +60,25 @@ func (x *MTL4CommandAllocatorDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTL4CommandAllocatorDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTL4CommandAllocatorDescriptor creates a new MTL4CommandAllocatorDescriptor.
 func NewMTL4CommandAllocatorDescriptor() *MTL4CommandAllocatorDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTL4CommandAllocatorDescriptor")), objc.RegisterName("new"))
 	return mTL4CommandAllocatorDescriptorAdopt(_id)
 }
 
-// An optional label you can assign to the command allocator to aid debugging.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel an optional label you can assign to the command allocator to aid debugging.
 func (x *MTL4CommandAllocatorDescriptor) WithLabel(label string) *MTL4CommandAllocatorDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// Label wraps the corresponding Objective-C method.
 func (x *MTL4CommandAllocatorDescriptor) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -80,6 +87,7 @@ func (x *MTL4CommandAllocatorDescriptor) Label() string {
 	return purego.GoString(_r)
 }
 
+// SetLabel wraps the corresponding Objective-C method.
 func (x *MTL4CommandAllocatorDescriptor) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }

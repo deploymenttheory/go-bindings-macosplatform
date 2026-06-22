@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration for a Metal capture session.
-//
 // CaptureDescriptor is an idiomatic wrapper over the Objective-C class MTLCaptureDescriptor.
+//
+// A configuration for a Metal capture session.
 type CaptureDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CaptureDescriptorFromID(id objc.ID) *CaptureDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptureDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func captureDescriptorAdopt(id objc.ID) *CaptureDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureDescriptor{Handle: objref.Wrap(id)}
+	x := &CaptureDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,62 +60,65 @@ func (x *CaptureDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptureDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCaptureDescriptor creates a new CaptureDescriptor.
 func NewCaptureDescriptor() *CaptureDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLCaptureDescriptor")), objc.RegisterName("new"))
 	return captureDescriptorAdopt(_id)
 }
 
-// The instance whose contents should be captured.
-//
-// WithCaptureObject sets captureObject and returns the receiver so calls can be chained.
+// WithCaptureObject the instance whose contents should be captured.
 func (x *CaptureDescriptor) WithCaptureObject(captureObject obj.Object) *CaptureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptureObject:"), objref.IDOf(captureObject))
 	return x
 }
 
-// The destination for any captured command data.
-//
-// WithDestination sets destination and returns the receiver so calls can be chained.
+// WithDestination the destination for any captured command data.
 func (x *CaptureDescriptor) WithDestination(destination CaptureDestination) *CaptureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), destination)
 	return x
 }
 
-// A URL for a file to write the capture data into.
-//
-// WithOutputURL sets outputURL and returns the receiver so calls can be chained.
+// WithOutputURL a URL for a file to write the capture data into.
 func (x *CaptureDescriptor) WithOutputURL(outputURL string) *CaptureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputURL:"), rt.FileURL(outputURL))
 	return x
 }
 
-// The object that is captured. Must be one of the following: MTLDevice captures all command queues of the device. MTLCommandQueue captures a single command queue. MTLCaptureScope captures between the next begin and end of the scope.
+// CaptureObject the object that is captured. Must be one of the following: MTLDevice captures all command queues of the device. MTLCommandQueue captures a single command queue. MTLCaptureScope captures between the next begin and end of the scope.
 func (x *CaptureDescriptor) CaptureObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("captureObject"))
 	return obj.Wrap(_r)
 }
 
+// SetCaptureObject wraps the corresponding Objective-C method.
 func (x *CaptureDescriptor) SetCaptureObject(captureObject obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptureObject:"), objref.IDOf(captureObject))
 }
 
-// The destination you want the GPU trace to be captured to.
+// Destination the destination you want the GPU trace to be captured to.
 func (x *CaptureDescriptor) Destination() CaptureDestination {
 	_r := objc.Send[CaptureDestination](objref.IDOf(x), objc.RegisterName("destination"))
 	return _r
 }
 
+// SetDestination wraps the corresponding Objective-C method.
 func (x *CaptureDescriptor) SetDestination(destination CaptureDestination) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), destination)
 }
 
-// URL the GPU Trace document will be captured to. Must be specified when destiation is MTLCaptureDestinationGPUTraceDocument.
+// OutputURL URL the GPU Trace document will be captured to. Must be specified when destiation is MTLCaptureDestinationGPUTraceDocument.
 func (x *CaptureDescriptor) OutputURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputURL"))
 	return obj.Wrap(_r)
 }
 
+// SetOutputURL wraps the corresponding Objective-C method.
 func (x *CaptureDescriptor) SetOutputURL(outputURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputURL:"), rt.FileURL(outputURL))
 }

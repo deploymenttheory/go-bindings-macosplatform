@@ -8,15 +8,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// A formatter that provides localized descriptions of energy values.
-//
 // EnergyFormatter is an idiomatic wrapper over the Objective-C class NSEnergyFormatter.
+//
+// It embeds [Formatter], promoting that type's methods.
+//
+// A formatter that provides localized descriptions of energy values.
 type EnergyFormatter struct {
-	objref.Handle
+	Formatter
 }
 
 // EnergyFormatterFromID adopts an existing Objective-C object as a EnergyFormatter
@@ -25,7 +27,8 @@ func EnergyFormatterFromID(id objc.ID) *EnergyFormatter {
 	if id == 0 {
 		return nil
 	}
-	x := &EnergyFormatter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EnergyFormatter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func energyFormatterAdopt(id objc.ID) *EnergyFormatter {
 	if id == 0 {
 		return nil
 	}
-	x := &EnergyFormatter{Handle: objref.Wrap(id)}
+	x := &EnergyFormatter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *EnergyFormatter) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EnergyFormatter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EnergyFormatter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewEnergyFormatter creates a new EnergyFormatter.
@@ -64,30 +53,31 @@ func NewEnergyFormatter() *EnergyFormatter {
 	return energyFormatterAdopt(_id)
 }
 
-// WithNumberFormatter sets numberFormatter and returns the receiver so calls can be chained.
+// WithNumberFormatter sets the property and returns the receiver so calls can be chained.
 func (x *EnergyFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) *EnergyFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberFormatter:"), objref.IDOf(numberFormatter))
 	return x
 }
 
-// WithUnitStyle sets unitStyle and returns the receiver so calls can be chained.
+// WithUnitStyle sets the property and returns the receiver so calls can be chained.
 func (x *EnergyFormatter) WithUnitStyle(unitStyle FormattingUnitStyle) *EnergyFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitStyle:"), unitStyle)
 	return x
 }
 
-// WithForFoodEnergyUse sets forFoodEnergyUse and returns the receiver so calls can be chained.
+// WithForFoodEnergyUse sets the property and returns the receiver so calls can be chained.
 func (x *EnergyFormatter) WithForFoodEnergyUse(forFoodEnergyUse bool) *EnergyFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForFoodEnergyUse:"), forFoodEnergyUse)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *EnergyFormatter) WithScriptingProperties(scriptingProperties obj.Object) *EnergyFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// StringFromValueUnit wraps the corresponding Objective-C method.
 func (x *EnergyFormatter) StringFromValueUnit(value float64, unit EnergyFormatterUnit) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromValue:unit:"), value, unit)
 	if _r == 0 {
@@ -96,6 +86,7 @@ func (x *EnergyFormatter) StringFromValueUnit(value float64, unit EnergyFormatte
 	return purego.GoString(_r)
 }
 
+// StringFromJoules wraps the corresponding Objective-C method.
 func (x *EnergyFormatter) StringFromJoules(numberInJoules float64) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromJoules:"), numberInJoules)
 	if _r == 0 {
@@ -104,6 +95,7 @@ func (x *EnergyFormatter) StringFromJoules(numberInJoules float64) string {
 	return purego.GoString(_r)
 }
 
+// UnitStringFromValueUnit wraps the corresponding Objective-C method.
 func (x *EnergyFormatter) UnitStringFromValueUnit(value float64, unit EnergyFormatterUnit) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unitStringFromValue:unit:"), value, unit)
 	if _r == 0 {
@@ -112,29 +104,46 @@ func (x *EnergyFormatter) UnitStringFromValueUnit(value float64, unit EnergyForm
 	return purego.GoString(_r)
 }
 
+// UnitStringFromJoulesUsedUnit wraps the corresponding Objective-C method.
+func (x *EnergyFormatter) UnitStringFromJoulesUsedUnit(numberInJoules float64) (result string, unitp EnergyFormatterUnit) {
+	var _out0 EnergyFormatterUnit
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unitStringFromJoules:usedUnit:"), numberInJoules, unsafe.Pointer(&_out0))
+	_v := ""
+	if _r != 0 {
+		_v = purego.GoString(_r)
+	}
+	return _v, _out0
+}
+
+// NumberFormatter wraps the corresponding Objective-C method.
 func (x *EnergyFormatter) NumberFormatter() *NumberFormatter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberFormatter"))
 	return NumberFormatterFromID(_r)
 }
 
+// SetNumberFormatter wraps the corresponding Objective-C method.
 func (x *EnergyFormatter) SetNumberFormatter(numberFormatter *NumberFormatter) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberFormatter:"), objref.IDOf(numberFormatter))
 }
 
+// UnitStyle wraps the corresponding Objective-C method.
 func (x *EnergyFormatter) UnitStyle() FormattingUnitStyle {
 	_r := objc.Send[FormattingUnitStyle](objref.IDOf(x), objc.RegisterName("unitStyle"))
 	return _r
 }
 
+// SetUnitStyle wraps the corresponding Objective-C method.
 func (x *EnergyFormatter) SetUnitStyle(unitStyle FormattingUnitStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitStyle:"), unitStyle)
 }
 
+// IsForFoodEnergyUse wraps the corresponding Objective-C method.
 func (x *EnergyFormatter) IsForFoodEnergyUse() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isForFoodEnergyUse"))
 	return _r
 }
 
+// SetForFoodEnergyUse wraps the corresponding Objective-C method.
 func (x *EnergyFormatter) SetForFoodEnergyUse(forFoodEnergyUse bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForFoodEnergyUse:"), forFoodEnergyUse)
 }
@@ -149,6 +158,7 @@ type EnergyFormatterable interface {
 	StringFromValueUnit(value float64, unit EnergyFormatterUnit) string
 	StringFromJoules(numberInJoules float64) string
 	UnitStringFromValueUnit(value float64, unit EnergyFormatterUnit) string
+	UnitStringFromJoulesUsedUnit(numberInJoules float64) (result string, unitp EnergyFormatterUnit)
 	NumberFormatter() *NumberFormatter
 	SetNumberFormatter(numberFormatter *NumberFormatter)
 	UnitStyle() FormattingUnitStyle
@@ -158,3 +168,5 @@ type EnergyFormatterable interface {
 }
 
 var _ EnergyFormatterable = (*EnergyFormatter)(nil)
+
+var _ FormatterProvider = (*EnergyFormatter)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A buffer that backs the vertex data of a Model I/O mesh, suitable for use in a Metal app.
-//
 // MeshBuffer is an idiomatic wrapper over the Objective-C class MTKMeshBuffer.
+//
+// A buffer that backs the vertex data of a Model I/O mesh, suitable for use in a Metal app.
 type MeshBuffer struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MeshBufferFromID(id objc.ID) *MeshBuffer {
 	if id == 0 {
 		return nil
 	}
-	x := &MeshBuffer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MeshBuffer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func meshBufferAdopt(id objc.ID) *MeshBuffer {
 	if id == 0 {
 		return nil
 	}
-	x := &MeshBuffer{Handle: objref.Wrap(id)}
+	x := &MeshBuffer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *MeshBuffer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MeshBuffer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMeshBuffer creates a new MeshBuffer.
 func NewMeshBuffer() *MeshBuffer {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTKMeshBuffer")), objc.RegisterName("new"))
 	return meshBufferAdopt(_id)
 }
 
-// Size in bytes of the buffer allocation.
+// Length size in bytes of the buffer allocation.
 func (x *MeshBuffer) Length() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
 	return _r
 }
 
-// Allocator object used to create this buffer. This allcoator is stored so that it can be used by Model I/O for copy and relayout operations (such as when a new vertex descriptor is applied to a vertex buffer).
+// Allocator allocator object used to create this buffer. This allcoator is stored so that it can be used by Model I/O for copy and relayout operations (such as when a new vertex descriptor is applied to a vertex buffer).
 func (x *MeshBuffer) Allocator() *MeshBufferAllocator {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allocator"))
 	return MeshBufferAllocatorFromID(_r)
 }
 
-// Byte offset of the data within the metal buffer.
+// Offset byte offset of the data within the metal buffer.
 func (x *MeshBuffer) Offset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
 	return _r

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that models the timeline and playback sequence of a primary player item and scheduled interstitial events.
-//
 // PlayerItemIntegratedTimeline is an idiomatic wrapper over the Objective-C class AVPlayerItemIntegratedTimeline.
+//
+// An object that models the timeline and playback sequence of a primary player item and scheduled interstitial events.
 type PlayerItemIntegratedTimeline struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PlayerItemIntegratedTimelineFromID(id objc.ID) *PlayerItemIntegratedTimelin
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemIntegratedTimeline{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlayerItemIntegratedTimeline{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func playerItemIntegratedTimelineAdopt(id objc.ID) *PlayerItemIntegratedTimeline
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemIntegratedTimeline{Handle: objref.Wrap(id)}
+	x := &PlayerItemIntegratedTimeline{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *PlayerItemIntegratedTimeline) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerItemIntegratedTimeline) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPlayerItemIntegratedTimeline creates a new PlayerItemIntegratedTimeline.
 func NewPlayerItemIntegratedTimeline() *PlayerItemIntegratedTimeline {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemIntegratedTimeline")), objc.RegisterName("new"))
 	return playerItemIntegratedTimelineAdopt(_id)
 }
 
-// This property provides an immutable representation of the timeline state at time of request. Returns an immutable representation of the timeline state at time of request. A timeline snapshot provides accessors for obtaining inspectable details of the timeline.  Because a snapshot is immutable, the snapshot's properties will not update as playback continues.
+// CurrentSnapshot this property provides an immutable representation of the timeline state at time of request. Returns an immutable representation of the timeline state at time of request. A timeline snapshot provides accessors for obtaining inspectable details of the timeline.  Because a snapshot is immutable, the snapshot's properties will not update as playback continues.
 func (x *PlayerItemIntegratedTimeline) CurrentSnapshot() *PlayerItemIntegratedTimelineSnapshot {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentSnapshot"))
 	return PlayerItemIntegratedTimelineSnapshotFromID(_r)
 }
 
-// Returns the date of current playback, or nil if playback is not mapped to any date.
+// CurrentDate returns the date of current playback, or nil if playback is not mapped to any date.
 func (x *PlayerItemIntegratedTimeline) CurrentDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentDate"))
 	return obj.Wrap(_r)
 }
 
-// Seeks to a particular date in the integrated time domain.
+// SeekToDateCompletionHandler seeks to a particular date in the integrated time domain.
 func (x *PlayerItemIntegratedTimeline) SeekToDateCompletionHandler(date obj.Object, completionHandler func(bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seekToDate:completionHandler:"), objref.IDOf(date), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }

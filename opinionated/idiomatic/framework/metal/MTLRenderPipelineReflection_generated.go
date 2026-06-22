@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information about the arguments of a graphics function.
-//
 // RenderPipelineReflection is an idiomatic wrapper over the Objective-C class MTLRenderPipelineReflection.
+//
+// Information about the arguments of a graphics function.
 type RenderPipelineReflection struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RenderPipelineReflectionFromID(id objc.ID) *RenderPipelineReflection {
 	if id == 0 {
 		return nil
 	}
-	x := &RenderPipelineReflection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RenderPipelineReflection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func renderPipelineReflectionAdopt(id objc.ID) *RenderPipelineReflection {
 	if id == 0 {
 		return nil
 	}
-	x := &RenderPipelineReflection{Handle: objref.Wrap(id)}
+	x := &RenderPipelineReflection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,49 +60,66 @@ func (x *RenderPipelineReflection) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RenderPipelineReflection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRenderPipelineReflection creates a new RenderPipelineReflection.
 func NewRenderPipelineReflection() *RenderPipelineReflection {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLRenderPipelineReflection")), objc.RegisterName("new"))
 	return renderPipelineReflectionAdopt(_id)
 }
 
+// VertexBindings wraps the corresponding Objective-C method.
 func (x *RenderPipelineReflection) VertexBindings() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexBindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// FragmentBindings wraps the corresponding Objective-C method.
 func (x *RenderPipelineReflection) FragmentBindings() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fragmentBindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// TileBindings wraps the corresponding Objective-C method.
 func (x *RenderPipelineReflection) TileBindings() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tileBindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// ObjectBindings wraps the corresponding Objective-C method.
 func (x *RenderPipelineReflection) ObjectBindings() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectBindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// MeshBindings wraps the corresponding Objective-C method.
 func (x *RenderPipelineReflection) MeshBindings() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("meshBindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// VertexArguments wraps the corresponding Objective-C method.
+//
 // VertexArguments returns the collection as a Go slice.
 func (x *RenderPipelineReflection) VertexArguments() []*Argument {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexArguments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Argument { return ArgumentFromID(_id) })
 }
 
+// FragmentArguments wraps the corresponding Objective-C method.
+//
 // FragmentArguments returns the collection as a Go slice.
 func (x *RenderPipelineReflection) FragmentArguments() []*Argument {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fragmentArguments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Argument { return ArgumentFromID(_id) })
 }
 
+// TileArguments wraps the corresponding Objective-C method.
+//
 // TileArguments returns the collection as a Go slice.
 func (x *RenderPipelineReflection) TileArguments() []*Argument {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tileArguments"))

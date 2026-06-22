@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// A set of entries from the unified logging system.
-//
 // LogStore is an idiomatic wrapper over the Objective-C class OSLogStore.
+//
+// A set of entries from the unified logging system.
 type LogStore struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func LogStoreFromID(id objc.ID) *LogStore {
 	if id == 0 {
 		return nil
 	}
-	x := &LogStore{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LogStore{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func logStoreAdopt(id objc.ID) *LogStore {
 	if id == 0 {
 		return nil
 	}
-	x := &LogStore{Handle: objref.Wrap(id)}
+	x := &LogStore{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,14 +62,20 @@ func (x *LogStore) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LogStore) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLogStore creates a new LogStore.
 func NewLogStore() *LogStore {
 	_id := objc.Send[objc.ID](objc.ID(_class("OSLogStore")), objc.RegisterName("new"))
 	return logStoreAdopt(_id)
 }
 
-// Returns a log enumerator based on an underlying store.
-func (x *LogStore) EntriesEnumeratorWithOptionsPositionPredicateError(options LogEnumeratorOptions, position *LogPosition, predicate obj.Object) (*LogEnumerator, error) {
+// EntriesEnumeratorWithOptionsPositionPredicateError returns a log enumerator based on an underlying store.
+func (x *LogStore) EntriesEnumeratorWithOptionsPositionPredicateError(options LogEnumeratorOptions, position *LogPosition, predicate obj.Object) (result *LogEnumerator, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entriesEnumeratorWithOptions:position:predicate:error:"), options, objref.IDOf(position), objref.IDOf(predicate), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -76,8 +84,8 @@ func (x *LogStore) EntriesEnumeratorWithOptionsPositionPredicateError(options Lo
 	return LogEnumeratorFromID(_r), nil
 }
 
-// Returns a log enumerator with default options for viewing the entries.
-func (x *LogStore) EntriesEnumeratorAndReturnError() (*LogEnumerator, error) {
+// EntriesEnumeratorAndReturnError returns a log enumerator with default options for viewing the entries.
+func (x *LogStore) EntriesEnumeratorAndReturnError() (result *LogEnumerator, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entriesEnumeratorAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -86,19 +94,19 @@ func (x *LogStore) EntriesEnumeratorAndReturnError() (*LogEnumerator, error) {
 	return LogEnumeratorFromID(_r), nil
 }
 
-// Returns a position representing the time specified.
+// PositionWithDate returns a position representing the time specified.
 func (x *LogStore) PositionWithDate(date obj.Object) *LogPosition {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("positionWithDate:"), objref.IDOf(date))
 	return LogPositionFromID(_r)
 }
 
-// Returns a position representing time since the end of the time range that the entries span.
+// PositionWithTimeIntervalSinceEnd returns a position representing time since the end of the time range that the entries span.
 func (x *LogStore) PositionWithTimeIntervalSinceEnd(seconds float64) *LogPosition {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("positionWithTimeIntervalSinceEnd:"), seconds)
 	return LogPositionFromID(_r)
 }
 
-// Returns a position representing time since the last boot in the series of entries.
+// PositionWithTimeIntervalSinceLatestBoot returns a position representing time since the last boot in the series of entries.
 func (x *LogStore) PositionWithTimeIntervalSinceLatestBoot(seconds float64) *LogPosition {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("positionWithTimeIntervalSinceLatestBoot:"), seconds)
 	return LogPositionFromID(_r)
@@ -107,8 +115,8 @@ func (x *LogStore) PositionWithTimeIntervalSinceLatestBoot(seconds float64) *Log
 // LogStoreable is the interface implemented by [LogStore], for mocking and DI.
 type LogStoreable interface {
 	obj.Object
-	EntriesEnumeratorWithOptionsPositionPredicateError(options LogEnumeratorOptions, position *LogPosition, predicate obj.Object) (*LogEnumerator, error)
-	EntriesEnumeratorAndReturnError() (*LogEnumerator, error)
+	EntriesEnumeratorWithOptionsPositionPredicateError(options LogEnumeratorOptions, position *LogPosition, predicate obj.Object) (result *LogEnumerator, err error)
+	EntriesEnumeratorAndReturnError() (result *LogEnumerator, err error)
 	PositionWithDate(date obj.Object) *LogPosition
 	PositionWithTimeIntervalSinceEnd(seconds float64) *LogPosition
 	PositionWithTimeIntervalSinceLatestBoot(seconds float64) *LogPosition

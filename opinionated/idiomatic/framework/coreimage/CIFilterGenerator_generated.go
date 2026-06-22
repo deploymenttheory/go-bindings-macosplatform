@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that creates and configures chains of individual image filters.
-//
 // FilterGenerator is an idiomatic wrapper over the Objective-C class CIFilterGenerator.
+//
+// An object that creates and configures chains of individual image filters.
 type FilterGenerator struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FilterGeneratorFromID(id objc.ID) *FilterGenerator {
 	if id == 0 {
 		return nil
 	}
-	x := &FilterGenerator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FilterGenerator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func filterGeneratorAdopt(id objc.ID) *FilterGenerator {
 	if id == 0 {
 		return nil
 	}
-	x := &FilterGenerator{Handle: objref.Wrap(id)}
+	x := &FilterGenerator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,77 +60,80 @@ func (x *FilterGenerator) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a filter generator object with the contents of a filter generator file.
-//
-// NewFilterGeneratorWithContentsOfURL creates a new FilterGenerator.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FilterGenerator) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFilterGeneratorWithContentsOfURL initializes a filter generator object with the contents of a filter generator file.
 func NewFilterGeneratorWithContentsOfURL(aURL string) *FilterGenerator {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIFilterGenerator")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), rt.FileURL(aURL))
 	return filterGeneratorAdopt(_id)
 }
 
-// The class attributes associated with the filter.
-//
-// WithClassAttributes sets classAttributes and returns the receiver so calls can be chained.
+// WithClassAttributes the class attributes associated with the filter.
 func (x *FilterGenerator) WithClassAttributes(classAttributes obj.Object) *FilterGenerator {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassAttributes:"), objref.IDOf(classAttributes))
 	return x
 }
 
-// Adds an object to the filter chain.
+// ConnectObjectWithKeyToObjectWithKey adds an object to the filter chain.
 func (x *FilterGenerator) ConnectObjectWithKeyToObjectWithKey(sourceObject obj.Object, sourceKey string, targetObject obj.Object, targetKey string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectObject:withKey:toObject:withKey:"), objref.IDOf(sourceObject), purego.NSString(sourceKey), objref.IDOf(targetObject), purego.NSString(targetKey))
 }
 
-// Removes the connection between two objects in the filter chain.
+// DisconnectObjectWithKeyToObjectWithKey removes the connection between two objects in the filter chain.
 func (x *FilterGenerator) DisconnectObjectWithKeyToObjectWithKey(sourceObject obj.Object, sourceKey string, targetObject obj.Object, targetKey string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disconnectObject:withKey:toObject:withKey:"), objref.IDOf(sourceObject), purego.NSString(sourceKey), objref.IDOf(targetObject), purego.NSString(targetKey))
 }
 
-// Exports an input or output key of an object in the filter chain.
+// ExportKeyFromObjectWithName exports an input or output key of an object in the filter chain.
 func (x *FilterGenerator) ExportKeyFromObjectWithName(key string, targetObject obj.Object, exportedKeyName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exportKey:fromObject:withName:"), purego.NSString(key), objref.IDOf(targetObject), purego.NSString(exportedKeyName))
 }
 
-// Removes a key that was previously exported.
+// RemoveExportedKey removes a key that was previously exported.
 func (x *FilterGenerator) RemoveExportedKey(exportedKeyName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeExportedKey:"), purego.NSString(exportedKeyName))
 }
 
-// Sets a dictionary of attributes for an exported key.
+// SetAttributesForExportedKey sets a dictionary of attributes for an exported key.
 func (x *FilterGenerator) SetAttributesForExportedKey(attributes obj.Object, key string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributes:forExportedKey:"), objref.IDOf(attributes), purego.NSString(key))
 }
 
-// Creates a filter object based on the filter chain.
+// Filter creates a filter object based on the filter chain.
 func (x *FilterGenerator) Filter() *Filter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filter"))
 	return FilterFromID(_r)
 }
 
-// Registers the name associated with a filter chain.
+// RegisterFilterName registers the name associated with a filter chain.
 func (x *FilterGenerator) RegisterFilterName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerFilterName:"), purego.NSString(name))
 }
 
-// Archives a filter generator object to a filter generator file.
+// WriteToURLAtomically archives a filter generator object to a filter generator file.
 func (x *FilterGenerator) WriteToURLAtomically(aURL string, flag bool) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:atomically:"), rt.FileURL(aURL), flag)
 	return _r
 }
 
-// An array of the exported keys. Use this method to get an NSArray of all the keys that you have exported using exportKey:fromObject:withName: or that were exported before written to a file from which you read the filter chain.
+// ExportedKeys an array of the exported keys. Use this method to get an NSArray of all the keys that you have exported using exportKey:fromObject:withName: or that were exported before written to a file from which you read the filter chain.
 func (x *FilterGenerator) ExportedKeys() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exportedKeys"))
 	return obj.Wrap(_r)
 }
 
-// Retrieve or Set the class attributes that will be used to register the filter using the registerFilterName method. Make sure you set the class attributes before using the registerFilterName method. See CIFilter for a description of the classAttributes that are needed to register a filter.
+// ClassAttributes retrieve or Set the class attributes that will be used to register the filter using the registerFilterName method. Make sure you set the class attributes before using the registerFilterName method. See CIFilter for a description of the classAttributes that are needed to register a filter.
 func (x *FilterGenerator) ClassAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("classAttributes"))
 	return obj.Wrap(_r)
 }
 
+// SetClassAttributes wraps the corresponding Objective-C method.
 func (x *FilterGenerator) SetClassAttributes(classAttributes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassAttributes:"), objref.IDOf(classAttributes))
 }

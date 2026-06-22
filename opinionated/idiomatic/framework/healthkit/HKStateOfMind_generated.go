@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // StateOfMind is an idiomatic wrapper over the Objective-C class HKStateOfMind.
+//
+// It embeds [Sample], promoting that type's methods.
 type StateOfMind struct {
-	objref.Handle
+	Sample
 }
 
 // StateOfMindFromID adopts an existing Objective-C object as a StateOfMind
@@ -23,7 +24,8 @@ func StateOfMindFromID(id objc.ID) *StateOfMind {
 	if id == 0 {
 		return nil
 	}
-	x := &StateOfMind{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StateOfMind{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func stateOfMindAdopt(id objc.ID) *StateOfMind {
 	if id == 0 {
 		return nil
 	}
-	x := &StateOfMind{Handle: objref.Wrap(id)}
+	x := &StateOfMind{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *StateOfMind) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StateOfMind) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StateOfMind) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewStateOfMind creates a new StateOfMind.
@@ -62,25 +50,25 @@ func NewStateOfMind() *StateOfMind {
 	return stateOfMindAdopt(_id)
 }
 
-// A description of the kind of feeling type captured by this state of mind. Feeling types can be understood by the timeframe considered to create this log, possibly indicated by the context used to create it. For example, a `momentary emotion` log might be in response to 'how are you feeling right now?' while a `daily mood` log might be in response to 'how have you been feeling today?'.
+// Kind a description of the kind of feeling type captured by this state of mind. Feeling types can be understood by the timeframe considered to create this log, possibly indicated by the context used to create it. For example, a `momentary emotion` log might be in response to 'how are you feeling right now?' while a `daily mood` log might be in response to 'how have you been feeling today?'.
 func (x *StateOfMind) Kind() StateOfMindKind {
 	_r := objc.Send[StateOfMindKind](objref.IDOf(x), objc.RegisterName("kind"))
 	return _r
 }
 
-// A signed, self-reported measure of how positive or negative one is feeling, on a continuous scale from -1 to +1.
+// Valence a signed, self-reported measure of how positive or negative one is feeling, on a continuous scale from -1 to +1.
 func (x *StateOfMind) Valence() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("valence"))
 	return _r
 }
 
-// A general region of pleasantness based on this sample's valence value.
+// ValenceClassification a general region of pleasantness based on this sample's valence value.
 func (x *StateOfMind) ValenceClassification() StateOfMindValenceClassification {
 	_r := objc.Send[StateOfMindValenceClassification](objref.IDOf(x), objc.RegisterName("valenceClassification"))
 	return _r
 }
 
-// Zero or more specific sentiments selected to represent a felt experience.
+// Labels zero or more specific sentiments selected to represent a felt experience.
 //
 // Labels returns the collection as a Go slice.
 func (x *StateOfMind) Labels() []obj.Object {
@@ -88,7 +76,7 @@ func (x *StateOfMind) Labels() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Zero or more facets of life with which this felt experience is associated.
+// Associations zero or more facets of life with which this felt experience is associated.
 //
 // Associations returns the collection as a Go slice.
 func (x *StateOfMind) Associations() []obj.Object {
@@ -107,3 +95,7 @@ type StateOfMindable interface {
 }
 
 var _ StateOfMindable = (*StateOfMind)(nil)
+
+var _ SampleProvider = (*StateOfMind)(nil)
+
+var _ ObjectProvider = (*StateOfMind)(nil)

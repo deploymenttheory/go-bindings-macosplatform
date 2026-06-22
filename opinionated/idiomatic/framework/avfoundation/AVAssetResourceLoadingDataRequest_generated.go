@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object for requesting data from a resource that an asset resource-loading request references.
-//
 // AssetResourceLoadingDataRequest is an idiomatic wrapper over the Objective-C class AVAssetResourceLoadingDataRequest.
+//
+// An object for requesting data from a resource that an asset resource-loading request references.
 type AssetResourceLoadingDataRequest struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetResourceLoadingDataRequestFromID(id objc.ID) *AssetResourceLoadingData
 	if id == 0 {
 		return nil
 	}
-	x := &AssetResourceLoadingDataRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetResourceLoadingDataRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetResourceLoadingDataRequestAdopt(id objc.ID) *AssetResourceLoadingDataR
 	if id == 0 {
 		return nil
 	}
-	x := &AssetResourceLoadingDataRequest{Handle: objref.Wrap(id)}
+	x := &AssetResourceLoadingDataRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,36 +60,42 @@ func (x *AssetResourceLoadingDataRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetResourceLoadingDataRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetResourceLoadingDataRequest creates a new AssetResourceLoadingDataRequest.
 func NewAssetResourceLoadingDataRequest() *AssetResourceLoadingDataRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetResourceLoadingDataRequest")), objc.RegisterName("new"))
 	return assetResourceLoadingDataRequestAdopt(_id)
 }
 
-// Provides data to the loading request.
+// RespondWithData provides data to the loading request.
 func (x *AssetResourceLoadingDataRequest) RespondWithData(data obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("respondWithData:"), objref.IDOf(data))
 }
 
-// The position within the resource of the first byte requested.
+// RequestedOffset the position within the resource of the first byte requested.
 func (x *AssetResourceLoadingDataRequest) RequestedOffset() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("requestedOffset"))
 	return _r
 }
 
-// The length of the data requested. Note that requestsAllDataToEndOfResource will be set to YES when the entire remaining length of the resource is being requested from requestedOffset to the end of the resource. This can occur even when the content length has not yet been reported by you via a prior finished loading request. When requestsAllDataToEndOfResource has a value of YES, you should disregard the value of requestedLength and incrementally provide as much data starting from the requestedOffset as the resource contains, until you have provided all of the available data successfully and invoked -finishLoading, until you have encountered a failure and invoked -finishLoadingWithError:, or until you have received -resourceLoader:didCancelLoadingRequest: for the AVAssetResourceLoadingRequest from which the AVAssetResourceLoadingDataRequest was obtained. When requestsAllDataToEndOfResource is YES and the content length has not yet been provided by you via a prior finished loading request, the value of requestedLength is set to NSIntegerMax. Starting in macOS 10.11 and iOS 9.0, in 32-bit applications requestedLength is also set to NSIntegerMax when all of the remaining resource data is being requested and the known length of the remaining data exceeds NSIntegerMax.
+// RequestedLength the length of the data requested. Note that requestsAllDataToEndOfResource will be set to YES when the entire remaining length of the resource is being requested from requestedOffset to the end of the resource. This can occur even when the content length has not yet been reported by you via a prior finished loading request. When requestsAllDataToEndOfResource has a value of YES, you should disregard the value of requestedLength and incrementally provide as much data starting from the requestedOffset as the resource contains, until you have provided all of the available data successfully and invoked -finishLoading, until you have encountered a failure and invoked -finishLoadingWithError:, or until you have received -resourceLoader:didCancelLoadingRequest: for the AVAssetResourceLoadingRequest from which the AVAssetResourceLoadingDataRequest was obtained. When requestsAllDataToEndOfResource is YES and the content length has not yet been provided by you via a prior finished loading request, the value of requestedLength is set to NSIntegerMax. Starting in macOS 10.11 and iOS 9.0, in 32-bit applications requestedLength is also set to NSIntegerMax when all of the remaining resource data is being requested and the known length of the remaining data exceeds NSIntegerMax.
 func (x *AssetResourceLoadingDataRequest) RequestedLength() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("requestedLength"))
 	return _r
 }
 
-// Specifies that the entire remaining length of the resource from requestedOffset to the end of the resource is being requested. When requestsAllDataToEndOfResource has a value of YES, you should disregard the value of requestedLength and incrementally provide as much data starting from the requestedOffset as the resource contains, until you have provided all of the available data successfully and invoked -finishLoading, until you have encountered a failure and invoked -finishLoadingWithError:, or until you have received -resourceLoader:didCancelLoadingRequest: for the AVAssetResourceLoadingRequest from which the AVAssetResourceLoadingDataRequest was obtained.
+// RequestsAllDataToEndOfResource specifies that the entire remaining length of the resource from requestedOffset to the end of the resource is being requested. When requestsAllDataToEndOfResource has a value of YES, you should disregard the value of requestedLength and incrementally provide as much data starting from the requestedOffset as the resource contains, until you have provided all of the available data successfully and invoked -finishLoading, until you have encountered a failure and invoked -finishLoadingWithError:, or until you have received -resourceLoader:didCancelLoadingRequest: for the AVAssetResourceLoadingRequest from which the AVAssetResourceLoadingDataRequest was obtained.
 func (x *AssetResourceLoadingDataRequest) RequestsAllDataToEndOfResource() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requestsAllDataToEndOfResource"))
 	return _r
 }
 
-// The position within the resource of the next byte within the resource following the bytes that have already been provided via prior invocations of -respondWithData.
+// CurrentOffset the position within the resource of the next byte within the resource following the bytes that have already been provided via prior invocations of -respondWithData.
 func (x *AssetResourceLoadingDataRequest) CurrentOffset() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("currentOffset"))
 	return _r

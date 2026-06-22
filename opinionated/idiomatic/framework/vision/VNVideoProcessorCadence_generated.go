@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the cadence at which to process video.
-//
 // VideoProcessorCadence is an idiomatic wrapper over the Objective-C class VNVideoProcessorCadence.
+//
+// VideoProcessorCadence is an abstract base — you do not construct it directly. Construct one of [VideoProcessorFrameRateCadence], [VideoProcessorTimeIntervalCadence] and pass it where a VideoProcessorCadence is accepted.
+//
+// An object that defines the cadence at which to process video.
 type VideoProcessorCadence struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func VideoProcessorCadenceFromID(id objc.ID) *VideoProcessorCadence {
 	if id == 0 {
 		return nil
 	}
-	x := &VideoProcessorCadence{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VideoProcessorCadence{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func videoProcessorCadenceAdopt(id objc.ID) *VideoProcessorCadence {
 	if id == 0 {
 		return nil
 	}
-	x := &VideoProcessorCadence{Handle: objref.Wrap(id)}
+	x := &VideoProcessorCadence{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *VideoProcessorCadence) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewVideoProcessorCadence creates a new VideoProcessorCadence.
-func NewVideoProcessorCadence() *VideoProcessorCadence {
-	_id := objc.Send[objc.ID](objc.ID(_class("VNVideoProcessorCadence")), objc.RegisterName("new"))
-	return videoProcessorCadenceAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VideoProcessorCadence) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // VideoProcessorCadenceable is the interface implemented by [VideoProcessorCadence], for mocking and DI.
@@ -70,3 +74,10 @@ type VideoProcessorCadenceable interface {
 }
 
 var _ VideoProcessorCadenceable = (*VideoProcessorCadence)(nil)
+
+// isVideoProcessorCadence marks VideoProcessorCadence — and, by embedding promotion, its
+// subclasses — as a member of the VideoProcessorCadence hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *VideoProcessorCadence) isVideoProcessorCadence() {}
+
+var _ VideoProcessorCadenceProvider = (*VideoProcessorCadence)(nil)

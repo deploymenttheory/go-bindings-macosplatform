@@ -11,31 +11,31 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Encodes a specified tag using BER-TLV tag encoding rules.
+// DataForTag encodes a specified tag using BER-TLV tag encoding rules.
 func DataForTag(tag uint64) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("TKBERTLVRecord")), objc.RegisterName("dataForTag:"), tag)
 	return obj.Wrap(_r)
 }
 
-// Global pool of SmartCard reader slots. macOS: Note that defaultManager instance is accessible only if the calling application has 'com.apple.security.smartcard' entitlement set to Boolean:YES.  If the calling application does not have this entitlement, defaultManager is always set to nil. iOS: The defaultManager instance is always accessible.
+// DefaultManager global pool of SmartCard reader slots. macOS: Note that defaultManager instance is accessible only if the calling application has 'com.apple.security.smartcard' entitlement set to Boolean:YES.  If the calling application does not have this entitlement, defaultManager is always set to nil. iOS: The defaultManager instance is always accessible.
 func DefaultManager() *SmartCardSlotManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("TKSmartCardSlotManager")), objc.RegisterName("defaultManager"))
 	return SmartCardSlotManagerFromID(_r)
 }
 
-// Creates and returns a TLV record from by parsing the specified data.
+// RecordFromData creates and returns a TLV record from by parsing the specified data.
 func RecordFromData(data obj.Object) *TLVRecord {
 	_r := objc.Send[objc.ID](objc.ID(_class("TKTLVRecord")), objc.RegisterName("recordFromData:"), objref.IDOf(data))
 	return TLVRecordFromID(_r)
 }
 
-// Creates and returns an array of TLV records from the specified data.
+// SequenceOfRecordsFromData creates and returns an array of TLV records from the specified data.
 func SequenceOfRecordsFromData(data obj.Object) []*TLVRecord {
 	_r := objc.Send[objc.ID](objc.ID(_class("TKTLVRecord")), objc.RegisterName("sequenceOfRecordsFromData:"), objref.IDOf(data))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *TLVRecord { return TLVRecordFromID(_id) })
 }
 
-// Contains dictionary of token class configurations keyed by TKTokenDriverClassID of token driver. Hosting application of token extension will contain the list of configurations for hosted token extensions. All other callers will get an empty array. This means that only token's hosting application can actually modify token's configuration. Typically, hosting application will contain only one token extension, therefore this dictionary will have one element.
+// DriverConfigurations contains dictionary of token class configurations keyed by TKTokenDriverClassID of token driver. Hosting application of token extension will contain the list of configurations for hosted token extensions. All other callers will get an empty array. This means that only token's hosting application can actually modify token's configuration. Typically, hosting application will contain only one token extension, therefore this dictionary will have one element.
 func DriverConfigurations() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("TKTokenDriverConfiguration")), objc.RegisterName("driverConfigurations"))
 	return obj.Wrap(_r)

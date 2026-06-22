@@ -11,29 +11,35 @@ import (
 // AssetChangeRequestProvider is accepted wherever a PHAssetChangeRequest (or one of its subclasses) is expected.
 type AssetChangeRequestProvider interface {
 	objref.Object
+	isAssetChangeRequest()
 }
 
 // AssetCollectionProvider is accepted wherever a PHAssetCollection (or one of its subclasses) is expected.
 type AssetCollectionProvider interface {
 	objref.Object
+	isAssetCollection()
 }
 
 // ChangeRequestProvider is accepted wherever a PHChangeRequest (or one of its subclasses) is expected.
 type ChangeRequestProvider interface {
 	objref.Object
+	isChangeRequest()
 }
 
 // CollectionProvider is accepted wherever a PHCollection (or one of its subclasses) is expected.
 type CollectionProvider interface {
 	objref.Object
+	isCollection()
 }
 
 // ImageManagerProvider is accepted wherever a PHImageManager (or one of its subclasses) is expected.
 type ImageManagerProvider interface {
 	objref.Object
+	isImageManager()
 }
 
 // ObjectProvider is accepted wherever a PHObject (or one of its subclasses) is expected.
 type ObjectProvider interface {
 	objref.Object
+	isObject()
 }

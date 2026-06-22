@@ -10,30 +10,31 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// SharedCoordinator wraps the corresponding Objective-C method.
 func SharedCoordinator() *CollaborationCoordinator {
 	_r := objc.Send[objc.ID](objc.ID(_class("SWCollaborationCoordinator")), objc.RegisterName("sharedCoordinator"))
 	return CollaborationCoordinatorFromID(_r)
 }
 
-// Creates and initializes a collaboration option object with a provided title and identifier.
+// OptionWithTitleIdentifier creates and initializes a collaboration option object with a provided title and identifier.
 func OptionWithTitleIdentifier(title string, identifier string) *CollaborationOption {
 	_r := objc.Send[objc.ID](objc.ID(_class("SWCollaborationOption")), objc.RegisterName("optionWithTitle:identifier:"), purego.NSString(title), purego.NSString(identifier))
 	return CollaborationOptionFromID(_r)
 }
 
-// Creates and initializes a collaboration options group object.
+// OptionsGroupWithIdentifierOptions creates and initializes a collaboration options group object.
 func OptionsGroupWithIdentifierOptions(identifier string, options []*CollaborationOption) *CollaborationOptionsGroup {
 	_r := objc.Send[objc.ID](objc.ID(_class("SWCollaborationOptionsGroup")), objc.RegisterName("optionsGroupWithIdentifier:options:"), purego.NSString(identifier), purego.SliceToNSArray(options, func(_v *CollaborationOption) objc.ID { return objref.IDOf(_v) }))
 	return CollaborationOptionsGroupFromID(_r)
 }
 
-// Creates and initializes a collaboration share options object the array of groups and a summary string.
+// ShareOptionsWithOptionsGroupsSummary creates and initializes a collaboration share options object the array of groups and a summary string.
 func ShareOptionsWithOptionsGroupsSummary(optionsGroups []*CollaborationOptionsGroup, summary string) *CollaborationShareOptions {
 	_r := objc.Send[objc.ID](objc.ID(_class("SWCollaborationShareOptions")), objc.RegisterName("shareOptionsWithOptionsGroups:summary:"), purego.SliceToNSArray(optionsGroups, func(_v *CollaborationOptionsGroup) objc.ID { return objref.IDOf(_v) }), purego.NSString(summary))
 	return CollaborationShareOptionsFromID(_r)
 }
 
-// Creates and initializes a collaboration share options object with the array of groups.
+// ShareOptionsWithOptionsGroups creates and initializes a collaboration share options object with the array of groups.
 func ShareOptionsWithOptionsGroups(optionsGroups []*CollaborationOptionsGroup) *CollaborationShareOptions {
 	_r := objc.Send[objc.ID](objc.ID(_class("SWCollaborationShareOptions")), objc.RegisterName("shareOptionsWithOptionsGroups:"), purego.SliceToNSArray(optionsGroups, func(_v *CollaborationOptionsGroup) objc.ID { return objref.IDOf(_v) }))
 	return CollaborationShareOptionsFromID(_r)

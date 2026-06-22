@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that determines which audio to play.
-//
 // SoundEvent is an idiomatic wrapper over the Objective-C class PHASESoundEvent.
+//
+// An object that determines which audio to play.
 type SoundEvent struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func SoundEventFromID(id objc.ID) *SoundEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &SoundEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SoundEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func soundEventAdopt(id objc.ID) *SoundEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &SoundEvent{Handle: objref.Wrap(id)}
+	x := &SoundEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,10 +62,14 @@ func (x *SoundEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a sound event node with the given asset and mixer parameters.
-//
-// NewSoundEventWithEngineAssetIdentifierMixerParametersError creates a new SoundEvent.
-func NewSoundEventWithEngineAssetIdentifierMixerParametersError(engine *Engine, assetIdentifier string, mixerParameters *MixerParameters) (*SoundEvent, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SoundEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSoundEventWithEngineAssetIdentifierMixerParametersError creates a sound event node with the given asset and mixer parameters.
+func NewSoundEventWithEngineAssetIdentifierMixerParametersError(engine *Engine, assetIdentifier string, mixerParameters *MixerParameters) (result *SoundEvent, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESoundEvent")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:assetIdentifier:mixerParameters:error:"), objref.IDOf(engine), purego.NSString(assetIdentifier), objref.IDOf(mixerParameters), unsafe.Pointer(&_nsErr))
@@ -73,10 +79,8 @@ func NewSoundEventWithEngineAssetIdentifierMixerParametersError(engine *Engine, 
 	return soundEventAdopt(_id), nil
 }
 
-// Creates a sound event node with the given asset.
-//
-// NewSoundEventWithEngineAssetIdentifierError creates a new SoundEvent.
-func NewSoundEventWithEngineAssetIdentifierError(engine *Engine, assetIdentifier string) (*SoundEvent, error) {
+// NewSoundEventWithEngineAssetIdentifierError creates a sound event node with the given asset.
+func NewSoundEventWithEngineAssetIdentifierError(engine *Engine, assetIdentifier string) (result *SoundEvent, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESoundEvent")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:assetIdentifier:error:"), objref.IDOf(engine), purego.NSString(assetIdentifier), unsafe.Pointer(&_nsErr))
@@ -86,63 +90,63 @@ func NewSoundEventWithEngineAssetIdentifierError(engine *Engine, assetIdentifier
 	return soundEventAdopt(_id), nil
 }
 
-// Pauses the sound event.
+// Pause pauses the sound event.
 func (x *SoundEvent) Pause() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pause"))
 }
 
-// Resumes the sound event.
+// Resume resumes the sound event.
 func (x *SoundEvent) Resume() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resume"))
 }
 
-// Resume the sound event at a specific time A nil time parameter will resume immediately. The device time is not scaled by UnitsPerSecond and is in seconds.
+// ResumeAtTime resume the sound event at a specific time A nil time parameter will resume immediately. The device time is not scaled by UnitsPerSecond and is in seconds.
 func (x *SoundEvent) ResumeAtTime(time_ obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeAtTime:"), objref.IDOf(time_))
 }
 
-// Stops a sound event and prevents it from resuming.
+// StopAndInvalidate stops a sound event and prevents it from resuming.
 func (x *SoundEvent) StopAndInvalidate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopAndInvalidate"))
 }
 
-// Sound Event's current rendering state
+// RenderingState sound Event's current rendering state
 func (x *SoundEvent) RenderingState() RenderingState {
 	_r := objc.Send[RenderingState](objref.IDOf(x), objc.RegisterName("renderingState"))
 	return _r
 }
 
-// Sound Event's current preparation state
+// PrepareState sound Event's current preparation state
 func (x *SoundEvent) PrepareState() SoundEventPrepareState {
 	_r := objc.Send[SoundEventPrepareState](objref.IDOf(x), objc.RegisterName("prepareState"))
 	return _r
 }
 
-// A Dictionary containing the MetaParameters associated with this sound event
+// MetaParameters a Dictionary containing the MetaParameters associated with this sound event
 func (x *SoundEvent) MetaParameters() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metaParameters"))
 	return obj.Wrap(_r)
 }
 
-// A Dictionary containing the mix nodes associated with this sound event
+// Mixers a Dictionary containing the mix nodes associated with this sound event
 func (x *SoundEvent) Mixers() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mixers"))
 	return obj.Wrap(_r)
 }
 
-// A Dictionary containing the push stream nodes associated with this sound event, for pushing buffers to.
+// PushStreamNodes a Dictionary containing the push stream nodes associated with this sound event, for pushing buffers to.
 func (x *SoundEvent) PushStreamNodes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pushStreamNodes"))
 	return obj.Wrap(_r)
 }
 
-// A Dictionary containing the pull stream nodes associated with this sound event, for setting renderBlocks on.
+// PullStreamNodes a Dictionary containing the pull stream nodes associated with this sound event, for setting renderBlocks on.
 func (x *SoundEvent) PullStreamNodes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pullStreamNodes"))
 	return obj.Wrap(_r)
 }
 
-// A boolean that tell if this sound event will run indefinitely, or finish executing on its own
+// IsIndefinite a boolean that tell if this sound event will run indefinitely, or finish executing on its own
 func (x *SoundEvent) IsIndefinite() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isIndefinite"))
 	return _r

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable object representing a phone number for a contact.
-//
 // PhoneNumber is an idiomatic wrapper over the Objective-C class CNPhoneNumber.
+//
+// An immutable object representing a phone number for a contact.
 type PhoneNumber struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PhoneNumberFromID(id objc.ID) *PhoneNumber {
 	if id == 0 {
 		return nil
 	}
-	x := &PhoneNumber{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PhoneNumber{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func phoneNumberAdopt(id objc.ID) *PhoneNumber {
 	if id == 0 {
 		return nil
 	}
-	x := &PhoneNumber{Handle: objref.Wrap(id)}
+	x := &PhoneNumber{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +60,26 @@ func (x *PhoneNumber) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PhoneNumber) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPhoneNumber creates a new PhoneNumber.
 func NewPhoneNumber() *PhoneNumber {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNPhoneNumber")), objc.RegisterName("new"))
 	return phoneNumberAdopt(_id)
 }
 
-// Returns a new phone number object initialized with the specified phone number string.
-//
-// NewPhoneNumberWithStringValue creates a new PhoneNumber.
+// NewPhoneNumberWithStringValue returns a new phone number object initialized with the specified phone number string.
 func NewPhoneNumberWithStringValue(string_ string) *PhoneNumber {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CNPhoneNumber")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStringValue:"), purego.NSString(string_))
 	return phoneNumberAdopt(_id)
 }
 
+// StringValue wraps the corresponding Objective-C method.
 func (x *PhoneNumber) StringValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
 	if _r == 0 {

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The kind of suggestion to use in a query.
-//
 // Suggestion is an idiomatic wrapper over the Objective-C class CSSuggestion.
+//
+// The kind of suggestion to use in a query.
 type Suggestion struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SuggestionFromID(id objc.ID) *Suggestion {
 	if id == 0 {
 		return nil
 	}
-	x := &Suggestion{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Suggestion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func suggestionAdopt(id objc.ID) *Suggestion {
 	if id == 0 {
 		return nil
 	}
-	x := &Suggestion{Handle: objref.Wrap(id)}
+	x := &Suggestion{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,25 @@ func (x *Suggestion) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Suggestion) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSuggestion creates a new Suggestion.
 func NewSuggestion() *Suggestion {
 	_id := objc.Send[objc.ID](objc.ID(_class("CSSuggestion")), objc.RegisterName("new"))
 	return suggestionAdopt(_id)
 }
 
+// LocalizedAttributedSuggestion wraps the corresponding Objective-C method.
 func (x *Suggestion) LocalizedAttributedSuggestion() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedAttributedSuggestion"))
 	return obj.Wrap(_r)
 }
 
+// SuggestionKind wraps the corresponding Objective-C method.
 func (x *Suggestion) SuggestionKind() SuggestionKind {
 	_r := objc.Send[SuggestionKind](objref.IDOf(x), objc.RegisterName("suggestionKind"))
 	return _r

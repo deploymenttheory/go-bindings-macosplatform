@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// WebDownload objects initiate download client requests on behalf of a delegate. A download request involves loading the data, decoding it (if necessary), and saving it to a file. Instances of this class behave similar to NSURLDownload except delegates of WebDownload may implement an additional delegate method. The method allows the delegate to specify the window to be used for authentication sheets. If the delegate does not implement this method, the WebDownload object will prompt the user for authentication using the standard WebKit authentication panel, as either a sheet or window. There are no additional methods defined in this class. See WebDownloadDelegate for the delegate method.
-//
 // WebDownload is an idiomatic wrapper over the Objective-C class WebDownload.
+//
+// WebDownload objects initiate download client requests on behalf of a delegate. A download request involves loading the data, decoding it (if necessary), and saving it to a file. Instances of this class behave similar to NSURLDownload except delegates of WebDownload may implement an additional delegate method. The method allows the delegate to specify the window to be used for authentication sheets. If the delegate does not implement this method, the WebDownload object will prompt the user for authentication using the standard WebKit authentication panel, as either a sheet or window. There are no additional methods defined in this class. See WebDownloadDelegate for the delegate method.
 type WebDownload struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WebDownloadFromID(id objc.ID) *WebDownload {
 	if id == 0 {
 		return nil
 	}
-	x := &WebDownload{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WebDownload{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func webDownloadAdopt(id objc.ID) *WebDownload {
 	if id == 0 {
 		return nil
 	}
-	x := &WebDownload{Handle: objref.Wrap(id)}
+	x := &WebDownload{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *WebDownload) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *WebDownload) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WebDownload) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewWebDownload creates a new WebDownload.

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Groups together parameters for the creation of a new command queue.
-//
 // MTL4CommandQueueDescriptor is an idiomatic wrapper over the Objective-C class MTL4CommandQueueDescriptor.
+//
+// Groups together parameters for the creation of a new command queue.
 type MTL4CommandQueueDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MTL4CommandQueueDescriptorFromID(id objc.ID) *MTL4CommandQueueDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4CommandQueueDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTL4CommandQueueDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTL4CommandQueueDescriptorAdopt(id objc.ID) *MTL4CommandQueueDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4CommandQueueDescriptor{Handle: objref.Wrap(id)}
+	x := &MTL4CommandQueueDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,29 +60,31 @@ func (x *MTL4CommandQueueDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTL4CommandQueueDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTL4CommandQueueDescriptor creates a new MTL4CommandQueueDescriptor.
 func NewMTL4CommandQueueDescriptor() *MTL4CommandQueueDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTL4CommandQueueDescriptor")), objc.RegisterName("new"))
 	return mTL4CommandQueueDescriptorAdopt(_id)
 }
 
-// Assigns an optional label to the command queue instance for debugging purposes.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel assigns an optional label to the command queue instance for debugging purposes.
 func (x *MTL4CommandQueueDescriptor) WithLabel(label string) *MTL4CommandQueueDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Assigns a dispatch queue to which Metal submits feedback notification blocks.
-//
-// WithFeedbackQueue sets feedbackQueue and returns the receiver so calls can be chained.
+// WithFeedbackQueue assigns a dispatch queue to which Metal submits feedback notification blocks.
 func (x *MTL4CommandQueueDescriptor) WithFeedbackQueue(feedbackQueue obj.Object) *MTL4CommandQueueDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFeedbackQueue:"), objref.IDOf(feedbackQueue))
 	return x
 }
 
-// Assigns an optional label to the command queue instance for debugging purposes.
+// Label assigns an optional label to the command queue instance for debugging purposes.
 func (x *MTL4CommandQueueDescriptor) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -89,16 +93,18 @@ func (x *MTL4CommandQueueDescriptor) Label() string {
 	return purego.GoString(_r)
 }
 
+// SetLabel wraps the corresponding Objective-C method.
 func (x *MTL4CommandQueueDescriptor) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// Assigns a dispatch queue to which Metal submits feedback notification blocks. When you assign a dispatch queue via this method, Metal requires that the queue parameter you provide is a serial queue. If you set the value of property to `nil`, the default, Metal allocates an internal dispatch queue to service feedback notifications.
+// FeedbackQueue assigns a dispatch queue to which Metal submits feedback notification blocks. When you assign a dispatch queue via this method, Metal requires that the queue parameter you provide is a serial queue. If you set the value of property to `nil`, the default, Metal allocates an internal dispatch queue to service feedback notifications.
 func (x *MTL4CommandQueueDescriptor) FeedbackQueue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("feedbackQueue"))
 	return obj.Wrap(_r)
 }
 
+// SetFeedbackQueue wraps the corresponding Objective-C method.
 func (x *MTL4CommandQueueDescriptor) SetFeedbackQueue(feedbackQueue obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFeedbackQueue:"), objref.IDOf(feedbackQueue))
 }

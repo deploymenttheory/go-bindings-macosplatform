@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A symbol effect that applies the Breathe animation to symbol images.
-//
 // SymbolBreatheEffect is an idiomatic wrapper over the Objective-C class NSSymbolBreatheEffect.
+//
+// It embeds [SymbolEffect], promoting that type's methods.
+//
+// A symbol effect that applies the Breathe animation to symbol images.
 type SymbolBreatheEffect struct {
-	objref.Handle
+	SymbolEffect
 }
 
 // SymbolBreatheEffectFromID adopts an existing Objective-C object as a SymbolBreatheEffect
@@ -25,7 +26,8 @@ func SymbolBreatheEffectFromID(id objc.ID) *SymbolBreatheEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolBreatheEffect{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SymbolBreatheEffect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func symbolBreatheEffectAdopt(id objc.ID) *SymbolBreatheEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolBreatheEffect{Handle: objref.Wrap(id)}
+	x := &SymbolBreatheEffect{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SymbolBreatheEffect) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SymbolBreatheEffect) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SymbolBreatheEffect) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSymbolBreatheEffect creates a new SymbolBreatheEffect.
@@ -64,13 +52,13 @@ func NewSymbolBreatheEffect() *SymbolBreatheEffect {
 	return symbolBreatheEffectAdopt(_id)
 }
 
-// Returns a copy of the effect that animates incrementally, by layer.
+// EffectWithByLayer returns a copy of the effect that animates incrementally, by layer.
 func (x *SymbolBreatheEffect) EffectWithByLayer() *SymbolBreatheEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
 	return SymbolBreatheEffectFromID(_r)
 }
 
-// Returns a copy of the effect that animates all layers of the symbol simultaneously.
+// EffectWithWholeSymbol returns a copy of the effect that animates all layers of the symbol simultaneously.
 func (x *SymbolBreatheEffect) EffectWithWholeSymbol() *SymbolBreatheEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolBreatheEffectFromID(_r)
@@ -84,3 +72,5 @@ type SymbolBreatheEffectable interface {
 }
 
 var _ SymbolBreatheEffectable = (*SymbolBreatheEffect)(nil)
+
+var _ SymbolEffectProvider = (*SymbolBreatheEffect)(nil)

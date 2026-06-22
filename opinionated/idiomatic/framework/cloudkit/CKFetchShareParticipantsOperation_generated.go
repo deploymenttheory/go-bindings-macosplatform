@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An operation that converts user identities into share participants.
-//
 // FetchShareParticipantsOperation is an idiomatic wrapper over the Objective-C class CKFetchShareParticipantsOperation.
+//
+// It embeds [Operation], promoting that type's methods.
+//
+// An operation that converts user identities into share participants.
 type FetchShareParticipantsOperation struct {
-	objref.Handle
+	Operation
 }
 
 // FetchShareParticipantsOperationFromID adopts an existing Objective-C object as a FetchShareParticipantsOperation
@@ -27,7 +28,8 @@ func FetchShareParticipantsOperationFromID(id objc.ID) *FetchShareParticipantsOp
 	if id == 0 {
 		return nil
 	}
-	x := &FetchShareParticipantsOperation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FetchShareParticipantsOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,24 +42,10 @@ func fetchShareParticipantsOperationAdopt(id objc.ID) *FetchShareParticipantsOpe
 	if id == 0 {
 		return nil
 	}
-	x := &FetchShareParticipantsOperation{Handle: objref.Wrap(id)}
+	x := &FetchShareParticipantsOperation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *FetchShareParticipantsOperation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FetchShareParticipantsOperation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FetchShareParticipantsOperation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewFetchShareParticipantsOperation creates a new FetchShareParticipantsOperation.
@@ -66,97 +54,75 @@ func NewFetchShareParticipantsOperation() *FetchShareParticipantsOperation {
 	return fetchShareParticipantsOperationAdopt(_id)
 }
 
-// Creates an operation for generating share participants from the specified user data.
-//
-// NewFetchShareParticipantsOperationWithUserIdentityLookupInfos creates a new FetchShareParticipantsOperation.
+// NewFetchShareParticipantsOperationWithUserIdentityLookupInfos creates an operation for generating share participants from the specified user data.
 func NewFetchShareParticipantsOperationWithUserIdentityLookupInfos(userIdentityLookupInfos []*UserIdentityLookupInfo) *FetchShareParticipantsOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKFetchShareParticipantsOperation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUserIdentityLookupInfos:"), purego.SliceToNSArray(userIdentityLookupInfos, func(_v *UserIdentityLookupInfo) objc.ID { return objref.IDOf(_v) }))
 	return fetchShareParticipantsOperationAdopt(_id)
 }
 
-// The user data for the participants.
-//
-// WithUserIdentityLookupInfos sets the collection and returns the receiver so calls can be chained.
+// WithUserIdentityLookupInfos the user data for the participants.
 func (x *FetchShareParticipantsOperation) WithUserIdentityLookupInfos(items ...*UserIdentityLookupInfo) *FetchShareParticipantsOperation {
 	_arr := purego.SliceToNSArray(items, func(_v *UserIdentityLookupInfo) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIdentityLookupInfos:"), _arr)
 	return x
 }
 
-// The closure to execute as the operation generates individual participants.
-//
-// WithShareParticipantFetchedBlock sets shareParticipantFetchedBlock and returns the receiver so calls can be chained.
+// WithShareParticipantFetchedBlock the closure to execute as the operation generates individual participants.
 func (x *FetchShareParticipantsOperation) WithShareParticipantFetchedBlock(shareParticipantFetchedBlock func(obj.Object)) *FetchShareParticipantsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShareParticipantFetchedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { shareParticipantFetchedBlock(obj.Wrap(_b0)) }))
 	return x
 }
 
-// The operation’s configuration.
-//
-// WithConfiguration sets configuration and returns the receiver so calls can be chained.
+// WithConfiguration the operation’s configuration.
 func (x *FetchShareParticipantsOperation) WithConfiguration(configuration *OperationConfiguration) *FetchShareParticipantsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
-// The operation’s group.
-//
-// WithGroup sets group and returns the receiver so calls can be chained.
+// WithGroup the operation’s group.
 func (x *FetchShareParticipantsOperation) WithGroup(group *OperationGroup) *FetchShareParticipantsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation.
-//
-// WithLongLivedOperationWasPersistedBlock sets longLivedOperationWasPersistedBlock and returns the receiver so calls can be chained.
+// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
 func (x *FetchShareParticipantsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchShareParticipantsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
 	return x
 }
 
-// The operation's container.
-//
-// WithContainer sets container and returns the receiver so calls can be chained.
+// WithContainer the operation's container.
 func (x *FetchShareParticipantsOperation) WithContainer(container *Container) *FetchShareParticipantsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network.
-//
-// WithAllowsCellularAccess sets allowsCellularAccess and returns the receiver so calls can be chained.
+// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
 func (x *FetchShareParticipantsOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchShareParticipantsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived.
-//
-// WithLongLived sets longLived and returns the receiver so calls can be chained.
+// WithLongLived a Boolean value that indicates whether the operation is long-lived.
 func (x *FetchShareParticipantsOperation) WithLongLived(longLived bool) *FetchShareParticipantsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The timeout interval when waiting for additional data.
-//
-// WithTimeoutIntervalForRequest sets timeoutIntervalForRequest and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
 func (x *FetchShareParticipantsOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchShareParticipantsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can use.
-//
-// WithTimeoutIntervalForResource sets timeoutIntervalForResource and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
 func (x *FetchShareParticipantsOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchShareParticipantsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
-// The user data for the participants. Use this property to view or change the participants user data. If you intend to specify or change the value of this property, do so before you execute the operation or submit it to a queue. - Note: If you don't set “CKFetchShareParticipantsOperation/userIdentityLookupInfos“ prior to executing the operation, it returns immediately with no results.
+// UserIdentityLookupInfos the user data for the participants. Use this property to view or change the participants user data. If you intend to specify or change the value of this property, do so before you execute the operation or submit it to a queue. - Note: If you don't set “CKFetchShareParticipantsOperation/userIdentityLookupInfos“ prior to executing the operation, it returns immediately with no results.
 //
 // UserIdentityLookupInfos returns the collection as a Go slice.
 func (x *FetchShareParticipantsOperation) UserIdentityLookupInfos() []*UserIdentityLookupInfo {
@@ -164,12 +130,15 @@ func (x *FetchShareParticipantsOperation) UserIdentityLookupInfos() []*UserIdent
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UserIdentityLookupInfo { return UserIdentityLookupInfoFromID(_id) })
 }
 
+// SetUserIdentityLookupInfos wraps the corresponding Objective-C method.
 func (x *FetchShareParticipantsOperation) SetUserIdentityLookupInfos(userIdentityLookupInfos []*UserIdentityLookupInfo) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIdentityLookupInfos:"), purego.SliceToNSArray(userIdentityLookupInfos, func(_v *UserIdentityLookupInfo) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SetShareParticipantFetchedBlock wraps the corresponding Objective-C method.
+//
 // SetShareParticipantFetchedBlock blocks until the operation completes or ctx is cancelled.
-func (x *FetchShareParticipantsOperation) SetShareParticipantFetchedBlock(ctx context.Context) (*ShareParticipant, error) {
+func (x *FetchShareParticipantsOperation) SetShareParticipantFetchedBlock(ctx context.Context) (result *ShareParticipant, err error) {
 	type _result struct {
 		val *ShareParticipant
 		err error
@@ -190,6 +159,8 @@ func (x *FetchShareParticipantsOperation) SetShareParticipantFetchedBlock(ctx co
 	}
 }
 
+// SetFetchShareParticipantsCompletionBlock wraps the corresponding Objective-C method.
+//
 // SetFetchShareParticipantsCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (x *FetchShareParticipantsOperation) SetFetchShareParticipantsCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -227,3 +198,5 @@ type FetchShareParticipantsOperationable interface {
 }
 
 var _ FetchShareParticipantsOperationable = (*FetchShareParticipantsOperation)(nil)
+
+var _ OperationProvider = (*FetchShareParticipantsOperation)(nil)

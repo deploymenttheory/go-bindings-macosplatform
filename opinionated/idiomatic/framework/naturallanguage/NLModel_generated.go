@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A custom model trained to classify or tag natural language text.
-//
 // Model is an idiomatic wrapper over the Objective-C class NLModel.
+//
+// A custom model trained to classify or tag natural language text.
 type Model struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ModelFromID(id objc.ID) *Model {
 	if id == 0 {
 		return nil
 	}
-	x := &Model{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Model{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func modelAdopt(id objc.ID) *Model {
 	if id == 0 {
 		return nil
 	}
-	x := &Model{Handle: objref.Wrap(id)}
+	x := &Model{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *Model) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Model) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewModel creates a new Model.
 func NewModel() *Model {
 	_id := objc.Send[objc.ID](objc.ID(_class("NLModel")), objc.RegisterName("new"))
 	return modelAdopt(_id)
 }
 
-// Predicts a label for the given input string.
+// PredictedLabelForString predicts a label for the given input string.
 func (x *Model) PredictedLabelForString(string_ string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predictedLabelForString:"), purego.NSString(string_))
 	if _r == 0 {
@@ -73,24 +81,25 @@ func (x *Model) PredictedLabelForString(string_ string) string {
 	return purego.GoString(_r)
 }
 
-// Predicts a label for each string in the given array.
+// PredictedLabelsForTokens predicts a label for each string in the given array.
 func (x *Model) PredictedLabelsForTokens(tokens []string) []string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predictedLabelsForTokens:"), purego.SliceToNSArray(tokens, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Predicts multiple possible labels for the given input string.
+// PredictedLabelHypothesesForStringMaximumCount predicts multiple possible labels for the given input string.
 func (x *Model) PredictedLabelHypothesesForStringMaximumCount(string_ string, maximumCount int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predictedLabelHypothesesForString:maximumCount:"), purego.NSString(string_), maximumCount)
 	return obj.Wrap(_r)
 }
 
-// Predicts multiple possible labels for each string in the given array.
+// PredictedLabelHypothesesForTokensMaximumCount predicts multiple possible labels for each string in the given array.
 func (x *Model) PredictedLabelHypothesesForTokensMaximumCount(tokens []string, maximumCount int) []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predictedLabelHypothesesForTokens:maximumCount:"), purego.SliceToNSArray(tokens, func(_v string) objc.ID { return purego.NSString(_v) }), maximumCount)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// Configuration wraps the corresponding Objective-C method.
 func (x *Model) Configuration() *ModelConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
 	return ModelConfigurationFromID(_r)

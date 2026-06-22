@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A query for one-time access to a SMART Health Card or EU Digital COVID Certificate.
-//
 // VerifiableClinicalRecordQuery is an idiomatic wrapper over the Objective-C class HKVerifiableClinicalRecordQuery.
+//
+// It embeds [Query], promoting that type's methods.
+//
+// A query for one-time access to a SMART Health Card or EU Digital COVID Certificate.
 type VerifiableClinicalRecordQuery struct {
-	objref.Handle
+	Query
 }
 
 // VerifiableClinicalRecordQueryFromID adopts an existing Objective-C object as a VerifiableClinicalRecordQuery
@@ -25,7 +26,8 @@ func VerifiableClinicalRecordQueryFromID(id objc.ID) *VerifiableClinicalRecordQu
 	if id == 0 {
 		return nil
 	}
-	x := &VerifiableClinicalRecordQuery{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VerifiableClinicalRecordQuery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func verifiableClinicalRecordQueryAdopt(id objc.ID) *VerifiableClinicalRecordQue
 	if id == 0 {
 		return nil
 	}
-	x := &VerifiableClinicalRecordQuery{Handle: objref.Wrap(id)}
+	x := &VerifiableClinicalRecordQuery{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *VerifiableClinicalRecordQuery) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VerifiableClinicalRecordQuery) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VerifiableClinicalRecordQuery) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewVerifiableClinicalRecordQuery creates a new VerifiableClinicalRecordQuery.
@@ -64,7 +52,7 @@ func NewVerifiableClinicalRecordQuery() *VerifiableClinicalRecordQuery {
 	return verifiableClinicalRecordQueryAdopt(_id)
 }
 
-// The record types that need to be present on desired records.
+// RecordTypes the record types that need to be present on desired records.
 //
 // RecordTypes returns the collection as a Go slice.
 func (x *VerifiableClinicalRecordQuery) RecordTypes() []string {
@@ -72,7 +60,7 @@ func (x *VerifiableClinicalRecordQuery) RecordTypes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// The source type(s) of the records.
+// SourceTypes the source type(s) of the records.
 //
 // SourceTypes returns the collection as a Go slice.
 func (x *VerifiableClinicalRecordQuery) SourceTypes() []obj.Object {
@@ -88,3 +76,5 @@ type VerifiableClinicalRecordQueryable interface {
 }
 
 var _ VerifiableClinicalRecordQueryable = (*VerifiableClinicalRecordQuery)(nil)
+
+var _ QueryProvider = (*VerifiableClinicalRecordQuery)(nil)

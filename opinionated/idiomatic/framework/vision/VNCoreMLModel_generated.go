@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container for the model to use with Vision requests.
-//
 // CoreMLModel is an idiomatic wrapper over the Objective-C class VNCoreMLModel.
+//
+// A container for the model to use with Vision requests.
 type CoreMLModel struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CoreMLModelFromID(id objc.ID) *CoreMLModel {
 	if id == 0 {
 		return nil
 	}
-	x := &CoreMLModel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CoreMLModel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func coreMLModelAdopt(id objc.ID) *CoreMLModel {
 	if id == 0 {
 		return nil
 	}
-	x := &CoreMLModel{Handle: objref.Wrap(id)}
+	x := &CoreMLModel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +60,25 @@ func (x *CoreMLModel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CoreMLModel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCoreMLModel creates a new CoreMLModel.
 func NewCoreMLModel() *CoreMLModel {
 	_id := objc.Send[objc.ID](objc.ID(_class("VNCoreMLModel")), objc.RegisterName("new"))
 	return coreMLModelAdopt(_id)
 }
 
-// The name of the feature value that Vision sets from the request handler.
-//
-// WithInputImageFeatureName sets inputImageFeatureName and returns the receiver so calls can be chained.
+// WithInputImageFeatureName the name of the feature value that Vision sets from the request handler.
 func (x *CoreMLModel) WithInputImageFeatureName(inputImageFeatureName string) *CoreMLModel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputImageFeatureName:"), purego.NSString(inputImageFeatureName))
 	return x
 }
 
-// The name of the MLFeatureValue that Vision will set from the VNRequestHandler. Vision will use the first input it finds by default but it can be set to another featureName instead.
+// InputImageFeatureName the name of the MLFeatureValue that Vision will set from the VNRequestHandler. Vision will use the first input it finds by default but it can be set to another featureName instead.
 func (x *CoreMLModel) InputImageFeatureName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputImageFeatureName"))
 	if _r == 0 {
@@ -81,6 +87,7 @@ func (x *CoreMLModel) InputImageFeatureName() string {
 	return purego.GoString(_r)
 }
 
+// SetInputImageFeatureName wraps the corresponding Objective-C method.
 func (x *CoreMLModel) SetInputImageFeatureName(inputImageFeatureName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputImageFeatureName:"), purego.NSString(inputImageFeatureName))
 }

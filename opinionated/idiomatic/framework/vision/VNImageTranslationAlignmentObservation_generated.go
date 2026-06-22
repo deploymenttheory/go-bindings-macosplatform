@@ -6,17 +6,19 @@ package vision
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Affine transform information that an image-alignment request produces.
-//
 // ImageTranslationAlignmentObservation is an idiomatic wrapper over the Objective-C class VNImageTranslationAlignmentObservation.
+//
+// It embeds [ImageAlignmentObservation], promoting that type's methods.
+//
+// Affine transform information that an image-alignment request produces.
 type ImageTranslationAlignmentObservation struct {
-	objref.Handle
+	ImageAlignmentObservation
 }
 
 // ImageTranslationAlignmentObservationFromID adopts an existing Objective-C object as a ImageTranslationAlignmentObservation
@@ -25,7 +27,8 @@ func ImageTranslationAlignmentObservationFromID(id objc.ID) *ImageTranslationAli
 	if id == 0 {
 		return nil
 	}
-	x := &ImageTranslationAlignmentObservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageTranslationAlignmentObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func imageTranslationAlignmentObservationAdopt(id objc.ID) *ImageTranslationAlig
 	if id == 0 {
 		return nil
 	}
-	x := &ImageTranslationAlignmentObservation{Handle: objref.Wrap(id)}
+	x := &ImageTranslationAlignmentObservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ImageTranslationAlignmentObservation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageTranslationAlignmentObservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageTranslationAlignmentObservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewImageTranslationAlignmentObservation creates a new ImageTranslationAlignmentObservation.
@@ -64,9 +53,20 @@ func NewImageTranslationAlignmentObservation() *ImageTranslationAlignmentObserva
 	return imageTranslationAlignmentObservationAdopt(_id)
 }
 
+// AlignmentTransform wraps the corresponding Objective-C method.
+func (x *ImageTranslationAlignmentObservation) AlignmentTransform() corefoundation.CGAffineTransform {
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("alignmentTransform"))
+	return _r
+}
+
 // ImageTranslationAlignmentObservationable is the interface implemented by [ImageTranslationAlignmentObservation], for mocking and DI.
 type ImageTranslationAlignmentObservationable interface {
 	obj.Object
+	AlignmentTransform() corefoundation.CGAffineTransform
 }
 
 var _ ImageTranslationAlignmentObservationable = (*ImageTranslationAlignmentObservation)(nil)
+
+var _ ImageAlignmentObservationProvider = (*ImageTranslationAlignmentObservation)(nil)
+
+var _ ObservationProvider = (*ImageTranslationAlignmentObservation)(nil)

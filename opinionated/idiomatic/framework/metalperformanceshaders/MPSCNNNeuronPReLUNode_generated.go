@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation a PReLU neuron filter.
-//
 // CNNNeuronPReLUNode is an idiomatic wrapper over the Objective-C class MPSCNNNeuronPReLUNode.
+//
+// It embeds [CNNNeuronNode], promoting that type's methods.
+//
+// A representation a PReLU neuron filter.
 type CNNNeuronPReLUNode struct {
-	objref.Handle
+	CNNNeuronNode
 }
 
 // CNNNeuronPReLUNodeFromID adopts an existing Objective-C object as a CNNNeuronPReLUNode
@@ -25,7 +26,8 @@ func CNNNeuronPReLUNodeFromID(id objc.ID) *CNNNeuronPReLUNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNeuronPReLUNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNNeuronPReLUNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,38 +40,20 @@ func cNNNeuronPReLUNodeAdopt(id objc.ID) *CNNNeuronPReLUNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNeuronPReLUNode{Handle: objref.Wrap(id)}
+	x := &CNNNeuronPReLUNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNNeuronPReLUNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNNeuronPReLUNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNNeuronPReLUNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Init a node representing a MPSCNNNeuronTanH kernel For each pixel, applies the following function:
-//
-// NewCNNNeuronPReLUNodeWithSourceAData creates a new CNNNeuronPReLUNode.
+// NewCNNNeuronPReLUNodeWithSourceAData init a node representing a MPSCNNNeuronTanH kernel For each pixel, applies the following function:
 func NewCNNNeuronPReLUNodeWithSourceAData(sourceNode obj.Object, aData obj.Object) *CNNNeuronPReLUNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronPReLUNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:aData:"), objref.IDOf(sourceNode), objref.IDOf(aData))
 	return cNNNeuronPReLUNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNNeuronPReLUNode) WithLabel(label string) *CNNNeuronPReLUNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -82,3 +66,7 @@ type CNNNeuronPReLUNodeable interface {
 }
 
 var _ CNNNeuronPReLUNodeable = (*CNNNeuronPReLUNode)(nil)
+
+var _ CNNNeuronNodeProvider = (*CNNNeuronPReLUNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNNeuronPReLUNode)(nil)

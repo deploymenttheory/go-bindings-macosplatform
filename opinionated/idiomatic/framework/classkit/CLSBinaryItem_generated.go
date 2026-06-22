@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Activity information that is true or false, pass or fail, yes or no.
-//
 // BinaryItem is an idiomatic wrapper over the Objective-C class CLSBinaryItem.
+//
+// It embeds [ActivityItem], promoting that type's methods.
+//
+// Activity information that is true or false, pass or fail, yes or no.
 type BinaryItem struct {
-	objref.Handle
+	ActivityItem
 }
 
 // BinaryItemFromID adopts an existing Objective-C object as a BinaryItem
@@ -25,7 +26,8 @@ func BinaryItemFromID(id objc.ID) *BinaryItem {
 	if id == 0 {
 		return nil
 	}
-	x := &BinaryItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BinaryItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,62 +40,43 @@ func binaryItemAdopt(id objc.ID) *BinaryItem {
 	if id == 0 {
 		return nil
 	}
-	x := &BinaryItem{Handle: objref.Wrap(id)}
+	x := &BinaryItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *BinaryItem) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BinaryItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BinaryItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a new binary activity item of the given type.
-//
-// NewBinaryItemWithIdentifierTitleType creates a new BinaryItem.
+// NewBinaryItemWithIdentifierTitleType initializes a new binary activity item of the given type.
 func NewBinaryItemWithIdentifierTitleType(identifier string, title string, valueType BinaryValueType) *BinaryItem {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CLSBinaryItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:title:type:"), purego.NSString(identifier), purego.NSString(title), valueType)
 	return binaryItemAdopt(_id)
 }
 
-// The value that the binary activity item takes.
-//
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue the value that the binary activity item takes.
 func (x *BinaryItem) WithValue(value bool) *BinaryItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 	return x
 }
 
-// A human readable name for the activity item.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle a human readable name for the activity item.
 func (x *BinaryItem) WithTitle(title string) *BinaryItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// True or false value.
+// Value true or false value.
 func (x *BinaryItem) Value() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("value"))
 	return _r
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *BinaryItem) SetValue(value bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 }
 
-// Value type of this CLSBinaryItem. The type that best describes this CLSBinaryItem value.
+// ValueType value type of this CLSBinaryItem. The type that best describes this CLSBinaryItem value.
 func (x *BinaryItem) ValueType() BinaryValueType {
 	_r := objc.Send[BinaryValueType](objref.IDOf(x), objc.RegisterName("valueType"))
 	return _r
@@ -110,3 +93,7 @@ type BinaryItemable interface {
 }
 
 var _ BinaryItemable = (*BinaryItem)(nil)
+
+var _ ActivityItemProvider = (*BinaryItem)(nil)
+
+var _ ObjectProvider = (*BinaryItem)(nil)

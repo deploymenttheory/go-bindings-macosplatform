@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // AnimatedQuaternionArray is an idiomatic wrapper over the Objective-C class MDLAnimatedQuaternionArray.
+//
+// It embeds [AnimatedValue], promoting that type's methods.
 type AnimatedQuaternionArray struct {
-	objref.Handle
+	AnimatedValue
 }
 
 // AnimatedQuaternionArrayFromID adopts an existing Objective-C object as a AnimatedQuaternionArray
@@ -23,7 +24,8 @@ func AnimatedQuaternionArrayFromID(id objc.ID) *AnimatedQuaternionArray {
 	if id == 0 {
 		return nil
 	}
-	x := &AnimatedQuaternionArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AnimatedQuaternionArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func animatedQuaternionArrayAdopt(id objc.ID) *AnimatedQuaternionArray {
 	if id == 0 {
 		return nil
 	}
-	x := &AnimatedQuaternionArray{Handle: objref.Wrap(id)}
+	x := &AnimatedQuaternionArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AnimatedQuaternionArray) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AnimatedQuaternionArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AnimatedQuaternionArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAnimatedQuaternionArrayWithElementCount creates a new AnimatedQuaternionArray.
@@ -63,12 +51,13 @@ func NewAnimatedQuaternionArrayWithElementCount(arrayElementCount int) *Animated
 	return animatedQuaternionArrayAdopt(_id)
 }
 
-// WithInterpolation sets interpolation and returns the receiver so calls can be chained.
+// WithInterpolation sets the property and returns the receiver so calls can be chained.
 func (x *AnimatedQuaternionArray) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedQuaternionArray {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
 	return x
 }
 
+// ElementCount wraps the corresponding Objective-C method.
 func (x *AnimatedQuaternionArray) ElementCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("elementCount"))
 	return _r
@@ -82,3 +71,5 @@ type AnimatedQuaternionArrayable interface {
 }
 
 var _ AnimatedQuaternionArrayable = (*AnimatedQuaternionArray)(nil)
+
+var _ AnimatedValueProvider = (*AnimatedQuaternionArray)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An array of buffer layout descriptor objects.
-//
 // BufferLayoutDescriptorArray is an idiomatic wrapper over the Objective-C class MTLBufferLayoutDescriptorArray.
+//
+// An array of buffer layout descriptor objects.
 type BufferLayoutDescriptorArray struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func BufferLayoutDescriptorArrayFromID(id objc.ID) *BufferLayoutDescriptorArray 
 	if id == 0 {
 		return nil
 	}
-	x := &BufferLayoutDescriptorArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BufferLayoutDescriptorArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func bufferLayoutDescriptorArrayAdopt(id objc.ID) *BufferLayoutDescriptorArray {
 	if id == 0 {
 		return nil
 	}
-	x := &BufferLayoutDescriptorArray{Handle: objref.Wrap(id)}
+	x := &BufferLayoutDescriptorArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *BufferLayoutDescriptorArray) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BufferLayoutDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBufferLayoutDescriptorArray creates a new BufferLayoutDescriptorArray.
 func NewBufferLayoutDescriptorArray() *BufferLayoutDescriptorArray {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLBufferLayoutDescriptorArray")), objc.RegisterName("new"))
 	return bufferLayoutDescriptorArrayAdopt(_id)
 }
 
-// Returns the state of the specified buffer layout.
+// ObjectAtIndexedSubscript returns the state of the specified buffer layout.
 func (x *BufferLayoutDescriptorArray) ObjectAtIndexedSubscript(index int) *BufferLayoutDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), index)
 	return BufferLayoutDescriptorFromID(_r)
 }
 
-// Sets the state of the specified buffer layout.
+// SetObjectAtIndexedSubscript sets the state of the specified buffer layout.
 func (x *BufferLayoutDescriptorArray) SetObjectAtIndexedSubscript(bufferDesc *BufferLayoutDescriptor, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(bufferDesc), index)
 }

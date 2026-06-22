@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NDArrayBinaryPrimaryGradientKernel is an idiomatic wrapper over the Objective-C class MPSNDArrayBinaryPrimaryGradientKernel.
+//
+// NDArrayBinaryPrimaryGradientKernel is an abstract base — you do not construct it directly. Construct one of [NDArrayGatherGradient] and pass it where a NDArrayBinaryPrimaryGradientKernel is accepted.
 type NDArrayBinaryPrimaryGradientKernel struct {
-	objref.Handle
+	NDArrayMultiaryGradientKernel
 }
 
 // NDArrayBinaryPrimaryGradientKernelFromID adopts an existing Objective-C object as a NDArrayBinaryPrimaryGradientKernel
@@ -23,7 +24,8 @@ func NDArrayBinaryPrimaryGradientKernelFromID(id objc.ID) *NDArrayBinaryPrimaryG
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayBinaryPrimaryGradientKernel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NDArrayBinaryPrimaryGradientKernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,35 +38,13 @@ func nDArrayBinaryPrimaryGradientKernelAdopt(id objc.ID) *NDArrayBinaryPrimaryGr
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayBinaryPrimaryGradientKernel{Handle: objref.Wrap(id)}
+	x := &NDArrayBinaryPrimaryGradientKernel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NDArrayBinaryPrimaryGradientKernel) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NDArrayBinaryPrimaryGradientKernel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NDArrayBinaryPrimaryGradientKernel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewNDArrayBinaryPrimaryGradientKernel creates a new NDArrayBinaryPrimaryGradientKernel.
-func NewNDArrayBinaryPrimaryGradientKernel() *NDArrayBinaryPrimaryGradientKernel {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayBinaryPrimaryGradientKernel")), objc.RegisterName("new"))
-	return nDArrayBinaryPrimaryGradientKernelAdopt(_id)
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayBinaryPrimaryGradientKernel) WithLabel(label string) *NDArrayBinaryPrimaryGradientKernel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -77,3 +57,16 @@ type NDArrayBinaryPrimaryGradientKernelable interface {
 }
 
 var _ NDArrayBinaryPrimaryGradientKernelable = (*NDArrayBinaryPrimaryGradientKernel)(nil)
+
+// isNDArrayBinaryPrimaryGradientKernel marks NDArrayBinaryPrimaryGradientKernel — and, by embedding promotion, its
+// subclasses — as a member of the NDArrayBinaryPrimaryGradientKernel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NDArrayBinaryPrimaryGradientKernel) isNDArrayBinaryPrimaryGradientKernel() {}
+
+var _ NDArrayBinaryPrimaryGradientKernelProvider = (*NDArrayBinaryPrimaryGradientKernel)(nil)
+
+var _ NDArrayMultiaryGradientKernelProvider = (*NDArrayBinaryPrimaryGradientKernel)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayBinaryPrimaryGradientKernel)(nil)
+
+var _ KernelProvider = (*NDArrayBinaryPrimaryGradientKernel)(nil)

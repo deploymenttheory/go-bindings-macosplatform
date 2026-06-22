@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An enumerator that can access and list log entries.
-//
 // LogEnumerator is an idiomatic wrapper over the Objective-C class OSLogEnumerator.
+//
+// An enumerator that can access and list log entries.
 type LogEnumerator struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LogEnumeratorFromID(id objc.ID) *LogEnumerator {
 	if id == 0 {
 		return nil
 	}
-	x := &LogEnumerator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LogEnumerator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func logEnumeratorAdopt(id objc.ID) *LogEnumerator {
 	if id == 0 {
 		return nil
 	}
-	x := &LogEnumerator{Handle: objref.Wrap(id)}
+	x := &LogEnumerator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *LogEnumerator) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *LogEnumerator) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LogEnumerator) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewLogEnumerator creates a new LogEnumerator.

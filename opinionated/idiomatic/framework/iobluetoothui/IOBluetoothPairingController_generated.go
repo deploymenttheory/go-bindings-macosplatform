@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A NSWindowController subclass to display a window to initiate pairing to other bluetooth devices.
-//
 // BluetoothPairingController is an idiomatic wrapper over the Objective-C class IOBluetoothPairingController.
+//
+// A NSWindowController subclass to display a window to initiate pairing to other bluetooth devices.
 type BluetoothPairingController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func BluetoothPairingControllerFromID(id objc.ID) *BluetoothPairingController {
 	if id == 0 {
 		return nil
 	}
-	x := &BluetoothPairingController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BluetoothPairingController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func bluetoothPairingControllerAdopt(id objc.ID) *BluetoothPairingController {
 	if id == 0 {
 		return nil
 	}
-	x := &BluetoothPairingController{Handle: objref.Wrap(id)}
+	x := &BluetoothPairingController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,56 +60,62 @@ func (x *BluetoothPairingController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BluetoothPairingController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBluetoothPairingController creates a new BluetoothPairingController.
 func NewBluetoothPairingController() *BluetoothPairingController {
 	_id := objc.Send[objc.ID](objc.ID(_class("IOBluetoothPairingController")), objc.RegisterName("new"))
 	return bluetoothPairingControllerAdopt(_id)
 }
 
-// Runs the pairing panel in a modal session to allow the user to select a Bluetooth device.
+// RunModal runs the pairing panel in a modal session to allow the user to select a Bluetooth device.
 func (x *BluetoothPairingController) RunModal() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModal"))
 	return _r
 }
 
-// Returns an NSArray of the devices that were paired.
+// GetResults returns an NSArray of the devices that were paired.
 func (x *BluetoothPairingController) GetResults() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getResults"))
 	return obj.Wrap(_r)
 }
 
-// Sets the option bits that control the panel’s behavior.
+// SetOptions sets the option bits that control the panel’s behavior.
 func (x *BluetoothPairingController) SetOptions(options uint32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
 }
 
-// Returns the option bits that control the panel’s behavior.
+// GetOptions returns the option bits that control the panel’s behavior.
 func (x *BluetoothPairingController) GetOptions() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("getOptions"))
 	return _r
 }
 
-// Adds a UUID to the list of UUIDs that are used to validate the user’s selection.
+// AddAllowedUUID adds a UUID to the list of UUIDs that are used to validate the user’s selection.
 func (x *BluetoothPairingController) AddAllowedUUID(allowedUUID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAllowedUUID:"), objref.IDOf(allowedUUID))
 }
 
-// Adds an array of UUIDs to the list of UUIDs that are used to validate the user’s selection.
+// AddAllowedUUIDArray adds an array of UUIDs to the list of UUIDs that are used to validate the user’s selection.
 func (x *BluetoothPairingController) AddAllowedUUIDArray(allowedUUIDArray obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAllowedUUIDArray:"), objref.IDOf(allowedUUIDArray))
 }
 
-// Resets the controller back to the default state where it will accept any device the user selects.
+// ClearAllowedUUIDs resets the controller back to the default state where it will accept any device the user selects.
 func (x *BluetoothPairingController) ClearAllowedUUIDs() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearAllowedUUIDs"))
 }
 
-// Sets the title of the panel when not run as a sheet.
+// SetTitle sets the title of the panel when not run as a sheet.
 func (x *BluetoothPairingController) SetTitle(windowTitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(windowTitle))
 }
 
-// Returns the title of the device selector panel.
+// GetTitle returns the title of the device selector panel.
 func (x *BluetoothPairingController) GetTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getTitle"))
 	if _r == 0 {
@@ -116,12 +124,12 @@ func (x *BluetoothPairingController) GetTitle() string {
 	return purego.GoString(_r)
 }
 
-// Sets the description text that appears in the device selector panel.
+// SetDescriptionText sets the description text that appears in the device selector panel.
 func (x *BluetoothPairingController) SetDescriptionText(descriptionText string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDescriptionText:"), purego.NSString(descriptionText))
 }
 
-// Returns the description text that appears in the device selector panel.
+// GetDescriptionText returns the description text that appears in the device selector panel.
 func (x *BluetoothPairingController) GetDescriptionText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getDescriptionText"))
 	if _r == 0 {
@@ -130,12 +138,12 @@ func (x *BluetoothPairingController) GetDescriptionText() string {
 	return purego.GoString(_r)
 }
 
-// Sets the title of the default/select button in the device selector panel.
+// SetPrompt sets the title of the default/select button in the device selector panel.
 func (x *BluetoothPairingController) SetPrompt(prompt string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrompt:"), purego.NSString(prompt))
 }
 
-// Returns the title of the default/select button in the device selector panel.
+// GetPrompt returns the title of the default/select button in the device selector panel.
 func (x *BluetoothPairingController) GetPrompt() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getPrompt"))
 	if _r == 0 {

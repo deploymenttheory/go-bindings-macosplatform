@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMEvent is an idiomatic wrapper over the Objective-C class DOMEvent.
+//
+// DOMEvent is an abstract base — you do not construct it directly. Construct one of [DOMMutationEvent], [DOMOverflowEvent], [DOMProgressEvent], [DOMUIEvent] and pass it where a DOMEvent is accepted.
 type DOMEvent struct {
-	objref.Handle
+	DOMObject
 }
 
 // DOMEventFromID adopts an existing Objective-C object as a DOMEvent
@@ -23,7 +24,8 @@ func DOMEventFromID(id objc.ID) *DOMEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMEventAdopt(id objc.ID) *DOMEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMEvent{Handle: objref.Wrap(id)}
+	x := &DOMEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMEventEventCanBubbleArgCancelableArg creates a new DOMEvent.
@@ -70,26 +58,29 @@ func NewDOMEventEvent(eventTypeArg string, canBubbleArg bool, cancelableArg bool
 	return dOMEventAdopt(_id)
 }
 
-// WithReturnValue sets returnValue and returns the receiver so calls can be chained.
+// WithReturnValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMEvent) WithReturnValue(returnValue bool) *DOMEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnValue:"), returnValue)
 	return x
 }
 
-// WithCancelBubble sets cancelBubble and returns the receiver so calls can be chained.
+// WithCancelBubble sets the property and returns the receiver so calls can be chained.
 func (x *DOMEvent) WithCancelBubble(cancelBubble bool) *DOMEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelBubble:"), cancelBubble)
 	return x
 }
 
+// StopPropagation wraps the corresponding Objective-C method.
 func (x *DOMEvent) StopPropagation() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopPropagation"))
 }
 
+// PreventDefault wraps the corresponding Objective-C method.
 func (x *DOMEvent) PreventDefault() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preventDefault"))
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *DOMEvent) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
 	if _r == 0 {
@@ -98,40 +89,48 @@ func (x *DOMEvent) Type() string {
 	return purego.GoString(_r)
 }
 
+// EventPhase wraps the corresponding Objective-C method.
 func (x *DOMEvent) EventPhase() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("eventPhase"))
 	return _r
 }
 
+// Bubbles wraps the corresponding Objective-C method.
 func (x *DOMEvent) Bubbles() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bubbles"))
 	return _r
 }
 
+// Cancelable wraps the corresponding Objective-C method.
 func (x *DOMEvent) Cancelable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("cancelable"))
 	return _r
 }
 
+// TimeStamp wraps the corresponding Objective-C method.
 func (x *DOMEvent) TimeStamp() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("timeStamp"))
 	return _r
 }
 
+// ReturnValue wraps the corresponding Objective-C method.
 func (x *DOMEvent) ReturnValue() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("returnValue"))
 	return _r
 }
 
+// SetReturnValue wraps the corresponding Objective-C method.
 func (x *DOMEvent) SetReturnValue(returnValue bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnValue:"), returnValue)
 }
 
+// CancelBubble wraps the corresponding Objective-C method.
 func (x *DOMEvent) CancelBubble() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("cancelBubble"))
 	return _r
 }
 
+// SetCancelBubble wraps the corresponding Objective-C method.
 func (x *DOMEvent) SetCancelBubble(cancelBubble bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelBubble:"), cancelBubble)
 }
@@ -155,3 +154,14 @@ type DOMEventable interface {
 }
 
 var _ DOMEventable = (*DOMEvent)(nil)
+
+// isDOMEvent marks DOMEvent — and, by embedding promotion, its
+// subclasses — as a member of the DOMEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DOMEvent) isDOMEvent() {}
+
+var _ DOMEventProvider = (*DOMEvent)(nil)
+
+var _ DOMObjectProvider = (*DOMEvent)(nil)
+
+var _ WebScriptObjectProvider = (*DOMEvent)(nil)

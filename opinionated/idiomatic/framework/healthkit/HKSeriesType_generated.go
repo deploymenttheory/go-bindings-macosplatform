@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that indicates the data stored in a series sample.
-//
 // SeriesType is an idiomatic wrapper over the Objective-C class HKSeriesType.
+//
+// It embeds [SampleType], promoting that type's methods.
+//
+// A type that indicates the data stored in a series sample.
 type SeriesType struct {
-	objref.Handle
+	SampleType
 }
 
 // SeriesTypeFromID adopts an existing Objective-C object as a SeriesType
@@ -25,7 +26,8 @@ func SeriesTypeFromID(id objc.ID) *SeriesType {
 	if id == 0 {
 		return nil
 	}
-	x := &SeriesType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SeriesType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func seriesTypeAdopt(id objc.ID) *SeriesType {
 	if id == 0 {
 		return nil
 	}
-	x := &SeriesType{Handle: objref.Wrap(id)}
+	x := &SeriesType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SeriesType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SeriesType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SeriesType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSeriesType creates a new SeriesType.
@@ -70,3 +58,7 @@ type SeriesTypeable interface {
 }
 
 var _ SeriesTypeable = (*SeriesType)(nil)
+
+var _ SampleTypeProvider = (*SeriesType)(nil)
+
+var _ ObjectTypeProvider = (*SeriesType)(nil)

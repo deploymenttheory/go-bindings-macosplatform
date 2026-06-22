@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request to activate or deactivate a system extension.
-//
 // SystemExtensionRequest is an idiomatic wrapper over the Objective-C class OSSystemExtensionRequest.
+//
+// A request to activate or deactivate a system extension.
 type SystemExtensionRequest struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SystemExtensionRequestFromID(id objc.ID) *SystemExtensionRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &SystemExtensionRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SystemExtensionRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func systemExtensionRequestAdopt(id objc.ID) *SystemExtensionRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &SystemExtensionRequest{Handle: objref.Wrap(id)}
+	x := &SystemExtensionRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *SystemExtensionRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SystemExtensionRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSystemExtensionRequest creates a new SystemExtensionRequest.
 func NewSystemExtensionRequest() *SystemExtensionRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionRequest")), objc.RegisterName("new"))
 	return systemExtensionRequestAdopt(_id)
 }
 
-// The bundle identifier of the target extension
+// Identifier the bundle identifier of the target extension
 func (x *SystemExtensionRequest) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {

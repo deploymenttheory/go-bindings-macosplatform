@@ -3,4 +3,52 @@
 //go:build darwin
 
 // Package foundation provides a fluent Go API over the macOS Foundation framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - Array: [MutableArray]
+//   - AttributedString: [MutableAttributedString]
+//   - CharacterSet: [MutableCharacterSet]
+//   - ClassDescription: [ScriptClassDescription]
+//   - Coder: [Archiver], [KeyedArchiver], [KeyedUnarchiver], [PortCoder], [Unarchiver], [XPCCoder]
+//   - Data: [MutableData]
+//   - Date: [CalendarDate]
+//   - Dictionary: [MutableDictionary]
+//   - Dimension: [UnitAcceleration], [UnitAngle], [UnitArea], [UnitConcentrationMass], [UnitDispersion], [UnitDuration], [UnitElectricCharge], [UnitElectricCurrent], [UnitElectricPotentialDifference], [UnitElectricResistance], [UnitEnergy], [UnitFrequency], [UnitFuelEfficiency], [UnitIlluminance], [UnitInformationStorage], [UnitLength], [UnitMass], [UnitPower], [UnitPressure], [UnitSpeed], [UnitTemperature], [UnitVolume]
+//   - Enumerator: [DirectoryEnumerator]
+//   - Formatter: [ByteCountFormatter], [DateComponentsFormatter], [DateFormatter], [DateIntervalFormatter], [EnergyFormatter], [ISO8601DateFormatter], [LengthFormatter], [ListFormatter], [MassFormatter], [MeasurementFormatter], [NumberFormatter], [PersonNameComponentsFormatter], [RelativeDateTimeFormatter]
+//   - IndexSet: [MutableIndexSet]
+//   - InflectionRule: [InflectionRuleExplicit]
+//   - MutableData: [PurgeableData]
+//   - MutableSet: [CountedSet]
+//   - NotificationCenter: [DistributedNotificationCenter]
+//   - Number: [DecimalNumber]
+//   - Object: [AffineTransform], [AppleEventDescriptor], [AppleEventManager], [AppleScript], [Array], [AssertionHandler], [AttributedString], [AttributedStringMarkdownParsingOptions], [AttributedStringMarkdownSourcePosition], [AutoreleasePool], [BackgroundActivityScheduler], [Bundle], [Cache], [CachedURLResponse], [Calendar], [CharacterSet], [ClassDescription], [Coder], [Condition], [ConditionLock], [Connection], [Data], [Date], [DateComponents], [DateInterval], [DecimalNumberHandler], [Dictionary], [DistantObjectRequest], [DistributedLock], [Enumerator], [Error], [Exception], [Expression], [ExtensionContext], [ExtensionItem], [FileAccessIntent], [FileCoordinator], [FileHandle], [FileManager], [FileProviderService], [FileSecurity], [FileVersion], [FileWrapper], [Formatter], [GarbageCollector], [HTTPCookie], [HTTPCookieStorage], [HashTable], [Host], [IndexPath], [IndexSet], [InflectionRule], [Invocation], [ItemProvider], [JSONSerialization], [KeyValueSharedObservers], [KeyValueSharedObserversSnapshot], [LinguisticTagger], [Locale], [LocalizedNumberFormatRule], [Lock], [MapTable], [Measurement], [MetadataItem], [MetadataQuery], [MetadataQueryAttributeValueTuple], [MetadataQueryResultGroup], [MethodSignature], [Morphology], [MorphologyCustomPronoun], [MorphologyPronoun], [NetService], [NetServiceBrowser], [Notification], [NotificationCenter], [NotificationQueue], [Null], [Operation], [OperationQueue], [OrderedCollectionChange], [OrderedCollectionDifference], [OrderedSet], [Orthography], [PersonNameComponents], [Pipe], [PointerArray], [PointerFunctions], [Port], [PortMessage], [PortNameServer], [PositionalSpecifier], [Predicate], [PresentationIntent], [ProcessInfo], [Progress], [PropertyListSerialization], [RecursiveLock], [RegularExpression], [RunLoop], [Scanner], [ScriptCoercionHandler], [ScriptCommand], [ScriptCommandDescription], [ScriptExecutionContext], [ScriptObjectSpecifier], [ScriptSuiteRegistry], [ScriptWhoseTest], [Set], [SortDescriptor], [SpellServer], [Stream], [String], [Task], [TermOfAddress], [TextCheckingResult], [Thread], [TimeZone], [Timer], [URL], [URLAuthenticationChallenge], [URLCache], [URLComponents], [URLConnection], [URLCredential], [URLCredentialStorage], [URLDownload], [URLHandle], [URLProtectionSpace], [URLProtocol], [URLQueryItem], [URLRequest], [URLResponse], [URLSession], [URLSessionConfiguration], [URLSessionTask], [URLSessionTaskMetrics], [URLSessionTaskTransactionMetrics], [URLSessionWebSocketMessage], [UUID], [UbiquitousKeyValueStore], [UndoManager], [Unit], [UnitConverter], [UserActivity], [UserDefaults], [UserNotification], [UserNotificationAction], [UserNotificationCenter], [UserScriptTask], [Value], [ValueTransformer], [XMLNode], [XMLParser], [XPCConnection], [XPCInterface], [XPCListener], [XPCListenerEndpoint]
+//   - Operation: [BlockOperation], [InvocationOperation]
+//   - OrderedSet: [MutableOrderedSet]
+//   - Port: [MachPort], [MessagePort], [SocketPort]
+//   - PortNameServer: [MachBootstrapServer], [MessagePortNameServer], [SocketPortNameServer]
+//   - Predicate: [ComparisonPredicate], [CompoundPredicate]
+//   - Proxy: [DistantObject], [ProtocolChecker]
+//   - RegularExpression: [DataDetector]
+//   - ScriptCommand: [CloneCommand], [CloseCommand], [CreateCommand], [DeleteCommand], [MoveCommand], [QuitCommand], [SetCommand]
+//   - ScriptObjectSpecifier: [IndexSpecifier], [NameSpecifier], [RangeSpecifier], [RelativeSpecifier], [UniqueIDSpecifier], [WhoseSpecifier]
+//   - ScriptWhoseTest: [LogicalTest], [SpecifierTest]
+//   - Set: [MutableSet]
+//   - SimpleCString: [ConstantString]
+//   - Stream: [InputStream], [OutputStream]
+//   - String: [MutableString], [SimpleCString]
+//   - URLRequest: [MutableURLRequest]
+//   - URLResponse: [HTTPURLResponse]
+//   - URLSessionDataTask: [URLSessionUploadTask]
+//   - URLSessionTask: [URLSessionDataTask], [URLSessionDownloadTask], [URLSessionStreamTask], [URLSessionWebSocketTask]
+//   - Unit: [Dimension]
+//   - UnitConverter: [UnitConverterLinear]
+//   - UserScriptTask: [UserAppleScriptTask], [UserAutomatorTask], [UserUnixTask]
+//   - Value: [Number]
+//   - ValueTransformer: [SecureUnarchiveFromDataTransformer]
+//   - XMLNode: [XMLDTD], [XMLDTDNode], [XMLDocument], [XMLElement]
 package foundation

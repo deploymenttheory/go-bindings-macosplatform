@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents a collection of Virtio console ports.
-//
 // VirtioConsolePortArray is an idiomatic wrapper over the Objective-C class VZVirtioConsolePortArray.
+//
+// A class that represents a collection of Virtio console ports.
 type VirtioConsolePortArray struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VirtioConsolePortArrayFromID(id objc.ID) *VirtioConsolePortArray {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioConsolePortArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VirtioConsolePortArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func virtioConsolePortArrayAdopt(id objc.ID) *VirtioConsolePortArray {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioConsolePortArray{Handle: objref.Wrap(id)}
+	x := &VirtioConsolePortArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +60,25 @@ func (x *VirtioConsolePortArray) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VirtioConsolePortArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVirtioConsolePortArray creates a new VirtioConsolePortArray.
 func NewVirtioConsolePortArray() *VirtioConsolePortArray {
 	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioConsolePortArray")), objc.RegisterName("new"))
 	return virtioConsolePortArrayAdopt(_id)
 }
 
-// Returns the Virtio console port at the specified index.
+// ObjectAtIndexedSubscript returns the Virtio console port at the specified index.
 func (x *VirtioConsolePortArray) ObjectAtIndexedSubscript(portIndex int) *VirtioConsolePort {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), portIndex)
 	return VirtioConsolePortFromID(_r)
 }
 
+// MaximumPortCount wraps the corresponding Objective-C method.
 func (x *VirtioConsolePortArray) MaximumPortCount() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("maximumPortCount"))
 	return _r

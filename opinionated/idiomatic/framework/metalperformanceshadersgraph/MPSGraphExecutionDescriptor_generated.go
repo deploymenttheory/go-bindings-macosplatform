@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that consists of all the levers to synchronize and schedule graph execution.
-//
 // GraphExecutionDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphExecutionDescriptor.
+//
+// It embeds [GraphObject], promoting that type's methods.
+//
+// A class that consists of all the levers to synchronize and schedule graph execution.
 type GraphExecutionDescriptor struct {
-	objref.Handle
+	GraphObject
 }
 
 // GraphExecutionDescriptorFromID adopts an existing Objective-C object as a GraphExecutionDescriptor
@@ -25,7 +26,8 @@ func GraphExecutionDescriptorFromID(id objc.ID) *GraphExecutionDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphExecutionDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphExecutionDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func graphExecutionDescriptorAdopt(id objc.ID) *GraphExecutionDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphExecutionDescriptor{Handle: objref.Wrap(id)}
+	x := &GraphExecutionDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GraphExecutionDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphExecutionDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphExecutionDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGraphExecutionDescriptor creates a new GraphExecutionDescriptor.
@@ -64,39 +52,36 @@ func NewGraphExecutionDescriptor() *GraphExecutionDescriptor {
 	return graphExecutionDescriptorAdopt(_id)
 }
 
-// The flag that blocks the execution call until the entire execution is complete.
-//
-// WithWaitUntilCompleted sets waitUntilCompleted and returns the receiver so calls can be chained.
+// WithWaitUntilCompleted the flag that blocks the execution call until the entire execution is complete.
 func (x *GraphExecutionDescriptor) WithWaitUntilCompleted(waitUntilCompleted bool) *GraphExecutionDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWaitUntilCompleted:"), waitUntilCompleted)
 	return x
 }
 
-// The compilation descriptor for the graph.
-//
-// WithCompilationDescriptor sets compilationDescriptor and returns the receiver so calls can be chained.
+// WithCompilationDescriptor the compilation descriptor for the graph.
 func (x *GraphExecutionDescriptor) WithCompilationDescriptor(compilationDescriptor *GraphCompilationDescriptor) *GraphExecutionDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompilationDescriptor:"), objref.IDOf(compilationDescriptor))
 	return x
 }
 
-// The flag that blocks the execution call until the entire execution is complete. Defaults to NO.
+// WaitUntilCompleted the flag that blocks the execution call until the entire execution is complete. Defaults to NO.
 func (x *GraphExecutionDescriptor) WaitUntilCompleted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("waitUntilCompleted"))
 	return _r
 }
 
+// SetWaitUntilCompleted wraps the corresponding Objective-C method.
 func (x *GraphExecutionDescriptor) SetWaitUntilCompleted(waitUntilCompleted bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWaitUntilCompleted:"), waitUntilCompleted)
 }
 
-// The compilation descriptor for the graph. Default value is nil.
+// CompilationDescriptor the compilation descriptor for the graph. Default value is nil.
 func (x *GraphExecutionDescriptor) CompilationDescriptor() *GraphCompilationDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compilationDescriptor"))
 	return GraphCompilationDescriptorFromID(_r)
 }
 
-// The compilation descriptor for the graph. Default value is nil.
+// SetCompilationDescriptor the compilation descriptor for the graph. Default value is nil.
 func (x *GraphExecutionDescriptor) SetCompilationDescriptor(compilationDescriptor *GraphCompilationDescriptor) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompilationDescriptor:"), objref.IDOf(compilationDescriptor))
 }
@@ -113,3 +98,5 @@ type GraphExecutionDescriptorable interface {
 }
 
 var _ GraphExecutionDescriptorable = (*GraphExecutionDescriptor)(nil)
+
+var _ GraphObjectProvider = (*GraphExecutionDescriptor)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The properties of a pass used as a ticket for the Suica transportation system.
-//
 // SuicaPassProperties is an idiomatic wrapper over the Objective-C class PKSuicaPassProperties.
+//
+// It embeds [TransitPassProperties], promoting that type's methods.
+//
+// The properties of a pass used as a ticket for the Suica transportation system.
 type SuicaPassProperties struct {
-	objref.Handle
+	TransitPassProperties
 }
 
 // SuicaPassPropertiesFromID adopts an existing Objective-C object as a SuicaPassProperties
@@ -25,7 +26,8 @@ func SuicaPassPropertiesFromID(id objc.ID) *SuicaPassProperties {
 	if id == 0 {
 		return nil
 	}
-	x := &SuicaPassProperties{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SuicaPassProperties{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func suicaPassPropertiesAdopt(id objc.ID) *SuicaPassProperties {
 	if id == 0 {
 		return nil
 	}
-	x := &SuicaPassProperties{Handle: objref.Wrap(id)}
+	x := &SuicaPassProperties{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SuicaPassProperties) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SuicaPassProperties) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SuicaPassProperties) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSuicaPassProperties creates a new SuicaPassProperties.
@@ -64,22 +52,25 @@ func NewSuicaPassProperties() *SuicaPassProperties {
 	return suicaPassPropertiesAdopt(_id)
 }
 
-// Note: isInShinkansenStation is not a subset of isInStation.
+// IsInShinkansenStation note: isInShinkansenStation is not a subset of isInStation.
 func (x *SuicaPassProperties) IsInShinkansenStation() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInShinkansenStation"))
 	return _r
 }
 
+// IsBalanceAllowedForCommute wraps the corresponding Objective-C method.
 func (x *SuicaPassProperties) IsBalanceAllowedForCommute() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBalanceAllowedForCommute"))
 	return _r
 }
 
+// IsLowBalanceGateNotificationEnabled wraps the corresponding Objective-C method.
 func (x *SuicaPassProperties) IsLowBalanceGateNotificationEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLowBalanceGateNotificationEnabled"))
 	return _r
 }
 
+// IsGreenCarTicketUsed wraps the corresponding Objective-C method.
 func (x *SuicaPassProperties) IsGreenCarTicketUsed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isGreenCarTicketUsed"))
 	return _r
@@ -95,3 +86,7 @@ type SuicaPassPropertiesable interface {
 }
 
 var _ SuicaPassPropertiesable = (*SuicaPassProperties)(nil)
+
+var _ TransitPassPropertiesProvider = (*SuicaPassProperties)(nil)
+
+var _ StoredValuePassPropertiesProvider = (*SuicaPassProperties)(nil)

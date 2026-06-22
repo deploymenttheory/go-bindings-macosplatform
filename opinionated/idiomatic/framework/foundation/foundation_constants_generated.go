@@ -1523,109 +1523,90 @@ func NSFileSystemFreeNodes() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSFileSystemFreeNodes")))
 }
 
-// Key for cookie name
 // NSHTTPCookieName returns the string constant NSHTTPCookieName.
 func NSHTTPCookieName() *String { return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieName"))) }
 
-// Key for cookie value
 // NSHTTPCookieValue returns the string constant NSHTTPCookieValue.
 func NSHTTPCookieValue() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieValue")))
 }
 
-// Key for cookie origin URL
 // NSHTTPCookieOriginURL returns the string constant NSHTTPCookieOriginURL.
 func NSHTTPCookieOriginURL() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieOriginURL")))
 }
 
-// Key for cookie version
 // NSHTTPCookieVersion returns the string constant NSHTTPCookieVersion.
 func NSHTTPCookieVersion() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieVersion")))
 }
 
-// Key for cookie domain
 // NSHTTPCookieDomain returns the string constant NSHTTPCookieDomain.
 func NSHTTPCookieDomain() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieDomain")))
 }
 
-// Key for cookie path
 // NSHTTPCookiePath returns the string constant NSHTTPCookiePath.
 func NSHTTPCookiePath() *String { return StringFromID(purego.CFConstant(_symbol("NSHTTPCookiePath"))) }
 
-// Key for cookie secure flag
 // NSHTTPCookieSecure returns the string constant NSHTTPCookieSecure.
 func NSHTTPCookieSecure() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieSecure")))
 }
 
-// Key for cookie expiration date
 // NSHTTPCookieExpires returns the string constant NSHTTPCookieExpires.
 func NSHTTPCookieExpires() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieExpires")))
 }
 
-// Key for cookie comment text
 // NSHTTPCookieComment returns the string constant NSHTTPCookieComment.
 func NSHTTPCookieComment() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieComment")))
 }
 
-// Key for cookie comment URL
 // NSHTTPCookieCommentURL returns the string constant NSHTTPCookieCommentURL.
 func NSHTTPCookieCommentURL() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieCommentURL")))
 }
 
-// Key for cookie discard (session-only) flag
 // NSHTTPCookieDiscard returns the string constant NSHTTPCookieDiscard.
 func NSHTTPCookieDiscard() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieDiscard")))
 }
 
-// Key for cookie maximum age (an alternate way of specifying the expiration)
 // NSHTTPCookieMaximumAge returns the string constant NSHTTPCookieMaximumAge.
 func NSHTTPCookieMaximumAge() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieMaximumAge")))
 }
 
-// Key for cookie ports
 // NSHTTPCookiePort returns the string constant NSHTTPCookiePort.
 func NSHTTPCookiePort() *String { return StringFromID(purego.CFConstant(_symbol("NSHTTPCookiePort"))) }
 
-// An NSString object indicating that the cookie is set via JavaScript.
 // NSHTTPCookieSetByJavaScript returns the string constant NSHTTPCookieSetByJavaScript.
 func NSHTTPCookieSetByJavaScript() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieSetByJavaScript")))
 }
 
-// Key for cookie same site
 // NSHTTPCookieSameSitePolicy returns the string constant NSHTTPCookieSameSitePolicy.
 func NSHTTPCookieSameSitePolicy() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieSameSitePolicy")))
 }
 
-// String constant "lax" to be used as a value for the property key NSHTTPCookieSameSite
 // NSHTTPCookieSameSiteLax returns the string constant NSHTTPCookieSameSiteLax.
 func NSHTTPCookieSameSiteLax() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieSameSiteLax")))
 }
 
-// String constant "strict" to be used as a value for the property key NSHTTPCookieSameSite
 // NSHTTPCookieSameSiteStrict returns the string constant NSHTTPCookieSameSiteStrict.
 func NSHTTPCookieSameSiteStrict() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieSameSiteStrict")))
 }
 
-// Name of notification that should be posted to the distributed notification center whenever the accept cookies preference is changed
 // NSHTTPCookieManagerAcceptPolicyChangedNotification returns the string constant NSHTTPCookieManagerAcceptPolicyChangedNotification.
 func NSHTTPCookieManagerAcceptPolicyChangedNotification() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieManagerAcceptPolicyChangedNotification")))
 }
 
-// Notification sent when the set of cookies changes
 // NSHTTPCookieManagerCookiesChangedNotification returns the string constant NSHTTPCookieManagerCookiesChangedNotification.
 func NSHTTPCookieManagerCookiesChangedNotification() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieManagerCookiesChangedNotification")))
@@ -1946,7 +1927,6 @@ func NSSystemTimeZoneDidChangeNotification() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSSystemTimeZoneDidChangeNotification")))
 }
 
-// This notification is sent on the main thread whenever the set of stored credentials changes.
 // NSURLCredentialStorageChangedNotification returns the string constant NSURLCredentialStorageChangedNotification.
 func NSURLCredentialStorageChangedNotification() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSURLCredentialStorageChangedNotification")))
@@ -1955,13 +1935,11 @@ func NSURLCredentialStorageChangedNotification() *String {
 // NSURLErrorDomain returns the string constant NSURLErrorDomain.
 func NSURLErrorDomain() *String { return StringFromID(purego.CFConstant(_symbol("NSURLErrorDomain"))) }
 
-// The NSErrorUserInfoKey used to store and retrieve the NSNumber object corresponding to the reason why the network is unavailable when the task failed due to unsatisfiable network constraints.  See the NSURLErrorNetworkUnavailableReason enum for details.
 // NSURLErrorNetworkUnavailableReasonKey returns the string constant NSURLErrorNetworkUnavailableReasonKey.
 func NSURLErrorNetworkUnavailableReasonKey() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSURLErrorNetworkUnavailableReasonKey")))
 }
 
-// NSUserDefaultsDidChangeNotification is posted whenever any user defaults changed within the current process, but is not posted when ubiquitous defaults change, or when an outside process changes defaults. Using key-value observing to register observers for the specific keys of interest will inform you of all updates, regardless of where they're from.
 // NSUserDefaultsDidChangeNotification returns the string constant NSUserDefaultsDidChangeNotification.
 func NSUserDefaultsDidChangeNotification() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSUserDefaultsDidChangeNotification")))

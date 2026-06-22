@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A data set that projects sound of a certain frequency outward in the shape of a cone.
-//
 // ConeDirectivityModelSubbandParameters is an idiomatic wrapper over the Objective-C class PHASEConeDirectivityModelSubbandParameters.
+//
+// A data set that projects sound of a certain frequency outward in the shape of a cone.
 type ConeDirectivityModelSubbandParameters struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ConeDirectivityModelSubbandParametersFromID(id objc.ID) *ConeDirectivityMod
 	if id == 0 {
 		return nil
 	}
-	x := &ConeDirectivityModelSubbandParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ConeDirectivityModelSubbandParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func coneDirectivityModelSubbandParametersAdopt(id objc.ID) *ConeDirectivityMode
 	if id == 0 {
 		return nil
 	}
-	x := &ConeDirectivityModelSubbandParameters{Handle: objref.Wrap(id)}
+	x := &ConeDirectivityModelSubbandParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,61 +60,65 @@ func (x *ConeDirectivityModelSubbandParameters) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ConeDirectivityModelSubbandParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewConeDirectivityModelSubbandParameters creates a new ConeDirectivityModelSubbandParameters.
 func NewConeDirectivityModelSubbandParameters() *ConeDirectivityModelSubbandParameters {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHASEConeDirectivityModelSubbandParameters")), objc.RegisterName("new"))
 	return coneDirectivityModelSubbandParametersAdopt(_id)
 }
 
-// A frequency in the audio spectrum where the subband resonates most.
-//
-// WithFrequency sets frequency and returns the receiver so calls can be chained.
+// WithFrequency a frequency in the audio spectrum where the subband resonates most.
 func (x *ConeDirectivityModelSubbandParameters) WithFrequency(frequency float64) *ConeDirectivityModelSubbandParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
 	return x
 }
 
-// The loudness of the audio the outside area of the cone emits.
-//
-// WithOuterGain sets outerGain and returns the receiver so calls can be chained.
+// WithOuterGain the loudness of the audio the outside area of the cone emits.
 func (x *ConeDirectivityModelSubbandParameters) WithOuterGain(outerGain float64) *ConeDirectivityModelSubbandParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterGain:"), outerGain)
 	return x
 }
 
-// Configures a focus area for cone-based sound directivity.
+// SetInnerAngleOuterAngle configures a focus area for cone-based sound directivity.
 func (x *ConeDirectivityModelSubbandParameters) SetInnerAngleOuterAngle(innerAngle float64, outerAngle float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerAngle:outerAngle:"), innerAngle, outerAngle)
 }
 
-// The frequency of the subband, in hertz.
+// Frequency the frequency of the subband, in hertz.
 func (x *ConeDirectivityModelSubbandParameters) Frequency() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frequency"))
 	return _r
 }
 
+// SetFrequency wraps the corresponding Objective-C method.
 func (x *ConeDirectivityModelSubbandParameters) SetFrequency(frequency float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
 }
 
-// The inner angle, in degrees.
+// InnerAngle the inner angle, in degrees.
 func (x *ConeDirectivityModelSubbandParameters) InnerAngle() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("innerAngle"))
 	return _r
 }
 
-// The outer angle, in degrees.
+// OuterAngle the outer angle, in degrees.
 func (x *ConeDirectivityModelSubbandParameters) OuterAngle() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("outerAngle"))
 	return _r
 }
 
-// The outer gain.
+// OuterGain the outer gain.
 func (x *ConeDirectivityModelSubbandParameters) OuterGain() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("outerGain"))
 	return _r
 }
 
+// SetOuterGain wraps the corresponding Objective-C method.
 func (x *ConeDirectivityModelSubbandParameters) SetOuterGain(outerGain float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterGain:"), outerGain)
 }

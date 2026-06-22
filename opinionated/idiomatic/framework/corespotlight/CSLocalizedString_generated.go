@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that displays localized text in search results related to your app.
-//
 // LocalizedString is an idiomatic wrapper over the Objective-C class CSLocalizedString.
+//
+// An object that displays localized text in search results related to your app.
 type LocalizedString struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LocalizedStringFromID(id objc.ID) *LocalizedString {
 	if id == 0 {
 		return nil
 	}
-	x := &LocalizedString{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LocalizedString{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func localizedStringAdopt(id objc.ID) *LocalizedString {
 	if id == 0 {
 		return nil
 	}
-	x := &LocalizedString{Handle: objref.Wrap(id)}
+	x := &LocalizedString{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,16 +60,20 @@ func (x *LocalizedString) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a CSLocalizedString object with the specified dictionary of localized strings.
-//
-// NewLocalizedStringWithLocalizedStrings creates a new LocalizedString.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LocalizedString) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLocalizedStringWithLocalizedStrings initializes a CSLocalizedString object with the specified dictionary of localized strings.
 func NewLocalizedStringWithLocalizedStrings(localizedStrings obj.Object) *LocalizedString {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CSLocalizedString")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedStrings:"), objref.IDOf(localizedStrings))
 	return localizedStringAdopt(_id)
 }
 
-// Returns the localized string for the current language.
+// LocalizedString returns the localized string for the current language.
 func (x *LocalizedString) LocalizedString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedString"))
 	if _r == 0 {

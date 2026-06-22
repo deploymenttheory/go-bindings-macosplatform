@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that you subclass to provide a data-based Quick Look preview extension.
-//
 // PreviewProvider is an idiomatic wrapper over the Objective-C class QLPreviewProvider.
+//
+// A class that you subclass to provide a data-based Quick Look preview extension.
 type PreviewProvider struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PreviewProviderFromID(id objc.ID) *PreviewProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &PreviewProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PreviewProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func previewProviderAdopt(id objc.ID) *PreviewProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &PreviewProvider{Handle: objref.Wrap(id)}
+	x := &PreviewProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *PreviewProvider) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *PreviewProvider) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PreviewProvider) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewPreviewProvider creates a new PreviewProvider.

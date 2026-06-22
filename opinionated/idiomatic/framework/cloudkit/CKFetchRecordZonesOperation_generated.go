@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An operation for retrieving record zones from a database.
-//
 // FetchRecordZonesOperation is an idiomatic wrapper over the Objective-C class CKFetchRecordZonesOperation.
+//
+// It embeds [DatabaseOperation], promoting that type's methods.
+//
+// An operation for retrieving record zones from a database.
 type FetchRecordZonesOperation struct {
-	objref.Handle
+	DatabaseOperation
 }
 
 // FetchRecordZonesOperationFromID adopts an existing Objective-C object as a FetchRecordZonesOperation
@@ -25,7 +26,8 @@ func FetchRecordZonesOperationFromID(id objc.ID) *FetchRecordZonesOperation {
 	if id == 0 {
 		return nil
 	}
-	x := &FetchRecordZonesOperation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FetchRecordZonesOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func fetchRecordZonesOperationAdopt(id objc.ID) *FetchRecordZonesOperation {
 	if id == 0 {
 		return nil
 	}
-	x := &FetchRecordZonesOperation{Handle: objref.Wrap(id)}
+	x := &FetchRecordZonesOperation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *FetchRecordZonesOperation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FetchRecordZonesOperation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FetchRecordZonesOperation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewFetchRecordZonesOperation creates a new FetchRecordZonesOperation.
@@ -64,97 +52,75 @@ func NewFetchRecordZonesOperation() *FetchRecordZonesOperation {
 	return fetchRecordZonesOperationAdopt(_id)
 }
 
-// Creates an operation for fetching the specified record zones.
-//
-// NewFetchRecordZonesOperationWithRecordZoneIDs creates a new FetchRecordZonesOperation.
+// NewFetchRecordZonesOperationWithRecordZoneIDs creates an operation for fetching the specified record zones.
 func NewFetchRecordZonesOperationWithRecordZoneIDs(zoneIDs []*RecordZoneID) *FetchRecordZonesOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKFetchRecordZonesOperation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordZoneIDs:"), purego.SliceToNSArray(zoneIDs, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) }))
 	return fetchRecordZonesOperationAdopt(_id)
 }
 
-// The IDs of the record zones to retrieve.
-//
-// WithRecordZoneIDs sets the collection and returns the receiver so calls can be chained.
+// WithRecordZoneIDs the IDs of the record zones to retrieve.
 func (x *FetchRecordZonesOperation) WithRecordZoneIDs(items ...*RecordZoneID) *FetchRecordZonesOperation {
 	_arr := purego.SliceToNSArray(items, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneIDs:"), _arr)
 	return x
 }
 
-// The database that the operation uses.
-//
-// WithDatabase sets database and returns the receiver so calls can be chained.
+// WithDatabase the database that the operation uses.
 func (x *FetchRecordZonesOperation) WithDatabase(database *Database) *FetchRecordZonesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return x
 }
 
-// The operation’s configuration.
-//
-// WithConfiguration sets configuration and returns the receiver so calls can be chained.
+// WithConfiguration the operation’s configuration.
 func (x *FetchRecordZonesOperation) WithConfiguration(configuration *OperationConfiguration) *FetchRecordZonesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
-// The operation’s group.
-//
-// WithGroup sets group and returns the receiver so calls can be chained.
+// WithGroup the operation’s group.
 func (x *FetchRecordZonesOperation) WithGroup(group *OperationGroup) *FetchRecordZonesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation.
-//
-// WithLongLivedOperationWasPersistedBlock sets longLivedOperationWasPersistedBlock and returns the receiver so calls can be chained.
+// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
 func (x *FetchRecordZonesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchRecordZonesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
 	return x
 }
 
-// The operation's container.
-//
-// WithContainer sets container and returns the receiver so calls can be chained.
+// WithContainer the operation's container.
 func (x *FetchRecordZonesOperation) WithContainer(container *Container) *FetchRecordZonesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network.
-//
-// WithAllowsCellularAccess sets allowsCellularAccess and returns the receiver so calls can be chained.
+// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
 func (x *FetchRecordZonesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchRecordZonesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived.
-//
-// WithLongLived sets longLived and returns the receiver so calls can be chained.
+// WithLongLived a Boolean value that indicates whether the operation is long-lived.
 func (x *FetchRecordZonesOperation) WithLongLived(longLived bool) *FetchRecordZonesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The timeout interval when waiting for additional data.
-//
-// WithTimeoutIntervalForRequest sets timeoutIntervalForRequest and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
 func (x *FetchRecordZonesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchRecordZonesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can use.
-//
-// WithTimeoutIntervalForResource sets timeoutIntervalForResource and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
 func (x *FetchRecordZonesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchRecordZonesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
-// The IDs of the record zones to retrieve. Use this property to view or change the IDs of the record zones you want to retrieve. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue. If you use the operation that “CKFetchRecordZonesOperation/fetchAllRecordZonesOperation()“ returns, CloudKit ignores the contents of this property and sets its value to `nil`.
+// RecordZoneIDs the IDs of the record zones to retrieve. Use this property to view or change the IDs of the record zones you want to retrieve. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue. If you use the operation that “CKFetchRecordZonesOperation/fetchAllRecordZonesOperation()“ returns, CloudKit ignores the contents of this property and sets its value to `nil`.
 //
 // RecordZoneIDs returns the collection as a Go slice.
 func (x *FetchRecordZonesOperation) RecordZoneIDs() []*RecordZoneID {
@@ -162,6 +128,7 @@ func (x *FetchRecordZonesOperation) RecordZoneIDs() []*RecordZoneID {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZoneID { return RecordZoneIDFromID(_id) })
 }
 
+// SetRecordZoneIDs wraps the corresponding Objective-C method.
 func (x *FetchRecordZonesOperation) SetRecordZoneIDs(recordZoneIDs []*RecordZoneID) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneIDs:"), purego.SliceToNSArray(recordZoneIDs, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) }))
 }
@@ -184,3 +151,7 @@ type FetchRecordZonesOperationable interface {
 }
 
 var _ FetchRecordZonesOperationable = (*FetchRecordZonesOperation)(nil)
+
+var _ DatabaseOperationProvider = (*FetchRecordZonesOperation)(nil)
+
+var _ OperationProvider = (*FetchRecordZonesOperation)(nil)

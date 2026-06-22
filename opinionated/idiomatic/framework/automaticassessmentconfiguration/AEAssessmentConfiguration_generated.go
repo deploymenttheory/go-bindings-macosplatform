@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Configuration information for an assessment session.
-//
 // AssessmentConfiguration is an idiomatic wrapper over the Objective-C class AEAssessmentConfiguration.
+//
+// Configuration information for an assessment session.
 type AssessmentConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssessmentConfigurationFromID(id objc.ID) *AssessmentConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &AssessmentConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssessmentConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assessmentConfigurationAdopt(id objc.ID) *AssessmentConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &AssessmentConfiguration{Handle: objref.Wrap(id)}
+	x := &AssessmentConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,173 +60,171 @@ func (x *AssessmentConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssessmentConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssessmentConfiguration creates a new AssessmentConfiguration.
 func NewAssessmentConfiguration() *AssessmentConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("AEAssessmentConfiguration")), objc.RegisterName("new"))
 	return assessmentConfigurationAdopt(_id)
 }
 
-// A Boolean value that indicates whether to allow Autocorrect during an assessment.
-//
-// WithAutocorrectMode sets autocorrectMode and returns the receiver so calls can be chained.
+// WithAutocorrectMode a Boolean value that indicates whether to allow Autocorrect during an assessment.
 func (x *AssessmentConfiguration) WithAutocorrectMode(autocorrectMode AutocorrectMode) *AssessmentConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutocorrectMode:"), autocorrectMode)
 	return x
 }
 
-// A Boolean value that indicates whether to allow spell check during an assessment.
-//
-// WithAllowsSpellCheck sets allowsSpellCheck and returns the receiver so calls can be chained.
+// WithAllowsSpellCheck a Boolean value that indicates whether to allow spell check during an assessment.
 func (x *AssessmentConfiguration) WithAllowsSpellCheck(allowsSpellCheck bool) *AssessmentConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsSpellCheck:"), allowsSpellCheck)
 	return x
 }
 
-// A Boolean value that indicates whether to enable the predictive keyboard during an assessment.
-//
-// WithAllowsPredictiveKeyboard sets allowsPredictiveKeyboard and returns the receiver so calls can be chained.
+// WithAllowsPredictiveKeyboard a Boolean value that indicates whether to enable the predictive keyboard during an assessment.
 func (x *AssessmentConfiguration) WithAllowsPredictiveKeyboard(allowsPredictiveKeyboard bool) *AssessmentConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsPredictiveKeyboard:"), allowsPredictiveKeyboard)
 	return x
 }
 
-// A Boolean value that indicates whether to allow keyboard shortcuts during an assessment.
-//
-// WithAllowsKeyboardShortcuts sets allowsKeyboardShortcuts and returns the receiver so calls can be chained.
+// WithAllowsKeyboardShortcuts a Boolean value that indicates whether to allow keyboard shortcuts during an assessment.
 func (x *AssessmentConfiguration) WithAllowsKeyboardShortcuts(allowsKeyboardShortcuts bool) *AssessmentConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsKeyboardShortcuts:"), allowsKeyboardShortcuts)
 	return x
 }
 
-// A Boolean value that indicates whether to allow the Accessibility Keyboard during an assessment.
-//
-// WithAllowsAccessibilityKeyboard sets allowsAccessibilityKeyboard and returns the receiver so calls can be chained.
+// WithAllowsAccessibilityKeyboard a Boolean value that indicates whether to allow the Accessibility Keyboard during an assessment.
 func (x *AssessmentConfiguration) WithAllowsAccessibilityKeyboard(allowsAccessibilityKeyboard bool) *AssessmentConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAccessibilityKeyboard:"), allowsAccessibilityKeyboard)
 	return x
 }
 
-// A Boolean value that indicates whether to allow Live Captions during an assessment.
-//
-// WithAllowsAccessibilityLiveCaptions sets allowsAccessibilityLiveCaptions and returns the receiver so calls can be chained.
+// WithAllowsAccessibilityLiveCaptions a Boolean value that indicates whether to allow Live Captions during an assessment.
 func (x *AssessmentConfiguration) WithAllowsAccessibilityLiveCaptions(allowsAccessibilityLiveCaptions bool) *AssessmentConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAccessibilityLiveCaptions:"), allowsAccessibilityLiveCaptions)
 	return x
 }
 
-// A Boolean value that indicates whether to allow the Accessibility Reader during an assessment.
-//
-// WithAllowsAccessibilityReader sets allowsAccessibilityReader and returns the receiver so calls can be chained.
+// WithAllowsAccessibilityReader a Boolean value that indicates whether to allow the Accessibility Reader during an assessment.
 func (x *AssessmentConfiguration) WithAllowsAccessibilityReader(allowsAccessibilityReader bool) *AssessmentConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAccessibilityReader:"), allowsAccessibilityReader)
 	return x
 }
 
-// A Boolean value that indicates whether to allow screenshots copied to the clipboard during an assessment.
-//
-// WithAllowsScreenshots sets allowsScreenshots and returns the receiver so calls can be chained.
+// WithAllowsScreenshots a Boolean value that indicates whether to allow screenshots copied to the clipboard during an assessment.
 func (x *AssessmentConfiguration) WithAllowsScreenshots(allowsScreenshots bool) *AssessmentConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsScreenshots:"), allowsScreenshots)
 	return x
 }
 
-// Adds an app to the list of apps available during an assessment.
+// SetConfigurationForApplication adds an app to the list of apps available during an assessment.
 func (x *AssessmentConfiguration) SetConfigurationForApplication(configuration *AssessmentParticipantConfiguration, application *AssessmentApplication) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:forApplication:"), objref.IDOf(configuration), objref.IDOf(application))
 }
 
-// Removes the availability of a previously allowed app.
+// RemoveApplication removes the availability of a previously allowed app.
 func (x *AssessmentConfiguration) RemoveApplication(application *AssessmentApplication) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeApplication:"), objref.IDOf(application))
 }
 
-// The autocorrect mode that specifies which autocorrect features to allow during an assessment. Users can turn on autocorrect in the Settings app (General > Keyboard > Auto-Correction). An assessment session disables this feature by default, but you can allow it by setting “AEAssessmentConfiguration/autocorrectMode-swift.property“ in the “AEAssessmentConfiguration“ instance that you use to initialize a session. Set the mode's value to some combination of the the values from the “AEAssessmentConfiguration/AutocorrectMode-swift.struct“ structure.
+// AutocorrectMode the autocorrect mode that specifies which autocorrect features to allow during an assessment. Users can turn on autocorrect in the Settings app (General > Keyboard > Auto-Correction). An assessment session disables this feature by default, but you can allow it by setting “AEAssessmentConfiguration/autocorrectMode-swift.property“ in the “AEAssessmentConfiguration“ instance that you use to initialize a session. Set the mode's value to some combination of the the values from the “AEAssessmentConfiguration/AutocorrectMode-swift.struct“ structure.
 func (x *AssessmentConfiguration) AutocorrectMode() AutocorrectMode {
 	_r := objc.Send[AutocorrectMode](objref.IDOf(x), objc.RegisterName("autocorrectMode"))
 	return _r
 }
 
+// SetAutocorrectMode wraps the corresponding Objective-C method.
 func (x *AssessmentConfiguration) SetAutocorrectMode(autocorrectMode AutocorrectMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutocorrectMode:"), autocorrectMode)
 }
 
-// A Boolean value that indicates whether to allow spell check during an assessment. Users can activate the spell checker by turning on the Check Spelling feature in the Settings app (General > Keyboard). An assessment session disables spell checking by default, but you can allow it by setting “AEAssessmentConfiguration/allowsSpellCheck“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+// AllowsSpellCheck a Boolean value that indicates whether to allow spell check during an assessment. Users can activate the spell checker by turning on the Check Spelling feature in the Settings app (General > Keyboard). An assessment session disables spell checking by default, but you can allow it by setting “AEAssessmentConfiguration/allowsSpellCheck“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
 func (x *AssessmentConfiguration) AllowsSpellCheck() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsSpellCheck"))
 	return _r
 }
 
+// SetAllowsSpellCheck wraps the corresponding Objective-C method.
 func (x *AssessmentConfiguration) SetAllowsSpellCheck(allowsSpellCheck bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsSpellCheck:"), allowsSpellCheck)
 }
 
-// A Boolean value that indicates whether to enable the predictive keyboard during an assessment. Users can turn on the Predictive Keyboard feature in the Settings app (General > Keyboard). An assessment session disables this feature by default, but you can allow it by setting “AEAssessmentConfiguration/allowsPredictiveKeyboard“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+// AllowsPredictiveKeyboard a Boolean value that indicates whether to enable the predictive keyboard during an assessment. Users can turn on the Predictive Keyboard feature in the Settings app (General > Keyboard). An assessment session disables this feature by default, but you can allow it by setting “AEAssessmentConfiguration/allowsPredictiveKeyboard“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
 func (x *AssessmentConfiguration) AllowsPredictiveKeyboard() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsPredictiveKeyboard"))
 	return _r
 }
 
+// SetAllowsPredictiveKeyboard wraps the corresponding Objective-C method.
 func (x *AssessmentConfiguration) SetAllowsPredictiveKeyboard(allowsPredictiveKeyboard bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsPredictiveKeyboard:"), allowsPredictiveKeyboard)
 }
 
-// A Boolean value that indicates whether to allow keyboard shortcuts during an assessment. Users can add Keyboard Shortcuts in the Settings app (General > Keyboard > Text Replacement). An assessment session disables the use of keyboard shortcuts by default, but you can allow them by setting “AEAssessmentConfiguration/allowsKeyboardShortcuts“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+// AllowsKeyboardShortcuts a Boolean value that indicates whether to allow keyboard shortcuts during an assessment. Users can add Keyboard Shortcuts in the Settings app (General > Keyboard > Text Replacement). An assessment session disables the use of keyboard shortcuts by default, but you can allow them by setting “AEAssessmentConfiguration/allowsKeyboardShortcuts“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
 func (x *AssessmentConfiguration) AllowsKeyboardShortcuts() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsKeyboardShortcuts"))
 	return _r
 }
 
+// SetAllowsKeyboardShortcuts wraps the corresponding Objective-C method.
 func (x *AssessmentConfiguration) SetAllowsKeyboardShortcuts(allowsKeyboardShortcuts bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsKeyboardShortcuts:"), allowsKeyboardShortcuts)
 }
 
-// A Boolean value that indicates whether to allow alternative input methods in the Accessibility Keyboard during an assessment. Users can enable the Accessibility Keyboard in the Settings app (Accessibility > Keyboard > Accessibility Keyboard) to access an on-screen keyboard with alternative input methods. An assessment session disables alternative input methods in the Accessibility Keyboard by default, but you can allow them by setting “AEAssessmentConfiguration/allowsAccessibilityKeyboard“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+// AllowsAccessibilityKeyboard a Boolean value that indicates whether to allow alternative input methods in the Accessibility Keyboard during an assessment. Users can enable the Accessibility Keyboard in the Settings app (Accessibility > Keyboard > Accessibility Keyboard) to access an on-screen keyboard with alternative input methods. An assessment session disables alternative input methods in the Accessibility Keyboard by default, but you can allow them by setting “AEAssessmentConfiguration/allowsAccessibilityKeyboard“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
 func (x *AssessmentConfiguration) AllowsAccessibilityKeyboard() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsAccessibilityKeyboard"))
 	return _r
 }
 
+// SetAllowsAccessibilityKeyboard wraps the corresponding Objective-C method.
 func (x *AssessmentConfiguration) SetAllowsAccessibilityKeyboard(allowsAccessibilityKeyboard bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAccessibilityKeyboard:"), allowsAccessibilityKeyboard)
 }
 
-// A Boolean value that indicates whether to allow Live Captions during an assessment. Users can enable Live Captions in the Settings app (Accessibility > Live Captions) to receive real-time transcription of spoken audio as text on screen. An assessment session disables Live Captions by default, but you can allow it by setting “AEAssessmentConfiguration/allowsAccessibilityLiveCaptions“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+// AllowsAccessibilityLiveCaptions a Boolean value that indicates whether to allow Live Captions during an assessment. Users can enable Live Captions in the Settings app (Accessibility > Live Captions) to receive real-time transcription of spoken audio as text on screen. An assessment session disables Live Captions by default, but you can allow it by setting “AEAssessmentConfiguration/allowsAccessibilityLiveCaptions“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
 func (x *AssessmentConfiguration) AllowsAccessibilityLiveCaptions() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsAccessibilityLiveCaptions"))
 	return _r
 }
 
+// SetAllowsAccessibilityLiveCaptions wraps the corresponding Objective-C method.
 func (x *AssessmentConfiguration) SetAllowsAccessibilityLiveCaptions(allowsAccessibilityLiveCaptions bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAccessibilityLiveCaptions:"), allowsAccessibilityLiveCaptions)
 }
 
-// A Boolean value that indicates whether to allow the Accessibility Reader during an assessment. Users can enable the Accessibility Reader in the Settings app (Accessibility > Read & Speak > Accessibility Reader) to have text content formatted or read aloud. An assessment session disables the Accessibility Reader by default, but you can allow it by setting “AEAssessmentConfiguration/allowsAccessibilityReader“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+// AllowsAccessibilityReader a Boolean value that indicates whether to allow the Accessibility Reader during an assessment. Users can enable the Accessibility Reader in the Settings app (Accessibility > Read & Speak > Accessibility Reader) to have text content formatted or read aloud. An assessment session disables the Accessibility Reader by default, but you can allow it by setting “AEAssessmentConfiguration/allowsAccessibilityReader“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
 func (x *AssessmentConfiguration) AllowsAccessibilityReader() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsAccessibilityReader"))
 	return _r
 }
 
+// SetAllowsAccessibilityReader wraps the corresponding Objective-C method.
 func (x *AssessmentConfiguration) SetAllowsAccessibilityReader(allowsAccessibilityReader bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAccessibilityReader:"), allowsAccessibilityReader)
 }
 
-// A Boolean value that indicates whether to allow screenshots copied to the clipboard during an assessment. An assessment session disables the ability to take screenshots by default to maintain assessment integrity. This property specifically applies to screenshots that are copied to the clipboard, typically those taken using the Command+Control+Shift+3 and Command+Control+Shift+4 keyboard shortcuts. You can allow clipboard screenshots by setting `allowsScreenshots` to `true`. - Note: The clipboard is cleared before the assessment session ends to prevent exporting captured content.
+// AllowsScreenshots a Boolean value that indicates whether to allow screenshots copied to the clipboard during an assessment. An assessment session disables the ability to take screenshots by default to maintain assessment integrity. This property specifically applies to screenshots that are copied to the clipboard, typically those taken using the Command+Control+Shift+3 and Command+Control+Shift+4 keyboard shortcuts. You can allow clipboard screenshots by setting `allowsScreenshots` to `true`. - Note: The clipboard is cleared before the assessment session ends to prevent exporting captured content.
 func (x *AssessmentConfiguration) AllowsScreenshots() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsScreenshots"))
 	return _r
 }
 
+// SetAllowsScreenshots wraps the corresponding Objective-C method.
 func (x *AssessmentConfiguration) SetAllowsScreenshots(allowsScreenshots bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsScreenshots:"), allowsScreenshots)
 }
 
-// The app-specific configuration for the app that invokes the assessment. Use this property to get and customize the app-specific configuration that's applied to your own app. For example, you can set the `allowsNetworkAccess` property for your own app: ```swift let config = AEAssessmentConfiguration() config.mainParticipantConfiguration.allowsNetworkAccess = false ```
+// MainParticipantConfiguration the app-specific configuration for the app that invokes the assessment. Use this property to get and customize the app-specific configuration that's applied to your own app. For example, you can set the `allowsNetworkAccess` property for your own app: ```swift let config = AEAssessmentConfiguration() config.mainParticipantConfiguration.allowsNetworkAccess = false ```
 func (x *AssessmentConfiguration) MainParticipantConfiguration() *AssessmentParticipantConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainParticipantConfiguration"))
 	return AssessmentParticipantConfigurationFromID(_r)
 }
 
-// The collection of apps available during an assessment, along with their associated configurations. Access this property to get a list of the currently allowed secondary apps and their individual configurations. Add apps to the list by calling the “AEAssessmentConfiguration/setConfiguration(_:for:)“ method. Remove them from the list by calling the “AEAssessmentConfiguration/remove(_:)“ method.
+// ConfigurationsByApplication the collection of apps available during an assessment, along with their associated configurations. Access this property to get a list of the currently allowed secondary apps and their individual configurations. Add apps to the list by calling the “AEAssessmentConfiguration/setConfiguration(_:for:)“ method. Remove them from the list by calling the “AEAssessmentConfiguration/remove(_:)“ method.
 func (x *AssessmentConfiguration) ConfigurationsByApplication() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configurationsByApplication"))
 	return obj.Wrap(_r)

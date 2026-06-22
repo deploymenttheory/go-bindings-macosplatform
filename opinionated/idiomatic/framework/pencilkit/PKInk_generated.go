@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A structure that represents an ink that specifies its type, color, and width.
-//
 // Ink is an idiomatic wrapper over the Objective-C class PKInk.
+//
+// A structure that represents an ink that specifies its type, color, and width.
 type Ink struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func InkFromID(id objc.ID) *Ink {
 	if id == 0 {
 		return nil
 	}
-	x := &Ink{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Ink{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func inkAdopt(id objc.ID) *Ink {
 	if id == 0 {
 		return nil
 	}
-	x := &Ink{Handle: objref.Wrap(id)}
+	x := &Ink{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +60,12 @@ func (x *Ink) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Ink) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewInkWithInkTypeColor creates a new Ink.
 func NewInkWithInkTypeColor(type_ obj.Object, color obj.Object) *Ink {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKInk")), objc.RegisterName("alloc"))
@@ -65,18 +73,19 @@ func NewInkWithInkTypeColor(type_ obj.Object, color obj.Object) *Ink {
 	return inkAdopt(_id)
 }
 
-// The type of ink, eg. pen, pencil...
+// InkType the type of ink, eg. pen, pencil...
 func (x *Ink) InkType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inkType"))
 	return obj.Wrap(_r)
 }
 
+// Color wraps the corresponding Objective-C method.
 func (x *Ink) Color() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }
 
-// The PencilKit version required to use this ink.
+// RequiredContentVersion the PencilKit version required to use this ink.
 func (x *Ink) RequiredContentVersion() ContentVersion {
 	_r := objc.Send[ContentVersion](objref.IDOf(x), objc.RegisterName("requiredContentVersion"))
 	return _r

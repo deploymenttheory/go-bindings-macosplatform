@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents an Automator action that’s a loadable bundle.
-//
 // BundleAction is an idiomatic wrapper over the Objective-C class AMBundleAction.
+//
+// BundleAction is an abstract base — you do not construct it directly. Construct one of [AppleScriptAction], [ShellScriptAction] and pass it where a BundleAction is accepted.
+//
+// An object that represents an Automator action that’s a loadable bundle.
 type BundleAction struct {
-	objref.Handle
+	Action
 }
 
 // BundleActionFromID adopts an existing Objective-C object as a BundleAction
@@ -25,7 +26,8 @@ func BundleActionFromID(id objc.ID) *BundleAction {
 	if id == 0 {
 		return nil
 	}
-	x := &BundleAction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BundleAction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,73 +40,54 @@ func bundleActionAdopt(id objc.ID) *BundleAction {
 	if id == 0 {
 		return nil
 	}
-	x := &BundleAction{Handle: objref.Wrap(id)}
+	x := &BundleAction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *BundleAction) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BundleAction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BundleAction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewBundleAction creates a new BundleAction.
-func NewBundleAction() *BundleAction {
-	_id := objc.Send[objc.ID](objc.ID(_class("AMBundleAction")), objc.RegisterName("new"))
-	return bundleActionAdopt(_id)
-}
-
-// The action’s parameters.
-//
-// WithParameters sets parameters and returns the receiver so calls can be chained.
+// WithParameters the action’s parameters.
 func (x *BundleAction) WithParameters(parameters obj.Object) *BundleAction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
 	return x
 }
 
-// A float value between 0 and 1, which indicates how far along the action is while processing.
-//
-// WithProgressValue sets progressValue and returns the receiver so calls can be chained.
+// WithProgressValue a float value between 0 and 1, which indicates how far along the action is while processing.
 func (x *BundleAction) WithProgressValue(progressValue float64) *BundleAction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressValue:"), progressValue)
 	return x
 }
 
-// Allows the action object to perform setup tasks requiring the presence of all bundle objects.
+// AwakeFromBundle allows the action object to perform setup tasks requiring the presence of all bundle objects.
 func (x *BundleAction) AwakeFromBundle() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("awakeFromBundle"))
 }
 
+// HasView wraps the corresponding Objective-C method.
 func (x *BundleAction) HasView() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasView"))
 	return _r
 }
 
+// View wraps the corresponding Objective-C method.
 func (x *BundleAction) View() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
 	return obj.Wrap(_r)
 }
 
+// Bundle wraps the corresponding Objective-C method.
 func (x *BundleAction) Bundle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundle"))
 	return obj.Wrap(_r)
 }
 
+// Parameters wraps the corresponding Objective-C method.
 func (x *BundleAction) Parameters() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameters"))
 	return obj.Wrap(_r)
 }
 
+// SetParameters wraps the corresponding Objective-C method.
 func (x *BundleAction) SetParameters(parameters obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
 }
@@ -123,3 +106,12 @@ type BundleActionable interface {
 }
 
 var _ BundleActionable = (*BundleAction)(nil)
+
+// isBundleAction marks BundleAction — and, by embedding promotion, its
+// subclasses — as a member of the BundleAction hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *BundleAction) isBundleAction() {}
+
+var _ BundleActionProvider = (*BundleAction)(nil)
+
+var _ ActionProvider = (*BundleAction)(nil)

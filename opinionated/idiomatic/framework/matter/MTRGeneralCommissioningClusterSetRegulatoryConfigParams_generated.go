@@ -23,7 +23,8 @@ func MTRGeneralCommissioningClusterSetRegulatoryConfigParamsFromID(id objc.ID) *
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGeneralCommissioningClusterSetRegulatoryConfigParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRGeneralCommissioningClusterSetRegulatoryConfigParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRGeneralCommissioningClusterSetRegulatoryConfigParamsAdopt(id objc.ID) *M
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGeneralCommissioningClusterSetRegulatoryConfigParams{Handle: objref.Wrap(id)}
+	x := &MTRGeneralCommissioningClusterSetRegulatoryConfigParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,55 +58,60 @@ func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) IsKind(classNa
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRGeneralCommissioningClusterSetRegulatoryConfigParams creates a new MTRGeneralCommissioningClusterSetRegulatoryConfigParams.
 func NewMTRGeneralCommissioningClusterSetRegulatoryConfigParams() *MTRGeneralCommissioningClusterSetRegulatoryConfigParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRGeneralCommissioningClusterSetRegulatoryConfigParams")), objc.RegisterName("new"))
 	return mTRGeneralCommissioningClusterSetRegulatoryConfigParamsAdopt(_id)
 }
 
-// WithNewRegulatoryConfig sets newRegulatoryConfig and returns the receiver so calls can be chained.
+// WithNewRegulatoryConfig sets the property and returns the receiver so calls can be chained.
 func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) WithNewRegulatoryConfig(newRegulatoryConfig obj.Object) *MTRGeneralCommissioningClusterSetRegulatoryConfigParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewRegulatoryConfig:"), objref.IDOf(newRegulatoryConfig))
 	return x
 }
 
-// WithCountryCode sets countryCode and returns the receiver so calls can be chained.
+// WithCountryCode sets the property and returns the receiver so calls can be chained.
 func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) WithCountryCode(countryCode string) *MTRGeneralCommissioningClusterSetRegulatoryConfigParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountryCode:"), purego.NSString(countryCode))
 	return x
 }
 
-// WithBreadcrumb sets breadcrumb and returns the receiver so calls can be chained.
+// WithBreadcrumb sets the property and returns the receiver so calls can be chained.
 func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) WithBreadcrumb(breadcrumb obj.Object) *MTRGeneralCommissioningClusterSetRegulatoryConfigParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGeneralCommissioningClusterSetRegulatoryConfigParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGeneralCommissioningClusterSetRegulatoryConfigParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// GetNewRegulatoryConfig wraps the corresponding Objective-C method.
 func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) GetNewRegulatoryConfig() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewRegulatoryConfig"))
 	return obj.Wrap(_r)
 }
 
+// SetNewRegulatoryConfig wraps the corresponding Objective-C method.
 func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) SetNewRegulatoryConfig(newRegulatoryConfig obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewRegulatoryConfig:"), objref.IDOf(newRegulatoryConfig))
 }
 
+// CountryCode wraps the corresponding Objective-C method.
 func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) CountryCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("countryCode"))
 	if _r == 0 {
@@ -113,35 +120,40 @@ func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) CountryCode() 
 	return purego.GoString(_r)
 }
 
+// SetCountryCode wraps the corresponding Objective-C method.
 func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) SetCountryCode(countryCode string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountryCode:"), purego.NSString(countryCode))
 }
 
+// Breadcrumb wraps the corresponding Objective-C method.
 func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) Breadcrumb() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("breadcrumb"))
 	return obj.Wrap(_r)
 }
 
+// SetBreadcrumb wraps the corresponding Objective-C method.
 func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) SetBreadcrumb(breadcrumb obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

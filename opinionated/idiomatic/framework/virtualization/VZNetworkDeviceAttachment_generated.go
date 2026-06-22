@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The common behaviors for the network attachment points of your virtual machine.
-//
 // NetworkDeviceAttachment is an idiomatic wrapper over the Objective-C class VZNetworkDeviceAttachment.
+//
+// NetworkDeviceAttachment is an abstract base — you do not construct it directly. Construct one of [BridgedNetworkDeviceAttachment], [FileHandleNetworkDeviceAttachment], [NATNetworkDeviceAttachment], [VmnetNetworkDeviceAttachment] and pass it where a NetworkDeviceAttachment is accepted.
+//
+// The common behaviors for the network attachment points of your virtual machine.
 type NetworkDeviceAttachment struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func NetworkDeviceAttachmentFromID(id objc.ID) *NetworkDeviceAttachment {
 	if id == 0 {
 		return nil
 	}
-	x := &NetworkDeviceAttachment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NetworkDeviceAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func networkDeviceAttachmentAdopt(id objc.ID) *NetworkDeviceAttachment {
 	if id == 0 {
 		return nil
 	}
-	x := &NetworkDeviceAttachment{Handle: objref.Wrap(id)}
+	x := &NetworkDeviceAttachment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *NetworkDeviceAttachment) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewNetworkDeviceAttachment creates a new NetworkDeviceAttachment.
-func NewNetworkDeviceAttachment() *NetworkDeviceAttachment {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZNetworkDeviceAttachment")), objc.RegisterName("new"))
-	return networkDeviceAttachmentAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NetworkDeviceAttachment) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NetworkDeviceAttachmentable is the interface implemented by [NetworkDeviceAttachment], for mocking and DI.
@@ -70,3 +74,10 @@ type NetworkDeviceAttachmentable interface {
 }
 
 var _ NetworkDeviceAttachmentable = (*NetworkDeviceAttachment)(nil)
+
+// isNetworkDeviceAttachment marks NetworkDeviceAttachment — and, by embedding promotion, its
+// subclasses — as a member of the NetworkDeviceAttachment hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NetworkDeviceAttachment) isNetworkDeviceAttachment() {}
+
+var _ NetworkDeviceAttachmentProvider = (*NetworkDeviceAttachment)(nil)

@@ -13,8 +13,10 @@ import (
 )
 
 // CalTask is an idiomatic wrapper over the Objective-C class CalTask.
+//
+// It embeds [CalCalendarItem], promoting that type's methods.
 type CalTask struct {
-	objref.Handle
+	CalCalendarItem
 }
 
 // CalTaskFromID adopts an existing Objective-C object as a CalTask
@@ -23,7 +25,8 @@ func CalTaskFromID(id objc.ID) *CalTask {
 	if id == 0 {
 		return nil
 	}
-	x := &CalTask{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CalTask{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +39,10 @@ func calTaskAdopt(id objc.ID) *CalTask {
 	if id == 0 {
 		return nil
 	}
-	x := &CalTask{Handle: objref.Wrap(id)}
+	x := &CalTask{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CalTask) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CalTask) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CalTask) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCalTask creates a new CalTask.
@@ -62,86 +51,94 @@ func NewCalTask() *CalTask {
 	return calTaskAdopt(_id)
 }
 
-// WithDueDate sets dueDate and returns the receiver so calls can be chained.
+// WithDueDate sets the property and returns the receiver so calls can be chained.
 func (x *CalTask) WithDueDate(dueDate obj.Object) *CalTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDueDate:"), objref.IDOf(dueDate))
 	return x
 }
 
-// WithPriority sets priority and returns the receiver so calls can be chained.
+// WithPriority sets the property and returns the receiver so calls can be chained.
 func (x *CalTask) WithPriority(priority int) *CalTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
 	return x
 }
 
-// WithIsCompleted sets isCompleted and returns the receiver so calls can be chained.
+// WithIsCompleted sets the property and returns the receiver so calls can be chained.
 func (x *CalTask) WithIsCompleted(isCompleted bool) *CalTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsCompleted:"), isCompleted)
 	return x
 }
 
-// WithCompletedDate sets completedDate and returns the receiver so calls can be chained.
+// WithCompletedDate sets the property and returns the receiver so calls can be chained.
 func (x *CalTask) WithCompletedDate(completedDate obj.Object) *CalTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletedDate:"), objref.IDOf(completedDate))
 	return x
 }
 
-// WithCalendar sets calendar and returns the receiver so calls can be chained.
+// WithCalendar sets the property and returns the receiver so calls can be chained.
 func (x *CalTask) WithCalendar(calendar *CalCalendar) *CalTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return x
 }
 
-// WithNotes sets notes and returns the receiver so calls can be chained.
+// WithNotes sets the property and returns the receiver so calls can be chained.
 func (x *CalTask) WithNotes(notes string) *CalTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotes:"), purego.NSString(notes))
 	return x
 }
 
-// WithUrl sets url and returns the receiver so calls can be chained.
+// WithUrl sets the property and returns the receiver so calls can be chained.
 func (x *CalTask) WithUrl(url string) *CalTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
 	return x
 }
 
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle sets the property and returns the receiver so calls can be chained.
 func (x *CalTask) WithTitle(title string) *CalTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
+// DueDate wraps the corresponding Objective-C method.
 func (x *CalTask) DueDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dueDate"))
 	return obj.Wrap(_r)
 }
 
+// SetDueDate wraps the corresponding Objective-C method.
 func (x *CalTask) SetDueDate(dueDate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDueDate:"), objref.IDOf(dueDate))
 }
 
+// Priority wraps the corresponding Objective-C method.
 func (x *CalTask) Priority() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("priority"))
 	return _r
 }
 
+// SetPriority wraps the corresponding Objective-C method.
 func (x *CalTask) SetPriority(priority int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
 }
 
+// IsCompleted wraps the corresponding Objective-C method.
 func (x *CalTask) IsCompleted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompleted"))
 	return _r
 }
 
+// SetIsCompleted wraps the corresponding Objective-C method.
 func (x *CalTask) SetIsCompleted(isCompleted bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsCompleted:"), isCompleted)
 }
 
+// CompletedDate wraps the corresponding Objective-C method.
 func (x *CalTask) CompletedDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completedDate"))
 	return obj.Wrap(_r)
 }
 
+// SetCompletedDate wraps the corresponding Objective-C method.
 func (x *CalTask) SetCompletedDate(completedDate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletedDate:"), objref.IDOf(completedDate))
 }
@@ -168,3 +165,5 @@ type CalTaskable interface {
 }
 
 var _ CalTaskable = (*CalTask)(nil)
+
+var _ CalCalendarItemProvider = (*CalTask)(nil)

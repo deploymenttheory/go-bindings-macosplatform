@@ -10,25 +10,25 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns a Boolean value that indicates whether the current device supports Picture in Picture.
+// IsPictureInPictureSupported returns a Boolean value that indicates whether the current device supports Picture in Picture.
 func IsPictureInPictureSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVPictureInPictureController")), objc.RegisterName("isPictureInPictureSupported"))
 	return _r
 }
 
-// System default Picture in Picture start template image for use in client's Picture in Picture button.
+// PictureInPictureButtonStartImage system default Picture in Picture start template image for use in client's Picture in Picture button.
 func PictureInPictureButtonStartImage() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVPictureInPictureController")), objc.RegisterName("pictureInPictureButtonStartImage"))
 	return obj.Wrap(_r)
 }
 
-// System default Picture in Picture stop template image for use in client's Picture in Picture button.
+// PictureInPictureButtonStopImage system default Picture in Picture stop template image for use in client's Picture in Picture button.
 func PictureInPictureButtonStopImage() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVPictureInPictureController")), objc.RegisterName("pictureInPictureButtonStopImage"))
 	return obj.Wrap(_r)
 }
 
-// A list of playback speeds to be used by default across the system.
+// SystemDefaultSpeeds a list of playback speeds to be used by default across the system.
 //
 // SystemDefaultSpeeds returns the collection as a Go slice.
 func SystemDefaultSpeeds() []*PlaybackSpeed {

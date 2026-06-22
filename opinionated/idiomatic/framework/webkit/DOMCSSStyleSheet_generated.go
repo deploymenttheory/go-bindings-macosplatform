@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMCSSStyleSheet is an idiomatic wrapper over the Objective-C class DOMCSSStyleSheet.
+//
+// It embeds [DOMStyleSheet], promoting that type's methods.
 type DOMCSSStyleSheet struct {
-	objref.Handle
+	DOMStyleSheet
 }
 
 // DOMCSSStyleSheetFromID adopts an existing Objective-C object as a DOMCSSStyleSheet
@@ -23,7 +24,8 @@ func DOMCSSStyleSheetFromID(id objc.ID) *DOMCSSStyleSheet {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMCSSStyleSheet{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMCSSStyleSheet{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMCSSStyleSheetAdopt(id objc.ID) *DOMCSSStyleSheet {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMCSSStyleSheet{Handle: objref.Wrap(id)}
+	x := &DOMCSSStyleSheet{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMCSSStyleSheet) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMCSSStyleSheet) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMCSSStyleSheet) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMCSSStyleSheet creates a new DOMCSSStyleSheet.
@@ -62,45 +50,53 @@ func NewDOMCSSStyleSheet() *DOMCSSStyleSheet {
 	return dOMCSSStyleSheetAdopt(_id)
 }
 
-// WithDisabled sets disabled and returns the receiver so calls can be chained.
+// WithDisabled sets the property and returns the receiver so calls can be chained.
 func (x *DOMCSSStyleSheet) WithDisabled(disabled bool) *DOMCSSStyleSheet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabled:"), disabled)
 	return x
 }
 
+// InsertRuleIndex wraps the corresponding Objective-C method.
 func (x *DOMCSSStyleSheet) InsertRuleIndex(rule string, index int) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("insertRule:index:"), purego.NSString(rule), index)
 	return _r
 }
 
+// DeleteRule wraps the corresponding Objective-C method.
 func (x *DOMCSSStyleSheet) DeleteRule(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteRule:"), index)
 }
 
+// AddRuleStyleIndex wraps the corresponding Objective-C method.
 func (x *DOMCSSStyleSheet) AddRuleStyleIndex(selector string, style string, index int) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("addRule:style:index:"), purego.NSString(selector), purego.NSString(style), index)
 	return _r
 }
 
+// RemoveRule wraps the corresponding Objective-C method.
 func (x *DOMCSSStyleSheet) RemoveRule(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeRule:"), index)
 }
 
+// OwnerRule wraps the corresponding Objective-C method.
 func (x *DOMCSSStyleSheet) OwnerRule() *DOMCSSRule {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ownerRule"))
 	return DOMCSSRuleFromID(_r)
 }
 
+// CssRules wraps the corresponding Objective-C method.
 func (x *DOMCSSStyleSheet) CssRules() *DOMCSSRuleList {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cssRules"))
 	return DOMCSSRuleListFromID(_r)
 }
 
+// Rules wraps the corresponding Objective-C method.
 func (x *DOMCSSStyleSheet) Rules() *DOMCSSRuleList {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rules"))
 	return DOMCSSRuleListFromID(_r)
 }
 
+// InsertRule wraps the corresponding Objective-C method.
 func (x *DOMCSSStyleSheet) InsertRule(rule string, index int) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("insertRule::"), purego.NSString(rule), index)
 	return _r
@@ -121,3 +117,9 @@ type DOMCSSStyleSheetable interface {
 }
 
 var _ DOMCSSStyleSheetable = (*DOMCSSStyleSheet)(nil)
+
+var _ DOMStyleSheetProvider = (*DOMCSSStyleSheet)(nil)
+
+var _ DOMObjectProvider = (*DOMCSSStyleSheet)(nil)
+
+var _ WebScriptObjectProvider = (*DOMCSSStyleSheet)(nil)

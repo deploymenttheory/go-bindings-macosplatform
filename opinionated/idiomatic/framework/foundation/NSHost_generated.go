@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of an individual host on the network.
-//
 // Host is an idiomatic wrapper over the Objective-C class NSHost.
+//
+// A representation of an individual host on the network.
 type Host struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func HostFromID(id objc.ID) *Host {
 	if id == 0 {
 		return nil
 	}
-	x := &Host{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Host{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func hostAdopt(id objc.ID) *Host {
 	if id == 0 {
 		return nil
 	}
-	x := &Host{Handle: objref.Wrap(id)}
+	x := &Host{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,23 +60,31 @@ func (x *Host) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Host) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewHost creates a new Host.
 func NewHost() *Host {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSHost")), objc.RegisterName("new"))
 	return hostAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Host) WithScriptingProperties(scriptingProperties obj.Object) *Host {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// IsEqualToHost wraps the corresponding Objective-C method.
 func (x *Host) IsEqualToHost(aHost *Host) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToHost:"), objref.IDOf(aHost))
 	return _r
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *Host) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -83,12 +93,15 @@ func (x *Host) Name() string {
 	return purego.GoString(_r)
 }
 
+// Names wraps the corresponding Objective-C method.
+//
 // Names returns the collection as a Go slice.
 func (x *Host) Names() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("names"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// Address wraps the corresponding Objective-C method.
 func (x *Host) Address() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("address"))
 	if _r == 0 {
@@ -97,12 +110,15 @@ func (x *Host) Address() string {
 	return purego.GoString(_r)
 }
 
+// Addresses wraps the corresponding Objective-C method.
+//
 // Addresses returns the collection as a Go slice.
 func (x *Host) Addresses() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// LocalizedName wraps the corresponding Objective-C method.
 func (x *Host) LocalizedName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
 	if _r == 0 {

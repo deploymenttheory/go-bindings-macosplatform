@@ -23,7 +23,8 @@ func MTRPumpConfigurationAndControlClusterPumpBlockedEventFromID(id objc.ID) *MT
 	if id == 0 {
 		return nil
 	}
-	x := &MTRPumpConfigurationAndControlClusterPumpBlockedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRPumpConfigurationAndControlClusterPumpBlockedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRPumpConfigurationAndControlClusterPumpBlockedEventAdopt(id objc.ID) *MTR
 	if id == 0 {
 		return nil
 	}
-	x := &MTRPumpConfigurationAndControlClusterPumpBlockedEvent{Handle: objref.Wrap(id)}
+	x := &MTRPumpConfigurationAndControlClusterPumpBlockedEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *MTRPumpConfigurationAndControlClusterPumpBlockedEvent) IsEqual(other ob
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MTRPumpConfigurationAndControlClusterPumpBlockedEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRPumpConfigurationAndControlClusterPumpBlockedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMTRPumpConfigurationAndControlClusterPumpBlockedEvent creates a new MTRPumpConfigurationAndControlClusterPumpBlockedEvent.

@@ -6,15 +6,16 @@ package coreml
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A list or range of sizes that augment an image constraint’s default size.
-//
 // ImageSizeConstraint is an idiomatic wrapper over the Objective-C class MLImageSizeConstraint.
+//
+// A list or range of sizes that augment an image constraint’s default size.
 type ImageSizeConstraint struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func ImageSizeConstraintFromID(id objc.ID) *ImageSizeConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageSizeConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageSizeConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func imageSizeConstraintAdopt(id objc.ID) *ImageSizeConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageSizeConstraint{Handle: objref.Wrap(id)}
+	x := &ImageSizeConstraint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +61,38 @@ func (x *ImageSizeConstraint) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ImageSizeConstraint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewImageSizeConstraint creates a new ImageSizeConstraint.
 func NewImageSizeConstraint() *ImageSizeConstraint {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLImageSizeConstraint")), objc.RegisterName("new"))
 	return imageSizeConstraintAdopt(_id)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *ImageSizeConstraint) Type() ImageSizeConstraintType {
 	_r := objc.Send[ImageSizeConstraintType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
+// PixelsWideRange wraps the corresponding Objective-C method.
+func (x *ImageSizeConstraint) PixelsWideRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("pixelsWideRange"))
+	return _r
+}
+
+// PixelsHighRange wraps the corresponding Objective-C method.
+func (x *ImageSizeConstraint) PixelsHighRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("pixelsHighRange"))
+	return _r
+}
+
+// EnumeratedImageSizes wraps the corresponding Objective-C method.
+//
 // EnumeratedImageSizes returns the collection as a Go slice.
 func (x *ImageSizeConstraint) EnumeratedImageSizes() []*ImageSize {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumeratedImageSizes"))
@@ -79,6 +103,8 @@ func (x *ImageSizeConstraint) EnumeratedImageSizes() []*ImageSize {
 type ImageSizeConstraintable interface {
 	obj.Object
 	Type() ImageSizeConstraintType
+	PixelsWideRange() foundation.NSRange
+	PixelsHighRange() foundation.NSRange
 	EnumeratedImageSizes() []*ImageSize
 }
 

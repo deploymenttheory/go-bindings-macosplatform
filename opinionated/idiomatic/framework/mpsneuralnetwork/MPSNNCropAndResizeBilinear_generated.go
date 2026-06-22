@@ -6,15 +6,18 @@ package mpsneuralnetwork
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NNCropAndResizeBilinear is an idiomatic wrapper over the Objective-C class MPSNNCropAndResizeBilinear.
+//
+// It embeds [CNNKernel], promoting that type's methods.
 type NNCropAndResizeBilinear struct {
-	objref.Handle
+	CNNKernel
 }
 
 // NNCropAndResizeBilinearFromID adopts an existing Objective-C object as a NNCropAndResizeBilinear
@@ -23,7 +26,8 @@ func NNCropAndResizeBilinearFromID(id objc.ID) *NNCropAndResizeBilinear {
 	if id == 0 {
 		return nil
 	}
-	x := &NNCropAndResizeBilinear{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNCropAndResizeBilinear{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +40,10 @@ func nNCropAndResizeBilinearAdopt(id objc.ID) *NNCropAndResizeBilinear {
 	if id == 0 {
 		return nil
 	}
-	x := &NNCropAndResizeBilinear{Handle: objref.Wrap(id)}
+	x := &NNCropAndResizeBilinear{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NNCropAndResizeBilinear) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNCropAndResizeBilinear) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNCropAndResizeBilinear) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNNCropAndResizeBilinear creates a new NNCropAndResizeBilinear.
@@ -62,43 +52,49 @@ func NewNNCropAndResizeBilinear() *NNCropAndResizeBilinear {
 	return nNCropAndResizeBilinearAdopt(_id)
 }
 
-// The number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, the destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and the destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
-//
-// WithDestinationFeatureChannelOffset sets destinationFeatureChannelOffset and returns the receiver so calls can be chained.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. offset.z is the index of starting source image in batch processing mode. See Also:
+func (x *NNCropAndResizeBilinear) WithOffset(offset mpscore.MPSOffset) *NNCropAndResizeBilinear {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
+func (x *NNCropAndResizeBilinear) WithClipRect(clipRect metal.MTLRegion) *NNCropAndResizeBilinear {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, the destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and the destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
 func (x *NNCropAndResizeBilinear) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNCropAndResizeBilinear {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// The number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-//
-// WithSourceFeatureChannelOffset sets sourceFeatureChannelOffset and returns the receiver so calls can be chained.
+// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
 func (x *NNCropAndResizeBilinear) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *NNCropAndResizeBilinear {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// The maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithSourceFeatureChannelMaxCount sets sourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 func (x *NNCropAndResizeBilinear) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *NNCropAndResizeBilinear {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
-// The resize width.
+// ResizeWidth the resize width.
 func (x *NNCropAndResizeBilinear) ResizeWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resizeWidth"))
 	return _r
 }
 
-// The resize height.
+// ResizeHeight the resize height.
 func (x *NNCropAndResizeBilinear) ResizeHeight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resizeHeight"))
 	return _r
 }
 
-// the number of bounding box i.e. regions to resize.
+// NumberOfRegions the number of bounding box i.e. regions to resize.
 func (x *NNCropAndResizeBilinear) NumberOfRegions() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfRegions"))
 	return _r
@@ -107,6 +103,8 @@ func (x *NNCropAndResizeBilinear) NumberOfRegions() int {
 // NNCropAndResizeBilinearable is the interface implemented by [NNCropAndResizeBilinear], for mocking and DI.
 type NNCropAndResizeBilinearable interface {
 	obj.Object
+	WithOffset(offset mpscore.MPSOffset) *NNCropAndResizeBilinear
+	WithClipRect(clipRect metal.MTLRegion) *NNCropAndResizeBilinear
 	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNCropAndResizeBilinear
 	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *NNCropAndResizeBilinear
 	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *NNCropAndResizeBilinear
@@ -116,3 +114,5 @@ type NNCropAndResizeBilinearable interface {
 }
 
 var _ NNCropAndResizeBilinearable = (*NNCropAndResizeBilinear)(nil)
+
+var _ CNNKernelProvider = (*NNCropAndResizeBilinear)(nil)

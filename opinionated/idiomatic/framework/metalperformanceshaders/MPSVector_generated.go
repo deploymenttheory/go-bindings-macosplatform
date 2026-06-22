@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A 1D array of data that stores the data’s values.
-//
 // Vector is an idiomatic wrapper over the Objective-C class MPSVector.
+//
+// Vector is an abstract base — you do not construct it directly. Construct one of [TemporaryVector] and pass it where a Vector is accepted.
+//
+// A 1D array of data that stores the data’s values.
 type Vector struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func VectorFromID(id objc.ID) *Vector {
 	if id == 0 {
 		return nil
 	}
-	x := &Vector{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Vector{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func vectorAdopt(id objc.ID) *Vector {
 	if id == 0 {
 		return nil
 	}
-	x := &Vector{Handle: objref.Wrap(id)}
+	x := &Vector{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +62,37 @@ func (x *Vector) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewVector creates a new Vector.
-func NewVector() *Vector {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSVector")), objc.RegisterName("new"))
-	return vectorAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Vector) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Get the number of bytes used to allocate underyling MTLResources This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSVector instantiation and MTLBuffer is not included. It only measures the size of the allocation used to hold the vector data in the buffer. This value is subject to change between different devices and operating systems. Except when -initWithBuffer:descriptor: is used, most MPSVectors are allocated without a backing store. The backing store is allocated lazily when it is needed, typically when the .texture property is called. Consequently, in most cases, it should be inexpensive to make a MPSMatrix to see how much memory it will need, and release it if it is too large. This method may fail in certain circumstances, such as when the MPSMatrix is created with -initWithBuffer:descriptor:. In such cases, 0 will be returned.
+// ResourceSize get the number of bytes used to allocate underyling MTLResources This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSVector instantiation and MTLBuffer is not included. It only measures the size of the allocation used to hold the vector data in the buffer. This value is subject to change between different devices and operating systems. Except when -initWithBuffer:descriptor: is used, most MPSVectors are allocated without a backing store. The backing store is allocated lazily when it is needed, typically when the .texture property is called. Consequently, in most cases, it should be inexpensive to make a MPSMatrix to see how much memory it will need, and release it if it is too large. This method may fail in certain circumstances, such as when the MPSMatrix is created with -initWithBuffer:descriptor:. In such cases, 0 will be returned.
 func (x *Vector) ResourceSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resourceSize"))
 	return _r
 }
 
-// The number of elements in the vector.
+// Length the number of elements in the vector.
 func (x *Vector) Length() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
 	return _r
 }
 
-// The number of vectors in the MPSVector.
+// Vectors the number of vectors in the MPSVector.
 func (x *Vector) Vectors() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vectors"))
 	return _r
 }
 
-// The stride, in bytes, between corresponding elements of consecutive vectors.
+// VectorBytes the stride, in bytes, between corresponding elements of consecutive vectors.
 func (x *Vector) VectorBytes() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vectorBytes"))
 	return _r
 }
 
-// Byte-offset to the buffer where the vector data begins - see
+// Offset byte-offset to the buffer where the vector data begins - see
 func (x *Vector) Offset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
 	return _r
@@ -105,3 +109,10 @@ type Vectorable interface {
 }
 
 var _ Vectorable = (*Vector)(nil)
+
+// isVector marks Vector — and, by embedding promotion, its
+// subclasses — as a member of the Vector hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Vector) isVector() {}
+
+var _ VectorProvider = (*Vector)(nil)

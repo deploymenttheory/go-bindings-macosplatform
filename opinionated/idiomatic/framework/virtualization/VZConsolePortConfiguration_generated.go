@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for a console port configuration.
-//
 // ConsolePortConfiguration is an idiomatic wrapper over the Objective-C class VZConsolePortConfiguration.
+//
+// ConsolePortConfiguration is an abstract base — you do not construct it directly. Construct one of [VirtioConsolePortConfiguration] and pass it where a ConsolePortConfiguration is accepted.
+//
+// The base class for a console port configuration.
 type ConsolePortConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ConsolePortConfigurationFromID(id objc.ID) *ConsolePortConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &ConsolePortConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ConsolePortConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func consolePortConfigurationAdopt(id objc.ID) *ConsolePortConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &ConsolePortConfiguration{Handle: objref.Wrap(id)}
+	x := &ConsolePortConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +62,25 @@ func (x *ConsolePortConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewConsolePortConfiguration creates a new ConsolePortConfiguration.
-func NewConsolePortConfiguration() *ConsolePortConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZConsolePortConfiguration")), objc.RegisterName("new"))
-	return consolePortConfigurationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ConsolePortConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The serial port attachment.
-//
-// WithAttachment sets attachment and returns the receiver so calls can be chained.
+// WithAttachment the serial port attachment.
 func (x *ConsolePortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *ConsolePortConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 	return x
 }
 
+// Attachment wraps the corresponding Objective-C method.
 func (x *ConsolePortConfiguration) Attachment() *SerialPortAttachment {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachment"))
 	return SerialPortAttachmentFromID(_r)
 }
 
+// SetAttachment wraps the corresponding Objective-C method.
 func (x *ConsolePortConfiguration) SetAttachment(attachment *SerialPortAttachment) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 }
@@ -90,3 +94,10 @@ type ConsolePortConfigurationable interface {
 }
 
 var _ ConsolePortConfigurationable = (*ConsolePortConfiguration)(nil)
+
+// isConsolePortConfiguration marks ConsolePortConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the ConsolePortConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ConsolePortConfiguration) isConsolePortConfiguration() {}
+
+var _ ConsolePortConfigurationProvider = (*ConsolePortConfiguration)(nil)

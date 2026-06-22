@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of the results from one or more kernels.
-//
 // NNConcatenationNode is an idiomatic wrapper over the Objective-C class MPSNNConcatenationNode.
+//
+// It embeds [NNFilterNode], promoting that type's methods.
+//
+// A representation of the results from one or more kernels.
 type NNConcatenationNode struct {
-	objref.Handle
+	NNFilterNode
 }
 
 // NNConcatenationNodeFromID adopts an existing Objective-C object as a NNConcatenationNode
@@ -25,7 +26,8 @@ func NNConcatenationNodeFromID(id objc.ID) *NNConcatenationNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNConcatenationNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNConcatenationNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,38 +40,20 @@ func nNConcatenationNodeAdopt(id objc.ID) *NNConcatenationNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNConcatenationNode{Handle: objref.Wrap(id)}
+	x := &NNConcatenationNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NNConcatenationNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNConcatenationNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNConcatenationNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Init a node that concatenates feature channels from multiple images In some neural network designs, it is necessary to append feature channels from one neural network filter to the results of another. If we have three image nodes with M, N and O feature channels in them, passed to -initWithSources: as
-//
-// NewNNConcatenationNodeWithSources creates a new NNConcatenationNode.
+// NewNNConcatenationNodeWithSources init a node that concatenates feature channels from multiple images In some neural network designs, it is necessary to append feature channels from one neural network filter to the results of another. If we have three image nodes with M, N and O feature channels in them, passed to -initWithSources: as
 func NewNNConcatenationNodeWithSources(sourceNodes []obj.Object) *NNConcatenationNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNConcatenationNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSources:"), purego.SliceToNSArray(sourceNodes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return nNConcatenationNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *NNConcatenationNode) WithLabel(label string) *NNConcatenationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -82,3 +66,5 @@ type NNConcatenationNodeable interface {
 }
 
 var _ NNConcatenationNodeable = (*NNConcatenationNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNConcatenationNode)(nil)

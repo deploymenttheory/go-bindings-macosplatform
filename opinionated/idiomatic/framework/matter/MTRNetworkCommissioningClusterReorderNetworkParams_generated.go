@@ -23,7 +23,8 @@ func MTRNetworkCommissioningClusterReorderNetworkParamsFromID(id objc.ID) *MTRNe
 	if id == 0 {
 		return nil
 	}
-	x := &MTRNetworkCommissioningClusterReorderNetworkParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRNetworkCommissioningClusterReorderNetworkParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRNetworkCommissioningClusterReorderNetworkParamsAdopt(id objc.ID) *MTRNet
 	if id == 0 {
 		return nil
 	}
-	x := &MTRNetworkCommissioningClusterReorderNetworkParams{Handle: objref.Wrap(id)}
+	x := &MTRNetworkCommissioningClusterReorderNetworkParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,89 +58,99 @@ func (x *MTRNetworkCommissioningClusterReorderNetworkParams) IsKind(className st
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRNetworkCommissioningClusterReorderNetworkParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRNetworkCommissioningClusterReorderNetworkParams creates a new MTRNetworkCommissioningClusterReorderNetworkParams.
 func NewMTRNetworkCommissioningClusterReorderNetworkParams() *MTRNetworkCommissioningClusterReorderNetworkParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRNetworkCommissioningClusterReorderNetworkParams")), objc.RegisterName("new"))
 	return mTRNetworkCommissioningClusterReorderNetworkParamsAdopt(_id)
 }
 
-// WithNetworkID sets networkID and returns the receiver so calls can be chained.
+// WithNetworkID sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterReorderNetworkParams) WithNetworkID(networkID obj.Object) *MTRNetworkCommissioningClusterReorderNetworkParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkID:"), objref.IDOf(networkID))
 	return x
 }
 
-// WithNetworkIndex sets networkIndex and returns the receiver so calls can be chained.
+// WithNetworkIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterReorderNetworkParams) WithNetworkIndex(networkIndex obj.Object) *MTRNetworkCommissioningClusterReorderNetworkParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkIndex:"), objref.IDOf(networkIndex))
 	return x
 }
 
-// WithBreadcrumb sets breadcrumb and returns the receiver so calls can be chained.
+// WithBreadcrumb sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterReorderNetworkParams) WithBreadcrumb(breadcrumb obj.Object) *MTRNetworkCommissioningClusterReorderNetworkParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRNetworkCommissioningClusterReorderNetworkParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRNetworkCommissioningClusterReorderNetworkParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRNetworkCommissioningClusterReorderNetworkParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRNetworkCommissioningClusterReorderNetworkParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// NetworkID wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterReorderNetworkParams) NetworkID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkID"))
 	return obj.Wrap(_r)
 }
 
+// SetNetworkID wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterReorderNetworkParams) SetNetworkID(networkID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkID:"), objref.IDOf(networkID))
 }
 
+// NetworkIndex wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterReorderNetworkParams) NetworkIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkIndex"))
 	return obj.Wrap(_r)
 }
 
+// SetNetworkIndex wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterReorderNetworkParams) SetNetworkIndex(networkIndex obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkIndex:"), objref.IDOf(networkIndex))
 }
 
+// Breadcrumb wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterReorderNetworkParams) Breadcrumb() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("breadcrumb"))
 	return obj.Wrap(_r)
 }
 
+// SetBreadcrumb wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterReorderNetworkParams) SetBreadcrumb(breadcrumb obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRNetworkCommissioningClusterReorderNetworkParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterReorderNetworkParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRNetworkCommissioningClusterReorderNetworkParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterReorderNetworkParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

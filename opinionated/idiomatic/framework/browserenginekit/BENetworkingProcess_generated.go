@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that represents a networking extension process.
-//
 // NetworkingProcess is an idiomatic wrapper over the Objective-C class BENetworkingProcess.
+//
+// An object that represents a networking extension process.
 type NetworkingProcess struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func NetworkingProcessFromID(id objc.ID) *NetworkingProcess {
 	if id == 0 {
 		return nil
 	}
-	x := &NetworkingProcess{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NetworkingProcess{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func networkingProcessAdopt(id objc.ID) *NetworkingProcess {
 	if id == 0 {
 		return nil
 	}
-	x := &NetworkingProcess{Handle: objref.Wrap(id)}
+	x := &NetworkingProcess{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,19 +62,25 @@ func (x *NetworkingProcess) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NetworkingProcess) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNetworkingProcess creates a new NetworkingProcess.
 func NewNetworkingProcess() *NetworkingProcess {
 	_id := objc.Send[objc.ID](objc.ID(_class("BENetworkingProcess")), objc.RegisterName("new"))
 	return networkingProcessAdopt(_id)
 }
 
-// Stops the networking process.
+// Invalidate stops the networking process.
 func (x *NetworkingProcess) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
-// Creates a new XPC connection to the extension process.
-func (x *NetworkingProcess) MakeLibXPCConnectionError() (obj.Object, error) {
+// MakeLibXPCConnectionError creates a new XPC connection to the extension process.
+func (x *NetworkingProcess) MakeLibXPCConnectionError() (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeLibXPCConnectionError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -85,7 +93,7 @@ func (x *NetworkingProcess) MakeLibXPCConnectionError() (obj.Object, error) {
 type NetworkingProcessable interface {
 	obj.Object
 	Invalidate()
-	MakeLibXPCConnectionError() (obj.Object, error)
+	MakeLibXPCConnectionError() (result obj.Object, err error)
 }
 
 var _ NetworkingProcessable = (*NetworkingProcess)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Manages periodic update messages for all component objects of a specified class.
-//
 // ComponentSystem is an idiomatic wrapper over the Objective-C class GKComponentSystem.
+//
+// Manages periodic update messages for all component objects of a specified class.
 type ComponentSystem struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ComponentSystemFromID(id objc.ID) *ComponentSystem {
 	if id == 0 {
 		return nil
 	}
-	x := &ComponentSystem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ComponentSystem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func componentSystemAdopt(id objc.ID) *ComponentSystem {
 	if id == 0 {
 		return nil
 	}
-	x := &ComponentSystem{Handle: objref.Wrap(id)}
+	x := &ComponentSystem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,44 +60,50 @@ func (x *ComponentSystem) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ComponentSystem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewComponentSystem creates a new ComponentSystem.
 func NewComponentSystem() *ComponentSystem {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKComponentSystem")), objc.RegisterName("new"))
 	return componentSystemAdopt(_id)
 }
 
-// Returns the component at the specified index in the system’s list of components.
+// ObjectAtIndexedSubscript returns the component at the specified index in the system’s list of components.
 func (x *ComponentSystem) ObjectAtIndexedSubscript(idx int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), idx)
 	return obj.Wrap(_r)
 }
 
-// Adds a component instance to the component system.
+// AddComponent adds a component instance to the component system.
 func (x *ComponentSystem) AddComponent(component obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addComponent:"), objref.IDOf(component))
 }
 
-// Adds any instances of the component system’s component class in the specified entity to the component system.
+// AddComponentWithEntity adds any instances of the component system’s component class in the specified entity to the component system.
 func (x *ComponentSystem) AddComponentWithEntity(entity *Entity) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addComponentWithEntity:"), objref.IDOf(entity))
 }
 
-// Removes any instances of the component system’s component class in the specified entity from the component system.
+// RemoveComponentWithEntity removes any instances of the component system’s component class in the specified entity from the component system.
 func (x *ComponentSystem) RemoveComponentWithEntity(entity *Entity) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeComponentWithEntity:"), objref.IDOf(entity))
 }
 
-// Removes the specified component instance from the component system.
+// RemoveComponent removes the specified component instance from the component system.
 func (x *ComponentSystem) RemoveComponent(component obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeComponent:"), objref.IDOf(component))
 }
 
-// Tells all component instances managed by the system to perform their custom periodic actions.
+// UpdateWithDeltaTime tells all component instances managed by the system to perform their custom periodic actions.
 func (x *ComponentSystem) UpdateWithDeltaTime(seconds float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithDeltaTime:"), seconds)
 }
 
-// The array of components currently in the system.
+// Components the array of components currently in the system.
 func (x *ComponentSystem) Components() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("components"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

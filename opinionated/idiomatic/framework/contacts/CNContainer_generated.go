@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable object that represents a collection of contacts.
-//
 // Container is an idiomatic wrapper over the Objective-C class CNContainer.
+//
+// An immutable object that represents a collection of contacts.
 type Container struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ContainerFromID(id objc.ID) *Container {
 	if id == 0 {
 		return nil
 	}
-	x := &Container{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Container{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func containerAdopt(id objc.ID) *Container {
 	if id == 0 {
 		return nil
 	}
-	x := &Container{Handle: objref.Wrap(id)}
+	x := &Container{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *Container) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Container) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewContainer creates a new Container.
 func NewContainer() *Container {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNContainer")), objc.RegisterName("new"))
 	return containerAdopt(_id)
 }
 
-// The identifier is unique among containers on the device. It can be saved and used for fetching containers next application launch.
+// Identifier the identifier is unique among containers on the device. It can be saved and used for fetching containers next application launch.
 func (x *Container) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -73,6 +81,7 @@ func (x *Container) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *Container) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -81,6 +90,7 @@ func (x *Container) Name() string {
 	return purego.GoString(_r)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *Container) Type() ContainerType {
 	_r := objc.Send[ContainerType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the space between or around items in a collection view.
-//
 // CollectionLayoutSpacing is an idiomatic wrapper over the Objective-C class NSCollectionLayoutSpacing.
+//
+// An object that defines the space between or around items in a collection view.
 type CollectionLayoutSpacing struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CollectionLayoutSpacingFromID(id objc.ID) *CollectionLayoutSpacing {
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionLayoutSpacing{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollectionLayoutSpacing{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func collectionLayoutSpacingAdopt(id objc.ID) *CollectionLayoutSpacing {
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionLayoutSpacing{Handle: objref.Wrap(id)}
+	x := &CollectionLayoutSpacing{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,31 @@ func (x *CollectionLayoutSpacing) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CollectionLayoutSpacing) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCollectionLayoutSpacing creates a new CollectionLayoutSpacing.
 func NewCollectionLayoutSpacing() *CollectionLayoutSpacing {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutSpacing")), objc.RegisterName("new"))
 	return collectionLayoutSpacingAdopt(_id)
 }
 
+// Spacing wraps the corresponding Objective-C method.
 func (x *CollectionLayoutSpacing) Spacing() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("spacing"))
 	return _r
 }
 
+// IsFlexibleSpacing wraps the corresponding Objective-C method.
 func (x *CollectionLayoutSpacing) IsFlexibleSpacing() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFlexibleSpacing"))
 	return _r
 }
 
+// IsFixedSpacing wraps the corresponding Objective-C method.
 func (x *CollectionLayoutSpacing) IsFixedSpacing() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFixedSpacing"))
 	return _r

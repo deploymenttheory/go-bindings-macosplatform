@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Describes whether a specific capability is supported and if that capability is currently enabled
-//
 // AudioSessionCapability is an idiomatic wrapper over the Objective-C class AVAudioSessionCapability.
+//
+// Describes whether a specific capability is supported and if that capability is currently enabled
 type AudioSessionCapability struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AudioSessionCapabilityFromID(id objc.ID) *AudioSessionCapability {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioSessionCapability{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioSessionCapability{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func audioSessionCapabilityAdopt(id objc.ID) *AudioSessionCapability {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioSessionCapability{Handle: objref.Wrap(id)}
+	x := &AudioSessionCapability{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *AudioSessionCapability) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioSessionCapability) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAudioSessionCapability creates a new AudioSessionCapability.
 func NewAudioSessionCapability() *AudioSessionCapability {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioSessionCapability")), objc.RegisterName("new"))
 	return audioSessionCapabilityAdopt(_id)
 }
 
-// A Boolean value that indicates whether the capability is supported.
+// IsSupported a Boolean value that indicates whether the capability is supported.
 func (x *AudioSessionCapability) IsSupported() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSupported"))
 	return _r
 }
 
-// A Boolean value that indicates whether the capability is enabled.
+// IsEnabled a Boolean value that indicates whether the capability is enabled.
 func (x *AudioSessionCapability) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r

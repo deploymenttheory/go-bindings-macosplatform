@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that identifies the origin of a particular resource.
-//
 // WKSecurityOrigin is an idiomatic wrapper over the Objective-C class WKSecurityOrigin.
+//
+// An object that identifies the origin of a particular resource.
 type WKSecurityOrigin struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKSecurityOriginFromID(id objc.ID) *WKSecurityOrigin {
 	if id == 0 {
 		return nil
 	}
-	x := &WKSecurityOrigin{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKSecurityOrigin{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKSecurityOriginAdopt(id objc.ID) *WKSecurityOrigin {
 	if id == 0 {
 		return nil
 	}
-	x := &WKSecurityOrigin{Handle: objref.Wrap(id)}
+	x := &WKSecurityOrigin{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *WKSecurityOrigin) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKSecurityOrigin) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKSecurityOrigin creates a new WKSecurityOrigin.
 func NewWKSecurityOrigin() *WKSecurityOrigin {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKSecurityOrigin")), objc.RegisterName("new"))
 	return wKSecurityOriginAdopt(_id)
 }
 
-// The security origin's protocol.
+// Protocol the security origin's protocol.
 func (x *WKSecurityOrigin) Protocol() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocol"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *WKSecurityOrigin) Protocol() string {
 	return purego.GoString(_r)
 }
 
-// The security origin's host.
+// Host the security origin's host.
 func (x *WKSecurityOrigin) Host() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("host"))
 	if _r == 0 {
@@ -82,7 +90,7 @@ func (x *WKSecurityOrigin) Host() string {
 	return purego.GoString(_r)
 }
 
-// The security origin's port.
+// Port the security origin's port.
 func (x *WKSecurityOrigin) Port() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("port"))
 	return _r

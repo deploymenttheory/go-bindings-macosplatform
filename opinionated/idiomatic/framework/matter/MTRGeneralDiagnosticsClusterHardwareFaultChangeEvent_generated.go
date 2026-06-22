@@ -23,7 +23,8 @@ func MTRGeneralDiagnosticsClusterHardwareFaultChangeEventFromID(id objc.ID) *MTR
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRGeneralDiagnosticsClusterHardwareFaultChangeEventAdopt(id objc.ID) *MTRG
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent{Handle: objref.Wrap(id)}
+	x := &MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,26 +58,36 @@ func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) IsKind(className 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRGeneralDiagnosticsClusterHardwareFaultChangeEvent creates a new MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent.
 func NewMTRGeneralDiagnosticsClusterHardwareFaultChangeEvent() *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent")), objc.RegisterName("new"))
 	return mTRGeneralDiagnosticsClusterHardwareFaultChangeEventAdopt(_id)
 }
 
+// Current wraps the corresponding Objective-C method.
 func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Current() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("current"))
 	return obj.Wrap(_r)
 }
 
+// SetCurrent wraps the corresponding Objective-C method.
 func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) SetCurrent(current obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrent:"), objref.IDOf(current))
 }
 
+// Previous wraps the corresponding Objective-C method.
 func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Previous() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previous"))
 	return obj.Wrap(_r)
 }
 
+// SetPrevious wraps the corresponding Objective-C method.
 func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) SetPrevious(previous obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrevious:"), objref.IDOf(previous))
 }

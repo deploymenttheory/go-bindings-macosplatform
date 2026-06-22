@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the directory share for a single directory.
-//
 // SingleDirectoryShare is an idiomatic wrapper over the Objective-C class VZSingleDirectoryShare.
+//
+// It embeds [DirectoryShare], promoting that type's methods.
+//
+// An object that defines the directory share for a single directory.
 type SingleDirectoryShare struct {
-	objref.Handle
+	DirectoryShare
 }
 
 // SingleDirectoryShareFromID adopts an existing Objective-C object as a SingleDirectoryShare
@@ -25,7 +26,8 @@ func SingleDirectoryShareFromID(id objc.ID) *SingleDirectoryShare {
 	if id == 0 {
 		return nil
 	}
-	x := &SingleDirectoryShare{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SingleDirectoryShare{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,35 +40,20 @@ func singleDirectoryShareAdopt(id objc.ID) *SingleDirectoryShare {
 	if id == 0 {
 		return nil
 	}
-	x := &SingleDirectoryShare{Handle: objref.Wrap(id)}
+	x := &SingleDirectoryShare{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *SingleDirectoryShare) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SingleDirectoryShare) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SingleDirectoryShare) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a directory share with a directory that you specify on the host.
-//
-// NewSingleDirectoryShareWithDirectory creates a new SingleDirectoryShare.
+// NewSingleDirectoryShareWithDirectory creates a directory share with a directory that you specify on the host.
 func NewSingleDirectoryShareWithDirectory(directory *SharedDirectory) *SingleDirectoryShare {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZSingleDirectoryShare")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDirectory:"), objref.IDOf(directory))
 	return singleDirectoryShareAdopt(_id)
 }
 
+// Directory wraps the corresponding Objective-C method.
 func (x *SingleDirectoryShare) Directory() *SharedDirectory {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("directory"))
 	return SharedDirectoryFromID(_r)
@@ -79,3 +66,5 @@ type SingleDirectoryShareable interface {
 }
 
 var _ SingleDirectoryShareable = (*SingleDirectoryShare)(nil)
+
+var _ DirectoryShareProvider = (*SingleDirectoryShare)(nil)

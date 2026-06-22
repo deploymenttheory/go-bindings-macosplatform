@@ -13,6 +13,8 @@ import (
 )
 
 // MTRDescriptorClusterDeviceTypeStruct is an idiomatic wrapper over the Objective-C class MTRDescriptorClusterDeviceTypeStruct.
+//
+// MTRDescriptorClusterDeviceTypeStruct is an abstract base — you do not construct it directly. Construct one of [MTRDescriptorClusterDeviceType] and pass it where a MTRDescriptorClusterDeviceTypeStruct is accepted.
 type MTRDescriptorClusterDeviceTypeStruct struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRDescriptorClusterDeviceTypeStructFromID(id objc.ID) *MTRDescriptorCluste
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDescriptorClusterDeviceTypeStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDescriptorClusterDeviceTypeStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRDescriptorClusterDeviceTypeStructAdopt(id objc.ID) *MTRDescriptorCluster
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDescriptorClusterDeviceTypeStruct{Handle: objref.Wrap(id)}
+	x := &MTRDescriptorClusterDeviceTypeStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,53 +60,59 @@ func (x *MTRDescriptorClusterDeviceTypeStruct) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRDescriptorClusterDeviceTypeStruct creates a new MTRDescriptorClusterDeviceTypeStruct.
-func NewMTRDescriptorClusterDeviceTypeStruct() *MTRDescriptorClusterDeviceTypeStruct {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRDescriptorClusterDeviceTypeStruct")), objc.RegisterName("new"))
-	return mTRDescriptorClusterDeviceTypeStructAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDescriptorClusterDeviceTypeStruct) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithDeviceType sets deviceType and returns the receiver so calls can be chained.
+// WithDeviceType sets the property and returns the receiver so calls can be chained.
 func (x *MTRDescriptorClusterDeviceTypeStruct) WithDeviceType(deviceType obj.Object) *MTRDescriptorClusterDeviceTypeStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeviceType:"), objref.IDOf(deviceType))
 	return x
 }
 
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithType sets the property and returns the receiver so calls can be chained.
 func (x *MTRDescriptorClusterDeviceTypeStruct) WithType(type_ obj.Object) *MTRDescriptorClusterDeviceTypeStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return x
 }
 
-// WithRevision sets revision and returns the receiver so calls can be chained.
+// WithRevision sets the property and returns the receiver so calls can be chained.
 func (x *MTRDescriptorClusterDeviceTypeStruct) WithRevision(revision obj.Object) *MTRDescriptorClusterDeviceTypeStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), objref.IDOf(revision))
 	return x
 }
 
+// DeviceType wraps the corresponding Objective-C method.
 func (x *MTRDescriptorClusterDeviceTypeStruct) DeviceType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceType"))
 	return obj.Wrap(_r)
 }
 
+// SetDeviceType wraps the corresponding Objective-C method.
 func (x *MTRDescriptorClusterDeviceTypeStruct) SetDeviceType(deviceType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeviceType:"), objref.IDOf(deviceType))
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *MTRDescriptorClusterDeviceTypeStruct) Type() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
 	return obj.Wrap(_r)
 }
 
+// SetType wraps the corresponding Objective-C method.
 func (x *MTRDescriptorClusterDeviceTypeStruct) SetType(type_ obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
 }
 
+// Revision wraps the corresponding Objective-C method.
 func (x *MTRDescriptorClusterDeviceTypeStruct) Revision() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("revision"))
 	return obj.Wrap(_r)
 }
 
+// SetRevision wraps the corresponding Objective-C method.
 func (x *MTRDescriptorClusterDeviceTypeStruct) SetRevision(revision obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), objref.IDOf(revision))
 }
@@ -122,3 +132,10 @@ type MTRDescriptorClusterDeviceTypeStructable interface {
 }
 
 var _ MTRDescriptorClusterDeviceTypeStructable = (*MTRDescriptorClusterDeviceTypeStruct)(nil)
+
+// isMTRDescriptorClusterDeviceTypeStruct marks MTRDescriptorClusterDeviceTypeStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRDescriptorClusterDeviceTypeStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRDescriptorClusterDeviceTypeStruct) isMTRDescriptorClusterDeviceTypeStruct() {}
+
+var _ MTRDescriptorClusterDeviceTypeStructProvider = (*MTRDescriptorClusterDeviceTypeStruct)(nil)

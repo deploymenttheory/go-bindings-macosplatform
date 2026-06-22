@@ -15,9 +15,9 @@ import (
 	"unsafe"
 )
 
-// The object you use to delete web-usage data.
-//
 // WebHistory is an idiomatic wrapper over the Objective-C class STWebHistory.
+//
+// The object you use to delete web-usage data.
 type WebHistory struct {
 	objref.Handle
 }
@@ -28,7 +28,8 @@ func WebHistoryFromID(id objc.ID) *WebHistory {
 	if id == 0 {
 		return nil
 	}
-	x := &WebHistory{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WebHistory{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -41,7 +42,8 @@ func webHistoryAdopt(id objc.ID) *WebHistory {
 	if id == 0 {
 		return nil
 	}
-	x := &WebHistory{Handle: objref.Wrap(id)}
+	x := &WebHistory{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -61,10 +63,14 @@ func (x *WebHistory) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a web history instance to delete web-usage data associated to the bundle identifier and profile identifier you specify.
-//
-// NewWebHistoryWithBundleIdentifierProfileIdentifierError creates a new WebHistory.
-func NewWebHistoryWithBundleIdentifierProfileIdentifierError(bundleIdentifier string, profileIdentifier obj.Object) (*WebHistory, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WebHistory) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWebHistoryWithBundleIdentifierProfileIdentifierError creates a web history instance to delete web-usage data associated to the bundle identifier and profile identifier you specify.
+func NewWebHistoryWithBundleIdentifierProfileIdentifierError(bundleIdentifier string, profileIdentifier obj.Object) (result *WebHistory, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("STWebHistory")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBundleIdentifier:profileIdentifier:error:"), purego.NSString(bundleIdentifier), objref.IDOf(profileIdentifier), unsafe.Pointer(&_nsErr))
@@ -74,19 +80,15 @@ func NewWebHistoryWithBundleIdentifierProfileIdentifierError(bundleIdentifier st
 	return webHistoryAdopt(_id), nil
 }
 
-// Creates a web history instance to delete web-usage data associated to the profile identifier you specify.
-//
-// NewWebHistoryWithProfileIdentifier creates a new WebHistory.
+// NewWebHistoryWithProfileIdentifier creates a web history instance to delete web-usage data associated to the profile identifier you specify.
 func NewWebHistoryWithProfileIdentifier(profileIdentifier obj.Object) *WebHistory {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("STWebHistory")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProfileIdentifier:"), objref.IDOf(profileIdentifier))
 	return webHistoryAdopt(_id)
 }
 
-// Creates a web history instance to delete web-usage data associated to the bundle identifier you specify.
-//
-// NewWebHistoryWithBundleIdentifierError creates a new WebHistory.
-func NewWebHistoryWithBundleIdentifierError(bundleIdentifier string) (*WebHistory, error) {
+// NewWebHistoryWithBundleIdentifierError creates a web history instance to delete web-usage data associated to the bundle identifier you specify.
+func NewWebHistoryWithBundleIdentifierError(bundleIdentifier string) (result *WebHistory, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("STWebHistory")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBundleIdentifier:error:"), purego.NSString(bundleIdentifier), unsafe.Pointer(&_nsErr))
@@ -96,10 +98,10 @@ func NewWebHistoryWithBundleIdentifierError(bundleIdentifier string) (*WebHistor
 	return webHistoryAdopt(_id), nil
 }
 
-// Fetches web history that occurred during the date interval you specify.
+// FetchHistoryDuringInterval fetches web history that occurred during the date interval you specify.
 //
 // FetchHistoryDuringInterval blocks until the operation completes or ctx is cancelled.
-func (x *WebHistory) FetchHistoryDuringInterval(ctx context.Context, interval obj.Object) (obj.Object, error) {
+func (x *WebHistory) FetchHistoryDuringInterval(ctx context.Context, interval obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -121,10 +123,10 @@ func (x *WebHistory) FetchHistoryDuringInterval(ctx context.Context, interval ob
 	}
 }
 
-// Fetches all web history associated with the bundle identifier and profile identifier you specified during initialization.
+// FetchAllHistory fetches all web history associated with the bundle identifier and profile identifier you specified during initialization.
 //
 // FetchAllHistory blocks until the operation completes or ctx is cancelled.
-func (x *WebHistory) FetchAllHistory(ctx context.Context) (obj.Object, error) {
+func (x *WebHistory) FetchAllHistory(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -146,17 +148,17 @@ func (x *WebHistory) FetchAllHistory(ctx context.Context) (obj.Object, error) {
 	}
 }
 
-// Deletes all the web history for the URL you specify.
+// DeleteHistoryForURL deletes all the web history for the URL you specify.
 func (x *WebHistory) DeleteHistoryForURL(url string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteHistoryForURL:"), rt.FileURL(url))
 }
 
-// Deletes web history that occurred during the date interval you specify.
+// DeleteHistoryDuringInterval deletes web history that occurred during the date interval you specify.
 func (x *WebHistory) DeleteHistoryDuringInterval(interval obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteHistoryDuringInterval:"), objref.IDOf(interval))
 }
 
-// Deletes all web history associated with the bundle identifier you specified during initialization.
+// DeleteAllHistory deletes all web history associated with the bundle identifier you specified during initialization.
 func (x *WebHistory) DeleteAllHistory() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteAllHistory"))
 }

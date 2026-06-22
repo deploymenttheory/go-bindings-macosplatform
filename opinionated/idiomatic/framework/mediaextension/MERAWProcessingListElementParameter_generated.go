@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // RAWProcessingListElementParameter is an idiomatic wrapper over the Objective-C class MERAWProcessingListElementParameter.
+//
+// It embeds [RAWProcessingParameter], promoting that type's methods.
 type RAWProcessingListElementParameter struct {
-	objref.Handle
+	RAWProcessingParameter
 }
 
 // RAWProcessingListElementParameterFromID adopts an existing Objective-C object as a RAWProcessingListElementParameter
@@ -23,7 +24,8 @@ func RAWProcessingListElementParameterFromID(id objc.ID) *RAWProcessingListEleme
 	if id == 0 {
 		return nil
 	}
-	x := &RAWProcessingListElementParameter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RAWProcessingListElementParameter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func rAWProcessingListElementParameterAdopt(id objc.ID) *RAWProcessingListElemen
 	if id == 0 {
 		return nil
 	}
-	x := &RAWProcessingListElementParameter{Handle: objref.Wrap(id)}
+	x := &RAWProcessingListElementParameter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RAWProcessingListElementParameter) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RAWProcessingListElementParameter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RAWProcessingListElementParameter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRAWProcessingListElementParameterWithNameDescriptionElementID creates a new RAWProcessingListElementParameter.
@@ -63,14 +51,13 @@ func NewRAWProcessingListElementParameterWithNameDescriptionElementID(name strin
 	return rAWProcessingListElementParameterAdopt(_id)
 }
 
-// A Boolean value that indicates whether the extension enables the parameter.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether the extension enables the parameter.
 func (x *RAWProcessingListElementParameter) WithEnabled(enabled bool) *RAWProcessingListElementParameter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
+// ListElementID wraps the corresponding Objective-C method.
 func (x *RAWProcessingListElementParameter) ListElementID() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("listElementID"))
 	return _r
@@ -84,3 +71,5 @@ type RAWProcessingListElementParameterable interface {
 }
 
 var _ RAWProcessingListElementParameterable = (*RAWProcessingListElementParameter)(nil)
+
+var _ RAWProcessingParameterProvider = (*RAWProcessingListElementParameter)(nil)

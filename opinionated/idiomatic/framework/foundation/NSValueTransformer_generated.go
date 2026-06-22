@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class used to transform values from one representation to another.
-//
 // ValueTransformer is an idiomatic wrapper over the Objective-C class NSValueTransformer.
+//
+// ValueTransformer is an abstract base — you do not construct it directly. Construct one of [SecureUnarchiveFromDataTransformer] and pass it where a ValueTransformer is accepted.
+//
+// An abstract class used to transform values from one representation to another.
 type ValueTransformer struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ValueTransformerFromID(id objc.ID) *ValueTransformer {
 	if id == 0 {
 		return nil
 	}
-	x := &ValueTransformer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ValueTransformer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func valueTransformerAdopt(id objc.ID) *ValueTransformer {
 	if id == 0 {
 		return nil
 	}
-	x := &ValueTransformer{Handle: objref.Wrap(id)}
+	x := &ValueTransformer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,23 +62,25 @@ func (x *ValueTransformer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewValueTransformer creates a new ValueTransformer.
-func NewValueTransformer() *ValueTransformer {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSValueTransformer")), objc.RegisterName("new"))
-	return valueTransformerAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ValueTransformer) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *ValueTransformer) WithScriptingProperties(scriptingProperties obj.Object) *ValueTransformer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// TransformedValue wraps the corresponding Objective-C method.
 func (x *ValueTransformer) TransformedValue(value obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transformedValue:"), objref.IDOf(value))
 	return obj.Wrap(_r)
 }
 
+// ReverseTransformedValue wraps the corresponding Objective-C method.
 func (x *ValueTransformer) ReverseTransformedValue(value obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reverseTransformedValue:"), objref.IDOf(value))
 	return obj.Wrap(_r)
@@ -89,3 +95,10 @@ type ValueTransformerable interface {
 }
 
 var _ ValueTransformerable = (*ValueTransformer)(nil)
+
+// isValueTransformer marks ValueTransformer — and, by embedding promotion, its
+// subclasses — as a member of the ValueTransformer hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ValueTransformer) isValueTransformer() {}
+
+var _ ValueTransformerProvider = (*ValueTransformer)(nil)

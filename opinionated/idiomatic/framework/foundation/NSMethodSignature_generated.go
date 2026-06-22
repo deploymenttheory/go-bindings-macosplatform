@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A record of the type information for the return value and parameters of a method.
-//
 // MethodSignature is an idiomatic wrapper over the Objective-C class NSMethodSignature.
+//
+// A record of the type information for the return value and parameters of a method.
 type MethodSignature struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MethodSignatureFromID(id objc.ID) *MethodSignature {
 	if id == 0 {
 		return nil
 	}
-	x := &MethodSignature{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MethodSignature{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func methodSignatureAdopt(id objc.ID) *MethodSignature {
 	if id == 0 {
 		return nil
 	}
-	x := &MethodSignature{Handle: objref.Wrap(id)}
+	x := &MethodSignature{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,40 +60,49 @@ func (x *MethodSignature) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MethodSignature) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMethodSignature creates a new MethodSignature.
 func NewMethodSignature() *MethodSignature {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSMethodSignature")), objc.RegisterName("new"))
 	return methodSignatureAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *MethodSignature) WithScriptingProperties(scriptingProperties obj.Object) *MethodSignature {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Returns the type encoding for the argument at a given index.
+// GetArgumentTypeAtIndex returns the type encoding for the argument at a given index.
 func (x *MethodSignature) GetArgumentTypeAtIndex(idx int) string {
 	_r := objc.Send[string](objref.IDOf(x), objc.RegisterName("getArgumentTypeAtIndex:"), idx)
 	return _r
 }
 
-// Whether the receiver is asynchronous when invoked through distributed objects.
+// IsOneway whether the receiver is asynchronous when invoked through distributed objects.
 func (x *MethodSignature) IsOneway() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOneway"))
 	return _r
 }
 
+// NumberOfArguments wraps the corresponding Objective-C method.
 func (x *MethodSignature) NumberOfArguments() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfArguments"))
 	return _r
 }
 
+// FrameLength wraps the corresponding Objective-C method.
 func (x *MethodSignature) FrameLength() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameLength"))
 	return _r
 }
 
+// MethodReturnLength wraps the corresponding Objective-C method.
 func (x *MethodSignature) MethodReturnLength() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("methodReturnLength"))
 	return _r

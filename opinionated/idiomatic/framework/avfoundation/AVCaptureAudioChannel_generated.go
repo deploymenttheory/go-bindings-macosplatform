@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that monitors average and peak power levels for an audio channel in a capture connection.
-//
 // CaptureAudioChannel is an idiomatic wrapper over the Objective-C class AVCaptureAudioChannel.
+//
+// An object that monitors average and peak power levels for an audio channel in a capture connection.
 type CaptureAudioChannel struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CaptureAudioChannelFromID(id objc.ID) *CaptureAudioChannel {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureAudioChannel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptureAudioChannel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func captureAudioChannelAdopt(id objc.ID) *CaptureAudioChannel {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureAudioChannel{Handle: objref.Wrap(id)}
+	x := &CaptureAudioChannel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,56 +60,60 @@ func (x *CaptureAudioChannel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptureAudioChannel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCaptureAudioChannel creates a new CaptureAudioChannel.
 func NewCaptureAudioChannel() *CaptureAudioChannel {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureAudioChannel")), objc.RegisterName("new"))
 	return captureAudioChannelAdopt(_id)
 }
 
-// The current volume (gain) of the channel.
-//
-// WithVolume sets volume and returns the receiver so calls can be chained.
+// WithVolume the current volume (gain) of the channel.
 func (x *CaptureAudioChannel) WithVolume(volume float32) *CaptureAudioChannel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 	return x
 }
 
-// A Boolean value that indicates whether the channel is in an enabled state.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether the channel is in an enabled state.
 func (x *CaptureAudioChannel) WithEnabled(enabled bool) *CaptureAudioChannel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A measurement of the instantaneous average power level of the audio flowing through the receiver. A client may poll an AVCaptureAudioChannel object for its current averagePowerLevel to get its instantaneous average power level in decibels. This property is not key-value observable.
+// AveragePowerLevel a measurement of the instantaneous average power level of the audio flowing through the receiver. A client may poll an AVCaptureAudioChannel object for its current averagePowerLevel to get its instantaneous average power level in decibels. This property is not key-value observable.
 func (x *CaptureAudioChannel) AveragePowerLevel() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("averagePowerLevel"))
 	return _r
 }
 
-// A measurement of the peak/hold level of the audio flowing through the receiver. A client may poll an AVCaptureAudioChannel object for its current peakHoldLevel to get its most recent peak hold level in decibels. This property is not key-value observable.
+// PeakHoldLevel a measurement of the peak/hold level of the audio flowing through the receiver. A client may poll an AVCaptureAudioChannel object for its current peakHoldLevel to get its most recent peak hold level in decibels. This property is not key-value observable.
 func (x *CaptureAudioChannel) PeakHoldLevel() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("peakHoldLevel"))
 	return _r
 }
 
-// A property indicating the current volume (gain) of the receiver. The volume property indicates the current volume or gain of the receiver as a floating point value between 0.0 -> 1.0. If you desire to boost the gain in software, you may specify a a value greater than 1.0.
+// Volume a property indicating the current volume (gain) of the receiver. The volume property indicates the current volume or gain of the receiver as a floating point value between 0.0 -> 1.0. If you desire to boost the gain in software, you may specify a a value greater than 1.0.
 func (x *CaptureAudioChannel) Volume() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("volume"))
 	return _r
 }
 
+// SetVolume wraps the corresponding Objective-C method.
 func (x *CaptureAudioChannel) SetVolume(volume float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 }
 
-// A property indicating whether the receiver is currently enabled for data capture. By default, all AVCaptureAudioChannel objects exposed by a connection are enabled. You may set enabled to NO to stop the flow of data for a particular AVCaptureAudioChannel.
+// IsEnabled a property indicating whether the receiver is currently enabled for data capture. By default, all AVCaptureAudioChannel objects exposed by a connection are enabled. You may set enabled to NO to stop the flow of data for a particular AVCaptureAudioChannel.
 func (x *CaptureAudioChannel) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r
 }
 
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *CaptureAudioChannel) SetEnabled(enabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }

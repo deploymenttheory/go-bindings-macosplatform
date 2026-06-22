@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The input profile for a controller.
-//
 // ControllerLiveInput is an idiomatic wrapper over the Objective-C class GCControllerLiveInput.
+//
+// It embeds [ControllerInputState], promoting that type's methods.
+//
+// The input profile for a controller.
 type ControllerLiveInput struct {
-	objref.Handle
+	ControllerInputState
 }
 
 // ControllerLiveInputFromID adopts an existing Objective-C object as a ControllerLiveInput
@@ -25,7 +26,8 @@ func ControllerLiveInputFromID(id objc.ID) *ControllerLiveInput {
 	if id == 0 {
 		return nil
 	}
-	x := &ControllerLiveInput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ControllerLiveInput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func controllerLiveInputAdopt(id objc.ID) *ControllerLiveInput {
 	if id == 0 {
 		return nil
 	}
-	x := &ControllerLiveInput{Handle: objref.Wrap(id)}
+	x := &ControllerLiveInput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ControllerLiveInput) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ControllerLiveInput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ControllerLiveInput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewControllerLiveInput creates a new ControllerLiveInput.
@@ -64,19 +52,19 @@ func NewControllerLiveInput() *ControllerLiveInput {
 	return controllerLiveInputAdopt(_id)
 }
 
-// Returns a snapshot of the physical device inputs.
+// Capture returns a snapshot of the physical device inputs.
 func (x *ControllerLiveInput) Capture() *ControllerInputState {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("capture"))
 	return ControllerInputStateFromID(_r)
 }
 
-// Returns the next device input state from the queue.
+// NextInputState returns the next device input state from the queue.
 func (x *ControllerLiveInput) NextInputState() *ControllerInputState {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextInputState"))
 	return ControllerInputStateFromID(_r)
 }
 
-// Get a view of the controller's input without any system-level control remapping applied. Developers should avoid implementing their own control remapping functionality and to instead direct users to the system game controller settings to remap controls.  If you choose to implement your own control remapping functionality, or if your app streams controller input to a remote device that implements control remapping functionality, you should access controller physical input through this interface.
+// UnmappedInput get a view of the controller's input without any system-level control remapping applied. Developers should avoid implementing their own control remapping functionality and to instead direct users to the system game controller settings to remap controls.  If you choose to implement your own control remapping functionality, or if your app streams controller input to a remote device that implements control remapping functionality, you should access controller physical input through this interface.
 func (x *ControllerLiveInput) UnmappedInput() *ControllerLiveInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unmappedInput"))
 	return ControllerLiveInputFromID(_r)
@@ -91,3 +79,5 @@ type ControllerLiveInputable interface {
 }
 
 var _ ControllerLiveInputable = (*ControllerLiveInput)(nil)
+
+var _ ControllerInputStateProvider = (*ControllerLiveInput)(nil)

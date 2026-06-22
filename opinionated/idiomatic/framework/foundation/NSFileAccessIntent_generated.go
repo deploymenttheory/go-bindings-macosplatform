@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The details of a coordinated-read or coordinated-write operation.
-//
 // FileAccessIntent is an idiomatic wrapper over the Objective-C class NSFileAccessIntent.
+//
+// The details of a coordinated-read or coordinated-write operation.
 type FileAccessIntent struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FileAccessIntentFromID(id objc.ID) *FileAccessIntent {
 	if id == 0 {
 		return nil
 	}
-	x := &FileAccessIntent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FileAccessIntent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func fileAccessIntentAdopt(id objc.ID) *FileAccessIntent {
 	if id == 0 {
 		return nil
 	}
-	x := &FileAccessIntent{Handle: objref.Wrap(id)}
+	x := &FileAccessIntent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +60,25 @@ func (x *FileAccessIntent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FileAccessIntent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFileAccessIntent creates a new FileAccessIntent.
 func NewFileAccessIntent() *FileAccessIntent {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSFileAccessIntent")), objc.RegisterName("new"))
 	return fileAccessIntentAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *FileAccessIntent) WithScriptingProperties(scriptingProperties obj.Object) *FileAccessIntent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// URL wraps the corresponding Objective-C method.
 func (x *FileAccessIntent) URL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return URLFromID(_r)

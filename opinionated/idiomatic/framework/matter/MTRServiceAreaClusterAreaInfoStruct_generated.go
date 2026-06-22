@@ -23,7 +23,8 @@ func MTRServiceAreaClusterAreaInfoStructFromID(id objc.ID) *MTRServiceAreaCluste
 	if id == 0 {
 		return nil
 	}
-	x := &MTRServiceAreaClusterAreaInfoStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRServiceAreaClusterAreaInfoStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRServiceAreaClusterAreaInfoStructAdopt(id objc.ID) *MTRServiceAreaCluster
 	if id == 0 {
 		return nil
 	}
-	x := &MTRServiceAreaClusterAreaInfoStruct{Handle: objref.Wrap(id)}
+	x := &MTRServiceAreaClusterAreaInfoStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,38 +58,48 @@ func (x *MTRServiceAreaClusterAreaInfoStruct) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRServiceAreaClusterAreaInfoStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRServiceAreaClusterAreaInfoStruct creates a new MTRServiceAreaClusterAreaInfoStruct.
 func NewMTRServiceAreaClusterAreaInfoStruct() *MTRServiceAreaClusterAreaInfoStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRServiceAreaClusterAreaInfoStruct")), objc.RegisterName("new"))
 	return mTRServiceAreaClusterAreaInfoStructAdopt(_id)
 }
 
-// WithLocationInfo sets locationInfo and returns the receiver so calls can be chained.
+// WithLocationInfo sets the property and returns the receiver so calls can be chained.
 func (x *MTRServiceAreaClusterAreaInfoStruct) WithLocationInfo(locationInfo *MTRDataTypeLocationDescriptorStruct) *MTRServiceAreaClusterAreaInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocationInfo:"), objref.IDOf(locationInfo))
 	return x
 }
 
-// WithLandmarkInfo sets landmarkInfo and returns the receiver so calls can be chained.
+// WithLandmarkInfo sets the property and returns the receiver so calls can be chained.
 func (x *MTRServiceAreaClusterAreaInfoStruct) WithLandmarkInfo(landmarkInfo *MTRServiceAreaClusterLandmarkInfoStruct) *MTRServiceAreaClusterAreaInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLandmarkInfo:"), objref.IDOf(landmarkInfo))
 	return x
 }
 
+// LocationInfo wraps the corresponding Objective-C method.
 func (x *MTRServiceAreaClusterAreaInfoStruct) LocationInfo() *MTRDataTypeLocationDescriptorStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locationInfo"))
 	return MTRDataTypeLocationDescriptorStructFromID(_r)
 }
 
+// SetLocationInfo wraps the corresponding Objective-C method.
 func (x *MTRServiceAreaClusterAreaInfoStruct) SetLocationInfo(locationInfo *MTRDataTypeLocationDescriptorStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocationInfo:"), objref.IDOf(locationInfo))
 }
 
+// LandmarkInfo wraps the corresponding Objective-C method.
 func (x *MTRServiceAreaClusterAreaInfoStruct) LandmarkInfo() *MTRServiceAreaClusterLandmarkInfoStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("landmarkInfo"))
 	return MTRServiceAreaClusterLandmarkInfoStructFromID(_r)
 }
 
+// SetLandmarkInfo wraps the corresponding Objective-C method.
 func (x *MTRServiceAreaClusterAreaInfoStruct) SetLandmarkInfo(landmarkInfo *MTRServiceAreaClusterLandmarkInfoStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLandmarkInfo:"), objref.IDOf(landmarkInfo))
 }

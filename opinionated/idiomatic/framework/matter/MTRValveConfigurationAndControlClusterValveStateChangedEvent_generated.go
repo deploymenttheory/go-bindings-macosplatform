@@ -23,7 +23,8 @@ func MTRValveConfigurationAndControlClusterValveStateChangedEventFromID(id objc.
 	if id == 0 {
 		return nil
 	}
-	x := &MTRValveConfigurationAndControlClusterValveStateChangedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRValveConfigurationAndControlClusterValveStateChangedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRValveConfigurationAndControlClusterValveStateChangedEventAdopt(id objc.I
 	if id == 0 {
 		return nil
 	}
-	x := &MTRValveConfigurationAndControlClusterValveStateChangedEvent{Handle: objref.Wrap(id)}
+	x := &MTRValveConfigurationAndControlClusterValveStateChangedEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,38 +58,48 @@ func (x *MTRValveConfigurationAndControlClusterValveStateChangedEvent) IsKind(cl
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRValveConfigurationAndControlClusterValveStateChangedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRValveConfigurationAndControlClusterValveStateChangedEvent creates a new MTRValveConfigurationAndControlClusterValveStateChangedEvent.
 func NewMTRValveConfigurationAndControlClusterValveStateChangedEvent() *MTRValveConfigurationAndControlClusterValveStateChangedEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRValveConfigurationAndControlClusterValveStateChangedEvent")), objc.RegisterName("new"))
 	return mTRValveConfigurationAndControlClusterValveStateChangedEventAdopt(_id)
 }
 
-// WithValveState sets valveState and returns the receiver so calls can be chained.
+// WithValveState sets the property and returns the receiver so calls can be chained.
 func (x *MTRValveConfigurationAndControlClusterValveStateChangedEvent) WithValveState(valveState obj.Object) *MTRValveConfigurationAndControlClusterValveStateChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValveState:"), objref.IDOf(valveState))
 	return x
 }
 
-// WithValveLevel sets valveLevel and returns the receiver so calls can be chained.
+// WithValveLevel sets the property and returns the receiver so calls can be chained.
 func (x *MTRValveConfigurationAndControlClusterValveStateChangedEvent) WithValveLevel(valveLevel obj.Object) *MTRValveConfigurationAndControlClusterValveStateChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValveLevel:"), objref.IDOf(valveLevel))
 	return x
 }
 
+// ValveState wraps the corresponding Objective-C method.
 func (x *MTRValveConfigurationAndControlClusterValveStateChangedEvent) ValveState() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valveState"))
 	return obj.Wrap(_r)
 }
 
+// SetValveState wraps the corresponding Objective-C method.
 func (x *MTRValveConfigurationAndControlClusterValveStateChangedEvent) SetValveState(valveState obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValveState:"), objref.IDOf(valveState))
 }
 
+// ValveLevel wraps the corresponding Objective-C method.
 func (x *MTRValveConfigurationAndControlClusterValveStateChangedEvent) ValveLevel() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valveLevel"))
 	return obj.Wrap(_r)
 }
 
+// SetValveLevel wraps the corresponding Objective-C method.
 func (x *MTRValveConfigurationAndControlClusterValveStateChangedEvent) SetValveLevel(valveLevel obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValveLevel:"), objref.IDOf(valveLevel))
 }

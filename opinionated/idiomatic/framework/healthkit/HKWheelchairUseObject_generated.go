@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// This class acts as a wrapper for the wheelchair use enumeration.
-//
 // WheelchairUseObject is an idiomatic wrapper over the Objective-C class HKWheelchairUseObject.
+//
+// This class acts as a wrapper for the wheelchair use enumeration.
 type WheelchairUseObject struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WheelchairUseObjectFromID(id objc.ID) *WheelchairUseObject {
 	if id == 0 {
 		return nil
 	}
-	x := &WheelchairUseObject{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WheelchairUseObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wheelchairUseObjectAdopt(id objc.ID) *WheelchairUseObject {
 	if id == 0 {
 		return nil
 	}
-	x := &WheelchairUseObject{Handle: objref.Wrap(id)}
+	x := &WheelchairUseObject{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *WheelchairUseObject) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WheelchairUseObject) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWheelchairUseObject creates a new WheelchairUseObject.
 func NewWheelchairUseObject() *WheelchairUseObject {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKWheelchairUseObject")), objc.RegisterName("new"))
 	return wheelchairUseObjectAdopt(_id)
 }
 
+// WheelchairUse wraps the corresponding Objective-C method.
 func (x *WheelchairUseObject) WheelchairUse() WheelchairUse {
 	_r := objc.Send[WheelchairUse](objref.IDOf(x), objc.RegisterName("wheelchairUse"))
 	return _r

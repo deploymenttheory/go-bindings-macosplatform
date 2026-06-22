@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The information associated with one of the user’s accounts.
-//
 // Account is an idiomatic wrapper over the Objective-C class ACAccount.
+//
+// The information associated with one of the user’s accounts.
 type Account struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AccountFromID(id objc.ID) *Account {
 	if id == 0 {
 		return nil
 	}
-	x := &Account{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Account{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func accountAdopt(id objc.ID) *Account {
 	if id == 0 {
 		return nil
 	}
-	x := &Account{Handle: objref.Wrap(id)}
+	x := &Account{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,47 +60,44 @@ func (x *Account) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a new account of the specified type.
-//
-// NewAccountWithAccountType creates a new Account.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Account) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAccountWithAccountType initializes a new account of the specified type.
 func NewAccountWithAccountType(type_ *AccountType) *Account {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ACAccount")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAccountType:"), objref.IDOf(type_))
 	return accountAdopt(_id)
 }
 
-// The type of service account.
-//
-// WithAccountType sets accountType and returns the receiver so calls can be chained.
+// WithAccountType the type of service account.
 func (x *Account) WithAccountType(accountType *AccountType) *Account {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccountType:"), objref.IDOf(accountType))
 	return x
 }
 
-// A human-readable description of the account.
-//
-// WithAccountDescription sets accountDescription and returns the receiver so calls can be chained.
+// WithAccountDescription a human-readable description of the account.
 func (x *Account) WithAccountDescription(accountDescription string) *Account {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccountDescription:"), purego.NSString(accountDescription))
 	return x
 }
 
-// The username for this account.
-//
-// WithUsername sets username and returns the receiver so calls can be chained.
+// WithUsername the username for this account.
 func (x *Account) WithUsername(username string) *Account {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsername:"), purego.NSString(username))
 	return x
 }
 
-// The credential used to authenticate the user of this account.
-//
-// WithCredential sets credential and returns the receiver so calls can be chained.
+// WithCredential the credential used to authenticate the user of this account.
 func (x *Account) WithCredential(credential *AccountCredential) *Account {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredential:"), objref.IDOf(credential))
 	return x
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *Account) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -107,15 +106,18 @@ func (x *Account) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// AccountType wraps the corresponding Objective-C method.
 func (x *Account) AccountType() *AccountType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountType"))
 	return AccountTypeFromID(_r)
 }
 
+// SetAccountType wraps the corresponding Objective-C method.
 func (x *Account) SetAccountType(accountType *AccountType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccountType:"), objref.IDOf(accountType))
 }
 
+// AccountDescription wraps the corresponding Objective-C method.
 func (x *Account) AccountDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountDescription"))
 	if _r == 0 {
@@ -124,10 +126,12 @@ func (x *Account) AccountDescription() string {
 	return purego.GoString(_r)
 }
 
+// SetAccountDescription wraps the corresponding Objective-C method.
 func (x *Account) SetAccountDescription(accountDescription string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccountDescription:"), purego.NSString(accountDescription))
 }
 
+// Username wraps the corresponding Objective-C method.
 func (x *Account) Username() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("username"))
 	if _r == 0 {
@@ -136,15 +140,18 @@ func (x *Account) Username() string {
 	return purego.GoString(_r)
 }
 
+// SetUsername wraps the corresponding Objective-C method.
 func (x *Account) SetUsername(username string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsername:"), purego.NSString(username))
 }
 
+// Credential wraps the corresponding Objective-C method.
 func (x *Account) Credential() *AccountCredential {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credential"))
 	return AccountCredentialFromID(_r)
 }
 
+// SetCredential wraps the corresponding Objective-C method.
 func (x *Account) SetCredential(credential *AccountCredential) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredential:"), objref.IDOf(credential))
 }

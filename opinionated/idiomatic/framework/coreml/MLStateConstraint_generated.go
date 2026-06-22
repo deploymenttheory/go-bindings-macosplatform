@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Constraint of a state feature value.
-//
 // StateConstraint is an idiomatic wrapper over the Objective-C class MLStateConstraint.
+//
+// Constraint of a state feature value.
 type StateConstraint struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func StateConstraintFromID(id objc.ID) *StateConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &StateConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StateConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func stateConstraintAdopt(id objc.ID) *StateConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &StateConstraint{Handle: objref.Wrap(id)}
+	x := &StateConstraint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *StateConstraint) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StateConstraint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewStateConstraint creates a new StateConstraint.
 func NewStateConstraint() *StateConstraint {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLStateConstraint")), objc.RegisterName("new"))
 	return stateConstraintAdopt(_id)
 }
 
-// The shape of the state buffer.
+// BufferShape the shape of the state buffer.
 //
 // BufferShape returns the collection as a Go slice.
 func (x *StateConstraint) BufferShape() []obj.Object {
@@ -72,7 +80,7 @@ func (x *StateConstraint) BufferShape() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The data type of scalars in the state buffer.
+// DataType the data type of scalars in the state buffer.
 func (x *StateConstraint) DataType() MultiArrayDataType {
 	_r := objc.Send[MultiArrayDataType](objref.IDOf(x), objc.RegisterName("dataType"))
 	return _r

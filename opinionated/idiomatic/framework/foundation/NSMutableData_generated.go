@@ -9,16 +9,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object representing a dynamic byte buffer in memory.
-//
 // MutableData is an idiomatic wrapper over the Objective-C class NSMutableData.
+//
+// MutableData is an abstract base — you do not construct it directly. Construct one of [PurgeableData] and pass it where a MutableData is accepted.
+//
+// An object representing a dynamic byte buffer in memory.
 type MutableData struct {
-	objref.Handle
+	Data
 }
 
 // MutableDataFromID adopts an existing Objective-C object as a MutableData
@@ -27,7 +28,8 @@ func MutableDataFromID(id objc.ID) *MutableData {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableData{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,78 +42,59 @@ func mutableDataAdopt(id objc.ID) *MutableData {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableData{Handle: objref.Wrap(id)}
+	x := &MutableData{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MutableData) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableData) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableData) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Returns an initialized mutable data object capable of holding the specified number of bytes.
-//
-// NewMutableDataWithCapacity creates a new MutableData.
+// NewMutableDataWithCapacity returns an initialized mutable data object capable of holding the specified number of bytes.
 func NewMutableDataWithCapacity(capacity int) *MutableData {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCapacity:"), capacity)
 	return mutableDataAdopt(_id)
 }
 
-// Initializes and returns a mutable data object containing a given number of zeroed bytes.
-//
-// NewMutableDataWithLength creates a new MutableData.
+// NewMutableDataWithLength initializes and returns a mutable data object containing a given number of zeroed bytes.
 func NewMutableDataWithLength(length int) *MutableData {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLength:"), length)
 	return mutableDataAdopt(_id)
 }
 
-// The number of bytes contained in the mutable data object.
-//
-// WithLength sets length and returns the receiver so calls can be chained.
+// WithLength the number of bytes contained in the mutable data object.
 func (x *MutableData) WithLength(length int) *MutableData {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *MutableData) WithScriptingProperties(scriptingProperties obj.Object) *MutableData {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// SetLength wraps the corresponding Objective-C method.
 func (x *MutableData) SetLength(length int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
 }
 
-// Appends the content of another data object to the receiver.
+// AppendData appends the content of another data object to the receiver.
 func (x *MutableData) AppendData(other *Data) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendData:"), objref.IDOf(other))
 }
 
-// Increases the length of the receiver by a given number of bytes.
+// IncreaseLengthBy increases the length of the receiver by a given number of bytes.
 func (x *MutableData) IncreaseLengthBy(extraLength int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("increaseLengthBy:"), extraLength)
 }
 
-// Replaces the entire contents of the receiver with the contents of another data object.
+// SetData replaces the entire contents of the receiver with the contents of another data object.
 func (x *MutableData) SetData(data *Data) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
 }
 
-// Decompresses the data object’s bytes.
+// DecompressUsingAlgorithm decompresses the data object’s bytes.
 func (x *MutableData) DecompressUsingAlgorithm(algorithm DataCompressionAlgorithm) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("decompressUsingAlgorithm:error:"), algorithm, unsafe.Pointer(&_nsErr))
@@ -121,7 +104,7 @@ func (x *MutableData) DecompressUsingAlgorithm(algorithm DataCompressionAlgorith
 	return nil
 }
 
-// Compresses the data object’s bytes using an algorithm that you specify.
+// CompressUsingAlgorithm compresses the data object’s bytes using an algorithm that you specify.
 func (x *MutableData) CompressUsingAlgorithm(algorithm DataCompressionAlgorithm) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("compressUsingAlgorithm:error:"), algorithm, unsafe.Pointer(&_nsErr))
@@ -145,3 +128,12 @@ type MutableDataable interface {
 }
 
 var _ MutableDataable = (*MutableData)(nil)
+
+// isMutableData marks MutableData — and, by embedding promotion, its
+// subclasses — as a member of the MutableData hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MutableData) isMutableData() {}
+
+var _ MutableDataProvider = (*MutableData)(nil)
+
+var _ DataProvider = (*MutableData)(nil)

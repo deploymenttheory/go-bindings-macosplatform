@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object containing methods for starting and controlling a broadcast.
-//
 // BroadcastController is an idiomatic wrapper over the Objective-C class RPBroadcastController.
+//
+// An object containing methods for starting and controlling a broadcast.
 type BroadcastController struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func BroadcastControllerFromID(id objc.ID) *BroadcastController {
 	if id == 0 {
 		return nil
 	}
-	x := &BroadcastController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BroadcastController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func broadcastControllerAdopt(id objc.ID) *BroadcastController {
 	if id == 0 {
 		return nil
 	}
-	x := &BroadcastController{Handle: objref.Wrap(id)}
+	x := &BroadcastController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,23 +62,29 @@ func (x *BroadcastController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BroadcastController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBroadcastController creates a new BroadcastController.
 func NewBroadcastController() *BroadcastController {
 	_id := objc.Send[objc.ID](objc.ID(_class("RPBroadcastController")), objc.RegisterName("new"))
 	return broadcastControllerAdopt(_id)
 }
 
-// Pauses the current broadcast.
+// PauseBroadcast pauses the current broadcast.
 func (x *BroadcastController) PauseBroadcast() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseBroadcast"))
 }
 
-// Resumes a paused broadcast.
+// ResumeBroadcast resumes a paused broadcast.
 func (x *BroadcastController) ResumeBroadcast() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeBroadcast"))
 }
 
-// Stops the current broadcast.
+// FinishBroadcastWithHandler stops the current broadcast.
 //
 // FinishBroadcastWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *BroadcastController) FinishBroadcastWithHandler(ctx context.Context) error {
@@ -95,21 +103,25 @@ func (x *BroadcastController) FinishBroadcastWithHandler(ctx context.Context) er
 	}
 }
 
+// IsBroadcasting wraps the corresponding Objective-C method.
 func (x *BroadcastController) IsBroadcasting() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBroadcasting"))
 	return _r
 }
 
+// IsPaused wraps the corresponding Objective-C method.
 func (x *BroadcastController) IsPaused() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaused"))
 	return _r
 }
 
+// BroadcastURL wraps the corresponding Objective-C method.
 func (x *BroadcastController) BroadcastURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("broadcastURL"))
 	return obj.Wrap(_r)
 }
 
+// ServiceInfo wraps the corresponding Objective-C method.
 func (x *BroadcastController) ServiceInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceInfo"))
 	return obj.Wrap(_r)

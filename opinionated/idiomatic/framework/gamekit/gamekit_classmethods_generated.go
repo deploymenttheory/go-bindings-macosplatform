@@ -14,15 +14,16 @@ import (
 	"unsafe"
 )
 
+// Shared wraps the corresponding Objective-C method.
 func Shared() *AccessPoint {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKAccessPoint")), objc.RegisterName("shared"))
 	return AccessPointFromID(_r)
 }
 
-// Loads the achievements that you previously reported the player making progress toward.
+// LoadAchievements loads the achievements that you previously reported the player making progress toward.
 //
 // LoadAchievements blocks until the operation completes or ctx is cancelled.
-func LoadAchievements(ctx context.Context) (obj.Object, error) {
+func LoadAchievements(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -44,7 +45,7 @@ func LoadAchievements(ctx context.Context) (obj.Object, error) {
 	}
 }
 
-// Resets the percentage completed for all of the player’s achievements.
+// ResetAchievements resets the percentage completed for all of the player’s achievements.
 //
 // ResetAchievements blocks until the operation completes or ctx is cancelled.
 func ResetAchievements(ctx context.Context) error {
@@ -63,7 +64,7 @@ func ResetAchievements(ctx context.Context) error {
 	}
 }
 
-// Reports the player’s progress of players toward one or more achievements.
+// ReportAchievements reports the player’s progress of players toward one or more achievements.
 //
 // ReportAchievements blocks until the operation completes or ctx is cancelled.
 func ReportAchievements(ctx context.Context, achievements []*Achievement) error {
@@ -82,7 +83,7 @@ func ReportAchievements(ctx context.Context, achievements []*Achievement) error 
 	}
 }
 
-// Reports the player’s progress on achievements and limits the challenges, associated with those achievements, that the player may complete.
+// ReportAchievementsWithEligibleChallenges reports the player’s progress on achievements and limits the challenges, associated with those achievements, that the player may complete.
 //
 // ReportAchievementsWithEligibleChallenges blocks until the operation completes or ctx is cancelled.
 func ReportAchievementsWithEligibleChallenges(ctx context.Context, achievements []*Achievement, challenges []*Challenge) error {
@@ -101,10 +102,10 @@ func ReportAchievementsWithEligibleChallenges(ctx context.Context, achievements 
 	}
 }
 
-// Downloads the localized descriptions of achievements from Game Center.
+// LoadAchievementDescriptions downloads the localized descriptions of achievements from Game Center.
 //
 // LoadAchievementDescriptions blocks until the operation completes or ctx is cancelled.
-func LoadAchievementDescriptions(ctx context.Context) (obj.Object, error) {
+func LoadAchievementDescriptions(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -126,22 +127,22 @@ func LoadAchievementDescriptions(ctx context.Context) (obj.Object, error) {
 	}
 }
 
-// A common image that you can display when the player hasn’t completed the achievement.
+// IncompleteAchievementImage a common image that you can display when the player hasn’t completed the achievement.
 func IncompleteAchievementImage() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKAchievementDescription")), objc.RegisterName("incompleteAchievementImage"))
 	return obj.Wrap(_r)
 }
 
-// A placeholder image that you can display when the player completes the achievement.
+// PlaceholderCompletedAchievementImage a placeholder image that you can display when the player completes the achievement.
 func PlaceholderCompletedAchievementImage() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKAchievementDescription")), objc.RegisterName("placeholderCompletedAchievementImage"))
 	return obj.Wrap(_r)
 }
 
-// Loads the list of outstanding challenges.
+// LoadReceivedChallenges loads the list of outstanding challenges.
 //
 // LoadReceivedChallenges blocks until the operation completes or ctx is cancelled.
-func LoadReceivedChallenges(ctx context.Context) (obj.Object, error) {
+func LoadReceivedChallenges(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -163,10 +164,10 @@ func LoadReceivedChallenges(ctx context.Context) (obj.Object, error) {
 	}
 }
 
-// Loads all the challenge definitions for the current game, returns an empty array if none exist.
+// LoadChallengeDefinitions loads all the challenge definitions for the current game, returns an empty array if none exist.
 //
 // LoadChallengeDefinitions blocks until the operation completes or ctx is cancelled.
-func LoadChallengeDefinitions(ctx context.Context) (obj.Object, error) {
+func LoadChallengeDefinitions(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -188,16 +189,16 @@ func LoadChallengeDefinitions(ctx context.Context) (obj.Object, error) {
 	}
 }
 
-// Returns the shared instance of the event handler
+// GKChallengeEventHandlerChallengeEventHandler returns the shared instance of the event handler
 func GKChallengeEventHandlerChallengeEventHandler() *ChallengeEventHandler {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKChallengeEventHandler")), objc.RegisterName("challengeEventHandler"))
 	return ChallengeEventHandlerFromID(_r)
 }
 
-// Returns player information for the currently signed-in player.
+// GetCurrentSignedInPlayerForContainer returns player information for the currently signed-in player.
 //
 // GetCurrentSignedInPlayerForContainer blocks until the operation completes or ctx is cancelled.
-func GetCurrentSignedInPlayerForContainer(ctx context.Context, containerName string) (*CloudPlayer, error) {
+func GetCurrentSignedInPlayerForContainer(ctx context.Context, containerName string) (result *CloudPlayer, err error) {
 	type _result struct {
 		val *CloudPlayer
 		err error
@@ -219,20 +220,20 @@ func GetCurrentSignedInPlayerForContainer(ctx context.Context, containerName str
 	}
 }
 
-// Retrieves the shared instance of the dialog controller.
+// SharedDialogController retrieves the shared instance of the dialog controller.
 func SharedDialogController() *DialogController {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKDialogController")), objc.RegisterName("sharedDialogController"))
 	return DialogControllerFromID(_r)
 }
 
-// Returns the maximum number of recipients permitted in a single request.
+// MaxNumberOfRecipients returns the maximum number of recipients permitted in a single request.
 func MaxNumberOfRecipients() int {
 	_r := objc.Send[int](objc.ID(_class("GKFriendRequestComposeViewController")), objc.RegisterName("maxNumberOfRecipients"))
 	return _r
 }
 
-// Creates and starts a new game activity with a custom party code.
-func StartWithDefinitionPartyCodeError(activityDefinition *GameActivityDefinition, partyCode string) (*GameActivity, error) {
+// StartWithDefinitionPartyCodeError creates and starts a new game activity with a custom party code.
+func StartWithDefinitionPartyCodeError(activityDefinition *GameActivityDefinition, partyCode string) (result *GameActivity, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("GKGameActivity")), objc.RegisterName("startWithDefinition:partyCode:error:"), objref.IDOf(activityDefinition), purego.NSString(partyCode), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -241,8 +242,8 @@ func StartWithDefinitionPartyCodeError(activityDefinition *GameActivityDefinitio
 	return GameActivityFromID(_r), nil
 }
 
-// Creates and starts a game activity with a definition.
-func StartWithDefinitionError(activityDefinition *GameActivityDefinition) (*GameActivity, error) {
+// StartWithDefinitionError creates and starts a game activity with a definition.
+func StartWithDefinitionError(activityDefinition *GameActivityDefinition) (result *GameActivity, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("GKGameActivity")), objc.RegisterName("startWithDefinition:error:"), objref.IDOf(activityDefinition), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -251,13 +252,13 @@ func StartWithDefinitionError(activityDefinition *GameActivityDefinition) (*Game
 	return GameActivityFromID(_r), nil
 }
 
-// Checks whether a party code is in valid format.
+// IsValidPartyCode checks whether a party code is in valid format.
 func IsValidPartyCode(partyCode string) bool {
 	_r := objc.Send[bool](objc.ID(_class("GKGameActivity")), objc.RegisterName("isValidPartyCode:"), purego.NSString(partyCode))
 	return _r
 }
 
-// Allowed characters for the party code to be used to share this activity.
+// ValidPartyCodeAlphabet allowed characters for the party code to be used to share this activity.
 //
 // ValidPartyCodeAlphabet returns the collection as a Go slice.
 func ValidPartyCodeAlphabet() []string {
@@ -265,15 +266,15 @@ func ValidPartyCodeAlphabet() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Checks whether there is a pending activity to handle for the current game.
+// CheckPendingGameActivityExistenceWithCompletionHandler checks whether there is a pending activity to handle for the current game.
 func CheckPendingGameActivityExistenceWithCompletionHandler(completionHandler func(bool)) {
 	objc.Send[objc.ID](objc.ID(_class("GKGameActivity")), objc.RegisterName("checkPendingGameActivityExistenceWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
-// Loads all the game activity definitions for the current game.
+// LoadGameActivityDefinitions loads all the game activity definitions for the current game.
 //
 // LoadGameActivityDefinitions blocks until the operation completes or ctx is cancelled.
-func LoadGameActivityDefinitions(ctx context.Context) (obj.Object, error) {
+func LoadGameActivityDefinitions(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -295,10 +296,10 @@ func LoadGameActivityDefinitions(ctx context.Context) (obj.Object, error) {
 	}
 }
 
-// Loads game activity definitions with the supplied App Store Connect identifiers.
+// LoadGameActivityDefinitionsWithIDs loads game activity definitions with the supplied App Store Connect identifiers.
 //
 // LoadGameActivityDefinitionsWithIDs blocks until the operation completes or ctx is cancelled.
-func LoadGameActivityDefinitionsWithIDs(ctx context.Context, activityDefinitionIDs []string) (obj.Object, error) {
+func LoadGameActivityDefinitionsWithIDs(ctx context.Context, activityDefinitionIDs []string) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -320,10 +321,10 @@ func LoadGameActivityDefinitionsWithIDs(ctx context.Context, activityDefinitionI
 	}
 }
 
-// Creates a new game session inside of an iCloud container.
+// CreateSessionInContainerWithTitleMaxConnectedPlayers creates a new game session inside of an iCloud container.
 //
 // CreateSessionInContainerWithTitleMaxConnectedPlayers blocks until the operation completes or ctx is cancelled.
-func CreateSessionInContainerWithTitleMaxConnectedPlayers(ctx context.Context, containerName string, title string, maxPlayers int) (*GameSession, error) {
+func CreateSessionInContainerWithTitleMaxConnectedPlayers(ctx context.Context, containerName string, title string, maxPlayers int) (result *GameSession, err error) {
 	type _result struct {
 		val *GameSession
 		err error
@@ -345,10 +346,10 @@ func CreateSessionInContainerWithTitleMaxConnectedPlayers(ctx context.Context, c
 	}
 }
 
-// Retrieves all of the game sessions associated with a container.
+// LoadSessionsInContainer retrieves all of the game sessions associated with a container.
 //
 // LoadSessionsInContainer blocks until the operation completes or ctx is cancelled.
-func LoadSessionsInContainer(ctx context.Context, containerName string) (obj.Object, error) {
+func LoadSessionsInContainer(ctx context.Context, containerName string) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -370,10 +371,10 @@ func LoadSessionsInContainer(ctx context.Context, containerName string) (obj.Obj
 	}
 }
 
-// Loads a specific game session.
+// LoadSessionWithIdentifier loads a specific game session.
 //
 // LoadSessionWithIdentifier blocks until the operation completes or ctx is cancelled.
-func LoadSessionWithIdentifier(ctx context.Context, identifier string) (*GameSession, error) {
+func LoadSessionWithIdentifier(ctx context.Context, identifier string) (result *GameSession, err error) {
 	type _result struct {
 		val *GameSession
 		err error
@@ -395,7 +396,7 @@ func LoadSessionWithIdentifier(ctx context.Context, identifier string) (*GameSes
 	}
 }
 
-// Removes the specified game session.
+// RemoveSessionWithIdentifier removes the specified game session.
 //
 // RemoveSessionWithIdentifier blocks until the operation completes or ctx is cancelled.
 func RemoveSessionWithIdentifier(ctx context.Context, identifier string) error {
@@ -414,20 +415,20 @@ func RemoveSessionWithIdentifier(ctx context.Context, identifier string) error {
 	}
 }
 
-// Adds a new event listener object.
+// AddEventListener adds a new event listener object.
 func AddEventListener(listener obj.Object) {
 	objc.Send[objc.ID](objc.ID(_class("GKGameSession")), objc.RegisterName("addEventListener:"), objref.IDOf(listener))
 }
 
-// Stops listening to the event listener object.
+// RemoveEventListener stops listening to the event listener object.
 func RemoveEventListener(listener obj.Object) {
 	objc.Send[objc.ID](objc.ID(_class("GKGameSession")), objc.RegisterName("removeEventListener:"), objref.IDOf(listener))
 }
 
-// Loads leaderboards for the specified leaderboard IDs that Game Center uses.
+// LoadLeaderboardsWithIDs loads leaderboards for the specified leaderboard IDs that Game Center uses.
 //
 // LoadLeaderboardsWithIDs blocks until the operation completes or ctx is cancelled.
-func LoadLeaderboardsWithIDs(ctx context.Context, leaderboardIDs []string) (obj.Object, error) {
+func LoadLeaderboardsWithIDs(ctx context.Context, leaderboardIDs []string) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -449,7 +450,7 @@ func LoadLeaderboardsWithIDs(ctx context.Context, leaderboardIDs []string) (obj.
 	}
 }
 
-// Submits a score to multiple leaderboards.
+// SubmitScoreContextPlayerLeaderboardIDs submits a score to multiple leaderboards.
 //
 // SubmitScoreContextPlayerLeaderboardIDs blocks until the operation completes or ctx is cancelled.
 func SubmitScoreContextPlayerLeaderboardIDs(ctx context.Context, score int, context_ int, player *Player, leaderboardIDs []string) error {
@@ -468,6 +469,8 @@ func SubmitScoreContextPlayerLeaderboardIDs(ctx context.Context, score int, cont
 	}
 }
 
+// SetDefaultLeaderboard wraps the corresponding Objective-C method.
+//
 // SetDefaultLeaderboard blocks until the operation completes or ctx is cancelled.
 func SetDefaultLeaderboard(ctx context.Context, leaderboardIdentifier string) error {
 	_ch := make(chan error, 1)
@@ -485,10 +488,10 @@ func SetDefaultLeaderboard(ctx context.Context, leaderboardIdentifier string) er
 	}
 }
 
-// Loads the array of GKLeaderboard for your app Possible reasons for error: 1. Communications problem 2. Unauthenticated player 3. Leaderboard not present
+// LoadLeaderboards loads the array of GKLeaderboard for your app Possible reasons for error: 1. Communications problem 2. Unauthenticated player 3. Leaderboard not present
 //
 // LoadLeaderboards blocks until the operation completes or ctx is cancelled.
-func LoadLeaderboards(ctx context.Context) (obj.Object, error) {
+func LoadLeaderboards(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -510,10 +513,10 @@ func LoadLeaderboards(ctx context.Context) (obj.Object, error) {
 	}
 }
 
-// Loads all of the leaderboard sets you configure for your game.
+// LoadLeaderboardSets loads all of the leaderboard sets you configure for your game.
 //
 // LoadLeaderboardSets blocks until the operation completes or ctx is cancelled.
-func LoadLeaderboardSets(ctx context.Context) (obj.Object, error) {
+func LoadLeaderboardSets(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -535,30 +538,31 @@ func LoadLeaderboardSets(ctx context.Context) (obj.Object, error) {
 	}
 }
 
-// Obtain the primary GKLocalPlayer object. The player is only available for offline play until logged in. A temporary player is created if no account is set up.
+// Local obtain the primary GKLocalPlayer object. The player is only available for offline play until logged in. A temporary player is created if no account is set up.
 func Local() *LocalPlayer {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKLocalPlayer")), objc.RegisterName("local"))
 	return LocalPlayerFromID(_r)
 }
 
+// GKLocalPlayerLocalPlayer wraps the corresponding Objective-C method.
 func GKLocalPlayerLocalPlayer() *LocalPlayer {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKLocalPlayer")), objc.RegisterName("localPlayer"))
 	return LocalPlayerFromID(_r)
 }
 
-// Returns the maximum number of players allowed in the match request for a given match type.
+// MaxPlayersAllowedForMatchOfType returns the maximum number of players allowed in the match request for a given match type.
 func MaxPlayersAllowedForMatchOfType(matchType MatchType) int {
 	_r := objc.Send[int](objc.ID(_class("GKMatchRequest")), objc.RegisterName("maxPlayersAllowedForMatchOfType:"), matchType)
 	return _r
 }
 
-// Returns the singleton matchmaker instance.
+// SharedMatchmaker returns the singleton matchmaker instance.
 func SharedMatchmaker() *Matchmaker {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKMatchmaker")), objc.RegisterName("sharedMatchmaker"))
 	return MatchmakerFromID(_r)
 }
 
-// Displays a banner with a title and message to the player.
+// ShowBannerWithTitleMessage displays a banner with a title and message to the player.
 //
 // ShowBannerWithTitleMessage blocks until the operation completes or ctx is cancelled.
 func ShowBannerWithTitleMessage(ctx context.Context, title string, message string) error {
@@ -575,7 +579,7 @@ func ShowBannerWithTitleMessage(ctx context.Context, title string, message strin
 	}
 }
 
-// Displays a banner to the player for a specified period of time.
+// ShowBannerWithTitleMessageDuration displays a banner to the player for a specified period of time.
 //
 // ShowBannerWithTitleMessageDuration blocks until the operation completes or ctx is cancelled.
 func ShowBannerWithTitleMessageDuration(ctx context.Context, title string, message string, duration float64) error {
@@ -592,16 +596,16 @@ func ShowBannerWithTitleMessageDuration(ctx context.Context, title string, messa
 	}
 }
 
-// Creates a guest player with the specified identifier.
+// AnonymousGuestPlayerWithIdentifier creates a guest player with the specified identifier.
 func AnonymousGuestPlayerWithIdentifier(guestIdentifier string) *Player {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKPlayer")), objc.RegisterName("anonymousGuestPlayerWithIdentifier:"), purego.NSString(guestIdentifier))
 	return PlayerFromID(_r)
 }
 
-// Loads information about a list of players from Game Center.
+// LoadPlayersForIdentifiers loads information about a list of players from Game Center.
 //
 // LoadPlayersForIdentifiers blocks until the operation completes or ctx is cancelled.
-func LoadPlayersForIdentifiers(ctx context.Context, identifiers []string) (obj.Object, error) {
+func LoadPlayersForIdentifiers(ctx context.Context, identifiers []string) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -623,7 +627,7 @@ func LoadPlayersForIdentifiers(ctx context.Context, identifiers []string) (obj.O
 	}
 }
 
-// Reports a list of scores to Game Center
+// ReportScores reports a list of scores to Game Center
 //
 // ReportScores blocks until the operation completes or ctx is cancelled.
 func ReportScores(ctx context.Context, scores []*Score) error {
@@ -642,7 +646,7 @@ func ReportScores(ctx context.Context, scores []*Score) error {
 	}
 }
 
-// Submits a list of scores and all eligible challenges.
+// ReportScoresWithEligibleChallenges submits a list of scores and all eligible challenges.
 //
 // ReportScoresWithEligibleChallenges blocks until the operation completes or ctx is cancelled.
 func ReportScoresWithEligibleChallenges(ctx context.Context, scores []*Score, challenges []*Challenge) error {
@@ -661,7 +665,7 @@ func ReportScoresWithEligibleChallenges(ctx context.Context, scores []*Score, ch
 	}
 }
 
-// Submits a list of scores and all eligible challenges.
+// ReportLeaderboardScoresWithEligibleChallenges submits a list of scores and all eligible challenges.
 //
 // ReportLeaderboardScoresWithEligibleChallenges blocks until the operation completes or ctx is cancelled.
 func ReportLeaderboardScoresWithEligibleChallenges(ctx context.Context, scores []*LeaderboardScore, challenges []*Challenge) error {
@@ -680,16 +684,16 @@ func ReportLeaderboardScoresWithEligibleChallenges(ctx context.Context, scores [
 	}
 }
 
-// Returns the shared instance of the event handler.
+// SharedTurnBasedEventHandler returns the shared instance of the event handler.
 func SharedTurnBasedEventHandler() *TurnBasedEventHandler {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKTurnBasedEventHandler")), objc.RegisterName("sharedTurnBasedEventHandler"))
 	return TurnBasedEventHandlerFromID(_r)
 }
 
-// Creates a new match or finds an existing match that needs a player.
+// FindMatchForRequest creates a new match or finds an existing match that needs a player.
 //
 // FindMatchForRequest blocks until the operation completes or ctx is cancelled.
-func FindMatchForRequest(ctx context.Context, request *MatchRequest) (*TurnBasedMatch, error) {
+func FindMatchForRequest(ctx context.Context, request *MatchRequest) (result *TurnBasedMatch, err error) {
 	type _result struct {
 		val *TurnBasedMatch
 		err error
@@ -711,10 +715,10 @@ func FindMatchForRequest(ctx context.Context, request *MatchRequest) (*TurnBased
 	}
 }
 
-// Fetches the turn-based matches from Game Center that the local player participates in.
+// LoadMatches fetches the turn-based matches from Game Center that the local player participates in.
 //
 // LoadMatches blocks until the operation completes or ctx is cancelled.
-func LoadMatches(ctx context.Context) (obj.Object, error) {
+func LoadMatches(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -736,10 +740,10 @@ func LoadMatches(ctx context.Context) (obj.Object, error) {
 	}
 }
 
-// Loads a specific match with the specified identifier.
+// LoadMatchWithID loads a specific match with the specified identifier.
 //
 // LoadMatchWithID blocks until the operation completes or ctx is cancelled.
-func LoadMatchWithID(ctx context.Context, matchID string) (*TurnBasedMatch, error) {
+func LoadMatchWithID(ctx context.Context, matchID string) (result *TurnBasedMatch, err error) {
 	type _result struct {
 		val *TurnBasedMatch
 		err error
@@ -761,7 +765,7 @@ func LoadMatchWithID(ctx context.Context, matchID string) (*TurnBasedMatch, erro
 	}
 }
 
-// Returns whether voice chat is available on the device.
+// IsVoIPAllowed returns whether voice chat is available on the device.
 func IsVoIPAllowed() bool {
 	_r := objc.Send[bool](objc.ID(_class("GKVoiceChat")), objc.RegisterName("isVoIPAllowed"))
 	return _r

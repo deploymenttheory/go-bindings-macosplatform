@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a connection to a mixer node from a node that conforms to the audio mixing protocol.
-//
 // AudioMixingDestination is an idiomatic wrapper over the Objective-C class AVAudioMixingDestination.
+//
+// An object that represents a connection to a mixer node from a node that conforms to the audio mixing protocol.
 type AudioMixingDestination struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AudioMixingDestinationFromID(id objc.ID) *AudioMixingDestination {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioMixingDestination{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioMixingDestination{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func audioMixingDestinationAdopt(id objc.ID) *AudioMixingDestination {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioMixingDestination{Handle: objref.Wrap(id)}
+	x := &AudioMixingDestination{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *AudioMixingDestination) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioMixingDestination) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAudioMixingDestination creates a new AudioMixingDestination.
 func NewAudioMixingDestination() *AudioMixingDestination {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioMixingDestination")), objc.RegisterName("new"))
 	return audioMixingDestinationAdopt(_id)
 }
 
+// ConnectionPoint wraps the corresponding Objective-C method.
 func (x *AudioMixingDestination) ConnectionPoint() *AudioConnectionPoint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectionPoint"))
 	return AudioConnectionPointFromID(_r)

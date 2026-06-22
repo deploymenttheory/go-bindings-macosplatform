@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Content App Observer
-//
 // MTRBaseClusterContentAppObserver is an idiomatic wrapper over the Objective-C class MTRBaseClusterContentAppObserver.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
+//
+// Cluster Content App Observer
 type MTRBaseClusterContentAppObserver struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterContentAppObserverFromID adopts an existing Objective-C object as a MTRBaseClusterContentAppObserver
@@ -27,7 +28,8 @@ func MTRBaseClusterContentAppObserverFromID(id objc.ID) *MTRBaseClusterContentAp
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterContentAppObserver{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterContentAppObserver{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,39 +42,23 @@ func mTRBaseClusterContentAppObserverAdopt(id objc.ID) *MTRBaseClusterContentApp
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterContentAppObserver{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterContentAppObserver{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterContentAppObserver) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterContentAppObserver) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterContentAppObserver) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterContentAppObserverWithDeviceEndpointIDQueue creates a new MTRBaseClusterContentAppObserver.
+// NewMTRBaseClusterContentAppObserverWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterContentAppObserverWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterContentAppObserver {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterContentAppObserver")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterContentAppObserverAdopt(_id)
 }
 
-// Command ContentAppMessage
+// ContentAppMessageWithParamsCompletion command ContentAppMessage
 //
 // ContentAppMessageWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterContentAppObserver) ContentAppMessageWithParamsCompletion(ctx context.Context, params *MTRContentAppObserverClusterContentAppMessageParams) (*MTRContentAppObserverClusterContentAppMessageResponseParams, error) {
+func (x *MTRBaseClusterContentAppObserver) ContentAppMessageWithParamsCompletion(ctx context.Context, params *MTRContentAppObserverClusterContentAppMessageParams) (result *MTRContentAppObserverClusterContentAppMessageResponseParams, err error) {
 	type _result struct {
 		val *MTRContentAppObserverClusterContentAppMessageResponseParams
 		err error
@@ -94,8 +80,10 @@ func (x *MTRBaseClusterContentAppObserver) ContentAppMessageWithParamsCompletion
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterContentAppObserver) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterContentAppObserver) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -117,8 +105,10 @@ func (x *MTRBaseClusterContentAppObserver) ReadAttributeGeneratedCommandListWith
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterContentAppObserver) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterContentAppObserver) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -140,8 +130,10 @@ func (x *MTRBaseClusterContentAppObserver) SubscribeAttributeGeneratedCommandLis
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterContentAppObserver) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterContentAppObserver) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -163,8 +155,10 @@ func (x *MTRBaseClusterContentAppObserver) ReadAttributeAcceptedCommandListWithC
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterContentAppObserver) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterContentAppObserver) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -186,8 +180,10 @@ func (x *MTRBaseClusterContentAppObserver) SubscribeAttributeAcceptedCommandList
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterContentAppObserver) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterContentAppObserver) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -209,8 +205,10 @@ func (x *MTRBaseClusterContentAppObserver) ReadAttributeAttributeListWithComplet
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterContentAppObserver) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterContentAppObserver) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -232,8 +230,10 @@ func (x *MTRBaseClusterContentAppObserver) SubscribeAttributeAttributeListWithPa
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterContentAppObserver) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterContentAppObserver) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -255,8 +255,10 @@ func (x *MTRBaseClusterContentAppObserver) ReadAttributeFeatureMapWithCompletion
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterContentAppObserver) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterContentAppObserver) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -278,8 +280,10 @@ func (x *MTRBaseClusterContentAppObserver) SubscribeAttributeFeatureMapWithParam
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterContentAppObserver) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterContentAppObserver) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -301,8 +305,10 @@ func (x *MTRBaseClusterContentAppObserver) ReadAttributeClusterRevisionWithCompl
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterContentAppObserver) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterContentAppObserver) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -341,3 +347,7 @@ type MTRBaseClusterContentAppObserverable interface {
 }
 
 var _ MTRBaseClusterContentAppObserverable = (*MTRBaseClusterContentAppObserver)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterContentAppObserver)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterContentAppObserver)(nil)

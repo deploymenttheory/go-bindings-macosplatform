@@ -23,7 +23,8 @@ func ISyncChangeFromID(id objc.ID) *ISyncChange {
 	if id == 0 {
 		return nil
 	}
-	x := &ISyncChange{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ISyncChange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func iSyncChangeAdopt(id objc.ID) *ISyncChange {
 	if id == 0 {
 		return nil
 	}
-	x := &ISyncChange{Handle: objref.Wrap(id)}
+	x := &ISyncChange{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *ISyncChange) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ISyncChange) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewISyncChangeWithChangeTypeRecordIdentifierChanges creates a new ISyncChange.
 func NewISyncChangeWithChangeTypeRecordIdentifierChanges(type_ int, recordIdentifier string, changes obj.Object) *ISyncChange {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ISyncChange")), objc.RegisterName("alloc"))
@@ -63,11 +71,13 @@ func NewISyncChangeWithChangeTypeRecordIdentifierChanges(type_ int, recordIdenti
 	return iSyncChangeAdopt(_id)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *ISyncChange) Type() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
+// RecordIdentifier wraps the corresponding Objective-C method.
 func (x *ISyncChange) RecordIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordIdentifier"))
 	if _r == 0 {
@@ -76,11 +86,13 @@ func (x *ISyncChange) RecordIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// Record wraps the corresponding Objective-C method.
 func (x *ISyncChange) Record() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("record"))
 	return obj.Wrap(_r)
 }
 
+// Changes wraps the corresponding Objective-C method.
 func (x *ISyncChange) Changes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changes"))
 	return obj.Wrap(_r)

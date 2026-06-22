@@ -6,15 +6,16 @@ package pdfkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains a set of thumbnails, each of which represents a page in a PDF document.
-//
 // ThumbnailView is an idiomatic wrapper over the Objective-C class PDFThumbnailView.
+//
+// An object that contains a set of thumbnails, each of which represents a page in a PDF document.
 type ThumbnailView struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func ThumbnailViewFromID(id objc.ID) *ThumbnailView {
 	if id == 0 {
 		return nil
 	}
-	x := &ThumbnailView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ThumbnailView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func thumbnailViewAdopt(id objc.ID) *ThumbnailView {
 	if id == 0 {
 		return nil
 	}
-	x := &ThumbnailView{Handle: objref.Wrap(id)}
+	x := &ThumbnailView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,116 +61,141 @@ func (x *ThumbnailView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ThumbnailView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewThumbnailView creates a new ThumbnailView.
 func NewThumbnailView() *ThumbnailView {
 	_id := objc.Send[objc.ID](objc.ID(_class("PDFThumbnailView")), objc.RegisterName("new"))
 	return thumbnailViewAdopt(_id)
 }
 
-// Returns the PDFView object associated with the thumbnail view.
-//
-// WithPDFView sets pDFView and returns the receiver so calls can be chained.
+// WithPDFView returns the PDFView object associated with the thumbnail view.
 func (x *ThumbnailView) WithPDFView(pDFView *View) *ThumbnailView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPDFView:"), objref.IDOf(pDFView))
 	return x
 }
 
-// Returns the color used in the background of the thumbnail view.
-//
-// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+// WithBackgroundColor returns the color used in the background of the thumbnail view.
 func (x *ThumbnailView) WithBackgroundColor(backgroundColor obj.Object) *ThumbnailView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// Returns the maximum number of columns of thumbnails the thumbnail view can display.
-//
-// WithMaximumNumberOfColumns sets maximumNumberOfColumns and returns the receiver so calls can be chained.
+// WithThumbnailSize returns the maximum width and height of the thumbnails in the thumbnail view.
+func (x *ThumbnailView) WithThumbnailSize(thumbnailSize corefoundation.CGSize) *ThumbnailView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThumbnailSize:"), thumbnailSize)
+	return x
+}
+
+// WithMaximumNumberOfColumns returns the maximum number of columns of thumbnails the thumbnail view can display.
 func (x *ThumbnailView) WithMaximumNumberOfColumns(maximumNumberOfColumns int) *ThumbnailView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumNumberOfColumns:"), maximumNumberOfColumns)
 	return x
 }
 
-// Returns the font used to label the thumbnails.
-//
-// WithLabelFont sets labelFont and returns the receiver so calls can be chained.
+// WithLabelFont returns the font used to label the thumbnails.
 func (x *ThumbnailView) WithLabelFont(labelFont obj.Object) *ThumbnailView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabelFont:"), objref.IDOf(labelFont))
 	return x
 }
 
-// Returns a Boolean value indicating whether users can drag thumbnails (that is, re-order pages in the document) within the thumbnail view.
-//
-// WithAllowsDragging sets allowsDragging and returns the receiver so calls can be chained.
+// WithAllowsDragging returns a Boolean value indicating whether users can drag thumbnails (that is, re-order pages in the document) within the thumbnail view.
 func (x *ThumbnailView) WithAllowsDragging(allowsDragging bool) *ThumbnailView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsDragging:"), allowsDragging)
 	return x
 }
 
-// Returns a Boolean value indicating whether users can select multiple thumbnails in the thumbnail view at one time.
-//
-// WithAllowsMultipleSelection sets allowsMultipleSelection and returns the receiver so calls can be chained.
+// WithAllowsMultipleSelection returns a Boolean value indicating whether users can select multiple thumbnails in the thumbnail view at one time.
 func (x *ThumbnailView) WithAllowsMultipleSelection(allowsMultipleSelection bool) *ThumbnailView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMultipleSelection:"), allowsMultipleSelection)
 	return x
 }
 
+// PDFView wraps the corresponding Objective-C method.
 func (x *ThumbnailView) PDFView() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("PDFView"))
 	return ViewFromID(_r)
 }
 
+// SetPDFView wraps the corresponding Objective-C method.
 func (x *ThumbnailView) SetPDFView(pDFView *View) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPDFView:"), objref.IDOf(pDFView))
 }
 
+// BackgroundColor wraps the corresponding Objective-C method.
 func (x *ThumbnailView) BackgroundColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
 }
 
+// SetBackgroundColor wraps the corresponding Objective-C method.
 func (x *ThumbnailView) SetBackgroundColor(backgroundColor obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
+// SelectedPages wraps the corresponding Objective-C method.
+//
 // SelectedPages returns the collection as a Go slice.
 func (x *ThumbnailView) SelectedPages() []*Page {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedPages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Page { return PageFromID(_id) })
 }
 
+// ThumbnailSize wraps the corresponding Objective-C method.
+func (x *ThumbnailView) ThumbnailSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("thumbnailSize"))
+	return _r
+}
+
+// SetThumbnailSize wraps the corresponding Objective-C method.
+func (x *ThumbnailView) SetThumbnailSize(thumbnailSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThumbnailSize:"), thumbnailSize)
+}
+
+// MaximumNumberOfColumns wraps the corresponding Objective-C method.
 func (x *ThumbnailView) MaximumNumberOfColumns() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumNumberOfColumns"))
 	return _r
 }
 
+// SetMaximumNumberOfColumns wraps the corresponding Objective-C method.
 func (x *ThumbnailView) SetMaximumNumberOfColumns(maximumNumberOfColumns int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumNumberOfColumns:"), maximumNumberOfColumns)
 }
 
+// LabelFont wraps the corresponding Objective-C method.
 func (x *ThumbnailView) LabelFont() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labelFont"))
 	return obj.Wrap(_r)
 }
 
+// SetLabelFont wraps the corresponding Objective-C method.
 func (x *ThumbnailView) SetLabelFont(labelFont obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabelFont:"), objref.IDOf(labelFont))
 }
 
+// AllowsDragging wraps the corresponding Objective-C method.
 func (x *ThumbnailView) AllowsDragging() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsDragging"))
 	return _r
 }
 
+// SetAllowsDragging wraps the corresponding Objective-C method.
 func (x *ThumbnailView) SetAllowsDragging(allowsDragging bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsDragging:"), allowsDragging)
 }
 
+// AllowsMultipleSelection wraps the corresponding Objective-C method.
 func (x *ThumbnailView) AllowsMultipleSelection() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsMultipleSelection"))
 	return _r
 }
 
+// SetAllowsMultipleSelection wraps the corresponding Objective-C method.
 func (x *ThumbnailView) SetAllowsMultipleSelection(allowsMultipleSelection bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMultipleSelection:"), allowsMultipleSelection)
 }
@@ -177,6 +205,7 @@ type ThumbnailViewable interface {
 	obj.Object
 	WithPDFView(pDFView *View) *ThumbnailView
 	WithBackgroundColor(backgroundColor obj.Object) *ThumbnailView
+	WithThumbnailSize(thumbnailSize corefoundation.CGSize) *ThumbnailView
 	WithMaximumNumberOfColumns(maximumNumberOfColumns int) *ThumbnailView
 	WithLabelFont(labelFont obj.Object) *ThumbnailView
 	WithAllowsDragging(allowsDragging bool) *ThumbnailView
@@ -186,6 +215,8 @@ type ThumbnailViewable interface {
 	BackgroundColor() obj.Object
 	SetBackgroundColor(backgroundColor obj.Object)
 	SelectedPages() []*Page
+	ThumbnailSize() corefoundation.CGSize
+	SetThumbnailSize(thumbnailSize corefoundation.CGSize)
 	MaximumNumberOfColumns() int
 	SetMaximumNumberOfColumns(maximumNumberOfColumns int)
 	LabelFont() obj.Object

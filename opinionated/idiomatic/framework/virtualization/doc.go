@@ -3,4 +3,44 @@
 //go:build darwin
 
 // Package virtualization provides a fluent Go API over the macOS Virtualization framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - AudioDeviceConfiguration: [VirtioSoundDeviceConfiguration]
+//   - AudioInputStreamSource: [HostAudioInputStreamSource]
+//   - AudioOutputStreamSink: [HostAudioOutputStreamSink]
+//   - BootLoader: [EFIBootLoader], [LinuxBootLoader], [MacOSBootLoader]
+//   - ConsoleDevice: [VirtioConsoleDevice]
+//   - ConsoleDeviceConfiguration: [VirtioConsoleDeviceConfiguration]
+//   - ConsolePortConfiguration: [VirtioConsolePortConfiguration]
+//   - DirectoryShare: [LinuxRosettaDirectoryShare], [MultipleDirectoryShare], [SingleDirectoryShare]
+//   - DirectorySharingDevice: [VirtioFileSystemDevice]
+//   - DirectorySharingDeviceConfiguration: [VirtioFileSystemDeviceConfiguration]
+//   - EntropyDeviceConfiguration: [VirtioEntropyDeviceConfiguration]
+//   - GraphicsDevice: [MacGraphicsDevice], [VirtioGraphicsDevice]
+//   - GraphicsDeviceConfiguration: [MacGraphicsDeviceConfiguration], [VirtioGraphicsDeviceConfiguration]
+//   - GraphicsDisplay: [MacGraphicsDisplay], [VirtioGraphicsScanout]
+//   - GraphicsDisplayConfiguration: [MacGraphicsDisplayConfiguration], [VirtioGraphicsScanoutConfiguration]
+//   - KeyboardConfiguration: [MacKeyboardConfiguration], [USBKeyboardConfiguration]
+//   - LinuxRosettaCachingOptions: [LinuxRosettaAbstractSocketCachingOptions], [LinuxRosettaUnixSocketCachingOptions]
+//   - MemoryBalloonDevice: [VirtioTraditionalMemoryBalloonDevice]
+//   - MemoryBalloonDeviceConfiguration: [VirtioTraditionalMemoryBalloonDeviceConfiguration]
+//   - NetworkDeviceAttachment: [BridgedNetworkDeviceAttachment], [FileHandleNetworkDeviceAttachment], [NATNetworkDeviceAttachment], [VmnetNetworkDeviceAttachment]
+//   - NetworkDeviceConfiguration: [VirtioNetworkDeviceConfiguration]
+//   - PlatformConfiguration: [GenericPlatformConfiguration], [MacPlatformConfiguration]
+//   - PointingDeviceConfiguration: [MacTrackpadConfiguration], [USBScreenCoordinatePointingDeviceConfiguration]
+//   - SerialPortAttachment: [FileHandleSerialPortAttachment], [FileSerialPortAttachment], [SpiceAgentPortAttachment]
+//   - SerialPortConfiguration: [VirtioConsoleDeviceSerialPortConfiguration]
+//   - SocketDevice: [VirtioSocketDevice]
+//   - SocketDeviceConfiguration: [VirtioSocketDeviceConfiguration]
+//   - StorageDevice: [USBMassStorageDevice]
+//   - StorageDeviceAttachment: [DiskBlockDeviceStorageDeviceAttachment], [DiskImageStorageDeviceAttachment], [NetworkBlockDeviceStorageDeviceAttachment]
+//   - StorageDeviceConfiguration: [NVMExpressControllerDeviceConfiguration], [USBMassStorageDeviceConfiguration], [VirtioBlockDeviceConfiguration]
+//   - USBController: [XHCIController]
+//   - USBControllerConfiguration: [XHCIControllerConfiguration]
+//   - VirtioSoundDeviceStreamConfiguration: [VirtioSoundDeviceInputStreamConfiguration], [VirtioSoundDeviceOutputStreamConfiguration]
+//   - VirtualMachineStartOptions: [MacOSVirtualMachineStartOptions]
 package virtualization

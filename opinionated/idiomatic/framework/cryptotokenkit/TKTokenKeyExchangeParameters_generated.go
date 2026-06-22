@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Parameters used to perform specific key exchange operations.
-//
 // TokenKeyExchangeParameters is an idiomatic wrapper over the Objective-C class TKTokenKeyExchangeParameters.
+//
+// Parameters used to perform specific key exchange operations.
 type TokenKeyExchangeParameters struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TokenKeyExchangeParametersFromID(id objc.ID) *TokenKeyExchangeParameters {
 	if id == 0 {
 		return nil
 	}
-	x := &TokenKeyExchangeParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TokenKeyExchangeParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func tokenKeyExchangeParametersAdopt(id objc.ID) *TokenKeyExchangeParameters {
 	if id == 0 {
 		return nil
 	}
-	x := &TokenKeyExchangeParameters{Handle: objref.Wrap(id)}
+	x := &TokenKeyExchangeParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *TokenKeyExchangeParameters) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TokenKeyExchangeParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTokenKeyExchangeParameters creates a new TokenKeyExchangeParameters.
 func NewTokenKeyExchangeParameters() *TokenKeyExchangeParameters {
 	_id := objc.Send[objc.ID](objc.ID(_class("TKTokenKeyExchangeParameters")), objc.RegisterName("new"))
 	return tokenKeyExchangeParametersAdopt(_id)
 }
 
-// Requested output size of key exchange result.  Should be ignored if output size is not configurable for specified key exchange algorithm.
+// RequestedSize requested output size of key exchange result.  Should be ignored if output size is not configurable for specified key exchange algorithm.
 func (x *TokenKeyExchangeParameters) RequestedSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("requestedSize"))
 	return _r
 }
 
-// Additional shared information input, typically used for key derivation (KDF) step of key exchange algorithm.  Should be ignored if shared info is not used for specified key exchange algorithm.
+// SharedInfo additional shared information input, typically used for key derivation (KDF) step of key exchange algorithm.  Should be ignored if shared info is not used for specified key exchange algorithm.
 func (x *TokenKeyExchangeParameters) SharedInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sharedInfo"))
 	return obj.Wrap(_r)

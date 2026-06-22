@@ -23,7 +23,8 @@ func TemporalAAFromID(id objc.ID) *TemporalAA {
 	if id == 0 {
 		return nil
 	}
-	x := &TemporalAA{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TemporalAA{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func temporalAAAdopt(id objc.ID) *TemporalAA {
 	if id == 0 {
 		return nil
 	}
-	x := &TemporalAA{Handle: objref.Wrap(id)}
+	x := &TemporalAA{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,30 +58,36 @@ func (x *TemporalAA) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TemporalAA) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTemporalAA creates a new TemporalAA.
 func NewTemporalAA() *TemporalAA {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSTemporalAA")), objc.RegisterName("new"))
 	return temporalAAAdopt(_id)
 }
 
-// How much to blend the current frame with the previous frame during temporal antialiasing. The final value is given by current * blendFactor + previous * (1 - blendFactor). Must be between zero and one, inclusive. Defaults to 0.1.
-//
-// WithBlendFactor sets blendFactor and returns the receiver so calls can be chained.
+// WithBlendFactor how much to blend the current frame with the previous frame during temporal antialiasing. The final value is given by current * blendFactor + previous * (1 - blendFactor). Must be between zero and one, inclusive. Defaults to 0.1.
 func (x *TemporalAA) WithBlendFactor(blendFactor float32) *TemporalAA {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendFactor:"), blendFactor)
 	return x
 }
 
+// EncodeWithCoder wraps the corresponding Objective-C method.
 func (x *TemporalAA) EncodeWithCoder(coder obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
 }
 
-// How much to blend the current frame with the previous frame during temporal antialiasing. The final value is given by current * blendFactor + previous * (1 - blendFactor). Must be between zero and one, inclusive. Defaults to 0.1.
+// BlendFactor how much to blend the current frame with the previous frame during temporal antialiasing. The final value is given by current * blendFactor + previous * (1 - blendFactor). Must be between zero and one, inclusive. Defaults to 0.1.
 func (x *TemporalAA) BlendFactor() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("blendFactor"))
 	return _r
 }
 
+// SetBlendFactor wraps the corresponding Objective-C method.
 func (x *TemporalAA) SetBlendFactor(blendFactor float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendFactor:"), blendFactor)
 }

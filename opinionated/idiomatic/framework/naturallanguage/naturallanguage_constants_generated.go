@@ -328,19 +328,16 @@ func NLScriptTraditionalChinese() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NLScriptTraditionalChinese")))
 }
 
-// A key that identifies the supported languages in a contextual embedding.
 // NLContextualEmbeddingKeyLanguages returns the string constant NLContextualEmbeddingKeyLanguages, for use as a dictionary key or argument.
 func NLContextualEmbeddingKeyLanguages() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NLContextualEmbeddingKeyLanguages")))
 }
 
-// A key that identifies the writing system that the language uses in a contextual embedding.
 // NLContextualEmbeddingKeyScripts returns the string constant NLContextualEmbeddingKeyScripts, for use as a dictionary key or argument.
 func NLContextualEmbeddingKeyScripts() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NLContextualEmbeddingKeyScripts")))
 }
 
-// A key that identifies the version number the contextual embedding uses.
 // NLContextualEmbeddingKeyRevision returns the string constant NLContextualEmbeddingKeyRevision, for use as a dictionary key or argument.
 func NLContextualEmbeddingKeyRevision() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NLContextualEmbeddingKeyRevision")))

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Options that configure how effects apply to symbol-based images.
-//
 // SymbolEffectOptions is an idiomatic wrapper over the Objective-C class NSSymbolEffectOptions.
+//
+// Options that configure how effects apply to symbol-based images.
 type SymbolEffectOptions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SymbolEffectOptionsFromID(id objc.ID) *SymbolEffectOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolEffectOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SymbolEffectOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func symbolEffectOptionsAdopt(id objc.ID) *SymbolEffectOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolEffectOptions{Handle: objref.Wrap(id)}
+	x := &SymbolEffectOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,43 @@ func (x *SymbolEffectOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SymbolEffectOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSymbolEffectOptions creates a new SymbolEffectOptions.
 func NewSymbolEffectOptions() *SymbolEffectOptions {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSSymbolEffectOptions")), objc.RegisterName("new"))
 	return symbolEffectOptionsAdopt(_id)
 }
 
-// A set of effect options that prefers to repeat indefinitely.
+// OptionsWithRepeating a set of effect options that prefers to repeat indefinitely.
 func (x *SymbolEffectOptions) OptionsWithRepeating() *SymbolEffectOptions {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsWithRepeating"))
 	return SymbolEffectOptionsFromID(_r)
 }
 
-// A set of effect options that prefers to not repeat.
+// OptionsWithNonRepeating a set of effect options that prefers to not repeat.
 func (x *SymbolEffectOptions) OptionsWithNonRepeating() *SymbolEffectOptions {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsWithNonRepeating"))
 	return SymbolEffectOptionsFromID(_r)
 }
 
-// Creates a set of effect options with a preferred repeat count.
+// OptionsWithRepeatCount creates a set of effect options with a preferred repeat count.
 func (x *SymbolEffectOptions) OptionsWithRepeatCount(count int) *SymbolEffectOptions {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsWithRepeatCount:"), count)
 	return SymbolEffectOptionsFromID(_r)
 }
 
-// Creates a set of effect options with a preferred speed multiplier.
+// OptionsWithSpeed creates a set of effect options with a preferred speed multiplier.
 func (x *SymbolEffectOptions) OptionsWithSpeed(speed float64) *SymbolEffectOptions {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsWithSpeed:"), speed)
 	return SymbolEffectOptionsFromID(_r)
 }
 
-// Return a copy of the options setting a preferred repeat behavior.
+// OptionsWithRepeatBehavior return a copy of the options setting a preferred repeat behavior.
 func (x *SymbolEffectOptions) OptionsWithRepeatBehavior(behavior *SymbolEffectOptionsRepeatBehavior) *SymbolEffectOptions {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsWithRepeatBehavior:"), objref.IDOf(behavior))
 	return SymbolEffectOptionsFromID(_r)

@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // TemporalAA is an idiomatic wrapper over the Objective-C class MPSTemporalAA.
+//
+// It embeds [Kernel], promoting that type's methods.
 type TemporalAA struct {
-	objref.Handle
+	Kernel
 }
 
 // TemporalAAFromID adopts an existing Objective-C object as a TemporalAA
@@ -23,7 +24,8 @@ func TemporalAAFromID(id objc.ID) *TemporalAA {
 	if id == 0 {
 		return nil
 	}
-	x := &TemporalAA{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TemporalAA{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func temporalAAAdopt(id objc.ID) *TemporalAA {
 	if id == 0 {
 		return nil
 	}
-	x := &TemporalAA{Handle: objref.Wrap(id)}
+	x := &TemporalAA{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *TemporalAA) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TemporalAA) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TemporalAA) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewTemporalAA creates a new TemporalAA.
@@ -62,32 +50,30 @@ func NewTemporalAA() *TemporalAA {
 	return temporalAAAdopt(_id)
 }
 
-// How much to blend the current frame with the previous frame during temporal antialiasing. The final value is given by current * blendFactor + previous * (1 - blendFactor). Must be between zero and one, inclusive. Defaults to 0.1.
-//
-// WithBlendFactor sets blendFactor and returns the receiver so calls can be chained.
+// WithBlendFactor how much to blend the current frame with the previous frame during temporal antialiasing. The final value is given by current * blendFactor + previous * (1 - blendFactor). Must be between zero and one, inclusive. Defaults to 0.1.
 func (x *TemporalAA) WithBlendFactor(blendFactor float32) *TemporalAA {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendFactor:"), blendFactor)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *TemporalAA) WithLabel(label string) *TemporalAA {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// EncodeWithCoder wraps the corresponding Objective-C method.
 func (x *TemporalAA) EncodeWithCoder(coder obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
 }
 
-// How much to blend the current frame with the previous frame during temporal antialiasing. The final value is given by current * blendFactor + previous * (1 - blendFactor). Must be between zero and one, inclusive. Defaults to 0.1.
+// BlendFactor how much to blend the current frame with the previous frame during temporal antialiasing. The final value is given by current * blendFactor + previous * (1 - blendFactor). Must be between zero and one, inclusive. Defaults to 0.1.
 func (x *TemporalAA) BlendFactor() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("blendFactor"))
 	return _r
 }
 
+// SetBlendFactor wraps the corresponding Objective-C method.
 func (x *TemporalAA) SetBlendFactor(blendFactor float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendFactor:"), blendFactor)
 }
@@ -103,3 +89,5 @@ type TemporalAAable interface {
 }
 
 var _ TemporalAAable = (*TemporalAA)(nil)
+
+var _ KernelProvider = (*TemporalAA)(nil)

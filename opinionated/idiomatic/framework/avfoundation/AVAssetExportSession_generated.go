@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that exports assets in a format that you specify using an export preset.
-//
 // AssetExportSession is an idiomatic wrapper over the Objective-C class AVAssetExportSession.
+//
+// An object that exports assets in a format that you specify using an export preset.
 type AssetExportSession struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func AssetExportSessionFromID(id objc.ID) *AssetExportSession {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetExportSession{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetExportSession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func assetExportSessionAdopt(id objc.ID) *AssetExportSession {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetExportSession{Handle: objref.Wrap(id)}
+	x := &AssetExportSession{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,121 +61,99 @@ func (x *AssetExportSession) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an export session with a preset configuration.
-//
-// NewAssetExportSessionWithAssetPresetName creates a new AssetExportSession.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetExportSession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetExportSessionWithAssetPresetName creates an export session with a preset configuration.
 func NewAssetExportSessionWithAssetPresetName(asset *Asset, presetName string) *AssetExportSession {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetExportSession")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:presetName:"), objref.IDOf(asset), purego.NSString(presetName))
 	return assetExportSessionAdopt(_id)
 }
 
-// The file type of the output an asset export session writes.
-//
-// WithOutputFileType sets outputFileType and returns the receiver so calls can be chained.
+// WithOutputFileType the file type of the output an asset export session writes.
 func (x *AssetExportSession) WithOutputFileType(outputFileType obj.Object) *AssetExportSession {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFileType:"), objref.IDOf(outputFileType))
 	return x
 }
 
-// A URL where an asset export session writes its output.
-//
-// WithOutputURL sets outputURL and returns the receiver so calls can be chained.
+// WithOutputURL a URL where an asset export session writes its output.
 func (x *AssetExportSession) WithOutputURL(outputURL string) *AssetExportSession {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputURL:"), rt.FileURL(outputURL))
 	return x
 }
 
-// A Boolean value that indicates whether to optimize the movie for network use.
-//
-// WithShouldOptimizeForNetworkUse sets shouldOptimizeForNetworkUse and returns the receiver so calls can be chained.
+// WithShouldOptimizeForNetworkUse a Boolean value that indicates whether to optimize the movie for network use.
 func (x *AssetExportSession) WithShouldOptimizeForNetworkUse(shouldOptimizeForNetworkUse bool) *AssetExportSession {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldOptimizeForNetworkUse:"), shouldOptimizeForNetworkUse)
 	return x
 }
 
-// A Boolean value that indicates whether the session can parallelize its export operation.
-//
-// WithAllowsParallelizedExport sets allowsParallelizedExport and returns the receiver so calls can be chained.
+// WithAllowsParallelizedExport a Boolean value that indicates whether the session can parallelize its export operation.
 func (x *AssetExportSession) WithAllowsParallelizedExport(allowsParallelizedExport bool) *AssetExportSession {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsParallelizedExport:"), allowsParallelizedExport)
 	return x
 }
 
-// The file length that the output of the session must not exceed.
-//
-// WithFileLengthLimit sets fileLengthLimit and returns the receiver so calls can be chained.
+// WithFileLengthLimit the file length that the output of the session must not exceed.
 func (x *AssetExportSession) WithFileLengthLimit(fileLengthLimit int64) *AssetExportSession {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileLengthLimit:"), fileLengthLimit)
 	return x
 }
 
-// The metadata an export session writes to the output container file.
-//
-// WithMetadata sets the collection and returns the receiver so calls can be chained.
+// WithMetadata the metadata an export session writes to the output container file.
 func (x *AssetExportSession) WithMetadata(items ...MetadataItemProvider) *AssetExportSession {
 	_arr := purego.SliceToNSArray(items, func(_v MetadataItemProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), _arr)
 	return x
 }
 
-// An object the export session uses to filter the metadata items it transfers to the output asset.
-//
-// WithMetadataItemFilter sets metadataItemFilter and returns the receiver so calls can be chained.
+// WithMetadataItemFilter an object the export session uses to filter the metadata items it transfers to the output asset.
 func (x *AssetExportSession) WithMetadataItemFilter(metadataItemFilter *MetadataItemFilter) *AssetExportSession {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadataItemFilter:"), objref.IDOf(metadataItemFilter))
 	return x
 }
 
-// A processing algorithm for managing audio pitch for scaled audio edits.
-//
-// WithAudioTimePitchAlgorithm sets audioTimePitchAlgorithm and returns the receiver so calls can be chained.
+// WithAudioTimePitchAlgorithm a processing algorithm for managing audio pitch for scaled audio edits.
 func (x *AssetExportSession) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) *AssetExportSession {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
 	return x
 }
 
-// The parameters for audio mixing and an indication of whether to enable nondefault audio mixing for export.
-//
-// WithAudioMix sets audioMix and returns the receiver so calls can be chained.
+// WithAudioMix the parameters for audio mixing and an indication of whether to enable nondefault audio mixing for export.
 func (x *AssetExportSession) WithAudioMix(audioMix AudioMixProvider) *AssetExportSession {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioMix:"), objref.IDOf(audioMix))
 	return x
 }
 
-// An optional object that provides instructions for how to composite frames of video.
-//
-// WithVideoComposition sets videoComposition and returns the receiver so calls can be chained.
+// WithVideoComposition an optional object that provides instructions for how to composite frames of video.
 func (x *AssetExportSession) WithVideoComposition(videoComposition VideoCompositionProvider) *AssetExportSession {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoComposition:"), objref.IDOf(videoComposition))
 	return x
 }
 
-// A policy that defines how the session exports alternate audio tracks.
-//
-// WithAudioTrackGroupHandling sets audioTrackGroupHandling and returns the receiver so calls can be chained.
+// WithAudioTrackGroupHandling a policy that defines how the session exports alternate audio tracks.
 func (x *AssetExportSession) WithAudioTrackGroupHandling(audioTrackGroupHandling AssetTrackGroupOutputHandling) *AssetExportSession {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTrackGroupHandling:"), audioTrackGroupHandling)
 	return x
 }
 
-// A Boolean value that indicates whether the export session can perform multiple passes over the source media to achieve better results.
-//
-// WithCanPerformMultiplePassesOverSourceMediaData sets canPerformMultiplePassesOverSourceMediaData and returns the receiver so calls can be chained.
+// WithCanPerformMultiplePassesOverSourceMediaData a Boolean value that indicates whether the export session can perform multiple passes over the source media to achieve better results.
 func (x *AssetExportSession) WithCanPerformMultiplePassesOverSourceMediaData(canPerformMultiplePassesOverSourceMediaData bool) *AssetExportSession {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanPerformMultiplePassesOverSourceMediaData:"), canPerformMultiplePassesOverSourceMediaData)
 	return x
 }
 
-// A directory suitable to store temporary files that the export process generates.
-//
-// WithDirectoryForTemporaryFiles sets directoryForTemporaryFiles and returns the receiver so calls can be chained.
+// WithDirectoryForTemporaryFiles a directory suitable to store temporary files that the export process generates.
 func (x *AssetExportSession) WithDirectoryForTemporaryFiles(directoryForTemporaryFiles string) *AssetExportSession {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirectoryForTemporaryFiles:"), rt.FileURL(directoryForTemporaryFiles))
 	return x
 }
 
-// Starts the asynchronous execution of an export session.
+// ExportAsynchronously starts the asynchronous execution of an export session.
 //
 // ExportAsynchronously blocks until the operation completes or ctx is cancelled.
 func (x *AssetExportSession) ExportAsynchronously(ctx context.Context) error {
@@ -190,11 +170,12 @@ func (x *AssetExportSession) ExportAsynchronously(ctx context.Context) error {
 	}
 }
 
-// Cancels the execution of an export session.
+// CancelExport cancels the execution of an export session.
 func (x *AssetExportSession) CancelExport() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelExport"))
 }
 
+// PresetName wraps the corresponding Objective-C method.
 func (x *AssetExportSession) PresetName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presetName"))
 	if _r == 0 {
@@ -203,62 +184,72 @@ func (x *AssetExportSession) PresetName() string {
 	return purego.GoString(_r)
 }
 
+// Asset wraps the corresponding Objective-C method.
 func (x *AssetExportSession) Asset() *Asset {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("asset"))
 	return AssetFromID(_r)
 }
 
+// OutputFileType wraps the corresponding Objective-C method.
 func (x *AssetExportSession) OutputFileType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputFileType"))
 	return obj.Wrap(_r)
 }
 
+// SetOutputFileType wraps the corresponding Objective-C method.
 func (x *AssetExportSession) SetOutputFileType(outputFileType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFileType:"), objref.IDOf(outputFileType))
 }
 
+// OutputURL wraps the corresponding Objective-C method.
 func (x *AssetExportSession) OutputURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputURL"))
 	return obj.Wrap(_r)
 }
 
+// SetOutputURL wraps the corresponding Objective-C method.
 func (x *AssetExportSession) SetOutputURL(outputURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputURL:"), rt.FileURL(outputURL))
 }
 
+// ShouldOptimizeForNetworkUse wraps the corresponding Objective-C method.
 func (x *AssetExportSession) ShouldOptimizeForNetworkUse() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldOptimizeForNetworkUse"))
 	return _r
 }
 
+// SetShouldOptimizeForNetworkUse wraps the corresponding Objective-C method.
 func (x *AssetExportSession) SetShouldOptimizeForNetworkUse(shouldOptimizeForNetworkUse bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldOptimizeForNetworkUse:"), shouldOptimizeForNetworkUse)
 }
 
-// Determines whether or not parallelization can be employed in the export. On select platforms, there may be opportunities to expedite the export by using additional resources in parallel. If set to YES, export parallelization will be enabled, only if parallelization requirements are met.  There will be no error signaled if export parallelization is not achievable, and instead the export will proceed as normal (without parallelization). If set to NO, export parallelization will not be used.
+// AllowsParallelizedExport determines whether or not parallelization can be employed in the export. On select platforms, there may be opportunities to expedite the export by using additional resources in parallel. If set to YES, export parallelization will be enabled, only if parallelization requirements are met.  There will be no error signaled if export parallelization is not achievable, and instead the export will proceed as normal (without parallelization). If set to NO, export parallelization will not be used.
 func (x *AssetExportSession) AllowsParallelizedExport() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsParallelizedExport"))
 	return _r
 }
 
+// SetAllowsParallelizedExport wraps the corresponding Objective-C method.
 func (x *AssetExportSession) SetAllowsParallelizedExport(allowsParallelizedExport bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsParallelizedExport:"), allowsParallelizedExport)
 }
 
+// Status wraps the corresponding Objective-C method.
 func (x *AssetExportSession) Status() AssetExportSessionStatus {
 	_r := objc.Send[AssetExportSessionStatus](objref.IDOf(x), objc.RegisterName("status"))
 	return _r
 }
 
+// Progress wraps the corresponding Objective-C method.
 func (x *AssetExportSession) Progress() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("progress"))
 	return _r
 }
 
-// Determines the output file types an asset export session supports writing in its current configuration.
+// DetermineCompatibleFileTypes determines the output file types an asset export session supports writing in its current configuration.
 //
 // DetermineCompatibleFileTypes blocks until the operation completes or ctx is cancelled.
-func (x *AssetExportSession) DetermineCompatibleFileTypes(ctx context.Context) (obj.Object, error) {
+func (x *AssetExportSession) DetermineCompatibleFileTypes(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -279,98 +270,117 @@ func (x *AssetExportSession) DetermineCompatibleFileTypes(ctx context.Context) (
 	}
 }
 
+// SupportedFileTypes wraps the corresponding Objective-C method.
+//
 // SupportedFileTypes returns the collection as a Go slice.
 func (x *AssetExportSession) SupportedFileTypes() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedFileTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// EstimatedOutputFileLength wraps the corresponding Objective-C method.
 func (x *AssetExportSession) EstimatedOutputFileLength() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("estimatedOutputFileLength"))
 	return _r
 }
 
+// FileLengthLimit wraps the corresponding Objective-C method.
 func (x *AssetExportSession) FileLengthLimit() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("fileLengthLimit"))
 	return _r
 }
 
+// SetFileLengthLimit wraps the corresponding Objective-C method.
 func (x *AssetExportSession) SetFileLengthLimit(fileLengthLimit int64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileLengthLimit:"), fileLengthLimit)
 }
 
+// Metadata wraps the corresponding Objective-C method.
+//
 // Metadata returns the collection as a Go slice.
 func (x *AssetExportSession) Metadata() []*MetadataItem {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
+// SetMetadata wraps the corresponding Objective-C method.
 func (x *AssetExportSession) SetMetadata(metadata []*MetadataItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), purego.SliceToNSArray(metadata, func(_v *MetadataItem) objc.ID { return objref.IDOf(_v) }))
 }
 
+// MetadataItemFilter wraps the corresponding Objective-C method.
 func (x *AssetExportSession) MetadataItemFilter() *MetadataItemFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadataItemFilter"))
 	return MetadataItemFilterFromID(_r)
 }
 
+// SetMetadataItemFilter wraps the corresponding Objective-C method.
 func (x *AssetExportSession) SetMetadataItemFilter(metadataItemFilter *MetadataItemFilter) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadataItemFilter:"), objref.IDOf(metadataItemFilter))
 }
 
+// AudioTimePitchAlgorithm wraps the corresponding Objective-C method.
 func (x *AssetExportSession) AudioTimePitchAlgorithm() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioTimePitchAlgorithm"))
 	return obj.Wrap(_r)
 }
 
+// SetAudioTimePitchAlgorithm wraps the corresponding Objective-C method.
 func (x *AssetExportSession) SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
 }
 
+// AudioMix wraps the corresponding Objective-C method.
 func (x *AssetExportSession) AudioMix() *AudioMix {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioMix"))
 	return AudioMixFromID(_r)
 }
 
+// SetAudioMix wraps the corresponding Objective-C method.
 func (x *AssetExportSession) SetAudioMix(audioMix *AudioMix) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioMix:"), objref.IDOf(audioMix))
 }
 
+// VideoComposition wraps the corresponding Objective-C method.
 func (x *AssetExportSession) VideoComposition() *VideoComposition {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoComposition"))
 	return VideoCompositionFromID(_r)
 }
 
+// SetVideoComposition wraps the corresponding Objective-C method.
 func (x *AssetExportSession) SetVideoComposition(videoComposition *VideoComposition) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoComposition:"), objref.IDOf(videoComposition))
 }
 
-// Defines export policy for handling alternate audio tracks Specifies the handling of audio tracks that are members of the same alternate track group corresponding to an exported audio track in the source asset. If no audio track group is present, the value of this property has no effect. If necessary, use the trackGroups property of AVAsset to determine whether any audio track groups are present. The AVAudioMix property is not allowed to be used when also specifying alternate track output handling.  An exception will be thrown if both are specified.
+// AudioTrackGroupHandling defines export policy for handling alternate audio tracks Specifies the handling of audio tracks that are members of the same alternate track group corresponding to an exported audio track in the source asset. If no audio track group is present, the value of this property has no effect. If necessary, use the trackGroups property of AVAsset to determine whether any audio track groups are present. The AVAudioMix property is not allowed to be used when also specifying alternate track output handling.  An exception will be thrown if both are specified.
 func (x *AssetExportSession) AudioTrackGroupHandling() AssetTrackGroupOutputHandling {
 	_r := objc.Send[AssetTrackGroupOutputHandling](objref.IDOf(x), objc.RegisterName("audioTrackGroupHandling"))
 	return _r
 }
 
+// SetAudioTrackGroupHandling wraps the corresponding Objective-C method.
 func (x *AssetExportSession) SetAudioTrackGroupHandling(audioTrackGroupHandling AssetTrackGroupOutputHandling) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTrackGroupHandling:"), audioTrackGroupHandling)
 }
 
-// Determines whether the export session can perform multiple passes over the source media to achieve better results. When the value for this property is YES, the export session can produce higher quality results at the expense of longer export times.  Setting this property to YES may also require the export session to write temporary data to disk during the export.  To control the location of temporary data, use the property directoryForTemporaryFiles. The default value is NO.  Not all export session configurations can benefit from performing multiple passes over the source media.  In these cases, setting this property to YES has no effect. This property cannot be set after the export has started.
+// CanPerformMultiplePassesOverSourceMediaData determines whether the export session can perform multiple passes over the source media to achieve better results. When the value for this property is YES, the export session can produce higher quality results at the expense of longer export times.  Setting this property to YES may also require the export session to write temporary data to disk during the export.  To control the location of temporary data, use the property directoryForTemporaryFiles. The default value is NO.  Not all export session configurations can benefit from performing multiple passes over the source media.  In these cases, setting this property to YES has no effect. This property cannot be set after the export has started.
 func (x *AssetExportSession) CanPerformMultiplePassesOverSourceMediaData() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPerformMultiplePassesOverSourceMediaData"))
 	return _r
 }
 
+// SetCanPerformMultiplePassesOverSourceMediaData wraps the corresponding Objective-C method.
 func (x *AssetExportSession) SetCanPerformMultiplePassesOverSourceMediaData(canPerformMultiplePassesOverSourceMediaData bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanPerformMultiplePassesOverSourceMediaData:"), canPerformMultiplePassesOverSourceMediaData)
 }
 
-// Specifies a directory that is suitable for containing temporary files generated during the export process AVAssetExportSession may need to write temporary files when configured in certain ways, such as when canPerformMultiplePassesOverSourceMediaData is set to YES.  This property can be used to control where in the filesystem those temporary files are created.  All temporary files will be deleted when the export is completed, is canceled, or fails. When the value of this property is nil, the export session will choose a suitable location when writing temporary files.  The default value is nil. This property cannot be set after the export has started.  The export will fail if the URL points to a location that is not a directory, does not exist, is not on the local file system, or if a file cannot be created in this directory (for example, due to insufficient permissions or sandboxing restrictions).
+// DirectoryForTemporaryFiles specifies a directory that is suitable for containing temporary files generated during the export process AVAssetExportSession may need to write temporary files when configured in certain ways, such as when canPerformMultiplePassesOverSourceMediaData is set to YES.  This property can be used to control where in the filesystem those temporary files are created.  All temporary files will be deleted when the export is completed, is canceled, or fails. When the value of this property is nil, the export session will choose a suitable location when writing temporary files.  The default value is nil. This property cannot be set after the export has started.  The export will fail if the URL points to a location that is not a directory, does not exist, is not on the local file system, or if a file cannot be created in this directory (for example, due to insufficient permissions or sandboxing restrictions).
 func (x *AssetExportSession) DirectoryForTemporaryFiles() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("directoryForTemporaryFiles"))
 	return obj.Wrap(_r)
 }
 
+// SetDirectoryForTemporaryFiles wraps the corresponding Objective-C method.
 func (x *AssetExportSession) SetDirectoryForTemporaryFiles(directoryForTemporaryFiles string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirectoryForTemporaryFiles:"), rt.FileURL(directoryForTemporaryFiles))
 }

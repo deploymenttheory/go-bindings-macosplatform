@@ -6,15 +6,18 @@ package mpsneuralnetwork
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NNReduceFeatureChannelsAndWeightsMean is an idiomatic wrapper over the Objective-C class MPSNNReduceFeatureChannelsAndWeightsMean.
+//
+// It embeds [NNReduceBinary], promoting that type's methods.
 type NNReduceFeatureChannelsAndWeightsMean struct {
-	objref.Handle
+	NNReduceBinary
 }
 
 // NNReduceFeatureChannelsAndWeightsMeanFromID adopts an existing Objective-C object as a NNReduceFeatureChannelsAndWeightsMean
@@ -23,7 +26,8 @@ func NNReduceFeatureChannelsAndWeightsMeanFromID(id objc.ID) *NNReduceFeatureCha
 	if id == 0 {
 		return nil
 	}
-	x := &NNReduceFeatureChannelsAndWeightsMean{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNReduceFeatureChannelsAndWeightsMean{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +40,10 @@ func nNReduceFeatureChannelsAndWeightsMeanAdopt(id objc.ID) *NNReduceFeatureChan
 	if id == 0 {
 		return nil
 	}
-	x := &NNReduceFeatureChannelsAndWeightsMean{Handle: objref.Wrap(id)}
+	x := &NNReduceFeatureChannelsAndWeightsMean{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NNReduceFeatureChannelsAndWeightsMean) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNReduceFeatureChannelsAndWeightsMean) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNReduceFeatureChannelsAndWeightsMean) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNNReduceFeatureChannelsAndWeightsMean creates a new NNReduceFeatureChannelsAndWeightsMean.
@@ -62,73 +52,85 @@ func NewNNReduceFeatureChannelsAndWeightsMean() *NNReduceFeatureChannelsAndWeigh
 	return nNReduceFeatureChannelsAndWeightsMeanAdopt(_id)
 }
 
-// The number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
-//
-// WithDestinationFeatureChannelOffset sets destinationFeatureChannelOffset and returns the receiver so calls can be chained.
+// WithPrimarySourceClipRect the source rectangle to use when reading data from primary source A MTLRegion that indicates which part of the primary source to read. If the clipRectPrimarySource does not lie completely within the primary source image, the intersection of the image bounds and clipRectPrimarySource will be used. The primarySourceClipRect replaces the MPSBinaryImageKernel primaryOffset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSBinaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithPrimarySourceClipRect(primarySourceClipRect metal.MTLRegion) *NNReduceFeatureChannelsAndWeightsMean {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceClipRect:"), primarySourceClipRect)
+	return x
+}
+
+// WithSecondarySourceClipRect the source rectangle to use when reading data from secondary source A MTLRegion that indicates which part of the secondary source to read. If the clipRectSecondarySource does not lie completely within the secondary source image, the intersection of the image bounds and clipRectSecondarySource will be used. The secondarySourceClipRect replaces the MPSBinaryImageKernel secondaryOffset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSBinaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithSecondarySourceClipRect(secondarySourceClipRect metal.MTLRegion) *NNReduceFeatureChannelsAndWeightsMean {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceClipRect:"), secondarySourceClipRect)
+	return x
+}
+
+// WithPrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNReduceFeatureChannelsAndWeightsMean {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNReduceFeatureChannelsAndWeightsMean {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithClipRect(clipRect metal.MTLRegion) *NNReduceFeatureChannelsAndWeightsMean {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
 func (x *NNReduceFeatureChannelsAndWeightsMean) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNReduceFeatureChannelsAndWeightsMean {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// The number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-//
-// WithPrimarySourceFeatureChannelOffset sets primarySourceFeatureChannelOffset and returns the receiver so calls can be chained.
+// WithPrimarySourceFeatureChannelOffset the number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
 func (x *NNReduceFeatureChannelsAndWeightsMean) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *NNReduceFeatureChannelsAndWeightsMean {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelOffset:"), primarySourceFeatureChannelOffset)
 	return x
 }
 
-// The number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-//
-// WithSecondarySourceFeatureChannelOffset sets secondarySourceFeatureChannelOffset and returns the receiver so calls can be chained.
+// WithSecondarySourceFeatureChannelOffset the number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
 func (x *NNReduceFeatureChannelsAndWeightsMean) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *NNReduceFeatureChannelsAndWeightsMean {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelOffset:"), secondarySourceFeatureChannelOffset)
 	return x
 }
 
-// The maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithPrimarySourceFeatureChannelMaxCount sets primarySourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+// WithPrimarySourceFeatureChannelMaxCount the maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 func (x *NNReduceFeatureChannelsAndWeightsMean) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *NNReduceFeatureChannelsAndWeightsMean {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelMaxCount:"), primarySourceFeatureChannelMaxCount)
 	return x
 }
 
-// The maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithSecondarySourceFeatureChannelMaxCount sets secondarySourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+// WithSecondarySourceFeatureChannelMaxCount the maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 func (x *NNReduceFeatureChannelsAndWeightsMean) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *NNReduceFeatureChannelsAndWeightsMean {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelMaxCount:"), secondarySourceFeatureChannelMaxCount)
 	return x
 }
 
-// The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
-//
-// WithPrimaryStrideInPixelsX sets primaryStrideInPixelsX and returns the receiver so calls can be chained.
+// WithPrimaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
 func (x *NNReduceFeatureChannelsAndWeightsMean) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNReduceFeatureChannelsAndWeightsMean {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
 	return x
 }
 
-// The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
-//
-// WithPrimaryStrideInPixelsY sets primaryStrideInPixelsY and returns the receiver so calls can be chained.
+// WithPrimaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
 func (x *NNReduceFeatureChannelsAndWeightsMean) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNReduceFeatureChannelsAndWeightsMean {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
 	return x
 }
 
-// The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
-//
-// WithSecondaryStrideInPixelsX sets secondaryStrideInPixelsX and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
 func (x *NNReduceFeatureChannelsAndWeightsMean) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNReduceFeatureChannelsAndWeightsMean {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 	return x
 }
 
-// The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
-//
-// WithSecondaryStrideInPixelsY sets secondaryStrideInPixelsY and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
 func (x *NNReduceFeatureChannelsAndWeightsMean) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNReduceFeatureChannelsAndWeightsMean {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 	return x
@@ -137,6 +139,11 @@ func (x *NNReduceFeatureChannelsAndWeightsMean) WithSecondaryStrideInPixelsY(sec
 // NNReduceFeatureChannelsAndWeightsMeanable is the interface implemented by [NNReduceFeatureChannelsAndWeightsMean], for mocking and DI.
 type NNReduceFeatureChannelsAndWeightsMeanable interface {
 	obj.Object
+	WithPrimarySourceClipRect(primarySourceClipRect metal.MTLRegion) *NNReduceFeatureChannelsAndWeightsMean
+	WithSecondarySourceClipRect(secondarySourceClipRect metal.MTLRegion) *NNReduceFeatureChannelsAndWeightsMean
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNReduceFeatureChannelsAndWeightsMean
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNReduceFeatureChannelsAndWeightsMean
+	WithClipRect(clipRect metal.MTLRegion) *NNReduceFeatureChannelsAndWeightsMean
 	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNReduceFeatureChannelsAndWeightsMean
 	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *NNReduceFeatureChannelsAndWeightsMean
 	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *NNReduceFeatureChannelsAndWeightsMean
@@ -149,3 +156,7 @@ type NNReduceFeatureChannelsAndWeightsMeanable interface {
 }
 
 var _ NNReduceFeatureChannelsAndWeightsMeanable = (*NNReduceFeatureChannelsAndWeightsMean)(nil)
+
+var _ NNReduceBinaryProvider = (*NNReduceFeatureChannelsAndWeightsMean)(nil)
+
+var _ CNNBinaryKernelProvider = (*NNReduceFeatureChannelsAndWeightsMean)(nil)

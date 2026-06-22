@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable object that combines a contact property value with a label that describes that property.
-//
 // LabeledValue is an idiomatic wrapper over the Objective-C class CNLabeledValue.
+//
+// An immutable object that combines a contact property value with a label that describes that property.
 type LabeledValue struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LabeledValueFromID(id objc.ID) *LabeledValue {
 	if id == 0 {
 		return nil
 	}
-	x := &LabeledValue{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LabeledValue{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func labeledValueAdopt(id objc.ID) *LabeledValue {
 	if id == 0 {
 		return nil
 	}
-	x := &LabeledValue{Handle: objref.Wrap(id)}
+	x := &LabeledValue{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,34 +60,38 @@ func (x *LabeledValue) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns a new labeled value identifier.
-//
-// NewLabeledValueWithLabelValue creates a new LabeledValue.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LabeledValue) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLabeledValueWithLabelValue returns a new labeled value identifier.
 func NewLabeledValueWithLabelValue(label string, value obj.Object) *LabeledValue {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CNLabeledValue")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLabel:value:"), purego.NSString(label), objref.IDOf(value))
 	return labeledValueAdopt(_id)
 }
 
-// Returns a labeled value object with an existing value and identifier.
+// LabeledValueBySettingLabel returns a labeled value object with an existing value and identifier.
 func (x *LabeledValue) LabeledValueBySettingLabel(label string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labeledValueBySettingLabel:"), purego.NSString(label))
 	return obj.Wrap(_r)
 }
 
-// Returns a new value for an existing label and identifier.
+// LabeledValueBySettingValue returns a new value for an existing label and identifier.
 func (x *LabeledValue) LabeledValueBySettingValue(value obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labeledValueBySettingValue:"), objref.IDOf(value))
 	return obj.Wrap(_r)
 }
 
-// Returns a labeled value object with the specified label and value with the existing identifier.
+// LabeledValueBySettingLabelValue returns a labeled value object with the specified label and value with the existing identifier.
 func (x *LabeledValue) LabeledValueBySettingLabelValue(label string, value obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labeledValueBySettingLabel:value:"), purego.NSString(label), objref.IDOf(value))
 	return obj.Wrap(_r)
 }
 
-// The identifier is unique among contacts on the device. It can be saved and used for finding labeled values next application launch.
+// Identifier the identifier is unique among contacts on the device. It can be saved and used for finding labeled values next application launch.
 func (x *LabeledValue) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -94,6 +100,7 @@ func (x *LabeledValue) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// Label wraps the corresponding Objective-C method.
 func (x *LabeledValue) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -102,6 +109,7 @@ func (x *LabeledValue) Label() string {
 	return purego.GoString(_r)
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *LabeledValue) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	return obj.Wrap(_r)

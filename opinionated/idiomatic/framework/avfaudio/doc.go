@@ -3,4 +3,19 @@
 //go:build darwin
 
 // Package avfaudio provides a fluent Go API over the macOS AVFAudio framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - AudioBuffer: [AudioCompressedBuffer], [AudioPCMBuffer]
+//   - AudioIONode: [AudioInputNode], [AudioOutputNode]
+//   - AudioNode: [AudioEnvironmentNode], [AudioIONode], [AudioMixerNode], [AudioPlayerNode], [AudioSinkNode], [AudioSourceNode], [AudioUnit]
+//   - AudioUnit: [AudioUnitEffect], [AudioUnitGenerator], [AudioUnitMIDIInstrument], [AudioUnitTimeEffect]
+//   - AudioUnitEffect: [AudioUnitDelay], [AudioUnitDistortion], [AudioUnitEQ], [AudioUnitReverb]
+//   - AudioUnitMIDIInstrument: [AudioUnitSampler]
+//   - AudioUnitTimeEffect: [AudioUnitTimePitch], [AudioUnitVarispeed]
+//   - MIDIChannelEvent: [MIDIChannelPressureEvent], [MIDIControlChangeEvent], [MIDIPitchBendEvent], [MIDIPolyPressureEvent], [MIDIProgramChangeEvent]
+//   - MusicEvent: [AUPresetEvent], [ExtendedNoteOnEvent], [ExtendedTempoEvent], [MIDIChannelEvent], [MIDIMetaEvent], [MIDINoteEvent], [MIDISysexEvent], [MusicUserEvent], [ParameterEvent]
 package avfaudio

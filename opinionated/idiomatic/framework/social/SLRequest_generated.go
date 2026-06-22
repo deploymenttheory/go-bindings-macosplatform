@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that you use to assemble an HTTP request for communicating with a social media service.
-//
 // Request is an idiomatic wrapper over the Objective-C class SLRequest.
+//
+// An object that you use to assemble an HTTP request for communicating with a social media service.
 type Request struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RequestFromID(id objc.ID) *Request {
 	if id == 0 {
 		return nil
 	}
-	x := &Request{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Request{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func requestAdopt(id objc.ID) *Request {
 	if id == 0 {
 		return nil
 	}
-	x := &Request{Handle: objref.Wrap(id)}
+	x := &Request{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,55 +60,64 @@ func (x *Request) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Request) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRequest creates a new Request.
 func NewRequest() *Request {
 	_id := objc.Send[objc.ID](objc.ID(_class("SLRequest")), objc.RegisterName("new"))
 	return requestAdopt(_id)
 }
 
-// Account information used to authenticate the request.
-//
-// WithAccount sets account and returns the receiver so calls can be chained.
+// WithAccount account information used to authenticate the request.
 func (x *Request) WithAccount(account obj.Object) *Request {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccount:"), objref.IDOf(account))
 	return x
 }
 
-// Specifies a named multipart POST body for this request.
+// AddMultipartDataWithNameTypeFilename specifies a named multipart POST body for this request.
 func (x *Request) AddMultipartDataWithNameTypeFilename(data obj.Object, name string, type_ string, filename string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addMultipartData:withName:type:filename:"), objref.IDOf(data), purego.NSString(name), purego.NSString(type_), purego.NSString(filename))
 }
 
-// Specifies a named multipart POST body for this request.
+// AddMultipartDataWithNameType specifies a named multipart POST body for this request.
 func (x *Request) AddMultipartDataWithNameType(data obj.Object, name string, type_ string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addMultipartData:withName:type:"), objref.IDOf(data), purego.NSString(name), purego.NSString(type_))
 }
 
-// Returns an authorized URL request that can be sent using an NSURLConnection object.
+// PreparedURLRequest returns an authorized URL request that can be sent using an NSURLConnection object.
 func (x *Request) PreparedURLRequest() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preparedURLRequest"))
 	return obj.Wrap(_r)
 }
 
+// Account wraps the corresponding Objective-C method.
 func (x *Request) Account() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("account"))
 	return obj.Wrap(_r)
 }
 
+// SetAccount wraps the corresponding Objective-C method.
 func (x *Request) SetAccount(account obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccount:"), objref.IDOf(account))
 }
 
+// RequestMethod wraps the corresponding Objective-C method.
 func (x *Request) RequestMethod() RequestMethod {
 	_r := objc.Send[RequestMethod](objref.IDOf(x), objc.RegisterName("requestMethod"))
 	return _r
 }
 
+// URL wraps the corresponding Objective-C method.
 func (x *Request) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
+// Parameters wraps the corresponding Objective-C method.
 func (x *Request) Parameters() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameters"))
 	return obj.Wrap(_r)

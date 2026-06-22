@@ -8,18 +8,19 @@ import (
 	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// sharedPicker the singleton shared picker for the application
+// SharedPicker sharedPicker the singleton shared picker for the application
 func SharedPicker() *ContentSharingPicker {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCContentSharingPicker")), objc.RegisterName("sharedPicker"))
 	return ContentSharingPickerFromID(_r)
 }
 
-// an array of UTTypes that corresponds to the file formats that are supported. ScreenCaptureKit can save the CGImage into heic, jpeg, and png
+// SupportedContentTypes an array of UTTypes that corresponds to the file formats that are supported. ScreenCaptureKit can save the CGImage into heic, jpeg, and png
 //
 // SupportedContentTypes returns the collection as a Go slice.
 func SupportedContentTypes() []obj.Object {
@@ -27,10 +28,10 @@ func SupportedContentTypes() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// captureScreenshotWithFilter:configuration:completionHandler: this method returns an SCScreenshotOutput object containing CGImages of the screenshot requested by the client
+// CaptureScreenshotWithFilterConfiguration captureScreenshotWithFilter:configuration:completionHandler: this method returns an SCScreenshotOutput object containing CGImages of the screenshot requested by the client
 //
 // CaptureScreenshotWithFilterConfiguration blocks until the operation completes or ctx is cancelled.
-func CaptureScreenshotWithFilterConfiguration(ctx context.Context, contentFilter *ContentFilter, config *ScreenshotConfiguration) (*ScreenshotOutput, error) {
+func CaptureScreenshotWithFilterConfiguration(ctx context.Context, contentFilter *ContentFilter, config *ScreenshotConfiguration) (result *ScreenshotOutput, err error) {
 	type _result struct {
 		val *ScreenshotOutput
 		err error
@@ -52,10 +53,35 @@ func CaptureScreenshotWithFilterConfiguration(ctx context.Context, contentFilter
 	}
 }
 
-// Retrieves the displays, apps, and windows that your app can capture.
+// CaptureScreenshotWithRectConfiguration captureScreenshotWithRect:configuration:completionHandler: this method returns an SCScreenshotOutput object containing CGImages of the screenshot requested by the client
+//
+// CaptureScreenshotWithRectConfiguration blocks until the operation completes or ctx is cancelled.
+func CaptureScreenshotWithRectConfiguration(ctx context.Context, rect corefoundation.CGRect, config *ScreenshotConfiguration) (result *ScreenshotOutput, err error) {
+	type _result struct {
+		val *ScreenshotOutput
+		err error
+	}
+	_ch := make(chan _result, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
+		var _o _result
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = ScreenshotOutputFromID(_p0)
+		_ch <- _o
+	})
+	objc.Send[objc.ID](objc.ID(_class("SCScreenshotManager")), objc.RegisterName("captureScreenshotWithRect:configuration:completionHandler:"), rect, objref.IDOf(config), _block)
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *ScreenshotOutput
+		return _zero, ctx.Err()
+	}
+}
+
+// GetShareableContent retrieves the displays, apps, and windows that your app can capture.
 //
 // GetShareableContent blocks until the operation completes or ctx is cancelled.
-func GetShareableContent(ctx context.Context) (*ShareableContent, error) {
+func GetShareableContent(ctx context.Context) (result *ShareableContent, err error) {
 	type _result struct {
 		val *ShareableContent
 		err error
@@ -77,10 +103,10 @@ func GetShareableContent(ctx context.Context) (*ShareableContent, error) {
 	}
 }
 
-// getCurrentProcessShareableContentWithCompletionHandler:completionHandler this method will create a SCShareableContent object that is called on the supplied queue. The SCShareableContent will contain redacted information about windows, displays and applications that are available to capture by current process without user consent via TCC
+// GetCurrentProcessShareableContent getCurrentProcessShareableContentWithCompletionHandler:completionHandler this method will create a SCShareableContent object that is called on the supplied queue. The SCShareableContent will contain redacted information about windows, displays and applications that are available to capture by current process without user consent via TCC
 //
 // GetCurrentProcessShareableContent blocks until the operation completes or ctx is cancelled.
-func GetCurrentProcessShareableContent(ctx context.Context) (*ShareableContent, error) {
+func GetCurrentProcessShareableContent(ctx context.Context) (result *ShareableContent, err error) {
 	type _result struct {
 		val *ShareableContent
 		err error
@@ -102,10 +128,10 @@ func GetCurrentProcessShareableContent(ctx context.Context) (*ShareableContent, 
 	}
 }
 
-// Retrieves the displays, apps, and windows that match your criteria.
+// GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnly retrieves the displays, apps, and windows that match your criteria.
 //
 // GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnly blocks until the operation completes or ctx is cancelled.
-func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnly(ctx context.Context, excludeDesktopWindows bool, onScreenWindowsOnly bool) (*ShareableContent, error) {
+func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnly(ctx context.Context, excludeDesktopWindows bool, onScreenWindowsOnly bool) (result *ShareableContent, err error) {
 	type _result struct {
 		val *ShareableContent
 		err error
@@ -127,10 +153,10 @@ func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnly(ctx context.C
 	}
 }
 
-// Retrieves the displays, apps, and windows that are behind the specified window.
+// GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyBelowWindow retrieves the displays, apps, and windows that are behind the specified window.
 //
 // GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyBelowWindow blocks until the operation completes or ctx is cancelled.
-func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyBelowWindow(ctx context.Context, excludeDesktopWindows bool, window *Window) (*ShareableContent, error) {
+func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyBelowWindow(ctx context.Context, excludeDesktopWindows bool, window *Window) (result *ShareableContent, err error) {
 	type _result struct {
 		val *ShareableContent
 		err error
@@ -152,10 +178,10 @@ func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyBelowWindow(ct
 	}
 }
 
-// Retrieves the displays, apps, and windows that are in front of the specified window.
+// GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyAboveWindow retrieves the displays, apps, and windows that are in front of the specified window.
 //
 // GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyAboveWindow blocks until the operation completes or ctx is cancelled.
-func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyAboveWindow(ctx context.Context, excludeDesktopWindows bool, window *Window) (*ShareableContent, error) {
+func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyAboveWindow(ctx context.Context, excludeDesktopWindows bool, window *Window) (result *ShareableContent, err error) {
 	type _result struct {
 		val *ShareableContent
 		err error
@@ -177,13 +203,13 @@ func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyAboveWindow(ct
 	}
 }
 
-// Retrieves any available sharable content information that matches the provided filter.
+// InfoForFilter retrieves any available sharable content information that matches the provided filter.
 func InfoForFilter(filter *ContentFilter) *ShareableContentInfo {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCShareableContent")), objc.RegisterName("infoForFilter:"), objref.IDOf(filter))
 	return ShareableContentInfoFromID(_r)
 }
 
-// Returns an instance of SCStreamConfiguration corresponding to the given preset The SCStreamConfiguration of the returned object can be used as a guide for creating and configuring an SCStream. If all the suggested properties are respected in creating the SCStream, the resulting capture result will conform to the criteria implied by the preset.
+// StreamConfigurationWithPreset returns an instance of SCStreamConfiguration corresponding to the given preset The SCStreamConfiguration of the returned object can be used as a guide for creating and configuring an SCStream. If all the suggested properties are respected in creating the SCStream, the resulting capture result will conform to the criteria implied by the preset.
 func StreamConfigurationWithPreset(preset StreamConfigurationPreset) *StreamConfiguration {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCStreamConfiguration")), objc.RegisterName("streamConfigurationWithPreset:"), preset)
 	return StreamConfigurationFromID(_r)

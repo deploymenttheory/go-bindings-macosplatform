@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class representing the structure of a Pipeline model.
-//
 // ModelStructurePipeline is an idiomatic wrapper over the Objective-C class MLModelStructurePipeline.
+//
+// A class representing the structure of a Pipeline model.
 type ModelStructurePipeline struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ModelStructurePipelineFromID(id objc.ID) *ModelStructurePipeline {
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructurePipeline{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ModelStructurePipeline{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func modelStructurePipelineAdopt(id objc.ID) *ModelStructurePipeline {
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructurePipeline{Handle: objref.Wrap(id)}
+	x := &ModelStructurePipeline{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *ModelStructurePipeline) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ModelStructurePipeline) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewModelStructurePipeline creates a new ModelStructurePipeline.
 func NewModelStructurePipeline() *ModelStructurePipeline {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLModelStructurePipeline")), objc.RegisterName("new"))
 	return modelStructurePipelineAdopt(_id)
 }
 
-// The names of the sub models in the pipeline.
+// SubModelNames the names of the sub models in the pipeline.
 //
 // SubModelNames returns the collection as a Go slice.
 func (x *ModelStructurePipeline) SubModelNames() []string {
@@ -72,7 +80,7 @@ func (x *ModelStructurePipeline) SubModelNames() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// The structure of the sub models in the pipeline.
+// SubModels the structure of the sub models in the pipeline.
 //
 // SubModels returns the collection as a Go slice.
 func (x *ModelStructurePipeline) SubModels() []*ModelStructure {

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Describes pixel buffer requirements and creates new pixel buffers.
-//
 // RAWProcessorPixelBufferManager is an idiomatic wrapper over the Objective-C class MERAWProcessorPixelBufferManager.
+//
+// Describes pixel buffer requirements and creates new pixel buffers.
 type RAWProcessorPixelBufferManager struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RAWProcessorPixelBufferManagerFromID(id objc.ID) *RAWProcessorPixelBufferMa
 	if id == 0 {
 		return nil
 	}
-	x := &RAWProcessorPixelBufferManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RAWProcessorPixelBufferManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func rAWProcessorPixelBufferManagerAdopt(id objc.ID) *RAWProcessorPixelBufferMan
 	if id == 0 {
 		return nil
 	}
-	x := &RAWProcessorPixelBufferManager{Handle: objref.Wrap(id)}
+	x := &RAWProcessorPixelBufferManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,26 +60,31 @@ func (x *RAWProcessorPixelBufferManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RAWProcessorPixelBufferManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRAWProcessorPixelBufferManager creates a new RAWProcessorPixelBufferManager.
 func NewRAWProcessorPixelBufferManager() *RAWProcessorPixelBufferManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("MERAWProcessorPixelBufferManager")), objc.RegisterName("new"))
 	return rAWProcessorPixelBufferManagerAdopt(_id)
 }
 
-// A dictionary that contains the attributes Video Toolbox uses to create a pixel buffer for the video RAW processor.
-//
-// WithPixelBufferAttributes sets pixelBufferAttributes and returns the receiver so calls can be chained.
+// WithPixelBufferAttributes a dictionary that contains the attributes Video Toolbox uses to create a pixel buffer for the video RAW processor.
 func (x *RAWProcessorPixelBufferManager) WithPixelBufferAttributes(pixelBufferAttributes obj.Object) *RAWProcessorPixelBufferManager {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelBufferAttributes:"), objref.IDOf(pixelBufferAttributes))
 	return x
 }
 
-// VideoToolbox will use these attributes when creating a pixelBuffer for the RAW Processor. This can be updated by the processor before requesting a new pixelBuffer.
+// PixelBufferAttributes videoToolbox will use these attributes when creating a pixelBuffer for the RAW Processor. This can be updated by the processor before requesting a new pixelBuffer.
 func (x *RAWProcessorPixelBufferManager) PixelBufferAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pixelBufferAttributes"))
 	return obj.Wrap(_r)
 }
 
+// SetPixelBufferAttributes wraps the corresponding Objective-C method.
 func (x *RAWProcessorPixelBufferManager) SetPixelBufferAttributes(pixelBufferAttributes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelBufferAttributes:"), objref.IDOf(pixelBufferAttributes))
 }

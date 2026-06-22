@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a MIDI pitch bend message.
-//
 // MIDIPitchBendEvent is an idiomatic wrapper over the Objective-C class AVMIDIPitchBendEvent.
+//
+// It embeds [MIDIChannelEvent], promoting that type's methods.
+//
+// An object that represents a MIDI pitch bend message.
 type MIDIPitchBendEvent struct {
-	objref.Handle
+	MIDIChannelEvent
 }
 
 // MIDIPitchBendEventFromID adopts an existing Objective-C object as a MIDIPitchBendEvent
@@ -25,7 +26,8 @@ func MIDIPitchBendEventFromID(id objc.ID) *MIDIPitchBendEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MIDIPitchBendEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MIDIPitchBendEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,56 +40,38 @@ func mIDIPitchBendEventAdopt(id objc.ID) *MIDIPitchBendEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MIDIPitchBendEvent{Handle: objref.Wrap(id)}
+	x := &MIDIPitchBendEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MIDIPitchBendEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MIDIPitchBendEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MIDIPitchBendEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates an event with a channel and pitch bend value.
-//
-// NewMIDIPitchBendEventWithChannelValue creates a new MIDIPitchBendEvent.
+// NewMIDIPitchBendEventWithChannelValue creates an event with a channel and pitch bend value.
 func NewMIDIPitchBendEventWithChannelValue(channel int, value int) *MIDIPitchBendEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMIDIPitchBendEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannel:value:"), channel, value)
 	return mIDIPitchBendEventAdopt(_id)
 }
 
-// The value of the pitch bend event.
-//
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue the value of the pitch bend event.
 func (x *MIDIPitchBendEvent) WithValue(value int) *MIDIPitchBendEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 	return x
 }
 
-// The MIDI channel.
-//
-// WithChannel sets channel and returns the receiver so calls can be chained.
+// WithChannel the MIDI channel.
 func (x *MIDIPitchBendEvent) WithChannel(channel int) *MIDIPitchBendEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
 	return x
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *MIDIPitchBendEvent) Value() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("value"))
 	return _r
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *MIDIPitchBendEvent) SetValue(value int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 }
@@ -102,3 +86,7 @@ type MIDIPitchBendEventable interface {
 }
 
 var _ MIDIPitchBendEventable = (*MIDIPitchBendEvent)(nil)
+
+var _ MIDIChannelEventProvider = (*MIDIPitchBendEvent)(nil)
+
+var _ MusicEventProvider = (*MIDIPitchBendEvent)(nil)

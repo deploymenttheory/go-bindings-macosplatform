@@ -1,18 +1,20 @@
 {{/*
-    class_header.tmpl renders a wrapper type for one Objective-C class. The
-    wrapper stores only the Objective-C object pointer (inside the embedded
-    objref.Handle); methods are emitted in the other templates. Two factory
-    helpers exist because the two come from different ownership situations:
-    <T>FromID is for an object you did not create (it adds a reference so Go can
-    keep it alive), while the Adopt helper is for an object a constructor just
-    created (Go already owns that reference, so it must not add another). Both
-    arrange for the object to be released once Go stops using it.
-    Description/IsEqual/IsKind let the wrapper be used as an obj.Object.
+    class_header.tmpl renders a wrapper type for one Objective-C class. A
+    framework root embeds objref.Handle (which stores the Objective-C object
+    pointer) and defines the obj.Object surface — Description/IsEqual/IsKind and
+    String — that every subclass then promotes. A subclass instead embeds its
+    same-framework base type, so it inherits that surface (and the base's other
+    methods) through Go embedding.
+
+    Two factory helpers exist because the object comes from two ownership
+    situations: <T>FromID is for an object you did not create (it adds a reference
+    so Go can keep it alive), while the Adopt helper is for an object a
+    constructor just created (Go already owns that reference, so it must not add
+    another). Both arrange for the object to be released once Go stops using it.
+    They assign the promoted Handle field, which works at any embedding depth.
 */}}
-{{define "class_header"}}{{if .DocComment}}{{.DocComment}}//
-{{end}}// {{.GoTypeName}} is an idiomatic wrapper over the Objective-C class {{.ClassName}}.
-type {{.GoTypeName}} struct {
-objref.Handle
+{{define "class_header"}}{{.DocComment}}type {{.GoTypeName}} struct {
+{{if .EmbedsRoot}}objref.Handle{{else}}{{.BaseType}}{{end}}
 }
 
 // {{.GoTypeName}}FromID adopts an existing Objective-C object as a {{.GoTypeName}}
@@ -21,7 +23,8 @@ func {{.GoTypeName}}FromID(id objc.ID) *{{.GoTypeName}} {
 if id == 0 {
 return nil
 }
-x := &{{.GoTypeName}}{Handle: objref.Wrap(purego.Retain(id))}
+x := &{{.GoTypeName}}{}
+x.Handle = objref.Wrap(purego.Retain(id))
 objref.Track(x)
 return x
 }
@@ -34,11 +37,12 @@ func {{.AdoptName}}(id objc.ID) *{{.GoTypeName}} {
 if id == 0 {
 return nil
 }
-x := &{{.GoTypeName}}{Handle: objref.Wrap(id)}
+x := &{{.GoTypeName}}{}
+x.Handle = objref.Wrap(id)
 objref.Track(x)
 return x
 }
-
+{{if .EmbedsRoot}}
 // Description returns the object's -description text.
 func (x *{{.GoTypeName}}) Description() string {
 return rt.Description(objref.IDOf(x))
@@ -53,4 +57,10 @@ return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 func (x *{{.GoTypeName}}) IsKind(className string) bool {
 return rt.IsKind(objref.IDOf(x), className)
 }
-{{end}}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *{{.GoTypeName}}) String() string {
+return rt.Description(objref.IDOf(x))
+}
+{{end}}{{end}}

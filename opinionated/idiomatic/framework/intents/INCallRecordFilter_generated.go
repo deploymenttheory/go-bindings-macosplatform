@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Filters a user specifies to redial a call.
-//
 // CallRecordFilter is an idiomatic wrapper over the Objective-C class INCallRecordFilter.
+//
+// Filters a user specifies to redial a call.
 type CallRecordFilter struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CallRecordFilterFromID(id objc.ID) *CallRecordFilter {
 	if id == 0 {
 		return nil
 	}
-	x := &CallRecordFilter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CallRecordFilter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func callRecordFilterAdopt(id objc.ID) *CallRecordFilter {
 	if id == 0 {
 		return nil
 	}
-	x := &CallRecordFilter{Handle: objref.Wrap(id)}
+	x := &CallRecordFilter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,26 +60,34 @@ func (x *CallRecordFilter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a filtered call record with the details about a call.
-//
-// NewCallRecordFilterWithParticipantsCallTypesCallCapability creates a new CallRecordFilter.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CallRecordFilter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCallRecordFilterWithParticipantsCallTypesCallCapability creates a filtered call record with the details about a call.
 func NewCallRecordFilterWithParticipantsCallTypesCallCapability(participants []*Person, callTypes CallRecordTypeOptions, callCapability CallCapability) *CallRecordFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INCallRecordFilter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParticipants:callTypes:callCapability:"), purego.SliceToNSArray(participants, func(_v *Person) objc.ID { return objref.IDOf(_v) }), callTypes, callCapability)
 	return callRecordFilterAdopt(_id)
 }
 
+// Participants wraps the corresponding Objective-C method.
+//
 // Participants returns the collection as a Go slice.
 func (x *CallRecordFilter) Participants() []*Person {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("participants"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
+// CallTypes wraps the corresponding Objective-C method.
 func (x *CallRecordFilter) CallTypes() CallRecordTypeOptions {
 	_r := objc.Send[CallRecordTypeOptions](objref.IDOf(x), objc.RegisterName("callTypes"))
 	return _r
 }
 
+// CallCapability wraps the corresponding Objective-C method.
 func (x *CallRecordFilter) CallCapability() CallCapability {
 	_r := objc.Send[CallCapability](objref.IDOf(x), objc.RegisterName("callCapability"))
 	return _r

@@ -14,9 +14,11 @@ import (
 	"unsafe"
 )
 
-// An object in the scene.
-//
 // Object is an idiomatic wrapper over the Objective-C class PHASEObject.
+//
+// Object is an abstract base — you do not construct it directly. Construct one of [Listener], [Occluder], [Source] and pass it where a Object is accepted.
+//
+// An object in the scene.
 type Object struct {
 	objref.Handle
 }
@@ -27,7 +29,8 @@ func ObjectFromID(id objc.ID) *Object {
 	if id == 0 {
 		return nil
 	}
-	x := &Object{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Object{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +43,8 @@ func objectAdopt(id objc.ID) *Object {
 	if id == 0 {
 		return nil
 	}
-	x := &Object{Handle: objref.Wrap(id)}
+	x := &Object{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +64,20 @@ func (x *Object) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an object in the scene.
-//
-// NewObjectWithEngine creates a new Object.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Object) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewObjectWithEngine creates an object in the scene.
 func NewObjectWithEngine(engine *Engine) *Object {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEObject")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:"), objref.IDOf(engine))
 	return objectAdopt(_id)
 }
 
-// Adds the given object as a child.
+// AddChild adds the given object as a child.
 func (x *Object) AddChild(child *Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addChild:error:"), objref.IDOf(child), unsafe.Pointer(&_nsErr))
@@ -79,23 +87,23 @@ func (x *Object) AddChild(child *Object) error {
 	return nil
 }
 
-// Removes the given object as a child.
+// RemoveChild removes the given object as a child.
 func (x *Object) RemoveChild(child *Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeChild:"), objref.IDOf(child))
 }
 
-// Removes all child objects from the given object.
+// RemoveChildren removes all child objects from the given object.
 func (x *Object) RemoveChildren() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeChildren"))
 }
 
-// The parent of this object, or nil if this object doesn't have a parent object.
+// Parent the parent of this object, or nil if this object doesn't have a parent object.
 func (x *Object) Parent() *Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parent"))
 	return ObjectFromID(_r)
 }
 
-// The children of this object.
+// Children the children of this object.
 //
 // Children returns the collection as a Go slice.
 func (x *Object) Children() []*Object {
@@ -114,3 +122,10 @@ type Objectable interface {
 }
 
 var _ Objectable = (*Object)(nil)
+
+// isObject marks Object — and, by embedding promotion, its
+// subclasses — as a member of the Object hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Object) isObject() {}
+
+var _ ObjectProvider = (*Object)(nil)

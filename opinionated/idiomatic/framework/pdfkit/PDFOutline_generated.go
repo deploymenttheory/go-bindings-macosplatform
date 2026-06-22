@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A PDFOutline object is an element in a tree-structured hierarchy that can represent the structure of a PDF document.
-//
 // Outline is an idiomatic wrapper over the Objective-C class PDFOutline.
+//
+// A PDFOutline object is an element in a tree-structured hierarchy that can represent the structure of a PDF document.
 type Outline struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func OutlineFromID(id objc.ID) *Outline {
 	if id == 0 {
 		return nil
 	}
-	x := &Outline{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Outline{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func outlineAdopt(id objc.ID) *Outline {
 	if id == 0 {
 		return nil
 	}
-	x := &Outline{Handle: objref.Wrap(id)}
+	x := &Outline{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,67 +60,71 @@ func (x *Outline) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Outline) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewOutline creates a new Outline.
 func NewOutline() *Outline {
 	_id := objc.Send[objc.ID](objc.ID(_class("PDFOutline")), objc.RegisterName("new"))
 	return outlineAdopt(_id)
 }
 
-// Returns the label for the outline.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel returns the label for the outline.
 func (x *Outline) WithLabel(label string) *Outline {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Returns a Boolean value that indicates whether the outline object is initially disclosed.
-//
-// WithIsOpen sets isOpen and returns the receiver so calls can be chained.
+// WithIsOpen returns a Boolean value that indicates whether the outline object is initially disclosed.
 func (x *Outline) WithIsOpen(isOpen bool) *Outline {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsOpen:"), isOpen)
 	return x
 }
 
-// Returns the destination associated with the outline.
-//
-// WithDestination sets destination and returns the receiver so calls can be chained.
+// WithDestination returns the destination associated with the outline.
 func (x *Outline) WithDestination(destination *Destination) *Outline {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 	return x
 }
 
-// Returns the child outline object at the specified index.
+// ChildAtIndex returns the child outline object at the specified index.
 func (x *Outline) ChildAtIndex(index int) *Outline {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("childAtIndex:"), index)
 	return OutlineFromID(_r)
 }
 
-// Inserts the specified outline object at the specified index.
+// InsertChildAtIndex inserts the specified outline object at the specified index.
 func (x *Outline) InsertChildAtIndex(child *Outline, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertChild:atIndex:"), objref.IDOf(child), index)
 }
 
-// Removes the outline object from its parent (does nothing if outline object is the root outline object).
+// RemoveFromParent removes the outline object from its parent (does nothing if outline object is the root outline object).
 func (x *Outline) RemoveFromParent() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromParent"))
 }
 
+// Document wraps the corresponding Objective-C method.
 func (x *Outline) Document() *Document {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("document"))
 	return DocumentFromID(_r)
 }
 
+// NumberOfChildren wraps the corresponding Objective-C method.
 func (x *Outline) NumberOfChildren() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfChildren"))
 	return _r
 }
 
+// Index wraps the corresponding Objective-C method.
 func (x *Outline) Index() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("index"))
 	return _r
 }
 
+// Label wraps the corresponding Objective-C method.
 func (x *Outline) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -127,24 +133,29 @@ func (x *Outline) Label() string {
 	return purego.GoString(_r)
 }
 
+// SetLabel wraps the corresponding Objective-C method.
 func (x *Outline) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
+// IsOpen wraps the corresponding Objective-C method.
 func (x *Outline) IsOpen() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOpen"))
 	return _r
 }
 
+// SetIsOpen wraps the corresponding Objective-C method.
 func (x *Outline) SetIsOpen(isOpen bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsOpen:"), isOpen)
 }
 
+// Destination wraps the corresponding Objective-C method.
 func (x *Outline) Destination() *Destination {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destination"))
 	return DestinationFromID(_r)
 }
 
+// SetDestination wraps the corresponding Objective-C method.
 func (x *Outline) SetDestination(destination *Destination) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 }

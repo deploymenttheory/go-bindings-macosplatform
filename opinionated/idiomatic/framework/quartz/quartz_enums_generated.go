@@ -17,6 +17,8 @@ const (
 	IKImageStateReady   IKImageBrowserCellState = 2
 )
 
+// String returns the IKImageBrowserCellState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e IKImageBrowserCellState) String() string {
 	switch e {
 	case IKImageStateNoImage:
@@ -39,6 +41,8 @@ const (
 	KQCPlugInExecutionModeConsumer  QCPlugInExecutionMode = 3
 )
 
+// String returns the QCPlugInExecutionMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e QCPlugInExecutionMode) String() string {
 	switch e {
 	case KQCPlugInExecutionModeProvider:
@@ -61,6 +65,8 @@ const (
 	KQCPlugInTimeModeTimeBase QCPlugInTimeMode = 2
 )
 
+// String returns the QCPlugInTimeMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e QCPlugInTimeMode) String() string {
 	switch e {
 	case KQCPlugInTimeModeNone:

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines an inclusive range of zoom values.
-//
 // ZoomRange is an idiomatic wrapper over the Objective-C class AVZoomRange.
+//
+// An object that defines an inclusive range of zoom values.
 type ZoomRange struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ZoomRangeFromID(id objc.ID) *ZoomRange {
 	if id == 0 {
 		return nil
 	}
-	x := &ZoomRange{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ZoomRange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func zoomRangeAdopt(id objc.ID) *ZoomRange {
 	if id == 0 {
 		return nil
 	}
-	x := &ZoomRange{Handle: objref.Wrap(id)}
+	x := &ZoomRange{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *ZoomRange) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ZoomRange) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewZoomRange creates a new ZoomRange.
 func NewZoomRange() *ZoomRange {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVZoomRange")), objc.RegisterName("new"))
 	return zoomRangeAdopt(_id)
 }
 
-// Returns a Boolean value that indicates whether the specified zoom factor exists in the range.
+// ContainsZoomFactor returns a Boolean value that indicates whether the specified zoom factor exists in the range.
 func (x *ZoomRange) ContainsZoomFactor(zoomFactor float64) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsZoomFactor:"), zoomFactor)
 	return _r
 }
 
-// A CGFloat indicating the minimum zoom factor supported by this range.
+// MinZoomFactor a CGFloat indicating the minimum zoom factor supported by this range.
 func (x *ZoomRange) MinZoomFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minZoomFactor"))
 	return _r
 }
 
-// A CGFloat indicating the maximum zoom factor supported by this range.
+// MaxZoomFactor a CGFloat indicating the maximum zoom factor supported by this range.
 func (x *ZoomRange) MaxZoomFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxZoomFactor"))
 	return _r

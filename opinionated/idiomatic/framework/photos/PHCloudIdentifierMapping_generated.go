@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains the cloud identifier result from looking up a local identifier, or an error indicating why the lookup failed.
-//
 // CloudIdentifierMapping is an idiomatic wrapper over the Objective-C class PHCloudIdentifierMapping.
+//
+// An object that contains the cloud identifier result from looking up a local identifier, or an error indicating why the lookup failed.
 type CloudIdentifierMapping struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CloudIdentifierMappingFromID(id objc.ID) *CloudIdentifierMapping {
 	if id == 0 {
 		return nil
 	}
-	x := &CloudIdentifierMapping{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CloudIdentifierMapping{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func cloudIdentifierMappingAdopt(id objc.ID) *CloudIdentifierMapping {
 	if id == 0 {
 		return nil
 	}
-	x := &CloudIdentifierMapping{Handle: objref.Wrap(id)}
+	x := &CloudIdentifierMapping{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *CloudIdentifierMapping) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CloudIdentifierMapping) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCloudIdentifierMapping creates a new CloudIdentifierMapping.
 func NewCloudIdentifierMapping() *CloudIdentifierMapping {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHCloudIdentifierMapping")), objc.RegisterName("new"))
 	return cloudIdentifierMappingAdopt(_id)
 }
 
-// The cloud identifier of the resource found for this local identifier
+// CloudIdentifier the cloud identifier of the resource found for this local identifier
 func (x *CloudIdentifierMapping) CloudIdentifier() *CloudIdentifier {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cloudIdentifier"))
 	return CloudIdentifierFromID(_r)

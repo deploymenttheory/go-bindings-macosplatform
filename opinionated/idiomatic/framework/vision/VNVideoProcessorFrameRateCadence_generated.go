@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines a frame-based cadence for processing a video stream.
-//
 // VideoProcessorFrameRateCadence is an idiomatic wrapper over the Objective-C class VNVideoProcessorFrameRateCadence.
+//
+// It embeds [VideoProcessorCadence], promoting that type's methods.
+//
+// An object that defines a frame-based cadence for processing a video stream.
 type VideoProcessorFrameRateCadence struct {
-	objref.Handle
+	VideoProcessorCadence
 }
 
 // VideoProcessorFrameRateCadenceFromID adopts an existing Objective-C object as a VideoProcessorFrameRateCadence
@@ -25,7 +26,8 @@ func VideoProcessorFrameRateCadenceFromID(id objc.ID) *VideoProcessorFrameRateCa
 	if id == 0 {
 		return nil
 	}
-	x := &VideoProcessorFrameRateCadence{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VideoProcessorFrameRateCadence{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func videoProcessorFrameRateCadenceAdopt(id objc.ID) *VideoProcessorFrameRateCad
 	if id == 0 {
 		return nil
 	}
-	x := &VideoProcessorFrameRateCadence{Handle: objref.Wrap(id)}
+	x := &VideoProcessorFrameRateCadence{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *VideoProcessorFrameRateCadence) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VideoProcessorFrameRateCadence) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VideoProcessorFrameRateCadence) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewVideoProcessorFrameRateCadenceWithFrameRate creates a new VideoProcessorFrameRateCadence.
@@ -65,6 +53,7 @@ func NewVideoProcessorFrameRateCadenceWithFrameRate(frameRate int) *VideoProcess
 	return videoProcessorFrameRateCadenceAdopt(_id)
 }
 
+// FrameRate wraps the corresponding Objective-C method.
 func (x *VideoProcessorFrameRateCadence) FrameRate() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameRate"))
 	return _r
@@ -77,3 +66,5 @@ type VideoProcessorFrameRateCadenceable interface {
 }
 
 var _ VideoProcessorFrameRateCadenceable = (*VideoProcessorFrameRateCadence)(nil)
+
+var _ VideoProcessorCadenceProvider = (*VideoProcessorFrameRateCadence)(nil)

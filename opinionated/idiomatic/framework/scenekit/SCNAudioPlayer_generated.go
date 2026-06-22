@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A controller for playback of a positional audio source in a SceneKit scene.
-//
 // AudioPlayer is an idiomatic wrapper over the Objective-C class SCNAudioPlayer.
+//
+// A controller for playback of a positional audio source in a SceneKit scene.
 type AudioPlayer struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func AudioPlayerFromID(id objc.ID) *AudioPlayer {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioPlayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioPlayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func audioPlayerAdopt(id objc.ID) *AudioPlayer {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioPlayer{Handle: objref.Wrap(id)}
+	x := &AudioPlayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,40 +61,40 @@ func (x *AudioPlayer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes an audio player for playing the specified simple audio source.
-//
-// NewAudioPlayerWithSource creates a new AudioPlayer.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioPlayer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudioPlayerWithSource initializes an audio player for playing the specified simple audio source.
 func NewAudioPlayerWithSource(source *AudioSource) *AudioPlayer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCNAudioPlayer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(source))
 	return audioPlayerAdopt(_id)
 }
 
-// Initializes an audio player for playing the specified AVFoundation audio node.
-//
-// NewAudioPlayerWithAVAudioNode creates a new AudioPlayer.
+// NewAudioPlayerWithAVAudioNode initializes an audio player for playing the specified AVFoundation audio node.
 func NewAudioPlayerWithAVAudioNode(audioNode obj.Object) *AudioPlayer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCNAudioPlayer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAVAudioNode:"), objref.IDOf(audioNode))
 	return audioPlayerAdopt(_id)
 }
 
-// A block called by SceneKit when playback of the player’s audio source is about to begin.
-//
-// WithWillStartPlayback sets willStartPlayback and returns the receiver so calls can be chained.
+// WithWillStartPlayback a block called by SceneKit when playback of the player’s audio source is about to begin.
 func (x *AudioPlayer) WithWillStartPlayback(willStartPlayback func()) *AudioPlayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWillStartPlayback:"), objc.NewBlock(func(_ objc.Block) { willStartPlayback() }))
 	return x
 }
 
-// A block called by SceneKit when playback of the player’s audio source has completed.
-//
-// WithDidFinishPlayback sets didFinishPlayback and returns the receiver so calls can be chained.
+// WithDidFinishPlayback a block called by SceneKit when playback of the player’s audio source has completed.
 func (x *AudioPlayer) WithDidFinishPlayback(didFinishPlayback func()) *AudioPlayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDidFinishPlayback:"), objc.NewBlock(func(_ objc.Block) { didFinishPlayback() }))
 	return x
 }
 
+// SetWillStartPlayback wraps the corresponding Objective-C method.
+//
 // SetWillStartPlayback blocks until the operation completes or ctx is cancelled.
 func (x *AudioPlayer) SetWillStartPlayback(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -108,6 +110,8 @@ func (x *AudioPlayer) SetWillStartPlayback(ctx context.Context) error {
 	}
 }
 
+// SetDidFinishPlayback wraps the corresponding Objective-C method.
+//
 // SetDidFinishPlayback blocks until the operation completes or ctx is cancelled.
 func (x *AudioPlayer) SetDidFinishPlayback(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -123,13 +127,13 @@ func (x *AudioPlayer) SetDidFinishPlayback(ctx context.Context) error {
 	}
 }
 
-// The audioNode. If this player was not initialised with a custom AVAudioNode this contains the internal audio player node used by scene kit internally.
+// AudioNode the audioNode. If this player was not initialised with a custom AVAudioNode this contains the internal audio player node used by scene kit internally.
 func (x *AudioPlayer) AudioNode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioNode"))
 	return obj.Wrap(_r)
 }
 
-// The audioSource if there is one.
+// AudioSource the audioSource if there is one.
 func (x *AudioPlayer) AudioSource() *AudioSource {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioSource"))
 	return AudioSourceFromID(_r)

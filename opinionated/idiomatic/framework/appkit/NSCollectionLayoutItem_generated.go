@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The most basic component of a collection view’s layout.
-//
 // CollectionLayoutItem is an idiomatic wrapper over the Objective-C class NSCollectionLayoutItem.
+//
+// CollectionLayoutItem is an abstract base — you do not construct it directly. Construct one of [CollectionLayoutDecorationItem], [CollectionLayoutGroup], [CollectionLayoutSupplementaryItem] and pass it where a CollectionLayoutItem is accepted.
+//
+// The most basic component of a collection view’s layout.
 type CollectionLayoutItem struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func CollectionLayoutItemFromID(id objc.ID) *CollectionLayoutItem {
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionLayoutItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollectionLayoutItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func collectionLayoutItemAdopt(id objc.ID) *CollectionLayoutItem {
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionLayoutItem{Handle: objref.Wrap(id)}
+	x := &CollectionLayoutItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,34 +62,37 @@ func (x *CollectionLayoutItem) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewCollectionLayoutItem creates a new CollectionLayoutItem.
-func NewCollectionLayoutItem() *CollectionLayoutItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutItem")), objc.RegisterName("new"))
-	return collectionLayoutItemAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CollectionLayoutItem) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The amount of space added around the boundaries of the item between other items and this item’s container.
-//
-// WithEdgeSpacing sets edgeSpacing and returns the receiver so calls can be chained.
+// WithEdgeSpacing the amount of space added around the boundaries of the item between other items and this item’s container.
 func (x *CollectionLayoutItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
 	return x
 }
 
+// EdgeSpacing wraps the corresponding Objective-C method.
 func (x *CollectionLayoutItem) EdgeSpacing() *CollectionLayoutEdgeSpacing {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("edgeSpacing"))
 	return CollectionLayoutEdgeSpacingFromID(_r)
 }
 
+// SetEdgeSpacing wraps the corresponding Objective-C method.
 func (x *CollectionLayoutItem) SetEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
 }
 
+// LayoutSize wraps the corresponding Objective-C method.
 func (x *CollectionLayoutItem) LayoutSize() *CollectionLayoutSize {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutSize"))
 	return CollectionLayoutSizeFromID(_r)
 }
 
+// SupplementaryItems wraps the corresponding Objective-C method.
+//
 // SupplementaryItems returns the collection as a Go slice.
 func (x *CollectionLayoutItem) SupplementaryItems() []*CollectionLayoutSupplementaryItem {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supplementaryItems"))
@@ -105,3 +112,10 @@ type CollectionLayoutItemable interface {
 }
 
 var _ CollectionLayoutItemable = (*CollectionLayoutItem)(nil)
+
+// isCollectionLayoutItem marks CollectionLayoutItem — and, by embedding promotion, its
+// subclasses — as a member of the CollectionLayoutItem hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CollectionLayoutItem) isCollectionLayoutItem() {}
+
+var _ CollectionLayoutItemProvider = (*CollectionLayoutItem)(nil)

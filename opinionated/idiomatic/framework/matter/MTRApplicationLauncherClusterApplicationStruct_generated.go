@@ -13,6 +13,8 @@ import (
 )
 
 // MTRApplicationLauncherClusterApplicationStruct is an idiomatic wrapper over the Objective-C class MTRApplicationLauncherClusterApplicationStruct.
+//
+// MTRApplicationLauncherClusterApplicationStruct is an abstract base — you do not construct it directly. Construct one of [MTRApplicationLauncherClusterApplication] and pass it where a MTRApplicationLauncherClusterApplicationStruct is accepted.
 type MTRApplicationLauncherClusterApplicationStruct struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRApplicationLauncherClusterApplicationStructFromID(id objc.ID) *MTRApplic
 	if id == 0 {
 		return nil
 	}
-	x := &MTRApplicationLauncherClusterApplicationStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRApplicationLauncherClusterApplicationStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRApplicationLauncherClusterApplicationStructAdopt(id objc.ID) *MTRApplica
 	if id == 0 {
 		return nil
 	}
-	x := &MTRApplicationLauncherClusterApplicationStruct{Handle: objref.Wrap(id)}
+	x := &MTRApplicationLauncherClusterApplicationStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,54 +60,59 @@ func (x *MTRApplicationLauncherClusterApplicationStruct) IsKind(className string
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRApplicationLauncherClusterApplicationStruct creates a new MTRApplicationLauncherClusterApplicationStruct.
-func NewMTRApplicationLauncherClusterApplicationStruct() *MTRApplicationLauncherClusterApplicationStruct {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRApplicationLauncherClusterApplicationStruct")), objc.RegisterName("new"))
-	return mTRApplicationLauncherClusterApplicationStructAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRApplicationLauncherClusterApplicationStruct) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithCatalogVendorID sets catalogVendorID and returns the receiver so calls can be chained.
+// WithCatalogVendorID sets the property and returns the receiver so calls can be chained.
 func (x *MTRApplicationLauncherClusterApplicationStruct) WithCatalogVendorID(catalogVendorID obj.Object) *MTRApplicationLauncherClusterApplicationStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCatalogVendorID:"), objref.IDOf(catalogVendorID))
 	return x
 }
 
-// WithCatalogVendorId sets catalogVendorId and returns the receiver so calls can be chained.
+// WithCatalogVendorId sets the property and returns the receiver so calls can be chained.
 func (x *MTRApplicationLauncherClusterApplicationStruct) WithCatalogVendorId(catalogVendorId obj.Object) *MTRApplicationLauncherClusterApplicationStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCatalogVendorId:"), objref.IDOf(catalogVendorId))
 	return x
 }
 
-// WithApplicationID sets applicationID and returns the receiver so calls can be chained.
+// WithApplicationID sets the property and returns the receiver so calls can be chained.
 func (x *MTRApplicationLauncherClusterApplicationStruct) WithApplicationID(applicationID string) *MTRApplicationLauncherClusterApplicationStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationID:"), purego.NSString(applicationID))
 	return x
 }
 
-// WithApplicationId sets applicationId and returns the receiver so calls can be chained.
+// WithApplicationId sets the property and returns the receiver so calls can be chained.
 func (x *MTRApplicationLauncherClusterApplicationStruct) WithApplicationId(applicationId string) *MTRApplicationLauncherClusterApplicationStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationId:"), purego.NSString(applicationId))
 	return x
 }
 
+// CatalogVendorID wraps the corresponding Objective-C method.
 func (x *MTRApplicationLauncherClusterApplicationStruct) CatalogVendorID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("catalogVendorID"))
 	return obj.Wrap(_r)
 }
 
+// SetCatalogVendorID wraps the corresponding Objective-C method.
 func (x *MTRApplicationLauncherClusterApplicationStruct) SetCatalogVendorID(catalogVendorID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCatalogVendorID:"), objref.IDOf(catalogVendorID))
 }
 
+// CatalogVendorId wraps the corresponding Objective-C method.
 func (x *MTRApplicationLauncherClusterApplicationStruct) CatalogVendorId() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("catalogVendorId"))
 	return obj.Wrap(_r)
 }
 
+// SetCatalogVendorId wraps the corresponding Objective-C method.
 func (x *MTRApplicationLauncherClusterApplicationStruct) SetCatalogVendorId(catalogVendorId obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCatalogVendorId:"), objref.IDOf(catalogVendorId))
 }
 
+// ApplicationID wraps the corresponding Objective-C method.
 func (x *MTRApplicationLauncherClusterApplicationStruct) ApplicationID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationID"))
 	if _r == 0 {
@@ -112,10 +121,12 @@ func (x *MTRApplicationLauncherClusterApplicationStruct) ApplicationID() string 
 	return purego.GoString(_r)
 }
 
+// SetApplicationID wraps the corresponding Objective-C method.
 func (x *MTRApplicationLauncherClusterApplicationStruct) SetApplicationID(applicationID string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationID:"), purego.NSString(applicationID))
 }
 
+// ApplicationId wraps the corresponding Objective-C method.
 func (x *MTRApplicationLauncherClusterApplicationStruct) ApplicationId() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationId"))
 	if _r == 0 {
@@ -124,6 +135,7 @@ func (x *MTRApplicationLauncherClusterApplicationStruct) ApplicationId() string 
 	return purego.GoString(_r)
 }
 
+// SetApplicationId wraps the corresponding Objective-C method.
 func (x *MTRApplicationLauncherClusterApplicationStruct) SetApplicationId(applicationId string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationId:"), purego.NSString(applicationId))
 }
@@ -146,3 +158,11 @@ type MTRApplicationLauncherClusterApplicationStructable interface {
 }
 
 var _ MTRApplicationLauncherClusterApplicationStructable = (*MTRApplicationLauncherClusterApplicationStruct)(nil)
+
+// isMTRApplicationLauncherClusterApplicationStruct marks MTRApplicationLauncherClusterApplicationStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRApplicationLauncherClusterApplicationStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRApplicationLauncherClusterApplicationStruct) isMTRApplicationLauncherClusterApplicationStruct() {
+}
+
+var _ MTRApplicationLauncherClusterApplicationStructProvider = (*MTRApplicationLauncherClusterApplicationStruct)(nil)

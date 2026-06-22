@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMText is an idiomatic wrapper over the Objective-C class DOMText.
+//
+// DOMText is an abstract base — you do not construct it directly. Construct one of [DOMCDATASection] and pass it where a DOMText is accepted.
 type DOMText struct {
-	objref.Handle
+	DOMCharacterData
 }
 
 // DOMTextFromID adopts an existing Objective-C object as a DOMText
@@ -23,7 +24,8 @@ func DOMTextFromID(id objc.ID) *DOMText {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMText{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMText{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,66 +38,49 @@ func dOMTextAdopt(id objc.ID) *DOMText {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMText{Handle: objref.Wrap(id)}
+	x := &DOMText{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *DOMText) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMText) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMText) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewDOMText creates a new DOMText.
-func NewDOMText() *DOMText {
-	_id := objc.Send[objc.ID](objc.ID(_class("DOMText")), objc.RegisterName("new"))
-	return dOMTextAdopt(_id)
-}
-
-// WithData sets data and returns the receiver so calls can be chained.
+// WithData sets the property and returns the receiver so calls can be chained.
 func (x *DOMText) WithData(data string) *DOMText {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 	return x
 }
 
-// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMText) WithNodeValue(nodeValue string) *DOMText {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets prefix and returns the receiver so calls can be chained.
+// WithPrefix sets the property and returns the receiver so calls can be chained.
 func (x *DOMText) WithPrefix(prefix string) *DOMText {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets textContent and returns the receiver so calls can be chained.
+// WithTextContent sets the property and returns the receiver so calls can be chained.
 func (x *DOMText) WithTextContent(textContent string) *DOMText {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
+// SplitText wraps the corresponding Objective-C method.
 func (x *DOMText) SplitText(offset int) *DOMText {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("splitText:"), offset)
 	return DOMTextFromID(_r)
 }
 
+// ReplaceWholeText wraps the corresponding Objective-C method.
 func (x *DOMText) ReplaceWholeText(content string) *DOMText {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceWholeText:"), purego.NSString(content))
 	return DOMTextFromID(_r)
 }
 
+// WholeText wraps the corresponding Objective-C method.
 func (x *DOMText) WholeText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wholeText"))
 	if _r == 0 {
@@ -117,3 +102,18 @@ type DOMTextable interface {
 }
 
 var _ DOMTextable = (*DOMText)(nil)
+
+// isDOMText marks DOMText — and, by embedding promotion, its
+// subclasses — as a member of the DOMText hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DOMText) isDOMText() {}
+
+var _ DOMTextProvider = (*DOMText)(nil)
+
+var _ DOMCharacterDataProvider = (*DOMText)(nil)
+
+var _ DOMNodeProvider = (*DOMText)(nil)
+
+var _ DOMObjectProvider = (*DOMText)(nil)
+
+var _ WebScriptObjectProvider = (*DOMText)(nil)

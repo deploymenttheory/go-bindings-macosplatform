@@ -12,11 +12,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A VPN On Demand rule that evaluate the app’s connection to determine whether to run its action.
-//
 // NEOnDemandRuleEvaluateConnection is an idiomatic wrapper over the Objective-C class NEOnDemandRuleEvaluateConnection.
+//
+// It embeds [NEOnDemandRule], promoting that type's methods.
+//
+// A VPN On Demand rule that evaluate the app’s connection to determine whether to run its action.
 type NEOnDemandRuleEvaluateConnection struct {
-	objref.Handle
+	NEOnDemandRule
 }
 
 // NEOnDemandRuleEvaluateConnectionFromID adopts an existing Objective-C object as a NEOnDemandRuleEvaluateConnection
@@ -25,7 +27,8 @@ func NEOnDemandRuleEvaluateConnectionFromID(id objc.ID) *NEOnDemandRuleEvaluateC
 	if id == 0 {
 		return nil
 	}
-	x := &NEOnDemandRuleEvaluateConnection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEOnDemandRuleEvaluateConnection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func nEOnDemandRuleEvaluateConnectionAdopt(id objc.ID) *NEOnDemandRuleEvaluateCo
 	if id == 0 {
 		return nil
 	}
-	x := &NEOnDemandRuleEvaluateConnection{Handle: objref.Wrap(id)}
+	x := &NEOnDemandRuleEvaluateConnection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NEOnDemandRuleEvaluateConnection) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEOnDemandRuleEvaluateConnection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEOnDemandRuleEvaluateConnection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNEOnDemandRuleEvaluateConnection creates a new NEOnDemandRuleEvaluateConnection.
@@ -64,64 +53,55 @@ func NewNEOnDemandRuleEvaluateConnection() *NEOnDemandRuleEvaluateConnection {
 	return nEOnDemandRuleEvaluateConnectionAdopt(_id)
 }
 
-// An array of NEEvaluateConnectionRule objects
-//
-// WithConnectionRules sets the collection and returns the receiver so calls can be chained.
+// WithConnectionRules an array of NEEvaluateConnectionRule objects
 func (x *NEOnDemandRuleEvaluateConnection) WithConnectionRules(items ...*NEEvaluateConnectionRule) *NEOnDemandRuleEvaluateConnection {
 	_arr := purego.SliceToNSArray(items, func(_v *NEEvaluateConnectionRule) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionRules:"), _arr)
 	return x
 }
 
-// DNS search domains that identify a network.
-//
-// WithDNSSearchDomainMatch sets the collection and returns the receiver so calls can be chained.
+// WithDNSSearchDomainMatch DNS search domains that identify a network.
 func (x *NEOnDemandRuleEvaluateConnection) WithDNSSearchDomainMatch(items ...obj.Object) *NEOnDemandRuleEvaluateConnection {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSSearchDomainMatch:"), _arr)
 	return x
 }
 
-// DNS server addresses that identify a network.
-//
-// WithDNSServerAddressMatch sets the collection and returns the receiver so calls can be chained.
+// WithDNSServerAddressMatch DNS server addresses that identify a network.
 func (x *NEOnDemandRuleEvaluateConnection) WithDNSServerAddressMatch(items ...obj.Object) *NEOnDemandRuleEvaluateConnection {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSServerAddressMatch:"), _arr)
 	return x
 }
 
-// An interface type to identify a network.
-//
-// WithInterfaceTypeMatch sets interfaceTypeMatch and returns the receiver so calls can be chained.
+// WithInterfaceTypeMatch an interface type to identify a network.
 func (x *NEOnDemandRuleEvaluateConnection) WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleEvaluateConnection {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterfaceTypeMatch:"), interfaceTypeMatch)
 	return x
 }
 
-// SSIDs that identify a network.
-//
-// WithSSIDMatch sets the collection and returns the receiver so calls can be chained.
+// WithSSIDMatch SSIDs that identify a network.
 func (x *NEOnDemandRuleEvaluateConnection) WithSSIDMatch(items ...obj.Object) *NEOnDemandRuleEvaluateConnection {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSSIDMatch:"), _arr)
 	return x
 }
 
-// A URL to probe when all other network identifiers match to validate that an expected resource is available.
-//
-// WithProbeURL sets probeURL and returns the receiver so calls can be chained.
+// WithProbeURL a URL to probe when all other network identifiers match to validate that an expected resource is available.
 func (x *NEOnDemandRuleEvaluateConnection) WithProbeURL(probeURL string) *NEOnDemandRuleEvaluateConnection {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProbeURL:"), rt.FileURL(probeURL))
 	return x
 }
 
+// ConnectionRules wraps the corresponding Objective-C method.
+//
 // ConnectionRules returns the collection as a Go slice.
 func (x *NEOnDemandRuleEvaluateConnection) ConnectionRules() []*NEEvaluateConnectionRule {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectionRules"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEEvaluateConnectionRule { return NEEvaluateConnectionRuleFromID(_id) })
 }
 
+// SetConnectionRules wraps the corresponding Objective-C method.
 func (x *NEOnDemandRuleEvaluateConnection) SetConnectionRules(connectionRules []*NEEvaluateConnectionRule) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionRules:"), purego.SliceToNSArray(connectionRules, func(_v *NEEvaluateConnectionRule) objc.ID { return objref.IDOf(_v) }))
 }
@@ -140,3 +120,5 @@ type NEOnDemandRuleEvaluateConnectionable interface {
 }
 
 var _ NEOnDemandRuleEvaluateConnectionable = (*NEOnDemandRuleEvaluateConnection)(nil)
+
+var _ NEOnDemandRuleProvider = (*NEOnDemandRuleEvaluateConnection)(nil)

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A definition for a deformation of nodes that conform to SKWarpable.
-//
 // WarpGeometry is an idiomatic wrapper over the Objective-C class SKWarpGeometry.
+//
+// WarpGeometry is an abstract base — you do not construct it directly. Construct one of [WarpGeometryGrid] and pass it where a WarpGeometry is accepted.
+//
+// A definition for a deformation of nodes that conform to SKWarpable.
 type WarpGeometry struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func WarpGeometryFromID(id objc.ID) *WarpGeometry {
 	if id == 0 {
 		return nil
 	}
-	x := &WarpGeometry{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WarpGeometry{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func warpGeometryAdopt(id objc.ID) *WarpGeometry {
 	if id == 0 {
 		return nil
 	}
-	x := &WarpGeometry{Handle: objref.Wrap(id)}
+	x := &WarpGeometry{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *WarpGeometry) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewWarpGeometry creates a new WarpGeometry.
-func NewWarpGeometry() *WarpGeometry {
-	_id := objc.Send[objc.ID](objc.ID(_class("SKWarpGeometry")), objc.RegisterName("new"))
-	return warpGeometryAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WarpGeometry) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // WarpGeometryable is the interface implemented by [WarpGeometry], for mocking and DI.
@@ -70,3 +74,10 @@ type WarpGeometryable interface {
 }
 
 var _ WarpGeometryable = (*WarpGeometry)(nil)
+
+// isWarpGeometry marks WarpGeometry — and, by embedding promotion, its
+// subclasses — as a member of the WarpGeometry hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *WarpGeometry) isWarpGeometry() {}
+
+var _ WarpGeometryProvider = (*WarpGeometry)(nil)

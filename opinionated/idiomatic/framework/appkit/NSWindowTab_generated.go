@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A tab associated with a window that is part of a tabbing group.
-//
 // WindowTab is an idiomatic wrapper over the Objective-C class NSWindowTab.
+//
+// A tab associated with a window that is part of a tabbing group.
 type WindowTab struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WindowTabFromID(id objc.ID) *WindowTab {
 	if id == 0 {
 		return nil
 	}
-	x := &WindowTab{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WindowTab{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func windowTabAdopt(id objc.ID) *WindowTab {
 	if id == 0 {
 		return nil
 	}
-	x := &WindowTab{Handle: objref.Wrap(id)}
+	x := &WindowTab{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,44 +60,43 @@ func (x *WindowTab) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WindowTab) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWindowTab creates a new WindowTab.
 func NewWindowTab() *WindowTab {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSWindowTab")), objc.RegisterName("new"))
 	return windowTabAdopt(_id)
 }
 
-// The title for the window tab.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the title for the window tab.
 func (x *WindowTab) WithTitle(title string) *WindowTab {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The title for the window tab, specified as an attributed string.
-//
-// WithAttributedTitle sets attributedTitle and returns the receiver so calls can be chained.
+// WithAttributedTitle the title for the window tab, specified as an attributed string.
 func (x *WindowTab) WithAttributedTitle(attributedTitle obj.Object) *WindowTab {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	return x
 }
 
-// The tooltip for this window tab.
-//
-// WithToolTip sets toolTip and returns the receiver so calls can be chained.
+// WithToolTip the tooltip for this window tab.
 func (x *WindowTab) WithToolTip(toolTip string) *WindowTab {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// An optional accessory view for the tab.
-//
-// WithAccessoryView sets accessoryView and returns the receiver so calls can be chained.
+// WithAccessoryView an optional accessory view for the tab.
 func (x *WindowTab) WithAccessoryView(accessoryView ViewProvider) *WindowTab {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 	return x
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *WindowTab) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -104,19 +105,23 @@ func (x *WindowTab) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *WindowTab) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
+// AttributedTitle wraps the corresponding Objective-C method.
 func (x *WindowTab) AttributedTitle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedTitle"))
 	return obj.Wrap(_r)
 }
 
+// SetAttributedTitle wraps the corresponding Objective-C method.
 func (x *WindowTab) SetAttributedTitle(attributedTitle obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 }
 
+// ToolTip wraps the corresponding Objective-C method.
 func (x *WindowTab) ToolTip() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toolTip"))
 	if _r == 0 {
@@ -125,15 +130,18 @@ func (x *WindowTab) ToolTip() string {
 	return purego.GoString(_r)
 }
 
+// SetToolTip wraps the corresponding Objective-C method.
 func (x *WindowTab) SetToolTip(toolTip string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 }
 
+// AccessoryView wraps the corresponding Objective-C method.
 func (x *WindowTab) AccessoryView() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessoryView"))
 	return ViewFromID(_r)
 }
 
+// SetAccessoryView wraps the corresponding Objective-C method.
 func (x *WindowTab) SetAccessoryView(accessoryView *View) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 }

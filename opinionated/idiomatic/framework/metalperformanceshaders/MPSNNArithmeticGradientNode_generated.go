@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of the base class for gradient arithmetic operators.
-//
 // NNArithmeticGradientNode is an idiomatic wrapper over the Objective-C class MPSNNArithmeticGradientNode.
+//
+// NNArithmeticGradientNode is an abstract base — you do not construct it directly. Construct one of [NNAdditionGradientNode], [NNMultiplicationGradientNode], [NNSubtractionGradientNode] and pass it where a NNArithmeticGradientNode is accepted.
+//
+// A representation of the base class for gradient arithmetic operators.
 type NNArithmeticGradientNode struct {
-	objref.Handle
+	NNGradientFilterNode
 }
 
 // NNArithmeticGradientNodeFromID adopts an existing Objective-C object as a NNArithmeticGradientNode
@@ -25,7 +26,8 @@ func NNArithmeticGradientNodeFromID(id objc.ID) *NNArithmeticGradientNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNArithmeticGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNArithmeticGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,172 +40,169 @@ func nNArithmeticGradientNodeAdopt(id objc.ID) *NNArithmeticGradientNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNArithmeticGradientNode{Handle: objref.Wrap(id)}
+	x := &NNArithmeticGradientNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NNArithmeticGradientNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNArithmeticGradientNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNArithmeticGradientNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// create a new arithmetic gradient node See also -[MPSCNNNeuronNode gradientFilterNodesWithSources:] for an easier way to do this.
-//
-// NewNNArithmeticGradientNodeWithSourceGradientSourceImageGradientStateIsSecondarySourceFilter creates a new NNArithmeticGradientNode.
+// NewNNArithmeticGradientNodeWithSourceGradientSourceImageGradientStateIsSecondarySourceFilter create a new arithmetic gradient node See also -[MPSCNNNeuronNode gradientFilterNodesWithSources:] for an easier way to do this.
 func NewNNArithmeticGradientNodeWithSourceGradientSourceImageGradientStateIsSecondarySourceFilter(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object, isSecondarySourceFilter bool) *NNArithmeticGradientNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNArithmeticGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:isSecondarySourceFilter:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), isSecondarySourceFilter)
 	return nNArithmeticGradientNodeAdopt(_id)
 }
 
-// create a new arithmetic gradient node See also -[MPSCNNNeuronNode gradientFilterNodesWithSources:] for an easier way to do this.
-//
-// NewNNArithmeticGradientNodeWithGradientImagesForwardFilterIsSecondarySourceFilter creates a new NNArithmeticGradientNode.
+// NewNNArithmeticGradientNodeWithGradientImagesForwardFilterIsSecondarySourceFilter create a new arithmetic gradient node See also -[MPSCNNNeuronNode gradientFilterNodesWithSources:] for an easier way to do this.
 func NewNNArithmeticGradientNodeWithGradientImagesForwardFilterIsSecondarySourceFilter(gradientImages []obj.Object, filter obj.Object, isSecondarySourceFilter bool) *NNArithmeticGradientNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNArithmeticGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGradientImages:forwardFilter:isSecondarySourceFilter:"), purego.SliceToNSArray(gradientImages, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(filter), isSecondarySourceFilter)
 	return nNArithmeticGradientNodeAdopt(_id)
 }
 
-// WithPrimaryScale sets primaryScale and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
 func (x *NNArithmeticGradientNode) WithPrimaryScale(primaryScale float32) *NNArithmeticGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return x
 }
 
-// WithSecondaryScale sets secondaryScale and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
 func (x *NNArithmeticGradientNode) WithSecondaryScale(secondaryScale float32) *NNArithmeticGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return x
 }
 
-// WithBias sets bias and returns the receiver so calls can be chained.
+// WithBias sets the property and returns the receiver so calls can be chained.
 func (x *NNArithmeticGradientNode) WithBias(bias float32) *NNArithmeticGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 	return x
 }
 
-// WithSecondaryStrideInPixelsX sets secondaryStrideInPixelsX and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
 func (x *NNArithmeticGradientNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNArithmeticGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 	return x
 }
 
-// WithSecondaryStrideInPixelsY sets secondaryStrideInPixelsY and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
 func (x *NNArithmeticGradientNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNArithmeticGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 	return x
 }
 
-// WithSecondaryStrideInFeatureChannels sets secondaryStrideInFeatureChannels and returns the receiver so calls can be chained.
+// WithSecondaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
 func (x *NNArithmeticGradientNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNArithmeticGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
 	return x
 }
 
-// WithMinimumValue sets minimumValue and returns the receiver so calls can be chained.
+// WithMinimumValue sets the property and returns the receiver so calls can be chained.
 func (x *NNArithmeticGradientNode) WithMinimumValue(minimumValue float32) *NNArithmeticGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
 	return x
 }
 
-// WithMaximumValue sets maximumValue and returns the receiver so calls can be chained.
+// WithMaximumValue sets the property and returns the receiver so calls can be chained.
 func (x *NNArithmeticGradientNode) WithMaximumValue(maximumValue float32) *NNArithmeticGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *NNArithmeticGradientNode) WithLabel(label string) *NNArithmeticGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// PrimaryScale wraps the corresponding Objective-C method.
 func (x *NNArithmeticGradientNode) PrimaryScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("primaryScale"))
 	return _r
 }
 
+// SetPrimaryScale wraps the corresponding Objective-C method.
 func (x *NNArithmeticGradientNode) SetPrimaryScale(primaryScale float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
 }
 
+// SecondaryScale wraps the corresponding Objective-C method.
 func (x *NNArithmeticGradientNode) SecondaryScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("secondaryScale"))
 	return _r
 }
 
+// SetSecondaryScale wraps the corresponding Objective-C method.
 func (x *NNArithmeticGradientNode) SetSecondaryScale(secondaryScale float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 }
 
+// Bias wraps the corresponding Objective-C method.
 func (x *NNArithmeticGradientNode) Bias() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("bias"))
 	return _r
 }
 
+// SetBias wraps the corresponding Objective-C method.
 func (x *NNArithmeticGradientNode) SetBias(bias float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 }
 
+// SecondaryStrideInPixelsX wraps the corresponding Objective-C method.
 func (x *NNArithmeticGradientNode) SecondaryStrideInPixelsX() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("secondaryStrideInPixelsX"))
 	return _r
 }
 
+// SetSecondaryStrideInPixelsX wraps the corresponding Objective-C method.
 func (x *NNArithmeticGradientNode) SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 }
 
+// SecondaryStrideInPixelsY wraps the corresponding Objective-C method.
 func (x *NNArithmeticGradientNode) SecondaryStrideInPixelsY() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("secondaryStrideInPixelsY"))
 	return _r
 }
 
+// SetSecondaryStrideInPixelsY wraps the corresponding Objective-C method.
 func (x *NNArithmeticGradientNode) SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 }
 
+// SecondaryStrideInFeatureChannels wraps the corresponding Objective-C method.
 func (x *NNArithmeticGradientNode) SecondaryStrideInFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("secondaryStrideInFeatureChannels"))
 	return _r
 }
 
+// SetSecondaryStrideInFeatureChannels wraps the corresponding Objective-C method.
 func (x *NNArithmeticGradientNode) SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
 }
 
+// MinimumValue wraps the corresponding Objective-C method.
 func (x *NNArithmeticGradientNode) MinimumValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minimumValue"))
 	return _r
 }
 
+// SetMinimumValue wraps the corresponding Objective-C method.
 func (x *NNArithmeticGradientNode) SetMinimumValue(minimumValue float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
 }
 
+// MaximumValue wraps the corresponding Objective-C method.
 func (x *NNArithmeticGradientNode) MaximumValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumValue"))
 	return _r
 }
 
+// SetMaximumValue wraps the corresponding Objective-C method.
 func (x *NNArithmeticGradientNode) SetMaximumValue(maximumValue float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
 }
 
+// IsSecondarySourceFilter wraps the corresponding Objective-C method.
 func (x *NNArithmeticGradientNode) IsSecondarySourceFilter() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSecondarySourceFilter"))
 	return _r
@@ -241,3 +240,14 @@ type NNArithmeticGradientNodeable interface {
 }
 
 var _ NNArithmeticGradientNodeable = (*NNArithmeticGradientNode)(nil)
+
+// isNNArithmeticGradientNode marks NNArithmeticGradientNode — and, by embedding promotion, its
+// subclasses — as a member of the NNArithmeticGradientNode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NNArithmeticGradientNode) isNNArithmeticGradientNode() {}
+
+var _ NNArithmeticGradientNodeProvider = (*NNArithmeticGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*NNArithmeticGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNArithmeticGradientNode)(nil)

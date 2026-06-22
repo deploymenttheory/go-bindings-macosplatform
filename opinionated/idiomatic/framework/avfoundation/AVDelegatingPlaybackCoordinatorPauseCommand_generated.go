@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A command that indicates to pause playback.
-//
 // DelegatingPlaybackCoordinatorPauseCommand is an idiomatic wrapper over the Objective-C class AVDelegatingPlaybackCoordinatorPauseCommand.
+//
+// It embeds [DelegatingPlaybackCoordinatorPlaybackControlCommand], promoting that type's methods.
+//
+// A command that indicates to pause playback.
 type DelegatingPlaybackCoordinatorPauseCommand struct {
-	objref.Handle
+	DelegatingPlaybackCoordinatorPlaybackControlCommand
 }
 
 // DelegatingPlaybackCoordinatorPauseCommandFromID adopts an existing Objective-C object as a DelegatingPlaybackCoordinatorPauseCommand
@@ -25,7 +26,8 @@ func DelegatingPlaybackCoordinatorPauseCommandFromID(id objc.ID) *DelegatingPlay
 	if id == 0 {
 		return nil
 	}
-	x := &DelegatingPlaybackCoordinatorPauseCommand{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DelegatingPlaybackCoordinatorPauseCommand{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func delegatingPlaybackCoordinatorPauseCommandAdopt(id objc.ID) *DelegatingPlayb
 	if id == 0 {
 		return nil
 	}
-	x := &DelegatingPlaybackCoordinatorPauseCommand{Handle: objref.Wrap(id)}
+	x := &DelegatingPlaybackCoordinatorPauseCommand{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DelegatingPlaybackCoordinatorPauseCommand) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DelegatingPlaybackCoordinatorPauseCommand) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DelegatingPlaybackCoordinatorPauseCommand) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDelegatingPlaybackCoordinatorPauseCommand creates a new DelegatingPlaybackCoordinatorPauseCommand.
@@ -64,13 +52,13 @@ func NewDelegatingPlaybackCoordinatorPauseCommand() *DelegatingPlaybackCoordinat
 	return delegatingPlaybackCoordinatorPauseCommandAdopt(_id)
 }
 
-// Indicates that playback is anticipated and the player should begin buffering if necessary. When shouldBufferInAnticipationOfPlayback is YES, some participant wants to resume playback at the rate indicated by the anticipatedPlaybackRate property. This should be treated similar to receiving a separate AVDelegatingPlaybackCoordinatorBufferingCommand. If YES, the command should only be considered complete once the player is ready to receive an AVDelegatingPlaybackCoordinatorPlayCommand with the indicated rate.
+// ShouldBufferInAnticipationOfPlayback indicates that playback is anticipated and the player should begin buffering if necessary. When shouldBufferInAnticipationOfPlayback is YES, some participant wants to resume playback at the rate indicated by the anticipatedPlaybackRate property. This should be treated similar to receiving a separate AVDelegatingPlaybackCoordinatorBufferingCommand. If YES, the command should only be considered complete once the player is ready to receive an AVDelegatingPlaybackCoordinatorPlayCommand with the indicated rate.
 func (x *DelegatingPlaybackCoordinatorPauseCommand) ShouldBufferInAnticipationOfPlayback() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldBufferInAnticipationOfPlayback"))
 	return _r
 }
 
-// The rate to prepare for if shouldBufferInAnticipationOfPlayback is YES.
+// AnticipatedPlaybackRate the rate to prepare for if shouldBufferInAnticipationOfPlayback is YES.
 func (x *DelegatingPlaybackCoordinatorPauseCommand) AnticipatedPlaybackRate() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("anticipatedPlaybackRate"))
 	return _r
@@ -84,3 +72,5 @@ type DelegatingPlaybackCoordinatorPauseCommandable interface {
 }
 
 var _ DelegatingPlaybackCoordinatorPauseCommandable = (*DelegatingPlaybackCoordinatorPauseCommand)(nil)
+
+var _ DelegatingPlaybackCoordinatorPlaybackControlCommandProvider = (*DelegatingPlaybackCoordinatorPauseCommand)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object from a data set type stored in an asset catalog.
-//
 // DataAsset is an idiomatic wrapper over the Objective-C class NSDataAsset.
+//
+// An object from a data set type stored in an asset catalog.
 type DataAsset struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DataAssetFromID(id objc.ID) *DataAsset {
 	if id == 0 {
 		return nil
 	}
-	x := &DataAsset{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DataAsset{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func dataAssetAdopt(id objc.ID) *DataAsset {
 	if id == 0 {
 		return nil
 	}
-	x := &DataAsset{Handle: objref.Wrap(id)}
+	x := &DataAsset{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,39 @@ func (x *DataAsset) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes and returns an object with a reference to the named data asset in an asset catalog.
-//
-// NewDataAssetWithName creates a new DataAsset.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DataAsset) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDataAssetWithName initializes and returns an object with a reference to the named data asset in an asset catalog.
 func NewDataAssetWithName(name obj.Object) *DataAsset {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDataAsset")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:"), objref.IDOf(name))
 	return dataAssetAdopt(_id)
 }
 
-// Initializes and returns an object with a reference to the named data asset that’s in an asset catalog in the specified bundle.
-//
-// NewDataAssetWithNameBundle creates a new DataAsset.
+// NewDataAssetWithNameBundle initializes and returns an object with a reference to the named data asset that’s in an asset catalog in the specified bundle.
 func NewDataAssetWithNameBundle(name obj.Object, bundle obj.Object) *DataAsset {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDataAsset")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:bundle:"), objref.IDOf(name), objref.IDOf(bundle))
 	return dataAssetAdopt(_id)
 }
 
-// The name used to reference the data asset
+// Name the name used to reference the data asset
 func (x *DataAsset) Name() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	return obj.Wrap(_r)
 }
 
-// The data for this asset, as stored in the asset catalog
+// Data the data for this asset, as stored in the asset catalog
 func (x *DataAsset) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// The Uniform Type Identifier for this data object.
+// TypeIdentifier the Uniform Type Identifier for this data object.
 func (x *DataAsset) TypeIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typeIdentifier"))
 	if _r == 0 {

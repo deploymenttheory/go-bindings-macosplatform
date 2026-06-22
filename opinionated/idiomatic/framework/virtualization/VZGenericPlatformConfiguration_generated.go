@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The platform configuration for a generic Intel or ARM virtual machine.
-//
 // GenericPlatformConfiguration is an idiomatic wrapper over the Objective-C class VZGenericPlatformConfiguration.
+//
+// It embeds [PlatformConfiguration], promoting that type's methods.
+//
+// The platform configuration for a generic Intel or ARM virtual machine.
 type GenericPlatformConfiguration struct {
-	objref.Handle
+	PlatformConfiguration
 }
 
 // GenericPlatformConfigurationFromID adopts an existing Objective-C object as a GenericPlatformConfiguration
@@ -25,7 +26,8 @@ func GenericPlatformConfigurationFromID(id objc.ID) *GenericPlatformConfiguratio
 	if id == 0 {
 		return nil
 	}
-	x := &GenericPlatformConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GenericPlatformConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func genericPlatformConfigurationAdopt(id objc.ID) *GenericPlatformConfiguration
 	if id == 0 {
 		return nil
 	}
-	x := &GenericPlatformConfiguration{Handle: objref.Wrap(id)}
+	x := &GenericPlatformConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GenericPlatformConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GenericPlatformConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GenericPlatformConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGenericPlatformConfiguration creates a new GenericPlatformConfiguration.
@@ -64,38 +52,36 @@ func NewGenericPlatformConfiguration() *GenericPlatformConfiguration {
 	return genericPlatformConfigurationAdopt(_id)
 }
 
-// A value that represents a unique identifier for the virtual machine.
-//
-// WithMachineIdentifier sets machineIdentifier and returns the receiver so calls can be chained.
+// WithMachineIdentifier a value that represents a unique identifier for the virtual machine.
 func (x *GenericPlatformConfiguration) WithMachineIdentifier(machineIdentifier *GenericMachineIdentifier) *GenericPlatformConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMachineIdentifier:"), objref.IDOf(machineIdentifier))
 	return x
 }
 
-// A Boolean value that indicates whether nested virtualization is in an enabled state.
-//
-// WithNestedVirtualizationEnabled sets nestedVirtualizationEnabled and returns the receiver so calls can be chained.
+// WithNestedVirtualizationEnabled a Boolean value that indicates whether nested virtualization is in an enabled state.
 func (x *GenericPlatformConfiguration) WithNestedVirtualizationEnabled(nestedVirtualizationEnabled bool) *GenericPlatformConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNestedVirtualizationEnabled:"), nestedVirtualizationEnabled)
 	return x
 }
 
-// The unique machine identifier. Running two virtual machines concurrently with the same identifier results in undefined behavior in the guest operating system. When restoring a virtual machine from saved state, this `machineIdentifier` must match the `machineIdentifier` of the saved virtual machine.
+// MachineIdentifier the unique machine identifier. Running two virtual machines concurrently with the same identifier results in undefined behavior in the guest operating system. When restoring a virtual machine from saved state, this `machineIdentifier` must match the `machineIdentifier` of the saved virtual machine.
 func (x *GenericPlatformConfiguration) MachineIdentifier() *GenericMachineIdentifier {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("machineIdentifier"))
 	return GenericMachineIdentifierFromID(_r)
 }
 
+// SetMachineIdentifier wraps the corresponding Objective-C method.
 func (x *GenericPlatformConfiguration) SetMachineIdentifier(machineIdentifier *GenericMachineIdentifier) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMachineIdentifier:"), objref.IDOf(machineIdentifier))
 }
 
-// Enable nested virtualization for the platform. If nested virtualization is available, enable it for the current platform configuration. You can use `nestedVirtualizationSupported` to discover the nested virtualization availability before enabling it. The default value is NO, nested virtualization is disabled.
+// IsNestedVirtualizationEnabled enable nested virtualization for the platform. If nested virtualization is available, enable it for the current platform configuration. You can use `nestedVirtualizationSupported` to discover the nested virtualization availability before enabling it. The default value is NO, nested virtualization is disabled.
 func (x *GenericPlatformConfiguration) IsNestedVirtualizationEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNestedVirtualizationEnabled"))
 	return _r
 }
 
+// SetNestedVirtualizationEnabled wraps the corresponding Objective-C method.
 func (x *GenericPlatformConfiguration) SetNestedVirtualizationEnabled(nestedVirtualizationEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNestedVirtualizationEnabled:"), nestedVirtualizationEnabled)
 }
@@ -112,3 +98,5 @@ type GenericPlatformConfigurationable interface {
 }
 
 var _ GenericPlatformConfigurationable = (*GenericPlatformConfiguration)(nil)
+
+var _ PlatformConfigurationProvider = (*GenericPlatformConfiguration)(nil)

@@ -6,15 +6,18 @@ package foundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A simple container for a single C or Objective-C data item.
-//
 // Value is an idiomatic wrapper over the Objective-C class NSValue.
+//
+// Value is an abstract base — you do not construct it directly. Construct one of [Number] and pass it where a Value is accepted.
+//
+// A simple container for a single C or Objective-C data item.
 type Value struct {
 	objref.Handle
 }
@@ -25,7 +28,8 @@ func ValueFromID(id objc.ID) *Value {
 	if id == 0 {
 		return nil
 	}
-	x := &Value{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Value{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +42,8 @@ func valueAdopt(id objc.ID) *Value {
 	if id == 0 {
 		return nil
 	}
-	x := &Value{Handle: objref.Wrap(id)}
+	x := &Value{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +63,12 @@ func (x *Value) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Value) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewValueWithCoder creates a new Value.
 func NewValueWithCoder(coder *Coder) *Value {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSValue")), objc.RegisterName("alloc"))
@@ -65,21 +76,40 @@ func NewValueWithCoder(coder *Coder) *Value {
 	return valueAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Value) WithScriptingProperties(scriptingProperties obj.Object) *Value {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Returns a Boolean value that indicates whether the value object and another value object are equal.
+// IsEqualToValue returns a Boolean value that indicates whether the value object and another value object are equal.
 func (x *Value) IsEqualToValue(value *Value) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToValue:"), objref.IDOf(value))
 	return _r
 }
 
+// NonretainedObjectValue wraps the corresponding Objective-C method.
 func (x *Value) NonretainedObjectValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nonretainedObjectValue"))
 	return obj.Wrap(_r)
+}
+
+// PointValue wraps the corresponding Objective-C method.
+func (x *Value) PointValue() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("pointValue"))
+	return _r
+}
+
+// SizeValue wraps the corresponding Objective-C method.
+func (x *Value) SizeValue() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("sizeValue"))
+	return _r
+}
+
+// RectValue wraps the corresponding Objective-C method.
+func (x *Value) RectValue() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rectValue"))
+	return _r
 }
 
 // Valueable is the interface implemented by [Value], for mocking and DI.
@@ -88,6 +118,16 @@ type Valueable interface {
 	WithScriptingProperties(scriptingProperties obj.Object) *Value
 	IsEqualToValue(value *Value) bool
 	NonretainedObjectValue() obj.Object
+	PointValue() corefoundation.CGPoint
+	SizeValue() corefoundation.CGSize
+	RectValue() corefoundation.CGRect
 }
 
 var _ Valueable = (*Value)(nil)
+
+// isValue marks Value — and, by embedding promotion, its
+// subclasses — as a member of the Value hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Value) isValue() {}
+
+var _ ValueProvider = (*Value)(nil)

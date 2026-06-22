@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A MPSNNFilterNode representing a MPSCNNBinaryFullyConnected kernel
-//
 // CNNBinaryFullyConnectedNode is an idiomatic wrapper over the Objective-C class MPSCNNBinaryFullyConnectedNode.
+//
+// It embeds [CNNBinaryConvolutionNode], promoting that type's methods.
+//
+// A MPSNNFilterNode representing a MPSCNNBinaryFullyConnected kernel
 type CNNBinaryFullyConnectedNode struct {
-	objref.Handle
+	CNNBinaryConvolutionNode
 }
 
 // CNNBinaryFullyConnectedNodeFromID adopts an existing Objective-C object as a CNNBinaryFullyConnectedNode
@@ -25,7 +26,8 @@ func CNNBinaryFullyConnectedNodeFromID(id objc.ID) *CNNBinaryFullyConnectedNode 
 	if id == 0 {
 		return nil
 	}
-	x := &CNNBinaryFullyConnectedNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNBinaryFullyConnectedNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func cNNBinaryFullyConnectedNodeAdopt(id objc.ID) *CNNBinaryFullyConnectedNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNBinaryFullyConnectedNode{Handle: objref.Wrap(id)}
+	x := &CNNBinaryFullyConnectedNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNBinaryFullyConnectedNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNBinaryFullyConnectedNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNBinaryFullyConnectedNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNBinaryFullyConnectedNode creates a new CNNBinaryFullyConnectedNode.
@@ -64,25 +52,19 @@ func NewCNNBinaryFullyConnectedNode() *CNNBinaryFullyConnectedNode {
 	return cNNBinaryFullyConnectedNodeAdopt(_id)
 }
 
-// The training style of the forward node will be propagated to gradient nodes made from it
-//
-// WithTrainingStyle sets trainingStyle and returns the receiver so calls can be chained.
+// WithTrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
 func (x *CNNBinaryFullyConnectedNode) WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNBinaryFullyConnectedNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStyle:"), trainingStyle)
 	return x
 }
 
-// Set the floating-point precision used by the convolution accumulator Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
-//
-// WithAccumulatorPrecision sets accumulatorPrecision and returns the receiver so calls can be chained.
+// WithAccumulatorPrecision set the floating-point precision used by the convolution accumulator Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
 func (x *CNNBinaryFullyConnectedNode) WithAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) *CNNBinaryFullyConnectedNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccumulatorPrecision:"), accumulatorPrecision)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNBinaryFullyConnectedNode) WithLabel(label string) *CNNBinaryFullyConnectedNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -97,3 +79,9 @@ type CNNBinaryFullyConnectedNodeable interface {
 }
 
 var _ CNNBinaryFullyConnectedNodeable = (*CNNBinaryFullyConnectedNode)(nil)
+
+var _ CNNBinaryConvolutionNodeProvider = (*CNNBinaryFullyConnectedNode)(nil)
+
+var _ CNNConvolutionNodeProvider = (*CNNBinaryFullyConnectedNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNBinaryFullyConnectedNode)(nil)

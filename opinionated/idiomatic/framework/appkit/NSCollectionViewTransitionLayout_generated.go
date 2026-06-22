@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that implements custom behaviors when changing from one layout to another in a collection view.
-//
 // CollectionViewTransitionLayout is an idiomatic wrapper over the Objective-C class NSCollectionViewTransitionLayout.
+//
+// It embeds [CollectionViewLayout], promoting that type's methods.
+//
+// An object that implements custom behaviors when changing from one layout to another in a collection view.
 type CollectionViewTransitionLayout struct {
-	objref.Handle
+	CollectionViewLayout
 }
 
 // CollectionViewTransitionLayoutFromID adopts an existing Objective-C object as a CollectionViewTransitionLayout
@@ -25,7 +26,8 @@ func CollectionViewTransitionLayoutFromID(id objc.ID) *CollectionViewTransitionL
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionViewTransitionLayout{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollectionViewTransitionLayout{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,68 +40,54 @@ func collectionViewTransitionLayoutAdopt(id objc.ID) *CollectionViewTransitionLa
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionViewTransitionLayout{Handle: objref.Wrap(id)}
+	x := &CollectionViewTransitionLayout{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CollectionViewTransitionLayout) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CollectionViewTransitionLayout) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CollectionViewTransitionLayout) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes and returns the transition layout object.
-//
-// NewCollectionViewTransitionLayoutWithCurrentLayoutNextLayout creates a new CollectionViewTransitionLayout.
+// NewCollectionViewTransitionLayoutWithCurrentLayoutNextLayout initializes and returns the transition layout object.
 func NewCollectionViewTransitionLayoutWithCurrentLayoutNextLayout(currentLayout *CollectionViewLayout, newLayout *CollectionViewLayout) *CollectionViewTransitionLayout {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewTransitionLayout")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCurrentLayout:nextLayout:"), objref.IDOf(currentLayout), objref.IDOf(newLayout))
 	return collectionViewTransitionLayoutAdopt(_id)
 }
 
-// The completion percentage of the transition.
-//
-// WithTransitionProgress sets transitionProgress and returns the receiver so calls can be chained.
+// WithTransitionProgress the completion percentage of the transition.
 func (x *CollectionViewTransitionLayout) WithTransitionProgress(transitionProgress float64) *CollectionViewTransitionLayout {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionProgress:"), transitionProgress)
 	return x
 }
 
-// Sets the value of a key whose value you use during the animation.
+// UpdateValueForAnimatedKey sets the value of a key whose value you use during the animation.
 func (x *CollectionViewTransitionLayout) UpdateValueForAnimatedKey(value float64, key obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateValue:forAnimatedKey:"), value, objref.IDOf(key))
 }
 
-// Returns the most recently set value for the specified key.
+// ValueForAnimatedKey returns the most recently set value for the specified key.
 func (x *CollectionViewTransitionLayout) ValueForAnimatedKey(key obj.Object) float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("valueForAnimatedKey:"), objref.IDOf(key))
 	return _r
 }
 
+// TransitionProgress wraps the corresponding Objective-C method.
 func (x *CollectionViewTransitionLayout) TransitionProgress() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("transitionProgress"))
 	return _r
 }
 
+// SetTransitionProgress wraps the corresponding Objective-C method.
 func (x *CollectionViewTransitionLayout) SetTransitionProgress(transitionProgress float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionProgress:"), transitionProgress)
 }
 
+// CurrentLayout wraps the corresponding Objective-C method.
 func (x *CollectionViewTransitionLayout) CurrentLayout() *CollectionViewLayout {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentLayout"))
 	return CollectionViewLayoutFromID(_r)
 }
 
+// NextLayout wraps the corresponding Objective-C method.
 func (x *CollectionViewTransitionLayout) NextLayout() *CollectionViewLayout {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextLayout"))
 	return CollectionViewLayoutFromID(_r)
@@ -118,3 +106,5 @@ type CollectionViewTransitionLayoutable interface {
 }
 
 var _ CollectionViewTransitionLayoutable = (*CollectionViewTransitionLayout)(nil)
+
+var _ CollectionViewLayoutProvider = (*CollectionViewTransitionLayout)(nil)

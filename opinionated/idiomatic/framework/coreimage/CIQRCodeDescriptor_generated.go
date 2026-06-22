@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A concrete subclass of the Core Image Barcode Descriptor that represents a square QR code symbol.
-//
 // QRCodeDescriptor is an idiomatic wrapper over the Objective-C class CIQRCodeDescriptor.
+//
+// It embeds [BarcodeDescriptor], promoting that type's methods.
+//
+// A concrete subclass of the Core Image Barcode Descriptor that represents a square QR code symbol.
 type QRCodeDescriptor struct {
-	objref.Handle
+	BarcodeDescriptor
 }
 
 // QRCodeDescriptorFromID adopts an existing Objective-C object as a QRCodeDescriptor
@@ -25,7 +26,8 @@ func QRCodeDescriptorFromID(id objc.ID) *QRCodeDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &QRCodeDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QRCodeDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,54 +40,38 @@ func qRCodeDescriptorAdopt(id objc.ID) *QRCodeDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &QRCodeDescriptor{Handle: objref.Wrap(id)}
+	x := &QRCodeDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *QRCodeDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *QRCodeDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *QRCodeDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a QR code descriptor for the given payload and parameters.
-//
-// NewQRCodeDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel creates a new QRCodeDescriptor.
+// NewQRCodeDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel initializes a QR code descriptor for the given payload and parameters.
 func NewQRCodeDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(errorCorrectedPayload obj.Object, symbolVersion int, maskPattern uint8, errorCorrectionLevel QRCodeErrorCorrectionLevel) *QRCodeDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIQRCodeDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPayload:symbolVersion:maskPattern:errorCorrectionLevel:"), objref.IDOf(errorCorrectedPayload), symbolVersion, maskPattern, errorCorrectionLevel)
 	return qRCodeDescriptorAdopt(_id)
 }
 
-// The error-corrected codeword payload that comprises the QR code symbol. QR Codes are formally specified in ISO/IEC 18004:2006(E). Section 6.4.10 "Bitstream to codeword conversion" specifies the set of 8-bit codewords in the symbol immediately prior to splitting the message into blocks and applying error correction. During decode, error correction is applied and if successful, the message is re-ordered to the state immediately following "Bitstream to codeword conversion." The `errorCorrectedPayload` corresponds to this sequence of 8-bit codewords.
+// ErrorCorrectedPayload the error-corrected codeword payload that comprises the QR code symbol. QR Codes are formally specified in ISO/IEC 18004:2006(E). Section 6.4.10 "Bitstream to codeword conversion" specifies the set of 8-bit codewords in the symbol immediately prior to splitting the message into blocks and applying error correction. During decode, error correction is applied and if successful, the message is re-ordered to the state immediately following "Bitstream to codeword conversion." The `errorCorrectedPayload` corresponds to this sequence of 8-bit codewords.
 func (x *QRCodeDescriptor) ErrorCorrectedPayload() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorCorrectedPayload"))
 	return obj.Wrap(_r)
 }
 
-// The version of the QR code which corresponds to the size of the QR code symbol. ISO/IEC 18004 defines versions from 1 to 40, where a higher symbol version indicates a larger data-carrying capacity. This field is required in order to properly interpret the error corrected payload.
+// SymbolVersion the version of the QR code which corresponds to the size of the QR code symbol. ISO/IEC 18004 defines versions from 1 to 40, where a higher symbol version indicates a larger data-carrying capacity. This field is required in order to properly interpret the error corrected payload.
 func (x *QRCodeDescriptor) SymbolVersion() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("symbolVersion"))
 	return _r
 }
 
-// The data mask pattern for the QR code symbol. QR Codes support eight data mask patterns, which are used to avoid large black or large white areas inside the symbol body. Valid values range from 0 to 7.
+// MaskPattern the data mask pattern for the QR code symbol. QR Codes support eight data mask patterns, which are used to avoid large black or large white areas inside the symbol body. Valid values range from 0 to 7.
 func (x *QRCodeDescriptor) MaskPattern() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("maskPattern"))
 	return _r
 }
 
-// The error correction level of the QR code symbol. QR Codes support four levels of Reed-Solomon error correction. The possible error correction levels are enumerated in “CIDataMatrixCodeECCVersion“.
+// ErrorCorrectionLevel the error correction level of the QR code symbol. QR Codes support four levels of Reed-Solomon error correction. The possible error correction levels are enumerated in “CIDataMatrixCodeECCVersion“.
 func (x *QRCodeDescriptor) ErrorCorrectionLevel() QRCodeErrorCorrectionLevel {
 	_r := objc.Send[QRCodeErrorCorrectionLevel](objref.IDOf(x), objc.RegisterName("errorCorrectionLevel"))
 	return _r
@@ -101,3 +87,5 @@ type QRCodeDescriptorable interface {
 }
 
 var _ QRCodeDescriptorable = (*QRCodeDescriptor)(nil)
+
+var _ BarcodeDescriptorProvider = (*QRCodeDescriptor)(nil)

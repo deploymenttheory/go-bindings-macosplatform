@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Configuration for a display attached to a Mac graphics device.
-//
 // MacGraphicsDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZMacGraphicsDeviceConfiguration.
+//
+// It embeds [GraphicsDeviceConfiguration], promoting that type's methods.
+//
+// Configuration for a display attached to a Mac graphics device.
 type MacGraphicsDeviceConfiguration struct {
-	objref.Handle
+	GraphicsDeviceConfiguration
 }
 
 // MacGraphicsDeviceConfigurationFromID adopts an existing Objective-C object as a MacGraphicsDeviceConfiguration
@@ -25,7 +26,8 @@ func MacGraphicsDeviceConfigurationFromID(id objc.ID) *MacGraphicsDeviceConfigur
 	if id == 0 {
 		return nil
 	}
-	x := &MacGraphicsDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MacGraphicsDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func macGraphicsDeviceConfigurationAdopt(id objc.ID) *MacGraphicsDeviceConfigura
 	if id == 0 {
 		return nil
 	}
-	x := &MacGraphicsDeviceConfiguration{Handle: objref.Wrap(id)}
+	x := &MacGraphicsDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MacGraphicsDeviceConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MacGraphicsDeviceConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MacGraphicsDeviceConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMacGraphicsDeviceConfiguration creates a new MacGraphicsDeviceConfiguration.
@@ -64,21 +52,22 @@ func NewMacGraphicsDeviceConfiguration() *MacGraphicsDeviceConfiguration {
 	return macGraphicsDeviceConfigurationAdopt(_id)
 }
 
-// The displays associated with this graphics device.
-//
-// WithDisplays sets the collection and returns the receiver so calls can be chained.
+// WithDisplays the displays associated with this graphics device.
 func (x *MacGraphicsDeviceConfiguration) WithDisplays(items ...*MacGraphicsDisplayConfiguration) *MacGraphicsDeviceConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v *MacGraphicsDisplayConfiguration) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplays:"), _arr)
 	return x
 }
 
+// Displays wraps the corresponding Objective-C method.
+//
 // Displays returns the collection as a Go slice.
 func (x *MacGraphicsDeviceConfiguration) Displays() []*MacGraphicsDisplayConfiguration {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displays"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MacGraphicsDisplayConfiguration { return MacGraphicsDisplayConfigurationFromID(_id) })
 }
 
+// SetDisplays wraps the corresponding Objective-C method.
 func (x *MacGraphicsDeviceConfiguration) SetDisplays(displays []*MacGraphicsDisplayConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplays:"), purego.SliceToNSArray(displays, func(_v *MacGraphicsDisplayConfiguration) objc.ID { return objref.IDOf(_v) }))
 }
@@ -92,3 +81,5 @@ type MacGraphicsDeviceConfigurationable interface {
 }
 
 var _ MacGraphicsDeviceConfigurationable = (*MacGraphicsDeviceConfiguration)(nil)
+
+var _ GraphicsDeviceConfigurationProvider = (*MacGraphicsDeviceConfiguration)(nil)

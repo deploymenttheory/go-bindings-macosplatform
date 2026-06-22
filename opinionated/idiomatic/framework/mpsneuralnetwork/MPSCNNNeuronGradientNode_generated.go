@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // CNNNeuronGradientNode is an idiomatic wrapper over the Objective-C class MPSCNNNeuronGradientNode.
+//
+// It embeds [NNGradientFilterNode], promoting that type's methods.
 type CNNNeuronGradientNode struct {
-	objref.Handle
+	NNGradientFilterNode
 }
 
 // CNNNeuronGradientNodeFromID adopts an existing Objective-C object as a CNNNeuronGradientNode
@@ -23,7 +24,8 @@ func CNNNeuronGradientNodeFromID(id objc.ID) *CNNNeuronGradientNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNeuronGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNNeuronGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,44 +38,26 @@ func cNNNeuronGradientNodeAdopt(id objc.ID) *CNNNeuronGradientNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNeuronGradientNode{Handle: objref.Wrap(id)}
+	x := &CNNNeuronGradientNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNNeuronGradientNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNNeuronGradientNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNNeuronGradientNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// create a new neuron gradient node See also -[MPSCNNNeuronNode gradientFilterNodeWithSources:] for an easier way to do this
-//
-// NewCNNNeuronGradientNodeWithSourceGradientSourceImageGradientStateDescriptor creates a new CNNNeuronGradientNode.
+// NewCNNNeuronGradientNodeWithSourceGradientSourceImageGradientStateDescriptor create a new neuron gradient node See also -[MPSCNNNeuronNode gradientFilterNodeWithSources:] for an easier way to do this
 func NewCNNNeuronGradientNodeWithSourceGradientSourceImageGradientStateDescriptor(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode, descriptor *NNNeuronDescriptor) *CNNNeuronGradientNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:descriptor:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), objref.IDOf(descriptor))
 	return cNNNeuronGradientNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNNeuronGradientNode) WithLabel(label string) *CNNNeuronGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The neuron descriptor
+// Descriptor the neuron descriptor
 func (x *CNNNeuronGradientNode) Descriptor() *NNNeuronDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
 	return NNNeuronDescriptorFromID(_r)
@@ -87,3 +71,7 @@ type CNNNeuronGradientNodeable interface {
 }
 
 var _ CNNNeuronGradientNodeable = (*CNNNeuronGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*CNNNeuronGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNNeuronGradientNode)(nil)

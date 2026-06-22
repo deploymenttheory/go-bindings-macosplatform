@@ -3,4 +3,12 @@
 //go:build darwin
 
 // Package glkit provides a fluent Go API over the macOS GLKit framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - BaseEffect: [ReflectionMapEffect]
+//   - EffectProperty: [EffectPropertyFog], [EffectPropertyLight], [EffectPropertyMaterial], [EffectPropertyTexture], [EffectPropertyTransform]
 package glkit

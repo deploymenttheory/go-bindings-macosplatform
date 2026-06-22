@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents a request to set up an automatic reload payment, such as a store card top-up or a prepaid account.
-//
 // AutomaticReloadPaymentRequest is an idiomatic wrapper over the Objective-C class PKAutomaticReloadPaymentRequest.
+//
+// A class that represents a request to set up an automatic reload payment, such as a store card top-up or a prepaid account.
 type AutomaticReloadPaymentRequest struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AutomaticReloadPaymentRequestFromID(id objc.ID) *AutomaticReloadPaymentRequ
 	if id == 0 {
 		return nil
 	}
-	x := &AutomaticReloadPaymentRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AutomaticReloadPaymentRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func automaticReloadPaymentRequestAdopt(id objc.ID) *AutomaticReloadPaymentReque
 	if id == 0 {
 		return nil
 	}
-	x := &AutomaticReloadPaymentRequest{Handle: objref.Wrap(id)}
+	x := &AutomaticReloadPaymentRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,55 +60,50 @@ func (x *AutomaticReloadPaymentRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Create an automatic reload payment object with a description, automatic billing information, and a management URL.
-//
-// NewAutomaticReloadPaymentRequestWithPaymentDescriptionAutomaticReloadBillingManagementURL creates a new AutomaticReloadPaymentRequest.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AutomaticReloadPaymentRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAutomaticReloadPaymentRequestWithPaymentDescriptionAutomaticReloadBillingManagementURL create an automatic reload payment object with a description, automatic billing information, and a management URL.
 func NewAutomaticReloadPaymentRequestWithPaymentDescriptionAutomaticReloadBillingManagementURL(paymentDescription string, automaticReloadBilling *AutomaticReloadPaymentSummaryItem, managementURL string) *AutomaticReloadPaymentRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKAutomaticReloadPaymentRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentDescription:automaticReloadBilling:managementURL:"), purego.NSString(paymentDescription), objref.IDOf(automaticReloadBilling), rt.FileURL(managementURL))
 	return automaticReloadPaymentRequestAdopt(_id)
 }
 
-// A description that you provide of the automatic reload payment and that Apple Pay displays to the user in the payment sheet.
-//
-// WithPaymentDescription sets paymentDescription and returns the receiver so calls can be chained.
+// WithPaymentDescription a description that you provide of the automatic reload payment and that Apple Pay displays to the user in the payment sheet.
 func (x *AutomaticReloadPaymentRequest) WithPaymentDescription(paymentDescription string) *AutomaticReloadPaymentRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentDescription:"), purego.NSString(paymentDescription))
 	return x
 }
 
-// Summary items that contain the top-up amount and balance threshold amount for the automatic reload payment.
-//
-// WithAutomaticReloadBilling sets automaticReloadBilling and returns the receiver so calls can be chained.
+// WithAutomaticReloadBilling summary items that contain the top-up amount and balance threshold amount for the automatic reload payment.
 func (x *AutomaticReloadPaymentRequest) WithAutomaticReloadBilling(automaticReloadBilling *AutomaticReloadPaymentSummaryItem) *AutomaticReloadPaymentRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticReloadBilling:"), objref.IDOf(automaticReloadBilling))
 	return x
 }
 
-// A localized billing agreement that the payment sheet displays to the user before the user authorizes the payment.
-//
-// WithBillingAgreement sets billingAgreement and returns the receiver so calls can be chained.
+// WithBillingAgreement a localized billing agreement that the payment sheet displays to the user before the user authorizes the payment.
 func (x *AutomaticReloadPaymentRequest) WithBillingAgreement(billingAgreement string) *AutomaticReloadPaymentRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBillingAgreement:"), purego.NSString(billingAgreement))
 	return x
 }
 
-// A URL to a web page where the user can manage and delete the payment method for the automatic reload payment.
-//
-// WithManagementURL sets managementURL and returns the receiver so calls can be chained.
+// WithManagementURL a URL to a web page where the user can manage and delete the payment method for the automatic reload payment.
 func (x *AutomaticReloadPaymentRequest) WithManagementURL(managementURL string) *AutomaticReloadPaymentRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManagementURL:"), rt.FileURL(managementURL))
 	return x
 }
 
-// A URL you provide to receive life-cycle notifications from the Apple Pay servers about the Apple Pay merchant token for the automatic reload payment.
-//
-// WithTokenNotificationURL sets tokenNotificationURL and returns the receiver so calls can be chained.
+// WithTokenNotificationURL a URL you provide to receive life-cycle notifications from the Apple Pay servers about the Apple Pay merchant token for the automatic reload payment.
 func (x *AutomaticReloadPaymentRequest) WithTokenNotificationURL(tokenNotificationURL string) *AutomaticReloadPaymentRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTokenNotificationURL:"), rt.FileURL(tokenNotificationURL))
 	return x
 }
 
+// PaymentDescription wraps the corresponding Objective-C method.
 func (x *AutomaticReloadPaymentRequest) PaymentDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentDescription"))
 	if _r == 0 {
@@ -115,19 +112,23 @@ func (x *AutomaticReloadPaymentRequest) PaymentDescription() string {
 	return purego.GoString(_r)
 }
 
+// SetPaymentDescription wraps the corresponding Objective-C method.
 func (x *AutomaticReloadPaymentRequest) SetPaymentDescription(paymentDescription string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentDescription:"), purego.NSString(paymentDescription))
 }
 
+// AutomaticReloadBilling wraps the corresponding Objective-C method.
 func (x *AutomaticReloadPaymentRequest) AutomaticReloadBilling() *AutomaticReloadPaymentSummaryItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("automaticReloadBilling"))
 	return AutomaticReloadPaymentSummaryItemFromID(_r)
 }
 
+// SetAutomaticReloadBilling wraps the corresponding Objective-C method.
 func (x *AutomaticReloadPaymentRequest) SetAutomaticReloadBilling(automaticReloadBilling *AutomaticReloadPaymentSummaryItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticReloadBilling:"), objref.IDOf(automaticReloadBilling))
 }
 
+// BillingAgreement wraps the corresponding Objective-C method.
 func (x *AutomaticReloadPaymentRequest) BillingAgreement() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("billingAgreement"))
 	if _r == 0 {
@@ -136,24 +137,29 @@ func (x *AutomaticReloadPaymentRequest) BillingAgreement() string {
 	return purego.GoString(_r)
 }
 
+// SetBillingAgreement wraps the corresponding Objective-C method.
 func (x *AutomaticReloadPaymentRequest) SetBillingAgreement(billingAgreement string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBillingAgreement:"), purego.NSString(billingAgreement))
 }
 
+// ManagementURL wraps the corresponding Objective-C method.
 func (x *AutomaticReloadPaymentRequest) ManagementURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("managementURL"))
 	return obj.Wrap(_r)
 }
 
+// SetManagementURL wraps the corresponding Objective-C method.
 func (x *AutomaticReloadPaymentRequest) SetManagementURL(managementURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManagementURL:"), rt.FileURL(managementURL))
 }
 
+// TokenNotificationURL wraps the corresponding Objective-C method.
 func (x *AutomaticReloadPaymentRequest) TokenNotificationURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tokenNotificationURL"))
 	return obj.Wrap(_r)
 }
 
+// SetTokenNotificationURL wraps the corresponding Objective-C method.
 func (x *AutomaticReloadPaymentRequest) SetTokenNotificationURL(tokenNotificationURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTokenNotificationURL:"), rt.FileURL(tokenNotificationURL))
 }

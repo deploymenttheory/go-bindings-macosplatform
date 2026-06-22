@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that responds to remote command events.
-//
 // RemoteCommand is an idiomatic wrapper over the Objective-C class MPRemoteCommand.
+//
+// RemoteCommand is an abstract base — you do not construct it directly. Construct one of [ChangePlaybackPositionCommand], [ChangePlaybackRateCommand], [ChangeRepeatModeCommand], [ChangeShuffleModeCommand], [FeedbackCommand], [RatingCommand], [SkipIntervalCommand] and pass it where a RemoteCommand is accepted.
+//
+// An object that responds to remote command events.
 type RemoteCommand struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func RemoteCommandFromID(id objc.ID) *RemoteCommand {
 	if id == 0 {
 		return nil
 	}
-	x := &RemoteCommand{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RemoteCommand{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func remoteCommandAdopt(id objc.ID) *RemoteCommand {
 	if id == 0 {
 		return nil
 	}
-	x := &RemoteCommand{Handle: objref.Wrap(id)}
+	x := &RemoteCommand{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +62,36 @@ func (x *RemoteCommand) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewRemoteCommand creates a new RemoteCommand.
-func NewRemoteCommand() *RemoteCommand {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPRemoteCommand")), objc.RegisterName("new"))
-	return remoteCommandAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RemoteCommand) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// A Boolean value that indicates whether a user can interact with the displayed element.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether a user can interact with the displayed element.
 func (x *RemoteCommand) WithEnabled(enabled bool) *RemoteCommand {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// Removes a target from the remote command object.
+// RemoveTarget removes a target from the remote command object.
 func (x *RemoteCommand) RemoveTarget(target obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTarget:"), objref.IDOf(target))
 }
 
-// Adds a block to be called when an event is received.
+// AddTargetWithHandler adds a block to be called when an event is received.
 func (x *RemoteCommand) AddTargetWithHandler(handler func(obj.Object) int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTargetWithHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return handler(obj.Wrap(_b0)) }))
 	return obj.Wrap(_r)
 }
 
-// Whether a button (for example) should be enabled and tappable for this particular command.
+// IsEnabled whether a button (for example) should be enabled and tappable for this particular command.
 func (x *RemoteCommand) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r
 }
 
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *RemoteCommand) SetEnabled(enabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
@@ -104,3 +107,10 @@ type RemoteCommandable interface {
 }
 
 var _ RemoteCommandable = (*RemoteCommand)(nil)
+
+// isRemoteCommand marks RemoteCommand — and, by embedding promotion, its
+// subclasses — as a member of the RemoteCommand hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *RemoteCommand) isRemoteCommand() {}
+
+var _ RemoteCommandProvider = (*RemoteCommand)(nil)

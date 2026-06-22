@@ -3,4 +3,19 @@
 //go:build darwin
 
 // Package gamecontroller provides a fluent Go API over the macOS GameController framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - ControllerButtonInput: [DualSenseAdaptiveTrigger]
+//   - ControllerDirectionPad: [DeviceCursor]
+//   - ControllerElement: [ControllerAxisInput], [ControllerButtonInput], [ControllerDirectionPad], [ControllerTouchpad]
+//   - ControllerInputState: [ControllerLiveInput]
+//   - ExtendedGamepad: [DualSenseGamepad], [DualShockGamepad], [ExtendedGamepadSnapshot], [XboxGamepad]
+//   - Gamepad: [GamepadSnapshot]
+//   - MicroGamepad: [DirectionalGamepad], [MicroGamepadSnapshot]
+//   - PhysicalInputProfile: [ExtendedGamepad], [Gamepad], [KeyboardInput], [MicroGamepad], [MouseInput]
+//   - RacingWheelInputState: [RacingWheelInput]
 package gamecontroller

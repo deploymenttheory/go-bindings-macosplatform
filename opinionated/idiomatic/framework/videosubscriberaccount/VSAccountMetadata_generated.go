@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of information for a subscriber’s account.
-//
 // VSAccountMetadata is an idiomatic wrapper over the Objective-C class VSAccountMetadata.
+//
+// A collection of information for a subscriber’s account.
 type VSAccountMetadata struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VSAccountMetadataFromID(id objc.ID) *VSAccountMetadata {
 	if id == 0 {
 		return nil
 	}
-	x := &VSAccountMetadata{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VSAccountMetadata{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func vSAccountMetadataAdopt(id objc.ID) *VSAccountMetadata {
 	if id == 0 {
 		return nil
 	}
-	x := &VSAccountMetadata{Handle: objref.Wrap(id)}
+	x := &VSAccountMetadata{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *VSAccountMetadata) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VSAccountMetadata) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVSAccountMetadata creates a new VSAccountMetadata.
 func NewVSAccountMetadata() *VSAccountMetadata {
 	_id := objc.Send[objc.ID](objc.ID(_class("VSAccountMetadata")), objc.RegisterName("new"))
 	return vSAccountMetadataAdopt(_id)
 }
 
-// A value that uniquely identifies the account provider. You may use this value to brand your app.
+// AccountProviderIdentifier a value that uniquely identifies the account provider. You may use this value to brand your app.
 func (x *VSAccountMetadata) AccountProviderIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountProviderIdentifier"))
 	if _r == 0 {
@@ -73,19 +81,19 @@ func (x *VSAccountMetadata) AccountProviderIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Specifies when the user might need to re-authenticate with the account provider. The value might be nil if the user is not currently authenticated.
+// AuthenticationExpirationDate specifies when the user might need to re-authenticate with the account provider. The value might be nil if the user is not currently authenticated.
 func (x *VSAccountMetadata) AuthenticationExpirationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authenticationExpirationDate"))
 	return obj.Wrap(_r)
 }
 
-// An opaque blob of data that can be used to cryptographically verify that the SAML AttributeQuery response actually came from the account provider.
+// VerificationData an opaque blob of data that can be used to cryptographically verify that the SAML AttributeQuery response actually came from the account provider.
 func (x *VSAccountMetadata) VerificationData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("verificationData"))
 	return obj.Wrap(_r)
 }
 
-// The SAML AttributeQuery response received from the account provider. The value might be nil if your account metadata request did not specify any SAML attributes or if the user does not have a valid authentication.
+// SAMLAttributeQueryResponse the SAML AttributeQuery response received from the account provider. The value might be nil if your account metadata request did not specify any SAML attributes or if the user does not have a valid authentication.
 func (x *VSAccountMetadata) SAMLAttributeQueryResponse() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("SAMLAttributeQueryResponse"))
 	if _r == 0 {
@@ -94,7 +102,7 @@ func (x *VSAccountMetadata) SAMLAttributeQueryResponse() string {
 	return purego.GoString(_r)
 }
 
-// The response received from the account provider. The value might be nil if your account metadata request did not specify any attributes, or if the user does not have a valid authentication.
+// AccountProviderResponse the response received from the account provider. The value might be nil if your account metadata request did not specify any attributes, or if the user does not have a valid authentication.
 func (x *VSAccountMetadata) AccountProviderResponse() *VSAccountProviderResponse {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountProviderResponse"))
 	return VSAccountProviderResponseFromID(_r)

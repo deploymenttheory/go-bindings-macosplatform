@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of the state of a credential identity store.
-//
 // CredentialIdentityStoreState is an idiomatic wrapper over the Objective-C class ASCredentialIdentityStoreState.
+//
+// A representation of the state of a credential identity store.
 type CredentialIdentityStoreState struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CredentialIdentityStoreStateFromID(id objc.ID) *CredentialIdentityStoreStat
 	if id == 0 {
 		return nil
 	}
-	x := &CredentialIdentityStoreState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CredentialIdentityStoreState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func credentialIdentityStoreStateAdopt(id objc.ID) *CredentialIdentityStoreState
 	if id == 0 {
 		return nil
 	}
-	x := &CredentialIdentityStoreState{Handle: objref.Wrap(id)}
+	x := &CredentialIdentityStoreState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *CredentialIdentityStoreState) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CredentialIdentityStoreState) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCredentialIdentityStoreState creates a new CredentialIdentityStoreState.
 func NewCredentialIdentityStoreState() *CredentialIdentityStoreState {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASCredentialIdentityStoreState")), objc.RegisterName("new"))
 	return credentialIdentityStoreStateAdopt(_id)
 }
 
-// Get the enabled state of the credential identity store.
+// IsEnabled get the enabled state of the credential identity store.
 func (x *CredentialIdentityStoreState) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r
 }
 
-// Get whether the credential identity store supports incremental updates. You should examine the value returned by this property to find out if the credential identity store can accept incremental updates. If incremental updates are supported, you can update the credential identity store with only the new changes since the last time it was updated. Otherwise, you should update the credential identity store by adding all credential identities.
+// SupportsIncrementalUpdates get whether the credential identity store supports incremental updates. You should examine the value returned by this property to find out if the credential identity store can accept incremental updates. If incremental updates are supported, you can update the credential identity store with only the new changes since the last time it was updated. Otherwise, you should update the credential identity store by adding all credential identities.
 func (x *CredentialIdentityStoreState) SupportsIncrementalUpdates() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsIncrementalUpdates"))
 	return _r

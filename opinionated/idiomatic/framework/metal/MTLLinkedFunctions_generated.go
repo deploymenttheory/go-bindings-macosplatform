@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of related functions that Metal links to when necessary to create the function instance.
-//
 // LinkedFunctions is an idiomatic wrapper over the Objective-C class MTLLinkedFunctions.
+//
+// A set of related functions that Metal links to when necessary to create the function instance.
 type LinkedFunctions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LinkedFunctionsFromID(id objc.ID) *LinkedFunctions {
 	if id == 0 {
 		return nil
 	}
-	x := &LinkedFunctions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LinkedFunctions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func linkedFunctionsAdopt(id objc.ID) *LinkedFunctions {
 	if id == 0 {
 		return nil
 	}
-	x := &LinkedFunctions{Handle: objref.Wrap(id)}
+	x := &LinkedFunctions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,56 +60,64 @@ func (x *LinkedFunctions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LinkedFunctions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLinkedFunctions creates a new LinkedFunctions.
 func NewLinkedFunctions() *LinkedFunctions {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLLinkedFunctions")), objc.RegisterName("new"))
 	return linkedFunctionsAdopt(_id)
 }
 
-// An optional list of groups specifying which functions your shader can call at each call site.
-//
-// WithGroups sets groups and returns the receiver so calls can be chained.
+// WithGroups an optional list of groups specifying which functions your shader can call at each call site.
 func (x *LinkedFunctions) WithGroups(groups obj.Object) *LinkedFunctions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroups:"), objref.IDOf(groups))
 	return x
 }
 
-// The array of functions to be AIR linked.
+// Functions the array of functions to be AIR linked.
 func (x *LinkedFunctions) Functions() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("functions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetFunctions wraps the corresponding Objective-C method.
 func (x *LinkedFunctions) SetFunctions(functions []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctions:"), purego.SliceToNSArray(functions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// The array of functions compiled to binary to be linked.
+// BinaryFunctions the array of functions compiled to binary to be linked.
 func (x *LinkedFunctions) BinaryFunctions() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("binaryFunctions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetBinaryFunctions wraps the corresponding Objective-C method.
 func (x *LinkedFunctions) SetBinaryFunctions(binaryFunctions []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBinaryFunctions:"), purego.SliceToNSArray(binaryFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Groups of functions, grouped to match callsites in the shader code.
+// Groups groups of functions, grouped to match callsites in the shader code.
 func (x *LinkedFunctions) Groups() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groups"))
 	return obj.Wrap(_r)
 }
 
+// SetGroups wraps the corresponding Objective-C method.
 func (x *LinkedFunctions) SetGroups(groups obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroups:"), objref.IDOf(groups))
 }
 
-// The array of functions to be AIR linked. These functions are not exported by the pipeline state as MTLFunctionHandle objects. Function pointer support is not required to link private functions.
+// PrivateFunctions the array of functions to be AIR linked. These functions are not exported by the pipeline state as MTLFunctionHandle objects. Function pointer support is not required to link private functions.
 func (x *LinkedFunctions) PrivateFunctions() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("privateFunctions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetPrivateFunctions wraps the corresponding Objective-C method.
 func (x *LinkedFunctions) SetPrivateFunctions(privateFunctions []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrivateFunctions:"), purego.SliceToNSArray(privateFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }

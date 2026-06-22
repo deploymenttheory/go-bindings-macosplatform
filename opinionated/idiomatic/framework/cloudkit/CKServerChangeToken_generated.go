@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An opaque token that represents a specific point in a database’s history.
-//
 // ServerChangeToken is an idiomatic wrapper over the Objective-C class CKServerChangeToken.
+//
+// An opaque token that represents a specific point in a database’s history.
 type ServerChangeToken struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ServerChangeTokenFromID(id objc.ID) *ServerChangeToken {
 	if id == 0 {
 		return nil
 	}
-	x := &ServerChangeToken{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ServerChangeToken{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func serverChangeTokenAdopt(id objc.ID) *ServerChangeToken {
 	if id == 0 {
 		return nil
 	}
-	x := &ServerChangeToken{Handle: objref.Wrap(id)}
+	x := &ServerChangeToken{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *ServerChangeToken) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *ServerChangeToken) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ServerChangeToken) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewServerChangeToken creates a new ServerChangeToken.

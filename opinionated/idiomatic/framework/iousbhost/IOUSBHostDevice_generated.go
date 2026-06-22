@@ -9,16 +9,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// The class that claims and configures devices, retrieves descriptors, and sends device requests.
-//
 // HostDevice is an idiomatic wrapper over the Objective-C class IOUSBHostDevice.
+//
+// It embeds [HostObject], promoting that type's methods.
+//
+// The class that claims and configures devices, retrieves descriptors, and sends device requests.
 type HostDevice struct {
-	objref.Handle
+	HostObject
 }
 
 // HostDeviceFromID adopts an existing Objective-C object as a HostDevice
@@ -27,7 +28,8 @@ func HostDeviceFromID(id objc.ID) *HostDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &HostDevice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HostDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,24 +42,10 @@ func hostDeviceAdopt(id objc.ID) *HostDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &HostDevice{Handle: objref.Wrap(id)}
+	x := &HostDevice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *HostDevice) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HostDevice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HostDevice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewHostDevice creates a new HostDevice.
@@ -66,7 +54,7 @@ func NewHostDevice() *HostDevice {
 	return hostDeviceAdopt(_id)
 }
 
-// Selects a new configuration for the device.
+// ConfigureWithValueMatchInterfaces selects a new configuration for the device.
 func (x *HostDevice) ConfigureWithValueMatchInterfaces(value int, matchInterfaces bool) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("configureWithValue:matchInterfaces:error:"), value, matchInterfaces, unsafe.Pointer(&_nsErr))
@@ -76,7 +64,7 @@ func (x *HostDevice) ConfigureWithValueMatchInterfaces(value int, matchInterface
 	return nil
 }
 
-// Selects a new configuration for the device and registers the interfaces for matching.
+// ConfigureWithValue selects a new configuration for the device and registers the interfaces for matching.
 func (x *HostDevice) ConfigureWithValue(value int) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("configureWithValue:error:"), value, unsafe.Pointer(&_nsErr))
@@ -86,7 +74,7 @@ func (x *HostDevice) ConfigureWithValue(value int) error {
 	return nil
 }
 
-// Terminates the device and attempts to re-enumerate it.
+// Reset terminates the device and attempts to re-enumerate it.
 //
 // Reset returns an error if the operation did not succeed.
 func (x *HostDevice) Reset() error {
@@ -107,3 +95,5 @@ type HostDeviceable interface {
 }
 
 var _ HostDeviceable = (*HostDevice)(nil)
+
+var _ HostObjectProvider = (*HostDevice)(nil)

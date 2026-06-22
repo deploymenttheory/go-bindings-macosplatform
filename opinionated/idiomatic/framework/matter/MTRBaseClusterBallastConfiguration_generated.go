@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBaseClusterBallastConfiguration is an idiomatic wrapper over the Objective-C class MTRBaseClusterBallastConfiguration.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
 type MTRBaseClusterBallastConfiguration struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterBallastConfigurationFromID adopts an existing Objective-C object as a MTRBaseClusterBallastConfiguration
@@ -25,7 +26,8 @@ func MTRBaseClusterBallastConfigurationFromID(id objc.ID) *MTRBaseClusterBallast
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterBallastConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterBallastConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func mTRBaseClusterBallastConfigurationAdopt(id objc.ID) *MTRBaseClusterBallastC
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterBallastConfiguration{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterBallastConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterBallastConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterBallastConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterBallastConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterBallastConfigurationWithDeviceEndpointIDQueue creates a new MTRBaseClusterBallastConfiguration.
+// NewMTRBaseClusterBallastConfigurationWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterBallastConfigurationWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterBallastConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterBallastConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -74,8 +60,10 @@ func NewMTRBaseClusterBallastConfigurationWithDeviceEndpointQueue(device *MTRBas
 	return mTRBaseClusterBallastConfigurationAdopt(_id)
 }
 
+// ReadAttributePhysicalMinLevelWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePhysicalMinLevelWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributePhysicalMinLevelWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributePhysicalMinLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -97,8 +85,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributePhysicalMinLevelWithCo
 	}
 }
 
+// SubscribeAttributePhysicalMinLevelWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePhysicalMinLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributePhysicalMinLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributePhysicalMinLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -120,8 +110,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributePhysicalMinLevelW
 	}
 }
 
+// ReadAttributePhysicalMaxLevelWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePhysicalMaxLevelWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributePhysicalMaxLevelWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributePhysicalMaxLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -143,8 +135,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributePhysicalMaxLevelWithCo
 	}
 }
 
+// SubscribeAttributePhysicalMaxLevelWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePhysicalMaxLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributePhysicalMaxLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributePhysicalMaxLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -166,8 +160,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributePhysicalMaxLevelW
 	}
 }
 
+// ReadAttributeBallastStatusWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeBallastStatusWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeBallastStatusWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeBallastStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -189,8 +185,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeBallastStatusWithCompl
 	}
 }
 
+// SubscribeAttributeBallastStatusWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeBallastStatusWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeBallastStatusWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeBallastStatusWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -212,8 +210,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeBallastStatusWith
 	}
 }
 
+// ReadAttributeMinLevelWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMinLevelWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeMinLevelWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeMinLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -235,8 +235,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeMinLevelWithCompletion
 	}
 }
 
+// SubscribeAttributeMinLevelWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMinLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeMinLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeMinLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -258,8 +260,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeMinLevelWithParam
 	}
 }
 
+// ReadAttributeMaxLevelWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMaxLevelWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeMaxLevelWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeMaxLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -281,8 +285,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeMaxLevelWithCompletion
 	}
 }
 
+// SubscribeAttributeMaxLevelWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMaxLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeMaxLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeMaxLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -304,8 +310,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeMaxLevelWithParam
 	}
 }
 
+// ReadAttributeIntrinsicBallastFactorWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeIntrinsicBallastFactorWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeIntrinsicBallastFactorWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeIntrinsicBallastFactorWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -327,8 +335,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeIntrinsicBallastFactor
 	}
 }
 
+// SubscribeAttributeIntrinsicBallastFactorWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeIntrinsicBallastFactorWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeIntrinsicBallastFactorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeIntrinsicBallastFactorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -350,8 +360,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeIntrinsicBallastF
 	}
 }
 
+// ReadAttributeBallastFactorAdjustmentWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeBallastFactorAdjustmentWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeBallastFactorAdjustmentWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeBallastFactorAdjustmentWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -373,8 +385,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeBallastFactorAdjustmen
 	}
 }
 
+// SubscribeAttributeBallastFactorAdjustmentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeBallastFactorAdjustmentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeBallastFactorAdjustmentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeBallastFactorAdjustmentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -396,8 +410,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeBallastFactorAdju
 	}
 }
 
+// ReadAttributeLampQuantityWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeLampQuantityWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampQuantityWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampQuantityWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -419,8 +435,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampQuantityWithComple
 	}
 }
 
+// SubscribeAttributeLampQuantityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLampQuantityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampQuantityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampQuantityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -442,8 +460,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampQuantityWithP
 	}
 }
 
+// ReadAttributeLampTypeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeLampTypeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampTypeWithCompletion(ctx context.Context) (string, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampTypeWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -465,8 +485,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampTypeWithCompletion
 	}
 }
 
+// SubscribeAttributeLampTypeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLampTypeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -488,8 +510,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampTypeWithParam
 	}
 }
 
+// ReadAttributeLampManufacturerWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeLampManufacturerWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampManufacturerWithCompletion(ctx context.Context) (string, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampManufacturerWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -511,8 +535,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampManufacturerWithCo
 	}
 }
 
+// SubscribeAttributeLampManufacturerWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLampManufacturerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampManufacturerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampManufacturerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -534,8 +560,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampManufacturerW
 	}
 }
 
+// ReadAttributeLampRatedHoursWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeLampRatedHoursWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampRatedHoursWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampRatedHoursWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -557,8 +585,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampRatedHoursWithComp
 	}
 }
 
+// SubscribeAttributeLampRatedHoursWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLampRatedHoursWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampRatedHoursWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampRatedHoursWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -580,8 +610,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampRatedHoursWit
 	}
 }
 
+// ReadAttributeLampBurnHoursWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeLampBurnHoursWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampBurnHoursWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampBurnHoursWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -603,8 +635,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampBurnHoursWithCompl
 	}
 }
 
+// SubscribeAttributeLampBurnHoursWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLampBurnHoursWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampBurnHoursWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampBurnHoursWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -626,8 +660,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampBurnHoursWith
 	}
 }
 
+// ReadAttributeLampAlarmModeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeLampAlarmModeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampAlarmModeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampAlarmModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -649,8 +685,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampAlarmModeWithCompl
 	}
 }
 
+// SubscribeAttributeLampAlarmModeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLampAlarmModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampAlarmModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampAlarmModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -672,8 +710,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampAlarmModeWith
 	}
 }
 
+// ReadAttributeLampBurnHoursTripPointWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeLampBurnHoursTripPointWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampBurnHoursTripPointWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampBurnHoursTripPointWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -695,8 +735,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampBurnHoursTripPoint
 	}
 }
 
+// SubscribeAttributeLampBurnHoursTripPointWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLampBurnHoursTripPointWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampBurnHoursTripPointWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampBurnHoursTripPointWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -718,8 +760,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampBurnHoursTrip
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -741,8 +785,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeGeneratedCommandListWi
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -764,8 +810,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeGeneratedCommandL
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -787,8 +835,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeAcceptedCommandListWit
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -810,8 +860,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeAcceptedCommandLi
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -833,8 +885,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeAttributeListWithCompl
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -856,8 +910,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeAttributeListWith
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -879,8 +935,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeFeatureMapWithCompleti
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -902,8 +960,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeFeatureMapWithPar
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -925,8 +985,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeClusterRevisionWithCom
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -948,8 +1010,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeClusterRevisionWi
 	}
 }
 
+// ReadAttributePhysicalMinLevel wraps the corresponding Objective-C method.
+//
 // ReadAttributePhysicalMinLevel blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributePhysicalMinLevel(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributePhysicalMinLevel(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -971,8 +1035,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributePhysicalMinLevel(ctx c
 	}
 }
 
+// SubscribeAttributePhysicalMinLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePhysicalMinLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributePhysicalMinLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributePhysicalMinLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -994,8 +1060,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributePhysicalMinLevelW
 	}
 }
 
+// ReadAttributePhysicalMaxLevel wraps the corresponding Objective-C method.
+//
 // ReadAttributePhysicalMaxLevel blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributePhysicalMaxLevel(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributePhysicalMaxLevel(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1017,8 +1085,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributePhysicalMaxLevel(ctx c
 	}
 }
 
+// SubscribeAttributePhysicalMaxLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePhysicalMaxLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributePhysicalMaxLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributePhysicalMaxLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1040,8 +1110,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributePhysicalMaxLevelW
 	}
 }
 
+// ReadAttributeBallastStatus wraps the corresponding Objective-C method.
+//
 // ReadAttributeBallastStatus blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeBallastStatus(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeBallastStatus(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1063,8 +1135,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeBallastStatus(ctx cont
 	}
 }
 
+// SubscribeAttributeBallastStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeBallastStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeBallastStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeBallastStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1086,8 +1160,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeBallastStatusWith
 	}
 }
 
+// ReadAttributeMinLevel wraps the corresponding Objective-C method.
+//
 // ReadAttributeMinLevel blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeMinLevel(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeMinLevel(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1109,8 +1185,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeMinLevel(ctx context.C
 	}
 }
 
+// SubscribeAttributeMinLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMinLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeMinLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeMinLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1132,8 +1210,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeMinLevelWithMinIn
 	}
 }
 
+// ReadAttributeMaxLevel wraps the corresponding Objective-C method.
+//
 // ReadAttributeMaxLevel blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeMaxLevel(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeMaxLevel(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1155,8 +1235,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeMaxLevel(ctx context.C
 	}
 }
 
+// SubscribeAttributeMaxLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMaxLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeMaxLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeMaxLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1178,8 +1260,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeMaxLevelWithMinIn
 	}
 }
 
+// ReadAttributeIntrinsicBalanceFactor wraps the corresponding Objective-C method.
+//
 // ReadAttributeIntrinsicBalanceFactor blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeIntrinsicBalanceFactor(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeIntrinsicBalanceFactor(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1201,8 +1285,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeIntrinsicBalanceFactor
 	}
 }
 
+// SubscribeAttributeIntrinsicBalanceFactorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeIntrinsicBalanceFactorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeIntrinsicBalanceFactorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeIntrinsicBalanceFactorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1224,8 +1310,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeIntrinsicBalanceF
 	}
 }
 
+// ReadAttributeBallastFactorAdjustment wraps the corresponding Objective-C method.
+//
 // ReadAttributeBallastFactorAdjustment blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeBallastFactorAdjustment(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeBallastFactorAdjustment(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1247,8 +1335,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeBallastFactorAdjustmen
 	}
 }
 
+// SubscribeAttributeBallastFactorAdjustmentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeBallastFactorAdjustmentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeBallastFactorAdjustmentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeBallastFactorAdjustmentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1270,8 +1360,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeBallastFactorAdju
 	}
 }
 
+// ReadAttributeLampQuantity wraps the corresponding Objective-C method.
+//
 // ReadAttributeLampQuantity blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampQuantity(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampQuantity(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1293,8 +1385,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampQuantity(ctx conte
 	}
 }
 
+// SubscribeAttributeLampQuantityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLampQuantityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampQuantityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampQuantityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1316,8 +1410,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampQuantityWithM
 	}
 }
 
+// ReadAttributeLampType wraps the corresponding Objective-C method.
+//
 // ReadAttributeLampType blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampType(ctx context.Context) (string, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampType(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -1339,8 +1435,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampType(ctx context.C
 	}
 }
 
+// SubscribeAttributeLampTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLampTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (string, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -1362,8 +1460,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampTypeWithMinIn
 	}
 }
 
+// ReadAttributeLampManufacturer wraps the corresponding Objective-C method.
+//
 // ReadAttributeLampManufacturer blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampManufacturer(ctx context.Context) (string, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampManufacturer(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -1385,8 +1485,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampManufacturer(ctx c
 	}
 }
 
+// SubscribeAttributeLampManufacturerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLampManufacturerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampManufacturerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (string, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampManufacturerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -1408,8 +1510,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampManufacturerW
 	}
 }
 
+// ReadAttributeLampRatedHours wraps the corresponding Objective-C method.
+//
 // ReadAttributeLampRatedHours blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampRatedHours(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampRatedHours(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1431,8 +1535,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampRatedHours(ctx con
 	}
 }
 
+// SubscribeAttributeLampRatedHoursWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLampRatedHoursWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampRatedHoursWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampRatedHoursWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1454,8 +1560,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampRatedHoursWit
 	}
 }
 
+// ReadAttributeLampBurnHours wraps the corresponding Objective-C method.
+//
 // ReadAttributeLampBurnHours blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampBurnHours(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampBurnHours(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1477,8 +1585,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampBurnHours(ctx cont
 	}
 }
 
+// SubscribeAttributeLampBurnHoursWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLampBurnHoursWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampBurnHoursWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampBurnHoursWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1500,8 +1610,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampBurnHoursWith
 	}
 }
 
+// ReadAttributeLampAlarmMode wraps the corresponding Objective-C method.
+//
 // ReadAttributeLampAlarmMode blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampAlarmMode(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampAlarmMode(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1523,8 +1635,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampAlarmMode(ctx cont
 	}
 }
 
+// SubscribeAttributeLampAlarmModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLampAlarmModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampAlarmModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampAlarmModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1546,8 +1660,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampAlarmModeWith
 	}
 }
 
+// ReadAttributeLampBurnHoursTripPoint wraps the corresponding Objective-C method.
+//
 // ReadAttributeLampBurnHoursTripPoint blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampBurnHoursTripPoint(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampBurnHoursTripPoint(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1569,8 +1685,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeLampBurnHoursTripPoint
 	}
 }
 
+// SubscribeAttributeLampBurnHoursTripPointWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLampBurnHoursTripPointWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampBurnHoursTripPointWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampBurnHoursTripPointWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1592,8 +1710,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampBurnHoursTrip
 	}
 }
 
+// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1615,8 +1735,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeGeneratedCommandList(c
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1638,8 +1760,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeGeneratedCommandL
 	}
 }
 
+// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1661,8 +1785,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeAcceptedCommandList(ct
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1684,8 +1810,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeAcceptedCommandLi
 	}
 }
 
+// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeAttributeList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1707,8 +1835,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeAttributeList(ctx cont
 	}
 }
 
+// SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1730,8 +1860,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeAttributeListWith
 	}
 }
 
+// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1753,8 +1885,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeFeatureMap(ctx context
 	}
 }
 
+// SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1776,8 +1910,10 @@ func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeFeatureMapWithMin
 	}
 }
 
+// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1799,8 +1935,10 @@ func (x *MTRBaseClusterBallastConfiguration) ReadAttributeClusterRevision(ctx co
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterBallastConfiguration) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1904,3 +2042,7 @@ type MTRBaseClusterBallastConfigurationable interface {
 }
 
 var _ MTRBaseClusterBallastConfigurationable = (*MTRBaseClusterBallastConfiguration)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterBallastConfiguration)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterBallastConfiguration)(nil)

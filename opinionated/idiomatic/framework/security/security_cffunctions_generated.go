@@ -1054,22 +1054,6 @@ func SecCodeCheckValidity(code obj.Object, flags SecCSFlags, requirement obj.Obj
 	return nil
 }
 
-var _fnSecCodeCheckValidityWithErrors func(objc.ID, SecCSFlags, objc.ID, unsafe.Pointer) int32
-
-// SecCodeCheckValidityWithErrors reports an error if the Security framework function SecCodeCheckValidityWithErrors fails.
-func SecCodeCheckValidityWithErrors(code obj.Object, flags SecCSFlags, requirement obj.Object) (obj.Object, error) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnSecCodeCheckValidityWithErrors == nil {
-		ebipurego.RegisterLibFunc(&_fnSecCodeCheckValidityWithErrors, _lib, "SecCodeCheckValidityWithErrors")
-	}
-	var _out0 uintptr
-	_rc := _fnSecCodeCheckValidityWithErrors(objref.IDOf(code), flags, objref.IDOf(requirement), unsafe.Pointer(&_out0))
-	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
-		return nil, _err
-	}
-	return obj.Wrap(objc.ID(_out0)), nil
-}
-
 var _fnSecCodeCopyPath func(objc.ID, SecCSFlags, unsafe.Pointer) int32
 
 // SecCodeCopyPath reports an error if the Security framework function SecCodeCopyPath fails.
@@ -1603,22 +1587,6 @@ func SecStaticCodeCheckValidity(staticCode obj.Object, flags SecCSFlags, require
 		return _err
 	}
 	return nil
-}
-
-var _fnSecStaticCodeCheckValidityWithErrors func(objc.ID, SecCSFlags, objc.ID, unsafe.Pointer) int32
-
-// SecStaticCodeCheckValidityWithErrors reports an error if the Security framework function SecStaticCodeCheckValidityWithErrors fails.
-func SecStaticCodeCheckValidityWithErrors(staticCode obj.Object, flags SecCSFlags, requirement obj.Object) (obj.Object, error) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnSecStaticCodeCheckValidityWithErrors == nil {
-		ebipurego.RegisterLibFunc(&_fnSecStaticCodeCheckValidityWithErrors, _lib, "SecStaticCodeCheckValidityWithErrors")
-	}
-	var _out0 uintptr
-	_rc := _fnSecStaticCodeCheckValidityWithErrors(objref.IDOf(staticCode), flags, objref.IDOf(requirement), unsafe.Pointer(&_out0))
-	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
-		return nil, _err
-	}
-	return obj.Wrap(objc.ID(_out0)), nil
 }
 
 var _fnSecTrustCopyAnchorCertificates func(unsafe.Pointer) int32

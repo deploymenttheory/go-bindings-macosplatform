@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A capture output that records audio and saves the recorded audio to a file.
-//
 // CaptureAudioFileOutput is an idiomatic wrapper over the Objective-C class AVCaptureAudioFileOutput.
+//
+// It embeds [CaptureFileOutput], promoting that type's methods.
+//
+// A capture output that records audio and saves the recorded audio to a file.
 type CaptureAudioFileOutput struct {
-	objref.Handle
+	CaptureFileOutput
 }
 
 // CaptureAudioFileOutputFromID adopts an existing Objective-C object as a CaptureAudioFileOutput
@@ -25,7 +26,8 @@ func CaptureAudioFileOutputFromID(id objc.ID) *CaptureAudioFileOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureAudioFileOutput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptureAudioFileOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func captureAudioFileOutputAdopt(id objc.ID) *CaptureAudioFileOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureAudioFileOutput{Handle: objref.Wrap(id)}
+	x := &CaptureAudioFileOutput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CaptureAudioFileOutput) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptureAudioFileOutput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptureAudioFileOutput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCaptureAudioFileOutput creates a new CaptureAudioFileOutput.
@@ -64,48 +52,38 @@ func NewCaptureAudioFileOutput() *CaptureAudioFileOutput {
 	return captureAudioFileOutputAdopt(_id)
 }
 
-// A collection of metadata to be written to the receiver’s output files.
-//
-// WithMetadata sets the collection and returns the receiver so calls can be chained.
+// WithMetadata a collection of metadata to be written to the receiver’s output files.
 func (x *CaptureAudioFileOutput) WithMetadata(items ...MetadataItemProvider) *CaptureAudioFileOutput {
 	_arr := purego.SliceToNSArray(items, func(_v MetadataItemProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), _arr)
 	return x
 }
 
-// The settings used to decode or re-encode audio before it is output by the receiver.
-//
-// WithAudioSettings sets audioSettings and returns the receiver so calls can be chained.
+// WithAudioSettings the settings used to decode or re-encode audio before it is output by the receiver.
 func (x *CaptureAudioFileOutput) WithAudioSettings(audioSettings obj.Object) *CaptureAudioFileOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioSettings:"), objref.IDOf(audioSettings))
 	return x
 }
 
-// The maximum size, in bytes, of the data that should be recorded by the receiver.
-//
-// WithMaxRecordedFileSize sets maxRecordedFileSize and returns the receiver so calls can be chained.
+// WithMaxRecordedFileSize the maximum size, in bytes, of the data that should be recorded by the receiver.
 func (x *CaptureAudioFileOutput) WithMaxRecordedFileSize(maxRecordedFileSize int64) *CaptureAudioFileOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxRecordedFileSize:"), maxRecordedFileSize)
 	return x
 }
 
-// The minimum amount of free space, in bytes, required for recording to continue on a given volume.
-//
-// WithMinFreeDiskSpaceLimit sets minFreeDiskSpaceLimit and returns the receiver so calls can be chained.
+// WithMinFreeDiskSpaceLimit the minimum amount of free space, in bytes, required for recording to continue on a given volume.
 func (x *CaptureAudioFileOutput) WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) *CaptureAudioFileOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinFreeDiskSpaceLimit:"), minFreeDiskSpaceLimit)
 	return x
 }
 
-// A Boolean value that indicates whether to defer starting this capture output.
-//
-// WithDeferredStartEnabled sets deferredStartEnabled and returns the receiver so calls can be chained.
+// WithDeferredStartEnabled a Boolean value that indicates whether to defer starting this capture output.
 func (x *CaptureAudioFileOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioFileOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
 	return x
 }
 
-// A collection of metadata to be written to the receiver's output files. The value of this property is an array of AVMetadataItem objects representing the collection of top-level metadata to be written in each output file. Only ID3 v2.2, v2.3, or v2.4 style metadata items are supported.
+// Metadata a collection of metadata to be written to the receiver's output files. The value of this property is an array of AVMetadataItem objects representing the collection of top-level metadata to be written in each output file. Only ID3 v2.2, v2.3, or v2.4 style metadata items are supported.
 //
 // Metadata returns the collection as a Go slice.
 func (x *CaptureAudioFileOutput) Metadata() []*MetadataItem {
@@ -113,16 +91,18 @@ func (x *CaptureAudioFileOutput) Metadata() []*MetadataItem {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
+// SetMetadata wraps the corresponding Objective-C method.
 func (x *CaptureAudioFileOutput) SetMetadata(metadata []*MetadataItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), purego.SliceToNSArray(metadata, func(_v *MetadataItem) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Specifies the options the receiver uses to re-encode audio as it is being recorded. The output settings dictionary can contain values for keys from AVAudioSettings.h. A value of nil indicates that the format of the audio should not be changed before being written to the file.
+// AudioSettings specifies the options the receiver uses to re-encode audio as it is being recorded. The output settings dictionary can contain values for keys from AVAudioSettings.h. A value of nil indicates that the format of the audio should not be changed before being written to the file.
 func (x *CaptureAudioFileOutput) AudioSettings() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioSettings"))
 	return obj.Wrap(_r)
 }
 
+// SetAudioSettings wraps the corresponding Objective-C method.
 func (x *CaptureAudioFileOutput) SetAudioSettings(audioSettings obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioSettings:"), objref.IDOf(audioSettings))
 }
@@ -142,3 +122,7 @@ type CaptureAudioFileOutputable interface {
 }
 
 var _ CaptureAudioFileOutputable = (*CaptureAudioFileOutput)(nil)
+
+var _ CaptureFileOutputProvider = (*CaptureAudioFileOutput)(nil)
+
+var _ CaptureOutputProvider = (*CaptureAudioFileOutput)(nil)

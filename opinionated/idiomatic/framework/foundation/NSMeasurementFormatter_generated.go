@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A formatter that provides localized representations of units and measurements.
-//
 // MeasurementFormatter is an idiomatic wrapper over the Objective-C class NSMeasurementFormatter.
+//
+// It embeds [Formatter], promoting that type's methods.
+//
+// A formatter that provides localized representations of units and measurements.
 type MeasurementFormatter struct {
-	objref.Handle
+	Formatter
 }
 
 // MeasurementFormatterFromID adopts an existing Objective-C object as a MeasurementFormatter
@@ -25,7 +26,8 @@ func MeasurementFormatterFromID(id objc.ID) *MeasurementFormatter {
 	if id == 0 {
 		return nil
 	}
-	x := &MeasurementFormatter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MeasurementFormatter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func measurementFormatterAdopt(id objc.ID) *MeasurementFormatter {
 	if id == 0 {
 		return nil
 	}
-	x := &MeasurementFormatter{Handle: objref.Wrap(id)}
+	x := &MeasurementFormatter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MeasurementFormatter) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MeasurementFormatter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MeasurementFormatter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMeasurementFormatter creates a new MeasurementFormatter.
@@ -64,36 +52,37 @@ func NewMeasurementFormatter() *MeasurementFormatter {
 	return measurementFormatterAdopt(_id)
 }
 
-// WithUnitOptions sets unitOptions and returns the receiver so calls can be chained.
+// WithUnitOptions sets the property and returns the receiver so calls can be chained.
 func (x *MeasurementFormatter) WithUnitOptions(unitOptions MeasurementFormatterUnitOptions) *MeasurementFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitOptions:"), unitOptions)
 	return x
 }
 
-// WithUnitStyle sets unitStyle and returns the receiver so calls can be chained.
+// WithUnitStyle sets the property and returns the receiver so calls can be chained.
 func (x *MeasurementFormatter) WithUnitStyle(unitStyle FormattingUnitStyle) *MeasurementFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitStyle:"), unitStyle)
 	return x
 }
 
-// WithLocale sets locale and returns the receiver so calls can be chained.
+// WithLocale sets the property and returns the receiver so calls can be chained.
 func (x *MeasurementFormatter) WithLocale(locale *Locale) *MeasurementFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return x
 }
 
-// WithNumberFormatter sets numberFormatter and returns the receiver so calls can be chained.
+// WithNumberFormatter sets the property and returns the receiver so calls can be chained.
 func (x *MeasurementFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) *MeasurementFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberFormatter:"), objref.IDOf(numberFormatter))
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *MeasurementFormatter) WithScriptingProperties(scriptingProperties obj.Object) *MeasurementFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// StringFromMeasurement wraps the corresponding Objective-C method.
 func (x *MeasurementFormatter) StringFromMeasurement(measurement obj.Object) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromMeasurement:"), objref.IDOf(measurement))
 	if _r == 0 {
@@ -102,6 +91,7 @@ func (x *MeasurementFormatter) StringFromMeasurement(measurement obj.Object) str
 	return purego.GoString(_r)
 }
 
+// StringFromUnit wraps the corresponding Objective-C method.
 func (x *MeasurementFormatter) StringFromUnit(unit *Unit) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromUnit:"), objref.IDOf(unit))
 	if _r == 0 {
@@ -110,38 +100,46 @@ func (x *MeasurementFormatter) StringFromUnit(unit *Unit) string {
 	return purego.GoString(_r)
 }
 
+// UnitOptions wraps the corresponding Objective-C method.
 func (x *MeasurementFormatter) UnitOptions() MeasurementFormatterUnitOptions {
 	_r := objc.Send[MeasurementFormatterUnitOptions](objref.IDOf(x), objc.RegisterName("unitOptions"))
 	return _r
 }
 
+// SetUnitOptions wraps the corresponding Objective-C method.
 func (x *MeasurementFormatter) SetUnitOptions(unitOptions MeasurementFormatterUnitOptions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitOptions:"), unitOptions)
 }
 
+// UnitStyle wraps the corresponding Objective-C method.
 func (x *MeasurementFormatter) UnitStyle() FormattingUnitStyle {
 	_r := objc.Send[FormattingUnitStyle](objref.IDOf(x), objc.RegisterName("unitStyle"))
 	return _r
 }
 
+// SetUnitStyle wraps the corresponding Objective-C method.
 func (x *MeasurementFormatter) SetUnitStyle(unitStyle FormattingUnitStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitStyle:"), unitStyle)
 }
 
+// Locale wraps the corresponding Objective-C method.
 func (x *MeasurementFormatter) Locale() *Locale {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locale"))
 	return LocaleFromID(_r)
 }
 
+// SetLocale wraps the corresponding Objective-C method.
 func (x *MeasurementFormatter) SetLocale(locale *Locale) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 }
 
+// NumberFormatter wraps the corresponding Objective-C method.
 func (x *MeasurementFormatter) NumberFormatter() *NumberFormatter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberFormatter"))
 	return NumberFormatterFromID(_r)
 }
 
+// SetNumberFormatter wraps the corresponding Objective-C method.
 func (x *MeasurementFormatter) SetNumberFormatter(numberFormatter *NumberFormatter) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberFormatter:"), objref.IDOf(numberFormatter))
 }
@@ -167,3 +165,5 @@ type MeasurementFormatterable interface {
 }
 
 var _ MeasurementFormatterable = (*MeasurementFormatter)(nil)
+
+var _ FormatterProvider = (*MeasurementFormatter)(nil)

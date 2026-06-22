@@ -23,7 +23,8 @@ func MTRPumpConfigurationAndControlClusterSupplyVoltageHighEventFromID(id objc.I
 	if id == 0 {
 		return nil
 	}
-	x := &MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRPumpConfigurationAndControlClusterSupplyVoltageHighEventAdopt(id objc.ID
 	if id == 0 {
 		return nil
 	}
-	x := &MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent{Handle: objref.Wrap(id)}
+	x := &MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent) IsEqual(ot
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent creates a new MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent.

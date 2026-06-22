@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of multipolyline shapes, each consisting of one or more connected line segments.
-//
 // MultiPolyline is an idiomatic wrapper over the Objective-C class MKMultiPolyline.
+//
+// It embeds [Shape], promoting that type's methods.
+//
+// A collection of multipolyline shapes, each consisting of one or more connected line segments.
 type MultiPolyline struct {
-	objref.Handle
+	Shape
 }
 
 // MultiPolylineFromID adopts an existing Objective-C object as a MultiPolyline
@@ -25,7 +26,8 @@ func MultiPolylineFromID(id objc.ID) *MultiPolyline {
 	if id == 0 {
 		return nil
 	}
-	x := &MultiPolyline{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MultiPolyline{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,51 +40,33 @@ func multiPolylineAdopt(id objc.ID) *MultiPolyline {
 	if id == 0 {
 		return nil
 	}
-	x := &MultiPolyline{Handle: objref.Wrap(id)}
+	x := &MultiPolyline{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MultiPolyline) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MultiPolyline) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MultiPolyline) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a multipolyline object using the provided polylines.
-//
-// NewMultiPolylineWithPolylines creates a new MultiPolyline.
+// NewMultiPolylineWithPolylines creates a multipolyline object using the provided polylines.
 func NewMultiPolylineWithPolylines(polylines []*Polyline) *MultiPolyline {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMultiPolyline")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPolylines:"), purego.SliceToNSArray(polylines, func(_v *Polyline) objc.ID { return objref.IDOf(_v) }))
 	return multiPolylineAdopt(_id)
 }
 
-// The title of the shape annotation.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the title of the shape annotation.
 func (x *MultiPolyline) WithTitle(title string) *MultiPolyline {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The subtitle of the shape annotation.
-//
-// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
+// WithSubtitle the subtitle of the shape annotation.
 func (x *MultiPolyline) WithSubtitle(subtitle string) *MultiPolyline {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
+// Polylines wraps the corresponding Objective-C method.
+//
 // Polylines returns the collection as a Go slice.
 func (x *MultiPolyline) Polylines() []*Polyline {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("polylines"))
@@ -98,3 +82,5 @@ type MultiPolylineable interface {
 }
 
 var _ MultiPolylineable = (*MultiPolyline)(nil)
+
+var _ ShapeProvider = (*MultiPolyline)(nil)

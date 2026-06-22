@@ -3,4 +3,12 @@
 //go:build darwin
 
 // Package corespotlight provides a fluent Go API over the macOS CoreSpotlight framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - SearchQuery: [UserQuery]
+//   - SearchQueryContext: [UserQueryContext]
 package corespotlight

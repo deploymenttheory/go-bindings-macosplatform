@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains information about the originator of a resource-loading request.
-//
 // AssetResourceLoadingRequestor is an idiomatic wrapper over the Objective-C class AVAssetResourceLoadingRequestor.
+//
+// An object that contains information about the originator of a resource-loading request.
 type AssetResourceLoadingRequestor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetResourceLoadingRequestorFromID(id objc.ID) *AssetResourceLoadingReques
 	if id == 0 {
 		return nil
 	}
-	x := &AssetResourceLoadingRequestor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetResourceLoadingRequestor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetResourceLoadingRequestorAdopt(id objc.ID) *AssetResourceLoadingRequest
 	if id == 0 {
 		return nil
 	}
-	x := &AssetResourceLoadingRequestor{Handle: objref.Wrap(id)}
+	x := &AssetResourceLoadingRequestor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *AssetResourceLoadingRequestor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetResourceLoadingRequestor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetResourceLoadingRequestor creates a new AssetResourceLoadingRequestor.
 func NewAssetResourceLoadingRequestor() *AssetResourceLoadingRequestor {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetResourceLoadingRequestor")), objc.RegisterName("new"))
 	return assetResourceLoadingRequestorAdopt(_id)
 }
 
+// ProvidesExpiredSessionReports wraps the corresponding Objective-C method.
 func (x *AssetResourceLoadingRequestor) ProvidesExpiredSessionReports() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("providesExpiredSessionReports"))
 	return _r

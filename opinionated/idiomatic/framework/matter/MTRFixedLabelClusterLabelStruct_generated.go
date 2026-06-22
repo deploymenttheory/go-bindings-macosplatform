@@ -23,7 +23,8 @@ func MTRFixedLabelClusterLabelStructFromID(id objc.ID) *MTRFixedLabelClusterLabe
 	if id == 0 {
 		return nil
 	}
-	x := &MTRFixedLabelClusterLabelStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRFixedLabelClusterLabelStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRFixedLabelClusterLabelStructAdopt(id objc.ID) *MTRFixedLabelClusterLabel
 	if id == 0 {
 		return nil
 	}
-	x := &MTRFixedLabelClusterLabelStruct{Handle: objref.Wrap(id)}
+	x := &MTRFixedLabelClusterLabelStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,24 +58,31 @@ func (x *MTRFixedLabelClusterLabelStruct) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRFixedLabelClusterLabelStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRFixedLabelClusterLabelStruct creates a new MTRFixedLabelClusterLabelStruct.
 func NewMTRFixedLabelClusterLabelStruct() *MTRFixedLabelClusterLabelStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRFixedLabelClusterLabelStruct")), objc.RegisterName("new"))
 	return mTRFixedLabelClusterLabelStructAdopt(_id)
 }
 
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel sets the property and returns the receiver so calls can be chained.
 func (x *MTRFixedLabelClusterLabelStruct) WithLabel(label string) *MTRFixedLabelClusterLabelStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue sets the property and returns the receiver so calls can be chained.
 func (x *MTRFixedLabelClusterLabelStruct) WithValue(value string) *MTRFixedLabelClusterLabelStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 	return x
 }
 
+// Label wraps the corresponding Objective-C method.
 func (x *MTRFixedLabelClusterLabelStruct) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -82,10 +91,12 @@ func (x *MTRFixedLabelClusterLabelStruct) Label() string {
 	return purego.GoString(_r)
 }
 
+// SetLabel wraps the corresponding Objective-C method.
 func (x *MTRFixedLabelClusterLabelStruct) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *MTRFixedLabelClusterLabelStruct) Value() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	if _r == 0 {
@@ -94,6 +105,7 @@ func (x *MTRFixedLabelClusterLabelStruct) Value() string {
 	return purego.GoString(_r)
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *MTRFixedLabelClusterLabelStruct) SetValue(value string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 }

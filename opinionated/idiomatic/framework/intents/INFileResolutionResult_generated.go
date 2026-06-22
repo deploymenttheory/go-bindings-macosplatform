@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resolution result for a file associated with an intent.
-//
 // FileResolutionResult is an idiomatic wrapper over the Objective-C class INFileResolutionResult.
+//
+// It embeds [IntentResolutionResult], promoting that type's methods.
+//
+// A resolution result for a file associated with an intent.
 type FileResolutionResult struct {
-	objref.Handle
+	IntentResolutionResult
 }
 
 // FileResolutionResultFromID adopts an existing Objective-C object as a FileResolutionResult
@@ -25,7 +26,8 @@ func FileResolutionResultFromID(id objc.ID) *FileResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	x := &FileResolutionResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FileResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func fileResolutionResultAdopt(id objc.ID) *FileResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	x := &FileResolutionResult{Handle: objref.Wrap(id)}
+	x := &FileResolutionResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *FileResolutionResult) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FileResolutionResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FileResolutionResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewFileResolutionResult creates a new FileResolutionResult.
@@ -70,3 +58,5 @@ type FileResolutionResultable interface {
 }
 
 var _ FileResolutionResultable = (*FileResolutionResult)(nil)
+
+var _ IntentResolutionResultProvider = (*FileResolutionResult)(nil)

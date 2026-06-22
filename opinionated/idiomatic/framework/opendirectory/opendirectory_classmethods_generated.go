@@ -13,25 +13,25 @@ import (
 	"unsafe"
 )
 
-// Returns an initialized and autoreleased ODAttributeMap object with the given value mapped. Returns an initialized and autoreleased ODAttributeMap object with the given value mapped.
+// AttributeMapWithValue returns an initialized and autoreleased ODAttributeMap object with the given value mapped. Returns an initialized and autoreleased ODAttributeMap object with the given value mapped.
 func AttributeMapWithValue(value string) *AttributeMap {
 	_r := objc.Send[objc.ID](objc.ID(_class("ODAttributeMap")), objc.RegisterName("attributeMapWithValue:"), purego.NSString(value))
 	return AttributeMapFromID(_r)
 }
 
-// Returns an initialized and autoreleased ODAttributeMap object with the given static value. Returns an initialized and autoreleased ODAttributeMap object with the given static value.
+// AttributeMapWithStaticValue returns an initialized and autoreleased ODAttributeMap object with the given static value. Returns an initialized and autoreleased ODAttributeMap object with the given static value.
 func AttributeMapWithStaticValue(staticValue string) *AttributeMap {
 	_r := objc.Send[objc.ID](objc.ID(_class("ODAttributeMap")), objc.RegisterName("attributeMapWithStaticValue:"), purego.NSString(staticValue))
 	return AttributeMapFromID(_r)
 }
 
-// Returns an initialized and autoreleased ODConfiguration object. Returns an initialized and autoreleased ODConfiguration object.
+// ODConfigurationConfiguration returns an initialized and autoreleased ODConfiguration object. Returns an initialized and autoreleased ODConfiguration object.
 func ODConfigurationConfiguration() *Configuration {
 	_r := objc.Send[objc.ID](objc.ID(_class("ODConfiguration")), objc.RegisterName("configuration"))
 	return ConfigurationFromID(_r)
 }
 
-// Returns a suggested name to use for the trust account. Returns a suggested name to use for a trust account.  This name will be derived from the hostname (if provided), otherwise it will be derived from the local hostname removing special characters that may not be allowed by many systems.
+// SuggestedTrustAccount returns a suggested name to use for the trust account. Returns a suggested name to use for a trust account.  This name will be derived from the hostname (if provided), otherwise it will be derived from the local hostname removing special characters that may not be allowed by many systems.
 func SuggestedTrustAccount(hostname string) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("ODConfiguration")), objc.RegisterName("suggestedTrustAccount:"), purego.NSString(hostname))
 	if _r == 0 {
@@ -40,7 +40,7 @@ func SuggestedTrustAccount(hostname string) string {
 	return purego.GoString(_r)
 }
 
-// Returns a suggested password to be used for trust account with the requested length. Returns a suggested password to be used for trust account with the requested length.
+// SuggestedTrustPassword returns a suggested password to be used for trust account with the requested length. Returns a suggested password to be used for trust account with the requested length.
 func SuggestedTrustPassword(length int) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("ODConfiguration")), objc.RegisterName("suggestedTrustPassword:"), length)
 	if _r == 0 {
@@ -49,20 +49,20 @@ func SuggestedTrustPassword(length int) string {
 	return purego.GoString(_r)
 }
 
-// Returns an initialized and autoreleased ODMappings object. Returns an initialized and autoreleased ODMappings object.
+// ODMappingsMappings returns an initialized and autoreleased ODMappings object. Returns an initialized and autoreleased ODMappings object.
 func ODMappingsMappings() *Mappings {
 	_r := objc.Send[objc.ID](objc.ID(_class("ODMappings")), objc.RegisterName("mappings"))
 	return MappingsFromID(_r)
 }
 
-// Creates a new module entry with a given name and service. Creates a new module entry with a given name and service.
+// ModuleEntryWithNameXpcServiceName creates a new module entry with a given name and service. Creates a new module entry with a given name and service.
 func ModuleEntryWithNameXpcServiceName(name string, xpcServiceName string) *ModuleEntry {
 	_r := objc.Send[objc.ID](objc.ID(_class("ODModuleEntry")), objc.RegisterName("moduleEntryWithName:xpcServiceName:"), purego.NSString(name), purego.NSString(xpcServiceName))
 	return ModuleEntryFromID(_r)
 }
 
-// Returns an autoreleased node object with a specified session and type.
-func NodeWithSessionTypeError(inSession *Session, inType uint32) (*Node, error) {
+// NodeWithSessionTypeError returns an autoreleased node object with a specified session and type.
+func NodeWithSessionTypeError(inSession *Session, inType uint32) (result *Node, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("ODNode")), objc.RegisterName("nodeWithSession:type:error:"), objref.IDOf(inSession), inType, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -71,8 +71,8 @@ func NodeWithSessionTypeError(inSession *Session, inType uint32) (*Node, error) 
 	return NodeFromID(_r), nil
 }
 
-// Returns an autoreleased node object with a specified session and name.
-func NodeWithSessionNameError(inSession *Session, inName string) (*Node, error) {
+// NodeWithSessionNameError returns an autoreleased node object with a specified session and name.
+func NodeWithSessionNameError(inSession *Session, inName string) (result *Node, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("ODNode")), objc.RegisterName("nodeWithSession:name:error:"), objref.IDOf(inSession), purego.NSString(inName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -81,8 +81,8 @@ func NodeWithSessionNameError(inSession *Session, inName string) (*Node, error) 
 	return NodeFromID(_r), nil
 }
 
-// Returns an autoreleased query object created with provided parameters.
-func QueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError(inNode *Node, inRecordTypeOrList obj.Object, inAttribute obj.Object, inMatchType uint32, inQueryValueOrList obj.Object, inReturnAttributeOrList obj.Object, inMaximumResults int) (*Query, error) {
+// QueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError returns an autoreleased query object created with provided parameters.
+func QueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError(inNode *Node, inRecordTypeOrList obj.Object, inAttribute obj.Object, inMatchType uint32, inQueryValueOrList obj.Object, inReturnAttributeOrList obj.Object, inMaximumResults int) (result *Query, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("ODQuery")), objc.RegisterName("queryWithNode:forRecordTypes:attribute:matchType:queryValues:returnAttributes:maximumResults:error:"), objref.IDOf(inNode), objref.IDOf(inRecordTypeOrList), objref.IDOf(inAttribute), inMatchType, objref.IDOf(inQueryValueOrList), objref.IDOf(inReturnAttributeOrList), inMaximumResults, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -91,20 +91,20 @@ func QueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMax
 	return QueryFromID(_r), nil
 }
 
-// Returns an initialized and autoreleased ODRecordMap object. Returns an initialized and autoreleased ODRecordMap object.
+// ODRecordMapRecordMap returns an initialized and autoreleased ODRecordMap object. Returns an initialized and autoreleased ODRecordMap object.
 func ODRecordMapRecordMap() *RecordMap {
 	_r := objc.Send[objc.ID](objc.ID(_class("ODRecordMap")), objc.RegisterName("recordMap"))
 	return RecordMapFromID(_r)
 }
 
-// Returns a shared instance of the local session.
+// DefaultSession returns a shared instance of the local session.
 func DefaultSession() *Session {
 	_r := objc.Send[objc.ID](objc.ID(_class("ODSession")), objc.RegisterName("defaultSession"))
 	return SessionFromID(_r)
 }
 
-// Returns an autoreleased session object directed over proxy to another host.
-func SessionWithOptionsError(inOptions obj.Object) (*Session, error) {
+// SessionWithOptionsError returns an autoreleased session object directed over proxy to another host.
+func SessionWithOptionsError(inOptions obj.Object) (result *Session, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("ODSession")), objc.RegisterName("sessionWithOptions:error:"), objref.IDOf(inOptions), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

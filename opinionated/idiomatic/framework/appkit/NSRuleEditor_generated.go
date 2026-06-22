@@ -6,17 +6,20 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An interface for configuring a rule-based list of options.
-//
 // RuleEditor is an idiomatic wrapper over the Objective-C class NSRuleEditor.
+//
+// RuleEditor is an abstract base — you do not construct it directly. Construct one of [PredicateEditor] and pass it where a RuleEditor is accepted.
+//
+// An interface for configuring a rule-based list of options.
 type RuleEditor struct {
-	objref.Handle
+	Control
 }
 
 // RuleEditorFromID adopts an existing Objective-C object as a RuleEditor
@@ -25,7 +28,8 @@ func RuleEditorFromID(id objc.ID) *RuleEditor {
 	if id == 0 {
 		return nil
 	}
-	x := &RuleEditor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RuleEditor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,662 +42,591 @@ func ruleEditorAdopt(id objc.ID) *RuleEditor {
 	if id == 0 {
 		return nil
 	}
-	x := &RuleEditor{Handle: objref.Wrap(id)}
+	x := &RuleEditor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *RuleEditor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RuleEditor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RuleEditor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewRuleEditor creates a new RuleEditor.
-func NewRuleEditor() *RuleEditor {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSRuleEditor")), objc.RegisterName("new"))
-	return ruleEditorAdopt(_id)
-}
-
-// The name of the rule editor’s strings file.
-//
-// WithFormattingStringsFilename sets formattingStringsFilename and returns the receiver so calls can be chained.
+// WithFormattingStringsFilename the name of the rule editor’s strings file.
 func (x *RuleEditor) WithFormattingStringsFilename(formattingStringsFilename string) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormattingStringsFilename:"), purego.NSString(formattingStringsFilename))
 	return x
 }
 
-// The formatting dictionary for the rule editor.
-//
-// WithFormattingDictionary sets formattingDictionary and returns the receiver so calls can be chained.
+// WithFormattingDictionary the formatting dictionary for the rule editor.
 func (x *RuleEditor) WithFormattingDictionary(formattingDictionary obj.Object) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormattingDictionary:"), objref.IDOf(formattingDictionary))
 	return x
 }
 
-// The rule editor’s nesting mode.
-//
-// WithNestingMode sets nestingMode and returns the receiver so calls can be chained.
+// WithNestingMode the rule editor’s nesting mode.
 func (x *RuleEditor) WithNestingMode(nestingMode RuleEditorNestingMode) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNestingMode:"), nestingMode)
 	return x
 }
 
-// The rule editor’s row height.
-//
-// WithRowHeight sets rowHeight and returns the receiver so calls can be chained.
+// WithRowHeight the rule editor’s row height.
 func (x *RuleEditor) WithRowHeight(rowHeight float64) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowHeight:"), rowHeight)
 	return x
 }
 
-// A Boolean value that determines whether the rule editor is editable.
-//
-// WithEditable sets editable and returns the receiver so calls can be chained.
+// WithEditable a Boolean value that determines whether the rule editor is editable.
 func (x *RuleEditor) WithEditable(editable bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
-// A Boolean value that indicates whether all the rows can be removed.
-//
-// WithCanRemoveAllRows sets canRemoveAllRows and returns the receiver so calls can be chained.
+// WithCanRemoveAllRows a Boolean value that indicates whether all the rows can be removed.
 func (x *RuleEditor) WithCanRemoveAllRows(canRemoveAllRows bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanRemoveAllRows:"), canRemoveAllRows)
 	return x
 }
 
-// The key path for the row type.
-//
-// WithRowTypeKeyPath sets rowTypeKeyPath and returns the receiver so calls can be chained.
+// WithRowTypeKeyPath the key path for the row type.
 func (x *RuleEditor) WithRowTypeKeyPath(rowTypeKeyPath string) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowTypeKeyPath:"), purego.NSString(rowTypeKeyPath))
 	return x
 }
 
-// The key path for the subrows.
-//
-// WithSubrowsKeyPath sets subrowsKeyPath and returns the receiver so calls can be chained.
+// WithSubrowsKeyPath the key path for the subrows.
 func (x *RuleEditor) WithSubrowsKeyPath(subrowsKeyPath string) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubrowsKeyPath:"), purego.NSString(subrowsKeyPath))
 	return x
 }
 
-// The criteria key path.
-//
-// WithCriteriaKeyPath sets criteriaKeyPath and returns the receiver so calls can be chained.
+// WithCriteriaKeyPath the criteria key path.
 func (x *RuleEditor) WithCriteriaKeyPath(criteriaKeyPath string) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCriteriaKeyPath:"), purego.NSString(criteriaKeyPath))
 	return x
 }
 
-// The display values key path.
-//
-// WithDisplayValuesKeyPath sets displayValuesKeyPath and returns the receiver so calls can be chained.
+// WithDisplayValuesKeyPath the display values key path.
 func (x *RuleEditor) WithDisplayValuesKeyPath(displayValuesKeyPath string) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayValuesKeyPath:"), purego.NSString(displayValuesKeyPath))
 	return x
 }
 
-// The target object that receives action messages from the cell.
-//
-// WithTarget sets target and returns the receiver so calls can be chained.
+// WithTarget the target object that receives action messages from the cell.
 func (x *RuleEditor) WithTarget(target obj.Object) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// The tag identifying the receiver (not the tag of the receiver’s cell).
-//
-// WithTag sets tag and returns the receiver so calls can be chained.
+// WithTag the tag identifying the receiver (not the tag of the receiver’s cell).
 func (x *RuleEditor) WithTag(tag int) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
-//
-// WithIgnoresMultiClick sets ignoresMultiClick and returns the receiver so calls can be chained.
+// WithIgnoresMultiClick a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (x *RuleEditor) WithIgnoresMultiClick(ignoresMultiClick bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
 	return x
 }
 
-// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
-//
-// WithContinuous sets continuous and returns the receiver so calls can be chained.
+// WithContinuous a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (x *RuleEditor) WithContinuous(continuous bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver reacts to mouse events.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether the receiver reacts to mouse events.
 func (x *RuleEditor) WithEnabled(enabled bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A Boolean value indicating whether the receiver refuses the first responder role.
-//
-// WithRefusesFirstResponder sets refusesFirstResponder and returns the receiver so calls can be chained.
+// WithRefusesFirstResponder a Boolean value indicating whether the receiver refuses the first responder role.
 func (x *RuleEditor) WithRefusesFirstResponder(refusesFirstResponder bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
-// A Boolean value that indicates whether the cell is highlighted.
-//
-// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
+// WithHighlighted a Boolean value that indicates whether the cell is highlighted.
 func (x *RuleEditor) WithHighlighted(highlighted bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// The size of the control.
-//
-// WithControlSize sets controlSize and returns the receiver so calls can be chained.
+// WithControlSize the size of the control.
 func (x *RuleEditor) WithControlSize(controlSize ControlSize) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
-// The receiver’s formatter.
-//
-// WithFormatter sets formatter and returns the receiver so calls can be chained.
+// WithFormatter the receiver’s formatter.
 func (x *RuleEditor) WithFormatter(formatter obj.Object) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
-// The value of the receiver’s cell as an Objective-C object.
-//
-// WithObjectValue sets objectValue and returns the receiver so calls can be chained.
+// WithObjectValue the value of the receiver’s cell as an Objective-C object.
 func (x *RuleEditor) WithObjectValue(objectValue obj.Object) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
-// The value of the receiver’s cell as an NSString object.
-//
-// WithStringValue sets stringValue and returns the receiver so calls can be chained.
+// WithStringValue the value of the receiver’s cell as an NSString object.
 func (x *RuleEditor) WithStringValue(stringValue string) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
-// The value of the receiver’s cell as an attributed string.
-//
-// WithAttributedStringValue sets attributedStringValue and returns the receiver so calls can be chained.
+// WithAttributedStringValue the value of the receiver’s cell as an attributed string.
 func (x *RuleEditor) WithAttributedStringValue(attributedStringValue obj.Object) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
-// The value of the receiver’s cell as an integer.
-//
-// WithIntValue sets intValue and returns the receiver so calls can be chained.
+// WithIntValue the value of the receiver’s cell as an integer.
 func (x *RuleEditor) WithIntValue(intValue int) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
-// The value of the receiver’s cell as an integer value.
-//
-// WithIntegerValue sets integerValue and returns the receiver so calls can be chained.
+// WithIntegerValue the value of the receiver’s cell as an integer value.
 func (x *RuleEditor) WithIntegerValue(integerValue int) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
-// The value of the receiver’s cell as a single-precision floating-point number.
-//
-// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
+// WithFloatValue the value of the receiver’s cell as a single-precision floating-point number.
 func (x *RuleEditor) WithFloatValue(floatValue float32) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
-// The value of the receiver’s cell as a double-precision floating-point number.
-//
-// WithDoubleValue sets doubleValue and returns the receiver so calls can be chained.
+// WithDoubleValue the value of the receiver’s cell as a double-precision floating-point number.
 func (x *RuleEditor) WithDoubleValue(doubleValue float64) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
-// The font used to draw text in the receiver’s cell.
-//
-// WithFont sets font and returns the receiver so calls can be chained.
+// WithFont the font used to draw text in the receiver’s cell.
 func (x *RuleEditor) WithFont(font *Font) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
-// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
-//
-// WithUsesSingleLineMode sets usesSingleLineMode and returns the receiver so calls can be chained.
+// WithUsesSingleLineMode a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (x *RuleEditor) WithUsesSingleLineMode(usesSingleLineMode bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
-// The line break mode to use for text in the control’s cell.
-//
-// WithLineBreakMode sets lineBreakMode and returns the receiver so calls can be chained.
+// WithLineBreakMode the line break mode to use for text in the control’s cell.
 func (x *RuleEditor) WithLineBreakMode(lineBreakMode LineBreakMode) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
-// The alignment mode of the text in the receiver’s cell.
-//
-// WithAlignment sets alignment and returns the receiver so calls can be chained.
+// WithAlignment the alignment mode of the text in the receiver’s cell.
 func (x *RuleEditor) WithAlignment(alignment TextAlignment) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
-// The initial writing direction used to determine the actual writing direction for text.
-//
-// WithBaseWritingDirection sets baseWritingDirection and returns the receiver so calls can be chained.
+// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
 func (x *RuleEditor) WithBaseWritingDirection(baseWritingDirection WritingDirection) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
-// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
-//
-// WithAllowsExpansionToolTips sets allowsExpansionToolTips and returns the receiver so calls can be chained.
+// WithAllowsExpansionToolTips a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (x *RuleEditor) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
 	return x
 }
 
-// WithCell sets cell and returns the receiver so calls can be chained.
+// WithCell sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithCell(cell CellProvider) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return x
 }
 
-// WithSubviews sets the collection and returns the receiver so calls can be chained.
+// WithSubviews sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithSubviews(items ...ViewProvider) *RuleEditor {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
 	return x
 }
 
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithHidden(hidden bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithPostsFrameChangedNotifications sets postsFrameChangedNotifications and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return x
 }
 
-// WithAutoresizesSubviews sets autoresizesSubviews and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithAutoresizesSubviews(autoresizesSubviews bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return x
 }
 
-// WithAutoresizingMask sets autoresizingMask and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// WithFrameRotation sets frameRotation and returns the receiver so calls can be chained.
+// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (x *RuleEditor) WithFrame(frame corefoundation.CGRect) *RuleEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
+	return x
+}
+
+// WithFrameRotation sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithFrameRotation(frameRotation float64) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return x
 }
 
-// WithFrameCenterRotation sets frameCenterRotation and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithFrameCenterRotation(frameCenterRotation float64) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return x
 }
 
-// WithBoundsRotation sets boundsRotation and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithBoundsRotation(boundsRotation float64) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return x
 }
 
-// WithCanDrawConcurrently sets canDrawConcurrently and returns the receiver so calls can be chained.
+// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (x *RuleEditor) WithBounds(bounds corefoundation.CGRect) *RuleEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithCanDrawConcurrently(canDrawConcurrently bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return x
 }
 
-// A Boolean value that determines whether the view needs to be redrawn before being displayed.
-//
-// WithNeedsDisplay sets needsDisplay and returns the receiver so calls can be chained.
+// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (x *RuleEditor) WithNeedsDisplay(needsDisplay bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// WithAcceptsTouchEvents sets acceptsTouchEvents and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithAcceptsTouchEvents(acceptsTouchEvents bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return x
 }
 
-// WithWantsRestingTouches sets wantsRestingTouches and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithWantsRestingTouches(wantsRestingTouches bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return x
 }
 
-// WithLayerContentsRedrawPolicy sets layerContentsRedrawPolicy and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return x
 }
 
-// WithLayerContentsPlacement sets layerContentsPlacement and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return x
 }
 
-// WithWantsLayer sets wantsLayer and returns the receiver so calls can be chained.
+// WithWantsLayer sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithWantsLayer(wantsLayer bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return x
 }
 
-// WithLayer sets layer and returns the receiver so calls can be chained.
+// WithLayer sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithLayer(layer obj.Object) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// WithCanDrawSubviewsIntoLayer sets canDrawSubviewsIntoLayer and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return x
 }
 
-// WithNeedsLayout sets needsLayout and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithNeedsLayout(needsLayout bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return x
 }
 
-// WithAlphaValue sets alphaValue and returns the receiver so calls can be chained.
+// WithAlphaValue sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithAlphaValue(alphaValue float64) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// WithLayerUsesCoreImageFilters sets layerUsesCoreImageFilters and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return x
 }
 
-// WithBackgroundFilters sets the collection and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithBackgroundFilters(items ...obj.Object) *RuleEditor {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return x
 }
 
-// WithCompositingFilter sets compositingFilter and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithCompositingFilter(compositingFilter obj.Object) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// WithContentFilters sets the collection and returns the receiver so calls can be chained.
+// WithContentFilters sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithContentFilters(items ...obj.Object) *RuleEditor {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
 	return x
 }
 
-// WithShadow sets shadow and returns the receiver so calls can be chained.
+// WithShadow sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithShadow(shadow *Shadow) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return x
 }
 
-// WithClipsToBounds sets clipsToBounds and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithClipsToBounds(clipsToBounds bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return x
 }
 
-// WithPostsBoundsChangedNotifications sets postsBoundsChangedNotifications and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return x
 }
 
-// WithToolTip sets toolTip and returns the receiver so calls can be chained.
+// WithToolTip sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithToolTip(toolTip string) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// WithNextKeyView sets nextKeyView and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+func (x *RuleEditor) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *RuleEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithNextKeyView(nextKeyView ViewProvider) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return x
 }
 
-// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+// WithFocusRingType sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithFocusRingType(focusRingType FocusRingType) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// WithGestureRecognizers sets the collection and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithGestureRecognizers(items ...GestureRecognizerProvider) *RuleEditor {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return x
 }
 
-// WithAllowedTouchTypes sets allowedTouchTypes and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return x
 }
 
-// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-//
-// WithPrefersCompactControlSizeMetrics sets prefersCompactControlSizeMetrics and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+func (x *RuleEditor) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *RuleEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (x *RuleEditor) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
 	return x
 }
 
-// WithWritingToolsCoordinator sets writingToolsCoordinator and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return x
 }
 
-// WithNeedsUpdateConstraints sets needsUpdateConstraints and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return x
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets translatesAutoresizingMaskIntoConstraints and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return x
 }
 
-// WithHorizontalContentSizeConstraintActive sets horizontalContentSizeConstraintActive and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return x
 }
 
-// WithVerticalContentSizeConstraintActive sets verticalContentSizeConstraintActive and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return x
 }
 
-// WithWantsBestResolutionOpenGLSurface sets wantsBestResolutionOpenGLSurface and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return x
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets wantsExtendedDynamicRangeOpenGLSurface and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return x
 }
 
-// WithPressureConfiguration sets pressureConfiguration and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
 func (x *RuleEditor) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *RuleEditor) WithNextResponder(nextResponder ResponderProvider) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets menu and returns the receiver so calls can be chained.
+// WithMenu returns the responder’s menu.
 func (x *RuleEditor) WithMenu(menu *Menu) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity an object encapsulating a user activity supported by this responder.
 func (x *RuleEditor) WithUserActivity(userActivity obj.Object) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *RuleEditor) WithTouchBar(touchBar *TouchBar) *RuleEditor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// Instructs the receiver to refetch criteria from its delegate.
+// ReloadCriteria instructs the receiver to refetch criteria from its delegate.
 func (x *RuleEditor) ReloadCriteria() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadCriteria"))
 }
 
-// Instructs the receiver to regenerate its predicate by invoking the corresponding delegate method.
+// ReloadPredicate instructs the receiver to regenerate its predicate by invoking the corresponding delegate method.
 func (x *RuleEditor) ReloadPredicate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadPredicate"))
 }
 
-// Returns the predicate for a given row.
+// PredicateForRow returns the predicate for a given row.
 func (x *RuleEditor) PredicateForRow(row int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicateForRow:"), row)
 	return obj.Wrap(_r)
 }
 
-// Returns the immediate subrows of a given row.
+// SubrowIndexesForRow returns the immediate subrows of a given row.
 func (x *RuleEditor) SubrowIndexesForRow(rowIndex int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subrowIndexesForRow:"), rowIndex)
 	return obj.Wrap(_r)
 }
 
-// Returns the currently chosen items for a given row.
+// CriteriaForRow returns the currently chosen items for a given row.
 func (x *RuleEditor) CriteriaForRow(row int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("criteriaForRow:"), row)
 	return obj.Wrap(_r)
 }
 
-// Returns the chosen values for a given row.
+// DisplayValuesForRow returns the chosen values for a given row.
 func (x *RuleEditor) DisplayValuesForRow(row int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayValuesForRow:"), row)
 	return obj.Wrap(_r)
 }
 
-// Returns the index of the row containing a given value.
+// RowForDisplayValue returns the index of the row containing a given value.
 func (x *RuleEditor) RowForDisplayValue(displayValue obj.Object) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowForDisplayValue:"), objref.IDOf(displayValue))
 	return _r
 }
 
-// Returns the type of a given row.
+// RowTypeForRow returns the type of a given row.
 func (x *RuleEditor) RowTypeForRow(rowIndex int) RuleEditorRowType {
 	_r := objc.Send[RuleEditorRowType](objref.IDOf(x), objc.RegisterName("rowTypeForRow:"), rowIndex)
 	return _r
 }
 
-// Returns the index of the parent of a given row.
+// ParentRowForRow returns the index of the parent of a given row.
 func (x *RuleEditor) ParentRowForRow(rowIndex int) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("parentRowForRow:"), rowIndex)
 	return _r
 }
 
-// Adds a row to the receiver.
+// AddRow adds a row to the receiver.
 func (x *RuleEditor) AddRow(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRow:"), objref.IDOf(sender))
 }
 
-// Adds a new row of a given type at a given location.
+// InsertRowAtIndexWithTypeAsSubrowOfRowAnimate adds a new row of a given type at a given location.
 func (x *RuleEditor) InsertRowAtIndexWithTypeAsSubrowOfRowAnimate(rowIndex int, rowType RuleEditorRowType, parentRow int, shouldAnimate bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertRowAtIndex:withType:asSubrowOfRow:animate:"), rowIndex, rowType, parentRow, shouldAnimate)
 }
 
-// Modifies the row at a given index to contain the given items and values.
+// SetCriteriaAndDisplayValuesForRowAtIndex modifies the row at a given index to contain the given items and values.
 func (x *RuleEditor) SetCriteriaAndDisplayValuesForRowAtIndex(criteria obj.Object, values obj.Object, rowIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCriteria:andDisplayValues:forRowAtIndex:"), objref.IDOf(criteria), objref.IDOf(values), rowIndex)
 }
 
-// Removes the row at a given index.
+// RemoveRowAtIndex removes the row at a given index.
 func (x *RuleEditor) RemoveRowAtIndex(rowIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeRowAtIndex:"), rowIndex)
 }
 
-// Removes the rows at given indexes.
+// RemoveRowsAtIndexesIncludeSubrows removes the rows at given indexes.
 func (x *RuleEditor) RemoveRowsAtIndexesIncludeSubrows(rowIndexes obj.Object, includeSubrows bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeRowsAtIndexes:includeSubrows:"), objref.IDOf(rowIndexes), includeSubrows)
 }
 
-// Sets in the receiver the indexes of rows that are selected.
+// SelectRowIndexesByExtendingSelection sets in the receiver the indexes of rows that are selected.
 func (x *RuleEditor) SelectRowIndexesByExtendingSelection(indexes obj.Object, extend bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectRowIndexes:byExtendingSelection:"), objref.IDOf(indexes), extend)
 }
 
+// FormattingStringsFilename wraps the corresponding Objective-C method.
 func (x *RuleEditor) FormattingStringsFilename() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formattingStringsFilename"))
 	if _r == 0 {
@@ -702,70 +635,85 @@ func (x *RuleEditor) FormattingStringsFilename() string {
 	return purego.GoString(_r)
 }
 
+// SetFormattingStringsFilename wraps the corresponding Objective-C method.
 func (x *RuleEditor) SetFormattingStringsFilename(formattingStringsFilename string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormattingStringsFilename:"), purego.NSString(formattingStringsFilename))
 }
 
+// FormattingDictionary wraps the corresponding Objective-C method.
 func (x *RuleEditor) FormattingDictionary() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formattingDictionary"))
 	return obj.Wrap(_r)
 }
 
+// SetFormattingDictionary wraps the corresponding Objective-C method.
 func (x *RuleEditor) SetFormattingDictionary(formattingDictionary obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormattingDictionary:"), objref.IDOf(formattingDictionary))
 }
 
+// NestingMode wraps the corresponding Objective-C method.
 func (x *RuleEditor) NestingMode() RuleEditorNestingMode {
 	_r := objc.Send[RuleEditorNestingMode](objref.IDOf(x), objc.RegisterName("nestingMode"))
 	return _r
 }
 
+// SetNestingMode wraps the corresponding Objective-C method.
 func (x *RuleEditor) SetNestingMode(nestingMode RuleEditorNestingMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNestingMode:"), nestingMode)
 }
 
+// RowHeight wraps the corresponding Objective-C method.
 func (x *RuleEditor) RowHeight() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rowHeight"))
 	return _r
 }
 
+// SetRowHeight wraps the corresponding Objective-C method.
 func (x *RuleEditor) SetRowHeight(rowHeight float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowHeight:"), rowHeight)
 }
 
+// IsEditable wraps the corresponding Objective-C method.
 func (x *RuleEditor) IsEditable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEditable"))
 	return _r
 }
 
+// SetEditable wraps the corresponding Objective-C method.
 func (x *RuleEditor) SetEditable(editable bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 }
 
+// CanRemoveAllRows wraps the corresponding Objective-C method.
 func (x *RuleEditor) CanRemoveAllRows() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canRemoveAllRows"))
 	return _r
 }
 
+// SetCanRemoveAllRows wraps the corresponding Objective-C method.
 func (x *RuleEditor) SetCanRemoveAllRows(canRemoveAllRows bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanRemoveAllRows:"), canRemoveAllRows)
 }
 
+// Predicate wraps the corresponding Objective-C method.
 func (x *RuleEditor) Predicate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
 	return obj.Wrap(_r)
 }
 
+// NumberOfRows wraps the corresponding Objective-C method.
 func (x *RuleEditor) NumberOfRows() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfRows"))
 	return _r
 }
 
+// SelectedRowIndexes wraps the corresponding Objective-C method.
 func (x *RuleEditor) SelectedRowIndexes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedRowIndexes"))
 	return obj.Wrap(_r)
 }
 
+// RowTypeKeyPath wraps the corresponding Objective-C method.
 func (x *RuleEditor) RowTypeKeyPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rowTypeKeyPath"))
 	if _r == 0 {
@@ -774,10 +722,12 @@ func (x *RuleEditor) RowTypeKeyPath() string {
 	return purego.GoString(_r)
 }
 
+// SetRowTypeKeyPath wraps the corresponding Objective-C method.
 func (x *RuleEditor) SetRowTypeKeyPath(rowTypeKeyPath string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowTypeKeyPath:"), purego.NSString(rowTypeKeyPath))
 }
 
+// SubrowsKeyPath wraps the corresponding Objective-C method.
 func (x *RuleEditor) SubrowsKeyPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subrowsKeyPath"))
 	if _r == 0 {
@@ -786,10 +736,12 @@ func (x *RuleEditor) SubrowsKeyPath() string {
 	return purego.GoString(_r)
 }
 
+// SetSubrowsKeyPath wraps the corresponding Objective-C method.
 func (x *RuleEditor) SetSubrowsKeyPath(subrowsKeyPath string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubrowsKeyPath:"), purego.NSString(subrowsKeyPath))
 }
 
+// CriteriaKeyPath wraps the corresponding Objective-C method.
 func (x *RuleEditor) CriteriaKeyPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("criteriaKeyPath"))
 	if _r == 0 {
@@ -798,10 +750,12 @@ func (x *RuleEditor) CriteriaKeyPath() string {
 	return purego.GoString(_r)
 }
 
+// SetCriteriaKeyPath wraps the corresponding Objective-C method.
 func (x *RuleEditor) SetCriteriaKeyPath(criteriaKeyPath string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCriteriaKeyPath:"), purego.NSString(criteriaKeyPath))
 }
 
+// DisplayValuesKeyPath wraps the corresponding Objective-C method.
 func (x *RuleEditor) DisplayValuesKeyPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayValuesKeyPath"))
 	if _r == 0 {
@@ -810,6 +764,7 @@ func (x *RuleEditor) DisplayValuesKeyPath() string {
 	return purego.GoString(_r)
 }
 
+// SetDisplayValuesKeyPath wraps the corresponding Objective-C method.
 func (x *RuleEditor) SetDisplayValuesKeyPath(displayValuesKeyPath string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayValuesKeyPath:"), purego.NSString(displayValuesKeyPath))
 }
@@ -855,9 +810,11 @@ type RuleEditorable interface {
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *RuleEditor
 	WithAutoresizesSubviews(autoresizesSubviews bool) *RuleEditor
 	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *RuleEditor
+	WithFrame(frame corefoundation.CGRect) *RuleEditor
 	WithFrameRotation(frameRotation float64) *RuleEditor
 	WithFrameCenterRotation(frameCenterRotation float64) *RuleEditor
 	WithBoundsRotation(boundsRotation float64) *RuleEditor
+	WithBounds(bounds corefoundation.CGRect) *RuleEditor
 	WithCanDrawConcurrently(canDrawConcurrently bool) *RuleEditor
 	WithNeedsDisplay(needsDisplay bool) *RuleEditor
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *RuleEditor
@@ -878,10 +835,12 @@ type RuleEditorable interface {
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *RuleEditor
 	WithToolTip(toolTip string) *RuleEditor
 	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *RuleEditor
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *RuleEditor
 	WithNextKeyView(nextKeyView ViewProvider) *RuleEditor
 	WithFocusRingType(focusRingType FocusRingType) *RuleEditor
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *RuleEditor
 	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *RuleEditor
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *RuleEditor
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *RuleEditor
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *RuleEditor
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *RuleEditor
@@ -936,3 +895,16 @@ type RuleEditorable interface {
 }
 
 var _ RuleEditorable = (*RuleEditor)(nil)
+
+// isRuleEditor marks RuleEditor — and, by embedding promotion, its
+// subclasses — as a member of the RuleEditor hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *RuleEditor) isRuleEditor() {}
+
+var _ RuleEditorProvider = (*RuleEditor)(nil)
+
+var _ ControlProvider = (*RuleEditor)(nil)
+
+var _ ViewProvider = (*RuleEditor)(nil)
+
+var _ ResponderProvider = (*RuleEditor)(nil)

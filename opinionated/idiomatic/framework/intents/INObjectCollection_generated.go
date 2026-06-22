@@ -23,7 +23,8 @@ func ObjectCollectionFromID(id objc.ID) *ObjectCollection {
 	if id == 0 {
 		return nil
 	}
-	x := &ObjectCollection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ObjectCollection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func objectCollectionAdopt(id objc.ID) *ObjectCollection {
 	if id == 0 {
 		return nil
 	}
-	x := &ObjectCollection{Handle: objref.Wrap(id)}
+	x := &ObjectCollection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *ObjectCollection) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ObjectCollection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewObjectCollectionWithSections creates a new ObjectCollection.
 func NewObjectCollectionWithSections(sections []obj.Object) *ObjectCollection {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INObjectCollection")), objc.RegisterName("alloc"))
@@ -70,28 +78,33 @@ func NewObjectCollectionWithItems(items []obj.Object) *ObjectCollection {
 	return objectCollectionAdopt(_id)
 }
 
-// WithUsesIndexedCollation sets usesIndexedCollation and returns the receiver so calls can be chained.
+// WithUsesIndexedCollation sets the property and returns the receiver so calls can be chained.
 func (x *ObjectCollection) WithUsesIndexedCollation(usesIndexedCollation bool) *ObjectCollection {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesIndexedCollation:"), usesIndexedCollation)
 	return x
 }
 
+// Sections wraps the corresponding Objective-C method.
+//
 // Sections returns the collection as a Go slice.
 func (x *ObjectCollection) Sections() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sections"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// AllItems wraps the corresponding Objective-C method.
 func (x *ObjectCollection) AllItems() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allItems"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// UsesIndexedCollation wraps the corresponding Objective-C method.
 func (x *ObjectCollection) UsesIndexedCollation() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesIndexedCollation"))
 	return _r
 }
 
+// SetUsesIndexedCollation wraps the corresponding Objective-C method.
 func (x *ObjectCollection) SetUsesIndexedCollation(usesIndexedCollation bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesIndexedCollation:"), usesIndexedCollation)
 }

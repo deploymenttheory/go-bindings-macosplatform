@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A network endpoint specified as a Bonjour service name, type, and domain.
-//
 // NWBonjourServiceEndpoint is an idiomatic wrapper over the Objective-C class NWBonjourServiceEndpoint.
+//
+// A network endpoint specified as a Bonjour service name, type, and domain.
 type NWBonjourServiceEndpoint struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NWBonjourServiceEndpointFromID(id objc.ID) *NWBonjourServiceEndpoint {
 	if id == 0 {
 		return nil
 	}
-	x := &NWBonjourServiceEndpoint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NWBonjourServiceEndpoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nWBonjourServiceEndpointAdopt(id objc.ID) *NWBonjourServiceEndpoint {
 	if id == 0 {
 		return nil
 	}
-	x := &NWBonjourServiceEndpoint{Handle: objref.Wrap(id)}
+	x := &NWBonjourServiceEndpoint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *NWBonjourServiceEndpoint) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NWBonjourServiceEndpoint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNWBonjourServiceEndpoint creates a new NWBonjourServiceEndpoint.
 func NewNWBonjourServiceEndpoint() *NWBonjourServiceEndpoint {
 	_id := objc.Send[objc.ID](objc.ID(_class("NWBonjourServiceEndpoint")), objc.RegisterName("new"))
 	return nWBonjourServiceEndpointAdopt(_id)
 }
 
-// The endpoint's Bonjour service name.
+// Name the endpoint's Bonjour service name.
 func (x *NWBonjourServiceEndpoint) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *NWBonjourServiceEndpoint) Name() string {
 	return purego.GoString(_r)
 }
 
-// The endpoint's Bonjour service type.
+// Type the endpoint's Bonjour service type.
 func (x *NWBonjourServiceEndpoint) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
 	if _r == 0 {
@@ -82,7 +90,7 @@ func (x *NWBonjourServiceEndpoint) Type() string {
 	return purego.GoString(_r)
 }
 
-// The endpoint's Bonjour service domain.
+// Domain the endpoint's Bonjour service domain.
 func (x *NWBonjourServiceEndpoint) Domain() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domain"))
 	if _r == 0 {

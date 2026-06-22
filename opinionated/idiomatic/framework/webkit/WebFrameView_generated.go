@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// WebFrameView objects and their subviews display the web content contained in a frame. You never create instances of WebFrameView directly—WebView objects create and manage a hierarchy of WebFrameView objects, one for each frame. WebFrameView objects use a scroll view whose document view conforms to the WebDocumentView protocol.
-//
 // WebFrameView is an idiomatic wrapper over the Objective-C class WebFrameView.
+//
+// WebFrameView objects and their subviews display the web content contained in a frame. You never create instances of WebFrameView directly—WebView objects create and manage a hierarchy of WebFrameView objects, one for each frame. WebFrameView objects use a scroll view whose document view conforms to the WebDocumentView protocol.
 type WebFrameView struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WebFrameViewFromID(id objc.ID) *WebFrameView {
 	if id == 0 {
 		return nil
 	}
-	x := &WebFrameView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WebFrameView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func webFrameViewAdopt(id objc.ID) *WebFrameView {
 	if id == 0 {
 		return nil
 	}
-	x := &WebFrameView{Handle: objref.Wrap(id)}
+	x := &WebFrameView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,60 +60,65 @@ func (x *WebFrameView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WebFrameView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWebFrameView creates a new WebFrameView.
 func NewWebFrameView() *WebFrameView {
 	_id := objc.Send[objc.ID](objc.ID(_class("WebFrameView")), objc.RegisterName("new"))
 	return webFrameViewAdopt(_id)
 }
 
-// A Boolean that indicates whether the frame view should allow users to scroll.
-//
-// WithAllowsScrolling sets allowsScrolling and returns the receiver so calls can be chained.
+// WithAllowsScrolling a Boolean that indicates whether the frame view should allow users to scroll.
 func (x *WebFrameView) WithAllowsScrolling(allowsScrolling bool) *WebFrameView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsScrolling:"), allowsScrolling)
 	return x
 }
 
-// Returns a print operation object to print this frame.
+// PrintOperationWithPrintInfo returns a print operation object to print this frame.
 func (x *WebFrameView) PrintOperationWithPrintInfo(printInfo obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printOperationWithPrintInfo:"), objref.IDOf(printInfo))
 	return obj.Wrap(_r)
 }
 
-// Prints the receiver.
+// PrintDocumentView prints the receiver.
 func (x *WebFrameView) PrintDocumentView() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printDocumentView"))
 }
 
-// The WebFrame associated with this WebFrameView
+// WebFrame the WebFrame associated with this WebFrameView
 func (x *WebFrameView) WebFrame() *WebFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webFrame"))
 	return WebFrameFromID(_r)
 }
 
-// The WebFrameView's document subview The subview that renders the WebFrameView's contents
+// DocumentView the WebFrameView's document subview The subview that renders the WebFrameView's contents
 func (x *WebFrameView) DocumentView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentView"))
 	return obj.Wrap(_r)
 }
 
-// Whether the WebFrameView allows its document to be scrolled
+// AllowsScrolling whether the WebFrameView allows its document to be scrolled
 func (x *WebFrameView) AllowsScrolling() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsScrolling"))
 	return _r
 }
 
+// SetAllowsScrolling wraps the corresponding Objective-C method.
 func (x *WebFrameView) SetAllowsScrolling(allowsScrolling bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsScrolling:"), allowsScrolling)
 }
 
-// Whether this frame can print headers and footers
+// CanPrintHeadersAndFooters whether this frame can print headers and footers
 func (x *WebFrameView) CanPrintHeadersAndFooters() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPrintHeadersAndFooters"))
 	return _r
 }
 
-// Called by the host application before it initializes and runs a print operation. If NO is returned, the host application will abort its print operation and call -printDocumentView on the WebFrameView.  The document view is then expected to run its own print operation.  If YES is returned, the host application's print operation will continue as normal.
+// DocumentViewShouldHandlePrint called by the host application before it initializes and runs a print operation. If NO is returned, the host application will abort its print operation and call -printDocumentView on the WebFrameView.  The document view is then expected to run its own print operation.  If YES is returned, the host application's print operation will continue as normal.
 func (x *WebFrameView) DocumentViewShouldHandlePrint() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("documentViewShouldHandlePrint"))
 	return _r

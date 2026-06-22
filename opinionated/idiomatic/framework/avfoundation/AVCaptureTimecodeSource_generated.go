@@ -23,7 +23,8 @@ func CaptureTimecodeSourceFromID(id objc.ID) *CaptureTimecodeSource {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureTimecodeSource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptureTimecodeSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func captureTimecodeSourceAdopt(id objc.ID) *CaptureTimecodeSource {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureTimecodeSource{Handle: objref.Wrap(id)}
+	x := &CaptureTimecodeSource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,13 +58,19 @@ func (x *CaptureTimecodeSource) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptureTimecodeSource) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCaptureTimecodeSource creates a new CaptureTimecodeSource.
 func NewCaptureTimecodeSource() *CaptureTimecodeSource {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureTimecodeSource")), objc.RegisterName("new"))
 	return captureTimecodeSourceAdopt(_id)
 }
 
-// The name of the timecode source. This property provides a descriptive name of the timecode source, useful for display in user interfaces or logging.
+// DisplayName the name of the timecode source. This property provides a descriptive name of the timecode source, useful for display in user interfaces or logging.
 func (x *CaptureTimecodeSource) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
 	if _r == 0 {
@@ -71,13 +79,13 @@ func (x *CaptureTimecodeSource) DisplayName() string {
 	return purego.GoString(_r)
 }
 
-// The type of timecode source. Indicates the type of timecode source, represented as a value from the “AVCaptureTimecodeSynchronizationSourceType“ enum. This helps you identify the source for specific synchronization use cases, such as frame counter, real-time clock, MIDI, or HID.
+// Type the type of timecode source. Indicates the type of timecode source, represented as a value from the “AVCaptureTimecodeSynchronizationSourceType“ enum. This helps you identify the source for specific synchronization use cases, such as frame counter, real-time clock, MIDI, or HID.
 func (x *CaptureTimecodeSource) Type() CaptureTimecodeSourceType {
 	_r := objc.Send[CaptureTimecodeSourceType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
-// A unique identifier for the timecode source. The UUID uniquely identifies this timecode source. It is particularly useful when multiple sources of the same type are available, allowing your application to distinguish between them. - Note: This value does not persist across application sessions.
+// Uuid a unique identifier for the timecode source. The UUID uniquely identifies this timecode source. It is particularly useful when multiple sources of the same type are available, allowing your application to distinguish between them. - Note: This value does not persist across application sessions.
 func (x *CaptureTimecodeSource) Uuid() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uuid"))
 	return obj.Wrap(_r)

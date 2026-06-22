@@ -6,17 +6,19 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that you use to create a new composition from existing assets.
-//
 // MutableComposition is an idiomatic wrapper over the Objective-C class AVMutableComposition.
+//
+// It embeds [Composition], promoting that type's methods.
+//
+// An object that you use to create a new composition from existing assets.
 type MutableComposition struct {
-	objref.Handle
+	Composition
 }
 
 // MutableCompositionFromID adopts an existing Objective-C object as a MutableComposition
@@ -25,7 +27,8 @@ func MutableCompositionFromID(id objc.ID) *MutableComposition {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableComposition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableComposition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func mutableCompositionAdopt(id objc.ID) *MutableComposition {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableComposition{Handle: objref.Wrap(id)}
+	x := &MutableComposition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MutableComposition) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableComposition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableComposition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMutableComposition creates a new MutableComposition.
@@ -64,18 +53,29 @@ func NewMutableComposition() *MutableComposition {
 	return mutableCompositionAdopt(_id)
 }
 
-// Adds an empty track to a composition.
+// WithNaturalSize the encoded or authored size of the visual portion of the asset.
+func (x *MutableComposition) WithNaturalSize(naturalSize corefoundation.CGSize) *MutableComposition {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNaturalSize:"), naturalSize)
+	return x
+}
+
+// SetNaturalSize wraps the corresponding Objective-C method.
+func (x *MutableComposition) SetNaturalSize(naturalSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNaturalSize:"), naturalSize)
+}
+
+// AddMutableTrackWithMediaTypePreferredTrackID adds an empty track to a composition.
 func (x *MutableComposition) AddMutableTrackWithMediaTypePreferredTrackID(mediaType obj.Object, preferredTrackID int32) *MutableCompositionTrack {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addMutableTrackWithMediaType:preferredTrackID:"), objref.IDOf(mediaType), preferredTrackID)
 	return MutableCompositionTrackFromID(_r)
 }
 
-// Removes a specified track from the composition.
+// RemoveTrack removes a specified track from the composition.
 func (x *MutableComposition) RemoveTrack(track *CompositionTrack) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTrack:"), objref.IDOf(track))
 }
 
-// Returns a composition track into which you can insert any time range of the specified asset track.
+// MutableTrackCompatibleWithTrack returns a composition track into which you can insert any time range of the specified asset track.
 func (x *MutableComposition) MutableTrackCompatibleWithTrack(track *AssetTrack) *MutableCompositionTrack {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mutableTrackCompatibleWithTrack:"), objref.IDOf(track))
 	return MutableCompositionTrackFromID(_r)
@@ -84,9 +84,15 @@ func (x *MutableComposition) MutableTrackCompatibleWithTrack(track *AssetTrack) 
 // MutableCompositionable is the interface implemented by [MutableComposition], for mocking and DI.
 type MutableCompositionable interface {
 	obj.Object
+	WithNaturalSize(naturalSize corefoundation.CGSize) *MutableComposition
+	SetNaturalSize(naturalSize corefoundation.CGSize)
 	AddMutableTrackWithMediaTypePreferredTrackID(mediaType obj.Object, preferredTrackID int32) *MutableCompositionTrack
 	RemoveTrack(track *CompositionTrack)
 	MutableTrackCompatibleWithTrack(track *AssetTrack) *MutableCompositionTrack
 }
 
 var _ MutableCompositionable = (*MutableComposition)(nil)
+
+var _ CompositionProvider = (*MutableComposition)(nil)
+
+var _ AssetProvider = (*MutableComposition)(nil)

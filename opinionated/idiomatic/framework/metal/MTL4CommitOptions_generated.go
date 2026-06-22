@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Represents options to configure a commit operation on a command queue.
-//
 // MTL4CommitOptions is an idiomatic wrapper over the Objective-C class MTL4CommitOptions.
+//
+// Represents options to configure a commit operation on a command queue.
 type MTL4CommitOptions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MTL4CommitOptionsFromID(id objc.ID) *MTL4CommitOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4CommitOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTL4CommitOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTL4CommitOptionsAdopt(id objc.ID) *MTL4CommitOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4CommitOptions{Handle: objref.Wrap(id)}
+	x := &MTL4CommitOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *MTL4CommitOptions) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MTL4CommitOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTL4CommitOptions) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMTL4CommitOptions creates a new MTL4CommitOptions.

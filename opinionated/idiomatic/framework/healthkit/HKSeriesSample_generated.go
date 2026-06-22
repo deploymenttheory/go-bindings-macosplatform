@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract base class that defines samples that contain a series of items.
-//
 // SeriesSample is an idiomatic wrapper over the Objective-C class HKSeriesSample.
+//
+// SeriesSample is an abstract base — you do not construct it directly. Construct one of [HeartbeatSeriesSample], [WorkoutRoute] and pass it where a SeriesSample is accepted.
+//
+// An abstract base class that defines samples that contain a series of items.
 type SeriesSample struct {
-	objref.Handle
+	Sample
 }
 
 // SeriesSampleFromID adopts an existing Objective-C object as a SeriesSample
@@ -25,7 +26,8 @@ func SeriesSampleFromID(id objc.ID) *SeriesSample {
 	if id == 0 {
 		return nil
 	}
-	x := &SeriesSample{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SeriesSample{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,32 +40,13 @@ func seriesSampleAdopt(id objc.ID) *SeriesSample {
 	if id == 0 {
 		return nil
 	}
-	x := &SeriesSample{Handle: objref.Wrap(id)}
+	x := &SeriesSample{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *SeriesSample) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SeriesSample) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SeriesSample) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewSeriesSample creates a new SeriesSample.
-func NewSeriesSample() *SeriesSample {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKSeriesSample")), objc.RegisterName("new"))
-	return seriesSampleAdopt(_id)
-}
-
+// Count wraps the corresponding Objective-C method.
 func (x *SeriesSample) Count() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
 	return _r
@@ -76,3 +59,14 @@ type SeriesSampleable interface {
 }
 
 var _ SeriesSampleable = (*SeriesSample)(nil)
+
+// isSeriesSample marks SeriesSample — and, by embedding promotion, its
+// subclasses — as a member of the SeriesSample hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SeriesSample) isSeriesSample() {}
+
+var _ SeriesSampleProvider = (*SeriesSample)(nil)
+
+var _ SampleProvider = (*SeriesSample)(nil)
+
+var _ ObjectProvider = (*SeriesSample)(nil)

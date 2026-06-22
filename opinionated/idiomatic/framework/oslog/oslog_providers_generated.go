@@ -11,4 +11,5 @@ import (
 // LogEntryProvider is accepted wherever a OSLogEntry (or one of its subclasses) is expected.
 type LogEntryProvider interface {
 	objref.Object
+	isLogEntry()
 }

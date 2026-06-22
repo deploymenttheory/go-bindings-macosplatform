@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a balance that’s available for transactions, such as points or money.
-//
 // StoredValuePassBalance is an idiomatic wrapper over the Objective-C class PKStoredValuePassBalance.
+//
+// An object that represents a balance that’s available for transactions, such as points or money.
 type StoredValuePassBalance struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func StoredValuePassBalanceFromID(id objc.ID) *StoredValuePassBalance {
 	if id == 0 {
 		return nil
 	}
-	x := &StoredValuePassBalance{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StoredValuePassBalance{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func storedValuePassBalanceAdopt(id objc.ID) *StoredValuePassBalance {
 	if id == 0 {
 		return nil
 	}
-	x := &StoredValuePassBalance{Handle: objref.Wrap(id)}
+	x := &StoredValuePassBalance{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,23 +60,31 @@ func (x *StoredValuePassBalance) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StoredValuePassBalance) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewStoredValuePassBalance creates a new StoredValuePassBalance.
 func NewStoredValuePassBalance() *StoredValuePassBalance {
 	_id := objc.Send[objc.ID](objc.ID(_class("PKStoredValuePassBalance")), objc.RegisterName("new"))
 	return storedValuePassBalanceAdopt(_id)
 }
 
-// Returns a Boolean value that indicates whether two pass balance objects contain the same values.
+// IsEqualToBalance returns a Boolean value that indicates whether two pass balance objects contain the same values.
 func (x *StoredValuePassBalance) IsEqualToBalance(balance *StoredValuePassBalance) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToBalance:"), objref.IDOf(balance))
 	return _r
 }
 
+// Amount wraps the corresponding Objective-C method.
 func (x *StoredValuePassBalance) Amount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("amount"))
 	return obj.Wrap(_r)
 }
 
+// CurrencyCode wraps the corresponding Objective-C method.
 func (x *StoredValuePassBalance) CurrencyCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currencyCode"))
 	if _r == 0 {
@@ -83,11 +93,13 @@ func (x *StoredValuePassBalance) CurrencyCode() string {
 	return purego.GoString(_r)
 }
 
+// BalanceType wraps the corresponding Objective-C method.
 func (x *StoredValuePassBalance) BalanceType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("balanceType"))
 	return obj.Wrap(_r)
 }
 
+// ExpiryDate wraps the corresponding Objective-C method.
 func (x *StoredValuePassBalance) ExpiryDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expiryDate"))
 	return obj.Wrap(_r)

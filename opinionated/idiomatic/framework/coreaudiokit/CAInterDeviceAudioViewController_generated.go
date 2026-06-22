@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view controller object that displays iOS devices that support inter-device audio.
-//
 // CAInterDeviceAudioViewController is an idiomatic wrapper over the Objective-C class CAInterDeviceAudioViewController.
+//
+// A view controller object that displays iOS devices that support inter-device audio.
 type CAInterDeviceAudioViewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CAInterDeviceAudioViewControllerFromID(id objc.ID) *CAInterDeviceAudioViewC
 	if id == 0 {
 		return nil
 	}
-	x := &CAInterDeviceAudioViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CAInterDeviceAudioViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func cAInterDeviceAudioViewControllerAdopt(id objc.ID) *CAInterDeviceAudioViewCo
 	if id == 0 {
 		return nil
 	}
-	x := &CAInterDeviceAudioViewController{Handle: objref.Wrap(id)}
+	x := &CAInterDeviceAudioViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *CAInterDeviceAudioViewController) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *CAInterDeviceAudioViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CAInterDeviceAudioViewController) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewCAInterDeviceAudioViewController creates a new CAInterDeviceAudioViewController.

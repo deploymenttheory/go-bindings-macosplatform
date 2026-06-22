@@ -3,4 +3,18 @@
 //go:build darwin
 
 // Package mapkit provides a fluent Go API over the macOS MapKit framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - AnnotationView: [MarkerAnnotationView], [PinAnnotationView], [UserLocationView]
+//   - MapConfiguration: [HybridMapConfiguration], [ImageryMapConfiguration], [StandardMapConfiguration]
+//   - MultiPoint: [Polygon], [Polyline]
+//   - OverlayPathRenderer: [CircleRenderer], [MultiPolygonRenderer], [MultiPolylineRenderer], [PolygonRenderer], [PolylineRenderer]
+//   - OverlayRenderer: [OverlayPathRenderer], [TileOverlayRenderer]
+//   - Polyline: [GeodesicPolyline]
+//   - PolylineRenderer: [GradientPolylineRenderer]
+//   - Shape: [Circle], [MultiPoint], [MultiPolygon], [MultiPolyline], [PointAnnotation]
 package mapkit

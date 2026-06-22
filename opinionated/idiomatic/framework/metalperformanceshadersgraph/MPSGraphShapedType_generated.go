@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The shaped type class for types on tensors with a shape and data type.
-//
 // GraphShapedType is an idiomatic wrapper over the Objective-C class MPSGraphShapedType.
+//
+// It embeds [GraphType], promoting that type's methods.
+//
+// The shaped type class for types on tensors with a shape and data type.
 type GraphShapedType struct {
-	objref.Handle
+	GraphType
 }
 
 // GraphShapedTypeFromID adopts an existing Objective-C object as a GraphShapedType
@@ -25,7 +26,8 @@ func GraphShapedTypeFromID(id objc.ID) *GraphShapedType {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphShapedType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphShapedType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func graphShapedTypeAdopt(id objc.ID) *GraphShapedType {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphShapedType{Handle: objref.Wrap(id)}
+	x := &GraphShapedType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GraphShapedType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphShapedType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphShapedType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGraphShapedType creates a new GraphShapedType.
@@ -70,3 +58,7 @@ type GraphShapedTypeable interface {
 }
 
 var _ GraphShapedTypeable = (*GraphShapedType)(nil)
+
+var _ GraphTypeProvider = (*GraphShapedType)(nil)
+
+var _ GraphObjectProvider = (*GraphShapedType)(nil)

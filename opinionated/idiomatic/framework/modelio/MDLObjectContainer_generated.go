@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A default implementation for handling object hierarchy relationships in a 3D asset.
-//
 // ObjectContainer is an idiomatic wrapper over the Objective-C class MDLObjectContainer.
+//
+// A default implementation for handling object hierarchy relationships in a 3D asset.
 type ObjectContainer struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ObjectContainerFromID(id objc.ID) *ObjectContainer {
 	if id == 0 {
 		return nil
 	}
-	x := &ObjectContainer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ObjectContainer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func objectContainerAdopt(id objc.ID) *ObjectContainer {
 	if id == 0 {
 		return nil
 	}
-	x := &ObjectContainer{Handle: objref.Wrap(id)}
+	x := &ObjectContainer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *ObjectContainer) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *ObjectContainer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ObjectContainer) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewObjectContainer creates a new ObjectContainer.

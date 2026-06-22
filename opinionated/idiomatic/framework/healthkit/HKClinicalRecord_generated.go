@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A sample that stores a clinical record.
-//
 // ClinicalRecord is an idiomatic wrapper over the Objective-C class HKClinicalRecord.
+//
+// It embeds [Sample], promoting that type's methods.
+//
+// A sample that stores a clinical record.
 type ClinicalRecord struct {
-	objref.Handle
+	Sample
 }
 
 // ClinicalRecordFromID adopts an existing Objective-C object as a ClinicalRecord
@@ -25,7 +26,8 @@ func ClinicalRecordFromID(id objc.ID) *ClinicalRecord {
 	if id == 0 {
 		return nil
 	}
-	x := &ClinicalRecord{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ClinicalRecord{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func clinicalRecordAdopt(id objc.ID) *ClinicalRecord {
 	if id == 0 {
 		return nil
 	}
-	x := &ClinicalRecord{Handle: objref.Wrap(id)}
+	x := &ClinicalRecord{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ClinicalRecord) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ClinicalRecord) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ClinicalRecord) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewClinicalRecord creates a new ClinicalRecord.
@@ -64,12 +52,13 @@ func NewClinicalRecord() *ClinicalRecord {
 	return clinicalRecordAdopt(_id)
 }
 
+// ClinicalType wraps the corresponding Objective-C method.
 func (x *ClinicalRecord) ClinicalType() *ClinicalType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clinicalType"))
 	return ClinicalTypeFromID(_r)
 }
 
-// The primary display name used in Health. The display name is not localized, and is generally expected to be US English.
+// DisplayName the primary display name used in Health. The display name is not localized, and is generally expected to be US English.
 func (x *ClinicalRecord) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
 	if _r == 0 {
@@ -78,7 +67,7 @@ func (x *ClinicalRecord) DisplayName() string {
 	return purego.GoString(_r)
 }
 
-// The FHIR resource (where applicable) backing this sample.
+// FHIRResource the FHIR resource (where applicable) backing this sample.
 func (x *ClinicalRecord) FHIRResource() *FHIRResource {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("FHIRResource"))
 	return FHIRResourceFromID(_r)
@@ -93,3 +82,7 @@ type ClinicalRecordable interface {
 }
 
 var _ ClinicalRecordable = (*ClinicalRecord)(nil)
+
+var _ SampleProvider = (*ClinicalRecord)(nil)
+
+var _ ObjectProvider = (*ClinicalRecord)(nil)

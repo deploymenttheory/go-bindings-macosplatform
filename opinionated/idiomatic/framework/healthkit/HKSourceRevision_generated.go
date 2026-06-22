@@ -6,15 +6,16 @@ package healthkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object indicating the source of a HealthKit sample.
-//
 // SourceRevision is an idiomatic wrapper over the Objective-C class HKSourceRevision.
+//
+// An object indicating the source of a HealthKit sample.
 type SourceRevision struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func SourceRevisionFromID(id objc.ID) *SourceRevision {
 	if id == 0 {
 		return nil
 	}
-	x := &SourceRevision{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SourceRevision{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func sourceRevisionAdopt(id objc.ID) *SourceRevision {
 	if id == 0 {
 		return nil
 	}
-	x := &SourceRevision{Handle: objref.Wrap(id)}
+	x := &SourceRevision{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +61,33 @@ func (x *SourceRevision) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a new source revision object with the provided source and version information.
-//
-// NewSourceRevisionWithSourceVersion creates a new SourceRevision.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SourceRevision) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSourceRevisionWithSourceVersionProductTypeOperatingSystemVersion initializes a new source revision object with the provided source, version, product type, and operating system.
+func NewSourceRevisionWithSourceVersionProductTypeOperatingSystemVersion(source *Source, version string, productType string, operatingSystemVersion foundation.NSOperatingSystemVersion) *SourceRevision {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKSourceRevision")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:version:productType:operatingSystemVersion:"), objref.IDOf(source), purego.NSString(version), purego.NSString(productType), operatingSystemVersion)
+	return sourceRevisionAdopt(_id)
+}
+
+// NewSourceRevisionWithSourceVersion initializes a new source revision object with the provided source and version information.
 func NewSourceRevisionWithSourceVersion(source *Source, version string) *SourceRevision {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKSourceRevision")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:version:"), objref.IDOf(source), purego.NSString(version))
 	return sourceRevisionAdopt(_id)
 }
 
-// The HKSource of the receiver.
+// Source the HKSource of the receiver.
 func (x *SourceRevision) Source() *Source {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
 	return SourceFromID(_r)
 }
 
-// Represents the product type of the device running HealthKit when the object was created. This value may be nil for older data, which indicates an unknown product type.
+// ProductType represents the product type of the device running HealthKit when the object was created. This value may be nil for older data, which indicates an unknown product type.
 func (x *SourceRevision) ProductType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productType"))
 	if _r == 0 {
@@ -82,11 +96,18 @@ func (x *SourceRevision) ProductType() string {
 	return purego.GoString(_r)
 }
 
+// OperatingSystemVersion represents the operating system version of the device running HealthKit when the object was created. iOS versions after 8.0 but prior to 8.2 are saved as 8.0, and iOS version after 8.2 but prior to 9.0 are saved as 8.2.
+func (x *SourceRevision) OperatingSystemVersion() foundation.NSOperatingSystemVersion {
+	_r := objc.Send[foundation.NSOperatingSystemVersion](objref.IDOf(x), objc.RegisterName("operatingSystemVersion"))
+	return _r
+}
+
 // SourceRevisionable is the interface implemented by [SourceRevision], for mocking and DI.
 type SourceRevisionable interface {
 	obj.Object
 	Source() *Source
 	ProductType() string
+	OperatingSystemVersion() foundation.NSOperatingSystemVersion
 }
 
 var _ SourceRevisionable = (*SourceRevision)(nil)

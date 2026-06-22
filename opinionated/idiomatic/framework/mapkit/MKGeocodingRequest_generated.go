@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that looks up a geographic coordinate using the provided string.
-//
 // GeocodingRequest is an idiomatic wrapper over the Objective-C class MKGeocodingRequest.
+//
+// A class that looks up a geographic coordinate using the provided string.
 type GeocodingRequest struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func GeocodingRequestFromID(id objc.ID) *GeocodingRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &GeocodingRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GeocodingRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func geocodingRequestAdopt(id objc.ID) *GeocodingRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &GeocodingRequest{Handle: objref.Wrap(id)}
+	x := &GeocodingRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,27 +62,29 @@ func (x *GeocodingRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a new geocoder request object with the provided address string.
-//
-// NewGeocodingRequestWithAddressString creates a new GeocodingRequest.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GeocodingRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewGeocodingRequestWithAddressString initializes a new geocoder request object with the provided address string.
 func NewGeocodingRequestWithAddressString(addressString string) *GeocodingRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKGeocodingRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAddressString:"), purego.NSString(addressString))
 	return geocodingRequestAdopt(_id)
 }
 
-// A value that indicates the default locale the geocoder should use when processing requests.
-//
-// WithPreferredLocale sets preferredLocale and returns the receiver so calls can be chained.
+// WithPreferredLocale a value that indicates the default locale the geocoder should use when processing requests.
 func (x *GeocodingRequest) WithPreferredLocale(preferredLocale obj.Object) *GeocodingRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredLocale:"), objref.IDOf(preferredLocale))
 	return x
 }
 
-// Returns the map items relevant to the geocoded location.
+// GetMapItems returns the map items relevant to the geocoded location.
 //
 // GetMapItems blocks until the operation completes or ctx is cancelled.
-func (x *GeocodingRequest) GetMapItems(ctx context.Context) (obj.Object, error) {
+func (x *GeocodingRequest) GetMapItems(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -102,21 +106,24 @@ func (x *GeocodingRequest) GetMapItems(ctx context.Context) (obj.Object, error) 
 	}
 }
 
-// A function you call to cancel a geocoding request that’s in progress.
+// Cancel a function you call to cancel a geocoding request that’s in progress.
 func (x *GeocodingRequest) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
+// IsCancelled wraps the corresponding Objective-C method.
 func (x *GeocodingRequest) IsCancelled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCancelled"))
 	return _r
 }
 
+// IsLoading wraps the corresponding Objective-C method.
 func (x *GeocodingRequest) IsLoading() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLoading"))
 	return _r
 }
 
+// AddressString wraps the corresponding Objective-C method.
 func (x *GeocodingRequest) AddressString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addressString"))
 	if _r == 0 {
@@ -125,11 +132,13 @@ func (x *GeocodingRequest) AddressString() string {
 	return purego.GoString(_r)
 }
 
+// PreferredLocale wraps the corresponding Objective-C method.
 func (x *GeocodingRequest) PreferredLocale() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredLocale"))
 	return obj.Wrap(_r)
 }
 
+// SetPreferredLocale wraps the corresponding Objective-C method.
 func (x *GeocodingRequest) SetPreferredLocale(preferredLocale obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredLocale:"), objref.IDOf(preferredLocale))
 }

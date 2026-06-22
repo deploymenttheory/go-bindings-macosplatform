@@ -59,25 +59,21 @@ func SHMediaItemGenres() obj.Object { return obj.Wrap(purego.CFConstant(_symbol(
 // SHMediaItemISRC returns the string constant SHMediaItemISRC, for use as a dictionary key or argument.
 func SHMediaItemISRC() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("SHMediaItemISRC"))) }
 
-// The key to access the time ranges property of a media item.
 // SHMediaItemTimeRanges returns the string constant SHMediaItemTimeRanges, for use as a dictionary key or argument.
 func SHMediaItemTimeRanges() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SHMediaItemTimeRanges")))
 }
 
-// The key to access the frequency skew ranges property of a media item.
 // SHMediaItemFrequencySkewRanges returns the string constant SHMediaItemFrequencySkewRanges, for use as a dictionary key or argument.
 func SHMediaItemFrequencySkewRanges() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SHMediaItemFrequencySkewRanges")))
 }
 
-// The date when the media item was created
 // SHMediaItemCreationDate returns the string constant SHMediaItemCreationDate, for use as a dictionary key or argument.
 func SHMediaItemCreationDate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SHMediaItemCreationDate")))
 }
 
-// The error domain for specific errors for ShazamKit.
 // SHErrorDomain returns the string constant SHErrorDomain, for use as a dictionary key or argument.
 func SHErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("SHErrorDomain"))) }
 

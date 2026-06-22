@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base type class for types on tensors.
-//
 // GraphType is an idiomatic wrapper over the Objective-C class MPSGraphType.
+//
+// GraphType is an abstract base — you do not construct it directly. Construct one of [GraphShapedType] and pass it where a GraphType is accepted.
+//
+// The base type class for types on tensors.
 type GraphType struct {
-	objref.Handle
+	GraphObject
 }
 
 // GraphTypeFromID adopts an existing Objective-C object as a GraphType
@@ -25,7 +26,8 @@ func GraphTypeFromID(id objc.ID) *GraphType {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,30 +40,10 @@ func graphTypeAdopt(id objc.ID) *GraphType {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphType{Handle: objref.Wrap(id)}
+	x := &GraphType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GraphType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewGraphType creates a new GraphType.
-func NewGraphType() *GraphType {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphType")), objc.RegisterName("new"))
-	return graphTypeAdopt(_id)
 }
 
 // GraphTypeable is the interface implemented by [GraphType], for mocking and DI.
@@ -70,3 +52,12 @@ type GraphTypeable interface {
 }
 
 var _ GraphTypeable = (*GraphType)(nil)
+
+// isGraphType marks GraphType — and, by embedding promotion, its
+// subclasses — as a member of the GraphType hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *GraphType) isGraphType() {}
+
+var _ GraphTypeProvider = (*GraphType)(nil)
+
+var _ GraphObjectProvider = (*GraphType)(nil)

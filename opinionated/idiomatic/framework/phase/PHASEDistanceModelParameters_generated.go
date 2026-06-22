@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class for a sound’s rate of change over distance.
-//
 // DistanceModelParameters is an idiomatic wrapper over the Objective-C class PHASEDistanceModelParameters.
+//
+// DistanceModelParameters is an abstract base — you do not construct it directly. Construct one of [EnvelopeDistanceModelParameters], [GeometricSpreadingDistanceModelParameters] and pass it where a DistanceModelParameters is accepted.
+//
+// A base class for a sound’s rate of change over distance.
 type DistanceModelParameters struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func DistanceModelParametersFromID(id objc.ID) *DistanceModelParameters {
 	if id == 0 {
 		return nil
 	}
-	x := &DistanceModelParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DistanceModelParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func distanceModelParametersAdopt(id objc.ID) *DistanceModelParameters {
 	if id == 0 {
 		return nil
 	}
-	x := &DistanceModelParameters{Handle: objref.Wrap(id)}
+	x := &DistanceModelParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +62,25 @@ func (x *DistanceModelParameters) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewDistanceModelParameters creates a new DistanceModelParameters.
-func NewDistanceModelParameters() *DistanceModelParameters {
-	_id := objc.Send[objc.ID](objc.ID(_class("PHASEDistanceModelParameters")), objc.RegisterName("new"))
-	return distanceModelParametersAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DistanceModelParameters) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// A distance over which the framework fades out the mixer’s sound.
-//
-// WithFadeOutParameters sets fadeOutParameters and returns the receiver so calls can be chained.
+// WithFadeOutParameters a distance over which the framework fades out the mixer’s sound.
 func (x *DistanceModelParameters) WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *DistanceModelParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFadeOutParameters:"), objref.IDOf(fadeOutParameters))
 	return x
 }
 
+// FadeOutParameters wraps the corresponding Objective-C method.
 func (x *DistanceModelParameters) FadeOutParameters() *DistanceModelFadeOutParameters {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fadeOutParameters"))
 	return DistanceModelFadeOutParametersFromID(_r)
 }
 
+// SetFadeOutParameters wraps the corresponding Objective-C method.
 func (x *DistanceModelParameters) SetFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFadeOutParameters:"), objref.IDOf(fadeOutParameters))
 }
@@ -90,3 +94,10 @@ type DistanceModelParametersable interface {
 }
 
 var _ DistanceModelParametersable = (*DistanceModelParameters)(nil)
+
+// isDistanceModelParameters marks DistanceModelParameters — and, by embedding promotion, its
+// subclasses — as a member of the DistanceModelParameters hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DistanceModelParameters) isDistanceModelParameters() {}
+
+var _ DistanceModelParametersProvider = (*DistanceModelParameters)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the content key decryptor.
-//
 // ContentKey is an idiomatic wrapper over the Objective-C class AVContentKey.
+//
+// An object that represents the content key decryptor.
 type ContentKey struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ContentKeyFromID(id objc.ID) *ContentKey {
 	if id == 0 {
 		return nil
 	}
-	x := &ContentKey{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContentKey{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func contentKeyAdopt(id objc.ID) *ContentKey {
 	if id == 0 {
 		return nil
 	}
-	x := &ContentKey{Handle: objref.Wrap(id)}
+	x := &ContentKey{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +60,30 @@ func (x *ContentKey) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContentKey) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewContentKey creates a new ContentKey.
 func NewContentKey() *ContentKey {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVContentKey")), objc.RegisterName("new"))
 	return contentKeyAdopt(_id)
 }
 
-// Revokes the decryption context of the content key, and removes it from its associated AVContentKeySession. Once revoked, the AVContentKey is no longer eligible to be used with any media. If the key is required again, or if the key is requested to be loaded by the application, a new AVContentKeyRequest will be dispatched to the delegate. If there is media playback occurring which is dependent on the content key it will fail and may result in an error being generated with the playback halting.
+// Revoke revokes the decryption context of the content key, and removes it from its associated AVContentKeySession. Once revoked, the AVContentKey is no longer eligible to be used with any media. If the key is required again, or if the key is requested to be loaded by the application, a new AVContentKeyRequest will be dispatched to the delegate. If there is media playback occurring which is dependent on the content key it will fail and may result in an error being generated with the playback halting.
 func (x *ContentKey) Revoke() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("revoke"))
 }
 
-// Specifies the content key.
+// ContentKeySpecifier specifies the content key.
 func (x *ContentKey) ContentKeySpecifier() *ContentKeySpecifier {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentKeySpecifier"))
 	return ContentKeySpecifierFromID(_r)
 }
 
-// The external protection status for the AVContentKey based on all attached displays. This property is not key-value observable, instead the contentKeySession:externalProtectionStatusDidChangeForContentKey: delegate method should be used.
+// ExternalContentProtectionStatus the external protection status for the AVContentKey based on all attached displays. This property is not key-value observable, instead the contentKeySession:externalProtectionStatusDidChangeForContentKey: delegate method should be used.
 func (x *ContentKey) ExternalContentProtectionStatus() ExternalContentProtectionStatus {
 	_r := objc.Send[ExternalContentProtectionStatus](objref.IDOf(x), objc.RegisterName("externalContentProtectionStatus"))
 	return _r

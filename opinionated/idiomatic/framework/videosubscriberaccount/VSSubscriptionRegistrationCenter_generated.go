@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that stores subscription information that the system provides to the Apple TV app.
-//
 // VSSubscriptionRegistrationCenter is an idiomatic wrapper over the Objective-C class VSSubscriptionRegistrationCenter.
+//
+// An object that stores subscription information that the system provides to the Apple TV app.
 type VSSubscriptionRegistrationCenter struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VSSubscriptionRegistrationCenterFromID(id objc.ID) *VSSubscriptionRegistrat
 	if id == 0 {
 		return nil
 	}
-	x := &VSSubscriptionRegistrationCenter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VSSubscriptionRegistrationCenter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func vSSubscriptionRegistrationCenterAdopt(id objc.ID) *VSSubscriptionRegistrati
 	if id == 0 {
 		return nil
 	}
-	x := &VSSubscriptionRegistrationCenter{Handle: objref.Wrap(id)}
+	x := &VSSubscriptionRegistrationCenter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *VSSubscriptionRegistrationCenter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VSSubscriptionRegistrationCenter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVSSubscriptionRegistrationCenter creates a new VSSubscriptionRegistrationCenter.
 func NewVSSubscriptionRegistrationCenter() *VSSubscriptionRegistrationCenter {
 	_id := objc.Send[objc.ID](objc.ID(_class("VSSubscriptionRegistrationCenter")), objc.RegisterName("new"))
 	return vSSubscriptionRegistrationCenterAdopt(_id)
 }
 
-// Sets the subscription information for the current user.
+// SetCurrentSubscription sets the subscription information for the current user.
 func (x *VSSubscriptionRegistrationCenter) SetCurrentSubscription(currentSubscription *VSSubscription) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentSubscription:"), objref.IDOf(currentSubscription))
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Represents reflection information for a machine learning pipeline state.
-//
 // MTL4MachineLearningPipelineReflection is an idiomatic wrapper over the Objective-C class MTL4MachineLearningPipelineReflection.
+//
+// Represents reflection information for a machine learning pipeline state.
 type MTL4MachineLearningPipelineReflection struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MTL4MachineLearningPipelineReflectionFromID(id objc.ID) *MTL4MachineLearnin
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4MachineLearningPipelineReflection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTL4MachineLearningPipelineReflection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTL4MachineLearningPipelineReflectionAdopt(id objc.ID) *MTL4MachineLearning
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4MachineLearningPipelineReflection{Handle: objref.Wrap(id)}
+	x := &MTL4MachineLearningPipelineReflection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *MTL4MachineLearningPipelineReflection) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTL4MachineLearningPipelineReflection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTL4MachineLearningPipelineReflection creates a new MTL4MachineLearningPipelineReflection.
 func NewMTL4MachineLearningPipelineReflection() *MTL4MachineLearningPipelineReflection {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTL4MachineLearningPipelineReflection")), objc.RegisterName("new"))
 	return mTL4MachineLearningPipelineReflectionAdopt(_id)
 }
 
+// Bindings wraps the corresponding Objective-C method.
 func (x *MTL4MachineLearningPipelineReflection) Bindings() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

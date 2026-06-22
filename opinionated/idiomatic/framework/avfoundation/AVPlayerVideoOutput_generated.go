@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that receives video data from a player object.
-//
 // PlayerVideoOutput is an idiomatic wrapper over the Objective-C class AVPlayerVideoOutput.
+//
+// An object that receives video data from a player object.
 type PlayerVideoOutput struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PlayerVideoOutputFromID(id objc.ID) *PlayerVideoOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerVideoOutput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlayerVideoOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func playerVideoOutputAdopt(id objc.ID) *PlayerVideoOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerVideoOutput{Handle: objref.Wrap(id)}
+	x := &PlayerVideoOutput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,9 +60,13 @@ func (x *PlayerVideoOutput) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a video output from a specification.
-//
-// NewPlayerVideoOutputWithSpecification creates a new PlayerVideoOutput.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerVideoOutput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPlayerVideoOutputWithSpecification creates a video output from a specification.
 func NewPlayerVideoOutputWithSpecification(specification *VideoOutputSpecification) *PlayerVideoOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerVideoOutput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSpecification:"), objref.IDOf(specification))

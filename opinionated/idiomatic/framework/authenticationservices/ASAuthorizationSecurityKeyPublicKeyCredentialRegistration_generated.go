@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A newly created security key credential that results from a credential registration request.
-//
 // AuthorizationSecurityKeyPublicKeyCredentialRegistration is an idiomatic wrapper over the Objective-C class ASAuthorizationSecurityKeyPublicKeyCredentialRegistration.
+//
+// A newly created security key credential that results from a credential registration request.
 type AuthorizationSecurityKeyPublicKeyCredentialRegistration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationSecurityKeyPublicKeyCredentialRegistrationFromID(id objc.ID) *
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationSecurityKeyPublicKeyCredentialRegistration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationSecurityKeyPublicKeyCredentialRegistration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationSecurityKeyPublicKeyCredentialRegistrationAdopt(id objc.ID) *A
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationSecurityKeyPublicKeyCredentialRegistration{Handle: objref.Wrap(id)}
+	x := &AuthorizationSecurityKeyPublicKeyCredentialRegistration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) IsKind(classNa
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAuthorizationSecurityKeyPublicKeyCredentialRegistration creates a new AuthorizationSecurityKeyPublicKeyCredentialRegistration.
 func NewAuthorizationSecurityKeyPublicKeyCredentialRegistration() *AuthorizationSecurityKeyPublicKeyCredentialRegistration {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationSecurityKeyPublicKeyCredentialRegistration")), objc.RegisterName("new"))
 	return authorizationSecurityKeyPublicKeyCredentialRegistrationAdopt(_id)
 }
 
-// A list of transports that the authenticator is believed to support, if this could be determined.
+// Transports a list of transports that the authenticator is believed to support, if this could be determined.
 //
 // Transports returns the collection as a Go slice.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Transports() []obj.Object {
@@ -72,6 +80,7 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Transports() [
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// Prf wraps the corresponding Objective-C method.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Prf() *AuthorizationPublicKeyCredentialPRFRegistrationOutput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFRegistrationOutputFromID(_r)

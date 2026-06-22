@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that implements encoding using Compact-TLV encoding according to ISO 7816-4.
-//
 // CompactTLVRecord is an idiomatic wrapper over the Objective-C class TKCompactTLVRecord.
+//
+// It embeds [TLVRecord], promoting that type's methods.
+//
+// An object that implements encoding using Compact-TLV encoding according to ISO 7816-4.
 type CompactTLVRecord struct {
-	objref.Handle
+	TLVRecord
 }
 
 // CompactTLVRecordFromID adopts an existing Objective-C object as a CompactTLVRecord
@@ -25,7 +26,8 @@ func CompactTLVRecordFromID(id objc.ID) *CompactTLVRecord {
 	if id == 0 {
 		return nil
 	}
-	x := &CompactTLVRecord{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CompactTLVRecord{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func compactTLVRecordAdopt(id objc.ID) *CompactTLVRecord {
 	if id == 0 {
 		return nil
 	}
-	x := &CompactTLVRecord{Handle: objref.Wrap(id)}
+	x := &CompactTLVRecord{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CompactTLVRecord) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CompactTLVRecord) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CompactTLVRecord) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a TLV record with the specified tag and value.
-//
-// NewCompactTLVRecordWithTagValue creates a new CompactTLVRecord.
+// NewCompactTLVRecordWithTagValue initializes a TLV record with the specified tag and value.
 func NewCompactTLVRecordWithTagValue(tag uint8, value obj.Object) *CompactTLVRecord {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("TKCompactTLVRecord")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTag:value:"), tag, objref.IDOf(value))
@@ -73,3 +59,5 @@ type CompactTLVRecordable interface {
 }
 
 var _ CompactTLVRecordable = (*CompactTLVRecord)(nil)
+
+var _ TLVRecordProvider = (*CompactTLVRecord)(nil)

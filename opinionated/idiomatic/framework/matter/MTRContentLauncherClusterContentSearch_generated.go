@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRContentLauncherClusterContentSearch is an idiomatic wrapper over the Objective-C class MTRContentLauncherClusterContentSearch.
+//
+// It embeds [MTRContentLauncherClusterContentSearchStruct], promoting that type's methods.
 type MTRContentLauncherClusterContentSearch struct {
-	objref.Handle
+	MTRContentLauncherClusterContentSearchStruct
 }
 
 // MTRContentLauncherClusterContentSearchFromID adopts an existing Objective-C object as a MTRContentLauncherClusterContentSearch
@@ -23,7 +24,8 @@ func MTRContentLauncherClusterContentSearchFromID(id objc.ID) *MTRContentLaunche
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterContentSearch{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRContentLauncherClusterContentSearch{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRContentLauncherClusterContentSearchAdopt(id objc.ID) *MTRContentLauncher
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterContentSearch{Handle: objref.Wrap(id)}
+	x := &MTRContentLauncherClusterContentSearch{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRContentLauncherClusterContentSearch) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRContentLauncherClusterContentSearch) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRContentLauncherClusterContentSearch) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRContentLauncherClusterContentSearch creates a new MTRContentLauncherClusterContentSearch.
@@ -68,3 +56,5 @@ type MTRContentLauncherClusterContentSearchable interface {
 }
 
 var _ MTRContentLauncherClusterContentSearchable = (*MTRContentLauncherClusterContentSearch)(nil)
+
+var _ MTRContentLauncherClusterContentSearchStructProvider = (*MTRContentLauncherClusterContentSearch)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains the contacts prescription data for one eye.
-//
 // ContactsLensSpecification is an idiomatic wrapper over the Objective-C class HKContactsLensSpecification.
+//
+// It embeds [LensSpecification], promoting that type's methods.
+//
+// An object that contains the contacts prescription data for one eye.
 type ContactsLensSpecification struct {
-	objref.Handle
+	LensSpecification
 }
 
 // ContactsLensSpecificationFromID adopts an existing Objective-C object as a ContactsLensSpecification
@@ -25,7 +26,8 @@ func ContactsLensSpecificationFromID(id objc.ID) *ContactsLensSpecification {
 	if id == 0 {
 		return nil
 	}
-	x := &ContactsLensSpecification{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContactsLensSpecification{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,42 +40,26 @@ func contactsLensSpecificationAdopt(id objc.ID) *ContactsLensSpecification {
 	if id == 0 {
 		return nil
 	}
-	x := &ContactsLensSpecification{Handle: objref.Wrap(id)}
+	x := &ContactsLensSpecification{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ContactsLensSpecification) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContactsLensSpecification) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContactsLensSpecification) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a new contact lens specification, containing the prescription data for one eye.
-//
-// NewContactsLensSpecificationWithSphereCylinderAxisAddPowerBaseCurveDiameter creates a new ContactsLensSpecification.
+// NewContactsLensSpecificationWithSphereCylinderAxisAddPowerBaseCurveDiameter creates a new contact lens specification, containing the prescription data for one eye.
 func NewContactsLensSpecificationWithSphereCylinderAxisAddPowerBaseCurveDiameter(sphere *Quantity, cylinder *Quantity, axis *Quantity, addPower *Quantity, baseCurve *Quantity, diameter *Quantity) *ContactsLensSpecification {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKContactsLensSpecification")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSphere:cylinder:axis:addPower:baseCurve:diameter:"), objref.IDOf(sphere), objref.IDOf(cylinder), objref.IDOf(axis), objref.IDOf(addPower), objref.IDOf(baseCurve), objref.IDOf(diameter))
 	return contactsLensSpecificationAdopt(_id)
 }
 
-// The curvature of the back surface of the lens (measured in mm)
+// BaseCurve the curvature of the back surface of the lens (measured in mm)
 func (x *ContactsLensSpecification) BaseCurve() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseCurve"))
 	return QuantityFromID(_r)
 }
 
-// The width of the lens from edge to edge (measured in mm)
+// Diameter the width of the lens from edge to edge (measured in mm)
 func (x *ContactsLensSpecification) Diameter() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("diameter"))
 	return QuantityFromID(_r)
@@ -87,3 +73,5 @@ type ContactsLensSpecificationable interface {
 }
 
 var _ ContactsLensSpecificationable = (*ContactsLensSpecification)(nil)
+
+var _ LensSpecificationProvider = (*ContactsLensSpecification)(nil)

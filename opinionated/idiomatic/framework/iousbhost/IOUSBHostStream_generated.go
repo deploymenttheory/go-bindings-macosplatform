@@ -9,16 +9,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// The class responsible for sending stream data for function drivers.
-//
 // HostStream is an idiomatic wrapper over the Objective-C class IOUSBHostStream.
+//
+// It embeds [HostIOSource], promoting that type's methods.
+//
+// The class responsible for sending stream data for function drivers.
 type HostStream struct {
-	objref.Handle
+	HostIOSource
 }
 
 // HostStreamFromID adopts an existing Objective-C object as a HostStream
@@ -27,7 +28,8 @@ func HostStreamFromID(id objc.ID) *HostStream {
 	if id == 0 {
 		return nil
 	}
-	x := &HostStream{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HostStream{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,24 +42,10 @@ func hostStreamAdopt(id objc.ID) *HostStream {
 	if id == 0 {
 		return nil
 	}
-	x := &HostStream{Handle: objref.Wrap(id)}
+	x := &HostStream{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *HostStream) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HostStream) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HostStream) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewHostStream creates a new HostStream.
@@ -66,7 +54,7 @@ func NewHostStream() *HostStream {
 	return hostStreamAdopt(_id)
 }
 
-// Aborts pending input/output requests.
+// AbortWithOption aborts pending input/output requests.
 func (x *HostStream) AbortWithOption(option HostAbortOption) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("abortWithOption:error:"), option, unsafe.Pointer(&_nsErr))
@@ -76,7 +64,7 @@ func (x *HostStream) AbortWithOption(option HostAbortOption) error {
 	return nil
 }
 
-// Aborts pending input/output requests synchronously.
+// Abort aborts pending input/output requests synchronously.
 //
 // Abort returns an error if the operation did not succeed.
 func (x *HostStream) Abort() error {
@@ -88,13 +76,24 @@ func (x *HostStream) Abort() error {
 	return nil
 }
 
-// Returns the IOUSBHostPipe this stream was created from
+// SendIORequestWithDataBytesTransferred sends an input/output request on the stream.
+func (x *HostStream) SendIORequestWithDataBytesTransferred(data obj.Object) (bytesTransferred int, err error) {
+	var _out0 int
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendIORequestWithData:bytesTransferred:error:"), objref.IDOf(data), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _out0, nil
+}
+
+// HostPipe returns the IOUSBHostPipe this stream was created from
 func (x *HostStream) HostPipe() *HostPipe {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hostPipe"))
 	return HostPipeFromID(_r)
 }
 
-// Returns streamID associated with this IOUSBHostStream.
+// StreamID returns streamID associated with this IOUSBHostStream.
 func (x *HostStream) StreamID() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("streamID"))
 	return _r
@@ -105,8 +104,11 @@ type HostStreamable interface {
 	obj.Object
 	AbortWithOption(option HostAbortOption) error
 	Abort() error
+	SendIORequestWithDataBytesTransferred(data obj.Object) (bytesTransferred int, err error)
 	HostPipe() *HostPipe
 	StreamID() int
 }
 
 var _ HostStreamable = (*HostStream)(nil)
+
+var _ HostIOSourceProvider = (*HostStream)(nil)

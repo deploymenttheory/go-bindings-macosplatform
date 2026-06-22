@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that implements the client side of a custom transparent network proxy solution.
-//
 // NETransparentProxyProvider is an idiomatic wrapper over the Objective-C class NETransparentProxyProvider.
+//
+// It embeds [NEAppProxyProvider], promoting that type's methods.
+//
+// An object that implements the client side of a custom transparent network proxy solution.
 type NETransparentProxyProvider struct {
-	objref.Handle
+	NEAppProxyProvider
 }
 
 // NETransparentProxyProviderFromID adopts an existing Objective-C object as a NETransparentProxyProvider
@@ -25,7 +26,8 @@ func NETransparentProxyProviderFromID(id objc.ID) *NETransparentProxyProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &NETransparentProxyProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NETransparentProxyProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func nETransparentProxyProviderAdopt(id objc.ID) *NETransparentProxyProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &NETransparentProxyProvider{Handle: objref.Wrap(id)}
+	x := &NETransparentProxyProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NETransparentProxyProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NETransparentProxyProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NETransparentProxyProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNETransparentProxyProvider creates a new NETransparentProxyProvider.
@@ -64,9 +52,7 @@ func NewNETransparentProxyProvider() *NETransparentProxyProvider {
 	return nETransparentProxyProviderAdopt(_id)
 }
 
-// Indicate to the system that the tunnel is being re-established.
-//
-// WithReasserting sets reasserting and returns the receiver so calls can be chained.
+// WithReasserting indicate to the system that the tunnel is being re-established.
 func (x *NETransparentProxyProvider) WithReasserting(reasserting bool) *NETransparentProxyProvider {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReasserting:"), reasserting)
 	return x
@@ -79,3 +65,9 @@ type NETransparentProxyProviderable interface {
 }
 
 var _ NETransparentProxyProviderable = (*NETransparentProxyProvider)(nil)
+
+var _ NEAppProxyProviderProvider = (*NETransparentProxyProvider)(nil)
+
+var _ NETunnelProviderProvider = (*NETransparentProxyProvider)(nil)
+
+var _ NEProviderProvider = (*NETransparentProxyProvider)(nil)

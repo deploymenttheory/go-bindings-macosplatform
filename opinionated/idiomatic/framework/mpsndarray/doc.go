@@ -3,4 +3,20 @@
 //go:build darwin
 
 // Package mpsndarray provides a fluent Go API over the macOS MPSNDArray framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - ArrayBinaryKernel: [ArrayGather]
+//   - ArrayBinaryPrimaryGradientKernel: [ArrayGatherGradient]
+//   - ArrayGradientState: [ArrayGatherGradientState]
+//   - ArrayMatrixMultiplication: [ArrayQuantizedMatrixMultiplication]
+//   - ArrayMultiaryBase: [ArrayMultiaryGradientKernel], [ArrayMultiaryKernel]
+//   - ArrayMultiaryGradientKernel: [ArrayBinaryPrimaryGradientKernel], [ArrayBinarySecondaryGradientKernel], [ArrayUnaryGradientKernel]
+//   - ArrayMultiaryKernel: [ArrayAffineInt4Dequantize], [ArrayBinaryKernel], [ArrayLUTDequantize], [ArrayMatrixMultiplication], [ArrayUnaryKernel], [ArrayVectorLUTDequantize]
+//   - ArrayQuantizationDescriptor: [ArrayAffineQuantizationDescriptor], [ArrayLUTQuantizationDescriptor]
+//   - ArrayUnaryGradientKernel: [ArrayStridedSliceGradient]
+//   - ArrayUnaryKernel: [ArrayIdentity], [ArrayStridedSlice]
 package mpsndarray

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The DNS resolver settings of a network tunnel or a system-wide configuration.
-//
 // NEDNSSettings is an idiomatic wrapper over the Objective-C class NEDNSSettings.
+//
+// NEDNSSettings is an abstract base — you do not construct it directly. Construct one of [NEDNSOverHTTPSSettings], [NEDNSOverTLSSettings] and pass it where a NEDNSSettings is accepted.
+//
+// The DNS resolver settings of a network tunnel or a system-wide configuration.
 type NEDNSSettings struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func NEDNSSettingsFromID(id objc.ID) *NEDNSSettings {
 	if id == 0 {
 		return nil
 	}
-	x := &NEDNSSettings{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEDNSSettings{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func nEDNSSettingsAdopt(id objc.ID) *NEDNSSettings {
 	if id == 0 {
 		return nil
 	}
-	x := &NEDNSSettings{Handle: objref.Wrap(id)}
+	x := &NEDNSSettings{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,64 +62,58 @@ func (x *NEDNSSettings) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize the NEDNSSetting object.
-//
-// NewNEDNSSettingsWithServers creates a new NEDNSSettings.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEDNSSettings) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNEDNSSettingsWithServers initialize the NEDNSSetting object.
 func NewNEDNSSettingsWithServers(servers []string) *NEDNSSettings {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NEDNSSettings")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServers:"), purego.SliceToNSArray(servers, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return nEDNSSettingsAdopt(_id)
 }
 
-// A list of domain strings used to fully qualify single-label host names.
-//
-// WithSearchDomains sets the collection and returns the receiver so calls can be chained.
+// WithSearchDomains a list of domain strings used to fully qualify single-label host names.
 func (x *NEDNSSettings) WithSearchDomains(items ...obj.Object) *NEDNSSettings {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchDomains:"), _arr)
 	return x
 }
 
-// The primary domain of the tunnel.
-//
-// WithDomainName sets domainName and returns the receiver so calls can be chained.
+// WithDomainName the primary domain of the tunnel.
 func (x *NEDNSSettings) WithDomainName(domainName string) *NEDNSSettings {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDomainName:"), purego.NSString(domainName))
 	return x
 }
 
-// A list of domain strings used to determine which DNS queries will use the DNS resolver settings contained in this object.
-//
-// WithMatchDomains sets the collection and returns the receiver so calls can be chained.
+// WithMatchDomains a list of domain strings used to determine which DNS queries will use the DNS resolver settings contained in this object.
 func (x *NEDNSSettings) WithMatchDomains(items ...obj.Object) *NEDNSSettings {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchDomains:"), _arr)
 	return x
 }
 
-// A Boolean that specifies if the domains in the matchDomains list should not be appended to the resolver’s list of search domains.
-//
-// WithMatchDomainsNoSearch sets matchDomainsNoSearch and returns the receiver so calls can be chained.
+// WithMatchDomainsNoSearch a Boolean that specifies if the domains in the matchDomains list should not be appended to the resolver’s list of search domains.
 func (x *NEDNSSettings) WithMatchDomainsNoSearch(matchDomainsNoSearch bool) *NEDNSSettings {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchDomainsNoSearch:"), matchDomainsNoSearch)
 	return x
 }
 
-// A boolean indicating if failover to the default system resolver is permitted on resolution failure.
-//
-// WithAllowFailover sets allowFailover and returns the receiver so calls can be chained.
+// WithAllowFailover a boolean indicating if failover to the default system resolver is permitted on resolution failure.
 func (x *NEDNSSettings) WithAllowFailover(allowFailover bool) *NEDNSSettings {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowFailover:"), allowFailover)
 	return x
 }
 
-// The DNS protocol used by the settings.
+// DnsProtocol the DNS protocol used by the settings.
 func (x *NEDNSSettings) DnsProtocol() NEDNSProtocol {
 	_r := objc.Send[NEDNSProtocol](objref.IDOf(x), objc.RegisterName("dnsProtocol"))
 	return _r
 }
 
-// An array of DNS server address strings.
+// Servers an array of DNS server address strings.
 //
 // Servers returns the collection as a Go slice.
 func (x *NEDNSSettings) Servers() []string {
@@ -123,7 +121,7 @@ func (x *NEDNSSettings) Servers() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// An array of DNS server search domain strings.
+// SearchDomains an array of DNS server search domain strings.
 //
 // SearchDomains returns the collection as a Go slice.
 func (x *NEDNSSettings) SearchDomains() []string {
@@ -131,11 +129,12 @@ func (x *NEDNSSettings) SearchDomains() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetSearchDomains wraps the corresponding Objective-C method.
 func (x *NEDNSSettings) SetSearchDomains(searchDomains []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchDomains:"), purego.SliceToNSArray(searchDomains, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// A string containing the DNS domain.
+// DomainName a string containing the DNS domain.
 func (x *NEDNSSettings) DomainName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domainName"))
 	if _r == 0 {
@@ -144,11 +143,12 @@ func (x *NEDNSSettings) DomainName() string {
 	return purego.GoString(_r)
 }
 
+// SetDomainName wraps the corresponding Objective-C method.
 func (x *NEDNSSettings) SetDomainName(domainName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDomainName:"), purego.NSString(domainName))
 }
 
-// An array of strings containing domain strings. If this property is non-nil, the DNS settings will only be used to resolve host names within the specified domains.
+// MatchDomains an array of strings containing domain strings. If this property is non-nil, the DNS settings will only be used to resolve host names within the specified domains.
 //
 // MatchDomains returns the collection as a Go slice.
 func (x *NEDNSSettings) MatchDomains() []string {
@@ -156,26 +156,29 @@ func (x *NEDNSSettings) MatchDomains() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetMatchDomains wraps the corresponding Objective-C method.
 func (x *NEDNSSettings) SetMatchDomains(matchDomains []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchDomains:"), purego.SliceToNSArray(matchDomains, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// A boolean indicating if the match domains should be appended to the search domain list.  Default is NO (match domains will be appended to the search domain list).
+// MatchDomainsNoSearch a boolean indicating if the match domains should be appended to the search domain list.  Default is NO (match domains will be appended to the search domain list).
 func (x *NEDNSSettings) MatchDomainsNoSearch() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("matchDomainsNoSearch"))
 	return _r
 }
 
+// SetMatchDomainsNoSearch wraps the corresponding Objective-C method.
 func (x *NEDNSSettings) SetMatchDomainsNoSearch(matchDomainsNoSearch bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchDomainsNoSearch:"), matchDomainsNoSearch)
 }
 
-// A boolean indicating if failover to the default system resolver is permitted on resolution failure.
+// AllowFailover a boolean indicating if failover to the default system resolver is permitted on resolution failure.
 func (x *NEDNSSettings) AllowFailover() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowFailover"))
 	return _r
 }
 
+// SetAllowFailover wraps the corresponding Objective-C method.
 func (x *NEDNSSettings) SetAllowFailover(allowFailover bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowFailover:"), allowFailover)
 }
@@ -203,3 +206,10 @@ type NEDNSSettingsable interface {
 }
 
 var _ NEDNSSettingsable = (*NEDNSSettings)(nil)
+
+// isNEDNSSettings marks NEDNSSettings — and, by embedding promotion, its
+// subclasses — as a member of the NEDNSSettings hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NEDNSSettings) isNEDNSSettings() {}
+
+var _ NEDNSSettingsProvider = (*NEDNSSettings)(nil)

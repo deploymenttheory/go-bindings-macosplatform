@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object for configuring a location monitor instance.
-//
 // MonitorConfiguration is an idiomatic wrapper over the Objective-C class CLMonitorConfiguration.
+//
+// An object for configuring a location monitor instance.
 type MonitorConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MonitorConfigurationFromID(id objc.ID) *MonitorConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &MonitorConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MonitorConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func monitorConfigurationAdopt(id objc.ID) *MonitorConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &MonitorConfiguration{Handle: objref.Wrap(id)}
+	x := &MonitorConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *MonitorConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MonitorConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMonitorConfiguration creates a new MonitorConfiguration.
 func NewMonitorConfiguration() *MonitorConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("CLMonitorConfiguration")), objc.RegisterName("new"))
 	return monitorConfigurationAdopt(_id)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *MonitorConfiguration) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -72,6 +81,7 @@ func (x *MonitorConfiguration) Name() string {
 	return purego.GoString(_r)
 }
 
+// Queue wraps the corresponding Objective-C method.
 func (x *MonitorConfiguration) Queue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queue"))
 	return obj.Wrap(_r)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of a single change to make to an item in a collection view.
-//
 // CollectionViewUpdateItem is an idiomatic wrapper over the Objective-C class NSCollectionViewUpdateItem.
+//
+// A description of a single change to make to an item in a collection view.
 type CollectionViewUpdateItem struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CollectionViewUpdateItemFromID(id objc.ID) *CollectionViewUpdateItem {
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionViewUpdateItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollectionViewUpdateItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func collectionViewUpdateItemAdopt(id objc.ID) *CollectionViewUpdateItem {
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionViewUpdateItem{Handle: objref.Wrap(id)}
+	x := &CollectionViewUpdateItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,31 @@ func (x *CollectionViewUpdateItem) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CollectionViewUpdateItem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCollectionViewUpdateItem creates a new CollectionViewUpdateItem.
 func NewCollectionViewUpdateItem() *CollectionViewUpdateItem {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewUpdateItem")), objc.RegisterName("new"))
 	return collectionViewUpdateItemAdopt(_id)
 }
 
+// IndexPathBeforeUpdate wraps the corresponding Objective-C method.
 func (x *CollectionViewUpdateItem) IndexPathBeforeUpdate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexPathBeforeUpdate"))
 	return obj.Wrap(_r)
 }
 
+// IndexPathAfterUpdate wraps the corresponding Objective-C method.
 func (x *CollectionViewUpdateItem) IndexPathAfterUpdate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexPathAfterUpdate"))
 	return obj.Wrap(_r)
 }
 
+// UpdateAction wraps the corresponding Objective-C method.
 func (x *CollectionViewUpdateItem) UpdateAction() CollectionUpdateAction {
 	_r := objc.Send[CollectionUpdateAction](objref.IDOf(x), objc.RegisterName("updateAction"))
 	return _r

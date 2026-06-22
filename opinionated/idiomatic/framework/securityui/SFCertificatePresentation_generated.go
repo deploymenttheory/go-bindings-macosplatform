@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that displays a certificate sheet for a provided certificate trust.
-//
 // CertificatePresentation is an idiomatic wrapper over the Objective-C class SFCertificatePresentation.
+//
+// An object that displays a certificate sheet for a provided certificate trust.
 type CertificatePresentation struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func CertificatePresentationFromID(id objc.ID) *CertificatePresentation {
 	if id == 0 {
 		return nil
 	}
-	x := &CertificatePresentation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CertificatePresentation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func certificatePresentationAdopt(id objc.ID) *CertificatePresentation {
 	if id == 0 {
 		return nil
 	}
-	x := &CertificatePresentation{Handle: objref.Wrap(id)}
+	x := &CertificatePresentation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,39 +61,39 @@ func (x *CertificatePresentation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize the certificate presentation with a certificate trust reference.
-//
-// NewCertificatePresentationWithTrust creates a new CertificatePresentation.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CertificatePresentation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCertificatePresentationWithTrust initialize the certificate presentation with a certificate trust reference.
 func NewCertificatePresentationWithTrust(trust obj.Object) *CertificatePresentation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SFCertificatePresentation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTrust:"), objref.IDOf(trust))
 	return certificatePresentationAdopt(_id)
 }
 
-// Title string to be displayed. If no title is provided, a default title will be used.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle title string to be displayed. If no title is provided, a default title will be used.
 func (x *CertificatePresentation) WithTitle(title string) *CertificatePresentation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// Message string to be displayed. If no message is provided, a default message will be used.
-//
-// WithMessage sets message and returns the receiver so calls can be chained.
+// WithMessage message string to be displayed. If no message is provided, a default message will be used.
 func (x *CertificatePresentation) WithMessage(message string) *CertificatePresentation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessage:"), purego.NSString(message))
 	return x
 }
 
-// The URL that will be opened by clicking the “Learn More” button.
-//
-// WithHelpURL sets helpURL and returns the receiver so calls can be chained.
+// WithHelpURL the URL that will be opened by clicking the “Learn More” button.
 func (x *CertificatePresentation) WithHelpURL(helpURL string) *CertificatePresentation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHelpURL:"), rt.FileURL(helpURL))
 	return x
 }
 
+// PresentSheetInWindowDismissHandler wraps the corresponding Objective-C method.
+//
 // PresentSheetInWindowDismissHandler blocks until the operation completes or ctx is cancelled.
 func (x *CertificatePresentation) PresentSheetInWindowDismissHandler(ctx context.Context, window obj.Object) error {
 	_ch := make(chan error, 1)
@@ -107,18 +109,18 @@ func (x *CertificatePresentation) PresentSheetInWindowDismissHandler(ctx context
 	}
 }
 
-// Dismisses the certificate sheet.
+// DismissSheet dismisses the certificate sheet.
 func (x *CertificatePresentation) DismissSheet() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dismissSheet"))
 }
 
-// A trust reference, previously created with SecTrustCreateWithCertificates (see <Security/SecTrust.h>).
+// Trust a trust reference, previously created with SecTrustCreateWithCertificates (see <Security/SecTrust.h>).
 func (x *CertificatePresentation) Trust() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trust"))
 	return obj.Wrap(_r)
 }
 
-// Title string to be displayed. If no title is provided, a default title will be used.
+// Title title string to be displayed. If no title is provided, a default title will be used.
 func (x *CertificatePresentation) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -127,11 +129,12 @@ func (x *CertificatePresentation) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *CertificatePresentation) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// Message string to be displayed. If no message is provided, a default message will be used.
+// Message message string to be displayed. If no message is provided, a default message will be used.
 func (x *CertificatePresentation) Message() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("message"))
 	if _r == 0 {
@@ -140,16 +143,18 @@ func (x *CertificatePresentation) Message() string {
 	return purego.GoString(_r)
 }
 
+// SetMessage wraps the corresponding Objective-C method.
 func (x *CertificatePresentation) SetMessage(message string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessage:"), purego.NSString(message))
 }
 
-// The URL that will be opened by clicking the "Learn More" button.
+// HelpURL the URL that will be opened by clicking the "Learn More" button.
 func (x *CertificatePresentation) HelpURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("helpURL"))
 	return obj.Wrap(_r)
 }
 
+// SetHelpURL wraps the corresponding Objective-C method.
 func (x *CertificatePresentation) SetHelpURL(helpURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHelpURL:"), rt.FileURL(helpURL))
 }

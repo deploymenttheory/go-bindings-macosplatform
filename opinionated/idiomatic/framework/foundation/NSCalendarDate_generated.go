@@ -8,15 +8,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// A specialized date object with embedded calendar information.
-//
 // CalendarDate is an idiomatic wrapper over the Objective-C class NSCalendarDate.
+//
+// It embeds [Date], promoting that type's methods.
+//
+// A specialized date object with embedded calendar information.
 type CalendarDate struct {
-	objref.Handle
+	Date
 }
 
 // CalendarDateFromID adopts an existing Objective-C object as a CalendarDate
@@ -25,7 +27,8 @@ func CalendarDateFromID(id objc.ID) *CalendarDate {
 	if id == 0 {
 		return nil
 	}
-	x := &CalendarDate{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CalendarDate{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func calendarDateAdopt(id objc.ID) *CalendarDate {
 	if id == 0 {
 		return nil
 	}
-	x := &CalendarDate{Handle: objref.Wrap(id)}
+	x := &CalendarDate{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CalendarDate) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CalendarDate) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CalendarDate) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCalendarDateWithStringCalendarFormatLocale creates a new CalendarDate.
@@ -86,62 +75,73 @@ func NewCalendarDateWithYearMonthDayHourMinuteSecondTimeZone(year int, month int
 	return calendarDateAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *CalendarDate) WithScriptingProperties(scriptingProperties obj.Object) *CalendarDate {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// DateByAddingYearsMonthsDaysHoursMinutesSeconds wraps the corresponding Objective-C method.
 func (x *CalendarDate) DateByAddingYearsMonthsDaysHoursMinutesSeconds(year int, month int, day int, hour int, minute int, second int) *CalendarDate {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateByAddingYears:months:days:hours:minutes:seconds:"), year, month, day, hour, minute, second)
 	return CalendarDateFromID(_r)
 }
 
+// DayOfCommonEra wraps the corresponding Objective-C method.
 func (x *CalendarDate) DayOfCommonEra() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dayOfCommonEra"))
 	return _r
 }
 
+// DayOfMonth wraps the corresponding Objective-C method.
 func (x *CalendarDate) DayOfMonth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dayOfMonth"))
 	return _r
 }
 
+// DayOfWeek wraps the corresponding Objective-C method.
 func (x *CalendarDate) DayOfWeek() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dayOfWeek"))
 	return _r
 }
 
+// DayOfYear wraps the corresponding Objective-C method.
 func (x *CalendarDate) DayOfYear() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dayOfYear"))
 	return _r
 }
 
+// HourOfDay wraps the corresponding Objective-C method.
 func (x *CalendarDate) HourOfDay() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("hourOfDay"))
 	return _r
 }
 
+// MinuteOfHour wraps the corresponding Objective-C method.
 func (x *CalendarDate) MinuteOfHour() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minuteOfHour"))
 	return _r
 }
 
+// MonthOfYear wraps the corresponding Objective-C method.
 func (x *CalendarDate) MonthOfYear() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("monthOfYear"))
 	return _r
 }
 
+// SecondOfMinute wraps the corresponding Objective-C method.
 func (x *CalendarDate) SecondOfMinute() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("secondOfMinute"))
 	return _r
 }
 
+// YearOfCommonEra wraps the corresponding Objective-C method.
 func (x *CalendarDate) YearOfCommonEra() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("yearOfCommonEra"))
 	return _r
 }
 
+// CalendarFormat wraps the corresponding Objective-C method.
 func (x *CalendarDate) CalendarFormat() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendarFormat"))
 	if _r == 0 {
@@ -150,6 +150,7 @@ func (x *CalendarDate) CalendarFormat() string {
 	return purego.GoString(_r)
 }
 
+// DescriptionWithCalendarFormatLocale wraps the corresponding Objective-C method.
 func (x *CalendarDate) DescriptionWithCalendarFormatLocale(format string, locale obj.Object) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionWithCalendarFormat:locale:"), purego.NSString(format), objref.IDOf(locale))
 	if _r == 0 {
@@ -158,6 +159,7 @@ func (x *CalendarDate) DescriptionWithCalendarFormatLocale(format string, locale
 	return purego.GoString(_r)
 }
 
+// DescriptionWithCalendarFormat wraps the corresponding Objective-C method.
 func (x *CalendarDate) DescriptionWithCalendarFormat(format string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionWithCalendarFormat:"), purego.NSString(format))
 	if _r == 0 {
@@ -166,17 +168,32 @@ func (x *CalendarDate) DescriptionWithCalendarFormat(format string) string {
 	return purego.GoString(_r)
 }
 
+// TimeZone wraps the corresponding Objective-C method.
 func (x *CalendarDate) TimeZone() *TimeZone {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeZone"))
 	return TimeZoneFromID(_r)
 }
 
+// SetCalendarFormat wraps the corresponding Objective-C method.
 func (x *CalendarDate) SetCalendarFormat(format string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendarFormat:"), purego.NSString(format))
 }
 
+// SetTimeZone wraps the corresponding Objective-C method.
 func (x *CalendarDate) SetTimeZone(aTimeZone *TimeZone) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(aTimeZone))
+}
+
+// YearsMonthsDaysHoursMinutesSecondsSinceDate wraps the corresponding Objective-C method.
+func (x *CalendarDate) YearsMonthsDaysHoursMinutesSecondsSinceDate(date *CalendarDate) (yp int64, mop int64, dp int64, hp int64, mip int64, sp int64) {
+	var _out0 int64
+	var _out1 int64
+	var _out2 int64
+	var _out3 int64
+	var _out4 int64
+	var _out5 int64
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("years:months:days:hours:minutes:seconds:sinceDate:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), objref.IDOf(date))
+	return _out0, _out1, _out2, _out3, _out4, _out5
 }
 
 // CalendarDateable is the interface implemented by [CalendarDate], for mocking and DI.
@@ -199,6 +216,9 @@ type CalendarDateable interface {
 	TimeZone() *TimeZone
 	SetCalendarFormat(format string)
 	SetTimeZone(aTimeZone *TimeZone)
+	YearsMonthsDaysHoursMinutesSecondsSinceDate(date *CalendarDate) (yp int64, mop int64, dp int64, hp int64, mip int64, sp int64)
 }
 
 var _ CalendarDateable = (*CalendarDate)(nil)
+
+var _ DateProvider = (*CalendarDate)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unique identifier for a specific health concept within a domain.
-//
 // HealthConceptIdentifier is an idiomatic wrapper over the Objective-C class HKHealthConceptIdentifier.
+//
+// A unique identifier for a specific health concept within a domain.
 type HealthConceptIdentifier struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func HealthConceptIdentifierFromID(id objc.ID) *HealthConceptIdentifier {
 	if id == 0 {
 		return nil
 	}
-	x := &HealthConceptIdentifier{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HealthConceptIdentifier{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func healthConceptIdentifierAdopt(id objc.ID) *HealthConceptIdentifier {
 	if id == 0 {
 		return nil
 	}
-	x := &HealthConceptIdentifier{Handle: objref.Wrap(id)}
+	x := &HealthConceptIdentifier{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *HealthConceptIdentifier) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HealthConceptIdentifier) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewHealthConceptIdentifier creates a new HealthConceptIdentifier.
 func NewHealthConceptIdentifier() *HealthConceptIdentifier {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKHealthConceptIdentifier")), objc.RegisterName("new"))
 	return healthConceptIdentifierAdopt(_id)
 }
 
-// The domain this identifier belongs to. This value identifies the group of concepts the identifier comes from. For example, if the identifier represents a medication, the category will be the medication domain.
+// Domain the domain this identifier belongs to. This value identifies the group of concepts the identifier comes from. For example, if the identifier represents a medication, the category will be the medication domain.
 func (x *HealthConceptIdentifier) Domain() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domain"))
 	return obj.Wrap(_r)

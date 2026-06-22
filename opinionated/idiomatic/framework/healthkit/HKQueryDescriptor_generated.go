@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A descriptor that specifies a set of samples based on the data type and a predicate.
-//
 // QueryDescriptor is an idiomatic wrapper over the Objective-C class HKQueryDescriptor.
+//
+// A descriptor that specifies a set of samples based on the data type and a predicate.
 type QueryDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func QueryDescriptorFromID(id objc.ID) *QueryDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &QueryDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QueryDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func queryDescriptorAdopt(id objc.ID) *QueryDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &QueryDescriptor{Handle: objref.Wrap(id)}
+	x := &QueryDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,26 @@ func (x *QueryDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new descriptor for the data type and predicate you provided.
-//
-// NewQueryDescriptorWithSampleTypePredicate creates a new QueryDescriptor.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *QueryDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewQueryDescriptorWithSampleTypePredicate creates a new descriptor for the data type and predicate you provided.
 func NewQueryDescriptorWithSampleTypePredicate(sampleType *SampleType, predicate obj.Object) *QueryDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKQueryDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleType:predicate:"), objref.IDOf(sampleType), objref.IDOf(predicate))
 	return queryDescriptorAdopt(_id)
 }
 
-// The type of sample to retrieve in an HKQuery.
+// SampleType the type of sample to retrieve in an HKQuery.
 func (x *QueryDescriptor) SampleType() *SampleType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleType"))
 	return SampleTypeFromID(_r)
 }
 
-// The predicate which samples should match.
+// Predicate the predicate which samples should match.
 func (x *QueryDescriptor) Predicate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
 	return obj.Wrap(_r)

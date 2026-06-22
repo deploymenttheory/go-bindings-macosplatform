@@ -9,6 +9,5 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// The string defining the error domain for AudioVideoBridging errors.
 // AVBErrorDomain returns the string constant AVBErrorDomain, for use as a dictionary key or argument.
 func AVBErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVBErrorDomain"))) }

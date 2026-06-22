@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides information about the application requesting data from the File Provider extension.
-//
 // FileProviderRequest is an idiomatic wrapper over the Objective-C class NSFileProviderRequest.
+//
+// An object that provides information about the application requesting data from the File Provider extension.
 type FileProviderRequest struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FileProviderRequestFromID(id objc.ID) *FileProviderRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &FileProviderRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FileProviderRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func fileProviderRequestAdopt(id objc.ID) *FileProviderRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &FileProviderRequest{Handle: objref.Wrap(id)}
+	x := &FileProviderRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,37 @@ func (x *FileProviderRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FileProviderRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFileProviderRequest creates a new FileProviderRequest.
 func NewFileProviderRequest() *FileProviderRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSFileProviderRequest")), objc.RegisterName("new"))
 	return fileProviderRequestAdopt(_id)
 }
 
-// The request was made by the sync system, e.g. to update a file to its latest version after a remote update was pushed. This is only valid for NSFileProviderRequest objects passed to these methods: - [NSFileProviderEnumerating enumeratorForContainerItemIdentifier:] - [NSFileProviderReplicatedExtension fetchContentsForItemWithIdentifier:] For sync up methods (createItem/modifyItem/deleteItem), the system does not know which actor made the modifications to the file, so it cannot supply this information.
+// IsSystemRequest the request was made by the sync system, e.g. to update a file to its latest version after a remote update was pushed. This is only valid for NSFileProviderRequest objects passed to these methods: - [NSFileProviderEnumerating enumeratorForContainerItemIdentifier:] - [NSFileProviderReplicatedExtension fetchContentsForItemWithIdentifier:] For sync up methods (createItem/modifyItem/deleteItem), the system does not know which actor made the modifications to the file, so it cannot supply this information.
 func (x *FileProviderRequest) IsSystemRequest() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSystemRequest"))
 	return _r
 }
 
-// The request was made by Finder or one of its helpers. This is only valid for NSFileProviderRequest objects passed to these methods: - [NSFileProviderEnumerating enumeratorForContainerItemIdentifier:] - [NSFileProviderReplicatedExtension fetchContentsForItemWithIdentifier:] For sync up methods (createItem/modifyItem/deleteItem), the system does not know which actor made the modifications to the file, so it cannot supply this information.
+// IsFileViewerRequest the request was made by Finder or one of its helpers. This is only valid for NSFileProviderRequest objects passed to these methods: - [NSFileProviderEnumerating enumeratorForContainerItemIdentifier:] - [NSFileProviderReplicatedExtension fetchContentsForItemWithIdentifier:] For sync up methods (createItem/modifyItem/deleteItem), the system does not know which actor made the modifications to the file, so it cannot supply this information.
 func (x *FileProviderRequest) IsFileViewerRequest() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFileViewerRequest"))
 	return _r
 }
 
-// The URL of the requesting executable. This will always be nil unless both an MDM profile key is set, and the provider's application is installed by an MDM profile.
+// RequestingExecutable the URL of the requesting executable. This will always be nil unless both an MDM profile key is set, and the provider's application is installed by an MDM profile.
 func (x *FileProviderRequest) RequestingExecutable() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestingExecutable"))
 	return obj.Wrap(_r)
 }
 
-// The version of the domain when the event that triggered the request was observed. If the extension doesn't implement the NSFileProviderDomainState protocol, this will be nil.
+// DomainVersion the version of the domain when the event that triggered the request was observed. If the extension doesn't implement the NSFileProviderDomainState protocol, this will be nil.
 func (x *FileProviderRequest) DomainVersion() *FileProviderDomainVersion {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domainVersion"))
 	return FileProviderDomainVersionFromID(_r)

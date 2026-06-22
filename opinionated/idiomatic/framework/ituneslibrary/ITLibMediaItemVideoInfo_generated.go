@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// This class encapsulates the video information of a video media item.
-//
 // LibMediaItemVideoInfo is an idiomatic wrapper over the Objective-C class ITLibMediaItemVideoInfo.
+//
+// This class encapsulates the video information of a video media item.
 type LibMediaItemVideoInfo struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LibMediaItemVideoInfoFromID(id objc.ID) *LibMediaItemVideoInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &LibMediaItemVideoInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LibMediaItemVideoInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func libMediaItemVideoInfoAdopt(id objc.ID) *LibMediaItemVideoInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &LibMediaItemVideoInfo{Handle: objref.Wrap(id)}
+	x := &LibMediaItemVideoInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *LibMediaItemVideoInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LibMediaItemVideoInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLibMediaItemVideoInfo creates a new LibMediaItemVideoInfo.
 func NewLibMediaItemVideoInfo() *LibMediaItemVideoInfo {
 	_id := objc.Send[objc.ID](objc.ID(_class("ITLibMediaItemVideoInfo")), objc.RegisterName("new"))
 	return libMediaItemVideoInfoAdopt(_id)
 }
 
-// The name of TV series the video is associated with (implies track is a TV show).
+// Series the name of TV series the video is associated with (implies track is a TV show).
 func (x *LibMediaItemVideoInfo) Series() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("series"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *LibMediaItemVideoInfo) Series() string {
 	return purego.GoString(_r)
 }
 
-// The name of the TV series the video is associated with that should be used for when sorting (implies the track is a TV show).
+// SortSeries the name of the TV series the video is associated with that should be used for when sorting (implies the track is a TV show).
 func (x *LibMediaItemVideoInfo) SortSeries() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortSeries"))
 	if _r == 0 {
@@ -82,13 +90,13 @@ func (x *LibMediaItemVideoInfo) SortSeries() string {
 	return purego.GoString(_r)
 }
 
-// The name of TV season the video is associated with (implies the track is a TV show).
+// Season the name of TV season the video is associated with (implies the track is a TV show).
 func (x *LibMediaItemVideoInfo) Season() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("season"))
 	return _r
 }
 
-// The TV episode the video is associated with (implies the track is a TV show).
+// Episode the TV episode the video is associated with (implies the track is a TV show).
 func (x *LibMediaItemVideoInfo) Episode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("episode"))
 	if _r == 0 {
@@ -97,25 +105,25 @@ func (x *LibMediaItemVideoInfo) Episode() string {
 	return purego.GoString(_r)
 }
 
-// The TV episode order the video is associated with (implies the track is a TV show).
+// EpisodeOrder the TV episode order the video is associated with (implies the track is a TV show).
 func (x *LibMediaItemVideoInfo) EpisodeOrder() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("episodeOrder"))
 	return _r
 }
 
-// Whether the video is high definition.
+// IsHD whether the video is high definition.
 func (x *LibMediaItemVideoInfo) IsHD() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHD"))
 	return _r
 }
 
-// The width of the video.
+// VideoWidth the width of the video.
 func (x *LibMediaItemVideoInfo) VideoWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("videoWidth"))
 	return _r
 }
 
-// The height of the video.
+// VideoHeight the height of the video.
 func (x *LibMediaItemVideoInfo) VideoHeight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("videoHeight"))
 	return _r

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A service with writeable property values.
-//
 // MutableService is an idiomatic wrapper over the Objective-C class CBMutableService.
+//
+// It embeds [Service], promoting that type's methods.
+//
+// A service with writeable property values.
 type MutableService struct {
-	objref.Handle
+	Service
 }
 
 // MutableServiceFromID adopts an existing Objective-C object as a MutableService
@@ -25,7 +26,8 @@ func MutableServiceFromID(id objc.ID) *MutableService {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableService{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableService{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,57 +40,39 @@ func mutableServiceAdopt(id objc.ID) *MutableService {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableService{Handle: objref.Wrap(id)}
+	x := &MutableService{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MutableService) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableService) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableService) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a newly initialized mutable service specified by UUID and service type.
-//
-// NewMutableServiceWithTypePrimary creates a new MutableService.
+// NewMutableServiceWithTypePrimary creates a newly initialized mutable service specified by UUID and service type.
 func NewMutableServiceWithTypePrimary(uUID *UUID, isPrimary bool) *MutableService {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CBMutableService")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:primary:"), objref.IDOf(uUID), isPrimary)
 	return mutableServiceAdopt(_id)
 }
 
-// A list of included services.
-//
-// WithIncludedServices sets the collection and returns the receiver so calls can be chained.
+// WithIncludedServices a list of included services.
 func (x *MutableService) WithIncludedServices(items ...ServiceProvider) *MutableService {
 	_arr := purego.SliceToNSArray(items, func(_v ServiceProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludedServices:"), _arr)
 	return x
 }
 
-// A list of characteristics of a service.
-//
-// WithCharacteristics sets the collection and returns the receiver so calls can be chained.
+// WithCharacteristics a list of characteristics of a service.
 func (x *MutableService) WithCharacteristics(items ...CharacteristicProvider) *MutableService {
 	_arr := purego.SliceToNSArray(items, func(_v CharacteristicProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharacteristics:"), _arr)
 	return x
 }
 
+// SetIncludedServices wraps the corresponding Objective-C method.
 func (x *MutableService) SetIncludedServices(includedServices []*Service) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludedServices:"), purego.SliceToNSArray(includedServices, func(_v *Service) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SetCharacteristics wraps the corresponding Objective-C method.
 func (x *MutableService) SetCharacteristics(characteristics []*Characteristic) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharacteristics:"), purego.SliceToNSArray(characteristics, func(_v *Characteristic) objc.ID { return objref.IDOf(_v) }))
 }
@@ -103,3 +87,7 @@ type MutableServiceable interface {
 }
 
 var _ MutableServiceable = (*MutableService)(nil)
+
+var _ ServiceProvider = (*MutableService)(nil)
+
+var _ AttributeProvider = (*MutableService)(nil)

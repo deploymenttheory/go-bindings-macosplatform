@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object used by the distributed objects system to help handle invocations between different processes.
-//
 // DistantObjectRequest is an idiomatic wrapper over the Objective-C class NSDistantObjectRequest.
+//
+// An object used by the distributed objects system to help handle invocations between different processes.
 type DistantObjectRequest struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DistantObjectRequestFromID(id objc.ID) *DistantObjectRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &DistantObjectRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DistantObjectRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func distantObjectRequestAdopt(id objc.ID) *DistantObjectRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &DistantObjectRequest{Handle: objref.Wrap(id)}
+	x := &DistantObjectRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,33 +60,42 @@ func (x *DistantObjectRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DistantObjectRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDistantObjectRequest creates a new DistantObjectRequest.
 func NewDistantObjectRequest() *DistantObjectRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSDistantObjectRequest")), objc.RegisterName("new"))
 	return distantObjectRequestAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *DistantObjectRequest) WithScriptingProperties(scriptingProperties obj.Object) *DistantObjectRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Sends a reply back to the remote object making the distant object request.
+// ReplyWithException sends a reply back to the remote object making the distant object request.
 func (x *DistantObjectRequest) ReplyWithException(exception *Exception) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replyWithException:"), objref.IDOf(exception))
 }
 
+// Invocation wraps the corresponding Objective-C method.
 func (x *DistantObjectRequest) Invocation() *Invocation {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invocation"))
 	return InvocationFromID(_r)
 }
 
+// Connection wraps the corresponding Objective-C method.
 func (x *DistantObjectRequest) Connection() *Connection {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connection"))
 	return ConnectionFromID(_r)
 }
 
+// Conversation wraps the corresponding Objective-C method.
 func (x *DistantObjectRequest) Conversation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("conversation"))
 	return obj.Wrap(_r)

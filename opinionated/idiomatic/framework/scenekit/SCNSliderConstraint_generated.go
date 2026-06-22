@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // SliderConstraint is an idiomatic wrapper over the Objective-C class SCNSliderConstraint.
+//
+// It embeds [Constraint], promoting that type's methods.
 type SliderConstraint struct {
-	objref.Handle
+	Constraint
 }
 
 // SliderConstraintFromID adopts an existing Objective-C object as a SliderConstraint
@@ -23,7 +24,8 @@ func SliderConstraintFromID(id objc.ID) *SliderConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &SliderConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SliderConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func sliderConstraintAdopt(id objc.ID) *SliderConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &SliderConstraint{Handle: objref.Wrap(id)}
+	x := &SliderConstraint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SliderConstraint) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SliderConstraint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SliderConstraint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSliderConstraint creates a new SliderConstraint.
@@ -62,62 +50,54 @@ func NewSliderConstraint() *SliderConstraint {
 	return sliderConstraintAdopt(_id)
 }
 
-// Defines the category of node to collide against. Defaults to 0.
-//
-// WithCollisionCategoryBitMask sets collisionCategoryBitMask and returns the receiver so calls can be chained.
+// WithCollisionCategoryBitMask defines the category of node to collide against. Defaults to 0.
 func (x *SliderConstraint) WithCollisionCategoryBitMask(collisionCategoryBitMask int) *SliderConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollisionCategoryBitMask:"), collisionCategoryBitMask)
 	return x
 }
 
-// Defines the radius of the slider. Defaults to 1.
-//
-// WithRadius sets radius and returns the receiver so calls can be chained.
+// WithRadius defines the radius of the slider. Defaults to 1.
 func (x *SliderConstraint) WithRadius(radius float64) *SliderConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 	return x
 }
 
-// Determines whether the constraint is enabled or not. Defaults to YES.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled determines whether the constraint is enabled or not. Defaults to YES.
 func (x *SliderConstraint) WithEnabled(enabled bool) *SliderConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The influence of the constraint on the node’s transformation.
-//
-// WithInfluenceFactor sets influenceFactor and returns the receiver so calls can be chained.
+// WithInfluenceFactor the influence of the constraint on the node’s transformation.
 func (x *SliderConstraint) WithInfluenceFactor(influenceFactor float64) *SliderConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
 	return x
 }
 
-// Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
-//
-// WithIncremental sets incremental and returns the receiver so calls can be chained.
+// WithIncremental specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
 func (x *SliderConstraint) WithIncremental(incremental bool) *SliderConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
 	return x
 }
 
-// Defines the category of node to collide against. Defaults to 0.
+// CollisionCategoryBitMask defines the category of node to collide against. Defaults to 0.
 func (x *SliderConstraint) CollisionCategoryBitMask() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("collisionCategoryBitMask"))
 	return _r
 }
 
+// SetCollisionCategoryBitMask wraps the corresponding Objective-C method.
 func (x *SliderConstraint) SetCollisionCategoryBitMask(collisionCategoryBitMask int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollisionCategoryBitMask:"), collisionCategoryBitMask)
 }
 
-// Defines the radius of the slider. Defaults to 1.
+// Radius defines the radius of the slider. Defaults to 1.
 func (x *SliderConstraint) Radius() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("radius"))
 	return _r
 }
 
+// SetRadius wraps the corresponding Objective-C method.
 func (x *SliderConstraint) SetRadius(radius float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 }
@@ -137,3 +117,5 @@ type SliderConstraintable interface {
 }
 
 var _ SliderConstraintable = (*SliderConstraint)(nil)
+
+var _ ConstraintProvider = (*SliderConstraint)(nil)

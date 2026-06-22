@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing metrics about the amount of time the app is active.
-//
 // AppRunTimeMetric is an idiomatic wrapper over the Objective-C class MXAppRunTimeMetric.
+//
+// It embeds [Metric], promoting that type's methods.
+//
+// An object representing metrics about the amount of time the app is active.
 type AppRunTimeMetric struct {
-	objref.Handle
+	Metric
 }
 
 // AppRunTimeMetricFromID adopts an existing Objective-C object as a AppRunTimeMetric
@@ -25,7 +26,8 @@ func AppRunTimeMetricFromID(id objc.ID) *AppRunTimeMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &AppRunTimeMetric{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AppRunTimeMetric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func appRunTimeMetricAdopt(id objc.ID) *AppRunTimeMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &AppRunTimeMetric{Handle: objref.Wrap(id)}
+	x := &AppRunTimeMetric{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AppRunTimeMetric) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AppRunTimeMetric) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AppRunTimeMetric) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAppRunTimeMetric creates a new AppRunTimeMetric.
@@ -64,25 +52,25 @@ func NewAppRunTimeMetric() *AppRunTimeMetric {
 	return appRunTimeMetricAdopt(_id)
 }
 
-// Cumulative application foreground time. Time spent on screen and visible to the user. Dimensioned as NSUnitDuration.
+// CumulativeForegroundTime cumulative application foreground time. Time spent on screen and visible to the user. Dimensioned as NSUnitDuration.
 func (x *AppRunTimeMetric) CumulativeForegroundTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeForegroundTime"))
 	return obj.Wrap(_r)
 }
 
-// Cumulative application background time. Time spent off screen and in the background, invisible to the user. Dimensioned as NSUnitDuration.
+// CumulativeBackgroundTime cumulative application background time. Time spent off screen and in the background, invisible to the user. Dimensioned as NSUnitDuration.
 func (x *AppRunTimeMetric) CumulativeBackgroundTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeBackgroundTime"))
 	return obj.Wrap(_r)
 }
 
-// Cumulative time the application spent running in the background to play audio Dimensioned as NSUnitDuration.
+// CumulativeBackgroundAudioTime cumulative time the application spent running in the background to play audio Dimensioned as NSUnitDuration.
 func (x *AppRunTimeMetric) CumulativeBackgroundAudioTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeBackgroundAudioTime"))
 	return obj.Wrap(_r)
 }
 
-// Cumulative time the application spent running in the background to acquire or process location. Dimensioned as NSUnitDuration.
+// CumulativeBackgroundLocationTime cumulative time the application spent running in the background to acquire or process location. Dimensioned as NSUnitDuration.
 func (x *AppRunTimeMetric) CumulativeBackgroundLocationTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeBackgroundLocationTime"))
 	return obj.Wrap(_r)
@@ -98,3 +86,5 @@ type AppRunTimeMetricable interface {
 }
 
 var _ AppRunTimeMetricable = (*AppRunTimeMetric)(nil)
+
+var _ MetricProvider = (*AppRunTimeMetric)(nil)

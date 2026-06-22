@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that encapsulates information about a response to a content decryption key request.
-//
 // ContentKeyResponse is an idiomatic wrapper over the Objective-C class AVContentKeyResponse.
+//
+// An object that encapsulates information about a response to a content decryption key request.
 type ContentKeyResponse struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ContentKeyResponseFromID(id objc.ID) *ContentKeyResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &ContentKeyResponse{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContentKeyResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func contentKeyResponseAdopt(id objc.ID) *ContentKeyResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &ContentKeyResponse{Handle: objref.Wrap(id)}
+	x := &ContentKeyResponse{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *ContentKeyResponse) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *ContentKeyResponse) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContentKeyResponse) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewContentKeyResponse creates a new ContentKeyResponse.

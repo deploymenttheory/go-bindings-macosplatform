@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A subclass of CAOpenGLLayer that is suitable for rendering OpenGL into layers.
-//
 // OpenGLLayer is an idiomatic wrapper over the Objective-C class NSOpenGLLayer.
+//
+// A subclass of CAOpenGLLayer that is suitable for rendering OpenGL into layers.
 type OpenGLLayer struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func OpenGLLayerFromID(id objc.ID) *OpenGLLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &OpenGLLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OpenGLLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func openGLLayerAdopt(id objc.ID) *OpenGLLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &OpenGLLayer{Handle: objref.Wrap(id)}
+	x := &OpenGLLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,71 +60,77 @@ func (x *OpenGLLayer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OpenGLLayer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewOpenGLLayer creates a new OpenGLLayer.
 func NewOpenGLLayer() *OpenGLLayer {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSOpenGLLayer")), objc.RegisterName("new"))
 	return openGLLayerAdopt(_id)
 }
 
-// Returns the view associated with the layer.
-//
-// WithView sets view and returns the receiver so calls can be chained.
+// WithView returns the view associated with the layer.
 func (x *OpenGLLayer) WithView(view ViewProvider) *OpenGLLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 	return x
 }
 
-// Provides access to the layer’s associated OpenGL pixel format.
-//
-// WithOpenGLPixelFormat sets openGLPixelFormat and returns the receiver so calls can be chained.
+// WithOpenGLPixelFormat provides access to the layer’s associated OpenGL pixel format.
 func (x *OpenGLLayer) WithOpenGLPixelFormat(openGLPixelFormat *OpenGLPixelFormat) *OpenGLLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpenGLPixelFormat:"), objref.IDOf(openGLPixelFormat))
 	return x
 }
 
-// The layer’s OpenGL context.
-//
-// WithOpenGLContext sets openGLContext and returns the receiver so calls can be chained.
+// WithOpenGLContext the layer’s OpenGL context.
 func (x *OpenGLLayer) WithOpenGLContext(openGLContext *OpenGLContext) *OpenGLLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpenGLContext:"), objref.IDOf(openGLContext))
 	return x
 }
 
-// Returns the OpenGL pixel format suitable for the specified displays.
+// OpenGLPixelFormatForDisplayMask returns the OpenGL pixel format suitable for the specified displays.
 func (x *OpenGLLayer) OpenGLPixelFormatForDisplayMask(mask uint32) *OpenGLPixelFormat {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLPixelFormatForDisplayMask:"), mask)
 	return OpenGLPixelFormatFromID(_r)
 }
 
-// Returns the OpenGL context to use for the requested pixel format.
+// OpenGLContextForPixelFormat returns the OpenGL context to use for the requested pixel format.
 func (x *OpenGLLayer) OpenGLContextForPixelFormat(pixelFormat *OpenGLPixelFormat) *OpenGLContext {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLContextForPixelFormat:"), objref.IDOf(pixelFormat))
 	return OpenGLContextFromID(_r)
 }
 
+// View wraps the corresponding Objective-C method.
 func (x *OpenGLLayer) View() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }
 
+// SetView wraps the corresponding Objective-C method.
 func (x *OpenGLLayer) SetView(view *View) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 }
 
+// OpenGLPixelFormat wraps the corresponding Objective-C method.
 func (x *OpenGLLayer) OpenGLPixelFormat() *OpenGLPixelFormat {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLPixelFormat"))
 	return OpenGLPixelFormatFromID(_r)
 }
 
+// SetOpenGLPixelFormat wraps the corresponding Objective-C method.
 func (x *OpenGLLayer) SetOpenGLPixelFormat(openGLPixelFormat *OpenGLPixelFormat) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpenGLPixelFormat:"), objref.IDOf(openGLPixelFormat))
 }
 
+// OpenGLContext wraps the corresponding Objective-C method.
 func (x *OpenGLLayer) OpenGLContext() *OpenGLContext {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLContext"))
 	return OpenGLContextFromID(_r)
 }
 
+// SetOpenGLContext wraps the corresponding Objective-C method.
 func (x *OpenGLLayer) SetOpenGLContext(openGLContext *OpenGLContext) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpenGLContext:"), objref.IDOf(openGLContext))
 }

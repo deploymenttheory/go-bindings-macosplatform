@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// This object contains both input and output parameters necessary to run the motion blur processor on a frame.
-//
 // MotionBlurParameters is an idiomatic wrapper over the Objective-C class VTMotionBlurParameters.
+//
+// This object contains both input and output parameters necessary to run the motion blur processor on a frame.
 type MotionBlurParameters struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MotionBlurParametersFromID(id objc.ID) *MotionBlurParameters {
 	if id == 0 {
 		return nil
 	}
-	x := &MotionBlurParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MotionBlurParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func motionBlurParametersAdopt(id objc.ID) *MotionBlurParameters {
 	if id == 0 {
 		return nil
 	}
-	x := &MotionBlurParameters{Handle: objref.Wrap(id)}
+	x := &MotionBlurParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,58 +60,62 @@ func (x *MotionBlurParameters) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new motion blur parameters object. Returns `nil` if `sourceFrame` or `destinationFrame` is `nil`, `sourceFrame` and reference frames are different pixel formats, or `motionBlurStrength` is out of range. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - nextFrame: Next source frame in presentation time order; for the last frame you can set this to `nil`. - previousFrame: Previous source frame in presentation time order; for the first frame you can set this to `nil`. - nextOpticalFlow: Optional `VTFrameProcessorOpticalFlow` object that contains forward and backward optical flow with `nextFrame`. You only need this object if optical flow is pre-computed. For the last frame this is always `nil`. - previousOpticalFlow: Optional VTFrameProcessorOpticalFlow object that contains forward and backward optical flow with `previousFrame`. You only need to use this if the optical flow is pre-computed. For the first frame this is always `nil`. - motionBlurStrength: Number that indicates the strength of blur applied by the processor. Range is from 1 to 100. Default value is 50. - submissionMode: Provides a hint to let the processor know whether you are submitting frames in presenatation sequence. For more information about supported modes see “VTMotionBlurParametersSubmissionMode“. - destinationFrame: User-allocated pixel buffer that receives a frame with motion blur applied by the processor.
-//
-// NewMotionBlurParametersWithSourceFrameNextFramePreviousFrameNextOpticalFlowPreviousOpticalFlowMotionBlurStrengthSubmissionModeDestinationFrame creates a new MotionBlurParameters.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MotionBlurParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMotionBlurParametersWithSourceFrameNextFramePreviousFrameNextOpticalFlowPreviousOpticalFlowMotionBlurStrengthSubmissionModeDestinationFrame creates a new motion blur parameters object. Returns `nil` if `sourceFrame` or `destinationFrame` is `nil`, `sourceFrame` and reference frames are different pixel formats, or `motionBlurStrength` is out of range. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - nextFrame: Next source frame in presentation time order; for the last frame you can set this to `nil`. - previousFrame: Previous source frame in presentation time order; for the first frame you can set this to `nil`. - nextOpticalFlow: Optional `VTFrameProcessorOpticalFlow` object that contains forward and backward optical flow with `nextFrame`. You only need this object if optical flow is pre-computed. For the last frame this is always `nil`. - previousOpticalFlow: Optional VTFrameProcessorOpticalFlow object that contains forward and backward optical flow with `previousFrame`. You only need to use this if the optical flow is pre-computed. For the first frame this is always `nil`. - motionBlurStrength: Number that indicates the strength of blur applied by the processor. Range is from 1 to 100. Default value is 50. - submissionMode: Provides a hint to let the processor know whether you are submitting frames in presenatation sequence. For more information about supported modes see “VTMotionBlurParametersSubmissionMode“. - destinationFrame: User-allocated pixel buffer that receives a frame with motion blur applied by the processor.
 func NewMotionBlurParametersWithSourceFrameNextFramePreviousFrameNextOpticalFlowPreviousOpticalFlowMotionBlurStrengthSubmissionModeDestinationFrame(sourceFrame *FrameProcessorFrame, nextFrame *FrameProcessorFrame, previousFrame *FrameProcessorFrame, nextOpticalFlow *FrameProcessorOpticalFlow, previousOpticalFlow *FrameProcessorOpticalFlow, motionBlurStrength int, submissionMode MotionBlurParametersSubmissionMode, destinationFrame *FrameProcessorFrame) *MotionBlurParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VTMotionBlurParameters")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:nextFrame:previousFrame:nextOpticalFlow:previousOpticalFlow:motionBlurStrength:submissionMode:destinationFrame:"), objref.IDOf(sourceFrame), objref.IDOf(nextFrame), objref.IDOf(previousFrame), objref.IDOf(nextOpticalFlow), objref.IDOf(previousOpticalFlow), motionBlurStrength, submissionMode, objref.IDOf(destinationFrame))
 	return motionBlurParametersAdopt(_id)
 }
 
-// Current source frame, which must be non `nil`.
+// SourceFrame current source frame, which must be non `nil`.
 func (x *MotionBlurParameters) SourceFrame() *FrameProcessorFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// The next source frame in presentation time order, which is `nil` for the last frame.
+// NextFrame the next source frame in presentation time order, which is `nil` for the last frame.
 func (x *MotionBlurParameters) NextFrame() *FrameProcessorFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// Previous source frame in presentation time order, which is `nil` for the first frame.
+// PreviousFrame previous source frame in presentation time order, which is `nil` for the first frame.
 func (x *MotionBlurParameters) PreviousFrame() *FrameProcessorFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// Optional frame processor optical flow object that contains forward and backward optical flow with next frame. You only need to use this object if the optical flow is pre-computed. For the last frame this is `nil`.
+// NextOpticalFlow optional frame processor optical flow object that contains forward and backward optical flow with next frame. You only need to use this object if the optical flow is pre-computed. For the last frame this is `nil`.
 func (x *MotionBlurParameters) NextOpticalFlow() *FrameProcessorOpticalFlow {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextOpticalFlow"))
 	return FrameProcessorOpticalFlowFromID(_r)
 }
 
-// Optional frame processor optical flow object that contains forward and backward optical flow with previous frame. You only need to use this object if the optical flow is pre-computed. For the first frame this is `nil`.
+// PreviousOpticalFlow optional frame processor optical flow object that contains forward and backward optical flow with previous frame. You only need to use this object if the optical flow is pre-computed. For the first frame this is `nil`.
 func (x *MotionBlurParameters) PreviousOpticalFlow() *FrameProcessorOpticalFlow {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousOpticalFlow"))
 	return FrameProcessorOpticalFlowFromID(_r)
 }
 
-// Number that indicates the strength of motion blur. The range is from 1 to 100; the default value is 50.
+// MotionBlurStrength number that indicates the strength of motion blur. The range is from 1 to 100; the default value is 50.
 func (x *MotionBlurParameters) MotionBlurStrength() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("motionBlurStrength"))
 	return _r
 }
 
-// Ordering of the input frames this submission related to the previous submission.
+// SubmissionMode ordering of the input frames this submission related to the previous submission.
 func (x *MotionBlurParameters) SubmissionMode() MotionBlurParametersSubmissionMode {
 	_r := objc.Send[MotionBlurParametersSubmissionMode](objref.IDOf(x), objc.RegisterName("submissionMode"))
 	return _r
 }
 
-// Destination frame that contains user-allocated pixel buffer that receive a frame with motion blur applied by the processor.
+// DestinationFrame destination frame that contains user-allocated pixel buffer that receive a frame with motion blur applied by the processor.
 func (x *MotionBlurParameters) DestinationFrame() *FrameProcessorFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationFrame"))
 	return FrameProcessorFrameFromID(_r)

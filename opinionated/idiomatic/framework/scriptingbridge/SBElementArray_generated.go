@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// SBElementArray is subclass of NSMutableArray that manages collections of related SBObject objects. For example, when you ask the Finder for a list of disks, or ask iTunes for a list of playlists, you get the result back as an SBElementArray containing Scripting Bridge objects representing those items.
-//
 // ElementArray is an idiomatic wrapper over the Objective-C class SBElementArray.
+//
+// SBElementArray is subclass of NSMutableArray that manages collections of related SBObject objects. For example, when you ask the Finder for a list of disks, or ask iTunes for a list of playlists, you get the result back as an SBElementArray containing Scripting Bridge objects representing those items.
 type ElementArray struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ElementArrayFromID(id objc.ID) *ElementArray {
 	if id == 0 {
 		return nil
 	}
-	x := &ElementArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ElementArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func elementArrayAdopt(id objc.ID) *ElementArray {
 	if id == 0 {
 		return nil
 	}
-	x := &ElementArray{Handle: objref.Wrap(id)}
+	x := &ElementArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,37 @@ func (x *ElementArray) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ElementArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewElementArray creates a new ElementArray.
 func NewElementArray() *ElementArray {
 	_id := objc.Send[objc.ID](objc.ID(_class("SBElementArray")), objc.RegisterName("new"))
 	return elementArrayAdopt(_id)
 }
 
-// Returns the object in the array with the given name.
+// ObjectWithName returns the object in the array with the given name.
 func (x *ElementArray) ObjectWithName(name string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectWithName:"), purego.NSString(name))
 	return obj.Wrap(_r)
 }
 
-// Returns the object in the array with the given identifier.
+// ObjectWithID returns the object in the array with the given identifier.
 func (x *ElementArray) ObjectWithID(identifier obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectWithID:"), objref.IDOf(identifier))
 	return obj.Wrap(_r)
 }
 
-// Returns the object at the given location in the receiver.
+// ObjectAtLocation returns the object at the given location in the receiver.
 func (x *ElementArray) ObjectAtLocation(location obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtLocation:"), objref.IDOf(location))
 	return obj.Wrap(_r)
 }
 
-// Forces evaluation of the receiver, causing the real object to be returned immediately.
+// Get forces evaluation of the receiver, causing the real object to be returned immediately.
 func (x *ElementArray) Get() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("get"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

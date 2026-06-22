@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The object for registering a new security key credential.
-//
 // AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest is an idiomatic wrapper over the Objective-C class ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest.
+//
+// It embeds [AuthorizationRequest], promoting that type's methods.
+//
+// The object for registering a new security key credential.
 type AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest struct {
-	objref.Handle
+	AuthorizationRequest
 }
 
 // AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestFromID adopts an existing Objective-C object as a AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest
@@ -25,7 +26,8 @@ func AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestFromID(id obj
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func authorizationSecurityKeyPublicKeyCredentialRegistrationRequestAdopt(id objc
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest{Handle: objref.Wrap(id)}
+	x := &AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest creates a new AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest.
@@ -64,39 +52,33 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest() *Author
 	return authorizationSecurityKeyPublicKeyCredentialRegistrationRequestAdopt(_id)
 }
 
-// An array of parameters for the credential.
-//
-// WithCredentialParameters sets the collection and returns the receiver so calls can be chained.
+// WithCredentialParameters an array of parameters for the credential.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) WithCredentialParameters(items ...*AuthorizationPublicKeyCredentialParameters) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
 	_arr := purego.SliceToNSArray(items, func(_v *AuthorizationPublicKeyCredentialParameters) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentialParameters:"), _arr)
 	return x
 }
 
-// An array of excluded parameters for the credential.
-//
-// WithExcludedCredentials sets the collection and returns the receiver so calls can be chained.
+// WithExcludedCredentials an array of excluded parameters for the credential.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) WithExcludedCredentials(items ...*AuthorizationSecurityKeyPublicKeyCredentialDescriptor) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
 	_arr := purego.SliceToNSArray(items, func(_v *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedCredentials:"), _arr)
 	return x
 }
 
-// The preference that indicates where the resident key resides.
-//
-// WithResidentKeyPreference sets residentKeyPreference and returns the receiver so calls can be chained.
+// WithResidentKeyPreference the preference that indicates where the resident key resides.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) WithResidentKeyPreference(residentKeyPreference obj.Object) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResidentKeyPreference:"), objref.IDOf(residentKeyPreference))
 	return x
 }
 
-// WithPrf sets prf and returns the receiver so calls can be chained.
+// WithPrf sets the property and returns the receiver so calls can be chained.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) WithPrf(prf *AuthorizationPublicKeyCredentialPRFRegistrationInput) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrf:"), objref.IDOf(prf))
 	return x
 }
 
-// A list of parameters for the new credential which are supported by the Relying Party. The authenticator should choose from these parameters when creating the credential.
+// CredentialParameters a list of parameters for the new credential which are supported by the Relying Party. The authenticator should choose from these parameters when creating the credential.
 //
 // CredentialParameters returns the collection as a Go slice.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) CredentialParameters() []*AuthorizationPublicKeyCredentialParameters {
@@ -106,11 +88,12 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) Credent
 	})
 }
 
+// SetCredentialParameters wraps the corresponding Objective-C method.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) SetCredentialParameters(credentialParameters []*AuthorizationPublicKeyCredentialParameters) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentialParameters:"), purego.SliceToNSArray(credentialParameters, func(_v *AuthorizationPublicKeyCredentialParameters) objc.ID { return objref.IDOf(_v) }))
 }
 
-// A list of descriptors indicating credentials which must not already exist on the authenticator. If a credential already exists on the authenticator which matches one or more of these descriptors, a new credential will not be created and authentication will fail.
+// ExcludedCredentials a list of descriptors indicating credentials which must not already exist on the authenticator. If a credential already exists on the authenticator which matches one or more of these descriptors, a new credential will not be created and authentication will fail.
 //
 // ExcludedCredentials returns the collection as a Go slice.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) ExcludedCredentials() []*AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
@@ -120,25 +103,29 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) Exclude
 	})
 }
 
+// SetExcludedCredentials wraps the corresponding Objective-C method.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) SetExcludedCredentials(excludedCredentials []*AuthorizationSecurityKeyPublicKeyCredentialDescriptor) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedCredentials:"), purego.SliceToNSArray(excludedCredentials, func(_v *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) objc.ID { return objref.IDOf(_v) }))
 }
 
-// A preference whether the authenticator should store the private key of the newly created credential.
+// ResidentKeyPreference a preference whether the authenticator should store the private key of the newly created credential.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) ResidentKeyPreference() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("residentKeyPreference"))
 	return obj.Wrap(_r)
 }
 
+// SetResidentKeyPreference wraps the corresponding Objective-C method.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) SetResidentKeyPreference(residentKeyPreference obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResidentKeyPreference:"), objref.IDOf(residentKeyPreference))
 }
 
+// Prf wraps the corresponding Objective-C method.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) Prf() *AuthorizationPublicKeyCredentialPRFRegistrationInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFRegistrationInputFromID(_r)
 }
 
+// SetPrf wraps the corresponding Objective-C method.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) SetPrf(prf *AuthorizationPublicKeyCredentialPRFRegistrationInput) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrf:"), objref.IDOf(prf))
 }
@@ -161,3 +148,5 @@ type AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestable interfac
 }
 
 var _ AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestable = (*AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest)(nil)
+
+var _ AuthorizationRequestProvider = (*AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest)(nil)

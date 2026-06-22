@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // HangUpCallIntentResponse is an idiomatic wrapper over the Objective-C class INHangUpCallIntentResponse.
+//
+// It embeds [IntentResponse], promoting that type's methods.
 type HangUpCallIntentResponse struct {
-	objref.Handle
+	IntentResponse
 }
 
 // HangUpCallIntentResponseFromID adopts an existing Objective-C object as a HangUpCallIntentResponse
@@ -23,7 +24,8 @@ func HangUpCallIntentResponseFromID(id objc.ID) *HangUpCallIntentResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &HangUpCallIntentResponse{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HangUpCallIntentResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func hangUpCallIntentResponseAdopt(id objc.ID) *HangUpCallIntentResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &HangUpCallIntentResponse{Handle: objref.Wrap(id)}
+	x := &HangUpCallIntentResponse{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *HangUpCallIntentResponse) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HangUpCallIntentResponse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HangUpCallIntentResponse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewHangUpCallIntentResponseWithCodeUserActivity creates a new HangUpCallIntentResponse.
@@ -63,14 +51,13 @@ func NewHangUpCallIntentResponseWithCodeUserActivity(code HangUpCallIntentRespon
 	return hangUpCallIntentResponseAdopt(_id)
 }
 
-// The user activity object to use when launching the app.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity the user activity object to use when launching the app.
 func (x *HangUpCallIntentResponse) WithUserActivity(userActivity obj.Object) *HangUpCallIntentResponse {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
+// Code wraps the corresponding Objective-C method.
 func (x *HangUpCallIntentResponse) Code() HangUpCallIntentResponseCode {
 	_r := objc.Send[HangUpCallIntentResponseCode](objref.IDOf(x), objc.RegisterName("code"))
 	return _r
@@ -84,3 +71,5 @@ type HangUpCallIntentResponseable interface {
 }
 
 var _ HangUpCallIntentResponseable = (*HangUpCallIntentResponse)(nil)
+
+var _ IntentResponseProvider = (*HangUpCallIntentResponse)(nil)

@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NDArrayLUTDequantize is an idiomatic wrapper over the Objective-C class MPSNDArrayLUTDequantize.
+//
+// It embeds [NDArrayMultiaryKernel], promoting that type's methods.
 type NDArrayLUTDequantize struct {
-	objref.Handle
+	NDArrayMultiaryKernel
 }
 
 // NDArrayLUTDequantizeFromID adopts an existing Objective-C object as a NDArrayLUTDequantize
@@ -23,7 +24,8 @@ func NDArrayLUTDequantizeFromID(id objc.ID) *NDArrayLUTDequantize {
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayLUTDequantize{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NDArrayLUTDequantize{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func nDArrayLUTDequantizeAdopt(id objc.ID) *NDArrayLUTDequantize {
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayLUTDequantize{Handle: objref.Wrap(id)}
+	x := &NDArrayLUTDequantize{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NDArrayLUTDequantize) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NDArrayLUTDequantize) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NDArrayLUTDequantize) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNDArrayLUTDequantize creates a new NDArrayLUTDequantize.
@@ -62,9 +50,7 @@ func NewNDArrayLUTDequantize() *NDArrayLUTDequantize {
 	return nDArrayLUTDequantizeAdopt(_id)
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayLUTDequantize) WithLabel(label string) *NDArrayLUTDequantize {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -77,3 +63,9 @@ type NDArrayLUTDequantizeable interface {
 }
 
 var _ NDArrayLUTDequantizeable = (*NDArrayLUTDequantize)(nil)
+
+var _ NDArrayMultiaryKernelProvider = (*NDArrayLUTDequantize)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayLUTDequantize)(nil)
+
+var _ KernelProvider = (*NDArrayLUTDequantize)(nil)

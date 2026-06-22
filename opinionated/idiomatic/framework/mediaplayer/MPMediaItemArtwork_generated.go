@@ -6,15 +6,16 @@ package mediaplayer
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A graphical image, such as music album cover art, associated with a media item.
-//
 // MediaItemArtwork is an idiomatic wrapper over the Objective-C class MPMediaItemArtwork.
+//
+// A graphical image, such as music album cover art, associated with a media item.
 type MediaItemArtwork struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func MediaItemArtworkFromID(id objc.ID) *MediaItemArtwork {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaItemArtwork{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MediaItemArtwork{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func mediaItemArtworkAdopt(id objc.ID) *MediaItemArtwork {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaItemArtwork{Handle: objref.Wrap(id)}
+	x := &MediaItemArtwork{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +61,42 @@ func (x *MediaItemArtwork) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MediaItemArtwork) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMediaItemArtwork creates a new MediaItemArtwork.
 func NewMediaItemArtwork() *MediaItemArtwork {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPMediaItemArtwork")), objc.RegisterName("new"))
 	return mediaItemArtworkAdopt(_id)
 }
 
+// ImageWithSize returns the artwork image for an item at the given size.
+func (x *MediaItemArtwork) ImageWithSize(size corefoundation.CGSize) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageWithSize:"), size)
+	return obj.Wrap(_r)
+}
+
+// Bounds wraps the corresponding Objective-C method.
+func (x *MediaItemArtwork) Bounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("bounds"))
+	return _r
+}
+
+// ImageCropRect wraps the corresponding Objective-C method.
+func (x *MediaItemArtwork) ImageCropRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("imageCropRect"))
+	return _r
+}
+
 // MediaItemArtworkable is the interface implemented by [MediaItemArtwork], for mocking and DI.
 type MediaItemArtworkable interface {
 	obj.Object
+	ImageWithSize(size corefoundation.CGSize) obj.Object
+	Bounds() corefoundation.CGRect
+	ImageCropRect() corefoundation.CGRect
 }
 
 var _ MediaItemArtworkable = (*MediaItemArtwork)(nil)

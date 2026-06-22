@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NDArrayStridedSlice is an idiomatic wrapper over the Objective-C class MPSNDArrayStridedSlice.
+//
+// It embeds [NDArrayUnaryKernel], promoting that type's methods.
 type NDArrayStridedSlice struct {
-	objref.Handle
+	NDArrayUnaryKernel
 }
 
 // NDArrayStridedSliceFromID adopts an existing Objective-C object as a NDArrayStridedSlice
@@ -23,7 +24,8 @@ func NDArrayStridedSliceFromID(id objc.ID) *NDArrayStridedSlice {
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayStridedSlice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NDArrayStridedSlice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func nDArrayStridedSliceAdopt(id objc.ID) *NDArrayStridedSlice {
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayStridedSlice{Handle: objref.Wrap(id)}
+	x := &NDArrayStridedSlice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NDArrayStridedSlice) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NDArrayStridedSlice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NDArrayStridedSlice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNDArrayStridedSlice creates a new NDArrayStridedSlice.
@@ -62,9 +50,7 @@ func NewNDArrayStridedSlice() *NDArrayStridedSlice {
 	return nDArrayStridedSliceAdopt(_id)
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayStridedSlice) WithLabel(label string) *NDArrayStridedSlice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -77,3 +63,11 @@ type NDArrayStridedSliceable interface {
 }
 
 var _ NDArrayStridedSliceable = (*NDArrayStridedSlice)(nil)
+
+var _ NDArrayUnaryKernelProvider = (*NDArrayStridedSlice)(nil)
+
+var _ NDArrayMultiaryKernelProvider = (*NDArrayStridedSlice)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayStridedSlice)(nil)
+
+var _ KernelProvider = (*NDArrayStridedSlice)(nil)

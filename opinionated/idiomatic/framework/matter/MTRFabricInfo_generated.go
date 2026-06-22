@@ -23,7 +23,8 @@ func MTRFabricInfoFromID(id objc.ID) *MTRFabricInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRFabricInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRFabricInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRFabricInfoAdopt(id objc.ID) *MTRFabricInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRFabricInfo{Handle: objref.Wrap(id)}
+	x := &MTRFabricInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,37 +58,43 @@ func (x *MTRFabricInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRFabricInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRFabricInfo creates a new MTRFabricInfo.
 func NewMTRFabricInfo() *MTRFabricInfo {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRFabricInfo")), objc.RegisterName("new"))
 	return mTRFabricInfoAdopt(_id)
 }
 
-// Root public key for the fabric.
+// RootPublicKey root public key for the fabric.
 func (x *MTRFabricInfo) RootPublicKey() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootPublicKey"))
 	return obj.Wrap(_r)
 }
 
-// Vendor identifier for the fabric.
+// VendorID vendor identifier for the fabric.
 func (x *MTRFabricInfo) VendorID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorID"))
 	return obj.Wrap(_r)
 }
 
-// Fabric identifier (scoped to the root public key) for the fabric.
+// FabricID fabric identifier (scoped to the root public key) for the fabric.
 func (x *MTRFabricInfo) FabricID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricID"))
 	return obj.Wrap(_r)
 }
 
-// Node identifier for the given node on the fabric.
+// NodeID node identifier for the given node on the fabric.
 func (x *MTRFabricInfo) NodeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeID"))
 	return obj.Wrap(_r)
 }
 
-// The string label for the fabric.  May be empty.
+// Label the string label for the fabric.  May be empty.
 func (x *MTRFabricInfo) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -95,43 +103,43 @@ func (x *MTRFabricInfo) Label() string {
 	return purego.GoString(_r)
 }
 
-// The root certificate for the fabric.  This might be nil if a root certificate is not available (e.g. if this is information about some remote node that we don't have root certificate information for).
+// RootCertificate the root certificate for the fabric.  This might be nil if a root certificate is not available (e.g. if this is information about some remote node that we don't have root certificate information for).
 func (x *MTRFabricInfo) RootCertificate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootCertificate"))
 	return obj.Wrap(_r)
 }
 
-// The same root certificate as rootCertificate, in Matter TLV format.
+// RootCertificateTLV the same root certificate as rootCertificate, in Matter TLV format.
 func (x *MTRFabricInfo) RootCertificateTLV() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootCertificateTLV"))
 	return obj.Wrap(_r)
 }
 
-// The intermediate certificate for the node.  This might be nil if there is no intermediate certificate, or if the node is not on a fabric we have access to.
+// IntermediateCertificate the intermediate certificate for the node.  This might be nil if there is no intermediate certificate, or if the node is not on a fabric we have access to.
 func (x *MTRFabricInfo) IntermediateCertificate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intermediateCertificate"))
 	return obj.Wrap(_r)
 }
 
-// The same intermediate certificate as intermediateCertificate, in Matter TLV format.
+// IntermediateCertificateTLV the same intermediate certificate as intermediateCertificate, in Matter TLV format.
 func (x *MTRFabricInfo) IntermediateCertificateTLV() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intermediateCertificateTLV"))
 	return obj.Wrap(_r)
 }
 
-// The operational certificate for the node.  This might be nil if the node is not on a fabric we have access to.
+// OperationalCertificate the operational certificate for the node.  This might be nil if the node is not on a fabric we have access to.
 func (x *MTRFabricInfo) OperationalCertificate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationalCertificate"))
 	return obj.Wrap(_r)
 }
 
-// The same operational certificate as operationalCertificate, in Matter TLV format.
+// OperationalCertificateTLV the same operational certificate as operationalCertificate, in Matter TLV format.
 func (x *MTRFabricInfo) OperationalCertificateTLV() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationalCertificateTLV"))
 	return obj.Wrap(_r)
 }
 
-// The fabric index which identifies the fabric on the node.
+// FabricIndex the fabric index which identifies the fabric on the node.
 func (x *MTRFabricInfo) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)

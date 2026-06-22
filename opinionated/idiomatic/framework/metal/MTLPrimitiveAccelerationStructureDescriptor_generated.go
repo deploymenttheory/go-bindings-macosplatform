@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of an acceleration structure that contains geometry primitives.
-//
 // PrimitiveAccelerationStructureDescriptor is an idiomatic wrapper over the Objective-C class MTLPrimitiveAccelerationStructureDescriptor.
+//
+// It embeds [AccelerationStructureDescriptor], promoting that type's methods.
+//
+// A description of an acceleration structure that contains geometry primitives.
 type PrimitiveAccelerationStructureDescriptor struct {
-	objref.Handle
+	AccelerationStructureDescriptor
 }
 
 // PrimitiveAccelerationStructureDescriptorFromID adopts an existing Objective-C object as a PrimitiveAccelerationStructureDescriptor
@@ -25,7 +26,8 @@ func PrimitiveAccelerationStructureDescriptorFromID(id objc.ID) *PrimitiveAccele
 	if id == 0 {
 		return nil
 	}
-	x := &PrimitiveAccelerationStructureDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PrimitiveAccelerationStructureDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func primitiveAccelerationStructureDescriptorAdopt(id objc.ID) *PrimitiveAcceler
 	if id == 0 {
 		return nil
 	}
-	x := &PrimitiveAccelerationStructureDescriptor{Handle: objref.Wrap(id)}
+	x := &PrimitiveAccelerationStructureDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PrimitiveAccelerationStructureDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PrimitiveAccelerationStructureDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PrimitiveAccelerationStructureDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPrimitiveAccelerationStructureDescriptor creates a new PrimitiveAccelerationStructureDescriptor.
@@ -64,64 +52,50 @@ func NewPrimitiveAccelerationStructureDescriptor() *PrimitiveAccelerationStructu
 	return primitiveAccelerationStructureDescriptorAdopt(_id)
 }
 
-// An array that contains the individual pieces of geometry that compose the acceleration structure.
-//
-// WithGeometryDescriptors sets the collection and returns the receiver so calls can be chained.
+// WithGeometryDescriptors an array that contains the individual pieces of geometry that compose the acceleration structure.
 func (x *PrimitiveAccelerationStructureDescriptor) WithGeometryDescriptors(items ...AccelerationStructureGeometryDescriptorProvider) *PrimitiveAccelerationStructureDescriptor {
 	_arr := purego.SliceToNSArray(items, func(_v AccelerationStructureGeometryDescriptorProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeometryDescriptors:"), _arr)
 	return x
 }
 
-// The mode to use when handling timestamps before the start time.
-//
-// WithMotionStartBorderMode sets motionStartBorderMode and returns the receiver so calls can be chained.
+// WithMotionStartBorderMode the mode to use when handling timestamps before the start time.
 func (x *PrimitiveAccelerationStructureDescriptor) WithMotionStartBorderMode(motionStartBorderMode MotionBorderMode) *PrimitiveAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionStartBorderMode:"), motionStartBorderMode)
 	return x
 }
 
-// The mode to use when handling timestamps after the end time.
-//
-// WithMotionEndBorderMode sets motionEndBorderMode and returns the receiver so calls can be chained.
+// WithMotionEndBorderMode the mode to use when handling timestamps after the end time.
 func (x *PrimitiveAccelerationStructureDescriptor) WithMotionEndBorderMode(motionEndBorderMode MotionBorderMode) *PrimitiveAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionEndBorderMode:"), motionEndBorderMode)
 	return x
 }
 
-// The start time for the range of motion that the keyframe data describes.
-//
-// WithMotionStartTime sets motionStartTime and returns the receiver so calls can be chained.
+// WithMotionStartTime the start time for the range of motion that the keyframe data describes.
 func (x *PrimitiveAccelerationStructureDescriptor) WithMotionStartTime(motionStartTime float32) *PrimitiveAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionStartTime:"), motionStartTime)
 	return x
 }
 
-// The end time for the range of motion that the keyframe data describes.
-//
-// WithMotionEndTime sets motionEndTime and returns the receiver so calls can be chained.
+// WithMotionEndTime the end time for the range of motion that the keyframe data describes.
 func (x *PrimitiveAccelerationStructureDescriptor) WithMotionEndTime(motionEndTime float32) *PrimitiveAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionEndTime:"), motionEndTime)
 	return x
 }
 
-// The number of keyframes in the geometry data.
-//
-// WithMotionKeyframeCount sets motionKeyframeCount and returns the receiver so calls can be chained.
+// WithMotionKeyframeCount the number of keyframes in the geometry data.
 func (x *PrimitiveAccelerationStructureDescriptor) WithMotionKeyframeCount(motionKeyframeCount int) *PrimitiveAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionKeyframeCount:"), motionKeyframeCount)
 	return x
 }
 
-// The options that describe how you intend to use the acceleration structure.
-//
-// WithUsage sets usage and returns the receiver so calls can be chained.
+// WithUsage the options that describe how you intend to use the acceleration structure.
 func (x *PrimitiveAccelerationStructureDescriptor) WithUsage(usage AccelerationStructureUsage) *PrimitiveAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsage:"), usage)
 	return x
 }
 
-// Array of geometry descriptors. If motionKeyframeCount is greater than one all geometryDescriptors must be motion versions and have motionKeyframeCount of primitive buffers.
+// GeometryDescriptors array of geometry descriptors. If motionKeyframeCount is greater than one all geometryDescriptors must be motion versions and have motionKeyframeCount of primitive buffers.
 //
 // GeometryDescriptors returns the collection as a Go slice.
 func (x *PrimitiveAccelerationStructureDescriptor) GeometryDescriptors() []*AccelerationStructureGeometryDescriptor {
@@ -131,56 +105,62 @@ func (x *PrimitiveAccelerationStructureDescriptor) GeometryDescriptors() []*Acce
 	})
 }
 
+// SetGeometryDescriptors wraps the corresponding Objective-C method.
 func (x *PrimitiveAccelerationStructureDescriptor) SetGeometryDescriptors(geometryDescriptors []*AccelerationStructureGeometryDescriptor) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeometryDescriptors:"), purego.SliceToNSArray(geometryDescriptors, func(_v *AccelerationStructureGeometryDescriptor) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Motion border mode describing what happens if acceleration structure is sampled before motionStartTime. If not set defaults to MTLMotionBorderModeClamp.
+// MotionStartBorderMode motion border mode describing what happens if acceleration structure is sampled before motionStartTime. If not set defaults to MTLMotionBorderModeClamp.
 func (x *PrimitiveAccelerationStructureDescriptor) MotionStartBorderMode() MotionBorderMode {
 	_r := objc.Send[MotionBorderMode](objref.IDOf(x), objc.RegisterName("motionStartBorderMode"))
 	return _r
 }
 
+// SetMotionStartBorderMode wraps the corresponding Objective-C method.
 func (x *PrimitiveAccelerationStructureDescriptor) SetMotionStartBorderMode(motionStartBorderMode MotionBorderMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionStartBorderMode:"), motionStartBorderMode)
 }
 
-// Motion border mode describing what happens if acceleration structure is sampled after motionEndTime. If not set defaults to MTLMotionBorderModeClamp.
+// MotionEndBorderMode motion border mode describing what happens if acceleration structure is sampled after motionEndTime. If not set defaults to MTLMotionBorderModeClamp.
 func (x *PrimitiveAccelerationStructureDescriptor) MotionEndBorderMode() MotionBorderMode {
 	_r := objc.Send[MotionBorderMode](objref.IDOf(x), objc.RegisterName("motionEndBorderMode"))
 	return _r
 }
 
+// SetMotionEndBorderMode wraps the corresponding Objective-C method.
 func (x *PrimitiveAccelerationStructureDescriptor) SetMotionEndBorderMode(motionEndBorderMode MotionBorderMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionEndBorderMode:"), motionEndBorderMode)
 }
 
-// Motion start time of this geometry. If not set defaults to 0.0f.
+// MotionStartTime motion start time of this geometry. If not set defaults to 0.0f.
 func (x *PrimitiveAccelerationStructureDescriptor) MotionStartTime() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("motionStartTime"))
 	return _r
 }
 
+// SetMotionStartTime wraps the corresponding Objective-C method.
 func (x *PrimitiveAccelerationStructureDescriptor) SetMotionStartTime(motionStartTime float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionStartTime:"), motionStartTime)
 }
 
-// Motion end time of this geometry. If not set defaults to 1.0f.
+// MotionEndTime motion end time of this geometry. If not set defaults to 1.0f.
 func (x *PrimitiveAccelerationStructureDescriptor) MotionEndTime() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("motionEndTime"))
 	return _r
 }
 
+// SetMotionEndTime wraps the corresponding Objective-C method.
 func (x *PrimitiveAccelerationStructureDescriptor) SetMotionEndTime(motionEndTime float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionEndTime:"), motionEndTime)
 }
 
-// Motion keyframe count. Is 1 by default which means no motion.
+// MotionKeyframeCount motion keyframe count. Is 1 by default which means no motion.
 func (x *PrimitiveAccelerationStructureDescriptor) MotionKeyframeCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("motionKeyframeCount"))
 	return _r
 }
 
+// SetMotionKeyframeCount wraps the corresponding Objective-C method.
 func (x *PrimitiveAccelerationStructureDescriptor) SetMotionKeyframeCount(motionKeyframeCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionKeyframeCount:"), motionKeyframeCount)
 }
@@ -210,3 +190,5 @@ type PrimitiveAccelerationStructureDescriptorable interface {
 }
 
 var _ PrimitiveAccelerationStructureDescriptorable = (*PrimitiveAccelerationStructureDescriptor)(nil)
+
+var _ AccelerationStructureDescriptorProvider = (*PrimitiveAccelerationStructureDescriptor)(nil)

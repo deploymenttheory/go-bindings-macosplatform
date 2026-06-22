@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing metrics about network transfers.
-//
 // NetworkTransferMetric is an idiomatic wrapper over the Objective-C class MXNetworkTransferMetric.
+//
+// It embeds [Metric], promoting that type's methods.
+//
+// An object representing metrics about network transfers.
 type NetworkTransferMetric struct {
-	objref.Handle
+	Metric
 }
 
 // NetworkTransferMetricFromID adopts an existing Objective-C object as a NetworkTransferMetric
@@ -25,7 +26,8 @@ func NetworkTransferMetricFromID(id objc.ID) *NetworkTransferMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &NetworkTransferMetric{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NetworkTransferMetric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func networkTransferMetricAdopt(id objc.ID) *NetworkTransferMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &NetworkTransferMetric{Handle: objref.Wrap(id)}
+	x := &NetworkTransferMetric{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NetworkTransferMetric) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NetworkTransferMetric) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NetworkTransferMetric) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNetworkTransferMetric creates a new NetworkTransferMetric.
@@ -64,25 +52,25 @@ func NewNetworkTransferMetric() *NetworkTransferMetric {
 	return networkTransferMetricAdopt(_id)
 }
 
-// Cumulative amount of data uploaded over WiFi. Dimensioned as NSUnitInformationStorage.
+// CumulativeWifiUpload cumulative amount of data uploaded over WiFi. Dimensioned as NSUnitInformationStorage.
 func (x *NetworkTransferMetric) CumulativeWifiUpload() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeWifiUpload"))
 	return obj.Wrap(_r)
 }
 
-// Cumulative amount of data downloaded over WiFi. Dimensioned as NSUnitInformationStorage.
+// CumulativeWifiDownload cumulative amount of data downloaded over WiFi. Dimensioned as NSUnitInformationStorage.
 func (x *NetworkTransferMetric) CumulativeWifiDownload() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeWifiDownload"))
 	return obj.Wrap(_r)
 }
 
-// Cumulative amount of data uploaded over cellular networks. This data is radio access technology agnostic. Dimensioned as NSUnitInformationStorage.
+// CumulativeCellularUpload cumulative amount of data uploaded over cellular networks. This data is radio access technology agnostic. Dimensioned as NSUnitInformationStorage.
 func (x *NetworkTransferMetric) CumulativeCellularUpload() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeCellularUpload"))
 	return obj.Wrap(_r)
 }
 
-// Cumulative amount of data downloaded over cellular networks. This data is radio access technology agnostic. Dimensioned as NSUnitInformationStorage.
+// CumulativeCellularDownload cumulative amount of data downloaded over cellular networks. This data is radio access technology agnostic. Dimensioned as NSUnitInformationStorage.
 func (x *NetworkTransferMetric) CumulativeCellularDownload() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeCellularDownload"))
 	return obj.Wrap(_r)
@@ -98,3 +86,5 @@ type NetworkTransferMetricable interface {
 }
 
 var _ NetworkTransferMetricable = (*NetworkTransferMetric)(nil)
+
+var _ MetricProvider = (*NetworkTransferMetric)(nil)

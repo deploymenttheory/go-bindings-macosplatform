@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container for dynamic shader data associated with a node.
-//
 // AttributeValue is an idiomatic wrapper over the Objective-C class SKAttributeValue.
+//
+// A container for dynamic shader data associated with a node.
 type AttributeValue struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AttributeValueFromID(id objc.ID) *AttributeValue {
 	if id == 0 {
 		return nil
 	}
-	x := &AttributeValue{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AttributeValue{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func attributeValueAdopt(id objc.ID) *AttributeValue {
 	if id == 0 {
 		return nil
 	}
-	x := &AttributeValue{Handle: objref.Wrap(id)}
+	x := &AttributeValue{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *AttributeValue) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AttributeValue) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAttributeValue creates a new AttributeValue.
 func NewAttributeValue() *AttributeValue {
 	_id := objc.Send[objc.ID](objc.ID(_class("SKAttributeValue")), objc.RegisterName("new"))
 	return attributeValueAdopt(_id)
 }
 
-// The receiver’s floating point value.
-//
-// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
+// WithFloatValue the receiver’s floating point value.
 func (x *AttributeValue) WithFloatValue(floatValue float32) *AttributeValue {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
+// FloatValue wraps the corresponding Objective-C method.
 func (x *AttributeValue) FloatValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("floatValue"))
 	return _r
 }
 
+// SetFloatValue wraps the corresponding Objective-C method.
 func (x *AttributeValue) SetFloatValue(floatValue float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 }

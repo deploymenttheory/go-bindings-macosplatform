@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// Represents a physical external storage device that stores media assets.
-//
 // ExternalStorageDevice is an idiomatic wrapper over the Objective-C class AVExternalStorageDevice.
+//
+// Represents a physical external storage device that stores media assets.
 type ExternalStorageDevice struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func ExternalStorageDeviceFromID(id objc.ID) *ExternalStorageDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &ExternalStorageDevice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExternalStorageDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func externalStorageDeviceAdopt(id objc.ID) *ExternalStorageDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &ExternalStorageDevice{Handle: objref.Wrap(id)}
+	x := &ExternalStorageDevice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,14 +62,20 @@ func (x *ExternalStorageDevice) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExternalStorageDevice) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewExternalStorageDevice creates a new ExternalStorageDevice.
 func NewExternalStorageDevice() *ExternalStorageDevice {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVExternalStorageDevice")), objc.RegisterName("new"))
 	return externalStorageDeviceAdopt(_id)
 }
 
-// Generates an array of security scoped URLs that are compliant for digital camera formats, where each element has a different path extension.
-func (x *ExternalStorageDevice) NextAvailableURLsWithPathExtensionsError(extensionArray []string) ([]obj.Object, error) {
+// NextAvailableURLsWithPathExtensionsError generates an array of security scoped URLs that are compliant for digital camera formats, where each element has a different path extension.
+func (x *ExternalStorageDevice) NextAvailableURLsWithPathExtensionsError(extensionArray []string) (result []obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextAvailableURLsWithPathExtensions:error:"), purego.SliceToNSArray(extensionArray, func(_v string) objc.ID { return purego.NSString(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -76,7 +84,7 @@ func (x *ExternalStorageDevice) NextAvailableURLsWithPathExtensionsError(extensi
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// Display name of the external storage device. This property can be used for displaying the name of an external storage device in a user interface. Will return nil if we fail to extract information from external storage device.
+// DisplayName display name of the external storage device. This property can be used for displaying the name of an external storage device in a user interface. Will return nil if we fail to extract information from external storage device.
 func (x *ExternalStorageDevice) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
 	if _r == 0 {
@@ -85,31 +93,31 @@ func (x *ExternalStorageDevice) DisplayName() string {
 	return purego.GoString(_r)
 }
 
-// Current free size in bytes. This property represents the free size available on the external storage device. Will return -1 if we fail to extract information from external storage device.
+// FreeSize current free size in bytes. This property represents the free size available on the external storage device. Will return -1 if we fail to extract information from external storage device.
 func (x *ExternalStorageDevice) FreeSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("freeSize"))
 	return _r
 }
 
-// Total storage size in bytes. This property represents the total storage size available on the external storage device. Will return -1 if we fail to extract information from external storage device.
+// TotalSize total storage size in bytes. This property represents the total storage size available on the external storage device. Will return -1 if we fail to extract information from external storage device.
 func (x *ExternalStorageDevice) TotalSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("totalSize"))
 	return _r
 }
 
-// Indicates whether the external storage device is connected and available to the system. The property gives the current connection status of the external storage device.
+// IsConnected indicates whether the external storage device is connected and available to the system. The property gives the current connection status of the external storage device.
 func (x *ExternalStorageDevice) IsConnected() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConnected"))
 	return _r
 }
 
-// A unique identifier for external storage device. This property can be used to select a specific external storage device with ImageCapture framework APIs to read media assets. Will return nil if we fail to extract information from external storage device. For example the string value of this property will match the value from [ICDevice UUIDString].
+// Uuid a unique identifier for external storage device. This property can be used to select a specific external storage device with ImageCapture framework APIs to read media assets. Will return nil if we fail to extract information from external storage device. For example the string value of this property will match the value from [ICDevice UUIDString].
 func (x *ExternalStorageDevice) Uuid() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uuid"))
 	return obj.Wrap(_r)
 }
 
-// Indicates whether the external storage device is not recommended for capture use. This property is used to let the client know if the external storage device is not suitable for camera capture.
+// IsNotRecommendedForCaptureUse indicates whether the external storage device is not recommended for capture use. This property is used to let the client know if the external storage device is not suitable for camera capture.
 func (x *ExternalStorageDevice) IsNotRecommendedForCaptureUse() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNotRecommendedForCaptureUse"))
 	return _r
@@ -118,7 +126,7 @@ func (x *ExternalStorageDevice) IsNotRecommendedForCaptureUse() bool {
 // ExternalStorageDeviceable is the interface implemented by [ExternalStorageDevice], for mocking and DI.
 type ExternalStorageDeviceable interface {
 	obj.Object
-	NextAvailableURLsWithPathExtensionsError(extensionArray []string) ([]obj.Object, error)
+	NextAvailableURLsWithPathExtensionsError(extensionArray []string) (result []obj.Object, err error)
 	DisplayName() string
 	FreeSize() int
 	TotalSize() int

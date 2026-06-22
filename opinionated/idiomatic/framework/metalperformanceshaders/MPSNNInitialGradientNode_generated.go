@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A node for a MPSNNInitialGradient kernel This node can be used to generate a starting point for an arbitrary gradient computation. Simply add this node after the node for which you want to compute gradients and then call the function
-//
 // NNInitialGradientNode is an idiomatic wrapper over the Objective-C class MPSNNInitialGradientNode.
+//
+// It embeds [NNFilterNode], promoting that type's methods.
+//
+// A node for a MPSNNInitialGradient kernel This node can be used to generate a starting point for an arbitrary gradient computation. Simply add this node after the node for which you want to compute gradients and then call the function
 type NNInitialGradientNode struct {
-	objref.Handle
+	NNFilterNode
 }
 
 // NNInitialGradientNodeFromID adopts an existing Objective-C object as a NNInitialGradientNode
@@ -25,7 +26,8 @@ func NNInitialGradientNodeFromID(id objc.ID) *NNInitialGradientNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNInitialGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNInitialGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,38 +40,20 @@ func nNInitialGradientNodeAdopt(id objc.ID) *NNInitialGradientNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNInitialGradientNode{Handle: objref.Wrap(id)}
+	x := &NNInitialGradientNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NNInitialGradientNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNInitialGradientNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNInitialGradientNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Init a node representing a MPSNNInitialGradient MPSNNPad kernel
-//
-// NewNNInitialGradientNodeWithSource creates a new NNInitialGradientNode.
+// NewNNInitialGradientNodeWithSource init a node representing a MPSNNInitialGradient MPSNNPad kernel
 func NewNNInitialGradientNodeWithSource(source obj.Object) *NNInitialGradientNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNInitialGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(source))
 	return nNInitialGradientNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *NNInitialGradientNode) WithLabel(label string) *NNInitialGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -82,3 +66,5 @@ type NNInitialGradientNodeable interface {
 }
 
 var _ NNInitialGradientNodeable = (*NNInitialGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNInitialGradientNode)(nil)

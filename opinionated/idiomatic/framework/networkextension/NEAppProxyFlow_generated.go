@@ -14,9 +14,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract base class shared by NEAppProxyTCPFlow and NEAppProxyUDPFlow.
-//
 // NEAppProxyFlow is an idiomatic wrapper over the Objective-C class NEAppProxyFlow.
+//
+// NEAppProxyFlow is an abstract base — you do not construct it directly. Construct one of [NEAppProxyTCPFlow], [NEAppProxyUDPFlow] and pass it where a NEAppProxyFlow is accepted.
+//
+// An abstract base class shared by NEAppProxyTCPFlow and NEAppProxyUDPFlow.
 type NEAppProxyFlow struct {
 	objref.Handle
 }
@@ -27,7 +29,8 @@ func NEAppProxyFlowFromID(id objc.ID) *NEAppProxyFlow {
 	if id == 0 {
 		return nil
 	}
-	x := &NEAppProxyFlow{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEAppProxyFlow{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +43,8 @@ func nEAppProxyFlowAdopt(id objc.ID) *NEAppProxyFlow {
 	if id == 0 {
 		return nil
 	}
-	x := &NEAppProxyFlow{Handle: objref.Wrap(id)}
+	x := &NEAppProxyFlow{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,21 +64,19 @@ func (x *NEAppProxyFlow) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewNEAppProxyFlow creates a new NEAppProxyFlow.
-func NewNEAppProxyFlow() *NEAppProxyFlow {
-	_id := objc.Send[objc.ID](objc.ID(_class("NEAppProxyFlow")), objc.RegisterName("new"))
-	return nEAppProxyFlowAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEAppProxyFlow) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The network interface, if any, used by this flow.
-//
-// WithNetworkInterface sets networkInterface and returns the receiver so calls can be chained.
+// WithNetworkInterface the network interface, if any, used by this flow.
 func (x *NEAppProxyFlow) WithNetworkInterface(networkInterface obj.Object) *NEAppProxyFlow {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkInterface:"), objref.IDOf(networkInterface))
 	return x
 }
 
-// This function is used by an NEProvider implementation to indicate that it is ready to handle flow data.
+// OpenWithLocalFlowEndpoint this function is used by an NEProvider implementation to indicate that it is ready to handle flow data.
 //
 // OpenWithLocalFlowEndpoint blocks until the operation completes or ctx is cancelled.
 func (x *NEAppProxyFlow) OpenWithLocalFlowEndpoint(ctx context.Context, localEndpoint obj.Object) error {
@@ -93,7 +95,7 @@ func (x *NEAppProxyFlow) OpenWithLocalFlowEndpoint(ctx context.Context, localEnd
 	}
 }
 
-// Opens the flow, indicating to the system that the caller is ready to start receiving and sending data.
+// OpenWithLocalEndpoint opens the flow, indicating to the system that the caller is ready to start receiving and sending data.
 //
 // OpenWithLocalEndpoint blocks until the operation completes or ctx is cancelled.
 func (x *NEAppProxyFlow) OpenWithLocalEndpoint(ctx context.Context, localEndpoint *NWHostEndpoint) error {
@@ -112,28 +114,29 @@ func (x *NEAppProxyFlow) OpenWithLocalEndpoint(ctx context.Context, localEndpoin
 	}
 }
 
-// Sets the flow’s metadata for use by proxy providers.
+// SetMetadata sets the flow’s metadata for use by proxy providers.
 func (x *NEAppProxyFlow) SetMetadata(parameters obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), objref.IDOf(parameters))
 }
 
-// An NEFlowMetaData object containing meta data for the flow.
+// MetaData an NEFlowMetaData object containing meta data for the flow.
 func (x *NEAppProxyFlow) MetaData() *NEFlowMetaData {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metaData"))
 	return NEFlowMetaDataFromID(_r)
 }
 
-// An nw_interface_t containing information about the network interface used by the flow. If the flow's data is transported using a different interface, this property should be set to that interface.
+// NetworkInterface an nw_interface_t containing information about the network interface used by the flow. If the flow's data is transported using a different interface, this property should be set to that interface.
 func (x *NEAppProxyFlow) NetworkInterface() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkInterface"))
 	return obj.Wrap(_r)
 }
 
+// SetNetworkInterface wraps the corresponding Objective-C method.
 func (x *NEAppProxyFlow) SetNetworkInterface(networkInterface obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkInterface:"), objref.IDOf(networkInterface))
 }
 
-// If the flow was created by passing a hostname to a "connect by name" API such as NSURLSession or Network.framework, this property is set to the remote hostname.
+// RemoteHostname if the flow was created by passing a hostname to a "connect by name" API such as NSURLSession or Network.framework, this property is set to the remote hostname.
 func (x *NEAppProxyFlow) RemoteHostname() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remoteHostname"))
 	if _r == 0 {
@@ -142,7 +145,7 @@ func (x *NEAppProxyFlow) RemoteHostname() string {
 	return purego.GoString(_r)
 }
 
-// YES if the flow was bound by the application to a specific interface (contained in the networkInterface property), NO otherwise.
+// IsBound YES if the flow was bound by the application to a specific interface (contained in the networkInterface property), NO otherwise.
 func (x *NEAppProxyFlow) IsBound() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBound"))
 	return _r
@@ -163,3 +166,10 @@ type NEAppProxyFlowable interface {
 }
 
 var _ NEAppProxyFlowable = (*NEAppProxyFlow)(nil)
+
+// isNEAppProxyFlow marks NEAppProxyFlow — and, by embedding promotion, its
+// subclasses — as a member of the NEAppProxyFlow hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NEAppProxyFlow) isNEAppProxyFlow() {}
+
+var _ NEAppProxyFlowProvider = (*NEAppProxyFlow)(nil)

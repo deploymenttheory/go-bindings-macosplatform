@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of content representing curated asset and text elements.
-//
 // ProjectSection is an idiomatic wrapper over the Objective-C class PHProjectSection.
+//
+// A collection of content representing curated asset and text elements.
 type ProjectSection struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ProjectSectionFromID(id objc.ID) *ProjectSection {
 	if id == 0 {
 		return nil
 	}
-	x := &ProjectSection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ProjectSection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func projectSectionAdopt(id objc.ID) *ProjectSection {
 	if id == 0 {
 		return nil
 	}
-	x := &ProjectSection{Handle: objref.Wrap(id)}
+	x := &ProjectSection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *ProjectSection) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ProjectSection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewProjectSection creates a new ProjectSection.
 func NewProjectSection() *ProjectSection {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHProjectSection")), objc.RegisterName("new"))
 	return projectSectionAdopt(_id)
 }
 
-// Array containing one or more PHProjectSectionContent objects. Ordered by number of elements from least to most. Projects should only present one level of content to the user at a time as assets will be reused within individual content objects.
+// SectionContents array containing one or more PHProjectSectionContent objects. Ordered by number of elements from least to most. Projects should only present one level of content to the user at a time as assets will be reused within individual content objects.
 //
 // SectionContents returns the collection as a Go slice.
 func (x *ProjectSection) SectionContents() []*ProjectSectionContent {
@@ -72,13 +80,13 @@ func (x *ProjectSection) SectionContents() []*ProjectSectionContent {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ProjectSectionContent { return ProjectSectionContentFromID(_id) })
 }
 
-// The intended usage of the section (e.g., cover, content, auxiliary)
+// SectionType the intended usage of the section (e.g., cover, content, auxiliary)
 func (x *ProjectSection) SectionType() ProjectSectionType {
 	_r := objc.Send[ProjectSectionType](objref.IDOf(x), objc.RegisterName("sectionType"))
 	return _r
 }
 
-// Title for the section (e.g., a Moment name or a general geographical location), might be an empty string.
+// Title title for the section (e.g., a Moment name or a general geographical location), might be an empty string.
 func (x *ProjectSection) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {

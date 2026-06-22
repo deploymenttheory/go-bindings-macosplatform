@@ -25,7 +25,8 @@ func MTRDoorLockClusterGetYearDayScheduleResponseParamsFromID(id objc.ID) *MTRDo
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDoorLockClusterGetYearDayScheduleResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDoorLockClusterGetYearDayScheduleResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRDoorLockClusterGetYearDayScheduleResponseParamsAdopt(id objc.ID) *MTRDoo
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDoorLockClusterGetYearDayScheduleResponseParams{Handle: objref.Wrap(id)}
+	x := &MTRDoorLockClusterGetYearDayScheduleResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) IsKind(className st
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRDoorLockClusterGetYearDayScheduleResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTRDoorLockClusterGetYearDayScheduleResponseParamsWithResponseValueError creates a new MTRDoorLockClusterGetYearDayScheduleResponseParams.
-func NewMTRDoorLockClusterGetYearDayScheduleResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRDoorLockClusterGetYearDayScheduleResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRDoorLockClusterGetYearDayScheduleResponseParamsWithResponseValueError initialize an MTRDoorLockClusterGetYearDayScheduleResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRDoorLockClusterGetYearDayScheduleResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRDoorLockClusterGetYearDayScheduleResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRDoorLockClusterGetYearDayScheduleResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,95 +77,104 @@ func NewMTRDoorLockClusterGetYearDayScheduleResponseParamsWithResponseValueError
 	return mTRDoorLockClusterGetYearDayScheduleResponseParamsAdopt(_id), nil
 }
 
-// WithYearDayIndex sets yearDayIndex and returns the receiver so calls can be chained.
+// WithYearDayIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) WithYearDayIndex(yearDayIndex obj.Object) *MTRDoorLockClusterGetYearDayScheduleResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYearDayIndex:"), objref.IDOf(yearDayIndex))
 	return x
 }
 
-// WithUserIndex sets userIndex and returns the receiver so calls can be chained.
+// WithUserIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterGetYearDayScheduleResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return x
 }
 
-// WithStatus sets status and returns the receiver so calls can be chained.
+// WithStatus sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) WithStatus(status obj.Object) *MTRDoorLockClusterGetYearDayScheduleResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return x
 }
 
-// WithLocalStartTime sets localStartTime and returns the receiver so calls can be chained.
+// WithLocalStartTime sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) WithLocalStartTime(localStartTime obj.Object) *MTRDoorLockClusterGetYearDayScheduleResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalStartTime:"), objref.IDOf(localStartTime))
 	return x
 }
 
-// WithLocalEndTime sets localEndTime and returns the receiver so calls can be chained.
+// WithLocalEndTime sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) WithLocalEndTime(localEndTime obj.Object) *MTRDoorLockClusterGetYearDayScheduleResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalEndTime:"), objref.IDOf(localEndTime))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterGetYearDayScheduleResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
+// YearDayIndex wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) YearDayIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("yearDayIndex"))
 	return obj.Wrap(_r)
 }
 
+// SetYearDayIndex wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) SetYearDayIndex(yearDayIndex obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYearDayIndex:"), objref.IDOf(yearDayIndex))
 }
 
+// UserIndex wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) UserIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userIndex"))
 	return obj.Wrap(_r)
 }
 
+// SetUserIndex wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) SetUserIndex(userIndex obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 }
 
+// Status wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
+// SetStatus wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) SetStatus(status obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 }
 
+// LocalStartTime wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) LocalStartTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localStartTime"))
 	return obj.Wrap(_r)
 }
 
+// SetLocalStartTime wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) SetLocalStartTime(localStartTime obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalStartTime:"), objref.IDOf(localStartTime))
 }
 
+// LocalEndTime wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) LocalEndTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localEndTime"))
 	return obj.Wrap(_r)
 }
 
+// SetLocalEndTime wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) SetLocalEndTime(localEndTime obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalEndTime:"), objref.IDOf(localEndTime))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }

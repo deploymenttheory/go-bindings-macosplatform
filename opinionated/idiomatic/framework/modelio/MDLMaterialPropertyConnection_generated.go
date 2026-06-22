@@ -23,7 +23,8 @@ func MaterialPropertyConnectionFromID(id objc.ID) *MaterialPropertyConnection {
 	if id == 0 {
 		return nil
 	}
-	x := &MaterialPropertyConnection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MaterialPropertyConnection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func materialPropertyConnectionAdopt(id objc.ID) *MaterialPropertyConnection {
 	if id == 0 {
 		return nil
 	}
-	x := &MaterialPropertyConnection{Handle: objref.Wrap(id)}
+	x := &MaterialPropertyConnection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,20 +58,26 @@ func (x *MaterialPropertyConnection) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Connects the output to the input
-//
-// NewMaterialPropertyConnectionWithOutputInput creates a new MaterialPropertyConnection.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MaterialPropertyConnection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMaterialPropertyConnectionWithOutputInput connects the output to the input
 func NewMaterialPropertyConnectionWithOutputInput(output *MaterialProperty, input *MaterialProperty) *MaterialPropertyConnection {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMaterialPropertyConnection")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOutput:input:"), objref.IDOf(output), objref.IDOf(input))
 	return materialPropertyConnectionAdopt(_id)
 }
 
+// Output wraps the corresponding Objective-C method.
 func (x *MaterialPropertyConnection) Output() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("output"))
 	return MaterialPropertyFromID(_r)
 }
 
+// Input wraps the corresponding Objective-C method.
 func (x *MaterialPropertyConnection) Input() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("input"))
 	return MaterialPropertyFromID(_r)

@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The principal class for an app proxy provider app extension.
-//
 // NEAppProxyProvider is an idiomatic wrapper over the Objective-C class NEAppProxyProvider.
+//
+// NEAppProxyProvider is an abstract base — you do not construct it directly. Construct one of [NETransparentProxyProvider] and pass it where a NEAppProxyProvider is accepted.
+//
+// The principal class for an app proxy provider app extension.
 type NEAppProxyProvider struct {
-	objref.Handle
+	NETunnelProvider
 }
 
 // NEAppProxyProviderFromID adopts an existing Objective-C object as a NEAppProxyProvider
@@ -27,7 +28,8 @@ func NEAppProxyProviderFromID(id objc.ID) *NEAppProxyProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &NEAppProxyProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEAppProxyProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,41 +42,19 @@ func nEAppProxyProviderAdopt(id objc.ID) *NEAppProxyProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &NEAppProxyProvider{Handle: objref.Wrap(id)}
+	x := &NEAppProxyProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NEAppProxyProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEAppProxyProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEAppProxyProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewNEAppProxyProvider creates a new NEAppProxyProvider.
-func NewNEAppProxyProvider() *NEAppProxyProvider {
-	_id := objc.Send[objc.ID](objc.ID(_class("NEAppProxyProvider")), objc.RegisterName("new"))
-	return nEAppProxyProviderAdopt(_id)
-}
-
-// Indicate to the system that the tunnel is being re-established.
-//
-// WithReasserting sets reasserting and returns the receiver so calls can be chained.
+// WithReasserting indicate to the system that the tunnel is being re-established.
 func (x *NEAppProxyProvider) WithReasserting(reasserting bool) *NEAppProxyProvider {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReasserting:"), reasserting)
 	return x
 }
 
-// Start the network proxy.
+// StartProxyWithOptions start the network proxy.
 //
 // StartProxyWithOptions blocks until the operation completes or ctx is cancelled.
 func (x *NEAppProxyProvider) StartProxyWithOptions(ctx context.Context, options obj.Object) error {
@@ -93,7 +73,7 @@ func (x *NEAppProxyProvider) StartProxyWithOptions(ctx context.Context, options 
 	}
 }
 
-// Stop the network proxy.
+// StopProxyWithReason stop the network proxy.
 //
 // StopProxyWithReason blocks until the operation completes or ctx is cancelled.
 func (x *NEAppProxyProvider) StopProxyWithReason(ctx context.Context, reason NEProviderStopReason) error {
@@ -110,13 +90,13 @@ func (x *NEAppProxyProvider) StopProxyWithReason(ctx context.Context, reason NEP
 	}
 }
 
-// Handle a new flow of network data.
+// HandleNewFlow handle a new flow of network data.
 func (x *NEAppProxyProvider) HandleNewFlow(flow *NEAppProxyFlow) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("handleNewFlow:"), objref.IDOf(flow))
 	return _r
 }
 
-// This function is called by the framework to deliver a new UDP data flow to the proxy provider implementation. Subclasses can override this method to perform whatever steps are necessary to ready the proxy to receive data from the flow. The proxy provider implementation indicates that the proxy is ready to handle flow data by calling -[NEAppProxyFlow openWithLocalFlowEndpoint:completionHandler:] on the flow. If the proxy implementation decides to not handle the flow and instead terminate it, the subclass implementation of this method should return NO. If the proxy implementation decides to handle the flow, the subclass implementation of this method should return YES. In this case the proxy implementation is responsible for retaining the NEAppProxyUDPFlow object. The default implementation of this method calls -[NEAppProxyProvider handleNewFlow:] and returns its result.
+// HandleNewUDPFlowInitialRemoteFlowEndpoint this function is called by the framework to deliver a new UDP data flow to the proxy provider implementation. Subclasses can override this method to perform whatever steps are necessary to ready the proxy to receive data from the flow. The proxy provider implementation indicates that the proxy is ready to handle flow data by calling -[NEAppProxyFlow openWithLocalFlowEndpoint:completionHandler:] on the flow. If the proxy implementation decides to not handle the flow and instead terminate it, the subclass implementation of this method should return NO. If the proxy implementation decides to handle the flow, the subclass implementation of this method should return YES. In this case the proxy implementation is responsible for retaining the NEAppProxyUDPFlow object. The default implementation of this method calls -[NEAppProxyProvider handleNewFlow:] and returns its result.
 func (x *NEAppProxyProvider) HandleNewUDPFlowInitialRemoteFlowEndpoint(flow *NEAppProxyUDPFlow, remoteEndpoint obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("handleNewUDPFlow:initialRemoteFlowEndpoint:"), objref.IDOf(flow), objref.IDOf(remoteEndpoint))
 	return _r
@@ -133,3 +113,14 @@ type NEAppProxyProviderable interface {
 }
 
 var _ NEAppProxyProviderable = (*NEAppProxyProvider)(nil)
+
+// isNEAppProxyProvider marks NEAppProxyProvider — and, by embedding promotion, its
+// subclasses — as a member of the NEAppProxyProvider hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NEAppProxyProvider) isNEAppProxyProvider() {}
+
+var _ NEAppProxyProviderProvider = (*NEAppProxyProvider)(nil)
+
+var _ NETunnelProviderProvider = (*NEAppProxyProvider)(nil)
+
+var _ NEProviderProvider = (*NEAppProxyProvider)(nil)

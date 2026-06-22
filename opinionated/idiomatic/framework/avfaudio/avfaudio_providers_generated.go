@@ -11,44 +11,53 @@ import (
 // AudioBufferProvider is accepted wherever a AVAudioBuffer (or one of its subclasses) is expected.
 type AudioBufferProvider interface {
 	objref.Object
+	isAudioBuffer()
 }
 
 // AudioIONodeProvider is accepted wherever a AVAudioIONode (or one of its subclasses) is expected.
 type AudioIONodeProvider interface {
 	objref.Object
+	isAudioIONode()
 }
 
 // AudioNodeProvider is accepted wherever a AVAudioNode (or one of its subclasses) is expected.
 type AudioNodeProvider interface {
 	objref.Object
+	isAudioNode()
 }
 
 // AudioUnitProvider is accepted wherever a AVAudioUnit (or one of its subclasses) is expected.
 type AudioUnitProvider interface {
 	objref.Object
+	isAudioUnit()
 }
 
 // AudioUnitEffectProvider is accepted wherever a AVAudioUnitEffect (or one of its subclasses) is expected.
 type AudioUnitEffectProvider interface {
 	objref.Object
+	isAudioUnitEffect()
 }
 
 // AudioUnitMIDIInstrumentProvider is accepted wherever a AVAudioUnitMIDIInstrument (or one of its subclasses) is expected.
 type AudioUnitMIDIInstrumentProvider interface {
 	objref.Object
+	isAudioUnitMIDIInstrument()
 }
 
 // AudioUnitTimeEffectProvider is accepted wherever a AVAudioUnitTimeEffect (or one of its subclasses) is expected.
 type AudioUnitTimeEffectProvider interface {
 	objref.Object
+	isAudioUnitTimeEffect()
 }
 
 // MIDIChannelEventProvider is accepted wherever a AVMIDIChannelEvent (or one of its subclasses) is expected.
 type MIDIChannelEventProvider interface {
 	objref.Object
+	isMIDIChannelEvent()
 }
 
 // MusicEventProvider is accepted wherever a AVMusicEvent (or one of its subclasses) is expected.
 type MusicEventProvider interface {
 	objref.Object
+	isMusicEvent()
 }

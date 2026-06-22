@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container that provides information about and access to the image, video, or Live Photo content of an asset to be edited.
-//
 // ContentEditingInput is an idiomatic wrapper over the Objective-C class PHContentEditingInput.
+//
+// A container that provides information about and access to the image, video, or Live Photo content of an asset to be edited.
 type ContentEditingInput struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ContentEditingInputFromID(id objc.ID) *ContentEditingInput {
 	if id == 0 {
 		return nil
 	}
-	x := &ContentEditingInput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContentEditingInput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func contentEditingInputAdopt(id objc.ID) *ContentEditingInput {
 	if id == 0 {
 		return nil
 	}
-	x := &ContentEditingInput{Handle: objref.Wrap(id)}
+	x := &ContentEditingInput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,33 +60,43 @@ func (x *ContentEditingInput) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContentEditingInput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewContentEditingInput creates a new ContentEditingInput.
 func NewContentEditingInput() *ContentEditingInput {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHContentEditingInput")), objc.RegisterName("new"))
 	return contentEditingInputAdopt(_id)
 }
 
+// MediaType wraps the corresponding Objective-C method.
 func (x *ContentEditingInput) MediaType() AssetMediaType {
 	_r := objc.Send[AssetMediaType](objref.IDOf(x), objc.RegisterName("mediaType"))
 	return _r
 }
 
+// MediaSubtypes wraps the corresponding Objective-C method.
 func (x *ContentEditingInput) MediaSubtypes() AssetMediaSubtype {
 	_r := objc.Send[AssetMediaSubtype](objref.IDOf(x), objc.RegisterName("mediaSubtypes"))
 	return _r
 }
 
+// CreationDate wraps the corresponding Objective-C method.
 func (x *ContentEditingInput) CreationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creationDate"))
 	return obj.Wrap(_r)
 }
 
-// The type of data provided as the asset's content editing input image or video.
+// ContentType the type of data provided as the asset's content editing input image or video.
 func (x *ContentEditingInput) ContentType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
 	return obj.Wrap(_r)
 }
 
+// UniformTypeIdentifier wraps the corresponding Objective-C method.
 func (x *ContentEditingInput) UniformTypeIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniformTypeIdentifier"))
 	if _r == 0 {
@@ -93,36 +105,43 @@ func (x *ContentEditingInput) UniformTypeIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// PlaybackStyle wraps the corresponding Objective-C method.
 func (x *ContentEditingInput) PlaybackStyle() AssetPlaybackStyle {
 	_r := objc.Send[AssetPlaybackStyle](objref.IDOf(x), objc.RegisterName("playbackStyle"))
 	return _r
 }
 
+// AdjustmentData wraps the corresponding Objective-C method.
 func (x *ContentEditingInput) AdjustmentData() *AdjustmentData {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adjustmentData"))
 	return AdjustmentDataFromID(_r)
 }
 
+// DisplaySizeImage wraps the corresponding Objective-C method.
 func (x *ContentEditingInput) DisplaySizeImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displaySizeImage"))
 	return obj.Wrap(_r)
 }
 
+// FullSizeImageURL wraps the corresponding Objective-C method.
 func (x *ContentEditingInput) FullSizeImageURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullSizeImageURL"))
 	return obj.Wrap(_r)
 }
 
+// FullSizeImageOrientation wraps the corresponding Objective-C method.
 func (x *ContentEditingInput) FullSizeImageOrientation() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fullSizeImageOrientation"))
 	return _r
 }
 
+// AudiovisualAsset wraps the corresponding Objective-C method.
 func (x *ContentEditingInput) AudiovisualAsset() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audiovisualAsset"))
 	return obj.Wrap(_r)
 }
 
+// LivePhoto wraps the corresponding Objective-C method.
 func (x *ContentEditingInput) LivePhoto() *LivePhoto {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("livePhoto"))
 	return LivePhotoFromID(_r)

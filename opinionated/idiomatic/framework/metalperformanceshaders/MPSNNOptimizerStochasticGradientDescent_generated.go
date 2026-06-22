@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An optimization layer that performs a gradient descent with an optional momentum update.
-//
 // NNOptimizerStochasticGradientDescent is an idiomatic wrapper over the Objective-C class MPSNNOptimizerStochasticGradientDescent.
+//
+// It embeds [NNOptimizer], promoting that type's methods.
+//
+// An optimization layer that performs a gradient descent with an optional momentum update.
 type NNOptimizerStochasticGradientDescent struct {
-	objref.Handle
+	NNOptimizer
 }
 
 // NNOptimizerStochasticGradientDescentFromID adopts an existing Objective-C object as a NNOptimizerStochasticGradientDescent
@@ -25,7 +26,8 @@ func NNOptimizerStochasticGradientDescentFromID(id objc.ID) *NNOptimizerStochast
 	if id == 0 {
 		return nil
 	}
-	x := &NNOptimizerStochasticGradientDescent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNOptimizerStochasticGradientDescent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func nNOptimizerStochasticGradientDescentAdopt(id objc.ID) *NNOptimizerStochasti
 	if id == 0 {
 		return nil
 	}
-	x := &NNOptimizerStochasticGradientDescent{Handle: objref.Wrap(id)}
+	x := &NNOptimizerStochasticGradientDescent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NNOptimizerStochasticGradientDescent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNOptimizerStochasticGradientDescent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNOptimizerStochasticGradientDescent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNNOptimizerStochasticGradientDescent creates a new NNOptimizerStochasticGradientDescent.
@@ -64,42 +52,37 @@ func NewNNOptimizerStochasticGradientDescent() *NNOptimizerStochasticGradientDes
 	return nNOptimizerStochasticGradientDescentAdopt(_id)
 }
 
-// The learningRate at which we update values The default value is 1e-3
-//
-// WithLearningRate sets learningRate and returns the receiver so calls can be chained.
+// WithLearningRate the learningRate at which we update values The default value is 1e-3
 func (x *NNOptimizerStochasticGradientDescent) WithLearningRate(learningRate float32) *NNOptimizerStochasticGradientDescent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
 	return x
 }
 
-// A bool which decides if gradient will be clipped The default value is NO
-//
-// WithApplyGradientClipping sets applyGradientClipping and returns the receiver so calls can be chained.
+// WithApplyGradientClipping a bool which decides if gradient will be clipped The default value is NO
 func (x *NNOptimizerStochasticGradientDescent) WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerStochasticGradientDescent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplyGradientClipping:"), applyGradientClipping)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *NNOptimizerStochasticGradientDescent) WithLabel(label string) *NNOptimizerStochasticGradientDescent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The momentumScale at which we update momentum for values array Default value is 0.0
+// MomentumScale the momentumScale at which we update momentum for values array Default value is 0.0
 func (x *NNOptimizerStochasticGradientDescent) MomentumScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("momentumScale"))
 	return _r
 }
 
-// Nesterov momentum is considered an improvement on the usual momentum update Default value is NO
+// UseNesterovMomentum nesterov momentum is considered an improvement on the usual momentum update Default value is NO
 func (x *NNOptimizerStochasticGradientDescent) UseNesterovMomentum() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("useNesterovMomentum"))
 	return _r
 }
 
+// UseNestrovMomentum wraps the corresponding Objective-C method.
 func (x *NNOptimizerStochasticGradientDescent) UseNestrovMomentum() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("useNestrovMomentum"))
 	return _r
@@ -117,3 +100,7 @@ type NNOptimizerStochasticGradientDescentable interface {
 }
 
 var _ NNOptimizerStochasticGradientDescentable = (*NNOptimizerStochasticGradientDescent)(nil)
+
+var _ NNOptimizerProvider = (*NNOptimizerStochasticGradientDescent)(nil)
+
+var _ KernelProvider = (*NNOptimizerStochasticGradientDescent)(nil)

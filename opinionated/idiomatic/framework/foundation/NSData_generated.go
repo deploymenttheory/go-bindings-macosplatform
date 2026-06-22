@@ -14,9 +14,11 @@ import (
 	"unsafe"
 )
 
-// A static byte buffer in memory.
-//
 // Data is an idiomatic wrapper over the Objective-C class NSData.
+//
+// Data is an abstract base — you do not construct it directly. Construct one of [MutableData] and pass it where a Data is accepted.
+//
+// A static byte buffer in memory.
 type Data struct {
 	objref.Handle
 }
@@ -27,7 +29,8 @@ func DataFromID(id objc.ID) *Data {
 	if id == 0 {
 		return nil
 	}
-	x := &Data{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Data{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +43,8 @@ func dataAdopt(id objc.ID) *Data {
 	if id == 0 {
 		return nil
 	}
-	x := &Data{Handle: objref.Wrap(id)}
+	x := &Data{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,10 +64,14 @@ func (x *Data) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a data object with the content of the file at a given path.
-//
-// NewDataWithContentsOfFileOptionsError creates a new Data.
-func NewDataWithContentsOfFileOptionsError(path string, readOptionsMask DataReadingOptions) (*Data, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Data) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDataWithContentsOfFileOptionsError initializes a data object with the content of the file at a given path.
+func NewDataWithContentsOfFileOptionsError(path string, readOptionsMask DataReadingOptions) (result *Data, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfFile:options:error:"), purego.NSString(path), readOptionsMask, unsafe.Pointer(&_nsErr))
@@ -73,10 +81,8 @@ func NewDataWithContentsOfFileOptionsError(path string, readOptionsMask DataRead
 	return dataAdopt(_id), nil
 }
 
-// Creates a data object from the data at the provided file URL using specific reading options.
-//
-// NewDataWithContentsOfURLOptionsError creates a new Data.
-func NewDataWithContentsOfURLOptionsError(url string, readOptionsMask DataReadingOptions) (*Data, error) {
+// NewDataWithContentsOfURLOptionsError creates a data object from the data at the provided file URL using specific reading options.
+func NewDataWithContentsOfURLOptionsError(url string, readOptionsMask DataReadingOptions) (result *Data, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:options:error:"), rt.FileURL(url), readOptionsMask, unsafe.Pointer(&_nsErr))
@@ -86,99 +92,86 @@ func NewDataWithContentsOfURLOptionsError(url string, readOptionsMask DataReadin
 	return dataAdopt(_id), nil
 }
 
-// Initializes a data object with the content of the file at a given path.
-//
-// NewDataWithContentsOfFile creates a new Data.
+// NewDataWithContentsOfFile initializes a data object with the content of the file at a given path.
 func NewDataWithContentsOfFile(path string) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfFile:"), purego.NSString(path))
 	return dataAdopt(_id)
 }
 
-// Creates a data object from the data at the specified file URL, or returns nil if the system can’t create one.
-//
-// NewDataWithContentsOfURL creates a new Data.
+// NewDataWithContentsOfURL creates a data object from the data at the specified file URL, or returns nil if the system can’t create one.
 func NewDataWithContentsOfURL(url string) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), rt.FileURL(url))
 	return dataAdopt(_id)
 }
 
-// Initializes a data object with the contents of another data object.
-//
-// NewDataWithData creates a new Data.
+// NewDataWithData initializes a data object with the contents of another data object.
 func NewDataWithData(data *Data) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
 	return dataAdopt(_id)
 }
 
-// Initializes a data object with the given Base64 encoded string.
-//
-// NewDataWithBase64EncodedStringOptions creates a new Data.
+// NewDataWithBase64EncodedStringOptions initializes a data object with the given Base64 encoded string.
 func NewDataWithBase64EncodedStringOptions(base64String string, options DataBase64DecodingOptions) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBase64EncodedString:options:"), purego.NSString(base64String), options)
 	return dataAdopt(_id)
 }
 
-// Initializes a data object with the given Base64 encoded data.
-//
-// NewDataWithBase64EncodedDataOptions creates a new Data.
+// NewDataWithBase64EncodedDataOptions initializes a data object with the given Base64 encoded data.
 func NewDataWithBase64EncodedDataOptions(base64Data *Data, options DataBase64DecodingOptions) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBase64EncodedData:options:"), objref.IDOf(base64Data), options)
 	return dataAdopt(_id)
 }
 
-// Initializes a data object with the contents of the mapped file specified by a given path.
-//
-// NewDataWithContentsOfMappedFile creates a new Data.
+// NewDataWithContentsOfMappedFile initializes a data object with the contents of the mapped file specified by a given path.
 func NewDataWithContentsOfMappedFile(path string) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfMappedFile:"), purego.NSString(path))
 	return dataAdopt(_id)
 }
 
-// Initializes a data object initialized with the given Base64 encoded string.
-//
-// NewDataWithBase64Encoding creates a new Data.
+// NewDataWithBase64Encoding initializes a data object initialized with the given Base64 encoded string.
 func NewDataWithBase64Encoding(base64String string) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBase64Encoding:"), purego.NSString(base64String))
 	return dataAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Data) WithScriptingProperties(scriptingProperties obj.Object) *Data {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Length wraps the corresponding Objective-C method.
 func (x *Data) Length() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
 	return _r
 }
 
-// Returns a Boolean value indicating whether this data object is the same as another.
+// IsEqualToData returns a Boolean value indicating whether this data object is the same as another.
 func (x *Data) IsEqualToData(other *Data) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToData:"), objref.IDOf(other))
 	return _r
 }
 
-// Writes the data object’s bytes to the file specified by a given path.
+// WriteToFileAtomically writes the data object’s bytes to the file specified by a given path.
 func (x *Data) WriteToFileAtomically(path string, useAuxiliaryFile bool) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToFile:atomically:"), purego.NSString(path), useAuxiliaryFile)
 	return _r
 }
 
-// Writes the data object’s bytes to the location specified by a given URL.
+// WriteToURLAtomically writes the data object’s bytes to the location specified by a given URL.
 func (x *Data) WriteToURLAtomically(url string, atomically bool) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:atomically:"), rt.FileURL(url), atomically)
 	return _r
 }
 
-// Writes the data object’s bytes to the file specified by a given path.
+// WriteToFileOptions writes the data object’s bytes to the file specified by a given path.
 func (x *Data) WriteToFileOptions(path string, writeOptionsMask DataWritingOptions) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToFile:options:error:"), purego.NSString(path), writeOptionsMask, unsafe.Pointer(&_nsErr))
@@ -188,7 +181,7 @@ func (x *Data) WriteToFileOptions(path string, writeOptionsMask DataWritingOptio
 	return nil
 }
 
-// Writes the data object’s bytes to the location specified by a given URL.
+// WriteToURLOptions writes the data object’s bytes to the location specified by a given URL.
 func (x *Data) WriteToURLOptions(url string, writeOptionsMask DataWritingOptions) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:options:error:"), rt.FileURL(url), writeOptionsMask, unsafe.Pointer(&_nsErr))
@@ -198,7 +191,7 @@ func (x *Data) WriteToURLOptions(url string, writeOptionsMask DataWritingOptions
 	return nil
 }
 
-// Creates a Base64 encoded string from the string using the given options.
+// Base64EncodedStringWithOptions creates a Base64 encoded string from the string using the given options.
 func (x *Data) Base64EncodedStringWithOptions(options DataBase64EncodingOptions) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("base64EncodedStringWithOptions:"), options)
 	if _r == 0 {
@@ -207,14 +200,14 @@ func (x *Data) Base64EncodedStringWithOptions(options DataBase64EncodingOptions)
 	return purego.GoString(_r)
 }
 
-// Creates a Base64, UTF-8 encoded data object from the string using the given options.
+// Base64EncodedDataWithOptions creates a Base64, UTF-8 encoded data object from the string using the given options.
 func (x *Data) Base64EncodedDataWithOptions(options DataBase64EncodingOptions) *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("base64EncodedDataWithOptions:"), options)
 	return DataFromID(_r)
 }
 
-// Returns a new data object by decompressing data object’s bytes.
-func (x *Data) DecompressedDataUsingAlgorithmError(algorithm DataCompressionAlgorithm) (*Data, error) {
+// DecompressedDataUsingAlgorithmError returns a new data object by decompressing data object’s bytes.
+func (x *Data) DecompressedDataUsingAlgorithmError(algorithm DataCompressionAlgorithm) (result *Data, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decompressedDataUsingAlgorithm:error:"), algorithm, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -223,8 +216,8 @@ func (x *Data) DecompressedDataUsingAlgorithmError(algorithm DataCompressionAlgo
 	return DataFromID(_r), nil
 }
 
-// Returns a new data object by compressing the data object’s bytes.
-func (x *Data) CompressedDataUsingAlgorithmError(algorithm DataCompressionAlgorithm) (*Data, error) {
+// CompressedDataUsingAlgorithmError returns a new data object by compressing the data object’s bytes.
+func (x *Data) CompressedDataUsingAlgorithmError(algorithm DataCompressionAlgorithm) (result *Data, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compressedDataUsingAlgorithm:error:"), algorithm, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -233,7 +226,7 @@ func (x *Data) CompressedDataUsingAlgorithmError(algorithm DataCompressionAlgori
 	return DataFromID(_r), nil
 }
 
-// Initializes a Base64 encoded string from the string.
+// Base64Encoding initializes a Base64 encoded string from the string.
 func (x *Data) Base64Encoding() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("base64Encoding"))
 	if _r == 0 {
@@ -254,9 +247,16 @@ type Dataable interface {
 	WriteToURLOptions(url string, writeOptionsMask DataWritingOptions) error
 	Base64EncodedStringWithOptions(options DataBase64EncodingOptions) string
 	Base64EncodedDataWithOptions(options DataBase64EncodingOptions) *Data
-	DecompressedDataUsingAlgorithmError(algorithm DataCompressionAlgorithm) (*Data, error)
-	CompressedDataUsingAlgorithmError(algorithm DataCompressionAlgorithm) (*Data, error)
+	DecompressedDataUsingAlgorithmError(algorithm DataCompressionAlgorithm) (result *Data, err error)
+	CompressedDataUsingAlgorithmError(algorithm DataCompressionAlgorithm) (result *Data, err error)
 	Base64Encoding() string
 }
 
 var _ Dataable = (*Data)(nil)
+
+// isData marks Data — and, by embedding promotion, its
+// subclasses — as a member of the Data hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Data) isData() {}
+
+var _ DataProvider = (*Data)(nil)

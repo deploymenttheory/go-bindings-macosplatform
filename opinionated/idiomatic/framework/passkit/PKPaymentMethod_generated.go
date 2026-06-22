@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains information about payment methods.
-//
 // PaymentMethod is an idiomatic wrapper over the Objective-C class PKPaymentMethod.
+//
+// An object that contains information about payment methods.
 type PaymentMethod struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PaymentMethodFromID(id objc.ID) *PaymentMethod {
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentMethod{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PaymentMethod{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func paymentMethodAdopt(id objc.ID) *PaymentMethod {
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentMethod{Handle: objref.Wrap(id)}
+	x := &PaymentMethod{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *PaymentMethod) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PaymentMethod) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPaymentMethod creates a new PaymentMethod.
 func NewPaymentMethod() *PaymentMethod {
 	_id := objc.Send[objc.ID](objc.ID(_class("PKPaymentMethod")), objc.RegisterName("new"))
 	return paymentMethodAdopt(_id)
 }
 
+// DisplayName wraps the corresponding Objective-C method.
 func (x *PaymentMethod) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
 	if _r == 0 {
@@ -72,26 +81,31 @@ func (x *PaymentMethod) DisplayName() string {
 	return purego.GoString(_r)
 }
 
+// Network wraps the corresponding Objective-C method.
 func (x *PaymentMethod) Network() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("network"))
 	return obj.Wrap(_r)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *PaymentMethod) Type() PaymentMethodType {
 	_r := objc.Send[PaymentMethodType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
+// PaymentPass wraps the corresponding Objective-C method.
 func (x *PaymentMethod) PaymentPass() *PaymentPass {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentPass"))
 	return PaymentPassFromID(_r)
 }
 
+// SecureElementPass wraps the corresponding Objective-C method.
 func (x *PaymentMethod) SecureElementPass() *SecureElementPass {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("secureElementPass"))
 	return SecureElementPassFromID(_r)
 }
 
+// BillingAddress wraps the corresponding Objective-C method.
 func (x *PaymentMethod) BillingAddress() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("billingAddress"))
 	return obj.Wrap(_r)

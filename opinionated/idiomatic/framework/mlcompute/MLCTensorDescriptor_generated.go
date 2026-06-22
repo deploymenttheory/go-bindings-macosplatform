@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration object you use to create a tensor.
-//
 // TensorDescriptor is an idiomatic wrapper over the Objective-C class MLCTensorDescriptor.
+//
+// A configuration object you use to create a tensor.
 type TensorDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TensorDescriptorFromID(id objc.ID) *TensorDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &TensorDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TensorDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func tensorDescriptorAdopt(id objc.ID) *TensorDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &TensorDescriptor{Handle: objref.Wrap(id)}
+	x := &TensorDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *TensorDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TensorDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTensorDescriptor creates a new TensorDescriptor.
 func NewTensorDescriptor() *TensorDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLCTensorDescriptor")), objc.RegisterName("new"))
 	return tensorDescriptorAdopt(_id)
 }
 
-// The tensor data type.  The default is MLCDataTypeFloat32.
+// DataType the tensor data type.  The default is MLCDataTypeFloat32.
 func (x *TensorDescriptor) DataType() DataType {
 	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("dataType"))
 	return _r
 }
 
-// The number of dimensions in the tensor
+// DimensionCount the number of dimensions in the tensor
 func (x *TensorDescriptor) DimensionCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dimensionCount"))
 	return _r
 }
 
-// The size in each dimension
+// Shape the size in each dimension
 //
 // Shape returns the collection as a Go slice.
 func (x *TensorDescriptor) Shape() []obj.Object {
@@ -84,7 +92,7 @@ func (x *TensorDescriptor) Shape() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The stride in bytes in each dimension
+// Stride the stride in bytes in each dimension
 //
 // Stride returns the collection as a Go slice.
 func (x *TensorDescriptor) Stride() []obj.Object {
@@ -92,13 +100,13 @@ func (x *TensorDescriptor) Stride() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The allocation size in bytes for a tensor.
+// TensorAllocationSizeInBytes the allocation size in bytes for a tensor.
 func (x *TensorDescriptor) TensorAllocationSizeInBytes() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("tensorAllocationSizeInBytes"))
 	return _r
 }
 
-// TODO
+// SequenceLengths TODO
 //
 // SequenceLengths returns the collection as a Go slice.
 func (x *TensorDescriptor) SequenceLengths() []obj.Object {
@@ -106,13 +114,13 @@ func (x *TensorDescriptor) SequenceLengths() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Specifies whether the sequences are sorted or not.
+// SortedSequences specifies whether the sequences are sorted or not.
 func (x *TensorDescriptor) SortedSequences() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sortedSequences"))
 	return _r
 }
 
-// The batch size for each sequence We populate this only when sequenceLengths is valid. The length of this array should be the maximum sequence length in sequenceLengths (i.e sequenceLengths[0]).
+// BatchSizePerSequenceStep the batch size for each sequence We populate this only when sequenceLengths is valid. The length of this array should be the maximum sequence length in sequenceLengths (i.e sequenceLengths[0]).
 //
 // BatchSizePerSequenceStep returns the collection as a Go slice.
 func (x *TensorDescriptor) BatchSizePerSequenceStep() []obj.Object {

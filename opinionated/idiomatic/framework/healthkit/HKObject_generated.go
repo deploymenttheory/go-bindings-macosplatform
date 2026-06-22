@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A piece of data that can be stored inside the HealthKit store.
-//
 // Object is an idiomatic wrapper over the Objective-C class HKObject.
+//
+// Object is an abstract base — you do not construct it directly. Construct one of [Sample] and pass it where a Object is accepted.
+//
+// A piece of data that can be stored inside the HealthKit store.
 type Object struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ObjectFromID(id objc.ID) *Object {
 	if id == 0 {
 		return nil
 	}
-	x := &Object{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Object{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func objectAdopt(id objc.ID) *Object {
 	if id == 0 {
 		return nil
 	}
-	x := &Object{Handle: objref.Wrap(id)}
+	x := &Object{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +62,31 @@ func (x *Object) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewObject creates a new Object.
-func NewObject() *Object {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKObject")), objc.RegisterName("new"))
-	return objectAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Object) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// A unique identifier of the receiver in the HealthKit database.
+// UUID a unique identifier of the receiver in the HealthKit database.
 func (x *Object) UUID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
 	return obj.Wrap(_r)
 }
 
-// Represents the revision of the source responsible for saving the receiver.
+// SourceRevision represents the revision of the source responsible for saving the receiver.
 func (x *Object) SourceRevision() *SourceRevision {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceRevision"))
 	return SourceRevisionFromID(_r)
 }
 
-// Represents the device that generated the data of the receiver.
+// Device represents the device that generated the data of the receiver.
 func (x *Object) Device() *Device {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
 	return DeviceFromID(_r)
 }
 
-// Extra information describing properties of the receiver. Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
+// Metadata extra information describing properties of the receiver. Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
 func (x *Object) Metadata() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
 	return obj.Wrap(_r)
@@ -98,3 +102,10 @@ type Objectable interface {
 }
 
 var _ Objectable = (*Object)(nil)
+
+// isObject marks Object — and, by embedding promotion, its
+// subclasses — as a member of the Object hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Object) isObject() {}
+
+var _ ObjectProvider = (*Object)(nil)

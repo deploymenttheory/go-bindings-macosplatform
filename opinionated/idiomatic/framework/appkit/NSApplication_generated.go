@@ -8,16 +8,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object that manages an app’s main event loop and resources used by all of that app’s objects.
-//
 // Application is an idiomatic wrapper over the Objective-C class NSApplication.
+//
+// It embeds [Responder], promoting that type's methods.
+//
+// An object that manages an app’s main event loop and resources used by all of that app’s objects.
 type Application struct {
-	objref.Handle
+	Responder
 }
 
 // ApplicationFromID adopts an existing Objective-C object as a Application
@@ -26,7 +27,8 @@ func ApplicationFromID(id objc.ID) *Application {
 	if id == 0 {
 		return nil
 	}
-	x := &Application{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Application{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,24 +41,10 @@ func applicationAdopt(id objc.ID) *Application {
 	if id == 0 {
 		return nil
 	}
-	x := &Application{Handle: objref.Wrap(id)}
+	x := &Application{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *Application) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Application) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Application) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewApplication creates a new Application.
@@ -65,601 +53,641 @@ func NewApplication() *Application {
 	return applicationAdopt(_id)
 }
 
-// WithMainMenu sets mainMenu and returns the receiver so calls can be chained.
+// WithMainMenu sets the property and returns the receiver so calls can be chained.
 func (x *Application) WithMainMenu(mainMenu *Menu) *Application {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMainMenu:"), objref.IDOf(mainMenu))
 	return x
 }
 
-// The help menu used by the app.
-//
-// WithHelpMenu sets helpMenu and returns the receiver so calls can be chained.
+// WithHelpMenu the help menu used by the app.
 func (x *Application) WithHelpMenu(helpMenu *Menu) *Application {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHelpMenu:"), objref.IDOf(helpMenu))
 	return x
 }
 
-// The image used for the app’s icon.
-//
-// WithApplicationIconImage sets applicationIconImage and returns the receiver so calls can be chained.
+// WithApplicationIconImage the image used for the app’s icon.
 func (x *Application) WithApplicationIconImage(applicationIconImage *Image) *Application {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationIconImage:"), objref.IDOf(applicationIconImage))
 	return x
 }
 
-// The presentation options that should be in effect for the system when this app is active.
-//
-// WithPresentationOptions sets presentationOptions and returns the receiver so calls can be chained.
+// WithPresentationOptions the presentation options that should be in effect for the system when this app is active.
 func (x *Application) WithPresentationOptions(presentationOptions ApplicationPresentationOptions) *Application {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresentationOptions:"), presentationOptions)
 	return x
 }
 
-// The appearance associated with the app’s windows.
-//
-// WithAppearance sets appearance and returns the receiver so calls can be chained.
+// WithAppearance the appearance associated with the app’s windows.
 func (x *Application) WithAppearance(appearance *Appearance) *Application {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppearance:"), objref.IDOf(appearance))
 	return x
 }
 
-// WithWindowsMenu sets windowsMenu and returns the receiver so calls can be chained.
+// WithWindowsMenu sets the property and returns the receiver so calls can be chained.
 func (x *Application) WithWindowsMenu(windowsMenu *Menu) *Application {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindowsMenu:"), objref.IDOf(windowsMenu))
 	return x
 }
 
-// WithServicesMenu sets servicesMenu and returns the receiver so calls can be chained.
+// WithServicesMenu sets the property and returns the receiver so calls can be chained.
 func (x *Application) WithServicesMenu(servicesMenu *Menu) *Application {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServicesMenu:"), objref.IDOf(servicesMenu))
 	return x
 }
 
-// The object that provides the services the current app advertises in the Services menu of other apps.
-//
-// WithServicesProvider sets servicesProvider and returns the receiver so calls can be chained.
+// WithServicesProvider the object that provides the services the current app advertises in the Services menu of other apps.
 func (x *Application) WithServicesProvider(servicesProvider obj.Object) *Application {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServicesProvider:"), objref.IDOf(servicesProvider))
 	return x
 }
 
-// Whether or not a menu item to customize the NSTouchBar can be automatically added to the main menu. It will only actually be added when Touch Bar hardware or simulator is present. Defaults to NO. Setting this property to YES is the recommended way to add the customization menu item. But if non-standard placement of the menu item is needed, creating a menu item with an action of `toggleTouchBarCustomizationPalette:` can be used instead.
-//
-// WithAutomaticCustomizeTouchBarMenuItemEnabled sets automaticCustomizeTouchBarMenuItemEnabled and returns the receiver so calls can be chained.
+// WithAutomaticCustomizeTouchBarMenuItemEnabled whether or not a menu item to customize the NSTouchBar can be automatically added to the main menu. It will only actually be added when Touch Bar hardware or simulator is present. Defaults to NO. Setting this property to YES is the recommended way to add the customization menu item. But if non-standard placement of the menu item is needed, creating a menu item with an action of `toggleTouchBarCustomizationPalette:` can be used instead.
 func (x *Application) WithAutomaticCustomizeTouchBarMenuItemEnabled(automaticCustomizeTouchBarMenuItemEnabled bool) *Application {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticCustomizeTouchBarMenuItemEnabled:"), automaticCustomizeTouchBarMenuItemEnabled)
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *Application) WithNextResponder(nextResponder ResponderProvider) *Application {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets menu and returns the receiver so calls can be chained.
+// WithMenu returns the responder’s menu.
 func (x *Application) WithMenu(menu *Menu) *Application {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity an object encapsulating a user activity supported by this responder.
 func (x *Application) WithUserActivity(userActivity obj.Object) *Application {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *Application) WithTouchBar(touchBar *TouchBar) *Application {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// Hides all the receiver’s windows, and the next app in line is activated.
+// Hide hides all the receiver’s windows, and the next app in line is activated.
 func (x *Application) Hide(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hide:"), objref.IDOf(sender))
 }
 
+// Unhide wraps the corresponding Objective-C method.
 func (x *Application) Unhide(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unhide:"), objref.IDOf(sender))
 }
 
-// Restores hidden windows without activating their owner (the receiver).
+// UnhideWithoutActivation restores hidden windows without activating their owner (the receiver).
 func (x *Application) UnhideWithoutActivation() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unhideWithoutActivation"))
 }
 
+// WindowWithWindowNumber wraps the corresponding Objective-C method.
 func (x *Application) WindowWithWindowNumber(windowNum int) *Window {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("windowWithWindowNumber:"), windowNum)
 	return WindowFromID(_r)
 }
 
-// Deactivates the receiver.
+// Deactivate deactivates the receiver.
 func (x *Application) Deactivate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deactivate"))
 }
 
-// Makes the receiver the active app. - Parameter ignoreOtherApps: If `NO`, the app is activated only if no other app is currently active. If `YES`, the app activates regardless.
+// ActivateIgnoringOtherApps makes the receiver the active app. - Parameter ignoreOtherApps: If `NO`, the app is activated only if no other app is currently active. If `YES`, the app activates regardless.
 func (x *Application) ActivateIgnoringOtherApps(ignoreOtherApps bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activateIgnoringOtherApps:"), ignoreOtherApps)
 }
 
-// Activates the receiver app, if appropriate.
+// Activate activates the receiver app, if appropriate.
 func (x *Application) Activate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activate"))
 }
 
-// Explicitly allows another app to make itself active.
+// YieldActivationToApplication explicitly allows another app to make itself active.
 func (x *Application) YieldActivationToApplication(application *RunningApplication) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("yieldActivationToApplication:"), objref.IDOf(application))
 }
 
-// Explicitly allows another app to make itself active.
+// YieldActivationToApplicationWithBundleIdentifier explicitly allows another app to make itself active.
 func (x *Application) YieldActivationToApplicationWithBundleIdentifier(bundleIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("yieldActivationToApplicationWithBundleIdentifier:"), purego.NSString(bundleIdentifier))
 }
 
-// Hides all apps, except the receiver.
+// HideOtherApplications hides all apps, except the receiver.
 func (x *Application) HideOtherApplications(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hideOtherApplications:"), objref.IDOf(sender))
 }
 
-// Unhides all apps, including the receiver.
+// UnhideAllApplications unhides all apps, including the receiver.
 func (x *Application) UnhideAllApplications(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unhideAllApplications:"), objref.IDOf(sender))
 }
 
-// Activates the app, opens any files specified by the NSOpen user default, and unhighlights the app’s icon.
+// FinishLaunching activates the app, opens any files specified by the NSOpen user default, and unhighlights the app’s icon.
 func (x *Application) FinishLaunching() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishLaunching"))
 }
 
-// Starts the main event loop.
+// Run starts the main event loop.
 func (x *Application) Run() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("run"))
 }
 
+// RunModalForWindow wraps the corresponding Objective-C method.
 func (x *Application) RunModalForWindow(window *Window) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalForWindow:"), objref.IDOf(window))
 	return _r
 }
 
-// Stops the main event loop.
+// Stop stops the main event loop.
 func (x *Application) Stop(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop:"), objref.IDOf(sender))
 }
 
+// StopModal wraps the corresponding Objective-C method.
 func (x *Application) StopModal() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopModal"))
 }
 
+// StopModalWithCode wraps the corresponding Objective-C method.
 func (x *Application) StopModalWithCode(returnCode int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopModalWithCode:"), returnCode)
 }
 
+// AbortModal wraps the corresponding Objective-C method.
 func (x *Application) AbortModal() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("abortModal"))
 }
 
+// BeginModalSessionForWindow wraps the corresponding Objective-C method.
 func (x *Application) BeginModalSessionForWindow(window *Window) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginModalSessionForWindow:"), objref.IDOf(window))
 	return obj.Wrap(_r)
 }
 
+// RunModalSession wraps the corresponding Objective-C method.
 func (x *Application) RunModalSession(session obj.Object) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalSession:"), objref.IDOf(session))
 	return _r
 }
 
+// EndModalSession wraps the corresponding Objective-C method.
 func (x *Application) EndModalSession(session obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endModalSession:"), objref.IDOf(session))
 }
 
-// Terminates the receiver.
+// Terminate terminates the receiver.
 func (x *Application) Terminate(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("terminate:"), objref.IDOf(sender))
 }
 
-// Starts a user attention request.
+// RequestUserAttention starts a user attention request.
 func (x *Application) RequestUserAttention(requestType RequestUserAttentionType) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("requestUserAttention:"), requestType)
 	return _r
 }
 
-// Cancels a previous user attention request.
+// CancelUserAttentionRequest cancels a previous user attention request.
 func (x *Application) CancelUserAttentionRequest(request int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelUserAttentionRequest:"), request)
 }
 
-// Execute a block for each of the app's windows. Set `*stop = YES` if desired, to halt the enumeration early.
+// EnumerateWindowsWithOptionsUsing execute a block for each of the app's windows. Set `*stop = YES` if desired, to halt the enumeration early.
 func (x *Application) EnumerateWindowsWithOptionsUsing(options WindowListOptions, block func(obj.Object, *bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateWindowsWithOptions:usingBlock:"), options, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
+// PreventWindowOrdering wraps the corresponding Objective-C method.
 func (x *Application) PreventWindowOrdering() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preventWindowOrdering"))
 }
 
+// SetWindowsNeedUpdate wraps the corresponding Objective-C method.
 func (x *Application) SetWindowsNeedUpdate(needUpdate bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindowsNeedUpdate:"), needUpdate)
 }
 
-// Sends an message to each onscreen window.
+// UpdateWindows sends an message to each onscreen window.
 func (x *Application) UpdateWindows() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWindows"))
 }
 
-// Returns the app’s activation policy.
+// ActivationPolicy returns the app’s activation policy.
 func (x *Application) ActivationPolicy() ApplicationActivationPolicy {
 	_r := objc.Send[ApplicationActivationPolicy](objref.IDOf(x), objc.RegisterName("activationPolicy"))
 	return _r
 }
 
-// Attempts to modify the app’s activation policy.
+// SetActivationPolicy attempts to modify the app’s activation policy.
 func (x *Application) SetActivationPolicy(activationPolicy ApplicationActivationPolicy) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setActivationPolicy:"), activationPolicy)
 	return _r
 }
 
-// Logs a given exception by calling NSLog().
+// ReportException logs a given exception by calling NSLog().
 func (x *Application) ReportException(exception obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reportException:"), objref.IDOf(exception))
 }
 
-// Responds to NSTerminateLater once the app knows whether it can terminate.
+// ReplyToApplicationShouldTerminate responds to NSTerminateLater once the app knows whether it can terminate.
 func (x *Application) ReplyToApplicationShouldTerminate(shouldTerminate bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replyToApplicationShouldTerminate:"), shouldTerminate)
 }
 
-// Handles errors that might occur when the user attempts to open or print files.
+// ReplyToOpenOrPrint handles errors that might occur when the user attempts to open or print files.
 func (x *Application) ReplyToOpenOrPrint(reply ApplicationDelegateReply) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replyToOpenOrPrint:"), reply)
 }
 
-// Opens the character palette.
+// OrderFrontCharacterPalette opens the character palette.
 func (x *Application) OrderFrontCharacterPalette(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderFrontCharacterPalette:"), objref.IDOf(sender))
 }
 
+// MainWindow wraps the corresponding Objective-C method.
 func (x *Application) MainWindow() *Window {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainWindow"))
 	return WindowFromID(_r)
 }
 
+// KeyWindow wraps the corresponding Objective-C method.
 func (x *Application) KeyWindow() *Window {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyWindow"))
 	return WindowFromID(_r)
 }
 
+// IsActive wraps the corresponding Objective-C method.
 func (x *Application) IsActive() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
 	return _r
 }
 
+// IsHidden wraps the corresponding Objective-C method.
 func (x *Application) IsHidden() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
 	return _r
 }
 
+// IsRunning wraps the corresponding Objective-C method.
 func (x *Application) IsRunning() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRunning"))
 	return _r
 }
 
-// A boolean value indicating whether your application should suppress HDR content based on established policy. Built-in AppKit components such as NSImageView will automatically behave correctly with HDR content. You should use this value in conjunction with notifications (`NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification` and `NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification`) to suppress HDR content in your application when signaled to do so.
+// ApplicationShouldSuppressHighDynamicRangeContent a boolean value indicating whether your application should suppress HDR content based on established policy. Built-in AppKit components such as NSImageView will automatically behave correctly with HDR content. You should use this value in conjunction with notifications (`NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification` and `NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification`) to suppress HDR content in your application when signaled to do so.
 func (x *Application) ApplicationShouldSuppressHighDynamicRangeContent() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("applicationShouldSuppressHighDynamicRangeContent"))
 	return _r
 }
 
+// ModalWindow wraps the corresponding Objective-C method.
 func (x *Application) ModalWindow() *Window {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modalWindow"))
 	return WindowFromID(_r)
 }
 
+// Windows wraps the corresponding Objective-C method.
+//
 // Windows returns the collection as a Go slice.
 func (x *Application) Windows() []*Window {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("windows"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Window { return WindowFromID(_id) })
 }
 
+// MainMenu wraps the corresponding Objective-C method.
 func (x *Application) MainMenu() *Menu {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainMenu"))
 	return MenuFromID(_r)
 }
 
+// SetMainMenu wraps the corresponding Objective-C method.
 func (x *Application) SetMainMenu(mainMenu *Menu) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMainMenu:"), objref.IDOf(mainMenu))
 }
 
-// Set or get the Help menu for the app.  If a non-nil menu is set as the Help menu, Spotlight for Help will be installed in it; otherwise AppKit will install Spotlight for Help into a menu of its choosing (and that menu is not returned from `-helpMenu`).  If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.
+// HelpMenu set or get the Help menu for the app.  If a non-nil menu is set as the Help menu, Spotlight for Help will be installed in it; otherwise AppKit will install Spotlight for Help into a menu of its choosing (and that menu is not returned from `-helpMenu`).  If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.
 func (x *Application) HelpMenu() *Menu {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("helpMenu"))
 	return MenuFromID(_r)
 }
 
-// Set or get the Help menu for the app.  If a non-nil menu is set as the Help menu, Spotlight for Help will be installed in it; otherwise AppKit will install Spotlight for Help into a menu of its choosing (and that menu is not returned from `-helpMenu`).  If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.
+// SetHelpMenu set or get the Help menu for the app.  If a non-nil menu is set as the Help menu, Spotlight for Help will be installed in it; otherwise AppKit will install Spotlight for Help into a menu of its choosing (and that menu is not returned from `-helpMenu`).  If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.
 func (x *Application) SetHelpMenu(helpMenu *Menu) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHelpMenu:"), objref.IDOf(helpMenu))
 }
 
+// ApplicationIconImage wraps the corresponding Objective-C method.
 func (x *Application) ApplicationIconImage() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationIconImage"))
 	return ImageFromID(_r)
 }
 
+// SetApplicationIconImage wraps the corresponding Objective-C method.
 func (x *Application) SetApplicationIconImage(applicationIconImage *Image) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationIconImage:"), objref.IDOf(applicationIconImage))
 }
 
+// DockTile wraps the corresponding Objective-C method.
 func (x *Application) DockTile() *DockTile {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dockTile"))
 	return DockTileFromID(_r)
 }
 
-// Gets or sets the
+// PresentationOptions gets or sets the
 func (x *Application) PresentationOptions() ApplicationPresentationOptions {
 	_r := objc.Send[ApplicationPresentationOptions](objref.IDOf(x), objc.RegisterName("presentationOptions"))
 	return _r
 }
 
-// Gets or sets the
+// SetPresentationOptions gets or sets the
 func (x *Application) SetPresentationOptions(presentationOptions ApplicationPresentationOptions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresentationOptions:"), presentationOptions)
 }
 
+// CurrentSystemPresentationOptions wraps the corresponding Objective-C method.
 func (x *Application) CurrentSystemPresentationOptions() ApplicationPresentationOptions {
 	_r := objc.Send[ApplicationPresentationOptions](objref.IDOf(x), objc.RegisterName("currentSystemPresentationOptions"))
 	return _r
 }
 
+// OcclusionState wraps the corresponding Objective-C method.
 func (x *Application) OcclusionState() ApplicationOcclusionState {
 	_r := objc.Send[ApplicationOcclusionState](objref.IDOf(x), objc.RegisterName("occlusionState"))
 	return _r
 }
 
+// IsProtectedDataAvailable wraps the corresponding Objective-C method.
 func (x *Application) IsProtectedDataAvailable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isProtectedDataAvailable"))
 	return _r
 }
 
+// Appearance wraps the corresponding Objective-C method.
 func (x *Application) Appearance() *Appearance {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appearance"))
 	return AppearanceFromID(_r)
 }
 
+// SetAppearance wraps the corresponding Objective-C method.
 func (x *Application) SetAppearance(appearance *Appearance) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppearance:"), objref.IDOf(appearance))
 }
 
+// EffectiveAppearance wraps the corresponding Objective-C method.
 func (x *Application) EffectiveAppearance() *Appearance {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectiveAppearance"))
 	return AppearanceFromID(_r)
 }
 
-// Dispatches an event to other objects.
+// SendEvent dispatches an event to other objects.
 func (x *Application) SendEvent(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendEvent:"), objref.IDOf(event))
 }
 
-// Adds a given event to the receiver’s event queue.
+// PostEventAtStart adds a given event to the receiver’s event queue.
 func (x *Application) PostEventAtStart(event *Event, atStart bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postEvent:atStart:"), objref.IDOf(event), atStart)
 }
 
-// Returns the next event matching a given mask, or nil if no such event is found before a specified expiration date.
+// NextEventMatchingMaskUntilDateInModeDequeue returns the next event matching a given mask, or nil if no such event is found before a specified expiration date.
 func (x *Application) NextEventMatchingMaskUntilDateInModeDequeue(mask EventMask, expiration obj.Object, mode obj.Object, deqFlag bool) *Event {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextEventMatchingMask:untilDate:inMode:dequeue:"), mask, objref.IDOf(expiration), objref.IDOf(mode), deqFlag)
 	return EventFromID(_r)
 }
 
-// Removes all events matching the given mask and generated before the specified event.
+// DiscardEventsMatchingMaskBeforeEvent removes all events matching the given mask and generated before the specified event.
 func (x *Application) DiscardEventsMatchingMaskBeforeEvent(mask EventMask, lastEvent *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discardEventsMatchingMask:beforeEvent:"), mask, objref.IDOf(lastEvent))
 }
 
+// CurrentEvent wraps the corresponding Objective-C method.
 func (x *Application) CurrentEvent() *Event {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentEvent"))
 	return EventFromID(_r)
 }
 
+// ArrangeInFront wraps the corresponding Objective-C method.
 func (x *Application) ArrangeInFront(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrangeInFront:"), objref.IDOf(sender))
 }
 
+// RemoveWindowsItem wraps the corresponding Objective-C method.
 func (x *Application) RemoveWindowsItem(win *Window) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeWindowsItem:"), objref.IDOf(win))
 }
 
+// AddWindowsItemTitleFilename wraps the corresponding Objective-C method.
 func (x *Application) AddWindowsItemTitleFilename(win *Window, string_ string, isFilename bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addWindowsItem:title:filename:"), objref.IDOf(win), purego.NSString(string_), isFilename)
 }
 
+// ChangeWindowsItemTitleFilename wraps the corresponding Objective-C method.
 func (x *Application) ChangeWindowsItemTitleFilename(win *Window, string_ string, isFilename bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeWindowsItem:title:filename:"), objref.IDOf(win), purego.NSString(string_), isFilename)
 }
 
+// UpdateWindowsItem wraps the corresponding Objective-C method.
 func (x *Application) UpdateWindowsItem(win *Window) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWindowsItem:"), objref.IDOf(win))
 }
 
+// MiniaturizeAll wraps the corresponding Objective-C method.
 func (x *Application) MiniaturizeAll(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("miniaturizeAll:"), objref.IDOf(sender))
 }
 
+// WindowsMenu wraps the corresponding Objective-C method.
 func (x *Application) WindowsMenu() *Menu {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("windowsMenu"))
 	return MenuFromID(_r)
 }
 
+// SetWindowsMenu wraps the corresponding Objective-C method.
 func (x *Application) SetWindowsMenu(windowsMenu *Menu) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindowsMenu:"), objref.IDOf(windowsMenu))
 }
 
-// A Boolean value indicating whether keyboard navigation is enabled in System Settings > Keyboard. - Note: The value of this property is `YES` if keyboard navigation is enabled or `NO` if it’s not. You might use this value to implement your own key loop or to implement in-control tabbing behavior similar to `NSTableView`. Because of the nature of the preference storage, you won’t be notified of changes to this property if you attempt to observe it through key-value observing; however, accessing this property is fairly inexpensive, so you can access it directly rather than caching it. - Note: This property’s value isn’t necessarily reflective of the separate accessibility setting named “Full Keyboard Access” in System Settings > Accessibility > Keyboard.
+// IsFullKeyboardAccessEnabled a Boolean value indicating whether keyboard navigation is enabled in System Settings > Keyboard. - Note: The value of this property is `YES` if keyboard navigation is enabled or `NO` if it’s not. You might use this value to implement your own key loop or to implement in-control tabbing behavior similar to `NSTableView`. Because of the nature of the preference storage, you won’t be notified of changes to this property if you attempt to observe it through key-value observing; however, accessing this property is fairly inexpensive, so you can access it directly rather than caching it. - Note: This property’s value isn’t necessarily reflective of the separate accessibility setting named “Full Keyboard Access” in System Settings > Accessibility > Keyboard.
 func (x *Application) IsFullKeyboardAccessEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFullKeyboardAccessEnabled"))
 	return _r
 }
 
+// RegisterServicesMenuSendTypesReturnTypes wraps the corresponding Objective-C method.
 func (x *Application) RegisterServicesMenuSendTypesReturnTypes(sendTypes []obj.Object, returnTypes []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerServicesMenuSendTypes:returnTypes:"), purego.SliceToNSArray(sendTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(returnTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// ServicesMenu wraps the corresponding Objective-C method.
 func (x *Application) ServicesMenu() *Menu {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("servicesMenu"))
 	return MenuFromID(_r)
 }
 
+// SetServicesMenu wraps the corresponding Objective-C method.
 func (x *Application) SetServicesMenu(servicesMenu *Menu) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServicesMenu:"), objref.IDOf(servicesMenu))
 }
 
+// ServicesProvider wraps the corresponding Objective-C method.
 func (x *Application) ServicesProvider() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("servicesProvider"))
 	return obj.Wrap(_r)
 }
 
+// SetServicesProvider wraps the corresponding Objective-C method.
 func (x *Application) SetServicesProvider(servicesProvider obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServicesProvider:"), objref.IDOf(servicesProvider))
 }
 
+// OrderFrontStandardAboutPanel wraps the corresponding Objective-C method.
 func (x *Application) OrderFrontStandardAboutPanel(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderFrontStandardAboutPanel:"), objref.IDOf(sender))
 }
 
+// OrderFrontStandardAboutPanelWithOptions wraps the corresponding Objective-C method.
 func (x *Application) OrderFrontStandardAboutPanelWithOptions(optionsDictionary obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderFrontStandardAboutPanelWithOptions:"), objref.IDOf(optionsDictionary))
 }
 
+// UserInterfaceLayoutDirection wraps the corresponding Objective-C method.
 func (x *Application) UserInterfaceLayoutDirection() UserInterfaceLayoutDirection {
 	_r := objc.Send[UserInterfaceLayoutDirection](objref.IDOf(x), objc.RegisterName("userInterfaceLayoutDirection"))
 	return _r
 }
 
-// Disables relaunching the app on login.
+// DisableRelaunchOnLogin disables relaunching the app on login.
 func (x *Application) DisableRelaunchOnLogin() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disableRelaunchOnLogin"))
 }
 
-// Enables relaunching the app on login.
+// EnableRelaunchOnLogin enables relaunching the app on login.
 func (x *Application) EnableRelaunchOnLogin() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enableRelaunchOnLogin"))
 }
 
-// Register for notifications sent by Apple Push Notification service (APNs).
+// RegisterForRemoteNotifications register for notifications sent by Apple Push Notification service (APNs).
 func (x *Application) RegisterForRemoteNotifications() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerForRemoteNotifications"))
 }
 
-// Unregister for notifications received from Apple Push Notification service.
+// UnregisterForRemoteNotifications unregister for notifications received from Apple Push Notification service.
 func (x *Application) UnregisterForRemoteNotifications() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unregisterForRemoteNotifications"))
 }
 
-// Register to receive notifications of the specified types from a provider through the Apple Push Notification service.
+// RegisterForRemoteNotificationTypes register to receive notifications of the specified types from a provider through the Apple Push Notification service.
 func (x *Application) RegisterForRemoteNotificationTypes(types RemoteNotificationType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerForRemoteNotificationTypes:"), types)
 }
 
+// IsRegisteredForRemoteNotifications wraps the corresponding Objective-C method.
 func (x *Application) IsRegisteredForRemoteNotifications() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRegisteredForRemoteNotifications"))
 	return _r
 }
 
+// EnabledRemoteNotificationTypes wraps the corresponding Objective-C method.
 func (x *Application) EnabledRemoteNotificationTypes() RemoteNotificationType {
 	_r := objc.Send[RemoteNotificationType](objref.IDOf(x), objc.RegisterName("enabledRemoteNotificationTypes"))
 	return _r
 }
 
-// `-runModalForWindow:relativeToWindow:` was deprecated in Mac OS X 10.0. Please use `-[NSWindow beginSheet:completionHandler:]` instead.
+// RunModalForWindowRelativeToWindow `-runModalForWindow:relativeToWindow:` was deprecated in Mac OS X 10.0. Please use `-[NSWindow beginSheet:completionHandler:]` instead.
 func (x *Application) RunModalForWindowRelativeToWindow(window *Window, docWindow *Window) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalForWindow:relativeToWindow:"), objref.IDOf(window), objref.IDOf(docWindow))
 	return _r
 }
 
-// `-beginModalSessionForWindow:relativeToWindow:` was deprecated in Mac OS X 10.0. Please use `-[NSWindow beginSheet:completionHandler:]` instead.
+// BeginModalSessionForWindowRelativeToWindow `-beginModalSessionForWindow:relativeToWindow:` was deprecated in Mac OS X 10.0. Please use `-[NSWindow beginSheet:completionHandler:]` instead.
 func (x *Application) BeginModalSessionForWindowRelativeToWindow(window *Window, docWindow *Window) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginModalSessionForWindow:relativeToWindow:"), objref.IDOf(window), objref.IDOf(docWindow))
 	return obj.Wrap(_r)
 }
 
-// `-application:printFiles:` was deprecated in Mac OS X 10.4. Implement `-application:printFiles:withSettings:showPrintPanels:` in your application delegate instead.
+// ApplicationPrintFiles `-application:printFiles:` was deprecated in Mac OS X 10.4. Implement `-application:printFiles:withSettings:showPrintPanels:` in your application delegate instead.
 func (x *Application) ApplicationPrintFiles(sender *Application, filenames []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("application:printFiles:"), objref.IDOf(sender), purego.SliceToNSArray(filenames, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// EndSheet wraps the corresponding Objective-C method.
 func (x *Application) EndSheet(sheet *Window) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endSheet:"), objref.IDOf(sheet))
 }
 
+// EndSheetReturnCode wraps the corresponding Objective-C method.
 func (x *Application) EndSheetReturnCode(sheet *Window, returnCode int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endSheet:returnCode:"), objref.IDOf(sheet), returnCode)
 }
 
-// This method is deprecated as of macOS 10.12. Beginning in OS X 10.11 it would always return nil. Prior to this it would return an undefined graphics context that was not generally suitable for drawing.
+// Context this method is deprecated as of macOS 10.12. Beginning in OS X 10.11 it would always return nil. Prior to this it would return an undefined graphics context that was not generally suitable for drawing.
 func (x *Application) Context() *GraphicsContext {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("context"))
 	return GraphicsContextFromID(_r)
 }
 
-// Places the receiver in context-sensitive help mode.
+// ActivateContextHelpMode places the receiver in context-sensitive help mode.
 func (x *Application) ActivateContextHelpMode(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activateContextHelpMode:"), objref.IDOf(sender))
 }
 
-// If your project is properly registered, and the necessary keys have been set in the property list, this method launches Help Viewer and displays the first page of your app’s help book.
+// ShowHelp if your project is properly registered, and the necessary keys have been set in the property list, this method launches Help Viewer and displays the first page of your app’s help book.
 func (x *Application) ShowHelp(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showHelp:"), objref.IDOf(sender))
 }
 
-// Show or hides the interface for customizing the Touch Bar.
+// ToggleTouchBarCustomizationPalette show or hides the interface for customizing the Touch Bar.
 func (x *Application) ToggleTouchBarCustomizationPalette(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toggleTouchBarCustomizationPalette:"), objref.IDOf(sender))
 }
 
-// Whether or not a menu item to customize the NSTouchBar can be automatically added to the main menu. It will only actually be added when Touch Bar hardware or simulator is present. Defaults to NO. Setting this property to YES is the recommended way to add the customization menu item. But if non-standard placement of the menu item is needed, creating a menu item with an action of `toggleTouchBarCustomizationPalette:` can be used instead.
+// IsAutomaticCustomizeTouchBarMenuItemEnabled whether or not a menu item to customize the NSTouchBar can be automatically added to the main menu. It will only actually be added when Touch Bar hardware or simulator is present. Defaults to NO. Setting this property to YES is the recommended way to add the customization menu item. But if non-standard placement of the menu item is needed, creating a menu item with an action of `toggleTouchBarCustomizationPalette:` can be used instead.
 func (x *Application) IsAutomaticCustomizeTouchBarMenuItemEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAutomaticCustomizeTouchBarMenuItemEnabled"))
 	return _r
 }
 
+// SetAutomaticCustomizeTouchBarMenuItemEnabled wraps the corresponding Objective-C method.
 func (x *Application) SetAutomaticCustomizeTouchBarMenuItemEnabled(automaticCustomizeTouchBarMenuItemEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticCustomizeTouchBarMenuItemEnabled:"), automaticCustomizeTouchBarMenuItemEnabled)
 }
 
+// OrderFrontColorPanel wraps the corresponding Objective-C method.
 func (x *Application) OrderFrontColorPanel(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderFrontColorPanel:"), objref.IDOf(sender))
 }
 
+// RunPageLayout wraps the corresponding Objective-C method.
 func (x *Application) RunPageLayout(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runPageLayout:"), objref.IDOf(sender))
 }
 
+// OrderedDocuments wraps the corresponding Objective-C method.
+//
 // OrderedDocuments returns the collection as a Go slice.
 func (x *Application) OrderedDocuments() []*Document {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderedDocuments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Document { return DocumentFromID(_id) })
 }
 
+// OrderedWindows wraps the corresponding Objective-C method.
+//
 // OrderedWindows returns the collection as a Go slice.
 func (x *Application) OrderedWindows() []*Window {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderedWindows"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Window { return WindowFromID(_id) })
 }
 
+// ExtendStateRestoration wraps the corresponding Objective-C method.
 func (x *Application) ExtendStateRestoration() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendStateRestoration"))
 }
 
+// CompleteStateRestoration wraps the corresponding Objective-C method.
 func (x *Application) CompleteStateRestoration() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeStateRestoration"))
 }
@@ -786,3 +814,5 @@ type Applicationable interface {
 }
 
 var _ Applicationable = (*Application)(nil)
+
+var _ ResponderProvider = (*Application)(nil)

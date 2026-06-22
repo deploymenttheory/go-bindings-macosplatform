@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An encapsulation of a render task’s timing, passes, and pixels processed.
-//
 // RenderInfo is an idiomatic wrapper over the Objective-C class CIRenderInfo.
+//
+// An encapsulation of a render task’s timing, passes, and pixels processed.
 type RenderInfo struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RenderInfoFromID(id objc.ID) *RenderInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &RenderInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RenderInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func renderInfoAdopt(id objc.ID) *RenderInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &RenderInfo{Handle: objref.Wrap(id)}
+	x := &RenderInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,27 +60,37 @@ func (x *RenderInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RenderInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRenderInfo creates a new RenderInfo.
 func NewRenderInfo() *RenderInfo {
 	_id := objc.Send[objc.ID](objc.ID(_class("CIRenderInfo")), objc.RegisterName("new"))
 	return renderInfoAdopt(_id)
 }
 
+// KernelExecutionTime wraps the corresponding Objective-C method.
 func (x *RenderInfo) KernelExecutionTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("kernelExecutionTime"))
 	return _r
 }
 
+// KernelCompileTime wraps the corresponding Objective-C method.
 func (x *RenderInfo) KernelCompileTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("kernelCompileTime"))
 	return _r
 }
 
+// PassCount wraps the corresponding Objective-C method.
 func (x *RenderInfo) PassCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("passCount"))
 	return _r
 }
 
+// PixelsProcessed wraps the corresponding Objective-C method.
 func (x *RenderInfo) PixelsProcessed() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelsProcessed"))
 	return _r

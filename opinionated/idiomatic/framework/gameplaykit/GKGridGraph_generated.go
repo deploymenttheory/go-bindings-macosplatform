@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A navigation graph for 2D game worlds where movement is constrained to an integer grid.
-//
 // GridGraph is an idiomatic wrapper over the Objective-C class GKGridGraph.
+//
+// It embeds [Graph], promoting that type's methods.
+//
+// A navigation graph for 2D game worlds where movement is constrained to an integer grid.
 type GridGraph struct {
-	objref.Handle
+	Graph
 }
 
 // GridGraphFromID adopts an existing Objective-C object as a GridGraph
@@ -25,7 +26,8 @@ func GridGraphFromID(id objc.ID) *GridGraph {
 	if id == 0 {
 		return nil
 	}
-	x := &GridGraph{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GridGraph{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func gridGraphAdopt(id objc.ID) *GridGraph {
 	if id == 0 {
 		return nil
 	}
-	x := &GridGraph{Handle: objref.Wrap(id)}
+	x := &GridGraph{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GridGraph) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GridGraph) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GridGraph) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGridGraph creates a new GridGraph.
@@ -64,21 +52,24 @@ func NewGridGraph() *GridGraph {
 	return gridGraphAdopt(_id)
 }
 
-// Adds the specified node to the graph, connecting it to its nearest neighbors in the grid.
+// ConnectNodeToAdjacentNodes adds the specified node to the graph, connecting it to its nearest neighbors in the grid.
 func (x *GridGraph) ConnectNodeToAdjacentNodes(node *GridGraphNode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectNodeToAdjacentNodes:"), objref.IDOf(node))
 }
 
+// GridWidth wraps the corresponding Objective-C method.
 func (x *GridGraph) GridWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("gridWidth"))
 	return _r
 }
 
+// GridHeight wraps the corresponding Objective-C method.
 func (x *GridGraph) GridHeight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("gridHeight"))
 	return _r
 }
 
+// DiagonalsAllowed wraps the corresponding Objective-C method.
 func (x *GridGraph) DiagonalsAllowed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("diagonalsAllowed"))
 	return _r
@@ -94,3 +85,5 @@ type GridGraphable interface {
 }
 
 var _ GridGraphable = (*GridGraph)(nil)
+
+var _ GraphProvider = (*GridGraph)(nil)

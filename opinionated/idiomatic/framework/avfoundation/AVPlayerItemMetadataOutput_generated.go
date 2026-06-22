@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that vends collections of metadata items that a player item’s tracks carry.
-//
 // PlayerItemMetadataOutput is an idiomatic wrapper over the Objective-C class AVPlayerItemMetadataOutput.
+//
+// It embeds [PlayerItemOutput], promoting that type's methods.
+//
+// An object that vends collections of metadata items that a player item’s tracks carry.
 type PlayerItemMetadataOutput struct {
-	objref.Handle
+	PlayerItemOutput
 }
 
 // PlayerItemMetadataOutputFromID adopts an existing Objective-C object as a PlayerItemMetadataOutput
@@ -25,7 +26,8 @@ func PlayerItemMetadataOutputFromID(id objc.ID) *PlayerItemMetadataOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemMetadataOutput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlayerItemMetadataOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,63 +40,44 @@ func playerItemMetadataOutputAdopt(id objc.ID) *PlayerItemMetadataOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemMetadataOutput{Handle: objref.Wrap(id)}
+	x := &PlayerItemMetadataOutput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *PlayerItemMetadataOutput) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlayerItemMetadataOutput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlayerItemMetadataOutput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates an instance of AVPlayerItemMetadataOutput.
-//
-// NewPlayerItemMetadataOutputWithIdentifiers creates a new PlayerItemMetadataOutput.
+// NewPlayerItemMetadataOutputWithIdentifiers creates an instance of AVPlayerItemMetadataOutput.
 func NewPlayerItemMetadataOutputWithIdentifiers(identifiers []string) *PlayerItemMetadataOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemMetadataOutput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return playerItemMetadataOutputAdopt(_id)
 }
 
-// The time interval, in seconds, the player item metadata output object messages its delegate earlier than normal.
-//
-// WithAdvanceIntervalForDelegateInvocation sets advanceIntervalForDelegateInvocation and returns the receiver so calls can be chained.
+// WithAdvanceIntervalForDelegateInvocation the time interval, in seconds, the player item metadata output object messages its delegate earlier than normal.
 func (x *PlayerItemMetadataOutput) WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemMetadataOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdvanceIntervalForDelegateInvocation:"), advanceIntervalForDelegateInvocation)
 	return x
 }
 
-// A Boolean value that indicates whether the player object renders the receiver’s output.
-//
-// WithSuppressesPlayerRendering sets suppressesPlayerRendering and returns the receiver so calls can be chained.
+// WithSuppressesPlayerRendering a Boolean value that indicates whether the player object renders the receiver’s output.
 func (x *PlayerItemMetadataOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemMetadataOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
 	return x
 }
 
-// The dispatch queue on which messages are sent to the delegate. This property is not key-value observable.
+// DelegateQueue the dispatch queue on which messages are sent to the delegate. This property is not key-value observable.
 func (x *PlayerItemMetadataOutput) DelegateQueue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegateQueue"))
 	return obj.Wrap(_r)
 }
 
-// Permits advance invocation of the associated delegate, if any. If it is possible, an AVPlayerItemMetadataOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemMetadataOutput is prepared to act on them, the delegate will be invoked as soon as possible.
+// AdvanceIntervalForDelegateInvocation permits advance invocation of the associated delegate, if any. If it is possible, an AVPlayerItemMetadataOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemMetadataOutput is prepared to act on them, the delegate will be invoked as soon as possible.
 func (x *PlayerItemMetadataOutput) AdvanceIntervalForDelegateInvocation() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("advanceIntervalForDelegateInvocation"))
 	return _r
 }
 
+// SetAdvanceIntervalForDelegateInvocation wraps the corresponding Objective-C method.
 func (x *PlayerItemMetadataOutput) SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdvanceIntervalForDelegateInvocation:"), advanceIntervalForDelegateInvocation)
 }
@@ -110,3 +93,5 @@ type PlayerItemMetadataOutputable interface {
 }
 
 var _ PlayerItemMetadataOutputable = (*PlayerItemMetadataOutput)(nil)
+
+var _ PlayerItemOutputProvider = (*PlayerItemMetadataOutput)(nil)

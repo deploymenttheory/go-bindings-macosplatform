@@ -13,6 +13,8 @@ import (
 )
 
 // MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct is an idiomatic wrapper over the Objective-C class MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct.
+//
+// MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct is an abstract base — you do not construct it directly. Construct one of [MTRNetworkCommissioningClusterWiFiInterfaceScanResult] and pass it where a MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct is accepted.
 type MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRNetworkCommissioningClusterWiFiInterfaceScanResultStructFromID(id objc.I
 	if id == 0 {
 		return nil
 	}
-	x := &MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructAdopt(id objc.ID
 	if id == 0 {
 		return nil
 	}
-	x := &MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct{Handle: objref.Wrap(id)}
+	x := &MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,98 +60,110 @@ func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) IsKind(cla
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct creates a new MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct.
-func NewMTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct() *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct")), objc.RegisterName("new"))
-	return mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithSecurity sets security and returns the receiver so calls can be chained.
+// WithSecurity sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WithSecurity(security obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecurity:"), objref.IDOf(security))
 	return x
 }
 
-// WithSsid sets ssid and returns the receiver so calls can be chained.
+// WithSsid sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WithSsid(ssid obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSsid:"), objref.IDOf(ssid))
 	return x
 }
 
-// WithBssid sets bssid and returns the receiver so calls can be chained.
+// WithBssid sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WithBssid(bssid obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBssid:"), objref.IDOf(bssid))
 	return x
 }
 
-// WithChannel sets channel and returns the receiver so calls can be chained.
+// WithChannel sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WithChannel(channel obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), objref.IDOf(channel))
 	return x
 }
 
-// WithWiFiBand sets wiFiBand and returns the receiver so calls can be chained.
+// WithWiFiBand sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WithWiFiBand(wiFiBand obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWiFiBand:"), objref.IDOf(wiFiBand))
 	return x
 }
 
-// WithRssi sets rssi and returns the receiver so calls can be chained.
+// WithRssi sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WithRssi(rssi obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRssi:"), objref.IDOf(rssi))
 	return x
 }
 
+// Security wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Security() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("security"))
 	return obj.Wrap(_r)
 }
 
+// SetSecurity wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) SetSecurity(security obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecurity:"), objref.IDOf(security))
 }
 
+// Ssid wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Ssid() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ssid"))
 	return obj.Wrap(_r)
 }
 
+// SetSsid wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) SetSsid(ssid obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSsid:"), objref.IDOf(ssid))
 }
 
+// Bssid wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Bssid() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bssid"))
 	return obj.Wrap(_r)
 }
 
+// SetBssid wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) SetBssid(bssid obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBssid:"), objref.IDOf(bssid))
 }
 
+// Channel wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Channel() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("channel"))
 	return obj.Wrap(_r)
 }
 
+// SetChannel wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) SetChannel(channel obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), objref.IDOf(channel))
 }
 
+// WiFiBand wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WiFiBand() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wiFiBand"))
 	return obj.Wrap(_r)
 }
 
+// SetWiFiBand wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) SetWiFiBand(wiFiBand obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWiFiBand:"), objref.IDOf(wiFiBand))
 }
 
+// Rssi wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Rssi() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rssi"))
 	return obj.Wrap(_r)
 }
 
+// SetRssi wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) SetRssi(rssi obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRssi:"), objref.IDOf(rssi))
 }
@@ -176,3 +192,11 @@ type MTRNetworkCommissioningClusterWiFiInterfaceScanResultStructable interface {
 }
 
 var _ MTRNetworkCommissioningClusterWiFiInterfaceScanResultStructable = (*MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct)(nil)
+
+// isMTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct marks MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) isMTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct() {
+}
+
+var _ MTRNetworkCommissioningClusterWiFiInterfaceScanResultStructProvider = (*MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct)(nil)

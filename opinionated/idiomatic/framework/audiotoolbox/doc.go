@@ -3,4 +3,13 @@
 //go:build darwin
 
 // Package audiotoolbox provides a fluent Go API over the macOS AudioToolbox framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - AudioUnit: [AudioUnitV2Bridge]
+//   - ParameterGroup: [ParameterTree]
+//   - ParameterNode: [Parameter], [ParameterGroup]
 package audiotoolbox

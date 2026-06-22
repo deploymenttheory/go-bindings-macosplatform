@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A database partition that contains related records.
-//
 // RecordZone is an idiomatic wrapper over the Objective-C class CKRecordZone.
+//
+// A database partition that contains related records.
 type RecordZone struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RecordZoneFromID(id objc.ID) *RecordZone {
 	if id == 0 {
 		return nil
 	}
-	x := &RecordZone{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RecordZone{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func recordZoneAdopt(id objc.ID) *RecordZone {
 	if id == 0 {
 		return nil
 	}
-	x := &RecordZone{Handle: objref.Wrap(id)}
+	x := &RecordZone{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,56 +60,57 @@ func (x *RecordZone) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a record zone object with the specified zone name.
-//
-// NewRecordZoneWithZoneName creates a new RecordZone.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RecordZone) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRecordZoneWithZoneName creates a record zone object with the specified zone name.
 func NewRecordZoneWithZoneName(zoneName string) *RecordZone {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKRecordZone")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZoneName:"), purego.NSString(zoneName))
 	return recordZoneAdopt(_id)
 }
 
-// Creates a record zone object with the specified zone ID.
-//
-// NewRecordZoneWithZoneID creates a new RecordZone.
+// NewRecordZoneWithZoneID creates a record zone object with the specified zone ID.
 func NewRecordZoneWithZoneID(zoneID *RecordZoneID) *RecordZone {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKRecordZone")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZoneID:"), objref.IDOf(zoneID))
 	return recordZoneAdopt(_id)
 }
 
-// The encryption scope determines the granularity at which CloudKit stores encryption keys within the zone.
-//
-// WithEncryptionScope sets encryptionScope and returns the receiver so calls can be chained.
+// WithEncryptionScope the encryption scope determines the granularity at which CloudKit stores encryption keys within the zone.
 func (x *RecordZone) WithEncryptionScope(encryptionScope RecordZoneEncryptionScope) *RecordZone {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncryptionScope:"), encryptionScope)
 	return x
 }
 
-// The unique ID of the zone. The zone ID contains the name of the zone and the name of the user who owns the zone. Use this property to access both of those values.
+// ZoneID the unique ID of the zone. The zone ID contains the name of the zone and the name of the user who owns the zone. Use this property to access both of those values.
 func (x *RecordZone) ZoneID() *RecordZoneID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneID"))
 	return RecordZoneIDFromID(_r)
 }
 
-// The capabilities that the zone supports. The server determines the capabilities of the zone and sets the value of this property when you save the record zone. Always check this property before performing tasks that require a specific capability. Default zones don't support any special capabilities. Custom zones in a private database support the options that “CKRecordZone/Capabilities“ provides.
+// Capabilities the capabilities that the zone supports. The server determines the capabilities of the zone and sets the value of this property when you save the record zone. Always check this property before performing tasks that require a specific capability. Default zones don't support any special capabilities. Custom zones in a private database support the options that “CKRecordZone/Capabilities“ provides.
 func (x *RecordZone) Capabilities() RecordZoneCapabilities {
 	_r := objc.Send[RecordZoneCapabilities](objref.IDOf(x), objc.RegisterName("capabilities"))
 	return _r
 }
 
-// A reference to the record zone's share record. CloudKit sets this property only for fetched record zones that contain a share record; otherwise, it's `nil`. To share a record zone, create a share record using the “CKShare/init(recordZoneID:)“ method and then save it to the server. Shared record zones must have the “CKRecordZone/Capabilities/zoneWideSharing“ capability, which CloudKit enables by default for new custom record zones in the user's private database. A record zone, and the records it contains, can take part in only a single share. CloudKit returns an error if you attempt to share an already-shared record zone, or if that record zone contains previously shared records. Record zone sharing errors include the following: - “CKError/Code/serverRecordChanged“, which CloudKit returns if you try to share an already-shared record zone. - “CKError/Code/serverRejectedRequest“, which CloudKit returns if you try to share a record hierarchy from an already-shared record zone. - “CKError/Code/invalidArguments“, which CloudKit returns if you try to share a record zone that contains one or more shared hierarchies.
+// Share a reference to the record zone's share record. CloudKit sets this property only for fetched record zones that contain a share record; otherwise, it's `nil`. To share a record zone, create a share record using the “CKShare/init(recordZoneID:)“ method and then save it to the server. Shared record zones must have the “CKRecordZone/Capabilities/zoneWideSharing“ capability, which CloudKit enables by default for new custom record zones in the user's private database. A record zone, and the records it contains, can take part in only a single share. CloudKit returns an error if you attempt to share an already-shared record zone, or if that record zone contains previously shared records. Record zone sharing errors include the following: - “CKError/Code/serverRecordChanged“, which CloudKit returns if you try to share an already-shared record zone. - “CKError/Code/serverRejectedRequest“, which CloudKit returns if you try to share a record hierarchy from an already-shared record zone. - “CKError/Code/invalidArguments“, which CloudKit returns if you try to share a record zone that contains one or more shared hierarchies.
 func (x *RecordZone) Share() *Reference {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("share"))
 	return ReferenceFromID(_r)
 }
 
-// The encryption scope determines the granularity at which CloudKit stores encryption keys within the zone. Zone encryption scope defaults to `CKRecordZoneEncryptionScopePerRecord` and can only be modified before zone creation. Attempting to change the encryption scope of an existing zone is invalid and results in an error. Zones using `CKRecordZoneEncryptionScopePerZone` can only use zone-wide sharing and are not compatible with older device OS versions. Refer to `CKRecordZoneEncryptionScope` for more info.
+// EncryptionScope the encryption scope determines the granularity at which CloudKit stores encryption keys within the zone. Zone encryption scope defaults to `CKRecordZoneEncryptionScopePerRecord` and can only be modified before zone creation. Attempting to change the encryption scope of an existing zone is invalid and results in an error. Zones using `CKRecordZoneEncryptionScopePerZone` can only use zone-wide sharing and are not compatible with older device OS versions. Refer to `CKRecordZoneEncryptionScope` for more info.
 func (x *RecordZone) EncryptionScope() RecordZoneEncryptionScope {
 	_r := objc.Send[RecordZoneEncryptionScope](objref.IDOf(x), objc.RegisterName("encryptionScope"))
 	return _r
 }
 
+// SetEncryptionScope wraps the corresponding Objective-C method.
 func (x *RecordZone) SetEncryptionScope(encryptionScope RecordZoneEncryptionScope) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncryptionScope:"), encryptionScope)
 }

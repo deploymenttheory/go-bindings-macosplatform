@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The mechanism for loading image units in macOS.
-//
 // PlugIn is an idiomatic wrapper over the Objective-C class CIPlugIn.
+//
+// The mechanism for loading image units in macOS.
 type PlugIn struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PlugInFromID(id objc.ID) *PlugIn {
 	if id == 0 {
 		return nil
 	}
-	x := &PlugIn{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlugIn{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func plugInAdopt(id objc.ID) *PlugIn {
 	if id == 0 {
 		return nil
 	}
-	x := &PlugIn{Handle: objref.Wrap(id)}
+	x := &PlugIn{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *PlugIn) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *PlugIn) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlugIn) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewPlugIn creates a new PlugIn.

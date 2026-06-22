@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of changes that occurred in an asset or collection object.
-//
 // ObjectChangeDetails is an idiomatic wrapper over the Objective-C class PHObjectChangeDetails.
+//
+// A description of changes that occurred in an asset or collection object.
 type ObjectChangeDetails struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ObjectChangeDetailsFromID(id objc.ID) *ObjectChangeDetails {
 	if id == 0 {
 		return nil
 	}
-	x := &ObjectChangeDetails{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ObjectChangeDetails{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func objectChangeDetailsAdopt(id objc.ID) *ObjectChangeDetails {
 	if id == 0 {
 		return nil
 	}
-	x := &ObjectChangeDetails{Handle: objref.Wrap(id)}
+	x := &ObjectChangeDetails{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,27 +60,37 @@ func (x *ObjectChangeDetails) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ObjectChangeDetails) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewObjectChangeDetails creates a new ObjectChangeDetails.
 func NewObjectChangeDetails() *ObjectChangeDetails {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHObjectChangeDetails")), objc.RegisterName("new"))
 	return objectChangeDetailsAdopt(_id)
 }
 
+// ObjectBeforeChanges wraps the corresponding Objective-C method.
 func (x *ObjectChangeDetails) ObjectBeforeChanges() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectBeforeChanges"))
 	return obj.Wrap(_r)
 }
 
+// ObjectAfterChanges wraps the corresponding Objective-C method.
 func (x *ObjectChangeDetails) ObjectAfterChanges() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAfterChanges"))
 	return obj.Wrap(_r)
 }
 
+// AssetContentChanged wraps the corresponding Objective-C method.
 func (x *ObjectChangeDetails) AssetContentChanged() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("assetContentChanged"))
 	return _r
 }
 
+// ObjectWasDeleted wraps the corresponding Objective-C method.
 func (x *ObjectChangeDetails) ObjectWasDeleted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("objectWasDeleted"))
 	return _r

@@ -27,6 +27,8 @@ const (
 	SystemExtensionErrorAuthorizationRequired           SystemExtensionErrorCode = 13
 )
 
+// String returns the SystemExtensionErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SystemExtensionErrorCode) String() string {
 	switch e {
 	case SystemExtensionErrorUnknown:

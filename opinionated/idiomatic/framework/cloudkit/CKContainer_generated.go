@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A conduit to your app’s databases.
-//
 // Container is an idiomatic wrapper over the Objective-C class CKContainer.
+//
+// A conduit to your app’s databases.
 type Container struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func ContainerFromID(id objc.ID) *Container {
 	if id == 0 {
 		return nil
 	}
-	x := &Container{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Container{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func containerAdopt(id objc.ID) *Container {
 	if id == 0 {
 		return nil
 	}
-	x := &Container{Handle: objref.Wrap(id)}
+	x := &Container{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,18 +62,24 @@ func (x *Container) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Container) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewContainer creates a new Container.
 func NewContainer() *Container {
 	_id := objc.Send[objc.ID](objc.ID(_class("CKContainer")), objc.RegisterName("new"))
 	return containerAdopt(_id)
 }
 
-// Adds an operation to the container’s queue.
+// AddOperation adds an operation to the container’s queue.
 func (x *Container) AddOperation(operation *Operation) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOperation:"), objref.IDOf(operation))
 }
 
-// The container's unique identifier. Use this property's value to distinguish different containers in your app.
+// ContainerIdentifier the container's unique identifier. Use this property's value to distinguish different containers in your app.
 func (x *Container) ContainerIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containerIdentifier"))
 	if _r == 0 {
@@ -80,34 +88,34 @@ func (x *Container) ContainerIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Returns the database with the specified scope.
+// DatabaseWithDatabaseScope returns the database with the specified scope.
 func (x *Container) DatabaseWithDatabaseScope(databaseScope DatabaseScope) *Database {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("databaseWithDatabaseScope:"), databaseScope)
 	return DatabaseFromID(_r)
 }
 
-// The user's private database. The user's private database is only available if the device has an iCloud account. Only the user can access their private database, by default. They own all of the database's content and can view and modify that content. Data in the private database isn't visible in the developer portal. Data in the private database counts toward the user's iCloud storage quota. If there isn't an iCloud account on the user's device, this property still returns a database, but any attempt to use it results in an error. To determine if there is an iCloud account on the device, use the “CKContainer/accountStatus(completionHandler:)“ method.
+// PrivateCloudDatabase the user's private database. The user's private database is only available if the device has an iCloud account. Only the user can access their private database, by default. They own all of the database's content and can view and modify that content. Data in the private database isn't visible in the developer portal. Data in the private database counts toward the user's iCloud storage quota. If there isn't an iCloud account on the user's device, this property still returns a database, but any attempt to use it results in an error. To determine if there is an iCloud account on the device, use the “CKContainer/accountStatus(completionHandler:)“ method.
 func (x *Container) PrivateCloudDatabase() *Database {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("privateCloudDatabase"))
 	return DatabaseFromID(_r)
 }
 
-// The app's public database. This database is available regardless of whether the user's device has an iCloud account. The contents of the public database are readable by all users of the app, and users have write access to the records, and other objects, they create. The public database's contents are visible in the developer portal, where you can assign roles to users and restrict access as necessary. Data in the public database counts toward your app's iCloud storage quota.
+// PublicCloudDatabase the app's public database. This database is available regardless of whether the user's device has an iCloud account. The contents of the public database are readable by all users of the app, and users have write access to the records, and other objects, they create. The public database's contents are visible in the developer portal, where you can assign roles to users and restrict access as necessary. Data in the public database counts toward your app's iCloud storage quota.
 func (x *Container) PublicCloudDatabase() *Database {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicCloudDatabase"))
 	return DatabaseFromID(_r)
 }
 
-// The database that contains shared data. This database is only available if the device has an iCloud account. Permissions on the database are available only to the user according to the permissions of the enclosing “CKShare“ instance, which represents the shared record. The current user doesn't own the content in the shared database, and can view and modify that content only if the necessary permissions exist. Data in the shared database isn't visible in the developer portal or to any user who doesn't have access. Data in the shared database counts toward your app's iCloud storage quota. If there isn't an iCloud account on the user's device, this property still returns a database, but any attempt to use it results in an error. To determine if there is an iCloud account on the device, use the “CKContainer/accountStatus(completionHandler:)“ method.
+// SharedCloudDatabase the database that contains shared data. This database is only available if the device has an iCloud account. Permissions on the database are available only to the user according to the permissions of the enclosing “CKShare“ instance, which represents the shared record. The current user doesn't own the content in the shared database, and can view and modify that content only if the necessary permissions exist. Data in the shared database isn't visible in the developer portal or to any user who doesn't have access. Data in the shared database counts toward your app's iCloud storage quota. If there isn't an iCloud account on the user's device, this property still returns a database, but any attempt to use it results in an error. To determine if there is an iCloud account on the device, use the “CKContainer/accountStatus(completionHandler:)“ method.
 func (x *Container) SharedCloudDatabase() *Database {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sharedCloudDatabase"))
 	return DatabaseFromID(_r)
 }
 
-// Fetches the user record ID of the current user.
+// FetchUserRecordID fetches the user record ID of the current user.
 //
 // FetchUserRecordID blocks until the operation completes or ctx is cancelled.
-func (x *Container) FetchUserRecordID(ctx context.Context) (*RecordID, error) {
+func (x *Container) FetchUserRecordID(ctx context.Context) (result *RecordID, err error) {
 	type _result struct {
 		val *RecordID
 		err error
@@ -129,10 +137,10 @@ func (x *Container) FetchUserRecordID(ctx context.Context) (*RecordID, error) {
 	}
 }
 
-// Fetches all user identities that match entries in the user’s Contacts.
+// DiscoverAllIdentities fetches all user identities that match entries in the user’s Contacts.
 //
 // DiscoverAllIdentities blocks until the operation completes or ctx is cancelled.
-func (x *Container) DiscoverAllIdentities(ctx context.Context) (obj.Object, error) {
+func (x *Container) DiscoverAllIdentities(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -154,10 +162,10 @@ func (x *Container) DiscoverAllIdentities(ctx context.Context) (obj.Object, erro
 	}
 }
 
-// Fetches the share participant with the specified email address.
+// FetchShareParticipantWithEmailAddress fetches the share participant with the specified email address.
 //
 // FetchShareParticipantWithEmailAddress blocks until the operation completes or ctx is cancelled.
-func (x *Container) FetchShareParticipantWithEmailAddress(ctx context.Context, emailAddress string) (*ShareParticipant, error) {
+func (x *Container) FetchShareParticipantWithEmailAddress(ctx context.Context, emailAddress string) (result *ShareParticipant, err error) {
 	type _result struct {
 		val *ShareParticipant
 		err error
@@ -179,10 +187,10 @@ func (x *Container) FetchShareParticipantWithEmailAddress(ctx context.Context, e
 	}
 }
 
-// Fetches the share participant with the specified phone number.
+// FetchShareParticipantWithPhoneNumber fetches the share participant with the specified phone number.
 //
 // FetchShareParticipantWithPhoneNumber blocks until the operation completes or ctx is cancelled.
-func (x *Container) FetchShareParticipantWithPhoneNumber(ctx context.Context, phoneNumber string) (*ShareParticipant, error) {
+func (x *Container) FetchShareParticipantWithPhoneNumber(ctx context.Context, phoneNumber string) (result *ShareParticipant, err error) {
 	type _result struct {
 		val *ShareParticipant
 		err error
@@ -204,10 +212,10 @@ func (x *Container) FetchShareParticipantWithPhoneNumber(ctx context.Context, ph
 	}
 }
 
-// Fetches the share participant with the specified user record ID.
+// FetchShareParticipantWithUserRecordID fetches the share participant with the specified user record ID.
 //
 // FetchShareParticipantWithUserRecordID blocks until the operation completes or ctx is cancelled.
-func (x *Container) FetchShareParticipantWithUserRecordID(ctx context.Context, userRecordID *RecordID) (*ShareParticipant, error) {
+func (x *Container) FetchShareParticipantWithUserRecordID(ctx context.Context, userRecordID *RecordID) (result *ShareParticipant, err error) {
 	type _result struct {
 		val *ShareParticipant
 		err error
@@ -229,10 +237,10 @@ func (x *Container) FetchShareParticipantWithUserRecordID(ctx context.Context, u
 	}
 }
 
-// Fetches the share metadata for the specified share URL.
+// FetchShareMetadataWithURL fetches the share metadata for the specified share URL.
 //
 // FetchShareMetadataWithURL blocks until the operation completes or ctx is cancelled.
-func (x *Container) FetchShareMetadataWithURL(ctx context.Context, url string) (*ShareMetadata, error) {
+func (x *Container) FetchShareMetadataWithURL(ctx context.Context, url string) (result *ShareMetadata, err error) {
 	type _result struct {
 		val *ShareMetadata
 		err error
@@ -254,10 +262,10 @@ func (x *Container) FetchShareMetadataWithURL(ctx context.Context, url string) (
 	}
 }
 
-// Accepts the specified share metadata.
+// AcceptShareMetadata accepts the specified share metadata.
 //
 // AcceptShareMetadata blocks until the operation completes or ctx is cancelled.
-func (x *Container) AcceptShareMetadata(ctx context.Context, metadata *ShareMetadata) (*Share, error) {
+func (x *Container) AcceptShareMetadata(ctx context.Context, metadata *ShareMetadata) (result *Share, err error) {
 	type _result struct {
 		val *Share
 		err error
@@ -279,10 +287,10 @@ func (x *Container) AcceptShareMetadata(ctx context.Context, metadata *ShareMeta
 	}
 }
 
-// Fetches the IDs of any long-lived operations that are running.
+// FetchAllLongLivedOperationIDs fetches the IDs of any long-lived operations that are running.
 //
 // FetchAllLongLivedOperationIDs blocks until the operation completes or ctx is cancelled.
-func (x *Container) FetchAllLongLivedOperationIDs(ctx context.Context) (obj.Object, error) {
+func (x *Container) FetchAllLongLivedOperationIDs(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error

@@ -23,7 +23,8 @@ func PictureTakerFromID(id objc.ID) *PictureTaker {
 	if id == 0 {
 		return nil
 	}
-	x := &PictureTaker{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PictureTaker{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func pictureTakerAdopt(id objc.ID) *PictureTaker {
 	if id == 0 {
 		return nil
 	}
-	x := &PictureTaker{Handle: objref.Wrap(id)}
+	x := &PictureTaker{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,41 +58,47 @@ func (x *PictureTaker) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PictureTaker) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPictureTaker creates a new PictureTaker.
 func NewPictureTaker() *PictureTaker {
 	_id := objc.Send[objc.ID](objc.ID(_class("IKPictureTaker")), objc.RegisterName("new"))
 	return pictureTakerAdopt(_id)
 }
 
-// Launches a modal PictureTaker session.
+// RunModal launches a modal PictureTaker session.
 func (x *PictureTaker) RunModal() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModal"))
 	return _r
 }
 
-// Set the image input for the PictureTaker. The input image is never modified by the PictureTaker.
+// SetInputImage set the image input for the PictureTaker. The input image is never modified by the PictureTaker.
 func (x *PictureTaker) SetInputImage(image obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputImage:"), objref.IDOf(image))
 }
 
-// return the original PictureTaker's input-image. The input image is never modified by the PictureTaker.
+// InputImage return the original PictureTaker's input-image. The input image is never modified by the PictureTaker.
 func (x *PictureTaker) InputImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputImage"))
 	return obj.Wrap(_r)
 }
 
-// return the edited image.
+// OutputImage return the edited image.
 func (x *PictureTaker) OutputImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputImage"))
 	return obj.Wrap(_r)
 }
 
-// Controls whether the receiver enable/disable video mirroring durring snapshots (default is YES).
+// SetMirroring controls whether the receiver enable/disable video mirroring durring snapshots (default is YES).
 func (x *PictureTaker) SetMirroring(b bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMirroring:"), b)
 }
 
-// Returns YES if video mirroring is enabled, NO otherwise.
+// Mirroring returns YES if video mirroring is enabled, NO otherwise.
 func (x *PictureTaker) Mirroring() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mirroring"))
 	return _r

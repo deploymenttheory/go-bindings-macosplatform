@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ScoredAssessmentType is an idiomatic wrapper over the Objective-C class HKScoredAssessmentType.
+//
+// It embeds [SampleType], promoting that type's methods.
 type ScoredAssessmentType struct {
-	objref.Handle
+	SampleType
 }
 
 // ScoredAssessmentTypeFromID adopts an existing Objective-C object as a ScoredAssessmentType
@@ -23,7 +24,8 @@ func ScoredAssessmentTypeFromID(id objc.ID) *ScoredAssessmentType {
 	if id == 0 {
 		return nil
 	}
-	x := &ScoredAssessmentType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScoredAssessmentType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func scoredAssessmentTypeAdopt(id objc.ID) *ScoredAssessmentType {
 	if id == 0 {
 		return nil
 	}
-	x := &ScoredAssessmentType{Handle: objref.Wrap(id)}
+	x := &ScoredAssessmentType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ScoredAssessmentType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ScoredAssessmentType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ScoredAssessmentType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewScoredAssessmentType creates a new ScoredAssessmentType.
@@ -68,3 +56,7 @@ type ScoredAssessmentTypeable interface {
 }
 
 var _ ScoredAssessmentTypeable = (*ScoredAssessmentType)(nil)
+
+var _ SampleTypeProvider = (*ScoredAssessmentType)(nil)
+
+var _ ObjectTypeProvider = (*ScoredAssessmentType)(nil)

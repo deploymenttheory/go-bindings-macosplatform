@@ -5,8 +5,20 @@
 package screensaver
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	ebipurego "github.com/ebitengine/purego"
 )
+
+var _fnSSCenteredRectInRect func(corefoundation.CGRect, corefoundation.CGRect) corefoundation.CGRect
+
+// SSCenteredRectInRect calls the ScreenSaver framework function SSCenteredRectInRect.
+func SSCenteredRectInRect(innerRect corefoundation.CGRect, outerRect corefoundation.CGRect) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSSCenteredRectInRect == nil {
+		ebipurego.RegisterLibFunc(&_fnSSCenteredRectInRect, _lib, "SSCenteredRectInRect")
+	}
+	return _fnSSCenteredRectInRect(innerRect, outerRect)
+}
 
 var _fnSSRandomFloatBetween func(float64, float64) float64
 
@@ -28,4 +40,15 @@ func SSRandomIntBetween(a int, b int) int {
 		ebipurego.RegisterLibFunc(&_fnSSRandomIntBetween, _lib, "SSRandomIntBetween")
 	}
 	return _fnSSRandomIntBetween(a, b)
+}
+
+var _fnSSRandomPointForSizeWithinRect func(corefoundation.CGSize, corefoundation.CGRect) corefoundation.CGPoint
+
+// SSRandomPointForSizeWithinRect calls the ScreenSaver framework function SSRandomPointForSizeWithinRect.
+func SSRandomPointForSizeWithinRect(size corefoundation.CGSize, rect corefoundation.CGRect) corefoundation.CGPoint {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSSRandomPointForSizeWithinRect == nil {
+		ebipurego.RegisterLibFunc(&_fnSSRandomPointForSizeWithinRect, _lib, "SSRandomPointForSizeWithinRect")
+	}
+	return _fnSSRandomPointForSizeWithinRect(size, rect)
 }

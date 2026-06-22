@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of a pointer.
-//
 // PointerType is an idiomatic wrapper over the Objective-C class MTLPointerType.
+//
+// It embeds [Type], promoting that type's methods.
+//
+// A description of a pointer.
 type PointerType struct {
-	objref.Handle
+	Type
 }
 
 // PointerTypeFromID adopts an existing Objective-C object as a PointerType
@@ -25,7 +26,8 @@ func PointerTypeFromID(id objc.ID) *PointerType {
 	if id == 0 {
 		return nil
 	}
-	x := &PointerType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PointerType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func pointerTypeAdopt(id objc.ID) *PointerType {
 	if id == 0 {
 		return nil
 	}
-	x := &PointerType{Handle: objref.Wrap(id)}
+	x := &PointerType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PointerType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PointerType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PointerType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPointerType creates a new PointerType.
@@ -64,38 +52,43 @@ func NewPointerType() *PointerType {
 	return pointerTypeAdopt(_id)
 }
 
-// Provides a description of the underlying struct when the pointer points to a struct.
+// ElementStructType provides a description of the underlying struct when the pointer points to a struct.
 func (x *PointerType) ElementStructType() *StructType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementStructType"))
 	return StructTypeFromID(_r)
 }
 
-// Provides a description of the underlying array when the pointer points to an array.
+// ElementArrayType provides a description of the underlying array when the pointer points to an array.
 func (x *PointerType) ElementArrayType() *ArrayType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementArrayType"))
 	return ArrayTypeFromID(_r)
 }
 
+// ElementType wraps the corresponding Objective-C method.
 func (x *PointerType) ElementType() DataType {
 	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("elementType"))
 	return _r
 }
 
+// Access wraps the corresponding Objective-C method.
 func (x *PointerType) Access() BindingAccess {
 	_r := objc.Send[BindingAccess](objref.IDOf(x), objc.RegisterName("access"))
 	return _r
 }
 
+// Alignment wraps the corresponding Objective-C method.
 func (x *PointerType) Alignment() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("alignment"))
 	return _r
 }
 
+// DataSize wraps the corresponding Objective-C method.
 func (x *PointerType) DataSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataSize"))
 	return _r
 }
 
+// ElementIsArgumentBuffer wraps the corresponding Objective-C method.
 func (x *PointerType) ElementIsArgumentBuffer() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("elementIsArgumentBuffer"))
 	return _r
@@ -114,3 +107,5 @@ type PointerTypeable interface {
 }
 
 var _ PointerTypeable = (*PointerType)(nil)
+
+var _ TypeProvider = (*PointerType)(nil)

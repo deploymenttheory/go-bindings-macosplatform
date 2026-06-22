@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that consists of all the levers to serialize an executable.
-//
 // GraphExecutableSerializationDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphExecutableSerializationDescriptor.
+//
+// It embeds [GraphObject], promoting that type's methods.
+//
+// A class that consists of all the levers to serialize an executable.
 type GraphExecutableSerializationDescriptor struct {
-	objref.Handle
+	GraphObject
 }
 
 // GraphExecutableSerializationDescriptorFromID adopts an existing Objective-C object as a GraphExecutableSerializationDescriptor
@@ -25,7 +26,8 @@ func GraphExecutableSerializationDescriptorFromID(id objc.ID) *GraphExecutableSe
 	if id == 0 {
 		return nil
 	}
-	x := &GraphExecutableSerializationDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphExecutableSerializationDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func graphExecutableSerializationDescriptorAdopt(id objc.ID) *GraphExecutableSer
 	if id == 0 {
 		return nil
 	}
-	x := &GraphExecutableSerializationDescriptor{Handle: objref.Wrap(id)}
+	x := &GraphExecutableSerializationDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GraphExecutableSerializationDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphExecutableSerializationDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphExecutableSerializationDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGraphExecutableSerializationDescriptor creates a new GraphExecutableSerializationDescriptor.
@@ -64,51 +52,47 @@ func NewGraphExecutableSerializationDescriptor() *GraphExecutableSerializationDe
 	return graphExecutableSerializationDescriptorAdopt(_id)
 }
 
-// Flag to append to an existing .mpsgraphpackage if found at provided url.
-//
-// WithAppend sets append_ and returns the receiver so calls can be chained.
+// WithAppend flag to append to an existing .mpsgraphpackage if found at provided url.
 func (x *GraphExecutableSerializationDescriptor) WithAppend(append_ bool) *GraphExecutableSerializationDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppend:"), append_)
 	return x
 }
 
-// The deployment platform used to serialize the executable.
-//
-// WithDeploymentPlatform sets deploymentPlatform and returns the receiver so calls can be chained.
+// WithDeploymentPlatform the deployment platform used to serialize the executable.
 func (x *GraphExecutableSerializationDescriptor) WithDeploymentPlatform(deploymentPlatform GraphDeploymentPlatform) *GraphExecutableSerializationDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeploymentPlatform:"), deploymentPlatform)
 	return x
 }
 
-// The minimum deployment target to serialize the executable.
-//
-// WithMinimumDeploymentTarget sets minimumDeploymentTarget and returns the receiver so calls can be chained.
+// WithMinimumDeploymentTarget the minimum deployment target to serialize the executable.
 func (x *GraphExecutableSerializationDescriptor) WithMinimumDeploymentTarget(minimumDeploymentTarget string) *GraphExecutableSerializationDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumDeploymentTarget:"), purego.NSString(minimumDeploymentTarget))
 	return x
 }
 
-// Flag to append to an existing .mpsgraphpackage if found at provided url. If false, the exisiting .mpsgraphpackage will be overwritten.
+// Append flag to append to an existing .mpsgraphpackage if found at provided url. If false, the exisiting .mpsgraphpackage will be overwritten.
 func (x *GraphExecutableSerializationDescriptor) Append() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("append"))
 	return _r
 }
 
+// SetAppend wraps the corresponding Objective-C method.
 func (x *GraphExecutableSerializationDescriptor) SetAppend(append_ bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppend:"), append_)
 }
 
-// The deployment platform used to serialize the executable. Defaults to the current platform.
+// DeploymentPlatform the deployment platform used to serialize the executable. Defaults to the current platform.
 func (x *GraphExecutableSerializationDescriptor) DeploymentPlatform() GraphDeploymentPlatform {
 	_r := objc.Send[GraphDeploymentPlatform](objref.IDOf(x), objc.RegisterName("deploymentPlatform"))
 	return _r
 }
 
+// SetDeploymentPlatform wraps the corresponding Objective-C method.
 func (x *GraphExecutableSerializationDescriptor) SetDeploymentPlatform(deploymentPlatform GraphDeploymentPlatform) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeploymentPlatform:"), deploymentPlatform)
 }
 
-// The minimum deployment target to serialize the executable. If not set, the package created will target the latest version of the `deploymentPlatform` set.
+// MinimumDeploymentTarget the minimum deployment target to serialize the executable. If not set, the package created will target the latest version of the `deploymentPlatform` set.
 func (x *GraphExecutableSerializationDescriptor) MinimumDeploymentTarget() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minimumDeploymentTarget"))
 	if _r == 0 {
@@ -117,6 +101,7 @@ func (x *GraphExecutableSerializationDescriptor) MinimumDeploymentTarget() strin
 	return purego.GoString(_r)
 }
 
+// SetMinimumDeploymentTarget wraps the corresponding Objective-C method.
 func (x *GraphExecutableSerializationDescriptor) SetMinimumDeploymentTarget(minimumDeploymentTarget string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumDeploymentTarget:"), purego.NSString(minimumDeploymentTarget))
 }
@@ -136,3 +121,5 @@ type GraphExecutableSerializationDescriptorable interface {
 }
 
 var _ GraphExecutableSerializationDescriptorable = (*GraphExecutableSerializationDescriptor)(nil)
+
+var _ GraphObjectProvider = (*GraphExecutableSerializationDescriptor)(nil)

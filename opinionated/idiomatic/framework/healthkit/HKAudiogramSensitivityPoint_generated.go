@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A hearing sensitivity reading associated with a hearing test.
-//
 // AudiogramSensitivityPoint is an idiomatic wrapper over the Objective-C class HKAudiogramSensitivityPoint.
+//
+// A hearing sensitivity reading associated with a hearing test.
 type AudiogramSensitivityPoint struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AudiogramSensitivityPointFromID(id objc.ID) *AudiogramSensitivityPoint {
 	if id == 0 {
 		return nil
 	}
-	x := &AudiogramSensitivityPoint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudiogramSensitivityPoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func audiogramSensitivityPointAdopt(id objc.ID) *AudiogramSensitivityPoint {
 	if id == 0 {
 		return nil
 	}
-	x := &AudiogramSensitivityPoint{Handle: objref.Wrap(id)}
+	x := &AudiogramSensitivityPoint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,37 @@ func (x *AudiogramSensitivityPoint) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudiogramSensitivityPoint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAudiogramSensitivityPoint creates a new AudiogramSensitivityPoint.
 func NewAudiogramSensitivityPoint() *AudiogramSensitivityPoint {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKAudiogramSensitivityPoint")), objc.RegisterName("new"))
 	return audiogramSensitivityPointAdopt(_id)
 }
 
+// Frequency wraps the corresponding Objective-C method.
 func (x *AudiogramSensitivityPoint) Frequency() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frequency"))
 	return QuantityFromID(_r)
 }
 
+// LeftEarSensitivity wraps the corresponding Objective-C method.
 func (x *AudiogramSensitivityPoint) LeftEarSensitivity() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftEarSensitivity"))
 	return QuantityFromID(_r)
 }
 
+// RightEarSensitivity wraps the corresponding Objective-C method.
 func (x *AudiogramSensitivityPoint) RightEarSensitivity() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightEarSensitivity"))
 	return QuantityFromID(_r)
 }
 
-// The tests conducted at this frequency
+// Tests the tests conducted at this frequency
 //
 // Tests returns the collection as a Go slice.
 func (x *AudiogramSensitivityPoint) Tests() []*AudiogramSensitivityTest {

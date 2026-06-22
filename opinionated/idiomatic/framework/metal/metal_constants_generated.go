@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// An error domain for errors that pertain to creating a tensor.
 // MTLTensorDomain returns the string constant MTLTensorDomain, for use as a dictionary key or argument.
 func MTLTensorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MTLTensorDomain"))) }
 
@@ -113,19 +112,16 @@ func MTLCounterErrorDomain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MTLCounterErrorDomain")))
 }
 
-// This notification is posted when a new Metal device is added to the system
 // MTLDeviceWasAddedNotification returns the string constant MTLDeviceWasAddedNotification, for use as a dictionary key or argument.
 func MTLDeviceWasAddedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MTLDeviceWasAddedNotification")))
 }
 
-// This notification is posted when the user has requested that applications cease using a particular device.  Applications should assume that the device will be removed (terminated) imminently.  Additionally, the device will be removed from the internal device array prior to this notification being posted.  Applications should immediately begin the process of releasing all resources created on the given device, as well as any references to the device itself.
 // MTLDeviceRemovalRequestedNotification returns the string constant MTLDeviceRemovalRequestedNotification, for use as a dictionary key or argument.
 func MTLDeviceRemovalRequestedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MTLDeviceRemovalRequestedNotification")))
 }
 
-// This notification is posted if the device is removed while there are still outstanding references to it, due to either a surprise or forced disconnect by the user.  Applications must expect that any attempt to use the device after this point will fail.
 // MTLDeviceWasRemovedNotification returns the string constant MTLDeviceWasRemovedNotification, for use as a dictionary key or argument.
 func MTLDeviceWasRemovedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MTLDeviceWasRemovedNotification")))

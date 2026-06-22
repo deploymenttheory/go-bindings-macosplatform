@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An on-device index for your app’s searchable content.
-//
 // SearchableIndex is an idiomatic wrapper over the Objective-C class CSSearchableIndex.
+//
+// An on-device index for your app’s searchable content.
 type SearchableIndex struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func SearchableIndexFromID(id objc.ID) *SearchableIndex {
 	if id == 0 {
 		return nil
 	}
-	x := &SearchableIndex{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SearchableIndex{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func searchableIndexAdopt(id objc.ID) *SearchableIndex {
 	if id == 0 {
 		return nil
 	}
-	x := &SearchableIndex{Handle: objref.Wrap(id)}
+	x := &SearchableIndex{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,25 +62,27 @@ func (x *SearchableIndex) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns an on-device index with the specified name.
-//
-// NewSearchableIndexWithName creates a new SearchableIndex.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SearchableIndex) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSearchableIndexWithName returns an on-device index with the specified name.
 func NewSearchableIndexWithName(name string) *SearchableIndex {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CSSearchableIndex")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:"), purego.NSString(name))
 	return searchableIndexAdopt(_id)
 }
 
-// Returns an on-device index with the specified name and data protection class.
-//
-// NewSearchableIndexWithNameProtectionClass creates a new SearchableIndex.
+// NewSearchableIndexWithNameProtectionClass returns an on-device index with the specified name and data protection class.
 func NewSearchableIndexWithNameProtectionClass(name string, protectionClass obj.Object) *SearchableIndex {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CSSearchableIndex")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:protectionClass:"), purego.NSString(name), objref.IDOf(protectionClass))
 	return searchableIndexAdopt(_id)
 }
 
-// Adds or updates items in the index.
+// IndexSearchableItems adds or updates items in the index.
 //
 // IndexSearchableItems blocks until the operation completes or ctx is cancelled.
 func (x *SearchableIndex) IndexSearchableItems(ctx context.Context, items []*SearchableItem) error {
@@ -97,7 +101,7 @@ func (x *SearchableIndex) IndexSearchableItems(ctx context.Context, items []*Sea
 	}
 }
 
-// Removes from the index all items with the specified identifiers.
+// DeleteSearchableItemsWithIdentifiers removes from the index all items with the specified identifiers.
 //
 // DeleteSearchableItemsWithIdentifiers blocks until the operation completes or ctx is cancelled.
 func (x *SearchableIndex) DeleteSearchableItemsWithIdentifiers(ctx context.Context, identifiers []string) error {
@@ -116,7 +120,7 @@ func (x *SearchableIndex) DeleteSearchableItemsWithIdentifiers(ctx context.Conte
 	}
 }
 
-// Removes from the index all searchable items associated with the specified domain.
+// DeleteSearchableItemsWithDomainIdentifiers removes from the index all searchable items associated with the specified domain.
 //
 // DeleteSearchableItemsWithDomainIdentifiers blocks until the operation completes or ctx is cancelled.
 func (x *SearchableIndex) DeleteSearchableItemsWithDomainIdentifiers(ctx context.Context, domainIdentifiers []string) error {
@@ -135,7 +139,7 @@ func (x *SearchableIndex) DeleteSearchableItemsWithDomainIdentifiers(ctx context
 	}
 }
 
-// Deletes all searchable items from the index.
+// DeleteAllSearchableItems deletes all searchable items from the index.
 //
 // DeleteAllSearchableItems blocks until the operation completes or ctx is cancelled.
 func (x *SearchableIndex) DeleteAllSearchableItems(ctx context.Context) error {
@@ -154,12 +158,12 @@ func (x *SearchableIndex) DeleteAllSearchableItems(ctx context.Context) error {
 	}
 }
 
-// Begins a batch of updates to an index.
+// BeginIndexBatch begins a batch of updates to an index.
 func (x *SearchableIndex) BeginIndexBatch() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginIndexBatch"))
 }
 
-// Ends a batch of index updates and stores the specified state information.
+// EndIndexBatchWithExpectedClientStateNewClientState ends a batch of index updates and stores the specified state information.
 //
 // EndIndexBatchWithExpectedClientStateNewClientState blocks until the operation completes or ctx is cancelled.
 func (x *SearchableIndex) EndIndexBatchWithExpectedClientStateNewClientState(ctx context.Context, expectedClientState obj.Object, newClientState obj.Object) error {
@@ -178,7 +182,7 @@ func (x *SearchableIndex) EndIndexBatchWithExpectedClientStateNewClientState(ctx
 	}
 }
 
-// Ends a batch of index updates and stores the specified state information.
+// EndIndexBatchWithClientState ends a batch of index updates and stores the specified state information.
 //
 // EndIndexBatchWithClientState blocks until the operation completes or ctx is cancelled.
 func (x *SearchableIndex) EndIndexBatchWithClientState(ctx context.Context, clientState obj.Object) error {
@@ -197,10 +201,10 @@ func (x *SearchableIndex) EndIndexBatchWithClientState(ctx context.Context, clie
 	}
 }
 
-// Fetches the app’s most recent client state information asynchronously.
+// FetchLastClientState fetches the app’s most recent client state information asynchronously.
 //
 // FetchLastClientState blocks until the operation completes or ctx is cancelled.
-func (x *SearchableIndex) FetchLastClientState(ctx context.Context) (obj.Object, error) {
+func (x *SearchableIndex) FetchLastClientState(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -222,10 +226,10 @@ func (x *SearchableIndex) FetchLastClientState(ctx context.Context) (obj.Object,
 	}
 }
 
-// Fetches data from an external provider.
+// FetchDataForBundleIdentifierItemIdentifierContentType fetches data from an external provider.
 //
 // FetchDataForBundleIdentifierItemIdentifierContentType blocks until the operation completes or ctx is cancelled.
-func (x *SearchableIndex) FetchDataForBundleIdentifierItemIdentifierContentType(ctx context.Context, bundleIdentifier string, itemIdentifier string, contentType obj.Object) (obj.Object, error) {
+func (x *SearchableIndex) FetchDataForBundleIdentifierItemIdentifierContentType(ctx context.Context, bundleIdentifier string, itemIdentifier string, contentType obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error

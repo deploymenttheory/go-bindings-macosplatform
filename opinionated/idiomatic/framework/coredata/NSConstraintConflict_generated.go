@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An encapsulation of conflicts that occur during an attempt to save a managed object.
-//
 // ConstraintConflict is an idiomatic wrapper over the Objective-C class NSConstraintConflict.
+//
+// An encapsulation of conflicts that occur during an attempt to save a managed object.
 type ConstraintConflict struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ConstraintConflictFromID(id objc.ID) *ConstraintConflict {
 	if id == 0 {
 		return nil
 	}
-	x := &ConstraintConflict{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ConstraintConflict{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func constraintConflictAdopt(id objc.ID) *ConstraintConflict {
 	if id == 0 {
 		return nil
 	}
-	x := &ConstraintConflict{Handle: objref.Wrap(id)}
+	x := &ConstraintConflict{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,42 +60,55 @@ func (x *ConstraintConflict) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a constraint conflict.
-//
-// NewConstraintConflictWithConstraintDatabaseObjectDatabaseSnapshotConflictingObjectsConflictingSnapshots creates a new ConstraintConflict.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ConstraintConflict) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewConstraintConflictWithConstraintDatabaseObjectDatabaseSnapshotConflictingObjectsConflictingSnapshots initializes a constraint conflict.
 func NewConstraintConflictWithConstraintDatabaseObjectDatabaseSnapshotConflictingObjectsConflictingSnapshots(contraint []string, databaseObject *ManagedObject, databaseSnapshot obj.Object, conflictingObjects []*ManagedObject, conflictingSnapshots obj.Object) *ConstraintConflict {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSConstraintConflict")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConstraint:databaseObject:databaseSnapshot:conflictingObjects:conflictingSnapshots:"), purego.SliceToNSArray(contraint, func(_v string) objc.ID { return purego.NSString(_v) }), objref.IDOf(databaseObject), objref.IDOf(databaseSnapshot), purego.SliceToNSArray(conflictingObjects, func(_v *ManagedObject) objc.ID { return objref.IDOf(_v) }), objref.IDOf(conflictingSnapshots))
 	return constraintConflictAdopt(_id)
 }
 
+// Constraint wraps the corresponding Objective-C method.
+//
 // Constraint returns the collection as a Go slice.
 func (x *ConstraintConflict) Constraint() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraint"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// ConstraintValues wraps the corresponding Objective-C method.
 func (x *ConstraintConflict) ConstraintValues() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintValues"))
 	return obj.Wrap(_r)
 }
 
+// DatabaseObject wraps the corresponding Objective-C method.
 func (x *ConstraintConflict) DatabaseObject() *ManagedObject {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("databaseObject"))
 	return ManagedObjectFromID(_r)
 }
 
+// DatabaseSnapshot wraps the corresponding Objective-C method.
 func (x *ConstraintConflict) DatabaseSnapshot() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("databaseSnapshot"))
 	return obj.Wrap(_r)
 }
 
+// ConflictingObjects wraps the corresponding Objective-C method.
+//
 // ConflictingObjects returns the collection as a Go slice.
 func (x *ConstraintConflict) ConflictingObjects() []*ManagedObject {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("conflictingObjects"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ManagedObject { return ManagedObjectFromID(_id) })
 }
 
+// ConflictingSnapshots wraps the corresponding Objective-C method.
+//
 // ConflictingSnapshots returns the collection as a Go slice.
 func (x *ConstraintConflict) ConflictingSnapshots() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("conflictingSnapshots"))

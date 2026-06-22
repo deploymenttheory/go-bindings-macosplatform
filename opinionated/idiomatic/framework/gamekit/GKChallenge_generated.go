@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A challenge issued by the local player to another player.
-//
 // Challenge is an idiomatic wrapper over the Objective-C class GKChallenge.
+//
+// Challenge is an abstract base — you do not construct it directly. Construct one of [AchievementChallenge], [ScoreChallenge] and pass it where a Challenge is accepted.
+//
+// A challenge issued by the local player to another player.
 type Challenge struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ChallengeFromID(id objc.ID) *Challenge {
 	if id == 0 {
 		return nil
 	}
-	x := &Challenge{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Challenge{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func challengeAdopt(id objc.ID) *Challenge {
 	if id == 0 {
 		return nil
 	}
-	x := &Challenge{Handle: objref.Wrap(id)}
+	x := &Challenge{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,48 +62,48 @@ func (x *Challenge) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewChallenge creates a new Challenge.
-func NewChallenge() *Challenge {
-	_id := objc.Send[objc.ID](objc.ID(_class("GKChallenge")), objc.RegisterName("new"))
-	return challengeAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Challenge) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Declines a challenge that another player issues to the local player.
+// Decline declines a challenge that another player issues to the local player.
 func (x *Challenge) Decline() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decline"))
 }
 
-// The GKPlayer who issued the challenge
+// IssuingPlayer the GKPlayer who issued the challenge
 func (x *Challenge) IssuingPlayer() *Player {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issuingPlayer"))
 	return PlayerFromID(_r)
 }
 
-// The GKPlayer who has received the challenge
+// ReceivingPlayer the GKPlayer who has received the challenge
 func (x *Challenge) ReceivingPlayer() *Player {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("receivingPlayer"))
 	return PlayerFromID(_r)
 }
 
-// Current state of the challenge
+// State current state of the challenge
 func (x *Challenge) State() ChallengeState {
 	_r := objc.Send[ChallengeState](objref.IDOf(x), objc.RegisterName("state"))
 	return _r
 }
 
-// Date the challenge was issued
+// IssueDate date the challenge was issued
 func (x *Challenge) IssueDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issueDate"))
 	return obj.Wrap(_r)
 }
 
-// Date the challenge was completed or aborted
+// CompletionDate date the challenge was completed or aborted
 func (x *Challenge) CompletionDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completionDate"))
 	return obj.Wrap(_r)
 }
 
-// The message sent to receivers of this challenge
+// Message the message sent to receivers of this challenge
 func (x *Challenge) Message() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("message"))
 	if _r == 0 {
@@ -108,7 +112,7 @@ func (x *Challenge) Message() string {
 	return purego.GoString(_r)
 }
 
-// * This property is obsolete. **
+// IssuingPlayerID * This property is obsolete. **
 func (x *Challenge) IssuingPlayerID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issuingPlayerID"))
 	if _r == 0 {
@@ -117,7 +121,7 @@ func (x *Challenge) IssuingPlayerID() string {
 	return purego.GoString(_r)
 }
 
-// * This property is obsolete. **
+// ReceivingPlayerID * This property is obsolete. **
 func (x *Challenge) ReceivingPlayerID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("receivingPlayerID"))
 	if _r == 0 {
@@ -141,3 +145,10 @@ type Challengeable interface {
 }
 
 var _ Challengeable = (*Challenge)(nil)
+
+// isChallenge marks Challenge — and, by embedding promotion, its
+// subclasses — as a member of the Challenge hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Challenge) isChallenge() {}
+
+var _ ChallengeProvider = (*Challenge)(nil)

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A single entry from the unified logging system.
-//
 // LogEntry is an idiomatic wrapper over the Objective-C class OSLogEntry.
+//
+// LogEntry is an abstract base — you do not construct it directly. Construct one of [LogEntryActivity], [LogEntryBoundary], [LogEntryLog], [LogEntrySignpost] and pass it where a LogEntry is accepted.
+//
+// A single entry from the unified logging system.
 type LogEntry struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func LogEntryFromID(id objc.ID) *LogEntry {
 	if id == 0 {
 		return nil
 	}
-	x := &LogEntry{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LogEntry{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func logEntryAdopt(id objc.ID) *LogEntry {
 	if id == 0 {
 		return nil
 	}
-	x := &LogEntry{Handle: objref.Wrap(id)}
+	x := &LogEntry{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +62,13 @@ func (x *LogEntry) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewLogEntry creates a new LogEntry.
-func NewLogEntry() *LogEntry {
-	_id := objc.Send[objc.ID](objc.ID(_class("OSLogEntry")), objc.RegisterName("new"))
-	return logEntryAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LogEntry) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The fully formatted message for the entry.
+// ComposedMessage the fully formatted message for the entry.
 func (x *LogEntry) ComposedMessage() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("composedMessage"))
 	if _r == 0 {
@@ -73,13 +77,13 @@ func (x *LogEntry) ComposedMessage() string {
 	return purego.GoString(_r)
 }
 
-// The timestamp of the entry.
+// Date the timestamp of the entry.
 func (x *LogEntry) Date() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
 
-// This entry's storage tag. See OSLogEntryStoreCategory.
+// StoreCategory this entry's storage tag. See OSLogEntryStoreCategory.
 func (x *LogEntry) StoreCategory() LogEntryStoreCategory {
 	_r := objc.Send[LogEntryStoreCategory](objref.IDOf(x), objc.RegisterName("storeCategory"))
 	return _r
@@ -94,3 +98,10 @@ type LogEntryable interface {
 }
 
 var _ LogEntryable = (*LogEntry)(nil)
+
+// isLogEntry marks LogEntry — and, by embedding promotion, its
+// subclasses — as a member of the LogEntry hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *LogEntry) isLogEntry() {}
+
+var _ LogEntryProvider = (*LogEntry)(nil)

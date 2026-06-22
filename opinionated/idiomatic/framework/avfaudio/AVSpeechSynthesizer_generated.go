@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that produces synthesized speech from text utterances and enables monitoring or controlling of ongoing speech.
-//
 // SpeechSynthesizer is an idiomatic wrapper over the Objective-C class AVSpeechSynthesizer.
+//
+// An object that produces synthesized speech from text utterances and enables monitoring or controlling of ongoing speech.
 type SpeechSynthesizer struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SpeechSynthesizerFromID(id objc.ID) *SpeechSynthesizer {
 	if id == 0 {
 		return nil
 	}
-	x := &SpeechSynthesizer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SpeechSynthesizer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func speechSynthesizerAdopt(id objc.ID) *SpeechSynthesizer {
 	if id == 0 {
 		return nil
 	}
-	x := &SpeechSynthesizer{Handle: objref.Wrap(id)}
+	x := &SpeechSynthesizer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,40 +60,48 @@ func (x *SpeechSynthesizer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpeechSynthesizer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSpeechSynthesizer creates a new SpeechSynthesizer.
 func NewSpeechSynthesizer() *SpeechSynthesizer {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVSpeechSynthesizer")), objc.RegisterName("new"))
 	return speechSynthesizerAdopt(_id)
 }
 
-// Adds the utterance you specify to the speech synthesizer’s queue.
+// SpeakUtterance adds the utterance you specify to the speech synthesizer’s queue.
 func (x *SpeechSynthesizer) SpeakUtterance(utterance *SpeechUtterance) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("speakUtterance:"), objref.IDOf(utterance))
 }
 
-// Stops speech at the boundary you specify.
+// StopSpeakingAtBoundary stops speech at the boundary you specify.
 func (x *SpeechSynthesizer) StopSpeakingAtBoundary(boundary SpeechBoundary) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("stopSpeakingAtBoundary:"), boundary)
 	return _r
 }
 
-// Pauses speech at the boundary you specify.
+// PauseSpeakingAtBoundary pauses speech at the boundary you specify.
 func (x *SpeechSynthesizer) PauseSpeakingAtBoundary(boundary SpeechBoundary) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("pauseSpeakingAtBoundary:"), boundary)
 	return _r
 }
 
-// Resumes speech from its paused point.
+// ContinueSpeaking resumes speech from its paused point.
 func (x *SpeechSynthesizer) ContinueSpeaking() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("continueSpeaking"))
 	return _r
 }
 
+// IsSpeaking wraps the corresponding Objective-C method.
 func (x *SpeechSynthesizer) IsSpeaking() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSpeaking"))
 	return _r
 }
 
+// IsPaused wraps the corresponding Objective-C method.
 func (x *SpeechSynthesizer) IsPaused() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaused"))
 	return _r

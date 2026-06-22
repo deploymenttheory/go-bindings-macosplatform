@@ -6,15 +6,16 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the context in which custom compositors render pixel buffers.
-//
 // VideoCompositionRenderContext is an idiomatic wrapper over the Objective-C class AVVideoCompositionRenderContext.
+//
+// An object that defines the context in which custom compositors render pixel buffers.
 type VideoCompositionRenderContext struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func VideoCompositionRenderContextFromID(id objc.ID) *VideoCompositionRenderCont
 	if id == 0 {
 		return nil
 	}
-	x := &VideoCompositionRenderContext{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VideoCompositionRenderContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func videoCompositionRenderContextAdopt(id objc.ID) *VideoCompositionRenderConte
 	if id == 0 {
 		return nil
 	}
-	x := &VideoCompositionRenderContext{Handle: objref.Wrap(id)}
+	x := &VideoCompositionRenderContext{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +61,43 @@ func (x *VideoCompositionRenderContext) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VideoCompositionRenderContext) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVideoCompositionRenderContext creates a new VideoCompositionRenderContext.
 func NewVideoCompositionRenderContext() *VideoCompositionRenderContext {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVVideoCompositionRenderContext")), objc.RegisterName("new"))
 	return videoCompositionRenderContextAdopt(_id)
 }
 
-// Indicates a scaling ratio that should be applied when rendering frames.
+// Size indicates the width and height for rendering frames.
+func (x *VideoCompositionRenderContext) Size() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("size"))
+	return _r
+}
+
+// RenderTransform transform to apply to the source image to incorporate renderScale, pixelAspectRatio, edgeWidths. The coordinate system origin is the top left corner of the buffer.
+func (x *VideoCompositionRenderContext) RenderTransform() corefoundation.CGAffineTransform {
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("renderTransform"))
+	return _r
+}
+
+// RenderScale indicates a scaling ratio that should be applied when rendering frames.
 func (x *VideoCompositionRenderContext) RenderScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("renderScale"))
 	return _r
 }
 
-// Hints the custom compositor that it may use higher quality, potentially slower algorithms. Generally true for non real time use cases.
+// HighQualityRendering hints the custom compositor that it may use higher quality, potentially slower algorithms. Generally true for non real time use cases.
 func (x *VideoCompositionRenderContext) HighQualityRendering() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("highQualityRendering"))
 	return _r
 }
 
-// The AVVideoComposition being rendered.
+// VideoComposition the AVVideoComposition being rendered.
 func (x *VideoCompositionRenderContext) VideoComposition() *VideoComposition {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoComposition"))
 	return VideoCompositionFromID(_r)
@@ -85,6 +106,8 @@ func (x *VideoCompositionRenderContext) VideoComposition() *VideoComposition {
 // VideoCompositionRenderContextable is the interface implemented by [VideoCompositionRenderContext], for mocking and DI.
 type VideoCompositionRenderContextable interface {
 	obj.Object
+	Size() corefoundation.CGSize
+	RenderTransform() corefoundation.CGAffineTransform
 	RenderScale() float32
 	HighQualityRendering() bool
 	VideoComposition() *VideoComposition

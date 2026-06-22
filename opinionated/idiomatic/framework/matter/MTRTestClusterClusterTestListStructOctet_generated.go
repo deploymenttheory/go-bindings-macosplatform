@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRTestClusterClusterTestListStructOctet is an idiomatic wrapper over the Objective-C class MTRTestClusterClusterTestListStructOctet.
+//
+// It embeds [MTRUnitTestingClusterTestListStructOctet], promoting that type's methods.
 type MTRTestClusterClusterTestListStructOctet struct {
-	objref.Handle
+	MTRUnitTestingClusterTestListStructOctet
 }
 
 // MTRTestClusterClusterTestListStructOctetFromID adopts an existing Objective-C object as a MTRTestClusterClusterTestListStructOctet
@@ -23,7 +24,8 @@ func MTRTestClusterClusterTestListStructOctetFromID(id objc.ID) *MTRTestClusterC
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTestClusterClusterTestListStructOctet{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRTestClusterClusterTestListStructOctet{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRTestClusterClusterTestListStructOctetAdopt(id objc.ID) *MTRTestClusterCl
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTestClusterClusterTestListStructOctet{Handle: objref.Wrap(id)}
+	x := &MTRTestClusterClusterTestListStructOctet{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRTestClusterClusterTestListStructOctet) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRTestClusterClusterTestListStructOctet) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRTestClusterClusterTestListStructOctet) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRTestClusterClusterTestListStructOctet creates a new MTRTestClusterClusterTestListStructOctet.
@@ -62,13 +50,13 @@ func NewMTRTestClusterClusterTestListStructOctet() *MTRTestClusterClusterTestLis
 	return mTRTestClusterClusterTestListStructOctetAdopt(_id)
 }
 
-// WithMember1 sets member1 and returns the receiver so calls can be chained.
+// WithMember1 sets the property and returns the receiver so calls can be chained.
 func (x *MTRTestClusterClusterTestListStructOctet) WithMember1(member1 obj.Object) *MTRTestClusterClusterTestListStructOctet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMember1:"), objref.IDOf(member1))
 	return x
 }
 
-// WithMember2 sets member2 and returns the receiver so calls can be chained.
+// WithMember2 sets the property and returns the receiver so calls can be chained.
 func (x *MTRTestClusterClusterTestListStructOctet) WithMember2(member2 obj.Object) *MTRTestClusterClusterTestListStructOctet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMember2:"), objref.IDOf(member2))
 	return x
@@ -82,3 +70,5 @@ type MTRTestClusterClusterTestListStructOctetable interface {
 }
 
 var _ MTRTestClusterClusterTestListStructOctetable = (*MTRTestClusterClusterTestListStructOctet)(nil)
+
+var _ MTRUnitTestingClusterTestListStructOctetProvider = (*MTRTestClusterClusterTestListStructOctet)(nil)

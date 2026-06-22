@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that processes image-analysis requests for each frame in a sequence.
-//
 // SequenceRequestHandler is an idiomatic wrapper over the Objective-C class VNSequenceRequestHandler.
+//
+// An object that processes image-analysis requests for each frame in a sequence.
 type SequenceRequestHandler struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func SequenceRequestHandlerFromID(id objc.ID) *SequenceRequestHandler {
 	if id == 0 {
 		return nil
 	}
-	x := &SequenceRequestHandler{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SequenceRequestHandler{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func sequenceRequestHandlerAdopt(id objc.ID) *SequenceRequestHandler {
 	if id == 0 {
 		return nil
 	}
-	x := &SequenceRequestHandler{Handle: objref.Wrap(id)}
+	x := &SequenceRequestHandler{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,13 +62,19 @@ func (x *SequenceRequestHandler) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SequenceRequestHandler) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSequenceRequestHandler creates a new SequenceRequestHandler.
 func NewSequenceRequestHandler() *SequenceRequestHandler {
 	_id := objc.Send[objc.ID](objc.ID(_class("VNSequenceRequestHandler")), objc.RegisterName("new"))
 	return sequenceRequestHandlerAdopt(_id)
 }
 
-// Schedules Vision requests to be performed on a Core Graphics image.
+// PerformRequestsOnCGImage schedules Vision requests to be performed on a Core Graphics image.
 func (x *SequenceRequestHandler) PerformRequestsOnCGImage(requests []*Request, image obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("performRequests:onCGImage:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), objref.IDOf(image), unsafe.Pointer(&_nsErr))
@@ -76,7 +84,7 @@ func (x *SequenceRequestHandler) PerformRequestsOnCGImage(requests []*Request, i
 	return nil
 }
 
-// Schedules one or more Vision requests to be performed on Core Image image data.
+// PerformRequestsOnCIImage schedules one or more Vision requests to be performed on Core Image image data.
 func (x *SequenceRequestHandler) PerformRequestsOnCIImage(requests []*Request, image obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("performRequests:onCIImage:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), objref.IDOf(image), unsafe.Pointer(&_nsErr))
@@ -86,7 +94,7 @@ func (x *SequenceRequestHandler) PerformRequestsOnCIImage(requests []*Request, i
 	return nil
 }
 
-// Schedules one or more Vision requests to be performed on an image.
+// PerformRequestsOnImageURL schedules one or more Vision requests to be performed on an image.
 func (x *SequenceRequestHandler) PerformRequestsOnImageURL(requests []*Request, imageURL string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("performRequests:onImageURL:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), rt.FileURL(imageURL), unsafe.Pointer(&_nsErr))
@@ -96,7 +104,7 @@ func (x *SequenceRequestHandler) PerformRequestsOnImageURL(requests []*Request, 
 	return nil
 }
 
-// Schedules one or more Vision requests to be performed on raw image data.
+// PerformRequestsOnImageData schedules one or more Vision requests to be performed on raw image data.
 func (x *SequenceRequestHandler) PerformRequestsOnImageData(requests []*Request, imageData obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("performRequests:onImageData:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), objref.IDOf(imageData), unsafe.Pointer(&_nsErr))
@@ -106,7 +114,7 @@ func (x *SequenceRequestHandler) PerformRequestsOnImageData(requests []*Request,
 	return nil
 }
 
-// Performs one or more requests on an image contained within a sample buffer.
+// PerformRequestsOnCMSampleBuffer performs one or more requests on an image contained within a sample buffer.
 func (x *SequenceRequestHandler) PerformRequestsOnCMSampleBuffer(requests []*Request, sampleBuffer obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("performRequests:onCMSampleBuffer:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), objref.IDOf(sampleBuffer), unsafe.Pointer(&_nsErr))

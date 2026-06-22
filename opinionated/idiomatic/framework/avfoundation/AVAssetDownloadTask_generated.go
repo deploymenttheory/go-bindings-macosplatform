@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A session used to download HTTP Live Streaming assets.
-//
 // AssetDownloadTask is an idiomatic wrapper over the Objective-C class AVAssetDownloadTask.
+//
+// A session used to download HTTP Live Streaming assets.
 type AssetDownloadTask struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetDownloadTaskFromID(id objc.ID) *AssetDownloadTask {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetDownloadTask{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetDownloadTask{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetDownloadTaskAdopt(id objc.ID) *AssetDownloadTask {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetDownloadTask{Handle: objref.Wrap(id)}
+	x := &AssetDownloadTask{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *AssetDownloadTask) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetDownloadTask) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetDownloadTask creates a new AssetDownloadTask.
 func NewAssetDownloadTask() *AssetDownloadTask {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetDownloadTask")), objc.RegisterName("new"))
 	return assetDownloadTaskAdopt(_id)
 }
 
-// The asset supplied to the download task upon initialization.
+// URLAsset the asset supplied to the download task upon initialization.
 func (x *AssetDownloadTask) URLAsset() *URLAsset {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLAsset"))
 	return URLAssetFromID(_r)
 }
 
-// The options supplied to the download task upon initialization.
+// Options the options supplied to the download task upon initialization.
 func (x *AssetDownloadTask) Options() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
 	return obj.Wrap(_r)
 }
 
-// This property provides a collection of time ranges for which the download task has media data already downloaded and playable. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
+// LoadedTimeRanges this property provides a collection of time ranges for which the download task has media data already downloaded and playable. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
 //
 // LoadedTimeRanges returns the collection as a Go slice.
 func (x *AssetDownloadTask) LoadedTimeRanges() []obj.Object {

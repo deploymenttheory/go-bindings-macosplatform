@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mechanism for generating requests to authenticate users with third-party providers.
-//
 // AuthorizationSingleSignOnProvider is an idiomatic wrapper over the Objective-C class ASAuthorizationSingleSignOnProvider.
+//
+// A mechanism for generating requests to authenticate users with third-party providers.
 type AuthorizationSingleSignOnProvider struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationSingleSignOnProviderFromID(id objc.ID) *AuthorizationSingleSig
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationSingleSignOnProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationSingleSignOnProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationSingleSignOnProviderAdopt(id objc.ID) *AuthorizationSingleSign
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationSingleSignOnProvider{Handle: objref.Wrap(id)}
+	x := &AuthorizationSingleSignOnProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +60,31 @@ func (x *AuthorizationSingleSignOnProvider) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationSingleSignOnProvider) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAuthorizationSingleSignOnProvider creates a new AuthorizationSingleSignOnProvider.
 func NewAuthorizationSingleSignOnProvider() *AuthorizationSingleSignOnProvider {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationSingleSignOnProvider")), objc.RegisterName("new"))
 	return authorizationSingleSignOnProviderAdopt(_id)
 }
 
-// Creates a single sign-on (SSO) authorization request.
+// CreateRequest creates a single sign-on (SSO) authorization request.
 func (x *AuthorizationSingleSignOnProvider) CreateRequest() *AuthorizationSingleSignOnRequest {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createRequest"))
 	return AuthorizationSingleSignOnRequestFromID(_r)
 }
 
+// Url wraps the corresponding Objective-C method.
 func (x *AuthorizationSingleSignOnProvider) Url() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
-// Returns YES if the configured provider is capable of performing authorization within a given configuration.
+// CanPerformAuthorization returns YES if the configured provider is capable of performing authorization within a given configuration.
 func (x *AuthorizationSingleSignOnProvider) CanPerformAuthorization() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPerformAuthorization"))
 	return _r

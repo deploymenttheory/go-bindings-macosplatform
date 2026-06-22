@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A progress reporting capability supported by a context.
-//
 // ProgressReportingCapability is an idiomatic wrapper over the Objective-C class CLSProgressReportingCapability.
+//
+// It embeds [Object], promoting that type's methods.
+//
+// A progress reporting capability supported by a context.
 type ProgressReportingCapability struct {
-	objref.Handle
+	Object
 }
 
 // ProgressReportingCapabilityFromID adopts an existing Objective-C object as a ProgressReportingCapability
@@ -25,7 +26,8 @@ func ProgressReportingCapabilityFromID(id objc.ID) *ProgressReportingCapability 
 	if id == 0 {
 		return nil
 	}
-	x := &ProgressReportingCapability{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ProgressReportingCapability{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,42 +40,26 @@ func progressReportingCapabilityAdopt(id objc.ID) *ProgressReportingCapability {
 	if id == 0 {
 		return nil
 	}
-	x := &ProgressReportingCapability{Handle: objref.Wrap(id)}
+	x := &ProgressReportingCapability{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ProgressReportingCapability) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ProgressReportingCapability) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ProgressReportingCapability) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a new progress reporting capability of the given type with a descriptive string.
-//
-// NewProgressReportingCapabilityWithKindDetails creates a new ProgressReportingCapability.
+// NewProgressReportingCapabilityWithKindDetails creates a new progress reporting capability of the given type with a descriptive string.
 func NewProgressReportingCapabilityWithKindDetails(kind ProgressReportingCapabilityKind, details string) *ProgressReportingCapability {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CLSProgressReportingCapability")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKind:details:"), kind, purego.NSString(details))
 	return progressReportingCapabilityAdopt(_id)
 }
 
-// Returns the kind of progress reporting capability
+// Kind returns the kind of progress reporting capability
 func (x *ProgressReportingCapability) Kind() ProgressReportingCapabilityKind {
 	_r := objc.Send[ProgressReportingCapabilityKind](objref.IDOf(x), objc.RegisterName("kind"))
 	return _r
 }
 
-// Returns progress reporting details
+// Details returns progress reporting details
 func (x *ProgressReportingCapability) Details() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("details"))
 	if _r == 0 {
@@ -90,3 +76,5 @@ type ProgressReportingCapabilityable interface {
 }
 
 var _ ProgressReportingCapabilityable = (*ProgressReportingCapability)(nil)
+
+var _ ObjectProvider = (*ProgressReportingCapability)(nil)

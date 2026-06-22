@@ -6,17 +6,19 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mutable video composition subclass.
-//
 // MutableVideoComposition is an idiomatic wrapper over the Objective-C class AVMutableVideoComposition.
+//
+// It embeds [VideoComposition], promoting that type's methods.
+//
+// A mutable video composition subclass.
 type MutableVideoComposition struct {
-	objref.Handle
+	VideoComposition
 }
 
 // MutableVideoCompositionFromID adopts an existing Objective-C object as a MutableVideoComposition
@@ -25,7 +27,8 @@ func MutableVideoCompositionFromID(id objc.ID) *MutableVideoComposition {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableVideoComposition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableVideoComposition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func mutableVideoCompositionAdopt(id objc.ID) *MutableVideoComposition {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableVideoComposition{Handle: objref.Wrap(id)}
+	x := &MutableVideoComposition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MutableVideoComposition) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableVideoComposition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableVideoComposition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMutableVideoComposition creates a new MutableVideoComposition.
@@ -64,107 +53,112 @@ func NewMutableVideoComposition() *MutableVideoComposition {
 	return mutableVideoCompositionAdopt(_id)
 }
 
-// An identifier of the source track from which the video composition derives frame timing.
-//
-// WithSourceTrackIDForFrameTiming sets sourceTrackIDForFrameTiming and returns the receiver so calls can be chained.
+// WithSourceTrackIDForFrameTiming an identifier of the source track from which the video composition derives frame timing.
 func (x *MutableVideoComposition) WithSourceTrackIDForFrameTiming(sourceTrackIDForFrameTiming int32) *MutableVideoComposition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceTrackIDForFrameTiming:"), sourceTrackIDForFrameTiming)
 	return x
 }
 
-// The scale at which the video composition should render.
-//
-// WithRenderScale sets renderScale and returns the receiver so calls can be chained.
+// WithRenderSize the size at which the video composition should render.
+func (x *MutableVideoComposition) WithRenderSize(renderSize corefoundation.CGSize) *MutableVideoComposition {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderSize:"), renderSize)
+	return x
+}
+
+// WithRenderScale the scale at which the video composition should render.
 func (x *MutableVideoComposition) WithRenderScale(renderScale float32) *MutableVideoComposition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderScale:"), renderScale)
 	return x
 }
 
-// A video composition tool to use with Core Animation in offline rendering.
-//
-// WithAnimationTool sets animationTool and returns the receiver so calls can be chained.
+// WithAnimationTool a video composition tool to use with Core Animation in offline rendering.
 func (x *MutableVideoComposition) WithAnimationTool(animationTool *VideoCompositionCoreAnimationTool) *MutableVideoComposition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationTool:"), objref.IDOf(animationTool))
 	return x
 }
 
-// The identifiers of source sample data tracks in the composition that the object requires to compose frames.
-//
-// WithSourceSampleDataTrackIDs sets the collection and returns the receiver so calls can be chained.
+// WithSourceSampleDataTrackIDs the identifiers of source sample data tracks in the composition that the object requires to compose frames.
 func (x *MutableVideoComposition) WithSourceSampleDataTrackIDs(items ...obj.Object) *MutableVideoComposition {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceSampleDataTrackIDs:"), _arr)
 	return x
 }
 
-// The color primaries used for video composition.
-//
-// WithColorPrimaries sets colorPrimaries and returns the receiver so calls can be chained.
+// WithColorPrimaries the color primaries used for video composition.
 func (x *MutableVideoComposition) WithColorPrimaries(colorPrimaries string) *MutableVideoComposition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorPrimaries:"), purego.NSString(colorPrimaries))
 	return x
 }
 
-// The YCbCr matrix used for video composition.
-//
-// WithColorYCbCrMatrix sets colorYCbCrMatrix and returns the receiver so calls can be chained.
+// WithColorYCbCrMatrix the YCbCr matrix used for video composition.
 func (x *MutableVideoComposition) WithColorYCbCrMatrix(colorYCbCrMatrix string) *MutableVideoComposition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorYCbCrMatrix:"), purego.NSString(colorYCbCrMatrix))
 	return x
 }
 
-// The transfer function used for video composition.
-//
-// WithColorTransferFunction sets colorTransferFunction and returns the receiver so calls can be chained.
+// WithColorTransferFunction the transfer function used for video composition.
 func (x *MutableVideoComposition) WithColorTransferFunction(colorTransferFunction string) *MutableVideoComposition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorTransferFunction:"), purego.NSString(colorTransferFunction))
 	return x
 }
 
-// Configures the policy for display of HDR display metadata on the rendered frame.
-//
-// WithPerFrameHDRDisplayMetadataPolicy sets perFrameHDRDisplayMetadataPolicy and returns the receiver so calls can be chained.
+// WithPerFrameHDRDisplayMetadataPolicy configures the policy for display of HDR display metadata on the rendered frame.
 func (x *MutableVideoComposition) WithPerFrameHDRDisplayMetadataPolicy(perFrameHDRDisplayMetadataPolicy obj.Object) *MutableVideoComposition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerFrameHDRDisplayMetadataPolicy:"), objref.IDOf(perFrameHDRDisplayMetadataPolicy))
 	return x
 }
 
+// SetSourceTrackIDForFrameTiming wraps the corresponding Objective-C method.
 func (x *MutableVideoComposition) SetSourceTrackIDForFrameTiming(sourceTrackIDForFrameTiming int32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceTrackIDForFrameTiming:"), sourceTrackIDForFrameTiming)
 }
 
+// SetRenderSize wraps the corresponding Objective-C method.
+func (x *MutableVideoComposition) SetRenderSize(renderSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderSize:"), renderSize)
+}
+
+// SetRenderScale wraps the corresponding Objective-C method.
 func (x *MutableVideoComposition) SetRenderScale(renderScale float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderScale:"), renderScale)
 }
 
+// SetInstructions wraps the corresponding Objective-C method.
 func (x *MutableVideoComposition) SetInstructions(instructions []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstructions:"), purego.SliceToNSArray(instructions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SetAnimationTool wraps the corresponding Objective-C method.
 func (x *MutableVideoComposition) SetAnimationTool(animationTool *VideoCompositionCoreAnimationTool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationTool:"), objref.IDOf(animationTool))
 }
 
+// SetSourceSampleDataTrackIDs wraps the corresponding Objective-C method.
 func (x *MutableVideoComposition) SetSourceSampleDataTrackIDs(sourceSampleDataTrackIDs []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceSampleDataTrackIDs:"), purego.SliceToNSArray(sourceSampleDataTrackIDs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SetOutputBufferDescription wraps the corresponding Objective-C method.
 func (x *MutableVideoComposition) SetOutputBufferDescription(outputBufferDescription obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputBufferDescription:"), objref.IDOf(outputBufferDescription))
 }
 
+// SetColorPrimaries wraps the corresponding Objective-C method.
 func (x *MutableVideoComposition) SetColorPrimaries(colorPrimaries string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorPrimaries:"), purego.NSString(colorPrimaries))
 }
 
+// SetColorYCbCrMatrix wraps the corresponding Objective-C method.
 func (x *MutableVideoComposition) SetColorYCbCrMatrix(colorYCbCrMatrix string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorYCbCrMatrix:"), purego.NSString(colorYCbCrMatrix))
 }
 
+// SetColorTransferFunction wraps the corresponding Objective-C method.
 func (x *MutableVideoComposition) SetColorTransferFunction(colorTransferFunction string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorTransferFunction:"), purego.NSString(colorTransferFunction))
 }
 
+// SetPerFrameHDRDisplayMetadataPolicy wraps the corresponding Objective-C method.
 func (x *MutableVideoComposition) SetPerFrameHDRDisplayMetadataPolicy(perFrameHDRDisplayMetadataPolicy obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerFrameHDRDisplayMetadataPolicy:"), objref.IDOf(perFrameHDRDisplayMetadataPolicy))
 }
@@ -173,6 +167,7 @@ func (x *MutableVideoComposition) SetPerFrameHDRDisplayMetadataPolicy(perFrameHD
 type MutableVideoCompositionable interface {
 	obj.Object
 	WithSourceTrackIDForFrameTiming(sourceTrackIDForFrameTiming int32) *MutableVideoComposition
+	WithRenderSize(renderSize corefoundation.CGSize) *MutableVideoComposition
 	WithRenderScale(renderScale float32) *MutableVideoComposition
 	WithAnimationTool(animationTool *VideoCompositionCoreAnimationTool) *MutableVideoComposition
 	WithSourceSampleDataTrackIDs(items ...obj.Object) *MutableVideoComposition
@@ -181,6 +176,7 @@ type MutableVideoCompositionable interface {
 	WithColorTransferFunction(colorTransferFunction string) *MutableVideoComposition
 	WithPerFrameHDRDisplayMetadataPolicy(perFrameHDRDisplayMetadataPolicy obj.Object) *MutableVideoComposition
 	SetSourceTrackIDForFrameTiming(sourceTrackIDForFrameTiming int32)
+	SetRenderSize(renderSize corefoundation.CGSize)
 	SetRenderScale(renderScale float32)
 	SetInstructions(instructions []obj.Object)
 	SetAnimationTool(animationTool *VideoCompositionCoreAnimationTool)
@@ -193,3 +189,5 @@ type MutableVideoCompositionable interface {
 }
 
 var _ MutableVideoCompositionable = (*MutableVideoComposition)(nil)
+
+var _ VideoCompositionProvider = (*MutableVideoComposition)(nil)

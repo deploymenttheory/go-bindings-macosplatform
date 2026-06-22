@@ -23,7 +23,8 @@ func ExternalSyncDeviceDiscoverySessionFromID(id objc.ID) *ExternalSyncDeviceDis
 	if id == 0 {
 		return nil
 	}
-	x := &ExternalSyncDeviceDiscoverySession{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExternalSyncDeviceDiscoverySession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func externalSyncDeviceDiscoverySessionAdopt(id objc.ID) *ExternalSyncDeviceDisc
 	if id == 0 {
 		return nil
 	}
-	x := &ExternalSyncDeviceDiscoverySession{Handle: objref.Wrap(id)}
+	x := &ExternalSyncDeviceDiscoverySession{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,13 +58,19 @@ func (x *ExternalSyncDeviceDiscoverySession) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExternalSyncDeviceDiscoverySession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewExternalSyncDeviceDiscoverySession creates a new ExternalSyncDeviceDiscoverySession.
 func NewExternalSyncDeviceDiscoverySession() *ExternalSyncDeviceDiscoverySession {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVExternalSyncDeviceDiscoverySession")), objc.RegisterName("new"))
 	return externalSyncDeviceDiscoverySessionAdopt(_id)
 }
 
-// An array of external sync devices connected to this host. The list is updated when external sync devices are connected to the host and they remain in the list until they become unavailable. This property is key-value observable.
+// Devices an array of external sync devices connected to this host. The list is updated when external sync devices are connected to the host and they remain in the list until they become unavailable. This property is key-value observable.
 //
 // Devices returns the collection as a Go slice.
 func (x *ExternalSyncDeviceDiscoverySession) Devices() []*ExternalSyncDevice {

@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRChannelClusterChannelInfo is an idiomatic wrapper over the Objective-C class MTRChannelClusterChannelInfo.
+//
+// It embeds [MTRChannelClusterChannelInfoStruct], promoting that type's methods.
 type MTRChannelClusterChannelInfo struct {
-	objref.Handle
+	MTRChannelClusterChannelInfoStruct
 }
 
 // MTRChannelClusterChannelInfoFromID adopts an existing Objective-C object as a MTRChannelClusterChannelInfo
@@ -23,7 +24,8 @@ func MTRChannelClusterChannelInfoFromID(id objc.ID) *MTRChannelClusterChannelInf
 	if id == 0 {
 		return nil
 	}
-	x := &MTRChannelClusterChannelInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRChannelClusterChannelInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRChannelClusterChannelInfoAdopt(id objc.ID) *MTRChannelClusterChannelInfo
 	if id == 0 {
 		return nil
 	}
-	x := &MTRChannelClusterChannelInfo{Handle: objref.Wrap(id)}
+	x := &MTRChannelClusterChannelInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRChannelClusterChannelInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRChannelClusterChannelInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRChannelClusterChannelInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRChannelClusterChannelInfo creates a new MTRChannelClusterChannelInfo.
@@ -62,43 +50,43 @@ func NewMTRChannelClusterChannelInfo() *MTRChannelClusterChannelInfo {
 	return mTRChannelClusterChannelInfoAdopt(_id)
 }
 
-// WithMajorNumber sets majorNumber and returns the receiver so calls can be chained.
+// WithMajorNumber sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterChannelInfo) WithMajorNumber(majorNumber obj.Object) *MTRChannelClusterChannelInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMajorNumber:"), objref.IDOf(majorNumber))
 	return x
 }
 
-// WithMinorNumber sets minorNumber and returns the receiver so calls can be chained.
+// WithMinorNumber sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterChannelInfo) WithMinorNumber(minorNumber obj.Object) *MTRChannelClusterChannelInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinorNumber:"), objref.IDOf(minorNumber))
 	return x
 }
 
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterChannelInfo) WithName(name string) *MTRChannelClusterChannelInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// WithCallSign sets callSign and returns the receiver so calls can be chained.
+// WithCallSign sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterChannelInfo) WithCallSign(callSign string) *MTRChannelClusterChannelInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCallSign:"), purego.NSString(callSign))
 	return x
 }
 
-// WithAffiliateCallSign sets affiliateCallSign and returns the receiver so calls can be chained.
+// WithAffiliateCallSign sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterChannelInfo) WithAffiliateCallSign(affiliateCallSign string) *MTRChannelClusterChannelInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffiliateCallSign:"), purego.NSString(affiliateCallSign))
 	return x
 }
 
-// WithIdentifier sets identifier and returns the receiver so calls can be chained.
+// WithIdentifier sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterChannelInfo) WithIdentifier(identifier string) *MTRChannelClusterChannelInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 	return x
 }
 
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithType sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterChannelInfo) WithType(type_ obj.Object) *MTRChannelClusterChannelInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return x
@@ -117,3 +105,5 @@ type MTRChannelClusterChannelInfoable interface {
 }
 
 var _ MTRChannelClusterChannelInfoable = (*MTRChannelClusterChannelInfo)(nil)
+
+var _ MTRChannelClusterChannelInfoStructProvider = (*MTRChannelClusterChannelInfo)(nil)

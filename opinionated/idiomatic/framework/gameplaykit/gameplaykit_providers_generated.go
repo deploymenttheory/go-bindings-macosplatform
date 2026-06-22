@@ -11,54 +11,65 @@ import (
 // AgentProvider is accepted wherever a GKAgent (or one of its subclasses) is expected.
 type AgentProvider interface {
 	objref.Object
+	isAgent()
 }
 
 // BehaviorProvider is accepted wherever a GKBehavior (or one of its subclasses) is expected.
 type BehaviorProvider interface {
 	objref.Object
+	isBehavior()
 }
 
 // CoherentNoiseSourceProvider is accepted wherever a GKCoherentNoiseSource (or one of its subclasses) is expected.
 type CoherentNoiseSourceProvider interface {
 	objref.Object
+	isCoherentNoiseSource()
 }
 
 // ComponentProvider is accepted wherever a GKComponent (or one of its subclasses) is expected.
 type ComponentProvider interface {
 	objref.Object
+	isComponent()
 }
 
 // GraphProvider is accepted wherever a GKGraph (or one of its subclasses) is expected.
 type GraphProvider interface {
 	objref.Object
+	isGraph()
 }
 
 // GraphNodeProvider is accepted wherever a GKGraphNode (or one of its subclasses) is expected.
 type GraphNodeProvider interface {
 	objref.Object
+	isGraphNode()
 }
 
 // NoiseSourceProvider is accepted wherever a GKNoiseSource (or one of its subclasses) is expected.
 type NoiseSourceProvider interface {
 	objref.Object
+	isNoiseSource()
 }
 
 // ObstacleProvider is accepted wherever a GKObstacle (or one of its subclasses) is expected.
 type ObstacleProvider interface {
 	objref.Object
+	isObstacle()
 }
 
 // RandomDistributionProvider is accepted wherever a GKRandomDistribution (or one of its subclasses) is expected.
 type RandomDistributionProvider interface {
 	objref.Object
+	isRandomDistribution()
 }
 
 // RandomSourceProvider is accepted wherever a GKRandomSource (or one of its subclasses) is expected.
 type RandomSourceProvider interface {
 	objref.Object
+	isRandomSource()
 }
 
 // RuleProvider is accepted wherever a GKRule (or one of its subclasses) is expected.
 type RuleProvider interface {
 	objref.Object
+	isRule()
 }

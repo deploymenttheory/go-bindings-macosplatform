@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An array of sample buffer attachments for a render pass.
-//
 // RenderPassSampleBufferAttachmentDescriptorArray is an idiomatic wrapper over the Objective-C class MTLRenderPassSampleBufferAttachmentDescriptorArray.
+//
+// An array of sample buffer attachments for a render pass.
 type RenderPassSampleBufferAttachmentDescriptorArray struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RenderPassSampleBufferAttachmentDescriptorArrayFromID(id objc.ID) *RenderPa
 	if id == 0 {
 		return nil
 	}
-	x := &RenderPassSampleBufferAttachmentDescriptorArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RenderPassSampleBufferAttachmentDescriptorArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func renderPassSampleBufferAttachmentDescriptorArrayAdopt(id objc.ID) *RenderPas
 	if id == 0 {
 		return nil
 	}
-	x := &RenderPassSampleBufferAttachmentDescriptorArray{Handle: objref.Wrap(id)}
+	x := &RenderPassSampleBufferAttachmentDescriptorArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *RenderPassSampleBufferAttachmentDescriptorArray) IsKind(className strin
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RenderPassSampleBufferAttachmentDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRenderPassSampleBufferAttachmentDescriptorArray creates a new RenderPassSampleBufferAttachmentDescriptorArray.
 func NewRenderPassSampleBufferAttachmentDescriptorArray() *RenderPassSampleBufferAttachmentDescriptorArray {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLRenderPassSampleBufferAttachmentDescriptorArray")), objc.RegisterName("new"))
 	return renderPassSampleBufferAttachmentDescriptorArrayAdopt(_id)
 }
 
-// Returns the descriptor object for the specified sample buffer attachment.
+// ObjectAtIndexedSubscript returns the descriptor object for the specified sample buffer attachment.
 func (x *RenderPassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *RenderPassSampleBufferAttachmentDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return RenderPassSampleBufferAttachmentDescriptorFromID(_r)
 }
 
-// Sets the descriptor object for the specified sample buffer attachment.
+// SetObjectAtIndexedSubscript sets the descriptor object for the specified sample buffer attachment.
 func (x *RenderPassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *RenderPassSampleBufferAttachmentDescriptor, attachmentIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }

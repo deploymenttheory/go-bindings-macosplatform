@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A camera zoom range that limits the distances to which the user can zoom.
-//
 // MapCameraZoomRange is an idiomatic wrapper over the Objective-C class MKMapCameraZoomRange.
+//
+// A camera zoom range that limits the distances to which the user can zoom.
 type MapCameraZoomRange struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MapCameraZoomRangeFromID(id objc.ID) *MapCameraZoomRange {
 	if id == 0 {
 		return nil
 	}
-	x := &MapCameraZoomRange{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MapCameraZoomRange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mapCameraZoomRangeAdopt(id objc.ID) *MapCameraZoomRange {
 	if id == 0 {
 		return nil
 	}
-	x := &MapCameraZoomRange{Handle: objref.Wrap(id)}
+	x := &MapCameraZoomRange{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *MapCameraZoomRange) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MapCameraZoomRange) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MapCameraZoomRange) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMapCameraZoomRange creates a new MapCameraZoomRange.

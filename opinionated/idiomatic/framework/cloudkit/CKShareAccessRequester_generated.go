@@ -23,7 +23,8 @@ func ShareAccessRequesterFromID(id objc.ID) *ShareAccessRequester {
 	if id == 0 {
 		return nil
 	}
-	x := &ShareAccessRequester{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ShareAccessRequester{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func shareAccessRequesterAdopt(id objc.ID) *ShareAccessRequester {
 	if id == 0 {
 		return nil
 	}
-	x := &ShareAccessRequester{Handle: objref.Wrap(id)}
+	x := &ShareAccessRequester{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,25 +58,31 @@ func (x *ShareAccessRequester) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ShareAccessRequester) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewShareAccessRequester creates a new ShareAccessRequester.
 func NewShareAccessRequester() *ShareAccessRequester {
 	_id := objc.Send[objc.ID](objc.ID(_class("CKShareAccessRequester")), objc.RegisterName("new"))
 	return shareAccessRequesterAdopt(_id)
 }
 
-// The identity of the user requesting access to the share.
+// UserIdentity the identity of the user requesting access to the share.
 func (x *ShareAccessRequester) UserIdentity() *UserIdentity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userIdentity"))
 	return UserIdentityFromID(_r)
 }
 
-// Lookup information for the requester. Use this lookup info with “CKFetchShareParticipantsOperation“ to fetch the corresponding participant. Once fetched, add the participant to the share to approve the requester.
+// ParticipantLookupInfo lookup information for the requester. Use this lookup info with “CKFetchShareParticipantsOperation“ to fetch the corresponding participant. Once fetched, add the participant to the share to approve the requester.
 func (x *ShareAccessRequester) ParticipantLookupInfo() *UserIdentityLookupInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("participantLookupInfo"))
 	return UserIdentityLookupInfoFromID(_r)
 }
 
-// A displayable CNContact representing the requester. If the requester doesn't exist in the user's contacts or is not accessible, returns a newly created `CNContact`. This provides formatted requester information suitable for display in the application's UI.
+// Contact a displayable CNContact representing the requester. If the requester doesn't exist in the user's contacts or is not accessible, returns a newly created `CNContact`. This provides formatted requester information suitable for display in the application's UI.
 func (x *ShareAccessRequester) Contact() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contact"))
 	return obj.Wrap(_r)

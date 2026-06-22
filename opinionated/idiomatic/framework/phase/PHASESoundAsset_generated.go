@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A sound resource stored in the asset registry.
-//
 // SoundAsset is an idiomatic wrapper over the Objective-C class PHASESoundAsset.
+//
+// It embeds [Asset], promoting that type's methods.
+//
+// A sound resource stored in the asset registry.
 type SoundAsset struct {
-	objref.Handle
+	Asset
 }
 
 // SoundAssetFromID adopts an existing Objective-C object as a SoundAsset
@@ -25,7 +26,8 @@ func SoundAssetFromID(id objc.ID) *SoundAsset {
 	if id == 0 {
 		return nil
 	}
-	x := &SoundAsset{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SoundAsset{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func soundAssetAdopt(id objc.ID) *SoundAsset {
 	if id == 0 {
 		return nil
 	}
-	x := &SoundAsset{Handle: objref.Wrap(id)}
+	x := &SoundAsset{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SoundAsset) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SoundAsset) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SoundAsset) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSoundAsset creates a new SoundAsset.
@@ -64,19 +52,19 @@ func NewSoundAsset() *SoundAsset {
 	return soundAssetAdopt(_id)
 }
 
-// The URL of the sound asset, if applicable.
+// Url the URL of the sound asset, if applicable.
 func (x *SoundAsset) Url() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
-// The buffer for the sound asset, if applicable.
+// Data the buffer for the sound asset, if applicable.
 func (x *SoundAsset) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// The sound asset type.
+// Type the sound asset type.
 func (x *SoundAsset) Type() AssetType {
 	_r := objc.Send[AssetType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
@@ -91,3 +79,5 @@ type SoundAssetable interface {
 }
 
 var _ SoundAssetable = (*SoundAsset)(nil)
+
+var _ AssetProvider = (*SoundAsset)(nil)

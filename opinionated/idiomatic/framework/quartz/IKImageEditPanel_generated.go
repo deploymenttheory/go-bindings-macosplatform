@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The IKImageEditPanel class provides a panel, that is, a utility window that floats on top of document windows, optimized for image editing.
-//
 // IKImageEditPanel is an idiomatic wrapper over the Objective-C class IKImageEditPanel.
+//
+// The IKImageEditPanel class provides a panel, that is, a utility window that floats on top of document windows, optimized for image editing.
 type IKImageEditPanel struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func IKImageEditPanelFromID(id objc.ID) *IKImageEditPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &IKImageEditPanel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IKImageEditPanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func iKImageEditPanelAdopt(id objc.ID) *IKImageEditPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &IKImageEditPanel{Handle: objref.Wrap(id)}
+	x := &IKImageEditPanel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,36 +60,41 @@ func (x *IKImageEditPanel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IKImageEditPanel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewIKImageEditPanel creates a new IKImageEditPanel.
 func NewIKImageEditPanel() *IKImageEditPanel {
 	_id := objc.Send[objc.ID](objc.ID(_class("IKImageEditPanel")), objc.RegisterName("new"))
 	return iKImageEditPanelAdopt(_id)
 }
 
-// Specifies the edit panel’s dataSource.
-//
-// WithDataSource sets dataSource and returns the receiver so calls can be chained.
+// WithDataSource specifies the edit panel’s dataSource.
 func (x *IKImageEditPanel) WithDataSource(dataSource obj.Object) *IKImageEditPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataSource:"), objref.IDOf(dataSource))
 	return x
 }
 
-// Reloads the data from the data associated with an image editing panel.
+// ReloadData reloads the data from the data associated with an image editing panel.
 func (x *IKImageEditPanel) ReloadData() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadData"))
 }
 
-// Data source associated with an image editing panel
+// DataSource data source associated with an image editing panel
 func (x *IKImageEditPanel) DataSource() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataSource"))
 	return obj.Wrap(_r)
 }
 
+// SetDataSource wraps the corresponding Objective-C method.
 func (x *IKImageEditPanel) SetDataSource(dataSource obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataSource:"), objref.IDOf(dataSource))
 }
 
-// Array of filters reflecting the current user adjustments in the adjust or effects tab.
+// FilterArray array of filters reflecting the current user adjustments in the adjust or effects tab.
 func (x *IKImageEditPanel) FilterArray() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterArray"))
 	return obj.Wrap(_r)

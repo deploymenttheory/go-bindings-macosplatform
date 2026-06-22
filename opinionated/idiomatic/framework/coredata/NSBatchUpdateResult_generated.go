@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The result returned when executing a batch update request.
-//
 // BatchUpdateResult is an idiomatic wrapper over the Objective-C class NSBatchUpdateResult.
+//
+// It embeds [PersistentStoreResult], promoting that type's methods.
+//
+// The result returned when executing a batch update request.
 type BatchUpdateResult struct {
-	objref.Handle
+	PersistentStoreResult
 }
 
 // BatchUpdateResultFromID adopts an existing Objective-C object as a BatchUpdateResult
@@ -25,7 +26,8 @@ func BatchUpdateResultFromID(id objc.ID) *BatchUpdateResult {
 	if id == 0 {
 		return nil
 	}
-	x := &BatchUpdateResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BatchUpdateResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func batchUpdateResultAdopt(id objc.ID) *BatchUpdateResult {
 	if id == 0 {
 		return nil
 	}
-	x := &BatchUpdateResult{Handle: objref.Wrap(id)}
+	x := &BatchUpdateResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *BatchUpdateResult) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BatchUpdateResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BatchUpdateResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewBatchUpdateResult creates a new BatchUpdateResult.
@@ -64,11 +52,13 @@ func NewBatchUpdateResult() *BatchUpdateResult {
 	return batchUpdateResultAdopt(_id)
 }
 
+// Result wraps the corresponding Objective-C method.
 func (x *BatchUpdateResult) Result() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("result"))
 	return obj.Wrap(_r)
 }
 
+// ResultType wraps the corresponding Objective-C method.
 func (x *BatchUpdateResult) ResultType() BatchUpdateRequestResultType {
 	_r := objc.Send[BatchUpdateRequestResultType](objref.IDOf(x), objc.RegisterName("resultType"))
 	return _r
@@ -82,3 +72,5 @@ type BatchUpdateResultable interface {
 }
 
 var _ BatchUpdateResultable = (*BatchUpdateResult)(nil)
+
+var _ PersistentStoreResultProvider = (*BatchUpdateResult)(nil)

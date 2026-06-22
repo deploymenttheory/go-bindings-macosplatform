@@ -9,109 +9,91 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// Value should be a CFString. The extension is used as a badge when producing an icon.
 // KQLThumbnailPropertyExtensionKey returns the value of the constant kQLThumbnailPropertyExtensionKey.
 func KQLThumbnailPropertyExtensionKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kQLThumbnailPropertyExtensionKey")))
 }
 
-// Value should be a CGImage. The badge is used when producing an icon.
 // KQLThumbnailPropertyBadgeImageKey returns the value of the constant kQLThumbnailPropertyBadgeImageKey.
 func KQLThumbnailPropertyBadgeImageKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kQLThumbnailPropertyBadgeImageKey")))
 }
 
-// Extends the security scope where Quick Look will accept to look at a file. Value is a path as CFString. Only useful when using QLThumbnailRequestSetImageAtURL() or QLThumbnailRequestSetThumbnailWithURLRepresentation(). By default, Quick Look will only accept files within the current document bundle.
 // KQLThumbnailPropertyBaseBundlePathKey returns the value of the constant kQLThumbnailPropertyBaseBundlePathKey.
 func KQLThumbnailPropertyBaseBundlePathKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kQLThumbnailPropertyBaseBundlePathKey")))
 }
 
-// Customizes Displayed name in the preview panel. This replaces the document's display name. Value is a CFString.
 // KQLPreviewPropertyDisplayNameKey returns the value of the constant kQLPreviewPropertyDisplayNameKey.
 func KQLPreviewPropertyDisplayNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kQLPreviewPropertyDisplayNameKey")))
 }
 
-// Gives the width (in points) of the preview. Value is a CFNumber.
 // KQLPreviewPropertyWidthKey returns the value of the constant kQLPreviewPropertyWidthKey.
 func KQLPreviewPropertyWidthKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kQLPreviewPropertyWidthKey")))
 }
 
-// Gives the height (in points) of the preview. Value is a CFNumber.
 // KQLPreviewPropertyHeightKey returns the value of the constant kQLPreviewPropertyHeightKey.
 func KQLPreviewPropertyHeightKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kQLPreviewPropertyHeightKey")))
 }
 
-// Extends the security scope where Quick Look will accept to look at a file. Value is a path as CFString. Only useful when using QLPreviewRequestSetURLRepresentation(). By default, Quick Look will only accept files within the current document bundle.
 // KQLPreviewPropertyBaseBundlePathKey returns the value of the constant kQLPreviewPropertyBaseBundlePathKey.
 func KQLPreviewPropertyBaseBundlePathKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kQLPreviewPropertyBaseBundlePathKey")))
 }
 
-// Gives the CFStringEncoding of the preview data if the preview type is plain text. Value is a CFNumber.
 // KQLPreviewPropertyStringEncodingKey returns the value of the constant kQLPreviewPropertyStringEncodingKey.
 func KQLPreviewPropertyStringEncodingKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kQLPreviewPropertyStringEncodingKey")))
 }
 
-// Specify the preferred way to display PDF content. Value is a CFNumber using QLPreviewPDFStyle values.
 // KQLPreviewPropertyPDFStyleKey returns the value of the constant kQLPreviewPropertyPDFStyleKey.
 func KQLPreviewPropertyPDFStyleKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kQLPreviewPropertyPDFStyleKey")))
 }
 
-// Value is the same CFNumber passed by potential previous calls to generator's preview callback for the same document with kQLPreviewPropertyCursorKey. Use this value to provide more of the preview content.
 // KQLPreviewOptionCursorKey returns the value of the constant kQLPreviewOptionCursorKey.
 func KQLPreviewOptionCursorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kQLPreviewOptionCursorKey")))
 }
 
-// Value should be a CFNumber. This value will be used to get more of the document's preview if necessary (and if the preview genererator returns kQLReturnHasMore)
 // KQLPreviewPropertyCursorKey returns the value of the constant kQLPreviewPropertyCursorKey.
 func KQLPreviewPropertyCursorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kQLPreviewPropertyCursorKey")))
 }
 
-// Gives the web content or attachment mime type. For the main data, default is text/html. Value is a CFString.
 // KQLPreviewPropertyMIMETypeKey returns the value of the constant kQLPreviewPropertyMIMETypeKey.
 func KQLPreviewPropertyMIMETypeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kQLPreviewPropertyMIMETypeKey")))
 }
 
-// Gives the web content or attachment text encoding. Use IANA encodings like UTF-8. Value is a CFString.
 // KQLPreviewPropertyTextEncodingNameKey returns the value of the constant kQLPreviewPropertyTextEncodingNameKey.
 func KQLPreviewPropertyTextEncodingNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kQLPreviewPropertyTextEncodingNameKey")))
 }
 
-// Gives the attachment data. Value is a CFData.
 // KQLPreviewPropertyAttachmentDataKey returns the value of the constant kQLPreviewPropertyAttachmentDataKey.
 func KQLPreviewPropertyAttachmentDataKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kQLPreviewPropertyAttachmentDataKey")))
 }
 
-// Gives the list of attachments (or sub-resources). Value is a CFDictionary. Keys are the attachment ids (CFStringRef) that can be referenced with "cid:id" URL and Values are dictionaries using kQLPreviewPropertyAttachmentDataKey, kQLPreviewPropertyMIMETypeKey and kQLPreviewPropertyTextEncodingNameKey keys.
 // KQLPreviewPropertyAttachmentsKey returns the value of the constant kQLPreviewPropertyAttachmentsKey.
 func KQLPreviewPropertyAttachmentsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kQLPreviewPropertyAttachmentsKey")))
 }
 
-// Is the "cid" URL scheme.
 // KQLPreviewContentIDScheme returns the value of the constant kQLPreviewContentIDScheme.
 func KQLPreviewContentIDScheme() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kQLPreviewContentIDScheme")))
 }
 
-// If kCFBooleanTrue, QL will produce an icon (ie a thumbnail and all the icon decor, like shadows, curled corner, etc.).
 // KQLThumbnailOptionIconModeKey returns the value of the constant kQLThumbnailOptionIconModeKey.
 func KQLThumbnailOptionIconModeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kQLThumbnailOptionIconModeKey")))
 }
 
-// This is the user scale factor (as a CFNumber). If absent, default value is 1.0
 // KQLThumbnailOptionScaleFactorKey returns the value of the constant kQLThumbnailOptionScaleFactorKey.
 func KQLThumbnailOptionScaleFactorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kQLThumbnailOptionScaleFactorKey")))

@@ -11,9 +11,11 @@ import (
 // AuthorizationOpenIDRequestProvider is accepted wherever a ASAuthorizationOpenIDRequest (or one of its subclasses) is expected.
 type AuthorizationOpenIDRequestProvider interface {
 	objref.Object
+	isAuthorizationOpenIDRequest()
 }
 
 // AuthorizationRequestProvider is accepted wherever a ASAuthorizationRequest (or one of its subclasses) is expected.
 type AuthorizationRequestProvider interface {
 	objref.Object
+	isAuthorizationRequest()
 }

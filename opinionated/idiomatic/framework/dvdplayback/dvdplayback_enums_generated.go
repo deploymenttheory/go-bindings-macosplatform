@@ -18,6 +18,8 @@ const (
 	KDVDAspectRatioLetterBox     DVDAspectRatio = 4
 )
 
+// String returns the DVDAspectRatio constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DVDAspectRatio) String() string {
 	switch e {
 	case KDVDAspectRatioUninitialized:
@@ -47,6 +49,8 @@ const (
 	KDVDMenuNone       DVDMenu = 6
 )
 
+// String returns the DVDMenu constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DVDMenu) String() string {
 	switch e {
 	case KDVDMenuTitle:
@@ -75,6 +79,8 @@ const (
 	KDVDScanDirectionBackward DVDScanDirection = 1
 )
 
+// String returns the DVDScanDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DVDScanDirection) String() string {
 	switch e {
 	case KDVDScanDirectionForward:
@@ -100,6 +106,8 @@ const (
 	KDVDScanRate32x       DVDScanRate = 32
 )
 
+// String returns the DVDScanRate constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DVDScanRate) String() string {
 	switch e {
 	case KDVDScanRateOneEigth:
@@ -135,6 +143,8 @@ const (
 	KDVDUserNavigationEnter     DVDUserNavigation = 5
 )
 
+// String returns the DVDUserNavigation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DVDUserNavigation) String() string {
 	switch e {
 	case KDVDUserNavigationMoveUp:

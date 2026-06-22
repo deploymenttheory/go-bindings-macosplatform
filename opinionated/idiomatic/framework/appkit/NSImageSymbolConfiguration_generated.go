@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains the specific font, style, and weight attributes to apply to a symbol image.
-//
 // ImageSymbolConfiguration is an idiomatic wrapper over the Objective-C class NSImageSymbolConfiguration.
+//
+// An object that contains the specific font, style, and weight attributes to apply to a symbol image.
 type ImageSymbolConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ImageSymbolConfigurationFromID(id objc.ID) *ImageSymbolConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageSymbolConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageSymbolConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func imageSymbolConfigurationAdopt(id objc.ID) *ImageSymbolConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageSymbolConfiguration{Handle: objref.Wrap(id)}
+	x := &ImageSymbolConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *ImageSymbolConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ImageSymbolConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewImageSymbolConfiguration creates a new ImageSymbolConfiguration.
 func NewImageSymbolConfiguration() *ImageSymbolConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSImageSymbolConfiguration")), objc.RegisterName("new"))
 	return imageSymbolConfigurationAdopt(_id)
 }
 
-// Returns a new configuration object whose values are defined by applying values from the provided configuration and the receiver. Values defined by both configurations will use the provided configuration’s values.
+// ConfigurationByApplyingConfiguration returns a new configuration object whose values are defined by applying values from the provided configuration and the receiver. Values defined by both configurations will use the provided configuration’s values.
 func (x *ImageSymbolConfiguration) ConfigurationByApplyingConfiguration(configuration *ImageSymbolConfiguration) *ImageSymbolConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configurationByApplyingConfiguration:"), objref.IDOf(configuration))
 	return ImageSymbolConfigurationFromID(_r)

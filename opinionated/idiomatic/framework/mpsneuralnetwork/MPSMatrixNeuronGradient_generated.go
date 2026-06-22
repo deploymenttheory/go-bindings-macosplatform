@@ -23,7 +23,8 @@ func MatrixNeuronGradientFromID(id objc.ID) *MatrixNeuronGradient {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixNeuronGradient{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatrixNeuronGradient{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func matrixNeuronGradientAdopt(id objc.ID) *MatrixNeuronGradient {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixNeuronGradient{Handle: objref.Wrap(id)}
+	x := &MatrixNeuronGradient{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,96 +58,99 @@ func (x *MatrixNeuronGradient) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MatrixNeuronGradient) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMatrixNeuronGradient creates a new MatrixNeuronGradient.
 func NewMatrixNeuronGradient() *MatrixNeuronGradient {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixNeuronGradient")), objc.RegisterName("new"))
 	return matrixNeuronGradientAdopt(_id)
 }
 
-// The number of input vectors which make up the input array.
-//
-// WithSourceNumberOfFeatureVectors sets sourceNumberOfFeatureVectors and returns the receiver so calls can be chained.
+// WithSourceNumberOfFeatureVectors the number of input vectors which make up the input array.
 func (x *MatrixNeuronGradient) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixNeuronGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
 	return x
 }
 
-// The number of feature channels in the input vectors.
-//
-// WithSourceInputFeatureChannels sets sourceInputFeatureChannels and returns the receiver so calls can be chained.
+// WithSourceInputFeatureChannels the number of feature channels in the input vectors.
 func (x *MatrixNeuronGradient) WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixNeuronGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
 	return x
 }
 
-// The scale factor to apply to the input.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the scale factor to apply to the input.
 func (x *MatrixNeuronGradient) WithAlpha(alpha float64) *MatrixNeuronGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// Specifies a neuron activation function to be used. This method can be used to add a neuron activation funtion of given type with associated scalar parameters A, B, and C that are shared across all output values. Note that this method can only be used to specify neurons which are specified by three (or fewer) parameters shared across all output values (or channels, in CNN nomenclature). It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. For those kind of neuron activation functions, use appropriate setter functions.  An MPSMatrixNeuron kernel is initialized with a default neuron function of MPSCNNNeuronTypeNone.
+// SetNeuronTypeParameterAParameterBParameterC specifies a neuron activation function to be used. This method can be used to add a neuron activation funtion of given type with associated scalar parameters A, B, and C that are shared across all output values. Note that this method can only be used to specify neurons which are specified by three (or fewer) parameters shared across all output values (or channels, in CNN nomenclature). It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. For those kind of neuron activation functions, use appropriate setter functions.  An MPSMatrixNeuron kernel is initialized with a default neuron function of MPSCNNNeuronTypeNone.
 func (x *MatrixNeuronGradient) SetNeuronTypeParameterAParameterBParameterC(neuronType CNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:"), neuronType, parameterA, parameterB, parameterC)
 }
 
-// Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+// NeuronType getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (x *MatrixNeuronGradient) NeuronType() CNNNeuronType {
 	_r := objc.Send[CNNNeuronType](objref.IDOf(x), objc.RegisterName("neuronType"))
 	return _r
 }
 
-// Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+// NeuronParameterA getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (x *MatrixNeuronGradient) NeuronParameterA() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterA"))
 	return _r
 }
 
-// Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+// NeuronParameterB getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (x *MatrixNeuronGradient) NeuronParameterB() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterB"))
 	return _r
 }
 
-// Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+// NeuronParameterC getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (x *MatrixNeuronGradient) NeuronParameterC() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterC"))
 	return _r
 }
 
-// Add per output value neuron parameters A for PReLu neuron activation functions. This method sets the neuron to PReLU, zeros parameters A and B and sets the per output value neuron parameters A to an array containing a unique value of A for each output value. If the neuron function is f(v,a,b), it will apply resultMatrix(i, j) = f( input(i, j), A[j], B[j] ) where j in [0, sourceInputFeatureChannels] See https://arxiv.org/pdf/1502.01852.pdf for details. All other neuron types, where parameter A and parameter B are shared across output values must be set using -setNeuronType:parameterA:parameterB:
+// SetNeuronToPReLUWithParametersA add per output value neuron parameters A for PReLu neuron activation functions. This method sets the neuron to PReLU, zeros parameters A and B and sets the per output value neuron parameters A to an array containing a unique value of A for each output value. If the neuron function is f(v,a,b), it will apply resultMatrix(i, j) = f( input(i, j), A[j], B[j] ) where j in [0, sourceInputFeatureChannels] See https://arxiv.org/pdf/1502.01852.pdf for details. All other neuron types, where parameter A and parameter B are shared across output values must be set using -setNeuronType:parameterA:parameterB:
 func (x *MatrixNeuronGradient) SetNeuronToPReLUWithParametersA(a obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeuronToPReLUWithParametersA:"), objref.IDOf(a))
 }
 
-// The number of input vectors which make up the input array.
+// SourceNumberOfFeatureVectors the number of input vectors which make up the input array.
 func (x *MatrixNeuronGradient) SourceNumberOfFeatureVectors() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceNumberOfFeatureVectors"))
 	return _r
 }
 
+// SetSourceNumberOfFeatureVectors wraps the corresponding Objective-C method.
 func (x *MatrixNeuronGradient) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
 }
 
-// The number of feature channels in the input vectors.
+// SourceInputFeatureChannels the number of feature channels in the input vectors.
 func (x *MatrixNeuronGradient) SourceInputFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceInputFeatureChannels"))
 	return _r
 }
 
+// SetSourceInputFeatureChannels wraps the corresponding Objective-C method.
 func (x *MatrixNeuronGradient) SetSourceInputFeatureChannels(sourceInputFeatureChannels int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
 }
 
-// The scale factor to apply to the input.
+// Alpha the scale factor to apply to the input.
 func (x *MatrixNeuronGradient) Alpha() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
 	return _r
 }
 
+// SetAlpha wraps the corresponding Objective-C method.
 func (x *MatrixNeuronGradient) SetAlpha(alpha float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }

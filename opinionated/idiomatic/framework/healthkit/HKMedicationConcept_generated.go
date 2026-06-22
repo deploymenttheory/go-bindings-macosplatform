@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes a specific medication concept.
-//
 // MedicationConcept is an idiomatic wrapper over the Objective-C class HKMedicationConcept.
+//
+// An object that describes a specific medication concept.
 type MedicationConcept struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MedicationConceptFromID(id objc.ID) *MedicationConcept {
 	if id == 0 {
 		return nil
 	}
-	x := &MedicationConcept{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MedicationConcept{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func medicationConceptAdopt(id objc.ID) *MedicationConcept {
 	if id == 0 {
 		return nil
 	}
-	x := &MedicationConcept{Handle: objref.Wrap(id)}
+	x := &MedicationConcept{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *MedicationConcept) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MedicationConcept) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMedicationConcept creates a new MedicationConcept.
 func NewMedicationConcept() *MedicationConcept {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKMedicationConcept")), objc.RegisterName("new"))
 	return medicationConceptAdopt(_id)
 }
 
-// The unique identifier for the specific medication concept. Each concept has one stable identifier that stays the same across devices. You can use this identifier to directly compare medications, for example, to check whether two objects represent the same medication.
+// Identifier the unique identifier for the specific medication concept. Each concept has one stable identifier that stays the same across devices. You can use this identifier to directly compare medications, for example, to check whether two objects represent the same medication.
 func (x *MedicationConcept) Identifier() *HealthConceptIdentifier {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	return HealthConceptIdentifierFromID(_r)
 }
 
-// The display name for this medication. The name of the medication a person enters or selects during medication onboarding.
+// DisplayText the display name for this medication. The name of the medication a person enters or selects during medication onboarding.
 func (x *MedicationConcept) DisplayText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayText"))
 	if _r == 0 {
@@ -79,13 +87,13 @@ func (x *MedicationConcept) DisplayText() string {
 	return purego.GoString(_r)
 }
 
-// The general form the medication is manufactured in. A general manufactured dose form for the specific medication. This value tells you the manufactured form of the medication, such as tablet, capsule, cream, injection, or inhaler.
+// GeneralForm the general form the medication is manufactured in. A general manufactured dose form for the specific medication. This value tells you the manufactured form of the medication, such as tablet, capsule, cream, injection, or inhaler.
 func (x *MedicationConcept) GeneralForm() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("generalForm"))
 	return obj.Wrap(_r)
 }
 
-// The set of related clinical codings for the medication. Each coding links the medication to an external medical terminology system, such as RxNorm.
+// RelatedCodings the set of related clinical codings for the medication. Each coding links the medication to an external medical terminology system, such as RxNorm.
 func (x *MedicationConcept) RelatedCodings() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relatedCodings"))
 	return obj.Wrap(_r)

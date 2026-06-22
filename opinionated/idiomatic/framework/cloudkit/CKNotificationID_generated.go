@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that uniquely identifies a push notification that a container sends.
-//
 // NotificationID is an idiomatic wrapper over the Objective-C class CKNotificationID.
+//
+// An object that uniquely identifies a push notification that a container sends.
 type NotificationID struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NotificationIDFromID(id objc.ID) *NotificationID {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationID{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NotificationID{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func notificationIDAdopt(id objc.ID) *NotificationID {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationID{Handle: objref.Wrap(id)}
+	x := &NotificationID{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *NotificationID) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *NotificationID) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationID) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewNotificationID creates a new NotificationID.

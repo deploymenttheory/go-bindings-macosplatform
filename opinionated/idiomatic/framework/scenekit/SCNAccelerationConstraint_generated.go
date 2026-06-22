@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // AccelerationConstraint is an idiomatic wrapper over the Objective-C class SCNAccelerationConstraint.
+//
+// It embeds [Constraint], promoting that type's methods.
 type AccelerationConstraint struct {
-	objref.Handle
+	Constraint
 }
 
 // AccelerationConstraintFromID adopts an existing Objective-C object as a AccelerationConstraint
@@ -23,7 +24,8 @@ func AccelerationConstraintFromID(id objc.ID) *AccelerationConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &AccelerationConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AccelerationConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func accelerationConstraintAdopt(id objc.ID) *AccelerationConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &AccelerationConstraint{Handle: objref.Wrap(id)}
+	x := &AccelerationConstraint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AccelerationConstraint) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AccelerationConstraint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AccelerationConstraint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAccelerationConstraint creates a new AccelerationConstraint.
@@ -62,98 +50,88 @@ func NewAccelerationConstraint() *AccelerationConstraint {
 	return accelerationConstraintAdopt(_id)
 }
 
-// Controls the maximum linear acceleration. Defaults to MAXFLOAT. Animatable. The maximum linear acceleration is in m.s^-2
-//
-// WithMaximumLinearAcceleration sets maximumLinearAcceleration and returns the receiver so calls can be chained.
+// WithMaximumLinearAcceleration controls the maximum linear acceleration. Defaults to MAXFLOAT. Animatable. The maximum linear acceleration is in m.s^-2
 func (x *AccelerationConstraint) WithMaximumLinearAcceleration(maximumLinearAcceleration float64) *AccelerationConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLinearAcceleration:"), maximumLinearAcceleration)
 	return x
 }
 
-// Controls the maximum linear velocity. Defaults to MAXFLOAT. Animatable. The maximum linear velocity is in m.s
-//
-// WithMaximumLinearVelocity sets maximumLinearVelocity and returns the receiver so calls can be chained.
+// WithMaximumLinearVelocity controls the maximum linear velocity. Defaults to MAXFLOAT. Animatable. The maximum linear velocity is in m.s
 func (x *AccelerationConstraint) WithMaximumLinearVelocity(maximumLinearVelocity float64) *AccelerationConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLinearVelocity:"), maximumLinearVelocity)
 	return x
 }
 
-// Controls the distance at which the node should start decelerating. Defaults to 0. Animatable.
-//
-// WithDecelerationDistance sets decelerationDistance and returns the receiver so calls can be chained.
+// WithDecelerationDistance controls the distance at which the node should start decelerating. Defaults to 0. Animatable.
 func (x *AccelerationConstraint) WithDecelerationDistance(decelerationDistance float64) *AccelerationConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecelerationDistance:"), decelerationDistance)
 	return x
 }
 
-// Specifies the damping factor of the receiver. Optionally reduce the body's linear velocity each frame to simulate fluid/air friction. Value should be zero or greater. Defaults to 0.1. Animatable.
-//
-// WithDamping sets damping and returns the receiver so calls can be chained.
+// WithDamping specifies the damping factor of the receiver. Optionally reduce the body's linear velocity each frame to simulate fluid/air friction. Value should be zero or greater. Defaults to 0.1. Animatable.
 func (x *AccelerationConstraint) WithDamping(damping float64) *AccelerationConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDamping:"), damping)
 	return x
 }
 
-// Determines whether the constraint is enabled or not. Defaults to YES.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled determines whether the constraint is enabled or not. Defaults to YES.
 func (x *AccelerationConstraint) WithEnabled(enabled bool) *AccelerationConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The influence of the constraint on the node’s transformation.
-//
-// WithInfluenceFactor sets influenceFactor and returns the receiver so calls can be chained.
+// WithInfluenceFactor the influence of the constraint on the node’s transformation.
 func (x *AccelerationConstraint) WithInfluenceFactor(influenceFactor float64) *AccelerationConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
 	return x
 }
 
-// Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
-//
-// WithIncremental sets incremental and returns the receiver so calls can be chained.
+// WithIncremental specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
 func (x *AccelerationConstraint) WithIncremental(incremental bool) *AccelerationConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
 	return x
 }
 
-// Controls the maximum linear acceleration. Defaults to MAXFLOAT. Animatable. The maximum linear acceleration is in m.s^-2
+// MaximumLinearAcceleration controls the maximum linear acceleration. Defaults to MAXFLOAT. Animatable. The maximum linear acceleration is in m.s^-2
 func (x *AccelerationConstraint) MaximumLinearAcceleration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumLinearAcceleration"))
 	return _r
 }
 
+// SetMaximumLinearAcceleration wraps the corresponding Objective-C method.
 func (x *AccelerationConstraint) SetMaximumLinearAcceleration(maximumLinearAcceleration float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLinearAcceleration:"), maximumLinearAcceleration)
 }
 
-// Controls the maximum linear velocity. Defaults to MAXFLOAT. Animatable. The maximum linear velocity is in m.s
+// MaximumLinearVelocity controls the maximum linear velocity. Defaults to MAXFLOAT. Animatable. The maximum linear velocity is in m.s
 func (x *AccelerationConstraint) MaximumLinearVelocity() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumLinearVelocity"))
 	return _r
 }
 
+// SetMaximumLinearVelocity wraps the corresponding Objective-C method.
 func (x *AccelerationConstraint) SetMaximumLinearVelocity(maximumLinearVelocity float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLinearVelocity:"), maximumLinearVelocity)
 }
 
-// Controls the distance at which the node should start decelerating. Defaults to 0. Animatable.
+// DecelerationDistance controls the distance at which the node should start decelerating. Defaults to 0. Animatable.
 func (x *AccelerationConstraint) DecelerationDistance() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("decelerationDistance"))
 	return _r
 }
 
+// SetDecelerationDistance wraps the corresponding Objective-C method.
 func (x *AccelerationConstraint) SetDecelerationDistance(decelerationDistance float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecelerationDistance:"), decelerationDistance)
 }
 
-// Specifies the damping factor of the receiver. Optionally reduce the body's linear velocity each frame to simulate fluid/air friction. Value should be zero or greater. Defaults to 0.1. Animatable.
+// Damping specifies the damping factor of the receiver. Optionally reduce the body's linear velocity each frame to simulate fluid/air friction. Value should be zero or greater. Defaults to 0.1. Animatable.
 func (x *AccelerationConstraint) Damping() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("damping"))
 	return _r
 }
 
+// SetDamping wraps the corresponding Objective-C method.
 func (x *AccelerationConstraint) SetDamping(damping float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDamping:"), damping)
 }
@@ -179,3 +157,5 @@ type AccelerationConstraintable interface {
 }
 
 var _ AccelerationConstraintable = (*AccelerationConstraint)(nil)
+
+var _ ConstraintProvider = (*AccelerationConstraint)(nil)

@@ -13,6 +13,8 @@ import (
 )
 
 // MTRContentLauncherClusterBrandingInformationStruct is an idiomatic wrapper over the Objective-C class MTRContentLauncherClusterBrandingInformationStruct.
+//
+// MTRContentLauncherClusterBrandingInformationStruct is an abstract base — you do not construct it directly. Construct one of [MTRContentLauncherClusterBrandingInformation] and pass it where a MTRContentLauncherClusterBrandingInformationStruct is accepted.
 type MTRContentLauncherClusterBrandingInformationStruct struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRContentLauncherClusterBrandingInformationStructFromID(id objc.ID) *MTRCo
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterBrandingInformationStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRContentLauncherClusterBrandingInformationStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRContentLauncherClusterBrandingInformationStructAdopt(id objc.ID) *MTRCon
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterBrandingInformationStruct{Handle: objref.Wrap(id)}
+	x := &MTRContentLauncherClusterBrandingInformationStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,48 +60,49 @@ func (x *MTRContentLauncherClusterBrandingInformationStruct) IsKind(className st
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRContentLauncherClusterBrandingInformationStruct creates a new MTRContentLauncherClusterBrandingInformationStruct.
-func NewMTRContentLauncherClusterBrandingInformationStruct() *MTRContentLauncherClusterBrandingInformationStruct {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRContentLauncherClusterBrandingInformationStruct")), objc.RegisterName("new"))
-	return mTRContentLauncherClusterBrandingInformationStructAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRContentLauncherClusterBrandingInformationStruct) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithProviderName sets providerName and returns the receiver so calls can be chained.
+// WithProviderName sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterBrandingInformationStruct) WithProviderName(providerName string) *MTRContentLauncherClusterBrandingInformationStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderName:"), purego.NSString(providerName))
 	return x
 }
 
-// WithBackground sets background and returns the receiver so calls can be chained.
+// WithBackground sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterBrandingInformationStruct) WithBackground(background MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformationStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackground:"), objref.IDOf(background))
 	return x
 }
 
-// WithLogo sets logo and returns the receiver so calls can be chained.
+// WithLogo sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterBrandingInformationStruct) WithLogo(logo MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformationStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLogo:"), objref.IDOf(logo))
 	return x
 }
 
-// WithProgressBar sets progressBar and returns the receiver so calls can be chained.
+// WithProgressBar sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterBrandingInformationStruct) WithProgressBar(progressBar MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformationStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressBar:"), objref.IDOf(progressBar))
 	return x
 }
 
-// WithSplash sets splash and returns the receiver so calls can be chained.
+// WithSplash sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterBrandingInformationStruct) WithSplash(splash MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformationStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSplash:"), objref.IDOf(splash))
 	return x
 }
 
-// WithWaterMark sets waterMark and returns the receiver so calls can be chained.
+// WithWaterMark sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterBrandingInformationStruct) WithWaterMark(waterMark MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformationStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWaterMark:"), objref.IDOf(waterMark))
 	return x
 }
 
+// ProviderName wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterBrandingInformationStruct) ProviderName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("providerName"))
 	if _r == 0 {
@@ -106,51 +111,62 @@ func (x *MTRContentLauncherClusterBrandingInformationStruct) ProviderName() stri
 	return purego.GoString(_r)
 }
 
+// SetProviderName wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterBrandingInformationStruct) SetProviderName(providerName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderName:"), purego.NSString(providerName))
 }
 
+// Background wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterBrandingInformationStruct) Background() *MTRContentLauncherClusterStyleInformationStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("background"))
 	return MTRContentLauncherClusterStyleInformationStructFromID(_r)
 }
 
+// SetBackground wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterBrandingInformationStruct) SetBackground(background *MTRContentLauncherClusterStyleInformationStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackground:"), objref.IDOf(background))
 }
 
+// Logo wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterBrandingInformationStruct) Logo() *MTRContentLauncherClusterStyleInformationStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logo"))
 	return MTRContentLauncherClusterStyleInformationStructFromID(_r)
 }
 
+// SetLogo wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterBrandingInformationStruct) SetLogo(logo *MTRContentLauncherClusterStyleInformationStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLogo:"), objref.IDOf(logo))
 }
 
+// ProgressBar wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterBrandingInformationStruct) ProgressBar() *MTRContentLauncherClusterStyleInformationStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("progressBar"))
 	return MTRContentLauncherClusterStyleInformationStructFromID(_r)
 }
 
+// SetProgressBar wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterBrandingInformationStruct) SetProgressBar(progressBar *MTRContentLauncherClusterStyleInformationStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressBar:"), objref.IDOf(progressBar))
 }
 
+// Splash wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterBrandingInformationStruct) Splash() *MTRContentLauncherClusterStyleInformationStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("splash"))
 	return MTRContentLauncherClusterStyleInformationStructFromID(_r)
 }
 
+// SetSplash wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterBrandingInformationStruct) SetSplash(splash *MTRContentLauncherClusterStyleInformationStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSplash:"), objref.IDOf(splash))
 }
 
+// WaterMark wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterBrandingInformationStruct) WaterMark() *MTRContentLauncherClusterStyleInformationStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("waterMark"))
 	return MTRContentLauncherClusterStyleInformationStructFromID(_r)
 }
 
+// SetWaterMark wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterBrandingInformationStruct) SetWaterMark(waterMark *MTRContentLauncherClusterStyleInformationStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWaterMark:"), objref.IDOf(waterMark))
 }
@@ -179,3 +195,11 @@ type MTRContentLauncherClusterBrandingInformationStructable interface {
 }
 
 var _ MTRContentLauncherClusterBrandingInformationStructable = (*MTRContentLauncherClusterBrandingInformationStruct)(nil)
+
+// isMTRContentLauncherClusterBrandingInformationStruct marks MTRContentLauncherClusterBrandingInformationStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRContentLauncherClusterBrandingInformationStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRContentLauncherClusterBrandingInformationStruct) isMTRContentLauncherClusterBrandingInformationStruct() {
+}
+
+var _ MTRContentLauncherClusterBrandingInformationStructProvider = (*MTRContentLauncherClusterBrandingInformationStruct)(nil)

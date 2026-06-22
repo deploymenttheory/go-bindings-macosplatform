@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of an acceleration structure that Metal derives from instances of primitive acceleration structures that the GPU can populate.
-//
 // IndirectInstanceAccelerationStructureDescriptor is an idiomatic wrapper over the Objective-C class MTLIndirectInstanceAccelerationStructureDescriptor.
+//
+// It embeds [AccelerationStructureDescriptor], promoting that type's methods.
+//
+// A description of an acceleration structure that Metal derives from instances of primitive acceleration structures that the GPU can populate.
 type IndirectInstanceAccelerationStructureDescriptor struct {
-	objref.Handle
+	AccelerationStructureDescriptor
 }
 
 // IndirectInstanceAccelerationStructureDescriptorFromID adopts an existing Objective-C object as a IndirectInstanceAccelerationStructureDescriptor
@@ -25,7 +26,8 @@ func IndirectInstanceAccelerationStructureDescriptorFromID(id objc.ID) *Indirect
 	if id == 0 {
 		return nil
 	}
-	x := &IndirectInstanceAccelerationStructureDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IndirectInstanceAccelerationStructureDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func indirectInstanceAccelerationStructureDescriptorAdopt(id objc.ID) *IndirectI
 	if id == 0 {
 		return nil
 	}
-	x := &IndirectInstanceAccelerationStructureDescriptor{Handle: objref.Wrap(id)}
+	x := &IndirectInstanceAccelerationStructureDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *IndirectInstanceAccelerationStructureDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IndirectInstanceAccelerationStructureDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IndirectInstanceAccelerationStructureDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewIndirectInstanceAccelerationStructureDescriptor creates a new IndirectInstanceAccelerationStructureDescriptor.
@@ -64,208 +52,195 @@ func NewIndirectInstanceAccelerationStructureDescriptor() *IndirectInstanceAccel
 	return indirectInstanceAccelerationStructureDescriptorAdopt(_id)
 }
 
-// Offset into the instance descriptor buffer. Must be a multiple of 64 bytes and must be aligned to the platform's buffer offset alignment.
-//
-// WithInstanceDescriptorBufferOffset sets instanceDescriptorBufferOffset and returns the receiver so calls can be chained.
+// WithInstanceDescriptorBufferOffset offset into the instance descriptor buffer. Must be a multiple of 64 bytes and must be aligned to the platform's buffer offset alignment.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithInstanceDescriptorBufferOffset(instanceDescriptorBufferOffset int) *IndirectInstanceAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceDescriptorBufferOffset:"), instanceDescriptorBufferOffset)
 	return x
 }
 
-// Stride, in bytes, between instance descriptors in the instance descriptor buffer. Must be at least the size of the instance descriptor type and must be a multiple of 4 bytes. Defaults to the size of the instance descriptor type.
-//
-// WithInstanceDescriptorStride sets instanceDescriptorStride and returns the receiver so calls can be chained.
+// WithInstanceDescriptorStride stride, in bytes, between instance descriptors in the instance descriptor buffer. Must be at least the size of the instance descriptor type and must be a multiple of 4 bytes. Defaults to the size of the instance descriptor type.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithInstanceDescriptorStride(instanceDescriptorStride int) *IndirectInstanceAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceDescriptorStride:"), instanceDescriptorStride)
 	return x
 }
 
-// Maximum number of instance descriptors
-//
-// WithMaxInstanceCount sets maxInstanceCount and returns the receiver so calls can be chained.
+// WithMaxInstanceCount maximum number of instance descriptors
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithMaxInstanceCount(maxInstanceCount int) *IndirectInstanceAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxInstanceCount:"), maxInstanceCount)
 	return x
 }
 
-// Offset into the instance count buffer. Must be a multiple of 4 bytes and must be aligned to the platform's buffer offset alignment.
-//
-// WithInstanceCountBufferOffset sets instanceCountBufferOffset and returns the receiver so calls can be chained.
+// WithInstanceCountBufferOffset offset into the instance count buffer. Must be a multiple of 4 bytes and must be aligned to the platform's buffer offset alignment.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithInstanceCountBufferOffset(instanceCountBufferOffset int) *IndirectInstanceAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceCountBufferOffset:"), instanceCountBufferOffset)
 	return x
 }
 
-// Type of instance descriptor in the instance descriptor buffer. Defaults to MTLAccelerationStructureInstanceDescriptorTypeIndirect. Must be MTLAccelerationStructureInstanceDescriptorTypeIndirect or MTLAccelerationStructureInstanceDescriptorTypeIndirectMotion.
-//
-// WithInstanceDescriptorType sets instanceDescriptorType and returns the receiver so calls can be chained.
+// WithInstanceDescriptorType type of instance descriptor in the instance descriptor buffer. Defaults to MTLAccelerationStructureInstanceDescriptorTypeIndirect. Must be MTLAccelerationStructureInstanceDescriptorTypeIndirect or MTLAccelerationStructureInstanceDescriptorTypeIndirectMotion.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithInstanceDescriptorType(instanceDescriptorType AccelerationStructureInstanceDescriptorType) *IndirectInstanceAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceDescriptorType:"), instanceDescriptorType)
 	return x
 }
 
-// The offset, in bytes, to the descripton of the first motion transform.
-//
-// WithMotionTransformBufferOffset sets motionTransformBufferOffset and returns the receiver so calls can be chained.
+// WithMotionTransformBufferOffset the offset, in bytes, to the descripton of the first motion transform.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithMotionTransformBufferOffset(motionTransformBufferOffset int) *IndirectInstanceAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionTransformBufferOffset:"), motionTransformBufferOffset)
 	return x
 }
 
-// Maximum number of motion transforms
-//
-// WithMaxMotionTransformCount sets maxMotionTransformCount and returns the receiver so calls can be chained.
+// WithMaxMotionTransformCount maximum number of motion transforms
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithMaxMotionTransformCount(maxMotionTransformCount int) *IndirectInstanceAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxMotionTransformCount:"), maxMotionTransformCount)
 	return x
 }
 
-// Offset into the motion transform count buffer. Must be a multiple of 4 bytes and must be aligned to the platform's buffer offset alignment.
-//
-// WithMotionTransformCountBufferOffset sets motionTransformCountBufferOffset and returns the receiver so calls can be chained.
+// WithMotionTransformCountBufferOffset offset into the motion transform count buffer. Must be a multiple of 4 bytes and must be aligned to the platform's buffer offset alignment.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithMotionTransformCountBufferOffset(motionTransformCountBufferOffset int) *IndirectInstanceAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionTransformCountBufferOffset:"), motionTransformCountBufferOffset)
 	return x
 }
 
-// Matrix layout of the transformation matrices in the instance descriptors in the instance descriptor buffer and the transformation matrices in the transformation matrix buffer. Defaults to MTLMatrixLayoutColumnMajor.
-//
-// WithInstanceTransformationMatrixLayout sets instanceTransformationMatrixLayout and returns the receiver so calls can be chained.
+// WithInstanceTransformationMatrixLayout matrix layout of the transformation matrices in the instance descriptors in the instance descriptor buffer and the transformation matrices in the transformation matrix buffer. Defaults to MTLMatrixLayoutColumnMajor.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithInstanceTransformationMatrixLayout(instanceTransformationMatrixLayout MatrixLayout) *IndirectInstanceAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceTransformationMatrixLayout:"), instanceTransformationMatrixLayout)
 	return x
 }
 
-// Type of motion transforms. Defaults to MTLTransformTypePackedFloat4x3.
-//
-// WithMotionTransformType sets motionTransformType and returns the receiver so calls can be chained.
+// WithMotionTransformType type of motion transforms. Defaults to MTLTransformTypePackedFloat4x3.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithMotionTransformType(motionTransformType TransformType) *IndirectInstanceAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionTransformType:"), motionTransformType)
 	return x
 }
 
-// Motion transform stride. Defaults to 0, indicating that transforms are tightly packed according to the motion transform type.
-//
-// WithMotionTransformStride sets motionTransformStride and returns the receiver so calls can be chained.
+// WithMotionTransformStride motion transform stride. Defaults to 0, indicating that transforms are tightly packed according to the motion transform type.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithMotionTransformStride(motionTransformStride int) *IndirectInstanceAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionTransformStride:"), motionTransformStride)
 	return x
 }
 
-// The options that describe how you intend to use the acceleration structure.
-//
-// WithUsage sets usage and returns the receiver so calls can be chained.
+// WithUsage the options that describe how you intend to use the acceleration structure.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithUsage(usage AccelerationStructureUsage) *IndirectInstanceAccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsage:"), usage)
 	return x
 }
 
-// Offset into the instance descriptor buffer. Must be a multiple of 64 bytes and must be aligned to the platform's buffer offset alignment.
+// InstanceDescriptorBufferOffset offset into the instance descriptor buffer. Must be a multiple of 64 bytes and must be aligned to the platform's buffer offset alignment.
 func (x *IndirectInstanceAccelerationStructureDescriptor) InstanceDescriptorBufferOffset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("instanceDescriptorBufferOffset"))
 	return _r
 }
 
+// SetInstanceDescriptorBufferOffset wraps the corresponding Objective-C method.
 func (x *IndirectInstanceAccelerationStructureDescriptor) SetInstanceDescriptorBufferOffset(instanceDescriptorBufferOffset int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceDescriptorBufferOffset:"), instanceDescriptorBufferOffset)
 }
 
-// Stride, in bytes, between instance descriptors in the instance descriptor buffer. Must be at least the size of the instance descriptor type and must be a multiple of 4 bytes. Defaults to the size of the instance descriptor type.
+// InstanceDescriptorStride stride, in bytes, between instance descriptors in the instance descriptor buffer. Must be at least the size of the instance descriptor type and must be a multiple of 4 bytes. Defaults to the size of the instance descriptor type.
 func (x *IndirectInstanceAccelerationStructureDescriptor) InstanceDescriptorStride() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("instanceDescriptorStride"))
 	return _r
 }
 
+// SetInstanceDescriptorStride wraps the corresponding Objective-C method.
 func (x *IndirectInstanceAccelerationStructureDescriptor) SetInstanceDescriptorStride(instanceDescriptorStride int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceDescriptorStride:"), instanceDescriptorStride)
 }
 
-// Maximum number of instance descriptors
+// MaxInstanceCount maximum number of instance descriptors
 func (x *IndirectInstanceAccelerationStructureDescriptor) MaxInstanceCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxInstanceCount"))
 	return _r
 }
 
+// SetMaxInstanceCount wraps the corresponding Objective-C method.
 func (x *IndirectInstanceAccelerationStructureDescriptor) SetMaxInstanceCount(maxInstanceCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxInstanceCount:"), maxInstanceCount)
 }
 
-// Offset into the instance count buffer. Must be a multiple of 4 bytes and must be aligned to the platform's buffer offset alignment.
+// InstanceCountBufferOffset offset into the instance count buffer. Must be a multiple of 4 bytes and must be aligned to the platform's buffer offset alignment.
 func (x *IndirectInstanceAccelerationStructureDescriptor) InstanceCountBufferOffset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("instanceCountBufferOffset"))
 	return _r
 }
 
+// SetInstanceCountBufferOffset wraps the corresponding Objective-C method.
 func (x *IndirectInstanceAccelerationStructureDescriptor) SetInstanceCountBufferOffset(instanceCountBufferOffset int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceCountBufferOffset:"), instanceCountBufferOffset)
 }
 
-// Type of instance descriptor in the instance descriptor buffer. Defaults to MTLAccelerationStructureInstanceDescriptorTypeIndirect. Must be MTLAccelerationStructureInstanceDescriptorTypeIndirect or MTLAccelerationStructureInstanceDescriptorTypeIndirectMotion.
+// InstanceDescriptorType type of instance descriptor in the instance descriptor buffer. Defaults to MTLAccelerationStructureInstanceDescriptorTypeIndirect. Must be MTLAccelerationStructureInstanceDescriptorTypeIndirect or MTLAccelerationStructureInstanceDescriptorTypeIndirectMotion.
 func (x *IndirectInstanceAccelerationStructureDescriptor) InstanceDescriptorType() AccelerationStructureInstanceDescriptorType {
 	_r := objc.Send[AccelerationStructureInstanceDescriptorType](objref.IDOf(x), objc.RegisterName("instanceDescriptorType"))
 	return _r
 }
 
+// SetInstanceDescriptorType wraps the corresponding Objective-C method.
 func (x *IndirectInstanceAccelerationStructureDescriptor) SetInstanceDescriptorType(instanceDescriptorType AccelerationStructureInstanceDescriptorType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceDescriptorType:"), instanceDescriptorType)
 }
 
-// Offset into the instance motion descriptor buffer. Must be a multiple of 64 bytes and must be aligned to the platform's buffer offset alignment.
+// MotionTransformBufferOffset offset into the instance motion descriptor buffer. Must be a multiple of 64 bytes and must be aligned to the platform's buffer offset alignment.
 func (x *IndirectInstanceAccelerationStructureDescriptor) MotionTransformBufferOffset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("motionTransformBufferOffset"))
 	return _r
 }
 
+// SetMotionTransformBufferOffset wraps the corresponding Objective-C method.
 func (x *IndirectInstanceAccelerationStructureDescriptor) SetMotionTransformBufferOffset(motionTransformBufferOffset int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionTransformBufferOffset:"), motionTransformBufferOffset)
 }
 
-// Maximum number of motion transforms
+// MaxMotionTransformCount maximum number of motion transforms
 func (x *IndirectInstanceAccelerationStructureDescriptor) MaxMotionTransformCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxMotionTransformCount"))
 	return _r
 }
 
+// SetMaxMotionTransformCount wraps the corresponding Objective-C method.
 func (x *IndirectInstanceAccelerationStructureDescriptor) SetMaxMotionTransformCount(maxMotionTransformCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxMotionTransformCount:"), maxMotionTransformCount)
 }
 
-// Offset into the motion transform count buffer. Must be a multiple of 4 bytes and must be aligned to the platform's buffer offset alignment.
+// MotionTransformCountBufferOffset offset into the motion transform count buffer. Must be a multiple of 4 bytes and must be aligned to the platform's buffer offset alignment.
 func (x *IndirectInstanceAccelerationStructureDescriptor) MotionTransformCountBufferOffset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("motionTransformCountBufferOffset"))
 	return _r
 }
 
+// SetMotionTransformCountBufferOffset wraps the corresponding Objective-C method.
 func (x *IndirectInstanceAccelerationStructureDescriptor) SetMotionTransformCountBufferOffset(motionTransformCountBufferOffset int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionTransformCountBufferOffset:"), motionTransformCountBufferOffset)
 }
 
-// Matrix layout of the transformation matrices in the instance descriptors in the instance descriptor buffer and the transformation matrices in the transformation matrix buffer. Defaults to MTLMatrixLayoutColumnMajor.
+// InstanceTransformationMatrixLayout matrix layout of the transformation matrices in the instance descriptors in the instance descriptor buffer and the transformation matrices in the transformation matrix buffer. Defaults to MTLMatrixLayoutColumnMajor.
 func (x *IndirectInstanceAccelerationStructureDescriptor) InstanceTransformationMatrixLayout() MatrixLayout {
 	_r := objc.Send[MatrixLayout](objref.IDOf(x), objc.RegisterName("instanceTransformationMatrixLayout"))
 	return _r
 }
 
+// SetInstanceTransformationMatrixLayout wraps the corresponding Objective-C method.
 func (x *IndirectInstanceAccelerationStructureDescriptor) SetInstanceTransformationMatrixLayout(instanceTransformationMatrixLayout MatrixLayout) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceTransformationMatrixLayout:"), instanceTransformationMatrixLayout)
 }
 
-// Type of motion transforms. Defaults to MTLTransformTypePackedFloat4x3.
+// MotionTransformType type of motion transforms. Defaults to MTLTransformTypePackedFloat4x3.
 func (x *IndirectInstanceAccelerationStructureDescriptor) MotionTransformType() TransformType {
 	_r := objc.Send[TransformType](objref.IDOf(x), objc.RegisterName("motionTransformType"))
 	return _r
 }
 
+// SetMotionTransformType wraps the corresponding Objective-C method.
 func (x *IndirectInstanceAccelerationStructureDescriptor) SetMotionTransformType(motionTransformType TransformType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionTransformType:"), motionTransformType)
 }
 
-// Motion transform stride. Defaults to 0, indicating that transforms are tightly packed according to the motion transform type.
+// MotionTransformStride motion transform stride. Defaults to 0, indicating that transforms are tightly packed according to the motion transform type.
 func (x *IndirectInstanceAccelerationStructureDescriptor) MotionTransformStride() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("motionTransformStride"))
 	return _r
 }
 
+// SetMotionTransformStride wraps the corresponding Objective-C method.
 func (x *IndirectInstanceAccelerationStructureDescriptor) SetMotionTransformStride(motionTransformStride int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionTransformStride:"), motionTransformStride)
 }
@@ -310,3 +285,5 @@ type IndirectInstanceAccelerationStructureDescriptorable interface {
 }
 
 var _ IndirectInstanceAccelerationStructureDescriptorable = (*IndirectInstanceAccelerationStructureDescriptor)(nil)
+
+var _ AccelerationStructureDescriptorProvider = (*IndirectInstanceAccelerationStructureDescriptor)(nil)

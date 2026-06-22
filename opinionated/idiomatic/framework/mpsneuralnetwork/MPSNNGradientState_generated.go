@@ -13,6 +13,8 @@ import (
 )
 
 // NNGradientState is an idiomatic wrapper over the Objective-C class MPSNNGradientState.
+//
+// NNGradientState is an abstract base — you do not construct it directly. Construct one of [CNNBatchNormalizationState], [CNNConvolutionGradientState], [CNNDropoutGradientState], [CNNGroupNormalizationGradientState], [CNNInstanceNormalizationGradientState] and pass it where a NNGradientState is accepted.
 type NNGradientState struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func NNGradientStateFromID(id objc.ID) *NNGradientState {
 	if id == 0 {
 		return nil
 	}
-	x := &NNGradientState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNGradientState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func nNGradientStateAdopt(id objc.ID) *NNGradientState {
 	if id == 0 {
 		return nil
 	}
-	x := &NNGradientState{Handle: objref.Wrap(id)}
+	x := &NNGradientState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,10 +60,10 @@ func (x *NNGradientState) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewNNGradientState creates a new NNGradientState.
-func NewNNGradientState() *NNGradientState {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNGradientState")), objc.RegisterName("new"))
-	return nNGradientStateAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NNGradientState) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NNGradientStateable is the interface implemented by [NNGradientState], for mocking and DI.
@@ -68,3 +72,10 @@ type NNGradientStateable interface {
 }
 
 var _ NNGradientStateable = (*NNGradientState)(nil)
+
+// isNNGradientState marks NNGradientState — and, by embedding promotion, its
+// subclasses — as a member of the NNGradientState hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NNGradientState) isNNGradientState() {}
+
+var _ NNGradientStateProvider = (*NNGradientState)(nil)

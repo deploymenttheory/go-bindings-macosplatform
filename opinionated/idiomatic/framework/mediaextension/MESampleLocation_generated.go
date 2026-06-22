@@ -6,15 +6,16 @@ package mediaextension
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides information about the sample location with the media.
-//
 // SampleLocation is an idiomatic wrapper over the Objective-C class MESampleLocation.
+//
+// An object that provides information about the sample location with the media.
 type SampleLocation struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func SampleLocationFromID(id objc.ID) *SampleLocation {
 	if id == 0 {
 		return nil
 	}
-	x := &SampleLocation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SampleLocation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func sampleLocationAdopt(id objc.ID) *SampleLocation {
 	if id == 0 {
 		return nil
 	}
-	x := &SampleLocation{Handle: objref.Wrap(id)}
+	x := &SampleLocation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +61,26 @@ func (x *SampleLocation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewSampleLocation creates a new SampleLocation.
-func NewSampleLocation() *SampleLocation {
-	_id := objc.Send[objc.ID](objc.ID(_class("MESampleLocation")), objc.RegisterName("new"))
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SampleLocation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSampleLocationWithByteSourceSampleLocation creates a sample location object with the byte source and sample location that you specify.
+func NewSampleLocationWithByteSourceSampleLocation(byteSource *ByteSource, sampleLocation avfoundation.AVSampleCursorStorageRange) *SampleLocation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MESampleLocation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithByteSource:sampleLocation:"), objref.IDOf(byteSource), sampleLocation)
 	return sampleLocationAdopt(_id)
 }
 
-// The MEByteSource to be used to read the data for the sample.
+// SampleLocation the starting file offset and size in bytes of the sample.
+func (x *SampleLocation) SampleLocation() avfoundation.AVSampleCursorStorageRange {
+	_r := objc.Send[avfoundation.AVSampleCursorStorageRange](objref.IDOf(x), objc.RegisterName("sampleLocation"))
+	return _r
+}
+
+// ByteSource the MEByteSource to be used to read the data for the sample.
 func (x *SampleLocation) ByteSource() *ByteSource {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("byteSource"))
 	return ByteSourceFromID(_r)
@@ -73,6 +89,7 @@ func (x *SampleLocation) ByteSource() *ByteSource {
 // SampleLocationable is the interface implemented by [SampleLocation], for mocking and DI.
 type SampleLocationable interface {
 	obj.Object
+	SampleLocation() avfoundation.AVSampleCursorStorageRange
 	ByteSource() *ByteSource
 }
 

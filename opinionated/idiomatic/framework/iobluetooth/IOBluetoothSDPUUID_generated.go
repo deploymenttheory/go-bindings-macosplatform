@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An NSData subclass that represents a UUID as defined in the Bluetooth SDP spec.
-//
 // IOBluetoothSDPUUID is an idiomatic wrapper over the Objective-C class IOBluetoothSDPUUID.
+//
+// An NSData subclass that represents a UUID as defined in the Bluetooth SDP spec.
 type IOBluetoothSDPUUID struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func IOBluetoothSDPUUIDFromID(id objc.ID) *IOBluetoothSDPUUID {
 	if id == 0 {
 		return nil
 	}
-	x := &IOBluetoothSDPUUID{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IOBluetoothSDPUUID{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func iOBluetoothSDPUUIDAdopt(id objc.ID) *IOBluetoothSDPUUID {
 	if id == 0 {
 		return nil
 	}
-	x := &IOBluetoothSDPUUID{Handle: objref.Wrap(id)}
+	x := &IOBluetoothSDPUUID{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,39 @@ func (x *IOBluetoothSDPUUID) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a new 16-bit IOBluetoothSDPUUID with the given UUID16
-//
-// NewIOBluetoothSDPUUIDWithUUID16 creates a new IOBluetoothSDPUUID.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IOBluetoothSDPUUID) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewIOBluetoothSDPUUIDWithUUID16 initializes a new 16-bit IOBluetoothSDPUUID with the given UUID16
 func NewIOBluetoothSDPUUIDWithUUID16(uuid16 uint16) *IOBluetoothSDPUUID {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPUUID")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID16:"), uuid16)
 	return iOBluetoothSDPUUIDAdopt(_id)
 }
 
-// Creates a new 32-bit IOBluetoothSDPUUID with the given UUID32
-//
-// NewIOBluetoothSDPUUIDWithUUID32 creates a new IOBluetoothSDPUUID.
+// NewIOBluetoothSDPUUIDWithUUID32 creates a new 32-bit IOBluetoothSDPUUID with the given UUID32
 func NewIOBluetoothSDPUUIDWithUUID32(uuid32 uint32) *IOBluetoothSDPUUID {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPUUID")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID32:"), uuid32)
 	return iOBluetoothSDPUUIDAdopt(_id)
 }
 
-// Returns an IOBluetoothSDPUUIDRef representation of the target IOBluetoothSDPUUID object.
+// GetSDPUUIDRef returns an IOBluetoothSDPUUIDRef representation of the target IOBluetoothSDPUUID object.
 func (x *IOBluetoothSDPUUID) GetSDPUUIDRef() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getSDPUUIDRef"))
 	return obj.Wrap(_r)
 }
 
-// Returns an IOBluetoothSDPUUID object matching the target UUID, but with the given number of bytes.
+// GetUUIDWithLength returns an IOBluetoothSDPUUID object matching the target UUID, but with the given number of bytes.
 func (x *IOBluetoothSDPUUID) GetUUIDWithLength(newLength int) *IOBluetoothSDPUUID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getUUIDWithLength:"), newLength)
 	return IOBluetoothSDPUUIDFromID(_r)
 }
 
-// Compares the target IOBluetoothSDPUUID object with the given otherUUID object.
+// IsEqualToUUID compares the target IOBluetoothSDPUUID object with the given otherUUID object.
 func (x *IOBluetoothSDPUUID) IsEqualToUUID(otherUUID *IOBluetoothSDPUUID) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToUUID:"), objref.IDOf(otherUUID))
 	return _r

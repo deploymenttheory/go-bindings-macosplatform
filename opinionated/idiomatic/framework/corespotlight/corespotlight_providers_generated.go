@@ -11,9 +11,11 @@ import (
 // SearchQueryProvider is accepted wherever a CSSearchQuery (or one of its subclasses) is expected.
 type SearchQueryProvider interface {
 	objref.Object
+	isSearchQuery()
 }
 
 // SearchQueryContextProvider is accepted wherever a CSSearchQueryContext (or one of its subclasses) is expected.
 type SearchQueryContextProvider interface {
 	objref.Object
+	isSearchQueryContext()
 }

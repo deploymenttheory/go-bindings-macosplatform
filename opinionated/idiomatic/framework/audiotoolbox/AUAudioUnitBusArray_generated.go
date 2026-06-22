@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// A class that defines a container for an audio unit’s input or output busses.
-//
 // AudioUnitBusArray is an idiomatic wrapper over the Objective-C class AUAudioUnitBusArray.
+//
+// A class that defines a container for an audio unit’s input or output busses.
 type AudioUnitBusArray struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func AudioUnitBusArrayFromID(id objc.ID) *AudioUnitBusArray {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitBusArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioUnitBusArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func audioUnitBusArrayAdopt(id objc.ID) *AudioUnitBusArray {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitBusArray{Handle: objref.Wrap(id)}
+	x := &AudioUnitBusArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,32 +62,34 @@ func (x *AudioUnitBusArray) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a bus array by making a copy of the supplied busses.
-//
-// NewAudioUnitBusArrayWithAudioUnitBusTypeBusses creates a new AudioUnitBusArray.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioUnitBusArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudioUnitBusArrayWithAudioUnitBusTypeBusses initializes a bus array by making a copy of the supplied busses.
 func NewAudioUnitBusArrayWithAudioUnitBusTypeBusses(owner *AudioUnit, busType AudioUnitBusType, busArray []*AudioUnitBus) *AudioUnitBusArray {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AUAudioUnitBusArray")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioUnit:busType:busses:"), objref.IDOf(owner), busType, purego.SliceToNSArray(busArray, func(_v *AudioUnitBus) objc.ID { return objref.IDOf(_v) }))
 	return audioUnitBusArrayAdopt(_id)
 }
 
-// Initializes an empty bus array.
-//
-// NewAudioUnitBusArrayWithAudioUnitBusType creates a new AudioUnitBusArray.
+// NewAudioUnitBusArrayWithAudioUnitBusType initializes an empty bus array.
 func NewAudioUnitBusArrayWithAudioUnitBusType(owner *AudioUnit, busType AudioUnitBusType) *AudioUnitBusArray {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AUAudioUnitBusArray")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioUnit:busType:"), objref.IDOf(owner), busType)
 	return audioUnitBusArrayAdopt(_id)
 }
 
-// Returns the bus at the specified index.
+// ObjectAtIndexedSubscript returns the bus at the specified index.
 func (x *AudioUnitBusArray) ObjectAtIndexedSubscript(index int) *AudioUnitBus {
 	errkit.CheckIndex(index, x.Count())
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), index)
 	return AudioUnitBusFromID(_r)
 }
 
-// Changes the number of busses in the array.
+// SetBusCount changes the number of busses in the array.
 func (x *AudioUnitBusArray) SetBusCount(count int) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setBusCount:error:"), count, unsafe.Pointer(&_nsErr))
@@ -95,30 +99,31 @@ func (x *AudioUnitBusArray) SetBusCount(count int) error {
 	return nil
 }
 
+// Count wraps the corresponding Objective-C method.
 func (x *AudioUnitBusArray) Count() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
 	return _r
 }
 
-// Whether the array can have a variable number of busses. The base implementation returns false.
+// IsCountChangeable whether the array can have a variable number of busses. The base implementation returns false.
 func (x *AudioUnitBusArray) IsCountChangeable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCountChangeable"))
 	return _r
 }
 
-// The audio unit that owns the bus.
+// OwnerAudioUnit the audio unit that owns the bus.
 func (x *AudioUnitBusArray) OwnerAudioUnit() *AudioUnit {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ownerAudioUnit"))
 	return AudioUnitFromID(_r)
 }
 
-// Which bus array this is (input or output).
+// BusType which bus array this is (input or output).
 func (x *AudioUnitBusArray) BusType() AudioUnitBusType {
 	_r := objc.Send[AudioUnitBusType](objref.IDOf(x), objc.RegisterName("busType"))
 	return _r
 }
 
-// Replaces the current bus array with a copy of the supplied bus array.
+// ReplaceBusses replaces the current bus array with a copy of the supplied bus array.
 func (x *AudioUnitBusArray) ReplaceBusses(busArray []*AudioUnitBus) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceBusses:"), purego.SliceToNSArray(busArray, func(_v *AudioUnitBus) objc.ID { return objref.IDOf(_v) }))
 }

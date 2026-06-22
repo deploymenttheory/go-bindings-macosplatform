@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that performs interpolation between values specified at different times (keyframes).
-//
 // KeyframeSequence is an idiomatic wrapper over the Objective-C class SKKeyframeSequence.
+//
+// An object that performs interpolation between values specified at different times (keyframes).
 type KeyframeSequence struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func KeyframeSequenceFromID(id objc.ID) *KeyframeSequence {
 	if id == 0 {
 		return nil
 	}
-	x := &KeyframeSequence{Handle: objref.Wrap(purego.Retain(id))}
+	x := &KeyframeSequence{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func keyframeSequenceAdopt(id objc.ID) *KeyframeSequence {
 	if id == 0 {
 		return nil
 	}
-	x := &KeyframeSequence{Handle: objref.Wrap(id)}
+	x := &KeyframeSequence{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,117 +60,117 @@ func (x *KeyframeSequence) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a keyframe sequence with an initial set of values and times.
-//
-// NewKeyframeSequenceWithKeyframeValuesTimes creates a new KeyframeSequence.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *KeyframeSequence) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewKeyframeSequenceWithKeyframeValuesTimes initializes a keyframe sequence with an initial set of values and times.
 func NewKeyframeSequenceWithKeyframeValuesTimes(values obj.Object, times []obj.Object) *KeyframeSequence {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKKeyframeSequence")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKeyframeValues:times:"), objref.IDOf(values), purego.SliceToNSArray(times, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return keyframeSequenceAdopt(_id)
 }
 
-// Initializes a new keyframe sequence.
-//
-// NewKeyframeSequenceWithCapacity creates a new KeyframeSequence.
+// NewKeyframeSequenceWithCapacity initializes a new keyframe sequence.
 func NewKeyframeSequenceWithCapacity(numItems int) *KeyframeSequence {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKKeyframeSequence")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCapacity:"), numItems)
 	return keyframeSequenceAdopt(_id)
 }
 
-// Support coding and decoding via NSKeyedArchiver.
-//
-// NewKeyframeSequenceWithCoder creates a new KeyframeSequence.
+// NewKeyframeSequenceWithCoder support coding and decoding via NSKeyedArchiver.
 func NewKeyframeSequenceWithCoder(aDecoder obj.Object) *KeyframeSequence {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKKeyframeSequence")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return keyframeSequenceAdopt(_id)
 }
 
-// The mode used to determine how values for times between the keyframes are calculated.
-//
-// WithInterpolationMode sets interpolationMode and returns the receiver so calls can be chained.
+// WithInterpolationMode the mode used to determine how values for times between the keyframes are calculated.
 func (x *KeyframeSequence) WithInterpolationMode(interpolationMode InterpolationMode) *KeyframeSequence {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolationMode:"), interpolationMode)
 	return x
 }
 
-// The mode used to determine how the keyframe sequence repeats.
-//
-// WithRepeatMode sets repeatMode and returns the receiver so calls can be chained.
+// WithRepeatMode the mode used to determine how the keyframe sequence repeats.
 func (x *KeyframeSequence) WithRepeatMode(repeatMode RepeatMode) *KeyframeSequence {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepeatMode:"), repeatMode)
 	return x
 }
 
-// The number of keyframes in the sequence.
+// Count the number of keyframes in the sequence.
 func (x *KeyframeSequence) Count() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
 	return _r
 }
 
-// Adds a keyframe to the sequence.
+// AddKeyframeValueTime adds a keyframe to the sequence.
 func (x *KeyframeSequence) AddKeyframeValueTime(value obj.Object, time_ float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addKeyframeValue:time:"), objref.IDOf(value), time_)
 }
 
-// Removes the last value in the sequence.
+// RemoveLastKeyframe removes the last value in the sequence.
 func (x *KeyframeSequence) RemoveLastKeyframe() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeLastKeyframe"))
 }
 
-// Removes a keyframe from the sequence.
+// RemoveKeyframeAtIndex removes a keyframe from the sequence.
 func (x *KeyframeSequence) RemoveKeyframeAtIndex(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeKeyframeAtIndex:"), index)
 }
 
-// Changes the value for a specific keyframe.
+// SetKeyframeValueForIndex changes the value for a specific keyframe.
 func (x *KeyframeSequence) SetKeyframeValueForIndex(value obj.Object, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyframeValue:forIndex:"), objref.IDOf(value), index)
 }
 
-// Changes the time for a specific keyframe.
+// SetKeyframeTimeForIndex changes the time for a specific keyframe.
 func (x *KeyframeSequence) SetKeyframeTimeForIndex(time_ float64, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyframeTime:forIndex:"), time_, index)
 }
 
-// Replaces a keyframe in the sequence with a new keyframe.
+// SetKeyframeValueTimeForIndex replaces a keyframe in the sequence with a new keyframe.
 func (x *KeyframeSequence) SetKeyframeValueTimeForIndex(value obj.Object, time_ float64, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyframeValue:time:forIndex:"), objref.IDOf(value), time_, index)
 }
 
-// Gets the value for a keyframe in the sequence.
+// GetKeyframeValueForIndex gets the value for a keyframe in the sequence.
 func (x *KeyframeSequence) GetKeyframeValueForIndex(index int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getKeyframeValueForIndex:"), index)
 	return obj.Wrap(_r)
 }
 
-// Gets the time for a keyframe in the sequence.
+// GetKeyframeTimeForIndex gets the time for a keyframe in the sequence.
 func (x *KeyframeSequence) GetKeyframeTimeForIndex(index int) float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("getKeyframeTimeForIndex:"), index)
 	return _r
 }
 
-// Calculates the sample at a particular time.
+// SampleAtTime calculates the sample at a particular time.
 func (x *KeyframeSequence) SampleAtTime(time_ float64) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleAtTime:"), time_)
 	return obj.Wrap(_r)
 }
 
+// InterpolationMode wraps the corresponding Objective-C method.
 func (x *KeyframeSequence) InterpolationMode() InterpolationMode {
 	_r := objc.Send[InterpolationMode](objref.IDOf(x), objc.RegisterName("interpolationMode"))
 	return _r
 }
 
+// SetInterpolationMode wraps the corresponding Objective-C method.
 func (x *KeyframeSequence) SetInterpolationMode(interpolationMode InterpolationMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolationMode:"), interpolationMode)
 }
 
+// RepeatMode wraps the corresponding Objective-C method.
 func (x *KeyframeSequence) RepeatMode() RepeatMode {
 	_r := objc.Send[RepeatMode](objref.IDOf(x), objc.RegisterName("repeatMode"))
 	return _r
 }
 
+// SetRepeatMode wraps the corresponding Objective-C method.
 func (x *KeyframeSequence) SetRepeatMode(repeatMode RepeatMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepeatMode:"), repeatMode)
 }

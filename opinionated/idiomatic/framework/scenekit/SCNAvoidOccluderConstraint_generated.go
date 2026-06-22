@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // AvoidOccluderConstraint is an idiomatic wrapper over the Objective-C class SCNAvoidOccluderConstraint.
+//
+// It embeds [Constraint], promoting that type's methods.
 type AvoidOccluderConstraint struct {
-	objref.Handle
+	Constraint
 }
 
 // AvoidOccluderConstraintFromID adopts an existing Objective-C object as a AvoidOccluderConstraint
@@ -23,7 +24,8 @@ func AvoidOccluderConstraintFromID(id objc.ID) *AvoidOccluderConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &AvoidOccluderConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AvoidOccluderConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func avoidOccluderConstraintAdopt(id objc.ID) *AvoidOccluderConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &AvoidOccluderConstraint{Handle: objref.Wrap(id)}
+	x := &AvoidOccluderConstraint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AvoidOccluderConstraint) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AvoidOccluderConstraint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AvoidOccluderConstraint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAvoidOccluderConstraint creates a new AvoidOccluderConstraint.
@@ -62,80 +50,71 @@ func NewAvoidOccluderConstraint() *AvoidOccluderConstraint {
 	return avoidOccluderConstraintAdopt(_id)
 }
 
-// Defines the target node
-//
-// WithTarget sets target and returns the receiver so calls can be chained.
+// WithTarget defines the target node
 func (x *AvoidOccluderConstraint) WithTarget(target NodeProvider) *AvoidOccluderConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// Defines the category of node to consider as occluder. Defaults to 1.
-//
-// WithOccluderCategoryBitMask sets occluderCategoryBitMask and returns the receiver so calls can be chained.
+// WithOccluderCategoryBitMask defines the category of node to consider as occluder. Defaults to 1.
 func (x *AvoidOccluderConstraint) WithOccluderCategoryBitMask(occluderCategoryBitMask int) *AvoidOccluderConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOccluderCategoryBitMask:"), occluderCategoryBitMask)
 	return x
 }
 
-// Defines the bias the apply after moving the receiver to avoid occluders. Defaults to 10e-5. A positive bias will move the receiver closer to the target.
-//
-// WithBias sets bias and returns the receiver so calls can be chained.
+// WithBias defines the bias the apply after moving the receiver to avoid occluders. Defaults to 10e-5. A positive bias will move the receiver closer to the target.
 func (x *AvoidOccluderConstraint) WithBias(bias float64) *AvoidOccluderConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 	return x
 }
 
-// Determines whether the constraint is enabled or not. Defaults to YES.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled determines whether the constraint is enabled or not. Defaults to YES.
 func (x *AvoidOccluderConstraint) WithEnabled(enabled bool) *AvoidOccluderConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The influence of the constraint on the node’s transformation.
-//
-// WithInfluenceFactor sets influenceFactor and returns the receiver so calls can be chained.
+// WithInfluenceFactor the influence of the constraint on the node’s transformation.
 func (x *AvoidOccluderConstraint) WithInfluenceFactor(influenceFactor float64) *AvoidOccluderConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
 	return x
 }
 
-// Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
-//
-// WithIncremental sets incremental and returns the receiver so calls can be chained.
+// WithIncremental specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
 func (x *AvoidOccluderConstraint) WithIncremental(incremental bool) *AvoidOccluderConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
 	return x
 }
 
-// Defines the target node
+// Target defines the target node
 func (x *AvoidOccluderConstraint) Target() *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
 	return NodeFromID(_r)
 }
 
+// SetTarget wraps the corresponding Objective-C method.
 func (x *AvoidOccluderConstraint) SetTarget(target *Node) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 }
 
-// Defines the category of node to consider as occluder. Defaults to 1.
+// OccluderCategoryBitMask defines the category of node to consider as occluder. Defaults to 1.
 func (x *AvoidOccluderConstraint) OccluderCategoryBitMask() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("occluderCategoryBitMask"))
 	return _r
 }
 
+// SetOccluderCategoryBitMask wraps the corresponding Objective-C method.
 func (x *AvoidOccluderConstraint) SetOccluderCategoryBitMask(occluderCategoryBitMask int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOccluderCategoryBitMask:"), occluderCategoryBitMask)
 }
 
-// Defines the bias the apply after moving the receiver to avoid occluders. Defaults to 10e-5. A positive bias will move the receiver closer to the target.
+// Bias defines the bias the apply after moving the receiver to avoid occluders. Defaults to 10e-5. A positive bias will move the receiver closer to the target.
 func (x *AvoidOccluderConstraint) Bias() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("bias"))
 	return _r
 }
 
+// SetBias wraps the corresponding Objective-C method.
 func (x *AvoidOccluderConstraint) SetBias(bias float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 }
@@ -158,3 +137,5 @@ type AvoidOccluderConstraintable interface {
 }
 
 var _ AvoidOccluderConstraintable = (*AvoidOccluderConstraint)(nil)
+
+var _ ConstraintProvider = (*AvoidOccluderConstraint)(nil)

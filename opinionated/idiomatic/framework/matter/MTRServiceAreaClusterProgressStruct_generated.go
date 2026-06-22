@@ -23,7 +23,8 @@ func MTRServiceAreaClusterProgressStructFromID(id objc.ID) *MTRServiceAreaCluste
 	if id == 0 {
 		return nil
 	}
-	x := &MTRServiceAreaClusterProgressStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRServiceAreaClusterProgressStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRServiceAreaClusterProgressStructAdopt(id objc.ID) *MTRServiceAreaCluster
 	if id == 0 {
 		return nil
 	}
-	x := &MTRServiceAreaClusterProgressStruct{Handle: objref.Wrap(id)}
+	x := &MTRServiceAreaClusterProgressStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,53 +58,65 @@ func (x *MTRServiceAreaClusterProgressStruct) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRServiceAreaClusterProgressStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRServiceAreaClusterProgressStruct creates a new MTRServiceAreaClusterProgressStruct.
 func NewMTRServiceAreaClusterProgressStruct() *MTRServiceAreaClusterProgressStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRServiceAreaClusterProgressStruct")), objc.RegisterName("new"))
 	return mTRServiceAreaClusterProgressStructAdopt(_id)
 }
 
-// WithAreaID sets areaID and returns the receiver so calls can be chained.
+// WithAreaID sets the property and returns the receiver so calls can be chained.
 func (x *MTRServiceAreaClusterProgressStruct) WithAreaID(areaID obj.Object) *MTRServiceAreaClusterProgressStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaID:"), objref.IDOf(areaID))
 	return x
 }
 
-// WithStatus sets status and returns the receiver so calls can be chained.
+// WithStatus sets the property and returns the receiver so calls can be chained.
 func (x *MTRServiceAreaClusterProgressStruct) WithStatus(status obj.Object) *MTRServiceAreaClusterProgressStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return x
 }
 
-// WithTotalOperationalTime sets totalOperationalTime and returns the receiver so calls can be chained.
+// WithTotalOperationalTime sets the property and returns the receiver so calls can be chained.
 func (x *MTRServiceAreaClusterProgressStruct) WithTotalOperationalTime(totalOperationalTime obj.Object) *MTRServiceAreaClusterProgressStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTotalOperationalTime:"), objref.IDOf(totalOperationalTime))
 	return x
 }
 
+// AreaID wraps the corresponding Objective-C method.
 func (x *MTRServiceAreaClusterProgressStruct) AreaID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("areaID"))
 	return obj.Wrap(_r)
 }
 
+// SetAreaID wraps the corresponding Objective-C method.
 func (x *MTRServiceAreaClusterProgressStruct) SetAreaID(areaID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaID:"), objref.IDOf(areaID))
 }
 
+// Status wraps the corresponding Objective-C method.
 func (x *MTRServiceAreaClusterProgressStruct) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
+// SetStatus wraps the corresponding Objective-C method.
 func (x *MTRServiceAreaClusterProgressStruct) SetStatus(status obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 }
 
+// TotalOperationalTime wraps the corresponding Objective-C method.
 func (x *MTRServiceAreaClusterProgressStruct) TotalOperationalTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalOperationalTime"))
 	return obj.Wrap(_r)
 }
 
+// SetTotalOperationalTime wraps the corresponding Objective-C method.
 func (x *MTRServiceAreaClusterProgressStruct) SetTotalOperationalTime(totalOperationalTime obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTotalOperationalTime:"), objref.IDOf(totalOperationalTime))
 }

@@ -6,15 +6,16 @@ package naturallanguage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A tokenizer that segments natural language text into semantic units.
-//
 // Tokenizer is an idiomatic wrapper over the Objective-C class NLTokenizer.
+//
+// A tokenizer that segments natural language text into semantic units.
 type Tokenizer struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func TokenizerFromID(id objc.ID) *Tokenizer {
 	if id == 0 {
 		return nil
 	}
-	x := &Tokenizer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Tokenizer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func tokenizerAdopt(id objc.ID) *Tokenizer {
 	if id == 0 {
 		return nil
 	}
-	x := &Tokenizer{Handle: objref.Wrap(id)}
+	x := &Tokenizer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,41 +61,55 @@ func (x *Tokenizer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a tokenizer with the specified unit.
-//
-// NewTokenizerWithUnit creates a new Tokenizer.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Tokenizer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTokenizerWithUnit creates a tokenizer with the specified unit.
 func NewTokenizerWithUnit(unit TokenUnit) *Tokenizer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NLTokenizer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUnit:"), unit)
 	return tokenizerAdopt(_id)
 }
 
-// The text to be tokenized.
-//
-// WithString sets string_ and returns the receiver so calls can be chained.
+// WithString the text to be tokenized.
 func (x *Tokenizer) WithString(string_ string) *Tokenizer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:"), purego.NSString(string_))
 	return x
 }
 
-// Sets the language of the text to be tokenized.
+// SetLanguage sets the language of the text to be tokenized.
 func (x *Tokenizer) SetLanguage(language obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguage:"), objref.IDOf(language))
 }
 
+// TokenRangeAtIndex finds the range of the token at the given index.
+func (x *Tokenizer) TokenRangeAtIndex(characterIndex int) foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("tokenRangeAtIndex:"), characterIndex)
+	return _r
+}
+
+// TokenRangeForRange finds the entire range of all tokens contained completely or partially within the specified range.
+func (x *Tokenizer) TokenRangeForRange(range_ foundation.NSRange) foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("tokenRangeForRange:"), range_)
+	return _r
+}
+
+// TokensForRange tokenizes the string within the provided range.
+func (x *Tokenizer) TokensForRange(range_ foundation.NSRange) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tokensForRange:"), range_)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// Unit wraps the corresponding Objective-C method.
 func (x *Tokenizer) Unit() TokenUnit {
 	_r := objc.Send[TokenUnit](objref.IDOf(x), objc.RegisterName("unit"))
 	return _r
 }
 
-func (x *Tokenizer) String() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("string"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
-}
-
+// SetString wraps the corresponding Objective-C method.
 func (x *Tokenizer) SetString(string_ string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:"), purego.NSString(string_))
 }
@@ -102,8 +119,10 @@ type Tokenizerable interface {
 	obj.Object
 	WithString(string_ string) *Tokenizer
 	SetLanguage(language obj.Object)
+	TokenRangeAtIndex(characterIndex int) foundation.NSRange
+	TokenRangeForRange(range_ foundation.NSRange) foundation.NSRange
+	TokensForRange(range_ foundation.NSRange) []obj.Object
 	Unit() TokenUnit
-	String() string
 	SetString(string_ string)
 }
 

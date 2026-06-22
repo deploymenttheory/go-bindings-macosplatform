@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBaseClusterRVCRunMode is an idiomatic wrapper over the Objective-C class MTRBaseClusterRVCRunMode.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
 type MTRBaseClusterRVCRunMode struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterRVCRunModeFromID adopts an existing Objective-C object as a MTRBaseClusterRVCRunMode
@@ -25,7 +26,8 @@ func MTRBaseClusterRVCRunModeFromID(id objc.ID) *MTRBaseClusterRVCRunMode {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterRVCRunMode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterRVCRunMode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,39 +40,23 @@ func mTRBaseClusterRVCRunModeAdopt(id objc.ID) *MTRBaseClusterRVCRunMode {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterRVCRunMode{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterRVCRunMode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterRVCRunMode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterRVCRunMode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterRVCRunMode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterRVCRunModeWithDeviceEndpointIDQueue creates a new MTRBaseClusterRVCRunMode.
+// NewMTRBaseClusterRVCRunModeWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterRVCRunModeWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterRVCRunMode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterRVCRunMode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterRVCRunModeAdopt(_id)
 }
 
-// Command ChangeToMode This command is used to change device modes. On receipt of this command the device SHALL respond with a ChangeToModeResponse command.
+// ChangeToModeWithParamsCompletion command ChangeToMode This command is used to change device modes. On receipt of this command the device SHALL respond with a ChangeToModeResponse command.
 //
 // ChangeToModeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCRunMode) ChangeToModeWithParamsCompletion(ctx context.Context, params *MTRRVCRunModeClusterChangeToModeParams) (*MTRRVCRunModeClusterChangeToModeResponseParams, error) {
+func (x *MTRBaseClusterRVCRunMode) ChangeToModeWithParamsCompletion(ctx context.Context, params *MTRRVCRunModeClusterChangeToModeParams) (result *MTRRVCRunModeClusterChangeToModeResponseParams, err error) {
 	type _result struct {
 		val *MTRRVCRunModeClusterChangeToModeResponseParams
 		err error
@@ -92,8 +78,10 @@ func (x *MTRBaseClusterRVCRunMode) ChangeToModeWithParamsCompletion(ctx context.
 	}
 }
 
+// ReadAttributeSupportedModesWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSupportedModesWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCRunMode) ReadAttributeSupportedModesWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterRVCRunMode) ReadAttributeSupportedModesWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -115,8 +103,10 @@ func (x *MTRBaseClusterRVCRunMode) ReadAttributeSupportedModesWithCompletion(ctx
 	}
 }
 
+// SubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCRunMode) SubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterRVCRunMode) SubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -138,8 +128,10 @@ func (x *MTRBaseClusterRVCRunMode) SubscribeAttributeSupportedModesWithParamsSub
 	}
 }
 
+// ReadAttributeCurrentModeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentModeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCRunMode) ReadAttributeCurrentModeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterRVCRunMode) ReadAttributeCurrentModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -161,8 +153,10 @@ func (x *MTRBaseClusterRVCRunMode) ReadAttributeCurrentModeWithCompletion(ctx co
 	}
 }
 
+// SubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCRunMode) SubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterRVCRunMode) SubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -184,8 +178,10 @@ func (x *MTRBaseClusterRVCRunMode) SubscribeAttributeCurrentModeWithParamsSubscr
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCRunMode) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterRVCRunMode) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -207,8 +203,10 @@ func (x *MTRBaseClusterRVCRunMode) ReadAttributeGeneratedCommandListWithCompleti
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCRunMode) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterRVCRunMode) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -230,8 +228,10 @@ func (x *MTRBaseClusterRVCRunMode) SubscribeAttributeGeneratedCommandListWithPar
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCRunMode) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterRVCRunMode) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -253,8 +253,10 @@ func (x *MTRBaseClusterRVCRunMode) ReadAttributeAcceptedCommandListWithCompletio
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCRunMode) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterRVCRunMode) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -276,8 +278,10 @@ func (x *MTRBaseClusterRVCRunMode) SubscribeAttributeAcceptedCommandListWithPara
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCRunMode) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterRVCRunMode) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -299,8 +303,10 @@ func (x *MTRBaseClusterRVCRunMode) ReadAttributeAttributeListWithCompletion(ctx 
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCRunMode) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterRVCRunMode) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -322,8 +328,10 @@ func (x *MTRBaseClusterRVCRunMode) SubscribeAttributeAttributeListWithParamsSubs
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCRunMode) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterRVCRunMode) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -345,8 +353,10 @@ func (x *MTRBaseClusterRVCRunMode) ReadAttributeFeatureMapWithCompletion(ctx con
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCRunMode) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterRVCRunMode) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -368,8 +378,10 @@ func (x *MTRBaseClusterRVCRunMode) SubscribeAttributeFeatureMapWithParamsSubscri
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCRunMode) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterRVCRunMode) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -391,8 +403,10 @@ func (x *MTRBaseClusterRVCRunMode) ReadAttributeClusterRevisionWithCompletion(ct
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCRunMode) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterRVCRunMode) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -435,3 +449,7 @@ type MTRBaseClusterRVCRunModeable interface {
 }
 
 var _ MTRBaseClusterRVCRunModeable = (*MTRBaseClusterRVCRunMode)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterRVCRunMode)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterRVCRunMode)(nil)

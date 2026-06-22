@@ -14,9 +14,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object to create and manage a Personal VPN configuration.
-//
 // NEVPNManager is an idiomatic wrapper over the Objective-C class NEVPNManager.
+//
+// NEVPNManager is an abstract base — you do not construct it directly. Construct one of [NETransparentProxyManager], [NETunnelProviderManager] and pass it where a NEVPNManager is accepted.
+//
+// An object to create and manage a Personal VPN configuration.
 type NEVPNManager struct {
 	objref.Handle
 }
@@ -27,7 +29,8 @@ func NEVPNManagerFromID(id objc.ID) *NEVPNManager {
 	if id == 0 {
 		return nil
 	}
-	x := &NEVPNManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEVPNManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +43,8 @@ func nEVPNManagerAdopt(id objc.ID) *NEVPNManager {
 	if id == 0 {
 		return nil
 	}
-	x := &NEVPNManager{Handle: objref.Wrap(id)}
+	x := &NEVPNManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,62 +64,50 @@ func (x *NEVPNManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewNEVPNManager creates a new NEVPNManager.
-func NewNEVPNManager() *NEVPNManager {
-	_id := objc.Send[objc.ID](objc.ID(_class("NEVPNManager")), objc.RegisterName("new"))
-	return nEVPNManagerAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEVPNManager) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// An ordered list of Connect On Demand rules.
-//
-// WithOnDemandRules sets the collection and returns the receiver so calls can be chained.
+// WithOnDemandRules an ordered list of Connect On Demand rules.
 func (x *NEVPNManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NEVPNManager {
 	_arr := purego.SliceToNSArray(items, func(_v NEOnDemandRuleProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnDemandRules:"), _arr)
 	return x
 }
 
-// A Boolean used to toggle the Connect On Demand capability.
-//
-// WithOnDemandEnabled sets onDemandEnabled and returns the receiver so calls can be chained.
+// WithOnDemandEnabled a Boolean used to toggle the Connect On Demand capability.
 func (x *NEVPNManager) WithOnDemandEnabled(onDemandEnabled bool) *NEVPNManager {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnDemandEnabled:"), onDemandEnabled)
 	return x
 }
 
-// A string containing the display name of the VPN configuration.
-//
-// WithLocalizedDescription sets localizedDescription and returns the receiver so calls can be chained.
+// WithLocalizedDescription a string containing the display name of the VPN configuration.
 func (x *NEVPNManager) WithLocalizedDescription(localizedDescription string) *NEVPNManager {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
 	return x
 }
 
-// An NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
-//
-// WithProtocol sets protocol and returns the receiver so calls can be chained.
+// WithProtocol an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
 func (x *NEVPNManager) WithProtocol(protocol NEVPNProtocolProvider) *NEVPNManager {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocol:"), objref.IDOf(protocol))
 	return x
 }
 
-// An NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
-//
-// WithProtocolConfiguration sets protocolConfiguration and returns the receiver so calls can be chained.
+// WithProtocolConfiguration an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
 func (x *NEVPNManager) WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NEVPNManager {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocolConfiguration:"), objref.IDOf(protocolConfiguration))
 	return x
 }
 
-// A Boolean used to toggle the enabled state of the VPN configuration.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean used to toggle the enabled state of the VPN configuration.
 func (x *NEVPNManager) WithEnabled(enabled bool) *NEVPNManager {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// Load the VPN configuration from the Network Extension preferences.
+// LoadFromPreferences load the VPN configuration from the Network Extension preferences.
 //
 // LoadFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEVPNManager) LoadFromPreferences(ctx context.Context) error {
@@ -134,7 +126,7 @@ func (x *NEVPNManager) LoadFromPreferences(ctx context.Context) error {
 	}
 }
 
-// Remove the VPN configuration from the Network Extension preferences.
+// RemoveFromPreferences remove the VPN configuration from the Network Extension preferences.
 //
 // RemoveFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEVPNManager) RemoveFromPreferences(ctx context.Context) error {
@@ -153,7 +145,7 @@ func (x *NEVPNManager) RemoveFromPreferences(ctx context.Context) error {
 	}
 }
 
-// Save the VPN configuration in the Network Extension preferences.
+// SaveToPreferences save the VPN configuration in the Network Extension preferences.
 //
 // SaveToPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEVPNManager) SaveToPreferences(ctx context.Context) error {
@@ -172,12 +164,12 @@ func (x *NEVPNManager) SaveToPreferences(ctx context.Context) error {
 	}
 }
 
-// This function sets an authorization object that can be used to obtain the authorization rights necessary to modify the system VPN configuration.
+// SetAuthorization this function sets an authorization object that can be used to obtain the authorization rights necessary to modify the system VPN configuration.
 func (x *NEVPNManager) SetAuthorization(authorization obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthorization:"), objref.IDOf(authorization))
 }
 
-// An array of NEOnDemandRule objects.
+// OnDemandRules an array of NEOnDemandRule objects.
 //
 // OnDemandRules returns the collection as a Go slice.
 func (x *NEVPNManager) OnDemandRules() []*NEOnDemandRule {
@@ -185,21 +177,23 @@ func (x *NEVPNManager) OnDemandRules() []*NEOnDemandRule {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEOnDemandRule { return NEOnDemandRuleFromID(_id) })
 }
 
+// SetOnDemandRules wraps the corresponding Objective-C method.
 func (x *NEVPNManager) SetOnDemandRules(onDemandRules []*NEOnDemandRule) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnDemandRules:"), purego.SliceToNSArray(onDemandRules, func(_v *NEOnDemandRule) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Toggles VPN On Demand.
+// IsOnDemandEnabled toggles VPN On Demand.
 func (x *NEVPNManager) IsOnDemandEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOnDemandEnabled"))
 	return _r
 }
 
+// SetOnDemandEnabled wraps the corresponding Objective-C method.
 func (x *NEVPNManager) SetOnDemandEnabled(onDemandEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnDemandEnabled:"), onDemandEnabled)
 }
 
-// A string containing a description of the VPN.
+// LocalizedDescription a string containing a description of the VPN.
 func (x *NEVPNManager) LocalizedDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
@@ -208,42 +202,46 @@ func (x *NEVPNManager) LocalizedDescription() string {
 	return purego.GoString(_r)
 }
 
+// SetLocalizedDescription wraps the corresponding Objective-C method.
 func (x *NEVPNManager) SetLocalizedDescription(localizedDescription string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
 }
 
-// An NEVPNProtocol object containing the protocol-specific portion of the VPN configuration.
+// Protocol an NEVPNProtocol object containing the protocol-specific portion of the VPN configuration.
 func (x *NEVPNManager) Protocol() *NEVPNProtocol {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocol"))
 	return NEVPNProtocolFromID(_r)
 }
 
+// SetProtocol wraps the corresponding Objective-C method.
 func (x *NEVPNManager) SetProtocol(protocol *NEVPNProtocol) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocol:"), objref.IDOf(protocol))
 }
 
-// An NEVPNProtocol object containing the protocol-specific portion of the VPN configuration.
+// ProtocolConfiguration an NEVPNProtocol object containing the protocol-specific portion of the VPN configuration.
 func (x *NEVPNManager) ProtocolConfiguration() *NEVPNProtocol {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocolConfiguration"))
 	return NEVPNProtocolFromID(_r)
 }
 
+// SetProtocolConfiguration wraps the corresponding Objective-C method.
 func (x *NEVPNManager) SetProtocolConfiguration(protocolConfiguration *NEVPNProtocol) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocolConfiguration:"), objref.IDOf(protocolConfiguration))
 }
 
-// The NEVPNConnection object used for controlling the VPN tunnel.
+// Connection the NEVPNConnection object used for controlling the VPN tunnel.
 func (x *NEVPNManager) Connection() *NEVPNConnection {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connection"))
 	return NEVPNConnectionFromID(_r)
 }
 
-// Toggles the enabled status of the VPN. Setting this property will disable VPN configurations of other apps. This property will be set to NO  when other VPN configurations are enabled.
+// IsEnabled toggles the enabled status of the VPN. Setting this property will disable VPN configurations of other apps. This property will be set to NO  when other VPN configurations are enabled.
 func (x *NEVPNManager) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r
 }
 
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *NEVPNManager) SetEnabled(enabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
@@ -277,3 +275,10 @@ type NEVPNManagerable interface {
 }
 
 var _ NEVPNManagerable = (*NEVPNManager)(nil)
+
+// isNEVPNManager marks NEVPNManager — and, by embedding promotion, its
+// subclasses — as a member of the NEVPNManager hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NEVPNManager) isNEVPNManager() {}
+
+var _ NEVPNManagerProvider = (*NEVPNManager)(nil)

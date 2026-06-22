@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of interfaces for setting the language option for the Now Playing item.
-//
 // NowPlayingInfoLanguageOption is an idiomatic wrapper over the Objective-C class MPNowPlayingInfoLanguageOption.
+//
+// A set of interfaces for setting the language option for the Now Playing item.
 type NowPlayingInfoLanguageOption struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NowPlayingInfoLanguageOptionFromID(id objc.ID) *NowPlayingInfoLanguageOptio
 	if id == 0 {
 		return nil
 	}
-	x := &NowPlayingInfoLanguageOption{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NowPlayingInfoLanguageOption{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nowPlayingInfoLanguageOptionAdopt(id objc.ID) *NowPlayingInfoLanguageOption
 	if id == 0 {
 		return nil
 	}
-	x := &NowPlayingInfoLanguageOption{Handle: objref.Wrap(id)}
+	x := &NowPlayingInfoLanguageOption{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,34 +60,38 @@ func (x *NowPlayingInfoLanguageOption) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a single language option.
-//
-// NewNowPlayingInfoLanguageOptionWithTypeLanguageTagCharacteristicsDisplayNameIdentifier creates a new NowPlayingInfoLanguageOption.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NowPlayingInfoLanguageOption) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNowPlayingInfoLanguageOptionWithTypeLanguageTagCharacteristicsDisplayNameIdentifier creates a single language option.
 func NewNowPlayingInfoLanguageOptionWithTypeLanguageTagCharacteristicsDisplayNameIdentifier(languageOptionType NowPlayingInfoLanguageOptionType, languageTag string, languageOptionCharacteristics []string, displayName string, identifier string) *NowPlayingInfoLanguageOption {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPNowPlayingInfoLanguageOption")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:languageTag:characteristics:displayName:identifier:"), languageOptionType, purego.NSString(languageTag), purego.SliceToNSArray(languageOptionCharacteristics, func(_v string) objc.ID { return purego.NSString(_v) }), purego.NSString(displayName), purego.NSString(identifier))
 	return nowPlayingInfoLanguageOptionAdopt(_id)
 }
 
-// Returns a Boolean value that determines whether to use the best legible language option based on the system preferences.
+// IsAutomaticLegibleLanguageOption returns a Boolean value that determines whether to use the best legible language option based on the system preferences.
 func (x *NowPlayingInfoLanguageOption) IsAutomaticLegibleLanguageOption() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAutomaticLegibleLanguageOption"))
 	return _r
 }
 
-// Returns a Boolean value that determines whether to use the best audible language option based on the system preferences.
+// IsAutomaticAudibleLanguageOption returns a Boolean value that determines whether to use the best audible language option based on the system preferences.
 func (x *NowPlayingInfoLanguageOption) IsAutomaticAudibleLanguageOption() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAutomaticAudibleLanguageOption"))
 	return _r
 }
 
-// The type of language option.
+// LanguageOptionType the type of language option.
 func (x *NowPlayingInfoLanguageOption) LanguageOptionType() NowPlayingInfoLanguageOptionType {
 	_r := objc.Send[NowPlayingInfoLanguageOptionType](objref.IDOf(x), objc.RegisterName("languageOptionType"))
 	return _r
 }
 
-// The IETF BCP 47 language tag. A nil languageTag reprsents that this option should be disabled. A languageTag with the value of MPLangaugeOptionAutoLangaugeTag represents that the best langauge based on the system preferences should be used.
+// LanguageTag the IETF BCP 47 language tag. A nil languageTag reprsents that this option should be disabled. A languageTag with the value of MPLangaugeOptionAutoLangaugeTag represents that the best langauge based on the system preferences should be used.
 func (x *NowPlayingInfoLanguageOption) LanguageTag() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageTag"))
 	if _r == 0 {
@@ -94,7 +100,7 @@ func (x *NowPlayingInfoLanguageOption) LanguageTag() string {
 	return purego.GoString(_r)
 }
 
-// Characteristics describing the content of the language options. See the LanguageOptionCharacteristics for the most commonly used values.
+// LanguageOptionCharacteristics characteristics describing the content of the language options. See the LanguageOptionCharacteristics for the most commonly used values.
 //
 // LanguageOptionCharacteristics returns the collection as a Go slice.
 func (x *NowPlayingInfoLanguageOption) LanguageOptionCharacteristics() []string {
@@ -102,7 +108,7 @@ func (x *NowPlayingInfoLanguageOption) LanguageOptionCharacteristics() []string 
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// A user presentable display name for this option.
+// DisplayName a user presentable display name for this option.
 func (x *NowPlayingInfoLanguageOption) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
 	if _r == 0 {
@@ -111,7 +117,7 @@ func (x *NowPlayingInfoLanguageOption) DisplayName() string {
 	return purego.GoString(_r)
 }
 
-// A unique identifier representing this option.
+// Identifier a unique identifier representing this option.
 func (x *NowPlayingInfoLanguageOption) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {

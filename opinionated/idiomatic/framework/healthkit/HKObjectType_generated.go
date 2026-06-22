@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract superclass with subclasses that identify a specific type of data for the HealthKit store.
-//
 // ObjectType is an idiomatic wrapper over the Objective-C class HKObjectType.
+//
+// ObjectType is an abstract base — you do not construct it directly. Construct one of [ActivitySummaryType], [CharacteristicType], [SampleType], [UserAnnotatedMedicationType] and pass it where a ObjectType is accepted.
+//
+// An abstract superclass with subclasses that identify a specific type of data for the HealthKit store.
 type ObjectType struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ObjectTypeFromID(id objc.ID) *ObjectType {
 	if id == 0 {
 		return nil
 	}
-	x := &ObjectType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ObjectType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func objectTypeAdopt(id objc.ID) *ObjectType {
 	if id == 0 {
 		return nil
 	}
-	x := &ObjectType{Handle: objref.Wrap(id)}
+	x := &ObjectType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +62,19 @@ func (x *ObjectType) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewObjectType creates a new ObjectType.
-func NewObjectType() *ObjectType {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("new"))
-	return objectTypeAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ObjectType) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns a Boolean that indicates whether the data type requires per-object authorization.
+// RequiresPerObjectAuthorization returns a Boolean that indicates whether the data type requires per-object authorization.
 func (x *ObjectType) RequiresPerObjectAuthorization() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresPerObjectAuthorization"))
 	return _r
 }
 
-// A unique string identifying a type of health object. See HKTypeIdentifiers.h for possible values.
+// Identifier a unique string identifying a type of health object. See HKTypeIdentifiers.h for possible values.
 func (x *ObjectType) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -87,3 +91,10 @@ type ObjectTypeable interface {
 }
 
 var _ ObjectTypeable = (*ObjectType)(nil)
+
+// isObjectType marks ObjectType — and, by embedding promotion, its
+// subclasses — as a member of the ObjectType hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ObjectType) isObjectType() {}
+
+var _ ObjectTypeProvider = (*ObjectType)(nil)

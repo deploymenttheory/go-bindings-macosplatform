@@ -6,17 +6,19 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A capture input for recording from a screen in macOS.
-//
 // CaptureScreenInput is an idiomatic wrapper over the Objective-C class AVCaptureScreenInput.
+//
+// It embeds [CaptureInput], promoting that type's methods.
+//
+// A capture input for recording from a screen in macOS.
 type CaptureScreenInput struct {
-	objref.Handle
+	CaptureInput
 }
 
 // CaptureScreenInputFromID adopts an existing Objective-C object as a CaptureScreenInput
@@ -25,7 +27,8 @@ func CaptureScreenInputFromID(id objc.ID) *CaptureScreenInput {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureScreenInput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptureScreenInput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func captureScreenInputAdopt(id objc.ID) *CaptureScreenInput {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureScreenInput{Handle: objref.Wrap(id)}
+	x := &CaptureScreenInput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CaptureScreenInput) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptureScreenInput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptureScreenInput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCaptureScreenInput creates a new CaptureScreenInput.
@@ -64,83 +53,94 @@ func NewCaptureScreenInput() *CaptureScreenInput {
 	return captureScreenInputAdopt(_id)
 }
 
-// Initializes a capture screen input that provides media data from the specified display.
-//
-// NewCaptureScreenInputWithDisplayID creates a new CaptureScreenInput.
+// NewCaptureScreenInputWithDisplayID initializes a capture screen input that provides media data from the specified display.
 func NewCaptureScreenInputWithDisplayID(displayID uint32) *CaptureScreenInput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptureScreenInput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplayID:"), displayID)
 	return captureScreenInputAdopt(_id)
 }
 
-// Indicates the factor by which video buffers captured from the screen are to be scaled.
-//
-// WithScaleFactor sets scaleFactor and returns the receiver so calls can be chained.
+// WithCropRect indicates the bounding rectangle of the screen area to be captured, in pixels.
+func (x *CaptureScreenInput) WithCropRect(cropRect corefoundation.CGRect) *CaptureScreenInput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCropRect:"), cropRect)
+	return x
+}
+
+// WithScaleFactor indicates the factor by which video buffers captured from the screen are to be scaled.
 func (x *CaptureScreenInput) WithScaleFactor(scaleFactor float64) *CaptureScreenInput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleFactor:"), scaleFactor)
 	return x
 }
 
-// A Boolean value that specifies whether mouse clicks appear highlighted in the captured output.
-//
-// WithCapturesMouseClicks sets capturesMouseClicks and returns the receiver so calls can be chained.
+// WithCapturesMouseClicks a Boolean value that specifies whether mouse clicks appear highlighted in the captured output.
 func (x *CaptureScreenInput) WithCapturesMouseClicks(capturesMouseClicks bool) *CaptureScreenInput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapturesMouseClicks:"), capturesMouseClicks)
 	return x
 }
 
-// A Boolean value that specifies whether the mouse cursor appears in the captured output.
-//
-// WithCapturesCursor sets capturesCursor and returns the receiver so calls can be chained.
+// WithCapturesCursor a Boolean value that specifies whether the mouse cursor appears in the captured output.
 func (x *CaptureScreenInput) WithCapturesCursor(capturesCursor bool) *CaptureScreenInput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapturesCursor:"), capturesCursor)
 	return x
 }
 
-// A Boolean value that specifies whether the capture input skips duplicate frames.
-//
-// WithRemovesDuplicateFrames sets removesDuplicateFrames and returns the receiver so calls can be chained.
+// WithRemovesDuplicateFrames a Boolean value that specifies whether the capture input skips duplicate frames.
 func (x *CaptureScreenInput) WithRemovesDuplicateFrames(removesDuplicateFrames bool) *CaptureScreenInput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovesDuplicateFrames:"), removesDuplicateFrames)
 	return x
 }
 
-// A property indicating the factor by which video buffers captured from the screen are to be scaled. By default, AVCaptureScreenInput captures the video buffers from the display at a scale factor of 1.0 (no scaling). Set this property to scale the buffers by a given factor. For instance, a 320x240 capture area with a scaleFactor of 2.0f produces video buffers at 640x480.
+// CropRect a property indicating the bounding rectangle of the screen area to be captured in points. By default, AVCaptureScreenInput captures the entire area of the displayID with which it is associated. To limit the capture rectangle to a subsection of the screen, set the cropRect property, which defines a smaller section of the screen in the screen's coordinate system. The origin (0,0) is the bottom-left corner of the screen.
+func (x *CaptureScreenInput) CropRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("cropRect"))
+	return _r
+}
+
+// SetCropRect wraps the corresponding Objective-C method.
+func (x *CaptureScreenInput) SetCropRect(cropRect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCropRect:"), cropRect)
+}
+
+// ScaleFactor a property indicating the factor by which video buffers captured from the screen are to be scaled. By default, AVCaptureScreenInput captures the video buffers from the display at a scale factor of 1.0 (no scaling). Set this property to scale the buffers by a given factor. For instance, a 320x240 capture area with a scaleFactor of 2.0f produces video buffers at 640x480.
 func (x *CaptureScreenInput) ScaleFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactor"))
 	return _r
 }
 
+// SetScaleFactor wraps the corresponding Objective-C method.
 func (x *CaptureScreenInput) SetScaleFactor(scaleFactor float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleFactor:"), scaleFactor)
 }
 
-// A property indicating whether mouse clicks should be highlighted in the captured output. By default, AVCaptureScreenInput does not highlight mouse clicks in its captured output. If this property is set to YES, mouse clicks are highlighted (a circle is drawn around the mouse for the duration of the click) in the captured output.
+// CapturesMouseClicks a property indicating whether mouse clicks should be highlighted in the captured output. By default, AVCaptureScreenInput does not highlight mouse clicks in its captured output. If this property is set to YES, mouse clicks are highlighted (a circle is drawn around the mouse for the duration of the click) in the captured output.
 func (x *CaptureScreenInput) CapturesMouseClicks() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("capturesMouseClicks"))
 	return _r
 }
 
+// SetCapturesMouseClicks wraps the corresponding Objective-C method.
 func (x *CaptureScreenInput) SetCapturesMouseClicks(capturesMouseClicks bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapturesMouseClicks:"), capturesMouseClicks)
 }
 
-// A property indicating whether the cursor should be rendered to the captured output. By default, AVCaptureScreenInput draws the cursor in its captured output. If this property is set to NO, the captured output contains only the windows on the screen. Cursor is omitted. Note that cursor position and mouse button state at the time of capture is preserved in CMSampleBuffers emitted from AVCaptureScreenInput. See the inline documentation for kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers in <CoreMediaIO/CMIOSampleBuffer.h>
+// CapturesCursor a property indicating whether the cursor should be rendered to the captured output. By default, AVCaptureScreenInput draws the cursor in its captured output. If this property is set to NO, the captured output contains only the windows on the screen. Cursor is omitted. Note that cursor position and mouse button state at the time of capture is preserved in CMSampleBuffers emitted from AVCaptureScreenInput. See the inline documentation for kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers in <CoreMediaIO/CMIOSampleBuffer.h>
 func (x *CaptureScreenInput) CapturesCursor() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("capturesCursor"))
 	return _r
 }
 
+// SetCapturesCursor wraps the corresponding Objective-C method.
 func (x *CaptureScreenInput) SetCapturesCursor(capturesCursor bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapturesCursor:"), capturesCursor)
 }
 
-// A property indicating whether duplicate frames should be removed by the input. If this property is set to YES, AVCaptureScreenInput performs frame differencing and when it detects duplicate frames, it drops them. If set to NO, the captured output receives all frames from the input. Prior to 10.9 this value defaulted to YES. In 10.9 and later, it defaults to NO, as modern platforms support frame differencing in hardware-based encoders. As of 10.10, this property has been deprecated and is ignored. Clients wishing to re-create this functionality can use an AVCaptureVideoDataOutput and compare frame contents in their own code. If they wish to write a movie file, they can then pass the unique frames to an AVAssetWriterInput.
+// RemovesDuplicateFrames a property indicating whether duplicate frames should be removed by the input. If this property is set to YES, AVCaptureScreenInput performs frame differencing and when it detects duplicate frames, it drops them. If set to NO, the captured output receives all frames from the input. Prior to 10.9 this value defaulted to YES. In 10.9 and later, it defaults to NO, as modern platforms support frame differencing in hardware-based encoders. As of 10.10, this property has been deprecated and is ignored. Clients wishing to re-create this functionality can use an AVCaptureVideoDataOutput and compare frame contents in their own code. If they wish to write a movie file, they can then pass the unique frames to an AVAssetWriterInput.
 func (x *CaptureScreenInput) RemovesDuplicateFrames() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removesDuplicateFrames"))
 	return _r
 }
 
+// SetRemovesDuplicateFrames wraps the corresponding Objective-C method.
 func (x *CaptureScreenInput) SetRemovesDuplicateFrames(removesDuplicateFrames bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovesDuplicateFrames:"), removesDuplicateFrames)
 }
@@ -148,10 +148,13 @@ func (x *CaptureScreenInput) SetRemovesDuplicateFrames(removesDuplicateFrames bo
 // CaptureScreenInputable is the interface implemented by [CaptureScreenInput], for mocking and DI.
 type CaptureScreenInputable interface {
 	obj.Object
+	WithCropRect(cropRect corefoundation.CGRect) *CaptureScreenInput
 	WithScaleFactor(scaleFactor float64) *CaptureScreenInput
 	WithCapturesMouseClicks(capturesMouseClicks bool) *CaptureScreenInput
 	WithCapturesCursor(capturesCursor bool) *CaptureScreenInput
 	WithRemovesDuplicateFrames(removesDuplicateFrames bool) *CaptureScreenInput
+	CropRect() corefoundation.CGRect
+	SetCropRect(cropRect corefoundation.CGRect)
 	ScaleFactor() float64
 	SetScaleFactor(scaleFactor float64)
 	CapturesMouseClicks() bool
@@ -163,3 +166,5 @@ type CaptureScreenInputable interface {
 }
 
 var _ CaptureScreenInputable = (*CaptureScreenInput)(nil)
+
+var _ CaptureInputProvider = (*CaptureScreenInput)(nil)

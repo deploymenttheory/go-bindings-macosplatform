@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The name, type, and constraints of an input or output feature.
-//
 // FeatureDescription is an idiomatic wrapper over the Objective-C class MLFeatureDescription.
+//
+// The name, type, and constraints of an input or output feature.
 type FeatureDescription struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FeatureDescriptionFromID(id objc.ID) *FeatureDescription {
 	if id == 0 {
 		return nil
 	}
-	x := &FeatureDescription{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FeatureDescription{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func featureDescriptionAdopt(id objc.ID) *FeatureDescription {
 	if id == 0 {
 		return nil
 	}
-	x := &FeatureDescription{Handle: objref.Wrap(id)}
+	x := &FeatureDescription{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *FeatureDescription) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FeatureDescription) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFeatureDescription creates a new FeatureDescription.
 func NewFeatureDescription() *FeatureDescription {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLFeatureDescription")), objc.RegisterName("new"))
 	return featureDescriptionAdopt(_id)
 }
 
-// Checks whether the model will accept an input feature value.
+// IsAllowedValue checks whether the model will accept an input feature value.
 func (x *FeatureDescription) IsAllowedValue(value *FeatureValue) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAllowedValue:"), objref.IDOf(value))
 	return _r
 }
 
-// Name of feature
+// Name name of feature
 func (x *FeatureDescription) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -79,43 +87,43 @@ func (x *FeatureDescription) Name() string {
 	return purego.GoString(_r)
 }
 
-// Type of data
+// Type type of data
 func (x *FeatureDescription) Type() FeatureType {
 	_r := objc.Send[FeatureType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
-// Whether this feature can take an undefined value or not
+// IsOptional whether this feature can take an undefined value or not
 func (x *FeatureDescription) IsOptional() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOptional"))
 	return _r
 }
 
-// Constraint when type == MLFeatureTypeMultiArray, nil otherwise
+// MultiArrayConstraint constraint when type == MLFeatureTypeMultiArray, nil otherwise
 func (x *FeatureDescription) MultiArrayConstraint() *MultiArrayConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("multiArrayConstraint"))
 	return MultiArrayConstraintFromID(_r)
 }
 
-// Constraint when type == MLFeatureTypeImage, nil otherwise
+// ImageConstraint constraint when type == MLFeatureTypeImage, nil otherwise
 func (x *FeatureDescription) ImageConstraint() *ImageConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageConstraint"))
 	return ImageConstraintFromID(_r)
 }
 
-// Constraint when type == MLFeatureTypeDictionary, nil otherwise
+// DictionaryConstraint constraint when type == MLFeatureTypeDictionary, nil otherwise
 func (x *FeatureDescription) DictionaryConstraint() *DictionaryConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryConstraint"))
 	return DictionaryConstraintFromID(_r)
 }
 
-// Constraint when type == MLFeatureTypeSequence, nil otherwise
+// SequenceConstraint constraint when type == MLFeatureTypeSequence, nil otherwise
 func (x *FeatureDescription) SequenceConstraint() *SequenceConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sequenceConstraint"))
 	return SequenceConstraintFromID(_r)
 }
 
-// The state feature value constraint. The property has a value when `.type == MLFeatureTypeState`.
+// StateConstraint the state feature value constraint. The property has a value when `.type == MLFeatureTypeState`.
 func (x *FeatureDescription) StateConstraint() *StateConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateConstraint"))
 	return StateConstraintFromID(_r)

@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ArrayStridedSlice is an idiomatic wrapper over the Objective-C class MPSNDArrayStridedSlice.
+//
+// It embeds [ArrayUnaryKernel], promoting that type's methods.
 type ArrayStridedSlice struct {
-	objref.Handle
+	ArrayUnaryKernel
 }
 
 // ArrayStridedSliceFromID adopts an existing Objective-C object as a ArrayStridedSlice
@@ -23,7 +24,8 @@ func ArrayStridedSliceFromID(id objc.ID) *ArrayStridedSlice {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayStridedSlice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ArrayStridedSlice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func arrayStridedSliceAdopt(id objc.ID) *ArrayStridedSlice {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayStridedSlice{Handle: objref.Wrap(id)}
+	x := &ArrayStridedSlice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ArrayStridedSlice) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ArrayStridedSlice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ArrayStridedSlice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewArrayStridedSlice creates a new ArrayStridedSlice.
@@ -68,3 +56,9 @@ type ArrayStridedSliceable interface {
 }
 
 var _ ArrayStridedSliceable = (*ArrayStridedSlice)(nil)
+
+var _ ArrayUnaryKernelProvider = (*ArrayStridedSlice)(nil)
+
+var _ ArrayMultiaryKernelProvider = (*ArrayStridedSlice)(nil)
+
+var _ ArrayMultiaryBaseProvider = (*ArrayStridedSlice)(nil)

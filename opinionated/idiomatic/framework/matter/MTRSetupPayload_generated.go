@@ -25,7 +25,8 @@ func MTRSetupPayloadFromID(id objc.ID) *MTRSetupPayload {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRSetupPayload{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRSetupPayload{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRSetupPayloadAdopt(id objc.ID) *MTRSetupPayload {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRSetupPayload{Handle: objref.Wrap(id)}
+	x := &MTRSetupPayload{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,120 +60,116 @@ func (x *MTRSetupPayload) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRSetupPayload) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRSetupPayload creates a new MTRSetupPayload.
 func NewMTRSetupPayload() *MTRSetupPayload {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRSetupPayload")), objc.RegisterName("new"))
 	return mTRSetupPayloadAdopt(_id)
 }
 
-// Initializes the payload object from the provide QR Code or Manual Pairing Code string. Returns nil if the payload is not valid.
-//
-// NewMTRSetupPayloadWithPayload creates a new MTRSetupPayload.
+// NewMTRSetupPayloadWithPayload initializes the payload object from the provide QR Code or Manual Pairing Code string. Returns nil if the payload is not valid.
 func NewMTRSetupPayloadWithPayload(payload string) *MTRSetupPayload {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRSetupPayload")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPayload:"), purego.NSString(payload))
 	return mTRSetupPayloadAdopt(_id)
 }
 
-// Initialize an MTRSetupPayload with the given passcode and discriminator. This will pre-set version, product id, and vendor id to 0.
-//
-// NewMTRSetupPayloadWithSetupPasscodeDiscriminator creates a new MTRSetupPayload.
+// NewMTRSetupPayloadWithSetupPasscodeDiscriminator initialize an MTRSetupPayload with the given passcode and discriminator. This will pre-set version, product id, and vendor id to 0.
 func NewMTRSetupPayloadWithSetupPasscodeDiscriminator(setupPasscode obj.Object, discriminator obj.Object) *MTRSetupPayload {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRSetupPayload")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSetupPasscode:discriminator:"), objref.IDOf(setupPasscode), objref.IDOf(discriminator))
 	return mTRSetupPayloadAdopt(_id)
 }
 
-// The individual constituent payloads, if the receiver represents a concatenated payload.
-//
-// WithSubPayloads sets the collection and returns the receiver so calls can be chained.
+// WithSubPayloads the individual constituent payloads, if the receiver represents a concatenated payload.
 func (x *MTRSetupPayload) WithSubPayloads(items ...*MTRSetupPayload) *MTRSetupPayload {
 	_arr := purego.SliceToNSArray(items, func(_v *MTRSetupPayload) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubPayloads:"), _arr)
 	return x
 }
 
-// WithVendorID sets vendorID and returns the receiver so calls can be chained.
+// WithVendorID sets the property and returns the receiver so calls can be chained.
 func (x *MTRSetupPayload) WithVendorID(vendorID obj.Object) *MTRSetupPayload {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
 	return x
 }
 
-// WithProductID sets productID and returns the receiver so calls can be chained.
+// WithProductID sets the property and returns the receiver so calls can be chained.
 func (x *MTRSetupPayload) WithProductID(productID obj.Object) *MTRSetupPayload {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductID:"), objref.IDOf(productID))
 	return x
 }
 
-// WithCommissioningFlow sets commissioningFlow and returns the receiver so calls can be chained.
+// WithCommissioningFlow sets the property and returns the receiver so calls can be chained.
 func (x *MTRSetupPayload) WithCommissioningFlow(commissioningFlow MTRCommissioningFlow) *MTRSetupPayload {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommissioningFlow:"), commissioningFlow)
 	return x
 }
 
-// WithDiscoveryCapabilities sets discoveryCapabilities and returns the receiver so calls can be chained.
+// WithDiscoveryCapabilities sets the property and returns the receiver so calls can be chained.
 func (x *MTRSetupPayload) WithDiscoveryCapabilities(discoveryCapabilities MTRDiscoveryCapabilities) *MTRSetupPayload {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiscoveryCapabilities:"), discoveryCapabilities)
 	return x
 }
 
-// WithDiscriminator sets discriminator and returns the receiver so calls can be chained.
+// WithDiscriminator sets the property and returns the receiver so calls can be chained.
 func (x *MTRSetupPayload) WithDiscriminator(discriminator obj.Object) *MTRSetupPayload {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiscriminator:"), objref.IDOf(discriminator))
 	return x
 }
 
-// If hasShortDiscriminator is true, the discriminator value contains just the high 4 bits of the full discriminator.  For example, if hasShortDiscriminator is true and discriminator is 0xA, then the full discriminator can be anything in the range 0xA00 to 0xAFF.
-//
-// WithHasShortDiscriminator sets hasShortDiscriminator and returns the receiver so calls can be chained.
+// WithHasShortDiscriminator if hasShortDiscriminator is true, the discriminator value contains just the high 4 bits of the full discriminator.  For example, if hasShortDiscriminator is true and discriminator is 0xA, then the full discriminator can be anything in the range 0xA00 to 0xAFF.
 func (x *MTRSetupPayload) WithHasShortDiscriminator(hasShortDiscriminator bool) *MTRSetupPayload {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasShortDiscriminator:"), hasShortDiscriminator)
 	return x
 }
 
-// WithSetupPasscode sets setupPasscode and returns the receiver so calls can be chained.
+// WithSetupPasscode sets the property and returns the receiver so calls can be chained.
 func (x *MTRSetupPayload) WithSetupPasscode(setupPasscode obj.Object) *MTRSetupPayload {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSetupPasscode:"), objref.IDOf(setupPasscode))
 	return x
 }
 
-// The value of the Serial Number extension element, if any.
-//
-// WithSerialNumber sets serialNumber and returns the receiver so calls can be chained.
+// WithSerialNumber the value of the Serial Number extension element, if any.
 func (x *MTRSetupPayload) WithSerialNumber(serialNumber string) *MTRSetupPayload {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSerialNumber:"), purego.NSString(serialNumber))
 	return x
 }
 
-// WithRendezvousInformation sets rendezvousInformation and returns the receiver so calls can be chained.
+// WithRendezvousInformation sets the property and returns the receiver so calls can be chained.
 func (x *MTRSetupPayload) WithRendezvousInformation(rendezvousInformation obj.Object) *MTRSetupPayload {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRendezvousInformation:"), objref.IDOf(rendezvousInformation))
 	return x
 }
 
-// WithSetUpPINCode sets setUpPINCode and returns the receiver so calls can be chained.
+// WithSetUpPINCode sets the property and returns the receiver so calls can be chained.
 func (x *MTRSetupPayload) WithSetUpPINCode(setUpPINCode obj.Object) *MTRSetupPayload {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSetUpPINCode:"), objref.IDOf(setUpPINCode))
 	return x
 }
 
-// Returns the Manufacturer-specific extension element with the specified tag, if any. The tag must be in the range 0x80 - 0xFF.
+// VendorElementWithTag returns the Manufacturer-specific extension element with the specified tag, if any. The tag must be in the range 0x80 - 0xFF.
 func (x *MTRSetupPayload) VendorElementWithTag(tag obj.Object) *MTROptionalQRCodeInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorElementWithTag:"), objref.IDOf(tag))
 	return MTROptionalQRCodeInfoFromID(_r)
 }
 
-// Removes the extension element with the specified tag, if any. The tag must be in the range 0x80 - 0xFF.
+// RemoveVendorElementWithTag removes the extension element with the specified tag, if any. The tag must be in the range 0x80 - 0xFF.
 func (x *MTRSetupPayload) RemoveVendorElementWithTag(tag obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeVendorElementWithTag:"), objref.IDOf(tag))
 }
 
-// Adds or replaces a Manufacturer-specific extension element.
+// AddOrReplaceVendorElement adds or replaces a Manufacturer-specific extension element.
 func (x *MTRSetupPayload) AddOrReplaceVendorElement(element *MTROptionalQRCodeInfo) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOrReplaceVendorElement:"), objref.IDOf(element))
 }
 
-// Creates a Manual Pairing Code from this setup payload. Returns nil if this payload cannot be represented as a valid Manual Pairing Code. The following properties must be populated for a valid Manual Pairing Code: - setupPasscode - discriminator (short or long) In most cases the pairing code will be 11 digits long. If the payload indicates a `commissioningFlow` other than `MTRCommissioningFlowStandard`, a 21 digit code will be produced that includes the vendorID and productID values.
+// ManualEntryCode creates a Manual Pairing Code from this setup payload. Returns nil if this payload cannot be represented as a valid Manual Pairing Code. The following properties must be populated for a valid Manual Pairing Code: - setupPasscode - discriminator (short or long) In most cases the pairing code will be 11 digits long. If the payload indicates a `commissioningFlow` other than `MTRCommissioningFlowStandard`, a 21 digit code will be produced that includes the vendorID and productID values.
 func (x *MTRSetupPayload) ManualEntryCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manualEntryCode"))
 	if _r == 0 {
@@ -180,7 +178,7 @@ func (x *MTRSetupPayload) ManualEntryCode() string {
 	return purego.GoString(_r)
 }
 
-// Creates a QR Code payload from this setup payload. Returns nil if this payload cannot be represented as a valid QR Code. The following properties must be populated for a valid QR Code: - setupPasscode - discriminator (must be long) - discoveryCapabilities (not MTRDiscoveryCapabilitiesUnknown) If this object represents a `concatenated` payload, then this property will include the QR Code strings of all the underlying `subPayloads.`
+// QrCodeString creates a QR Code payload from this setup payload. Returns nil if this payload cannot be represented as a valid QR Code. The following properties must be populated for a valid QR Code: - setupPasscode - discriminator (must be long) - discoveryCapabilities (not MTRDiscoveryCapabilitiesUnknown) If this object represents a `concatenated` payload, then this property will include the QR Code strings of all the underlying `subPayloads.`
 func (x *MTRSetupPayload) QrCodeString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("qrCodeString"))
 	if _r == 0 {
@@ -189,13 +187,13 @@ func (x *MTRSetupPayload) QrCodeString() string {
 	return purego.GoString(_r)
 }
 
-// Whether this object represents a concatenated QR Code payload consisting of two or more underlying payloads. If YES, then: - The constituent payloads are exposed in the `subPayloads` property. - Properties other than `subPayloads` and `qrCodeString` (e.g. `vendorID`, `discriminator`) are not relevant to a concatenated payload and should not be used. If accessed, they will act as if the payload was not in fact concatenated, and return the relevant value associated with the first sub-payload. Mutating such a property will discard the additional sub-payloads.
+// IsConcatenated whether this object represents a concatenated QR Code payload consisting of two or more underlying payloads. If YES, then: - The constituent payloads are exposed in the `subPayloads` property. - Properties other than `subPayloads` and `qrCodeString` (e.g. `vendorID`, `discriminator`) are not relevant to a concatenated payload and should not be used. If accessed, they will act as if the payload was not in fact concatenated, and return the relevant value associated with the first sub-payload. Mutating such a property will discard the additional sub-payloads.
 func (x *MTRSetupPayload) IsConcatenated() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConcatenated"))
 	return _r
 }
 
-// The individual constituent payloads, if the receiver represents a concatenated payload.
+// SubPayloads the individual constituent payloads, if the receiver represents a concatenated payload.
 //
 // SubPayloads returns the collection as a Go slice.
 func (x *MTRSetupPayload) SubPayloads() []*MTRSetupPayload {
@@ -203,75 +201,89 @@ func (x *MTRSetupPayload) SubPayloads() []*MTRSetupPayload {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTRSetupPayload { return MTRSetupPayloadFromID(_id) })
 }
 
+// SetSubPayloads wraps the corresponding Objective-C method.
 func (x *MTRSetupPayload) SetSubPayloads(subPayloads []*MTRSetupPayload) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubPayloads:"), purego.SliceToNSArray(subPayloads, func(_v *MTRSetupPayload) objc.ID { return objref.IDOf(_v) }))
 }
 
+// VendorID wraps the corresponding Objective-C method.
 func (x *MTRSetupPayload) VendorID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorID"))
 	return obj.Wrap(_r)
 }
 
+// SetVendorID wraps the corresponding Objective-C method.
 func (x *MTRSetupPayload) SetVendorID(vendorID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
 }
 
+// ProductID wraps the corresponding Objective-C method.
 func (x *MTRSetupPayload) ProductID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productID"))
 	return obj.Wrap(_r)
 }
 
+// SetProductID wraps the corresponding Objective-C method.
 func (x *MTRSetupPayload) SetProductID(productID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductID:"), objref.IDOf(productID))
 }
 
+// CommissioningFlow wraps the corresponding Objective-C method.
 func (x *MTRSetupPayload) CommissioningFlow() MTRCommissioningFlow {
 	_r := objc.Send[MTRCommissioningFlow](objref.IDOf(x), objc.RegisterName("commissioningFlow"))
 	return _r
 }
 
+// SetCommissioningFlow wraps the corresponding Objective-C method.
 func (x *MTRSetupPayload) SetCommissioningFlow(commissioningFlow MTRCommissioningFlow) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommissioningFlow:"), commissioningFlow)
 }
 
+// DiscoveryCapabilities wraps the corresponding Objective-C method.
 func (x *MTRSetupPayload) DiscoveryCapabilities() MTRDiscoveryCapabilities {
 	_r := objc.Send[MTRDiscoveryCapabilities](objref.IDOf(x), objc.RegisterName("discoveryCapabilities"))
 	return _r
 }
 
+// SetDiscoveryCapabilities wraps the corresponding Objective-C method.
 func (x *MTRSetupPayload) SetDiscoveryCapabilities(discoveryCapabilities MTRDiscoveryCapabilities) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiscoveryCapabilities:"), discoveryCapabilities)
 }
 
+// Discriminator wraps the corresponding Objective-C method.
 func (x *MTRSetupPayload) Discriminator() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discriminator"))
 	return obj.Wrap(_r)
 }
 
+// SetDiscriminator wraps the corresponding Objective-C method.
 func (x *MTRSetupPayload) SetDiscriminator(discriminator obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiscriminator:"), objref.IDOf(discriminator))
 }
 
-// If hasShortDiscriminator is true, the discriminator value contains just the high 4 bits of the full discriminator.  For example, if hasShortDiscriminator is true and discriminator is 0xA, then the full discriminator can be anything in the range 0xA00 to 0xAFF.
+// HasShortDiscriminator if hasShortDiscriminator is true, the discriminator value contains just the high 4 bits of the full discriminator.  For example, if hasShortDiscriminator is true and discriminator is 0xA, then the full discriminator can be anything in the range 0xA00 to 0xAFF.
 func (x *MTRSetupPayload) HasShortDiscriminator() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasShortDiscriminator"))
 	return _r
 }
 
+// SetHasShortDiscriminator wraps the corresponding Objective-C method.
 func (x *MTRSetupPayload) SetHasShortDiscriminator(hasShortDiscriminator bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasShortDiscriminator:"), hasShortDiscriminator)
 }
 
+// SetupPasscode wraps the corresponding Objective-C method.
 func (x *MTRSetupPayload) SetupPasscode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setupPasscode"))
 	return obj.Wrap(_r)
 }
 
+// SetSetupPasscode wraps the corresponding Objective-C method.
 func (x *MTRSetupPayload) SetSetupPasscode(setupPasscode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSetupPasscode:"), objref.IDOf(setupPasscode))
 }
 
-// The value of the Serial Number extension element, if any.
+// SerialNumber the value of the Serial Number extension element, if any.
 func (x *MTRSetupPayload) SerialNumber() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serialNumber"))
 	if _r == 0 {
@@ -280,11 +292,12 @@ func (x *MTRSetupPayload) SerialNumber() string {
 	return purego.GoString(_r)
 }
 
+// SetSerialNumber wraps the corresponding Objective-C method.
 func (x *MTRSetupPayload) SetSerialNumber(serialNumber string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSerialNumber:"), purego.NSString(serialNumber))
 }
 
-// The list of Manufacturer-specific extension elements contained in the setup code. May be empty.
+// VendorElements the list of Manufacturer-specific extension elements contained in the setup code. May be empty.
 //
 // VendorElements returns the collection as a Go slice.
 func (x *MTRSetupPayload) VendorElements() []*MTROptionalQRCodeInfo {
@@ -292,7 +305,8 @@ func (x *MTRSetupPayload) VendorElements() []*MTROptionalQRCodeInfo {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTROptionalQRCodeInfo { return MTROptionalQRCodeInfoFromID(_id) })
 }
 
-func (x *MTRSetupPayload) QrCodeString2() (string, error) {
+// QrCodeString2 wraps the corresponding Objective-C method.
+func (x *MTRSetupPayload) QrCodeString2() (result string, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("qrCodeString:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -304,8 +318,10 @@ func (x *MTRSetupPayload) QrCodeString2() (string, error) {
 	return purego.GoString(_r), nil
 }
 
+// GetAllOptionalVendorData wraps the corresponding Objective-C method.
+//
 // GetAllOptionalVendorData returns the collection as a Go slice.
-func (x *MTRSetupPayload) GetAllOptionalVendorData() ([]*MTROptionalQRCodeInfo, error) {
+func (x *MTRSetupPayload) GetAllOptionalVendorData() (result []*MTROptionalQRCodeInfo, err error) {
 	var _nsErr uintptr
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getAllOptionalVendorData:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -314,20 +330,24 @@ func (x *MTRSetupPayload) GetAllOptionalVendorData() ([]*MTROptionalQRCodeInfo, 
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTROptionalQRCodeInfo { return MTROptionalQRCodeInfoFromID(_id) }), nil
 }
 
+// RendezvousInformation wraps the corresponding Objective-C method.
 func (x *MTRSetupPayload) RendezvousInformation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rendezvousInformation"))
 	return obj.Wrap(_r)
 }
 
+// SetRendezvousInformation wraps the corresponding Objective-C method.
 func (x *MTRSetupPayload) SetRendezvousInformation(rendezvousInformation obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRendezvousInformation:"), objref.IDOf(rendezvousInformation))
 }
 
+// SetUpPINCode wraps the corresponding Objective-C method.
 func (x *MTRSetupPayload) SetUpPINCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpPINCode"))
 	return obj.Wrap(_r)
 }
 
+// SetSetUpPINCode wraps the corresponding Objective-C method.
 func (x *MTRSetupPayload) SetSetUpPINCode(setUpPINCode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSetUpPINCode:"), objref.IDOf(setUpPINCode))
 }
@@ -371,7 +391,7 @@ type MTRSetupPayloadable interface {
 	SerialNumber() string
 	SetSerialNumber(serialNumber string)
 	VendorElements() []*MTROptionalQRCodeInfo
-	QrCodeString2() (string, error)
+	QrCodeString2() (result string, err error)
 	GetAllOptionalVendorData() ([]*MTROptionalQRCodeInfo, error)
 	RendezvousInformation() obj.Object
 	SetRendezvousInformation(rendezvousInformation obj.Object)

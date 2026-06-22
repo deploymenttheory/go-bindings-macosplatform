@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that responds to a request to load the value of a metadata item.
-//
 // MetadataItemValueRequest is an idiomatic wrapper over the Objective-C class AVMetadataItemValueRequest.
+//
+// An object that responds to a request to load the value of a metadata item.
 type MetadataItemValueRequest struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MetadataItemValueRequestFromID(id objc.ID) *MetadataItemValueRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &MetadataItemValueRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetadataItemValueRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func metadataItemValueRequestAdopt(id objc.ID) *MetadataItemValueRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &MetadataItemValueRequest{Handle: objref.Wrap(id)}
+	x := &MetadataItemValueRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,24 @@ func (x *MetadataItemValueRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetadataItemValueRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMetadataItemValueRequest creates a new MetadataItemValueRequest.
 func NewMetadataItemValueRequest() *MetadataItemValueRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVMetadataItemValueRequest")), objc.RegisterName("new"))
 	return metadataItemValueRequestAdopt(_id)
 }
 
-// Returns the metadata item’s value.
+// RespondWithValue returns the metadata item’s value.
 func (x *MetadataItemValueRequest) RespondWithValue(value obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("respondWithValue:"), objref.IDOf(value))
 }
 
+// MetadataItem wraps the corresponding Objective-C method.
 func (x *MetadataItemValueRequest) MetadataItem() *MetadataItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadataItem"))
 	return MetadataItemFromID(_r)

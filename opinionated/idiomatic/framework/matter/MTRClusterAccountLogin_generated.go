@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterAccountLogin is an idiomatic wrapper over the Objective-C class MTRClusterAccountLogin.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterAccountLogin struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterAccountLoginFromID adopts an existing Objective-C object as a MTRClusterAccountLogin
@@ -25,7 +26,8 @@ func MTRClusterAccountLoginFromID(id objc.ID) *MTRClusterAccountLogin {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterAccountLogin{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterAccountLogin{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func mTRClusterAccountLoginAdopt(id objc.ID) *MTRClusterAccountLogin {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterAccountLogin{Handle: objref.Wrap(id)}
+	x := &MTRClusterAccountLogin{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterAccountLogin) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterAccountLogin) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterAccountLogin) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterAccountLoginWithDeviceEndpointIDQueue creates a new MTRClusterAccountLogin.
+// NewMTRClusterAccountLoginWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterAccountLoginWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterAccountLogin {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterAccountLogin")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -74,8 +60,10 @@ func NewMTRClusterAccountLoginWithDeviceEndpointQueue(device *MTRDevice, endpoin
 	return mTRClusterAccountLoginAdopt(_id)
 }
 
+// GetSetupPINWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // GetSetupPINWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterAccountLogin) GetSetupPINWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRAccountLoginClusterGetSetupPINParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRAccountLoginClusterGetSetupPINResponseParams, error) {
+func (x *MTRClusterAccountLogin) GetSetupPINWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRAccountLoginClusterGetSetupPINParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRAccountLoginClusterGetSetupPINResponseParams, err error) {
 	type _result struct {
 		val *MTRAccountLoginClusterGetSetupPINResponseParams
 		err error
@@ -97,33 +85,40 @@ func (x *MTRClusterAccountLogin) GetSetupPINWithParamsExpectedValuesExpectedValu
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterAccountLogin) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterAccountLogin) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterAccountLogin) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterAccountLogin) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterAccountLogin) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// GetSetupPINWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // GetSetupPINWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterAccountLogin) GetSetupPINWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRAccountLoginClusterGetSetupPINParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRAccountLoginClusterGetSetupPINResponseParams, error) {
+func (x *MTRClusterAccountLogin) GetSetupPINWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRAccountLoginClusterGetSetupPINParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRAccountLoginClusterGetSetupPINResponseParams, err error) {
 	type _result struct {
 		val *MTRAccountLoginClusterGetSetupPINResponseParams
 		err error
@@ -158,3 +153,7 @@ type MTRClusterAccountLoginable interface {
 }
 
 var _ MTRClusterAccountLoginable = (*MTRClusterAccountLogin)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterAccountLogin)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterAccountLogin)(nil)

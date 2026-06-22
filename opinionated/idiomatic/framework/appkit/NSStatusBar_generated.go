@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages a collection of status items displayed within the system-wide menu bar.
-//
 // StatusBar is an idiomatic wrapper over the Objective-C class NSStatusBar.
+//
+// An object that manages a collection of status items displayed within the system-wide menu bar.
 type StatusBar struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func StatusBarFromID(id objc.ID) *StatusBar {
 	if id == 0 {
 		return nil
 	}
-	x := &StatusBar{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StatusBar{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func statusBarAdopt(id objc.ID) *StatusBar {
 	if id == 0 {
 		return nil
 	}
-	x := &StatusBar{Handle: objref.Wrap(id)}
+	x := &StatusBar{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,36 @@ func (x *StatusBar) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StatusBar) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewStatusBar creates a new StatusBar.
 func NewStatusBar() *StatusBar {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSStatusBar")), objc.RegisterName("new"))
 	return statusBarAdopt(_id)
 }
 
-// Returns a newly created status item that has been allotted a specified space within the status bar.
+// StatusItemWithLength returns a newly created status item that has been allotted a specified space within the status bar.
 func (x *StatusBar) StatusItemWithLength(length float64) *StatusItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statusItemWithLength:"), length)
 	return StatusItemFromID(_r)
 }
 
-// Removes the specified status item from the receiver.
+// RemoveStatusItem removes the specified status item from the receiver.
 func (x *StatusBar) RemoveStatusItem(item *StatusItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeStatusItem:"), objref.IDOf(item))
 }
 
+// IsVertical wraps the corresponding Objective-C method.
 func (x *StatusBar) IsVertical() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVertical"))
 	return _r
 }
 
+// Thickness wraps the corresponding Objective-C method.
 func (x *StatusBar) Thickness() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("thickness"))
 	return _r

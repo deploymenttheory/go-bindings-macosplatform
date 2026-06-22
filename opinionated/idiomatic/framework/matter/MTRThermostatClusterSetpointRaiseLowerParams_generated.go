@@ -23,7 +23,8 @@ func MTRThermostatClusterSetpointRaiseLowerParamsFromID(id objc.ID) *MTRThermost
 	if id == 0 {
 		return nil
 	}
-	x := &MTRThermostatClusterSetpointRaiseLowerParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRThermostatClusterSetpointRaiseLowerParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRThermostatClusterSetpointRaiseLowerParamsAdopt(id objc.ID) *MTRThermosta
 	if id == 0 {
 		return nil
 	}
-	x := &MTRThermostatClusterSetpointRaiseLowerParams{Handle: objref.Wrap(id)}
+	x := &MTRThermostatClusterSetpointRaiseLowerParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,74 +58,82 @@ func (x *MTRThermostatClusterSetpointRaiseLowerParams) IsKind(className string) 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRThermostatClusterSetpointRaiseLowerParams creates a new MTRThermostatClusterSetpointRaiseLowerParams.
 func NewMTRThermostatClusterSetpointRaiseLowerParams() *MTRThermostatClusterSetpointRaiseLowerParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRThermostatClusterSetpointRaiseLowerParams")), objc.RegisterName("new"))
 	return mTRThermostatClusterSetpointRaiseLowerParamsAdopt(_id)
 }
 
-// WithMode sets mode and returns the receiver so calls can be chained.
+// WithMode sets the property and returns the receiver so calls can be chained.
 func (x *MTRThermostatClusterSetpointRaiseLowerParams) WithMode(mode obj.Object) *MTRThermostatClusterSetpointRaiseLowerParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	return x
 }
 
-// WithAmount sets amount and returns the receiver so calls can be chained.
+// WithAmount sets the property and returns the receiver so calls can be chained.
 func (x *MTRThermostatClusterSetpointRaiseLowerParams) WithAmount(amount obj.Object) *MTRThermostatClusterSetpointRaiseLowerParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRThermostatClusterSetpointRaiseLowerParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThermostatClusterSetpointRaiseLowerParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRThermostatClusterSetpointRaiseLowerParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThermostatClusterSetpointRaiseLowerParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// Mode wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterSetpointRaiseLowerParams) Mode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mode"))
 	return obj.Wrap(_r)
 }
 
+// SetMode wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterSetpointRaiseLowerParams) SetMode(mode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
 }
 
+// Amount wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterSetpointRaiseLowerParams) Amount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("amount"))
 	return obj.Wrap(_r)
 }
 
+// SetAmount wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterSetpointRaiseLowerParams) SetAmount(amount obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRThermostatClusterSetpointRaiseLowerParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterSetpointRaiseLowerParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRThermostatClusterSetpointRaiseLowerParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterSetpointRaiseLowerParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

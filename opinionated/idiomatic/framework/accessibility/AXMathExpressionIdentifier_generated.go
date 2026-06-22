@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MathExpressionIdentifier is an idiomatic wrapper over the Objective-C class AXMathExpressionIdentifier.
+//
+// It embeds [MathExpression], promoting that type's methods.
 type MathExpressionIdentifier struct {
-	objref.Handle
+	MathExpression
 }
 
 // MathExpressionIdentifierFromID adopts an existing Objective-C object as a MathExpressionIdentifier
@@ -23,7 +24,8 @@ func MathExpressionIdentifierFromID(id objc.ID) *MathExpressionIdentifier {
 	if id == 0 {
 		return nil
 	}
-	x := &MathExpressionIdentifier{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MathExpressionIdentifier{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mathExpressionIdentifierAdopt(id objc.ID) *MathExpressionIdentifier {
 	if id == 0 {
 		return nil
 	}
-	x := &MathExpressionIdentifier{Handle: objref.Wrap(id)}
+	x := &MathExpressionIdentifier{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MathExpressionIdentifier) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MathExpressionIdentifier) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MathExpressionIdentifier) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMathExpressionIdentifierWithContent creates a new MathExpressionIdentifier.
@@ -63,6 +51,7 @@ func NewMathExpressionIdentifierWithContent(content string) *MathExpressionIdent
 	return mathExpressionIdentifierAdopt(_id)
 }
 
+// Content wraps the corresponding Objective-C method.
 func (x *MathExpressionIdentifier) Content() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("content"))
 	if _r == 0 {
@@ -78,3 +67,5 @@ type MathExpressionIdentifierable interface {
 }
 
 var _ MathExpressionIdentifierable = (*MathExpressionIdentifier)(nil)
+
+var _ MathExpressionProvider = (*MathExpressionIdentifier)(nil)

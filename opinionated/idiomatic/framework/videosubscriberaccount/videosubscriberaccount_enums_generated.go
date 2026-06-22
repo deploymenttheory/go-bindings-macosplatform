@@ -21,6 +21,8 @@ const (
 	VSAutoSignInAuthorizationDenied VSAutoSignInAuthorization = 2
 )
 
+// String returns the VSAutoSignInAuthorization constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VSAutoSignInAuthorization) String() string {
 	switch e {
 	case VSAutoSignInAuthorizationNotDetermined:
@@ -48,6 +50,8 @@ const (
 	VSErrorCodeUnsupported                   VSErrorCode = 7
 )
 
+// String returns the VSErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VSErrorCode) String() string {
 	switch e {
 	case VSErrorCodeAccessNotGranted:
@@ -81,6 +85,8 @@ const (
 	VSOriginatingDeviceCategoryOther VSOriginatingDeviceCategory = 1
 )
 
+// String returns the VSOriginatingDeviceCategory constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VSOriginatingDeviceCategory) String() string {
 	switch e {
 	case VSOriginatingDeviceCategoryMobile:
@@ -104,6 +110,8 @@ const (
 	VSSubscriptionAccessLevelPaid VSSubscriptionAccessLevel = 2
 )
 
+// String returns the VSSubscriptionAccessLevel constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VSSubscriptionAccessLevel) String() string {
 	switch e {
 	case VSSubscriptionAccessLevelUnknown:
@@ -127,6 +135,8 @@ const (
 	VSUserAccountQueryAllDevices VSUserAccountQueryOptions = 1
 )
 
+// String returns the VSUserAccountQueryOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VSUserAccountQueryOptions) String() string {
 	var parts []string
 	if e&VSUserAccountQueryAllDevices != 0 {
@@ -148,6 +158,8 @@ const (
 	VSUserAccountTypePaid VSUserAccountType = 1
 )
 
+// String returns the VSUserAccountType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VSUserAccountType) String() string {
 	switch e {
 	case VSUserAccountTypeFree:

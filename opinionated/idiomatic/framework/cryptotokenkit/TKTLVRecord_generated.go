@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class encapsulating a Tag-Length-Value record.
-//
 // TLVRecord is an idiomatic wrapper over the Objective-C class TKTLVRecord.
+//
+// TLVRecord is an abstract base — you do not construct it directly. Construct one of [BERTLVRecord], [CompactTLVRecord], [SimpleTLVRecord] and pass it where a TLVRecord is accepted.
+//
+// The base class encapsulating a Tag-Length-Value record.
 type TLVRecord struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func TLVRecordFromID(id objc.ID) *TLVRecord {
 	if id == 0 {
 		return nil
 	}
-	x := &TLVRecord{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TLVRecord{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func tLVRecordAdopt(id objc.ID) *TLVRecord {
 	if id == 0 {
 		return nil
 	}
-	x := &TLVRecord{Handle: objref.Wrap(id)}
+	x := &TLVRecord{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +62,25 @@ func (x *TLVRecord) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewTLVRecord creates a new TLVRecord.
-func NewTLVRecord() *TLVRecord {
-	_id := objc.Send[objc.ID](objc.ID(_class("TKTLVRecord")), objc.RegisterName("new"))
-	return tLVRecordAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TLVRecord) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Tag value of the record.
+// Tag tag value of the record.
 func (x *TLVRecord) Tag() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("tag"))
 	return _r
 }
 
-// Value field of the record.
+// Value value field of the record.
 func (x *TLVRecord) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
-// Data object containing whole encoded record, including tag, length and value.
+// Data data object containing whole encoded record, including tag, length and value.
 func (x *TLVRecord) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
@@ -91,3 +95,10 @@ type TLVRecordable interface {
 }
 
 var _ TLVRecordable = (*TLVRecord)(nil)
+
+// isTLVRecord marks TLVRecord — and, by embedding promotion, its
+// subclasses — as a member of the TLVRecord hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *TLVRecord) isTLVRecord() {}
+
+var _ TLVRecordProvider = (*TLVRecord)(nil)

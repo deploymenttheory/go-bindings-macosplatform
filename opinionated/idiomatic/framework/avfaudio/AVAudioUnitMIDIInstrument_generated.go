@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents music devices or remote instruments.
-//
 // AudioUnitMIDIInstrument is an idiomatic wrapper over the Objective-C class AVAudioUnitMIDIInstrument.
+//
+// AudioUnitMIDIInstrument is an abstract base — you do not construct it directly. Construct one of [AudioUnitSampler] and pass it where a AudioUnitMIDIInstrument is accepted.
+//
+// An object that represents music devices or remote instruments.
 type AudioUnitMIDIInstrument struct {
-	objref.Handle
+	AudioUnit
 }
 
 // AudioUnitMIDIInstrumentFromID adopts an existing Objective-C object as a AudioUnitMIDIInstrument
@@ -25,7 +26,8 @@ func AudioUnitMIDIInstrumentFromID(id objc.ID) *AudioUnitMIDIInstrument {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitMIDIInstrument{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioUnitMIDIInstrument{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,86 +40,70 @@ func audioUnitMIDIInstrumentAdopt(id objc.ID) *AudioUnitMIDIInstrument {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitMIDIInstrument{Handle: objref.Wrap(id)}
+	x := &AudioUnitMIDIInstrument{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *AudioUnitMIDIInstrument) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioUnitMIDIInstrument) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioUnitMIDIInstrument) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a MIDI instrument audio unit with the component description you specify.
-//
-// NewAudioUnitMIDIInstrumentWithAudioComponentDescription creates a new AudioUnitMIDIInstrument.
+// NewAudioUnitMIDIInstrumentWithAudioComponentDescription creates a MIDI instrument audio unit with the component description you specify.
 func NewAudioUnitMIDIInstrumentWithAudioComponentDescription(description obj.Object) *AudioUnitMIDIInstrument {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioUnitMIDIInstrument")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioComponentDescription:"), objref.IDOf(description))
 	return audioUnitMIDIInstrumentAdopt(_id)
 }
 
-// Sends a MIDI Note On event to the instrument.
+// StartNoteWithVelocityOnChannel sends a MIDI Note On event to the instrument.
 func (x *AudioUnitMIDIInstrument) StartNoteWithVelocityOnChannel(note uint8, velocity uint8, channel uint8) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startNote:withVelocity:onChannel:"), note, velocity, channel)
 }
 
-// Sends a MIDI Note Off event to the instrument.
+// StopNoteOnChannel sends a MIDI Note Off event to the instrument.
 func (x *AudioUnitMIDIInstrument) StopNoteOnChannel(note uint8, channel uint8) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopNote:onChannel:"), note, channel)
 }
 
-// Sends a MIDI controller event to the instrument.
+// SendControllerWithValueOnChannel sends a MIDI controller event to the instrument.
 func (x *AudioUnitMIDIInstrument) SendControllerWithValueOnChannel(controller uint8, value uint8, channel uint8) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendController:withValue:onChannel:"), controller, value, channel)
 }
 
-// Sends a MIDI Pitch Bend event to the instrument.
+// SendPitchBendOnChannel sends a MIDI Pitch Bend event to the instrument.
 func (x *AudioUnitMIDIInstrument) SendPitchBendOnChannel(pitchbend uint16, channel uint8) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendPitchBend:onChannel:"), pitchbend, channel)
 }
 
-// Sends a MIDI channel pressure event to the instrument.
+// SendPressureOnChannel sends a MIDI channel pressure event to the instrument.
 func (x *AudioUnitMIDIInstrument) SendPressureOnChannel(pressure uint8, channel uint8) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendPressure:onChannel:"), pressure, channel)
 }
 
-// Sends a MIDI Polyphonic key pressure event to the instrument.
+// SendPressureForKeyWithValueOnChannel sends a MIDI Polyphonic key pressure event to the instrument.
 func (x *AudioUnitMIDIInstrument) SendPressureForKeyWithValueOnChannel(key uint8, value uint8, channel uint8) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendPressureForKey:withValue:onChannel:"), key, value, channel)
 }
 
-// Sends MIDI Program Change and Bank Select events to the instrument.
+// SendProgramChangeOnChannel sends MIDI Program Change and Bank Select events to the instrument.
 func (x *AudioUnitMIDIInstrument) SendProgramChangeOnChannel(program uint8, channel uint8) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendProgramChange:onChannel:"), program, channel)
 }
 
-// Sends MIDI Program Change and Bank Select events to the instrument.
+// SendProgramChangeBankMSBBankLSBOnChannel sends MIDI Program Change and Bank Select events to the instrument.
 func (x *AudioUnitMIDIInstrument) SendProgramChangeBankMSBBankLSBOnChannel(program uint8, bankMSB uint8, bankLSB uint8, channel uint8) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendProgramChange:bankMSB:bankLSB:onChannel:"), program, bankMSB, bankLSB, channel)
 }
 
-// Sends a MIDI event which contains two data bytes to the instrument.
+// SendMIDIEventData1Data2 sends a MIDI event which contains two data bytes to the instrument.
 func (x *AudioUnitMIDIInstrument) SendMIDIEventData1Data2(midiStatus uint8, data1 uint8, data2 uint8) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendMIDIEvent:data1:data2:"), midiStatus, data1, data2)
 }
 
-// Sends a MIDI event which contains one data byte to the instrument.
+// SendMIDIEventData1 sends a MIDI event which contains one data byte to the instrument.
 func (x *AudioUnitMIDIInstrument) SendMIDIEventData1(midiStatus uint8, data1 uint8) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendMIDIEvent:data1:"), midiStatus, data1)
 }
 
-// Sends a MIDI System Exclusive event to the instrument.
+// SendMIDISysExEvent sends a MIDI System Exclusive event to the instrument.
 func (x *AudioUnitMIDIInstrument) SendMIDISysExEvent(midiData obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendMIDISysExEvent:"), objref.IDOf(midiData))
 }
@@ -139,3 +125,14 @@ type AudioUnitMIDIInstrumentable interface {
 }
 
 var _ AudioUnitMIDIInstrumentable = (*AudioUnitMIDIInstrument)(nil)
+
+// isAudioUnitMIDIInstrument marks AudioUnitMIDIInstrument — and, by embedding promotion, its
+// subclasses — as a member of the AudioUnitMIDIInstrument hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AudioUnitMIDIInstrument) isAudioUnitMIDIInstrument() {}
+
+var _ AudioUnitMIDIInstrumentProvider = (*AudioUnitMIDIInstrument)(nil)
+
+var _ AudioUnitProvider = (*AudioUnitMIDIInstrument)(nil)
+
+var _ AudioNodeProvider = (*AudioUnitMIDIInstrument)(nil)

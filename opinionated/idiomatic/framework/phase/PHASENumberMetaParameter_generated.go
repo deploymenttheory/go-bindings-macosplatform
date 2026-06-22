@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A metaparameter defined by a number that can change over time.
-//
 // NumberMetaParameter is an idiomatic wrapper over the Objective-C class PHASENumberMetaParameter.
+//
+// It embeds [MetaParameter], promoting that type's methods.
+//
+// A metaparameter defined by a number that can change over time.
 type NumberMetaParameter struct {
-	objref.Handle
+	MetaParameter
 }
 
 // NumberMetaParameterFromID adopts an existing Objective-C object as a NumberMetaParameter
@@ -25,7 +26,8 @@ func NumberMetaParameterFromID(id objc.ID) *NumberMetaParameter {
 	if id == 0 {
 		return nil
 	}
-	x := &NumberMetaParameter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NumberMetaParameter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func numberMetaParameterAdopt(id objc.ID) *NumberMetaParameter {
 	if id == 0 {
 		return nil
 	}
-	x := &NumberMetaParameter{Handle: objref.Wrap(id)}
+	x := &NumberMetaParameter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NumberMetaParameter) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NumberMetaParameter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NumberMetaParameter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNumberMetaParameter creates a new NumberMetaParameter.
@@ -64,26 +52,24 @@ func NewNumberMetaParameter() *NumberMetaParameter {
 	return numberMetaParameterAdopt(_id)
 }
 
-// A value for the metaparameter.
-//
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue a value for the metaparameter.
 func (x *NumberMetaParameter) WithValue(value obj.Object) *NumberMetaParameter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return x
 }
 
-// Sets the value gradually over the given amount of time.
+// FadeToValueDuration sets the value gradually over the given amount of time.
 func (x *NumberMetaParameter) FadeToValueDuration(value float64, duration float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fadeToValue:duration:"), value, duration)
 }
 
-// The minimum value this metaparameter can be set to
+// Minimum the minimum value this metaparameter can be set to
 func (x *NumberMetaParameter) Minimum() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimum"))
 	return _r
 }
 
-// The maximum value this metaparameter can be set to
+// Maximum the maximum value this metaparameter can be set to
 func (x *NumberMetaParameter) Maximum() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximum"))
 	return _r
@@ -99,3 +85,5 @@ type NumberMetaParameterable interface {
 }
 
 var _ NumberMetaParameterable = (*NumberMetaParameter)(nil)
+
+var _ MetaParameterProvider = (*NumberMetaParameter)(nil)

@@ -22,6 +22,8 @@ const (
 	AllowsFormFieldEntry       AccessPermissions = 128
 )
 
+// String returns the AccessPermissions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AccessPermissions) String() string {
 	switch e {
 	case AllowsLowQualityPrinting:
@@ -74,6 +76,8 @@ const (
 	KPDFActionNamedZoomOut ActionNamedName = 11
 )
 
+// String returns the ActionNamedName constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ActionNamedName) String() string {
 	switch e {
 	case KPDFActionNamedNone:
@@ -133,6 +137,8 @@ const (
 	KPDFAnyArea   AreaOfInterest = 9223372036854775807
 )
 
+// String returns the AreaOfInterest constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AreaOfInterest) String() string {
 	var parts []string
 	if e&KPDFPageArea != 0 {
@@ -187,6 +193,8 @@ const (
 	KPDFBorderStyleUnderline BorderStyle = 4
 )
 
+// String returns the BorderStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BorderStyle) String() string {
 	switch e {
 	case KPDFBorderStyleSolid:
@@ -220,6 +228,8 @@ const (
 	KPDFDisplayBoxArtBox DisplayBox = 4
 )
 
+// String returns the DisplayBox constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DisplayBox) String() string {
 	switch e {
 	case KPDFDisplayBoxMediaBox:
@@ -244,6 +254,8 @@ const (
 	KPDFDisplayDirectionHorizontal DisplayDirection = 1
 )
 
+// String returns the DisplayDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DisplayDirection) String() string {
 	switch e {
 	case KPDFDisplayDirectionVertical:
@@ -269,6 +281,8 @@ const (
 	KPDFDisplayTwoUpContinuous DisplayMode = 3
 )
 
+// String returns the DisplayMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DisplayMode) String() string {
 	switch e {
 	case KPDFDisplaySinglePage:
@@ -296,6 +310,8 @@ const (
 	KPDFDocumentPermissionsOwner DocumentPermissions = 2
 )
 
+// String returns the DocumentPermissions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DocumentPermissions) String() string {
 	switch e {
 	case KPDFDocumentPermissionsNone:
@@ -321,6 +337,8 @@ const (
 	KPDFInterpolationQualityHigh InterpolationQuality = 2
 )
 
+// String returns the InterpolationQuality constant's name, or its numeric form when the
+// value is not a known constant.
 func (e InterpolationQuality) String() string {
 	switch e {
 	case KPDFInterpolationQualityNone:
@@ -352,6 +370,8 @@ const (
 	KPDFLineStyleClosedArrow LineStyle = 5
 )
 
+// String returns the LineStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LineStyle) String() string {
 	switch e {
 	case KPDFLineStyleNone:
@@ -385,6 +405,8 @@ const (
 	KPDFMarkupTypeRedact MarkupType = 3
 )
 
+// String returns the MarkupType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MarkupType) String() string {
 	switch e {
 	case KPDFMarkupTypeHighlight:
@@ -412,6 +434,8 @@ const (
 	KPDFPrintPageScaleDownToFit PrintScalingMode = 2
 )
 
+// String returns the PrintScalingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PrintScalingMode) String() string {
 	switch e {
 	case KPDFPrintPageScaleNone:
@@ -422,6 +446,29 @@ func (e PrintScalingMode) String() string {
 		return "KPDFPrintPageScaleDownToFit"
 	default:
 		return fmt.Sprintf("PrintScalingMode(%d)", int64(e))
+	}
+}
+
+type SelectionGranularity uint64
+
+const (
+	SelectionGranularityCharacter SelectionGranularity = 0
+	SelectionGranularityWord      SelectionGranularity = 1
+	SelectionGranularityLine      SelectionGranularity = 2
+)
+
+// String returns the SelectionGranularity constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SelectionGranularity) String() string {
+	switch e {
+	case SelectionGranularityCharacter:
+		return "SelectionGranularityCharacter"
+	case SelectionGranularityWord:
+		return "SelectionGranularityWord"
+	case SelectionGranularityLine:
+		return "SelectionGranularityLine"
+	default:
+		return fmt.Sprintf("SelectionGranularity(%d)", int64(e))
 	}
 }
 
@@ -445,6 +492,8 @@ const (
 	KPDFTextAnnotationIconInsert TextAnnotationIconType = 6
 )
 
+// String returns the TextAnnotationIconType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextAnnotationIconType) String() string {
 	switch e {
 	case KPDFTextAnnotationIconComment:
@@ -478,6 +527,8 @@ const (
 	KPDFWidgetOnState WidgetCellState = 1
 )
 
+// String returns the WidgetCellState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WidgetCellState) String() string {
 	switch e {
 	case KPDFWidgetMixedState:
@@ -505,6 +556,8 @@ const (
 	KPDFWidgetCheckBoxControl WidgetControlType = 2
 )
 
+// String returns the WidgetControlType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WidgetControlType) String() string {
 	switch e {
 	case KPDFWidgetUnknownControl:

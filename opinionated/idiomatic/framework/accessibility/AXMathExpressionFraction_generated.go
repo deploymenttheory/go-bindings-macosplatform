@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MathExpressionFraction is an idiomatic wrapper over the Objective-C class AXMathExpressionFraction.
+//
+// It embeds [MathExpression], promoting that type's methods.
 type MathExpressionFraction struct {
-	objref.Handle
+	MathExpression
 }
 
 // MathExpressionFractionFromID adopts an existing Objective-C object as a MathExpressionFraction
@@ -23,7 +24,8 @@ func MathExpressionFractionFromID(id objc.ID) *MathExpressionFraction {
 	if id == 0 {
 		return nil
 	}
-	x := &MathExpressionFraction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MathExpressionFraction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mathExpressionFractionAdopt(id objc.ID) *MathExpressionFraction {
 	if id == 0 {
 		return nil
 	}
-	x := &MathExpressionFraction{Handle: objref.Wrap(id)}
+	x := &MathExpressionFraction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MathExpressionFraction) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MathExpressionFraction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MathExpressionFraction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMathExpressionFractionWithNumeratorExpressionDenimonatorExpression creates a new MathExpressionFraction.
@@ -63,11 +51,13 @@ func NewMathExpressionFractionWithNumeratorExpressionDenimonatorExpression(numer
 	return mathExpressionFractionAdopt(_id)
 }
 
+// NumeratorExpression wraps the corresponding Objective-C method.
 func (x *MathExpressionFraction) NumeratorExpression() *MathExpression {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numeratorExpression"))
 	return MathExpressionFromID(_r)
 }
 
+// DenimonatorExpression wraps the corresponding Objective-C method.
 func (x *MathExpressionFraction) DenimonatorExpression() *MathExpression {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("denimonatorExpression"))
 	return MathExpressionFromID(_r)
@@ -81,3 +71,5 @@ type MathExpressionFractionable interface {
 }
 
 var _ MathExpressionFractionable = (*MathExpressionFraction)(nil)
+
+var _ MathExpressionProvider = (*MathExpressionFraction)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that facilitates activation and deactivation of system extensions.
-//
 // SystemExtensionManager is an idiomatic wrapper over the Objective-C class OSSystemExtensionManager.
+//
+// A type that facilitates activation and deactivation of system extensions.
 type SystemExtensionManager struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SystemExtensionManagerFromID(id objc.ID) *SystemExtensionManager {
 	if id == 0 {
 		return nil
 	}
-	x := &SystemExtensionManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SystemExtensionManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func systemExtensionManagerAdopt(id objc.ID) *SystemExtensionManager {
 	if id == 0 {
 		return nil
 	}
-	x := &SystemExtensionManager{Handle: objref.Wrap(id)}
+	x := &SystemExtensionManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *SystemExtensionManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SystemExtensionManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSystemExtensionManager creates a new SystemExtensionManager.
 func NewSystemExtensionManager() *SystemExtensionManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionManager")), objc.RegisterName("new"))
 	return systemExtensionManagerAdopt(_id)
 }
 
-// Submits a system extension request to the manager.
+// SubmitRequest submits a system extension request to the manager.
 func (x *SystemExtensionManager) SubmitRequest(request *SystemExtensionRequest) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("submitRequest:"), objref.IDOf(request))
 }

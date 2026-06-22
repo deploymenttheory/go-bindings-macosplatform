@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A coder that encodes and decodes objects that your app sends over an XPC connection.
-//
 // XPCCoder is an idiomatic wrapper over the Objective-C class NSXPCCoder.
+//
+// It embeds [Coder], promoting that type's methods.
+//
+// A coder that encodes and decodes objects that your app sends over an XPC connection.
 type XPCCoder struct {
-	objref.Handle
+	Coder
 }
 
 // XPCCoderFromID adopts an existing Objective-C object as a XPCCoder
@@ -25,7 +26,8 @@ func XPCCoderFromID(id objc.ID) *XPCCoder {
 	if id == 0 {
 		return nil
 	}
-	x := &XPCCoder{Handle: objref.Wrap(purego.Retain(id))}
+	x := &XPCCoder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func xPCCoderAdopt(id objc.ID) *XPCCoder {
 	if id == 0 {
 		return nil
 	}
-	x := &XPCCoder{Handle: objref.Wrap(id)}
+	x := &XPCCoder{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *XPCCoder) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *XPCCoder) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *XPCCoder) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewXPCCoder creates a new XPCCoder.
@@ -64,23 +52,24 @@ func NewXPCCoder() *XPCCoder {
 	return xPCCoderAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *XPCCoder) WithScriptingProperties(scriptingProperties obj.Object) *XPCCoder {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Encodes an object to send over an XPC connection.
+// EncodeXPCObjectForKey encodes an object to send over an XPC connection.
 func (x *XPCCoder) EncodeXPCObjectForKey(xpcObject *Object, key string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeXPCObject:forKey:"), objref.IDOf(xpcObject), purego.NSString(key))
 }
 
-// Decodes an object and validates that its type matches the type a service provides over XPC.
+// DecodeXPCObjectOfTypeForKey decodes an object and validates that its type matches the type a service provides over XPC.
 func (x *XPCCoder) DecodeXPCObjectOfTypeForKey(type_ obj.Object, key string) *Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decodeXPCObjectOfType:forKey:"), objref.IDOf(type_), purego.NSString(key))
 	return ObjectFromID(_r)
 }
 
+// Connection wraps the corresponding Objective-C method.
 func (x *XPCCoder) Connection() *XPCConnection {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connection"))
 	return XPCConnectionFromID(_r)
@@ -96,3 +85,5 @@ type XPCCoderable interface {
 }
 
 var _ XPCCoderable = (*XPCCoder)(nil)
+
+var _ CoderProvider = (*XPCCoder)(nil)

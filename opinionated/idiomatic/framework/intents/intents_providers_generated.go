@@ -11,34 +11,41 @@ import (
 // CallRecordResolutionResultProvider is accepted wherever a INCallRecordResolutionResult (or one of its subclasses) is expected.
 type CallRecordResolutionResultProvider interface {
 	objref.Object
+	isCallRecordResolutionResult()
 }
 
 // IntentProvider is accepted wherever a INIntent (or one of its subclasses) is expected.
 type IntentProvider interface {
 	objref.Object
+	isIntent()
 }
 
 // IntentDonationMetadataProvider is accepted wherever a INIntentDonationMetadata (or one of its subclasses) is expected.
 type IntentDonationMetadataProvider interface {
 	objref.Object
+	isIntentDonationMetadata()
 }
 
 // IntentResolutionResultProvider is accepted wherever a INIntentResolutionResult (or one of its subclasses) is expected.
 type IntentResolutionResultProvider interface {
 	objref.Object
+	isIntentResolutionResult()
 }
 
 // IntentResponseProvider is accepted wherever a INIntentResponse (or one of its subclasses) is expected.
 type IntentResponseProvider interface {
 	objref.Object
+	isIntentResponse()
 }
 
 // PersonResolutionResultProvider is accepted wherever a INPersonResolutionResult (or one of its subclasses) is expected.
 type PersonResolutionResultProvider interface {
 	objref.Object
+	isPersonResolutionResult()
 }
 
 // ReservationProvider is accepted wherever a INReservation (or one of its subclasses) is expected.
 type ReservationProvider interface {
 	objref.Object
+	isReservation()
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that converts a normalized point or rectangle into a detection track that tracks an object over time.
-//
 // ObjectTracker is an idiomatic wrapper over the Objective-C class CNObjectTracker.
+//
+// An object that converts a normalized point or rectangle into a detection track that tracks an object over time.
 type ObjectTracker struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ObjectTrackerFromID(id objc.ID) *ObjectTracker {
 	if id == 0 {
 		return nil
 	}
-	x := &ObjectTracker{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ObjectTracker{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func objectTrackerAdopt(id objc.ID) *ObjectTracker {
 	if id == 0 {
 		return nil
 	}
-	x := &ObjectTracker{Handle: objref.Wrap(id)}
+	x := &ObjectTracker{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *ObjectTracker) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ObjectTracker) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewObjectTracker creates a new ObjectTracker.
 func NewObjectTracker() *ObjectTracker {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNObjectTracker")), objc.RegisterName("new"))
 	return objectTrackerAdopt(_id)
 }
 
-// Finish constructing the detection track and return it. - Returns: a detection track which tracks the object
+// FinishDetectionTrack finish constructing the detection track and return it. - Returns: a detection track which tracks the object
 func (x *ObjectTracker) FinishDetectionTrack() *DetectionTrack {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishDetectionTrack"))
 	return DetectionTrackFromID(_r)
 }
 
-// Reset the builder to construct a new detection track.
+// ResetDetectionTrack reset the builder to construct a new detection track.
 func (x *ObjectTracker) ResetDetectionTrack() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetDetectionTrack"))
 }

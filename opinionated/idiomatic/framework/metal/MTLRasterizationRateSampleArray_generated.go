@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An array instance that contains rasterization rates.
-//
 // RasterizationRateSampleArray is an idiomatic wrapper over the Objective-C class MTLRasterizationRateSampleArray.
+//
+// An array instance that contains rasterization rates.
 type RasterizationRateSampleArray struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RasterizationRateSampleArrayFromID(id objc.ID) *RasterizationRateSampleArra
 	if id == 0 {
 		return nil
 	}
-	x := &RasterizationRateSampleArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RasterizationRateSampleArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func rasterizationRateSampleArrayAdopt(id objc.ID) *RasterizationRateSampleArray
 	if id == 0 {
 		return nil
 	}
-	x := &RasterizationRateSampleArray{Handle: objref.Wrap(id)}
+	x := &RasterizationRateSampleArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *RasterizationRateSampleArray) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RasterizationRateSampleArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRasterizationRateSampleArray creates a new RasterizationRateSampleArray.
 func NewRasterizationRateSampleArray() *RasterizationRateSampleArray {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLRasterizationRateSampleArray")), objc.RegisterName("new"))
 	return rasterizationRateSampleArrayAdopt(_id)
 }
 
-// Retrieves the sample value at the specified index.
+// ObjectAtIndexedSubscript retrieves the sample value at the specified index.
 func (x *RasterizationRateSampleArray) ObjectAtIndexedSubscript(index int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), index)
 	return obj.Wrap(_r)
 }
 
-// Stores a sample value at the specified index.
+// SetObjectAtIndexedSubscript stores a sample value at the specified index.
 func (x *RasterizationRateSampleArray) SetObjectAtIndexedSubscript(value obj.Object, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(value), index)
 }

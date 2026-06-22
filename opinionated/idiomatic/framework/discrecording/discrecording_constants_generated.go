@@ -9,295 +9,246 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// Notification sent when a device has become available. Because users can connect and disconnect FireWire, USB, and other devices while a computer is on, you should maintain your own list of attached devices and rely on notifications to keep the list current.
 // KDRDeviceAppearedNotification returns the value of the constant kDRDeviceAppearedNotification.
 func KDRDeviceAppearedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceAppearedNotification")))
 }
 
-// Notification sent when a device is no longer available. Because users can connect and disconnect FireWire, USB, and other devices while a computer is on, you should maintain your own list of attached devices and rely on notifications to keep the list current.
 // KDRDeviceDisappearedNotification returns the value of the constant kDRDeviceDisappearedNotification.
 func KDRDeviceDisappearedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceDisappearedNotification")))
 }
 
-// Notification sent when a device's status changes, usually because a disc has been inserted or removed.  The value of the info parameter for your notification callback is equivalent to the dictionary object reference returned from a call to
 // KDRDeviceStatusChangedNotification returns the value of the constant kDRDeviceStatusChangedNotification.
 func KDRDeviceStatusChangedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceStatusChangedNotification")))
 }
 
-// A key for the dictionary object returned by
 // KDRDeviceSupportLevelKey returns the value of the constant kDRDeviceSupportLevelKey.
 func KDRDeviceSupportLevelKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceSupportLevelKey")))
 }
 
-// A key for the dictionary object returned by
 // KDRDeviceIORegistryEntryPathKey returns the value of the constant kDRDeviceIORegistryEntryPathKey.
 func KDRDeviceIORegistryEntryPathKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceIORegistryEntryPathKey")))
 }
 
-// A key for the dictionary object returned by
 // KDRDeviceVendorNameKey returns the value of the constant kDRDeviceVendorNameKey.
 func KDRDeviceVendorNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceVendorNameKey")))
 }
 
-// A key for the dictionary object returned by
 // KDRDeviceProductNameKey returns the value of the constant kDRDeviceProductNameKey.
 func KDRDeviceProductNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceProductNameKey")))
 }
 
-// A key for the dictionary object returned by
 // KDRDeviceFirmwareRevisionKey returns the value of the constant kDRDeviceFirmwareRevisionKey.
 func KDRDeviceFirmwareRevisionKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceFirmwareRevisionKey")))
 }
 
-// A key for the dictionary object returned by
 // KDRDevicePhysicalInterconnectKey returns the value of the constant kDRDevicePhysicalInterconnectKey.
 func KDRDevicePhysicalInterconnectKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDevicePhysicalInterconnectKey")))
 }
 
-// A key for the dictionary object returned by
 // KDRDevicePhysicalInterconnectLocationKey returns the value of the constant kDRDevicePhysicalInterconnectLocationKey.
 func KDRDevicePhysicalInterconnectLocationKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDevicePhysicalInterconnectLocationKey")))
 }
 
-// A key for the dictionary object  returned by
 // KDRDeviceWriteCapabilitiesKey returns the value of the constant kDRDeviceWriteCapabilitiesKey.
 func KDRDeviceWriteCapabilitiesKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceWriteCapabilitiesKey")))
 }
 
-// A key for the dictionary object returned by
 // KDRDeviceLoadingMechanismCanEjectKey returns the value of the constant kDRDeviceLoadingMechanismCanEjectKey.
 func KDRDeviceLoadingMechanismCanEjectKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceLoadingMechanismCanEjectKey")))
 }
 
-// A key for the dictionary object returned by
 // KDRDeviceLoadingMechanismCanInjectKey returns the value of the constant kDRDeviceLoadingMechanismCanInjectKey.
 func KDRDeviceLoadingMechanismCanInjectKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceLoadingMechanismCanInjectKey")))
 }
 
-// A key for the dictionary object returned by
 // KDRDeviceLoadingMechanismCanOpenKey returns the value of the constant kDRDeviceLoadingMechanismCanOpenKey.
 func KDRDeviceLoadingMechanismCanOpenKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceLoadingMechanismCanOpenKey")))
 }
 
-// A key for the dictionary object returned by
 // KDRDeviceWriteBufferSizeKey returns the value of the constant kDRDeviceWriteBufferSizeKey.
 func KDRDeviceWriteBufferSizeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceWriteBufferSizeKey")))
 }
 
-// One value for the
 // KDRDeviceSupportLevelNone returns the value of the constant kDRDeviceSupportLevelNone.
 func KDRDeviceSupportLevelNone() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceSupportLevelNone")))
 }
 
-// One value for the
 // KDRDeviceSupportLevelUnsupported returns the value of the constant kDRDeviceSupportLevelUnsupported.
 func KDRDeviceSupportLevelUnsupported() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceSupportLevelUnsupported")))
 }
 
-// One value for the
 // KDRDeviceSupportLevelVendorSupported returns the value of the constant kDRDeviceSupportLevelVendorSupported.
 func KDRDeviceSupportLevelVendorSupported() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceSupportLevelVendorSupported")))
 }
 
-// One value for the
 // KDRDeviceSupportLevelAppleSupported returns the value of the constant kDRDeviceSupportLevelAppleSupported.
 func KDRDeviceSupportLevelAppleSupported() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceSupportLevelAppleSupported")))
 }
 
-// One value for the
 // KDRDeviceSupportLevelAppleShipping returns the value of the constant kDRDeviceSupportLevelAppleShipping.
 func KDRDeviceSupportLevelAppleShipping() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceSupportLevelAppleShipping")))
 }
 
-// One value for the
 // KDRDevicePhysicalInterconnectATAPI returns the value of the constant kDRDevicePhysicalInterconnectATAPI.
 func KDRDevicePhysicalInterconnectATAPI() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDevicePhysicalInterconnectATAPI")))
 }
 
-// One value for the
 // KDRDevicePhysicalInterconnectFibreChannel returns the value of the constant kDRDevicePhysicalInterconnectFibreChannel.
 func KDRDevicePhysicalInterconnectFibreChannel() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDevicePhysicalInterconnectFibreChannel")))
 }
 
-// One value for the
 // KDRDevicePhysicalInterconnectFireWire returns the value of the constant kDRDevicePhysicalInterconnectFireWire.
 func KDRDevicePhysicalInterconnectFireWire() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDevicePhysicalInterconnectFireWire")))
 }
 
-// One value for the
 // KDRDevicePhysicalInterconnectUSB returns the value of the constant kDRDevicePhysicalInterconnectUSB.
 func KDRDevicePhysicalInterconnectUSB() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDevicePhysicalInterconnectUSB")))
 }
 
-// One value for the
 // KDRDevicePhysicalInterconnectSCSI returns the value of the constant kDRDevicePhysicalInterconnectSCSI.
 func KDRDevicePhysicalInterconnectSCSI() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDevicePhysicalInterconnectSCSI")))
 }
 
-// One value for the
 // KDRDevicePhysicalInterconnectLocationInternal returns the value of the constant kDRDevicePhysicalInterconnectLocationInternal.
 func KDRDevicePhysicalInterconnectLocationInternal() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDevicePhysicalInterconnectLocationInternal")))
 }
 
-// One value for the
 // KDRDevicePhysicalInterconnectLocationExternal returns the value of the constant kDRDevicePhysicalInterconnectLocationExternal.
 func KDRDevicePhysicalInterconnectLocationExternal() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDevicePhysicalInterconnectLocationExternal")))
 }
 
-// One value for the
 // KDRDevicePhysicalInterconnectLocationUnknown returns the value of the constant kDRDevicePhysicalInterconnectLocationUnknown.
 func KDRDevicePhysicalInterconnectLocationUnknown() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDevicePhysicalInterconnectLocationUnknown")))
 }
 
-// A key for the
 // KDRDeviceCanWriteKey returns the value of the constant kDRDeviceCanWriteKey.
 func KDRDeviceCanWriteKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteCDKey returns the value of the constant kDRDeviceCanWriteCDKey.
 func KDRDeviceCanWriteCDKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteCDKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteCDRKey returns the value of the constant kDRDeviceCanWriteCDRKey.
 func KDRDeviceCanWriteCDRKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteCDRKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteCDRWKey returns the value of the constant kDRDeviceCanWriteCDRWKey.
 func KDRDeviceCanWriteCDRWKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteCDRWKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteDVDKey returns the value of the constant kDRDeviceCanWriteDVDKey.
 func KDRDeviceCanWriteDVDKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteDVDKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteDVDRKey returns the value of the constant kDRDeviceCanWriteDVDRKey.
 func KDRDeviceCanWriteDVDRKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteDVDRKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteDVDRDualLayerKey returns the value of the constant kDRDeviceCanWriteDVDRDualLayerKey.
 func KDRDeviceCanWriteDVDRDualLayerKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteDVDRDualLayerKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteDVDRWKey returns the value of the constant kDRDeviceCanWriteDVDRWKey.
 func KDRDeviceCanWriteDVDRWKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteDVDRWKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteDVDRWDualLayerKey returns the value of the constant kDRDeviceCanWriteDVDRWDualLayerKey.
 func KDRDeviceCanWriteDVDRWDualLayerKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteDVDRWDualLayerKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteDVDRAMKey returns the value of the constant kDRDeviceCanWriteDVDRAMKey.
 func KDRDeviceCanWriteDVDRAMKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteDVDRAMKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteDVDPlusRKey returns the value of the constant kDRDeviceCanWriteDVDPlusRKey.
 func KDRDeviceCanWriteDVDPlusRKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteDVDPlusRKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteDVDPlusRDoubleLayerKey returns the value of the constant kDRDeviceCanWriteDVDPlusRDoubleLayerKey.
 func KDRDeviceCanWriteDVDPlusRDoubleLayerKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteDVDPlusRDoubleLayerKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteDVDPlusRWKey returns the value of the constant kDRDeviceCanWriteDVDPlusRWKey.
 func KDRDeviceCanWriteDVDPlusRWKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteDVDPlusRWKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteDVDPlusRWDoubleLayerKey returns the value of the constant kDRDeviceCanWriteDVDPlusRWDoubleLayerKey.
 func KDRDeviceCanWriteDVDPlusRWDoubleLayerKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteDVDPlusRWDoubleLayerKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteBDKey returns the value of the constant kDRDeviceCanWriteBDKey.
 func KDRDeviceCanWriteBDKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteBDKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteBDRKey returns the value of the constant kDRDeviceCanWriteBDRKey.
 func KDRDeviceCanWriteBDRKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteBDRKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteBDREKey returns the value of the constant kDRDeviceCanWriteBDREKey.
 func KDRDeviceCanWriteBDREKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteBDREKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteHDDVDKey returns the value of the constant kDRDeviceCanWriteHDDVDKey.
 func KDRDeviceCanWriteHDDVDKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteHDDVDKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteHDDVDRKey returns the value of the constant kDRDeviceCanWriteHDDVDRKey.
 func KDRDeviceCanWriteHDDVDRKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteHDDVDRKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteHDDVDRDualLayerKey returns the value of the constant kDRDeviceCanWriteHDDVDRDualLayerKey.
 func KDRDeviceCanWriteHDDVDRDualLayerKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteHDDVDRDualLayerKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteHDDVDRAMKey returns the value of the constant kDRDeviceCanWriteHDDVDRAMKey.
 func KDRDeviceCanWriteHDDVDRAMKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteHDDVDRAMKey")))
@@ -313,2696 +264,2219 @@ func KDRDeviceCanWriteHDDVDRWDualLayerKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteHDDVDRWDualLayerKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteCDTextKey returns the value of the constant kDRDeviceCanWriteCDTextKey.
 func KDRDeviceCanWriteCDTextKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteCDTextKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteIndexPointsKey returns the value of the constant kDRDeviceCanWriteIndexPointsKey.
 func KDRDeviceCanWriteIndexPointsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteIndexPointsKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteISRCKey returns the value of the constant kDRDeviceCanWriteISRCKey.
 func KDRDeviceCanWriteISRCKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteISRCKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteCDTAOKey returns the value of the constant kDRDeviceCanWriteCDTAOKey.
 func KDRDeviceCanWriteCDTAOKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteCDTAOKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteCDSAOKey returns the value of the constant kDRDeviceCanWriteCDSAOKey.
 func KDRDeviceCanWriteCDSAOKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteCDSAOKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteCDRawKey returns the value of the constant kDRDeviceCanWriteCDRawKey.
 func KDRDeviceCanWriteCDRawKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteCDRawKey")))
 }
 
-// A key for the
 // KDRDeviceCanWriteDVDDAOKey returns the value of the constant kDRDeviceCanWriteDVDDAOKey.
 func KDRDeviceCanWriteDVDDAOKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanWriteDVDDAOKey")))
 }
 
-// A key for the
 // KDRDeviceCanTestWriteCDKey returns the value of the constant kDRDeviceCanTestWriteCDKey.
 func KDRDeviceCanTestWriteCDKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanTestWriteCDKey")))
 }
 
-// A key for the
 // KDRDeviceCanTestWriteDVDKey returns the value of the constant kDRDeviceCanTestWriteDVDKey.
 func KDRDeviceCanTestWriteDVDKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanTestWriteDVDKey")))
 }
 
-// A key for the
 // KDRDeviceCanUnderrunProtectCDKey returns the value of the constant kDRDeviceCanUnderrunProtectCDKey.
 func KDRDeviceCanUnderrunProtectCDKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanUnderrunProtectCDKey")))
 }
 
-// A key for the
 // KDRDeviceCanUnderrunProtectDVDKey returns the value of the constant kDRDeviceCanUnderrunProtectDVDKey.
 func KDRDeviceCanUnderrunProtectDVDKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCanUnderrunProtectDVDKey")))
 }
 
-// A key for the dictionary returned by
 // KDRDeviceIsBusyKey returns the value of the constant kDRDeviceIsBusyKey.
 func KDRDeviceIsBusyKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceIsBusyKey")))
 }
 
-// A key for the dictionary returned by
 // KDRDeviceIsTrayOpenKey returns the value of the constant kDRDeviceIsTrayOpenKey.
 func KDRDeviceIsTrayOpenKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceIsTrayOpenKey")))
 }
 
-// A key for the dictionary returned by
 // KDRDeviceMaximumWriteSpeedKey returns the value of the constant kDRDeviceMaximumWriteSpeedKey.
 func KDRDeviceMaximumWriteSpeedKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMaximumWriteSpeedKey")))
 }
 
-// A key for the dictionary returned by
 // KDRDeviceCurrentWriteSpeedKey returns the value of the constant kDRDeviceCurrentWriteSpeedKey.
 func KDRDeviceCurrentWriteSpeedKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceCurrentWriteSpeedKey")))
 }
 
-// A key for the dictionary returned by
 // KDRDeviceMediaStateKey returns the value of the constant kDRDeviceMediaStateKey.
 func KDRDeviceMediaStateKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaStateKey")))
 }
 
-// A key for the dictionary returned by
 // KDRDeviceMediaInfoKey returns the value of the constant kDRDeviceMediaInfoKey.
 func KDRDeviceMediaInfoKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaInfoKey")))
 }
 
-// A key for the dictionary returned by
 // KDRDeviceBurnSpeedsKey returns the value of the constant kDRDeviceBurnSpeedsKey.
 func KDRDeviceBurnSpeedsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceBurnSpeedsKey")))
 }
 
-// A key for the dictionary returned by
 // KDRDeviceTrackRefsKey returns the value of the constant kDRDeviceTrackRefsKey.
 func KDRDeviceTrackRefsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceTrackRefsKey")))
 }
 
-// A key for the dictionary returned by
 // KDRDeviceTrackInfoKey returns the value of the constant kDRDeviceTrackInfoKey.
 func KDRDeviceTrackInfoKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceTrackInfoKey")))
 }
 
-// One value for the
 // KDRDeviceMediaStateMediaPresent returns the value of the constant kDRDeviceMediaStateMediaPresent.
 func KDRDeviceMediaStateMediaPresent() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaStateMediaPresent")))
 }
 
-// One value for the
 // KDRDeviceMediaStateInTransition returns the value of the constant kDRDeviceMediaStateInTransition.
 func KDRDeviceMediaStateInTransition() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaStateInTransition")))
 }
 
-// One value for the
 // KDRDeviceMediaStateNone returns the value of the constant kDRDeviceMediaStateNone.
 func KDRDeviceMediaStateNone() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaStateNone")))
 }
 
-// A key in the
 // KDRDeviceMediaBSDNameKey returns the value of the constant kDRDeviceMediaBSDNameKey.
 func KDRDeviceMediaBSDNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaBSDNameKey")))
 }
 
-// A key in the
 // KDRDeviceMediaIsBlankKey returns the value of the constant kDRDeviceMediaIsBlankKey.
 func KDRDeviceMediaIsBlankKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaIsBlankKey")))
 }
 
-// A key in the
 // KDRDeviceMediaIsAppendableKey returns the value of the constant kDRDeviceMediaIsAppendableKey.
 func KDRDeviceMediaIsAppendableKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaIsAppendableKey")))
 }
 
-// A key in the
 // KDRDeviceMediaIsOverwritableKey returns the value of the constant kDRDeviceMediaIsOverwritableKey.
 func KDRDeviceMediaIsOverwritableKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaIsOverwritableKey")))
 }
 
-// A key in the
 // KDRDeviceMediaIsErasableKey returns the value of the constant kDRDeviceMediaIsErasableKey.
 func KDRDeviceMediaIsErasableKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaIsErasableKey")))
 }
 
-// A key in the
 // KDRDeviceMediaIsReservedKey returns the value of the constant kDRDeviceMediaIsReservedKey.
 func KDRDeviceMediaIsReservedKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaIsReservedKey")))
 }
 
-// A key in the
 // KDRDeviceMediaBlocksOverwritableKey returns the value of the constant kDRDeviceMediaBlocksOverwritableKey.
 func KDRDeviceMediaBlocksOverwritableKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaBlocksOverwritableKey")))
 }
 
-// A key in the
 // KDRDeviceMediaBlocksFreeKey returns the value of the constant kDRDeviceMediaBlocksFreeKey.
 func KDRDeviceMediaBlocksFreeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaBlocksFreeKey")))
 }
 
-// A key in the
 // KDRDeviceMediaBlocksUsedKey returns the value of the constant kDRDeviceMediaBlocksUsedKey.
 func KDRDeviceMediaBlocksUsedKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaBlocksUsedKey")))
 }
 
-// A key in the
 // KDRDeviceMediaDoubleLayerL0DataZoneBlocksKey returns the value of the constant kDRDeviceMediaDoubleLayerL0DataZoneBlocksKey.
 func KDRDeviceMediaDoubleLayerL0DataZoneBlocksKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaDoubleLayerL0DataZoneBlocksKey")))
 }
 
-// A key in the
 // KDRDeviceMediaTrackCountKey returns the value of the constant kDRDeviceMediaTrackCountKey.
 func KDRDeviceMediaTrackCountKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTrackCountKey")))
 }
 
-// A key in the
 // KDRDeviceMediaSessionCountKey returns the value of the constant kDRDeviceMediaSessionCountKey.
 func KDRDeviceMediaSessionCountKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaSessionCountKey")))
 }
 
-// A key for the
 // KDRDeviceMediaClassKey returns the value of the constant kDRDeviceMediaClassKey.
 func KDRDeviceMediaClassKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaClassKey")))
 }
 
-// A key in the
 // KDRDeviceMediaTypeKey returns the value of the constant kDRDeviceMediaTypeKey.
 func KDRDeviceMediaTypeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeKey")))
 }
 
-// One value for the
 // KDRDeviceMediaClassCD returns the value of the constant kDRDeviceMediaClassCD.
 func KDRDeviceMediaClassCD() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaClassCD")))
 }
 
-// One value for the
 // KDRDeviceMediaClassDVD returns the value of the constant kDRDeviceMediaClassDVD.
 func KDRDeviceMediaClassDVD() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaClassDVD")))
 }
 
-// One value for the
 // KDRDeviceMediaClassBD returns the value of the constant kDRDeviceMediaClassBD.
 func KDRDeviceMediaClassBD() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaClassBD")))
 }
 
-// One value for the
 // KDRDeviceMediaClassHDDVD returns the value of the constant kDRDeviceMediaClassHDDVD.
 func KDRDeviceMediaClassHDDVD() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaClassHDDVD")))
 }
 
-// One value for the
 // KDRDeviceMediaClassUnknown returns the value of the constant kDRDeviceMediaClassUnknown.
 func KDRDeviceMediaClassUnknown() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaClassUnknown")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeCDROM returns the value of the constant kDRDeviceMediaTypeCDROM.
 func KDRDeviceMediaTypeCDROM() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeCDROM")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeCDR returns the value of the constant kDRDeviceMediaTypeCDR.
 func KDRDeviceMediaTypeCDR() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeCDR")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeCDRW returns the value of the constant kDRDeviceMediaTypeCDRW.
 func KDRDeviceMediaTypeCDRW() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeCDRW")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeDVDROM returns the value of the constant kDRDeviceMediaTypeDVDROM.
 func KDRDeviceMediaTypeDVDROM() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeDVDROM")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeDVDRAM returns the value of the constant kDRDeviceMediaTypeDVDRAM.
 func KDRDeviceMediaTypeDVDRAM() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeDVDRAM")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeDVDR returns the value of the constant kDRDeviceMediaTypeDVDR.
 func KDRDeviceMediaTypeDVDR() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeDVDR")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeDVDRDualLayer returns the value of the constant kDRDeviceMediaTypeDVDRDualLayer.
 func KDRDeviceMediaTypeDVDRDualLayer() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeDVDRDualLayer")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeDVDRW returns the value of the constant kDRDeviceMediaTypeDVDRW.
 func KDRDeviceMediaTypeDVDRW() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeDVDRW")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeDVDRWDualLayer returns the value of the constant kDRDeviceMediaTypeDVDRWDualLayer.
 func KDRDeviceMediaTypeDVDRWDualLayer() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeDVDRWDualLayer")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeDVDPlusR returns the value of the constant kDRDeviceMediaTypeDVDPlusR.
 func KDRDeviceMediaTypeDVDPlusR() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeDVDPlusR")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeDVDPlusRDoubleLayer returns the value of the constant kDRDeviceMediaTypeDVDPlusRDoubleLayer.
 func KDRDeviceMediaTypeDVDPlusRDoubleLayer() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeDVDPlusRDoubleLayer")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeDVDPlusRW returns the value of the constant kDRDeviceMediaTypeDVDPlusRW.
 func KDRDeviceMediaTypeDVDPlusRW() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeDVDPlusRW")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeDVDPlusRWDoubleLayer returns the value of the constant kDRDeviceMediaTypeDVDPlusRWDoubleLayer.
 func KDRDeviceMediaTypeDVDPlusRWDoubleLayer() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeDVDPlusRWDoubleLayer")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeBDR returns the value of the constant kDRDeviceMediaTypeBDR.
 func KDRDeviceMediaTypeBDR() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeBDR")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeBDRE returns the value of the constant kDRDeviceMediaTypeBDRE.
 func KDRDeviceMediaTypeBDRE() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeBDRE")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeBDROM returns the value of the constant kDRDeviceMediaTypeBDROM.
 func KDRDeviceMediaTypeBDROM() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeBDROM")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeHDDVDROM returns the value of the constant kDRDeviceMediaTypeHDDVDROM.
 func KDRDeviceMediaTypeHDDVDROM() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeHDDVDROM")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeHDDVDR returns the value of the constant kDRDeviceMediaTypeHDDVDR.
 func KDRDeviceMediaTypeHDDVDR() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeHDDVDR")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeHDDVDRDualLayer returns the value of the constant kDRDeviceMediaTypeHDDVDRDualLayer.
 func KDRDeviceMediaTypeHDDVDRDualLayer() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeHDDVDRDualLayer")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeHDDVDRAM returns the value of the constant kDRDeviceMediaTypeHDDVDRAM.
 func KDRDeviceMediaTypeHDDVDRAM() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeHDDVDRAM")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeHDDVDRW returns the value of the constant kDRDeviceMediaTypeHDDVDRW.
 func KDRDeviceMediaTypeHDDVDRW() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeHDDVDRW")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeHDDVDRWDualLayer returns the value of the constant kDRDeviceMediaTypeHDDVDRWDualLayer.
 func KDRDeviceMediaTypeHDDVDRWDualLayer() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeHDDVDRWDualLayer")))
 }
 
-// One value for the
 // KDRDeviceMediaTypeUnknown returns the value of the constant kDRDeviceMediaTypeUnknown.
 func KDRDeviceMediaTypeUnknown() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDeviceMediaTypeUnknown")))
 }
 
-// Required Key. This key corresponds to a CFNumber object containing the length of the track data in blocks.
 // KDRTrackLengthKey returns the value of the constant kDRTrackLengthKey.
 func KDRTrackLengthKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRTrackLengthKey"))) }
 
-// Required key. This key corresponds to a CFNumber object containing the size of each block of the track. Common values are defined in the
 // KDRBlockSizeKey returns the value of the constant kDRBlockSizeKey.
 func KDRBlockSizeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRBlockSizeKey"))) }
 
-// Required key. This key corresponds to a CFNumber object containing the type of each block of the track. Common values are defined in the
 // KDRBlockTypeKey returns the value of the constant kDRBlockTypeKey.
 func KDRBlockTypeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRBlockTypeKey"))) }
 
-// Required key. This key corresponds to a CFNumber object containing the data format of each block of the track. Common values are defined in the
 // KDRDataFormKey returns the value of the constant kDRDataFormKey.
 func KDRDataFormKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRDataFormKey"))) }
 
-// Required key. This key corresponds to a CFNumber object containing the session format of the track. Common values are defined in the
 // KDRSessionFormatKey returns the value of the constant kDRSessionFormatKey.
 func KDRSessionFormatKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRSessionFormatKey")))
 }
 
-// Required key. This key corresponds to a CFNumber object containing the track mode of the track. Common values are defined in the
 // KDRTrackModeKey returns the value of the constant kDRTrackModeKey.
 func KDRTrackModeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRTrackModeKey"))) }
 
-// Optional key. This track property key corresponds to a CFString object indicating the kind of verification that should be performed. If the key is not present, no verification will take place.
 // KDRVerificationTypeKey returns the value of the constant kDRVerificationTypeKey.
 func KDRVerificationTypeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRVerificationTypeKey")))
 }
 
-// Optional key. This track property key corresponds to a CFData object containing Multi-Media Command (MMC) copyright data. This data will be sent directly to the drive. If this key is not present, no copyright information will be sent.
 // KDRDVDCopyrightInfoKey returns the value of the constant kDRDVDCopyrightInfoKey.
 func KDRDVDCopyrightInfoKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDVDCopyrightInfoKey")))
 }
 
-// Optional key. This track property key corresponds to a CFData object containing Multi-Media Command (MMC) timestamp data. This data will be sent directly to the drive. If this key is not present, no timestamp will be sent.
 // KDRDVDTimestampKey returns the value of the constant kDRDVDTimestampKey.
 func KDRDVDTimestampKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRDVDTimestampKey")))
 }
 
-// Optional key. This track property key corresponds to a CFData object containing the data to write to Buffer Zone 1 on drives which support it, such as the Pioneer DVR-S201. This data will be sent directly to the drive. If this key is not present, no Buffer Zone 1 data will be sent.
 // KDRBufferZone1DataKey returns the value of the constant kDRBufferZone1DataKey.
 func KDRBufferZone1DataKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRBufferZone1DataKey")))
 }
 
-// Optional key. This track property key corresponds to a CFNumber object containing the maximum sustained rate at which your application will request data from the track callback, in units of kilobytes per second where 1 kilobyte = 1,000 bytes. The value for
 // KDRMaxBurnSpeedKey returns the value of the constant kDRMaxBurnSpeedKey.
 func KDRMaxBurnSpeedKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRMaxBurnSpeedKey")))
 }
 
-// Optional key. This track property key corresponds to a CFNumber object containing the length in blocks of empty space, or pregap, to be recorded before the track. If this key is not present the Disc Recording engine will assume a 2 second, or 150 block, pregap.
 // KDRPreGapLengthKey returns the value of the constant kDRPreGapLengthKey.
 func KDRPreGapLengthKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRPreGapLengthKey")))
 }
 
-// Optional key. This track property key corresponds to a CFBoolean object indicating whether the pregap listed for the track is required.  If this key is not present, the track will behave as though the key were <tt>false</tt>. If this key's value is set to <tt>true</tt> and the device does not support the exact pregap length, the burn will fail with a return value of
 // KDRPreGapIsRequiredKey returns the value of the constant kDRPreGapIsRequiredKey.
 func KDRPreGapIsRequiredKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRPreGapIsRequiredKey")))
 }
 
-// Optional key. For CD-DA audio tracks only.  This track property key corresponds to a CFData object containing exactly 12 bytes, which will be written to the disc as the International Standard Recording Code (ISRC).  If this key is not present, no ISRC data is written. The use of this value should conform to the specifications of the IFPI.  See <a href="http://www.ifpi.org/isrc">http://www.ifpi.org/isrc</a> for details on the ISRC standard. Not all drives can write ISRC data. If this key is present in any track and the drive cannot write ISRC data, the burn will fail with a return value of
 // KDRTrackISRCKey returns the value of the constant kDRTrackISRCKey.
 func KDRTrackISRCKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRTrackISRCKey"))) }
 
-// Optional key. For CD tracks only.  This track property key corresponds to a CFArray object containing CFNumber objects	describing index points within the track.  Each index point is specified as a number of blocks, equivalent to frames, relative to the start of the track.  There are 75 blocks in one second of CD audio.  No more than 98 index points may be specified for a track. Not all drives can write index points, and not all consumer CD players report or use them.  If this key is present in any track and the drive cannot write index points, the burn will fail with a return value of
 // KDRIndexPointsKey returns the value of the constant kDRIndexPointsKey.
 func KDRIndexPointsKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRIndexPointsKey"))) }
 
-// Optional key. For CD-DA audio tracks only. This track property key corresponds to a CFBoolean value indicating whether the track includes pre-emphasis of 50/15 microseconds. If this key is not present, the engine will use a default value of <tt>false</tt>.  On the disc, this key corresponds to bit 0 of the control field in sub-channel Q.
 // KDRAudioPreEmphasisKey returns the value of the constant kDRAudioPreEmphasisKey.
 func KDRAudioPreEmphasisKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRAudioPreEmphasisKey")))
 }
 
-// Optional key. For CD-DA audio tracks only. This track property key corresponds to a CFBoolean value indicating whether the track data has four channels, as opposed to the two channels of normal stereo.  If this key is not present, the engine will use a default value of <tt>false</tt> and standard two-channel stereo is assumed. Four-channel audio is supported in the Red Book standard but never caught on. It is probably being replaced by SACD, so you probably shouldn't attempt to use it. On the disc, this key corresponds to bit 3 of the control field in sub-channel Q.
 // KDRAudioFourChannelKey returns the value of the constant kDRAudioFourChannelKey.
 func KDRAudioFourChannelKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRAudioFourChannelKey")))
 }
 
-// Optional key. For CD tracks only.  This track property key corresponds to a CFString value indicating the Serial Copy Management System (SCMS) state of the track.  If this key is not present, no SCMS data is written. Not all drives are capable of writing SCMS data.  If this key is present in any track and the drive cannot write SCMS, the burn will fail with a return value of
 // KDRSerialCopyManagementStateKey returns the value of the constant kDRSerialCopyManagementStateKey.
 func KDRSerialCopyManagementStateKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRSerialCopyManagementStateKey")))
 }
 
-// One value for the
 // KDRVerificationTypeNone returns the value of the constant kDRVerificationTypeNone.
 func KDRVerificationTypeNone() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRVerificationTypeNone")))
 }
 
-// One value for the
 // KDRVerificationTypeProduceAgain returns the value of the constant kDRVerificationTypeProduceAgain.
 func KDRVerificationTypeProduceAgain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRVerificationTypeProduceAgain")))
 }
 
-// One value for the
 // KDRVerificationTypeReceiveData returns the value of the constant kDRVerificationTypeReceiveData.
 func KDRVerificationTypeReceiveData() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRVerificationTypeReceiveData")))
 }
 
-// One value for the
 // KDRVerificationTypeChecksum returns the value of the constant kDRVerificationTypeChecksum.
 func KDRVerificationTypeChecksum() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRVerificationTypeChecksum")))
 }
 
-// One value for the
 // KDRSCMSCopyrightFree returns the value of the constant kDRSCMSCopyrightFree.
 func KDRSCMSCopyrightFree() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRSCMSCopyrightFree")))
 }
 
-// One value for the
 // KDRSCMSCopyrightProtectedOriginal returns the value of the constant kDRSCMSCopyrightProtectedOriginal.
 func KDRSCMSCopyrightProtectedOriginal() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRSCMSCopyrightProtectedOriginal")))
 }
 
-// One value for the
 // KDRSCMSCopyrightProtectedCopy returns the value of the constant kDRSCMSCopyrightProtectedCopy.
 func KDRSCMSCopyrightProtectedCopy() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRSCMSCopyrightProtectedCopy")))
 }
 
-// This key corresponds to a CFNumber object containing the Logical Block Address (LBA) of the next writable address in the track. This key is not present in closed tracks.
 // KDRNextWritableAddressKey returns the value of the constant kDRNextWritableAddressKey.
 func KDRNextWritableAddressKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRNextWritableAddressKey")))
 }
 
-// This key corresponds to a CFNumber object containing the Logical Block Address (LBA) of the start address for the track.
 // KDRTrackStartAddressKey returns the value of the constant kDRTrackStartAddressKey.
 func KDRTrackStartAddressKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRTrackStartAddressKey")))
 }
 
-// This key corresponds to a CFNumber object containing the length, in blocks, which is still available in a writable track.
 // KDRFreeBlocksKey returns the value of the constant kDRFreeBlocksKey.
 func KDRFreeBlocksKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRFreeBlocksKey"))) }
 
-// This key corresponds to a CFNumber object containing the physical track number of a track.
 // KDRTrackNumberKey returns the value of the constant kDRTrackNumberKey.
 func KDRTrackNumberKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRTrackNumberKey"))) }
 
-// This key corresponds to a CFNumber object containing the physical session number of a track.
 // KDRSessionNumberKey returns the value of the constant kDRSessionNumberKey.
 func KDRSessionNumberKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRSessionNumberKey")))
 }
 
-// This key corresponds to a CFString object indicating the type of track. Possible values are
 // KDRTrackTypeKey returns the value of the constant kDRTrackTypeKey.
 func KDRTrackTypeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRTrackTypeKey"))) }
 
-// This key corresponds to a CFBoolean object and indicates whether the track is empty.
 // KDRTrackIsEmptyKey returns the value of the constant kDRTrackIsEmptyKey.
 func KDRTrackIsEmptyKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRTrackIsEmptyKey")))
 }
 
-// This key corresponds to a CFString value indicating the kind of packets being written.
 // KDRTrackPacketTypeKey returns the value of the constant kDRTrackPacketTypeKey.
 func KDRTrackPacketTypeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRTrackPacketTypeKey")))
 }
 
-// This key corresponds to a CFNumber object that contains the number of blocks per packet for the disc. It will only be present if the disc contains fixed packets. This key will contain '16' for DVD media, and typically contains either '16' or '32' for CD media.
 // KDRTrackPacketSizeKey returns the value of the constant kDRTrackPacketSizeKey.
 func KDRTrackPacketSizeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRTrackPacketSizeKey")))
 }
 
-// One value for the
 // KDRTrackTypeInvisible returns the value of the constant kDRTrackTypeInvisible.
 func KDRTrackTypeInvisible() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRTrackTypeInvisible")))
 }
 
-// One value for the
 // KDRTrackTypeIncomplete returns the value of the constant kDRTrackTypeIncomplete.
 func KDRTrackTypeIncomplete() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRTrackTypeIncomplete")))
 }
 
-// One value for the
 // KDRTrackTypeReserved returns the value of the constant kDRTrackTypeReserved.
 func KDRTrackTypeReserved() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRTrackTypeReserved")))
 }
 
-// One value for the
 // KDRTrackTypeClosed returns the value of the constant kDRTrackTypeClosed.
 func KDRTrackTypeClosed() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRTrackTypeClosed")))
 }
 
-// One value for the
 // KDRTrackPacketTypeFixed returns the value of the constant kDRTrackPacketTypeFixed.
 func KDRTrackPacketTypeFixed() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRTrackPacketTypeFixed")))
 }
 
-// One value for the
 // KDRTrackPacketTypeVariable returns the value of the constant kDRTrackPacketTypeVariable.
 func KDRTrackPacketTypeVariable() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRTrackPacketTypeVariable")))
 }
 
-// This key corresponds to the DRBurn object for which the PreBurn message applies.
 // KDRBurnKey returns the value of the constant kDRBurnKey.
 func KDRBurnKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRBurnKey"))) }
 
-// The property whose value is the data mode of the subchannel data sent to the drive. If this key is not present, the track will default to a value of
 // KDRSubchannelDataFormKey returns the value of the constant kDRSubchannelDataFormKey.
 func KDRSubchannelDataFormKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRSubchannelDataFormKey")))
 }
 
-// A value for
 // KDRSubchannelDataFormNone returns the value of the constant kDRSubchannelDataFormNone.
 func KDRSubchannelDataFormNone() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRSubchannelDataFormNone")))
 }
 
-// A value for
 // KDRSubchannelDataFormPack returns the value of the constant kDRSubchannelDataFormPack.
 func KDRSubchannelDataFormPack() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRSubchannelDataFormPack")))
 }
 
-// A value for
 // KDRSubchannelDataFormRaw returns the value of the constant kDRSubchannelDataFormRaw.
 func KDRSubchannelDataFormRaw() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRSubchannelDataFormRaw")))
 }
 
-// The notification sent when a DRBurn object has updated status.
 // KDRBurnStatusChangedNotification returns the value of the constant kDRBurnStatusChangedNotification.
 func KDRBurnStatusChangedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRBurnStatusChangedNotification")))
 }
 
-// The requested speed of the burn. This burn property key corresponds to a CFNumber object containing the speed at which the burn should run, expressed as a floating point value in kilobytes per second where 1 kilobyte = 1,000 bytes. If this key is not present, the requested maximum burn speed defaults to
 // KDRBurnRequestedSpeedKey returns the value of the constant kDRBurnRequestedSpeedKey.
 func KDRBurnRequestedSpeedKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRBurnRequestedSpeedKey")))
 }
 
-// Flag indicating whether or not the disc should remain appendable after the burn. This burn property key corresponds to a CFBoolean object containing a flag indicating if the disc should still be appendable after the burn. If this key is not present, the burn will default to a value of <tt>false</tt> and the disc will be closed. Most CD formats do not allow unclosed discs, and many types of CD readers will not work with discs that are left appendable. Don't change the value of this key unless you understand the consequences.
 // KDRBurnAppendableKey returns the value of the constant kDRBurnAppendableKey.
 func KDRBurnAppendableKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRBurnAppendableKey")))
 }
 
-// Flag indicating whether the disc should be appended to or overwritten. This burn property key corresponds to a CFBoolean object containing a flag indicating if the disc will be overwritten from block zero for the burn. If this key is not present, the burn will default to a value of <tt>false</tt> and the disc will be appended. Overwriting requires the media either be blank or erasable, and is functionally equivalent to an erase followed by a burn.
 // KDRBurnOverwriteDiscKey returns the value of the constant kDRBurnOverwriteDiscKey.
 func KDRBurnOverwriteDiscKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRBurnOverwriteDiscKey")))
 }
 
-// Flag indicating whether the disc will be verified after the burn. This burn property key corresponds to a CFBoolean object containing a flag indicating if the disc will be verified after being burned. If this key is not present, the burn will default to a value of <tt>true</tt> and the disc will be verified. Verification requires each DRTrack object to specify its verification method by way of the kDRVerificationTypeKey key in the track properties dictionary.  If none of the DRTrack objects in the burn have specified a verification method, verification will not occur.
 // KDRBurnVerifyDiscKey returns the value of the constant kDRBurnVerifyDiscKey.
 func KDRBurnVerifyDiscKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRBurnVerifyDiscKey")))
 }
 
-// The action to take upon burn completion, with a default of eject. This burn property key corresponds to a CFString object containing one of the available completion actions for disc handling. If this key is not present, the burn will default to a value of
 // KDRBurnCompletionActionKey returns the value of the constant kDRBurnCompletionActionKey.
 func KDRBurnCompletionActionKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRBurnCompletionActionKey")))
 }
 
-// Flag indicating whether burn underrun protection will be on or off. This burn property key corresponds to a CFBoolean object containing a flag indicating whether burn underrun protection will be on or off, for devices which support it. Burn underrun protection is on by default for drives which support it. Clients do need to set this value except to explicitly disable underrun protection. If this key is not present, the burn will default to a value of <tt>true</tt> and burn underrun protection will enabled, if the drive supports it.
 // KDRBurnUnderrunProtectionKey returns the value of the constant kDRBurnUnderrunProtectionKey.
 func KDRBurnUnderrunProtectionKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRBurnUnderrunProtectionKey")))
 }
 
-// Flag indicating whether to perform a test or normal burn. This burn property key corresponds to a CFBoolean object containing a flag indicating whether the burn will be a test or not. If testing is set and your application calls the DRBurnWriteLayout function, the burn process proceeds as if data would be written to the disc--but the laser is not turned on to full power so the disc is not modified. If this key is not present or the selected burning device does not support test burning, the burn will default to a value of <tt>false</tt> and a normal burn will occur.
 // KDRBurnTestingKey returns the value of the constant kDRBurnTestingKey.
 func KDRBurnTestingKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRBurnTestingKey"))) }
 
-// Flag indicating whether to burn synchronously or asynchronously. This burn property key corresponds to a CFBoolean object containing a flag indicating if burn operations will behave synchronously.  If this key is not present, it will default to a value of <tt>false</tt> and burn operations will behave asynchronously. Synchronous operations do not post status notifications and do not return until they are completed.  Status can be queried at any time using the
 // KDRSynchronousBehaviorKey returns the value of the constant kDRSynchronousBehaviorKey.
 func KDRSynchronousBehaviorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRSynchronousBehaviorKey")))
 }
 
-// The action to take upon burn failure, with a default of eject. This burn property key corresponds to a CFString object containing one of the available failure actions for disc handling. If this key is not present, the burn will default to a value of
 // KDRBurnFailureActionKey returns the value of the constant kDRBurnFailureActionKey.
 func KDRBurnFailureActionKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRBurnFailureActionKey")))
 }
 
-// The Media Catalog Number (MCN) to write to disc. This burn property key corresponds to a CFData object containing exactly 13 bytes of data to be written to the disc as the Media Catalog Number (MCN). If this key is not present it will default to all zeroes, indicating that an MCN is not supplied. This value is the standard UPC/EAN product number, and should conform to the specifications of the UCC and EAN.  See <a href="http://www.ean-int.org">http://www.ean-int.org</a> and <a href="http://www.uc-council.org">http://www.uc-council.org</a> for more information.
 // KDRMediaCatalogNumberKey returns the value of the constant kDRMediaCatalogNumberKey.
 func KDRMediaCatalogNumberKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRMediaCatalogNumberKey")))
 }
 
-// This burn property key corresponds to a CFNumber containing the number of blocks desired for the layer 0 data zone on a double layer writable disc. The size of the layer 0 data zone dictates where the transition point is from layer 0 to layer 1. If this key is present, the data zone size will be set prior to the start of the burn using the value for this key. If it is not present, the default layer 0 data zone will be used (half the available blocks on an empty disc). The transition point can be specified two ways. If the value specified in this key is greater than 1.0, then it will designate an absolute block number for the transition point. In this case, the block number should be a multiple of 16 and at least 40000h per specification. If the value is less than 1.0, it will specify the percentage of the burn that should reside on layer 0. A typical value is 0.5, designating half the burn for each layer. A value of 0.0 or 1.0 will not change the layer 0 transition point.
 // KDRBurnDoubleLayerL0DataZoneBlocksKey returns the value of the constant kDRBurnDoubleLayerL0DataZoneBlocksKey.
 func KDRBurnDoubleLayerL0DataZoneBlocksKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRBurnDoubleLayerL0DataZoneBlocksKey")))
 }
 
-// One or more suggested burn strategies. This burn property key corresponds to a CFString object, or to a CFArray object containing CFString objects, indicating the suggested burn strategy or strategies. If this key is not present, the burn engine picks an appropriate burn strategy automatically--so most clients do not need to specify a burn strategy. When more than one strategy is suggested, the burn engine attempts to use the first strategy in the list which is available.  A burn strategy will never be used if it cannot write the required data. For example, the track-at-once (TAO) strategy cannot write CD-Text. This presence of this key alone is just a suggestion--if the burn engine cannot fulfill the request it will burn using whatever strategy is available.  To convert the suggestion into a requirement, add the
 // KDRBurnStrategyKey returns the value of the constant kDRBurnStrategyKey.
 func KDRBurnStrategyKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRBurnStrategyKey")))
 }
 
-// Flag indicating whether to attempt to enforce the specified burn strategies. This burn property key corresponds to a CFBoolean object indicating whether the burn strategy or strategies listed for the
 // KDRBurnStrategyIsRequiredKey returns the value of the constant kDRBurnStrategyIsRequiredKey.
 func KDRBurnStrategyIsRequiredKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRBurnStrategyIsRequiredKey")))
 }
 
-// This burn property key corresponds to a
 // KDRCDTextKey returns the value of the constant kDRCDTextKey.
 func KDRCDTextKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRCDTextKey"))) }
 
-// A CFString object indicating that the drive should eject the disc when the burn completes.
 // KDRBurnCompletionActionEject returns the value of the constant kDRBurnCompletionActionEject.
 func KDRBurnCompletionActionEject() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRBurnCompletionActionEject")))
 }
 
-// A CFString object indicating that the Disc Recording engine should mount the disc on the desktop when the burn completes.
 // KDRBurnCompletionActionMount returns the value of the constant kDRBurnCompletionActionMount.
 func KDRBurnCompletionActionMount() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRBurnCompletionActionMount")))
 }
 
-// A CFString object indicating that the drive should eject the disc if the burn fails.
 // KDRBurnFailureActionEject returns the value of the constant kDRBurnFailureActionEject.
 func KDRBurnFailureActionEject() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRBurnFailureActionEject")))
 }
 
-// A CFString object indicating that the drive should do nothing with the disc if the burn fails.
 // KDRBurnFailureActionNone returns the value of the constant kDRBurnFailureActionNone.
 func KDRBurnFailureActionNone() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRBurnFailureActionNone")))
 }
 
-// A CFString object representing the track-at-once (TAO) burn strategy for CD.
 // KDRBurnStrategyCDTAO returns the value of the constant kDRBurnStrategyCDTAO.
 func KDRBurnStrategyCDTAO() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRBurnStrategyCDTAO")))
 }
 
-// A CFString object representing the session-at-once (SAO) burn strategy for CD.
 // KDRBurnStrategyCDSAO returns the value of the constant kDRBurnStrategyCDSAO.
 func KDRBurnStrategyCDSAO() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRBurnStrategyCDSAO")))
 }
 
-// A CFString object representing the disc-at-once (DAO) burn strategy for DVD. This strategy applies only to DVDs. It is not valid when burning to CD media.
 // KDRBurnStrategyDVDDAO returns the value of the constant kDRBurnStrategyDVDDAO.
 func KDRBurnStrategyDVDDAO() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRBurnStrategyDVDDAO")))
 }
 
-// A CFString object representing the disc-at-once (DAO) burn strategy for BD. This strategy applies only to BDs (Blu-ray).
 // KDRBurnStrategyBDDAO returns the value of the constant kDRBurnStrategyBDDAO.
 func KDRBurnStrategyBDDAO() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRBurnStrategyBDDAO")))
 }
 
-// This is a required property key for a CD-Text block.  Its value is a reference to a CFString object containing the ISO 639 language code describing the language for the text of the block.  CD-Text allows the concept of an unknown language, which is represented here by an empty string. You can change a block's language after creating the block.
 // KDRCDTextLanguageKey returns the value of the constant kDRCDTextLanguageKey.
 func KDRCDTextLanguageKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRCDTextLanguageKey")))
 }
 
-// This is a required property key for a CD-Text block.  Its value is a reference to a CFNumber object containing the Red Book character set value for the text of the block. The value is not a CFStringEncoding or an NSStringEncoding data type and should not be used as such. This property should remain constant once a block is created.  If you change it after creating a block, the results are undefined.
 // KDRCDTextCharacterCodeKey returns the value of the constant kDRCDTextCharacterCodeKey.
 func KDRCDTextCharacterCodeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRCDTextCharacterCodeKey")))
 }
 
-// This is a required property key for a CD-Text block.  Its value is a reference to a CFNumber object containing the CFStringEncoding value for the text of the block. This property should remain constant once a block is created.   If you change it after creating a block, the results are undefined.
 // KDRCDTextCFStringEncodingKey returns the value of the constant kDRCDTextCFStringEncodingKey.
 func KDRCDTextCFStringEncodingKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRCDTextCFStringEncodingKey")))
 }
 
-// This is an optional property key for a CD-Text block.  Its value is a reference to a CFBoolean object that indicates whether copyright is asserted on the block text associated with the kDRCDTextSpecialMessageKey key. If this value is not specified, no copyright is asserted for the text.
 // KDRCDTextCopyrightAssertedForSpecialMessagesKey returns the value of the constant kDRCDTextCopyrightAssertedForSpecialMessagesKey.
 func KDRCDTextCopyrightAssertedForSpecialMessagesKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRCDTextCopyrightAssertedForSpecialMessagesKey")))
 }
 
-// This is an optional property key for a CD-Text block.  Its value is a reference to a CFBoolean object that indicates whether copyright is asserted on the names in the block, which include the values associated with the kDRCDTextPerformerKey, kDRCDTextSongwriterKey, kDRCDTextComposerKey, and kDRCDTextArrangerKey keys. If this value is not specified, no copyright is asserted for these items.
 // KDRCDTextCopyrightAssertedForNamesKey returns the value of the constant kDRCDTextCopyrightAssertedForNamesKey.
 func KDRCDTextCopyrightAssertedForNamesKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRCDTextCopyrightAssertedForNamesKey")))
 }
 
-// This is an optional property key for a CD-Text block.  Its value is a reference to a CFBoolean object that indicates whether copyright is asserted on the disc or track title associated with the kDRCDTextTitleKey key. If this value is not specified, no copyright is asserted for this text.
 // KDRCDTextCopyrightAssertedForTitlesKey returns the value of the constant kDRCDTextCopyrightAssertedForTitlesKey.
 func KDRCDTextCopyrightAssertedForTitlesKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRCDTextCopyrightAssertedForTitlesKey")))
 }
 
-// A CD-Text block dictionary key whose value, a CFString object, contains the title for a track or, if for the disc info block, for the disc as a whole.
 // KDRCDTextTitleKey returns the value of the constant kDRCDTextTitleKey.
 func KDRCDTextTitleKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRCDTextTitleKey"))) }
 
-// A CD-Text block dictionary key whose value, a CFString object, contains the name of the performer for a track or, if for the disc info block, for the disc as a whole.
 // KDRCDTextPerformerKey returns the value of the constant kDRCDTextPerformerKey.
 func KDRCDTextPerformerKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRCDTextPerformerKey")))
 }
 
-// A CD-Text block dictionary key whose value, a CFString object, contains the name of the songwriter for a track or, if for the disc info block, for the disc as a whole.
 // KDRCDTextSongwriterKey returns the value of the constant kDRCDTextSongwriterKey.
 func KDRCDTextSongwriterKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRCDTextSongwriterKey")))
 }
 
-// A CD-Text block dictionary key whose value, a CFString object, contains the name of the composer for a track or, if for the disc info block, for the disc as a whole.
 // KDRCDTextComposerKey returns the value of the constant kDRCDTextComposerKey.
 func KDRCDTextComposerKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRCDTextComposerKey")))
 }
 
-// A CD-Text block dictionary key whose value, a CFString object, contains the name of the arranger for a track or, if for the disc info block, for the disc as a whole.
 // KDRCDTextArrangerKey returns the value of the constant kDRCDTextArrangerKey.
 func KDRCDTextArrangerKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRCDTextArrangerKey")))
 }
 
-// A CD-Text block dictionary key whose value, a CFString object, contains a text message that may be displayed to the user by some players.
 // KDRCDTextSpecialMessageKey returns the value of the constant kDRCDTextSpecialMessageKey.
 func KDRCDTextSpecialMessageKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRCDTextSpecialMessageKey")))
 }
 
-// A CD-Text block dictionary key whose value, a CFString object, contains disc identifying information such as the catalog number and name of the record company, point of sale code, year, and so on.  Each item shall be separated by a slash ("/"). In compliance with the CD-Text specifications, this string is always encoded using the kDRCDTextEncodingISOLatin1Modified encoding, regardless of the block's encoding. This key is valid only for the disc as a whole, namely for array index 0. It is ignored when set in the dictionaries for tracks.
 // KDRCDTextDiscIdentKey returns the value of the constant kDRCDTextDiscIdentKey.
 func KDRCDTextDiscIdentKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRCDTextDiscIdentKey")))
 }
 
-// A CD-Text block dictionary key whose value, a CFString object, contains the name of the genre for the disc as a whole. In compliance with the CD-Text specifications, this string is always encoded using the kDRCDTextEncodingISOLatin1Modified encoding, regardless of the block's encoding. This key is valid only for the disc as a whole, namely for array index 0. It is ignored when set in the dictionaries for tracks.
 // KDRCDTextGenreKey returns the value of the constant kDRCDTextGenreKey.
 func KDRCDTextGenreKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRCDTextGenreKey"))) }
 
-// A CD-Text block dictionary key whose value, a CFNumber object, contains the numeric code of the genre for the disc as a whole as listed in the CD-Text Genres enumeration. This key is valid only for the disc as a whole, namely for array index 0. It is ignored when set in the dictionaries for tracks.
 // KDRCDTextGenreCodeKey returns the value of the constant kDRCDTextGenreCodeKey.
 func KDRCDTextGenreCodeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRCDTextGenreCodeKey")))
 }
 
-// A CD-Text block dictionary key whose value, a CFString object, contains arbitrary disc information. The text format is arbitrary and is up to the content provider.  This information is private and players should not display it to the user of the disc. In compliance with the CD-Text specifications, this string is always encoded using the kDRCDTextEncodingISOLatin1Modified encoding, regardless of the block's encoding.
 // KDRCDTextClosedKey returns the value of the constant kDRCDTextClosedKey.
 func KDRCDTextClosedKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRCDTextClosedKey")))
 }
 
-// A CD-Text block dictionary key whose value, a CFData object, contains either 13 bytes of Media Catalog Number (MCN, for the disc as a whole) or 12 bytes of International Standard Recording Code (ISRC, for tracks). This information can also be specified in the burn and track properties.  CD-Text simply provides an alternative, possibly redundant, way to encode this information. If the MCN or ISRC data was specified in the properties for the burn or track, this value should be the same.  See the descriptions of kDRMediaCatalogNumberKey and kDRTrackISRCKey for more details on the precise format of the data.
 // KDRCDTextMCNISRCKey returns the value of the constant kDRCDTextMCNISRCKey.
 func KDRCDTextMCNISRCKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRCDTextMCNISRCKey")))
 }
 
-// A CD-Text block dictionary key whose value, a CFData object, contains table-of-contents information. This key is for output use only, when reading CD-Text from a disc. It is ignored when specified in a burn.
 // KDRCDTextTOCKey returns the value of the constant kDRCDTextTOCKey.
 func KDRCDTextTOCKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRCDTextTOCKey"))) }
 
-// A CD-Text block dictionary key whose value, a CFData object, contains additional table-of-contents information. This key is for output use only, when reading CD-Text from a disc. It is ignored when specified in a burn.
 // KDRCDTextTOC2Key returns the value of the constant kDRCDTextTOC2Key.
 func KDRCDTextTOC2Key() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRCDTextTOC2Key"))) }
 
-// A CD-Text block dictionary key whose value, a CFData object, contains information about the number of packs and languages associated with each block. This key is for output use only, when reading CD-Text from a disc. It is ignored when specified in a burn.
 // KDRCDTextSizeKey returns the value of the constant kDRCDTextSizeKey.
 func KDRCDTextSizeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRCDTextSizeKey"))) }
 
-// The notification sent when a DRErase object has updated status.
 // KDREraseStatusChangedNotification returns the value of the constant kDREraseStatusChangedNotification.
 func KDREraseStatusChangedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDREraseStatusChangedNotification")))
 }
 
-// This key points to a CFString object describing the type of erase to be performed. If this key is not present, a
 // KDREraseTypeKey returns the value of the constant kDREraseTypeKey.
 func KDREraseTypeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDREraseTypeKey"))) }
 
-// A CFString object indicating the erase operation should do the minimal amount of work to make the disc appear blank. This operation typically takes only a minute or two.
 // KDREraseTypeQuick returns the value of the constant kDREraseTypeQuick.
 func KDREraseTypeQuick() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDREraseTypeQuick"))) }
 
-// A CFString object indicating the erase operation should erase every byte on the disc. This operation is slow, taking on the order of 30 minutes.
 // KDREraseTypeComplete returns the value of the constant kDREraseTypeComplete.
 func KDREraseTypeComplete() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDREraseTypeComplete")))
 }
 
-// A key for the DRErrorStatus dictionary, returned by any of the <tt>DRxxxCopyStatus</tt> calls or <tt>kDRxxxStatusChangedNotifications</tt>, to describe a failure.  The value of this key is a CFDictionary object containing error code and device sense information.
 // KDRErrorStatusKey returns the value of the constant kDRErrorStatusKey.
 func KDRErrorStatusKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRErrorStatusKey"))) }
 
-// A key for the DRErrorStatus dictionary. The value of this key is a CFNumber object containing the OSStatus value corresponding to the failure.
 // KDRErrorStatusErrorKey returns the value of the constant kDRErrorStatusErrorKey.
 func KDRErrorStatusErrorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRErrorStatusErrorKey")))
 }
 
-// A key for the DRErrorStatus dictionary. The value of this key is a CFString object containing the localized string describing the kDRErrorStatusErrorKey key.  This value is optional and may not be present if a suitable string does not exist to describe the failure.
 // KDRErrorStatusErrorStringKey returns the value of the constant kDRErrorStatusErrorStringKey.
 func KDRErrorStatusErrorStringKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRErrorStatusErrorStringKey")))
 }
 
-// A key for the DRErrorStatus dictionary. The value of this key is a CFString object containing a string providing additional information for the error.  This value is optional and may not be present if a suitable string does not exist to describe the failure.
 // KDRErrorStatusErrorInfoStringKey returns the value of the constant kDRErrorStatusErrorInfoStringKey.
 func KDRErrorStatusErrorInfoStringKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRErrorStatusErrorInfoStringKey")))
 }
 
-// A key for the DRErrorStatus dictionary. The value of this key is a CFData object containing the device sense data describing the failure.  This value is optional and may not be present if the failure was not device-related, or if the device failed in a way which did not provide meaningful sense data.
 // KDRErrorStatusSenseKey returns the value of the constant kDRErrorStatusSenseKey.
 func KDRErrorStatusSenseKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRErrorStatusSenseKey")))
 }
 
-// A key for the DRErrorStatus dictionary. The value of this key is a CFString object containing the localized string describing the sense key from the sense data for the failure. This value is optional and will not be present if the kDRErrorStatusSenseKey key is not present or if a suitable string does not exist to describe the failure.
 // KDRErrorStatusSenseCodeStringKey returns the value of the constant kDRErrorStatusSenseCodeStringKey.
 func KDRErrorStatusSenseCodeStringKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRErrorStatusSenseCodeStringKey")))
 }
 
-// A key for the DRErrorStatus dictionary. The value of this key is a CFString object containing the localized string describing the additonal sense from the sense data for the failure.  This value is optional and will not be present if the kDRErrorStatusSenseKey key is not present or if a suitable string does not exist to describe the failure.
 // KDRErrorStatusAdditionalSenseStringKey returns the value of the constant kDRErrorStatusAdditionalSenseStringKey.
 func KDRErrorStatusAdditionalSenseStringKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRErrorStatusAdditionalSenseStringKey")))
 }
 
-// The state of the burn or erase operation. A key for the status dictionaries. The value of this key is a CFString object indicating the current state of the burn or erase operation.
 // KDRStatusStateKey returns the value of the constant kDRStatusStateKey.
 func KDRStatusStateKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRStatusStateKey"))) }
 
-// The burn or erase operation's percentage of completion. A key for the status dictionaries. The value of this key is a CFNumber object containing the precentage of completion for the burn or erase operation, expressed as a foating point number from 0 to 1.
 // KDRStatusPercentCompleteKey returns the value of the constant kDRStatusPercentCompleteKey.
 func KDRStatusPercentCompleteKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRStatusPercentCompleteKey")))
 }
 
-// The current burn or erase speed. A key for the burn status dictionary. The value of this key is a CFNumber object containing the current burn or erase speed.
 // KDRStatusCurrentSpeedKey returns the value of the constant kDRStatusCurrentSpeedKey.
 func KDRStatusCurrentSpeedKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRStatusCurrentSpeedKey")))
 }
 
-// The number of the burn session. A key for the burn status dictionary. The value of this key is a CFNumber object containing the number of the current burn session.
 // KDRStatusCurrentSessionKey returns the value of the constant kDRStatusCurrentSessionKey.
 func KDRStatusCurrentSessionKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRStatusCurrentSessionKey")))
 }
 
-// The number of the track being burned. A key for the status dictionaries. The value of this key is a CFNumber object containing the number of the track being burned.
 // KDRStatusCurrentTrackKey returns the value of the constant kDRStatusCurrentTrackKey.
 func KDRStatusCurrentTrackKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRStatusCurrentTrackKey")))
 }
 
-// The total number of burn sessions. A key for the status dictionaries. The value of this key is a CFNumber object containing the total number of sessions being burned.
 // KDRStatusTotalSessionsKey returns the value of the constant kDRStatusTotalSessionsKey.
 func KDRStatusTotalSessionsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRStatusTotalSessionsKey")))
 }
 
-// The number of tracks in the current session. A key for the status dictionaries. The value of this key is a CFNumber object containing the total number of tracks being burned in the current session.
 // KDRStatusTotalTracksKey returns the value of the constant kDRStatusTotalTracksKey.
 func KDRStatusTotalTracksKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRStatusTotalTracksKey")))
 }
 
-// The type of erase operation. A key for the erase status dictionary. The value of this key is a CFString object containing the type of erase operation -- either
 // KDRStatusEraseTypeKey returns the value of the constant kDRStatusEraseTypeKey.
 func KDRStatusEraseTypeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRStatusEraseTypeKey")))
 }
 
-// The burn or erase operation has not begun. A value for the
 // KDRStatusStateNone returns the value of the constant kDRStatusStateNone.
 func KDRStatusStateNone() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRStatusStateNone")))
 }
 
-// The burn or erase operation is preparing to begin. A value for the
 // KDRStatusStatePreparing returns the value of the constant kDRStatusStatePreparing.
 func KDRStatusStatePreparing() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRStatusStatePreparing")))
 }
 
-// The burn or erase operation is being verified. A value for the
 // KDRStatusStateVerifying returns the value of the constant kDRStatusStateVerifying.
 func KDRStatusStateVerifying() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRStatusStateVerifying")))
 }
 
-// The burn or erase operation finished successfully. A value for the
 // KDRStatusStateDone returns the value of the constant kDRStatusStateDone.
 func KDRStatusStateDone() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRStatusStateDone")))
 }
 
-// The burn or erase operation failed. A value for the
 // KDRStatusStateFailed returns the value of the constant kDRStatusStateFailed.
 func KDRStatusStateFailed() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRStatusStateFailed")))
 }
 
-// The burn session is opening. A value for the
 // KDRStatusStateSessionOpen returns the value of the constant kDRStatusStateSessionOpen.
 func KDRStatusStateSessionOpen() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRStatusStateSessionOpen")))
 }
 
-// The burn session is opening a track. A value for the
 // KDRStatusStateTrackOpen returns the value of the constant kDRStatusStateTrackOpen.
 func KDRStatusStateTrackOpen() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRStatusStateTrackOpen")))
 }
 
-// The burn session is writing a track. A value for the
 // KDRStatusStateTrackWrite returns the value of the constant kDRStatusStateTrackWrite.
 func KDRStatusStateTrackWrite() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRStatusStateTrackWrite")))
 }
 
-// The burn session is closing a track. A value for the
 // KDRStatusStateTrackClose returns the value of the constant kDRStatusStateTrackClose.
 func KDRStatusStateTrackClose() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRStatusStateTrackClose")))
 }
 
-// The burn session is closing. A value for the
 // KDRStatusStateSessionClose returns the value of the constant kDRStatusStateSessionClose.
 func KDRStatusStateSessionClose() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRStatusStateSessionClose")))
 }
 
-// The burn session is finishing. A value for the
 // KDRStatusStateFinishing returns the value of the constant kDRStatusStateFinishing.
 func KDRStatusStateFinishing() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRStatusStateFinishing")))
 }
 
-// The disc is being erased. A value for the
 // KDRStatusStateErasing returns the value of the constant kDRStatusStateErasing.
 func KDRStatusStateErasing() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRStatusStateErasing")))
 }
 
-// A dictionary of extended progress information. A key for the status dictionary. The value of this key is a reference to a CFDictionary object containing extended progress information.
 // KDRStatusProgressInfoKey returns the value of the constant kDRStatusProgressInfoKey.
 func KDRStatusProgressInfoKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRStatusProgressInfoKey")))
 }
 
-// The current burn speed in kilobytes per second. This is an optional key within the kDRStatusProgressInfo dictionary. The value of this key, if present, is a CFNumber object containing the write speed of the burn.
 // KDRStatusProgressCurrentKPS returns the value of the constant kDRStatusProgressCurrentKPS.
 func KDRStatusProgressCurrentKPS() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRStatusProgressCurrentKPS")))
 }
 
-// The current burn speed in a media appropriate x-factor This is an optional key within the kDRStatusProgressInfo dictionary. The value of this key, if present, is a CFNumber object containing the appropriate x-factor for the media.
 // KDRStatusProgressCurrentXFactor returns the value of the constant kDRStatusProgressCurrentXFactor.
 func KDRStatusProgressCurrentXFactor() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRStatusProgressCurrentXFactor")))
 }
 
-// The key for indicating the ISO level of the ISO-9660 filesystem on the track. Value is a CFNumberRef, currently should be 1 or 2.
 // KDRISOLevel returns the value of the constant kDRISOLevel.
 func KDRISOLevel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRISOLevel"))) }
 
-// (ISO/Joliet) The key for indicating the volume set name. Value is a CFStringRef.
 // KDRVolumeSet returns the value of the constant kDRVolumeSet.
 func KDRVolumeSet() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRVolumeSet"))) }
 
-// (ISO/Joliet) The key for indicating the publisher string. Value is a CFStringRef.
 // KDRPublisher returns the value of the constant kDRPublisher.
 func KDRPublisher() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRPublisher"))) }
 
-// (ISO/Joliet) The key for indicating the data preparer. Value is a CFStringRef.
 // KDRDataPreparer returns the value of the constant kDRDataPreparer.
 func KDRDataPreparer() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRDataPreparer"))) }
 
-// (ISO/Joliet) The key for indicating the system identifier. Value is a CFStringRef. Only the first 32 characters (ISO) or 16 characters (Joliet) will be used, after being mapped into a legal character set. Note, this value will NOT be used if Mac extensions are turned on - with Mac extensions, the system identifier will always be "APPLE COMPUTER, INC., TYPE: 0002" or "APPLE INC., TYPE: 0002"
 // KDRSystemIdentifier returns the value of the constant kDRSystemIdentifier.
 func KDRSystemIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRSystemIdentifier")))
 }
 
-// (ISO/Joliet) The key for indicating the application identifier. Value is a CFStringRef. Only the first 32 characters (ISO) or 16 characters (Joliet) will be used, after being mapped into a legal character set.
 // KDRApplicationIdentifier returns the value of the constant kDRApplicationIdentifier.
 func KDRApplicationIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRApplicationIdentifier")))
 }
 
-// (ISO/Joliet) The key for indicating the copyright file. Value is a
 // KDRCopyrightFile returns the value of the constant kDRCopyrightFile.
 func KDRCopyrightFile() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRCopyrightFile"))) }
 
-// (ISO/Joliet) The key for indicating the abstract file. Value is a
 // KDRAbstractFile returns the value of the constant kDRAbstractFile.
 func KDRAbstractFile() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRAbstractFile"))) }
 
-// (ISO/Joliet) The key for indicating the bibliographic file. Value is a
 // KDRBibliographicFile returns the value of the constant kDRBibliographicFile.
 func KDRBibliographicFile() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRBibliographicFile")))
 }
 
-// The key for indicating the block size of the track. Value is a CFNumberRef, currently always 2048.  Do not change.
 // KDRBlockSize returns the value of the constant kDRBlockSize.
 func KDRBlockSize() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRBlockSize"))) }
 
-// The default date for any unspecified dates in the filesystem. Value is a CFDateRef.  The current date and time is used if unspecified.
 // KDRDefaultDate returns the value of the constant kDRDefaultDate.
 func KDRDefaultDate() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRDefaultDate"))) }
 
-// The key for indicating the volume creation date. Value is a CFDateRef.
 // KDRVolumeCreationDate returns the value of the constant kDRVolumeCreationDate.
 func KDRVolumeCreationDate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRVolumeCreationDate")))
 }
 
-// The key for indicating the volume modification date. Value is a CFDateRef.
 // KDRVolumeModificationDate returns the value of the constant kDRVolumeModificationDate.
 func KDRVolumeModificationDate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRVolumeModificationDate")))
 }
 
-// (HFS+) The key for indicating the volume-checked date. Value is a CFDateRef.
 // KDRVolumeCheckedDate returns the value of the constant kDRVolumeCheckedDate.
 func KDRVolumeCheckedDate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRVolumeCheckedDate")))
 }
 
-// (ISO/Joliet) The date and time at which the volume expires. Value is a CFDateRef.  Empty if unspecified.
 // KDRVolumeExpirationDate returns the value of the constant kDRVolumeExpirationDate.
 func KDRVolumeExpirationDate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRVolumeExpirationDate")))
 }
 
-// (ISO/Joliet) The date and time at which the volume is effective. Value is a CFDateRef.  Empty if unspecified.
 // KDRVolumeEffectiveDate returns the value of the constant kDRVolumeEffectiveDate.
 func KDRVolumeEffectiveDate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRVolumeEffectiveDate")))
 }
 
-// (ISO/Joliet) Whether to add ISO/Joliet Mac extensions when appropriate. Value is a CFBooleanRef.
 // KDRISOMacExtensions returns the value of the constant kDRISOMacExtensions.
 func KDRISOMacExtensions() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRISOMacExtensions")))
 }
 
-// (ISO/Joliet) Whether to add RockRidge (POSIX extensions) when appropriate. Value is a CFBooleanRef.
 // KDRISORockRidgeExtensions returns the value of the constant kDRISORockRidgeExtensions.
 func KDRISORockRidgeExtensions() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRISORockRidgeExtensions")))
 }
 
-// Whether to suppress Mac-specific files from non-HFS filesystems. Value is a CFBooleanRef.
 // KDRSuppressMacSpecificFiles returns the value of the constant kDRSuppressMacSpecificFiles.
 func KDRSuppressMacSpecificFiles() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRSuppressMacSpecificFiles")))
 }
 
-// The key for accessing the name or properties for the file in all filesystems together. When this key is used to refer to a name, it refers to the base name (which has no naming restrictions).
 // KDRAllFilesystems returns the value of the constant kDRAllFilesystems.
 func KDRAllFilesystems() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRAllFilesystems"))) }
 
-// The key for accessing the ISO-9660 properties for the file. This key is used to refer specifically to the properties for the file. This key cannot be used to refer to the name of the file; it is ambiguous, since the name may be in either level 1 or level 2 format.
 // KDRISO9660 returns the value of the constant kDRISO9660.
 func KDRISO9660() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRISO9660"))) }
 
-// The key for accessing the ISO-9660 level 1 name for the file. This key is used to refer specifically to the name generated for ISO-9660 if the ISO level is set to 1.  When used for a property, it is equivalent in use to the
 // KDRISO9660LevelOne returns the value of the constant kDRISO9660LevelOne.
 func KDRISO9660LevelOne() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRISO9660LevelOne")))
 }
 
-// The key for accessing the ISO-9660 level 2 name for the file. This key is used to refer specifically to the name generated for ISO-9660 if the ISO level is set to 2.  When used for a property, it is equivalent in use to the
 // KDRISO9660LevelTwo returns the value of the constant kDRISO9660LevelTwo.
 func KDRISO9660LevelTwo() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRISO9660LevelTwo")))
 }
 
-// The key for accessing the Joliet name/properties for the file. Joliet names can be 64 precomposed unicode characters long, but are only allowed one "." character and many punctuation characters are illegal.
 // KDRJoliet returns the value of the constant kDRJoliet.
 func KDRJoliet() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRJoliet"))) }
 
-// The key for accessing the HFS+ name/properties for the file. HFS+ names can be up to 255 decomposed unicode characters long.
 // KDRHFSPlus returns the value of the constant kDRHFSPlus.
 func KDRHFSPlus() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRHFSPlus"))) }
 
-// The key for accessing the UDF name/properties for the file.
 // KDRUDF returns the value of the constant kDRUDF.
 func KDRUDF() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRUDF"))) }
 
-// The property key for the ISO9660 version number for the object. Value is a CFNumber, default value is 1.
 // KDRISO9660VersionNumber returns the value of the constant kDRISO9660VersionNumber.
 func KDRISO9660VersionNumber() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRISO9660VersionNumber")))
 }
 
-// The property key for the invisibility of the object. Value is a CFBooleanRef.
 // KDRInvisible returns the value of the constant kDRInvisible.
 func KDRInvisible() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRInvisible"))) }
 
-// The property key for the item's creation date. Value is a CFDateRef.
 // KDRCreationDate returns the value of the constant kDRCreationDate.
 func KDRCreationDate() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRCreationDate"))) }
 
-// The property key for the item's content modification date. Value is a CFDateRef.
 // KDRContentModificationDate returns the value of the constant kDRContentModificationDate.
 func KDRContentModificationDate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRContentModificationDate")))
 }
 
-// The property key for the item's attribute modification date. Value is a CFDateRef.
 // KDRAttributeModificationDate returns the value of the constant kDRAttributeModificationDate.
 func KDRAttributeModificationDate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRAttributeModificationDate")))
 }
 
-// The property key for the item's last-accessed date. Value is a CFDateRef.
 // KDRAccessDate returns the value of the constant kDRAccessDate.
 func KDRAccessDate() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRAccessDate"))) }
 
-// The property key for the item's backup date. Value is a CFDateRef.
 // KDRBackupDate returns the value of the constant kDRBackupDate.
 func KDRBackupDate() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRBackupDate"))) }
 
-// The property key for the item's recording date. Value is a CFDateRef.
 // KDRRecordingDate returns the value of the constant kDRRecordingDate.
 func KDRRecordingDate() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRRecordingDate"))) }
 
-// The property key for the item's effective date, the date at which the contents become valid. Value is a CFDateRef.
 // KDREffectiveDate returns the value of the constant kDREffectiveDate.
 func KDREffectiveDate() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDREffectiveDate"))) }
 
-// The property key for the item's expiration date, the date at which the contents become no longer valid. Value is a CFDateRef.
 // KDRExpirationDate returns the value of the constant kDRExpirationDate.
 func KDRExpirationDate() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRExpirationDate"))) }
 
-// The posix file mode. Value is a CFNumber.
 // KDRPosixFileMode returns the value of the constant kDRPosixFileMode.
 func KDRPosixFileMode() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRPosixFileMode"))) }
 
-// The posix file UID. Value is a CFNumber.
 // KDRPosixUID returns the value of the constant kDRPosixUID.
 func KDRPosixUID() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRPosixUID"))) }
 
-// The posix file GID. Value is a CFNumber.
 // KDRPosixGID returns the value of the constant kDRPosixGID.
 func KDRPosixGID() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRPosixGID"))) }
 
-// The property key for the item's text encoding hint (HFS+ only). Value is a CFNumber.  This value is used by the MacOS to help when converting the natively UTF-16 filename into an 8-bit-per-character representation (such as MacRoman, Shift-JIS, or UTF8).  If not set, default behavior is to call
 // KDRHFSPlusTextEncodingHint returns the value of the constant kDRHFSPlusTextEncodingHint.
 func KDRHFSPlusTextEncodingHint() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRHFSPlusTextEncodingHint")))
 }
 
-// The property key for the item's catalog node ID (HFS+ only). Value is a CFNumber.  Currently, this value if set is only a suggestion. The burn engine will attempt to use this node ID, but may use another value if it needs to resolve conflicts.  Default behavior is to allocate node IDs incrementally from
 // KDRHFSPlusCatalogNodeID returns the value of the constant kDRHFSPlusCatalogNodeID.
 func KDRHFSPlusCatalogNodeID() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRHFSPlusCatalogNodeID")))
 }
 
-// The property key for a file's type (MacOS only). Value is a CFDataRef containing an OSType.
 // KDRMacFileType returns the value of the constant kDRMacFileType.
 func KDRMacFileType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRMacFileType"))) }
 
-// The property key for a file's creator (MacOS only). Value is a CFDataRef containing an OSType.
 // KDRMacFileCreator returns the value of the constant kDRMacFileCreator.
 func KDRMacFileCreator() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRMacFileCreator"))) }
 
-// The property key for the window bounds for a folder (MacOS only). Value is a CFDataRef containing a Rect.
 // KDRMacWindowBounds returns the value of the constant kDRMacWindowBounds.
 func KDRMacWindowBounds() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRMacWindowBounds")))
 }
 
-// The property key for the item's icon location in its parent folder (MacOS only). Value is a CFDataRef containing a Point.
 // KDRMacIconLocation returns the value of the constant kDRMacIconLocation.
 func KDRMacIconLocation() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRMacIconLocation")))
 }
 
-// The property key for the folder's scroll position (MacOS only). Value is a CFDataRef containing a Point.
 // KDRMacScrollPosition returns the value of the constant kDRMacScrollPosition.
 func KDRMacScrollPosition() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRMacScrollPosition")))
 }
 
-// The property key for the folder's window view (MacOS only). Value is a CFNumber.
 // KDRMacWindowView returns the value of the constant kDRMacWindowView.
 func KDRMacWindowView() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRMacWindowView"))) }
 
-// The property key for the item's Finder flags (MacOS only). Value is a CFNumber.  The "invisible" bit is ignored - use
 // KDRMacFinderFlags returns the value of the constant kDRMacFinderFlags.
 func KDRMacFinderFlags() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRMacFinderFlags"))) }
 
-// The property key for the item's extended Finder flags (MacOS only). Value is a CFNumber.
 // KDRMacExtendedFinderFlags returns the value of the constant kDRMacExtendedFinderFlags.
 func KDRMacExtendedFinderFlags() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRMacExtendedFinderFlags")))
 }
 
-// The property key for hiding the extension of the object. A CFBooleanRef indicating whether the extension should be hidden in the Finder or not. The default is false and only applies to files.
 // KDRMacFinderHideExtension returns the value of the constant kDRMacFinderHideExtension.
 func KDRMacFinderHideExtension() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRMacFinderHideExtension")))
 }
 
-// Optional key. This property key defines the version for the UDF structures written to disk. Values are definde in UDF Version types.
 // KDRUDFWriteVersion returns the value of the constant kDRUDFWriteVersion.
 func KDRUDFWriteVersion() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRUDFWriteVersion")))
 }
 
-// This value is used in
 // KDRUDFVersion102 returns the value of the constant kDRUDFVersion102.
 func KDRUDFVersion102() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRUDFVersion102"))) }
 
-// This value is used in
 // KDRUDFVersion150 returns the value of the constant kDRUDFVersion150.
 func KDRUDFVersion150() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kDRUDFVersion150"))) }
 
-// Optional key. This property key defines the primary volume sequence number. See the UDF specs for details.
 // KDRUDFPrimaryVolumeDescriptorNumber returns the value of the constant kDRUDFPrimaryVolumeDescriptorNumber.
 func KDRUDFPrimaryVolumeDescriptorNumber() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRUDFPrimaryVolumeDescriptorNumber")))
 }
 
-// Optional key. This property key defines the volume sequence number. See the UDF specs for details.
 // KDRUDFVolumeSequenceNumber returns the value of the constant kDRUDFVolumeSequenceNumber.
 func KDRUDFVolumeSequenceNumber() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRUDFVolumeSequenceNumber")))
 }
 
-// Optional key. This property key defines the maximum volume sequence number. See the UDF specs for details.
 // KDRUDFMaxVolumeSequenceNumber returns the value of the constant kDRUDFMaxVolumeSequenceNumber.
 func KDRUDFMaxVolumeSequenceNumber() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRUDFMaxVolumeSequenceNumber")))
 }
 
-// Optional key. This property key defines the volume interchange level. See the UDF specs for details.
 // KDRUDFInterchangeLevel returns the value of the constant kDRUDFInterchangeLevel.
 func KDRUDFInterchangeLevel() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRUDFInterchangeLevel")))
 }
 
-// Optional key. This property key defines the maximum volume interchange level number. See the UDF specs for details.
 // KDRUDFMaxInterchangeLevel returns the value of the constant kDRUDFMaxInterchangeLevel.
 func KDRUDFMaxInterchangeLevel() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRUDFMaxInterchangeLevel")))
 }
 
-// Optional key.  A CFData object containing at most 8 bytes of data. See the UDF specs for details.
 // KDRUDFApplicationIdentifierSuffix returns the value of the constant kDRUDFApplicationIdentifierSuffix.
 func KDRUDFApplicationIdentifierSuffix() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRUDFApplicationIdentifierSuffix")))
 }
 
-// Optional key. The Volume Set Identifier for the UDF volume set. If this key is not present,
 // KDRUDFVolumeSetIdentifier returns the value of the constant kDRUDFVolumeSetIdentifier.
 func KDRUDFVolumeSetIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRUDFVolumeSetIdentifier")))
 }
 
-// Optional key. See the UDF specs for details.
 // KDRUDFVolumeSetTimestamp returns the value of the constant kDRUDFVolumeSetTimestamp.
 func KDRUDFVolumeSetTimestamp() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRUDFVolumeSetTimestamp")))
 }
 
-// Optional key. A CFData object containing at most 8 bytes of data. See the UDF specs for details.
 // KDRUDFVolumeSetImplementationUse returns the value of the constant kDRUDFVolumeSetImplementationUse.
 func KDRUDFVolumeSetImplementationUse() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRUDFVolumeSetImplementationUse")))
 }
 
-// Optional key. Specifies whether this file is to be marked as a UDF Real-Time file. Value is a CFBooleanRef.
 // KDRUDFRealTimeFile returns the value of the constant kDRUDFRealTimeFile.
 func KDRUDFRealTimeFile() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRUDFRealTimeFile")))
 }
 
-// Optional key. Specifies the extended UDF file permissions of this file. Value is a CFNumberRef. Bit 0: Change attributes for others (low order bit) Bit 1: Delete permissions for others Bit 2: Change attributes for group Bit 3: Delete permissions for group Bit 4: Change attributes for owner Bit 5: Delete permissions for owner Bit 6 & 7: Reserved If this key is not present,
 // KDRUDFExtendedFilePermissions returns the value of the constant kDRUDFExtendedFilePermissions.
 func KDRUDFExtendedFilePermissions() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kDRUDFExtendedFilePermissions")))
 }
 
-// Posted by a
 // DRDeviceAppearedNotification returns the string constant DRDeviceAppearedNotification, for use as a dictionary key or argument.
 func DRDeviceAppearedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceAppearedNotification")))
 }
 
-// Posted by a
 // DRDeviceDisappearedNotification returns the string constant DRDeviceDisappearedNotification, for use as a dictionary key or argument.
 func DRDeviceDisappearedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceDisappearedNotification")))
 }
 
-// Posted by a
 // DRDeviceStatusChangedNotification returns the string constant DRDeviceStatusChangedNotification, for use as a dictionary key or argument.
 func DRDeviceStatusChangedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceStatusChangedNotification")))
 }
 
-// One of the keys in the dictionary returned by the
 // DRDeviceSupportLevelKey returns the string constant DRDeviceSupportLevelKey, for use as a dictionary key or argument.
 func DRDeviceSupportLevelKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceSupportLevelKey")))
 }
 
-// One of the keys in the dictionary returned by the
 // DRDeviceIORegistryEntryPathKey returns the string constant DRDeviceIORegistryEntryPathKey, for use as a dictionary key or argument.
 func DRDeviceIORegistryEntryPathKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceIORegistryEntryPathKey")))
 }
 
-// One of the keys in the dictionary returned by the
 // DRDeviceWriteCapabilitiesKey returns the string constant DRDeviceWriteCapabilitiesKey, for use as a dictionary key or argument.
 func DRDeviceWriteCapabilitiesKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceWriteCapabilitiesKey")))
 }
 
-// One of the keys in the dictionary returned by the
 // DRDeviceVendorNameKey returns the string constant DRDeviceVendorNameKey, for use as a dictionary key or argument.
 func DRDeviceVendorNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceVendorNameKey")))
 }
 
-// One of the keys in the dictionary returned by the
 // DRDeviceProductNameKey returns the string constant DRDeviceProductNameKey, for use as a dictionary key or argument.
 func DRDeviceProductNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceProductNameKey")))
 }
 
-// One of the keys in the dictionary returned by the
 // DRDeviceFirmwareRevisionKey returns the string constant DRDeviceFirmwareRevisionKey, for use as a dictionary key or argument.
 func DRDeviceFirmwareRevisionKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceFirmwareRevisionKey")))
 }
 
-// One of the keys in the dictionary returned by the
 // DRDevicePhysicalInterconnectKey returns the string constant DRDevicePhysicalInterconnectKey, for use as a dictionary key or argument.
 func DRDevicePhysicalInterconnectKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDevicePhysicalInterconnectKey")))
 }
 
-// One of the keys in the dictionary returned by the
 // DRDevicePhysicalInterconnectLocationKey returns the string constant DRDevicePhysicalInterconnectLocationKey, for use as a dictionary key or argument.
 func DRDevicePhysicalInterconnectLocationKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDevicePhysicalInterconnectLocationKey")))
 }
 
-// One of the keys in the dictionary returned by the
 // DRDeviceLoadingMechanismCanEjectKey returns the string constant DRDeviceLoadingMechanismCanEjectKey, for use as a dictionary key or argument.
 func DRDeviceLoadingMechanismCanEjectKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceLoadingMechanismCanEjectKey")))
 }
 
-// One of the keys in the dictionary returned by the
 // DRDeviceLoadingMechanismCanInjectKey returns the string constant DRDeviceLoadingMechanismCanInjectKey, for use as a dictionary key or argument.
 func DRDeviceLoadingMechanismCanInjectKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceLoadingMechanismCanInjectKey")))
 }
 
-// One of the keys in the dictionary returned by the
 // DRDeviceLoadingMechanismCanOpenKey returns the string constant DRDeviceLoadingMechanismCanOpenKey, for use as a dictionary key or argument.
 func DRDeviceLoadingMechanismCanOpenKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceLoadingMechanismCanOpenKey")))
 }
 
-// One of the keys in the dictionary returned by the
 // DRDeviceWriteBufferSizeKey returns the string constant DRDeviceWriteBufferSizeKey, for use as a dictionary key or argument.
 func DRDeviceWriteBufferSizeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceWriteBufferSizeKey")))
 }
 
-// One of the values for
 // DRDeviceSupportLevelNone returns the string constant DRDeviceSupportLevelNone, for use as a dictionary key or argument.
 func DRDeviceSupportLevelNone() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceSupportLevelNone")))
 }
 
-// One of the values for
 // DRDeviceSupportLevelUnsupported returns the string constant DRDeviceSupportLevelUnsupported, for use as a dictionary key or argument.
 func DRDeviceSupportLevelUnsupported() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceSupportLevelUnsupported")))
 }
 
-// One of the values for
 // DRDeviceSupportLevelVendorSupported returns the string constant DRDeviceSupportLevelVendorSupported, for use as a dictionary key or argument.
 func DRDeviceSupportLevelVendorSupported() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceSupportLevelVendorSupported")))
 }
 
-// One of the values for
 // DRDeviceSupportLevelAppleSupported returns the string constant DRDeviceSupportLevelAppleSupported, for use as a dictionary key or argument.
 func DRDeviceSupportLevelAppleSupported() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceSupportLevelAppleSupported")))
 }
 
-// One of the values for
 // DRDeviceSupportLevelAppleShipping returns the string constant DRDeviceSupportLevelAppleShipping, for use as a dictionary key or argument.
 func DRDeviceSupportLevelAppleShipping() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceSupportLevelAppleShipping")))
 }
 
-// One of the possible values of the
 // DRDevicePhysicalInterconnectATAPI returns the string constant DRDevicePhysicalInterconnectATAPI, for use as a dictionary key or argument.
 func DRDevicePhysicalInterconnectATAPI() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDevicePhysicalInterconnectATAPI")))
 }
 
-// One of the possible values of the
 // DRDevicePhysicalInterconnectFibreChannel returns the string constant DRDevicePhysicalInterconnectFibreChannel, for use as a dictionary key or argument.
 func DRDevicePhysicalInterconnectFibreChannel() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDevicePhysicalInterconnectFibreChannel")))
 }
 
-// One of the possible values of the
 // DRDevicePhysicalInterconnectFireWire returns the string constant DRDevicePhysicalInterconnectFireWire, for use as a dictionary key or argument.
 func DRDevicePhysicalInterconnectFireWire() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDevicePhysicalInterconnectFireWire")))
 }
 
-// One of the possible values of the
 // DRDevicePhysicalInterconnectSCSI returns the string constant DRDevicePhysicalInterconnectSCSI, for use as a dictionary key or argument.
 func DRDevicePhysicalInterconnectSCSI() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDevicePhysicalInterconnectSCSI")))
 }
 
-// One of the possible values of the
 // DRDevicePhysicalInterconnectUSB returns the string constant DRDevicePhysicalInterconnectUSB, for use as a dictionary key or argument.
 func DRDevicePhysicalInterconnectUSB() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDevicePhysicalInterconnectUSB")))
 }
 
-// One of the possible values of the
 // DRDevicePhysicalInterconnectLocationInternal returns the string constant DRDevicePhysicalInterconnectLocationInternal, for use as a dictionary key or argument.
 func DRDevicePhysicalInterconnectLocationInternal() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDevicePhysicalInterconnectLocationInternal")))
 }
 
-// One of the possible values of the
 // DRDevicePhysicalInterconnectLocationExternal returns the string constant DRDevicePhysicalInterconnectLocationExternal, for use as a dictionary key or argument.
 func DRDevicePhysicalInterconnectLocationExternal() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDevicePhysicalInterconnectLocationExternal")))
 }
 
-// One of the possible values of the
 // DRDevicePhysicalInterconnectLocationUnknown returns the string constant DRDevicePhysicalInterconnectLocationUnknown, for use as a dictionary key or argument.
 func DRDevicePhysicalInterconnectLocationUnknown() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDevicePhysicalInterconnectLocationUnknown")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteKey returns the string constant DRDeviceCanWriteKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteCDKey returns the string constant DRDeviceCanWriteCDKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteCDKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteCDKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteCDRKey returns the string constant DRDeviceCanWriteCDRKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteCDRKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteCDRKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteCDRWKey returns the string constant DRDeviceCanWriteCDRWKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteCDRWKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteCDRWKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteDVDKey returns the string constant DRDeviceCanWriteDVDKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteDVDKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteDVDKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteDVDRKey returns the string constant DRDeviceCanWriteDVDRKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteDVDRKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteDVDRKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteDVDRDualLayerKey returns the string constant DRDeviceCanWriteDVDRDualLayerKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteDVDRDualLayerKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteDVDRDualLayerKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteDVDRWKey returns the string constant DRDeviceCanWriteDVDRWKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteDVDRWKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteDVDRWKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteDVDRWDualLayerKey returns the string constant DRDeviceCanWriteDVDRWDualLayerKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteDVDRWDualLayerKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteDVDRWDualLayerKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteDVDRAMKey returns the string constant DRDeviceCanWriteDVDRAMKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteDVDRAMKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteDVDRAMKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteDVDPlusRKey returns the string constant DRDeviceCanWriteDVDPlusRKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteDVDPlusRKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteDVDPlusRKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteDVDPlusRDoubleLayerKey returns the string constant DRDeviceCanWriteDVDPlusRDoubleLayerKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteDVDPlusRDoubleLayerKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteDVDPlusRDoubleLayerKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteDVDPlusRWKey returns the string constant DRDeviceCanWriteDVDPlusRWKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteDVDPlusRWKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteDVDPlusRWKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteDVDPlusRWDoubleLayerKey returns the string constant DRDeviceCanWriteDVDPlusRWDoubleLayerKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteDVDPlusRWDoubleLayerKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteDVDPlusRWDoubleLayerKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteBDKey returns the string constant DRDeviceCanWriteBDKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteBDKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteBDKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteBDRKey returns the string constant DRDeviceCanWriteBDRKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteBDRKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteBDRKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteBDREKey returns the string constant DRDeviceCanWriteBDREKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteBDREKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteBDREKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteHDDVDKey returns the string constant DRDeviceCanWriteHDDVDKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteHDDVDKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteHDDVDKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteHDDVDRKey returns the string constant DRDeviceCanWriteHDDVDRKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteHDDVDRKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteHDDVDRKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteHDDVDRDualLayerKey returns the string constant DRDeviceCanWriteHDDVDRDualLayerKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteHDDVDRDualLayerKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteHDDVDRDualLayerKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteHDDVDRAMKey returns the string constant DRDeviceCanWriteHDDVDRAMKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteHDDVDRAMKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteHDDVDRAMKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteHDDVDRWKey returns the string constant DRDeviceCanWriteHDDVDRWKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteHDDVDRWKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteHDDVDRWKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteHDDVDRWDualLayerKey returns the string constant DRDeviceCanWriteHDDVDRWDualLayerKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteHDDVDRWDualLayerKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteHDDVDRWDualLayerKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteCDTextKey returns the string constant DRDeviceCanWriteCDTextKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteCDTextKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteCDTextKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteIndexPointsKey returns the string constant DRDeviceCanWriteIndexPointsKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteIndexPointsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteIndexPointsKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteISRCKey returns the string constant DRDeviceCanWriteISRCKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteISRCKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteISRCKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteCDTAOKey returns the string constant DRDeviceCanWriteCDTAOKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteCDTAOKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteCDTAOKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteCDSAOKey returns the string constant DRDeviceCanWriteCDSAOKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteCDSAOKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteCDSAOKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteCDRawKey returns the string constant DRDeviceCanWriteCDRawKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteCDRawKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteCDRawKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanWriteDVDDAOKey returns the string constant DRDeviceCanWriteDVDDAOKey, for use as a dictionary key or argument.
 func DRDeviceCanWriteDVDDAOKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanWriteDVDDAOKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanTestWriteCDKey returns the string constant DRDeviceCanTestWriteCDKey, for use as a dictionary key or argument.
 func DRDeviceCanTestWriteCDKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanTestWriteCDKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanTestWriteDVDKey returns the string constant DRDeviceCanTestWriteDVDKey, for use as a dictionary key or argument.
 func DRDeviceCanTestWriteDVDKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanTestWriteDVDKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanUnderrunProtectCDKey returns the string constant DRDeviceCanUnderrunProtectCDKey, for use as a dictionary key or argument.
 func DRDeviceCanUnderrunProtectCDKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanUnderrunProtectCDKey")))
 }
 
-// One of the keys in the
 // DRDeviceCanUnderrunProtectDVDKey returns the string constant DRDeviceCanUnderrunProtectDVDKey, for use as a dictionary key or argument.
 func DRDeviceCanUnderrunProtectDVDKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCanUnderrunProtectDVDKey")))
 }
 
-// One of the keys in the dictionary returned by the
 // DRDeviceIsBusyKey returns the string constant DRDeviceIsBusyKey, for use as a dictionary key or argument.
 func DRDeviceIsBusyKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRDeviceIsBusyKey"))) }
 
-// One of the keys in the dictionary returned by the
 // DRDeviceIsTrayOpenKey returns the string constant DRDeviceIsTrayOpenKey, for use as a dictionary key or argument.
 func DRDeviceIsTrayOpenKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceIsTrayOpenKey")))
 }
 
-// One of the keys in the dictionary returned by the
 // DRDeviceMaximumWriteSpeedKey returns the string constant DRDeviceMaximumWriteSpeedKey, for use as a dictionary key or argument.
 func DRDeviceMaximumWriteSpeedKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMaximumWriteSpeedKey")))
 }
 
-// One of the keys in the dictionary returned by the
 // DRDeviceCurrentWriteSpeedKey returns the string constant DRDeviceCurrentWriteSpeedKey, for use as a dictionary key or argument.
 func DRDeviceCurrentWriteSpeedKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceCurrentWriteSpeedKey")))
 }
 
-// One of the keys in the dictionary returned by the
 // DRDeviceMediaStateKey returns the string constant DRDeviceMediaStateKey, for use as a dictionary key or argument.
 func DRDeviceMediaStateKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaStateKey")))
 }
 
-// One of the keys in the dictionary returned by the
 // DRDeviceMediaInfoKey returns the string constant DRDeviceMediaInfoKey, for use as a dictionary key or argument.
 func DRDeviceMediaInfoKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaInfoKey")))
 }
 
-// One of the keys in the dictionary returned by the
 // DRDeviceBurnSpeedsKey returns the string constant DRDeviceBurnSpeedsKey, for use as a dictionary key or argument.
 func DRDeviceBurnSpeedsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceBurnSpeedsKey")))
 }
 
-// One of the keys in the dictionary returned by the
 // DRDeviceTrackRefsKey returns the string constant DRDeviceTrackRefsKey, for use as a dictionary key or argument.
 func DRDeviceTrackRefsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceTrackRefsKey")))
 }
 
-// One of the keys in the dictionary returned by the
 // DRDeviceTrackInfoKey returns the string constant DRDeviceTrackInfoKey, for use as a dictionary key or argument.
 func DRDeviceTrackInfoKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceTrackInfoKey")))
 }
 
-// One of the possible values for the
 // DRDeviceMediaStateMediaPresent returns the string constant DRDeviceMediaStateMediaPresent, for use as a dictionary key or argument.
 func DRDeviceMediaStateMediaPresent() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaStateMediaPresent")))
 }
 
-// One of the possible values for the
 // DRDeviceMediaStateInTransition returns the string constant DRDeviceMediaStateInTransition, for use as a dictionary key or argument.
 func DRDeviceMediaStateInTransition() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaStateInTransition")))
 }
 
-// One of the possible values for the
 // DRDeviceMediaStateNone returns the string constant DRDeviceMediaStateNone, for use as a dictionary key or argument.
 func DRDeviceMediaStateNone() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaStateNone")))
 }
 
-// One of the keys in the
 // DRDeviceMediaBSDNameKey returns the string constant DRDeviceMediaBSDNameKey, for use as a dictionary key or argument.
 func DRDeviceMediaBSDNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaBSDNameKey")))
 }
 
-// One of the keys in the
 // DRDeviceMediaIsBlankKey returns the string constant DRDeviceMediaIsBlankKey, for use as a dictionary key or argument.
 func DRDeviceMediaIsBlankKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaIsBlankKey")))
 }
 
-// One of the keys in the
 // DRDeviceMediaIsAppendableKey returns the string constant DRDeviceMediaIsAppendableKey, for use as a dictionary key or argument.
 func DRDeviceMediaIsAppendableKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaIsAppendableKey")))
 }
 
-// One of the keys in the
 // DRDeviceMediaIsOverwritableKey returns the string constant DRDeviceMediaIsOverwritableKey, for use as a dictionary key or argument.
 func DRDeviceMediaIsOverwritableKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaIsOverwritableKey")))
 }
 
-// One of the keys in the
 // DRDeviceMediaIsErasableKey returns the string constant DRDeviceMediaIsErasableKey, for use as a dictionary key or argument.
 func DRDeviceMediaIsErasableKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaIsErasableKey")))
 }
 
-// One of the keys in the
 // DRDeviceMediaIsReservedKey returns the string constant DRDeviceMediaIsReservedKey, for use as a dictionary key or argument.
 func DRDeviceMediaIsReservedKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaIsReservedKey")))
 }
 
-// One of the keys in the
 // DRDeviceMediaOverwritableSpaceKey returns the string constant DRDeviceMediaOverwritableSpaceKey, for use as a dictionary key or argument.
 func DRDeviceMediaOverwritableSpaceKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaOverwritableSpaceKey")))
 }
 
-// One of the keys in the
 // DRDeviceMediaFreeSpaceKey returns the string constant DRDeviceMediaFreeSpaceKey, for use as a dictionary key or argument.
 func DRDeviceMediaFreeSpaceKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaFreeSpaceKey")))
 }
 
-// One of the keys in the
 // DRDeviceMediaUsedSpaceKey returns the string constant DRDeviceMediaUsedSpaceKey, for use as a dictionary key or argument.
 func DRDeviceMediaUsedSpaceKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaUsedSpaceKey")))
 }
 
-// One of the keys in the
 // DRDeviceMediaBlocksOverwritableKey returns the string constant DRDeviceMediaBlocksOverwritableKey, for use as a dictionary key or argument.
 func DRDeviceMediaBlocksOverwritableKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaBlocksOverwritableKey")))
 }
 
-// One of the keys in the
 // DRDeviceMediaBlocksFreeKey returns the string constant DRDeviceMediaBlocksFreeKey, for use as a dictionary key or argument.
 func DRDeviceMediaBlocksFreeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaBlocksFreeKey")))
 }
 
-// One of the keys in the
 // DRDeviceMediaBlocksUsedKey returns the string constant DRDeviceMediaBlocksUsedKey, for use as a dictionary key or argument.
 func DRDeviceMediaBlocksUsedKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaBlocksUsedKey")))
 }
 
-// One of the keys in the
 // DRDeviceMediaDoubleLayerL0DataZoneBlocksKey returns the string constant DRDeviceMediaDoubleLayerL0DataZoneBlocksKey, for use as a dictionary key or argument.
 func DRDeviceMediaDoubleLayerL0DataZoneBlocksKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaDoubleLayerL0DataZoneBlocksKey")))
 }
 
-// One of the keys in the
 // DRDeviceMediaTrackCountKey returns the string constant DRDeviceMediaTrackCountKey, for use as a dictionary key or argument.
 func DRDeviceMediaTrackCountKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTrackCountKey")))
 }
 
-// One of the keys in the
 // DRDeviceMediaSessionCountKey returns the string constant DRDeviceMediaSessionCountKey, for use as a dictionary key or argument.
 func DRDeviceMediaSessionCountKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaSessionCountKey")))
 }
 
-// One of the keys in the
 // DRDeviceMediaClassKey returns the string constant DRDeviceMediaClassKey, for use as a dictionary key or argument.
 func DRDeviceMediaClassKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaClassKey")))
 }
 
-// One of the keys in the
 // DRDeviceMediaTypeKey returns the string constant DRDeviceMediaTypeKey, for use as a dictionary key or argument.
 func DRDeviceMediaTypeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeKey")))
 }
 
-// One possible value of the
 // DRDeviceMediaClassCD returns the string constant DRDeviceMediaClassCD, for use as a dictionary key or argument.
 func DRDeviceMediaClassCD() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaClassCD")))
 }
 
-// One possible value of the
 // DRDeviceMediaClassDVD returns the string constant DRDeviceMediaClassDVD, for use as a dictionary key or argument.
 func DRDeviceMediaClassDVD() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaClassDVD")))
 }
 
-// One possible value of the
 // DRDeviceMediaClassBD returns the string constant DRDeviceMediaClassBD, for use as a dictionary key or argument.
 func DRDeviceMediaClassBD() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaClassBD")))
 }
 
-// One possible value of the
 // DRDeviceMediaClassHDDVD returns the string constant DRDeviceMediaClassHDDVD, for use as a dictionary key or argument.
 func DRDeviceMediaClassHDDVD() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaClassHDDVD")))
 }
 
-// One possible value of the
 // DRDeviceMediaClassUnknown returns the string constant DRDeviceMediaClassUnknown, for use as a dictionary key or argument.
 func DRDeviceMediaClassUnknown() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaClassUnknown")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeCDROM returns the string constant DRDeviceMediaTypeCDROM, for use as a dictionary key or argument.
 func DRDeviceMediaTypeCDROM() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeCDROM")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeCDR returns the string constant DRDeviceMediaTypeCDR, for use as a dictionary key or argument.
 func DRDeviceMediaTypeCDR() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeCDR")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeCDRW returns the string constant DRDeviceMediaTypeCDRW, for use as a dictionary key or argument.
 func DRDeviceMediaTypeCDRW() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeCDRW")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeDVDROM returns the string constant DRDeviceMediaTypeDVDROM, for use as a dictionary key or argument.
 func DRDeviceMediaTypeDVDROM() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeDVDROM")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeDVDRAM returns the string constant DRDeviceMediaTypeDVDRAM, for use as a dictionary key or argument.
 func DRDeviceMediaTypeDVDRAM() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeDVDRAM")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeDVDR returns the string constant DRDeviceMediaTypeDVDR, for use as a dictionary key or argument.
 func DRDeviceMediaTypeDVDR() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeDVDR")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeDVDRDualLayer returns the string constant DRDeviceMediaTypeDVDRDualLayer, for use as a dictionary key or argument.
 func DRDeviceMediaTypeDVDRDualLayer() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeDVDRDualLayer")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeDVDRW returns the string constant DRDeviceMediaTypeDVDRW, for use as a dictionary key or argument.
 func DRDeviceMediaTypeDVDRW() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeDVDRW")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeDVDRWDualLayer returns the string constant DRDeviceMediaTypeDVDRWDualLayer, for use as a dictionary key or argument.
 func DRDeviceMediaTypeDVDRWDualLayer() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeDVDRWDualLayer")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeDVDPlusR returns the string constant DRDeviceMediaTypeDVDPlusR, for use as a dictionary key or argument.
 func DRDeviceMediaTypeDVDPlusR() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeDVDPlusR")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeDVDPlusRDoubleLayer returns the string constant DRDeviceMediaTypeDVDPlusRDoubleLayer, for use as a dictionary key or argument.
 func DRDeviceMediaTypeDVDPlusRDoubleLayer() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeDVDPlusRDoubleLayer")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeDVDPlusRW returns the string constant DRDeviceMediaTypeDVDPlusRW, for use as a dictionary key or argument.
 func DRDeviceMediaTypeDVDPlusRW() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeDVDPlusRW")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeDVDPlusRWDoubleLayer returns the string constant DRDeviceMediaTypeDVDPlusRWDoubleLayer, for use as a dictionary key or argument.
 func DRDeviceMediaTypeDVDPlusRWDoubleLayer() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeDVDPlusRWDoubleLayer")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeBDR returns the string constant DRDeviceMediaTypeBDR, for use as a dictionary key or argument.
 func DRDeviceMediaTypeBDR() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeBDR")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeBDRE returns the string constant DRDeviceMediaTypeBDRE, for use as a dictionary key or argument.
 func DRDeviceMediaTypeBDRE() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeBDRE")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeBDROM returns the string constant DRDeviceMediaTypeBDROM, for use as a dictionary key or argument.
 func DRDeviceMediaTypeBDROM() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeBDROM")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeHDDVDROM returns the string constant DRDeviceMediaTypeHDDVDROM, for use as a dictionary key or argument.
 func DRDeviceMediaTypeHDDVDROM() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeHDDVDROM")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeHDDVDR returns the string constant DRDeviceMediaTypeHDDVDR, for use as a dictionary key or argument.
 func DRDeviceMediaTypeHDDVDR() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeHDDVDR")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeHDDVDRDualLayer returns the string constant DRDeviceMediaTypeHDDVDRDualLayer, for use as a dictionary key or argument.
 func DRDeviceMediaTypeHDDVDRDualLayer() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeHDDVDRDualLayer")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeHDDVDRAM returns the string constant DRDeviceMediaTypeHDDVDRAM, for use as a dictionary key or argument.
 func DRDeviceMediaTypeHDDVDRAM() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeHDDVDRAM")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeHDDVDRW returns the string constant DRDeviceMediaTypeHDDVDRW, for use as a dictionary key or argument.
 func DRDeviceMediaTypeHDDVDRW() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeHDDVDRW")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeHDDVDRWDualLayer returns the string constant DRDeviceMediaTypeHDDVDRWDualLayer, for use as a dictionary key or argument.
 func DRDeviceMediaTypeHDDVDRWDualLayer() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeHDDVDRWDualLayer")))
 }
 
-// One of the possible values of the
 // DRDeviceMediaTypeUnknown returns the string constant DRDeviceMediaTypeUnknown, for use as a dictionary key or argument.
 func DRDeviceMediaTypeUnknown() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDeviceMediaTypeUnknown")))
 }
 
-// NSNumber representing the length of the track
 // DRTrackLengthKey returns the string constant DRTrackLengthKey, for use as a dictionary key or argument.
 func DRTrackLengthKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRTrackLengthKey"))) }
 
-// NSNumber containing the size in bytes of each track block. See the Mt. Fuji (INF-8090i) specification for CD/DVD devices for possible values for this property.
 // DRBlockSizeKey returns the string constant DRBlockSizeKey, for use as a dictionary key or argument.
 func DRBlockSizeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRBlockSizeKey"))) }
 
-// NSNumber containing the type of each track block. See the Mt. Fuji (INF-8090i) specification for CD/DVD devices for possible values for this property.
 // DRBlockTypeKey returns the string constant DRBlockTypeKey, for use as a dictionary key or argument.
 func DRBlockTypeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRBlockTypeKey"))) }
 
-// NSNumber containing the data form of each block in the track. See the Mt. Fuji (INF-8090i) specification for CD/DVD devices for possible values for this property.
 // DRDataFormKey returns the string constant DRDataFormKey, for use as a dictionary key or argument.
 func DRDataFormKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRDataFormKey"))) }
 
-// NSNumber containing the session format of the track. See the Mt. Fuji (INF-8090i) specification for CD/DVD devices for possible values for this property.
 // DRSessionFormatKey returns the string constant DRSessionFormatKey, for use as a dictionary key or argument.
 func DRSessionFormatKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRSessionFormatKey")))
 }
 
-// NSNumber containing the track mode of the track. See the Mt. Fuji (INF-8090i) specification for CD/DVD devices for possible values for this property.
 // DRTrackModeKey returns the string constant DRTrackModeKey, for use as a dictionary key or argument.
 func DRTrackModeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRTrackModeKey"))) }
 
-// NSString indicating the type of verification to be performed. If this is not present, the track will not be verified.
 // DRVerificationTypeKey returns the string constant DRVerificationTypeKey, for use as a dictionary key or argument.
 func DRVerificationTypeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRVerificationTypeKey")))
 }
 
-// NSNumber containing the maximum burn speed at which data can be produced. The speed is represented in KB/s (1 KB = 1000 bytes).  This key can only be used to limit the speed at which the burn runs.
 // DRMaxBurnSpeedKey returns the string constant DRMaxBurnSpeedKey, for use as a dictionary key or argument.
 func DRMaxBurnSpeedKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRMaxBurnSpeedKey"))) }
 
-// For CD tracks only.  NSNumber containing the length of silence or data at the beginning of the track.  This defaults to 2 seconds of silence. If this key is present, the track producer will be asked for the pregap data first. If the producer implements the proper selector, then it's the responsibility of the producer to provide data for the pregap, otherwise that length of silence will be produced by Disc Recording.
 // DRPreGapLengthKey returns the string constant DRPreGapLengthKey, for use as a dictionary key or argument.
 func DRPreGapLengthKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRPreGapLengthKey"))) }
 
-// For CD tracks only. NSNumber indicating whether the pregap listed for the track is required.  If this key is not present, the track will behave as though the key were <i>NO</i>. If this key's value is set to <i>YES</i> and the device does not support the exact pregap length, the burn will fail with a return value of
 // DRPreGapIsRequiredKey returns the string constant DRPreGapIsRequiredKey, for use as a dictionary key or argument.
 func DRPreGapIsRequiredKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRPreGapIsRequiredKey")))
 }
 
-// For DVD tracks only.  NSData containing the DVD timestamp structure sent through the SEND DVD STRUCTURE command.  The contents of this will be sent directly to the drive.
 // DRDVDTimestampKey returns the string constant DRDVDTimestampKey, for use as a dictionary key or argument.
 func DRDVDTimestampKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRDVDTimestampKey"))) }
 
-// For DVD tracks only.  NSData containing the DVD copyright info structure sent through the SEND DVD STRUCTURE command.  The contents of this will be sent directly to the drive.
 // DRDVDCopyrightInfoKey returns the string constant DRDVDCopyrightInfoKey, for use as a dictionary key or argument.
 func DRDVDCopyrightInfoKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRDVDCopyrightInfoKey")))
 }
 
-// For CD-DA audio tracks only.  This key points to an NSData containing exactly 12 bytes, which will be written to the disc as the International Standard Recording Code (ISRC).  If this key is not present, no ISRC is written. The use of this value should conform to the specifications of the IFPI. See <a href="http://www.ifpi.org/isrc/">http://www.ifpi.org/isrc/</a> for more details on the ISRC standard. Not all drives are capable of the write modes necessary to write the ISRC. If this key is present in any track and the drive cannot write the ISRC, the burn will fail with
 // DRTrackISRCKey returns the string constant DRTrackISRCKey, for use as a dictionary key or argument.
 func DRTrackISRCKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRTrackISRCKey"))) }
 
-// For CD tracks only. This key points to an NSArray of NSNumbers, indicating the index points inside the track.  Each index point is specified as a number of blocks (frames) relative to the start of the track.  There are 75 blocks in one second of CD audio.  No more than 98 index points may be specified for a track. Not all drives are capable of writing index points, and not all consumer CD players report or use them.  If this key is present in any track and the drive cannot write index points, the burn will fail with
 // DRIndexPointsKey returns the string constant DRIndexPointsKey, for use as a dictionary key or argument.
 func DRIndexPointsKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRIndexPointsKey"))) }
 
-// For CD-DA audio tracks only. This key points to a BOOL value indicating whether the track includes pre-emphasis of 50/15us.  If this key is not present, the engine will use a default value of NO.  On the media, this key corresponds to bit 0 of the control field in sub-channel Q.
 // DRAudioPreEmphasisKey returns the string constant DRAudioPreEmphasisKey, for use as a dictionary key or argument.
 func DRAudioPreEmphasisKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRAudioPreEmphasisKey")))
 }
 
-// For CD-DA audio tracks only. This key points to a BOOL value indicating whether the track data has four channels, as opposed to the two channels of normal stereo.  If this key is not present, the engine will use a default value of NO and standard two-channel stereo is assumed. Note that while four-channel is technically allowed in the Red Book, it never caught on and is probably being replaced by SACD, so you probably shouldn't attempt to use it. On the media, this key corresponds to bit 3 of the control field in sub-channel Q.
 // DRAudioFourChannelKey returns the string constant DRAudioFourChannelKey, for use as a dictionary key or argument.
 func DRAudioFourChannelKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRAudioFourChannelKey")))
 }
 
-// For CD tracks only.  This key points to an NSString value indicating the SCMS state of the track.  If this key is not present, no SCMS data is written. Not all drives are capable of writing SCMS.  If this key is present in any track and the drive cannot write SCMS, the burn will fail with
 // DRSerialCopyManagementStateKey returns the string constant DRSerialCopyManagementStateKey, for use as a dictionary key or argument.
 func DRSerialCopyManagementStateKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRSerialCopyManagementStateKey")))
 }
 
-// One of the possible values of the
 // DRVerificationTypeProduceAgain returns the string constant DRVerificationTypeProduceAgain, for use as a dictionary key or argument.
 func DRVerificationTypeProduceAgain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRVerificationTypeProduceAgain")))
 }
 
-// One of the possible values of the
 // DRVerificationTypeReceiveData returns the string constant DRVerificationTypeReceiveData, for use as a dictionary key or argument.
 func DRVerificationTypeReceiveData() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRVerificationTypeReceiveData")))
 }
 
-// One of the possible values of the
 // DRVerificationTypeChecksum returns the string constant DRVerificationTypeChecksum, for use as a dictionary key or argument.
 func DRVerificationTypeChecksum() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRVerificationTypeChecksum")))
 }
 
-// One of the possible values of the
 // DRVerificationTypeNone returns the string constant DRVerificationTypeNone, for use as a dictionary key or argument.
 func DRVerificationTypeNone() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRVerificationTypeNone")))
 }
 
-// One possible value for the
 // DRSCMSCopyrightFree returns the string constant DRSCMSCopyrightFree, for use as a dictionary key or argument.
 func DRSCMSCopyrightFree() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRSCMSCopyrightFree")))
 }
 
-// One possible value for the
 // DRSCMSCopyrightProtectedOriginal returns the string constant DRSCMSCopyrightProtectedOriginal, for use as a dictionary key or argument.
 func DRSCMSCopyrightProtectedOriginal() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRSCMSCopyrightProtectedOriginal")))
 }
 
-// One possible value for the
 // DRSCMSCopyrightProtectedCopy returns the string constant DRSCMSCopyrightProtectedCopy, for use as a dictionary key or argument.
 func DRSCMSCopyrightProtectedCopy() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRSCMSCopyrightProtectedCopy")))
 }
 
-// NSNumber containing the LBA of the next writable address in the track. This key is not present in closed tracks.
 // DRNextWritableAddressKey returns the string constant DRNextWritableAddressKey, for use as a dictionary key or argument.
 func DRNextWritableAddressKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRNextWritableAddressKey")))
 }
 
-// NSNumber containing the LBA of the start address for the track.
 // DRTrackStartAddressKey returns the string constant DRTrackStartAddressKey, for use as a dictionary key or argument.
 func DRTrackStartAddressKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRTrackStartAddressKey")))
 }
 
-// NSNumber containing the length, in blocks, which is still available in a writable track.
 // DRFreeBlocksKey returns the string constant DRFreeBlocksKey, for use as a dictionary key or argument.
 func DRFreeBlocksKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRFreeBlocksKey"))) }
 
-// NSNumber containing the physical track number of a track.
 // DRTrackNumberKey returns the string constant DRTrackNumberKey, for use as a dictionary key or argument.
 func DRTrackNumberKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRTrackNumberKey"))) }
 
-// NSNumber containing the physical session number of a track.
 // DRSessionNumberKey returns the string constant DRSessionNumberKey, for use as a dictionary key or argument.
 func DRSessionNumberKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRSessionNumberKey")))
 }
 
-// NSString indicating the type of track. Possible values are:
 // DRTrackTypeKey returns the string constant DRTrackTypeKey, for use as a dictionary key or argument.
 func DRTrackTypeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRTrackTypeKey"))) }
 
-// NSNumber containing a BOOL value and indicates whether the track is empty.
 // DRTrackIsEmptyKey returns the string constant DRTrackIsEmptyKey, for use as a dictionary key or argument.
 func DRTrackIsEmptyKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRTrackIsEmptyKey"))) }
 
-// NSString indicating the kind of packets being written.
 // DRTrackPacketTypeKey returns the string constant DRTrackPacketTypeKey, for use as a dictionary key or argument.
 func DRTrackPacketTypeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRTrackPacketTypeKey")))
 }
 
-// NSNumber containing the number of blocks per packet for the disc. It will only be present if the disc contains fixed packets. This key will contain 16 for DVD media, and typically contains either 16 or 32 for CD media.
 // DRTrackPacketSizeKey returns the string constant DRTrackPacketSizeKey, for use as a dictionary key or argument.
 func DRTrackPacketSizeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRTrackPacketSizeKey")))
 }
 
-// If this is the value of the
 // DRTrackTypeInvisible returns the string constant DRTrackTypeInvisible, for use as a dictionary key or argument.
 func DRTrackTypeInvisible() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRTrackTypeInvisible")))
 }
 
-// If this is the value of the
 // DRTrackTypeIncomplete returns the string constant DRTrackTypeIncomplete, for use as a dictionary key or argument.
 func DRTrackTypeIncomplete() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRTrackTypeIncomplete")))
 }
 
-// If this is the value of the
 // DRTrackTypeReserved returns the string constant DRTrackTypeReserved, for use as a dictionary key or argument.
 func DRTrackTypeReserved() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRTrackTypeReserved")))
 }
 
-// If this is the value of the
 // DRTrackTypeClosed returns the string constant DRTrackTypeClosed, for use as a dictionary key or argument.
 func DRTrackTypeClosed() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRTrackTypeClosed"))) }
 
-// If this is the value of the
 // DRTrackPacketTypeFixed returns the string constant DRTrackPacketTypeFixed, for use as a dictionary key or argument.
 func DRTrackPacketTypeFixed() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRTrackPacketTypeFixed")))
 }
 
-// If this is the value of the
 // DRTrackPacketTypeVariable returns the string constant DRTrackPacketTypeVariable, for use as a dictionary key or argument.
 func DRTrackPacketTypeVariable() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRTrackPacketTypeVariable")))
 }
 
-// NSNumber containing the ISO level of the ISO-9660 filesystem on the track. Currently should be 1 or 2.
 // DRISOLevel returns the string constant DRISOLevel, for use as a dictionary key or argument.
 func DRISOLevel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRISOLevel"))) }
 
-// NSString indicating the volume set name for ISO and Joliet volumes.
 // DRVolumeSet returns the string constant DRVolumeSet, for use as a dictionary key or argument.
 func DRVolumeSet() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRVolumeSet"))) }
 
-// NSString indicating the publisher for ISO and Joliet volumes.
 // DRPublisher returns the string constant DRPublisher, for use as a dictionary key or argument.
 func DRPublisher() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRPublisher"))) }
 
-// NSString indicating the data preparer for ISO and Joliet volumes.
 // DRDataPreparer returns the string constant DRDataPreparer, for use as a dictionary key or argument.
 func DRDataPreparer() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRDataPreparer"))) }
 
-// NSString indicating the application identifier for ISO, Joliet and UDF volumes.
 // DRApplicationIdentifier returns the string constant DRApplicationIdentifier, for use as a dictionary key or argument.
 func DRApplicationIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRApplicationIdentifier")))
 }
 
-// NSString indicating the system identifier for ISO and Joliet volumes.
 // DRSystemIdentifier returns the string constant DRSystemIdentifier, for use as a dictionary key or argument.
 func DRSystemIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRSystemIdentifier")))
 }
 
-// DRFile pointing to the copyright file for ISO and Joliet volumes. The file must be in the root directory.
 // DRCopyrightFile returns the string constant DRCopyrightFile, for use as a dictionary key or argument.
 func DRCopyrightFile() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRCopyrightFile"))) }
 
-// DRFile pointing to the abstract file for ISO and Joliet volumes. The file must be in the root directory.
 // DRAbstractFile returns the string constant DRAbstractFile, for use as a dictionary key or argument.
 func DRAbstractFile() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRAbstractFile"))) }
 
-// DRFile pointing to the bibliographic file for ISO and Joliet volumes. The file must be in the root directory.
 // DRBibliographicFile returns the string constant DRBibliographicFile, for use as a dictionary key or argument.
 func DRBibliographicFile() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRBibliographicFile")))
 }
 
-// NSNumber indicating the block size of the track. Currently always 2048.  Do not change.
 // DRBlockSize returns the string constant DRBlockSize, for use as a dictionary key or argument.
 func DRBlockSize() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRBlockSize"))) }
 
-// NSDate containing the default date to use for any unspecified dates in the filesystem. The current date and time is used if unspecified.
 // DRDefaultDate returns the string constant DRDefaultDate, for use as a dictionary key or argument.
 func DRDefaultDate() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRDefaultDate"))) }
 
-// NSDate containing the volume creation date. DRDefaultDate is used if unspecified.
 // DRVolumeCreationDate returns the string constant DRVolumeCreationDate, for use as a dictionary key or argument.
 func DRVolumeCreationDate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRVolumeCreationDate")))
 }
 
-// NSDate containing the volume modification date. DRDefaultDate is used if unspecified.
 // DRVolumeModificationDate returns the string constant DRVolumeModificationDate, for use as a dictionary key or argument.
 func DRVolumeModificationDate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRVolumeModificationDate")))
 }
 
-// NSDate containing the volume-checked date for HFS+ volumes. DRDefaultDate is used if unspecified.
 // DRVolumeCheckedDate returns the string constant DRVolumeCheckedDate, for use as a dictionary key or argument.
 func DRVolumeCheckedDate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRVolumeCheckedDate")))
 }
 
-// NSDate containing the volume expiration date for ISO and Joliet volumes.
 // DRVolumeExpirationDate returns the string constant DRVolumeExpirationDate, for use as a dictionary key or argument.
 func DRVolumeExpirationDate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRVolumeExpirationDate")))
 }
 
-// NSDate containing the date and time at which the volume is effective for ISO and Joliet volumes.
 // DRVolumeEffectiveDate returns the string constant DRVolumeEffectiveDate, for use as a dictionary key or argument.
 func DRVolumeEffectiveDate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRVolumeEffectiveDate")))
 }
 
-// NSBoolean indicating whether the track should have Mac extensions.
 // DRISOMacExtensions returns the string constant DRISOMacExtensions, for use as a dictionary key or argument.
 func DRISOMacExtensions() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRISOMacExtensions")))
 }
 
-// NSBoolean indicating whether the track should have RockRidge (POSIX) extensions.
 // DRISORockRidgeExtensions returns the string constant DRISORockRidgeExtensions, for use as a dictionary key or argument.
 func DRISORockRidgeExtensions() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRISORockRidgeExtensions")))
 }
 
-// NSBoolean indicating whether the track should suppress Mac-specific files from non-HFS filesystems.
 // DRSuppressMacSpecificFiles returns the string constant DRSuppressMacSpecificFiles, for use as a dictionary key or argument.
 func DRSuppressMacSpecificFiles() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRSuppressMacSpecificFiles")))
 }
 
-// The property whose value is the data mode of the subchannel data sent to the drive. If this key is not present, the track will default to a value of
 // DRSubchannelDataFormKey returns the string constant DRSubchannelDataFormKey, for use as a dictionary key or argument.
 func DRSubchannelDataFormKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRSubchannelDataFormKey")))
 }
 
-// A value for
 // DRSubchannelDataFormNone returns the string constant DRSubchannelDataFormNone, for use as a dictionary key or argument.
 func DRSubchannelDataFormNone() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRSubchannelDataFormNone")))
 }
 
-// A value for
 // DRSubchannelDataFormPack returns the string constant DRSubchannelDataFormPack, for use as a dictionary key or argument.
 func DRSubchannelDataFormPack() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRSubchannelDataFormPack")))
 }
 
-// A value for
 // DRSubchannelDataFormRaw returns the string constant DRSubchannelDataFormRaw, for use as a dictionary key or argument.
 func DRSubchannelDataFormRaw() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRSubchannelDataFormRaw")))
 }
 
-// The burn property whose value is an NSNumber containing the speed at which the burn should run, expressed as a float value of kilobytes per second. If this key is not present, the speed will default to
 // DRBurnRequestedSpeedKey returns the string constant DRBurnRequestedSpeedKey, for use as a dictionary key or argument.
 func DRBurnRequestedSpeedKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRBurnRequestedSpeedKey")))
 }
 
-// The burn property whose value is a BOOL indicating if the disc will still be appendable after the burn. If this key is not present, the burn will default to a value of <i>NO</i> and the disc will be marked as not appendable.
 // DRBurnAppendableKey returns the string constant DRBurnAppendableKey, for use as a dictionary key or argument.
 func DRBurnAppendableKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRBurnAppendableKey")))
 }
 
-// The burn property whose value is a BOOL indicating if the disc will be overwritten from block zero for the burn. If this key is not present, the burn will default to a value of <i>NO</i> and the disc will be appended.
 // DRBurnOverwriteDiscKey returns the string constant DRBurnOverwriteDiscKey, for use as a dictionary key or argument.
 func DRBurnOverwriteDiscKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRBurnOverwriteDiscKey")))
 }
 
-// The burn property whose value is a BOOL indicating if the disc will be verified after being burned. If this key is not present, the burn will default to a value of <i>YES</i> and the disc will be verified.
 // DRBurnVerifyDiscKey returns the string constant DRBurnVerifyDiscKey, for use as a dictionary key or argument.
 func DRBurnVerifyDiscKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRBurnVerifyDiscKey")))
 }
 
-// The burn property whose value is an NSString containing one of the completion actions possible for the disc handling. If this key is not present, the burn will default to a value of
 // DRBurnCompletionActionKey returns the string constant DRBurnCompletionActionKey, for use as a dictionary key or argument.
 func DRBurnCompletionActionKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRBurnCompletionActionKey")))
 }
 
-// The burn property whose value is a BOOL indicating if burn underrun protection will be on or off for devices which support it. For those devices which support it, burn underrun protection is enabled by default. If the device supports burn underrun protection and this key is not present, the burn will default to a value of <i>YES</i> and burn underrun protection will be enabled.
 // DRBurnUnderrunProtectionKey returns the string constant DRBurnUnderrunProtectionKey, for use as a dictionary key or argument.
 func DRBurnUnderrunProtectionKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRBurnUnderrunProtectionKey")))
 }
 
-// The burn property whose value is a BOOL indicating if the burn will run as a test burn. When this is set and the burn object is sent
 // DRBurnTestingKey returns the string constant DRBurnTestingKey, for use as a dictionary key or argument.
 func DRBurnTestingKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRBurnTestingKey"))) }
 
-// The burn property whose value is a BOOL indicating if burn operations will behave synchronously.  If this key is not present, it will default to a value of <i>NO</i> and burn operations will behave asynchronously. Synchronous operations do not post status notifications, and will not return until they are completed.  Status can still be queried at any time, and will remain valid even after the burn operation has finished.
 // DRSynchronousBehaviorKey returns the string constant DRSynchronousBehaviorKey, for use as a dictionary key or argument.
 func DRSynchronousBehaviorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRSynchronousBehaviorKey")))
 }
 
-// The burn property whose value is an NSString containing a one of the failure actions possible for the disc handling. If this key is not present, the burn will default to a value of
 // DRBurnFailureActionKey returns the string constant DRBurnFailureActionKey, for use as a dictionary key or argument.
 func DRBurnFailureActionKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRBurnFailureActionKey")))
 }
 
-// The burn property whose value is an NSData containing exactly 13 bytes of data, which will be written to the disc as the Media Catalog Number. If this key is not present, it will default to all zeroes, indicating that a MCN is not supplied. This value is the UPC/EAN product number, and should conform to the specifications of the UCC and EAN.  See <a href="http://www.ean-int.org/">http://www.ean-int.org/</a> and <a href="http://www.uc-council.org/">http://www.uc-council.org/</a> for more details on the UPC/EAN standard.
 // DRMediaCatalogNumberKey returns the string constant DRMediaCatalogNumberKey, for use as a dictionary key or argument.
 func DRMediaCatalogNumberKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRMediaCatalogNumberKey")))
 }
 
-// The burn property key whose value is an NSNumber containing the number of blocks desired for the layer 0 data zone on a double layer writable disc. The size of the layer 0 data zone dictates where the transition point is from layer 0 to layer 1. If this key is present, the data zone size will be set prior to the start of the burn using the value for this key. If it is not present, the default layer 0 data zone will be used (half the available blocks on an empty disc). The transition point can be specified two ways. If the value specified in this key is greater than 1.0, then it will designate an absolute block number for the transition point. In this case, the block number should be a multiple of 16 and at least 40000h per specification. If the value is less than 1.0, it will specify the percentage of the burn that should reside on layer 0. A typical value is 0.5, designating half the burn for each layer. A value of 0.0 or 1.0 will not change the layer 0 transition point.
 // DRBurnDoubleLayerL0DataZoneBlocksKey returns the string constant DRBurnDoubleLayerL0DataZoneBlocksKey, for use as a dictionary key or argument.
 func DRBurnDoubleLayerL0DataZoneBlocksKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRBurnDoubleLayerL0DataZoneBlocksKey")))
 }
 
-// The burn property whose value is an NSString, or array of NSStrings, indicating the burn strategy or strategies that are suggested.  If this key is not present, the burn engine picks an appropriate burn strategy automatically. Most clients will not need to specify a specific burn strategy. When more than one strategy is suggested, the burn engine will attempt to use the first strategy in the list which is available. A burn strategy will never be used if it cannot write the required data: for example, TAO cannot be used to write CD-Text. The presence of this key by itself is just a suggestion, and if the burn engine cannot fulfill the request it will burn using whatever strategy is available.  To make the suggestion into a requirement, add
 // DRBurnStrategyKey returns the string constant DRBurnStrategyKey, for use as a dictionary key or argument.
 func DRBurnStrategyKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRBurnStrategyKey"))) }
 
-// The burn property whose value is a BOOL indicating whether the burn strategy/strategies listed for
 // DRBurnStrategyIsRequiredKey returns the string constant DRBurnStrategyIsRequiredKey, for use as a dictionary key or argument.
 func DRBurnStrategyIsRequiredKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRBurnStrategyIsRequiredKey")))
 }
 
-// This key points to a
 // DRCDTextKey returns the string constant DRCDTextKey, for use as a dictionary key or argument.
 func DRCDTextKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRCDTextKey"))) }
 
-// An NSString value for
 // DRBurnCompletionActionEject returns the string constant DRBurnCompletionActionEject, for use as a dictionary key or argument.
 func DRBurnCompletionActionEject() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRBurnCompletionActionEject")))
 }
 
-// An NSString value for
 // DRBurnCompletionActionMount returns the string constant DRBurnCompletionActionMount, for use as a dictionary key or argument.
 func DRBurnCompletionActionMount() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRBurnCompletionActionMount")))
 }
 
-// An NSString value for
 // DRBurnFailureActionEject returns the string constant DRBurnFailureActionEject, for use as a dictionary key or argument.
 func DRBurnFailureActionEject() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRBurnFailureActionEject")))
 }
 
-// An NSString value for
 // DRBurnFailureActionNone returns the string constant DRBurnFailureActionNone, for use as a dictionary key or argument.
 func DRBurnFailureActionNone() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRBurnFailureActionNone")))
 }
 
-// An NSString value for
 // DRBurnStrategyCDTAO returns the string constant DRBurnStrategyCDTAO, for use as a dictionary key or argument.
 func DRBurnStrategyCDTAO() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRBurnStrategyCDTAO")))
 }
 
-// An NSString value for
 // DRBurnStrategyCDSAO returns the string constant DRBurnStrategyCDSAO, for use as a dictionary key or argument.
 func DRBurnStrategyCDSAO() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRBurnStrategyCDSAO")))
 }
 
-// An NSString value for
 // DRBurnStrategyDVDDAO returns the string constant DRBurnStrategyDVDDAO, for use as a dictionary key or argument.
 func DRBurnStrategyDVDDAO() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRBurnStrategyDVDDAO")))
 }
 
-// An NSString value for
 // DRBurnStrategyBDDAO returns the string constant DRBurnStrategyBDDAO, for use as a dictionary key or argument.
 func DRBurnStrategyBDDAO() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRBurnStrategyBDDAO")))
 }
 
-// Posted by a
 // DRBurnStatusChangedNotification returns the string constant DRBurnStatusChangedNotification, for use as a dictionary key or argument.
 func DRBurnStatusChangedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRBurnStatusChangedNotification")))
 }
 
-// Required property key for a CD-Text block.  The value for this property is an NSNumber, containing the numeric code for the language.  This value is the Red Book language code value for the text of the block. The language may be changed after the block is created.
 // DRCDTextLanguageKey returns the string constant DRCDTextLanguageKey, for use as a dictionary key or argument.
 func DRCDTextLanguageKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRCDTextLanguageKey")))
 }
 
-// Required property key for a CD-Text block.  The value for this property is an NSNumber, containing the Red Book character set value for the text of the block.  This value is <b>not</b> a CFStringEncoding or NSStringEncoding, and should not be used as such. This property should remain constant once the block is created. If this property is changed after the block is created, the results are undefined.
 // DRCDTextCharacterCodeKey returns the string constant DRCDTextCharacterCodeKey, for use as a dictionary key or argument.
 func DRCDTextCharacterCodeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRCDTextCharacterCodeKey")))
 }
 
-// Required property key for a CD-Text block.  The value for this property is an NSNumber, containing the NSStringEncoding for the text of the block. This property should remain constant once the block is created.  If this property is changed after the block is created, the results are undefined.
 // DRCDTextNSStringEncodingKey returns the string constant DRCDTextNSStringEncodingKey, for use as a dictionary key or argument.
 func DRCDTextNSStringEncodingKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRCDTextNSStringEncodingKey")))
 }
 
-// Optional property key for a CD-Text block.  The value for this property is an NSNumber, containing a BOOL value indicating whether copyright is asserted on the messages in the block (
 // DRCDTextCopyrightAssertedForSpecialMessagesKey returns the string constant DRCDTextCopyrightAssertedForSpecialMessagesKey, for use as a dictionary key or argument.
 func DRCDTextCopyrightAssertedForSpecialMessagesKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRCDTextCopyrightAssertedForSpecialMessagesKey")))
 }
 
-// Optional property key for a CD-Text block.  The value for this property is an NSNumber, containing a BOOL value indicating whether copyright is asserted on the names in the block.  (
 // DRCDTextCopyrightAssertedForNamesKey returns the string constant DRCDTextCopyrightAssertedForNamesKey, for use as a dictionary key or argument.
 func DRCDTextCopyrightAssertedForNamesKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRCDTextCopyrightAssertedForNamesKey")))
 }
 
-// Optional property key for a CD-Text block.  The value for this property is an NSNumber, containing a BOOL value indicating whether copyright is asserted on the titles of the disc and tracks.  (
 // DRCDTextCopyrightAssertedForTitlesKey returns the string constant DRCDTextCopyrightAssertedForTitlesKey, for use as a dictionary key or argument.
 func DRCDTextCopyrightAssertedForTitlesKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRCDTextCopyrightAssertedForTitlesKey")))
 }
 
-// One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSString, containing the track/disc title.
 // DRCDTextTitleKey returns the string constant DRCDTextTitleKey, for use as a dictionary key or argument.
 func DRCDTextTitleKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRCDTextTitleKey"))) }
 
-// One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSString, containing the track/disc performer.
 // DRCDTextPerformerKey returns the string constant DRCDTextPerformerKey, for use as a dictionary key or argument.
 func DRCDTextPerformerKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRCDTextPerformerKey")))
 }
 
-// One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSString, containing the track/disc songwriter.
 // DRCDTextSongwriterKey returns the string constant DRCDTextSongwriterKey, for use as a dictionary key or argument.
 func DRCDTextSongwriterKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRCDTextSongwriterKey")))
 }
 
-// One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSString, containing the track/disc composer.
 // DRCDTextComposerKey returns the string constant DRCDTextComposerKey, for use as a dictionary key or argument.
 func DRCDTextComposerKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRCDTextComposerKey")))
 }
 
-// One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSString, containing the track/disc arranger.
 // DRCDTextArrangerKey returns the string constant DRCDTextArrangerKey, for use as a dictionary key or argument.
 func DRCDTextArrangerKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRCDTextArrangerKey")))
 }
 
-// One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSString, containing a text message which may be displayed to the user by some players.
 // DRCDTextSpecialMessageKey returns the string constant DRCDTextSpecialMessageKey, for use as a dictionary key or argument.
 func DRCDTextSpecialMessageKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRCDTextSpecialMessageKey")))
 }
 
-// One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSString, containing disc ID information, such as the catalog number and name of the record company, point of sale code, year of sales, etc.  Each item shall be separated by a slash ("/"). This key is only valid for the disc (array index 0) and is ignored when set in the dictionaries for tracks.
 // DRCDTextDiscIdentKey returns the string constant DRCDTextDiscIdentKey, for use as a dictionary key or argument.
 func DRCDTextDiscIdentKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRCDTextDiscIdentKey")))
 }
 
-// One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSString, containing the description of the disc genre. This key is only valid for the disc (array index 0) and is ignored when set in the dictionaries for tracks.
 // DRCDTextGenreKey returns the string constant DRCDTextGenreKey, for use as a dictionary key or argument.
 func DRCDTextGenreKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRCDTextGenreKey"))) }
 
-// One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSNumber, containing the numeric code for the disc genre as enumerated above. This key is only valid for the disc (array index 0) and is ignored when set in the dictionaries for tracks.
 // DRCDTextGenreCodeKey returns the string constant DRCDTextGenreCodeKey, for use as a dictionary key or argument.
 func DRCDTextGenreCodeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRCDTextGenreCodeKey")))
 }
 
-// One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSString, containing disc information.  The format of this data is arbitrary and is up to the content provider.  This information is private and players should not display it to the user of the disc.
 // DRCDTextClosedKey returns the string constant DRCDTextClosedKey, for use as a dictionary key or argument.
 func DRCDTextClosedKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRCDTextClosedKey"))) }
 
-// One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSData, containing either 13 bytes of MCN (for the disc) or 12 bytes of ISRC (for tracks). This information can also be specified in the burn and track properties.  CD-Text simply provides an alternative, possibly redundant way to encode this information. If the MCN or ISRC was specified in the properties for the burn or track, this value should be the same.  See the descriptions of
 // DRCDTextMCNISRCKey returns the string constant DRCDTextMCNISRCKey, for use as a dictionary key or argument.
 func DRCDTextMCNISRCKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRCDTextMCNISRCKey")))
 }
 
-// One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSData, containing table-of-contents information. This key is provided for output purposes only, when reading CD-Text from an existing disc.  It is ignored when specified in a burn.
 // DRCDTextTOCKey returns the string constant DRCDTextTOCKey, for use as a dictionary key or argument.
 func DRCDTextTOCKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRCDTextTOCKey"))) }
 
-// One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSData, containing additional table-of-contents information. This key is provided for output purposes only, when reading CD-Text from an existing disc.  It is ignored when specified in a burn.
 // DRCDTextTOC2Key returns the string constant DRCDTextTOC2Key, for use as a dictionary key or argument.
 func DRCDTextTOC2Key() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRCDTextTOC2Key"))) }
 
-// One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSData, containing information about the number of packs and languages associated with each block. This key is provided for output purposes only, when reading CD-Text from an existing disc.  It is ignored when specified in a burn.
 // DRCDTextSizeKey returns the string constant DRCDTextSizeKey, for use as a dictionary key or argument.
 func DRCDTextSizeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRCDTextSizeKey"))) }
 
-// The key for the erase's properties dictionary storing the type of erase to perform
 // DREraseTypeKey returns the string constant DREraseTypeKey, for use as a dictionary key or argument.
 func DREraseTypeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DREraseTypeKey"))) }
 
 // DREraseTypeQuick returns the string constant DREraseTypeQuick, for use as a dictionary key or argument.
 func DREraseTypeQuick() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DREraseTypeQuick"))) }
 
-// An NString value for the
 // DREraseTypeComplete returns the string constant DREraseTypeComplete, for use as a dictionary key or argument.
 func DREraseTypeComplete() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DREraseTypeComplete")))
@@ -3013,407 +2487,329 @@ func DREraseStatusChangedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DREraseStatusChangedNotification")))
 }
 
-// The key for accessing the name or properties for the file in all filesystems together. When this key is used to refer to a name, it refers to the base name (which has no naming restrictions).
 // DRAllFilesystems returns the string constant DRAllFilesystems, for use as a dictionary key or argument.
 func DRAllFilesystems() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRAllFilesystems"))) }
 
-// The key for accessing the ISO-9660 properties for the file. This key is used to refer specifically to the properties for the file. This key cannot be used to refer to the name of the file; it is ambiguous, since the name may be in either level 1 or level 2 format.
 // DRISO9660 returns the string constant DRISO9660, for use as a dictionary key or argument.
 func DRISO9660() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRISO9660"))) }
 
-// The key for accessing the ISO-9660 level 1 name for the file. This key is used to refer specifically to the name generated for ISO-9660 if the ISO level is set to 1.  When used for a property, it is equivalent in use to the
 // DRISO9660LevelOne returns the string constant DRISO9660LevelOne, for use as a dictionary key or argument.
 func DRISO9660LevelOne() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRISO9660LevelOne"))) }
 
-// The key for accessing the ISO-9660 level 2 name for the file. This key is used to refer specifically to the name generated for ISO-9660 if the ISO level is set to 2.  When used for a property, it is equivalent in use to the
 // DRISO9660LevelTwo returns the string constant DRISO9660LevelTwo, for use as a dictionary key or argument.
 func DRISO9660LevelTwo() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRISO9660LevelTwo"))) }
 
-// The key for accessing the Joliet name/properties for the file. Joliet names can be 64 precomposed unicode characters long, but are only allowed one "." character and many punctuation characters are illegal.
 // DRJoliet returns the string constant DRJoliet, for use as a dictionary key or argument.
 func DRJoliet() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRJoliet"))) }
 
-// The key for accessing the HFS+ name/properties for the file. HFS+ names can be up to 255 decomposed unicode characters long.
 // DRHFSPlus returns the string constant DRHFSPlus, for use as a dictionary key or argument.
 func DRHFSPlus() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRHFSPlus"))) }
 
-// The key for accessing the UDF name/properties for the file.
 // DRUDF returns the string constant DRUDF, for use as a dictionary key or argument.
 func DRUDF() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRUDF"))) }
 
-// NSNumber containing the ISO9660 version number for the object. Default value is 1.
 // DRISO9660VersionNumber returns the string constant DRISO9660VersionNumber, for use as a dictionary key or argument.
 func DRISO9660VersionNumber() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRISO9660VersionNumber")))
 }
 
-// NSBoolean indicating whether the item is invisibile or not.
 // DRInvisible returns the string constant DRInvisible, for use as a dictionary key or argument.
 func DRInvisible() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRInvisible"))) }
 
-// NSDate containing the item's creation date.
 // DRCreationDate returns the string constant DRCreationDate, for use as a dictionary key or argument.
 func DRCreationDate() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRCreationDate"))) }
 
-// NSDate containing the item's content modification date.
 // DRContentModificationDate returns the string constant DRContentModificationDate, for use as a dictionary key or argument.
 func DRContentModificationDate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRContentModificationDate")))
 }
 
-// NSDate containing the item's attribute modification date.
 // DRAttributeModificationDate returns the string constant DRAttributeModificationDate, for use as a dictionary key or argument.
 func DRAttributeModificationDate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRAttributeModificationDate")))
 }
 
-// NSDate containing the item's last-accessed date.
 // DRAccessDate returns the string constant DRAccessDate, for use as a dictionary key or argument.
 func DRAccessDate() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRAccessDate"))) }
 
-// NSDate containing the item's backup date.
 // DRBackupDate returns the string constant DRBackupDate, for use as a dictionary key or argument.
 func DRBackupDate() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRBackupDate"))) }
 
-// NSDate containing the item's effective date.
 // DREffectiveDate returns the string constant DREffectiveDate, for use as a dictionary key or argument.
 func DREffectiveDate() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DREffectiveDate"))) }
 
-// NSDate containing the item's expiration date.
 // DRExpirationDate returns the string constant DRExpirationDate, for use as a dictionary key or argument.
 func DRExpirationDate() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRExpirationDate"))) }
 
-// NSDate containing the item's recording date.
 // DRRecordingDate returns the string constant DRRecordingDate, for use as a dictionary key or argument.
 func DRRecordingDate() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRRecordingDate"))) }
 
-// NSNumber containing the item's POSIX file mode.
 // DRPosixFileMode returns the string constant DRPosixFileMode, for use as a dictionary key or argument.
 func DRPosixFileMode() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRPosixFileMode"))) }
 
-// NSNumber containing the item's POSIX UID.
 // DRPosixUID returns the string constant DRPosixUID, for use as a dictionary key or argument.
 func DRPosixUID() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRPosixUID"))) }
 
-// NSNumber containing the item's POSIX GID.
 // DRPosixGID returns the string constant DRPosixGID, for use as a dictionary key or argument.
 func DRPosixGID() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRPosixGID"))) }
 
-// NSNumber containing the item's text encoding hint (HFS+ only). This value is used by the MacOS to help when converting the natively UTF-16 filename into an 8-bit-per-character representation (such as MacRoman, Shift-JIS, or UTF8).  If not set, default behavior is to call
 // DRHFSPlusTextEncodingHint returns the string constant DRHFSPlusTextEncodingHint, for use as a dictionary key or argument.
 func DRHFSPlusTextEncodingHint() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRHFSPlusTextEncodingHint")))
 }
 
-// NSNumber containing item's catalog node ID (HFS+ only). Currently, this value if set is only a suggestion. The burn engine will attempt to use this node ID, but may use another value if it needs to resolve conflicts.  Default behavior is to allocate node IDs incrementally from
 // DRHFSPlusCatalogNodeID returns the string constant DRHFSPlusCatalogNodeID, for use as a dictionary key or argument.
 func DRHFSPlusCatalogNodeID() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRHFSPlusCatalogNodeID")))
 }
 
-// NSData containing the OSType for the file type (MacOS only).
 // DRMacFileType returns the string constant DRMacFileType, for use as a dictionary key or argument.
 func DRMacFileType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRMacFileType"))) }
 
-// NSData containing the OSType for the file creator (MacOS only).
 // DRMacFileCreator returns the string constant DRMacFileCreator, for use as a dictionary key or argument.
 func DRMacFileCreator() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRMacFileCreator"))) }
 
-// NSData containing a Rect (not NSRect) for the window bounds for a folder (MacOS only).
 // DRMacWindowBounds returns the string constant DRMacWindowBounds, for use as a dictionary key or argument.
 func DRMacWindowBounds() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRMacWindowBounds"))) }
 
-// NSData containing a Point (not NSPoint) for the item's icon location in its parent folder (MacOS only).
 // DRMacIconLocation returns the string constant DRMacIconLocation, for use as a dictionary key or argument.
 func DRMacIconLocation() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRMacIconLocation"))) }
 
-// NSData containing a Point (not NSPoint) for the folder's scroll position (MacOS only).
 // DRMacScrollPosition returns the string constant DRMacScrollPosition, for use as a dictionary key or argument.
 func DRMacScrollPosition() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRMacScrollPosition")))
 }
 
-// NSNumber containing the folder's window view type (MacOS only).
 // DRMacWindowView returns the string constant DRMacWindowView, for use as a dictionary key or argument.
 func DRMacWindowView() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRMacWindowView"))) }
 
-// NSNumber containing the item's Finder flags (MacOS only). The invisible bit is ignored - use DRInvisible instead.
 // DRMacFinderFlags returns the string constant DRMacFinderFlags, for use as a dictionary key or argument.
 func DRMacFinderFlags() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRMacFinderFlags"))) }
 
-// NSNumber containing the item's extended Finder flags (MacOS only).
 // DRMacExtendedFinderFlags returns the string constant DRMacExtendedFinderFlags, for use as a dictionary key or argument.
 func DRMacExtendedFinderFlags() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRMacExtendedFinderFlags")))
 }
 
-// A BOOL indicating whether the extension should be hidden in the Finder or not. The default is false and only applies to files.
 // DRMacFinderHideExtension returns the string constant DRMacFinderHideExtension, for use as a dictionary key or argument.
 func DRMacFinderHideExtension() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRMacFinderHideExtension")))
 }
 
-// Optional key. This property key defines the version for the UDF structures written to disk. Values are definde in UDF Version types.
 // DRUDFWriteVersion returns the string constant DRUDFWriteVersion, for use as a dictionary key or argument.
 func DRUDFWriteVersion() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRUDFWriteVersion"))) }
 
-// This value is used in
 // DRUDFVersion102 returns the string constant DRUDFVersion102, for use as a dictionary key or argument.
 func DRUDFVersion102() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRUDFVersion102"))) }
 
-// This value is used in
 // DRUDFVersion150 returns the string constant DRUDFVersion150, for use as a dictionary key or argument.
 func DRUDFVersion150() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRUDFVersion150"))) }
 
-// Optional key. NSNumber containing the primary volume sequence number. See the UDF specs for details.
 // DRUDFPrimaryVolumeDescriptorNumber returns the string constant DRUDFPrimaryVolumeDescriptorNumber, for use as a dictionary key or argument.
 func DRUDFPrimaryVolumeDescriptorNumber() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRUDFPrimaryVolumeDescriptorNumber")))
 }
 
-// Optional key. NSNumber containing the volume sequence number. See the UDF specs for details.
 // DRUDFVolumeSequenceNumber returns the string constant DRUDFVolumeSequenceNumber, for use as a dictionary key or argument.
 func DRUDFVolumeSequenceNumber() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRUDFVolumeSequenceNumber")))
 }
 
-// Optional key. NSNumber containing the maximum volume sequence number. See the UDF specs for details.
 // DRUDFMaxVolumeSequenceNumber returns the string constant DRUDFMaxVolumeSequenceNumber, for use as a dictionary key or argument.
 func DRUDFMaxVolumeSequenceNumber() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRUDFMaxVolumeSequenceNumber")))
 }
 
-// Optional key. NSNumber containing the volume interchange level. See the UDF specs for details.
 // DRUDFInterchangeLevel returns the string constant DRUDFInterchangeLevel, for use as a dictionary key or argument.
 func DRUDFInterchangeLevel() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRUDFInterchangeLevel")))
 }
 
-// Optional key. NSNumber containing the maximum volume interchange level number. See the UDF specs for details.
 // DRUDFMaxInterchangeLevel returns the string constant DRUDFMaxInterchangeLevel, for use as a dictionary key or argument.
 func DRUDFMaxInterchangeLevel() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRUDFMaxInterchangeLevel")))
 }
 
-// Optional key. NSData object of up to 8 bytes in length, for application use. The presence of this key requires the
 // DRUDFApplicationIdentifierSuffix returns the string constant DRUDFApplicationIdentifierSuffix, for use as a dictionary key or argument.
 func DRUDFApplicationIdentifierSuffix() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRUDFApplicationIdentifierSuffix")))
 }
 
-// Optional key. The Volume Set Identifier for the UDF volume set. If this key is not present,
 // DRUDFVolumeSetIdentifier returns the string constant DRUDFVolumeSetIdentifier, for use as a dictionary key or argument.
 func DRUDFVolumeSetIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRUDFVolumeSetIdentifier")))
 }
 
-// Optional key. An NSDate object for the volume set timestamp. See the UDF specs for details.
 // DRUDFVolumeSetTimestamp returns the string constant DRUDFVolumeSetTimestamp, for use as a dictionary key or argument.
 func DRUDFVolumeSetTimestamp() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRUDFVolumeSetTimestamp")))
 }
 
-// Optional key. An NSData object (8 bytes in length) for implementation use data. See the UDF specs for details.
 // DRUDFVolumeSetImplementationUse returns the string constant DRUDFVolumeSetImplementationUse, for use as a dictionary key or argument.
 func DRUDFVolumeSetImplementationUse() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRUDFVolumeSetImplementationUse")))
 }
 
-// NSNumber indicating whether the file is a UDF Real-Time file.
 // DRUDFRealTimeFile returns the string constant DRUDFRealTimeFile, for use as a dictionary key or argument.
 func DRUDFRealTimeFile() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRUDFRealTimeFile"))) }
 
-// NSNumber indicating the extended UDF file permissions of this file. Bit 0: Change attributes for others (low order bit) Bit 1: Delete permissions for others Bit 2: Change attributes for group Bit 3: Delete permissions for group Bit 4: Change attributes for owner Bit 5: Delete permissions for owner Bit 6 & 7: Reserved If this key is not present,
 // DRUDFExtendedFilePermissions returns the string constant DRUDFExtendedFilePermissions, for use as a dictionary key or argument.
 func DRUDFExtendedFilePermissions() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRUDFExtendedFilePermissions")))
 }
 
-// A hard link.
 // DRLinkTypeHardLink returns the string constant DRLinkTypeHardLink, for use as a dictionary key or argument.
 func DRLinkTypeHardLink() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRLinkTypeHardLink")))
 }
 
-// A symbolic link.
 // DRLinkTypeSymbolicLink returns the string constant DRLinkTypeSymbolicLink, for use as a dictionary key or argument.
 func DRLinkTypeSymbolicLink() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRLinkTypeSymbolicLink")))
 }
 
-// A Finder alias.
 // DRLinkTypeFinderAlias returns the string constant DRLinkTypeFinderAlias, for use as a dictionary key or argument.
 func DRLinkTypeFinderAlias() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRLinkTypeFinderAlias")))
 }
 
-// A key for the status dictionaries. NSString indicating the current state of the operation.
 // DRStatusStateKey returns the string constant DRStatusStateKey, for use as a dictionary key or argument.
 func DRStatusStateKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRStatusStateKey"))) }
 
-// A key for the status dictionaries. NSNumber containing the percent complete of the operation expressed as a floating point number from 0 to 1.
 // DRStatusPercentCompleteKey returns the string constant DRStatusPercentCompleteKey, for use as a dictionary key or argument.
 func DRStatusPercentCompleteKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRStatusPercentCompleteKey")))
 }
 
-// A key for the burn status dictionary. NSNumber indicating the current session being burned.
 // DRStatusCurrentSessionKey returns the string constant DRStatusCurrentSessionKey, for use as a dictionary key or argument.
 func DRStatusCurrentSessionKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRStatusCurrentSessionKey")))
 }
 
-// A key for the status dictionaries. NSNumber indicating the current track being burned.
 // DRStatusCurrentTrackKey returns the string constant DRStatusCurrentTrackKey, for use as a dictionary key or argument.
 func DRStatusCurrentTrackKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRStatusCurrentTrackKey")))
 }
 
-// A key for the status dictionaries. NSNumber indicating the total number of sessions being burned.
 // DRStatusTotalSessionsKey returns the string constant DRStatusTotalSessionsKey, for use as a dictionary key or argument.
 func DRStatusTotalSessionsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRStatusTotalSessionsKey")))
 }
 
-// A key for the status dictionaries. NSNumber indicating the total number of tracks in the current session being burned.
 // DRStatusTotalTracksKey returns the string constant DRStatusTotalTracksKey, for use as a dictionary key or argument.
 func DRStatusTotalTracksKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRStatusTotalTracksKey")))
 }
 
-// A key for the burn status dictionary. NSNumber indicating the current burn speed.
 // DRStatusCurrentSpeedKey returns the string constant DRStatusCurrentSpeedKey, for use as a dictionary key or argument.
 func DRStatusCurrentSpeedKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRStatusCurrentSpeedKey")))
 }
 
-// A key for the erase status dictionary. NSString indicating the type of erase operation.
 // DRStatusEraseTypeKey returns the string constant DRStatusEraseTypeKey, for use as a dictionary key or argument.
 func DRStatusEraseTypeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRStatusEraseTypeKey")))
 }
 
-// One possible value for
 // DRStatusStateNone returns the string constant DRStatusStateNone, for use as a dictionary key or argument.
 func DRStatusStateNone() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRStatusStateNone"))) }
 
-// One possible value for
 // DRStatusStatePreparing returns the string constant DRStatusStatePreparing, for use as a dictionary key or argument.
 func DRStatusStatePreparing() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRStatusStatePreparing")))
 }
 
-// One possible value for
 // DRStatusStateVerifying returns the string constant DRStatusStateVerifying, for use as a dictionary key or argument.
 func DRStatusStateVerifying() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRStatusStateVerifying")))
 }
 
-// One possible value for
 // DRStatusStateDone returns the string constant DRStatusStateDone, for use as a dictionary key or argument.
 func DRStatusStateDone() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRStatusStateDone"))) }
 
-// One possible value for
 // DRStatusStateFailed returns the string constant DRStatusStateFailed, for use as a dictionary key or argument.
 func DRStatusStateFailed() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRStatusStateFailed")))
 }
 
-// One possible value for
 // DRStatusStateSessionOpen returns the string constant DRStatusStateSessionOpen, for use as a dictionary key or argument.
 func DRStatusStateSessionOpen() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRStatusStateSessionOpen")))
 }
 
-// One possible value for
 // DRStatusStateTrackOpen returns the string constant DRStatusStateTrackOpen, for use as a dictionary key or argument.
 func DRStatusStateTrackOpen() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRStatusStateTrackOpen")))
 }
 
-// One possible value for
 // DRStatusStateTrackWrite returns the string constant DRStatusStateTrackWrite, for use as a dictionary key or argument.
 func DRStatusStateTrackWrite() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRStatusStateTrackWrite")))
 }
 
-// One possible value for
 // DRStatusStateTrackClose returns the string constant DRStatusStateTrackClose, for use as a dictionary key or argument.
 func DRStatusStateTrackClose() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRStatusStateTrackClose")))
 }
 
-// One possible value for
 // DRStatusStateSessionClose returns the string constant DRStatusStateSessionClose, for use as a dictionary key or argument.
 func DRStatusStateSessionClose() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRStatusStateSessionClose")))
 }
 
-// One possible value for
 // DRStatusStateFinishing returns the string constant DRStatusStateFinishing, for use as a dictionary key or argument.
 func DRStatusStateFinishing() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRStatusStateFinishing")))
 }
 
-// One possible value for
 // DRStatusStateErasing returns the string constant DRStatusStateErasing, for use as a dictionary key or argument.
 func DRStatusStateErasing() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRStatusStateErasing")))
 }
 
-// A dictionary of extended progress information. A key for the status dictionary. The value of this key is a reference to a NSDictionary object containing extended progress information.
 // DRStatusProgressInfoKey returns the string constant DRStatusProgressInfoKey, for use as a dictionary key or argument.
 func DRStatusProgressInfoKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRStatusProgressInfoKey")))
 }
 
-// The current burn speed in kilobytes per second. This is an optional key within the
 // DRStatusProgressCurrentKPS returns the string constant DRStatusProgressCurrentKPS, for use as a dictionary key or argument.
 func DRStatusProgressCurrentKPS() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRStatusProgressCurrentKPS")))
 }
 
-// The current burn speed in a media appropriate x-factor This is an optional key within the
 // DRStatusProgressCurrentXFactor returns the string constant DRStatusProgressCurrentXFactor, for use as a dictionary key or argument.
 func DRStatusProgressCurrentXFactor() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRStatusProgressCurrentXFactor")))
 }
 
-// The key in the status dictionary for the error dictionary.
 // DRErrorStatusKey returns the string constant DRErrorStatusKey, for use as a dictionary key or argument.
 func DRErrorStatusKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRErrorStatusKey"))) }
 
-// An NSNumber containing the OS error code for the error.
 // DRErrorStatusErrorKey returns the string constant DRErrorStatusErrorKey, for use as a dictionary key or argument.
 func DRErrorStatusErrorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRErrorStatusErrorKey")))
 }
 
-// An NSString describing the error in a user appropriate manner.
 // DRErrorStatusErrorStringKey returns the string constant DRErrorStatusErrorStringKey, for use as a dictionary key or argument.
 func DRErrorStatusErrorStringKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRErrorStatusErrorStringKey")))
 }
 
-// An NSString describing extended error information in a user appropriate manner.
 // DRErrorStatusErrorInfoStringKey returns the string constant DRErrorStatusErrorInfoStringKey, for use as a dictionary key or argument.
 func DRErrorStatusErrorInfoStringKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRErrorStatusErrorInfoStringKey")))
 }
 
-// An NSData object containing the raw RBC sense information structure reported by the device. If no sense is reported, this key will not be present.
 // DRErrorStatusSenseKey returns the string constant DRErrorStatusSenseKey, for use as a dictionary key or argument.
 func DRErrorStatusSenseKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRErrorStatusSenseKey")))
 }
 
-// An NSString describing the RBC sense code returned by the device. If no sense is reported, this key will not be present.
 // DRErrorStatusSenseCodeStringKey returns the string constant DRErrorStatusSenseCodeStringKey, for use as a dictionary key or argument.
 func DRErrorStatusSenseCodeStringKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRErrorStatusSenseCodeStringKey")))
 }
 
-// An NSString describing the RBC additional sense code and additional sense code qualifier pair returned by the device. If no sense is reported, this key will not be present.
 // DRErrorStatusAdditionalSenseStringKey returns the string constant DRErrorStatusAdditionalSenseStringKey, for use as a dictionary key or argument.
 func DRErrorStatusAdditionalSenseStringKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRErrorStatusAdditionalSenseStringKey")))

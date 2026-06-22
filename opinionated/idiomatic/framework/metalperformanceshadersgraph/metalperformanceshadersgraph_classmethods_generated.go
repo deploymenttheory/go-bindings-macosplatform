@@ -11,121 +11,121 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Creates a new graph to insert nodes in.
+// New creates a new graph to insert nodes in.
 func New() *Graph {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraph")), objc.RegisterName("new"))
 	return GraphFromID(_r)
 }
 
-// Creates a convolution descriptor with given values for parameters.
+// DescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYGroupsPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout creates a convolution descriptor with given values for parameters.
 func DescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYGroupsPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout(strideInX int, strideInY int, dilationRateInX int, dilationRateInY int, groups int, paddingLeft int, paddingRight int, paddingTop int, paddingBottom int, paddingStyle GraphPaddingStyle, dataLayout GraphTensorNamedDataLayout, weightsLayout GraphTensorNamedDataLayout) *GraphConvolution2DOpDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphConvolution2DOpDescriptor")), objc.RegisterName("descriptorWithStrideInX:strideInY:dilationRateInX:dilationRateInY:groups:paddingLeft:paddingRight:paddingTop:paddingBottom:paddingStyle:dataLayout:weightsLayout:"), strideInX, strideInY, dilationRateInX, dilationRateInY, groups, paddingLeft, paddingRight, paddingTop, paddingBottom, paddingStyle, dataLayout, weightsLayout)
 	return GraphConvolution2DOpDescriptorFromID(_r)
 }
 
-// Creates a convolution descriptor with given values for parameters.
+// DescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYGroupsPaddingStyleDataLayoutWeightsLayout creates a convolution descriptor with given values for parameters.
 func DescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYGroupsPaddingStyleDataLayoutWeightsLayout(strideInX int, strideInY int, dilationRateInX int, dilationRateInY int, groups int, paddingStyle GraphPaddingStyle, dataLayout GraphTensorNamedDataLayout, weightsLayout GraphTensorNamedDataLayout) *GraphConvolution2DOpDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphConvolution2DOpDescriptor")), objc.RegisterName("descriptorWithStrideInX:strideInY:dilationRateInX:dilationRateInY:groups:paddingStyle:dataLayout:weightsLayout:"), strideInX, strideInY, dilationRateInX, dilationRateInY, groups, paddingStyle, dataLayout, weightsLayout)
 	return GraphConvolution2DOpDescriptorFromID(_r)
 }
 
-// Creates a convolution descriptor with given values for parameters.
+// DescriptorWithStrideInXStrideInYStrideInZDilationRateInXDilationRateInYDilationRateInZGroupsPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBackPaddingStyleDataLayoutWeightsLayout creates a convolution descriptor with given values for parameters.
 func DescriptorWithStrideInXStrideInYStrideInZDilationRateInXDilationRateInYDilationRateInZGroupsPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBackPaddingStyleDataLayoutWeightsLayout(strideInX int, strideInY int, strideInZ int, dilationRateInX int, dilationRateInY int, dilationRateInZ int, groups int, paddingLeft int, paddingRight int, paddingTop int, paddingBottom int, paddingFront int, paddingBack int, paddingStyle GraphPaddingStyle, dataLayout GraphTensorNamedDataLayout, weightsLayout GraphTensorNamedDataLayout) *GraphConvolution3DOpDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphConvolution3DOpDescriptor")), objc.RegisterName("descriptorWithStrideInX:strideInY:strideInZ:dilationRateInX:dilationRateInY:dilationRateInZ:groups:paddingLeft:paddingRight:paddingTop:paddingBottom:paddingFront:paddingBack:paddingStyle:dataLayout:weightsLayout:"), strideInX, strideInY, strideInZ, dilationRateInX, dilationRateInY, dilationRateInZ, groups, paddingLeft, paddingRight, paddingTop, paddingBottom, paddingFront, paddingBack, paddingStyle, dataLayout, weightsLayout)
 	return GraphConvolution3DOpDescriptorFromID(_r)
 }
 
-// Creates a convolution descriptor with given values for parameters.
+// DescriptorWithStrideInXStrideInYStrideInZDilationRateInXDilationRateInYDilationRateInZGroupsPaddingStyleDataLayoutWeightsLayout creates a convolution descriptor with given values for parameters.
 func DescriptorWithStrideInXStrideInYStrideInZDilationRateInXDilationRateInYDilationRateInZGroupsPaddingStyleDataLayoutWeightsLayout(strideInX int, strideInY int, strideInZ int, dilationRateInX int, dilationRateInY int, dilationRateInZ int, groups int, paddingStyle GraphPaddingStyle, dataLayout GraphTensorNamedDataLayout, weightsLayout GraphTensorNamedDataLayout) *GraphConvolution3DOpDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphConvolution3DOpDescriptor")), objc.RegisterName("descriptorWithStrideInX:strideInY:strideInZ:dilationRateInX:dilationRateInY:dilationRateInZ:groups:paddingStyle:dataLayout:weightsLayout:"), strideInX, strideInY, strideInZ, dilationRateInX, dilationRateInY, dilationRateInZ, groups, paddingStyle, dataLayout, weightsLayout)
 	return GraphConvolution3DOpDescriptorFromID(_r)
 }
 
-// Creates a 2D-depthwise convolution descriptor with given values.
+// DescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout creates a 2D-depthwise convolution descriptor with given values.
 func DescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout(strideInX int, strideInY int, dilationRateInX int, dilationRateInY int, paddingLeft int, paddingRight int, paddingTop int, paddingBottom int, paddingStyle GraphPaddingStyle, dataLayout GraphTensorNamedDataLayout, weightsLayout GraphTensorNamedDataLayout) *GraphDepthwiseConvolution2DOpDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphDepthwiseConvolution2DOpDescriptor")), objc.RegisterName("descriptorWithStrideInX:strideInY:dilationRateInX:dilationRateInY:paddingLeft:paddingRight:paddingTop:paddingBottom:paddingStyle:dataLayout:weightsLayout:"), strideInX, strideInY, dilationRateInX, dilationRateInY, paddingLeft, paddingRight, paddingTop, paddingBottom, paddingStyle, dataLayout, weightsLayout)
 	return GraphDepthwiseConvolution2DOpDescriptorFromID(_r)
 }
 
-// Creates a 2D-depthwise convolution descriptor with given properties and default values.
+// DescriptorWithDataLayoutWeightsLayout creates a 2D-depthwise convolution descriptor with given properties and default values.
 func DescriptorWithDataLayoutWeightsLayout(dataLayout GraphTensorNamedDataLayout, weightsLayout GraphTensorNamedDataLayout) *GraphDepthwiseConvolution2DOpDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphDepthwiseConvolution2DOpDescriptor")), objc.RegisterName("descriptorWithDataLayout:weightsLayout:"), dataLayout, weightsLayout)
 	return GraphDepthwiseConvolution2DOpDescriptorFromID(_r)
 }
 
-// Creates a 3D depthwise convolution descriptor with given values.
+// DescriptorWithStridesDilationRatesPaddingValuesPaddingStyle creates a 3D depthwise convolution descriptor with given values.
 func DescriptorWithStridesDilationRatesPaddingValuesPaddingStyle(strides []obj.Object, dilationRates []obj.Object, paddingValues []obj.Object, paddingStyle GraphPaddingStyle) *GraphDepthwiseConvolution3DOpDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphDepthwiseConvolution3DOpDescriptor")), objc.RegisterName("descriptorWithStrides:dilationRates:paddingValues:paddingStyle:"), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(paddingValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingStyle)
 	return GraphDepthwiseConvolution3DOpDescriptorFromID(_r)
 }
 
-// Creates a 3D depthwise convolution descriptor with default values.
+// DescriptorWithPaddingStyle creates a 3D depthwise convolution descriptor with default values.
 func DescriptorWithPaddingStyle(paddingStyle GraphPaddingStyle) *GraphDepthwiseConvolution3DOpDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphDepthwiseConvolution3DOpDescriptor")), objc.RegisterName("descriptorWithPaddingStyle:"), paddingStyle)
 	return GraphDepthwiseConvolution3DOpDescriptorFromID(_r)
 }
 
-// Creates a fast Fourier transform descriptor with default parameter values.
+// Descriptor creates a fast Fourier transform descriptor with default parameter values.
 func Descriptor() *GraphFFTDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphFFTDescriptor")), objc.RegisterName("descriptor"))
 	return GraphFFTDescriptorFromID(_r)
 }
 
-// Creates an GRU descriptor with default values.
+// MPSGraphGRUDescriptorDescriptor creates an GRU descriptor with default values.
 func MPSGraphGRUDescriptorDescriptor() *GraphGRUDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphGRUDescriptor")), objc.RegisterName("descriptor"))
 	return GraphGRUDescriptorFromID(_r)
 }
 
-// Creates an image to column descriptor with given values for parameters.
+// DescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomDataLayout creates an image to column descriptor with given values for parameters.
 func DescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomDataLayout(kernelWidth int, kernelHeight int, strideInX int, strideInY int, dilationRateInX int, dilationRateInY int, paddingLeft int, paddingRight int, paddingTop int, paddingBottom int, dataLayout GraphTensorNamedDataLayout) *GraphImToColOpDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphImToColOpDescriptor")), objc.RegisterName("descriptorWithKernelWidth:kernelHeight:strideInX:strideInY:dilationRateInX:dilationRateInY:paddingLeft:paddingRight:paddingTop:paddingBottom:dataLayout:"), kernelWidth, kernelHeight, strideInX, strideInY, dilationRateInX, dilationRateInY, paddingLeft, paddingRight, paddingTop, paddingBottom, dataLayout)
 	return GraphImToColOpDescriptorFromID(_r)
 }
 
-// Creates column to image descriptor with given values for parameters.
+// DescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYDataLayout creates column to image descriptor with given values for parameters.
 func DescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYDataLayout(kernelWidth int, kernelHeight int, strideInX int, strideInY int, dilationRateInX int, dilationRateInY int, dataLayout GraphTensorNamedDataLayout) *GraphImToColOpDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphImToColOpDescriptor")), objc.RegisterName("descriptorWithKernelWidth:kernelHeight:strideInX:strideInY:dilationRateInX:dilationRateInY:dataLayout:"), kernelWidth, kernelHeight, strideInX, strideInY, dilationRateInX, dilationRateInY, dataLayout)
 	return GraphImToColOpDescriptorFromID(_r)
 }
 
-// Creates an LSTM descriptor with default values.
+// MPSGraphLSTMDescriptorDescriptor creates an LSTM descriptor with default values.
 func MPSGraphLSTMDescriptorDescriptor() *GraphLSTMDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphLSTMDescriptor")), objc.RegisterName("descriptor"))
 	return GraphLSTMDescriptorFromID(_r)
 }
 
-// Creates a 2D pooling descriptor with given values.
+// DescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayout creates a 2D pooling descriptor with given values.
 func DescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayout(kernelWidth int, kernelHeight int, strideInX int, strideInY int, dilationRateInX int, dilationRateInY int, paddingLeft int, paddingRight int, paddingTop int, paddingBottom int, paddingStyle GraphPaddingStyle, dataLayout GraphTensorNamedDataLayout) *GraphPooling2DOpDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphPooling2DOpDescriptor")), objc.RegisterName("descriptorWithKernelWidth:kernelHeight:strideInX:strideInY:dilationRateInX:dilationRateInY:paddingLeft:paddingRight:paddingTop:paddingBottom:paddingStyle:dataLayout:"), kernelWidth, kernelHeight, strideInX, strideInY, dilationRateInX, dilationRateInY, paddingLeft, paddingRight, paddingTop, paddingBottom, paddingStyle, dataLayout)
 	return GraphPooling2DOpDescriptorFromID(_r)
 }
 
-// Creates a 2D pooling descriptor with given values.
+// DescriptorWithKernelWidthKernelHeightStrideInXStrideInYPaddingStyleDataLayout creates a 2D pooling descriptor with given values.
 func DescriptorWithKernelWidthKernelHeightStrideInXStrideInYPaddingStyleDataLayout(kernelWidth int, kernelHeight int, strideInX int, strideInY int, paddingStyle GraphPaddingStyle, dataLayout GraphTensorNamedDataLayout) *GraphPooling2DOpDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphPooling2DOpDescriptor")), objc.RegisterName("descriptorWithKernelWidth:kernelHeight:strideInX:strideInY:paddingStyle:dataLayout:"), kernelWidth, kernelHeight, strideInX, strideInY, paddingStyle, dataLayout)
 	return GraphPooling2DOpDescriptorFromID(_r)
 }
 
-// Creates a 4D pooling descriptor with given values.
+// DescriptorWithKernelSizesStridesDilationRatesPaddingValuesPaddingStyle creates a 4D pooling descriptor with given values.
 func DescriptorWithKernelSizesStridesDilationRatesPaddingValuesPaddingStyle(kernelSizes []obj.Object, strides []obj.Object, dilationRates []obj.Object, paddingValues []obj.Object, paddingStyle GraphPaddingStyle) *GraphPooling4DOpDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphPooling4DOpDescriptor")), objc.RegisterName("descriptorWithKernelSizes:strides:dilationRates:paddingValues:paddingStyle:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(paddingValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingStyle)
 	return GraphPooling4DOpDescriptorFromID(_r)
 }
 
-// Creates a 4D pooling descriptor with default values.
+// DescriptorWithKernelSizesPaddingStyle creates a 4D pooling descriptor with default values.
 func DescriptorWithKernelSizesPaddingStyle(kernelSizes []obj.Object, paddingStyle GraphPaddingStyle) *GraphPooling4DOpDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphPooling4DOpDescriptor")), objc.RegisterName("descriptorWithKernelSizes:paddingStyle:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingStyle)
 	return GraphPooling4DOpDescriptorFromID(_r)
 }
 
-// Creates a single gate RNN descriptor with default values.
+// MPSGraphSingleGateRNNDescriptorDescriptor creates a single gate RNN descriptor with default values.
 func MPSGraphSingleGateRNNDescriptorDescriptor() *GraphSingleGateRNNDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphSingleGateRNNDescriptor")), objc.RegisterName("descriptor"))
 	return GraphSingleGateRNNDescriptorFromID(_r)
 }
 
-// Creates a stencil operation descriptor with default values.
+// MPSGraphStencilOpDescriptorDescriptorWithPaddingStyle creates a stencil operation descriptor with default values.
 func MPSGraphStencilOpDescriptorDescriptorWithPaddingStyle(paddingStyle GraphPaddingStyle) *GraphStencilOpDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphStencilOpDescriptor")), objc.RegisterName("descriptorWithPaddingStyle:"), paddingStyle)
 	return GraphStencilOpDescriptorFromID(_r)

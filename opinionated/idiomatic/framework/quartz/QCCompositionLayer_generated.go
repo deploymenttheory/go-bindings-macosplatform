@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that loads, plays, and controls Quartz Composer compositions in a Core Animation layer hierarchy.
-//
 // QCCompositionLayer is an idiomatic wrapper over the Objective-C class QCCompositionLayer.
+//
+// A layer that loads, plays, and controls Quartz Composer compositions in a Core Animation layer hierarchy.
 type QCCompositionLayer struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func QCCompositionLayerFromID(id objc.ID) *QCCompositionLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &QCCompositionLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QCCompositionLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func qCCompositionLayerAdopt(id objc.ID) *QCCompositionLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &QCCompositionLayer{Handle: objref.Wrap(id)}
+	x := &QCCompositionLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,27 @@ func (x *QCCompositionLayer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes and returns a composition layer using the Quartz Composer composition in the specified file.
-//
-// NewQCCompositionLayerWithFile creates a new QCCompositionLayer.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *QCCompositionLayer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewQCCompositionLayerWithFile initializes and returns a composition layer using the Quartz Composer composition in the specified file.
 func NewQCCompositionLayerWithFile(path string) *QCCompositionLayer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("QCCompositionLayer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFile:"), purego.NSString(path))
 	return qCCompositionLayerAdopt(_id)
 }
 
-// Initializes and returns a composition layer using the provided Quartz Composer composition.
-//
-// NewQCCompositionLayerWithComposition creates a new QCCompositionLayer.
+// NewQCCompositionLayerWithComposition initializes and returns a composition layer using the provided Quartz Composer composition.
 func NewQCCompositionLayerWithComposition(composition *QCComposition) *QCCompositionLayer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("QCCompositionLayer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithComposition:"), objref.IDOf(composition))
 	return qCCompositionLayerAdopt(_id)
 }
 
-// Returns the composition associated with the layer.
+// Composition returns the composition associated with the layer.
 func (x *QCCompositionLayer) Composition() *QCComposition {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("composition"))
 	return QCCompositionFromID(_r)

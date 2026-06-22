@@ -13,6 +13,8 @@ import (
 )
 
 // MTRDeviceControllerAbstractParameters is an idiomatic wrapper over the Objective-C class MTRDeviceControllerAbstractParameters.
+//
+// MTRDeviceControllerAbstractParameters is an abstract base — you do not construct it directly. Construct one of [MTRDeviceControllerParameters], [MTRXPCDeviceControllerParameters] and pass it where a MTRDeviceControllerAbstractParameters is accepted.
 type MTRDeviceControllerAbstractParameters struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRDeviceControllerAbstractParametersFromID(id objc.ID) *MTRDeviceControlle
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceControllerAbstractParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDeviceControllerAbstractParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRDeviceControllerAbstractParametersAdopt(id objc.ID) *MTRDeviceController
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceControllerAbstractParameters{Handle: objref.Wrap(id)}
+	x := &MTRDeviceControllerAbstractParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,25 +60,25 @@ func (x *MTRDeviceControllerAbstractParameters) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRDeviceControllerAbstractParameters creates a new MTRDeviceControllerAbstractParameters.
-func NewMTRDeviceControllerAbstractParameters() *MTRDeviceControllerAbstractParameters {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceControllerAbstractParameters")), objc.RegisterName("new"))
-	return mTRDeviceControllerAbstractParametersAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceControllerAbstractParameters) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Whether the controller should start out suspended.
-//
-// WithStartSuspended sets startSuspended and returns the receiver so calls can be chained.
+// WithStartSuspended whether the controller should start out suspended.
 func (x *MTRDeviceControllerAbstractParameters) WithStartSuspended(startSuspended bool) *MTRDeviceControllerAbstractParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartSuspended:"), startSuspended)
 	return x
 }
 
+// StartSuspended wraps the corresponding Objective-C method.
 func (x *MTRDeviceControllerAbstractParameters) StartSuspended() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startSuspended"))
 	return _r
 }
 
+// SetStartSuspended wraps the corresponding Objective-C method.
 func (x *MTRDeviceControllerAbstractParameters) SetStartSuspended(startSuspended bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartSuspended:"), startSuspended)
 }
@@ -88,3 +92,10 @@ type MTRDeviceControllerAbstractParametersable interface {
 }
 
 var _ MTRDeviceControllerAbstractParametersable = (*MTRDeviceControllerAbstractParameters)(nil)
+
+// isMTRDeviceControllerAbstractParameters marks MTRDeviceControllerAbstractParameters — and, by embedding promotion, its
+// subclasses — as a member of the MTRDeviceControllerAbstractParameters hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRDeviceControllerAbstractParameters) isMTRDeviceControllerAbstractParameters() {}
+
+var _ MTRDeviceControllerAbstractParametersProvider = (*MTRDeviceControllerAbstractParameters)(nil)

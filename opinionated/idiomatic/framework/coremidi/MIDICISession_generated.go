@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that represents a MIDI-CI session.
-//
 // CISession is an idiomatic wrapper over the Objective-C class MIDICISession.
+//
+// An object that represents a MIDI-CI session.
 type CISession struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func CISessionFromID(id objc.ID) *CISession {
 	if id == 0 {
 		return nil
 	}
-	x := &CISession{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CISession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func cISessionAdopt(id objc.ID) *CISession {
 	if id == 0 {
 		return nil
 	}
-	x := &CISession{Handle: objref.Wrap(id)}
+	x := &CISession{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,19 +62,25 @@ func (x *CISession) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CISession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCISession creates a new CISession.
 func NewCISession() *CISession {
 	_id := objc.Send[objc.ID](objc.ID(_class("MIDICISession")), objc.RegisterName("new"))
 	return cISessionAdopt(_id)
 }
 
-// Returns the profile state for the specified MIDI channel number.
+// ProfileStateForChannel returns the profile state for the specified MIDI channel number.
 func (x *CISession) ProfileStateForChannel(channel uint8) *CIProfileState {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("profileStateForChannel:"), channel)
 	return CIProfileStateFromID(_r)
 }
 
-// Performs an asynchronous request to enable a profile for a specific MIDI channel number.
+// EnableProfileOnChannel performs an asynchronous request to enable a profile for a specific MIDI channel number.
 func (x *CISession) EnableProfileOnChannel(profile *CIProfile, channel uint8) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("enableProfile:onChannel:error:"), objref.IDOf(profile), channel, unsafe.Pointer(&_nsErr))
@@ -82,7 +90,7 @@ func (x *CISession) EnableProfileOnChannel(profile *CIProfile, channel uint8) er
 	return nil
 }
 
-// Performs an asynchronous request to disable a profile for a specific MIDI channel number.
+// DisableProfileOnChannel performs an asynchronous request to disable a profile for a specific MIDI channel number.
 func (x *CISession) DisableProfileOnChannel(profile *CIProfile, channel uint8) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("disableProfile:onChannel:error:"), objref.IDOf(profile), channel, unsafe.Pointer(&_nsErr))
@@ -92,37 +100,43 @@ func (x *CISession) DisableProfileOnChannel(profile *CIProfile, channel uint8) e
 	return nil
 }
 
-// Sends profile-specific data to the MIDI-CI session.
+// SendProfileOnChannelProfileData sends profile-specific data to the MIDI-CI session.
 func (x *CISession) SendProfileOnChannelProfileData(profile *CIProfile, channel uint8, profileSpecificData obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendProfile:onChannel:profileData:"), objref.IDOf(profile), channel, objref.IDOf(profileSpecificData))
 	return _r
 }
 
+// MidiDestination wraps the corresponding Objective-C method.
 func (x *CISession) MidiDestination() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("midiDestination"))
 	return _r
 }
 
+// SupportsProfileCapability wraps the corresponding Objective-C method.
 func (x *CISession) SupportsProfileCapability() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsProfileCapability"))
 	return _r
 }
 
+// SupportsPropertyCapability wraps the corresponding Objective-C method.
 func (x *CISession) SupportsPropertyCapability() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsPropertyCapability"))
 	return _r
 }
 
+// DeviceInfo wraps the corresponding Objective-C method.
 func (x *CISession) DeviceInfo() *CIDeviceInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceInfo"))
 	return CIDeviceInfoFromID(_r)
 }
 
+// MaxSysExSize wraps the corresponding Objective-C method.
 func (x *CISession) MaxSysExSize() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxSysExSize"))
 	return obj.Wrap(_r)
 }
 
+// MaxPropertyRequests wraps the corresponding Objective-C method.
 func (x *CISession) MaxPropertyRequests() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPropertyRequests"))
 	return obj.Wrap(_r)

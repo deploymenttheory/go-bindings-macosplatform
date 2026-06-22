@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterFanControl is an idiomatic wrapper over the Objective-C class MTRClusterFanControl.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterFanControl struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterFanControlFromID adopts an existing Objective-C object as a MTRClusterFanControl
@@ -23,7 +24,8 @@ func MTRClusterFanControlFromID(id objc.ID) *MTRClusterFanControl {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterFanControl{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterFanControl{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,29 +38,13 @@ func mTRClusterFanControlAdopt(id objc.ID) *MTRClusterFanControl {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterFanControl{Handle: objref.Wrap(id)}
+	x := &MTRClusterFanControl{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterFanControl) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterFanControl) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterFanControl) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterFanControlWithDeviceEndpointIDQueue creates a new MTRClusterFanControl.
+// NewMTRClusterFanControlWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterFanControlWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterFanControl {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterFanControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -72,142 +58,173 @@ func NewMTRClusterFanControlWithDeviceEndpointQueue(device *MTRDevice, endpoint 
 	return mTRClusterFanControlAdopt(_id)
 }
 
+// ReadAttributeFanModeWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) ReadAttributeFanModeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFanModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeFanModeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) WriteAttributeFanModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeFanModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeFanModeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) WriteAttributeFanModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeFanModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeFanModeSequenceWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) ReadAttributeFanModeSequenceWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFanModeSequenceWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeFanModeSequenceWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) WriteAttributeFanModeSequenceWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeFanModeSequenceWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeFanModeSequenceWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) WriteAttributeFanModeSequenceWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeFanModeSequenceWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributePercentSettingWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) ReadAttributePercentSettingWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePercentSettingWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributePercentSettingWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) WriteAttributePercentSettingWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePercentSettingWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributePercentSettingWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) WriteAttributePercentSettingWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePercentSettingWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributePercentCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) ReadAttributePercentCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePercentCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeSpeedMaxWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) ReadAttributeSpeedMaxWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSpeedMaxWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeSpeedSettingWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) ReadAttributeSpeedSettingWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSpeedSettingWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeSpeedSettingWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) WriteAttributeSpeedSettingWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeSpeedSettingWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeSpeedSettingWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) WriteAttributeSpeedSettingWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeSpeedSettingWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeSpeedCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) ReadAttributeSpeedCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSpeedCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRockSupportWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) ReadAttributeRockSupportWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRockSupportWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRockSettingWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) ReadAttributeRockSettingWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRockSettingWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeRockSettingWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) WriteAttributeRockSettingWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRockSettingWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeRockSettingWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) WriteAttributeRockSettingWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRockSettingWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeWindSupportWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) ReadAttributeWindSupportWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWindSupportWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeWindSettingWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) ReadAttributeWindSettingWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWindSettingWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeWindSettingWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) WriteAttributeWindSettingWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeWindSettingWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeWindSettingWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) WriteAttributeWindSettingWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeWindSettingWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeAirflowDirectionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) ReadAttributeAirflowDirectionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAirflowDirectionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeAirflowDirectionWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) WriteAttributeAirflowDirectionWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeAirflowDirectionWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeAirflowDirectionWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) WriteAttributeAirflowDirectionWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeAirflowDirectionWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterFanControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -250,3 +267,7 @@ type MTRClusterFanControlable interface {
 }
 
 var _ MTRClusterFanControlable = (*MTRClusterFanControl)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterFanControl)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterFanControl)(nil)

@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMXPathResult is an idiomatic wrapper over the Objective-C class DOMXPathResult.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMXPathResult struct {
-	objref.Handle
+	DOMObject
 }
 
 // DOMXPathResultFromID adopts an existing Objective-C object as a DOMXPathResult
@@ -23,7 +24,8 @@ func DOMXPathResultFromID(id objc.ID) *DOMXPathResult {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMXPathResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMXPathResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMXPathResultAdopt(id objc.ID) *DOMXPathResult {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMXPathResult{Handle: objref.Wrap(id)}
+	x := &DOMXPathResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMXPathResult) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMXPathResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMXPathResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMXPathResult creates a new DOMXPathResult.
@@ -62,26 +50,31 @@ func NewDOMXPathResult() *DOMXPathResult {
 	return dOMXPathResultAdopt(_id)
 }
 
+// IterateNext wraps the corresponding Objective-C method.
 func (x *DOMXPathResult) IterateNext() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iterateNext"))
 	return DOMNodeFromID(_r)
 }
 
+// SnapshotItem wraps the corresponding Objective-C method.
 func (x *DOMXPathResult) SnapshotItem(index int) *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotItem:"), index)
 	return DOMNodeFromID(_r)
 }
 
+// ResultType wraps the corresponding Objective-C method.
 func (x *DOMXPathResult) ResultType() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("resultType"))
 	return _r
 }
 
+// NumberValue wraps the corresponding Objective-C method.
 func (x *DOMXPathResult) NumberValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("numberValue"))
 	return _r
 }
 
+// StringValue wraps the corresponding Objective-C method.
 func (x *DOMXPathResult) StringValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
 	if _r == 0 {
@@ -90,21 +83,25 @@ func (x *DOMXPathResult) StringValue() string {
 	return purego.GoString(_r)
 }
 
+// BooleanValue wraps the corresponding Objective-C method.
 func (x *DOMXPathResult) BooleanValue() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("booleanValue"))
 	return _r
 }
 
+// SingleNodeValue wraps the corresponding Objective-C method.
 func (x *DOMXPathResult) SingleNodeValue() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("singleNodeValue"))
 	return DOMNodeFromID(_r)
 }
 
+// InvalidIteratorState wraps the corresponding Objective-C method.
 func (x *DOMXPathResult) InvalidIteratorState() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("invalidIteratorState"))
 	return _r
 }
 
+// SnapshotLength wraps the corresponding Objective-C method.
 func (x *DOMXPathResult) SnapshotLength() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("snapshotLength"))
 	return _r
@@ -125,3 +122,7 @@ type DOMXPathResultable interface {
 }
 
 var _ DOMXPathResultable = (*DOMXPathResult)(nil)
+
+var _ DOMObjectProvider = (*DOMXPathResult)(nil)
+
+var _ WebScriptObjectProvider = (*DOMXPathResult)(nil)

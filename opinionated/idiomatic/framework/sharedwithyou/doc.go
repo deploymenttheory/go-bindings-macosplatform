@@ -3,4 +3,11 @@
 //go:build darwin
 
 // Package sharedwithyou provides a fluent Go API over the macOS SharedWithYou framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - Highlight: [CollaborationHighlight]
 package sharedwithyou

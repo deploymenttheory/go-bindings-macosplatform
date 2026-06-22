@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that coordinates the reading and writing of files and directories among file presenters.
-//
 // FileCoordinator is an idiomatic wrapper over the Objective-C class NSFileCoordinator.
+//
+// An object that coordinates the reading and writing of files and directories among file presenters.
 type FileCoordinator struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func FileCoordinatorFromID(id objc.ID) *FileCoordinator {
 	if id == 0 {
 		return nil
 	}
-	x := &FileCoordinator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FileCoordinator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func fileCoordinatorAdopt(id objc.ID) *FileCoordinator {
 	if id == 0 {
 		return nil
 	}
-	x := &FileCoordinator{Handle: objref.Wrap(id)}
+	x := &FileCoordinator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,27 +62,31 @@ func (x *FileCoordinator) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FileCoordinator) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFileCoordinator creates a new FileCoordinator.
 func NewFileCoordinator() *FileCoordinator {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSFileCoordinator")), objc.RegisterName("new"))
 	return fileCoordinatorAdopt(_id)
 }
 
-// A string that uniquely identifies the file access that was performed by this file coordinator.
-//
-// WithPurposeIdentifier sets purposeIdentifier and returns the receiver so calls can be chained.
+// WithPurposeIdentifier a string that uniquely identifies the file access that was performed by this file coordinator.
 func (x *FileCoordinator) WithPurposeIdentifier(purposeIdentifier StringProvider) *FileCoordinator {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPurposeIdentifier:"), objref.IDOf(purposeIdentifier))
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *FileCoordinator) WithScriptingProperties(scriptingProperties obj.Object) *FileCoordinator {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Performs a number of coordinated-read or -write operations asynchronously.
+// CoordinateAccessWithIntentsQueueByAccessor performs a number of coordinated-read or -write operations asynchronously.
 //
 // CoordinateAccessWithIntentsQueueByAccessor blocks until the operation completes or ctx is cancelled.
 func (x *FileCoordinator) CoordinateAccessWithIntentsQueueByAccessor(ctx context.Context, intents []*FileAccessIntent, queue *OperationQueue) error {
@@ -99,26 +105,27 @@ func (x *FileCoordinator) CoordinateAccessWithIntentsQueueByAccessor(ctx context
 	}
 }
 
-// Announces that your app is moving a file to a new URL.
+// ItemAtURLWillMoveToURL announces that your app is moving a file to a new URL.
 func (x *FileCoordinator) ItemAtURLWillMoveToURL(oldURL string, newURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemAtURL:willMoveToURL:"), rt.FileURL(oldURL), rt.FileURL(newURL))
 }
 
-// Notifies relevant file presenters that the location of a file or directory changed.
+// ItemAtURLDidMoveToURL notifies relevant file presenters that the location of a file or directory changed.
 func (x *FileCoordinator) ItemAtURLDidMoveToURL(oldURL string, newURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemAtURL:didMoveToURL:"), rt.FileURL(oldURL), rt.FileURL(newURL))
 }
 
-// Tells observing file providers that the item’s ubiquity attributes have changed.
+// ItemAtURLDidChangeUbiquityAttributes tells observing file providers that the item’s ubiquity attributes have changed.
 func (x *FileCoordinator) ItemAtURLDidChangeUbiquityAttributes(url string, attributes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemAtURL:didChangeUbiquityAttributes:"), rt.FileURL(url), objref.IDOf(attributes))
 }
 
-// Cancels any active file coordination calls.
+// Cancel cancels any active file coordination calls.
 func (x *FileCoordinator) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
+// PurposeIdentifier wraps the corresponding Objective-C method.
 func (x *FileCoordinator) PurposeIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("purposeIdentifier"))
 	if _r == 0 {
@@ -127,6 +134,7 @@ func (x *FileCoordinator) PurposeIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// SetPurposeIdentifier wraps the corresponding Objective-C method.
 func (x *FileCoordinator) SetPurposeIdentifier(purposeIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPurposeIdentifier:"), purego.NSString(purposeIdentifier))
 }

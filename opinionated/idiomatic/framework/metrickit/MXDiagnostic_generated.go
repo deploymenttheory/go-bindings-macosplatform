@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract data class for a diagnostic.
-//
 // Diagnostic is an idiomatic wrapper over the Objective-C class MXDiagnostic.
+//
+// Diagnostic is an abstract base — you do not construct it directly. Construct one of [CPUExceptionDiagnostic], [CrashDiagnostic], [DiskWriteExceptionDiagnostic], [HangDiagnostic] and pass it where a Diagnostic is accepted.
+//
+// An abstract data class for a diagnostic.
 type Diagnostic struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func DiagnosticFromID(id objc.ID) *Diagnostic {
 	if id == 0 {
 		return nil
 	}
-	x := &Diagnostic{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Diagnostic{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func diagnosticAdopt(id objc.ID) *Diagnostic {
 	if id == 0 {
 		return nil
 	}
-	x := &Diagnostic{Handle: objref.Wrap(id)}
+	x := &Diagnostic{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,30 +62,31 @@ func (x *Diagnostic) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewDiagnostic creates a new Diagnostic.
-func NewDiagnostic() *Diagnostic {
-	_id := objc.Send[objc.ID](objc.ID(_class("MXDiagnostic")), objc.RegisterName("new"))
-	return diagnosticAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Diagnostic) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns the contents of the diagnostic in JSON format.
+// JSONRepresentation returns the contents of the diagnostic in JSON format.
 func (x *Diagnostic) JSONRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSONRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// Returns the contents of a diagnostic as a dictionary.
+// DictionaryRepresentation returns the contents of a diagnostic as a dictionary.
 func (x *Diagnostic) DictionaryRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)
 }
 
+// MetaData wraps the corresponding Objective-C method.
 func (x *Diagnostic) MetaData() *MetaData {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metaData"))
 	return MetaDataFromID(_r)
 }
 
-// An NSString representation of the application version from which this diagnostic was generated.
+// ApplicationVersion an NSString representation of the application version from which this diagnostic was generated.
 func (x *Diagnostic) ApplicationVersion() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationVersion"))
 	if _r == 0 {
@@ -90,6 +95,8 @@ func (x *Diagnostic) ApplicationVersion() string {
 	return purego.GoString(_r)
 }
 
+// SignpostData wraps the corresponding Objective-C method.
+//
 // SignpostData returns the collection as a Go slice.
 func (x *Diagnostic) SignpostData() []*SignpostRecord {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signpostData"))
@@ -107,3 +114,10 @@ type Diagnosticable interface {
 }
 
 var _ Diagnosticable = (*Diagnostic)(nil)
+
+// isDiagnostic marks Diagnostic — and, by embedding promotion, its
+// subclasses — as a member of the Diagnostic hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Diagnostic) isDiagnostic() {}
+
+var _ DiagnosticProvider = (*Diagnostic)(nil)

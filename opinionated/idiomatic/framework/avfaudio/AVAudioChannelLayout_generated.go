@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes the roles of a set of audio channels.
-//
 // AudioChannelLayout is an idiomatic wrapper over the Objective-C class AVAudioChannelLayout.
+//
+// An object that describes the roles of a set of audio channels.
 type AudioChannelLayout struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AudioChannelLayoutFromID(id objc.ID) *AudioChannelLayout {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioChannelLayout{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioChannelLayout{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func audioChannelLayoutAdopt(id objc.ID) *AudioChannelLayout {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioChannelLayout{Handle: objref.Wrap(id)}
+	x := &AudioChannelLayout{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,26 @@ func (x *AudioChannelLayout) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an audio channel layout object from a layout tag.
-//
-// NewAudioChannelLayoutWithLayoutTag creates a new AudioChannelLayout.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioChannelLayout) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudioChannelLayoutWithLayoutTag creates an audio channel layout object from a layout tag.
 func NewAudioChannelLayoutWithLayoutTag(layoutTag int) *AudioChannelLayout {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioChannelLayout")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLayoutTag:"), layoutTag)
 	return audioChannelLayoutAdopt(_id)
 }
 
-// The layout's tag.
+// LayoutTag the layout's tag.
 func (x *AudioChannelLayout) LayoutTag() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("layoutTag"))
 	return _r
 }
 
-// The number of channels of audio data.
+// ChannelCount the number of channels of audio data.
 func (x *AudioChannelLayout) ChannelCount() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("channelCount"))
 	return _r

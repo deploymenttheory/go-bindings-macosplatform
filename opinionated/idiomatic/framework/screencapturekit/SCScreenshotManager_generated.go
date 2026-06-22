@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An instance for the capture of single frames from a stream.
-//
 // ScreenshotManager is an idiomatic wrapper over the Objective-C class SCScreenshotManager.
+//
+// An instance for the capture of single frames from a stream.
 type ScreenshotManager struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ScreenshotManagerFromID(id objc.ID) *ScreenshotManager {
 	if id == 0 {
 		return nil
 	}
-	x := &ScreenshotManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScreenshotManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func screenshotManagerAdopt(id objc.ID) *ScreenshotManager {
 	if id == 0 {
 		return nil
 	}
-	x := &ScreenshotManager{Handle: objref.Wrap(id)}
+	x := &ScreenshotManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *ScreenshotManager) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *ScreenshotManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScreenshotManager) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewScreenshotManager creates a new ScreenshotManager.

@@ -6,17 +6,19 @@ package spritekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A node that determines which parts of the scene are visible within a view.
-//
 // CameraNode is an idiomatic wrapper over the Objective-C class SKCameraNode.
+//
+// It embeds [Node], promoting that type's methods.
+//
+// A node that determines which parts of the scene are visible within a view.
 type CameraNode struct {
-	objref.Handle
+	Node
 }
 
 // CameraNodeFromID adopts an existing Objective-C object as a CameraNode
@@ -25,7 +27,8 @@ func CameraNodeFromID(id objc.ID) *CameraNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CameraNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CameraNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func cameraNodeAdopt(id objc.ID) *CameraNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CameraNode{Handle: objref.Wrap(id)}
+	x := &CameraNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CameraNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CameraNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CameraNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCameraNode creates a new CameraNode.
@@ -64,198 +53,164 @@ func NewCameraNode() *CameraNode {
 	return cameraNodeAdopt(_id)
 }
 
-// The height of the node relative to its parent.
-//
-// WithZPosition sets zPosition and returns the receiver so calls can be chained.
+// WithPosition the position of the node in its parent’s coordinate system.
+func (x *CameraNode) WithPosition(position corefoundation.CGPoint) *CameraNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
+	return x
+}
+
+// WithZPosition the height of the node relative to its parent.
 func (x *CameraNode) WithZPosition(zPosition float64) *CameraNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
 	return x
 }
 
-// The Euler rotation about the z axis (in radians).
-//
-// WithZRotation sets zRotation and returns the receiver so calls can be chained.
+// WithZRotation the Euler rotation about the z axis (in radians).
 func (x *CameraNode) WithZRotation(zRotation float64) *CameraNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
 	return x
 }
 
-// A scaling factor that multiplies the width of a node and its children.
-//
-// WithXScale sets xScale and returns the receiver so calls can be chained.
+// WithXScale a scaling factor that multiplies the width of a node and its children.
 func (x *CameraNode) WithXScale(xScale float64) *CameraNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
 	return x
 }
 
-// A scaling factor that multiplies the height of a node and its children.
-//
-// WithYScale sets yScale and returns the receiver so calls can be chained.
+// WithYScale a scaling factor that multiplies the height of a node and its children.
 func (x *CameraNode) WithYScale(yScale float64) *CameraNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
 	return x
 }
 
-// A speed modifier applied to all actions executed by a node and its descendants.
-//
-// WithSpeed sets speed and returns the receiver so calls can be chained.
+// WithSpeed a speed modifier applied to all actions executed by a node and its descendants.
 func (x *CameraNode) WithSpeed(speed float64) *CameraNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
-// The transparency value applied to the node’s contents.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the transparency value applied to the node’s contents.
 func (x *CameraNode) WithAlpha(alpha float64) *CameraNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// A Boolean value that determines whether actions on the node and its descendants are processed.
-//
-// WithPaused sets paused and returns the receiver so calls can be chained.
+// WithPaused a Boolean value that determines whether actions on the node and its descendants are processed.
 func (x *CameraNode) WithPaused(paused bool) *CameraNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
-// A Boolean value that determines whether a node and its descendants are rendered.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden a Boolean value that determines whether a node and its descendants are rendered.
 func (x *CameraNode) WithHidden(hidden bool) *CameraNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// A Boolean value that indicates whether the node receives touch events.
-//
-// WithUserInteractionEnabled sets userInteractionEnabled and returns the receiver so calls can be chained.
+// WithUserInteractionEnabled a Boolean value that indicates whether the node receives touch events.
 func (x *CameraNode) WithUserInteractionEnabled(userInteractionEnabled bool) *CameraNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
 	return x
 }
 
-// The node’s assignable name.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the node’s assignable name.
 func (x *CameraNode) WithName(name string) *CameraNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The physics body associated with the node.
-//
-// WithPhysicsBody sets physicsBody and returns the receiver so calls can be chained.
+// WithPhysicsBody the physics body associated with the node.
 func (x *CameraNode) WithPhysicsBody(physicsBody *PhysicsBody) *CameraNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	return x
 }
 
-// A dictionary containing arbitrary data.
-//
-// WithUserData sets userData and returns the receiver so calls can be chained.
+// WithUserData a dictionary containing arbitrary data.
 func (x *CameraNode) WithUserData(userData obj.Object) *CameraNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	return x
 }
 
-// The reach constraints to apply to the node when executing a reach action.
-//
-// WithReachConstraints sets reachConstraints and returns the receiver so calls can be chained.
+// WithReachConstraints the reach constraints to apply to the node when executing a reach action.
 func (x *CameraNode) WithReachConstraints(reachConstraints *ReachConstraints) *CameraNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	return x
 }
 
-// A list of constraints to apply to the node.
-//
-// WithConstraints sets the collection and returns the receiver so calls can be chained.
+// WithConstraints a list of constraints to apply to the node.
 func (x *CameraNode) WithConstraints(items ...*Constraint) *CameraNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
-// The values of each attribute associated with the node’s attached shader.
-//
-// WithAttributeValues sets attributeValues and returns the receiver so calls can be chained.
+// WithAttributeValues the values of each attribute associated with the node’s attached shader.
 func (x *CameraNode) WithAttributeValues(attributeValues obj.Object) *CameraNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
-//
-// WithAccessibilityElement sets accessibilityElement and returns the receiver so calls can be chained.
+// WithAccessibilityElement a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (x *CameraNode) WithAccessibilityElement(accessibilityElement bool) *CameraNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
 	return x
 }
 
-// A string value describing the user interface element type; for example, a button.
-//
-// WithAccessibilityRole sets accessibilityRole and returns the receiver so calls can be chained.
+// WithAccessibilityRole a string value describing the user interface element type; for example, a button.
 func (x *CameraNode) WithAccessibilityRole(accessibilityRole string) *CameraNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
 	return x
 }
 
-// A string value describing the user interface element name and type; for example, the Buy button.
-//
-// WithAccessibilityRoleDescription sets accessibilityRoleDescription and returns the receiver so calls can be chained.
+// WithAccessibilityRoleDescription a string value describing the user interface element name and type; for example, the Buy button.
 func (x *CameraNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *CameraNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
 	return x
 }
 
-// A string that defines this user interface element’s subrole; for example, a full-screen button.
-//
-// WithAccessibilitySubrole sets accessibilitySubrole and returns the receiver so calls can be chained.
+// WithAccessibilitySubrole a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (x *CameraNode) WithAccessibilitySubrole(accessibilitySubrole string) *CameraNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
 	return x
 }
 
-// The user interface element that contains this element.
-//
-// WithAccessibilityParent sets accessibilityParent and returns the receiver so calls can be chained.
+// WithAccessibilityFrame the size of this user interface element, in screen points.
+func (x *CameraNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *CameraNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	return x
+}
+
+// WithAccessibilityParent the user interface element that contains this element.
 func (x *CameraNode) WithAccessibilityParent(accessibilityParent obj.Object) *CameraNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	return x
 }
 
-// The help description of this user interface element; for example, the text shown in a tooltip.
-//
-// WithAccessibilityHelp sets accessibilityHelp and returns the receiver so calls can be chained.
+// WithAccessibilityHelp the help description of this user interface element; for example, the text shown in a tooltip.
 func (x *CameraNode) WithAccessibilityHelp(accessibilityHelp string) *CameraNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
 	return x
 }
 
-// A short description of this user interface element.
-//
-// WithAccessibilityLabel sets accessibilityLabel and returns the receiver so calls can be chained.
+// WithAccessibilityLabel a short description of this user interface element.
 func (x *CameraNode) WithAccessibilityLabel(accessibilityLabel string) *CameraNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
-//
-// WithAccessibilityEnabled sets accessibilityEnabled and returns the receiver so calls can be chained.
+// WithAccessibilityEnabled a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (x *CameraNode) WithAccessibilityEnabled(accessibilityEnabled bool) *CameraNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
 	return x
 }
 
-// Checks to see if a node is visible in the camera’s viewport.
+// ContainsNode checks to see if a node is visible in the camera’s viewport.
 func (x *CameraNode) ContainsNode(node *Node) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsNode:"), objref.IDOf(node))
 	return _r
 }
 
-// Finds nodes that are visible in the camera’s viewport.
+// ContainedNodeSet finds nodes that are visible in the camera’s viewport.
 func (x *CameraNode) ContainedNodeSet() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containedNodeSet"))
 	return obj.Wrap(_r)
@@ -264,6 +219,7 @@ func (x *CameraNode) ContainedNodeSet() obj.Object {
 // CameraNodeable is the interface implemented by [CameraNode], for mocking and DI.
 type CameraNodeable interface {
 	obj.Object
+	WithPosition(position corefoundation.CGPoint) *CameraNode
 	WithZPosition(zPosition float64) *CameraNode
 	WithZRotation(zRotation float64) *CameraNode
 	WithXScale(xScale float64) *CameraNode
@@ -283,6 +239,7 @@ type CameraNodeable interface {
 	WithAccessibilityRole(accessibilityRole string) *CameraNode
 	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *CameraNode
 	WithAccessibilitySubrole(accessibilitySubrole string) *CameraNode
+	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *CameraNode
 	WithAccessibilityParent(accessibilityParent obj.Object) *CameraNode
 	WithAccessibilityHelp(accessibilityHelp string) *CameraNode
 	WithAccessibilityLabel(accessibilityLabel string) *CameraNode
@@ -292,3 +249,5 @@ type CameraNodeable interface {
 }
 
 var _ CameraNodeable = (*CameraNode)(nil)
+
+var _ NodeProvider = (*CameraNode)(nil)

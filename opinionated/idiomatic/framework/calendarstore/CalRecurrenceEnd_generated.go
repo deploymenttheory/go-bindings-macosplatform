@@ -23,7 +23,8 @@ func CalRecurrenceEndFromID(id objc.ID) *CalRecurrenceEnd {
 	if id == 0 {
 		return nil
 	}
-	x := &CalRecurrenceEnd{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CalRecurrenceEnd{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func calRecurrenceEndAdopt(id objc.ID) *CalRecurrenceEnd {
 	if id == 0 {
 		return nil
 	}
-	x := &CalRecurrenceEnd{Handle: objref.Wrap(id)}
+	x := &CalRecurrenceEnd{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,22 +58,31 @@ func (x *CalRecurrenceEnd) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CalRecurrenceEnd) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCalRecurrenceEnd creates a new CalRecurrenceEnd.
 func NewCalRecurrenceEnd() *CalRecurrenceEnd {
 	_id := objc.Send[objc.ID](objc.ID(_class("CalRecurrenceEnd")), objc.RegisterName("new"))
 	return calRecurrenceEndAdopt(_id)
 }
 
+// UsesEndDate wraps the corresponding Objective-C method.
 func (x *CalRecurrenceEnd) UsesEndDate() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesEndDate"))
 	return _r
 }
 
+// EndDate wraps the corresponding Objective-C method.
 func (x *CalRecurrenceEnd) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
+// OccurrenceCount wraps the corresponding Objective-C method.
 func (x *CalRecurrenceEnd) OccurrenceCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("occurrenceCount"))
 	return _r

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that makes the layers of a symbol-based image disappear separately or as a whole.
-//
 // SymbolDisappearEffect is an idiomatic wrapper over the Objective-C class NSSymbolDisappearEffect.
+//
+// It embeds [SymbolEffect], promoting that type's methods.
+//
+// A type that makes the layers of a symbol-based image disappear separately or as a whole.
 type SymbolDisappearEffect struct {
-	objref.Handle
+	SymbolEffect
 }
 
 // SymbolDisappearEffectFromID adopts an existing Objective-C object as a SymbolDisappearEffect
@@ -25,7 +26,8 @@ func SymbolDisappearEffectFromID(id objc.ID) *SymbolDisappearEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolDisappearEffect{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SymbolDisappearEffect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func symbolDisappearEffectAdopt(id objc.ID) *SymbolDisappearEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolDisappearEffect{Handle: objref.Wrap(id)}
+	x := &SymbolDisappearEffect{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SymbolDisappearEffect) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SymbolDisappearEffect) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SymbolDisappearEffect) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSymbolDisappearEffect creates a new SymbolDisappearEffect.
@@ -64,13 +52,13 @@ func NewSymbolDisappearEffect() *SymbolDisappearEffect {
 	return symbolDisappearEffectAdopt(_id)
 }
 
-// An effect that makes each layer disappear separately.
+// EffectWithByLayer an effect that makes each layer disappear separately.
 func (x *SymbolDisappearEffect) EffectWithByLayer() *SymbolDisappearEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
 	return SymbolDisappearEffectFromID(_r)
 }
 
-// An effect that makes all layers disappear simultaneously.
+// EffectWithWholeSymbol an effect that makes all layers disappear simultaneously.
 func (x *SymbolDisappearEffect) EffectWithWholeSymbol() *SymbolDisappearEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolDisappearEffectFromID(_r)
@@ -84,3 +72,5 @@ type SymbolDisappearEffectable interface {
 }
 
 var _ SymbolDisappearEffectable = (*SymbolDisappearEffect)(nil)
+
+var _ SymbolEffectProvider = (*SymbolDisappearEffect)(nil)

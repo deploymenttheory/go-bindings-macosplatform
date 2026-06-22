@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a tempo change to a specific beats-per-minute value.
-//
 // ExtendedTempoEvent is an idiomatic wrapper over the Objective-C class AVExtendedTempoEvent.
+//
+// It embeds [MusicEvent], promoting that type's methods.
+//
+// An object that represents a tempo change to a specific beats-per-minute value.
 type ExtendedTempoEvent struct {
-	objref.Handle
+	MusicEvent
 }
 
 // ExtendedTempoEventFromID adopts an existing Objective-C object as a ExtendedTempoEvent
@@ -25,7 +26,8 @@ func ExtendedTempoEventFromID(id objc.ID) *ExtendedTempoEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtendedTempoEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExtendedTempoEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,48 +40,32 @@ func extendedTempoEventAdopt(id objc.ID) *ExtendedTempoEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtendedTempoEvent{Handle: objref.Wrap(id)}
+	x := &ExtendedTempoEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ExtendedTempoEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExtendedTempoEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExtendedTempoEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates an extended tempo event.
-//
-// NewExtendedTempoEventWithTempo creates a new ExtendedTempoEvent.
+// NewExtendedTempoEventWithTempo creates an extended tempo event.
 func NewExtendedTempoEventWithTempo(tempo float64) *ExtendedTempoEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVExtendedTempoEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTempo:"), tempo)
 	return extendedTempoEventAdopt(_id)
 }
 
-// The tempo in beats per minute as a positive value.
-//
-// WithTempo sets tempo and returns the receiver so calls can be chained.
+// WithTempo the tempo in beats per minute as a positive value.
 func (x *ExtendedTempoEvent) WithTempo(tempo float64) *ExtendedTempoEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTempo:"), tempo)
 	return x
 }
 
+// Tempo wraps the corresponding Objective-C method.
 func (x *ExtendedTempoEvent) Tempo() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("tempo"))
 	return _r
 }
 
+// SetTempo wraps the corresponding Objective-C method.
 func (x *ExtendedTempoEvent) SetTempo(tempo float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTempo:"), tempo)
 }
@@ -93,3 +79,5 @@ type ExtendedTempoEventable interface {
 }
 
 var _ ExtendedTempoEventable = (*ExtendedTempoEvent)(nil)
+
+var _ MusicEventProvider = (*ExtendedTempoEvent)(nil)

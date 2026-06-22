@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that specifies the volume of optional environmental effects.
-//
 // SpatialPipeline is an idiomatic wrapper over the Objective-C class PHASESpatialPipeline.
+//
+// An object that specifies the volume of optional environmental effects.
 type SpatialPipeline struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SpatialPipelineFromID(id objc.ID) *SpatialPipeline {
 	if id == 0 {
 		return nil
 	}
-	x := &SpatialPipeline{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SpatialPipeline{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func spatialPipelineAdopt(id objc.ID) *SpatialPipeline {
 	if id == 0 {
 		return nil
 	}
-	x := &SpatialPipeline{Handle: objref.Wrap(id)}
+	x := &SpatialPipeline{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,26 @@ func (x *SpatialPipeline) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a spatial pipeline with the specified flags.
-//
-// NewSpatialPipelineWithFlags creates a new SpatialPipeline.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpatialPipeline) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSpatialPipelineWithFlags creates a spatial pipeline with the specified flags.
 func NewSpatialPipelineWithFlags(flags SpatialPipelineFlags) *SpatialPipeline {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESpatialPipeline")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFlags:"), flags)
 	return spatialPipelineAdopt(_id)
 }
 
-// Spatial Pipeline Flags.
+// Flags spatial Pipeline Flags.
 func (x *SpatialPipeline) Flags() SpatialPipelineFlags {
 	_r := objc.Send[SpatialPipelineFlags](objref.IDOf(x), objc.RegisterName("flags"))
 	return _r
 }
 
-// A dictionary of entries in the Spatial Pipeline. Upon initialization, an entry will be created for every flag in the PHASESpatialPipelineFlags passed to PHASESpatialPipeline:initWithFlags.
+// Entries a dictionary of entries in the Spatial Pipeline. Upon initialization, an entry will be created for every flag in the PHASESpatialPipelineFlags passed to PHASESpatialPipeline:initWithFlags.
 func (x *SpatialPipeline) Entries() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entries"))
 	return obj.Wrap(_r)

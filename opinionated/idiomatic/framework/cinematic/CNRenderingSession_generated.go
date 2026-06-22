@@ -6,15 +6,16 @@ package cinematic
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing the context in which rendering occurs.
-//
 // RenderingSession is an idiomatic wrapper over the Objective-C class CNRenderingSession.
+//
+// An object representing the context in which rendering occurs.
 type RenderingSession struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func RenderingSessionFromID(id objc.ID) *RenderingSession {
 	if id == 0 {
 		return nil
 	}
-	x := &RenderingSession{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RenderingSession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func renderingSessionAdopt(id objc.ID) *RenderingSession {
 	if id == 0 {
 		return nil
 	}
-	x := &RenderingSession{Handle: objref.Wrap(id)}
+	x := &RenderingSession{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +61,31 @@ func (x *RenderingSession) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RenderingSession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRenderingSession creates a new RenderingSession.
 func NewRenderingSession() *RenderingSession {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNRenderingSession")), objc.RegisterName("new"))
 	return renderingSessionAdopt(_id)
 }
 
+// SessionAttributes wraps the corresponding Objective-C method.
 func (x *RenderingSession) SessionAttributes() *RenderingSessionAttributes {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sessionAttributes"))
 	return RenderingSessionAttributesFromID(_r)
 }
 
+// PreferredTransform wraps the corresponding Objective-C method.
+func (x *RenderingSession) PreferredTransform() corefoundation.CGAffineTransform {
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("preferredTransform"))
+	return _r
+}
+
+// Quality wraps the corresponding Objective-C method.
 func (x *RenderingSession) Quality() RenderingQuality {
 	_r := objc.Send[RenderingQuality](objref.IDOf(x), objc.RegisterName("quality"))
 	return _r
@@ -78,6 +95,7 @@ func (x *RenderingSession) Quality() RenderingQuality {
 type RenderingSessionable interface {
 	obj.Object
 	SessionAttributes() *RenderingSessionAttributes
+	PreferredTransform() corefoundation.CGAffineTransform
 	Quality() RenderingQuality
 }
 

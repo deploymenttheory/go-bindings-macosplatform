@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object you use to install macOS on the specified virtual machine.
-//
 // MacOSInstaller is an idiomatic wrapper over the Objective-C class VZMacOSInstaller.
+//
+// An object you use to install macOS on the specified virtual machine.
 type MacOSInstaller struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func MacOSInstallerFromID(id objc.ID) *MacOSInstaller {
 	if id == 0 {
 		return nil
 	}
-	x := &MacOSInstaller{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MacOSInstaller{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func macOSInstallerAdopt(id objc.ID) *MacOSInstaller {
 	if id == 0 {
 		return nil
 	}
-	x := &MacOSInstaller{Handle: objref.Wrap(id)}
+	x := &MacOSInstaller{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,20 @@ func (x *MacOSInstaller) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a macOS installer object.
-//
-// NewMacOSInstallerWithVirtualMachineRestoreImageURL creates a new MacOSInstaller.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MacOSInstaller) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMacOSInstallerWithVirtualMachineRestoreImageURL creates a macOS installer object.
 func NewMacOSInstallerWithVirtualMachineRestoreImageURL(virtualMachine *VirtualMachine, restoreImageFileURL string) *MacOSInstaller {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMacOSInstaller")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVirtualMachine:restoreImageURL:"), objref.IDOf(virtualMachine), rt.FileURL(restoreImageFileURL))
 	return macOSInstallerAdopt(_id)
 }
 
-// Start installing macOS.
+// Install start installing macOS.
 //
 // Install blocks until the operation completes or ctx is cancelled.
 func (x *MacOSInstaller) Install(ctx context.Context) error {
@@ -88,19 +94,19 @@ func (x *MacOSInstaller) Install(ctx context.Context) error {
 	}
 }
 
-// An NSProgress object that can be used to observe or cancel installation. If the progress object is cancelled before installation is started, an exception will be raised.
+// Progress an NSProgress object that can be used to observe or cancel installation. If the progress object is cancelled before installation is started, an exception will be raised.
 func (x *MacOSInstaller) Progress() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("progress"))
 	return obj.Wrap(_r)
 }
 
-// The virtual machine that this installer was initialized with.
+// VirtualMachine the virtual machine that this installer was initialized with.
 func (x *MacOSInstaller) VirtualMachine() *VirtualMachine {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("virtualMachine"))
 	return VirtualMachineFromID(_r)
 }
 
-// The restore image URL that this installer was initialized with.
+// RestoreImageURL the restore image URL that this installer was initialized with.
 func (x *MacOSInstaller) RestoreImageURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restoreImageURL"))
 	return obj.Wrap(_r)

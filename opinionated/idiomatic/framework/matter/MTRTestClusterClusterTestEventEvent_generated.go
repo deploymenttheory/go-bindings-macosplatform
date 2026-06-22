@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRTestClusterClusterTestEventEvent is an idiomatic wrapper over the Objective-C class MTRTestClusterClusterTestEventEvent.
+//
+// It embeds [MTRUnitTestingClusterTestEventEvent], promoting that type's methods.
 type MTRTestClusterClusterTestEventEvent struct {
-	objref.Handle
+	MTRUnitTestingClusterTestEventEvent
 }
 
 // MTRTestClusterClusterTestEventEventFromID adopts an existing Objective-C object as a MTRTestClusterClusterTestEventEvent
@@ -23,7 +24,8 @@ func MTRTestClusterClusterTestEventEventFromID(id objc.ID) *MTRTestClusterCluste
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTestClusterClusterTestEventEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRTestClusterClusterTestEventEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRTestClusterClusterTestEventEventAdopt(id objc.ID) *MTRTestClusterCluster
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTestClusterClusterTestEventEvent{Handle: objref.Wrap(id)}
+	x := &MTRTestClusterClusterTestEventEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRTestClusterClusterTestEventEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRTestClusterClusterTestEventEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRTestClusterClusterTestEventEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRTestClusterClusterTestEventEvent creates a new MTRTestClusterClusterTestEventEvent.
@@ -62,25 +50,25 @@ func NewMTRTestClusterClusterTestEventEvent() *MTRTestClusterClusterTestEventEve
 	return mTRTestClusterClusterTestEventEventAdopt(_id)
 }
 
-// WithArg1 sets arg1 and returns the receiver so calls can be chained.
+// WithArg1 sets the property and returns the receiver so calls can be chained.
 func (x *MTRTestClusterClusterTestEventEvent) WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestEventEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return x
 }
 
-// WithArg2 sets arg2 and returns the receiver so calls can be chained.
+// WithArg2 sets the property and returns the receiver so calls can be chained.
 func (x *MTRTestClusterClusterTestEventEvent) WithArg2(arg2 obj.Object) *MTRTestClusterClusterTestEventEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
 	return x
 }
 
-// WithArg3 sets arg3 and returns the receiver so calls can be chained.
+// WithArg3 sets the property and returns the receiver so calls can be chained.
 func (x *MTRTestClusterClusterTestEventEvent) WithArg3(arg3 obj.Object) *MTRTestClusterClusterTestEventEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg3:"), objref.IDOf(arg3))
 	return x
 }
 
-// WithArg4 sets arg4 and returns the receiver so calls can be chained.
+// WithArg4 sets the property and returns the receiver so calls can be chained.
 func (x *MTRTestClusterClusterTestEventEvent) WithArg4(arg4 MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestEventEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg4:"), objref.IDOf(arg4))
 	return x
@@ -96,3 +84,5 @@ type MTRTestClusterClusterTestEventEventable interface {
 }
 
 var _ MTRTestClusterClusterTestEventEventable = (*MTRTestClusterClusterTestEventEvent)(nil)
+
+var _ MTRUnitTestingClusterTestEventEventProvider = (*MTRTestClusterClusterTestEventEvent)(nil)

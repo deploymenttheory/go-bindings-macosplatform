@@ -8,13 +8,15 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // RAWProcessingBooleanParameter is an idiomatic wrapper over the Objective-C class MERAWProcessingBooleanParameter.
+//
+// It embeds [RAWProcessingParameter], promoting that type's methods.
 type RAWProcessingBooleanParameter struct {
-	objref.Handle
+	RAWProcessingParameter
 }
 
 // RAWProcessingBooleanParameterFromID adopts an existing Objective-C object as a RAWProcessingBooleanParameter
@@ -23,7 +25,8 @@ func RAWProcessingBooleanParameterFromID(id objc.ID) *RAWProcessingBooleanParame
 	if id == 0 {
 		return nil
 	}
-	x := &RAWProcessingBooleanParameter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RAWProcessingBooleanParameter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +39,10 @@ func rAWProcessingBooleanParameterAdopt(id objc.ID) *RAWProcessingBooleanParamet
 	if id == 0 {
 		return nil
 	}
-	x := &RAWProcessingBooleanParameter{Handle: objref.Wrap(id)}
+	x := &RAWProcessingBooleanParameter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RAWProcessingBooleanParameter) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RAWProcessingBooleanParameter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RAWProcessingBooleanParameter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRAWProcessingBooleanParameter creates a new RAWProcessingBooleanParameter.
@@ -90,28 +79,39 @@ func NewRAWProcessingBooleanParameterWithNameKeyDescriptionInitialValueNeutralVa
 	return rAWProcessingBooleanParameterAdopt(_id)
 }
 
-// Get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
-//
-// WithCurrentValue sets currentValue and returns the receiver so calls can be chained.
+// WithCurrentValue get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
 func (x *RAWProcessingBooleanParameter) WithCurrentValue(currentValue bool) *RAWProcessingBooleanParameter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), currentValue)
 	return x
 }
 
-// A Boolean value that indicates whether the extension enables the parameter.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether the extension enables the parameter.
 func (x *RAWProcessingBooleanParameter) WithEnabled(enabled bool) *RAWProcessingBooleanParameter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// Get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
+// HasNeutralValue return value indicates whether the MERAWProcessingBooleanParameter has an optional declared Neutral value. If the return value is YES and outNeutralValue is not nil, the value held by outNeutralValue will be set to the neutral value. If the return value is NO and outNeutralValue is not nil, the value held by outNeutralValue will be set to NO.
+func (x *RAWProcessingBooleanParameter) HasNeutralValue() (ok bool, outNeutralValue bool) {
+	var _out0 bool
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasNeutralValue:"), unsafe.Pointer(&_out0))
+	return _r, _out0
+}
+
+// HasCameraValue return value indicates whether the MERAWProcessingBooleanParameter has an optional declared Camera value. If the return value is YES and outCameraValue is not nil, the value held by outCameraValue will be set to the camera value. If the return value is NO and outCameraValue is not nil, the value held by outCameraValue will be set to NO.
+func (x *RAWProcessingBooleanParameter) HasCameraValue() (ok bool, outCameraValue bool) {
+	var _out0 bool
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasCameraValue:"), unsafe.Pointer(&_out0))
+	return _r, _out0
+}
+
+// CurrentValue get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
 func (x *RAWProcessingBooleanParameter) CurrentValue() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("currentValue"))
 	return _r
 }
 
+// SetCurrentValue wraps the corresponding Objective-C method.
 func (x *RAWProcessingBooleanParameter) SetCurrentValue(currentValue bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), currentValue)
 }
@@ -121,8 +121,12 @@ type RAWProcessingBooleanParameterable interface {
 	obj.Object
 	WithCurrentValue(currentValue bool) *RAWProcessingBooleanParameter
 	WithEnabled(enabled bool) *RAWProcessingBooleanParameter
+	HasNeutralValue() (ok bool, outNeutralValue bool)
+	HasCameraValue() (ok bool, outCameraValue bool)
 	CurrentValue() bool
 	SetCurrentValue(currentValue bool)
 }
 
 var _ RAWProcessingBooleanParameterable = (*RAWProcessingBooleanParameter)(nil)
+
+var _ RAWProcessingParameterProvider = (*RAWProcessingBooleanParameter)(nil)

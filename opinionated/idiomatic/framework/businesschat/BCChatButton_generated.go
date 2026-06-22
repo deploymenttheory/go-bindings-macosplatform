@@ -23,7 +23,8 @@ func ChatButtonFromID(id objc.ID) *ChatButton {
 	if id == 0 {
 		return nil
 	}
-	x := &ChatButton{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ChatButton{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func chatButtonAdopt(id objc.ID) *ChatButton {
 	if id == 0 {
 		return nil
 	}
-	x := &ChatButton{Handle: objref.Wrap(id)}
+	x := &ChatButton{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,9 +58,13 @@ func (x *ChatButton) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates and returns a BCChatButton configured for a given style.
-//
-// NewChatButtonWithStyle creates a new ChatButton.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ChatButton) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewChatButtonWithStyle creates and returns a BCChatButton configured for a given style.
 func NewChatButtonWithStyle(style ChatButtonStyle) *ChatButton {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("BCChatButton")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStyle:"), style)

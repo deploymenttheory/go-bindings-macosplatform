@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Configuration that you use to set up the super-resolution processor.
-//
 // SuperResolutionScalerConfiguration is an idiomatic wrapper over the Objective-C class VTSuperResolutionScalerConfiguration.
+//
+// Configuration that you use to set up the super-resolution processor.
 type SuperResolutionScalerConfiguration struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func SuperResolutionScalerConfigurationFromID(id objc.ID) *SuperResolutionScaler
 	if id == 0 {
 		return nil
 	}
-	x := &SuperResolutionScalerConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SuperResolutionScalerConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func superResolutionScalerConfigurationAdopt(id objc.ID) *SuperResolutionScalerC
 	if id == 0 {
 		return nil
 	}
-	x := &SuperResolutionScalerConfiguration{Handle: objref.Wrap(id)}
+	x := &SuperResolutionScalerConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,20 @@ func (x *SuperResolutionScalerConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new super-resolution scaler processor configuration.
-//
-// NewSuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactorInputTypeUsePrecomputedFlowQualityPrioritizationRevision creates a new SuperResolutionScalerConfiguration.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SuperResolutionScalerConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactorInputTypeUsePrecomputedFlowQualityPrioritizationRevision creates a new super-resolution scaler processor configuration.
 func NewSuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactorInputTypeUsePrecomputedFlowQualityPrioritizationRevision(frameWidth int, frameHeight int, scaleFactor int, inputType SuperResolutionScalerConfigurationInputType, usePrecomputedFlow bool, qualityPrioritization SuperResolutionScalerConfigurationQualityPrioritization, revision SuperResolutionScalerConfigurationRevision) *SuperResolutionScalerConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VTSuperResolutionScalerConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameWidth:frameHeight:scaleFactor:inputType:usePrecomputedFlow:qualityPrioritization:revision:"), frameWidth, frameHeight, scaleFactor, inputType, usePrecomputedFlow, qualityPrioritization, revision)
 	return superResolutionScalerConfigurationAdopt(_id)
 }
 
-// Downloads models that the system needs for the current configuration.
+// DownloadConfigurationModel downloads models that the system needs for the current configuration.
 //
 // DownloadConfigurationModel blocks until the operation completes or ctx is cancelled.
 func (x *SuperResolutionScalerConfiguration) DownloadConfigurationModel(ctx context.Context) error {
@@ -88,49 +94,49 @@ func (x *SuperResolutionScalerConfiguration) DownloadConfigurationModel(ctx cont
 	}
 }
 
-// Width of source frame in pixels.
+// FrameWidth width of source frame in pixels.
 func (x *SuperResolutionScalerConfiguration) FrameWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameWidth"))
 	return _r
 }
 
-// Height of source frame in pixels.
+// FrameHeight height of source frame in pixels.
 func (x *SuperResolutionScalerConfiguration) FrameHeight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameHeight"))
 	return _r
 }
 
-// Indicates the type of input.
+// InputType indicates the type of input.
 func (x *SuperResolutionScalerConfiguration) InputType() SuperResolutionScalerConfigurationInputType {
 	_r := objc.Send[SuperResolutionScalerConfigurationInputType](objref.IDOf(x), objc.RegisterName("inputType"))
 	return _r
 }
 
-// Indicates that you provide optical flow.
+// UsesPrecomputedFlow indicates that you provide optical flow.
 func (x *SuperResolutionScalerConfiguration) UsesPrecomputedFlow() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesPrecomputedFlow"))
 	return _r
 }
 
-// Indicates the scale factor between input and output.
+// ScaleFactor indicates the scale factor between input and output.
 func (x *SuperResolutionScalerConfiguration) ScaleFactor() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("scaleFactor"))
 	return _r
 }
 
-// A parameter to control quality and performance levels. For more information about supported levels, see “VTSuperResolutionScalerConfigurationQualityPrioritization“.
+// QualityPrioritization a parameter to control quality and performance levels. For more information about supported levels, see “VTSuperResolutionScalerConfigurationQualityPrioritization“.
 func (x *SuperResolutionScalerConfiguration) QualityPrioritization() SuperResolutionScalerConfigurationQualityPrioritization {
 	_r := objc.Send[SuperResolutionScalerConfigurationQualityPrioritization](objref.IDOf(x), objc.RegisterName("qualityPrioritization"))
 	return _r
 }
 
-// The specific algorithm or configuration revision you use to perform the request.
+// Revision the specific algorithm or configuration revision you use to perform the request.
 func (x *SuperResolutionScalerConfiguration) Revision() SuperResolutionScalerConfigurationRevision {
 	_r := objc.Send[SuperResolutionScalerConfigurationRevision](objref.IDOf(x), objc.RegisterName("revision"))
 	return _r
 }
 
-// Available supported pixel formats for source frames for current configuration.
+// FrameSupportedPixelFormats available supported pixel formats for source frames for current configuration.
 //
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (x *SuperResolutionScalerConfiguration) FrameSupportedPixelFormats() []obj.Object {
@@ -138,25 +144,25 @@ func (x *SuperResolutionScalerConfiguration) FrameSupportedPixelFormats() []obj.
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+// SourcePixelBufferAttributes pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (x *SuperResolutionScalerConfiguration) SourcePixelBufferAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourcePixelBufferAttributes"))
 	return obj.Wrap(_r)
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+// DestinationPixelBufferAttributes pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (x *SuperResolutionScalerConfiguration) DestinationPixelBufferAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationPixelBufferAttributes"))
 	return obj.Wrap(_r)
 }
 
-// Reports the download status of models that the system needs for the current configuration.
+// ConfigurationModelStatus reports the download status of models that the system needs for the current configuration.
 func (x *SuperResolutionScalerConfiguration) ConfigurationModelStatus() SuperResolutionScalerConfigurationModelStatus {
 	_r := objc.Send[SuperResolutionScalerConfigurationModelStatus](objref.IDOf(x), objc.RegisterName("configurationModelStatus"))
 	return _r
 }
 
-// Returns a floating point value between 0.0 and 1.0 indicating the percentage of required model assets that have been downloaded.
+// ConfigurationModelPercentageAvailable returns a floating point value between 0.0 and 1.0 indicating the percentage of required model assets that have been downloaded.
 func (x *SuperResolutionScalerConfiguration) ConfigurationModelPercentageAvailable() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("configurationModelPercentageAvailable"))
 	return _r

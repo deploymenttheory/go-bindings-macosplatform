@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class representing a unit of measure.
-//
 // Unit is an idiomatic wrapper over the Objective-C class NSUnit.
+//
+// Unit is an abstract base — you do not construct it directly. Construct one of [Dimension] and pass it where a Unit is accepted.
+//
+// An abstract class representing a unit of measure.
 type Unit struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func UnitFromID(id objc.ID) *Unit {
 	if id == 0 {
 		return nil
 	}
-	x := &Unit{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Unit{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func unitAdopt(id objc.ID) *Unit {
 	if id == 0 {
 		return nil
 	}
-	x := &Unit{Handle: objref.Wrap(id)}
+	x := &Unit{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +62,19 @@ func (x *Unit) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewUnit creates a new Unit.
-func NewUnit() *Unit {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSUnit")), objc.RegisterName("new"))
-	return unitAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Unit) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Unit) WithScriptingProperties(scriptingProperties obj.Object) *Unit {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Symbol wraps the corresponding Objective-C method.
 func (x *Unit) Symbol() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("symbol"))
 	if _r == 0 {
@@ -86,3 +91,10 @@ type Unitable interface {
 }
 
 var _ Unitable = (*Unit)(nil)
+
+// isUnit marks Unit — and, by embedding promotion, its
+// subclasses — as a member of the Unit hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Unit) isUnit() {}
+
+var _ UnitProvider = (*Unit)(nil)

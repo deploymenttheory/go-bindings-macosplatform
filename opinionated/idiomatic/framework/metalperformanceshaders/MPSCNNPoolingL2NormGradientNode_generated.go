@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a gradient L2-norm pooling filter.
-//
 // CNNPoolingL2NormGradientNode is an idiomatic wrapper over the Objective-C class MPSCNNPoolingL2NormGradientNode.
+//
+// It embeds [CNNPoolingGradientNode], promoting that type's methods.
+//
+// A representation of a gradient L2-norm pooling filter.
 type CNNPoolingL2NormGradientNode struct {
-	objref.Handle
+	CNNPoolingGradientNode
 }
 
 // CNNPoolingL2NormGradientNodeFromID adopts an existing Objective-C object as a CNNPoolingL2NormGradientNode
@@ -25,7 +26,8 @@ func CNNPoolingL2NormGradientNodeFromID(id objc.ID) *CNNPoolingL2NormGradientNod
 	if id == 0 {
 		return nil
 	}
-	x := &CNNPoolingL2NormGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNPoolingL2NormGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func cNNPoolingL2NormGradientNodeAdopt(id objc.ID) *CNNPoolingL2NormGradientNode
 	if id == 0 {
 		return nil
 	}
-	x := &CNNPoolingL2NormGradientNode{Handle: objref.Wrap(id)}
+	x := &CNNPoolingL2NormGradientNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNPoolingL2NormGradientNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNPoolingL2NormGradientNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNPoolingL2NormGradientNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNPoolingL2NormGradientNode creates a new CNNPoolingL2NormGradientNode.
@@ -64,9 +52,7 @@ func NewCNNPoolingL2NormGradientNode() *CNNPoolingL2NormGradientNode {
 	return cNNPoolingL2NormGradientNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNPoolingL2NormGradientNode) WithLabel(label string) *CNNPoolingL2NormGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -79,3 +65,9 @@ type CNNPoolingL2NormGradientNodeable interface {
 }
 
 var _ CNNPoolingL2NormGradientNodeable = (*CNNPoolingL2NormGradientNode)(nil)
+
+var _ CNNPoolingGradientNodeProvider = (*CNNPoolingL2NormGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*CNNPoolingL2NormGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNPoolingL2NormGradientNode)(nil)

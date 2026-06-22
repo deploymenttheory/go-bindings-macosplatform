@@ -6,15 +6,17 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An object that can draw gradient fill colors
-//
 // Gradient is an idiomatic wrapper over the Objective-C class NSGradient.
+//
+// An object that can draw gradient fill colors
 type Gradient struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func GradientFromID(id objc.ID) *Gradient {
 	if id == 0 {
 		return nil
 	}
-	x := &Gradient{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Gradient{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func gradientAdopt(id objc.ID) *Gradient {
 	if id == 0 {
 		return nil
 	}
-	x := &Gradient{Handle: objref.Wrap(id)}
+	x := &Gradient{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,58 +62,90 @@ func (x *Gradient) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a newly allocated gradient object with two colors.
-//
-// NewGradientWithStartingColorEndingColor creates a new Gradient.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Gradient) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewGradientWithStartingColorEndingColor initializes a newly allocated gradient object with two colors.
 func NewGradientWithStartingColorEndingColor(startingColor *Color, endingColor *Color) *Gradient {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSGradient")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartingColor:endingColor:"), objref.IDOf(startingColor), objref.IDOf(endingColor))
 	return gradientAdopt(_id)
 }
 
-// Initializes a newly allocated gradient object with an array of colors.
-//
-// NewGradientWithColors creates a new Gradient.
+// NewGradientWithColors initializes a newly allocated gradient object with an array of colors.
 func NewGradientWithColors(colorArray []*Color) *Gradient {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSGradient")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithColors:"), purego.SliceToNSArray(colorArray, func(_v *Color) objc.ID { return objref.IDOf(_v) }))
 	return gradientAdopt(_id)
 }
 
-// Initializes a newly allocated gradient object with a comma-separated list of arguments.
-//
-// NewGradientWithColorsAndLocations creates a new Gradient.
+// NewGradientWithColorsAndLocations initializes a newly allocated gradient object with a comma-separated list of arguments.
 func NewGradientWithColorsAndLocations(firstColor *Color) *Gradient {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSGradient")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithColorsAndLocations:"), objref.IDOf(firstColor))
 	return gradientAdopt(_id)
 }
 
-// Creates a gradient from data in an unarchiver.
-//
-// NewGradientWithCoder creates a new Gradient.
+// NewGradientWithCoder creates a gradient from data in an unarchiver.
 func NewGradientWithCoder(coder obj.Object) *Gradient {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSGradient")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return gradientAdopt(_id)
 }
 
-// Fills the specified path with a linear gradient.
+// DrawFromPointToPointOptions draws a linear gradient between the specified start and end points.
+func (x *Gradient) DrawFromPointToPointOptions(startingPoint corefoundation.CGPoint, endingPoint corefoundation.CGPoint, options GradientDrawingOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawFromPoint:toPoint:options:"), startingPoint, endingPoint, options)
+}
+
+// DrawInRectAngle fills the specified rectangle with a linear gradient.
+func (x *Gradient) DrawInRectAngle(rect corefoundation.CGRect, angle float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawInRect:angle:"), rect, angle)
+}
+
+// DrawInBezierPathAngle fills the specified path with a linear gradient.
 func (x *Gradient) DrawInBezierPathAngle(path *BezierPath, angle float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawInBezierPath:angle:"), objref.IDOf(path), angle)
 }
 
-// Returns the color of the rendered gradient at the specified relative location.
+// DrawFromCenterRadiusToCenterRadiusOptions draws a radial gradient between the specified circles.
+func (x *Gradient) DrawFromCenterRadiusToCenterRadiusOptions(startCenter corefoundation.CGPoint, startRadius float64, endCenter corefoundation.CGPoint, endRadius float64, options GradientDrawingOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawFromCenter:radius:toCenter:radius:options:"), startCenter, startRadius, endCenter, endRadius, options)
+}
+
+// DrawInRectRelativeCenterPosition draws a radial gradient starting at the center of the specified rectangle.
+func (x *Gradient) DrawInRectRelativeCenterPosition(rect corefoundation.CGRect, relativeCenterPosition corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawInRect:relativeCenterPosition:"), rect, relativeCenterPosition)
+}
+
+// DrawInBezierPathRelativeCenterPosition draws a radial gradient starting at the center point of the specified path.
+func (x *Gradient) DrawInBezierPathRelativeCenterPosition(path *BezierPath, relativeCenterPosition corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawInBezierPath:relativeCenterPosition:"), objref.IDOf(path), relativeCenterPosition)
+}
+
+// GetColorLocationAtIndex returns information about the color stop at the specified index in the receiver’s color array.
+func (x *Gradient) GetColorLocationAtIndex(color *Color, index int) (location float64) {
+	var _out0 float64
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getColor:location:atIndex:"), objref.IDOf(color), unsafe.Pointer(&_out0), index)
+	return _out0
+}
+
+// InterpolatedColorAtLocation returns the color of the rendered gradient at the specified relative location.
 func (x *Gradient) InterpolatedColorAtLocation(location float64) *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interpolatedColorAtLocation:"), location)
 	return ColorFromID(_r)
 }
 
+// ColorSpace wraps the corresponding Objective-C method.
 func (x *Gradient) ColorSpace() *ColorSpace {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorSpace"))
 	return ColorSpaceFromID(_r)
 }
 
+// NumberOfColorStops wraps the corresponding Objective-C method.
 func (x *Gradient) NumberOfColorStops() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfColorStops"))
 	return _r
@@ -118,7 +154,13 @@ func (x *Gradient) NumberOfColorStops() int {
 // Gradientable is the interface implemented by [Gradient], for mocking and DI.
 type Gradientable interface {
 	obj.Object
+	DrawFromPointToPointOptions(startingPoint corefoundation.CGPoint, endingPoint corefoundation.CGPoint, options GradientDrawingOptions)
+	DrawInRectAngle(rect corefoundation.CGRect, angle float64)
 	DrawInBezierPathAngle(path *BezierPath, angle float64)
+	DrawFromCenterRadiusToCenterRadiusOptions(startCenter corefoundation.CGPoint, startRadius float64, endCenter corefoundation.CGPoint, endRadius float64, options GradientDrawingOptions)
+	DrawInRectRelativeCenterPosition(rect corefoundation.CGRect, relativeCenterPosition corefoundation.CGPoint)
+	DrawInBezierPathRelativeCenterPosition(path *BezierPath, relativeCenterPosition corefoundation.CGPoint)
+	GetColorLocationAtIndex(color *Color, index int) (location float64)
 	InterpolatedColorAtLocation(location float64) *Color
 	ColorSpace() *ColorSpace
 	NumberOfColorStops() int

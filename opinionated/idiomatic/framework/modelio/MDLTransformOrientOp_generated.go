@@ -23,7 +23,8 @@ func TransformOrientOpFromID(id objc.ID) *TransformOrientOp {
 	if id == 0 {
 		return nil
 	}
-	x := &TransformOrientOp{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TransformOrientOp{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func transformOrientOpAdopt(id objc.ID) *TransformOrientOp {
 	if id == 0 {
 		return nil
 	}
-	x := &TransformOrientOp{Handle: objref.Wrap(id)}
+	x := &TransformOrientOp{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,12 +58,19 @@ func (x *TransformOrientOp) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TransformOrientOp) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTransformOrientOp creates a new TransformOrientOp.
 func NewTransformOrientOp() *TransformOrientOp {
 	_id := objc.Send[objc.ID](objc.ID(_class("MDLTransformOrientOp")), objc.RegisterName("new"))
 	return transformOrientOpAdopt(_id)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *TransformOrientOp) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -70,6 +79,7 @@ func (x *TransformOrientOp) Name() string {
 	return purego.GoString(_r)
 }
 
+// AnimatedValue wraps the corresponding Objective-C method.
 func (x *TransformOrientOp) AnimatedValue() *AnimatedQuaternion {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animatedValue"))
 	return AnimatedQuaternionFromID(_r)

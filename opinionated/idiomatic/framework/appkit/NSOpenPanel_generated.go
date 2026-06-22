@@ -6,17 +6,20 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A panel that prompts the user to select a file to open.
-//
 // OpenPanel is an idiomatic wrapper over the Objective-C class NSOpenPanel.
+//
+// It embeds [SavePanel], promoting that type's methods.
+//
+// A panel that prompts the user to select a file to open.
 type OpenPanel struct {
-	objref.Handle
+	SavePanel
 }
 
 // OpenPanelFromID adopts an existing Objective-C object as a OpenPanel
@@ -25,7 +28,8 @@ func OpenPanelFromID(id objc.ID) *OpenPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &OpenPanel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OpenPanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func openPanelAdopt(id objc.ID) *OpenPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &OpenPanel{Handle: objref.Wrap(id)}
+	x := &OpenPanel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *OpenPanel) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *OpenPanel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *OpenPanel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewOpenPanel creates a new OpenPanel.
@@ -64,809 +54,714 @@ func NewOpenPanel() *OpenPanel {
 	return openPanelAdopt(_id)
 }
 
-// A Boolean that indicates whether the panel resolves aliases.
-//
-// WithResolvesAliases sets resolvesAliases and returns the receiver so calls can be chained.
+// WithResolvesAliases a Boolean that indicates whether the panel resolves aliases.
 func (x *OpenPanel) WithResolvesAliases(resolvesAliases bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolvesAliases:"), resolvesAliases)
 	return x
 }
 
-// A Boolean that indicates whether the user can choose directories in the panel.
-//
-// WithCanChooseDirectories sets canChooseDirectories and returns the receiver so calls can be chained.
+// WithCanChooseDirectories a Boolean that indicates whether the user can choose directories in the panel.
 func (x *OpenPanel) WithCanChooseDirectories(canChooseDirectories bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanChooseDirectories:"), canChooseDirectories)
 	return x
 }
 
-// A Boolean that indicates whether the user may select multiple files and directories.
-//
-// WithAllowsMultipleSelection sets allowsMultipleSelection and returns the receiver so calls can be chained.
+// WithAllowsMultipleSelection a Boolean that indicates whether the user may select multiple files and directories.
 func (x *OpenPanel) WithAllowsMultipleSelection(allowsMultipleSelection bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMultipleSelection:"), allowsMultipleSelection)
 	return x
 }
 
-// A Boolean that indicates whether the user can choose files in the panel.
-//
-// WithCanChooseFiles sets canChooseFiles and returns the receiver so calls can be chained.
+// WithCanChooseFiles a Boolean that indicates whether the user can choose files in the panel.
 func (x *OpenPanel) WithCanChooseFiles(canChooseFiles bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanChooseFiles:"), canChooseFiles)
 	return x
 }
 
-// A Boolean value that indicates how the panel responds to iCloud documents that have conflicting versions.
-//
-// WithCanResolveUbiquitousConflicts sets canResolveUbiquitousConflicts and returns the receiver so calls can be chained.
+// WithCanResolveUbiquitousConflicts a Boolean value that indicates how the panel responds to iCloud documents that have conflicting versions.
 func (x *OpenPanel) WithCanResolveUbiquitousConflicts(canResolveUbiquitousConflicts bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanResolveUbiquitousConflicts:"), canResolveUbiquitousConflicts)
 	return x
 }
 
-// A Boolean value that indicates how the panel responds to iCloud documents that aren’t fully downloaded locally.
-//
-// WithCanDownloadUbiquitousContents sets canDownloadUbiquitousContents and returns the receiver so calls can be chained.
+// WithCanDownloadUbiquitousContents a Boolean value that indicates how the panel responds to iCloud documents that aren’t fully downloaded locally.
 func (x *OpenPanel) WithCanDownloadUbiquitousContents(canDownloadUbiquitousContents bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDownloadUbiquitousContents:"), canDownloadUbiquitousContents)
 	return x
 }
 
-// A Boolean value that indicates whether the panel’s accessory view is visible.
-//
-// WithAccessoryViewDisclosed sets accessoryViewDisclosed and returns the receiver so calls can be chained.
+// WithAccessoryViewDisclosed a Boolean value that indicates whether the panel’s accessory view is visible.
 func (x *OpenPanel) WithAccessoryViewDisclosed(accessoryViewDisclosed bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryViewDisclosed:"), accessoryViewDisclosed)
 	return x
 }
 
-// Sets and returns the identifier.
-//
-// WithIdentifier sets identifier and returns the receiver so calls can be chained.
+// WithIdentifier sets and returns the identifier.
 func (x *OpenPanel) WithIdentifier(identifier obj.Object) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
 	return x
 }
 
-// The current directory shown in the panel.
-//
-// WithDirectoryURL sets directoryURL and returns the receiver so calls can be chained.
+// WithDirectoryURL the current directory shown in the panel.
 func (x *OpenPanel) WithDirectoryURL(directoryURL string) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirectoryURL:"), rt.FileURL(directoryURL))
 	return x
 }
 
-// An array of types that specify the files types to which you can save.
-//
-// WithAllowedContentTypes sets the collection and returns the receiver so calls can be chained.
+// WithAllowedContentTypes an array of types that specify the files types to which you can save.
 func (x *OpenPanel) WithAllowedContentTypes(items ...obj.Object) *OpenPanel {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedContentTypes:"), _arr)
 	return x
 }
 
-// A Boolean value that indicates whether the panel allows the user to save files with a filename extension that’s not in the list of allowed types.
-//
-// WithAllowsOtherFileTypes sets allowsOtherFileTypes and returns the receiver so calls can be chained.
+// WithAllowsOtherFileTypes a Boolean value that indicates whether the panel allows the user to save files with a filename extension that’s not in the list of allowed types.
 func (x *OpenPanel) WithAllowsOtherFileTypes(allowsOtherFileTypes bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsOtherFileTypes:"), allowsOtherFileTypes)
 	return x
 }
 
-// NSSavePanel:The current type. If set to nil, resets to the first allowed content type. Returns nil if allowedContentTypes is empty. NSOpenPanel: Not used.
-//
-// WithCurrentContentType sets currentContentType and returns the receiver so calls can be chained.
+// WithCurrentContentType NSSavePanel:The current type. If set to nil, resets to the first allowed content type. Returns nil if allowedContentTypes is empty. NSOpenPanel: Not used.
 func (x *OpenPanel) WithCurrentContentType(currentContentType obj.Object) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentContentType:"), objref.IDOf(currentContentType))
 	return x
 }
 
-// The custom accessory view for the current app.
-//
-// WithAccessoryView sets accessoryView and returns the receiver so calls can be chained.
+// WithAccessoryView the custom accessory view for the current app.
 func (x *OpenPanel) WithAccessoryView(accessoryView ViewProvider) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 	return x
 }
 
-// A Boolean value that indicates whether the panel displays UI for creating directories.
-//
-// WithCanCreateDirectories sets canCreateDirectories and returns the receiver so calls can be chained.
+// WithCanCreateDirectories a Boolean value that indicates whether the panel displays UI for creating directories.
 func (x *OpenPanel) WithCanCreateDirectories(canCreateDirectories bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanCreateDirectories:"), canCreateDirectories)
 	return x
 }
 
-// A Boolean value that indicates whether the panel displays UI for hiding or showing filename extensions.
-//
-// WithCanSelectHiddenExtension sets canSelectHiddenExtension and returns the receiver so calls can be chained.
+// WithCanSelectHiddenExtension a Boolean value that indicates whether the panel displays UI for hiding or showing filename extensions.
 func (x *OpenPanel) WithCanSelectHiddenExtension(canSelectHiddenExtension bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanSelectHiddenExtension:"), canSelectHiddenExtension)
 	return x
 }
 
-// A Boolean value that indicates whether to display filename extensions.
-//
-// WithExtensionHidden sets extensionHidden and returns the receiver so calls can be chained.
+// WithExtensionHidden a Boolean value that indicates whether to display filename extensions.
 func (x *OpenPanel) WithExtensionHidden(extensionHidden bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtensionHidden:"), extensionHidden)
 	return x
 }
 
-// A Boolean value that indicates whether the panel displays file packages as directories.
-//
-// WithTreatsFilePackagesAsDirectories sets treatsFilePackagesAsDirectories and returns the receiver so calls can be chained.
+// WithTreatsFilePackagesAsDirectories a Boolean value that indicates whether the panel displays file packages as directories.
 func (x *OpenPanel) WithTreatsFilePackagesAsDirectories(treatsFilePackagesAsDirectories bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTreatsFilePackagesAsDirectories:"), treatsFilePackagesAsDirectories)
 	return x
 }
 
-// The text to display in the default button.
-//
-// WithPrompt sets prompt and returns the receiver so calls can be chained.
+// WithPrompt the text to display in the default button.
 func (x *OpenPanel) WithPrompt(prompt string) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrompt:"), purego.NSString(prompt))
 	return x
 }
 
-// The label text displayed in front of the filename text field.
-//
-// WithNameFieldLabel sets nameFieldLabel and returns the receiver so calls can be chained.
+// WithNameFieldLabel the label text displayed in front of the filename text field.
 func (x *OpenPanel) WithNameFieldLabel(nameFieldLabel string) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNameFieldLabel:"), purego.NSString(nameFieldLabel))
 	return x
 }
 
-// The user-editable filename currently shown in the name field.
-//
-// WithNameFieldStringValue sets nameFieldStringValue and returns the receiver so calls can be chained.
+// WithNameFieldStringValue the user-editable filename currently shown in the name field.
 func (x *OpenPanel) WithNameFieldStringValue(nameFieldStringValue string) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNameFieldStringValue:"), purego.NSString(nameFieldStringValue))
 	return x
 }
 
-// The message text displayed in the panel.
-//
-// WithMessage sets message and returns the receiver so calls can be chained.
+// WithMessage the message text displayed in the panel.
 func (x *OpenPanel) WithMessage(message string) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessage:"), purego.NSString(message))
 	return x
 }
 
-// A Boolean value that indicates whether the panel displays files that are normally hidden from the user.
-//
-// WithShowsHiddenFiles sets showsHiddenFiles and returns the receiver so calls can be chained.
+// WithShowsHiddenFiles a Boolean value that indicates whether the panel displays files that are normally hidden from the user.
 func (x *OpenPanel) WithShowsHiddenFiles(showsHiddenFiles bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsHiddenFiles:"), showsHiddenFiles)
 	return x
 }
 
-// A Boolean value that indicates whether the panel displays the Tags field.
-//
-// WithShowsTagField sets showsTagField and returns the receiver so calls can be chained.
+// WithShowsTagField a Boolean value that indicates whether the panel displays the Tags field.
 func (x *OpenPanel) WithShowsTagField(showsTagField bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsTagField:"), showsTagField)
 	return x
 }
 
-// The tag names that you want to include on a saved file.
-//
-// WithTagNames sets the collection and returns the receiver so calls can be chained.
+// WithTagNames the tag names that you want to include on a saved file.
 func (x *OpenPanel) WithTagNames(items ...obj.Object) *OpenPanel {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTagNames:"), _arr)
 	return x
 }
 
-// Whether or not to show a popup list for selecting the type of the saved file.
-//
-// WithShowsContentTypes sets showsContentTypes and returns the receiver so calls can be chained.
+// WithShowsContentTypes whether or not to show a popup list for selecting the type of the saved file.
 func (x *OpenPanel) WithShowsContentTypes(showsContentTypes bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsContentTypes:"), showsContentTypes)
 	return x
 }
 
-// `NSSavePanel`: An array of NSStrings specifying the file types the user can save the file as. The file type can be a common file extension, or a UTI. A nil value indicates that any file type can be used. If the array is not nil and the array contains no items, an exception will be raised. If no extension is given by the user, the first item in the allowedFileTypes will be used as the extension for the save panel. If the user specifies a type not in the array, and 'allowsOtherFileTypes' is YES, they will be presented with another dialog when prompted to save. The default value is 'nil'. `NSOpenPanel`: On versions less than 10.6, this property is ignored. For applications that link against 10.6 and higher, this property will determine which files should be enabled in the open panel. Using the deprecated methods to show the open panel (the ones that take a "types:" parameter) will overwrite this value, and should not be used. The allowedFileTypes can be changed while the panel is running (ie: from an accessory view). The file type can be a common file extension, or a UTI. This is also known as the "enabled file types". A nil value indicates that all files should be enabled.
-//
-// WithAllowedFileTypes sets the collection and returns the receiver so calls can be chained.
+// WithAllowedFileTypes `NSSavePanel`: An array of NSStrings specifying the file types the user can save the file as. The file type can be a common file extension, or a UTI. A nil value indicates that any file type can be used. If the array is not nil and the array contains no items, an exception will be raised. If no extension is given by the user, the first item in the allowedFileTypes will be used as the extension for the save panel. If the user specifies a type not in the array, and 'allowsOtherFileTypes' is YES, they will be presented with another dialog when prompted to save. The default value is 'nil'. `NSOpenPanel`: On versions less than 10.6, this property is ignored. For applications that link against 10.6 and higher, this property will determine which files should be enabled in the open panel. Using the deprecated methods to show the open panel (the ones that take a "types:" parameter) will overwrite this value, and should not be used. The allowedFileTypes can be changed while the panel is running (ie: from an accessory view). The file type can be a common file extension, or a UTI. This is also known as the "enabled file types". A nil value indicates that all files should be enabled.
 func (x *OpenPanel) WithAllowedFileTypes(items ...obj.Object) *OpenPanel {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedFileTypes:"), _arr)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver is a floating panel.
-//
-// WithFloatingPanel sets floatingPanel and returns the receiver so calls can be chained.
+// WithFloatingPanel a Boolean value that indicates whether the receiver is a floating panel.
 func (x *OpenPanel) WithFloatingPanel(floatingPanel bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatingPanel:"), floatingPanel)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver becomes the key window only when needed.
-//
-// WithBecomesKeyOnlyIfNeeded sets becomesKeyOnlyIfNeeded and returns the receiver so calls can be chained.
+// WithBecomesKeyOnlyIfNeeded a Boolean value that indicates whether the receiver becomes the key window only when needed.
 func (x *OpenPanel) WithBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBecomesKeyOnlyIfNeeded:"), becomesKeyOnlyIfNeeded)
 	return x
 }
 
-// A Boolean value that indicates whether the panel receives keyboard and mouse events even when some other window is being run modally.
-//
-// WithWorksWhenModal sets worksWhenModal and returns the receiver so calls can be chained.
+// WithWorksWhenModal a Boolean value that indicates whether the panel receives keyboard and mouse events even when some other window is being run modally.
 func (x *OpenPanel) WithWorksWhenModal(worksWhenModal bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorksWhenModal:"), worksWhenModal)
 	return x
 }
 
-// The string that appears in the title bar of the window or the path to the represented file.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the string that appears in the title bar of the window or the path to the represented file.
 func (x *OpenPanel) WithTitle(title string) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A secondary line of text that appears in the title bar of the window.
-//
-// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
+// WithSubtitle a secondary line of text that appears in the title bar of the window.
 func (x *OpenPanel) WithSubtitle(subtitle string) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
-// A value that indicates the visibility of the window’s title and title bar buttons.
-//
-// WithTitleVisibility sets titleVisibility and returns the receiver so calls can be chained.
+// WithTitleVisibility a value that indicates the visibility of the window’s title and title bar buttons.
 func (x *OpenPanel) WithTitleVisibility(titleVisibility WindowTitleVisibility) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleVisibility:"), titleVisibility)
 	return x
 }
 
-// A Boolean value that indicates whether the title bar draws its background.
-//
-// WithTitlebarAppearsTransparent sets titlebarAppearsTransparent and returns the receiver so calls can be chained.
+// WithTitlebarAppearsTransparent a Boolean value that indicates whether the title bar draws its background.
 func (x *OpenPanel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlebarAppearsTransparent:"), titlebarAppearsTransparent)
 	return x
 }
 
-// The style that determines the appearance and location of the toolbar in relation to the title bar.
-//
-// WithToolbarStyle sets toolbarStyle and returns the receiver so calls can be chained.
+// WithToolbarStyle the style that determines the appearance and location of the toolbar in relation to the title bar.
 func (x *OpenPanel) WithToolbarStyle(toolbarStyle WindowToolbarStyle) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolbarStyle:"), toolbarStyle)
 	return x
 }
 
-// An array of title bar accessory view controllers that are currently added to the window.
-//
-// WithTitlebarAccessoryViewControllers sets the collection and returns the receiver so calls can be chained.
+// WithTitlebarAccessoryViewControllers an array of title bar accessory view controllers that are currently added to the window.
 func (x *OpenPanel) WithTitlebarAccessoryViewControllers(items ...*TitlebarAccessoryViewController) *OpenPanel {
 	_arr := purego.SliceToNSArray(items, func(_v *TitlebarAccessoryViewController) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlebarAccessoryViewControllers:"), _arr)
 	return x
 }
 
-// The URL of the file the window represents.
-//
-// WithRepresentedURL sets representedURL and returns the receiver so calls can be chained.
+// WithRepresentedURL the URL of the file the window represents.
 func (x *OpenPanel) WithRepresentedURL(representedURL string) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedURL:"), rt.FileURL(representedURL))
 	return x
 }
 
-// The path to the file of the window’s represented file.
-//
-// WithRepresentedFilename sets representedFilename and returns the receiver so calls can be chained.
+// WithRepresentedFilename the path to the file of the window’s represented file.
 func (x *OpenPanel) WithRepresentedFilename(representedFilename string) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedFilename:"), purego.NSString(representedFilename))
 	return x
 }
 
-// A Boolean value that indicates whether the window is excluded from the application’s Windows menu.
-//
-// WithExcludedFromWindowsMenu sets excludedFromWindowsMenu and returns the receiver so calls can be chained.
+// WithExcludedFromWindowsMenu a Boolean value that indicates whether the window is excluded from the application’s Windows menu.
 func (x *OpenPanel) WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedFromWindowsMenu:"), excludedFromWindowsMenu)
 	return x
 }
 
-// The window’s content view, the highest accessible view object in the window’s view hierarchy.
-//
-// WithContentView sets contentView and returns the receiver so calls can be chained.
+// WithContentView the window’s content view, the highest accessible view object in the window’s view hierarchy.
 func (x *OpenPanel) WithContentView(contentView ViewProvider) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	return x
 }
 
-// Flags that describe the window’s current style, such as if it’s resizable or in full-screen mode.
-//
-// WithStyleMask sets styleMask and returns the receiver so calls can be chained.
+// WithStyleMask flags that describe the window’s current style, such as if it’s resizable or in full-screen mode.
 func (x *OpenPanel) WithStyleMask(styleMask WindowStyleMask) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyleMask:"), styleMask)
 	return x
 }
 
-// A Boolean value that indicates whether any of the window’s views need to be displayed.
-//
-// WithViewsNeedDisplay sets viewsNeedDisplay and returns the receiver so calls can be chained.
+// WithResizeIncrements the window’s resizing increments.
+func (x *OpenPanel) WithResizeIncrements(resizeIncrements corefoundation.CGSize) *OpenPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResizeIncrements:"), resizeIncrements)
+	return x
+}
+
+// WithAspectRatio the window’s aspect ratio, which constrains the size of its frame rectangle to integral multiples of this ratio when the user resizes it.
+func (x *OpenPanel) WithAspectRatio(aspectRatio corefoundation.CGSize) *OpenPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAspectRatio:"), aspectRatio)
+	return x
+}
+
+// WithContentResizeIncrements the window’s content-view resizing increments.
+func (x *OpenPanel) WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *OpenPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentResizeIncrements:"), contentResizeIncrements)
+	return x
+}
+
+// WithContentAspectRatio the window’s content aspect ratio.
+func (x *OpenPanel) WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *OpenPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentAspectRatio:"), contentAspectRatio)
+	return x
+}
+
+// WithViewsNeedDisplay a Boolean value that indicates whether any of the window’s views need to be displayed.
 func (x *OpenPanel) WithViewsNeedDisplay(viewsNeedDisplay bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewsNeedDisplay:"), viewsNeedDisplay)
 	return x
 }
 
-// A Boolean value that indicates whether the window tries to optimize user-initiated resize operations by preserving the content of views that have not changed.
-//
-// WithPreservesContentDuringLiveResize sets preservesContentDuringLiveResize and returns the receiver so calls can be chained.
+// WithPreservesContentDuringLiveResize a Boolean value that indicates whether the window tries to optimize user-initiated resize operations by preserving the content of views that have not changed.
 func (x *OpenPanel) WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesContentDuringLiveResize:"), preservesContentDuringLiveResize)
 	return x
 }
 
-// A Boolean value that indicates whether the window is released when it receives the close message.
-//
-// WithReleasedWhenClosed sets releasedWhenClosed and returns the receiver so calls can be chained.
+// WithReleasedWhenClosed a Boolean value that indicates whether the window is released when it receives the close message.
 func (x *OpenPanel) WithReleasedWhenClosed(releasedWhenClosed bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReleasedWhenClosed:"), releasedWhenClosed)
 	return x
 }
 
-// The color of the window’s background.
-//
-// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+// WithBackgroundColor the color of the window’s background.
 func (x *OpenPanel) WithBackgroundColor(backgroundColor *Color) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// A Boolean value that indicates whether the window can be dragged by clicking in its title bar or background.
-//
-// WithMovable sets movable and returns the receiver so calls can be chained.
+// WithMovable a Boolean value that indicates whether the window can be dragged by clicking in its title bar or background.
 func (x *OpenPanel) WithMovable(movable bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMovable:"), movable)
 	return x
 }
 
-// A Boolean value that indicates whether the window is movable by clicking and dragging anywhere in its background.
-//
-// WithMovableByWindowBackground sets movableByWindowBackground and returns the receiver so calls can be chained.
+// WithMovableByWindowBackground a Boolean value that indicates whether the window is movable by clicking and dragging anywhere in its background.
 func (x *OpenPanel) WithMovableByWindowBackground(movableByWindowBackground bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMovableByWindowBackground:"), movableByWindowBackground)
 	return x
 }
 
-// A Boolean value that indicates whether the window is removed from the screen when its application becomes inactive.
-//
-// WithHidesOnDeactivate sets hidesOnDeactivate and returns the receiver so calls can be chained.
+// WithHidesOnDeactivate a Boolean value that indicates whether the window is removed from the screen when its application becomes inactive.
 func (x *OpenPanel) WithHidesOnDeactivate(hidesOnDeactivate bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidesOnDeactivate:"), hidesOnDeactivate)
 	return x
 }
 
-// A Boolean value that indicates whether the window can hide when its application becomes hidden.
-//
-// WithCanHide sets canHide and returns the receiver so calls can be chained.
+// WithCanHide a Boolean value that indicates whether the window can hide when its application becomes hidden.
 func (x *OpenPanel) WithCanHide(canHide bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanHide:"), canHide)
 	return x
 }
 
-// The custom miniaturized window image of the window.
-//
-// WithMiniwindowImage sets miniwindowImage and returns the receiver so calls can be chained.
+// WithMiniwindowImage the custom miniaturized window image of the window.
 func (x *OpenPanel) WithMiniwindowImage(miniwindowImage *Image) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiniwindowImage:"), objref.IDOf(miniwindowImage))
 	return x
 }
 
-// The title displayed in the window’s minimized window.
-//
-// WithMiniwindowTitle sets miniwindowTitle and returns the receiver so calls can be chained.
+// WithMiniwindowTitle the title displayed in the window’s minimized window.
 func (x *OpenPanel) WithMiniwindowTitle(miniwindowTitle string) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiniwindowTitle:"), purego.NSString(miniwindowTitle))
 	return x
 }
 
-// A Boolean value that indicates whether the window’s document has been edited.
-//
-// WithDocumentEdited sets documentEdited and returns the receiver so calls can be chained.
+// WithDocumentEdited a Boolean value that indicates whether the window’s document has been edited.
 func (x *OpenPanel) WithDocumentEdited(documentEdited bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentEdited:"), documentEdited)
 	return x
 }
 
-// A Boolean value that indicates whether the window prevents application termination when modal.
-//
-// WithPreventsApplicationTerminationWhenModal sets preventsApplicationTerminationWhenModal and returns the receiver so calls can be chained.
+// WithPreventsApplicationTerminationWhenModal a Boolean value that indicates whether the window prevents application termination when modal.
 func (x *OpenPanel) WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreventsApplicationTerminationWhenModal:"), preventsApplicationTerminationWhenModal)
 	return x
 }
 
-// A Boolean value that indicates whether the window can display tooltips even when the application is in the background.
-//
-// WithAllowsToolTipsWhenApplicationIsInactive sets allowsToolTipsWhenApplicationIsInactive and returns the receiver so calls can be chained.
+// WithAllowsToolTipsWhenApplicationIsInactive a Boolean value that indicates whether the window can display tooltips even when the application is in the background.
 func (x *OpenPanel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsToolTipsWhenApplicationIsInactive:"), allowsToolTipsWhenApplicationIsInactive)
 	return x
 }
 
-// The window’s backing store type.
-//
-// WithBackingType sets backingType and returns the receiver so calls can be chained.
+// WithBackingType the window’s backing store type.
 func (x *OpenPanel) WithBackingType(backingType BackingStoreType) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackingType:"), backingType)
 	return x
 }
 
-// The window level of the window.
-//
-// WithLevel sets level and returns the receiver so calls can be chained.
+// WithLevel the window level of the window.
 func (x *OpenPanel) WithLevel(level int) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevel:"), level)
 	return x
 }
 
-// The depth limit of the window.
-//
-// WithDepthLimit sets depthLimit and returns the receiver so calls can be chained.
+// WithDepthLimit the depth limit of the window.
 func (x *OpenPanel) WithDepthLimit(depthLimit WindowDepth) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthLimit:"), depthLimit)
 	return x
 }
 
-// A Boolean value that indicates whether the window has a shadow.
-//
-// WithHasShadow sets hasShadow and returns the receiver so calls can be chained.
+// WithHasShadow a Boolean value that indicates whether the window has a shadow.
 func (x *OpenPanel) WithHasShadow(hasShadow bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasShadow:"), hasShadow)
 	return x
 }
 
-// The window’s alpha value.
-//
-// WithAlphaValue sets alphaValue and returns the receiver so calls can be chained.
+// WithAlphaValue the window’s alpha value.
 func (x *OpenPanel) WithAlphaValue(alphaValue float64) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// A Boolean value that indicates whether the window is opaque.
-//
-// WithOpaque sets opaque and returns the receiver so calls can be chained.
+// WithOpaque a Boolean value that indicates whether the window is opaque.
 func (x *OpenPanel) WithOpaque(opaque bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
 	return x
 }
 
-// A Boolean value that indicates the level of access other processes have to the window’s content.
-//
-// WithSharingType sets sharingType and returns the receiver so calls can be chained.
+// WithSharingType a Boolean value that indicates the level of access other processes have to the window’s content.
 func (x *OpenPanel) WithSharingType(sharingType WindowSharingType) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharingType:"), sharingType)
 	return x
 }
 
-// A Boolean value that indicates whether the window allows multithreaded view drawing.
-//
-// WithAllowsConcurrentViewDrawing sets allowsConcurrentViewDrawing and returns the receiver so calls can be chained.
+// WithAllowsConcurrentViewDrawing a Boolean value that indicates whether the window allows multithreaded view drawing.
 func (x *OpenPanel) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsConcurrentViewDrawing:"), allowsConcurrentViewDrawing)
 	return x
 }
 
-// A Boolean value that indicates whether the window context should be updated when the screen profile changes or when the window moves to a different screen.
-//
-// WithDisplaysWhenScreenProfileChanges sets displaysWhenScreenProfileChanges and returns the receiver so calls can be chained.
+// WithDisplaysWhenScreenProfileChanges a Boolean value that indicates whether the window context should be updated when the screen profile changes or when the window moves to a different screen.
 func (x *OpenPanel) WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysWhenScreenProfileChanges:"), displaysWhenScreenProfileChanges)
 	return x
 }
 
-// A Boolean value that indicates whether the window can be displayed at the login window.
-//
-// WithCanBecomeVisibleWithoutLogin sets canBecomeVisibleWithoutLogin and returns the receiver so calls can be chained.
+// WithCanBecomeVisibleWithoutLogin a Boolean value that indicates whether the window can be displayed at the login window.
 func (x *OpenPanel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanBecomeVisibleWithoutLogin:"), canBecomeVisibleWithoutLogin)
 	return x
 }
 
-// A value that identifies the window’s behavior in window collections.
-//
-// WithCollectionBehavior sets collectionBehavior and returns the receiver so calls can be chained.
+// WithCollectionBehavior a value that identifies the window’s behavior in window collections.
 func (x *OpenPanel) WithCollectionBehavior(collectionBehavior WindowCollectionBehavior) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollectionBehavior:"), collectionBehavior)
 	return x
 }
 
-// The window’s automatic animation behavior.
-//
-// WithAnimationBehavior sets animationBehavior and returns the receiver so calls can be chained.
+// WithAnimationBehavior the window’s automatic animation behavior.
 func (x *OpenPanel) WithAnimationBehavior(animationBehavior WindowAnimationBehavior) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationBehavior:"), animationBehavior)
 	return x
 }
 
-// The name used to automatically save the window’s frame rectangle data in the defaults system.
-//
-// WithFrameAutosaveName sets frameAutosaveName and returns the receiver so calls can be chained.
+// WithFrameAutosaveName the name used to automatically save the window’s frame rectangle data in the defaults system.
 func (x *OpenPanel) WithFrameAutosaveName(frameAutosaveName obj.Object) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameAutosaveName:"), objref.IDOf(frameAutosaveName))
 	return x
 }
 
-// The window’s window controller.
-//
-// WithWindowController sets windowController and returns the receiver so calls can be chained.
+// WithMinSize the minimum size to which the window’s frame (including its title bar) can be sized.
+func (x *OpenPanel) WithMinSize(minSize corefoundation.CGSize) *OpenPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinSize:"), minSize)
+	return x
+}
+
+// WithMaxSize the maximum size to which the window’s frame (including its title bar) can be sized.
+func (x *OpenPanel) WithMaxSize(maxSize corefoundation.CGSize) *OpenPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSize:"), maxSize)
+	return x
+}
+
+// WithContentMinSize the minimum size of the window’s content view in the window’s base coordinate system.
+func (x *OpenPanel) WithContentMinSize(contentMinSize corefoundation.CGSize) *OpenPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentMinSize:"), contentMinSize)
+	return x
+}
+
+// WithContentMaxSize the maximum size of the window’s content view in the window’s base coordinate system.
+func (x *OpenPanel) WithContentMaxSize(contentMaxSize corefoundation.CGSize) *OpenPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentMaxSize:"), contentMaxSize)
+	return x
+}
+
+// WithMinFullScreenContentSize a minimum size that is used to determine if a window can fit when it is in full screen in a tile.
+func (x *OpenPanel) WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *OpenPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinFullScreenContentSize:"), minFullScreenContentSize)
+	return x
+}
+
+// WithMaxFullScreenContentSize a maximum size that is used to determine if a window can fit when it is in full screen in a tile.
+func (x *OpenPanel) WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *OpenPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxFullScreenContentSize:"), maxFullScreenContentSize)
+	return x
+}
+
+// WithWindowController the window’s window controller.
 func (x *OpenPanel) WithWindowController(windowController *WindowController) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindowController:"), objref.IDOf(windowController))
 	return x
 }
 
-// The parent window to which the window is attached as a child.
-//
-// WithParentWindow sets parentWindow and returns the receiver so calls can be chained.
+// WithParentWindow the parent window to which the window is attached as a child.
 func (x *OpenPanel) WithParentWindow(parentWindow WindowProvider) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
 	return x
 }
 
-// An object that the window inherits its appearance from.
-//
-// WithAppearanceSource sets appearanceSource and returns the receiver so calls can be chained.
+// WithAppearanceSource an object that the window inherits its appearance from.
 func (x *OpenPanel) WithAppearanceSource(appearanceSource obj.Object) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppearanceSource:"), objref.IDOf(appearanceSource))
 	return x
 }
 
-// The window’s color space.
-//
-// WithColorSpace sets colorSpace and returns the receiver so calls can be chained.
+// WithColorSpace the window’s color space.
 func (x *OpenPanel) WithColorSpace(colorSpace *ColorSpace) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
 	return x
 }
 
-// The type of separator that the app displays between the title bar and content of a window.
-//
-// WithTitlebarSeparatorStyle sets titlebarSeparatorStyle and returns the receiver so calls can be chained.
+// WithTitlebarSeparatorStyle the type of separator that the app displays between the title bar and content of a window.
 func (x *OpenPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle TitlebarSeparatorStyle) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlebarSeparatorStyle:"), titlebarSeparatorStyle)
 	return x
 }
 
-// The main content view controller for the window.
-//
-// WithContentViewController sets contentViewController and returns the receiver so calls can be chained.
+// WithContentViewController the main content view controller for the window.
 func (x *OpenPanel) WithContentViewController(contentViewController ViewControllerProvider) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
 	return x
 }
 
-// The view that’s made first responder (also called the key view) the first time the window is placed onscreen.
-//
-// WithInitialFirstResponder sets initialFirstResponder and returns the receiver so calls can be chained.
+// WithInitialFirstResponder the view that’s made first responder (also called the key view) the first time the window is placed onscreen.
 func (x *OpenPanel) WithInitialFirstResponder(initialFirstResponder ViewProvider) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialFirstResponder:"), objref.IDOf(initialFirstResponder))
 	return x
 }
 
-// The button cell that performs as if clicked when the window receives a Return (or Enter) key event.
-//
-// WithDefaultButtonCell sets defaultButtonCell and returns the receiver so calls can be chained.
+// WithDefaultButtonCell the button cell that performs as if clicked when the window receives a Return (or Enter) key event.
 func (x *OpenPanel) WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultButtonCell:"), objref.IDOf(defaultButtonCell))
 	return x
 }
 
-// A Boolean value that indicates whether the window automatically recalculates the key view loop when views are added.
-//
-// WithAutorecalculatesKeyViewLoop sets autorecalculatesKeyViewLoop and returns the receiver so calls can be chained.
+// WithAutorecalculatesKeyViewLoop a Boolean value that indicates whether the window automatically recalculates the key view loop when views are added.
 func (x *OpenPanel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutorecalculatesKeyViewLoop:"), autorecalculatesKeyViewLoop)
 	return x
 }
 
-// The window’s toolbar.
-//
-// WithToolbar sets toolbar and returns the receiver so calls can be chained.
+// WithToolbar the window’s toolbar.
 func (x *OpenPanel) WithToolbar(toolbar *Toolbar) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolbar:"), objref.IDOf(toolbar))
 	return x
 }
 
-// A Boolean value that indicates whether the toolbar control button is currently displayed.
-//
-// WithShowsToolbarButton sets showsToolbarButton and returns the receiver so calls can be chained.
+// WithShowsToolbarButton a Boolean value that indicates whether the toolbar control button is currently displayed.
 func (x *OpenPanel) WithShowsToolbarButton(showsToolbarButton bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsToolbarButton:"), showsToolbarButton)
 	return x
 }
 
-// A value that indicates when a window displays tabs.
-//
-// WithTabbingMode sets tabbingMode and returns the receiver so calls can be chained.
+// WithTabbingMode a value that indicates when a window displays tabs.
 func (x *OpenPanel) WithTabbingMode(tabbingMode WindowTabbingMode) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabbingMode:"), tabbingMode)
 	return x
 }
 
-// A value that allows a group of related windows.
-//
-// WithTabbingIdentifier sets tabbingIdentifier and returns the receiver so calls can be chained.
+// WithTabbingIdentifier a value that allows a group of related windows.
 func (x *OpenPanel) WithTabbingIdentifier(tabbingIdentifier obj.Object) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabbingIdentifier:"), objref.IDOf(tabbingIdentifier))
 	return x
 }
 
-// A Boolean value that indicates whether the window accepts mouse-moved events.
-//
-// WithAcceptsMouseMovedEvents sets acceptsMouseMovedEvents and returns the receiver so calls can be chained.
+// WithAcceptsMouseMovedEvents a Boolean value that indicates whether the window accepts mouse-moved events.
 func (x *OpenPanel) WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsMouseMovedEvents:"), acceptsMouseMovedEvents)
 	return x
 }
 
-// A Boolean value that indicates whether the window is transparent to mouse events.
-//
-// WithIgnoresMouseEvents sets ignoresMouseEvents and returns the receiver so calls can be chained.
+// WithIgnoresMouseEvents a Boolean value that indicates whether the window is transparent to mouse events.
 func (x *OpenPanel) WithIgnoresMouseEvents(ignoresMouseEvents bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMouseEvents:"), ignoresMouseEvents)
 	return x
 }
 
-// WithAutodisplay sets autodisplay and returns the receiver so calls can be chained.
+// WithAutodisplay sets the property and returns the receiver so calls can be chained.
 func (x *OpenPanel) WithAutodisplay(autodisplay bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutodisplay:"), autodisplay)
 	return x
 }
 
-// WithOneShot sets oneShot and returns the receiver so calls can be chained.
+// WithOneShot sets the property and returns the receiver so calls can be chained.
 func (x *OpenPanel) WithOneShot(oneShot bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOneShot:"), oneShot)
 	return x
 }
 
-// WithPreferredBackingLocation sets preferredBackingLocation and returns the receiver so calls can be chained.
+// WithPreferredBackingLocation sets the property and returns the receiver so calls can be chained.
 func (x *OpenPanel) WithPreferredBackingLocation(preferredBackingLocation WindowBackingLocation) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredBackingLocation:"), preferredBackingLocation)
 	return x
 }
 
-// WithShowsResizeIndicator sets showsResizeIndicator and returns the receiver so calls can be chained.
+// WithShowsResizeIndicator sets the property and returns the receiver so calls can be chained.
 func (x *OpenPanel) WithShowsResizeIndicator(showsResizeIndicator bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsResizeIndicator:"), showsResizeIndicator)
 	return x
 }
 
-// The zero-based position of the window, based on its order from front to back among all visible application windows.
-//
-// WithOrderedIndex sets orderedIndex and returns the receiver so calls can be chained.
+// WithOrderedIndex the zero-based position of the window, based on its order from front to back among all visible application windows.
 func (x *OpenPanel) WithOrderedIndex(orderedIndex int) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrderedIndex:"), orderedIndex)
 	return x
 }
 
-// A Boolean value indicating whether the window configuration is preserved between application launches.
-//
-// WithRestorable sets restorable and returns the receiver so calls can be chained.
+// WithRestorable a Boolean value indicating whether the window configuration is preserved between application launches.
 func (x *OpenPanel) WithRestorable(restorable bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRestorable:"), restorable)
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *OpenPanel) WithNextResponder(nextResponder ResponderProvider) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets menu and returns the receiver so calls can be chained.
+// WithMenu returns the responder’s menu.
 func (x *OpenPanel) WithMenu(menu *Menu) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity an object encapsulating a user activity supported by this responder.
 func (x *OpenPanel) WithUserActivity(userActivity obj.Object) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *OpenPanel) WithTouchBar(touchBar *TouchBar) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
+// URLs wraps the corresponding Objective-C method.
+//
 // URLs returns the collection as a Go slice.
 func (x *OpenPanel) URLs() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// ResolvesAliases wraps the corresponding Objective-C method.
 func (x *OpenPanel) ResolvesAliases() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("resolvesAliases"))
 	return _r
 }
 
+// SetResolvesAliases wraps the corresponding Objective-C method.
 func (x *OpenPanel) SetResolvesAliases(resolvesAliases bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolvesAliases:"), resolvesAliases)
 }
 
+// CanChooseDirectories wraps the corresponding Objective-C method.
 func (x *OpenPanel) CanChooseDirectories() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canChooseDirectories"))
 	return _r
 }
 
+// SetCanChooseDirectories wraps the corresponding Objective-C method.
 func (x *OpenPanel) SetCanChooseDirectories(canChooseDirectories bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanChooseDirectories:"), canChooseDirectories)
 }
 
+// AllowsMultipleSelection wraps the corresponding Objective-C method.
 func (x *OpenPanel) AllowsMultipleSelection() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsMultipleSelection"))
 	return _r
 }
 
+// SetAllowsMultipleSelection wraps the corresponding Objective-C method.
 func (x *OpenPanel) SetAllowsMultipleSelection(allowsMultipleSelection bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMultipleSelection:"), allowsMultipleSelection)
 }
 
+// CanChooseFiles wraps the corresponding Objective-C method.
 func (x *OpenPanel) CanChooseFiles() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canChooseFiles"))
 	return _r
 }
 
+// SetCanChooseFiles wraps the corresponding Objective-C method.
 func (x *OpenPanel) SetCanChooseFiles(canChooseFiles bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanChooseFiles:"), canChooseFiles)
 }
 
+// CanResolveUbiquitousConflicts wraps the corresponding Objective-C method.
 func (x *OpenPanel) CanResolveUbiquitousConflicts() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canResolveUbiquitousConflicts"))
 	return _r
 }
 
+// SetCanResolveUbiquitousConflicts wraps the corresponding Objective-C method.
 func (x *OpenPanel) SetCanResolveUbiquitousConflicts(canResolveUbiquitousConflicts bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanResolveUbiquitousConflicts:"), canResolveUbiquitousConflicts)
 }
 
+// CanDownloadUbiquitousContents wraps the corresponding Objective-C method.
 func (x *OpenPanel) CanDownloadUbiquitousContents() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canDownloadUbiquitousContents"))
 	return _r
 }
 
+// SetCanDownloadUbiquitousContents wraps the corresponding Objective-C method.
 func (x *OpenPanel) SetCanDownloadUbiquitousContents(canDownloadUbiquitousContents bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDownloadUbiquitousContents:"), canDownloadUbiquitousContents)
 }
 
+// IsAccessoryViewDisclosed wraps the corresponding Objective-C method.
 func (x *OpenPanel) IsAccessoryViewDisclosed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAccessoryViewDisclosed"))
 	return _r
 }
 
+// SetAccessoryViewDisclosed wraps the corresponding Objective-C method.
 func (x *OpenPanel) SetAccessoryViewDisclosed(accessoryViewDisclosed bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryViewDisclosed:"), accessoryViewDisclosed)
 }
 
+// Filenames wraps the corresponding Objective-C method.
 func (x *OpenPanel) Filenames() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filenames"))
 	return obj.Wrap(_r)
 }
 
+// RunModalForDirectoryFileTypes wraps the corresponding Objective-C method.
 func (x *OpenPanel) RunModalForDirectoryFileTypes(path string, name string, fileTypes obj.Object) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalForDirectory:file:types:"), purego.NSString(path), purego.NSString(name), objref.IDOf(fileTypes))
 	return _r
 }
 
+// RunModalForTypes wraps the corresponding Objective-C method.
 func (x *OpenPanel) RunModalForTypes(fileTypes obj.Object) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalForTypes:"), objref.IDOf(fileTypes))
 	return _r
@@ -915,6 +810,10 @@ type OpenPanelable interface {
 	WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *OpenPanel
 	WithContentView(contentView ViewProvider) *OpenPanel
 	WithStyleMask(styleMask WindowStyleMask) *OpenPanel
+	WithResizeIncrements(resizeIncrements corefoundation.CGSize) *OpenPanel
+	WithAspectRatio(aspectRatio corefoundation.CGSize) *OpenPanel
+	WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *OpenPanel
+	WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *OpenPanel
 	WithViewsNeedDisplay(viewsNeedDisplay bool) *OpenPanel
 	WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *OpenPanel
 	WithReleasedWhenClosed(releasedWhenClosed bool) *OpenPanel
@@ -941,6 +840,12 @@ type OpenPanelable interface {
 	WithCollectionBehavior(collectionBehavior WindowCollectionBehavior) *OpenPanel
 	WithAnimationBehavior(animationBehavior WindowAnimationBehavior) *OpenPanel
 	WithFrameAutosaveName(frameAutosaveName obj.Object) *OpenPanel
+	WithMinSize(minSize corefoundation.CGSize) *OpenPanel
+	WithMaxSize(maxSize corefoundation.CGSize) *OpenPanel
+	WithContentMinSize(contentMinSize corefoundation.CGSize) *OpenPanel
+	WithContentMaxSize(contentMaxSize corefoundation.CGSize) *OpenPanel
+	WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *OpenPanel
+	WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *OpenPanel
 	WithWindowController(windowController *WindowController) *OpenPanel
 	WithParentWindow(parentWindow WindowProvider) *OpenPanel
 	WithAppearanceSource(appearanceSource obj.Object) *OpenPanel
@@ -987,3 +892,11 @@ type OpenPanelable interface {
 }
 
 var _ OpenPanelable = (*OpenPanel)(nil)
+
+var _ SavePanelProvider = (*OpenPanel)(nil)
+
+var _ PanelProvider = (*OpenPanel)(nil)
+
+var _ WindowProvider = (*OpenPanel)(nil)
+
+var _ ResponderProvider = (*OpenPanel)(nil)

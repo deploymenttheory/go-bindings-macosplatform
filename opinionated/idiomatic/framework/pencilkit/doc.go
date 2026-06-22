@@ -3,4 +3,12 @@
 //go:build darwin
 
 // Package pencilkit provides a fluent Go API over the macOS PencilKit framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - Tool: [EraserTool], [InkingTool], [LassoTool]
+//   - ToolPickerItem: [ToolPickerEraserItem], [ToolPickerInkingItem]
 package pencilkit

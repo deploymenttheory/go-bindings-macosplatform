@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The MCAdvertiserAssistant is a convenience class that handles advertising, presents incoming invitations to the user, and handles users’ responses. Use this class to provide a user interface for handling invitations when your app does not require programmatic control over the invitation process.
-//
 // AdvertiserAssistant is an idiomatic wrapper over the Objective-C class MCAdvertiserAssistant.
+//
+// The MCAdvertiserAssistant is a convenience class that handles advertising, presents incoming invitations to the user, and handles users’ responses. Use this class to provide a user interface for handling invitations when your app does not require programmatic control over the invitation process.
 type AdvertiserAssistant struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AdvertiserAssistantFromID(id objc.ID) *AdvertiserAssistant {
 	if id == 0 {
 		return nil
 	}
-	x := &AdvertiserAssistant{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AdvertiserAssistant{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func advertiserAssistantAdopt(id objc.ID) *AdvertiserAssistant {
 	if id == 0 {
 		return nil
 	}
-	x := &AdvertiserAssistant{Handle: objref.Wrap(id)}
+	x := &AdvertiserAssistant{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,35 +60,42 @@ func (x *AdvertiserAssistant) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes an advertiser assistant object.
-//
-// NewAdvertiserAssistantWithServiceTypeDiscoveryInfoSession creates a new AdvertiserAssistant.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AdvertiserAssistant) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAdvertiserAssistantWithServiceTypeDiscoveryInfoSession initializes an advertiser assistant object.
 func NewAdvertiserAssistantWithServiceTypeDiscoveryInfoSession(serviceType string, info obj.Object, session *Session) *AdvertiserAssistant {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MCAdvertiserAssistant")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceType:discoveryInfo:session:"), purego.NSString(serviceType), objref.IDOf(info), objref.IDOf(session))
 	return advertiserAssistantAdopt(_id)
 }
 
-// Begins advertising the service provided by a local peer and starts the assistant.
+// Start begins advertising the service provided by a local peer and starts the assistant.
 func (x *AdvertiserAssistant) Start() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
 }
 
-// Stops advertising the service provided by a local peer and stops the assistant.
+// Stop stops advertising the service provided by a local peer and stops the assistant.
 func (x *AdvertiserAssistant) Stop() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
+// Session wraps the corresponding Objective-C method.
 func (x *AdvertiserAssistant) Session() *Session {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("session"))
 	return SessionFromID(_r)
 }
 
+// DiscoveryInfo wraps the corresponding Objective-C method.
 func (x *AdvertiserAssistant) DiscoveryInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discoveryInfo"))
 	return obj.Wrap(_r)
 }
 
+// ServiceType wraps the corresponding Objective-C method.
 func (x *AdvertiserAssistant) ServiceType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceType"))
 	if _r == 0 {

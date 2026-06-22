@@ -9,16 +9,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An observation that provides the 3D body points the request recognizes.
-//
 // HumanBodyPose3DObservation is an idiomatic wrapper over the Objective-C class VNHumanBodyPose3DObservation.
+//
+// It embeds [RecognizedPoints3DObservation], promoting that type's methods.
+//
+// An observation that provides the 3D body points the request recognizes.
 type HumanBodyPose3DObservation struct {
-	objref.Handle
+	RecognizedPoints3DObservation
 }
 
 // HumanBodyPose3DObservationFromID adopts an existing Objective-C object as a HumanBodyPose3DObservation
@@ -27,7 +28,8 @@ func HumanBodyPose3DObservationFromID(id objc.ID) *HumanBodyPose3DObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &HumanBodyPose3DObservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HumanBodyPose3DObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,24 +42,10 @@ func humanBodyPose3DObservationAdopt(id objc.ID) *HumanBodyPose3DObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &HumanBodyPose3DObservation{Handle: objref.Wrap(id)}
+	x := &HumanBodyPose3DObservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *HumanBodyPose3DObservation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HumanBodyPose3DObservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HumanBodyPose3DObservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewHumanBodyPose3DObservation creates a new HumanBodyPose3DObservation.
@@ -66,8 +54,8 @@ func NewHumanBodyPose3DObservation() *HumanBodyPose3DObservation {
 	return humanBodyPose3DObservationAdopt(_id)
 }
 
-// Returns a collection of points for the group name you specify.
-func (x *HumanBodyPose3DObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName obj.Object) (obj.Object, error) {
+// RecognizedPointsForJointsGroupNameError returns a collection of points for the group name you specify.
+func (x *HumanBodyPose3DObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName obj.Object) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recognizedPointsForJointsGroupName:error:"), objref.IDOf(jointsGroupName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -76,8 +64,8 @@ func (x *HumanBodyPose3DObservation) RecognizedPointsForJointsGroupNameError(joi
 	return obj.Wrap(_r), nil
 }
 
-// Returns the point for a joint name that the observation recognizes.
-func (x *HumanBodyPose3DObservation) RecognizedPointForJointNameError(jointName obj.Object) (*HumanBodyRecognizedPoint3D, error) {
+// RecognizedPointForJointNameError returns the point for a joint name that the observation recognizes.
+func (x *HumanBodyPose3DObservation) RecognizedPointForJointNameError(jointName obj.Object) (result *HumanBodyRecognizedPoint3D, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recognizedPointForJointName:error:"), objref.IDOf(jointName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -86,8 +74,8 @@ func (x *HumanBodyPose3DObservation) RecognizedPointForJointNameError(jointName 
 	return HumanBodyRecognizedPoint3DFromID(_r), nil
 }
 
-// Returns a 2D point for the joint name you specify, relative to the input image.
-func (x *HumanBodyPose3DObservation) PointInImageForJointNameError(jointName obj.Object) (*Point, error) {
+// PointInImageForJointNameError returns a 2D point for the joint name you specify, relative to the input image.
+func (x *HumanBodyPose3DObservation) PointInImageForJointNameError(jointName obj.Object) (result *Point, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointInImageForJointName:error:"), objref.IDOf(jointName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -96,19 +84,19 @@ func (x *HumanBodyPose3DObservation) PointInImageForJointNameError(jointName obj
 	return PointFromID(_r), nil
 }
 
-// Returns the parent joint of the joint name you specify.
+// ParentJointNameForJointName returns the parent joint of the joint name you specify.
 func (x *HumanBodyPose3DObservation) ParentJointNameForJointName(jointName obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentJointNameForJointName:"), objref.IDOf(jointName))
 	return obj.Wrap(_r)
 }
 
-// Technique used to estimate body height.   `VNHumanBodyPose3DObservationHeightEstimationMeasured`   indicates`bodyHeight` returns measured height in meters more accurate to true world height. `VNHumanBodyPose3DObservationHeightEstimationReference` indicates `bodyHeight` returns reference height of 1.8 m
+// HeightEstimation technique used to estimate body height.   `VNHumanBodyPose3DObservationHeightEstimationMeasured`   indicates`bodyHeight` returns measured height in meters more accurate to true world height. `VNHumanBodyPose3DObservationHeightEstimationReference` indicates `bodyHeight` returns reference height of 1.8 m
 func (x *HumanBodyPose3DObservation) HeightEstimation() HumanBodyPose3DObservationHeightEstimation {
 	_r := objc.Send[HumanBodyPose3DObservationHeightEstimation](objref.IDOf(x), objc.RegisterName("heightEstimation"))
 	return _r
 }
 
-// All of the joints group names available in the observation.
+// AvailableJointsGroupNames all of the joints group names available in the observation.
 //
 // AvailableJointsGroupNames returns the collection as a Go slice.
 func (x *HumanBodyPose3DObservation) AvailableJointsGroupNames() []obj.Object {
@@ -116,7 +104,7 @@ func (x *HumanBodyPose3DObservation) AvailableJointsGroupNames() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// All of the joint names available in the observation.
+// AvailableJointNames all of the joint names available in the observation.
 //
 // AvailableJointNames returns the collection as a Go slice.
 func (x *HumanBodyPose3DObservation) AvailableJointNames() []obj.Object {
@@ -124,7 +112,7 @@ func (x *HumanBodyPose3DObservation) AvailableJointNames() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Estimated human height, in meters.
+// BodyHeight estimated human height, in meters.
 func (x *HumanBodyPose3DObservation) BodyHeight() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("bodyHeight"))
 	return _r
@@ -133,9 +121,9 @@ func (x *HumanBodyPose3DObservation) BodyHeight() float32 {
 // HumanBodyPose3DObservationable is the interface implemented by [HumanBodyPose3DObservation], for mocking and DI.
 type HumanBodyPose3DObservationable interface {
 	obj.Object
-	RecognizedPointsForJointsGroupNameError(jointsGroupName obj.Object) (obj.Object, error)
-	RecognizedPointForJointNameError(jointName obj.Object) (*HumanBodyRecognizedPoint3D, error)
-	PointInImageForJointNameError(jointName obj.Object) (*Point, error)
+	RecognizedPointsForJointsGroupNameError(jointsGroupName obj.Object) (result obj.Object, err error)
+	RecognizedPointForJointNameError(jointName obj.Object) (result *HumanBodyRecognizedPoint3D, err error)
+	PointInImageForJointNameError(jointName obj.Object) (result *Point, err error)
 	ParentJointNameForJointName(jointName obj.Object) obj.Object
 	HeightEstimation() HumanBodyPose3DObservationHeightEstimation
 	AvailableJointsGroupNames() []obj.Object
@@ -144,3 +132,7 @@ type HumanBodyPose3DObservationable interface {
 }
 
 var _ HumanBodyPose3DObservationable = (*HumanBodyPose3DObservation)(nil)
+
+var _ RecognizedPoints3DObservationProvider = (*HumanBodyPose3DObservation)(nil)
+
+var _ ObservationProvider = (*HumanBodyPose3DObservation)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A WebArchive object represents a webpage that can be archived—for example, archived on disk or on the pasteboard. A WebArchive object contains the main resource, as well as the subresources and subframes of the main resource. The main resource can be an entire webpage, a portion of a webpage, or some other kind of data such as an image. Use this class to archive webpages, or place a portion of a webpage on the pasteboard, or to represent rich web content in any application.
-//
 // WebArchive is an idiomatic wrapper over the Objective-C class WebArchive.
+//
+// A WebArchive object represents a webpage that can be archived—for example, archived on disk or on the pasteboard. A WebArchive object contains the main resource, as well as the subresources and subframes of the main resource. The main resource can be an entire webpage, a portion of a webpage, or some other kind of data such as an image. Use this class to archive webpages, or place a portion of a webpage on the pasteboard, or to represent rich web content in any application.
 type WebArchive struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WebArchiveFromID(id objc.ID) *WebArchive {
 	if id == 0 {
 		return nil
 	}
-	x := &WebArchive{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WebArchive{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func webArchiveAdopt(id objc.ID) *WebArchive {
 	if id == 0 {
 		return nil
 	}
-	x := &WebArchive{Handle: objref.Wrap(id)}
+	x := &WebArchive{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,43 +60,45 @@ func (x *WebArchive) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes the receiver with a resource and optional subresources and subframe archives..
-//
-// NewWebArchiveWithMainResourceSubresourcesSubframeArchives creates a new WebArchive.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WebArchive) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWebArchiveWithMainResourceSubresourcesSubframeArchives initializes the receiver with a resource and optional subresources and subframe archives..
 func NewWebArchiveWithMainResourceSubresourcesSubframeArchives(mainResource *WebResource, subresources obj.Object, subframeArchives obj.Object) *WebArchive {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("WebArchive")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMainResource:subresources:subframeArchives:"), objref.IDOf(mainResource), objref.IDOf(subresources), objref.IDOf(subframeArchives))
 	return webArchiveAdopt(_id)
 }
 
-// Initializes and returns the receiver, specifying the initial content data.
-//
-// NewWebArchiveWithData creates a new WebArchive.
+// NewWebArchiveWithData initializes and returns the receiver, specifying the initial content data.
 func NewWebArchiveWithData(data obj.Object) *WebArchive {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("WebArchive")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
 	return webArchiveAdopt(_id)
 }
 
-// The main resource of the archive.
+// MainResource the main resource of the archive.
 func (x *WebArchive) MainResource() *WebResource {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainResource"))
 	return WebResourceFromID(_r)
 }
 
-// The subresource of the archive (can be nil).
+// Subresources the subresource of the archive (can be nil).
 func (x *WebArchive) Subresources() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subresources"))
 	return obj.Wrap(_r)
 }
 
-// The archives representing the subframes of the archive (can be nil).
+// SubframeArchives the archives representing the subframes of the archive (can be nil).
 func (x *WebArchive) SubframeArchives() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subframeArchives"))
 	return obj.Wrap(_r)
 }
 
-// The data representation of the archive. The data returned by this method can be used to save a web archive to a file or to place a web archive on the pasteboard using WebArchivePboardType. To create a WebArchive using the returned data, call initWithData:.
+// Data the data representation of the archive. The data returned by this method can be used to save a web archive to a file or to place a web archive on the pasteboard using WebArchivePboardType. To create a WebArchive using the returned data, call initWithData:.
 func (x *WebArchive) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)

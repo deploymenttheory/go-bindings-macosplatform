@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request to change asset data in a Photos project extension.
-//
 // ProjectChangeRequest is an idiomatic wrapper over the Objective-C class PHProjectChangeRequest.
+//
+// It embeds [ChangeRequest], promoting that type's methods.
+//
+// A request to change asset data in a Photos project extension.
 type ProjectChangeRequest struct {
-	objref.Handle
+	ChangeRequest
 }
 
 // ProjectChangeRequestFromID adopts an existing Objective-C object as a ProjectChangeRequest
@@ -25,7 +26,8 @@ func ProjectChangeRequestFromID(id objc.ID) *ProjectChangeRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &ProjectChangeRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ProjectChangeRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,61 +40,42 @@ func projectChangeRequestAdopt(id objc.ID) *ProjectChangeRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &ProjectChangeRequest{Handle: objref.Wrap(id)}
+	x := &ProjectChangeRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ProjectChangeRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ProjectChangeRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ProjectChangeRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a change request around the specified project.
-//
-// NewProjectChangeRequestWithProject creates a new ProjectChangeRequest.
+// NewProjectChangeRequestWithProject creates a change request around the specified project.
 func NewProjectChangeRequestWithProject(project *Project) *ProjectChangeRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHProjectChangeRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProject:"), objref.IDOf(project))
 	return projectChangeRequestAdopt(_id)
 }
 
-// The title of the change request.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the title of the change request.
 func (x *ProjectChangeRequest) WithTitle(title string) *ProjectChangeRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// Compressed project-specific data to use in the change request.
-//
-// WithProjectExtensionData sets projectExtensionData and returns the receiver so calls can be chained.
+// WithProjectExtensionData compressed project-specific data to use in the change request.
 func (x *ProjectChangeRequest) WithProjectExtensionData(projectExtensionData obj.Object) *ProjectChangeRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProjectExtensionData:"), objref.IDOf(projectExtensionData))
 	return x
 }
 
-// Sets the key asset representing the project.
+// SetKeyAsset sets the key asset representing the project.
 func (x *ProjectChangeRequest) SetKeyAsset(keyAsset *Asset) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyAsset:"), objref.IDOf(keyAsset))
 }
 
-// Updates the project preview in Photos.
+// SetProjectPreviewImage updates the project preview in Photos.
 func (x *ProjectChangeRequest) SetProjectPreviewImage(previewImage obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProjectPreviewImage:"), objref.IDOf(previewImage))
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *ProjectChangeRequest) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -101,17 +84,18 @@ func (x *ProjectChangeRequest) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *ProjectChangeRequest) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// The projectExtensionData property is intended for storage of compressed, project specific data only. Do not include things like rasterized images that can be locally cached in this data. The total size of stored data is limited to 5 MB. Attempting to store more data than allowed will result in an error.
+// ProjectExtensionData the projectExtensionData property is intended for storage of compressed, project specific data only. Do not include things like rasterized images that can be locally cached in this data. The total size of stored data is limited to 5 MB. Attempting to store more data than allowed will result in an error.
 func (x *ProjectChangeRequest) ProjectExtensionData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("projectExtensionData"))
 	return obj.Wrap(_r)
 }
 
-// The projectExtensionData property is intended for storage of compressed, project specific data only. Do not include things like rasterized images that can be locally cached in this data. The total size of stored data is limited to 5 MB. Attempting to store more data than allowed will result in an error.
+// SetProjectExtensionData the projectExtensionData property is intended for storage of compressed, project specific data only. Do not include things like rasterized images that can be locally cached in this data. The total size of stored data is limited to 5 MB. Attempting to store more data than allowed will result in an error.
 func (x *ProjectChangeRequest) SetProjectExtensionData(projectExtensionData obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProjectExtensionData:"), objref.IDOf(projectExtensionData))
 }
@@ -130,3 +114,5 @@ type ProjectChangeRequestable interface {
 }
 
 var _ ProjectChangeRequestable = (*ProjectChangeRequest)(nil)
+
+var _ ChangeRequestProvider = (*ProjectChangeRequest)(nil)

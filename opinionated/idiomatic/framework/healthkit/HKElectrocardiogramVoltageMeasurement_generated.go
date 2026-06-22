@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The voltage for all leads at a single point in time.
-//
 // ElectrocardiogramVoltageMeasurement is an idiomatic wrapper over the Objective-C class HKElectrocardiogramVoltageMeasurement.
+//
+// The voltage for all leads at a single point in time.
 type ElectrocardiogramVoltageMeasurement struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ElectrocardiogramVoltageMeasurementFromID(id objc.ID) *ElectrocardiogramVol
 	if id == 0 {
 		return nil
 	}
-	x := &ElectrocardiogramVoltageMeasurement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ElectrocardiogramVoltageMeasurement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func electrocardiogramVoltageMeasurementAdopt(id objc.ID) *ElectrocardiogramVolt
 	if id == 0 {
 		return nil
 	}
-	x := &ElectrocardiogramVoltageMeasurement{Handle: objref.Wrap(id)}
+	x := &ElectrocardiogramVoltageMeasurement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *ElectrocardiogramVoltageMeasurement) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ElectrocardiogramVoltageMeasurement) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewElectrocardiogramVoltageMeasurement creates a new ElectrocardiogramVoltageMeasurement.
 func NewElectrocardiogramVoltageMeasurement() *ElectrocardiogramVoltageMeasurement {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKElectrocardiogramVoltageMeasurement")), objc.RegisterName("new"))
 	return electrocardiogramVoltageMeasurementAdopt(_id)
 }
 
-// Returns an HKQuantity for the specified lead with a unit compatible with [HKUnit voltUnit].
+// QuantityForLead returns an HKQuantity for the specified lead with a unit compatible with [HKUnit voltUnit].
 func (x *ElectrocardiogramVoltageMeasurement) QuantityForLead(lead ElectrocardiogramLead) *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("quantityForLead:"), lead)
 	return QuantityFromID(_r)
 }
 
-// The time interval between this voltage measurement and the start of the sample.
+// TimeSinceSampleStart the time interval between this voltage measurement and the start of the sample.
 func (x *ElectrocardiogramVoltageMeasurement) TimeSinceSampleStart() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeSinceSampleStart"))
 	return _r

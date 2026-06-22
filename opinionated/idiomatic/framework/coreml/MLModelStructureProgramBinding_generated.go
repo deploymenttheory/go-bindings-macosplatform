@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class representing a binding in the Program
-//
 // ModelStructureProgramBinding is an idiomatic wrapper over the Objective-C class MLModelStructureProgramBinding.
+//
+// A class representing a binding in the Program
 type ModelStructureProgramBinding struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ModelStructureProgramBindingFromID(id objc.ID) *ModelStructureProgramBindin
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructureProgramBinding{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ModelStructureProgramBinding{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func modelStructureProgramBindingAdopt(id objc.ID) *ModelStructureProgramBinding
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructureProgramBinding{Handle: objref.Wrap(id)}
+	x := &ModelStructureProgramBinding{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *ModelStructureProgramBinding) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ModelStructureProgramBinding) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewModelStructureProgramBinding creates a new ModelStructureProgramBinding.
 func NewModelStructureProgramBinding() *ModelStructureProgramBinding {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLModelStructureProgramBinding")), objc.RegisterName("new"))
 	return modelStructureProgramBindingAdopt(_id)
 }
 
-// The name of the variable in the Program.
+// Name the name of the variable in the Program.
 func (x *ModelStructureProgramBinding) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *ModelStructureProgramBinding) Name() string {
 	return purego.GoString(_r)
 }
 
-// The compile time constant value in the Program.
+// Value the compile time constant value in the Program.
 func (x *ModelStructureProgramBinding) Value() *ModelStructureProgramValue {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	return ModelStructureProgramValueFromID(_r)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An array of length matching the rank, holding the dimensions of a tensor.
-//
 // TensorExtents is an idiomatic wrapper over the Objective-C class MTLTensorExtents.
+//
+// An array of length matching the rank, holding the dimensions of a tensor.
 type TensorExtents struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TensorExtentsFromID(id objc.ID) *TensorExtents {
 	if id == 0 {
 		return nil
 	}
-	x := &TensorExtents{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TensorExtents{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func tensorExtentsAdopt(id objc.ID) *TensorExtents {
 	if id == 0 {
 		return nil
 	}
-	x := &TensorExtents{Handle: objref.Wrap(id)}
+	x := &TensorExtents{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *TensorExtents) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TensorExtents) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTensorExtents creates a new TensorExtents.
 func NewTensorExtents() *TensorExtents {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLTensorExtents")), objc.RegisterName("new"))
 	return tensorExtentsAdopt(_id)
 }
 
-// Returns the extent at an index.
+// ExtentAtDimensionIndex returns the extent at an index.
 func (x *TensorExtents) ExtentAtDimensionIndex(dimensionIndex int) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("extentAtDimensionIndex:"), dimensionIndex)
 	return _r
 }
 
-// Obtains the rank of the tensor. The rank represents the number of dimensions.
+// Rank obtains the rank of the tensor. The rank represents the number of dimensions.
 func (x *TensorExtents) Rank() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rank"))
 	return _r

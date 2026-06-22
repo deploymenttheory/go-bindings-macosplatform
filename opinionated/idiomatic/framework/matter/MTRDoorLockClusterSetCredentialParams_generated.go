@@ -23,7 +23,8 @@ func MTRDoorLockClusterSetCredentialParamsFromID(id objc.ID) *MTRDoorLockCluster
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDoorLockClusterSetCredentialParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDoorLockClusterSetCredentialParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDoorLockClusterSetCredentialParamsAdopt(id objc.ID) *MTRDoorLockClusterS
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDoorLockClusterSetCredentialParams{Handle: objref.Wrap(id)}
+	x := &MTRDoorLockClusterSetCredentialParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,134 +58,150 @@ func (x *MTRDoorLockClusterSetCredentialParams) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDoorLockClusterSetCredentialParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDoorLockClusterSetCredentialParams creates a new MTRDoorLockClusterSetCredentialParams.
 func NewMTRDoorLockClusterSetCredentialParams() *MTRDoorLockClusterSetCredentialParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDoorLockClusterSetCredentialParams")), objc.RegisterName("new"))
 	return mTRDoorLockClusterSetCredentialParamsAdopt(_id)
 }
 
-// WithOperationType sets operationType and returns the receiver so calls can be chained.
+// WithOperationType sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterSetCredentialParams) WithOperationType(operationType obj.Object) *MTRDoorLockClusterSetCredentialParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationType:"), objref.IDOf(operationType))
 	return x
 }
 
-// WithCredential sets credential and returns the receiver so calls can be chained.
+// WithCredential sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterSetCredentialParams) WithCredential(credential MTRDoorLockClusterCredentialStructProvider) *MTRDoorLockClusterSetCredentialParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredential:"), objref.IDOf(credential))
 	return x
 }
 
-// WithCredentialData sets credentialData and returns the receiver so calls can be chained.
+// WithCredentialData sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterSetCredentialParams) WithCredentialData(credentialData obj.Object) *MTRDoorLockClusterSetCredentialParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentialData:"), objref.IDOf(credentialData))
 	return x
 }
 
-// WithUserIndex sets userIndex and returns the receiver so calls can be chained.
+// WithUserIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterSetCredentialParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterSetCredentialParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return x
 }
 
-// WithUserStatus sets userStatus and returns the receiver so calls can be chained.
+// WithUserStatus sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterSetCredentialParams) WithUserStatus(userStatus obj.Object) *MTRDoorLockClusterSetCredentialParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserStatus:"), objref.IDOf(userStatus))
 	return x
 }
 
-// WithUserType sets userType and returns the receiver so calls can be chained.
+// WithUserType sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterSetCredentialParams) WithUserType(userType obj.Object) *MTRDoorLockClusterSetCredentialParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserType:"), objref.IDOf(userType))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRDoorLockClusterSetCredentialParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterSetCredentialParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRDoorLockClusterSetCredentialParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterSetCredentialParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// OperationType wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetCredentialParams) OperationType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationType"))
 	return obj.Wrap(_r)
 }
 
+// SetOperationType wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetCredentialParams) SetOperationType(operationType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationType:"), objref.IDOf(operationType))
 }
 
+// Credential wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetCredentialParams) Credential() *MTRDoorLockClusterCredentialStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credential"))
 	return MTRDoorLockClusterCredentialStructFromID(_r)
 }
 
+// SetCredential wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetCredentialParams) SetCredential(credential *MTRDoorLockClusterCredentialStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredential:"), objref.IDOf(credential))
 }
 
+// CredentialData wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetCredentialParams) CredentialData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentialData"))
 	return obj.Wrap(_r)
 }
 
+// SetCredentialData wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetCredentialParams) SetCredentialData(credentialData obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentialData:"), objref.IDOf(credentialData))
 }
 
+// UserIndex wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetCredentialParams) UserIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userIndex"))
 	return obj.Wrap(_r)
 }
 
+// SetUserIndex wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetCredentialParams) SetUserIndex(userIndex obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 }
 
+// UserStatus wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetCredentialParams) UserStatus() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userStatus"))
 	return obj.Wrap(_r)
 }
 
+// SetUserStatus wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetCredentialParams) SetUserStatus(userStatus obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserStatus:"), objref.IDOf(userStatus))
 }
 
+// UserType wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetCredentialParams) UserType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userType"))
 	return obj.Wrap(_r)
 }
 
+// SetUserType wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetCredentialParams) SetUserType(userType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserType:"), objref.IDOf(userType))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRDoorLockClusterSetCredentialParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetCredentialParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRDoorLockClusterSetCredentialParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetCredentialParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

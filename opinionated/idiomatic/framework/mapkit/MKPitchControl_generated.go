@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specialized view that displays and controls the pitch angle of the map view.
-//
 // PitchControl is an idiomatic wrapper over the Objective-C class MKPitchControl.
+//
+// A specialized view that displays and controls the pitch angle of the map view.
 type PitchControl struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PitchControlFromID(id objc.ID) *PitchControl {
 	if id == 0 {
 		return nil
 	}
-	x := &PitchControl{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PitchControl{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func pitchControlAdopt(id objc.ID) *PitchControl {
 	if id == 0 {
 		return nil
 	}
-	x := &PitchControl{Handle: objref.Wrap(id)}
+	x := &PitchControl{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *PitchControl) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PitchControl) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPitchControl creates a new PitchControl.
 func NewPitchControl() *PitchControl {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKPitchControl")), objc.RegisterName("new"))
 	return pitchControlAdopt(_id)
 }
 
-// The map view associated with this control.
-//
-// WithMapView sets mapView and returns the receiver so calls can be chained.
+// WithMapView the map view associated with this control.
 func (x *PitchControl) WithMapView(mapView *MapView) *PitchControl {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
 	return x
 }
 
+// MapView wraps the corresponding Objective-C method.
 func (x *PitchControl) MapView() *MapView {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapView"))
 	return MapViewFromID(_r)
 }
 
+// SetMapView wraps the corresponding Objective-C method.
 func (x *PitchControl) SetMapView(mapView *MapView) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
 }

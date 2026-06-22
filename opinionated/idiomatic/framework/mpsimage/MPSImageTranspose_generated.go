@@ -6,15 +6,18 @@ package mpsimage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ImageTranspose is an idiomatic wrapper over the Objective-C class MPSImageTranspose.
+//
+// It embeds [UnaryImageKernel], promoting that type's methods.
 type ImageTranspose struct {
-	objref.Handle
+	UnaryImageKernel
 }
 
 // ImageTransposeFromID adopts an existing Objective-C object as a ImageTranspose
@@ -23,7 +26,8 @@ func ImageTransposeFromID(id objc.ID) *ImageTranspose {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageTranspose{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageTranspose{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +40,10 @@ func imageTransposeAdopt(id objc.ID) *ImageTranspose {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageTranspose{Handle: objref.Wrap(id)}
+	x := &ImageTranspose{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ImageTranspose) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageTranspose) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageTranspose) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewImageTranspose creates a new ImageTranspose.
@@ -62,9 +52,25 @@ func NewImageTranspose() *ImageTranspose {
 	return imageTransposeAdopt(_id)
 }
 
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
+func (x *ImageTranspose) WithOffset(offset mpscore.MPSOffset) *ImageTranspose {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (x *ImageTranspose) WithClipRect(clipRect metal.MTLRegion) *ImageTranspose {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
 // ImageTransposeable is the interface implemented by [ImageTranspose], for mocking and DI.
 type ImageTransposeable interface {
 	obj.Object
+	WithOffset(offset mpscore.MPSOffset) *ImageTranspose
+	WithClipRect(clipRect metal.MTLRegion) *ImageTranspose
 }
 
 var _ ImageTransposeable = (*ImageTranspose)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageTranspose)(nil)

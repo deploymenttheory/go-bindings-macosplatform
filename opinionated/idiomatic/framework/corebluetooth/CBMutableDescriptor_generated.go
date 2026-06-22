@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides additional information about a local peripheral’s characteristic.
-//
 // MutableDescriptor is an idiomatic wrapper over the Objective-C class CBMutableDescriptor.
+//
+// It embeds [Descriptor], promoting that type's methods.
+//
+// An object that provides additional information about a local peripheral’s characteristic.
 type MutableDescriptor struct {
-	objref.Handle
+	Descriptor
 }
 
 // MutableDescriptorFromID adopts an existing Objective-C object as a MutableDescriptor
@@ -25,7 +26,8 @@ func MutableDescriptorFromID(id objc.ID) *MutableDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func mutableDescriptorAdopt(id objc.ID) *MutableDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableDescriptor{Handle: objref.Wrap(id)}
+	x := &MutableDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MutableDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a mutable descriptor with a specified value.
-//
-// NewMutableDescriptorWithTypeValue creates a new MutableDescriptor.
+// NewMutableDescriptorWithTypeValue creates a mutable descriptor with a specified value.
 func NewMutableDescriptorWithTypeValue(uUID *UUID, value obj.Object) *MutableDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CBMutableDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:value:"), objref.IDOf(uUID), objref.IDOf(value))
@@ -73,3 +59,7 @@ type MutableDescriptorable interface {
 }
 
 var _ MutableDescriptorable = (*MutableDescriptor)(nil)
+
+var _ DescriptorProvider = (*MutableDescriptor)(nil)
+
+var _ AttributeProvider = (*MutableDescriptor)(nil)

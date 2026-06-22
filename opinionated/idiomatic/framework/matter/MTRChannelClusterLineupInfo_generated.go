@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRChannelClusterLineupInfo is an idiomatic wrapper over the Objective-C class MTRChannelClusterLineupInfo.
+//
+// It embeds [MTRChannelClusterLineupInfoStruct], promoting that type's methods.
 type MTRChannelClusterLineupInfo struct {
-	objref.Handle
+	MTRChannelClusterLineupInfoStruct
 }
 
 // MTRChannelClusterLineupInfoFromID adopts an existing Objective-C object as a MTRChannelClusterLineupInfo
@@ -23,7 +24,8 @@ func MTRChannelClusterLineupInfoFromID(id objc.ID) *MTRChannelClusterLineupInfo 
 	if id == 0 {
 		return nil
 	}
-	x := &MTRChannelClusterLineupInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRChannelClusterLineupInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRChannelClusterLineupInfoAdopt(id objc.ID) *MTRChannelClusterLineupInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRChannelClusterLineupInfo{Handle: objref.Wrap(id)}
+	x := &MTRChannelClusterLineupInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRChannelClusterLineupInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRChannelClusterLineupInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRChannelClusterLineupInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRChannelClusterLineupInfo creates a new MTRChannelClusterLineupInfo.
@@ -62,25 +50,25 @@ func NewMTRChannelClusterLineupInfo() *MTRChannelClusterLineupInfo {
 	return mTRChannelClusterLineupInfoAdopt(_id)
 }
 
-// WithOperatorName sets operatorName and returns the receiver so calls can be chained.
+// WithOperatorName sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterLineupInfo) WithOperatorName(operatorName string) *MTRChannelClusterLineupInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperatorName:"), purego.NSString(operatorName))
 	return x
 }
 
-// WithLineupName sets lineupName and returns the receiver so calls can be chained.
+// WithLineupName sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterLineupInfo) WithLineupName(lineupName string) *MTRChannelClusterLineupInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineupName:"), purego.NSString(lineupName))
 	return x
 }
 
-// WithPostalCode sets postalCode and returns the receiver so calls can be chained.
+// WithPostalCode sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterLineupInfo) WithPostalCode(postalCode string) *MTRChannelClusterLineupInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostalCode:"), purego.NSString(postalCode))
 	return x
 }
 
-// WithLineupInfoType sets lineupInfoType and returns the receiver so calls can be chained.
+// WithLineupInfoType sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterLineupInfo) WithLineupInfoType(lineupInfoType obj.Object) *MTRChannelClusterLineupInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineupInfoType:"), objref.IDOf(lineupInfoType))
 	return x
@@ -96,3 +84,5 @@ type MTRChannelClusterLineupInfoable interface {
 }
 
 var _ MTRChannelClusterLineupInfoable = (*MTRChannelClusterLineupInfo)(nil)
+
+var _ MTRChannelClusterLineupInfoStructProvider = (*MTRChannelClusterLineupInfo)(nil)

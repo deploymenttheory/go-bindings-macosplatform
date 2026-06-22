@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// A mechanism for evaluating authentication policies and access controls.
-//
 // Context is an idiomatic wrapper over the Objective-C class LAContext.
+//
+// A mechanism for evaluating authentication policies and access controls.
 type Context struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func ContextFromID(id objc.ID) *Context {
 	if id == 0 {
 		return nil
 	}
-	x := &Context{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Context{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func contextAdopt(id objc.ID) *Context {
 	if id == 0 {
 		return nil
 	}
-	x := &Context{Handle: objref.Wrap(id)}
+	x := &Context{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,61 +62,55 @@ func (x *Context) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Context) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewContext creates a new Context.
 func NewContext() *Context {
 	_id := objc.Send[objc.ID](objc.ID(_class("LAContext")), objc.RegisterName("new"))
 	return contextAdopt(_id)
 }
 
-// The localized title for the fallback button in the dialog presented to the user during authentication.
-//
-// WithLocalizedFallbackTitle sets localizedFallbackTitle and returns the receiver so calls can be chained.
+// WithLocalizedFallbackTitle the localized title for the fallback button in the dialog presented to the user during authentication.
 func (x *Context) WithLocalizedFallbackTitle(localizedFallbackTitle string) *Context {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedFallbackTitle:"), purego.NSString(localizedFallbackTitle))
 	return x
 }
 
-// The number of biometric authentication failures after which the context falls back to another mechanism.
-//
-// WithMaxBiometryFailures sets maxBiometryFailures and returns the receiver so calls can be chained.
+// WithMaxBiometryFailures the number of biometric authentication failures after which the context falls back to another mechanism.
 func (x *Context) WithMaxBiometryFailures(maxBiometryFailures obj.Object) *Context {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxBiometryFailures:"), objref.IDOf(maxBiometryFailures))
 	return x
 }
 
-// The localized title for the cancel button in the dialog presented to the user during authentication.
-//
-// WithLocalizedCancelTitle sets localizedCancelTitle and returns the receiver so calls can be chained.
+// WithLocalizedCancelTitle the localized title for the cancel button in the dialog presented to the user during authentication.
 func (x *Context) WithLocalizedCancelTitle(localizedCancelTitle string) *Context {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedCancelTitle:"), purego.NSString(localizedCancelTitle))
 	return x
 }
 
-// The duration for which Touch ID authentication reuse is allowable.
-//
-// WithTouchIDAuthenticationAllowableReuseDuration sets touchIDAuthenticationAllowableReuseDuration and returns the receiver so calls can be chained.
+// WithTouchIDAuthenticationAllowableReuseDuration the duration for which Touch ID authentication reuse is allowable.
 func (x *Context) WithTouchIDAuthenticationAllowableReuseDuration(touchIDAuthenticationAllowableReuseDuration float64) *Context {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchIDAuthenticationAllowableReuseDuration:"), touchIDAuthenticationAllowableReuseDuration)
 	return x
 }
 
-// The localized explanation for authentication shown in the dialog presented to the user.
-//
-// WithLocalizedReason sets localizedReason and returns the receiver so calls can be chained.
+// WithLocalizedReason the localized explanation for authentication shown in the dialog presented to the user.
 func (x *Context) WithLocalizedReason(localizedReason string) *Context {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedReason:"), purego.NSString(localizedReason))
 	return x
 }
 
-// A Boolean value indicating whether authentication can be interactive.
-//
-// WithInteractionNotAllowed sets interactionNotAllowed and returns the receiver so calls can be chained.
+// WithInteractionNotAllowed a Boolean value indicating whether authentication can be interactive.
 func (x *Context) WithInteractionNotAllowed(interactionNotAllowed bool) *Context {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteractionNotAllowed:"), interactionNotAllowed)
 	return x
 }
 
-// Assesses whether authentication can proceed for a given policy.
+// CanEvaluatePolicy assesses whether authentication can proceed for a given policy.
 func (x *Context) CanEvaluatePolicy(policy Policy) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("canEvaluatePolicy:error:"), policy, unsafe.Pointer(&_nsErr))
@@ -124,24 +120,24 @@ func (x *Context) CanEvaluatePolicy(policy Policy) error {
 	return nil
 }
 
-// Invalidates the authentication context.
+// Invalidate invalidates the authentication context.
 func (x *Context) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
-// Sets an application-provided credential to be used when evaluating authentication.
+// SetCredentialType sets an application-provided credential to be used when evaluating authentication.
 func (x *Context) SetCredentialType(credential obj.Object, type_ CredentialType) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setCredential:type:"), objref.IDOf(credential), type_)
 	return _r
 }
 
-// Returns a Boolean value indicating whether the specified credential type is set.
+// IsCredentialSet returns a Boolean value indicating whether the specified credential type is set.
 func (x *Context) IsCredentialSet(type_ CredentialType) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCredentialSet:"), type_)
 	return _r
 }
 
-// Fallback button title. Allows fallback button title customization. If set to empty string, the button will be hidden. A default title "Use Password…" is used when this property is left nil.
+// LocalizedFallbackTitle fallback button title. Allows fallback button title customization. If set to empty string, the button will be hidden. A default title "Use Password…" is used when this property is left nil.
 func (x *Context) LocalizedFallbackTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedFallbackTitle"))
 	if _r == 0 {
@@ -150,21 +146,23 @@ func (x *Context) LocalizedFallbackTitle() string {
 	return purego.GoString(_r)
 }
 
+// SetLocalizedFallbackTitle wraps the corresponding Objective-C method.
 func (x *Context) SetLocalizedFallbackTitle(localizedFallbackTitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedFallbackTitle:"), purego.NSString(localizedFallbackTitle))
 }
 
-// This property is deprecated and setting it has no effect.
+// MaxBiometryFailures this property is deprecated and setting it has no effect.
 func (x *Context) MaxBiometryFailures() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxBiometryFailures"))
 	return obj.Wrap(_r)
 }
 
+// SetMaxBiometryFailures wraps the corresponding Objective-C method.
 func (x *Context) SetMaxBiometryFailures(maxBiometryFailures obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxBiometryFailures:"), objref.IDOf(maxBiometryFailures))
 }
 
-// Cancel button title. Allows cancel button title customization. A default title "Cancel" is used when this property is left nil or is set to empty string.
+// LocalizedCancelTitle cancel button title. Allows cancel button title customization. A default title "Cancel" is used when this property is left nil or is set to empty string.
 func (x *Context) LocalizedCancelTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedCancelTitle"))
 	if _r == 0 {
@@ -173,21 +171,23 @@ func (x *Context) LocalizedCancelTitle() string {
 	return purego.GoString(_r)
 }
 
+// SetLocalizedCancelTitle wraps the corresponding Objective-C method.
 func (x *Context) SetLocalizedCancelTitle(localizedCancelTitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedCancelTitle:"), purego.NSString(localizedCancelTitle))
 }
 
-// Time interval for accepting a successful Touch ID or Face ID device unlock (on the lock screen) from the past. This property can be set with a time interval in seconds. If the device was successfully unlocked by biometry within this time interval, then biometric authentication on this context will succeed automatically and the reply block will be called without prompting user for Touch ID or Face ID. The default value is 0, meaning that no previous biometric unlock can be reused. This property is meant only for reusing biometric matches from the device lock screen. It does not allow reusing previous biometric matches in application or between applications. The maximum supported interval is 5 minutes and setting the value beyond 5 minutes does not increase the accepted interval.
+// TouchIDAuthenticationAllowableReuseDuration time interval for accepting a successful Touch ID or Face ID device unlock (on the lock screen) from the past. This property can be set with a time interval in seconds. If the device was successfully unlocked by biometry within this time interval, then biometric authentication on this context will succeed automatically and the reply block will be called without prompting user for Touch ID or Face ID. The default value is 0, meaning that no previous biometric unlock can be reused. This property is meant only for reusing biometric matches from the device lock screen. It does not allow reusing previous biometric matches in application or between applications. The maximum supported interval is 5 minutes and setting the value beyond 5 minutes does not increase the accepted interval.
 func (x *Context) TouchIDAuthenticationAllowableReuseDuration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("touchIDAuthenticationAllowableReuseDuration"))
 	return _r
 }
 
+// SetTouchIDAuthenticationAllowableReuseDuration wraps the corresponding Objective-C method.
 func (x *Context) SetTouchIDAuthenticationAllowableReuseDuration(touchIDAuthenticationAllowableReuseDuration float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchIDAuthenticationAllowableReuseDuration:"), touchIDAuthenticationAllowableReuseDuration)
 }
 
-// Allows setting the default localized authentication reason on context. A localized string from this property is displayed in the authentication UI if the caller didn't specify its own authentication reason (e.g. a keychain operation with kSecUseAuthenticationContext). This property is ignored if the authentication reason was provided by caller.
+// LocalizedReason allows setting the default localized authentication reason on context. A localized string from this property is displayed in the authentication UI if the caller didn't specify its own authentication reason (e.g. a keychain operation with kSecUseAuthenticationContext). This property is ignored if the authentication reason was provided by caller.
 func (x *Context) LocalizedReason() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedReason"))
 	if _r == 0 {
@@ -196,33 +196,35 @@ func (x *Context) LocalizedReason() string {
 	return purego.GoString(_r)
 }
 
+// SetLocalizedReason wraps the corresponding Objective-C method.
 func (x *Context) SetLocalizedReason(localizedReason string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedReason:"), purego.NSString(localizedReason))
 }
 
-// Allows running authentication in non-interactive mode. If the context is used in a keychain query by the means of kSecUseAuthenticationContext, then setting this property to YES has the same effect as passing kSecUseNoAuthenticationUI in the query, i.e. the keychain call will eventually fail with errSecInteractionNotAllowed instead of displaying the authentication UI. If this property is used with a LocalAuthentication evaluation, it will eventually fail with LAErrorNotInteractive instead of displaying the authentication UI.
+// InteractionNotAllowed allows running authentication in non-interactive mode. If the context is used in a keychain query by the means of kSecUseAuthenticationContext, then setting this property to YES has the same effect as passing kSecUseNoAuthenticationUI in the query, i.e. the keychain call will eventually fail with errSecInteractionNotAllowed instead of displaying the authentication UI. If this property is used with a LocalAuthentication evaluation, it will eventually fail with LAErrorNotInteractive instead of displaying the authentication UI.
 func (x *Context) InteractionNotAllowed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("interactionNotAllowed"))
 	return _r
 }
 
+// SetInteractionNotAllowed wraps the corresponding Objective-C method.
 func (x *Context) SetInteractionNotAllowed(interactionNotAllowed bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteractionNotAllowed:"), interactionNotAllowed)
 }
 
-// Indicates the type of the biometry supported by the device.
+// BiometryType indicates the type of the biometry supported by the device.
 func (x *Context) BiometryType() BiometryType {
 	_r := objc.Send[BiometryType](objref.IDOf(x), objc.RegisterName("biometryType"))
 	return _r
 }
 
-// Contains policy domain state. This property is set only when evaluatePolicy is called and succesful Touch ID or Face ID authentication was performed, or when canEvaluatePolicy succeeds for a biometric policy. It stays nil for all other cases. If biometric database was modified (fingers or faces were removed or added), evaluatedPolicyDomainState data will change. Nature of such database changes cannot be determined but comparing data of evaluatedPolicyDomainState after different evaluatePolicy will reveal the fact database was changed between calls.
+// EvaluatedPolicyDomainState contains policy domain state. This property is set only when evaluatePolicy is called and succesful Touch ID or Face ID authentication was performed, or when canEvaluatePolicy succeeds for a biometric policy. It stays nil for all other cases. If biometric database was modified (fingers or faces were removed or added), evaluatedPolicyDomainState data will change. Nature of such database changes cannot be determined but comparing data of evaluatedPolicyDomainState after different evaluatePolicy will reveal the fact database was changed between calls.
 func (x *Context) EvaluatedPolicyDomainState() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("evaluatedPolicyDomainState"))
 	return obj.Wrap(_r)
 }
 
-// Contains authentication domain state.
+// DomainState contains authentication domain state.
 func (x *Context) DomainState() *DomainState {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domainState"))
 	return DomainStateFromID(_r)

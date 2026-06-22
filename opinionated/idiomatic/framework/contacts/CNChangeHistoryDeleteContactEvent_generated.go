@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a user deleting a contact.
-//
 // ChangeHistoryDeleteContactEvent is an idiomatic wrapper over the Objective-C class CNChangeHistoryDeleteContactEvent.
+//
+// It embeds [ChangeHistoryEvent], promoting that type's methods.
+//
+// An object that represents a user deleting a contact.
 type ChangeHistoryDeleteContactEvent struct {
-	objref.Handle
+	ChangeHistoryEvent
 }
 
 // ChangeHistoryDeleteContactEventFromID adopts an existing Objective-C object as a ChangeHistoryDeleteContactEvent
@@ -25,7 +26,8 @@ func ChangeHistoryDeleteContactEventFromID(id objc.ID) *ChangeHistoryDeleteConta
 	if id == 0 {
 		return nil
 	}
-	x := &ChangeHistoryDeleteContactEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ChangeHistoryDeleteContactEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func changeHistoryDeleteContactEventAdopt(id objc.ID) *ChangeHistoryDeleteContac
 	if id == 0 {
 		return nil
 	}
-	x := &ChangeHistoryDeleteContactEvent{Handle: objref.Wrap(id)}
+	x := &ChangeHistoryDeleteContactEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ChangeHistoryDeleteContactEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ChangeHistoryDeleteContactEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ChangeHistoryDeleteContactEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewChangeHistoryDeleteContactEvent creates a new ChangeHistoryDeleteContactEvent.
@@ -64,6 +52,7 @@ func NewChangeHistoryDeleteContactEvent() *ChangeHistoryDeleteContactEvent {
 	return changeHistoryDeleteContactEventAdopt(_id)
 }
 
+// ContactIdentifier wraps the corresponding Objective-C method.
 func (x *ChangeHistoryDeleteContactEvent) ContactIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contactIdentifier"))
 	if _r == 0 {
@@ -79,3 +68,5 @@ type ChangeHistoryDeleteContactEventable interface {
 }
 
 var _ ChangeHistoryDeleteContactEventable = (*ChangeHistoryDeleteContactEvent)(nil)
+
+var _ ChangeHistoryEventProvider = (*ChangeHistoryDeleteContactEvent)(nil)

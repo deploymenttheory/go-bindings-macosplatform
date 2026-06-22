@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a linear neuron filter.
-//
 // CNNNeuronLinearNode is an idiomatic wrapper over the Objective-C class MPSCNNNeuronLinearNode.
+//
+// It embeds [CNNNeuronNode], promoting that type's methods.
+//
+// A representation of a linear neuron filter.
 type CNNNeuronLinearNode struct {
-	objref.Handle
+	CNNNeuronNode
 }
 
 // CNNNeuronLinearNodeFromID adopts an existing Objective-C object as a CNNNeuronLinearNode
@@ -25,7 +26,8 @@ func CNNNeuronLinearNodeFromID(id objc.ID) *CNNNeuronLinearNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNeuronLinearNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNNeuronLinearNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,47 +40,27 @@ func cNNNeuronLinearNodeAdopt(id objc.ID) *CNNNeuronLinearNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNeuronLinearNode{Handle: objref.Wrap(id)}
+	x := &CNNNeuronLinearNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNNeuronLinearNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNNeuronLinearNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNNeuronLinearNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Init a node representing a MPSCNNNeuronLinear kernel
-//
-// NewCNNNeuronLinearNodeWithSourceAB creates a new CNNNeuronLinearNode.
+// NewCNNNeuronLinearNodeWithSourceAB init a node representing a MPSCNNNeuronLinear kernel
 func NewCNNNeuronLinearNodeWithSourceAB(sourceNode obj.Object, a float32, b float32) *CNNNeuronLinearNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronLinearNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:a:b:"), objref.IDOf(sourceNode), a, b)
 	return cNNNeuronLinearNodeAdopt(_id)
 }
 
-// Init a node with default values for parameters a & b
-//
-// NewCNNNeuronLinearNodeWithSource creates a new CNNNeuronLinearNode.
+// NewCNNNeuronLinearNodeWithSource init a node with default values for parameters a & b
 func NewCNNNeuronLinearNodeWithSource(sourceNode obj.Object) *CNNNeuronLinearNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronLinearNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return cNNNeuronLinearNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNNeuronLinearNode) WithLabel(label string) *CNNNeuronLinearNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -91,3 +73,7 @@ type CNNNeuronLinearNodeable interface {
 }
 
 var _ CNNNeuronLinearNodeable = (*CNNNeuronLinearNode)(nil)
+
+var _ CNNNeuronNodeProvider = (*CNNNeuronLinearNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNNeuronLinearNode)(nil)

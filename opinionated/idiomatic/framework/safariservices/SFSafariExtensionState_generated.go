@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The state of a Safari extension.
-//
 // SafariExtensionState is an idiomatic wrapper over the Objective-C class SFSafariExtensionState.
+//
+// The state of a Safari extension.
 type SafariExtensionState struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SafariExtensionStateFromID(id objc.ID) *SafariExtensionState {
 	if id == 0 {
 		return nil
 	}
-	x := &SafariExtensionState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SafariExtensionState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func safariExtensionStateAdopt(id objc.ID) *SafariExtensionState {
 	if id == 0 {
 		return nil
 	}
-	x := &SafariExtensionState{Handle: objref.Wrap(id)}
+	x := &SafariExtensionState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *SafariExtensionState) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SafariExtensionState) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSafariExtensionState creates a new SafariExtensionState.
 func NewSafariExtensionState() *SafariExtensionState {
 	_id := objc.Send[objc.ID](objc.ID(_class("SFSafariExtensionState")), objc.RegisterName("new"))
 	return safariExtensionStateAdopt(_id)
 }
 
+// IsEnabled wraps the corresponding Objective-C method.
 func (x *SafariExtensionState) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r

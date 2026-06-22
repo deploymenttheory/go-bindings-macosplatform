@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that implements a delay effect.
-//
 // AudioUnitDelay is an idiomatic wrapper over the Objective-C class AVAudioUnitDelay.
+//
+// It embeds [AudioUnitEffect], promoting that type's methods.
+//
+// An object that implements a delay effect.
 type AudioUnitDelay struct {
-	objref.Handle
+	AudioUnitEffect
 }
 
 // AudioUnitDelayFromID adopts an existing Objective-C object as a AudioUnitDelay
@@ -25,7 +26,8 @@ func AudioUnitDelayFromID(id objc.ID) *AudioUnitDelay {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitDelay{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioUnitDelay{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func audioUnitDelayAdopt(id objc.ID) *AudioUnitDelay {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitDelay{Handle: objref.Wrap(id)}
+	x := &AudioUnitDelay{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AudioUnitDelay) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioUnitDelay) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioUnitDelay) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAudioUnitDelay creates a new AudioUnitDelay.
@@ -64,82 +52,76 @@ func NewAudioUnitDelay() *AudioUnitDelay {
 	return audioUnitDelayAdopt(_id)
 }
 
-// The time for the input signal to reach the output.
-//
-// WithDelayTime sets delayTime and returns the receiver so calls can be chained.
+// WithDelayTime the time for the input signal to reach the output.
 func (x *AudioUnitDelay) WithDelayTime(delayTime float64) *AudioUnitDelay {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelayTime:"), delayTime)
 	return x
 }
 
-// The amount of the output signal that feeds back into the delay line.
-//
-// WithFeedback sets feedback and returns the receiver so calls can be chained.
+// WithFeedback the amount of the output signal that feeds back into the delay line.
 func (x *AudioUnitDelay) WithFeedback(feedback float32) *AudioUnitDelay {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFeedback:"), feedback)
 	return x
 }
 
-// The cutoff frequency above which high frequency content rolls off, in hertz.
-//
-// WithLowPassCutoff sets lowPassCutoff and returns the receiver so calls can be chained.
+// WithLowPassCutoff the cutoff frequency above which high frequency content rolls off, in hertz.
 func (x *AudioUnitDelay) WithLowPassCutoff(lowPassCutoff float32) *AudioUnitDelay {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowPassCutoff:"), lowPassCutoff)
 	return x
 }
 
-// The blend of the wet and dry signals.
-//
-// WithWetDryMix sets wetDryMix and returns the receiver so calls can be chained.
+// WithWetDryMix the blend of the wet and dry signals.
 func (x *AudioUnitDelay) WithWetDryMix(wetDryMix float32) *AudioUnitDelay {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWetDryMix:"), wetDryMix)
 	return x
 }
 
-// The bypass state of the audio unit.
-//
-// WithBypass sets bypass and returns the receiver so calls can be chained.
+// WithBypass the bypass state of the audio unit.
 func (x *AudioUnitDelay) WithBypass(bypass bool) *AudioUnitDelay {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
 	return x
 }
 
-// Range:      0 -> 2 Default:    1 Unit:       Seconds
+// DelayTime range:      0 -> 2 Default:    1 Unit:       Seconds
 func (x *AudioUnitDelay) DelayTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("delayTime"))
 	return _r
 }
 
+// SetDelayTime wraps the corresponding Objective-C method.
 func (x *AudioUnitDelay) SetDelayTime(delayTime float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelayTime:"), delayTime)
 }
 
-// Amount of the output signal fed back into the delay line Range:      -100 -> 100 Default:    50 Unit:       Percent
+// Feedback amount of the output signal fed back into the delay line Range:      -100 -> 100 Default:    50 Unit:       Percent
 func (x *AudioUnitDelay) Feedback() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("feedback"))
 	return _r
 }
 
+// SetFeedback wraps the corresponding Objective-C method.
 func (x *AudioUnitDelay) SetFeedback(feedback float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFeedback:"), feedback)
 }
 
-// Cutoff frequency above which high frequency content is rolled off Range:      10 -> (samplerate/2) Default:    15000 Unit:       Hertz
+// LowPassCutoff cutoff frequency above which high frequency content is rolled off Range:      10 -> (samplerate/2) Default:    15000 Unit:       Hertz
 func (x *AudioUnitDelay) LowPassCutoff() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("lowPassCutoff"))
 	return _r
 }
 
+// SetLowPassCutoff wraps the corresponding Objective-C method.
 func (x *AudioUnitDelay) SetLowPassCutoff(lowPassCutoff float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowPassCutoff:"), lowPassCutoff)
 }
 
-// Blend of the wet and dry signals Range:      0 (all dry) -> 100 (all wet) Default:    100 Unit:       Percent
+// WetDryMix blend of the wet and dry signals Range:      0 (all dry) -> 100 (all wet) Default:    100 Unit:       Percent
 func (x *AudioUnitDelay) WetDryMix() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("wetDryMix"))
 	return _r
 }
 
+// SetWetDryMix wraps the corresponding Objective-C method.
 func (x *AudioUnitDelay) SetWetDryMix(wetDryMix float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWetDryMix:"), wetDryMix)
 }
@@ -163,3 +145,9 @@ type AudioUnitDelayable interface {
 }
 
 var _ AudioUnitDelayable = (*AudioUnitDelay)(nil)
+
+var _ AudioUnitEffectProvider = (*AudioUnitDelay)(nil)
+
+var _ AudioUnitProvider = (*AudioUnitDelay)(nil)
+
+var _ AudioNodeProvider = (*AudioUnitDelay)(nil)

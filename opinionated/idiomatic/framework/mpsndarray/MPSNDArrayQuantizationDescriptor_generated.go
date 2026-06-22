@@ -13,6 +13,8 @@ import (
 )
 
 // ArrayQuantizationDescriptor is an idiomatic wrapper over the Objective-C class MPSNDArrayQuantizationDescriptor.
+//
+// ArrayQuantizationDescriptor is an abstract base — you do not construct it directly. Construct one of [ArrayAffineQuantizationDescriptor], [ArrayLUTQuantizationDescriptor] and pass it where a ArrayQuantizationDescriptor is accepted.
 type ArrayQuantizationDescriptor struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func ArrayQuantizationDescriptorFromID(id objc.ID) *ArrayQuantizationDescriptor 
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayQuantizationDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ArrayQuantizationDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func arrayQuantizationDescriptorAdopt(id objc.ID) *ArrayQuantizationDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayQuantizationDescriptor{Handle: objref.Wrap(id)}
+	x := &ArrayQuantizationDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,13 +60,13 @@ func (x *ArrayQuantizationDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewArrayQuantizationDescriptor creates a new ArrayQuantizationDescriptor.
-func NewArrayQuantizationDescriptor() *ArrayQuantizationDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayQuantizationDescriptor")), objc.RegisterName("new"))
-	return arrayQuantizationDescriptorAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ArrayQuantizationDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The quantization scheme for this descriptor. The default is MPSNDArrayQuantizationTypeNone.
+// QuantizationScheme the quantization scheme for this descriptor. The default is MPSNDArrayQuantizationTypeNone.
 func (x *ArrayQuantizationDescriptor) QuantizationScheme() ArrayQuantizationScheme {
 	_r := objc.Send[ArrayQuantizationScheme](objref.IDOf(x), objc.RegisterName("quantizationScheme"))
 	return _r
@@ -75,3 +79,10 @@ type ArrayQuantizationDescriptorable interface {
 }
 
 var _ ArrayQuantizationDescriptorable = (*ArrayQuantizationDescriptor)(nil)
+
+// isArrayQuantizationDescriptor marks ArrayQuantizationDescriptor — and, by embedding promotion, its
+// subclasses — as a member of the ArrayQuantizationDescriptor hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ArrayQuantizationDescriptor) isArrayQuantizationDescriptor() {}
+
+var _ ArrayQuantizationDescriptorProvider = (*ArrayQuantizationDescriptor)(nil)

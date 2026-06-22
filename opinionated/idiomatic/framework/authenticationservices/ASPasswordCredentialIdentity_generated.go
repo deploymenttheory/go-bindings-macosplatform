@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description that uniquely identifies a particular password credential.
-//
 // PasswordCredentialIdentity is an idiomatic wrapper over the Objective-C class ASPasswordCredentialIdentity.
+//
+// A description that uniquely identifies a particular password credential.
 type PasswordCredentialIdentity struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PasswordCredentialIdentityFromID(id objc.ID) *PasswordCredentialIdentity {
 	if id == 0 {
 		return nil
 	}
-	x := &PasswordCredentialIdentity{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PasswordCredentialIdentity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func passwordCredentialIdentityAdopt(id objc.ID) *PasswordCredentialIdentity {
 	if id == 0 {
 		return nil
 	}
-	x := &PasswordCredentialIdentity{Handle: objref.Wrap(id)}
+	x := &PasswordCredentialIdentity{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,30 +60,32 @@ func (x *PasswordCredentialIdentity) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a password credential identity.
-//
-// NewPasswordCredentialIdentityWithServiceIdentifierUserRecordIdentifier creates a new PasswordCredentialIdentity.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PasswordCredentialIdentity) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPasswordCredentialIdentityWithServiceIdentifierUserRecordIdentifier initializes a password credential identity.
 func NewPasswordCredentialIdentityWithServiceIdentifierUserRecordIdentifier(serviceIdentifier *CredentialServiceIdentifier, user string, recordIdentifier string) *PasswordCredentialIdentity {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasswordCredentialIdentity")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceIdentifier:user:recordIdentifier:"), objref.IDOf(serviceIdentifier), purego.NSString(user), purego.NSString(recordIdentifier))
 	return passwordCredentialIdentityAdopt(_id)
 }
 
-// An indicator that enables you to prioritze credential identities relative to each other.
-//
-// WithRank sets rank and returns the receiver so calls can be chained.
+// WithRank an indicator that enables you to prioritze credential identities relative to each other.
 func (x *PasswordCredentialIdentity) WithRank(rank int) *PasswordCredentialIdentity {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRank:"), rank)
 	return x
 }
 
-// Get the service identifier.
+// ServiceIdentifier get the service identifier.
 func (x *PasswordCredentialIdentity) ServiceIdentifier() *CredentialServiceIdentifier {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceIdentifier"))
 	return CredentialServiceIdentifierFromID(_r)
 }
 
-// Get the user.
+// User get the user.
 func (x *PasswordCredentialIdentity) User() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("user"))
 	if _r == 0 {
@@ -90,7 +94,7 @@ func (x *PasswordCredentialIdentity) User() string {
 	return purego.GoString(_r)
 }
 
-// Get the record identifier. You can utilize the record identifier to uniquely identify the credential identity in your local database.
+// RecordIdentifier get the record identifier. You can utilize the record identifier to uniquely identify the credential identity in your local database.
 func (x *PasswordCredentialIdentity) RecordIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordIdentifier"))
 	if _r == 0 {
@@ -99,12 +103,13 @@ func (x *PasswordCredentialIdentity) RecordIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Get or set the rank of the credential identity object. The system may utilize the rank to decide which credential identity precedes the other if two identities have the same service identifier. A credential identity with a larger rank value precedes one with a smaller value if both credential identities have the same service identifier. The default value of this property is 0.
+// Rank get or set the rank of the credential identity object. The system may utilize the rank to decide which credential identity precedes the other if two identities have the same service identifier. A credential identity with a larger rank value precedes one with a smaller value if both credential identities have the same service identifier. The default value of this property is 0.
 func (x *PasswordCredentialIdentity) Rank() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rank"))
 	return _r
 }
 
+// SetRank wraps the corresponding Objective-C method.
 func (x *PasswordCredentialIdentity) SetRank(rank int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRank:"), rank)
 }

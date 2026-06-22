@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that represents a request to the App Store.
-//
 // Request is an idiomatic wrapper over the Objective-C class SKRequest.
+//
+// Request is an abstract base — you do not construct it directly. Construct one of [ProductsRequest], [ReceiptRefreshRequest] and pass it where a Request is accepted.
+//
+// An abstract class that represents a request to the App Store.
 type Request struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func RequestFromID(id objc.ID) *Request {
 	if id == 0 {
 		return nil
 	}
-	x := &Request{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Request{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func requestAdopt(id objc.ID) *Request {
 	if id == 0 {
 		return nil
 	}
-	x := &Request{Handle: objref.Wrap(id)}
+	x := &Request{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +62,18 @@ func (x *Request) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewRequest creates a new Request.
-func NewRequest() *Request {
-	_id := objc.Send[objc.ID](objc.ID(_class("SKRequest")), objc.RegisterName("new"))
-	return requestAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Request) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Cancels a previously started request.
+// Cancel cancels a previously started request.
 func (x *Request) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// Sends the request to the Apple App Store.
+// Start sends the request to the Apple App Store.
 func (x *Request) Start() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
 }
@@ -82,3 +86,10 @@ type Requestable interface {
 }
 
 var _ Requestable = (*Request)(nil)
+
+// isRequest marks Request — and, by embedding promotion, its
+// subclasses — as a member of the Request hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Request) isRequest() {}
+
+var _ RequestProvider = (*Request)(nil)

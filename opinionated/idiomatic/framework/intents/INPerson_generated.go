@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information about a person participating in a SiriKit interaction.
-//
 // Person is an idiomatic wrapper over the Objective-C class INPerson.
+//
+// Information about a person participating in a SiriKit interaction.
 type Person struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PersonFromID(id objc.ID) *Person {
 	if id == 0 {
 		return nil
 	}
-	x := &Person{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Person{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func personAdopt(id objc.ID) *Person {
 	if id == 0 {
 		return nil
 	}
-	x := &Person{Handle: objref.Wrap(id)}
+	x := &Person{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,97 +60,88 @@ func (x *Person) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a person with the specified name and contact information.
-//
-// NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifier creates a new Person.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Person) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifier creates a person with the specified name and contact information.
 func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifier(personHandle *PersonHandle, nameComponents obj.Object, displayName string, image *Image, contactIdentifier string, customIdentifier string) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INPerson")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:"), objref.IDOf(personHandle), objref.IDOf(nameComponents), purego.NSString(displayName), objref.IDOf(image), purego.NSString(contactIdentifier), purego.NSString(customIdentifier))
 	return personAdopt(_id)
 }
 
-// Creates a person with the specified name, contact, and relationship information.
-//
-// NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierRelationship creates a new Person.
+// NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierRelationship creates a person with the specified name, contact, and relationship information.
 func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierRelationship(personHandle *PersonHandle, nameComponents obj.Object, displayName string, image *Image, contactIdentifier string, customIdentifier string, relationship obj.Object) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INPerson")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:relationship:"), objref.IDOf(personHandle), objref.IDOf(nameComponents), purego.NSString(displayName), objref.IDOf(image), purego.NSString(contactIdentifier), purego.NSString(customIdentifier), objref.IDOf(relationship))
 	return personAdopt(_id)
 }
 
-// Creates a person with information that indicates whether the person is the user of the device.
-//
-// NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMe creates a new Person.
+// NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMe creates a person with information that indicates whether the person is the user of the device.
 func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMe(personHandle *PersonHandle, nameComponents obj.Object, displayName string, image *Image, contactIdentifier string, customIdentifier string, isMe bool) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INPerson")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:isMe:"), objref.IDOf(personHandle), objref.IDOf(nameComponents), purego.NSString(displayName), objref.IDOf(image), purego.NSString(contactIdentifier), purego.NSString(customIdentifier), isMe)
 	return personAdopt(_id)
 }
 
-// Creates a person that includes required metadata for messaging intents.
-//
-// NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMeSuggestionType creates a new Person.
+// NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMeSuggestionType creates a person that includes required metadata for messaging intents.
 func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMeSuggestionType(personHandle *PersonHandle, nameComponents obj.Object, displayName string, image *Image, contactIdentifier string, customIdentifier string, isMe bool, suggestionType PersonSuggestionType) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INPerson")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:isMe:suggestionType:"), objref.IDOf(personHandle), objref.IDOf(nameComponents), purego.NSString(displayName), objref.IDOf(image), purego.NSString(contactIdentifier), purego.NSString(customIdentifier), isMe, suggestionType)
 	return personAdopt(_id)
 }
 
-// Creates a person with information Siri can use to suggestion the person at appropriate times.
-//
-// NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsContactSuggestionSuggestionType creates a new Person.
+// NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsContactSuggestionSuggestionType creates a person with information Siri can use to suggestion the person at appropriate times.
 func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsContactSuggestionSuggestionType(personHandle *PersonHandle, nameComponents obj.Object, displayName string, image *Image, contactIdentifier string, customIdentifier string, isContactSuggestion bool, suggestionType PersonSuggestionType) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INPerson")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:isContactSuggestion:suggestionType:"), objref.IDOf(personHandle), objref.IDOf(nameComponents), purego.NSString(displayName), objref.IDOf(image), purego.NSString(contactIdentifier), purego.NSString(customIdentifier), isContactSuggestion, suggestionType)
 	return personAdopt(_id)
 }
 
-// Creates a person with the specified name, contact, and alias information.
-//
-// NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierAliasesSuggestionType creates a new Person.
+// NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierAliasesSuggestionType creates a person with the specified name, contact, and alias information.
 func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierAliasesSuggestionType(personHandle *PersonHandle, nameComponents obj.Object, displayName string, image *Image, contactIdentifier string, customIdentifier string, aliases []*PersonHandle, suggestionType PersonSuggestionType) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INPerson")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:aliases:suggestionType:"), objref.IDOf(personHandle), objref.IDOf(nameComponents), purego.NSString(displayName), objref.IDOf(image), purego.NSString(contactIdentifier), purego.NSString(customIdentifier), purego.SliceToNSArray(aliases, func(_v *PersonHandle) objc.ID { return objref.IDOf(_v) }), suggestionType)
 	return personAdopt(_id)
 }
 
-// Creates a person object with the specified display name and contact information.
-//
-// NewPersonWithHandleNameComponentsContactIdentifier creates a new Person.
+// NewPersonWithHandleNameComponentsContactIdentifier creates a person object with the specified display name and contact information.
 func NewPersonWithHandleNameComponentsContactIdentifier(handle string, nameComponents obj.Object, contactIdentifier string) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INPerson")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHandle:nameComponents:contactIdentifier:"), purego.NSString(handle), objref.IDOf(nameComponents), purego.NSString(contactIdentifier))
 	return personAdopt(_id)
 }
 
-// Creates a person object with the specified display name and contact information.
-//
-// NewPersonWithHandleDisplayNameContactIdentifier creates a new Person.
+// NewPersonWithHandleDisplayNameContactIdentifier creates a person object with the specified display name and contact information.
 func NewPersonWithHandleDisplayNameContactIdentifier(handle string, displayName string, contactIdentifier string) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INPerson")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHandle:displayName:contactIdentifier:"), purego.NSString(handle), purego.NSString(displayName), purego.NSString(contactIdentifier))
 	return personAdopt(_id)
 }
 
-// Creates a person object with the specified name and contact information.
-//
-// NewPersonWithHandleNameComponentsDisplayNameImageContactIdentifier creates a new Person.
+// NewPersonWithHandleNameComponentsDisplayNameImageContactIdentifier creates a person object with the specified name and contact information.
 func NewPersonWithHandleNameComponentsDisplayNameImageContactIdentifier(handle string, nameComponents obj.Object, displayName string, image *Image, contactIdentifier string) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INPerson")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHandle:nameComponents:displayName:image:contactIdentifier:"), purego.NSString(handle), objref.IDOf(nameComponents), purego.NSString(displayName), objref.IDOf(image), purego.NSString(contactIdentifier))
 	return personAdopt(_id)
 }
 
+// PersonHandle wraps the corresponding Objective-C method.
 func (x *Person) PersonHandle() *PersonHandle {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("personHandle"))
 	return PersonHandleFromID(_r)
 }
 
+// NameComponents wraps the corresponding Objective-C method.
 func (x *Person) NameComponents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nameComponents"))
 	return obj.Wrap(_r)
 }
 
+// DisplayName wraps the corresponding Objective-C method.
 func (x *Person) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
 	if _r == 0 {
@@ -157,11 +150,13 @@ func (x *Person) DisplayName() string {
 	return purego.GoString(_r)
 }
 
+// Image wraps the corresponding Objective-C method.
 func (x *Person) Image() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
+// ContactIdentifier wraps the corresponding Objective-C method.
 func (x *Person) ContactIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contactIdentifier"))
 	if _r == 0 {
@@ -170,6 +165,7 @@ func (x *Person) ContactIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// CustomIdentifier wraps the corresponding Objective-C method.
 func (x *Person) CustomIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customIdentifier"))
 	if _r == 0 {
@@ -178,27 +174,33 @@ func (x *Person) CustomIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// Relationship wraps the corresponding Objective-C method.
 func (x *Person) Relationship() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relationship"))
 	return obj.Wrap(_r)
 }
 
+// IsContactSuggestion wraps the corresponding Objective-C method.
 func (x *Person) IsContactSuggestion() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isContactSuggestion"))
 	return _r
 }
 
+// Aliases wraps the corresponding Objective-C method.
+//
 // Aliases returns the collection as a Go slice.
 func (x *Person) Aliases() []*PersonHandle {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("aliases"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersonHandle { return PersonHandleFromID(_id) })
 }
 
+// SuggestionType wraps the corresponding Objective-C method.
 func (x *Person) SuggestionType() PersonSuggestionType {
 	_r := objc.Send[PersonSuggestionType](objref.IDOf(x), objc.RegisterName("suggestionType"))
 	return _r
 }
 
+// IsMe wraps the corresponding Objective-C method.
 func (x *Person) IsMe() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMe"))
 	return _r

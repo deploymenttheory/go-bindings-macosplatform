@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing the span of time between a specific start date and end date.
-//
 // DateInterval is an idiomatic wrapper over the Objective-C class NSDateInterval.
+//
+// An object representing the span of time between a specific start date and end date.
 type DateInterval struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DateIntervalFromID(id objc.ID) *DateInterval {
 	if id == 0 {
 		return nil
 	}
-	x := &DateInterval{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DateInterval{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func dateIntervalAdopt(id objc.ID) *DateInterval {
 	if id == 0 {
 		return nil
 	}
-	x := &DateInterval{Handle: objref.Wrap(id)}
+	x := &DateInterval{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,85 +60,88 @@ func (x *DateInterval) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DateInterval) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDateInterval creates a new DateInterval.
 func NewDateInterval() *DateInterval {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSDateInterval")), objc.RegisterName("new"))
 	return dateIntervalAdopt(_id)
 }
 
-// Returns a date interval initialized from data in the given unarchiver.
-//
-// NewDateIntervalWithCoder creates a new DateInterval.
+// NewDateIntervalWithCoder returns a date interval initialized from data in the given unarchiver.
 func NewDateIntervalWithCoder(coder *Coder) *DateInterval {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDateInterval")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return dateIntervalAdopt(_id)
 }
 
-// Initializes a date interval with a given start date and duration.
-//
-// NewDateIntervalWithStartDateDuration creates a new DateInterval.
+// NewDateIntervalWithStartDateDuration initializes a date interval with a given start date and duration.
 func NewDateIntervalWithStartDateDuration(startDate *Date, duration float64) *DateInterval {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDateInterval")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartDate:duration:"), objref.IDOf(startDate), duration)
 	return dateIntervalAdopt(_id)
 }
 
-// Initializes a date interval from a given start date and end date.
-//
-// NewDateIntervalWithStartDateEndDate creates a new DateInterval.
+// NewDateIntervalWithStartDateEndDate initializes a date interval from a given start date and end date.
 func NewDateIntervalWithStartDateEndDate(startDate *Date, endDate *Date) *DateInterval {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDateInterval")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartDate:endDate:"), objref.IDOf(startDate), objref.IDOf(endDate))
 	return dateIntervalAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *DateInterval) WithScriptingProperties(scriptingProperties obj.Object) *DateInterval {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Compares the receiver with the specified date interval.
+// Compare compares the receiver with the specified date interval.
 func (x *DateInterval) Compare(dateInterval *DateInterval) ComparisonResult {
 	_r := objc.Send[ComparisonResult](objref.IDOf(x), objc.RegisterName("compare:"), objref.IDOf(dateInterval))
 	return _r
 }
 
-// Indicates whether the receiver is equal to the specified date interval.
+// IsEqualToDateInterval indicates whether the receiver is equal to the specified date interval.
 func (x *DateInterval) IsEqualToDateInterval(dateInterval *DateInterval) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToDateInterval:"), objref.IDOf(dateInterval))
 	return _r
 }
 
-// Indicates whether the receiver intersects with the specified date interval.
+// IntersectsDateInterval indicates whether the receiver intersects with the specified date interval.
 func (x *DateInterval) IntersectsDateInterval(dateInterval *DateInterval) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("intersectsDateInterval:"), objref.IDOf(dateInterval))
 	return _r
 }
 
-// Returns the intersection between the receiver and the specified date interval.
+// IntersectionWithDateInterval returns the intersection between the receiver and the specified date interval.
 func (x *DateInterval) IntersectionWithDateInterval(dateInterval *DateInterval) *DateInterval {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intersectionWithDateInterval:"), objref.IDOf(dateInterval))
 	return DateIntervalFromID(_r)
 }
 
-// Indicates whether the receiver contains the specified date.
+// ContainsDate indicates whether the receiver contains the specified date.
 func (x *DateInterval) ContainsDate(date *Date) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsDate:"), objref.IDOf(date))
 	return _r
 }
 
+// StartDate wraps the corresponding Objective-C method.
 func (x *DateInterval) StartDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
 	return DateFromID(_r)
 }
 
+// EndDate wraps the corresponding Objective-C method.
 func (x *DateInterval) EndDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
 	return DateFromID(_r)
 }
 
+// Duration wraps the corresponding Objective-C method.
 func (x *DateInterval) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
 	return _r

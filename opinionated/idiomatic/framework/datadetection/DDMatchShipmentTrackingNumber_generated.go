@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains parcel tracking information that the data detection system matches.
-//
 // MatchShipmentTrackingNumber is an idiomatic wrapper over the Objective-C class DDMatchShipmentTrackingNumber.
+//
+// It embeds [Match], promoting that type's methods.
+//
+// An object that contains parcel tracking information that the data detection system matches.
 type MatchShipmentTrackingNumber struct {
-	objref.Handle
+	Match
 }
 
 // MatchShipmentTrackingNumberFromID adopts an existing Objective-C object as a MatchShipmentTrackingNumber
@@ -25,7 +26,8 @@ func MatchShipmentTrackingNumberFromID(id objc.ID) *MatchShipmentTrackingNumber 
 	if id == 0 {
 		return nil
 	}
-	x := &MatchShipmentTrackingNumber{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatchShipmentTrackingNumber{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func matchShipmentTrackingNumberAdopt(id objc.ID) *MatchShipmentTrackingNumber {
 	if id == 0 {
 		return nil
 	}
-	x := &MatchShipmentTrackingNumber{Handle: objref.Wrap(id)}
+	x := &MatchShipmentTrackingNumber{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MatchShipmentTrackingNumber) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatchShipmentTrackingNumber) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatchShipmentTrackingNumber) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMatchShipmentTrackingNumber creates a new MatchShipmentTrackingNumber.
@@ -64,7 +52,7 @@ func NewMatchShipmentTrackingNumber() *MatchShipmentTrackingNumber {
 	return matchShipmentTrackingNumberAdopt(_id)
 }
 
-// The name of a parcel carrier.
+// Carrier the name of a parcel carrier.
 func (x *MatchShipmentTrackingNumber) Carrier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("carrier"))
 	if _r == 0 {
@@ -73,7 +61,7 @@ func (x *MatchShipmentTrackingNumber) Carrier() string {
 	return purego.GoString(_r)
 }
 
-// A string that represents a carrier’s tracking identifier for a parcel.
+// TrackingNumber a string that represents a carrier’s tracking identifier for a parcel.
 func (x *MatchShipmentTrackingNumber) TrackingNumber() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trackingNumber"))
 	if _r == 0 {
@@ -90,3 +78,5 @@ type MatchShipmentTrackingNumberable interface {
 }
 
 var _ MatchShipmentTrackingNumberable = (*MatchShipmentTrackingNumber)(nil)
+
+var _ MatchProvider = (*MatchShipmentTrackingNumber)(nil)

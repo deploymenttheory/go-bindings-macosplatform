@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // AnimatedVector3Array is an idiomatic wrapper over the Objective-C class MDLAnimatedVector3Array.
+//
+// It embeds [AnimatedValue], promoting that type's methods.
 type AnimatedVector3Array struct {
-	objref.Handle
+	AnimatedValue
 }
 
 // AnimatedVector3ArrayFromID adopts an existing Objective-C object as a AnimatedVector3Array
@@ -23,7 +24,8 @@ func AnimatedVector3ArrayFromID(id objc.ID) *AnimatedVector3Array {
 	if id == 0 {
 		return nil
 	}
-	x := &AnimatedVector3Array{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AnimatedVector3Array{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func animatedVector3ArrayAdopt(id objc.ID) *AnimatedVector3Array {
 	if id == 0 {
 		return nil
 	}
-	x := &AnimatedVector3Array{Handle: objref.Wrap(id)}
+	x := &AnimatedVector3Array{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AnimatedVector3Array) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AnimatedVector3Array) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AnimatedVector3Array) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAnimatedVector3ArrayWithElementCount creates a new AnimatedVector3Array.
@@ -63,12 +51,13 @@ func NewAnimatedVector3ArrayWithElementCount(arrayElementCount int) *AnimatedVec
 	return animatedVector3ArrayAdopt(_id)
 }
 
-// WithInterpolation sets interpolation and returns the receiver so calls can be chained.
+// WithInterpolation sets the property and returns the receiver so calls can be chained.
 func (x *AnimatedVector3Array) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedVector3Array {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
 	return x
 }
 
+// ElementCount wraps the corresponding Objective-C method.
 func (x *AnimatedVector3Array) ElementCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("elementCount"))
 	return _r
@@ -82,3 +71,5 @@ type AnimatedVector3Arrayable interface {
 }
 
 var _ AnimatedVector3Arrayable = (*AnimatedVector3Array)(nil)
+
+var _ AnimatedValueProvider = (*AnimatedVector3Array)(nil)

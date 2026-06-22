@@ -6,15 +6,17 @@ package pdfkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that encapsulates the functionality of PDF Kit into a single widget that you can add to your application using Interface Builder.
-//
 // View is an idiomatic wrapper over the Objective-C class PDFView.
+//
+// An object that encapsulates the functionality of PDF Kit into a single widget that you can add to your application using Interface Builder.
 type View struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ViewFromID(id objc.ID) *View {
 	if id == 0 {
 		return nil
 	}
-	x := &View{Handle: objref.Wrap(purego.Retain(id))}
+	x := &View{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func viewAdopt(id objc.ID) *View {
 	if id == 0 {
 		return nil
 	}
-	x := &View{Handle: objref.Wrap(id)}
+	x := &View{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,503 +62,653 @@ func (x *View) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *View) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewView creates a new View.
 func NewView() *View {
 	_id := objc.Send[objc.ID](objc.ID(_class("PDFView")), objc.RegisterName("new"))
 	return viewAdopt(_id)
 }
 
-// Returns the document associated with a PDFView object.
-//
-// WithDocument sets document and returns the receiver so calls can be chained.
+// WithDocument returns the document associated with a PDFView object.
 func (x *View) WithDocument(document *Document) *View {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocument:"), objref.IDOf(document))
 	return x
 }
 
-// WithDisplayMode sets displayMode and returns the receiver so calls can be chained.
+// WithDisplayMode sets the property and returns the receiver so calls can be chained.
 func (x *View) WithDisplayMode(displayMode DisplayMode) *View {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayMode:"), displayMode)
 	return x
 }
 
-// WithDisplayDirection sets displayDirection and returns the receiver so calls can be chained.
+// WithDisplayDirection sets the property and returns the receiver so calls can be chained.
 func (x *View) WithDisplayDirection(displayDirection DisplayDirection) *View {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayDirection:"), displayDirection)
 	return x
 }
 
-// WithDisplaysPageBreaks sets displaysPageBreaks and returns the receiver so calls can be chained.
+// WithDisplaysPageBreaks sets the property and returns the receiver so calls can be chained.
 func (x *View) WithDisplaysPageBreaks(displaysPageBreaks bool) *View {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysPageBreaks:"), displaysPageBreaks)
 	return x
 }
 
-// WithDisplayBox sets displayBox and returns the receiver so calls can be chained.
+// WithPageBreakMargins sets the property and returns the receiver so calls can be chained.
+func (x *View) WithPageBreakMargins(pageBreakMargins foundation.NSEdgeInsets) *View {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageBreakMargins:"), pageBreakMargins)
+	return x
+}
+
+// WithDisplayBox sets the property and returns the receiver so calls can be chained.
 func (x *View) WithDisplayBox(displayBox DisplayBox) *View {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayBox:"), displayBox)
 	return x
 }
 
-// WithDisplaysAsBook sets displaysAsBook and returns the receiver so calls can be chained.
+// WithDisplaysAsBook sets the property and returns the receiver so calls can be chained.
 func (x *View) WithDisplaysAsBook(displaysAsBook bool) *View {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysAsBook:"), displaysAsBook)
 	return x
 }
 
-// WithDisplaysRTL sets displaysRTL and returns the receiver so calls can be chained.
+// WithDisplaysRTL sets the property and returns the receiver so calls can be chained.
 func (x *View) WithDisplaysRTL(displaysRTL bool) *View {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysRTL:"), displaysRTL)
 	return x
 }
 
-// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+// WithBackgroundColor sets the property and returns the receiver so calls can be chained.
 func (x *View) WithBackgroundColor(backgroundColor obj.Object) *View {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// WithInterpolationQuality sets interpolationQuality and returns the receiver so calls can be chained.
+// WithInterpolationQuality sets the property and returns the receiver so calls can be chained.
 func (x *View) WithInterpolationQuality(interpolationQuality InterpolationQuality) *View {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolationQuality:"), interpolationQuality)
 	return x
 }
 
-// WithPageShadowsEnabled sets pageShadowsEnabled and returns the receiver so calls can be chained.
+// WithPageShadowsEnabled sets the property and returns the receiver so calls can be chained.
 func (x *View) WithPageShadowsEnabled(pageShadowsEnabled bool) *View {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enablePageShadows:"), pageShadowsEnabled)
 	return x
 }
 
-// WithScaleFactor sets scaleFactor and returns the receiver so calls can be chained.
+// WithScaleFactor sets the property and returns the receiver so calls can be chained.
 func (x *View) WithScaleFactor(scaleFactor float64) *View {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleFactor:"), scaleFactor)
 	return x
 }
 
-// WithMinScaleFactor sets minScaleFactor and returns the receiver so calls can be chained.
+// WithMinScaleFactor sets the property and returns the receiver so calls can be chained.
 func (x *View) WithMinScaleFactor(minScaleFactor float64) *View {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinScaleFactor:"), minScaleFactor)
 	return x
 }
 
-// WithMaxScaleFactor sets maxScaleFactor and returns the receiver so calls can be chained.
+// WithMaxScaleFactor sets the property and returns the receiver so calls can be chained.
 func (x *View) WithMaxScaleFactor(maxScaleFactor float64) *View {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxScaleFactor:"), maxScaleFactor)
 	return x
 }
 
-// WithAutoScales sets autoScales and returns the receiver so calls can be chained.
+// WithAutoScales sets the property and returns the receiver so calls can be chained.
 func (x *View) WithAutoScales(autoScales bool) *View {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoScales:"), autoScales)
 	return x
 }
 
-// WithCurrentSelection sets currentSelection and returns the receiver so calls can be chained.
+// WithCurrentSelection sets the property and returns the receiver so calls can be chained.
 func (x *View) WithCurrentSelection(currentSelection *Selection) *View {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentSelection:"), objref.IDOf(currentSelection))
 	return x
 }
 
-// WithAcceptsDraggedFiles sets acceptsDraggedFiles and returns the receiver so calls can be chained.
+// WithAcceptsDraggedFiles sets the property and returns the receiver so calls can be chained.
 func (x *View) WithAcceptsDraggedFiles(acceptsDraggedFiles bool) *View {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsDraggedFiles:"), acceptsDraggedFiles)
 	return x
 }
 
-// WithEnableDataDetectors sets enableDataDetectors and returns the receiver so calls can be chained.
+// WithEnableDataDetectors sets the property and returns the receiver so calls can be chained.
 func (x *View) WithEnableDataDetectors(enableDataDetectors bool) *View {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableDataDetectors:"), enableDataDetectors)
 	return x
 }
 
-// WithInMarkupMode sets inMarkupMode and returns the receiver so calls can be chained.
+// WithInMarkupMode sets the property and returns the receiver so calls can be chained.
 func (x *View) WithInMarkupMode(inMarkupMode bool) *View {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInMarkupMode:"), inMarkupMode)
 	return x
 }
 
-// WithShouldAntiAlias sets shouldAntiAlias and returns the receiver so calls can be chained.
+// WithShouldAntiAlias sets the property and returns the receiver so calls can be chained.
 func (x *View) WithShouldAntiAlias(shouldAntiAlias bool) *View {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldAntiAlias:"), shouldAntiAlias)
 	return x
 }
 
-// WithGreekingThreshold sets greekingThreshold and returns the receiver so calls can be chained.
+// WithGreekingThreshold sets the property and returns the receiver so calls can be chained.
 func (x *View) WithGreekingThreshold(greekingThreshold float64) *View {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGreekingThreshold:"), greekingThreshold)
 	return x
 }
 
-// WithAllowsDragging sets allowsDragging and returns the receiver so calls can be chained.
+// WithAllowsDragging sets the property and returns the receiver so calls can be chained.
 func (x *View) WithAllowsDragging(allowsDragging bool) *View {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsDragging:"), allowsDragging)
 	return x
 }
 
+// GoToFirstPage wraps the corresponding Objective-C method.
 func (x *View) GoToFirstPage(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goToFirstPage:"), objref.IDOf(sender))
 }
 
+// GoToLastPage wraps the corresponding Objective-C method.
 func (x *View) GoToLastPage(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goToLastPage:"), objref.IDOf(sender))
 }
 
+// GoToNextPage wraps the corresponding Objective-C method.
 func (x *View) GoToNextPage(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goToNextPage:"), objref.IDOf(sender))
 }
 
+// GoToPreviousPage wraps the corresponding Objective-C method.
 func (x *View) GoToPreviousPage(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goToPreviousPage:"), objref.IDOf(sender))
 }
 
+// GoBack wraps the corresponding Objective-C method.
 func (x *View) GoBack(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goBack:"), objref.IDOf(sender))
 }
 
+// GoForward wraps the corresponding Objective-C method.
 func (x *View) GoForward(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goForward:"), objref.IDOf(sender))
 }
 
+// GoToPage wraps the corresponding Objective-C method.
 func (x *View) GoToPage(page *Page) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goToPage:"), objref.IDOf(page))
 }
 
+// GoToDestination wraps the corresponding Objective-C method.
 func (x *View) GoToDestination(destination *Destination) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goToDestination:"), objref.IDOf(destination))
 }
 
+// GoToSelection wraps the corresponding Objective-C method.
 func (x *View) GoToSelection(selection *Selection) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goToSelection:"), objref.IDOf(selection))
 }
 
+// GoToRectOnPage wraps the corresponding Objective-C method.
+func (x *View) GoToRectOnPage(rect corefoundation.CGRect, page *Page) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goToRect:onPage:"), rect, objref.IDOf(page))
+}
+
+// ZoomIn wraps the corresponding Objective-C method.
 func (x *View) ZoomIn(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoomIn:"), objref.IDOf(sender))
 }
 
+// ZoomOut wraps the corresponding Objective-C method.
 func (x *View) ZoomOut(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoomOut:"), objref.IDOf(sender))
 }
 
+// AreaOfInterestForMouse wraps the corresponding Objective-C method.
 func (x *View) AreaOfInterestForMouse(event obj.Object) AreaOfInterest {
 	_r := objc.Send[AreaOfInterest](objref.IDOf(x), objc.RegisterName("areaOfInterestForMouse:"), objref.IDOf(event))
 	return _r
 }
 
+// AreaOfInterestForPoint wraps the corresponding Objective-C method.
+func (x *View) AreaOfInterestForPoint(cursorLocation corefoundation.CGPoint) AreaOfInterest {
+	_r := objc.Send[AreaOfInterest](objref.IDOf(x), objc.RegisterName("areaOfInterestForPoint:"), cursorLocation)
+	return _r
+}
+
+// SetCursorForAreaOfInterest wraps the corresponding Objective-C method.
 func (x *View) SetCursorForAreaOfInterest(area AreaOfInterest) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCursorForAreaOfInterest:"), area)
 }
 
+// PerformAction wraps the corresponding Objective-C method.
 func (x *View) PerformAction(action *Action) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performAction:"), objref.IDOf(action))
 }
 
+// SetCurrentSelectionAnimate wraps the corresponding Objective-C method.
 func (x *View) SetCurrentSelectionAnimate(selection *Selection, animate bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentSelection:animate:"), objref.IDOf(selection), animate)
 }
 
+// ClearSelection wraps the corresponding Objective-C method.
 func (x *View) ClearSelection() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearSelection"))
 }
 
+// SelectAll wraps the corresponding Objective-C method.
 func (x *View) SelectAll(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectAll:"), objref.IDOf(sender))
 }
 
+// ScrollSelectionToVisible wraps the corresponding Objective-C method.
 func (x *View) ScrollSelectionToVisible(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollSelectionToVisible:"), objref.IDOf(sender))
 }
 
+// DrawPageToContext wraps the corresponding Objective-C method.
 func (x *View) DrawPageToContext(page *Page, context_ obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawPage:toContext:"), objref.IDOf(page), objref.IDOf(context_))
 }
 
+// DrawPagePostToContext wraps the corresponding Objective-C method.
 func (x *View) DrawPagePostToContext(page *Page, context_ obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawPagePost:toContext:"), objref.IDOf(page), objref.IDOf(context_))
 }
 
+// Copy wraps the corresponding Objective-C method.
 func (x *View) Copy(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copy:"), objref.IDOf(sender))
 }
 
+// PrintWithInfoAutoRotate wraps the corresponding Objective-C method.
 func (x *View) PrintWithInfoAutoRotate(printInfo obj.Object, doRotate bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printWithInfo:autoRotate:"), objref.IDOf(printInfo), doRotate)
 }
 
+// PrintWithInfoAutoRotatePageScaling wraps the corresponding Objective-C method.
 func (x *View) PrintWithInfoAutoRotatePageScaling(printInfo obj.Object, doRotate bool, scale PrintScalingMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printWithInfo:autoRotate:pageScaling:"), objref.IDOf(printInfo), doRotate, scale)
 }
 
+// PageForPointNearest wraps the corresponding Objective-C method.
+func (x *View) PageForPointNearest(point corefoundation.CGPoint, nearest bool) *Page {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pageForPoint:nearest:"), point, nearest)
+	return PageFromID(_r)
+}
+
+// ConvertPointToPage wraps the corresponding Objective-C method.
+func (x *View) ConvertPointToPage(point corefoundation.CGPoint, page *Page) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPoint:toPage:"), point, objref.IDOf(page))
+	return _r
+}
+
+// ConvertRectToPage wraps the corresponding Objective-C method.
+func (x *View) ConvertRectToPage(rect corefoundation.CGRect, page *Page) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("convertRect:toPage:"), rect, objref.IDOf(page))
+	return _r
+}
+
+// ConvertPointFromPage wraps the corresponding Objective-C method.
+func (x *View) ConvertPointFromPage(point corefoundation.CGPoint, page *Page) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPoint:fromPage:"), point, objref.IDOf(page))
+	return _r
+}
+
+// ConvertRectFromPage wraps the corresponding Objective-C method.
+func (x *View) ConvertRectFromPage(rect corefoundation.CGRect, page *Page) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("convertRect:fromPage:"), rect, objref.IDOf(page))
+	return _r
+}
+
+// LayoutDocumentView wraps the corresponding Objective-C method.
 func (x *View) LayoutDocumentView() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutDocumentView"))
 }
 
+// AnnotationsChangedOnPage wraps the corresponding Objective-C method.
 func (x *View) AnnotationsChangedOnPage(page *Page) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("annotationsChangedOnPage:"), objref.IDOf(page))
 }
 
+// RowSizeForPage wraps the corresponding Objective-C method.
+func (x *View) RowSizeForPage(page *Page) corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("rowSizeForPage:"), objref.IDOf(page))
+	return _r
+}
+
+// Document wraps the corresponding Objective-C method.
 func (x *View) Document() *Document {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("document"))
 	return DocumentFromID(_r)
 }
 
+// SetDocument wraps the corresponding Objective-C method.
 func (x *View) SetDocument(document *Document) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocument:"), objref.IDOf(document))
 }
 
+// CanGoToFirstPage wraps the corresponding Objective-C method.
 func (x *View) CanGoToFirstPage() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canGoToFirstPage"))
 	return _r
 }
 
+// CanGoToLastPage wraps the corresponding Objective-C method.
 func (x *View) CanGoToLastPage() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canGoToLastPage"))
 	return _r
 }
 
+// CanGoToNextPage wraps the corresponding Objective-C method.
 func (x *View) CanGoToNextPage() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canGoToNextPage"))
 	return _r
 }
 
+// CanGoToPreviousPage wraps the corresponding Objective-C method.
 func (x *View) CanGoToPreviousPage() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canGoToPreviousPage"))
 	return _r
 }
 
+// CanGoBack wraps the corresponding Objective-C method.
 func (x *View) CanGoBack() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canGoBack"))
 	return _r
 }
 
+// CanGoForward wraps the corresponding Objective-C method.
 func (x *View) CanGoForward() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canGoForward"))
 	return _r
 }
 
+// CurrentPage wraps the corresponding Objective-C method.
 func (x *View) CurrentPage() *Page {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentPage"))
 	return PageFromID(_r)
 }
 
+// CurrentDestination wraps the corresponding Objective-C method.
 func (x *View) CurrentDestination() *Destination {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentDestination"))
 	return DestinationFromID(_r)
 }
 
+// DisplayMode wraps the corresponding Objective-C method.
 func (x *View) DisplayMode() DisplayMode {
 	_r := objc.Send[DisplayMode](objref.IDOf(x), objc.RegisterName("displayMode"))
 	return _r
 }
 
+// SetDisplayMode wraps the corresponding Objective-C method.
 func (x *View) SetDisplayMode(displayMode DisplayMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayMode:"), displayMode)
 }
 
+// DisplayDirection wraps the corresponding Objective-C method.
 func (x *View) DisplayDirection() DisplayDirection {
 	_r := objc.Send[DisplayDirection](objref.IDOf(x), objc.RegisterName("displayDirection"))
 	return _r
 }
 
+// SetDisplayDirection wraps the corresponding Objective-C method.
 func (x *View) SetDisplayDirection(displayDirection DisplayDirection) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayDirection:"), displayDirection)
 }
 
+// DisplaysPageBreaks wraps the corresponding Objective-C method.
 func (x *View) DisplaysPageBreaks() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysPageBreaks"))
 	return _r
 }
 
+// SetDisplaysPageBreaks wraps the corresponding Objective-C method.
 func (x *View) SetDisplaysPageBreaks(displaysPageBreaks bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysPageBreaks:"), displaysPageBreaks)
 }
 
+// PageBreakMargins wraps the corresponding Objective-C method.
+func (x *View) PageBreakMargins() foundation.NSEdgeInsets {
+	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(x), objc.RegisterName("pageBreakMargins"))
+	return _r
+}
+
+// SetPageBreakMargins wraps the corresponding Objective-C method.
+func (x *View) SetPageBreakMargins(pageBreakMargins foundation.NSEdgeInsets) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageBreakMargins:"), pageBreakMargins)
+}
+
+// DisplayBox wraps the corresponding Objective-C method.
 func (x *View) DisplayBox() DisplayBox {
 	_r := objc.Send[DisplayBox](objref.IDOf(x), objc.RegisterName("displayBox"))
 	return _r
 }
 
+// SetDisplayBox wraps the corresponding Objective-C method.
 func (x *View) SetDisplayBox(displayBox DisplayBox) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayBox:"), displayBox)
 }
 
+// DisplaysAsBook wraps the corresponding Objective-C method.
 func (x *View) DisplaysAsBook() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysAsBook"))
 	return _r
 }
 
+// SetDisplaysAsBook wraps the corresponding Objective-C method.
 func (x *View) SetDisplaysAsBook(displaysAsBook bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysAsBook:"), displaysAsBook)
 }
 
+// DisplaysRTL wraps the corresponding Objective-C method.
 func (x *View) DisplaysRTL() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysRTL"))
 	return _r
 }
 
+// SetDisplaysRTL wraps the corresponding Objective-C method.
 func (x *View) SetDisplaysRTL(displaysRTL bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysRTL:"), displaysRTL)
 }
 
+// BackgroundColor wraps the corresponding Objective-C method.
 func (x *View) BackgroundColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
 }
 
+// SetBackgroundColor wraps the corresponding Objective-C method.
 func (x *View) SetBackgroundColor(backgroundColor obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
+// InterpolationQuality wraps the corresponding Objective-C method.
 func (x *View) InterpolationQuality() InterpolationQuality {
 	_r := objc.Send[InterpolationQuality](objref.IDOf(x), objc.RegisterName("interpolationQuality"))
 	return _r
 }
 
+// SetInterpolationQuality wraps the corresponding Objective-C method.
 func (x *View) SetInterpolationQuality(interpolationQuality InterpolationQuality) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolationQuality:"), interpolationQuality)
 }
 
+// PageShadowsEnabled wraps the corresponding Objective-C method.
 func (x *View) PageShadowsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("pageShadowsEnabled"))
 	return _r
 }
 
+// EnablePageShadows wraps the corresponding Objective-C method.
 func (x *View) EnablePageShadows(pageShadowsEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enablePageShadows:"), pageShadowsEnabled)
 }
 
+// ScaleFactor wraps the corresponding Objective-C method.
 func (x *View) ScaleFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactor"))
 	return _r
 }
 
+// SetScaleFactor wraps the corresponding Objective-C method.
 func (x *View) SetScaleFactor(scaleFactor float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleFactor:"), scaleFactor)
 }
 
+// MinScaleFactor wraps the corresponding Objective-C method.
 func (x *View) MinScaleFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minScaleFactor"))
 	return _r
 }
 
+// SetMinScaleFactor wraps the corresponding Objective-C method.
 func (x *View) SetMinScaleFactor(minScaleFactor float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinScaleFactor:"), minScaleFactor)
 }
 
+// MaxScaleFactor wraps the corresponding Objective-C method.
 func (x *View) MaxScaleFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxScaleFactor"))
 	return _r
 }
 
+// SetMaxScaleFactor wraps the corresponding Objective-C method.
 func (x *View) SetMaxScaleFactor(maxScaleFactor float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxScaleFactor:"), maxScaleFactor)
 }
 
+// AutoScales wraps the corresponding Objective-C method.
 func (x *View) AutoScales() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autoScales"))
 	return _r
 }
 
+// SetAutoScales wraps the corresponding Objective-C method.
 func (x *View) SetAutoScales(autoScales bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoScales:"), autoScales)
 }
 
+// ScaleFactorForSizeToFit wraps the corresponding Objective-C method.
 func (x *View) ScaleFactorForSizeToFit() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactorForSizeToFit"))
 	return _r
 }
 
+// CanZoomIn wraps the corresponding Objective-C method.
 func (x *View) CanZoomIn() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canZoomIn"))
 	return _r
 }
 
+// CanZoomOut wraps the corresponding Objective-C method.
 func (x *View) CanZoomOut() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canZoomOut"))
 	return _r
 }
 
+// CurrentSelection wraps the corresponding Objective-C method.
 func (x *View) CurrentSelection() *Selection {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentSelection"))
 	return SelectionFromID(_r)
 }
 
+// SetCurrentSelection wraps the corresponding Objective-C method.
 func (x *View) SetCurrentSelection(currentSelection *Selection) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentSelection:"), objref.IDOf(currentSelection))
 }
 
+// DocumentView wraps the corresponding Objective-C method.
 func (x *View) DocumentView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentView"))
 	return obj.Wrap(_r)
 }
 
+// AcceptsDraggedFiles wraps the corresponding Objective-C method.
 func (x *View) AcceptsDraggedFiles() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("acceptsDraggedFiles"))
 	return _r
 }
 
+// SetAcceptsDraggedFiles wraps the corresponding Objective-C method.
 func (x *View) SetAcceptsDraggedFiles(acceptsDraggedFiles bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsDraggedFiles:"), acceptsDraggedFiles)
 }
 
+// EnableDataDetectors wraps the corresponding Objective-C method.
 func (x *View) EnableDataDetectors() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enableDataDetectors"))
 	return _r
 }
 
+// SetEnableDataDetectors wraps the corresponding Objective-C method.
 func (x *View) SetEnableDataDetectors(enableDataDetectors bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableDataDetectors:"), enableDataDetectors)
 }
 
+// IsInMarkupMode wraps the corresponding Objective-C method.
 func (x *View) IsInMarkupMode() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInMarkupMode"))
 	return _r
 }
 
+// SetInMarkupMode wraps the corresponding Objective-C method.
 func (x *View) SetInMarkupMode(inMarkupMode bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInMarkupMode:"), inMarkupMode)
 }
 
-// Unlocks with the password from the specified sender.
+// TakePasswordFrom unlocks with the password from the specified sender.
 func (x *View) TakePasswordFrom(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takePasswordFrom:"), objref.IDOf(sender))
 }
 
+// DrawPage wraps the corresponding Objective-C method.
 func (x *View) DrawPage(page *Page) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawPage:"), objref.IDOf(page))
 }
 
+// DrawPagePost wraps the corresponding Objective-C method.
 func (x *View) DrawPagePost(page *Page) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawPagePost:"), objref.IDOf(page))
 }
 
+// TakeBackgroundColorFrom wraps the corresponding Objective-C method.
 func (x *View) TakeBackgroundColorFrom(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeBackgroundColorFrom:"), objref.IDOf(sender))
 }
 
+// ShouldAntiAlias wraps the corresponding Objective-C method.
 func (x *View) ShouldAntiAlias() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldAntiAlias"))
 	return _r
 }
 
+// SetShouldAntiAlias wraps the corresponding Objective-C method.
 func (x *View) SetShouldAntiAlias(shouldAntiAlias bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldAntiAlias:"), shouldAntiAlias)
 }
 
+// GreekingThreshold wraps the corresponding Objective-C method.
 func (x *View) GreekingThreshold() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("greekingThreshold"))
 	return _r
 }
 
+// SetGreekingThreshold wraps the corresponding Objective-C method.
 func (x *View) SetGreekingThreshold(greekingThreshold float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGreekingThreshold:"), greekingThreshold)
 }
 
+// AllowsDragging wraps the corresponding Objective-C method.
 func (x *View) AllowsDragging() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsDragging"))
 	return _r
 }
 
+// SetAllowsDragging wraps the corresponding Objective-C method.
 func (x *View) SetAllowsDragging(allowsDragging bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsDragging:"), allowsDragging)
 }
@@ -566,6 +720,7 @@ type Viewable interface {
 	WithDisplayMode(displayMode DisplayMode) *View
 	WithDisplayDirection(displayDirection DisplayDirection) *View
 	WithDisplaysPageBreaks(displaysPageBreaks bool) *View
+	WithPageBreakMargins(pageBreakMargins foundation.NSEdgeInsets) *View
 	WithDisplayBox(displayBox DisplayBox) *View
 	WithDisplaysAsBook(displaysAsBook bool) *View
 	WithDisplaysRTL(displaysRTL bool) *View
@@ -592,9 +747,11 @@ type Viewable interface {
 	GoToPage(page *Page)
 	GoToDestination(destination *Destination)
 	GoToSelection(selection *Selection)
+	GoToRectOnPage(rect corefoundation.CGRect, page *Page)
 	ZoomIn(sender obj.Object)
 	ZoomOut(sender obj.Object)
 	AreaOfInterestForMouse(event obj.Object) AreaOfInterest
+	AreaOfInterestForPoint(cursorLocation corefoundation.CGPoint) AreaOfInterest
 	SetCursorForAreaOfInterest(area AreaOfInterest)
 	PerformAction(action *Action)
 	SetCurrentSelectionAnimate(selection *Selection, animate bool)
@@ -606,8 +763,14 @@ type Viewable interface {
 	Copy(sender obj.Object)
 	PrintWithInfoAutoRotate(printInfo obj.Object, doRotate bool)
 	PrintWithInfoAutoRotatePageScaling(printInfo obj.Object, doRotate bool, scale PrintScalingMode)
+	PageForPointNearest(point corefoundation.CGPoint, nearest bool) *Page
+	ConvertPointToPage(point corefoundation.CGPoint, page *Page) corefoundation.CGPoint
+	ConvertRectToPage(rect corefoundation.CGRect, page *Page) corefoundation.CGRect
+	ConvertPointFromPage(point corefoundation.CGPoint, page *Page) corefoundation.CGPoint
+	ConvertRectFromPage(rect corefoundation.CGRect, page *Page) corefoundation.CGRect
 	LayoutDocumentView()
 	AnnotationsChangedOnPage(page *Page)
+	RowSizeForPage(page *Page) corefoundation.CGSize
 	Document() *Document
 	SetDocument(document *Document)
 	CanGoToFirstPage() bool
@@ -624,6 +787,8 @@ type Viewable interface {
 	SetDisplayDirection(displayDirection DisplayDirection)
 	DisplaysPageBreaks() bool
 	SetDisplaysPageBreaks(displaysPageBreaks bool)
+	PageBreakMargins() foundation.NSEdgeInsets
+	SetPageBreakMargins(pageBreakMargins foundation.NSEdgeInsets)
 	DisplayBox() DisplayBox
 	SetDisplayBox(displayBox DisplayBox)
 	DisplaysAsBook() bool

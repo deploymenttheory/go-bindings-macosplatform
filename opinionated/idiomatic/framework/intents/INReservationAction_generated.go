@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An action a user can perform that’s relevant to a reservation.
-//
 // ReservationAction is an idiomatic wrapper over the Objective-C class INReservationAction.
+//
+// An action a user can perform that’s relevant to a reservation.
 type ReservationAction struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ReservationActionFromID(id objc.ID) *ReservationAction {
 	if id == 0 {
 		return nil
 	}
-	x := &ReservationAction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ReservationAction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func reservationActionAdopt(id objc.ID) *ReservationAction {
 	if id == 0 {
 		return nil
 	}
-	x := &ReservationAction{Handle: objref.Wrap(id)}
+	x := &ReservationAction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,32 @@ func (x *ReservationAction) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new reservation action.
-//
-// NewReservationActionWithTypeValidDurationUserActivity creates a new ReservationAction.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ReservationAction) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewReservationActionWithTypeValidDurationUserActivity creates a new reservation action.
 func NewReservationActionWithTypeValidDurationUserActivity(type_ ReservationActionType, validDuration *DateComponentsRange, userActivity obj.Object) *ReservationAction {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INReservationAction")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:validDuration:userActivity:"), type_, objref.IDOf(validDuration), objref.IDOf(userActivity))
 	return reservationActionAdopt(_id)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *ReservationAction) Type() ReservationActionType {
 	_r := objc.Send[ReservationActionType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
+// ValidDuration wraps the corresponding Objective-C method.
 func (x *ReservationAction) ValidDuration() *DateComponentsRange {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
+// UserActivity wraps the corresponding Objective-C method.
 func (x *ReservationAction) UserActivity() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userActivity"))
 	return obj.Wrap(_r)

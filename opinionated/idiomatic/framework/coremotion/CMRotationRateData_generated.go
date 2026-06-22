@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A data object that contains a single rotation-rate measurement.
-//
 // RotationRateData is an idiomatic wrapper over the Objective-C class CMRotationRateData.
+//
+// RotationRateData is an abstract base — you do not construct it directly. Construct one of [RecordedRotationRateData] and pass it where a RotationRateData is accepted.
+//
+// A data object that contains a single rotation-rate measurement.
 type RotationRateData struct {
-	objref.Handle
+	LogItem
 }
 
 // RotationRateDataFromID adopts an existing Objective-C object as a RotationRateData
@@ -25,7 +26,8 @@ func RotationRateDataFromID(id objc.ID) *RotationRateData {
 	if id == 0 {
 		return nil
 	}
-	x := &RotationRateData{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RotationRateData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,30 +40,10 @@ func rotationRateDataAdopt(id objc.ID) *RotationRateData {
 	if id == 0 {
 		return nil
 	}
-	x := &RotationRateData{Handle: objref.Wrap(id)}
+	x := &RotationRateData{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RotationRateData) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RotationRateData) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RotationRateData) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewRotationRateData creates a new RotationRateData.
-func NewRotationRateData() *RotationRateData {
-	_id := objc.Send[objc.ID](objc.ID(_class("CMRotationRateData")), objc.RegisterName("new"))
-	return rotationRateDataAdopt(_id)
 }
 
 // RotationRateDataable is the interface implemented by [RotationRateData], for mocking and DI.
@@ -70,3 +52,12 @@ type RotationRateDataable interface {
 }
 
 var _ RotationRateDataable = (*RotationRateData)(nil)
+
+// isRotationRateData marks RotationRateData — and, by embedding promotion, its
+// subclasses — as a member of the RotationRateData hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *RotationRateData) isRotationRateData() {}
+
+var _ RotationRateDataProvider = (*RotationRateData)(nil)
+
+var _ LogItemProvider = (*RotationRateData)(nil)

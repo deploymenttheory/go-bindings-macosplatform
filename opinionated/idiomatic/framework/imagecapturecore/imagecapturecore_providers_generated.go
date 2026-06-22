@@ -11,19 +11,23 @@ import (
 // CameraItemProvider is accepted wherever a ICCameraItem (or one of its subclasses) is expected.
 type CameraItemProvider interface {
 	objref.Object
+	isCameraItem()
 }
 
 // DeviceProvider is accepted wherever a ICDevice (or one of its subclasses) is expected.
 type DeviceProvider interface {
 	objref.Object
+	isDevice()
 }
 
 // ScannerFeatureProvider is accepted wherever a ICScannerFeature (or one of its subclasses) is expected.
 type ScannerFeatureProvider interface {
 	objref.Object
+	isScannerFeature()
 }
 
 // ScannerFunctionalUnitProvider is accepted wherever a ICScannerFunctionalUnit (or one of its subclasses) is expected.
 type ScannerFunctionalUnitProvider interface {
 	objref.Object
+	isScannerFunctionalUnit()
 }

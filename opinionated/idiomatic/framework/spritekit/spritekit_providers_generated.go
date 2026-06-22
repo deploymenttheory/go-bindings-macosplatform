@@ -11,24 +11,29 @@ import (
 // EffectNodeProvider is accepted wherever a SKEffectNode (or one of its subclasses) is expected.
 type EffectNodeProvider interface {
 	objref.Object
+	isEffectNode()
 }
 
 // NodeProvider is accepted wherever a SKNode (or one of its subclasses) is expected.
 type NodeProvider interface {
 	objref.Object
+	isNode()
 }
 
 // PhysicsJointProvider is accepted wherever a SKPhysicsJoint (or one of its subclasses) is expected.
 type PhysicsJointProvider interface {
 	objref.Object
+	isPhysicsJoint()
 }
 
 // TextureProvider is accepted wherever a SKTexture (or one of its subclasses) is expected.
 type TextureProvider interface {
 	objref.Object
+	isTexture()
 }
 
 // WarpGeometryProvider is accepted wherever a SKWarpGeometry (or one of its subclasses) is expected.
 type WarpGeometryProvider interface {
 	objref.Object
+	isWarpGeometry()
 }

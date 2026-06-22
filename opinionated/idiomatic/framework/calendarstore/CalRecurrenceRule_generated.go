@@ -23,7 +23,8 @@ func CalRecurrenceRuleFromID(id objc.ID) *CalRecurrenceRule {
 	if id == 0 {
 		return nil
 	}
-	x := &CalRecurrenceRule{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CalRecurrenceRule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func calRecurrenceRuleAdopt(id objc.ID) *CalRecurrenceRule {
 	if id == 0 {
 		return nil
 	}
-	x := &CalRecurrenceRule{Handle: objref.Wrap(id)}
+	x := &CalRecurrenceRule{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *CalRecurrenceRule) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *CalRecurrenceRule) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CalRecurrenceRule) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewCalRecurrenceRuleDailyRecurrenceWithIntervalEnd creates a new CalRecurrenceRule.
@@ -119,41 +127,49 @@ func NewCalRecurrenceRuleYearlyRecurrenceWithIntervalForDayOfTheWeekForWeekOfThe
 	return calRecurrenceRuleAdopt(_id)
 }
 
+// RecurrenceEnd wraps the corresponding Objective-C method.
 func (x *CalRecurrenceRule) RecurrenceEnd() *CalRecurrenceEnd {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recurrenceEnd"))
 	return CalRecurrenceEndFromID(_r)
 }
 
+// RecurrenceType wraps the corresponding Objective-C method.
 func (x *CalRecurrenceRule) RecurrenceType() CalRecurrenceType {
 	_r := objc.Send[CalRecurrenceType](objref.IDOf(x), objc.RegisterName("recurrenceType"))
 	return _r
 }
 
+// RecurrenceInterval wraps the corresponding Objective-C method.
 func (x *CalRecurrenceRule) RecurrenceInterval() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("recurrenceInterval"))
 	return _r
 }
 
+// FirstDayOfTheWeek wraps the corresponding Objective-C method.
 func (x *CalRecurrenceRule) FirstDayOfTheWeek() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("firstDayOfTheWeek"))
 	return _r
 }
 
+// DaysOfTheWeek wraps the corresponding Objective-C method.
 func (x *CalRecurrenceRule) DaysOfTheWeek() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("daysOfTheWeek"))
 	return obj.Wrap(_r)
 }
 
+// DaysOfTheMonth wraps the corresponding Objective-C method.
 func (x *CalRecurrenceRule) DaysOfTheMonth() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("daysOfTheMonth"))
 	return obj.Wrap(_r)
 }
 
+// NthWeekDaysOfTheMonth wraps the corresponding Objective-C method.
 func (x *CalRecurrenceRule) NthWeekDaysOfTheMonth() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nthWeekDaysOfTheMonth"))
 	return obj.Wrap(_r)
 }
 
+// MonthsOfTheYear wraps the corresponding Objective-C method.
 func (x *CalRecurrenceRule) MonthsOfTheYear() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("monthsOfTheYear"))
 	return obj.Wrap(_r)

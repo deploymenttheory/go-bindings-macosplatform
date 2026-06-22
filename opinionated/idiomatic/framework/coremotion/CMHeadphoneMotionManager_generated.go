@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that starts and manages headphone motion services.
-//
 // HeadphoneMotionManager is an idiomatic wrapper over the Objective-C class CMHeadphoneMotionManager.
+//
+// An object that starts and manages headphone motion services.
 type HeadphoneMotionManager struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func HeadphoneMotionManagerFromID(id objc.ID) *HeadphoneMotionManager {
 	if id == 0 {
 		return nil
 	}
-	x := &HeadphoneMotionManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HeadphoneMotionManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func headphoneMotionManagerAdopt(id objc.ID) *HeadphoneMotionManager {
 	if id == 0 {
 		return nil
 	}
-	x := &HeadphoneMotionManager{Handle: objref.Wrap(id)}
+	x := &HeadphoneMotionManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,45 +60,57 @@ func (x *HeadphoneMotionManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HeadphoneMotionManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewHeadphoneMotionManager creates a new HeadphoneMotionManager.
 func NewHeadphoneMotionManager() *HeadphoneMotionManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("CMHeadphoneMotionManager")), objc.RegisterName("new"))
 	return headphoneMotionManagerAdopt(_id)
 }
 
-// Starts device-motion updates.
+// StartDeviceMotionUpdates starts device-motion updates.
 func (x *HeadphoneMotionManager) StartDeviceMotionUpdates() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDeviceMotionUpdates"))
 }
 
-// Stops device-motion updates.
+// StopDeviceMotionUpdates stops device-motion updates.
 func (x *HeadphoneMotionManager) StopDeviceMotionUpdates() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopDeviceMotionUpdates"))
 }
 
+// StartConnectionStatusUpdates wraps the corresponding Objective-C method.
 func (x *HeadphoneMotionManager) StartConnectionStatusUpdates() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startConnectionStatusUpdates"))
 }
 
+// StopConnectionStatusUpdates wraps the corresponding Objective-C method.
 func (x *HeadphoneMotionManager) StopConnectionStatusUpdates() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopConnectionStatusUpdates"))
 }
 
+// IsConnectionStatusActive wraps the corresponding Objective-C method.
 func (x *HeadphoneMotionManager) IsConnectionStatusActive() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConnectionStatusActive"))
 	return _r
 }
 
+// IsDeviceMotionAvailable wraps the corresponding Objective-C method.
 func (x *HeadphoneMotionManager) IsDeviceMotionAvailable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDeviceMotionAvailable"))
 	return _r
 }
 
+// IsDeviceMotionActive wraps the corresponding Objective-C method.
 func (x *HeadphoneMotionManager) IsDeviceMotionActive() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDeviceMotionActive"))
 	return _r
 }
 
+// DeviceMotion wraps the corresponding Objective-C method.
 func (x *HeadphoneMotionManager) DeviceMotion() *DeviceMotion {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceMotion"))
 	return DeviceMotionFromID(_r)

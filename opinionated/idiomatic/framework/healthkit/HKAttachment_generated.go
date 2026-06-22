@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A file that is attached to a sample in the HealthKit store.
-//
 // Attachment is an idiomatic wrapper over the Objective-C class HKAttachment.
+//
+// A file that is attached to a sample in the HealthKit store.
 type Attachment struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AttachmentFromID(id objc.ID) *Attachment {
 	if id == 0 {
 		return nil
 	}
-	x := &Attachment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Attachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func attachmentAdopt(id objc.ID) *Attachment {
 	if id == 0 {
 		return nil
 	}
-	x := &Attachment{Handle: objref.Wrap(id)}
+	x := &Attachment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *Attachment) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Attachment) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAttachment creates a new Attachment.
 func NewAttachment() *Attachment {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKAttachment")), objc.RegisterName("new"))
 	return attachmentAdopt(_id)
 }
 
-// A unique identifier of the receiver in the HealthKit database.
+// Identifier a unique identifier of the receiver in the HealthKit database.
 func (x *Attachment) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
-// Represents the name of the file.
+// Name represents the name of the file.
 func (x *Attachment) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -79,25 +87,25 @@ func (x *Attachment) Name() string {
 	return purego.GoString(_r)
 }
 
-// The Uniform Type of the file.
+// ContentType the Uniform Type of the file.
 func (x *Attachment) ContentType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
 	return obj.Wrap(_r)
 }
 
-// The size in bytes of the file.
+// Size the size in bytes of the file.
 func (x *Attachment) Size() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("size"))
 	return _r
 }
 
-// The date the receiver was created.
+// CreationDate the date the receiver was created.
 func (x *Attachment) CreationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creationDate"))
 	return obj.Wrap(_r)
 }
 
-// Extra information describing the attachment. Keys must be NSString and values must be either NSString, NSNumber, or NSDate.
+// Metadata extra information describing the attachment. Keys must be NSString and values must be either NSString, NSNumber, or NSDate.
 func (x *Attachment) Metadata() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
 	return obj.Wrap(_r)

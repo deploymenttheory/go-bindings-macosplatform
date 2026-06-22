@@ -1,0 +1,18 @@
+{{/*
+    constant.tmpl renders accessors for a framework's global constant values.
+    Each constant is a named symbol in the framework's library; _symbol returns
+    its address and CFConstant reads the value from it. CoreFoundation references
+    and non-Foundation string constants are objects (returned as obj.Object);
+    Foundation's own string constants are returned as the package's String type.
+    The Kind is decided in gather; the template only shapes each accessor.
+*/}}
+{{define "constants"}}{{range .}}{{template "constant" .}}{{end}}{{end}}
+{{define "constant"}}
+{{- if eq .Kind 0}}// {{.GoName}} returns the value of the constant {{.ExternName}}.
+func {{.GoName}}() obj.Object { return obj.Wrap(purego.CFConstant(_symbol({{.ExternName | printf "%q"}}))) }
+{{else if eq .Kind 1}}// {{.GoName}} returns the string constant {{.ExternName}}.
+func {{.GoName}}() *String { return StringFromID(purego.CFConstant(_symbol({{.ExternName | printf "%q"}}))) }
+{{else}}// {{.GoName}} returns the string constant {{.ExternName}}, for use as a dictionary key or argument.
+func {{.GoName}}() obj.Object { return obj.Wrap(purego.CFConstant(_symbol({{.ExternName | printf "%q"}}))) }
+{{end}}
+{{end}}

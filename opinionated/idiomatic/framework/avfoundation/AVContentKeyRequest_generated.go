@@ -15,9 +15,11 @@ import (
 	"unsafe"
 )
 
-// An object that encapsulates information about a content decryption key request issued from a content key session object.
-//
 // ContentKeyRequest is an idiomatic wrapper over the Objective-C class AVContentKeyRequest.
+//
+// ContentKeyRequest is an abstract base — you do not construct it directly. Construct one of [PersistableContentKeyRequest] and pass it where a ContentKeyRequest is accepted.
+//
+// An object that encapsulates information about a content decryption key request issued from a content key session object.
 type ContentKeyRequest struct {
 	objref.Handle
 }
@@ -28,7 +30,8 @@ func ContentKeyRequestFromID(id objc.ID) *ContentKeyRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &ContentKeyRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContentKeyRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -41,7 +44,8 @@ func contentKeyRequestAdopt(id objc.ID) *ContentKeyRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &ContentKeyRequest{Handle: objref.Wrap(id)}
+	x := &ContentKeyRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -61,16 +65,16 @@ func (x *ContentKeyRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewContentKeyRequest creates a new ContentKeyRequest.
-func NewContentKeyRequest() *ContentKeyRequest {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVContentKeyRequest")), objc.RegisterName("new"))
-	return contentKeyRequestAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContentKeyRequest) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Obtains encrypted key request data for a specific combination of app and content.
+// MakeStreamingContentKeyRequestDataForAppContentIdentifierOptions obtains encrypted key request data for a specific combination of app and content.
 //
 // MakeStreamingContentKeyRequestDataForAppContentIdentifierOptions blocks until the operation completes or ctx is cancelled.
-func (x *ContentKeyRequest) MakeStreamingContentKeyRequestDataForAppContentIdentifierOptions(ctx context.Context, appIdentifier obj.Object, contentIdentifier obj.Object, options obj.Object) (obj.Object, error) {
+func (x *ContentKeyRequest) MakeStreamingContentKeyRequestDataForAppContentIdentifierOptions(ctx context.Context, appIdentifier obj.Object, contentIdentifier obj.Object, options obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -92,12 +96,12 @@ func (x *ContentKeyRequest) MakeStreamingContentKeyRequestDataForAppContentIdent
 	}
 }
 
-// Sends the specified content key response to the receiver for processing.
+// ProcessContentKeyResponse sends the specified content key response to the receiver for processing.
 func (x *ContentKeyRequest) ProcessContentKeyResponse(keyResponse *ContentKeyResponse) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processContentKeyResponse:"), objref.IDOf(keyResponse))
 }
 
-// Tells the receiver that the app requires a persistable content key request object for processing.
+// RespondByRequestingPersistableContentKeyRequestAndReturnError tells the receiver that the app requires a persistable content key request object for processing.
 //
 // RespondByRequestingPersistableContentKeyRequestAndReturnError returns an error if the operation did not succeed.
 func (x *ContentKeyRequest) RespondByRequestingPersistableContentKeyRequestAndReturnError() error {
@@ -109,42 +113,43 @@ func (x *ContentKeyRequest) RespondByRequestingPersistableContentKeyRequestAndRe
 	return nil
 }
 
-// This describes the state of the AVContentKeyRequest, value is one of AVContentKeyRequestStatus.
+// Status this describes the state of the AVContentKeyRequest, value is one of AVContentKeyRequestStatus.
 func (x *ContentKeyRequest) Status() ContentKeyRequestStatus {
 	_r := objc.Send[ContentKeyRequestStatus](objref.IDOf(x), objc.RegisterName("status"))
 	return _r
 }
 
-// Container- and protocol-specific identifier for the content key. In order to use a key with an HTTP Live Streaming AVURLAsset, the identifier must be an NSURL that matches a key URI in the Media Playlist.
+// Identifier container- and protocol-specific identifier for the content key. In order to use a key with an HTTP Live Streaming AVURLAsset, the identifier must be an NSURL that matches a key URI in the Media Playlist.
 func (x *ContentKeyRequest) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
-// Additional information specified while initiaing key loading using -processContentKeyRequestWithIdentifier:initializationData:options:.
+// Options additional information specified while initiaing key loading using -processContentKeyRequestWithIdentifier:initializationData:options:.
 func (x *ContentKeyRequest) Options() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
 	return obj.Wrap(_r)
 }
 
-// When the value of this property is YES, you can use the method -persistableContentKeyFromKeyVendorResponse:options:error: to create a persistable content key from the content key response. The value of this property will be YES only when the receiver is provided to your AVContentKeySession delegate via the method -contentKeySession:didProvidePersistableContentKeyRequest:. If you have an AVContentKeyRequest for which the value of canProvidePersistableContentKey is NO, but you wish to obtain a persistable content key, send the AVContentKeyRequest the message -respondByRequestingPersistableContentKeyRequest.
+// CanProvidePersistableContentKey when the value of this property is YES, you can use the method -persistableContentKeyFromKeyVendorResponse:options:error: to create a persistable content key from the content key response. The value of this property will be YES only when the receiver is provided to your AVContentKeySession delegate via the method -contentKeySession:didProvidePersistableContentKeyRequest:. If you have an AVContentKeyRequest for which the value of canProvidePersistableContentKey is NO, but you wish to obtain a persistable content key, send the AVContentKeyRequest the message -respondByRequestingPersistableContentKeyRequest.
 func (x *ContentKeyRequest) CanProvidePersistableContentKey() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canProvidePersistableContentKey"))
 	return _r
 }
 
-// Specifies the requested content key.
+// ContentKeySpecifier specifies the requested content key.
 func (x *ContentKeyRequest) ContentKeySpecifier() *ContentKeySpecifier {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentKeySpecifier"))
 	return ContentKeySpecifierFromID(_r)
 }
 
-// Represents an AVContentKey that results from an invocation of -processContentKeyResponse:. Before the receiver achieves the status AVContentKeyRequestReceivedResponse, the value of this property will be nil. Once that status has been achieved, the value of this property becomes a non-nil AVContentKey that can be provided to content key recipients that apply content keys manually to objects that require them, such as CMSampleBuffers, or to initiate renewal. A non-nil value does not indicate that the content key is valid; authorization failures may yet be possible.
+// ContentKey represents an AVContentKey that results from an invocation of -processContentKeyResponse:. Before the receiver achieves the status AVContentKeyRequestReceivedResponse, the value of this property will be nil. Once that status has been achieved, the value of this property becomes a non-nil AVContentKey that can be provided to content key recipients that apply content keys manually to objects that require them, such as CMSampleBuffers, or to initiate renewal. A non-nil value does not indicate that the content key is valid; authorization failures may yet be possible.
 func (x *ContentKeyRequest) ContentKey() *ContentKey {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentKey"))
 	return ContentKeyFromID(_r)
 }
 
+// RenewsExpiringResponseData wraps the corresponding Objective-C method.
 func (x *ContentKeyRequest) RenewsExpiringResponseData() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("renewsExpiringResponseData"))
 	return _r
@@ -166,3 +171,10 @@ type ContentKeyRequestable interface {
 }
 
 var _ ContentKeyRequestable = (*ContentKeyRequest)(nil)
+
+// isContentKeyRequest marks ContentKeyRequest — and, by embedding promotion, its
+// subclasses — as a member of the ContentKeyRequest hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ContentKeyRequest) isContentKeyRequest() {}
+
+var _ ContentKeyRequestProvider = (*ContentKeyRequest)(nil)

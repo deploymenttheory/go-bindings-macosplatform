@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a snapshot of the changes made to a movie script, including the added user decisions and detection tracks.
-//
 // ScriptChanges is an idiomatic wrapper over the Objective-C class CNScriptChanges.
+//
+// An object that represents a snapshot of the changes made to a movie script, including the added user decisions and detection tracks.
 type ScriptChanges struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ScriptChangesFromID(id objc.ID) *ScriptChanges {
 	if id == 0 {
 		return nil
 	}
-	x := &ScriptChanges{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScriptChanges{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func scriptChangesAdopt(id objc.ID) *ScriptChanges {
 	if id == 0 {
 		return nil
 	}
-	x := &ScriptChanges{Handle: objref.Wrap(id)}
+	x := &ScriptChanges{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,32 @@ func (x *ScriptChanges) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a previously saved data representation.
-//
-// NewScriptChangesWithDataRepresentation creates a new ScriptChanges.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScriptChanges) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewScriptChangesWithDataRepresentation creates a previously saved data representation.
 func NewScriptChangesWithDataRepresentation(dataRepresentation obj.Object) *ScriptChanges {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CNScriptChanges")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:"), objref.IDOf(dataRepresentation))
 	return scriptChangesAdopt(_id)
 }
 
-// Get persistent data representation of these changes for later restoration. The changes can only be used with the original cinematic asset from which the CNScript was created.
+// DataRepresentation get persistent data representation of these changes for later restoration. The changes can only be used with the original cinematic asset from which the CNScript was created.
 func (x *ScriptChanges) DataRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// The f/number to apply to the entire movie.
+// FNumber the f/number to apply to the entire movie.
 func (x *ScriptChanges) FNumber() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("fNumber"))
 	return _r
 }
 
-// All active user decisions, including those made at recording time, unless they have been removed.
+// UserDecisions all active user decisions, including those made at recording time, unless they have been removed.
 //
 // UserDecisions returns the collection as a Go slice.
 func (x *ScriptChanges) UserDecisions() []*Decision {
@@ -87,7 +93,7 @@ func (x *ScriptChanges) UserDecisions() []*Decision {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Decision { return DecisionFromID(_id) })
 }
 
-// All detection tracks that have been added. Does not include those created at recording time.
+// AddedDetectionTracks all detection tracks that have been added. Does not include those created at recording time.
 //
 // AddedDetectionTracks returns the collection as a Go slice.
 func (x *ScriptChanges) AddedDetectionTracks() []*DetectionTrack {

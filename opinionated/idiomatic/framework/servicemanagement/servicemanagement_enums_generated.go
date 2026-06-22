@@ -18,6 +18,8 @@ const (
 	AppServiceStatusNotFound         AppServiceStatus = 3
 )
 
+// String returns the AppServiceStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AppServiceStatus) String() string {
 	switch e {
 	case AppServiceStatusNotRegistered:

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A circular impassable area to be avoided by agents.
-//
 // CircleObstacle is an idiomatic wrapper over the Objective-C class GKCircleObstacle.
+//
+// It embeds [Obstacle], promoting that type's methods.
+//
+// A circular impassable area to be avoided by agents.
 type CircleObstacle struct {
-	objref.Handle
+	Obstacle
 }
 
 // CircleObstacleFromID adopts an existing Objective-C object as a CircleObstacle
@@ -25,7 +26,8 @@ func CircleObstacleFromID(id objc.ID) *CircleObstacle {
 	if id == 0 {
 		return nil
 	}
-	x := &CircleObstacle{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CircleObstacle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,49 +40,32 @@ func circleObstacleAdopt(id objc.ID) *CircleObstacle {
 	if id == 0 {
 		return nil
 	}
-	x := &CircleObstacle{Handle: objref.Wrap(id)}
+	x := &CircleObstacle{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CircleObstacle) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CircleObstacle) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CircleObstacle) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a circular obstacle with the specified radius.
-//
-// NewCircleObstacleWithRadius creates a new CircleObstacle.
+// NewCircleObstacleWithRadius initializes a circular obstacle with the specified radius.
 func NewCircleObstacleWithRadius(radius float32) *CircleObstacle {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKCircleObstacle")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRadius:"), radius)
 	return circleObstacleAdopt(_id)
 }
 
-// The radius of the obstacle.
-//
-// WithRadius sets radius and returns the receiver so calls can be chained.
+// WithRadius the radius of the obstacle.
 func (x *CircleObstacle) WithRadius(radius float32) *CircleObstacle {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 	return x
 }
 
-// Radius of the impassible circle
+// Radius radius of the impassible circle
 func (x *CircleObstacle) Radius() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("radius"))
 	return _r
 }
 
+// SetRadius wraps the corresponding Objective-C method.
 func (x *CircleObstacle) SetRadius(radius float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 }
@@ -94,3 +79,5 @@ type CircleObstacleable interface {
 }
 
 var _ CircleObstacleable = (*CircleObstacle)(nil)
+
+var _ ObstacleProvider = (*CircleObstacle)(nil)

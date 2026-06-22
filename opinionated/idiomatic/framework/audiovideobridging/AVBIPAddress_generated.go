@@ -23,7 +23,8 @@ func IPAddressFromID(id objc.ID) *IPAddress {
 	if id == 0 {
 		return nil
 	}
-	x := &IPAddress{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IPAddress{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func iPAddressAdopt(id objc.ID) *IPAddress {
 	if id == 0 {
 		return nil
 	}
-	x := &IPAddress{Handle: objref.Wrap(id)}
+	x := &IPAddress{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,75 +58,73 @@ func (x *IPAddress) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// This method initializes the receiver to contain the IPv6 address specified.
-//
-// NewIPAddressWithIPv6AddressData creates a new IPAddress.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IPAddress) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewIPAddressWithIPv6AddressData this method initializes the receiver to contain the IPv6 address specified.
 func NewIPAddressWithIPv6AddressData(ipv6Address obj.Object) *IPAddress {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVBIPAddress")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIPv6AddressData:"), objref.IDOf(ipv6Address))
 	return iPAddressAdopt(_id)
 }
 
-// This method initializes the receiver to contain the IPv4 address specified.
-//
-// NewIPAddressWithIPv4Address creates a new IPAddress.
+// NewIPAddressWithIPv4Address this method initializes the receiver to contain the IPv4 address specified.
 func NewIPAddressWithIPv4Address(ipv4Address uint32) *IPAddress {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVBIPAddress")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIPv4Address:"), ipv4Address)
 	return iPAddressAdopt(_id)
 }
 
-// An NSData object containing the bytes of the IPv6 representaion of the address. This value is always valid and uses the IPv4 to IPv6 address translation of 2.5.5.2 of RFC 4291 to encode the address
-//
-// WithIpv6Address sets ipv6Address and returns the receiver so calls can be chained.
+// WithIpv6Address an NSData object containing the bytes of the IPv6 representaion of the address. This value is always valid and uses the IPv4 to IPv6 address translation of 2.5.5.2 of RFC 4291 to encode the address
 func (x *IPAddress) WithIpv6Address(ipv6Address obj.Object) *IPAddress {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIpv6Address:"), objref.IDOf(ipv6Address))
 	return x
 }
 
-// An unsigned32 bit integer containg the IPv4 representaion in host byte order. This value is only valid when representsIPv4Address returns YES.
-//
-// WithIpv4Address sets ipv4Address and returns the receiver so calls can be chained.
+// WithIpv4Address an unsigned32 bit integer containg the IPv4 representaion in host byte order. This value is only valid when representsIPv4Address returns YES.
 func (x *IPAddress) WithIpv4Address(ipv4Address uint32) *IPAddress {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIpv4Address:"), ipv4Address)
 	return x
 }
 
-// A strign representation of the IP address in the appropriate representation for IPv4 or IPv6.
-//
-// WithStringRepresentation sets stringRepresentation and returns the receiver so calls can be chained.
+// WithStringRepresentation a strign representation of the IP address in the appropriate representation for IPv4 or IPv6.
 func (x *IPAddress) WithStringRepresentation(stringRepresentation string) *IPAddress {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringRepresentation:"), purego.NSString(stringRepresentation))
 	return x
 }
 
-// A boolean indicating if the address is an IPv4 address.
+// RepresentsIPv4Address a boolean indicating if the address is an IPv4 address.
 func (x *IPAddress) RepresentsIPv4Address() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("representsIPv4Address"))
 	return _r
 }
 
-// An NSData object containing the bytes of the IPv6 representaion of the address. This value is always valid and uses the IPv4 to IPv6 address translation of 2.5.5.2 of RFC 4291 to encode the address
+// Ipv6Address an NSData object containing the bytes of the IPv6 representaion of the address. This value is always valid and uses the IPv4 to IPv6 address translation of 2.5.5.2 of RFC 4291 to encode the address
 func (x *IPAddress) Ipv6Address() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ipv6Address"))
 	return obj.Wrap(_r)
 }
 
+// SetIpv6Address wraps the corresponding Objective-C method.
 func (x *IPAddress) SetIpv6Address(ipv6Address obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIpv6Address:"), objref.IDOf(ipv6Address))
 }
 
-// An unsigned32 bit integer containg the IPv4 representaion in host byte order. This value is only valid when representsIPv4Address returns YES.
+// Ipv4Address an unsigned32 bit integer containg the IPv4 representaion in host byte order. This value is only valid when representsIPv4Address returns YES.
 func (x *IPAddress) Ipv4Address() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("ipv4Address"))
 	return _r
 }
 
+// SetIpv4Address wraps the corresponding Objective-C method.
 func (x *IPAddress) SetIpv4Address(ipv4Address uint32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIpv4Address:"), ipv4Address)
 }
 
-// A strign representation of the IP address in the appropriate representation for IPv4 or IPv6.
+// StringRepresentation a strign representation of the IP address in the appropriate representation for IPv4 or IPv6.
 func (x *IPAddress) StringRepresentation() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringRepresentation"))
 	if _r == 0 {
@@ -133,6 +133,7 @@ func (x *IPAddress) StringRepresentation() string {
 	return purego.GoString(_r)
 }
 
+// SetStringRepresentation wraps the corresponding Objective-C method.
 func (x *IPAddress) SetStringRepresentation(stringRepresentation string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringRepresentation:"), purego.NSString(stringRepresentation))
 }

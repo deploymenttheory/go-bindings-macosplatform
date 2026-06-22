@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An individual dimension representing an item’s width or height in a collection view.
-//
 // CollectionLayoutDimension is an idiomatic wrapper over the Objective-C class NSCollectionLayoutDimension.
+//
+// An individual dimension representing an item’s width or height in a collection view.
 type CollectionLayoutDimension struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CollectionLayoutDimensionFromID(id objc.ID) *CollectionLayoutDimension {
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionLayoutDimension{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollectionLayoutDimension{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func collectionLayoutDimensionAdopt(id objc.ID) *CollectionLayoutDimension {
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionLayoutDimension{Handle: objref.Wrap(id)}
+	x := &CollectionLayoutDimension{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,32 +60,43 @@ func (x *CollectionLayoutDimension) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CollectionLayoutDimension) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCollectionLayoutDimension creates a new CollectionLayoutDimension.
 func NewCollectionLayoutDimension() *CollectionLayoutDimension {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutDimension")), objc.RegisterName("new"))
 	return collectionLayoutDimensionAdopt(_id)
 }
 
+// IsFractionalWidth wraps the corresponding Objective-C method.
 func (x *CollectionLayoutDimension) IsFractionalWidth() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFractionalWidth"))
 	return _r
 }
 
+// IsFractionalHeight wraps the corresponding Objective-C method.
 func (x *CollectionLayoutDimension) IsFractionalHeight() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFractionalHeight"))
 	return _r
 }
 
+// IsAbsolute wraps the corresponding Objective-C method.
 func (x *CollectionLayoutDimension) IsAbsolute() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAbsolute"))
 	return _r
 }
 
+// IsEstimated wraps the corresponding Objective-C method.
 func (x *CollectionLayoutDimension) IsEstimated() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEstimated"))
 	return _r
 }
 
+// Dimension wraps the corresponding Objective-C method.
 func (x *CollectionLayoutDimension) Dimension() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("dimension"))
 	return _r

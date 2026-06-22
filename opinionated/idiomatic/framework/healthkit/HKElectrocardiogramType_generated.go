@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that identifies samples containing electrocardiogram data.
-//
 // ElectrocardiogramType is an idiomatic wrapper over the Objective-C class HKElectrocardiogramType.
+//
+// It embeds [SampleType], promoting that type's methods.
+//
+// A type that identifies samples containing electrocardiogram data.
 type ElectrocardiogramType struct {
-	objref.Handle
+	SampleType
 }
 
 // ElectrocardiogramTypeFromID adopts an existing Objective-C object as a ElectrocardiogramType
@@ -25,7 +26,8 @@ func ElectrocardiogramTypeFromID(id objc.ID) *ElectrocardiogramType {
 	if id == 0 {
 		return nil
 	}
-	x := &ElectrocardiogramType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ElectrocardiogramType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func electrocardiogramTypeAdopt(id objc.ID) *ElectrocardiogramType {
 	if id == 0 {
 		return nil
 	}
-	x := &ElectrocardiogramType{Handle: objref.Wrap(id)}
+	x := &ElectrocardiogramType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ElectrocardiogramType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ElectrocardiogramType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ElectrocardiogramType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewElectrocardiogramType creates a new ElectrocardiogramType.
@@ -70,3 +58,7 @@ type ElectrocardiogramTypeable interface {
 }
 
 var _ ElectrocardiogramTypeable = (*ElectrocardiogramType)(nil)
+
+var _ SampleTypeProvider = (*ElectrocardiogramType)(nil)
+
+var _ ObjectTypeProvider = (*ElectrocardiogramType)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A sample that represents a cumulative quantity.
-//
 // CumulativeQuantitySample is an idiomatic wrapper over the Objective-C class HKCumulativeQuantitySample.
+//
+// CumulativeQuantitySample is an abstract base — you do not construct it directly. Construct one of [CumulativeQuantitySeriesSample] and pass it where a CumulativeQuantitySample is accepted.
+//
+// A sample that represents a cumulative quantity.
 type CumulativeQuantitySample struct {
-	objref.Handle
+	QuantitySample
 }
 
 // CumulativeQuantitySampleFromID adopts an existing Objective-C object as a CumulativeQuantitySample
@@ -25,7 +26,8 @@ func CumulativeQuantitySampleFromID(id objc.ID) *CumulativeQuantitySample {
 	if id == 0 {
 		return nil
 	}
-	x := &CumulativeQuantitySample{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CumulativeQuantitySample{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,32 +40,13 @@ func cumulativeQuantitySampleAdopt(id objc.ID) *CumulativeQuantitySample {
 	if id == 0 {
 		return nil
 	}
-	x := &CumulativeQuantitySample{Handle: objref.Wrap(id)}
+	x := &CumulativeQuantitySample{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CumulativeQuantitySample) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CumulativeQuantitySample) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CumulativeQuantitySample) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewCumulativeQuantitySample creates a new CumulativeQuantitySample.
-func NewCumulativeQuantitySample() *CumulativeQuantitySample {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKCumulativeQuantitySample")), objc.RegisterName("new"))
-	return cumulativeQuantitySampleAdopt(_id)
-}
-
+// SumQuantity wraps the corresponding Objective-C method.
 func (x *CumulativeQuantitySample) SumQuantity() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sumQuantity"))
 	return QuantityFromID(_r)
@@ -76,3 +59,16 @@ type CumulativeQuantitySampleable interface {
 }
 
 var _ CumulativeQuantitySampleable = (*CumulativeQuantitySample)(nil)
+
+// isCumulativeQuantitySample marks CumulativeQuantitySample — and, by embedding promotion, its
+// subclasses — as a member of the CumulativeQuantitySample hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CumulativeQuantitySample) isCumulativeQuantitySample() {}
+
+var _ CumulativeQuantitySampleProvider = (*CumulativeQuantitySample)(nil)
+
+var _ QuantitySampleProvider = (*CumulativeQuantitySample)(nil)
+
+var _ SampleProvider = (*CumulativeQuantitySample)(nil)
+
+var _ ObjectProvider = (*CumulativeQuantitySample)(nil)

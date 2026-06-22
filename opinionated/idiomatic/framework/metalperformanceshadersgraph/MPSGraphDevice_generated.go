@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that describes the compute device.
-//
 // GraphDevice is an idiomatic wrapper over the Objective-C class MPSGraphDevice.
+//
+// It embeds [GraphObject], promoting that type's methods.
+//
+// A class that describes the compute device.
 type GraphDevice struct {
-	objref.Handle
+	GraphObject
 }
 
 // GraphDeviceFromID adopts an existing Objective-C object as a GraphDevice
@@ -25,7 +26,8 @@ func GraphDeviceFromID(id objc.ID) *GraphDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphDevice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func graphDeviceAdopt(id objc.ID) *GraphDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphDevice{Handle: objref.Wrap(id)}
+	x := &GraphDevice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GraphDevice) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphDevice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphDevice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGraphDevice creates a new GraphDevice.
@@ -64,7 +52,7 @@ func NewGraphDevice() *GraphDevice {
 	return graphDeviceAdopt(_id)
 }
 
-// Device of the MPSGraphDevice.
+// Type device of the MPSGraphDevice.
 func (x *GraphDevice) Type() GraphDeviceType {
 	_r := objc.Send[GraphDeviceType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
@@ -77,3 +65,5 @@ type GraphDeviceable interface {
 }
 
 var _ GraphDeviceable = (*GraphDevice)(nil)
+
+var _ GraphObjectProvider = (*GraphDevice)(nil)

@@ -21,6 +21,8 @@ const (
 	AssetExportSessionStatusCancelled AssetExportSessionStatus = 5
 )
 
+// String returns the AssetExportSessionStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AssetExportSessionStatus) String() string {
 	switch e {
 	case AssetExportSessionStatusUnknown:
@@ -51,6 +53,8 @@ const (
 	AssetReaderStatusCancelled AssetReaderStatus = 4
 )
 
+// String returns the AssetReaderStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AssetReaderStatus) String() string {
 	switch e {
 	case AssetReaderStatusUnknown:
@@ -89,6 +93,8 @@ const (
 	AssetReferenceRestrictionDefaultPolicy AssetReferenceRestrictions = 2
 )
 
+// String returns the AssetReferenceRestrictions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AssetReferenceRestrictions) String() string {
 	var parts []string
 	if e&AssetReferenceRestrictionForbidRemoteReferenceToLocal != 0 {
@@ -125,6 +131,8 @@ const (
 	AssetSegmentTypeSeparable AssetSegmentType = 2
 )
 
+// String returns the AssetSegmentType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AssetSegmentType) String() string {
 	switch e {
 	case AssetSegmentTypeInitialization:
@@ -149,6 +157,8 @@ const (
 	AssetTrackGroupOutputHandlingDefaultPolicy AssetTrackGroupOutputHandling = 0
 )
 
+// String returns the AssetTrackGroupOutputHandling constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AssetTrackGroupOutputHandling) String() string {
 	var parts []string
 	if e&AssetTrackGroupOutputHandlingPreserveAlternateTracks != 0 {
@@ -171,6 +181,8 @@ const (
 	AssetWriterStatusCancelled AssetWriterStatus = 4
 )
 
+// String returns the AssetWriterStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AssetWriterStatus) String() string {
 	switch e {
 	case AssetWriterStatusUnknown:
@@ -203,6 +215,8 @@ const (
 	AudioSpatializationFormatMonoStereoAndMultichannel AudioSpatializationFormats = 7
 )
 
+// String returns the AudioSpatializationFormats constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudioSpatializationFormats) String() string {
 	var parts []string
 	if e&AudioSpatializationFormatMonoAndStereo != 0 {
@@ -234,6 +248,8 @@ const (
 	AuthorizationStatusAuthorized AuthorizationStatus = 3
 )
 
+// String returns the AuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationStatus) String() string {
 	switch e {
 	case AuthorizationStatusNotDetermined:
@@ -257,6 +273,8 @@ const (
 	CaptionAnimationCharacterReveal CaptionAnimation = 1
 )
 
+// String returns the CaptionAnimation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptionAnimation) String() string {
 	switch e {
 	case CaptionAnimationNone:
@@ -278,6 +296,8 @@ const (
 	CaptionConversionValidatorStatusStopped    CaptionConversionValidatorStatus = 3
 )
 
+// String returns the CaptionConversionValidatorStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptionConversionValidatorStatus) String() string {
 	switch e {
 	case CaptionConversionValidatorStatusUnknown:
@@ -305,6 +325,8 @@ const (
 	CaptionDecorationOverline    CaptionDecoration = 4
 )
 
+// String returns the CaptionDecoration constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptionDecoration) String() string {
 	var parts []string
 	if e&CaptionDecorationUnderline != 0 {
@@ -331,6 +353,8 @@ const (
 	CaptionFontStyleItalic  CaptionFontStyle = 2
 )
 
+// String returns the CaptionFontStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptionFontStyle) String() string {
 	switch e {
 	case CaptionFontStyleUnknown:
@@ -353,6 +377,8 @@ const (
 	CaptionFontWeightBold    CaptionFontWeight = 2
 )
 
+// String returns the CaptionFontWeight constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptionFontWeight) String() string {
 	switch e {
 	case CaptionFontWeightUnknown:
@@ -375,6 +401,8 @@ const (
 	CaptionRegionDisplayAlignmentAfter  CaptionRegionDisplayAlignment = 2
 )
 
+// String returns the CaptionRegionDisplayAlignment constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptionRegionDisplayAlignment) String() string {
 	switch e {
 	case CaptionRegionDisplayAlignmentBefore:
@@ -396,6 +424,8 @@ const (
 	CaptionRegionScrollRollUp CaptionRegionScroll = 1
 )
 
+// String returns the CaptionRegionScroll constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptionRegionScroll) String() string {
 	switch e {
 	case CaptionRegionScrollNone:
@@ -415,6 +445,8 @@ const (
 	CaptionRegionWritingModeTopToBottomAndRightToLeft CaptionRegionWritingMode = 2
 )
 
+// String returns the CaptionRegionWritingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptionRegionWritingMode) String() string {
 	switch e {
 	case CaptionRegionWritingModeLeftToRightAndTopToBottom:
@@ -435,6 +467,8 @@ const (
 	CaptionRubyAlignmentDistributeSpaceAround  CaptionRubyAlignment = 3
 )
 
+// String returns the CaptionRubyAlignment constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptionRubyAlignment) String() string {
 	switch e {
 	case CaptionRubyAlignmentStart:
@@ -457,6 +491,8 @@ const (
 	CaptionRubyPositionAfter  CaptionRubyPosition = 1
 )
 
+// String returns the CaptionRubyPosition constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptionRubyPosition) String() string {
 	switch e {
 	case CaptionRubyPositionBefore:
@@ -479,6 +515,8 @@ const (
 	CaptionTextAlignmentRight  CaptionTextAlignment = 4
 )
 
+// String returns the CaptionTextAlignment constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptionTextAlignment) String() string {
 	switch e {
 	case CaptionTextAlignmentStart:
@@ -508,6 +546,8 @@ const (
 	CaptionTextCombineFourDigits  CaptionTextCombine = 4
 )
 
+// String returns the CaptionTextCombine constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptionTextCombine) String() string {
 	switch e {
 	case CaptionTextCombineAll:
@@ -539,6 +579,8 @@ const (
 	CaptionUnitsTypePercent CaptionUnitsType = 2
 )
 
+// String returns the CaptionUnitsType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptionUnitsType) String() string {
 	switch e {
 	case CaptionUnitsTypeUnspecified:
@@ -561,6 +603,8 @@ const (
 	CaptureAutoFocusSystemPhaseDetection    CaptureAutoFocusSystem = 2
 )
 
+// String returns the CaptureAutoFocusSystem constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptureAutoFocusSystem) String() string {
 	switch e {
 	case CaptureAutoFocusSystemNone:
@@ -588,6 +632,8 @@ const (
 	CaptureCameraLensSmudgeDetectionStatusUnknown CaptureCameraLensSmudgeDetectionStatus = 3
 )
 
+// String returns the CaptureCameraLensSmudgeDetectionStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptureCameraLensSmudgeDetectionStatus) String() string {
 	switch e {
 	case CaptureCameraLensSmudgeDetectionStatusDisabled:
@@ -612,6 +658,8 @@ const (
 	CaptureCenterStageControlModeCooperative CaptureCenterStageControlMode = 2
 )
 
+// String returns the CaptureCenterStageControlMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptureCenterStageControlMode) String() string {
 	switch e {
 	case CaptureCenterStageControlModeUser:
@@ -636,6 +684,8 @@ const (
 	CaptureCinematicVideoFocusModeWeak CaptureCinematicVideoFocusMode = 2
 )
 
+// String returns the CaptureCinematicVideoFocusMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptureCinematicVideoFocusMode) String() string {
 	switch e {
 	case CaptureCinematicVideoFocusModeNone:
@@ -659,6 +709,8 @@ const (
 	CaptureColorSpace_P3_D65 CaptureColorSpace = 1
 )
 
+// String returns the CaptureColorSpace constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptureColorSpace) String() string {
 	switch e {
 	case CaptureColorSpace_sRGB:
@@ -679,6 +731,8 @@ const (
 	CaptureDevicePositionFront       CaptureDevicePosition = 2
 )
 
+// String returns the CaptureDevicePosition constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptureDevicePosition) String() string {
 	switch e {
 	case CaptureDevicePositionUnspecified:
@@ -700,6 +754,8 @@ const (
 	CaptureDeviceTransportControlsPlayingMode    CaptureDeviceTransportControlsPlaybackMode = 1
 )
 
+// String returns the CaptureDeviceTransportControlsPlaybackMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptureDeviceTransportControlsPlaybackMode) String() string {
 	switch e {
 	case CaptureDeviceTransportControlsNotPlayingMode:
@@ -721,6 +777,8 @@ const (
 	CaptureExposureModeCustom                 CaptureExposureMode = 3
 )
 
+// String returns the CaptureExposureMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptureExposureMode) String() string {
 	switch e {
 	case CaptureExposureModeLocked:
@@ -745,6 +803,8 @@ const (
 	CaptureFlashModeAuto CaptureFlashMode = 2
 )
 
+// String returns the CaptureFlashMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptureFlashMode) String() string {
 	switch e {
 	case CaptureFlashModeOff:
@@ -767,6 +827,8 @@ const (
 	CaptureFocusModeContinuousAutoFocus CaptureFocusMode = 2
 )
 
+// String returns the CaptureFocusMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptureFocusMode) String() string {
 	switch e {
 	case CaptureFocusModeLocked:
@@ -789,6 +851,8 @@ const (
 	CaptureMicrophoneModeVoiceIsolation CaptureMicrophoneMode = 2
 )
 
+// String returns the CaptureMicrophoneMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptureMicrophoneMode) String() string {
 	switch e {
 	case CaptureMicrophoneModeStandard:
@@ -814,6 +878,8 @@ const (
 	CaptureMultichannelAudioModeFirstOrderAmbisonics CaptureMultichannelAudioMode = 2
 )
 
+// String returns the CaptureMultichannelAudioMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptureMultichannelAudioMode) String() string {
 	switch e {
 	case CaptureMultichannelAudioModeNone:
@@ -838,6 +904,8 @@ const (
 	CapturePhotoOutputCaptureReadinessNotReadyWaitingForProcessing CapturePhotoOutputCaptureReadiness = 4
 )
 
+// String returns the CapturePhotoOutputCaptureReadiness constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CapturePhotoOutputCaptureReadiness) String() string {
 	switch e {
 	case CapturePhotoOutputCaptureReadinessSessionNotRunning:
@@ -864,6 +932,8 @@ const (
 	CapturePhotoQualityPrioritizationQuality  CapturePhotoQualityPrioritization = 3
 )
 
+// String returns the CapturePhotoQualityPrioritization constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CapturePhotoQualityPrioritization) String() string {
 	switch e {
 	case CapturePhotoQualityPrioritizationSpeed:
@@ -889,6 +959,8 @@ const (
 	CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionExposureModeChanged CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 4
 )
 
+// String returns the CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions) String() string {
 	var parts []string
 	if e&CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionVideoZoomChanged != 0 {
@@ -916,6 +988,8 @@ const (
 	CapturePrimaryConstituentDeviceSwitchingBehaviorLocked      CapturePrimaryConstituentDeviceSwitchingBehavior = 3
 )
 
+// String returns the CapturePrimaryConstituentDeviceSwitchingBehavior constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CapturePrimaryConstituentDeviceSwitchingBehavior) String() string {
 	switch e {
 	case CapturePrimaryConstituentDeviceSwitchingBehaviorUnsupported:
@@ -939,6 +1013,8 @@ const (
 	CaptureSystemUserInterfaceMicrophoneModes CaptureSystemUserInterface = 2
 )
 
+// String returns the CaptureSystemUserInterface constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptureSystemUserInterface) String() string {
 	switch e {
 	case CaptureSystemUserInterfaceVideoEffects:
@@ -961,6 +1037,8 @@ const (
 	CaptureTimecodeSourceTypeExternal CaptureTimecodeSourceType = 2
 )
 
+// String returns the CaptureTimecodeSourceType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptureTimecodeSourceType) String() string {
 	switch e {
 	case CaptureTimecodeSourceTypeFrameCount:
@@ -983,6 +1061,8 @@ const (
 	CaptureTorchModeAuto CaptureTorchMode = 2
 )
 
+// String returns the CaptureTorchMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptureTorchMode) String() string {
 	switch e {
 	case CaptureTorchModeOff:
@@ -1012,6 +1092,8 @@ const (
 	CaptureVideoOrientationLandscapeLeft CaptureVideoOrientation = 4
 )
 
+// String returns the CaptureVideoOrientation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptureVideoOrientation) String() string {
 	switch e {
 	case CaptureVideoOrientationPortrait:
@@ -1036,6 +1118,8 @@ const (
 	CaptureWhiteBalanceModeContinuousAutoWhiteBalance CaptureWhiteBalanceMode = 2
 )
 
+// String returns the CaptureWhiteBalanceMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptureWhiteBalanceMode) String() string {
 	switch e {
 	case CaptureWhiteBalanceModeLocked:
@@ -1069,6 +1153,8 @@ const (
 	ContentAuthorizationNotPossible ContentAuthorizationStatus = 6
 )
 
+// String returns the ContentAuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ContentAuthorizationStatus) String() string {
 	switch e {
 	case ContentAuthorizationUnknown:
@@ -1108,6 +1194,8 @@ const (
 	ContentKeyRequestStatusFailed ContentKeyRequestStatus = 5
 )
 
+// String returns the ContentKeyRequestStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ContentKeyRequestStatus) String() string {
 	switch e {
 	case ContentKeyRequestStatusRequestingResponse:
@@ -1136,6 +1224,8 @@ const (
 	DelegatingPlaybackCoordinatorRateChangeOptionPlayImmediately DelegatingPlaybackCoordinatorRateChangeOptions = 1
 )
 
+// String returns the DelegatingPlaybackCoordinatorRateChangeOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DelegatingPlaybackCoordinatorRateChangeOptions) String() string {
 	var parts []string
 	if e&DelegatingPlaybackCoordinatorRateChangeOptionPlayImmediately != 0 {
@@ -1155,6 +1245,8 @@ const (
 	DepthDataAccuracyAbsolute DepthDataAccuracy = 1
 )
 
+// String returns the DepthDataAccuracy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DepthDataAccuracy) String() string {
 	switch e {
 	case DepthDataAccuracyRelative:
@@ -1174,6 +1266,8 @@ const (
 	DepthDataQualityHigh DepthDataQuality = 1
 )
 
+// String returns the DepthDataQuality constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DepthDataQuality) String() string {
 	switch e {
 	case DepthDataQualityLow:
@@ -1197,6 +1291,8 @@ const (
 	ExternalContentProtectionStatusInsufficient ExternalContentProtectionStatus = 2
 )
 
+// String returns the ExternalContentProtectionStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ExternalContentProtectionStatus) String() string {
 	switch e {
 	case ExternalContentProtectionStatusPending:
@@ -1226,6 +1322,8 @@ const (
 	ExternalSyncDeviceStatusFreeRunSync ExternalSyncDeviceStatus = 4
 )
 
+// String returns the ExternalSyncDeviceStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ExternalSyncDeviceStatus) String() string {
 	switch e {
 	case ExternalSyncDeviceStatusUnavailable:
@@ -1259,6 +1357,8 @@ const (
 	KeyValueStatusCancelled KeyValueStatus = 4
 )
 
+// String returns the KeyValueStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e KeyValueStatus) String() string {
 	switch e {
 	case KeyValueStatusUnknown:
@@ -1287,6 +1387,8 @@ const (
 	MovieWritingTruncateDestinationToMovieHeaderOnly MovieWritingOptions = 1
 )
 
+// String returns the MovieWritingOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MovieWritingOptions) String() string {
 	var parts []string
 	if e&MovieWritingTruncateDestinationToMovieHeaderOnly != 0 {
@@ -1310,6 +1412,8 @@ const (
 	PlayerActionAtItemEndNone PlayerActionAtItemEnd = 2
 )
 
+// String returns the PlayerActionAtItemEnd constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PlayerActionAtItemEnd) String() string {
 	switch e {
 	case PlayerActionAtItemEndAdvance:
@@ -1335,6 +1439,8 @@ const (
 	PlayerAudiovisualBackgroundPlaybackPolicyContinuesIfPossible PlayerAudiovisualBackgroundPlaybackPolicy = 3
 )
 
+// String returns the PlayerAudiovisualBackgroundPlaybackPolicy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PlayerAudiovisualBackgroundPlaybackPolicy) String() string {
 	switch e {
 	case PlayerAudiovisualBackgroundPlaybackPolicyAutomatic:
@@ -1363,6 +1469,8 @@ const (
 	PlayerInterstitialEventRestrictionDefaultPolicy PlayerInterstitialEventRestrictions = 0
 )
 
+// String returns the PlayerInterstitialEventRestrictions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PlayerInterstitialEventRestrictions) String() string {
 	var parts []string
 	if e&PlayerInterstitialEventRestrictionConstrainsSeekingForwardInPrimaryContent != 0 {
@@ -1390,6 +1498,8 @@ const (
 	PlayerInterstitialEventSkippableEventStateNoLongerEligible PlayerInterstitialEventSkippableEventState = 3
 )
 
+// String returns the PlayerInterstitialEventSkippableEventState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PlayerInterstitialEventSkippableEventState) String() string {
 	switch e {
 	case PlayerInterstitialEventSkippableEventStateNotSkippable:
@@ -1415,6 +1525,8 @@ const (
 	PlayerInterstitialEventTimelineOccupancyFill PlayerInterstitialEventTimelineOccupancy = 1
 )
 
+// String returns the PlayerInterstitialEventTimelineOccupancy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PlayerInterstitialEventTimelineOccupancy) String() string {
 	switch e {
 	case PlayerInterstitialEventTimelineOccupancySinglePoint:
@@ -1434,6 +1546,8 @@ const (
 	PlayerItemSegmentTypeInterstitial PlayerItemSegmentType = 1
 )
 
+// String returns the PlayerItemSegmentType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PlayerItemSegmentType) String() string {
 	switch e {
 	case PlayerItemSegmentTypePrimary:
@@ -1457,6 +1571,8 @@ const (
 	PlayerItemStatusFailed PlayerItemStatus = 2
 )
 
+// String returns the PlayerItemStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PlayerItemStatus) String() string {
 	switch e {
 	case PlayerItemStatusUnknown:
@@ -1480,6 +1596,8 @@ const (
 	PlayerLooperStatusCancelled PlayerLooperStatus = 3
 )
 
+// String returns the PlayerLooperStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PlayerLooperStatus) String() string {
 	switch e {
 	case PlayerLooperStatusUnknown:
@@ -1506,6 +1624,8 @@ const (
 	PlayerNetworkResourcePriorityHigh PlayerNetworkResourcePriority = 2
 )
 
+// String returns the PlayerNetworkResourcePriority constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PlayerNetworkResourcePriority) String() string {
 	switch e {
 	case PlayerNetworkResourcePriorityDefault:
@@ -1531,6 +1651,8 @@ const (
 	PlayerStatusFailed PlayerStatus = 2
 )
 
+// String returns the PlayerStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PlayerStatus) String() string {
 	switch e {
 	case PlayerStatusUnknown:
@@ -1556,6 +1678,8 @@ const (
 	PlayerTimeControlStatusPlaying PlayerTimeControlStatus = 2
 )
 
+// String returns the PlayerTimeControlStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PlayerTimeControlStatus) String() string {
 	switch e {
 	case PlayerTimeControlStatusPaused:
@@ -1581,6 +1705,8 @@ const (
 	QueuedSampleBufferRenderingStatusFailed QueuedSampleBufferRenderingStatus = 2
 )
 
+// String returns the QueuedSampleBufferRenderingStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e QueuedSampleBufferRenderingStatus) String() string {
 	switch e {
 	case QueuedSampleBufferRenderingStatusUnknown:
@@ -1603,6 +1729,8 @@ const (
 	SampleBufferRequestDirectionReverse SampleBufferRequestDirection = -1
 )
 
+// String returns the SampleBufferRequestDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SampleBufferRequestDirection) String() string {
 	switch e {
 	case SampleBufferRequestDirectionForward:
@@ -1625,6 +1753,8 @@ const (
 	SampleBufferRequestModeOpportunistic SampleBufferRequestMode = 2
 )
 
+// String returns the SampleBufferRequestMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SampleBufferRequestMode) String() string {
 	switch e {
 	case SampleBufferRequestModeImmediate:
@@ -1649,6 +1779,8 @@ const (
 	VariantPreferenceScalabilityToLosslessAudio VariantPreferences = 1
 )
 
+// String returns the VariantPreferences constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VariantPreferences) String() string {
 	var parts []string
 	if e&VariantPreferenceScalabilityToLosslessAudio != 0 {
@@ -1674,6 +1806,8 @@ const (
 	VideoFieldModeDeinterlace VideoFieldMode = 3
 )
 
+// String returns the VideoFieldMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VideoFieldMode) String() string {
 	switch e {
 	case VideoFieldModeBoth:
@@ -1699,6 +1833,8 @@ const (
 	KCMTagCollectionVideoOutputPreset_Stereoscopic CMTagCollectionVideoOutputPreset = 1
 )
 
+// String returns the CMTagCollectionVideoOutputPreset constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CMTagCollectionVideoOutputPreset) String() string {
 	switch e {
 	case KCMTagCollectionVideoOutputPreset_Monoscopic:

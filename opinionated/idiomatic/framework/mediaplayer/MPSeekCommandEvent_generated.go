@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event requesting that the player seek to a new position.
-//
 // SeekCommandEvent is an idiomatic wrapper over the Objective-C class MPSeekCommandEvent.
+//
+// It embeds [RemoteCommandEvent], promoting that type's methods.
+//
+// An event requesting that the player seek to a new position.
 type SeekCommandEvent struct {
-	objref.Handle
+	RemoteCommandEvent
 }
 
 // SeekCommandEventFromID adopts an existing Objective-C object as a SeekCommandEvent
@@ -25,7 +26,8 @@ func SeekCommandEventFromID(id objc.ID) *SeekCommandEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &SeekCommandEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SeekCommandEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func seekCommandEventAdopt(id objc.ID) *SeekCommandEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &SeekCommandEvent{Handle: objref.Wrap(id)}
+	x := &SeekCommandEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SeekCommandEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SeekCommandEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SeekCommandEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSeekCommandEvent creates a new SeekCommandEvent.
@@ -64,6 +52,7 @@ func NewSeekCommandEvent() *SeekCommandEvent {
 	return seekCommandEventAdopt(_id)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *SeekCommandEvent) Type() SeekCommandEventType {
 	_r := objc.Send[SeekCommandEventType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
@@ -76,3 +65,5 @@ type SeekCommandEventable interface {
 }
 
 var _ SeekCommandEventable = (*SeekCommandEvent)(nil)
+
+var _ RemoteCommandEventProvider = (*SeekCommandEvent)(nil)

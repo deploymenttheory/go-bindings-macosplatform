@@ -6,15 +6,17 @@ package javascriptcore
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A JavaScript value.
-//
 // Value is an idiomatic wrapper over the Objective-C class JSValue.
+//
+// A JavaScript value.
 type Value struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ValueFromID(id objc.ID) *Value {
 	if id == 0 {
 		return nil
 	}
-	x := &Value{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Value{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func valueAdopt(id objc.ID) *Value {
 	if id == 0 {
 		return nil
 	}
-	x := &Value{Handle: objref.Wrap(id)}
+	x := &Value{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,61 +62,67 @@ func (x *Value) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Value) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewValue creates a new Value.
 func NewValue() *Value {
 	_id := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("new"))
 	return valueAdopt(_id)
 }
 
-// Converts the JavaScript value to a native object.
+// ToObject converts the JavaScript value to a native object.
 func (x *Value) ToObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toObject"))
 	return obj.Wrap(_r)
 }
 
-// Converts the JavaScript value to a native Boolean value.
+// ToBool converts the JavaScript value to a native Boolean value.
 func (x *Value) ToBool() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("toBool"))
 	return _r
 }
 
-// Converts the JavaScript value to a native floating-point value.
+// ToDouble converts the JavaScript value to a native floating-point value.
 func (x *Value) ToDouble() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("toDouble"))
 	return _r
 }
 
-// Converts the JavaScript value to a native signed integer value.
+// ToInt32 converts the JavaScript value to a native signed integer value.
 func (x *Value) ToInt32() int32 {
 	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("toInt32"))
 	return _r
 }
 
-// Converts the JavaScript value to a native unsigned integer value.
+// ToUInt32 converts the JavaScript value to a native unsigned integer value.
 func (x *Value) ToUInt32() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("toUInt32"))
 	return _r
 }
 
-// Convert a JSValue to a <code>int64_t</code>. The JSValue is converted to an integer according to the rules specified by the JavaScript language. If the value is a BigInt, then the value is truncated to an <code>int64_t</code>.
+// ToInt64 convert a JSValue to a <code>int64_t</code>. The JSValue is converted to an integer according to the rules specified by the JavaScript language. If the value is a BigInt, then the value is truncated to an <code>int64_t</code>.
 func (x *Value) ToInt64() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("toInt64"))
 	return _r
 }
 
-// Convert a JSValue to a <code>uint64_t</code>. The JSValue is converted to an integer according to the rules specified by the JavaScript language. If the value is a BigInt, then the value is truncated to a <code>uint64_t</code>.
+// ToUInt64 convert a JSValue to a <code>uint64_t</code>. The JSValue is converted to an integer according to the rules specified by the JavaScript language. If the value is a BigInt, then the value is truncated to a <code>uint64_t</code>.
 func (x *Value) ToUInt64() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("toUInt64"))
 	return _r
 }
 
-// Converts the JavaScript value to a NSNumber object.
+// ToNumber converts the JavaScript value to a NSNumber object.
 func (x *Value) ToNumber() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toNumber"))
 	return obj.Wrap(_r)
 }
 
-// Converts the JavaScript value to a native string.
+// ToString converts the JavaScript value to a native string.
 func (x *Value) ToString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toString"))
 	if _r == 0 {
@@ -121,211 +131,236 @@ func (x *Value) ToString() string {
 	return purego.GoString(_r)
 }
 
-// Converts the JavaScript value to a date object.
+// ToDate converts the JavaScript value to a date object.
 func (x *Value) ToDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toDate"))
 	return obj.Wrap(_r)
 }
 
-// Converts the JavaScript value to an array.
+// ToArray converts the JavaScript value to an array.
 func (x *Value) ToArray() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toArray"))
 	return obj.Wrap(_r)
 }
 
-// Converts the JavaScript value to a dictionary.
+// ToDictionary converts the JavaScript value to a dictionary.
 func (x *Value) ToDictionary() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toDictionary"))
 	return obj.Wrap(_r)
 }
 
-// Returns a Boolean value indicating whether the value is an instance of another JavaScript object value.
+// IsInstanceOf returns a Boolean value indicating whether the value is an instance of another JavaScript object value.
 func (x *Value) IsInstanceOf(value obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInstanceOf:"), objref.IDOf(value))
 	return _r
 }
 
-// Compares the value to another for strict equality.
+// IsEqualToObject compares the value to another for strict equality.
 func (x *Value) IsEqualToObject(value obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToObject:"), objref.IDOf(value))
 	return _r
 }
 
-// Compares the value to another for equivalence, allowing type conversion.
+// IsEqualWithTypeCoercionToObject compares the value to another for equivalence, allowing type conversion.
 func (x *Value) IsEqualWithTypeCoercionToObject(value obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualWithTypeCoercionToObject:"), objref.IDOf(value))
 	return _r
 }
 
-// Compare two JSValues. The result is computed by comparing the results of JavaScript's <code>==</code>, <code><</code>, and <code>></code> operators. If either <code>self</code> or <code>other</code> is (or would coerce to) <code>NaN</code> in JavaScript, then the result is kJSRelationConditionUndefined.
+// CompareJSValue compare two JSValues. The result is computed by comparing the results of JavaScript's <code>==</code>, <code><</code>, and <code>></code> operators. If either <code>self</code> or <code>other</code> is (or would coerce to) <code>NaN</code> in JavaScript, then the result is kJSRelationConditionUndefined.
 func (x *Value) CompareJSValue(other *Value) RelationCondition {
 	_r := objc.Send[RelationCondition](objref.IDOf(x), objc.RegisterName("compareJSValue:"), objref.IDOf(other))
 	return _r
 }
 
-// Compare a JSValue with a <code>int64_t</code>. The JSValue is converted to an integer according to the rules specified by the JavaScript language then compared with <code>other</code>.
+// CompareInt64 compare a JSValue with a <code>int64_t</code>. The JSValue is converted to an integer according to the rules specified by the JavaScript language then compared with <code>other</code>.
 func (x *Value) CompareInt64(other int64) RelationCondition {
 	_r := objc.Send[RelationCondition](objref.IDOf(x), objc.RegisterName("compareInt64:"), other)
 	return _r
 }
 
-// Compare a JSValue with a <code>uint64_t</code>. The JSValue is converted to an integer according to the rules specified by the JavaScript language then compared with <code>other</code>.
+// CompareUInt64 compare a JSValue with a <code>uint64_t</code>. The JSValue is converted to an integer according to the rules specified by the JavaScript language then compared with <code>other</code>.
 func (x *Value) CompareUInt64(other uint64) RelationCondition {
 	_r := objc.Send[RelationCondition](objref.IDOf(x), objc.RegisterName("compareUInt64:"), other)
 	return _r
 }
 
-// Compare a JSValue with a double. The JSValue is converted to a double according to the rules specified by the JavaScript language then compared with <code>other</code>.
+// CompareDouble compare a JSValue with a double. The JSValue is converted to a double according to the rules specified by the JavaScript language then compared with <code>other</code>.
 func (x *Value) CompareDouble(other float64) RelationCondition {
 	_r := objc.Send[RelationCondition](objref.IDOf(x), objc.RegisterName("compareDouble:"), other)
 	return _r
 }
 
-// Invokes the value as a JavaScript function.
+// CallWithArguments invokes the value as a JavaScript function.
 func (x *Value) CallWithArguments(arguments obj.Object) *Value {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callWithArguments:"), objref.IDOf(arguments))
 	return ValueFromID(_r)
 }
 
-// Invokes the value as a JavaScript constructor.
+// ConstructWithArguments invokes the value as a JavaScript constructor.
 func (x *Value) ConstructWithArguments(arguments obj.Object) *Value {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constructWithArguments:"), objref.IDOf(arguments))
 	return ValueFromID(_r)
 }
 
-// Calls the named JavaScript method on the value.
+// InvokeMethodWithArguments calls the named JavaScript method on the value.
 func (x *Value) InvokeMethodWithArguments(method string, arguments obj.Object) *Value {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invokeMethod:withArguments:"), purego.NSString(method), objref.IDOf(arguments))
 	return ValueFromID(_r)
 }
 
-// The JSContext that this value originates from.
+// Context the JSContext that this value originates from.
 func (x *Value) Context() *Context {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("context"))
 	return ContextFromID(_r)
 }
 
-// Check if a JSValue corresponds to the JavaScript value <code>undefined</code>.
+// IsUndefined check if a JSValue corresponds to the JavaScript value <code>undefined</code>.
 func (x *Value) IsUndefined() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUndefined"))
 	return _r
 }
 
-// Check if a JSValue corresponds to the JavaScript value <code>null</code>.
+// IsNull check if a JSValue corresponds to the JavaScript value <code>null</code>.
 func (x *Value) IsNull() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNull"))
 	return _r
 }
 
-// Check if a JSValue is a boolean.
+// IsBoolean check if a JSValue is a boolean.
 func (x *Value) IsBoolean() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBoolean"))
 	return _r
 }
 
-// Check if a JSValue is a number. In JavaScript, there is no differentiation between types of numbers. Semantically all numbers behave like doubles except in special cases like bit operations.
+// IsNumber check if a JSValue is a number. In JavaScript, there is no differentiation between types of numbers. Semantically all numbers behave like doubles except in special cases like bit operations.
 func (x *Value) IsNumber() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNumber"))
 	return _r
 }
 
-// Check if a JSValue is a string.
+// IsString check if a JSValue is a string.
 func (x *Value) IsString() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isString"))
 	return _r
 }
 
-// Check if a JSValue is an object.
+// IsObject check if a JSValue is an object.
 func (x *Value) IsObject() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isObject"))
 	return _r
 }
 
-// Check if a JSValue is an array.
+// IsArray check if a JSValue is an array.
 func (x *Value) IsArray() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isArray"))
 	return _r
 }
 
-// Check if a JSValue is a date.
+// IsDate check if a JSValue is a date.
 func (x *Value) IsDate() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDate"))
 	return _r
 }
 
-// Check if a JSValue is a symbol.
+// IsSymbol check if a JSValue is a symbol.
 func (x *Value) IsSymbol() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSymbol"))
 	return _r
 }
 
-// Check if a JSValue is a BigInt.
+// IsBigInt check if a JSValue is a BigInt.
 func (x *Value) IsBigInt() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBigInt"))
 	return _r
 }
 
-// Returns the value of the named property in the JavaScript object value.
+// ToPoint converts the value to a point structure.
+func (x *Value) ToPoint() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("toPoint"))
+	return _r
+}
+
+// ToRange converts the value to a range.
+func (x *Value) ToRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("toRange"))
+	return _r
+}
+
+// ToRect converts the value to a rectangle structure.
+func (x *Value) ToRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("toRect"))
+	return _r
+}
+
+// ToSize converts the value to a size.
+func (x *Value) ToSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("toSize"))
+	return _r
+}
+
+// ValueForProperty returns the value of the named property in the JavaScript object value.
 func (x *Value) ValueForProperty(property obj.Object) *Value {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForProperty:"), objref.IDOf(property))
 	return ValueFromID(_r)
 }
 
-// Sets the value of the named property in the JavaScript object value.
+// SetValueForProperty sets the value of the named property in the JavaScript object value.
 func (x *Value) SetValueForProperty(value obj.Object, property obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:forProperty:"), objref.IDOf(value), objref.IDOf(property))
 }
 
-// Deletes the named property from the JavaScript object value.
+// DeleteProperty deletes the named property from the JavaScript object value.
 func (x *Value) DeleteProperty(property obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("deleteProperty:"), objref.IDOf(property))
 	return _r
 }
 
-// Returns a Boolean value indicating whether the JavaScript value has a defined property with the specified name.
+// HasProperty returns a Boolean value indicating whether the JavaScript value has a defined property with the specified name.
 func (x *Value) HasProperty(property obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasProperty:"), objref.IDOf(property))
 	return _r
 }
 
-// Defines a property on the JavaScript object value or modifies a property’s definition.
+// DefinePropertyDescriptor defines a property on the JavaScript object value or modifies a property’s definition.
 func (x *Value) DefinePropertyDescriptor(property obj.Object, descriptor obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defineProperty:descriptor:"), objref.IDOf(property), objref.IDOf(descriptor))
 }
 
-// Returns the value at the specified numeric index in the JavaScript object value.
+// ValueAtIndex returns the value at the specified numeric index in the JavaScript object value.
 func (x *Value) ValueAtIndex(index int) *Value {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueAtIndex:"), index)
 	return ValueFromID(_r)
 }
 
-// Sets the value at the specified numeric index in the JavaScript object value.
+// SetValueAtIndex sets the value at the specified numeric index in the JavaScript object value.
 func (x *Value) SetValueAtIndex(value obj.Object, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:atIndex:"), objref.IDOf(value), index)
 }
 
-// Returns the value’s JavaScript property named with the specified key, allowing subscript syntax.
+// ObjectForKeyedSubscript returns the value’s JavaScript property named with the specified key, allowing subscript syntax.
 func (x *Value) ObjectForKeyedSubscript(key obj.Object) *Value {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(key))
 	return ValueFromID(_r)
 }
 
-// Returns the value’s JavaScript property at the specified index, allowing subscript syntax.
+// ObjectAtIndexedSubscript returns the value’s JavaScript property at the specified index, allowing subscript syntax.
 func (x *Value) ObjectAtIndexedSubscript(index int) *Value {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), index)
 	return ValueFromID(_r)
 }
 
-// Sets the value’s JavaScript property named with the specified key, allowing subscript syntax.
+// SetObjectForKeyedSubscript sets the value’s JavaScript property named with the specified key, allowing subscript syntax.
 func (x *Value) SetObjectForKeyedSubscript(object obj.Object, key obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:forKeyedSubscript:"), objref.IDOf(object), objref.IDOf(key))
 }
 
-// Sets the value’s JavaScript property at the specified index, allowing subscript syntax.
+// SetObjectAtIndexedSubscript sets the value’s JavaScript property at the specified index, allowing subscript syntax.
 func (x *Value) SetObjectAtIndexedSubscript(object obj.Object, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(object), index)
 }
 
+// JSValueRef wraps the corresponding Objective-C method.
 func (x *Value) JSValueRef() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSValueRef"))
 	return obj.Wrap(_r)
@@ -367,6 +402,10 @@ type Valueable interface {
 	IsDate() bool
 	IsSymbol() bool
 	IsBigInt() bool
+	ToPoint() corefoundation.CGPoint
+	ToRange() foundation.NSRange
+	ToRect() corefoundation.CGRect
+	ToSize() corefoundation.CGSize
 	ValueForProperty(property obj.Object) *Value
 	SetValueForProperty(value obj.Object, property obj.Object)
 	DeleteProperty(property obj.Object) bool

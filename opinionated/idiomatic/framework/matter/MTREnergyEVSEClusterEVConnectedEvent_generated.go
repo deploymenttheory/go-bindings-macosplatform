@@ -23,7 +23,8 @@ func MTREnergyEVSEClusterEVConnectedEventFromID(id objc.ID) *MTREnergyEVSECluste
 	if id == 0 {
 		return nil
 	}
-	x := &MTREnergyEVSEClusterEVConnectedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTREnergyEVSEClusterEVConnectedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTREnergyEVSEClusterEVConnectedEventAdopt(id objc.ID) *MTREnergyEVSECluster
 	if id == 0 {
 		return nil
 	}
-	x := &MTREnergyEVSEClusterEVConnectedEvent{Handle: objref.Wrap(id)}
+	x := &MTREnergyEVSEClusterEVConnectedEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTREnergyEVSEClusterEVConnectedEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTREnergyEVSEClusterEVConnectedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTREnergyEVSEClusterEVConnectedEvent creates a new MTREnergyEVSEClusterEVConnectedEvent.
 func NewMTREnergyEVSEClusterEVConnectedEvent() *MTREnergyEVSEClusterEVConnectedEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTREnergyEVSEClusterEVConnectedEvent")), objc.RegisterName("new"))
 	return mTREnergyEVSEClusterEVConnectedEventAdopt(_id)
 }
 
-// WithSessionID sets sessionID and returns the receiver so calls can be chained.
+// WithSessionID sets the property and returns the receiver so calls can be chained.
 func (x *MTREnergyEVSEClusterEVConnectedEvent) WithSessionID(sessionID obj.Object) *MTREnergyEVSEClusterEVConnectedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
 	return x
 }
 
+// SessionID wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterEVConnectedEvent) SessionID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sessionID"))
 	return obj.Wrap(_r)
 }
 
+// SetSessionID wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterEVConnectedEvent) SetSessionID(sessionID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that adds metadata to an item you share using the macOS share sheet.
-//
 // PreviewRepresentingActivityItem is an idiomatic wrapper over the Objective-C class NSPreviewRepresentingActivityItem.
+//
+// A type that adds metadata to an item you share using the macOS share sheet.
 type PreviewRepresentingActivityItem struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PreviewRepresentingActivityItemFromID(id objc.ID) *PreviewRepresentingActiv
 	if id == 0 {
 		return nil
 	}
-	x := &PreviewRepresentingActivityItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PreviewRepresentingActivityItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func previewRepresentingActivityItemAdopt(id objc.ID) *PreviewRepresentingActivi
 	if id == 0 {
 		return nil
 	}
-	x := &PreviewRepresentingActivityItem{Handle: objref.Wrap(id)}
+	x := &PreviewRepresentingActivityItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +60,20 @@ func (x *PreviewRepresentingActivityItem) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a metadata object with the title, image, and icon for a shareable item.
-//
-// NewPreviewRepresentingActivityItemWithItemTitleImageIcon creates a new PreviewRepresentingActivityItem.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PreviewRepresentingActivityItem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPreviewRepresentingActivityItemWithItemTitleImageIcon creates a metadata object with the title, image, and icon for a shareable item.
 func NewPreviewRepresentingActivityItemWithItemTitleImageIcon(item obj.Object, title string, image *Image, icon *Image) *PreviewRepresentingActivityItem {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPreviewRepresentingActivityItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItem:title:image:icon:"), objref.IDOf(item), purego.NSString(title), objref.IDOf(image), objref.IDOf(icon))
 	return previewRepresentingActivityItemAdopt(_id)
 }
 
-// Creates a metadata object that provides a title and images for a shareable item.
-//
-// NewPreviewRepresentingActivityItemWithItemTitleImageProviderIconProvider creates a new PreviewRepresentingActivityItem.
+// NewPreviewRepresentingActivityItemWithItemTitleImageProviderIconProvider creates a metadata object that provides a title and images for a shareable item.
 func NewPreviewRepresentingActivityItemWithItemTitleImageProviderIconProvider(item obj.Object, title string, imageProvider obj.Object, iconProvider obj.Object) *PreviewRepresentingActivityItem {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPreviewRepresentingActivityItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItem:title:imageProvider:iconProvider:"), objref.IDOf(item), purego.NSString(title), objref.IDOf(imageProvider), objref.IDOf(iconProvider))

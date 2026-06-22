@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that monitors the conditions you add to it.
-//
 // Monitor is an idiomatic wrapper over the Objective-C class CLMonitor.
+//
+// An object that monitors the conditions you add to it.
 type Monitor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MonitorFromID(id objc.ID) *Monitor {
 	if id == 0 {
 		return nil
 	}
-	x := &Monitor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Monitor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func monitorAdopt(id objc.ID) *Monitor {
 	if id == 0 {
 		return nil
 	}
-	x := &Monitor{Handle: objref.Wrap(id)}
+	x := &Monitor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,29 +60,40 @@ func (x *Monitor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Monitor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMonitor creates a new Monitor.
 func NewMonitor() *Monitor {
 	_id := objc.Send[objc.ID](objc.ID(_class("CLMonitor")), objc.RegisterName("new"))
 	return monitorAdopt(_id)
 }
 
+// AddConditionForMonitoringIdentifier wraps the corresponding Objective-C method.
 func (x *Monitor) AddConditionForMonitoringIdentifier(condition *Condition, identifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addConditionForMonitoring:identifier:"), objref.IDOf(condition), purego.NSString(identifier))
 }
 
+// AddConditionForMonitoringIdentifierAssumedState wraps the corresponding Objective-C method.
 func (x *Monitor) AddConditionForMonitoringIdentifierAssumedState(condition *Condition, identifier string, state MonitoringState) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addConditionForMonitoring:identifier:assumedState:"), objref.IDOf(condition), purego.NSString(identifier), state)
 }
 
+// RemoveConditionFromMonitoringWithIdentifier wraps the corresponding Objective-C method.
 func (x *Monitor) RemoveConditionFromMonitoringWithIdentifier(identifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeConditionFromMonitoringWithIdentifier:"), purego.NSString(identifier))
 }
 
+// MonitoringRecordForIdentifier wraps the corresponding Objective-C method.
 func (x *Monitor) MonitoringRecordForIdentifier(identifier string) *MonitoringRecord {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("monitoringRecordForIdentifier:"), purego.NSString(identifier))
 	return MonitoringRecordFromID(_r)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *Monitor) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -89,6 +102,8 @@ func (x *Monitor) Name() string {
 	return purego.GoString(_r)
 }
 
+// MonitoredIdentifiers wraps the corresponding Objective-C method.
+//
 // MonitoredIdentifiers returns the collection as a Go slice.
 func (x *Monitor) MonitoredIdentifiers() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("monitoredIdentifiers"))

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that logs an assertion to the console.
-//
 // AssertionHandler is an idiomatic wrapper over the Objective-C class NSAssertionHandler.
+//
+// An object that logs an assertion to the console.
 type AssertionHandler struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssertionHandlerFromID(id objc.ID) *AssertionHandler {
 	if id == 0 {
 		return nil
 	}
-	x := &AssertionHandler{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssertionHandler{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assertionHandlerAdopt(id objc.ID) *AssertionHandler {
 	if id == 0 {
 		return nil
 	}
-	x := &AssertionHandler{Handle: objref.Wrap(id)}
+	x := &AssertionHandler{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *AssertionHandler) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssertionHandler) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssertionHandler creates a new AssertionHandler.
 func NewAssertionHandler() *AssertionHandler {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSAssertionHandler")), objc.RegisterName("new"))
 	return assertionHandlerAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *AssertionHandler) WithScriptingProperties(scriptingProperties obj.Object) *AssertionHandler {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x

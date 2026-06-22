@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A formatter that converts between dates and their textual representations.
-//
 // DateFormatter is an idiomatic wrapper over the Objective-C class NSDateFormatter.
+//
+// It embeds [Formatter], promoting that type's methods.
+//
+// A formatter that converts between dates and their textual representations.
 type DateFormatter struct {
-	objref.Handle
+	Formatter
 }
 
 // DateFormatterFromID adopts an existing Objective-C object as a DateFormatter
@@ -25,7 +26,8 @@ func DateFormatterFromID(id objc.ID) *DateFormatter {
 	if id == 0 {
 		return nil
 	}
-	x := &DateFormatter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DateFormatter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,263 +40,248 @@ func dateFormatterAdopt(id objc.ID) *DateFormatter {
 	if id == 0 {
 		return nil
 	}
-	x := &DateFormatter{Handle: objref.Wrap(id)}
+	x := &DateFormatter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *DateFormatter) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DateFormatter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DateFormatter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes and returns an NSDateFormatter instance that uses the OS X 10.0 formatting behavior and the given date format string in its conversions.
-//
-// NewDateFormatterWithDateFormatAllowNaturalLanguage creates a new DateFormatter.
+// NewDateFormatterWithDateFormatAllowNaturalLanguage initializes and returns an NSDateFormatter instance that uses the OS X 10.0 formatting behavior and the given date format string in its conversions.
 func NewDateFormatterWithDateFormatAllowNaturalLanguage(format string, flag bool) *DateFormatter {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDateFormatter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDateFormat:allowNaturalLanguage:"), purego.NSString(format), flag)
 	return dateFormatterAdopt(_id)
 }
 
-// WithFormattingContext sets formattingContext and returns the receiver so calls can be chained.
+// WithFormattingContext sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithFormattingContext(formattingContext FormattingContext) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormattingContext:"), formattingContext)
 	return x
 }
 
-// WithDateFormat sets dateFormat and returns the receiver so calls can be chained.
+// WithDateFormat sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithDateFormat(dateFormat StringProvider) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateFormat:"), objref.IDOf(dateFormat))
 	return x
 }
 
-// WithDateStyle sets dateStyle and returns the receiver so calls can be chained.
+// WithDateStyle sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithDateStyle(dateStyle DateFormatterStyle) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateStyle:"), dateStyle)
 	return x
 }
 
-// WithTimeStyle sets timeStyle and returns the receiver so calls can be chained.
+// WithTimeStyle sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithTimeStyle(timeStyle DateFormatterStyle) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeStyle:"), timeStyle)
 	return x
 }
 
-// WithLocale sets locale and returns the receiver so calls can be chained.
+// WithLocale sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithLocale(locale *Locale) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return x
 }
 
-// WithGeneratesCalendarDates sets generatesCalendarDates and returns the receiver so calls can be chained.
+// WithGeneratesCalendarDates sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithGeneratesCalendarDates(generatesCalendarDates bool) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeneratesCalendarDates:"), generatesCalendarDates)
 	return x
 }
 
-// WithFormatterBehavior sets formatterBehavior and returns the receiver so calls can be chained.
+// WithFormatterBehavior sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithFormatterBehavior(formatterBehavior DateFormatterBehavior) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatterBehavior:"), formatterBehavior)
 	return x
 }
 
-// WithTimeZone sets timeZone and returns the receiver so calls can be chained.
+// WithTimeZone sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithTimeZone(timeZone *TimeZone) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	return x
 }
 
-// WithCalendar sets calendar and returns the receiver so calls can be chained.
+// WithCalendar sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithCalendar(calendar *Calendar) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return x
 }
 
-// WithLenient sets lenient and returns the receiver so calls can be chained.
+// WithLenient sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithLenient(lenient bool) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLenient:"), lenient)
 	return x
 }
 
-// WithTwoDigitStartDate sets twoDigitStartDate and returns the receiver so calls can be chained.
+// WithTwoDigitStartDate sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithTwoDigitStartDate(twoDigitStartDate DateProvider) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTwoDigitStartDate:"), objref.IDOf(twoDigitStartDate))
 	return x
 }
 
-// WithDefaultDate sets defaultDate and returns the receiver so calls can be chained.
+// WithDefaultDate sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithDefaultDate(defaultDate DateProvider) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultDate:"), objref.IDOf(defaultDate))
 	return x
 }
 
-// WithEraSymbols sets the collection and returns the receiver so calls can be chained.
+// WithEraSymbols sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithEraSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEraSymbols:"), _arr)
 	return x
 }
 
-// WithMonthSymbols sets the collection and returns the receiver so calls can be chained.
+// WithMonthSymbols sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithMonthSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMonthSymbols:"), _arr)
 	return x
 }
 
-// WithShortMonthSymbols sets the collection and returns the receiver so calls can be chained.
+// WithShortMonthSymbols sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithShortMonthSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortMonthSymbols:"), _arr)
 	return x
 }
 
-// WithWeekdaySymbols sets the collection and returns the receiver so calls can be chained.
+// WithWeekdaySymbols sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithWeekdaySymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeekdaySymbols:"), _arr)
 	return x
 }
 
-// WithShortWeekdaySymbols sets the collection and returns the receiver so calls can be chained.
+// WithShortWeekdaySymbols sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithShortWeekdaySymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortWeekdaySymbols:"), _arr)
 	return x
 }
 
-// WithAMSymbol sets aMSymbol and returns the receiver so calls can be chained.
+// WithAMSymbol sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithAMSymbol(aMSymbol StringProvider) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAMSymbol:"), objref.IDOf(aMSymbol))
 	return x
 }
 
-// WithPMSymbol sets pMSymbol and returns the receiver so calls can be chained.
+// WithPMSymbol sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithPMSymbol(pMSymbol StringProvider) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPMSymbol:"), objref.IDOf(pMSymbol))
 	return x
 }
 
-// WithLongEraSymbols sets the collection and returns the receiver so calls can be chained.
+// WithLongEraSymbols sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithLongEraSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongEraSymbols:"), _arr)
 	return x
 }
 
-// WithVeryShortMonthSymbols sets the collection and returns the receiver so calls can be chained.
+// WithVeryShortMonthSymbols sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithVeryShortMonthSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVeryShortMonthSymbols:"), _arr)
 	return x
 }
 
-// WithStandaloneMonthSymbols sets the collection and returns the receiver so calls can be chained.
+// WithStandaloneMonthSymbols sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithStandaloneMonthSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandaloneMonthSymbols:"), _arr)
 	return x
 }
 
-// WithShortStandaloneMonthSymbols sets the collection and returns the receiver so calls can be chained.
+// WithShortStandaloneMonthSymbols sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithShortStandaloneMonthSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortStandaloneMonthSymbols:"), _arr)
 	return x
 }
 
-// WithVeryShortStandaloneMonthSymbols sets the collection and returns the receiver so calls can be chained.
+// WithVeryShortStandaloneMonthSymbols sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithVeryShortStandaloneMonthSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVeryShortStandaloneMonthSymbols:"), _arr)
 	return x
 }
 
-// WithVeryShortWeekdaySymbols sets the collection and returns the receiver so calls can be chained.
+// WithVeryShortWeekdaySymbols sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithVeryShortWeekdaySymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVeryShortWeekdaySymbols:"), _arr)
 	return x
 }
 
-// WithStandaloneWeekdaySymbols sets the collection and returns the receiver so calls can be chained.
+// WithStandaloneWeekdaySymbols sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithStandaloneWeekdaySymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandaloneWeekdaySymbols:"), _arr)
 	return x
 }
 
-// WithShortStandaloneWeekdaySymbols sets the collection and returns the receiver so calls can be chained.
+// WithShortStandaloneWeekdaySymbols sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithShortStandaloneWeekdaySymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortStandaloneWeekdaySymbols:"), _arr)
 	return x
 }
 
-// WithVeryShortStandaloneWeekdaySymbols sets the collection and returns the receiver so calls can be chained.
+// WithVeryShortStandaloneWeekdaySymbols sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithVeryShortStandaloneWeekdaySymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVeryShortStandaloneWeekdaySymbols:"), _arr)
 	return x
 }
 
-// WithQuarterSymbols sets the collection and returns the receiver so calls can be chained.
+// WithQuarterSymbols sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithQuarterSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuarterSymbols:"), _arr)
 	return x
 }
 
-// WithShortQuarterSymbols sets the collection and returns the receiver so calls can be chained.
+// WithShortQuarterSymbols sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithShortQuarterSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortQuarterSymbols:"), _arr)
 	return x
 }
 
-// WithStandaloneQuarterSymbols sets the collection and returns the receiver so calls can be chained.
+// WithStandaloneQuarterSymbols sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithStandaloneQuarterSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandaloneQuarterSymbols:"), _arr)
 	return x
 }
 
-// WithShortStandaloneQuarterSymbols sets the collection and returns the receiver so calls can be chained.
+// WithShortStandaloneQuarterSymbols sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithShortStandaloneQuarterSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortStandaloneQuarterSymbols:"), _arr)
 	return x
 }
 
-// WithGregorianStartDate sets gregorianStartDate and returns the receiver so calls can be chained.
+// WithGregorianStartDate sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithGregorianStartDate(gregorianStartDate DateProvider) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGregorianStartDate:"), objref.IDOf(gregorianStartDate))
 	return x
 }
 
-// WithDoesRelativeDateFormatting sets doesRelativeDateFormatting and returns the receiver so calls can be chained.
+// WithDoesRelativeDateFormatting sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithDoesRelativeDateFormatting(doesRelativeDateFormatting bool) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoesRelativeDateFormatting:"), doesRelativeDateFormatting)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithScriptingProperties(scriptingProperties obj.Object) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// StringFromDate wraps the corresponding Objective-C method.
 func (x *DateFormatter) StringFromDate(date *Date) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromDate:"), objref.IDOf(date))
 	if _r == 0 {
@@ -303,24 +290,29 @@ func (x *DateFormatter) StringFromDate(date *Date) string {
 	return purego.GoString(_r)
 }
 
+// DateFromString wraps the corresponding Objective-C method.
 func (x *DateFormatter) DateFromString(string_ string) *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateFromString:"), purego.NSString(string_))
 	return DateFromID(_r)
 }
 
+// SetLocalizedDateFormatFromTemplate wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetLocalizedDateFormatFromTemplate(dateFormatTemplate string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDateFormatFromTemplate:"), purego.NSString(dateFormatTemplate))
 }
 
+// FormattingContext wraps the corresponding Objective-C method.
 func (x *DateFormatter) FormattingContext() FormattingContext {
 	_r := objc.Send[FormattingContext](objref.IDOf(x), objc.RegisterName("formattingContext"))
 	return _r
 }
 
+// SetFormattingContext wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetFormattingContext(formattingContext FormattingContext) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormattingContext:"), formattingContext)
 }
 
+// DateFormat wraps the corresponding Objective-C method.
 func (x *DateFormatter) DateFormat() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateFormat"))
 	if _r == 0 {
@@ -329,150 +321,187 @@ func (x *DateFormatter) DateFormat() string {
 	return purego.GoString(_r)
 }
 
+// SetDateFormat wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetDateFormat(dateFormat string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateFormat:"), purego.NSString(dateFormat))
 }
 
+// DateStyle wraps the corresponding Objective-C method.
 func (x *DateFormatter) DateStyle() DateFormatterStyle {
 	_r := objc.Send[DateFormatterStyle](objref.IDOf(x), objc.RegisterName("dateStyle"))
 	return _r
 }
 
+// SetDateStyle wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetDateStyle(dateStyle DateFormatterStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateStyle:"), dateStyle)
 }
 
+// TimeStyle wraps the corresponding Objective-C method.
 func (x *DateFormatter) TimeStyle() DateFormatterStyle {
 	_r := objc.Send[DateFormatterStyle](objref.IDOf(x), objc.RegisterName("timeStyle"))
 	return _r
 }
 
+// SetTimeStyle wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetTimeStyle(timeStyle DateFormatterStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeStyle:"), timeStyle)
 }
 
+// Locale wraps the corresponding Objective-C method.
 func (x *DateFormatter) Locale() *Locale {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locale"))
 	return LocaleFromID(_r)
 }
 
+// SetLocale wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetLocale(locale *Locale) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 }
 
+// GeneratesCalendarDates wraps the corresponding Objective-C method.
 func (x *DateFormatter) GeneratesCalendarDates() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("generatesCalendarDates"))
 	return _r
 }
 
+// SetGeneratesCalendarDates wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetGeneratesCalendarDates(generatesCalendarDates bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeneratesCalendarDates:"), generatesCalendarDates)
 }
 
+// FormatterBehavior wraps the corresponding Objective-C method.
 func (x *DateFormatter) FormatterBehavior() DateFormatterBehavior {
 	_r := objc.Send[DateFormatterBehavior](objref.IDOf(x), objc.RegisterName("formatterBehavior"))
 	return _r
 }
 
+// SetFormatterBehavior wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetFormatterBehavior(formatterBehavior DateFormatterBehavior) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatterBehavior:"), formatterBehavior)
 }
 
+// TimeZone wraps the corresponding Objective-C method.
 func (x *DateFormatter) TimeZone() *TimeZone {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeZone"))
 	return TimeZoneFromID(_r)
 }
 
+// SetTimeZone wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetTimeZone(timeZone *TimeZone) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 }
 
+// Calendar wraps the corresponding Objective-C method.
 func (x *DateFormatter) Calendar() *Calendar {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendar"))
 	return CalendarFromID(_r)
 }
 
+// SetCalendar wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetCalendar(calendar *Calendar) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 }
 
+// IsLenient wraps the corresponding Objective-C method.
 func (x *DateFormatter) IsLenient() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLenient"))
 	return _r
 }
 
+// SetLenient wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetLenient(lenient bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLenient:"), lenient)
 }
 
+// TwoDigitStartDate wraps the corresponding Objective-C method.
 func (x *DateFormatter) TwoDigitStartDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("twoDigitStartDate"))
 	return DateFromID(_r)
 }
 
+// SetTwoDigitStartDate wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetTwoDigitStartDate(twoDigitStartDate *Date) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTwoDigitStartDate:"), objref.IDOf(twoDigitStartDate))
 }
 
+// DefaultDate wraps the corresponding Objective-C method.
 func (x *DateFormatter) DefaultDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultDate"))
 	return DateFromID(_r)
 }
 
+// SetDefaultDate wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetDefaultDate(defaultDate *Date) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultDate:"), objref.IDOf(defaultDate))
 }
 
+// EraSymbols wraps the corresponding Objective-C method.
+//
 // EraSymbols returns the collection as a Go slice.
 func (x *DateFormatter) EraSymbols() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eraSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetEraSymbols wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetEraSymbols(eraSymbols []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEraSymbols:"), purego.SliceToNSArray(eraSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// MonthSymbols wraps the corresponding Objective-C method.
+//
 // MonthSymbols returns the collection as a Go slice.
 func (x *DateFormatter) MonthSymbols() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("monthSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetMonthSymbols wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetMonthSymbols(monthSymbols []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMonthSymbols:"), purego.SliceToNSArray(monthSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// ShortMonthSymbols wraps the corresponding Objective-C method.
+//
 // ShortMonthSymbols returns the collection as a Go slice.
 func (x *DateFormatter) ShortMonthSymbols() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shortMonthSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetShortMonthSymbols wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetShortMonthSymbols(shortMonthSymbols []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortMonthSymbols:"), purego.SliceToNSArray(shortMonthSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// WeekdaySymbols wraps the corresponding Objective-C method.
+//
 // WeekdaySymbols returns the collection as a Go slice.
 func (x *DateFormatter) WeekdaySymbols() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weekdaySymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetWeekdaySymbols wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetWeekdaySymbols(weekdaySymbols []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeekdaySymbols:"), purego.SliceToNSArray(weekdaySymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// ShortWeekdaySymbols wraps the corresponding Objective-C method.
+//
 // ShortWeekdaySymbols returns the collection as a Go slice.
 func (x *DateFormatter) ShortWeekdaySymbols() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shortWeekdaySymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetShortWeekdaySymbols wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetShortWeekdaySymbols(shortWeekdaySymbols []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortWeekdaySymbols:"), purego.SliceToNSArray(shortWeekdaySymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// AMSymbol wraps the corresponding Objective-C method.
 func (x *DateFormatter) AMSymbol() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("AMSymbol"))
 	if _r == 0 {
@@ -481,10 +510,12 @@ func (x *DateFormatter) AMSymbol() string {
 	return purego.GoString(_r)
 }
 
+// SetAMSymbol wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetAMSymbol(aMSymbol string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAMSymbol:"), purego.NSString(aMSymbol))
 }
 
+// PMSymbol wraps the corresponding Objective-C method.
 func (x *DateFormatter) PMSymbol() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("PMSymbol"))
 	if _r == 0 {
@@ -493,159 +524,203 @@ func (x *DateFormatter) PMSymbol() string {
 	return purego.GoString(_r)
 }
 
+// SetPMSymbol wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetPMSymbol(pMSymbol string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPMSymbol:"), purego.NSString(pMSymbol))
 }
 
+// LongEraSymbols wraps the corresponding Objective-C method.
+//
 // LongEraSymbols returns the collection as a Go slice.
 func (x *DateFormatter) LongEraSymbols() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("longEraSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetLongEraSymbols wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetLongEraSymbols(longEraSymbols []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongEraSymbols:"), purego.SliceToNSArray(longEraSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// VeryShortMonthSymbols wraps the corresponding Objective-C method.
+//
 // VeryShortMonthSymbols returns the collection as a Go slice.
 func (x *DateFormatter) VeryShortMonthSymbols() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("veryShortMonthSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetVeryShortMonthSymbols wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetVeryShortMonthSymbols(veryShortMonthSymbols []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVeryShortMonthSymbols:"), purego.SliceToNSArray(veryShortMonthSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// StandaloneMonthSymbols wraps the corresponding Objective-C method.
+//
 // StandaloneMonthSymbols returns the collection as a Go slice.
 func (x *DateFormatter) StandaloneMonthSymbols() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standaloneMonthSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetStandaloneMonthSymbols wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetStandaloneMonthSymbols(standaloneMonthSymbols []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandaloneMonthSymbols:"), purego.SliceToNSArray(standaloneMonthSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// ShortStandaloneMonthSymbols wraps the corresponding Objective-C method.
+//
 // ShortStandaloneMonthSymbols returns the collection as a Go slice.
 func (x *DateFormatter) ShortStandaloneMonthSymbols() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shortStandaloneMonthSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetShortStandaloneMonthSymbols wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetShortStandaloneMonthSymbols(shortStandaloneMonthSymbols []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortStandaloneMonthSymbols:"), purego.SliceToNSArray(shortStandaloneMonthSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// VeryShortStandaloneMonthSymbols wraps the corresponding Objective-C method.
+//
 // VeryShortStandaloneMonthSymbols returns the collection as a Go slice.
 func (x *DateFormatter) VeryShortStandaloneMonthSymbols() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("veryShortStandaloneMonthSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetVeryShortStandaloneMonthSymbols wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetVeryShortStandaloneMonthSymbols(veryShortStandaloneMonthSymbols []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVeryShortStandaloneMonthSymbols:"), purego.SliceToNSArray(veryShortStandaloneMonthSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// VeryShortWeekdaySymbols wraps the corresponding Objective-C method.
+//
 // VeryShortWeekdaySymbols returns the collection as a Go slice.
 func (x *DateFormatter) VeryShortWeekdaySymbols() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("veryShortWeekdaySymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetVeryShortWeekdaySymbols wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetVeryShortWeekdaySymbols(veryShortWeekdaySymbols []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVeryShortWeekdaySymbols:"), purego.SliceToNSArray(veryShortWeekdaySymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// StandaloneWeekdaySymbols wraps the corresponding Objective-C method.
+//
 // StandaloneWeekdaySymbols returns the collection as a Go slice.
 func (x *DateFormatter) StandaloneWeekdaySymbols() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standaloneWeekdaySymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetStandaloneWeekdaySymbols wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetStandaloneWeekdaySymbols(standaloneWeekdaySymbols []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandaloneWeekdaySymbols:"), purego.SliceToNSArray(standaloneWeekdaySymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// ShortStandaloneWeekdaySymbols wraps the corresponding Objective-C method.
+//
 // ShortStandaloneWeekdaySymbols returns the collection as a Go slice.
 func (x *DateFormatter) ShortStandaloneWeekdaySymbols() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shortStandaloneWeekdaySymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetShortStandaloneWeekdaySymbols wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetShortStandaloneWeekdaySymbols(shortStandaloneWeekdaySymbols []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortStandaloneWeekdaySymbols:"), purego.SliceToNSArray(shortStandaloneWeekdaySymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// VeryShortStandaloneWeekdaySymbols wraps the corresponding Objective-C method.
+//
 // VeryShortStandaloneWeekdaySymbols returns the collection as a Go slice.
 func (x *DateFormatter) VeryShortStandaloneWeekdaySymbols() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("veryShortStandaloneWeekdaySymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetVeryShortStandaloneWeekdaySymbols wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetVeryShortStandaloneWeekdaySymbols(veryShortStandaloneWeekdaySymbols []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVeryShortStandaloneWeekdaySymbols:"), purego.SliceToNSArray(veryShortStandaloneWeekdaySymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// QuarterSymbols wraps the corresponding Objective-C method.
+//
 // QuarterSymbols returns the collection as a Go slice.
 func (x *DateFormatter) QuarterSymbols() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("quarterSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetQuarterSymbols wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetQuarterSymbols(quarterSymbols []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuarterSymbols:"), purego.SliceToNSArray(quarterSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// ShortQuarterSymbols wraps the corresponding Objective-C method.
+//
 // ShortQuarterSymbols returns the collection as a Go slice.
 func (x *DateFormatter) ShortQuarterSymbols() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shortQuarterSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetShortQuarterSymbols wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetShortQuarterSymbols(shortQuarterSymbols []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortQuarterSymbols:"), purego.SliceToNSArray(shortQuarterSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// StandaloneQuarterSymbols wraps the corresponding Objective-C method.
+//
 // StandaloneQuarterSymbols returns the collection as a Go slice.
 func (x *DateFormatter) StandaloneQuarterSymbols() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standaloneQuarterSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetStandaloneQuarterSymbols wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetStandaloneQuarterSymbols(standaloneQuarterSymbols []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandaloneQuarterSymbols:"), purego.SliceToNSArray(standaloneQuarterSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// ShortStandaloneQuarterSymbols wraps the corresponding Objective-C method.
+//
 // ShortStandaloneQuarterSymbols returns the collection as a Go slice.
 func (x *DateFormatter) ShortStandaloneQuarterSymbols() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shortStandaloneQuarterSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetShortStandaloneQuarterSymbols wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetShortStandaloneQuarterSymbols(shortStandaloneQuarterSymbols []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortStandaloneQuarterSymbols:"), purego.SliceToNSArray(shortStandaloneQuarterSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// GregorianStartDate wraps the corresponding Objective-C method.
 func (x *DateFormatter) GregorianStartDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gregorianStartDate"))
 	return DateFromID(_r)
 }
 
+// SetGregorianStartDate wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetGregorianStartDate(gregorianStartDate *Date) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGregorianStartDate:"), objref.IDOf(gregorianStartDate))
 }
 
+// DoesRelativeDateFormatting wraps the corresponding Objective-C method.
 func (x *DateFormatter) DoesRelativeDateFormatting() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("doesRelativeDateFormatting"))
 	return _r
 }
 
+// SetDoesRelativeDateFormatting wraps the corresponding Objective-C method.
 func (x *DateFormatter) SetDoesRelativeDateFormatting(doesRelativeDateFormatting bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoesRelativeDateFormatting:"), doesRelativeDateFormatting)
 }
 
-// Returns a Boolean value that indicates whether the receiver attempts to process dates entered as a vernacular string.
+// AllowsNaturalLanguage returns a Boolean value that indicates whether the receiver attempts to process dates entered as a vernacular string.
 func (x *DateFormatter) AllowsNaturalLanguage() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsNaturalLanguage"))
 	return _r
@@ -764,3 +839,5 @@ type DateFormatterable interface {
 }
 
 var _ DateFormatterable = (*DateFormatter)(nil)
+
+var _ FormatterProvider = (*DateFormatter)(nil)

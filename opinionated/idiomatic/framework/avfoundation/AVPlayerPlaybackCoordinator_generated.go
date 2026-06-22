@@ -9,16 +9,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// A playback coordinator subclass that coordinates the playback of player objects in a connected group.
-//
 // PlayerPlaybackCoordinator is an idiomatic wrapper over the Objective-C class AVPlayerPlaybackCoordinator.
+//
+// It embeds [PlaybackCoordinator], promoting that type's methods.
+//
+// A playback coordinator subclass that coordinates the playback of player objects in a connected group.
 type PlayerPlaybackCoordinator struct {
-	objref.Handle
+	PlaybackCoordinator
 }
 
 // PlayerPlaybackCoordinatorFromID adopts an existing Objective-C object as a PlayerPlaybackCoordinator
@@ -27,7 +28,8 @@ func PlayerPlaybackCoordinatorFromID(id objc.ID) *PlayerPlaybackCoordinator {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerPlaybackCoordinator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlayerPlaybackCoordinator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,24 +42,10 @@ func playerPlaybackCoordinatorAdopt(id objc.ID) *PlayerPlaybackCoordinator {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerPlaybackCoordinator{Handle: objref.Wrap(id)}
+	x := &PlayerPlaybackCoordinator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PlayerPlaybackCoordinator) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlayerPlaybackCoordinator) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlayerPlaybackCoordinator) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPlayerPlaybackCoordinator creates a new PlayerPlaybackCoordinator.
@@ -66,30 +54,26 @@ func NewPlayerPlaybackCoordinator() *PlayerPlaybackCoordinator {
 	return playerPlaybackCoordinatorAdopt(_id)
 }
 
-// The reasons that cause a coordinator to suspend playback.
-//
-// WithSuspensionReasonsThatTriggerWaiting sets the collection and returns the receiver so calls can be chained.
+// WithSuspensionReasonsThatTriggerWaiting the reasons that cause a coordinator to suspend playback.
 func (x *PlayerPlaybackCoordinator) WithSuspensionReasonsThatTriggerWaiting(items ...obj.Object) *PlayerPlaybackCoordinator {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionReasonsThatTriggerWaiting:"), _arr)
 	return x
 }
 
-// A Boolean value that indicates whether participants mirror the originator’s stop time when they pause.
-//
-// WithPauseSnapsToMediaTimeOfOriginator sets pauseSnapsToMediaTimeOfOriginator and returns the receiver so calls can be chained.
+// WithPauseSnapsToMediaTimeOfOriginator a Boolean value that indicates whether participants mirror the originator’s stop time when they pause.
 func (x *PlayerPlaybackCoordinator) WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *PlayerPlaybackCoordinator {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPauseSnapsToMediaTimeOfOriginator:"), pauseSnapsToMediaTimeOfOriginator)
 	return x
 }
 
-// The AVPlayer this coordinator is controlling.
+// Player the AVPlayer this coordinator is controlling.
 func (x *PlayerPlaybackCoordinator) Player() *Player {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("player"))
 	return PlayerFromID(_r)
 }
 
-// Connects the playback coordinator to the coordination medium
+// CoordinateUsingCoordinationMedium connects the playback coordinator to the coordination medium
 func (x *PlayerPlaybackCoordinator) CoordinateUsingCoordinationMedium(coordinationMedium *PlaybackCoordinationMedium) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("coordinateUsingCoordinationMedium:error:"), objref.IDOf(coordinationMedium), unsafe.Pointer(&_nsErr))
@@ -99,6 +83,7 @@ func (x *PlayerPlaybackCoordinator) CoordinateUsingCoordinationMedium(coordinati
 	return nil
 }
 
+// PlaybackCoordinationMedium wraps the corresponding Objective-C method.
 func (x *PlayerPlaybackCoordinator) PlaybackCoordinationMedium() *PlaybackCoordinationMedium {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playbackCoordinationMedium"))
 	return PlaybackCoordinationMediumFromID(_r)
@@ -115,3 +100,5 @@ type PlayerPlaybackCoordinatorable interface {
 }
 
 var _ PlayerPlaybackCoordinatorable = (*PlayerPlaybackCoordinator)(nil)
+
+var _ PlaybackCoordinatorProvider = (*PlayerPlaybackCoordinator)(nil)

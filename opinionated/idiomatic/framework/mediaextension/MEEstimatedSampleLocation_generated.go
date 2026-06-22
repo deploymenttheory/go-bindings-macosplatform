@@ -6,15 +6,16 @@ package mediaextension
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides information about the estimated sample location with the media.
-//
 // EstimatedSampleLocation is an idiomatic wrapper over the Objective-C class MEEstimatedSampleLocation.
+//
+// An object that provides information about the estimated sample location with the media.
 type EstimatedSampleLocation struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func EstimatedSampleLocationFromID(id objc.ID) *EstimatedSampleLocation {
 	if id == 0 {
 		return nil
 	}
-	x := &EstimatedSampleLocation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EstimatedSampleLocation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func estimatedSampleLocationAdopt(id objc.ID) *EstimatedSampleLocation {
 	if id == 0 {
 		return nil
 	}
-	x := &EstimatedSampleLocation{Handle: objref.Wrap(id)}
+	x := &EstimatedSampleLocation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +61,32 @@ func (x *EstimatedSampleLocation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewEstimatedSampleLocation creates a new EstimatedSampleLocation.
-func NewEstimatedSampleLocation() *EstimatedSampleLocation {
-	_id := objc.Send[objc.ID](objc.ID(_class("MEEstimatedSampleLocation")), objc.RegisterName("new"))
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *EstimatedSampleLocation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewEstimatedSampleLocationWithByteSourceEstimatedSampleLocationRefinementDataLocation creates an estimated sample location object with the byte source, sample location, and data location that you specify.
+func NewEstimatedSampleLocationWithByteSourceEstimatedSampleLocationRefinementDataLocation(byteSource *ByteSource, estimatedSampleLocation avfoundation.AVSampleCursorStorageRange, refinementDataLocation avfoundation.AVSampleCursorStorageRange) *EstimatedSampleLocation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MEEstimatedSampleLocation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithByteSource:estimatedSampleLocation:refinementDataLocation:"), objref.IDOf(byteSource), estimatedSampleLocation, refinementDataLocation)
 	return estimatedSampleLocationAdopt(_id)
 }
 
-// The MEByteSource to be used to read the data for the sample.
+// EstimatedSampleLocation the estimated starting file offset and size in bytes of the sample.
+func (x *EstimatedSampleLocation) EstimatedSampleLocation() avfoundation.AVSampleCursorStorageRange {
+	_r := objc.Send[avfoundation.AVSampleCursorStorageRange](objref.IDOf(x), objc.RegisterName("estimatedSampleLocation"))
+	return _r
+}
+
+// RefinementDataLocation the starting file offset and size in bytes of the the data necessary to provide an accurate sample location. The refinement data can be provided to the MESampleCursor method refineSampleLocation to determine the exact sample location.
+func (x *EstimatedSampleLocation) RefinementDataLocation() avfoundation.AVSampleCursorStorageRange {
+	_r := objc.Send[avfoundation.AVSampleCursorStorageRange](objref.IDOf(x), objc.RegisterName("refinementDataLocation"))
+	return _r
+}
+
+// ByteSource the MEByteSource to be used to read the data for the sample.
 func (x *EstimatedSampleLocation) ByteSource() *ByteSource {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("byteSource"))
 	return ByteSourceFromID(_r)
@@ -73,6 +95,8 @@ func (x *EstimatedSampleLocation) ByteSource() *ByteSource {
 // EstimatedSampleLocationable is the interface implemented by [EstimatedSampleLocation], for mocking and DI.
 type EstimatedSampleLocationable interface {
 	obj.Object
+	EstimatedSampleLocation() avfoundation.AVSampleCursorStorageRange
+	RefinementDataLocation() avfoundation.AVSampleCursorStorageRange
 	ByteSource() *ByteSource
 }
 

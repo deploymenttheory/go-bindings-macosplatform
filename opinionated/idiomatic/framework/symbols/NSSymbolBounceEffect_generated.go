@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that applies a transitory scaling effect, or bounce, to the layers in a symbol-based image separately or as a whole.
-//
 // SymbolBounceEffect is an idiomatic wrapper over the Objective-C class NSSymbolBounceEffect.
+//
+// It embeds [SymbolEffect], promoting that type's methods.
+//
+// A type that applies a transitory scaling effect, or bounce, to the layers in a symbol-based image separately or as a whole.
 type SymbolBounceEffect struct {
-	objref.Handle
+	SymbolEffect
 }
 
 // SymbolBounceEffectFromID adopts an existing Objective-C object as a SymbolBounceEffect
@@ -25,7 +26,8 @@ func SymbolBounceEffectFromID(id objc.ID) *SymbolBounceEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolBounceEffect{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SymbolBounceEffect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func symbolBounceEffectAdopt(id objc.ID) *SymbolBounceEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolBounceEffect{Handle: objref.Wrap(id)}
+	x := &SymbolBounceEffect{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SymbolBounceEffect) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SymbolBounceEffect) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SymbolBounceEffect) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSymbolBounceEffect creates a new SymbolBounceEffect.
@@ -64,13 +52,13 @@ func NewSymbolBounceEffect() *SymbolBounceEffect {
 	return symbolBounceEffectAdopt(_id)
 }
 
-// An effect that bounces each layer separately.
+// EffectWithByLayer an effect that bounces each layer separately.
 func (x *SymbolBounceEffect) EffectWithByLayer() *SymbolBounceEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
 	return SymbolBounceEffectFromID(_r)
 }
 
-// An effect that bounces all layers simultaneously.
+// EffectWithWholeSymbol an effect that bounces all layers simultaneously.
 func (x *SymbolBounceEffect) EffectWithWholeSymbol() *SymbolBounceEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolBounceEffectFromID(_r)
@@ -84,3 +72,5 @@ type SymbolBounceEffectable interface {
 }
 
 var _ SymbolBounceEffectable = (*SymbolBounceEffect)(nil)
+
+var _ SymbolEffectProvider = (*SymbolBounceEffect)(nil)

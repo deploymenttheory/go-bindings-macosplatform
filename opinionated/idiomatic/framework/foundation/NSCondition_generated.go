@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A condition variable whose semantics follow those used for POSIX-style conditions.
-//
 // Condition is an idiomatic wrapper over the Objective-C class NSCondition.
+//
+// A condition variable whose semantics follow those used for POSIX-style conditions.
 type Condition struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ConditionFromID(id objc.ID) *Condition {
 	if id == 0 {
 		return nil
 	}
-	x := &Condition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Condition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func conditionAdopt(id objc.ID) *Condition {
 	if id == 0 {
 		return nil
 	}
-	x := &Condition{Handle: objref.Wrap(id)}
+	x := &Condition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,47 +60,52 @@ func (x *Condition) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Condition) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCondition creates a new Condition.
 func NewCondition() *Condition {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSCondition")), objc.RegisterName("new"))
 	return conditionAdopt(_id)
 }
 
-// The name of the condition.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the name of the condition.
 func (x *Condition) WithName(name StringProvider) *Condition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Condition) WithScriptingProperties(scriptingProperties obj.Object) *Condition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Blocks the current thread until the condition is signaled.
+// Wait blocks the current thread until the condition is signaled.
 func (x *Condition) Wait() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wait"))
 }
 
-// Blocks the current thread until the condition is signaled or the specified time limit is reached.
+// WaitUntilDate blocks the current thread until the condition is signaled or the specified time limit is reached.
 func (x *Condition) WaitUntilDate(limit *Date) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("waitUntilDate:"), objref.IDOf(limit))
 	return _r
 }
 
-// Signals the condition, waking up one thread waiting on it.
+// Signal signals the condition, waking up one thread waiting on it.
 func (x *Condition) Signal() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signal"))
 }
 
-// Signals the condition, waking up all threads waiting on it.
+// Broadcast signals the condition, waking up all threads waiting on it.
 func (x *Condition) Broadcast() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("broadcast"))
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *Condition) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -107,6 +114,7 @@ func (x *Condition) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *Condition) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }

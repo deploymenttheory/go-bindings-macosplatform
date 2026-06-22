@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object indicating the app or device that created a HealthKit sample
-//
 // Source is an idiomatic wrapper over the Objective-C class HKSource.
+//
+// An object indicating the app or device that created a HealthKit sample
 type Source struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SourceFromID(id objc.ID) *Source {
 	if id == 0 {
 		return nil
 	}
-	x := &Source{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Source{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func sourceAdopt(id objc.ID) *Source {
 	if id == 0 {
 		return nil
 	}
-	x := &Source{Handle: objref.Wrap(id)}
+	x := &Source{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *Source) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Source) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSource creates a new Source.
 func NewSource() *Source {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKSource")), objc.RegisterName("new"))
 	return sourceAdopt(_id)
 }
 
-// The name of the source represented by the receiver.  If the source is an app, then the name is the localized name of the app.
+// Name the name of the source represented by the receiver.  If the source is an app, then the name is the localized name of the app.
 func (x *Source) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *Source) Name() string {
 	return purego.GoString(_r)
 }
 
-// The bundle identifier of the source represented by the receiver.
+// BundleIdentifier the bundle identifier of the source represented by the receiver.
 func (x *Source) BundleIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {

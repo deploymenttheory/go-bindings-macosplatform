@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A session that your app uses to protect an assessment.
-//
 // AssessmentSession is an idiomatic wrapper over the Objective-C class AEAssessmentSession.
+//
+// A session that your app uses to protect an assessment.
 type AssessmentSession struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssessmentSessionFromID(id objc.ID) *AssessmentSession {
 	if id == 0 {
 		return nil
 	}
-	x := &AssessmentSession{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssessmentSession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assessmentSessionAdopt(id objc.ID) *AssessmentSession {
 	if id == 0 {
 		return nil
 	}
-	x := &AssessmentSession{Handle: objref.Wrap(id)}
+	x := &AssessmentSession{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,35 +60,41 @@ func (x *AssessmentSession) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new assessment session.
-//
-// NewAssessmentSessionWithConfiguration creates a new AssessmentSession.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssessmentSession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssessmentSessionWithConfiguration creates a new assessment session.
 func NewAssessmentSessionWithConfiguration(configuration *AssessmentConfiguration) *AssessmentSession {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AEAssessmentSession")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), objref.IDOf(configuration))
 	return assessmentSessionAdopt(_id)
 }
 
-// Starts an assessment session.
+// Begin starts an assessment session.
 func (x *AssessmentSession) Begin() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("begin"))
 }
 
-// Ends an assessment session.
+// End ends an assessment session.
 func (x *AssessmentSession) End() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("end"))
 }
 
-// Changes the session to use the specified configuration.
+// UpdateToConfiguration changes the session to use the specified configuration.
 func (x *AssessmentSession) UpdateToConfiguration(configuration *AssessmentConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateToConfiguration:"), objref.IDOf(configuration))
 }
 
+// Configuration wraps the corresponding Objective-C method.
 func (x *AssessmentSession) Configuration() *AssessmentConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
 	return AssessmentConfigurationFromID(_r)
 }
 
+// IsActive wraps the corresponding Objective-C method.
 func (x *AssessmentSession) IsActive() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
 	return _r

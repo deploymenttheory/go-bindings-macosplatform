@@ -6,15 +6,18 @@ package spritekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for objects that connect physics bodies.
-//
 // PhysicsJoint is an idiomatic wrapper over the Objective-C class SKPhysicsJoint.
+//
+// PhysicsJoint is an abstract base — you do not construct it directly. Construct one of [PhysicsJointFixed], [PhysicsJointLimit], [PhysicsJointPin], [PhysicsJointSliding], [PhysicsJointSpring] and pass it where a PhysicsJoint is accepted.
+//
+// The abstract superclass for objects that connect physics bodies.
 type PhysicsJoint struct {
 	objref.Handle
 }
@@ -25,7 +28,8 @@ func PhysicsJointFromID(id objc.ID) *PhysicsJoint {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsJoint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PhysicsJoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +42,8 @@ func physicsJointAdopt(id objc.ID) *PhysicsJoint {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsJoint{Handle: objref.Wrap(id)}
+	x := &PhysicsJoint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,46 +63,53 @@ func (x *PhysicsJoint) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewPhysicsJoint creates a new PhysicsJoint.
-func NewPhysicsJoint() *PhysicsJoint {
-	_id := objc.Send[objc.ID](objc.ID(_class("SKPhysicsJoint")), objc.RegisterName("new"))
-	return physicsJointAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PhysicsJoint) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The first body connected by the joint.
-//
-// WithBodyA sets bodyA and returns the receiver so calls can be chained.
+// WithBodyA the first body connected by the joint.
 func (x *PhysicsJoint) WithBodyA(bodyA *PhysicsBody) *PhysicsJoint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
 	return x
 }
 
-// The second body connected by the joint.
-//
-// WithBodyB sets bodyB and returns the receiver so calls can be chained.
+// WithBodyB the second body connected by the joint.
 func (x *PhysicsJoint) WithBodyB(bodyB *PhysicsBody) *PhysicsJoint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
 	return x
 }
 
+// BodyA wraps the corresponding Objective-C method.
 func (x *PhysicsJoint) BodyA() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyA"))
 	return PhysicsBodyFromID(_r)
 }
 
+// SetBodyA wraps the corresponding Objective-C method.
 func (x *PhysicsJoint) SetBodyA(bodyA *PhysicsBody) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
 }
 
+// BodyB wraps the corresponding Objective-C method.
 func (x *PhysicsJoint) BodyB() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyB"))
 	return PhysicsBodyFromID(_r)
 }
 
+// SetBodyB wraps the corresponding Objective-C method.
 func (x *PhysicsJoint) SetBodyB(bodyB *PhysicsBody) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
 }
 
+// ReactionForce wraps the corresponding Objective-C method.
+func (x *PhysicsJoint) ReactionForce() corefoundation.CGVector {
+	_r := objc.Send[corefoundation.CGVector](objref.IDOf(x), objc.RegisterName("reactionForce"))
+	return _r
+}
+
+// ReactionTorque wraps the corresponding Objective-C method.
 func (x *PhysicsJoint) ReactionTorque() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("reactionTorque"))
 	return _r
@@ -112,7 +124,15 @@ type PhysicsJointable interface {
 	SetBodyA(bodyA *PhysicsBody)
 	BodyB() *PhysicsBody
 	SetBodyB(bodyB *PhysicsBody)
+	ReactionForce() corefoundation.CGVector
 	ReactionTorque() float64
 }
 
 var _ PhysicsJointable = (*PhysicsJoint)(nil)
+
+// isPhysicsJoint marks PhysicsJoint — and, by embedding promotion, its
+// subclasses — as a member of the PhysicsJoint hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *PhysicsJoint) isPhysicsJoint() {}
+
+var _ PhysicsJointProvider = (*PhysicsJoint)(nil)

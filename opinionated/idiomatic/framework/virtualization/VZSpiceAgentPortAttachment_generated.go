@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An attachment point that enables the Spice clipboard sharing capability.
-//
 // SpiceAgentPortAttachment is an idiomatic wrapper over the Objective-C class VZSpiceAgentPortAttachment.
+//
+// It embeds [SerialPortAttachment], promoting that type's methods.
+//
+// An attachment point that enables the Spice clipboard sharing capability.
 type SpiceAgentPortAttachment struct {
-	objref.Handle
+	SerialPortAttachment
 }
 
 // SpiceAgentPortAttachmentFromID adopts an existing Objective-C object as a SpiceAgentPortAttachment
@@ -25,7 +26,8 @@ func SpiceAgentPortAttachmentFromID(id objc.ID) *SpiceAgentPortAttachment {
 	if id == 0 {
 		return nil
 	}
-	x := &SpiceAgentPortAttachment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SpiceAgentPortAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func spiceAgentPortAttachmentAdopt(id objc.ID) *SpiceAgentPortAttachment {
 	if id == 0 {
 		return nil
 	}
-	x := &SpiceAgentPortAttachment{Handle: objref.Wrap(id)}
+	x := &SpiceAgentPortAttachment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SpiceAgentPortAttachment) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SpiceAgentPortAttachment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SpiceAgentPortAttachment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSpiceAgentPortAttachment creates a new SpiceAgentPortAttachment.
@@ -64,20 +52,19 @@ func NewSpiceAgentPortAttachment() *SpiceAgentPortAttachment {
 	return spiceAgentPortAttachmentAdopt(_id)
 }
 
-// A Boolean value that indicates whether the framework needs to share the clipboard between the host and the VM.
-//
-// WithSharesClipboard sets sharesClipboard and returns the receiver so calls can be chained.
+// WithSharesClipboard a Boolean value that indicates whether the framework needs to share the clipboard between the host and the VM.
 func (x *SpiceAgentPortAttachment) WithSharesClipboard(sharesClipboard bool) *SpiceAgentPortAttachment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharesClipboard:"), sharesClipboard)
 	return x
 }
 
-// Enable the Spice agent clipboard sharing capability. If enabled, the clipboard capability will be advertised to the Spice guest agent. Copy and paste events will be shared between the host and the virtual machine. This property is enabled by default.
+// SharesClipboard enable the Spice agent clipboard sharing capability. If enabled, the clipboard capability will be advertised to the Spice guest agent. Copy and paste events will be shared between the host and the virtual machine. This property is enabled by default.
 func (x *SpiceAgentPortAttachment) SharesClipboard() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sharesClipboard"))
 	return _r
 }
 
+// SetSharesClipboard wraps the corresponding Objective-C method.
 func (x *SpiceAgentPortAttachment) SetSharesClipboard(sharesClipboard bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharesClipboard:"), sharesClipboard)
 }
@@ -91,3 +78,5 @@ type SpiceAgentPortAttachmentable interface {
 }
 
 var _ SpiceAgentPortAttachmentable = (*SpiceAgentPortAttachment)(nil)
+
+var _ SerialPortAttachmentProvider = (*SpiceAgentPortAttachment)(nil)

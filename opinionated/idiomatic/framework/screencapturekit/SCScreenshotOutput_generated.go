@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains all images requested by the client.
-//
 // ScreenshotOutput is an idiomatic wrapper over the Objective-C class SCScreenshotOutput.
+//
+// An object that contains all images requested by the client.
 type ScreenshotOutput struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ScreenshotOutputFromID(id objc.ID) *ScreenshotOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &ScreenshotOutput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScreenshotOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func screenshotOutputAdopt(id objc.ID) *ScreenshotOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &ScreenshotOutput{Handle: objref.Wrap(id)}
+	x := &ScreenshotOutput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,62 +60,65 @@ func (x *ScreenshotOutput) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScreenshotOutput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewScreenshotOutput creates a new ScreenshotOutput.
 func NewScreenshotOutput() *ScreenshotOutput {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCScreenshotOutput")), objc.RegisterName("new"))
 	return screenshotOutputAdopt(_id)
 }
 
-// An output property that specifies the standard dynamic range version of the screenshot.
-//
-// WithSdrImage sets sdrImage and returns the receiver so calls can be chained.
+// WithSdrImage an output property that specifies the standard dynamic range version of the screenshot.
 func (x *ScreenshotOutput) WithSdrImage(sdrImage obj.Object) *ScreenshotOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSdrImage:"), objref.IDOf(sdrImage))
 	return x
 }
 
-// An output property that specifies the high dynamic range version of the screenshot.
-//
-// WithHdrImage sets hdrImage and returns the receiver so calls can be chained.
+// WithHdrImage an output property that specifies the high dynamic range version of the screenshot.
 func (x *ScreenshotOutput) WithHdrImage(hdrImage obj.Object) *ScreenshotOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHdrImage:"), objref.IDOf(hdrImage))
 	return x
 }
 
-// A URL property that specifies the location of the saved image.
-//
-// WithFileURL sets fileURL and returns the receiver so calls can be chained.
+// WithFileURL a URL property that specifies the location of the saved image.
 func (x *ScreenshotOutput) WithFileURL(fileURL string) *ScreenshotOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileURL:"), rt.FileURL(fileURL))
 	return x
 }
 
-// SCScreenshotOutput property that denotes the SDR CGimage.  The output CGImage uses the same color space as the display
+// SdrImage SCScreenshotOutput property that denotes the SDR CGimage.  The output CGImage uses the same color space as the display
 func (x *ScreenshotOutput) SdrImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sdrImage"))
 	return obj.Wrap(_r)
 }
 
+// SetSdrImage wraps the corresponding Objective-C method.
 func (x *ScreenshotOutput) SetSdrImage(sdrImage obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSdrImage:"), objref.IDOf(sdrImage))
 }
 
-// SCScreenshotOutput property that denotes the HDR CGimage.  The output CGImage uses the extended sRGB color space.
+// HdrImage SCScreenshotOutput property that denotes the HDR CGimage.  The output CGImage uses the extended sRGB color space.
 func (x *ScreenshotOutput) HdrImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hdrImage"))
 	return obj.Wrap(_r)
 }
 
+// SetHdrImage wraps the corresponding Objective-C method.
 func (x *ScreenshotOutput) SetHdrImage(hdrImage obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHdrImage:"), objref.IDOf(hdrImage))
 }
 
-// SCScreenshotOutput property to specify the location where the image was saved.  If a fileURL in the screenshot configuration was not specified, then the fileURL will be nil
+// FileURL SCScreenshotOutput property to specify the location where the image was saved.  If a fileURL in the screenshot configuration was not specified, then the fileURL will be nil
 func (x *ScreenshotOutput) FileURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileURL"))
 	return obj.Wrap(_r)
 }
 
+// SetFileURL wraps the corresponding Objective-C method.
 func (x *ScreenshotOutput) SetFileURL(fileURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileURL:"), rt.FileURL(fileURL))
 }

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides a detailed rating for the playing item.
-//
 // RatingCommand is an idiomatic wrapper over the Objective-C class MPRatingCommand.
+//
+// It embeds [RemoteCommand], promoting that type's methods.
+//
+// An object that provides a detailed rating for the playing item.
 type RatingCommand struct {
-	objref.Handle
+	RemoteCommand
 }
 
 // RatingCommandFromID adopts an existing Objective-C object as a RatingCommand
@@ -25,7 +26,8 @@ func RatingCommandFromID(id objc.ID) *RatingCommand {
 	if id == 0 {
 		return nil
 	}
-	x := &RatingCommand{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RatingCommand{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func ratingCommandAdopt(id objc.ID) *RatingCommand {
 	if id == 0 {
 		return nil
 	}
-	x := &RatingCommand{Handle: objref.Wrap(id)}
+	x := &RatingCommand{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RatingCommand) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RatingCommand) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RatingCommand) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRatingCommand creates a new RatingCommand.
@@ -64,46 +52,42 @@ func NewRatingCommand() *RatingCommand {
 	return ratingCommandAdopt(_id)
 }
 
-// The minimum rating for a command.
-//
-// WithMinimumRating sets minimumRating and returns the receiver so calls can be chained.
+// WithMinimumRating the minimum rating for a command.
 func (x *RatingCommand) WithMinimumRating(minimumRating float32) *RatingCommand {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumRating:"), minimumRating)
 	return x
 }
 
-// The maximum rating for a command.
-//
-// WithMaximumRating sets maximumRating and returns the receiver so calls can be chained.
+// WithMaximumRating the maximum rating for a command.
 func (x *RatingCommand) WithMaximumRating(maximumRating float32) *RatingCommand {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumRating:"), maximumRating)
 	return x
 }
 
-// A Boolean value that indicates whether a user can interact with the displayed element.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether a user can interact with the displayed element.
 func (x *RatingCommand) WithEnabled(enabled bool) *RatingCommand {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// Minimum rating for the command.
+// MinimumRating minimum rating for the command.
 func (x *RatingCommand) MinimumRating() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minimumRating"))
 	return _r
 }
 
+// SetMinimumRating wraps the corresponding Objective-C method.
 func (x *RatingCommand) SetMinimumRating(minimumRating float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumRating:"), minimumRating)
 }
 
-// Maximum rating for the command.
+// MaximumRating maximum rating for the command.
 func (x *RatingCommand) MaximumRating() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumRating"))
 	return _r
 }
 
+// SetMaximumRating wraps the corresponding Objective-C method.
 func (x *RatingCommand) SetMaximumRating(maximumRating float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumRating:"), maximumRating)
 }
@@ -121,3 +105,5 @@ type RatingCommandable interface {
 }
 
 var _ RatingCommandable = (*RatingCommand)(nil)
+
+var _ RemoteCommandProvider = (*RatingCommand)(nil)

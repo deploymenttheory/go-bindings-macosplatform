@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Node representing a
-//
 // NNGramMatrixCalculationGradientNode is an idiomatic wrapper over the Objective-C class MPSNNGramMatrixCalculationGradientNode.
+//
+// It embeds [NNGradientFilterNode], promoting that type's methods.
+//
+// Node representing a
 type NNGramMatrixCalculationGradientNode struct {
-	objref.Handle
+	NNGradientFilterNode
 }
 
 // NNGramMatrixCalculationGradientNodeFromID adopts an existing Objective-C object as a NNGramMatrixCalculationGradientNode
@@ -25,7 +26,8 @@ func NNGramMatrixCalculationGradientNodeFromID(id objc.ID) *NNGramMatrixCalculat
 	if id == 0 {
 		return nil
 	}
-	x := &NNGramMatrixCalculationGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNGramMatrixCalculationGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func nNGramMatrixCalculationGradientNodeAdopt(id objc.ID) *NNGramMatrixCalculati
 	if id == 0 {
 		return nil
 	}
-	x := &NNGramMatrixCalculationGradientNode{Handle: objref.Wrap(id)}
+	x := &NNGramMatrixCalculationGradientNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NNGramMatrixCalculationGradientNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNGramMatrixCalculationGradientNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNGramMatrixCalculationGradientNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNNGramMatrixCalculationGradientNodeWithSourceGradientSourceImageGradientState creates a new NNGramMatrixCalculationGradientNode.
@@ -72,15 +60,13 @@ func NewNNGramMatrixCalculationGradientNodeWithSourceGradientSourceImageGradient
 	return nNGramMatrixCalculationGradientNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *NNGramMatrixCalculationGradientNode) WithLabel(label string) *NNGramMatrixCalculationGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Scaling factor for the output. Default: 1.0f.
+// Alpha scaling factor for the output. Default: 1.0f.
 func (x *NNGramMatrixCalculationGradientNode) Alpha() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
 	return _r
@@ -94,3 +80,7 @@ type NNGramMatrixCalculationGradientNodeable interface {
 }
 
 var _ NNGramMatrixCalculationGradientNodeable = (*NNGramMatrixCalculationGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*NNGramMatrixCalculationGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNGramMatrixCalculationGradientNode)(nil)

@@ -13,6 +13,8 @@ import (
 )
 
 // MTRBridgedDeviceBasicInformationClusterStartUpEvent is an idiomatic wrapper over the Objective-C class MTRBridgedDeviceBasicInformationClusterStartUpEvent.
+//
+// MTRBridgedDeviceBasicInformationClusterStartUpEvent is an abstract base — you do not construct it directly. Construct one of [MTRBridgedDeviceBasicClusterStartUpEvent] and pass it where a MTRBridgedDeviceBasicInformationClusterStartUpEvent is accepted.
 type MTRBridgedDeviceBasicInformationClusterStartUpEvent struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRBridgedDeviceBasicInformationClusterStartUpEventFromID(id objc.ID) *MTRB
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBridgedDeviceBasicInformationClusterStartUpEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBridgedDeviceBasicInformationClusterStartUpEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRBridgedDeviceBasicInformationClusterStartUpEventAdopt(id objc.ID) *MTRBr
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBridgedDeviceBasicInformationClusterStartUpEvent{Handle: objref.Wrap(id)}
+	x := &MTRBridgedDeviceBasicInformationClusterStartUpEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +60,25 @@ func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) IsKind(className s
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRBridgedDeviceBasicInformationClusterStartUpEvent creates a new MTRBridgedDeviceBasicInformationClusterStartUpEvent.
-func NewMTRBridgedDeviceBasicInformationClusterStartUpEvent() *MTRBridgedDeviceBasicInformationClusterStartUpEvent {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRBridgedDeviceBasicInformationClusterStartUpEvent")), objc.RegisterName("new"))
-	return mTRBridgedDeviceBasicInformationClusterStartUpEventAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithSoftwareVersion sets softwareVersion and returns the receiver so calls can be chained.
+// WithSoftwareVersion sets the property and returns the receiver so calls can be chained.
 func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTRBridgedDeviceBasicInformationClusterStartUpEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return x
 }
 
+// SoftwareVersion wraps the corresponding Objective-C method.
 func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) SoftwareVersion() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("softwareVersion"))
 	return obj.Wrap(_r)
 }
 
+// SetSoftwareVersion wraps the corresponding Objective-C method.
 func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) SetSoftwareVersion(softwareVersion obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 }
@@ -86,3 +92,11 @@ type MTRBridgedDeviceBasicInformationClusterStartUpEventable interface {
 }
 
 var _ MTRBridgedDeviceBasicInformationClusterStartUpEventable = (*MTRBridgedDeviceBasicInformationClusterStartUpEvent)(nil)
+
+// isMTRBridgedDeviceBasicInformationClusterStartUpEvent marks MTRBridgedDeviceBasicInformationClusterStartUpEvent — and, by embedding promotion, its
+// subclasses — as a member of the MTRBridgedDeviceBasicInformationClusterStartUpEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) isMTRBridgedDeviceBasicInformationClusterStartUpEvent() {
+}
+
+var _ MTRBridgedDeviceBasicInformationClusterStartUpEventProvider = (*MTRBridgedDeviceBasicInformationClusterStartUpEvent)(nil)

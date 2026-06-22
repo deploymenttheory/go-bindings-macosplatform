@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a softmax filter.
-//
 // CNNSoftMaxNode is an idiomatic wrapper over the Objective-C class MPSCNNSoftMaxNode.
+//
+// It embeds [NNFilterNode], promoting that type's methods.
+//
+// A representation of a softmax filter.
 type CNNSoftMaxNode struct {
-	objref.Handle
+	NNFilterNode
 }
 
 // CNNSoftMaxNodeFromID adopts an existing Objective-C object as a CNNSoftMaxNode
@@ -25,7 +26,8 @@ func CNNSoftMaxNodeFromID(id objc.ID) *CNNSoftMaxNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNSoftMaxNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNSoftMaxNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,38 +40,20 @@ func cNNSoftMaxNodeAdopt(id objc.ID) *CNNSoftMaxNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNSoftMaxNode{Handle: objref.Wrap(id)}
+	x := &CNNSoftMaxNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNSoftMaxNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNSoftMaxNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNSoftMaxNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Init a node representing a MPSCNNSoftMax kernel
-//
-// NewCNNSoftMaxNodeWithSource creates a new CNNSoftMaxNode.
+// NewCNNSoftMaxNodeWithSource init a node representing a MPSCNNSoftMax kernel
 func NewCNNSoftMaxNodeWithSource(sourceNode obj.Object) *CNNSoftMaxNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNSoftMaxNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return cNNSoftMaxNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNSoftMaxNode) WithLabel(label string) *CNNSoftMaxNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -82,3 +66,5 @@ type CNNSoftMaxNodeable interface {
 }
 
 var _ CNNSoftMaxNodeable = (*CNNSoftMaxNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNSoftMaxNode)(nil)

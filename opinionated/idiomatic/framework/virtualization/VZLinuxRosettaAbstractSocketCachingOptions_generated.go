@@ -9,16 +9,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// Caching options for an abstract socket.
-//
 // LinuxRosettaAbstractSocketCachingOptions is an idiomatic wrapper over the Objective-C class VZLinuxRosettaAbstractSocketCachingOptions.
+//
+// It embeds [LinuxRosettaCachingOptions], promoting that type's methods.
+//
+// Caching options for an abstract socket.
 type LinuxRosettaAbstractSocketCachingOptions struct {
-	objref.Handle
+	LinuxRosettaCachingOptions
 }
 
 // LinuxRosettaAbstractSocketCachingOptionsFromID adopts an existing Objective-C object as a LinuxRosettaAbstractSocketCachingOptions
@@ -27,7 +28,8 @@ func LinuxRosettaAbstractSocketCachingOptionsFromID(id objc.ID) *LinuxRosettaAbs
 	if id == 0 {
 		return nil
 	}
-	x := &LinuxRosettaAbstractSocketCachingOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LinuxRosettaAbstractSocketCachingOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,30 +42,14 @@ func linuxRosettaAbstractSocketCachingOptionsAdopt(id objc.ID) *LinuxRosettaAbst
 	if id == 0 {
 		return nil
 	}
-	x := &LinuxRosettaAbstractSocketCachingOptions{Handle: objref.Wrap(id)}
+	x := &LinuxRosettaAbstractSocketCachingOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *LinuxRosettaAbstractSocketCachingOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LinuxRosettaAbstractSocketCachingOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LinuxRosettaAbstractSocketCachingOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initialize options to set on a Rosetta directory share.
-//
-// NewLinuxRosettaAbstractSocketCachingOptionsWithNameError creates a new LinuxRosettaAbstractSocketCachingOptions.
-func NewLinuxRosettaAbstractSocketCachingOptionsWithNameError(name string) (*LinuxRosettaAbstractSocketCachingOptions, error) {
+// NewLinuxRosettaAbstractSocketCachingOptionsWithNameError initialize options to set on a Rosetta directory share.
+func NewLinuxRosettaAbstractSocketCachingOptionsWithNameError(name string) (result *LinuxRosettaAbstractSocketCachingOptions, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZLinuxRosettaAbstractSocketCachingOptions")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:error:"), purego.NSString(name), unsafe.Pointer(&_nsErr))
@@ -73,7 +59,7 @@ func NewLinuxRosettaAbstractSocketCachingOptionsWithNameError(name string) (*Lin
 	return linuxRosettaAbstractSocketCachingOptionsAdopt(_id), nil
 }
 
-// Name set by initWithName. This is the name of the Abstract Socket to be used by Rosetta.
+// Name name set by initWithName. This is the name of the Abstract Socket to be used by Rosetta.
 func (x *LinuxRosettaAbstractSocketCachingOptions) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -89,3 +75,5 @@ type LinuxRosettaAbstractSocketCachingOptionsable interface {
 }
 
 var _ LinuxRosettaAbstractSocketCachingOptionsable = (*LinuxRosettaAbstractSocketCachingOptions)(nil)
+
+var _ LinuxRosettaCachingOptionsProvider = (*LinuxRosettaAbstractSocketCachingOptions)(nil)

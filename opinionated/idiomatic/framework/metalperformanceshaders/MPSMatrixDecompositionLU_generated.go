@@ -6,17 +6,19 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A kernel for computing the LU factorization of a matrix using partial pivoting with row interchanges.
-//
 // MatrixDecompositionLU is an idiomatic wrapper over the Objective-C class MPSMatrixDecompositionLU.
+//
+// It embeds [MatrixUnaryKernel], promoting that type's methods.
+//
+// A kernel for computing the LU factorization of a matrix using partial pivoting with row interchanges.
 type MatrixDecompositionLU struct {
-	objref.Handle
+	MatrixUnaryKernel
 }
 
 // MatrixDecompositionLUFromID adopts an existing Objective-C object as a MatrixDecompositionLU
@@ -25,7 +27,8 @@ func MatrixDecompositionLUFromID(id objc.ID) *MatrixDecompositionLU {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixDecompositionLU{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatrixDecompositionLU{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func matrixDecompositionLUAdopt(id objc.ID) *MatrixDecompositionLU {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixDecompositionLU{Handle: objref.Wrap(id)}
+	x := &MatrixDecompositionLU{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MatrixDecompositionLU) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatrixDecompositionLU) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatrixDecompositionLU) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMatrixDecompositionLU creates a new MatrixDecompositionLU.
@@ -64,25 +53,31 @@ func NewMatrixDecompositionLU() *MatrixDecompositionLU {
 	return matrixDecompositionLUAdopt(_id)
 }
 
-// The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
-//
-// WithBatchStart sets batchStart and returns the receiver so calls can be chained.
+// WithSourceMatrixOrigin the origin, relative to [0, 0] in the source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixDecompositionLU) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixDecompositionLU {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMatrixOrigin:"), sourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixDecompositionLU) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixDecompositionLU {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
 func (x *MatrixDecompositionLU) WithBatchStart(batchStart int) *MatrixDecompositionLU {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 	return x
 }
 
-// The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
-//
-// WithBatchSize sets batchSize and returns the receiver so calls can be chained.
+// WithBatchSize the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
 func (x *MatrixDecompositionLU) WithBatchSize(batchSize int) *MatrixDecompositionLU {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *MatrixDecompositionLU) WithLabel(label string) *MatrixDecompositionLU {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -91,9 +86,15 @@ func (x *MatrixDecompositionLU) WithLabel(label string) *MatrixDecompositionLU {
 // MatrixDecompositionLUable is the interface implemented by [MatrixDecompositionLU], for mocking and DI.
 type MatrixDecompositionLUable interface {
 	obj.Object
+	WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixDecompositionLU
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixDecompositionLU
 	WithBatchStart(batchStart int) *MatrixDecompositionLU
 	WithBatchSize(batchSize int) *MatrixDecompositionLU
 	WithLabel(label string) *MatrixDecompositionLU
 }
 
 var _ MatrixDecompositionLUable = (*MatrixDecompositionLU)(nil)
+
+var _ MatrixUnaryKernelProvider = (*MatrixDecompositionLU)(nil)
+
+var _ KernelProvider = (*MatrixDecompositionLU)(nil)

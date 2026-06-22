@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// This class represents the artwork for a media item.
-//
 // LibArtwork is an idiomatic wrapper over the Objective-C class ITLibArtwork.
+//
+// This class represents the artwork for a media item.
 type LibArtwork struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LibArtworkFromID(id objc.ID) *LibArtwork {
 	if id == 0 {
 		return nil
 	}
-	x := &LibArtwork{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LibArtwork{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func libArtworkAdopt(id objc.ID) *LibArtwork {
 	if id == 0 {
 		return nil
 	}
-	x := &LibArtwork{Handle: objref.Wrap(id)}
+	x := &LibArtwork{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *LibArtwork) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LibArtwork) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLibArtwork creates a new LibArtwork.
 func NewLibArtwork() *LibArtwork {
 	_id := objc.Send[objc.ID](objc.ID(_class("ITLibArtwork")), objc.RegisterName("new"))
 	return libArtworkAdopt(_id)
 }
 
-// The NSImage formed by calling [[NSImage alloc] initWithData:self.imageData].
+// Image the NSImage formed by calling [[NSImage alloc] initWithData:self.imageData].
 func (x *LibArtwork) Image() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
 	return obj.Wrap(_r)
 }
 
-// The data (bytes) of this artwork image.
+// ImageData the data (bytes) of this artwork image.
 func (x *LibArtwork) ImageData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageData"))
 	return obj.Wrap(_r)
 }
 
-// The fortmat of the data returned by the imageData method.
+// ImageDataFormat the fortmat of the data returned by the imageData method.
 func (x *LibArtwork) ImageDataFormat() LibArtworkFormat {
 	_r := objc.Send[LibArtworkFormat](objref.IDOf(x), objc.RegisterName("imageDataFormat"))
 	return _r

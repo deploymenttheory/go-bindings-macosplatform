@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The settings for creating or updating a machine learning model.
-//
 // ModelConfiguration is an idiomatic wrapper over the Objective-C class MLModelConfiguration.
+//
+// The settings for creating or updating a machine learning model.
 type ModelConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ModelConfigurationFromID(id objc.ID) *ModelConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &ModelConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ModelConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func modelConfigurationAdopt(id objc.ID) *ModelConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &ModelConfiguration{Handle: objref.Wrap(id)}
+	x := &ModelConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,61 +60,55 @@ func (x *ModelConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ModelConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewModelConfiguration creates a new ModelConfiguration.
 func NewModelConfiguration() *ModelConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLModelConfiguration")), objc.RegisterName("new"))
 	return modelConfigurationAdopt(_id)
 }
 
-// A human readable name of a model for display purposes.
-//
-// WithModelDisplayName sets modelDisplayName and returns the receiver so calls can be chained.
+// WithModelDisplayName a human readable name of a model for display purposes.
 func (x *ModelConfiguration) WithModelDisplayName(modelDisplayName string) *ModelConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModelDisplayName:"), purego.NSString(modelDisplayName))
 	return x
 }
 
-// The processing unit or units the model uses to make predictions.
-//
-// WithComputeUnits sets computeUnits and returns the receiver so calls can be chained.
+// WithComputeUnits the processing unit or units the model uses to make predictions.
 func (x *ModelConfiguration) WithComputeUnits(computeUnits ComputeUnits) *ModelConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComputeUnits:"), computeUnits)
 	return x
 }
 
-// A group of hints for CoreML to optimize
-//
-// WithOptimizationHints sets optimizationHints and returns the receiver so calls can be chained.
+// WithOptimizationHints a group of hints for CoreML to optimize
 func (x *ModelConfiguration) WithOptimizationHints(optimizationHints *OptimizationHints) *ModelConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptimizationHints:"), objref.IDOf(optimizationHints))
 	return x
 }
 
-// A Boolean value that determines whether to allow low-precision accumulation on a GPU.
-//
-// WithAllowLowPrecisionAccumulationOnGPU sets allowLowPrecisionAccumulationOnGPU and returns the receiver so calls can be chained.
+// WithAllowLowPrecisionAccumulationOnGPU a Boolean value that determines whether to allow low-precision accumulation on a GPU.
 func (x *ModelConfiguration) WithAllowLowPrecisionAccumulationOnGPU(allowLowPrecisionAccumulationOnGPU bool) *ModelConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowLowPrecisionAccumulationOnGPU:"), allowLowPrecisionAccumulationOnGPU)
 	return x
 }
 
-// A dictionary of configuration settings your app can override when loading a model.
-//
-// WithParameters sets parameters and returns the receiver so calls can be chained.
+// WithParameters a dictionary of configuration settings your app can override when loading a model.
 func (x *ModelConfiguration) WithParameters(parameters obj.Object) *ModelConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
 	return x
 }
 
-// Function name that MLModel will use.
-//
-// WithFunctionName sets functionName and returns the receiver so calls can be chained.
+// WithFunctionName function name that MLModel will use.
 func (x *ModelConfiguration) WithFunctionName(functionName string) *ModelConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionName:"), purego.NSString(functionName))
 	return x
 }
 
-// A human readable name of a MLModel instance for display purposes. Use this property to set a name of a model instance so that runtime analysis tools (e.g. Instruments and os_log) can display that name in the user interface. CoreML framework doesn't parse nor filter the text. It is the client's responsibility to use appropriate text, which may involve localization and privacy considerations. When the property is nil, CoreML framework provides a default.
+// ModelDisplayName a human readable name of a MLModel instance for display purposes. Use this property to set a name of a model instance so that runtime analysis tools (e.g. Instruments and os_log) can display that name in the user interface. CoreML framework doesn't parse nor filter the text. It is the client's responsibility to use appropriate text, which may involve localization and privacy considerations. When the property is nil, CoreML framework provides a default.
 func (x *ModelConfiguration) ModelDisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modelDisplayName"))
 	if _r == 0 {
@@ -121,48 +117,56 @@ func (x *ModelConfiguration) ModelDisplayName() string {
 	return purego.GoString(_r)
 }
 
+// SetModelDisplayName wraps the corresponding Objective-C method.
 func (x *ModelConfiguration) SetModelDisplayName(modelDisplayName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModelDisplayName:"), purego.NSString(modelDisplayName))
 }
 
+// ComputeUnits wraps the corresponding Objective-C method.
 func (x *ModelConfiguration) ComputeUnits() ComputeUnits {
 	_r := objc.Send[ComputeUnits](objref.IDOf(x), objc.RegisterName("computeUnits"))
 	return _r
 }
 
+// SetComputeUnits wraps the corresponding Objective-C method.
 func (x *ModelConfiguration) SetComputeUnits(computeUnits ComputeUnits) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComputeUnits:"), computeUnits)
 }
 
-// A group of hints for CoreML to optimize
+// OptimizationHints a group of hints for CoreML to optimize
 func (x *ModelConfiguration) OptimizationHints() *OptimizationHints {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optimizationHints"))
 	return OptimizationHintsFromID(_r)
 }
 
+// SetOptimizationHints wraps the corresponding Objective-C method.
 func (x *ModelConfiguration) SetOptimizationHints(optimizationHints *OptimizationHints) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptimizationHints:"), objref.IDOf(optimizationHints))
 }
 
-// Set to YES to allow low precision accumulation on GPU when available. Defaults to NO
+// AllowLowPrecisionAccumulationOnGPU set to YES to allow low precision accumulation on GPU when available. Defaults to NO
 func (x *ModelConfiguration) AllowLowPrecisionAccumulationOnGPU() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowLowPrecisionAccumulationOnGPU"))
 	return _r
 }
 
+// SetAllowLowPrecisionAccumulationOnGPU wraps the corresponding Objective-C method.
 func (x *ModelConfiguration) SetAllowLowPrecisionAccumulationOnGPU(allowLowPrecisionAccumulationOnGPU bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowLowPrecisionAccumulationOnGPU:"), allowLowPrecisionAccumulationOnGPU)
 }
 
+// Parameters wraps the corresponding Objective-C method.
 func (x *ModelConfiguration) Parameters() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameters"))
 	return obj.Wrap(_r)
 }
 
+// SetParameters wraps the corresponding Objective-C method.
 func (x *ModelConfiguration) SetParameters(parameters obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
 }
 
+// FunctionName wraps the corresponding Objective-C method.
 func (x *ModelConfiguration) FunctionName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("functionName"))
 	if _r == 0 {
@@ -171,6 +175,7 @@ func (x *ModelConfiguration) FunctionName() string {
 	return purego.GoString(_r)
 }
 
+// SetFunctionName wraps the corresponding Objective-C method.
 func (x *ModelConfiguration) SetFunctionName(functionName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionName:"), purego.NSString(functionName))
 }

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The GKLeaderboardViewController class provides a standard user interface that displays leaderboard scores to the player. If the GKGameCenterViewController class is available, you should use it instead.
-//
 // LeaderboardViewController is an idiomatic wrapper over the Objective-C class GKLeaderboardViewController.
+//
+// It embeds [GameCenterViewController], promoting that type's methods.
+//
+// The GKLeaderboardViewController class provides a standard user interface that displays leaderboard scores to the player. If the GKGameCenterViewController class is available, you should use it instead.
 type LeaderboardViewController struct {
-	objref.Handle
+	GameCenterViewController
 }
 
 // LeaderboardViewControllerFromID adopts an existing Objective-C object as a LeaderboardViewController
@@ -25,7 +26,8 @@ func LeaderboardViewControllerFromID(id objc.ID) *LeaderboardViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &LeaderboardViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LeaderboardViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func leaderboardViewControllerAdopt(id objc.ID) *LeaderboardViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &LeaderboardViewController{Handle: objref.Wrap(id)}
+	x := &LeaderboardViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *LeaderboardViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LeaderboardViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LeaderboardViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewLeaderboardViewController creates a new LeaderboardViewController.
@@ -64,55 +52,54 @@ func NewLeaderboardViewController() *LeaderboardViewController {
 	return leaderboardViewControllerAdopt(_id)
 }
 
-// A time filter used to restrict which scores are displayed to the player.
-//
-// WithTimeScope sets timeScope and returns the receiver so calls can be chained.
+// WithTimeScope a time filter used to restrict which scores are displayed to the player.
 func (x *LeaderboardViewController) WithTimeScope(timeScope LeaderboardTimeScope) *LeaderboardViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeScope:"), timeScope)
 	return x
 }
 
-// The named leaderboard that is displayed by the view controller.
-//
-// WithCategory sets category and returns the receiver so calls can be chained.
+// WithCategory the named leaderboard that is displayed by the view controller.
 func (x *LeaderboardViewController) WithCategory(category string) *LeaderboardViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategory:"), purego.NSString(category))
 	return x
 }
 
-// WithViewState sets viewState and returns the receiver so calls can be chained.
+// WithViewState sets the property and returns the receiver so calls can be chained.
 func (x *LeaderboardViewController) WithViewState(viewState GameCenterViewControllerState) *LeaderboardViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewState:"), viewState)
 	return x
 }
 
-// WithLeaderboardTimeScope sets leaderboardTimeScope and returns the receiver so calls can be chained.
+// WithLeaderboardTimeScope sets the property and returns the receiver so calls can be chained.
 func (x *LeaderboardViewController) WithLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope) *LeaderboardViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardTimeScope:"), leaderboardTimeScope)
 	return x
 }
 
-// WithLeaderboardIdentifier sets leaderboardIdentifier and returns the receiver so calls can be chained.
+// WithLeaderboardIdentifier sets the property and returns the receiver so calls can be chained.
 func (x *LeaderboardViewController) WithLeaderboardIdentifier(leaderboardIdentifier string) *LeaderboardViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
 	return x
 }
 
-// WithLeaderboardCategory sets leaderboardCategory and returns the receiver so calls can be chained.
+// WithLeaderboardCategory sets the property and returns the receiver so calls can be chained.
 func (x *LeaderboardViewController) WithLeaderboardCategory(leaderboardCategory string) *LeaderboardViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardCategory:"), purego.NSString(leaderboardCategory))
 	return x
 }
 
+// TimeScope wraps the corresponding Objective-C method.
 func (x *LeaderboardViewController) TimeScope() LeaderboardTimeScope {
 	_r := objc.Send[LeaderboardTimeScope](objref.IDOf(x), objc.RegisterName("timeScope"))
 	return _r
 }
 
+// SetTimeScope wraps the corresponding Objective-C method.
 func (x *LeaderboardViewController) SetTimeScope(timeScope LeaderboardTimeScope) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeScope:"), timeScope)
 }
 
+// Category wraps the corresponding Objective-C method.
 func (x *LeaderboardViewController) Category() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("category"))
 	if _r == 0 {
@@ -121,6 +108,7 @@ func (x *LeaderboardViewController) Category() string {
 	return purego.GoString(_r)
 }
 
+// SetCategory wraps the corresponding Objective-C method.
 func (x *LeaderboardViewController) SetCategory(category string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategory:"), purego.NSString(category))
 }
@@ -141,3 +129,5 @@ type LeaderboardViewControllerable interface {
 }
 
 var _ LeaderboardViewControllerable = (*LeaderboardViewController)(nil)
+
+var _ GameCenterViewControllerProvider = (*LeaderboardViewController)(nil)

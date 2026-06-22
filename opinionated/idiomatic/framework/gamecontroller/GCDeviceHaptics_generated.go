@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The locations of haptic actuators on a game controller.
-//
 // DeviceHaptics is an idiomatic wrapper over the Objective-C class GCDeviceHaptics.
+//
+// The locations of haptic actuators on a game controller.
 type DeviceHaptics struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DeviceHapticsFromID(id objc.ID) *DeviceHaptics {
 	if id == 0 {
 		return nil
 	}
-	x := &DeviceHaptics{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DeviceHaptics{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func deviceHapticsAdopt(id objc.ID) *DeviceHaptics {
 	if id == 0 {
 		return nil
 	}
-	x := &DeviceHaptics{Handle: objref.Wrap(id)}
+	x := &DeviceHaptics{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *DeviceHaptics) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DeviceHaptics) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDeviceHaptics creates a new DeviceHaptics.
 func NewDeviceHaptics() *DeviceHaptics {
 	_id := objc.Send[objc.ID](objc.ID(_class("GCDeviceHaptics")), objc.RegisterName("new"))
 	return deviceHapticsAdopt(_id)
 }
 
-// Creates a haptics engine with the specified locality.
+// CreateEngineWithLocality creates a haptics engine with the specified locality.
 func (x *DeviceHaptics) CreateEngineWithLocality(locality obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createEngineWithLocality:"), objref.IDOf(locality))
 	return obj.Wrap(_r)
 }
 
-// The set of supported haptic localities for this device - representing the locations of its haptic actuators.
+// SupportedLocalities the set of supported haptic localities for this device - representing the locations of its haptic actuators.
 func (x *DeviceHaptics) SupportedLocalities() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedLocalities"))
 	return obj.Wrap(_r)

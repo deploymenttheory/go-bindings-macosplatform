@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A self-contained scripting statement.
-//
 // ScriptCommand is an idiomatic wrapper over the Objective-C class NSScriptCommand.
+//
+// ScriptCommand is an abstract base — you do not construct it directly. Construct one of [CloneCommand], [CloseCommand], [CreateCommand], [DeleteCommand], [MoveCommand], [QuitCommand], [SetCommand] and pass it where a ScriptCommand is accepted.
+//
+// A self-contained scripting statement.
 type ScriptCommand struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ScriptCommandFromID(id objc.ID) *ScriptCommand {
 	if id == 0 {
 		return nil
 	}
-	x := &ScriptCommand{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScriptCommand{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func scriptCommandAdopt(id objc.ID) *ScriptCommand {
 	if id == 0 {
 		return nil
 	}
-	x := &ScriptCommand{Handle: objref.Wrap(id)}
+	x := &ScriptCommand{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,9 +62,13 @@ func (x *ScriptCommand) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns an a script command object initialized from the passed command description.
-//
-// NewScriptCommandWithCommandDescription creates a new ScriptCommand.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScriptCommand) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewScriptCommandWithCommandDescription returns an a script command object initialized from the passed command description.
 func NewScriptCommandWithCommandDescription(commandDef *ScriptCommandDescription) *ScriptCommand {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScriptCommand")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCommandDescription:"), objref.IDOf(commandDef))
@@ -74,164 +82,167 @@ func NewScriptCommandWithCoder(inCoder *Coder) *ScriptCommand {
 	return scriptCommandAdopt(_id)
 }
 
-// Sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
-//
-// WithDirectParameter sets directParameter and returns the receiver so calls can be chained.
+// WithDirectParameter sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
 func (x *ScriptCommand) WithDirectParameter(directParameter obj.Object) *ScriptCommand {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirectParameter:"), objref.IDOf(directParameter))
 	return x
 }
 
-// Sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
-//
-// WithReceiversSpecifier sets receiversSpecifier and returns the receiver so calls can be chained.
+// WithReceiversSpecifier sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
 func (x *ScriptCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *ScriptCommand {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReceiversSpecifier:"), objref.IDOf(receiversSpecifier))
 	return x
 }
 
-// Sets the arguments of the command to args.
-//
-// WithArguments sets arguments and returns the receiver so calls can be chained.
+// WithArguments sets the arguments of the command to args.
 func (x *ScriptCommand) WithArguments(arguments obj.Object) *ScriptCommand {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArguments:"), objref.IDOf(arguments))
 	return x
 }
 
-// Sets a script error number that is associated with the execution of the command and is returned in the reply Apple event, if a reply was requested by the sender.
-//
-// WithScriptErrorNumber sets scriptErrorNumber and returns the receiver so calls can be chained.
+// WithScriptErrorNumber sets a script error number that is associated with the execution of the command and is returned in the reply Apple event, if a reply was requested by the sender.
 func (x *ScriptCommand) WithScriptErrorNumber(scriptErrorNumber int) *ScriptCommand {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorNumber:"), scriptErrorNumber)
 	return x
 }
 
-// Sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
-//
-// WithScriptErrorOffendingObjectDescriptor sets scriptErrorOffendingObjectDescriptor and returns the receiver so calls can be chained.
+// WithScriptErrorOffendingObjectDescriptor sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
 func (x *ScriptCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *ScriptCommand {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorOffendingObjectDescriptor:"), objref.IDOf(scriptErrorOffendingObjectDescriptor))
 	return x
 }
 
-// Sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
-//
-// WithScriptErrorExpectedTypeDescriptor sets scriptErrorExpectedTypeDescriptor and returns the receiver so calls can be chained.
+// WithScriptErrorExpectedTypeDescriptor sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
 func (x *ScriptCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *ScriptCommand {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorExpectedTypeDescriptor:"), objref.IDOf(scriptErrorExpectedTypeDescriptor))
 	return x
 }
 
-// Sets a script error string that is associated with execution of the command.
-//
-// WithScriptErrorString sets scriptErrorString and returns the receiver so calls can be chained.
+// WithScriptErrorString sets a script error string that is associated with execution of the command.
 func (x *ScriptCommand) WithScriptErrorString(scriptErrorString StringProvider) *ScriptCommand {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorString:"), objref.IDOf(scriptErrorString))
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *ScriptCommand) WithScriptingProperties(scriptingProperties obj.Object) *ScriptCommand {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Overridden by subclasses to provide a default implementation for the command represented by the receiver.
+// PerformDefaultImplementation overridden by subclasses to provide a default implementation for the command represented by the receiver.
 func (x *ScriptCommand) PerformDefaultImplementation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performDefaultImplementation"))
 	return obj.Wrap(_r)
 }
 
-// Executes the command if it is valid and returns the result, if any.
+// ExecuteCommand executes the command if it is valid and returns the result, if any.
 func (x *ScriptCommand) ExecuteCommand() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executeCommand"))
 	return obj.Wrap(_r)
 }
 
-// Suspends the execution of the receiver.
+// SuspendExecution suspends the execution of the receiver.
 func (x *ScriptCommand) SuspendExecution() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suspendExecution"))
 }
 
-// If a successful, unmatched, invocation of suspendExecution has been made, resume the execution of the command.
+// ResumeExecutionWithResult if a successful, unmatched, invocation of suspendExecution has been made, resume the execution of the command.
 func (x *ScriptCommand) ResumeExecutionWithResult(result obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeExecutionWithResult:"), objref.IDOf(result))
 }
 
+// CommandDescription wraps the corresponding Objective-C method.
 func (x *ScriptCommand) CommandDescription() *ScriptCommandDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commandDescription"))
 	return ScriptCommandDescriptionFromID(_r)
 }
 
+// DirectParameter wraps the corresponding Objective-C method.
 func (x *ScriptCommand) DirectParameter() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("directParameter"))
 	return obj.Wrap(_r)
 }
 
+// SetDirectParameter wraps the corresponding Objective-C method.
 func (x *ScriptCommand) SetDirectParameter(directParameter obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirectParameter:"), objref.IDOf(directParameter))
 }
 
+// ReceiversSpecifier wraps the corresponding Objective-C method.
 func (x *ScriptCommand) ReceiversSpecifier() *ScriptObjectSpecifier {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("receiversSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }
 
+// SetReceiversSpecifier wraps the corresponding Objective-C method.
 func (x *ScriptCommand) SetReceiversSpecifier(receiversSpecifier *ScriptObjectSpecifier) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReceiversSpecifier:"), objref.IDOf(receiversSpecifier))
 }
 
+// EvaluatedReceivers wraps the corresponding Objective-C method.
 func (x *ScriptCommand) EvaluatedReceivers() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("evaluatedReceivers"))
 	return obj.Wrap(_r)
 }
 
+// Arguments wraps the corresponding Objective-C method.
 func (x *ScriptCommand) Arguments() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arguments"))
 	return obj.Wrap(_r)
 }
 
+// SetArguments wraps the corresponding Objective-C method.
 func (x *ScriptCommand) SetArguments(arguments obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArguments:"), objref.IDOf(arguments))
 }
 
+// EvaluatedArguments wraps the corresponding Objective-C method.
 func (x *ScriptCommand) EvaluatedArguments() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("evaluatedArguments"))
 	return obj.Wrap(_r)
 }
 
+// IsWellFormed wraps the corresponding Objective-C method.
 func (x *ScriptCommand) IsWellFormed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isWellFormed"))
 	return _r
 }
 
+// ScriptErrorNumber wraps the corresponding Objective-C method.
 func (x *ScriptCommand) ScriptErrorNumber() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("scriptErrorNumber"))
 	return _r
 }
 
+// SetScriptErrorNumber wraps the corresponding Objective-C method.
 func (x *ScriptCommand) SetScriptErrorNumber(scriptErrorNumber int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorNumber:"), scriptErrorNumber)
 }
 
+// ScriptErrorOffendingObjectDescriptor wraps the corresponding Objective-C method.
 func (x *ScriptCommand) ScriptErrorOffendingObjectDescriptor() *AppleEventDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scriptErrorOffendingObjectDescriptor"))
 	return AppleEventDescriptorFromID(_r)
 }
 
+// SetScriptErrorOffendingObjectDescriptor wraps the corresponding Objective-C method.
 func (x *ScriptCommand) SetScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorOffendingObjectDescriptor:"), objref.IDOf(scriptErrorOffendingObjectDescriptor))
 }
 
+// ScriptErrorExpectedTypeDescriptor wraps the corresponding Objective-C method.
 func (x *ScriptCommand) ScriptErrorExpectedTypeDescriptor() *AppleEventDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scriptErrorExpectedTypeDescriptor"))
 	return AppleEventDescriptorFromID(_r)
 }
 
+// SetScriptErrorExpectedTypeDescriptor wraps the corresponding Objective-C method.
 func (x *ScriptCommand) SetScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorExpectedTypeDescriptor:"), objref.IDOf(scriptErrorExpectedTypeDescriptor))
 }
 
+// ScriptErrorString wraps the corresponding Objective-C method.
 func (x *ScriptCommand) ScriptErrorString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scriptErrorString"))
 	if _r == 0 {
@@ -240,10 +251,12 @@ func (x *ScriptCommand) ScriptErrorString() string {
 	return purego.GoString(_r)
 }
 
+// SetScriptErrorString wraps the corresponding Objective-C method.
 func (x *ScriptCommand) SetScriptErrorString(scriptErrorString string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorString:"), purego.NSString(scriptErrorString))
 }
 
+// AppleEvent wraps the corresponding Objective-C method.
 func (x *ScriptCommand) AppleEvent() *AppleEventDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appleEvent"))
 	return AppleEventDescriptorFromID(_r)
@@ -286,3 +299,10 @@ type ScriptCommandable interface {
 }
 
 var _ ScriptCommandable = (*ScriptCommand)(nil)
+
+// isScriptCommand marks ScriptCommand — and, by embedding promotion, its
+// subclasses — as a member of the ScriptCommand hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ScriptCommand) isScriptCommand() {}
+
+var _ ScriptCommandProvider = (*ScriptCommand)(nil)

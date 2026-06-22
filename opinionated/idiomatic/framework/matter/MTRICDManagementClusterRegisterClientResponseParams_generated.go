@@ -25,7 +25,8 @@ func MTRICDManagementClusterRegisterClientResponseParamsFromID(id objc.ID) *MTRI
 	if id == 0 {
 		return nil
 	}
-	x := &MTRICDManagementClusterRegisterClientResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRICDManagementClusterRegisterClientResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRICDManagementClusterRegisterClientResponseParamsAdopt(id objc.ID) *MTRIC
 	if id == 0 {
 		return nil
 	}
-	x := &MTRICDManagementClusterRegisterClientResponseParams{Handle: objref.Wrap(id)}
+	x := &MTRICDManagementClusterRegisterClientResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTRICDManagementClusterRegisterClientResponseParams) IsKind(className s
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRICDManagementClusterRegisterClientResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-//
-// NewMTRICDManagementClusterRegisterClientResponseParamsWithResponseValueError creates a new MTRICDManagementClusterRegisterClientResponseParams.
-func NewMTRICDManagementClusterRegisterClientResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRICDManagementClusterRegisterClientResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRICDManagementClusterRegisterClientResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRICDManagementClusterRegisterClientResponseParamsWithResponseValueError initialize an MTRICDManagementClusterRegisterClientResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRICDManagementClusterRegisterClientResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRICDManagementClusterRegisterClientResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRICDManagementClusterRegisterClientResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,17 +77,19 @@ func NewMTRICDManagementClusterRegisterClientResponseParamsWithResponseValueErro
 	return mTRICDManagementClusterRegisterClientResponseParamsAdopt(_id), nil
 }
 
-// WithIcdCounter sets icdCounter and returns the receiver so calls can be chained.
+// WithIcdCounter sets the property and returns the receiver so calls can be chained.
 func (x *MTRICDManagementClusterRegisterClientResponseParams) WithIcdCounter(icdCounter obj.Object) *MTRICDManagementClusterRegisterClientResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIcdCounter:"), objref.IDOf(icdCounter))
 	return x
 }
 
+// IcdCounter wraps the corresponding Objective-C method.
 func (x *MTRICDManagementClusterRegisterClientResponseParams) IcdCounter() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("icdCounter"))
 	return obj.Wrap(_r)
 }
 
+// SetIcdCounter wraps the corresponding Objective-C method.
 func (x *MTRICDManagementClusterRegisterClientResponseParams) SetIcdCounter(icdCounter obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIcdCounter:"), objref.IDOf(icdCounter))
 }

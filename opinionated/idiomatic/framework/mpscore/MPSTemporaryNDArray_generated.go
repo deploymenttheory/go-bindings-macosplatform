@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // TemporaryNDArray is an idiomatic wrapper over the Objective-C class MPSTemporaryNDArray.
+//
+// It embeds [NDArray], promoting that type's methods.
 type TemporaryNDArray struct {
-	objref.Handle
+	NDArray
 }
 
 // TemporaryNDArrayFromID adopts an existing Objective-C object as a TemporaryNDArray
@@ -23,7 +24,8 @@ func TemporaryNDArrayFromID(id objc.ID) *TemporaryNDArray {
 	if id == 0 {
 		return nil
 	}
-	x := &TemporaryNDArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TemporaryNDArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func temporaryNDArrayAdopt(id objc.ID) *TemporaryNDArray {
 	if id == 0 {
 		return nil
 	}
-	x := &TemporaryNDArray{Handle: objref.Wrap(id)}
+	x := &TemporaryNDArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *TemporaryNDArray) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TemporaryNDArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TemporaryNDArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewTemporaryNDArray creates a new TemporaryNDArray.
@@ -62,28 +50,25 @@ func NewTemporaryNDArray() *TemporaryNDArray {
 	return temporaryNDArrayAdopt(_id)
 }
 
-// The number of times a temporary MPSNDArray may be read by a MPSNDArray... kernel before its contents become undefined. MPSTemporaryNDArrays must release their underlying buffers for reuse immediately after last use. So as to facilitate *prompt* convenient memory recycling, each time a MPSTemporaryNDArray is read by a MPSNDArray... -encode... method, its readCount is automatically decremented. When the readCount reaches 0, the underlying buffer is automatically made available for reuse to MPS for its own needs and for other MPSTemporaryNDArrays prior to return from the -encode.. function. The contents of the buffer become undefined at this time. By default, the readCount is initialized to 1, indicating a MPSNDArray that may be overwritten any number of times, but read only once. You may change the readCount as desired to allow MPSNDArrayKernels to read the MPSTemporaryNDArray additional times. However, it is an error to change the readCount once it is zero. It is an error to read or write to a MPSTemporaryNDArray with a zero readCount. You may set the readCount to 0 yourself to cause the underlying buffer to be returned to MPS. Writing to a MPSTemporaryNDArray does not adjust the readCount. The Metal API Validation layer will assert if a MPSTemporaryNDArray is deallocated with non-zero readCount to help identify cases when resources are not returned promptly.
-//
-// WithReadCount sets readCount and returns the receiver so calls can be chained.
+// WithReadCount the number of times a temporary MPSNDArray may be read by a MPSNDArray... kernel before its contents become undefined. MPSTemporaryNDArrays must release their underlying buffers for reuse immediately after last use. So as to facilitate *prompt* convenient memory recycling, each time a MPSTemporaryNDArray is read by a MPSNDArray... -encode... method, its readCount is automatically decremented. When the readCount reaches 0, the underlying buffer is automatically made available for reuse to MPS for its own needs and for other MPSTemporaryNDArrays prior to return from the -encode.. function. The contents of the buffer become undefined at this time. By default, the readCount is initialized to 1, indicating a MPSNDArray that may be overwritten any number of times, but read only once. You may change the readCount as desired to allow MPSNDArrayKernels to read the MPSTemporaryNDArray additional times. However, it is an error to change the readCount once it is zero. It is an error to read or write to a MPSTemporaryNDArray with a zero readCount. You may set the readCount to 0 yourself to cause the underlying buffer to be returned to MPS. Writing to a MPSTemporaryNDArray does not adjust the readCount. The Metal API Validation layer will assert if a MPSTemporaryNDArray is deallocated with non-zero readCount to help identify cases when resources are not returned promptly.
 func (x *TemporaryNDArray) WithReadCount(readCount int) *TemporaryNDArray {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 	return x
 }
 
-// A used specified string to help identify the array during debugging. May be externally visible to tools like Instruments
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a used specified string to help identify the array during debugging. May be externally visible to tools like Instruments
 func (x *TemporaryNDArray) WithLabel(label string) *TemporaryNDArray {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The number of times a temporary MPSNDArray may be read by a MPSNDArray... kernel before its contents become undefined. MPSTemporaryNDArrays must release their underlying buffers for reuse immediately after last use. So as to facilitate *prompt* convenient memory recycling, each time a MPSTemporaryNDArray is read by a MPSNDArray... -encode... method, its readCount is automatically decremented. When the readCount reaches 0, the underlying buffer is automatically made available for reuse to MPS for its own needs and for other MPSTemporaryNDArrays prior to return from the -encode.. function. The contents of the buffer become undefined at this time. By default, the readCount is initialized to 1, indicating a MPSNDArray that may be overwritten any number of times, but read only once. You may change the readCount as desired to allow MPSNDArrayKernels to read the MPSTemporaryNDArray additional times. However, it is an error to change the readCount once it is zero. It is an error to read or write to a MPSTemporaryNDArray with a zero readCount. You may set the readCount to 0 yourself to cause the underlying buffer to be returned to MPS. Writing to a MPSTemporaryNDArray does not adjust the readCount. The Metal API Validation layer will assert if a MPSTemporaryNDArray is deallocated with non-zero readCount to help identify cases when resources are not returned promptly.
+// ReadCount the number of times a temporary MPSNDArray may be read by a MPSNDArray... kernel before its contents become undefined. MPSTemporaryNDArrays must release their underlying buffers for reuse immediately after last use. So as to facilitate *prompt* convenient memory recycling, each time a MPSTemporaryNDArray is read by a MPSNDArray... -encode... method, its readCount is automatically decremented. When the readCount reaches 0, the underlying buffer is automatically made available for reuse to MPS for its own needs and for other MPSTemporaryNDArrays prior to return from the -encode.. function. The contents of the buffer become undefined at this time. By default, the readCount is initialized to 1, indicating a MPSNDArray that may be overwritten any number of times, but read only once. You may change the readCount as desired to allow MPSNDArrayKernels to read the MPSTemporaryNDArray additional times. However, it is an error to change the readCount once it is zero. It is an error to read or write to a MPSTemporaryNDArray with a zero readCount. You may set the readCount to 0 yourself to cause the underlying buffer to be returned to MPS. Writing to a MPSTemporaryNDArray does not adjust the readCount. The Metal API Validation layer will assert if a MPSTemporaryNDArray is deallocated with non-zero readCount to help identify cases when resources are not returned promptly.
 func (x *TemporaryNDArray) ReadCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("readCount"))
 	return _r
 }
 
+// SetReadCount wraps the corresponding Objective-C method.
 func (x *TemporaryNDArray) SetReadCount(readCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 }
@@ -98,3 +83,5 @@ type TemporaryNDArrayable interface {
 }
 
 var _ TemporaryNDArrayable = (*TemporaryNDArray)(nil)
+
+var _ NDArrayProvider = (*TemporaryNDArray)(nil)

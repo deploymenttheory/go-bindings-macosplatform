@@ -23,7 +23,8 @@ func MTRThreadNetworkDirectoryClusterThreadNetworkStructFromID(id objc.ID) *MTRT
 	if id == 0 {
 		return nil
 	}
-	x := &MTRThreadNetworkDirectoryClusterThreadNetworkStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRThreadNetworkDirectoryClusterThreadNetworkStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRThreadNetworkDirectoryClusterThreadNetworkStructAdopt(id objc.ID) *MTRTh
 	if id == 0 {
 		return nil
 	}
-	x := &MTRThreadNetworkDirectoryClusterThreadNetworkStruct{Handle: objref.Wrap(id)}
+	x := &MTRThreadNetworkDirectoryClusterThreadNetworkStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,45 +58,54 @@ func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) IsKind(className s
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRThreadNetworkDirectoryClusterThreadNetworkStruct creates a new MTRThreadNetworkDirectoryClusterThreadNetworkStruct.
 func NewMTRThreadNetworkDirectoryClusterThreadNetworkStruct() *MTRThreadNetworkDirectoryClusterThreadNetworkStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRThreadNetworkDirectoryClusterThreadNetworkStruct")), objc.RegisterName("new"))
 	return mTRThreadNetworkDirectoryClusterThreadNetworkStructAdopt(_id)
 }
 
-// WithExtendedPanID sets extendedPanID and returns the receiver so calls can be chained.
+// WithExtendedPanID sets the property and returns the receiver so calls can be chained.
 func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) WithExtendedPanID(extendedPanID obj.Object) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedPanID:"), objref.IDOf(extendedPanID))
 	return x
 }
 
-// WithNetworkName sets networkName and returns the receiver so calls can be chained.
+// WithNetworkName sets the property and returns the receiver so calls can be chained.
 func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) WithNetworkName(networkName string) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkName:"), purego.NSString(networkName))
 	return x
 }
 
-// WithChannel sets channel and returns the receiver so calls can be chained.
+// WithChannel sets the property and returns the receiver so calls can be chained.
 func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) WithChannel(channel obj.Object) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), objref.IDOf(channel))
 	return x
 }
 
-// WithActiveTimestamp sets activeTimestamp and returns the receiver so calls can be chained.
+// WithActiveTimestamp sets the property and returns the receiver so calls can be chained.
 func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) WithActiveTimestamp(activeTimestamp obj.Object) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActiveTimestamp:"), objref.IDOf(activeTimestamp))
 	return x
 }
 
+// ExtendedPanID wraps the corresponding Objective-C method.
 func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) ExtendedPanID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendedPanID"))
 	return obj.Wrap(_r)
 }
 
+// SetExtendedPanID wraps the corresponding Objective-C method.
 func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) SetExtendedPanID(extendedPanID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedPanID:"), objref.IDOf(extendedPanID))
 }
 
+// NetworkName wraps the corresponding Objective-C method.
 func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) NetworkName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkName"))
 	if _r == 0 {
@@ -103,24 +114,29 @@ func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) NetworkName() stri
 	return purego.GoString(_r)
 }
 
+// SetNetworkName wraps the corresponding Objective-C method.
 func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) SetNetworkName(networkName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkName:"), purego.NSString(networkName))
 }
 
+// Channel wraps the corresponding Objective-C method.
 func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) Channel() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("channel"))
 	return obj.Wrap(_r)
 }
 
+// SetChannel wraps the corresponding Objective-C method.
 func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) SetChannel(channel obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), objref.IDOf(channel))
 }
 
+// ActiveTimestamp wraps the corresponding Objective-C method.
 func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) ActiveTimestamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activeTimestamp"))
 	return obj.Wrap(_r)
 }
 
+// SetActiveTimestamp wraps the corresponding Objective-C method.
 func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) SetActiveTimestamp(activeTimestamp obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActiveTimestamp:"), objref.IDOf(activeTimestamp))
 }

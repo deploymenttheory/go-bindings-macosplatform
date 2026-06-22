@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The information that describes a train trip.
-//
 // TrainTrip is an idiomatic wrapper over the Objective-C class INTrainTrip.
+//
+// The information that describes a train trip.
 type TrainTrip struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TrainTripFromID(id objc.ID) *TrainTrip {
 	if id == 0 {
 		return nil
 	}
-	x := &TrainTrip{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TrainTrip{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func trainTripAdopt(id objc.ID) *TrainTrip {
 	if id == 0 {
 		return nil
 	}
-	x := &TrainTrip{Handle: objref.Wrap(id)}
+	x := &TrainTrip{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *TrainTrip) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new train trip with the specified contents and attributes.
-//
-// NewTrainTripWithProviderTrainNameTrainNumberTripDurationDepartureStationLocationDeparturePlatformArrivalStationLocationArrivalPlatform creates a new TrainTrip.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TrainTrip) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTrainTripWithProviderTrainNameTrainNumberTripDurationDepartureStationLocationDeparturePlatformArrivalStationLocationArrivalPlatform creates a new train trip with the specified contents and attributes.
 func NewTrainTripWithProviderTrainNameTrainNumberTripDurationDepartureStationLocationDeparturePlatformArrivalStationLocationArrivalPlatform(provider string, trainName string, trainNumber string, tripDuration *DateComponentsRange, departureStationLocation obj.Object, departurePlatform string, arrivalStationLocation obj.Object, arrivalPlatform string) *TrainTrip {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INTrainTrip")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvider:trainName:trainNumber:tripDuration:departureStationLocation:departurePlatform:arrivalStationLocation:arrivalPlatform:"), purego.NSString(provider), purego.NSString(trainName), purego.NSString(trainNumber), objref.IDOf(tripDuration), objref.IDOf(departureStationLocation), purego.NSString(departurePlatform), objref.IDOf(arrivalStationLocation), purego.NSString(arrivalPlatform))
 	return trainTripAdopt(_id)
 }
 
+// Provider wraps the corresponding Objective-C method.
 func (x *TrainTrip) Provider() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("provider"))
 	if _r == 0 {
@@ -75,6 +82,7 @@ func (x *TrainTrip) Provider() string {
 	return purego.GoString(_r)
 }
 
+// TrainName wraps the corresponding Objective-C method.
 func (x *TrainTrip) TrainName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trainName"))
 	if _r == 0 {
@@ -83,6 +91,7 @@ func (x *TrainTrip) TrainName() string {
 	return purego.GoString(_r)
 }
 
+// TrainNumber wraps the corresponding Objective-C method.
 func (x *TrainTrip) TrainNumber() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trainNumber"))
 	if _r == 0 {
@@ -91,16 +100,19 @@ func (x *TrainTrip) TrainNumber() string {
 	return purego.GoString(_r)
 }
 
+// TripDuration wraps the corresponding Objective-C method.
 func (x *TrainTrip) TripDuration() *DateComponentsRange {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tripDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
+// DepartureStationLocation wraps the corresponding Objective-C method.
 func (x *TrainTrip) DepartureStationLocation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("departureStationLocation"))
 	return obj.Wrap(_r)
 }
 
+// DeparturePlatform wraps the corresponding Objective-C method.
 func (x *TrainTrip) DeparturePlatform() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("departurePlatform"))
 	if _r == 0 {
@@ -109,11 +121,13 @@ func (x *TrainTrip) DeparturePlatform() string {
 	return purego.GoString(_r)
 }
 
+// ArrivalStationLocation wraps the corresponding Objective-C method.
 func (x *TrainTrip) ArrivalStationLocation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrivalStationLocation"))
 	return obj.Wrap(_r)
 }
 
+// ArrivalPlatform wraps the corresponding Objective-C method.
 func (x *TrainTrip) ArrivalPlatform() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrivalPlatform"))
 	if _r == 0 {

@@ -13,6 +13,8 @@ import (
 )
 
 // AVB1722ControlInterface is an idiomatic wrapper over the Objective-C class AVB1722ControlInterface.
+//
+// AVB1722ControlInterface is an abstract base — you do not construct it directly. Construct one of [AVB17221ACMPInterface], [AVB17221AECPInterface] and pass it where a AVB1722ControlInterface is accepted.
 type AVB1722ControlInterface struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func AVB1722ControlInterfaceFromID(id objc.ID) *AVB1722ControlInterface {
 	if id == 0 {
 		return nil
 	}
-	x := &AVB1722ControlInterface{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AVB1722ControlInterface{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func aVB1722ControlInterfaceAdopt(id objc.ID) *AVB1722ControlInterface {
 	if id == 0 {
 		return nil
 	}
-	x := &AVB1722ControlInterface{Handle: objref.Wrap(id)}
+	x := &AVB1722ControlInterface{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,24 +60,27 @@ func (x *AVB1722ControlInterface) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes the receiver to work with a 1722 control service on the specified interface. The client must have previously be requested to load on the interface.
-//
-// NewAVB1722ControlInterfaceWithInterfaceName creates a new AVB1722ControlInterface.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AVB1722ControlInterface) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAVB1722ControlInterfaceWithInterfaceName initializes the receiver to work with a 1722 control service on the specified interface. The client must have previously be requested to load on the interface.
 func NewAVB1722ControlInterfaceWithInterfaceName(anInterfaceName string) *AVB1722ControlInterface {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVB1722ControlInterface")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterfaceName:"), purego.NSString(anInterfaceName))
 	return aVB1722ControlInterfaceAdopt(_id)
 }
 
-// Initializes the receiver to work with a 1722 control service on the specified interface. The client must have previously be requested to load on the interface.
-//
-// NewAVB1722ControlInterfaceWithInterface creates a new AVB1722ControlInterface.
+// NewAVB1722ControlInterfaceWithInterface initializes the receiver to work with a 1722 control service on the specified interface. The client must have previously be requested to load on the interface.
 func NewAVB1722ControlInterfaceWithInterface(anInterface *Interface) *AVB1722ControlInterface {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVB1722ControlInterface")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterface:"), objref.IDOf(anInterface))
 	return aVB1722ControlInterfaceAdopt(_id)
 }
 
+// InterfaceName wraps the corresponding Objective-C method.
 func (x *AVB1722ControlInterface) InterfaceName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interfaceName"))
 	if _r == 0 {
@@ -82,7 +89,7 @@ func (x *AVB1722ControlInterface) InterfaceName() string {
 	return purego.GoString(_r)
 }
 
-// The AVBInterface object which owns this object. This may be nil if it was not created by an instance of AVBInterface
+// Interface the AVBInterface object which owns this object. This may be nil if it was not created by an instance of AVBInterface
 func (x *AVB1722ControlInterface) Interface() *Interface {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interface"))
 	return InterfaceFromID(_r)
@@ -96,3 +103,10 @@ type AVB1722ControlInterfaceable interface {
 }
 
 var _ AVB1722ControlInterfaceable = (*AVB1722ControlInterface)(nil)
+
+// isAVB1722ControlInterface marks AVB1722ControlInterface — and, by embedding promotion, its
+// subclasses — as a member of the AVB1722ControlInterface hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AVB1722ControlInterface) isAVB1722ControlInterface() {}
+
+var _ AVB1722ControlInterfaceProvider = (*AVB1722ControlInterface)(nil)

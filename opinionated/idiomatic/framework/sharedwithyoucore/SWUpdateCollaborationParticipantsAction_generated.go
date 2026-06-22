@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An action that contains the cryptographic identities the system uses to add to or remove from an existing collaboration.
-//
 // UpdateCollaborationParticipantsAction is an idiomatic wrapper over the Objective-C class SWUpdateCollaborationParticipantsAction.
+//
+// It embeds [Action], promoting that type's methods.
+//
+// An action that contains the cryptographic identities the system uses to add to or remove from an existing collaboration.
 type UpdateCollaborationParticipantsAction struct {
-	objref.Handle
+	Action
 }
 
 // UpdateCollaborationParticipantsActionFromID adopts an existing Objective-C object as a UpdateCollaborationParticipantsAction
@@ -25,7 +26,8 @@ func UpdateCollaborationParticipantsActionFromID(id objc.ID) *UpdateCollaboratio
 	if id == 0 {
 		return nil
 	}
-	x := &UpdateCollaborationParticipantsAction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UpdateCollaborationParticipantsAction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func updateCollaborationParticipantsActionAdopt(id objc.ID) *UpdateCollaboration
 	if id == 0 {
 		return nil
 	}
-	x := &UpdateCollaborationParticipantsAction{Handle: objref.Wrap(id)}
+	x := &UpdateCollaborationParticipantsAction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UpdateCollaborationParticipantsAction) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UpdateCollaborationParticipantsAction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UpdateCollaborationParticipantsAction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUpdateCollaborationParticipantsAction creates a new UpdateCollaborationParticipantsAction.
@@ -64,17 +52,22 @@ func NewUpdateCollaborationParticipantsAction() *UpdateCollaborationParticipants
 	return updateCollaborationParticipantsActionAdopt(_id)
 }
 
+// CollaborationMetadata wraps the corresponding Objective-C method.
 func (x *UpdateCollaborationParticipantsAction) CollaborationMetadata() *CollaborationMetadata {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collaborationMetadata"))
 	return CollaborationMetadataFromID(_r)
 }
 
+// AddedIdentities wraps the corresponding Objective-C method.
+//
 // AddedIdentities returns the collection as a Go slice.
 func (x *UpdateCollaborationParticipantsAction) AddedIdentities() []*PersonIdentity {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addedIdentities"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersonIdentity { return PersonIdentityFromID(_id) })
 }
 
+// RemovedIdentities wraps the corresponding Objective-C method.
+//
 // RemovedIdentities returns the collection as a Go slice.
 func (x *UpdateCollaborationParticipantsAction) RemovedIdentities() []*PersonIdentity {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removedIdentities"))
@@ -90,3 +83,5 @@ type UpdateCollaborationParticipantsActionable interface {
 }
 
 var _ UpdateCollaborationParticipantsActionable = (*UpdateCollaborationParticipantsAction)(nil)
+
+var _ ActionProvider = (*UpdateCollaborationParticipantsAction)(nil)

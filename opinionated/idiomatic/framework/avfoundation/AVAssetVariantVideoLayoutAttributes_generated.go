@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Attributes that describe the layout of video content.
-//
 // AssetVariantVideoLayoutAttributes is an idiomatic wrapper over the Objective-C class AVAssetVariantVideoLayoutAttributes.
+//
+// Attributes that describe the layout of video content.
 type AssetVariantVideoLayoutAttributes struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetVariantVideoLayoutAttributesFromID(id objc.ID) *AssetVariantVideoLayou
 	if id == 0 {
 		return nil
 	}
-	x := &AssetVariantVideoLayoutAttributes{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetVariantVideoLayoutAttributes{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetVariantVideoLayoutAttributesAdopt(id objc.ID) *AssetVariantVideoLayout
 	if id == 0 {
 		return nil
 	}
-	x := &AssetVariantVideoLayoutAttributes{Handle: objref.Wrap(id)}
+	x := &AssetVariantVideoLayoutAttributes{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *AssetVariantVideoLayoutAttributes) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *AssetVariantVideoLayoutAttributes) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetVariantVideoLayoutAttributes) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewAssetVariantVideoLayoutAttributes creates a new AssetVariantVideoLayoutAttributes.

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that manages the presentation and display of a LookAround view.
-//
 // LookAroundViewController is an idiomatic wrapper over the Objective-C class MKLookAroundViewController.
+//
+// A class that manages the presentation and display of a LookAround view.
 type LookAroundViewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LookAroundViewControllerFromID(id objc.ID) *LookAroundViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &LookAroundViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LookAroundViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func lookAroundViewControllerAdopt(id objc.ID) *LookAroundViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &LookAroundViewController{Handle: objref.Wrap(id)}
+	x := &LookAroundViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,114 +60,114 @@ func (x *LookAroundViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new LookAround view controller with the specified scene.
-//
-// NewLookAroundViewControllerWithScene creates a new LookAroundViewController.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LookAroundViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLookAroundViewControllerWithScene creates a new LookAround view controller with the specified scene.
 func NewLookAroundViewControllerWithScene(scene *LookAroundScene) *LookAroundViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKLookAroundViewController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScene:"), objref.IDOf(scene))
 	return lookAroundViewControllerAdopt(_id)
 }
 
-// Creates a new LookAround view controller from the specified nib and bundle.
-//
-// NewLookAroundViewControllerWithNibNameBundle creates a new LookAroundViewController.
+// NewLookAroundViewControllerWithNibNameBundle creates a new LookAround view controller from the specified nib and bundle.
 func NewLookAroundViewControllerWithNibNameBundle(nibNameOrNil string, nibBundleOrNil obj.Object) *LookAroundViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKLookAroundViewController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNibName:bundle:"), purego.NSString(nibNameOrNil), objref.IDOf(nibBundleOrNil))
 	return lookAroundViewControllerAdopt(_id)
 }
 
-// Creates a new LookAround view controller object from a coder object provided by a storyboard or nib file.
-//
-// NewLookAroundViewControllerWithCoder creates a new LookAroundViewController.
+// NewLookAroundViewControllerWithCoder creates a new LookAround view controller object from a coder object provided by a storyboard or nib file.
 func NewLookAroundViewControllerWithCoder(coder obj.Object) *LookAroundViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKLookAroundViewController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return lookAroundViewControllerAdopt(_id)
 }
 
-// The LookAround scene.
-//
-// WithScene sets scene and returns the receiver so calls can be chained.
+// WithScene the LookAround scene.
 func (x *LookAroundViewController) WithScene(scene *LookAroundScene) *LookAroundViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScene:"), objref.IDOf(scene))
 	return x
 }
 
-// A Boolean value that indicates whether the map’s navigation controls are visible.
-//
-// WithNavigationEnabled sets navigationEnabled and returns the receiver so calls can be chained.
+// WithNavigationEnabled a Boolean value that indicates whether the map’s navigation controls are visible.
 func (x *LookAroundViewController) WithNavigationEnabled(navigationEnabled bool) *LookAroundViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNavigationEnabled:"), navigationEnabled)
 	return x
 }
 
-// A Boolean value that indicates whether the map display road labels.
-//
-// WithShowsRoadLabels sets showsRoadLabels and returns the receiver so calls can be chained.
+// WithShowsRoadLabels a Boolean value that indicates whether the map display road labels.
 func (x *LookAroundViewController) WithShowsRoadLabels(showsRoadLabels bool) *LookAroundViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsRoadLabels:"), showsRoadLabels)
 	return x
 }
 
-// The filter used to determine the points of interest shown on the map.
-//
-// WithPointOfInterestFilter sets pointOfInterestFilter and returns the receiver so calls can be chained.
+// WithPointOfInterestFilter the filter used to determine the points of interest shown on the map.
 func (x *LookAroundViewController) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LookAroundViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 	return x
 }
 
-// A value that indicates the badge’s position on the LookAround view.
-//
-// WithBadgePosition sets badgePosition and returns the receiver so calls can be chained.
+// WithBadgePosition a value that indicates the badge’s position on the LookAround view.
 func (x *LookAroundViewController) WithBadgePosition(badgePosition LookAroundBadgePosition) *LookAroundViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadgePosition:"), badgePosition)
 	return x
 }
 
+// Scene wraps the corresponding Objective-C method.
 func (x *LookAroundViewController) Scene() *LookAroundScene {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scene"))
 	return LookAroundSceneFromID(_r)
 }
 
+// SetScene wraps the corresponding Objective-C method.
 func (x *LookAroundViewController) SetScene(scene *LookAroundScene) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScene:"), objref.IDOf(scene))
 }
 
+// IsNavigationEnabled wraps the corresponding Objective-C method.
 func (x *LookAroundViewController) IsNavigationEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNavigationEnabled"))
 	return _r
 }
 
+// SetNavigationEnabled wraps the corresponding Objective-C method.
 func (x *LookAroundViewController) SetNavigationEnabled(navigationEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNavigationEnabled:"), navigationEnabled)
 }
 
+// ShowsRoadLabels wraps the corresponding Objective-C method.
 func (x *LookAroundViewController) ShowsRoadLabels() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsRoadLabels"))
 	return _r
 }
 
+// SetShowsRoadLabels wraps the corresponding Objective-C method.
 func (x *LookAroundViewController) SetShowsRoadLabels(showsRoadLabels bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsRoadLabels:"), showsRoadLabels)
 }
 
+// PointOfInterestFilter wraps the corresponding Objective-C method.
 func (x *LookAroundViewController) PointOfInterestFilter() *PointOfInterestFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }
 
+// SetPointOfInterestFilter wraps the corresponding Objective-C method.
 func (x *LookAroundViewController) SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 }
 
+// BadgePosition wraps the corresponding Objective-C method.
 func (x *LookAroundViewController) BadgePosition() LookAroundBadgePosition {
 	_r := objc.Send[LookAroundBadgePosition](objref.IDOf(x), objc.RegisterName("badgePosition"))
 	return _r
 }
 
+// SetBadgePosition wraps the corresponding Objective-C method.
 func (x *LookAroundViewController) SetBadgePosition(badgePosition LookAroundBadgePosition) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadgePosition:"), badgePosition)
 }

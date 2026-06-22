@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The common configuration traits for storage device requests.
-//
 // StorageDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZStorageDeviceConfiguration.
+//
+// StorageDeviceConfiguration is an abstract base — you do not construct it directly. Construct one of [NVMExpressControllerDeviceConfiguration], [USBMassStorageDeviceConfiguration], [VirtioBlockDeviceConfiguration] and pass it where a StorageDeviceConfiguration is accepted.
+//
+// The common configuration traits for storage device requests.
 type StorageDeviceConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func StorageDeviceConfigurationFromID(id objc.ID) *StorageDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &StorageDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StorageDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func storageDeviceConfigurationAdopt(id objc.ID) *StorageDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &StorageDeviceConfiguration{Handle: objref.Wrap(id)}
+	x := &StorageDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +62,13 @@ func (x *StorageDeviceConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewStorageDeviceConfiguration creates a new StorageDeviceConfiguration.
-func NewStorageDeviceConfiguration() *StorageDeviceConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZStorageDeviceConfiguration")), objc.RegisterName("new"))
-	return storageDeviceConfigurationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StorageDeviceConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// Attachment wraps the corresponding Objective-C method.
 func (x *StorageDeviceConfiguration) Attachment() *StorageDeviceAttachment {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachment"))
 	return StorageDeviceAttachmentFromID(_r)
@@ -76,3 +81,10 @@ type StorageDeviceConfigurationable interface {
 }
 
 var _ StorageDeviceConfigurationable = (*StorageDeviceConfiguration)(nil)
+
+// isStorageDeviceConfiguration marks StorageDeviceConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the StorageDeviceConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *StorageDeviceConfiguration) isStorageDeviceConfiguration() {}
+
+var _ StorageDeviceConfigurationProvider = (*StorageDeviceConfiguration)(nil)

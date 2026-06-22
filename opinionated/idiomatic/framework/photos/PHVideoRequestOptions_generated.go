@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of options affecting the delivery of video asset data that you request from an image manager.
-//
 // VideoRequestOptions is an idiomatic wrapper over the Objective-C class PHVideoRequestOptions.
+//
+// A set of options affecting the delivery of video asset data that you request from an image manager.
 type VideoRequestOptions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VideoRequestOptionsFromID(id objc.ID) *VideoRequestOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &VideoRequestOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VideoRequestOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func videoRequestOptionsAdopt(id objc.ID) *VideoRequestOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &VideoRequestOptions{Handle: objref.Wrap(id)}
+	x := &VideoRequestOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,42 +60,48 @@ func (x *VideoRequestOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VideoRequestOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVideoRequestOptions creates a new VideoRequestOptions.
 func NewVideoRequestOptions() *VideoRequestOptions {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHVideoRequestOptions")), objc.RegisterName("new"))
 	return videoRequestOptionsAdopt(_id)
 }
 
-// A Boolean value that specifies whether Photos can download the requested video from iCloud.
-//
-// WithNetworkAccessAllowed sets networkAccessAllowed and returns the receiver so calls can be chained.
+// WithNetworkAccessAllowed a Boolean value that specifies whether Photos can download the requested video from iCloud.
 func (x *VideoRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bool) *VideoRequestOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
 	return x
 }
 
-// A mode specifying the requested video quality and delivery priority.
-//
-// WithDeliveryMode sets deliveryMode and returns the receiver so calls can be chained.
+// WithDeliveryMode a mode specifying the requested video quality and delivery priority.
 func (x *VideoRequestOptions) WithDeliveryMode(deliveryMode VideoRequestOptionsDeliveryMode) *VideoRequestOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeliveryMode:"), deliveryMode)
 	return x
 }
 
+// IsNetworkAccessAllowed wraps the corresponding Objective-C method.
 func (x *VideoRequestOptions) IsNetworkAccessAllowed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNetworkAccessAllowed"))
 	return _r
 }
 
+// SetNetworkAccessAllowed wraps the corresponding Objective-C method.
 func (x *VideoRequestOptions) SetNetworkAccessAllowed(networkAccessAllowed bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
 }
 
+// DeliveryMode wraps the corresponding Objective-C method.
 func (x *VideoRequestOptions) DeliveryMode() VideoRequestOptionsDeliveryMode {
 	_r := objc.Send[VideoRequestOptionsDeliveryMode](objref.IDOf(x), objc.RegisterName("deliveryMode"))
 	return _r
 }
 
+// SetDeliveryMode wraps the corresponding Objective-C method.
 func (x *VideoRequestOptions) SetDeliveryMode(deliveryMode VideoRequestOptionsDeliveryMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeliveryMode:"), deliveryMode)
 }

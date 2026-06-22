@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that holds data from a forward pass to be used in a backward pass.
-//
 // RNNMatrixTrainingState is an idiomatic wrapper over the Objective-C class MPSRNNMatrixTrainingState.
+//
+// It embeds [State], promoting that type's methods.
+//
+// A class that holds data from a forward pass to be used in a backward pass.
 type RNNMatrixTrainingState struct {
-	objref.Handle
+	State
 }
 
 // RNNMatrixTrainingStateFromID adopts an existing Objective-C object as a RNNMatrixTrainingState
@@ -25,7 +26,8 @@ func RNNMatrixTrainingStateFromID(id objc.ID) *RNNMatrixTrainingState {
 	if id == 0 {
 		return nil
 	}
-	x := &RNNMatrixTrainingState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RNNMatrixTrainingState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func rNNMatrixTrainingStateAdopt(id objc.ID) *RNNMatrixTrainingState {
 	if id == 0 {
 		return nil
 	}
-	x := &RNNMatrixTrainingState{Handle: objref.Wrap(id)}
+	x := &RNNMatrixTrainingState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RNNMatrixTrainingState) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RNNMatrixTrainingState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RNNMatrixTrainingState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRNNMatrixTrainingState creates a new RNNMatrixTrainingState.
@@ -64,15 +52,13 @@ func NewRNNMatrixTrainingState() *RNNMatrixTrainingState {
 	return rNNMatrixTrainingStateAdopt(_id)
 }
 
-// WithReadCount sets readCount and returns the receiver so calls can be chained.
+// WithReadCount sets the property and returns the receiver so calls can be chained.
 func (x *RNNMatrixTrainingState) WithReadCount(readCount int) *RNNMatrixTrainingState {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *RNNMatrixTrainingState) WithLabel(label string) *RNNMatrixTrainingState {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -86,3 +72,5 @@ type RNNMatrixTrainingStateable interface {
 }
 
 var _ RNNMatrixTrainingStateable = (*RNNMatrixTrainingState)(nil)
+
+var _ StateProvider = (*RNNMatrixTrainingState)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request that uses the Attribute Protocol (ATT).
-//
 // ATTRequest is an idiomatic wrapper over the Objective-C class CBATTRequest.
+//
+// A request that uses the Attribute Protocol (ATT).
 type ATTRequest struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ATTRequestFromID(id objc.ID) *ATTRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &ATTRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ATTRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func aTTRequestAdopt(id objc.ID) *ATTRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &ATTRequest{Handle: objref.Wrap(id)}
+	x := &ATTRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,44 +60,49 @@ func (x *ATTRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ATTRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewATTRequest creates a new ATTRequest.
 func NewATTRequest() *ATTRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("CBATTRequest")), objc.RegisterName("new"))
 	return aTTRequestAdopt(_id)
 }
 
-// The data that the central reads from or writes to the peripheral.
-//
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue the data that the central reads from or writes to the peripheral.
 func (x *ATTRequest) WithValue(value obj.Object) *ATTRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return x
 }
 
-// The central that originated the request.
+// Central the central that originated the request.
 func (x *ATTRequest) Central() *Central {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("central"))
 	return CentralFromID(_r)
 }
 
-// The characteristic whose value will be read or written.
+// Characteristic the characteristic whose value will be read or written.
 func (x *ATTRequest) Characteristic() *Characteristic {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("characteristic"))
 	return CharacteristicFromID(_r)
 }
 
-// The zero-based index of the first byte for the read or write.
+// Offset the zero-based index of the first byte for the read or write.
 func (x *ATTRequest) Offset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
 	return _r
 }
 
-// The data being read or written. For read requests, <i>value</i> will be nil and should be set before responding via
+// Value the data being read or written. For read requests, <i>value</i> will be nil and should be set before responding via
 func (x *ATTRequest) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *ATTRequest) SetValue(value obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 }

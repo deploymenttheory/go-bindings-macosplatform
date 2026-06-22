@@ -13,6 +13,8 @@ import (
 )
 
 // Interface is an idiomatic wrapper over the Objective-C class AVBInterface.
+//
+// Interface is an abstract base — you do not construct it directly. Construct one of [EthernetInterface] and pass it where a Interface is accepted.
 type Interface struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func InterfaceFromID(id objc.ID) *Interface {
 	if id == 0 {
 		return nil
 	}
-	x := &Interface{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Interface{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func interfaceAdopt(id objc.ID) *Interface {
 	if id == 0 {
 		return nil
 	}
-	x := &Interface{Handle: objref.Wrap(id)}
+	x := &Interface{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,16 +60,20 @@ func (x *Interface) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// This method initializes the receiver to work on the specified interface.
-//
-// NewInterfaceWithInterfaceName creates a new Interface.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Interface) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewInterfaceWithInterfaceName this method initializes the receiver to work on the specified interface.
 func NewInterfaceWithInterfaceName(anInterfaceName string) *Interface {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVBInterface")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterfaceName:"), purego.NSString(anInterfaceName))
 	return interfaceAdopt(_id)
 }
 
-// The BSD interface name.
+// InterfaceName the BSD interface name.
 func (x *Interface) InterfaceName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interfaceName"))
 	if _r == 0 {
@@ -74,19 +82,19 @@ func (x *Interface) InterfaceName() string {
 	return purego.GoString(_r)
 }
 
-// The IEEE Std 1722.1™-2013 entity discovery for the interface.
+// EntityDiscovery the IEEE Std 1722.1™-2013 entity discovery for the interface.
 func (x *Interface) EntityDiscovery() *AVB17221EntityDiscovery {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entityDiscovery"))
 	return AVB17221EntityDiscoveryFromID(_r)
 }
 
-// The IEEE Std 1722.1™-2013 AECP interface for the interface.
+// Aecp the IEEE Std 1722.1™-2013 AECP interface for the interface.
 func (x *Interface) Aecp() *AVB17221AECPInterface {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("aecp"))
 	return AVB17221AECPInterfaceFromID(_r)
 }
 
-// The IEEE Std 1722.1™-2013 ACMP interface for the interface.
+// Acmp the IEEE Std 1722.1™-2013 ACMP interface for the interface.
 func (x *Interface) Acmp() *AVB17221ACMPInterface {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("acmp"))
 	return AVB17221ACMPInterfaceFromID(_r)
@@ -102,3 +110,10 @@ type Interfaceable interface {
 }
 
 var _ Interfaceable = (*Interface)(nil)
+
+// isInterface marks Interface — and, by embedding promotion, its
+// subclasses — as a member of the Interface hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Interface) isInterface() {}
+
+var _ InterfaceProvider = (*Interface)(nil)

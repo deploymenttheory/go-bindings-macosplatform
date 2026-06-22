@@ -34,7 +34,6 @@ func GCProductCategoryHID() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategoryHID")))
 }
 
-// The category for game controller products that support 6DoF tracking on visionOS.
 // GCProductCategorySpatialController returns the string constant GCProductCategorySpatialController, for use as a dictionary key or argument.
 func GCProductCategorySpatialController() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategorySpatialController")))
@@ -45,31 +44,26 @@ func GCProductCategoryArcadeStick() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategoryArcadeStick")))
 }
 
-// The Siri Remote (1st generation), or Apple TV Remote (1st generation), was first introduced in 2015. It features a Touch surface for touch navigation, and supports device motion.
 // GCProductCategorySiriRemote1stGen returns the string constant GCProductCategorySiriRemote1stGen, for use as a dictionary key or argument.
 func GCProductCategorySiriRemote1stGen() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategorySiriRemote1stGen")))
 }
 
-// The Siri Remote (2nd generation), or Apple TV Remote (2nd generation), was first introduced in 2021. It features a touch-enabled clickpad for navigation.
 // GCProductCategorySiriRemote2ndGen returns the string constant GCProductCategorySiriRemote2ndGen, for use as a dictionary key or argument.
 func GCProductCategorySiriRemote2ndGen() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategorySiriRemote2ndGen")))
 }
 
-// Users can use Apple TV Remote controls in Control Center on an iOS or iPadOS device.
 // GCProductCategoryControlCenterRemote returns the string constant GCProductCategoryControlCenterRemote, for use as a dictionary key or argument.
 func GCProductCategoryControlCenterRemote() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategoryControlCenterRemote")))
 }
 
-// The Universal Electronics remote is an infrared and Bluetooth Low Energy remote designed to work with the Apple TV.
 // GCProductCategoryUniversalElectronicsRemote returns the string constant GCProductCategoryUniversalElectronicsRemote, for use as a dictionary key or argument.
 func GCProductCategoryUniversalElectronicsRemote() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategoryUniversalElectronicsRemote")))
 }
 
-// If multiple remotes have been combined into one, the device will have the GCProductCategoryCoalescedRemote product category. By default, the Game Controller framework will try to coalesce, or combine, the physical Apple TV Remote and the virtual Control Center remote and treat them as a single GCDevice instance. By setting GCSupportsMultipleMicroGamepads in your app's plist to true, you can disable this behavior.
 // GCProductCategoryCoalescedRemote returns the string constant GCProductCategoryCoalescedRemote, for use as a dictionary key or argument.
 func GCProductCategoryCoalescedRemote() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategoryCoalescedRemote")))
@@ -521,55 +515,46 @@ func GCKeyRightAlt() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCK
 // GCKeyRightGUI returns the string constant GCKeyRightGUI, for use as a dictionary key or argument.
 func GCKeyRightGUI() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyRightGUI"))) }
 
-// The primary directional input surface for the directional gamepad
 // GCInputMicroGamepadDpad returns the string constant GCInputMicroGamepadDpad, for use as a dictionary key or argument.
 func GCInputMicroGamepadDpad() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCInputMicroGamepadDpad")))
 }
 
-// The primary button for the microgamepad
 // GCInputMicroGamepadButtonA returns the string constant GCInputMicroGamepadButtonA, for use as a dictionary key or argument.
 func GCInputMicroGamepadButtonA() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCInputMicroGamepadButtonA")))
 }
 
-// The secondary button for the microgamepad
 // GCInputMicroGamepadButtonX returns the string constant GCInputMicroGamepadButtonX, for use as a dictionary key or argument.
 func GCInputMicroGamepadButtonX() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCInputMicroGamepadButtonX")))
 }
 
-// The primary menu button for the microgamepad
 // GCInputMicroGamepadButtonMenu returns the string constant GCInputMicroGamepadButtonMenu, for use as a dictionary key or argument.
 func GCInputMicroGamepadButtonMenu() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCInputMicroGamepadButtonMenu")))
 }
 
-// The primary directional input surface for the directional gamepad
 // GCInputDirectionalDpad returns the string constant GCInputDirectionalDpad, for use as a dictionary key or argument.
 func GCInputDirectionalDpad() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCInputDirectionalDpad")))
 }
 
-// The button corresponding to pressing anywhere on the primary directional input surface for the directional gamepad
 // GCInputDirectionalTouchSurfaceButton returns the string constant GCInputDirectionalTouchSurfaceButton, for use as a dictionary key or argument.
 func GCInputDirectionalTouchSurfaceButton() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCInputDirectionalTouchSurfaceButton")))
 }
 
-// An optional secondary directional input surface for the directional gamepad. This input is guaranteed to be an 8-way digital dpad with physical Up, Down, Left, Right butttons.
 // GCInputDirectionalCardinalDpad returns the string constant GCInputDirectionalCardinalDpad, for use as a dictionary key or argument.
 func GCInputDirectionalCardinalDpad() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCInputDirectionalCardinalDpad")))
 }
 
-// An optional button for the directional gamepad. This input represents the center button of the cardinal dpad.
 // GCInputDirectionalCenterButton returns the string constant GCInputDirectionalCenterButton, for use as a dictionary key or argument.
 func GCInputDirectionalCenterButton() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCInputDirectionalCenterButton")))
 }
 
-// Use these constants with NSNotificationCenter to listen to connection and disconnection events. Use GCControllerDidConnectNotification for observing connections of controllers. Use GCControllerDidDisconnectNotification for observing disconnections of controllers. Connections and disconnections of controllers will also be reflected in the controllers array of the GCController class. The 'object' property of the notification will contain the GCController that was connected or disconnected. For example: - (void)controllerDidConnect:(NSNotification *)note { GCController *controller = note.object; .... }
 // GCControllerDidConnectNotification returns the string constant GCControllerDidConnectNotification, for use as a dictionary key or argument.
 func GCControllerDidConnectNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCControllerDidConnectNotification")))
@@ -580,7 +565,6 @@ func GCControllerDidDisconnectNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCControllerDidDisconnectNotification")))
 }
 
-// Use these constants with NSNotificationCenter to listen to a controller becoming the most recently used controller. This is a good time to swap out UI to match the new current controller, and unregister any handlers with the old current controller. The 'object' property of the notification will contain the GCController that became the current controller. For example: - (void)controllerDidBecomeCurrent:(NSNotification *)note { GCController *controller = note.object; ... }
 // GCControllerDidBecomeCurrentNotification returns the string constant GCControllerDidBecomeCurrentNotification, for use as a dictionary key or argument.
 func GCControllerDidBecomeCurrentNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCControllerDidBecomeCurrentNotification")))
@@ -591,13 +575,11 @@ func GCControllerDidStopBeingCurrentNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCControllerDidStopBeingCurrentNotification")))
 }
 
-// Use this constant with NSNotificationCenter to listen to controller user customization events. When a user customizes the button mappings or other settings of a controller this notification will be posted. This is a good time to swap out UI to match the new user settings. Users can modify game controller settings through the Settings app on iOS, tvOS, and macOS. The 'object' property of the notification will contain the GCController that was customized. For example: - (void)controllerDidConnect:(NSNotification *)note { GCController *controller = note.object; .... }
 // GCControllerUserCustomizationsDidChangeNotification returns the string constant GCControllerUserCustomizationsDidChangeNotification, for use as a dictionary key or argument.
 func GCControllerUserCustomizationsDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCControllerUserCustomizationsDidChangeNotification")))
 }
 
-// Use these constants with NSNotificationCenter to listen to connection and disconnection events Use GCKeyboardDidConnectNotification for observing keyboard connection Use GCKeyboardDidDisconnectNotification for observing keyboard disconnection The 'object' property of the notification will contain the GCKeyboard that was connected or disconnected.
 // GCKeyboardDidConnectNotification returns the string constant GCKeyboardDidConnectNotification, for use as a dictionary key or argument.
 func GCKeyboardDidConnectNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCKeyboardDidConnectNotification")))
@@ -608,7 +590,6 @@ func GCKeyboardDidDisconnectNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCKeyboardDidDisconnectNotification")))
 }
 
-// Use these constants with NSNotificationCenter to listen to connection and disconnection events. Use GCMouseDidConnectNotification for observing connections of mice. Use GCMouserDidDisconnectNotification for observing disconnections of mice. Connections and disconnections of mice will also be reflected in the mice array of the GCMouse class. The 'object' property of the notification will contain the GCMouse that was connected or disconnected. For example: - (void)controllerDidConnect:(NSNotification *)note { GCMouse *mouse = note.object; .... }
 // GCMouseDidConnectNotification returns the string constant GCMouseDidConnectNotification, for use as a dictionary key or argument.
 func GCMouseDidConnectNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCMouseDidConnectNotification")))
@@ -619,7 +600,6 @@ func GCMouseDidDisconnectNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCMouseDidDisconnectNotification")))
 }
 
-// Use these constants with NSNotificationCenter to listen to a controller becoming the most recently used mouse. This is a good time to swap out UI to match the new current mouse, and unregister any handlers with the old current controller. The 'object' property of the notification will contain the GCMouse that became the current one. For example: - (void)mouseDidBecomeCurrent:(NSNotification *)note { GCMouse *mouse = note.object; ... }
 // GCMouseDidBecomeCurrentNotification returns the string constant GCMouseDidBecomeCurrentNotification, for use as a dictionary key or argument.
 func GCMouseDidBecomeCurrentNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCMouseDidBecomeCurrentNotification")))
@@ -630,7 +610,6 @@ func GCMouseDidStopBeingCurrentNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCMouseDidStopBeingCurrentNotification")))
 }
 
-// Use these constants with NSNotificationCenter to listen to connection and disconnection events. Use GCRacingWheelDidConnectNotification for observing connections of racing wheels. Use GCRacingWheelDidDisconnectNotification for observing disconnections of racing wheels. Connections and disconnections of racing wheels will also be reflected in the connectedRacingWheels array of the GCRacingWheel class. The 'object' property of the notification will contain the GCRacingWheel that was connected or disconnected. For example: - (void)wheelDidConnect:(NSNotification *)note { GCRacingWheel *controller = note.object; .... }
 // GCRacingWheelDidConnectNotification returns the string constant GCRacingWheelDidConnectNotification, for use as a dictionary key or argument.
 func GCRacingWheelDidConnectNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCRacingWheelDidConnectNotification")))

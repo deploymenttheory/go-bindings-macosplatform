@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The details of your app-specific content that someone might search for on their devices.
-//
 // SearchableItem is an idiomatic wrapper over the Objective-C class CSSearchableItem.
+//
+// The details of your app-specific content that someone might search for on their devices.
 type SearchableItem struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SearchableItemFromID(id objc.ID) *SearchableItem {
 	if id == 0 {
 		return nil
 	}
-	x := &SearchableItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SearchableItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func searchableItemAdopt(id objc.ID) *SearchableItem {
 	if id == 0 {
 		return nil
 	}
-	x := &SearchableItem{Handle: objref.Wrap(id)}
+	x := &SearchableItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,63 +60,56 @@ func (x *SearchableItem) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns a searchable item associated with the specified identifier, domain identifier, and attribute set.
-//
-// NewSearchableItemWithUniqueIdentifierDomainIdentifierAttributeSet creates a new SearchableItem.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SearchableItem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSearchableItemWithUniqueIdentifierDomainIdentifierAttributeSet returns a searchable item associated with the specified identifier, domain identifier, and attribute set.
 func NewSearchableItemWithUniqueIdentifierDomainIdentifierAttributeSet(uniqueIdentifier string, domainIdentifier string, attributeSet *SearchableItemAttributeSet) *SearchableItem {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CSSearchableItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUniqueIdentifier:domainIdentifier:attributeSet:"), purego.NSString(uniqueIdentifier), purego.NSString(domainIdentifier), objref.IDOf(attributeSet))
 	return searchableItemAdopt(_id)
 }
 
-// The value that uniquely identifies the searchable item within your app.
-//
-// WithUniqueIdentifier sets uniqueIdentifier and returns the receiver so calls can be chained.
+// WithUniqueIdentifier the value that uniquely identifies the searchable item within your app.
 func (x *SearchableItem) WithUniqueIdentifier(uniqueIdentifier string) *SearchableItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniqueIdentifier:"), purego.NSString(uniqueIdentifier))
 	return x
 }
 
-// An optional identifier that represents the domain or owner of the item.
-//
-// WithDomainIdentifier sets domainIdentifier and returns the receiver so calls can be chained.
+// WithDomainIdentifier an optional identifier that represents the domain or owner of the item.
 func (x *SearchableItem) WithDomainIdentifier(domainIdentifier string) *SearchableItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDomainIdentifier:"), purego.NSString(domainIdentifier))
 	return x
 }
 
-// The date after which the searchable item should no longer exist.
-//
-// WithExpirationDate sets expirationDate and returns the receiver so calls can be chained.
+// WithExpirationDate the date after which the searchable item should no longer exist.
 func (x *SearchableItem) WithExpirationDate(expirationDate obj.Object) *SearchableItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpirationDate:"), objref.IDOf(expirationDate))
 	return x
 }
 
-// The set of attributes that contain metadata associated with the item in a CSSearchableItemAttributeSet object.
-//
-// WithAttributeSet sets attributeSet and returns the receiver so calls can be chained.
+// WithAttributeSet the set of attributes that contain metadata associated with the item in a CSSearchableItemAttributeSet object.
 func (x *SearchableItem) WithAttributeSet(attributeSet *SearchableItemAttributeSet) *SearchableItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeSet:"), objref.IDOf(attributeSet))
 	return x
 }
 
-// A Boolean value that indicates whether to treat the item as an update instead of a new item.
-//
-// WithIsUpdate sets isUpdate and returns the receiver so calls can be chained.
+// WithIsUpdate a Boolean value that indicates whether to treat the item as an update instead of a new item.
 func (x *SearchableItem) WithIsUpdate(isUpdate bool) *SearchableItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsUpdate:"), isUpdate)
 	return x
 }
 
-// The types of notifications to request from Spotlight.
-//
-// WithUpdateListenerOptions sets updateListenerOptions and returns the receiver so calls can be chained.
+// WithUpdateListenerOptions the types of notifications to request from Spotlight.
 func (x *SearchableItem) WithUpdateListenerOptions(updateListenerOptions SearchableItemUpdateListenerOptions) *SearchableItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpdateListenerOptions:"), updateListenerOptions)
 	return x
 }
 
+// UniqueIdentifier wraps the corresponding Objective-C method.
 func (x *SearchableItem) UniqueIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniqueIdentifier"))
 	if _r == 0 {
@@ -123,10 +118,12 @@ func (x *SearchableItem) UniqueIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// SetUniqueIdentifier wraps the corresponding Objective-C method.
 func (x *SearchableItem) SetUniqueIdentifier(uniqueIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniqueIdentifier:"), purego.NSString(uniqueIdentifier))
 }
 
+// DomainIdentifier wraps the corresponding Objective-C method.
 func (x *SearchableItem) DomainIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domainIdentifier"))
 	if _r == 0 {
@@ -135,42 +132,51 @@ func (x *SearchableItem) DomainIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// SetDomainIdentifier wraps the corresponding Objective-C method.
 func (x *SearchableItem) SetDomainIdentifier(domainIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDomainIdentifier:"), purego.NSString(domainIdentifier))
 }
 
+// ExpirationDate wraps the corresponding Objective-C method.
 func (x *SearchableItem) ExpirationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expirationDate"))
 	return obj.Wrap(_r)
 }
 
+// SetExpirationDate wraps the corresponding Objective-C method.
 func (x *SearchableItem) SetExpirationDate(expirationDate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpirationDate:"), objref.IDOf(expirationDate))
 }
 
+// AttributeSet wraps the corresponding Objective-C method.
 func (x *SearchableItem) AttributeSet() *SearchableItemAttributeSet {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeSet"))
 	return SearchableItemAttributeSetFromID(_r)
 }
 
+// SetAttributeSet wraps the corresponding Objective-C method.
 func (x *SearchableItem) SetAttributeSet(attributeSet *SearchableItemAttributeSet) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeSet:"), objref.IDOf(attributeSet))
 }
 
+// IsUpdate wraps the corresponding Objective-C method.
 func (x *SearchableItem) IsUpdate() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUpdate"))
 	return _r
 }
 
+// SetIsUpdate wraps the corresponding Objective-C method.
 func (x *SearchableItem) SetIsUpdate(isUpdate bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsUpdate:"), isUpdate)
 }
 
+// UpdateListenerOptions wraps the corresponding Objective-C method.
 func (x *SearchableItem) UpdateListenerOptions() SearchableItemUpdateListenerOptions {
 	_r := objc.Send[SearchableItemUpdateListenerOptions](objref.IDOf(x), objc.RegisterName("updateListenerOptions"))
 	return _r
 }
 
+// SetUpdateListenerOptions wraps the corresponding Objective-C method.
 func (x *SearchableItem) SetUpdateListenerOptions(updateListenerOptions SearchableItemUpdateListenerOptions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpdateListenerOptions:"), updateListenerOptions)
 }

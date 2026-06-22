@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for energy.
-//
 // UnitEnergy is an idiomatic wrapper over the Objective-C class NSUnitEnergy.
+//
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for energy.
 type UnitEnergy struct {
-	objref.Handle
+	Dimension
 }
 
 // UnitEnergyFromID adopts an existing Objective-C object as a UnitEnergy
@@ -25,7 +26,8 @@ func UnitEnergyFromID(id objc.ID) *UnitEnergy {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitEnergy{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UnitEnergy{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func unitEnergyAdopt(id objc.ID) *UnitEnergy {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitEnergy{Handle: objref.Wrap(id)}
+	x := &UnitEnergy{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UnitEnergy) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UnitEnergy) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UnitEnergy) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUnitEnergy creates a new UnitEnergy.
@@ -64,7 +52,7 @@ func NewUnitEnergy() *UnitEnergy {
 	return unitEnergyAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UnitEnergy) WithScriptingProperties(scriptingProperties obj.Object) *UnitEnergy {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
@@ -77,3 +65,7 @@ type UnitEnergyable interface {
 }
 
 var _ UnitEnergyable = (*UnitEnergy)(nil)
+
+var _ DimensionProvider = (*UnitEnergy)(nil)
+
+var _ UnitProvider = (*UnitEnergy)(nil)

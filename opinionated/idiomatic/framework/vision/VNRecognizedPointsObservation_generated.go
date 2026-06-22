@@ -9,16 +9,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An observation that provides the points the analysis recognized.
-//
 // RecognizedPointsObservation is an idiomatic wrapper over the Objective-C class VNRecognizedPointsObservation.
+//
+// RecognizedPointsObservation is an abstract base — you do not construct it directly. Construct one of [AnimalBodyPoseObservation], [HumanBodyPoseObservation], [HumanHandPoseObservation] and pass it where a RecognizedPointsObservation is accepted.
+//
+// An observation that provides the points the analysis recognized.
 type RecognizedPointsObservation struct {
-	objref.Handle
+	Observation
 }
 
 // RecognizedPointsObservationFromID adopts an existing Objective-C object as a RecognizedPointsObservation
@@ -27,7 +28,8 @@ func RecognizedPointsObservationFromID(id objc.ID) *RecognizedPointsObservation 
 	if id == 0 {
 		return nil
 	}
-	x := &RecognizedPointsObservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RecognizedPointsObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,34 +42,14 @@ func recognizedPointsObservationAdopt(id objc.ID) *RecognizedPointsObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &RecognizedPointsObservation{Handle: objref.Wrap(id)}
+	x := &RecognizedPointsObservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *RecognizedPointsObservation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RecognizedPointsObservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RecognizedPointsObservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewRecognizedPointsObservation creates a new RecognizedPointsObservation.
-func NewRecognizedPointsObservation() *RecognizedPointsObservation {
-	_id := objc.Send[objc.ID](objc.ID(_class("VNRecognizedPointsObservation")), objc.RegisterName("new"))
-	return recognizedPointsObservationAdopt(_id)
-}
-
-// Retrieves a recognized point for a key.
-func (x *RecognizedPointsObservation) RecognizedPointForKeyError(pointKey obj.Object) (*RecognizedPoint, error) {
+// RecognizedPointForKeyError retrieves a recognized point for a key.
+func (x *RecognizedPointsObservation) RecognizedPointForKeyError(pointKey obj.Object) (result *RecognizedPoint, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recognizedPointForKey:error:"), objref.IDOf(pointKey), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -76,8 +58,8 @@ func (x *RecognizedPointsObservation) RecognizedPointForKeyError(pointKey obj.Ob
 	return RecognizedPointFromID(_r), nil
 }
 
-// Retrieves the recognized points for a key.
-func (x *RecognizedPointsObservation) RecognizedPointsForGroupKeyError(groupKey obj.Object) (obj.Object, error) {
+// RecognizedPointsForGroupKeyError retrieves the recognized points for a key.
+func (x *RecognizedPointsObservation) RecognizedPointsForGroupKeyError(groupKey obj.Object) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recognizedPointsForGroupKey:error:"), objref.IDOf(groupKey), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -86,8 +68,8 @@ func (x *RecognizedPointsObservation) RecognizedPointsForGroupKeyError(groupKey 
 	return obj.Wrap(_r), nil
 }
 
-// Retrieves the grouping of normalized point coordinates and confidence scores in a format compatible with Core ML.
-func (x *RecognizedPointsObservation) KeypointsMultiArrayAndReturnError() (obj.Object, error) {
+// KeypointsMultiArrayAndReturnError retrieves the grouping of normalized point coordinates and confidence scores in a format compatible with Core ML.
+func (x *RecognizedPointsObservation) KeypointsMultiArrayAndReturnError() (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keypointsMultiArrayAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -96,7 +78,7 @@ func (x *RecognizedPointsObservation) KeypointsMultiArrayAndReturnError() (obj.O
 	return obj.Wrap(_r), nil
 }
 
-// Returns all of the point group keys available in the observation.
+// AvailableKeys returns all of the point group keys available in the observation.
 //
 // AvailableKeys returns the collection as a Go slice.
 func (x *RecognizedPointsObservation) AvailableKeys() []obj.Object {
@@ -104,7 +86,7 @@ func (x *RecognizedPointsObservation) AvailableKeys() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The availableGroupKeys property returns all of the point group labels usable with the observation.
+// AvailableGroupKeys the availableGroupKeys property returns all of the point group labels usable with the observation.
 //
 // AvailableGroupKeys returns the collection as a Go slice.
 func (x *RecognizedPointsObservation) AvailableGroupKeys() []obj.Object {
@@ -115,11 +97,20 @@ func (x *RecognizedPointsObservation) AvailableGroupKeys() []obj.Object {
 // RecognizedPointsObservationable is the interface implemented by [RecognizedPointsObservation], for mocking and DI.
 type RecognizedPointsObservationable interface {
 	obj.Object
-	RecognizedPointForKeyError(pointKey obj.Object) (*RecognizedPoint, error)
-	RecognizedPointsForGroupKeyError(groupKey obj.Object) (obj.Object, error)
-	KeypointsMultiArrayAndReturnError() (obj.Object, error)
+	RecognizedPointForKeyError(pointKey obj.Object) (result *RecognizedPoint, err error)
+	RecognizedPointsForGroupKeyError(groupKey obj.Object) (result obj.Object, err error)
+	KeypointsMultiArrayAndReturnError() (result obj.Object, err error)
 	AvailableKeys() []obj.Object
 	AvailableGroupKeys() []obj.Object
 }
 
 var _ RecognizedPointsObservationable = (*RecognizedPointsObservation)(nil)
+
+// isRecognizedPointsObservation marks RecognizedPointsObservation — and, by embedding promotion, its
+// subclasses — as a member of the RecognizedPointsObservation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *RecognizedPointsObservation) isRecognizedPointsObservation() {}
+
+var _ RecognizedPointsObservationProvider = (*RecognizedPointsObservation)(nil)
+
+var _ ObservationProvider = (*RecognizedPointsObservation)(nil)

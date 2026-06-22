@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A bar item that provides a system-defined color picker.
-//
 // ColorPickerTouchBarItem is an idiomatic wrapper over the Objective-C class NSColorPickerTouchBarItem.
+//
+// It embeds [TouchBarItem], promoting that type's methods.
+//
+// A bar item that provides a system-defined color picker.
 type ColorPickerTouchBarItem struct {
-	objref.Handle
+	TouchBarItem
 }
 
 // ColorPickerTouchBarItemFromID adopts an existing Objective-C object as a ColorPickerTouchBarItem
@@ -25,7 +26,8 @@ func ColorPickerTouchBarItemFromID(id objc.ID) *ColorPickerTouchBarItem {
 	if id == 0 {
 		return nil
 	}
-	x := &ColorPickerTouchBarItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ColorPickerTouchBarItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func colorPickerTouchBarItemAdopt(id objc.ID) *ColorPickerTouchBarItem {
 	if id == 0 {
 		return nil
 	}
-	x := &ColorPickerTouchBarItem{Handle: objref.Wrap(id)}
+	x := &ColorPickerTouchBarItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ColorPickerTouchBarItem) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ColorPickerTouchBarItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ColorPickerTouchBarItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewColorPickerTouchBarItem creates a new ColorPickerTouchBarItem.
@@ -64,91 +52,78 @@ func NewColorPickerTouchBarItem() *ColorPickerTouchBarItem {
 	return colorPickerTouchBarItemAdopt(_id)
 }
 
-// The picker’s currently selected color.
-//
-// WithColor sets color and returns the receiver so calls can be chained.
+// WithColor the picker’s currently selected color.
 func (x *ColorPickerTouchBarItem) WithColor(color *Color) *ColorPickerTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 	return x
 }
 
-// A Boolean value that controls whether the color picker allows picking of colors with alpha values other than 1.0.
-//
-// WithShowsAlpha sets showsAlpha and returns the receiver so calls can be chained.
+// WithShowsAlpha a Boolean value that controls whether the color picker allows picking of colors with alpha values other than 1.0.
 func (x *ColorPickerTouchBarItem) WithShowsAlpha(showsAlpha bool) *ColorPickerTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsAlpha:"), showsAlpha)
 	return x
 }
 
-// Controls the color spaces that the color picker can produce.
-//
-// WithAllowedColorSpaces sets the collection and returns the receiver so calls can be chained.
+// WithAllowedColorSpaces controls the color spaces that the color picker can produce.
 func (x *ColorPickerTouchBarItem) WithAllowedColorSpaces(items ...*ColorSpace) *ColorPickerTouchBarItem {
 	_arr := purego.SliceToNSArray(items, func(_v *ColorSpace) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedColorSpaces:"), _arr)
 	return x
 }
 
-// The list of colors displayed in the color picker.
-//
-// WithColorList sets colorList and returns the receiver so calls can be chained.
+// WithColorList the list of colors displayed in the color picker.
 func (x *ColorPickerTouchBarItem) WithColorList(colorList *ColorList) *ColorPickerTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorList:"), objref.IDOf(colorList))
 	return x
 }
 
-// The user-visible string identifying this item during touch bar customization.
-//
-// WithCustomizationLabel sets customizationLabel and returns the receiver so calls can be chained.
+// WithCustomizationLabel the user-visible string identifying this item during touch bar customization.
 func (x *ColorPickerTouchBarItem) WithCustomizationLabel(customizationLabel string) *ColorPickerTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
 	return x
 }
 
-// An object that is notified when a user interacts with the color picker.
-//
-// WithTarget sets target and returns the receiver so calls can be chained.
+// WithTarget an object that is notified when a user interacts with the color picker.
 func (x *ColorPickerTouchBarItem) WithTarget(target obj.Object) *ColorPickerTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// A Boolean value that determines whether the color picker is enabled.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that determines whether the color picker is enabled.
 func (x *ColorPickerTouchBarItem) WithEnabled(enabled bool) *ColorPickerTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// Determines which items are shown in a bar when space is limited.
-//
-// WithVisibilityPriority sets visibilityPriority and returns the receiver so calls can be chained.
+// WithVisibilityPriority determines which items are shown in a bar when space is limited.
 func (x *ColorPickerTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *ColorPickerTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
 	return x
 }
 
+// Color wraps the corresponding Objective-C method.
 func (x *ColorPickerTouchBarItem) Color() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
 	return ColorFromID(_r)
 }
 
+// SetColor wraps the corresponding Objective-C method.
 func (x *ColorPickerTouchBarItem) SetColor(color *Color) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 }
 
-// Whether or not the picker should allow picking a color with non-1.0 alpha. Defaults to `!NSColor.ignoresAlpha`.
+// ShowsAlpha whether or not the picker should allow picking a color with non-1.0 alpha. Defaults to `!NSColor.ignoresAlpha`.
 func (x *ColorPickerTouchBarItem) ShowsAlpha() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsAlpha"))
 	return _r
 }
 
+// SetShowsAlpha wraps the corresponding Objective-C method.
 func (x *ColorPickerTouchBarItem) SetShowsAlpha(showsAlpha bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsAlpha:"), showsAlpha)
 }
 
-// Controls the color spaces that the receiver is able to produce. If a color outside of the allowed spaces are displayed or selected, it will first be converted to the first color space in the array. `nil` signifies any color space is allowed. Empty array is an invalid value and will raise an exception if set. Defaults to `nil`.
+// AllowedColorSpaces controls the color spaces that the receiver is able to produce. If a color outside of the allowed spaces are displayed or selected, it will first be converted to the first color space in the array. `nil` signifies any color space is allowed. Empty array is an invalid value and will raise an exception if set. Defaults to `nil`.
 //
 // AllowedColorSpaces returns the collection as a Go slice.
 func (x *ColorPickerTouchBarItem) AllowedColorSpaces() []*ColorSpace {
@@ -156,39 +131,45 @@ func (x *ColorPickerTouchBarItem) AllowedColorSpaces() []*ColorSpace {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ColorSpace { return ColorSpaceFromID(_id) })
 }
 
+// SetAllowedColorSpaces wraps the corresponding Objective-C method.
 func (x *ColorPickerTouchBarItem) SetAllowedColorSpaces(allowedColorSpaces []*ColorSpace) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedColorSpaces:"), purego.SliceToNSArray(allowedColorSpaces, func(_v *ColorSpace) objc.ID { return objref.IDOf(_v) }))
 }
 
-// The color list displayed in the list color picker. Defaults to the standard system color list. Setting a custom color list will disable the additional tints/shades that appear on long-press.
+// ColorList the color list displayed in the list color picker. Defaults to the standard system color list. Setting a custom color list will disable the additional tints/shades that appear on long-press.
 func (x *ColorPickerTouchBarItem) ColorList() *ColorList {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorList"))
 	return ColorListFromID(_r)
 }
 
+// SetColorList wraps the corresponding Objective-C method.
 func (x *ColorPickerTouchBarItem) SetColorList(colorList *ColorList) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorList:"), objref.IDOf(colorList))
 }
 
+// SetCustomizationLabel wraps the corresponding Objective-C method.
 func (x *ColorPickerTouchBarItem) SetCustomizationLabel(customizationLabel string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
 }
 
+// Target wraps the corresponding Objective-C method.
 func (x *ColorPickerTouchBarItem) Target() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
 	return obj.Wrap(_r)
 }
 
+// SetTarget wraps the corresponding Objective-C method.
 func (x *ColorPickerTouchBarItem) SetTarget(target obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 }
 
-// Enables or disabled the color picker. If it is currently being shown in a popover, it will be dismissed.
+// IsEnabled enables or disabled the color picker. If it is currently being shown in a popover, it will be dismissed.
 func (x *ColorPickerTouchBarItem) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r
 }
 
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *ColorPickerTouchBarItem) SetEnabled(enabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
@@ -220,3 +201,5 @@ type ColorPickerTouchBarItemable interface {
 }
 
 var _ ColorPickerTouchBarItemable = (*ColorPickerTouchBarItem)(nil)
+
+var _ TouchBarItemProvider = (*ColorPickerTouchBarItem)(nil)

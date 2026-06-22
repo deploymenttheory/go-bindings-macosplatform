@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing a histogram of data values of the same type of unit.
-//
 // Histogram is an idiomatic wrapper over the Objective-C class MXHistogram.
+//
+// An object representing a histogram of data values of the same type of unit.
 type Histogram struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func HistogramFromID(id objc.ID) *Histogram {
 	if id == 0 {
 		return nil
 	}
-	x := &Histogram{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Histogram{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func histogramAdopt(id objc.ID) *Histogram {
 	if id == 0 {
 		return nil
 	}
-	x := &Histogram{Handle: objref.Wrap(id)}
+	x := &Histogram{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *Histogram) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Histogram) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewHistogram creates a new Histogram.
 func NewHistogram() *Histogram {
 	_id := objc.Send[objc.ID](objc.ID(_class("MXHistogram")), objc.RegisterName("new"))
 	return histogramAdopt(_id)
 }
 
-// The number of buckets contained within this histogram. This value can never be negative.
+// TotalBucketCount the number of buckets contained within this histogram. This value can never be negative.
 func (x *Histogram) TotalBucketCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("totalBucketCount"))
 	return _r
 }
 
-// An NSEnumerator that can be used to enumerate the buckets of this histogram.
+// BucketEnumerator an NSEnumerator that can be used to enumerate the buckets of this histogram.
 func (x *Histogram) BucketEnumerator() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bucketEnumerator"))
 	return obj.Wrap(_r)

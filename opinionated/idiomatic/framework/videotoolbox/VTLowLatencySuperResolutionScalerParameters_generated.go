@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains both input and output parameters that the low-latency super-resolution scaler frame processor needs.
-//
 // LowLatencySuperResolutionScalerParameters is an idiomatic wrapper over the Objective-C class VTLowLatencySuperResolutionScalerParameters.
+//
+// An object that contains both input and output parameters that the low-latency super-resolution scaler frame processor needs.
 type LowLatencySuperResolutionScalerParameters struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LowLatencySuperResolutionScalerParametersFromID(id objc.ID) *LowLatencySupe
 	if id == 0 {
 		return nil
 	}
-	x := &LowLatencySuperResolutionScalerParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LowLatencySuperResolutionScalerParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func lowLatencySuperResolutionScalerParametersAdopt(id objc.ID) *LowLatencySuper
 	if id == 0 {
 		return nil
 	}
-	x := &LowLatencySuperResolutionScalerParameters{Handle: objref.Wrap(id)}
+	x := &LowLatencySuperResolutionScalerParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,26 @@ func (x *LowLatencySuperResolutionScalerParameters) IsKind(className string) boo
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new low-latency, super-resolution scaler parameters object.
-//
-// NewLowLatencySuperResolutionScalerParametersWithSourceFrameDestinationFrame creates a new LowLatencySuperResolutionScalerParameters.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LowLatencySuperResolutionScalerParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLowLatencySuperResolutionScalerParametersWithSourceFrameDestinationFrame creates a new low-latency, super-resolution scaler parameters object.
 func NewLowLatencySuperResolutionScalerParametersWithSourceFrameDestinationFrame(sourceFrame *FrameProcessorFrame, destinationFrame *FrameProcessorFrame) *LowLatencySuperResolutionScalerParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VTLowLatencySuperResolutionScalerParameters")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:destinationFrame:"), objref.IDOf(sourceFrame), objref.IDOf(destinationFrame))
 	return lowLatencySuperResolutionScalerParametersAdopt(_id)
 }
 
-// Current source frame, which must be non `nil`.
+// SourceFrame current source frame, which must be non `nil`.
 func (x *LowLatencySuperResolutionScalerParameters) SourceFrame() *FrameProcessorFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// Destination frame that contains user-allocated pixel buffer that receives the scaled processor output.
+// DestinationFrame destination frame that contains user-allocated pixel buffer that receives the scaled processor output.
 func (x *LowLatencySuperResolutionScalerParameters) DestinationFrame() *FrameProcessorFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationFrame"))
 	return FrameProcessorFrameFromID(_r)

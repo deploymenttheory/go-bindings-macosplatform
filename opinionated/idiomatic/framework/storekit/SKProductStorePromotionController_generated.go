@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A product promotion controller for customizing the order and visibility of In-App Purchases per device.
-//
 // ProductStorePromotionController is an idiomatic wrapper over the Objective-C class SKProductStorePromotionController.
+//
+// A product promotion controller for customizing the order and visibility of In-App Purchases per device.
 type ProductStorePromotionController struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func ProductStorePromotionControllerFromID(id objc.ID) *ProductStorePromotionCon
 	if id == 0 {
 		return nil
 	}
-	x := &ProductStorePromotionController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ProductStorePromotionController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func productStorePromotionControllerAdopt(id objc.ID) *ProductStorePromotionCont
 	if id == 0 {
 		return nil
 	}
-	x := &ProductStorePromotionController{Handle: objref.Wrap(id)}
+	x := &ProductStorePromotionController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,13 +62,19 @@ func (x *ProductStorePromotionController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ProductStorePromotionController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewProductStorePromotionController creates a new ProductStorePromotionController.
 func NewProductStorePromotionController() *ProductStorePromotionController {
 	_id := objc.Send[objc.ID](objc.ID(_class("SKProductStorePromotionController")), objc.RegisterName("new"))
 	return productStorePromotionControllerAdopt(_id)
 }
 
-// Updates the visibility of the product on the App Store, per device.
+// UpdateStorePromotionVisibilityForProduct updates the visibility of the product on the App Store, per device.
 //
 // UpdateStorePromotionVisibilityForProduct blocks until the operation completes or ctx is cancelled.
 func (x *ProductStorePromotionController) UpdateStorePromotionVisibilityForProduct(ctx context.Context, promotionVisibility ProductStorePromotionVisibility, product *Product) error {
@@ -85,10 +93,10 @@ func (x *ProductStorePromotionController) UpdateStorePromotionVisibilityForProdu
 	}
 }
 
-// Reads the product order override that determines the promoted product order on this device.
+// FetchStorePromotionOrder reads the product order override that determines the promoted product order on this device.
 //
 // FetchStorePromotionOrder blocks until the operation completes or ctx is cancelled.
-func (x *ProductStorePromotionController) FetchStorePromotionOrder(ctx context.Context) (obj.Object, error) {
+func (x *ProductStorePromotionController) FetchStorePromotionOrder(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -110,7 +118,7 @@ func (x *ProductStorePromotionController) FetchStorePromotionOrder(ctx context.C
 	}
 }
 
-// Overrides the promoted product order on this device.
+// UpdateStorePromotionOrder overrides the promoted product order on this device.
 //
 // UpdateStorePromotionOrder blocks until the operation completes or ctx is cancelled.
 func (x *ProductStorePromotionController) UpdateStorePromotionOrder(ctx context.Context, promotionOrder []*Product) error {

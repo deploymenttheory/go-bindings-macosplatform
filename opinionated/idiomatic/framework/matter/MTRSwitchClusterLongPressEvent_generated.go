@@ -23,7 +23,8 @@ func MTRSwitchClusterLongPressEventFromID(id objc.ID) *MTRSwitchClusterLongPress
 	if id == 0 {
 		return nil
 	}
-	x := &MTRSwitchClusterLongPressEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRSwitchClusterLongPressEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRSwitchClusterLongPressEventAdopt(id objc.ID) *MTRSwitchClusterLongPressE
 	if id == 0 {
 		return nil
 	}
-	x := &MTRSwitchClusterLongPressEvent{Handle: objref.Wrap(id)}
+	x := &MTRSwitchClusterLongPressEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTRSwitchClusterLongPressEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRSwitchClusterLongPressEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRSwitchClusterLongPressEvent creates a new MTRSwitchClusterLongPressEvent.
 func NewMTRSwitchClusterLongPressEvent() *MTRSwitchClusterLongPressEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRSwitchClusterLongPressEvent")), objc.RegisterName("new"))
 	return mTRSwitchClusterLongPressEventAdopt(_id)
 }
 
-// WithNewPosition sets newPosition and returns the receiver so calls can be chained.
+// WithNewPosition sets the property and returns the receiver so calls can be chained.
 func (x *MTRSwitchClusterLongPressEvent) WithNewPosition(newPosition obj.Object) *MTRSwitchClusterLongPressEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
 	return x
 }
 
+// GetNewPosition wraps the corresponding Objective-C method.
 func (x *MTRSwitchClusterLongPressEvent) GetNewPosition() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewPosition"))
 	return obj.Wrap(_r)
 }
 
+// SetNewPosition wraps the corresponding Objective-C method.
 func (x *MTRSwitchClusterLongPressEvent) SetNewPosition(newPosition obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
 }

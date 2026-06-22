@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of an attribute that derives its value by performing a calculation on a related attribute.
-//
 // DerivedAttributeDescription is an idiomatic wrapper over the Objective-C class NSDerivedAttributeDescription.
+//
+// It embeds [AttributeDescription], promoting that type's methods.
+//
+// A description of an attribute that derives its value by performing a calculation on a related attribute.
 type DerivedAttributeDescription struct {
-	objref.Handle
+	AttributeDescription
 }
 
 // DerivedAttributeDescriptionFromID adopts an existing Objective-C object as a DerivedAttributeDescription
@@ -25,7 +26,8 @@ func DerivedAttributeDescriptionFromID(id objc.ID) *DerivedAttributeDescription 
 	if id == 0 {
 		return nil
 	}
-	x := &DerivedAttributeDescription{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DerivedAttributeDescription{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func derivedAttributeDescriptionAdopt(id objc.ID) *DerivedAttributeDescription {
 	if id == 0 {
 		return nil
 	}
-	x := &DerivedAttributeDescription{Handle: objref.Wrap(id)}
+	x := &DerivedAttributeDescription{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DerivedAttributeDescription) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DerivedAttributeDescription) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DerivedAttributeDescription) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDerivedAttributeDescription creates a new DerivedAttributeDescription.
@@ -64,147 +52,115 @@ func NewDerivedAttributeDescription() *DerivedAttributeDescription {
 	return derivedAttributeDescriptionAdopt(_id)
 }
 
-// An expression for generating derived data.
-//
-// WithDerivationExpression sets derivationExpression and returns the receiver so calls can be chained.
+// WithDerivationExpression an expression for generating derived data.
 func (x *DerivedAttributeDescription) WithDerivationExpression(derivationExpression obj.Object) *DerivedAttributeDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDerivationExpression:"), objref.IDOf(derivationExpression))
 	return x
 }
 
-// The attribute’s type.
-//
-// WithAttributeType sets attributeType and returns the receiver so calls can be chained.
+// WithAttributeType the attribute’s type.
 func (x *DerivedAttributeDescription) WithAttributeType(attributeType AttributeType) *DerivedAttributeDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeType:"), attributeType)
 	return x
 }
 
-// The class name that represents the attribute’s value.
-//
-// WithAttributeValueClassName sets attributeValueClassName and returns the receiver so calls can be chained.
+// WithAttributeValueClassName the class name that represents the attribute’s value.
 func (x *DerivedAttributeDescription) WithAttributeValueClassName(attributeValueClassName string) *DerivedAttributeDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValueClassName:"), purego.NSString(attributeValueClassName))
 	return x
 }
 
-// The default value of the attribute.
-//
-// WithDefaultValue sets defaultValue and returns the receiver so calls can be chained.
+// WithDefaultValue the default value of the attribute.
 func (x *DerivedAttributeDescription) WithDefaultValue(defaultValue obj.Object) *DerivedAttributeDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultValue:"), objref.IDOf(defaultValue))
 	return x
 }
 
-// The name of the transformer to use for the attribute value.
-//
-// WithValueTransformerName sets valueTransformerName and returns the receiver so calls can be chained.
+// WithValueTransformerName the name of the transformer to use for the attribute value.
 func (x *DerivedAttributeDescription) WithValueTransformerName(valueTransformerName string) *DerivedAttributeDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueTransformerName:"), purego.NSString(valueTransformerName))
 	return x
 }
 
-// A Boolean value that indicates whether the attribute allows external binary storage.
-//
-// WithAllowsExternalBinaryDataStorage sets allowsExternalBinaryDataStorage and returns the receiver so calls can be chained.
+// WithAllowsExternalBinaryDataStorage a Boolean value that indicates whether the attribute allows external binary storage.
 func (x *DerivedAttributeDescription) WithAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage bool) *DerivedAttributeDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExternalBinaryDataStorage:"), allowsExternalBinaryDataStorage)
 	return x
 }
 
-// A Boolean value that indicates whether the attribute records its value in the persistent history transaction for a managed object’s deletion.
-//
-// WithPreservesValueInHistoryOnDeletion sets preservesValueInHistoryOnDeletion and returns the receiver so calls can be chained.
+// WithPreservesValueInHistoryOnDeletion a Boolean value that indicates whether the attribute records its value in the persistent history transaction for a managed object’s deletion.
 func (x *DerivedAttributeDescription) WithPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion bool) *DerivedAttributeDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesValueInHistoryOnDeletion:"), preservesValueInHistoryOnDeletion)
 	return x
 }
 
-// A Boolean value that determines whether to encrypt the attribute’s value.
-//
-// WithAllowsCloudEncryption sets allowsCloudEncryption and returns the receiver so calls can be chained.
+// WithAllowsCloudEncryption a Boolean value that determines whether to encrypt the attribute’s value.
 func (x *DerivedAttributeDescription) WithAllowsCloudEncryption(allowsCloudEncryption bool) *DerivedAttributeDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCloudEncryption:"), allowsCloudEncryption)
 	return x
 }
 
-// The name of the receiver.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the name of the receiver.
 func (x *DerivedAttributeDescription) WithName(name string) *DerivedAttributeDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// A Boolean value that indicates whether the receiver is optional.
-//
-// WithOptional sets optional and returns the receiver so calls can be chained.
+// WithOptional a Boolean value that indicates whether the receiver is optional.
 func (x *DerivedAttributeDescription) WithOptional(optional bool) *DerivedAttributeDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptional:"), optional)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver is transient.
-//
-// WithTransient sets transient and returns the receiver so calls can be chained.
+// WithTransient a Boolean value that indicates whether the receiver is transient.
 func (x *DerivedAttributeDescription) WithTransient(transient bool) *DerivedAttributeDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransient:"), transient)
 	return x
 }
 
-// The user info dictionary of the receiver.
-//
-// WithUserInfo sets userInfo and returns the receiver so calls can be chained.
+// WithUserInfo the user info dictionary of the receiver.
 func (x *DerivedAttributeDescription) WithUserInfo(userInfo obj.Object) *DerivedAttributeDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return x
 }
 
-// A Boolean value that indicates whether the receiver should be indexed for searching.
-//
-// WithIndexed sets indexed and returns the receiver so calls can be chained.
+// WithIndexed a Boolean value that indicates whether the receiver should be indexed for searching.
 func (x *DerivedAttributeDescription) WithIndexed(indexed bool) *DerivedAttributeDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexed:"), indexed)
 	return x
 }
 
-// The version hash modifier for the receiver.
-//
-// WithVersionHashModifier sets versionHashModifier and returns the receiver so calls can be chained.
+// WithVersionHashModifier the version hash modifier for the receiver.
 func (x *DerivedAttributeDescription) WithVersionHashModifier(versionHashModifier string) *DerivedAttributeDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVersionHashModifier:"), purego.NSString(versionHashModifier))
 	return x
 }
 
-// A Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
-//
-// WithIndexedBySpotlight sets indexedBySpotlight and returns the receiver so calls can be chained.
+// WithIndexedBySpotlight a Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
 func (x *DerivedAttributeDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *DerivedAttributeDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexedBySpotlight:"), indexedBySpotlight)
 	return x
 }
 
-// A Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
-//
-// WithStoredInExternalRecord sets storedInExternalRecord and returns the receiver so calls can be chained.
+// WithStoredInExternalRecord a Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
 func (x *DerivedAttributeDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *DerivedAttributeDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoredInExternalRecord:"), storedInExternalRecord)
 	return x
 }
 
-// The renaming identifier for the receiver.
-//
-// WithRenamingIdentifier sets renamingIdentifier and returns the receiver so calls can be chained.
+// WithRenamingIdentifier the renaming identifier for the receiver.
 func (x *DerivedAttributeDescription) WithRenamingIdentifier(renamingIdentifier string) *DerivedAttributeDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenamingIdentifier:"), purego.NSString(renamingIdentifier))
 	return x
 }
 
+// DerivationExpression wraps the corresponding Objective-C method.
 func (x *DerivedAttributeDescription) DerivationExpression() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("derivationExpression"))
 	return obj.Wrap(_r)
 }
 
+// SetDerivationExpression wraps the corresponding Objective-C method.
 func (x *DerivedAttributeDescription) SetDerivationExpression(derivationExpression obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDerivationExpression:"), objref.IDOf(derivationExpression))
 }
@@ -234,3 +190,7 @@ type DerivedAttributeDescriptionable interface {
 }
 
 var _ DerivedAttributeDescriptionable = (*DerivedAttributeDescription)(nil)
+
+var _ AttributeDescriptionProvider = (*DerivedAttributeDescription)(nil)
+
+var _ PropertyDescriptionProvider = (*DerivedAttributeDescription)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A feature with a value of YES or NO.
-//
 // ScannerFeatureBoolean is an idiomatic wrapper over the Objective-C class ICScannerFeatureBoolean.
+//
+// It embeds [ScannerFeature], promoting that type's methods.
+//
+// A feature with a value of YES or NO.
 type ScannerFeatureBoolean struct {
-	objref.Handle
+	ScannerFeature
 }
 
 // ScannerFeatureBooleanFromID adopts an existing Objective-C object as a ScannerFeatureBoolean
@@ -25,7 +26,8 @@ func ScannerFeatureBooleanFromID(id objc.ID) *ScannerFeatureBoolean {
 	if id == 0 {
 		return nil
 	}
-	x := &ScannerFeatureBoolean{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScannerFeatureBoolean{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func scannerFeatureBooleanAdopt(id objc.ID) *ScannerFeatureBoolean {
 	if id == 0 {
 		return nil
 	}
-	x := &ScannerFeatureBoolean{Handle: objref.Wrap(id)}
+	x := &ScannerFeatureBoolean{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ScannerFeatureBoolean) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ScannerFeatureBoolean) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ScannerFeatureBoolean) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewScannerFeatureBoolean creates a new ScannerFeatureBoolean.
@@ -64,19 +52,19 @@ func NewScannerFeatureBoolean() *ScannerFeatureBoolean {
 	return scannerFeatureBooleanAdopt(_id)
 }
 
-// ￼The value of this feature.
-//
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue ￼The value of this feature.
 func (x *ScannerFeatureBoolean) WithValue(value bool) *ScannerFeatureBoolean {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 	return x
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *ScannerFeatureBoolean) Value() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("value"))
 	return _r
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *ScannerFeatureBoolean) SetValue(value bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 }
@@ -90,3 +78,5 @@ type ScannerFeatureBooleanable interface {
 }
 
 var _ ScannerFeatureBooleanable = (*ScannerFeatureBoolean)(nil)
+
+var _ ScannerFeatureProvider = (*ScannerFeatureBoolean)(nil)

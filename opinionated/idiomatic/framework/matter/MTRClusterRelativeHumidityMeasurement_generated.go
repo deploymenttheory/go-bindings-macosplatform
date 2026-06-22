@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterRelativeHumidityMeasurement is an idiomatic wrapper over the Objective-C class MTRClusterRelativeHumidityMeasurement.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterRelativeHumidityMeasurement struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterRelativeHumidityMeasurementFromID adopts an existing Objective-C object as a MTRClusterRelativeHumidityMeasurement
@@ -23,7 +24,8 @@ func MTRClusterRelativeHumidityMeasurementFromID(id objc.ID) *MTRClusterRelative
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterRelativeHumidityMeasurement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterRelativeHumidityMeasurement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,29 +38,13 @@ func mTRClusterRelativeHumidityMeasurementAdopt(id objc.ID) *MTRClusterRelativeH
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterRelativeHumidityMeasurement{Handle: objref.Wrap(id)}
+	x := &MTRClusterRelativeHumidityMeasurement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterRelativeHumidityMeasurement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterRelativeHumidityMeasurement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterRelativeHumidityMeasurement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
-//
-// NewMTRClusterRelativeHumidityMeasurementWithDeviceEndpointIDQueue creates a new MTRClusterRelativeHumidityMeasurement.
+// NewMTRClusterRelativeHumidityMeasurementWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func NewMTRClusterRelativeHumidityMeasurementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterRelativeHumidityMeasurement {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterRelativeHumidityMeasurement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -72,46 +58,55 @@ func NewMTRClusterRelativeHumidityMeasurementWithDeviceEndpointQueue(device *MTR
 	return mTRClusterRelativeHumidityMeasurementAdopt(_id)
 }
 
+// ReadAttributeMeasuredValueWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRelativeHumidityMeasurement) ReadAttributeMeasuredValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMinMeasuredValueWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRelativeHumidityMeasurement) ReadAttributeMinMeasuredValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMaxMeasuredValueWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRelativeHumidityMeasurement) ReadAttributeMaxMeasuredValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeToleranceWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRelativeHumidityMeasurement) ReadAttributeToleranceWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeToleranceWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRelativeHumidityMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRelativeHumidityMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRelativeHumidityMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRelativeHumidityMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRelativeHumidityMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -132,3 +127,7 @@ type MTRClusterRelativeHumidityMeasurementable interface {
 }
 
 var _ MTRClusterRelativeHumidityMeasurementable = (*MTRClusterRelativeHumidityMeasurement)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterRelativeHumidityMeasurement)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterRelativeHumidityMeasurement)(nil)

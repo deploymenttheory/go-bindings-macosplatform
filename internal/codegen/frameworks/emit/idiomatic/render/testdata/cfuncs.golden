@@ -1,0 +1,42 @@
+var _fnAudioChannelLayoutTagGetNumberOfChannels func(uint32) uint32
+
+// AudioChannelLayoutTagGetNumberOfChannels calls the CoreAudioTypes framework function AudioChannelLayoutTag_GetNumberOfChannels.
+func AudioChannelLayoutTagGetNumberOfChannels(inLayoutTag uint32) uint {
+_loadOnce.Do(_loadLibrary)
+if _fnAudioChannelLayoutTagGetNumberOfChannels == nil {
+ebipurego.RegisterLibFunc(&_fnAudioChannelLayoutTagGetNumberOfChannels, _lib, "AudioChannelLayoutTag_GetNumberOfChannels")
+}
+return _fnAudioChannelLayoutTagGetNumberOfChannels(inLayoutTag)
+}
+
+var _fnSecItemDelete func(objc.ID) int32
+
+// SecItemDelete reports an error if the Security framework function SecItemDelete fails.
+func SecItemDelete(query obj.Object) error {
+_loadOnce.Do(_loadLibrary)
+if _fnSecItemDelete == nil {
+ebipurego.RegisterLibFunc(&_fnSecItemDelete, _lib, "SecItemDelete")
+}
+_rc := _fnSecItemDelete(objref.IDOf(query))
+if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+return _err
+}
+return nil
+}
+
+// CFBundlePreflightExecutable reports an error if the CoreFoundation framework function CFBundlePreflightExecutable fails.
+var _fnCFBundlePreflightExecutable func(objc.ID, unsafe.Pointer) bool
+
+func CFBundlePreflightExecutable(bundle obj.Object) error {
+_loadOnce.Do(_loadLibrary)
+if _fnCFBundlePreflightExecutable == nil {
+ebipurego.RegisterLibFunc(&_fnCFBundlePreflightExecutable, _lib, "CFBundlePreflightExecutable")
+}
+var _cfErr unsafe.Pointer
+_ok := _fnCFBundlePreflightExecutable(objref.IDOf(bundle), unsafe.Pointer(&_cfErr))
+if !_ok {
+return errkit.FromCFError(_cfErr)
+}
+return nil
+}
+

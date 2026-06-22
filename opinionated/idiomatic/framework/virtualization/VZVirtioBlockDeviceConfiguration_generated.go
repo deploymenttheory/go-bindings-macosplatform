@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The configuration object that requests the creation of a virtual storage device in the guest system.
-//
 // VirtioBlockDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZVirtioBlockDeviceConfiguration.
+//
+// It embeds [StorageDeviceConfiguration], promoting that type's methods.
+//
+// The configuration object that requests the creation of a virtual storage device in the guest system.
 type VirtioBlockDeviceConfiguration struct {
-	objref.Handle
+	StorageDeviceConfiguration
 }
 
 // VirtioBlockDeviceConfigurationFromID adopts an existing Objective-C object as a VirtioBlockDeviceConfiguration
@@ -25,7 +26,8 @@ func VirtioBlockDeviceConfigurationFromID(id objc.ID) *VirtioBlockDeviceConfigur
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioBlockDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VirtioBlockDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,43 +40,26 @@ func virtioBlockDeviceConfigurationAdopt(id objc.ID) *VirtioBlockDeviceConfigura
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioBlockDeviceConfiguration{Handle: objref.Wrap(id)}
+	x := &VirtioBlockDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *VirtioBlockDeviceConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VirtioBlockDeviceConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VirtioBlockDeviceConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a block device configuration object that uses the specified storage medium.
-//
-// NewVirtioBlockDeviceConfigurationWithAttachment creates a new VirtioBlockDeviceConfiguration.
+// NewVirtioBlockDeviceConfigurationWithAttachment creates a block device configuration object that uses the specified storage medium.
 func NewVirtioBlockDeviceConfigurationWithAttachment(attachment *StorageDeviceAttachment) *VirtioBlockDeviceConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZVirtioBlockDeviceConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttachment:"), objref.IDOf(attachment))
 	return virtioBlockDeviceConfigurationAdopt(_id)
 }
 
-// The string that identifies the VIRTIO block device.
-//
-// WithBlockDeviceIdentifier sets blockDeviceIdentifier and returns the receiver so calls can be chained.
+// WithBlockDeviceIdentifier the string that identifies the VIRTIO block device.
 func (x *VirtioBlockDeviceConfiguration) WithBlockDeviceIdentifier(blockDeviceIdentifier string) *VirtioBlockDeviceConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlockDeviceIdentifier:"), purego.NSString(blockDeviceIdentifier))
 	return x
 }
 
+// BlockDeviceIdentifier wraps the corresponding Objective-C method.
 func (x *VirtioBlockDeviceConfiguration) BlockDeviceIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("blockDeviceIdentifier"))
 	if _r == 0 {
@@ -83,6 +68,7 @@ func (x *VirtioBlockDeviceConfiguration) BlockDeviceIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// SetBlockDeviceIdentifier wraps the corresponding Objective-C method.
 func (x *VirtioBlockDeviceConfiguration) SetBlockDeviceIdentifier(blockDeviceIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlockDeviceIdentifier:"), purego.NSString(blockDeviceIdentifier))
 }
@@ -96,3 +82,5 @@ type VirtioBlockDeviceConfigurationable interface {
 }
 
 var _ VirtioBlockDeviceConfigurationable = (*VirtioBlockDeviceConfiguration)(nil)
+
+var _ StorageDeviceConfigurationProvider = (*VirtioBlockDeviceConfiguration)(nil)

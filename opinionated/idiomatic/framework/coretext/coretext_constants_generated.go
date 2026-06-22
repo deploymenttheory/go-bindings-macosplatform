@@ -9,183 +9,152 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// Dictionary key to access the symbolic traits value. Use this key to access the symbolic traits value from the font traits dictionary. The value is returned as a CFNumberRef.
 // KCTFontSymbolicTrait returns the value of the constant kCTFontSymbolicTrait.
 func KCTFontSymbolicTrait() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontSymbolicTrait")))
 }
 
-// Dictionary key to access the weight trait value. Use this key to access the normalized weight trait from the font traits dictionary. The value returned is a CFNumberRef representing a float value between -1.0 and 1.0 for normalized weight. The value of 0.0 corresponds to the regular or medium font weight.
 // KCTFontWeightTrait returns the value of the constant kCTFontWeightTrait.
 func KCTFontWeightTrait() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontWeightTrait")))
 }
 
-// Dictionary key to access the width (condense/expand) trait value. Use this key to access the normalized proportion trait from the font traits dictionary. This value corresponds to the design width of the font, which is usually related to the overall width of glyphs in a font relative to their height (and the 'wdth' axis for variable fonts). The value is a CFNumberRef representing a float between -1.0 and 1.0. The value of 0.0 corresponds to a normal width, negative values correspond to a condensed width, and positive values correspond to an expanded width.
 // KCTFontWidthTrait returns the value of the constant kCTFontWidthTrait.
 func KCTFontWidthTrait() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCTFontWidthTrait"))) }
 
-// Dictionary key to access the slant trait value. Use this key to access the normalized slant angle from the font traits dictionary. The value returned is a CFNumberRef representing a float value between -1.0 and 1.0 for normalized slant angle. The value or 0.0 corresponds to 0 degree clockwise rotation from the vertical and 1.0 corresponds to 30 degrees clockwise rotation.
 // KCTFontSlantTrait returns the value of the constant kCTFontSlantTrait.
 func KCTFontSlantTrait() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCTFontSlantTrait"))) }
 
-// The font URL. This is the key for accessing the font URL from the font descriptor. The value associated with this key is a CFURLRef.
 // KCTFontURLAttribute returns the value of the constant kCTFontURLAttribute.
 func KCTFontURLAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontURLAttribute")))
 }
 
-// The PostScript name. This is the key for retrieving the PostScript name from the font descriptor. When matching, this is treated more generically: the system first tries to find fonts with this PostScript name. If none is found, the system tries to find fonts with this family name, and, finally, if still nothing, tries to find fonts with this display name. The value associated with this key is a CFStringRef. If unspecified, defaults to "Helvetica", if unavailable falls back to global font cascade list.
 // KCTFontNameAttribute returns the value of the constant kCTFontNameAttribute.
 func KCTFontNameAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontNameAttribute")))
 }
 
-// The display name. This is the key for accessing the name used to display the font. Most commonly this is the full name. The value associated with this key is a CFStringRef.
 // KCTFontDisplayNameAttribute returns the value of the constant kCTFontDisplayNameAttribute.
 func KCTFontDisplayNameAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontDisplayNameAttribute")))
 }
 
-// The family name. This is the key for accessing the family name from the font descriptor. The value associated with this key is a CFStringRef.
 // KCTFontFamilyNameAttribute returns the value of the constant kCTFontFamilyNameAttribute.
 func KCTFontFamilyNameAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontFamilyNameAttribute")))
 }
 
-// The style name. This is the key for accessing the style name of the font. This name represents the designer's description of the font's style. The value associated with this key is a CFStringRef.
 // KCTFontStyleNameAttribute returns the value of the constant kCTFontStyleNameAttribute.
 func KCTFontStyleNameAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontStyleNameAttribute")))
 }
 
-// The font traits dictionary. This is the key for accessing the dictionary of font traits for stylistic information. See CTFontTraits.h for the list of font traits. The value associated with this key is a CFDictionaryRef.
 // KCTFontTraitsAttribute returns the value of the constant kCTFontTraitsAttribute.
 func KCTFontTraitsAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontTraitsAttribute")))
 }
 
-// The font variation dictionary. This key is used to obtain the font variation instance as a CFDictionaryRef. If specified in a font descriptor, fonts with the specified axes will be primary match candidates, if no such fonts exist, this attribute will be ignored.
 // KCTFontVariationAttribute returns the value of the constant kCTFontVariationAttribute.
 func KCTFontVariationAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontVariationAttribute")))
 }
 
-// An array of variation axis dictionaries or null if the font does not support variations. Each variation axis dictionary contains the five kCTFontVariationAxis-prefixed keys. Unlike the result of CTFontCopyVariationAxes(), kCTFontVariationAxisNameKey values for this attribute are not localized. Before macOS 13.0 and iOS 16.0 this attribute is not accurate and CTFontCopyVariationAxes() should be used instead.
 // KCTFontVariationAxesAttribute returns the value of the constant kCTFontVariationAxesAttribute.
 func KCTFontVariationAxesAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontVariationAxesAttribute")))
 }
 
-// The font point size. This key is used to obtain or specify the font point size. Creating a font with this unspecified will default to a point size of 12.0. The value for this key is represented as a CFNumberRef.
 // KCTFontSizeAttribute returns the value of the constant kCTFontSizeAttribute.
 func KCTFontSizeAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontSizeAttribute")))
 }
 
-// The font transformation matrix. This key is used to specify the font transformation matrix when creating a font. The default value is CGAffineTransformIdentity. The value for this key is a CFDataRef containing a CGAffineTransform, of which only the a, b, c, and d fields are used.
 // KCTFontMatrixAttribute returns the value of the constant kCTFontMatrixAttribute.
 func KCTFontMatrixAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontMatrixAttribute")))
 }
 
-// The font cascade list. This key is used to specify or obtain the cascade list used for a font reference. The cascade list is a CFArrayRef containing CTFontDescriptorRefs. If unspecified, the global cascade list is used. This list is not consulted for private-use characters on OS X 10.10, iOS 8, or earlier.
 // KCTFontCascadeListAttribute returns the value of the constant kCTFontCascadeListAttribute.
 func KCTFontCascadeListAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontCascadeListAttribute")))
 }
 
-// The font Unicode character coverage set. The value for this key is a CFCharacterSetRef. Creating a font with this attribute will restrict the font to a subset of its actual character set.
 // KCTFontCharacterSetAttribute returns the value of the constant kCTFontCharacterSetAttribute.
 func KCTFontCharacterSetAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontCharacterSetAttribute")))
 }
 
-// The list of supported languages. The value for this key is a CFArrayRef of CFStringRef language identifiers conforming to UTS #35. It can be requested from any font. If present in a descriptor used for matching, only fonts supporting the specified languages will be returned.
 // KCTFontLanguagesAttribute returns the value of the constant kCTFontLanguagesAttribute.
 func KCTFontLanguagesAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontLanguagesAttribute")))
 }
 
-// The baseline adjustment to apply to font metrics. The value for this key is a floating-point CFNumberRef. This is primarily used when defining font descriptors for a cascade list to keep the baseline of all fonts even.
 // KCTFontBaselineAdjustAttribute returns the value of the constant kCTFontBaselineAdjustAttribute.
 func KCTFontBaselineAdjustAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontBaselineAdjustAttribute")))
 }
 
-// The Macintosh encodings (legacy script codes). The value associated with this key is a CFNumberRef containing a bitfield of the script codes in <CoreText/SFNTTypes.h>; bit 0 corresponds to kFontRomanScript, and so on. This attribute is provided for legacy compatibility.
 // KCTFontMacintoshEncodingsAttribute returns the value of the constant kCTFontMacintoshEncodingsAttribute.
 func KCTFontMacintoshEncodingsAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontMacintoshEncodingsAttribute")))
 }
 
-// The array of font features. This key is used to specify or obtain the font features for a font reference. The value associated with this key is a CFArrayRef of font feature dictionaries as documented for CTFontCopyFeatures() in <CoreText/CTFont.h>. Unlike the result of CTFontCopyFeatures(), this attribute does not contain localized names.
 // KCTFontFeaturesAttribute returns the value of the constant kCTFontFeaturesAttribute.
 func KCTFontFeaturesAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontFeaturesAttribute")))
 }
 
-// The array of typographic feature settings. This key is used to specify an array of zero or more feature settings. Each setting dictionary indicates which setting should be applied. In the case of duplicate or conflicting settings the last setting in the list will take precedence. In the case of AAT settings, it is the caller's responsibility to handle exclusive and non-exclusive settings as necessary. An AAT setting dictionary contains a tuple of a kCTFontFeatureTypeIdentifierKey key-value pair and a kCTFontFeatureSelectorIdentifierKey key-value pair. An OpenType setting dictionary contains a tuple of a kCTFontOpenTypeFeatureTag key-value pair and a kCTFontOpenTypeFeatureValue key-value pair. Starting with OS X 10.10 and iOS 8.0, settings are also accepted (but not returned) in the following simplified forms: An OpenType setting can be either an array pair of tag string and value number, or a tag string on its own. For example:
 // KCTFontFeatureSettingsAttribute returns the value of the constant kCTFontFeatureSettingsAttribute.
 func KCTFontFeatureSettingsAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontFeatureSettingsAttribute")))
 }
 
-// Specifies advance width. This key is used to specify a constant advance width, which affects the glyph metrics of any font instance created with this key; it overrides font values and the font transformation matrix, if any. The value associated with this key must be a CFNumberRef. Starting with macOS 10.14 and iOS 12.0, this only affects glyph advances that have non-zero width when this attribute is not present.
 // KCTFontFixedAdvanceAttribute returns the value of the constant kCTFontFixedAdvanceAttribute.
 func KCTFontFixedAdvanceAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontFixedAdvanceAttribute")))
 }
 
-// The orientation attribute. This key is used to specify a particular orientation for the glyphs of the font. The value associated with this key is a int as a CFNumberRef. If you want to receive vertical metrics from a font for vertical rendering, specify kCTFontVerticalOrientation. If unspecified, the font will use its native orientation.
 // KCTFontOrientationAttribute returns the value of the constant kCTFontOrientationAttribute.
 func KCTFontOrientationAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontOrientationAttribute")))
 }
 
-// Specifies the recognized format of the font. The attribute is used to specify or obtain the format of the font. The returned value is a CFNumber containing one of the constants defined below.
 // KCTFontFormatAttribute returns the value of the constant kCTFontFormatAttribute.
 func KCTFontFormatAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontFormatAttribute")))
 }
 
-// Specifies the font descriptor's registration scope. The attribute is used to specify or obtain the font registration scope. The value returned is a CFNumberRef containing one of the CTFontManagerScope enumerated values. A value of NULL can be returned for font descriptors that are not registered.
 // KCTFontRegistrationScopeAttribute returns the value of the constant kCTFontRegistrationScopeAttribute.
 func KCTFontRegistrationScopeAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontRegistrationScopeAttribute")))
 }
 
-// The font descriptors priority when resolving duplicates and sorting match results. This key is used to obtain or specify the font priority. The value returned is a CFNumberRef containing an integer value as defined below. The higher the value, the higher the priority of the font. Only registered fonts will have a priority. Unregistered font descriptors will return NULL.
 // KCTFontPriorityAttribute returns the value of the constant kCTFontPriorityAttribute.
 func KCTFontPriorityAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontPriorityAttribute")))
 }
 
-// The font enabled state. The value associated with this key is a CFBoolean. Unregistered font descriptors will return NULL, which is equivalent to false.
 // KCTFontEnabledAttribute returns the value of the constant kCTFontEnabledAttribute.
 func KCTFontEnabledAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontEnabledAttribute")))
 }
 
-// The font downloadable state. The value associated with this key is a CFBoolean. If it is true, CoreText attempts to download a font if necessary when matching a descriptor.
 // KCTFontDownloadableAttribute returns the value of the constant kCTFontDownloadableAttribute.
 func KCTFontDownloadableAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontDownloadableAttribute")))
 }
 
-// The download state. The value associated with this key is a CFBoolean. If it is true, corresponding FontAsset has been downloaded. (but still it may be necessary to call appropriate API in order to use the font in the FontAsset.)
 // KCTFontDownloadedAttribute returns the value of the constant kCTFontDownloadedAttribute.
 func KCTFontDownloadedAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontDownloadedAttribute")))
 }
 
-// The point size at which this font is intended to be used. The value is a CFNumber used to activate size-specific (not linearly scaled) metrics. Starting with macOS 10.14 and iOS 12.0, the CFString "auto" can be used instead to request an optical size matching the point size. Starting with macOS 10.15 and iOS 13.0, the CFString "none" can be used instead to explicitly disable automatic optical sizing enabled by the font.
 // KCTFontOpticalSizeAttribute returns the value of the constant kCTFontOpticalSizeAttribute.
 func KCTFontOpticalSizeAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontOpticalSizeAttribute")))
 }
 
-// The language identifier for font fallback selection. The value associated with this key is a CFStringRef. If specified in a font descriptor, it is used to select the appropriate font fallback list for the language. This key should not be confused with kCTLanguageAttributeName, which is defined in CTStringAttributes.h.
 // KCTFontDescriptorLanguageAttribute returns the value of the constant kCTFontDescriptorLanguageAttribute.
 func KCTFontDescriptorLanguageAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontDescriptorLanguageAttribute")))
@@ -231,307 +200,256 @@ func KCTFontDescriptorMatchingError() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontDescriptorMatchingError")))
 }
 
-// The name specifier for the copyright name.
 // KCTFontCopyrightNameKey returns the value of the constant kCTFontCopyrightNameKey.
 func KCTFontCopyrightNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontCopyrightNameKey")))
 }
 
-// The name specifier for the family name.
 // KCTFontFamilyNameKey returns the value of the constant kCTFontFamilyNameKey.
 func KCTFontFamilyNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontFamilyNameKey")))
 }
 
-// The name specifier for the subfamily name.
 // KCTFontSubFamilyNameKey returns the value of the constant kCTFontSubFamilyNameKey.
 func KCTFontSubFamilyNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontSubFamilyNameKey")))
 }
 
-// The name specifier for the style name.
 // KCTFontStyleNameKey returns the value of the constant kCTFontStyleNameKey.
 func KCTFontStyleNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontStyleNameKey")))
 }
 
-// The name specifier for the unique name. Note that this name is often not unique and should not be assumed to be truly unique.
 // KCTFontUniqueNameKey returns the value of the constant kCTFontUniqueNameKey.
 func KCTFontUniqueNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontUniqueNameKey")))
 }
 
-// The name specifier for the full name.
 // KCTFontFullNameKey returns the value of the constant kCTFontFullNameKey.
 func KCTFontFullNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontFullNameKey")))
 }
 
-// The name specifier for the version name.
 // KCTFontVersionNameKey returns the value of the constant kCTFontVersionNameKey.
 func KCTFontVersionNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontVersionNameKey")))
 }
 
-// The name specifier for the PostScript name.
 // KCTFontPostScriptNameKey returns the value of the constant kCTFontPostScriptNameKey.
 func KCTFontPostScriptNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontPostScriptNameKey")))
 }
 
-// The name specifier for the trademark name.
 // KCTFontTrademarkNameKey returns the value of the constant kCTFontTrademarkNameKey.
 func KCTFontTrademarkNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontTrademarkNameKey")))
 }
 
-// The name specifier for the manufacturer name.
 // KCTFontManufacturerNameKey returns the value of the constant kCTFontManufacturerNameKey.
 func KCTFontManufacturerNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontManufacturerNameKey")))
 }
 
-// The name specifier for the designer name.
 // KCTFontDesignerNameKey returns the value of the constant kCTFontDesignerNameKey.
 func KCTFontDesignerNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontDesignerNameKey")))
 }
 
-// The name specifier for the description name.
 // KCTFontDescriptionNameKey returns the value of the constant kCTFontDescriptionNameKey.
 func KCTFontDescriptionNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontDescriptionNameKey")))
 }
 
-// The name specifier for the vendor url name.
 // KCTFontVendorURLNameKey returns the value of the constant kCTFontVendorURLNameKey.
 func KCTFontVendorURLNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontVendorURLNameKey")))
 }
 
-// The name specifier for the designer url name.
 // KCTFontDesignerURLNameKey returns the value of the constant kCTFontDesignerURLNameKey.
 func KCTFontDesignerURLNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontDesignerURLNameKey")))
 }
 
-// The name specifier for the license name.
 // KCTFontLicenseNameKey returns the value of the constant kCTFontLicenseNameKey.
 func KCTFontLicenseNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontLicenseNameKey")))
 }
 
-// The name specifier for the license url name.
 // KCTFontLicenseURLNameKey returns the value of the constant kCTFontLicenseURLNameKey.
 func KCTFontLicenseURLNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontLicenseURLNameKey")))
 }
 
-// The name specifier for the sample text name string.
 // KCTFontSampleTextNameKey returns the value of the constant kCTFontSampleTextNameKey.
 func KCTFontSampleTextNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontSampleTextNameKey")))
 }
 
-// The name specifier for the PostScript CID name.
 // KCTFontPostScriptCIDNameKey returns the value of the constant kCTFontPostScriptCIDNameKey.
 func KCTFontPostScriptCIDNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontPostScriptCIDNameKey")))
 }
 
-// Key to get the variation axis identifier. This key is used with a variation axis dictionary to get the axis identifier value as a CFNumberRef.
 // KCTFontVariationAxisIdentifierKey returns the value of the constant kCTFontVariationAxisIdentifierKey.
 func KCTFontVariationAxisIdentifierKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontVariationAxisIdentifierKey")))
 }
 
-// Key to get the variation axis minimum value. This key is used with a variation axis dictionary to get the minimum axis value as a CFNumberRef.
 // KCTFontVariationAxisMinimumValueKey returns the value of the constant kCTFontVariationAxisMinimumValueKey.
 func KCTFontVariationAxisMinimumValueKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontVariationAxisMinimumValueKey")))
 }
 
-// Key to get the variation axis maximum value. This key is used with a variation axis dictionary to get the maximum axis value as a CFNumberRef.
 // KCTFontVariationAxisMaximumValueKey returns the value of the constant kCTFontVariationAxisMaximumValueKey.
 func KCTFontVariationAxisMaximumValueKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontVariationAxisMaximumValueKey")))
 }
 
-// Key to get the variation axis default value. This key is used with a variation axis dictionary to get the default axis value as a CFNumberRef.
 // KCTFontVariationAxisDefaultValueKey returns the value of the constant kCTFontVariationAxisDefaultValueKey.
 func KCTFontVariationAxisDefaultValueKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontVariationAxisDefaultValueKey")))
 }
 
-// Key to get the variation axis name string. This key is used with a variation axis dictionary to get the variation axis name.
 // KCTFontVariationAxisNameKey returns the value of the constant kCTFontVariationAxisNameKey.
 func KCTFontVariationAxisNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontVariationAxisNameKey")))
 }
 
-// Key to get the hidden axis flag. This key contains a CFBoolean value that is true when the font designer recommends the axis not be exposed directly to end users in application interfaces.
 // KCTFontVariationAxisHiddenKey returns the value of the constant kCTFontVariationAxisHiddenKey.
 func KCTFontVariationAxisHiddenKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontVariationAxisHiddenKey")))
 }
 
-// Key to get the OpenType feature tag. This key can be used with a font feature dictionary to get the tag as a CFStringRef.
 // KCTFontOpenTypeFeatureTag returns the value of the constant kCTFontOpenTypeFeatureTag.
 func KCTFontOpenTypeFeatureTag() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontOpenTypeFeatureTag")))
 }
 
-// Key to get the OpenType feature value. This key can be used with a font feature dictionary to get the value as a CFNumberRef.
 // KCTFontOpenTypeFeatureValue returns the value of the constant kCTFontOpenTypeFeatureValue.
 func KCTFontOpenTypeFeatureValue() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontOpenTypeFeatureValue")))
 }
 
-// Key to get the font feature type value. This key can be used with a font feature dictionary to get the type identifier as a CFNumberRef.
 // KCTFontFeatureTypeIdentifierKey returns the value of the constant kCTFontFeatureTypeIdentifierKey.
 func KCTFontFeatureTypeIdentifierKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontFeatureTypeIdentifierKey")))
 }
 
-// Key to get the font feature name. This key can be used with a font feature dictionary to get the localized type name string as a CFString.
 // KCTFontFeatureTypeNameKey returns the value of the constant kCTFontFeatureTypeNameKey.
 func KCTFontFeatureTypeNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontFeatureTypeNameKey")))
 }
 
-// Key to get the font feature exclusive setting. This key can be used with a font feature dictionary to get the the exclusive setting of the feature as a CFBoolean. The value associated with this key indicates whether the feature selectors associated with this type should be mutually exclusive.
 // KCTFontFeatureTypeExclusiveKey returns the value of the constant kCTFontFeatureTypeExclusiveKey.
 func KCTFontFeatureTypeExclusiveKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontFeatureTypeExclusiveKey")))
 }
 
-// Key to get the font feature selectors. This key can be used with a font feature dictionary to get the array of font feature selectors as a CFArrayRef. This is an array of selector dictionaries that contain the values for the following selector keys.
 // KCTFontFeatureTypeSelectorsKey returns the value of the constant kCTFontFeatureTypeSelectorsKey.
 func KCTFontFeatureTypeSelectorsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontFeatureTypeSelectorsKey")))
 }
 
-// Key to get the font feature selector identifier. This key can be used with a selector dictionary corresponding to a feature type to obtain the selector identifier value as a CFNumberRef.
 // KCTFontFeatureSelectorIdentifierKey returns the value of the constant kCTFontFeatureSelectorIdentifierKey.
 func KCTFontFeatureSelectorIdentifierKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontFeatureSelectorIdentifierKey")))
 }
 
-// Key to get the font feature selector name. This key is used with a selector dictionary to get the localized name string for the selector as a CFStringRef.
 // KCTFontFeatureSelectorNameKey returns the value of the constant kCTFontFeatureSelectorNameKey.
 func KCTFontFeatureSelectorNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontFeatureSelectorNameKey")))
 }
 
-// Key to get the font feature selector default setting value. This key is used with a selector dictionary to get the default indicator for the selector. This value is a CFBooleanRef which if present and true indicates that this selector is the default setting for the current feature type.
 // KCTFontFeatureSelectorDefaultKey returns the value of the constant kCTFontFeatureSelectorDefaultKey.
 func KCTFontFeatureSelectorDefaultKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontFeatureSelectorDefaultKey")))
 }
 
-// Key to get or specify the current feature setting. This key is used with a selector dictionary to get or specify the current setting for the selector. This value is a CFBooleanRef to indicate whether this selector is on or off. If this key is not present, the default setting is used.
 // KCTFontFeatureSelectorSettingKey returns the value of the constant kCTFontFeatureSelectorSettingKey.
 func KCTFontFeatureSelectorSettingKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontFeatureSelectorSettingKey")))
 }
 
-// Key to get the font feature sample text. This key can be used with a font feature dictionary to get the localized sample text as a CFStringRef.
 // KCTFontFeatureSampleTextKey returns the value of the constant kCTFontFeatureSampleTextKey.
 func KCTFontFeatureSampleTextKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontFeatureSampleTextKey")))
 }
 
-// Key to get the font feature tooltip text. This key can be used with a font feature dictionary to get the localized tooltip text as a CFStringRef.
 // KCTFontFeatureTooltipTextKey returns the value of the constant kCTFontFeatureTooltipTextKey.
 func KCTFontFeatureTooltipTextKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontFeatureTooltipTextKey")))
 }
 
-// Key to reference the Roman baseline class. This key can be used with a baseline info dictionary to offset to the Roman baseline as a CFNumberRef float. It can also be used as the value for kCTBaselineClassAttributeName.
 // KCTBaselineClassRoman returns the value of the constant kCTBaselineClassRoman.
 func KCTBaselineClassRoman() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTBaselineClassRoman")))
 }
 
-// Key to reference the Ideographic Centered baseline class. This key can be used with a baseline info dictionary to offset to the Ideographic Centered baseline as a CFNumberRef float. It can also be used as the value for kCTBaselineClassAttributeName.
 // KCTBaselineClassIdeographicCentered returns the value of the constant kCTBaselineClassIdeographicCentered.
 func KCTBaselineClassIdeographicCentered() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTBaselineClassIdeographicCentered")))
 }
 
-// Key to reference the Ideographic Low baseline class. This key can be used with a baseline info dictionary to offset to the Ideographic Low baseline as a CFNumberRef float. It can also be used as the value for kCTBaselineClassAttributeName.
 // KCTBaselineClassIdeographicLow returns the value of the constant kCTBaselineClassIdeographicLow.
 func KCTBaselineClassIdeographicLow() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTBaselineClassIdeographicLow")))
 }
 
-// Key to reference the Ideographic High baseline class. This key can be used with a baseline info dictionary to offset to the Ideographic High baseline as a CFNumberRef float. It can also be used as the value for kCTBaselineClassAttributeName.
 // KCTBaselineClassIdeographicHigh returns the value of the constant kCTBaselineClassIdeographicHigh.
 func KCTBaselineClassIdeographicHigh() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTBaselineClassIdeographicHigh")))
 }
 
-// Key to reference the Hanging baseline class. This key can be used with a baseline info dictionary to offset to the Hanging baseline as a CFNumberRef float. It can also be used as the value for kCTBaselineClassAttributeName.
 // KCTBaselineClassHanging returns the value of the constant kCTBaselineClassHanging.
 func KCTBaselineClassHanging() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTBaselineClassHanging")))
 }
 
-// Key to reference the Math baseline class. This key can be used with a baseline info dictionary to offset to the Math baseline as a CFNumberRef float. It can also be used as the value for kCTBaselineClassAttributeName.
 // KCTBaselineClassMath returns the value of the constant kCTBaselineClassMath.
 func KCTBaselineClassMath() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTBaselineClassMath")))
 }
 
-// Key to reference a font for the reference baseline. This key can be used to specify a font for the reference baseline. The value is a CTFontRef or the kCTBaselineOriginalFont constant.
 // KCTBaselineReferenceFont returns the value of the constant kCTBaselineReferenceFont.
 func KCTBaselineReferenceFont() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTBaselineReferenceFont")))
 }
 
-// Use the original font for setting the reference baseline. This constant can be used as the value for kCTBaselineReferenceFont to specify that the original font should be used for the reference baseline.
 // KCTBaselineOriginalFont returns the value of the constant kCTBaselineOriginalFont.
 func KCTBaselineOriginalFont() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTBaselineOriginalFont")))
 }
 
-// Option key to specify filtering of duplicates. Specify this option key in the options dictionary with a non- zero value to enable automatic filtering of duplicate font descriptors.
 // KCTFontCollectionRemoveDuplicatesOption returns the value of the constant kCTFontCollectionRemoveDuplicatesOption.
 func KCTFontCollectionRemoveDuplicatesOption() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontCollectionRemoveDuplicatesOption")))
 }
 
-// Option key to include disabled fonts in the matching results. Specify this option key in the options dictionary with a non-zero value to enable matching of disabled fonts. You can pass font descriptors specifying disabled fonts to CTFontManagerEnableFontDescriptors, but you cannot use such a font descriptor to query font attributes from the system database or create a CTFontRef.
 // KCTFontCollectionIncludeDisabledFontsOption returns the value of the constant kCTFontCollectionIncludeDisabledFontsOption.
 func KCTFontCollectionIncludeDisabledFontsOption() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontCollectionIncludeDisabledFontsOption")))
 }
 
-// Option key to avoid auto-activating fonts. Specify this option key in the options dictionary with a non-zero value to disallow searches for missing fonts (font descriptors returning no results).
 // KCTFontCollectionDisallowAutoActivationOption returns the value of the constant kCTFontCollectionDisallowAutoActivationOption.
 func KCTFontCollectionDisallowAutoActivationOption() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontCollectionDisallowAutoActivationOption")))
 }
 
-// CFError domain for CTFontManager errors CFErrors with this domain will have error codes corresponding to one of the CTFontManagerErrors above.
 // KCTFontManagerErrorDomain returns the value of the constant kCTFontManagerErrorDomain.
 func KCTFontManagerErrorDomain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontManagerErrorDomain")))
 }
 
-// User info key to be used with CFError references returned from registration functions. The value associated with this key in the user info dictionary of a CFError is a CFArray of font URLs that failed with given error.
 // KCTFontManagerErrorFontURLsKey returns the value of the constant kCTFontManagerErrorFontURLsKey.
 func KCTFontManagerErrorFontURLsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontManagerErrorFontURLsKey")))
 }
 
-// CTFontManage bundle identifier The CTFontManager bundle identifier to be used with get or set global auto-activation settings.
 // KCTFontManagerBundleIdentifier returns the value of the constant kCTFontManagerBundleIdentifier.
 func KCTFontManagerBundleIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontManagerBundleIdentifier")))
 }
 
-// Notification name for font registry changes. This is the string to use as the notification name when subscribing to CTFontManager notifications.  This notification will be posted when fonts are added or removed. OS X clients should register as an observer of the notification with the distributed notification center for changes in session or persistent scopes and with the local notification center for changes in process scope. iOS clients should register as an observer of the notification with the local notification center for all changes.
 // KCTFontManagerRegisteredFontsChangedNotification returns the value of the constant kCTFontManagerRegisteredFontsChangedNotification.
 func KCTFontManagerRegisteredFontsChangedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTFontManagerRegisteredFontsChangedNotification")))
@@ -712,7 +630,6 @@ func KCTRubyAnnotationAttributeName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTRubyAnnotationAttributeName")))
 }
 
-// Provide the image for an emoji-like text attachment. The attribute value must be an object conforming to the CTAdaptiveImageProviding protocol. The range this attribute is applied to should be one or more U+FFFC characters, each of which will be drawn as the provided image, and the font attribute applied to that range will be used to determine properties such as point size.
 // KCTAdaptiveImageProviderAttributeName returns the value of the constant kCTAdaptiveImageProviderAttributeName.
 func KCTAdaptiveImageProviderAttributeName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCTAdaptiveImageProviderAttributeName")))

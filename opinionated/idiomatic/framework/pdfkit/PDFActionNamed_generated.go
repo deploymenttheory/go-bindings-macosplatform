@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// PDFActionNamed defines methods used to work with actions in PDF documents, some of which are named in the Adobe PDF Specification.
-//
 // ActionNamed is an idiomatic wrapper over the Objective-C class PDFActionNamed.
+//
+// It embeds [Action], promoting that type's methods.
+//
+// PDFActionNamed defines methods used to work with actions in PDF documents, some of which are named in the Adobe PDF Specification.
 type ActionNamed struct {
-	objref.Handle
+	Action
 }
 
 // ActionNamedFromID adopts an existing Objective-C object as a ActionNamed
@@ -25,7 +26,8 @@ func ActionNamedFromID(id objc.ID) *ActionNamed {
 	if id == 0 {
 		return nil
 	}
-	x := &ActionNamed{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ActionNamed{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,48 +40,32 @@ func actionNamedAdopt(id objc.ID) *ActionNamed {
 	if id == 0 {
 		return nil
 	}
-	x := &ActionNamed{Handle: objref.Wrap(id)}
+	x := &ActionNamed{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ActionNamed) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ActionNamed) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ActionNamed) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes the PDFActionName object with the specified named action.
-//
-// NewActionNamedWithName creates a new ActionNamed.
+// NewActionNamedWithName initializes the PDFActionName object with the specified named action.
 func NewActionNamedWithName(name ActionNamedName) *ActionNamed {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFActionNamed")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:"), name)
 	return actionNamedAdopt(_id)
 }
 
-// Returns the name of the named action.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName returns the name of the named action.
 func (x *ActionNamed) WithName(name ActionNamedName) *ActionNamed {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), name)
 	return x
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *ActionNamed) Name() ActionNamedName {
 	_r := objc.Send[ActionNamedName](objref.IDOf(x), objc.RegisterName("name"))
 	return _r
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *ActionNamed) SetName(name ActionNamedName) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), name)
 }
@@ -93,3 +79,5 @@ type ActionNamedable interface {
 }
 
 var _ ActionNamedable = (*ActionNamed)(nil)
+
+var _ ActionProvider = (*ActionNamed)(nil)

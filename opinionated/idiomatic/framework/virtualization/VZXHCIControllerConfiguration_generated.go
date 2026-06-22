@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The configuration object for the USB Extensible Host Controller Interface (XHCI) controller.
-//
 // XHCIControllerConfiguration is an idiomatic wrapper over the Objective-C class VZXHCIControllerConfiguration.
+//
+// It embeds [USBControllerConfiguration], promoting that type's methods.
+//
+// The configuration object for the USB Extensible Host Controller Interface (XHCI) controller.
 type XHCIControllerConfiguration struct {
-	objref.Handle
+	USBControllerConfiguration
 }
 
 // XHCIControllerConfigurationFromID adopts an existing Objective-C object as a XHCIControllerConfiguration
@@ -25,7 +26,8 @@ func XHCIControllerConfigurationFromID(id objc.ID) *XHCIControllerConfiguration 
 	if id == 0 {
 		return nil
 	}
-	x := &XHCIControllerConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &XHCIControllerConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func xHCIControllerConfigurationAdopt(id objc.ID) *XHCIControllerConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &XHCIControllerConfiguration{Handle: objref.Wrap(id)}
+	x := &XHCIControllerConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *XHCIControllerConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *XHCIControllerConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *XHCIControllerConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewXHCIControllerConfiguration creates a new XHCIControllerConfiguration.
@@ -70,3 +58,5 @@ type XHCIControllerConfigurationable interface {
 }
 
 var _ XHCIControllerConfigurationable = (*XHCIControllerConfiguration)(nil)
+
+var _ USBControllerConfigurationProvider = (*XHCIControllerConfiguration)(nil)

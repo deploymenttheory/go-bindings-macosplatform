@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a hyperbolic tangent neuron filter.
-//
 // CNNNeuronTanHNode is an idiomatic wrapper over the Objective-C class MPSCNNNeuronTanHNode.
+//
+// It embeds [CNNNeuronNode], promoting that type's methods.
+//
+// A representation of a hyperbolic tangent neuron filter.
 type CNNNeuronTanHNode struct {
-	objref.Handle
+	CNNNeuronNode
 }
 
 // CNNNeuronTanHNodeFromID adopts an existing Objective-C object as a CNNNeuronTanHNode
@@ -25,7 +26,8 @@ func CNNNeuronTanHNodeFromID(id objc.ID) *CNNNeuronTanHNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNeuronTanHNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNNeuronTanHNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,47 +40,27 @@ func cNNNeuronTanHNodeAdopt(id objc.ID) *CNNNeuronTanHNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNeuronTanHNode{Handle: objref.Wrap(id)}
+	x := &CNNNeuronTanHNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNNeuronTanHNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNNeuronTanHNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNNeuronTanHNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Init a node representing a MPSCNNNeuronTanH kernel For each pixel, applies the following function:
-//
-// NewCNNNeuronTanHNodeWithSourceAB creates a new CNNNeuronTanHNode.
+// NewCNNNeuronTanHNodeWithSourceAB init a node representing a MPSCNNNeuronTanH kernel For each pixel, applies the following function:
 func NewCNNNeuronTanHNodeWithSourceAB(sourceNode obj.Object, a float32, b float32) *CNNNeuronTanHNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronTanHNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:a:b:"), objref.IDOf(sourceNode), a, b)
 	return cNNNeuronTanHNodeAdopt(_id)
 }
 
-// Init a node with default values for parameters a & b
-//
-// NewCNNNeuronTanHNodeWithSource creates a new CNNNeuronTanHNode.
+// NewCNNNeuronTanHNodeWithSource init a node with default values for parameters a & b
 func NewCNNNeuronTanHNodeWithSource(sourceNode obj.Object) *CNNNeuronTanHNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronTanHNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return cNNNeuronTanHNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNNeuronTanHNode) WithLabel(label string) *CNNNeuronTanHNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -91,3 +73,7 @@ type CNNNeuronTanHNodeable interface {
 }
 
 var _ CNNNeuronTanHNodeable = (*CNNNeuronTanHNode)(nil)
+
+var _ CNNNeuronNodeProvider = (*CNNNeuronTanHNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNNeuronTanHNode)(nil)

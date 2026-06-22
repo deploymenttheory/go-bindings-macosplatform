@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class representing the type of a value or a variable in the Program.
-//
 // ModelStructureProgramValueType is an idiomatic wrapper over the Objective-C class MLModelStructureProgramValueType.
+//
+// A class representing the type of a value or a variable in the Program.
 type ModelStructureProgramValueType struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ModelStructureProgramValueTypeFromID(id objc.ID) *ModelStructureProgramValu
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructureProgramValueType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ModelStructureProgramValueType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func modelStructureProgramValueTypeAdopt(id objc.ID) *ModelStructureProgramValue
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructureProgramValueType{Handle: objref.Wrap(id)}
+	x := &ModelStructureProgramValueType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *ModelStructureProgramValueType) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *ModelStructureProgramValueType) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ModelStructureProgramValueType) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewModelStructureProgramValueType creates a new ModelStructureProgramValueType.

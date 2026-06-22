@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for containers of face landmark information.
-//
 // FaceLandmarks is an idiomatic wrapper over the Objective-C class VNFaceLandmarks.
+//
+// FaceLandmarks is an abstract base — you do not construct it directly. Construct one of [FaceLandmarks2D] and pass it where a FaceLandmarks is accepted.
+//
+// The abstract superclass for containers of face landmark information.
 type FaceLandmarks struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func FaceLandmarksFromID(id objc.ID) *FaceLandmarks {
 	if id == 0 {
 		return nil
 	}
-	x := &FaceLandmarks{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FaceLandmarks{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func faceLandmarksAdopt(id objc.ID) *FaceLandmarks {
 	if id == 0 {
 		return nil
 	}
-	x := &FaceLandmarks{Handle: objref.Wrap(id)}
+	x := &FaceLandmarks{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +62,13 @@ func (x *FaceLandmarks) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewFaceLandmarks creates a new FaceLandmarks.
-func NewFaceLandmarks() *FaceLandmarks {
-	_id := objc.Send[objc.ID](objc.ID(_class("VNFaceLandmarks")), objc.RegisterName("new"))
-	return faceLandmarksAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FaceLandmarks) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// Confidence wraps the corresponding Objective-C method.
 func (x *FaceLandmarks) Confidence() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("confidence"))
 	return _r
@@ -76,3 +81,10 @@ type FaceLandmarksable interface {
 }
 
 var _ FaceLandmarksable = (*FaceLandmarks)(nil)
+
+// isFaceLandmarks marks FaceLandmarks — and, by embedding promotion, its
+// subclasses — as a member of the FaceLandmarks hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *FaceLandmarks) isFaceLandmarks() {}
+
+var _ FaceLandmarksProvider = (*FaceLandmarks)(nil)

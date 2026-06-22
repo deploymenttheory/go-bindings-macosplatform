@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NDArrayAffineInt4Dequantize is an idiomatic wrapper over the Objective-C class MPSNDArrayAffineInt4Dequantize.
+//
+// It embeds [NDArrayMultiaryKernel], promoting that type's methods.
 type NDArrayAffineInt4Dequantize struct {
-	objref.Handle
+	NDArrayMultiaryKernel
 }
 
 // NDArrayAffineInt4DequantizeFromID adopts an existing Objective-C object as a NDArrayAffineInt4Dequantize
@@ -23,7 +24,8 @@ func NDArrayAffineInt4DequantizeFromID(id objc.ID) *NDArrayAffineInt4Dequantize 
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayAffineInt4Dequantize{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NDArrayAffineInt4Dequantize{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func nDArrayAffineInt4DequantizeAdopt(id objc.ID) *NDArrayAffineInt4Dequantize {
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayAffineInt4Dequantize{Handle: objref.Wrap(id)}
+	x := &NDArrayAffineInt4Dequantize{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NDArrayAffineInt4Dequantize) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NDArrayAffineInt4Dequantize) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NDArrayAffineInt4Dequantize) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNDArrayAffineInt4Dequantize creates a new NDArrayAffineInt4Dequantize.
@@ -62,9 +50,7 @@ func NewNDArrayAffineInt4Dequantize() *NDArrayAffineInt4Dequantize {
 	return nDArrayAffineInt4DequantizeAdopt(_id)
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayAffineInt4Dequantize) WithLabel(label string) *NDArrayAffineInt4Dequantize {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -77,3 +63,9 @@ type NDArrayAffineInt4Dequantizeable interface {
 }
 
 var _ NDArrayAffineInt4Dequantizeable = (*NDArrayAffineInt4Dequantize)(nil)
+
+var _ NDArrayMultiaryKernelProvider = (*NDArrayAffineInt4Dequantize)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayAffineInt4Dequantize)(nil)
+
+var _ KernelProvider = (*NDArrayAffineInt4Dequantize)(nil)

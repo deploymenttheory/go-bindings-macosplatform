@@ -11,49 +11,49 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Retrieve the shared MIDI-CI device manager for the client process. After the first access of the property, the client process may observe notifications which are posted when the system-wide cache changes. In environments where virtual MIDI endpoint creation is not allowed, callbacks are only invoked when the process is not suspended. However, any suspended process will receive an updated copy of the cache when it resumes its running state.
+// SharedInstance retrieve the shared MIDI-CI device manager for the client process. After the first access of the property, the client process may observe notifications which are posted when the system-wide cache changes. In environments where virtual MIDI endpoint creation is not allowed, callbacks are only invoked when the process is not suspended. However, any suspended process will receive an updated copy of the cache when it resumes its running state.
 func SharedInstance() *CIDeviceManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("MIDICIDeviceManager")), objc.RegisterName("sharedInstance"))
 	return CIDeviceManagerFromID(_r)
 }
 
-// Returns the singleton discovery manager instance.
+// MIDICIDiscoveryManagerSharedInstance returns the singleton discovery manager instance.
 func MIDICIDiscoveryManagerSharedInstance() *CIDiscoveryManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("MIDICIDiscoveryManager")), objc.RegisterName("sharedInstance"))
 	return CIDiscoveryManagerFromID(_r)
 }
 
-// Creates a connection to the specified host.
+// ConnectionWithHost creates a connection to the specified host.
 func ConnectionWithHost(host *NetworkHost) *NetworkConnection {
 	_r := objc.Send[objc.ID](objc.ID(_class("MIDINetworkConnection")), objc.RegisterName("connectionWithHost:"), objref.IDOf(host))
 	return NetworkConnectionFromID(_r)
 }
 
-// Creates a host with the specified name, adress, and port.
+// HostWithNameAddressPort creates a host with the specified name, adress, and port.
 func HostWithNameAddressPort(name string, address string, port int) *NetworkHost {
 	_r := objc.Send[objc.ID](objc.ID(_class("MIDINetworkHost")), objc.RegisterName("hostWithName:address:port:"), purego.NSString(name), purego.NSString(address), port)
 	return NetworkHostFromID(_r)
 }
 
-// Creates a host with the specified name and net service.
+// HostWithNameNetService creates a host with the specified name and net service.
 func HostWithNameNetService(name string, netService obj.Object) *NetworkHost {
 	_r := objc.Send[objc.ID](objc.ID(_class("MIDINetworkHost")), objc.RegisterName("hostWithName:netService:"), purego.NSString(name), objref.IDOf(netService))
 	return NetworkHostFromID(_r)
 }
 
-// Creates a host with the specified name, net service name, and domain.
+// HostWithNameNetServiceNameNetServiceDomain creates a host with the specified name, net service name, and domain.
 func HostWithNameNetServiceNameNetServiceDomain(name string, netServiceName string, netServiceDomain string) *NetworkHost {
 	_r := objc.Send[objc.ID](objc.ID(_class("MIDINetworkHost")), objc.RegisterName("hostWithName:netServiceName:netServiceDomain:"), purego.NSString(name), purego.NSString(netServiceName), purego.NSString(netServiceDomain))
 	return NetworkHostFromID(_r)
 }
 
-// Returns the default singleton session.
+// DefaultSession returns the default singleton session.
 func DefaultSession() *NetworkSession {
 	_r := objc.Send[objc.ID](objc.ID(_class("MIDINetworkSession")), objc.RegisterName("defaultSession"))
 	return NetworkSessionFromID(_r)
 }
 
-// Retrieve the shared UMP Endpoint manager for the client process. After first access to this property, the client process may begin observing notifications which are posted when the system-wide cache changes.
+// MIDIUMPEndpointManagerSharedInstance retrieve the shared UMP Endpoint manager for the client process. After first access to this property, the client process may begin observing notifications which are posted when the system-wide cache changes.
 func MIDIUMPEndpointManagerSharedInstance() *UMPEndpointManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("MIDIUMPEndpointManager")), objc.RegisterName("sharedInstance"))
 	return UMPEndpointManagerFromID(_r)

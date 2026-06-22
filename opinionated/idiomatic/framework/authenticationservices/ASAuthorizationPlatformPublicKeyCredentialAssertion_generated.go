@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents the platform credential assertion type.
-//
 // AuthorizationPlatformPublicKeyCredentialAssertion is an idiomatic wrapper over the Objective-C class ASAuthorizationPlatformPublicKeyCredentialAssertion.
+//
+// A class that represents the platform credential assertion type.
 type AuthorizationPlatformPublicKeyCredentialAssertion struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationPlatformPublicKeyCredentialAssertionFromID(id objc.ID) *Author
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPlatformPublicKeyCredentialAssertion{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationPlatformPublicKeyCredentialAssertion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationPlatformPublicKeyCredentialAssertionAdopt(id objc.ID) *Authori
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPlatformPublicKeyCredentialAssertion{Handle: objref.Wrap(id)}
+	x := &AuthorizationPlatformPublicKeyCredentialAssertion{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,31 @@ func (x *AuthorizationPlatformPublicKeyCredentialAssertion) IsKind(className str
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationPlatformPublicKeyCredentialAssertion) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAuthorizationPlatformPublicKeyCredentialAssertion creates a new AuthorizationPlatformPublicKeyCredentialAssertion.
 func NewAuthorizationPlatformPublicKeyCredentialAssertion() *AuthorizationPlatformPublicKeyCredentialAssertion {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPlatformPublicKeyCredentialAssertion")), objc.RegisterName("new"))
 	return authorizationPlatformPublicKeyCredentialAssertionAdopt(_id)
 }
 
+// Attachment wraps the corresponding Objective-C method.
 func (x *AuthorizationPlatformPublicKeyCredentialAssertion) Attachment() AuthorizationPublicKeyCredentialAttachment {
 	_r := objc.Send[AuthorizationPublicKeyCredentialAttachment](objref.IDOf(x), objc.RegisterName("attachment"))
 	return _r
 }
 
+// LargeBlob wraps the corresponding Objective-C method.
 func (x *AuthorizationPlatformPublicKeyCredentialAssertion) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("largeBlob"))
 	return AuthorizationPublicKeyCredentialLargeBlobAssertionOutputFromID(_r)
 }
 
+// Prf wraps the corresponding Objective-C method.
 func (x *AuthorizationPlatformPublicKeyCredentialAssertion) Prf() *AuthorizationPublicKeyCredentialPRFAssertionOutput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFAssertionOutputFromID(_r)

@@ -32,6 +32,8 @@ const (
 	LibArtworkFormatPICT LibArtworkFormat = 8
 )
 
+// String returns the LibArtworkFormat constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LibArtworkFormat) String() string {
 	switch e {
 	case LibArtworkFormatNone:
@@ -109,6 +111,8 @@ const (
 	LibDistinguishedPlaylistKindMusicShowsAndMovies LibDistinguishedPlaylistKind = 53
 )
 
+// String returns the LibDistinguishedPlaylistKind constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LibDistinguishedPlaylistKind) String() string {
 	switch e {
 	case LibDistinguishedPlaylistKindNone:
@@ -168,6 +172,8 @@ const (
 	LibExportFeatureNone LibExportFeature = 0
 )
 
+// String returns the LibExportFeature constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LibExportFeature) String() string {
 	switch e {
 	case LibExportFeatureNone:
@@ -187,6 +193,8 @@ const (
 	LibInitOptionLazyLoadData LibInitOptions = 1
 )
 
+// String returns the LibInitOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LibInitOptions) String() string {
 	switch e {
 	case LibInitOptionNone:
@@ -212,6 +220,8 @@ const (
 	LibMediaItemLocationTypeRemote LibMediaItemLocationType = 3
 )
 
+// String returns the LibMediaItemLocationType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LibMediaItemLocationType) String() string {
 	switch e {
 	case LibMediaItemLocationTypeUnknown:
@@ -239,6 +249,8 @@ const (
 	LibMediaItemLyricsContentRatingClean LibMediaItemLyricsContentRating = 2
 )
 
+// String returns the LibMediaItemLyricsContentRating constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LibMediaItemLyricsContentRating) String() string {
 	switch e {
 	case LibMediaItemLyricsContentRatingNone:
@@ -294,6 +306,8 @@ const (
 	LibMediaItemMediaKindAlertTone LibMediaItemMediaKind = 21
 )
 
+// String returns the LibMediaItemMediaKind constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LibMediaItemMediaKind) String() string {
 	switch e {
 	case LibMediaItemMediaKindUnknown:
@@ -349,6 +363,8 @@ const (
 	LibMediaItemPlayStatusUnplayed LibMediaItemPlayStatus = 2
 )
 
+// String returns the LibMediaItemPlayStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LibMediaItemPlayStatus) String() string {
 	switch e {
 	case LibMediaItemPlayStatusNone:
@@ -378,6 +394,8 @@ const (
 	LibPlaylistKindGeniusMix LibPlaylistKind = 4
 )
 
+// String returns the LibPlaylistKind constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LibPlaylistKind) String() string {
 	switch e {
 	case LibPlaylistKindRegular:

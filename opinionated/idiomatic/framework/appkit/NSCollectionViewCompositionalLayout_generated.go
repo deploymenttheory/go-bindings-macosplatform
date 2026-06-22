@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layout object that lets you combine items in highly adaptive and flexible visual arrangements.
-//
 // CollectionViewCompositionalLayout is an idiomatic wrapper over the Objective-C class NSCollectionViewCompositionalLayout.
+//
+// It embeds [CollectionViewLayout], promoting that type's methods.
+//
+// A layout object that lets you combine items in highly adaptive and flexible visual arrangements.
 type CollectionViewCompositionalLayout struct {
-	objref.Handle
+	CollectionViewLayout
 }
 
 // CollectionViewCompositionalLayoutFromID adopts an existing Objective-C object as a CollectionViewCompositionalLayout
@@ -25,7 +26,8 @@ func CollectionViewCompositionalLayoutFromID(id objc.ID) *CollectionViewComposit
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionViewCompositionalLayout{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollectionViewCompositionalLayout{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,57 +40,39 @@ func collectionViewCompositionalLayoutAdopt(id objc.ID) *CollectionViewCompositi
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionViewCompositionalLayout{Handle: objref.Wrap(id)}
+	x := &CollectionViewCompositionalLayout{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CollectionViewCompositionalLayout) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CollectionViewCompositionalLayout) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CollectionViewCompositionalLayout) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a compositional layout object with a single section.
-//
-// NewCollectionViewCompositionalLayoutWithSection creates a new CollectionViewCompositionalLayout.
+// NewCollectionViewCompositionalLayoutWithSection creates a compositional layout object with a single section.
 func NewCollectionViewCompositionalLayoutWithSection(section *CollectionLayoutSection) *CollectionViewCompositionalLayout {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewCompositionalLayout")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSection:"), objref.IDOf(section))
 	return collectionViewCompositionalLayoutAdopt(_id)
 }
 
-// Creates a compositional layout object with a single section and an additional configuration.
-//
-// NewCollectionViewCompositionalLayoutWithSectionConfiguration creates a new CollectionViewCompositionalLayout.
+// NewCollectionViewCompositionalLayoutWithSectionConfiguration creates a compositional layout object with a single section and an additional configuration.
 func NewCollectionViewCompositionalLayoutWithSectionConfiguration(section *CollectionLayoutSection, configuration *CollectionViewCompositionalLayoutConfiguration) *CollectionViewCompositionalLayout {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewCompositionalLayout")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSection:configuration:"), objref.IDOf(section), objref.IDOf(configuration))
 	return collectionViewCompositionalLayoutAdopt(_id)
 }
 
-// The layout’s configuration, such as its scroll direction and section spacing.
-//
-// WithConfiguration sets configuration and returns the receiver so calls can be chained.
+// WithConfiguration the layout’s configuration, such as its scroll direction and section spacing.
 func (x *CollectionViewCompositionalLayout) WithConfiguration(configuration *CollectionViewCompositionalLayoutConfiguration) *CollectionViewCompositionalLayout {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
+// Configuration wraps the corresponding Objective-C method.
 func (x *CollectionViewCompositionalLayout) Configuration() *CollectionViewCompositionalLayoutConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
 	return CollectionViewCompositionalLayoutConfigurationFromID(_r)
 }
 
+// SetConfiguration wraps the corresponding Objective-C method.
 func (x *CollectionViewCompositionalLayout) SetConfiguration(configuration *CollectionViewCompositionalLayoutConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 }
@@ -102,3 +86,5 @@ type CollectionViewCompositionalLayoutable interface {
 }
 
 var _ CollectionViewCompositionalLayoutable = (*CollectionViewCompositionalLayout)(nil)
+
+var _ CollectionViewLayoutProvider = (*CollectionViewCompositionalLayout)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A controller profile that supports a racing wheel.
-//
 // RacingWheelInput is an idiomatic wrapper over the Objective-C class GCRacingWheelInput.
+//
+// It embeds [RacingWheelInputState], promoting that type's methods.
+//
+// A controller profile that supports a racing wheel.
 type RacingWheelInput struct {
-	objref.Handle
+	RacingWheelInputState
 }
 
 // RacingWheelInputFromID adopts an existing Objective-C object as a RacingWheelInput
@@ -25,7 +26,8 @@ func RacingWheelInputFromID(id objc.ID) *RacingWheelInput {
 	if id == 0 {
 		return nil
 	}
-	x := &RacingWheelInput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RacingWheelInput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func racingWheelInputAdopt(id objc.ID) *RacingWheelInput {
 	if id == 0 {
 		return nil
 	}
-	x := &RacingWheelInput{Handle: objref.Wrap(id)}
+	x := &RacingWheelInput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RacingWheelInput) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RacingWheelInput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RacingWheelInput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRacingWheelInput creates a new RacingWheelInput.
@@ -64,13 +52,13 @@ func NewRacingWheelInput() *RacingWheelInput {
 	return racingWheelInputAdopt(_id)
 }
 
-// Returns a snapshot of the racing wheel inputs.
+// Capture returns a snapshot of the racing wheel inputs.
 func (x *RacingWheelInput) Capture() *RacingWheelInputState {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("capture"))
 	return RacingWheelInputStateFromID(_r)
 }
 
-// Returns the next input state of the racing wheel from the queue.
+// NextInputState returns the next input state of the racing wheel from the queue.
 func (x *RacingWheelInput) NextInputState() *RacingWheelInputState {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextInputState"))
 	return RacingWheelInputStateFromID(_r)
@@ -84,3 +72,5 @@ type RacingWheelInputable interface {
 }
 
 var _ RacingWheelInputable = (*RacingWheelInput)(nil)
+
+var _ RacingWheelInputStateProvider = (*RacingWheelInput)(nil)

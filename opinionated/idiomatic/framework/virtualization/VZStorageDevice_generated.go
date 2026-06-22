@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents a storage device in a VM.
-//
 // StorageDevice is an idiomatic wrapper over the Objective-C class VZStorageDevice.
+//
+// StorageDevice is an abstract base — you do not construct it directly. Construct one of [USBMassStorageDevice] and pass it where a StorageDevice is accepted.
+//
+// A class that represents a storage device in a VM.
 type StorageDevice struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func StorageDeviceFromID(id objc.ID) *StorageDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &StorageDevice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StorageDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func storageDeviceAdopt(id objc.ID) *StorageDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &StorageDevice{Handle: objref.Wrap(id)}
+	x := &StorageDevice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *StorageDevice) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewStorageDevice creates a new StorageDevice.
-func NewStorageDevice() *StorageDevice {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZStorageDevice")), objc.RegisterName("new"))
-	return storageDeviceAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StorageDevice) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // StorageDeviceable is the interface implemented by [StorageDevice], for mocking and DI.
@@ -70,3 +74,10 @@ type StorageDeviceable interface {
 }
 
 var _ StorageDeviceable = (*StorageDevice)(nil)
+
+// isStorageDevice marks StorageDevice — and, by embedding promotion, its
+// subclasses — as a member of the StorageDevice hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *StorageDevice) isStorageDevice() {}
+
+var _ StorageDeviceProvider = (*StorageDevice)(nil)

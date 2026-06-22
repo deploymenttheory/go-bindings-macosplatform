@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An opaque object that contains the serialized representation of a sync engine’s current state.
-//
 // SyncEngineStateSerialization is an idiomatic wrapper over the Objective-C class CKSyncEngineStateSerialization.
+//
+// An opaque object that contains the serialized representation of a sync engine’s current state.
 type SyncEngineStateSerialization struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SyncEngineStateSerializationFromID(id objc.ID) *SyncEngineStateSerializatio
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineStateSerialization{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SyncEngineStateSerialization{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func syncEngineStateSerializationAdopt(id objc.ID) *SyncEngineStateSerialization
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineStateSerialization{Handle: objref.Wrap(id)}
+	x := &SyncEngineStateSerialization{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *SyncEngineStateSerialization) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *SyncEngineStateSerialization) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncEngineStateSerialization) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewSyncEngineStateSerialization creates a new SyncEngineStateSerialization.

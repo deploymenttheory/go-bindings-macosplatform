@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents an input state for gamepads and arcade sticks.
-//
 // ControllerInputState is an idiomatic wrapper over the Objective-C class GCControllerInputState.
+//
+// ControllerInputState is an abstract base — you do not construct it directly. Construct one of [ControllerLiveInput] and pass it where a ControllerInputState is accepted.
+//
+// A class that represents an input state for gamepads and arcade sticks.
 type ControllerInputState struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ControllerInputStateFromID(id objc.ID) *ControllerInputState {
 	if id == 0 {
 		return nil
 	}
-	x := &ControllerInputState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ControllerInputState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func controllerInputStateAdopt(id objc.ID) *ControllerInputState {
 	if id == 0 {
 		return nil
 	}
-	x := &ControllerInputState{Handle: objref.Wrap(id)}
+	x := &ControllerInputState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *ControllerInputState) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewControllerInputState creates a new ControllerInputState.
-func NewControllerInputState() *ControllerInputState {
-	_id := objc.Send[objc.ID](objc.ID(_class("GCControllerInputState")), objc.RegisterName("new"))
-	return controllerInputStateAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ControllerInputState) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // ControllerInputStateable is the interface implemented by [ControllerInputState], for mocking and DI.
@@ -70,3 +74,10 @@ type ControllerInputStateable interface {
 }
 
 var _ ControllerInputStateable = (*ControllerInputState)(nil)
+
+// isControllerInputState marks ControllerInputState — and, by embedding promotion, its
+// subclasses — as a member of the ControllerInputState hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ControllerInputState) isControllerInputState() {}
+
+var _ ControllerInputStateProvider = (*ControllerInputState)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that represents a location in an element’s accessibility text.
-//
 // AccessibilityTextMarker is an idiomatic wrapper over the Objective-C class BEAccessibilityTextMarker.
+//
+// An abstract class that represents a location in an element’s accessibility text.
 type AccessibilityTextMarker struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AccessibilityTextMarkerFromID(id objc.ID) *AccessibilityTextMarker {
 	if id == 0 {
 		return nil
 	}
-	x := &AccessibilityTextMarker{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AccessibilityTextMarker{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func accessibilityTextMarkerAdopt(id objc.ID) *AccessibilityTextMarker {
 	if id == 0 {
 		return nil
 	}
-	x := &AccessibilityTextMarker{Handle: objref.Wrap(id)}
+	x := &AccessibilityTextMarker{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *AccessibilityTextMarker) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *AccessibilityTextMarker) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AccessibilityTextMarker) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewAccessibilityTextMarker creates a new AccessibilityTextMarker.

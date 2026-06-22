@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An input for a physical control, such as a button or thumbstick.
-//
 // ControllerElement is an idiomatic wrapper over the Objective-C class GCControllerElement.
+//
+// ControllerElement is an abstract base — you do not construct it directly. Construct one of [ControllerAxisInput], [ControllerButtonInput], [ControllerDirectionPad], [ControllerTouchpad] and pass it where a ControllerElement is accepted.
+//
+// An input for a physical control, such as a button or thumbstick.
 type ControllerElement struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ControllerElementFromID(id objc.ID) *ControllerElement {
 	if id == 0 {
 		return nil
 	}
-	x := &ControllerElement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ControllerElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func controllerElementAdopt(id objc.ID) *ControllerElement {
 	if id == 0 {
 		return nil
 	}
-	x := &ControllerElement{Handle: objref.Wrap(id)}
+	x := &ControllerElement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,81 +62,72 @@ func (x *ControllerElement) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewControllerElement creates a new ControllerElement.
-func NewControllerElement() *ControllerElement {
-	_id := objc.Send[objc.ID](objc.ID(_class("GCControllerElement")), objc.RegisterName("new"))
-	return controllerElementAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ControllerElement) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The preferred state for handling input when the user binds the element to a system gesture.
-//
-// WithPreferredSystemGestureState sets preferredSystemGestureState and returns the receiver so calls can be chained.
+// WithPreferredSystemGestureState the preferred state for handling input when the user binds the element to a system gesture.
 func (x *ControllerElement) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
 	return x
 }
 
-// A system symbol for the element or the remapped element.
-//
-// WithSfSymbolsName sets sfSymbolsName and returns the receiver so calls can be chained.
+// WithSfSymbolsName a system symbol for the element or the remapped element.
 func (x *ControllerElement) WithSfSymbolsName(sfSymbolsName string) *ControllerElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
 	return x
 }
 
-// The localized name for the element or the remapped element.
-//
-// WithLocalizedName sets localizedName and returns the receiver so calls can be chained.
+// WithLocalizedName the localized name for the element or the remapped element.
 func (x *ControllerElement) WithLocalizedName(localizedName string) *ControllerElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedName:"), purego.NSString(localizedName))
 	return x
 }
 
-// The element’s system symbol, not the remapped symbol.
-//
-// WithUnmappedSfSymbolsName sets unmappedSfSymbolsName and returns the receiver so calls can be chained.
+// WithUnmappedSfSymbolsName the element’s system symbol, not the remapped symbol.
 func (x *ControllerElement) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedSfSymbolsName:"), purego.NSString(unmappedSfSymbolsName))
 	return x
 }
 
-// The element’s localized name, not the remapped name.
-//
-// WithUnmappedLocalizedName sets unmappedLocalizedName and returns the receiver so calls can be chained.
+// WithUnmappedLocalizedName the element’s localized name, not the remapped name.
 func (x *ControllerElement) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
 	return x
 }
 
-// Each element can be part of a wider collection of inputs that map to a single logical element. A directional pad (dpad) is a logical collection of two axis inputs and thus each axis belongs to the same collection element - the dpad.
+// Collection each element can be part of a wider collection of inputs that map to a single logical element. A directional pad (dpad) is a logical collection of two axis inputs and thus each axis belongs to the same collection element - the dpad.
 func (x *ControllerElement) Collection() *ControllerElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collection"))
 	return ControllerElementFromID(_r)
 }
 
-// Check if the element can support more than just digital values, such as decimal ranges between 0 and 1. Defaults to YES for most elements.
+// IsAnalog check if the element can support more than just digital values, such as decimal ranges between 0 and 1. Defaults to YES for most elements.
 func (x *ControllerElement) IsAnalog() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAnalog"))
 	return _r
 }
 
-// Check if the element is bound to a system gesture. Defaults to NO for most elements.
+// IsBoundToSystemGesture check if the element is bound to a system gesture. Defaults to NO for most elements.
 func (x *ControllerElement) IsBoundToSystemGesture() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBoundToSystemGesture"))
 	return _r
 }
 
-// The preferred system gesture state for this element. Defaults to GCSystemGestureStateEnabled for most elements
+// PreferredSystemGestureState the preferred system gesture state for this element. Defaults to GCSystemGestureStateEnabled for most elements
 func (x *ControllerElement) PreferredSystemGestureState() SystemGestureState {
 	_r := objc.Send[SystemGestureState](objref.IDOf(x), objc.RegisterName("preferredSystemGestureState"))
 	return _r
 }
 
+// SetPreferredSystemGestureState wraps the corresponding Objective-C method.
 func (x *ControllerElement) SetPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
 }
 
-// The element's SF Symbols name, taking input remapping into account.
+// SfSymbolsName the element's SF Symbols name, taking input remapping into account.
 func (x *ControllerElement) SfSymbolsName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sfSymbolsName"))
 	if _r == 0 {
@@ -141,11 +136,12 @@ func (x *ControllerElement) SfSymbolsName() string {
 	return purego.GoString(_r)
 }
 
+// SetSfSymbolsName wraps the corresponding Objective-C method.
 func (x *ControllerElement) SetSfSymbolsName(sfSymbolsName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
 }
 
-// The element's localized name, taking input remapping into account.
+// LocalizedName the element's localized name, taking input remapping into account.
 func (x *ControllerElement) LocalizedName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
 	if _r == 0 {
@@ -154,11 +150,12 @@ func (x *ControllerElement) LocalizedName() string {
 	return purego.GoString(_r)
 }
 
+// SetLocalizedName wraps the corresponding Objective-C method.
 func (x *ControllerElement) SetLocalizedName(localizedName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedName:"), purego.NSString(localizedName))
 }
 
-// The element's SF Symbols name, not taking any input remapping into account.
+// UnmappedSfSymbolsName the element's SF Symbols name, not taking any input remapping into account.
 func (x *ControllerElement) UnmappedSfSymbolsName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unmappedSfSymbolsName"))
 	if _r == 0 {
@@ -167,11 +164,12 @@ func (x *ControllerElement) UnmappedSfSymbolsName() string {
 	return purego.GoString(_r)
 }
 
+// SetUnmappedSfSymbolsName wraps the corresponding Objective-C method.
 func (x *ControllerElement) SetUnmappedSfSymbolsName(unmappedSfSymbolsName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedSfSymbolsName:"), purego.NSString(unmappedSfSymbolsName))
 }
 
-// The element's localized name, not taking any input remapping into account.
+// UnmappedLocalizedName the element's localized name, not taking any input remapping into account.
 func (x *ControllerElement) UnmappedLocalizedName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unmappedLocalizedName"))
 	if _r == 0 {
@@ -180,11 +178,12 @@ func (x *ControllerElement) UnmappedLocalizedName() string {
 	return purego.GoString(_r)
 }
 
+// SetUnmappedLocalizedName wraps the corresponding Objective-C method.
 func (x *ControllerElement) SetUnmappedLocalizedName(unmappedLocalizedName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
 }
 
-// A set of aliases that can be used to access this element with keyed subscript notation.
+// Aliases a set of aliases that can be used to access this element with keyed subscript notation.
 func (x *ControllerElement) Aliases() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("aliases"))
 	return obj.Wrap(_r)
@@ -215,3 +214,10 @@ type ControllerElementable interface {
 }
 
 var _ ControllerElementable = (*ControllerElement)(nil)
+
+// isControllerElement marks ControllerElement — and, by embedding promotion, its
+// subclasses — as a member of the ControllerElement hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ControllerElement) isControllerElement() {}
+
+var _ ControllerElementProvider = (*ControllerElement)(nil)

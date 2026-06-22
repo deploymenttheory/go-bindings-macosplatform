@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that indicates whether there are any payment cards available to add as Wallet passes.
-//
 // IssuerProvisioningExtensionStatus is an idiomatic wrapper over the Objective-C class PKIssuerProvisioningExtensionStatus.
+//
+// An object that indicates whether there are any payment cards available to add as Wallet passes.
 type IssuerProvisioningExtensionStatus struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func IssuerProvisioningExtensionStatusFromID(id objc.ID) *IssuerProvisioningExte
 	if id == 0 {
 		return nil
 	}
-	x := &IssuerProvisioningExtensionStatus{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IssuerProvisioningExtensionStatus{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func issuerProvisioningExtensionStatusAdopt(id objc.ID) *IssuerProvisioningExten
 	if id == 0 {
 		return nil
 	}
-	x := &IssuerProvisioningExtensionStatus{Handle: objref.Wrap(id)}
+	x := &IssuerProvisioningExtensionStatus{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,59 +60,65 @@ func (x *IssuerProvisioningExtensionStatus) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IssuerProvisioningExtensionStatus) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewIssuerProvisioningExtensionStatus creates a new IssuerProvisioningExtensionStatus.
 func NewIssuerProvisioningExtensionStatus() *IssuerProvisioningExtensionStatus {
 	_id := objc.Send[objc.ID](objc.ID(_class("PKIssuerProvisioningExtensionStatus")), objc.RegisterName("new"))
 	return issuerProvisioningExtensionStatusAdopt(_id)
 }
 
-// A Boolean value that indicates whether adding a card requires an authorization-user-interface extension provided by your app.
-//
-// WithRequiresAuthentication sets requiresAuthentication and returns the receiver so calls can be chained.
+// WithRequiresAuthentication a Boolean value that indicates whether adding a card requires an authorization-user-interface extension provided by your app.
 func (x *IssuerProvisioningExtensionStatus) WithRequiresAuthentication(requiresAuthentication bool) *IssuerProvisioningExtensionStatus {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresAuthentication:"), requiresAuthentication)
 	return x
 }
 
-// A Boolean value that indicates whether a payment card is available to add to an iPhone.
-//
-// WithPassEntriesAvailable sets passEntriesAvailable and returns the receiver so calls can be chained.
+// WithPassEntriesAvailable a Boolean value that indicates whether a payment card is available to add to an iPhone.
 func (x *IssuerProvisioningExtensionStatus) WithPassEntriesAvailable(passEntriesAvailable bool) *IssuerProvisioningExtensionStatus {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassEntriesAvailable:"), passEntriesAvailable)
 	return x
 }
 
-// A Boolean value that indicates whether a payment card is available to add to an Apple Watch.
-//
-// WithRemotePassEntriesAvailable sets remotePassEntriesAvailable and returns the receiver so calls can be chained.
+// WithRemotePassEntriesAvailable a Boolean value that indicates whether a payment card is available to add to an Apple Watch.
 func (x *IssuerProvisioningExtensionStatus) WithRemotePassEntriesAvailable(remotePassEntriesAvailable bool) *IssuerProvisioningExtensionStatus {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemotePassEntriesAvailable:"), remotePassEntriesAvailable)
 	return x
 }
 
+// RequiresAuthentication wraps the corresponding Objective-C method.
 func (x *IssuerProvisioningExtensionStatus) RequiresAuthentication() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresAuthentication"))
 	return _r
 }
 
+// SetRequiresAuthentication wraps the corresponding Objective-C method.
 func (x *IssuerProvisioningExtensionStatus) SetRequiresAuthentication(requiresAuthentication bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresAuthentication:"), requiresAuthentication)
 }
 
+// PassEntriesAvailable wraps the corresponding Objective-C method.
 func (x *IssuerProvisioningExtensionStatus) PassEntriesAvailable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("passEntriesAvailable"))
 	return _r
 }
 
+// SetPassEntriesAvailable wraps the corresponding Objective-C method.
 func (x *IssuerProvisioningExtensionStatus) SetPassEntriesAvailable(passEntriesAvailable bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassEntriesAvailable:"), passEntriesAvailable)
 }
 
+// RemotePassEntriesAvailable wraps the corresponding Objective-C method.
 func (x *IssuerProvisioningExtensionStatus) RemotePassEntriesAvailable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("remotePassEntriesAvailable"))
 	return _r
 }
 
+// SetRemotePassEntriesAvailable wraps the corresponding Objective-C method.
 func (x *IssuerProvisioningExtensionStatus) SetRemotePassEntriesAvailable(remotePassEntriesAvailable bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemotePassEntriesAvailable:"), remotePassEntriesAvailable)
 }

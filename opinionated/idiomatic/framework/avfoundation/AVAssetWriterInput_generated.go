@@ -7,15 +7,16 @@ package avfoundation
 import (
 	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that appends media samples to a track in an asset writer’s output file.
-//
 // AssetWriterInput is an idiomatic wrapper over the Objective-C class AVAssetWriterInput.
+//
+// An object that appends media samples to a track in an asset writer’s output file.
 type AssetWriterInput struct {
 	objref.Handle
 }
@@ -26,7 +27,8 @@ func AssetWriterInputFromID(id objc.ID) *AssetWriterInput {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetWriterInput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetWriterInput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +41,8 @@ func assetWriterInputAdopt(id objc.ID) *AssetWriterInput {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetWriterInput{Handle: objref.Wrap(id)}
+	x := &AssetWriterInput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,114 +62,106 @@ func (x *AssetWriterInput) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an input to append sample buffers of the specified type to the output file.
-//
-// NewAssetWriterInputWithMediaTypeOutputSettings creates a new AssetWriterInput.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetWriterInput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetWriterInputWithMediaTypeOutputSettings creates an input to append sample buffers of the specified type to the output file.
 func NewAssetWriterInputWithMediaTypeOutputSettings(mediaType obj.Object, outputSettings obj.Object) *AssetWriterInput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMediaType:outputSettings:"), objref.IDOf(mediaType), objref.IDOf(outputSettings))
 	return assetWriterInputAdopt(_id)
 }
 
-// Creates an input that appends sample buffers of the specified type and format hint to the output file.
-//
-// NewAssetWriterInputWithMediaTypeOutputSettingsSourceFormatHint creates a new AssetWriterInput.
+// NewAssetWriterInputWithMediaTypeOutputSettingsSourceFormatHint creates an input that appends sample buffers of the specified type and format hint to the output file.
 func NewAssetWriterInputWithMediaTypeOutputSettingsSourceFormatHint(mediaType obj.Object, outputSettings obj.Object, sourceFormatHint obj.Object) *AssetWriterInput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMediaType:outputSettings:sourceFormatHint:"), objref.IDOf(mediaType), objref.IDOf(outputSettings), objref.IDOf(sourceFormatHint))
 	return assetWriterInputAdopt(_id)
 }
 
-// The track-level metadata to write to the output.
-//
-// WithMetadata sets the collection and returns the receiver so calls can be chained.
+// WithMetadata the track-level metadata to write to the output.
 func (x *AssetWriterInput) WithMetadata(items ...MetadataItemProvider) *AssetWriterInput {
 	_arr := purego.SliceToNSArray(items, func(_v MetadataItemProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), _arr)
 	return x
 }
 
-// A Boolean value that indicates whether the input tailors its processing for real-time sources.
-//
-// WithExpectsMediaDataInRealTime sets expectsMediaDataInRealTime and returns the receiver so calls can be chained.
+// WithExpectsMediaDataInRealTime a Boolean value that indicates whether the input tailors its processing for real-time sources.
 func (x *AssetWriterInput) WithExpectsMediaDataInRealTime(expectsMediaDataInRealTime bool) *AssetWriterInput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpectsMediaDataInRealTime:"), expectsMediaDataInRealTime)
 	return x
 }
 
-// The language code of the input’s track.
-//
-// WithLanguageCode sets languageCode and returns the receiver so calls can be chained.
+// WithLanguageCode the language code of the input’s track.
 func (x *AssetWriterInput) WithLanguageCode(languageCode string) *AssetWriterInput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguageCode:"), purego.NSString(languageCode))
 	return x
 }
 
-// The extended language for the input’s track.
-//
-// WithExtendedLanguageTag sets extendedLanguageTag and returns the receiver so calls can be chained.
+// WithExtendedLanguageTag the extended language for the input’s track.
 func (x *AssetWriterInput) WithExtendedLanguageTag(extendedLanguageTag string) *AssetWriterInput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedLanguageTag:"), purego.NSString(extendedLanguageTag))
 	return x
 }
 
-// The volume to prefer for playback of the output’s audio data.
-//
-// WithPreferredVolume sets preferredVolume and returns the receiver so calls can be chained.
+// WithNaturalSize the natural display dimensions of the output’s visual media.
+func (x *AssetWriterInput) WithNaturalSize(naturalSize corefoundation.CGSize) *AssetWriterInput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNaturalSize:"), naturalSize)
+	return x
+}
+
+// WithTransform the transform to use for display of the output’s visual media.
+func (x *AssetWriterInput) WithTransform(transform corefoundation.CGAffineTransform) *AssetWriterInput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransform:"), transform)
+	return x
+}
+
+// WithPreferredVolume the volume to prefer for playback of the output’s audio data.
 func (x *AssetWriterInput) WithPreferredVolume(preferredVolume float32) *AssetWriterInput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredVolume:"), preferredVolume)
 	return x
 }
 
-// A Boolean value that indicates whether to enable a track in the output for playback and processing.
-//
-// WithMarksOutputTrackAsEnabled sets marksOutputTrackAsEnabled and returns the receiver so calls can be chained.
+// WithMarksOutputTrackAsEnabled a Boolean value that indicates whether to enable a track in the output for playback and processing.
 func (x *AssetWriterInput) WithMarksOutputTrackAsEnabled(marksOutputTrackAsEnabled bool) *AssetWriterInput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMarksOutputTrackAsEnabled:"), marksOutputTrackAsEnabled)
 	return x
 }
 
-// The time scale of the track in the output file.
-//
-// WithMediaTimeScale sets mediaTimeScale and returns the receiver so calls can be chained.
+// WithMediaTimeScale the time scale of the track in the output file.
 func (x *AssetWriterInput) WithMediaTimeScale(mediaTimeScale int32) *AssetWriterInput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaTimeScale:"), mediaTimeScale)
 	return x
 }
 
-// The boundary, in bytes, for aligning media chunks.
-//
-// WithPreferredMediaChunkAlignment sets preferredMediaChunkAlignment and returns the receiver so calls can be chained.
+// WithPreferredMediaChunkAlignment the boundary, in bytes, for aligning media chunks.
 func (x *AssetWriterInput) WithPreferredMediaChunkAlignment(preferredMediaChunkAlignment int) *AssetWriterInput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMediaChunkAlignment:"), preferredMediaChunkAlignment)
 	return x
 }
 
-// The base URL sample references are relative to.
-//
-// WithSampleReferenceBaseURL sets sampleReferenceBaseURL and returns the receiver so calls can be chained.
+// WithSampleReferenceBaseURL the base URL sample references are relative to.
 func (x *AssetWriterInput) WithSampleReferenceBaseURL(sampleReferenceBaseURL string) *AssetWriterInput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleReferenceBaseURL:"), rt.FileURL(sampleReferenceBaseURL))
 	return x
 }
 
-// Specifies how the input lays out and interleaves media data.
-//
-// WithMediaDataLocation sets mediaDataLocation and returns the receiver so calls can be chained.
+// WithMediaDataLocation specifies how the input lays out and interleaves media data.
 func (x *AssetWriterInput) WithMediaDataLocation(mediaDataLocation obj.Object) *AssetWriterInput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaDataLocation:"), objref.IDOf(mediaDataLocation))
 	return x
 }
 
-// A Boolean value that indicates whether the input attempts to encode the source media data using multiple passes.
-//
-// WithPerformsMultiPassEncodingIfSupported sets performsMultiPassEncodingIfSupported and returns the receiver so calls can be chained.
+// WithPerformsMultiPassEncodingIfSupported a Boolean value that indicates whether the input attempts to encode the source media data using multiple passes.
 func (x *AssetWriterInput) WithPerformsMultiPassEncodingIfSupported(performsMultiPassEncodingIfSupported bool) *AssetWriterInput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerformsMultiPassEncodingIfSupported:"), performsMultiPassEncodingIfSupported)
 	return x
 }
 
-// Tells the input to request media data, at its convenience, to write to the output file.
+// RequestMediaDataWhenReadyOnQueueUsing tells the input to request media data, at its convenience, to write to the output file.
 //
 // RequestMediaDataWhenReadyOnQueueUsing blocks until the operation completes or ctx is cancelled.
 func (x *AssetWriterInput) RequestMediaDataWhenReadyOnQueueUsing(ctx context.Context, queue obj.Object) error {
@@ -183,36 +178,36 @@ func (x *AssetWriterInput) RequestMediaDataWhenReadyOnQueueUsing(ctx context.Con
 	}
 }
 
-// Appends a sample buffer to an input to write to the output file.
+// AppendSampleBuffer appends a sample buffer to an input to write to the output file.
 func (x *AssetWriterInput) AppendSampleBuffer(sampleBuffer obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appendSampleBuffer:"), objref.IDOf(sampleBuffer))
 	return _r
 }
 
-// Marks the input as finished to indicate that you’re done appending samples to it.
+// MarkAsFinished marks the input as finished to indicate that you’re done appending samples to it.
 func (x *AssetWriterInput) MarkAsFinished() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markAsFinished"))
 }
 
-// The media type of the samples that can be appended to the receiver. The value of this property is one of the media types defined in AVMediaFormat.h.
+// MediaType the media type of the samples that can be appended to the receiver. The value of this property is one of the media types defined in AVMediaFormat.h.
 func (x *AssetWriterInput) MediaType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaType"))
 	return obj.Wrap(_r)
 }
 
-// The settings used for encoding the media appended to the output. The value of this property is an NSDictionary that contains values for keys as specified by either AVAudioSettings.h for AVMediaTypeAudio or AVVideoSettings.h for AVMediaTypeVideo. A value of nil indicates that the receiver will pass through appended samples, doing no processing before they are written to the output file.
+// OutputSettings the settings used for encoding the media appended to the output. The value of this property is an NSDictionary that contains values for keys as specified by either AVAudioSettings.h for AVMediaTypeAudio or AVVideoSettings.h for AVMediaTypeVideo. A value of nil indicates that the receiver will pass through appended samples, doing no processing before they are written to the output file.
 func (x *AssetWriterInput) OutputSettings() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputSettings"))
 	return obj.Wrap(_r)
 }
 
-// The hint given at initialization time about the format of incoming media data. AVAssetWriterInput may be able to use this hint to fill in missing output settings or perform more upfront validation. To guarantee successful file writing, clients who specify a format hint should ensure that subsequently-appended media data are of the specified format.
+// SourceFormatHint the hint given at initialization time about the format of incoming media data. AVAssetWriterInput may be able to use this hint to fill in missing output settings or perform more upfront validation. To guarantee successful file writing, clients who specify a format hint should ensure that subsequently-appended media data are of the specified format.
 func (x *AssetWriterInput) SourceFormatHint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceFormatHint"))
 	return obj.Wrap(_r)
 }
 
-// A collection of metadata to be written to the track corresponding to the receiver. The value of this property is an array of AVMetadataItem objects representing the collection of track-level metadata to be written in the output file. This property cannot be set after writing on the receiver's AVAssetWriter has started.
+// Metadata a collection of metadata to be written to the track corresponding to the receiver. The value of this property is an array of AVMetadataItem objects representing the collection of track-level metadata to be written in the output file. This property cannot be set after writing on the receiver's AVAssetWriter has started.
 //
 // Metadata returns the collection as a Go slice.
 func (x *AssetWriterInput) Metadata() []*MetadataItem {
@@ -220,28 +215,29 @@ func (x *AssetWriterInput) Metadata() []*MetadataItem {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
+// SetMetadata wraps the corresponding Objective-C method.
 func (x *AssetWriterInput) SetMetadata(metadata []*MetadataItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), purego.SliceToNSArray(metadata, func(_v *MetadataItem) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Indicates the readiness of the input to accept more media data. When there are multiple inputs, AVAssetWriter tries to write media data in an ideal interleaving pattern for efficiency in storage and playback. Each of its inputs signals its readiness to receive media data for writing according to that pattern via the value of readyForMoreMediaData. You can append media data to an input only while its readyForMoreMediaData property is YES. Clients writing media data from a non-real-time source, such as an instance of AVAssetReader, should hold off on generating or obtaining more media data to append to an input when the value of readyForMoreMediaData is NO. To help with control of the supply of non-real-time media data, such clients can use -requestMediaDataWhenReadyOnQueue:usingBlock in order to specify a block that the input should invoke whenever it's ready for input to be appended. Clients writing media data from a real-time source, such as an instance of AVCaptureOutput, should set the input's expectsMediaDataInRealTime property to YES to ensure that the value of readyForMoreMediaData is calculated appropriately. When expectsMediaDataInRealTime is YES, readyForMoreMediaData will become NO only when the input cannot process media samples as quickly as they are being provided by the client. If readyForMoreMediaData becomes NO for a real-time source, the client may need to drop samples or consider reducing the data rate of appended samples. When the value of canPerformMultiplePasses is YES for any input attached to this input's asset writer, the value for this property may start as NO and/or be NO for long periods of time. The value of readyForMoreMediaData will often change from NO to YES asynchronously, as previously supplied media data is processed and written to the output. It is possible for all of an AVAssetWriter's AVAssetWriterInputs temporarily to return NO for readyForMoreMediaData. This property is key value observable. Observers should not assume that they will be notified of changes on a specific thread.
+// IsReadyForMoreMediaData indicates the readiness of the input to accept more media data. When there are multiple inputs, AVAssetWriter tries to write media data in an ideal interleaving pattern for efficiency in storage and playback. Each of its inputs signals its readiness to receive media data for writing according to that pattern via the value of readyForMoreMediaData. You can append media data to an input only while its readyForMoreMediaData property is YES. Clients writing media data from a non-real-time source, such as an instance of AVAssetReader, should hold off on generating or obtaining more media data to append to an input when the value of readyForMoreMediaData is NO. To help with control of the supply of non-real-time media data, such clients can use -requestMediaDataWhenReadyOnQueue:usingBlock in order to specify a block that the input should invoke whenever it's ready for input to be appended. Clients writing media data from a real-time source, such as an instance of AVCaptureOutput, should set the input's expectsMediaDataInRealTime property to YES to ensure that the value of readyForMoreMediaData is calculated appropriately. When expectsMediaDataInRealTime is YES, readyForMoreMediaData will become NO only when the input cannot process media samples as quickly as they are being provided by the client. If readyForMoreMediaData becomes NO for a real-time source, the client may need to drop samples or consider reducing the data rate of appended samples. When the value of canPerformMultiplePasses is YES for any input attached to this input's asset writer, the value for this property may start as NO and/or be NO for long periods of time. The value of readyForMoreMediaData will often change from NO to YES asynchronously, as previously supplied media data is processed and written to the output. It is possible for all of an AVAssetWriter's AVAssetWriterInputs temporarily to return NO for readyForMoreMediaData. This property is key value observable. Observers should not assume that they will be notified of changes on a specific thread.
 func (x *AssetWriterInput) IsReadyForMoreMediaData() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadyForMoreMediaData"))
 	return _r
 }
 
-// Indicates whether the input should tailor its processing of media data for real-time sources. Clients appending media data to an input from a real-time source, such as an AVCaptureOutput, should set expectsMediaDataInRealTime to YES. This will ensure that readyForMoreMediaData is calculated appropriately for real-time usage. For best results, do not set both this property and performsMultiPassEncodingIfSupported to YES. This property cannot be set after writing on the receiver's AVAssetWriter has started.
+// ExpectsMediaDataInRealTime indicates whether the input should tailor its processing of media data for real-time sources. Clients appending media data to an input from a real-time source, such as an AVCaptureOutput, should set expectsMediaDataInRealTime to YES. This will ensure that readyForMoreMediaData is calculated appropriately for real-time usage. For best results, do not set both this property and performsMultiPassEncodingIfSupported to YES. This property cannot be set after writing on the receiver's AVAssetWriter has started.
 func (x *AssetWriterInput) ExpectsMediaDataInRealTime() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("expectsMediaDataInRealTime"))
 	return _r
 }
 
-// Indicates whether the input should tailor its processing of media data for real-time sources. Clients appending media data to an input from a real-time source, such as an AVCaptureOutput, should set expectsMediaDataInRealTime to YES. This will ensure that readyForMoreMediaData is calculated appropriately for real-time usage. For best results, do not set both this property and performsMultiPassEncodingIfSupported to YES. This property cannot be set after writing on the receiver's AVAssetWriter has started.
+// SetExpectsMediaDataInRealTime indicates whether the input should tailor its processing of media data for real-time sources. Clients appending media data to an input from a real-time source, such as an AVCaptureOutput, should set expectsMediaDataInRealTime to YES. This will ensure that readyForMoreMediaData is calculated appropriately for real-time usage. For best results, do not set both this property and performsMultiPassEncodingIfSupported to YES. This property cannot be set after writing on the receiver's AVAssetWriter has started.
 func (x *AssetWriterInput) SetExpectsMediaDataInRealTime(expectsMediaDataInRealTime bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpectsMediaDataInRealTime:"), expectsMediaDataInRealTime)
 }
 
-// Indicates the language to associate with the track corresponding to the receiver, as an ISO 639-2/T language code; can be nil. Also see extendedLanguageTag below. This property cannot be set after writing on the receiver's AVAssetWriter has started. This property throws an exception if a language code is set which does not conform to the ISO 639-2/T language codes.
+// LanguageCode indicates the language to associate with the track corresponding to the receiver, as an ISO 639-2/T language code; can be nil. Also see extendedLanguageTag below. This property cannot be set after writing on the receiver's AVAssetWriter has started. This property throws an exception if a language code is set which does not conform to the ISO 639-2/T language codes.
 func (x *AssetWriterInput) LanguageCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageCode"))
 	if _r == 0 {
@@ -250,11 +246,12 @@ func (x *AssetWriterInput) LanguageCode() string {
 	return purego.GoString(_r)
 }
 
+// SetLanguageCode wraps the corresponding Objective-C method.
 func (x *AssetWriterInput) SetLanguageCode(languageCode string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguageCode:"), purego.NSString(languageCode))
 }
 
-// Indicates the language tag to associate with the track corresponding to the receiver, as an IETF BCP 47 (RFC 4646) language identifier; can be nil. Extended language tags are normally set only when an ISO 639-2/T language code by itself is ambiguous, as in cases in which media data should be distinguished not only by language but also by the regional dialect in use or the writing system employed. This property cannot be set after writing on the receiver's AVAssetWriter has started. This property throws an exception if an extended language tag is set which does not conform to the IETF BCP 47 (RFC 4646) language identifiers.
+// ExtendedLanguageTag indicates the language tag to associate with the track corresponding to the receiver, as an IETF BCP 47 (RFC 4646) language identifier; can be nil. Extended language tags are normally set only when an ISO 639-2/T language code by itself is ambiguous, as in cases in which media data should be distinguished not only by language but also by the regional dialect in use or the writing system employed. This property cannot be set after writing on the receiver's AVAssetWriter has started. This property throws an exception if an extended language tag is set which does not conform to the IETF BCP 47 (RFC 4646) language identifiers.
 func (x *AssetWriterInput) ExtendedLanguageTag() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendedLanguageTag"))
 	if _r == 0 {
@@ -263,107 +260,138 @@ func (x *AssetWriterInput) ExtendedLanguageTag() string {
 	return purego.GoString(_r)
 }
 
+// SetExtendedLanguageTag wraps the corresponding Objective-C method.
 func (x *AssetWriterInput) SetExtendedLanguageTag(extendedLanguageTag string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedLanguageTag:"), purego.NSString(extendedLanguageTag))
 }
 
+// NaturalSize the size specified in the output file as the natural dimensions of the visual media data for display purposes. If the default value, CGSizeZero, is specified, the naturalSize of the track corresponding to the receiver is set according to dimensions indicated by the format descriptions that are ultimately written to the output track. This property cannot be set after writing on the receiver's AVAssetWriter has started.
+func (x *AssetWriterInput) NaturalSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("naturalSize"))
+	return _r
+}
+
+// SetNaturalSize wraps the corresponding Objective-C method.
+func (x *AssetWriterInput) SetNaturalSize(naturalSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNaturalSize:"), naturalSize)
+}
+
+// Transform the transform specified in the output file as the preferred transformation of the visual media data for display purposes. If no value is specified, the identity transform is used. This property cannot be set after writing on the receiver's AVAssetWriter has started.
+func (x *AssetWriterInput) Transform() corefoundation.CGAffineTransform {
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("transform"))
+	return _r
+}
+
+// SetTransform wraps the corresponding Objective-C method.
+func (x *AssetWriterInput) SetTransform(transform corefoundation.CGAffineTransform) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransform:"), transform)
+}
+
+// PreferredVolume wraps the corresponding Objective-C method.
 func (x *AssetWriterInput) PreferredVolume() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("preferredVolume"))
 	return _r
 }
 
+// SetPreferredVolume wraps the corresponding Objective-C method.
 func (x *AssetWriterInput) SetPreferredVolume(preferredVolume float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredVolume:"), preferredVolume)
 }
 
-// For file types that support enabled and disabled tracks, such as QuickTime Movie files, specifies whether the track corresponding to the receiver should be enabled by default for playback and processing. The default value is YES. When an input group is added to an AVAssetWriter (see -[AVAssetWriter addInputGroup:]), the value of marksOutputTrackAsEnabled will automatically be set to YES for the default input and set to NO for all of the other inputs in the group. In this case, if a new value is set on this property then an exception will be raised. This property cannot be set after writing on the receiver's AVAssetWriter has started. This property throws an exception if a value is set on an asset writer input that is contained in an input group.
+// MarksOutputTrackAsEnabled for file types that support enabled and disabled tracks, such as QuickTime Movie files, specifies whether the track corresponding to the receiver should be enabled by default for playback and processing. The default value is YES. When an input group is added to an AVAssetWriter (see -[AVAssetWriter addInputGroup:]), the value of marksOutputTrackAsEnabled will automatically be set to YES for the default input and set to NO for all of the other inputs in the group. In this case, if a new value is set on this property then an exception will be raised. This property cannot be set after writing on the receiver's AVAssetWriter has started. This property throws an exception if a value is set on an asset writer input that is contained in an input group.
 func (x *AssetWriterInput) MarksOutputTrackAsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("marksOutputTrackAsEnabled"))
 	return _r
 }
 
+// SetMarksOutputTrackAsEnabled wraps the corresponding Objective-C method.
 func (x *AssetWriterInput) SetMarksOutputTrackAsEnabled(marksOutputTrackAsEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMarksOutputTrackAsEnabled:"), marksOutputTrackAsEnabled)
 }
 
-// For file types that support media time scales, such as QuickTime Movie files, specifies the media time scale to be used. The default value is 0, which indicates that the receiver should choose a convenient value, if applicable. It is an error to set a value other than 0 if the receiver has media type AVMediaTypeAudio. This property cannot be set after writing has started. This property throws an exception if a value is set on an asset writer input with media type AVMediaTypeAudio.
+// MediaTimeScale for file types that support media time scales, such as QuickTime Movie files, specifies the media time scale to be used. The default value is 0, which indicates that the receiver should choose a convenient value, if applicable. It is an error to set a value other than 0 if the receiver has media type AVMediaTypeAudio. This property cannot be set after writing has started. This property throws an exception if a value is set on an asset writer input with media type AVMediaTypeAudio.
 func (x *AssetWriterInput) MediaTimeScale() int32 {
 	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("mediaTimeScale"))
 	return _r
 }
 
+// SetMediaTimeScale wraps the corresponding Objective-C method.
 func (x *AssetWriterInput) SetMediaTimeScale(mediaTimeScale int32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaTimeScale:"), mediaTimeScale)
 }
 
-// For file types that support media chunk alignment, such as QuickTime Movie files, specifies the boundary for media chunk alignment in bytes (e.g. 512). The default value is 0, which means that the receiver will choose an appropriate default value. A value of 1 implies that no padding should be used to achieve a particular chunk alignment. It is an error to set a negative value for chunk alignment. This property cannot be set after -startWriting has been called on the receiver.
+// PreferredMediaChunkAlignment for file types that support media chunk alignment, such as QuickTime Movie files, specifies the boundary for media chunk alignment in bytes (e.g. 512). The default value is 0, which means that the receiver will choose an appropriate default value. A value of 1 implies that no padding should be used to achieve a particular chunk alignment. It is an error to set a negative value for chunk alignment. This property cannot be set after -startWriting has been called on the receiver.
 func (x *AssetWriterInput) PreferredMediaChunkAlignment() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("preferredMediaChunkAlignment"))
 	return _r
 }
 
+// SetPreferredMediaChunkAlignment wraps the corresponding Objective-C method.
 func (x *AssetWriterInput) SetPreferredMediaChunkAlignment(preferredMediaChunkAlignment int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMediaChunkAlignment:"), preferredMediaChunkAlignment)
 }
 
-// For file types that support writing sample references, such as QuickTime Movie files, specifies the base URL sample references are relative to. If the value of this property can be resolved as an absolute URL, the sample locations written to the file when appending sample references will be relative to this URL. The URL must point to a location that is in a directory that is a parent of the sample reference location. Usage example: Setting the sampleReferenceBaseURL property to "file:///User/johnappleseed/Movies/" and appending sample buffers with the kCMSampleBufferAttachmentKey_SampleReferenceURL attachment set to "file:///User/johnappleseed/Movies/data/movie1.mov" will cause the sample reference "data/movie1.mov" to be written to the movie. If the value of the property cannot be resolved as an absolute URL or if it points to a location that is not in a parent directory of the sample reference location, the location referenced in the sample buffer will be written unmodified. The default value is nil, which means that the location referenced in the sample buffer will be written unmodified. This property cannot be set after -startWriting has been called on the receiver.
+// SampleReferenceBaseURL for file types that support writing sample references, such as QuickTime Movie files, specifies the base URL sample references are relative to. If the value of this property can be resolved as an absolute URL, the sample locations written to the file when appending sample references will be relative to this URL. The URL must point to a location that is in a directory that is a parent of the sample reference location. Usage example: Setting the sampleReferenceBaseURL property to "file:///User/johnappleseed/Movies/" and appending sample buffers with the kCMSampleBufferAttachmentKey_SampleReferenceURL attachment set to "file:///User/johnappleseed/Movies/data/movie1.mov" will cause the sample reference "data/movie1.mov" to be written to the movie. If the value of the property cannot be resolved as an absolute URL or if it points to a location that is not in a parent directory of the sample reference location, the location referenced in the sample buffer will be written unmodified. The default value is nil, which means that the location referenced in the sample buffer will be written unmodified. This property cannot be set after -startWriting has been called on the receiver.
 func (x *AssetWriterInput) SampleReferenceBaseURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleReferenceBaseURL"))
 	return obj.Wrap(_r)
 }
 
+// SetSampleReferenceBaseURL wraps the corresponding Objective-C method.
 func (x *AssetWriterInput) SetSampleReferenceBaseURL(sampleReferenceBaseURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleReferenceBaseURL:"), rt.FileURL(sampleReferenceBaseURL))
 }
 
-// Specifies where the media data will be laid out and whether the media data will be interleaved as the main media data. If this value is set to AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved, AVAssetWriter tries to write the media data for this track before all the media data for AVAssetWriterInputs with this property set to AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData. Use of this property is recommended for optimizing tracks that contain a small amount of data that is needed all at once, independent of playback time, such as chapter name tracks and chapter image tracks. Keep it set to AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData for tracks whose media data that's needed only as its presentation time is approaching and, when multiple inputs are present that supply media data that will be played concurrently, should be interleaved for optimal access. For file types that support preloading media data such as QuickTime movie file, if this value is set to AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved, AVAssetWriter will write an indication such as 'load' atom that the whole media data should be preloaded. The default value is AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData, which means that the receiver will not write the indication and that the media data will be interleaved. This property cannot be set after -startWriting has been called on the receiver.
+// MediaDataLocation specifies where the media data will be laid out and whether the media data will be interleaved as the main media data. If this value is set to AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved, AVAssetWriter tries to write the media data for this track before all the media data for AVAssetWriterInputs with this property set to AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData. Use of this property is recommended for optimizing tracks that contain a small amount of data that is needed all at once, independent of playback time, such as chapter name tracks and chapter image tracks. Keep it set to AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData for tracks whose media data that's needed only as its presentation time is approaching and, when multiple inputs are present that supply media data that will be played concurrently, should be interleaved for optimal access. For file types that support preloading media data such as QuickTime movie file, if this value is set to AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved, AVAssetWriter will write an indication such as 'load' atom that the whole media data should be preloaded. The default value is AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData, which means that the receiver will not write the indication and that the media data will be interleaved. This property cannot be set after -startWriting has been called on the receiver.
 func (x *AssetWriterInput) MediaDataLocation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaDataLocation"))
 	return obj.Wrap(_r)
 }
 
+// SetMediaDataLocation wraps the corresponding Objective-C method.
 func (x *AssetWriterInput) SetMediaDataLocation(mediaDataLocation obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaDataLocation:"), objref.IDOf(mediaDataLocation))
 }
 
-// Determines whether it’s valid to associate another input’s track with this input’s track.
+// CanAddTrackAssociationWithTrackOfInputType determines whether it’s valid to associate another input’s track with this input’s track.
 func (x *AssetWriterInput) CanAddTrackAssociationWithTrackOfInputType(input *AssetWriterInput, trackAssociationType string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canAddTrackAssociationWithTrackOfInput:type:"), objref.IDOf(input), purego.NSString(trackAssociationType))
 	return _r
 }
 
-// Adds an association between input tracks.
+// AddTrackAssociationWithTrackOfInputType adds an association between input tracks.
 func (x *AssetWriterInput) AddTrackAssociationWithTrackOfInputType(input *AssetWriterInput, trackAssociationType string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTrackAssociationWithTrackOfInput:type:"), objref.IDOf(input), purego.NSString(trackAssociationType))
 }
 
-// Tells the input to invoke a callback whenever it begins a new pass.
+// RespondToEachPassDescriptionOnQueueUsing tells the input to invoke a callback whenever it begins a new pass.
 func (x *AssetWriterInput) RespondToEachPassDescriptionOnQueueUsing(queue obj.Object, block func()) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("respondToEachPassDescriptionOnQueue:usingBlock:"), objref.IDOf(queue), block)
 }
 
-// Tells the input to analyze the appended media to determine whether it can improve the results by reencoding certain segments.
+// MarkCurrentPassAsFinished tells the input to analyze the appended media to determine whether it can improve the results by reencoding certain segments.
 func (x *AssetWriterInput) MarkCurrentPassAsFinished() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markCurrentPassAsFinished"))
 }
 
-// Indicates whether the input should attempt to encode the source media data using multiple passes. The input may be able to achieve higher quality and/or lower data rate by performing multiple passes over the source media. It does this by analyzing the media data that has been appended and re-encoding certain segments with different parameters. In order to do this re-encoding, the media data for these segments must be appended again. See -markCurrentPassAsFinished and the property currentPassDescription for the mechanism by which the input nominates segments for re-appending. When the value of this property is YES, the value of readyForMoreMediaData for other inputs attached to the same AVAssetWriter may be NO more often and/or for longer periods of time. In particular, the value of readyForMoreMediaData for inputs that do not (or cannot) perform multiple passes may start out as NO after -[AVAssetWriter startWriting] has been called and may not change to YES until after all multi-pass inputs have completed their final pass. When the value of this property is YES, the input may store data in one or more temporary files before writing compressed samples to the output file. Use the AVAssetWriter property directoryForTemporaryFiles if you need to control the location of temporary file writing. The default value is NO, meaning that no additional analysis will occur and no segments will be re-encoded. Not all asset writer input configurations (for example, inputs configured with certain media types or to use certain encoders) can benefit from performing multiple passes over the source media. To determine whether the selected encoder can perform multiple passes, query the value of canPerformMultiplePasses after calling -startWriting. For best results, do not set both this property and expectsMediaDataInRealTime to YES. This property cannot be set after writing on the receiver's AVAssetWriter has started.
+// PerformsMultiPassEncodingIfSupported indicates whether the input should attempt to encode the source media data using multiple passes. The input may be able to achieve higher quality and/or lower data rate by performing multiple passes over the source media. It does this by analyzing the media data that has been appended and re-encoding certain segments with different parameters. In order to do this re-encoding, the media data for these segments must be appended again. See -markCurrentPassAsFinished and the property currentPassDescription for the mechanism by which the input nominates segments for re-appending. When the value of this property is YES, the value of readyForMoreMediaData for other inputs attached to the same AVAssetWriter may be NO more often and/or for longer periods of time. In particular, the value of readyForMoreMediaData for inputs that do not (or cannot) perform multiple passes may start out as NO after -[AVAssetWriter startWriting] has been called and may not change to YES until after all multi-pass inputs have completed their final pass. When the value of this property is YES, the input may store data in one or more temporary files before writing compressed samples to the output file. Use the AVAssetWriter property directoryForTemporaryFiles if you need to control the location of temporary file writing. The default value is NO, meaning that no additional analysis will occur and no segments will be re-encoded. Not all asset writer input configurations (for example, inputs configured with certain media types or to use certain encoders) can benefit from performing multiple passes over the source media. To determine whether the selected encoder can perform multiple passes, query the value of canPerformMultiplePasses after calling -startWriting. For best results, do not set both this property and expectsMediaDataInRealTime to YES. This property cannot be set after writing on the receiver's AVAssetWriter has started.
 func (x *AssetWriterInput) PerformsMultiPassEncodingIfSupported() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("performsMultiPassEncodingIfSupported"))
 	return _r
 }
 
+// SetPerformsMultiPassEncodingIfSupported wraps the corresponding Objective-C method.
 func (x *AssetWriterInput) SetPerformsMultiPassEncodingIfSupported(performsMultiPassEncodingIfSupported bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerformsMultiPassEncodingIfSupported:"), performsMultiPassEncodingIfSupported)
 }
 
-// Indicates whether the input might perform multiple passes over appended media data. When the value for this property is YES, your source for media data should be configured for random access. After appending all of the media data for the current pass (as specified by the currentPassDescription property), call -markCurrentPassAsFinished to start the process of determining whether additional passes are needed. Note that it is still possible in this case for the input to perform only the initial pass, if it determines that there will be no benefit to performing multiple passes. When the value for this property is NO, your source for media data only needs to support sequential access. In this case, append all of the source media once and call -markAsFinished. In the default configuration of AVAssetWriterInput, the value for this property will be NO. Currently the only way for this property to become YES is when performsMultiPassEncodingIfSupported has been set to YES. The final value will be available after -startWriting is called, when a specific encoder has been choosen. This property is key-value observable.
+// CanPerformMultiplePasses indicates whether the input might perform multiple passes over appended media data. When the value for this property is YES, your source for media data should be configured for random access. After appending all of the media data for the current pass (as specified by the currentPassDescription property), call -markCurrentPassAsFinished to start the process of determining whether additional passes are needed. Note that it is still possible in this case for the input to perform only the initial pass, if it determines that there will be no benefit to performing multiple passes. When the value for this property is NO, your source for media data only needs to support sequential access. In this case, append all of the source media once and call -markAsFinished. In the default configuration of AVAssetWriterInput, the value for this property will be NO. Currently the only way for this property to become YES is when performsMultiPassEncodingIfSupported has been set to YES. The final value will be available after -startWriting is called, when a specific encoder has been choosen. This property is key-value observable.
 func (x *AssetWriterInput) CanPerformMultiplePasses() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPerformMultiplePasses"))
 	return _r
 }
 
-// Provides an object that describes the requirements, such as source time ranges to append or re-append, for the current pass. If the value of this property is nil, it means there is no request to be fulfilled and -markAsFinished should be called on the asset writer input. During the first pass, the request will contain a single time range from zero to positive infinity, indicating that all media from the source should be appended. This will also be true when canPerformMultiplePasses is NO, in which case only one pass will be performed. The value of this property will be nil before -startWriting is called on the attached asset writer. It will transition to an initial non-nil value during the call to -startWriting. After that, the value of this property will change only after a call to -markCurrentPassAsFinished. For an easy way to be notified at the beginning of each pass, see -respondToEachPassDescriptionOnQueue:usingBlock:. This property is key-value observable. Observers should not assume that they will be notified of changes on a specific thread.
+// CurrentPassDescription provides an object that describes the requirements, such as source time ranges to append or re-append, for the current pass. If the value of this property is nil, it means there is no request to be fulfilled and -markAsFinished should be called on the asset writer input. During the first pass, the request will contain a single time range from zero to positive infinity, indicating that all media from the source should be appended. This will also be true when canPerformMultiplePasses is NO, in which case only one pass will be performed. The value of this property will be nil before -startWriting is called on the attached asset writer. It will transition to an initial non-nil value during the call to -startWriting. After that, the value of this property will change only after a call to -markCurrentPassAsFinished. For an easy way to be notified at the beginning of each pass, see -respondToEachPassDescriptionOnQueue:usingBlock:. This property is key-value observable. Observers should not assume that they will be notified of changes on a specific thread.
 func (x *AssetWriterInput) CurrentPassDescription() *AssetWriterInputPassDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentPassDescription"))
 	return AssetWriterInputPassDescriptionFromID(_r)
@@ -376,6 +404,8 @@ type AssetWriterInputable interface {
 	WithExpectsMediaDataInRealTime(expectsMediaDataInRealTime bool) *AssetWriterInput
 	WithLanguageCode(languageCode string) *AssetWriterInput
 	WithExtendedLanguageTag(extendedLanguageTag string) *AssetWriterInput
+	WithNaturalSize(naturalSize corefoundation.CGSize) *AssetWriterInput
+	WithTransform(transform corefoundation.CGAffineTransform) *AssetWriterInput
 	WithPreferredVolume(preferredVolume float32) *AssetWriterInput
 	WithMarksOutputTrackAsEnabled(marksOutputTrackAsEnabled bool) *AssetWriterInput
 	WithMediaTimeScale(mediaTimeScale int32) *AssetWriterInput
@@ -398,6 +428,10 @@ type AssetWriterInputable interface {
 	SetLanguageCode(languageCode string)
 	ExtendedLanguageTag() string
 	SetExtendedLanguageTag(extendedLanguageTag string)
+	NaturalSize() corefoundation.CGSize
+	SetNaturalSize(naturalSize corefoundation.CGSize)
+	Transform() corefoundation.CGAffineTransform
+	SetTransform(transform corefoundation.CGAffineTransform)
 	PreferredVolume() float32
 	SetPreferredVolume(preferredVolume float32)
 	MarksOutputTrackAsEnabled() bool

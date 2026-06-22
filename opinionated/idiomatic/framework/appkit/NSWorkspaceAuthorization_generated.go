@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The authorization granted to the app by the user.
-//
 // WorkspaceAuthorization is an idiomatic wrapper over the Objective-C class NSWorkspaceAuthorization.
+//
+// The authorization granted to the app by the user.
 type WorkspaceAuthorization struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WorkspaceAuthorizationFromID(id objc.ID) *WorkspaceAuthorization {
 	if id == 0 {
 		return nil
 	}
-	x := &WorkspaceAuthorization{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WorkspaceAuthorization{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func workspaceAuthorizationAdopt(id objc.ID) *WorkspaceAuthorization {
 	if id == 0 {
 		return nil
 	}
-	x := &WorkspaceAuthorization{Handle: objref.Wrap(id)}
+	x := &WorkspaceAuthorization{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *WorkspaceAuthorization) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *WorkspaceAuthorization) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WorkspaceAuthorization) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewWorkspaceAuthorization creates a new WorkspaceAuthorization.

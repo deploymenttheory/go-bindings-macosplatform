@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A right that gates access to a key and a secret.
-//
 // PersistedRight is an idiomatic wrapper over the Objective-C class LAPersistedRight.
+//
+// It embeds [Right], promoting that type's methods.
+//
+// A right that gates access to a key and a secret.
 type PersistedRight struct {
-	objref.Handle
+	Right
 }
 
 // PersistedRightFromID adopts an existing Objective-C object as a PersistedRight
@@ -25,7 +26,8 @@ func PersistedRightFromID(id objc.ID) *PersistedRight {
 	if id == 0 {
 		return nil
 	}
-	x := &PersistedRight{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PersistedRight{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func persistedRightAdopt(id objc.ID) *PersistedRight {
 	if id == 0 {
 		return nil
 	}
-	x := &PersistedRight{Handle: objref.Wrap(id)}
+	x := &PersistedRight{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PersistedRight) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PersistedRight) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PersistedRight) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPersistedRight creates a new PersistedRight.
@@ -64,21 +52,19 @@ func NewPersistedRight() *PersistedRight {
 	return persistedRightAdopt(_id)
 }
 
-// An integer you use to identify a right.
-//
-// WithTag sets tag and returns the receiver so calls can be chained.
+// WithTag an integer you use to identify a right.
 func (x *PersistedRight) WithTag(tag int) *PersistedRight {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// Managed private key
+// Key managed private key
 func (x *PersistedRight) Key() *PrivateKey {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("key"))
 	return PrivateKeyFromID(_r)
 }
 
-// Generic secret This is the generic secret that would have been stored along with the right
+// Secret generic secret This is the generic secret that would have been stored along with the right
 func (x *PersistedRight) Secret() *Secret {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("secret"))
 	return SecretFromID(_r)
@@ -93,3 +79,5 @@ type PersistedRightable interface {
 }
 
 var _ PersistedRightable = (*PersistedRight)(nil)
+
+var _ RightProvider = (*PersistedRight)(nil)

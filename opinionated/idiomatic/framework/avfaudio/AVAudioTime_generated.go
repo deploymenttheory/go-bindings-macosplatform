@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object you use to represent a moment in time.
-//
 // AudioTime is an idiomatic wrapper over the Objective-C class AVAudioTime.
+//
+// An object you use to represent a moment in time.
 type AudioTime struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AudioTimeFromID(id objc.ID) *AudioTime {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioTime{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioTime{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func audioTimeAdopt(id objc.ID) *AudioTime {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioTime{Handle: objref.Wrap(id)}
+	x := &AudioTime{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,64 +60,64 @@ func (x *AudioTime) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an audio time object with the specified host time.
-//
-// NewAudioTimeWithHostTime creates a new AudioTime.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioTime) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudioTimeWithHostTime creates an audio time object with the specified host time.
 func NewAudioTimeWithHostTime(hostTime uint64) *AudioTime {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioTime")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHostTime:"), hostTime)
 	return audioTimeAdopt(_id)
 }
 
-// Creates an audio time object with the specified timestamp and sample rate.
-//
-// NewAudioTimeWithSampleTimeAtRate creates a new AudioTime.
+// NewAudioTimeWithSampleTimeAtRate creates an audio time object with the specified timestamp and sample rate.
 func NewAudioTimeWithSampleTimeAtRate(sampleTime int64, sampleRate float64) *AudioTime {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioTime")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleTime:atRate:"), sampleTime, sampleRate)
 	return audioTimeAdopt(_id)
 }
 
-// Creates an audio time object with the specified host time, sample time, and sample rate.
-//
-// NewAudioTimeWithHostTimeSampleTimeAtRate creates a new AudioTime.
+// NewAudioTimeWithHostTimeSampleTimeAtRate creates an audio time object with the specified host time, sample time, and sample rate.
 func NewAudioTimeWithHostTimeSampleTimeAtRate(hostTime uint64, sampleTime int64, sampleRate float64) *AudioTime {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioTime")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHostTime:sampleTime:atRate:"), hostTime, sampleTime, sampleRate)
 	return audioTimeAdopt(_id)
 }
 
-// Creates an audio time object by converting between host time and sample time.
+// ExtrapolateTimeFromAnchor creates an audio time object by converting between host time and sample time.
 func (x *AudioTime) ExtrapolateTimeFromAnchor(anchorTime *AudioTime) *AudioTime {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extrapolateTimeFromAnchor:"), objref.IDOf(anchorTime))
 	return AudioTimeFromID(_r)
 }
 
-// Whether the hostTime property is valid.
+// IsHostTimeValid whether the hostTime property is valid.
 func (x *AudioTime) IsHostTimeValid() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHostTimeValid"))
 	return _r
 }
 
-// The host time.
+// HostTime the host time.
 func (x *AudioTime) HostTime() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("hostTime"))
 	return _r
 }
 
-// Whether the sampleTime and sampleRate properties are valid.
+// IsSampleTimeValid whether the sampleTime and sampleRate properties are valid.
 func (x *AudioTime) IsSampleTimeValid() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSampleTimeValid"))
 	return _r
 }
 
-// The time as a number of audio samples, as tracked by the current audio device.
+// SampleTime the time as a number of audio samples, as tracked by the current audio device.
 func (x *AudioTime) SampleTime() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("sampleTime"))
 	return _r
 }
 
-// The sample rate at which sampleTime is being expressed.
+// SampleRate the sample rate at which sampleTime is being expressed.
 func (x *AudioTime) SampleRate() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("sampleRate"))
 	return _r

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration that instructs the GPU where to store counter data from the beginning and end of a compute pass.
-//
 // ComputePassSampleBufferAttachmentDescriptor is an idiomatic wrapper over the Objective-C class MTLComputePassSampleBufferAttachmentDescriptor.
+//
+// A configuration that instructs the GPU where to store counter data from the beginning and end of a compute pass.
 type ComputePassSampleBufferAttachmentDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ComputePassSampleBufferAttachmentDescriptorFromID(id objc.ID) *ComputePassS
 	if id == 0 {
 		return nil
 	}
-	x := &ComputePassSampleBufferAttachmentDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ComputePassSampleBufferAttachmentDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func computePassSampleBufferAttachmentDescriptorAdopt(id objc.ID) *ComputePassSa
 	if id == 0 {
 		return nil
 	}
-	x := &ComputePassSampleBufferAttachmentDescriptor{Handle: objref.Wrap(id)}
+	x := &ComputePassSampleBufferAttachmentDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,44 +60,48 @@ func (x *ComputePassSampleBufferAttachmentDescriptor) IsKind(className string) b
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ComputePassSampleBufferAttachmentDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewComputePassSampleBufferAttachmentDescriptor creates a new ComputePassSampleBufferAttachmentDescriptor.
 func NewComputePassSampleBufferAttachmentDescriptor() *ComputePassSampleBufferAttachmentDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLComputePassSampleBufferAttachmentDescriptor")), objc.RegisterName("new"))
 	return computePassSampleBufferAttachmentDescriptorAdopt(_id)
 }
 
-// An index within a counter sample buffer that tells the GPU where to store counter data from the start of a compute pass.
-//
-// WithStartOfEncoderSampleIndex sets startOfEncoderSampleIndex and returns the receiver so calls can be chained.
+// WithStartOfEncoderSampleIndex an index within a counter sample buffer that tells the GPU where to store counter data from the start of a compute pass.
 func (x *ComputePassSampleBufferAttachmentDescriptor) WithStartOfEncoderSampleIndex(startOfEncoderSampleIndex int) *ComputePassSampleBufferAttachmentDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartOfEncoderSampleIndex:"), startOfEncoderSampleIndex)
 	return x
 }
 
-// An index within a counter sample buffer that tells the GPU where to store counter data from the end of a compute pass.
-//
-// WithEndOfEncoderSampleIndex sets endOfEncoderSampleIndex and returns the receiver so calls can be chained.
+// WithEndOfEncoderSampleIndex an index within a counter sample buffer that tells the GPU where to store counter data from the end of a compute pass.
 func (x *ComputePassSampleBufferAttachmentDescriptor) WithEndOfEncoderSampleIndex(endOfEncoderSampleIndex int) *ComputePassSampleBufferAttachmentDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndOfEncoderSampleIndex:"), endOfEncoderSampleIndex)
 	return x
 }
 
-// The sample index to use to store the sample taken at the start of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a compute pass will fail.
+// StartOfEncoderSampleIndex the sample index to use to store the sample taken at the start of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a compute pass will fail.
 func (x *ComputePassSampleBufferAttachmentDescriptor) StartOfEncoderSampleIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("startOfEncoderSampleIndex"))
 	return _r
 }
 
+// SetStartOfEncoderSampleIndex wraps the corresponding Objective-C method.
 func (x *ComputePassSampleBufferAttachmentDescriptor) SetStartOfEncoderSampleIndex(startOfEncoderSampleIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartOfEncoderSampleIndex:"), startOfEncoderSampleIndex)
 }
 
-// The sample index to use to store the sample taken at the end of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a compute pass will fail.
+// EndOfEncoderSampleIndex the sample index to use to store the sample taken at the end of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a compute pass will fail.
 func (x *ComputePassSampleBufferAttachmentDescriptor) EndOfEncoderSampleIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("endOfEncoderSampleIndex"))
 	return _r
 }
 
+// SetEndOfEncoderSampleIndex wraps the corresponding Objective-C method.
 func (x *ComputePassSampleBufferAttachmentDescriptor) SetEndOfEncoderSampleIndex(endOfEncoderSampleIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndOfEncoderSampleIndex:"), endOfEncoderSampleIndex)
 }

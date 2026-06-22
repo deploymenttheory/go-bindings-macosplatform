@@ -6,116 +6,132 @@ package videotoolbox
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Provides the collection of currently supported algorithms or configuration revisions for the class of configuration. A property you use to introspect at runtime which revisions are available for each configuration.
+// SupportedRevisions provides the collection of currently supported algorithms or configuration revisions for the class of configuration. A property you use to introspect at runtime which revisions are available for each configuration.
 func SupportedRevisions() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("VTFrameRateConversionConfiguration")), objc.RegisterName("supportedRevisions"))
 	return obj.Wrap(_r)
 }
 
-// Provides the default revision of a specific algorithm or configuration.
+// DefaultRevision provides the default revision of a specific algorithm or configuration.
 func DefaultRevision() FrameRateConversionConfigurationRevision {
 	_r := objc.Send[FrameRateConversionConfigurationRevision](objc.ID(_class("VTFrameRateConversionConfiguration")), objc.RegisterName("defaultRevision"))
 	return _r
 }
 
-// Reports whether the system supports this processor.
+// IsSupported reports whether the system supports this processor.
 func IsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("VTFrameRateConversionConfiguration")), objc.RegisterName("isSupported"))
 	return _r
 }
 
+// ProcessorSupported wraps the corresponding Objective-C method.
 func ProcessorSupported() uint8 {
 	_r := objc.Send[uint8](objc.ID(_class("VTFrameRateConversionConfiguration")), objc.RegisterName("processorSupported"))
 	return _r
 }
 
-// Reports whether the system supports this processor.
+// VTLowLatencyFrameInterpolationConfigurationIsSupported reports whether the system supports this processor.
 func VTLowLatencyFrameInterpolationConfigurationIsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("VTLowLatencyFrameInterpolationConfiguration")), objc.RegisterName("isSupported"))
 	return _r
 }
 
-// Returns an array of supported scale factors values, or an empty list if the processor doesn’t support the dimensions.
+// SupportedScaleFactorsForFrameWidthFrameHeight returns an array of supported scale factors values, or an empty list if the processor doesn’t support the dimensions.
 func SupportedScaleFactorsForFrameWidthFrameHeight(frameWidth int, frameHeight int) []obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("VTLowLatencySuperResolutionScalerConfiguration")), objc.RegisterName("supportedScaleFactorsForFrameWidth:frameHeight:"), frameWidth, frameHeight)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Reports whether the system supports this processor on the current configuration.
+// MaximumDimensions maximum dimensions for a source frame for the processor.
+func MaximumDimensions() coremedia.CMVideoDimensions {
+	_r := objc.Send[coremedia.CMVideoDimensions](objc.ID(_class("VTLowLatencySuperResolutionScalerConfiguration")), objc.RegisterName("maximumDimensions"))
+	return _r
+}
+
+// MinimumDimensions minimum dimensions for a source frame for the processor.
+func MinimumDimensions() coremedia.CMVideoDimensions {
+	_r := objc.Send[coremedia.CMVideoDimensions](objc.ID(_class("VTLowLatencySuperResolutionScalerConfiguration")), objc.RegisterName("minimumDimensions"))
+	return _r
+}
+
+// VTLowLatencySuperResolutionScalerConfigurationIsSupported reports whether the system supports this processor on the current configuration.
 func VTLowLatencySuperResolutionScalerConfigurationIsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("VTLowLatencySuperResolutionScalerConfiguration")), objc.RegisterName("isSupported"))
 	return _r
 }
 
-// Provides the collection of currently supported algorithms or configuration revisions for the class of configuration. A property you use to introspect at runtime which revisions are available for each configuration.
+// VTMotionBlurConfigurationSupportedRevisions provides the collection of currently supported algorithms or configuration revisions for the class of configuration. A property you use to introspect at runtime which revisions are available for each configuration.
 func VTMotionBlurConfigurationSupportedRevisions() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("VTMotionBlurConfiguration")), objc.RegisterName("supportedRevisions"))
 	return obj.Wrap(_r)
 }
 
-// Provides the default revision of a specific algorithm or configuration.
+// VTMotionBlurConfigurationDefaultRevision provides the default revision of a specific algorithm or configuration.
 func VTMotionBlurConfigurationDefaultRevision() MotionBlurConfigurationRevision {
 	_r := objc.Send[MotionBlurConfigurationRevision](objc.ID(_class("VTMotionBlurConfiguration")), objc.RegisterName("defaultRevision"))
 	return _r
 }
 
-// Reports whether the system supports this processor.
+// VTMotionBlurConfigurationIsSupported reports whether the system supports this processor.
 func VTMotionBlurConfigurationIsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("VTMotionBlurConfiguration")), objc.RegisterName("isSupported"))
 	return _r
 }
 
+// VTMotionBlurConfigurationProcessorSupported wraps the corresponding Objective-C method.
 func VTMotionBlurConfigurationProcessorSupported() uint8 {
 	_r := objc.Send[uint8](objc.ID(_class("VTMotionBlurConfiguration")), objc.RegisterName("processorSupported"))
 	return _r
 }
 
-// Provides the collection of currently supported algorithms or configuration revisions for the class of configuration. A property you use to introspect at runtime which revisions are available for each configuration.
+// VTOpticalFlowConfigurationSupportedRevisions provides the collection of currently supported algorithms or configuration revisions for the class of configuration. A property you use to introspect at runtime which revisions are available for each configuration.
 func VTOpticalFlowConfigurationSupportedRevisions() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("VTOpticalFlowConfiguration")), objc.RegisterName("supportedRevisions"))
 	return obj.Wrap(_r)
 }
 
-// Provides the default revision of a specific algorithm or configuration.
+// VTOpticalFlowConfigurationDefaultRevision provides the default revision of a specific algorithm or configuration.
 func VTOpticalFlowConfigurationDefaultRevision() OpticalFlowConfigurationRevision {
 	_r := objc.Send[OpticalFlowConfigurationRevision](objc.ID(_class("VTOpticalFlowConfiguration")), objc.RegisterName("defaultRevision"))
 	return _r
 }
 
-// Reports whether the system supports this processor.
+// VTOpticalFlowConfigurationIsSupported reports whether the system supports this processor.
 func VTOpticalFlowConfigurationIsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("VTOpticalFlowConfiguration")), objc.RegisterName("isSupported"))
 	return _r
 }
 
+// VTOpticalFlowConfigurationProcessorSupported wraps the corresponding Objective-C method.
 func VTOpticalFlowConfigurationProcessorSupported() uint8 {
 	_r := objc.Send[uint8](objc.ID(_class("VTOpticalFlowConfiguration")), objc.RegisterName("processorSupported"))
 	return _r
 }
 
-// Provides the collection of currently supported algorithms or configuration revisions for the class of configuration. A property you use to introspect at runtime which revisions are available for each configuration.
+// VTSuperResolutionScalerConfigurationSupportedRevisions provides the collection of currently supported algorithms or configuration revisions for the class of configuration. A property you use to introspect at runtime which revisions are available for each configuration.
 func VTSuperResolutionScalerConfigurationSupportedRevisions() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("VTSuperResolutionScalerConfiguration")), objc.RegisterName("supportedRevisions"))
 	return obj.Wrap(_r)
 }
 
-// Provides the default revision of a specific algorithm or configuration.
+// VTSuperResolutionScalerConfigurationDefaultRevision provides the default revision of a specific algorithm or configuration.
 func VTSuperResolutionScalerConfigurationDefaultRevision() SuperResolutionScalerConfigurationRevision {
 	_r := objc.Send[SuperResolutionScalerConfigurationRevision](objc.ID(_class("VTSuperResolutionScalerConfiguration")), objc.RegisterName("defaultRevision"))
 	return _r
 }
 
-// Reports whether the system supports this processor.
+// VTSuperResolutionScalerConfigurationIsSupported reports whether the system supports this processor.
 func VTSuperResolutionScalerConfigurationIsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("VTSuperResolutionScalerConfiguration")), objc.RegisterName("isSupported"))
 	return _r
 }
 
-// Reports the set of supported scale factors to use when initializing a super-resolution scaler configuration.
+// SupportedScaleFactors reports the set of supported scale factors to use when initializing a super-resolution scaler configuration.
 //
 // SupportedScaleFactors returns the collection as a Go slice.
 func SupportedScaleFactors() []obj.Object {
@@ -123,7 +139,7 @@ func SupportedScaleFactors() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// List of all supported pixel formats for source frames.
+// SupportedSourcePixelFormats list of all supported pixel formats for source frames.
 //
 // SupportedSourcePixelFormats returns the collection as a Go slice.
 func SupportedSourcePixelFormats() []obj.Object {
@@ -131,7 +147,19 @@ func SupportedSourcePixelFormats() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Reports whether the system supports this processor.
+// VTTemporalNoiseFilterConfigurationMaximumDimensions the maximum dimensions of a source frame that the processor supports.
+func VTTemporalNoiseFilterConfigurationMaximumDimensions() coremedia.CMVideoDimensions {
+	_r := objc.Send[coremedia.CMVideoDimensions](objc.ID(_class("VTTemporalNoiseFilterConfiguration")), objc.RegisterName("maximumDimensions"))
+	return _r
+}
+
+// VTTemporalNoiseFilterConfigurationMinimumDimensions the minimum dimensions of a source frame that the processor supports.
+func VTTemporalNoiseFilterConfigurationMinimumDimensions() coremedia.CMVideoDimensions {
+	_r := objc.Send[coremedia.CMVideoDimensions](objc.ID(_class("VTTemporalNoiseFilterConfiguration")), objc.RegisterName("minimumDimensions"))
+	return _r
+}
+
+// VTTemporalNoiseFilterConfigurationIsSupported reports whether the system supports this processor.
 func VTTemporalNoiseFilterConfigurationIsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("VTTemporalNoiseFilterConfiguration")), objc.RegisterName("isSupported"))
 	return _r

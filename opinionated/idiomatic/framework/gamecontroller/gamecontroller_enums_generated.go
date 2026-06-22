@@ -24,6 +24,8 @@ const (
 	ControllerPlayerIndex4 ControllerPlayerIndex = 3
 )
 
+// String returns the ControllerPlayerIndex constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ControllerPlayerIndex) String() string {
 	switch e {
 	case ControllerPlayerIndexUnset:
@@ -51,6 +53,8 @@ const (
 	DeviceBatteryStateFull        DeviceBatteryState = 2
 )
 
+// String returns the DeviceBatteryState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DeviceBatteryState) String() string {
 	switch e {
 	case DeviceBatteryStateUnknown:
@@ -82,6 +86,8 @@ const (
 	DualSenseAdaptiveTriggerModeSlopeFeedback DualSenseAdaptiveTriggerMode = 4
 )
 
+// String returns the DualSenseAdaptiveTriggerMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DualSenseAdaptiveTriggerMode) String() string {
 	switch e {
 	case DualSenseAdaptiveTriggerModeOff:
@@ -127,6 +133,8 @@ const (
 	DualSenseAdaptiveTriggerStatusSlopeFeedbackFinished DualSenseAdaptiveTriggerStatus = 9
 )
 
+// String returns the DualSenseAdaptiveTriggerStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DualSenseAdaptiveTriggerStatus) String() string {
 	switch e {
 	case DualSenseAdaptiveTriggerStatusUnknown:
@@ -168,6 +176,8 @@ const (
 	SystemGestureStateDisabled SystemGestureState = 2
 )
 
+// String returns the SystemGestureState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SystemGestureState) String() string {
 	switch e {
 	case SystemGestureStateEnabled:
@@ -190,6 +200,8 @@ const (
 	TouchStateMoving TouchState = 2
 )
 
+// String returns the TouchState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TouchState) String() string {
 	switch e {
 	case TouchStateUp:

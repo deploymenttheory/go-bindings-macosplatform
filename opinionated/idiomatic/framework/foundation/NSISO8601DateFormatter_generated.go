@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A formatter that converts between dates and their ISO 8601 string representations.
-//
 // ISO8601DateFormatter is an idiomatic wrapper over the Objective-C class NSISO8601DateFormatter.
+//
+// It embeds [Formatter], promoting that type's methods.
+//
+// A formatter that converts between dates and their ISO 8601 string representations.
 type ISO8601DateFormatter struct {
-	objref.Handle
+	Formatter
 }
 
 // ISO8601DateFormatterFromID adopts an existing Objective-C object as a ISO8601DateFormatter
@@ -25,7 +26,8 @@ func ISO8601DateFormatterFromID(id objc.ID) *ISO8601DateFormatter {
 	if id == 0 {
 		return nil
 	}
-	x := &ISO8601DateFormatter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ISO8601DateFormatter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func iSO8601DateFormatterAdopt(id objc.ID) *ISO8601DateFormatter {
 	if id == 0 {
 		return nil
 	}
-	x := &ISO8601DateFormatter{Handle: objref.Wrap(id)}
+	x := &ISO8601DateFormatter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ISO8601DateFormatter) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ISO8601DateFormatter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ISO8601DateFormatter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewISO8601DateFormatter creates a new ISO8601DateFormatter.
@@ -64,24 +52,25 @@ func NewISO8601DateFormatter() *ISO8601DateFormatter {
 	return iSO8601DateFormatterAdopt(_id)
 }
 
-// WithTimeZone sets timeZone and returns the receiver so calls can be chained.
+// WithTimeZone sets the property and returns the receiver so calls can be chained.
 func (x *ISO8601DateFormatter) WithTimeZone(timeZone *TimeZone) *ISO8601DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	return x
 }
 
-// WithFormatOptions sets formatOptions and returns the receiver so calls can be chained.
+// WithFormatOptions sets the property and returns the receiver so calls can be chained.
 func (x *ISO8601DateFormatter) WithFormatOptions(formatOptions ISO8601DateFormatOptions) *ISO8601DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatOptions:"), formatOptions)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *ISO8601DateFormatter) WithScriptingProperties(scriptingProperties obj.Object) *ISO8601DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// StringFromDate wraps the corresponding Objective-C method.
 func (x *ISO8601DateFormatter) StringFromDate(date *Date) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromDate:"), objref.IDOf(date))
 	if _r == 0 {
@@ -90,25 +79,30 @@ func (x *ISO8601DateFormatter) StringFromDate(date *Date) string {
 	return purego.GoString(_r)
 }
 
+// DateFromString wraps the corresponding Objective-C method.
 func (x *ISO8601DateFormatter) DateFromString(string_ string) *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateFromString:"), purego.NSString(string_))
 	return DateFromID(_r)
 }
 
+// TimeZone wraps the corresponding Objective-C method.
 func (x *ISO8601DateFormatter) TimeZone() *TimeZone {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeZone"))
 	return TimeZoneFromID(_r)
 }
 
+// SetTimeZone wraps the corresponding Objective-C method.
 func (x *ISO8601DateFormatter) SetTimeZone(timeZone *TimeZone) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 }
 
+// FormatOptions wraps the corresponding Objective-C method.
 func (x *ISO8601DateFormatter) FormatOptions() ISO8601DateFormatOptions {
 	_r := objc.Send[ISO8601DateFormatOptions](objref.IDOf(x), objc.RegisterName("formatOptions"))
 	return _r
 }
 
+// SetFormatOptions wraps the corresponding Objective-C method.
 func (x *ISO8601DateFormatter) SetFormatOptions(formatOptions ISO8601DateFormatOptions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatOptions:"), formatOptions)
 }
@@ -128,3 +122,5 @@ type ISO8601DateFormatterable interface {
 }
 
 var _ ISO8601DateFormatterable = (*ISO8601DateFormatter)(nil)
+
+var _ FormatterProvider = (*ISO8601DateFormatter)(nil)

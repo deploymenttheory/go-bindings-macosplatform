@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NNOptimizerRMSProp is an idiomatic wrapper over the Objective-C class MPSNNOptimizerRMSProp.
+//
+// It embeds [NNOptimizer], promoting that type's methods.
 type NNOptimizerRMSProp struct {
-	objref.Handle
+	NNOptimizer
 }
 
 // NNOptimizerRMSPropFromID adopts an existing Objective-C object as a NNOptimizerRMSProp
@@ -23,7 +24,8 @@ func NNOptimizerRMSPropFromID(id objc.ID) *NNOptimizerRMSProp {
 	if id == 0 {
 		return nil
 	}
-	x := &NNOptimizerRMSProp{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNOptimizerRMSProp{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func nNOptimizerRMSPropAdopt(id objc.ID) *NNOptimizerRMSProp {
 	if id == 0 {
 		return nil
 	}
-	x := &NNOptimizerRMSProp{Handle: objref.Wrap(id)}
+	x := &NNOptimizerRMSProp{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NNOptimizerRMSProp) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNOptimizerRMSProp) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNOptimizerRMSProp) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNNOptimizerRMSProp creates a new NNOptimizerRMSProp.
@@ -62,29 +50,25 @@ func NewNNOptimizerRMSProp() *NNOptimizerRMSProp {
 	return nNOptimizerRMSPropAdopt(_id)
 }
 
-// The learningRate at which we update values The default value is 1e-3
-//
-// WithLearningRate sets learningRate and returns the receiver so calls can be chained.
+// WithLearningRate the learningRate at which we update values The default value is 1e-3
 func (x *NNOptimizerRMSProp) WithLearningRate(learningRate float32) *NNOptimizerRMSProp {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
 	return x
 }
 
-// A bool which decides if gradient will be clipped The default value is NO
-//
-// WithApplyGradientClipping sets applyGradientClipping and returns the receiver so calls can be chained.
+// WithApplyGradientClipping a bool which decides if gradient will be clipped The default value is NO
 func (x *NNOptimizerRMSProp) WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerRMSProp {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplyGradientClipping:"), applyGradientClipping)
 	return x
 }
 
-// The decay at which we update sumOfSquares Default value is 0.9
+// Decay the decay at which we update sumOfSquares Default value is 0.9
 func (x *NNOptimizerRMSProp) Decay() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("decay"))
 	return _r
 }
 
-// The epsilon at which we update values This value is usually used to ensure to avoid divide by 0, default value is 1e-8
+// Epsilon the epsilon at which we update values This value is usually used to ensure to avoid divide by 0, default value is 1e-8
 func (x *NNOptimizerRMSProp) Epsilon() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
 	return _r
@@ -100,3 +84,5 @@ type NNOptimizerRMSPropable interface {
 }
 
 var _ NNOptimizerRMSPropable = (*NNOptimizerRMSProp)(nil)
+
+var _ NNOptimizerProvider = (*NNOptimizerRMSProp)(nil)

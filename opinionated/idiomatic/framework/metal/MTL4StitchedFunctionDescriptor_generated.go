@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Groups together properties that describe a shader function suitable for stitching.
-//
 // MTL4StitchedFunctionDescriptor is an idiomatic wrapper over the Objective-C class MTL4StitchedFunctionDescriptor.
+//
+// It embeds [MTL4FunctionDescriptor], promoting that type's methods.
+//
+// Groups together properties that describe a shader function suitable for stitching.
 type MTL4StitchedFunctionDescriptor struct {
-	objref.Handle
+	MTL4FunctionDescriptor
 }
 
 // MTL4StitchedFunctionDescriptorFromID adopts an existing Objective-C object as a MTL4StitchedFunctionDescriptor
@@ -25,7 +26,8 @@ func MTL4StitchedFunctionDescriptorFromID(id objc.ID) *MTL4StitchedFunctionDescr
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4StitchedFunctionDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTL4StitchedFunctionDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func mTL4StitchedFunctionDescriptorAdopt(id objc.ID) *MTL4StitchedFunctionDescri
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4StitchedFunctionDescriptor{Handle: objref.Wrap(id)}
+	x := &MTL4StitchedFunctionDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTL4StitchedFunctionDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTL4StitchedFunctionDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTL4StitchedFunctionDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTL4StitchedFunctionDescriptor creates a new MTL4StitchedFunctionDescriptor.
@@ -64,34 +52,31 @@ func NewMTL4StitchedFunctionDescriptor() *MTL4StitchedFunctionDescriptor {
 	return mTL4StitchedFunctionDescriptorAdopt(_id)
 }
 
-// Sets the graph representing how to stitch functions together.
-//
-// WithFunctionGraph sets functionGraph and returns the receiver so calls can be chained.
+// WithFunctionGraph sets the graph representing how to stitch functions together.
 func (x *MTL4StitchedFunctionDescriptor) WithFunctionGraph(functionGraph *FunctionStitchingGraph) *MTL4StitchedFunctionDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionGraph:"), objref.IDOf(functionGraph))
 	return x
 }
 
-// Configures an array of function descriptors with references to functions that contribute to the stitching process.
-//
-// WithFunctionDescriptors sets the collection and returns the receiver so calls can be chained.
+// WithFunctionDescriptors configures an array of function descriptors with references to functions that contribute to the stitching process.
 func (x *MTL4StitchedFunctionDescriptor) WithFunctionDescriptors(items ...MTL4FunctionDescriptorProvider) *MTL4StitchedFunctionDescriptor {
 	_arr := purego.SliceToNSArray(items, func(_v MTL4FunctionDescriptorProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionDescriptors:"), _arr)
 	return x
 }
 
-// Sets the graph representing how to stitch functions together.
+// FunctionGraph sets the graph representing how to stitch functions together.
 func (x *MTL4StitchedFunctionDescriptor) FunctionGraph() *FunctionStitchingGraph {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("functionGraph"))
 	return FunctionStitchingGraphFromID(_r)
 }
 
+// SetFunctionGraph wraps the corresponding Objective-C method.
 func (x *MTL4StitchedFunctionDescriptor) SetFunctionGraph(functionGraph *FunctionStitchingGraph) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionGraph:"), objref.IDOf(functionGraph))
 }
 
-// Configures an array of function descriptors with references to functions that contribute to the stitching process.
+// FunctionDescriptors configures an array of function descriptors with references to functions that contribute to the stitching process.
 //
 // FunctionDescriptors returns the collection as a Go slice.
 func (x *MTL4StitchedFunctionDescriptor) FunctionDescriptors() []*MTL4FunctionDescriptor {
@@ -99,6 +84,7 @@ func (x *MTL4StitchedFunctionDescriptor) FunctionDescriptors() []*MTL4FunctionDe
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTL4FunctionDescriptor { return MTL4FunctionDescriptorFromID(_id) })
 }
 
+// SetFunctionDescriptors wraps the corresponding Objective-C method.
 func (x *MTL4StitchedFunctionDescriptor) SetFunctionDescriptors(functionDescriptors []*MTL4FunctionDescriptor) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionDescriptors:"), purego.SliceToNSArray(functionDescriptors, func(_v *MTL4FunctionDescriptor) objc.ID { return objref.IDOf(_v) }))
 }
@@ -115,3 +101,5 @@ type MTL4StitchedFunctionDescriptorable interface {
 }
 
 var _ MTL4StitchedFunctionDescriptorable = (*MTL4StitchedFunctionDescriptor)(nil)
+
+var _ MTL4FunctionDescriptorProvider = (*MTL4StitchedFunctionDescriptor)(nil)

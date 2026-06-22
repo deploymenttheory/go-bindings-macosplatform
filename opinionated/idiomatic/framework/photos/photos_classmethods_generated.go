@@ -6,240 +6,247 @@ package photos
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Retrieves assets from the specified asset collection.
+// FetchAssetsInAssetCollectionOptions retrieves assets from the specified asset collection.
 func FetchAssetsInAssetCollectionOptions(assetCollection *AssetCollection, options *FetchOptions) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAsset")), objc.RegisterName("fetchAssetsInAssetCollection:options:"), objref.IDOf(assetCollection), objref.IDOf(options))
 	return obj.Wrap(_r)
 }
 
-// Retrieves assets with the specified local-device-specific unique identifiers.
+// FetchAssetsWithLocalIdentifiersOptions retrieves assets with the specified local-device-specific unique identifiers.
 func FetchAssetsWithLocalIdentifiersOptions(identifiers []string, options *FetchOptions) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAsset")), objc.RegisterName("fetchAssetsWithLocalIdentifiers:options:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }), objref.IDOf(options))
 	return obj.Wrap(_r)
 }
 
-// Retrieves assets marked as key assets in the specified asset collection.
+// FetchKeyAssetsInAssetCollectionOptions retrieves assets marked as key assets in the specified asset collection.
 func FetchKeyAssetsInAssetCollectionOptions(assetCollection *AssetCollection, options *FetchOptions) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAsset")), objc.RegisterName("fetchKeyAssetsInAssetCollection:options:"), objref.IDOf(assetCollection), objref.IDOf(options))
 	return obj.Wrap(_r)
 }
 
-// Retrieves assets with the specified burst photo sequence identifier.
+// FetchAssetsWithBurstIdentifierOptions retrieves assets with the specified burst photo sequence identifier.
 func FetchAssetsWithBurstIdentifierOptions(burstIdentifier string, options *FetchOptions) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAsset")), objc.RegisterName("fetchAssetsWithBurstIdentifier:options:"), purego.NSString(burstIdentifier), objref.IDOf(options))
 	return obj.Wrap(_r)
 }
 
-// Retrieves all assets matching the specified options.
+// FetchAssetsWithOptions retrieves all assets matching the specified options.
 func FetchAssetsWithOptions(options *FetchOptions) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAsset")), objc.RegisterName("fetchAssetsWithOptions:"), objref.IDOf(options))
 	return obj.Wrap(_r)
 }
 
-// Retrieves assets with the specified media type.
+// FetchAssetsWithMediaTypeOptions retrieves assets with the specified media type.
 func FetchAssetsWithMediaTypeOptions(mediaType AssetMediaType, options *FetchOptions) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAsset")), objc.RegisterName("fetchAssetsWithMediaType:options:"), mediaType, objref.IDOf(options))
 	return obj.Wrap(_r)
 }
 
-// Creates a request for adding a new image asset to the Photos library.
+// CreationRequestForAssetFromImage creates a request for adding a new image asset to the Photos library.
 func CreationRequestForAssetFromImage(image obj.Object) *AssetChangeRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetChangeRequest")), objc.RegisterName("creationRequestForAssetFromImage:"), objref.IDOf(image))
 	return AssetChangeRequestFromID(_r)
 }
 
-// Creates a request for adding a new image asset to the Photos library, using the image file at the specified URL.
+// CreationRequestForAssetFromImageAtFileURL creates a request for adding a new image asset to the Photos library, using the image file at the specified URL.
 func CreationRequestForAssetFromImageAtFileURL(fileURL string) *AssetChangeRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetChangeRequest")), objc.RegisterName("creationRequestForAssetFromImageAtFileURL:"), rt.FileURL(fileURL))
 	return AssetChangeRequestFromID(_r)
 }
 
-// Creates a request for adding a new video asset to the Photos library, using the video file at the specified URL.
+// CreationRequestForAssetFromVideoAtFileURL creates a request for adding a new video asset to the Photos library, using the video file at the specified URL.
 func CreationRequestForAssetFromVideoAtFileURL(fileURL string) *AssetChangeRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetChangeRequest")), objc.RegisterName("creationRequestForAssetFromVideoAtFileURL:"), rt.FileURL(fileURL))
 	return AssetChangeRequestFromID(_r)
 }
 
-// Creates a request for modifying the specified asset.
+// ChangeRequestForAsset creates a request for modifying the specified asset.
 func ChangeRequestForAsset(asset *Asset) *AssetChangeRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetChangeRequest")), objc.RegisterName("changeRequestForAsset:"), objref.IDOf(asset))
 	return AssetChangeRequestFromID(_r)
 }
 
-// Retrieves asset collections with the specified unique identifiers.
+// FetchAssetCollectionsWithLocalIdentifiersOptions retrieves asset collections with the specified unique identifiers.
 func FetchAssetCollectionsWithLocalIdentifiersOptions(identifiers []string, options *FetchOptions) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetCollection")), objc.RegisterName("fetchAssetCollectionsWithLocalIdentifiers:options:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }), objref.IDOf(options))
 	return obj.Wrap(_r)
 }
 
-// Retrieves asset collections of the specified type containing the specified asset.
+// FetchAssetCollectionsContainingAssetWithTypeOptions retrieves asset collections of the specified type containing the specified asset.
 func FetchAssetCollectionsContainingAssetWithTypeOptions(asset *Asset, type_ AssetCollectionType, options *FetchOptions) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetCollection")), objc.RegisterName("fetchAssetCollectionsContainingAsset:withType:options:"), objref.IDOf(asset), type_, objref.IDOf(options))
 	return obj.Wrap(_r)
 }
 
-// Retrieves asset collections using URLs provided by the Assets Library framework.
+// FetchAssetCollectionsWithALAssetGroupURLsOptions retrieves asset collections using URLs provided by the Assets Library framework.
 func FetchAssetCollectionsWithALAssetGroupURLsOptions(assetGroupURLs []obj.Object, options *FetchOptions) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetCollection")), objc.RegisterName("fetchAssetCollectionsWithALAssetGroupURLs:options:"), purego.SliceToNSArray(assetGroupURLs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(options))
 	return obj.Wrap(_r)
 }
 
-// Creates a temporary asset collection containing the specified assets.
+// TransientAssetCollectionWithAssetsTitle creates a temporary asset collection containing the specified assets.
 func TransientAssetCollectionWithAssetsTitle(assets []*Asset, title string) *AssetCollection {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetCollection")), objc.RegisterName("transientAssetCollectionWithAssets:title:"), purego.SliceToNSArray(assets, func(_v *Asset) objc.ID { return objref.IDOf(_v) }), purego.NSString(title))
 	return AssetCollectionFromID(_r)
 }
 
-// Creates a temporary asset collection containing the assets from the specified fetch result.
+// TransientAssetCollectionWithAssetFetchResultTitle creates a temporary asset collection containing the assets from the specified fetch result.
 func TransientAssetCollectionWithAssetFetchResultTitle(fetchResult obj.Object, title string) *AssetCollection {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetCollection")), objc.RegisterName("transientAssetCollectionWithAssetFetchResult:title:"), objref.IDOf(fetchResult), purego.NSString(title))
 	return AssetCollectionFromID(_r)
 }
 
-// Creates a request for adding a new asset collection to the Photos library.
+// CreationRequestForAssetCollectionWithTitle creates a request for adding a new asset collection to the Photos library.
 func CreationRequestForAssetCollectionWithTitle(title string) *AssetCollectionChangeRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetCollectionChangeRequest")), objc.RegisterName("creationRequestForAssetCollectionWithTitle:"), purego.NSString(title))
 	return AssetCollectionChangeRequestFromID(_r)
 }
 
-// Creates a request for modifying the specified asset collection.
+// ChangeRequestForAssetCollection creates a request for modifying the specified asset collection.
 func ChangeRequestForAssetCollection(assetCollection *AssetCollection) *AssetCollectionChangeRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetCollectionChangeRequest")), objc.RegisterName("changeRequestForAssetCollection:"), objref.IDOf(assetCollection))
 	return AssetCollectionChangeRequestFromID(_r)
 }
 
-// Creates a request for modifying the specified asset collection, with a fetch result for tracking changes.
+// ChangeRequestForAssetCollectionAssets creates a request for modifying the specified asset collection, with a fetch result for tracking changes.
 func ChangeRequestForAssetCollectionAssets(assetCollection *AssetCollection, assets obj.Object) *AssetCollectionChangeRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetCollectionChangeRequest")), objc.RegisterName("changeRequestForAssetCollection:assets:"), objref.IDOf(assetCollection), objref.IDOf(assets))
 	return AssetCollectionChangeRequestFromID(_r)
 }
 
-// Creates a request for adding a new asset to the Photos library using asset resources.
+// CreationRequestForAsset creates a request for adding a new asset to the Photos library using asset resources.
 func CreationRequestForAsset() *AssetCreationRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetCreationRequest")), objc.RegisterName("creationRequestForAsset"))
 	return AssetCreationRequestFromID(_r)
 }
 
-// Returns a Boolean value indicating whether Photos supports creating an asset with the specified combination of resource types.
+// SupportsAssetResourceTypes returns a Boolean value indicating whether Photos supports creating an asset with the specified combination of resource types.
 func SupportsAssetResourceTypes(types []obj.Object) bool {
 	_r := objc.Send[bool](objc.ID(_class("PHAssetCreationRequest")), objc.RegisterName("supportsAssetResourceTypes:"), purego.SliceToNSArray(types, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
-// Returns the list of data resources associated with an asset.
+// AssetResourcesForAsset returns the list of data resources associated with an asset.
 func AssetResourcesForAsset(asset *Asset) []*AssetResource {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetResource")), objc.RegisterName("assetResourcesForAsset:"), objref.IDOf(asset))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *AssetResource { return AssetResourceFromID(_id) })
 }
 
-// Returns the list of data resources associated with a Live Photo object.
+// AssetResourcesForLivePhoto returns the list of data resources associated with a Live Photo object.
 func AssetResourcesForLivePhoto(livePhoto *LivePhoto) []*AssetResource {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetResource")), objc.RegisterName("assetResourcesForLivePhoto:"), objref.IDOf(livePhoto))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *AssetResource { return AssetResourceFromID(_id) })
 }
 
-// Returns the shared asset resource manager object.
+// DefaultManager returns the shared asset resource manager object.
 func DefaultManager() *AssetResourceManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetResourceManager")), objc.RegisterName("defaultManager"))
 	return AssetResourceManagerFromID(_r)
 }
 
-// Retrieves collections from the specified collection list.
+// FetchCollectionsInCollectionListOptions retrieves collections from the specified collection list.
 func FetchCollectionsInCollectionListOptions(collectionList *CollectionList, options *FetchOptions) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHCollection")), objc.RegisterName("fetchCollectionsInCollectionList:options:"), objref.IDOf(collectionList), objref.IDOf(options))
 	return obj.Wrap(_r)
 }
 
-// Retrieves collections from the root of the photo library’s hierarchy of user-created albums and folders.
+// FetchTopLevelUserCollectionsWithOptions retrieves collections from the root of the photo library’s hierarchy of user-created albums and folders.
 func FetchTopLevelUserCollectionsWithOptions(options *FetchOptions) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHCollection")), objc.RegisterName("fetchTopLevelUserCollectionsWithOptions:"), objref.IDOf(options))
 	return obj.Wrap(_r)
 }
 
-// Retrieves collection lists that contain the specified collection.
+// FetchCollectionListsContainingCollectionOptions retrieves collection lists that contain the specified collection.
 func FetchCollectionListsContainingCollectionOptions(collection *Collection, options *FetchOptions) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHCollectionList")), objc.RegisterName("fetchCollectionListsContainingCollection:options:"), objref.IDOf(collection), objref.IDOf(options))
 	return obj.Wrap(_r)
 }
 
-// Retrieves collection lists with the specified local-device-specific unique identifiers.
+// FetchCollectionListsWithLocalIdentifiersOptions retrieves collection lists with the specified local-device-specific unique identifiers.
 func FetchCollectionListsWithLocalIdentifiersOptions(identifiers []string, options *FetchOptions) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHCollectionList")), objc.RegisterName("fetchCollectionListsWithLocalIdentifiers:options:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }), objref.IDOf(options))
 	return obj.Wrap(_r)
 }
 
-// Creates a temporary collection list that contains the specified asset collections.
+// TransientCollectionListWithCollectionsTitle creates a temporary collection list that contains the specified asset collections.
 func TransientCollectionListWithCollectionsTitle(collections []*Collection, title string) *CollectionList {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHCollectionList")), objc.RegisterName("transientCollectionListWithCollections:title:"), purego.SliceToNSArray(collections, func(_v *Collection) objc.ID { return objref.IDOf(_v) }), purego.NSString(title))
 	return CollectionListFromID(_r)
 }
 
-// Creates a temporary collection list containing the asset collections in the specified fetch result.
+// TransientCollectionListWithCollectionsFetchResultTitle creates a temporary collection list containing the asset collections in the specified fetch result.
 func TransientCollectionListWithCollectionsFetchResultTitle(fetchResult obj.Object, title string) *CollectionList {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHCollectionList")), objc.RegisterName("transientCollectionListWithCollectionsFetchResult:title:"), objref.IDOf(fetchResult), purego.NSString(title))
 	return CollectionListFromID(_r)
 }
 
-// Creates a request for adding a new collection list to the Photos library.
+// CreationRequestForCollectionListWithTitle creates a request for adding a new collection list to the Photos library.
 func CreationRequestForCollectionListWithTitle(title string) *CollectionListChangeRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHCollectionListChangeRequest")), objc.RegisterName("creationRequestForCollectionListWithTitle:"), purego.NSString(title))
 	return CollectionListChangeRequestFromID(_r)
 }
 
-// Creates a request for modifying the specified collection list.
+// ChangeRequestForCollectionList creates a request for modifying the specified collection list.
 func ChangeRequestForCollectionList(collectionList *CollectionList) *CollectionListChangeRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHCollectionListChangeRequest")), objc.RegisterName("changeRequestForCollectionList:"), objref.IDOf(collectionList))
 	return CollectionListChangeRequestFromID(_r)
 }
 
-// Creates a request for modifying the specified collection list, with a fetch result for tracking changes.
+// ChangeRequestForCollectionListChildCollections creates a request for modifying the specified collection list, with a fetch result for tracking changes.
 func ChangeRequestForCollectionListChildCollections(collectionList *CollectionList, childCollections obj.Object) *CollectionListChangeRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHCollectionListChangeRequest")), objc.RegisterName("changeRequestForCollectionList:childCollections:"), objref.IDOf(collectionList), objref.IDOf(childCollections))
 	return CollectionListChangeRequestFromID(_r)
 }
 
-// Creates a request to add, remove, or rearrange child collections in the top-level collection list.
+// ChangeRequestForTopLevelCollectionListUserCollections creates a request to add, remove, or rearrange child collections in the top-level collection list.
 func ChangeRequestForTopLevelCollectionListUserCollections(childCollections obj.Object) *CollectionListChangeRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHCollectionListChangeRequest")), objc.RegisterName("changeRequestForTopLevelCollectionListUserCollections:"), objref.IDOf(childCollections))
 	return CollectionListChangeRequestFromID(_r)
 }
 
-// Creates a change details object that summarizes the differences between two fetch results.
+// ChangeDetailsFromFetchResultToFetchResultChangedObjects creates a change details object that summarizes the differences between two fetch results.
 func ChangeDetailsFromFetchResultToFetchResultChangedObjects(fromResult obj.Object, toResult obj.Object, changedObjects []obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHFetchResultChangeDetails")), objc.RegisterName("changeDetailsFromFetchResult:toFetchResult:changedObjects:"), objref.IDOf(fromResult), objref.IDOf(toResult), purego.SliceToNSArray(changedObjects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
-// Returns the shared image manager object.
+// PHImageManagerDefaultManager returns the shared image manager object.
 func PHImageManagerDefaultManager() *ImageManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHImageManager")), objc.RegisterName("defaultManager"))
 	return ImageManagerFromID(_r)
 }
 
-// Cancels an asynchronous request
+// RequestLivePhotoWithResourceFileURLsPlaceholderImageTargetSizeContentModeResultHandler asynchronously loads a Live Photo from the specified resource files.
+func RequestLivePhotoWithResourceFileURLsPlaceholderImageTargetSizeContentModeResultHandler(fileURLs []obj.Object, image obj.Object, targetSize corefoundation.CGSize, contentMode ImageContentMode, resultHandler func(obj.Object, obj.Object)) int32 {
+	_r := objc.Send[int32](objc.ID(_class("PHLivePhoto")), objc.RegisterName("requestLivePhotoWithResourceFileURLs:placeholderImage:targetSize:contentMode:resultHandler:"), purego.SliceToNSArray(fileURLs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(image), targetSize, contentMode, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { resultHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return _r
+}
+
+// CancelLivePhotoRequestWithRequestID cancels an asynchronous request
 func CancelLivePhotoRequestWithRequestID(requestID int32) {
 	objc.Send[objc.ID](objc.ID(_class("PHLivePhoto")), objc.RegisterName("cancelLivePhotoRequestWithRequestID:"), requestID)
 }
 
-// Retrieves the shared photo library object.
+// SharedPhotoLibrary retrieves the shared photo library object.
 func SharedPhotoLibrary() *PhotoLibrary {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHPhotoLibrary")), objc.RegisterName("sharedPhotoLibrary"))
 	return PhotoLibraryFromID(_r)
 }
 
-// Returns the app’s authorization to access the user’s photo library for the specified access level.
+// AuthorizationStatusForAccessLevel returns the app’s authorization to access the user’s photo library for the specified access level.
 func AuthorizationStatusForAccessLevel(accessLevel AccessLevel) AuthorizationStatus {
 	_r := objc.Send[AuthorizationStatus](objc.ID(_class("PHPhotoLibrary")), objc.RegisterName("authorizationStatusForAccessLevel:"), accessLevel)
 	return _r
 }
 
-// Returns information about your app’s authorization to access the user’s photo library.
+// PHPhotoLibraryAuthorizationStatus returns information about your app’s authorization to access the user’s photo library.
 func PHPhotoLibraryAuthorizationStatus() AuthorizationStatus {
 	_r := objc.Send[AuthorizationStatus](objc.ID(_class("PHPhotoLibrary")), objc.RegisterName("authorizationStatus"))
 	return _r

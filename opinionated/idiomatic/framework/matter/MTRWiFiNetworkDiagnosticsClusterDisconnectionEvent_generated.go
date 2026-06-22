@@ -23,7 +23,8 @@ func MTRWiFiNetworkDiagnosticsClusterDisconnectionEventFromID(id objc.ID) *MTRWi
 	if id == 0 {
 		return nil
 	}
-	x := &MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRWiFiNetworkDiagnosticsClusterDisconnectionEventAdopt(id objc.ID) *MTRWiF
 	if id == 0 {
 		return nil
 	}
-	x := &MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent{Handle: objref.Wrap(id)}
+	x := &MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) IsKind(className st
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRWiFiNetworkDiagnosticsClusterDisconnectionEvent creates a new MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent.
 func NewMTRWiFiNetworkDiagnosticsClusterDisconnectionEvent() *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent")), objc.RegisterName("new"))
 	return mTRWiFiNetworkDiagnosticsClusterDisconnectionEventAdopt(_id)
 }
 
-// WithReasonCode sets reasonCode and returns the receiver so calls can be chained.
+// WithReasonCode sets the property and returns the receiver so calls can be chained.
 func (x *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) WithReasonCode(reasonCode obj.Object) *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReasonCode:"), objref.IDOf(reasonCode))
 	return x
 }
 
+// ReasonCode wraps the corresponding Objective-C method.
 func (x *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) ReasonCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reasonCode"))
 	return obj.Wrap(_r)
 }
 
+// SetReasonCode wraps the corresponding Objective-C method.
 func (x *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) SetReasonCode(reasonCode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReasonCode:"), objref.IDOf(reasonCode))
 }

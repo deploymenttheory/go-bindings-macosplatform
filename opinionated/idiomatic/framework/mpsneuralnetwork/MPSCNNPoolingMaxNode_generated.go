@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A node representing a MPSCNNPoolingMax kernel The default edge mode is MPSImageEdgeModeClamp
-//
 // CNNPoolingMaxNode is an idiomatic wrapper over the Objective-C class MPSCNNPoolingMaxNode.
+//
+// It embeds [CNNPoolingNode], promoting that type's methods.
+//
+// A node representing a MPSCNNPoolingMax kernel The default edge mode is MPSImageEdgeModeClamp
 type CNNPoolingMaxNode struct {
-	objref.Handle
+	CNNPoolingNode
 }
 
 // CNNPoolingMaxNodeFromID adopts an existing Objective-C object as a CNNPoolingMaxNode
@@ -25,7 +26,8 @@ func CNNPoolingMaxNodeFromID(id objc.ID) *CNNPoolingMaxNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNPoolingMaxNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNPoolingMaxNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func cNNPoolingMaxNodeAdopt(id objc.ID) *CNNPoolingMaxNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNPoolingMaxNode{Handle: objref.Wrap(id)}
+	x := &CNNPoolingMaxNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNPoolingMaxNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNPoolingMaxNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNPoolingMaxNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNPoolingMaxNode creates a new CNNPoolingMaxNode.
@@ -64,9 +52,7 @@ func NewCNNPoolingMaxNode() *CNNPoolingMaxNode {
 	return cNNPoolingMaxNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNPoolingMaxNode) WithLabel(label string) *CNNPoolingMaxNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -79,3 +65,7 @@ type CNNPoolingMaxNodeable interface {
 }
 
 var _ CNNPoolingMaxNodeable = (*CNNPoolingMaxNode)(nil)
+
+var _ CNNPoolingNodeProvider = (*CNNPoolingMaxNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNPoolingMaxNode)(nil)

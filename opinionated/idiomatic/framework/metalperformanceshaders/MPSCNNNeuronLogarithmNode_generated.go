@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a logarithm neuron filter.
-//
 // CNNNeuronLogarithmNode is an idiomatic wrapper over the Objective-C class MPSCNNNeuronLogarithmNode.
+//
+// It embeds [CNNNeuronNode], promoting that type's methods.
+//
+// A representation of a logarithm neuron filter.
 type CNNNeuronLogarithmNode struct {
-	objref.Handle
+	CNNNeuronNode
 }
 
 // CNNNeuronLogarithmNodeFromID adopts an existing Objective-C object as a CNNNeuronLogarithmNode
@@ -25,7 +26,8 @@ func CNNNeuronLogarithmNodeFromID(id objc.ID) *CNNNeuronLogarithmNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNeuronLogarithmNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNNeuronLogarithmNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,47 +40,27 @@ func cNNNeuronLogarithmNodeAdopt(id objc.ID) *CNNNeuronLogarithmNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNeuronLogarithmNode{Handle: objref.Wrap(id)}
+	x := &CNNNeuronLogarithmNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNNeuronLogarithmNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNNeuronLogarithmNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNNeuronLogarithmNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Init a node representing a MPSCNNNeuronLogarithm kernel For each pixel, applies the following function:
-//
-// NewCNNNeuronLogarithmNodeWithSourceABC creates a new CNNNeuronLogarithmNode.
+// NewCNNNeuronLogarithmNodeWithSourceABC init a node representing a MPSCNNNeuronLogarithm kernel For each pixel, applies the following function:
 func NewCNNNeuronLogarithmNodeWithSourceABC(sourceNode obj.Object, a float32, b float32, c float32) *CNNNeuronLogarithmNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronLogarithmNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:a:b:c:"), objref.IDOf(sourceNode), a, b, c)
 	return cNNNeuronLogarithmNodeAdopt(_id)
 }
 
-// Init a node with default values for parameters a, b, and c
-//
-// NewCNNNeuronLogarithmNodeWithSource creates a new CNNNeuronLogarithmNode.
+// NewCNNNeuronLogarithmNodeWithSource init a node with default values for parameters a, b, and c
 func NewCNNNeuronLogarithmNodeWithSource(sourceNode obj.Object) *CNNNeuronLogarithmNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronLogarithmNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return cNNNeuronLogarithmNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNNeuronLogarithmNode) WithLabel(label string) *CNNNeuronLogarithmNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -91,3 +73,7 @@ type CNNNeuronLogarithmNodeable interface {
 }
 
 var _ CNNNeuronLogarithmNodeable = (*CNNNeuronLogarithmNode)(nil)
+
+var _ CNNNeuronNodeProvider = (*CNNNeuronLogarithmNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNNeuronLogarithmNode)(nil)

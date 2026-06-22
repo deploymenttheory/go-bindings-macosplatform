@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that displays a user interface where users preview and edit a screen recording that you create with ReplayKit.
-//
 // PreviewViewController is an idiomatic wrapper over the Objective-C class RPPreviewViewController.
+//
+// An object that displays a user interface where users preview and edit a screen recording that you create with ReplayKit.
 type PreviewViewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PreviewViewControllerFromID(id objc.ID) *PreviewViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &PreviewViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PreviewViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func previewViewControllerAdopt(id objc.ID) *PreviewViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &PreviewViewController{Handle: objref.Wrap(id)}
+	x := &PreviewViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *PreviewViewController) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *PreviewViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PreviewViewController) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewPreviewViewController creates a new PreviewViewController.

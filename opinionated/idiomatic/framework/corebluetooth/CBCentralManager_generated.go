@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that scans for, discovers, connects to, and manages peripherals.
-//
 // CentralManager is an idiomatic wrapper over the Objective-C class CBCentralManager.
+//
+// It embeds [Manager], promoting that type's methods.
+//
+// An object that scans for, discovers, connects to, and manages peripherals.
 type CentralManager struct {
-	objref.Handle
+	Manager
 }
 
 // CentralManagerFromID adopts an existing Objective-C object as a CentralManager
@@ -25,7 +26,8 @@ func CentralManagerFromID(id objc.ID) *CentralManager {
 	if id == 0 {
 		return nil
 	}
-	x := &CentralManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CentralManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func centralManagerAdopt(id objc.ID) *CentralManager {
 	if id == 0 {
 		return nil
 	}
-	x := &CentralManager{Handle: objref.Wrap(id)}
+	x := &CentralManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CentralManager) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CentralManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CentralManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCentralManager creates a new CentralManager.
@@ -64,39 +52,39 @@ func NewCentralManager() *CentralManager {
 	return centralManagerAdopt(_id)
 }
 
-// Returns a list of known peripherals by their identifiers.
+// RetrievePeripheralsWithIdentifiers returns a list of known peripherals by their identifiers.
 func (x *CentralManager) RetrievePeripheralsWithIdentifiers(identifiers []obj.Object) []*Peripheral {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("retrievePeripheralsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Peripheral { return PeripheralFromID(_id) })
 }
 
-// Returns a list of the peripherals connected to the system whose services match a given set of criteria.
+// RetrieveConnectedPeripheralsWithServices returns a list of the peripherals connected to the system whose services match a given set of criteria.
 func (x *CentralManager) RetrieveConnectedPeripheralsWithServices(serviceUUIDs []*UUID) []*Peripheral {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("retrieveConnectedPeripheralsWithServices:"), purego.SliceToNSArray(serviceUUIDs, func(_v *UUID) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Peripheral { return PeripheralFromID(_id) })
 }
 
-// Scans for peripherals that are advertising services.
+// ScanForPeripheralsWithServicesOptions scans for peripherals that are advertising services.
 func (x *CentralManager) ScanForPeripheralsWithServicesOptions(serviceUUIDs []*UUID, options obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scanForPeripheralsWithServices:options:"), purego.SliceToNSArray(serviceUUIDs, func(_v *UUID) objc.ID { return objref.IDOf(_v) }), objref.IDOf(options))
 }
 
-// Asks the central manager to stop scanning for peripherals.
+// StopScan asks the central manager to stop scanning for peripherals.
 func (x *CentralManager) StopScan() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopScan"))
 }
 
-// Establishes a local connection to a peripheral.
+// ConnectPeripheralOptions establishes a local connection to a peripheral.
 func (x *CentralManager) ConnectPeripheralOptions(peripheral *Peripheral, options obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectPeripheral:options:"), objref.IDOf(peripheral), objref.IDOf(options))
 }
 
-// Cancels an active or pending local connection to a peripheral.
+// CancelPeripheralConnection cancels an active or pending local connection to a peripheral.
 func (x *CentralManager) CancelPeripheralConnection(peripheral *Peripheral) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelPeripheralConnection:"), objref.IDOf(peripheral))
 }
 
-// Whether or not the central is currently scanning.
+// IsScanning whether or not the central is currently scanning.
 func (x *CentralManager) IsScanning() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isScanning"))
 	return _r
@@ -115,3 +103,5 @@ type CentralManagerable interface {
 }
 
 var _ CentralManagerable = (*CentralManager)(nil)
+
+var _ ManagerProvider = (*CentralManager)(nil)

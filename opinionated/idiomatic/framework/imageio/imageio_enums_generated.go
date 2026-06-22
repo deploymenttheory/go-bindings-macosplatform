@@ -30,6 +30,8 @@ const (
 	KCGImageMetadataTypeStructure CGImageMetadataType = 6
 )
 
+// String returns the CGImageMetadataType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGImageMetadataType) String() string {
 	switch e {
 	case KCGImageMetadataTypeInvalid:
@@ -71,6 +73,8 @@ const (
 	KCGImageStatusComplete CGImageSourceStatus = 0
 )
 
+// String returns the CGImageSourceStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGImageSourceStatus) String() string {
 	switch e {
 	case KCGImageStatusUnexpectedEOF:

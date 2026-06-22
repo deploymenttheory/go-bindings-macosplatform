@@ -23,7 +23,8 @@ func ProcessCapabilityFromID(id objc.ID) *ProcessCapability {
 	if id == 0 {
 		return nil
 	}
-	x := &ProcessCapability{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ProcessCapability{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func processCapabilityAdopt(id objc.ID) *ProcessCapability {
 	if id == 0 {
 		return nil
 	}
-	x := &ProcessCapability{Handle: objref.Wrap(id)}
+	x := &ProcessCapability{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *ProcessCapability) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *ProcessCapability) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ProcessCapability) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewProcessCapability creates a new ProcessCapability.

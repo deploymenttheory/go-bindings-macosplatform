@@ -13,8 +13,10 @@ import (
 )
 
 // DOMHTMLDocument is an idiomatic wrapper over the Objective-C class DOMHTMLDocument.
+//
+// It embeds [DOMDocument], promoting that type's methods.
 type DOMHTMLDocument struct {
-	objref.Handle
+	DOMDocument
 }
 
 // DOMHTMLDocumentFromID adopts an existing Objective-C object as a DOMHTMLDocument
@@ -23,7 +25,8 @@ func DOMHTMLDocumentFromID(id objc.ID) *DOMHTMLDocument {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMHTMLDocument{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMHTMLDocument{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +39,10 @@ func dOMHTMLDocumentAdopt(id objc.ID) *DOMHTMLDocument {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMHTMLDocument{Handle: objref.Wrap(id)}
+	x := &DOMHTMLDocument{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMHTMLDocument) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMHTMLDocument) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMHTMLDocument) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMHTMLDocument creates a new DOMHTMLDocument.
@@ -62,167 +51,180 @@ func NewDOMHTMLDocument() *DOMHTMLDocument {
 	return dOMHTMLDocumentAdopt(_id)
 }
 
-// WithDir sets dir and returns the receiver so calls can be chained.
+// WithDir sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLDocument) WithDir(dir string) *DOMHTMLDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return x
 }
 
-// WithDesignMode sets designMode and returns the receiver so calls can be chained.
+// WithDesignMode sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLDocument) WithDesignMode(designMode string) *DOMHTMLDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesignMode:"), purego.NSString(designMode))
 	return x
 }
 
-// WithBgColor sets bgColor and returns the receiver so calls can be chained.
+// WithBgColor sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLDocument) WithBgColor(bgColor string) *DOMHTMLDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBgColor:"), purego.NSString(bgColor))
 	return x
 }
 
-// WithFgColor sets fgColor and returns the receiver so calls can be chained.
+// WithFgColor sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLDocument) WithFgColor(fgColor string) *DOMHTMLDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFgColor:"), purego.NSString(fgColor))
 	return x
 }
 
-// WithAlinkColor sets alinkColor and returns the receiver so calls can be chained.
+// WithAlinkColor sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLDocument) WithAlinkColor(alinkColor string) *DOMHTMLDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlinkColor:"), purego.NSString(alinkColor))
 	return x
 }
 
-// WithLinkColor sets linkColor and returns the receiver so calls can be chained.
+// WithLinkColor sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLDocument) WithLinkColor(linkColor string) *DOMHTMLDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinkColor:"), purego.NSString(linkColor))
 	return x
 }
 
-// WithVlinkColor sets vlinkColor and returns the receiver so calls can be chained.
+// WithVlinkColor sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLDocument) WithVlinkColor(vlinkColor string) *DOMHTMLDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVlinkColor:"), purego.NSString(vlinkColor))
 	return x
 }
 
-// WithXmlVersion sets xmlVersion and returns the receiver so calls can be chained.
+// WithXmlVersion sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLDocument) WithXmlVersion(xmlVersion string) *DOMHTMLDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXmlVersion:"), purego.NSString(xmlVersion))
 	return x
 }
 
-// WithXmlStandalone sets xmlStandalone and returns the receiver so calls can be chained.
+// WithXmlStandalone sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLDocument) WithXmlStandalone(xmlStandalone bool) *DOMHTMLDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXmlStandalone:"), xmlStandalone)
 	return x
 }
 
-// WithDocumentURI sets documentURI and returns the receiver so calls can be chained.
+// WithDocumentURI sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLDocument) WithDocumentURI(documentURI string) *DOMHTMLDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentURI:"), purego.NSString(documentURI))
 	return x
 }
 
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLDocument) WithTitle(title string) *DOMHTMLDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// WithCookie sets cookie and returns the receiver so calls can be chained.
+// WithCookie sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLDocument) WithCookie(cookie string) *DOMHTMLDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCookie:"), purego.NSString(cookie))
 	return x
 }
 
-// WithBody sets body and returns the receiver so calls can be chained.
+// WithBody sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLDocument) WithBody(body DOMHTMLElementProvider) *DOMHTMLDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBody:"), objref.IDOf(body))
 	return x
 }
 
-// WithCharset sets charset and returns the receiver so calls can be chained.
+// WithCharset sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLDocument) WithCharset(charset string) *DOMHTMLDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharset:"), purego.NSString(charset))
 	return x
 }
 
-// WithSelectedStylesheetSet sets selectedStylesheetSet and returns the receiver so calls can be chained.
+// WithSelectedStylesheetSet sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLDocument) WithSelectedStylesheetSet(selectedStylesheetSet string) *DOMHTMLDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedStylesheetSet:"), purego.NSString(selectedStylesheetSet))
 	return x
 }
 
-// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLDocument) WithNodeValue(nodeValue string) *DOMHTMLDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets prefix and returns the receiver so calls can be chained.
+// WithPrefix sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLDocument) WithPrefix(prefix string) *DOMHTMLDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets textContent and returns the receiver so calls can be chained.
+// WithTextContent sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLDocument) WithTextContent(textContent string) *DOMHTMLDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
+// Open wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) Open() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("open"))
 }
 
+// Close wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) Close() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
 }
 
+// Write wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) Write(text string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("write:"), purego.NSString(text))
 }
 
+// Writeln wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) Writeln(text string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeln:"), purego.NSString(text))
 }
 
+// Clear wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) Clear() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clear"))
 }
 
+// CaptureEvents wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) CaptureEvents() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("captureEvents"))
 }
 
+// ReleaseEvents wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) ReleaseEvents() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("releaseEvents"))
 }
 
+// Embeds wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) Embeds() *DOMHTMLCollection {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("embeds"))
 	return DOMHTMLCollectionFromID(_r)
 }
 
+// Plugins wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) Plugins() *DOMHTMLCollection {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("plugins"))
 	return DOMHTMLCollectionFromID(_r)
 }
 
+// Scripts wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) Scripts() *DOMHTMLCollection {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scripts"))
 	return DOMHTMLCollectionFromID(_r)
 }
 
+// Width wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) Width() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("width"))
 	return _r
 }
 
+// Height wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) Height() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("height"))
 	return _r
 }
 
+// Dir wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) Dir() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dir"))
 	if _r == 0 {
@@ -231,10 +233,12 @@ func (x *DOMHTMLDocument) Dir() string {
 	return purego.GoString(_r)
 }
 
+// SetDir wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) SetDir(dir string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
 }
 
+// DesignMode wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) DesignMode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("designMode"))
 	if _r == 0 {
@@ -243,10 +247,12 @@ func (x *DOMHTMLDocument) DesignMode() string {
 	return purego.GoString(_r)
 }
 
+// SetDesignMode wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) SetDesignMode(designMode string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesignMode:"), purego.NSString(designMode))
 }
 
+// CompatMode wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) CompatMode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compatMode"))
 	if _r == 0 {
@@ -255,6 +261,7 @@ func (x *DOMHTMLDocument) CompatMode() string {
 	return purego.GoString(_r)
 }
 
+// BgColor wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) BgColor() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bgColor"))
 	if _r == 0 {
@@ -263,10 +270,12 @@ func (x *DOMHTMLDocument) BgColor() string {
 	return purego.GoString(_r)
 }
 
+// SetBgColor wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) SetBgColor(bgColor string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBgColor:"), purego.NSString(bgColor))
 }
 
+// FgColor wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) FgColor() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fgColor"))
 	if _r == 0 {
@@ -275,10 +284,12 @@ func (x *DOMHTMLDocument) FgColor() string {
 	return purego.GoString(_r)
 }
 
+// SetFgColor wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) SetFgColor(fgColor string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFgColor:"), purego.NSString(fgColor))
 }
 
+// AlinkColor wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) AlinkColor() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alinkColor"))
 	if _r == 0 {
@@ -287,10 +298,12 @@ func (x *DOMHTMLDocument) AlinkColor() string {
 	return purego.GoString(_r)
 }
 
+// SetAlinkColor wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) SetAlinkColor(alinkColor string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlinkColor:"), purego.NSString(alinkColor))
 }
 
+// LinkColor wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) LinkColor() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("linkColor"))
 	if _r == 0 {
@@ -299,10 +312,12 @@ func (x *DOMHTMLDocument) LinkColor() string {
 	return purego.GoString(_r)
 }
 
+// SetLinkColor wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) SetLinkColor(linkColor string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinkColor:"), purego.NSString(linkColor))
 }
 
+// VlinkColor wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) VlinkColor() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vlinkColor"))
 	if _r == 0 {
@@ -311,17 +326,18 @@ func (x *DOMHTMLDocument) VlinkColor() string {
 	return purego.GoString(_r)
 }
 
+// SetVlinkColor wraps the corresponding Objective-C method.
 func (x *DOMHTMLDocument) SetVlinkColor(vlinkColor string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVlinkColor:"), purego.NSString(vlinkColor))
 }
 
-// Creates a document fragment containing the given HTML markup.
+// CreateDocumentFragmentWithMarkupStringBaseURL creates a document fragment containing the given HTML markup.
 func (x *DOMHTMLDocument) CreateDocumentFragmentWithMarkupStringBaseURL(markupString string, baseURL string) *DOMDocumentFragment {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createDocumentFragmentWithMarkupString:baseURL:"), purego.NSString(markupString), rt.FileURL(baseURL))
 	return DOMDocumentFragmentFromID(_r)
 }
 
-// Creates a document fragment containing the given text.
+// CreateDocumentFragmentWithText creates a document fragment containing the given text.
 func (x *DOMHTMLDocument) CreateDocumentFragmentWithText(text string) *DOMDocumentFragment {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createDocumentFragmentWithText:"), purego.NSString(text))
 	return DOMDocumentFragmentFromID(_r)
@@ -380,3 +396,11 @@ type DOMHTMLDocumentable interface {
 }
 
 var _ DOMHTMLDocumentable = (*DOMHTMLDocument)(nil)
+
+var _ DOMDocumentProvider = (*DOMHTMLDocument)(nil)
+
+var _ DOMNodeProvider = (*DOMHTMLDocument)(nil)
+
+var _ DOMObjectProvider = (*DOMHTMLDocument)(nil)
+
+var _ WebScriptObjectProvider = (*DOMHTMLDocument)(nil)

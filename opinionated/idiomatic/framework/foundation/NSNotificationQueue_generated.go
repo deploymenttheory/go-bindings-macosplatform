@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A notification center buffer.
-//
 // NotificationQueue is an idiomatic wrapper over the Objective-C class NSNotificationQueue.
+//
+// A notification center buffer.
 type NotificationQueue struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NotificationQueueFromID(id objc.ID) *NotificationQueue {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationQueue{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NotificationQueue{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func notificationQueueAdopt(id objc.ID) *NotificationQueue {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationQueue{Handle: objref.Wrap(id)}
+	x := &NotificationQueue{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +60,12 @@ func (x *NotificationQueue) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationQueue) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNotificationQueueWithNotificationCenter creates a new NotificationQueue.
 func NewNotificationQueueWithNotificationCenter(notificationCenter *NotificationCenter) *NotificationQueue {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNotificationQueue")), objc.RegisterName("alloc"))
@@ -65,20 +73,23 @@ func NewNotificationQueueWithNotificationCenter(notificationCenter *Notification
 	return notificationQueueAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *NotificationQueue) WithScriptingProperties(scriptingProperties obj.Object) *NotificationQueue {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// EnqueueNotificationPostingStyle wraps the corresponding Objective-C method.
 func (x *NotificationQueue) EnqueueNotificationPostingStyle(notification *Notification, postingStyle PostingStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enqueueNotification:postingStyle:"), objref.IDOf(notification), postingStyle)
 }
 
+// EnqueueNotificationPostingStyleCoalesceMaskForModes wraps the corresponding Objective-C method.
 func (x *NotificationQueue) EnqueueNotificationPostingStyleCoalesceMaskForModes(notification *Notification, postingStyle PostingStyle, coalesceMask NotificationCoalescing, modes []*String) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enqueueNotification:postingStyle:coalesceMask:forModes:"), objref.IDOf(notification), postingStyle, coalesceMask, purego.SliceToNSArray(modes, func(_v *String) objc.ID { return objref.IDOf(_v) }))
 }
 
+// DequeueNotificationsMatchingCoalesceMask wraps the corresponding Objective-C method.
 func (x *NotificationQueue) DequeueNotificationsMatchingCoalesceMask(notification *Notification, coalesceMask int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dequeueNotificationsMatching:coalesceMask:"), objref.IDOf(notification), coalesceMask)
 }

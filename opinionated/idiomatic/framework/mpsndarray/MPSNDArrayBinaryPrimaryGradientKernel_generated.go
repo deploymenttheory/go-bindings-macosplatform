@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ArrayBinaryPrimaryGradientKernel is an idiomatic wrapper over the Objective-C class MPSNDArrayBinaryPrimaryGradientKernel.
+//
+// ArrayBinaryPrimaryGradientKernel is an abstract base — you do not construct it directly. Construct one of [ArrayGatherGradient] and pass it where a ArrayBinaryPrimaryGradientKernel is accepted.
 type ArrayBinaryPrimaryGradientKernel struct {
-	objref.Handle
+	ArrayMultiaryGradientKernel
 }
 
 // ArrayBinaryPrimaryGradientKernelFromID adopts an existing Objective-C object as a ArrayBinaryPrimaryGradientKernel
@@ -23,7 +24,8 @@ func ArrayBinaryPrimaryGradientKernelFromID(id objc.ID) *ArrayBinaryPrimaryGradi
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayBinaryPrimaryGradientKernel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ArrayBinaryPrimaryGradientKernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,30 +38,10 @@ func arrayBinaryPrimaryGradientKernelAdopt(id objc.ID) *ArrayBinaryPrimaryGradie
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayBinaryPrimaryGradientKernel{Handle: objref.Wrap(id)}
+	x := &ArrayBinaryPrimaryGradientKernel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ArrayBinaryPrimaryGradientKernel) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ArrayBinaryPrimaryGradientKernel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ArrayBinaryPrimaryGradientKernel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewArrayBinaryPrimaryGradientKernel creates a new ArrayBinaryPrimaryGradientKernel.
-func NewArrayBinaryPrimaryGradientKernel() *ArrayBinaryPrimaryGradientKernel {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayBinaryPrimaryGradientKernel")), objc.RegisterName("new"))
-	return arrayBinaryPrimaryGradientKernelAdopt(_id)
 }
 
 // ArrayBinaryPrimaryGradientKernelable is the interface implemented by [ArrayBinaryPrimaryGradientKernel], for mocking and DI.
@@ -68,3 +50,14 @@ type ArrayBinaryPrimaryGradientKernelable interface {
 }
 
 var _ ArrayBinaryPrimaryGradientKernelable = (*ArrayBinaryPrimaryGradientKernel)(nil)
+
+// isArrayBinaryPrimaryGradientKernel marks ArrayBinaryPrimaryGradientKernel — and, by embedding promotion, its
+// subclasses — as a member of the ArrayBinaryPrimaryGradientKernel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ArrayBinaryPrimaryGradientKernel) isArrayBinaryPrimaryGradientKernel() {}
+
+var _ ArrayBinaryPrimaryGradientKernelProvider = (*ArrayBinaryPrimaryGradientKernel)(nil)
+
+var _ ArrayMultiaryGradientKernelProvider = (*ArrayBinaryPrimaryGradientKernel)(nil)
+
+var _ ArrayMultiaryBaseProvider = (*ArrayBinaryPrimaryGradientKernel)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The configuration details of a file upload control in your web content.
-//
 // WKOpenPanelParameters is an idiomatic wrapper over the Objective-C class WKOpenPanelParameters.
+//
+// The configuration details of a file upload control in your web content.
 type WKOpenPanelParameters struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKOpenPanelParametersFromID(id objc.ID) *WKOpenPanelParameters {
 	if id == 0 {
 		return nil
 	}
-	x := &WKOpenPanelParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKOpenPanelParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKOpenPanelParametersAdopt(id objc.ID) *WKOpenPanelParameters {
 	if id == 0 {
 		return nil
 	}
-	x := &WKOpenPanelParameters{Handle: objref.Wrap(id)}
+	x := &WKOpenPanelParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *WKOpenPanelParameters) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKOpenPanelParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKOpenPanelParameters creates a new WKOpenPanelParameters.
 func NewWKOpenPanelParameters() *WKOpenPanelParameters {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKOpenPanelParameters")), objc.RegisterName("new"))
 	return wKOpenPanelParametersAdopt(_id)
 }
 
-// Whether the file upload control supports multiple files.
+// AllowsMultipleSelection whether the file upload control supports multiple files.
 func (x *WKOpenPanelParameters) AllowsMultipleSelection() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsMultipleSelection"))
 	return _r
 }
 
-// Whether the file upload control supports selecting directories.
+// AllowsDirectories whether the file upload control supports selecting directories.
 func (x *WKOpenPanelParameters) AllowsDirectories() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsDirectories"))
 	return _r

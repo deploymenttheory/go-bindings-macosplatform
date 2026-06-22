@@ -11,79 +11,79 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The shared instance of the FSKit client class.
+// SharedInstance the shared instance of the FSKit client class.
 func SharedInstance() *Client {
 	_r := objc.Send[objc.ID](objc.ID(_class("FSClient")), objc.RegisterName("sharedInstance"))
 	return ClientFromID(_r)
 }
 
-// A status that represents an active container with no error. This value is a “FSContainerStatus“ with a “state“ that is “active“, and has a “status“ that is `nil`.
+// Active a status that represents an active container with no error. This value is a “FSContainerStatus“ with a “state“ that is “active“, and has a “status“ that is `nil`.
 func Active() *ContainerStatus {
 	_r := objc.Send[objc.ID](objc.ID(_class("FSContainerStatus")), objc.RegisterName("active"))
 	return ContainerStatusFromID(_r)
 }
 
-// A status that represents a ready container with no error. This value is a “FSContainerStatus“ with a “state“ that is “ready“, and a “status“ that is `nil`.
+// Ready a status that represents a ready container with no error. This value is a “FSContainerStatus“ with a “state“ that is “ready“, and a “status“ that is `nil`.
 func Ready() *ContainerStatus {
 	_r := objc.Send[objc.ID](objc.ID(_class("FSContainerStatus")), objc.RegisterName("ready"))
 	return ContainerStatusFromID(_r)
 }
 
-// Creates a filename from a null-terminated character sequence.
+// NameWithCString creates a filename from a null-terminated character sequence.
 func NameWithCString(name string) *FileName {
 	_r := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("nameWithCString:"), name)
 	return FileNameFromID(_r)
 }
 
-// Creates a filename by copying a character sequence from a byte array.
+// NameWithBytesLength creates a filename by copying a character sequence from a byte array.
 func NameWithBytesLength(bytes_ string, length int) *FileName {
 	_r := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("nameWithBytes:length:"), bytes_, length)
 	return FileNameFromID(_r)
 }
 
-// Creates a filename by copying a character sequence data object.
+// NameWithData creates a filename by copying a character sequence data object.
 func NameWithData(name obj.Object) *FileName {
 	_r := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("nameWithData:"), objref.IDOf(name))
 	return FileNameFromID(_r)
 }
 
-// Creates a filename by copying a character sequence from a string instance.
+// NameWithString creates a filename by copying a character sequence from a string instance.
 func NameWithString(name string) *FileName {
 	_r := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("nameWithString:"), purego.NSString(name))
 	return FileNameFromID(_r)
 }
 
-// Creates a metadata range with the given properties.
+// RangeWithOffsetSegmentLengthSegmentCount creates a metadata range with the given properties.
 func RangeWithOffsetSegmentLengthSegmentCount(startOffset int64, segmentLength uint64, segmentCount uint64) *MetadataRange {
 	_r := objc.Send[objc.ID](objc.ID(_class("FSMetadataRange")), objc.RegisterName("rangeWithOffset:segmentLength:segmentCount:"), startOffset, segmentLength, segmentCount)
 	return MetadataRangeFromID(_r)
 }
 
-// Creates a probe result for a recognized file system.
+// RecognizedProbeResultWithNameContainerID creates a probe result for a recognized file system.
 func RecognizedProbeResultWithNameContainerID(name string, containerID *ContainerIdentifier) *ProbeResult {
 	_r := objc.Send[objc.ID](objc.ID(_class("FSProbeResult")), objc.RegisterName("recognizedProbeResultWithName:containerID:"), purego.NSString(name), objref.IDOf(containerID))
 	return ProbeResultFromID(_r)
 }
 
-// Creates a probe result for a recognized file system that is usable, but with limited capabilities.
+// UsableButLimitedProbeResultWithNameContainerID creates a probe result for a recognized file system that is usable, but with limited capabilities.
 func UsableButLimitedProbeResultWithNameContainerID(name string, containerID *ContainerIdentifier) *ProbeResult {
 	_r := objc.Send[objc.ID](objc.ID(_class("FSProbeResult")), objc.RegisterName("usableButLimitedProbeResultWithName:containerID:"), purego.NSString(name), objref.IDOf(containerID))
 	return ProbeResultFromID(_r)
 }
 
-// Creates a probe result for a recognized and usable file system.
+// UsableProbeResultWithNameContainerID creates a probe result for a recognized and usable file system.
 func UsableProbeResultWithNameContainerID(name string, containerID *ContainerIdentifier) *ProbeResult {
 	_r := objc.Send[objc.ID](objc.ID(_class("FSProbeResult")), objc.RegisterName("usableProbeResultWithName:containerID:"), purego.NSString(name), objref.IDOf(containerID))
 	return ProbeResultFromID(_r)
 }
 
-// A probe result for an unrecognized file system. An unrecognized probe result contains `nil` for its “FSProbeResult/name“ and “FSProbeResult/containerID“ properties.
+// NotRecognizedProbeResult a probe result for an unrecognized file system. An unrecognized probe result contains `nil` for its “FSProbeResult/name“ and “FSProbeResult/containerID“ properties.
 func NotRecognizedProbeResult() *ProbeResult {
 	_r := objc.Send[objc.ID](objc.ID(_class("FSProbeResult")), objc.RegisterName("notRecognizedProbeResult"))
 	return ProbeResultFromID(_r)
 }
 
-// A probe result for a recognized file system that is usable, but with limited capabilities. This kind of probe result lacks the “FSProbeResult/name“, “FSProbeResult/containerID“, or both. Don't return this result from probing a resource that isn't limited.
+// UsableButLimitedProbeResult a probe result for a recognized file system that is usable, but with limited capabilities. This kind of probe result lacks the “FSProbeResult/name“, “FSProbeResult/containerID“, or both. Don't return this result from probing a resource that isn't limited.
 func UsableButLimitedProbeResult() *ProbeResult {
 	_r := objc.Send[objc.ID](objc.ID(_class("FSProbeResult")), objc.RegisterName("usableButLimitedProbeResult"))
 	return ProbeResultFromID(_r)

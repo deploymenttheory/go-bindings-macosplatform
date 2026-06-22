@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A glyph attribute in an attributed string.
-//
 // GlyphInfo is an idiomatic wrapper over the Objective-C class NSGlyphInfo.
+//
+// A glyph attribute in an attributed string.
 type GlyphInfo struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func GlyphInfoFromID(id objc.ID) *GlyphInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &GlyphInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GlyphInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func glyphInfoAdopt(id objc.ID) *GlyphInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &GlyphInfo{Handle: objref.Wrap(id)}
+	x := &GlyphInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,25 @@ func (x *GlyphInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GlyphInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewGlyphInfo creates a new GlyphInfo.
 func NewGlyphInfo() *GlyphInfo {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSGlyphInfo")), objc.RegisterName("new"))
 	return glyphInfoAdopt(_id)
 }
 
+// GlyphID wraps the corresponding Objective-C method.
 func (x *GlyphInfo) GlyphID() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("glyphID"))
 	return _r
 }
 
+// BaseString wraps the corresponding Objective-C method.
 func (x *GlyphInfo) BaseString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseString"))
 	if _r == 0 {
@@ -77,6 +87,7 @@ func (x *GlyphInfo) BaseString() string {
 	return purego.GoString(_r)
 }
 
+// GlyphName wraps the corresponding Objective-C method.
 func (x *GlyphInfo) GlyphName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("glyphName"))
 	if _r == 0 {
@@ -85,11 +96,13 @@ func (x *GlyphInfo) GlyphName() string {
 	return purego.GoString(_r)
 }
 
+// CharacterIdentifier wraps the corresponding Objective-C method.
 func (x *GlyphInfo) CharacterIdentifier() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("characterIdentifier"))
 	return _r
 }
 
+// CharacterCollection wraps the corresponding Objective-C method.
 func (x *GlyphInfo) CharacterCollection() CharacterCollection {
 	_r := objc.Send[CharacterCollection](objref.IDOf(x), objc.RegisterName("characterCollection"))
 	return _r

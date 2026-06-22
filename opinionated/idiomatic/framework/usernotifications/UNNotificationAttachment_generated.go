@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A media file associated with a notification.
-//
 // NotificationAttachment is an idiomatic wrapper over the Objective-C class UNNotificationAttachment.
+//
+// A media file associated with a notification.
 type NotificationAttachment struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NotificationAttachmentFromID(id objc.ID) *NotificationAttachment {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationAttachment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NotificationAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func notificationAttachmentAdopt(id objc.ID) *NotificationAttachment {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationAttachment{Handle: objref.Wrap(id)}
+	x := &NotificationAttachment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *NotificationAttachment) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationAttachment) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNotificationAttachment creates a new NotificationAttachment.
 func NewNotificationAttachment() *NotificationAttachment {
 	_id := objc.Send[objc.ID](objc.ID(_class("UNNotificationAttachment")), objc.RegisterName("new"))
 	return notificationAttachmentAdopt(_id)
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *NotificationAttachment) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -72,11 +81,13 @@ func (x *NotificationAttachment) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// URL wraps the corresponding Objective-C method.
 func (x *NotificationAttachment) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *NotificationAttachment) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
 	if _r == 0 {

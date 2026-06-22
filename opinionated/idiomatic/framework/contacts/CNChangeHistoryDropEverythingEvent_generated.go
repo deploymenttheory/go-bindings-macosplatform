@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that indicates the delegate should drop all contacts and groups before handling change events.
-//
 // ChangeHistoryDropEverythingEvent is an idiomatic wrapper over the Objective-C class CNChangeHistoryDropEverythingEvent.
+//
+// It embeds [ChangeHistoryEvent], promoting that type's methods.
+//
+// An object that indicates the delegate should drop all contacts and groups before handling change events.
 type ChangeHistoryDropEverythingEvent struct {
-	objref.Handle
+	ChangeHistoryEvent
 }
 
 // ChangeHistoryDropEverythingEventFromID adopts an existing Objective-C object as a ChangeHistoryDropEverythingEvent
@@ -25,7 +26,8 @@ func ChangeHistoryDropEverythingEventFromID(id objc.ID) *ChangeHistoryDropEveryt
 	if id == 0 {
 		return nil
 	}
-	x := &ChangeHistoryDropEverythingEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ChangeHistoryDropEverythingEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func changeHistoryDropEverythingEventAdopt(id objc.ID) *ChangeHistoryDropEveryth
 	if id == 0 {
 		return nil
 	}
-	x := &ChangeHistoryDropEverythingEvent{Handle: objref.Wrap(id)}
+	x := &ChangeHistoryDropEverythingEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ChangeHistoryDropEverythingEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ChangeHistoryDropEverythingEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ChangeHistoryDropEverythingEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewChangeHistoryDropEverythingEvent creates a new ChangeHistoryDropEverythingEvent.
@@ -70,3 +58,5 @@ type ChangeHistoryDropEverythingEventable interface {
 }
 
 var _ ChangeHistoryDropEverythingEventable = (*ChangeHistoryDropEverythingEvent)(nil)
+
+var _ ChangeHistoryEventProvider = (*ChangeHistoryDropEverythingEvent)(nil)

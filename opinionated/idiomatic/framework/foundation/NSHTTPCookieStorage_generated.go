@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container that manages the storage of cookies.
-//
 // HTTPCookieStorage is an idiomatic wrapper over the Objective-C class NSHTTPCookieStorage.
+//
+// A container that manages the storage of cookies.
 type HTTPCookieStorage struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func HTTPCookieStorageFromID(id objc.ID) *HTTPCookieStorage {
 	if id == 0 {
 		return nil
 	}
-	x := &HTTPCookieStorage{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HTTPCookieStorage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func hTTPCookieStorageAdopt(id objc.ID) *HTTPCookieStorage {
 	if id == 0 {
 		return nil
 	}
-	x := &HTTPCookieStorage{Handle: objref.Wrap(id)}
+	x := &HTTPCookieStorage{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,59 +61,63 @@ func (x *HTTPCookieStorage) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HTTPCookieStorage) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewHTTPCookieStorage creates a new HTTPCookieStorage.
 func NewHTTPCookieStorage() *HTTPCookieStorage {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSHTTPCookieStorage")), objc.RegisterName("new"))
 	return hTTPCookieStorageAdopt(_id)
 }
 
-// The cookie accept policy preference of the receiver.
-//
-// WithCookieAcceptPolicy sets cookieAcceptPolicy and returns the receiver so calls can be chained.
+// WithCookieAcceptPolicy the cookie accept policy preference of the receiver.
 func (x *HTTPCookieStorage) WithCookieAcceptPolicy(cookieAcceptPolicy HTTPCookieAcceptPolicy) *HTTPCookieStorage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCookieAcceptPolicy:"), cookieAcceptPolicy)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *HTTPCookieStorage) WithScriptingProperties(scriptingProperties obj.Object) *HTTPCookieStorage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Set a cookie The cookie will override an existing cookie with the same name, domain and path, if any.
+// SetCookie set a cookie The cookie will override an existing cookie with the same name, domain and path, if any.
 func (x *HTTPCookieStorage) SetCookie(cookie *HTTPCookie) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCookie:"), objref.IDOf(cookie))
 }
 
-// Delete the specified cookie
+// DeleteCookie delete the specified cookie
 func (x *HTTPCookieStorage) DeleteCookie(cookie *HTTPCookie) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteCookie:"), objref.IDOf(cookie))
 }
 
-// Delete all cookies from the cookie storage since the provided date.
+// RemoveCookiesSinceDate delete all cookies from the cookie storage since the provided date.
 func (x *HTTPCookieStorage) RemoveCookiesSinceDate(date *Date) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeCookiesSinceDate:"), objref.IDOf(date))
 }
 
-// Returns an array of cookies to send to the given URL. The cookie manager examines the cookies it stores and includes those which should be sent to the given URL. You can use <tt>+[NSCookie requestHeaderFieldsWithCookies:]</tt> to turn this array into a set of header fields to add to a request.
+// CookiesForURL returns an array of cookies to send to the given URL. The cookie manager examines the cookies it stores and includes those which should be sent to the given URL. You can use <tt>+[NSCookie requestHeaderFieldsWithCookies:]</tt> to turn this array into a set of header fields to add to a request.
 func (x *HTTPCookieStorage) CookiesForURL(uRL string) []*HTTPCookie {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cookiesForURL:"), rt.FileURL(uRL))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *HTTPCookie { return HTTPCookieFromID(_id) })
 }
 
-// Adds an array cookies to the cookie store, following the cookie accept policy. For mainDocumentURL, the caller should pass the URL for an appropriate main document, if known. For example, when loading a web page, the URL of the main html document for the top-level frame should be passed. To save cookies based on a set of response headers, you can use <tt>+[NSCookie cookiesWithResponseHeaderFields:forURL:]</tt> on a header field dictionary and then use this method to store the resulting cookies in accordance with policy settings.
+// SetCookiesForURLMainDocumentURL adds an array cookies to the cookie store, following the cookie accept policy. For mainDocumentURL, the caller should pass the URL for an appropriate main document, if known. For example, when loading a web page, the URL of the main html document for the top-level frame should be passed. To save cookies based on a set of response headers, you can use <tt>+[NSCookie cookiesWithResponseHeaderFields:forURL:]</tt> on a header field dictionary and then use this method to store the resulting cookies in accordance with policy settings.
 func (x *HTTPCookieStorage) SetCookiesForURLMainDocumentURL(cookies []*HTTPCookie, uRL string, mainDocumentURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCookies:forURL:mainDocumentURL:"), purego.SliceToNSArray(cookies, func(_v *HTTPCookie) objc.ID { return objref.IDOf(_v) }), rt.FileURL(uRL), rt.FileURL(mainDocumentURL))
 }
 
-// Returns an array of all cookies in the store, sorted according to the key value and sorting direction of the NSSortDescriptors specified in the parameter. proper sorting of cookies may require extensive string conversion, which can be avoided by allowing the system to perform the sorting.  This API is to be preferred over the more generic -[NSHTTPCookieStorage cookies] API, if sorting is going to be performed.
+// SortedCookiesUsingDescriptors returns an array of all cookies in the store, sorted according to the key value and sorting direction of the NSSortDescriptors specified in the parameter. proper sorting of cookies may require extensive string conversion, which can be avoided by allowing the system to perform the sorting.  This API is to be preferred over the more generic -[NSHTTPCookieStorage cookies] API, if sorting is going to be performed.
 func (x *HTTPCookieStorage) SortedCookiesUsingDescriptors(sortOrder []*SortDescriptor) []*HTTPCookie {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortedCookiesUsingDescriptors:"), purego.SliceToNSArray(sortOrder, func(_v *SortDescriptor) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *HTTPCookie { return HTTPCookieFromID(_id) })
 }
 
-// Get all the cookies
+// Cookies get all the cookies
 //
 // Cookies returns the collection as a Go slice.
 func (x *HTTPCookieStorage) Cookies() []*HTTPCookie {
@@ -119,22 +125,26 @@ func (x *HTTPCookieStorage) Cookies() []*HTTPCookie {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *HTTPCookie { return HTTPCookieFromID(_id) })
 }
 
-// The cookie accept policy preference of the receiver.
+// CookieAcceptPolicy the cookie accept policy preference of the receiver.
 func (x *HTTPCookieStorage) CookieAcceptPolicy() HTTPCookieAcceptPolicy {
 	_r := objc.Send[HTTPCookieAcceptPolicy](objref.IDOf(x), objc.RegisterName("cookieAcceptPolicy"))
 	return _r
 }
 
+// SetCookieAcceptPolicy wraps the corresponding Objective-C method.
 func (x *HTTPCookieStorage) SetCookieAcceptPolicy(cookieAcceptPolicy HTTPCookieAcceptPolicy) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCookieAcceptPolicy:"), cookieAcceptPolicy)
 }
 
+// StoreCookiesForTask wraps the corresponding Objective-C method.
 func (x *HTTPCookieStorage) StoreCookiesForTask(cookies []*HTTPCookie, task *URLSessionTask) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("storeCookies:forTask:"), purego.SliceToNSArray(cookies, func(_v *HTTPCookie) objc.ID { return objref.IDOf(_v) }), objref.IDOf(task))
 }
 
+// GetCookiesForTask wraps the corresponding Objective-C method.
+//
 // GetCookiesForTask blocks until the operation completes or ctx is cancelled.
-func (x *HTTPCookieStorage) GetCookiesForTask(ctx context.Context, task *URLSessionTask) (obj.Object, error) {
+func (x *HTTPCookieStorage) GetCookiesForTask(ctx context.Context, task *URLSessionTask) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error

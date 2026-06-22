@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that marks the stopping point for a query and the starting point for retrieving the remaining results.
-//
 // QueryCursor is an idiomatic wrapper over the Objective-C class CKQueryCursor.
+//
+// An object that marks the stopping point for a query and the starting point for retrieving the remaining results.
 type QueryCursor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func QueryCursorFromID(id objc.ID) *QueryCursor {
 	if id == 0 {
 		return nil
 	}
-	x := &QueryCursor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QueryCursor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func queryCursorAdopt(id objc.ID) *QueryCursor {
 	if id == 0 {
 		return nil
 	}
-	x := &QueryCursor{Handle: objref.Wrap(id)}
+	x := &QueryCursor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *QueryCursor) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *QueryCursor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *QueryCursor) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewQueryCursor creates a new QueryCursor.

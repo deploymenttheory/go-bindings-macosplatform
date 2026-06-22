@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ArrayMatrixMultiplication is an idiomatic wrapper over the Objective-C class MPSNDArrayMatrixMultiplication.
+//
+// ArrayMatrixMultiplication is an abstract base — you do not construct it directly. Construct one of [ArrayQuantizedMatrixMultiplication] and pass it where a ArrayMatrixMultiplication is accepted.
 type ArrayMatrixMultiplication struct {
-	objref.Handle
+	ArrayMultiaryKernel
 }
 
 // ArrayMatrixMultiplicationFromID adopts an existing Objective-C object as a ArrayMatrixMultiplication
@@ -23,7 +24,8 @@ func ArrayMatrixMultiplicationFromID(id objc.ID) *ArrayMatrixMultiplication {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayMatrixMultiplication{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ArrayMatrixMultiplication{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,64 +38,42 @@ func arrayMatrixMultiplicationAdopt(id objc.ID) *ArrayMatrixMultiplication {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayMatrixMultiplication{Handle: objref.Wrap(id)}
+	x := &ArrayMatrixMultiplication{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ArrayMatrixMultiplication) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ArrayMatrixMultiplication) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ArrayMatrixMultiplication) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewArrayMatrixMultiplication creates a new ArrayMatrixMultiplication.
-func NewArrayMatrixMultiplication() *ArrayMatrixMultiplication {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayMatrixMultiplication")), objc.RegisterName("new"))
-	return arrayMatrixMultiplicationAdopt(_id)
-}
-
-// The scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (x *ArrayMatrixMultiplication) WithAlpha(alpha float64) *ArrayMatrixMultiplication {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// The scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-//
-// WithBeta sets beta and returns the receiver so calls can be chained.
+// WithBeta the scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (x *ArrayMatrixMultiplication) WithBeta(beta float64) *ArrayMatrixMultiplication {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
 	return x
 }
 
-// The scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+// Alpha the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (x *ArrayMatrixMultiplication) Alpha() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
 	return _r
 }
 
+// SetAlpha wraps the corresponding Objective-C method.
 func (x *ArrayMatrixMultiplication) SetAlpha(alpha float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }
 
-// The scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+// Beta the scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (x *ArrayMatrixMultiplication) Beta() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("beta"))
 	return _r
 }
 
+// SetBeta wraps the corresponding Objective-C method.
 func (x *ArrayMatrixMultiplication) SetBeta(beta float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
 }
@@ -110,3 +90,14 @@ type ArrayMatrixMultiplicationable interface {
 }
 
 var _ ArrayMatrixMultiplicationable = (*ArrayMatrixMultiplication)(nil)
+
+// isArrayMatrixMultiplication marks ArrayMatrixMultiplication — and, by embedding promotion, its
+// subclasses — as a member of the ArrayMatrixMultiplication hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ArrayMatrixMultiplication) isArrayMatrixMultiplication() {}
+
+var _ ArrayMatrixMultiplicationProvider = (*ArrayMatrixMultiplication)(nil)
+
+var _ ArrayMultiaryKernelProvider = (*ArrayMatrixMultiplication)(nil)
+
+var _ ArrayMultiaryBaseProvider = (*ArrayMatrixMultiplication)(nil)

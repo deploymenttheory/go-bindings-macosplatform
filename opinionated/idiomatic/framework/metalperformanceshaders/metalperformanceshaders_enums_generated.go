@@ -20,6 +20,8 @@ const (
 	DeviceOptionsSkipRemovable DeviceOptions = 2
 )
 
+// String returns the DeviceOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DeviceOptions) String() string {
 	var parts []string
 	if e&DeviceOptionsLowPower != 0 {

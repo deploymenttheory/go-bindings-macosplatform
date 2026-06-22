@@ -9,6 +9,5 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// The error domain for errors raised by the File Provider UI extension.
 // FPUIErrorDomain returns the string constant FPUIErrorDomain, for use as a dictionary key or argument.
 func FPUIErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("FPUIErrorDomain"))) }

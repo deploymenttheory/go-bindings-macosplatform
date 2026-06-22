@@ -23,7 +23,8 @@ func MTREnergyEVSEClusterEnergyTransferStoppedEventFromID(id objc.ID) *MTREnergy
 	if id == 0 {
 		return nil
 	}
-	x := &MTREnergyEVSEClusterEnergyTransferStoppedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTREnergyEVSEClusterEnergyTransferStoppedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTREnergyEVSEClusterEnergyTransferStoppedEventAdopt(id objc.ID) *MTREnergyE
 	if id == 0 {
 		return nil
 	}
-	x := &MTREnergyEVSEClusterEnergyTransferStoppedEvent{Handle: objref.Wrap(id)}
+	x := &MTREnergyEVSEClusterEnergyTransferStoppedEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,68 +58,82 @@ func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) IsKind(className string
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTREnergyEVSEClusterEnergyTransferStoppedEvent creates a new MTREnergyEVSEClusterEnergyTransferStoppedEvent.
 func NewMTREnergyEVSEClusterEnergyTransferStoppedEvent() *MTREnergyEVSEClusterEnergyTransferStoppedEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTREnergyEVSEClusterEnergyTransferStoppedEvent")), objc.RegisterName("new"))
 	return mTREnergyEVSEClusterEnergyTransferStoppedEventAdopt(_id)
 }
 
-// WithSessionID sets sessionID and returns the receiver so calls can be chained.
+// WithSessionID sets the property and returns the receiver so calls can be chained.
 func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) WithSessionID(sessionID obj.Object) *MTREnergyEVSEClusterEnergyTransferStoppedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
 	return x
 }
 
-// WithState sets state and returns the receiver so calls can be chained.
+// WithState sets the property and returns the receiver so calls can be chained.
 func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) WithState(state obj.Object) *MTREnergyEVSEClusterEnergyTransferStoppedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), objref.IDOf(state))
 	return x
 }
 
-// WithReason sets reason and returns the receiver so calls can be chained.
+// WithReason sets the property and returns the receiver so calls can be chained.
 func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) WithReason(reason obj.Object) *MTREnergyEVSEClusterEnergyTransferStoppedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReason:"), objref.IDOf(reason))
 	return x
 }
 
-// WithEnergyTransferred sets energyTransferred and returns the receiver so calls can be chained.
+// WithEnergyTransferred sets the property and returns the receiver so calls can be chained.
 func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) WithEnergyTransferred(energyTransferred obj.Object) *MTREnergyEVSEClusterEnergyTransferStoppedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnergyTransferred:"), objref.IDOf(energyTransferred))
 	return x
 }
 
+// SessionID wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) SessionID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sessionID"))
 	return obj.Wrap(_r)
 }
 
+// SetSessionID wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) SetSessionID(sessionID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
 }
 
+// State wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) State() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
 	return obj.Wrap(_r)
 }
 
+// SetState wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) SetState(state obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), objref.IDOf(state))
 }
 
+// Reason wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) Reason() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reason"))
 	return obj.Wrap(_r)
 }
 
+// SetReason wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) SetReason(reason obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReason:"), objref.IDOf(reason))
 }
 
+// EnergyTransferred wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) EnergyTransferred() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("energyTransferred"))
 	return obj.Wrap(_r)
 }
 
+// SetEnergyTransferred wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) SetEnergyTransferred(energyTransferred obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnergyTransferred:"), objref.IDOf(energyTransferred))
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of the paravirtualized graphics device to create.
-//
 // PGDeviceDescriptor is an idiomatic wrapper over the Objective-C class PGDeviceDescriptor.
+//
+// A description of the paravirtualized graphics device to create.
 type PGDeviceDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PGDeviceDescriptorFromID(id objc.ID) *PGDeviceDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &PGDeviceDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PGDeviceDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func pGDeviceDescriptorAdopt(id objc.ID) *PGDeviceDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &PGDeviceDescriptor{Handle: objref.Wrap(id)}
+	x := &PGDeviceDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,56 +60,59 @@ func (x *PGDeviceDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PGDeviceDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPGDeviceDescriptor creates a new PGDeviceDescriptor.
 func NewPGDeviceDescriptor() *PGDeviceDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("PGDeviceDescriptor")), objc.RegisterName("new"))
 	return pGDeviceDescriptorAdopt(_id)
 }
 
-// The length in bytes of the memory-mapped IO section.
-//
-// WithMmioLength sets mmioLength and returns the receiver so calls can be chained.
+// WithMmioLength the length in bytes of the memory-mapped IO section.
 func (x *PGDeviceDescriptor) WithMmioLength(mmioLength int) *PGDeviceDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMmioLength:"), mmioLength)
 	return x
 }
 
-// A handler that the system calls to raise an interrupt in the guest environment.
-//
-// WithRaiseInterrupt sets raiseInterrupt and returns the receiver so calls can be chained.
+// WithRaiseInterrupt a handler that the system calls to raise an interrupt in the guest environment.
 func (x *PGDeviceDescriptor) WithRaiseInterrupt(raiseInterrupt func(uint32)) *PGDeviceDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRaiseInterrupt:"), raiseInterrupt)
 	return x
 }
 
-// The number of PGDisplay ports configured into the VM. By default, the value of displayPortCount will be 1.  Valid values range from 1 to the value returned by PGMaxDisplayPortCount().
-//
-// WithDisplayPortCount sets displayPortCount and returns the receiver so calls can be chained.
+// WithDisplayPortCount the number of PGDisplay ports configured into the VM. By default, the value of displayPortCount will be 1.  Valid values range from 1 to the value returned by PGMaxDisplayPortCount().
 func (x *PGDeviceDescriptor) WithDisplayPortCount(displayPortCount uint32) *PGDeviceDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayPortCount:"), displayPortCount)
 	return x
 }
 
-// The length, of the memory that backs the APPLEGPU_BAR_MMIO By default, the value of mmioLength will be the recommended default size for the MMIO memory.
+// MmioLength the length, of the memory that backs the APPLEGPU_BAR_MMIO By default, the value of mmioLength will be the recommended default size for the MMIO memory.
 func (x *PGDeviceDescriptor) MmioLength() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("mmioLength"))
 	return _r
 }
 
+// SetMmioLength wraps the corresponding Objective-C method.
 func (x *PGDeviceDescriptor) SetMmioLength(mmioLength int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMmioLength:"), mmioLength)
 }
 
+// SetRaiseInterrupt wraps the corresponding Objective-C method.
 func (x *PGDeviceDescriptor) SetRaiseInterrupt(raiseInterrupt func(uint32)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRaiseInterrupt:"), raiseInterrupt)
 }
 
-// The number of PGDisplay ports configured into the VM. By default, the value of displayPortCount will be 1.  Valid values range from 1 to the value returned by PGMaxDisplayPortCount().
+// DisplayPortCount the number of PGDisplay ports configured into the VM. By default, the value of displayPortCount will be 1.  Valid values range from 1 to the value returned by PGMaxDisplayPortCount().
 func (x *PGDeviceDescriptor) DisplayPortCount() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("displayPortCount"))
 	return _r
 }
 
+// SetDisplayPortCount wraps the corresponding Objective-C method.
 func (x *PGDeviceDescriptor) SetDisplayPortCount(displayPortCount uint32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayPortCount:"), displayPortCount)
 }

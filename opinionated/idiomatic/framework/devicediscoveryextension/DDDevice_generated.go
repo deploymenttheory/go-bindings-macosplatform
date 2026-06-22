@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes a discovered device of interest.
-//
 // DDDevice is an idiomatic wrapper over the Objective-C class DDDevice.
+//
+// An object that describes a discovered device of interest.
 type DDDevice struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DDDeviceFromID(id objc.ID) *DDDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &DDDevice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DDDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func dDDeviceAdopt(id objc.ID) *DDDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &DDDevice{Handle: objref.Wrap(id)}
+	x := &DDDevice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,215 +60,179 @@ func (x *DDDevice) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an object that describes a discovered device.
-//
-// NewDDDeviceWithDisplayNameCategoryProtocolTypeIdentifier creates a new DDDevice.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DDDevice) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDDDeviceWithDisplayNameCategoryProtocolTypeIdentifier creates an object that describes a discovered device.
 func NewDDDeviceWithDisplayNameCategoryProtocolTypeIdentifier(displayName string, category DDDeviceCategory, protocolType obj.Object, identifier string) *DDDevice {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DDDevice")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplayName:category:protocolType:identifier:"), purego.NSString(displayName), category, objref.IDOf(protocolType), purego.NSString(identifier))
 	return dDDeviceAdopt(_id)
 }
 
-// Device supported capabilities.
-//
-// WithDeviceSupports sets deviceSupports and returns the receiver so calls can be chained.
+// WithDeviceSupports device supported capabilities.
 func (x *DDDevice) WithDeviceSupports(deviceSupports DDDeviceSupports) *DDDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeviceSupports:"), deviceSupports)
 	return x
 }
 
-// An identifier to communicate with the device through Bluetooth wireless technology.
-//
-// WithBluetoothIdentifier sets bluetoothIdentifier and returns the receiver so calls can be chained.
+// WithBluetoothIdentifier an identifier to communicate with the device through Bluetooth wireless technology.
 func (x *DDDevice) WithBluetoothIdentifier(bluetoothIdentifier obj.Object) *DDDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBluetoothIdentifier:"), objref.IDOf(bluetoothIdentifier))
 	return x
 }
 
-// An option that determies the icon that the picker UI displays for the device.
-//
-// WithCategory sets category and returns the receiver so calls can be chained.
+// WithCategory an option that determies the icon that the picker UI displays for the device.
 func (x *DDDevice) WithCategory(category DDDeviceCategory) *DDDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategory:"), category)
 	return x
 }
 
-// Device's custom asset for product image name in the main App bundle.
-//
-// WithDisplayImageName sets displayImageName and returns the receiver so calls can be chained.
+// WithDisplayImageName device's custom asset for product image name in the main App bundle.
 func (x *DDDevice) WithDisplayImageName(displayImageName string) *DDDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayImageName:"), purego.NSString(displayImageName))
 	return x
 }
 
-// A name for the device to display to the user.
-//
-// WithDisplayName sets displayName and returns the receiver so calls can be chained.
+// WithDisplayName a name for the device to display to the user.
 func (x *DDDevice) WithDisplayName(displayName string) *DDDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayName:"), purego.NSString(displayName))
 	return x
 }
 
-// A unique identifier for the device.
-//
-// WithIdentifier sets identifier and returns the receiver so calls can be chained.
+// WithIdentifier a unique identifier for the device.
 func (x *DDDevice) WithIdentifier(identifier string) *DDDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 	return x
 }
 
-// A playback status for the device’s current media.
-//
-// WithMediaPlaybackState sets mediaPlaybackState and returns the receiver so calls can be chained.
+// WithMediaPlaybackState a playback status for the device’s current media.
 func (x *DDDevice) WithMediaPlaybackState(mediaPlaybackState DDDeviceMediaPlaybackState) *DDDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaPlaybackState:"), mediaPlaybackState)
 	return x
 }
 
-// A title for the current media that the device plays.
-//
-// WithMediaContentTitle sets mediaContentTitle and returns the receiver so calls can be chained.
+// WithMediaContentTitle a title for the current media that the device plays.
 func (x *DDDevice) WithMediaContentTitle(mediaContentTitle string) *DDDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaContentTitle:"), purego.NSString(mediaContentTitle))
 	return x
 }
 
-// A subtitle for the current media that the device plays.
-//
-// WithMediaContentSubtitle sets mediaContentSubtitle and returns the receiver so calls can be chained.
+// WithMediaContentSubtitle a subtitle for the current media that the device plays.
 func (x *DDDevice) WithMediaContentSubtitle(mediaContentSubtitle string) *DDDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaContentSubtitle:"), purego.NSString(mediaContentSubtitle))
 	return x
 }
 
-// An object that describes a local-network device.
-//
-// WithNetworkEndpoint sets networkEndpoint and returns the receiver so calls can be chained.
+// WithNetworkEndpoint an object that describes a local-network device.
 func (x *DDDevice) WithNetworkEndpoint(networkEndpoint obj.Object) *DDDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkEndpoint:"), objref.IDOf(networkEndpoint))
 	return x
 }
 
-// The manner in which the system applies your app’s device discovery extension.
-//
-// WithProtocol sets protocol and returns the receiver so calls can be chained.
+// WithProtocol the manner in which the system applies your app’s device discovery extension.
 func (x *DDDevice) WithProtocol(protocol DDDeviceProtocol) *DDDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocol:"), protocol)
 	return x
 }
 
-// A custom universal type that describes the device’s manner of communication with the extension.
-//
-// WithProtocolType sets protocolType and returns the receiver so calls can be chained.
+// WithProtocolType a custom universal type that describes the device’s manner of communication with the extension.
 func (x *DDDevice) WithProtocolType(protocolType obj.Object) *DDDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocolType:"), objref.IDOf(protocolType))
 	return x
 }
 
-// A state that represents the level of user interaction with the device.
-//
-// WithState sets state and returns the receiver so calls can be chained.
+// WithState a state that represents the level of user interaction with the device.
 func (x *DDDevice) WithState(state DDDeviceState) *DDDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 	return x
 }
 
-// Device's WiFi Hotspot SSID.
-//
-// WithSSID sets sSID and returns the receiver so calls can be chained.
+// WithSSID device's WiFi Hotspot SSID.
 func (x *DDDevice) WithSSID(sSID string) *DDDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSSID:"), purego.NSString(sSID))
 	return x
 }
 
-// A Boolean value that indicates whether to group the device with others in the AirPlay UI.
-//
-// WithSupportsGrouping sets supportsGrouping and returns the receiver so calls can be chained.
+// WithSupportsGrouping a Boolean value that indicates whether to group the device with others in the AirPlay UI.
 func (x *DDDevice) WithSupportsGrouping(supportsGrouping bool) *DDDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsGrouping:"), supportsGrouping)
 	return x
 }
 
-// A dictionary of metadata for the device that the extension communicates with over the local network.
-//
-// WithTxtRecordData sets txtRecordData and returns the receiver so calls can be chained.
+// WithTxtRecordData a dictionary of metadata for the device that the extension communicates with over the local network.
 func (x *DDDevice) WithTxtRecordData(txtRecordData obj.Object) *DDDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTxtRecordData:"), objref.IDOf(txtRecordData))
 	return x
 }
 
-// A resource locator for the simple service discovery protocol.
-//
-// WithUrl sets url and returns the receiver so calls can be chained.
+// WithUrl a resource locator for the simple service discovery protocol.
 func (x *DDDevice) WithUrl(url string) *DDDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
 	return x
 }
 
-// Device’s Wi-Fi Aware’s service name.
-//
-// WithWifiAwareServiceName sets wifiAwareServiceName and returns the receiver so calls can be chained.
+// WithWifiAwareServiceName device’s Wi-Fi Aware’s service name.
 func (x *DDDevice) WithWifiAwareServiceName(wifiAwareServiceName string) *DDDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWifiAwareServiceName:"), purego.NSString(wifiAwareServiceName))
 	return x
 }
 
-// Device’s Wi-Fi Aware’s service. Default is DDDeviceWiFiAwareServiceRoleSubscriber
-//
-// WithWifiAwareServiceRole sets wifiAwareServiceRole and returns the receiver so calls can be chained.
+// WithWifiAwareServiceRole device’s Wi-Fi Aware’s service. Default is DDDeviceWiFiAwareServiceRoleSubscriber
 func (x *DDDevice) WithWifiAwareServiceRole(wifiAwareServiceRole DDDeviceWiFiAwareServiceRole) *DDDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWifiAwareServiceRole:"), wifiAwareServiceRole)
 	return x
 }
 
-// Device’s Wi-Fi Aware model name.
-//
-// WithWifiAwareModelName sets wifiAwareModelName and returns the receiver so calls can be chained.
+// WithWifiAwareModelName device’s Wi-Fi Aware model name.
 func (x *DDDevice) WithWifiAwareModelName(wifiAwareModelName string) *DDDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWifiAwareModelName:"), purego.NSString(wifiAwareModelName))
 	return x
 }
 
-// Device’s Wi-Fi Aware vendor name.
-//
-// WithWifiAwareVendorName sets wifiAwareVendorName and returns the receiver so calls can be chained.
+// WithWifiAwareVendorName device’s Wi-Fi Aware vendor name.
 func (x *DDDevice) WithWifiAwareVendorName(wifiAwareVendorName string) *DDDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWifiAwareVendorName:"), purego.NSString(wifiAwareVendorName))
 	return x
 }
 
-// Device supported capabilities.
+// DeviceSupports device supported capabilities.
 func (x *DDDevice) DeviceSupports() DDDeviceSupports {
 	_r := objc.Send[DDDeviceSupports](objref.IDOf(x), objc.RegisterName("deviceSupports"))
 	return _r
 }
 
-// Device supported capabilities.
+// SetDeviceSupports device supported capabilities.
 func (x *DDDevice) SetDeviceSupports(deviceSupports DDDeviceSupports) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeviceSupports:"), deviceSupports)
 }
 
-// Identifier to communicate with the device via Bluetooth.
+// BluetoothIdentifier identifier to communicate with the device via Bluetooth.
 func (x *DDDevice) BluetoothIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bluetoothIdentifier"))
 	return obj.Wrap(_r)
 }
 
+// SetBluetoothIdentifier wraps the corresponding Objective-C method.
 func (x *DDDevice) SetBluetoothIdentifier(bluetoothIdentifier obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBluetoothIdentifier:"), objref.IDOf(bluetoothIdentifier))
 }
 
-// Category of the device.
+// Category category of the device.
 func (x *DDDevice) Category() DDDeviceCategory {
 	_r := objc.Send[DDDeviceCategory](objref.IDOf(x), objc.RegisterName("category"))
 	return _r
 }
 
+// SetCategory wraps the corresponding Objective-C method.
 func (x *DDDevice) SetCategory(category DDDeviceCategory) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategory:"), category)
 }
 
-// Device's custom asset for product image name in the main App bundle.
+// DisplayImageName device's custom asset for product image name in the main App bundle.
 func (x *DDDevice) DisplayImageName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayImageName"))
 	if _r == 0 {
@@ -275,12 +241,12 @@ func (x *DDDevice) DisplayImageName() string {
 	return purego.GoString(_r)
 }
 
-// Device's custom asset for product image name in the main App bundle.
+// SetDisplayImageName device's custom asset for product image name in the main App bundle.
 func (x *DDDevice) SetDisplayImageName(displayImageName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayImageName:"), purego.NSString(displayImageName))
 }
 
-// Name of the device. Should be suitable for displaying to a user.
+// DisplayName name of the device. Should be suitable for displaying to a user.
 func (x *DDDevice) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
 	if _r == 0 {
@@ -289,11 +255,12 @@ func (x *DDDevice) DisplayName() string {
 	return purego.GoString(_r)
 }
 
+// SetDisplayName wraps the corresponding Objective-C method.
 func (x *DDDevice) SetDisplayName(displayName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayName:"), purego.NSString(displayName))
 }
 
-// Identifier of the device.
+// Identifier identifier of the device.
 func (x *DDDevice) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -302,21 +269,23 @@ func (x *DDDevice) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// SetIdentifier wraps the corresponding Objective-C method.
 func (x *DDDevice) SetIdentifier(identifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 }
 
-// Current state of media playback on this device.
+// MediaPlaybackState current state of media playback on this device.
 func (x *DDDevice) MediaPlaybackState() DDDeviceMediaPlaybackState {
 	_r := objc.Send[DDDeviceMediaPlaybackState](objref.IDOf(x), objc.RegisterName("mediaPlaybackState"))
 	return _r
 }
 
+// SetMediaPlaybackState wraps the corresponding Objective-C method.
 func (x *DDDevice) SetMediaPlaybackState(mediaPlaybackState DDDeviceMediaPlaybackState) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaPlaybackState:"), mediaPlaybackState)
 }
 
-// Title of the media content being played.
+// MediaContentTitle title of the media content being played.
 func (x *DDDevice) MediaContentTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaContentTitle"))
 	if _r == 0 {
@@ -325,11 +294,12 @@ func (x *DDDevice) MediaContentTitle() string {
 	return purego.GoString(_r)
 }
 
+// SetMediaContentTitle wraps the corresponding Objective-C method.
 func (x *DDDevice) SetMediaContentTitle(mediaContentTitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaContentTitle:"), purego.NSString(mediaContentTitle))
 }
 
-// Subtitle of the media content being played. It can be used to display extra information about the content, such as the name of the artist.
+// MediaContentSubtitle subtitle of the media content being played. It can be used to display extra information about the content, such as the name of the artist.
 func (x *DDDevice) MediaContentSubtitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaContentSubtitle"))
 	if _r == 0 {
@@ -338,51 +308,56 @@ func (x *DDDevice) MediaContentSubtitle() string {
 	return purego.GoString(_r)
 }
 
+// SetMediaContentSubtitle wraps the corresponding Objective-C method.
 func (x *DDDevice) SetMediaContentSubtitle(mediaContentSubtitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaContentSubtitle:"), purego.NSString(mediaContentSubtitle))
 }
 
-// Endpoint to communicate with the device via networking.
+// NetworkEndpoint endpoint to communicate with the device via networking.
 func (x *DDDevice) NetworkEndpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkEndpoint"))
 	return obj.Wrap(_r)
 }
 
+// SetNetworkEndpoint wraps the corresponding Objective-C method.
 func (x *DDDevice) SetNetworkEndpoint(networkEndpoint obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkEndpoint:"), objref.IDOf(networkEndpoint))
 }
 
-// Protocol of the device.
+// Protocol protocol of the device.
 func (x *DDDevice) Protocol() DDDeviceProtocol {
 	_r := objc.Send[DDDeviceProtocol](objref.IDOf(x), objc.RegisterName("protocol"))
 	return _r
 }
 
+// SetProtocol wraps the corresponding Objective-C method.
 func (x *DDDevice) SetProtocol(protocol DDDeviceProtocol) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocol:"), protocol)
 }
 
-// Uniform Type for the protocol.
+// ProtocolType uniform Type for the protocol.
 func (x *DDDevice) ProtocolType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocolType"))
 	return obj.Wrap(_r)
 }
 
+// SetProtocolType wraps the corresponding Objective-C method.
 func (x *DDDevice) SetProtocolType(protocolType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocolType:"), objref.IDOf(protocolType))
 }
 
-// State of the device.
+// State state of the device.
 func (x *DDDevice) State() DDDeviceState {
 	_r := objc.Send[DDDeviceState](objref.IDOf(x), objc.RegisterName("state"))
 	return _r
 }
 
+// SetState wraps the corresponding Objective-C method.
 func (x *DDDevice) SetState(state DDDeviceState) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 }
 
-// Device's WiFi Hotspot SSID.
+// SSID device's WiFi Hotspot SSID.
 func (x *DDDevice) SSID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("SSID"))
 	if _r == 0 {
@@ -391,43 +366,45 @@ func (x *DDDevice) SSID() string {
 	return purego.GoString(_r)
 }
 
-// Device's WiFi Hotspot SSID.
+// SetSSID device's WiFi Hotspot SSID.
 func (x *DDDevice) SetSSID(sSID string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSSID:"), purego.NSString(sSID))
 }
 
-// Whether the device supports grouping with other devices with the same protocol.
+// SupportsGrouping whether the device supports grouping with other devices with the same protocol.
 func (x *DDDevice) SupportsGrouping() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsGrouping"))
 	return _r
 }
 
-// Whether the device supports grouping with other devices with the same protocol.
+// SetSupportsGrouping whether the device supports grouping with other devices with the same protocol.
 func (x *DDDevice) SetSupportsGrouping(supportsGrouping bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsGrouping:"), supportsGrouping)
 }
 
-// TXT record of the device.
+// TxtRecordData TXT record of the device.
 func (x *DDDevice) TxtRecordData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("txtRecordData"))
 	return obj.Wrap(_r)
 }
 
+// SetTxtRecordData wraps the corresponding Objective-C method.
 func (x *DDDevice) SetTxtRecordData(txtRecordData obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTxtRecordData:"), objref.IDOf(txtRecordData))
 }
 
-// URL used for SSDP connection. The URL must have a valid hostname, no query parameters, and a maximum size of 100 bytes.
+// Url URL used for SSDP connection. The URL must have a valid hostname, no query parameters, and a maximum size of 100 bytes.
 func (x *DDDevice) Url() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
+// SetUrl wraps the corresponding Objective-C method.
 func (x *DDDevice) SetUrl(url string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
 }
 
-// Device's Wi-Fi Aware's service name.
+// WifiAwareServiceName device's Wi-Fi Aware's service name.
 func (x *DDDevice) WifiAwareServiceName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wifiAwareServiceName"))
 	if _r == 0 {
@@ -436,23 +413,23 @@ func (x *DDDevice) WifiAwareServiceName() string {
 	return purego.GoString(_r)
 }
 
-// Device's Wi-Fi Aware's service name.
+// SetWifiAwareServiceName device's Wi-Fi Aware's service name.
 func (x *DDDevice) SetWifiAwareServiceName(wifiAwareServiceName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWifiAwareServiceName:"), purego.NSString(wifiAwareServiceName))
 }
 
-// Device's Wi-Fi Aware's service. Default is `DDDeviceWiFiAwareServiceRoleSubscriber`
+// WifiAwareServiceRole device's Wi-Fi Aware's service. Default is `DDDeviceWiFiAwareServiceRoleSubscriber`
 func (x *DDDevice) WifiAwareServiceRole() DDDeviceWiFiAwareServiceRole {
 	_r := objc.Send[DDDeviceWiFiAwareServiceRole](objref.IDOf(x), objc.RegisterName("wifiAwareServiceRole"))
 	return _r
 }
 
-// Device's Wi-Fi Aware's service. Default is `DDDeviceWiFiAwareServiceRoleSubscriber`
+// SetWifiAwareServiceRole device's Wi-Fi Aware's service. Default is `DDDeviceWiFiAwareServiceRoleSubscriber`
 func (x *DDDevice) SetWifiAwareServiceRole(wifiAwareServiceRole DDDeviceWiFiAwareServiceRole) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWifiAwareServiceRole:"), wifiAwareServiceRole)
 }
 
-// Device's Wi-Fi Aware model name.
+// WifiAwareModelName device's Wi-Fi Aware model name.
 func (x *DDDevice) WifiAwareModelName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wifiAwareModelName"))
 	if _r == 0 {
@@ -461,12 +438,12 @@ func (x *DDDevice) WifiAwareModelName() string {
 	return purego.GoString(_r)
 }
 
-// Device's Wi-Fi Aware model name.
+// SetWifiAwareModelName device's Wi-Fi Aware model name.
 func (x *DDDevice) SetWifiAwareModelName(wifiAwareModelName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWifiAwareModelName:"), purego.NSString(wifiAwareModelName))
 }
 
-// Device's Wi-Fi Aware vendor name.
+// WifiAwareVendorName device's Wi-Fi Aware vendor name.
 func (x *DDDevice) WifiAwareVendorName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wifiAwareVendorName"))
 	if _r == 0 {
@@ -475,7 +452,7 @@ func (x *DDDevice) WifiAwareVendorName() string {
 	return purego.GoString(_r)
 }
 
-// Device's Wi-Fi Aware vendor name.
+// SetWifiAwareVendorName device's Wi-Fi Aware vendor name.
 func (x *DDDevice) SetWifiAwareVendorName(wifiAwareVendorName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWifiAwareVendorName:"), purego.NSString(wifiAwareVendorName))
 }

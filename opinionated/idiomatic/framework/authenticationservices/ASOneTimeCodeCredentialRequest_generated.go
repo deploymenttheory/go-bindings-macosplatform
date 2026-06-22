@@ -23,7 +23,8 @@ func OneTimeCodeCredentialRequestFromID(id objc.ID) *OneTimeCodeCredentialReques
 	if id == 0 {
 		return nil
 	}
-	x := &OneTimeCodeCredentialRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OneTimeCodeCredentialRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func oneTimeCodeCredentialRequestAdopt(id objc.ID) *OneTimeCodeCredentialRequest
 	if id == 0 {
 		return nil
 	}
-	x := &OneTimeCodeCredentialRequest{Handle: objref.Wrap(id)}
+	x := &OneTimeCodeCredentialRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,9 +58,13 @@ func (x *OneTimeCodeCredentialRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes an instance of ASOneTimeCodeCredentialRequest.
-//
-// NewOneTimeCodeCredentialRequestWithCredentialIdentity creates a new OneTimeCodeCredentialRequest.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OneTimeCodeCredentialRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewOneTimeCodeCredentialRequestWithCredentialIdentity initializes an instance of ASOneTimeCodeCredentialRequest.
 func NewOneTimeCodeCredentialRequestWithCredentialIdentity(credentialIdentity *OneTimeCodeCredentialIdentity) *OneTimeCodeCredentialRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASOneTimeCodeCredentialRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialIdentity:"), objref.IDOf(credentialIdentity))

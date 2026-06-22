@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that maintains the user’s current focus status and your app’s ability to access it.
-//
 // FocusStatusCenter is an idiomatic wrapper over the Objective-C class INFocusStatusCenter.
+//
+// An object that maintains the user’s current focus status and your app’s ability to access it.
 type FocusStatusCenter struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FocusStatusCenterFromID(id objc.ID) *FocusStatusCenter {
 	if id == 0 {
 		return nil
 	}
-	x := &FocusStatusCenter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FocusStatusCenter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func focusStatusCenterAdopt(id objc.ID) *FocusStatusCenter {
 	if id == 0 {
 		return nil
 	}
-	x := &FocusStatusCenter{Handle: objref.Wrap(id)}
+	x := &FocusStatusCenter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,25 @@ func (x *FocusStatusCenter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FocusStatusCenter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFocusStatusCenter creates a new FocusStatusCenter.
 func NewFocusStatusCenter() *FocusStatusCenter {
 	_id := objc.Send[objc.ID](objc.ID(_class("INFocusStatusCenter")), objc.RegisterName("new"))
 	return focusStatusCenterAdopt(_id)
 }
 
+// FocusStatus wraps the corresponding Objective-C method.
 func (x *FocusStatusCenter) FocusStatus() *FocusStatus {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("focusStatus"))
 	return FocusStatusFromID(_r)
 }
 
+// AuthorizationStatus wraps the corresponding Objective-C method.
 func (x *FocusStatusCenter) AuthorizationStatus() FocusStatusAuthorizationStatus {
 	_r := objc.Send[FocusStatusAuthorizationStatus](objref.IDOf(x), objc.RegisterName("authorizationStatus"))
 	return _r

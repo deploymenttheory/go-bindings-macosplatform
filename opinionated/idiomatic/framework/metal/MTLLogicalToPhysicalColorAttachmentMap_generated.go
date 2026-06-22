@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Allows you to easily specify color attachment remapping from logical to physical indices.
-//
 // LogicalToPhysicalColorAttachmentMap is an idiomatic wrapper over the Objective-C class MTLLogicalToPhysicalColorAttachmentMap.
+//
+// Allows you to easily specify color attachment remapping from logical to physical indices.
 type LogicalToPhysicalColorAttachmentMap struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LogicalToPhysicalColorAttachmentMapFromID(id objc.ID) *LogicalToPhysicalCol
 	if id == 0 {
 		return nil
 	}
-	x := &LogicalToPhysicalColorAttachmentMap{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LogicalToPhysicalColorAttachmentMap{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func logicalToPhysicalColorAttachmentMapAdopt(id objc.ID) *LogicalToPhysicalColo
 	if id == 0 {
 		return nil
 	}
-	x := &LogicalToPhysicalColorAttachmentMap{Handle: objref.Wrap(id)}
+	x := &LogicalToPhysicalColorAttachmentMap{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,23 +60,30 @@ func (x *LogicalToPhysicalColorAttachmentMap) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LogicalToPhysicalColorAttachmentMap) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLogicalToPhysicalColorAttachmentMap creates a new LogicalToPhysicalColorAttachmentMap.
 func NewLogicalToPhysicalColorAttachmentMap() *LogicalToPhysicalColorAttachmentMap {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLLogicalToPhysicalColorAttachmentMap")), objc.RegisterName("new"))
 	return logicalToPhysicalColorAttachmentMapAdopt(_id)
 }
 
-// Maps a physical color attachment index to a logical index.
+// SetPhysicalIndexForLogicalIndex maps a physical color attachment index to a logical index.
 func (x *LogicalToPhysicalColorAttachmentMap) SetPhysicalIndexForLogicalIndex(physicalIndex int, logicalIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicalIndex:forLogicalIndex:"), physicalIndex, logicalIndex)
 }
 
-// Queries the physical color attachment index corresponding to a logical index.
+// GetPhysicalIndexForLogicalIndex queries the physical color attachment index corresponding to a logical index.
 func (x *LogicalToPhysicalColorAttachmentMap) GetPhysicalIndexForLogicalIndex(logicalIndex int) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("getPhysicalIndexForLogicalIndex:"), logicalIndex)
 	return _r
 }
 
+// Reset wraps the corresponding Objective-C method.
 func (x *LogicalToPhysicalColorAttachmentMap) Reset() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }

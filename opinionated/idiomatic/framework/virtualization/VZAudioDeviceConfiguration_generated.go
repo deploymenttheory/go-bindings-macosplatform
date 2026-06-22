@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for an audio device configuration.
-//
 // AudioDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZAudioDeviceConfiguration.
+//
+// AudioDeviceConfiguration is an abstract base — you do not construct it directly. Construct one of [VirtioSoundDeviceConfiguration] and pass it where a AudioDeviceConfiguration is accepted.
+//
+// The base class for an audio device configuration.
 type AudioDeviceConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func AudioDeviceConfigurationFromID(id objc.ID) *AudioDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func audioDeviceConfigurationAdopt(id objc.ID) *AudioDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioDeviceConfiguration{Handle: objref.Wrap(id)}
+	x := &AudioDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *AudioDeviceConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewAudioDeviceConfiguration creates a new AudioDeviceConfiguration.
-func NewAudioDeviceConfiguration() *AudioDeviceConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZAudioDeviceConfiguration")), objc.RegisterName("new"))
-	return audioDeviceConfigurationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioDeviceConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // AudioDeviceConfigurationable is the interface implemented by [AudioDeviceConfiguration], for mocking and DI.
@@ -70,3 +74,10 @@ type AudioDeviceConfigurationable interface {
 }
 
 var _ AudioDeviceConfigurationable = (*AudioDeviceConfiguration)(nil)
+
+// isAudioDeviceConfiguration marks AudioDeviceConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the AudioDeviceConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AudioDeviceConfiguration) isAudioDeviceConfiguration() {}
+
+var _ AudioDeviceConfigurationProvider = (*AudioDeviceConfiguration)(nil)

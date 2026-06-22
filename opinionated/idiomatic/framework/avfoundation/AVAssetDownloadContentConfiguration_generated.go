@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration object that contains variant qualifiers and media options.
-//
 // AssetDownloadContentConfiguration is an idiomatic wrapper over the Objective-C class AVAssetDownloadContentConfiguration.
+//
+// A configuration object that contains variant qualifiers and media options.
 type AssetDownloadContentConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetDownloadContentConfigurationFromID(id objc.ID) *AssetDownloadContentCo
 	if id == 0 {
 		return nil
 	}
-	x := &AssetDownloadContentConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetDownloadContentConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetDownloadContentConfigurationAdopt(id objc.ID) *AssetDownloadContentCon
 	if id == 0 {
 		return nil
 	}
-	x := &AssetDownloadContentConfiguration{Handle: objref.Wrap(id)}
+	x := &AssetDownloadContentConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,33 @@ func (x *AssetDownloadContentConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetDownloadContentConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetDownloadContentConfiguration creates a new AssetDownloadContentConfiguration.
 func NewAssetDownloadContentConfiguration() *AssetDownloadContentConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetDownloadContentConfiguration")), objc.RegisterName("new"))
 	return assetDownloadContentConfigurationAdopt(_id)
 }
 
-// The variant qualifiers for this configuration.
-//
-// WithVariantQualifiers sets the collection and returns the receiver so calls can be chained.
+// WithVariantQualifiers the variant qualifiers for this configuration.
 func (x *AssetDownloadContentConfiguration) WithVariantQualifiers(items ...*AssetVariantQualifier) *AssetDownloadContentConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v *AssetVariantQualifier) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariantQualifiers:"), _arr)
 	return x
 }
 
-// The media selections of an asset that a task downloads.
-//
-// WithMediaSelections sets the collection and returns the receiver so calls can be chained.
+// WithMediaSelections the media selections of an asset that a task downloads.
 func (x *AssetDownloadContentConfiguration) WithMediaSelections(items ...MediaSelectionProvider) *AssetDownloadContentConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v MediaSelectionProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaSelections:"), _arr)
 	return x
 }
 
-// An array of variant qualifiers. The qualifiers are expected to be added in the preferential order and will be evaluated in that order until the qualifier matches one or more AVAssetVariants. Only those variants which can be played on the current device configuration will be initially chosen for evaluation. If there is more than one match, automatic variant selection will be used to choose among the matched. If a variant qualifier is constructed to explicitly choose a variant, no evaluation is performed and the variant provided will be downloaded as is, even if it is not playable on current device configuration. If a variant qualifier has not been provided, or if the variant qualifier when evaluated does not match any of the variants which can be played according to the current device configuration, automatic variant selection will be used.
+// VariantQualifiers an array of variant qualifiers. The qualifiers are expected to be added in the preferential order and will be evaluated in that order until the qualifier matches one or more AVAssetVariants. Only those variants which can be played on the current device configuration will be initially chosen for evaluation. If there is more than one match, automatic variant selection will be used to choose among the matched. If a variant qualifier is constructed to explicitly choose a variant, no evaluation is performed and the variant provided will be downloaded as is, even if it is not playable on current device configuration. If a variant qualifier has not been provided, or if the variant qualifier when evaluated does not match any of the variants which can be played according to the current device configuration, automatic variant selection will be used.
 //
 // VariantQualifiers returns the collection as a Go slice.
 func (x *AssetDownloadContentConfiguration) VariantQualifiers() []*AssetVariantQualifier {
@@ -90,11 +94,12 @@ func (x *AssetDownloadContentConfiguration) VariantQualifiers() []*AssetVariantQ
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetVariantQualifier { return AssetVariantQualifierFromID(_id) })
 }
 
+// SetVariantQualifiers wraps the corresponding Objective-C method.
 func (x *AssetDownloadContentConfiguration) SetVariantQualifiers(variantQualifiers []*AssetVariantQualifier) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariantQualifiers:"), purego.SliceToNSArray(variantQualifiers, func(_v *AssetVariantQualifier) objc.ID { return objref.IDOf(_v) }))
 }
 
-// An array of media selections obtained from the AVAsset. If a media selection is not provided, automatic media selection associated with the asset will be used.
+// MediaSelections an array of media selections obtained from the AVAsset. If a media selection is not provided, automatic media selection associated with the asset will be used.
 //
 // MediaSelections returns the collection as a Go slice.
 func (x *AssetDownloadContentConfiguration) MediaSelections() []*MediaSelection {
@@ -102,6 +107,7 @@ func (x *AssetDownloadContentConfiguration) MediaSelections() []*MediaSelection 
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaSelection { return MediaSelectionFromID(_id) })
 }
 
+// SetMediaSelections wraps the corresponding Objective-C method.
 func (x *AssetDownloadContentConfiguration) SetMediaSelections(mediaSelections []*MediaSelection) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaSelections:"), purego.SliceToNSArray(mediaSelections, func(_v *MediaSelection) objc.ID { return objref.IDOf(_v) }))
 }

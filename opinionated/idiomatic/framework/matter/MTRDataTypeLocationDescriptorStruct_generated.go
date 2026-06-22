@@ -23,7 +23,8 @@ func MTRDataTypeLocationDescriptorStructFromID(id objc.ID) *MTRDataTypeLocationD
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDataTypeLocationDescriptorStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDataTypeLocationDescriptorStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDataTypeLocationDescriptorStructAdopt(id objc.ID) *MTRDataTypeLocationDe
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDataTypeLocationDescriptorStruct{Handle: objref.Wrap(id)}
+	x := &MTRDataTypeLocationDescriptorStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,30 +58,37 @@ func (x *MTRDataTypeLocationDescriptorStruct) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDataTypeLocationDescriptorStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDataTypeLocationDescriptorStruct creates a new MTRDataTypeLocationDescriptorStruct.
 func NewMTRDataTypeLocationDescriptorStruct() *MTRDataTypeLocationDescriptorStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDataTypeLocationDescriptorStruct")), objc.RegisterName("new"))
 	return mTRDataTypeLocationDescriptorStructAdopt(_id)
 }
 
-// WithLocationName sets locationName and returns the receiver so calls can be chained.
+// WithLocationName sets the property and returns the receiver so calls can be chained.
 func (x *MTRDataTypeLocationDescriptorStruct) WithLocationName(locationName string) *MTRDataTypeLocationDescriptorStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocationName:"), purego.NSString(locationName))
 	return x
 }
 
-// WithFloorNumber sets floorNumber and returns the receiver so calls can be chained.
+// WithFloorNumber sets the property and returns the receiver so calls can be chained.
 func (x *MTRDataTypeLocationDescriptorStruct) WithFloorNumber(floorNumber obj.Object) *MTRDataTypeLocationDescriptorStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloorNumber:"), objref.IDOf(floorNumber))
 	return x
 }
 
-// WithAreaType sets areaType and returns the receiver so calls can be chained.
+// WithAreaType sets the property and returns the receiver so calls can be chained.
 func (x *MTRDataTypeLocationDescriptorStruct) WithAreaType(areaType obj.Object) *MTRDataTypeLocationDescriptorStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaType:"), objref.IDOf(areaType))
 	return x
 }
 
+// LocationName wraps the corresponding Objective-C method.
 func (x *MTRDataTypeLocationDescriptorStruct) LocationName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locationName"))
 	if _r == 0 {
@@ -88,24 +97,29 @@ func (x *MTRDataTypeLocationDescriptorStruct) LocationName() string {
 	return purego.GoString(_r)
 }
 
+// SetLocationName wraps the corresponding Objective-C method.
 func (x *MTRDataTypeLocationDescriptorStruct) SetLocationName(locationName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocationName:"), purego.NSString(locationName))
 }
 
+// FloorNumber wraps the corresponding Objective-C method.
 func (x *MTRDataTypeLocationDescriptorStruct) FloorNumber() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("floorNumber"))
 	return obj.Wrap(_r)
 }
 
+// SetFloorNumber wraps the corresponding Objective-C method.
 func (x *MTRDataTypeLocationDescriptorStruct) SetFloorNumber(floorNumber obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloorNumber:"), objref.IDOf(floorNumber))
 }
 
+// AreaType wraps the corresponding Objective-C method.
 func (x *MTRDataTypeLocationDescriptorStruct) AreaType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("areaType"))
 	return obj.Wrap(_r)
 }
 
+// SetAreaType wraps the corresponding Objective-C method.
 func (x *MTRDataTypeLocationDescriptorStruct) SetAreaType(areaType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaType:"), objref.IDOf(areaType))
 }

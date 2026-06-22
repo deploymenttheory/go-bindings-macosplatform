@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // CNNInstanceNormalizationNode is an idiomatic wrapper over the Objective-C class MPSCNNInstanceNormalizationNode.
+//
+// It embeds [NNFilterNode], promoting that type's methods.
 type CNNInstanceNormalizationNode struct {
-	objref.Handle
+	NNFilterNode
 }
 
 // CNNInstanceNormalizationNodeFromID adopts an existing Objective-C object as a CNNInstanceNormalizationNode
@@ -23,7 +24,8 @@ func CNNInstanceNormalizationNodeFromID(id objc.ID) *CNNInstanceNormalizationNod
 	if id == 0 {
 		return nil
 	}
-	x := &CNNInstanceNormalizationNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNInstanceNormalizationNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func cNNInstanceNormalizationNodeAdopt(id objc.ID) *CNNInstanceNormalizationNode
 	if id == 0 {
 		return nil
 	}
-	x := &CNNInstanceNormalizationNode{Handle: objref.Wrap(id)}
+	x := &CNNInstanceNormalizationNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNInstanceNormalizationNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNInstanceNormalizationNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNInstanceNormalizationNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNInstanceNormalizationNode creates a new CNNInstanceNormalizationNode.
@@ -62,29 +50,25 @@ func NewCNNInstanceNormalizationNode() *CNNInstanceNormalizationNode {
 	return cNNInstanceNormalizationNodeAdopt(_id)
 }
 
-// The training style of the forward node will be propagated to gradient nodes made from it
-//
-// WithTrainingStyle sets trainingStyle and returns the receiver so calls can be chained.
+// WithTrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
 func (x *CNNInstanceNormalizationNode) WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNInstanceNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStyle:"), trainingStyle)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNInstanceNormalizationNode) WithLabel(label string) *CNNInstanceNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The training style of the forward node will be propagated to gradient nodes made from it
+// TrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
 func (x *CNNInstanceNormalizationNode) TrainingStyle() NNTrainingStyle {
 	_r := objc.Send[NNTrainingStyle](objref.IDOf(x), objc.RegisterName("trainingStyle"))
 	return _r
 }
 
-// The training style of the forward node will be propagated to gradient nodes made from it
+// SetTrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
 func (x *CNNInstanceNormalizationNode) SetTrainingStyle(trainingStyle NNTrainingStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStyle:"), trainingStyle)
 }
@@ -99,3 +83,5 @@ type CNNInstanceNormalizationNodeable interface {
 }
 
 var _ CNNInstanceNormalizationNodeable = (*CNNInstanceNormalizationNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNInstanceNormalizationNode)(nil)

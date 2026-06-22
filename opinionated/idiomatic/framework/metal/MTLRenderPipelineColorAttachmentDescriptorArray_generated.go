@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An array of render pipeline color attachment descriptor objects.
-//
 // RenderPipelineColorAttachmentDescriptorArray is an idiomatic wrapper over the Objective-C class MTLRenderPipelineColorAttachmentDescriptorArray.
+//
+// An array of render pipeline color attachment descriptor objects.
 type RenderPipelineColorAttachmentDescriptorArray struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RenderPipelineColorAttachmentDescriptorArrayFromID(id objc.ID) *RenderPipel
 	if id == 0 {
 		return nil
 	}
-	x := &RenderPipelineColorAttachmentDescriptorArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RenderPipelineColorAttachmentDescriptorArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func renderPipelineColorAttachmentDescriptorArrayAdopt(id objc.ID) *RenderPipeli
 	if id == 0 {
 		return nil
 	}
-	x := &RenderPipelineColorAttachmentDescriptorArray{Handle: objref.Wrap(id)}
+	x := &RenderPipelineColorAttachmentDescriptorArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *RenderPipelineColorAttachmentDescriptorArray) IsKind(className string) 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RenderPipelineColorAttachmentDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRenderPipelineColorAttachmentDescriptorArray creates a new RenderPipelineColorAttachmentDescriptorArray.
 func NewRenderPipelineColorAttachmentDescriptorArray() *RenderPipelineColorAttachmentDescriptorArray {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLRenderPipelineColorAttachmentDescriptorArray")), objc.RegisterName("new"))
 	return renderPipelineColorAttachmentDescriptorArrayAdopt(_id)
 }
 
-// Returns the render pipeline state for the specified color attachment.
+// ObjectAtIndexedSubscript returns the render pipeline state for the specified color attachment.
 func (x *RenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *RenderPipelineColorAttachmentDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return RenderPipelineColorAttachmentDescriptorFromID(_r)
 }
 
-// Sets the render pipeline state for a specified color attachment.
+// SetObjectAtIndexedSubscript sets the render pipeline state for a specified color attachment.
 func (x *RenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *RenderPipelineColorAttachmentDescriptor, attachmentIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }

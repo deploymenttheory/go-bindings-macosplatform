@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Skeleton is an idiomatic wrapper over the Objective-C class MDLSkeleton.
+//
+// It embeds [Object], promoting that type's methods.
 type Skeleton struct {
-	objref.Handle
+	Object
 }
 
 // SkeletonFromID adopts an existing Objective-C object as a Skeleton
@@ -23,7 +24,8 @@ func SkeletonFromID(id objc.ID) *Skeleton {
 	if id == 0 {
 		return nil
 	}
-	x := &Skeleton{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Skeleton{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func skeletonAdopt(id objc.ID) *Skeleton {
 	if id == 0 {
 		return nil
 	}
-	x := &Skeleton{Handle: objref.Wrap(id)}
+	x := &Skeleton{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *Skeleton) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Skeleton) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Skeleton) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSkeletonWithNameJointPaths creates a new Skeleton.
@@ -63,41 +51,39 @@ func NewSkeletonWithNameJointPaths(name string, jointPaths []string) *Skeleton {
 	return skeletonAdopt(_id)
 }
 
-// The parent object that contains this object.
-//
-// WithParent sets parent and returns the receiver so calls can be chained.
+// WithParent the parent object that contains this object.
 func (x *Skeleton) WithParent(parent ObjectProvider) *Skeleton {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return x
 }
 
-// The primary object, if applicable, of which this object is an instance.
-//
-// WithInstance sets instance and returns the receiver so calls can be chained.
+// WithInstance the primary object, if applicable, of which this object is an instance.
 func (x *Skeleton) WithInstance(instance ObjectProvider) *Skeleton {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return x
 }
 
-// A Boolean value indicating whether this object should be used in rendering.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden a Boolean value indicating whether this object should be used in rendering.
 func (x *Skeleton) WithHidden(hidden bool) *Skeleton {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
+// JointPaths wraps the corresponding Objective-C method.
+//
 // JointPaths returns the collection as a Go slice.
 func (x *Skeleton) JointPaths() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jointPaths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// JointBindTransforms wraps the corresponding Objective-C method.
 func (x *Skeleton) JointBindTransforms() *Matrix4x4Array {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jointBindTransforms"))
 	return Matrix4x4ArrayFromID(_r)
 }
 
+// JointRestTransforms wraps the corresponding Objective-C method.
 func (x *Skeleton) JointRestTransforms() *Matrix4x4Array {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jointRestTransforms"))
 	return Matrix4x4ArrayFromID(_r)
@@ -115,3 +101,5 @@ type Skeletonable interface {
 }
 
 var _ Skeletonable = (*Skeleton)(nil)
+
+var _ ObjectProvider = (*Skeleton)(nil)

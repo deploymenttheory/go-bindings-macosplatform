@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view controller that provides the user interface for choosing assets from the photo library.
-//
 // PickerViewController is an idiomatic wrapper over the Objective-C class PHPickerViewController.
+//
+// A view controller that provides the user interface for choosing assets from the photo library.
 type PickerViewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PickerViewControllerFromID(id objc.ID) *PickerViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &PickerViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PickerViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func pickerViewControllerAdopt(id objc.ID) *PickerViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &PickerViewController{Handle: objref.Wrap(id)}
+	x := &PickerViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,46 +60,50 @@ func (x *PickerViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new picker view controller with the configuration you specify.
-//
-// NewPickerViewControllerWithConfiguration creates a new PickerViewController.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PickerViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPickerViewControllerWithConfiguration creates a new picker view controller with the configuration you specify.
 func NewPickerViewControllerWithConfiguration(configuration *PickerConfiguration) *PickerViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHPickerViewController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), objref.IDOf(configuration))
 	return pickerViewControllerAdopt(_id)
 }
 
-// Customizes your app’s photo picker according to the given configuration.
+// UpdatePickerUsingConfiguration customizes your app’s photo picker according to the given configuration.
 func (x *PickerViewController) UpdatePickerUsingConfiguration(configuration *PickerUpdateConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updatePickerUsingConfiguration:"), objref.IDOf(configuration))
 }
 
-// Deselects assets that are in a selected state.
+// DeselectAssetsWithIdentifiers deselects assets that are in a selected state.
 func (x *PickerViewController) DeselectAssetsWithIdentifiers(identifiers []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deselectAssetsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// Reorders assets that are in a selected state.
+// MoveAssetWithIdentifierAfterAssetWithIdentifier reorders assets that are in a selected state.
 func (x *PickerViewController) MoveAssetWithIdentifierAfterAssetWithIdentifier(identifier string, afterIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveAssetWithIdentifier:afterAssetWithIdentifier:"), purego.NSString(identifier), purego.NSString(afterIdentifier))
 }
 
-// Resets the visible photo thumbnails by scrolling the view to the picker’s initial position.
+// ScrollToInitialPosition resets the visible photo thumbnails by scrolling the view to the picker’s initial position.
 func (x *PickerViewController) ScrollToInitialPosition() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollToInitialPosition"))
 }
 
-// Changes the picker’s content scale by making the photo thumbnails larger in the view.
+// ZoomIn changes the picker’s content scale by making the photo thumbnails larger in the view.
 func (x *PickerViewController) ZoomIn() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoomIn"))
 }
 
-// Changes the picker’s content scale by making the photo thumbnails smaller in the view.
+// ZoomOut changes the picker’s content scale by making the photo thumbnails smaller in the view.
 func (x *PickerViewController) ZoomOut() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoomOut"))
 }
 
-// The configuration passed in during initialization.
+// Configuration the configuration passed in during initialization.
 func (x *PickerViewController) Configuration() *PickerConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
 	return PickerConfigurationFromID(_r)

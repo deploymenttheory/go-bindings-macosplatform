@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that customizes how a store description aligns with a CloudKit database.
-//
 // PersistentCloudKitContainerOptions is an idiomatic wrapper over the Objective-C class NSPersistentCloudKitContainerOptions.
+//
+// An object that customizes how a store description aligns with a CloudKit database.
 type PersistentCloudKitContainerOptions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PersistentCloudKitContainerOptionsFromID(id objc.ID) *PersistentCloudKitCon
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentCloudKitContainerOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PersistentCloudKitContainerOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func persistentCloudKitContainerOptionsAdopt(id objc.ID) *PersistentCloudKitCont
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentCloudKitContainerOptions{Handle: objref.Wrap(id)}
+	x := &PersistentCloudKitContainerOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +60,26 @@ func (x *PersistentCloudKitContainerOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes container options using the given CloudKit container identifier.
-//
-// NewPersistentCloudKitContainerOptionsWithContainerIdentifier creates a new PersistentCloudKitContainerOptions.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PersistentCloudKitContainerOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPersistentCloudKitContainerOptionsWithContainerIdentifier initializes container options using the given CloudKit container identifier.
 func NewPersistentCloudKitContainerOptionsWithContainerIdentifier(containerIdentifier string) *PersistentCloudKitContainerOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPersistentCloudKitContainerOptions")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerIdentifier:"), purego.NSString(containerIdentifier))
 	return persistentCloudKitContainerOptionsAdopt(_id)
 }
 
-// The database scope — public, private, or shared — to use for a specified store in a persistent CloudKit container.
-//
-// WithDatabaseScope sets databaseScope and returns the receiver so calls can be chained.
+// WithDatabaseScope the database scope — public, private, or shared — to use for a specified store in a persistent CloudKit container.
 func (x *PersistentCloudKitContainerOptions) WithDatabaseScope(databaseScope obj.Object) *PersistentCloudKitContainerOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabaseScope:"), objref.IDOf(databaseScope))
 	return x
 }
 
-// The container identifier of the CKContainer to use with a given instance of NSPersistentStoreDescription
+// ContainerIdentifier the container identifier of the CKContainer to use with a given instance of NSPersistentStoreDescription
 func (x *PersistentCloudKitContainerOptions) ContainerIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containerIdentifier"))
 	if _r == 0 {
@@ -84,11 +88,13 @@ func (x *PersistentCloudKitContainerOptions) ContainerIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// DatabaseScope wraps the corresponding Objective-C method.
 func (x *PersistentCloudKitContainerOptions) DatabaseScope() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("databaseScope"))
 	return obj.Wrap(_r)
 }
 
+// SetDatabaseScope wraps the corresponding Objective-C method.
 func (x *PersistentCloudKitContainerOptions) SetDatabaseScope(databaseScope obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabaseScope:"), objref.IDOf(databaseScope))
 }

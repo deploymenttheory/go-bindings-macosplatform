@@ -23,7 +23,8 @@ func ItemBadgeFromID(id objc.ID) *ItemBadge {
 	if id == 0 {
 		return nil
 	}
-	x := &ItemBadge{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ItemBadge{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func itemBadgeAdopt(id objc.ID) *ItemBadge {
 	if id == 0 {
 		return nil
 	}
-	x := &ItemBadge{Handle: objref.Wrap(id)}
+	x := &ItemBadge{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,12 +58,19 @@ func (x *ItemBadge) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ItemBadge) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewItemBadge creates a new ItemBadge.
 func NewItemBadge() *ItemBadge {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSItemBadge")), objc.RegisterName("new"))
 	return itemBadgeAdopt(_id)
 }
 
+// Text wraps the corresponding Objective-C method.
 func (x *ItemBadge) Text() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("text"))
 	if _r == 0 {

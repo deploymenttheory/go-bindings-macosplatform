@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An interaction between the user and your app involving an intent object.
-//
 // Interaction is an idiomatic wrapper over the Objective-C class INInteraction.
+//
+// An interaction between the user and your app involving an intent object.
 type Interaction struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func InteractionFromID(id objc.ID) *Interaction {
 	if id == 0 {
 		return nil
 	}
-	x := &Interaction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Interaction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func interactionAdopt(id objc.ID) *Interaction {
 	if id == 0 {
 		return nil
 	}
-	x := &Interaction{Handle: objref.Wrap(id)}
+	x := &Interaction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,48 +62,44 @@ func (x *Interaction) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes and returns an interaction object with an intent object and your app’s response.
-//
-// NewInteractionWithIntentResponse creates a new Interaction.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Interaction) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewInteractionWithIntentResponse initializes and returns an interaction object with an intent object and your app’s response.
 func NewInteractionWithIntentResponse(intent *Intent, response *IntentResponse) *Interaction {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INInteraction")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIntent:response:"), objref.IDOf(intent), objref.IDOf(response))
 	return interactionAdopt(_id)
 }
 
-// The direction in which information flowed to or from the device.
-//
-// WithDirection sets direction and returns the receiver so calls can be chained.
+// WithDirection the direction in which information flowed to or from the device.
 func (x *Interaction) WithDirection(direction InteractionDirection) *Interaction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirection:"), direction)
 	return x
 }
 
-// The time at which the interaction started and its duration.
-//
-// WithDateInterval sets dateInterval and returns the receiver so calls can be chained.
+// WithDateInterval the time at which the interaction started and its duration.
 func (x *Interaction) WithDateInterval(dateInterval obj.Object) *Interaction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateInterval:"), objref.IDOf(dateInterval))
 	return x
 }
 
-// The unique identifier of the interaction.
-//
-// WithIdentifier sets identifier and returns the receiver so calls can be chained.
+// WithIdentifier the unique identifier of the interaction.
 func (x *Interaction) WithIdentifier(identifier string) *Interaction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 	return x
 }
 
-// The unique identifier of the interaction’s group.
-//
-// WithGroupIdentifier sets groupIdentifier and returns the receiver so calls can be chained.
+// WithGroupIdentifier the unique identifier of the interaction’s group.
 func (x *Interaction) WithGroupIdentifier(groupIdentifier string) *Interaction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupIdentifier:"), purego.NSString(groupIdentifier))
 	return x
 }
 
-// Donates this interaction object to the system.
+// DonateInteractionWithCompletion donates this interaction object to the system.
 //
 // DonateInteractionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Interaction) DonateInteractionWithCompletion(ctx context.Context) error {
@@ -120,39 +118,47 @@ func (x *Interaction) DonateInteractionWithCompletion(ctx context.Context) error
 	}
 }
 
+// Intent wraps the corresponding Objective-C method.
 func (x *Interaction) Intent() *Intent {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intent"))
 	return IntentFromID(_r)
 }
 
+// IntentResponse wraps the corresponding Objective-C method.
 func (x *Interaction) IntentResponse() *IntentResponse {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intentResponse"))
 	return IntentResponseFromID(_r)
 }
 
+// IntentHandlingStatus wraps the corresponding Objective-C method.
 func (x *Interaction) IntentHandlingStatus() IntentHandlingStatus {
 	_r := objc.Send[IntentHandlingStatus](objref.IDOf(x), objc.RegisterName("intentHandlingStatus"))
 	return _r
 }
 
+// Direction wraps the corresponding Objective-C method.
 func (x *Interaction) Direction() InteractionDirection {
 	_r := objc.Send[InteractionDirection](objref.IDOf(x), objc.RegisterName("direction"))
 	return _r
 }
 
+// SetDirection wraps the corresponding Objective-C method.
 func (x *Interaction) SetDirection(direction InteractionDirection) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirection:"), direction)
 }
 
+// DateInterval wraps the corresponding Objective-C method.
 func (x *Interaction) DateInterval() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateInterval"))
 	return obj.Wrap(_r)
 }
 
+// SetDateInterval wraps the corresponding Objective-C method.
 func (x *Interaction) SetDateInterval(dateInterval obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateInterval:"), objref.IDOf(dateInterval))
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *Interaction) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -161,10 +167,12 @@ func (x *Interaction) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// SetIdentifier wraps the corresponding Objective-C method.
 func (x *Interaction) SetIdentifier(identifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 }
 
+// GroupIdentifier wraps the corresponding Objective-C method.
 func (x *Interaction) GroupIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupIdentifier"))
 	if _r == 0 {
@@ -173,6 +181,7 @@ func (x *Interaction) GroupIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// SetGroupIdentifier wraps the corresponding Objective-C method.
 func (x *Interaction) SetGroupIdentifier(groupIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupIdentifier:"), purego.NSString(groupIdentifier))
 }

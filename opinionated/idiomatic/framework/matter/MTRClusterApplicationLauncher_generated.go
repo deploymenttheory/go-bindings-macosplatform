@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterApplicationLauncher is an idiomatic wrapper over the Objective-C class MTRClusterApplicationLauncher.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterApplicationLauncher struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterApplicationLauncherFromID adopts an existing Objective-C object as a MTRClusterApplicationLauncher
@@ -25,7 +26,8 @@ func MTRClusterApplicationLauncherFromID(id objc.ID) *MTRClusterApplicationLaunc
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterApplicationLauncher{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterApplicationLauncher{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func mTRClusterApplicationLauncherAdopt(id objc.ID) *MTRClusterApplicationLaunch
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterApplicationLauncher{Handle: objref.Wrap(id)}
+	x := &MTRClusterApplicationLauncher{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterApplicationLauncher) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterApplicationLauncher) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterApplicationLauncher) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterApplicationLauncherWithDeviceEndpointIDQueue creates a new MTRClusterApplicationLauncher.
+// NewMTRClusterApplicationLauncherWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterApplicationLauncherWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterApplicationLauncher {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterApplicationLauncher")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -74,8 +60,10 @@ func NewMTRClusterApplicationLauncherWithDeviceEndpointQueue(device *MTRDevice, 
 	return mTRClusterApplicationLauncherAdopt(_id)
 }
 
+// LaunchAppWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // LaunchAppWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterApplicationLauncher) LaunchAppWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRApplicationLauncherClusterLaunchAppParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRApplicationLauncherClusterLauncherResponseParams, error) {
+func (x *MTRClusterApplicationLauncher) LaunchAppWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRApplicationLauncherClusterLaunchAppParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
 	type _result struct {
 		val *MTRApplicationLauncherClusterLauncherResponseParams
 		err error
@@ -97,8 +85,10 @@ func (x *MTRClusterApplicationLauncher) LaunchAppWithParamsExpectedValuesExpecte
 	}
 }
 
+// LaunchAppWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // LaunchAppWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterApplicationLauncher) LaunchAppWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRApplicationLauncherClusterLauncherResponseParams, error) {
+func (x *MTRClusterApplicationLauncher) LaunchAppWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
 	type _result struct {
 		val *MTRApplicationLauncherClusterLauncherResponseParams
 		err error
@@ -120,8 +110,10 @@ func (x *MTRClusterApplicationLauncher) LaunchAppWithExpectedValuesExpectedValue
 	}
 }
 
+// StopAppWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // StopAppWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterApplicationLauncher) StopAppWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRApplicationLauncherClusterStopAppParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRApplicationLauncherClusterLauncherResponseParams, error) {
+func (x *MTRClusterApplicationLauncher) StopAppWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRApplicationLauncherClusterStopAppParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
 	type _result struct {
 		val *MTRApplicationLauncherClusterLauncherResponseParams
 		err error
@@ -143,8 +135,10 @@ func (x *MTRClusterApplicationLauncher) StopAppWithParamsExpectedValuesExpectedV
 	}
 }
 
+// StopAppWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // StopAppWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterApplicationLauncher) StopAppWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRApplicationLauncherClusterLauncherResponseParams, error) {
+func (x *MTRClusterApplicationLauncher) StopAppWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
 	type _result struct {
 		val *MTRApplicationLauncherClusterLauncherResponseParams
 		err error
@@ -166,8 +160,10 @@ func (x *MTRClusterApplicationLauncher) StopAppWithExpectedValuesExpectedValueIn
 	}
 }
 
+// HideAppWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // HideAppWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterApplicationLauncher) HideAppWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRApplicationLauncherClusterHideAppParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRApplicationLauncherClusterLauncherResponseParams, error) {
+func (x *MTRClusterApplicationLauncher) HideAppWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRApplicationLauncherClusterHideAppParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
 	type _result struct {
 		val *MTRApplicationLauncherClusterLauncherResponseParams
 		err error
@@ -189,8 +185,10 @@ func (x *MTRClusterApplicationLauncher) HideAppWithParamsExpectedValuesExpectedV
 	}
 }
 
+// HideAppWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // HideAppWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterApplicationLauncher) HideAppWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRApplicationLauncherClusterLauncherResponseParams, error) {
+func (x *MTRClusterApplicationLauncher) HideAppWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
 	type _result struct {
 		val *MTRApplicationLauncherClusterLauncherResponseParams
 		err error
@@ -212,51 +210,62 @@ func (x *MTRClusterApplicationLauncher) HideAppWithExpectedValuesExpectedValueIn
 	}
 }
 
+// ReadAttributeCatalogListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterApplicationLauncher) ReadAttributeCatalogListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCatalogListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeCurrentAppWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterApplicationLauncher) ReadAttributeCurrentAppWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentAppWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeCurrentAppWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterApplicationLauncher) WriteAttributeCurrentAppWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeCurrentAppWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeCurrentAppWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterApplicationLauncher) WriteAttributeCurrentAppWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeCurrentAppWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterApplicationLauncher) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterApplicationLauncher) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterApplicationLauncher) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterApplicationLauncher) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterApplicationLauncher) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// LaunchAppWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // LaunchAppWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterApplicationLauncher) LaunchAppWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRApplicationLauncherClusterLaunchAppParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRApplicationLauncherClusterLauncherResponseParams, error) {
+func (x *MTRClusterApplicationLauncher) LaunchAppWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRApplicationLauncherClusterLaunchAppParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
 	type _result struct {
 		val *MTRApplicationLauncherClusterLauncherResponseParams
 		err error
@@ -278,8 +287,10 @@ func (x *MTRClusterApplicationLauncher) LaunchAppWithParamsExpectedValuesExpecte
 	}
 }
 
+// StopAppWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // StopAppWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterApplicationLauncher) StopAppWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRApplicationLauncherClusterStopAppParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRApplicationLauncherClusterLauncherResponseParams, error) {
+func (x *MTRClusterApplicationLauncher) StopAppWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRApplicationLauncherClusterStopAppParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
 	type _result struct {
 		val *MTRApplicationLauncherClusterLauncherResponseParams
 		err error
@@ -301,8 +312,10 @@ func (x *MTRClusterApplicationLauncher) StopAppWithParamsExpectedValuesExpectedV
 	}
 }
 
+// HideAppWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // HideAppWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterApplicationLauncher) HideAppWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRApplicationLauncherClusterHideAppParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRApplicationLauncherClusterLauncherResponseParams, error) {
+func (x *MTRClusterApplicationLauncher) HideAppWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRApplicationLauncherClusterHideAppParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
 	type _result struct {
 		val *MTRApplicationLauncherClusterLauncherResponseParams
 		err error
@@ -348,3 +361,7 @@ type MTRClusterApplicationLauncherable interface {
 }
 
 var _ MTRClusterApplicationLauncherable = (*MTRClusterApplicationLauncher)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterApplicationLauncher)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterApplicationLauncher)(nil)

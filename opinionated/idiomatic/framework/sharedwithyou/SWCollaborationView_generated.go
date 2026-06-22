@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view that contains the collaboration content and options.
-//
 // CollaborationView is an idiomatic wrapper over the Objective-C class SWCollaborationView.
+//
+// A view that contains the collaboration content and options.
 type CollaborationView struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func CollaborationViewFromID(id objc.ID) *CollaborationView {
 	if id == 0 {
 		return nil
 	}
-	x := &CollaborationView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollaborationView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func collaborationViewAdopt(id objc.ID) *CollaborationView {
 	if id == 0 {
 		return nil
 	}
-	x := &CollaborationView{Handle: objref.Wrap(id)}
+	x := &CollaborationView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,61 +61,55 @@ func (x *CollaborationView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates and initializes a collaboration view.
-//
-// NewCollaborationViewWithItemProvider creates a new CollaborationView.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CollaborationView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCollaborationViewWithItemProvider creates and initializes a collaboration view.
 func NewCollaborationViewWithItemProvider(itemProvider obj.Object) *CollaborationView {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWCollaborationView")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemProvider:"), objref.IDOf(itemProvider))
 	return collaborationViewAdopt(_id)
 }
 
-// The number of participants in a collaboration.
-//
-// WithActiveParticipantCount sets activeParticipantCount and returns the receiver so calls can be chained.
+// WithActiveParticipantCount the number of participants in a collaboration.
 func (x *CollaborationView) WithActiveParticipantCount(activeParticipantCount int) *CollaborationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActiveParticipantCount:"), activeParticipantCount)
 	return x
 }
 
-// The title that the system displays in the header.
-//
-// WithHeaderTitle sets headerTitle and returns the receiver so calls can be chained.
+// WithHeaderTitle the title that the system displays in the header.
 func (x *CollaborationView) WithHeaderTitle(headerTitle string) *CollaborationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaderTitle:"), purego.NSString(headerTitle))
 	return x
 }
 
-// The subtitle that the system displays in the header.
-//
-// WithHeaderSubtitle sets headerSubtitle and returns the receiver so calls can be chained.
+// WithHeaderSubtitle the subtitle that the system displays in the header.
 func (x *CollaborationView) WithHeaderSubtitle(headerSubtitle string) *CollaborationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaderSubtitle:"), purego.NSString(headerSubtitle))
 	return x
 }
 
-// The image that the system displays in the header.
-//
-// WithHeaderImage sets headerImage and returns the receiver so calls can be chained.
+// WithHeaderImage the image that the system displays in the header.
 func (x *CollaborationView) WithHeaderImage(headerImage obj.Object) *CollaborationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaderImage:"), objref.IDOf(headerImage))
 	return x
 }
 
-// The manage button title that the system displays in the header.
-//
-// WithManageButtonTitle sets manageButtonTitle and returns the receiver so calls can be chained.
+// WithManageButtonTitle the manage button title that the system displays in the header.
 func (x *CollaborationView) WithManageButtonTitle(manageButtonTitle string) *CollaborationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManageButtonTitle:"), purego.NSString(manageButtonTitle))
 	return x
 }
 
-// Sets the content view.
+// SetContentView sets the content view.
 func (x *CollaborationView) SetContentView(detailViewListContentView obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(detailViewListContentView))
 }
 
-// Dismisses the popover.
+// DismissPopover dismisses the popover.
 //
 // DismissPopover blocks until the operation completes or ctx is cancelled.
 func (x *CollaborationView) DismissPopover(ctx context.Context) error {
@@ -130,20 +126,23 @@ func (x *CollaborationView) DismissPopover(ctx context.Context) error {
 	}
 }
 
-// A Boolean value the system uses to show or hide the default manage-participants button in the collaboration popover.
+// SetShowManageButton a Boolean value the system uses to show or hide the default manage-participants button in the collaboration popover.
 func (x *CollaborationView) SetShowManageButton(showManageButton bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowManageButton:"), showManageButton)
 }
 
+// ActiveParticipantCount wraps the corresponding Objective-C method.
 func (x *CollaborationView) ActiveParticipantCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("activeParticipantCount"))
 	return _r
 }
 
+// SetActiveParticipantCount wraps the corresponding Objective-C method.
 func (x *CollaborationView) SetActiveParticipantCount(activeParticipantCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActiveParticipantCount:"), activeParticipantCount)
 }
 
+// HeaderTitle wraps the corresponding Objective-C method.
 func (x *CollaborationView) HeaderTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("headerTitle"))
 	if _r == 0 {
@@ -152,10 +151,12 @@ func (x *CollaborationView) HeaderTitle() string {
 	return purego.GoString(_r)
 }
 
+// SetHeaderTitle wraps the corresponding Objective-C method.
 func (x *CollaborationView) SetHeaderTitle(headerTitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaderTitle:"), purego.NSString(headerTitle))
 }
 
+// HeaderSubtitle wraps the corresponding Objective-C method.
 func (x *CollaborationView) HeaderSubtitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("headerSubtitle"))
 	if _r == 0 {
@@ -164,25 +165,29 @@ func (x *CollaborationView) HeaderSubtitle() string {
 	return purego.GoString(_r)
 }
 
+// SetHeaderSubtitle wraps the corresponding Objective-C method.
 func (x *CollaborationView) SetHeaderSubtitle(headerSubtitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaderSubtitle:"), purego.NSString(headerSubtitle))
 }
 
+// HeaderImage wraps the corresponding Objective-C method.
 func (x *CollaborationView) HeaderImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("headerImage"))
 	return obj.Wrap(_r)
 }
 
+// SetHeaderImage wraps the corresponding Objective-C method.
 func (x *CollaborationView) SetHeaderImage(headerImage obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaderImage:"), objref.IDOf(headerImage))
 }
 
+// MenuFormRepresentation wraps the corresponding Objective-C method.
 func (x *CollaborationView) MenuFormRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuFormRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// sets the title of the manage participants button in the collaboration popover to the given string, defaults to "Manage Share"
+// ManageButtonTitle sets the title of the manage participants button in the collaboration popover to the given string, defaults to "Manage Share"
 func (x *CollaborationView) ManageButtonTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manageButtonTitle"))
 	if _r == 0 {
@@ -191,6 +196,7 @@ func (x *CollaborationView) ManageButtonTitle() string {
 	return purego.GoString(_r)
 }
 
+// SetManageButtonTitle wraps the corresponding Objective-C method.
 func (x *CollaborationView) SetManageButtonTitle(manageButtonTitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManageButtonTitle:"), purego.NSString(manageButtonTitle))
 }

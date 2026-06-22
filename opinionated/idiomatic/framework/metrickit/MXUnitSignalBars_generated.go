@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for the number of bars of cellular network connectivity.
-//
 // UnitSignalBars is an idiomatic wrapper over the Objective-C class MXUnitSignalBars.
+//
+// A unit of measure for the number of bars of cellular network connectivity.
 type UnitSignalBars struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func UnitSignalBarsFromID(id objc.ID) *UnitSignalBars {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitSignalBars{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UnitSignalBars{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func unitSignalBarsAdopt(id objc.ID) *UnitSignalBars {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitSignalBars{Handle: objref.Wrap(id)}
+	x := &UnitSignalBars{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *UnitSignalBars) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *UnitSignalBars) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UnitSignalBars) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewUnitSignalBars creates a new UnitSignalBars.

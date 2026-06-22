@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class to wrap bidirectional optical flow to send to the processor.
-//
 // FrameProcessorOpticalFlow is an idiomatic wrapper over the Objective-C class VTFrameProcessorOpticalFlow.
+//
+// A class to wrap bidirectional optical flow to send to the processor.
 type FrameProcessorOpticalFlow struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FrameProcessorOpticalFlowFromID(id objc.ID) *FrameProcessorOpticalFlow {
 	if id == 0 {
 		return nil
 	}
-	x := &FrameProcessorOpticalFlow{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FrameProcessorOpticalFlow{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func frameProcessorOpticalFlowAdopt(id objc.ID) *FrameProcessorOpticalFlow {
 	if id == 0 {
 		return nil
 	}
-	x := &FrameProcessorOpticalFlow{Handle: objref.Wrap(id)}
+	x := &FrameProcessorOpticalFlow{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *FrameProcessorOpticalFlow) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *FrameProcessorOpticalFlow) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FrameProcessorOpticalFlow) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewFrameProcessorOpticalFlow creates a new FrameProcessorOpticalFlow.

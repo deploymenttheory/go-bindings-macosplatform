@@ -23,7 +23,8 @@ func MTRBridgedDeviceBasicInformationClusterActiveChangedEventFromID(id objc.ID)
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBridgedDeviceBasicInformationClusterActiveChangedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBridgedDeviceBasicInformationClusterActiveChangedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRBridgedDeviceBasicInformationClusterActiveChangedEventAdopt(id objc.ID) 
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBridgedDeviceBasicInformationClusterActiveChangedEvent{Handle: objref.Wrap(id)}
+	x := &MTRBridgedDeviceBasicInformationClusterActiveChangedEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) IsKind(class
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRBridgedDeviceBasicInformationClusterActiveChangedEvent creates a new MTRBridgedDeviceBasicInformationClusterActiveChangedEvent.
 func NewMTRBridgedDeviceBasicInformationClusterActiveChangedEvent() *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRBridgedDeviceBasicInformationClusterActiveChangedEvent")), objc.RegisterName("new"))
 	return mTRBridgedDeviceBasicInformationClusterActiveChangedEventAdopt(_id)
 }
 
-// WithPromisedActiveDuration sets promisedActiveDuration and returns the receiver so calls can be chained.
+// WithPromisedActiveDuration sets the property and returns the receiver so calls can be chained.
 func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) WithPromisedActiveDuration(promisedActiveDuration obj.Object) *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPromisedActiveDuration:"), objref.IDOf(promisedActiveDuration))
 	return x
 }
 
+// PromisedActiveDuration wraps the corresponding Objective-C method.
 func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) PromisedActiveDuration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("promisedActiveDuration"))
 	return obj.Wrap(_r)
 }
 
+// SetPromisedActiveDuration wraps the corresponding Objective-C method.
 func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) SetPromisedActiveDuration(promisedActiveDuration obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPromisedActiveDuration:"), objref.IDOf(promisedActiveDuration))
 }

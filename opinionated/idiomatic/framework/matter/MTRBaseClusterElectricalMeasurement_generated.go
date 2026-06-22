@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBaseClusterElectricalMeasurement is an idiomatic wrapper over the Objective-C class MTRBaseClusterElectricalMeasurement.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
 type MTRBaseClusterElectricalMeasurement struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterElectricalMeasurementFromID adopts an existing Objective-C object as a MTRBaseClusterElectricalMeasurement
@@ -25,7 +26,8 @@ func MTRBaseClusterElectricalMeasurementFromID(id objc.ID) *MTRBaseClusterElectr
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterElectricalMeasurement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterElectricalMeasurement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func mTRBaseClusterElectricalMeasurementAdopt(id objc.ID) *MTRBaseClusterElectri
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterElectricalMeasurement{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterElectricalMeasurement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterElectricalMeasurement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterElectricalMeasurement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterElectricalMeasurement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterElectricalMeasurementWithDeviceEndpointIDQueue creates a new MTRBaseClusterElectricalMeasurement.
+// NewMTRBaseClusterElectricalMeasurementWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterElectricalMeasurementWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterElectricalMeasurement {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterElectricalMeasurement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -74,8 +60,10 @@ func NewMTRBaseClusterElectricalMeasurementWithDeviceEndpointQueue(device *MTRBa
 	return mTRBaseClusterElectricalMeasurementAdopt(_id)
 }
 
+// ReadAttributeMeasurementTypeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasurementTypeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasurementTypeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasurementTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -97,8 +85,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasurementTypeWithCo
 	}
 }
 
+// SubscribeAttributeMeasurementTypeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasurementTypeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasurementTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasurementTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -120,8 +110,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasurementTypeW
 	}
 }
 
+// ReadAttributeDcVoltageWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcVoltageWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -143,8 +135,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageWithCompleti
 	}
 }
 
+// SubscribeAttributeDcVoltageWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcVoltageWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -166,8 +160,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageWithPar
 	}
 }
 
+// ReadAttributeDcVoltageMinWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcVoltageMinWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMinWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMinWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -189,8 +185,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMinWithCompl
 	}
 }
 
+// SubscribeAttributeDcVoltageMinWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcVoltageMinWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMinWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMinWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -212,8 +210,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMinWith
 	}
 }
 
+// ReadAttributeDcVoltageMaxWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcVoltageMaxWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMaxWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMaxWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -235,8 +235,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMaxWithCompl
 	}
 }
 
+// SubscribeAttributeDcVoltageMaxWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcVoltageMaxWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMaxWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMaxWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -258,8 +260,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMaxWith
 	}
 }
 
+// ReadAttributeDcCurrentWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -281,8 +285,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentWithCompleti
 	}
 }
 
+// SubscribeAttributeDcCurrentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -304,8 +310,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentWithPar
 	}
 }
 
+// ReadAttributeDcCurrentMinWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcCurrentMinWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMinWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMinWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -327,8 +335,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMinWithCompl
 	}
 }
 
+// SubscribeAttributeDcCurrentMinWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcCurrentMinWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMinWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMinWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -350,8 +360,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMinWith
 	}
 }
 
+// ReadAttributeDcCurrentMaxWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcCurrentMaxWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMaxWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMaxWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -373,8 +385,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMaxWithCompl
 	}
 }
 
+// SubscribeAttributeDcCurrentMaxWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcCurrentMaxWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMaxWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMaxWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -396,8 +410,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMaxWith
 	}
 }
 
+// ReadAttributeDcPowerWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcPowerWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -419,8 +435,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerWithCompletion
 	}
 }
 
+// SubscribeAttributeDcPowerWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcPowerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -442,8 +460,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerWithParam
 	}
 }
 
+// ReadAttributeDcPowerMinWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcPowerMinWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMinWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMinWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,8 +485,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMinWithComplet
 	}
 }
 
+// SubscribeAttributeDcPowerMinWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcPowerMinWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMinWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMinWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -488,8 +510,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMinWithPa
 	}
 }
 
+// ReadAttributeDcPowerMaxWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcPowerMaxWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMaxWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMaxWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -511,8 +535,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMaxWithComplet
 	}
 }
 
+// SubscribeAttributeDcPowerMaxWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcPowerMaxWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMaxWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMaxWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -534,8 +560,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMaxWithPa
 	}
 }
 
+// ReadAttributeDcVoltageMultiplierWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcVoltageMultiplierWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMultiplierWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMultiplierWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -557,8 +585,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMultiplierWi
 	}
 }
 
+// SubscribeAttributeDcVoltageMultiplierWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcVoltageMultiplierWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMultiplierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMultiplierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -580,8 +610,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMultipl
 	}
 }
 
+// ReadAttributeDcVoltageDivisorWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcVoltageDivisorWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageDivisorWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageDivisorWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -603,8 +635,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageDivisorWithC
 	}
 }
 
+// SubscribeAttributeDcVoltageDivisorWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcVoltageDivisorWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageDivisorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageDivisorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -626,8 +660,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageDivisor
 	}
 }
 
+// ReadAttributeDcCurrentMultiplierWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcCurrentMultiplierWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMultiplierWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMultiplierWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -649,8 +685,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMultiplierWi
 	}
 }
 
+// SubscribeAttributeDcCurrentMultiplierWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcCurrentMultiplierWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMultiplierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMultiplierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -672,8 +710,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMultipl
 	}
 }
 
+// ReadAttributeDcCurrentDivisorWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcCurrentDivisorWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentDivisorWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentDivisorWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -695,8 +735,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentDivisorWithC
 	}
 }
 
+// SubscribeAttributeDcCurrentDivisorWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcCurrentDivisorWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentDivisorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentDivisorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -718,8 +760,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentDivisor
 	}
 }
 
+// ReadAttributeDcPowerMultiplierWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcPowerMultiplierWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMultiplierWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMultiplierWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -741,8 +785,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMultiplierWith
 	}
 }
 
+// SubscribeAttributeDcPowerMultiplierWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcPowerMultiplierWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMultiplierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMultiplierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -764,8 +810,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMultiplie
 	}
 }
 
+// ReadAttributeDcPowerDivisorWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcPowerDivisorWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerDivisorWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerDivisorWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -787,8 +835,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerDivisorWithCom
 	}
 }
 
+// SubscribeAttributeDcPowerDivisorWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcPowerDivisorWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerDivisorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerDivisorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -810,8 +860,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerDivisorWi
 	}
 }
 
+// ReadAttributeAcFrequencyWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcFrequencyWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -833,8 +885,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyWithComple
 	}
 }
 
+// SubscribeAttributeAcFrequencyWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcFrequencyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -856,8 +910,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyWithP
 	}
 }
 
+// ReadAttributeAcFrequencyMinWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcFrequencyMinWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMinWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMinWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -879,8 +935,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMinWithCom
 	}
 }
 
+// SubscribeAttributeAcFrequencyMinWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcFrequencyMinWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyMinWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyMinWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -902,8 +960,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyMinWi
 	}
 }
 
+// ReadAttributeAcFrequencyMaxWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcFrequencyMaxWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMaxWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMaxWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -925,8 +985,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMaxWithCom
 	}
 }
 
+// SubscribeAttributeAcFrequencyMaxWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcFrequencyMaxWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyMaxWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyMaxWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -948,8 +1010,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyMaxWi
 	}
 }
 
+// ReadAttributeNeutralCurrentWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeNeutralCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeNeutralCurrentWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeNeutralCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -971,8 +1035,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeNeutralCurrentWithCom
 	}
 }
 
+// SubscribeAttributeNeutralCurrentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNeutralCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeNeutralCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeNeutralCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -994,8 +1060,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeNeutralCurrentWi
 	}
 }
 
+// ReadAttributeTotalActivePowerWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeTotalActivePowerWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalActivePowerWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalActivePowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1017,8 +1085,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalActivePowerWithC
 	}
 }
 
+// SubscribeAttributeTotalActivePowerWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTotalActivePowerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalActivePowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalActivePowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1040,8 +1110,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalActivePower
 	}
 }
 
+// ReadAttributeTotalReactivePowerWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeTotalReactivePowerWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalReactivePowerWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalReactivePowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1063,8 +1135,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalReactivePowerWit
 	}
 }
 
+// SubscribeAttributeTotalReactivePowerWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTotalReactivePowerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalReactivePowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalReactivePowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1086,8 +1160,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalReactivePow
 	}
 }
 
+// ReadAttributeTotalApparentPowerWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeTotalApparentPowerWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalApparentPowerWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalApparentPowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1109,8 +1185,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalApparentPowerWit
 	}
 }
 
+// SubscribeAttributeTotalApparentPowerWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTotalApparentPowerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalApparentPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalApparentPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1132,8 +1210,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalApparentPow
 	}
 }
 
+// ReadAttributeMeasured1stHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasured1stHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured1stHarmonicCurrentWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured1stHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1155,8 +1235,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured1stHarmonicCu
 	}
 }
 
+// SubscribeAttributeMeasured1stHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasured1stHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured1stHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured1stHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1178,8 +1260,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured1stHarmo
 	}
 }
 
+// ReadAttributeMeasured3rdHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasured3rdHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured3rdHarmonicCurrentWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured3rdHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1201,8 +1285,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured3rdHarmonicCu
 	}
 }
 
+// SubscribeAttributeMeasured3rdHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasured3rdHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured3rdHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured3rdHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1224,8 +1310,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured3rdHarmo
 	}
 }
 
+// ReadAttributeMeasured5thHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasured5thHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured5thHarmonicCurrentWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured5thHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1247,8 +1335,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured5thHarmonicCu
 	}
 }
 
+// SubscribeAttributeMeasured5thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasured5thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured5thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured5thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1270,8 +1360,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured5thHarmo
 	}
 }
 
+// ReadAttributeMeasured7thHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasured7thHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured7thHarmonicCurrentWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured7thHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1293,8 +1385,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured7thHarmonicCu
 	}
 }
 
+// SubscribeAttributeMeasured7thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasured7thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured7thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured7thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1316,8 +1410,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured7thHarmo
 	}
 }
 
+// ReadAttributeMeasured9thHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasured9thHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured9thHarmonicCurrentWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured9thHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1339,8 +1435,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured9thHarmonicCu
 	}
 }
 
+// SubscribeAttributeMeasured9thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasured9thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured9thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured9thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1362,8 +1460,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured9thHarmo
 	}
 }
 
+// ReadAttributeMeasured11thHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasured11thHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured11thHarmonicCurrentWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured11thHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1385,8 +1485,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured11thHarmonicC
 	}
 }
 
+// SubscribeAttributeMeasured11thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasured11thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured11thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured11thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1408,8 +1510,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured11thHarm
 	}
 }
 
+// ReadAttributeMeasuredPhase1stHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasuredPhase1stHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase1stHarmonicCurrentWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase1stHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1431,8 +1535,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase1stHarmo
 	}
 }
 
+// SubscribeAttributeMeasuredPhase1stHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasuredPhase1stHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase1stHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase1stHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1454,8 +1560,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase1st
 	}
 }
 
+// ReadAttributeMeasuredPhase3rdHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasuredPhase3rdHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase3rdHarmonicCurrentWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase3rdHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1477,8 +1585,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase3rdHarmo
 	}
 }
 
+// SubscribeAttributeMeasuredPhase3rdHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasuredPhase3rdHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase3rdHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase3rdHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1500,8 +1610,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase3rd
 	}
 }
 
+// ReadAttributeMeasuredPhase5thHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasuredPhase5thHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase5thHarmonicCurrentWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase5thHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1523,8 +1635,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase5thHarmo
 	}
 }
 
+// SubscribeAttributeMeasuredPhase5thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasuredPhase5thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase5thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase5thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1546,8 +1660,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase5th
 	}
 }
 
+// ReadAttributeMeasuredPhase7thHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasuredPhase7thHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase7thHarmonicCurrentWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase7thHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1569,8 +1685,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase7thHarmo
 	}
 }
 
+// SubscribeAttributeMeasuredPhase7thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasuredPhase7thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase7thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase7thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1592,8 +1710,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase7th
 	}
 }
 
+// ReadAttributeMeasuredPhase9thHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasuredPhase9thHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase9thHarmonicCurrentWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase9thHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1615,8 +1735,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase9thHarmo
 	}
 }
 
+// SubscribeAttributeMeasuredPhase9thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasuredPhase9thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase9thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase9thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1638,8 +1760,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase9th
 	}
 }
 
+// ReadAttributeMeasuredPhase11thHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasuredPhase11thHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase11thHarmonicCurrentWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase11thHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1661,8 +1785,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase11thHarm
 	}
 }
 
+// SubscribeAttributeMeasuredPhase11thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasuredPhase11thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase11thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase11thHarmonicCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1684,8 +1810,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase11t
 	}
 }
 
+// ReadAttributeAcFrequencyMultiplierWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcFrequencyMultiplierWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMultiplierWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMultiplierWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1707,8 +1835,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMultiplier
 	}
 }
 
+// SubscribeAttributeAcFrequencyMultiplierWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcFrequencyMultiplierWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyMultiplierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyMultiplierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1730,8 +1860,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyMulti
 	}
 }
 
+// ReadAttributeAcFrequencyDivisorWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcFrequencyDivisorWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyDivisorWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyDivisorWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1753,8 +1885,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyDivisorWit
 	}
 }
 
+// SubscribeAttributeAcFrequencyDivisorWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcFrequencyDivisorWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyDivisorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyDivisorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1776,8 +1910,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyDivis
 	}
 }
 
+// ReadAttributePowerMultiplierWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePowerMultiplierWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerMultiplierWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerMultiplierWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1799,8 +1935,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerMultiplierWithCo
 	}
 }
 
+// SubscribeAttributePowerMultiplierWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePowerMultiplierWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerMultiplierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerMultiplierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1822,8 +1960,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerMultiplierW
 	}
 }
 
+// ReadAttributePowerDivisorWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePowerDivisorWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerDivisorWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerDivisorWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1845,8 +1985,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerDivisorWithCompl
 	}
 }
 
+// SubscribeAttributePowerDivisorWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePowerDivisorWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerDivisorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerDivisorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1868,8 +2010,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerDivisorWith
 	}
 }
 
+// ReadAttributeHarmonicCurrentMultiplierWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeHarmonicCurrentMultiplierWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeHarmonicCurrentMultiplierWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeHarmonicCurrentMultiplierWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1891,8 +2035,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeHarmonicCurrentMultip
 	}
 }
 
+// SubscribeAttributeHarmonicCurrentMultiplierWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeHarmonicCurrentMultiplierWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeHarmonicCurrentMultiplierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeHarmonicCurrentMultiplierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1914,8 +2060,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeHarmonicCurrentM
 	}
 }
 
+// ReadAttributePhaseHarmonicCurrentMultiplierWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePhaseHarmonicCurrentMultiplierWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePhaseHarmonicCurrentMultiplierWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePhaseHarmonicCurrentMultiplierWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1937,8 +2085,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePhaseHarmonicCurrentM
 	}
 }
 
+// SubscribeAttributePhaseHarmonicCurrentMultiplierWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePhaseHarmonicCurrentMultiplierWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePhaseHarmonicCurrentMultiplierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePhaseHarmonicCurrentMultiplierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1960,8 +2110,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePhaseHarmonicCur
 	}
 }
 
+// ReadAttributeInstantaneousVoltageWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeInstantaneousVoltageWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousVoltageWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousVoltageWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1983,8 +2135,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousVoltageW
 	}
 }
 
+// SubscribeAttributeInstantaneousVoltageWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeInstantaneousVoltageWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousVoltageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousVoltageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2006,8 +2160,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousVol
 	}
 }
 
+// ReadAttributeInstantaneousLineCurrentWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeInstantaneousLineCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousLineCurrentWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousLineCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2029,8 +2185,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousLineCurr
 	}
 }
 
+// SubscribeAttributeInstantaneousLineCurrentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeInstantaneousLineCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousLineCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousLineCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2052,8 +2210,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousLin
 	}
 }
 
+// ReadAttributeInstantaneousActiveCurrentWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeInstantaneousActiveCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousActiveCurrentWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousActiveCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2075,8 +2235,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousActiveCu
 	}
 }
 
+// SubscribeAttributeInstantaneousActiveCurrentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeInstantaneousActiveCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousActiveCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousActiveCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2098,8 +2260,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousAct
 	}
 }
 
+// ReadAttributeInstantaneousReactiveCurrentWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeInstantaneousReactiveCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousReactiveCurrentWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousReactiveCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2121,8 +2285,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousReactive
 	}
 }
 
+// SubscribeAttributeInstantaneousReactiveCurrentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeInstantaneousReactiveCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousReactiveCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousReactiveCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2144,8 +2310,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousRea
 	}
 }
 
+// ReadAttributeInstantaneousPowerWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeInstantaneousPowerWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousPowerWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousPowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2167,8 +2335,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousPowerWit
 	}
 }
 
+// SubscribeAttributeInstantaneousPowerWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeInstantaneousPowerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2190,8 +2360,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousPow
 	}
 }
 
+// ReadAttributeRmsVoltageWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2213,8 +2385,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageWithComplet
 	}
 }
 
+// SubscribeAttributeRmsVoltageWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2236,8 +2410,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageWithPa
 	}
 }
 
+// ReadAttributeRmsVoltageMinWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageMinWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMinWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMinWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2259,8 +2435,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMinWithComp
 	}
 }
 
+// SubscribeAttributeRmsVoltageMinWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageMinWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMinWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMinWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2282,8 +2460,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMinWit
 	}
 }
 
+// ReadAttributeRmsVoltageMaxWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageMaxWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2305,8 +2485,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxWithComp
 	}
 }
 
+// SubscribeAttributeRmsVoltageMaxWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageMaxWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMaxWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMaxWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2328,8 +2510,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMaxWit
 	}
 }
 
+// ReadAttributeRmsCurrentWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2351,8 +2535,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentWithComplet
 	}
 }
 
+// SubscribeAttributeRmsCurrentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2374,8 +2560,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentWithPa
 	}
 }
 
+// ReadAttributeRmsCurrentMinWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsCurrentMinWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMinWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMinWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2397,8 +2585,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMinWithComp
 	}
 }
 
+// SubscribeAttributeRmsCurrentMinWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsCurrentMinWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMinWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMinWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2420,8 +2610,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMinWit
 	}
 }
 
+// ReadAttributeRmsCurrentMaxWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsCurrentMaxWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2443,8 +2635,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxWithComp
 	}
 }
 
+// SubscribeAttributeRmsCurrentMaxWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsCurrentMaxWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMaxWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMaxWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2466,8 +2660,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMaxWit
 	}
 }
 
+// ReadAttributeActivePowerWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeActivePowerWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2489,8 +2685,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerWithComple
 	}
 }
 
+// SubscribeAttributeActivePowerWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActivePowerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2512,8 +2710,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerWithP
 	}
 }
 
+// ReadAttributeActivePowerMinWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeActivePowerMinWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMinWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMinWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2535,8 +2735,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMinWithCom
 	}
 }
 
+// SubscribeAttributeActivePowerMinWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActivePowerMinWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMinWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMinWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2558,8 +2760,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMinWi
 	}
 }
 
+// ReadAttributeActivePowerMaxWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeActivePowerMaxWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMaxWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMaxWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2581,8 +2785,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMaxWithCom
 	}
 }
 
+// SubscribeAttributeActivePowerMaxWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActivePowerMaxWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMaxWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMaxWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2604,8 +2810,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMaxWi
 	}
 }
 
+// ReadAttributeReactivePowerWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeReactivePowerWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePowerWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2627,8 +2835,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePowerWithComp
 	}
 }
 
+// SubscribeAttributeReactivePowerWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeReactivePowerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2650,8 +2860,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowerWit
 	}
 }
 
+// ReadAttributeApparentPowerWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeApparentPowerWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPowerWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2673,8 +2885,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPowerWithComp
 	}
 }
 
+// SubscribeAttributeApparentPowerWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeApparentPowerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2696,8 +2910,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowerWit
 	}
 }
 
+// ReadAttributePowerFactorWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePowerFactorWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactorWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactorWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2719,8 +2935,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactorWithComple
 	}
 }
 
+// SubscribeAttributePowerFactorWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePowerFactorWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2742,8 +2960,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorWithP
 	}
 }
 
+// ReadAttributeAverageRmsVoltageMeasurementPeriodWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAverageRmsVoltageMeasurementPeriodWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2765,8 +2985,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeas
 	}
 }
 
+// SubscribeAttributeAverageRmsVoltageMeasurementPeriodWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAverageRmsVoltageMeasurementPeriodWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVoltageMeasurementPeriodWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVoltageMeasurementPeriodWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2788,8 +3010,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVoltag
 	}
 }
 
+// ReadAttributeAverageRmsUnderVoltageCounterWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAverageRmsUnderVoltageCounterWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2811,8 +3035,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltag
 	}
 }
 
+// SubscribeAttributeAverageRmsUnderVoltageCounterWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAverageRmsUnderVoltageCounterWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderVoltageCounterWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderVoltageCounterWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2834,8 +3060,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderV
 	}
 }
 
+// ReadAttributeRmsExtremeOverVoltagePeriodWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsExtremeOverVoltagePeriodWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2857,8 +3085,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltage
 	}
 }
 
+// SubscribeAttributeRmsExtremeOverVoltagePeriodWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsExtremeOverVoltagePeriodWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVoltagePeriodWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVoltagePeriodWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2880,8 +3110,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVo
 	}
 }
 
+// ReadAttributeRmsExtremeUnderVoltagePeriodWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsExtremeUnderVoltagePeriodWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2903,8 +3135,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltag
 	}
 }
 
+// SubscribeAttributeRmsExtremeUnderVoltagePeriodWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsExtremeUnderVoltagePeriodWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderVoltagePeriodWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderVoltagePeriodWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2926,8 +3160,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderV
 	}
 }
 
+// ReadAttributeRmsVoltageSagPeriodWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageSagPeriodWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2949,8 +3185,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodWi
 	}
 }
 
+// SubscribeAttributeRmsVoltageSagPeriodWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageSagPeriodWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagPeriodWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagPeriodWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2972,8 +3210,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagPer
 	}
 }
 
+// ReadAttributeRmsVoltageSwellPeriodWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageSwellPeriodWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2995,8 +3235,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriod
 	}
 }
 
+// SubscribeAttributeRmsVoltageSwellPeriodWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageSwellPeriodWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellPeriodWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellPeriodWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3018,8 +3260,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellP
 	}
 }
 
+// ReadAttributeAcVoltageMultiplierWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcVoltageMultiplierWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageMultiplierWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageMultiplierWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3041,8 +3285,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageMultiplierWi
 	}
 }
 
+// SubscribeAttributeAcVoltageMultiplierWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcVoltageMultiplierWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageMultiplierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageMultiplierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3064,8 +3310,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageMultipl
 	}
 }
 
+// ReadAttributeAcVoltageDivisorWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcVoltageDivisorWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageDivisorWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageDivisorWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3087,8 +3335,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageDivisorWithC
 	}
 }
 
+// SubscribeAttributeAcVoltageDivisorWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcVoltageDivisorWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageDivisorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageDivisorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3110,8 +3360,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageDivisor
 	}
 }
 
+// ReadAttributeAcCurrentMultiplierWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcCurrentMultiplierWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentMultiplierWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentMultiplierWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3133,8 +3385,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentMultiplierWi
 	}
 }
 
+// SubscribeAttributeAcCurrentMultiplierWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcCurrentMultiplierWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentMultiplierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentMultiplierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3156,8 +3410,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentMultipl
 	}
 }
 
+// ReadAttributeAcCurrentDivisorWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcCurrentDivisorWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentDivisorWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentDivisorWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3179,8 +3435,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentDivisorWithC
 	}
 }
 
+// SubscribeAttributeAcCurrentDivisorWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcCurrentDivisorWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentDivisorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentDivisorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3202,8 +3460,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentDivisor
 	}
 }
 
+// ReadAttributeAcPowerMultiplierWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcPowerMultiplierWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcPowerMultiplierWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcPowerMultiplierWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3225,8 +3485,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcPowerMultiplierWith
 	}
 }
 
+// SubscribeAttributeAcPowerMultiplierWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcPowerMultiplierWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcPowerMultiplierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcPowerMultiplierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3248,8 +3510,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcPowerMultiplie
 	}
 }
 
+// ReadAttributeAcPowerDivisorWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcPowerDivisorWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcPowerDivisorWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcPowerDivisorWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3271,8 +3535,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcPowerDivisorWithCom
 	}
 }
 
+// SubscribeAttributeAcPowerDivisorWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcPowerDivisorWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcPowerDivisorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcPowerDivisorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3294,8 +3560,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcPowerDivisorWi
 	}
 }
 
+// ReadAttributeOverloadAlarmsMaskWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeOverloadAlarmsMaskWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeOverloadAlarmsMaskWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeOverloadAlarmsMaskWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3317,8 +3585,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeOverloadAlarmsMaskWit
 	}
 }
 
+// SubscribeAttributeOverloadAlarmsMaskWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOverloadAlarmsMaskWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeOverloadAlarmsMaskWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeOverloadAlarmsMaskWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3340,8 +3610,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeOverloadAlarmsMa
 	}
 }
 
+// ReadAttributeVoltageOverloadWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeVoltageOverloadWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeVoltageOverloadWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeVoltageOverloadWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3363,8 +3635,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeVoltageOverloadWithCo
 	}
 }
 
+// SubscribeAttributeVoltageOverloadWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeVoltageOverloadWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeVoltageOverloadWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeVoltageOverloadWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3386,8 +3660,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeVoltageOverloadW
 	}
 }
 
+// ReadAttributeCurrentOverloadWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentOverloadWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeCurrentOverloadWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeCurrentOverloadWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3409,8 +3685,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeCurrentOverloadWithCo
 	}
 }
 
+// SubscribeAttributeCurrentOverloadWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentOverloadWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeCurrentOverloadWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeCurrentOverloadWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3432,8 +3710,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeCurrentOverloadW
 	}
 }
 
+// ReadAttributeAcOverloadAlarmsMaskWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcOverloadAlarmsMaskWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcOverloadAlarmsMaskWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcOverloadAlarmsMaskWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3455,8 +3735,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcOverloadAlarmsMaskW
 	}
 }
 
+// SubscribeAttributeAcOverloadAlarmsMaskWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcOverloadAlarmsMaskWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcOverloadAlarmsMaskWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcOverloadAlarmsMaskWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3478,8 +3760,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcOverloadAlarms
 	}
 }
 
+// ReadAttributeAcVoltageOverloadWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcVoltageOverloadWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageOverloadWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageOverloadWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3501,8 +3785,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageOverloadWith
 	}
 }
 
+// SubscribeAttributeAcVoltageOverloadWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcVoltageOverloadWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageOverloadWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageOverloadWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3524,8 +3810,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageOverloa
 	}
 }
 
+// ReadAttributeAcCurrentOverloadWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcCurrentOverloadWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentOverloadWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentOverloadWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3547,8 +3835,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentOverloadWith
 	}
 }
 
+// SubscribeAttributeAcCurrentOverloadWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcCurrentOverloadWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentOverloadWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentOverloadWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3570,8 +3860,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentOverloa
 	}
 }
 
+// ReadAttributeAcActivePowerOverloadWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcActivePowerOverloadWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcActivePowerOverloadWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcActivePowerOverloadWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3593,8 +3885,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcActivePowerOverload
 	}
 }
 
+// SubscribeAttributeAcActivePowerOverloadWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcActivePowerOverloadWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcActivePowerOverloadWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcActivePowerOverloadWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3616,8 +3910,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcActivePowerOve
 	}
 }
 
+// ReadAttributeAcReactivePowerOverloadWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcReactivePowerOverloadWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcReactivePowerOverloadWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcReactivePowerOverloadWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3639,8 +3935,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcReactivePowerOverlo
 	}
 }
 
+// SubscribeAttributeAcReactivePowerOverloadWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcReactivePowerOverloadWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcReactivePowerOverloadWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcReactivePowerOverloadWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3662,8 +3960,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcReactivePowerO
 	}
 }
 
+// ReadAttributeAverageRmsOverVoltageWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAverageRmsOverVoltageWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3685,8 +3985,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltage
 	}
 }
 
+// SubscribeAttributeAverageRmsOverVoltageWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAverageRmsOverVoltageWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOverVoltageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOverVoltageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3708,8 +4010,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOverVo
 	}
 }
 
+// ReadAttributeAverageRmsUnderVoltageWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAverageRmsUnderVoltageWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3731,8 +4035,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltag
 	}
 }
 
+// SubscribeAttributeAverageRmsUnderVoltageWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAverageRmsUnderVoltageWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderVoltageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderVoltageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3754,8 +4060,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderV
 	}
 }
 
+// ReadAttributeRmsExtremeOverVoltageWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsExtremeOverVoltageWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltageWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltageWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3777,8 +4085,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltage
 	}
 }
 
+// SubscribeAttributeRmsExtremeOverVoltageWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsExtremeOverVoltageWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVoltageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVoltageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3800,8 +4110,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVo
 	}
 }
 
+// ReadAttributeRmsExtremeUnderVoltageWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsExtremeUnderVoltageWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltageWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltageWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3823,8 +4135,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltag
 	}
 }
 
+// SubscribeAttributeRmsExtremeUnderVoltageWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsExtremeUnderVoltageWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderVoltageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderVoltageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3846,8 +4160,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderV
 	}
 }
 
+// ReadAttributeRmsVoltageSagWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageSagWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3869,8 +4185,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagWithComp
 	}
 }
 
+// SubscribeAttributeRmsVoltageSagWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageSagWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3892,8 +4210,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagWit
 	}
 }
 
+// ReadAttributeRmsVoltageSwellWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageSwellWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3915,8 +4235,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellWithCo
 	}
 }
 
+// SubscribeAttributeRmsVoltageSwellWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageSwellWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3938,8 +4260,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellW
 	}
 }
 
+// ReadAttributeLineCurrentPhaseBWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeLineCurrentPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseBWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3961,8 +4285,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseBWith
 	}
 }
 
+// SubscribeAttributeLineCurrentPhaseBWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLineCurrentPhaseBWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeLineCurrentPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeLineCurrentPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3984,8 +4310,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeLineCurrentPhase
 	}
 }
 
+// ReadAttributeActiveCurrentPhaseBWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeActiveCurrentPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseBWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4007,8 +4335,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseBWi
 	}
 }
 
+// SubscribeAttributeActiveCurrentPhaseBWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActiveCurrentPhaseBWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActiveCurrentPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActiveCurrentPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4030,8 +4360,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActiveCurrentPha
 	}
 }
 
+// ReadAttributeReactiveCurrentPhaseBWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeReactiveCurrentPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseBWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4053,8 +4385,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseB
 	}
 }
 
+// SubscribeAttributeReactiveCurrentPhaseBWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeReactiveCurrentPhaseBWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactiveCurrentPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactiveCurrentPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4076,8 +4410,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactiveCurrentP
 	}
 }
 
+// ReadAttributeRmsVoltagePhaseBWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltagePhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseBWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4099,8 +4435,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseBWithC
 	}
 }
 
+// SubscribeAttributeRmsVoltagePhaseBWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltagePhaseBWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltagePhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltagePhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4122,8 +4460,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltagePhaseB
 	}
 }
 
+// ReadAttributeRmsVoltageMinPhaseBWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageMinPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseBWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4145,8 +4485,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseBWi
 	}
 }
 
+// SubscribeAttributeRmsVoltageMinPhaseBWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageMinPhaseBWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMinPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMinPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4168,8 +4510,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMinPha
 	}
 }
 
+// ReadAttributeRmsVoltageMaxPhaseBWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageMaxPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseBWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4191,8 +4535,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseBWi
 	}
 }
 
+// SubscribeAttributeRmsVoltageMaxPhaseBWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageMaxPhaseBWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMaxPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMaxPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4214,8 +4560,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMaxPha
 	}
 }
 
+// ReadAttributeRmsCurrentPhaseBWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsCurrentPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseBWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4237,8 +4585,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseBWithC
 	}
 }
 
+// SubscribeAttributeRmsCurrentPhaseBWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsCurrentPhaseBWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4260,8 +4610,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentPhaseB
 	}
 }
 
+// ReadAttributeRmsCurrentMinPhaseBWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsCurrentMinPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseBWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4283,8 +4635,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseBWi
 	}
 }
 
+// SubscribeAttributeRmsCurrentMinPhaseBWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsCurrentMinPhaseBWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMinPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMinPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4306,8 +4660,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMinPha
 	}
 }
 
+// ReadAttributeRmsCurrentMaxPhaseBWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsCurrentMaxPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseBWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4329,8 +4685,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseBWi
 	}
 }
 
+// SubscribeAttributeRmsCurrentMaxPhaseBWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsCurrentMaxPhaseBWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMaxPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMaxPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4352,8 +4710,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMaxPha
 	}
 }
 
+// ReadAttributeActivePowerPhaseBWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeActivePowerPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerPhaseBWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4375,8 +4735,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerPhaseBWith
 	}
 }
 
+// SubscribeAttributeActivePowerPhaseBWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActivePowerPhaseBWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4398,8 +4760,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerPhase
 	}
 }
 
+// ReadAttributeActivePowerMinPhaseBWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeActivePowerMinPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseBWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4421,8 +4785,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseBW
 	}
 }
 
+// SubscribeAttributeActivePowerMinPhaseBWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActivePowerMinPhaseBWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMinPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMinPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4444,8 +4810,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMinPh
 	}
 }
 
+// ReadAttributeActivePowerMaxPhaseBWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeActivePowerMaxPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseBWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4467,8 +4835,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseBW
 	}
 }
 
+// SubscribeAttributeActivePowerMaxPhaseBWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActivePowerMaxPhaseBWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMaxPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMaxPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4490,8 +4860,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMaxPh
 	}
 }
 
+// ReadAttributeReactivePowerPhaseBWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeReactivePowerPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseBWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4513,8 +4885,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseBWi
 	}
 }
 
+// SubscribeAttributeReactivePowerPhaseBWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeReactivePowerPhaseBWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowerPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowerPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4536,8 +4910,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowerPha
 	}
 }
 
+// ReadAttributeApparentPowerPhaseBWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeApparentPowerPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseBWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4559,8 +4935,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseBWi
 	}
 }
 
+// SubscribeAttributeApparentPowerPhaseBWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeApparentPowerPhaseBWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowerPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowerPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4582,8 +4960,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowerPha
 	}
 }
 
+// ReadAttributePowerFactorPhaseBWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePowerFactorPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactorPhaseBWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactorPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4605,8 +4985,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactorPhaseBWith
 	}
 }
 
+// SubscribeAttributePowerFactorPhaseBWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePowerFactorPhaseBWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4628,8 +5010,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorPhase
 	}
 }
 
+// ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4651,8 +5035,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeas
 	}
 }
 
+// SubscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4674,8 +5060,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVoltag
 	}
 }
 
+// ReadAttributeAverageRmsOverVoltageCounterPhaseBWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAverageRmsOverVoltageCounterPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageCounterPhaseBWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageCounterPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4697,8 +5085,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltage
 	}
 }
 
+// SubscribeAttributeAverageRmsOverVoltageCounterPhaseBWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAverageRmsOverVoltageCounterPhaseBWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOverVoltageCounterPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOverVoltageCounterPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4720,8 +5110,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOverVo
 	}
 }
 
+// ReadAttributeAverageRmsUnderVoltageCounterPhaseBWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAverageRmsUnderVoltageCounterPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterPhaseBWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4743,8 +5135,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltag
 	}
 }
 
+// SubscribeAttributeAverageRmsUnderVoltageCounterPhaseBWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAverageRmsUnderVoltageCounterPhaseBWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderVoltageCounterPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderVoltageCounterPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4766,8 +5160,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderV
 	}
 }
 
+// ReadAttributeRmsExtremeOverVoltagePeriodPhaseBWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsExtremeOverVoltagePeriodPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodPhaseBWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4789,8 +5185,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltage
 	}
 }
 
+// SubscribeAttributeRmsExtremeOverVoltagePeriodPhaseBWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsExtremeOverVoltagePeriodPhaseBWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVoltagePeriodPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVoltagePeriodPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4812,8 +5210,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVo
 	}
 }
 
+// ReadAttributeRmsExtremeUnderVoltagePeriodPhaseBWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsExtremeUnderVoltagePeriodPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodPhaseBWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4835,8 +5235,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltag
 	}
 }
 
+// SubscribeAttributeRmsExtremeUnderVoltagePeriodPhaseBWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsExtremeUnderVoltagePeriodPhaseBWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderVoltagePeriodPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderVoltagePeriodPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4858,8 +5260,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderV
 	}
 }
 
+// ReadAttributeRmsVoltageSagPeriodPhaseBWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageSagPeriodPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPhaseBWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4881,8 +5285,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPh
 	}
 }
 
+// SubscribeAttributeRmsVoltageSagPeriodPhaseBWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageSagPeriodPhaseBWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagPeriodPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagPeriodPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4904,8 +5310,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagPer
 	}
 }
 
+// ReadAttributeRmsVoltageSwellPeriodPhaseBWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageSwellPeriodPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodPhaseBWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4927,8 +5335,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriod
 	}
 }
 
+// SubscribeAttributeRmsVoltageSwellPeriodPhaseBWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageSwellPeriodPhaseBWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellPeriodPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellPeriodPhaseBWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4950,8 +5360,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellP
 	}
 }
 
+// ReadAttributeLineCurrentPhaseCWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeLineCurrentPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseCWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4973,8 +5385,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseCWith
 	}
 }
 
+// SubscribeAttributeLineCurrentPhaseCWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLineCurrentPhaseCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeLineCurrentPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeLineCurrentPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4996,8 +5410,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeLineCurrentPhase
 	}
 }
 
+// ReadAttributeActiveCurrentPhaseCWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeActiveCurrentPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseCWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5019,8 +5435,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseCWi
 	}
 }
 
+// SubscribeAttributeActiveCurrentPhaseCWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActiveCurrentPhaseCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActiveCurrentPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActiveCurrentPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5042,8 +5460,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActiveCurrentPha
 	}
 }
 
+// ReadAttributeReactiveCurrentPhaseCWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeReactiveCurrentPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseCWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5065,8 +5485,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseC
 	}
 }
 
+// SubscribeAttributeReactiveCurrentPhaseCWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeReactiveCurrentPhaseCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactiveCurrentPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactiveCurrentPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5088,8 +5510,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactiveCurrentP
 	}
 }
 
+// ReadAttributeRmsVoltagePhaseCWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltagePhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseCWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5111,8 +5535,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseCWithC
 	}
 }
 
+// SubscribeAttributeRmsVoltagePhaseCWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltagePhaseCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltagePhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltagePhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5134,8 +5560,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltagePhaseC
 	}
 }
 
+// ReadAttributeRmsVoltageMinPhaseCWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageMinPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseCWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5157,8 +5585,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseCWi
 	}
 }
 
+// SubscribeAttributeRmsVoltageMinPhaseCWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageMinPhaseCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMinPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMinPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5180,8 +5610,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMinPha
 	}
 }
 
+// ReadAttributeRmsVoltageMaxPhaseCWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageMaxPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseCWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5203,8 +5635,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseCWi
 	}
 }
 
+// SubscribeAttributeRmsVoltageMaxPhaseCWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageMaxPhaseCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMaxPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMaxPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5226,8 +5660,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMaxPha
 	}
 }
 
+// ReadAttributeRmsCurrentPhaseCWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsCurrentPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseCWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5249,8 +5685,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseCWithC
 	}
 }
 
+// SubscribeAttributeRmsCurrentPhaseCWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsCurrentPhaseCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5272,8 +5710,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentPhaseC
 	}
 }
 
+// ReadAttributeRmsCurrentMinPhaseCWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsCurrentMinPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseCWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5295,8 +5735,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseCWi
 	}
 }
 
+// SubscribeAttributeRmsCurrentMinPhaseCWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsCurrentMinPhaseCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMinPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMinPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5318,8 +5760,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMinPha
 	}
 }
 
+// ReadAttributeRmsCurrentMaxPhaseCWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsCurrentMaxPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseCWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5341,8 +5785,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseCWi
 	}
 }
 
+// SubscribeAttributeRmsCurrentMaxPhaseCWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsCurrentMaxPhaseCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMaxPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMaxPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5364,8 +5810,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMaxPha
 	}
 }
 
+// ReadAttributeActivePowerPhaseCWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeActivePowerPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerPhaseCWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5387,8 +5835,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerPhaseCWith
 	}
 }
 
+// SubscribeAttributeActivePowerPhaseCWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActivePowerPhaseCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5410,8 +5860,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerPhase
 	}
 }
 
+// ReadAttributeActivePowerMinPhaseCWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeActivePowerMinPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseCWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5433,8 +5885,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseCW
 	}
 }
 
+// SubscribeAttributeActivePowerMinPhaseCWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActivePowerMinPhaseCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMinPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMinPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5456,8 +5910,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMinPh
 	}
 }
 
+// ReadAttributeActivePowerMaxPhaseCWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeActivePowerMaxPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseCWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5479,8 +5935,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseCW
 	}
 }
 
+// SubscribeAttributeActivePowerMaxPhaseCWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActivePowerMaxPhaseCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMaxPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMaxPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5502,8 +5960,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMaxPh
 	}
 }
 
+// ReadAttributeReactivePowerPhaseCWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeReactivePowerPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseCWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5525,8 +5985,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseCWi
 	}
 }
 
+// SubscribeAttributeReactivePowerPhaseCWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeReactivePowerPhaseCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowerPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowerPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5548,8 +6010,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowerPha
 	}
 }
 
+// ReadAttributeApparentPowerPhaseCWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeApparentPowerPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseCWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5571,8 +6035,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseCWi
 	}
 }
 
+// SubscribeAttributeApparentPowerPhaseCWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeApparentPowerPhaseCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowerPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowerPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5594,8 +6060,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowerPha
 	}
 }
 
+// ReadAttributePowerFactorPhaseCWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePowerFactorPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactorPhaseCWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactorPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5617,8 +6085,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactorPhaseCWith
 	}
 }
 
+// SubscribeAttributePowerFactorPhaseCWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePowerFactorPhaseCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5640,8 +6110,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorPhase
 	}
 }
 
+// ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5663,8 +6135,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeas
 	}
 }
 
+// SubscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5686,8 +6160,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVoltag
 	}
 }
 
+// ReadAttributeAverageRmsOverVoltageCounterPhaseCWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAverageRmsOverVoltageCounterPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageCounterPhaseCWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageCounterPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5709,8 +6185,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltage
 	}
 }
 
+// SubscribeAttributeAverageRmsOverVoltageCounterPhaseCWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAverageRmsOverVoltageCounterPhaseCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOverVoltageCounterPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOverVoltageCounterPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5732,8 +6210,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOverVo
 	}
 }
 
+// ReadAttributeAverageRmsUnderVoltageCounterPhaseCWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAverageRmsUnderVoltageCounterPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterPhaseCWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5755,8 +6235,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltag
 	}
 }
 
+// SubscribeAttributeAverageRmsUnderVoltageCounterPhaseCWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAverageRmsUnderVoltageCounterPhaseCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderVoltageCounterPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderVoltageCounterPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5778,8 +6260,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderV
 	}
 }
 
+// ReadAttributeRmsExtremeOverVoltagePeriodPhaseCWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsExtremeOverVoltagePeriodPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodPhaseCWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5801,8 +6285,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltage
 	}
 }
 
+// SubscribeAttributeRmsExtremeOverVoltagePeriodPhaseCWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsExtremeOverVoltagePeriodPhaseCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVoltagePeriodPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVoltagePeriodPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5824,8 +6310,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVo
 	}
 }
 
+// ReadAttributeRmsExtremeUnderVoltagePeriodPhaseCWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsExtremeUnderVoltagePeriodPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodPhaseCWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5847,8 +6335,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltag
 	}
 }
 
+// SubscribeAttributeRmsExtremeUnderVoltagePeriodPhaseCWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsExtremeUnderVoltagePeriodPhaseCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderVoltagePeriodPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderVoltagePeriodPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5870,8 +6360,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderV
 	}
 }
 
+// ReadAttributeRmsVoltageSagPeriodPhaseCWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageSagPeriodPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPhaseCWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5893,8 +6385,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPh
 	}
 }
 
+// SubscribeAttributeRmsVoltageSagPeriodPhaseCWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageSagPeriodPhaseCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagPeriodPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagPeriodPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5916,8 +6410,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagPer
 	}
 }
 
+// ReadAttributeRmsVoltageSwellPeriodPhaseCWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageSwellPeriodPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodPhaseCWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5939,8 +6435,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriod
 	}
 }
 
+// SubscribeAttributeRmsVoltageSwellPeriodPhaseCWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageSwellPeriodPhaseCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellPeriodPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellPeriodPhaseCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5962,8 +6460,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellP
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5985,8 +6485,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeGeneratedCommandListW
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6008,8 +6510,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeGeneratedCommand
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6031,8 +6535,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcceptedCommandListWi
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6054,8 +6560,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcceptedCommandL
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6077,8 +6585,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAttributeListWithComp
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6100,8 +6610,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAttributeListWit
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6123,8 +6635,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeFeatureMapWithComplet
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6146,8 +6660,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeFeatureMapWithPa
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6169,8 +6685,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeClusterRevisionWithCo
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6192,8 +6710,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeClusterRevisionW
 	}
 }
 
+// ReadAttributeMeasurementType wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasurementType blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasurementType(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasurementType(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6215,8 +6735,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasurementType(ctx c
 	}
 }
 
+// SubscribeAttributeMeasurementTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasurementTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasurementTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasurementTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6238,8 +6760,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasurementTypeW
 	}
 }
 
+// ReadAttributeDcVoltage wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcVoltage blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltage(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltage(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6261,8 +6785,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltage(ctx context
 	}
 }
 
+// SubscribeAttributeDcVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6284,8 +6810,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageWithMin
 	}
 }
 
+// ReadAttributeDcVoltageMin wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcVoltageMin blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMin(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMin(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6307,8 +6835,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMin(ctx cont
 	}
 }
 
+// SubscribeAttributeDcVoltageMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcVoltageMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6330,8 +6860,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMinWith
 	}
 }
 
+// ReadAttributeDcVoltageMax wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcVoltageMax blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMax(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMax(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6353,8 +6885,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMax(ctx cont
 	}
 }
 
+// SubscribeAttributeDcVoltageMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcVoltageMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6376,8 +6910,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMaxWith
 	}
 }
 
+// ReadAttributeDcCurrent wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcCurrent blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrent(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrent(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6399,8 +6935,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrent(ctx context
 	}
 }
 
+// SubscribeAttributeDcCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6422,8 +6960,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentWithMin
 	}
 }
 
+// ReadAttributeDcCurrentMin wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcCurrentMin blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMin(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMin(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6445,8 +6985,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMin(ctx cont
 	}
 }
 
+// SubscribeAttributeDcCurrentMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcCurrentMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6468,8 +7010,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMinWith
 	}
 }
 
+// ReadAttributeDcCurrentMax wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcCurrentMax blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMax(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMax(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6491,8 +7035,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMax(ctx cont
 	}
 }
 
+// SubscribeAttributeDcCurrentMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcCurrentMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6514,8 +7060,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMaxWith
 	}
 }
 
+// ReadAttributeDcPower wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcPower blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPower(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPower(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6537,8 +7085,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPower(ctx context.C
 	}
 }
 
+// SubscribeAttributeDcPowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcPowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6560,8 +7110,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerWithMinIn
 	}
 }
 
+// ReadAttributeDcPowerMin wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcPowerMin blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMin(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMin(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6583,8 +7135,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMin(ctx contex
 	}
 }
 
+// SubscribeAttributeDcPowerMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcPowerMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6606,8 +7160,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMinWithMi
 	}
 }
 
+// ReadAttributeDcPowerMax wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcPowerMax blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMax(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMax(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6629,8 +7185,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMax(ctx contex
 	}
 }
 
+// SubscribeAttributeDcPowerMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcPowerMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6652,8 +7210,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMaxWithMi
 	}
 }
 
+// ReadAttributeDcVoltageMultiplier wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcVoltageMultiplier blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMultiplier(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMultiplier(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6675,8 +7235,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMultiplier(c
 	}
 }
 
+// SubscribeAttributeDcVoltageMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcVoltageMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6698,8 +7260,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMultipl
 	}
 }
 
+// ReadAttributeDcVoltageDivisor wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcVoltageDivisor blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageDivisor(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageDivisor(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6721,8 +7285,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageDivisor(ctx 
 	}
 }
 
+// SubscribeAttributeDcVoltageDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcVoltageDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6744,8 +7310,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageDivisor
 	}
 }
 
+// ReadAttributeDcCurrentMultiplier wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcCurrentMultiplier blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMultiplier(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMultiplier(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6767,8 +7335,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMultiplier(c
 	}
 }
 
+// SubscribeAttributeDcCurrentMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcCurrentMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6790,8 +7360,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMultipl
 	}
 }
 
+// ReadAttributeDcCurrentDivisor wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcCurrentDivisor blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentDivisor(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentDivisor(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6813,8 +7385,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentDivisor(ctx 
 	}
 }
 
+// SubscribeAttributeDcCurrentDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcCurrentDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6836,8 +7410,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentDivisor
 	}
 }
 
+// ReadAttributeDcPowerMultiplier wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcPowerMultiplier blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMultiplier(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMultiplier(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6859,8 +7435,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMultiplier(ctx
 	}
 }
 
+// SubscribeAttributeDcPowerMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcPowerMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6882,8 +7460,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMultiplie
 	}
 }
 
+// ReadAttributeDcPowerDivisor wraps the corresponding Objective-C method.
+//
 // ReadAttributeDcPowerDivisor blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerDivisor(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerDivisor(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6905,8 +7485,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerDivisor(ctx co
 	}
 }
 
+// SubscribeAttributeDcPowerDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDcPowerDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6928,8 +7510,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerDivisorWi
 	}
 }
 
+// ReadAttributeAcFrequency wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcFrequency blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequency(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequency(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6951,8 +7535,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequency(ctx conte
 	}
 }
 
+// SubscribeAttributeAcFrequencyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcFrequencyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6974,8 +7560,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyWithM
 	}
 }
 
+// ReadAttributeAcFrequencyMin wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcFrequencyMin blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMin(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMin(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6997,8 +7585,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMin(ctx co
 	}
 }
 
+// SubscribeAttributeAcFrequencyMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcFrequencyMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7020,8 +7610,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyMinWi
 	}
 }
 
+// ReadAttributeAcFrequencyMax wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcFrequencyMax blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMax(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMax(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7043,8 +7635,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMax(ctx co
 	}
 }
 
+// SubscribeAttributeAcFrequencyMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcFrequencyMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7066,8 +7660,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyMaxWi
 	}
 }
 
+// ReadAttributeNeutralCurrent wraps the corresponding Objective-C method.
+//
 // ReadAttributeNeutralCurrent blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeNeutralCurrent(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeNeutralCurrent(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7089,8 +7685,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeNeutralCurrent(ctx co
 	}
 }
 
+// SubscribeAttributeNeutralCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNeutralCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeNeutralCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeNeutralCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7112,8 +7710,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeNeutralCurrentWi
 	}
 }
 
+// ReadAttributeTotalActivePower wraps the corresponding Objective-C method.
+//
 // ReadAttributeTotalActivePower blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalActivePower(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalActivePower(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7135,8 +7735,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalActivePower(ctx 
 	}
 }
 
+// SubscribeAttributeTotalActivePowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTotalActivePowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalActivePowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalActivePowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7158,8 +7760,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalActivePower
 	}
 }
 
+// ReadAttributeTotalReactivePower wraps the corresponding Objective-C method.
+//
 // ReadAttributeTotalReactivePower blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalReactivePower(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalReactivePower(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7181,8 +7785,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalReactivePower(ct
 	}
 }
 
+// SubscribeAttributeTotalReactivePowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTotalReactivePowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalReactivePowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalReactivePowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7204,8 +7810,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalReactivePow
 	}
 }
 
+// ReadAttributeTotalApparentPower wraps the corresponding Objective-C method.
+//
 // ReadAttributeTotalApparentPower blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalApparentPower(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalApparentPower(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7227,8 +7835,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalApparentPower(ct
 	}
 }
 
+// SubscribeAttributeTotalApparentPowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTotalApparentPowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalApparentPowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalApparentPowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7250,8 +7860,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalApparentPow
 	}
 }
 
+// ReadAttributeMeasured1stHarmonicCurrent wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasured1stHarmonicCurrent blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured1stHarmonicCurrent(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured1stHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7273,8 +7885,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured1stHarmonicCu
 	}
 }
 
+// SubscribeAttributeMeasured1stHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasured1stHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured1stHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured1stHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7296,8 +7910,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured1stHarmo
 	}
 }
 
+// ReadAttributeMeasured3rdHarmonicCurrent wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasured3rdHarmonicCurrent blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured3rdHarmonicCurrent(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured3rdHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7319,8 +7935,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured3rdHarmonicCu
 	}
 }
 
+// SubscribeAttributeMeasured3rdHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasured3rdHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured3rdHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured3rdHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7342,8 +7960,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured3rdHarmo
 	}
 }
 
+// ReadAttributeMeasured5thHarmonicCurrent wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasured5thHarmonicCurrent blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured5thHarmonicCurrent(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured5thHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7365,8 +7985,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured5thHarmonicCu
 	}
 }
 
+// SubscribeAttributeMeasured5thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasured5thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured5thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured5thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7388,8 +8010,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured5thHarmo
 	}
 }
 
+// ReadAttributeMeasured7thHarmonicCurrent wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasured7thHarmonicCurrent blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured7thHarmonicCurrent(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured7thHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7411,8 +8035,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured7thHarmonicCu
 	}
 }
 
+// SubscribeAttributeMeasured7thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasured7thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured7thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured7thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7434,8 +8060,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured7thHarmo
 	}
 }
 
+// ReadAttributeMeasured9thHarmonicCurrent wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasured9thHarmonicCurrent blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured9thHarmonicCurrent(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured9thHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7457,8 +8085,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured9thHarmonicCu
 	}
 }
 
+// SubscribeAttributeMeasured9thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasured9thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured9thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured9thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7480,8 +8110,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured9thHarmo
 	}
 }
 
+// ReadAttributeMeasured11thHarmonicCurrent wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasured11thHarmonicCurrent blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured11thHarmonicCurrent(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured11thHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7503,8 +8135,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured11thHarmonicC
 	}
 }
 
+// SubscribeAttributeMeasured11thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasured11thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured11thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured11thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7526,8 +8160,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured11thHarm
 	}
 }
 
+// ReadAttributeMeasuredPhase1stHarmonicCurrent wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasuredPhase1stHarmonicCurrent blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase1stHarmonicCurrent(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase1stHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7549,8 +8185,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase1stHarmo
 	}
 }
 
+// SubscribeAttributeMeasuredPhase1stHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasuredPhase1stHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase1stHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase1stHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7572,8 +8210,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase1st
 	}
 }
 
+// ReadAttributeMeasuredPhase3rdHarmonicCurrent wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasuredPhase3rdHarmonicCurrent blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase3rdHarmonicCurrent(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase3rdHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7595,8 +8235,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase3rdHarmo
 	}
 }
 
+// SubscribeAttributeMeasuredPhase3rdHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasuredPhase3rdHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase3rdHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase3rdHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7618,8 +8260,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase3rd
 	}
 }
 
+// ReadAttributeMeasuredPhase5thHarmonicCurrent wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasuredPhase5thHarmonicCurrent blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase5thHarmonicCurrent(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase5thHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7641,8 +8285,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase5thHarmo
 	}
 }
 
+// SubscribeAttributeMeasuredPhase5thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasuredPhase5thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase5thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase5thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7664,8 +8310,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase5th
 	}
 }
 
+// ReadAttributeMeasuredPhase7thHarmonicCurrent wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasuredPhase7thHarmonicCurrent blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase7thHarmonicCurrent(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase7thHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7687,8 +8335,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase7thHarmo
 	}
 }
 
+// SubscribeAttributeMeasuredPhase7thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasuredPhase7thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase7thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase7thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7710,8 +8360,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase7th
 	}
 }
 
+// ReadAttributeMeasuredPhase9thHarmonicCurrent wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasuredPhase9thHarmonicCurrent blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase9thHarmonicCurrent(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase9thHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7733,8 +8385,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase9thHarmo
 	}
 }
 
+// SubscribeAttributeMeasuredPhase9thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasuredPhase9thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase9thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase9thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7756,8 +8410,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase9th
 	}
 }
 
+// ReadAttributeMeasuredPhase11thHarmonicCurrent wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasuredPhase11thHarmonicCurrent blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase11thHarmonicCurrent(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase11thHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7779,8 +8435,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase11thHarm
 	}
 }
 
+// SubscribeAttributeMeasuredPhase11thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasuredPhase11thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase11thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase11thHarmonicCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7802,8 +8460,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhase11t
 	}
 }
 
+// ReadAttributeAcFrequencyMultiplier wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcFrequencyMultiplier blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMultiplier(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMultiplier(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7825,8 +8485,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMultiplier
 	}
 }
 
+// SubscribeAttributeAcFrequencyMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcFrequencyMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7848,8 +8510,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyMulti
 	}
 }
 
+// ReadAttributeAcFrequencyDivisor wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcFrequencyDivisor blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyDivisor(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyDivisor(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7871,8 +8535,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyDivisor(ct
 	}
 }
 
+// SubscribeAttributeAcFrequencyDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcFrequencyDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7894,8 +8560,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyDivis
 	}
 }
 
+// ReadAttributePowerMultiplier wraps the corresponding Objective-C method.
+//
 // ReadAttributePowerMultiplier blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerMultiplier(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerMultiplier(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7917,8 +8585,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerMultiplier(ctx c
 	}
 }
 
+// SubscribeAttributePowerMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePowerMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7940,8 +8610,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerMultiplierW
 	}
 }
 
+// ReadAttributePowerDivisor wraps the corresponding Objective-C method.
+//
 // ReadAttributePowerDivisor blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerDivisor(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerDivisor(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7963,8 +8635,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerDivisor(ctx cont
 	}
 }
 
+// SubscribeAttributePowerDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePowerDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -7986,8 +8660,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerDivisorWith
 	}
 }
 
+// ReadAttributeHarmonicCurrentMultiplier wraps the corresponding Objective-C method.
+//
 // ReadAttributeHarmonicCurrentMultiplier blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeHarmonicCurrentMultiplier(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeHarmonicCurrentMultiplier(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8009,8 +8685,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeHarmonicCurrentMultip
 	}
 }
 
+// SubscribeAttributeHarmonicCurrentMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeHarmonicCurrentMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeHarmonicCurrentMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeHarmonicCurrentMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8032,8 +8710,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeHarmonicCurrentM
 	}
 }
 
+// ReadAttributePhaseHarmonicCurrentMultiplier wraps the corresponding Objective-C method.
+//
 // ReadAttributePhaseHarmonicCurrentMultiplier blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePhaseHarmonicCurrentMultiplier(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePhaseHarmonicCurrentMultiplier(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8055,8 +8735,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePhaseHarmonicCurrentM
 	}
 }
 
+// SubscribeAttributePhaseHarmonicCurrentMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePhaseHarmonicCurrentMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePhaseHarmonicCurrentMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePhaseHarmonicCurrentMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8078,8 +8760,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePhaseHarmonicCur
 	}
 }
 
+// ReadAttributeInstantaneousVoltage wraps the corresponding Objective-C method.
+//
 // ReadAttributeInstantaneousVoltage blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousVoltage(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousVoltage(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8101,8 +8785,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousVoltage(
 	}
 }
 
+// SubscribeAttributeInstantaneousVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeInstantaneousVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8124,8 +8810,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousVol
 	}
 }
 
+// ReadAttributeInstantaneousLineCurrent wraps the corresponding Objective-C method.
+//
 // ReadAttributeInstantaneousLineCurrent blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousLineCurrent(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousLineCurrent(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8147,8 +8835,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousLineCurr
 	}
 }
 
+// SubscribeAttributeInstantaneousLineCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeInstantaneousLineCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousLineCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousLineCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8170,8 +8860,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousLin
 	}
 }
 
+// ReadAttributeInstantaneousActiveCurrent wraps the corresponding Objective-C method.
+//
 // ReadAttributeInstantaneousActiveCurrent blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousActiveCurrent(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousActiveCurrent(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8193,8 +8885,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousActiveCu
 	}
 }
 
+// SubscribeAttributeInstantaneousActiveCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeInstantaneousActiveCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousActiveCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousActiveCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8216,8 +8910,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousAct
 	}
 }
 
+// ReadAttributeInstantaneousReactiveCurrent wraps the corresponding Objective-C method.
+//
 // ReadAttributeInstantaneousReactiveCurrent blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousReactiveCurrent(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousReactiveCurrent(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8239,8 +8935,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousReactive
 	}
 }
 
+// SubscribeAttributeInstantaneousReactiveCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeInstantaneousReactiveCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousReactiveCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousReactiveCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8262,8 +8960,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousRea
 	}
 }
 
+// ReadAttributeInstantaneousPower wraps the corresponding Objective-C method.
+//
 // ReadAttributeInstantaneousPower blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousPower(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousPower(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8285,8 +8985,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousPower(ct
 	}
 }
 
+// SubscribeAttributeInstantaneousPowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeInstantaneousPowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousPowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousPowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8308,8 +9010,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneousPow
 	}
 }
 
+// ReadAttributeRmsVoltage wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltage blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltage(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltage(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8331,8 +9035,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltage(ctx contex
 	}
 }
 
+// SubscribeAttributeRmsVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8354,8 +9060,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageWithMi
 	}
 }
 
+// ReadAttributeRmsVoltageMin wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageMin blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMin(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMin(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8377,8 +9085,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMin(ctx con
 	}
 }
 
+// SubscribeAttributeRmsVoltageMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8400,8 +9110,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMinWit
 	}
 }
 
+// ReadAttributeRmsVoltageMax wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageMax blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMax(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMax(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8423,8 +9135,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMax(ctx con
 	}
 }
 
+// SubscribeAttributeRmsVoltageMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8446,8 +9160,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMaxWit
 	}
 }
 
+// ReadAttributeRmsCurrent wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsCurrent blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrent(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrent(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8469,8 +9185,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrent(ctx contex
 	}
 }
 
+// SubscribeAttributeRmsCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8492,8 +9210,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentWithMi
 	}
 }
 
+// ReadAttributeRmsCurrentMin wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsCurrentMin blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMin(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMin(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8515,8 +9235,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMin(ctx con
 	}
 }
 
+// SubscribeAttributeRmsCurrentMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsCurrentMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8538,8 +9260,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMinWit
 	}
 }
 
+// ReadAttributeRmsCurrentMax wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsCurrentMax blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMax(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMax(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8561,8 +9285,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMax(ctx con
 	}
 }
 
+// SubscribeAttributeRmsCurrentMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsCurrentMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8584,8 +9310,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMaxWit
 	}
 }
 
+// ReadAttributeActivePower wraps the corresponding Objective-C method.
+//
 // ReadAttributeActivePower blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePower(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePower(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8607,8 +9335,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePower(ctx conte
 	}
 }
 
+// SubscribeAttributeActivePowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActivePowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8630,8 +9360,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerWithM
 	}
 }
 
+// ReadAttributeActivePowerMin wraps the corresponding Objective-C method.
+//
 // ReadAttributeActivePowerMin blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMin(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMin(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8653,8 +9385,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMin(ctx co
 	}
 }
 
+// SubscribeAttributeActivePowerMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActivePowerMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMinWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8676,8 +9410,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMinWi
 	}
 }
 
+// ReadAttributeActivePowerMax wraps the corresponding Objective-C method.
+//
 // ReadAttributeActivePowerMax blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMax(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMax(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8699,8 +9435,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMax(ctx co
 	}
 }
 
+// SubscribeAttributeActivePowerMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActivePowerMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8722,8 +9460,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMaxWi
 	}
 }
 
+// ReadAttributeReactivePower wraps the corresponding Objective-C method.
+//
 // ReadAttributeReactivePower blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePower(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePower(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8745,8 +9485,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePower(ctx con
 	}
 }
 
+// SubscribeAttributeReactivePowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeReactivePowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8768,8 +9510,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowerWit
 	}
 }
 
+// ReadAttributeApparentPower wraps the corresponding Objective-C method.
+//
 // ReadAttributeApparentPower blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPower(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPower(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8791,8 +9535,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPower(ctx con
 	}
 }
 
+// SubscribeAttributeApparentPowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeApparentPowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowerWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8814,8 +9560,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowerWit
 	}
 }
 
+// ReadAttributePowerFactor wraps the corresponding Objective-C method.
+//
 // ReadAttributePowerFactor blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactor(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactor(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8837,8 +9585,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactor(ctx conte
 	}
 }
 
+// SubscribeAttributePowerFactorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePowerFactorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8860,8 +9610,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorWithM
 	}
 }
 
+// ReadAttributeAverageRmsVoltageMeasurementPeriod wraps the corresponding Objective-C method.
+//
 // ReadAttributeAverageRmsVoltageMeasurementPeriod blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriod(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriod(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8883,8 +9635,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeas
 	}
 }
 
+// SubscribeAttributeAverageRmsVoltageMeasurementPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAverageRmsVoltageMeasurementPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVoltageMeasurementPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVoltageMeasurementPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8906,8 +9660,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVoltag
 	}
 }
 
+// ReadAttributeAverageRmsUnderVoltageCounter wraps the corresponding Objective-C method.
+//
 // ReadAttributeAverageRmsUnderVoltageCounter blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounter(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounter(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8929,8 +9685,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltag
 	}
 }
 
+// SubscribeAttributeAverageRmsUnderVoltageCounterWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAverageRmsUnderVoltageCounterWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderVoltageCounterWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderVoltageCounterWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8952,8 +9710,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderV
 	}
 }
 
+// ReadAttributeRmsExtremeOverVoltagePeriod wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsExtremeOverVoltagePeriod blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriod(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriod(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8975,8 +9735,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltage
 	}
 }
 
+// SubscribeAttributeRmsExtremeOverVoltagePeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsExtremeOverVoltagePeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVoltagePeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVoltagePeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -8998,8 +9760,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVo
 	}
 }
 
+// ReadAttributeRmsExtremeUnderVoltagePeriod wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsExtremeUnderVoltagePeriod blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriod(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriod(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9021,8 +9785,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltag
 	}
 }
 
+// SubscribeAttributeRmsExtremeUnderVoltagePeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsExtremeUnderVoltagePeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderVoltagePeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderVoltagePeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9044,8 +9810,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderV
 	}
 }
 
+// ReadAttributeRmsVoltageSagPeriod wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageSagPeriod blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriod(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriod(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9067,8 +9835,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriod(c
 	}
 }
 
+// SubscribeAttributeRmsVoltageSagPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageSagPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9090,8 +9860,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagPer
 	}
 }
 
+// ReadAttributeRmsVoltageSwellPeriod wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageSwellPeriod blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriod(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriod(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9113,8 +9885,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriod
 	}
 }
 
+// SubscribeAttributeRmsVoltageSwellPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageSwellPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9136,8 +9910,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellP
 	}
 }
 
+// ReadAttributeAcVoltageMultiplier wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcVoltageMultiplier blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageMultiplier(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageMultiplier(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9159,8 +9935,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageMultiplier(c
 	}
 }
 
+// SubscribeAttributeAcVoltageMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcVoltageMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9182,8 +9960,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageMultipl
 	}
 }
 
+// ReadAttributeAcVoltageDivisor wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcVoltageDivisor blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageDivisor(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageDivisor(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9205,8 +9985,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageDivisor(ctx 
 	}
 }
 
+// SubscribeAttributeAcVoltageDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcVoltageDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9228,8 +10010,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageDivisor
 	}
 }
 
+// ReadAttributeAcCurrentMultiplier wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcCurrentMultiplier blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentMultiplier(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentMultiplier(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9251,8 +10035,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentMultiplier(c
 	}
 }
 
+// SubscribeAttributeAcCurrentMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcCurrentMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9274,8 +10060,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentMultipl
 	}
 }
 
+// ReadAttributeAcCurrentDivisor wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcCurrentDivisor blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentDivisor(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentDivisor(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9297,8 +10085,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentDivisor(ctx 
 	}
 }
 
+// SubscribeAttributeAcCurrentDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcCurrentDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9320,8 +10110,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentDivisor
 	}
 }
 
+// ReadAttributeAcPowerMultiplier wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcPowerMultiplier blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcPowerMultiplier(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcPowerMultiplier(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9343,8 +10135,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcPowerMultiplier(ctx
 	}
 }
 
+// SubscribeAttributeAcPowerMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcPowerMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcPowerMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcPowerMultiplierWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9366,8 +10160,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcPowerMultiplie
 	}
 }
 
+// ReadAttributeAcPowerDivisor wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcPowerDivisor blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcPowerDivisor(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcPowerDivisor(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9389,8 +10185,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcPowerDivisor(ctx co
 	}
 }
 
+// SubscribeAttributeAcPowerDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcPowerDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcPowerDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcPowerDivisorWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9412,8 +10210,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcPowerDivisorWi
 	}
 }
 
+// ReadAttributeOverloadAlarmsMask wraps the corresponding Objective-C method.
+//
 // ReadAttributeOverloadAlarmsMask blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeOverloadAlarmsMask(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeOverloadAlarmsMask(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9435,8 +10235,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeOverloadAlarmsMask(ct
 	}
 }
 
+// SubscribeAttributeOverloadAlarmsMaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOverloadAlarmsMaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeOverloadAlarmsMaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeOverloadAlarmsMaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9458,8 +10260,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeOverloadAlarmsMa
 	}
 }
 
+// ReadAttributeVoltageOverload wraps the corresponding Objective-C method.
+//
 // ReadAttributeVoltageOverload blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeVoltageOverload(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeVoltageOverload(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9481,8 +10285,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeVoltageOverload(ctx c
 	}
 }
 
+// SubscribeAttributeVoltageOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeVoltageOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeVoltageOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeVoltageOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9504,8 +10310,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeVoltageOverloadW
 	}
 }
 
+// ReadAttributeCurrentOverload wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentOverload blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeCurrentOverload(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeCurrentOverload(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9527,8 +10335,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeCurrentOverload(ctx c
 	}
 }
 
+// SubscribeAttributeCurrentOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeCurrentOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeCurrentOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9550,8 +10360,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeCurrentOverloadW
 	}
 }
 
+// ReadAttributeAcOverloadAlarmsMask wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcOverloadAlarmsMask blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcOverloadAlarmsMask(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcOverloadAlarmsMask(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9573,8 +10385,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcOverloadAlarmsMask(
 	}
 }
 
+// SubscribeAttributeAcOverloadAlarmsMaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcOverloadAlarmsMaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcOverloadAlarmsMaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcOverloadAlarmsMaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9596,8 +10410,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcOverloadAlarms
 	}
 }
 
+// ReadAttributeAcVoltageOverload wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcVoltageOverload blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageOverload(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageOverload(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9619,8 +10435,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageOverload(ctx
 	}
 }
 
+// SubscribeAttributeAcVoltageOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcVoltageOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9642,8 +10460,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageOverloa
 	}
 }
 
+// ReadAttributeAcCurrentOverload wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcCurrentOverload blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentOverload(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentOverload(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9665,8 +10485,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentOverload(ctx
 	}
 }
 
+// SubscribeAttributeAcCurrentOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcCurrentOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9688,8 +10510,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentOverloa
 	}
 }
 
+// ReadAttributeAcActivePowerOverload wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcActivePowerOverload blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcActivePowerOverload(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcActivePowerOverload(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9711,8 +10535,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcActivePowerOverload
 	}
 }
 
+// SubscribeAttributeAcActivePowerOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcActivePowerOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcActivePowerOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcActivePowerOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9734,8 +10560,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcActivePowerOve
 	}
 }
 
+// ReadAttributeAcReactivePowerOverload wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcReactivePowerOverload blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcReactivePowerOverload(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcReactivePowerOverload(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9757,8 +10585,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcReactivePowerOverlo
 	}
 }
 
+// SubscribeAttributeAcReactivePowerOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcReactivePowerOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcReactivePowerOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcReactivePowerOverloadWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9780,8 +10610,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcReactivePowerO
 	}
 }
 
+// ReadAttributeAverageRmsOverVoltage wraps the corresponding Objective-C method.
+//
 // ReadAttributeAverageRmsOverVoltage blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltage(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltage(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9803,8 +10635,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltage
 	}
 }
 
+// SubscribeAttributeAverageRmsOverVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAverageRmsOverVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOverVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOverVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9826,8 +10660,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOverVo
 	}
 }
 
+// ReadAttributeAverageRmsUnderVoltage wraps the corresponding Objective-C method.
+//
 // ReadAttributeAverageRmsUnderVoltage blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltage(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltage(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9849,8 +10685,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltag
 	}
 }
 
+// SubscribeAttributeAverageRmsUnderVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAverageRmsUnderVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9872,8 +10710,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderV
 	}
 }
 
+// ReadAttributeRmsExtremeOverVoltage wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsExtremeOverVoltage blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltage(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltage(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9895,8 +10735,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltage
 	}
 }
 
+// SubscribeAttributeRmsExtremeOverVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsExtremeOverVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9918,8 +10760,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVo
 	}
 }
 
+// ReadAttributeRmsExtremeUnderVoltage wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsExtremeUnderVoltage blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltage(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltage(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9941,8 +10785,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltag
 	}
 }
 
+// SubscribeAttributeRmsExtremeUnderVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsExtremeUnderVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderVoltageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9964,8 +10810,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderV
 	}
 }
 
+// ReadAttributeRmsVoltageSag wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageSag blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSag(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSag(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -9987,8 +10835,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSag(ctx con
 	}
 }
 
+// SubscribeAttributeRmsVoltageSagWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageSagWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10010,8 +10860,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagWit
 	}
 }
 
+// ReadAttributeRmsVoltageSwell wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageSwell blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwell(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwell(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10033,8 +10885,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwell(ctx c
 	}
 }
 
+// SubscribeAttributeRmsVoltageSwellWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageSwellWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10056,8 +10910,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellW
 	}
 }
 
+// ReadAttributeLineCurrentPhaseB wraps the corresponding Objective-C method.
+//
 // ReadAttributeLineCurrentPhaseB blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseB(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseB(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10079,8 +10935,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseB(ctx
 	}
 }
 
+// SubscribeAttributeLineCurrentPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLineCurrentPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeLineCurrentPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeLineCurrentPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10102,8 +10960,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeLineCurrentPhase
 	}
 }
 
+// ReadAttributeActiveCurrentPhaseB wraps the corresponding Objective-C method.
+//
 // ReadAttributeActiveCurrentPhaseB blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseB(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseB(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10125,8 +10985,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseB(c
 	}
 }
 
+// SubscribeAttributeActiveCurrentPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActiveCurrentPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActiveCurrentPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActiveCurrentPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10148,8 +11010,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActiveCurrentPha
 	}
 }
 
+// ReadAttributeReactiveCurrentPhaseB wraps the corresponding Objective-C method.
+//
 // ReadAttributeReactiveCurrentPhaseB blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseB(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseB(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10171,8 +11035,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseB
 	}
 }
 
+// SubscribeAttributeReactiveCurrentPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeReactiveCurrentPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactiveCurrentPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactiveCurrentPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10194,8 +11060,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactiveCurrentP
 	}
 }
 
+// ReadAttributeRmsVoltagePhaseB wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltagePhaseB blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseB(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseB(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10217,8 +11085,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseB(ctx 
 	}
 }
 
+// SubscribeAttributeRmsVoltagePhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltagePhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltagePhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltagePhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10240,8 +11110,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltagePhaseB
 	}
 }
 
+// ReadAttributeRmsVoltageMinPhaseB wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageMinPhaseB blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseB(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseB(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10263,8 +11135,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseB(c
 	}
 }
 
+// SubscribeAttributeRmsVoltageMinPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageMinPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMinPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMinPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10286,8 +11160,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMinPha
 	}
 }
 
+// ReadAttributeRmsVoltageMaxPhaseB wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageMaxPhaseB blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseB(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseB(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10309,8 +11185,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseB(c
 	}
 }
 
+// SubscribeAttributeRmsVoltageMaxPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageMaxPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMaxPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMaxPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10332,8 +11210,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMaxPha
 	}
 }
 
+// ReadAttributeRmsCurrentPhaseB wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsCurrentPhaseB blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseB(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseB(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10355,8 +11235,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseB(ctx 
 	}
 }
 
+// SubscribeAttributeRmsCurrentPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsCurrentPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10378,8 +11260,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentPhaseB
 	}
 }
 
+// ReadAttributeRmsCurrentMinPhaseB wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsCurrentMinPhaseB blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseB(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseB(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10401,8 +11285,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseB(c
 	}
 }
 
+// SubscribeAttributeRmsCurrentMinPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsCurrentMinPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMinPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMinPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10424,8 +11310,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMinPha
 	}
 }
 
+// ReadAttributeRmsCurrentMaxPhaseB wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsCurrentMaxPhaseB blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseB(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseB(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10447,8 +11335,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseB(c
 	}
 }
 
+// SubscribeAttributeRmsCurrentMaxPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsCurrentMaxPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMaxPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMaxPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10470,8 +11360,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMaxPha
 	}
 }
 
+// ReadAttributeActivePowerPhaseB wraps the corresponding Objective-C method.
+//
 // ReadAttributeActivePowerPhaseB blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerPhaseB(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerPhaseB(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10493,8 +11385,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerPhaseB(ctx
 	}
 }
 
+// SubscribeAttributeActivePowerPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActivePowerPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10516,8 +11410,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerPhase
 	}
 }
 
+// ReadAttributeActivePowerMinPhaseB wraps the corresponding Objective-C method.
+//
 // ReadAttributeActivePowerMinPhaseB blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseB(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseB(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10539,8 +11435,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseB(
 	}
 }
 
+// SubscribeAttributeActivePowerMinPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActivePowerMinPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMinPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMinPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10562,8 +11460,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMinPh
 	}
 }
 
+// ReadAttributeActivePowerMaxPhaseB wraps the corresponding Objective-C method.
+//
 // ReadAttributeActivePowerMaxPhaseB blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseB(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseB(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10585,8 +11485,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseB(
 	}
 }
 
+// SubscribeAttributeActivePowerMaxPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActivePowerMaxPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMaxPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMaxPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10608,8 +11510,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMaxPh
 	}
 }
 
+// ReadAttributeReactivePowerPhaseB wraps the corresponding Objective-C method.
+//
 // ReadAttributeReactivePowerPhaseB blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseB(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseB(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10631,8 +11535,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseB(c
 	}
 }
 
+// SubscribeAttributeReactivePowerPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeReactivePowerPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowerPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowerPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10654,8 +11560,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowerPha
 	}
 }
 
+// ReadAttributeApparentPowerPhaseB wraps the corresponding Objective-C method.
+//
 // ReadAttributeApparentPowerPhaseB blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseB(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseB(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10677,8 +11585,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseB(c
 	}
 }
 
+// SubscribeAttributeApparentPowerPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeApparentPowerPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowerPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowerPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10700,8 +11610,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowerPha
 	}
 }
 
+// ReadAttributePowerFactorPhaseB wraps the corresponding Objective-C method.
+//
 // ReadAttributePowerFactorPhaseB blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactorPhaseB(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactorPhaseB(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10723,8 +11635,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactorPhaseB(ctx
 	}
 }
 
+// SubscribeAttributePowerFactorPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePowerFactorPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10746,8 +11660,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorPhase
 	}
 }
 
+// ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseB wraps the corresponding Objective-C method.
+//
 // ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseB blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseB(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseB(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10769,8 +11685,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeas
 	}
 }
 
+// SubscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10792,8 +11710,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVoltag
 	}
 }
 
+// ReadAttributeAverageRmsOverVoltageCounterPhaseB wraps the corresponding Objective-C method.
+//
 // ReadAttributeAverageRmsOverVoltageCounterPhaseB blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageCounterPhaseB(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageCounterPhaseB(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10815,8 +11735,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltage
 	}
 }
 
+// SubscribeAttributeAverageRmsOverVoltageCounterPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAverageRmsOverVoltageCounterPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOverVoltageCounterPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOverVoltageCounterPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10838,8 +11760,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOverVo
 	}
 }
 
+// ReadAttributeAverageRmsUnderVoltageCounterPhaseB wraps the corresponding Objective-C method.
+//
 // ReadAttributeAverageRmsUnderVoltageCounterPhaseB blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterPhaseB(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterPhaseB(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10861,8 +11785,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltag
 	}
 }
 
+// SubscribeAttributeAverageRmsUnderVoltageCounterPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAverageRmsUnderVoltageCounterPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderVoltageCounterPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderVoltageCounterPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10884,8 +11810,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderV
 	}
 }
 
+// ReadAttributeRmsExtremeOverVoltagePeriodPhaseB wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsExtremeOverVoltagePeriodPhaseB blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodPhaseB(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodPhaseB(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10907,8 +11835,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltage
 	}
 }
 
+// SubscribeAttributeRmsExtremeOverVoltagePeriodPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsExtremeOverVoltagePeriodPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVoltagePeriodPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVoltagePeriodPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10930,8 +11860,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVo
 	}
 }
 
+// ReadAttributeRmsExtremeUnderVoltagePeriodPhaseB wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsExtremeUnderVoltagePeriodPhaseB blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodPhaseB(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodPhaseB(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10953,8 +11885,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltag
 	}
 }
 
+// SubscribeAttributeRmsExtremeUnderVoltagePeriodPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsExtremeUnderVoltagePeriodPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderVoltagePeriodPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderVoltagePeriodPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10976,8 +11910,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderV
 	}
 }
 
+// ReadAttributeRmsVoltageSagPeriodPhaseB wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageSagPeriodPhaseB blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPhaseB(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPhaseB(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -10999,8 +11935,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPh
 	}
 }
 
+// SubscribeAttributeRmsVoltageSagPeriodPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageSagPeriodPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagPeriodPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagPeriodPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11022,8 +11960,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagPer
 	}
 }
 
+// ReadAttributeRmsVoltageSwellPeriodPhaseB wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageSwellPeriodPhaseB blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodPhaseB(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodPhaseB(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11045,8 +11985,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriod
 	}
 }
 
+// SubscribeAttributeRmsVoltageSwellPeriodPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageSwellPeriodPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellPeriodPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellPeriodPhaseBWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11068,8 +12010,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellP
 	}
 }
 
+// ReadAttributeLineCurrentPhaseC wraps the corresponding Objective-C method.
+//
 // ReadAttributeLineCurrentPhaseC blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseC(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseC(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11091,8 +12035,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseC(ctx
 	}
 }
 
+// SubscribeAttributeLineCurrentPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLineCurrentPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeLineCurrentPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeLineCurrentPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11114,8 +12060,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeLineCurrentPhase
 	}
 }
 
+// ReadAttributeActiveCurrentPhaseC wraps the corresponding Objective-C method.
+//
 // ReadAttributeActiveCurrentPhaseC blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseC(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseC(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11137,8 +12085,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseC(c
 	}
 }
 
+// SubscribeAttributeActiveCurrentPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActiveCurrentPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActiveCurrentPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActiveCurrentPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11160,8 +12110,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActiveCurrentPha
 	}
 }
 
+// ReadAttributeReactiveCurrentPhaseC wraps the corresponding Objective-C method.
+//
 // ReadAttributeReactiveCurrentPhaseC blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseC(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseC(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11183,8 +12135,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseC
 	}
 }
 
+// SubscribeAttributeReactiveCurrentPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeReactiveCurrentPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactiveCurrentPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactiveCurrentPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11206,8 +12160,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactiveCurrentP
 	}
 }
 
+// ReadAttributeRmsVoltagePhaseC wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltagePhaseC blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseC(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseC(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11229,8 +12185,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseC(ctx 
 	}
 }
 
+// SubscribeAttributeRmsVoltagePhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltagePhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltagePhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltagePhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11252,8 +12210,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltagePhaseC
 	}
 }
 
+// ReadAttributeRmsVoltageMinPhaseC wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageMinPhaseC blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseC(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseC(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11275,8 +12235,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseC(c
 	}
 }
 
+// SubscribeAttributeRmsVoltageMinPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageMinPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMinPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMinPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11298,8 +12260,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMinPha
 	}
 }
 
+// ReadAttributeRmsVoltageMaxPhaseC wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageMaxPhaseC blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseC(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseC(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11321,8 +12285,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseC(c
 	}
 }
 
+// SubscribeAttributeRmsVoltageMaxPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageMaxPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMaxPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMaxPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11344,8 +12310,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMaxPha
 	}
 }
 
+// ReadAttributeRmsCurrentPhaseC wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsCurrentPhaseC blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseC(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseC(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11367,8 +12335,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseC(ctx 
 	}
 }
 
+// SubscribeAttributeRmsCurrentPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsCurrentPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11390,8 +12360,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentPhaseC
 	}
 }
 
+// ReadAttributeRmsCurrentMinPhaseC wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsCurrentMinPhaseC blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseC(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseC(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11413,8 +12385,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseC(c
 	}
 }
 
+// SubscribeAttributeRmsCurrentMinPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsCurrentMinPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMinPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMinPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11436,8 +12410,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMinPha
 	}
 }
 
+// ReadAttributeRmsCurrentMaxPhaseC wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsCurrentMaxPhaseC blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseC(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseC(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11459,8 +12435,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseC(c
 	}
 }
 
+// SubscribeAttributeRmsCurrentMaxPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsCurrentMaxPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMaxPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMaxPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11482,8 +12460,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMaxPha
 	}
 }
 
+// ReadAttributeActivePowerPhaseC wraps the corresponding Objective-C method.
+//
 // ReadAttributeActivePowerPhaseC blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerPhaseC(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerPhaseC(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11505,8 +12485,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerPhaseC(ctx
 	}
 }
 
+// SubscribeAttributeActivePowerPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActivePowerPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11528,8 +12510,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerPhase
 	}
 }
 
+// ReadAttributeActivePowerMinPhaseC wraps the corresponding Objective-C method.
+//
 // ReadAttributeActivePowerMinPhaseC blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseC(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseC(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11551,8 +12535,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseC(
 	}
 }
 
+// SubscribeAttributeActivePowerMinPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActivePowerMinPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMinPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMinPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11574,8 +12560,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMinPh
 	}
 }
 
+// ReadAttributeActivePowerMaxPhaseC wraps the corresponding Objective-C method.
+//
 // ReadAttributeActivePowerMaxPhaseC blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseC(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseC(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11597,8 +12585,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseC(
 	}
 }
 
+// SubscribeAttributeActivePowerMaxPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActivePowerMaxPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMaxPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMaxPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11620,8 +12610,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerMaxPh
 	}
 }
 
+// ReadAttributeReactivePowerPhaseC wraps the corresponding Objective-C method.
+//
 // ReadAttributeReactivePowerPhaseC blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseC(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseC(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11643,8 +12635,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseC(c
 	}
 }
 
+// SubscribeAttributeReactivePowerPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeReactivePowerPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowerPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowerPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11666,8 +12660,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowerPha
 	}
 }
 
+// ReadAttributeApparentPowerPhaseC wraps the corresponding Objective-C method.
+//
 // ReadAttributeApparentPowerPhaseC blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseC(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseC(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11689,8 +12685,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseC(c
 	}
 }
 
+// SubscribeAttributeApparentPowerPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeApparentPowerPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowerPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowerPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11712,8 +12710,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowerPha
 	}
 }
 
+// ReadAttributePowerFactorPhaseC wraps the corresponding Objective-C method.
+//
 // ReadAttributePowerFactorPhaseC blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactorPhaseC(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactorPhaseC(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11735,8 +12735,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactorPhaseC(ctx
 	}
 }
 
+// SubscribeAttributePowerFactorPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePowerFactorPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11758,8 +12760,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorPhase
 	}
 }
 
+// ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseC wraps the corresponding Objective-C method.
+//
 // ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseC blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseC(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseC(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11781,8 +12785,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeas
 	}
 }
 
+// SubscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11804,8 +12810,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVoltag
 	}
 }
 
+// ReadAttributeAverageRmsOverVoltageCounterPhaseC wraps the corresponding Objective-C method.
+//
 // ReadAttributeAverageRmsOverVoltageCounterPhaseC blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageCounterPhaseC(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageCounterPhaseC(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11827,8 +12835,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltage
 	}
 }
 
+// SubscribeAttributeAverageRmsOverVoltageCounterPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAverageRmsOverVoltageCounterPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOverVoltageCounterPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOverVoltageCounterPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11850,8 +12860,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOverVo
 	}
 }
 
+// ReadAttributeAverageRmsUnderVoltageCounterPhaseC wraps the corresponding Objective-C method.
+//
 // ReadAttributeAverageRmsUnderVoltageCounterPhaseC blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterPhaseC(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterPhaseC(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11873,8 +12885,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltag
 	}
 }
 
+// SubscribeAttributeAverageRmsUnderVoltageCounterPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAverageRmsUnderVoltageCounterPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderVoltageCounterPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderVoltageCounterPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11896,8 +12910,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUnderV
 	}
 }
 
+// ReadAttributeRmsExtremeOverVoltagePeriodPhaseC wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsExtremeOverVoltagePeriodPhaseC blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodPhaseC(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodPhaseC(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11919,8 +12935,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltage
 	}
 }
 
+// SubscribeAttributeRmsExtremeOverVoltagePeriodPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsExtremeOverVoltagePeriodPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVoltagePeriodPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVoltagePeriodPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11942,8 +12960,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOverVo
 	}
 }
 
+// ReadAttributeRmsExtremeUnderVoltagePeriodPhaseC wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsExtremeUnderVoltagePeriodPhaseC blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodPhaseC(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodPhaseC(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11965,8 +12985,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltag
 	}
 }
 
+// SubscribeAttributeRmsExtremeUnderVoltagePeriodPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsExtremeUnderVoltagePeriodPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderVoltagePeriodPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderVoltagePeriodPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -11988,8 +13010,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUnderV
 	}
 }
 
+// ReadAttributeRmsVoltageSagPeriodPhaseC wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageSagPeriodPhaseC blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPhaseC(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPhaseC(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -12011,8 +13035,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPh
 	}
 }
 
+// SubscribeAttributeRmsVoltageSagPeriodPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageSagPeriodPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagPeriodPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagPeriodPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -12034,8 +13060,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSagPer
 	}
 }
 
+// ReadAttributeRmsVoltageSwellPeriodPhaseC wraps the corresponding Objective-C method.
+//
 // ReadAttributeRmsVoltageSwellPeriodPhaseC blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodPhaseC(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodPhaseC(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -12057,8 +13085,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriod
 	}
 }
 
+// SubscribeAttributeRmsVoltageSwellPeriodPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRmsVoltageSwellPeriodPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellPeriodPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellPeriodPhaseCWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -12080,8 +13110,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSwellP
 	}
 }
 
+// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -12103,8 +13135,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeGeneratedCommandList(
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -12126,8 +13160,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeGeneratedCommand
 	}
 }
 
+// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -12149,8 +13185,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAcceptedCommandList(c
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -12172,8 +13210,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcceptedCommandL
 	}
 }
 
+// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAttributeList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -12195,8 +13235,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeAttributeList(ctx con
 	}
 }
 
+// SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -12218,8 +13260,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAttributeListWit
 	}
 }
 
+// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -12241,8 +13285,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeFeatureMap(ctx contex
 	}
 }
 
+// SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -12264,8 +13310,10 @@ func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeFeatureMapWithMi
 	}
 }
 
+// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -12287,8 +13335,10 @@ func (x *MTRBaseClusterElectricalMeasurement) ReadAttributeClusterRevision(ctx c
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalMeasurement) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -12848,3 +13898,7 @@ type MTRBaseClusterElectricalMeasurementable interface {
 }
 
 var _ MTRBaseClusterElectricalMeasurementable = (*MTRBaseClusterElectricalMeasurement)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterElectricalMeasurement)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterElectricalMeasurement)(nil)

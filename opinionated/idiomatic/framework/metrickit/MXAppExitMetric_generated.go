@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing metrics about the types of foreground and background app exits.
-//
 // AppExitMetric is an idiomatic wrapper over the Objective-C class MXAppExitMetric.
+//
+// It embeds [Metric], promoting that type's methods.
+//
+// An object representing metrics about the types of foreground and background app exits.
 type AppExitMetric struct {
-	objref.Handle
+	Metric
 }
 
 // AppExitMetricFromID adopts an existing Objective-C object as a AppExitMetric
@@ -25,7 +26,8 @@ func AppExitMetricFromID(id objc.ID) *AppExitMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &AppExitMetric{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AppExitMetric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func appExitMetricAdopt(id objc.ID) *AppExitMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &AppExitMetric{Handle: objref.Wrap(id)}
+	x := &AppExitMetric{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AppExitMetric) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AppExitMetric) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AppExitMetric) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAppExitMetric creates a new AppExitMetric.
@@ -64,13 +52,13 @@ func NewAppExitMetric() *AppExitMetric {
 	return appExitMetricAdopt(_id)
 }
 
-// Cumulative foreground exit data. This includes application exit data when the application was on screen and visible to the user.
+// ForegroundExitData cumulative foreground exit data. This includes application exit data when the application was on screen and visible to the user.
 func (x *AppExitMetric) ForegroundExitData() *ForegroundExitData {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("foregroundExitData"))
 	return ForegroundExitDataFromID(_r)
 }
 
-// Cumulative background exit data. This includes application exit data when the application was off screen and not visible to the user.
+// BackgroundExitData cumulative background exit data. This includes application exit data when the application was off screen and not visible to the user.
 func (x *AppExitMetric) BackgroundExitData() *BackgroundExitData {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundExitData"))
 	return BackgroundExitDataFromID(_r)
@@ -84,3 +72,5 @@ type AppExitMetricable interface {
 }
 
 var _ AppExitMetricable = (*AppExitMetric)(nil)
+
+var _ MetricProvider = (*AppExitMetric)(nil)

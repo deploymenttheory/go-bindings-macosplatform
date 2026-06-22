@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRTestClusterClusterDoubleNestedStructList is an idiomatic wrapper over the Objective-C class MTRTestClusterClusterDoubleNestedStructList.
+//
+// It embeds [MTRUnitTestingClusterDoubleNestedStructList], promoting that type's methods.
 type MTRTestClusterClusterDoubleNestedStructList struct {
-	objref.Handle
+	MTRUnitTestingClusterDoubleNestedStructList
 }
 
 // MTRTestClusterClusterDoubleNestedStructListFromID adopts an existing Objective-C object as a MTRTestClusterClusterDoubleNestedStructList
@@ -23,7 +24,8 @@ func MTRTestClusterClusterDoubleNestedStructListFromID(id objc.ID) *MTRTestClust
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTestClusterClusterDoubleNestedStructList{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRTestClusterClusterDoubleNestedStructList{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRTestClusterClusterDoubleNestedStructListAdopt(id objc.ID) *MTRTestCluste
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTestClusterClusterDoubleNestedStructList{Handle: objref.Wrap(id)}
+	x := &MTRTestClusterClusterDoubleNestedStructList{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRTestClusterClusterDoubleNestedStructList) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRTestClusterClusterDoubleNestedStructList) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRTestClusterClusterDoubleNestedStructList) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRTestClusterClusterDoubleNestedStructList creates a new MTRTestClusterClusterDoubleNestedStructList.
@@ -68,3 +56,5 @@ type MTRTestClusterClusterDoubleNestedStructListable interface {
 }
 
 var _ MTRTestClusterClusterDoubleNestedStructListable = (*MTRTestClusterClusterDoubleNestedStructList)(nil)
+
+var _ MTRUnitTestingClusterDoubleNestedStructListProvider = (*MTRTestClusterClusterDoubleNestedStructList)(nil)

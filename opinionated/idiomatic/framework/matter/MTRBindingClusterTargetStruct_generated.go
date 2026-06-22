@@ -23,7 +23,8 @@ func MTRBindingClusterTargetStructFromID(id objc.ID) *MTRBindingClusterTargetStr
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBindingClusterTargetStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBindingClusterTargetStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRBindingClusterTargetStructAdopt(id objc.ID) *MTRBindingClusterTargetStru
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBindingClusterTargetStruct{Handle: objref.Wrap(id)}
+	x := &MTRBindingClusterTargetStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,83 +58,99 @@ func (x *MTRBindingClusterTargetStruct) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRBindingClusterTargetStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRBindingClusterTargetStruct creates a new MTRBindingClusterTargetStruct.
 func NewMTRBindingClusterTargetStruct() *MTRBindingClusterTargetStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRBindingClusterTargetStruct")), objc.RegisterName("new"))
 	return mTRBindingClusterTargetStructAdopt(_id)
 }
 
-// WithNode sets node and returns the receiver so calls can be chained.
+// WithNode sets the property and returns the receiver so calls can be chained.
 func (x *MTRBindingClusterTargetStruct) WithNode(node obj.Object) *MTRBindingClusterTargetStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNode:"), objref.IDOf(node))
 	return x
 }
 
-// WithGroup sets group and returns the receiver so calls can be chained.
+// WithGroup sets the property and returns the receiver so calls can be chained.
 func (x *MTRBindingClusterTargetStruct) WithGroup(group obj.Object) *MTRBindingClusterTargetStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
-// WithEndpoint sets endpoint and returns the receiver so calls can be chained.
+// WithEndpoint sets the property and returns the receiver so calls can be chained.
 func (x *MTRBindingClusterTargetStruct) WithEndpoint(endpoint obj.Object) *MTRBindingClusterTargetStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return x
 }
 
-// WithCluster sets cluster and returns the receiver so calls can be chained.
+// WithCluster sets the property and returns the receiver so calls can be chained.
 func (x *MTRBindingClusterTargetStruct) WithCluster(cluster obj.Object) *MTRBindingClusterTargetStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
 	return x
 }
 
-// WithFabricIndex sets fabricIndex and returns the receiver so calls can be chained.
+// WithFabricIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRBindingClusterTargetStruct) WithFabricIndex(fabricIndex obj.Object) *MTRBindingClusterTargetStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return x
 }
 
+// Node wraps the corresponding Objective-C method.
 func (x *MTRBindingClusterTargetStruct) Node() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("node"))
 	return obj.Wrap(_r)
 }
 
+// SetNode wraps the corresponding Objective-C method.
 func (x *MTRBindingClusterTargetStruct) SetNode(node obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNode:"), objref.IDOf(node))
 }
 
+// Group wraps the corresponding Objective-C method.
 func (x *MTRBindingClusterTargetStruct) Group() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("group"))
 	return obj.Wrap(_r)
 }
 
+// SetGroup wraps the corresponding Objective-C method.
 func (x *MTRBindingClusterTargetStruct) SetGroup(group obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 }
 
+// Endpoint wraps the corresponding Objective-C method.
 func (x *MTRBindingClusterTargetStruct) Endpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)
 }
 
+// SetEndpoint wraps the corresponding Objective-C method.
 func (x *MTRBindingClusterTargetStruct) SetEndpoint(endpoint obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 }
 
+// Cluster wraps the corresponding Objective-C method.
 func (x *MTRBindingClusterTargetStruct) Cluster() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cluster"))
 	return obj.Wrap(_r)
 }
 
+// SetCluster wraps the corresponding Objective-C method.
 func (x *MTRBindingClusterTargetStruct) SetCluster(cluster obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
 }
 
+// FabricIndex wraps the corresponding Objective-C method.
 func (x *MTRBindingClusterTargetStruct) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)
 }
 
+// SetFabricIndex wraps the corresponding Objective-C method.
 func (x *MTRBindingClusterTargetStruct) SetFabricIndex(fabricIndex obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 }

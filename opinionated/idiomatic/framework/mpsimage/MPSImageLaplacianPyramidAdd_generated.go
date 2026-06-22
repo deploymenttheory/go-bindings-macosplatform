@@ -6,15 +6,18 @@ package mpsimage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ImageLaplacianPyramidAdd is an idiomatic wrapper over the Objective-C class MPSImageLaplacianPyramidAdd.
+//
+// It embeds [ImageLaplacianPyramid], promoting that type's methods.
 type ImageLaplacianPyramidAdd struct {
-	objref.Handle
+	ImageLaplacianPyramid
 }
 
 // ImageLaplacianPyramidAddFromID adopts an existing Objective-C object as a ImageLaplacianPyramidAdd
@@ -23,7 +26,8 @@ func ImageLaplacianPyramidAddFromID(id objc.ID) *ImageLaplacianPyramidAdd {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageLaplacianPyramidAdd{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageLaplacianPyramidAdd{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +40,10 @@ func imageLaplacianPyramidAddAdopt(id objc.ID) *ImageLaplacianPyramidAdd {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageLaplacianPyramidAdd{Handle: objref.Wrap(id)}
+	x := &ImageLaplacianPyramidAdd{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ImageLaplacianPyramidAdd) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageLaplacianPyramidAdd) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageLaplacianPyramidAdd) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewImageLaplacianPyramidAdd creates a new ImageLaplacianPyramidAdd.
@@ -62,15 +52,27 @@ func NewImageLaplacianPyramidAdd() *ImageLaplacianPyramidAdd {
 	return imageLaplacianPyramidAddAdopt(_id)
 }
 
-// WithLaplacianBias sets laplacianBias and returns the receiver so calls can be chained.
+// WithLaplacianBias sets the property and returns the receiver so calls can be chained.
 func (x *ImageLaplacianPyramidAdd) WithLaplacianBias(laplacianBias float32) *ImageLaplacianPyramidAdd {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLaplacianBias:"), laplacianBias)
 	return x
 }
 
-// WithLaplacianScale sets laplacianScale and returns the receiver so calls can be chained.
+// WithLaplacianScale sets the property and returns the receiver so calls can be chained.
 func (x *ImageLaplacianPyramidAdd) WithLaplacianScale(laplacianScale float32) *ImageLaplacianPyramidAdd {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLaplacianScale:"), laplacianScale)
+	return x
+}
+
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
+func (x *ImageLaplacianPyramidAdd) WithOffset(offset mpscore.MPSOffset) *ImageLaplacianPyramidAdd {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (x *ImageLaplacianPyramidAdd) WithClipRect(clipRect metal.MTLRegion) *ImageLaplacianPyramidAdd {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
@@ -79,6 +81,14 @@ type ImageLaplacianPyramidAddable interface {
 	obj.Object
 	WithLaplacianBias(laplacianBias float32) *ImageLaplacianPyramidAdd
 	WithLaplacianScale(laplacianScale float32) *ImageLaplacianPyramidAdd
+	WithOffset(offset mpscore.MPSOffset) *ImageLaplacianPyramidAdd
+	WithClipRect(clipRect metal.MTLRegion) *ImageLaplacianPyramidAdd
 }
 
 var _ ImageLaplacianPyramidAddable = (*ImageLaplacianPyramidAdd)(nil)
+
+var _ ImageLaplacianPyramidProvider = (*ImageLaplacianPyramidAdd)(nil)
+
+var _ ImagePyramidProvider = (*ImageLaplacianPyramidAdd)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageLaplacianPyramidAdd)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Surface appearance properties for use in GLKit rendering effects.
-//
 // EffectPropertyMaterial is an idiomatic wrapper over the Objective-C class GLKEffectPropertyMaterial.
+//
+// It embeds [EffectProperty], promoting that type's methods.
+//
+// Surface appearance properties for use in GLKit rendering effects.
 type EffectPropertyMaterial struct {
-	objref.Handle
+	EffectProperty
 }
 
 // EffectPropertyMaterialFromID adopts an existing Objective-C object as a EffectPropertyMaterial
@@ -25,7 +26,8 @@ func EffectPropertyMaterialFromID(id objc.ID) *EffectPropertyMaterial {
 	if id == 0 {
 		return nil
 	}
-	x := &EffectPropertyMaterial{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EffectPropertyMaterial{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func effectPropertyMaterialAdopt(id objc.ID) *EffectPropertyMaterial {
 	if id == 0 {
 		return nil
 	}
-	x := &EffectPropertyMaterial{Handle: objref.Wrap(id)}
+	x := &EffectPropertyMaterial{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *EffectPropertyMaterial) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EffectPropertyMaterial) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EffectPropertyMaterial) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewEffectPropertyMaterial creates a new EffectPropertyMaterial.
@@ -64,19 +52,19 @@ func NewEffectPropertyMaterial() *EffectPropertyMaterial {
 	return effectPropertyMaterialAdopt(_id)
 }
 
-// The shininess of the material, used when calculating specular lighting effects.
-//
-// WithShininess sets shininess and returns the receiver so calls can be chained.
+// WithShininess the shininess of the material, used when calculating specular lighting effects.
 func (x *EffectPropertyMaterial) WithShininess(shininess float32) *EffectPropertyMaterial {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShininess:"), shininess)
 	return x
 }
 
+// Shininess wraps the corresponding Objective-C method.
 func (x *EffectPropertyMaterial) Shininess() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("shininess"))
 	return _r
 }
 
+// SetShininess wraps the corresponding Objective-C method.
 func (x *EffectPropertyMaterial) SetShininess(shininess float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShininess:"), shininess)
 }
@@ -90,3 +78,5 @@ type EffectPropertyMaterialable interface {
 }
 
 var _ EffectPropertyMaterialable = (*EffectPropertyMaterial)(nil)
+
+var _ EffectPropertyProvider = (*EffectPropertyMaterial)(nil)

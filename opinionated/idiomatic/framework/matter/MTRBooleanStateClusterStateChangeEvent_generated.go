@@ -23,7 +23,8 @@ func MTRBooleanStateClusterStateChangeEventFromID(id objc.ID) *MTRBooleanStateCl
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBooleanStateClusterStateChangeEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBooleanStateClusterStateChangeEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRBooleanStateClusterStateChangeEventAdopt(id objc.ID) *MTRBooleanStateClu
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBooleanStateClusterStateChangeEvent{Handle: objref.Wrap(id)}
+	x := &MTRBooleanStateClusterStateChangeEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTRBooleanStateClusterStateChangeEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRBooleanStateClusterStateChangeEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRBooleanStateClusterStateChangeEvent creates a new MTRBooleanStateClusterStateChangeEvent.
 func NewMTRBooleanStateClusterStateChangeEvent() *MTRBooleanStateClusterStateChangeEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRBooleanStateClusterStateChangeEvent")), objc.RegisterName("new"))
 	return mTRBooleanStateClusterStateChangeEventAdopt(_id)
 }
 
-// WithStateValue sets stateValue and returns the receiver so calls can be chained.
+// WithStateValue sets the property and returns the receiver so calls can be chained.
 func (x *MTRBooleanStateClusterStateChangeEvent) WithStateValue(stateValue obj.Object) *MTRBooleanStateClusterStateChangeEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStateValue:"), objref.IDOf(stateValue))
 	return x
 }
 
+// StateValue wraps the corresponding Objective-C method.
 func (x *MTRBooleanStateClusterStateChangeEvent) StateValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateValue"))
 	return obj.Wrap(_r)
 }
 
+// SetStateValue wraps the corresponding Objective-C method.
 func (x *MTRBooleanStateClusterStateChangeEvent) SetStateValue(stateValue obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStateValue:"), objref.IDOf(stateValue))
 }

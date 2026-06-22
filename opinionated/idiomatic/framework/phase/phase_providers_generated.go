@@ -11,59 +11,71 @@ import (
 // AssetProvider is accepted wherever a PHASEAsset (or one of its subclasses) is expected.
 type AssetProvider interface {
 	objref.Object
+	isAsset()
 }
 
 // DefinitionProvider is accepted wherever a PHASEDefinition (or one of its subclasses) is expected.
 type DefinitionProvider interface {
 	objref.Object
+	isDefinition()
 }
 
 // DirectivityModelParametersProvider is accepted wherever a PHASEDirectivityModelParameters (or one of its subclasses) is expected.
 type DirectivityModelParametersProvider interface {
 	objref.Object
+	isDirectivityModelParameters()
 }
 
 // DistanceModelParametersProvider is accepted wherever a PHASEDistanceModelParameters (or one of its subclasses) is expected.
 type DistanceModelParametersProvider interface {
 	objref.Object
+	isDistanceModelParameters()
 }
 
 // GeneratorNodeDefinitionProvider is accepted wherever a PHASEGeneratorNodeDefinition (or one of its subclasses) is expected.
 type GeneratorNodeDefinitionProvider interface {
 	objref.Object
+	isGeneratorNodeDefinition()
 }
 
 // MetaParameterProvider is accepted wherever a PHASEMetaParameter (or one of its subclasses) is expected.
 type MetaParameterProvider interface {
 	objref.Object
+	isMetaParameter()
 }
 
 // MetaParameterDefinitionProvider is accepted wherever a PHASEMetaParameterDefinition (or one of its subclasses) is expected.
 type MetaParameterDefinitionProvider interface {
 	objref.Object
+	isMetaParameterDefinition()
 }
 
 // MixerDefinitionProvider is accepted wherever a PHASEMixerDefinition (or one of its subclasses) is expected.
 type MixerDefinitionProvider interface {
 	objref.Object
+	isMixerDefinition()
 }
 
 // NumberMetaParameterDefinitionProvider is accepted wherever a PHASENumberMetaParameterDefinition (or one of its subclasses) is expected.
 type NumberMetaParameterDefinitionProvider interface {
 	objref.Object
+	isNumberMetaParameterDefinition()
 }
 
 // ObjectProvider is accepted wherever a PHASEObject (or one of its subclasses) is expected.
 type ObjectProvider interface {
 	objref.Object
+	isObject()
 }
 
 // SoundEventNodeDefinitionProvider is accepted wherever a PHASESoundEventNodeDefinition (or one of its subclasses) is expected.
 type SoundEventNodeDefinitionProvider interface {
 	objref.Object
+	isSoundEventNodeDefinition()
 }
 
 // StreamNodeProvider is accepted wherever a PHASEStreamNode (or one of its subclasses) is expected.
 type StreamNodeProvider interface {
 	objref.Object
+	isStreamNode()
 }

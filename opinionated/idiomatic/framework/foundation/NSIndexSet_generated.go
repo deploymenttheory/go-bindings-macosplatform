@@ -13,9 +13,11 @@ import (
 	"unsafe"
 )
 
-// An immutable collection of unique integer values that represent indexes in another collection.
-//
 // IndexSet is an idiomatic wrapper over the Objective-C class NSIndexSet.
+//
+// IndexSet is an abstract base — you do not construct it directly. Construct one of [MutableIndexSet] and pass it where a IndexSet is accepted.
+//
+// An immutable collection of unique integer values that represent indexes in another collection.
 type IndexSet struct {
 	objref.Handle
 }
@@ -26,7 +28,8 @@ func IndexSetFromID(id objc.ID) *IndexSet {
 	if id == 0 {
 		return nil
 	}
-	x := &IndexSet{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IndexSet{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +42,8 @@ func indexSetAdopt(id objc.ID) *IndexSet {
 	if id == 0 {
 		return nil
 	}
-	x := &IndexSet{Handle: objref.Wrap(id)}
+	x := &IndexSet{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,116 +63,121 @@ func (x *IndexSet) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes an allocated NSIndexSet object with an index set.
-//
-// NewIndexSetWithIndexSet creates a new IndexSet.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IndexSet) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewIndexSetWithIndexSet initializes an allocated NSIndexSet object with an index set.
 func NewIndexSetWithIndexSet(indexSet *IndexSet) *IndexSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSIndexSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIndexSet:"), objref.IDOf(indexSet))
 	return indexSetAdopt(_id)
 }
 
-// Initializes an allocated NSIndexSet object with an index.
-//
-// NewIndexSetWithIndex creates a new IndexSet.
+// NewIndexSetWithIndex initializes an allocated NSIndexSet object with an index.
 func NewIndexSetWithIndex(value int) *IndexSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSIndexSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIndex:"), value)
 	return indexSetAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *IndexSet) WithScriptingProperties(scriptingProperties obj.Object) *IndexSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Indicates whether the indexes in the receiving index set are the same indexes contained in another index set.
+// IsEqualToIndexSet indicates whether the indexes in the receiving index set are the same indexes contained in another index set.
 func (x *IndexSet) IsEqualToIndexSet(indexSet *IndexSet) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToIndexSet:"), objref.IDOf(indexSet))
 	return _r
 }
 
-// Returns either the closest index in the index set that is greater than a specific index or the not-found indicator.
+// IndexGreaterThanIndex returns either the closest index in the index set that is greater than a specific index or the not-found indicator.
 func (x *IndexSet) IndexGreaterThanIndex(value int) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexGreaterThanIndex:"), value)
 	return _r
 }
 
-// Returns either the closest index in the index set that is less than a specific index or the not-found indicator.
+// IndexLessThanIndex returns either the closest index in the index set that is less than a specific index or the not-found indicator.
 func (x *IndexSet) IndexLessThanIndex(value int) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexLessThanIndex:"), value)
 	return _r
 }
 
-// Returns either the closest index in the index set that is greater than or equal to a specific index or the not-found indicator.
+// IndexGreaterThanOrEqualToIndex returns either the closest index in the index set that is greater than or equal to a specific index or the not-found indicator.
 func (x *IndexSet) IndexGreaterThanOrEqualToIndex(value int) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexGreaterThanOrEqualToIndex:"), value)
 	return _r
 }
 
-// Returns either the closest index in the index set that is less than or equal to a specific index or the not-found indicator.
+// IndexLessThanOrEqualToIndex returns either the closest index in the index set that is less than or equal to a specific index or the not-found indicator.
 func (x *IndexSet) IndexLessThanOrEqualToIndex(value int) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexLessThanOrEqualToIndex:"), value)
 	return _r
 }
 
-// Indicates whether the index set contains a specific index.
+// ContainsIndex indicates whether the index set contains a specific index.
 func (x *IndexSet) ContainsIndex(value int) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsIndex:"), value)
 	return _r
 }
 
-// Indicates whether the receiving index set contains a superset of the indexes in another index set.
+// ContainsIndexes indicates whether the receiving index set contains a superset of the indexes in another index set.
 func (x *IndexSet) ContainsIndexes(indexSet *IndexSet) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsIndexes:"), objref.IDOf(indexSet))
 	return _r
 }
 
-// Executes a given Block using each object in the index set.
+// EnumerateIndexesUsing executes a given Block using each object in the index set.
 func (x *IndexSet) EnumerateIndexesUsing(block func(int, *bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateIndexesUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) { block(_b0, (*bool)(_b1)) }))
 }
 
-// Executes a given Block over the index set’s indexes, using the specified enumeration options.
+// EnumerateIndexesWithOptionsUsing executes a given Block over the index set’s indexes, using the specified enumeration options.
 func (x *IndexSet) EnumerateIndexesWithOptionsUsing(opts EnumerationOptions, block func(int, *bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateIndexesWithOptions:usingBlock:"), opts, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) { block(_b0, (*bool)(_b1)) }))
 }
 
-// Returns the index of the first object that passes the predicate Block test.
+// IndexPassingTest returns the index of the first object that passes the predicate Block test.
 func (x *IndexSet) IndexPassingTest(predicate func(int, *bool) bool) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) bool { return predicate(_b0, (*bool)(_b1)) }))
 	return _r
 }
 
-// Returns the index of the first object that passes the predicate Block test using the specified enumeration options.
+// IndexWithOptionsPassingTest returns the index of the first object that passes the predicate Block test using the specified enumeration options.
 func (x *IndexSet) IndexWithOptionsPassingTest(opts EnumerationOptions, predicate func(int, *bool) bool) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexWithOptions:passingTest:"), opts, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) bool { return predicate(_b0, (*bool)(_b1)) }))
 	return _r
 }
 
-// Returns an NSIndexSet containing the receiving index set’s objects that pass the Block test.
+// IndexesPassingTest returns an NSIndexSet containing the receiving index set’s objects that pass the Block test.
 func (x *IndexSet) IndexesPassingTest(predicate func(int, *bool) bool) *IndexSet {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexesPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) bool { return predicate(_b0, (*bool)(_b1)) }))
 	return IndexSetFromID(_r)
 }
 
-// Returns an NSIndexSet containing the receiving index set’s objects that pass the Block test using the specified enumeration options.
+// IndexesWithOptionsPassingTest returns an NSIndexSet containing the receiving index set’s objects that pass the Block test using the specified enumeration options.
 func (x *IndexSet) IndexesWithOptionsPassingTest(opts EnumerationOptions, predicate func(int, *bool) bool) *IndexSet {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexesWithOptions:passingTest:"), opts, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) bool { return predicate(_b0, (*bool)(_b1)) }))
 	return IndexSetFromID(_r)
 }
 
+// Count wraps the corresponding Objective-C method.
 func (x *IndexSet) Count() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
 	return _r
 }
 
+// FirstIndex wraps the corresponding Objective-C method.
 func (x *IndexSet) FirstIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("firstIndex"))
 	return _r
 }
 
+// LastIndex wraps the corresponding Objective-C method.
 func (x *IndexSet) LastIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("lastIndex"))
 	return _r
@@ -197,3 +206,10 @@ type IndexSetable interface {
 }
 
 var _ IndexSetable = (*IndexSet)(nil)
+
+// isIndexSet marks IndexSet — and, by embedding promotion, its
+// subclasses — as a member of the IndexSet hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *IndexSet) isIndexSet() {}
+
+var _ IndexSetProvider = (*IndexSet)(nil)

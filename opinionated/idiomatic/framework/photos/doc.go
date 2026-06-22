@@ -3,4 +3,16 @@
 //go:build darwin
 
 // Package photos provides a fluent Go API over the macOS Photos framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - AssetChangeRequest: [AssetCreationRequest]
+//   - AssetCollection: [Project]
+//   - ChangeRequest: [AssetChangeRequest], [AssetCollectionChangeRequest], [CollectionListChangeRequest], [ProjectChangeRequest]
+//   - Collection: [AssetCollection], [CollectionList]
+//   - ImageManager: [CachingImageManager]
+//   - Object: [Asset], [Collection], [ObjectPlaceholder]
 package photos

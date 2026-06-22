@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An audio-layering object that outputs sound in a particular direction in 3D space.
-//
 // AmbientMixerDefinition is an idiomatic wrapper over the Objective-C class PHASEAmbientMixerDefinition.
+//
+// It embeds [MixerDefinition], promoting that type's methods.
+//
+// An audio-layering object that outputs sound in a particular direction in 3D space.
 type AmbientMixerDefinition struct {
-	objref.Handle
+	MixerDefinition
 }
 
 // AmbientMixerDefinitionFromID adopts an existing Objective-C object as a AmbientMixerDefinition
@@ -25,7 +26,8 @@ func AmbientMixerDefinitionFromID(id objc.ID) *AmbientMixerDefinition {
 	if id == 0 {
 		return nil
 	}
-	x := &AmbientMixerDefinition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AmbientMixerDefinition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func ambientMixerDefinitionAdopt(id objc.ID) *AmbientMixerDefinition {
 	if id == 0 {
 		return nil
 	}
-	x := &AmbientMixerDefinition{Handle: objref.Wrap(id)}
+	x := &AmbientMixerDefinition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AmbientMixerDefinition) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AmbientMixerDefinition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AmbientMixerDefinition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAmbientMixerDefinition creates a new AmbientMixerDefinition.
@@ -64,23 +52,19 @@ func NewAmbientMixerDefinition() *AmbientMixerDefinition {
 	return ambientMixerDefinitionAdopt(_id)
 }
 
-// The mixer’s volume.
-//
-// WithGain sets gain and returns the receiver so calls can be chained.
+// WithGain the mixer’s volume.
 func (x *AmbientMixerDefinition) WithGain(gain float64) *AmbientMixerDefinition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
 	return x
 }
 
-// A template for a parameter that changes the mixer’s volume gradually over a period of time.
-//
-// WithGainMetaParameterDefinition sets gainMetaParameterDefinition and returns the receiver so calls can be chained.
+// WithGainMetaParameterDefinition a template for a parameter that changes the mixer’s volume gradually over a period of time.
 func (x *AmbientMixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *AmbientMixerDefinition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
 	return x
 }
 
-// A readonly value of the input channel layout this mixer was initialized with.
+// InputChannelLayout a readonly value of the input channel layout this mixer was initialized with.
 func (x *AmbientMixerDefinition) InputChannelLayout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputChannelLayout"))
 	return obj.Wrap(_r)
@@ -95,3 +79,7 @@ type AmbientMixerDefinitionable interface {
 }
 
 var _ AmbientMixerDefinitionable = (*AmbientMixerDefinition)(nil)
+
+var _ MixerDefinitionProvider = (*AmbientMixerDefinition)(nil)
+
+var _ DefinitionProvider = (*AmbientMixerDefinition)(nil)

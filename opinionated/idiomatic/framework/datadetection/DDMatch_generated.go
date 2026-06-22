@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class for common types of data that the data detection system matches.
-//
 // Match is an idiomatic wrapper over the Objective-C class DDMatch.
+//
+// Match is an abstract base — you do not construct it directly. Construct one of [MatchCalendarEvent], [MatchEmailAddress], [MatchFlightNumber], [MatchLink], [MatchMoneyAmount], [MatchPhoneNumber], [MatchPostalAddress], [MatchShipmentTrackingNumber] and pass it where a Match is accepted.
+//
+// A base class for common types of data that the data detection system matches.
 type Match struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func MatchFromID(id objc.ID) *Match {
 	if id == 0 {
 		return nil
 	}
-	x := &Match{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Match{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func matchAdopt(id objc.ID) *Match {
 	if id == 0 {
 		return nil
 	}
-	x := &Match{Handle: objref.Wrap(id)}
+	x := &Match{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +62,13 @@ func (x *Match) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMatch creates a new Match.
-func NewMatch() *Match {
-	_id := objc.Send[objc.ID](objc.ID(_class("DDMatch")), objc.RegisterName("new"))
-	return matchAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Match) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// A substring that the data detection system identifies from an original string as a common type of data. Use `DDMatch` subclasses that the data detection system provides for a semantic interpretation of this string.
+// MatchedString a substring that the data detection system identifies from an original string as a common type of data. Use `DDMatch` subclasses that the data detection system provides for a semantic interpretation of this string.
 func (x *Match) MatchedString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchedString"))
 	if _r == 0 {
@@ -80,3 +84,10 @@ type Matchable interface {
 }
 
 var _ Matchable = (*Match)(nil)
+
+// isMatch marks Match — and, by embedding promotion, its
+// subclasses — as a member of the Match hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Match) isMatch() {}
+
+var _ MatchProvider = (*Match)(nil)

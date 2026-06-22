@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that gives you the ability to choose from system-provided tinting behaviors.
-//
 // TintConfiguration is an idiomatic wrapper over the Objective-C class NSTintConfiguration.
+//
+// An object that gives you the ability to choose from system-provided tinting behaviors.
 type TintConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TintConfigurationFromID(id objc.ID) *TintConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &TintConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TintConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func tintConfigurationAdopt(id objc.ID) *TintConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &TintConfiguration{Handle: objref.Wrap(id)}
+	x := &TintConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *TintConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TintConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTintConfiguration creates a new TintConfiguration.
 func NewTintConfiguration() *TintConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSTintConfiguration")), objc.RegisterName("new"))
 	return tintConfigurationAdopt(_id)
 }
 
-// The base NSColor supplied when creating the tint configuration object. If the receiver wasn't created using a base NSColor, this property returns nil.
+// BaseTintColor the base NSColor supplied when creating the tint configuration object. If the receiver wasn't created using a base NSColor, this property returns nil.
 func (x *TintConfiguration) BaseTintColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseTintColor"))
 	return ColorFromID(_r)
 }
 
-// An equivalent NSColor matching the effective content tint of the receiver. If the receiver can't be represented as a NSColor, this property returns nil.
+// EquivalentContentTintColor an equivalent NSColor matching the effective content tint of the receiver. If the receiver can't be represented as a NSColor, this property returns nil.
 func (x *TintConfiguration) EquivalentContentTintColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("equivalentContentTintColor"))
 	return ColorFromID(_r)
 }
 
-// If YES, the tint configuration alters its effect based on the user's preferred Accent Color. Otherwise, the tint configuration produces a constant effect regardless of the Accent Color preference.
+// AdaptsToUserAccentColor if YES, the tint configuration alters its effect based on the user's preferred Accent Color. Otherwise, the tint configuration produces a constant effect regardless of the Accent Color preference.
 func (x *TintConfiguration) AdaptsToUserAccentColor() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("adaptsToUserAccentColor"))
 	return _r

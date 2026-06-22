@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRSubscribeParams is an idiomatic wrapper over the Objective-C class MTRSubscribeParams.
+//
+// It embeds [MTRReadParams], promoting that type's methods.
 type MTRSubscribeParams struct {
-	objref.Handle
+	MTRReadParams
 }
 
 // MTRSubscribeParamsFromID adopts an existing Objective-C object as a MTRSubscribeParams
@@ -23,7 +24,8 @@ func MTRSubscribeParamsFromID(id objc.ID) *MTRSubscribeParams {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRSubscribeParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRSubscribeParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRSubscribeParamsAdopt(id objc.ID) *MTRSubscribeParams {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRSubscribeParams{Handle: objref.Wrap(id)}
+	x := &MTRSubscribeParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRSubscribeParams) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRSubscribeParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRSubscribeParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRSubscribeParams creates a new MTRSubscribeParams.
@@ -62,150 +50,152 @@ func NewMTRSubscribeParams() *MTRSubscribeParams {
 	return mTRSubscribeParamsAdopt(_id)
 }
 
-// Initialize an MTRSubscribeParams.  Must provide a minInterval and maxInterval; there are no default values for those.
-//
-// NewMTRSubscribeParamsWithMinIntervalMaxInterval creates a new MTRSubscribeParams.
+// NewMTRSubscribeParamsWithMinIntervalMaxInterval initialize an MTRSubscribeParams.  Must provide a minInterval and maxInterval; there are no default values for those.
 func NewMTRSubscribeParamsWithMinIntervalMaxInterval(minInterval obj.Object, maxInterval obj.Object) *MTRSubscribeParams {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRSubscribeParams")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMinInterval:maxInterval:"), objref.IDOf(minInterval), objref.IDOf(maxInterval))
 	return mTRSubscribeParamsAdopt(_id)
 }
 
-// WithReplaceExistingSubscriptions sets replaceExistingSubscriptions and returns the receiver so calls can be chained.
+// WithReplaceExistingSubscriptions sets the property and returns the receiver so calls can be chained.
 func (x *MTRSubscribeParams) WithReplaceExistingSubscriptions(replaceExistingSubscriptions bool) *MTRSubscribeParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReplaceExistingSubscriptions:"), replaceExistingSubscriptions)
 	return x
 }
 
-// WithResubscribeAutomatically sets resubscribeAutomatically and returns the receiver so calls can be chained.
+// WithResubscribeAutomatically sets the property and returns the receiver so calls can be chained.
 func (x *MTRSubscribeParams) WithResubscribeAutomatically(resubscribeAutomatically bool) *MTRSubscribeParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResubscribeAutomatically:"), resubscribeAutomatically)
 	return x
 }
 
-// The minimum time, in seconds, between consecutive reports a server will send for this subscription.  This can be used to rate-limit the subscription traffic.  Any non-negative value is allowed, including 0.
-//
-// WithMinInterval sets minInterval and returns the receiver so calls can be chained.
+// WithMinInterval the minimum time, in seconds, between consecutive reports a server will send for this subscription.  This can be used to rate-limit the subscription traffic.  Any non-negative value is allowed, including 0.
 func (x *MTRSubscribeParams) WithMinInterval(minInterval obj.Object) *MTRSubscribeParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinInterval:"), objref.IDOf(minInterval))
 	return x
 }
 
-// The suggested maximum time, in seconds, during which the server is allowed to send no reports at all for this subscription.  Must be at least as large as minInterval.  The server is allowed to use a larger time than this as the maxInterval it selects if it needs to (e.g. to meet its power budget).
-//
-// WithMaxInterval sets maxInterval and returns the receiver so calls can be chained.
+// WithMaxInterval the suggested maximum time, in seconds, during which the server is allowed to send no reports at all for this subscription.  Must be at least as large as minInterval.  The server is allowed to use a larger time than this as the maxInterval it selects if it needs to (e.g. to meet its power budget).
 func (x *MTRSubscribeParams) WithMaxInterval(maxInterval obj.Object) *MTRSubscribeParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxInterval:"), objref.IDOf(maxInterval))
 	return x
 }
 
-// WithReportEventsUrgently sets reportEventsUrgently and returns the receiver so calls can be chained.
+// WithReportEventsUrgently sets the property and returns the receiver so calls can be chained.
 func (x *MTRSubscribeParams) WithReportEventsUrgently(reportEventsUrgently bool) *MTRSubscribeParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReportEventsUrgently:"), reportEventsUrgently)
 	return x
 }
 
-// WithKeepPreviousSubscriptions sets keepPreviousSubscriptions and returns the receiver so calls can be chained.
+// WithKeepPreviousSubscriptions sets the property and returns the receiver so calls can be chained.
 func (x *MTRSubscribeParams) WithKeepPreviousSubscriptions(keepPreviousSubscriptions obj.Object) *MTRSubscribeParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeepPreviousSubscriptions:"), objref.IDOf(keepPreviousSubscriptions))
 	return x
 }
 
-// WithAutoResubscribe sets autoResubscribe and returns the receiver so calls can be chained.
+// WithAutoResubscribe sets the property and returns the receiver so calls can be chained.
 func (x *MTRSubscribeParams) WithAutoResubscribe(autoResubscribe obj.Object) *MTRSubscribeParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoResubscribe:"), objref.IDOf(autoResubscribe))
 	return x
 }
 
-// WithFilterByFabric sets filterByFabric and returns the receiver so calls can be chained.
+// WithFilterByFabric sets the property and returns the receiver so calls can be chained.
 func (x *MTRSubscribeParams) WithFilterByFabric(filterByFabric bool) *MTRSubscribeParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterByFabric:"), filterByFabric)
 	return x
 }
 
-// Sets a filter for which events will be reported in the read/subscribe interaction. If nil (the default value), all of the queued events will be reported from lowest to highest event number. If not nil, queued events with an event number smaller than minEventNumber will not be reported.
-//
-// WithMinEventNumber sets minEventNumber and returns the receiver so calls can be chained.
+// WithMinEventNumber sets a filter for which events will be reported in the read/subscribe interaction. If nil (the default value), all of the queued events will be reported from lowest to highest event number. If not nil, queued events with an event number smaller than minEventNumber will not be reported.
 func (x *MTRSubscribeParams) WithMinEventNumber(minEventNumber obj.Object) *MTRSubscribeParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinEventNumber:"), objref.IDOf(minEventNumber))
 	return x
 }
 
-// Controls whether attributes without known schema (e.g. vendor-specific attributes) should be assumed to be reportable normally via subscriptions. The default is YES. This setting is only relevant to some consumers of MTRReadParams.  One of those consumers is readAttributeWithEndpointID:clusterID:attributeID:params: on MTRDevice.
-//
-// WithAssumeUnknownAttributesReportable sets assumeUnknownAttributesReportable and returns the receiver so calls can be chained.
+// WithAssumeUnknownAttributesReportable controls whether attributes without known schema (e.g. vendor-specific attributes) should be assumed to be reportable normally via subscriptions. The default is YES. This setting is only relevant to some consumers of MTRReadParams.  One of those consumers is readAttributeWithEndpointID:clusterID:attributeID:params: on MTRDevice.
 func (x *MTRSubscribeParams) WithAssumeUnknownAttributesReportable(assumeUnknownAttributesReportable bool) *MTRSubscribeParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssumeUnknownAttributesReportable:"), assumeUnknownAttributesReportable)
 	return x
 }
 
-// WithFabricFiltered sets fabricFiltered and returns the receiver so calls can be chained.
+// WithFabricFiltered sets the property and returns the receiver so calls can be chained.
 func (x *MTRSubscribeParams) WithFabricFiltered(fabricFiltered obj.Object) *MTRSubscribeParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricFiltered:"), objref.IDOf(fabricFiltered))
 	return x
 }
 
+// ShouldReplaceExistingSubscriptions wraps the corresponding Objective-C method.
 func (x *MTRSubscribeParams) ShouldReplaceExistingSubscriptions() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldReplaceExistingSubscriptions"))
 	return _r
 }
 
+// SetReplaceExistingSubscriptions wraps the corresponding Objective-C method.
 func (x *MTRSubscribeParams) SetReplaceExistingSubscriptions(replaceExistingSubscriptions bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReplaceExistingSubscriptions:"), replaceExistingSubscriptions)
 }
 
+// ShouldResubscribeAutomatically wraps the corresponding Objective-C method.
 func (x *MTRSubscribeParams) ShouldResubscribeAutomatically() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldResubscribeAutomatically"))
 	return _r
 }
 
+// SetResubscribeAutomatically wraps the corresponding Objective-C method.
 func (x *MTRSubscribeParams) SetResubscribeAutomatically(resubscribeAutomatically bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResubscribeAutomatically:"), resubscribeAutomatically)
 }
 
-// The minimum time, in seconds, between consecutive reports a server will send for this subscription.  This can be used to rate-limit the subscription traffic.  Any non-negative value is allowed, including 0.
+// MinInterval the minimum time, in seconds, between consecutive reports a server will send for this subscription.  This can be used to rate-limit the subscription traffic.  Any non-negative value is allowed, including 0.
 func (x *MTRSubscribeParams) MinInterval() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minInterval"))
 	return obj.Wrap(_r)
 }
 
+// SetMinInterval wraps the corresponding Objective-C method.
 func (x *MTRSubscribeParams) SetMinInterval(minInterval obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinInterval:"), objref.IDOf(minInterval))
 }
 
-// The suggested maximum time, in seconds, during which the server is allowed to send no reports at all for this subscription.  Must be at least as large as minInterval.  The server is allowed to use a larger time than this as the maxInterval it selects if it needs to (e.g. to meet its power budget).
+// MaxInterval the suggested maximum time, in seconds, during which the server is allowed to send no reports at all for this subscription.  Must be at least as large as minInterval.  The server is allowed to use a larger time than this as the maxInterval it selects if it needs to (e.g. to meet its power budget).
 func (x *MTRSubscribeParams) MaxInterval() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxInterval"))
 	return obj.Wrap(_r)
 }
 
+// SetMaxInterval wraps the corresponding Objective-C method.
 func (x *MTRSubscribeParams) SetMaxInterval(maxInterval obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxInterval:"), objref.IDOf(maxInterval))
 }
 
+// ShouldReportEventsUrgently wraps the corresponding Objective-C method.
 func (x *MTRSubscribeParams) ShouldReportEventsUrgently() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldReportEventsUrgently"))
 	return _r
 }
 
+// SetReportEventsUrgently wraps the corresponding Objective-C method.
 func (x *MTRSubscribeParams) SetReportEventsUrgently(reportEventsUrgently bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReportEventsUrgently:"), reportEventsUrgently)
 }
 
+// KeepPreviousSubscriptions wraps the corresponding Objective-C method.
 func (x *MTRSubscribeParams) KeepPreviousSubscriptions() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keepPreviousSubscriptions"))
 	return obj.Wrap(_r)
 }
 
+// SetKeepPreviousSubscriptions wraps the corresponding Objective-C method.
 func (x *MTRSubscribeParams) SetKeepPreviousSubscriptions(keepPreviousSubscriptions obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeepPreviousSubscriptions:"), objref.IDOf(keepPreviousSubscriptions))
 }
 
+// AutoResubscribe wraps the corresponding Objective-C method.
 func (x *MTRSubscribeParams) AutoResubscribe() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("autoResubscribe"))
 	return obj.Wrap(_r)
 }
 
+// SetAutoResubscribe wraps the corresponding Objective-C method.
 func (x *MTRSubscribeParams) SetAutoResubscribe(autoResubscribe obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoResubscribe:"), objref.IDOf(autoResubscribe))
 }
@@ -241,3 +231,5 @@ type MTRSubscribeParamsable interface {
 }
 
 var _ MTRSubscribeParamsable = (*MTRSubscribeParams)(nil)
+
+var _ MTRReadParamsProvider = (*MTRSubscribeParams)(nil)

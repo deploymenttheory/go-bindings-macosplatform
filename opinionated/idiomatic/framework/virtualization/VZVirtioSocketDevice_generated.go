@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A device that manages port-based connections between the guest system and the host computer.
-//
 // VirtioSocketDevice is an idiomatic wrapper over the Objective-C class VZVirtioSocketDevice.
+//
+// It embeds [SocketDevice], promoting that type's methods.
+//
+// A device that manages port-based connections between the guest system and the host computer.
 type VirtioSocketDevice struct {
-	objref.Handle
+	SocketDevice
 }
 
 // VirtioSocketDeviceFromID adopts an existing Objective-C object as a VirtioSocketDevice
@@ -27,7 +28,8 @@ func VirtioSocketDeviceFromID(id objc.ID) *VirtioSocketDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioSocketDevice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VirtioSocketDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,24 +42,10 @@ func virtioSocketDeviceAdopt(id objc.ID) *VirtioSocketDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioSocketDevice{Handle: objref.Wrap(id)}
+	x := &VirtioSocketDevice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *VirtioSocketDevice) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VirtioSocketDevice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VirtioSocketDevice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewVirtioSocketDevice creates a new VirtioSocketDevice.
@@ -66,20 +54,20 @@ func NewVirtioSocketDevice() *VirtioSocketDevice {
 	return virtioSocketDeviceAdopt(_id)
 }
 
-// Configures an object to monitor the specified port for new connections.
+// SetSocketListenerForPort configures an object to monitor the specified port for new connections.
 func (x *VirtioSocketDevice) SetSocketListenerForPort(listener *VirtioSocketListener, port uint32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSocketListener:forPort:"), objref.IDOf(listener), port)
 }
 
-// Removes the listener object from the specfied port.
+// RemoveSocketListenerForPort removes the listener object from the specfied port.
 func (x *VirtioSocketDevice) RemoveSocketListenerForPort(port uint32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeSocketListenerForPort:"), port)
 }
 
-// Initiates a connection to the specified port of the guest operating system.
+// ConnectToPort initiates a connection to the specified port of the guest operating system.
 //
 // ConnectToPort blocks until the operation completes or ctx is cancelled.
-func (x *VirtioSocketDevice) ConnectToPort(ctx context.Context, port uint32) (*VirtioSocketConnection, error) {
+func (x *VirtioSocketDevice) ConnectToPort(ctx context.Context, port uint32) (result *VirtioSocketConnection, err error) {
 	type _result struct {
 		val *VirtioSocketConnection
 		err error
@@ -110,3 +98,5 @@ type VirtioSocketDeviceable interface {
 }
 
 var _ VirtioSocketDeviceable = (*VirtioSocketDevice)(nil)
+
+var _ SocketDeviceProvider = (*VirtioSocketDevice)(nil)

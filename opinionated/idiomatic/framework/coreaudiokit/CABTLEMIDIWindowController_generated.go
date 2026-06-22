@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A window controller that displays nearby Bluetooth-based MIDI peripherals.
-//
 // CABTLEMIDIWindowController is an idiomatic wrapper over the Objective-C class CABTLEMIDIWindowController.
+//
+// A window controller that displays nearby Bluetooth-based MIDI peripherals.
 type CABTLEMIDIWindowController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CABTLEMIDIWindowControllerFromID(id objc.ID) *CABTLEMIDIWindowController {
 	if id == 0 {
 		return nil
 	}
-	x := &CABTLEMIDIWindowController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CABTLEMIDIWindowController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func cABTLEMIDIWindowControllerAdopt(id objc.ID) *CABTLEMIDIWindowController {
 	if id == 0 {
 		return nil
 	}
-	x := &CABTLEMIDIWindowController{Handle: objref.Wrap(id)}
+	x := &CABTLEMIDIWindowController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *CABTLEMIDIWindowController) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *CABTLEMIDIWindowController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CABTLEMIDIWindowController) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewCABTLEMIDIWindowController creates a new CABTLEMIDIWindowController.

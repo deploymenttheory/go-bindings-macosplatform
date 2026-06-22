@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object for evaluating navigation events in an authentication session.
-//
 // WebAuthenticationSessionCallback is an idiomatic wrapper over the Objective-C class ASWebAuthenticationSessionCallback.
+//
+// An object for evaluating navigation events in an authentication session.
 type WebAuthenticationSessionCallback struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WebAuthenticationSessionCallbackFromID(id objc.ID) *WebAuthenticationSessio
 	if id == 0 {
 		return nil
 	}
-	x := &WebAuthenticationSessionCallback{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WebAuthenticationSessionCallback{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func webAuthenticationSessionCallbackAdopt(id objc.ID) *WebAuthenticationSession
 	if id == 0 {
 		return nil
 	}
-	x := &WebAuthenticationSessionCallback{Handle: objref.Wrap(id)}
+	x := &WebAuthenticationSessionCallback{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *WebAuthenticationSessionCallback) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WebAuthenticationSessionCallback) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWebAuthenticationSessionCallback creates a new WebAuthenticationSessionCallback.
 func NewWebAuthenticationSessionCallback() *WebAuthenticationSessionCallback {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASWebAuthenticationSessionCallback")), objc.RegisterName("new"))
 	return webAuthenticationSessionCallbackAdopt(_id)
 }
 
-// Check whether a given main-frame navigation URL matches the callback expected by the client app. Handles all URL-based callback strategies, including custom schemes and HTTPS navigations. This is mainly meant for web browsers adopting the ASWebAuthenticationWebBrowser API, but may also be useful for other apps for debugging purposes.
+// MatchesURL check whether a given main-frame navigation URL matches the callback expected by the client app. Handles all URL-based callback strategies, including custom schemes and HTTPS navigations. This is mainly meant for web browsers adopting the ASWebAuthenticationWebBrowser API, but may also be useful for other apps for debugging purposes.
 func (x *WebAuthenticationSessionCallback) MatchesURL(url string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("matchesURL:"), rt.FileURL(url))
 	return _r

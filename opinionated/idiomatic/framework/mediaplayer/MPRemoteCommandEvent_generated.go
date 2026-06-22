@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of a command sent by an external media player.
-//
 // RemoteCommandEvent is an idiomatic wrapper over the Objective-C class MPRemoteCommandEvent.
+//
+// RemoteCommandEvent is an abstract base — you do not construct it directly. Construct one of [ChangeLanguageOptionCommandEvent], [ChangePlaybackPositionCommandEvent], [ChangePlaybackRateCommandEvent], [ChangeRepeatModeCommandEvent], [ChangeShuffleModeCommandEvent], [FeedbackCommandEvent], [RatingCommandEvent], [SeekCommandEvent], [SkipIntervalCommandEvent] and pass it where a RemoteCommandEvent is accepted.
+//
+// A description of a command sent by an external media player.
 type RemoteCommandEvent struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func RemoteCommandEventFromID(id objc.ID) *RemoteCommandEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &RemoteCommandEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RemoteCommandEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func remoteCommandEventAdopt(id objc.ID) *RemoteCommandEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &RemoteCommandEvent{Handle: objref.Wrap(id)}
+	x := &RemoteCommandEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +62,19 @@ func (x *RemoteCommandEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewRemoteCommandEvent creates a new RemoteCommandEvent.
-func NewRemoteCommandEvent() *RemoteCommandEvent {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPRemoteCommandEvent")), objc.RegisterName("new"))
-	return remoteCommandEventAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RemoteCommandEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The command that sent the event.
+// Command the command that sent the event.
 func (x *RemoteCommandEvent) Command() *RemoteCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("command"))
 	return RemoteCommandFromID(_r)
 }
 
-// The time when the event occurred.
+// Timestamp the time when the event occurred.
 func (x *RemoteCommandEvent) Timestamp() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timestamp"))
 	return _r
@@ -84,3 +88,10 @@ type RemoteCommandEventable interface {
 }
 
 var _ RemoteCommandEventable = (*RemoteCommandEvent)(nil)
+
+// isRemoteCommandEvent marks RemoteCommandEvent — and, by embedding promotion, its
+// subclasses — as a member of the RemoteCommandEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *RemoteCommandEvent) isRemoteCommandEvent() {}
+
+var _ RemoteCommandEventProvider = (*RemoteCommandEvent)(nil)

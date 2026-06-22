@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration you create to customize an indirect command buffer.
-//
 // IndirectCommandBufferDescriptor is an idiomatic wrapper over the Objective-C class MTLIndirectCommandBufferDescriptor.
+//
+// A configuration you create to customize an indirect command buffer.
 type IndirectCommandBufferDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func IndirectCommandBufferDescriptorFromID(id objc.ID) *IndirectCommandBufferDes
 	if id == 0 {
 		return nil
 	}
-	x := &IndirectCommandBufferDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IndirectCommandBufferDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func indirectCommandBufferDescriptorAdopt(id objc.ID) *IndirectCommandBufferDesc
 	if id == 0 {
 		return nil
 	}
-	x := &IndirectCommandBufferDescriptor{Handle: objref.Wrap(id)}
+	x := &IndirectCommandBufferDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,350 +60,337 @@ func (x *IndirectCommandBufferDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IndirectCommandBufferDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewIndirectCommandBufferDescriptor creates a new IndirectCommandBufferDescriptor.
 func NewIndirectCommandBufferDescriptor() *IndirectCommandBufferDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLIndirectCommandBufferDescriptor")), objc.RegisterName("new"))
 	return indirectCommandBufferDescriptorAdopt(_id)
 }
 
-// The set of command types that you can encode into the indirect command buffer.
-//
-// WithCommandTypes sets commandTypes and returns the receiver so calls can be chained.
+// WithCommandTypes the set of command types that you can encode into the indirect command buffer.
 func (x *IndirectCommandBufferDescriptor) WithCommandTypes(commandTypes IndirectCommandType) *IndirectCommandBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandTypes:"), commandTypes)
 	return x
 }
 
-// A Boolean value that determines where commands in the indirect command buffer get their pipeline state from when you execute them.
-//
-// WithInheritPipelineState sets inheritPipelineState and returns the receiver so calls can be chained.
+// WithInheritPipelineState a Boolean value that determines where commands in the indirect command buffer get their pipeline state from when you execute them.
 func (x *IndirectCommandBufferDescriptor) WithInheritPipelineState(inheritPipelineState bool) *IndirectCommandBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInheritPipelineState:"), inheritPipelineState)
 	return x
 }
 
-// A Boolean value that determines where commands in the indirect command buffer get their buffer arguments from when you execute them.
-//
-// WithInheritBuffers sets inheritBuffers and returns the receiver so calls can be chained.
+// WithInheritBuffers a Boolean value that determines where commands in the indirect command buffer get their buffer arguments from when you execute them.
 func (x *IndirectCommandBufferDescriptor) WithInheritBuffers(inheritBuffers bool) *IndirectCommandBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInheritBuffers:"), inheritBuffers)
 	return x
 }
 
-// Configures whether the indirect command buffer inherits the depth stencil state from the encoder.
-//
-// WithInheritDepthStencilState sets inheritDepthStencilState and returns the receiver so calls can be chained.
+// WithInheritDepthStencilState configures whether the indirect command buffer inherits the depth stencil state from the encoder.
 func (x *IndirectCommandBufferDescriptor) WithInheritDepthStencilState(inheritDepthStencilState bool) *IndirectCommandBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInheritDepthStencilState:"), inheritDepthStencilState)
 	return x
 }
 
-// Configures whether the indirect command buffer inherits the depth bias from the encoder.
-//
-// WithInheritDepthBias sets inheritDepthBias and returns the receiver so calls can be chained.
+// WithInheritDepthBias configures whether the indirect command buffer inherits the depth bias from the encoder.
 func (x *IndirectCommandBufferDescriptor) WithInheritDepthBias(inheritDepthBias bool) *IndirectCommandBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInheritDepthBias:"), inheritDepthBias)
 	return x
 }
 
-// Configures whether the indirect command buffer inherits the depth clip mode from the encoder.
-//
-// WithInheritDepthClipMode sets inheritDepthClipMode and returns the receiver so calls can be chained.
+// WithInheritDepthClipMode configures whether the indirect command buffer inherits the depth clip mode from the encoder.
 func (x *IndirectCommandBufferDescriptor) WithInheritDepthClipMode(inheritDepthClipMode bool) *IndirectCommandBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInheritDepthClipMode:"), inheritDepthClipMode)
 	return x
 }
 
-// Configures whether the indirect command buffer inherits the cull mode from the encoder.
-//
-// WithInheritCullMode sets inheritCullMode and returns the receiver so calls can be chained.
+// WithInheritCullMode configures whether the indirect command buffer inherits the cull mode from the encoder.
 func (x *IndirectCommandBufferDescriptor) WithInheritCullMode(inheritCullMode bool) *IndirectCommandBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInheritCullMode:"), inheritCullMode)
 	return x
 }
 
-// Configures whether the indirect command buffer inherits the front facing winding from the encoder.
-//
-// WithInheritFrontFacingWinding sets inheritFrontFacingWinding and returns the receiver so calls can be chained.
+// WithInheritFrontFacingWinding configures whether the indirect command buffer inherits the front facing winding from the encoder.
 func (x *IndirectCommandBufferDescriptor) WithInheritFrontFacingWinding(inheritFrontFacingWinding bool) *IndirectCommandBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInheritFrontFacingWinding:"), inheritFrontFacingWinding)
 	return x
 }
 
-// Configures whether the indirect command buffer inherits the triangle fill mode from the encoder.
-//
-// WithInheritTriangleFillMode sets inheritTriangleFillMode and returns the receiver so calls can be chained.
+// WithInheritTriangleFillMode configures whether the indirect command buffer inherits the triangle fill mode from the encoder.
 func (x *IndirectCommandBufferDescriptor) WithInheritTriangleFillMode(inheritTriangleFillMode bool) *IndirectCommandBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInheritTriangleFillMode:"), inheritTriangleFillMode)
 	return x
 }
 
-// The maximum number of buffers that you can set per command for the vertex stage.
-//
-// WithMaxVertexBufferBindCount sets maxVertexBufferBindCount and returns the receiver so calls can be chained.
+// WithMaxVertexBufferBindCount the maximum number of buffers that you can set per command for the vertex stage.
 func (x *IndirectCommandBufferDescriptor) WithMaxVertexBufferBindCount(maxVertexBufferBindCount int) *IndirectCommandBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxVertexBufferBindCount:"), maxVertexBufferBindCount)
 	return x
 }
 
-// The maximum number of buffers that you can set per command for the fragment stage.
-//
-// WithMaxFragmentBufferBindCount sets maxFragmentBufferBindCount and returns the receiver so calls can be chained.
+// WithMaxFragmentBufferBindCount the maximum number of buffers that you can set per command for the fragment stage.
 func (x *IndirectCommandBufferDescriptor) WithMaxFragmentBufferBindCount(maxFragmentBufferBindCount int) *IndirectCommandBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxFragmentBufferBindCount:"), maxFragmentBufferBindCount)
 	return x
 }
 
-// The maximum number of buffers that you can set per command for the compute kernel.
-//
-// WithMaxKernelBufferBindCount sets maxKernelBufferBindCount and returns the receiver so calls can be chained.
+// WithMaxKernelBufferBindCount the maximum number of buffers that you can set per command for the compute kernel.
 func (x *IndirectCommandBufferDescriptor) WithMaxKernelBufferBindCount(maxKernelBufferBindCount int) *IndirectCommandBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxKernelBufferBindCount:"), maxKernelBufferBindCount)
 	return x
 }
 
-// The maximum bind index of kernel (or tile) threadgroup memory that can be set per command. The default value is 31.
-//
-// WithMaxKernelThreadgroupMemoryBindCount sets maxKernelThreadgroupMemoryBindCount and returns the receiver so calls can be chained.
+// WithMaxKernelThreadgroupMemoryBindCount the maximum bind index of kernel (or tile) threadgroup memory that can be set per command. The default value is 31.
 func (x *IndirectCommandBufferDescriptor) WithMaxKernelThreadgroupMemoryBindCount(maxKernelThreadgroupMemoryBindCount int) *IndirectCommandBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxKernelThreadgroupMemoryBindCount:"), maxKernelThreadgroupMemoryBindCount)
 	return x
 }
 
-// The maximum bind index of object stage buffers that can be set per render command.
-//
-// WithMaxObjectBufferBindCount sets maxObjectBufferBindCount and returns the receiver so calls can be chained.
+// WithMaxObjectBufferBindCount the maximum bind index of object stage buffers that can be set per render command.
 func (x *IndirectCommandBufferDescriptor) WithMaxObjectBufferBindCount(maxObjectBufferBindCount int) *IndirectCommandBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxObjectBufferBindCount:"), maxObjectBufferBindCount)
 	return x
 }
 
-// The maximum bind index of mesh stage buffers that can be set per render command.
-//
-// WithMaxMeshBufferBindCount sets maxMeshBufferBindCount and returns the receiver so calls can be chained.
+// WithMaxMeshBufferBindCount the maximum bind index of mesh stage buffers that can be set per render command.
 func (x *IndirectCommandBufferDescriptor) WithMaxMeshBufferBindCount(maxMeshBufferBindCount int) *IndirectCommandBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxMeshBufferBindCount:"), maxMeshBufferBindCount)
 	return x
 }
 
-// The maximum bind index of object threadgroup memory that can be set per render command. The default value is 0.
-//
-// WithMaxObjectThreadgroupMemoryBindCount sets maxObjectThreadgroupMemoryBindCount and returns the receiver so calls can be chained.
+// WithMaxObjectThreadgroupMemoryBindCount the maximum bind index of object threadgroup memory that can be set per render command. The default value is 0.
 func (x *IndirectCommandBufferDescriptor) WithMaxObjectThreadgroupMemoryBindCount(maxObjectThreadgroupMemoryBindCount int) *IndirectCommandBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxObjectThreadgroupMemoryBindCount:"), maxObjectThreadgroupMemoryBindCount)
 	return x
 }
 
-// Whether the render or compute commands can use ray tracing. Default value is NO.
-//
-// WithSupportRayTracing sets supportRayTracing and returns the receiver so calls can be chained.
+// WithSupportRayTracing whether the render or compute commands can use ray tracing. Default value is NO.
 func (x *IndirectCommandBufferDescriptor) WithSupportRayTracing(supportRayTracing bool) *IndirectCommandBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportRayTracing:"), supportRayTracing)
 	return x
 }
 
-// allows binding pipelines that have at least one MTLBufferLayout with a stride of `MTLBufferLayoutStrideDynamic` will allow setting attributeStride in `setVertexBuffer` / `setKernelBuffer` calls
-//
-// WithSupportDynamicAttributeStride sets supportDynamicAttributeStride and returns the receiver so calls can be chained.
+// WithSupportDynamicAttributeStride allows binding pipelines that have at least one MTLBufferLayout with a stride of `MTLBufferLayoutStrideDynamic` will allow setting attributeStride in `setVertexBuffer` / `setKernelBuffer` calls
 func (x *IndirectCommandBufferDescriptor) WithSupportDynamicAttributeStride(supportDynamicAttributeStride bool) *IndirectCommandBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportDynamicAttributeStride:"), supportDynamicAttributeStride)
 	return x
 }
 
-// Specifies if the indirect command buffer should support color attachment mapping.
-//
-// WithSupportColorAttachmentMapping sets supportColorAttachmentMapping and returns the receiver so calls can be chained.
+// WithSupportColorAttachmentMapping specifies if the indirect command buffer should support color attachment mapping.
 func (x *IndirectCommandBufferDescriptor) WithSupportColorAttachmentMapping(supportColorAttachmentMapping bool) *IndirectCommandBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportColorAttachmentMapping:"), supportColorAttachmentMapping)
 	return x
 }
 
-// A bitfield of the command types that be encoded. MTLCommandTypeDispatch cannot be mixed with any other command type.
+// CommandTypes a bitfield of the command types that be encoded. MTLCommandTypeDispatch cannot be mixed with any other command type.
 func (x *IndirectCommandBufferDescriptor) CommandTypes() IndirectCommandType {
 	_r := objc.Send[IndirectCommandType](objref.IDOf(x), objc.RegisterName("commandTypes"))
 	return _r
 }
 
+// SetCommandTypes wraps the corresponding Objective-C method.
 func (x *IndirectCommandBufferDescriptor) SetCommandTypes(commandTypes IndirectCommandType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandTypes:"), commandTypes)
 }
 
-// Whether the render or compute pipeline are inherited from the encoder
+// InheritPipelineState whether the render or compute pipeline are inherited from the encoder
 func (x *IndirectCommandBufferDescriptor) InheritPipelineState() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("inheritPipelineState"))
 	return _r
 }
 
+// SetInheritPipelineState wraps the corresponding Objective-C method.
 func (x *IndirectCommandBufferDescriptor) SetInheritPipelineState(inheritPipelineState bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInheritPipelineState:"), inheritPipelineState)
 }
 
-// Whether the render or compute pipeline can set arguments.
+// InheritBuffers whether the render or compute pipeline can set arguments.
 func (x *IndirectCommandBufferDescriptor) InheritBuffers() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("inheritBuffers"))
 	return _r
 }
 
+// SetInheritBuffers wraps the corresponding Objective-C method.
 func (x *IndirectCommandBufferDescriptor) SetInheritBuffers(inheritBuffers bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInheritBuffers:"), inheritBuffers)
 }
 
-// Configures whether the indirect command buffer inherits the depth stencil state from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+// InheritDepthStencilState configures whether the indirect command buffer inherits the depth stencil state from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
 func (x *IndirectCommandBufferDescriptor) InheritDepthStencilState() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("inheritDepthStencilState"))
 	return _r
 }
 
+// SetInheritDepthStencilState wraps the corresponding Objective-C method.
 func (x *IndirectCommandBufferDescriptor) SetInheritDepthStencilState(inheritDepthStencilState bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInheritDepthStencilState:"), inheritDepthStencilState)
 }
 
-// Configures whether the indirect command buffer inherits the depth bias from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+// InheritDepthBias configures whether the indirect command buffer inherits the depth bias from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
 func (x *IndirectCommandBufferDescriptor) InheritDepthBias() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("inheritDepthBias"))
 	return _r
 }
 
+// SetInheritDepthBias wraps the corresponding Objective-C method.
 func (x *IndirectCommandBufferDescriptor) SetInheritDepthBias(inheritDepthBias bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInheritDepthBias:"), inheritDepthBias)
 }
 
-// Configures whether the indirect command buffer inherits the depth clip mode from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+// InheritDepthClipMode configures whether the indirect command buffer inherits the depth clip mode from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
 func (x *IndirectCommandBufferDescriptor) InheritDepthClipMode() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("inheritDepthClipMode"))
 	return _r
 }
 
+// SetInheritDepthClipMode wraps the corresponding Objective-C method.
 func (x *IndirectCommandBufferDescriptor) SetInheritDepthClipMode(inheritDepthClipMode bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInheritDepthClipMode:"), inheritDepthClipMode)
 }
 
-// Configures whether the indirect command buffer inherits the cull mode from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+// InheritCullMode configures whether the indirect command buffer inherits the cull mode from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
 func (x *IndirectCommandBufferDescriptor) InheritCullMode() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("inheritCullMode"))
 	return _r
 }
 
+// SetInheritCullMode wraps the corresponding Objective-C method.
 func (x *IndirectCommandBufferDescriptor) SetInheritCullMode(inheritCullMode bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInheritCullMode:"), inheritCullMode)
 }
 
-// Configures whether the indirect command buffer inherits the front facing winding from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+// InheritFrontFacingWinding configures whether the indirect command buffer inherits the front facing winding from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
 func (x *IndirectCommandBufferDescriptor) InheritFrontFacingWinding() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("inheritFrontFacingWinding"))
 	return _r
 }
 
+// SetInheritFrontFacingWinding wraps the corresponding Objective-C method.
 func (x *IndirectCommandBufferDescriptor) SetInheritFrontFacingWinding(inheritFrontFacingWinding bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInheritFrontFacingWinding:"), inheritFrontFacingWinding)
 }
 
-// Configures whether the indirect command buffer inherits the triangle fill mode from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+// InheritTriangleFillMode configures whether the indirect command buffer inherits the triangle fill mode from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
 func (x *IndirectCommandBufferDescriptor) InheritTriangleFillMode() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("inheritTriangleFillMode"))
 	return _r
 }
 
+// SetInheritTriangleFillMode wraps the corresponding Objective-C method.
 func (x *IndirectCommandBufferDescriptor) SetInheritTriangleFillMode(inheritTriangleFillMode bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInheritTriangleFillMode:"), inheritTriangleFillMode)
 }
 
-// The maximum bind index of vertex argument buffers that can be set per command.
+// MaxVertexBufferBindCount the maximum bind index of vertex argument buffers that can be set per command.
 func (x *IndirectCommandBufferDescriptor) MaxVertexBufferBindCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxVertexBufferBindCount"))
 	return _r
 }
 
+// SetMaxVertexBufferBindCount wraps the corresponding Objective-C method.
 func (x *IndirectCommandBufferDescriptor) SetMaxVertexBufferBindCount(maxVertexBufferBindCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxVertexBufferBindCount:"), maxVertexBufferBindCount)
 }
 
-// The maximum bind index of fragment argument buffers that can be set per command.
+// MaxFragmentBufferBindCount the maximum bind index of fragment argument buffers that can be set per command.
 func (x *IndirectCommandBufferDescriptor) MaxFragmentBufferBindCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxFragmentBufferBindCount"))
 	return _r
 }
 
+// SetMaxFragmentBufferBindCount wraps the corresponding Objective-C method.
 func (x *IndirectCommandBufferDescriptor) SetMaxFragmentBufferBindCount(maxFragmentBufferBindCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxFragmentBufferBindCount:"), maxFragmentBufferBindCount)
 }
 
-// The maximum bind index of kernel (or tile) argument buffers that can be set per command.
+// MaxKernelBufferBindCount the maximum bind index of kernel (or tile) argument buffers that can be set per command.
 func (x *IndirectCommandBufferDescriptor) MaxKernelBufferBindCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxKernelBufferBindCount"))
 	return _r
 }
 
+// SetMaxKernelBufferBindCount wraps the corresponding Objective-C method.
 func (x *IndirectCommandBufferDescriptor) SetMaxKernelBufferBindCount(maxKernelBufferBindCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxKernelBufferBindCount:"), maxKernelBufferBindCount)
 }
 
-// The maximum bind index of kernel (or tile) threadgroup memory that can be set per command. The default value is 31.
+// MaxKernelThreadgroupMemoryBindCount the maximum bind index of kernel (or tile) threadgroup memory that can be set per command. The default value is 31.
 func (x *IndirectCommandBufferDescriptor) MaxKernelThreadgroupMemoryBindCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxKernelThreadgroupMemoryBindCount"))
 	return _r
 }
 
+// SetMaxKernelThreadgroupMemoryBindCount wraps the corresponding Objective-C method.
 func (x *IndirectCommandBufferDescriptor) SetMaxKernelThreadgroupMemoryBindCount(maxKernelThreadgroupMemoryBindCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxKernelThreadgroupMemoryBindCount:"), maxKernelThreadgroupMemoryBindCount)
 }
 
-// The maximum bind index of object stage buffers that can be set per render command.
+// MaxObjectBufferBindCount the maximum bind index of object stage buffers that can be set per render command.
 func (x *IndirectCommandBufferDescriptor) MaxObjectBufferBindCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxObjectBufferBindCount"))
 	return _r
 }
 
+// SetMaxObjectBufferBindCount wraps the corresponding Objective-C method.
 func (x *IndirectCommandBufferDescriptor) SetMaxObjectBufferBindCount(maxObjectBufferBindCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxObjectBufferBindCount:"), maxObjectBufferBindCount)
 }
 
-// The maximum bind index of mesh stage buffers that can be set per render command.
+// MaxMeshBufferBindCount the maximum bind index of mesh stage buffers that can be set per render command.
 func (x *IndirectCommandBufferDescriptor) MaxMeshBufferBindCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxMeshBufferBindCount"))
 	return _r
 }
 
+// SetMaxMeshBufferBindCount wraps the corresponding Objective-C method.
 func (x *IndirectCommandBufferDescriptor) SetMaxMeshBufferBindCount(maxMeshBufferBindCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxMeshBufferBindCount:"), maxMeshBufferBindCount)
 }
 
-// The maximum bind index of object threadgroup memory that can be set per render command. The default value is 0.
+// MaxObjectThreadgroupMemoryBindCount the maximum bind index of object threadgroup memory that can be set per render command. The default value is 0.
 func (x *IndirectCommandBufferDescriptor) MaxObjectThreadgroupMemoryBindCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxObjectThreadgroupMemoryBindCount"))
 	return _r
 }
 
+// SetMaxObjectThreadgroupMemoryBindCount wraps the corresponding Objective-C method.
 func (x *IndirectCommandBufferDescriptor) SetMaxObjectThreadgroupMemoryBindCount(maxObjectThreadgroupMemoryBindCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxObjectThreadgroupMemoryBindCount:"), maxObjectThreadgroupMemoryBindCount)
 }
 
-// Whether the render or compute commands can use ray tracing. Default value is NO.
+// SupportRayTracing whether the render or compute commands can use ray tracing. Default value is NO.
 func (x *IndirectCommandBufferDescriptor) SupportRayTracing() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportRayTracing"))
 	return _r
 }
 
+// SetSupportRayTracing wraps the corresponding Objective-C method.
 func (x *IndirectCommandBufferDescriptor) SetSupportRayTracing(supportRayTracing bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportRayTracing:"), supportRayTracing)
 }
 
-// allows binding pipelines that have at least one MTLBufferLayout with a stride of `MTLBufferLayoutStrideDynamic` will allow setting attributeStride in `setVertexBuffer` / `setKernelBuffer` calls
+// SupportDynamicAttributeStride allows binding pipelines that have at least one MTLBufferLayout with a stride of `MTLBufferLayoutStrideDynamic` will allow setting attributeStride in `setVertexBuffer` / `setKernelBuffer` calls
 func (x *IndirectCommandBufferDescriptor) SupportDynamicAttributeStride() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportDynamicAttributeStride"))
 	return _r
 }
 
+// SetSupportDynamicAttributeStride wraps the corresponding Objective-C method.
 func (x *IndirectCommandBufferDescriptor) SetSupportDynamicAttributeStride(supportDynamicAttributeStride bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportDynamicAttributeStride:"), supportDynamicAttributeStride)
 }
 
-// Specifies if the indirect command buffer should support color attachment mapping.
+// SupportColorAttachmentMapping specifies if the indirect command buffer should support color attachment mapping.
 func (x *IndirectCommandBufferDescriptor) SupportColorAttachmentMapping() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportColorAttachmentMapping"))
 	return _r
 }
 
+// SetSupportColorAttachmentMapping wraps the corresponding Objective-C method.
 func (x *IndirectCommandBufferDescriptor) SetSupportColorAttachmentMapping(supportColorAttachmentMapping bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportColorAttachmentMapping:"), supportColorAttachmentMapping)
 }

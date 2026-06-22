@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides convenience access to vertex data for a specific vertex attribute of a mesh.
-//
 // VertexAttributeData is an idiomatic wrapper over the Objective-C class MDLVertexAttributeData.
+//
+// An object that provides convenience access to vertex data for a specific vertex attribute of a mesh.
 type VertexAttributeData struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VertexAttributeDataFromID(id objc.ID) *VertexAttributeData {
 	if id == 0 {
 		return nil
 	}
-	x := &VertexAttributeData{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VertexAttributeData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func vertexAttributeDataAdopt(id objc.ID) *VertexAttributeData {
 	if id == 0 {
 		return nil
 	}
-	x := &VertexAttributeData{Handle: objref.Wrap(id)}
+	x := &VertexAttributeData{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,72 +60,82 @@ func (x *VertexAttributeData) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VertexAttributeData) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVertexAttributeData creates a new VertexAttributeData.
 func NewVertexAttributeData() *VertexAttributeData {
 	_id := objc.Send[objc.ID](objc.ID(_class("MDLVertexAttributeData")), objc.RegisterName("new"))
 	return vertexAttributeDataAdopt(_id)
 }
 
-// WithMap sets map_ and returns the receiver so calls can be chained.
+// WithMap sets the property and returns the receiver so calls can be chained.
 func (x *VertexAttributeData) WithMap(map_ *MeshBufferMap) *VertexAttributeData {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMap:"), objref.IDOf(map_))
 	return x
 }
 
-// The stride, in bytes, between vertex information for consecutive vertices in the data.
-//
-// WithStride sets stride and returns the receiver so calls can be chained.
+// WithStride the stride, in bytes, between vertex information for consecutive vertices in the data.
 func (x *VertexAttributeData) WithStride(stride int) *VertexAttributeData {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStride:"), stride)
 	return x
 }
 
-// The format of per-vertex data for the attribute.
-//
-// WithFormat sets format and returns the receiver so calls can be chained.
+// WithFormat the format of per-vertex data for the attribute.
 func (x *VertexAttributeData) WithFormat(format VertexFormat) *VertexAttributeData {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormat:"), format)
 	return x
 }
 
-// WithBufferSize sets bufferSize and returns the receiver so calls can be chained.
+// WithBufferSize sets the property and returns the receiver so calls can be chained.
 func (x *VertexAttributeData) WithBufferSize(bufferSize int) *VertexAttributeData {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferSize:"), bufferSize)
 	return x
 }
 
+// Map wraps the corresponding Objective-C method.
 func (x *VertexAttributeData) Map() *MeshBufferMap {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("map"))
 	return MeshBufferMapFromID(_r)
 }
 
+// SetMap wraps the corresponding Objective-C method.
 func (x *VertexAttributeData) SetMap(map_ *MeshBufferMap) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMap:"), objref.IDOf(map_))
 }
 
+// Stride wraps the corresponding Objective-C method.
 func (x *VertexAttributeData) Stride() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stride"))
 	return _r
 }
 
+// SetStride wraps the corresponding Objective-C method.
 func (x *VertexAttributeData) SetStride(stride int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStride:"), stride)
 }
 
+// Format wraps the corresponding Objective-C method.
 func (x *VertexAttributeData) Format() VertexFormat {
 	_r := objc.Send[VertexFormat](objref.IDOf(x), objc.RegisterName("format"))
 	return _r
 }
 
+// SetFormat wraps the corresponding Objective-C method.
 func (x *VertexAttributeData) SetFormat(format VertexFormat) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormat:"), format)
 }
 
+// BufferSize wraps the corresponding Objective-C method.
 func (x *VertexAttributeData) BufferSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bufferSize"))
 	return _r
 }
 
+// SetBufferSize wraps the corresponding Objective-C method.
 func (x *VertexAttributeData) SetBufferSize(bufferSize int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferSize:"), bufferSize)
 }

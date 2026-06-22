@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A Save or Export as PDF panel that’s consistent with the macOS user interface.
-//
 // PDFPanel is an idiomatic wrapper over the Objective-C class NSPDFPanel.
+//
+// A Save or Export as PDF panel that’s consistent with the macOS user interface.
 type PDFPanel struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PDFPanelFromID(id objc.ID) *PDFPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &PDFPanel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PDFPanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func pDFPanelAdopt(id objc.ID) *PDFPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &PDFPanel{Handle: objref.Wrap(id)}
+	x := &PDFPanel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,59 +60,64 @@ func (x *PDFPanel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PDFPanel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPDFPanel creates a new PDFPanel.
 func NewPDFPanel() *PDFPanel {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSPDFPanel")), objc.RegisterName("new"))
 	return pDFPanelAdopt(_id)
 }
 
-// A view controller for the accessory view that the panel can present.
-//
-// WithAccessoryController sets accessoryController and returns the receiver so calls can be chained.
+// WithAccessoryController a view controller for the accessory view that the panel can present.
 func (x *PDFPanel) WithAccessoryController(accessoryController ViewControllerProvider) *PDFPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryController:"), objref.IDOf(accessoryController))
 	return x
 }
 
-// A set of configuration options that determine the accessory views the PDF panel should display.
-//
-// WithOptions sets options and returns the receiver so calls can be chained.
+// WithOptions a set of configuration options that determine the accessory views the PDF panel should display.
 func (x *PDFPanel) WithOptions(options PDFPanelOptions) *PDFPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
 	return x
 }
 
-// The initial value for the user-editable filename shown in the name field of the PDF panel.
-//
-// WithDefaultFileName sets defaultFileName and returns the receiver so calls can be chained.
+// WithDefaultFileName the initial value for the user-editable filename shown in the name field of the PDF panel.
 func (x *PDFPanel) WithDefaultFileName(defaultFileName string) *PDFPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultFileName:"), purego.NSString(defaultFileName))
 	return x
 }
 
-// Presents a document-modal PDF panel.
+// BeginSheetWithPDFInfoModalForWindowCompletionHandler presents a document-modal PDF panel.
 func (x *PDFPanel) BeginSheetWithPDFInfoModalForWindowCompletionHandler(pdfInfo *PDFInfo, docWindow *Window, completionHandler func(int)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginSheetWithPDFInfo:modalForWindow:completionHandler:"), objref.IDOf(pdfInfo), objref.IDOf(docWindow), objc.NewBlock(func(_ objc.Block, _b0 int) { completionHandler(_b0) }))
 }
 
+// AccessoryController wraps the corresponding Objective-C method.
 func (x *PDFPanel) AccessoryController() *ViewController {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessoryController"))
 	return ViewControllerFromID(_r)
 }
 
+// SetAccessoryController wraps the corresponding Objective-C method.
 func (x *PDFPanel) SetAccessoryController(accessoryController *ViewController) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryController:"), objref.IDOf(accessoryController))
 }
 
+// Options wraps the corresponding Objective-C method.
 func (x *PDFPanel) Options() PDFPanelOptions {
 	_r := objc.Send[PDFPanelOptions](objref.IDOf(x), objc.RegisterName("options"))
 	return _r
 }
 
+// SetOptions wraps the corresponding Objective-C method.
 func (x *PDFPanel) SetOptions(options PDFPanelOptions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
 }
 
+// DefaultFileName wraps the corresponding Objective-C method.
 func (x *PDFPanel) DefaultFileName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultFileName"))
 	if _r == 0 {
@@ -119,6 +126,7 @@ func (x *PDFPanel) DefaultFileName() string {
 	return purego.GoString(_r)
 }
 
+// SetDefaultFileName wraps the corresponding Objective-C method.
 func (x *PDFPanel) SetDefaultFileName(defaultFileName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultFileName:"), purego.NSString(defaultFileName))
 }

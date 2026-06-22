@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that stores a value for a given unit.
-//
 // Quantity is an idiomatic wrapper over the Objective-C class HKQuantity.
+//
+// An object that stores a value for a given unit.
 type Quantity struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func QuantityFromID(id objc.ID) *Quantity {
 	if id == 0 {
 		return nil
 	}
-	x := &Quantity{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Quantity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func quantityAdopt(id objc.ID) *Quantity {
 	if id == 0 {
 		return nil
 	}
-	x := &Quantity{Handle: objref.Wrap(id)}
+	x := &Quantity{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *Quantity) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Quantity) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewQuantity creates a new Quantity.
 func NewQuantity() *Quantity {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKQuantity")), objc.RegisterName("new"))
 	return quantityAdopt(_id)
 }
 
-// Returns a boolean value indicating whether the quantity is compatible with the provided unit.
+// IsCompatibleWithUnit returns a boolean value indicating whether the quantity is compatible with the provided unit.
 func (x *Quantity) IsCompatibleWithUnit(unit *Unit) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompatibleWithUnit:"), objref.IDOf(unit))
 	return _r
 }
 
-// Returns the quantity’s value in the provided unit.
+// DoubleValueForUnit returns the quantity’s value in the provided unit.
 func (x *Quantity) DoubleValueForUnit(unit *Unit) float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("doubleValueForUnit:"), objref.IDOf(unit))
 	return _r

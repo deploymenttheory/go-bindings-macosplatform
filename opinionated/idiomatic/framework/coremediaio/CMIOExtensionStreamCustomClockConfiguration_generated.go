@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes the parameters to create a custom clock on the host side.
-//
 // ExtensionStreamCustomClockConfiguration is an idiomatic wrapper over the Objective-C class CMIOExtensionStreamCustomClockConfiguration.
+//
+// An object that describes the parameters to create a custom clock on the host side.
 type ExtensionStreamCustomClockConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ExtensionStreamCustomClockConfigurationFromID(id objc.ID) *ExtensionStreamC
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionStreamCustomClockConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExtensionStreamCustomClockConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func extensionStreamCustomClockConfigurationAdopt(id objc.ID) *ExtensionStreamCu
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionStreamCustomClockConfiguration{Handle: objref.Wrap(id)}
+	x := &ExtensionStreamCustomClockConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *ExtensionStreamCustomClockConfiguration) IsKind(className string) bool 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExtensionStreamCustomClockConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewExtensionStreamCustomClockConfiguration creates a new ExtensionStreamCustomClockConfiguration.
 func NewExtensionStreamCustomClockConfiguration() *ExtensionStreamCustomClockConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionStreamCustomClockConfiguration")), objc.RegisterName("new"))
 	return extensionStreamCustomClockConfigurationAdopt(_id)
 }
 
-// The name of the clock.
+// ClockName the name of the clock.
 func (x *ExtensionStreamCustomClockConfiguration) ClockName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clockName"))
 	if _r == 0 {
@@ -73,19 +81,19 @@ func (x *ExtensionStreamCustomClockConfiguration) ClockName() string {
 	return purego.GoString(_r)
 }
 
-// The identifier of the entity driving the clock. An unique identifier that is used to indicate the entity that is driving the clock. This value is used internally to determine if two custom clocks have the same hardware source, and thus determine whether or not they will drift relative to one another. This parameter is used in the following way: if a device supports multiple active streams that are internally clocked by a common source, then instead of sharing one clock between each stream, a clock per stream can be configured with the sourceIdentifier for each clock set to be the same value.
+// SourceIdentifier the identifier of the entity driving the clock. An unique identifier that is used to indicate the entity that is driving the clock. This value is used internally to determine if two custom clocks have the same hardware source, and thus determine whether or not they will drift relative to one another. This parameter is used in the following way: if a device supports multiple active streams that are internally clocked by a common source, then instead of sharing one clock between each stream, a clock per stream can be configured with the sourceIdentifier for each clock set to be the same value.
 func (x *ExtensionStreamCustomClockConfiguration) SourceIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceIdentifier"))
 	return obj.Wrap(_r)
 }
 
-// The number of events to use for rate smoothing; will be > 0.
+// NumberOfEventsForRateSmoothing the number of events to use for rate smoothing; will be > 0.
 func (x *ExtensionStreamCustomClockConfiguration) NumberOfEventsForRateSmoothing() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("numberOfEventsForRateSmoothing"))
 	return _r
 }
 
-// The number of averages used for rate smoothing; 0 indicates that the default smoothing algorithm is used.
+// NumberOfAveragesForRateSmoothing the number of averages used for rate smoothing; 0 indicates that the default smoothing algorithm is used.
 func (x *ExtensionStreamCustomClockConfiguration) NumberOfAveragesForRateSmoothing() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("numberOfAveragesForRateSmoothing"))
 	return _r

@@ -10,13 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// A stream that provides read-only stream functionality.
-//
 // InputStream is an idiomatic wrapper over the Objective-C class NSInputStream.
+//
+// It embeds [Stream], promoting that type's methods.
+//
+// A stream that provides read-only stream functionality.
 type InputStream struct {
-	objref.Handle
+	Stream
 }
 
 // InputStreamFromID adopts an existing Objective-C object as a InputStream
@@ -25,7 +28,8 @@ func InputStreamFromID(id objc.ID) *InputStream {
 	if id == 0 {
 		return nil
 	}
-	x := &InputStream{Handle: objref.Wrap(purego.Retain(id))}
+	x := &InputStream{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func inputStreamAdopt(id objc.ID) *InputStream {
 	if id == 0 {
 		return nil
 	}
-	x := &InputStream{Handle: objref.Wrap(id)}
+	x := &InputStream{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *InputStream) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *InputStream) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *InputStream) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewInputStreamWithData creates a new InputStream.
@@ -79,12 +69,28 @@ func NewInputStreamWithFileAtPath(path string) *InputStream {
 	return inputStreamAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *InputStream) WithScriptingProperties(scriptingProperties obj.Object) *InputStream {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// ReadMaxLength wraps the corresponding Objective-C method.
+func (x *InputStream) ReadMaxLength(len_ int) (result int, buffer uint8) {
+	var _out0 uint8
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("read:maxLength:"), unsafe.Pointer(&_out0), len_)
+	return _r, _out0
+}
+
+// GetBufferLength wraps the corresponding Objective-C method.
+func (x *InputStream) GetBufferLength() (ok bool, buffer uint8, len_ int) {
+	var _out0 uint8
+	var _out1 int
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("getBuffer:length:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _r, _out0, _out1
+}
+
+// HasBytesAvailable wraps the corresponding Objective-C method.
 func (x *InputStream) HasBytesAvailable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasBytesAvailable"))
 	return _r
@@ -94,7 +100,11 @@ func (x *InputStream) HasBytesAvailable() bool {
 type InputStreamable interface {
 	obj.Object
 	WithScriptingProperties(scriptingProperties obj.Object) *InputStream
+	ReadMaxLength(len_ int) (result int, buffer uint8)
+	GetBufferLength() (ok bool, buffer uint8, len_ int)
 	HasBytesAvailable() bool
 }
 
 var _ InputStreamable = (*InputStream)(nil)
+
+var _ StreamProvider = (*InputStream)(nil)

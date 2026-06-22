@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The object that coordinates your app’s authentication requests with a TV provider’s authentication service.
-//
 // VSAccountManager is an idiomatic wrapper over the Objective-C class VSAccountManager.
+//
+// The object that coordinates your app’s authentication requests with a TV provider’s authentication service.
 type VSAccountManager struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VSAccountManagerFromID(id objc.ID) *VSAccountManager {
 	if id == 0 {
 		return nil
 	}
-	x := &VSAccountManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VSAccountManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func vSAccountManagerAdopt(id objc.ID) *VSAccountManager {
 	if id == 0 {
 		return nil
 	}
-	x := &VSAccountManager{Handle: objref.Wrap(id)}
+	x := &VSAccountManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *VSAccountManager) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *VSAccountManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VSAccountManager) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewVSAccountManager creates a new VSAccountManager.

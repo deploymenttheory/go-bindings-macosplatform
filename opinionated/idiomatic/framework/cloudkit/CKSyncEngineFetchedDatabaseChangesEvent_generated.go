@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides information about fetched database changes.
-//
 // SyncEngineFetchedDatabaseChangesEvent is an idiomatic wrapper over the Objective-C class CKSyncEngineFetchedDatabaseChangesEvent.
+//
+// It embeds [SyncEngineEvent], promoting that type's methods.
+//
+// An object that provides information about fetched database changes.
 type SyncEngineFetchedDatabaseChangesEvent struct {
-	objref.Handle
+	SyncEngineEvent
 }
 
 // SyncEngineFetchedDatabaseChangesEventFromID adopts an existing Objective-C object as a SyncEngineFetchedDatabaseChangesEvent
@@ -25,7 +26,8 @@ func SyncEngineFetchedDatabaseChangesEventFromID(id objc.ID) *SyncEngineFetchedD
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineFetchedDatabaseChangesEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SyncEngineFetchedDatabaseChangesEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func syncEngineFetchedDatabaseChangesEventAdopt(id objc.ID) *SyncEngineFetchedDa
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineFetchedDatabaseChangesEvent{Handle: objref.Wrap(id)}
+	x := &SyncEngineFetchedDatabaseChangesEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SyncEngineFetchedDatabaseChangesEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SyncEngineFetchedDatabaseChangesEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SyncEngineFetchedDatabaseChangesEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSyncEngineFetchedDatabaseChangesEvent creates a new SyncEngineFetchedDatabaseChangesEvent.
@@ -64,7 +52,7 @@ func NewSyncEngineFetchedDatabaseChangesEvent() *SyncEngineFetchedDatabaseChange
 	return syncEngineFetchedDatabaseChangesEventAdopt(_id)
 }
 
-// The fetched record zone modifications.
+// Modifications the fetched record zone modifications.
 //
 // Modifications returns the collection as a Go slice.
 func (x *SyncEngineFetchedDatabaseChangesEvent) Modifications() []*RecordZone {
@@ -72,7 +60,7 @@ func (x *SyncEngineFetchedDatabaseChangesEvent) Modifications() []*RecordZone {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZone { return RecordZoneFromID(_id) })
 }
 
-// The fetched record zone deletions.
+// Deletions the fetched record zone deletions.
 //
 // Deletions returns the collection as a Go slice.
 func (x *SyncEngineFetchedDatabaseChangesEvent) Deletions() []*SyncEngineFetchedZoneDeletion {
@@ -88,3 +76,5 @@ type SyncEngineFetchedDatabaseChangesEventable interface {
 }
 
 var _ SyncEngineFetchedDatabaseChangesEventable = (*SyncEngineFetchedDatabaseChangesEvent)(nil)
+
+var _ SyncEngineEventProvider = (*SyncEngineFetchedDatabaseChangesEvent)(nil)

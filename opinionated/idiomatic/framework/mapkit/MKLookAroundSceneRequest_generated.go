@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class you use to request a LookAround scene at the location you specify.
-//
 // LookAroundSceneRequest is an idiomatic wrapper over the Objective-C class MKLookAroundSceneRequest.
+//
+// A class you use to request a LookAround scene at the location you specify.
 type LookAroundSceneRequest struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LookAroundSceneRequestFromID(id objc.ID) *LookAroundSceneRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &LookAroundSceneRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LookAroundSceneRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func lookAroundSceneRequestAdopt(id objc.ID) *LookAroundSceneRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &LookAroundSceneRequest{Handle: objref.Wrap(id)}
+	x := &LookAroundSceneRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,30 +60,37 @@ func (x *LookAroundSceneRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a LookAround scene with the location described by the specified map item.
-//
-// NewLookAroundSceneRequestWithMapItem creates a new LookAroundSceneRequest.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LookAroundSceneRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLookAroundSceneRequestWithMapItem creates a LookAround scene with the location described by the specified map item.
 func NewLookAroundSceneRequestWithMapItem(mapItem *MapItem) *LookAroundSceneRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKLookAroundSceneRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapItem:"), objref.IDOf(mapItem))
 	return lookAroundSceneRequestAdopt(_id)
 }
 
-// Cancels the pending scene request.
+// Cancel cancels the pending scene request.
 func (x *LookAroundSceneRequest) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
+// MapItem wraps the corresponding Objective-C method.
 func (x *LookAroundSceneRequest) MapItem() *MapItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapItem"))
 	return MapItemFromID(_r)
 }
 
+// IsCancelled wraps the corresponding Objective-C method.
 func (x *LookAroundSceneRequest) IsCancelled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCancelled"))
 	return _r
 }
 
+// IsLoading wraps the corresponding Objective-C method.
 func (x *LookAroundSceneRequest) IsLoading() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLoading"))
 	return _r

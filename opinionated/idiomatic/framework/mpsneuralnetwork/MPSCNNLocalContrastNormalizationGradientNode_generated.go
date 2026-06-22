@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // CNNLocalContrastNormalizationGradientNode is an idiomatic wrapper over the Objective-C class MPSCNNLocalContrastNormalizationGradientNode.
+//
+// It embeds [NNGradientFilterNode], promoting that type's methods.
 type CNNLocalContrastNormalizationGradientNode struct {
-	objref.Handle
+	NNGradientFilterNode
 }
 
 // CNNLocalContrastNormalizationGradientNodeFromID adopts an existing Objective-C object as a CNNLocalContrastNormalizationGradientNode
@@ -23,7 +24,8 @@ func CNNLocalContrastNormalizationGradientNodeFromID(id objc.ID) *CNNLocalContra
 	if id == 0 {
 		return nil
 	}
-	x := &CNNLocalContrastNormalizationGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNLocalContrastNormalizationGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func cNNLocalContrastNormalizationGradientNodeAdopt(id objc.ID) *CNNLocalContras
 	if id == 0 {
 		return nil
 	}
-	x := &CNNLocalContrastNormalizationGradientNode{Handle: objref.Wrap(id)}
+	x := &CNNLocalContrastNormalizationGradientNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNLocalContrastNormalizationGradientNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNLocalContrastNormalizationGradientNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNLocalContrastNormalizationGradientNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNLocalContrastNormalizationGradientNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeight creates a new CNNLocalContrastNormalizationGradientNode.
@@ -63,127 +51,121 @@ func NewCNNLocalContrastNormalizationGradientNodeWithSourceGradientSourceImageGr
 	return cNNLocalContrastNormalizationGradientNodeAdopt(_id)
 }
 
-// The value of alpha.  Default is 0.0 The default value 0.0 is not recommended and is preserved for backwards compatibility. With alpha 0, it performs a local mean subtraction. The MPSCNNLocalContrastNormalizationNode used with the MPSNNGraph uses 1.0 as a default.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the value of alpha.  Default is 0.0 The default value 0.0 is not recommended and is preserved for backwards compatibility. With alpha 0, it performs a local mean subtraction. The MPSCNNLocalContrastNormalizationNode used with the MPSNNGraph uses 1.0 as a default.
 func (x *CNNLocalContrastNormalizationGradientNode) WithAlpha(alpha float32) *CNNLocalContrastNormalizationGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// The value of beta.  Default is 0.5
-//
-// WithBeta sets beta and returns the receiver so calls can be chained.
+// WithBeta the value of beta.  Default is 0.5
 func (x *CNNLocalContrastNormalizationGradientNode) WithBeta(beta float32) *CNNLocalContrastNormalizationGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
 	return x
 }
 
-// The value of delta.  Default is 1/1024
-//
-// WithDelta sets delta and returns the receiver so calls can be chained.
+// WithDelta the value of delta.  Default is 1/1024
 func (x *CNNLocalContrastNormalizationGradientNode) WithDelta(delta float32) *CNNLocalContrastNormalizationGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
 	return x
 }
 
-// The value of p0.  Default is 1.0
-//
-// WithP0 sets p0 and returns the receiver so calls can be chained.
+// WithP0 the value of p0.  Default is 1.0
 func (x *CNNLocalContrastNormalizationGradientNode) WithP0(p0 float32) *CNNLocalContrastNormalizationGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setP0:"), p0)
 	return x
 }
 
-// The value of pm.  Default is 0.0
-//
-// WithPm sets pm and returns the receiver so calls can be chained.
+// WithPm the value of pm.  Default is 0.0
 func (x *CNNLocalContrastNormalizationGradientNode) WithPm(pm float32) *CNNLocalContrastNormalizationGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPm:"), pm)
 	return x
 }
 
-// The value of ps.  Default is 1.0
-//
-// WithPs sets ps and returns the receiver so calls can be chained.
+// WithPs the value of ps.  Default is 1.0
 func (x *CNNLocalContrastNormalizationGradientNode) WithPs(ps float32) *CNNLocalContrastNormalizationGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPs:"), ps)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNLocalContrastNormalizationGradientNode) WithLabel(label string) *CNNLocalContrastNormalizationGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The value of alpha.  Default is 0.0 The default value 0.0 is not recommended and is preserved for backwards compatibility. With alpha 0, it performs a local mean subtraction. The MPSCNNLocalContrastNormalizationNode used with the MPSNNGraph uses 1.0 as a default.
+// Alpha the value of alpha.  Default is 0.0 The default value 0.0 is not recommended and is preserved for backwards compatibility. With alpha 0, it performs a local mean subtraction. The MPSCNNLocalContrastNormalizationNode used with the MPSNNGraph uses 1.0 as a default.
 func (x *CNNLocalContrastNormalizationGradientNode) Alpha() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
 	return _r
 }
 
+// SetAlpha wraps the corresponding Objective-C method.
 func (x *CNNLocalContrastNormalizationGradientNode) SetAlpha(alpha float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }
 
-// The value of beta.  Default is 0.5
+// Beta the value of beta.  Default is 0.5
 func (x *CNNLocalContrastNormalizationGradientNode) Beta() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("beta"))
 	return _r
 }
 
+// SetBeta wraps the corresponding Objective-C method.
 func (x *CNNLocalContrastNormalizationGradientNode) SetBeta(beta float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
 }
 
-// The value of delta.  Default is 1/1024
+// Delta the value of delta.  Default is 1/1024
 func (x *CNNLocalContrastNormalizationGradientNode) Delta() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("delta"))
 	return _r
 }
 
+// SetDelta wraps the corresponding Objective-C method.
 func (x *CNNLocalContrastNormalizationGradientNode) SetDelta(delta float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
 }
 
-// The value of p0.  Default is 1.0
+// P0 the value of p0.  Default is 1.0
 func (x *CNNLocalContrastNormalizationGradientNode) P0() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("p0"))
 	return _r
 }
 
+// SetP0 wraps the corresponding Objective-C method.
 func (x *CNNLocalContrastNormalizationGradientNode) SetP0(p0 float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setP0:"), p0)
 }
 
-// The value of pm.  Default is 0.0
+// Pm the value of pm.  Default is 0.0
 func (x *CNNLocalContrastNormalizationGradientNode) Pm() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("pm"))
 	return _r
 }
 
+// SetPm wraps the corresponding Objective-C method.
 func (x *CNNLocalContrastNormalizationGradientNode) SetPm(pm float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPm:"), pm)
 }
 
-// The value of ps.  Default is 1.0
+// Ps the value of ps.  Default is 1.0
 func (x *CNNLocalContrastNormalizationGradientNode) Ps() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("ps"))
 	return _r
 }
 
+// SetPs wraps the corresponding Objective-C method.
 func (x *CNNLocalContrastNormalizationGradientNode) SetPs(ps float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPs:"), ps)
 }
 
+// KernelWidth wraps the corresponding Objective-C method.
 func (x *CNNLocalContrastNormalizationGradientNode) KernelWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
+// KernelHeight wraps the corresponding Objective-C method.
 func (x *CNNLocalContrastNormalizationGradientNode) KernelHeight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
 	return _r
@@ -216,3 +198,7 @@ type CNNLocalContrastNormalizationGradientNodeable interface {
 }
 
 var _ CNNLocalContrastNormalizationGradientNodeable = (*CNNLocalContrastNormalizationGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*CNNLocalContrastNormalizationGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNLocalContrastNormalizationGradientNode)(nil)

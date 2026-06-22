@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The metadata associated with a file.
-//
 // MetadataItem is an idiomatic wrapper over the Objective-C class NSMetadataItem.
+//
+// The metadata associated with a file.
 type MetadataItem struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MetadataItemFromID(id objc.ID) *MetadataItem {
 	if id == 0 {
 		return nil
 	}
-	x := &MetadataItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetadataItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func metadataItemAdopt(id objc.ID) *MetadataItem {
 	if id == 0 {
 		return nil
 	}
-	x := &MetadataItem{Handle: objref.Wrap(id)}
+	x := &MetadataItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,33 +60,39 @@ func (x *MetadataItem) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a metadata item with a given URL.
-//
-// NewMetadataItemWithURL creates a new MetadataItem.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetadataItem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMetadataItemWithURL initializes a metadata item with a given URL.
 func NewMetadataItemWithURL(url string) *MetadataItem {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMetadataItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
 	return metadataItemAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *MetadataItem) WithScriptingProperties(scriptingProperties obj.Object) *MetadataItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Returns the receiver’s metadata attribute name specified by a given key.
+// ValueForAttribute returns the receiver’s metadata attribute name specified by a given key.
 func (x *MetadataItem) ValueForAttribute(key string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForAttribute:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
-// Returns a dictionary containing the key-value pairs for the attribute names specified by a given array of keys.
+// ValuesForAttributes returns a dictionary containing the key-value pairs for the attribute names specified by a given array of keys.
 func (x *MetadataItem) ValuesForAttributes(keys []string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valuesForAttributes:"), purego.SliceToNSArray(keys, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return obj.Wrap(_r)
 }
 
+// Attributes wraps the corresponding Objective-C method.
+//
 // Attributes returns the collection as a Go slice.
 func (x *MetadataItem) Attributes() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))

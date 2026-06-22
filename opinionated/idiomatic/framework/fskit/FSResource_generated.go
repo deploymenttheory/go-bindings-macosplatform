@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract resource a file system uses to provide data for a volume.
-//
 // Resource is an idiomatic wrapper over the Objective-C class FSResource.
+//
+// Resource is an abstract base — you do not construct it directly. Construct one of [BlockDeviceResource], [GenericURLResource], [PathURLResource] and pass it where a Resource is accepted.
+//
+// An abstract resource a file system uses to provide data for a volume.
 type Resource struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ResourceFromID(id objc.ID) *Resource {
 	if id == 0 {
 		return nil
 	}
-	x := &Resource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Resource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func resourceAdopt(id objc.ID) *Resource {
 	if id == 0 {
 		return nil
 	}
-	x := &Resource{Handle: objref.Wrap(id)}
+	x := &Resource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +62,24 @@ func (x *Resource) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewResource creates a new Resource.
-func NewResource() *Resource {
-	_id := objc.Send[objc.ID](objc.ID(_class("FSResource")), objc.RegisterName("new"))
-	return resourceAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Resource) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Creates a proxy object of this resource.
+// MakeProxy creates a proxy object of this resource.
 func (x *Resource) MakeProxy() *Resource {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeProxy"))
 	return ResourceFromID(_r)
 }
 
-// Revokes the resource.
+// Revoke revokes the resource.
 func (x *Resource) Revoke() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("revoke"))
 }
 
-// A Boolean value that indicates whether the resource is revoked. If this is a proxy resource, the value of this property is always `true` (Swift) or `YES` (Objective-C).
+// IsRevoked a Boolean value that indicates whether the resource is revoked. If this is a proxy resource, the value of this property is always `true` (Swift) or `YES` (Objective-C).
 func (x *Resource) IsRevoked() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRevoked"))
 	return _r
@@ -90,3 +94,10 @@ type Resourceable interface {
 }
 
 var _ Resourceable = (*Resource)(nil)
+
+// isResource marks Resource — and, by embedding promotion, its
+// subclasses — as a member of the Resource hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Resource) isResource() {}
+
+var _ ResourceProvider = (*Resource)(nil)

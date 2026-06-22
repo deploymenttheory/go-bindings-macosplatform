@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// A convenience wrapper for batches of feature providers.
-//
 // ArrayBatchProvider is an idiomatic wrapper over the Objective-C class MLArrayBatchProvider.
+//
+// A convenience wrapper for batches of feature providers.
 type ArrayBatchProvider struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func ArrayBatchProviderFromID(id objc.ID) *ArrayBatchProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayBatchProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ArrayBatchProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func arrayBatchProviderAdopt(id objc.ID) *ArrayBatchProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayBatchProvider{Handle: objref.Wrap(id)}
+	x := &ArrayBatchProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,19 +62,21 @@ func (x *ArrayBatchProvider) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates the batch provider based on the array of feature providers.
-//
-// NewArrayBatchProviderWithFeatureProviderArray creates a new ArrayBatchProvider.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ArrayBatchProvider) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewArrayBatchProviderWithFeatureProviderArray creates the batch provider based on the array of feature providers.
 func NewArrayBatchProviderWithFeatureProviderArray(array []obj.Object) *ArrayBatchProvider {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MLArrayBatchProvider")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFeatureProviderArray:"), purego.SliceToNSArray(array, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return arrayBatchProviderAdopt(_id)
 }
 
-// Creates a batch provider based on feature names and their associated arrays of data.
-//
-// NewArrayBatchProviderWithDictionaryError creates a new ArrayBatchProvider.
-func NewArrayBatchProviderWithDictionaryError(dictionary obj.Object) (*ArrayBatchProvider, error) {
+// NewArrayBatchProviderWithDictionaryError creates a batch provider based on feature names and their associated arrays of data.
+func NewArrayBatchProviderWithDictionaryError(dictionary obj.Object) (result *ArrayBatchProvider, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MLArrayBatchProvider")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:error:"), objref.IDOf(dictionary), unsafe.Pointer(&_nsErr))
@@ -82,6 +86,7 @@ func NewArrayBatchProviderWithDictionaryError(dictionary obj.Object) (*ArrayBatc
 	return arrayBatchProviderAdopt(_id), nil
 }
 
+// Array wraps the corresponding Objective-C method.
 func (x *ArrayBatchProvider) Array() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("array"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

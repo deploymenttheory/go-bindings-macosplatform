@@ -6,15 +6,16 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Manages the layout process inside the viewport interacting with its delegate.
-//
 // TextViewportLayoutController is an idiomatic wrapper over the Objective-C class NSTextViewportLayoutController.
+//
+// Manages the layout process inside the viewport interacting with its delegate.
 type TextViewportLayoutController struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func TextViewportLayoutControllerFromID(id objc.ID) *TextViewportLayoutControlle
 	if id == 0 {
 		return nil
 	}
-	x := &TextViewportLayoutController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextViewportLayoutController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func textViewportLayoutControllerAdopt(id objc.ID) *TextViewportLayoutController
 	if id == 0 {
 		return nil
 	}
-	x := &TextViewportLayoutController{Handle: objref.Wrap(id)}
+	x := &TextViewportLayoutController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,30 +61,42 @@ func (x *TextViewportLayoutController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new instance with the text layout manager you provide.
-//
-// NewTextViewportLayoutControllerWithTextLayoutManager creates a new TextViewportLayoutController.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextViewportLayoutController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTextViewportLayoutControllerWithTextLayoutManager creates a new instance with the text layout manager you provide.
 func NewTextViewportLayoutControllerWithTextLayoutManager(textLayoutManager *TextLayoutManager) *TextViewportLayoutController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextViewportLayoutController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextLayoutManager:"), objref.IDOf(textLayoutManager))
 	return textViewportLayoutControllerAdopt(_id)
 }
 
-// Performs layout in the viewport.
+// LayoutViewport performs layout in the viewport.
 func (x *TextViewportLayoutController) LayoutViewport() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutViewport"))
 }
 
-// Adjusts the viewport rect by the specified offset if needed.
+// AdjustViewportByVerticalOffset adjusts the viewport rect by the specified offset if needed.
 func (x *TextViewportLayoutController) AdjustViewportByVerticalOffset(verticalOffset float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adjustViewportByVerticalOffset:"), verticalOffset)
 }
 
+// TextLayoutManager wraps the corresponding Objective-C method.
 func (x *TextViewportLayoutController) TextLayoutManager() *TextLayoutManager {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
+// ViewportBounds wraps the corresponding Objective-C method.
+func (x *TextViewportLayoutController) ViewportBounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("viewportBounds"))
+	return _r
+}
+
+// ViewportRange wraps the corresponding Objective-C method.
 func (x *TextViewportLayoutController) ViewportRange() *TextRange {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewportRange"))
 	return TextRangeFromID(_r)
@@ -93,6 +108,7 @@ type TextViewportLayoutControllerable interface {
 	LayoutViewport()
 	AdjustViewportByVerticalOffset(verticalOffset float64)
 	TextLayoutManager() *TextLayoutManager
+	ViewportBounds() corefoundation.CGRect
 	ViewportRange() *TextRange
 }
 

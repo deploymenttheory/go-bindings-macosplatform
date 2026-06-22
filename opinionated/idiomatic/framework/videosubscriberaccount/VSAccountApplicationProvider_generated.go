@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object to display app-specific providers in your app.
-//
 // VSAccountApplicationProvider is an idiomatic wrapper over the Objective-C class VSAccountApplicationProvider.
+//
+// An object to display app-specific providers in your app.
 type VSAccountApplicationProvider struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VSAccountApplicationProviderFromID(id objc.ID) *VSAccountApplicationProvide
 	if id == 0 {
 		return nil
 	}
-	x := &VSAccountApplicationProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VSAccountApplicationProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func vSAccountApplicationProviderAdopt(id objc.ID) *VSAccountApplicationProvider
 	if id == 0 {
 		return nil
 	}
-	x := &VSAccountApplicationProvider{Handle: objref.Wrap(id)}
+	x := &VSAccountApplicationProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,16 +60,20 @@ func (x *VSAccountApplicationProvider) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns an application provider using a given display name and identifier.
-//
-// NewVSAccountApplicationProviderWithLocalizedDisplayNameIdentifier creates a new VSAccountApplicationProvider.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VSAccountApplicationProvider) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVSAccountApplicationProviderWithLocalizedDisplayNameIdentifier returns an application provider using a given display name and identifier.
 func NewVSAccountApplicationProviderWithLocalizedDisplayNameIdentifier(localizedDisplayName string, identifier string) *VSAccountApplicationProvider {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VSAccountApplicationProvider")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedDisplayName:identifier:"), purego.NSString(localizedDisplayName), purego.NSString(identifier))
 	return vSAccountApplicationProviderAdopt(_id)
 }
 
-// The display name of the provider as it will appear in the list of providers.
+// LocalizedDisplayName the display name of the provider as it will appear in the list of providers.
 func (x *VSAccountApplicationProvider) LocalizedDisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDisplayName"))
 	if _r == 0 {
@@ -76,7 +82,7 @@ func (x *VSAccountApplicationProvider) LocalizedDisplayName() string {
 	return purego.GoString(_r)
 }
 
-// The identifier of the provider. If selected, this value is returned to your application.
+// Identifier the identifier of the provider. If selected, this value is returned to your application.
 func (x *VSAccountApplicationProvider) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {

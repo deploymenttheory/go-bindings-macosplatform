@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A joint that allows two physics bodies to slide along an axis.
-//
 // PhysicsJointSliding is an idiomatic wrapper over the Objective-C class SKPhysicsJointSliding.
+//
+// It embeds [PhysicsJoint], promoting that type's methods.
+//
+// A joint that allows two physics bodies to slide along an axis.
 type PhysicsJointSliding struct {
-	objref.Handle
+	PhysicsJoint
 }
 
 // PhysicsJointSlidingFromID adopts an existing Objective-C object as a PhysicsJointSliding
@@ -25,7 +26,8 @@ func PhysicsJointSlidingFromID(id objc.ID) *PhysicsJointSliding {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsJointSliding{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PhysicsJointSliding{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func physicsJointSlidingAdopt(id objc.ID) *PhysicsJointSliding {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsJointSliding{Handle: objref.Wrap(id)}
+	x := &PhysicsJointSliding{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PhysicsJointSliding) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PhysicsJointSliding) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PhysicsJointSliding) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPhysicsJointSliding creates a new PhysicsJointSliding.
@@ -64,69 +52,65 @@ func NewPhysicsJointSliding() *PhysicsJointSliding {
 	return physicsJointSlidingAdopt(_id)
 }
 
-// A Boolean value that indicates whether the sliding joint is restricted so that the objects may only slide a finite distance from the initial anchor point.
-//
-// WithShouldEnableLimits sets shouldEnableLimits and returns the receiver so calls can be chained.
+// WithShouldEnableLimits a Boolean value that indicates whether the sliding joint is restricted so that the objects may only slide a finite distance from the initial anchor point.
 func (x *PhysicsJointSliding) WithShouldEnableLimits(shouldEnableLimits bool) *PhysicsJointSliding {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldEnableLimits:"), shouldEnableLimits)
 	return x
 }
 
-// The smallest distance allowed for the sliding joint.
-//
-// WithLowerDistanceLimit sets lowerDistanceLimit and returns the receiver so calls can be chained.
+// WithLowerDistanceLimit the smallest distance allowed for the sliding joint.
 func (x *PhysicsJointSliding) WithLowerDistanceLimit(lowerDistanceLimit float64) *PhysicsJointSliding {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowerDistanceLimit:"), lowerDistanceLimit)
 	return x
 }
 
-// The largest distance allowed for the sliding joint.
-//
-// WithUpperDistanceLimit sets upperDistanceLimit and returns the receiver so calls can be chained.
+// WithUpperDistanceLimit the largest distance allowed for the sliding joint.
 func (x *PhysicsJointSliding) WithUpperDistanceLimit(upperDistanceLimit float64) *PhysicsJointSliding {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperDistanceLimit:"), upperDistanceLimit)
 	return x
 }
 
-// The first body connected by the joint.
-//
-// WithBodyA sets bodyA and returns the receiver so calls can be chained.
+// WithBodyA the first body connected by the joint.
 func (x *PhysicsJointSliding) WithBodyA(bodyA *PhysicsBody) *PhysicsJointSliding {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
 	return x
 }
 
-// The second body connected by the joint.
-//
-// WithBodyB sets bodyB and returns the receiver so calls can be chained.
+// WithBodyB the second body connected by the joint.
 func (x *PhysicsJointSliding) WithBodyB(bodyB *PhysicsBody) *PhysicsJointSliding {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
 	return x
 }
 
+// ShouldEnableLimits wraps the corresponding Objective-C method.
 func (x *PhysicsJointSliding) ShouldEnableLimits() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldEnableLimits"))
 	return _r
 }
 
+// SetShouldEnableLimits wraps the corresponding Objective-C method.
 func (x *PhysicsJointSliding) SetShouldEnableLimits(shouldEnableLimits bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldEnableLimits:"), shouldEnableLimits)
 }
 
+// LowerDistanceLimit wraps the corresponding Objective-C method.
 func (x *PhysicsJointSliding) LowerDistanceLimit() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lowerDistanceLimit"))
 	return _r
 }
 
+// SetLowerDistanceLimit wraps the corresponding Objective-C method.
 func (x *PhysicsJointSliding) SetLowerDistanceLimit(lowerDistanceLimit float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowerDistanceLimit:"), lowerDistanceLimit)
 }
 
+// UpperDistanceLimit wraps the corresponding Objective-C method.
 func (x *PhysicsJointSliding) UpperDistanceLimit() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("upperDistanceLimit"))
 	return _r
 }
 
+// SetUpperDistanceLimit wraps the corresponding Objective-C method.
 func (x *PhysicsJointSliding) SetUpperDistanceLimit(upperDistanceLimit float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperDistanceLimit:"), upperDistanceLimit)
 }
@@ -148,3 +132,5 @@ type PhysicsJointSlidingable interface {
 }
 
 var _ PhysicsJointSlidingable = (*PhysicsJointSliding)(nil)
+
+var _ PhysicsJointProvider = (*PhysicsJointSliding)(nil)

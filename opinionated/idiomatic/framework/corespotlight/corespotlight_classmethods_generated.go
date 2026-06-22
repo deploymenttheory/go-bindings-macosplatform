@@ -11,35 +11,35 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns a Boolean value that indicates whether indexing is available on the current device.
+// IsIndexingAvailable returns a Boolean value that indicates whether indexing is available on the current device.
 func IsIndexingAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("CSSearchableIndex")), objc.RegisterName("isIndexingAvailable"))
 	return _r
 }
 
-// Returns the default on-device index.
+// DefaultSearchableIndex returns the default on-device index.
 func DefaultSearchableIndex() *SearchableIndex {
 	_r := objc.Send[objc.ID](objc.ID(_class("CSSearchableIndex")), objc.RegisterName("defaultSearchableIndex"))
 	return SearchableIndexFromID(_r)
 }
 
-// Performs one-time tasks that prepare Spotlight to search for content in all search indexes.
+// Prepare performs one-time tasks that prepare Spotlight to search for content in all search indexes.
 func Prepare() {
 	objc.Send[objc.ID](objc.ID(_class("CSUserQuery")), objc.RegisterName("prepare"))
 }
 
-// Performs one-time tasks that prepare Spotlight to search for content in one or more protected search indexes.
+// PrepareProtectionClasses performs one-time tasks that prepare Spotlight to search for content in one or more protected search indexes.
 func PrepareProtectionClasses(protectionClasses []obj.Object) {
 	objc.Send[objc.ID](objc.ID(_class("CSUserQuery")), objc.RegisterName("prepareProtectionClasses:"), purego.SliceToNSArray(protectionClasses, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Returns the current behavior configuration for the user query.
+// CSUserQueryContextUserQueryContext returns the current behavior configuration for the user query.
 func CSUserQueryContextUserQueryContext() *UserQueryContext {
 	_r := objc.Send[objc.ID](objc.ID(_class("CSUserQueryContext")), objc.RegisterName("userQueryContext"))
 	return UserQueryContextFromID(_r)
 }
 
-// Creates a new query context object with an optional suggested search string.
+// UserQueryContextWithCurrentSuggestion creates a new query context object with an optional suggested search string.
 func UserQueryContextWithCurrentSuggestion(currentSuggestion *Suggestion) *UserQueryContext {
 	_r := objc.Send[objc.ID](objc.ID(_class("CSUserQueryContext")), objc.RegisterName("userQueryContextWithCurrentSuggestion:"), objref.IDOf(currentSuggestion))
 	return UserQueryContextFromID(_r)

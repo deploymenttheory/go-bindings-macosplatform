@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mapping instance that specifies in a model how to map from a property in a source entity to a property in a destination entity.
-//
 // PropertyMapping is an idiomatic wrapper over the Objective-C class NSPropertyMapping.
+//
+// A mapping instance that specifies in a model how to map from a property in a source entity to a property in a destination entity.
 type PropertyMapping struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PropertyMappingFromID(id objc.ID) *PropertyMapping {
 	if id == 0 {
 		return nil
 	}
-	x := &PropertyMapping{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PropertyMapping{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func propertyMappingAdopt(id objc.ID) *PropertyMapping {
 	if id == 0 {
 		return nil
 	}
-	x := &PropertyMapping{Handle: objref.Wrap(id)}
+	x := &PropertyMapping{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,36 +60,37 @@ func (x *PropertyMapping) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PropertyMapping) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPropertyMapping creates a new PropertyMapping.
 func NewPropertyMapping() *PropertyMapping {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSPropertyMapping")), objc.RegisterName("new"))
 	return propertyMappingAdopt(_id)
 }
 
-// The name of the property in the destination entity for the property mapping.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the name of the property in the destination entity for the property mapping.
 func (x *PropertyMapping) WithName(name string) *PropertyMapping {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The value expression for the property mapping.
-//
-// WithValueExpression sets valueExpression and returns the receiver so calls can be chained.
+// WithValueExpression the value expression for the property mapping.
 func (x *PropertyMapping) WithValueExpression(valueExpression obj.Object) *PropertyMapping {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueExpression:"), objref.IDOf(valueExpression))
 	return x
 }
 
-// The user info for the property mapping.
-//
-// WithUserInfo sets userInfo and returns the receiver so calls can be chained.
+// WithUserInfo the user info for the property mapping.
 func (x *PropertyMapping) WithUserInfo(userInfo obj.Object) *PropertyMapping {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return x
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *PropertyMapping) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -96,24 +99,29 @@ func (x *PropertyMapping) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *PropertyMapping) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
+// ValueExpression wraps the corresponding Objective-C method.
 func (x *PropertyMapping) ValueExpression() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueExpression"))
 	return obj.Wrap(_r)
 }
 
+// SetValueExpression wraps the corresponding Objective-C method.
 func (x *PropertyMapping) SetValueExpression(valueExpression obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueExpression:"), objref.IDOf(valueExpression))
 }
 
+// UserInfo wraps the corresponding Objective-C method.
 func (x *PropertyMapping) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
+// SetUserInfo wraps the corresponding Objective-C method.
 func (x *PropertyMapping) SetUserInfo(userInfo obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 }

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A summary item that represents a fee for an instant funds out transfer.
-//
 // InstantFundsOutFeeSummaryItem is an idiomatic wrapper over the Objective-C class PKInstantFundsOutFeeSummaryItem.
+//
+// It embeds [PaymentSummaryItem], promoting that type's methods.
+//
+// A summary item that represents a fee for an instant funds out transfer.
 type InstantFundsOutFeeSummaryItem struct {
-	objref.Handle
+	PaymentSummaryItem
 }
 
 // InstantFundsOutFeeSummaryItemFromID adopts an existing Objective-C object as a InstantFundsOutFeeSummaryItem
@@ -25,7 +26,8 @@ func InstantFundsOutFeeSummaryItemFromID(id objc.ID) *InstantFundsOutFeeSummaryI
 	if id == 0 {
 		return nil
 	}
-	x := &InstantFundsOutFeeSummaryItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &InstantFundsOutFeeSummaryItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func instantFundsOutFeeSummaryItemAdopt(id objc.ID) *InstantFundsOutFeeSummaryIt
 	if id == 0 {
 		return nil
 	}
-	x := &InstantFundsOutFeeSummaryItem{Handle: objref.Wrap(id)}
+	x := &InstantFundsOutFeeSummaryItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *InstantFundsOutFeeSummaryItem) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *InstantFundsOutFeeSummaryItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *InstantFundsOutFeeSummaryItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewInstantFundsOutFeeSummaryItem creates a new InstantFundsOutFeeSummaryItem.
@@ -64,25 +52,19 @@ func NewInstantFundsOutFeeSummaryItem() *InstantFundsOutFeeSummaryItem {
 	return instantFundsOutFeeSummaryItemAdopt(_id)
 }
 
-// A short, localized description of the item.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a short, localized description of the item.
 func (x *InstantFundsOutFeeSummaryItem) WithLabel(label string) *InstantFundsOutFeeSummaryItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The summary item’s amount.
-//
-// WithAmount sets amount and returns the receiver so calls can be chained.
+// WithAmount the summary item’s amount.
 func (x *InstantFundsOutFeeSummaryItem) WithAmount(amount obj.Object) *InstantFundsOutFeeSummaryItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 	return x
 }
 
-// The summary item’s type that indicates whether the amount is final.
-//
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithType the summary item’s type that indicates whether the amount is final.
 func (x *InstantFundsOutFeeSummaryItem) WithType(type_ PaymentSummaryItemType) *InstantFundsOutFeeSummaryItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
@@ -97,3 +79,5 @@ type InstantFundsOutFeeSummaryItemable interface {
 }
 
 var _ InstantFundsOutFeeSummaryItemable = (*InstantFundsOutFeeSummaryItem)(nil)
+
+var _ PaymentSummaryItemProvider = (*InstantFundsOutFeeSummaryItem)(nil)

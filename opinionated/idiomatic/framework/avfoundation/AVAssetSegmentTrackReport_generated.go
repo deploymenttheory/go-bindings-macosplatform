@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides information on a track in segment data.
-//
 // AssetSegmentTrackReport is an idiomatic wrapper over the Objective-C class AVAssetSegmentTrackReport.
+//
+// An object that provides information on a track in segment data.
 type AssetSegmentTrackReport struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetSegmentTrackReportFromID(id objc.ID) *AssetSegmentTrackReport {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetSegmentTrackReport{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetSegmentTrackReport{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetSegmentTrackReportAdopt(id objc.ID) *AssetSegmentTrackReport {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetSegmentTrackReport{Handle: objref.Wrap(id)}
+	x := &AssetSegmentTrackReport{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *AssetSegmentTrackReport) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetSegmentTrackReport) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetSegmentTrackReport creates a new AssetSegmentTrackReport.
 func NewAssetSegmentTrackReport() *AssetSegmentTrackReport {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetSegmentTrackReport")), objc.RegisterName("new"))
 	return assetSegmentTrackReportAdopt(_id)
 }
 
-// Indicates the persistent unique identifier for this track.
+// TrackID indicates the persistent unique identifier for this track.
 func (x *AssetSegmentTrackReport) TrackID() int32 {
 	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("trackID"))
 	return _r
 }
 
-// Indicates the media type for this track. Media types are declared in AVMediaFormat.h.
+// MediaType indicates the media type for this track. Media types are declared in AVMediaFormat.h.
 func (x *AssetSegmentTrackReport) MediaType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaType"))
 	return obj.Wrap(_r)
 }
 
-// Provides information on the first video sample in this track. The value is nil if this track is not video track or no information available.
+// FirstVideoSampleInformation provides information on the first video sample in this track. The value is nil if this track is not video track or no information available.
 func (x *AssetSegmentTrackReport) FirstVideoSampleInformation() *AssetSegmentReportSampleInformation {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstVideoSampleInformation"))
 	return AssetSegmentReportSampleInformationFromID(_r)

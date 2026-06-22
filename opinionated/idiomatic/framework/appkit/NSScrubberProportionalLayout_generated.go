@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A concrete layout object that sizes each item to some fraction of the scrubber’s visible size.
-//
 // ScrubberProportionalLayout is an idiomatic wrapper over the Objective-C class NSScrubberProportionalLayout.
+//
+// It embeds [ScrubberLayout], promoting that type's methods.
+//
+// A concrete layout object that sizes each item to some fraction of the scrubber’s visible size.
 type ScrubberProportionalLayout struct {
-	objref.Handle
+	ScrubberLayout
 }
 
 // ScrubberProportionalLayoutFromID adopts an existing Objective-C object as a ScrubberProportionalLayout
@@ -25,7 +26,8 @@ func ScrubberProportionalLayoutFromID(id objc.ID) *ScrubberProportionalLayout {
 	if id == 0 {
 		return nil
 	}
-	x := &ScrubberProportionalLayout{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScrubberProportionalLayout{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,59 +40,39 @@ func scrubberProportionalLayoutAdopt(id objc.ID) *ScrubberProportionalLayout {
 	if id == 0 {
 		return nil
 	}
-	x := &ScrubberProportionalLayout{Handle: objref.Wrap(id)}
+	x := &ScrubberProportionalLayout{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ScrubberProportionalLayout) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ScrubberProportionalLayout) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ScrubberProportionalLayout) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes and returns a newly allocated proportional layout, configured to display the given number of items.
-//
-// NewScrubberProportionalLayoutWithNumberOfVisibleItems creates a new ScrubberProportionalLayout.
+// NewScrubberProportionalLayoutWithNumberOfVisibleItems initializes and returns a newly allocated proportional layout, configured to display the given number of items.
 func NewScrubberProportionalLayoutWithNumberOfVisibleItems(numberOfVisibleItems int) *ScrubberProportionalLayout {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScrubberProportionalLayout")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNumberOfVisibleItems:"), numberOfVisibleItems)
 	return scrubberProportionalLayoutAdopt(_id)
 }
 
-// Initializes and returns a newly allocated proprotional layout object from a storyboard or nib file.
-//
-// NewScrubberProportionalLayoutWithCoder creates a new ScrubberProportionalLayout.
+// NewScrubberProportionalLayoutWithCoder initializes and returns a newly allocated proprotional layout object from a storyboard or nib file.
 func NewScrubberProportionalLayoutWithCoder(coder obj.Object) *ScrubberProportionalLayout {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScrubberProportionalLayout")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return scrubberProportionalLayoutAdopt(_id)
 }
 
-// The number of items visible in the scrubber at once.
-//
-// WithNumberOfVisibleItems sets numberOfVisibleItems and returns the receiver so calls can be chained.
+// WithNumberOfVisibleItems the number of items visible in the scrubber at once.
 func (x *ScrubberProportionalLayout) WithNumberOfVisibleItems(numberOfVisibleItems int) *ScrubberProportionalLayout {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfVisibleItems:"), numberOfVisibleItems)
 	return x
 }
 
-// The number of items that should fit within the scrubber's viewport at once.
+// NumberOfVisibleItems the number of items that should fit within the scrubber's viewport at once.
 func (x *ScrubberProportionalLayout) NumberOfVisibleItems() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfVisibleItems"))
 	return _r
 }
 
-// The number of items that should fit within the scrubber's viewport at once.
+// SetNumberOfVisibleItems the number of items that should fit within the scrubber's viewport at once.
 func (x *ScrubberProportionalLayout) SetNumberOfVisibleItems(numberOfVisibleItems int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfVisibleItems:"), numberOfVisibleItems)
 }
@@ -104,3 +86,5 @@ type ScrubberProportionalLayoutable interface {
 }
 
 var _ ScrubberProportionalLayoutable = (*ScrubberProportionalLayout)(nil)
+
+var _ ScrubberLayoutProvider = (*ScrubberProportionalLayout)(nil)

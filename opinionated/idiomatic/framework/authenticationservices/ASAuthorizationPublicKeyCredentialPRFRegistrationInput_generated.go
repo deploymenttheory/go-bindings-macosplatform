@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that encapsulates input for PRF extensions during registration.
-//
 // AuthorizationPublicKeyCredentialPRFRegistrationInput is an idiomatic wrapper over the Objective-C class ASAuthorizationPublicKeyCredentialPRFRegistrationInput.
+//
+// A type that encapsulates input for PRF extensions during registration.
 type AuthorizationPublicKeyCredentialPRFRegistrationInput struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationPublicKeyCredentialPRFRegistrationInputFromID(id objc.ID) *Aut
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPublicKeyCredentialPRFRegistrationInput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationPublicKeyCredentialPRFRegistrationInput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationPublicKeyCredentialPRFRegistrationInputAdopt(id objc.ID) *Auth
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPublicKeyCredentialPRFRegistrationInput{Handle: objref.Wrap(id)}
+	x := &AuthorizationPublicKeyCredentialPRFRegistrationInput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +60,12 @@ func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) IsKind(className 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAuthorizationPublicKeyCredentialPRFRegistrationInputWithInputValues creates a new AuthorizationPublicKeyCredentialPRFRegistrationInput.
 func NewAuthorizationPublicKeyCredentialPRFRegistrationInputWithInputValues(inputValues *AuthorizationPublicKeyCredentialPRFAssertionInputValues) *AuthorizationPublicKeyCredentialPRFRegistrationInput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPublicKeyCredentialPRFRegistrationInput")), objc.RegisterName("alloc"))
@@ -65,11 +73,13 @@ func NewAuthorizationPublicKeyCredentialPRFRegistrationInputWithInputValues(inpu
 	return authorizationPublicKeyCredentialPRFRegistrationInputAdopt(_id)
 }
 
+// ShouldCheckForSupport wraps the corresponding Objective-C method.
 func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) ShouldCheckForSupport() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldCheckForSupport"))
 	return _r
 }
 
+// InputValues wraps the corresponding Objective-C method.
 func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) InputValues() *AuthorizationPublicKeyCredentialPRFAssertionInputValues {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputValues"))
 	return AuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID(_r)

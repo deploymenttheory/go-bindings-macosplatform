@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Face information detected by a metadata capture output.
-//
 // MetadataFaceObject is an idiomatic wrapper over the Objective-C class AVMetadataFaceObject.
+//
+// It embeds [MetadataObject], promoting that type's methods.
+//
+// Face information detected by a metadata capture output.
 type MetadataFaceObject struct {
-	objref.Handle
+	MetadataObject
 }
 
 // MetadataFaceObjectFromID adopts an existing Objective-C object as a MetadataFaceObject
@@ -25,7 +26,8 @@ func MetadataFaceObjectFromID(id objc.ID) *MetadataFaceObject {
 	if id == 0 {
 		return nil
 	}
-	x := &MetadataFaceObject{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetadataFaceObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func metadataFaceObjectAdopt(id objc.ID) *MetadataFaceObject {
 	if id == 0 {
 		return nil
 	}
-	x := &MetadataFaceObject{Handle: objref.Wrap(id)}
+	x := &MetadataFaceObject{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MetadataFaceObject) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetadataFaceObject) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetadataFaceObject) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMetadataFaceObject creates a new MetadataFaceObject.
@@ -64,31 +52,31 @@ func NewMetadataFaceObject() *MetadataFaceObject {
 	return metadataFaceObjectAdopt(_id)
 }
 
-// A unique number associated with the receiver. The value of this property is an NSInteger indicating the unique identifier of this face in the picture. When a new face enters the picture, it is assigned a new unique identifier. faceIDs are not re-used as faces leave the picture and new ones enter. Faces that leave the picture then re-enter are assigned a new faceID.
+// FaceID a unique number associated with the receiver. The value of this property is an NSInteger indicating the unique identifier of this face in the picture. When a new face enters the picture, it is assigned a new unique identifier. faceIDs are not re-used as faces leave the picture and new ones enter. Faces that leave the picture then re-enter are assigned a new faceID.
 func (x *MetadataFaceObject) FaceID() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("faceID"))
 	return _r
 }
 
-// A BOOL indicating whether the rollAngle property is valid for this receiver.
+// HasRollAngle a BOOL indicating whether the rollAngle property is valid for this receiver.
 func (x *MetadataFaceObject) HasRollAngle() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasRollAngle"))
 	return _r
 }
 
-// The roll angle of the face in degrees. The value of this property is a CGFloat indicating the face's angle of roll (or tilt) in degrees. A value of 0.0 indicates that the face is level in the picture. If -hasRollAngle returns NO, then reading this property throws an NSGenericException.
+// RollAngle the roll angle of the face in degrees. The value of this property is a CGFloat indicating the face's angle of roll (or tilt) in degrees. A value of 0.0 indicates that the face is level in the picture. If -hasRollAngle returns NO, then reading this property throws an NSGenericException.
 func (x *MetadataFaceObject) RollAngle() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rollAngle"))
 	return _r
 }
 
-// A BOOL indicating whether the yawAngle property is valid for this receiver.
+// HasYawAngle a BOOL indicating whether the yawAngle property is valid for this receiver.
 func (x *MetadataFaceObject) HasYawAngle() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasYawAngle"))
 	return _r
 }
 
-// The yaw angle of the face in degrees. The value of this property is a CGFloat indicating the face's angle of yaw (or turn) in degrees. A value of 0.0 indicates that the face is straight on in the picture. If -hasYawAngle returns NO, then reading this property throws an NSGenericException.
+// YawAngle the yaw angle of the face in degrees. The value of this property is a CGFloat indicating the face's angle of yaw (or turn) in degrees. A value of 0.0 indicates that the face is straight on in the picture. If -hasYawAngle returns NO, then reading this property throws an NSGenericException.
 func (x *MetadataFaceObject) YawAngle() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("yawAngle"))
 	return _r
@@ -105,3 +93,5 @@ type MetadataFaceObjectable interface {
 }
 
 var _ MetadataFaceObjectable = (*MetadataFaceObject)(nil)
+
+var _ MetadataObjectProvider = (*MetadataFaceObject)(nil)

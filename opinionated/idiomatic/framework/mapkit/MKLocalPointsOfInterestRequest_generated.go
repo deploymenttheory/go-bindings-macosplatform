@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A structured request to use when searching for points of interest.
-//
 // LocalPointsOfInterestRequest is an idiomatic wrapper over the Objective-C class MKLocalPointsOfInterestRequest.
+//
+// A structured request to use when searching for points of interest.
 type LocalPointsOfInterestRequest struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LocalPointsOfInterestRequestFromID(id objc.ID) *LocalPointsOfInterestReques
 	if id == 0 {
 		return nil
 	}
-	x := &LocalPointsOfInterestRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LocalPointsOfInterestRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func localPointsOfInterestRequestAdopt(id objc.ID) *LocalPointsOfInterestRequest
 	if id == 0 {
 		return nil
 	}
-	x := &LocalPointsOfInterestRequest{Handle: objref.Wrap(id)}
+	x := &LocalPointsOfInterestRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *LocalPointsOfInterestRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LocalPointsOfInterestRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLocalPointsOfInterestRequest creates a new LocalPointsOfInterestRequest.
 func NewLocalPointsOfInterestRequest() *LocalPointsOfInterestRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKLocalPointsOfInterestRequest")), objc.RegisterName("new"))
 	return localPointsOfInterestRequestAdopt(_id)
 }
 
-// A filter that lists points of interest categories to include or exclude.
-//
-// WithPointOfInterestFilter sets pointOfInterestFilter and returns the receiver so calls can be chained.
+// WithPointOfInterestFilter a filter that lists points of interest categories to include or exclude.
 func (x *LocalPointsOfInterestRequest) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalPointsOfInterestRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 	return x
 }
 
+// PointOfInterestFilter wraps the corresponding Objective-C method.
 func (x *LocalPointsOfInterestRequest) PointOfInterestFilter() *PointOfInterestFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }
 
+// SetPointOfInterestFilter wraps the corresponding Objective-C method.
 func (x *LocalPointsOfInterestRequest) SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 }

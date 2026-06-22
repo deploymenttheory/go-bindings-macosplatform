@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The principal class for a packet tunnel provider app extension.
-//
 // NEPacketTunnelProvider is an idiomatic wrapper over the Objective-C class NEPacketTunnelProvider.
+//
+// NEPacketTunnelProvider is an abstract base — you do not construct it directly. Construct one of [NEEthernetTunnelProvider] and pass it where a NEPacketTunnelProvider is accepted.
+//
+// The principal class for a packet tunnel provider app extension.
 type NEPacketTunnelProvider struct {
-	objref.Handle
+	NETunnelProvider
 }
 
 // NEPacketTunnelProviderFromID adopts an existing Objective-C object as a NEPacketTunnelProvider
@@ -27,7 +28,8 @@ func NEPacketTunnelProviderFromID(id objc.ID) *NEPacketTunnelProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &NEPacketTunnelProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEPacketTunnelProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,41 +42,19 @@ func nEPacketTunnelProviderAdopt(id objc.ID) *NEPacketTunnelProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &NEPacketTunnelProvider{Handle: objref.Wrap(id)}
+	x := &NEPacketTunnelProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NEPacketTunnelProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEPacketTunnelProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEPacketTunnelProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewNEPacketTunnelProvider creates a new NEPacketTunnelProvider.
-func NewNEPacketTunnelProvider() *NEPacketTunnelProvider {
-	_id := objc.Send[objc.ID](objc.ID(_class("NEPacketTunnelProvider")), objc.RegisterName("new"))
-	return nEPacketTunnelProviderAdopt(_id)
-}
-
-// Indicate to the system that the tunnel is being re-established.
-//
-// WithReasserting sets reasserting and returns the receiver so calls can be chained.
+// WithReasserting indicate to the system that the tunnel is being re-established.
 func (x *NEPacketTunnelProvider) WithReasserting(reasserting bool) *NEPacketTunnelProvider {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReasserting:"), reasserting)
 	return x
 }
 
-// Start the network tunnel.
+// StartTunnelWithOptions start the network tunnel.
 //
 // StartTunnelWithOptions blocks until the operation completes or ctx is cancelled.
 func (x *NEPacketTunnelProvider) StartTunnelWithOptions(ctx context.Context, options obj.Object) error {
@@ -93,7 +73,7 @@ func (x *NEPacketTunnelProvider) StartTunnelWithOptions(ctx context.Context, opt
 	}
 }
 
-// Stop the network tunnel.
+// StopTunnelWithReason stop the network tunnel.
 //
 // StopTunnelWithReason blocks until the operation completes or ctx is cancelled.
 func (x *NEPacketTunnelProvider) StopTunnelWithReason(ctx context.Context, reason NEProviderStopReason) error {
@@ -110,13 +90,13 @@ func (x *NEPacketTunnelProvider) StopTunnelWithReason(ctx context.Context, reaso
 	}
 }
 
-// An NEPacketFlow object that the tunnel provider implementation should use to receive packets from the network stack and inject packets into the network stack. Every time the tunnel is started the packet flow object is in an initialized state and must be explicitly opened before any packets can be received or injected.
+// PacketFlow an NEPacketFlow object that the tunnel provider implementation should use to receive packets from the network stack and inject packets into the network stack. Every time the tunnel is started the packet flow object is in an initialized state and must be explicitly opened before any packets can be received or injected.
 func (x *NEPacketTunnelProvider) PacketFlow() *NEPacketTunnelFlow {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("packetFlow"))
 	return NEPacketTunnelFlowFromID(_r)
 }
 
-// The virtual network interface used to route packets to the packet tunnel provider. For NEPacketTunnelProvider sub-classes, this property will be non-nil when `-[NEPacketTunnelProvider startTunnelWithOptions:completionHandler:]` is called. For NEEthernetTunnelProvider sub-classes, this property will be non-nil when the completion handler passed to `-[NETunnelProvider setTunnelNetworkSettings:completionHandler:]` is executed. To create a connection through the tunnel, pass this interface to `nw_parameters_require_interface`.
+// VirtualInterface the virtual network interface used to route packets to the packet tunnel provider. For NEPacketTunnelProvider sub-classes, this property will be non-nil when `-[NEPacketTunnelProvider startTunnelWithOptions:completionHandler:]` is called. For NEEthernetTunnelProvider sub-classes, this property will be non-nil when the completion handler passed to `-[NETunnelProvider setTunnelNetworkSettings:completionHandler:]` is executed. To create a connection through the tunnel, pass this interface to `nw_parameters_require_interface`.
 func (x *NEPacketTunnelProvider) VirtualInterface() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("virtualInterface"))
 	return obj.Wrap(_r)
@@ -133,3 +113,14 @@ type NEPacketTunnelProviderable interface {
 }
 
 var _ NEPacketTunnelProviderable = (*NEPacketTunnelProvider)(nil)
+
+// isNEPacketTunnelProvider marks NEPacketTunnelProvider — and, by embedding promotion, its
+// subclasses — as a member of the NEPacketTunnelProvider hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NEPacketTunnelProvider) isNEPacketTunnelProvider() {}
+
+var _ NEPacketTunnelProviderProvider = (*NEPacketTunnelProvider)(nil)
+
+var _ NETunnelProviderProvider = (*NEPacketTunnelProvider)(nil)
+
+var _ NEProviderProvider = (*NEPacketTunnelProvider)(nil)

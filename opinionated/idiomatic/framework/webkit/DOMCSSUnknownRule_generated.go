@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMCSSUnknownRule is an idiomatic wrapper over the Objective-C class DOMCSSUnknownRule.
+//
+// It embeds [DOMCSSRule], promoting that type's methods.
 type DOMCSSUnknownRule struct {
-	objref.Handle
+	DOMCSSRule
 }
 
 // DOMCSSUnknownRuleFromID adopts an existing Objective-C object as a DOMCSSUnknownRule
@@ -23,7 +24,8 @@ func DOMCSSUnknownRuleFromID(id objc.ID) *DOMCSSUnknownRule {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMCSSUnknownRule{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMCSSUnknownRule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMCSSUnknownRuleAdopt(id objc.ID) *DOMCSSUnknownRule {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMCSSUnknownRule{Handle: objref.Wrap(id)}
+	x := &DOMCSSUnknownRule{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMCSSUnknownRule) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMCSSUnknownRule) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMCSSUnknownRule) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMCSSUnknownRule creates a new DOMCSSUnknownRule.
@@ -62,7 +50,7 @@ func NewDOMCSSUnknownRule() *DOMCSSUnknownRule {
 	return dOMCSSUnknownRuleAdopt(_id)
 }
 
-// WithCssText sets cssText and returns the receiver so calls can be chained.
+// WithCssText sets the property and returns the receiver so calls can be chained.
 func (x *DOMCSSUnknownRule) WithCssText(cssText string) *DOMCSSUnknownRule {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
 	return x
@@ -75,3 +63,9 @@ type DOMCSSUnknownRuleable interface {
 }
 
 var _ DOMCSSUnknownRuleable = (*DOMCSSUnknownRule)(nil)
+
+var _ DOMCSSRuleProvider = (*DOMCSSUnknownRule)(nil)
+
+var _ DOMObjectProvider = (*DOMCSSUnknownRule)(nil)
+
+var _ WebScriptObjectProvider = (*DOMCSSUnknownRule)(nil)

@@ -14,11 +14,13 @@ import (
 	"unsafe"
 )
 
-// An attachment point that writes data from the guest system to a file.
-//
 // FileSerialPortAttachment is an idiomatic wrapper over the Objective-C class VZFileSerialPortAttachment.
+//
+// It embeds [SerialPortAttachment], promoting that type's methods.
+//
+// An attachment point that writes data from the guest system to a file.
 type FileSerialPortAttachment struct {
-	objref.Handle
+	SerialPortAttachment
 }
 
 // FileSerialPortAttachmentFromID adopts an existing Objective-C object as a FileSerialPortAttachment
@@ -27,7 +29,8 @@ func FileSerialPortAttachmentFromID(id objc.ID) *FileSerialPortAttachment {
 	if id == 0 {
 		return nil
 	}
-	x := &FileSerialPortAttachment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FileSerialPortAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,30 +43,14 @@ func fileSerialPortAttachmentAdopt(id objc.ID) *FileSerialPortAttachment {
 	if id == 0 {
 		return nil
 	}
-	x := &FileSerialPortAttachment{Handle: objref.Wrap(id)}
+	x := &FileSerialPortAttachment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *FileSerialPortAttachment) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FileSerialPortAttachment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FileSerialPortAttachment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a file-based serial port attachment object.
-//
-// NewFileSerialPortAttachmentWithURLAppendError creates a new FileSerialPortAttachment.
-func NewFileSerialPortAttachmentWithURLAppendError(url string, shouldAppend bool) (*FileSerialPortAttachment, error) {
+// NewFileSerialPortAttachmentWithURLAppendError creates a file-based serial port attachment object.
+func NewFileSerialPortAttachmentWithURLAppendError(url string, shouldAppend bool) (result *FileSerialPortAttachment, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZFileSerialPortAttachment")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:append:error:"), rt.FileURL(url), shouldAppend, unsafe.Pointer(&_nsErr))
@@ -73,13 +60,13 @@ func NewFileSerialPortAttachmentWithURLAppendError(url string, shouldAppend bool
 	return fileSerialPortAttachmentAdopt(_id), nil
 }
 
-// The URL of the file for the attachment on the local file system.
+// URL the URL of the file for the attachment on the local file system.
 func (x *FileSerialPortAttachment) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// True if the file should be opened in append mode, false otherwise.
+// Append true if the file should be opened in append mode, false otherwise.
 func (x *FileSerialPortAttachment) Append() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("append"))
 	return _r
@@ -93,3 +80,5 @@ type FileSerialPortAttachmentable interface {
 }
 
 var _ FileSerialPortAttachmentable = (*FileSerialPortAttachment)(nil)
+
+var _ SerialPortAttachmentProvider = (*FileSerialPortAttachment)(nil)

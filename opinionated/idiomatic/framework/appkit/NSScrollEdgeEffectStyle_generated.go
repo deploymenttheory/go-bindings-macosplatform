@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Styles for a scroll view’s edge effect.
-//
 // ScrollEdgeEffectStyle is an idiomatic wrapper over the Objective-C class NSScrollEdgeEffectStyle.
+//
+// Styles for a scroll view’s edge effect.
 type ScrollEdgeEffectStyle struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ScrollEdgeEffectStyleFromID(id objc.ID) *ScrollEdgeEffectStyle {
 	if id == 0 {
 		return nil
 	}
-	x := &ScrollEdgeEffectStyle{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScrollEdgeEffectStyle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func scrollEdgeEffectStyleAdopt(id objc.ID) *ScrollEdgeEffectStyle {
 	if id == 0 {
 		return nil
 	}
-	x := &ScrollEdgeEffectStyle{Handle: objref.Wrap(id)}
+	x := &ScrollEdgeEffectStyle{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *ScrollEdgeEffectStyle) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *ScrollEdgeEffectStyle) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScrollEdgeEffectStyle) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewScrollEdgeEffectStyle creates a new ScrollEdgeEffectStyle.

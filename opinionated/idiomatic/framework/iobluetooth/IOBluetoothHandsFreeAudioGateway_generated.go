@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that sends data to a connected Bluetooth hands-free phone or headset and processes commands from it.
-//
 // IOBluetoothHandsFreeAudioGateway is an idiomatic wrapper over the Objective-C class IOBluetoothHandsFreeAudioGateway.
+//
+// It embeds [IOBluetoothHandsFree], promoting that type's methods.
+//
+// An object that sends data to a connected Bluetooth hands-free phone or headset and processes commands from it.
 type IOBluetoothHandsFreeAudioGateway struct {
-	objref.Handle
+	IOBluetoothHandsFree
 }
 
 // IOBluetoothHandsFreeAudioGatewayFromID adopts an existing Objective-C object as a IOBluetoothHandsFreeAudioGateway
@@ -25,7 +26,8 @@ func IOBluetoothHandsFreeAudioGatewayFromID(id objc.ID) *IOBluetoothHandsFreeAud
 	if id == 0 {
 		return nil
 	}
-	x := &IOBluetoothHandsFreeAudioGateway{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IOBluetoothHandsFreeAudioGateway{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,96 +40,70 @@ func iOBluetoothHandsFreeAudioGatewayAdopt(id objc.ID) *IOBluetoothHandsFreeAudi
 	if id == 0 {
 		return nil
 	}
-	x := &IOBluetoothHandsFreeAudioGateway{Handle: objref.Wrap(id)}
+	x := &IOBluetoothHandsFreeAudioGateway{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *IOBluetoothHandsFreeAudioGateway) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IOBluetoothHandsFreeAudioGateway) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IOBluetoothHandsFreeAudioGateway) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates an object that controls a connected Bluetooth hands-free phone or headset.
-//
-// NewIOBluetoothHandsFreeAudioGatewayWithDeviceDelegate creates a new IOBluetoothHandsFreeAudioGateway.
+// NewIOBluetoothHandsFreeAudioGatewayWithDeviceDelegate creates an object that controls a connected Bluetooth hands-free phone or headset.
 func NewIOBluetoothHandsFreeAudioGatewayWithDeviceDelegate(device *IOBluetoothDevice, inDelegate obj.Object) *IOBluetoothHandsFreeAudioGateway {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IOBluetoothHandsFreeAudioGateway")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:delegate:"), objref.IDOf(device), objref.IDOf(inDelegate))
 	return iOBluetoothHandsFreeAudioGatewayAdopt(_id)
 }
 
-// Set the supported features
-//
-// WithSupportedFeatures sets supportedFeatures and returns the receiver so calls can be chained.
+// WithSupportedFeatures set the supported features
 func (x *IOBluetoothHandsFreeAudioGateway) WithSupportedFeatures(supportedFeatures uint32) *IOBluetoothHandsFreeAudioGateway {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedFeatures:"), supportedFeatures)
 	return x
 }
 
-// Return the input volume
-//
-// WithInputVolume sets inputVolume and returns the receiver so calls can be chained.
+// WithInputVolume return the input volume
 func (x *IOBluetoothHandsFreeAudioGateway) WithInputVolume(inputVolume float32) *IOBluetoothHandsFreeAudioGateway {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputVolume:"), inputVolume)
 	return x
 }
 
-// Return the input mute state.
-//
-// WithInputMuted sets inputMuted and returns the receiver so calls can be chained.
+// WithInputMuted return the input mute state.
 func (x *IOBluetoothHandsFreeAudioGateway) WithInputMuted(inputMuted bool) *IOBluetoothHandsFreeAudioGateway {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputMuted:"), inputMuted)
 	return x
 }
 
-// Return the output volume
-//
-// WithOutputVolume sets outputVolume and returns the receiver so calls can be chained.
+// WithOutputVolume return the output volume
 func (x *IOBluetoothHandsFreeAudioGateway) WithOutputVolume(outputVolume float32) *IOBluetoothHandsFreeAudioGateway {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputVolume:"), outputVolume)
 	return x
 }
 
-// Return the output mute state.
-//
-// WithOutputMuted sets outputMuted and returns the receiver so calls can be chained.
+// WithOutputMuted return the output mute state.
 func (x *IOBluetoothHandsFreeAudioGateway) WithOutputMuted(outputMuted bool) *IOBluetoothHandsFreeAudioGateway {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputMuted:"), outputMuted)
 	return x
 }
 
-// Sends a request to the Bluetooth device to show or update a status indicator.
+// CreateIndicatorMinMaxCurrentValue sends a request to the Bluetooth device to show or update a status indicator.
 func (x *IOBluetoothHandsFreeAudioGateway) CreateIndicatorMinMaxCurrentValue(indicatorName string, minValue int, maxValue int, currentValue int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createIndicator:min:max:currentValue:"), purego.NSString(indicatorName), minValue, maxValue, currentValue)
 }
 
-// Processes a command from a connected Bluetooth hands-free phone or headset.
+// ProcessATCommand processes a command from a connected Bluetooth hands-free phone or headset.
 func (x *IOBluetoothHandsFreeAudioGateway) ProcessATCommand(atCommand string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processATCommand:"), purego.NSString(atCommand))
 }
 
-// Sends a success message to a connected Bluetooth hands-free phone or headset.
+// SendOKResponse sends a success message to a connected Bluetooth hands-free phone or headset.
 func (x *IOBluetoothHandsFreeAudioGateway) SendOKResponse() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendOKResponse"))
 }
 
-// Sends data followed by a success message to a connected Bluetooth hands-free phone or headset.
+// SendResponse sends data followed by a success message to a connected Bluetooth hands-free phone or headset.
 func (x *IOBluetoothHandsFreeAudioGateway) SendResponse(response string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendResponse:"), purego.NSString(response))
 }
 
-// Sends data followed by an optional success message to a connected Bluetooth hands-free phone or headset.
+// SendResponseWithOK sends data followed by an optional success message to a connected Bluetooth hands-free phone or headset.
 func (x *IOBluetoothHandsFreeAudioGateway) SendResponseWithOK(response string, withOK bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendResponse:withOK:"), purego.NSString(response), withOK)
 }
@@ -148,3 +124,5 @@ type IOBluetoothHandsFreeAudioGatewayable interface {
 }
 
 var _ IOBluetoothHandsFreeAudioGatewayable = (*IOBluetoothHandsFreeAudioGateway)(nil)
+
+var _ IOBluetoothHandsFreeProvider = (*IOBluetoothHandsFreeAudioGateway)(nil)

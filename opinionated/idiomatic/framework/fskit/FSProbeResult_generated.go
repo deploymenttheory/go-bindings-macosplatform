@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the results of a specific probe.
-//
 // ProbeResult is an idiomatic wrapper over the Objective-C class FSProbeResult.
+//
+// An object that represents the results of a specific probe.
 type ProbeResult struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ProbeResultFromID(id objc.ID) *ProbeResult {
 	if id == 0 {
 		return nil
 	}
-	x := &ProbeResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ProbeResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func probeResultAdopt(id objc.ID) *ProbeResult {
 	if id == 0 {
 		return nil
 	}
-	x := &ProbeResult{Handle: objref.Wrap(id)}
+	x := &ProbeResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *ProbeResult) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ProbeResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewProbeResult creates a new ProbeResult.
 func NewProbeResult() *ProbeResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("FSProbeResult")), objc.RegisterName("new"))
 	return probeResultAdopt(_id)
 }
 
-// The match result, representing the recognition and usability of a probed resource.
+// Result the match result, representing the recognition and usability of a probed resource.
 func (x *ProbeResult) Result() MatchResult {
 	_r := objc.Send[MatchResult](objref.IDOf(x), objc.RegisterName("result"))
 	return _r
 }
 
-// The resource name, as found during the probe operation. This value is non-`nil` unless the “FSProbeResult/result“ is “FSMatchResult/notRecognized`. For formats that lack a name, this value may be an empty string. This value can also be an empty string if the format supports a name, but the value isn't set yet.
+// Name the resource name, as found during the probe operation. This value is non-`nil` unless the “FSProbeResult/result“ is “FSMatchResult/notRecognized`. For formats that lack a name, this value may be an empty string. This value can also be an empty string if the format supports a name, but the value isn't set yet.
 func (x *ProbeResult) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -79,7 +87,7 @@ func (x *ProbeResult) Name() string {
 	return purego.GoString(_r)
 }
 
-// The container identifier, as found during the probe operation. This value is non-`nil` unless the “FSProbeResult/result“ is “FSMatchResult/notRecognized“. For formats that lack a durable UUID on which to base a container identifier --- which is only legal for a “FSUnaryFileSystem“ --- this value may be a random UUID.
+// ContainerID the container identifier, as found during the probe operation. This value is non-`nil` unless the “FSProbeResult/result“ is “FSMatchResult/notRecognized“. For formats that lack a durable UUID on which to base a container identifier --- which is only legal for a “FSUnaryFileSystem“ --- this value may be a random UUID.
 func (x *ProbeResult) ContainerID() *ContainerIdentifier {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containerID"))
 	return ContainerIdentifierFromID(_r)

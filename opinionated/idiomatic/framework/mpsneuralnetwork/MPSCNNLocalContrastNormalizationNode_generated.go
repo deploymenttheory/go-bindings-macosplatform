@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // CNNLocalContrastNormalizationNode is an idiomatic wrapper over the Objective-C class MPSCNNLocalContrastNormalizationNode.
+//
+// It embeds [CNNNormalizationNode], promoting that type's methods.
 type CNNLocalContrastNormalizationNode struct {
-	objref.Handle
+	CNNNormalizationNode
 }
 
 // CNNLocalContrastNormalizationNodeFromID adopts an existing Objective-C object as a CNNLocalContrastNormalizationNode
@@ -23,7 +24,8 @@ func CNNLocalContrastNormalizationNodeFromID(id objc.ID) *CNNLocalContrastNormal
 	if id == 0 {
 		return nil
 	}
-	x := &CNNLocalContrastNormalizationNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNLocalContrastNormalizationNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func cNNLocalContrastNormalizationNodeAdopt(id objc.ID) *CNNLocalContrastNormali
 	if id == 0 {
 		return nil
 	}
-	x := &CNNLocalContrastNormalizationNode{Handle: objref.Wrap(id)}
+	x := &CNNLocalContrastNormalizationNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNLocalContrastNormalizationNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNLocalContrastNormalizationNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNLocalContrastNormalizationNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNLocalContrastNormalizationNodeWithSourceKernelSize creates a new CNNLocalContrastNormalizationNode.
@@ -70,109 +58,111 @@ func NewCNNLocalContrastNormalizationNodeWithSource(sourceNode *NNImageNode) *CN
 	return cNNLocalContrastNormalizationNodeAdopt(_id)
 }
 
-// WithPm sets pm and returns the receiver so calls can be chained.
+// WithPm sets the property and returns the receiver so calls can be chained.
 func (x *CNNLocalContrastNormalizationNode) WithPm(pm float32) *CNNLocalContrastNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPm:"), pm)
 	return x
 }
 
-// WithPs sets ps and returns the receiver so calls can be chained.
+// WithPs sets the property and returns the receiver so calls can be chained.
 func (x *CNNLocalContrastNormalizationNode) WithPs(ps float32) *CNNLocalContrastNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPs:"), ps)
 	return x
 }
 
-// WithP0 sets p0 and returns the receiver so calls can be chained.
+// WithP0 sets the property and returns the receiver so calls can be chained.
 func (x *CNNLocalContrastNormalizationNode) WithP0(p0 float32) *CNNLocalContrastNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setP0:"), p0)
 	return x
 }
 
-// WithKernelWidth sets kernelWidth and returns the receiver so calls can be chained.
+// WithKernelWidth sets the property and returns the receiver so calls can be chained.
 func (x *CNNLocalContrastNormalizationNode) WithKernelWidth(kernelWidth int) *CNNLocalContrastNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelWidth:"), kernelWidth)
 	return x
 }
 
-// WithKernelHeight sets kernelHeight and returns the receiver so calls can be chained.
+// WithKernelHeight sets the property and returns the receiver so calls can be chained.
 func (x *CNNLocalContrastNormalizationNode) WithKernelHeight(kernelHeight int) *CNNLocalContrastNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelHeight:"), kernelHeight)
 	return x
 }
 
-// The value of alpha.  Default is 1.0. Must be non-negative.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the value of alpha.  Default is 1.0. Must be non-negative.
 func (x *CNNLocalContrastNormalizationNode) WithAlpha(alpha float32) *CNNLocalContrastNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// The value of beta.  Default is 5.0
-//
-// WithBeta sets beta and returns the receiver so calls can be chained.
+// WithBeta the value of beta.  Default is 5.0
 func (x *CNNLocalContrastNormalizationNode) WithBeta(beta float32) *CNNLocalContrastNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
 	return x
 }
 
-// The value of delta.  Default is 1.0
-//
-// WithDelta sets delta and returns the receiver so calls can be chained.
+// WithDelta the value of delta.  Default is 1.0
 func (x *CNNLocalContrastNormalizationNode) WithDelta(delta float32) *CNNLocalContrastNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNLocalContrastNormalizationNode) WithLabel(label string) *CNNLocalContrastNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// Pm wraps the corresponding Objective-C method.
 func (x *CNNLocalContrastNormalizationNode) Pm() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("pm"))
 	return _r
 }
 
+// SetPm wraps the corresponding Objective-C method.
 func (x *CNNLocalContrastNormalizationNode) SetPm(pm float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPm:"), pm)
 }
 
+// Ps wraps the corresponding Objective-C method.
 func (x *CNNLocalContrastNormalizationNode) Ps() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("ps"))
 	return _r
 }
 
+// SetPs wraps the corresponding Objective-C method.
 func (x *CNNLocalContrastNormalizationNode) SetPs(ps float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPs:"), ps)
 }
 
+// P0 wraps the corresponding Objective-C method.
 func (x *CNNLocalContrastNormalizationNode) P0() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("p0"))
 	return _r
 }
 
+// SetP0 wraps the corresponding Objective-C method.
 func (x *CNNLocalContrastNormalizationNode) SetP0(p0 float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setP0:"), p0)
 }
 
+// KernelWidth wraps the corresponding Objective-C method.
 func (x *CNNLocalContrastNormalizationNode) KernelWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
+// SetKernelWidth wraps the corresponding Objective-C method.
 func (x *CNNLocalContrastNormalizationNode) SetKernelWidth(kernelWidth int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelWidth:"), kernelWidth)
 }
 
+// KernelHeight wraps the corresponding Objective-C method.
 func (x *CNNLocalContrastNormalizationNode) KernelHeight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
+// SetKernelHeight wraps the corresponding Objective-C method.
 func (x *CNNLocalContrastNormalizationNode) SetKernelHeight(kernelHeight int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelHeight:"), kernelHeight)
 }
@@ -202,3 +192,7 @@ type CNNLocalContrastNormalizationNodeable interface {
 }
 
 var _ CNNLocalContrastNormalizationNodeable = (*CNNLocalContrastNormalizationNode)(nil)
+
+var _ CNNNormalizationNodeProvider = (*CNNLocalContrastNormalizationNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNLocalContrastNormalizationNode)(nil)

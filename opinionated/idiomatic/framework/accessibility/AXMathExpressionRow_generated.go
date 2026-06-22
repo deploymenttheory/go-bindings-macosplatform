@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MathExpressionRow is an idiomatic wrapper over the Objective-C class AXMathExpressionRow.
+//
+// It embeds [MathExpression], promoting that type's methods.
 type MathExpressionRow struct {
-	objref.Handle
+	MathExpression
 }
 
 // MathExpressionRowFromID adopts an existing Objective-C object as a MathExpressionRow
@@ -23,7 +24,8 @@ func MathExpressionRowFromID(id objc.ID) *MathExpressionRow {
 	if id == 0 {
 		return nil
 	}
-	x := &MathExpressionRow{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MathExpressionRow{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mathExpressionRowAdopt(id objc.ID) *MathExpressionRow {
 	if id == 0 {
 		return nil
 	}
-	x := &MathExpressionRow{Handle: objref.Wrap(id)}
+	x := &MathExpressionRow{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MathExpressionRow) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MathExpressionRow) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MathExpressionRow) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMathExpressionRowWithExpressions creates a new MathExpressionRow.
@@ -63,6 +51,8 @@ func NewMathExpressionRowWithExpressions(expressions []*MathExpression) *MathExp
 	return mathExpressionRowAdopt(_id)
 }
 
+// Expressions wraps the corresponding Objective-C method.
+//
 // Expressions returns the collection as a Go slice.
 func (x *MathExpressionRow) Expressions() []*MathExpression {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expressions"))
@@ -76,3 +66,5 @@ type MathExpressionRowable interface {
 }
 
 var _ MathExpressionRowable = (*MathExpressionRow)(nil)
+
+var _ MathExpressionProvider = (*MathExpressionRow)(nil)

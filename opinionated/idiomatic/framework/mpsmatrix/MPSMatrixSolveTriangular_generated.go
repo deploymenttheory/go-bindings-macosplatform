@@ -6,15 +6,17 @@ package mpsmatrix
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MatrixSolveTriangular is an idiomatic wrapper over the Objective-C class MPSMatrixSolveTriangular.
+//
+// It embeds [MatrixBinaryKernel], promoting that type's methods.
 type MatrixSolveTriangular struct {
-	objref.Handle
+	MatrixBinaryKernel
 }
 
 // MatrixSolveTriangularFromID adopts an existing Objective-C object as a MatrixSolveTriangular
@@ -23,7 +25,8 @@ func MatrixSolveTriangularFromID(id objc.ID) *MatrixSolveTriangular {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixSolveTriangular{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatrixSolveTriangular{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +39,10 @@ func matrixSolveTriangularAdopt(id objc.ID) *MatrixSolveTriangular {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixSolveTriangular{Handle: objref.Wrap(id)}
+	x := &MatrixSolveTriangular{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MatrixSolveTriangular) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatrixSolveTriangular) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatrixSolveTriangular) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMatrixSolveTriangular creates a new MatrixSolveTriangular.
@@ -62,17 +51,31 @@ func NewMatrixSolveTriangular() *MatrixSolveTriangular {
 	return matrixSolveTriangularAdopt(_id)
 }
 
-// The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
-//
-// WithBatchStart sets batchStart and returns the receiver so calls can be chained.
+// WithPrimarySourceMatrixOrigin the origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixSolveTriangular) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceMatrixOrigin:"), primarySourceMatrixOrigin)
+	return x
+}
+
+// WithSecondarySourceMatrixOrigin the origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixSolveTriangular) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceMatrixOrigin:"), secondarySourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixSolveTriangular) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
 func (x *MatrixSolveTriangular) WithBatchStart(batchStart int) *MatrixSolveTriangular {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 	return x
 }
 
-// The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
-//
-// WithBatchSize sets batchSize and returns the receiver so calls can be chained.
+// WithBatchSize the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
 func (x *MatrixSolveTriangular) WithBatchSize(batchSize int) *MatrixSolveTriangular {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 	return x
@@ -81,8 +84,13 @@ func (x *MatrixSolveTriangular) WithBatchSize(batchSize int) *MatrixSolveTriangu
 // MatrixSolveTriangularable is the interface implemented by [MatrixSolveTriangular], for mocking and DI.
 type MatrixSolveTriangularable interface {
 	obj.Object
+	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular
+	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular
 	WithBatchStart(batchStart int) *MatrixSolveTriangular
 	WithBatchSize(batchSize int) *MatrixSolveTriangular
 }
 
 var _ MatrixSolveTriangularable = (*MatrixSolveTriangular)(nil)
+
+var _ MatrixBinaryKernelProvider = (*MatrixSolveTriangular)(nil)

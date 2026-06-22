@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that reports the state of a reaction effect performed on a capture device.
-//
 // CaptureReactionEffectState is an idiomatic wrapper over the Objective-C class AVCaptureReactionEffectState.
+//
+// An object that reports the state of a reaction effect performed on a capture device.
 type CaptureReactionEffectState struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CaptureReactionEffectStateFromID(id objc.ID) *CaptureReactionEffectState {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureReactionEffectState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptureReactionEffectState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func captureReactionEffectStateAdopt(id objc.ID) *CaptureReactionEffectState {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureReactionEffectState{Handle: objref.Wrap(id)}
+	x := &CaptureReactionEffectState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *CaptureReactionEffectState) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptureReactionEffectState) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCaptureReactionEffectState creates a new CaptureReactionEffectState.
 func NewCaptureReactionEffectState() *CaptureReactionEffectState {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureReactionEffectState")), objc.RegisterName("new"))
 	return captureReactionEffectStateAdopt(_id)
 }
 
-// Indicates the reaction which is running. There may be multiple reactions of the same type at a given time.  Some may come from gesture detection, some may come from calls to -[AVCaptureDevice performReactionEffect:]
+// ReactionType indicates the reaction which is running. There may be multiple reactions of the same type at a given time.  Some may come from gesture detection, some may come from calls to -[AVCaptureDevice performReactionEffect:]
 func (x *CaptureReactionEffectState) ReactionType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reactionType"))
 	return obj.Wrap(_r)

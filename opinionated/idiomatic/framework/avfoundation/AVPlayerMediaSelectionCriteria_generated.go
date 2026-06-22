@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that specifies the preferred languages and media characteristics for a player.
-//
 // PlayerMediaSelectionCriteria is an idiomatic wrapper over the Objective-C class AVPlayerMediaSelectionCriteria.
+//
+// An object that specifies the preferred languages and media characteristics for a player.
 type PlayerMediaSelectionCriteria struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PlayerMediaSelectionCriteriaFromID(id objc.ID) *PlayerMediaSelectionCriteri
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerMediaSelectionCriteria{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlayerMediaSelectionCriteria{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func playerMediaSelectionCriteriaAdopt(id objc.ID) *PlayerMediaSelectionCriteria
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerMediaSelectionCriteria{Handle: objref.Wrap(id)}
+	x := &PlayerMediaSelectionCriteria{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,36 +60,44 @@ func (x *PlayerMediaSelectionCriteria) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates media selection criteria with the preferred languages and media characteristics.
-//
-// NewPlayerMediaSelectionCriteriaWithPreferredLanguagesPreferredMediaCharacteristics creates a new PlayerMediaSelectionCriteria.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerMediaSelectionCriteria) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPlayerMediaSelectionCriteriaWithPreferredLanguagesPreferredMediaCharacteristics creates media selection criteria with the preferred languages and media characteristics.
 func NewPlayerMediaSelectionCriteriaWithPreferredLanguagesPreferredMediaCharacteristics(preferredLanguages []string, preferredMediaCharacteristics []obj.Object) *PlayerMediaSelectionCriteria {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerMediaSelectionCriteria")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPreferredLanguages:preferredMediaCharacteristics:"), purego.SliceToNSArray(preferredLanguages, func(_v string) objc.ID { return purego.NSString(_v) }), purego.SliceToNSArray(preferredMediaCharacteristics, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return playerMediaSelectionCriteriaAdopt(_id)
 }
 
-// Creates media selection criteria with the principal media characteristics, and preferred languages and media characteristics.
-//
-// NewPlayerMediaSelectionCriteriaWithPrincipalMediaCharacteristicsPreferredLanguagesPreferredMediaCharacteristics creates a new PlayerMediaSelectionCriteria.
+// NewPlayerMediaSelectionCriteriaWithPrincipalMediaCharacteristicsPreferredLanguagesPreferredMediaCharacteristics creates media selection criteria with the principal media characteristics, and preferred languages and media characteristics.
 func NewPlayerMediaSelectionCriteriaWithPrincipalMediaCharacteristicsPreferredLanguagesPreferredMediaCharacteristics(principalMediaCharacteristics []obj.Object, preferredLanguages []string, preferredMediaCharacteristics []obj.Object) *PlayerMediaSelectionCriteria {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerMediaSelectionCriteria")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPrincipalMediaCharacteristics:preferredLanguages:preferredMediaCharacteristics:"), purego.SliceToNSArray(principalMediaCharacteristics, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(preferredLanguages, func(_v string) objc.ID { return purego.NSString(_v) }), purego.SliceToNSArray(preferredMediaCharacteristics, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return playerMediaSelectionCriteriaAdopt(_id)
 }
 
+// PreferredLanguages wraps the corresponding Objective-C method.
+//
 // PreferredLanguages returns the collection as a Go slice.
 func (x *PlayerMediaSelectionCriteria) PreferredLanguages() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredLanguages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// PreferredMediaCharacteristics wraps the corresponding Objective-C method.
+//
 // PreferredMediaCharacteristics returns the collection as a Go slice.
 func (x *PlayerMediaSelectionCriteria) PreferredMediaCharacteristics() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredMediaCharacteristics"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// PrincipalMediaCharacteristics wraps the corresponding Objective-C method.
+//
 // PrincipalMediaCharacteristics returns the collection as a Go slice.
 func (x *PlayerMediaSelectionCriteria) PrincipalMediaCharacteristics() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("principalMediaCharacteristics"))

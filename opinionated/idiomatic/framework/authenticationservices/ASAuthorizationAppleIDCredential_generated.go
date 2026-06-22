@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A credential that results from a successful Apple ID authentication.
-//
 // AuthorizationAppleIDCredential is an idiomatic wrapper over the Objective-C class ASAuthorizationAppleIDCredential.
+//
+// A credential that results from a successful Apple ID authentication.
 type AuthorizationAppleIDCredential struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationAppleIDCredentialFromID(id objc.ID) *AuthorizationAppleIDCrede
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationAppleIDCredential{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationAppleIDCredential{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationAppleIDCredentialAdopt(id objc.ID) *AuthorizationAppleIDCreden
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationAppleIDCredential{Handle: objref.Wrap(id)}
+	x := &AuthorizationAppleIDCredential{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *AuthorizationAppleIDCredential) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationAppleIDCredential) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAuthorizationAppleIDCredential creates a new AuthorizationAppleIDCredential.
 func NewAuthorizationAppleIDCredential() *AuthorizationAppleIDCredential {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationAppleIDCredential")), objc.RegisterName("new"))
 	return authorizationAppleIDCredentialAdopt(_id)
 }
 
-// An opaque user ID associated with the AppleID used for the sign in. This identifier will be stable across the 'developer team', it can later be used as an input to
+// User an opaque user ID associated with the AppleID used for the sign in. This identifier will be stable across the 'developer team', it can later be used as an input to
 func (x *AuthorizationAppleIDCredential) User() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("user"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *AuthorizationAppleIDCredential) User() string {
 	return purego.GoString(_r)
 }
 
-// A copy of the state value that was passed to ASAuthorizationRequest.
+// State a copy of the state value that was passed to ASAuthorizationRequest.
 func (x *AuthorizationAppleIDCredential) State() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
 	if _r == 0 {
@@ -82,7 +90,7 @@ func (x *AuthorizationAppleIDCredential) State() string {
 	return purego.GoString(_r)
 }
 
-// This value will contain a list of scopes for which the user provided authorization.  These may contain a subset of the requested scopes on
+// AuthorizedScopes this value will contain a list of scopes for which the user provided authorization.  These may contain a subset of the requested scopes on
 //
 // AuthorizedScopes returns the collection as a Go slice.
 func (x *AuthorizationAppleIDCredential) AuthorizedScopes() []obj.Object {
@@ -90,19 +98,19 @@ func (x *AuthorizationAppleIDCredential) AuthorizedScopes() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// A short-lived, one-time valid token that provides proof of authorization to the server component of the app. The authorization code is bound to the specific transaction using the state attribute passed in the authorization request. The server component of the app can validate the code using Apple’s identity service endpoint provided for this purpose.
+// AuthorizationCode a short-lived, one-time valid token that provides proof of authorization to the server component of the app. The authorization code is bound to the specific transaction using the state attribute passed in the authorization request. The server component of the app can validate the code using Apple’s identity service endpoint provided for this purpose.
 func (x *AuthorizationAppleIDCredential) AuthorizationCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authorizationCode"))
 	return obj.Wrap(_r)
 }
 
-// A JSON Web Token (JWT) used to communicate information about the identity of the user in a secure way to the app. The ID token will contain the following information: Issuer Identifier, Subject Identifier, Audience, Expiry Time and Issuance Time signed by Apple's identity service.
+// IdentityToken a JSON Web Token (JWT) used to communicate information about the identity of the user in a secure way to the app. The ID token will contain the following information: Issuer Identifier, Subject Identifier, Audience, Expiry Time and Issuance Time signed by Apple's identity service.
 func (x *AuthorizationAppleIDCredential) IdentityToken() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identityToken"))
 	return obj.Wrap(_r)
 }
 
-// An optional email shared by the user.  This field is populated with a value that the user authorized.
+// Email an optional email shared by the user.  This field is populated with a value that the user authorized.
 func (x *AuthorizationAppleIDCredential) Email() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("email"))
 	if _r == 0 {
@@ -111,19 +119,19 @@ func (x *AuthorizationAppleIDCredential) Email() string {
 	return purego.GoString(_r)
 }
 
-// An optional full name shared by the user.  This field is populated with a value that the user authorized.
+// FullName an optional full name shared by the user.  This field is populated with a value that the user authorized.
 func (x *AuthorizationAppleIDCredential) FullName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullName"))
 	return obj.Wrap(_r)
 }
 
-// Check this property for a hint as to whether the current user is a "real user".
+// RealUserStatus check this property for a hint as to whether the current user is a "real user".
 func (x *AuthorizationAppleIDCredential) RealUserStatus() UserDetectionStatus {
 	_r := objc.Send[UserDetectionStatus](objref.IDOf(x), objc.RegisterName("realUserStatus"))
 	return _r
 }
 
-// Check this property to determine whether the current user is a child.
+// UserAgeRange check this property to determine whether the current user is a child.
 func (x *AuthorizationAppleIDCredential) UserAgeRange() UserAgeRange {
 	_r := objc.Send[UserAgeRange](objref.IDOf(x), objc.RegisterName("userAgeRange"))
 	return _r

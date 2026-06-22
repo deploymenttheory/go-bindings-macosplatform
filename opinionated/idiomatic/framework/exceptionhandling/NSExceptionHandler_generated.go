@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The NSExceptionHandler class provides facilities for monitoring and debugging exceptional conditions in Objective-C programs. It works by installing a special uncaught exception handler via the NSSetUncaughtExceptionHandler function. Consequently, to use the services of NSExceptionHandler, you must not install your own custom uncaught exception handler.
-//
 // ExceptionHandler is an idiomatic wrapper over the Objective-C class NSExceptionHandler.
+//
+// The NSExceptionHandler class provides facilities for monitoring and debugging exceptional conditions in Objective-C programs. It works by installing a special uncaught exception handler via the NSSetUncaughtExceptionHandler function. Consequently, to use the services of NSExceptionHandler, you must not install your own custom uncaught exception handler.
 type ExceptionHandler struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ExceptionHandlerFromID(id objc.ID) *ExceptionHandler {
 	if id == 0 {
 		return nil
 	}
-	x := &ExceptionHandler{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExceptionHandler{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func exceptionHandlerAdopt(id objc.ID) *ExceptionHandler {
 	if id == 0 {
 		return nil
 	}
-	x := &ExceptionHandler{Handle: objref.Wrap(id)}
+	x := &ExceptionHandler{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,40 +60,46 @@ func (x *ExceptionHandler) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExceptionHandler) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewExceptionHandler creates a new ExceptionHandler.
 func NewExceptionHandler() *ExceptionHandler {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSExceptionHandler")), objc.RegisterName("new"))
 	return exceptionHandlerAdopt(_id)
 }
 
-// Sets the bit mask of constants specifying the types of exceptions monitored by the receiver and its handling and logging behavior.
+// SetExceptionHandlingMask sets the bit mask of constants specifying the types of exceptions monitored by the receiver and its handling and logging behavior.
 func (x *ExceptionHandler) SetExceptionHandlingMask(aMask int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExceptionHandlingMask:"), aMask)
 }
 
-// Returns a bit mask representing the types of exceptions monitored by the receiver and its handling and logging behavior.
+// ExceptionHandlingMask returns a bit mask representing the types of exceptions monitored by the receiver and its handling and logging behavior.
 func (x *ExceptionHandler) ExceptionHandlingMask() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("exceptionHandlingMask"))
 	return _r
 }
 
-// Sets the bit mask of constants specifying the types of exceptions that will halt execution for debugging.
+// SetExceptionHangingMask sets the bit mask of constants specifying the types of exceptions that will halt execution for debugging.
 func (x *ExceptionHandler) SetExceptionHangingMask(aMask int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExceptionHangingMask:"), aMask)
 }
 
-// Returns a bit mask representing the types of exceptions that will halt execution for debugging.
+// ExceptionHangingMask returns a bit mask representing the types of exceptions that will halt execution for debugging.
 func (x *ExceptionHandler) ExceptionHangingMask() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("exceptionHangingMask"))
 	return _r
 }
 
-// Sets the delegate of the NSExceptionHandler object.
+// SetDelegate sets the delegate of the NSExceptionHandler object.
 func (x *ExceptionHandler) SetDelegate(anObject obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(anObject))
 }
 
-// Returns the delegate of the NSExceptionHandler object.
+// Delegate returns the delegate of the NSExceptionHandler object.
 func (x *ExceptionHandler) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)

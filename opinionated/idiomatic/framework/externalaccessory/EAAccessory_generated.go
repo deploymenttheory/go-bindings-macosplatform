@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains information about a single, connected hardware accessory.
-//
 // Accessory is an idiomatic wrapper over the Objective-C class EAAccessory.
+//
+// An object that contains information about a single, connected hardware accessory.
 type Accessory struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AccessoryFromID(id objc.ID) *Accessory {
 	if id == 0 {
 		return nil
 	}
-	x := &Accessory{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Accessory{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func accessoryAdopt(id objc.ID) *Accessory {
 	if id == 0 {
 		return nil
 	}
-	x := &Accessory{Handle: objref.Wrap(id)}
+	x := &Accessory{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,31 @@ func (x *Accessory) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Accessory) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAccessory creates a new Accessory.
 func NewAccessory() *Accessory {
 	_id := objc.Send[objc.ID](objc.ID(_class("EAAccessory")), objc.RegisterName("new"))
 	return accessoryAdopt(_id)
 }
 
+// IsConnected wraps the corresponding Objective-C method.
 func (x *Accessory) IsConnected() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConnected"))
 	return _r
 }
 
+// ConnectionID wraps the corresponding Objective-C method.
 func (x *Accessory) ConnectionID() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("connectionID"))
 	return _r
 }
 
+// DockType wraps the corresponding Objective-C method.
 func (x *Accessory) DockType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dockType"))
 	if _r == 0 {

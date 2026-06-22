@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents a graphics device in a VM.
-//
 // GraphicsDevice is an idiomatic wrapper over the Objective-C class VZGraphicsDevice.
+//
+// GraphicsDevice is an abstract base — you do not construct it directly. Construct one of [MacGraphicsDevice], [VirtioGraphicsDevice] and pass it where a GraphicsDevice is accepted.
+//
+// A class that represents a graphics device in a VM.
 type GraphicsDevice struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func GraphicsDeviceFromID(id objc.ID) *GraphicsDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphicsDevice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphicsDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func graphicsDeviceAdopt(id objc.ID) *GraphicsDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphicsDevice{Handle: objref.Wrap(id)}
+	x := &GraphicsDevice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +62,14 @@ func (x *GraphicsDevice) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewGraphicsDevice creates a new GraphicsDevice.
-func NewGraphicsDevice() *GraphicsDevice {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZGraphicsDevice")), objc.RegisterName("new"))
-	return graphicsDeviceAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GraphicsDevice) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// Displays wraps the corresponding Objective-C method.
+//
 // Displays returns the collection as a Go slice.
 func (x *GraphicsDevice) Displays() []*GraphicsDisplay {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displays"))
@@ -77,3 +83,10 @@ type GraphicsDeviceable interface {
 }
 
 var _ GraphicsDeviceable = (*GraphicsDevice)(nil)
+
+// isGraphicsDevice marks GraphicsDevice — and, by embedding promotion, its
+// subclasses — as a member of the GraphicsDevice hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *GraphicsDevice) isGraphicsDevice() {}
+
+var _ GraphicsDeviceProvider = (*GraphicsDevice)(nil)

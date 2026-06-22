@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object you use to configure frame processor for low-latency super-resolution scaler processing.
-//
 // LowLatencySuperResolutionScalerConfiguration is an idiomatic wrapper over the Objective-C class VTLowLatencySuperResolutionScalerConfiguration.
+//
+// An object you use to configure frame processor for low-latency super-resolution scaler processing.
 type LowLatencySuperResolutionScalerConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LowLatencySuperResolutionScalerConfigurationFromID(id objc.ID) *LowLatencyS
 	if id == 0 {
 		return nil
 	}
-	x := &LowLatencySuperResolutionScalerConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LowLatencySuperResolutionScalerConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func lowLatencySuperResolutionScalerConfigurationAdopt(id objc.ID) *LowLatencySu
 	if id == 0 {
 		return nil
 	}
-	x := &LowLatencySuperResolutionScalerConfiguration{Handle: objref.Wrap(id)}
+	x := &LowLatencySuperResolutionScalerConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,32 @@ func (x *LowLatencySuperResolutionScalerConfiguration) IsKind(className string) 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new low-latency super-resolution scaler configuration with specified frame width and height.
-//
-// NewLowLatencySuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactor creates a new LowLatencySuperResolutionScalerConfiguration.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LowLatencySuperResolutionScalerConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLowLatencySuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactor creates a new low-latency super-resolution scaler configuration with specified frame width and height.
 func NewLowLatencySuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactor(frameWidth int, frameHeight int, scaleFactor float32) *LowLatencySuperResolutionScalerConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VTLowLatencySuperResolutionScalerConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameWidth:frameHeight:scaleFactor:"), frameWidth, frameHeight, scaleFactor)
 	return lowLatencySuperResolutionScalerConfigurationAdopt(_id)
 }
 
-// Width of source frame in pixels.
+// FrameWidth width of source frame in pixels.
 func (x *LowLatencySuperResolutionScalerConfiguration) FrameWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameWidth"))
 	return _r
 }
 
-// Height of source frame in pixels.
+// FrameHeight height of source frame in pixels.
 func (x *LowLatencySuperResolutionScalerConfiguration) FrameHeight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameHeight"))
 	return _r
 }
 
-// Available supported pixel formats for source frames for current configuration.
+// FrameSupportedPixelFormats available supported pixel formats for source frames for current configuration.
 //
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (x *LowLatencySuperResolutionScalerConfiguration) FrameSupportedPixelFormats() []obj.Object {
@@ -87,19 +93,19 @@ func (x *LowLatencySuperResolutionScalerConfiguration) FrameSupportedPixelFormat
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+// SourcePixelBufferAttributes pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (x *LowLatencySuperResolutionScalerConfiguration) SourcePixelBufferAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourcePixelBufferAttributes"))
 	return obj.Wrap(_r)
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+// DestinationPixelBufferAttributes pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (x *LowLatencySuperResolutionScalerConfiguration) DestinationPixelBufferAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationPixelBufferAttributes"))
 	return obj.Wrap(_r)
 }
 
-// Scale factor with which you initialized the configuration.
+// ScaleFactor scale factor with which you initialized the configuration.
 func (x *LowLatencySuperResolutionScalerConfiguration) ScaleFactor() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("scaleFactor"))
 	return _r

@@ -11,64 +11,64 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns a new properties object with a dictionary of property states.
+// DevicePropertiesWithDictionary returns a new properties object with a dictionary of property states.
 func DevicePropertiesWithDictionary(propertiesDictionary obj.Object) *ExtensionDeviceProperties {
 	_r := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionDeviceProperties")), objc.RegisterName("devicePropertiesWithDictionary:"), objref.IDOf(propertiesDictionary))
 	return ExtensionDevicePropertiesFromID(_r)
 }
 
-// Returns a new property attributes object with the specified configuration.
+// PropertyAttributesWithMinValueMaxValueValidValuesReadOnly returns a new property attributes object with the specified configuration.
 func PropertyAttributesWithMinValueMaxValueValidValuesReadOnly(minValue obj.Object, maxValue obj.Object, validValues []obj.Object, readOnly bool) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionPropertyAttributes")), objc.RegisterName("propertyAttributesWithMinValue:maxValue:validValues:readOnly:"), objref.IDOf(minValue), objref.IDOf(maxValue), purego.SliceToNSArray(validValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), readOnly)
 	return obj.Wrap(_r)
 }
 
-// The class property representing a readOnly property attribute with no minValue/maxValue/validValues.
+// ReadOnlyPropertyAttribute the class property representing a readOnly property attribute with no minValue/maxValue/validValues.
 func ReadOnlyPropertyAttribute() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionPropertyAttributes")), objc.RegisterName("readOnlyPropertyAttribute"))
 	return obj.Wrap(_r)
 }
 
-// Returns a new property state with a value.
+// PropertyStateWithValue returns a new property state with a value.
 func PropertyStateWithValue(value obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionPropertyState")), objc.RegisterName("propertyStateWithValue:"), objref.IDOf(value))
 	return obj.Wrap(_r)
 }
 
-// Returns a new property state with a value and attributes.
+// PropertyStateWithValueAttributes returns a new property state with a value and attributes.
 func PropertyStateWithValueAttributes(value obj.Object, attributes obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionPropertyState")), objc.RegisterName("propertyStateWithValue:attributes:"), objref.IDOf(value), objref.IDOf(attributes))
 	return obj.Wrap(_r)
 }
 
-// Starts the system extension.
+// StartServiceWithProvider starts the system extension.
 func StartServiceWithProvider(provider *ExtensionProvider) {
 	objc.Send[objc.ID](objc.ID(_class("CMIOExtensionProvider")), objc.RegisterName("startServiceWithProvider:"), objref.IDOf(provider))
 }
 
-// Stops the CoreMediaIO Extension machinery. This should only be called in very rare circumstances.  For example, if an extension is present on a system and there is no possible way that it would ever create a device instance. It is suggested that this be called as soon as possible in the provider's lifecycle, and that the provider's ignoreSIGTERM method be called first. After calling this method the extension should exit.
+// StopServiceWithProvider stops the CoreMediaIO Extension machinery. This should only be called in very rare circumstances.  For example, if an extension is present on a system and there is no possible way that it would ever create a device instance. It is suggested that this be called as soon as possible in the provider's lifecycle, and that the provider's ignoreSIGTERM method be called first. After calling this method the extension should exit.
 func StopServiceWithProvider(provider *ExtensionProvider) {
 	objc.Send[objc.ID](objc.ID(_class("CMIOExtensionProvider")), objc.RegisterName("stopServiceWithProvider:"), objref.IDOf(provider))
 }
 
-// Directs provider class to ignore the SIGTERM signal. Call this method if your provider handles SIGTERM signals; NOTE: if so, your handler must call exit.
+// IgnoreSIGTERM directs provider class to ignore the SIGTERM signal. Call this method if your provider handles SIGTERM signals; NOTE: if so, your handler must call exit.
 func IgnoreSIGTERM() {
 	objc.Send[objc.ID](objc.ID(_class("CMIOExtensionProvider")), objc.RegisterName("ignoreSIGTERM"))
 }
 
-// Returns a new provider properties object with the specified properties.
+// ProviderPropertiesWithDictionary returns a new provider properties object with the specified properties.
 func ProviderPropertiesWithDictionary(propertiesDictionary obj.Object) *ExtensionProviderProperties {
 	_r := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionProviderProperties")), objc.RegisterName("providerPropertiesWithDictionary:"), objref.IDOf(propertiesDictionary))
 	return ExtensionProviderPropertiesFromID(_r)
 }
 
-// Returns a new scheduled output object.
+// ScheduledOutputWithSequenceNumberHostTimeInNanoseconds returns a new scheduled output object.
 func ScheduledOutputWithSequenceNumberHostTimeInNanoseconds(sequenceNumber uint64, hostTimeInNanoseconds uint64) *ExtensionScheduledOutput {
 	_r := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionScheduledOutput")), objc.RegisterName("scheduledOutputWithSequenceNumber:hostTimeInNanoseconds:"), sequenceNumber, hostTimeInNanoseconds)
 	return ExtensionScheduledOutputFromID(_r)
 }
 
-// Returns a new properties object that provides the specified properties and default states.
+// StreamPropertiesWithDictionary returns a new properties object that provides the specified properties and default states.
 func StreamPropertiesWithDictionary(propertiesDictionary obj.Object) *ExtensionStreamProperties {
 	_r := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionStreamProperties")), objc.RegisterName("streamPropertiesWithDictionary:"), objref.IDOf(propertiesDictionary))
 	return ExtensionStreamPropertiesFromID(_r)

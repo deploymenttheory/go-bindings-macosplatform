@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBasicClusterShutDownEvent is an idiomatic wrapper over the Objective-C class MTRBasicClusterShutDownEvent.
+//
+// It embeds [MTRBasicInformationClusterShutDownEvent], promoting that type's methods.
 type MTRBasicClusterShutDownEvent struct {
-	objref.Handle
+	MTRBasicInformationClusterShutDownEvent
 }
 
 // MTRBasicClusterShutDownEventFromID adopts an existing Objective-C object as a MTRBasicClusterShutDownEvent
@@ -23,7 +24,8 @@ func MTRBasicClusterShutDownEventFromID(id objc.ID) *MTRBasicClusterShutDownEven
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBasicClusterShutDownEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBasicClusterShutDownEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRBasicClusterShutDownEventAdopt(id objc.ID) *MTRBasicClusterShutDownEvent
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBasicClusterShutDownEvent{Handle: objref.Wrap(id)}
+	x := &MTRBasicClusterShutDownEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRBasicClusterShutDownEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBasicClusterShutDownEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBasicClusterShutDownEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRBasicClusterShutDownEvent creates a new MTRBasicClusterShutDownEvent.
@@ -68,3 +56,5 @@ type MTRBasicClusterShutDownEventable interface {
 }
 
 var _ MTRBasicClusterShutDownEventable = (*MTRBasicClusterShutDownEvent)(nil)
+
+var _ MTRBasicInformationClusterShutDownEventProvider = (*MTRBasicClusterShutDownEvent)(nil)

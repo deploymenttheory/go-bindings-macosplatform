@@ -13,6 +13,8 @@ import (
 )
 
 // MTRClusterPath is an idiomatic wrapper over the Objective-C class MTRClusterPath.
+//
+// MTRClusterPath is an abstract base — you do not construct it directly. Construct one of [MTRAttributePath], [MTRCommandPath], [MTREventPath] and pass it where a MTRClusterPath is accepted.
 type MTRClusterPath struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRClusterPathFromID(id objc.ID) *MTRClusterPath {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterPath{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterPath{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRClusterPathAdopt(id objc.ID) *MTRClusterPath {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterPath{Handle: objref.Wrap(id)}
+	x := &MTRClusterPath{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,17 +60,19 @@ func (x *MTRClusterPath) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRClusterPath creates a new MTRClusterPath.
-func NewMTRClusterPath() *MTRClusterPath {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRClusterPath")), objc.RegisterName("new"))
-	return mTRClusterPathAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRClusterPath) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// Endpoint wraps the corresponding Objective-C method.
 func (x *MTRClusterPath) Endpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)
 }
 
+// Cluster wraps the corresponding Objective-C method.
 func (x *MTRClusterPath) Cluster() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cluster"))
 	return obj.Wrap(_r)
@@ -80,3 +86,10 @@ type MTRClusterPathable interface {
 }
 
 var _ MTRClusterPathable = (*MTRClusterPath)(nil)
+
+// isMTRClusterPath marks MTRClusterPath — and, by embedding promotion, its
+// subclasses — as a member of the MTRClusterPath hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRClusterPath) isMTRClusterPath() {}
+
+var _ MTRClusterPathProvider = (*MTRClusterPath)(nil)

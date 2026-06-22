@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The data for a single motion update event.
-//
 // MotionActivity is an idiomatic wrapper over the Objective-C class CMMotionActivity.
+//
+// It embeds [LogItem], promoting that type's methods.
+//
+// The data for a single motion update event.
 type MotionActivity struct {
-	objref.Handle
+	LogItem
 }
 
 // MotionActivityFromID adopts an existing Objective-C object as a MotionActivity
@@ -25,7 +26,8 @@ func MotionActivityFromID(id objc.ID) *MotionActivity {
 	if id == 0 {
 		return nil
 	}
-	x := &MotionActivity{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MotionActivity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func motionActivityAdopt(id objc.ID) *MotionActivity {
 	if id == 0 {
 		return nil
 	}
-	x := &MotionActivity{Handle: objref.Wrap(id)}
+	x := &MotionActivity{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MotionActivity) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MotionActivity) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MotionActivity) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMotionActivity creates a new MotionActivity.
@@ -64,36 +52,43 @@ func NewMotionActivity() *MotionActivity {
 	return motionActivityAdopt(_id)
 }
 
+// Confidence wraps the corresponding Objective-C method.
 func (x *MotionActivity) Confidence() MotionActivityConfidence {
 	_r := objc.Send[MotionActivityConfidence](objref.IDOf(x), objc.RegisterName("confidence"))
 	return _r
 }
 
+// StartDate wraps the corresponding Objective-C method.
 func (x *MotionActivity) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
+// Unknown wraps the corresponding Objective-C method.
 func (x *MotionActivity) Unknown() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("unknown"))
 	return _r
 }
 
+// Stationary wraps the corresponding Objective-C method.
 func (x *MotionActivity) Stationary() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("stationary"))
 	return _r
 }
 
+// Walking wraps the corresponding Objective-C method.
 func (x *MotionActivity) Walking() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("walking"))
 	return _r
 }
 
+// Running wraps the corresponding Objective-C method.
 func (x *MotionActivity) Running() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("running"))
 	return _r
 }
 
+// Automotive wraps the corresponding Objective-C method.
 func (x *MotionActivity) Automotive() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automotive"))
 	return _r
@@ -112,3 +107,5 @@ type MotionActivityable interface {
 }
 
 var _ MotionActivityable = (*MotionActivity)(nil)
+
+var _ LogItemProvider = (*MotionActivity)(nil)

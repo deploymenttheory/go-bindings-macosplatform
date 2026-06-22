@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // CNNGroupNormalizationGradientState is an idiomatic wrapper over the Objective-C class MPSCNNGroupNormalizationGradientState.
+//
+// It embeds [NNGradientState], promoting that type's methods.
 type CNNGroupNormalizationGradientState struct {
-	objref.Handle
+	NNGradientState
 }
 
 // CNNGroupNormalizationGradientStateFromID adopts an existing Objective-C object as a CNNGroupNormalizationGradientState
@@ -23,7 +24,8 @@ func CNNGroupNormalizationGradientStateFromID(id objc.ID) *CNNGroupNormalization
 	if id == 0 {
 		return nil
 	}
-	x := &CNNGroupNormalizationGradientState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNGroupNormalizationGradientState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func cNNGroupNormalizationGradientStateAdopt(id objc.ID) *CNNGroupNormalizationG
 	if id == 0 {
 		return nil
 	}
-	x := &CNNGroupNormalizationGradientState{Handle: objref.Wrap(id)}
+	x := &CNNGroupNormalizationGradientState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNGroupNormalizationGradientState) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNGroupNormalizationGradientState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNGroupNormalizationGradientState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNGroupNormalizationGradientState creates a new CNNGroupNormalizationGradientState.
@@ -62,21 +50,19 @@ func NewCNNGroupNormalizationGradientState() *CNNGroupNormalizationGradientState
 	return cNNGroupNormalizationGradientStateAdopt(_id)
 }
 
-// WithReadCount sets readCount and returns the receiver so calls can be chained.
+// WithReadCount sets the property and returns the receiver so calls can be chained.
 func (x *CNNGroupNormalizationGradientState) WithReadCount(readCount int) *CNNGroupNormalizationGradientState {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNGroupNormalizationGradientState) WithLabel(label string) *CNNGroupNormalizationGradientState {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The MPSCNNGroupNormalization object that created this state object.
+// GroupNormalization the MPSCNNGroupNormalization object that created this state object.
 func (x *CNNGroupNormalizationGradientState) GroupNormalization() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupNormalization"))
 	return obj.Wrap(_r)
@@ -91,3 +77,7 @@ type CNNGroupNormalizationGradientStateable interface {
 }
 
 var _ CNNGroupNormalizationGradientStateable = (*CNNGroupNormalizationGradientState)(nil)
+
+var _ NNGradientStateProvider = (*CNNGroupNormalizationGradientState)(nil)
+
+var _ StateProvider = (*CNNGroupNormalizationGradientState)(nil)

@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ArrayAffineInt4Dequantize is an idiomatic wrapper over the Objective-C class MPSNDArrayAffineInt4Dequantize.
+//
+// It embeds [ArrayMultiaryKernel], promoting that type's methods.
 type ArrayAffineInt4Dequantize struct {
-	objref.Handle
+	ArrayMultiaryKernel
 }
 
 // ArrayAffineInt4DequantizeFromID adopts an existing Objective-C object as a ArrayAffineInt4Dequantize
@@ -23,7 +24,8 @@ func ArrayAffineInt4DequantizeFromID(id objc.ID) *ArrayAffineInt4Dequantize {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayAffineInt4Dequantize{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ArrayAffineInt4Dequantize{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func arrayAffineInt4DequantizeAdopt(id objc.ID) *ArrayAffineInt4Dequantize {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayAffineInt4Dequantize{Handle: objref.Wrap(id)}
+	x := &ArrayAffineInt4Dequantize{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ArrayAffineInt4Dequantize) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ArrayAffineInt4Dequantize) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ArrayAffineInt4Dequantize) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewArrayAffineInt4Dequantize creates a new ArrayAffineInt4Dequantize.
@@ -68,3 +56,7 @@ type ArrayAffineInt4Dequantizeable interface {
 }
 
 var _ ArrayAffineInt4Dequantizeable = (*ArrayAffineInt4Dequantize)(nil)
+
+var _ ArrayMultiaryKernelProvider = (*ArrayAffineInt4Dequantize)(nil)
+
+var _ ArrayMultiaryBaseProvider = (*ArrayAffineInt4Dequantize)(nil)

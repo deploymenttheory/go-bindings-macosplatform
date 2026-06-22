@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The options available when making a prediction.
-//
 // PredictionOptions is an idiomatic wrapper over the Objective-C class MLPredictionOptions.
+//
+// The options available when making a prediction.
 type PredictionOptions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PredictionOptionsFromID(id objc.ID) *PredictionOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &PredictionOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PredictionOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func predictionOptionsAdopt(id objc.ID) *PredictionOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &PredictionOptions{Handle: objref.Wrap(id)}
+	x := &PredictionOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,44 +60,48 @@ func (x *PredictionOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PredictionOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPredictionOptions creates a new PredictionOptions.
 func NewPredictionOptions() *PredictionOptions {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLPredictionOptions")), objc.RegisterName("new"))
 	return predictionOptionsAdopt(_id)
 }
 
-// A Boolean value that indicates whether a prediction is computed using only the CPU.
-//
-// WithUsesCPUOnly sets usesCPUOnly and returns the receiver so calls can be chained.
+// WithUsesCPUOnly a Boolean value that indicates whether a prediction is computed using only the CPU.
 func (x *PredictionOptions) WithUsesCPUOnly(usesCPUOnly bool) *PredictionOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// A dictionary of feature names and client-allocated buffers.
-//
-// WithOutputBackings sets outputBackings and returns the receiver so calls can be chained.
+// WithOutputBackings a dictionary of feature names and client-allocated buffers.
 func (x *PredictionOptions) WithOutputBackings(outputBackings obj.Object) *PredictionOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputBackings:"), objref.IDOf(outputBackings))
 	return x
 }
 
-// Set to YES to force computation to be on the CPU only
+// UsesCPUOnly set to YES to force computation to be on the CPU only
 func (x *PredictionOptions) UsesCPUOnly() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesCPUOnly"))
 	return _r
 }
 
+// SetUsesCPUOnly wraps the corresponding Objective-C method.
 func (x *PredictionOptions) SetUsesCPUOnly(usesCPUOnly bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 }
 
-// Propose the model to use the specified backing objects for the output feature values. Use the property to get the inference result directly into the client allocated buffer when possible for efficient memory management. The property is a dictionary of the feature name and the output backing object. The framework may not use the specified backing object and instead allocates one by itself if the outputBacking dictionary doesn't contain the entry for the feature name, the model doesn't support the user allocated buffers, or in the batch prediction mode. To check if the backing object was used, compare the output prediction and the backing object by object identity. \code CVPixelBufferRef outputBacking = ...; [options setOutputBackings:
+// OutputBackings propose the model to use the specified backing objects for the output feature values. Use the property to get the inference result directly into the client allocated buffer when possible for efficient memory management. The property is a dictionary of the feature name and the output backing object. The framework may not use the specified backing object and instead allocates one by itself if the outputBacking dictionary doesn't contain the entry for the feature name, the model doesn't support the user allocated buffers, or in the batch prediction mode. To check if the backing object was used, compare the output prediction and the backing object by object identity. \code CVPixelBufferRef outputBacking = ...; [options setOutputBackings:
 func (x *PredictionOptions) OutputBackings() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputBackings"))
 	return obj.Wrap(_r)
 }
 
+// SetOutputBackings wraps the corresponding Objective-C method.
 func (x *PredictionOptions) SetOutputBackings(outputBackings obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputBackings:"), objref.IDOf(outputBackings))
 }

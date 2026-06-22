@@ -25,7 +25,8 @@ func MTRWaterHeaterModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MTRW
 	if id == 0 {
 		return nil
 	}
-	x := &MTRWaterHeaterModeClusterChangeToModeResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRWaterHeaterModeClusterChangeToModeResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRWaterHeaterModeClusterChangeToModeResponseParamsAdopt(id objc.ID) *MTRWa
 	if id == 0 {
 		return nil
 	}
-	x := &MTRWaterHeaterModeClusterChangeToModeResponseParams{Handle: objref.Wrap(id)}
+	x := &MTRWaterHeaterModeClusterChangeToModeResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTRWaterHeaterModeClusterChangeToModeResponseParams) IsKind(className s
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRWaterHeaterModeClusterChangeToModeResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-//
-// NewMTRWaterHeaterModeClusterChangeToModeResponseParamsWithResponseValueError creates a new MTRWaterHeaterModeClusterChangeToModeResponseParams.
-func NewMTRWaterHeaterModeClusterChangeToModeResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRWaterHeaterModeClusterChangeToModeResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRWaterHeaterModeClusterChangeToModeResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRWaterHeaterModeClusterChangeToModeResponseParamsWithResponseValueError initialize an MTRWaterHeaterModeClusterChangeToModeResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRWaterHeaterModeClusterChangeToModeResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRWaterHeaterModeClusterChangeToModeResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRWaterHeaterModeClusterChangeToModeResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,27 +77,30 @@ func NewMTRWaterHeaterModeClusterChangeToModeResponseParamsWithResponseValueErro
 	return mTRWaterHeaterModeClusterChangeToModeResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets status and returns the receiver so calls can be chained.
+// WithStatus sets the property and returns the receiver so calls can be chained.
 func (x *MTRWaterHeaterModeClusterChangeToModeResponseParams) WithStatus(status obj.Object) *MTRWaterHeaterModeClusterChangeToModeResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return x
 }
 
-// WithStatusText sets statusText and returns the receiver so calls can be chained.
+// WithStatusText sets the property and returns the receiver so calls can be chained.
 func (x *MTRWaterHeaterModeClusterChangeToModeResponseParams) WithStatusText(statusText string) *MTRWaterHeaterModeClusterChangeToModeResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
 	return x
 }
 
+// Status wraps the corresponding Objective-C method.
 func (x *MTRWaterHeaterModeClusterChangeToModeResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
+// SetStatus wraps the corresponding Objective-C method.
 func (x *MTRWaterHeaterModeClusterChangeToModeResponseParams) SetStatus(status obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 }
 
+// StatusText wraps the corresponding Objective-C method.
 func (x *MTRWaterHeaterModeClusterChangeToModeResponseParams) StatusText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statusText"))
 	if _r == 0 {
@@ -100,6 +109,7 @@ func (x *MTRWaterHeaterModeClusterChangeToModeResponseParams) StatusText() strin
 	return purego.GoString(_r)
 }
 
+// SetStatusText wraps the corresponding Objective-C method.
 func (x *MTRWaterHeaterModeClusterChangeToModeResponseParams) SetStatusText(statusText string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
 }

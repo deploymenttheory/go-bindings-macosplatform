@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view that displays standard user interface controls for capturing media data.
-//
 // CaptureView is an idiomatic wrapper over the Objective-C class AVCaptureView.
+//
+// A view that displays standard user interface controls for capturing media data.
 type CaptureView struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CaptureViewFromID(id objc.ID) *CaptureView {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptureView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func captureViewAdopt(id objc.ID) *CaptureView {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureView{Handle: objref.Wrap(id)}
+	x := &CaptureView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,61 +60,65 @@ func (x *CaptureView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptureView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCaptureView creates a new CaptureView.
 func NewCaptureView() *CaptureView {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureView")), objc.RegisterName("new"))
 	return captureViewAdopt(_id)
 }
 
-// The style of the capture controls presented by the view.
-//
-// WithControlsStyle sets controlsStyle and returns the receiver so calls can be chained.
+// WithControlsStyle the style of the capture controls presented by the view.
 func (x *CaptureView) WithControlsStyle(controlsStyle CaptureViewControlsStyle) *CaptureView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlsStyle:"), controlsStyle)
 	return x
 }
 
-// A string value that defines how the capture view displays video within its bounds.
-//
-// WithVideoGravity sets videoGravity and returns the receiver so calls can be chained.
+// WithVideoGravity a string value that defines how the capture view displays video within its bounds.
 func (x *CaptureView) WithVideoGravity(videoGravity obj.Object) *CaptureView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
 	return x
 }
 
-// Sets the view’s capture session.
+// SetSessionShowVideoPreviewShowAudioPreview sets the view’s capture session.
 func (x *CaptureView) SetSessionShowVideoPreviewShowAudioPreview(session obj.Object, showVideoPreview bool, showAudioPreview bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSession:showVideoPreview:showAudioPreview:"), objref.IDOf(session), showVideoPreview, showAudioPreview)
 }
 
-// A capture session represented by this view. Modifying the capture session will impact its visual representation in the view. The default value is a session configured for movie file recordings of audio and video media data. Use -setSession:showVideoPreview:showAudioPreview: to change the value of this property.
+// Session a capture session represented by this view. Modifying the capture session will impact its visual representation in the view. The default value is a session configured for movie file recordings of audio and video media data. Use -setSession:showVideoPreview:showAudioPreview: to change the value of this property.
 func (x *CaptureView) Session() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("session"))
 	return obj.Wrap(_r)
 }
 
-// A capture file output used to record media data. The value of this property is the first instance of AVCaptureFileOutput contained in the session's outputs array or nil if no such instance is found. In the latter case the capture view's start recording button will be disabled. However, the controls for choosing input sources may still be enabled.
+// FileOutput a capture file output used to record media data. The value of this property is the first instance of AVCaptureFileOutput contained in the session's outputs array or nil if no such instance is found. In the latter case the capture view's start recording button will be disabled. However, the controls for choosing input sources may still be enabled.
 func (x *CaptureView) FileOutput() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileOutput"))
 	return obj.Wrap(_r)
 }
 
-// The style of the capture controls pane associated with the view.
+// ControlsStyle the style of the capture controls pane associated with the view.
 func (x *CaptureView) ControlsStyle() CaptureViewControlsStyle {
 	_r := objc.Send[CaptureViewControlsStyle](objref.IDOf(x), objc.RegisterName("controlsStyle"))
 	return _r
 }
 
+// SetControlsStyle wraps the corresponding Objective-C method.
 func (x *CaptureView) SetControlsStyle(controlsStyle CaptureViewControlsStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlsStyle:"), controlsStyle)
 }
 
-// A string defining how the video is displayed within the views bounds rect. Options are AVLayerVideoGravityResize, AVLayerVideoGravityResizeAspect and AVLayerVideoGravityResizeAspectFill. AVLayerVideoGravityResizeAspect is default.
+// VideoGravity a string defining how the video is displayed within the views bounds rect. Options are AVLayerVideoGravityResize, AVLayerVideoGravityResizeAspect and AVLayerVideoGravityResizeAspectFill. AVLayerVideoGravityResizeAspect is default.
 func (x *CaptureView) VideoGravity() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoGravity"))
 	return obj.Wrap(_r)
 }
 
+// SetVideoGravity wraps the corresponding Objective-C method.
 func (x *CaptureView) SetVideoGravity(videoGravity obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
 }

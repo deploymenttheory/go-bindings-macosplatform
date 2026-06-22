@@ -11,4 +11,5 @@ import (
 // FSObjectProvider is accepted wherever a DRFSObject (or one of its subclasses) is expected.
 type FSObjectProvider interface {
 	objref.Object
+	isFSObject()
 }

@@ -11,4 +11,5 @@ import (
 // BroadcastHandlerProvider is accepted wherever a RPBroadcastHandler (or one of its subclasses) is expected.
 type BroadcastHandlerProvider interface {
 	objref.Object
+	isBroadcastHandler()
 }

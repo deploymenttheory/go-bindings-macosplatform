@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An element that represents a map within project section content.
-//
 // ProjectMapElement is an idiomatic wrapper over the Objective-C class PHProjectMapElement.
+//
+// It embeds [ProjectElement], promoting that type's methods.
+//
+// An element that represents a map within project section content.
 type ProjectMapElement struct {
-	objref.Handle
+	ProjectElement
 }
 
 // ProjectMapElementFromID adopts an existing Objective-C object as a ProjectMapElement
@@ -25,7 +26,8 @@ func ProjectMapElementFromID(id objc.ID) *ProjectMapElement {
 	if id == 0 {
 		return nil
 	}
-	x := &ProjectMapElement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ProjectMapElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func projectMapElementAdopt(id objc.ID) *ProjectMapElement {
 	if id == 0 {
 		return nil
 	}
-	x := &ProjectMapElement{Handle: objref.Wrap(id)}
+	x := &ProjectMapElement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ProjectMapElement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ProjectMapElement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ProjectMapElement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewProjectMapElement creates a new ProjectMapElement.
@@ -64,11 +52,13 @@ func NewProjectMapElement() *ProjectMapElement {
 	return projectMapElementAdopt(_id)
 }
 
+// Pitch wraps the corresponding Objective-C method.
 func (x *ProjectMapElement) Pitch() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("pitch"))
 	return _r
 }
 
+// Annotations wraps the corresponding Objective-C method.
 func (x *ProjectMapElement) Annotations() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("annotations"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
@@ -82,3 +72,5 @@ type ProjectMapElementable interface {
 }
 
 var _ ProjectMapElementable = (*ProjectMapElement)(nil)
+
+var _ ProjectElementProvider = (*ProjectMapElement)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A node in a navigation graph, associated with a point in continuous 3D space.
-//
 // GraphNode3D is an idiomatic wrapper over the Objective-C class GKGraphNode3D.
+//
+// It embeds [GraphNode], promoting that type's methods.
+//
+// A node in a navigation graph, associated with a point in continuous 3D space.
 type GraphNode3D struct {
-	objref.Handle
+	GraphNode
 }
 
 // GraphNode3DFromID adopts an existing Objective-C object as a GraphNode3D
@@ -25,7 +26,8 @@ func GraphNode3DFromID(id objc.ID) *GraphNode3D {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphNode3D{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphNode3D{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func graphNode3DAdopt(id objc.ID) *GraphNode3D {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphNode3D{Handle: objref.Wrap(id)}
+	x := &GraphNode3D{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GraphNode3D) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphNode3D) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphNode3D) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGraphNode3D creates a new GraphNode3D.
@@ -70,3 +58,5 @@ type GraphNode3Dable interface {
 }
 
 var _ GraphNode3Dable = (*GraphNode3D)(nil)
+
+var _ GraphNodeProvider = (*GraphNode3D)(nil)

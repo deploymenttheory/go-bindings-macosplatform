@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents an audio graph for a live-updating, continuous data series for VoiceOver.
-//
 // LiveAudioGraph is an idiomatic wrapper over the Objective-C class AXLiveAudioGraph.
+//
+// An object that represents an audio graph for a live-updating, continuous data series for VoiceOver.
 type LiveAudioGraph struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LiveAudioGraphFromID(id objc.ID) *LiveAudioGraph {
 	if id == 0 {
 		return nil
 	}
-	x := &LiveAudioGraph{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LiveAudioGraph{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func liveAudioGraphAdopt(id objc.ID) *LiveAudioGraph {
 	if id == 0 {
 		return nil
 	}
-	x := &LiveAudioGraph{Handle: objref.Wrap(id)}
+	x := &LiveAudioGraph{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *LiveAudioGraph) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *LiveAudioGraph) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LiveAudioGraph) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewLiveAudioGraph creates a new LiveAudioGraph.

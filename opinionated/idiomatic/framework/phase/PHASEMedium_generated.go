@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A property or quality of the environment that affects how sound travels.
-//
 // Medium is an idiomatic wrapper over the Objective-C class PHASEMedium.
+//
+// A property or quality of the environment that affects how sound travels.
 type Medium struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MediumFromID(id objc.ID) *Medium {
 	if id == 0 {
 		return nil
 	}
-	x := &Medium{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Medium{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mediumAdopt(id objc.ID) *Medium {
 	if id == 0 {
 		return nil
 	}
-	x := &Medium{Handle: objref.Wrap(id)}
+	x := &Medium{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,9 +60,13 @@ func (x *Medium) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a medium.
-//
-// NewMediumWithEnginePreset creates a new Medium.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Medium) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMediumWithEnginePreset creates a medium.
 func NewMediumWithEnginePreset(engine *Engine, preset MediumPreset) *Medium {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEMedium")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:preset:"), objref.IDOf(engine), preset)

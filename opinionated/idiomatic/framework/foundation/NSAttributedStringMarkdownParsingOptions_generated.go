@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Options that affect the parsing of Markdown content into an attributed string.
-//
 // AttributedStringMarkdownParsingOptions is an idiomatic wrapper over the Objective-C class NSAttributedStringMarkdownParsingOptions.
+//
+// Options that affect the parsing of Markdown content into an attributed string.
 type AttributedStringMarkdownParsingOptions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AttributedStringMarkdownParsingOptionsFromID(id objc.ID) *AttributedStringM
 	if id == 0 {
 		return nil
 	}
-	x := &AttributedStringMarkdownParsingOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AttributedStringMarkdownParsingOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func attributedStringMarkdownParsingOptionsAdopt(id objc.ID) *AttributedStringMa
 	if id == 0 {
 		return nil
 	}
-	x := &AttributedStringMarkdownParsingOptions{Handle: objref.Wrap(id)}
+	x := &AttributedStringMarkdownParsingOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,85 +60,88 @@ func (x *AttributedStringMarkdownParsingOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AttributedStringMarkdownParsingOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAttributedStringMarkdownParsingOptions creates a new AttributedStringMarkdownParsingOptions.
 func NewAttributedStringMarkdownParsingOptions() *AttributedStringMarkdownParsingOptions {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSAttributedStringMarkdownParsingOptions")), objc.RegisterName("new"))
 	return attributedStringMarkdownParsingOptionsAdopt(_id)
 }
 
-// A Boolean value that indicates whether parsing allows extensions to Markdown that specify extended attributes.
-//
-// WithAllowsExtendedAttributes sets allowsExtendedAttributes and returns the receiver so calls can be chained.
+// WithAllowsExtendedAttributes a Boolean value that indicates whether parsing allows extensions to Markdown that specify extended attributes.
 func (x *AttributedStringMarkdownParsingOptions) WithAllowsExtendedAttributes(allowsExtendedAttributes bool) *AttributedStringMarkdownParsingOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExtendedAttributes:"), allowsExtendedAttributes)
 	return x
 }
 
-// The syntax for intepreting a Markdown string.
-//
-// WithInterpretedSyntax sets interpretedSyntax and returns the receiver so calls can be chained.
+// WithInterpretedSyntax the syntax for intepreting a Markdown string.
 func (x *AttributedStringMarkdownParsingOptions) WithInterpretedSyntax(interpretedSyntax AttributedStringMarkdownInterpretedSyntax) *AttributedStringMarkdownParsingOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpretedSyntax:"), interpretedSyntax)
 	return x
 }
 
-// The policy for handling a parsing failure.
-//
-// WithFailurePolicy sets failurePolicy and returns the receiver so calls can be chained.
+// WithFailurePolicy the policy for handling a parsing failure.
 func (x *AttributedStringMarkdownParsingOptions) WithFailurePolicy(failurePolicy AttributedStringMarkdownParsingFailurePolicy) *AttributedStringMarkdownParsingOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFailurePolicy:"), failurePolicy)
 	return x
 }
 
-// The BCP-47 language code for this document.
-//
-// WithLanguageCode sets languageCode and returns the receiver so calls can be chained.
+// WithLanguageCode the BCP-47 language code for this document.
 func (x *AttributedStringMarkdownParsingOptions) WithLanguageCode(languageCode StringProvider) *AttributedStringMarkdownParsingOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguageCode:"), objref.IDOf(languageCode))
 	return x
 }
 
-// A Boolean value that indicates whether parsing applies attributes that indicate the position of attributed text in the original Markdown string.
-//
-// WithAppliesSourcePositionAttributes sets appliesSourcePositionAttributes and returns the receiver so calls can be chained.
+// WithAppliesSourcePositionAttributes a Boolean value that indicates whether parsing applies attributes that indicate the position of attributed text in the original Markdown string.
 func (x *AttributedStringMarkdownParsingOptions) WithAppliesSourcePositionAttributes(appliesSourcePositionAttributes bool) *AttributedStringMarkdownParsingOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesSourcePositionAttributes:"), appliesSourcePositionAttributes)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *AttributedStringMarkdownParsingOptions) WithScriptingProperties(scriptingProperties obj.Object) *AttributedStringMarkdownParsingOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// AllowsExtendedAttributes wraps the corresponding Objective-C method.
 func (x *AttributedStringMarkdownParsingOptions) AllowsExtendedAttributes() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsExtendedAttributes"))
 	return _r
 }
 
+// SetAllowsExtendedAttributes wraps the corresponding Objective-C method.
 func (x *AttributedStringMarkdownParsingOptions) SetAllowsExtendedAttributes(allowsExtendedAttributes bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExtendedAttributes:"), allowsExtendedAttributes)
 }
 
+// InterpretedSyntax wraps the corresponding Objective-C method.
 func (x *AttributedStringMarkdownParsingOptions) InterpretedSyntax() AttributedStringMarkdownInterpretedSyntax {
 	_r := objc.Send[AttributedStringMarkdownInterpretedSyntax](objref.IDOf(x), objc.RegisterName("interpretedSyntax"))
 	return _r
 }
 
+// SetInterpretedSyntax wraps the corresponding Objective-C method.
 func (x *AttributedStringMarkdownParsingOptions) SetInterpretedSyntax(interpretedSyntax AttributedStringMarkdownInterpretedSyntax) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpretedSyntax:"), interpretedSyntax)
 }
 
+// FailurePolicy wraps the corresponding Objective-C method.
 func (x *AttributedStringMarkdownParsingOptions) FailurePolicy() AttributedStringMarkdownParsingFailurePolicy {
 	_r := objc.Send[AttributedStringMarkdownParsingFailurePolicy](objref.IDOf(x), objc.RegisterName("failurePolicy"))
 	return _r
 }
 
+// SetFailurePolicy wraps the corresponding Objective-C method.
 func (x *AttributedStringMarkdownParsingOptions) SetFailurePolicy(failurePolicy AttributedStringMarkdownParsingFailurePolicy) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFailurePolicy:"), failurePolicy)
 }
 
+// LanguageCode wraps the corresponding Objective-C method.
 func (x *AttributedStringMarkdownParsingOptions) LanguageCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageCode"))
 	if _r == 0 {
@@ -145,15 +150,18 @@ func (x *AttributedStringMarkdownParsingOptions) LanguageCode() string {
 	return purego.GoString(_r)
 }
 
+// SetLanguageCode wraps the corresponding Objective-C method.
 func (x *AttributedStringMarkdownParsingOptions) SetLanguageCode(languageCode string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguageCode:"), purego.NSString(languageCode))
 }
 
+// AppliesSourcePositionAttributes wraps the corresponding Objective-C method.
 func (x *AttributedStringMarkdownParsingOptions) AppliesSourcePositionAttributes() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appliesSourcePositionAttributes"))
 	return _r
 }
 
+// SetAppliesSourcePositionAttributes wraps the corresponding Objective-C method.
 func (x *AttributedStringMarkdownParsingOptions) SetAppliesSourcePositionAttributes(appliesSourcePositionAttributes bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesSourcePositionAttributes:"), appliesSourcePositionAttributes)
 }

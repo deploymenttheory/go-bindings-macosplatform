@@ -25,7 +25,8 @@ func MTRChannelClusterProgramGuideResponseParamsFromID(id objc.ID) *MTRChannelCl
 	if id == 0 {
 		return nil
 	}
-	x := &MTRChannelClusterProgramGuideResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRChannelClusterProgramGuideResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRChannelClusterProgramGuideResponseParamsAdopt(id objc.ID) *MTRChannelClu
 	if id == 0 {
 		return nil
 	}
-	x := &MTRChannelClusterProgramGuideResponseParams{Handle: objref.Wrap(id)}
+	x := &MTRChannelClusterProgramGuideResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTRChannelClusterProgramGuideResponseParams) IsKind(className string) b
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRChannelClusterProgramGuideResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-//
-// NewMTRChannelClusterProgramGuideResponseParamsWithResponseValueError creates a new MTRChannelClusterProgramGuideResponseParams.
-func NewMTRChannelClusterProgramGuideResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRChannelClusterProgramGuideResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRChannelClusterProgramGuideResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRChannelClusterProgramGuideResponseParamsWithResponseValueError initialize an MTRChannelClusterProgramGuideResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRChannelClusterProgramGuideResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRChannelClusterProgramGuideResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRChannelClusterProgramGuideResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,26 +77,30 @@ func NewMTRChannelClusterProgramGuideResponseParamsWithResponseValueError(respon
 	return mTRChannelClusterProgramGuideResponseParamsAdopt(_id), nil
 }
 
-// WithPaging sets paging and returns the receiver so calls can be chained.
+// WithPaging sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterProgramGuideResponseParams) WithPaging(paging *MTRChannelClusterChannelPagingStruct) *MTRChannelClusterProgramGuideResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaging:"), objref.IDOf(paging))
 	return x
 }
 
+// Paging wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterProgramGuideResponseParams) Paging() *MTRChannelClusterChannelPagingStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paging"))
 	return MTRChannelClusterChannelPagingStructFromID(_r)
 }
 
+// SetPaging wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterProgramGuideResponseParams) SetPaging(paging *MTRChannelClusterChannelPagingStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaging:"), objref.IDOf(paging))
 }
 
+// ProgramList wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterProgramGuideResponseParams) ProgramList() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("programList"))
 	return obj.Wrap(_r)
 }
 
+// SetProgramList wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterProgramGuideResponseParams) SetProgramList(programList obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgramList:"), objref.IDOf(programList))
 }

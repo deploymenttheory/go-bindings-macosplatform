@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a MIDI control change message.
-//
 // MIDIControlChangeEvent is an idiomatic wrapper over the Objective-C class AVMIDIControlChangeEvent.
+//
+// It embeds [MIDIChannelEvent], promoting that type's methods.
+//
+// An object that represents a MIDI control change message.
 type MIDIControlChangeEvent struct {
-	objref.Handle
+	MIDIChannelEvent
 }
 
 // MIDIControlChangeEventFromID adopts an existing Objective-C object as a MIDIControlChangeEvent
@@ -25,7 +26,8 @@ func MIDIControlChangeEventFromID(id objc.ID) *MIDIControlChangeEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MIDIControlChangeEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MIDIControlChangeEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,48 +40,32 @@ func mIDIControlChangeEventAdopt(id objc.ID) *MIDIControlChangeEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MIDIControlChangeEvent{Handle: objref.Wrap(id)}
+	x := &MIDIControlChangeEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MIDIControlChangeEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MIDIControlChangeEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MIDIControlChangeEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates an event with a channel, control change type, and a value.
-//
-// NewMIDIControlChangeEventWithChannelMessageTypeValue creates a new MIDIControlChangeEvent.
+// NewMIDIControlChangeEventWithChannelMessageTypeValue creates an event with a channel, control change type, and a value.
 func NewMIDIControlChangeEventWithChannelMessageTypeValue(channel int, messageType MIDIControlChangeMessageType, value int) *MIDIControlChangeEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMIDIControlChangeEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannel:messageType:value:"), channel, messageType, value)
 	return mIDIControlChangeEventAdopt(_id)
 }
 
-// The MIDI channel.
-//
-// WithChannel sets channel and returns the receiver so calls can be chained.
+// WithChannel the MIDI channel.
 func (x *MIDIControlChangeEvent) WithChannel(channel int) *MIDIControlChangeEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
 	return x
 }
 
+// MessageType wraps the corresponding Objective-C method.
 func (x *MIDIControlChangeEvent) MessageType() MIDIControlChangeMessageType {
 	_r := objc.Send[MIDIControlChangeMessageType](objref.IDOf(x), objc.RegisterName("messageType"))
 	return _r
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *MIDIControlChangeEvent) Value() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("value"))
 	return _r
@@ -94,3 +80,7 @@ type MIDIControlChangeEventable interface {
 }
 
 var _ MIDIControlChangeEventable = (*MIDIControlChangeEvent)(nil)
+
+var _ MIDIChannelEventProvider = (*MIDIControlChangeEvent)(nil)
+
+var _ MusicEventProvider = (*MIDIControlChangeEvent)(nil)

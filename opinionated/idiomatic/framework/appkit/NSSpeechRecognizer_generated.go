@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The Cocoa interface to speech recognition in macOS.
-//
 // SpeechRecognizer is an idiomatic wrapper over the Objective-C class NSSpeechRecognizer.
+//
+// The Cocoa interface to speech recognition in macOS.
 type SpeechRecognizer struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SpeechRecognizerFromID(id objc.ID) *SpeechRecognizer {
 	if id == 0 {
 		return nil
 	}
-	x := &SpeechRecognizer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SpeechRecognizer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func speechRecognizerAdopt(id objc.ID) *SpeechRecognizer {
 	if id == 0 {
 		return nil
 	}
-	x := &SpeechRecognizer{Handle: objref.Wrap(id)}
+	x := &SpeechRecognizer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,65 +60,67 @@ func (x *SpeechRecognizer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpeechRecognizer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSpeechRecognizer creates a new SpeechRecognizer.
 func NewSpeechRecognizer() *SpeechRecognizer {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSSpeechRecognizer")), objc.RegisterName("new"))
 	return speechRecognizerAdopt(_id)
 }
 
-// An array of strings defining the commands for which the speech recognizer object should listen.
-//
-// WithCommands sets the collection and returns the receiver so calls can be chained.
+// WithCommands an array of strings defining the commands for which the speech recognizer object should listen.
 func (x *SpeechRecognizer) WithCommands(items ...obj.Object) *SpeechRecognizer {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommands:"), _arr)
 	return x
 }
 
-// The title of the commands section in the Speech Commands window or nil if there is no title.
-//
-// WithDisplayedCommandsTitle sets displayedCommandsTitle and returns the receiver so calls can be chained.
+// WithDisplayedCommandsTitle the title of the commands section in the Speech Commands window or nil if there is no title.
 func (x *SpeechRecognizer) WithDisplayedCommandsTitle(displayedCommandsTitle string) *SpeechRecognizer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayedCommandsTitle:"), purego.NSString(displayedCommandsTitle))
 	return x
 }
 
-// A Boolean value that indicates whether the speech recognizer object should only enable its commands when its application is the frontmost one.
-//
-// WithListensInForegroundOnly sets listensInForegroundOnly and returns the receiver so calls can be chained.
+// WithListensInForegroundOnly a Boolean value that indicates whether the speech recognizer object should only enable its commands when its application is the frontmost one.
 func (x *SpeechRecognizer) WithListensInForegroundOnly(listensInForegroundOnly bool) *SpeechRecognizer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListensInForegroundOnly:"), listensInForegroundOnly)
 	return x
 }
 
-// A Boolean value that indicates whether the speech recognizer object should block all other recognizers (that is, other applications attempting to understand spoken commands) when listening.
-//
-// WithBlocksOtherRecognizers sets blocksOtherRecognizers and returns the receiver so calls can be chained.
+// WithBlocksOtherRecognizers a Boolean value that indicates whether the speech recognizer object should block all other recognizers (that is, other applications attempting to understand spoken commands) when listening.
 func (x *SpeechRecognizer) WithBlocksOtherRecognizers(blocksOtherRecognizers bool) *SpeechRecognizer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlocksOtherRecognizers:"), blocksOtherRecognizers)
 	return x
 }
 
-// Tells the speech recognition engine to begin listening for commands.
+// StartListening tells the speech recognition engine to begin listening for commands.
 func (x *SpeechRecognizer) StartListening() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startListening"))
 }
 
-// Tells the speech recognition engine to suspend listening for commands.
+// StopListening tells the speech recognition engine to suspend listening for commands.
 func (x *SpeechRecognizer) StopListening() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopListening"))
 }
 
+// Commands wraps the corresponding Objective-C method.
+//
 // Commands returns the collection as a Go slice.
 func (x *SpeechRecognizer) Commands() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commands"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetCommands wraps the corresponding Objective-C method.
 func (x *SpeechRecognizer) SetCommands(commands []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommands:"), purego.SliceToNSArray(commands, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// DisplayedCommandsTitle wraps the corresponding Objective-C method.
 func (x *SpeechRecognizer) DisplayedCommandsTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayedCommandsTitle"))
 	if _r == 0 {
@@ -125,24 +129,29 @@ func (x *SpeechRecognizer) DisplayedCommandsTitle() string {
 	return purego.GoString(_r)
 }
 
+// SetDisplayedCommandsTitle wraps the corresponding Objective-C method.
 func (x *SpeechRecognizer) SetDisplayedCommandsTitle(displayedCommandsTitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayedCommandsTitle:"), purego.NSString(displayedCommandsTitle))
 }
 
+// ListensInForegroundOnly wraps the corresponding Objective-C method.
 func (x *SpeechRecognizer) ListensInForegroundOnly() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("listensInForegroundOnly"))
 	return _r
 }
 
+// SetListensInForegroundOnly wraps the corresponding Objective-C method.
 func (x *SpeechRecognizer) SetListensInForegroundOnly(listensInForegroundOnly bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListensInForegroundOnly:"), listensInForegroundOnly)
 }
 
+// BlocksOtherRecognizers wraps the corresponding Objective-C method.
 func (x *SpeechRecognizer) BlocksOtherRecognizers() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("blocksOtherRecognizers"))
 	return _r
 }
 
+// SetBlocksOtherRecognizers wraps the corresponding Objective-C method.
 func (x *SpeechRecognizer) SetBlocksOtherRecognizers(blocksOtherRecognizers bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlocksOtherRecognizers:"), blocksOtherRecognizers)
 }

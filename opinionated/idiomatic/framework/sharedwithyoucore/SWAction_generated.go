@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a collaboration action.
-//
 // Action is an idiomatic wrapper over the Objective-C class SWAction.
+//
+// Action is an abstract base — you do not construct it directly. Construct one of [StartCollaborationAction], [UpdateCollaborationParticipantsAction] and pass it where a Action is accepted.
+//
+// An object that represents a collaboration action.
 type Action struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ActionFromID(id objc.ID) *Action {
 	if id == 0 {
 		return nil
 	}
-	x := &Action{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Action{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func actionAdopt(id objc.ID) *Action {
 	if id == 0 {
 		return nil
 	}
-	x := &Action{Handle: objref.Wrap(id)}
+	x := &Action{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,27 +62,29 @@ func (x *Action) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewAction creates a new Action.
-func NewAction() *Action {
-	_id := objc.Send[objc.ID](objc.ID(_class("SWAction")), objc.RegisterName("new"))
-	return actionAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Action) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Reports a successful execution of the action.
+// Fulfill reports a successful execution of the action.
 func (x *Action) Fulfill() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fulfill"))
 }
 
-// Reports a failed execution of the action.
+// Fail reports a failed execution of the action.
 func (x *Action) Fail() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fail"))
 }
 
+// Uuid wraps the corresponding Objective-C method.
 func (x *Action) Uuid() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uuid"))
 	return obj.Wrap(_r)
 }
 
+// IsComplete wraps the corresponding Objective-C method.
 func (x *Action) IsComplete() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isComplete"))
 	return _r
@@ -94,3 +100,10 @@ type Actionable interface {
 }
 
 var _ Actionable = (*Action)(nil)
+
+// isAction marks Action — and, by embedding promotion, its
+// subclasses — as a member of the Action hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Action) isAction() {}
+
+var _ ActionProvider = (*Action)(nil)

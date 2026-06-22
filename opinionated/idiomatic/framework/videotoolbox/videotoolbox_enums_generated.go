@@ -18,6 +18,8 @@ const (
 	KVTCompressionSessionBeginFinalPass CompressionSessionOptionFlags = 1
 )
 
+// String returns the CompressionSessionOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CompressionSessionOptionFlags) String() string {
 	var parts []string
 	if e&KVTCompressionSessionBeginFinalPass != 0 {
@@ -44,6 +46,8 @@ const (
 	KVTDecodeFrame_EnableTemporalProcessing DecodeFrameFlags = 8
 )
 
+// String returns the DecodeFrameFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DecodeFrameFlags) String() string {
 	var parts []string
 	if e&KVTDecodeFrame_EnableAsynchronousDecompression != 0 {
@@ -71,6 +75,8 @@ const (
 	FrameRateConversionConfigurationQualityPrioritizationQuality FrameRateConversionConfigurationQualityPrioritization = 2
 )
 
+// String returns the FrameRateConversionConfigurationQualityPrioritization constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FrameRateConversionConfigurationQualityPrioritization) String() string {
 	switch e {
 	case FrameRateConversionConfigurationQualityPrioritizationNormal:
@@ -88,6 +94,8 @@ const (
 	FrameRateConversionConfigurationRevision1 FrameRateConversionConfigurationRevision = 1
 )
 
+// String returns the FrameRateConversionConfigurationRevision constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FrameRateConversionConfigurationRevision) String() string {
 	switch e {
 	case FrameRateConversionConfigurationRevision1:
@@ -108,6 +116,8 @@ const (
 	FrameRateConversionParametersSubmissionModeSequentialReferencesUnchanged FrameRateConversionParametersSubmissionMode = 3
 )
 
+// String returns the FrameRateConversionParametersSubmissionMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FrameRateConversionParametersSubmissionMode) String() string {
 	switch e {
 	case FrameRateConversionParametersSubmissionModeRandom:
@@ -128,6 +138,8 @@ const (
 	MotionBlurConfigurationQualityPrioritizationQuality MotionBlurConfigurationQualityPrioritization = 2
 )
 
+// String returns the MotionBlurConfigurationQualityPrioritization constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MotionBlurConfigurationQualityPrioritization) String() string {
 	switch e {
 	case MotionBlurConfigurationQualityPrioritizationNormal:
@@ -145,6 +157,8 @@ const (
 	MotionBlurConfigurationRevision1 MotionBlurConfigurationRevision = 1
 )
 
+// String returns the MotionBlurConfigurationRevision constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MotionBlurConfigurationRevision) String() string {
 	switch e {
 	case MotionBlurConfigurationRevision1:
@@ -161,6 +175,8 @@ const (
 	MotionBlurParametersSubmissionModeSequential MotionBlurParametersSubmissionMode = 2
 )
 
+// String returns the MotionBlurParametersSubmissionMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MotionBlurParametersSubmissionMode) String() string {
 	switch e {
 	case MotionBlurParametersSubmissionModeRandom:
@@ -179,6 +195,8 @@ const (
 	OpticalFlowConfigurationQualityPrioritizationQuality OpticalFlowConfigurationQualityPrioritization = 2
 )
 
+// String returns the OpticalFlowConfigurationQualityPrioritization constant's name, or its numeric form when the
+// value is not a known constant.
 func (e OpticalFlowConfigurationQualityPrioritization) String() string {
 	switch e {
 	case OpticalFlowConfigurationQualityPrioritizationNormal:
@@ -196,6 +214,8 @@ const (
 	OpticalFlowConfigurationRevision1 OpticalFlowConfigurationRevision = 1
 )
 
+// String returns the OpticalFlowConfigurationRevision constant's name, or its numeric form when the
+// value is not a known constant.
 func (e OpticalFlowConfigurationRevision) String() string {
 	switch e {
 	case OpticalFlowConfigurationRevision1:
@@ -212,6 +232,8 @@ const (
 	OpticalFlowParametersSubmissionModeSequential OpticalFlowParametersSubmissionMode = 2
 )
 
+// String returns the OpticalFlowParametersSubmissionMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e OpticalFlowParametersSubmissionMode) String() string {
 	switch e {
 	case OpticalFlowParametersSubmissionModeRandom:
@@ -230,6 +252,8 @@ const (
 	SuperResolutionScalerConfigurationInputTypeImage SuperResolutionScalerConfigurationInputType = 2
 )
 
+// String returns the SuperResolutionScalerConfigurationInputType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SuperResolutionScalerConfigurationInputType) String() string {
 	switch e {
 	case SuperResolutionScalerConfigurationInputTypeVideo:
@@ -249,6 +273,8 @@ const (
 	SuperResolutionScalerConfigurationModelStatusReady            SuperResolutionScalerConfigurationModelStatus = 2
 )
 
+// String returns the SuperResolutionScalerConfigurationModelStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SuperResolutionScalerConfigurationModelStatus) String() string {
 	switch e {
 	case SuperResolutionScalerConfigurationModelStatusDownloadRequired:
@@ -268,6 +294,8 @@ const (
 	SuperResolutionScalerConfigurationQualityPrioritizationNormal SuperResolutionScalerConfigurationQualityPrioritization = 1
 )
 
+// String returns the SuperResolutionScalerConfigurationQualityPrioritization constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SuperResolutionScalerConfigurationQualityPrioritization) String() string {
 	switch e {
 	case SuperResolutionScalerConfigurationQualityPrioritizationNormal:
@@ -283,6 +311,8 @@ const (
 	SuperResolutionScalerConfigurationRevision1 SuperResolutionScalerConfigurationRevision = 1
 )
 
+// String returns the SuperResolutionScalerConfigurationRevision constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SuperResolutionScalerConfigurationRevision) String() string {
 	switch e {
 	case SuperResolutionScalerConfigurationRevision1:
@@ -299,6 +329,8 @@ const (
 	SuperResolutionScalerParametersSubmissionModeSequential SuperResolutionScalerParametersSubmissionMode = 2
 )
 
+// String returns the SuperResolutionScalerParametersSubmissionMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SuperResolutionScalerParametersSubmissionMode) String() string {
 	switch e {
 	case SuperResolutionScalerParametersSubmissionModeRandom:

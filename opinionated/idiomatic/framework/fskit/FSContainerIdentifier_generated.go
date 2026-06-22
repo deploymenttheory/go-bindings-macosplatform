@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that identifies a container.
-//
 // ContainerIdentifier is an idiomatic wrapper over the Objective-C class FSContainerIdentifier.
+//
+// It embeds [EntityIdentifier], promoting that type's methods.
+//
+// A type that identifies a container.
 type ContainerIdentifier struct {
-	objref.Handle
+	EntityIdentifier
 }
 
 // ContainerIdentifierFromID adopts an existing Objective-C object as a ContainerIdentifier
@@ -25,7 +26,8 @@ func ContainerIdentifierFromID(id objc.ID) *ContainerIdentifier {
 	if id == 0 {
 		return nil
 	}
-	x := &ContainerIdentifier{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContainerIdentifier{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func containerIdentifierAdopt(id objc.ID) *ContainerIdentifier {
 	if id == 0 {
 		return nil
 	}
-	x := &ContainerIdentifier{Handle: objref.Wrap(id)}
+	x := &ContainerIdentifier{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ContainerIdentifier) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContainerIdentifier) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContainerIdentifier) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewContainerIdentifier creates a new ContainerIdentifier.
@@ -64,22 +52,19 @@ func NewContainerIdentifier() *ContainerIdentifier {
 	return containerIdentifierAdopt(_id)
 }
 
-// A UUID to uniquely identify this entity.
-//
-// WithUuid sets uuid and returns the receiver so calls can be chained.
+// WithUuid a UUID to uniquely identify this entity.
 func (x *ContainerIdentifier) WithUuid(uuid obj.Object) *ContainerIdentifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUuid:"), objref.IDOf(uuid))
 	return x
 }
 
-// An optional piece of data to distinguish entities that otherwise share the same UUID.
-//
-// WithQualifier sets qualifier and returns the receiver so calls can be chained.
+// WithQualifier an optional piece of data to distinguish entities that otherwise share the same UUID.
 func (x *ContainerIdentifier) WithQualifier(qualifier obj.Object) *ContainerIdentifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualifier:"), objref.IDOf(qualifier))
 	return x
 }
 
+// VolumeIdentifier wraps the corresponding Objective-C method.
 func (x *ContainerIdentifier) VolumeIdentifier() *VolumeIdentifier {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("volumeIdentifier"))
 	return VolumeIdentifierFromID(_r)
@@ -94,3 +79,5 @@ type ContainerIdentifierable interface {
 }
 
 var _ ContainerIdentifierable = (*ContainerIdentifier)(nil)
+
+var _ EntityIdentifierProvider = (*ContainerIdentifier)(nil)

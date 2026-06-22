@@ -23,7 +23,8 @@ func MTRMessagesClusterMessageResponseOptionStructFromID(id objc.ID) *MTRMessage
 	if id == 0 {
 		return nil
 	}
-	x := &MTRMessagesClusterMessageResponseOptionStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRMessagesClusterMessageResponseOptionStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRMessagesClusterMessageResponseOptionStructAdopt(id objc.ID) *MTRMessages
 	if id == 0 {
 		return nil
 	}
-	x := &MTRMessagesClusterMessageResponseOptionStruct{Handle: objref.Wrap(id)}
+	x := &MTRMessagesClusterMessageResponseOptionStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,33 +58,42 @@ func (x *MTRMessagesClusterMessageResponseOptionStruct) IsKind(className string)
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRMessagesClusterMessageResponseOptionStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRMessagesClusterMessageResponseOptionStruct creates a new MTRMessagesClusterMessageResponseOptionStruct.
 func NewMTRMessagesClusterMessageResponseOptionStruct() *MTRMessagesClusterMessageResponseOptionStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRMessagesClusterMessageResponseOptionStruct")), objc.RegisterName("new"))
 	return mTRMessagesClusterMessageResponseOptionStructAdopt(_id)
 }
 
-// WithMessageResponseID sets messageResponseID and returns the receiver so calls can be chained.
+// WithMessageResponseID sets the property and returns the receiver so calls can be chained.
 func (x *MTRMessagesClusterMessageResponseOptionStruct) WithMessageResponseID(messageResponseID obj.Object) *MTRMessagesClusterMessageResponseOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageResponseID:"), objref.IDOf(messageResponseID))
 	return x
 }
 
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel sets the property and returns the receiver so calls can be chained.
 func (x *MTRMessagesClusterMessageResponseOptionStruct) WithLabel(label string) *MTRMessagesClusterMessageResponseOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// MessageResponseID wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageResponseOptionStruct) MessageResponseID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageResponseID"))
 	return obj.Wrap(_r)
 }
 
+// SetMessageResponseID wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageResponseOptionStruct) SetMessageResponseID(messageResponseID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageResponseID:"), objref.IDOf(messageResponseID))
 }
 
+// Label wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageResponseOptionStruct) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -91,6 +102,7 @@ func (x *MTRMessagesClusterMessageResponseOptionStruct) Label() string {
 	return purego.GoString(_r)
 }
 
+// SetLabel wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageResponseOptionStruct) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }

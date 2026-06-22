@@ -23,7 +23,8 @@ func OneTimeCodeCredentialIdentityFromID(id objc.ID) *OneTimeCodeCredentialIdent
 	if id == 0 {
 		return nil
 	}
-	x := &OneTimeCodeCredentialIdentity{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OneTimeCodeCredentialIdentity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func oneTimeCodeCredentialIdentityAdopt(id objc.ID) *OneTimeCodeCredentialIdenti
 	if id == 0 {
 		return nil
 	}
-	x := &OneTimeCodeCredentialIdentity{Handle: objref.Wrap(id)}
+	x := &OneTimeCodeCredentialIdentity{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,15 +58,20 @@ func (x *OneTimeCodeCredentialIdentity) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes an instance of ASOneTimeCodeCredentialIdentity.
-//
-// NewOneTimeCodeCredentialIdentityWithServiceIdentifierLabelRecordIdentifier creates a new OneTimeCodeCredentialIdentity.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OneTimeCodeCredentialIdentity) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewOneTimeCodeCredentialIdentityWithServiceIdentifierLabelRecordIdentifier initializes an instance of ASOneTimeCodeCredentialIdentity.
 func NewOneTimeCodeCredentialIdentityWithServiceIdentifierLabelRecordIdentifier(serviceIdentifier *CredentialServiceIdentifier, label string, recordIdentifier string) *OneTimeCodeCredentialIdentity {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASOneTimeCodeCredentialIdentity")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceIdentifier:label:recordIdentifier:"), objref.IDOf(serviceIdentifier), purego.NSString(label), purego.NSString(recordIdentifier))
 	return oneTimeCodeCredentialIdentityAdopt(_id)
 }
 
+// Label wraps the corresponding Objective-C method.
 func (x *OneTimeCodeCredentialIdentity) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing a diagnostic report for a fatal or nonfatal CPU exception.
-//
 // CPUExceptionDiagnostic is an idiomatic wrapper over the Objective-C class MXCPUExceptionDiagnostic.
+//
+// It embeds [Diagnostic], promoting that type's methods.
+//
+// An object representing a diagnostic report for a fatal or nonfatal CPU exception.
 type CPUExceptionDiagnostic struct {
-	objref.Handle
+	Diagnostic
 }
 
 // CPUExceptionDiagnosticFromID adopts an existing Objective-C object as a CPUExceptionDiagnostic
@@ -25,7 +26,8 @@ func CPUExceptionDiagnosticFromID(id objc.ID) *CPUExceptionDiagnostic {
 	if id == 0 {
 		return nil
 	}
-	x := &CPUExceptionDiagnostic{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CPUExceptionDiagnostic{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func cPUExceptionDiagnosticAdopt(id objc.ID) *CPUExceptionDiagnostic {
 	if id == 0 {
 		return nil
 	}
-	x := &CPUExceptionDiagnostic{Handle: objref.Wrap(id)}
+	x := &CPUExceptionDiagnostic{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CPUExceptionDiagnostic) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CPUExceptionDiagnostic) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CPUExceptionDiagnostic) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCPUExceptionDiagnostic creates a new CPUExceptionDiagnostic.
@@ -64,19 +52,19 @@ func NewCPUExceptionDiagnostic() *CPUExceptionDiagnostic {
 	return cPUExceptionDiagnosticAdopt(_id)
 }
 
-// The application call stack tree associated with the excessive CPU consumption.
+// CallStackTree the application call stack tree associated with the excessive CPU consumption.
 func (x *CPUExceptionDiagnostic) CallStackTree() *CallStackTree {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callStackTree"))
 	return CallStackTreeFromID(_r)
 }
 
-// Total CPU time consumed in the scope of this CPU exception. Dimensioned as NSUnitDuration.
+// TotalCPUTime total CPU time consumed in the scope of this CPU exception. Dimensioned as NSUnitDuration.
 func (x *CPUExceptionDiagnostic) TotalCPUTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalCPUTime"))
 	return obj.Wrap(_r)
 }
 
-// Total time that the application was sampled for during the CPU exception. Dimensioned as NSUnitDuration.
+// TotalSampledTime total time that the application was sampled for during the CPU exception. Dimensioned as NSUnitDuration.
 func (x *CPUExceptionDiagnostic) TotalSampledTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalSampledTime"))
 	return obj.Wrap(_r)
@@ -91,3 +79,5 @@ type CPUExceptionDiagnosticable interface {
 }
 
 var _ CPUExceptionDiagnosticable = (*CPUExceptionDiagnostic)(nil)
+
+var _ DiagnosticProvider = (*CPUExceptionDiagnostic)(nil)

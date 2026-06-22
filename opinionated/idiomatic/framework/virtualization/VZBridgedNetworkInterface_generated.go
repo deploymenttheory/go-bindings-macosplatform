@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that identifies the supported network interfaces of the host computer.
-//
 // BridgedNetworkInterface is an idiomatic wrapper over the Objective-C class VZBridgedNetworkInterface.
+//
+// An object that identifies the supported network interfaces of the host computer.
 type BridgedNetworkInterface struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func BridgedNetworkInterfaceFromID(id objc.ID) *BridgedNetworkInterface {
 	if id == 0 {
 		return nil
 	}
-	x := &BridgedNetworkInterface{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BridgedNetworkInterface{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func bridgedNetworkInterfaceAdopt(id objc.ID) *BridgedNetworkInterface {
 	if id == 0 {
 		return nil
 	}
-	x := &BridgedNetworkInterface{Handle: objref.Wrap(id)}
+	x := &BridgedNetworkInterface{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *BridgedNetworkInterface) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BridgedNetworkInterface) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBridgedNetworkInterface creates a new BridgedNetworkInterface.
 func NewBridgedNetworkInterface() *BridgedNetworkInterface {
 	_id := objc.Send[objc.ID](objc.ID(_class("VZBridgedNetworkInterface")), objc.RegisterName("new"))
 	return bridgedNetworkInterfaceAdopt(_id)
 }
 
-// Return the unique identifier for this interface. The identifier is the BSD name associated with the interface (e.g. "en0").
+// Identifier return the unique identifier for this interface. The identifier is the BSD name associated with the interface (e.g. "en0").
 func (x *BridgedNetworkInterface) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *BridgedNetworkInterface) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Return a display name if available (e.g. "Ethernet").
+// LocalizedDisplayName return a display name if available (e.g. "Ethernet").
 func (x *BridgedNetworkInterface) LocalizedDisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDisplayName"))
 	if _r == 0 {

@@ -23,7 +23,8 @@ func MatrixFullyConnectedGradientFromID(id objc.ID) *MatrixFullyConnectedGradien
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixFullyConnectedGradient{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatrixFullyConnectedGradient{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func matrixFullyConnectedGradientAdopt(id objc.ID) *MatrixFullyConnectedGradient
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixFullyConnectedGradient{Handle: objref.Wrap(id)}
+	x := &MatrixFullyConnectedGradient{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,80 +58,82 @@ func (x *MatrixFullyConnectedGradient) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MatrixFullyConnectedGradient) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMatrixFullyConnectedGradient creates a new MatrixFullyConnectedGradient.
 func NewMatrixFullyConnectedGradient() *MatrixFullyConnectedGradient {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixFullyConnectedGradient")), objc.RegisterName("new"))
 	return matrixFullyConnectedGradientAdopt(_id)
 }
 
-// The number of input vectors which make up the input array. This is equivalent to the number of rows in both the input matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
-//
-// WithSourceNumberOfFeatureVectors sets sourceNumberOfFeatureVectors and returns the receiver so calls can be chained.
+// WithSourceNumberOfFeatureVectors the number of input vectors which make up the input array. This is equivalent to the number of rows in both the input matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
 func (x *MatrixFullyConnectedGradient) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixFullyConnectedGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
 	return x
 }
 
-// The number of feature channels in the output of the forward fully connected layer. This is equivalent to the number of columns in both the weight matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
-//
-// WithSourceOutputFeatureChannels sets sourceOutputFeatureChannels and returns the receiver so calls can be chained.
+// WithSourceOutputFeatureChannels the number of feature channels in the output of the forward fully connected layer. This is equivalent to the number of columns in both the weight matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
 func (x *MatrixFullyConnectedGradient) WithSourceOutputFeatureChannels(sourceOutputFeatureChannels int) *MatrixFullyConnectedGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceOutputFeatureChannels:"), sourceOutputFeatureChannels)
 	return x
 }
 
-// The number of feature channels in the input to the forward fully connected layer. This is equivalent to the number of columns in the input matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
-//
-// WithSourceInputFeatureChannels sets sourceInputFeatureChannels and returns the receiver so calls can be chained.
+// WithSourceInputFeatureChannels the number of feature channels in the input to the forward fully connected layer. This is equivalent to the number of columns in the input matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
 func (x *MatrixFullyConnectedGradient) WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixFullyConnectedGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
 	return x
 }
 
-// Scale factor to apply to the product.  This value should be equal to the corresponding value in the forward fully connected kernel.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha scale factor to apply to the product.  This value should be equal to the corresponding value in the forward fully connected kernel.
 func (x *MatrixFullyConnectedGradient) WithAlpha(alpha float64) *MatrixFullyConnectedGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// The number of input vectors which make up the input array. This is equivalent to the number of rows in both the input matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
+// SourceNumberOfFeatureVectors the number of input vectors which make up the input array. This is equivalent to the number of rows in both the input matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
 func (x *MatrixFullyConnectedGradient) SourceNumberOfFeatureVectors() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceNumberOfFeatureVectors"))
 	return _r
 }
 
+// SetSourceNumberOfFeatureVectors wraps the corresponding Objective-C method.
 func (x *MatrixFullyConnectedGradient) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
 }
 
-// The number of feature channels in the output of the forward fully connected layer. This is equivalent to the number of columns in both the weight matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
+// SourceOutputFeatureChannels the number of feature channels in the output of the forward fully connected layer. This is equivalent to the number of columns in both the weight matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
 func (x *MatrixFullyConnectedGradient) SourceOutputFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceOutputFeatureChannels"))
 	return _r
 }
 
+// SetSourceOutputFeatureChannels wraps the corresponding Objective-C method.
 func (x *MatrixFullyConnectedGradient) SetSourceOutputFeatureChannels(sourceOutputFeatureChannels int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceOutputFeatureChannels:"), sourceOutputFeatureChannels)
 }
 
-// The number of feature channels in the input to the forward fully connected layer. This is equivalent to the number of columns in the input matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
+// SourceInputFeatureChannels the number of feature channels in the input to the forward fully connected layer. This is equivalent to the number of columns in the input matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
 func (x *MatrixFullyConnectedGradient) SourceInputFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceInputFeatureChannels"))
 	return _r
 }
 
+// SetSourceInputFeatureChannels wraps the corresponding Objective-C method.
 func (x *MatrixFullyConnectedGradient) SetSourceInputFeatureChannels(sourceInputFeatureChannels int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
 }
 
-// Scale factor to apply to the product.  This value should be equal to the corresponding value in the forward fully connected kernel.
+// Alpha scale factor to apply to the product.  This value should be equal to the corresponding value in the forward fully connected kernel.
 func (x *MatrixFullyConnectedGradient) Alpha() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
 	return _r
 }
 
+// SetAlpha wraps the corresponding Objective-C method.
 func (x *MatrixFullyConnectedGradient) SetAlpha(alpha float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }

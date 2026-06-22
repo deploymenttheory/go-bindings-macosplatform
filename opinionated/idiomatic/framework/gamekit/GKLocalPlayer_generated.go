@@ -10,16 +10,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// The local player who signs in to Game Center on the device running the game.
-//
 // LocalPlayer is an idiomatic wrapper over the Objective-C class GKLocalPlayer.
+//
+// It embeds [Player], promoting that type's methods.
+//
+// The local player who signs in to Game Center on the device running the game.
 type LocalPlayer struct {
-	objref.Handle
+	Player
 }
 
 // LocalPlayerFromID adopts an existing Objective-C object as a LocalPlayer
@@ -28,7 +29,8 @@ func LocalPlayerFromID(id objc.ID) *LocalPlayer {
 	if id == 0 {
 		return nil
 	}
-	x := &LocalPlayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LocalPlayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -41,24 +43,10 @@ func localPlayerAdopt(id objc.ID) *LocalPlayer {
 	if id == 0 {
 		return nil
 	}
-	x := &LocalPlayer{Handle: objref.Wrap(id)}
+	x := &LocalPlayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *LocalPlayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LocalPlayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LocalPlayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewLocalPlayer creates a new LocalPlayer.
@@ -67,10 +55,10 @@ func NewLocalPlayer() *LocalPlayer {
 	return localPlayerAdopt(_id)
 }
 
-// Loads players from the friends list or players that recently participated in a game with the local player.
+// LoadRecentPlayers loads players from the friends list or players that recently participated in a game with the local player.
 //
 // LoadRecentPlayers blocks until the operation completes or ctx is cancelled.
-func (x *LocalPlayer) LoadRecentPlayers(ctx context.Context) (obj.Object, error) {
+func (x *LocalPlayer) LoadRecentPlayers(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -92,10 +80,10 @@ func (x *LocalPlayer) LoadRecentPlayers(ctx context.Context) (obj.Object, error)
 	}
 }
 
-// Loads players to whom the local player can issue a challenge.
+// LoadChallengableFriends loads players to whom the local player can issue a challenge.
 //
 // LoadChallengableFriends blocks until the operation completes or ctx is cancelled.
-func (x *LocalPlayer) LoadChallengableFriends(ctx context.Context) (obj.Object, error) {
+func (x *LocalPlayer) LoadChallengableFriends(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -117,35 +105,37 @@ func (x *LocalPlayer) LoadChallengableFriends(ctx context.Context) (obj.Object, 
 	}
 }
 
-// Authentication state
+// IsAuthenticated authentication state
 func (x *LocalPlayer) IsAuthenticated() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAuthenticated"))
 	return _r
 }
 
-// Indicates if a player is under age
+// IsUnderage indicates if a player is under age
 func (x *LocalPlayer) IsUnderage() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUnderage"))
 	return _r
 }
 
-// A Boolean value that declares whether or not multiplayer gaming is restricted on this device.
+// IsMultiplayerGamingRestricted a Boolean value that declares whether or not multiplayer gaming is restricted on this device.
 func (x *LocalPlayer) IsMultiplayerGamingRestricted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMultiplayerGamingRestricted"))
 	return _r
 }
 
-// A Boolean value that declares whether personalized communication is restricted on this device. If it is restricted, the player will not be able to read or write personalized messages on game invites, challenges, or enable voice communication in multiplayer games.  Note: this value will always be true when isUnderage is true.
+// IsPersonalizedCommunicationRestricted a Boolean value that declares whether personalized communication is restricted on this device. If it is restricted, the player will not be able to read or write personalized messages on game invites, challenges, or enable voice communication in multiplayer games.  Note: this value will always be true when isUnderage is true.
 func (x *LocalPlayer) IsPersonalizedCommunicationRestricted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPersonalizedCommunicationRestricted"))
 	return _r
 }
 
-// Unregisters all listeners in your game.
+// UnregisterAllListeners unregisters all listeners in your game.
 func (x *LocalPlayer) UnregisterAllListeners() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unregisterAllListeners"))
 }
 
+// SetDefaultLeaderboardCategoryID wraps the corresponding Objective-C method.
+//
 // SetDefaultLeaderboardCategoryID blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) SetDefaultLeaderboardCategoryID(ctx context.Context, categoryID string) error {
 	_ch := make(chan error, 1)
@@ -163,8 +153,10 @@ func (x *LocalPlayer) SetDefaultLeaderboardCategoryID(ctx context.Context, categ
 	}
 }
 
+// LoadDefaultLeaderboardCategoryID wraps the corresponding Objective-C method.
+//
 // LoadDefaultLeaderboardCategoryID blocks until the operation completes or ctx is cancelled.
-func (x *LocalPlayer) LoadDefaultLeaderboardCategoryID(ctx context.Context) (string, error) {
+func (x *LocalPlayer) LoadDefaultLeaderboardCategoryID(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -186,6 +178,8 @@ func (x *LocalPlayer) LoadDefaultLeaderboardCategoryID(ctx context.Context) (str
 	}
 }
 
+// Authenticate wraps the corresponding Objective-C method.
+//
 // Authenticate blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) Authenticate(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -203,8 +197,10 @@ func (x *LocalPlayer) Authenticate(ctx context.Context) error {
 	}
 }
 
+// LoadFriendPlayers wraps the corresponding Objective-C method.
+//
 // LoadFriendPlayers blocks until the operation completes or ctx is cancelled.
-func (x *LocalPlayer) LoadFriendPlayers(ctx context.Context) (obj.Object, error) {
+func (x *LocalPlayer) LoadFriendPlayers(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -226,10 +222,10 @@ func (x *LocalPlayer) LoadFriendPlayers(ctx context.Context) (obj.Object, error)
 	}
 }
 
-// Loads the identifier for the local player’s default leaderboard.
+// LoadDefaultLeaderboardIdentifier loads the identifier for the local player’s default leaderboard.
 //
 // LoadDefaultLeaderboardIdentifier blocks until the operation completes or ctx is cancelled.
-func (x *LocalPlayer) LoadDefaultLeaderboardIdentifier(ctx context.Context) (string, error) {
+func (x *LocalPlayer) LoadDefaultLeaderboardIdentifier(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -251,7 +247,7 @@ func (x *LocalPlayer) LoadDefaultLeaderboardIdentifier(ctx context.Context) (str
 	}
 }
 
-// Sets the local player’s default leaderboard.
+// SetDefaultLeaderboardIdentifier sets the local player’s default leaderboard.
 //
 // SetDefaultLeaderboardIdentifier blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) SetDefaultLeaderboardIdentifier(ctx context.Context, leaderboardIdentifier string) error {
@@ -270,10 +266,10 @@ func (x *LocalPlayer) SetDefaultLeaderboardIdentifier(ctx context.Context, leade
 	}
 }
 
-// This method is obsolete. It will never be invoked and its implementation does nothing**
+// LoadFriends this method is obsolete. It will never be invoked and its implementation does nothing**
 //
 // LoadFriends blocks until the operation completes or ctx is cancelled.
-func (x *LocalPlayer) LoadFriends(ctx context.Context) (obj.Object, error) {
+func (x *LocalPlayer) LoadFriends(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -295,16 +291,18 @@ func (x *LocalPlayer) LoadFriends(ctx context.Context) (obj.Object, error) {
 	}
 }
 
+// Friends wraps the corresponding Objective-C method.
+//
 // Friends returns the collection as a Go slice.
 func (x *LocalPlayer) Friends() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("friends"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Loads the player’s friends list, scoped by the identifiers, if the player and their friends grant access.
+// LoadFriendsWithIdentifiers loads the player’s friends list, scoped by the identifiers, if the player and their friends grant access.
 //
 // LoadFriendsWithIdentifiers blocks until the operation completes or ctx is cancelled.
-func (x *LocalPlayer) LoadFriendsWithIdentifiers(ctx context.Context, identifiers []string) (obj.Object, error) {
+func (x *LocalPlayer) LoadFriendsWithIdentifiers(ctx context.Context, identifiers []string) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -326,7 +324,7 @@ func (x *LocalPlayer) LoadFriendsWithIdentifiers(ctx context.Context, identifier
 	}
 }
 
-// Opens the Messages app with a sheet for the player to request friends.
+// PresentFriendRequestCreatorFromWindow opens the Messages app with a sheet for the player to request friends.
 func (x *LocalPlayer) PresentFriendRequestCreatorFromWindow(window obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("presentFriendRequestCreatorFromWindow:error:"), objref.IDOf(window), unsafe.Pointer(&_nsErr))
@@ -336,8 +334,10 @@ func (x *LocalPlayer) PresentFriendRequestCreatorFromWindow(window obj.Object) e
 	return nil
 }
 
+// SetAuthenticateHandler wraps the corresponding Objective-C method.
+//
 // SetAuthenticateHandler blocks until the operation completes or ctx is cancelled.
-func (x *LocalPlayer) SetAuthenticateHandler(ctx context.Context) (obj.Object, error) {
+func (x *LocalPlayer) SetAuthenticateHandler(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -359,16 +359,16 @@ func (x *LocalPlayer) SetAuthenticateHandler(ctx context.Context) (obj.Object, e
 	}
 }
 
-// observable property that becomes true when the friend request view controller is displayed.  It becomes false when it is dismissed
+// IsPresentingFriendRequestViewController observable property that becomes true when the friend request view controller is displayed.  It becomes false when it is dismissed
 func (x *LocalPlayer) IsPresentingFriendRequestViewController() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPresentingFriendRequestViewController"))
 	return _r
 }
 
-// Retrieves all available saved games.
+// FetchSavedGames retrieves all available saved games.
 //
 // FetchSavedGames blocks until the operation completes or ctx is cancelled.
-func (x *LocalPlayer) FetchSavedGames(ctx context.Context) (obj.Object, error) {
+func (x *LocalPlayer) FetchSavedGames(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -390,10 +390,10 @@ func (x *LocalPlayer) FetchSavedGames(ctx context.Context) (obj.Object, error) {
 	}
 }
 
-// Saves game data with the specified name.
+// SaveGameDataWithName saves game data with the specified name.
 //
 // SaveGameDataWithName blocks until the operation completes or ctx is cancelled.
-func (x *LocalPlayer) SaveGameDataWithName(ctx context.Context, data obj.Object, name string) (*SavedGame, error) {
+func (x *LocalPlayer) SaveGameDataWithName(ctx context.Context, data obj.Object, name string) (result *SavedGame, err error) {
 	type _result struct {
 		val *SavedGame
 		err error
@@ -415,7 +415,7 @@ func (x *LocalPlayer) SaveGameDataWithName(ctx context.Context, data obj.Object,
 	}
 }
 
-// Deletes saved games with the specified filename.
+// DeleteSavedGamesWithName deletes saved games with the specified filename.
 //
 // DeleteSavedGamesWithName blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) DeleteSavedGamesWithName(ctx context.Context, name string) error {
@@ -434,10 +434,10 @@ func (x *LocalPlayer) DeleteSavedGamesWithName(ctx context.Context, name string)
 	}
 }
 
-// Replaces duplicate saved games that use the same filename with one file containing the specified game data.
+// ResolveConflictingSavedGamesWithData replaces duplicate saved games that use the same filename with one file containing the specified game data.
 //
 // ResolveConflictingSavedGamesWithData blocks until the operation completes or ctx is cancelled.
-func (x *LocalPlayer) ResolveConflictingSavedGamesWithData(ctx context.Context, conflictingSavedGames []*SavedGame, data obj.Object) (obj.Object, error) {
+func (x *LocalPlayer) ResolveConflictingSavedGamesWithData(ctx context.Context, conflictingSavedGames []*SavedGame, data obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -488,3 +488,7 @@ type LocalPlayerable interface {
 }
 
 var _ LocalPlayerable = (*LocalPlayer)(nil)
+
+var _ PlayerProvider = (*LocalPlayer)(nil)
+
+var _ BasePlayerProvider = (*LocalPlayer)(nil)

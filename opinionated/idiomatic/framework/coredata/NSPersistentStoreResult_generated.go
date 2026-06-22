@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract base class for results returned from a persistent store coordinator.
-//
 // PersistentStoreResult is an idiomatic wrapper over the Objective-C class NSPersistentStoreResult.
+//
+// PersistentStoreResult is an abstract base — you do not construct it directly. Construct one of [BatchDeleteResult], [BatchInsertResult], [BatchUpdateResult], [PersistentCloudKitContainerEventResult], [PersistentHistoryResult], [PersistentStoreAsynchronousResult] and pass it where a PersistentStoreResult is accepted.
+//
+// The abstract base class for results returned from a persistent store coordinator.
 type PersistentStoreResult struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func PersistentStoreResultFromID(id objc.ID) *PersistentStoreResult {
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentStoreResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PersistentStoreResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func persistentStoreResultAdopt(id objc.ID) *PersistentStoreResult {
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentStoreResult{Handle: objref.Wrap(id)}
+	x := &PersistentStoreResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *PersistentStoreResult) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewPersistentStoreResult creates a new PersistentStoreResult.
-func NewPersistentStoreResult() *PersistentStoreResult {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSPersistentStoreResult")), objc.RegisterName("new"))
-	return persistentStoreResultAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PersistentStoreResult) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // PersistentStoreResultable is the interface implemented by [PersistentStoreResult], for mocking and DI.
@@ -70,3 +74,10 @@ type PersistentStoreResultable interface {
 }
 
 var _ PersistentStoreResultable = (*PersistentStoreResult)(nil)
+
+// isPersistentStoreResult marks PersistentStoreResult — and, by embedding promotion, its
+// subclasses — as a member of the PersistentStoreResult hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *PersistentStoreResult) isPersistentStoreResult() {}
+
+var _ PersistentStoreResultProvider = (*PersistentStoreResult)(nil)

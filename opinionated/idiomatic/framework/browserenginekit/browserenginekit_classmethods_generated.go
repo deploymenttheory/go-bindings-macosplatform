@@ -11,10 +11,10 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Launches a networking extension process asynchronously.
+// NetworkProcessWithInterruptionHandlerCompletion launches a networking extension process asynchronously.
 //
 // NetworkProcessWithInterruptionHandlerCompletion blocks until the operation completes or ctx is cancelled.
-func NetworkProcessWithInterruptionHandlerCompletion(ctx context.Context, interruptionHandler func()) (*NetworkingProcess, error) {
+func NetworkProcessWithInterruptionHandlerCompletion(ctx context.Context, interruptionHandler func()) (result *NetworkingProcess, err error) {
 	type _result struct {
 		val *NetworkingProcess
 		err error
@@ -36,10 +36,10 @@ func NetworkProcessWithInterruptionHandlerCompletion(ctx context.Context, interr
 	}
 }
 
-// Launches a networking extension process asynchronously.
+// NetworkProcessWithBundleIDInterruptionHandlerCompletion launches a networking extension process asynchronously.
 //
 // NetworkProcessWithBundleIDInterruptionHandlerCompletion blocks until the operation completes or ctx is cancelled.
-func NetworkProcessWithBundleIDInterruptionHandlerCompletion(ctx context.Context, bundleID string, interruptionHandler func()) (*NetworkingProcess, error) {
+func NetworkProcessWithBundleIDInterruptionHandlerCompletion(ctx context.Context, bundleID string, interruptionHandler func()) (result *NetworkingProcess, err error) {
 	type _result struct {
 		val *NetworkingProcess
 		err error
@@ -61,22 +61,22 @@ func NetworkProcessWithBundleIDInterruptionHandlerCompletion(ctx context.Context
 	}
 }
 
-// The helper extension process may run at foreground priority to work on behalf of the host process while it is foreground.
+// Foreground the helper extension process may run at foreground priority to work on behalf of the host process while it is foreground.
 func Foreground() *ProcessCapability {
 	_r := objc.Send[objc.ID](objc.ID(_class("BEProcessCapability")), objc.RegisterName("foreground"))
 	return ProcessCapabilityFromID(_r)
 }
 
-// The helper extension process may remain resident in a suspended state (it will not be granted CPU time).
+// Suspended the helper extension process may remain resident in a suspended state (it will not be granted CPU time).
 func Suspended() *ProcessCapability {
 	_r := objc.Send[objc.ID](objc.ID(_class("BEProcessCapability")), objc.RegisterName("suspended"))
 	return ProcessCapabilityFromID(_r)
 }
 
-// Launches a rendering extension process asynchronously.
+// RenderingProcessWithInterruptionHandlerCompletion launches a rendering extension process asynchronously.
 //
 // RenderingProcessWithInterruptionHandlerCompletion blocks until the operation completes or ctx is cancelled.
-func RenderingProcessWithInterruptionHandlerCompletion(ctx context.Context, interruptionHandler func()) (*RenderingProcess, error) {
+func RenderingProcessWithInterruptionHandlerCompletion(ctx context.Context, interruptionHandler func()) (result *RenderingProcess, err error) {
 	type _result struct {
 		val *RenderingProcess
 		err error
@@ -98,10 +98,10 @@ func RenderingProcessWithInterruptionHandlerCompletion(ctx context.Context, inte
 	}
 }
 
-// Launches a rendering extension process asynchronously.
+// RenderingProcessWithBundleIDInterruptionHandlerCompletion launches a rendering extension process asynchronously.
 //
 // RenderingProcessWithBundleIDInterruptionHandlerCompletion blocks until the operation completes or ctx is cancelled.
-func RenderingProcessWithBundleIDInterruptionHandlerCompletion(ctx context.Context, bundleID string, interruptionHandler func()) (*RenderingProcess, error) {
+func RenderingProcessWithBundleIDInterruptionHandlerCompletion(ctx context.Context, bundleID string, interruptionHandler func()) (result *RenderingProcess, err error) {
 	type _result struct {
 		val *RenderingProcess
 		err error
@@ -123,10 +123,10 @@ func RenderingProcessWithBundleIDInterruptionHandlerCompletion(ctx context.Conte
 	}
 }
 
-// Launches a web content extension process asynchronously.
+// WebContentProcessWithInterruptionHandlerCompletion launches a web content extension process asynchronously.
 //
 // WebContentProcessWithInterruptionHandlerCompletion blocks until the operation completes or ctx is cancelled.
-func WebContentProcessWithInterruptionHandlerCompletion(ctx context.Context, interruptionHandler func()) (*WebContentProcess, error) {
+func WebContentProcessWithInterruptionHandlerCompletion(ctx context.Context, interruptionHandler func()) (result *WebContentProcess, err error) {
 	type _result struct {
 		val *WebContentProcess
 		err error
@@ -148,10 +148,10 @@ func WebContentProcessWithInterruptionHandlerCompletion(ctx context.Context, int
 	}
 }
 
-// Launches a web content extension process asynchronously.
+// WebContentProcessWithBundleIDInterruptionHandlerCompletion launches a web content extension process asynchronously.
 //
 // WebContentProcessWithBundleIDInterruptionHandlerCompletion blocks until the operation completes or ctx is cancelled.
-func WebContentProcessWithBundleIDInterruptionHandlerCompletion(ctx context.Context, bundleID string, interruptionHandler func()) (*WebContentProcess, error) {
+func WebContentProcessWithBundleIDInterruptionHandlerCompletion(ctx context.Context, bundleID string, interruptionHandler func()) (result *WebContentProcess, err error) {
 	type _result struct {
 		val *WebContentProcess
 		err error

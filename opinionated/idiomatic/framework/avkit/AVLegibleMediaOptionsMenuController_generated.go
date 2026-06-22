@@ -23,7 +23,8 @@ func LegibleMediaOptionsMenuControllerFromID(id objc.ID) *LegibleMediaOptionsMen
 	if id == 0 {
 		return nil
 	}
-	x := &LegibleMediaOptionsMenuController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LegibleMediaOptionsMenuController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func legibleMediaOptionsMenuControllerAdopt(id objc.ID) *LegibleMediaOptionsMenu
 	if id == 0 {
 		return nil
 	}
-	x := &LegibleMediaOptionsMenuController{Handle: objref.Wrap(id)}
+	x := &LegibleMediaOptionsMenuController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,35 +58,38 @@ func (x *LegibleMediaOptionsMenuController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an AVLegibleMediaOptionsMenuController with an optional player When player is non-nil, both media tracks and caption appearance options will be included, otherwise, only caption appearance options.
-//
-// NewLegibleMediaOptionsMenuControllerWithPlayer creates a new LegibleMediaOptionsMenuController.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LegibleMediaOptionsMenuController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLegibleMediaOptionsMenuControllerWithPlayer creates an AVLegibleMediaOptionsMenuController with an optional player When player is non-nil, both media tracks and caption appearance options will be included, otherwise, only caption appearance options.
 func NewLegibleMediaOptionsMenuControllerWithPlayer(player obj.Object) *LegibleMediaOptionsMenuController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVLegibleMediaOptionsMenuController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayer:"), objref.IDOf(player))
 	return legibleMediaOptionsMenuControllerAdopt(_id)
 }
 
-// The player associated with the menu controller.
-//
-// WithPlayer sets player and returns the receiver so calls can be chained.
+// WithPlayer the player associated with the menu controller.
 func (x *LegibleMediaOptionsMenuController) WithPlayer(player obj.Object) *LegibleMediaOptionsMenuController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayer:"), objref.IDOf(player))
 	return x
 }
 
-// Builds a legible options menu using the specified contents. Returns nil if the requested menu type cannot be built due to missing content (e.g., requesting track selection without a player).
+// MenuWithContents builds a legible options menu using the specified contents. Returns nil if the requested menu type cannot be built due to missing content (e.g., requesting track selection without a player).
 func (x *LegibleMediaOptionsMenuController) MenuWithContents(contents LegibleMediaOptionsMenuContents) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuWithContents:"), contents)
 	return obj.Wrap(_r)
 }
 
-// The player associated with the menu controller.
+// Player the player associated with the menu controller.
 func (x *LegibleMediaOptionsMenuController) Player() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("player"))
 	return obj.Wrap(_r)
 }
 
+// SetPlayer wraps the corresponding Objective-C method.
 func (x *LegibleMediaOptionsMenuController) SetPlayer(player obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayer:"), objref.IDOf(player))
 }

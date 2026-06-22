@@ -25,7 +25,8 @@ func WKWebExtensionMessagePortFromID(id objc.ID) *WKWebExtensionMessagePort {
 	if id == 0 {
 		return nil
 	}
-	x := &WKWebExtensionMessagePort{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKWebExtensionMessagePort{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKWebExtensionMessagePortAdopt(id objc.ID) *WKWebExtensionMessagePort {
 	if id == 0 {
 		return nil
 	}
-	x := &WKWebExtensionMessagePort{Handle: objref.Wrap(id)}
+	x := &WKWebExtensionMessagePort{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *WKWebExtensionMessagePort) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKWebExtensionMessagePort) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKWebExtensionMessagePort creates a new WKWebExtensionMessagePort.
 func NewWKWebExtensionMessagePort() *WKWebExtensionMessagePort {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionMessagePort")), objc.RegisterName("new"))
 	return wKWebExtensionMessagePortAdopt(_id)
 }
 
-// Sends a message to the connected web extension.
+// SendMessage sends a message to the connected web extension.
 //
 // SendMessage blocks until the operation completes or ctx is cancelled.
 func (x *WKWebExtensionMessagePort) SendMessage(ctx context.Context, message obj.Object) error {
@@ -83,12 +91,12 @@ func (x *WKWebExtensionMessagePort) SendMessage(ctx context.Context, message obj
 	}
 }
 
-// Disconnects the port, terminating all further messages.
+// Disconnect disconnects the port, terminating all further messages.
 func (x *WKWebExtensionMessagePort) Disconnect() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disconnect"))
 }
 
-// The unique identifier for the app to which this port should be connected. This identifier is provided by the web extension and may or may not be used by the app. It's up to the app to decide how to interpret this identifier.
+// ApplicationIdentifier the unique identifier for the app to which this port should be connected. This identifier is provided by the web extension and may or may not be used by the app. It's up to the app to decide how to interpret this identifier.
 func (x *WKWebExtensionMessagePort) ApplicationIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationIdentifier"))
 	if _r == 0 {
@@ -97,6 +105,8 @@ func (x *WKWebExtensionMessagePort) ApplicationIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// SetDisconnectHandler wraps the corresponding Objective-C method.
+//
 // SetDisconnectHandler blocks until the operation completes or ctx is cancelled.
 func (x *WKWebExtensionMessagePort) SetDisconnectHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -114,7 +124,7 @@ func (x *WKWebExtensionMessagePort) SetDisconnectHandler(ctx context.Context) er
 	}
 }
 
-// Indicates whether the message port is disconnected.
+// IsDisconnected indicates whether the message port is disconnected.
 func (x *WKWebExtensionMessagePort) IsDisconnected() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDisconnected"))
 	return _r

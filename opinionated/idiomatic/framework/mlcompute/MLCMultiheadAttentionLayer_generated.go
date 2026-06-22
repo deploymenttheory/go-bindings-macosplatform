@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A multihead, scaled dot-product attention layer that attends to one or more entries in the input key-value pairs.
-//
 // MultiheadAttentionLayer is an idiomatic wrapper over the Objective-C class MLCMultiheadAttentionLayer.
+//
+// It embeds [Layer], promoting that type's methods.
+//
+// A multihead, scaled dot-product attention layer that attends to one or more entries in the input key-value pairs.
 type MultiheadAttentionLayer struct {
-	objref.Handle
+	Layer
 }
 
 // MultiheadAttentionLayerFromID adopts an existing Objective-C object as a MultiheadAttentionLayer
@@ -25,7 +26,8 @@ func MultiheadAttentionLayerFromID(id objc.ID) *MultiheadAttentionLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &MultiheadAttentionLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MultiheadAttentionLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func multiheadAttentionLayerAdopt(id objc.ID) *MultiheadAttentionLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &MultiheadAttentionLayer{Handle: objref.Wrap(id)}
+	x := &MultiheadAttentionLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MultiheadAttentionLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MultiheadAttentionLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MultiheadAttentionLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMultiheadAttentionLayer creates a new MultiheadAttentionLayer.
@@ -64,29 +52,25 @@ func NewMultiheadAttentionLayer() *MultiheadAttentionLayer {
 	return multiheadAttentionLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string that helps identify this layer.
 func (x *MultiheadAttentionLayer) WithLabel(label string) *MultiheadAttentionLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *MultiheadAttentionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *MultiheadAttentionLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// The multi-head attention descriptor
+// Descriptor the multi-head attention descriptor
 func (x *MultiheadAttentionLayer) Descriptor() *MultiheadAttentionDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
 	return MultiheadAttentionDescriptorFromID(_r)
 }
 
-// The weights of query, key, value and output projections
+// Weights the weights of query, key, value and output projections
 //
 // Weights returns the collection as a Go slice.
 func (x *MultiheadAttentionLayer) Weights() []*Tensor {
@@ -94,7 +78,7 @@ func (x *MultiheadAttentionLayer) Weights() []*Tensor {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
-// The biases of query, key, value and output projections
+// Biases the biases of query, key, value and output projections
 //
 // Biases returns the collection as a Go slice.
 func (x *MultiheadAttentionLayer) Biases() []*Tensor {
@@ -102,7 +86,7 @@ func (x *MultiheadAttentionLayer) Biases() []*Tensor {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
-// The biases added to key and value
+// AttentionBiases the biases added to key and value
 //
 // AttentionBiases returns the collection as a Go slice.
 func (x *MultiheadAttentionLayer) AttentionBiases() []*Tensor {
@@ -110,7 +94,7 @@ func (x *MultiheadAttentionLayer) AttentionBiases() []*Tensor {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
-// The weights tensor parameters used for optimizer update
+// WeightsParameters the weights tensor parameters used for optimizer update
 //
 // WeightsParameters returns the collection as a Go slice.
 func (x *MultiheadAttentionLayer) WeightsParameters() []*TensorParameter {
@@ -118,7 +102,7 @@ func (x *MultiheadAttentionLayer) WeightsParameters() []*TensorParameter {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TensorParameter { return TensorParameterFromID(_id) })
 }
 
-// The biases tensor parameters used for optimizer update
+// BiasesParameters the biases tensor parameters used for optimizer update
 //
 // BiasesParameters returns the collection as a Go slice.
 func (x *MultiheadAttentionLayer) BiasesParameters() []*TensorParameter {
@@ -140,3 +124,5 @@ type MultiheadAttentionLayerable interface {
 }
 
 var _ MultiheadAttentionLayerable = (*MultiheadAttentionLayer)(nil)
+
+var _ LayerProvider = (*MultiheadAttentionLayer)(nil)

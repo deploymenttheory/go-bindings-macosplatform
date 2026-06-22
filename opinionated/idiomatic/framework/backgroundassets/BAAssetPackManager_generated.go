@@ -15,9 +15,9 @@ import (
 	"unsafe"
 )
 
-// A class that manages asset packs.
-//
 // AssetPackManager is an idiomatic wrapper over the Objective-C class BAAssetPackManager.
+//
+// A class that manages asset packs.
 type AssetPackManager struct {
 	objref.Handle
 }
@@ -28,7 +28,8 @@ func AssetPackManagerFromID(id objc.ID) *AssetPackManager {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetPackManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetPackManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -41,7 +42,8 @@ func assetPackManagerAdopt(id objc.ID) *AssetPackManager {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetPackManager{Handle: objref.Wrap(id)}
+	x := &AssetPackManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -61,16 +63,22 @@ func (x *AssetPackManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetPackManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetPackManager creates a new AssetPackManager.
 func NewAssetPackManager() *AssetPackManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("BAAssetPackManager")), objc.RegisterName("new"))
 	return assetPackManagerAdopt(_id)
 }
 
-// Gets the asset packs that are available to download.
+// GetAllAssetPacks gets the asset packs that are available to download.
 //
 // GetAllAssetPacks blocks until the operation completes or ctx is cancelled.
-func (x *AssetPackManager) GetAllAssetPacks(ctx context.Context) (obj.Object, error) {
+func (x *AssetPackManager) GetAllAssetPacks(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -92,10 +100,10 @@ func (x *AssetPackManager) GetAllAssetPacks(ctx context.Context) (obj.Object, er
 	}
 }
 
-// Gets the asset pack with the given identifier.
+// GetAssetPackWithIdentifier gets the asset pack with the given identifier.
 //
 // GetAssetPackWithIdentifier blocks until the operation completes or ctx is cancelled.
-func (x *AssetPackManager) GetAssetPackWithIdentifier(ctx context.Context, assetPackIdentifier string) (*AssetPack, error) {
+func (x *AssetPackManager) GetAssetPackWithIdentifier(ctx context.Context, assetPackIdentifier string) (result *AssetPack, err error) {
 	type _result struct {
 		val *AssetPack
 		err error
@@ -117,13 +125,13 @@ func (x *AssetPackManager) GetAssetPackWithIdentifier(ctx context.Context, asset
 	}
 }
 
-// Checks whether the asset pack with the specified identifier is available locally.
+// AssetPackIsAvailableLocallyWithIdentifier checks whether the asset pack with the specified identifier is available locally.
 func (x *AssetPackManager) AssetPackIsAvailableLocallyWithIdentifier(assetPackIdentifier string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("assetPackIsAvailableLocallyWithIdentifier:"), purego.NSString(assetPackIdentifier))
 	return _r
 }
 
-// Ensures that the specified asset pack be available locally.
+// EnsureLocalAvailabilityOfAssetPack ensures that the specified asset pack be available locally.
 //
 // EnsureLocalAvailabilityOfAssetPack blocks until the operation completes or ctx is cancelled.
 func (x *AssetPackManager) EnsureLocalAvailabilityOfAssetPack(ctx context.Context, assetPack *AssetPack) error {
@@ -142,7 +150,7 @@ func (x *AssetPackManager) EnsureLocalAvailabilityOfAssetPack(ctx context.Contex
 	}
 }
 
-// Ensures that the specified asset pack is available locally, performing a download if necessary.
+// EnsureLocalAvailabilityOfAssetPackRequireLatestVersion ensures that the specified asset pack is available locally, performing a download if necessary.
 //
 // EnsureLocalAvailabilityOfAssetPackRequireLatestVersion blocks until the operation completes or ctx is cancelled.
 func (x *AssetPackManager) EnsureLocalAvailabilityOfAssetPackRequireLatestVersion(ctx context.Context, assetPack *AssetPack, shouldUpdate bool) error {
@@ -161,8 +169,8 @@ func (x *AssetPackManager) EnsureLocalAvailabilityOfAssetPackRequireLatestVersio
 	}
 }
 
-// Opens and returns a file descriptor for the asset file at the specified relative path.
-func (x *AssetPackManager) FileDescriptorForPathSearchingInAssetPackWithIdentifierError(path string, assetPackIdentifier string) (int, error) {
+// FileDescriptorForPathSearchingInAssetPackWithIdentifierError opens and returns a file descriptor for the asset file at the specified relative path.
+func (x *AssetPackManager) FileDescriptorForPathSearchingInAssetPackWithIdentifierError(path string, assetPackIdentifier string) (result int, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fileDescriptorForPath:searchingInAssetPackWithIdentifier:error:"), purego.NSString(path), purego.NSString(assetPackIdentifier), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -171,8 +179,8 @@ func (x *AssetPackManager) FileDescriptorForPathSearchingInAssetPackWithIdentifi
 	return _r, nil
 }
 
-// Returns a URL for the specified relative path.
-func (x *AssetPackManager) URLForPathError(path string) (obj.Object, error) {
+// URLForPathError returns a URL for the specified relative path.
+func (x *AssetPackManager) URLForPathError(path string) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLForPath:error:"), purego.NSString(path), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -181,7 +189,7 @@ func (x *AssetPackManager) URLForPathError(path string) (obj.Object, error) {
 	return obj.Wrap(_r), nil
 }
 
-// Removes the specified asset pack from the device.
+// RemoveAssetPackWithIdentifier removes the specified asset pack from the device.
 //
 // RemoveAssetPackWithIdentifier blocks until the operation completes or ctx is cancelled.
 func (x *AssetPackManager) RemoveAssetPackWithIdentifier(ctx context.Context, assetPackIdentifier string) error {
@@ -208,8 +216,8 @@ type AssetPackManagerable interface {
 	AssetPackIsAvailableLocallyWithIdentifier(assetPackIdentifier string) bool
 	EnsureLocalAvailabilityOfAssetPack(ctx context.Context, assetPack *AssetPack) error
 	EnsureLocalAvailabilityOfAssetPackRequireLatestVersion(ctx context.Context, assetPack *AssetPack, shouldUpdate bool) error
-	FileDescriptorForPathSearchingInAssetPackWithIdentifierError(path string, assetPackIdentifier string) (int, error)
-	URLForPathError(path string) (obj.Object, error)
+	FileDescriptorForPathSearchingInAssetPackWithIdentifierError(path string, assetPackIdentifier string) (result int, err error)
+	URLForPathError(path string) (result obj.Object, err error)
 	RemoveAssetPackWithIdentifier(ctx context.Context, assetPackIdentifier string) error
 }
 

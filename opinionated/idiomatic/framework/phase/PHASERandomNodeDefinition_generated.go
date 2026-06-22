@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A sound event node that invokes one of its child nodes at random.
-//
 // RandomNodeDefinition is an idiomatic wrapper over the Objective-C class PHASERandomNodeDefinition.
+//
+// It embeds [SoundEventNodeDefinition], promoting that type's methods.
+//
+// A sound event node that invokes one of its child nodes at random.
 type RandomNodeDefinition struct {
-	objref.Handle
+	SoundEventNodeDefinition
 }
 
 // RandomNodeDefinitionFromID adopts an existing Objective-C object as a RandomNodeDefinition
@@ -25,7 +26,8 @@ func RandomNodeDefinitionFromID(id objc.ID) *RandomNodeDefinition {
 	if id == 0 {
 		return nil
 	}
-	x := &RandomNodeDefinition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RandomNodeDefinition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func randomNodeDefinitionAdopt(id objc.ID) *RandomNodeDefinition {
 	if id == 0 {
 		return nil
 	}
-	x := &RandomNodeDefinition{Handle: objref.Wrap(id)}
+	x := &RandomNodeDefinition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RandomNodeDefinition) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RandomNodeDefinition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RandomNodeDefinition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRandomNodeDefinition creates a new RandomNodeDefinition.
@@ -64,33 +52,31 @@ func NewRandomNodeDefinition() *RandomNodeDefinition {
 	return randomNodeDefinitionAdopt(_id)
 }
 
-// Creates a random node with the name you specify.
-//
-// NewRandomNodeDefinitionWithIdentifier creates a new RandomNodeDefinition.
+// NewRandomNodeDefinitionWithIdentifier creates a random node with the name you specify.
 func NewRandomNodeDefinitionWithIdentifier(identifier string) *RandomNodeDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASERandomNodeDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), purego.NSString(identifier))
 	return randomNodeDefinitionAdopt(_id)
 }
 
-// The length of the unique selection queue.
-//
-// WithUniqueSelectionQueueLength sets uniqueSelectionQueueLength and returns the receiver so calls can be chained.
+// WithUniqueSelectionQueueLength the length of the unique selection queue.
 func (x *RandomNodeDefinition) WithUniqueSelectionQueueLength(uniqueSelectionQueueLength int) *RandomNodeDefinition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniqueSelectionQueueLength:"), uniqueSelectionQueueLength)
 	return x
 }
 
-// Adds a node tree that’s one of the random-selection options.
+// AddSubtreeWeight adds a node tree that’s one of the random-selection options.
 func (x *RandomNodeDefinition) AddSubtreeWeight(subtree *SoundEventNodeDefinition, weight obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSubtree:weight:"), objref.IDOf(subtree), objref.IDOf(weight))
 }
 
+// UniqueSelectionQueueLength wraps the corresponding Objective-C method.
 func (x *RandomNodeDefinition) UniqueSelectionQueueLength() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("uniqueSelectionQueueLength"))
 	return _r
 }
 
+// SetUniqueSelectionQueueLength wraps the corresponding Objective-C method.
 func (x *RandomNodeDefinition) SetUniqueSelectionQueueLength(uniqueSelectionQueueLength int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniqueSelectionQueueLength:"), uniqueSelectionQueueLength)
 }
@@ -105,3 +91,7 @@ type RandomNodeDefinitionable interface {
 }
 
 var _ RandomNodeDefinitionable = (*RandomNodeDefinition)(nil)
+
+var _ SoundEventNodeDefinitionProvider = (*RandomNodeDefinition)(nil)
+
+var _ DefinitionProvider = (*RandomNodeDefinition)(nil)

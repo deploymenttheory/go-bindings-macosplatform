@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns an authorization object initialized with a default environment, flags, and rights.
+// SFAuthorizationAuthorization returns an authorization object initialized with a default environment, flags, and rights.
 func SFAuthorizationAuthorization() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("SFAuthorization")), objc.RegisterName("authorization"))
 	return obj.Wrap(_r)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An interface that represents a log state configuration.
-//
 // LogStateDescriptor is an idiomatic wrapper over the Objective-C class MTLLogStateDescriptor.
+//
+// An interface that represents a log state configuration.
 type LogStateDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LogStateDescriptorFromID(id objc.ID) *LogStateDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &LogStateDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LogStateDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func logStateDescriptorAdopt(id objc.ID) *LogStateDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &LogStateDescriptor{Handle: objref.Wrap(id)}
+	x := &LogStateDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,44 +60,48 @@ func (x *LogStateDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LogStateDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLogStateDescriptor creates a new LogStateDescriptor.
 func NewLogStateDescriptor() *LogStateDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLLogStateDescriptor")), objc.RegisterName("new"))
 	return logStateDescriptorAdopt(_id)
 }
 
-// The minimum level of messages that the shader can log.
-//
-// WithLevel sets level and returns the receiver so calls can be chained.
+// WithLevel the minimum level of messages that the shader can log.
 func (x *LogStateDescriptor) WithLevel(level LogLevel) *LogStateDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevel:"), level)
 	return x
 }
 
-// The size of the internal buffer the log state uses, specified in bytes.
-//
-// WithBufferSize sets bufferSize and returns the receiver so calls can be chained.
+// WithBufferSize the size of the internal buffer the log state uses, specified in bytes.
 func (x *LogStateDescriptor) WithBufferSize(bufferSize int) *LogStateDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferSize:"), bufferSize)
 	return x
 }
 
-// level indicates the minimum level of the logs that will be printed. All the logs with level less than given level will be skipped on the GPU Side.
+// Level level indicates the minimum level of the logs that will be printed. All the logs with level less than given level will be skipped on the GPU Side.
 func (x *LogStateDescriptor) Level() LogLevel {
 	_r := objc.Send[LogLevel](objref.IDOf(x), objc.RegisterName("level"))
 	return _r
 }
 
+// SetLevel wraps the corresponding Objective-C method.
 func (x *LogStateDescriptor) SetLevel(level LogLevel) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevel:"), level)
 }
 
-// bufferSize indicates the size of the buffer where GPU will store the logging content from shaders. Minimum value is 1KB
+// BufferSize bufferSize indicates the size of the buffer where GPU will store the logging content from shaders. Minimum value is 1KB
 func (x *LogStateDescriptor) BufferSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bufferSize"))
 	return _r
 }
 
+// SetBufferSize wraps the corresponding Objective-C method.
 func (x *LogStateDescriptor) SetBufferSize(bufferSize int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferSize:"), bufferSize)
 }

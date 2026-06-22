@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The settings for an IPv4 route.
-//
 // NEIPv4Route is an idiomatic wrapper over the Objective-C class NEIPv4Route.
+//
+// The settings for an IPv4 route.
 type NEIPv4Route struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NEIPv4RouteFromID(id objc.ID) *NEIPv4Route {
 	if id == 0 {
 		return nil
 	}
-	x := &NEIPv4Route{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEIPv4Route{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nEIPv4RouteAdopt(id objc.ID) *NEIPv4Route {
 	if id == 0 {
 		return nil
 	}
-	x := &NEIPv4Route{Handle: objref.Wrap(id)}
+	x := &NEIPv4Route{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +60,26 @@ func (x *NEIPv4Route) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize the NEIPv4Route object.
-//
-// NewNEIPv4RouteWithDestinationAddressSubnetMask creates a new NEIPv4Route.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEIPv4Route) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNEIPv4RouteWithDestinationAddressSubnetMask initialize the NEIPv4Route object.
 func NewNEIPv4RouteWithDestinationAddressSubnetMask(address string, subnetMask string) *NEIPv4Route {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NEIPv4Route")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestinationAddress:subnetMask:"), purego.NSString(address), purego.NSString(subnetMask))
 	return nEIPv4RouteAdopt(_id)
 }
 
-// The address of the next-hop gateway of the route.
-//
-// WithGatewayAddress sets gatewayAddress and returns the receiver so calls can be chained.
+// WithGatewayAddress the address of the next-hop gateway of the route.
 func (x *NEIPv4Route) WithGatewayAddress(gatewayAddress string) *NEIPv4Route {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGatewayAddress:"), purego.NSString(gatewayAddress))
 	return x
 }
 
-// An IPv4 address represented as a dotted decimal string.
+// DestinationAddress an IPv4 address represented as a dotted decimal string.
 func (x *NEIPv4Route) DestinationAddress() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationAddress"))
 	if _r == 0 {
@@ -84,7 +88,7 @@ func (x *NEIPv4Route) DestinationAddress() string {
 	return purego.GoString(_r)
 }
 
-// An IPv4 subnet mask represented as a dotted decimal string. This mask in combination with the destinationAddress property is used to determine the destination network of the route.
+// DestinationSubnetMask an IPv4 subnet mask represented as a dotted decimal string. This mask in combination with the destinationAddress property is used to determine the destination network of the route.
 func (x *NEIPv4Route) DestinationSubnetMask() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationSubnetMask"))
 	if _r == 0 {
@@ -93,7 +97,7 @@ func (x *NEIPv4Route) DestinationSubnetMask() string {
 	return purego.GoString(_r)
 }
 
-// The IPv4 address of the route's gateway. If this property is nil then the route's gateway will be set to the tunnel's virtual interface.
+// GatewayAddress the IPv4 address of the route's gateway. If this property is nil then the route's gateway will be set to the tunnel's virtual interface.
 func (x *NEIPv4Route) GatewayAddress() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gatewayAddress"))
 	if _r == 0 {
@@ -102,6 +106,7 @@ func (x *NEIPv4Route) GatewayAddress() string {
 	return purego.GoString(_r)
 }
 
+// SetGatewayAddress wraps the corresponding Objective-C method.
 func (x *NEIPv4Route) SetGatewayAddress(gatewayAddress string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGatewayAddress:"), purego.NSString(gatewayAddress))
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of a model parameter that includes a default value and a constraint, if applicable.
-//
 // ParameterDescription is an idiomatic wrapper over the Objective-C class MLParameterDescription.
+//
+// A description of a model parameter that includes a default value and a constraint, if applicable.
 type ParameterDescription struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ParameterDescriptionFromID(id objc.ID) *ParameterDescription {
 	if id == 0 {
 		return nil
 	}
-	x := &ParameterDescription{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ParameterDescription{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func parameterDescriptionAdopt(id objc.ID) *ParameterDescription {
 	if id == 0 {
 		return nil
 	}
-	x := &ParameterDescription{Handle: objref.Wrap(id)}
+	x := &ParameterDescription{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,31 @@ func (x *ParameterDescription) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ParameterDescription) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewParameterDescription creates a new ParameterDescription.
 func NewParameterDescription() *ParameterDescription {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLParameterDescription")), objc.RegisterName("new"))
 	return parameterDescriptionAdopt(_id)
 }
 
+// Key wraps the corresponding Objective-C method.
 func (x *ParameterDescription) Key() *ParameterKey {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("key"))
 	return ParameterKeyFromID(_r)
 }
 
+// DefaultValue wraps the corresponding Objective-C method.
 func (x *ParameterDescription) DefaultValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultValue"))
 	return obj.Wrap(_r)
 }
 
+// NumericConstraint wraps the corresponding Objective-C method.
 func (x *ParameterDescription) NumericConstraint() *NumericConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numericConstraint"))
 	return NumericConstraintFromID(_r)

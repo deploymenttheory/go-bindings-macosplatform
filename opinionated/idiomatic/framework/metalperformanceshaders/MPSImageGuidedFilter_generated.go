@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that performs edge-aware filtering on an image.
-//
 // ImageGuidedFilter is an idiomatic wrapper over the Objective-C class MPSImageGuidedFilter.
+//
+// It embeds [Kernel], promoting that type's methods.
+//
+// A filter that performs edge-aware filtering on an image.
 type ImageGuidedFilter struct {
-	objref.Handle
+	Kernel
 }
 
 // ImageGuidedFilterFromID adopts an existing Objective-C object as a ImageGuidedFilter
@@ -25,7 +26,8 @@ func ImageGuidedFilterFromID(id objc.ID) *ImageGuidedFilter {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageGuidedFilter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageGuidedFilter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func imageGuidedFilterAdopt(id objc.ID) *ImageGuidedFilter {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageGuidedFilter{Handle: objref.Wrap(id)}
+	x := &ImageGuidedFilter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ImageGuidedFilter) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageGuidedFilter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageGuidedFilter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewImageGuidedFilter creates a new ImageGuidedFilter.
@@ -64,70 +52,65 @@ func NewImageGuidedFilter() *ImageGuidedFilter {
 	return imageGuidedFilterAdopt(_id)
 }
 
-// The regularization parameter The parameter used when computing the linear coefficients a and b.
-//
-// WithEpsilon sets epsilon and returns the receiver so calls can be chained.
+// WithEpsilon the regularization parameter The parameter used when computing the linear coefficients a and b.
 func (x *ImageGuidedFilter) WithEpsilon(epsilon float32) *ImageGuidedFilter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpsilon:"), epsilon)
 	return x
 }
 
-// The scale parameter The parameter used to scale the result of the reconstruction operation. The default value is 1.0f.
-//
-// WithReconstructScale sets reconstructScale and returns the receiver so calls can be chained.
+// WithReconstructScale the scale parameter The parameter used to scale the result of the reconstruction operation. The default value is 1.0f.
 func (x *ImageGuidedFilter) WithReconstructScale(reconstructScale float32) *ImageGuidedFilter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReconstructScale:"), reconstructScale)
 	return x
 }
 
-// The offset parameter The offset parameter added to the result of the scaled reconstructed value. The default value is 0.0f.
-//
-// WithReconstructOffset sets reconstructOffset and returns the receiver so calls can be chained.
+// WithReconstructOffset the offset parameter The offset parameter added to the result of the scaled reconstructed value. The default value is 0.0f.
 func (x *ImageGuidedFilter) WithReconstructOffset(reconstructOffset float32) *ImageGuidedFilter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReconstructOffset:"), reconstructOffset)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *ImageGuidedFilter) WithLabel(label string) *ImageGuidedFilter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The local window size The local window size.
+// KernelDiameter the local window size The local window size.
 func (x *ImageGuidedFilter) KernelDiameter() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelDiameter"))
 	return _r
 }
 
-// The regularization parameter The parameter used when computing the linear coefficients a and b.
+// Epsilon the regularization parameter The parameter used when computing the linear coefficients a and b.
 func (x *ImageGuidedFilter) Epsilon() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
 	return _r
 }
 
+// SetEpsilon wraps the corresponding Objective-C method.
 func (x *ImageGuidedFilter) SetEpsilon(epsilon float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpsilon:"), epsilon)
 }
 
-// The scale parameter The parameter used to scale the result of the reconstruction operation. The default value is 1.0f.
+// ReconstructScale the scale parameter The parameter used to scale the result of the reconstruction operation. The default value is 1.0f.
 func (x *ImageGuidedFilter) ReconstructScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("reconstructScale"))
 	return _r
 }
 
+// SetReconstructScale wraps the corresponding Objective-C method.
 func (x *ImageGuidedFilter) SetReconstructScale(reconstructScale float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReconstructScale:"), reconstructScale)
 }
 
-// The offset parameter The offset parameter added to the result of the scaled reconstructed value. The default value is 0.0f.
+// ReconstructOffset the offset parameter The offset parameter added to the result of the scaled reconstructed value. The default value is 0.0f.
 func (x *ImageGuidedFilter) ReconstructOffset() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("reconstructOffset"))
 	return _r
 }
 
+// SetReconstructOffset wraps the corresponding Objective-C method.
 func (x *ImageGuidedFilter) SetReconstructOffset(reconstructOffset float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReconstructOffset:"), reconstructOffset)
 }
@@ -149,3 +132,5 @@ type ImageGuidedFilterable interface {
 }
 
 var _ ImageGuidedFilterable = (*ImageGuidedFilter)(nil)
+
+var _ KernelProvider = (*ImageGuidedFilter)(nil)

@@ -23,7 +23,8 @@ func QCPatchControllerFromID(id objc.ID) *QCPatchController {
 	if id == 0 {
 		return nil
 	}
-	x := &QCPatchController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QCPatchController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func qCPatchControllerAdopt(id objc.ID) *QCPatchController {
 	if id == 0 {
 		return nil
 	}
-	x := &QCPatchController{Handle: objref.Wrap(id)}
+	x := &QCPatchController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *QCPatchController) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *QCPatchController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *QCPatchController) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewQCPatchController creates a new QCPatchController.

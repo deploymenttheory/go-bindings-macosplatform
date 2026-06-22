@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that adopts the decimal number behaviors protocol.
-//
 // DecimalNumberHandler is an idiomatic wrapper over the Objective-C class NSDecimalNumberHandler.
+//
+// A class that adopts the decimal number behaviors protocol.
 type DecimalNumberHandler struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DecimalNumberHandlerFromID(id objc.ID) *DecimalNumberHandler {
 	if id == 0 {
 		return nil
 	}
-	x := &DecimalNumberHandler{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DecimalNumberHandler{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func decimalNumberHandlerAdopt(id objc.ID) *DecimalNumberHandler {
 	if id == 0 {
 		return nil
 	}
-	x := &DecimalNumberHandler{Handle: objref.Wrap(id)}
+	x := &DecimalNumberHandler{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,16 +60,20 @@ func (x *DecimalNumberHandler) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns an NSDecimalNumberHandler object initialized so it behaves as specified by the method’s arguments.
-//
-// NewDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero creates a new DecimalNumberHandler.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DecimalNumberHandler) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero returns an NSDecimalNumberHandler object initialized so it behaves as specified by the method’s arguments.
 func NewDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero(roundingMode RoundingMode, scale int16, exact bool, overflow bool, underflow bool, divideByZero bool) *DecimalNumberHandler {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumberHandler")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRoundingMode:scale:raiseOnExactness:raiseOnOverflow:raiseOnUnderflow:raiseOnDivideByZero:"), roundingMode, scale, exact, overflow, underflow, divideByZero)
 	return decimalNumberHandlerAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *DecimalNumberHandler) WithScriptingProperties(scriptingProperties obj.Object) *DecimalNumberHandler {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x

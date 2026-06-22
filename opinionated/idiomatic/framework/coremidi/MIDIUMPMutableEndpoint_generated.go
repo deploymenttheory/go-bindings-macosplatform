@@ -9,14 +9,15 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // UMPMutableEndpoint is an idiomatic wrapper over the Objective-C class MIDIUMPMutableEndpoint.
+//
+// It embeds [UMPEndpoint], promoting that type's methods.
 type UMPMutableEndpoint struct {
-	objref.Handle
+	UMPEndpoint
 }
 
 // UMPMutableEndpointFromID adopts an existing Objective-C object as a UMPMutableEndpoint
@@ -25,7 +26,8 @@ func UMPMutableEndpointFromID(id objc.ID) *UMPMutableEndpoint {
 	if id == 0 {
 		return nil
 	}
-	x := &UMPMutableEndpoint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UMPMutableEndpoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func uMPMutableEndpointAdopt(id objc.ID) *UMPMutableEndpoint {
 	if id == 0 {
 		return nil
 	}
-	x := &UMPMutableEndpoint{Handle: objref.Wrap(id)}
+	x := &UMPMutableEndpoint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UMPMutableEndpoint) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UMPMutableEndpoint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UMPMutableEndpoint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUMPMutableEndpoint creates a new UMPMutableEndpoint.
@@ -64,25 +52,21 @@ func NewUMPMutableEndpoint() *UMPMutableEndpoint {
 	return uMPMutableEndpointAdopt(_id)
 }
 
-// The Function Blocks associated with the UMP endpoint, if any.
-//
-// WithMutableFunctionBlocks sets the collection and returns the receiver so calls can be chained.
+// WithMutableFunctionBlocks the Function Blocks associated with the UMP endpoint, if any.
 func (x *UMPMutableEndpoint) WithMutableFunctionBlocks(items ...*UMPMutableFunctionBlock) *UMPMutableEndpoint {
 	_arr := purego.SliceToNSArray(items, func(_v *UMPMutableFunctionBlock) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMutableFunctionBlocks:"), _arr)
 	return x
 }
 
-// The Function Blocks associated with the UMP endpoint, if any.
-//
-// WithFunctionBlocks sets the collection and returns the receiver so calls can be chained.
+// WithFunctionBlocks the Function Blocks associated with the UMP endpoint, if any.
 func (x *UMPMutableEndpoint) WithFunctionBlocks(items ...UMPFunctionBlockProvider) *UMPMutableEndpoint {
 	_arr := purego.SliceToNSArray(items, func(_v UMPFunctionBlockProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionBlocks:"), _arr)
 	return x
 }
 
-// Set the endpoints name. This operation will fail if the name could not be set.
+// SetName set the endpoints name. This operation will fail if the name could not be set.
 func (x *UMPMutableEndpoint) SetName(name string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setName:error:"), purego.NSString(name), unsafe.Pointer(&_nsErr))
@@ -92,7 +76,7 @@ func (x *UMPMutableEndpoint) SetName(name string) error {
 	return nil
 }
 
-// Register or replace Function Blocks for a disabled client-created MIDIUMPEndpoint. This operation will fail if the array contains any disabled Function Blocks but the MIDIUMPEndpoint Function Block configuration is static. Returns YES if the Function Block configuration was set successfully.
+// RegisterFunctionBlocksMarkAsStatic register or replace Function Blocks for a disabled client-created MIDIUMPEndpoint. This operation will fail if the array contains any disabled Function Blocks but the MIDIUMPEndpoint Function Block configuration is static. Returns YES if the Function Block configuration was set successfully.
 func (x *UMPMutableEndpoint) RegisterFunctionBlocksMarkAsStatic(functionBlocks []*UMPMutableFunctionBlock, markAsStatic bool) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("registerFunctionBlocks:markAsStatic:error:"), purego.SliceToNSArray(functionBlocks, func(_v *UMPMutableFunctionBlock) objc.ID { return objref.IDOf(_v) }), markAsStatic, unsafe.Pointer(&_nsErr))
@@ -102,7 +86,7 @@ func (x *UMPMutableEndpoint) RegisterFunctionBlocksMarkAsStatic(functionBlocks [
 	return nil
 }
 
-// Enable a mutable UMP endpoint in the system-wide UMP endpoint cache. A MIDIUMPMutableEndpoint must be cache enabled before it is visible via API. Note that Function Blocks may only be registered to uncached MIDIUMPMutableEndpoint objects.
+// SetEnabled enable a mutable UMP endpoint in the system-wide UMP endpoint cache. A MIDIUMPMutableEndpoint must be cache enabled before it is visible via API. Note that Function Blocks may only be registered to uncached MIDIUMPMutableEndpoint objects.
 func (x *UMPMutableEndpoint) SetEnabled(isEnabled bool) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setEnabled:error:"), isEnabled, unsafe.Pointer(&_nsErr))
@@ -112,7 +96,7 @@ func (x *UMPMutableEndpoint) SetEnabled(isEnabled bool) error {
 	return nil
 }
 
-// The Function Blocks associated with the UMP endpoint, if any.
+// MutableFunctionBlocks the Function Blocks associated with the UMP endpoint, if any.
 //
 // MutableFunctionBlocks returns the collection as a Go slice.
 func (x *UMPMutableEndpoint) MutableFunctionBlocks() []*UMPMutableFunctionBlock {
@@ -120,11 +104,12 @@ func (x *UMPMutableEndpoint) MutableFunctionBlocks() []*UMPMutableFunctionBlock 
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UMPMutableFunctionBlock { return UMPMutableFunctionBlockFromID(_id) })
 }
 
+// SetMutableFunctionBlocks wraps the corresponding Objective-C method.
 func (x *UMPMutableEndpoint) SetMutableFunctionBlocks(mutableFunctionBlocks []*UMPMutableFunctionBlock) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMutableFunctionBlocks:"), purego.SliceToNSArray(mutableFunctionBlocks, func(_v *UMPMutableFunctionBlock) objc.ID { return objref.IDOf(_v) }))
 }
 
-// The enable state of the endpoint.
+// IsEnabled the enable state of the endpoint.
 func (x *UMPMutableEndpoint) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r
@@ -144,3 +129,5 @@ type UMPMutableEndpointable interface {
 }
 
 var _ UMPMutableEndpointable = (*UMPMutableEndpoint)(nil)
+
+var _ UMPEndpointProvider = (*UMPMutableEndpoint)(nil)

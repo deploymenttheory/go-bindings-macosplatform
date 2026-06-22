@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An instance that describes how to organize and map data to a vertex function.
-//
 // VertexDescriptor is an idiomatic wrapper over the Objective-C class MTLVertexDescriptor.
+//
+// An instance that describes how to organize and map data to a vertex function.
 type VertexDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VertexDescriptorFromID(id objc.ID) *VertexDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &VertexDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VertexDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func vertexDescriptorAdopt(id objc.ID) *VertexDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &VertexDescriptor{Handle: objref.Wrap(id)}
+	x := &VertexDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,30 @@ func (x *VertexDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VertexDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVertexDescriptor creates a new VertexDescriptor.
 func NewVertexDescriptor() *VertexDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLVertexDescriptor")), objc.RegisterName("new"))
 	return vertexDescriptorAdopt(_id)
 }
 
-// Resets the default state for the vertex descriptor.
+// Reset resets the default state for the vertex descriptor.
 func (x *VertexDescriptor) Reset() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
+// Layouts wraps the corresponding Objective-C method.
 func (x *VertexDescriptor) Layouts() *VertexBufferLayoutDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layouts"))
 	return VertexBufferLayoutDescriptorArrayFromID(_r)
 }
 
+// Attributes wraps the corresponding Objective-C method.
 func (x *VertexDescriptor) Attributes() *VertexAttributeDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
 	return VertexAttributeDescriptorArrayFromID(_r)

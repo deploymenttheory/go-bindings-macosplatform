@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing metrics about the responsiveness of animation in the app.
-//
 // AnimationMetric is an idiomatic wrapper over the Objective-C class MXAnimationMetric.
+//
+// It embeds [Metric], promoting that type's methods.
+//
+// An object representing metrics about the responsiveness of animation in the app.
 type AnimationMetric struct {
-	objref.Handle
+	Metric
 }
 
 // AnimationMetricFromID adopts an existing Objective-C object as a AnimationMetric
@@ -25,7 +26,8 @@ func AnimationMetricFromID(id objc.ID) *AnimationMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &AnimationMetric{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AnimationMetric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func animationMetricAdopt(id objc.ID) *AnimationMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &AnimationMetric{Handle: objref.Wrap(id)}
+	x := &AnimationMetric{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AnimationMetric) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AnimationMetric) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AnimationMetric) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAnimationMetric creates a new AnimationMetric.
@@ -64,13 +52,13 @@ func NewAnimationMetric() *AnimationMetric {
 	return animationMetricAdopt(_id)
 }
 
-// Ratio of time the application spent hitching while scrolling. Scroll hitches are user perceptible animation issues that occur during scrolling. This metric only applies to UIScrollViews. Dimensionless.
+// ScrollHitchTimeRatio ratio of time the application spent hitching while scrolling. Scroll hitches are user perceptible animation issues that occur during scrolling. This metric only applies to UIScrollViews. Dimensionless.
 func (x *AnimationMetric) ScrollHitchTimeRatio() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollHitchTimeRatio"))
 	return obj.Wrap(_r)
 }
 
-// Ratio of time the application spent hitching during tracked animations. Hitches are user perceptible frame delays that can occur during animations and scrolling. This metric incorporates adjustments that optimize for user perception, and typically will be the most accurate representation of what hitches users experience during app usage. This metric is normalized against total animation duration. Many animations are tracked by default. You can track additional animations using the -[NSProcessInfo beginActivityWithOptions:reason:] method with the NSActivityAnimationTrackingEnabled option. Dimensionless.
+// HitchTimeRatio ratio of time the application spent hitching during tracked animations. Hitches are user perceptible frame delays that can occur during animations and scrolling. This metric incorporates adjustments that optimize for user perception, and typically will be the most accurate representation of what hitches users experience during app usage. This metric is normalized against total animation duration. Many animations are tracked by default. You can track additional animations using the -[NSProcessInfo beginActivityWithOptions:reason:] method with the NSActivityAnimationTrackingEnabled option. Dimensionless.
 func (x *AnimationMetric) HitchTimeRatio() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hitchTimeRatio"))
 	return obj.Wrap(_r)
@@ -84,3 +72,5 @@ type AnimationMetricable interface {
 }
 
 var _ AnimationMetricable = (*AnimationMetric)(nil)
+
+var _ MetricProvider = (*AnimationMetric)(nil)

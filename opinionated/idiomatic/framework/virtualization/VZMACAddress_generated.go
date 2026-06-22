@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The media access control (MAC) address for a network interface in your virtual machine.
-//
 // MACAddress is an idiomatic wrapper over the Objective-C class VZMACAddress.
+//
+// The media access control (MAC) address for a network interface in your virtual machine.
 type MACAddress struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MACAddressFromID(id objc.ID) *MACAddress {
 	if id == 0 {
 		return nil
 	}
-	x := &MACAddress{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MACAddress{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mACAddressAdopt(id objc.ID) *MACAddress {
 	if id == 0 {
 		return nil
 	}
-	x := &MACAddress{Handle: objref.Wrap(id)}
+	x := &MACAddress{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,49 +60,44 @@ func (x *MACAddress) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a MAC address object from a specially formatted string.
-//
-// NewMACAddressWithString creates a new MACAddress.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MACAddress) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMACAddressWithString creates a MAC address object from a specially formatted string.
 func NewMACAddressWithString(string_ string) *MACAddress {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMACAddress")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(string_))
 	return mACAddressAdopt(_id)
 }
 
-// The address represented as a string. The 6 bytes are represented in hexadecimal form, separated by a colon character. Alphabetical characters are lowercase. The address is compatible with the parameter of -[VZMACAddress initWithString:].
-func (x *MACAddress) String() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("string"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
-}
-
-// True if the address is the broadcast address, false otherwise.
+// IsBroadcastAddress true if the address is the broadcast address, false otherwise.
 func (x *MACAddress) IsBroadcastAddress() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBroadcastAddress"))
 	return _r
 }
 
-// True if the address is a multicast address, false otherwise.
+// IsMulticastAddress true if the address is a multicast address, false otherwise.
 func (x *MACAddress) IsMulticastAddress() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMulticastAddress"))
 	return _r
 }
 
-// True if the address is a unicast address, false otherwise.
+// IsUnicastAddress true if the address is a unicast address, false otherwise.
 func (x *MACAddress) IsUnicastAddress() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUnicastAddress"))
 	return _r
 }
 
-// True if the address is a locally administered addresses (LAA), false otherwise.
+// IsLocallyAdministeredAddress true if the address is a locally administered addresses (LAA), false otherwise.
 func (x *MACAddress) IsLocallyAdministeredAddress() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLocallyAdministeredAddress"))
 	return _r
 }
 
-// True if the address is a universally administered addresses (UAA), false otherwise.
+// IsUniversallyAdministeredAddress true if the address is a universally administered addresses (UAA), false otherwise.
 func (x *MACAddress) IsUniversallyAdministeredAddress() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUniversallyAdministeredAddress"))
 	return _r
@@ -109,7 +106,6 @@ func (x *MACAddress) IsUniversallyAdministeredAddress() bool {
 // MACAddressable is the interface implemented by [MACAddress], for mocking and DI.
 type MACAddressable interface {
 	obj.Object
-	String() string
 	IsBroadcastAddress() bool
 	IsMulticastAddress() bool
 	IsUnicastAddress() bool

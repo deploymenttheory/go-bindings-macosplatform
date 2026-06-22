@@ -23,7 +23,8 @@ func MTRServerAttributeFromID(id objc.ID) *MTRServerAttribute {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRServerAttribute{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRServerAttribute{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRServerAttributeAdopt(id objc.ID) *MTRServerAttribute {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRServerAttribute{Handle: objref.Wrap(id)}
+	x := &MTRServerAttribute{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,43 +58,50 @@ func (x *MTRServerAttribute) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize as a readonly attribute.  The value is a data-value as documented in MTRBaseDevice.h. Will fail if the attribute ID is not valid per the Matter specification or the attribute value is not a valid data-value. requiredPrivilege is the privilege required to read the attribute. This initializer may fail if the provided attributeID is a global attribute and the provided requiredPrivilege value is not correct for that attribute ID.
-//
-// NewMTRServerAttributeReadonlyAttributeWithIDInitialValueRequiredPrivilege creates a new MTRServerAttribute.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRServerAttribute) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRServerAttributeReadonlyAttributeWithIDInitialValueRequiredPrivilege initialize as a readonly attribute.  The value is a data-value as documented in MTRBaseDevice.h. Will fail if the attribute ID is not valid per the Matter specification or the attribute value is not a valid data-value. requiredPrivilege is the privilege required to read the attribute. This initializer may fail if the provided attributeID is a global attribute and the provided requiredPrivilege value is not correct for that attribute ID.
 func NewMTRServerAttributeReadonlyAttributeWithIDInitialValueRequiredPrivilege(attributeID obj.Object, value obj.Object, requiredPrivilege MTRAccessControlEntryPrivilege) *MTRServerAttribute {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRServerAttribute")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initReadonlyAttributeWithID:initialValue:requiredPrivilege:"), objref.IDOf(attributeID), objref.IDOf(value), requiredPrivilege)
 	return mTRServerAttributeAdopt(_id)
 }
 
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue sets the property and returns the receiver so calls can be chained.
 func (x *MTRServerAttribute) WithValue(value obj.Object) *MTRServerAttribute {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return x
 }
 
-// Change the value of the attribute to a new value.  The value is a data-value as documented in MTRBaseDevice.h. Will fail if the attribute is not a valid data-value.
+// SetValue change the value of the attribute to a new value.  The value is a data-value as documented in MTRBaseDevice.h. Will fail if the attribute is not a valid data-value.
 func (x *MTRServerAttribute) SetValue(value obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return _r
 }
 
+// AttributeID wraps the corresponding Objective-C method.
 func (x *MTRServerAttribute) AttributeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeID"))
 	return obj.Wrap(_r)
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *MTRServerAttribute) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
-// The privilege level necessary to read this attribute.
+// RequiredReadPrivilege the privilege level necessary to read this attribute.
 func (x *MTRServerAttribute) RequiredReadPrivilege() MTRAccessControlEntryPrivilege {
 	_r := objc.Send[MTRAccessControlEntryPrivilege](objref.IDOf(x), objc.RegisterName("requiredReadPrivilege"))
 	return _r
 }
 
+// IsWritable wraps the corresponding Objective-C method.
 func (x *MTRServerAttribute) IsWritable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isWritable"))
 	return _r

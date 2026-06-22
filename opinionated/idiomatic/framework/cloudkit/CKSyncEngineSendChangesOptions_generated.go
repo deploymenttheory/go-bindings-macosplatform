@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of options to use with a send operation.
-//
 // SyncEngineSendChangesOptions is an idiomatic wrapper over the Objective-C class CKSyncEngineSendChangesOptions.
+//
+// A set of options to use with a send operation.
 type SyncEngineSendChangesOptions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SyncEngineSendChangesOptionsFromID(id objc.ID) *SyncEngineSendChangesOption
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineSendChangesOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SyncEngineSendChangesOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func syncEngineSendChangesOptionsAdopt(id objc.ID) *SyncEngineSendChangesOptions
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineSendChangesOptions{Handle: objref.Wrap(id)}
+	x := &SyncEngineSendChangesOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,47 +60,49 @@ func (x *SyncEngineSendChangesOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a set of options with the specific scope.
-//
-// NewSyncEngineSendChangesOptionsWithScope creates a new SyncEngineSendChangesOptions.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncEngineSendChangesOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSyncEngineSendChangesOptionsWithScope initializes a set of options with the specific scope.
 func NewSyncEngineSendChangesOptionsWithScope(scope *SyncEngineSendChangesScope) *SyncEngineSendChangesOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineSendChangesOptions")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScope:"), objref.IDOf(scope))
 	return syncEngineSendChangesOptionsAdopt(_id)
 }
 
-// The scope in which to send changes to the server.
-//
-// WithScope sets scope and returns the receiver so calls can be chained.
+// WithScope the scope in which to send changes to the server.
 func (x *SyncEngineSendChangesOptions) WithScope(scope *SyncEngineSendChangesScope) *SyncEngineSendChangesOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScope:"), objref.IDOf(scope))
 	return x
 }
 
-// The operation group to use for the underlying CloudKit operations.
-//
-// WithOperationGroup sets operationGroup and returns the receiver so calls can be chained.
+// WithOperationGroup the operation group to use for the underlying CloudKit operations.
 func (x *SyncEngineSendChangesOptions) WithOperationGroup(operationGroup *OperationGroup) *SyncEngineSendChangesOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationGroup:"), objref.IDOf(operationGroup))
 	return x
 }
 
-// The scope in which to send changes to the server.
+// Scope the scope in which to send changes to the server.
 func (x *SyncEngineSendChangesOptions) Scope() *SyncEngineSendChangesScope {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scope"))
 	return SyncEngineSendChangesScopeFromID(_r)
 }
 
+// SetScope wraps the corresponding Objective-C method.
 func (x *SyncEngineSendChangesOptions) SetScope(scope *SyncEngineSendChangesScope) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScope:"), objref.IDOf(scope))
 }
 
-// The operation group to use for the underlying CloudKit operations. - Tip: Providing a specific operation group helps you to identify and analyze the telemetry of send operations in CloudKit Console. The default value is `nil`.
+// OperationGroup the operation group to use for the underlying CloudKit operations. - Tip: Providing a specific operation group helps you to identify and analyze the telemetry of send operations in CloudKit Console. The default value is `nil`.
 func (x *SyncEngineSendChangesOptions) OperationGroup() *OperationGroup {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationGroup"))
 	return OperationGroupFromID(_r)
 }
 
+// SetOperationGroup wraps the corresponding Objective-C method.
 func (x *SyncEngineSendChangesOptions) SetOperationGroup(operationGroup *OperationGroup) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationGroup:"), objref.IDOf(operationGroup))
 }

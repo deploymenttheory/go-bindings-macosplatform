@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A textual representation of the specified speech in its entirety, as recognized by the speech recognizer.
-//
 // Transcription is an idiomatic wrapper over the Objective-C class SFTranscription.
+//
+// A textual representation of the specified speech in its entirety, as recognized by the speech recognizer.
 type Transcription struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TranscriptionFromID(id objc.ID) *Transcription {
 	if id == 0 {
 		return nil
 	}
-	x := &Transcription{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Transcription{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func transcriptionAdopt(id objc.ID) *Transcription {
 	if id == 0 {
 		return nil
 	}
-	x := &Transcription{Handle: objref.Wrap(id)}
+	x := &Transcription{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *Transcription) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Transcription) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTranscription creates a new Transcription.
 func NewTranscription() *Transcription {
 	_id := objc.Send[objc.ID](objc.ID(_class("SFTranscription")), objc.RegisterName("new"))
 	return transcriptionAdopt(_id)
 }
 
-// The entire transcription of utterances, formatted into a single, user-displayable string.
+// FormattedString the entire transcription of utterances, formatted into a single, user-displayable string.
 func (x *Transcription) FormattedString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formattedString"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *Transcription) FormattedString() string {
 	return purego.GoString(_r)
 }
 
-// An array of transcription segments that represent the parts of the transcription, as identified by the speech recognizer. The order of the segments in the array matches the order in which the corresponding utterances occur in the spoken content.
+// Segments an array of transcription segments that represent the parts of the transcription, as identified by the speech recognizer. The order of the segments in the array matches the order in which the corresponding utterances occur in the spoken content.
 //
 // Segments returns the collection as a Go slice.
 func (x *Transcription) Segments() []*TranscriptionSegment {
@@ -81,13 +89,13 @@ func (x *Transcription) Segments() []*TranscriptionSegment {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TranscriptionSegment { return TranscriptionSegmentFromID(_id) })
 }
 
-// The number of words spoken per minute.
+// SpeakingRate the number of words spoken per minute.
 func (x *Transcription) SpeakingRate() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speakingRate"))
 	return _r
 }
 
-// The average pause duration between words, measured in seconds.
+// AveragePauseDuration the average pause duration between words, measured in seconds.
 func (x *Transcription) AveragePauseDuration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("averagePauseDuration"))
 	return _r

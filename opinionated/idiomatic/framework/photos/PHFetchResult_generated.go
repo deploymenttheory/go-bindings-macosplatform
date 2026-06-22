@@ -7,6 +7,7 @@ package photos
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -14,9 +15,9 @@ import (
 	"unsafe"
 )
 
-// An ordered list of assets or collections returned from a Photos fetch method.
-//
 // FetchResult is an idiomatic wrapper over the Objective-C class PHFetchResult.
+//
+// An ordered list of assets or collections returned from a Photos fetch method.
 type FetchResult struct {
 	objref.Handle
 }
@@ -27,7 +28,8 @@ func FetchResultFromID(id objc.ID) *FetchResult {
 	if id == 0 {
 		return nil
 	}
-	x := &FetchResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FetchResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +42,8 @@ func fetchResultAdopt(id objc.ID) *FetchResult {
 	if id == 0 {
 		return nil
 	}
-	x := &FetchResult{Handle: objref.Wrap(id)}
+	x := &FetchResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,65 +63,80 @@ func (x *FetchResult) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FetchResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFetchResult creates a new FetchResult.
 func NewFetchResult() *FetchResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHFetchResult")), objc.RegisterName("new"))
 	return fetchResultAdopt(_id)
 }
 
-// Returns the object located at the specified index.
+// ObjectAtIndex returns the object located at the specified index.
 func (x *FetchResult) ObjectAtIndex(index int) obj.Object {
 	errkit.CheckIndex(index, x.Count())
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndex:"), index)
 	return obj.Wrap(_r)
 }
 
-// Returns the object located at the specified index.
+// ObjectAtIndexedSubscript returns the object located at the specified index.
 func (x *FetchResult) ObjectAtIndexedSubscript(idx int) obj.Object {
 	errkit.CheckIndex(idx, x.Count())
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), idx)
 	return obj.Wrap(_r)
 }
 
-// Returns whether the specified object is present in the fetch result.
+// ContainsObject returns whether the specified object is present in the fetch result.
 func (x *FetchResult) ContainsObject(anObject obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsObject:"), objref.IDOf(anObject))
 	return _r
 }
 
-// Returns the lowest index whose corresponding object in the fetch result is equal to the specified object.
+// IndexOfObject returns the lowest index whose corresponding object in the fetch result is equal to the specified object.
 func (x *FetchResult) IndexOfObject(anObject obj.Object) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfObject:"), objref.IDOf(anObject))
 	return _r
 }
 
-// Returns an array containing the objects in the fetch result at the indexes in the specified index set.
+// IndexOfObjectInRange returns the lowest index within the specified range whose corresponding object in the fetch result is equal to the specified object.
+func (x *FetchResult) IndexOfObjectInRange(anObject obj.Object, range_ foundation.NSRange) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfObject:inRange:"), objref.IDOf(anObject), range_)
+	return _r
+}
+
+// ObjectsAtIndexes returns an array containing the objects in the fetch result at the indexes in the specified index set.
 func (x *FetchResult) ObjectsAtIndexes(indexes obj.Object) []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectsAtIndexes:"), objref.IDOf(indexes))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Executes the specified block using each object in the fetch result, starting with the first object and continuing in order to the last object.
+// EnumerateObjectsUsing executes the specified block using each object in the fetch result, starting with the first object and continuing in order to the last object.
 func (x *FetchResult) EnumerateObjectsUsing(block func(obj.Object, int, *bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateObjectsUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
 }
 
-// Returns the number of assets in the fetch result of a specified type.
+// CountOfAssetsWithMediaType returns the number of assets in the fetch result of a specified type.
 func (x *FetchResult) CountOfAssetsWithMediaType(mediaType AssetMediaType) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("countOfAssetsWithMediaType:"), mediaType)
 	return _r
 }
 
+// Count wraps the corresponding Objective-C method.
 func (x *FetchResult) Count() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
 	return _r
 }
 
+// FirstObject wraps the corresponding Objective-C method.
 func (x *FetchResult) FirstObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstObject"))
 	return obj.Wrap(_r)
 }
 
+// LastObject wraps the corresponding Objective-C method.
 func (x *FetchResult) LastObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastObject"))
 	return obj.Wrap(_r)
@@ -131,6 +149,7 @@ type FetchResultable interface {
 	ObjectAtIndexedSubscript(idx int) obj.Object
 	ContainsObject(anObject obj.Object) bool
 	IndexOfObject(anObject obj.Object) int
+	IndexOfObjectInRange(anObject obj.Object, range_ foundation.NSRange) int
 	ObjectsAtIndexes(indexes obj.Object) []obj.Object
 	EnumerateObjectsUsing(block func(obj.Object, int, *bool))
 	CountOfAssetsWithMediaType(mediaType AssetMediaType) int

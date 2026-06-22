@@ -23,7 +23,8 @@ func MTRMetricDataFromID(id objc.ID) *MTRMetricData {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRMetricData{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRMetricData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRMetricDataAdopt(id objc.ID) *MTRMetricData {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRMetricData{Handle: objref.Wrap(id)}
+	x := &MTRMetricData{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,25 +58,31 @@ func (x *MTRMetricData) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRMetricData) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRMetricData creates a new MTRMetricData.
 func NewMTRMetricData() *MTRMetricData {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRMetricData")), objc.RegisterName("new"))
 	return mTRMetricDataAdopt(_id)
 }
 
-// Value for the metric data. The value may be nil depending on the event emitted.
+// Value value for the metric data. The value may be nil depending on the event emitted.
 func (x *MTRMetricData) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
-// Error code for the metric data. This value, when not nil, holds the error code value of the operation associated with the event. Interpretation of the error code value dependents on the metric being emitted.
+// ErrorCode error code for the metric data. This value, when not nil, holds the error code value of the operation associated with the event. Interpretation of the error code value dependents on the metric being emitted.
 func (x *MTRMetricData) ErrorCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorCode"))
 	return obj.Wrap(_r)
 }
 
-// Duration of event associated with the metric. This value may be nil depending on the event emitted. When not nil, the value of duration is of type NSTimeInterval.
+// Duration duration of event associated with the metric. This value may be nil depending on the event emitted. When not nil, the value of duration is of type NSTimeInterval.
 func (x *MTRMetricData) Duration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("duration"))
 	return obj.Wrap(_r)

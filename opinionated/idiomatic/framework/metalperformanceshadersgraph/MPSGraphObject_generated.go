@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The common base class for all Metal Performance Shaders Graph objects.
-//
 // GraphObject is an idiomatic wrapper over the Objective-C class MPSGraphObject.
+//
+// GraphObject is an abstract base — you do not construct it directly. Construct one of [GraphCompilationDescriptor], [GraphConvolution2DOpDescriptor], [GraphConvolution3DOpDescriptor], [GraphCreateSparseOpDescriptor], [GraphDepthwiseConvolution2DOpDescriptor], [GraphDepthwiseConvolution3DOpDescriptor], [GraphDevice], [GraphExecutableExecutionDescriptor], [GraphExecutableSerializationDescriptor], [GraphExecutable], [GraphExecutionDescriptor], [GraphFFTDescriptor], [GraphGRUDescriptor], [GraphImToColOpDescriptor], [GraphLSTMDescriptor], [GraphOperation], [GraphPooling2DOpDescriptor], [GraphPooling4DOpDescriptor], [GraphRandomOpDescriptor], [GraphSingleGateRNNDescriptor], [GraphStencilOpDescriptor], [GraphTensorData], [GraphTensor], [GraphType], [Graph] and pass it where a GraphObject is accepted.
+//
+// The common base class for all Metal Performance Shaders Graph objects.
 type GraphObject struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func GraphObjectFromID(id objc.ID) *GraphObject {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphObject{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func graphObjectAdopt(id objc.ID) *GraphObject {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphObject{Handle: objref.Wrap(id)}
+	x := &GraphObject{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *GraphObject) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewGraphObject creates a new GraphObject.
-func NewGraphObject() *GraphObject {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphObject")), objc.RegisterName("new"))
-	return graphObjectAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GraphObject) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // GraphObjectable is the interface implemented by [GraphObject], for mocking and DI.
@@ -70,3 +74,10 @@ type GraphObjectable interface {
 }
 
 var _ GraphObjectable = (*GraphObject)(nil)
+
+// isGraphObject marks GraphObject — and, by embedding promotion, its
+// subclasses — as a member of the GraphObject hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *GraphObject) isGraphObject() {}
+
+var _ GraphObjectProvider = (*GraphObject)(nil)

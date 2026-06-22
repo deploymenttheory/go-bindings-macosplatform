@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An AI that chooses moves in turn-based games using a probabilistic strategy.
-//
 // MonteCarloStrategist is an idiomatic wrapper over the Objective-C class GKMonteCarloStrategist.
+//
+// An AI that chooses moves in turn-based games using a probabilistic strategy.
 type MonteCarloStrategist struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MonteCarloStrategistFromID(id objc.ID) *MonteCarloStrategist {
 	if id == 0 {
 		return nil
 	}
-	x := &MonteCarloStrategist{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MonteCarloStrategist{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func monteCarloStrategistAdopt(id objc.ID) *MonteCarloStrategist {
 	if id == 0 {
 		return nil
 	}
-	x := &MonteCarloStrategist{Handle: objref.Wrap(id)}
+	x := &MonteCarloStrategist{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,44 +60,48 @@ func (x *MonteCarloStrategist) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MonteCarloStrategist) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMonteCarloStrategist creates a new MonteCarloStrategist.
 func NewMonteCarloStrategist() *MonteCarloStrategist {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKMonteCarloStrategist")), objc.RegisterName("new"))
 	return monteCarloStrategistAdopt(_id)
 }
 
-// The maximum number of game model states the strategist will examine when searching for a move.
-//
-// WithBudget sets budget and returns the receiver so calls can be chained.
+// WithBudget the maximum number of game model states the strategist will examine when searching for a move.
 func (x *MonteCarloStrategist) WithBudget(budget int) *MonteCarloStrategist {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBudget:"), budget)
 	return x
 }
 
-// A value that influences whether the strategist searches more broadly or more deeply for winning game model states.
-//
-// WithExplorationParameter sets explorationParameter and returns the receiver so calls can be chained.
+// WithExplorationParameter a value that influences whether the strategist searches more broadly or more deeply for winning game model states.
 func (x *MonteCarloStrategist) WithExplorationParameter(explorationParameter int) *MonteCarloStrategist {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExplorationParameter:"), explorationParameter)
 	return x
 }
 
-// The maximum number of samples that will be processed when searching for a move.
+// Budget the maximum number of samples that will be processed when searching for a move.
 func (x *MonteCarloStrategist) Budget() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("budget"))
 	return _r
 }
 
+// SetBudget wraps the corresponding Objective-C method.
 func (x *MonteCarloStrategist) SetBudget(budget int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBudget:"), budget)
 }
 
-// A weight that encourages exploration of less visited updates versus the continued exploitation of previously visited updates.
+// ExplorationParameter a weight that encourages exploration of less visited updates versus the continued exploitation of previously visited updates.
 func (x *MonteCarloStrategist) ExplorationParameter() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("explorationParameter"))
 	return _r
 }
 
+// SetExplorationParameter wraps the corresponding Objective-C method.
 func (x *MonteCarloStrategist) SetExplorationParameter(explorationParameter int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExplorationParameter:"), explorationParameter)
 }

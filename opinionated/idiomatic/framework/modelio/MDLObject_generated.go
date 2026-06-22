@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for objects that are part of a 3D asset, including meshes, cameras, and lights.
-//
 // Object is an idiomatic wrapper over the Objective-C class MDLObject.
+//
+// Object is an abstract base — you do not construct it directly. Construct one of [Camera], [Light], [Mesh], [PackedJointAnimation], [Skeleton], [VoxelArray] and pass it where a Object is accepted.
+//
+// The base class for objects that are part of a 3D asset, including meshes, cameras, and lights.
 type Object struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ObjectFromID(id objc.ID) *Object {
 	if id == 0 {
 		return nil
 	}
-	x := &Object{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Object{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func objectAdopt(id objc.ID) *Object {
 	if id == 0 {
 		return nil
 	}
-	x := &Object{Handle: objref.Wrap(id)}
+	x := &Object{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,74 +62,70 @@ func (x *Object) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewObject creates a new Object.
-func NewObject() *Object {
-	_id := objc.Send[objc.ID](objc.ID(_class("MDLObject")), objc.RegisterName("new"))
-	return objectAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Object) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The parent object that contains this object.
-//
-// WithParent sets parent and returns the receiver so calls can be chained.
+// WithParent the parent object that contains this object.
 func (x *Object) WithParent(parent ObjectProvider) *Object {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return x
 }
 
-// The primary object, if applicable, of which this object is an instance.
-//
-// WithInstance sets instance and returns the receiver so calls can be chained.
+// WithInstance the primary object, if applicable, of which this object is an instance.
 func (x *Object) WithInstance(instance ObjectProvider) *Object {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return x
 }
 
-// A Boolean value indicating whether this object should be used in rendering.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden a Boolean value indicating whether this object should be used in rendering.
 func (x *Object) WithHidden(hidden bool) *Object {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// Returns the child object at the specified path.
+// ObjectAtPath returns the child object at the specified path.
 func (x *Object) ObjectAtPath(path string) *Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtPath:"), purego.NSString(path))
 	return ObjectFromID(_r)
 }
 
-// Adds a child object to this object, creating a container for the object’s children if necessary.
+// AddChild adds a child object to this object, creating a container for the object’s children if necessary.
 func (x *Object) AddChild(child *Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addChild:"), objref.IDOf(child))
 }
 
-// Allows applications to introspect the components on the objects.
+// Components allows applications to introspect the components on the objects.
 func (x *Object) Components() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("components"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Parent object. Nil if no parent. Set to nil when you remove this from an object container inside the parent object.
+// Parent parent object. Nil if no parent. Set to nil when you remove this from an object container inside the parent object.
 func (x *Object) Parent() *Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parent"))
 	return ObjectFromID(_r)
 }
 
+// SetParent wraps the corresponding Objective-C method.
 func (x *Object) SetParent(parent *Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
 }
 
-// Instance object nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
+// Instance instance object nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
 func (x *Object) Instance() *Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instance"))
 	return ObjectFromID(_r)
 }
 
+// SetInstance wraps the corresponding Objective-C method.
 func (x *Object) SetInstance(instance *Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 }
 
-// a string representing a path to the object a path is of the form /path/to/object where the path is formed by concatenating the names of the objects up the parent chain. Requesting a path will force any unnamed objects to became uniquely named. Any characters outside of [A-Z][a-z][0-9][:-_.] will be forced to underscore.
+// Path a string representing a path to the object a path is of the form /path/to/object where the path is formed by concatenating the names of the objects up the parent chain. Requesting a path will force any unnamed objects to became uniquely named. Any characters outside of [A-Z][a-z][0-9][:-_.] will be forced to underscore.
 func (x *Object) Path() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
 	if _r == 0 {
@@ -134,11 +134,13 @@ func (x *Object) Path() string {
 	return purego.GoString(_r)
 }
 
+// Hidden wraps the corresponding Objective-C method.
 func (x *Object) Hidden() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hidden"))
 	return _r
 }
 
+// SetHidden wraps the corresponding Objective-C method.
 func (x *Object) SetHidden(hidden bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 }
@@ -162,3 +164,10 @@ type Objectable interface {
 }
 
 var _ Objectable = (*Object)(nil)
+
+// isObject marks Object — and, by embedding promotion, its
+// subclasses — as a member of the Object hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Object) isObject() {}
+
+var _ ObjectProvider = (*Object)(nil)

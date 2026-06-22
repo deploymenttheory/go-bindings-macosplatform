@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A reference to the tracked medication and the details a person can customize.
-//
 // UserAnnotatedMedication is an idiomatic wrapper over the Objective-C class HKUserAnnotatedMedication.
+//
+// A reference to the tracked medication and the details a person can customize.
 type UserAnnotatedMedication struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func UserAnnotatedMedicationFromID(id objc.ID) *UserAnnotatedMedication {
 	if id == 0 {
 		return nil
 	}
-	x := &UserAnnotatedMedication{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UserAnnotatedMedication{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func userAnnotatedMedicationAdopt(id objc.ID) *UserAnnotatedMedication {
 	if id == 0 {
 		return nil
 	}
-	x := &UserAnnotatedMedication{Handle: objref.Wrap(id)}
+	x := &UserAnnotatedMedication{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *UserAnnotatedMedication) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UserAnnotatedMedication) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewUserAnnotatedMedication creates a new UserAnnotatedMedication.
 func NewUserAnnotatedMedication() *UserAnnotatedMedication {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKUserAnnotatedMedication")), objc.RegisterName("new"))
 	return userAnnotatedMedicationAdopt(_id)
 }
 
-// The nickname that a person added to a medication during the entry experience. This can be edited at any point.
+// Nickname the nickname that a person added to a medication during the entry experience. This can be edited at any point.
 func (x *UserAnnotatedMedication) Nickname() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nickname"))
 	if _r == 0 {
@@ -73,19 +81,19 @@ func (x *UserAnnotatedMedication) Nickname() string {
 	return purego.GoString(_r)
 }
 
-// A Boolean value that indicates whether a medication is archived. The value is `true` if a person moves a medication to the archived section in the Health App. The value is `false` if a medication isn't in the archived section.
+// IsArchived a Boolean value that indicates whether a medication is archived. The value is `true` if a person moves a medication to the archived section in the Health App. The value is `false` if a medication isn't in the archived section.
 func (x *UserAnnotatedMedication) IsArchived() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isArchived"))
 	return _r
 }
 
-// A Boolean value that indicates whether a medication has a schedule set up. The value is `true` for medications for which a person has set up reminders and `false` for medications that are only taken as needed. > Note: Scheduled medications can still be taken as needed.
+// HasSchedule a Boolean value that indicates whether a medication has a schedule set up. The value is `true` for medications for which a person has set up reminders and `false` for medications that are only taken as needed. > Note: Scheduled medications can still be taken as needed.
 func (x *UserAnnotatedMedication) HasSchedule() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasSchedule"))
 	return _r
 }
 
-// A reference to the specific medication a person is tracking. This concept's identifier is directly associated with the logged dose events.
+// Medication a reference to the specific medication a person is tracking. This concept's identifier is directly associated with the logged dose events.
 func (x *UserAnnotatedMedication) Medication() *MedicationConcept {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("medication"))
 	return MedicationConceptFromID(_r)

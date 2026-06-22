@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of settings for groups.
-//
 // GroupPreset is an idiomatic wrapper over the Objective-C class PHASEGroupPreset.
+//
+// A collection of settings for groups.
 type GroupPreset struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func GroupPresetFromID(id objc.ID) *GroupPreset {
 	if id == 0 {
 		return nil
 	}
-	x := &GroupPreset{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GroupPreset{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func groupPresetAdopt(id objc.ID) *GroupPreset {
 	if id == 0 {
 		return nil
 	}
-	x := &GroupPreset{Handle: objref.Wrap(id)}
+	x := &GroupPreset{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,48 +60,52 @@ func (x *GroupPreset) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a group preset with the designated engine, settings, and fade parameters.
-//
-// NewGroupPresetWithEngineSettingsTimeToTargetTimeToReset creates a new GroupPreset.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GroupPreset) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewGroupPresetWithEngineSettingsTimeToTargetTimeToReset creates a group preset with the designated engine, settings, and fade parameters.
 func NewGroupPresetWithEngineSettingsTimeToTargetTimeToReset(engine *Engine, settings obj.Object, timeToTarget float64, timeToReset float64) *GroupPreset {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEGroupPreset")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:settings:timeToTarget:timeToReset:"), objref.IDOf(engine), objref.IDOf(settings), timeToTarget, timeToReset)
 	return groupPresetAdopt(_id)
 }
 
-// Applies settings to the designated groups.
+// Activate applies settings to the designated groups.
 func (x *GroupPreset) Activate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activate"))
 }
 
-// Applies settings with an overriden fade duration.
+// ActivateWithTimeToTargetOverride applies settings with an overriden fade duration.
 func (x *GroupPreset) ActivateWithTimeToTargetOverride(timeToTargetOverride float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activateWithTimeToTargetOverride:"), timeToTargetOverride)
 }
 
-// Reverts settings for the preset’s groups.
+// Deactivate reverts settings for the preset’s groups.
 func (x *GroupPreset) Deactivate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deactivate"))
 }
 
-// Reverts settings for the preset’s groups using a timed adjustment.
+// DeactivateWithTimeToResetOverride reverts settings for the preset’s groups using a timed adjustment.
 func (x *GroupPreset) DeactivateWithTimeToResetOverride(timeToResetOverride float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deactivateWithTimeToResetOverride:"), timeToResetOverride)
 }
 
-// The collection of PHASEGroupPresetSetting objects to apply when this preset is activated.
+// Settings the collection of PHASEGroupPresetSetting objects to apply when this preset is activated.
 func (x *GroupPreset) Settings() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("settings"))
 	return obj.Wrap(_r)
 }
 
-// The time interval that all group settings in this preset will take to gradually fade to the new value
+// TimeToTarget the time interval that all group settings in this preset will take to gradually fade to the new value
 func (x *GroupPreset) TimeToTarget() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeToTarget"))
 	return _r
 }
 
-// The time interval that all group settings in this preset will take to gradually fade to the unity value
+// TimeToReset the time interval that all group settings in this preset will take to gradually fade to the unity value
 func (x *GroupPreset) TimeToReset() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeToReset"))
 	return _r

@@ -6,6 +6,7 @@ package mpsmatrix
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -13,6 +14,8 @@ import (
 )
 
 // MatrixUnaryKernel is an idiomatic wrapper over the Objective-C class MPSMatrixUnaryKernel.
+//
+// MatrixUnaryKernel is an abstract base — you do not construct it directly. Construct one of [MatrixDecompositionCholesky], [MatrixDecompositionLU], [MatrixFindTopK], [MatrixSoftMax] and pass it where a MatrixUnaryKernel is accepted.
 type MatrixUnaryKernel struct {
 	objref.Handle
 }
@@ -23,7 +26,8 @@ func MatrixUnaryKernelFromID(id objc.ID) *MatrixUnaryKernel {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixUnaryKernel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatrixUnaryKernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +40,8 @@ func matrixUnaryKernelAdopt(id objc.ID) *MatrixUnaryKernel {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixUnaryKernel{Handle: objref.Wrap(id)}
+	x := &MatrixUnaryKernel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,44 +61,76 @@ func (x *MatrixUnaryKernel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMatrixUnaryKernel creates a new MatrixUnaryKernel.
-func NewMatrixUnaryKernel() *MatrixUnaryKernel {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixUnaryKernel")), objc.RegisterName("new"))
-	return matrixUnaryKernelAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MatrixUnaryKernel) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
-//
-// WithBatchStart sets batchStart and returns the receiver so calls can be chained.
+// WithSourceMatrixOrigin the origin, relative to [0, 0] in the source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixUnaryKernel) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixUnaryKernel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMatrixOrigin:"), sourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixUnaryKernel) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixUnaryKernel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
 func (x *MatrixUnaryKernel) WithBatchStart(batchStart int) *MatrixUnaryKernel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 	return x
 }
 
-// The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
-//
-// WithBatchSize sets batchSize and returns the receiver so calls can be chained.
+// WithBatchSize the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
 func (x *MatrixUnaryKernel) WithBatchSize(batchSize int) *MatrixUnaryKernel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 	return x
 }
 
-// The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+// SourceMatrixOrigin the origin, relative to [0, 0] in the source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixUnaryKernel) SourceMatrixOrigin() metal.MTLOrigin {
+	_r := objc.Send[metal.MTLOrigin](objref.IDOf(x), objc.RegisterName("sourceMatrixOrigin"))
+	return _r
+}
+
+// SetSourceMatrixOrigin wraps the corresponding Objective-C method.
+func (x *MatrixUnaryKernel) SetSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMatrixOrigin:"), sourceMatrixOrigin)
+}
+
+// ResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixUnaryKernel) ResultMatrixOrigin() metal.MTLOrigin {
+	_r := objc.Send[metal.MTLOrigin](objref.IDOf(x), objc.RegisterName("resultMatrixOrigin"))
+	return _r
+}
+
+// SetResultMatrixOrigin wraps the corresponding Objective-C method.
+func (x *MatrixUnaryKernel) SetResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
+}
+
+// BatchStart the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
 func (x *MatrixUnaryKernel) BatchStart() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("batchStart"))
 	return _r
 }
 
+// SetBatchStart wraps the corresponding Objective-C method.
 func (x *MatrixUnaryKernel) SetBatchStart(batchStart int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 }
 
-// The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+// BatchSize the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
 func (x *MatrixUnaryKernel) BatchSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("batchSize"))
 	return _r
 }
 
+// SetBatchSize wraps the corresponding Objective-C method.
 func (x *MatrixUnaryKernel) SetBatchSize(batchSize int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 }
@@ -101,8 +138,14 @@ func (x *MatrixUnaryKernel) SetBatchSize(batchSize int) {
 // MatrixUnaryKernelable is the interface implemented by [MatrixUnaryKernel], for mocking and DI.
 type MatrixUnaryKernelable interface {
 	obj.Object
+	WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixUnaryKernel
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixUnaryKernel
 	WithBatchStart(batchStart int) *MatrixUnaryKernel
 	WithBatchSize(batchSize int) *MatrixUnaryKernel
+	SourceMatrixOrigin() metal.MTLOrigin
+	SetSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin)
+	ResultMatrixOrigin() metal.MTLOrigin
+	SetResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin)
 	BatchStart() int
 	SetBatchStart(batchStart int)
 	BatchSize() int
@@ -110,3 +153,10 @@ type MatrixUnaryKernelable interface {
 }
 
 var _ MatrixUnaryKernelable = (*MatrixUnaryKernel)(nil)
+
+// isMatrixUnaryKernel marks MatrixUnaryKernel — and, by embedding promotion, its
+// subclasses — as a member of the MatrixUnaryKernel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MatrixUnaryKernel) isMatrixUnaryKernel() {}
+
+var _ MatrixUnaryKernelProvider = (*MatrixUnaryKernel)(nil)

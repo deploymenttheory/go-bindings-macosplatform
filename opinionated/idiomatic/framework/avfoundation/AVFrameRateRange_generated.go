@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable type that represents a range of valid frame rates.
-//
 // FrameRateRange is an idiomatic wrapper over the Objective-C class AVFrameRateRange.
+//
+// An immutable type that represents a range of valid frame rates.
 type FrameRateRange struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FrameRateRangeFromID(id objc.ID) *FrameRateRange {
 	if id == 0 {
 		return nil
 	}
-	x := &FrameRateRange{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FrameRateRange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func frameRateRangeAdopt(id objc.ID) *FrameRateRange {
 	if id == 0 {
 		return nil
 	}
-	x := &FrameRateRange{Handle: objref.Wrap(id)}
+	x := &FrameRateRange{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *FrameRateRange) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FrameRateRange) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFrameRateRange creates a new FrameRateRange.
 func NewFrameRateRange() *FrameRateRange {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVFrameRateRange")), objc.RegisterName("new"))
 	return frameRateRangeAdopt(_id)
 }
 
-// A Float64 indicating the minimum frame rate supported by this range. This read-only property indicates the minimum frame rate supported by this range in frames per second.
+// MinFrameRate a Float64 indicating the minimum frame rate supported by this range. This read-only property indicates the minimum frame rate supported by this range in frames per second.
 func (x *FrameRateRange) MinFrameRate() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minFrameRate"))
 	return _r
 }
 
-// A Float64 indicating the maximum frame rate supported by this range. This read-only property indicates the maximum frame rate supported by this range in frames per second.
+// MaxFrameRate a Float64 indicating the maximum frame rate supported by this range. This read-only property indicates the maximum frame rate supported by this range in frames per second.
 func (x *FrameRateRange) MaxFrameRate() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxFrameRate"))
 	return _r

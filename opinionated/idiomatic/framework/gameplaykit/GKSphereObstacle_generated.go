@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A spherical impassable volume to be avoided by agents.
-//
 // SphereObstacle is an idiomatic wrapper over the Objective-C class GKSphereObstacle.
+//
+// It embeds [Obstacle], promoting that type's methods.
+//
+// A spherical impassable volume to be avoided by agents.
 type SphereObstacle struct {
-	objref.Handle
+	Obstacle
 }
 
 // SphereObstacleFromID adopts an existing Objective-C object as a SphereObstacle
@@ -25,7 +26,8 @@ func SphereObstacleFromID(id objc.ID) *SphereObstacle {
 	if id == 0 {
 		return nil
 	}
-	x := &SphereObstacle{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SphereObstacle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,49 +40,32 @@ func sphereObstacleAdopt(id objc.ID) *SphereObstacle {
 	if id == 0 {
 		return nil
 	}
-	x := &SphereObstacle{Handle: objref.Wrap(id)}
+	x := &SphereObstacle{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *SphereObstacle) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SphereObstacle) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SphereObstacle) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a spherical obstacle with the specified radius.
-//
-// NewSphereObstacleWithRadius creates a new SphereObstacle.
+// NewSphereObstacleWithRadius initializes a spherical obstacle with the specified radius.
 func NewSphereObstacleWithRadius(radius float32) *SphereObstacle {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKSphereObstacle")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRadius:"), radius)
 	return sphereObstacleAdopt(_id)
 }
 
-// The radius of the obstacle.
-//
-// WithRadius sets radius and returns the receiver so calls can be chained.
+// WithRadius the radius of the obstacle.
 func (x *SphereObstacle) WithRadius(radius float32) *SphereObstacle {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 	return x
 }
 
-// Radius of the impassible circle
+// Radius radius of the impassible circle
 func (x *SphereObstacle) Radius() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("radius"))
 	return _r
 }
 
+// SetRadius wraps the corresponding Objective-C method.
 func (x *SphereObstacle) SetRadius(radius float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 }
@@ -94,3 +79,5 @@ type SphereObstacleable interface {
 }
 
 var _ SphereObstacleable = (*SphereObstacle)(nil)
+
+var _ ObstacleProvider = (*SphereObstacle)(nil)

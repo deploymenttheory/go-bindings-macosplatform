@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// The UTType for storing drawing data.
 // PKAppleDrawingTypeIdentifier returns the value of the constant PKAppleDrawingTypeIdentifier.
 func PKAppleDrawingTypeIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("PKAppleDrawingTypeIdentifier")))

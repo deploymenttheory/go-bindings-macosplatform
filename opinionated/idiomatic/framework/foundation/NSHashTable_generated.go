@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection similar to a set, but with broader range of available memory semantics.
-//
 // HashTable is an idiomatic wrapper over the Objective-C class NSHashTable.
+//
+// A collection similar to a set, but with broader range of available memory semantics.
 type HashTable struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func HashTableFromID(id objc.ID) *HashTable {
 	if id == 0 {
 		return nil
 	}
-	x := &HashTable{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HashTable{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func hashTableAdopt(id objc.ID) *HashTable {
 	if id == 0 {
 		return nil
 	}
-	x := &HashTable{Handle: objref.Wrap(id)}
+	x := &HashTable{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,116 +60,123 @@ func (x *HashTable) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns a hash table initialized with the given attributes.
-//
-// NewHashTableWithOptionsCapacity creates a new HashTable.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HashTable) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewHashTableWithOptionsCapacity returns a hash table initialized with the given attributes.
 func NewHashTableWithOptionsCapacity(options PointerFunctionsOptions, initialCapacity int) *HashTable {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSHashTable")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:capacity:"), options, initialCapacity)
 	return hashTableAdopt(_id)
 }
 
-// Returns a hash table initialized with the given functions and capacity.
-//
-// NewHashTableWithPointerFunctionsCapacity creates a new HashTable.
+// NewHashTableWithPointerFunctionsCapacity returns a hash table initialized with the given functions and capacity.
 func NewHashTableWithPointerFunctionsCapacity(functions *PointerFunctions, initialCapacity int) *HashTable {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSHashTable")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPointerFunctions:capacity:"), objref.IDOf(functions), initialCapacity)
 	return hashTableAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *HashTable) WithScriptingProperties(scriptingProperties obj.Object) *HashTable {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Determines whether the hash table contains a given object, and returns that object if it is present
+// Member determines whether the hash table contains a given object, and returns that object if it is present
 func (x *HashTable) Member(object obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("member:"), objref.IDOf(object))
 	return obj.Wrap(_r)
 }
 
-// Returns an enumerator object that lets you access each object in the hash table.
+// ObjectEnumerator returns an enumerator object that lets you access each object in the hash table.
 func (x *HashTable) ObjectEnumerator() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectEnumerator"))
 	return obj.Wrap(_r)
 }
 
-// Adds a given object to the hash table.
+// AddObject adds a given object to the hash table.
 func (x *HashTable) AddObject(object obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObject:"), objref.IDOf(object))
 }
 
-// Removes a given object from the hash table.
+// RemoveObject removes a given object from the hash table.
 func (x *HashTable) RemoveObject(object obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObject:"), objref.IDOf(object))
 }
 
-// Removes all objects from the hash table.
+// RemoveAllObjects removes all objects from the hash table.
 func (x *HashTable) RemoveAllObjects() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllObjects"))
 }
 
-// Returns a Boolean value that indicates whether the hash table contains a given object.
+// ContainsObject returns a Boolean value that indicates whether the hash table contains a given object.
 func (x *HashTable) ContainsObject(anObject obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsObject:"), objref.IDOf(anObject))
 	return _r
 }
 
-// Returns a Boolean value that indicates whether a given hash table intersects with the receiving hash table.
+// IntersectsHashTable returns a Boolean value that indicates whether a given hash table intersects with the receiving hash table.
 func (x *HashTable) IntersectsHashTable(other obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("intersectsHashTable:"), objref.IDOf(other))
 	return _r
 }
 
-// Returns a Boolean value that indicates whether a given hash table is equal to the receiving hash table.
+// IsEqualToHashTable returns a Boolean value that indicates whether a given hash table is equal to the receiving hash table.
 func (x *HashTable) IsEqualToHashTable(other obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToHashTable:"), objref.IDOf(other))
 	return _r
 }
 
-// Returns a Boolean value that indicates whether every element in the receiving hash table is also present in another given hash table.
+// IsSubsetOfHashTable returns a Boolean value that indicates whether every element in the receiving hash table is also present in another given hash table.
 func (x *HashTable) IsSubsetOfHashTable(other obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSubsetOfHashTable:"), objref.IDOf(other))
 	return _r
 }
 
-// Removes from the receiving hash table each element that isn’t a member of another given hash table.
+// IntersectHashTable removes from the receiving hash table each element that isn’t a member of another given hash table.
 func (x *HashTable) IntersectHashTable(other obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intersectHashTable:"), objref.IDOf(other))
 }
 
-// Adds each element in another given hash table to the receiving hash table, if not present.
+// UnionHashTable adds each element in another given hash table to the receiving hash table, if not present.
 func (x *HashTable) UnionHashTable(other obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unionHashTable:"), objref.IDOf(other))
 }
 
-// Removes each element in another given hash table from the receiving hash table, if present.
+// MinusHashTable removes each element in another given hash table from the receiving hash table, if present.
 func (x *HashTable) MinusHashTable(other obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minusHashTable:"), objref.IDOf(other))
 }
 
+// PointerFunctions wraps the corresponding Objective-C method.
 func (x *HashTable) PointerFunctions() *PointerFunctions {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointerFunctions"))
 	return PointerFunctionsFromID(_r)
 }
 
+// Count wraps the corresponding Objective-C method.
 func (x *HashTable) Count() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
 	return _r
 }
 
+// AllObjects wraps the corresponding Objective-C method.
 func (x *HashTable) AllObjects() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// AnyObject wraps the corresponding Objective-C method.
 func (x *HashTable) AnyObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("anyObject"))
 	return obj.Wrap(_r)
 }
 
+// SetRepresentation wraps the corresponding Objective-C method.
 func (x *HashTable) SetRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentation"))
 	return obj.Wrap(_r)

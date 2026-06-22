@@ -23,7 +23,8 @@ func BarcodeEventConfigurationRequestFromID(id objc.ID) *BarcodeEventConfigurati
 	if id == 0 {
 		return nil
 	}
-	x := &BarcodeEventConfigurationRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BarcodeEventConfigurationRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func barcodeEventConfigurationRequestAdopt(id objc.ID) *BarcodeEventConfiguratio
 	if id == 0 {
 		return nil
 	}
-	x := &BarcodeEventConfigurationRequest{Handle: objref.Wrap(id)}
+	x := &BarcodeEventConfigurationRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,12 +58,19 @@ func (x *BarcodeEventConfigurationRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BarcodeEventConfigurationRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBarcodeEventConfigurationRequest creates a new BarcodeEventConfigurationRequest.
 func NewBarcodeEventConfigurationRequest() *BarcodeEventConfigurationRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("PKBarcodeEventConfigurationRequest")), objc.RegisterName("new"))
 	return barcodeEventConfigurationRequestAdopt(_id)
 }
 
+// DeviceAccountIdentifier wraps the corresponding Objective-C method.
 func (x *BarcodeEventConfigurationRequest) DeviceAccountIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceAccountIdentifier"))
 	if _r == 0 {
@@ -70,11 +79,13 @@ func (x *BarcodeEventConfigurationRequest) DeviceAccountIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// ConfigurationData wraps the corresponding Objective-C method.
 func (x *BarcodeEventConfigurationRequest) ConfigurationData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configurationData"))
 	return obj.Wrap(_r)
 }
 
+// ConfigurationDataType wraps the corresponding Objective-C method.
 func (x *BarcodeEventConfigurationRequest) ConfigurationDataType() BarcodeEventConfigurationDataType {
 	_r := objc.Send[BarcodeEventConfigurationDataType](objref.IDOf(x), objc.RegisterName("configurationDataType"))
 	return _r

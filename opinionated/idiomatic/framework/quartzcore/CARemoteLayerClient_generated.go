@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A legacy class for cross-process rendering.
-//
 // RemoteLayerClient is an idiomatic wrapper over the Objective-C class CARemoteLayerClient.
+//
+// A legacy class for cross-process rendering.
 type RemoteLayerClient struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RemoteLayerClientFromID(id objc.ID) *RemoteLayerClient {
 	if id == 0 {
 		return nil
 	}
-	x := &RemoteLayerClient{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RemoteLayerClient{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func remoteLayerClientAdopt(id objc.ID) *RemoteLayerClient {
 	if id == 0 {
 		return nil
 	}
-	x := &RemoteLayerClient{Handle: objref.Wrap(id)}
+	x := &RemoteLayerClient{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,38 +60,43 @@ func (x *RemoteLayerClient) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a layer client from a server port.
-//
-// NewRemoteLayerClientWithServerPort creates a new RemoteLayerClient.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RemoteLayerClient) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRemoteLayerClientWithServerPort creates a layer client from a server port.
 func NewRemoteLayerClientWithServerPort(port int) *RemoteLayerClient {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CARemoteLayerClient")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServerPort:"), port)
 	return remoteLayerClientAdopt(_id)
 }
 
-// The layer associated with the remote client.
-//
-// WithLayer sets layer and returns the receiver so calls can be chained.
+// WithLayer the layer associated with the remote client.
 func (x *RemoteLayerClient) WithLayer(layer LayerProvider) *RemoteLayerClient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// Invalidates a remote layer client.
+// Invalidate invalidates a remote layer client.
 func (x *RemoteLayerClient) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
+// ClientId wraps the corresponding Objective-C method.
 func (x *RemoteLayerClient) ClientId() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("clientId"))
 	return _r
 }
 
+// Layer wraps the corresponding Objective-C method.
 func (x *RemoteLayerClient) Layer() *Layer {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layer"))
 	return LayerFromID(_r)
 }
 
+// SetLayer wraps the corresponding Objective-C method.
 func (x *RemoteLayerClient) SetLayer(layer *Layer) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 }

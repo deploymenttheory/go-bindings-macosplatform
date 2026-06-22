@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Node representing a MPSCNNLogSoftMaxGradient kernel
-//
 // CNNLogSoftMaxGradientNode is an idiomatic wrapper over the Objective-C class MPSCNNLogSoftMaxGradientNode.
+//
+// It embeds [NNGradientFilterNode], promoting that type's methods.
+//
+// Node representing a MPSCNNLogSoftMaxGradient kernel
 type CNNLogSoftMaxGradientNode struct {
-	objref.Handle
+	NNGradientFilterNode
 }
 
 // CNNLogSoftMaxGradientNodeFromID adopts an existing Objective-C object as a CNNLogSoftMaxGradientNode
@@ -25,7 +26,8 @@ func CNNLogSoftMaxGradientNodeFromID(id objc.ID) *CNNLogSoftMaxGradientNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNLogSoftMaxGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNLogSoftMaxGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func cNNLogSoftMaxGradientNodeAdopt(id objc.ID) *CNNLogSoftMaxGradientNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNLogSoftMaxGradientNode{Handle: objref.Wrap(id)}
+	x := &CNNLogSoftMaxGradientNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNLogSoftMaxGradientNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNLogSoftMaxGradientNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNLogSoftMaxGradientNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNLogSoftMaxGradientNodeWithSourceGradientSourceImageGradientState creates a new CNNLogSoftMaxGradientNode.
@@ -65,9 +53,7 @@ func NewCNNLogSoftMaxGradientNodeWithSourceGradientSourceImageGradientState(sour
 	return cNNLogSoftMaxGradientNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNLogSoftMaxGradientNode) WithLabel(label string) *CNNLogSoftMaxGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -80,3 +66,7 @@ type CNNLogSoftMaxGradientNodeable interface {
 }
 
 var _ CNNLogSoftMaxGradientNodeable = (*CNNLogSoftMaxGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*CNNLogSoftMaxGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNLogSoftMaxGradientNode)(nil)

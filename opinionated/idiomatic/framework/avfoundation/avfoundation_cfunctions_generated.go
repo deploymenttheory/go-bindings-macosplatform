@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -25,4 +26,15 @@ func AVCaptureReactionSystemImageNameForType(reactionType obj.Object) string {
 		return ""
 	}
 	return purego.GoString(_ret)
+}
+
+var _fnAVMakeRectWithAspectRatioInsideRect func(corefoundation.CGSize, corefoundation.CGRect) corefoundation.CGRect
+
+// AVMakeRectWithAspectRatioInsideRect calls the AVFoundation framework function AVMakeRectWithAspectRatioInsideRect.
+func AVMakeRectWithAspectRatioInsideRect(aspectRatio corefoundation.CGSize, boundingRect corefoundation.CGRect) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAVMakeRectWithAspectRatioInsideRect == nil {
+		ebipurego.RegisterLibFunc(&_fnAVMakeRectWithAspectRatioInsideRect, _lib, "AVMakeRectWithAspectRatioInsideRect")
+	}
+	return _fnAVMakeRectWithAspectRatioInsideRect(aspectRatio, boundingRect)
 }

@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBaseClusterOzoneConcentrationMeasurement is an idiomatic wrapper over the Objective-C class MTRBaseClusterOzoneConcentrationMeasurement.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
 type MTRBaseClusterOzoneConcentrationMeasurement struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterOzoneConcentrationMeasurementFromID adopts an existing Objective-C object as a MTRBaseClusterOzoneConcentrationMeasurement
@@ -25,7 +26,8 @@ func MTRBaseClusterOzoneConcentrationMeasurementFromID(id objc.ID) *MTRBaseClust
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterOzoneConcentrationMeasurement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterOzoneConcentrationMeasurement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,37 +40,23 @@ func mTRBaseClusterOzoneConcentrationMeasurementAdopt(id objc.ID) *MTRBaseCluste
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterOzoneConcentrationMeasurement{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterOzoneConcentrationMeasurement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterOzoneConcentrationMeasurementWithDeviceEndpointIDQueue creates a new MTRBaseClusterOzoneConcentrationMeasurement.
+// NewMTRBaseClusterOzoneConcentrationMeasurementWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterOzoneConcentrationMeasurementWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterOzoneConcentrationMeasurement {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterOzoneConcentrationMeasurement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterOzoneConcentrationMeasurementAdopt(_id)
 }
 
+// ReadAttributeMeasuredValueWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeMeasuredValueWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -90,8 +78,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeMeasuredValue
 	}
 }
 
+// SubscribeAttributeMeasuredValueWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -113,8 +103,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeMeasured
 	}
 }
 
+// ReadAttributeMinMeasuredValueWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMinMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeMinMeasuredValueWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeMinMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -136,8 +128,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeMinMeasuredVa
 	}
 }
 
+// SubscribeAttributeMinMeasuredValueWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMinMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeMinMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeMinMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -159,8 +153,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeMinMeasu
 	}
 }
 
+// ReadAttributeMaxMeasuredValueWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMaxMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeMaxMeasuredValueWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeMaxMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -182,8 +178,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeMaxMeasuredVa
 	}
 }
 
+// SubscribeAttributeMaxMeasuredValueWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMaxMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeMaxMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeMaxMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -205,8 +203,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeMaxMeasu
 	}
 }
 
+// ReadAttributePeakMeasuredValueWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePeakMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributePeakMeasuredValueWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributePeakMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -228,8 +228,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributePeakMeasuredV
 	}
 }
 
+// SubscribeAttributePeakMeasuredValueWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePeakMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributePeakMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributePeakMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -251,8 +253,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributePeakMeas
 	}
 }
 
+// ReadAttributePeakMeasuredValueWindowWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePeakMeasuredValueWindowWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributePeakMeasuredValueWindowWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributePeakMeasuredValueWindowWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -274,8 +278,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributePeakMeasuredV
 	}
 }
 
+// SubscribeAttributePeakMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePeakMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributePeakMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributePeakMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -297,8 +303,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributePeakMeas
 	}
 }
 
+// ReadAttributeAverageMeasuredValueWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAverageMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeAverageMeasuredValueWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeAverageMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -320,8 +328,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeAverageMeasur
 	}
 }
 
+// SubscribeAttributeAverageMeasuredValueWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAverageMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeAverageMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeAverageMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -343,8 +353,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeAverageM
 	}
 }
 
+// ReadAttributeAverageMeasuredValueWindowWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAverageMeasuredValueWindowWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeAverageMeasuredValueWindowWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeAverageMeasuredValueWindowWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -366,8 +378,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeAverageMeasur
 	}
 }
 
+// SubscribeAttributeAverageMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAverageMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeAverageMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeAverageMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -389,8 +403,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeAverageM
 	}
 }
 
+// ReadAttributeUncertaintyWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeUncertaintyWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeUncertaintyWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeUncertaintyWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -412,8 +428,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeUncertaintyWi
 	}
 }
 
+// SubscribeAttributeUncertaintyWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeUncertaintyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeUncertaintyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeUncertaintyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -435,8 +453,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeUncertai
 	}
 }
 
+// ReadAttributeMeasurementUnitWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasurementUnitWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeMeasurementUnitWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeMeasurementUnitWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -458,8 +478,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeMeasurementUn
 	}
 }
 
+// SubscribeAttributeMeasurementUnitWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasurementUnitWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeMeasurementUnitWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeMeasurementUnitWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -481,8 +503,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeMeasurem
 	}
 }
 
+// ReadAttributeMeasurementMediumWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasurementMediumWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeMeasurementMediumWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeMeasurementMediumWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -504,8 +528,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeMeasurementMe
 	}
 }
 
+// SubscribeAttributeMeasurementMediumWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasurementMediumWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeMeasurementMediumWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeMeasurementMediumWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -527,8 +553,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeMeasurem
 	}
 }
 
+// ReadAttributeLevelValueWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeLevelValueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeLevelValueWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeLevelValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -550,8 +578,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeLevelValueWit
 	}
 }
 
+// SubscribeAttributeLevelValueWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLevelValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeLevelValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeLevelValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -573,8 +603,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeLevelVal
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -596,8 +628,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeGeneratedComm
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -619,8 +653,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeGenerate
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -642,8 +678,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeAcceptedComma
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -665,8 +703,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeAccepted
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -688,8 +728,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeAttributeList
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -711,8 +753,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeAttribut
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -734,8 +778,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeFeatureMapWit
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -757,8 +803,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeFeatureM
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -780,8 +828,10 @@ func (x *MTRBaseClusterOzoneConcentrationMeasurement) ReadAttributeClusterRevisi
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOzoneConcentrationMeasurement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -841,3 +891,7 @@ type MTRBaseClusterOzoneConcentrationMeasurementable interface {
 }
 
 var _ MTRBaseClusterOzoneConcentrationMeasurementable = (*MTRBaseClusterOzoneConcentrationMeasurement)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterOzoneConcentrationMeasurement)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterOzoneConcentrationMeasurement)(nil)

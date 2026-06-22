@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mechanism for converting one kind of scripting data to another.
-//
 // ScriptCoercionHandler is an idiomatic wrapper over the Objective-C class NSScriptCoercionHandler.
+//
+// A mechanism for converting one kind of scripting data to another.
 type ScriptCoercionHandler struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ScriptCoercionHandlerFromID(id objc.ID) *ScriptCoercionHandler {
 	if id == 0 {
 		return nil
 	}
-	x := &ScriptCoercionHandler{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScriptCoercionHandler{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func scriptCoercionHandlerAdopt(id objc.ID) *ScriptCoercionHandler {
 	if id == 0 {
 		return nil
 	}
-	x := &ScriptCoercionHandler{Handle: objref.Wrap(id)}
+	x := &ScriptCoercionHandler{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *ScriptCoercionHandler) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScriptCoercionHandler) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewScriptCoercionHandler creates a new ScriptCoercionHandler.
 func NewScriptCoercionHandler() *ScriptCoercionHandler {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSScriptCoercionHandler")), objc.RegisterName("new"))
 	return scriptCoercionHandlerAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *ScriptCoercionHandler) WithScriptingProperties(scriptingProperties obj.Object) *ScriptCoercionHandler {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x

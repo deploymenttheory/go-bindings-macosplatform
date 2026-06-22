@@ -14,9 +14,11 @@ import (
 	"unsafe"
 )
 
-// An authentication operation for a cryptographic token.
-//
 // TokenAuthOperation is an idiomatic wrapper over the Objective-C class TKTokenAuthOperation.
+//
+// TokenAuthOperation is an abstract base — you do not construct it directly. Construct one of [TokenPasswordAuthOperation], [TokenSmartCardPINAuthOperation] and pass it where a TokenAuthOperation is accepted.
+//
+// An authentication operation for a cryptographic token.
 type TokenAuthOperation struct {
 	objref.Handle
 }
@@ -27,7 +29,8 @@ func TokenAuthOperationFromID(id objc.ID) *TokenAuthOperation {
 	if id == 0 {
 		return nil
 	}
-	x := &TokenAuthOperation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TokenAuthOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +43,8 @@ func tokenAuthOperationAdopt(id objc.ID) *TokenAuthOperation {
 	if id == 0 {
 		return nil
 	}
-	x := &TokenAuthOperation{Handle: objref.Wrap(id)}
+	x := &TokenAuthOperation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,13 +64,13 @@ func (x *TokenAuthOperation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewTokenAuthOperation creates a new TokenAuthOperation.
-func NewTokenAuthOperation() *TokenAuthOperation {
-	_id := objc.Send[objc.ID](objc.ID(_class("TKTokenAuthOperation")), objc.RegisterName("new"))
-	return tokenAuthOperationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TokenAuthOperation) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Finishes the authentication operation.
+// Finish finishes the authentication operation.
 //
 // Finish returns an error if the operation did not succeed.
 func (x *TokenAuthOperation) Finish() error {
@@ -85,3 +89,10 @@ type TokenAuthOperationable interface {
 }
 
 var _ TokenAuthOperationable = (*TokenAuthOperation)(nil)
+
+// isTokenAuthOperation marks TokenAuthOperation — and, by embedding promotion, its
+// subclasses — as a member of the TokenAuthOperation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *TokenAuthOperation) isTokenAuthOperation() {}
+
+var _ TokenAuthOperationProvider = (*TokenAuthOperation)(nil)

@@ -23,7 +23,8 @@ func ShareBlockedIdentityFromID(id objc.ID) *ShareBlockedIdentity {
 	if id == 0 {
 		return nil
 	}
-	x := &ShareBlockedIdentity{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ShareBlockedIdentity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func shareBlockedIdentityAdopt(id objc.ID) *ShareBlockedIdentity {
 	if id == 0 {
 		return nil
 	}
-	x := &ShareBlockedIdentity{Handle: objref.Wrap(id)}
+	x := &ShareBlockedIdentity{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,19 +58,25 @@ func (x *ShareBlockedIdentity) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ShareBlockedIdentity) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewShareBlockedIdentity creates a new ShareBlockedIdentity.
 func NewShareBlockedIdentity() *ShareBlockedIdentity {
 	_id := objc.Send[objc.ID](objc.ID(_class("CKShareBlockedIdentity")), objc.RegisterName("new"))
 	return shareBlockedIdentityAdopt(_id)
 }
 
-// The identity of the user who has been blocked from requesting access to the share.
+// UserIdentity the identity of the user who has been blocked from requesting access to the share.
 func (x *ShareBlockedIdentity) UserIdentity() *UserIdentity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userIdentity"))
 	return UserIdentityFromID(_r)
 }
 
-// A displayable CNContact representing the blocked user. If the blocked identity does not exist in the user's contacts or is not accessible, returns a newly created `CNContact`. This provides formatted blocked identity information suitable for display in the application's UI.
+// Contact a displayable CNContact representing the blocked user. If the blocked identity does not exist in the user's contacts or is not accessible, returns a newly created `CNContact`. This provides formatted blocked identity information suitable for display in the application's UI.
 func (x *ShareBlockedIdentity) Contact() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contact"))
 	return obj.Wrap(_r)

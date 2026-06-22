@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that contains a full address, and, optionally, a short address.
-//
 // Address is an idiomatic wrapper over the Objective-C class MKAddress.
+//
+// A class that contains a full address, and, optionally, a short address.
 type Address struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AddressFromID(id objc.ID) *Address {
 	if id == 0 {
 		return nil
 	}
-	x := &Address{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Address{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func addressAdopt(id objc.ID) *Address {
 	if id == 0 {
 		return nil
 	}
-	x := &Address{Handle: objref.Wrap(id)}
+	x := &Address{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *Address) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a new address with a location’s full address using a string and a short address that provides an abbreviated form of the address such as a street address.
-//
-// NewAddressWithFullAddressShortAddress creates a new Address.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Address) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAddressWithFullAddressShortAddress initializes a new address with a location’s full address using a string and a short address that provides an abbreviated form of the address such as a street address.
 func NewAddressWithFullAddressShortAddress(fullAddress string, shortAddress string) *Address {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKAddress")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFullAddress:shortAddress:"), purego.NSString(fullAddress), purego.NSString(shortAddress))
 	return addressAdopt(_id)
 }
 
+// FullAddress wraps the corresponding Objective-C method.
 func (x *Address) FullAddress() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullAddress"))
 	if _r == 0 {
@@ -75,6 +82,7 @@ func (x *Address) FullAddress() string {
 	return purego.GoString(_r)
 }
 
+// ShortAddress wraps the corresponding Objective-C method.
 func (x *Address) ShortAddress() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shortAddress"))
 	if _r == 0 {

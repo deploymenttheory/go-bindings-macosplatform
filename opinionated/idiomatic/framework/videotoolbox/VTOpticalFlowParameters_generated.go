@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes frame-level optical flow parameters.
-//
 // OpticalFlowParameters is an idiomatic wrapper over the Objective-C class VTOpticalFlowParameters.
+//
+// An object that describes frame-level optical flow parameters.
 type OpticalFlowParameters struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func OpticalFlowParametersFromID(id objc.ID) *OpticalFlowParameters {
 	if id == 0 {
 		return nil
 	}
-	x := &OpticalFlowParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OpticalFlowParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func opticalFlowParametersAdopt(id objc.ID) *OpticalFlowParameters {
 	if id == 0 {
 		return nil
 	}
-	x := &OpticalFlowParameters{Handle: objref.Wrap(id)}
+	x := &OpticalFlowParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,34 +60,38 @@ func (x *OpticalFlowParameters) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new optical flow parameters object. Returns `nil` if `sourceFrame` or `nextFrame` is `nil`, or if `sourceFrame` and `nextFrame` have different pixel formats. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - nextFrame: Next source frame in presentation time order. - submissionMode: Provides a hint to let the processor know whether you are submitting frames in presentation sequence. For more information about supported modes see “VTOpticalFlowParametersSubmissionMode“. - destinationOpticalFlow: User allocated `VTFrameProcessorOpticalFlow` that receives the results.
-//
-// NewOpticalFlowParametersWithSourceFrameNextFrameSubmissionModeDestinationOpticalFlow creates a new OpticalFlowParameters.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OpticalFlowParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewOpticalFlowParametersWithSourceFrameNextFrameSubmissionModeDestinationOpticalFlow creates a new optical flow parameters object. Returns `nil` if `sourceFrame` or `nextFrame` is `nil`, or if `sourceFrame` and `nextFrame` have different pixel formats. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - nextFrame: Next source frame in presentation time order. - submissionMode: Provides a hint to let the processor know whether you are submitting frames in presentation sequence. For more information about supported modes see “VTOpticalFlowParametersSubmissionMode“. - destinationOpticalFlow: User allocated `VTFrameProcessorOpticalFlow` that receives the results.
 func NewOpticalFlowParametersWithSourceFrameNextFrameSubmissionModeDestinationOpticalFlow(sourceFrame *FrameProcessorFrame, nextFrame *FrameProcessorFrame, submissionMode OpticalFlowParametersSubmissionMode, destinationOpticalFlow *FrameProcessorOpticalFlow) *OpticalFlowParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VTOpticalFlowParameters")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:nextFrame:submissionMode:destinationOpticalFlow:"), objref.IDOf(sourceFrame), objref.IDOf(nextFrame), submissionMode, objref.IDOf(destinationOpticalFlow))
 	return opticalFlowParametersAdopt(_id)
 }
 
-// Current source frame, which must be non `nil`.
+// SourceFrame current source frame, which must be non `nil`.
 func (x *OpticalFlowParameters) SourceFrame() *FrameProcessorFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// The next source frame in presentation time order.
+// NextFrame the next source frame in presentation time order.
 func (x *OpticalFlowParameters) NextFrame() *FrameProcessorFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// Ordering of the input frames in this submission relative to the previous submission.
+// SubmissionMode ordering of the input frames in this submission relative to the previous submission.
 func (x *OpticalFlowParameters) SubmissionMode() OpticalFlowParametersSubmissionMode {
 	_r := objc.Send[OpticalFlowParametersSubmissionMode](objref.IDOf(x), objc.RegisterName("submissionMode"))
 	return _r
 }
 
-// Output optical flow calculated by the processor.
+// DestinationOpticalFlow output optical flow calculated by the processor.
 func (x *OpticalFlowParameters) DestinationOpticalFlow() *FrameProcessorOpticalFlow {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationOpticalFlow"))
 	return FrameProcessorOpticalFlowFromID(_r)

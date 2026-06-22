@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a person in the context of search results.
-//
 // Person is an idiomatic wrapper over the Objective-C class CSPerson.
+//
+// An object that represents a person in the context of search results.
 type Person struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PersonFromID(id objc.ID) *Person {
 	if id == 0 {
 		return nil
 	}
-	x := &Person{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Person{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func personAdopt(id objc.ID) *Person {
 	if id == 0 {
 		return nil
 	}
-	x := &Person{Handle: objref.Wrap(id)}
+	x := &Person{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,23 +60,26 @@ func (x *Person) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns a new CSPerson object initialized with the specified display name and contact attributes.
-//
-// NewPersonWithDisplayNameHandlesHandleIdentifier creates a new Person.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Person) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPersonWithDisplayNameHandlesHandleIdentifier returns a new CSPerson object initialized with the specified display name and contact attributes.
 func NewPersonWithDisplayNameHandlesHandleIdentifier(displayName string, handles []string, handleIdentifier string) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CSPerson")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplayName:handles:handleIdentifier:"), purego.NSString(displayName), purego.SliceToNSArray(handles, func(_v string) objc.ID { return purego.NSString(_v) }), purego.NSString(handleIdentifier))
 	return personAdopt(_id)
 }
 
-// The identifier for the contact associated with the person.
-//
-// WithContactIdentifier sets contactIdentifier and returns the receiver so calls can be chained.
+// WithContactIdentifier the identifier for the contact associated with the person.
 func (x *Person) WithContactIdentifier(contactIdentifier string) *Person {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContactIdentifier:"), purego.NSString(contactIdentifier))
 	return x
 }
 
+// DisplayName wraps the corresponding Objective-C method.
 func (x *Person) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
 	if _r == 0 {
@@ -83,12 +88,15 @@ func (x *Person) DisplayName() string {
 	return purego.GoString(_r)
 }
 
+// Handles wraps the corresponding Objective-C method.
+//
 // Handles returns the collection as a Go slice.
 func (x *Person) Handles() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handles"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// HandleIdentifier wraps the corresponding Objective-C method.
 func (x *Person) HandleIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleIdentifier"))
 	if _r == 0 {
@@ -97,6 +105,7 @@ func (x *Person) HandleIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// ContactIdentifier wraps the corresponding Objective-C method.
 func (x *Person) ContactIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contactIdentifier"))
 	if _r == 0 {
@@ -105,6 +114,7 @@ func (x *Person) ContactIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// SetContactIdentifier wraps the corresponding Objective-C method.
 func (x *Person) SetContactIdentifier(contactIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContactIdentifier:"), purego.NSString(contactIdentifier))
 }

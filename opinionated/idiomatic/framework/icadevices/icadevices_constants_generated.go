@@ -228,7 +228,6 @@ func KICATWAINDSPathKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kICATWAINDSPathKey")))
 }
 
-// This key may be present in the property dictionary of a device if the device has a user-assigned name. Value is of type CFStringRef.
 // KICAUserAssignedDeviceNameKey returns the value of the constant kICAUserAssignedDeviceNameKey.
 func KICAUserAssignedDeviceNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kICAUserAssignedDeviceNameKey")))

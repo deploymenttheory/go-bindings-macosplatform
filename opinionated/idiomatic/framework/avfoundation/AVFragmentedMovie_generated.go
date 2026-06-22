@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a fragmented movie file.
-//
 // FragmentedMovie is an idiomatic wrapper over the Objective-C class AVFragmentedMovie.
+//
+// It embeds [Movie], promoting that type's methods.
+//
+// An object that represents a fragmented movie file.
 type FragmentedMovie struct {
-	objref.Handle
+	Movie
 }
 
 // FragmentedMovieFromID adopts an existing Objective-C object as a FragmentedMovie
@@ -25,7 +26,8 @@ func FragmentedMovieFromID(id objc.ID) *FragmentedMovie {
 	if id == 0 {
 		return nil
 	}
-	x := &FragmentedMovie{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FragmentedMovie{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func fragmentedMovieAdopt(id objc.ID) *FragmentedMovie {
 	if id == 0 {
 		return nil
 	}
-	x := &FragmentedMovie{Handle: objref.Wrap(id)}
+	x := &FragmentedMovie{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *FragmentedMovie) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FragmentedMovie) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FragmentedMovie) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewFragmentedMovie creates a new FragmentedMovie.
@@ -70,3 +58,7 @@ type FragmentedMovieable interface {
 }
 
 var _ FragmentedMovieable = (*FragmentedMovie)(nil)
+
+var _ MovieProvider = (*FragmentedMovie)(nil)
+
+var _ AssetProvider = (*FragmentedMovie)(nil)

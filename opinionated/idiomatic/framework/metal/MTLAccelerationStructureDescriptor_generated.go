@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class for classes that define the configuration for a new acceleration structure.
-//
 // AccelerationStructureDescriptor is an idiomatic wrapper over the Objective-C class MTLAccelerationStructureDescriptor.
+//
+// AccelerationStructureDescriptor is an abstract base — you do not construct it directly. Construct one of [IndirectInstanceAccelerationStructureDescriptor], [InstanceAccelerationStructureDescriptor], [MTL4AccelerationStructureDescriptor], [PrimitiveAccelerationStructureDescriptor] and pass it where a AccelerationStructureDescriptor is accepted.
+//
+// A base class for classes that define the configuration for a new acceleration structure.
 type AccelerationStructureDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func AccelerationStructureDescriptorFromID(id objc.ID) *AccelerationStructureDes
 	if id == 0 {
 		return nil
 	}
-	x := &AccelerationStructureDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AccelerationStructureDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func accelerationStructureDescriptorAdopt(id objc.ID) *AccelerationStructureDesc
 	if id == 0 {
 		return nil
 	}
-	x := &AccelerationStructureDescriptor{Handle: objref.Wrap(id)}
+	x := &AccelerationStructureDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +62,25 @@ func (x *AccelerationStructureDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewAccelerationStructureDescriptor creates a new AccelerationStructureDescriptor.
-func NewAccelerationStructureDescriptor() *AccelerationStructureDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTLAccelerationStructureDescriptor")), objc.RegisterName("new"))
-	return accelerationStructureDescriptorAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AccelerationStructureDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The options that describe how you intend to use the acceleration structure.
-//
-// WithUsage sets usage and returns the receiver so calls can be chained.
+// WithUsage the options that describe how you intend to use the acceleration structure.
 func (x *AccelerationStructureDescriptor) WithUsage(usage AccelerationStructureUsage) *AccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsage:"), usage)
 	return x
 }
 
+// Usage wraps the corresponding Objective-C method.
 func (x *AccelerationStructureDescriptor) Usage() AccelerationStructureUsage {
 	_r := objc.Send[AccelerationStructureUsage](objref.IDOf(x), objc.RegisterName("usage"))
 	return _r
 }
 
+// SetUsage wraps the corresponding Objective-C method.
 func (x *AccelerationStructureDescriptor) SetUsage(usage AccelerationStructureUsage) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsage:"), usage)
 }
@@ -90,3 +94,10 @@ type AccelerationStructureDescriptorable interface {
 }
 
 var _ AccelerationStructureDescriptorable = (*AccelerationStructureDescriptor)(nil)
+
+// isAccelerationStructureDescriptor marks AccelerationStructureDescriptor — and, by embedding promotion, its
+// subclasses — as a member of the AccelerationStructureDescriptor hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AccelerationStructureDescriptor) isAccelerationStructureDescriptor() {}
+
+var _ AccelerationStructureDescriptorProvider = (*AccelerationStructureDescriptor)(nil)

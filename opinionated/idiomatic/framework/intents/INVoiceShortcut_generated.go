@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A shortcut the user added to Siri.
-//
 // VoiceShortcut is an idiomatic wrapper over the Objective-C class INVoiceShortcut.
+//
+// A shortcut the user added to Siri.
 type VoiceShortcut struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VoiceShortcutFromID(id objc.ID) *VoiceShortcut {
 	if id == 0 {
 		return nil
 	}
-	x := &VoiceShortcut{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VoiceShortcut{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func voiceShortcutAdopt(id objc.ID) *VoiceShortcut {
 	if id == 0 {
 		return nil
 	}
-	x := &VoiceShortcut{Handle: objref.Wrap(id)}
+	x := &VoiceShortcut{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *VoiceShortcut) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VoiceShortcut) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVoiceShortcut creates a new VoiceShortcut.
 func NewVoiceShortcut() *VoiceShortcut {
 	_id := objc.Send[objc.ID](objc.ID(_class("INVoiceShortcut")), objc.RegisterName("new"))
 	return voiceShortcutAdopt(_id)
 }
 
-// The unique identifier for this voice shortcut
+// Identifier the unique identifier for this voice shortcut
 func (x *VoiceShortcut) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
-// The phrase the user speaks to invoke this shortcut; set by the user when they add it to Siri.
+// InvocationPhrase the phrase the user speaks to invoke this shortcut; set by the user when they add it to Siri.
 func (x *VoiceShortcut) InvocationPhrase() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invocationPhrase"))
 	if _r == 0 {
@@ -79,7 +87,7 @@ func (x *VoiceShortcut) InvocationPhrase() string {
 	return purego.GoString(_r)
 }
 
-// The shortcut that will be performed when this voice shortcut is invoked via Siri.
+// Shortcut the shortcut that will be performed when this voice shortcut is invoked via Siri.
 func (x *VoiceShortcut) Shortcut() *Shortcut {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shortcut"))
 	return ShortcutFromID(_r)

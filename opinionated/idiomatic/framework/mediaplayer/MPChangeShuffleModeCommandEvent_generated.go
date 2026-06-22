@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event requesting a change in the shuffle mode.
-//
 // ChangeShuffleModeCommandEvent is an idiomatic wrapper over the Objective-C class MPChangeShuffleModeCommandEvent.
+//
+// It embeds [RemoteCommandEvent], promoting that type's methods.
+//
+// An event requesting a change in the shuffle mode.
 type ChangeShuffleModeCommandEvent struct {
-	objref.Handle
+	RemoteCommandEvent
 }
 
 // ChangeShuffleModeCommandEventFromID adopts an existing Objective-C object as a ChangeShuffleModeCommandEvent
@@ -25,7 +26,8 @@ func ChangeShuffleModeCommandEventFromID(id objc.ID) *ChangeShuffleModeCommandEv
 	if id == 0 {
 		return nil
 	}
-	x := &ChangeShuffleModeCommandEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ChangeShuffleModeCommandEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func changeShuffleModeCommandEventAdopt(id objc.ID) *ChangeShuffleModeCommandEve
 	if id == 0 {
 		return nil
 	}
-	x := &ChangeShuffleModeCommandEvent{Handle: objref.Wrap(id)}
+	x := &ChangeShuffleModeCommandEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ChangeShuffleModeCommandEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ChangeShuffleModeCommandEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ChangeShuffleModeCommandEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewChangeShuffleModeCommandEvent creates a new ChangeShuffleModeCommandEvent.
@@ -64,13 +52,13 @@ func NewChangeShuffleModeCommandEvent() *ChangeShuffleModeCommandEvent {
 	return changeShuffleModeCommandEventAdopt(_id)
 }
 
-// The desired shuffle type to use when fulfilling the request.
+// ShuffleType the desired shuffle type to use when fulfilling the request.
 func (x *ChangeShuffleModeCommandEvent) ShuffleType() ShuffleType {
 	_r := objc.Send[ShuffleType](objref.IDOf(x), objc.RegisterName("shuffleType"))
 	return _r
 }
 
-// Whether or not the selection should be preserved between playback sessions
+// PreservesShuffleMode whether or not the selection should be preserved between playback sessions
 func (x *ChangeShuffleModeCommandEvent) PreservesShuffleMode() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preservesShuffleMode"))
 	return _r
@@ -84,3 +72,5 @@ type ChangeShuffleModeCommandEventable interface {
 }
 
 var _ ChangeShuffleModeCommandEventable = (*ChangeShuffleModeCommandEvent)(nil)
+
+var _ RemoteCommandEventProvider = (*ChangeShuffleModeCommandEvent)(nil)

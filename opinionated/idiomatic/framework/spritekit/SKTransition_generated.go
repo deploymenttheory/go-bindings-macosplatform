@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object used to perform an animated transition to a new scene.
-//
 // Transition is an idiomatic wrapper over the Objective-C class SKTransition.
+//
+// An object used to perform an animated transition to a new scene.
 type Transition struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TransitionFromID(id objc.ID) *Transition {
 	if id == 0 {
 		return nil
 	}
-	x := &Transition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Transition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func transitionAdopt(id objc.ID) *Transition {
 	if id == 0 {
 		return nil
 	}
-	x := &Transition{Handle: objref.Wrap(id)}
+	x := &Transition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,44 +60,48 @@ func (x *Transition) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Transition) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTransition creates a new Transition.
 func NewTransition() *Transition {
 	_id := objc.Send[objc.ID](objc.ID(_class("SKTransition")), objc.RegisterName("new"))
 	return transitionAdopt(_id)
 }
 
-// A Boolean value that determines whether the incoming scene is paused during the transition.
-//
-// WithPausesIncomingScene sets pausesIncomingScene and returns the receiver so calls can be chained.
+// WithPausesIncomingScene a Boolean value that determines whether the incoming scene is paused during the transition.
 func (x *Transition) WithPausesIncomingScene(pausesIncomingScene bool) *Transition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPausesIncomingScene:"), pausesIncomingScene)
 	return x
 }
 
-// A Boolean value that determines whether the outgoing scene is paused during the transition.
-//
-// WithPausesOutgoingScene sets pausesOutgoingScene and returns the receiver so calls can be chained.
+// WithPausesOutgoingScene a Boolean value that determines whether the outgoing scene is paused during the transition.
 func (x *Transition) WithPausesOutgoingScene(pausesOutgoingScene bool) *Transition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPausesOutgoingScene:"), pausesOutgoingScene)
 	return x
 }
 
-// Pause the incoming Scene during the transition, defaults to YES.
+// PausesIncomingScene pause the incoming Scene during the transition, defaults to YES.
 func (x *Transition) PausesIncomingScene() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("pausesIncomingScene"))
 	return _r
 }
 
+// SetPausesIncomingScene wraps the corresponding Objective-C method.
 func (x *Transition) SetPausesIncomingScene(pausesIncomingScene bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPausesIncomingScene:"), pausesIncomingScene)
 }
 
-// Pause the outgoing Scene during the transition, defaults to YES.
+// PausesOutgoingScene pause the outgoing Scene during the transition, defaults to YES.
 func (x *Transition) PausesOutgoingScene() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("pausesOutgoingScene"))
 	return _r
 }
 
+// SetPausesOutgoingScene wraps the corresponding Objective-C method.
 func (x *Transition) SetPausesOutgoingScene(pausesOutgoingScene bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPausesOutgoingScene:"), pausesOutgoingScene)
 }

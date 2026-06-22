@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for Photos asset collections and collection lists.
-//
 // Collection is an idiomatic wrapper over the Objective-C class PHCollection.
+//
+// Collection is an abstract base — you do not construct it directly. Construct one of [AssetCollection], [CollectionList] and pass it where a Collection is accepted.
+//
+// The abstract superclass for Photos asset collections and collection lists.
 type Collection struct {
-	objref.Handle
+	Object
 }
 
 // CollectionFromID adopts an existing Objective-C object as a Collection
@@ -25,7 +26,8 @@ func CollectionFromID(id objc.ID) *Collection {
 	if id == 0 {
 		return nil
 	}
-	x := &Collection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Collection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,48 +40,31 @@ func collectionAdopt(id objc.ID) *Collection {
 	if id == 0 {
 		return nil
 	}
-	x := &Collection{Handle: objref.Wrap(id)}
+	x := &Collection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *Collection) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Collection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Collection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewCollection creates a new Collection.
-func NewCollection() *Collection {
-	_id := objc.Send[objc.ID](objc.ID(_class("PHCollection")), objc.RegisterName("new"))
-	return collectionAdopt(_id)
-}
-
-// Returns whether the collection supports the specified editing operation.
+// CanPerformEditOperation returns whether the collection supports the specified editing operation.
 func (x *Collection) CanPerformEditOperation(anOperation CollectionEditOperation) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPerformEditOperation:"), anOperation)
 	return _r
 }
 
+// CanContainAssets wraps the corresponding Objective-C method.
 func (x *Collection) CanContainAssets() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canContainAssets"))
 	return _r
 }
 
+// CanContainCollections wraps the corresponding Objective-C method.
 func (x *Collection) CanContainCollections() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canContainCollections"))
 	return _r
 }
 
+// LocalizedTitle wraps the corresponding Objective-C method.
 func (x *Collection) LocalizedTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedTitle"))
 	if _r == 0 {
@@ -98,3 +83,12 @@ type Collectionable interface {
 }
 
 var _ Collectionable = (*Collection)(nil)
+
+// isCollection marks Collection — and, by embedding promotion, its
+// subclasses — as a member of the Collection hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Collection) isCollection() {}
+
+var _ CollectionProvider = (*Collection)(nil)
+
+var _ ObjectProvider = (*Collection)(nil)

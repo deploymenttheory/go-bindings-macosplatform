@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Configuration that you use to program Video Toolbox frame processor for low-latency frame interpolation.
-//
 // LowLatencyFrameInterpolationConfiguration is an idiomatic wrapper over the Objective-C class VTLowLatencyFrameInterpolationConfiguration.
+//
+// Configuration that you use to program Video Toolbox frame processor for low-latency frame interpolation.
 type LowLatencyFrameInterpolationConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LowLatencyFrameInterpolationConfigurationFromID(id objc.ID) *LowLatencyFram
 	if id == 0 {
 		return nil
 	}
-	x := &LowLatencyFrameInterpolationConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LowLatencyFrameInterpolationConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func lowLatencyFrameInterpolationConfigurationAdopt(id objc.ID) *LowLatencyFrame
 	if id == 0 {
 		return nil
 	}
-	x := &LowLatencyFrameInterpolationConfiguration{Handle: objref.Wrap(id)}
+	x := &LowLatencyFrameInterpolationConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,49 +60,51 @@ func (x *LowLatencyFrameInterpolationConfiguration) IsKind(className string) boo
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new low-latency frame interpolation configuration for frame-rate conversion.
-//
-// NewLowLatencyFrameInterpolationConfigurationWithFrameWidthFrameHeightNumberOfInterpolatedFrames creates a new LowLatencyFrameInterpolationConfiguration.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LowLatencyFrameInterpolationConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLowLatencyFrameInterpolationConfigurationWithFrameWidthFrameHeightNumberOfInterpolatedFrames creates a new low-latency frame interpolation configuration for frame-rate conversion.
 func NewLowLatencyFrameInterpolationConfigurationWithFrameWidthFrameHeightNumberOfInterpolatedFrames(frameWidth int, frameHeight int, numberOfInterpolatedFrames int) *LowLatencyFrameInterpolationConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VTLowLatencyFrameInterpolationConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameWidth:frameHeight:numberOfInterpolatedFrames:"), frameWidth, frameHeight, numberOfInterpolatedFrames)
 	return lowLatencyFrameInterpolationConfigurationAdopt(_id)
 }
 
-// Creates a new low-latency frame interpolation configuration for spatial scaling and temporal scaling.
-//
-// NewLowLatencyFrameInterpolationConfigurationWithFrameWidthFrameHeightSpatialScaleFactor creates a new LowLatencyFrameInterpolationConfiguration.
+// NewLowLatencyFrameInterpolationConfigurationWithFrameWidthFrameHeightSpatialScaleFactor creates a new low-latency frame interpolation configuration for spatial scaling and temporal scaling.
 func NewLowLatencyFrameInterpolationConfigurationWithFrameWidthFrameHeightSpatialScaleFactor(frameWidth int, frameHeight int, spatialScaleFactor int) *LowLatencyFrameInterpolationConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VTLowLatencyFrameInterpolationConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameWidth:frameHeight:spatialScaleFactor:"), frameWidth, frameHeight, spatialScaleFactor)
 	return lowLatencyFrameInterpolationConfigurationAdopt(_id)
 }
 
-// Width of source frames in pixels.
+// FrameWidth width of source frames in pixels.
 func (x *LowLatencyFrameInterpolationConfiguration) FrameWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameWidth"))
 	return _r
 }
 
-// Height of source frames in pixels.
+// FrameHeight height of source frames in pixels.
 func (x *LowLatencyFrameInterpolationConfiguration) FrameHeight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameHeight"))
 	return _r
 }
 
-// Configured spatial scale factor as an integer.
+// SpatialScaleFactor configured spatial scale factor as an integer.
 func (x *LowLatencyFrameInterpolationConfiguration) SpatialScaleFactor() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("spatialScaleFactor"))
 	return _r
 }
 
-// Number of uniformly spaced frames for which you configured the processor.
+// NumberOfInterpolatedFrames number of uniformly spaced frames for which you configured the processor.
 func (x *LowLatencyFrameInterpolationConfiguration) NumberOfInterpolatedFrames() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfInterpolatedFrames"))
 	return _r
 }
 
-// Available supported pixel formats for current configuration.
+// FrameSupportedPixelFormats available supported pixel formats for current configuration.
 //
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (x *LowLatencyFrameInterpolationConfiguration) FrameSupportedPixelFormats() []obj.Object {
@@ -108,13 +112,13 @@ func (x *LowLatencyFrameInterpolationConfiguration) FrameSupportedPixelFormats()
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+// SourcePixelBufferAttributes pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (x *LowLatencyFrameInterpolationConfiguration) SourcePixelBufferAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourcePixelBufferAttributes"))
 	return obj.Wrap(_r)
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+// DestinationPixelBufferAttributes pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (x *LowLatencyFrameInterpolationConfiguration) DestinationPixelBufferAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationPixelBufferAttributes"))
 	return obj.Wrap(_r)

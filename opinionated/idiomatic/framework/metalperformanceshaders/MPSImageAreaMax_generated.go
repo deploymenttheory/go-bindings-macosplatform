@@ -6,17 +6,20 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that finds the maximum pixel value in a rectangular region centered around each pixel in the source image.
-//
 // ImageAreaMax is an idiomatic wrapper over the Objective-C class MPSImageAreaMax.
+//
+// ImageAreaMax is an abstract base — you do not construct it directly. Construct one of [ImageAreaMin] and pass it where a ImageAreaMax is accepted.
+//
+// A filter that finds the maximum pixel value in a rectangular region centered around each pixel in the source image.
 type ImageAreaMax struct {
-	objref.Handle
+	UnaryImageKernel
 }
 
 // ImageAreaMaxFromID adopts an existing Objective-C object as a ImageAreaMax
@@ -25,7 +28,8 @@ func ImageAreaMaxFromID(id objc.ID) *ImageAreaMax {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageAreaMax{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageAreaMax{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,47 +42,37 @@ func imageAreaMaxAdopt(id objc.ID) *ImageAreaMax {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageAreaMax{Handle: objref.Wrap(id)}
+	x := &ImageAreaMax{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ImageAreaMax) Description() string {
-	return rt.Description(objref.IDOf(x))
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
+func (x *ImageAreaMax) WithOffset(offset mpscore.MPSOffset) *ImageAreaMax {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
 }
 
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageAreaMax) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (x *ImageAreaMax) WithClipRect(clipRect metal.MTLRegion) *ImageAreaMax {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
 }
 
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageAreaMax) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewImageAreaMax creates a new ImageAreaMax.
-func NewImageAreaMax() *ImageAreaMax {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageAreaMax")), objc.RegisterName("new"))
-	return imageAreaMaxAdopt(_id)
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *ImageAreaMax) WithLabel(label string) *ImageAreaMax {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The height of the filter window. Must be an odd number.
+// KernelHeight the height of the filter window. Must be an odd number.
 func (x *ImageAreaMax) KernelHeight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
-// The width of the filter window. Must be an odd number.
+// KernelWidth the width of the filter window. Must be an odd number.
 func (x *ImageAreaMax) KernelWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
 	return _r
@@ -87,9 +81,22 @@ func (x *ImageAreaMax) KernelWidth() int {
 // ImageAreaMaxable is the interface implemented by [ImageAreaMax], for mocking and DI.
 type ImageAreaMaxable interface {
 	obj.Object
+	WithOffset(offset mpscore.MPSOffset) *ImageAreaMax
+	WithClipRect(clipRect metal.MTLRegion) *ImageAreaMax
 	WithLabel(label string) *ImageAreaMax
 	KernelHeight() int
 	KernelWidth() int
 }
 
 var _ ImageAreaMaxable = (*ImageAreaMax)(nil)
+
+// isImageAreaMax marks ImageAreaMax — and, by embedding promotion, its
+// subclasses — as a member of the ImageAreaMax hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ImageAreaMax) isImageAreaMax() {}
+
+var _ ImageAreaMaxProvider = (*ImageAreaMax)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageAreaMax)(nil)
+
+var _ KernelProvider = (*ImageAreaMax)(nil)

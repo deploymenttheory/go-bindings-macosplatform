@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An opaque object that identifies a specific version of a domain.
-//
 // FileProviderDomainVersion is an idiomatic wrapper over the Objective-C class NSFileProviderDomainVersion.
+//
+// An opaque object that identifies a specific version of a domain.
 type FileProviderDomainVersion struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FileProviderDomainVersionFromID(id objc.ID) *FileProviderDomainVersion {
 	if id == 0 {
 		return nil
 	}
-	x := &FileProviderDomainVersion{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FileProviderDomainVersion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func fileProviderDomainVersionAdopt(id objc.ID) *FileProviderDomainVersion {
 	if id == 0 {
 		return nil
 	}
-	x := &FileProviderDomainVersion{Handle: objref.Wrap(id)}
+	x := &FileProviderDomainVersion{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *FileProviderDomainVersion) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FileProviderDomainVersion) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFileProviderDomainVersion creates a new FileProviderDomainVersion.
 func NewFileProviderDomainVersion() *FileProviderDomainVersion {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSFileProviderDomainVersion")), objc.RegisterName("new"))
 	return fileProviderDomainVersionAdopt(_id)
 }
 
-// Creates a new version that supersedes the current version.
+// Next creates a new version that supersedes the current version.
 func (x *FileProviderDomainVersion) Next() *FileProviderDomainVersion {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("next"))
 	return FileProviderDomainVersionFromID(_r)

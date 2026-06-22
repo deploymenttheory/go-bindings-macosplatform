@@ -23,7 +23,8 @@ func MessageReactionFromID(id objc.ID) *MessageReaction {
 	if id == 0 {
 		return nil
 	}
-	x := &MessageReaction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MessageReaction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func messageReactionAdopt(id objc.ID) *MessageReaction {
 	if id == 0 {
 		return nil
 	}
-	x := &MessageReaction{Handle: objref.Wrap(id)}
+	x := &MessageReaction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *MessageReaction) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MessageReaction) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMessageReactionWithReactionTypeReactionDescriptionEmoji creates a new MessageReaction.
 func NewMessageReactionWithReactionTypeReactionDescriptionEmoji(reactionType MessageReactionType, reactionDescription string, emoji string) *MessageReaction {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INMessageReaction")), objc.RegisterName("alloc"))
@@ -63,11 +71,13 @@ func NewMessageReactionWithReactionTypeReactionDescriptionEmoji(reactionType Mes
 	return messageReactionAdopt(_id)
 }
 
+// ReactionType wraps the corresponding Objective-C method.
 func (x *MessageReaction) ReactionType() MessageReactionType {
 	_r := objc.Send[MessageReactionType](objref.IDOf(x), objc.RegisterName("reactionType"))
 	return _r
 }
 
+// ReactionDescription wraps the corresponding Objective-C method.
 func (x *MessageReaction) ReactionDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reactionDescription"))
 	if _r == 0 {
@@ -76,6 +86,7 @@ func (x *MessageReaction) ReactionDescription() string {
 	return purego.GoString(_r)
 }
 
+// Emoji wraps the corresponding Objective-C method.
 func (x *MessageReaction) Emoji() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emoji"))
 	if _r == 0 {

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer for training recurrent neural networks on Metal Performance Shaders matrices.
-//
 // RNNMatrixTrainingLayer is an idiomatic wrapper over the Objective-C class MPSRNNMatrixTrainingLayer.
+//
+// It embeds [Kernel], promoting that type's methods.
+//
+// A layer for training recurrent neural networks on Metal Performance Shaders matrices.
 type RNNMatrixTrainingLayer struct {
-	objref.Handle
+	Kernel
 }
 
 // RNNMatrixTrainingLayerFromID adopts an existing Objective-C object as a RNNMatrixTrainingLayer
@@ -25,7 +26,8 @@ func RNNMatrixTrainingLayerFromID(id objc.ID) *RNNMatrixTrainingLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &RNNMatrixTrainingLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RNNMatrixTrainingLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func rNNMatrixTrainingLayerAdopt(id objc.ID) *RNNMatrixTrainingLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &RNNMatrixTrainingLayer{Handle: objref.Wrap(id)}
+	x := &RNNMatrixTrainingLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RNNMatrixTrainingLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RNNMatrixTrainingLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RNNMatrixTrainingLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRNNMatrixTrainingLayer creates a new RNNMatrixTrainingLayer.
@@ -64,99 +52,93 @@ func NewRNNMatrixTrainingLayer() *RNNMatrixTrainingLayer {
 	return rNNMatrixTrainingLayerAdopt(_id)
 }
 
-// If YES then calls to functions
-//
-// WithStoreAllIntermediateStates sets storeAllIntermediateStates and returns the receiver so calls can be chained.
+// WithStoreAllIntermediateStates if YES then calls to functions
 func (x *RNNMatrixTrainingLayer) WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNMatrixTrainingLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAllIntermediateStates:"), storeAllIntermediateStates)
 	return x
 }
 
-// How recurrent output states from
-//
-// WithRecurrentOutputIsTemporary sets recurrentOutputIsTemporary and returns the receiver so calls can be chained.
+// WithRecurrentOutputIsTemporary how recurrent output states from
 func (x *RNNMatrixTrainingLayer) WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNMatrixTrainingLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrentOutputIsTemporary:"), recurrentOutputIsTemporary)
 	return x
 }
 
-// How training output states from
-//
-// WithTrainingStateIsTemporary sets trainingStateIsTemporary and returns the receiver so calls can be chained.
+// WithTrainingStateIsTemporary how training output states from
 func (x *RNNMatrixTrainingLayer) WithTrainingStateIsTemporary(trainingStateIsTemporary bool) *RNNMatrixTrainingLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStateIsTemporary:"), trainingStateIsTemporary)
 	return x
 }
 
-// If yes then the computed weight gradients are accumulated on top of existing values in calls to the gradient computation functions: encodeGradientSequenceToCommandBuffer. Defaults to NO.
-//
-// WithAccumulateWeightGradients sets accumulateWeightGradients and returns the receiver so calls can be chained.
+// WithAccumulateWeightGradients if yes then the computed weight gradients are accumulated on top of existing values in calls to the gradient computation functions: encodeGradientSequenceToCommandBuffer. Defaults to NO.
 func (x *RNNMatrixTrainingLayer) WithAccumulateWeightGradients(accumulateWeightGradients bool) *RNNMatrixTrainingLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccumulateWeightGradients:"), accumulateWeightGradients)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *RNNMatrixTrainingLayer) WithLabel(label string) *RNNMatrixTrainingLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Initializes a set of matrices that can be used in training for weight and bias matrices in the forward and backward passes. The layout, datatype and number of matrices is the same as for the outputs of
+// CreateWeightMatrices initializes a set of matrices that can be used in training for weight and bias matrices in the forward and backward passes. The layout, datatype and number of matrices is the same as for the outputs of
 func (x *RNNMatrixTrainingLayer) CreateWeightMatrices(matricesOut []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createWeightMatrices:"), purego.SliceToNSArray(matricesOut, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// The number of feature channels input vector/matrix.
+// InputFeatureChannels the number of feature channels input vector/matrix.
 func (x *RNNMatrixTrainingLayer) InputFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputFeatureChannels"))
 	return _r
 }
 
-// The number of feature channels in the output vector/matrix.
+// OutputFeatureChannels the number of feature channels in the output vector/matrix.
 func (x *RNNMatrixTrainingLayer) OutputFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputFeatureChannels"))
 	return _r
 }
 
-// If YES then calls to functions
+// StoreAllIntermediateStates if YES then calls to functions
 func (x *RNNMatrixTrainingLayer) StoreAllIntermediateStates() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("storeAllIntermediateStates"))
 	return _r
 }
 
+// SetStoreAllIntermediateStates wraps the corresponding Objective-C method.
 func (x *RNNMatrixTrainingLayer) SetStoreAllIntermediateStates(storeAllIntermediateStates bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAllIntermediateStates:"), storeAllIntermediateStates)
 }
 
-// How recurrent output states from
+// RecurrentOutputIsTemporary how recurrent output states from
 func (x *RNNMatrixTrainingLayer) RecurrentOutputIsTemporary() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("recurrentOutputIsTemporary"))
 	return _r
 }
 
+// SetRecurrentOutputIsTemporary wraps the corresponding Objective-C method.
 func (x *RNNMatrixTrainingLayer) SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrentOutputIsTemporary:"), recurrentOutputIsTemporary)
 }
 
-// How training output states from
+// TrainingStateIsTemporary how training output states from
 func (x *RNNMatrixTrainingLayer) TrainingStateIsTemporary() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("trainingStateIsTemporary"))
 	return _r
 }
 
+// SetTrainingStateIsTemporary wraps the corresponding Objective-C method.
 func (x *RNNMatrixTrainingLayer) SetTrainingStateIsTemporary(trainingStateIsTemporary bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStateIsTemporary:"), trainingStateIsTemporary)
 }
 
-// If yes then the computed weight gradients are accumulated on top of existing values in calls to the gradient computation functions: encodeGradientSequenceToCommandBuffer. Defaults to NO.
+// AccumulateWeightGradients if yes then the computed weight gradients are accumulated on top of existing values in calls to the gradient computation functions: encodeGradientSequenceToCommandBuffer. Defaults to NO.
 func (x *RNNMatrixTrainingLayer) AccumulateWeightGradients() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("accumulateWeightGradients"))
 	return _r
 }
 
+// SetAccumulateWeightGradients wraps the corresponding Objective-C method.
 func (x *RNNMatrixTrainingLayer) SetAccumulateWeightGradients(accumulateWeightGradients bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccumulateWeightGradients:"), accumulateWeightGradients)
 }
@@ -183,3 +165,5 @@ type RNNMatrixTrainingLayerable interface {
 }
 
 var _ RNNMatrixTrainingLayerable = (*RNNMatrixTrainingLayer)(nil)
+
+var _ KernelProvider = (*RNNMatrixTrainingLayer)(nil)

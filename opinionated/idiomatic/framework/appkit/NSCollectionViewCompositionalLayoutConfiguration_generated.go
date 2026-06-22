@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines scroll direction, section spacing, and headers or footers for the layout.
-//
 // CollectionViewCompositionalLayoutConfiguration is an idiomatic wrapper over the Objective-C class NSCollectionViewCompositionalLayoutConfiguration.
+//
+// An object that defines scroll direction, section spacing, and headers or footers for the layout.
 type CollectionViewCompositionalLayoutConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CollectionViewCompositionalLayoutConfigurationFromID(id objc.ID) *Collectio
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionViewCompositionalLayoutConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollectionViewCompositionalLayoutConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func collectionViewCompositionalLayoutConfigurationAdopt(id objc.ID) *Collection
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionViewCompositionalLayoutConfiguration{Handle: objref.Wrap(id)}
+	x := &CollectionViewCompositionalLayoutConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,55 +60,61 @@ func (x *CollectionViewCompositionalLayoutConfiguration) IsKind(className string
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CollectionViewCompositionalLayoutConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCollectionViewCompositionalLayoutConfiguration creates a new CollectionViewCompositionalLayoutConfiguration.
 func NewCollectionViewCompositionalLayoutConfiguration() *CollectionViewCompositionalLayoutConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewCompositionalLayoutConfiguration")), objc.RegisterName("new"))
 	return collectionViewCompositionalLayoutConfigurationAdopt(_id)
 }
 
-// The axis that the content in the collection view layout scrolls along.
-//
-// WithScrollDirection sets scrollDirection and returns the receiver so calls can be chained.
+// WithScrollDirection the axis that the content in the collection view layout scrolls along.
 func (x *CollectionViewCompositionalLayoutConfiguration) WithScrollDirection(scrollDirection CollectionViewScrollDirection) *CollectionViewCompositionalLayoutConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollDirection:"), scrollDirection)
 	return x
 }
 
-// The amount of space between the sections in the layout.
-//
-// WithInterSectionSpacing sets interSectionSpacing and returns the receiver so calls can be chained.
+// WithInterSectionSpacing the amount of space between the sections in the layout.
 func (x *CollectionViewCompositionalLayoutConfiguration) WithInterSectionSpacing(interSectionSpacing float64) *CollectionViewCompositionalLayoutConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterSectionSpacing:"), interSectionSpacing)
 	return x
 }
 
-// An array of the supplementary items that are associated with the boundary edges of the entire layout, such as global headers and footers.
-//
-// WithBoundarySupplementaryItems sets the collection and returns the receiver so calls can be chained.
+// WithBoundarySupplementaryItems an array of the supplementary items that are associated with the boundary edges of the entire layout, such as global headers and footers.
 func (x *CollectionViewCompositionalLayoutConfiguration) WithBoundarySupplementaryItems(items ...*CollectionLayoutBoundarySupplementaryItem) *CollectionViewCompositionalLayoutConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v *CollectionLayoutBoundarySupplementaryItem) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundarySupplementaryItems:"), _arr)
 	return x
 }
 
+// ScrollDirection wraps the corresponding Objective-C method.
 func (x *CollectionViewCompositionalLayoutConfiguration) ScrollDirection() CollectionViewScrollDirection {
 	_r := objc.Send[CollectionViewScrollDirection](objref.IDOf(x), objc.RegisterName("scrollDirection"))
 	return _r
 }
 
+// SetScrollDirection wraps the corresponding Objective-C method.
 func (x *CollectionViewCompositionalLayoutConfiguration) SetScrollDirection(scrollDirection CollectionViewScrollDirection) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollDirection:"), scrollDirection)
 }
 
+// InterSectionSpacing wraps the corresponding Objective-C method.
 func (x *CollectionViewCompositionalLayoutConfiguration) InterSectionSpacing() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("interSectionSpacing"))
 	return _r
 }
 
+// SetInterSectionSpacing wraps the corresponding Objective-C method.
 func (x *CollectionViewCompositionalLayoutConfiguration) SetInterSectionSpacing(interSectionSpacing float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterSectionSpacing:"), interSectionSpacing)
 }
 
+// BoundarySupplementaryItems wraps the corresponding Objective-C method.
+//
 // BoundarySupplementaryItems returns the collection as a Go slice.
 func (x *CollectionViewCompositionalLayoutConfiguration) BoundarySupplementaryItems() []*CollectionLayoutBoundarySupplementaryItem {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boundarySupplementaryItems"))
@@ -115,6 +123,7 @@ func (x *CollectionViewCompositionalLayoutConfiguration) BoundarySupplementaryIt
 	})
 }
 
+// SetBoundarySupplementaryItems wraps the corresponding Objective-C method.
 func (x *CollectionViewCompositionalLayoutConfiguration) SetBoundarySupplementaryItems(boundarySupplementaryItems []*CollectionLayoutBoundarySupplementaryItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundarySupplementaryItems:"), purego.SliceToNSArray(boundarySupplementaryItems, func(_v *CollectionLayoutBoundarySupplementaryItem) objc.ID { return objref.IDOf(_v) }))
 }

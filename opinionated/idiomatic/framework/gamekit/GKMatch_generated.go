@@ -15,9 +15,9 @@ import (
 	"unsafe"
 )
 
-// A peer-to-peer network between a group of players that sign into Game Center.
-//
 // Match is an idiomatic wrapper over the Objective-C class GKMatch.
+//
+// A peer-to-peer network between a group of players that sign into Game Center.
 type Match struct {
 	objref.Handle
 }
@@ -28,7 +28,8 @@ func MatchFromID(id objc.ID) *Match {
 	if id == 0 {
 		return nil
 	}
-	x := &Match{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Match{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -41,7 +42,8 @@ func matchAdopt(id objc.ID) *Match {
 	if id == 0 {
 		return nil
 	}
-	x := &Match{Handle: objref.Wrap(id)}
+	x := &Match{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -61,13 +63,19 @@ func (x *Match) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Match) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMatch creates a new Match.
 func NewMatch() *Match {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKMatch")), objc.RegisterName("new"))
 	return matchAdopt(_id)
 }
 
-// Transmits data to one or more players connected to the match.
+// SendDataToPlayersDataMode transmits data to one or more players connected to the match.
 func (x *Match) SendDataToPlayersDataMode(data obj.Object, players []*Player, mode MatchSendDataMode) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendData:toPlayers:dataMode:error:"), objref.IDOf(data), purego.SliceToNSArray(players, func(_v *Player) objc.ID { return objref.IDOf(_v) }), mode, unsafe.Pointer(&_nsErr))
@@ -77,7 +85,7 @@ func (x *Match) SendDataToPlayersDataMode(data obj.Object, players []*Player, mo
 	return nil
 }
 
-// Transmits data to all players connected to the match.
+// SendDataToAllPlayersWithDataMode transmits data to all players connected to the match.
 func (x *Match) SendDataToAllPlayersWithDataMode(data obj.Object, mode MatchSendDataMode) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendDataToAllPlayers:withDataMode:error:"), objref.IDOf(data), mode, unsafe.Pointer(&_nsErr))
@@ -87,15 +95,15 @@ func (x *Match) SendDataToAllPlayersWithDataMode(data obj.Object, mode MatchSend
 	return nil
 }
 
-// Disconnects the local player from the match.
+// Disconnect disconnects the local player from the match.
 func (x *Match) Disconnect() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disconnect"))
 }
 
-// Determines the best player in the game to act as the server for a client-server topology.
+// ChooseBestHostingPlayer determines the best player in the game to act as the server for a client-server topology.
 //
 // ChooseBestHostingPlayer blocks until the operation completes or ctx is cancelled.
-func (x *Match) ChooseBestHostingPlayer(ctx context.Context) (*Player, error) {
+func (x *Match) ChooseBestHostingPlayer(ctx context.Context) (result *Player, err error) {
 	type _result struct {
 		val *Player
 		err error
@@ -116,10 +124,10 @@ func (x *Match) ChooseBestHostingPlayer(ctx context.Context) (*Player, error) {
 	}
 }
 
-// Creates a new match with the players from an existing match.
+// Rematch creates a new match with the players from an existing match.
 //
 // Rematch blocks until the operation completes or ctx is cancelled.
-func (x *Match) Rematch(ctx context.Context) (*Match, error) {
+func (x *Match) Rematch(ctx context.Context) (result *Match, err error) {
 	type _result struct {
 		val *Match
 		err error
@@ -141,32 +149,36 @@ func (x *Match) Rematch(ctx context.Context) (*Match, error) {
 	}
 }
 
-// Joins the local player to a voice channel.
+// VoiceChatWithName joins the local player to a voice channel.
 func (x *Match) VoiceChatWithName(name string) *VoiceChat {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("voiceChatWithName:"), purego.NSString(name))
 	return VoiceChatFromID(_r)
 }
 
+// Players wraps the corresponding Objective-C method.
+//
 // Players returns the collection as a Go slice.
 func (x *Match) Players() []*Player {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("players"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Player { return PlayerFromID(_id) })
 }
 
+// ExpectedPlayerCount wraps the corresponding Objective-C method.
 func (x *Match) ExpectedPlayerCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("expectedPlayerCount"))
 	return _r
 }
 
+// PlayerProperties wraps the corresponding Objective-C method.
 func (x *Match) PlayerProperties() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerProperties"))
 	return obj.Wrap(_r)
 }
 
-// Determines the best player in the game to act as the server for a client-server match.
+// ChooseBestHostPlayer determines the best player in the game to act as the server for a client-server match.
 //
 // ChooseBestHostPlayer blocks until the operation completes or ctx is cancelled.
-func (x *Match) ChooseBestHostPlayer(ctx context.Context) (string, error) {
+func (x *Match) ChooseBestHostPlayer(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -187,7 +199,7 @@ func (x *Match) ChooseBestHostPlayer(ctx context.Context) (string, error) {
 	}
 }
 
-// Transmits data to a list of connected players.
+// SendDataToPlayersWithDataMode transmits data to a list of connected players.
 func (x *Match) SendDataToPlayersWithDataMode(data obj.Object, playerIDs []string, mode MatchSendDataMode) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendData:toPlayers:withDataMode:error:"), objref.IDOf(data), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }), mode, unsafe.Pointer(&_nsErr))
@@ -197,6 +209,8 @@ func (x *Match) SendDataToPlayersWithDataMode(data obj.Object, playerIDs []strin
 	return nil
 }
 
+// PlayerIDs wraps the corresponding Objective-C method.
+//
 // PlayerIDs returns the collection as a Go slice.
 func (x *Match) PlayerIDs() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerIDs"))

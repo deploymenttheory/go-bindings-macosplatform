@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request to schedule a local notification, which includes the content of the notification and the trigger conditions for delivery.
-//
 // NotificationRequest is an idiomatic wrapper over the Objective-C class UNNotificationRequest.
+//
+// A request to schedule a local notification, which includes the content of the notification and the trigger conditions for delivery.
 type NotificationRequest struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NotificationRequestFromID(id objc.ID) *NotificationRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NotificationRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func notificationRequestAdopt(id objc.ID) *NotificationRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationRequest{Handle: objref.Wrap(id)}
+	x := &NotificationRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *NotificationRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNotificationRequest creates a new NotificationRequest.
 func NewNotificationRequest() *NotificationRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("UNNotificationRequest")), objc.RegisterName("new"))
 	return notificationRequestAdopt(_id)
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *NotificationRequest) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -72,11 +81,13 @@ func (x *NotificationRequest) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// Content wraps the corresponding Objective-C method.
 func (x *NotificationRequest) Content() *NotificationContent {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("content"))
 	return NotificationContentFromID(_r)
 }
 
+// Trigger wraps the corresponding Objective-C method.
 func (x *NotificationRequest) Trigger() *NotificationTrigger {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trigger"))
 	return NotificationTriggerFromID(_r)

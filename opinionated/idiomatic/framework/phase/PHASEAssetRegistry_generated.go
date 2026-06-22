@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// A central repository of audio assets.
-//
 // AssetRegistry is an idiomatic wrapper over the Objective-C class PHASEAssetRegistry.
+//
+// A central repository of audio assets.
 type AssetRegistry struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func AssetRegistryFromID(id objc.ID) *AssetRegistry {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetRegistry{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetRegistry{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func assetRegistryAdopt(id objc.ID) *AssetRegistry {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetRegistry{Handle: objref.Wrap(id)}
+	x := &AssetRegistry{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,14 +62,20 @@ func (x *AssetRegistry) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetRegistry) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetRegistry creates a new AssetRegistry.
 func NewAssetRegistry() *AssetRegistry {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHASEAssetRegistry")), objc.RegisterName("new"))
 	return assetRegistryAdopt(_id)
 }
 
-// Registers a global metaparameter with the asset registry.
-func (x *AssetRegistry) RegisterGlobalMetaParameterError(metaParameterDefinition *MetaParameterDefinition) (*GlobalMetaParameterAsset, error) {
+// RegisterGlobalMetaParameterError registers a global metaparameter with the asset registry.
+func (x *AssetRegistry) RegisterGlobalMetaParameterError(metaParameterDefinition *MetaParameterDefinition) (result *GlobalMetaParameterAsset, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerGlobalMetaParameter:error:"), objref.IDOf(metaParameterDefinition), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -76,8 +84,8 @@ func (x *AssetRegistry) RegisterGlobalMetaParameterError(metaParameterDefinition
 	return GlobalMetaParameterAssetFromID(_r), nil
 }
 
-// Registers the root node of the sound event asset.
-func (x *AssetRegistry) RegisterSoundEventAssetWithRootNodeIdentifierError(rootNode *SoundEventNodeDefinition, identifier string) (*SoundEventNodeAsset, error) {
+// RegisterSoundEventAssetWithRootNodeIdentifierError registers the root node of the sound event asset.
+func (x *AssetRegistry) RegisterSoundEventAssetWithRootNodeIdentifierError(rootNode *SoundEventNodeDefinition, identifier string) (result *SoundEventNodeAsset, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerSoundEventAssetWithRootNode:identifier:error:"), objref.IDOf(rootNode), purego.NSString(identifier), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -86,8 +94,8 @@ func (x *AssetRegistry) RegisterSoundEventAssetWithRootNodeIdentifierError(rootN
 	return SoundEventNodeAssetFromID(_r), nil
 }
 
-// Loads a sound asset from the argument URL and adds it to the engine’s list of registered assets.
-func (x *AssetRegistry) RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError(url string, identifier string, assetType AssetType, channelLayout obj.Object, normalizationMode NormalizationMode) (*SoundAsset, error) {
+// RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError loads a sound asset from the argument URL and adds it to the engine’s list of registered assets.
+func (x *AssetRegistry) RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError(url string, identifier string, assetType AssetType, channelLayout obj.Object, normalizationMode NormalizationMode) (result *SoundAsset, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerSoundAssetAtURL:identifier:assetType:channelLayout:normalizationMode:error:"), rt.FileURL(url), purego.NSString(identifier), assetType, objref.IDOf(channelLayout), normalizationMode, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -96,8 +104,8 @@ func (x *AssetRegistry) RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutN
 	return SoundAssetFromID(_r), nil
 }
 
-// Loads a sound asset from memory and adds it to the engine’s list of registered assets.
-func (x *AssetRegistry) RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError(data obj.Object, identifier string, format obj.Object, normalizationMode NormalizationMode) (*SoundAsset, error) {
+// RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError loads a sound asset from memory and adds it to the engine’s list of registered assets.
+func (x *AssetRegistry) RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError(data obj.Object, identifier string, format obj.Object, normalizationMode NormalizationMode) (result *SoundAsset, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerSoundAssetWithData:identifier:format:normalizationMode:error:"), objref.IDOf(data), purego.NSString(identifier), objref.IDOf(format), normalizationMode, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -106,17 +114,18 @@ func (x *AssetRegistry) RegisterSoundAssetWithDataIdentifierFormatNormalizationM
 	return SoundAssetFromID(_r), nil
 }
 
-// Deallocates system memory for a given asset and removes it from the engine’s list of registered assets.
+// UnregisterAssetWithIdentifierCompletion deallocates system memory for a given asset and removes it from the engine’s list of registered assets.
 func (x *AssetRegistry) UnregisterAssetWithIdentifierCompletion(identifier string, handler func(bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unregisterAssetWithIdentifier:completion:"), purego.NSString(identifier), objc.NewBlock(func(_ objc.Block, _b0 bool) { handler(_b0) }))
 }
 
-// Provides the asset named with the designated identifier.
+// AssetForIdentifier provides the asset named with the designated identifier.
 func (x *AssetRegistry) AssetForIdentifier(identifier string) *Asset {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetForIdentifier:"), purego.NSString(identifier))
 	return AssetFromID(_r)
 }
 
+// GlobalMetaParameters wraps the corresponding Objective-C method.
 func (x *AssetRegistry) GlobalMetaParameters() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("globalMetaParameters"))
 	return obj.Wrap(_r)
@@ -125,10 +134,10 @@ func (x *AssetRegistry) GlobalMetaParameters() obj.Object {
 // AssetRegistryable is the interface implemented by [AssetRegistry], for mocking and DI.
 type AssetRegistryable interface {
 	obj.Object
-	RegisterGlobalMetaParameterError(metaParameterDefinition *MetaParameterDefinition) (*GlobalMetaParameterAsset, error)
-	RegisterSoundEventAssetWithRootNodeIdentifierError(rootNode *SoundEventNodeDefinition, identifier string) (*SoundEventNodeAsset, error)
-	RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError(url string, identifier string, assetType AssetType, channelLayout obj.Object, normalizationMode NormalizationMode) (*SoundAsset, error)
-	RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError(data obj.Object, identifier string, format obj.Object, normalizationMode NormalizationMode) (*SoundAsset, error)
+	RegisterGlobalMetaParameterError(metaParameterDefinition *MetaParameterDefinition) (result *GlobalMetaParameterAsset, err error)
+	RegisterSoundEventAssetWithRootNodeIdentifierError(rootNode *SoundEventNodeDefinition, identifier string) (result *SoundEventNodeAsset, err error)
+	RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError(url string, identifier string, assetType AssetType, channelLayout obj.Object, normalizationMode NormalizationMode) (result *SoundAsset, err error)
+	RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError(data obj.Object, identifier string, format obj.Object, normalizationMode NormalizationMode) (result *SoundAsset, err error)
 	UnregisterAssetWithIdentifierCompletion(identifier string, handler func(bool))
 	AssetForIdentifier(identifier string) *Asset
 	GlobalMetaParameters() obj.Object

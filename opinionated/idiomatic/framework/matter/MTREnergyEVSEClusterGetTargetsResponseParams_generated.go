@@ -25,7 +25,8 @@ func MTREnergyEVSEClusterGetTargetsResponseParamsFromID(id objc.ID) *MTREnergyEV
 	if id == 0 {
 		return nil
 	}
-	x := &MTREnergyEVSEClusterGetTargetsResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTREnergyEVSEClusterGetTargetsResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTREnergyEVSEClusterGetTargetsResponseParamsAdopt(id objc.ID) *MTREnergyEVS
 	if id == 0 {
 		return nil
 	}
-	x := &MTREnergyEVSEClusterGetTargetsResponseParams{Handle: objref.Wrap(id)}
+	x := &MTREnergyEVSEClusterGetTargetsResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTREnergyEVSEClusterGetTargetsResponseParams) IsKind(className string) 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTREnergyEVSEClusterGetTargetsResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-//
-// NewMTREnergyEVSEClusterGetTargetsResponseParamsWithResponseValueError creates a new MTREnergyEVSEClusterGetTargetsResponseParams.
-func NewMTREnergyEVSEClusterGetTargetsResponseParamsWithResponseValueError(responseValue obj.Object) (*MTREnergyEVSEClusterGetTargetsResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTREnergyEVSEClusterGetTargetsResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTREnergyEVSEClusterGetTargetsResponseParamsWithResponseValueError initialize an MTREnergyEVSEClusterGetTargetsResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTREnergyEVSEClusterGetTargetsResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTREnergyEVSEClusterGetTargetsResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTREnergyEVSEClusterGetTargetsResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,11 +77,13 @@ func NewMTREnergyEVSEClusterGetTargetsResponseParamsWithResponseValueError(respo
 	return mTREnergyEVSEClusterGetTargetsResponseParamsAdopt(_id), nil
 }
 
+// ChargingTargetSchedules wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterGetTargetsResponseParams) ChargingTargetSchedules() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("chargingTargetSchedules"))
 	return obj.Wrap(_r)
 }
 
+// SetChargingTargetSchedules wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterGetTargetsResponseParams) SetChargingTargetSchedules(chargingTargetSchedules obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChargingTargetSchedules:"), objref.IDOf(chargingTargetSchedules))
 }

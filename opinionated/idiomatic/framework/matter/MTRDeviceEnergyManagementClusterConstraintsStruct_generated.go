@@ -23,7 +23,8 @@ func MTRDeviceEnergyManagementClusterConstraintsStructFromID(id objc.ID) *MTRDev
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceEnergyManagementClusterConstraintsStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDeviceEnergyManagementClusterConstraintsStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDeviceEnergyManagementClusterConstraintsStructAdopt(id objc.ID) *MTRDevi
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceEnergyManagementClusterConstraintsStruct{Handle: objref.Wrap(id)}
+	x := &MTRDeviceEnergyManagementClusterConstraintsStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,83 +58,99 @@ func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) IsKind(className str
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDeviceEnergyManagementClusterConstraintsStruct creates a new MTRDeviceEnergyManagementClusterConstraintsStruct.
 func NewMTRDeviceEnergyManagementClusterConstraintsStruct() *MTRDeviceEnergyManagementClusterConstraintsStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceEnergyManagementClusterConstraintsStruct")), objc.RegisterName("new"))
 	return mTRDeviceEnergyManagementClusterConstraintsStructAdopt(_id)
 }
 
-// WithStartTime sets startTime and returns the receiver so calls can be chained.
+// WithStartTime sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) WithStartTime(startTime obj.Object) *MTRDeviceEnergyManagementClusterConstraintsStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 	return x
 }
 
-// WithDuration sets duration and returns the receiver so calls can be chained.
+// WithDuration sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterConstraintsStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return x
 }
 
-// WithNominalPower sets nominalPower and returns the receiver so calls can be chained.
+// WithNominalPower sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) WithNominalPower(nominalPower obj.Object) *MTRDeviceEnergyManagementClusterConstraintsStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNominalPower:"), objref.IDOf(nominalPower))
 	return x
 }
 
-// WithMaximumEnergy sets maximumEnergy and returns the receiver so calls can be chained.
+// WithMaximumEnergy sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) WithMaximumEnergy(maximumEnergy obj.Object) *MTRDeviceEnergyManagementClusterConstraintsStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumEnergy:"), objref.IDOf(maximumEnergy))
 	return x
 }
 
-// WithLoadControl sets loadControl and returns the receiver so calls can be chained.
+// WithLoadControl sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) WithLoadControl(loadControl obj.Object) *MTRDeviceEnergyManagementClusterConstraintsStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoadControl:"), objref.IDOf(loadControl))
 	return x
 }
 
+// StartTime wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) StartTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startTime"))
 	return obj.Wrap(_r)
 }
 
+// SetStartTime wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) SetStartTime(startTime obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 }
 
+// Duration wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) Duration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("duration"))
 	return obj.Wrap(_r)
 }
 
+// SetDuration wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) SetDuration(duration obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 }
 
+// NominalPower wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) NominalPower() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nominalPower"))
 	return obj.Wrap(_r)
 }
 
+// SetNominalPower wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) SetNominalPower(nominalPower obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNominalPower:"), objref.IDOf(nominalPower))
 }
 
+// MaximumEnergy wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) MaximumEnergy() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maximumEnergy"))
 	return obj.Wrap(_r)
 }
 
+// SetMaximumEnergy wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) SetMaximumEnergy(maximumEnergy obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumEnergy:"), objref.IDOf(maximumEnergy))
 }
 
+// LoadControl wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) LoadControl() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadControl"))
 	return obj.Wrap(_r)
 }
 
+// SetLoadControl wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) SetLoadControl(loadControl obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoadControl:"), objref.IDOf(loadControl))
 }

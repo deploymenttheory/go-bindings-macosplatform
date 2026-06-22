@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The value of a voice analysis metric.
-//
 // AcousticFeature is an idiomatic wrapper over the Objective-C class SFAcousticFeature.
+//
+// The value of a voice analysis metric.
 type AcousticFeature struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AcousticFeatureFromID(id objc.ID) *AcousticFeature {
 	if id == 0 {
 		return nil
 	}
-	x := &AcousticFeature{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AcousticFeature{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func acousticFeatureAdopt(id objc.ID) *AcousticFeature {
 	if id == 0 {
 		return nil
 	}
-	x := &AcousticFeature{Handle: objref.Wrap(id)}
+	x := &AcousticFeature{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *AcousticFeature) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AcousticFeature) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAcousticFeature creates a new AcousticFeature.
 func NewAcousticFeature() *AcousticFeature {
 	_id := objc.Send[objc.ID](objc.ID(_class("SFAcousticFeature")), objc.RegisterName("new"))
 	return acousticFeatureAdopt(_id)
 }
 
-// An array of feature values, one value per audio frame, corresponding to a transcript segment of recorded audio.
+// AcousticFeatureValuePerFrame an array of feature values, one value per audio frame, corresponding to a transcript segment of recorded audio.
 //
 // AcousticFeatureValuePerFrame returns the collection as a Go slice.
 func (x *AcousticFeature) AcousticFeatureValuePerFrame() []obj.Object {
@@ -72,7 +80,7 @@ func (x *AcousticFeature) AcousticFeatureValuePerFrame() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The duration of the audio frame.
+// FrameDuration the duration of the audio frame.
 func (x *AcousticFeature) FrameDuration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frameDuration"))
 	return _r

@@ -23,7 +23,8 @@ func DomainStateFromID(id objc.ID) *DomainState {
 	if id == 0 {
 		return nil
 	}
-	x := &DomainState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DomainState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func domainStateAdopt(id objc.ID) *DomainState {
 	if id == 0 {
 		return nil
 	}
-	x := &DomainState{Handle: objref.Wrap(id)}
+	x := &DomainState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,25 +58,31 @@ func (x *DomainState) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DomainState) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDomainState creates a new DomainState.
 func NewDomainState() *DomainState {
 	_id := objc.Send[objc.ID](objc.ID(_class("LADomainState")), objc.RegisterName("new"))
 	return domainStateAdopt(_id)
 }
 
-// Contains biometric domain state.
+// Biometry contains biometric domain state.
 func (x *DomainState) Biometry() *DomainStateBiometry {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biometry"))
 	return DomainStateBiometryFromID(_r)
 }
 
-// Contains companion domain state.
+// Companion contains companion domain state.
 func (x *DomainState) Companion() *DomainStateCompanion {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("companion"))
 	return DomainStateCompanionFromID(_r)
 }
 
-// Contains combined state hash data for biometry and companion state hashes.
+// StateHash contains combined state hash data for biometry and companion state hashes.
 func (x *DomainState) StateHash() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateHash"))
 	return obj.Wrap(_r)

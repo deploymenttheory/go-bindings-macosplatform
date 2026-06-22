@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the CPU or one or more GPUs the framework uses to execute a neural network.
-//
 // Device is an idiomatic wrapper over the Objective-C class MLCDevice.
+//
+// An object that represents the CPU or one or more GPUs the framework uses to execute a neural network.
 type Device struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DeviceFromID(id objc.ID) *Device {
 	if id == 0 {
 		return nil
 	}
-	x := &Device{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Device{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func deviceAdopt(id objc.ID) *Device {
 	if id == 0 {
 		return nil
 	}
-	x := &Device{Handle: objref.Wrap(id)}
+	x := &Device{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +60,31 @@ func (x *Device) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Device) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDevice creates a new Device.
 func NewDevice() *Device {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLCDevice")), objc.RegisterName("new"))
 	return deviceAdopt(_id)
 }
 
-// The type specified when the device is created Recommend that developers use MLCDeviceTypeAny as the device type. This will ensure that MLCompute will select the best device to execute the neural network. If developers want to be able to control device selection, they can select CPU or GPU and for the GPU, they can also select a specific Metal device.
+// Type the type specified when the device is created Recommend that developers use MLCDeviceTypeAny as the device type. This will ensure that MLCompute will select the best device to execute the neural network. If developers want to be able to control device selection, they can select CPU or GPU and for the GPU, they can also select a specific Metal device.
 func (x *Device) Type() DeviceType {
 	_r := objc.Send[DeviceType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
-// The specific device selected. This can be CPU, GPU or ANE.  If type is MLCDeviceTypeAny, this property can be used to find out the specific device type that is selected.
+// ActualDeviceType the specific device selected. This can be CPU, GPU or ANE.  If type is MLCDeviceTypeAny, this property can be used to find out the specific device type that is selected.
 func (x *Device) ActualDeviceType() DeviceType {
 	_r := objc.Send[DeviceType](objref.IDOf(x), objc.RegisterName("actualDeviceType"))
 	return _r
 }
 
+// GpuDevices wraps the corresponding Objective-C method.
 func (x *Device) GpuDevices() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gpuDevices"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

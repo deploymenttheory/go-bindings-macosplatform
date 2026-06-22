@@ -23,7 +23,8 @@ func ItemGetAttributesRequestFromID(id objc.ID) *ItemGetAttributesRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &ItemGetAttributesRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ItemGetAttributesRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func itemGetAttributesRequestAdopt(id objc.ID) *ItemGetAttributesRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &ItemGetAttributesRequest{Handle: objref.Wrap(id)}
+	x := &ItemGetAttributesRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,32 +58,37 @@ func (x *ItemGetAttributesRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ItemGetAttributesRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewItemGetAttributesRequest creates a new ItemGetAttributesRequest.
 func NewItemGetAttributesRequest() *ItemGetAttributesRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("FSItemGetAttributesRequest")), objc.RegisterName("new"))
 	return itemGetAttributesRequestAdopt(_id)
 }
 
-// The attributes requested by the request. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
-//
-// WithWantedAttributes sets wantedAttributes and returns the receiver so calls can be chained.
+// WithWantedAttributes the attributes requested by the request. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
 func (x *ItemGetAttributesRequest) WithWantedAttributes(wantedAttributes ItemAttribute) *ItemGetAttributesRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantedAttributes:"), wantedAttributes)
 	return x
 }
 
-// A method that indicates whether the request wants given attribute. - Parameter attribute: The “FSItemAttribute“ to check.
+// IsAttributeWanted a method that indicates whether the request wants given attribute. - Parameter attribute: The “FSItemAttribute“ to check.
 func (x *ItemGetAttributesRequest) IsAttributeWanted(attribute ItemAttribute) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAttributeWanted:"), attribute)
 	return _r
 }
 
-// The attributes requested by the request. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
+// WantedAttributes the attributes requested by the request. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
 func (x *ItemGetAttributesRequest) WantedAttributes() ItemAttribute {
 	_r := objc.Send[ItemAttribute](objref.IDOf(x), objc.RegisterName("wantedAttributes"))
 	return _r
 }
 
+// SetWantedAttributes wraps the corresponding Objective-C method.
 func (x *ItemGetAttributesRequest) SetWantedAttributes(wantedAttributes ItemAttribute) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantedAttributes:"), wantedAttributes)
 }

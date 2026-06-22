@@ -1,0 +1,85 @@
+{{/*
+    method.tmpl renders one Go method (or package-level function) that calls a
+    single Objective-C method. The signature pieces are resolved in the gather
+    phase; the body is rendered here from view.Dispatch, so no Go syntax is
+    assembled by string concatenation. The whole file is gofmt'd after assembly,
+    so only the tokens and statement order matter, not the indentation.
+*/}}
+{{define "method"}}{{if .DocComment}}{{.DocComment}}{{end}}func {{.Recv}}{{.GoName}}({{.ParamStr}}){{.RetSig}} {
+{{template "dispatch_tail" .Dispatch}}
+}
+
+{{end}}
+
+{{/*
+    dispatch_tail renders the statements inside a plain method body: optional
+    pre-call guards, the call, an optional NSError early-return, and the
+    conversion of the result and any value out-parameters into the return tuple.
+*/}}
+{{define "dispatch_tail"}}
+{{- range .Guards}}{{.}}
+{{end -}}
+{{- if .Outs}}{{template "tail_outs" .}}{{else}}{{template "tail_plain" .}}{{end -}}
+{{end}}
+
+{{/* tail_plain — a method with no value out-parameters. */}}
+{{define "tail_plain"}}
+{{- if eq .RetKind 0}}
+{{- if not .Error}}{{.Call}}
+{{- else}}var _nsErr uintptr
+_ = {{.Call}}
+if _nsErr != 0 {
+return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+}
+return nil
+{{- end}}
+{{- else}}
+{{- if .Error}}var _nsErr uintptr
+{{end}}_r := {{.Call}}
+{{if .Error}}if _nsErr != 0 {
+return {{.RetZero}}, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+}
+{{end}}
+{{- if eq .RetKind 2}}
+{{- if .Error}}if _r == 0 {
+return "", nil
+}
+return purego.GoString(_r), nil
+{{- else}}if _r == 0 {
+return ""
+}
+return purego.GoString(_r)
+{{- end}}
+{{- else if eq .RetKind 3}}
+{{- if .Error}}return {{wrap .RetWrap "_r"}}, nil
+{{- else}}return {{wrap .RetWrap "_r"}}
+{{- end}}
+{{- else}}
+{{- if .Error}}return _r, nil
+{{- else}}return _r
+{{- end}}
+{{- end}}
+{{- end}}
+{{- end}}
+
+{{/* tail_outs — a method with one or more value out-parameters. */}}
+{{define "tail_outs"}}
+{{- range .Outs}}var {{.GoName}} {{.GoType}}
+{{end -}}
+{{- if .Error}}var _nsErr uintptr
+{{end -}}
+{{- if eq .RetKind 0}}{{.Call}}
+{{else}}_r := {{.Call}}
+{{end -}}
+{{- if eq .RetKind 2}}_v := ""
+if _r != 0 {
+_v = purego.GoString(_r)
+}
+{{else if eq .RetKind 3}}_v := {{wrap .RetWrap "_r"}}
+{{end -}}
+{{- if .Error}}if _nsErr != 0 {
+return {{retOutZeros .}}errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+}
+{{end -}}
+return {{retOutValues .}}
+{{- end}}

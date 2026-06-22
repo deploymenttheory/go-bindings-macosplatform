@@ -13,6 +13,8 @@ import (
 )
 
 // MTRMediaPlaybackClusterPlaybackPositionStruct is an idiomatic wrapper over the Objective-C class MTRMediaPlaybackClusterPlaybackPositionStruct.
+//
+// MTRMediaPlaybackClusterPlaybackPositionStruct is an abstract base — you do not construct it directly. Construct one of [MTRMediaPlaybackClusterPlaybackPosition] and pass it where a MTRMediaPlaybackClusterPlaybackPositionStruct is accepted.
 type MTRMediaPlaybackClusterPlaybackPositionStruct struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRMediaPlaybackClusterPlaybackPositionStructFromID(id objc.ID) *MTRMediaPl
 	if id == 0 {
 		return nil
 	}
-	x := &MTRMediaPlaybackClusterPlaybackPositionStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRMediaPlaybackClusterPlaybackPositionStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRMediaPlaybackClusterPlaybackPositionStructAdopt(id objc.ID) *MTRMediaPla
 	if id == 0 {
 		return nil
 	}
-	x := &MTRMediaPlaybackClusterPlaybackPositionStruct{Handle: objref.Wrap(id)}
+	x := &MTRMediaPlaybackClusterPlaybackPositionStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,38 +60,42 @@ func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) IsKind(className string)
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRMediaPlaybackClusterPlaybackPositionStruct creates a new MTRMediaPlaybackClusterPlaybackPositionStruct.
-func NewMTRMediaPlaybackClusterPlaybackPositionStruct() *MTRMediaPlaybackClusterPlaybackPositionStruct {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRMediaPlaybackClusterPlaybackPositionStruct")), objc.RegisterName("new"))
-	return mTRMediaPlaybackClusterPlaybackPositionStructAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithUpdatedAt sets updatedAt and returns the receiver so calls can be chained.
+// WithUpdatedAt sets the property and returns the receiver so calls can be chained.
 func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) WithUpdatedAt(updatedAt obj.Object) *MTRMediaPlaybackClusterPlaybackPositionStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpdatedAt:"), objref.IDOf(updatedAt))
 	return x
 }
 
-// WithPosition sets position and returns the receiver so calls can be chained.
+// WithPosition sets the property and returns the receiver so calls can be chained.
 func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) WithPosition(position obj.Object) *MTRMediaPlaybackClusterPlaybackPositionStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), objref.IDOf(position))
 	return x
 }
 
+// UpdatedAt wraps the corresponding Objective-C method.
 func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) UpdatedAt() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updatedAt"))
 	return obj.Wrap(_r)
 }
 
+// SetUpdatedAt wraps the corresponding Objective-C method.
 func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) SetUpdatedAt(updatedAt obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpdatedAt:"), objref.IDOf(updatedAt))
 }
 
+// Position wraps the corresponding Objective-C method.
 func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) Position() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("position"))
 	return obj.Wrap(_r)
 }
 
+// SetPosition wraps the corresponding Objective-C method.
 func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) SetPosition(position obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), objref.IDOf(position))
 }
@@ -104,3 +112,11 @@ type MTRMediaPlaybackClusterPlaybackPositionStructable interface {
 }
 
 var _ MTRMediaPlaybackClusterPlaybackPositionStructable = (*MTRMediaPlaybackClusterPlaybackPositionStruct)(nil)
+
+// isMTRMediaPlaybackClusterPlaybackPositionStruct marks MTRMediaPlaybackClusterPlaybackPositionStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRMediaPlaybackClusterPlaybackPositionStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) isMTRMediaPlaybackClusterPlaybackPositionStruct() {
+}
+
+var _ MTRMediaPlaybackClusterPlaybackPositionStructProvider = (*MTRMediaPlaybackClusterPlaybackPositionStruct)(nil)

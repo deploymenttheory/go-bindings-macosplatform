@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes the state of a property.
-//
 // ExtensionPropertyState is an idiomatic wrapper over the Objective-C class CMIOExtensionPropertyState.
+//
+// An object that describes the state of a property.
 type ExtensionPropertyState struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ExtensionPropertyStateFromID(id objc.ID) *ExtensionPropertyState {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionPropertyState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExtensionPropertyState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func extensionPropertyStateAdopt(id objc.ID) *ExtensionPropertyState {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionPropertyState{Handle: objref.Wrap(id)}
+	x := &ExtensionPropertyState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,33 @@ func (x *ExtensionPropertyState) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a property state with a value.
-//
-// NewExtensionPropertyStateWithValue creates a new ExtensionPropertyState.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExtensionPropertyState) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewExtensionPropertyStateWithValue creates a property state with a value.
 func NewExtensionPropertyStateWithValue(value obj.Object) *ExtensionPropertyState {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionPropertyState")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:"), objref.IDOf(value))
 	return extensionPropertyStateAdopt(_id)
 }
 
-// Creates a property state with a value and attributes.
-//
-// NewExtensionPropertyStateWithValueAttributes creates a new ExtensionPropertyState.
+// NewExtensionPropertyStateWithValueAttributes creates a property state with a value and attributes.
 func NewExtensionPropertyStateWithValueAttributes(value obj.Object, attributes obj.Object) *ExtensionPropertyState {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionPropertyState")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:attributes:"), objref.IDOf(value), objref.IDOf(attributes))
 	return extensionPropertyStateAdopt(_id)
 }
 
-// The value of the property.
+// Value the value of the property.
 func (x *ExtensionPropertyState) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
-// The property attributes of the property.
+// Attributes the property attributes of the property.
 func (x *ExtensionPropertyState) Attributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)

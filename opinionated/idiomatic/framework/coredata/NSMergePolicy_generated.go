@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// A policy object that you use to resolve conflicts between the persistent store and in-memory versions of managed objects.
-//
 // MergePolicy is an idiomatic wrapper over the Objective-C class NSMergePolicy.
+//
+// A policy object that you use to resolve conflicts between the persistent store and in-memory versions of managed objects.
 type MergePolicy struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func MergePolicyFromID(id objc.ID) *MergePolicy {
 	if id == 0 {
 		return nil
 	}
-	x := &MergePolicy{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MergePolicy{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func mergePolicyAdopt(id objc.ID) *MergePolicy {
 	if id == 0 {
 		return nil
 	}
-	x := &MergePolicy{Handle: objref.Wrap(id)}
+	x := &MergePolicy{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,20 @@ func (x *MergePolicy) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns a merge policy initialized with a given policy type.
-//
-// NewMergePolicyWithMergeType creates a new MergePolicy.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MergePolicy) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMergePolicyWithMergeType returns a merge policy initialized with a given policy type.
 func NewMergePolicyWithMergeType(ty MergePolicyType) *MergePolicy {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMergePolicy")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMergeType:"), ty)
 	return mergePolicyAdopt(_id)
 }
 
-// Resolves the conflicts in a given list.
+// ResolveConflicts resolves the conflicts in a given list.
 func (x *MergePolicy) ResolveConflicts(list obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("resolveConflicts:error:"), objref.IDOf(list), unsafe.Pointer(&_nsErr))
@@ -79,7 +85,7 @@ func (x *MergePolicy) ResolveConflicts(list obj.Object) error {
 	return nil
 }
 
-// Resolves the conflicts in a given list.
+// ResolveOptimisticLockingVersionConflicts resolves the conflicts in a given list.
 func (x *MergePolicy) ResolveOptimisticLockingVersionConflicts(list []*MergeConflict) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("resolveOptimisticLockingVersionConflicts:error:"), purego.SliceToNSArray(list, func(_v *MergeConflict) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
@@ -89,7 +95,7 @@ func (x *MergePolicy) ResolveOptimisticLockingVersionConflicts(list []*MergeConf
 	return nil
 }
 
-// Resolves the conflicts in a given list.
+// ResolveConstraintConflicts resolves the conflicts in a given list.
 func (x *MergePolicy) ResolveConstraintConflicts(list []*ConstraintConflict) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("resolveConstraintConflicts:error:"), purego.SliceToNSArray(list, func(_v *ConstraintConflict) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
@@ -99,6 +105,7 @@ func (x *MergePolicy) ResolveConstraintConflicts(list []*ConstraintConflict) err
 	return nil
 }
 
+// MergeType wraps the corresponding Objective-C method.
 func (x *MergePolicy) MergeType() MergePolicyType {
 	_r := objc.Send[MergePolicyType](objref.IDOf(x), objc.RegisterName("mergeType"))
 	return _r

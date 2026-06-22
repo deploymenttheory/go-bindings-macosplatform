@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that encapsulates contact information needed for billing and shipping.
-//
 // Contact is an idiomatic wrapper over the Objective-C class PKContact.
+//
+// An object that encapsulates contact information needed for billing and shipping.
 type Contact struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ContactFromID(id objc.ID) *Contact {
 	if id == 0 {
 		return nil
 	}
-	x := &Contact{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Contact{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func contactAdopt(id objc.ID) *Contact {
 	if id == 0 {
 		return nil
 	}
-	x := &Contact{Handle: objref.Wrap(id)}
+	x := &Contact{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,79 +60,82 @@ func (x *Contact) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Contact) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewContact creates a new Contact.
 func NewContact() *Contact {
 	_id := objc.Send[objc.ID](objc.ID(_class("PKContact")), objc.RegisterName("new"))
 	return contactAdopt(_id)
 }
 
-// The contact’s first and last name, or nil if the contact’s name is not needed for the transaction.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the contact’s first and last name, or nil if the contact’s name is not needed for the transaction.
 func (x *Contact) WithName(name obj.Object) *Contact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 	return x
 }
 
-// The contact’s full postal address.
-//
-// WithPostalAddress sets postalAddress and returns the receiver so calls can be chained.
+// WithPostalAddress the contact’s full postal address.
 func (x *Contact) WithPostalAddress(postalAddress obj.Object) *Contact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostalAddress:"), objref.IDOf(postalAddress))
 	return x
 }
 
-// The contact’s telephone number, or nil if the contact’s phone number is not needed for the transaction.
-//
-// WithPhoneNumber sets phoneNumber and returns the receiver so calls can be chained.
+// WithPhoneNumber the contact’s telephone number, or nil if the contact’s phone number is not needed for the transaction.
 func (x *Contact) WithPhoneNumber(phoneNumber obj.Object) *Contact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneNumber:"), objref.IDOf(phoneNumber))
 	return x
 }
 
-// The contact’s email address, or nil if the contact’s email is not needed for the transaction.
-//
-// WithEmailAddress sets emailAddress and returns the receiver so calls can be chained.
+// WithEmailAddress the contact’s email address, or nil if the contact’s email is not needed for the transaction.
 func (x *Contact) WithEmailAddress(emailAddress string) *Contact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmailAddress:"), purego.NSString(emailAddress))
 	return x
 }
 
-// The contact’s sublocality, or nil if the sublocality is not needed for the transaction.
-//
-// WithSupplementarySubLocality sets supplementarySubLocality and returns the receiver so calls can be chained.
+// WithSupplementarySubLocality the contact’s sublocality, or nil if the sublocality is not needed for the transaction.
 func (x *Contact) WithSupplementarySubLocality(supplementarySubLocality string) *Contact {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupplementarySubLocality:"), purego.NSString(supplementarySubLocality))
 	return x
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *Contact) Name() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	return obj.Wrap(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *Contact) SetName(name obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 }
 
+// PostalAddress wraps the corresponding Objective-C method.
 func (x *Contact) PostalAddress() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postalAddress"))
 	return obj.Wrap(_r)
 }
 
+// SetPostalAddress wraps the corresponding Objective-C method.
 func (x *Contact) SetPostalAddress(postalAddress obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostalAddress:"), objref.IDOf(postalAddress))
 }
 
+// PhoneNumber wraps the corresponding Objective-C method.
 func (x *Contact) PhoneNumber() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("phoneNumber"))
 	return obj.Wrap(_r)
 }
 
+// SetPhoneNumber wraps the corresponding Objective-C method.
 func (x *Contact) SetPhoneNumber(phoneNumber obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneNumber:"), objref.IDOf(phoneNumber))
 }
 
+// EmailAddress wraps the corresponding Objective-C method.
 func (x *Contact) EmailAddress() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emailAddress"))
 	if _r == 0 {
@@ -139,10 +144,12 @@ func (x *Contact) EmailAddress() string {
 	return purego.GoString(_r)
 }
 
+// SetEmailAddress wraps the corresponding Objective-C method.
 func (x *Contact) SetEmailAddress(emailAddress string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmailAddress:"), purego.NSString(emailAddress))
 }
 
+// SupplementarySubLocality wraps the corresponding Objective-C method.
 func (x *Contact) SupplementarySubLocality() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supplementarySubLocality"))
 	if _r == 0 {
@@ -151,6 +158,7 @@ func (x *Contact) SupplementarySubLocality() string {
 	return purego.GoString(_r)
 }
 
+// SetSupplementarySubLocality wraps the corresponding Objective-C method.
 func (x *Contact) SetSupplementarySubLocality(supplementarySubLocality string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupplementarySubLocality:"), purego.NSString(supplementarySubLocality))
 }

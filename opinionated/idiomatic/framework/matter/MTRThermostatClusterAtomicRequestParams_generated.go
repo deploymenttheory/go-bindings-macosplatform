@@ -23,7 +23,8 @@ func MTRThermostatClusterAtomicRequestParamsFromID(id objc.ID) *MTRThermostatClu
 	if id == 0 {
 		return nil
 	}
-	x := &MTRThermostatClusterAtomicRequestParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRThermostatClusterAtomicRequestParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRThermostatClusterAtomicRequestParamsAdopt(id objc.ID) *MTRThermostatClus
 	if id == 0 {
 		return nil
 	}
-	x := &MTRThermostatClusterAtomicRequestParams{Handle: objref.Wrap(id)}
+	x := &MTRThermostatClusterAtomicRequestParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,83 +58,93 @@ func (x *MTRThermostatClusterAtomicRequestParams) IsKind(className string) bool 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRThermostatClusterAtomicRequestParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRThermostatClusterAtomicRequestParams creates a new MTRThermostatClusterAtomicRequestParams.
 func NewMTRThermostatClusterAtomicRequestParams() *MTRThermostatClusterAtomicRequestParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRThermostatClusterAtomicRequestParams")), objc.RegisterName("new"))
 	return mTRThermostatClusterAtomicRequestParamsAdopt(_id)
 }
 
-// WithRequestType sets requestType and returns the receiver so calls can be chained.
+// WithRequestType sets the property and returns the receiver so calls can be chained.
 func (x *MTRThermostatClusterAtomicRequestParams) WithRequestType(requestType obj.Object) *MTRThermostatClusterAtomicRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestType:"), objref.IDOf(requestType))
 	return x
 }
 
-// WithTimeout sets timeout and returns the receiver so calls can be chained.
+// WithTimeout sets the property and returns the receiver so calls can be chained.
 func (x *MTRThermostatClusterAtomicRequestParams) WithTimeout(timeout obj.Object) *MTRThermostatClusterAtomicRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeout:"), objref.IDOf(timeout))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke).
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
 func (x *MTRThermostatClusterAtomicRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThermostatClusterAtomicRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
 func (x *MTRThermostatClusterAtomicRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThermostatClusterAtomicRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// RequestType wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterAtomicRequestParams) RequestType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestType"))
 	return obj.Wrap(_r)
 }
 
+// SetRequestType wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterAtomicRequestParams) SetRequestType(requestType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestType:"), objref.IDOf(requestType))
 }
 
+// AttributeRequests wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterAtomicRequestParams) AttributeRequests() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeRequests"))
 	return obj.Wrap(_r)
 }
 
+// SetAttributeRequests wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterAtomicRequestParams) SetAttributeRequests(attributeRequests obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeRequests:"), objref.IDOf(attributeRequests))
 }
 
+// Timeout wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterAtomicRequestParams) Timeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeout"))
 	return obj.Wrap(_r)
 }
 
+// SetTimeout wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterAtomicRequestParams) SetTimeout(timeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeout:"), objref.IDOf(timeout))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRThermostatClusterAtomicRequestParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterAtomicRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRThermostatClusterAtomicRequestParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterAtomicRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that executes unix applications.
-//
 // UserUnixTask is an idiomatic wrapper over the Objective-C class NSUserUnixTask.
+//
+// It embeds [UserScriptTask], promoting that type's methods.
+//
+// An object that executes unix applications.
 type UserUnixTask struct {
-	objref.Handle
+	UserScriptTask
 }
 
 // UserUnixTaskFromID adopts an existing Objective-C object as a UserUnixTask
@@ -25,7 +26,8 @@ func UserUnixTaskFromID(id objc.ID) *UserUnixTask {
 	if id == 0 {
 		return nil
 	}
-	x := &UserUnixTask{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UserUnixTask{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func userUnixTaskAdopt(id objc.ID) *UserUnixTask {
 	if id == 0 {
 		return nil
 	}
-	x := &UserUnixTask{Handle: objref.Wrap(id)}
+	x := &UserUnixTask{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UserUnixTask) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UserUnixTask) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UserUnixTask) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUserUnixTask creates a new UserUnixTask.
@@ -64,59 +52,59 @@ func NewUserUnixTask() *UserUnixTask {
 	return userUnixTaskAdopt(_id)
 }
 
-// The standard input stream.
-//
-// WithStandardInput sets standardInput and returns the receiver so calls can be chained.
+// WithStandardInput the standard input stream.
 func (x *UserUnixTask) WithStandardInput(standardInput *FileHandle) *UserUnixTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardInput:"), objref.IDOf(standardInput))
 	return x
 }
 
-// The standard output stream.
-//
-// WithStandardOutput sets standardOutput and returns the receiver so calls can be chained.
+// WithStandardOutput the standard output stream.
 func (x *UserUnixTask) WithStandardOutput(standardOutput *FileHandle) *UserUnixTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardOutput:"), objref.IDOf(standardOutput))
 	return x
 }
 
-// The standard error stream.
-//
-// WithStandardError sets standardError and returns the receiver so calls can be chained.
+// WithStandardError the standard error stream.
 func (x *UserUnixTask) WithStandardError(standardError *FileHandle) *UserUnixTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardError:"), objref.IDOf(standardError))
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UserUnixTask) WithScriptingProperties(scriptingProperties obj.Object) *UserUnixTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// StandardInput wraps the corresponding Objective-C method.
 func (x *UserUnixTask) StandardInput() *FileHandle {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standardInput"))
 	return FileHandleFromID(_r)
 }
 
+// SetStandardInput wraps the corresponding Objective-C method.
 func (x *UserUnixTask) SetStandardInput(standardInput *FileHandle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardInput:"), objref.IDOf(standardInput))
 }
 
+// StandardOutput wraps the corresponding Objective-C method.
 func (x *UserUnixTask) StandardOutput() *FileHandle {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standardOutput"))
 	return FileHandleFromID(_r)
 }
 
+// SetStandardOutput wraps the corresponding Objective-C method.
 func (x *UserUnixTask) SetStandardOutput(standardOutput *FileHandle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardOutput:"), objref.IDOf(standardOutput))
 }
 
+// StandardError wraps the corresponding Objective-C method.
 func (x *UserUnixTask) StandardError() *FileHandle {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standardError"))
 	return FileHandleFromID(_r)
 }
 
+// SetStandardError wraps the corresponding Objective-C method.
 func (x *UserUnixTask) SetStandardError(standardError *FileHandle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardError:"), objref.IDOf(standardError))
 }
@@ -137,3 +125,5 @@ type UserUnixTaskable interface {
 }
 
 var _ UserUnixTaskable = (*UserUnixTask)(nil)
+
+var _ UserScriptTaskProvider = (*UserUnixTask)(nil)

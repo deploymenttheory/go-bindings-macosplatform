@@ -13,7 +13,7 @@ import (
 	"unsafe"
 )
 
-// Return the list of network interfaces available for bridging.
+// NetworkInterfaces return the list of network interfaces available for bridging.
 //
 // NetworkInterfaces returns the collection as a Go slice.
 func NetworkInterfaces() []*BridgedNetworkInterface {
@@ -21,19 +21,19 @@ func NetworkInterfaces() []*BridgedNetworkInterface {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *BridgedNetworkInterface { return BridgedNetworkInterfaceFromID(_id) })
 }
 
-// Indicate whether or not nested virtualization is available. Nested virtualization is only available on some hardware and software configurations. It may also be disabled by policy. Use this property to check if support is available for the platform. If nested virtualization is supported, use `nestedVirtualizationEnabled` to enable the feature.
+// IsNestedVirtualizationSupported indicate whether or not nested virtualization is available. Nested virtualization is only available on some hardware and software configurations. It may also be disabled by policy. Use this property to check if support is available for the platform. If nested virtualization is supported, use `nestedVirtualizationEnabled` to enable the feature.
 func IsNestedVirtualizationSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("VZGenericPlatformConfiguration")), objc.RegisterName("isNestedVirtualizationSupported"))
 	return _r
 }
 
-// The maximum allowed length of name, as defined by the sockaddr_un structure in Linux.
+// MaximumNameLength the maximum allowed length of name, as defined by the sockaddr_un structure in Linux.
 func MaximumNameLength() int {
 	_r := objc.Send[int](objc.ID(_class("VZLinuxRosettaAbstractSocketCachingOptions")), objc.RegisterName("maximumNameLength"))
 	return _r
 }
 
-// Starts the installation of Rosetta.
+// InstallRosetta starts the installation of Rosetta.
 //
 // InstallRosetta blocks until the operation completes or ctx is cancelled.
 func InstallRosetta(ctx context.Context) error {
@@ -52,28 +52,28 @@ func InstallRosetta(ctx context.Context) error {
 	}
 }
 
-// Check the availability of Rosetta support for the directory share.
+// Availability check the availability of Rosetta support for the directory share.
 func Availability() LinuxRosettaAvailability {
 	_r := objc.Send[LinuxRosettaAvailability](objc.ID(_class("VZLinuxRosettaDirectoryShare")), objc.RegisterName("availability"))
 	return _r
 }
 
-// The maximum allowed length of path, as defined by the sockaddr_un structure in Linux.
+// MaximumPathLength the maximum allowed length of path, as defined by the sockaddr_un structure in Linux.
 func MaximumPathLength() int {
 	_r := objc.Send[int](objc.ID(_class("VZLinuxRosettaUnixSocketCachingOptions")), objc.RegisterName("maximumPathLength"))
 	return _r
 }
 
-// Returns a valid, random, locally administered, unicast MAC address.
+// RandomLocallyAdministeredAddress returns a valid, random, locally administered, unicast MAC address.
 func RandomLocallyAdministeredAddress() *MACAddress {
 	_r := objc.Send[objc.ID](objc.ID(_class("VZMACAddress")), objc.RegisterName("randomLocallyAdministeredAddress"))
 	return MACAddressFromID(_r)
 }
 
-// Load a restore image from a file on the local file system.
+// LoadFileURL load a restore image from a file on the local file system.
 //
 // LoadFileURL blocks until the operation completes or ctx is cancelled.
-func LoadFileURL(ctx context.Context, fileURL string) (*MacOSRestoreImage, error) {
+func LoadFileURL(ctx context.Context, fileURL string) (result *MacOSRestoreImage, err error) {
 	type _result struct {
 		val *MacOSRestoreImage
 		err error
@@ -95,10 +95,10 @@ func LoadFileURL(ctx context.Context, fileURL string) (*MacOSRestoreImage, error
 	}
 }
 
-// Fetches the latest restore image supported by this host from the network.
+// FetchLatestSupported fetches the latest restore image supported by this host from the network.
 //
 // FetchLatestSupported blocks until the operation completes or ctx is cancelled.
-func FetchLatestSupported(ctx context.Context) (*MacOSRestoreImage, error) {
+func FetchLatestSupported(ctx context.Context) (result *MacOSRestoreImage, err error) {
 	type _result struct {
 		val *MacOSRestoreImage
 		err error
@@ -120,7 +120,7 @@ func FetchLatestSupported(ctx context.Context) (*MacOSRestoreImage, error) {
 	}
 }
 
-// Check if a name is a valid directory name.
+// ValidateName check if a name is a valid directory name.
 func ValidateName(name string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objc.ID(_class("VZMultipleDirectoryShare")), objc.RegisterName("validateName:error:"), purego.NSString(name), unsafe.Pointer(&_nsErr))
@@ -130,7 +130,7 @@ func ValidateName(name string) error {
 	return nil
 }
 
-// Transforms a string to be a valid directory name.
+// CanonicalizedNameFromName transforms a string to be a valid directory name.
 func CanonicalizedNameFromName(name string) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("VZMultipleDirectoryShare")), objc.RegisterName("canonicalizedNameFromName:"), purego.NSString(name))
 	if _r == 0 {
@@ -139,7 +139,7 @@ func CanonicalizedNameFromName(name string) string {
 	return purego.GoString(_r)
 }
 
-// Checks if the URL is a valid network block device URL.
+// ValidateURL checks if the URL is a valid network block device URL.
 func ValidateURL(uRL string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objc.ID(_class("VZNetworkBlockDeviceStorageDeviceAttachment")), objc.RegisterName("validateURL:error:"), rt.FileURL(uRL), unsafe.Pointer(&_nsErr))
@@ -149,7 +149,7 @@ func ValidateURL(uRL string) error {
 	return nil
 }
 
-// The Spice agent port name. A console port configured with this name will spawn a Spice guest agent if supported by the guest. VZConsolePortConfiguration.attachment must be set to VZSpiceAgentPortAttachment. VZVirtioConsolePortConfiguration.isConsole must remain false on a Spice agent port.
+// SpiceAgentPortName the Spice agent port name. A console port configured with this name will spawn a Spice guest agent if supported by the guest. VZConsolePortConfiguration.attachment must be set to VZSpiceAgentPortAttachment. VZVirtioConsolePortConfiguration.isConsole must remain false on a Spice agent port.
 func SpiceAgentPortName() string {
 	_r := objc.Send[objc.ID](objc.ID(_class("VZSpiceAgentPortAttachment")), objc.RegisterName("spiceAgentPortName"))
 	if _r == 0 {
@@ -158,7 +158,7 @@ func SpiceAgentPortName() string {
 	return purego.GoString(_r)
 }
 
-// Checks the validity of a block device identifier.
+// ValidateBlockDeviceIdentifier checks the validity of a block device identifier.
 func ValidateBlockDeviceIdentifier(blockDeviceIdentifier string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objc.ID(_class("VZVirtioBlockDeviceConfiguration")), objc.RegisterName("validateBlockDeviceIdentifier:error:"), purego.NSString(blockDeviceIdentifier), unsafe.Pointer(&_nsErr))
@@ -168,7 +168,7 @@ func ValidateBlockDeviceIdentifier(blockDeviceIdentifier string) error {
 	return nil
 }
 
-// Checks to see whether a Virtio tag is valid.
+// ValidateTag checks to see whether a Virtio tag is valid.
 func ValidateTag(tag string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objc.ID(_class("VZVirtioFileSystemDeviceConfiguration")), objc.RegisterName("validateTag:error:"), purego.NSString(tag), unsafe.Pointer(&_nsErr))
@@ -178,7 +178,7 @@ func ValidateTag(tag string) error {
 	return nil
 }
 
-// The macOS automount tag. A device configured with this tag will be automatically mounted in a macOS guest.
+// MacOSGuestAutomountTag the macOS automount tag. A device configured with this tag will be automatically mounted in a macOS guest.
 func MacOSGuestAutomountTag() string {
 	_r := objc.Send[objc.ID](objc.ID(_class("VZVirtioFileSystemDeviceConfiguration")), objc.RegisterName("macOSGuestAutomountTag"))
 	if _r == 0 {
@@ -187,31 +187,31 @@ func MacOSGuestAutomountTag() string {
 	return purego.GoString(_r)
 }
 
-// Indicate whether or not virtualization is available. If virtualization is unavailable, no VZVirtualMachineConfiguration will validate. The validation error of the VZVirtualMachineConfiguration provides more information about why virtualization is unavailable.
+// IsSupported indicate whether or not virtualization is available. If virtualization is unavailable, no VZVirtualMachineConfiguration will validate. The validation error of the VZVirtualMachineConfiguration provides more information about why virtualization is unavailable.
 func IsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("VZVirtualMachine")), objc.RegisterName("isSupported"))
 	return _r
 }
 
-// Minimum amount of memory required by virtual machines.
+// MinimumAllowedMemorySize minimum amount of memory required by virtual machines.
 func MinimumAllowedMemorySize() uint64 {
 	_r := objc.Send[uint64](objc.ID(_class("VZVirtualMachineConfiguration")), objc.RegisterName("minimumAllowedMemorySize"))
 	return _r
 }
 
-// Maximum amount of memory allowed for a virtual machine.
+// MaximumAllowedMemorySize maximum amount of memory allowed for a virtual machine.
 func MaximumAllowedMemorySize() uint64 {
 	_r := objc.Send[uint64](objc.ID(_class("VZVirtualMachineConfiguration")), objc.RegisterName("maximumAllowedMemorySize"))
 	return _r
 }
 
-// Minimum number of CPUs for a virtual machine.
+// MinimumAllowedCPUCount minimum number of CPUs for a virtual machine.
 func MinimumAllowedCPUCount() int {
 	_r := objc.Send[int](objc.ID(_class("VZVirtualMachineConfiguration")), objc.RegisterName("minimumAllowedCPUCount"))
 	return _r
 }
 
-// Maximum number of CPUs for a virtual machine.
+// MaximumAllowedCPUCount maximum number of CPUs for a virtual machine.
 func MaximumAllowedCPUCount() int {
 	_r := objc.Send[int](objc.ID(_class("VZVirtualMachineConfiguration")), objc.RegisterName("maximumAllowedCPUCount"))
 	return _r

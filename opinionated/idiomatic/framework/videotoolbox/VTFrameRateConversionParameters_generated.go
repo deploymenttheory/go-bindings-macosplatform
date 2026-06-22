@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains the required input and output parameters to run a frame rate conversion processor on a frame.
-//
 // FrameRateConversionParameters is an idiomatic wrapper over the Objective-C class VTFrameRateConversionParameters.
+//
+// An object that contains the required input and output parameters to run a frame rate conversion processor on a frame.
 type FrameRateConversionParameters struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FrameRateConversionParametersFromID(id objc.ID) *FrameRateConversionParamet
 	if id == 0 {
 		return nil
 	}
-	x := &FrameRateConversionParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FrameRateConversionParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func frameRateConversionParametersAdopt(id objc.ID) *FrameRateConversionParamete
 	if id == 0 {
 		return nil
 	}
-	x := &FrameRateConversionParameters{Handle: objref.Wrap(id)}
+	x := &FrameRateConversionParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,34 +60,38 @@ func (x *FrameRateConversionParameters) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new frame rate conversion parameters object.
-//
-// NewFrameRateConversionParametersWithSourceFrameNextFrameOpticalFlowInterpolationPhaseSubmissionModeDestinationFrames creates a new FrameRateConversionParameters.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FrameRateConversionParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFrameRateConversionParametersWithSourceFrameNextFrameOpticalFlowInterpolationPhaseSubmissionModeDestinationFrames creates a new frame rate conversion parameters object.
 func NewFrameRateConversionParametersWithSourceFrameNextFrameOpticalFlowInterpolationPhaseSubmissionModeDestinationFrames(sourceFrame *FrameProcessorFrame, nextFrame *FrameProcessorFrame, opticalFlow *FrameProcessorOpticalFlow, interpolationPhase []obj.Object, submissionMode FrameRateConversionParametersSubmissionMode, destinationFrame []*FrameProcessorFrame) *FrameRateConversionParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VTFrameRateConversionParameters")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:nextFrame:opticalFlow:interpolationPhase:submissionMode:destinationFrames:"), objref.IDOf(sourceFrame), objref.IDOf(nextFrame), objref.IDOf(opticalFlow), purego.SliceToNSArray(interpolationPhase, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), submissionMode, purego.SliceToNSArray(destinationFrame, func(_v *FrameProcessorFrame) objc.ID { return objref.IDOf(_v) }))
 	return frameRateConversionParametersAdopt(_id)
 }
 
-// Current source frame, which must be non `nil`.
+// SourceFrame current source frame, which must be non `nil`.
 func (x *FrameRateConversionParameters) SourceFrame() *FrameProcessorFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// The next source frame in presentation time order, which is `nil` for the last frame.
+// NextFrame the next source frame in presentation time order, which is `nil` for the last frame.
 func (x *FrameRateConversionParameters) NextFrame() *FrameProcessorFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// An optional object that contains forward and backward optical flow with next frame. Only needed if optical flow is pre-computed. For the last frame this is `nil`.
+// OpticalFlow an optional object that contains forward and backward optical flow with next frame. Only needed if optical flow is pre-computed. For the last frame this is `nil`.
 func (x *FrameRateConversionParameters) OpticalFlow() *FrameProcessorOpticalFlow {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("opticalFlow"))
 	return FrameProcessorOpticalFlowFromID(_r)
 }
 
-// Array of float numbers that indicate intervals at which the processor inserts a frame between the current and next frame. Array size indicates how many frames to interpolate and must match `destinationFrames` size, one interval for each destination frame. Use float number values between 0 and 1, for example, to insert one frame in the middle use a value of 0.5.
+// InterpolationPhase array of float numbers that indicate intervals at which the processor inserts a frame between the current and next frame. Array size indicates how many frames to interpolate and must match `destinationFrames` size, one interval for each destination frame. Use float number values between 0 and 1, for example, to insert one frame in the middle use a value of 0.5.
 //
 // InterpolationPhase returns the collection as a Go slice.
 func (x *FrameRateConversionParameters) InterpolationPhase() []obj.Object {
@@ -93,13 +99,13 @@ func (x *FrameRateConversionParameters) InterpolationPhase() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Ordering of the input frames in this submission relative to the previous submission.
+// SubmissionMode ordering of the input frames in this submission relative to the previous submission.
 func (x *FrameRateConversionParameters) SubmissionMode() FrameRateConversionParametersSubmissionMode {
 	_r := objc.Send[FrameRateConversionParametersSubmissionMode](objref.IDOf(x), objc.RegisterName("submissionMode"))
 	return _r
 }
 
-// Caller-allocated array of video frame objects that contain pixel buffers to receive the results. Must contain the same number of elements as `interpolationPhase` NSArray.
+// DestinationFrames caller-allocated array of video frame objects that contain pixel buffers to receive the results. Must contain the same number of elements as `interpolationPhase` NSArray.
 //
 // DestinationFrames returns the collection as a Go slice.
 func (x *FrameRateConversionParameters) DestinationFrames() []*FrameProcessorFrame {

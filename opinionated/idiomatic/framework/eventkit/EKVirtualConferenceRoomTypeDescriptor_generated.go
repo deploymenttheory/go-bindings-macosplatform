@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Details about a room where virtual conferences take place.
-//
 // VirtualConferenceRoomTypeDescriptor is an idiomatic wrapper over the Objective-C class EKVirtualConferenceRoomTypeDescriptor.
+//
+// Details about a room where virtual conferences take place.
 type VirtualConferenceRoomTypeDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VirtualConferenceRoomTypeDescriptorFromID(id objc.ID) *VirtualConferenceRoo
 	if id == 0 {
 		return nil
 	}
-	x := &VirtualConferenceRoomTypeDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VirtualConferenceRoomTypeDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func virtualConferenceRoomTypeDescriptorAdopt(id objc.ID) *VirtualConferenceRoom
 	if id == 0 {
 		return nil
 	}
-	x := &VirtualConferenceRoomTypeDescriptor{Handle: objref.Wrap(id)}
+	x := &VirtualConferenceRoomTypeDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *VirtualConferenceRoomTypeDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an object that describes a location where a virtual conference takes place.
-//
-// NewVirtualConferenceRoomTypeDescriptorWithTitleIdentifier creates a new VirtualConferenceRoomTypeDescriptor.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VirtualConferenceRoomTypeDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVirtualConferenceRoomTypeDescriptorWithTitleIdentifier creates an object that describes a location where a virtual conference takes place.
 func NewVirtualConferenceRoomTypeDescriptorWithTitleIdentifier(title string, identifier obj.Object) *VirtualConferenceRoomTypeDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("EKVirtualConferenceRoomTypeDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:identifier:"), purego.NSString(title), objref.IDOf(identifier))
 	return virtualConferenceRoomTypeDescriptorAdopt(_id)
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *VirtualConferenceRoomTypeDescriptor) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -75,6 +82,7 @@ func (x *VirtualConferenceRoomTypeDescriptor) Title() string {
 	return purego.GoString(_r)
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *VirtualConferenceRoomTypeDescriptor) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)

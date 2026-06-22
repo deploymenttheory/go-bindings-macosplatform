@@ -11,9 +11,11 @@ import (
 // UMPEndpointProvider is accepted wherever a MIDIUMPEndpoint (or one of its subclasses) is expected.
 type UMPEndpointProvider interface {
 	objref.Object
+	isUMPEndpoint()
 }
 
 // UMPFunctionBlockProvider is accepted wherever a MIDIUMPFunctionBlock (or one of its subclasses) is expected.
 type UMPFunctionBlockProvider interface {
 	objref.Object
+	isUMPFunctionBlock()
 }

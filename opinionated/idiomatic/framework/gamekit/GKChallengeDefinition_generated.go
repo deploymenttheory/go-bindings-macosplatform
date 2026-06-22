@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the static metadata you define for the challenge.
-//
 // ChallengeDefinition is an idiomatic wrapper over the Objective-C class GKChallengeDefinition.
+//
+// An object that represents the static metadata you define for the challenge.
 type ChallengeDefinition struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ChallengeDefinitionFromID(id objc.ID) *ChallengeDefinition {
 	if id == 0 {
 		return nil
 	}
-	x := &ChallengeDefinition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ChallengeDefinition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func challengeDefinitionAdopt(id objc.ID) *ChallengeDefinition {
 	if id == 0 {
 		return nil
 	}
-	x := &ChallengeDefinition{Handle: objref.Wrap(id)}
+	x := &ChallengeDefinition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *ChallengeDefinition) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ChallengeDefinition) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewChallengeDefinition creates a new ChallengeDefinition.
 func NewChallengeDefinition() *ChallengeDefinition {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKChallengeDefinition")), objc.RegisterName("new"))
 	return challengeDefinitionAdopt(_id)
 }
 
-// The developer defined identifier for a given challenge definition.
+// Identifier the developer defined identifier for a given challenge definition.
 func (x *ChallengeDefinition) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *ChallengeDefinition) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// The group identifier for the challenge definition, if one exists.
+// GroupIdentifier the group identifier for the challenge definition, if one exists.
 func (x *ChallengeDefinition) GroupIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupIdentifier"))
 	if _r == 0 {
@@ -82,7 +90,7 @@ func (x *ChallengeDefinition) GroupIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// A short title for the challenge definition.
+// Title a short title for the challenge definition.
 func (x *ChallengeDefinition) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -91,7 +99,7 @@ func (x *ChallengeDefinition) Title() string {
 	return purego.GoString(_r)
 }
 
-// A more detailed description of the challenge definition.
+// Details a more detailed description of the challenge definition.
 func (x *ChallengeDefinition) Details() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("details"))
 	if _r == 0 {
@@ -100,7 +108,7 @@ func (x *ChallengeDefinition) Details() string {
 	return purego.GoString(_r)
 }
 
-// The duration options for the challenge, like `1 day` or `1 week`. - Note: If set, the amount of weeks is stored in the `weekOfYear` field. - Important: The actual duration of the challenge may be dynamically adjusted in order to accommodate different factors like players' timezones.
+// DurationOptions the duration options for the challenge, like `1 day` or `1 week`. - Note: If set, the amount of weeks is stored in the `weekOfYear` field. - Important: The actual duration of the challenge may be dynamically adjusted in order to accommodate different factors like players' timezones.
 //
 // DurationOptions returns the collection as a Go slice.
 func (x *ChallengeDefinition) DurationOptions() []obj.Object {
@@ -108,19 +116,19 @@ func (x *ChallengeDefinition) DurationOptions() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Indicates if a challenge can be attempted more than once.
+// IsRepeatable indicates if a challenge can be attempted more than once.
 func (x *ChallengeDefinition) IsRepeatable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRepeatable"))
 	return _r
 }
 
-// Scores submitted to this leaderboard will also be submitted as scores in this challenge.
+// Leaderboard scores submitted to this leaderboard will also be submitted as scores in this challenge.
 func (x *ChallengeDefinition) Leaderboard() *Leaderboard {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leaderboard"))
 	return LeaderboardFromID(_r)
 }
 
-// The release state of the challenge definition in App Store Connect.
+// ReleaseState the release state of the challenge definition in App Store Connect.
 func (x *ChallengeDefinition) ReleaseState() ReleaseState {
 	_r := objc.Send[ReleaseState](objref.IDOf(x), objc.RegisterName("releaseState"))
 	return _r

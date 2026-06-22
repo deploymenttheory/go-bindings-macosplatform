@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes a reservation.
-//
 // Reservation is an idiomatic wrapper over the Objective-C class INReservation.
+//
+// Reservation is an abstract base — you do not construct it directly. Construct one of [BoatReservation], [BusReservation], [FlightReservation], [LodgingReservation], [RentalCarReservation], [RestaurantReservation], [TicketedEventReservation], [TrainReservation] and pass it where a Reservation is accepted.
+//
+// An object that describes a reservation.
 type Reservation struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ReservationFromID(id objc.ID) *Reservation {
 	if id == 0 {
 		return nil
 	}
-	x := &Reservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Reservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func reservationAdopt(id objc.ID) *Reservation {
 	if id == 0 {
 		return nil
 	}
-	x := &Reservation{Handle: objref.Wrap(id)}
+	x := &Reservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +62,19 @@ func (x *Reservation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewReservation creates a new Reservation.
-func NewReservation() *Reservation {
-	_id := objc.Send[objc.ID](objc.ID(_class("INReservation")), objc.RegisterName("new"))
-	return reservationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Reservation) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// ItemReference wraps the corresponding Objective-C method.
 func (x *Reservation) ItemReference() *SpeakableString {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemReference"))
 	return SpeakableStringFromID(_r)
 }
 
+// ReservationNumber wraps the corresponding Objective-C method.
 func (x *Reservation) ReservationNumber() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservationNumber"))
 	if _r == 0 {
@@ -77,16 +83,19 @@ func (x *Reservation) ReservationNumber() string {
 	return purego.GoString(_r)
 }
 
+// BookingTime wraps the corresponding Objective-C method.
 func (x *Reservation) BookingTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bookingTime"))
 	return obj.Wrap(_r)
 }
 
+// ReservationStatus wraps the corresponding Objective-C method.
 func (x *Reservation) ReservationStatus() ReservationStatus {
 	_r := objc.Send[ReservationStatus](objref.IDOf(x), objc.RegisterName("reservationStatus"))
 	return _r
 }
 
+// ReservationHolderName wraps the corresponding Objective-C method.
 func (x *Reservation) ReservationHolderName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservationHolderName"))
 	if _r == 0 {
@@ -95,12 +104,15 @@ func (x *Reservation) ReservationHolderName() string {
 	return purego.GoString(_r)
 }
 
+// Actions wraps the corresponding Objective-C method.
+//
 // Actions returns the collection as a Go slice.
 func (x *Reservation) Actions() []*ReservationAction {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ReservationAction { return ReservationActionFromID(_id) })
 }
 
+// URL wraps the corresponding Objective-C method.
 func (x *Reservation) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
@@ -119,3 +131,10 @@ type Reservationable interface {
 }
 
 var _ Reservationable = (*Reservation)(nil)
+
+// isReservation marks Reservation — and, by embedding promotion, its
+// subclasses — as a member of the Reservation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Reservation) isReservation() {}
+
+var _ ReservationProvider = (*Reservation)(nil)

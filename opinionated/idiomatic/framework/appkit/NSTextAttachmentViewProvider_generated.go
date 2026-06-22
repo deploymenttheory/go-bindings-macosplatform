@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container object that associates a text attachment at a particular document location with a view object.
-//
 // TextAttachmentViewProvider is an idiomatic wrapper over the Objective-C class NSTextAttachmentViewProvider.
+//
+// A container object that associates a text attachment at a particular document location with a view object.
 type TextAttachmentViewProvider struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TextAttachmentViewProviderFromID(id objc.ID) *TextAttachmentViewProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &TextAttachmentViewProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextAttachmentViewProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func textAttachmentViewProviderAdopt(id objc.ID) *TextAttachmentViewProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &TextAttachmentViewProvider{Handle: objref.Wrap(id)}
+	x := &TextAttachmentViewProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,57 +60,65 @@ func (x *TextAttachmentViewProvider) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextAttachmentViewProvider) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTextAttachmentViewProvider creates a new TextAttachmentViewProvider.
 func NewTextAttachmentViewProvider() *TextAttachmentViewProvider {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSTextAttachmentViewProvider")), objc.RegisterName("new"))
 	return textAttachmentViewProviderAdopt(_id)
 }
 
-// The text attachment’s view.
-//
-// WithView sets view and returns the receiver so calls can be chained.
+// WithView the text attachment’s view.
 func (x *TextAttachmentViewProvider) WithView(view ViewProvider) *TextAttachmentViewProvider {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 	return x
 }
 
-// A Boolean value that determines the text attachment’s bounds policy.
-//
-// WithTracksTextAttachmentViewBounds sets tracksTextAttachmentViewBounds and returns the receiver so calls can be chained.
+// WithTracksTextAttachmentViewBounds a Boolean value that determines the text attachment’s bounds policy.
 func (x *TextAttachmentViewProvider) WithTracksTextAttachmentViewBounds(tracksTextAttachmentViewBounds bool) *TextAttachmentViewProvider {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTracksTextAttachmentViewBounds:"), tracksTextAttachmentViewBounds)
 	return x
 }
 
-// Draws the custom view hierarchy that text attachment view subclasses implement.
+// LoadView draws the custom view hierarchy that text attachment view subclasses implement.
 func (x *TextAttachmentViewProvider) LoadView() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadView"))
 }
 
+// TextAttachment wraps the corresponding Objective-C method.
 func (x *TextAttachmentViewProvider) TextAttachment() *TextAttachment {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textAttachment"))
 	return TextAttachmentFromID(_r)
 }
 
+// TextLayoutManager wraps the corresponding Objective-C method.
 func (x *TextAttachmentViewProvider) TextLayoutManager() *TextLayoutManager {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
+// View wraps the corresponding Objective-C method.
 func (x *TextAttachmentViewProvider) View() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }
 
+// SetView wraps the corresponding Objective-C method.
 func (x *TextAttachmentViewProvider) SetView(view *View) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 }
 
+// TracksTextAttachmentViewBounds wraps the corresponding Objective-C method.
 func (x *TextAttachmentViewProvider) TracksTextAttachmentViewBounds() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("tracksTextAttachmentViewBounds"))
 	return _r
 }
 
+// SetTracksTextAttachmentViewBounds wraps the corresponding Objective-C method.
 func (x *TextAttachmentViewProvider) SetTracksTextAttachmentViewBounds(tracksTextAttachmentViewBounds bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTracksTextAttachmentViewBounds:"), tracksTextAttachmentViewBounds)
 }

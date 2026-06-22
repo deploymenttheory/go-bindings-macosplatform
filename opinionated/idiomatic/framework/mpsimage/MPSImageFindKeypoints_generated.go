@@ -23,7 +23,8 @@ func ImageFindKeypointsFromID(id objc.ID) *ImageFindKeypoints {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageFindKeypoints{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageFindKeypoints{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func imageFindKeypointsAdopt(id objc.ID) *ImageFindKeypoints {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageFindKeypoints{Handle: objref.Wrap(id)}
+	x := &ImageFindKeypoints{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *ImageFindKeypoints) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *ImageFindKeypoints) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ImageFindKeypoints) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewImageFindKeypoints creates a new ImageFindKeypoints.

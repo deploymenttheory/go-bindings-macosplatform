@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides the configuration for a download task.
-//
 // AssetDownloadConfiguration is an idiomatic wrapper over the Objective-C class AVAssetDownloadConfiguration.
+//
+// An object that provides the configuration for a download task.
 type AssetDownloadConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetDownloadConfigurationFromID(id objc.ID) *AssetDownloadConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetDownloadConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetDownloadConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetDownloadConfigurationAdopt(id objc.ID) *AssetDownloadConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetDownloadConfiguration{Handle: objref.Wrap(id)}
+	x := &AssetDownloadConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,67 +60,66 @@ func (x *AssetDownloadConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetDownloadConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetDownloadConfiguration creates a new AssetDownloadConfiguration.
 func NewAssetDownloadConfiguration() *AssetDownloadConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetDownloadConfiguration")), objc.RegisterName("new"))
 	return assetDownloadConfigurationAdopt(_id)
 }
 
-// A data value that represents the asset’s artwork.
-//
-// WithArtworkData sets artworkData and returns the receiver so calls can be chained.
+// WithArtworkData a data value that represents the asset’s artwork.
 func (x *AssetDownloadConfiguration) WithArtworkData(artworkData obj.Object) *AssetDownloadConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArtworkData:"), objref.IDOf(artworkData))
 	return x
 }
 
-// The configuration for the auxiliary content that the task downloads.
-//
-// WithAuxiliaryContentConfigurations sets the collection and returns the receiver so calls can be chained.
+// WithAuxiliaryContentConfigurations the configuration for the auxiliary content that the task downloads.
 func (x *AssetDownloadConfiguration) WithAuxiliaryContentConfigurations(items ...*AssetDownloadContentConfiguration) *AssetDownloadConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v *AssetDownloadContentConfiguration) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuxiliaryContentConfigurations:"), _arr)
 	return x
 }
 
-// A Boolean value that indicates whether the task optimizes auxiliary content selection.
-//
-// WithOptimizesAuxiliaryContentConfigurations sets optimizesAuxiliaryContentConfigurations and returns the receiver so calls can be chained.
+// WithOptimizesAuxiliaryContentConfigurations a Boolean value that indicates whether the task optimizes auxiliary content selection.
 func (x *AssetDownloadConfiguration) WithOptimizesAuxiliaryContentConfigurations(optimizesAuxiliaryContentConfigurations bool) *AssetDownloadConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptimizesAuxiliaryContentConfigurations:"), optimizesAuxiliaryContentConfigurations)
 	return x
 }
 
-// Download interstitial assets as listed in the index file. False by default.
-//
-// WithDownloadsInterstitialAssets sets downloadsInterstitialAssets and returns the receiver so calls can be chained.
+// WithDownloadsInterstitialAssets download interstitial assets as listed in the index file. False by default.
 func (x *AssetDownloadConfiguration) WithDownloadsInterstitialAssets(downloadsInterstitialAssets bool) *AssetDownloadConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownloadsInterstitialAssets:"), downloadsInterstitialAssets)
 	return x
 }
 
-// Sets media selection on interstitials for this asset
+// SetInterstitialMediaSelectionCriteriaForMediaCharacteristic sets media selection on interstitials for this asset
 func (x *AssetDownloadConfiguration) SetInterstitialMediaSelectionCriteriaForMediaCharacteristic(criteria []*PlayerMediaSelectionCriteria, mediaCharacteristic obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterstitialMediaSelectionCriteria:forMediaCharacteristic:"), purego.SliceToNSArray(criteria, func(_v *PlayerMediaSelectionCriteria) objc.ID { return objref.IDOf(_v) }), objref.IDOf(mediaCharacteristic))
 }
 
-// NSData representing artwork data for this asset. Optional. May be displayed, for example, by the usage pane of the Settings app. Must work with +[UIImage imageWithData:].
+// ArtworkData NSData representing artwork data for this asset. Optional. May be displayed, for example, by the usage pane of the Settings app. Must work with +[UIImage imageWithData:].
 func (x *AssetDownloadConfiguration) ArtworkData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("artworkData"))
 	return obj.Wrap(_r)
 }
 
+// SetArtworkData wraps the corresponding Objective-C method.
 func (x *AssetDownloadConfiguration) SetArtworkData(artworkData obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArtworkData:"), objref.IDOf(artworkData))
 }
 
-// The primary content for the download.
+// PrimaryContentConfiguration the primary content for the download.
 func (x *AssetDownloadConfiguration) PrimaryContentConfiguration() *AssetDownloadContentConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryContentConfiguration"))
 	return AssetDownloadContentConfigurationFromID(_r)
 }
 
-// The auxiliary content for the download. Optional. By default, auxiliaryContentConfigurations will have one or more default auxiliary content configurations. These content configurations can be augmented with additional content configurations or removed entirely if no auxiliary content is desired.
+// AuxiliaryContentConfigurations the auxiliary content for the download. Optional. By default, auxiliaryContentConfigurations will have one or more default auxiliary content configurations. These content configurations can be augmented with additional content configurations or removed entirely if no auxiliary content is desired.
 //
 // AuxiliaryContentConfigurations returns the collection as a Go slice.
 func (x *AssetDownloadConfiguration) AuxiliaryContentConfigurations() []*AssetDownloadContentConfiguration {
@@ -128,26 +129,29 @@ func (x *AssetDownloadConfiguration) AuxiliaryContentConfigurations() []*AssetDo
 	})
 }
 
+// SetAuxiliaryContentConfigurations wraps the corresponding Objective-C method.
 func (x *AssetDownloadConfiguration) SetAuxiliaryContentConfigurations(auxiliaryContentConfigurations []*AssetDownloadContentConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuxiliaryContentConfigurations:"), purego.SliceToNSArray(auxiliaryContentConfigurations, func(_v *AssetDownloadContentConfiguration) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Optimizes auxiliary content selection depending on the primary to minimize total number of video renditions downloaded. True by default. For example, if the primary content configuration represents stereo renditions and auxiliary content configuration represents multichannel audio renditions, auxiliary multichannel variant will be chosen so as to avoid downloading duplicate video renditions.
+// OptimizesAuxiliaryContentConfigurations optimizes auxiliary content selection depending on the primary to minimize total number of video renditions downloaded. True by default. For example, if the primary content configuration represents stereo renditions and auxiliary content configuration represents multichannel audio renditions, auxiliary multichannel variant will be chosen so as to avoid downloading duplicate video renditions.
 func (x *AssetDownloadConfiguration) OptimizesAuxiliaryContentConfigurations() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("optimizesAuxiliaryContentConfigurations"))
 	return _r
 }
 
+// SetOptimizesAuxiliaryContentConfigurations wraps the corresponding Objective-C method.
 func (x *AssetDownloadConfiguration) SetOptimizesAuxiliaryContentConfigurations(optimizesAuxiliaryContentConfigurations bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptimizesAuxiliaryContentConfigurations:"), optimizesAuxiliaryContentConfigurations)
 }
 
-// Download interstitial assets as listed in the index file. False by default. Ordinarily, interstitial assets are skipped when downloading content for later playback. Setting this property to true will cause interstitial assets to be downloaded as well. Playback of the downloaded content can then match the experience of online streaming playback as closely as possible.
+// DownloadsInterstitialAssets download interstitial assets as listed in the index file. False by default. Ordinarily, interstitial assets are skipped when downloading content for later playback. Setting this property to true will cause interstitial assets to be downloaded as well. Playback of the downloaded content can then match the experience of online streaming playback as closely as possible.
 func (x *AssetDownloadConfiguration) DownloadsInterstitialAssets() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("downloadsInterstitialAssets"))
 	return _r
 }
 
+// SetDownloadsInterstitialAssets wraps the corresponding Objective-C method.
 func (x *AssetDownloadConfiguration) SetDownloadsInterstitialAssets(downloadsInterstitialAssets bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownloadsInterstitialAssets:"), downloadsInterstitialAssets)
 }

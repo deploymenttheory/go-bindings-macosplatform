@@ -389,13 +389,11 @@ func KCVImageBufferSceneIlluminationKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferSceneIlluminationKey")))
 }
 
-// Specifies region of interest that image statistics cover. This value should be a CGRect dictionary created by CGRectCreateDictionaryRepresentation(). The origin in the CGRect represents the x,y coordinate within the CVPixelBuffer where region of interest is located.
 // KCVImageBufferRegionOfInterestKey returns the value of the constant kCVImageBufferRegionOfInterestKey.
 func KCVImageBufferRegionOfInterestKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferRegionOfInterestKey")))
 }
 
-// The value is a CFString holding fully specified reverse DNS identifier. Log is a specific video format usually processed in a camera's ISP. A Log video format usually defines: Scene-referred color primaries designed to preserve the chromaticity range captured by a camera sensor. In cinematography, "scene-referred" color primaries refers to a color space designed to accurately preserve the chromaticity and dynamic range directly captured by a camera sensor. A specific gamma curve (or transfer characteristic) tailored to capturing the full dynamic range from the sensor. This gamma curve is usually shaped like a log curve (hence the name Log). A set of matrix transforms to go from RGB to Y'CbCr (Y'CbCr being the most common format used to store the bits compressed into a file). As described above, a Log video format defines a whole color space (even though the “log” part of the name comes only from the “transfer characteristic” or gamma curve) Content captured in Apple Log will have this key set to kCVImageBufferLogTransferFunction_AppleLog or kCVImageBufferLogTransferFunction_AppleLog2. You can download the Apple Log Profile White Paper from the Apple Developer Downloads website.
 // KCVImageBufferLogTransferFunctionKey returns the value of the constant kCVImageBufferLogTransferFunctionKey.
 func KCVImageBufferLogTransferFunctionKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferLogTransferFunctionKey")))
@@ -411,67 +409,56 @@ func KCVImageBufferLogTransferFunction_AppleLog2() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferLogTransferFunction_AppleLog2")))
 }
 
-// Specifies the rectangular display area within the image. The left, width, top and height are specified relative to a reference raster width and height that should be scaled to the image buffer dimensions. Value is a dictionary containing these keys for the raster rectangle: kCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey kCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey kCVImageBufferDisplayMaskRectangle_RectangleLeftKey kCVImageBufferDisplayMaskRectangle_RectangleWidthKey kCVImageBufferDisplayMaskRectangle_RectangleTopKey kCVImageBufferDisplayMaskRectangle_RectangleHeightKey
 // KCVImageBufferDisplayMaskRectangleKey returns the value of the constant kCVImageBufferDisplayMaskRectangleKey.
 func KCVImageBufferDisplayMaskRectangleKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangleKey")))
 }
 
-// Specifies the width in pixels of the 2D coordinate system to define the rectangle. 0,0 origin is the top-left. The raster width value is a CFNumber of unsigned 16-bit integer. Usually matches the width of the video or the output device.
 // KCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey returns the value of the constant kCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey.
 func KCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey")))
 }
 
-// Specifies the height in pixels of the 2D coordinate system to define the rectangle. 0,0 origin is the top-left. The raster height value is a CFNumber of unsigned 16-bit integer. Usually matches the height of the video or the output device.
 // KCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey returns the value of the constant kCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey.
 func KCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey")))
 }
 
-// Specifies the horizontal pixel offset of the rectangle from the left of the bounding raster. The left offset value is a CFNumber of unsigned 16-bit integer that is less than the reference raster width value.
 // KCVImageBufferDisplayMaskRectangle_RectangleLeftKey returns the value of the constant kCVImageBufferDisplayMaskRectangle_RectangleLeftKey.
 func KCVImageBufferDisplayMaskRectangle_RectangleLeftKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangle_RectangleLeftKey")))
 }
 
-// Specifies the width of the rectangle starting at rectangle's left offset toward the rectangle's right edge. The width value is a CFNumber of unsigned 16-bit integer.
 // KCVImageBufferDisplayMaskRectangle_RectangleWidthKey returns the value of the constant kCVImageBufferDisplayMaskRectangle_RectangleWidthKey.
 func KCVImageBufferDisplayMaskRectangle_RectangleWidthKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangle_RectangleWidthKey")))
 }
 
-// Specifies the vertical pixel offset of the rectangle from the top of the bounding raster. The top offset value is a CFNumber of unsigned 16-bit integer that is less than the reference raster height value.
 // KCVImageBufferDisplayMaskRectangle_RectangleTopKey returns the value of the constant kCVImageBufferDisplayMaskRectangle_RectangleTopKey.
 func KCVImageBufferDisplayMaskRectangle_RectangleTopKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangle_RectangleTopKey")))
 }
 
-// Specifies the height of the rectangle starting at rectangle's top offset toward the rectangle's bottom edge. The height value is a CFNumber of unsigned 16-bit integer.
 // KCVImageBufferDisplayMaskRectangle_RectangleHeightKey returns the value of the constant kCVImageBufferDisplayMaskRectangle_RectangleHeightKey.
 func KCVImageBufferDisplayMaskRectangle_RectangleHeightKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangle_RectangleHeightKey")))
 }
 
-// Specifies the rectangular display area within the left eye view of stereo images, using the same keys as with kCVImageBufferDisplayMaskRectangleKey. To address window violations in stereo video, points insetting the left and right edges of the rectangle are supported through additional keys, allowing the description of the "extended raster rectangle". Value is a dictionary containing these keys for the extended raster rectangle: kCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey kCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey kCVImageBufferDisplayMaskRectangle_RectangleLeftKey kCVImageBufferDisplayMaskRectangle_RectangleWidthKey kCVImageBufferDisplayMaskRectangle_RectangleTopKey kCVImageBufferDisplayMaskRectangle_RectangleHeightKey kCVImageBufferDisplayMaskRectangle_LeftEdgePointsKey kCVImageBufferDisplayMaskRectangle_RightEdgePointsKey
 // KCVImageBufferDisplayMaskRectangleStereoLeftKey returns the value of the constant kCVImageBufferDisplayMaskRectangleStereoLeftKey.
 func KCVImageBufferDisplayMaskRectangleStereoLeftKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangleStereoLeftKey")))
 }
 
-// Specifies the rectangular display area within the right eye view of stereo images, using the same keys as with kCVImageBufferDisplayMaskRectangleKey. To address window violations in stereo video, points insetting the left and right edges of the rectangle are supported through additional keys, allowing the description of the "extended raster rectangle". Value is a dictionary containing these keys for the extended raster rectangle: kCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey kCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey kCVImageBufferDisplayMaskRectangle_RectangleLeftKey kCVImageBufferDisplayMaskRectangle_RectangleWidthKey kCVImageBufferDisplayMaskRectangle_RectangleTopKey kCVImageBufferDisplayMaskRectangle_RectangleHeightKey kCVImageBufferDisplayMaskRectangle_LeftEdgePointsKey kCVImageBufferDisplayMaskRectangle_RightEdgePointsKey
 // KCVImageBufferDisplayMaskRectangleStereoRightKey returns the value of the constant kCVImageBufferDisplayMaskRectangleStereoRightKey.
 func KCVImageBufferDisplayMaskRectangleStereoRightKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangleStereoRightKey")))
 }
 
-// Specifies inset points on the left vertical edge of the rectangle. The points are CFArray of unsigned 16-bit integer CFNumber pairs alternating between inset X and inset Y. Inset X is an unsigned offset from left edge (0) towards the right edge (width). Inset Y is an unsigned offset from top edge (0) towards the bottom edge (height)
 // KCVImageBufferDisplayMaskRectangle_LeftEdgePointsKey returns the value of the constant kCVImageBufferDisplayMaskRectangle_LeftEdgePointsKey.
 func KCVImageBufferDisplayMaskRectangle_LeftEdgePointsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangle_LeftEdgePointsKey")))
 }
 
-// Specifies inset points on the right vertical edge of the rectangle. The points are CFArray of unsigned 16-bit integer CFNumber pairs alternating between inset X and inset Y. Inset X is an unsigned offset from right edge (0) towards the left edge (width). Inset Y is an unsigned offset from top edge (0) towards the bottom edge (height)
 // KCVImageBufferDisplayMaskRectangle_RightEdgePointsKey returns the value of the constant kCVImageBufferDisplayMaskRectangle_RightEdgePointsKey.
 func KCVImageBufferDisplayMaskRectangle_RightEdgePointsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangle_RightEdgePointsKey")))
@@ -557,73 +544,61 @@ func KCVPixelBufferOpenGLTextureCacheCompatibilityKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferOpenGLTextureCacheCompatibilityKey")))
 }
 
-// Buffer attachment key for code indicating Bayer pattern (sensel arrangement). Associated attachment is a CFNumber of type kCFNumberSInt32Type.  The value follows the semantics of the ProRes RAW bayer_pattern bitstream syntax element, namely 0, 1, 2, or 3, where 0 means the top-left sensel of the frame is red-filtered ("RGGB"); 1 means the top-left sensel of the frame is green-filtered, with the top row alternating between green- and red-filtered sensels ("GRBG"); 2 means the top-left sensel of the frame is green- filtered, with the top row alternating between green- and blue-filtered sensels ("GBRG"); and 3 means the top-left sensel of the frame is blue-filtered ("BGGR").  This attachment applies only to buffers with VersatileBayer formats.
 // KCVPixelBufferVersatileBayerKey_BayerPattern returns the value of the constant kCVPixelBufferVersatileBayerKey_BayerPattern.
 func KCVPixelBufferVersatileBayerKey_BayerPattern() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferVersatileBayerKey_BayerPattern")))
 }
 
-// Buffer attachment key for siting offsets, relative to pixel center, of individual sensels/components constituting each pixel. Associated attachment is CFData containing an array of 8 32-bit floats.  The eight CFData array elements specify, in order, the following sensel/component offsets from pixel center: red horizontal offset, red vertical offset, green horizontal offset, green vertical offset, blue horizontal offset, blue vertical offset, alpha horizontal offset, and alpha vertical offset.  A positive offset value indicates that the sensel/component lies to the right of or below the center of its pixel, while a negative value indicates that the sensel/component lies to the left of or above the center of its pixel.  Horizontal and vertical offset magnitudes are respectively in terms of the spacing between horizontally- and vertically-adjacent pixel centers.  This attachment applies only to buffers with the bp64 format, and is optional for those buffers; if not present, all offsets are considered to be 0.
 // KCVPixelBufferProResRAWKey_SenselSitingOffsets returns the value of the constant kCVPixelBufferProResRAWKey_SenselSitingOffsets.
 func KCVPixelBufferProResRAWKey_SenselSitingOffsets() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferProResRAWKey_SenselSitingOffsets")))
 }
 
-// Buffer attachment key for sensel black level. Associated attachment is a CFNumber of type kCFNumberSInt32Type.  The value is the sensel level corresponding to no light exposure.  This attachment is required for buffers with either the bp16 or bp64 format.
 // KCVPixelBufferProResRAWKey_BlackLevel returns the value of the constant kCVPixelBufferProResRAWKey_BlackLevel.
 func KCVPixelBufferProResRAWKey_BlackLevel() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferProResRAWKey_BlackLevel")))
 }
 
-// Buffer attachment key for sensel white level. Associated attachment is a CFNumber of type kCFNumberSInt32Type.  The value is the sensel level corresponding to sensor (or camera A-to-D converter) saturation.  This attachment is required for buffers with either the bp16 or bp64 format.
 // KCVPixelBufferProResRAWKey_WhiteLevel returns the value of the constant kCVPixelBufferProResRAWKey_WhiteLevel.
 func KCVPixelBufferProResRAWKey_WhiteLevel() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferProResRAWKey_WhiteLevel")))
 }
 
-// Buffer attachment key for illuminant correlated color temperature. Associated attachment is a CFNumber of type kCFNumberSInt32Type.  The value is the illuminant correlated color temperature (CCT), in kelvins, selected at the time of capture.  May be 0, indicating that the CCT is unknown or unspecified.  This attachment is optional for buffers with either the bp16 or bp64 format; if not present, the CCT is considered unknown or unspecified.
 // KCVPixelBufferProResRAWKey_WhiteBalanceCCT returns the value of the constant kCVPixelBufferProResRAWKey_WhiteBalanceCCT.
 func KCVPixelBufferProResRAWKey_WhiteBalanceCCT() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferProResRAWKey_WhiteBalanceCCT")))
 }
 
-// Buffer attachment key for white balance red factor. Associated attachment is a CFNumber of type kCFNumberFloat32Type.  The value is the white balance multiplication factor for red-filtered sensels.  This attachment is required for buffers with either the bp16 or bp64 format.
 // KCVPixelBufferProResRAWKey_WhiteBalanceRedFactor returns the value of the constant kCVPixelBufferProResRAWKey_WhiteBalanceRedFactor.
 func KCVPixelBufferProResRAWKey_WhiteBalanceRedFactor() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferProResRAWKey_WhiteBalanceRedFactor")))
 }
 
-// Buffer attachment key for white balance blue factor. Associated attachment is a CFNumber of type kCFNumberFloat32Type.  The value is the white balance multiplication factor for blue-filtered sensels.  This attachment is required for buffers with either the bp16 or bp64 format.
 // KCVPixelBufferProResRAWKey_WhiteBalanceBlueFactor returns the value of the constant kCVPixelBufferProResRAWKey_WhiteBalanceBlueFactor.
 func KCVPixelBufferProResRAWKey_WhiteBalanceBlueFactor() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferProResRAWKey_WhiteBalanceBlueFactor")))
 }
 
-// Buffer attachment key for color translation matrix. Associated attachment is CFData containing an array of 9 32-bit floats.  The value is a 3x3 matrix which transforms linear RGB pixel values in the camera native color space to CIE 1931 XYZ values relative to the D65 illuminant, where the matrix entries are stored in the CFData in row-major order.  This attachment is required for buffers with either the bp16 or bp64 format.
 // KCVPixelBufferProResRAWKey_ColorMatrix returns the value of the constant kCVPixelBufferProResRAWKey_ColorMatrix.
 func KCVPixelBufferProResRAWKey_ColorMatrix() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferProResRAWKey_ColorMatrix")))
 }
 
-// Buffer attachment key for gain factor. Associated attachment is a CFNumber of type kCFNumberFloat32Type.  The value is the overall gain factor for raw conversion.  This attachment is required for buffers with either the bp16 or bp64 format.
 // KCVPixelBufferProResRAWKey_GainFactor returns the value of the constant kCVPixelBufferProResRAWKey_GainFactor.
 func KCVPixelBufferProResRAWKey_GainFactor() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferProResRAWKey_GainFactor")))
 }
 
-// Buffer attachment key for recommended number of pixels/rows to discard from the sides of the image after raw conversion. Associated attachment is CFData containing an array of 4 32-bit floats.  The four CFData array elements specify, in order, the recommended number of: pixels to discard from the start (left) of each row of the image; pixels to discard from the end (right) of each row of the image; rows of pixels to discard from the top of the image; and rows of pixels to discard from the bottom of the image.  (Pixels/rows are discarded after raw conversion.)  This attachment is optional for buffers with either the bp16 or bp64 format; if not present, the recommended crop values are considered to be 0.  For buffers with the bp64 format, the values may be nonintegral due to downscaling, in which case the handling of fractional parts is implementation-dependent.
 // KCVPixelBufferProResRAWKey_RecommendedCrop returns the value of the constant kCVPixelBufferProResRAWKey_RecommendedCrop.
 func KCVPixelBufferProResRAWKey_RecommendedCrop() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferProResRAWKey_RecommendedCrop")))
 }
 
-// Buffer attachment key for metadata extension. Associated attachment is CFData containing ProRes RAW metadata extension. This attachment is optional for buffers with either bp16 or bp64.  The CFData contains a big-endian uint32 representing the size of the item in bytes followed by a 4-character code ('psim') followed by a variable-length pascal string identifying the metadata (like a key string) followed by the metadata payload.
 // KCVPixelBufferProResRAWKey_MetadataExtension returns the value of the constant kCVPixelBufferProResRAWKey_MetadataExtension.
 func KCVPixelBufferProResRAWKey_MetadataExtension() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferProResRAWKey_MetadataExtension")))
 }
 
-// Key sets the IOSurface backed memory allocation for CVPixelBuffer as purgable and volatile. A purgeable IOSurface is capable of being switched between non-volatile, volatile and empty states using IOSurfaceSetPurgeable.  When in the volatile state, the OS is permitted to instantly change its state to empty and remove all its memory pages.  Clients should set the IOSurfaces to the non-volatile state while they are in use and the volatile state when their need and contents is optional/speculative and OK to discard in response to system memory demand.  See IOSurfaceSetPurgeable for more details.  This key is only effective for CVPixelBuffers that are backed by IOSurface.
 // KCVPixelBufferIOSurfacePurgeableKey returns the value of the constant kCVPixelBufferIOSurfacePurgeableKey.
 func KCVPixelBufferIOSurfacePurgeableKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferIOSurfacePurgeableKey")))
@@ -719,13 +694,11 @@ func KCVOpenGLTextureCacheChromaSamplingModeBestPerformance() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVOpenGLTextureCacheChromaSamplingModeBestPerformance")))
 }
 
-// kCVMetalTextureUsage is a property that can be placed on a CVMetalTextureCache to instruct the MTLTextureUsage of the created MTLTexture. Values for this can can be read from MTLTexture.h
 // KCVMetalTextureUsage returns the value of the constant kCVMetalTextureUsage.
 func KCVMetalTextureUsage() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVMetalTextureUsage")))
 }
 
-// kCVMetalTextureStorageMode is a property that can be placed on a CVMetalTextureCache to instruct the MTLTextureStorageMode of the created MTLTexture. Values for this can can be read from MTLTexture.h
 // KCVMetalTextureStorageMode returns the value of the constant kCVMetalTextureStorageMode.
 func KCVMetalTextureStorageMode() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVMetalTextureStorageMode")))

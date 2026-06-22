@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view controller that you present from your share app extension, allowing the user to compose social media posts.
-//
 // ComposeServiceViewController is an idiomatic wrapper over the Objective-C class SLComposeServiceViewController.
+//
+// A view controller that you present from your share app extension, allowing the user to compose social media posts.
 type ComposeServiceViewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ComposeServiceViewControllerFromID(id objc.ID) *ComposeServiceViewControlle
 	if id == 0 {
 		return nil
 	}
-	x := &ComposeServiceViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ComposeServiceViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func composeServiceViewControllerAdopt(id objc.ID) *ComposeServiceViewController
 	if id == 0 {
 		return nil
 	}
-	x := &ComposeServiceViewController{Handle: objref.Wrap(id)}
+	x := &ComposeServiceViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,64 +60,68 @@ func (x *ComposeServiceViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ComposeServiceViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewComposeServiceViewController creates a new ComposeServiceViewController.
 func NewComposeServiceViewController() *ComposeServiceViewController {
 	_id := objc.Send[objc.ID](objc.ID(_class("SLComposeServiceViewController")), objc.RegisterName("new"))
 	return composeServiceViewControllerAdopt(_id)
 }
 
-// A string that’s displayed in the compose view’s text view when the text view is empty.
-//
-// WithPlaceholder sets placeholder and returns the receiver so calls can be chained.
+// WithPlaceholder a string that’s displayed in the compose view’s text view when the text view is empty.
 func (x *ComposeServiceViewController) WithPlaceholder(placeholder string) *ComposeServiceViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholder:"), purego.NSString(placeholder))
 	return x
 }
 
-// The number of characters remaining in a custom character limit.
-//
-// WithCharactersRemaining sets charactersRemaining and returns the receiver so calls can be chained.
+// WithCharactersRemaining the number of characters remaining in a custom character limit.
 func (x *ComposeServiceViewController) WithCharactersRemaining(charactersRemaining obj.Object) *ComposeServiceViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharactersRemaining:"), objref.IDOf(charactersRemaining))
 	return x
 }
 
-// Tells the compose view controller that the presentation animation is finished.
+// PresentationAnimationDidFinish tells the compose view controller that the presentation animation is finished.
 func (x *ComposeServiceViewController) PresentationAnimationDidFinish() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentationAnimationDidFinish"))
 }
 
-// Sent to the compose view after the post animation finishes.
+// DidSelectPost sent to the compose view after the post animation finishes.
 func (x *ComposeServiceViewController) DidSelectPost() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didSelectPost"))
 }
 
-// Sent to the compose view after the cancel animation finishes.
+// DidSelectCancel sent to the compose view after the cancel animation finishes.
 func (x *ComposeServiceViewController) DidSelectCancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didSelectCancel"))
 }
 
-// Starts the animated dismissal of the compose view.
+// Cancel starts the animated dismissal of the compose view.
 func (x *ComposeServiceViewController) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// A Boolean value that indicates whether the current content and attachments are valid.
+// IsContentValid a Boolean value that indicates whether the current content and attachments are valid.
 func (x *ComposeServiceViewController) IsContentValid() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isContentValid"))
 	return _r
 }
 
-// Performs validation of the current content and updates the state of the Post button, if appropriate.
+// ValidateContent performs validation of the current content and updates the state of the Post button, if appropriate.
 func (x *ComposeServiceViewController) ValidateContent() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validateContent"))
 }
 
+// TextView wraps the corresponding Objective-C method.
 func (x *ComposeServiceViewController) TextView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textView"))
 	return obj.Wrap(_r)
 }
 
+// ContentText wraps the corresponding Objective-C method.
 func (x *ComposeServiceViewController) ContentText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentText"))
 	if _r == 0 {
@@ -124,6 +130,7 @@ func (x *ComposeServiceViewController) ContentText() string {
 	return purego.GoString(_r)
 }
 
+// Placeholder wraps the corresponding Objective-C method.
 func (x *ComposeServiceViewController) Placeholder() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholder"))
 	if _r == 0 {
@@ -132,15 +139,18 @@ func (x *ComposeServiceViewController) Placeholder() string {
 	return purego.GoString(_r)
 }
 
+// SetPlaceholder wraps the corresponding Objective-C method.
 func (x *ComposeServiceViewController) SetPlaceholder(placeholder string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholder:"), purego.NSString(placeholder))
 }
 
+// CharactersRemaining wraps the corresponding Objective-C method.
 func (x *ComposeServiceViewController) CharactersRemaining() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("charactersRemaining"))
 	return obj.Wrap(_r)
 }
 
+// SetCharactersRemaining wraps the corresponding Objective-C method.
 func (x *ComposeServiceViewController) SetCharactersRemaining(charactersRemaining obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharactersRemaining:"), objref.IDOf(charactersRemaining))
 }

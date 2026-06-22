@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A participant in a turn-based match.
-//
 // TurnBasedParticipant is an idiomatic wrapper over the Objective-C class GKTurnBasedParticipant.
+//
+// A participant in a turn-based match.
 type TurnBasedParticipant struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TurnBasedParticipantFromID(id objc.ID) *TurnBasedParticipant {
 	if id == 0 {
 		return nil
 	}
-	x := &TurnBasedParticipant{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TurnBasedParticipant{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func turnBasedParticipantAdopt(id objc.ID) *TurnBasedParticipant {
 	if id == 0 {
 		return nil
 	}
-	x := &TurnBasedParticipant{Handle: objref.Wrap(id)}
+	x := &TurnBasedParticipant{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,49 +60,60 @@ func (x *TurnBasedParticipant) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TurnBasedParticipant) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTurnBasedParticipant creates a new TurnBasedParticipant.
 func NewTurnBasedParticipant() *TurnBasedParticipant {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKTurnBasedParticipant")), objc.RegisterName("new"))
 	return turnBasedParticipantAdopt(_id)
 }
 
-// The conclusion or results of a participant in a match.
-//
-// WithMatchOutcome sets matchOutcome and returns the receiver so calls can be chained.
+// WithMatchOutcome the conclusion or results of a participant in a match.
 func (x *TurnBasedParticipant) WithMatchOutcome(matchOutcome TurnBasedMatchOutcome) *TurnBasedParticipant {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchOutcome:"), matchOutcome)
 	return x
 }
 
+// Player wraps the corresponding Objective-C method.
 func (x *TurnBasedParticipant) Player() *Player {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("player"))
 	return PlayerFromID(_r)
 }
 
+// LastTurnDate wraps the corresponding Objective-C method.
 func (x *TurnBasedParticipant) LastTurnDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastTurnDate"))
 	return obj.Wrap(_r)
 }
 
+// Status wraps the corresponding Objective-C method.
 func (x *TurnBasedParticipant) Status() TurnBasedParticipantStatus {
 	_r := objc.Send[TurnBasedParticipantStatus](objref.IDOf(x), objc.RegisterName("status"))
 	return _r
 }
 
+// MatchOutcome wraps the corresponding Objective-C method.
 func (x *TurnBasedParticipant) MatchOutcome() TurnBasedMatchOutcome {
 	_r := objc.Send[TurnBasedMatchOutcome](objref.IDOf(x), objc.RegisterName("matchOutcome"))
 	return _r
 }
 
+// SetMatchOutcome wraps the corresponding Objective-C method.
 func (x *TurnBasedParticipant) SetMatchOutcome(matchOutcome TurnBasedMatchOutcome) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchOutcome:"), matchOutcome)
 }
 
+// TimeoutDate wraps the corresponding Objective-C method.
 func (x *TurnBasedParticipant) TimeoutDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeoutDate"))
 	return obj.Wrap(_r)
 }
 
+// PlayerID wraps the corresponding Objective-C method.
 func (x *TurnBasedParticipant) PlayerID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerID"))
 	if _r == 0 {

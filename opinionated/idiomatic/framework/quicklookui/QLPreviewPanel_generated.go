@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that implements the Quick Look preview panel to display a preview of a list of items.
-//
 // PreviewPanel is an idiomatic wrapper over the Objective-C class QLPreviewPanel.
+//
+// A class that implements the Quick Look preview panel to display a preview of a list of items.
 type PreviewPanel struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PreviewPanelFromID(id objc.ID) *PreviewPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &PreviewPanel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PreviewPanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func previewPanelAdopt(id objc.ID) *PreviewPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &PreviewPanel{Handle: objref.Wrap(id)}
+	x := &PreviewPanel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,81 +60,85 @@ func (x *PreviewPanel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PreviewPanel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPreviewPanel creates a new PreviewPanel.
 func NewPreviewPanel() *PreviewPanel {
 	_id := objc.Send[objc.ID](objc.ID(_class("QLPreviewPanel")), objc.RegisterName("new"))
 	return previewPanelAdopt(_id)
 }
 
-// The index of the current preview item.
-//
-// WithCurrentPreviewItemIndex sets currentPreviewItemIndex and returns the receiver so calls can be chained.
+// WithCurrentPreviewItemIndex the index of the current preview item.
 func (x *PreviewPanel) WithCurrentPreviewItemIndex(currentPreviewItemIndex int) *PreviewPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentPreviewItemIndex:"), currentPreviewItemIndex)
 	return x
 }
 
-// The preview panel’s display state.
-//
-// WithDisplayState sets displayState and returns the receiver so calls can be chained.
+// WithDisplayState the preview panel’s display state.
 func (x *PreviewPanel) WithDisplayState(displayState obj.Object) *PreviewPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayState:"), objref.IDOf(displayState))
 	return x
 }
 
-// Asks the preview panel to update its current controller.
+// UpdateController asks the preview panel to update its current controller.
 func (x *PreviewPanel) UpdateController() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateController"))
 }
 
-// Asks the preview panel to reload its data from its data source.
+// ReloadData asks the preview panel to reload its data from its data source.
 func (x *PreviewPanel) ReloadData() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadData"))
 }
 
-// Asks the preview panel to recompute the preview of the current preview item.
+// RefreshCurrentPreviewItem asks the preview panel to recompute the preview of the current preview item.
 func (x *PreviewPanel) RefreshCurrentPreviewItem() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("refreshCurrentPreviewItem"))
 }
 
-// Instructs the panel to enter full screen mode.
+// EnterFullScreenModeWithOptions instructs the panel to enter full screen mode.
 func (x *PreviewPanel) EnterFullScreenModeWithOptions(screen obj.Object, options obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enterFullScreenMode:withOptions:"), objref.IDOf(screen), objref.IDOf(options))
 	return _r
 }
 
-// Instructs the panel to exit full screen mode.
+// ExitFullScreenModeWithOptions instructs the panel to exit full screen mode.
 func (x *PreviewPanel) ExitFullScreenModeWithOptions(options obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exitFullScreenModeWithOptions:"), objref.IDOf(options))
 }
 
-// The current first responder accepting to control the preview panel. You should never change the preview panel’s state (for example, its delegate, datasource, and so on) if you aren’t controlling it.
+// CurrentController the current first responder accepting to control the preview panel. You should never change the preview panel’s state (for example, its delegate, datasource, and so on) if you aren’t controlling it.
 func (x *PreviewPanel) CurrentController() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentController"))
 	return obj.Wrap(_r)
 }
 
-// The index of the current preview item. The value is `NSNotFound` if there’s no current preview item.
+// CurrentPreviewItemIndex the index of the current preview item. The value is `NSNotFound` if there’s no current preview item.
 func (x *PreviewPanel) CurrentPreviewItemIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("currentPreviewItemIndex"))
 	return _r
 }
 
+// SetCurrentPreviewItemIndex wraps the corresponding Objective-C method.
 func (x *PreviewPanel) SetCurrentPreviewItemIndex(currentPreviewItemIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentPreviewItemIndex:"), currentPreviewItemIndex)
 }
 
-// The preview panel’s display state. This property is an opaque object that Quick Look uses to get and set the current display state of the preview. The display state could be, for example, the currently displayed page, the zoom factor on an image, or the position in a movie. You can use this property to get and save the current display state of the preview before switching to another. This saving allows you to restore a preview later on when the user switches back to it.
+// DisplayState the preview panel’s display state. This property is an opaque object that Quick Look uses to get and set the current display state of the preview. The display state could be, for example, the currently displayed page, the zoom factor on an image, or the position in a movie. You can use this property to get and save the current display state of the preview before switching to another. This saving allows you to restore a preview later on when the user switches back to it.
 func (x *PreviewPanel) DisplayState() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayState"))
 	return obj.Wrap(_r)
 }
 
+// SetDisplayState wraps the corresponding Objective-C method.
 func (x *PreviewPanel) SetDisplayState(displayState obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayState:"), objref.IDOf(displayState))
 }
 
-// The property that indicates whether the panel is in full screen mode. The value is <doc://com.apple.documentation/documentation/objectivec/yes> if the panel is currently open and in full screen mode; otherwise it’s <doc://com.apple.documentation/documentation/objectivec/no>.
+// IsInFullScreenMode the property that indicates whether the panel is in full screen mode. The value is <doc://com.apple.documentation/documentation/objectivec/yes> if the panel is currently open and in full screen mode; otherwise it’s <doc://com.apple.documentation/documentation/objectivec/no>.
 func (x *PreviewPanel) IsInFullScreenMode() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInFullScreenMode"))
 	return _r

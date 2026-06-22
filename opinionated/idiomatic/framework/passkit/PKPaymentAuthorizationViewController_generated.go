@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that presents a sheet that prompts the user to authorize a payment request.
-//
 // PaymentAuthorizationViewController is an idiomatic wrapper over the Objective-C class PKPaymentAuthorizationViewController.
+//
+// An object that presents a sheet that prompts the user to authorize a payment request.
 type PaymentAuthorizationViewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PaymentAuthorizationViewControllerFromID(id objc.ID) *PaymentAuthorizationV
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentAuthorizationViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PaymentAuthorizationViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func paymentAuthorizationViewControllerAdopt(id objc.ID) *PaymentAuthorizationVi
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentAuthorizationViewController{Handle: objref.Wrap(id)}
+	x := &PaymentAuthorizationViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +60,20 @@ func (x *PaymentAuthorizationViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes and returns a payment authorization view controller.
-//
-// NewPaymentAuthorizationViewControllerWithPaymentRequest creates a new PaymentAuthorizationViewController.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PaymentAuthorizationViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPaymentAuthorizationViewControllerWithPaymentRequest initializes and returns a payment authorization view controller.
 func NewPaymentAuthorizationViewControllerWithPaymentRequest(request *PaymentRequest) *PaymentAuthorizationViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentAuthorizationViewController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentRequest:"), objref.IDOf(request))
 	return paymentAuthorizationViewControllerAdopt(_id)
 }
 
-// Initializes and returns a new payment authorization view controller with the provided disbursement request.
-//
-// NewPaymentAuthorizationViewControllerWithDisbursementRequest creates a new PaymentAuthorizationViewController.
+// NewPaymentAuthorizationViewControllerWithDisbursementRequest initializes and returns a new payment authorization view controller with the provided disbursement request.
 func NewPaymentAuthorizationViewControllerWithDisbursementRequest(request *DisbursementRequest) *PaymentAuthorizationViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentAuthorizationViewController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisbursementRequest:"), objref.IDOf(request))

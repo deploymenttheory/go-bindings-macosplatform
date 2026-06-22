@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A group of inputs with tracks that are mutually exclusive to each other for playback or processing.
-//
 // AssetWriterInputGroup is an idiomatic wrapper over the Objective-C class AVAssetWriterInputGroup.
+//
+// It embeds [MediaSelectionGroup], promoting that type's methods.
+//
+// A group of inputs with tracks that are mutually exclusive to each other for playback or processing.
 type AssetWriterInputGroup struct {
-	objref.Handle
+	MediaSelectionGroup
 }
 
 // AssetWriterInputGroupFromID adopts an existing Objective-C object as a AssetWriterInputGroup
@@ -25,7 +26,8 @@ func AssetWriterInputGroupFromID(id objc.ID) *AssetWriterInputGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetWriterInputGroup{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetWriterInputGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,36 +40,20 @@ func assetWriterInputGroupAdopt(id objc.ID) *AssetWriterInputGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetWriterInputGroup{Handle: objref.Wrap(id)}
+	x := &AssetWriterInputGroup{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *AssetWriterInputGroup) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetWriterInputGroup) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetWriterInputGroup) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a group for the asset writer inputs.
-//
-// NewAssetWriterInputGroupWithInputsDefaultInput creates a new AssetWriterInputGroup.
+// NewAssetWriterInputGroupWithInputsDefaultInput creates a group for the asset writer inputs.
 func NewAssetWriterInputGroupWithInputsDefaultInput(inputs []*AssetWriterInput, defaultInput *AssetWriterInput) *AssetWriterInputGroup {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInputGroup")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputs:defaultInput:"), purego.SliceToNSArray(inputs, func(_v *AssetWriterInput) objc.ID { return objref.IDOf(_v) }), objref.IDOf(defaultInput))
 	return assetWriterInputGroupAdopt(_id)
 }
 
-// The inputs grouped together by the receiver. The value of this property is an NSArray containing concrete instances of AVAssetWriterInput.
+// Inputs the inputs grouped together by the receiver. The value of this property is an NSArray containing concrete instances of AVAssetWriterInput.
 //
 // Inputs returns the collection as a Go slice.
 func (x *AssetWriterInputGroup) Inputs() []*AssetWriterInput {
@@ -75,7 +61,7 @@ func (x *AssetWriterInputGroup) Inputs() []*AssetWriterInput {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetWriterInput { return AssetWriterInputFromID(_id) })
 }
 
-// The input designated at the defaultInput of the receiver. The value of this property is a concrete instance of AVAssetWriterInput.
+// DefaultInput the input designated at the defaultInput of the receiver. The value of this property is a concrete instance of AVAssetWriterInput.
 func (x *AssetWriterInputGroup) DefaultInput() *AssetWriterInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultInput"))
 	return AssetWriterInputFromID(_r)
@@ -89,3 +75,5 @@ type AssetWriterInputGroupable interface {
 }
 
 var _ AssetWriterInputGroupable = (*AssetWriterInputGroup)(nil)
+
+var _ MediaSelectionGroupProvider = (*AssetWriterInputGroup)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event that represents when playback stalls.
-//
 // MetricPlayerItemStallEvent is an idiomatic wrapper over the Objective-C class AVMetricPlayerItemStallEvent.
+//
+// It embeds [MetricPlayerItemRateChangeEvent], promoting that type's methods.
+//
+// An event that represents when playback stalls.
 type MetricPlayerItemStallEvent struct {
-	objref.Handle
+	MetricPlayerItemRateChangeEvent
 }
 
 // MetricPlayerItemStallEventFromID adopts an existing Objective-C object as a MetricPlayerItemStallEvent
@@ -25,7 +26,8 @@ func MetricPlayerItemStallEventFromID(id objc.ID) *MetricPlayerItemStallEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MetricPlayerItemStallEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetricPlayerItemStallEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func metricPlayerItemStallEventAdopt(id objc.ID) *MetricPlayerItemStallEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MetricPlayerItemStallEvent{Handle: objref.Wrap(id)}
+	x := &MetricPlayerItemStallEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MetricPlayerItemStallEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetricPlayerItemStallEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetricPlayerItemStallEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMetricPlayerItemStallEvent creates a new MetricPlayerItemStallEvent.
@@ -70,3 +58,7 @@ type MetricPlayerItemStallEventable interface {
 }
 
 var _ MetricPlayerItemStallEventable = (*MetricPlayerItemStallEvent)(nil)
+
+var _ MetricPlayerItemRateChangeEventProvider = (*MetricPlayerItemStallEvent)(nil)
+
+var _ MetricEventProvider = (*MetricPlayerItemStallEvent)(nil)

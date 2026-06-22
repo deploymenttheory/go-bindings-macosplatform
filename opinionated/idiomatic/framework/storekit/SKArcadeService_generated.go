@@ -23,7 +23,8 @@ func ArcadeServiceFromID(id objc.ID) *ArcadeService {
 	if id == 0 {
 		return nil
 	}
-	x := &ArcadeService{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ArcadeService{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func arcadeServiceAdopt(id objc.ID) *ArcadeService {
 	if id == 0 {
 		return nil
 	}
-	x := &ArcadeService{Handle: objref.Wrap(id)}
+	x := &ArcadeService{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *ArcadeService) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *ArcadeService) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ArcadeService) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewArcadeService creates a new ArcadeService.

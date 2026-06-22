@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMUIEvent is an idiomatic wrapper over the Objective-C class DOMUIEvent.
+//
+// DOMUIEvent is an abstract base — you do not construct it directly. Construct one of [DOMKeyboardEvent], [DOMMouseEvent] and pass it where a DOMUIEvent is accepted.
 type DOMUIEvent struct {
-	objref.Handle
+	DOMEvent
 }
 
 // DOMUIEventFromID adopts an existing Objective-C object as a DOMUIEvent
@@ -23,7 +24,8 @@ func DOMUIEventFromID(id objc.ID) *DOMUIEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMUIEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMUIEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMUIEventAdopt(id objc.ID) *DOMUIEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMUIEvent{Handle: objref.Wrap(id)}
+	x := &DOMUIEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMUIEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMUIEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMUIEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMUIEventUIEventCanBubbleCancelableViewDetail creates a new DOMUIEvent.
@@ -70,58 +58,67 @@ func NewDOMUIEventUIEvent(type_ string, canBubble bool, cancelable bool, view *D
 	return dOMUIEventAdopt(_id)
 }
 
-// WithReturnValue sets returnValue and returns the receiver so calls can be chained.
+// WithReturnValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMUIEvent) WithReturnValue(returnValue bool) *DOMUIEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnValue:"), returnValue)
 	return x
 }
 
-// WithCancelBubble sets cancelBubble and returns the receiver so calls can be chained.
+// WithCancelBubble sets the property and returns the receiver so calls can be chained.
 func (x *DOMUIEvent) WithCancelBubble(cancelBubble bool) *DOMUIEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelBubble:"), cancelBubble)
 	return x
 }
 
+// View wraps the corresponding Objective-C method.
 func (x *DOMUIEvent) View() *DOMAbstractView {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
 	return DOMAbstractViewFromID(_r)
 }
 
+// Detail wraps the corresponding Objective-C method.
 func (x *DOMUIEvent) Detail() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("detail"))
 	return _r
 }
 
+// KeyCode wraps the corresponding Objective-C method.
 func (x *DOMUIEvent) KeyCode() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("keyCode"))
 	return _r
 }
 
+// CharCode wraps the corresponding Objective-C method.
 func (x *DOMUIEvent) CharCode() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("charCode"))
 	return _r
 }
 
+// LayerX wraps the corresponding Objective-C method.
 func (x *DOMUIEvent) LayerX() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("layerX"))
 	return _r
 }
 
+// LayerY wraps the corresponding Objective-C method.
 func (x *DOMUIEvent) LayerY() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("layerY"))
 	return _r
 }
 
+// PageX wraps the corresponding Objective-C method.
 func (x *DOMUIEvent) PageX() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pageX"))
 	return _r
 }
 
+// PageY wraps the corresponding Objective-C method.
 func (x *DOMUIEvent) PageY() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pageY"))
 	return _r
 }
 
+// Which wraps the corresponding Objective-C method.
 func (x *DOMUIEvent) Which() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("which"))
 	return _r
@@ -144,3 +141,16 @@ type DOMUIEventable interface {
 }
 
 var _ DOMUIEventable = (*DOMUIEvent)(nil)
+
+// isDOMUIEvent marks DOMUIEvent — and, by embedding promotion, its
+// subclasses — as a member of the DOMUIEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DOMUIEvent) isDOMUIEvent() {}
+
+var _ DOMUIEventProvider = (*DOMUIEvent)(nil)
+
+var _ DOMEventProvider = (*DOMUIEvent)(nil)
+
+var _ DOMObjectProvider = (*DOMUIEvent)(nil)
+
+var _ WebScriptObjectProvider = (*DOMUIEvent)(nil)

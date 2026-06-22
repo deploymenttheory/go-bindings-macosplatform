@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBaseClusterPressureMeasurement is an idiomatic wrapper over the Objective-C class MTRBaseClusterPressureMeasurement.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
 type MTRBaseClusterPressureMeasurement struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterPressureMeasurementFromID adopts an existing Objective-C object as a MTRBaseClusterPressureMeasurement
@@ -25,7 +26,8 @@ func MTRBaseClusterPressureMeasurementFromID(id objc.ID) *MTRBaseClusterPressure
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterPressureMeasurement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterPressureMeasurement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func mTRBaseClusterPressureMeasurementAdopt(id objc.ID) *MTRBaseClusterPressureM
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterPressureMeasurement{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterPressureMeasurement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterPressureMeasurement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterPressureMeasurement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterPressureMeasurement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterPressureMeasurementWithDeviceEndpointIDQueue creates a new MTRBaseClusterPressureMeasurement.
+// NewMTRBaseClusterPressureMeasurementWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterPressureMeasurementWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterPressureMeasurement {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterPressureMeasurement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -74,8 +60,10 @@ func NewMTRBaseClusterPressureMeasurementWithDeviceEndpointQueue(device *MTRBase
 	return mTRBaseClusterPressureMeasurementAdopt(_id)
 }
 
+// ReadAttributeMeasuredValueWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMeasuredValueWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -97,8 +85,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMeasuredValueWithComple
 	}
 }
 
+// SubscribeAttributeMeasuredValueWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -120,8 +110,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMeasuredValueWithP
 	}
 }
 
+// ReadAttributeMinMeasuredValueWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMinMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMinMeasuredValueWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMinMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -143,8 +135,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMinMeasuredValueWithCom
 	}
 }
 
+// SubscribeAttributeMinMeasuredValueWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMinMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMinMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMinMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -166,8 +160,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMinMeasuredValueWi
 	}
 }
 
+// ReadAttributeMaxMeasuredValueWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMaxMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMaxMeasuredValueWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMaxMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -189,8 +185,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMaxMeasuredValueWithCom
 	}
 }
 
+// SubscribeAttributeMaxMeasuredValueWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMaxMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMaxMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMaxMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -212,8 +210,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMaxMeasuredValueWi
 	}
 }
 
+// ReadAttributeToleranceWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeToleranceWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeToleranceWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeToleranceWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -235,8 +235,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeToleranceWithCompletion
 	}
 }
 
+// SubscribeAttributeToleranceWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeToleranceWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeToleranceWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeToleranceWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -258,8 +260,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeToleranceWithParam
 	}
 }
 
+// ReadAttributeScaledValueWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeScaledValueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeScaledValueWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeScaledValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -281,8 +285,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeScaledValueWithCompleti
 	}
 }
 
+// SubscribeAttributeScaledValueWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeScaledValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaledValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaledValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -304,8 +310,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaledValueWithPar
 	}
 }
 
+// ReadAttributeMinScaledValueWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMinScaledValueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMinScaledValueWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMinScaledValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -327,8 +335,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMinScaledValueWithCompl
 	}
 }
 
+// SubscribeAttributeMinScaledValueWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMinScaledValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMinScaledValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMinScaledValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -350,8 +360,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMinScaledValueWith
 	}
 }
 
+// ReadAttributeMaxScaledValueWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMaxScaledValueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMaxScaledValueWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMaxScaledValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -373,8 +385,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMaxScaledValueWithCompl
 	}
 }
 
+// SubscribeAttributeMaxScaledValueWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMaxScaledValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMaxScaledValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMaxScaledValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -396,8 +410,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMaxScaledValueWith
 	}
 }
 
+// ReadAttributeScaledToleranceWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeScaledToleranceWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeScaledToleranceWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeScaledToleranceWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -419,8 +435,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeScaledToleranceWithComp
 	}
 }
 
+// SubscribeAttributeScaledToleranceWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeScaledToleranceWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaledToleranceWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaledToleranceWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -442,8 +460,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaledToleranceWit
 	}
 }
 
+// ReadAttributeScaleWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeScaleWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeScaleWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeScaleWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,8 +485,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeScaleWithCompletion(ctx
 	}
 }
 
+// SubscribeAttributeScaleWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeScaleWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -488,8 +510,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaleWithParamsSub
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -511,8 +535,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeGeneratedCommandListWit
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -534,8 +560,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeGeneratedCommandLi
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -557,8 +585,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeAcceptedCommandListWith
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -580,8 +610,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeAcceptedCommandLis
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -603,8 +635,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeAttributeListWithComple
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -626,8 +660,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeAttributeListWithP
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -649,8 +685,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeFeatureMapWithCompletio
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -672,8 +710,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeFeatureMapWithPara
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -695,8 +735,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeClusterRevisionWithComp
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -718,8 +760,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeClusterRevisionWit
 	}
 }
 
+// ReadAttributeMeasuredValue wraps the corresponding Objective-C method.
+//
 // ReadAttributeMeasuredValue blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMeasuredValue(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMeasuredValue(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -741,8 +785,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMeasuredValue(ctx conte
 	}
 }
 
+// SubscribeAttributeMeasuredValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMeasuredValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMeasuredValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMeasuredValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -764,8 +810,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMeasuredValueWithM
 	}
 }
 
+// ReadAttributeMinMeasuredValue wraps the corresponding Objective-C method.
+//
 // ReadAttributeMinMeasuredValue blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMinMeasuredValue(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMinMeasuredValue(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -787,8 +835,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMinMeasuredValue(ctx co
 	}
 }
 
+// SubscribeAttributeMinMeasuredValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMinMeasuredValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMinMeasuredValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMinMeasuredValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -810,8 +860,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMinMeasuredValueWi
 	}
 }
 
+// ReadAttributeMaxMeasuredValue wraps the corresponding Objective-C method.
+//
 // ReadAttributeMaxMeasuredValue blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMaxMeasuredValue(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMaxMeasuredValue(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -833,8 +885,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMaxMeasuredValue(ctx co
 	}
 }
 
+// SubscribeAttributeMaxMeasuredValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMaxMeasuredValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMaxMeasuredValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMaxMeasuredValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -856,8 +910,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMaxMeasuredValueWi
 	}
 }
 
+// ReadAttributeTolerance wraps the corresponding Objective-C method.
+//
 // ReadAttributeTolerance blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeTolerance(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeTolerance(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -879,8 +935,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeTolerance(ctx context.C
 	}
 }
 
+// SubscribeAttributeToleranceWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeToleranceWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeToleranceWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeToleranceWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -902,8 +960,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeToleranceWithMinIn
 	}
 }
 
+// ReadAttributeScaledValue wraps the corresponding Objective-C method.
+//
 // ReadAttributeScaledValue blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeScaledValue(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeScaledValue(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -925,8 +985,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeScaledValue(ctx context
 	}
 }
 
+// SubscribeAttributeScaledValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeScaledValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaledValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaledValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -948,8 +1010,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaledValueWithMin
 	}
 }
 
+// ReadAttributeMinScaledValue wraps the corresponding Objective-C method.
+//
 // ReadAttributeMinScaledValue blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMinScaledValue(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMinScaledValue(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -971,8 +1035,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMinScaledValue(ctx cont
 	}
 }
 
+// SubscribeAttributeMinScaledValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMinScaledValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMinScaledValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMinScaledValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -994,8 +1060,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMinScaledValueWith
 	}
 }
 
+// ReadAttributeMaxScaledValue wraps the corresponding Objective-C method.
+//
 // ReadAttributeMaxScaledValue blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMaxScaledValue(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMaxScaledValue(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1017,8 +1085,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeMaxScaledValue(ctx cont
 	}
 }
 
+// SubscribeAttributeMaxScaledValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMaxScaledValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMaxScaledValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMaxScaledValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1040,8 +1110,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeMaxScaledValueWith
 	}
 }
 
+// ReadAttributeScaledTolerance wraps the corresponding Objective-C method.
+//
 // ReadAttributeScaledTolerance blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeScaledTolerance(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeScaledTolerance(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1063,8 +1135,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeScaledTolerance(ctx con
 	}
 }
 
+// SubscribeAttributeScaledToleranceWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeScaledToleranceWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaledToleranceWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaledToleranceWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1086,8 +1160,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaledToleranceWit
 	}
 }
 
+// ReadAttributeScale wraps the corresponding Objective-C method.
+//
 // ReadAttributeScale blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeScale(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeScale(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1109,8 +1185,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeScale(ctx context.Conte
 	}
 }
 
+// SubscribeAttributeScaleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeScaleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1132,8 +1210,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaleWithMinInterv
 	}
 }
 
+// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1155,8 +1235,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeGeneratedCommandList(ct
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1178,8 +1260,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeGeneratedCommandLi
 	}
 }
 
+// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1201,8 +1285,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeAcceptedCommandList(ctx
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1224,8 +1310,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeAcceptedCommandLis
 	}
 }
 
+// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeAttributeList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1247,8 +1335,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeAttributeList(ctx conte
 	}
 }
 
+// SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1270,8 +1360,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeAttributeListWithM
 	}
 }
 
+// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1293,8 +1385,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeFeatureMap(ctx context.
 	}
 }
 
+// SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1316,8 +1410,10 @@ func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeFeatureMapWithMinI
 	}
 }
 
+// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1339,8 +1435,10 @@ func (x *MTRBaseClusterPressureMeasurement) ReadAttributeClusterRevision(ctx con
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterPressureMeasurement) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1424,3 +1522,7 @@ type MTRBaseClusterPressureMeasurementable interface {
 }
 
 var _ MTRBaseClusterPressureMeasurementable = (*MTRBaseClusterPressureMeasurement)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterPressureMeasurement)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterPressureMeasurement)(nil)

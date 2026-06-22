@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A joint that imposes a maximum distance between two physics bodies, as if they were connected by a rope.
-//
 // PhysicsJointLimit is an idiomatic wrapper over the Objective-C class SKPhysicsJointLimit.
+//
+// It embeds [PhysicsJoint], promoting that type's methods.
+//
+// A joint that imposes a maximum distance between two physics bodies, as if they were connected by a rope.
 type PhysicsJointLimit struct {
-	objref.Handle
+	PhysicsJoint
 }
 
 // PhysicsJointLimitFromID adopts an existing Objective-C object as a PhysicsJointLimit
@@ -25,7 +26,8 @@ func PhysicsJointLimitFromID(id objc.ID) *PhysicsJointLimit {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsJointLimit{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PhysicsJointLimit{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func physicsJointLimitAdopt(id objc.ID) *PhysicsJointLimit {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsJointLimit{Handle: objref.Wrap(id)}
+	x := &PhysicsJointLimit{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PhysicsJointLimit) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PhysicsJointLimit) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PhysicsJointLimit) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPhysicsJointLimit creates a new PhysicsJointLimit.
@@ -64,35 +52,31 @@ func NewPhysicsJointLimit() *PhysicsJointLimit {
 	return physicsJointLimitAdopt(_id)
 }
 
-// The maximum distance allowed between the two physics bodies connected by the limit joint.
-//
-// WithMaxLength sets maxLength and returns the receiver so calls can be chained.
+// WithMaxLength the maximum distance allowed between the two physics bodies connected by the limit joint.
 func (x *PhysicsJointLimit) WithMaxLength(maxLength float64) *PhysicsJointLimit {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxLength:"), maxLength)
 	return x
 }
 
-// The first body connected by the joint.
-//
-// WithBodyA sets bodyA and returns the receiver so calls can be chained.
+// WithBodyA the first body connected by the joint.
 func (x *PhysicsJointLimit) WithBodyA(bodyA *PhysicsBody) *PhysicsJointLimit {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
 	return x
 }
 
-// The second body connected by the joint.
-//
-// WithBodyB sets bodyB and returns the receiver so calls can be chained.
+// WithBodyB the second body connected by the joint.
 func (x *PhysicsJointLimit) WithBodyB(bodyB *PhysicsBody) *PhysicsJointLimit {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
 	return x
 }
 
+// MaxLength wraps the corresponding Objective-C method.
 func (x *PhysicsJointLimit) MaxLength() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxLength"))
 	return _r
 }
 
+// SetMaxLength wraps the corresponding Objective-C method.
 func (x *PhysicsJointLimit) SetMaxLength(maxLength float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxLength:"), maxLength)
 }
@@ -108,3 +92,5 @@ type PhysicsJointLimitable interface {
 }
 
 var _ PhysicsJointLimitable = (*PhysicsJointLimit)(nil)
+
+var _ PhysicsJointProvider = (*PhysicsJointLimit)(nil)

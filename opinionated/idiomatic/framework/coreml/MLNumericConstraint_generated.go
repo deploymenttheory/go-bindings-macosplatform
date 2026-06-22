@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The value limitations of a number.
-//
 // NumericConstraint is an idiomatic wrapper over the Objective-C class MLNumericConstraint.
+//
+// The value limitations of a number.
 type NumericConstraint struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NumericConstraintFromID(id objc.ID) *NumericConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &NumericConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NumericConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func numericConstraintAdopt(id objc.ID) *NumericConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &NumericConstraint{Handle: objref.Wrap(id)}
+	x := &NumericConstraint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,31 @@ func (x *NumericConstraint) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NumericConstraint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNumericConstraint creates a new NumericConstraint.
 func NewNumericConstraint() *NumericConstraint {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLNumericConstraint")), objc.RegisterName("new"))
 	return numericConstraintAdopt(_id)
 }
 
+// MinNumber wraps the corresponding Objective-C method.
 func (x *NumericConstraint) MinNumber() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minNumber"))
 	return obj.Wrap(_r)
 }
 
+// MaxNumber wraps the corresponding Objective-C method.
 func (x *NumericConstraint) MaxNumber() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxNumber"))
 	return obj.Wrap(_r)
 }
 
+// EnumeratedNumbers wraps the corresponding Objective-C method.
 func (x *NumericConstraint) EnumeratedNumbers() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumeratedNumbers"))
 	return obj.Wrap(_r)

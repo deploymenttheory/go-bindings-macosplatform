@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that represents a request to recognize speech from an audio source.
-//
 // SpeechRecognitionRequest is an idiomatic wrapper over the Objective-C class SFSpeechRecognitionRequest.
+//
+// SpeechRecognitionRequest is an abstract base — you do not construct it directly. Construct one of [SpeechAudioBufferRecognitionRequest], [SpeechURLRecognitionRequest] and pass it where a SpeechRecognitionRequest is accepted.
+//
+// An abstract class that represents a request to recognize speech from an audio source.
 type SpeechRecognitionRequest struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func SpeechRecognitionRequestFromID(id objc.ID) *SpeechRecognitionRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &SpeechRecognitionRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SpeechRecognitionRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func speechRecognitionRequestAdopt(id objc.ID) *SpeechRecognitionRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &SpeechRecognitionRequest{Handle: objref.Wrap(id)}
+	x := &SpeechRecognitionRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,87 +62,78 @@ func (x *SpeechRecognitionRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewSpeechRecognitionRequest creates a new SpeechRecognitionRequest.
-func NewSpeechRecognitionRequest() *SpeechRecognitionRequest {
-	_id := objc.Send[objc.ID](objc.ID(_class("SFSpeechRecognitionRequest")), objc.RegisterName("new"))
-	return speechRecognitionRequestAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpeechRecognitionRequest) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// A value that indicates the type of speech recognition being performed.
-//
-// WithTaskHint sets taskHint and returns the receiver so calls can be chained.
+// WithTaskHint a value that indicates the type of speech recognition being performed.
 func (x *SpeechRecognitionRequest) WithTaskHint(taskHint SpeechRecognitionTaskHint) *SpeechRecognitionRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTaskHint:"), taskHint)
 	return x
 }
 
-// A Boolean value that indicates whether you want intermediate results returned for each utterance.
-//
-// WithShouldReportPartialResults sets shouldReportPartialResults and returns the receiver so calls can be chained.
+// WithShouldReportPartialResults a Boolean value that indicates whether you want intermediate results returned for each utterance.
 func (x *SpeechRecognitionRequest) WithShouldReportPartialResults(shouldReportPartialResults bool) *SpeechRecognitionRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldReportPartialResults:"), shouldReportPartialResults)
 	return x
 }
 
-// An array of phrases that should be recognized, even if they are not in the system vocabulary.
-//
-// WithContextualStrings sets the collection and returns the receiver so calls can be chained.
+// WithContextualStrings an array of phrases that should be recognized, even if they are not in the system vocabulary.
 func (x *SpeechRecognitionRequest) WithContextualStrings(items ...obj.Object) *SpeechRecognitionRequest {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContextualStrings:"), _arr)
 	return x
 }
 
-// An identifier string that you use to describe the type of interaction associated with the speech recognition request.
-//
-// WithInteractionIdentifier sets interactionIdentifier and returns the receiver so calls can be chained.
+// WithInteractionIdentifier an identifier string that you use to describe the type of interaction associated with the speech recognition request.
 func (x *SpeechRecognitionRequest) WithInteractionIdentifier(interactionIdentifier string) *SpeechRecognitionRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteractionIdentifier:"), purego.NSString(interactionIdentifier))
 	return x
 }
 
-// A Boolean value that determines whether a request must keep its audio data on the device.
-//
-// WithRequiresOnDeviceRecognition sets requiresOnDeviceRecognition and returns the receiver so calls can be chained.
+// WithRequiresOnDeviceRecognition a Boolean value that determines whether a request must keep its audio data on the device.
 func (x *SpeechRecognitionRequest) WithRequiresOnDeviceRecognition(requiresOnDeviceRecognition bool) *SpeechRecognitionRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresOnDeviceRecognition:"), requiresOnDeviceRecognition)
 	return x
 }
 
-// A Boolean value that indicates whether to add punctuation to speech recognition results.
-//
-// WithAddsPunctuation sets addsPunctuation and returns the receiver so calls can be chained.
+// WithAddsPunctuation a Boolean value that indicates whether to add punctuation to speech recognition results.
 func (x *SpeechRecognitionRequest) WithAddsPunctuation(addsPunctuation bool) *SpeechRecognitionRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAddsPunctuation:"), addsPunctuation)
 	return x
 }
 
-// WithCustomizedLanguageModel sets customizedLanguageModel and returns the receiver so calls can be chained.
+// WithCustomizedLanguageModel sets the property and returns the receiver so calls can be chained.
 func (x *SpeechRecognitionRequest) WithCustomizedLanguageModel(customizedLanguageModel *SpeechLanguageModelConfiguration) *SpeechRecognitionRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizedLanguageModel:"), objref.IDOf(customizedLanguageModel))
 	return x
 }
 
-// A value that indicates the type of speech recognition being performed. The default value of this property is “SFSpeechRecognitionTaskHint/unspecified“. For a valid list of values, see “SFSpeechRecognitionTaskHint“.
+// TaskHint a value that indicates the type of speech recognition being performed. The default value of this property is “SFSpeechRecognitionTaskHint/unspecified“. For a valid list of values, see “SFSpeechRecognitionTaskHint“.
 func (x *SpeechRecognitionRequest) TaskHint() SpeechRecognitionTaskHint {
 	_r := objc.Send[SpeechRecognitionTaskHint](objref.IDOf(x), objc.RegisterName("taskHint"))
 	return _r
 }
 
+// SetTaskHint wraps the corresponding Objective-C method.
 func (x *SpeechRecognitionRequest) SetTaskHint(taskHint SpeechRecognitionTaskHint) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTaskHint:"), taskHint)
 }
 
+// ShouldReportPartialResults wraps the corresponding Objective-C method.
 func (x *SpeechRecognitionRequest) ShouldReportPartialResults() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldReportPartialResults"))
 	return _r
 }
 
+// SetShouldReportPartialResults wraps the corresponding Objective-C method.
 func (x *SpeechRecognitionRequest) SetShouldReportPartialResults(shouldReportPartialResults bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldReportPartialResults:"), shouldReportPartialResults)
 }
 
-// An array of phrases that should be recognized, even if they are not in the system vocabulary. Use this property to specify short custom phrases that are unique to your app. You might include phrases with the names of characters, products, or places that are specific to your app. You might also include domain-specific terminology or unusual or made-up words. Assigning custom phrases to this property improves the likelihood of those phrases being recognized. Keep phrases relatively brief, limiting them to one or two words whenever possible. Lengthy phrases are less likely to be recognized. In addition, try to limit each phrase to something the user can say without pausing. Limit the total number of phrases to no more than 100.
+// ContextualStrings an array of phrases that should be recognized, even if they are not in the system vocabulary. Use this property to specify short custom phrases that are unique to your app. You might include phrases with the names of characters, products, or places that are specific to your app. You might also include domain-specific terminology or unusual or made-up words. Assigning custom phrases to this property improves the likelihood of those phrases being recognized. Keep phrases relatively brief, limiting them to one or two words whenever possible. Lengthy phrases are less likely to be recognized. In addition, try to limit each phrase to something the user can say without pausing. Limit the total number of phrases to no more than 100.
 //
 // ContextualStrings returns the collection as a Go slice.
 func (x *SpeechRecognitionRequest) ContextualStrings() []string {
@@ -146,11 +141,12 @@ func (x *SpeechRecognitionRequest) ContextualStrings() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetContextualStrings wraps the corresponding Objective-C method.
 func (x *SpeechRecognitionRequest) SetContextualStrings(contextualStrings []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContextualStrings:"), purego.SliceToNSArray(contextualStrings, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// An identifier string that you use to describe the type of interaction associated with the speech recognition request. If different parts of your app have different speech recognition needs, you can use this property to identify the part of your app that is making each request. For example, if one part of your app lets users speak phone numbers and another part lets users speak street addresses, consistently identifying the part of the app that makes a recognition request may help improve the accuracy of the results.
+// InteractionIdentifier an identifier string that you use to describe the type of interaction associated with the speech recognition request. If different parts of your app have different speech recognition needs, you can use this property to identify the part of your app that is making each request. For example, if one part of your app lets users speak phone numbers and another part lets users speak street addresses, consistently identifying the part of the app that makes a recognition request may help improve the accuracy of the results.
 func (x *SpeechRecognitionRequest) InteractionIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interactionIdentifier"))
 	if _r == 0 {
@@ -159,35 +155,40 @@ func (x *SpeechRecognitionRequest) InteractionIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// SetInteractionIdentifier wraps the corresponding Objective-C method.
 func (x *SpeechRecognitionRequest) SetInteractionIdentifier(interactionIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteractionIdentifier:"), purego.NSString(interactionIdentifier))
 }
 
-// A Boolean value that determines whether a request must keep its audio data on the device. Set this property to `true` to prevent an “SFSpeechRecognitionRequest“ from sending audio over the network. However, on-device requests won't be as accurate. > Note: > The request only honors this setting if the “SFSpeechRecognizer/supportsOnDeviceRecognition“ (“SFSpeechRecognizer“) property is also `true`.
+// RequiresOnDeviceRecognition a Boolean value that determines whether a request must keep its audio data on the device. Set this property to `true` to prevent an “SFSpeechRecognitionRequest“ from sending audio over the network. However, on-device requests won't be as accurate. > Note: > The request only honors this setting if the “SFSpeechRecognizer/supportsOnDeviceRecognition“ (“SFSpeechRecognizer“) property is also `true`.
 func (x *SpeechRecognitionRequest) RequiresOnDeviceRecognition() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresOnDeviceRecognition"))
 	return _r
 }
 
+// SetRequiresOnDeviceRecognition wraps the corresponding Objective-C method.
 func (x *SpeechRecognitionRequest) SetRequiresOnDeviceRecognition(requiresOnDeviceRecognition bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresOnDeviceRecognition:"), requiresOnDeviceRecognition)
 }
 
-// A Boolean value that indicates whether to add punctuation to speech recognition results. Set this property to `true` for the speech framework to automatically include punctuation in the recognition results. Punctuation includes a period or question mark at the end of a sentence, and a comma within a sentence.
+// AddsPunctuation a Boolean value that indicates whether to add punctuation to speech recognition results. Set this property to `true` for the speech framework to automatically include punctuation in the recognition results. Punctuation includes a period or question mark at the end of a sentence, and a comma within a sentence.
 func (x *SpeechRecognitionRequest) AddsPunctuation() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addsPunctuation"))
 	return _r
 }
 
+// SetAddsPunctuation wraps the corresponding Objective-C method.
 func (x *SpeechRecognitionRequest) SetAddsPunctuation(addsPunctuation bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAddsPunctuation:"), addsPunctuation)
 }
 
+// CustomizedLanguageModel wraps the corresponding Objective-C method.
 func (x *SpeechRecognitionRequest) CustomizedLanguageModel() *SpeechLanguageModelConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customizedLanguageModel"))
 	return SpeechLanguageModelConfigurationFromID(_r)
 }
 
+// SetCustomizedLanguageModel wraps the corresponding Objective-C method.
 func (x *SpeechRecognitionRequest) SetCustomizedLanguageModel(customizedLanguageModel *SpeechLanguageModelConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizedLanguageModel:"), objref.IDOf(customizedLanguageModel))
 }
@@ -219,3 +220,10 @@ type SpeechRecognitionRequestable interface {
 }
 
 var _ SpeechRecognitionRequestable = (*SpeechRecognitionRequest)(nil)
+
+// isSpeechRecognitionRequest marks SpeechRecognitionRequest — and, by embedding promotion, its
+// subclasses — as a member of the SpeechRecognitionRequest hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SpeechRecognitionRequest) isSpeechRecognitionRequest() {}
+
+var _ SpeechRecognitionRequestProvider = (*SpeechRecognitionRequest)(nil)

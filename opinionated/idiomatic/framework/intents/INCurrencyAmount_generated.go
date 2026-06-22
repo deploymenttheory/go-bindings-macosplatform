@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An amount of money to transfer during a financial transaction.
-//
 // CurrencyAmount is an idiomatic wrapper over the Objective-C class INCurrencyAmount.
+//
+// An amount of money to transfer during a financial transaction.
 type CurrencyAmount struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CurrencyAmountFromID(id objc.ID) *CurrencyAmount {
 	if id == 0 {
 		return nil
 	}
-	x := &CurrencyAmount{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CurrencyAmount{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func currencyAmountAdopt(id objc.ID) *CurrencyAmount {
 	if id == 0 {
 		return nil
 	}
-	x := &CurrencyAmount{Handle: objref.Wrap(id)}
+	x := &CurrencyAmount{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,20 +60,26 @@ func (x *CurrencyAmount) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a currency amount object with the specified values.
-//
-// NewCurrencyAmountWithAmountCurrencyCode creates a new CurrencyAmount.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CurrencyAmount) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCurrencyAmountWithAmountCurrencyCode initializes a currency amount object with the specified values.
 func NewCurrencyAmountWithAmountCurrencyCode(amount obj.Object, currencyCode string) *CurrencyAmount {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INCurrencyAmount")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAmount:currencyCode:"), objref.IDOf(amount), purego.NSString(currencyCode))
 	return currencyAmountAdopt(_id)
 }
 
+// Amount wraps the corresponding Objective-C method.
 func (x *CurrencyAmount) Amount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("amount"))
 	return obj.Wrap(_r)
 }
 
+// CurrencyCode wraps the corresponding Objective-C method.
 func (x *CurrencyAmount) CurrencyCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currencyCode"))
 	if _r == 0 {

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A clinical coding that represents a medical concept using a standardized coding system.
-//
 // ClinicalCoding is an idiomatic wrapper over the Objective-C class HKClinicalCoding.
+//
+// A clinical coding that represents a medical concept using a standardized coding system.
 type ClinicalCoding struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ClinicalCodingFromID(id objc.ID) *ClinicalCoding {
 	if id == 0 {
 		return nil
 	}
-	x := &ClinicalCoding{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ClinicalCoding{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func clinicalCodingAdopt(id objc.ID) *ClinicalCoding {
 	if id == 0 {
 		return nil
 	}
-	x := &ClinicalCoding{Handle: objref.Wrap(id)}
+	x := &ClinicalCoding{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,16 +60,20 @@ func (x *ClinicalCoding) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a clinical coding with the specified system, version, and code.
-//
-// NewClinicalCodingWithSystemVersionCode creates a new ClinicalCoding.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ClinicalCoding) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewClinicalCodingWithSystemVersionCode creates a clinical coding with the specified system, version, and code.
 func NewClinicalCodingWithSystemVersionCode(system string, version string, code string) *ClinicalCoding {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKClinicalCoding")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSystem:version:code:"), purego.NSString(system), purego.NSString(version), purego.NSString(code))
 	return clinicalCodingAdopt(_id)
 }
 
-// The string that identifies the coding system that defines this clinical code. The system is usually expressed as a URL from the [HL7 Terminology](https://terminology.hl7.org/). For example, the RxNorm, a coding system for medications uses: `http://www.nlm.nih.gov/research/umls/rxnorm`.
+// System the string that identifies the coding system that defines this clinical code. The system is usually expressed as a URL from the [HL7 Terminology](https://terminology.hl7.org/). For example, the RxNorm, a coding system for medications uses: `http://www.nlm.nih.gov/research/umls/rxnorm`.
 func (x *ClinicalCoding) System() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("system"))
 	if _r == 0 {
@@ -76,7 +82,7 @@ func (x *ClinicalCoding) System() string {
 	return purego.GoString(_r)
 }
 
-// The clinical code that represents a medical concept inside the coding system. The format depends on the coding system. For example, RxNorm codes are numeric.
+// Code the clinical code that represents a medical concept inside the coding system. The format depends on the coding system. For example, RxNorm codes are numeric.
 func (x *ClinicalCoding) Code() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("code"))
 	if _r == 0 {

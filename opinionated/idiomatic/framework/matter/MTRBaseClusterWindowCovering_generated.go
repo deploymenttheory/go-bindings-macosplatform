@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBaseClusterWindowCovering is an idiomatic wrapper over the Objective-C class MTRBaseClusterWindowCovering.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
 type MTRBaseClusterWindowCovering struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterWindowCoveringFromID adopts an existing Objective-C object as a MTRBaseClusterWindowCovering
@@ -25,7 +26,8 @@ func MTRBaseClusterWindowCoveringFromID(id objc.ID) *MTRBaseClusterWindowCoverin
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterWindowCovering{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterWindowCovering{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func mTRBaseClusterWindowCoveringAdopt(id objc.ID) *MTRBaseClusterWindowCovering
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterWindowCovering{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterWindowCovering{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterWindowCovering) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterWindowCovering) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterWindowCovering) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterWindowCoveringWithDeviceEndpointIDQueue creates a new MTRBaseClusterWindowCovering.
+// NewMTRBaseClusterWindowCoveringWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterWindowCoveringWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterWindowCovering {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterWindowCovering")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -74,8 +60,10 @@ func NewMTRBaseClusterWindowCoveringWithDeviceEndpointQueue(device *MTRBaseDevic
 	return mTRBaseClusterWindowCoveringAdopt(_id)
 }
 
+// ReadAttributeTypeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeTypeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeTypeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -97,8 +85,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeTypeWithCompletion(ctx conte
 	}
 }
 
+// SubscribeAttributeTypeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTypeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -120,8 +110,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTypeWithParamsSubscript
 	}
 }
 
+// ReadAttributePhysicalClosedLimitLiftWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePhysicalClosedLimitLiftWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitLiftWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -143,8 +135,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitLiftWithC
 	}
 }
 
+// SubscribeAttributePhysicalClosedLimitLiftWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePhysicalClosedLimitLiftWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -166,8 +160,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitLift
 	}
 }
 
+// ReadAttributePhysicalClosedLimitTiltWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePhysicalClosedLimitTiltWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitTiltWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -189,8 +185,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitTiltWithC
 	}
 }
 
+// SubscribeAttributePhysicalClosedLimitTiltWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePhysicalClosedLimitTiltWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -212,8 +210,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitTilt
 	}
 }
 
+// ReadAttributeCurrentPositionLiftWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentPositionLiftWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -235,8 +235,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftWithCompl
 	}
 }
 
+// SubscribeAttributeCurrentPositionLiftWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentPositionLiftWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -258,8 +260,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftWith
 	}
 }
 
+// ReadAttributeCurrentPositionTiltWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentPositionTiltWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -281,8 +285,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltWithCompl
 	}
 }
 
+// SubscribeAttributeCurrentPositionTiltWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentPositionTiltWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -304,8 +310,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltWith
 	}
 }
 
+// ReadAttributeNumberOfActuationsLiftWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfActuationsLiftWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsLiftWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -327,8 +335,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsLiftWithCo
 	}
 }
 
+// SubscribeAttributeNumberOfActuationsLiftWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfActuationsLiftWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -350,8 +360,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsLiftW
 	}
 }
 
+// ReadAttributeNumberOfActuationsTiltWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfActuationsTiltWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsTiltWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -373,8 +385,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsTiltWithCo
 	}
 }
 
+// SubscribeAttributeNumberOfActuationsTiltWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfActuationsTiltWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -396,8 +410,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsTiltW
 	}
 }
 
+// ReadAttributeConfigStatusWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeConfigStatusWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeConfigStatusWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeConfigStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -419,8 +435,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeConfigStatusWithCompletion(c
 	}
 }
 
+// SubscribeAttributeConfigStatusWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeConfigStatusWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeConfigStatusWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeConfigStatusWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -442,8 +460,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeConfigStatusWithParamsS
 	}
 }
 
+// ReadAttributeCurrentPositionLiftPercentageWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentPositionLiftPercentageWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercentageWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercentageWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,8 +485,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercentag
 	}
 }
 
+// SubscribeAttributeCurrentPositionLiftPercentageWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentPositionLiftPercentageWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPercentageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPercentageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -488,8 +510,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPerc
 	}
 }
 
+// ReadAttributeCurrentPositionTiltPercentageWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentPositionTiltPercentageWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercentageWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercentageWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -511,8 +535,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercentag
 	}
 }
 
+// SubscribeAttributeCurrentPositionTiltPercentageWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentPositionTiltPercentageWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPercentageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPercentageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -534,8 +560,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPerc
 	}
 }
 
+// ReadAttributeOperationalStatusWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeOperationalStatusWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeOperationalStatusWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeOperationalStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -557,8 +585,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeOperationalStatusWithComplet
 	}
 }
 
+// SubscribeAttributeOperationalStatusWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOperationalStatusWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeOperationalStatusWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeOperationalStatusWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -580,8 +610,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeOperationalStatusWithPa
 	}
 }
 
+// ReadAttributeTargetPositionLiftPercent100thsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeTargetPositionLiftPercent100thsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionLiftPercent100thsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionLiftPercent100thsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -603,8 +635,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionLiftPercent100
 	}
 }
 
+// SubscribeAttributeTargetPositionLiftPercent100thsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTargetPositionLiftPercent100thsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionLiftPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionLiftPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -626,8 +660,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionLiftPerce
 	}
 }
 
+// ReadAttributeTargetPositionTiltPercent100thsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeTargetPositionTiltPercent100thsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionTiltPercent100thsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionTiltPercent100thsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -649,8 +685,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionTiltPercent100
 	}
 }
 
+// SubscribeAttributeTargetPositionTiltPercent100thsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTargetPositionTiltPercent100thsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionTiltPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionTiltPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -672,8 +710,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionTiltPerce
 	}
 }
 
+// ReadAttributeEndProductTypeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeEndProductTypeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeEndProductTypeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeEndProductTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -695,8 +735,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeEndProductTypeWithCompletion
 	}
 }
 
+// SubscribeAttributeEndProductTypeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeEndProductTypeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeEndProductTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeEndProductTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -718,8 +760,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeEndProductTypeWithParam
 	}
 }
 
+// ReadAttributeCurrentPositionLiftPercent100thsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentPositionLiftPercent100thsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercent100thsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercent100thsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -741,8 +785,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercent10
 	}
 }
 
+// SubscribeAttributeCurrentPositionLiftPercent100thsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentPositionLiftPercent100thsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -764,8 +810,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPerc
 	}
 }
 
+// ReadAttributeCurrentPositionTiltPercent100thsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentPositionTiltPercent100thsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercent100thsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercent100thsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -787,8 +835,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercent10
 	}
 }
 
+// SubscribeAttributeCurrentPositionTiltPercent100thsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentPositionTiltPercent100thsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -810,8 +860,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPerc
 	}
 }
 
+// ReadAttributeInstalledOpenLimitLiftWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeInstalledOpenLimitLiftWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitLiftWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -833,8 +885,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitLiftWithCo
 	}
 }
 
+// SubscribeAttributeInstalledOpenLimitLiftWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeInstalledOpenLimitLiftWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -856,8 +910,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitLiftW
 	}
 }
 
+// ReadAttributeInstalledClosedLimitLiftWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeInstalledClosedLimitLiftWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitLiftWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -879,8 +935,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitLiftWith
 	}
 }
 
+// SubscribeAttributeInstalledClosedLimitLiftWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeInstalledClosedLimitLiftWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -902,8 +960,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitLif
 	}
 }
 
+// ReadAttributeInstalledOpenLimitTiltWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeInstalledOpenLimitTiltWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitTiltWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -925,8 +985,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitTiltWithCo
 	}
 }
 
+// SubscribeAttributeInstalledOpenLimitTiltWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeInstalledOpenLimitTiltWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -948,8 +1010,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitTiltW
 	}
 }
 
+// ReadAttributeInstalledClosedLimitTiltWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeInstalledClosedLimitTiltWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitTiltWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -971,8 +1035,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitTiltWith
 	}
 }
 
+// SubscribeAttributeInstalledClosedLimitTiltWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeInstalledClosedLimitTiltWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -994,8 +1060,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitTil
 	}
 }
 
+// ReadAttributeModeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeModeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeModeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1017,8 +1085,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeModeWithCompletion(ctx conte
 	}
 }
 
+// SubscribeAttributeModeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1040,8 +1110,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeModeWithParamsSubscript
 	}
 }
 
+// ReadAttributeSafetyStatusWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSafetyStatusWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeSafetyStatusWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeSafetyStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1063,8 +1135,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeSafetyStatusWithCompletion(c
 	}
 }
 
+// SubscribeAttributeSafetyStatusWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSafetyStatusWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeSafetyStatusWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeSafetyStatusWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1086,8 +1160,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeSafetyStatusWithParamsS
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1109,8 +1185,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeGeneratedCommandListWithComp
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1132,8 +1210,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeGeneratedCommandListWit
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1155,8 +1235,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeAcceptedCommandListWithCompl
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1178,8 +1260,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAcceptedCommandListWith
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1201,8 +1285,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeAttributeListWithCompletion(
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1224,8 +1310,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAttributeListWithParams
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1247,8 +1335,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeFeatureMapWithCompletion(ctx
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1270,8 +1360,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeFeatureMapWithParamsSub
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1293,8 +1385,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeClusterRevisionWithCompletio
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1316,8 +1410,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeClusterRevisionWithPara
 	}
 }
 
+// ReadAttributeType wraps the corresponding Objective-C method.
+//
 // ReadAttributeType blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeType(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeType(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1339,8 +1435,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeType(ctx context.Context) (o
 	}
 }
 
+// SubscribeAttributeTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1362,8 +1460,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTypeWithMinIntervalMaxI
 	}
 }
 
+// ReadAttributePhysicalClosedLimitLift wraps the corresponding Objective-C method.
+//
 // ReadAttributePhysicalClosedLimitLift blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitLift(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitLift(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1385,8 +1485,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitLift(ctx 
 	}
 }
 
+// SubscribeAttributePhysicalClosedLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePhysicalClosedLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1408,8 +1510,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitLift
 	}
 }
 
+// ReadAttributePhysicalClosedLimitTilt wraps the corresponding Objective-C method.
+//
 // ReadAttributePhysicalClosedLimitTilt blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitTilt(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitTilt(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1431,8 +1535,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitTilt(ctx 
 	}
 }
 
+// SubscribeAttributePhysicalClosedLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePhysicalClosedLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1454,8 +1560,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitTilt
 	}
 }
 
+// ReadAttributeCurrentPositionLift wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentPositionLift blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLift(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLift(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1477,8 +1585,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLift(ctx cont
 	}
 }
 
+// SubscribeAttributeCurrentPositionLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentPositionLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1500,8 +1610,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftWith
 	}
 }
 
+// ReadAttributeCurrentPositionTilt wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentPositionTilt blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTilt(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTilt(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1523,8 +1635,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTilt(ctx cont
 	}
 }
 
+// SubscribeAttributeCurrentPositionTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentPositionTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1546,8 +1660,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltWith
 	}
 }
 
+// ReadAttributeNumberOfActuationsLift wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfActuationsLift blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsLift(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsLift(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1569,8 +1685,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsLift(ctx c
 	}
 }
 
+// SubscribeAttributeNumberOfActuationsLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfActuationsLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1592,8 +1710,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsLiftW
 	}
 }
 
+// ReadAttributeNumberOfActuationsTilt wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfActuationsTilt blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsTilt(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsTilt(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1615,8 +1735,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsTilt(ctx c
 	}
 }
 
+// SubscribeAttributeNumberOfActuationsTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfActuationsTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1638,8 +1760,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsTiltW
 	}
 }
 
+// ReadAttributeConfigStatus wraps the corresponding Objective-C method.
+//
 // ReadAttributeConfigStatus blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeConfigStatus(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeConfigStatus(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1661,8 +1785,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeConfigStatus(ctx context.Con
 	}
 }
 
+// SubscribeAttributeConfigStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeConfigStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeConfigStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeConfigStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1684,8 +1810,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeConfigStatusWithMinInte
 	}
 }
 
+// ReadAttributeCurrentPositionLiftPercentage wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentPositionLiftPercentage blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercentage(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercentage(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1707,8 +1835,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercentag
 	}
 }
 
+// SubscribeAttributeCurrentPositionLiftPercentageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentPositionLiftPercentageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPercentageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPercentageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1730,8 +1860,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPerc
 	}
 }
 
+// ReadAttributeCurrentPositionTiltPercentage wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentPositionTiltPercentage blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercentage(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercentage(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1753,8 +1885,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercentag
 	}
 }
 
+// SubscribeAttributeCurrentPositionTiltPercentageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentPositionTiltPercentageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPercentageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPercentageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1776,8 +1910,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPerc
 	}
 }
 
+// ReadAttributeOperationalStatus wraps the corresponding Objective-C method.
+//
 // ReadAttributeOperationalStatus blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeOperationalStatus(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeOperationalStatus(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1799,8 +1935,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeOperationalStatus(ctx contex
 	}
 }
 
+// SubscribeAttributeOperationalStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOperationalStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeOperationalStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeOperationalStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1822,8 +1960,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeOperationalStatusWithMi
 	}
 }
 
+// ReadAttributeTargetPositionLiftPercent100ths wraps the corresponding Objective-C method.
+//
 // ReadAttributeTargetPositionLiftPercent100ths blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionLiftPercent100ths(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionLiftPercent100ths(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1845,8 +1985,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionLiftPercent100
 	}
 }
 
+// SubscribeAttributeTargetPositionLiftPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTargetPositionLiftPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionLiftPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionLiftPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1868,8 +2010,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionLiftPerce
 	}
 }
 
+// ReadAttributeTargetPositionTiltPercent100ths wraps the corresponding Objective-C method.
+//
 // ReadAttributeTargetPositionTiltPercent100ths blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionTiltPercent100ths(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionTiltPercent100ths(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1891,8 +2035,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionTiltPercent100
 	}
 }
 
+// SubscribeAttributeTargetPositionTiltPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTargetPositionTiltPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionTiltPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionTiltPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1914,8 +2060,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionTiltPerce
 	}
 }
 
+// ReadAttributeEndProductType wraps the corresponding Objective-C method.
+//
 // ReadAttributeEndProductType blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeEndProductType(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeEndProductType(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1937,8 +2085,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeEndProductType(ctx context.C
 	}
 }
 
+// SubscribeAttributeEndProductTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeEndProductTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeEndProductTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeEndProductTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1960,8 +2110,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeEndProductTypeWithMinIn
 	}
 }
 
+// ReadAttributeCurrentPositionLiftPercent100ths wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentPositionLiftPercent100ths blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercent100ths(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercent100ths(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1983,8 +2135,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercent10
 	}
 }
 
+// SubscribeAttributeCurrentPositionLiftPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentPositionLiftPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2006,8 +2160,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPerc
 	}
 }
 
+// ReadAttributeCurrentPositionTiltPercent100ths wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentPositionTiltPercent100ths blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercent100ths(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercent100ths(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2029,8 +2185,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercent10
 	}
 }
 
+// SubscribeAttributeCurrentPositionTiltPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentPositionTiltPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2052,8 +2210,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPerc
 	}
 }
 
+// ReadAttributeInstalledOpenLimitLift wraps the corresponding Objective-C method.
+//
 // ReadAttributeInstalledOpenLimitLift blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitLift(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitLift(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2075,8 +2235,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitLift(ctx c
 	}
 }
 
+// SubscribeAttributeInstalledOpenLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeInstalledOpenLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2098,8 +2260,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitLiftW
 	}
 }
 
+// ReadAttributeInstalledClosedLimitLift wraps the corresponding Objective-C method.
+//
 // ReadAttributeInstalledClosedLimitLift blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitLift(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitLift(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2121,8 +2285,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitLift(ctx
 	}
 }
 
+// SubscribeAttributeInstalledClosedLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeInstalledClosedLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2144,8 +2310,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitLif
 	}
 }
 
+// ReadAttributeInstalledOpenLimitTilt wraps the corresponding Objective-C method.
+//
 // ReadAttributeInstalledOpenLimitTilt blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitTilt(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitTilt(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2167,8 +2335,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitTilt(ctx c
 	}
 }
 
+// SubscribeAttributeInstalledOpenLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeInstalledOpenLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2190,8 +2360,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitTiltW
 	}
 }
 
+// ReadAttributeInstalledClosedLimitTilt wraps the corresponding Objective-C method.
+//
 // ReadAttributeInstalledClosedLimitTilt blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitTilt(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitTilt(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2213,8 +2385,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitTilt(ctx
 	}
 }
 
+// SubscribeAttributeInstalledClosedLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeInstalledClosedLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2236,8 +2410,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitTil
 	}
 }
 
+// ReadAttributeMode wraps the corresponding Objective-C method.
+//
 // ReadAttributeMode blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeMode(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeMode(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2259,8 +2435,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeMode(ctx context.Context) (o
 	}
 }
 
+// SubscribeAttributeModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2282,8 +2460,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeModeWithMinIntervalMaxI
 	}
 }
 
+// ReadAttributeSafetyStatus wraps the corresponding Objective-C method.
+//
 // ReadAttributeSafetyStatus blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeSafetyStatus(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeSafetyStatus(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2305,8 +2485,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeSafetyStatus(ctx context.Con
 	}
 }
 
+// SubscribeAttributeSafetyStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSafetyStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeSafetyStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeSafetyStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2328,8 +2510,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeSafetyStatusWithMinInte
 	}
 }
 
+// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2351,8 +2535,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeGeneratedCommandList(ctx con
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2374,8 +2560,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeGeneratedCommandListWit
 	}
 }
 
+// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2397,8 +2585,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeAcceptedCommandList(ctx cont
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2420,8 +2610,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAcceptedCommandListWith
 	}
 }
 
+// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeAttributeList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2443,8 +2635,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeAttributeList(ctx context.Co
 	}
 }
 
+// SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2466,8 +2660,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAttributeListWithMinInt
 	}
 }
 
+// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2489,8 +2685,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeFeatureMap(ctx context.Conte
 	}
 }
 
+// SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2512,8 +2710,10 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeFeatureMapWithMinInterv
 	}
 }
 
+// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2535,8 +2735,10 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeClusterRevision(ctx context.
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterWindowCovering) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2672,3 +2874,7 @@ type MTRBaseClusterWindowCoveringable interface {
 }
 
 var _ MTRBaseClusterWindowCoveringable = (*MTRBaseClusterWindowCovering)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterWindowCovering)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterWindowCovering)(nil)

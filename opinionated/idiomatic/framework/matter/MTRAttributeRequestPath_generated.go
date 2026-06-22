@@ -23,7 +23,8 @@ func MTRAttributeRequestPathFromID(id objc.ID) *MTRAttributeRequestPath {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAttributeRequestPath{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRAttributeRequestPath{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRAttributeRequestPathAdopt(id objc.ID) *MTRAttributeRequestPath {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAttributeRequestPath{Handle: objref.Wrap(id)}
+	x := &MTRAttributeRequestPath{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,22 +58,31 @@ func (x *MTRAttributeRequestPath) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRAttributeRequestPath) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRAttributeRequestPath creates a new MTRAttributeRequestPath.
 func NewMTRAttributeRequestPath() *MTRAttributeRequestPath {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRAttributeRequestPath")), objc.RegisterName("new"))
 	return mTRAttributeRequestPathAdopt(_id)
 }
 
+// Endpoint wraps the corresponding Objective-C method.
 func (x *MTRAttributeRequestPath) Endpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)
 }
 
+// Cluster wraps the corresponding Objective-C method.
 func (x *MTRAttributeRequestPath) Cluster() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cluster"))
 	return obj.Wrap(_r)
 }
 
+// Attribute wraps the corresponding Objective-C method.
 func (x *MTRAttributeRequestPath) Attribute() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attribute"))
 	return obj.Wrap(_r)

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that represents the shared elements of map configurations.
-//
 // MapConfiguration is an idiomatic wrapper over the Objective-C class MKMapConfiguration.
+//
+// MapConfiguration is an abstract base — you do not construct it directly. Construct one of [HybridMapConfiguration], [ImageryMapConfiguration], [StandardMapConfiguration] and pass it where a MapConfiguration is accepted.
+//
+// An abstract class that represents the shared elements of map configurations.
 type MapConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func MapConfigurationFromID(id objc.ID) *MapConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &MapConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MapConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func mapConfigurationAdopt(id objc.ID) *MapConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &MapConfiguration{Handle: objref.Wrap(id)}
+	x := &MapConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +62,25 @@ func (x *MapConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMapConfiguration creates a new MapConfiguration.
-func NewMapConfiguration() *MapConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(_class("MKMapConfiguration")), objc.RegisterName("new"))
-	return mapConfigurationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MapConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The value that indicates the map’s elevation style.
-//
-// WithElevationStyle sets elevationStyle and returns the receiver so calls can be chained.
+// WithElevationStyle the value that indicates the map’s elevation style.
 func (x *MapConfiguration) WithElevationStyle(elevationStyle MapElevationStyle) *MapConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElevationStyle:"), elevationStyle)
 	return x
 }
 
+// ElevationStyle wraps the corresponding Objective-C method.
 func (x *MapConfiguration) ElevationStyle() MapElevationStyle {
 	_r := objc.Send[MapElevationStyle](objref.IDOf(x), objc.RegisterName("elevationStyle"))
 	return _r
 }
 
+// SetElevationStyle wraps the corresponding Objective-C method.
 func (x *MapConfiguration) SetElevationStyle(elevationStyle MapElevationStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElevationStyle:"), elevationStyle)
 }
@@ -90,3 +94,10 @@ type MapConfigurationable interface {
 }
 
 var _ MapConfigurationable = (*MapConfiguration)(nil)
+
+// isMapConfiguration marks MapConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the MapConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MapConfiguration) isMapConfiguration() {}
+
+var _ MapConfigurationProvider = (*MapConfiguration)(nil)

@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRContentLauncherClusterStyleInformation is an idiomatic wrapper over the Objective-C class MTRContentLauncherClusterStyleInformation.
+//
+// It embeds [MTRContentLauncherClusterStyleInformationStruct], promoting that type's methods.
 type MTRContentLauncherClusterStyleInformation struct {
-	objref.Handle
+	MTRContentLauncherClusterStyleInformationStruct
 }
 
 // MTRContentLauncherClusterStyleInformationFromID adopts an existing Objective-C object as a MTRContentLauncherClusterStyleInformation
@@ -23,7 +24,8 @@ func MTRContentLauncherClusterStyleInformationFromID(id objc.ID) *MTRContentLaun
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterStyleInformation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRContentLauncherClusterStyleInformation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRContentLauncherClusterStyleInformationAdopt(id objc.ID) *MTRContentLaunc
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterStyleInformation{Handle: objref.Wrap(id)}
+	x := &MTRContentLauncherClusterStyleInformation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRContentLauncherClusterStyleInformation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRContentLauncherClusterStyleInformation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRContentLauncherClusterStyleInformation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRContentLauncherClusterStyleInformation creates a new MTRContentLauncherClusterStyleInformation.
@@ -62,25 +50,25 @@ func NewMTRContentLauncherClusterStyleInformation() *MTRContentLauncherClusterSt
 	return mTRContentLauncherClusterStyleInformationAdopt(_id)
 }
 
-// WithImageURL sets imageURL and returns the receiver so calls can be chained.
+// WithImageURL sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterStyleInformation) WithImageURL(imageURL string) *MTRContentLauncherClusterStyleInformation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageURL:"), purego.NSString(imageURL))
 	return x
 }
 
-// WithImageUrl sets imageUrl and returns the receiver so calls can be chained.
+// WithImageUrl sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterStyleInformation) WithImageUrl(imageUrl string) *MTRContentLauncherClusterStyleInformation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageUrl:"), purego.NSString(imageUrl))
 	return x
 }
 
-// WithColor sets color and returns the receiver so calls can be chained.
+// WithColor sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterStyleInformation) WithColor(color string) *MTRContentLauncherClusterStyleInformation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), purego.NSString(color))
 	return x
 }
 
-// WithSize sets size and returns the receiver so calls can be chained.
+// WithSize sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterStyleInformation) WithSize(size MTRContentLauncherClusterDimensionStructProvider) *MTRContentLauncherClusterStyleInformation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), objref.IDOf(size))
 	return x
@@ -96,3 +84,5 @@ type MTRContentLauncherClusterStyleInformationable interface {
 }
 
 var _ MTRContentLauncherClusterStyleInformationable = (*MTRContentLauncherClusterStyleInformation)(nil)
+
+var _ MTRContentLauncherClusterStyleInformationStructProvider = (*MTRContentLauncherClusterStyleInformation)(nil)

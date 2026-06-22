@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a parameter event on a music track’s destination.
-//
 // ParameterEvent is an idiomatic wrapper over the Objective-C class AVParameterEvent.
+//
+// It embeds [MusicEvent], promoting that type's methods.
+//
+// An object that represents a parameter event on a music track’s destination.
 type ParameterEvent struct {
-	objref.Handle
+	MusicEvent
 }
 
 // ParameterEventFromID adopts an existing Objective-C object as a ParameterEvent
@@ -25,7 +26,8 @@ func ParameterEventFromID(id objc.ID) *ParameterEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &ParameterEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ParameterEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,99 +40,83 @@ func parameterEventAdopt(id objc.ID) *ParameterEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &ParameterEvent{Handle: objref.Wrap(id)}
+	x := &ParameterEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ParameterEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ParameterEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ParameterEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates an event with a parameter identifier, scope, element, and value for the parameter to set.
-//
-// NewParameterEventWithParameterIDScopeElementValue creates a new ParameterEvent.
+// NewParameterEventWithParameterIDScopeElementValue creates an event with a parameter identifier, scope, element, and value for the parameter to set.
 func NewParameterEventWithParameterIDScopeElementValue(parameterID int, scope int, element int, value float32) *ParameterEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVParameterEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParameterID:scope:element:value:"), parameterID, scope, element, value)
 	return parameterEventAdopt(_id)
 }
 
-// The identifier of the parameter.
-//
-// WithParameterID sets parameterID and returns the receiver so calls can be chained.
+// WithParameterID the identifier of the parameter.
 func (x *ParameterEvent) WithParameterID(parameterID int) *ParameterEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParameterID:"), parameterID)
 	return x
 }
 
-// The audio unit scope for the parameter.
-//
-// WithScope sets scope and returns the receiver so calls can be chained.
+// WithScope the audio unit scope for the parameter.
 func (x *ParameterEvent) WithScope(scope int) *ParameterEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScope:"), scope)
 	return x
 }
 
-// The element index in the scope.
-//
-// WithElement sets element and returns the receiver so calls can be chained.
+// WithElement the element index in the scope.
 func (x *ParameterEvent) WithElement(element int) *ParameterEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElement:"), element)
 	return x
 }
 
-// The value of the parameter to set.
-//
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue the value of the parameter to set.
 func (x *ParameterEvent) WithValue(value float32) *ParameterEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 	return x
 }
 
+// ParameterID wraps the corresponding Objective-C method.
 func (x *ParameterEvent) ParameterID() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("parameterID"))
 	return _r
 }
 
+// SetParameterID wraps the corresponding Objective-C method.
 func (x *ParameterEvent) SetParameterID(parameterID int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParameterID:"), parameterID)
 }
 
+// Scope wraps the corresponding Objective-C method.
 func (x *ParameterEvent) Scope() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("scope"))
 	return _r
 }
 
+// SetScope wraps the corresponding Objective-C method.
 func (x *ParameterEvent) SetScope(scope int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScope:"), scope)
 }
 
+// Element wraps the corresponding Objective-C method.
 func (x *ParameterEvent) Element() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("element"))
 	return _r
 }
 
+// SetElement wraps the corresponding Objective-C method.
 func (x *ParameterEvent) SetElement(element int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElement:"), element)
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *ParameterEvent) Value() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("value"))
 	return _r
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *ParameterEvent) SetValue(value float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 }
@@ -153,3 +139,5 @@ type ParameterEventable interface {
 }
 
 var _ ParameterEventable = (*ParameterEvent)(nil)
+
+var _ MusicEventProvider = (*ParameterEvent)(nil)

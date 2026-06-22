@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a universal link to share by any number of contacts in one or more conversations.
-//
 // Highlight is an idiomatic wrapper over the Objective-C class SWHighlight.
+//
+// Highlight is an abstract base — you do not construct it directly. Construct one of [CollaborationHighlight] and pass it where a Highlight is accepted.
+//
+// An object that represents a universal link to share by any number of contacts in one or more conversations.
 type Highlight struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func HighlightFromID(id objc.ID) *Highlight {
 	if id == 0 {
 		return nil
 	}
-	x := &Highlight{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Highlight{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func highlightAdopt(id objc.ID) *Highlight {
 	if id == 0 {
 		return nil
 	}
-	x := &Highlight{Handle: objref.Wrap(id)}
+	x := &Highlight{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +62,19 @@ func (x *Highlight) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewHighlight creates a new Highlight.
-func NewHighlight() *Highlight {
-	_id := objc.Send[objc.ID](objc.ID(_class("SWHighlight")), objc.RegisterName("new"))
-	return highlightAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Highlight) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The unique identifier for this highlight
+// Identifier the unique identifier for this highlight
 func (x *Highlight) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
-// The surfaced content URL
+// URL the surfaced content URL
 func (x *Highlight) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
@@ -84,3 +88,10 @@ type Highlightable interface {
 }
 
 var _ Highlightable = (*Highlight)(nil)
+
+// isHighlight marks Highlight — and, by embedding promotion, its
+// subclasses — as a member of the Highlight hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Highlight) isHighlight() {}
+
+var _ HighlightProvider = (*Highlight)(nil)

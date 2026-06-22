@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The context of an attempt to fetch changes from the server.
-//
 // SyncEngineFetchChangesContext is an idiomatic wrapper over the Objective-C class CKSyncEngineFetchChangesContext.
+//
+// The context of an attempt to fetch changes from the server.
 type SyncEngineFetchChangesContext struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SyncEngineFetchChangesContextFromID(id objc.ID) *SyncEngineFetchChangesCont
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineFetchChangesContext{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SyncEngineFetchChangesContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func syncEngineFetchChangesContextAdopt(id objc.ID) *SyncEngineFetchChangesConte
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineFetchChangesContext{Handle: objref.Wrap(id)}
+	x := &SyncEngineFetchChangesContext{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *SyncEngineFetchChangesContext) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncEngineFetchChangesContext) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSyncEngineFetchChangesContext creates a new SyncEngineFetchChangesContext.
 func NewSyncEngineFetchChangesContext() *SyncEngineFetchChangesContext {
 	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineFetchChangesContext")), objc.RegisterName("new"))
 	return syncEngineFetchChangesContextAdopt(_id)
 }
 
-// The reason why the sync engine is attempting to fetch changes.
+// Reason the reason why the sync engine is attempting to fetch changes.
 func (x *SyncEngineFetchChangesContext) Reason() SyncEngineSyncReason {
 	_r := objc.Send[SyncEngineSyncReason](objref.IDOf(x), objc.RegisterName("reason"))
 	return _r
 }
 
-// The options being used for this attempt to fetch changes.
+// Options the options being used for this attempt to fetch changes.
 func (x *SyncEngineFetchChangesContext) Options() *SyncEngineFetchChangesOptions {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
 	return SyncEngineFetchChangesOptionsFromID(_r)

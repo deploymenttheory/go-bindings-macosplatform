@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // CNNCrossChannelNormalizationGradientNode is an idiomatic wrapper over the Objective-C class MPSCNNCrossChannelNormalizationGradientNode.
+//
+// It embeds [NNGradientFilterNode], promoting that type's methods.
 type CNNCrossChannelNormalizationGradientNode struct {
-	objref.Handle
+	NNGradientFilterNode
 }
 
 // CNNCrossChannelNormalizationGradientNodeFromID adopts an existing Objective-C object as a CNNCrossChannelNormalizationGradientNode
@@ -23,7 +24,8 @@ func CNNCrossChannelNormalizationGradientNodeFromID(id objc.ID) *CNNCrossChannel
 	if id == 0 {
 		return nil
 	}
-	x := &CNNCrossChannelNormalizationGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNCrossChannelNormalizationGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func cNNCrossChannelNormalizationGradientNodeAdopt(id objc.ID) *CNNCrossChannelN
 	if id == 0 {
 		return nil
 	}
-	x := &CNNCrossChannelNormalizationGradientNode{Handle: objref.Wrap(id)}
+	x := &CNNCrossChannelNormalizationGradientNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNCrossChannelNormalizationGradientNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNCrossChannelNormalizationGradientNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNCrossChannelNormalizationGradientNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNCrossChannelNormalizationGradientNodeWithSourceGradientSourceImageGradientStateKernelSize creates a new CNNCrossChannelNormalizationGradientNode.
@@ -63,14 +51,13 @@ func NewCNNCrossChannelNormalizationGradientNodeWithSourceGradientSourceImageGra
 	return cNNCrossChannelNormalizationGradientNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNCrossChannelNormalizationGradientNode) WithLabel(label string) *CNNCrossChannelNormalizationGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// KernelSize wraps the corresponding Objective-C method.
 func (x *CNNCrossChannelNormalizationGradientNode) KernelSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelSize"))
 	return _r
@@ -84,3 +71,7 @@ type CNNCrossChannelNormalizationGradientNodeable interface {
 }
 
 var _ CNNCrossChannelNormalizationGradientNodeable = (*CNNCrossChannelNormalizationGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*CNNCrossChannelNormalizationGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNCrossChannelNormalizationGradientNode)(nil)

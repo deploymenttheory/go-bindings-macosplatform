@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of options affecting the delivery of underlying asset data that you request from the asset resource manager.
-//
 // AssetResourceRequestOptions is an idiomatic wrapper over the Objective-C class PHAssetResourceRequestOptions.
+//
+// A set of options affecting the delivery of underlying asset data that you request from the asset resource manager.
 type AssetResourceRequestOptions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetResourceRequestOptionsFromID(id objc.ID) *AssetResourceRequestOptions 
 	if id == 0 {
 		return nil
 	}
-	x := &AssetResourceRequestOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetResourceRequestOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetResourceRequestOptionsAdopt(id objc.ID) *AssetResourceRequestOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetResourceRequestOptions{Handle: objref.Wrap(id)}
+	x := &AssetResourceRequestOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,42 @@ func (x *AssetResourceRequestOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetResourceRequestOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetResourceRequestOptions creates a new AssetResourceRequestOptions.
 func NewAssetResourceRequestOptions() *AssetResourceRequestOptions {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHAssetResourceRequestOptions")), objc.RegisterName("new"))
 	return assetResourceRequestOptionsAdopt(_id)
 }
 
-// A Boolean value that specifies whether Photos can download the requested asset resource data from iCloud.
-//
-// WithNetworkAccessAllowed sets networkAccessAllowed and returns the receiver so calls can be chained.
+// WithNetworkAccessAllowed a Boolean value that specifies whether Photos can download the requested asset resource data from iCloud.
 func (x *AssetResourceRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bool) *AssetResourceRequestOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
 	return x
 }
 
-// A block that Photos calls periodically while downloading the asset resource data.
-//
-// WithProgressHandler sets progressHandler and returns the receiver so calls can be chained.
+// WithProgressHandler a block that Photos calls periodically while downloading the asset resource data.
 func (x *AssetResourceRequestOptions) WithProgressHandler(progressHandler func(float64)) *AssetResourceRequestOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressHandler:"), progressHandler)
 	return x
 }
 
+// IsNetworkAccessAllowed wraps the corresponding Objective-C method.
 func (x *AssetResourceRequestOptions) IsNetworkAccessAllowed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNetworkAccessAllowed"))
 	return _r
 }
 
+// SetNetworkAccessAllowed wraps the corresponding Objective-C method.
 func (x *AssetResourceRequestOptions) SetNetworkAccessAllowed(networkAccessAllowed bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
 }
 
+// SetProgressHandler wraps the corresponding Objective-C method.
 func (x *AssetResourceRequestOptions) SetProgressHandler(progressHandler func(float64)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressHandler:"), progressHandler)
 }

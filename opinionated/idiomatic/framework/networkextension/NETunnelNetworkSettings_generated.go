@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The configuration for a tunnel provider’s virtual interface.
-//
 // NETunnelNetworkSettings is an idiomatic wrapper over the Objective-C class NETunnelNetworkSettings.
+//
+// NETunnelNetworkSettings is an abstract base — you do not construct it directly. Construct one of [NEPacketTunnelNetworkSettings], [NETransparentProxyNetworkSettings] and pass it where a NETunnelNetworkSettings is accepted.
+//
+// The configuration for a tunnel provider’s virtual interface.
 type NETunnelNetworkSettings struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func NETunnelNetworkSettingsFromID(id objc.ID) *NETunnelNetworkSettings {
 	if id == 0 {
 		return nil
 	}
-	x := &NETunnelNetworkSettings{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NETunnelNetworkSettings{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func nETunnelNetworkSettingsAdopt(id objc.ID) *NETunnelNetworkSettings {
 	if id == 0 {
 		return nil
 	}
-	x := &NETunnelNetworkSettings{Handle: objref.Wrap(id)}
+	x := &NETunnelNetworkSettings{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,32 +62,32 @@ func (x *NETunnelNetworkSettings) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize a NETunnelNetworkSettings object.
-//
-// NewNETunnelNetworkSettingsWithTunnelRemoteAddress creates a new NETunnelNetworkSettings.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NETunnelNetworkSettings) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNETunnelNetworkSettingsWithTunnelRemoteAddress initialize a NETunnelNetworkSettings object.
 func NewNETunnelNetworkSettingsWithTunnelRemoteAddress(address string) *NETunnelNetworkSettings {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NETunnelNetworkSettings")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTunnelRemoteAddress:"), purego.NSString(address))
 	return nETunnelNetworkSettingsAdopt(_id)
 }
 
-// The tunnel DNS settings.
-//
-// WithDNSSettings sets dNSSettings and returns the receiver so calls can be chained.
+// WithDNSSettings the tunnel DNS settings.
 func (x *NETunnelNetworkSettings) WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NETunnelNetworkSettings {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSSettings:"), objref.IDOf(dNSSettings))
 	return x
 }
 
-// The tunnel HTTP proxy settings.
-//
-// WithProxySettings sets proxySettings and returns the receiver so calls can be chained.
+// WithProxySettings the tunnel HTTP proxy settings.
 func (x *NETunnelNetworkSettings) WithProxySettings(proxySettings *NEProxySettings) *NETunnelNetworkSettings {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProxySettings:"), objref.IDOf(proxySettings))
 	return x
 }
 
-// A string containing the IP address of the remote endpoint that is providing the tunnel service.
+// TunnelRemoteAddress a string containing the IP address of the remote endpoint that is providing the tunnel service.
 func (x *NETunnelNetworkSettings) TunnelRemoteAddress() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tunnelRemoteAddress"))
 	if _r == 0 {
@@ -92,22 +96,24 @@ func (x *NETunnelNetworkSettings) TunnelRemoteAddress() string {
 	return purego.GoString(_r)
 }
 
-// An NEDNSSettings object that contains the desired tunnel DNS settings.
+// DNSSettings an NEDNSSettings object that contains the desired tunnel DNS settings.
 func (x *NETunnelNetworkSettings) DNSSettings() *NEDNSSettings {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("DNSSettings"))
 	return NEDNSSettingsFromID(_r)
 }
 
+// SetDNSSettings wraps the corresponding Objective-C method.
 func (x *NETunnelNetworkSettings) SetDNSSettings(dNSSettings *NEDNSSettings) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSSettings:"), objref.IDOf(dNSSettings))
 }
 
-// An NEProxySettings object that contains the desired tunnel proxy settings.
+// ProxySettings an NEProxySettings object that contains the desired tunnel proxy settings.
 func (x *NETunnelNetworkSettings) ProxySettings() *NEProxySettings {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("proxySettings"))
 	return NEProxySettingsFromID(_r)
 }
 
+// SetProxySettings wraps the corresponding Objective-C method.
 func (x *NETunnelNetworkSettings) SetProxySettings(proxySettings *NEProxySettings) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProxySettings:"), objref.IDOf(proxySettings))
 }
@@ -125,3 +131,10 @@ type NETunnelNetworkSettingsable interface {
 }
 
 var _ NETunnelNetworkSettingsable = (*NETunnelNetworkSettings)(nil)
+
+// isNETunnelNetworkSettings marks NETunnelNetworkSettings — and, by embedding promotion, its
+// subclasses — as a member of the NETunnelNetworkSettings hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NETunnelNetworkSettings) isNETunnelNetworkSettings() {}
+
+var _ NETunnelNetworkSettingsProvider = (*NETunnelNetworkSettings)(nil)

@@ -23,7 +23,8 @@ func TransformScaleOpFromID(id objc.ID) *TransformScaleOp {
 	if id == 0 {
 		return nil
 	}
-	x := &TransformScaleOp{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TransformScaleOp{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func transformScaleOpAdopt(id objc.ID) *TransformScaleOp {
 	if id == 0 {
 		return nil
 	}
-	x := &TransformScaleOp{Handle: objref.Wrap(id)}
+	x := &TransformScaleOp{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,12 +58,19 @@ func (x *TransformScaleOp) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TransformScaleOp) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTransformScaleOp creates a new TransformScaleOp.
 func NewTransformScaleOp() *TransformScaleOp {
 	_id := objc.Send[objc.ID](objc.ID(_class("MDLTransformScaleOp")), objc.RegisterName("new"))
 	return transformScaleOpAdopt(_id)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *TransformScaleOp) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -70,6 +79,7 @@ func (x *TransformScaleOp) Name() string {
 	return purego.GoString(_r)
 }
 
+// AnimatedValue wraps the corresponding Objective-C method.
 func (x *TransformScaleOp) AnimatedValue() *AnimatedVector3 {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animatedValue"))
 	return AnimatedVector3FromID(_r)

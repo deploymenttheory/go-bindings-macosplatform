@@ -23,7 +23,8 @@ func PredicateFromID(id objc.ID) *Predicate {
 	if id == 0 {
 		return nil
 	}
-	x := &Predicate{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Predicate{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func predicateAdopt(id objc.ID) *Predicate {
 	if id == 0 {
 		return nil
 	}
-	x := &Predicate{Handle: objref.Wrap(id)}
+	x := &Predicate{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,13 +58,19 @@ func (x *Predicate) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Predicate) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPredicate creates a new Predicate.
 func NewPredicate() *Predicate {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSPredicate")), objc.RegisterName("new"))
 	return predicateAdopt(_id)
 }
 
-// Location of the predicate in bytes, must be multiple of four. If the uint32_t value stored at this location in
+// PredicateOffset location of the predicate in bytes, must be multiple of four. If the uint32_t value stored at this location in
 func (x *Predicate) PredicateOffset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("predicateOffset"))
 	return _r

@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// A snapshot of a file at a specific point in time.
-//
 // FileVersion is an idiomatic wrapper over the Objective-C class NSFileVersion.
+//
+// A snapshot of a file at a specific point in time.
 type FileVersion struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func FileVersionFromID(id objc.ID) *FileVersion {
 	if id == 0 {
 		return nil
 	}
-	x := &FileVersion{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FileVersion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func fileVersionAdopt(id objc.ID) *FileVersion {
 	if id == 0 {
 		return nil
 	}
-	x := &FileVersion{Handle: objref.Wrap(id)}
+	x := &FileVersion{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,36 +62,38 @@ func (x *FileVersion) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FileVersion) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFileVersion creates a new FileVersion.
 func NewFileVersion() *FileVersion {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSFileVersion")), objc.RegisterName("new"))
 	return fileVersionAdopt(_id)
 }
 
-// A Boolean value that indicates if the version object is in conflict or not.
-//
-// WithResolved sets resolved and returns the receiver so calls can be chained.
+// WithResolved a Boolean value that indicates if the version object is in conflict or not.
 func (x *FileVersion) WithResolved(resolved bool) *FileVersion {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolved:"), resolved)
 	return x
 }
 
-// A Boolean value that specifies whether the system can delete the associated file at some future time.
-//
-// WithDiscardable sets discardable and returns the receiver so calls can be chained.
+// WithDiscardable a Boolean value that specifies whether the system can delete the associated file at some future time.
 func (x *FileVersion) WithDiscardable(discardable bool) *FileVersion {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiscardable:"), discardable)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *FileVersion) WithScriptingProperties(scriptingProperties obj.Object) *FileVersion {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Replace the contents of the specified file with the contents of the current version’s file.
-func (x *FileVersion) ReplaceItemAtURLOptionsError(url string, options FileVersionReplacingOptions) (*URL, error) {
+// ReplaceItemAtURLOptionsError replace the contents of the specified file with the contents of the current version’s file.
+func (x *FileVersion) ReplaceItemAtURLOptionsError(url string, options FileVersionReplacingOptions) (result *URL, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceItemAtURL:options:error:"), rt.FileURL(url), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -98,7 +102,7 @@ func (x *FileVersion) ReplaceItemAtURLOptionsError(url string, options FileVersi
 	return URLFromID(_r), nil
 }
 
-// Remove this version object and its associated file from the version store.
+// RemoveAndReturnError remove this version object and its associated file from the version store.
 //
 // RemoveAndReturnError returns an error if the operation did not succeed.
 func (x *FileVersion) RemoveAndReturnError() error {
@@ -110,11 +114,13 @@ func (x *FileVersion) RemoveAndReturnError() error {
 	return nil
 }
 
+// URL wraps the corresponding Objective-C method.
 func (x *FileVersion) URL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return URLFromID(_r)
 }
 
+// LocalizedName wraps the corresponding Objective-C method.
 func (x *FileVersion) LocalizedName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
 	if _r == 0 {
@@ -123,6 +129,7 @@ func (x *FileVersion) LocalizedName() string {
 	return purego.GoString(_r)
 }
 
+// LocalizedNameOfSavingComputer wraps the corresponding Objective-C method.
 func (x *FileVersion) LocalizedNameOfSavingComputer() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedNameOfSavingComputer"))
 	if _r == 0 {
@@ -131,44 +138,53 @@ func (x *FileVersion) LocalizedNameOfSavingComputer() string {
 	return purego.GoString(_r)
 }
 
+// OriginatorNameComponents wraps the corresponding Objective-C method.
 func (x *FileVersion) OriginatorNameComponents() *PersonNameComponents {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originatorNameComponents"))
 	return PersonNameComponentsFromID(_r)
 }
 
+// ModificationDate wraps the corresponding Objective-C method.
 func (x *FileVersion) ModificationDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modificationDate"))
 	return DateFromID(_r)
 }
 
+// IsConflict wraps the corresponding Objective-C method.
 func (x *FileVersion) IsConflict() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConflict"))
 	return _r
 }
 
+// IsResolved wraps the corresponding Objective-C method.
 func (x *FileVersion) IsResolved() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isResolved"))
 	return _r
 }
 
+// SetResolved wraps the corresponding Objective-C method.
 func (x *FileVersion) SetResolved(resolved bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolved:"), resolved)
 }
 
+// IsDiscardable wraps the corresponding Objective-C method.
 func (x *FileVersion) IsDiscardable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDiscardable"))
 	return _r
 }
 
+// SetDiscardable wraps the corresponding Objective-C method.
 func (x *FileVersion) SetDiscardable(discardable bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiscardable:"), discardable)
 }
 
+// HasLocalContents wraps the corresponding Objective-C method.
 func (x *FileVersion) HasLocalContents() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasLocalContents"))
 	return _r
 }
 
+// HasThumbnail wraps the corresponding Objective-C method.
 func (x *FileVersion) HasThumbnail() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasThumbnail"))
 	return _r
@@ -180,7 +196,7 @@ type FileVersionable interface {
 	WithResolved(resolved bool) *FileVersion
 	WithDiscardable(discardable bool) *FileVersion
 	WithScriptingProperties(scriptingProperties obj.Object) *FileVersion
-	ReplaceItemAtURLOptionsError(url string, options FileVersionReplacingOptions) (*URL, error)
+	ReplaceItemAtURLOptionsError(url string, options FileVersionReplacingOptions) (result *URL, err error)
 	RemoveAndReturnError() error
 	URL() *URL
 	LocalizedName() string

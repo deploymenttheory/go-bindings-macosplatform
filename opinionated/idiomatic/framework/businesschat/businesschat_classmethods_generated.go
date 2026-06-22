@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Open the chat transcript configured for a given business.
+// OpenTranscriptIntentParameters open the chat transcript configured for a given business.
 func OpenTranscriptIntentParameters(businessIdentifier string, intentParameters obj.Object) {
 	objc.Send[objc.ID](objc.ID(_class("BCChatAction")), objc.RegisterName("openTranscript:intentParameters:"), purego.NSString(businessIdentifier), objref.IDOf(intentParameters))
 }

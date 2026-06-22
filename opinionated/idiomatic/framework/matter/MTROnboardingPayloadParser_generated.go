@@ -23,7 +23,8 @@ func MTROnboardingPayloadParserFromID(id objc.ID) *MTROnboardingPayloadParser {
 	if id == 0 {
 		return nil
 	}
-	x := &MTROnboardingPayloadParser{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTROnboardingPayloadParser{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTROnboardingPayloadParserAdopt(id objc.ID) *MTROnboardingPayloadParser {
 	if id == 0 {
 		return nil
 	}
-	x := &MTROnboardingPayloadParser{Handle: objref.Wrap(id)}
+	x := &MTROnboardingPayloadParser{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *MTROnboardingPayloadParser) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MTROnboardingPayloadParser) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTROnboardingPayloadParser) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMTROnboardingPayloadParser creates a new MTROnboardingPayloadParser.

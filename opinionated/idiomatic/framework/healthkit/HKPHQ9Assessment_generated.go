@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // PHQ9Assessment is an idiomatic wrapper over the Objective-C class HKPHQ9Assessment.
+//
+// It embeds [ScoredAssessment], promoting that type's methods.
 type PHQ9Assessment struct {
-	objref.Handle
+	ScoredAssessment
 }
 
 // PHQ9AssessmentFromID adopts an existing Objective-C object as a PHQ9Assessment
@@ -23,7 +24,8 @@ func PHQ9AssessmentFromID(id objc.ID) *PHQ9Assessment {
 	if id == 0 {
 		return nil
 	}
-	x := &PHQ9Assessment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PHQ9Assessment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func pHQ9AssessmentAdopt(id objc.ID) *PHQ9Assessment {
 	if id == 0 {
 		return nil
 	}
-	x := &PHQ9Assessment{Handle: objref.Wrap(id)}
+	x := &PHQ9Assessment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PHQ9Assessment) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PHQ9Assessment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PHQ9Assessment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPHQ9Assessment creates a new PHQ9Assessment.
@@ -62,7 +50,7 @@ func NewPHQ9Assessment() *PHQ9Assessment {
 	return pHQ9AssessmentAdopt(_id)
 }
 
-// Answers on the PHQ-9 assessment. There are exactly 9 answers, one for each multiple choice question. Each answer is of type `HKPHQ9AssessmentAnswer`. If the 9th question was unanswered,  the answer is `HKPHQ9AssessmentAnswerPreferNotToAnswer`.
+// Answers answers on the PHQ-9 assessment. There are exactly 9 answers, one for each multiple choice question. Each answer is of type `HKPHQ9AssessmentAnswer`. If the 9th question was unanswered,  the answer is `HKPHQ9AssessmentAnswerPreferNotToAnswer`.
 //
 // Answers returns the collection as a Go slice.
 func (x *PHQ9Assessment) Answers() []obj.Object {
@@ -70,7 +58,7 @@ func (x *PHQ9Assessment) Answers() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The risk determined by the score on a PHQ-9 assessment.
+// Risk the risk determined by the score on a PHQ-9 assessment.
 func (x *PHQ9Assessment) Risk() PHQ9AssessmentRisk {
 	_r := objc.Send[PHQ9AssessmentRisk](objref.IDOf(x), objc.RegisterName("risk"))
 	return _r
@@ -84,3 +72,9 @@ type PHQ9Assessmentable interface {
 }
 
 var _ PHQ9Assessmentable = (*PHQ9Assessment)(nil)
+
+var _ ScoredAssessmentProvider = (*PHQ9Assessment)(nil)
+
+var _ SampleProvider = (*PHQ9Assessment)(nil)
+
+var _ ObjectProvider = (*PHQ9Assessment)(nil)

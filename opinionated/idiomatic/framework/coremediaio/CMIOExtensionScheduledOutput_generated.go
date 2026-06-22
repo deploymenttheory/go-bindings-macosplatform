@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents scheduled output.
-//
 // ExtensionScheduledOutput is an idiomatic wrapper over the Objective-C class CMIOExtensionScheduledOutput.
+//
+// An object that represents scheduled output.
 type ExtensionScheduledOutput struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ExtensionScheduledOutputFromID(id objc.ID) *ExtensionScheduledOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionScheduledOutput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExtensionScheduledOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func extensionScheduledOutputAdopt(id objc.ID) *ExtensionScheduledOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionScheduledOutput{Handle: objref.Wrap(id)}
+	x := &ExtensionScheduledOutput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,26 @@ func (x *ExtensionScheduledOutput) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a scheduled output object.
-//
-// NewExtensionScheduledOutputWithSequenceNumberHostTimeInNanoseconds creates a new ExtensionScheduledOutput.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExtensionScheduledOutput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewExtensionScheduledOutputWithSequenceNumberHostTimeInNanoseconds creates a scheduled output object.
 func NewExtensionScheduledOutputWithSequenceNumberHostTimeInNanoseconds(sequenceNumber uint64, hostTimeInNanoseconds uint64) *ExtensionScheduledOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionScheduledOutput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSequenceNumber:hostTimeInNanoseconds:"), sequenceNumber, hostTimeInNanoseconds)
 	return extensionScheduledOutputAdopt(_id)
 }
 
-// The buffer sequence number that was output.
+// SequenceNumber the buffer sequence number that was output.
 func (x *ExtensionScheduledOutput) SequenceNumber() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("sequenceNumber"))
 	return _r
 }
 
-// The host time in nanoseconds when the buffer was output.
+// HostTimeInNanoseconds the host time in nanoseconds when the buffer was output.
 func (x *ExtensionScheduledOutput) HostTimeInNanoseconds() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("hostTimeInNanoseconds"))
 	return _r

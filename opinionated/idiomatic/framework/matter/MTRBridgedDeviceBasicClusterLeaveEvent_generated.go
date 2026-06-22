@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBridgedDeviceBasicClusterLeaveEvent is an idiomatic wrapper over the Objective-C class MTRBridgedDeviceBasicClusterLeaveEvent.
+//
+// It embeds [MTRBridgedDeviceBasicInformationClusterLeaveEvent], promoting that type's methods.
 type MTRBridgedDeviceBasicClusterLeaveEvent struct {
-	objref.Handle
+	MTRBridgedDeviceBasicInformationClusterLeaveEvent
 }
 
 // MTRBridgedDeviceBasicClusterLeaveEventFromID adopts an existing Objective-C object as a MTRBridgedDeviceBasicClusterLeaveEvent
@@ -23,7 +24,8 @@ func MTRBridgedDeviceBasicClusterLeaveEventFromID(id objc.ID) *MTRBridgedDeviceB
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBridgedDeviceBasicClusterLeaveEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBridgedDeviceBasicClusterLeaveEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRBridgedDeviceBasicClusterLeaveEventAdopt(id objc.ID) *MTRBridgedDeviceBa
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBridgedDeviceBasicClusterLeaveEvent{Handle: objref.Wrap(id)}
+	x := &MTRBridgedDeviceBasicClusterLeaveEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRBridgedDeviceBasicClusterLeaveEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBridgedDeviceBasicClusterLeaveEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBridgedDeviceBasicClusterLeaveEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRBridgedDeviceBasicClusterLeaveEvent creates a new MTRBridgedDeviceBasicClusterLeaveEvent.
@@ -68,3 +56,5 @@ type MTRBridgedDeviceBasicClusterLeaveEventable interface {
 }
 
 var _ MTRBridgedDeviceBasicClusterLeaveEventable = (*MTRBridgedDeviceBasicClusterLeaveEvent)(nil)
+
+var _ MTRBridgedDeviceBasicInformationClusterLeaveEventProvider = (*MTRBridgedDeviceBasicClusterLeaveEvent)(nil)

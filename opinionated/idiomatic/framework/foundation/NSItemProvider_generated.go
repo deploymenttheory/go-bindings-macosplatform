@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An item provider for conveying data or a file between processes during drag-and-drop or copy-and-paste activities, or from a host app to an app extension.
-//
 // ItemProvider is an idiomatic wrapper over the Objective-C class NSItemProvider.
+//
+// An item provider for conveying data or a file between processes during drag-and-drop or copy-and-paste activities, or from a host app to an app extension.
 type ItemProvider struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ItemProviderFromID(id objc.ID) *ItemProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &ItemProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ItemProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func itemProviderAdopt(id objc.ID) *ItemProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &ItemProvider{Handle: objref.Wrap(id)}
+	x := &ItemProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,59 +60,64 @@ func (x *ItemProvider) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ItemProvider) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewItemProvider creates a new ItemProvider.
 func NewItemProvider() *ItemProvider {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSItemProvider")), objc.RegisterName("new"))
 	return itemProviderAdopt(_id)
 }
 
-// Provides data-backed content from an existing file.
-//
-// NewItemProviderWithContentsOfURL creates a new ItemProvider.
+// NewItemProviderWithContentsOfURL provides data-backed content from an existing file.
 func NewItemProviderWithContentsOfURL(fileURL string) *ItemProvider {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSItemProvider")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), rt.FileURL(fileURL))
 	return itemProviderAdopt(_id)
 }
 
-// The filename to use when writing the provided data to a file on disk.
-//
-// WithSuggestedName sets suggestedName and returns the receiver so calls can be chained.
+// WithSuggestedName the filename to use when writing the provided data to a file on disk.
 func (x *ItemProvider) WithSuggestedName(suggestedName StringProvider) *ItemProvider {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedName:"), objref.IDOf(suggestedName))
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *ItemProvider) WithScriptingProperties(scriptingProperties obj.Object) *ItemProvider {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Returns an array with a subset of type identifiers for the item provider, according to the specified file options, in the same order they were registered.
+// RegisteredTypeIdentifiersWithFileOptions returns an array with a subset of type identifiers for the item provider, according to the specified file options, in the same order they were registered.
 func (x *ItemProvider) RegisteredTypeIdentifiersWithFileOptions(fileOptions ItemProviderFileOptions) []string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registeredTypeIdentifiersWithFileOptions:"), fileOptions)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Returns a Boolean value indicating whether an item provider contains a data representation conforming to a specified universal type identifier file options parameter with a value of zero.
+// HasItemConformingToTypeIdentifier returns a Boolean value indicating whether an item provider contains a data representation conforming to a specified universal type identifier file options parameter with a value of zero.
 func (x *ItemProvider) HasItemConformingToTypeIdentifier(typeIdentifier string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasItemConformingToTypeIdentifier:"), purego.NSString(typeIdentifier))
 	return _r
 }
 
-// Returns a Boolean value indicating whether an item provider contains a data representation conforming to a specified universal type identifier and to specified open-in-place behavior.
+// HasRepresentationConformingToTypeIdentifierFileOptions returns a Boolean value indicating whether an item provider contains a data representation conforming to a specified universal type identifier and to specified open-in-place behavior.
 func (x *ItemProvider) HasRepresentationConformingToTypeIdentifierFileOptions(typeIdentifier string, fileOptions ItemProviderFileOptions) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasRepresentationConformingToTypeIdentifier:fileOptions:"), purego.NSString(typeIdentifier), fileOptions)
 	return _r
 }
 
+// RegisteredTypeIdentifiers wraps the corresponding Objective-C method.
+//
 // RegisteredTypeIdentifiers returns the collection as a Go slice.
 func (x *ItemProvider) RegisteredTypeIdentifiers() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registeredTypeIdentifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SuggestedName wraps the corresponding Objective-C method.
 func (x *ItemProvider) SuggestedName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suggestedName"))
 	if _r == 0 {
@@ -119,6 +126,7 @@ func (x *ItemProvider) SuggestedName() string {
 	return purego.GoString(_r)
 }
 
+// SetSuggestedName wraps the corresponding Objective-C method.
 func (x *ItemProvider) SetSuggestedName(suggestedName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedName:"), purego.NSString(suggestedName))
 }

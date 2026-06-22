@@ -6,17 +6,19 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A neuron activation kernel that operates on matrices.
-//
 // MatrixNeuron is an idiomatic wrapper over the Objective-C class MPSMatrixNeuron.
+//
+// It embeds [MatrixUnaryKernel], promoting that type's methods.
+//
+// A neuron activation kernel that operates on matrices.
 type MatrixNeuron struct {
-	objref.Handle
+	MatrixUnaryKernel
 }
 
 // MatrixNeuronFromID adopts an existing Objective-C object as a MatrixNeuron
@@ -25,7 +27,8 @@ func MatrixNeuronFromID(id objc.ID) *MatrixNeuron {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixNeuron{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatrixNeuron{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func matrixNeuronAdopt(id objc.ID) *MatrixNeuron {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixNeuron{Handle: objref.Wrap(id)}
+	x := &MatrixNeuron{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MatrixNeuron) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatrixNeuron) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatrixNeuron) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMatrixNeuron creates a new MatrixNeuron.
@@ -64,103 +53,106 @@ func NewMatrixNeuron() *MatrixNeuron {
 	return matrixNeuronAdopt(_id)
 }
 
-// The number of input vectors which make up the input array.  This is equivalent to the number of rows to consider from the primary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available number of inputs is used.  The value of NSUIntegerMax thus indicates that all available input rows (beginning at sourceMatrixOrigin.x) should be considered.
-//
-// WithSourceNumberOfFeatureVectors sets sourceNumberOfFeatureVectors and returns the receiver so calls can be chained.
+// WithSourceNumberOfFeatureVectors the number of input vectors which make up the input array.  This is equivalent to the number of rows to consider from the primary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available number of inputs is used.  The value of NSUIntegerMax thus indicates that all available input rows (beginning at sourceMatrixOrigin.x) should be considered.
 func (x *MatrixNeuron) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixNeuron {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
 	return x
 }
 
-// The input size to to use in the operation.  This is equivalent to the number of columns in the primary (input array) source matrix to consider and the number of channels to produce for the output matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available input size is used. The value of NSUIntegerMax thus indicates that all available columns in the input array (beginning at sourceMatrixOrigin.y) should be considered. Defines also the number of output feature channels. Note: The value used in the operation will be MIN(inputMatrix.columns - sourceMatrixOrigin.y, sourceInputFeatureChannels)
-//
-// WithSourceInputFeatureChannels sets sourceInputFeatureChannels and returns the receiver so calls can be chained.
+// WithSourceInputFeatureChannels the input size to to use in the operation.  This is equivalent to the number of columns in the primary (input array) source matrix to consider and the number of channels to produce for the output matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available input size is used. The value of NSUIntegerMax thus indicates that all available columns in the input array (beginning at sourceMatrixOrigin.y) should be considered. Defines also the number of output feature channels. Note: The value used in the operation will be MIN(inputMatrix.columns - sourceMatrixOrigin.y, sourceInputFeatureChannels)
 func (x *MatrixNeuron) WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixNeuron {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
 	return x
 }
 
-// The scale factor to apply to the input.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the scale factor to apply to the input.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (x *MatrixNeuron) WithAlpha(alpha float64) *MatrixNeuron {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
-//
-// WithBatchStart sets batchStart and returns the receiver so calls can be chained.
+// WithSourceMatrixOrigin the origin, relative to [0, 0] in the source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixNeuron) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixNeuron {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMatrixOrigin:"), sourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixNeuron) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixNeuron {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
 func (x *MatrixNeuron) WithBatchStart(batchStart int) *MatrixNeuron {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 	return x
 }
 
-// The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
-//
-// WithBatchSize sets batchSize and returns the receiver so calls can be chained.
+// WithBatchSize the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
 func (x *MatrixNeuron) WithBatchSize(batchSize int) *MatrixNeuron {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *MatrixNeuron) WithLabel(label string) *MatrixNeuron {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+// NeuronParameterA getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (x *MatrixNeuron) NeuronParameterA() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterA"))
 	return _r
 }
 
-// Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+// NeuronParameterB getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (x *MatrixNeuron) NeuronParameterB() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterB"))
 	return _r
 }
 
-// Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+// NeuronParameterC getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (x *MatrixNeuron) NeuronParameterC() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterC"))
 	return _r
 }
 
-// Add per output value neuron parameters A for PReLu neuron activation functions. This method sets the neuron to PReLU, zeros parameters A and B and sets the per output value neuron parameters A to an array containing a unique value of A for each output value. If the neuron function is f(v,a,b), it will apply resultMatrix(i, j) = f( input(i, j), A[j], B[j] ) where j in [0, sourceInputFeatureChannels] See https://arxiv.org/pdf/1502.01852.pdf for details. All other neuron types, where parameter A and parameter B are shared across output values must be set using -setNeuronType:parameterA:parameterB:
+// SetNeuronToPReLUWithParametersA add per output value neuron parameters A for PReLu neuron activation functions. This method sets the neuron to PReLU, zeros parameters A and B and sets the per output value neuron parameters A to an array containing a unique value of A for each output value. If the neuron function is f(v,a,b), it will apply resultMatrix(i, j) = f( input(i, j), A[j], B[j] ) where j in [0, sourceInputFeatureChannels] See https://arxiv.org/pdf/1502.01852.pdf for details. All other neuron types, where parameter A and parameter B are shared across output values must be set using -setNeuronType:parameterA:parameterB:
 func (x *MatrixNeuron) SetNeuronToPReLUWithParametersA(a obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeuronToPReLUWithParametersA:"), objref.IDOf(a))
 }
 
-// The number of input vectors which make up the input array.  This is equivalent to the number of rows to consider from the primary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available number of inputs is used.  The value of NSUIntegerMax thus indicates that all available input rows (beginning at sourceMatrixOrigin.x) should be considered.
+// SourceNumberOfFeatureVectors the number of input vectors which make up the input array.  This is equivalent to the number of rows to consider from the primary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available number of inputs is used.  The value of NSUIntegerMax thus indicates that all available input rows (beginning at sourceMatrixOrigin.x) should be considered.
 func (x *MatrixNeuron) SourceNumberOfFeatureVectors() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceNumberOfFeatureVectors"))
 	return _r
 }
 
+// SetSourceNumberOfFeatureVectors wraps the corresponding Objective-C method.
 func (x *MatrixNeuron) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
 }
 
-// The input size to to use in the operation.  This is equivalent to the number of columns in the primary (input array) source matrix to consider and the number of channels to produce for the output matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available input size is used. The value of NSUIntegerMax thus indicates that all available columns in the input array (beginning at sourceMatrixOrigin.y) should be considered. Defines also the number of output feature channels. Note: The value used in the operation will be MIN(inputMatrix.columns - sourceMatrixOrigin.y, sourceInputFeatureChannels)
+// SourceInputFeatureChannels the input size to to use in the operation.  This is equivalent to the number of columns in the primary (input array) source matrix to consider and the number of channels to produce for the output matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available input size is used. The value of NSUIntegerMax thus indicates that all available columns in the input array (beginning at sourceMatrixOrigin.y) should be considered. Defines also the number of output feature channels. Note: The value used in the operation will be MIN(inputMatrix.columns - sourceMatrixOrigin.y, sourceInputFeatureChannels)
 func (x *MatrixNeuron) SourceInputFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceInputFeatureChannels"))
 	return _r
 }
 
+// SetSourceInputFeatureChannels wraps the corresponding Objective-C method.
 func (x *MatrixNeuron) SetSourceInputFeatureChannels(sourceInputFeatureChannels int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
 }
 
-// The scale factor to apply to the input.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+// Alpha the scale factor to apply to the input.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (x *MatrixNeuron) Alpha() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
 	return _r
 }
 
+// SetAlpha wraps the corresponding Objective-C method.
 func (x *MatrixNeuron) SetAlpha(alpha float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }
@@ -171,6 +163,8 @@ type MatrixNeuronable interface {
 	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixNeuron
 	WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixNeuron
 	WithAlpha(alpha float64) *MatrixNeuron
+	WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixNeuron
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixNeuron
 	WithBatchStart(batchStart int) *MatrixNeuron
 	WithBatchSize(batchSize int) *MatrixNeuron
 	WithLabel(label string) *MatrixNeuron
@@ -187,3 +181,7 @@ type MatrixNeuronable interface {
 }
 
 var _ MatrixNeuronable = (*MatrixNeuron)(nil)
+
+var _ MatrixUnaryKernelProvider = (*MatrixNeuron)(nil)
+
+var _ KernelProvider = (*MatrixNeuron)(nil)

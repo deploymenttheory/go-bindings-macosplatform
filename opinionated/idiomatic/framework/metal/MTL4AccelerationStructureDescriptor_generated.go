@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Base class for Metal 4 acceleration structure descriptors.
-//
 // MTL4AccelerationStructureDescriptor is an idiomatic wrapper over the Objective-C class MTL4AccelerationStructureDescriptor.
+//
+// MTL4AccelerationStructureDescriptor is an abstract base — you do not construct it directly. Construct one of [MTL4IndirectInstanceAccelerationStructureDescriptor], [MTL4InstanceAccelerationStructureDescriptor], [MTL4PrimitiveAccelerationStructureDescriptor] and pass it where a MTL4AccelerationStructureDescriptor is accepted.
+//
+// Base class for Metal 4 acceleration structure descriptors.
 type MTL4AccelerationStructureDescriptor struct {
-	objref.Handle
+	AccelerationStructureDescriptor
 }
 
 // MTL4AccelerationStructureDescriptorFromID adopts an existing Objective-C object as a MTL4AccelerationStructureDescriptor
@@ -25,7 +26,8 @@ func MTL4AccelerationStructureDescriptorFromID(id objc.ID) *MTL4AccelerationStru
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4AccelerationStructureDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTL4AccelerationStructureDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,35 +40,13 @@ func mTL4AccelerationStructureDescriptorAdopt(id objc.ID) *MTL4AccelerationStruc
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4AccelerationStructureDescriptor{Handle: objref.Wrap(id)}
+	x := &MTL4AccelerationStructureDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTL4AccelerationStructureDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTL4AccelerationStructureDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTL4AccelerationStructureDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewMTL4AccelerationStructureDescriptor creates a new MTL4AccelerationStructureDescriptor.
-func NewMTL4AccelerationStructureDescriptor() *MTL4AccelerationStructureDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTL4AccelerationStructureDescriptor")), objc.RegisterName("new"))
-	return mTL4AccelerationStructureDescriptorAdopt(_id)
-}
-
-// The options that describe how you intend to use the acceleration structure.
-//
-// WithUsage sets usage and returns the receiver so calls can be chained.
+// WithUsage the options that describe how you intend to use the acceleration structure.
 func (x *MTL4AccelerationStructureDescriptor) WithUsage(usage AccelerationStructureUsage) *MTL4AccelerationStructureDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsage:"), usage)
 	return x
@@ -79,3 +59,12 @@ type MTL4AccelerationStructureDescriptorable interface {
 }
 
 var _ MTL4AccelerationStructureDescriptorable = (*MTL4AccelerationStructureDescriptor)(nil)
+
+// isMTL4AccelerationStructureDescriptor marks MTL4AccelerationStructureDescriptor — and, by embedding promotion, its
+// subclasses — as a member of the MTL4AccelerationStructureDescriptor hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTL4AccelerationStructureDescriptor) isMTL4AccelerationStructureDescriptor() {}
+
+var _ MTL4AccelerationStructureDescriptorProvider = (*MTL4AccelerationStructureDescriptor)(nil)
+
+var _ AccelerationStructureDescriptorProvider = (*MTL4AccelerationStructureDescriptor)(nil)

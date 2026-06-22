@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that can perform multiple matrix copy operations.
-//
 // MatrixCopy is an idiomatic wrapper over the Objective-C class MPSMatrixCopy.
+//
+// It embeds [Kernel], promoting that type's methods.
+//
+// A class that can perform multiple matrix copy operations.
 type MatrixCopy struct {
-	objref.Handle
+	Kernel
 }
 
 // MatrixCopyFromID adopts an existing Objective-C object as a MatrixCopy
@@ -25,7 +26,8 @@ func MatrixCopyFromID(id objc.ID) *MatrixCopy {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixCopy{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatrixCopy{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func matrixCopyAdopt(id objc.ID) *MatrixCopy {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixCopy{Handle: objref.Wrap(id)}
+	x := &MatrixCopy{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MatrixCopy) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatrixCopy) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatrixCopy) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMatrixCopy creates a new MatrixCopy.
@@ -64,33 +52,31 @@ func NewMatrixCopy() *MatrixCopy {
 	return matrixCopyAdopt(_id)
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *MatrixCopy) WithLabel(label string) *MatrixCopy {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The number of rows to copy for each copy operation
+// CopyRows the number of rows to copy for each copy operation
 func (x *MatrixCopy) CopyRows() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("copyRows"))
 	return _r
 }
 
-// The number of columns to copy for each copy operation
+// CopyColumns the number of columns to copy for each copy operation
 func (x *MatrixCopy) CopyColumns() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("copyColumns"))
 	return _r
 }
 
-// If YES, the sources are in row major storage order
+// SourcesAreTransposed if YES, the sources are in row major storage order
 func (x *MatrixCopy) SourcesAreTransposed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sourcesAreTransposed"))
 	return _r
 }
 
-// If YES, the destinations are in row major storage order
+// DestinationsAreTransposed if YES, the destinations are in row major storage order
 func (x *MatrixCopy) DestinationsAreTransposed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("destinationsAreTransposed"))
 	return _r
@@ -107,3 +93,5 @@ type MatrixCopyable interface {
 }
 
 var _ MatrixCopyable = (*MatrixCopy)(nil)
+
+var _ KernelProvider = (*MatrixCopy)(nil)

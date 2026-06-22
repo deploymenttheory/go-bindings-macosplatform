@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A button that allows the user to add or edit a shortcut.
-//
 // AddVoiceShortcutButton is an idiomatic wrapper over the Objective-C class INUIAddVoiceShortcutButton.
+//
+// A button that allows the user to add or edit a shortcut.
 type AddVoiceShortcutButton struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AddVoiceShortcutButtonFromID(id objc.ID) *AddVoiceShortcutButton {
 	if id == 0 {
 		return nil
 	}
-	x := &AddVoiceShortcutButton{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AddVoiceShortcutButton{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func addVoiceShortcutButtonAdopt(id objc.ID) *AddVoiceShortcutButton {
 	if id == 0 {
 		return nil
 	}
-	x := &AddVoiceShortcutButton{Handle: objref.Wrap(id)}
+	x := &AddVoiceShortcutButton{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,63 +60,66 @@ func (x *AddVoiceShortcutButton) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an Add to Siri button with the specified style.
-//
-// NewAddVoiceShortcutButtonWithStyle creates a new AddVoiceShortcutButton.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AddVoiceShortcutButton) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAddVoiceShortcutButtonWithStyle creates an Add to Siri button with the specified style.
 func NewAddVoiceShortcutButtonWithStyle(style AddVoiceShortcutButtonStyle) *AddVoiceShortcutButton {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INUIAddVoiceShortcutButton")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStyle:"), style)
 	return addVoiceShortcutButtonAdopt(_id)
 }
 
-// The button style.
-//
-// WithStyle sets style and returns the receiver so calls can be chained.
+// WithStyle the button style.
 func (x *AddVoiceShortcutButton) WithStyle(style AddVoiceShortcutButtonStyle) *AddVoiceShortcutButton {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 	return x
 }
 
-// The shortcut Siri invokes when the user speaks the invocation phrase.
-//
-// WithShortcut sets shortcut and returns the receiver so calls can be chained.
+// WithShortcut the shortcut Siri invokes when the user speaks the invocation phrase.
 func (x *AddVoiceShortcutButton) WithShortcut(shortcut obj.Object) *AddVoiceShortcutButton {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortcut:"), objref.IDOf(shortcut))
 	return x
 }
 
-// A custom corner radius for the If the provided corner radius is greater than half of the button’s height, it will be capped at half of the button’s height.
-//
-// WithCornerRadius sets cornerRadius and returns the receiver so calls can be chained.
+// WithCornerRadius a custom corner radius for the If the provided corner radius is greater than half of the button’s height, it will be capped at half of the button’s height.
 func (x *AddVoiceShortcutButton) WithCornerRadius(cornerRadius float64) *AddVoiceShortcutButton {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
 	return x
 }
 
+// Style wraps the corresponding Objective-C method.
 func (x *AddVoiceShortcutButton) Style() AddVoiceShortcutButtonStyle {
 	_r := objc.Send[AddVoiceShortcutButtonStyle](objref.IDOf(x), objc.RegisterName("style"))
 	return _r
 }
 
+// SetStyle wraps the corresponding Objective-C method.
 func (x *AddVoiceShortcutButton) SetStyle(style AddVoiceShortcutButtonStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 }
 
+// Shortcut wraps the corresponding Objective-C method.
 func (x *AddVoiceShortcutButton) Shortcut() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shortcut"))
 	return obj.Wrap(_r)
 }
 
+// SetShortcut wraps the corresponding Objective-C method.
 func (x *AddVoiceShortcutButton) SetShortcut(shortcut obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortcut:"), objref.IDOf(shortcut))
 }
 
-// A custom corner radius for the If the provided corner radius is greater than half of the button’s height, it will be capped at half of the button’s height.
+// CornerRadius a custom corner radius for the If the provided corner radius is greater than half of the button’s height, it will be capped at half of the button’s height.
 func (x *AddVoiceShortcutButton) CornerRadius() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("cornerRadius"))
 	return _r
 }
 
+// SetCornerRadius wraps the corresponding Objective-C method.
 func (x *AddVoiceShortcutButton) SetCornerRadius(cornerRadius float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
 }

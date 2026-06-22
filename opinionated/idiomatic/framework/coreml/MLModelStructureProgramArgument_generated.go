@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class representing an argument in the Program.
-//
 // ModelStructureProgramArgument is an idiomatic wrapper over the Objective-C class MLModelStructureProgramArgument.
+//
+// A class representing an argument in the Program.
 type ModelStructureProgramArgument struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ModelStructureProgramArgumentFromID(id objc.ID) *ModelStructureProgramArgum
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructureProgramArgument{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ModelStructureProgramArgument{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func modelStructureProgramArgumentAdopt(id objc.ID) *ModelStructureProgramArgume
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructureProgramArgument{Handle: objref.Wrap(id)}
+	x := &ModelStructureProgramArgument{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,20 @@ func (x *ModelStructureProgramArgument) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ModelStructureProgramArgument) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewModelStructureProgramArgument creates a new ModelStructureProgramArgument.
 func NewModelStructureProgramArgument() *ModelStructureProgramArgument {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLModelStructureProgramArgument")), objc.RegisterName("new"))
 	return modelStructureProgramArgumentAdopt(_id)
 }
 
+// Bindings wraps the corresponding Objective-C method.
+//
 // Bindings returns the collection as a Go slice.
 func (x *ModelStructureProgramArgument) Bindings() []*ModelStructureProgramBinding {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bindings"))

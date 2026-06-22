@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a time range segment of an asset track.
-//
 // AssetTrackSegment is an idiomatic wrapper over the Objective-C class AVAssetTrackSegment.
+//
+// AssetTrackSegment is an abstract base — you do not construct it directly. Construct one of [CompositionTrackSegment] and pass it where a AssetTrackSegment is accepted.
+//
+// An object that represents a time range segment of an asset track.
 type AssetTrackSegment struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func AssetTrackSegmentFromID(id objc.ID) *AssetTrackSegment {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetTrackSegment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetTrackSegment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func assetTrackSegmentAdopt(id objc.ID) *AssetTrackSegment {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetTrackSegment{Handle: objref.Wrap(id)}
+	x := &AssetTrackSegment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +62,13 @@ func (x *AssetTrackSegment) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewAssetTrackSegment creates a new AssetTrackSegment.
-func NewAssetTrackSegment() *AssetTrackSegment {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetTrackSegment")), objc.RegisterName("new"))
-	return assetTrackSegmentAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetTrackSegment) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// IsEmpty wraps the corresponding Objective-C method.
 func (x *AssetTrackSegment) IsEmpty() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEmpty"))
 	return _r
@@ -76,3 +81,10 @@ type AssetTrackSegmentable interface {
 }
 
 var _ AssetTrackSegmentable = (*AssetTrackSegment)(nil)
+
+// isAssetTrackSegment marks AssetTrackSegment — and, by embedding promotion, its
+// subclasses — as a member of the AssetTrackSegment hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AssetTrackSegment) isAssetTrackSegment() {}
+
+var _ AssetTrackSegmentProvider = (*AssetTrackSegment)(nil)

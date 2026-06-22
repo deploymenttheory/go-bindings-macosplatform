@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes the parameter constraints required by a specific configuration of macOS.
-//
 // MacOSConfigurationRequirements is an idiomatic wrapper over the Objective-C class VZMacOSConfigurationRequirements.
+//
+// An object that describes the parameter constraints required by a specific configuration of macOS.
 type MacOSConfigurationRequirements struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MacOSConfigurationRequirementsFromID(id objc.ID) *MacOSConfigurationRequire
 	if id == 0 {
 		return nil
 	}
-	x := &MacOSConfigurationRequirements{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MacOSConfigurationRequirements{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func macOSConfigurationRequirementsAdopt(id objc.ID) *MacOSConfigurationRequirem
 	if id == 0 {
 		return nil
 	}
-	x := &MacOSConfigurationRequirements{Handle: objref.Wrap(id)}
+	x := &MacOSConfigurationRequirements{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *MacOSConfigurationRequirements) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MacOSConfigurationRequirements) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMacOSConfigurationRequirements creates a new MacOSConfigurationRequirements.
 func NewMacOSConfigurationRequirements() *MacOSConfigurationRequirements {
 	_id := objc.Send[objc.ID](objc.ID(_class("VZMacOSConfigurationRequirements")), objc.RegisterName("new"))
 	return macOSConfigurationRequirementsAdopt(_id)
 }
 
-// The hardware model for this configuration. The hardware model can be used to configure a new virtual machine that meets the requirements. Use VZMacPlatformConfiguration.hardwareModel to configure the Mac platform, and -[VZMacAuxiliaryStorage initCreatingStorageAtURL:hardwareModel:options:error:] to create its auxiliary storage.
+// HardwareModel the hardware model for this configuration. The hardware model can be used to configure a new virtual machine that meets the requirements. Use VZMacPlatformConfiguration.hardwareModel to configure the Mac platform, and -[VZMacAuxiliaryStorage initCreatingStorageAtURL:hardwareModel:options:error:] to create its auxiliary storage.
 func (x *MacOSConfigurationRequirements) HardwareModel() *MacHardwareModel {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hardwareModel"))
 	return MacHardwareModelFromID(_r)
 }
 
-// The minimum supported number of CPUs for this configuration. A VZMacOSConfigurationRequirements object is associated with a specific VZMacOSRestoreImage object, and thus a specific macOS configuration. This property specifies the minimum number of CPUs required by the associated macOS configuration. Installing or running the associated configuration of macOS on a virtual machine with fewer than this number of CPUs will result in undefined behavior.
+// MinimumSupportedCPUCount the minimum supported number of CPUs for this configuration. A VZMacOSConfigurationRequirements object is associated with a specific VZMacOSRestoreImage object, and thus a specific macOS configuration. This property specifies the minimum number of CPUs required by the associated macOS configuration. Installing or running the associated configuration of macOS on a virtual machine with fewer than this number of CPUs will result in undefined behavior.
 func (x *MacOSConfigurationRequirements) MinimumSupportedCPUCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumSupportedCPUCount"))
 	return _r
 }
 
-// The minimum supported memory size for this configuration. A VZMacOSConfigurationRequirements object is associated with a specific VZMacOSRestoreImage object, and thus a specific macOS configuration. This property specifies the minimum amount of memory required by the associated macOS configuration. Installing or running the associated configuration of macOS on a virtual machine with less than this amount of memory will result in undefined behavior.
+// MinimumSupportedMemorySize the minimum supported memory size for this configuration. A VZMacOSConfigurationRequirements object is associated with a specific VZMacOSRestoreImage object, and thus a specific macOS configuration. This property specifies the minimum amount of memory required by the associated macOS configuration. Installing or running the associated configuration of macOS on a virtual machine with less than this amount of memory will result in undefined behavior.
 func (x *MacOSConfigurationRequirements) MinimumSupportedMemorySize() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("minimumSupportedMemorySize"))
 	return _r

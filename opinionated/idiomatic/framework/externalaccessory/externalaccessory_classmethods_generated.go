@@ -8,7 +8,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns the shared accessory manager object for the iOS-based device.
+// SharedAccessoryManager returns the shared accessory manager object for the iOS-based device.
 func SharedAccessoryManager() *AccessoryManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("EAAccessoryManager")), objc.RegisterName("sharedAccessoryManager"))
 	return AccessoryManagerFromID(_r)

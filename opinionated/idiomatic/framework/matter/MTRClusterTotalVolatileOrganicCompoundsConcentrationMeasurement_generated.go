@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement is an idiomatic wrapper over the Objective-C class MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementFromID adopts an existing Objective-C object as a MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement
@@ -23,7 +24,8 @@ func MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementFromID(id ob
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,110 +38,110 @@ func mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementAdopt(id obj
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement{Handle: objref.Wrap(id)}
+	x := &MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
-//
-// NewMTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementWithDeviceEndpointIDQueue creates a new MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement.
+// NewMTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func NewMTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementAdopt(_id)
 }
 
+// ReadAttributeMeasuredValueWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeMeasuredValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMinMeasuredValueWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeMinMeasuredValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMaxMeasuredValueWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeMaxMeasuredValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributePeakMeasuredValueWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributePeakMeasuredValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePeakMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributePeakMeasuredValueWindowWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributePeakMeasuredValueWindowWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePeakMeasuredValueWindowWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAverageMeasuredValueWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeAverageMeasuredValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAverageMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAverageMeasuredValueWindowWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeAverageMeasuredValueWindowWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAverageMeasuredValueWindowWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeUncertaintyWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeUncertaintyWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUncertaintyWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMeasurementUnitWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeMeasurementUnitWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasurementUnitWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMeasurementMediumWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeMeasurementMediumWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasurementMediumWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeLevelValueWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeLevelValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLevelValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -167,3 +169,7 @@ type MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementable interfa
 }
 
 var _ MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementable = (*MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement)(nil)

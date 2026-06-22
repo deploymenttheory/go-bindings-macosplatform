@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract superclass for lens specifications.
-//
 // LensSpecification is an idiomatic wrapper over the Objective-C class HKLensSpecification.
+//
+// LensSpecification is an abstract base — you do not construct it directly. Construct one of [ContactsLensSpecification], [GlassesLensSpecification] and pass it where a LensSpecification is accepted.
+//
+// An abstract superclass for lens specifications.
 type LensSpecification struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func LensSpecificationFromID(id objc.ID) *LensSpecification {
 	if id == 0 {
 		return nil
 	}
-	x := &LensSpecification{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LensSpecification{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func lensSpecificationAdopt(id objc.ID) *LensSpecification {
 	if id == 0 {
 		return nil
 	}
-	x := &LensSpecification{Handle: objref.Wrap(id)}
+	x := &LensSpecification{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +62,31 @@ func (x *LensSpecification) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewLensSpecification creates a new LensSpecification.
-func NewLensSpecification() *LensSpecification {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKLensSpecification")), objc.RegisterName("new"))
-	return lensSpecificationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LensSpecification) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The lens power to correct nearsightedness or farsightedness. (-) means nearsighted while (+) farsighted.
+// Sphere the lens power to correct nearsightedness or farsightedness. (-) means nearsighted while (+) farsighted.
 func (x *LensSpecification) Sphere() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sphere"))
 	return QuantityFromID(_r)
 }
 
-// The lens power required to correct astigmatism. Can be positive or negative.
+// Cylinder the lens power required to correct astigmatism. Can be positive or negative.
 func (x *LensSpecification) Cylinder() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cylinder"))
 	return QuantityFromID(_r)
 }
 
-// The angle along which cylindrical power should be positioned to correct astigmatism
+// Axis the angle along which cylindrical power should be positioned to correct astigmatism
 func (x *LensSpecification) Axis() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("axis"))
 	return QuantityFromID(_r)
 }
 
-// The power adjustment applied to a multifocal lens to correct presbyopia
+// AddPower the power adjustment applied to a multifocal lens to correct presbyopia
 func (x *LensSpecification) AddPower() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addPower"))
 	return QuantityFromID(_r)
@@ -98,3 +102,10 @@ type LensSpecificationable interface {
 }
 
 var _ LensSpecificationable = (*LensSpecification)(nil)
+
+// isLensSpecification marks LensSpecification — and, by embedding promotion, its
+// subclasses — as a member of the LensSpecification hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *LensSpecification) isLensSpecification() {}
+
+var _ LensSpecificationProvider = (*LensSpecification)(nil)

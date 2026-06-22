@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A record of the data that a particular website stores persistently.
-//
 // WKWebsiteDataRecord is an idiomatic wrapper over the Objective-C class WKWebsiteDataRecord.
+//
+// A record of the data that a particular website stores persistently.
 type WKWebsiteDataRecord struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKWebsiteDataRecordFromID(id objc.ID) *WKWebsiteDataRecord {
 	if id == 0 {
 		return nil
 	}
-	x := &WKWebsiteDataRecord{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKWebsiteDataRecord{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKWebsiteDataRecordAdopt(id objc.ID) *WKWebsiteDataRecord {
 	if id == 0 {
 		return nil
 	}
-	x := &WKWebsiteDataRecord{Handle: objref.Wrap(id)}
+	x := &WKWebsiteDataRecord{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *WKWebsiteDataRecord) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKWebsiteDataRecord) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKWebsiteDataRecord creates a new WKWebsiteDataRecord.
 func NewWKWebsiteDataRecord() *WKWebsiteDataRecord {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKWebsiteDataRecord")), objc.RegisterName("new"))
 	return wKWebsiteDataRecordAdopt(_id)
 }
 
-// The display name for the data record. This is usually the domain name.
+// DisplayName the display name for the data record. This is usually the domain name.
 func (x *WKWebsiteDataRecord) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *WKWebsiteDataRecord) DisplayName() string {
 	return purego.GoString(_r)
 }
 
-// The various types of website data that exist for this data record.
+// DataTypes the various types of website data that exist for this data record.
 func (x *WKWebsiteDataRecord) DataTypes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataTypes"))
 	return obj.Wrap(_r)

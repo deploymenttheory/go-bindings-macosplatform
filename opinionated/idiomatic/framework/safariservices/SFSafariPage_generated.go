@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A proxy for a Safari webpage.
-//
 // SafariPage is an idiomatic wrapper over the Objective-C class SFSafariPage.
+//
+// A proxy for a Safari webpage.
 type SafariPage struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func SafariPageFromID(id objc.ID) *SafariPage {
 	if id == 0 {
 		return nil
 	}
-	x := &SafariPage{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SafariPage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func safariPageAdopt(id objc.ID) *SafariPage {
 	if id == 0 {
 		return nil
 	}
-	x := &SafariPage{Handle: objref.Wrap(id)}
+	x := &SafariPage{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,26 +61,32 @@ func (x *SafariPage) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SafariPage) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSafariPage creates a new SafariPage.
 func NewSafariPage() *SafariPage {
 	_id := objc.Send[objc.ID](objc.ID(_class("SFSafariPage")), objc.RegisterName("new"))
 	return safariPageAdopt(_id)
 }
 
-// Dispatches a message from the app extension to the content script injected in this page.
+// DispatchMessageToScriptWithNameUserInfo dispatches a message from the app extension to the content script injected in this page.
 func (x *SafariPage) DispatchMessageToScriptWithNameUserInfo(messageName string, userInfo obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dispatchMessageToScriptWithName:userInfo:"), purego.NSString(messageName), objref.IDOf(userInfo))
 }
 
-// Tells Safari to reload the webpage.
+// Reload tells Safari to reload the webpage.
 func (x *SafariPage) Reload() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reload"))
 }
 
-// Retrieves the properties of the webpage.
+// GetPageProperties retrieves the properties of the webpage.
 //
 // GetPageProperties blocks until the operation completes or ctx is cancelled.
-func (x *SafariPage) GetPageProperties(ctx context.Context) (*SafariPageProperties, error) {
+func (x *SafariPage) GetPageProperties(ctx context.Context) (result *SafariPageProperties, err error) {
 	type _result struct {
 		val *SafariPageProperties
 		err error
@@ -99,10 +107,10 @@ func (x *SafariPage) GetPageProperties(ctx context.Context) (*SafariPageProperti
 	}
 }
 
-// This calls the completion handler with the tab containing this page. This will return a non-nil tab for any pages being preloaded by Safari.
+// GetContainingTab this calls the completion handler with the tab containing this page. This will return a non-nil tab for any pages being preloaded by Safari.
 //
 // GetContainingTab blocks until the operation completes or ctx is cancelled.
-func (x *SafariPage) GetContainingTab(ctx context.Context) (*SafariTab, error) {
+func (x *SafariPage) GetContainingTab(ctx context.Context) (result *SafariTab, err error) {
 	type _result struct {
 		val *SafariTab
 		err error
@@ -123,10 +131,10 @@ func (x *SafariPage) GetContainingTab(ctx context.Context) (*SafariTab, error) {
 	}
 }
 
-// Gets a screenshot of the currently visible area of the page.
+// GetScreenshotOfVisibleArea gets a screenshot of the currently visible area of the page.
 //
 // GetScreenshotOfVisibleArea blocks until the operation completes or ctx is cancelled.
-func (x *SafariPage) GetScreenshotOfVisibleArea(ctx context.Context) (obj.Object, error) {
+func (x *SafariPage) GetScreenshotOfVisibleArea(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error

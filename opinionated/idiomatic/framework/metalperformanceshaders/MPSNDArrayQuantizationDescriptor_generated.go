@@ -13,6 +13,8 @@ import (
 )
 
 // NDArrayQuantizationDescriptor is an idiomatic wrapper over the Objective-C class MPSNDArrayQuantizationDescriptor.
+//
+// NDArrayQuantizationDescriptor is an abstract base — you do not construct it directly. Construct one of [NDArrayAffineQuantizationDescriptor], [NDArrayLUTQuantizationDescriptor] and pass it where a NDArrayQuantizationDescriptor is accepted.
 type NDArrayQuantizationDescriptor struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func NDArrayQuantizationDescriptorFromID(id objc.ID) *NDArrayQuantizationDescrip
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayQuantizationDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NDArrayQuantizationDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func nDArrayQuantizationDescriptorAdopt(id objc.ID) *NDArrayQuantizationDescript
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayQuantizationDescriptor{Handle: objref.Wrap(id)}
+	x := &NDArrayQuantizationDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,10 +60,10 @@ func (x *NDArrayQuantizationDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewNDArrayQuantizationDescriptor creates a new NDArrayQuantizationDescriptor.
-func NewNDArrayQuantizationDescriptor() *NDArrayQuantizationDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayQuantizationDescriptor")), objc.RegisterName("new"))
-	return nDArrayQuantizationDescriptorAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NDArrayQuantizationDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NDArrayQuantizationDescriptorable is the interface implemented by [NDArrayQuantizationDescriptor], for mocking and DI.
@@ -68,3 +72,10 @@ type NDArrayQuantizationDescriptorable interface {
 }
 
 var _ NDArrayQuantizationDescriptorable = (*NDArrayQuantizationDescriptor)(nil)
+
+// isNDArrayQuantizationDescriptor marks NDArrayQuantizationDescriptor — and, by embedding promotion, its
+// subclasses — as a member of the NDArrayQuantizationDescriptor hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NDArrayQuantizationDescriptor) isNDArrayQuantizationDescriptor() {}
+
+var _ NDArrayQuantizationDescriptorProvider = (*NDArrayQuantizationDescriptor)(nil)

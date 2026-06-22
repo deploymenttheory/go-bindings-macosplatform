@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that converts between JSON and the equivalent Foundation objects.
-//
 // JSONSerialization is an idiomatic wrapper over the Objective-C class NSJSONSerialization.
+//
+// An object that converts between JSON and the equivalent Foundation objects.
 type JSONSerialization struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func JSONSerializationFromID(id objc.ID) *JSONSerialization {
 	if id == 0 {
 		return nil
 	}
-	x := &JSONSerialization{Handle: objref.Wrap(purego.Retain(id))}
+	x := &JSONSerialization{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func jSONSerializationAdopt(id objc.ID) *JSONSerialization {
 	if id == 0 {
 		return nil
 	}
-	x := &JSONSerialization{Handle: objref.Wrap(id)}
+	x := &JSONSerialization{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *JSONSerialization) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *JSONSerialization) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewJSONSerialization creates a new JSONSerialization.
 func NewJSONSerialization() *JSONSerialization {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSJSONSerialization")), objc.RegisterName("new"))
 	return jSONSerializationAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *JSONSerialization) WithScriptingProperties(scriptingProperties obj.Object) *JSONSerialization {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x

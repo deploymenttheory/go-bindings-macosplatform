@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing a Clinical Document Architecture (CDA) document in HealthKit.
-//
 // CDADocument is an idiomatic wrapper over the Objective-C class HKCDADocument.
+//
+// An object representing a Clinical Document Architecture (CDA) document in HealthKit.
 type CDADocument struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CDADocumentFromID(id objc.ID) *CDADocument {
 	if id == 0 {
 		return nil
 	}
-	x := &CDADocument{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CDADocument{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func cDADocumentAdopt(id objc.ID) *CDADocument {
 	if id == 0 {
 		return nil
 	}
-	x := &CDADocument{Handle: objref.Wrap(id)}
+	x := &CDADocument{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *CDADocument) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CDADocument) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCDADocument creates a new CDADocument.
 func NewCDADocument() *CDADocument {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKCDADocument")), objc.RegisterName("new"))
 	return cDADocumentAdopt(_id)
 }
 
-// The CDA document content in XML format as specified in the CDA standard. This may be nil if the includeDocumentData option in HKDocumentQuery is specified as NO.
+// DocumentData the CDA document content in XML format as specified in the CDA standard. This may be nil if the includeDocumentData option in HKDocumentQuery is specified as NO.
 func (x *CDADocument) DocumentData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentData"))
 	return obj.Wrap(_r)
 }
 
-// The title of the document. This property is extracted automatically from the document.
+// Title the title of the document. This property is extracted automatically from the document.
 func (x *CDADocument) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -79,7 +87,7 @@ func (x *CDADocument) Title() string {
 	return purego.GoString(_r)
 }
 
-// The name of the patient receiving treatment. This property is extracted automatically from the document.
+// PatientName the name of the patient receiving treatment. This property is extracted automatically from the document.
 func (x *CDADocument) PatientName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("patientName"))
 	if _r == 0 {
@@ -88,7 +96,7 @@ func (x *CDADocument) PatientName() string {
 	return purego.GoString(_r)
 }
 
-// The person responsible for authoring the document.  Usually, this is the treating physician. This property is extracted automatically from the document.
+// AuthorName the person responsible for authoring the document.  Usually, this is the treating physician. This property is extracted automatically from the document.
 func (x *CDADocument) AuthorName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authorName"))
 	if _r == 0 {
@@ -97,7 +105,7 @@ func (x *CDADocument) AuthorName() string {
 	return purego.GoString(_r)
 }
 
-// The organization responsible for the document.  This is usually the treating institution name. This property is extracted automatically from the document.
+// CustodianName the organization responsible for the document.  This is usually the treating institution name. This property is extracted automatically from the document.
 func (x *CDADocument) CustodianName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("custodianName"))
 	if _r == 0 {

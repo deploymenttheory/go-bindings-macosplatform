@@ -11,4 +11,5 @@ import (
 // RAWProcessingParameterProvider is accepted wherever a MERAWProcessingParameter (or one of its subclasses) is expected.
 type RAWProcessingParameterProvider interface {
 	objref.Object
+	isRAWProcessingParameter()
 }

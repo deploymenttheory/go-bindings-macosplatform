@@ -11,8 +11,8 @@ import (
 	"unsafe"
 )
 
-// Generates a token.
-func AttributionTokenWithError() (string, error) {
+// AttributionTokenWithError generates a token.
+func AttributionTokenWithError() (result string, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("AAAttribution")), objc.RegisterName("attributionTokenWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

@@ -23,7 +23,8 @@ func MTRPowerSourceClusterWiredFaultChangeEventFromID(id objc.ID) *MTRPowerSourc
 	if id == 0 {
 		return nil
 	}
-	x := &MTRPowerSourceClusterWiredFaultChangeEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRPowerSourceClusterWiredFaultChangeEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRPowerSourceClusterWiredFaultChangeEventAdopt(id objc.ID) *MTRPowerSource
 	if id == 0 {
 		return nil
 	}
-	x := &MTRPowerSourceClusterWiredFaultChangeEvent{Handle: objref.Wrap(id)}
+	x := &MTRPowerSourceClusterWiredFaultChangeEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,26 +58,36 @@ func (x *MTRPowerSourceClusterWiredFaultChangeEvent) IsKind(className string) bo
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRPowerSourceClusterWiredFaultChangeEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRPowerSourceClusterWiredFaultChangeEvent creates a new MTRPowerSourceClusterWiredFaultChangeEvent.
 func NewMTRPowerSourceClusterWiredFaultChangeEvent() *MTRPowerSourceClusterWiredFaultChangeEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRPowerSourceClusterWiredFaultChangeEvent")), objc.RegisterName("new"))
 	return mTRPowerSourceClusterWiredFaultChangeEventAdopt(_id)
 }
 
+// Current wraps the corresponding Objective-C method.
 func (x *MTRPowerSourceClusterWiredFaultChangeEvent) Current() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("current"))
 	return obj.Wrap(_r)
 }
 
+// SetCurrent wraps the corresponding Objective-C method.
 func (x *MTRPowerSourceClusterWiredFaultChangeEvent) SetCurrent(current obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrent:"), objref.IDOf(current))
 }
 
+// Previous wraps the corresponding Objective-C method.
 func (x *MTRPowerSourceClusterWiredFaultChangeEvent) Previous() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previous"))
 	return obj.Wrap(_r)
 }
 
+// SetPrevious wraps the corresponding Objective-C method.
 func (x *MTRPowerSourceClusterWiredFaultChangeEvent) SetPrevious(previous obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrevious:"), objref.IDOf(previous))
 }

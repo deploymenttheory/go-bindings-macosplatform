@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that listens for port-based connection requests from the guest operating system.
-//
 // VirtioSocketListener is an idiomatic wrapper over the Objective-C class VZVirtioSocketListener.
+//
+// An object that listens for port-based connection requests from the guest operating system.
 type VirtioSocketListener struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VirtioSocketListenerFromID(id objc.ID) *VirtioSocketListener {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioSocketListener{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VirtioSocketListener{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func virtioSocketListenerAdopt(id objc.ID) *VirtioSocketListener {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioSocketListener{Handle: objref.Wrap(id)}
+	x := &VirtioSocketListener{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *VirtioSocketListener) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *VirtioSocketListener) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VirtioSocketListener) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewVirtioSocketListener creates a new VirtioSocketListener.

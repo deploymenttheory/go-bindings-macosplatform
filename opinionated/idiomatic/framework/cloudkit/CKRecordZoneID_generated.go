@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that uniquely identifies a record zone in a database.
-//
 // RecordZoneID is an idiomatic wrapper over the Objective-C class CKRecordZoneID.
+//
+// An object that uniquely identifies a record zone in a database.
 type RecordZoneID struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RecordZoneIDFromID(id objc.ID) *RecordZoneID {
 	if id == 0 {
 		return nil
 	}
-	x := &RecordZoneID{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RecordZoneID{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func recordZoneIDAdopt(id objc.ID) *RecordZoneID {
 	if id == 0 {
 		return nil
 	}
-	x := &RecordZoneID{Handle: objref.Wrap(id)}
+	x := &RecordZoneID{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,16 +60,20 @@ func (x *RecordZoneID) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a record zone ID with the specified name and owner.
-//
-// NewRecordZoneIDWithZoneNameOwnerName creates a new RecordZoneID.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RecordZoneID) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRecordZoneIDWithZoneNameOwnerName creates a record zone ID with the specified name and owner.
 func NewRecordZoneIDWithZoneNameOwnerName(zoneName string, ownerName string) *RecordZoneID {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKRecordZoneID")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZoneName:ownerName:"), purego.NSString(zoneName), purego.NSString(ownerName))
 	return recordZoneIDAdopt(_id)
 }
 
-// The unique name of the record zone.
+// ZoneName the unique name of the record zone.
 func (x *RecordZoneID) ZoneName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneName"))
 	if _r == 0 {
@@ -76,7 +82,7 @@ func (x *RecordZoneID) ZoneName() string {
 	return purego.GoString(_r)
 }
 
-// The ID of the user who owns the record zone.
+// OwnerName the ID of the user who owns the record zone.
 func (x *RecordZoneID) OwnerName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ownerName"))
 	if _r == 0 {

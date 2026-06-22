@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of requirements to fall back on if biometrics aren’t present.
-//
 // BiometryFallbackRequirement is an idiomatic wrapper over the Objective-C class LABiometryFallbackRequirement.
+//
+// A set of requirements to fall back on if biometrics aren’t present.
 type BiometryFallbackRequirement struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func BiometryFallbackRequirementFromID(id objc.ID) *BiometryFallbackRequirement 
 	if id == 0 {
 		return nil
 	}
-	x := &BiometryFallbackRequirement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BiometryFallbackRequirement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func biometryFallbackRequirementAdopt(id objc.ID) *BiometryFallbackRequirement {
 	if id == 0 {
 		return nil
 	}
-	x := &BiometryFallbackRequirement{Handle: objref.Wrap(id)}
+	x := &BiometryFallbackRequirement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *BiometryFallbackRequirement) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *BiometryFallbackRequirement) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BiometryFallbackRequirement) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewBiometryFallbackRequirement creates a new BiometryFallbackRequirement.

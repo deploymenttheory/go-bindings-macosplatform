@@ -23,7 +23,8 @@ func MTRMediaPlaybackClusterActivateTextTrackParamsFromID(id objc.ID) *MTRMediaP
 	if id == 0 {
 		return nil
 	}
-	x := &MTRMediaPlaybackClusterActivateTextTrackParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRMediaPlaybackClusterActivateTextTrackParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRMediaPlaybackClusterActivateTextTrackParamsAdopt(id objc.ID) *MTRMediaPl
 	if id == 0 {
 		return nil
 	}
-	x := &MTRMediaPlaybackClusterActivateTextTrackParams{Handle: objref.Wrap(id)}
+	x := &MTRMediaPlaybackClusterActivateTextTrackParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,34 +58,37 @@ func (x *MTRMediaPlaybackClusterActivateTextTrackParams) IsKind(className string
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRMediaPlaybackClusterActivateTextTrackParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRMediaPlaybackClusterActivateTextTrackParams creates a new MTRMediaPlaybackClusterActivateTextTrackParams.
 func NewMTRMediaPlaybackClusterActivateTextTrackParams() *MTRMediaPlaybackClusterActivateTextTrackParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRMediaPlaybackClusterActivateTextTrackParams")), objc.RegisterName("new"))
 	return mTRMediaPlaybackClusterActivateTextTrackParamsAdopt(_id)
 }
 
-// WithTrackID sets trackID and returns the receiver so calls can be chained.
+// WithTrackID sets the property and returns the receiver so calls can be chained.
 func (x *MTRMediaPlaybackClusterActivateTextTrackParams) WithTrackID(trackID string) *MTRMediaPlaybackClusterActivateTextTrackParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackID:"), purego.NSString(trackID))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke).
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
 func (x *MTRMediaPlaybackClusterActivateTextTrackParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMediaPlaybackClusterActivateTextTrackParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
 func (x *MTRMediaPlaybackClusterActivateTextTrackParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMediaPlaybackClusterActivateTextTrackParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// TrackID wraps the corresponding Objective-C method.
 func (x *MTRMediaPlaybackClusterActivateTextTrackParams) TrackID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trackID"))
 	if _r == 0 {
@@ -92,26 +97,29 @@ func (x *MTRMediaPlaybackClusterActivateTextTrackParams) TrackID() string {
 	return purego.GoString(_r)
 }
 
+// SetTrackID wraps the corresponding Objective-C method.
 func (x *MTRMediaPlaybackClusterActivateTextTrackParams) SetTrackID(trackID string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackID:"), purego.NSString(trackID))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRMediaPlaybackClusterActivateTextTrackParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRMediaPlaybackClusterActivateTextTrackParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRMediaPlaybackClusterActivateTextTrackParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRMediaPlaybackClusterActivateTextTrackParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A token’s certificate as stored in the keychain.
-//
 // TokenKeychainCertificate is an idiomatic wrapper over the Objective-C class TKTokenKeychainCertificate.
+//
+// It embeds [TokenKeychainItem], promoting that type's methods.
+//
+// A token’s certificate as stored in the keychain.
 type TokenKeychainCertificate struct {
-	objref.Handle
+	TokenKeychainItem
 }
 
 // TokenKeychainCertificateFromID adopts an existing Objective-C object as a TokenKeychainCertificate
@@ -25,7 +26,8 @@ func TokenKeychainCertificateFromID(id objc.ID) *TokenKeychainCertificate {
 	if id == 0 {
 		return nil
 	}
-	x := &TokenKeychainCertificate{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TokenKeychainCertificate{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,51 +40,32 @@ func tokenKeychainCertificateAdopt(id objc.ID) *TokenKeychainCertificate {
 	if id == 0 {
 		return nil
 	}
-	x := &TokenKeychainCertificate{Handle: objref.Wrap(id)}
+	x := &TokenKeychainCertificate{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *TokenKeychainCertificate) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TokenKeychainCertificate) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TokenKeychainCertificate) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a token keychain certificate with data from the specified certificate reference and a given object ID.
-//
-// NewTokenKeychainCertificateWithCertificateObjectID creates a new TokenKeychainCertificate.
+// NewTokenKeychainCertificateWithCertificateObjectID initializes a token keychain certificate with data from the specified certificate reference and a given object ID.
 func NewTokenKeychainCertificateWithCertificateObjectID(certificateRef obj.Object, objectID obj.Object) *TokenKeychainCertificate {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("TKTokenKeychainCertificate")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCertificate:objectID:"), objref.IDOf(certificateRef), objref.IDOf(objectID))
 	return tokenKeychainCertificateAdopt(_id)
 }
 
-// The user-visible label for the keychain item.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the user-visible label for the keychain item.
 func (x *TokenKeychainCertificate) WithLabel(label string) *TokenKeychainCertificate {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Access constraints for the keychain item, keyed by TKTokenOperation values wrapped in NSNumber objects.
-//
-// WithConstraints sets constraints and returns the receiver so calls can be chained.
+// WithConstraints access constraints for the keychain item, keyed by TKTokenOperation values wrapped in NSNumber objects.
 func (x *TokenKeychainCertificate) WithConstraints(constraints obj.Object) *TokenKeychainCertificate {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), objref.IDOf(constraints))
 	return x
 }
 
+// Data wraps the corresponding Objective-C method.
 func (x *TokenKeychainCertificate) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
@@ -97,3 +80,5 @@ type TokenKeychainCertificateable interface {
 }
 
 var _ TokenKeychainCertificateable = (*TokenKeychainCertificate)(nil)
+
+var _ TokenKeychainItemProvider = (*TokenKeychainCertificate)(nil)

@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // CNNBatchNormalizationState is an idiomatic wrapper over the Objective-C class MPSCNNBatchNormalizationState.
+//
+// It embeds [NNGradientState], promoting that type's methods.
 type CNNBatchNormalizationState struct {
-	objref.Handle
+	NNGradientState
 }
 
 // CNNBatchNormalizationStateFromID adopts an existing Objective-C object as a CNNBatchNormalizationState
@@ -23,7 +24,8 @@ func CNNBatchNormalizationStateFromID(id objc.ID) *CNNBatchNormalizationState {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNBatchNormalizationState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNBatchNormalizationState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func cNNBatchNormalizationStateAdopt(id objc.ID) *CNNBatchNormalizationState {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNBatchNormalizationState{Handle: objref.Wrap(id)}
+	x := &CNNBatchNormalizationState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNBatchNormalizationState) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNBatchNormalizationState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNBatchNormalizationState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNBatchNormalizationState creates a new CNNBatchNormalizationState.
@@ -62,11 +50,12 @@ func NewCNNBatchNormalizationState() *CNNBatchNormalizationState {
 	return cNNBatchNormalizationStateAdopt(_id)
 }
 
-// Reset any accumulated state data to its initial values.
+// Reset reset any accumulated state data to its initial values.
 func (x *CNNBatchNormalizationState) Reset() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
+// BatchNormalization wraps the corresponding Objective-C method.
 func (x *CNNBatchNormalizationState) BatchNormalization() *CNNBatchNormalization {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("batchNormalization"))
 	return CNNBatchNormalizationFromID(_r)
@@ -80,3 +69,5 @@ type CNNBatchNormalizationStateable interface {
 }
 
 var _ CNNBatchNormalizationStateable = (*CNNBatchNormalizationState)(nil)
+
+var _ NNGradientStateProvider = (*CNNBatchNormalizationState)(nil)

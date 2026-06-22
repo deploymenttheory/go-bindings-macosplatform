@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The MLMediaSource class identifies a specific provider of media. Conceptually, a media source respresents a single app, such as iTunes or Aperture. Each media source contains multiple groups of media objects—individual files containing a piece of media such as a photo, song, or movie.
-//
 // MediaSource is an idiomatic wrapper over the Objective-C class MLMediaSource.
+//
+// The MLMediaSource class identifies a specific provider of media. Conceptually, a media source respresents a single app, such as iTunes or Aperture. Each media source contains multiple groups of media objects—individual files containing a piece of media such as a photo, song, or movie.
 type MediaSource struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MediaSourceFromID(id objc.ID) *MediaSource {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaSource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MediaSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mediaSourceAdopt(id objc.ID) *MediaSource {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaSource{Handle: objref.Wrap(id)}
+	x := &MediaSource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,41 +60,49 @@ func (x *MediaSource) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MediaSource) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMediaSource creates a new MediaSource.
 func NewMediaSource() *MediaSource {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLMediaSource")), objc.RegisterName("new"))
 	return mediaSourceAdopt(_id)
 }
 
-// Returns the media group with the specified identifier.
+// MediaGroupForIdentifier returns the media group with the specified identifier.
 func (x *MediaSource) MediaGroupForIdentifier(mediaGroupIdentifier string) *MediaGroup {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaGroupForIdentifier:"), purego.NSString(mediaGroupIdentifier))
 	return MediaGroupFromID(_r)
 }
 
-// Returns the media groups with the specified identifiers.
+// MediaGroupsForIdentifiers returns the media groups with the specified identifiers.
 func (x *MediaSource) MediaGroupsForIdentifiers(mediaGroupIdentifiers []string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaGroupsForIdentifiers:"), purego.SliceToNSArray(mediaGroupIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return obj.Wrap(_r)
 }
 
-// Returns the media object with the specified identifier.
+// MediaObjectForIdentifier returns the media object with the specified identifier.
 func (x *MediaSource) MediaObjectForIdentifier(mediaObjectIdentifier string) *MediaObject {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaObjectForIdentifier:"), purego.NSString(mediaObjectIdentifier))
 	return MediaObjectFromID(_r)
 }
 
-// Returns the media objects with the specified identifiers.
+// MediaObjectsForIdentifiers returns the media objects with the specified identifiers.
 func (x *MediaSource) MediaObjectsForIdentifiers(mediaObjectIdentifiers []string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaObjectsForIdentifiers:"), purego.SliceToNSArray(mediaObjectIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return obj.Wrap(_r)
 }
 
+// MediaLibrary wraps the corresponding Objective-C method.
 func (x *MediaSource) MediaLibrary() *MediaLibrary {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaLibrary"))
 	return MediaLibraryFromID(_r)
 }
 
+// MediaSourceIdentifier wraps the corresponding Objective-C method.
 func (x *MediaSource) MediaSourceIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSourceIdentifier"))
 	if _r == 0 {
@@ -101,11 +111,13 @@ func (x *MediaSource) MediaSourceIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// Attributes wraps the corresponding Objective-C method.
 func (x *MediaSource) Attributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
+// RootMediaGroup wraps the corresponding Objective-C method.
 func (x *MediaSource) RootMediaGroup() *MediaGroup {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootMediaGroup"))
 	return MediaGroupFromID(_r)

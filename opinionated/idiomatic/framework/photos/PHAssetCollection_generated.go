@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a Photos asset grouping, such as a moment, user-created album, or smart album.
-//
 // AssetCollection is an idiomatic wrapper over the Objective-C class PHAssetCollection.
+//
+// AssetCollection is an abstract base — you do not construct it directly. Construct one of [Project] and pass it where a AssetCollection is accepted.
+//
+// A representation of a Photos asset grouping, such as a moment, user-created album, or smart album.
 type AssetCollection struct {
-	objref.Handle
+	Collection
 }
 
 // AssetCollectionFromID adopts an existing Objective-C object as a AssetCollection
@@ -25,7 +26,8 @@ func AssetCollectionFromID(id objc.ID) *AssetCollection {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetCollection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetCollection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,52 +40,38 @@ func assetCollectionAdopt(id objc.ID) *AssetCollection {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetCollection{Handle: objref.Wrap(id)}
+	x := &AssetCollection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *AssetCollection) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetCollection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetCollection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewAssetCollection creates a new AssetCollection.
-func NewAssetCollection() *AssetCollection {
-	_id := objc.Send[objc.ID](objc.ID(_class("PHAssetCollection")), objc.RegisterName("new"))
-	return assetCollectionAdopt(_id)
-}
-
+// AssetCollectionType wraps the corresponding Objective-C method.
 func (x *AssetCollection) AssetCollectionType() AssetCollectionType {
 	_r := objc.Send[AssetCollectionType](objref.IDOf(x), objc.RegisterName("assetCollectionType"))
 	return _r
 }
 
+// EstimatedAssetCount wraps the corresponding Objective-C method.
 func (x *AssetCollection) EstimatedAssetCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("estimatedAssetCount"))
 	return _r
 }
 
+// StartDate wraps the corresponding Objective-C method.
 func (x *AssetCollection) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
+// EndDate wraps the corresponding Objective-C method.
 func (x *AssetCollection) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
+// LocalizedLocationNames wraps the corresponding Objective-C method.
+//
 // LocalizedLocationNames returns the collection as a Go slice.
 func (x *AssetCollection) LocalizedLocationNames() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedLocationNames"))
@@ -101,3 +89,14 @@ type AssetCollectionable interface {
 }
 
 var _ AssetCollectionable = (*AssetCollection)(nil)
+
+// isAssetCollection marks AssetCollection — and, by embedding promotion, its
+// subclasses — as a member of the AssetCollection hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AssetCollection) isAssetCollection() {}
+
+var _ AssetCollectionProvider = (*AssetCollection)(nil)
+
+var _ CollectionProvider = (*AssetCollection)(nil)
+
+var _ ObjectProvider = (*AssetCollection)(nil)

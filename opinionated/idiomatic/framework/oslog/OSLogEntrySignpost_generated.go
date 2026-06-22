@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An entry containing a signpost.
-//
 // LogEntrySignpost is an idiomatic wrapper over the Objective-C class OSLogEntrySignpost.
+//
+// It embeds [LogEntry], promoting that type's methods.
+//
+// An entry containing a signpost.
 type LogEntrySignpost struct {
-	objref.Handle
+	LogEntry
 }
 
 // LogEntrySignpostFromID adopts an existing Objective-C object as a LogEntrySignpost
@@ -25,7 +26,8 @@ func LogEntrySignpostFromID(id objc.ID) *LogEntrySignpost {
 	if id == 0 {
 		return nil
 	}
-	x := &LogEntrySignpost{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LogEntrySignpost{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func logEntrySignpostAdopt(id objc.ID) *LogEntrySignpost {
 	if id == 0 {
 		return nil
 	}
-	x := &LogEntrySignpost{Handle: objref.Wrap(id)}
+	x := &LogEntrySignpost{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *LogEntrySignpost) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LogEntrySignpost) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LogEntrySignpost) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewLogEntrySignpost creates a new LogEntrySignpost.
@@ -64,13 +52,13 @@ func NewLogEntrySignpost() *LogEntrySignpost {
 	return logEntrySignpostAdopt(_id)
 }
 
-// The signpost ID associated with this entry.
+// SignpostIdentifier the signpost ID associated with this entry.
 func (x *LogEntrySignpost) SignpostIdentifier() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("signpostIdentifier"))
 	return _r
 }
 
-// The signpost name associated with this entry.
+// SignpostName the signpost name associated with this entry.
 func (x *LogEntrySignpost) SignpostName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signpostName"))
 	if _r == 0 {
@@ -79,7 +67,7 @@ func (x *LogEntrySignpost) SignpostName() string {
 	return purego.GoString(_r)
 }
 
-// The signpost type associated with this entry.
+// SignpostType the signpost type associated with this entry.
 func (x *LogEntrySignpost) SignpostType() LogEntrySignpostType {
 	_r := objc.Send[LogEntrySignpostType](objref.IDOf(x), objc.RegisterName("signpostType"))
 	return _r
@@ -94,3 +82,5 @@ type LogEntrySignpostable interface {
 }
 
 var _ LogEntrySignpostable = (*LogEntrySignpost)(nil)
+
+var _ LogEntryProvider = (*LogEntrySignpost)(nil)

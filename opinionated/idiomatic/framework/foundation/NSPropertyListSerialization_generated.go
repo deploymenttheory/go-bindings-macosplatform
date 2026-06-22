@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that converts between a property list and one of several serialized representations.
-//
 // PropertyListSerialization is an idiomatic wrapper over the Objective-C class NSPropertyListSerialization.
+//
+// An object that converts between a property list and one of several serialized representations.
 type PropertyListSerialization struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PropertyListSerializationFromID(id objc.ID) *PropertyListSerialization {
 	if id == 0 {
 		return nil
 	}
-	x := &PropertyListSerialization{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PropertyListSerialization{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func propertyListSerializationAdopt(id objc.ID) *PropertyListSerialization {
 	if id == 0 {
 		return nil
 	}
-	x := &PropertyListSerialization{Handle: objref.Wrap(id)}
+	x := &PropertyListSerialization{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *PropertyListSerialization) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PropertyListSerialization) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPropertyListSerialization creates a new PropertyListSerialization.
 func NewPropertyListSerialization() *PropertyListSerialization {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("new"))
 	return propertyListSerializationAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *PropertyListSerialization) WithScriptingProperties(scriptingProperties obj.Object) *PropertyListSerialization {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x

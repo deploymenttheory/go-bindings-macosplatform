@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An enum representing the structure of a model.
-//
 // ModelStructure is an idiomatic wrapper over the Objective-C class MLModelStructure.
+//
+// An enum representing the structure of a model.
 type ModelStructure struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ModelStructureFromID(id objc.ID) *ModelStructure {
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructure{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ModelStructure{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func modelStructureAdopt(id objc.ID) *ModelStructure {
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructure{Handle: objref.Wrap(id)}
+	x := &ModelStructure{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *ModelStructure) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ModelStructure) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewModelStructure creates a new ModelStructure.
 func NewModelStructure() *ModelStructure {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLModelStructure")), objc.RegisterName("new"))
 	return modelStructureAdopt(_id)
 }
 
-// If the model is of NeuralNetwork type then it is the structure of the NeuralNetwork otherwise `nil`.
+// NeuralNetwork if the model is of NeuralNetwork type then it is the structure of the NeuralNetwork otherwise `nil`.
 func (x *ModelStructure) NeuralNetwork() *ModelStructureNeuralNetwork {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("neuralNetwork"))
 	return ModelStructureNeuralNetworkFromID(_r)
 }
 
-// If the model is of ML Program type then it is the structure of the ML Program otherwise `nil`.
+// Program if the model is of ML Program type then it is the structure of the ML Program otherwise `nil`.
 func (x *ModelStructure) Program() *ModelStructureProgram {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("program"))
 	return ModelStructureProgramFromID(_r)
 }
 
-// If the model is of Pipeline type then it is the structure of the Pipeline otherwise `nil`.
+// Pipeline if the model is of Pipeline type then it is the structure of the Pipeline otherwise `nil`.
 func (x *ModelStructure) Pipeline() *ModelStructurePipeline {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pipeline"))
 	return ModelStructurePipelineFromID(_r)

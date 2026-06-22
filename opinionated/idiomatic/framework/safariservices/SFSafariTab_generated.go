@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A proxy for a tab in a Safari window.
-//
 // SafariTab is an idiomatic wrapper over the Objective-C class SFSafariTab.
+//
+// A proxy for a tab in a Safari window.
 type SafariTab struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func SafariTabFromID(id objc.ID) *SafariTab {
 	if id == 0 {
 		return nil
 	}
-	x := &SafariTab{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SafariTab{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func safariTabAdopt(id objc.ID) *SafariTab {
 	if id == 0 {
 		return nil
 	}
-	x := &SafariTab{Handle: objref.Wrap(id)}
+	x := &SafariTab{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,16 +61,22 @@ func (x *SafariTab) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SafariTab) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSafariTab creates a new SafariTab.
 func NewSafariTab() *SafariTab {
 	_id := objc.Send[objc.ID](objc.ID(_class("SFSafariTab")), objc.RegisterName("new"))
 	return safariTabAdopt(_id)
 }
 
-// Calls the completion handler passing the active page in the tab.
+// GetActivePage calls the completion handler passing the active page in the tab.
 //
 // GetActivePage blocks until the operation completes or ctx is cancelled.
-func (x *SafariTab) GetActivePage(ctx context.Context) (*SafariPage, error) {
+func (x *SafariTab) GetActivePage(ctx context.Context) (result *SafariPage, err error) {
 	type _result struct {
 		val *SafariPage
 		err error
@@ -89,10 +97,10 @@ func (x *SafariTab) GetActivePage(ctx context.Context) (*SafariPage, error) {
 	}
 }
 
-// Calls the completion handler with all of the tab’s active and preloading pages.
+// GetPages calls the completion handler with all of the tab’s active and preloading pages.
 //
 // GetPages blocks until the operation completes or ctx is cancelled.
-func (x *SafariTab) GetPages(ctx context.Context) (obj.Object, error) {
+func (x *SafariTab) GetPages(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -113,10 +121,10 @@ func (x *SafariTab) GetPages(ctx context.Context) (obj.Object, error) {
 	}
 }
 
-// This calls completion handler with the window containing this tab. If the tab is pinned, the window is nil.
+// GetContainingWindow this calls completion handler with the window containing this tab. If the tab is pinned, the window is nil.
 //
 // GetContainingWindow blocks until the operation completes or ctx is cancelled.
-func (x *SafariTab) GetContainingWindow(ctx context.Context) (*SafariWindow, error) {
+func (x *SafariTab) GetContainingWindow(ctx context.Context) (result *SafariWindow, err error) {
 	type _result struct {
 		val *SafariWindow
 		err error
@@ -137,7 +145,7 @@ func (x *SafariTab) GetContainingWindow(ctx context.Context) (*SafariWindow, err
 	}
 }
 
-// Activates the tab.
+// Activate activates the tab.
 //
 // Activate blocks until the operation completes or ctx is cancelled.
 func (x *SafariTab) Activate(ctx context.Context) error {
@@ -154,12 +162,12 @@ func (x *SafariTab) Activate(ctx context.Context) error {
 	}
 }
 
-// Navigates this tab to the given URL. The extension doesn't need permission to access the URL to navigate to it.
+// NavigateToURL navigates this tab to the given URL. The extension doesn't need permission to access the URL to navigate to it.
 func (x *SafariTab) NavigateToURL(url string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("navigateToURL:"), rt.FileURL(url))
 }
 
-// Closes this tab. If this is the last tab in its window, the window is also closed.
+// Close closes this tab. If this is the last tab in its window, the window is also closed.
 func (x *SafariTab) Close() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
 }

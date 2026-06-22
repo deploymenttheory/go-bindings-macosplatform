@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The principal class for a filter data provider extension.
-//
 // NEFilterDataProvider is an idiomatic wrapper over the Objective-C class NEFilterDataProvider.
+//
+// It embeds [NEFilterProvider], promoting that type's methods.
+//
+// The principal class for a filter data provider extension.
 type NEFilterDataProvider struct {
-	objref.Handle
+	NEFilterProvider
 }
 
 // NEFilterDataProviderFromID adopts an existing Objective-C object as a NEFilterDataProvider
@@ -27,7 +28,8 @@ func NEFilterDataProviderFromID(id objc.ID) *NEFilterDataProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &NEFilterDataProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEFilterDataProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,24 +42,10 @@ func nEFilterDataProviderAdopt(id objc.ID) *NEFilterDataProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &NEFilterDataProvider{Handle: objref.Wrap(id)}
+	x := &NEFilterDataProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NEFilterDataProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEFilterDataProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEFilterDataProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNEFilterDataProvider creates a new NEFilterDataProvider.
@@ -66,37 +54,37 @@ func NewNEFilterDataProvider() *NEFilterDataProvider {
 	return nEFilterDataProviderAdopt(_id)
 }
 
-// Make a filtering decision for a newly-created flow of network content.
+// HandleNewFlow make a filtering decision for a newly-created flow of network content.
 func (x *NEFilterDataProvider) HandleNewFlow(flow *NEFilterFlow) *NEFilterNewFlowVerdict {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleNewFlow:"), objref.IDOf(flow))
 	return NEFilterNewFlowVerdictFromID(_r)
 }
 
-// Make a filtering decision about a chunk of inbound data.
+// HandleInboundDataFromFlowReadBytesStartOffsetReadBytes make a filtering decision about a chunk of inbound data.
 func (x *NEFilterDataProvider) HandleInboundDataFromFlowReadBytesStartOffsetReadBytes(flow *NEFilterFlow, offset int, readBytes obj.Object) *NEFilterDataVerdict {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleInboundDataFromFlow:readBytesStartOffset:readBytes:"), objref.IDOf(flow), offset, objref.IDOf(readBytes))
 	return NEFilterDataVerdictFromID(_r)
 }
 
-// Make a filtering decision about a chunk of outbound data.
+// HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes make a filtering decision about a chunk of outbound data.
 func (x *NEFilterDataProvider) HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes(flow *NEFilterFlow, offset int, readBytes obj.Object) *NEFilterDataVerdict {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleOutboundDataFromFlow:readBytesStartOffset:readBytes:"), objref.IDOf(flow), offset, objref.IDOf(readBytes))
 	return NEFilterDataVerdictFromID(_r)
 }
 
-// Make a filtering decision after seeing all of the inbound data for a flow.
+// HandleInboundDataCompleteForFlow make a filtering decision after seeing all of the inbound data for a flow.
 func (x *NEFilterDataProvider) HandleInboundDataCompleteForFlow(flow *NEFilterFlow) *NEFilterDataVerdict {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleInboundDataCompleteForFlow:"), objref.IDOf(flow))
 	return NEFilterDataVerdictFromID(_r)
 }
 
-// Make a filtering decision after seeing all of the outbound data for a flow.
+// HandleOutboundDataCompleteForFlow make a filtering decision after seeing all of the outbound data for a flow.
 func (x *NEFilterDataProvider) HandleOutboundDataCompleteForFlow(flow *NEFilterFlow) *NEFilterDataVerdict {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleOutboundDataCompleteForFlow:"), objref.IDOf(flow))
 	return NEFilterDataVerdictFromID(_r)
 }
 
-// Applies a set of filtering rules associated with the provider and changes the default filtering action.
+// ApplySettings applies a set of filtering rules associated with the provider and changes the default filtering action.
 //
 // ApplySettings blocks until the operation completes or ctx is cancelled.
 func (x *NEFilterDataProvider) ApplySettings(ctx context.Context, settings *NEFilterSettings) error {
@@ -115,12 +103,12 @@ func (x *NEFilterDataProvider) ApplySettings(ctx context.Context, settings *NEFi
 	}
 }
 
-// Resumes a previously-paused flow.
+// ResumeFlowWithVerdict resumes a previously-paused flow.
 func (x *NEFilterDataProvider) ResumeFlowWithVerdict(flow *NEFilterFlow, verdict *NEFilterVerdict) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeFlow:withVerdict:"), objref.IDOf(flow), objref.IDOf(verdict))
 }
 
-// Updates the verdict for a flow outside the context of any filter data provider callback.
+// UpdateFlowUsingVerdictForDirection updates the verdict for a flow outside the context of any filter data provider callback.
 func (x *NEFilterDataProvider) UpdateFlowUsingVerdictForDirection(flow *NEFilterSocketFlow, verdict *NEFilterDataVerdict, direction NETrafficDirection) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateFlow:usingVerdict:forDirection:"), objref.IDOf(flow), objref.IDOf(verdict), direction)
 }
@@ -139,3 +127,7 @@ type NEFilterDataProviderable interface {
 }
 
 var _ NEFilterDataProviderable = (*NEFilterDataProvider)(nil)
+
+var _ NEFilterProviderProvider = (*NEFilterDataProvider)(nil)
+
+var _ NEProviderProvider = (*NEFilterDataProvider)(nil)

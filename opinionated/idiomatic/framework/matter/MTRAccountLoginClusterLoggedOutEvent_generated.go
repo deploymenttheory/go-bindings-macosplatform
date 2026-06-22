@@ -23,7 +23,8 @@ func MTRAccountLoginClusterLoggedOutEventFromID(id objc.ID) *MTRAccountLoginClus
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAccountLoginClusterLoggedOutEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRAccountLoginClusterLoggedOutEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRAccountLoginClusterLoggedOutEventAdopt(id objc.ID) *MTRAccountLoginClust
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAccountLoginClusterLoggedOutEvent{Handle: objref.Wrap(id)}
+	x := &MTRAccountLoginClusterLoggedOutEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTRAccountLoginClusterLoggedOutEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRAccountLoginClusterLoggedOutEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRAccountLoginClusterLoggedOutEvent creates a new MTRAccountLoginClusterLoggedOutEvent.
 func NewMTRAccountLoginClusterLoggedOutEvent() *MTRAccountLoginClusterLoggedOutEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRAccountLoginClusterLoggedOutEvent")), objc.RegisterName("new"))
 	return mTRAccountLoginClusterLoggedOutEventAdopt(_id)
 }
 
-// WithNode sets node and returns the receiver so calls can be chained.
+// WithNode sets the property and returns the receiver so calls can be chained.
 func (x *MTRAccountLoginClusterLoggedOutEvent) WithNode(node obj.Object) *MTRAccountLoginClusterLoggedOutEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNode:"), objref.IDOf(node))
 	return x
 }
 
+// Node wraps the corresponding Objective-C method.
 func (x *MTRAccountLoginClusterLoggedOutEvent) Node() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("node"))
 	return obj.Wrap(_r)
 }
 
+// SetNode wraps the corresponding Objective-C method.
 func (x *MTRAccountLoginClusterLoggedOutEvent) SetNode(node obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNode:"), objref.IDOf(node))
 }

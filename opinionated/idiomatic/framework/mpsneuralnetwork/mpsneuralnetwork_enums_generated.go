@@ -25,6 +25,8 @@ const (
 	CNNBatchNormalizationFlagsCalculateStatisticsMask CNNBatchNormalizationFlags = 3
 )
 
+// String returns the CNNBatchNormalizationFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CNNBatchNormalizationFlags) String() string {
 	var parts []string
 	if e&CNNBatchNormalizationFlagsCalculateStatisticsAlways != 0 {
@@ -51,6 +53,8 @@ const (
 	CNNConvolutionGradientOptionAll                        CNNConvolutionGradientOption = 3
 )
 
+// String returns the CNNConvolutionGradientOption constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CNNConvolutionGradientOption) String() string {
 	var parts []string
 	if e&CNNConvolutionGradientOptionGradientWithData != 0 {
@@ -74,6 +78,8 @@ const (
 	CNNConvolutionWeightsLayoutOHWI CNNConvolutionWeightsLayout = 0
 )
 
+// String returns the CNNConvolutionWeightsLayout constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CNNConvolutionWeightsLayout) String() string {
 	switch e {
 	case CNNConvolutionWeightsLayoutOHWI:
@@ -99,6 +105,8 @@ const (
 	CNNLossTypeCount                     CNNLossType = 10
 )
 
+// String returns the CNNLossType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CNNLossType) String() string {
 	switch e {
 	case CNNLossTypeMeanAbsoluteError:
@@ -150,6 +158,8 @@ const (
 	CNNNeuronTypeCount       CNNNeuronType = 16
 )
 
+// String returns the CNNNeuronType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CNNNeuronType) String() string {
 	switch e {
 	case CNNNeuronTypeNone:
@@ -201,6 +211,8 @@ const (
 	CNNReductionTypeCount               CNNReductionType = 4
 )
 
+// String returns the CNNReductionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CNNReductionType) String() string {
 	switch e {
 	case CNNReductionTypeNone:
@@ -230,6 +242,8 @@ const (
 	NNComparisonTypeGreaterOrEqual NNComparisonType = 5
 )
 
+// String returns the NNComparisonType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NNComparisonType) String() string {
 	var parts []string
 	if e&NNComparisonTypeNotEqual != 0 {
@@ -263,6 +277,8 @@ const (
 	NNConvolutionAccumulatorPrecisionOptionFloat NNConvolutionAccumulatorPrecisionOption = 1
 )
 
+// String returns the NNConvolutionAccumulatorPrecisionOption constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NNConvolutionAccumulatorPrecisionOption) String() string {
 	var parts []string
 	if e&NNConvolutionAccumulatorPrecisionOptionFloat != 0 {
@@ -300,6 +316,8 @@ const (
 	NNPaddingMethodExcludeEdges NNPaddingMethod = 32768
 )
 
+// String returns the NNPaddingMethod constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NNPaddingMethod) String() string {
 	var parts []string
 	if e&NNPaddingMethodAlignTopLeft != 0 {
@@ -366,6 +384,8 @@ const (
 	NNRegularizationTypeL2 NNRegularizationType = 2
 )
 
+// String returns the NNRegularizationType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NNRegularizationType) String() string {
 	switch e {
 	case NNRegularizationTypeNone:
@@ -391,6 +411,8 @@ const (
 	NNTrainingStyleUpdateDeviceGPU NNTrainingStyle = 2
 )
 
+// String returns the NNTrainingStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NNTrainingStyle) String() string {
 	var parts []string
 	if e&NNTrainingStyleUpdateDeviceCPU != 0 {
@@ -416,6 +438,8 @@ const (
 	RNNBidirectionalCombineModeConcatenate RNNBidirectionalCombineMode = 2
 )
 
+// String returns the RNNBidirectionalCombineMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RNNBidirectionalCombineMode) String() string {
 	switch e {
 	case RNNBidirectionalCombineModeNone:
@@ -438,6 +462,8 @@ const (
 	RNNSequenceDirectionBackward RNNSequenceDirection = 1
 )
 
+// String returns the RNNSequenceDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RNNSequenceDirection) String() string {
 	switch e {
 	case RNNSequenceDirectionForward:

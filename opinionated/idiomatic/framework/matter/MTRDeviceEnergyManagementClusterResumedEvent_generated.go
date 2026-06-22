@@ -23,7 +23,8 @@ func MTRDeviceEnergyManagementClusterResumedEventFromID(id objc.ID) *MTRDeviceEn
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceEnergyManagementClusterResumedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDeviceEnergyManagementClusterResumedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDeviceEnergyManagementClusterResumedEventAdopt(id objc.ID) *MTRDeviceEne
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceEnergyManagementClusterResumedEvent{Handle: objref.Wrap(id)}
+	x := &MTRDeviceEnergyManagementClusterResumedEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTRDeviceEnergyManagementClusterResumedEvent) IsKind(className string) 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceEnergyManagementClusterResumedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDeviceEnergyManagementClusterResumedEvent creates a new MTRDeviceEnergyManagementClusterResumedEvent.
 func NewMTRDeviceEnergyManagementClusterResumedEvent() *MTRDeviceEnergyManagementClusterResumedEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceEnergyManagementClusterResumedEvent")), objc.RegisterName("new"))
 	return mTRDeviceEnergyManagementClusterResumedEventAdopt(_id)
 }
 
-// WithCause sets cause and returns the receiver so calls can be chained.
+// WithCause sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterResumedEvent) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterResumedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
 	return x
 }
 
+// Cause wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterResumedEvent) Cause() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cause"))
 	return obj.Wrap(_r)
 }
 
+// SetCause wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterResumedEvent) SetCause(cause obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
 }

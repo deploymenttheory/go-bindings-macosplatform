@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NDArrayIdentity is an idiomatic wrapper over the Objective-C class MPSNDArrayIdentity.
+//
+// It embeds [NDArrayUnaryKernel], promoting that type's methods.
 type NDArrayIdentity struct {
-	objref.Handle
+	NDArrayUnaryKernel
 }
 
 // NDArrayIdentityFromID adopts an existing Objective-C object as a NDArrayIdentity
@@ -23,7 +24,8 @@ func NDArrayIdentityFromID(id objc.ID) *NDArrayIdentity {
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayIdentity{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NDArrayIdentity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func nDArrayIdentityAdopt(id objc.ID) *NDArrayIdentity {
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayIdentity{Handle: objref.Wrap(id)}
+	x := &NDArrayIdentity{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NDArrayIdentity) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NDArrayIdentity) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NDArrayIdentity) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNDArrayIdentity creates a new NDArrayIdentity.
@@ -62,9 +50,7 @@ func NewNDArrayIdentity() *NDArrayIdentity {
 	return nDArrayIdentityAdopt(_id)
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayIdentity) WithLabel(label string) *NDArrayIdentity {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -77,3 +63,11 @@ type NDArrayIdentityable interface {
 }
 
 var _ NDArrayIdentityable = (*NDArrayIdentity)(nil)
+
+var _ NDArrayUnaryKernelProvider = (*NDArrayIdentity)(nil)
+
+var _ NDArrayMultiaryKernelProvider = (*NDArrayIdentity)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayIdentity)(nil)
+
+var _ KernelProvider = (*NDArrayIdentity)(nil)

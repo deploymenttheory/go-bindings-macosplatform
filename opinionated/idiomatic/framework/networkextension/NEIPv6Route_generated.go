@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The settings for an IPv6 route.
-//
 // NEIPv6Route is an idiomatic wrapper over the Objective-C class NEIPv6Route.
+//
+// The settings for an IPv6 route.
 type NEIPv6Route struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NEIPv6RouteFromID(id objc.ID) *NEIPv6Route {
 	if id == 0 {
 		return nil
 	}
-	x := &NEIPv6Route{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEIPv6Route{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nEIPv6RouteAdopt(id objc.ID) *NEIPv6Route {
 	if id == 0 {
 		return nil
 	}
-	x := &NEIPv6Route{Handle: objref.Wrap(id)}
+	x := &NEIPv6Route{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +60,26 @@ func (x *NEIPv6Route) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize the NEIPv6Route
-//
-// NewNEIPv6RouteWithDestinationAddressNetworkPrefixLength creates a new NEIPv6Route.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEIPv6Route) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNEIPv6RouteWithDestinationAddressNetworkPrefixLength initialize the NEIPv6Route
 func NewNEIPv6RouteWithDestinationAddressNetworkPrefixLength(address string, networkPrefixLength obj.Object) *NEIPv6Route {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NEIPv6Route")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestinationAddress:networkPrefixLength:"), purego.NSString(address), objref.IDOf(networkPrefixLength))
 	return nEIPv6RouteAdopt(_id)
 }
 
-// The address of the next-hop gateway of the route.
-//
-// WithGatewayAddress sets gatewayAddress and returns the receiver so calls can be chained.
+// WithGatewayAddress the address of the next-hop gateway of the route.
 func (x *NEIPv6Route) WithGatewayAddress(gatewayAddress string) *NEIPv6Route {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGatewayAddress:"), purego.NSString(gatewayAddress))
 	return x
 }
 
-// An IPv6 address represented as a string.
+// DestinationAddress an IPv6 address represented as a string.
 func (x *NEIPv6Route) DestinationAddress() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationAddress"))
 	if _r == 0 {
@@ -84,13 +88,13 @@ func (x *NEIPv6Route) DestinationAddress() string {
 	return purego.GoString(_r)
 }
 
-// A number containing the length in bits of the network prefix of the destination network. This prefix in combination with the destinationAddress property is used to determine the destination network of the route.
+// DestinationNetworkPrefixLength a number containing the length in bits of the network prefix of the destination network. This prefix in combination with the destinationAddress property is used to determine the destination network of the route.
 func (x *NEIPv6Route) DestinationNetworkPrefixLength() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationNetworkPrefixLength"))
 	return obj.Wrap(_r)
 }
 
-// The IPv6 address of the route's gateway. If this property is nil then the route's gateway will be set to the tunnel's virtual interface.
+// GatewayAddress the IPv6 address of the route's gateway. If this property is nil then the route's gateway will be set to the tunnel's virtual interface.
 func (x *NEIPv6Route) GatewayAddress() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gatewayAddress"))
 	if _r == 0 {
@@ -99,6 +103,7 @@ func (x *NEIPv6Route) GatewayAddress() string {
 	return purego.GoString(_r)
 }
 
+// SetGatewayAddress wraps the corresponding Objective-C method.
 func (x *NEIPv6Route) SetGatewayAddress(gatewayAddress string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGatewayAddress:"), purego.NSString(gatewayAddress))
 }

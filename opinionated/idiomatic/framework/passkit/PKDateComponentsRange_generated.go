@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that specifies the start and end dates for a range of time.
-//
 // DateComponentsRange is an idiomatic wrapper over the Objective-C class PKDateComponentsRange.
+//
+// An object that specifies the start and end dates for a range of time.
 type DateComponentsRange struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DateComponentsRangeFromID(id objc.ID) *DateComponentsRange {
 	if id == 0 {
 		return nil
 	}
-	x := &DateComponentsRange{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DateComponentsRange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func dateComponentsRangeAdopt(id objc.ID) *DateComponentsRange {
 	if id == 0 {
 		return nil
 	}
-	x := &DateComponentsRange{Handle: objref.Wrap(id)}
+	x := &DateComponentsRange{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,20 +60,26 @@ func (x *DateComponentsRange) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new time range with the start and end dates and times that you specify.
-//
-// NewDateComponentsRangeWithStartDateComponentsEndDateComponents creates a new DateComponentsRange.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DateComponentsRange) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDateComponentsRangeWithStartDateComponentsEndDateComponents creates a new time range with the start and end dates and times that you specify.
 func NewDateComponentsRangeWithStartDateComponentsEndDateComponents(startDateComponents obj.Object, endDateComponents obj.Object) *DateComponentsRange {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKDateComponentsRange")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartDateComponents:endDateComponents:"), objref.IDOf(startDateComponents), objref.IDOf(endDateComponents))
 	return dateComponentsRangeAdopt(_id)
 }
 
+// StartDateComponents wraps the corresponding Objective-C method.
 func (x *DateComponentsRange) StartDateComponents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDateComponents"))
 	return obj.Wrap(_r)
 }
 
+// EndDateComponents wraps the corresponding Objective-C method.
 func (x *DateComponentsRange) EndDateComponents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDateComponents"))
 	return obj.Wrap(_r)

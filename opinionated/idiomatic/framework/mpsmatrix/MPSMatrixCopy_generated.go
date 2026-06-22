@@ -23,7 +23,8 @@ func MatrixCopyFromID(id objc.ID) *MatrixCopy {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixCopy{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatrixCopy{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func matrixCopyAdopt(id objc.ID) *MatrixCopy {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixCopy{Handle: objref.Wrap(id)}
+	x := &MatrixCopy{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,31 +58,37 @@ func (x *MatrixCopy) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MatrixCopy) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMatrixCopy creates a new MatrixCopy.
 func NewMatrixCopy() *MatrixCopy {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixCopy")), objc.RegisterName("new"))
 	return matrixCopyAdopt(_id)
 }
 
-// The number of rows to copy for each copy operation
+// CopyRows the number of rows to copy for each copy operation
 func (x *MatrixCopy) CopyRows() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("copyRows"))
 	return _r
 }
 
-// The number of columns to copy for each copy operation
+// CopyColumns the number of columns to copy for each copy operation
 func (x *MatrixCopy) CopyColumns() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("copyColumns"))
 	return _r
 }
 
-// If YES, the sources are in row major storage order
+// SourcesAreTransposed if YES, the sources are in row major storage order
 func (x *MatrixCopy) SourcesAreTransposed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sourcesAreTransposed"))
 	return _r
 }
 
-// If YES, the destinations are in row major storage order
+// DestinationsAreTransposed if YES, the destinations are in row major storage order
 func (x *MatrixCopy) DestinationsAreTransposed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("destinationsAreTransposed"))
 	return _r

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An expression that evaluates the result of a fetch request on a managed object context.
-//
 // FetchRequestExpression is an idiomatic wrapper over the Objective-C class NSFetchRequestExpression.
+//
+// An expression that evaluates the result of a fetch request on a managed object context.
 type FetchRequestExpression struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FetchRequestExpressionFromID(id objc.ID) *FetchRequestExpression {
 	if id == 0 {
 		return nil
 	}
-	x := &FetchRequestExpression{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FetchRequestExpression{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func fetchRequestExpressionAdopt(id objc.ID) *FetchRequestExpression {
 	if id == 0 {
 		return nil
 	}
-	x := &FetchRequestExpression{Handle: objref.Wrap(id)}
+	x := &FetchRequestExpression{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,31 @@ func (x *FetchRequestExpression) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FetchRequestExpression) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFetchRequestExpression creates a new FetchRequestExpression.
 func NewFetchRequestExpression() *FetchRequestExpression {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSFetchRequestExpression")), objc.RegisterName("new"))
 	return fetchRequestExpressionAdopt(_id)
 }
 
+// RequestExpression wraps the corresponding Objective-C method.
 func (x *FetchRequestExpression) RequestExpression() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestExpression"))
 	return obj.Wrap(_r)
 }
 
+// ContextExpression wraps the corresponding Objective-C method.
 func (x *FetchRequestExpression) ContextExpression() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contextExpression"))
 	return obj.Wrap(_r)
 }
 
+// IsCountOnlyRequest wraps the corresponding Objective-C method.
 func (x *FetchRequestExpression) IsCountOnlyRequest() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCountOnlyRequest"))
 	return _r

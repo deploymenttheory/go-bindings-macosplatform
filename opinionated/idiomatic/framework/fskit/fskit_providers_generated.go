@@ -11,14 +11,17 @@ import (
 // EntityIdentifierProvider is accepted wherever a FSEntityIdentifier (or one of its subclasses) is expected.
 type EntityIdentifierProvider interface {
 	objref.Object
+	isEntityIdentifier()
 }
 
 // ItemAttributesProvider is accepted wherever a FSItemAttributes (or one of its subclasses) is expected.
 type ItemAttributesProvider interface {
 	objref.Object
+	isItemAttributes()
 }
 
 // ResourceProvider is accepted wherever a FSResource (or one of its subclasses) is expected.
 type ResourceProvider interface {
 	objref.Object
+	isResource()
 }

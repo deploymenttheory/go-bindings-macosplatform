@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract superclass for all EventKit classes that have persistent instances.
-//
 // Object is an idiomatic wrapper over the Objective-C class EKObject.
+//
+// Object is an abstract base — you do not construct it directly. Construct one of [Alarm], [CalendarItem], [Calendar], [Participant], [RecurrenceRule], [Source], [StructuredLocation] and pass it where a Object is accepted.
+//
+// An abstract superclass for all EventKit classes that have persistent instances.
 type Object struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ObjectFromID(id objc.ID) *Object {
 	if id == 0 {
 		return nil
 	}
-	x := &Object{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Object{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func objectAdopt(id objc.ID) *Object {
 	if id == 0 {
 		return nil
 	}
-	x := &Object{Handle: objref.Wrap(id)}
+	x := &Object{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,33 +62,35 @@ func (x *Object) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewObject creates a new Object.
-func NewObject() *Object {
-	_id := objc.Send[objc.ID](objc.ID(_class("EKObject")), objc.RegisterName("new"))
-	return objectAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Object) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns this object to its saved state.
+// Reset returns this object to its saved state.
 func (x *Object) Reset() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
-// Rolls back the property values of this object to its original state when it was first fetched.
+// Rollback rolls back the property values of this object to its original state when it was first fetched.
 func (x *Object) Rollback() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rollback"))
 }
 
-// Merges changes to this object with the latest saved values.
+// Refresh merges changes to this object with the latest saved values.
 func (x *Object) Refresh() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("refresh"))
 	return _r
 }
 
+// HasChanges wraps the corresponding Objective-C method.
 func (x *Object) HasChanges() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasChanges"))
 	return _r
 }
 
+// IsNew wraps the corresponding Objective-C method.
 func (x *Object) IsNew() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNew"))
 	return _r
@@ -101,3 +107,10 @@ type Objectable interface {
 }
 
 var _ Objectable = (*Object)(nil)
+
+// isObject marks Object — and, by embedding promotion, its
+// subclasses — as a member of the Object hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Object) isObject() {}
+
+var _ ObjectProvider = (*Object)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that specifies the behaviors to use when loading and rendering page content.
-//
 // WKWebpagePreferences is an idiomatic wrapper over the Objective-C class WKWebpagePreferences.
+//
+// An object that specifies the behaviors to use when loading and rendering page content.
 type WKWebpagePreferences struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKWebpagePreferencesFromID(id objc.ID) *WKWebpagePreferences {
 	if id == 0 {
 		return nil
 	}
-	x := &WKWebpagePreferences{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKWebpagePreferences{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKWebpagePreferencesAdopt(id objc.ID) *WKWebpagePreferences {
 	if id == 0 {
 		return nil
 	}
-	x := &WKWebpagePreferences{Handle: objref.Wrap(id)}
+	x := &WKWebpagePreferences{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,97 +60,99 @@ func (x *WKWebpagePreferences) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKWebpagePreferences) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKWebpagePreferences creates a new WKWebpagePreferences.
 func NewWKWebpagePreferences() *WKWebpagePreferences {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKWebpagePreferences")), objc.RegisterName("new"))
 	return wKWebpagePreferencesAdopt(_id)
 }
 
-// The content mode for the web view to use when it loads and renders a webpage.
-//
-// WithPreferredContentMode sets preferredContentMode and returns the receiver so calls can be chained.
+// WithPreferredContentMode the content mode for the web view to use when it loads and renders a webpage.
 func (x *WKWebpagePreferences) WithPreferredContentMode(preferredContentMode WKContentMode) *WKWebpagePreferences {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredContentMode:"), preferredContentMode)
 	return x
 }
 
-// A Boolean value that indicates whether JavaScript from web content is allowed to run.
-//
-// WithAllowsContentJavaScript sets allowsContentJavaScript and returns the receiver so calls can be chained.
+// WithAllowsContentJavaScript a Boolean value that indicates whether JavaScript from web content is allowed to run.
 func (x *WKWebpagePreferences) WithAllowsContentJavaScript(allowsContentJavaScript bool) *WKWebpagePreferences {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsContentJavaScript:"), allowsContentJavaScript)
 	return x
 }
 
-// A Boolean value that indicates whether to use Lockdown Mode in the web view.
-//
-// WithLockdownModeEnabled sets lockdownModeEnabled and returns the receiver so calls can be chained.
+// WithLockdownModeEnabled a Boolean value that indicates whether to use Lockdown Mode in the web view.
 func (x *WKWebpagePreferences) WithLockdownModeEnabled(lockdownModeEnabled bool) *WKWebpagePreferences {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLockdownModeEnabled:"), lockdownModeEnabled)
 	return x
 }
 
-// A WKWebpagePreferencesUpgradeToHTTPSPolicy indicating the desired mode used when performing a top-level navigation to a webpage. The default value is WKWebpagePreferencesUpgradeToHTTPSPolicyKeepAsRequested. The stated preference is ignored on subframe navigation, and it may be ignored based on system configuration. The upgradeKnownHostsToHTTPS property on WKWebViewConfiguration supercedes this policy for known hosts.
-//
-// WithPreferredHTTPSNavigationPolicy sets preferredHTTPSNavigationPolicy and returns the receiver so calls can be chained.
+// WithPreferredHTTPSNavigationPolicy a WKWebpagePreferencesUpgradeToHTTPSPolicy indicating the desired mode used when performing a top-level navigation to a webpage. The default value is WKWebpagePreferencesUpgradeToHTTPSPolicyKeepAsRequested. The stated preference is ignored on subframe navigation, and it may be ignored based on system configuration. The upgradeKnownHostsToHTTPS property on WKWebViewConfiguration supercedes this policy for known hosts.
 func (x *WKWebpagePreferences) WithPreferredHTTPSNavigationPolicy(preferredHTTPSNavigationPolicy WKWebpagePreferencesUpgradeToHTTPSPolicy) *WKWebpagePreferences {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredHTTPSNavigationPolicy:"), preferredHTTPSNavigationPolicy)
 	return x
 }
 
-// Security restriction mode for this navigation. Security restriction modes provide different levels of security hardening for high-risk browsing contexts. WKSecurityRestrictionModeMaximizeCompatibility provides additional hardening while maintaining full web compatibility: - JavaScript JIT compilation disabled (interpreter-only execution) - Increased Memory Tagging Extension (MTE) coverage across allocations in the WebContent process Setting a security restriction mode creates separate, isolated WebContent processes for the specified protection level. This preference only applies to main frame navigations and will be ignored for subframe navigations. When set for a main frame, all subframe content and opened windows inherit the same security restrictions. When the system has chosen WKSecurityRestrictionModeLockdown (e.g., in Lockdown Mode), attempts to set a less restrictive mode will fail silently. The default value is WKSecurityRestrictionModeNone.
-//
-// WithSecurityRestrictionMode sets securityRestrictionMode and returns the receiver so calls can be chained.
+// WithSecurityRestrictionMode security restriction mode for this navigation. Security restriction modes provide different levels of security hardening for high-risk browsing contexts. WKSecurityRestrictionModeMaximizeCompatibility provides additional hardening while maintaining full web compatibility: - JavaScript JIT compilation disabled (interpreter-only execution) - Increased Memory Tagging Extension (MTE) coverage across allocations in the WebContent process Setting a security restriction mode creates separate, isolated WebContent processes for the specified protection level. This preference only applies to main frame navigations and will be ignored for subframe navigations. When set for a main frame, all subframe content and opened windows inherit the same security restrictions. When the system has chosen WKSecurityRestrictionModeLockdown (e.g., in Lockdown Mode), attempts to set a less restrictive mode will fail silently. The default value is WKSecurityRestrictionModeNone.
 func (x *WKWebpagePreferences) WithSecurityRestrictionMode(securityRestrictionMode WKSecurityRestrictionMode) *WKWebpagePreferences {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecurityRestrictionMode:"), securityRestrictionMode)
 	return x
 }
 
-// A WKContentMode indicating the content mode to prefer when loading and rendering a webpage. The default value is WKContentModeRecommended. The stated preference is ignored on subframe navigation
+// PreferredContentMode a WKContentMode indicating the content mode to prefer when loading and rendering a webpage. The default value is WKContentModeRecommended. The stated preference is ignored on subframe navigation
 func (x *WKWebpagePreferences) PreferredContentMode() WKContentMode {
 	_r := objc.Send[WKContentMode](objref.IDOf(x), objc.RegisterName("preferredContentMode"))
 	return _r
 }
 
+// SetPreferredContentMode wraps the corresponding Objective-C method.
 func (x *WKWebpagePreferences) SetPreferredContentMode(preferredContentMode WKContentMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredContentMode:"), preferredContentMode)
 }
 
+// AllowsContentJavaScript wraps the corresponding Objective-C method.
 func (x *WKWebpagePreferences) AllowsContentJavaScript() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsContentJavaScript"))
 	return _r
 }
 
+// SetAllowsContentJavaScript wraps the corresponding Objective-C method.
 func (x *WKWebpagePreferences) SetAllowsContentJavaScript(allowsContentJavaScript bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsContentJavaScript:"), allowsContentJavaScript)
 }
 
-// A boolean indicating whether lockdown mode is enabled. This mode trades off performance and compatibility in favor of security. The default value depends on the system setting.
+// IsLockdownModeEnabled a boolean indicating whether lockdown mode is enabled. This mode trades off performance and compatibility in favor of security. The default value depends on the system setting.
 func (x *WKWebpagePreferences) IsLockdownModeEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLockdownModeEnabled"))
 	return _r
 }
 
+// SetLockdownModeEnabled wraps the corresponding Objective-C method.
 func (x *WKWebpagePreferences) SetLockdownModeEnabled(lockdownModeEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLockdownModeEnabled:"), lockdownModeEnabled)
 }
 
-// A WKWebpagePreferencesUpgradeToHTTPSPolicy indicating the desired mode used when performing a top-level navigation to a webpage. The default value is WKWebpagePreferencesUpgradeToHTTPSPolicyKeepAsRequested. The stated preference is ignored on subframe navigation, and it may be ignored based on system configuration. The upgradeKnownHostsToHTTPS property on WKWebViewConfiguration supercedes this policy for known hosts.
+// PreferredHTTPSNavigationPolicy a WKWebpagePreferencesUpgradeToHTTPSPolicy indicating the desired mode used when performing a top-level navigation to a webpage. The default value is WKWebpagePreferencesUpgradeToHTTPSPolicyKeepAsRequested. The stated preference is ignored on subframe navigation, and it may be ignored based on system configuration. The upgradeKnownHostsToHTTPS property on WKWebViewConfiguration supercedes this policy for known hosts.
 func (x *WKWebpagePreferences) PreferredHTTPSNavigationPolicy() WKWebpagePreferencesUpgradeToHTTPSPolicy {
 	_r := objc.Send[WKWebpagePreferencesUpgradeToHTTPSPolicy](objref.IDOf(x), objc.RegisterName("preferredHTTPSNavigationPolicy"))
 	return _r
 }
 
+// SetPreferredHTTPSNavigationPolicy wraps the corresponding Objective-C method.
 func (x *WKWebpagePreferences) SetPreferredHTTPSNavigationPolicy(preferredHTTPSNavigationPolicy WKWebpagePreferencesUpgradeToHTTPSPolicy) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredHTTPSNavigationPolicy:"), preferredHTTPSNavigationPolicy)
 }
 
-// Security restriction mode for this navigation. Security restriction modes provide different levels of security hardening for high-risk browsing contexts. WKSecurityRestrictionModeMaximizeCompatibility provides additional hardening while maintaining full web compatibility: - JavaScript JIT compilation disabled (interpreter-only execution) - Increased Memory Tagging Extension (MTE) coverage across allocations in the WebContent process Setting a security restriction mode creates separate, isolated WebContent processes for the specified protection level. This preference only applies to main frame navigations and will be ignored for subframe navigations. When set for a main frame, all subframe content and opened windows inherit the same security restrictions. When the system has chosen WKSecurityRestrictionModeLockdown (e.g., in Lockdown Mode), attempts to set a less restrictive mode will fail silently. The default value is WKSecurityRestrictionModeNone.
+// SecurityRestrictionMode security restriction mode for this navigation. Security restriction modes provide different levels of security hardening for high-risk browsing contexts. WKSecurityRestrictionModeMaximizeCompatibility provides additional hardening while maintaining full web compatibility: - JavaScript JIT compilation disabled (interpreter-only execution) - Increased Memory Tagging Extension (MTE) coverage across allocations in the WebContent process Setting a security restriction mode creates separate, isolated WebContent processes for the specified protection level. This preference only applies to main frame navigations and will be ignored for subframe navigations. When set for a main frame, all subframe content and opened windows inherit the same security restrictions. When the system has chosen WKSecurityRestrictionModeLockdown (e.g., in Lockdown Mode), attempts to set a less restrictive mode will fail silently. The default value is WKSecurityRestrictionModeNone.
 func (x *WKWebpagePreferences) SecurityRestrictionMode() WKSecurityRestrictionMode {
 	_r := objc.Send[WKSecurityRestrictionMode](objref.IDOf(x), objc.RegisterName("securityRestrictionMode"))
 	return _r
 }
 
+// SetSecurityRestrictionMode wraps the corresponding Objective-C method.
 func (x *WKWebpagePreferences) SetSecurityRestrictionMode(securityRestrictionMode WKSecurityRestrictionMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecurityRestrictionMode:"), securityRestrictionMode)
 }

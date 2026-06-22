@@ -23,7 +23,8 @@ func MTRDoorLockClusterDoorLockAlarmEventFromID(id objc.ID) *MTRDoorLockClusterD
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDoorLockClusterDoorLockAlarmEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDoorLockClusterDoorLockAlarmEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDoorLockClusterDoorLockAlarmEventAdopt(id objc.ID) *MTRDoorLockClusterDo
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDoorLockClusterDoorLockAlarmEvent{Handle: objref.Wrap(id)}
+	x := &MTRDoorLockClusterDoorLockAlarmEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTRDoorLockClusterDoorLockAlarmEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDoorLockClusterDoorLockAlarmEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDoorLockClusterDoorLockAlarmEvent creates a new MTRDoorLockClusterDoorLockAlarmEvent.
 func NewMTRDoorLockClusterDoorLockAlarmEvent() *MTRDoorLockClusterDoorLockAlarmEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDoorLockClusterDoorLockAlarmEvent")), objc.RegisterName("new"))
 	return mTRDoorLockClusterDoorLockAlarmEventAdopt(_id)
 }
 
-// WithAlarmCode sets alarmCode and returns the receiver so calls can be chained.
+// WithAlarmCode sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterDoorLockAlarmEvent) WithAlarmCode(alarmCode obj.Object) *MTRDoorLockClusterDoorLockAlarmEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarmCode:"), objref.IDOf(alarmCode))
 	return x
 }
 
+// AlarmCode wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterDoorLockAlarmEvent) AlarmCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alarmCode"))
 	return obj.Wrap(_r)
 }
 
+// SetAlarmCode wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterDoorLockAlarmEvent) SetAlarmCode(alarmCode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarmCode:"), objref.IDOf(alarmCode))
 }

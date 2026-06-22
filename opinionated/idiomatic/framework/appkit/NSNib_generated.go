@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object wrapper, or container, for an Interface Builder nib file.
-//
 // Nib is an idiomatic wrapper over the Objective-C class NSNib.
+//
+// An object wrapper, or container, for an Interface Builder nib file.
 type Nib struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NibFromID(id objc.ID) *Nib {
 	if id == 0 {
 		return nil
 	}
-	x := &Nib{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Nib{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nibAdopt(id objc.ID) *Nib {
 	if id == 0 {
 		return nil
 	}
-	x := &Nib{Handle: objref.Wrap(id)}
+	x := &Nib{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,46 +60,46 @@ func (x *Nib) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns an NSNib object initialized to the nib file in the specified bundle.
-//
-// NewNibWithNibNamedBundle creates a new Nib.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Nib) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNibWithNibNamedBundle returns an NSNib object initialized to the nib file in the specified bundle.
 func NewNibWithNibNamedBundle(nibName obj.Object, bundle obj.Object) *Nib {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNib")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNibNamed:bundle:"), objref.IDOf(nibName), objref.IDOf(bundle))
 	return nibAdopt(_id)
 }
 
-// Initializes an instance with nib data and specified bundle for locating resources.
-//
-// NewNibWithNibDataBundle creates a new Nib.
+// NewNibWithNibDataBundle initializes an instance with nib data and specified bundle for locating resources.
 func NewNibWithNibDataBundle(nibData obj.Object, bundle obj.Object) *Nib {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNib")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNibData:bundle:"), objref.IDOf(nibData), objref.IDOf(bundle))
 	return nibAdopt(_id)
 }
 
-// Returns an NSNib object initialized to the nib file at the specified URL.
-//
-// NewNibWithContentsOfURL creates a new Nib.
+// NewNibWithContentsOfURL returns an NSNib object initialized to the nib file at the specified URL.
 func NewNibWithContentsOfURL(nibFileURL string) *Nib {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNib")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), rt.FileURL(nibFileURL))
 	return nibAdopt(_id)
 }
 
-// Instantiates objects in the nib file with the specified owner.
+// InstantiateWithOwnerTopLevelObjects instantiates objects in the nib file with the specified owner.
 func (x *Nib) InstantiateWithOwnerTopLevelObjects(owner obj.Object, topLevelObjects obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("instantiateWithOwner:topLevelObjects:"), objref.IDOf(owner), objref.IDOf(topLevelObjects))
 	return _r
 }
 
-// Unarchives and instantiates the in-memory contents of the receiver’s nib file, creating a distinct object tree and top level objects.
+// InstantiateNibWithExternalNameTable unarchives and instantiates the in-memory contents of the receiver’s nib file, creating a distinct object tree and top level objects.
 func (x *Nib) InstantiateNibWithExternalNameTable(externalNameTable obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("instantiateNibWithExternalNameTable:"), objref.IDOf(externalNameTable))
 	return _r
 }
 
-// Unarchives and instantiates the in-memory contents of the receiver’s nib file, creating a distinct object tree and set of top level objects.
+// InstantiateNibWithOwnerTopLevelObjects unarchives and instantiates the in-memory contents of the receiver’s nib file, creating a distinct object tree and set of top level objects.
 func (x *Nib) InstantiateNibWithOwnerTopLevelObjects(owner obj.Object, topLevelObjects obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("instantiateNibWithOwner:topLevelObjects:"), objref.IDOf(owner), objref.IDOf(topLevelObjects))
 	return _r

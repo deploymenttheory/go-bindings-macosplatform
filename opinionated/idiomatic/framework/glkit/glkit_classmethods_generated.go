@@ -14,8 +14,8 @@ import (
 	"unsafe"
 )
 
-// Initialize all meshes in a Model I/O asset.
-func NewMeshesFromAssetSourceMeshesError(asset obj.Object, sourceMeshes []obj.Object) ([]*Mesh, error) {
+// NewMeshesFromAssetSourceMeshesError initialize all meshes in a Model I/O asset.
+func NewMeshesFromAssetSourceMeshesError(asset obj.Object, sourceMeshes []obj.Object) (result []*Mesh, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("GLKMesh")), objc.RegisterName("newMeshesFromAsset:sourceMeshes:error:"), objref.IDOf(asset), purego.SliceToNSArray(sourceMeshes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -24,8 +24,8 @@ func NewMeshesFromAssetSourceMeshesError(asset obj.Object, sourceMeshes []obj.Ob
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Mesh { return MeshFromID(_id) }), nil
 }
 
-// Loads a 2D texture image from a file and creates a new texture from the data.
-func TextureWithContentsOfFileOptionsError(path string, options obj.Object) (*TextureInfo, error) {
+// TextureWithContentsOfFileOptionsError loads a 2D texture image from a file and creates a new texture from the data.
+func TextureWithContentsOfFileOptionsError(path string, options obj.Object) (result *TextureInfo, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("GLKTextureLoader")), objc.RegisterName("textureWithContentsOfFile:options:error:"), purego.NSString(path), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -34,8 +34,8 @@ func TextureWithContentsOfFileOptionsError(path string, options obj.Object) (*Te
 	return TextureInfoFromID(_r), nil
 }
 
-// Loads a 2D texture image from a URL and creates a new texture from the data.
-func TextureWithContentsOfURLOptionsError(url string, options obj.Object) (*TextureInfo, error) {
+// TextureWithContentsOfURLOptionsError loads a 2D texture image from a URL and creates a new texture from the data.
+func TextureWithContentsOfURLOptionsError(url string, options obj.Object) (result *TextureInfo, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("GLKTextureLoader")), objc.RegisterName("textureWithContentsOfURL:options:error:"), rt.FileURL(url), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -44,7 +44,8 @@ func TextureWithContentsOfURLOptionsError(url string, options obj.Object) (*Text
 	return TextureInfoFromID(_r), nil
 }
 
-func TextureWithNameScaleFactorBundleOptionsError(name string, scaleFactor float64, bundle obj.Object, options obj.Object) (*TextureInfo, error) {
+// TextureWithNameScaleFactorBundleOptionsError wraps the corresponding Objective-C method.
+func TextureWithNameScaleFactorBundleOptionsError(name string, scaleFactor float64, bundle obj.Object, options obj.Object) (result *TextureInfo, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("GLKTextureLoader")), objc.RegisterName("textureWithName:scaleFactor:bundle:options:error:"), purego.NSString(name), scaleFactor, objref.IDOf(bundle), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -53,8 +54,8 @@ func TextureWithNameScaleFactorBundleOptionsError(name string, scaleFactor float
 	return TextureInfoFromID(_r), nil
 }
 
-// Loads a 2D texture image from a memory range and creates a new texture from the data.
-func TextureWithContentsOfDataOptionsError(data obj.Object, options obj.Object) (*TextureInfo, error) {
+// TextureWithContentsOfDataOptionsError loads a 2D texture image from a memory range and creates a new texture from the data.
+func TextureWithContentsOfDataOptionsError(data obj.Object, options obj.Object) (result *TextureInfo, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("GLKTextureLoader")), objc.RegisterName("textureWithContentsOfData:options:error:"), objref.IDOf(data), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -63,8 +64,8 @@ func TextureWithContentsOfDataOptionsError(data obj.Object, options obj.Object) 
 	return TextureInfoFromID(_r), nil
 }
 
-// Loads a 2D texture image from a Quartz image and creates a new texture from the data.
-func TextureWithCGImageOptionsError(cgImage obj.Object, options obj.Object) (*TextureInfo, error) {
+// TextureWithCGImageOptionsError loads a 2D texture image from a Quartz image and creates a new texture from the data.
+func TextureWithCGImageOptionsError(cgImage obj.Object, options obj.Object) (result *TextureInfo, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("GLKTextureLoader")), objc.RegisterName("textureWithCGImage:options:error:"), objref.IDOf(cgImage), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -73,8 +74,8 @@ func TextureWithCGImageOptionsError(cgImage obj.Object, options obj.Object) (*Te
 	return TextureInfoFromID(_r), nil
 }
 
-// Loads a cube map texture image from a series of files and creates a new texture from the data.
-func CubeMapWithContentsOfFilesOptionsError(paths []obj.Object, options obj.Object) (*TextureInfo, error) {
+// CubeMapWithContentsOfFilesOptionsError loads a cube map texture image from a series of files and creates a new texture from the data.
+func CubeMapWithContentsOfFilesOptionsError(paths []obj.Object, options obj.Object) (result *TextureInfo, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("GLKTextureLoader")), objc.RegisterName("cubeMapWithContentsOfFiles:options:error:"), purego.SliceToNSArray(paths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -83,8 +84,8 @@ func CubeMapWithContentsOfFilesOptionsError(paths []obj.Object, options obj.Obje
 	return TextureInfoFromID(_r), nil
 }
 
-// Loads a cube map texture image from a single file and creates a new texture from the data.
-func CubeMapWithContentsOfFileOptionsError(path string, options obj.Object) (*TextureInfo, error) {
+// CubeMapWithContentsOfFileOptionsError loads a cube map texture image from a single file and creates a new texture from the data.
+func CubeMapWithContentsOfFileOptionsError(path string, options obj.Object) (result *TextureInfo, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("GLKTextureLoader")), objc.RegisterName("cubeMapWithContentsOfFile:options:error:"), purego.NSString(path), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -93,8 +94,8 @@ func CubeMapWithContentsOfFileOptionsError(path string, options obj.Object) (*Te
 	return TextureInfoFromID(_r), nil
 }
 
-// Loads a cube map texture image from a single URL and creates a new texture from the data.
-func CubeMapWithContentsOfURLOptionsError(url string, options obj.Object) (*TextureInfo, error) {
+// CubeMapWithContentsOfURLOptionsError loads a cube map texture image from a single URL and creates a new texture from the data.
+func CubeMapWithContentsOfURLOptionsError(url string, options obj.Object) (result *TextureInfo, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("GLKTextureLoader")), objc.RegisterName("cubeMapWithContentsOfURL:options:error:"), rt.FileURL(url), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

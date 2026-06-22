@@ -23,7 +23,8 @@ func CalAttendeeFromID(id objc.ID) *CalAttendee {
 	if id == 0 {
 		return nil
 	}
-	x := &CalAttendee{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CalAttendee{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func calAttendeeAdopt(id objc.ID) *CalAttendee {
 	if id == 0 {
 		return nil
 	}
-	x := &CalAttendee{Handle: objref.Wrap(id)}
+	x := &CalAttendee{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,17 +58,25 @@ func (x *CalAttendee) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CalAttendee) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCalAttendee creates a new CalAttendee.
 func NewCalAttendee() *CalAttendee {
 	_id := objc.Send[objc.ID](objc.ID(_class("CalAttendee")), objc.RegisterName("new"))
 	return calAttendeeAdopt(_id)
 }
 
+// Address wraps the corresponding Objective-C method.
 func (x *CalAttendee) Address() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("address"))
 	return obj.Wrap(_r)
 }
 
+// CommonName wraps the corresponding Objective-C method.
 func (x *CalAttendee) CommonName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commonName"))
 	if _r == 0 {
@@ -75,6 +85,7 @@ func (x *CalAttendee) CommonName() string {
 	return purego.GoString(_r)
 }
 
+// Status wraps the corresponding Objective-C method.
 func (x *CalAttendee) Status() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
 	if _r == 0 {

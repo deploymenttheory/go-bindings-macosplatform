@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that encapsulates input for various WebAuthn extensions during passkey assertion.
-//
 // PasskeyAssertionCredentialExtensionInput is an idiomatic wrapper over the Objective-C class ASPasskeyAssertionCredentialExtensionInput.
+//
+// A type that encapsulates input for various WebAuthn extensions during passkey assertion.
 type PasskeyAssertionCredentialExtensionInput struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PasskeyAssertionCredentialExtensionInputFromID(id objc.ID) *PasskeyAssertio
 	if id == 0 {
 		return nil
 	}
-	x := &PasskeyAssertionCredentialExtensionInput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PasskeyAssertionCredentialExtensionInput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func passkeyAssertionCredentialExtensionInputAdopt(id objc.ID) *PasskeyAssertion
 	if id == 0 {
 		return nil
 	}
-	x := &PasskeyAssertionCredentialExtensionInput{Handle: objref.Wrap(id)}
+	x := &PasskeyAssertionCredentialExtensionInput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *PasskeyAssertionCredentialExtensionInput) IsKind(className string) bool
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PasskeyAssertionCredentialExtensionInput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPasskeyAssertionCredentialExtensionInput creates a new PasskeyAssertionCredentialExtensionInput.
 func NewPasskeyAssertionCredentialExtensionInput() *PasskeyAssertionCredentialExtensionInput {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASPasskeyAssertionCredentialExtensionInput")), objc.RegisterName("new"))
 	return passkeyAssertionCredentialExtensionInputAdopt(_id)
 }
 
+// LargeBlob wraps the corresponding Objective-C method.
 func (x *PasskeyAssertionCredentialExtensionInput) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("largeBlob"))
 	return AuthorizationPublicKeyCredentialLargeBlobAssertionInputFromID(_r)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The object for specifying the metadata necessary to provision identity documents.
-//
 // AddIdentityDocumentMetadata is an idiomatic wrapper over the Objective-C class PKAddIdentityDocumentMetadata.
+//
+// It embeds [IdentityDocumentMetadata], promoting that type's methods.
+//
+// The object for specifying the metadata necessary to provision identity documents.
 type AddIdentityDocumentMetadata struct {
-	objref.Handle
+	IdentityDocumentMetadata
 }
 
 // AddIdentityDocumentMetadataFromID adopts an existing Objective-C object as a AddIdentityDocumentMetadata
@@ -25,7 +26,8 @@ func AddIdentityDocumentMetadataFromID(id objc.ID) *AddIdentityDocumentMetadata 
 	if id == 0 {
 		return nil
 	}
-	x := &AddIdentityDocumentMetadata{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AddIdentityDocumentMetadata{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,43 +40,26 @@ func addIdentityDocumentMetadataAdopt(id objc.ID) *AddIdentityDocumentMetadata {
 	if id == 0 {
 		return nil
 	}
-	x := &AddIdentityDocumentMetadata{Handle: objref.Wrap(id)}
+	x := &AddIdentityDocumentMetadata{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *AddIdentityDocumentMetadata) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AddIdentityDocumentMetadata) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AddIdentityDocumentMetadata) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates the identity document metadata with parameters that the issuer’s server configures to indicate the specific product instance to provision.
-//
-// NewAddIdentityDocumentMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierIssuingCountryCodeDocumentTypePreview creates a new AddIdentityDocumentMetadata.
+// NewAddIdentityDocumentMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierIssuingCountryCodeDocumentTypePreview creates the identity document metadata with parameters that the issuer’s server configures to indicate the specific product instance to provision.
 func NewAddIdentityDocumentMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierIssuingCountryCodeDocumentTypePreview(credentialIdentifier string, sharingInstanceIdentifier string, templateIdentifier string, issuingCountryCode string, documentType AddIdentityDocumentType, preview *AddPassMetadataPreview) *AddIdentityDocumentMetadata {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKAddIdentityDocumentMetadata")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvisioningCredentialIdentifier:sharingInstanceIdentifier:cardTemplateIdentifier:issuingCountryCode:documentType:preview:"), purego.NSString(credentialIdentifier), purego.NSString(sharingInstanceIdentifier), purego.NSString(templateIdentifier), purego.NSString(issuingCountryCode), documentType, objref.IDOf(preview))
 	return addIdentityDocumentMetadataAdopt(_id)
 }
 
-// An identifier that references the target server environment Apple Pay servers need to connect with to provision the pass.
-//
-// WithServerEnvironmentIdentifier sets serverEnvironmentIdentifier and returns the receiver so calls can be chained.
+// WithServerEnvironmentIdentifier an identifier that references the target server environment Apple Pay servers need to connect with to provision the pass.
 func (x *AddIdentityDocumentMetadata) WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *AddIdentityDocumentMetadata {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerEnvironmentIdentifier:"), purego.NSString(serverEnvironmentIdentifier))
 	return x
 }
 
+// Preview wraps the corresponding Objective-C method.
 func (x *AddIdentityDocumentMetadata) Preview() *AddPassMetadataPreview {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preview"))
 	return AddPassMetadataPreviewFromID(_r)
@@ -88,3 +73,5 @@ type AddIdentityDocumentMetadataable interface {
 }
 
 var _ AddIdentityDocumentMetadataable = (*AddIdentityDocumentMetadata)(nil)
+
+var _ IdentityDocumentMetadataProvider = (*AddIdentityDocumentMetadata)(nil)

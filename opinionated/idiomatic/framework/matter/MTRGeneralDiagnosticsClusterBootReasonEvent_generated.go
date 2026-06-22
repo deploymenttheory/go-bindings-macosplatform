@@ -23,7 +23,8 @@ func MTRGeneralDiagnosticsClusterBootReasonEventFromID(id objc.ID) *MTRGeneralDi
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGeneralDiagnosticsClusterBootReasonEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRGeneralDiagnosticsClusterBootReasonEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRGeneralDiagnosticsClusterBootReasonEventAdopt(id objc.ID) *MTRGeneralDia
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGeneralDiagnosticsClusterBootReasonEvent{Handle: objref.Wrap(id)}
+	x := &MTRGeneralDiagnosticsClusterBootReasonEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTRGeneralDiagnosticsClusterBootReasonEvent) IsKind(className string) b
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRGeneralDiagnosticsClusterBootReasonEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRGeneralDiagnosticsClusterBootReasonEvent creates a new MTRGeneralDiagnosticsClusterBootReasonEvent.
 func NewMTRGeneralDiagnosticsClusterBootReasonEvent() *MTRGeneralDiagnosticsClusterBootReasonEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRGeneralDiagnosticsClusterBootReasonEvent")), objc.RegisterName("new"))
 	return mTRGeneralDiagnosticsClusterBootReasonEventAdopt(_id)
 }
 
-// WithBootReason sets bootReason and returns the receiver so calls can be chained.
+// WithBootReason sets the property and returns the receiver so calls can be chained.
 func (x *MTRGeneralDiagnosticsClusterBootReasonEvent) WithBootReason(bootReason obj.Object) *MTRGeneralDiagnosticsClusterBootReasonEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBootReason:"), objref.IDOf(bootReason))
 	return x
 }
 
+// BootReason wraps the corresponding Objective-C method.
 func (x *MTRGeneralDiagnosticsClusterBootReasonEvent) BootReason() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bootReason"))
 	return obj.Wrap(_r)
 }
 
+// SetBootReason wraps the corresponding Objective-C method.
 func (x *MTRGeneralDiagnosticsClusterBootReasonEvent) SetBootReason(bootReason obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBootReason:"), objref.IDOf(bootReason))
 }

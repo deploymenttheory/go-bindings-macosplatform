@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An indexed container for 3D objects and associated information, such as transform hierarchies, meshes, cameras, and lights.
-//
 // Asset is an idiomatic wrapper over the Objective-C class MDLAsset.
+//
+// An indexed container for 3D objects and associated information, such as transform hierarchies, meshes, cameras, and lights.
 type Asset struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func AssetFromID(id objc.ID) *Asset {
 	if id == 0 {
 		return nil
 	}
-	x := &Asset{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Asset{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func assetAdopt(id objc.ID) *Asset {
 	if id == 0 {
 		return nil
 	}
-	x := &Asset{Handle: objref.Wrap(id)}
+	x := &Asset{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,123 +61,124 @@ func (x *Asset) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes an asset from the file at the specified URL.
-//
-// NewAssetWithURL creates a new Asset.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Asset) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetWithURL initializes an asset from the file at the specified URL.
 func NewAssetWithURL(uRL string) *Asset {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLAsset")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(uRL))
 	return assetAdopt(_id)
 }
 
-// The time interval between data samples in the asset.
-//
-// WithFrameInterval sets frameInterval and returns the receiver so calls can be chained.
+// WithFrameInterval the time interval between data samples in the asset.
 func (x *Asset) WithFrameInterval(frameInterval float64) *Asset {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameInterval:"), frameInterval)
 	return x
 }
 
-// The timestamp for the first timed data sample in the asset.
-//
-// WithStartTime sets startTime and returns the receiver so calls can be chained.
+// WithStartTime the timestamp for the first timed data sample in the asset.
 func (x *Asset) WithStartTime(startTime float64) *Asset {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), startTime)
 	return x
 }
 
-// The timestamp for the last timed data sample in the asset.
-//
-// WithEndTime sets endTime and returns the receiver so calls can be chained.
+// WithEndTime the timestamp for the last timed data sample in the asset.
 func (x *Asset) WithEndTime(endTime float64) *Asset {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndTime:"), endTime)
 	return x
 }
 
-// Writes asset data to a file at the specified URL.
+// ExportAssetToURL writes asset data to a file at the specified URL.
 func (x *Asset) ExportAssetToURL(uRL string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("exportAssetToURL:"), rt.FileURL(uRL))
 	return _r
 }
 
-// Return the object at the specified path, or nil if none exists there
+// ObjectAtPath return the object at the specified path, or nil if none exists there
 func (x *Asset) ObjectAtPath(path string) *Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtPath:"), purego.NSString(path))
 	return ObjectFromID(_r)
 }
 
-// Iterates over all material properties on all materials. If they are string values or NSURL values, and can be resolved as textures, then the string and NSURL values will be replaced by MDLTextureSampler values.
+// LoadTextures iterates over all material properties on all materials. If they are string values or NSURL values, and can be resolved as textures, then the string and NSURL values will be replaced by MDLTextureSampler values.
 func (x *Asset) LoadTextures() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadTextures"))
 }
 
-// Adds the specified object to the asset’s list of top-level objects.
+// AddObject adds the specified object to the asset’s list of top-level objects.
 func (x *Asset) AddObject(object *Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObject:"), objref.IDOf(object))
 }
 
-// Removes the specified object from the asset’s list of top-level objects.
+// RemoveObject removes the specified object from the asset’s list of top-level objects.
 func (x *Asset) RemoveObject(object *Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObject:"), objref.IDOf(object))
 }
 
-// Returns the top-level object at the specified index in the asset, using subscript syntax.
+// ObjectAtIndexedSubscript returns the top-level object at the specified index in the asset, using subscript syntax.
 func (x *Asset) ObjectAtIndexedSubscript(index int) *Object {
 	errkit.CheckIndex(index, x.Count())
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), index)
 	return ObjectFromID(_r)
 }
 
-// Returns the top-level object at the specified index in the asset.
+// ObjectAtIndex returns the top-level object at the specified index in the asset.
 func (x *Asset) ObjectAtIndex(index int) *Object {
 	errkit.CheckIndex(index, x.Count())
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndex:"), index)
 	return ObjectFromID(_r)
 }
 
-// Inherent frame rate of an asset If no framerate was specified by resource or resource uncapable of specifying framerate, this value defaults to 0
+// FrameInterval inherent frame rate of an asset If no framerate was specified by resource or resource uncapable of specifying framerate, this value defaults to 0
 func (x *Asset) FrameInterval() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frameInterval"))
 	return _r
 }
 
+// SetFrameInterval wraps the corresponding Objective-C method.
 func (x *Asset) SetFrameInterval(frameInterval float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameInterval:"), frameInterval)
 }
 
-// Start time bracket of animation data If no animation data was specified by resource or resource incapable of specifying animation data, this value defaults to 0. If startTime was set explicitly, then the value of startTime will be the lesser of the set value and the animated values.
+// StartTime start time bracket of animation data If no animation data was specified by resource or resource incapable of specifying animation data, this value defaults to 0. If startTime was set explicitly, then the value of startTime will be the lesser of the set value and the animated values.
 func (x *Asset) StartTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("startTime"))
 	return _r
 }
 
+// SetStartTime wraps the corresponding Objective-C method.
 func (x *Asset) SetStartTime(startTime float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), startTime)
 }
 
-// End time bracket of animation data If no animation data was specified by resource or resource incapable of specifying animation data, this value defaults to 0. If the endTime was set explicitly, then the value of endTime will be the greater of the set value and the animated values.
+// EndTime end time bracket of animation data If no animation data was specified by resource or resource incapable of specifying animation data, this value defaults to 0. If the endTime was set explicitly, then the value of endTime will be the greater of the set value and the animated values.
 func (x *Asset) EndTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("endTime"))
 	return _r
 }
 
+// SetEndTime wraps the corresponding Objective-C method.
 func (x *Asset) SetEndTime(endTime float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndTime:"), endTime)
 }
 
-// URL used to create the asset If the asset was not created with a URL, nil will be returned.
+// URL URL used to create the asset If the asset was not created with a URL, nil will be returned.
 func (x *Asset) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// Vertex descriptor set upon asset initialization Will be nil if there was no descriptor set
+// VertexDescriptor vertex descriptor set upon asset initialization Will be nil if there was no descriptor set
 func (x *Asset) VertexDescriptor() *VertexDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexDescriptor"))
 	return VertexDescriptorFromID(_r)
 }
 
-// The number of top level objects
+// Count the number of top level objects
 func (x *Asset) Count() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
 	return _r

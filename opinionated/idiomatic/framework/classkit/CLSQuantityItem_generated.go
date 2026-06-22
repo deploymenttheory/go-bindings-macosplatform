@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Activity information that signifies a quantity.
-//
 // QuantityItem is an idiomatic wrapper over the Objective-C class CLSQuantityItem.
+//
+// It embeds [ActivityItem], promoting that type's methods.
+//
+// Activity information that signifies a quantity.
 type QuantityItem struct {
-	objref.Handle
+	ActivityItem
 }
 
 // QuantityItemFromID adopts an existing Objective-C object as a QuantityItem
@@ -25,7 +26,8 @@ func QuantityItemFromID(id objc.ID) *QuantityItem {
 	if id == 0 {
 		return nil
 	}
-	x := &QuantityItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QuantityItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,57 +40,38 @@ func quantityItemAdopt(id objc.ID) *QuantityItem {
 	if id == 0 {
 		return nil
 	}
-	x := &QuantityItem{Handle: objref.Wrap(id)}
+	x := &QuantityItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *QuantityItem) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *QuantityItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *QuantityItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes an activity item that records a discrete quantity.
-//
-// NewQuantityItemWithIdentifierTitle creates a new QuantityItem.
+// NewQuantityItemWithIdentifierTitle initializes an activity item that records a discrete quantity.
 func NewQuantityItemWithIdentifierTitle(identifier string, title string) *QuantityItem {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CLSQuantityItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:title:"), purego.NSString(identifier), purego.NSString(title))
 	return quantityItemAdopt(_id)
 }
 
-// A quantity associated with the task.
-//
-// WithQuantity sets quantity and returns the receiver so calls can be chained.
+// WithQuantity a quantity associated with the task.
 func (x *QuantityItem) WithQuantity(quantity float64) *QuantityItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuantity:"), quantity)
 	return x
 }
 
-// A human readable name for the activity item.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle a human readable name for the activity item.
 func (x *QuantityItem) WithTitle(title string) *QuantityItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// Quantity awarded.
+// Quantity quantity awarded.
 func (x *QuantityItem) Quantity() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("quantity"))
 	return _r
 }
 
+// SetQuantity wraps the corresponding Objective-C method.
 func (x *QuantityItem) SetQuantity(quantity float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuantity:"), quantity)
 }
@@ -103,3 +86,7 @@ type QuantityItemable interface {
 }
 
 var _ QuantityItemable = (*QuantityItem)(nil)
+
+var _ ActivityItemProvider = (*QuantityItem)(nil)
+
+var _ ObjectProvider = (*QuantityItem)(nil)

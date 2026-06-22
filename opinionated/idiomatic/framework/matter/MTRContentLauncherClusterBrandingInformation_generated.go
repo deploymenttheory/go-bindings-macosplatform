@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRContentLauncherClusterBrandingInformation is an idiomatic wrapper over the Objective-C class MTRContentLauncherClusterBrandingInformation.
+//
+// It embeds [MTRContentLauncherClusterBrandingInformationStruct], promoting that type's methods.
 type MTRContentLauncherClusterBrandingInformation struct {
-	objref.Handle
+	MTRContentLauncherClusterBrandingInformationStruct
 }
 
 // MTRContentLauncherClusterBrandingInformationFromID adopts an existing Objective-C object as a MTRContentLauncherClusterBrandingInformation
@@ -23,7 +24,8 @@ func MTRContentLauncherClusterBrandingInformationFromID(id objc.ID) *MTRContentL
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterBrandingInformation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRContentLauncherClusterBrandingInformation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRContentLauncherClusterBrandingInformationAdopt(id objc.ID) *MTRContentLa
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterBrandingInformation{Handle: objref.Wrap(id)}
+	x := &MTRContentLauncherClusterBrandingInformation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRContentLauncherClusterBrandingInformation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRContentLauncherClusterBrandingInformation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRContentLauncherClusterBrandingInformation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRContentLauncherClusterBrandingInformation creates a new MTRContentLauncherClusterBrandingInformation.
@@ -62,37 +50,37 @@ func NewMTRContentLauncherClusterBrandingInformation() *MTRContentLauncherCluste
 	return mTRContentLauncherClusterBrandingInformationAdopt(_id)
 }
 
-// WithProviderName sets providerName and returns the receiver so calls can be chained.
+// WithProviderName sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterBrandingInformation) WithProviderName(providerName string) *MTRContentLauncherClusterBrandingInformation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderName:"), purego.NSString(providerName))
 	return x
 }
 
-// WithBackground sets background and returns the receiver so calls can be chained.
+// WithBackground sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterBrandingInformation) WithBackground(background MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackground:"), objref.IDOf(background))
 	return x
 }
 
-// WithLogo sets logo and returns the receiver so calls can be chained.
+// WithLogo sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterBrandingInformation) WithLogo(logo MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLogo:"), objref.IDOf(logo))
 	return x
 }
 
-// WithProgressBar sets progressBar and returns the receiver so calls can be chained.
+// WithProgressBar sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterBrandingInformation) WithProgressBar(progressBar MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressBar:"), objref.IDOf(progressBar))
 	return x
 }
 
-// WithSplash sets splash and returns the receiver so calls can be chained.
+// WithSplash sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterBrandingInformation) WithSplash(splash MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSplash:"), objref.IDOf(splash))
 	return x
 }
 
-// WithWaterMark sets waterMark and returns the receiver so calls can be chained.
+// WithWaterMark sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterBrandingInformation) WithWaterMark(waterMark MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWaterMark:"), objref.IDOf(waterMark))
 	return x
@@ -110,3 +98,5 @@ type MTRContentLauncherClusterBrandingInformationable interface {
 }
 
 var _ MTRContentLauncherClusterBrandingInformationable = (*MTRContentLauncherClusterBrandingInformation)(nil)
+
+var _ MTRContentLauncherClusterBrandingInformationStructProvider = (*MTRContentLauncherClusterBrandingInformation)(nil)

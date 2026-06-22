@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that manages the queue of scheduled asset downloads.
-//
 // DownloadManager is an idiomatic wrapper over the Objective-C class BADownloadManager.
+//
+// An object that manages the queue of scheduled asset downloads.
 type DownloadManager struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func DownloadManagerFromID(id objc.ID) *DownloadManager {
 	if id == 0 {
 		return nil
 	}
-	x := &DownloadManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DownloadManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func downloadManagerAdopt(id objc.ID) *DownloadManager {
 	if id == 0 {
 		return nil
 	}
-	x := &DownloadManager{Handle: objref.Wrap(id)}
+	x := &DownloadManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,22 @@ func (x *DownloadManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DownloadManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDownloadManager creates a new DownloadManager.
 func NewDownloadManager() *DownloadManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("BADownloadManager")), objc.RegisterName("new"))
 	return downloadManagerAdopt(_id)
 }
 
-// Fetches current downloads. Fetches the current list of scheduled or in-flight downloads queued by your application or extension.
+// FetchCurrentDownloads fetches current downloads. Fetches the current list of scheduled or in-flight downloads queued by your application or extension.
 //
 // FetchCurrentDownloads returns the collection as a Go slice.
-func (x *DownloadManager) FetchCurrentDownloads() ([]*Download, error) {
+func (x *DownloadManager) FetchCurrentDownloads() (result []*Download, err error) {
 	var _nsErr uintptr
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchCurrentDownloads:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -78,7 +86,7 @@ func (x *DownloadManager) FetchCurrentDownloads() ([]*Download, error) {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Download { return DownloadFromID(_id) }), nil
 }
 
-// Schedules an asset download to execute in the background at a nonspecific time in the future.
+// ScheduleDownload schedules an asset download to execute in the background at a nonspecific time in the future.
 func (x *DownloadManager) ScheduleDownload(download *Download) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("scheduleDownload:error:"), objref.IDOf(download), unsafe.Pointer(&_nsErr))
@@ -88,7 +96,7 @@ func (x *DownloadManager) ScheduleDownload(download *Download) error {
 	return nil
 }
 
-// Schedules an asset download that executes immediately in the foreground.
+// StartForegroundDownload schedules an asset download that executes immediately in the foreground.
 func (x *DownloadManager) StartForegroundDownload(download *Download) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("startForegroundDownload:error:"), objref.IDOf(download), unsafe.Pointer(&_nsErr))
@@ -98,7 +106,7 @@ func (x *DownloadManager) StartForegroundDownload(download *Download) error {
 	return nil
 }
 
-// Cancels an asset download.
+// CancelDownload cancels an asset download.
 func (x *DownloadManager) CancelDownload(download *Download) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("cancelDownload:error:"), objref.IDOf(download), unsafe.Pointer(&_nsErr))

@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that looks up address strings for the provided geographic coordinates.
-//
 // ReverseGeocodingRequest is an idiomatic wrapper over the Objective-C class MKReverseGeocodingRequest.
+//
+// A class that looks up address strings for the provided geographic coordinates.
 type ReverseGeocodingRequest struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func ReverseGeocodingRequestFromID(id objc.ID) *ReverseGeocodingRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &ReverseGeocodingRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ReverseGeocodingRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func reverseGeocodingRequestAdopt(id objc.ID) *ReverseGeocodingRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &ReverseGeocodingRequest{Handle: objref.Wrap(id)}
+	x := &ReverseGeocodingRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,24 +62,28 @@ func (x *ReverseGeocodingRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ReverseGeocodingRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewReverseGeocodingRequest creates a new ReverseGeocodingRequest.
 func NewReverseGeocodingRequest() *ReverseGeocodingRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKReverseGeocodingRequest")), objc.RegisterName("new"))
 	return reverseGeocodingRequestAdopt(_id)
 }
 
-// A value that indicates the preferred locale for the addresses the request returns, or nil if the framework should use the device locale.
-//
-// WithPreferredLocale sets preferredLocale and returns the receiver so calls can be chained.
+// WithPreferredLocale a value that indicates the preferred locale for the addresses the request returns, or nil if the framework should use the device locale.
 func (x *ReverseGeocodingRequest) WithPreferredLocale(preferredLocale obj.Object) *ReverseGeocodingRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredLocale:"), objref.IDOf(preferredLocale))
 	return x
 }
 
-// Returns the map items relevant to the reverse geocoded location.
+// GetMapItems returns the map items relevant to the reverse geocoded location.
 //
 // GetMapItems blocks until the operation completes or ctx is cancelled.
-func (x *ReverseGeocodingRequest) GetMapItems(ctx context.Context) (obj.Object, error) {
+func (x *ReverseGeocodingRequest) GetMapItems(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -99,26 +105,30 @@ func (x *ReverseGeocodingRequest) GetMapItems(ctx context.Context) (obj.Object, 
 	}
 }
 
-// A method you call to cancel a reverse geocoding request that’s in progress.
+// Cancel a method you call to cancel a reverse geocoding request that’s in progress.
 func (x *ReverseGeocodingRequest) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
+// IsCancelled wraps the corresponding Objective-C method.
 func (x *ReverseGeocodingRequest) IsCancelled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCancelled"))
 	return _r
 }
 
+// IsLoading wraps the corresponding Objective-C method.
 func (x *ReverseGeocodingRequest) IsLoading() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLoading"))
 	return _r
 }
 
+// PreferredLocale wraps the corresponding Objective-C method.
 func (x *ReverseGeocodingRequest) PreferredLocale() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredLocale"))
 	return obj.Wrap(_r)
 }
 
+// SetPreferredLocale wraps the corresponding Objective-C method.
 func (x *ReverseGeocodingRequest) SetPreferredLocale(preferredLocale obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredLocale:"), objref.IDOf(preferredLocale))
 }

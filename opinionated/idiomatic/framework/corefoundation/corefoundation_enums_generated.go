@@ -51,6 +51,8 @@ const (
 	KCFCalendarUnitDayOfYear         CFCalendarUnit = 65536
 )
 
+// String returns the CFCalendarUnit constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFCalendarUnit) String() string {
 	var parts []string
 	if e&KCFCalendarUnitEra != 0 {
@@ -140,6 +142,8 @@ const (
 	KCFCharacterSetIllegal CFCharacterSetPredefinedSet = 12
 )
 
+// String returns the CFCharacterSetPredefinedSet constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFCharacterSetPredefinedSet) String() string {
 	switch e {
 	case KCFCharacterSetControl:
@@ -189,6 +193,8 @@ const (
 	KCFCompareGreaterThan CFComparisonResult = 1
 )
 
+// String returns the CFComparisonResult constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFComparisonResult) String() string {
 	switch e {
 	case KCFCompareLessThan:
@@ -218,6 +224,8 @@ const (
 	KCFDateFormatterFullStyle CFDateFormatterStyle = 4
 )
 
+// String returns the CFDateFormatterStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFDateFormatterStyle) String() string {
 	switch e {
 	case KCFDateFormatterNoStyle:
@@ -253,6 +261,8 @@ const (
 	KCFFileSecurityClearAccessControlList CFFileSecurityClearOptions = 32
 )
 
+// String returns the CFFileSecurityClearOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFFileSecurityClearOptions) String() string {
 	var parts []string
 	if e&KCFFileSecurityClearOwner != 0 {
@@ -299,6 +309,8 @@ const (
 	KCFISO8601DateFormatWithInternetDateTime         CFISO8601DateFormatOptions = 1907
 )
 
+// String returns the CFISO8601DateFormatOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFISO8601DateFormatOptions) String() string {
 	var parts []string
 	if e&KCFISO8601DateFormatWithYear != 0 {
@@ -360,6 +372,8 @@ const (
 	KCFLocaleLanguageDirectionBottomToTop CFLocaleLanguageDirection = 4
 )
 
+// String returns the CFLocaleLanguageDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFLocaleLanguageDirection) String() string {
 	switch e {
 	case KCFLocaleLanguageDirectionUnknown:
@@ -399,6 +413,8 @@ const (
 	KCFNumberFormatterCurrencyAccountingStyle CFNumberFormatterStyle = 10
 )
 
+// String returns the CFNumberFormatterStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFNumberFormatterStyle) String() string {
 	switch e {
 	case KCFNumberFormatterNoStyle:
@@ -466,6 +482,8 @@ const (
 	KCFNumberMaxType CFNumberType = 16
 )
 
+// String returns the CFNumberType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFNumberType) String() string {
 	switch e {
 	case KCFNumberSInt8Type:
@@ -517,6 +535,8 @@ const (
 	KCFPropertyListBinaryFormat_v1_0 CFPropertyListFormat = 200
 )
 
+// String returns the CFPropertyListFormat constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFPropertyListFormat) String() string {
 	switch e {
 	case KCFPropertyListOpenStepFormat:
@@ -542,6 +562,8 @@ const (
 	KCFSocketTimeout CFSocketError = -2
 )
 
+// String returns the CFSocketError constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFSocketError) String() string {
 	switch e {
 	case KCFSocketSuccess:
@@ -577,6 +599,8 @@ const (
 	KCFStreamStatusError CFStreamStatus = 7
 )
 
+// String returns the CFStreamStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFStreamStatus) String() string {
 	switch e {
 	case KCFStreamStatusNotOpen:
@@ -625,6 +649,8 @@ const (
 	KCFCompareForcedOrdering CFStringCompareFlags = 512
 )
 
+// String returns the CFStringCompareFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFStringCompareFlags) String() string {
 	var parts []string
 	if e&KCFCompareCaseInsensitive != 0 {
@@ -674,6 +700,8 @@ const (
 	KCFStringNormalizationFormKC CFStringNormalizationForm = 3
 )
 
+// String returns the CFStringNormalizationForm constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFStringNormalizationForm) String() string {
 	switch e {
 	case KCFStringNormalizationFormD:
@@ -710,6 +738,8 @@ const (
 	KCFStringTokenizerTokenIsCJWordMask CFStringTokenizerTokenType = 32
 )
 
+// String returns the CFStringTokenizerTokenType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFStringTokenizerTokenType) String() string {
 	var parts []string
 	if e&KCFStringTokenizerTokenNormal != 0 {
@@ -754,6 +784,8 @@ const (
 	KCFTimeZoneNameStyleShortGeneric CFTimeZoneNameStyle = 5
 )
 
+// String returns the CFTimeZoneNameStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFTimeZoneNameStyle) String() string {
 	switch e {
 	case KCFTimeZoneNameStyleStandard:
@@ -793,6 +825,8 @@ const (
 	KCFURLBookmarkCreationPreferFileIDResolutionMask CFURLBookmarkCreationOptions = 256
 )
 
+// String returns the CFURLBookmarkCreationOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFURLBookmarkCreationOptions) String() string {
 	var parts []string
 	if e&KCFURLBookmarkCreationMinimalBookmarkMask != 0 {
@@ -835,6 +869,8 @@ const (
 	KCFBookmarkResolutionWithoutMountingMask CFURLBookmarkResolutionOptions = 512
 )
 
+// String returns the CFURLBookmarkResolutionOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFURLBookmarkResolutionOptions) String() string {
 	var parts []string
 	if e&KCFURLBookmarkResolutionWithoutUIMask != 0 {
@@ -891,6 +927,8 @@ const (
 	KCFURLComponentFragment CFURLComponentType = 12
 )
 
+// String returns the CFURLComponentType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFURLComponentType) String() string {
 	switch e {
 	case KCFURLComponentScheme:
@@ -944,6 +982,8 @@ const (
 	KCFURLEnumeratorGenerateRelativePathURLs    CFURLEnumeratorOptions = 64
 )
 
+// String returns the CFURLEnumeratorOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFURLEnumeratorOptions) String() string {
 	var parts []string
 	if e&KCFURLEnumeratorDescendRecursively != 0 {
@@ -989,6 +1029,8 @@ const (
 	KCFURLWindowsPathStyle CFURLPathStyle = 2
 )
 
+// String returns the CFURLPathStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFURLPathStyle) String() string {
 	switch e {
 	case KCFURLPOSIXPathStyle:
@@ -1038,6 +1080,8 @@ const (
 	KCFXMLNodeTypeAttributeListDeclaration CFXMLNodeTypeCode = 15
 )
 
+// String returns the CFXMLNodeTypeCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFXMLNodeTypeCode) String() string {
 	switch e {
 	case KCFXMLNodeTypeDocument:
@@ -1118,6 +1162,8 @@ const (
 	KCFXMLErrorNoData CFXMLParserStatusCode = 15
 )
 
+// String returns the CFXMLParserStatusCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFXMLParserStatusCode) String() string {
 	var parts []string
 	if e&KCFXMLStatusParseNotBegun != 0 {

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that allows control of the playback rate.
-//
 // AudioUnitVarispeed is an idiomatic wrapper over the Objective-C class AVAudioUnitVarispeed.
+//
+// It embeds [AudioUnitTimeEffect], promoting that type's methods.
+//
+// An object that allows control of the playback rate.
 type AudioUnitVarispeed struct {
-	objref.Handle
+	AudioUnitTimeEffect
 }
 
 // AudioUnitVarispeedFromID adopts an existing Objective-C object as a AudioUnitVarispeed
@@ -25,7 +26,8 @@ func AudioUnitVarispeedFromID(id objc.ID) *AudioUnitVarispeed {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitVarispeed{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioUnitVarispeed{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func audioUnitVarispeedAdopt(id objc.ID) *AudioUnitVarispeed {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitVarispeed{Handle: objref.Wrap(id)}
+	x := &AudioUnitVarispeed{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AudioUnitVarispeed) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioUnitVarispeed) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioUnitVarispeed) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAudioUnitVarispeed creates a new AudioUnitVarispeed.
@@ -64,27 +52,25 @@ func NewAudioUnitVarispeed() *AudioUnitVarispeed {
 	return audioUnitVarispeedAdopt(_id)
 }
 
-// The audio playback rate.
-//
-// WithRate sets rate and returns the receiver so calls can be chained.
+// WithRate the audio playback rate.
 func (x *AudioUnitVarispeed) WithRate(rate float32) *AudioUnitVarispeed {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 	return x
 }
 
-// The bypass state of the audio unit.
-//
-// WithBypass sets bypass and returns the receiver so calls can be chained.
+// WithBypass the bypass state of the audio unit.
 func (x *AudioUnitVarispeed) WithBypass(bypass bool) *AudioUnitVarispeed {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
 	return x
 }
 
+// Rate wraps the corresponding Objective-C method.
 func (x *AudioUnitVarispeed) Rate() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rate"))
 	return _r
 }
 
+// SetRate wraps the corresponding Objective-C method.
 func (x *AudioUnitVarispeed) SetRate(rate float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 }
@@ -99,3 +85,9 @@ type AudioUnitVarispeedable interface {
 }
 
 var _ AudioUnitVarispeedable = (*AudioUnitVarispeed)(nil)
+
+var _ AudioUnitTimeEffectProvider = (*AudioUnitVarispeed)(nil)
+
+var _ AudioUnitProvider = (*AudioUnitVarispeed)(nil)
+
+var _ AudioNodeProvider = (*AudioUnitVarispeed)(nil)

@@ -20,6 +20,8 @@ const (
 	ContentRequestPeriodic ContentRequest = 3
 )
 
+// String returns the ContentRequest constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ContentRequest) String() string {
 	switch e {
 	case ContentRequestInstall:
@@ -44,6 +46,8 @@ const (
 	DownloadStateFinished    DownloadState = 3
 )
 
+// String returns the DownloadState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DownloadState) String() string {
 	switch e {
 	case DownloadStateFailed:
@@ -83,6 +87,8 @@ const (
 	ErrorCodeSessionDownloadNotPermittedBeforeAppLaunch ErrorCode = 206
 )
 
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ErrorCode) String() string {
 	switch e {
 	case ErrorCodeDownloadInvalid:
@@ -134,6 +140,8 @@ const (
 	ManagedErrorCodeFileNotFound ManagedErrorCode = 1
 )
 
+// String returns the ManagedErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ManagedErrorCode) String() string {
 	switch e {
 	case ManagedErrorCodeAssetPackNotFound:

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents matchmaking results, including the players that join the match and their properties that matchmaking rules uses.
-//
 // MatchedPlayers is an idiomatic wrapper over the Objective-C class GKMatchedPlayers.
+//
+// An object that represents matchmaking results, including the players that join the match and their properties that matchmaking rules uses.
 type MatchedPlayers struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MatchedPlayersFromID(id objc.ID) *MatchedPlayers {
 	if id == 0 {
 		return nil
 	}
-	x := &MatchedPlayers{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatchedPlayers{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func matchedPlayersAdopt(id objc.ID) *MatchedPlayers {
 	if id == 0 {
 		return nil
 	}
-	x := &MatchedPlayers{Handle: objref.Wrap(id)}
+	x := &MatchedPlayers{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +60,27 @@ func (x *MatchedPlayers) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MatchedPlayers) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMatchedPlayers creates a new MatchedPlayers.
 func NewMatchedPlayers() *MatchedPlayers {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKMatchedPlayers")), objc.RegisterName("new"))
 	return matchedPlayersAdopt(_id)
 }
 
+// Players wraps the corresponding Objective-C method.
+//
 // Players returns the collection as a Go slice.
 func (x *MatchedPlayers) Players() []*Player {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("players"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Player { return PlayerFromID(_id) })
 }
 
+// PlayerProperties wraps the corresponding Objective-C method.
 func (x *MatchedPlayers) PlayerProperties() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerProperties"))
 	return obj.Wrap(_r)

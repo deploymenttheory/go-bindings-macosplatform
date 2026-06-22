@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // CNNConvolutionTransposeGradientNode is an idiomatic wrapper over the Objective-C class MPSCNNConvolutionTransposeGradientNode.
+//
+// It embeds [CNNConvolutionGradientNode], promoting that type's methods.
 type CNNConvolutionTransposeGradientNode struct {
-	objref.Handle
+	CNNConvolutionGradientNode
 }
 
 // CNNConvolutionTransposeGradientNodeFromID adopts an existing Objective-C object as a CNNConvolutionTransposeGradientNode
@@ -23,7 +24,8 @@ func CNNConvolutionTransposeGradientNodeFromID(id objc.ID) *CNNConvolutionTransp
 	if id == 0 {
 		return nil
 	}
-	x := &CNNConvolutionTransposeGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNConvolutionTransposeGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func cNNConvolutionTransposeGradientNodeAdopt(id objc.ID) *CNNConvolutionTranspo
 	if id == 0 {
 		return nil
 	}
-	x := &CNNConvolutionTransposeGradientNode{Handle: objref.Wrap(id)}
+	x := &CNNConvolutionTransposeGradientNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNConvolutionTransposeGradientNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNConvolutionTransposeGradientNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNConvolutionTransposeGradientNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNConvolutionTransposeGradientNode creates a new CNNConvolutionTransposeGradientNode.
@@ -62,9 +50,7 @@ func NewCNNConvolutionTransposeGradientNode() *CNNConvolutionTransposeGradientNo
 	return cNNConvolutionTransposeGradientNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNConvolutionTransposeGradientNode) WithLabel(label string) *CNNConvolutionTransposeGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -77,3 +63,9 @@ type CNNConvolutionTransposeGradientNodeable interface {
 }
 
 var _ CNNConvolutionTransposeGradientNodeable = (*CNNConvolutionTransposeGradientNode)(nil)
+
+var _ CNNConvolutionGradientNodeProvider = (*CNNConvolutionTransposeGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*CNNConvolutionTransposeGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNConvolutionTransposeGradientNode)(nil)

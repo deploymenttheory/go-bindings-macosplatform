@@ -6,6 +6,7 @@ package quartzcomposer
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -23,7 +24,8 @@ func RendererFromID(id objc.ID) *Renderer {
 	if id == 0 {
 		return nil
 	}
-	x := &Renderer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Renderer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +38,8 @@ func rendererAdopt(id objc.ID) *Renderer {
 	if id == 0 {
 		return nil
 	}
-	x := &Renderer{Handle: objref.Wrap(id)}
+	x := &Renderer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +59,12 @@ func (x *Renderer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Renderer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRendererWithCompositionColorSpace creates a new Renderer.
 func NewRendererWithCompositionColorSpace(composition obj.Object, colorSpace obj.Object) *Renderer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("QCRenderer")), objc.RegisterName("alloc"))
@@ -70,6 +79,13 @@ func NewRendererWithCGLContextPixelFormatColorSpaceComposition(context_ obj.Obje
 	return rendererAdopt(_id)
 }
 
+// NewRendererOffScreenWithSizeColorSpaceComposition creates a new Renderer.
+func NewRendererOffScreenWithSizeColorSpaceComposition(size corefoundation.CGSize, colorSpace obj.Object, composition obj.Object) *Renderer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("QCRenderer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initOffScreenWithSize:colorSpace:composition:"), size, objref.IDOf(colorSpace), objref.IDOf(composition))
+	return rendererAdopt(_id)
+}
+
 // NewRendererWithOpenGLContextPixelFormatFile creates a new Renderer.
 func NewRendererWithOpenGLContextPixelFormatFile(context_ obj.Object, format obj.Object, path string) *Renderer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("QCRenderer")), objc.RegisterName("alloc"))
@@ -77,26 +93,31 @@ func NewRendererWithOpenGLContextPixelFormatFile(context_ obj.Object, format obj
 	return rendererAdopt(_id)
 }
 
+// RenderAtTimeArguments wraps the corresponding Objective-C method.
 func (x *Renderer) RenderAtTimeArguments(time_ float64, arguments obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("renderAtTime:arguments:"), time_, objref.IDOf(arguments))
 	return _r
 }
 
+// RenderingTimeForTimeArguments wraps the corresponding Objective-C method.
 func (x *Renderer) RenderingTimeForTimeArguments(time_ float64, arguments obj.Object) float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("renderingTimeForTime:arguments:"), time_, objref.IDOf(arguments))
 	return _r
 }
 
+// Composition wraps the corresponding Objective-C method.
 func (x *Renderer) Composition() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("composition"))
 	return obj.Wrap(_r)
 }
 
+// SnapshotImage wraps the corresponding Objective-C method.
 func (x *Renderer) SnapshotImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotImage"))
 	return obj.Wrap(_r)
 }
 
+// CreateSnapshotImageOfType wraps the corresponding Objective-C method.
 func (x *Renderer) CreateSnapshotImageOfType(type_ string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createSnapshotImageOfType:"), purego.NSString(type_))
 	return obj.Wrap(_r)

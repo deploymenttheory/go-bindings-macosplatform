@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides the track-level interface to inspect a fragmented asset’s media tracks.
-//
 // FragmentedAssetTrack is an idiomatic wrapper over the Objective-C class AVFragmentedAssetTrack.
+//
+// It embeds [AssetTrack], promoting that type's methods.
+//
+// An object that provides the track-level interface to inspect a fragmented asset’s media tracks.
 type FragmentedAssetTrack struct {
-	objref.Handle
+	AssetTrack
 }
 
 // FragmentedAssetTrackFromID adopts an existing Objective-C object as a FragmentedAssetTrack
@@ -25,7 +26,8 @@ func FragmentedAssetTrackFromID(id objc.ID) *FragmentedAssetTrack {
 	if id == 0 {
 		return nil
 	}
-	x := &FragmentedAssetTrack{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FragmentedAssetTrack{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func fragmentedAssetTrackAdopt(id objc.ID) *FragmentedAssetTrack {
 	if id == 0 {
 		return nil
 	}
-	x := &FragmentedAssetTrack{Handle: objref.Wrap(id)}
+	x := &FragmentedAssetTrack{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *FragmentedAssetTrack) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FragmentedAssetTrack) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FragmentedAssetTrack) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewFragmentedAssetTrack creates a new FragmentedAssetTrack.
@@ -70,3 +58,5 @@ type FragmentedAssetTrackable interface {
 }
 
 var _ FragmentedAssetTrackable = (*FragmentedAssetTrack)(nil)
+
+var _ AssetTrackProvider = (*FragmentedAssetTrack)(nil)

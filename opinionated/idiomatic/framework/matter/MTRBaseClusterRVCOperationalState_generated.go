@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBaseClusterRVCOperationalState is an idiomatic wrapper over the Objective-C class MTRBaseClusterRVCOperationalState.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
 type MTRBaseClusterRVCOperationalState struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterRVCOperationalStateFromID adopts an existing Objective-C object as a MTRBaseClusterRVCOperationalState
@@ -25,7 +26,8 @@ func MTRBaseClusterRVCOperationalStateFromID(id objc.ID) *MTRBaseClusterRVCOpera
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterRVCOperationalState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterRVCOperationalState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,39 +40,23 @@ func mTRBaseClusterRVCOperationalStateAdopt(id objc.ID) *MTRBaseClusterRVCOperat
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterRVCOperationalState{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterRVCOperationalState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterRVCOperationalState) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterRVCOperationalState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterRVCOperationalState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterRVCOperationalStateWithDeviceEndpointIDQueue creates a new MTRBaseClusterRVCOperationalState.
+// NewMTRBaseClusterRVCOperationalStateWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterRVCOperationalStateWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterRVCOperationalState {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterRVCOperationalState")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterRVCOperationalStateAdopt(_id)
 }
 
-// Command Pause Upon receipt, the device SHALL pause its operation if it is possible based on the current function of the server.
+// PauseWithParamsCompletion command Pause Upon receipt, the device SHALL pause its operation if it is possible based on the current function of the server.
 //
 // PauseWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) PauseWithParamsCompletion(ctx context.Context, params *MTRRVCOperationalStateClusterPauseParams) (*MTRRVCOperationalStateClusterOperationalCommandResponseParams, error) {
+func (x *MTRBaseClusterRVCOperationalState) PauseWithParamsCompletion(ctx context.Context, params *MTRRVCOperationalStateClusterPauseParams) (result *MTRRVCOperationalStateClusterOperationalCommandResponseParams, err error) {
 	type _result struct {
 		val *MTRRVCOperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -92,8 +78,10 @@ func (x *MTRBaseClusterRVCOperationalState) PauseWithParamsCompletion(ctx contex
 	}
 }
 
+// PauseWithCompletion wraps the corresponding Objective-C method.
+//
 // PauseWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) PauseWithCompletion(ctx context.Context) (*MTRRVCOperationalStateClusterOperationalCommandResponseParams, error) {
+func (x *MTRBaseClusterRVCOperationalState) PauseWithCompletion(ctx context.Context) (result *MTRRVCOperationalStateClusterOperationalCommandResponseParams, err error) {
 	type _result struct {
 		val *MTRRVCOperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -115,10 +103,10 @@ func (x *MTRBaseClusterRVCOperationalState) PauseWithCompletion(ctx context.Cont
 	}
 }
 
-// Command Resume Upon receipt, the device SHALL resume its operation from the point it was at when it received the Pause command, or from the point when it was paused by means outside of this cluster (for example by manual button press).
+// ResumeWithParamsCompletion command Resume Upon receipt, the device SHALL resume its operation from the point it was at when it received the Pause command, or from the point when it was paused by means outside of this cluster (for example by manual button press).
 //
 // ResumeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) ResumeWithParamsCompletion(ctx context.Context, params *MTRRVCOperationalStateClusterResumeParams) (*MTRRVCOperationalStateClusterOperationalCommandResponseParams, error) {
+func (x *MTRBaseClusterRVCOperationalState) ResumeWithParamsCompletion(ctx context.Context, params *MTRRVCOperationalStateClusterResumeParams) (result *MTRRVCOperationalStateClusterOperationalCommandResponseParams, err error) {
 	type _result struct {
 		val *MTRRVCOperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -140,8 +128,10 @@ func (x *MTRBaseClusterRVCOperationalState) ResumeWithParamsCompletion(ctx conte
 	}
 }
 
+// ResumeWithCompletion wraps the corresponding Objective-C method.
+//
 // ResumeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) ResumeWithCompletion(ctx context.Context) (*MTRRVCOperationalStateClusterOperationalCommandResponseParams, error) {
+func (x *MTRBaseClusterRVCOperationalState) ResumeWithCompletion(ctx context.Context) (result *MTRRVCOperationalStateClusterOperationalCommandResponseParams, err error) {
 	type _result struct {
 		val *MTRRVCOperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -163,10 +153,10 @@ func (x *MTRBaseClusterRVCOperationalState) ResumeWithCompletion(ctx context.Con
 	}
 }
 
-// Command GoHome
+// GoHomeWithParamsCompletion command GoHome
 //
 // GoHomeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) GoHomeWithParamsCompletion(ctx context.Context, params *MTRRVCOperationalStateClusterGoHomeParams) (*MTRRVCOperationalStateClusterOperationalCommandResponseParams, error) {
+func (x *MTRBaseClusterRVCOperationalState) GoHomeWithParamsCompletion(ctx context.Context, params *MTRRVCOperationalStateClusterGoHomeParams) (result *MTRRVCOperationalStateClusterOperationalCommandResponseParams, err error) {
 	type _result struct {
 		val *MTRRVCOperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -188,8 +178,10 @@ func (x *MTRBaseClusterRVCOperationalState) GoHomeWithParamsCompletion(ctx conte
 	}
 }
 
+// GoHomeWithCompletion wraps the corresponding Objective-C method.
+//
 // GoHomeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) GoHomeWithCompletion(ctx context.Context) (*MTRRVCOperationalStateClusterOperationalCommandResponseParams, error) {
+func (x *MTRBaseClusterRVCOperationalState) GoHomeWithCompletion(ctx context.Context) (result *MTRRVCOperationalStateClusterOperationalCommandResponseParams, err error) {
 	type _result struct {
 		val *MTRRVCOperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -211,8 +203,10 @@ func (x *MTRBaseClusterRVCOperationalState) GoHomeWithCompletion(ctx context.Con
 	}
 }
 
+// ReadAttributePhaseListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePhaseListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) ReadAttributePhaseListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterRVCOperationalState) ReadAttributePhaseListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -234,8 +228,10 @@ func (x *MTRBaseClusterRVCOperationalState) ReadAttributePhaseListWithCompletion
 	}
 }
 
+// SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -257,8 +253,10 @@ func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributePhaseListWithParam
 	}
 }
 
+// ReadAttributeCurrentPhaseWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentPhaseWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) ReadAttributeCurrentPhaseWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterRVCOperationalState) ReadAttributeCurrentPhaseWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -280,8 +278,10 @@ func (x *MTRBaseClusterRVCOperationalState) ReadAttributeCurrentPhaseWithComplet
 	}
 }
 
+// SubscribeAttributeCurrentPhaseWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentPhaseWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeCurrentPhaseWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeCurrentPhaseWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -303,8 +303,10 @@ func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeCurrentPhaseWithPa
 	}
 }
 
+// ReadAttributeCountdownTimeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCountdownTimeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) ReadAttributeCountdownTimeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterRVCOperationalState) ReadAttributeCountdownTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -326,8 +328,10 @@ func (x *MTRBaseClusterRVCOperationalState) ReadAttributeCountdownTimeWithComple
 	}
 }
 
+// SubscribeAttributeCountdownTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCountdownTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeCountdownTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeCountdownTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -349,8 +353,10 @@ func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeCountdownTimeWithP
 	}
 }
 
+// ReadAttributeOperationalStateListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeOperationalStateListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) ReadAttributeOperationalStateListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterRVCOperationalState) ReadAttributeOperationalStateListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -372,8 +378,10 @@ func (x *MTRBaseClusterRVCOperationalState) ReadAttributeOperationalStateListWit
 	}
 }
 
+// SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -395,8 +403,10 @@ func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeOperationalStateLi
 	}
 }
 
+// ReadAttributeOperationalStateWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeOperationalStateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) ReadAttributeOperationalStateWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterRVCOperationalState) ReadAttributeOperationalStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -418,8 +428,10 @@ func (x *MTRBaseClusterRVCOperationalState) ReadAttributeOperationalStateWithCom
 	}
 }
 
+// SubscribeAttributeOperationalStateWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOperationalStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeOperationalStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeOperationalStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -441,8 +453,10 @@ func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeOperationalStateWi
 	}
 }
 
+// ReadAttributeOperationalErrorWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeOperationalErrorWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) ReadAttributeOperationalErrorWithCompletion(ctx context.Context) (*MTRRVCOperationalStateClusterErrorStateStruct, error) {
+func (x *MTRBaseClusterRVCOperationalState) ReadAttributeOperationalErrorWithCompletion(ctx context.Context) (result *MTRRVCOperationalStateClusterErrorStateStruct, err error) {
 	type _result struct {
 		val *MTRRVCOperationalStateClusterErrorStateStruct
 		err error
@@ -464,8 +478,10 @@ func (x *MTRBaseClusterRVCOperationalState) ReadAttributeOperationalErrorWithCom
 	}
 }
 
+// SubscribeAttributeOperationalErrorWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOperationalErrorWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeOperationalErrorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRRVCOperationalStateClusterErrorStateStruct, error) {
+func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeOperationalErrorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRRVCOperationalStateClusterErrorStateStruct, err error) {
 	type _result struct {
 		val *MTRRVCOperationalStateClusterErrorStateStruct
 		err error
@@ -487,8 +503,10 @@ func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeOperationalErrorWi
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterRVCOperationalState) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -510,8 +528,10 @@ func (x *MTRBaseClusterRVCOperationalState) ReadAttributeGeneratedCommandListWit
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -533,8 +553,10 @@ func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeGeneratedCommandLi
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterRVCOperationalState) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -556,8 +578,10 @@ func (x *MTRBaseClusterRVCOperationalState) ReadAttributeAcceptedCommandListWith
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -579,8 +603,10 @@ func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeAcceptedCommandLis
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterRVCOperationalState) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -602,8 +628,10 @@ func (x *MTRBaseClusterRVCOperationalState) ReadAttributeAttributeListWithComple
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -625,8 +653,10 @@ func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeAttributeListWithP
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterRVCOperationalState) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -648,8 +678,10 @@ func (x *MTRBaseClusterRVCOperationalState) ReadAttributeFeatureMapWithCompletio
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -671,8 +703,10 @@ func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeFeatureMapWithPara
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterRVCOperationalState) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -694,8 +728,10 @@ func (x *MTRBaseClusterRVCOperationalState) ReadAttributeClusterRevisionWithComp
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -751,3 +787,7 @@ type MTRBaseClusterRVCOperationalStateable interface {
 }
 
 var _ MTRBaseClusterRVCOperationalStateable = (*MTRBaseClusterRVCOperationalState)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterRVCOperationalState)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterRVCOperationalState)(nil)

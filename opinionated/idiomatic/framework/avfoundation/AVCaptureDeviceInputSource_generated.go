@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A distinct input source on a capture device.
-//
 // CaptureDeviceInputSource is an idiomatic wrapper over the Objective-C class AVCaptureDeviceInputSource.
+//
+// A distinct input source on a capture device.
 type CaptureDeviceInputSource struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CaptureDeviceInputSourceFromID(id objc.ID) *CaptureDeviceInputSource {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureDeviceInputSource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptureDeviceInputSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func captureDeviceInputSourceAdopt(id objc.ID) *CaptureDeviceInputSource {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureDeviceInputSource{Handle: objref.Wrap(id)}
+	x := &CaptureDeviceInputSource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *CaptureDeviceInputSource) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptureDeviceInputSource) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCaptureDeviceInputSource creates a new CaptureDeviceInputSource.
 func NewCaptureDeviceInputSource() *CaptureDeviceInputSource {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureDeviceInputSource")), objc.RegisterName("new"))
 	return captureDeviceInputSourceAdopt(_id)
 }
 
-// An ID unique among the inputSources exposed by a given AVCaptureDevice. An AVCaptureDevice's inputSources array must contain AVCaptureInputSource objects with unique inputSourceIDs.
+// InputSourceID an ID unique among the inputSources exposed by a given AVCaptureDevice. An AVCaptureDevice's inputSources array must contain AVCaptureInputSource objects with unique inputSourceIDs.
 func (x *CaptureDeviceInputSource) InputSourceID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputSourceID"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *CaptureDeviceInputSource) InputSourceID() string {
 	return purego.GoString(_r)
 }
 
-// A localized human-readable name for the receiver. This property can be used for displaying the name of the capture device input source in a user interface.
+// LocalizedName a localized human-readable name for the receiver. This property can be used for displaying the name of the capture device input source in a user interface.
 func (x *CaptureDeviceInputSource) LocalizedName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
 	if _r == 0 {

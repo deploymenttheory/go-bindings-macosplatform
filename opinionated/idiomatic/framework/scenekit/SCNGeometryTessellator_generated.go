@@ -23,7 +23,8 @@ func GeometryTessellatorFromID(id objc.ID) *GeometryTessellator {
 	if id == 0 {
 		return nil
 	}
-	x := &GeometryTessellator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GeometryTessellator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func geometryTessellatorAdopt(id objc.ID) *GeometryTessellator {
 	if id == 0 {
 		return nil
 	}
-	x := &GeometryTessellator{Handle: objref.Wrap(id)}
+	x := &GeometryTessellator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,134 +58,133 @@ func (x *GeometryTessellator) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GeometryTessellator) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewGeometryTessellator creates a new GeometryTessellator.
 func NewGeometryTessellator() *GeometryTessellator {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCNGeometryTessellator")), objc.RegisterName("new"))
 	return geometryTessellatorAdopt(_id)
 }
 
-// Specifies the scale factor applied to the per-patch tessellation factors. Defaults to 1.
-//
-// WithTessellationFactorScale sets tessellationFactorScale and returns the receiver so calls can be chained.
+// WithTessellationFactorScale specifies the scale factor applied to the per-patch tessellation factors. Defaults to 1.
 func (x *GeometryTessellator) WithTessellationFactorScale(tessellationFactorScale float64) *GeometryTessellator {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellationFactorScale:"), tessellationFactorScale)
 	return x
 }
 
-// Specifies if the tessellation should be uniform or adaptive. Defaults to NO.
-//
-// WithAdaptive sets adaptive and returns the receiver so calls can be chained.
+// WithAdaptive specifies if the tessellation should be uniform or adaptive. Defaults to NO.
 func (x *GeometryTessellator) WithAdaptive(adaptive bool) *GeometryTessellator {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdaptive:"), adaptive)
 	return x
 }
 
-// Specifies if the level of tessellation should be adapted in screenSpace. Defaults to NO.
-//
-// WithScreenSpace sets screenSpace and returns the receiver so calls can be chained.
+// WithScreenSpace specifies if the level of tessellation should be adapted in screenSpace. Defaults to NO.
 func (x *GeometryTessellator) WithScreenSpace(screenSpace bool) *GeometryTessellator {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScreenSpace:"), screenSpace)
 	return x
 }
 
-// Specifies the edge tessellation factor. Defaults to 1. This has no effect for adaptive subdivision
-//
-// WithEdgeTessellationFactor sets edgeTessellationFactor and returns the receiver so calls can be chained.
+// WithEdgeTessellationFactor specifies the edge tessellation factor. Defaults to 1. This has no effect for adaptive subdivision
 func (x *GeometryTessellator) WithEdgeTessellationFactor(edgeTessellationFactor float64) *GeometryTessellator {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeTessellationFactor:"), edgeTessellationFactor)
 	return x
 }
 
-// Specifies the inside tessellation factor. Defaults to 1. This has no effect for adaptive subdivision
-//
-// WithInsideTessellationFactor sets insideTessellationFactor and returns the receiver so calls can be chained.
+// WithInsideTessellationFactor specifies the inside tessellation factor. Defaults to 1. This has no effect for adaptive subdivision
 func (x *GeometryTessellator) WithInsideTessellationFactor(insideTessellationFactor float64) *GeometryTessellator {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInsideTessellationFactor:"), insideTessellationFactor)
 	return x
 }
 
-// Specifies the maximum edge length. Defaults to 1. This has no effect for non-adaptive subdivision
-//
-// WithMaximumEdgeLength sets maximumEdgeLength and returns the receiver so calls can be chained.
+// WithMaximumEdgeLength specifies the maximum edge length. Defaults to 1. This has no effect for non-adaptive subdivision
 func (x *GeometryTessellator) WithMaximumEdgeLength(maximumEdgeLength float64) *GeometryTessellator {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumEdgeLength:"), maximumEdgeLength)
 	return x
 }
 
-// Defaults to SCNTessellationSmoothingModeNone.
-//
-// WithSmoothingMode sets smoothingMode and returns the receiver so calls can be chained.
+// WithSmoothingMode defaults to SCNTessellationSmoothingModeNone.
 func (x *GeometryTessellator) WithSmoothingMode(smoothingMode TessellationSmoothingMode) *GeometryTessellator {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSmoothingMode:"), smoothingMode)
 	return x
 }
 
-// Specifies the scale factor applied to the per-patch tessellation factors. Defaults to 1.
+// TessellationFactorScale specifies the scale factor applied to the per-patch tessellation factors. Defaults to 1.
 func (x *GeometryTessellator) TessellationFactorScale() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("tessellationFactorScale"))
 	return _r
 }
 
+// SetTessellationFactorScale wraps the corresponding Objective-C method.
 func (x *GeometryTessellator) SetTessellationFactorScale(tessellationFactorScale float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellationFactorScale:"), tessellationFactorScale)
 }
 
-// Specifies if the tessellation should be uniform or adaptive. Defaults to NO.
+// IsAdaptive specifies if the tessellation should be uniform or adaptive. Defaults to NO.
 func (x *GeometryTessellator) IsAdaptive() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAdaptive"))
 	return _r
 }
 
+// SetAdaptive wraps the corresponding Objective-C method.
 func (x *GeometryTessellator) SetAdaptive(adaptive bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdaptive:"), adaptive)
 }
 
-// Specifies if the level of tessellation should be adapted in screenSpace. Defaults to NO.
+// IsScreenSpace specifies if the level of tessellation should be adapted in screenSpace. Defaults to NO.
 func (x *GeometryTessellator) IsScreenSpace() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isScreenSpace"))
 	return _r
 }
 
+// SetScreenSpace wraps the corresponding Objective-C method.
 func (x *GeometryTessellator) SetScreenSpace(screenSpace bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScreenSpace:"), screenSpace)
 }
 
-// Specifies the edge tessellation factor. Defaults to 1. This has no effect for adaptive subdivision
+// EdgeTessellationFactor specifies the edge tessellation factor. Defaults to 1. This has no effect for adaptive subdivision
 func (x *GeometryTessellator) EdgeTessellationFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("edgeTessellationFactor"))
 	return _r
 }
 
+// SetEdgeTessellationFactor wraps the corresponding Objective-C method.
 func (x *GeometryTessellator) SetEdgeTessellationFactor(edgeTessellationFactor float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeTessellationFactor:"), edgeTessellationFactor)
 }
 
-// Specifies the inside tessellation factor. Defaults to 1. This has no effect for adaptive subdivision
+// InsideTessellationFactor specifies the inside tessellation factor. Defaults to 1. This has no effect for adaptive subdivision
 func (x *GeometryTessellator) InsideTessellationFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("insideTessellationFactor"))
 	return _r
 }
 
+// SetInsideTessellationFactor wraps the corresponding Objective-C method.
 func (x *GeometryTessellator) SetInsideTessellationFactor(insideTessellationFactor float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInsideTessellationFactor:"), insideTessellationFactor)
 }
 
-// Specifies the maximum edge length. Defaults to 1. This has no effect for non-adaptive subdivision
+// MaximumEdgeLength specifies the maximum edge length. Defaults to 1. This has no effect for non-adaptive subdivision
 func (x *GeometryTessellator) MaximumEdgeLength() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumEdgeLength"))
 	return _r
 }
 
+// SetMaximumEdgeLength wraps the corresponding Objective-C method.
 func (x *GeometryTessellator) SetMaximumEdgeLength(maximumEdgeLength float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumEdgeLength:"), maximumEdgeLength)
 }
 
-// Defaults to SCNTessellationSmoothingModeNone.
+// SmoothingMode defaults to SCNTessellationSmoothingModeNone.
 func (x *GeometryTessellator) SmoothingMode() TessellationSmoothingMode {
 	_r := objc.Send[TessellationSmoothingMode](objref.IDOf(x), objc.RegisterName("smoothingMode"))
 	return _r
 }
 
+// SetSmoothingMode wraps the corresponding Objective-C method.
 func (x *GeometryTessellator) SetSmoothingMode(smoothingMode TessellationSmoothingMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSmoothingMode:"), smoothingMode)
 }

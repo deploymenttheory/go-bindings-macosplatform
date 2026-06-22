@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that decodes GeoJSON objects into MapKit types.
-//
 // GeoJSONDecoder is an idiomatic wrapper over the Objective-C class MKGeoJSONDecoder.
+//
+// An object that decodes GeoJSON objects into MapKit types.
 type GeoJSONDecoder struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func GeoJSONDecoderFromID(id objc.ID) *GeoJSONDecoder {
 	if id == 0 {
 		return nil
 	}
-	x := &GeoJSONDecoder{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GeoJSONDecoder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func geoJSONDecoderAdopt(id objc.ID) *GeoJSONDecoder {
 	if id == 0 {
 		return nil
 	}
-	x := &GeoJSONDecoder{Handle: objref.Wrap(id)}
+	x := &GeoJSONDecoder{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,14 +62,20 @@ func (x *GeoJSONDecoder) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GeoJSONDecoder) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewGeoJSONDecoder creates a new GeoJSONDecoder.
 func NewGeoJSONDecoder() *GeoJSONDecoder {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKGeoJSONDecoder")), objc.RegisterName("new"))
 	return geoJSONDecoderAdopt(_id)
 }
 
-// Decodes the provided data into native MapKit types that a map can display.
-func (x *GeoJSONDecoder) GeoJSONObjectsWithDataError(data obj.Object) ([]obj.Object, error) {
+// GeoJSONObjectsWithDataError decodes the provided data into native MapKit types that a map can display.
+func (x *GeoJSONDecoder) GeoJSONObjectsWithDataError(data obj.Object) (result []obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("geoJSONObjectsWithData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -79,7 +87,7 @@ func (x *GeoJSONDecoder) GeoJSONObjectsWithDataError(data obj.Object) ([]obj.Obj
 // GeoJSONDecoderable is the interface implemented by [GeoJSONDecoder], for mocking and DI.
 type GeoJSONDecoderable interface {
 	obj.Object
-	GeoJSONObjectsWithDataError(data obj.Object) ([]obj.Object, error)
+	GeoJSONObjectsWithDataError(data obj.Object) (result []obj.Object, err error)
 }
 
 var _ GeoJSONDecoderable = (*GeoJSONDecoder)(nil)

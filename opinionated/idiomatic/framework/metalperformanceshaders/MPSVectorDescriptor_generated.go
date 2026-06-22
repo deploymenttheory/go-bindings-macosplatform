@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of the length and data type of a vector.
-//
 // VectorDescriptor is an idiomatic wrapper over the Objective-C class MPSVectorDescriptor.
+//
+// A description of the length and data type of a vector.
 type VectorDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VectorDescriptorFromID(id objc.ID) *VectorDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &VectorDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VectorDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func vectorDescriptorAdopt(id objc.ID) *VectorDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &VectorDescriptor{Handle: objref.Wrap(id)}
+	x := &VectorDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,42 @@ func (x *VectorDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VectorDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVectorDescriptor creates a new VectorDescriptor.
 func NewVectorDescriptor() *VectorDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSVectorDescriptor")), objc.RegisterName("new"))
 	return vectorDescriptorAdopt(_id)
 }
 
-// The number of elements in the vector.
-//
-// WithLength sets length and returns the receiver so calls can be chained.
+// WithLength the number of elements in the vector.
 func (x *VectorDescriptor) WithLength(length int) *VectorDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
 	return x
 }
 
-// The number of elements in the vector.
+// Length the number of elements in the vector.
 func (x *VectorDescriptor) Length() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
 	return _r
 }
 
+// SetLength wraps the corresponding Objective-C method.
 func (x *VectorDescriptor) SetLength(length int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
 }
 
-// The number of vectors.
+// Vectors the number of vectors.
 func (x *VectorDescriptor) Vectors() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vectors"))
 	return _r
 }
 
-// The stride, in bytes, between corresponding elements of consecutive vectors.  Must be a multiple of the element size
+// VectorBytes the stride, in bytes, between corresponding elements of consecutive vectors.  Must be a multiple of the element size
 func (x *VectorDescriptor) VectorBytes() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vectorBytes"))
 	return _r

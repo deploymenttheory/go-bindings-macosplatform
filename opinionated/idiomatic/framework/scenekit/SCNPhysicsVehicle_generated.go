@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A physics behavior that modifies a physics body to behave like a car, motorcycle, or other wheeled vehicle.
-//
 // PhysicsVehicle is an idiomatic wrapper over the Objective-C class SCNPhysicsVehicle.
+//
+// It embeds [PhysicsBehavior], promoting that type's methods.
+//
+// A physics behavior that modifies a physics body to behave like a car, motorcycle, or other wheeled vehicle.
 type PhysicsVehicle struct {
-	objref.Handle
+	PhysicsBehavior
 }
 
 // PhysicsVehicleFromID adopts an existing Objective-C object as a PhysicsVehicle
@@ -25,7 +26,8 @@ func PhysicsVehicleFromID(id objc.ID) *PhysicsVehicle {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsVehicle{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PhysicsVehicle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func physicsVehicleAdopt(id objc.ID) *PhysicsVehicle {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsVehicle{Handle: objref.Wrap(id)}
+	x := &PhysicsVehicle{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PhysicsVehicle) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PhysicsVehicle) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PhysicsVehicle) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPhysicsVehicle creates a new PhysicsVehicle.
@@ -64,32 +52,36 @@ func NewPhysicsVehicle() *PhysicsVehicle {
 	return physicsVehicleAdopt(_id)
 }
 
-// Applies a force between the specified wheel and the ground under the vehicle.
+// ApplyEngineForceForWheelAtIndex applies a force between the specified wheel and the ground under the vehicle.
 func (x *PhysicsVehicle) ApplyEngineForceForWheelAtIndex(value float64, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyEngineForce:forWheelAtIndex:"), value, index)
 }
 
-// Pivots the specified wheel around its steering axis.
+// SetSteeringAngleForWheelAtIndex pivots the specified wheel around its steering axis.
 func (x *PhysicsVehicle) SetSteeringAngleForWheelAtIndex(value float64, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSteeringAngle:forWheelAtIndex:"), value, index)
 }
 
-// Applies a force between the specified wheel and the ground under the vehicle.
+// ApplyBrakingForceForWheelAtIndex applies a force between the specified wheel and the ground under the vehicle.
 func (x *PhysicsVehicle) ApplyBrakingForceForWheelAtIndex(value float64, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyBrakingForce:forWheelAtIndex:"), value, index)
 }
 
+// SpeedInKilometersPerHour wraps the corresponding Objective-C method.
 func (x *PhysicsVehicle) SpeedInKilometersPerHour() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speedInKilometersPerHour"))
 	return _r
 }
 
+// Wheels wraps the corresponding Objective-C method.
+//
 // Wheels returns the collection as a Go slice.
 func (x *PhysicsVehicle) Wheels() []*PhysicsVehicleWheel {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wheels"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PhysicsVehicleWheel { return PhysicsVehicleWheelFromID(_id) })
 }
 
+// ChassisBody wraps the corresponding Objective-C method.
 func (x *PhysicsVehicle) ChassisBody() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("chassisBody"))
 	return PhysicsBodyFromID(_r)
@@ -107,3 +99,5 @@ type PhysicsVehicleable interface {
 }
 
 var _ PhysicsVehicleable = (*PhysicsVehicle)(nil)
+
+var _ PhysicsBehaviorProvider = (*PhysicsVehicle)(nil)

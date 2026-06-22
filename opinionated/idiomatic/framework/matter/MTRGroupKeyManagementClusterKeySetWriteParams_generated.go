@@ -23,7 +23,8 @@ func MTRGroupKeyManagementClusterKeySetWriteParamsFromID(id objc.ID) *MTRGroupKe
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGroupKeyManagementClusterKeySetWriteParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRGroupKeyManagementClusterKeySetWriteParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRGroupKeyManagementClusterKeySetWriteParamsAdopt(id objc.ID) *MTRGroupKey
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGroupKeyManagementClusterKeySetWriteParams{Handle: objref.Wrap(id)}
+	x := &MTRGroupKeyManagementClusterKeySetWriteParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,59 +58,65 @@ func (x *MTRGroupKeyManagementClusterKeySetWriteParams) IsKind(className string)
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRGroupKeyManagementClusterKeySetWriteParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRGroupKeyManagementClusterKeySetWriteParams creates a new MTRGroupKeyManagementClusterKeySetWriteParams.
 func NewMTRGroupKeyManagementClusterKeySetWriteParams() *MTRGroupKeyManagementClusterKeySetWriteParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRGroupKeyManagementClusterKeySetWriteParams")), objc.RegisterName("new"))
 	return mTRGroupKeyManagementClusterKeySetWriteParamsAdopt(_id)
 }
 
-// WithGroupKeySet sets groupKeySet and returns the receiver so calls can be chained.
+// WithGroupKeySet sets the property and returns the receiver so calls can be chained.
 func (x *MTRGroupKeyManagementClusterKeySetWriteParams) WithGroupKeySet(groupKeySet *MTRGroupKeyManagementClusterGroupKeySetStruct) *MTRGroupKeyManagementClusterKeySetWriteParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupKeySet:"), objref.IDOf(groupKeySet))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRGroupKeyManagementClusterKeySetWriteParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGroupKeyManagementClusterKeySetWriteParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRGroupKeyManagementClusterKeySetWriteParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGroupKeyManagementClusterKeySetWriteParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// GroupKeySet wraps the corresponding Objective-C method.
 func (x *MTRGroupKeyManagementClusterKeySetWriteParams) GroupKeySet() *MTRGroupKeyManagementClusterGroupKeySetStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupKeySet"))
 	return MTRGroupKeyManagementClusterGroupKeySetStructFromID(_r)
 }
 
+// SetGroupKeySet wraps the corresponding Objective-C method.
 func (x *MTRGroupKeyManagementClusterKeySetWriteParams) SetGroupKeySet(groupKeySet *MTRGroupKeyManagementClusterGroupKeySetStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupKeySet:"), objref.IDOf(groupKeySet))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRGroupKeyManagementClusterKeySetWriteParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRGroupKeyManagementClusterKeySetWriteParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRGroupKeyManagementClusterKeySetWriteParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRGroupKeyManagementClusterKeySetWriteParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

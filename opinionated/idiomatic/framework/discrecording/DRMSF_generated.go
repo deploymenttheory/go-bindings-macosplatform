@@ -23,7 +23,8 @@ func MSFFromID(id objc.ID) *MSF {
 	if id == 0 {
 		return nil
 	}
-	x := &MSF{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MSF{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mSFAdopt(id objc.ID) *MSF {
 	if id == 0 {
 		return nil
 	}
-	x := &MSF{Handle: objref.Wrap(id)}
+	x := &MSF{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,61 +58,63 @@ func (x *MSF) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes an msf object whose length is frames.
-//
-// NewMSFWithFrames creates a new MSF.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MSF) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMSFWithFrames initializes an msf object whose length is frames.
 func NewMSFWithFrames(frames int) *MSF {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DRMSF")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrames:"), frames)
 	return mSFAdopt(_id)
 }
 
-// Initializes an msf object initialized to the value represented by string
-//
-// NewMSFWithString creates a new MSF.
+// NewMSFWithString initializes an msf object initialized to the value represented by string
 func NewMSFWithString(string_ string) *MSF {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DRMSF")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(string_))
 	return mSFAdopt(_id)
 }
 
-// Returns the number of minutes represented by the receiver. If the receiver represents a non integral number of minutes, only the whole minute value is returned. For example an DRMSF value of 5:30:72 will return 5 from a message to
+// Minutes returns the number of minutes represented by the receiver. If the receiver represents a non integral number of minutes, only the whole minute value is returned. For example an DRMSF value of 5:30:72 will return 5 from a message to
 func (x *MSF) Minutes() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minutes"))
 	return _r
 }
 
-// Returns the number of seconds represented by the receiver. If the receiver represents a non integral number of seconds, only the whole second value is returned. For example an DRMSF value of 5:30:72 will return 30 from a message to
+// Seconds returns the number of seconds represented by the receiver. If the receiver represents a non integral number of seconds, only the whole second value is returned. For example an DRMSF value of 5:30:72 will return 30 from a message to
 func (x *MSF) Seconds() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("seconds"))
 	return _r
 }
 
-// Returns the number of frames represented by the receiver. This method differs from
+// Frames returns the number of frames represented by the receiver. This method differs from
 func (x *MSF) Frames() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frames"))
 	return _r
 }
 
-// Returns the total number of frames/sectors represented by the receiver. This method differs from
+// Sectors returns the total number of frames/sectors represented by the receiver. This method differs from
 func (x *MSF) Sectors() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sectors"))
 	return _r
 }
 
-// Adds an msf to the receiver.
+// MsfByAdding adds an msf to the receiver.
 func (x *MSF) MsfByAdding(msf *MSF) *MSF {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("msfByAdding:"), objref.IDOf(msf))
 	return MSFFromID(_r)
 }
 
-// Subtracts an msf to the receiver.
+// MsfBySubtracting subtracts an msf to the receiver.
 func (x *MSF) MsfBySubtracting(msf *MSF) *MSF {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("msfBySubtracting:"), objref.IDOf(msf))
 	return MSFFromID(_r)
 }
 
-// Returns a textual representation of the receiver. The format string is very similar to a printf-style format string with %-escaped formatting characters. <ul> <li>%%	A "%" character</li> <li>%m	Minutes as a decimal number</li> <li>%s	Seconds as a decimal number</li> <li>%f	Frames as a decimal number</li> </ul> In addition to these formatting characters an optional length specifier can come between then % and the formatting character. This length specifier will force the field in question to be at least that wide. For example a format specifier of "%02m:%02s" will cause a DRMSF object representing 3 minutes 9 seconds to be formatted as "03:09". A formatter is aware of and respects rounding. If a bit of the msf is not zero, but the format does not display that value, the next higher value will be increased by one to reflect that. Extending our example above, an DRMSF with a value of 3 minutes, 9 seconds, 15 frames using a format specfier of "%02m:%02s", will be formatted as "03:10" since the 15 frames rounds up the seconds to the next value
+// DescriptionWithFormat returns a textual representation of the receiver. The format string is very similar to a printf-style format string with %-escaped formatting characters. <ul> <li>%%	A "%" character</li> <li>%m	Minutes as a decimal number</li> <li>%s	Seconds as a decimal number</li> <li>%f	Frames as a decimal number</li> </ul> In addition to these formatting characters an optional length specifier can come between then % and the formatting character. This length specifier will force the field in question to be at least that wide. For example a format specifier of "%02m:%02s" will cause a DRMSF object representing 3 minutes 9 seconds to be formatted as "03:09". A formatter is aware of and respects rounding. If a bit of the msf is not zero, but the format does not display that value, the next higher value will be increased by one to reflect that. Extending our example above, an DRMSF with a value of 3 minutes, 9 seconds, 15 frames using a format specfier of "%02m:%02s", will be formatted as "03:10" since the 15 frames rounds up the seconds to the next value
 func (x *MSF) DescriptionWithFormat(format string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionWithFormat:"), purego.NSString(format))
 	if _r == 0 {
@@ -119,7 +123,7 @@ func (x *MSF) DescriptionWithFormat(format string) string {
 	return purego.GoString(_r)
 }
 
-// Compares on emsf to another.
+// IsEqualToMSF compares on emsf to another.
 func (x *MSF) IsEqualToMSF(otherDRMSF *MSF) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToMSF:"), objref.IDOf(otherDRMSF))
 	return _r

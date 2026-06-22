@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specialized record type that manages a collection of shared records.
-//
 // Share is an idiomatic wrapper over the Objective-C class CKShare.
+//
+// It embeds [Record], promoting that type's methods.
+//
+// A specialized record type that manages a collection of shared records.
 type Share struct {
-	objref.Handle
+	Record
 }
 
 // ShareFromID adopts an existing Objective-C object as a Share
@@ -25,7 +26,8 @@ func ShareFromID(id objc.ID) *Share {
 	if id == 0 {
 		return nil
 	}
-	x := &Share{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Share{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,134 +40,107 @@ func shareAdopt(id objc.ID) *Share {
 	if id == 0 {
 		return nil
 	}
-	x := &Share{Handle: objref.Wrap(id)}
+	x := &Share{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *Share) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Share) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Share) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a new share for the specified record.
-//
-// NewShareWithRootRecord creates a new Share.
+// NewShareWithRootRecord creates a new share for the specified record.
 func NewShareWithRootRecord(rootRecord *Record) *Share {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKShare")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRootRecord:"), objref.IDOf(rootRecord))
 	return shareAdopt(_id)
 }
 
-// Creates a new share for the specified record and record ID.
-//
-// NewShareWithRootRecordShareID creates a new Share.
+// NewShareWithRootRecordShareID creates a new share for the specified record and record ID.
 func NewShareWithRootRecordShareID(rootRecord *Record, shareID *RecordID) *Share {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKShare")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRootRecord:shareID:"), objref.IDOf(rootRecord), objref.IDOf(shareID))
 	return shareAdopt(_id)
 }
 
-// Creates a new share for the specified record zone.
-//
-// NewShareWithRecordZoneID creates a new Share.
+// NewShareWithRecordZoneID creates a new share for the specified record zone.
 func NewShareWithRecordZoneID(recordZoneID *RecordZoneID) *Share {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKShare")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordZoneID:"), objref.IDOf(recordZoneID))
 	return shareAdopt(_id)
 }
 
-// Creates a share from a serialized instance.
-//
-// NewShareWithCoder creates a new Share.
+// NewShareWithCoder creates a share from a serialized instance.
 func NewShareWithCoder(aDecoder obj.Object) *Share {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKShare")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return shareAdopt(_id)
 }
 
-// The permission for anyone with access to the share’s URL.
-//
-// WithPublicPermission sets publicPermission and returns the receiver so calls can be chained.
+// WithPublicPermission the permission for anyone with access to the share’s URL.
 func (x *Share) WithPublicPermission(publicPermission ShareParticipantPermission) *Share {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPublicPermission:"), publicPermission)
 	return x
 }
 
-// Indicates whether uninvited users can request access to this share.
-//
-// WithAllowsAccessRequests sets allowsAccessRequests and returns the receiver so calls can be chained.
+// WithAllowsAccessRequests indicates whether uninvited users can request access to this share.
 func (x *Share) WithAllowsAccessRequests(allowsAccessRequests bool) *Share {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAccessRequests:"), allowsAccessRequests)
 	return x
 }
 
-// A reference to the record’s parent record.
-//
-// WithParent sets parent and returns the receiver so calls can be chained.
+// WithParent a reference to the record’s parent record.
 func (x *Share) WithParent(parent *Reference) *Share {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return x
 }
 
-// Adds a participant to the share.
+// AddParticipant adds a participant to the share.
 func (x *Share) AddParticipant(participant *ShareParticipant) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addParticipant:"), objref.IDOf(participant))
 }
 
-// Removes a participant from the share.
+// RemoveParticipant removes a participant from the share.
 func (x *Share) RemoveParticipant(participant *ShareParticipant) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeParticipant:"), objref.IDOf(participant))
 }
 
-// Invitation URLs that any receiver can use to claim the associated participantID and join the share.
+// OneTimeURLForParticipantID invitation URLs that any receiver can use to claim the associated participantID and join the share.
 func (x *Share) OneTimeURLForParticipantID(participantID string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("oneTimeURLForParticipantID:"), purego.NSString(participantID))
 	return obj.Wrap(_r)
 }
 
-// Denies access requests from specified users.
+// DenyRequesters denies access requests from specified users.
 func (x *Share) DenyRequesters(requesters []*ShareAccessRequester) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("denyRequesters:"), purego.SliceToNSArray(requesters, func(_v *ShareAccessRequester) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Blocks specified users from requesting access to this share.
+// BlockRequesters blocks specified users from requesting access to this share.
 func (x *Share) BlockRequesters(requesters []*ShareAccessRequester) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("blockRequesters:"), purego.SliceToNSArray(requesters, func(_v *ShareAccessRequester) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Unblocks previously blocked users, allowing them to request access again.
+// UnblockIdentities unblocks previously blocked users, allowing them to request access again.
 func (x *Share) UnblockIdentities(blockedIdentities []*ShareBlockedIdentity) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unblockIdentities:"), purego.SliceToNSArray(blockedIdentities, func(_v *ShareBlockedIdentity) objc.ID { return objref.IDOf(_v) }))
 }
 
-// The permission for anyone with access to the share's URL. Setting this property's value to be more permissive than “CKShare/ParticipantPermission/none“ allows any user with the share's URL to join. CloudKit removes all public participants when you save the share if you set the property's value to “CKShare/ParticipantPermission/none“. The default value is “CKShare/ParticipantPermission/none“
+// PublicPermission the permission for anyone with access to the share's URL. Setting this property's value to be more permissive than “CKShare/ParticipantPermission/none“ allows any user with the share's URL to join. CloudKit removes all public participants when you save the share if you set the property's value to “CKShare/ParticipantPermission/none“. The default value is “CKShare/ParticipantPermission/none“
 func (x *Share) PublicPermission() ShareParticipantPermission {
 	_r := objc.Send[ShareParticipantPermission](objref.IDOf(x), objc.RegisterName("publicPermission"))
 	return _r
 }
 
+// SetPublicPermission wraps the corresponding Objective-C method.
 func (x *Share) SetPublicPermission(publicPermission ShareParticipantPermission) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPublicPermission:"), publicPermission)
 }
 
-// The Uniform Resource Locator (URL) for inviting participants to the share. This property is only available after saving a share record to the server. This URL is stable and persists across shares and reshares of the same root record.
+// URL the Uniform Resource Locator (URL) for inviting participants to the share. This property is only available after saving a share record to the server. This URL is stable and persists across shares and reshares of the same root record.
 func (x *Share) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// An array that contains the share's participants. The property's value contains all of the share's participants that the current user has permissions to see. At a minimum, it includes the share's owner and the current user.
+// Participants an array that contains the share's participants. The property's value contains all of the share's participants that the current user has permissions to see. At a minimum, it includes the share's owner and the current user.
 //
 // Participants returns the collection as a Go slice.
 func (x *Share) Participants() []*ShareParticipant {
@@ -173,19 +148,19 @@ func (x *Share) Participants() []*ShareParticipant {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ShareParticipant { return ShareParticipantFromID(_id) })
 }
 
-// The participant that represents the share's owner.
+// Owner the participant that represents the share's owner.
 func (x *Share) Owner() *ShareParticipant {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("owner"))
 	return ShareParticipantFromID(_r)
 }
 
-// The participant that represents the current user.
+// CurrentUserParticipant the participant that represents the current user.
 func (x *Share) CurrentUserParticipant() *ShareParticipant {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentUserParticipant"))
 	return ShareParticipantFromID(_r)
 }
 
-// A list of all uninvited users who have requested access to this share. When an originator or administrator allows share access requests, uninvited users can request to join the share. All pending access requests appear in this array. CloudKit returns each requester with name components and either an email or phone number. Either share owners or administrators can respond to these access requests. ### Responding to Access Requests: - **Approve Requesters:** - Fetch the participant information by running “CKFetchShareParticipantsOperation“ with the requester's “CKShareAccessRequester/participantLookupInfo“. - Add the resulting participant to the share. - **Deny Requesters:** - Use “CloudKit/CKShare/denyRequesters(_:)“ to remove the requester from the requesters list. - **Block Requesters:** - Use “CloudKit/CKShare/blockRequesters(_:)“ to block requesters. - Blocking a requester prevents them from sending future access requests to the share.
+// Requesters a list of all uninvited users who have requested access to this share. When an originator or administrator allows share access requests, uninvited users can request to join the share. All pending access requests appear in this array. CloudKit returns each requester with name components and either an email or phone number. Either share owners or administrators can respond to these access requests. ### Responding to Access Requests: - **Approve Requesters:** - Fetch the participant information by running “CKFetchShareParticipantsOperation“ with the requester's “CKShareAccessRequester/participantLookupInfo“. - Add the resulting participant to the share. - **Deny Requesters:** - Use “CloudKit/CKShare/denyRequesters(_:)“ to remove the requester from the requesters list. - **Block Requesters:** - Use “CloudKit/CKShare/blockRequesters(_:)“ to block requesters. - Blocking a requester prevents them from sending future access requests to the share.
 //
 // Requesters returns the collection as a Go slice.
 func (x *Share) Requesters() []*ShareAccessRequester {
@@ -193,7 +168,7 @@ func (x *Share) Requesters() []*ShareAccessRequester {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ShareAccessRequester { return ShareAccessRequesterFromID(_id) })
 }
 
-// A list of users blocked from requesting access to this share. Identities remain in this list until an owner or administrator calls “CloudKit/CKShare/unblockIdentities(_:)“.
+// BlockedIdentities a list of users blocked from requesting access to this share. Identities remain in this list until an owner or administrator calls “CloudKit/CKShare/unblockIdentities(_:)“.
 //
 // BlockedIdentities returns the collection as a Go slice.
 func (x *Share) BlockedIdentities() []*ShareBlockedIdentity {
@@ -201,12 +176,13 @@ func (x *Share) BlockedIdentities() []*ShareBlockedIdentity {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ShareBlockedIdentity { return ShareBlockedIdentityFromID(_id) })
 }
 
-// Indicates whether uninvited users can request access to this share. By default, this property is `NO`. When this property is `YES`, uninvited users can request access to the share if they discover the share URL. When this property is `NO`, the server prevents uninvited users from requesting access and does not indicate whether the share exists. Only the share owner or an administrator can modify this property. If another participant attempts to modify this property, CloudKit throws an exception.
+// AllowsAccessRequests indicates whether uninvited users can request access to this share. By default, this property is `NO`. When this property is `YES`, uninvited users can request access to the share if they discover the share URL. When this property is `NO`, the server prevents uninvited users from requesting access and does not indicate whether the share exists. Only the share owner or an administrator can modify this property. If another participant attempts to modify this property, CloudKit throws an exception.
 func (x *Share) AllowsAccessRequests() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsAccessRequests"))
 	return _r
 }
 
+// SetAllowsAccessRequests wraps the corresponding Objective-C method.
 func (x *Share) SetAllowsAccessRequests(allowsAccessRequests bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAccessRequests:"), allowsAccessRequests)
 }
@@ -236,3 +212,5 @@ type Shareable interface {
 }
 
 var _ Shareable = (*Share)(nil)
+
+var _ RecordProvider = (*Share)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Informs your app when the external storage devices connect to and disconnect from the system.
-//
 // ExternalStorageDeviceDiscoverySession is an idiomatic wrapper over the Objective-C class AVExternalStorageDeviceDiscoverySession.
+//
+// Informs your app when the external storage devices connect to and disconnect from the system.
 type ExternalStorageDeviceDiscoverySession struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ExternalStorageDeviceDiscoverySessionFromID(id objc.ID) *ExternalStorageDev
 	if id == 0 {
 		return nil
 	}
-	x := &ExternalStorageDeviceDiscoverySession{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExternalStorageDeviceDiscoverySession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func externalStorageDeviceDiscoverySessionAdopt(id objc.ID) *ExternalStorageDevi
 	if id == 0 {
 		return nil
 	}
-	x := &ExternalStorageDeviceDiscoverySession{Handle: objref.Wrap(id)}
+	x := &ExternalStorageDeviceDiscoverySession{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *ExternalStorageDeviceDiscoverySession) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExternalStorageDeviceDiscoverySession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewExternalStorageDeviceDiscoverySession creates a new ExternalStorageDeviceDiscoverySession.
 func NewExternalStorageDeviceDiscoverySession() *ExternalStorageDeviceDiscoverySession {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVExternalStorageDeviceDiscoverySession")), objc.RegisterName("new"))
 	return externalStorageDeviceDiscoverySessionAdopt(_id)
 }
 
-// An array of external storage devices connected to this device. Read only. Key-value observable. An array of AVExternalStorageDevice objects connected to this device. The list is updated when the external storage device detected status changes.
+// ExternalStorageDevices an array of external storage devices connected to this device. Read only. Key-value observable. An array of AVExternalStorageDevice objects connected to this device. The list is updated when the external storage device detected status changes.
 //
 // ExternalStorageDevices returns the collection as a Go slice.
 func (x *ExternalStorageDeviceDiscoverySession) ExternalStorageDevices() []*ExternalStorageDevice {

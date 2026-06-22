@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the download of a web resource.
-//
 // WKDownload is an idiomatic wrapper over the Objective-C class WKDownload.
+//
+// An object that represents the download of a web resource.
 type WKDownload struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKDownloadFromID(id objc.ID) *WKDownload {
 	if id == 0 {
 		return nil
 	}
-	x := &WKDownload{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKDownload{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKDownloadAdopt(id objc.ID) *WKDownload {
 	if id == 0 {
 		return nil
 	}
-	x := &WKDownload{Handle: objref.Wrap(id)}
+	x := &WKDownload{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,32 +60,42 @@ func (x *WKDownload) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKDownload) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKDownload creates a new WKDownload.
 func NewWKDownload() *WKDownload {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKDownload")), objc.RegisterName("new"))
 	return wKDownloadAdopt(_id)
 }
 
-// Cancels the download, and optionally captures data so that you can resume the download later.
+// Cancel cancels the download, and optionally captures data so that you can resume the download later.
 func (x *WKDownload) Cancel(completionHandler func(obj.Object) int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
 }
 
+// OriginalRequest wraps the corresponding Objective-C method.
 func (x *WKDownload) OriginalRequest() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalRequest"))
 	return obj.Wrap(_r)
 }
 
+// WebView wraps the corresponding Objective-C method.
 func (x *WKDownload) WebView() *WKWebView {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webView"))
 	return WKWebViewFromID(_r)
 }
 
+// IsUserInitiated wraps the corresponding Objective-C method.
 func (x *WKDownload) IsUserInitiated() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUserInitiated"))
 	return _r
 }
 
+// OriginatingFrame wraps the corresponding Objective-C method.
 func (x *WKDownload) OriginatingFrame() *WKFrameInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originatingFrame"))
 	return WKFrameInfoFromID(_r)

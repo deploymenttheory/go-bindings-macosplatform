@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides information about segment data.
-//
 // AssetSegmentReport is an idiomatic wrapper over the Objective-C class AVAssetSegmentReport.
+//
+// An object that provides information about segment data.
 type AssetSegmentReport struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetSegmentReportFromID(id objc.ID) *AssetSegmentReport {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetSegmentReport{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetSegmentReport{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetSegmentReportAdopt(id objc.ID) *AssetSegmentReport {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetSegmentReport{Handle: objref.Wrap(id)}
+	x := &AssetSegmentReport{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *AssetSegmentReport) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetSegmentReport) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetSegmentReport creates a new AssetSegmentReport.
 func NewAssetSegmentReport() *AssetSegmentReport {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetSegmentReport")), objc.RegisterName("new"))
 	return assetSegmentReportAdopt(_id)
 }
 
-// A segment type of the segment data.
+// SegmentType a segment type of the segment data.
 func (x *AssetSegmentReport) SegmentType() AssetSegmentType {
 	_r := objc.Send[AssetSegmentType](objref.IDOf(x), objc.RegisterName("segmentType"))
 	return _r
 }
 
-// Provides an array of AVAssetSegmentTrackReport in the segment data.
+// TrackReports provides an array of AVAssetSegmentTrackReport in the segment data.
 //
 // TrackReports returns the collection as a Go slice.
 func (x *AssetSegmentReport) TrackReports() []*AssetSegmentTrackReport {

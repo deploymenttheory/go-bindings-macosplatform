@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An analyzer that runs sound classification requests on an audio file.
-//
 // AudioFileAnalyzer is an idiomatic wrapper over the Objective-C class SNAudioFileAnalyzer.
+//
+// An analyzer that runs sound classification requests on an audio file.
 type AudioFileAnalyzer struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func AudioFileAnalyzerFromID(id objc.ID) *AudioFileAnalyzer {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioFileAnalyzer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioFileAnalyzer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func audioFileAnalyzerAdopt(id objc.ID) *AudioFileAnalyzer {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioFileAnalyzer{Handle: objref.Wrap(id)}
+	x := &AudioFileAnalyzer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,10 +62,14 @@ func (x *AudioFileAnalyzer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new audio file analyzer.
-//
-// NewAudioFileAnalyzerWithURLError creates a new AudioFileAnalyzer.
-func NewAudioFileAnalyzerWithURLError(url string) (*AudioFileAnalyzer, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioFileAnalyzer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudioFileAnalyzerWithURLError creates a new audio file analyzer.
+func NewAudioFileAnalyzerWithURLError(url string) (result *AudioFileAnalyzer, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SNAudioFileAnalyzer")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
@@ -73,22 +79,22 @@ func NewAudioFileAnalyzerWithURLError(url string) (*AudioFileAnalyzer, error) {
 	return audioFileAnalyzerAdopt(_id), nil
 }
 
-// Removes all the sound analysis requests from the audio file analyzer.
+// RemoveAllRequests removes all the sound analysis requests from the audio file analyzer.
 func (x *AudioFileAnalyzer) RemoveAllRequests() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllRequests"))
 }
 
-// Analyzes the audio file synchronously.
+// Analyze analyzes the audio file synchronously.
 func (x *AudioFileAnalyzer) Analyze() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("analyze"))
 }
 
-// Analyzes the audio file asynchronously.
+// AnalyzeWithCompletionHandler analyzes the audio file asynchronously.
 func (x *AudioFileAnalyzer) AnalyzeWithCompletionHandler(completionHandler func(bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("analyzeWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
-// Cancels all the asynchronous sound analysis requests the analyzer is currently processing.
+// CancelAnalysis cancels all the asynchronous sound analysis requests the analyzer is currently processing.
 func (x *AudioFileAnalyzer) CancelAnalysis() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelAnalysis"))
 }

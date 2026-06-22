@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A server or an area on a server, commonly referred to as a realm, that requires authentication.
-//
 // URLProtectionSpace is an idiomatic wrapper over the Objective-C class NSURLProtectionSpace.
+//
+// A server or an area on a server, commonly referred to as a realm, that requires authentication.
 type URLProtectionSpace struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func URLProtectionSpaceFromID(id objc.ID) *URLProtectionSpace {
 	if id == 0 {
 		return nil
 	}
-	x := &URLProtectionSpace{Handle: objref.Wrap(purego.Retain(id))}
+	x := &URLProtectionSpace{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func uRLProtectionSpaceAdopt(id objc.ID) *URLProtectionSpace {
 	if id == 0 {
 		return nil
 	}
-	x := &URLProtectionSpace{Handle: objref.Wrap(id)}
+	x := &URLProtectionSpace{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,33 @@ func (x *URLProtectionSpace) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize a protection space representing an origin server, or a realm on one
-//
-// NewURLProtectionSpaceWithHostPortProtocolRealmAuthenticationMethod creates a new URLProtectionSpace.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *URLProtectionSpace) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewURLProtectionSpaceWithHostPortProtocolRealmAuthenticationMethod initialize a protection space representing an origin server, or a realm on one
 func NewURLProtectionSpaceWithHostPortProtocolRealmAuthenticationMethod(host string, port int, protocol string, realm string, authenticationMethod string) *URLProtectionSpace {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLProtectionSpace")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHost:port:protocol:realm:authenticationMethod:"), purego.NSString(host), port, purego.NSString(protocol), purego.NSString(realm), purego.NSString(authenticationMethod))
 	return uRLProtectionSpaceAdopt(_id)
 }
 
-// Initialize a protection space representing a proxy server, or a realm on one
-//
-// NewURLProtectionSpaceWithProxyHostPortTypeRealmAuthenticationMethod creates a new URLProtectionSpace.
+// NewURLProtectionSpaceWithProxyHostPortTypeRealmAuthenticationMethod initialize a protection space representing a proxy server, or a realm on one
 func NewURLProtectionSpaceWithProxyHostPortTypeRealmAuthenticationMethod(host string, port int, type_ string, realm string, authenticationMethod string) *URLProtectionSpace {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLProtectionSpace")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProxyHost:port:type:realm:authenticationMethod:"), purego.NSString(host), port, purego.NSString(type_), purego.NSString(realm), purego.NSString(authenticationMethod))
 	return uRLProtectionSpaceAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *URLProtectionSpace) WithScriptingProperties(scriptingProperties obj.Object) *URLProtectionSpace {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Get the authentication realm for which the protection space that needs authentication This is generally only available for http authentication, and may be nil otherwise.
+// Realm get the authentication realm for which the protection space that needs authentication This is generally only available for http authentication, and may be nil otherwise.
 func (x *URLProtectionSpace) Realm() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("realm"))
 	if _r == 0 {
@@ -91,19 +95,19 @@ func (x *URLProtectionSpace) Realm() string {
 	return purego.GoString(_r)
 }
 
-// Determine if the password for this protection space can be sent securely
+// ReceivesCredentialSecurely determine if the password for this protection space can be sent securely
 func (x *URLProtectionSpace) ReceivesCredentialSecurely() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("receivesCredentialSecurely"))
 	return _r
 }
 
-// Determine if this authenticating protection space is a proxy server
+// IsProxy determine if this authenticating protection space is a proxy server
 func (x *URLProtectionSpace) IsProxy() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isProxy"))
 	return _r
 }
 
-// Get the proxy host if this is a proxy authentication, or the host from the URL.
+// Host get the proxy host if this is a proxy authentication, or the host from the URL.
 func (x *URLProtectionSpace) Host() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("host"))
 	if _r == 0 {
@@ -112,13 +116,13 @@ func (x *URLProtectionSpace) Host() string {
 	return purego.GoString(_r)
 }
 
-// Get the proxy port if this is a proxy authentication, or the port from the URL.
+// Port get the proxy port if this is a proxy authentication, or the port from the URL.
 func (x *URLProtectionSpace) Port() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("port"))
 	return _r
 }
 
-// Get the type of this protection space, if a proxy
+// ProxyType get the type of this protection space, if a proxy
 func (x *URLProtectionSpace) ProxyType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("proxyType"))
 	if _r == 0 {
@@ -127,7 +131,7 @@ func (x *URLProtectionSpace) ProxyType() string {
 	return purego.GoString(_r)
 }
 
-// Get the protocol of this protection space, if not a proxy
+// Protocol get the protocol of this protection space, if not a proxy
 func (x *URLProtectionSpace) Protocol() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocol"))
 	if _r == 0 {
@@ -136,7 +140,7 @@ func (x *URLProtectionSpace) Protocol() string {
 	return purego.GoString(_r)
 }
 
-// Get the authentication method to be used for this protection space
+// AuthenticationMethod get the authentication method to be used for this protection space
 func (x *URLProtectionSpace) AuthenticationMethod() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authenticationMethod"))
 	if _r == 0 {
@@ -145,12 +149,15 @@ func (x *URLProtectionSpace) AuthenticationMethod() string {
 	return purego.GoString(_r)
 }
 
+// DistinguishedNames wraps the corresponding Objective-C method.
+//
 // DistinguishedNames returns the collection as a Go slice.
 func (x *URLProtectionSpace) DistinguishedNames() []*Data {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("distinguishedNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Data { return DataFromID(_id) })
 }
 
+// ServerTrust wraps the corresponding Objective-C method.
 func (x *URLProtectionSpace) ServerTrust() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverTrust"))
 	return obj.Wrap(_r)

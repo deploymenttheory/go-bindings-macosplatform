@@ -6,17 +6,19 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A kernel that copies matrix data to a Metal Performance Shaders image.
-//
 // MatrixCopyToImage is an idiomatic wrapper over the Objective-C class MPSMatrixCopyToImage.
+//
+// It embeds [Kernel], promoting that type's methods.
+//
+// A kernel that copies matrix data to a Metal Performance Shaders image.
 type MatrixCopyToImage struct {
-	objref.Handle
+	Kernel
 }
 
 // MatrixCopyToImageFromID adopts an existing Objective-C object as a MatrixCopyToImage
@@ -25,7 +27,8 @@ func MatrixCopyToImageFromID(id objc.ID) *MatrixCopyToImage {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixCopyToImage{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatrixCopyToImage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func matrixCopyToImageAdopt(id objc.ID) *MatrixCopyToImage {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixCopyToImage{Handle: objref.Wrap(id)}
+	x := &MatrixCopyToImage{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MatrixCopyToImage) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatrixCopyToImage) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatrixCopyToImage) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMatrixCopyToImage creates a new MatrixCopyToImage.
@@ -64,28 +53,42 @@ func NewMatrixCopyToImage() *MatrixCopyToImage {
 	return matrixCopyToImageAdopt(_id)
 }
 
-// The index of the source matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.
-//
-// WithSourceMatrixBatchIndex sets sourceMatrixBatchIndex and returns the receiver so calls can be chained.
+// WithSourceMatrixOrigin the origin, relative to [0, 0] in the source matrix. This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixCopyToImage) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixCopyToImage {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMatrixOrigin:"), sourceMatrixOrigin)
+	return x
+}
+
+// WithSourceMatrixBatchIndex the index of the source matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.
 func (x *MatrixCopyToImage) WithSourceMatrixBatchIndex(sourceMatrixBatchIndex int) *MatrixCopyToImage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMatrixBatchIndex:"), sourceMatrixBatchIndex)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *MatrixCopyToImage) WithLabel(label string) *MatrixCopyToImage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The index of the source matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.
+// SourceMatrixOrigin the origin, relative to [0, 0] in the source matrix. This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixCopyToImage) SourceMatrixOrigin() metal.MTLOrigin {
+	_r := objc.Send[metal.MTLOrigin](objref.IDOf(x), objc.RegisterName("sourceMatrixOrigin"))
+	return _r
+}
+
+// SetSourceMatrixOrigin wraps the corresponding Objective-C method.
+func (x *MatrixCopyToImage) SetSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMatrixOrigin:"), sourceMatrixOrigin)
+}
+
+// SourceMatrixBatchIndex the index of the source matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.
 func (x *MatrixCopyToImage) SourceMatrixBatchIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceMatrixBatchIndex"))
 	return _r
 }
 
+// SetSourceMatrixBatchIndex wraps the corresponding Objective-C method.
 func (x *MatrixCopyToImage) SetSourceMatrixBatchIndex(sourceMatrixBatchIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMatrixBatchIndex:"), sourceMatrixBatchIndex)
 }
@@ -93,10 +96,15 @@ func (x *MatrixCopyToImage) SetSourceMatrixBatchIndex(sourceMatrixBatchIndex int
 // MatrixCopyToImageable is the interface implemented by [MatrixCopyToImage], for mocking and DI.
 type MatrixCopyToImageable interface {
 	obj.Object
+	WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixCopyToImage
 	WithSourceMatrixBatchIndex(sourceMatrixBatchIndex int) *MatrixCopyToImage
 	WithLabel(label string) *MatrixCopyToImage
+	SourceMatrixOrigin() metal.MTLOrigin
+	SetSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin)
 	SourceMatrixBatchIndex() int
 	SetSourceMatrixBatchIndex(sourceMatrixBatchIndex int)
 }
 
 var _ MatrixCopyToImageable = (*MatrixCopyToImage)(nil)
+
+var _ KernelProvider = (*MatrixCopyToImage)(nil)

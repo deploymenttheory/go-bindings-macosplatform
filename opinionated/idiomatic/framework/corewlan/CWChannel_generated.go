@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Encapsulates an IEEE 802.11 channel.
-//
 // Channel is an idiomatic wrapper over the Objective-C class CWChannel.
+//
+// Encapsulates an IEEE 802.11 channel.
 type Channel struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ChannelFromID(id objc.ID) *Channel {
 	if id == 0 {
 		return nil
 	}
-	x := &Channel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Channel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func channelAdopt(id objc.ID) *Channel {
 	if id == 0 {
 		return nil
 	}
-	x := &Channel{Handle: objref.Wrap(id)}
+	x := &Channel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,37 @@ func (x *Channel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Channel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewChannel creates a new Channel.
 func NewChannel() *Channel {
 	_id := objc.Send[objc.ID](objc.ID(_class("CWChannel")), objc.RegisterName("new"))
 	return channelAdopt(_id)
 }
 
-// Determine CWChannel object equality.
+// IsEqualToChannel determine CWChannel object equality.
 func (x *Channel) IsEqualToChannel(channel *Channel) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToChannel:"), objref.IDOf(channel))
 	return _r
 }
 
-// The channel number represented as an integer value.
+// ChannelNumber the channel number represented as an integer value.
 func (x *Channel) ChannelNumber() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("channelNumber"))
 	return _r
 }
 
-// The channel width as indicated by the CWChannelWidth type.
+// ChannelWidth the channel width as indicated by the CWChannelWidth type.
 func (x *Channel) ChannelWidth() ChannelWidth {
 	_r := objc.Send[ChannelWidth](objref.IDOf(x), objc.RegisterName("channelWidth"))
 	return _r
 }
 
-// The channel band as indicated by the CWChannelBand type.
+// ChannelBand the channel band as indicated by the CWChannelBand type.
 func (x *Channel) ChannelBand() ChannelBand {
 	_r := objc.Send[ChannelBand](objref.IDOf(x), objc.RegisterName("channelBand"))
 	return _r

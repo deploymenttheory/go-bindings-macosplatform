@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object you create to analyze a stream of audio data and provide the results to your app.
-//
 // AudioStreamAnalyzer is an idiomatic wrapper over the Objective-C class SNAudioStreamAnalyzer.
+//
+// An object you create to analyze a stream of audio data and provide the results to your app.
 type AudioStreamAnalyzer struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AudioStreamAnalyzerFromID(id objc.ID) *AudioStreamAnalyzer {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioStreamAnalyzer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioStreamAnalyzer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func audioStreamAnalyzerAdopt(id objc.ID) *AudioStreamAnalyzer {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioStreamAnalyzer{Handle: objref.Wrap(id)}
+	x := &AudioStreamAnalyzer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,26 +60,30 @@ func (x *AudioStreamAnalyzer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new audio stream analyzer.
-//
-// NewAudioStreamAnalyzerWithFormat creates a new AudioStreamAnalyzer.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioStreamAnalyzer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudioStreamAnalyzerWithFormat creates a new audio stream analyzer.
 func NewAudioStreamAnalyzerWithFormat(format obj.Object) *AudioStreamAnalyzer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SNAudioStreamAnalyzer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:"), objref.IDOf(format))
 	return audioStreamAnalyzerAdopt(_id)
 }
 
-// Removes all the sound analysis requests from the audio stream analyzer.
+// RemoveAllRequests removes all the sound analysis requests from the audio stream analyzer.
 func (x *AudioStreamAnalyzer) RemoveAllRequests() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllRequests"))
 }
 
-// Adds a new audio buffer to the analyzer’s larger stream buffer.
+// AnalyzeAudioBufferAtAudioFramePosition adds a new audio buffer to the analyzer’s larger stream buffer.
 func (x *AudioStreamAnalyzer) AnalyzeAudioBufferAtAudioFramePosition(audioBuffer obj.Object, audioFramePosition int64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("analyzeAudioBuffer:atAudioFramePosition:"), objref.IDOf(audioBuffer), audioFramePosition)
 }
 
-// Notifies the analyzer when it receives the final audio buffer.
+// CompleteAnalysis notifies the analyzer when it receives the final audio buffer.
 func (x *AudioStreamAnalyzer) CompleteAnalysis() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeAnalysis"))
 }

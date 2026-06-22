@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A closed polygon overlay.
-//
 // Polygon is an idiomatic wrapper over the Objective-C class MKPolygon.
+//
+// It embeds [MultiPoint], promoting that type's methods.
+//
+// A closed polygon overlay.
 type Polygon struct {
-	objref.Handle
+	MultiPoint
 }
 
 // PolygonFromID adopts an existing Objective-C object as a Polygon
@@ -25,7 +26,8 @@ func PolygonFromID(id objc.ID) *Polygon {
 	if id == 0 {
 		return nil
 	}
-	x := &Polygon{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Polygon{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func polygonAdopt(id objc.ID) *Polygon {
 	if id == 0 {
 		return nil
 	}
-	x := &Polygon{Handle: objref.Wrap(id)}
+	x := &Polygon{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *Polygon) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Polygon) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Polygon) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPolygon creates a new Polygon.
@@ -64,22 +52,20 @@ func NewPolygon() *Polygon {
 	return polygonAdopt(_id)
 }
 
-// The title of the shape annotation.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the title of the shape annotation.
 func (x *Polygon) WithTitle(title string) *Polygon {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The subtitle of the shape annotation.
-//
-// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
+// WithSubtitle the subtitle of the shape annotation.
 func (x *Polygon) WithSubtitle(subtitle string) *Polygon {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
+// InteriorPolygons wraps the corresponding Objective-C method.
+//
 // InteriorPolygons returns the collection as a Go slice.
 func (x *Polygon) InteriorPolygons() []*Polygon {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interiorPolygons"))
@@ -95,3 +81,7 @@ type Polygonable interface {
 }
 
 var _ Polygonable = (*Polygon)(nil)
+
+var _ MultiPointProvider = (*Polygon)(nil)
+
+var _ ShapeProvider = (*Polygon)(nil)

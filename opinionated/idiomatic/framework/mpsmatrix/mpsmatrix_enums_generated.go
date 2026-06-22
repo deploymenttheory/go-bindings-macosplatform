@@ -17,6 +17,8 @@ const (
 	MatrixRandomDistributionNormal  MatrixRandomDistribution = 3
 )
 
+// String returns the MatrixRandomDistribution constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MatrixRandomDistribution) String() string {
 	var parts []string
 	if e&MatrixRandomDistributionDefault != 0 {

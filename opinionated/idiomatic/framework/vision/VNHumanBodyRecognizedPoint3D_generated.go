@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A recognized 3D point that includes a parent joint.
-//
 // HumanBodyRecognizedPoint3D is an idiomatic wrapper over the Objective-C class VNHumanBodyRecognizedPoint3D.
+//
+// It embeds [RecognizedPoint3D], promoting that type's methods.
+//
+// A recognized 3D point that includes a parent joint.
 type HumanBodyRecognizedPoint3D struct {
-	objref.Handle
+	RecognizedPoint3D
 }
 
 // HumanBodyRecognizedPoint3DFromID adopts an existing Objective-C object as a HumanBodyRecognizedPoint3D
@@ -25,7 +26,8 @@ func HumanBodyRecognizedPoint3DFromID(id objc.ID) *HumanBodyRecognizedPoint3D {
 	if id == 0 {
 		return nil
 	}
-	x := &HumanBodyRecognizedPoint3D{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HumanBodyRecognizedPoint3D{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func humanBodyRecognizedPoint3DAdopt(id objc.ID) *HumanBodyRecognizedPoint3D {
 	if id == 0 {
 		return nil
 	}
-	x := &HumanBodyRecognizedPoint3D{Handle: objref.Wrap(id)}
+	x := &HumanBodyRecognizedPoint3D{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *HumanBodyRecognizedPoint3D) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HumanBodyRecognizedPoint3D) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HumanBodyRecognizedPoint3D) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewHumanBodyRecognizedPoint3D creates a new HumanBodyRecognizedPoint3D.
@@ -64,6 +52,7 @@ func NewHumanBodyRecognizedPoint3D() *HumanBodyRecognizedPoint3D {
 	return humanBodyRecognizedPoint3DAdopt(_id)
 }
 
+// ParentJoint wraps the corresponding Objective-C method.
 func (x *HumanBodyRecognizedPoint3D) ParentJoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentJoint"))
 	return obj.Wrap(_r)
@@ -76,3 +65,7 @@ type HumanBodyRecognizedPoint3Dable interface {
 }
 
 var _ HumanBodyRecognizedPoint3Dable = (*HumanBodyRecognizedPoint3D)(nil)
+
+var _ RecognizedPoint3DProvider = (*HumanBodyRecognizedPoint3D)(nil)
+
+var _ Point3DProvider = (*HumanBodyRecognizedPoint3D)(nil)

@@ -6,6 +6,7 @@ package scenekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -13,9 +14,11 @@ import (
 	"unsafe"
 )
 
-// A structural element of a scene graph, representing a position and transform in a 3D coordinate space, to which you can attach geometry, lights, cameras, or other displayable content.
-//
 // Node is an idiomatic wrapper over the Objective-C class SCNNode.
+//
+// Node is an abstract base — you do not construct it directly. Construct one of [ReferenceNode] and pass it where a Node is accepted.
+//
+// A structural element of a scene graph, representing a position and transform in a 3D coordinate space, to which you can attach geometry, lights, cameras, or other displayable content.
 type Node struct {
 	objref.Handle
 }
@@ -26,7 +29,8 @@ func NodeFromID(id objc.ID) *Node {
 	if id == 0 {
 		return nil
 	}
-	x := &Node{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Node{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +43,8 @@ func nodeAdopt(id objc.ID) *Node {
 	if id == 0 {
 		return nil
 	}
-	x := &Node{Handle: objref.Wrap(id)}
+	x := &Node{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,197 +64,184 @@ func (x *Node) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewNode creates a new Node.
-func NewNode() *Node {
-	_id := objc.Send[objc.ID](objc.ID(_class("SCNNode")), objc.RegisterName("new"))
-	return nodeAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Node) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// A name associated with the node.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName a name associated with the node.
 func (x *Node) WithName(name string) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The light attached to the node.
-//
-// WithLight sets light and returns the receiver so calls can be chained.
+// WithLight the light attached to the node.
 func (x *Node) WithLight(light *Light) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLight:"), objref.IDOf(light))
 	return x
 }
 
-// The camera attached to the node.
-//
-// WithCamera sets camera and returns the receiver so calls can be chained.
+// WithCamera the camera attached to the node.
 func (x *Node) WithCamera(camera *Camera) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCamera:"), objref.IDOf(camera))
 	return x
 }
 
-// The geometry attached to the node.
-//
-// WithGeometry sets geometry and returns the receiver so calls can be chained.
+// WithGeometry the geometry attached to the node.
 func (x *Node) WithGeometry(geometry GeometryProvider) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeometry:"), objref.IDOf(geometry))
 	return x
 }
 
-// The skinner object responsible for skeletal animations of node’s contents.
-//
-// WithSkinner sets skinner and returns the receiver so calls can be chained.
+// WithSkinner the skinner object responsible for skeletal animations of node’s contents.
 func (x *Node) WithSkinner(skinner *Skinner) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSkinner:"), objref.IDOf(skinner))
 	return x
 }
 
-// The morpher object responsible for blending the node’s geometry.
-//
-// WithMorpher sets morpher and returns the receiver so calls can be chained.
+// WithMorpher the morpher object responsible for blending the node’s geometry.
 func (x *Node) WithMorpher(morpher *Morpher) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMorpher:"), objref.IDOf(morpher))
 	return x
 }
 
-// A Boolean value that determines the visibility of the node’s contents. Animatable.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithTransform the transform applied to the node relative to its parent. Animatable.
+func (x *Node) WithTransform(transform quartzcore.CATransform3D) *Node {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransform:"), transform)
+	return x
+}
+
+// WithWorldTransform the world transform applied to the node.
+func (x *Node) WithWorldTransform(worldTransform quartzcore.CATransform3D) *Node {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorldTransform:"), worldTransform)
+	return x
+}
+
+// WithPivot the pivot point for the node’s position, rotation, and scale. Animatable.
+func (x *Node) WithPivot(pivot quartzcore.CATransform3D) *Node {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPivot:"), pivot)
+	return x
+}
+
+// WithHidden a Boolean value that determines the visibility of the node’s contents. Animatable.
 func (x *Node) WithHidden(hidden bool) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// The opacity value of the node. Animatable.
-//
-// WithOpacity sets opacity and returns the receiver so calls can be chained.
+// WithOpacity the opacity value of the node. Animatable.
 func (x *Node) WithOpacity(opacity float64) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpacity:"), opacity)
 	return x
 }
 
-// The order the node’s content is drawn in relative to that of other nodes.
-//
-// WithRenderingOrder sets renderingOrder and returns the receiver so calls can be chained.
+// WithRenderingOrder the order the node’s content is drawn in relative to that of other nodes.
 func (x *Node) WithRenderingOrder(renderingOrder int) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderingOrder:"), renderingOrder)
 	return x
 }
 
-// A Boolean value that determines whether SceneKit renders the node’s contents into shadow maps.
-//
-// WithCastsShadow sets castsShadow and returns the receiver so calls can be chained.
+// WithCastsShadow a Boolean value that determines whether SceneKit renders the node’s contents into shadow maps.
 func (x *Node) WithCastsShadow(castsShadow bool) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCastsShadow:"), castsShadow)
 	return x
 }
 
-// A value that indicates how SceneKit should handle the node when rendering movement-related effects.
-//
-// WithMovabilityHint sets movabilityHint and returns the receiver so calls can be chained.
+// WithMovabilityHint a value that indicates how SceneKit should handle the node when rendering movement-related effects.
 func (x *Node) WithMovabilityHint(movabilityHint MovabilityHint) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMovabilityHint:"), movabilityHint)
 	return x
 }
 
-// The physics body associated with the node.
-//
-// WithPhysicsBody sets physicsBody and returns the receiver so calls can be chained.
+// WithPhysicsBody the physics body associated with the node.
 func (x *Node) WithPhysicsBody(physicsBody *PhysicsBody) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	return x
 }
 
-// The physics field associated with the node.
-//
-// WithPhysicsField sets physicsField and returns the receiver so calls can be chained.
+// WithPhysicsField the physics field associated with the node.
 func (x *Node) WithPhysicsField(physicsField *PhysicsField) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsField:"), objref.IDOf(physicsField))
 	return x
 }
 
-// A list of constraints affecting the node’s transformation.
-//
-// WithConstraints sets the collection and returns the receiver so calls can be chained.
+// WithConstraints a list of constraints affecting the node’s transformation.
 func (x *Node) WithConstraints(items ...ConstraintProvider) *Node {
 	_arr := purego.SliceToNSArray(items, func(_v ConstraintProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
-// An array of Core Image filters to be applied to the rendered contents of the node.
-//
-// WithFilters sets the collection and returns the receiver so calls can be chained.
+// WithFilters an array of Core Image filters to be applied to the rendered contents of the node.
 func (x *Node) WithFilters(items ...obj.Object) *Node {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilters:"), _arr)
 	return x
 }
 
-// A Boolean value that determines whether to run actions and animations attached to the node and its child nodes.
-//
-// WithPaused sets paused and returns the receiver so calls can be chained.
+// WithPaused a Boolean value that determines whether to run actions and animations attached to the node and its child nodes.
 func (x *Node) WithPaused(paused bool) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
-// A mask that defines which categories the node belongs to.
-//
-// WithCategoryBitMask sets categoryBitMask and returns the receiver so calls can be chained.
+// WithCategoryBitMask a mask that defines which categories the node belongs to.
 func (x *Node) WithCategoryBitMask(categoryBitMask int) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
 	return x
 }
 
-// The focus behavior for a node.
-//
-// WithFocusBehavior sets focusBehavior and returns the receiver so calls can be chained.
+// WithFocusBehavior the focus behavior for a node.
 func (x *Node) WithFocusBehavior(focusBehavior NodeFocusBehavior) *Node {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusBehavior:"), focusBehavior)
 	return x
 }
 
-// Creates a copy of the node and its children.
+// Clone creates a copy of the node and its children.
 func (x *Node) Clone() *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clone"))
 	return NodeFromID(_r)
 }
 
-// Creates an optimized copy of the node and its children.
+// FlattenedClone creates an optimized copy of the node and its children.
 func (x *Node) FlattenedClone() *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flattenedClone"))
 	return NodeFromID(_r)
 }
 
-// Adds a node to the node’s array of children.
+// SetWorldTransform sets the world transform applied to the node.
+func (x *Node) SetWorldTransform(worldTransform quartzcore.CATransform3D) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorldTransform:"), worldTransform)
+}
+
+// AddChildNode adds a node to the node’s array of children.
 func (x *Node) AddChildNode(child *Node) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addChildNode:"), objref.IDOf(child))
 }
 
-// Adds a node to the node’s array of children at a specified index.
+// InsertChildNodeAtIndex adds a node to the node’s array of children at a specified index.
 func (x *Node) InsertChildNodeAtIndex(child *Node, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertChildNode:atIndex:"), objref.IDOf(child), index)
 }
 
-// Removes the node from its parent’s array of child nodes.
+// RemoveFromParentNode removes the node from its parent’s array of child nodes.
 func (x *Node) RemoveFromParentNode() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromParentNode"))
 }
 
-// Removes a child from the node’s array of children and inserts another node in its place.
+// ReplaceChildNodeWith removes a child from the node’s array of children and inserts another node in its place.
 func (x *Node) ReplaceChildNodeWith(oldChild *Node, newChild *Node) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceChildNode:with:"), objref.IDOf(oldChild), objref.IDOf(newChild))
 }
 
-// Returns the first node in the node’s child node subtree with the specified name.
+// ChildNodeWithNameRecursively returns the first node in the node’s child node subtree with the specified name.
 func (x *Node) ChildNodeWithNameRecursively(name string, recursively bool) *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("childNodeWithName:recursively:"), purego.NSString(name), recursively)
 	return NodeFromID(_r)
 }
 
-// Returns all nodes in the node’s child node subtree that satisfy the test applied by a block.
+// ChildNodesPassingTest returns all nodes in the node’s child node subtree that satisfy the test applied by a block.
 func (x *Node) ChildNodesPassingTest(predicate func(obj.Object, *bool) bool) []*Node {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("childNodesPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), (*bool)(_b1))
@@ -257,17 +249,29 @@ func (x *Node) ChildNodesPassingTest(predicate func(obj.Object, *bool) bool) []*
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Node { return NodeFromID(_id) })
 }
 
-// Executes the specified block for each of the node’s child and descendant nodes.
+// EnumerateChildNodesUsing executes the specified block for each of the node’s child and descendant nodes.
 func (x *Node) EnumerateChildNodesUsing(block func(obj.Object, *bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateChildNodesUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
-// Executes the specified block for each of the node’s child and descendant nodes, as well as for the node itself.
+// EnumerateHierarchyUsing executes the specified block for each of the node’s child and descendant nodes, as well as for the node itself.
 func (x *Node) EnumerateHierarchyUsing(block func(obj.Object, *bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateHierarchyUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
-// Determines the name of the receiver.
+// ConvertTransformToNode converts a transform from the node’s local coordinate space to that of another node.
+func (x *Node) ConvertTransformToNode(transform quartzcore.CATransform3D, node *Node) quartzcore.CATransform3D {
+	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(x), objc.RegisterName("convertTransform:toNode:"), transform, objref.IDOf(node))
+	return _r
+}
+
+// ConvertTransformFromNode converts a transform to the node’s local coordinate space from that of another node.
+func (x *Node) ConvertTransformFromNode(transform quartzcore.CATransform3D, node *Node) quartzcore.CATransform3D {
+	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(x), objc.RegisterName("convertTransform:fromNode:"), transform, objref.IDOf(node))
+	return _r
+}
+
+// Name determines the name of the receiver.
 func (x *Node) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -276,116 +280,156 @@ func (x *Node) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *Node) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// Determines the light attached to the receiver.
+// Light determines the light attached to the receiver.
 func (x *Node) Light() *Light {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("light"))
 	return LightFromID(_r)
 }
 
+// SetLight wraps the corresponding Objective-C method.
 func (x *Node) SetLight(light *Light) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLight:"), objref.IDOf(light))
 }
 
+// Camera wraps the corresponding Objective-C method.
 func (x *Node) Camera() *Camera {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("camera"))
 	return CameraFromID(_r)
 }
 
+// SetCamera wraps the corresponding Objective-C method.
 func (x *Node) SetCamera(camera *Camera) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCamera:"), objref.IDOf(camera))
 }
 
-// Returns the geometry attached to the receiver.
+// Geometry returns the geometry attached to the receiver.
 func (x *Node) Geometry() *Geometry {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("geometry"))
 	return GeometryFromID(_r)
 }
 
+// SetGeometry wraps the corresponding Objective-C method.
 func (x *Node) SetGeometry(geometry *Geometry) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeometry:"), objref.IDOf(geometry))
 }
 
-// Returns the skinner attached to the receiver.
+// Skinner returns the skinner attached to the receiver.
 func (x *Node) Skinner() *Skinner {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skinner"))
 	return SkinnerFromID(_r)
 }
 
+// SetSkinner wraps the corresponding Objective-C method.
 func (x *Node) SetSkinner(skinner *Skinner) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSkinner:"), objref.IDOf(skinner))
 }
 
-// Returns the morpher attached to the receiver.
+// Morpher returns the morpher attached to the receiver.
 func (x *Node) Morpher() *Morpher {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("morpher"))
 	return MorpherFromID(_r)
 }
 
+// SetMorpher wraps the corresponding Objective-C method.
 func (x *Node) SetMorpher(morpher *Morpher) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMorpher:"), objref.IDOf(morpher))
 }
 
-// Determines whether the receiver is displayed. Defaults to NO. Animatable.
+// Transform determines the receiver's transform. Animatable. The transform is the combination of the position, rotation and scale defined below. So when the transform is set, the receiver's position, rotation and scale are changed to match the new transform.
+func (x *Node) Transform() quartzcore.CATransform3D {
+	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(x), objc.RegisterName("transform"))
+	return _r
+}
+
+// SetTransform wraps the corresponding Objective-C method.
+func (x *Node) SetTransform(transform quartzcore.CATransform3D) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransform:"), transform)
+}
+
+// WorldTransform determines the receiver's transform in world space (relative to the scene's root node). Animatable.
+func (x *Node) WorldTransform() quartzcore.CATransform3D {
+	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(x), objc.RegisterName("worldTransform"))
+	return _r
+}
+
+// Pivot determines the receiver's pivot. Animatable.
+func (x *Node) Pivot() quartzcore.CATransform3D {
+	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(x), objc.RegisterName("pivot"))
+	return _r
+}
+
+// SetPivot wraps the corresponding Objective-C method.
+func (x *Node) SetPivot(pivot quartzcore.CATransform3D) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPivot:"), pivot)
+}
+
+// IsHidden determines whether the receiver is displayed. Defaults to NO. Animatable.
 func (x *Node) IsHidden() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
 	return _r
 }
 
+// SetHidden wraps the corresponding Objective-C method.
 func (x *Node) SetHidden(hidden bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 }
 
-// Determines the opacity of the receiver. Default is 1. Animatable.
+// Opacity determines the opacity of the receiver. Default is 1. Animatable.
 func (x *Node) Opacity() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("opacity"))
 	return _r
 }
 
+// SetOpacity wraps the corresponding Objective-C method.
 func (x *Node) SetOpacity(opacity float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpacity:"), opacity)
 }
 
-// Determines the rendering order of the receiver. Nodes with greater rendering orders are rendered last. Defaults to 0.
+// RenderingOrder determines the rendering order of the receiver. Nodes with greater rendering orders are rendered last. Defaults to 0.
 func (x *Node) RenderingOrder() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("renderingOrder"))
 	return _r
 }
 
+// SetRenderingOrder wraps the corresponding Objective-C method.
 func (x *Node) SetRenderingOrder(renderingOrder int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderingOrder:"), renderingOrder)
 }
 
-// Determines if the node is rendered in shadow maps. Defaults to YES.
+// CastsShadow determines if the node is rendered in shadow maps. Defaults to YES.
 func (x *Node) CastsShadow() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("castsShadow"))
 	return _r
 }
 
+// SetCastsShadow wraps the corresponding Objective-C method.
 func (x *Node) SetCastsShadow(castsShadow bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCastsShadow:"), castsShadow)
 }
 
-// Communicates to SceneKit’s rendering system about how you want to move content in your scene; it does not affect your ability to change the node’s position or add animations or physics to the node. Defaults to SCNMovabilityHintFixed.
+// MovabilityHint communicates to SceneKit’s rendering system about how you want to move content in your scene; it does not affect your ability to change the node’s position or add animations or physics to the node. Defaults to SCNMovabilityHintFixed.
 func (x *Node) MovabilityHint() MovabilityHint {
 	_r := objc.Send[MovabilityHint](objref.IDOf(x), objc.RegisterName("movabilityHint"))
 	return _r
 }
 
+// SetMovabilityHint wraps the corresponding Objective-C method.
 func (x *Node) SetMovabilityHint(movabilityHint MovabilityHint) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMovabilityHint:"), movabilityHint)
 }
 
-// Returns the parent node of the receiver.
+// ParentNode returns the parent node of the receiver.
 func (x *Node) ParentNode() *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentNode"))
 	return NodeFromID(_r)
 }
 
-// Returns the child node array of the receiver.
+// ChildNodes returns the child node array of the receiver.
 //
 // ChildNodes returns the collection as a Go slice.
 func (x *Node) ChildNodes() []*Node {
@@ -393,27 +437,29 @@ func (x *Node) ChildNodes() []*Node {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Node { return NodeFromID(_id) })
 }
 
-// The description of the physics body of the receiver. Default is nil.
+// PhysicsBody the description of the physics body of the receiver. Default is nil.
 func (x *Node) PhysicsBody() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("physicsBody"))
 	return PhysicsBodyFromID(_r)
 }
 
+// SetPhysicsBody wraps the corresponding Objective-C method.
 func (x *Node) SetPhysicsBody(physicsBody *PhysicsBody) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 }
 
-// The description of the physics field of the receiver. Default is nil.
+// PhysicsField the description of the physics field of the receiver. Default is nil.
 func (x *Node) PhysicsField() *PhysicsField {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("physicsField"))
 	return PhysicsFieldFromID(_r)
 }
 
+// SetPhysicsField wraps the corresponding Objective-C method.
 func (x *Node) SetPhysicsField(physicsField *PhysicsField) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsField:"), objref.IDOf(physicsField))
 }
 
-// An array of SCNConstraint that are applied to the receiver. Adding or removing a constraint can be implicitly animated based on the current transaction.
+// Constraints an array of SCNConstraint that are applied to the receiver. Adding or removing a constraint can be implicitly animated based on the current transaction.
 //
 // Constraints returns the collection as a Go slice.
 func (x *Node) Constraints() []*Constraint {
@@ -421,11 +467,12 @@ func (x *Node) Constraints() []*Constraint {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Constraint { return ConstraintFromID(_id) })
 }
 
+// SetConstraints wraps the corresponding Objective-C method.
 func (x *Node) SetConstraints(constraints []*Constraint) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), purego.SliceToNSArray(constraints, func(_v *Constraint) objc.ID { return objref.IDOf(_v) }))
 }
 
-// An array of Core Image filters that are applied to the rendering of the receiver and its child nodes. Animatable. Defaults to nil. Filter properties should be modified by calling setValue:forKeyPath: on each node that the filter is attached to. If the inputs of the filter are modified directly after the filter is attached to a node, the behavior is undefined.
+// Filters an array of Core Image filters that are applied to the rendering of the receiver and its child nodes. Animatable. Defaults to nil. Filter properties should be modified by calling setValue:forKeyPath: on each node that the filter is attached to. If the inputs of the filter are modified directly after the filter is attached to a node, the behavior is undefined.
 //
 // Filters returns the collection as a Go slice.
 func (x *Node) Filters() []obj.Object {
@@ -433,81 +480,90 @@ func (x *Node) Filters() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetFilters wraps the corresponding Objective-C method.
 func (x *Node) SetFilters(filters []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilters:"), purego.SliceToNSArray(filters, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Returns the presentation node. Returns a copy of the node containing all the properties as they were at the start of the current transaction, with any active animations applied. This gives a close approximation to the version of the node that is currently displayed. The effect of attempting to modify the returned node in any way is undefined. The returned node has no parent and no child nodes.
+// PresentationNode returns the presentation node. Returns a copy of the node containing all the properties as they were at the start of the current transaction, with any active animations applied. This gives a close approximation to the version of the node that is currently displayed. The effect of attempting to modify the returned node in any way is undefined. The returned node has no parent and no child nodes.
 func (x *Node) PresentationNode() *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentationNode"))
 	return NodeFromID(_r)
 }
 
-// Controls whether or not the node's actions and animations are updated or paused. Defaults to NO.
+// IsPaused controls whether or not the node's actions and animations are updated or paused. Defaults to NO.
 func (x *Node) IsPaused() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaused"))
 	return _r
 }
 
+// SetPaused wraps the corresponding Objective-C method.
 func (x *Node) SetPaused(paused bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 }
 
-// Defines what logical 'categories' the receiver belongs too. Defaults to 1. Categories can be used to 1. exclude nodes from the influence of a given light (see SCNLight.categoryBitMask) 2. include/exclude nodes from render passes (see SCNTechnique.h) 3. specify which nodes to use when hit-testing (see SCNHitTestOptionCategoryBitMask)
+// CategoryBitMask defines what logical 'categories' the receiver belongs too. Defaults to 1. Categories can be used to 1. exclude nodes from the influence of a given light (see SCNLight.categoryBitMask) 2. include/exclude nodes from render passes (see SCNTechnique.h) 3. specify which nodes to use when hit-testing (see SCNHitTestOptionCategoryBitMask)
 func (x *Node) CategoryBitMask() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("categoryBitMask"))
 	return _r
 }
 
+// SetCategoryBitMask wraps the corresponding Objective-C method.
 func (x *Node) SetCategoryBitMask(categoryBitMask int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
 }
 
+// FocusBehavior wraps the corresponding Objective-C method.
 func (x *Node) FocusBehavior() NodeFocusBehavior {
 	_r := objc.Send[NodeFocusBehavior](objref.IDOf(x), objc.RegisterName("focusBehavior"))
 	return _r
 }
 
+// SetFocusBehavior wraps the corresponding Objective-C method.
 func (x *Node) SetFocusBehavior(focusBehavior NodeFocusBehavior) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusBehavior:"), focusBehavior)
 }
 
-// Attaches a particle system to the node.
+// AddParticleSystem attaches a particle system to the node.
 func (x *Node) AddParticleSystem(system *ParticleSystem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addParticleSystem:"), objref.IDOf(system))
 }
 
-// Removes any particle systems directly attached to the node.
+// RemoveAllParticleSystems removes any particle systems directly attached to the node.
 func (x *Node) RemoveAllParticleSystems() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllParticleSystems"))
 }
 
-// Removes a particle system attached to the node.
+// RemoveParticleSystem removes a particle system attached to the node.
 func (x *Node) RemoveParticleSystem(system *ParticleSystem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeParticleSystem:"), objref.IDOf(system))
 }
 
+// ParticleSystems wraps the corresponding Objective-C method.
+//
 // ParticleSystems returns the collection as a Go slice.
 func (x *Node) ParticleSystems() []*ParticleSystem {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("particleSystems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ParticleSystem { return ParticleSystemFromID(_id) })
 }
 
-// Adds the specified auto player to the node and begins playback.
+// AddAudioPlayer adds the specified auto player to the node and begins playback.
 func (x *Node) AddAudioPlayer(player *AudioPlayer) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAudioPlayer:"), objref.IDOf(player))
 }
 
-// Removes all audio players attached to the node, stopping playback.
+// RemoveAllAudioPlayers removes all audio players attached to the node, stopping playback.
 func (x *Node) RemoveAllAudioPlayers() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllAudioPlayers"))
 }
 
-// Removes the specified audio player from the node, stopping playback.
+// RemoveAudioPlayer removes the specified audio player from the node, stopping playback.
 func (x *Node) RemoveAudioPlayer(player *AudioPlayer) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAudioPlayer:"), objref.IDOf(player))
 }
 
+// AudioPlayers wraps the corresponding Objective-C method.
+//
 // AudioPlayers returns the collection as a Go slice.
 func (x *Node) AudioPlayers() []*AudioPlayer {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioPlayers"))
@@ -523,6 +579,9 @@ type Nodeable interface {
 	WithGeometry(geometry GeometryProvider) *Node
 	WithSkinner(skinner *Skinner) *Node
 	WithMorpher(morpher *Morpher) *Node
+	WithTransform(transform quartzcore.CATransform3D) *Node
+	WithWorldTransform(worldTransform quartzcore.CATransform3D) *Node
+	WithPivot(pivot quartzcore.CATransform3D) *Node
 	WithHidden(hidden bool) *Node
 	WithOpacity(opacity float64) *Node
 	WithRenderingOrder(renderingOrder int) *Node
@@ -537,6 +596,7 @@ type Nodeable interface {
 	WithFocusBehavior(focusBehavior NodeFocusBehavior) *Node
 	Clone() *Node
 	FlattenedClone() *Node
+	SetWorldTransform(worldTransform quartzcore.CATransform3D)
 	AddChildNode(child *Node)
 	InsertChildNodeAtIndex(child *Node, index int)
 	RemoveFromParentNode()
@@ -545,6 +605,8 @@ type Nodeable interface {
 	ChildNodesPassingTest(predicate func(obj.Object, *bool) bool) []*Node
 	EnumerateChildNodesUsing(block func(obj.Object, *bool))
 	EnumerateHierarchyUsing(block func(obj.Object, *bool))
+	ConvertTransformToNode(transform quartzcore.CATransform3D, node *Node) quartzcore.CATransform3D
+	ConvertTransformFromNode(transform quartzcore.CATransform3D, node *Node) quartzcore.CATransform3D
 	Name() string
 	SetName(name string)
 	Light() *Light
@@ -557,6 +619,11 @@ type Nodeable interface {
 	SetSkinner(skinner *Skinner)
 	Morpher() *Morpher
 	SetMorpher(morpher *Morpher)
+	Transform() quartzcore.CATransform3D
+	SetTransform(transform quartzcore.CATransform3D)
+	WorldTransform() quartzcore.CATransform3D
+	Pivot() quartzcore.CATransform3D
+	SetPivot(pivot quartzcore.CATransform3D)
 	IsHidden() bool
 	SetHidden(hidden bool)
 	Opacity() float64
@@ -595,3 +662,10 @@ type Nodeable interface {
 }
 
 var _ Nodeable = (*Node)(nil)
+
+// isNode marks Node — and, by embedding promotion, its
+// subclasses — as a member of the Node hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Node) isNode() {}
+
+var _ NodeProvider = (*Node)(nil)

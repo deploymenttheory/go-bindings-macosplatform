@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a single layout constraint between two layers.
-//
 // Constraint is an idiomatic wrapper over the Objective-C class CAConstraint.
+//
+// A representation of a single layout constraint between two layers.
 type Constraint struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ConstraintFromID(id objc.ID) *Constraint {
 	if id == 0 {
 		return nil
 	}
-	x := &Constraint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Constraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func constraintAdopt(id objc.ID) *Constraint {
 	if id == 0 {
 		return nil
 	}
-	x := &Constraint{Handle: objref.Wrap(id)}
+	x := &Constraint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,20 +60,26 @@ func (x *Constraint) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns an CAConstraint object with the specified parameters. Designated initializer.
-//
-// NewConstraintWithAttributeRelativeToAttributeScaleOffset creates a new Constraint.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Constraint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewConstraintWithAttributeRelativeToAttributeScaleOffset returns an CAConstraint object with the specified parameters. Designated initializer.
 func NewConstraintWithAttributeRelativeToAttributeScaleOffset(attr ConstraintAttribute, srcId string, srcAttr ConstraintAttribute, m float64, c float64) *Constraint {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CAConstraint")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttribute:relativeTo:attribute:scale:offset:"), attr, purego.NSString(srcId), srcAttr, m, c)
 	return constraintAdopt(_id)
 }
 
+// Attribute wraps the corresponding Objective-C method.
 func (x *Constraint) Attribute() ConstraintAttribute {
 	_r := objc.Send[ConstraintAttribute](objref.IDOf(x), objc.RegisterName("attribute"))
 	return _r
 }
 
+// SourceName wraps the corresponding Objective-C method.
 func (x *Constraint) SourceName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceName"))
 	if _r == 0 {
@@ -80,16 +88,19 @@ func (x *Constraint) SourceName() string {
 	return purego.GoString(_r)
 }
 
+// SourceAttribute wraps the corresponding Objective-C method.
 func (x *Constraint) SourceAttribute() ConstraintAttribute {
 	_r := objc.Send[ConstraintAttribute](objref.IDOf(x), objc.RegisterName("sourceAttribute"))
 	return _r
 }
 
+// Scale wraps the corresponding Objective-C method.
 func (x *Constraint) Scale() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scale"))
 	return _r
 }
 
+// Offset wraps the corresponding Objective-C method.
 func (x *Constraint) Offset() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("offset"))
 	return _r

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A query that performs complex searches based on the correlation’s contents, and returns a snapshot of all matching samples.
-//
 // CorrelationQuery is an idiomatic wrapper over the Objective-C class HKCorrelationQuery.
+//
+// It embeds [Query], promoting that type's methods.
+//
+// A query that performs complex searches based on the correlation’s contents, and returns a snapshot of all matching samples.
 type CorrelationQuery struct {
-	objref.Handle
+	Query
 }
 
 // CorrelationQueryFromID adopts an existing Objective-C object as a CorrelationQuery
@@ -25,7 +26,8 @@ func CorrelationQueryFromID(id objc.ID) *CorrelationQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &CorrelationQuery{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CorrelationQuery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func correlationQueryAdopt(id objc.ID) *CorrelationQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &CorrelationQuery{Handle: objref.Wrap(id)}
+	x := &CorrelationQuery{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CorrelationQuery) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CorrelationQuery) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CorrelationQuery) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCorrelationQuery creates a new CorrelationQuery.
@@ -64,12 +52,13 @@ func NewCorrelationQuery() *CorrelationQuery {
 	return correlationQueryAdopt(_id)
 }
 
+// CorrelationType wraps the corresponding Objective-C method.
 func (x *CorrelationQuery) CorrelationType() *CorrelationType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("correlationType"))
 	return CorrelationTypeFromID(_r)
 }
 
-// A dictionary of predicates for the HKCorrelation's objects samplePredicates maps HKSampleTypes to NSPredicates. The predicate value will apply to objects of the key type.
+// SamplePredicates a dictionary of predicates for the HKCorrelation's objects samplePredicates maps HKSampleTypes to NSPredicates. The predicate value will apply to objects of the key type.
 func (x *CorrelationQuery) SamplePredicates() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("samplePredicates"))
 	return obj.Wrap(_r)
@@ -83,3 +72,5 @@ type CorrelationQueryable interface {
 }
 
 var _ CorrelationQueryable = (*CorrelationQuery)(nil)
+
+var _ QueryProvider = (*CorrelationQuery)(nil)

@@ -6,17 +6,21 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// A legacy interface for grouping radio buttons or other types of cells together.
-//
 // Matrix is an idiomatic wrapper over the Objective-C class NSMatrix.
+//
+// Matrix is an abstract base — you do not construct it directly. Construct one of [Form] and pass it where a Matrix is accepted.
+//
+// A legacy interface for grouping radio buttons or other types of cells together.
 type Matrix struct {
-	objref.Handle
+	Control
 }
 
 // MatrixFromID adopts an existing Objective-C object as a Matrix
@@ -25,7 +29,8 @@ func MatrixFromID(id objc.ID) *Matrix {
 	if id == 0 {
 		return nil
 	}
-	x := &Matrix{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Matrix{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,803 +43,781 @@ func matrixAdopt(id objc.ID) *Matrix {
 	if id == 0 {
 		return nil
 	}
-	x := &Matrix{Handle: objref.Wrap(id)}
+	x := &Matrix{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *Matrix) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Matrix) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Matrix) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewMatrix creates a new Matrix.
-func NewMatrix() *Matrix {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSMatrix")), objc.RegisterName("new"))
+// NewMatrixWithFrame initializes a newly allocated matrix with the specified frame.
+func NewMatrixWithFrame(frameRect corefoundation.CGRect) *Matrix {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMatrix")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:"), frameRect)
 	return matrixAdopt(_id)
 }
 
-// The prototype cell that’s copied whenever the matrix creates a new cell.
-//
-// WithPrototype sets prototype and returns the receiver so calls can be chained.
+// NewMatrixWithFrameModePrototypeNumberOfRowsNumberOfColumns initializes and returns a newly allocated matrix of the specified size using the given cell as a prototype.
+func NewMatrixWithFrameModePrototypeNumberOfRowsNumberOfColumns(frameRect corefoundation.CGRect, mode MatrixMode, cell *Cell, rowsHigh int, colsWide int) *Matrix {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMatrix")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:mode:prototype:numberOfRows:numberOfColumns:"), frameRect, mode, objref.IDOf(cell), rowsHigh, colsWide)
+	return matrixAdopt(_id)
+}
+
+// WithPrototype the prototype cell that’s copied whenever the matrix creates a new cell.
 func (x *Matrix) WithPrototype(prototype CellProvider) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrototype:"), objref.IDOf(prototype))
 	return x
 }
 
-// The selection mode of the receiver.
-//
-// WithMode sets mode and returns the receiver so calls can be chained.
+// WithMode the selection mode of the receiver.
 func (x *Matrix) WithMode(mode MatrixMode) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 	return x
 }
 
-// A Boolean that indicates whether a radio-mode matrix supports an empty selection.
-//
-// WithAllowsEmptySelection sets allowsEmptySelection and returns the receiver so calls can be chained.
+// WithAllowsEmptySelection a Boolean that indicates whether a radio-mode matrix supports an empty selection.
 func (x *Matrix) WithAllowsEmptySelection(allowsEmptySelection bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEmptySelection:"), allowsEmptySelection)
 	return x
 }
 
-// A Boolean that indicates whether the user can select a rectangle of cells in the receiver by dragging the cursor.
-//
-// WithSelectionByRect sets selectionByRect and returns the receiver so calls can be chained.
+// WithSelectionByRect a Boolean that indicates whether the user can select a rectangle of cells in the receiver by dragging the cursor.
 func (x *Matrix) WithSelectionByRect(selectionByRect bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionByRect:"), selectionByRect)
 	return x
 }
 
-// The background color of the matrix (the space between the cells).
-//
-// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+// WithCellSize the size of each cell in the matrix.
+func (x *Matrix) WithCellSize(cellSize corefoundation.CGSize) *Matrix {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCellSize:"), cellSize)
+	return x
+}
+
+// WithIntercellSpacing the vertical and horizontal spacing between cells in the matrix.
+func (x *Matrix) WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *Matrix {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntercellSpacing:"), intercellSpacing)
+	return x
+}
+
+// WithBackgroundColor the background color of the matrix (the space between the cells).
 func (x *Matrix) WithBackgroundColor(backgroundColor *Color) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// The background color of the matrix’s cells.
-//
-// WithCellBackgroundColor sets cellBackgroundColor and returns the receiver so calls can be chained.
+// WithCellBackgroundColor the background color of the matrix’s cells.
 func (x *Matrix) WithCellBackgroundColor(cellBackgroundColor *Color) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCellBackgroundColor:"), objref.IDOf(cellBackgroundColor))
 	return x
 }
 
-// A Boolean that indicates whether the matrix draws the background within each of its cells.
-//
-// WithDrawsCellBackground sets drawsCellBackground and returns the receiver so calls can be chained.
+// WithDrawsCellBackground a Boolean that indicates whether the matrix draws the background within each of its cells.
 func (x *Matrix) WithDrawsCellBackground(drawsCellBackground bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsCellBackground:"), drawsCellBackground)
 	return x
 }
 
-// A Boolean that indicates whether the matrix draws its background.
-//
-// WithDrawsBackground sets drawsBackground and returns the receiver so calls can be chained.
+// WithDrawsBackground a Boolean that indicates whether the matrix draws its background.
 func (x *Matrix) WithDrawsBackground(drawsBackground bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
 	return x
 }
 
-// A Boolean that indicates whether the cell sizes change when the receiver is resized.
-//
-// WithAutosizesCells sets autosizesCells and returns the receiver so calls can be chained.
+// WithAutosizesCells a Boolean that indicates whether the cell sizes change when the receiver is resized.
 func (x *Matrix) WithAutosizesCells(autosizesCells bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutosizesCells:"), autosizesCells)
 	return x
 }
 
-// A Boolean that indicates whether the receiver is automatically scrolled.
-//
-// WithAutoscroll sets autoscroll and returns the receiver so calls can be chained.
+// WithAutoscroll a Boolean that indicates whether the receiver is automatically scrolled.
 func (x *Matrix) WithAutoscroll(autoscroll bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoscroll:"), autoscroll)
 	return x
 }
 
-// A Boolean that indicates whether the matrix auto-recalculates its cell size.
-//
-// WithAutorecalculatesCellSize sets autorecalculatesCellSize and returns the receiver so calls can be chained.
+// WithAutorecalculatesCellSize a Boolean that indicates whether the matrix auto-recalculates its cell size.
 func (x *Matrix) WithAutorecalculatesCellSize(autorecalculatesCellSize bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutorecalculatesCellSize:"), autorecalculatesCellSize)
 	return x
 }
 
-// A Boolean that indicates whether pressing the Tab key advances the key cell to the next selectable cell.
-//
-// WithTabKeyTraversesCells sets tabKeyTraversesCells and returns the receiver so calls can be chained.
+// WithTabKeyTraversesCells a Boolean that indicates whether pressing the Tab key advances the key cell to the next selectable cell.
 func (x *Matrix) WithTabKeyTraversesCells(tabKeyTraversesCells bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabKeyTraversesCells:"), tabKeyTraversesCells)
 	return x
 }
 
-// The cell that will be clicked when the user presses the Space bar.
-//
-// WithKeyCell sets keyCell and returns the receiver so calls can be chained.
+// WithKeyCell the cell that will be clicked when the user presses the Space bar.
 func (x *Matrix) WithKeyCell(keyCell CellProvider) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyCell:"), objref.IDOf(keyCell))
 	return x
 }
 
-// The target object that receives action messages from the cell.
-//
-// WithTarget sets target and returns the receiver so calls can be chained.
+// WithTarget the target object that receives action messages from the cell.
 func (x *Matrix) WithTarget(target obj.Object) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// The tag identifying the receiver (not the tag of the receiver’s cell).
-//
-// WithTag sets tag and returns the receiver so calls can be chained.
+// WithTag the tag identifying the receiver (not the tag of the receiver’s cell).
 func (x *Matrix) WithTag(tag int) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
-//
-// WithIgnoresMultiClick sets ignoresMultiClick and returns the receiver so calls can be chained.
+// WithIgnoresMultiClick a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (x *Matrix) WithIgnoresMultiClick(ignoresMultiClick bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
 	return x
 }
 
-// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
-//
-// WithContinuous sets continuous and returns the receiver so calls can be chained.
+// WithContinuous a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (x *Matrix) WithContinuous(continuous bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver reacts to mouse events.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether the receiver reacts to mouse events.
 func (x *Matrix) WithEnabled(enabled bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A Boolean value indicating whether the receiver refuses the first responder role.
-//
-// WithRefusesFirstResponder sets refusesFirstResponder and returns the receiver so calls can be chained.
+// WithRefusesFirstResponder a Boolean value indicating whether the receiver refuses the first responder role.
 func (x *Matrix) WithRefusesFirstResponder(refusesFirstResponder bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
-// A Boolean value that indicates whether the cell is highlighted.
-//
-// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
+// WithHighlighted a Boolean value that indicates whether the cell is highlighted.
 func (x *Matrix) WithHighlighted(highlighted bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// The size of the control.
-//
-// WithControlSize sets controlSize and returns the receiver so calls can be chained.
+// WithControlSize the size of the control.
 func (x *Matrix) WithControlSize(controlSize ControlSize) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
-// The receiver’s formatter.
-//
-// WithFormatter sets formatter and returns the receiver so calls can be chained.
+// WithFormatter the receiver’s formatter.
 func (x *Matrix) WithFormatter(formatter obj.Object) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
-// The value of the receiver’s cell as an Objective-C object.
-//
-// WithObjectValue sets objectValue and returns the receiver so calls can be chained.
+// WithObjectValue the value of the receiver’s cell as an Objective-C object.
 func (x *Matrix) WithObjectValue(objectValue obj.Object) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
-// The value of the receiver’s cell as an NSString object.
-//
-// WithStringValue sets stringValue and returns the receiver so calls can be chained.
+// WithStringValue the value of the receiver’s cell as an NSString object.
 func (x *Matrix) WithStringValue(stringValue string) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
-// The value of the receiver’s cell as an attributed string.
-//
-// WithAttributedStringValue sets attributedStringValue and returns the receiver so calls can be chained.
+// WithAttributedStringValue the value of the receiver’s cell as an attributed string.
 func (x *Matrix) WithAttributedStringValue(attributedStringValue obj.Object) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
-// The value of the receiver’s cell as an integer.
-//
-// WithIntValue sets intValue and returns the receiver so calls can be chained.
+// WithIntValue the value of the receiver’s cell as an integer.
 func (x *Matrix) WithIntValue(intValue int) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
-// The value of the receiver’s cell as an integer value.
-//
-// WithIntegerValue sets integerValue and returns the receiver so calls can be chained.
+// WithIntegerValue the value of the receiver’s cell as an integer value.
 func (x *Matrix) WithIntegerValue(integerValue int) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
-// The value of the receiver’s cell as a single-precision floating-point number.
-//
-// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
+// WithFloatValue the value of the receiver’s cell as a single-precision floating-point number.
 func (x *Matrix) WithFloatValue(floatValue float32) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
-// The value of the receiver’s cell as a double-precision floating-point number.
-//
-// WithDoubleValue sets doubleValue and returns the receiver so calls can be chained.
+// WithDoubleValue the value of the receiver’s cell as a double-precision floating-point number.
 func (x *Matrix) WithDoubleValue(doubleValue float64) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
-// The font used to draw text in the receiver’s cell.
-//
-// WithFont sets font and returns the receiver so calls can be chained.
+// WithFont the font used to draw text in the receiver’s cell.
 func (x *Matrix) WithFont(font *Font) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
-// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
-//
-// WithUsesSingleLineMode sets usesSingleLineMode and returns the receiver so calls can be chained.
+// WithUsesSingleLineMode a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (x *Matrix) WithUsesSingleLineMode(usesSingleLineMode bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
-// The line break mode to use for text in the control’s cell.
-//
-// WithLineBreakMode sets lineBreakMode and returns the receiver so calls can be chained.
+// WithLineBreakMode the line break mode to use for text in the control’s cell.
 func (x *Matrix) WithLineBreakMode(lineBreakMode LineBreakMode) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
-// The alignment mode of the text in the receiver’s cell.
-//
-// WithAlignment sets alignment and returns the receiver so calls can be chained.
+// WithAlignment the alignment mode of the text in the receiver’s cell.
 func (x *Matrix) WithAlignment(alignment TextAlignment) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
-// The initial writing direction used to determine the actual writing direction for text.
-//
-// WithBaseWritingDirection sets baseWritingDirection and returns the receiver so calls can be chained.
+// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
 func (x *Matrix) WithBaseWritingDirection(baseWritingDirection WritingDirection) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
-// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
-//
-// WithAllowsExpansionToolTips sets allowsExpansionToolTips and returns the receiver so calls can be chained.
+// WithAllowsExpansionToolTips a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (x *Matrix) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
 	return x
 }
 
-// WithCell sets cell and returns the receiver so calls can be chained.
+// WithCell sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithCell(cell CellProvider) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return x
 }
 
-// WithSubviews sets the collection and returns the receiver so calls can be chained.
+// WithSubviews sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithSubviews(items ...ViewProvider) *Matrix {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
 	return x
 }
 
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithHidden(hidden bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithPostsFrameChangedNotifications sets postsFrameChangedNotifications and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return x
 }
 
-// WithAutoresizesSubviews sets autoresizesSubviews and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithAutoresizesSubviews(autoresizesSubviews bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return x
 }
 
-// WithAutoresizingMask sets autoresizingMask and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// WithFrameRotation sets frameRotation and returns the receiver so calls can be chained.
+// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (x *Matrix) WithFrame(frame corefoundation.CGRect) *Matrix {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
+	return x
+}
+
+// WithFrameRotation sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithFrameRotation(frameRotation float64) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return x
 }
 
-// WithFrameCenterRotation sets frameCenterRotation and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithFrameCenterRotation(frameCenterRotation float64) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return x
 }
 
-// WithBoundsRotation sets boundsRotation and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithBoundsRotation(boundsRotation float64) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return x
 }
 
-// WithCanDrawConcurrently sets canDrawConcurrently and returns the receiver so calls can be chained.
+// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (x *Matrix) WithBounds(bounds corefoundation.CGRect) *Matrix {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithCanDrawConcurrently(canDrawConcurrently bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return x
 }
 
-// A Boolean value that determines whether the view needs to be redrawn before being displayed.
-//
-// WithNeedsDisplay sets needsDisplay and returns the receiver so calls can be chained.
+// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (x *Matrix) WithNeedsDisplay(needsDisplay bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// WithAcceptsTouchEvents sets acceptsTouchEvents and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return x
 }
 
-// WithWantsRestingTouches sets wantsRestingTouches and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithWantsRestingTouches(wantsRestingTouches bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return x
 }
 
-// WithLayerContentsRedrawPolicy sets layerContentsRedrawPolicy and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return x
 }
 
-// WithLayerContentsPlacement sets layerContentsPlacement and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return x
 }
 
-// WithWantsLayer sets wantsLayer and returns the receiver so calls can be chained.
+// WithWantsLayer sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithWantsLayer(wantsLayer bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return x
 }
 
-// WithLayer sets layer and returns the receiver so calls can be chained.
+// WithLayer sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithLayer(layer obj.Object) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// WithCanDrawSubviewsIntoLayer sets canDrawSubviewsIntoLayer and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return x
 }
 
-// WithNeedsLayout sets needsLayout and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithNeedsLayout(needsLayout bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return x
 }
 
-// WithAlphaValue sets alphaValue and returns the receiver so calls can be chained.
+// WithAlphaValue sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithAlphaValue(alphaValue float64) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// WithLayerUsesCoreImageFilters sets layerUsesCoreImageFilters and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return x
 }
 
-// WithBackgroundFilters sets the collection and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithBackgroundFilters(items ...obj.Object) *Matrix {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return x
 }
 
-// WithCompositingFilter sets compositingFilter and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithCompositingFilter(compositingFilter obj.Object) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// WithContentFilters sets the collection and returns the receiver so calls can be chained.
+// WithContentFilters sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithContentFilters(items ...obj.Object) *Matrix {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
 	return x
 }
 
-// WithShadow sets shadow and returns the receiver so calls can be chained.
+// WithShadow sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithShadow(shadow *Shadow) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return x
 }
 
-// WithClipsToBounds sets clipsToBounds and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithClipsToBounds(clipsToBounds bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return x
 }
 
-// WithPostsBoundsChangedNotifications sets postsBoundsChangedNotifications and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return x
 }
 
-// WithToolTip sets toolTip and returns the receiver so calls can be chained.
+// WithToolTip sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithToolTip(toolTip string) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// WithNextKeyView sets nextKeyView and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+func (x *Matrix) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Matrix {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithNextKeyView(nextKeyView ViewProvider) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return x
 }
 
-// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+// WithFocusRingType sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithFocusRingType(focusRingType FocusRingType) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// WithGestureRecognizers sets the collection and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithGestureRecognizers(items ...GestureRecognizerProvider) *Matrix {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return x
 }
 
-// WithAllowedTouchTypes sets allowedTouchTypes and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return x
 }
 
-// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-//
-// WithPrefersCompactControlSizeMetrics sets prefersCompactControlSizeMetrics and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+func (x *Matrix) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Matrix {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (x *Matrix) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
 	return x
 }
 
-// WithWritingToolsCoordinator sets writingToolsCoordinator and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return x
 }
 
-// WithNeedsUpdateConstraints sets needsUpdateConstraints and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return x
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets translatesAutoresizingMaskIntoConstraints and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return x
 }
 
-// WithHorizontalContentSizeConstraintActive sets horizontalContentSizeConstraintActive and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return x
 }
 
-// WithVerticalContentSizeConstraintActive sets verticalContentSizeConstraintActive and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return x
 }
 
-// WithWantsBestResolutionOpenGLSurface sets wantsBestResolutionOpenGLSurface and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return x
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets wantsExtendedDynamicRangeOpenGLSurface and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return x
 }
 
-// WithPressureConfiguration sets pressureConfiguration and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
 func (x *Matrix) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *Matrix) WithNextResponder(nextResponder ResponderProvider) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets menu and returns the receiver so calls can be chained.
+// WithMenu returns the responder’s menu.
 func (x *Matrix) WithMenu(menu *Menu) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity an object encapsulating a user activity supported by this responder.
 func (x *Matrix) WithUserActivity(userActivity obj.Object) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *Matrix) WithTouchBar(touchBar *TouchBar) *Matrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// Creates a new cell at the location specified by the given row and column in the receiver.
+// MakeCellAtRowColumn creates a new cell at the location specified by the given row and column in the receiver.
 func (x *Matrix) MakeCellAtRowColumn(row int, col int) *Cell {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeCellAtRow:column:"), row, col)
 	return CellFromID(_r)
 }
 
-// Programmatically selects a range of cells.
+// SetSelectionFromToAnchorHighlight programmatically selects a range of cells.
 func (x *Matrix) SetSelectionFromToAnchorHighlight(startPos int, endPos int, anchorPos int, lit bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionFrom:to:anchor:highlight:"), startPos, endPos, anchorPos, lit)
 }
 
-// Deselects the selected cell or cells.
+// DeselectSelectedCell deselects the selected cell or cells.
 func (x *Matrix) DeselectSelectedCell() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deselectSelectedCell"))
 }
 
-// Deselects all cells in the receiver and, if necessary, redisplays the receiver.
+// DeselectAllCells deselects all cells in the receiver and, if necessary, redisplays the receiver.
 func (x *Matrix) DeselectAllCells() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deselectAllCells"))
 }
 
-// Selects the cell at the specified row and column within the receiver.
+// SelectCellAtRowColumn selects the cell at the specified row and column within the receiver.
 func (x *Matrix) SelectCellAtRowColumn(row int, col int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectCellAtRow:column:"), row, col)
 }
 
-// Selects and highlights all cells in the receiver.
+// SelectAll selects and highlights all cells in the receiver.
 func (x *Matrix) SelectAll(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectAll:"), objref.IDOf(sender))
 }
 
-// Selects the last cell with the given tag.
+// SelectCellWithTag selects the last cell with the given tag.
 func (x *Matrix) SelectCellWithTag(tag int) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("selectCellWithTag:"), tag)
 	return _r
 }
 
-// Specifies whether the cells in the matrix are scrollable.
+// SetScrollable specifies whether the cells in the matrix are scrollable.
 func (x *Matrix) SetScrollable(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), flag)
 }
 
-// Sets the state of the cell at specified location.
+// SetStateAtRowColumn sets the state of the cell at specified location.
 func (x *Matrix) SetStateAtRowColumn(value int, row int, col int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:atRow:column:"), value, row, col)
 }
 
-// Returns the cell at the specified row and column.
+// GetNumberOfRowsColumns obtains the number of rows and columns in the receiver.
+func (x *Matrix) GetNumberOfRowsColumns() (rowCount int64, colCount int64) {
+	var _out0 int64
+	var _out1 int64
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNumberOfRows:columns:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _out0, _out1
+}
+
+// CellAtRowColumn returns the cell at the specified row and column.
 func (x *Matrix) CellAtRowColumn(row int, col int) *Cell {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cellAtRow:column:"), row, col)
 	return CellFromID(_r)
 }
 
-// Changes the number of rows and columns in the receiver.
+// CellFrameAtRowColumn returns the frame rectangle of the cell that would be drawn at the specified location.
+func (x *Matrix) CellFrameAtRowColumn(row int, col int) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("cellFrameAtRow:column:"), row, col)
+	return _r
+}
+
+// GetRowColumnOfCell searches the receiver for the specified cell and returns the row and column of the cell
+func (x *Matrix) GetRowColumnOfCell(cell *Cell) (ok bool, row int64, col int64) {
+	var _out0 int64
+	var _out1 int64
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("getRow:column:ofCell:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), objref.IDOf(cell))
+	return _r, _out0, _out1
+}
+
+// GetRowColumnForPoint indicates whether the specified point lies within one of the cells of the matrix and returns the location of the cell within which the point lies.
+func (x *Matrix) GetRowColumnForPoint(point corefoundation.CGPoint) (ok bool, row int64, col int64) {
+	var _out0 int64
+	var _out1 int64
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("getRow:column:forPoint:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), point)
+	return _r, _out0, _out1
+}
+
+// RenewRowsColumns changes the number of rows and columns in the receiver.
 func (x *Matrix) RenewRowsColumns(newRows int, newCols int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("renewRows:columns:"), newRows, newCols)
 }
 
-// Replaces the cell at the specified row and column with the new cell.
+// PutCellAtRowColumn replaces the cell at the specified row and column with the new cell.
 func (x *Matrix) PutCellAtRowColumn(newCell *Cell, row int, col int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("putCell:atRow:column:"), objref.IDOf(newCell), row, col)
 }
 
-// Adds a new row of cells below the last row.
+// AddRow adds a new row of cells below the last row.
 func (x *Matrix) AddRow() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRow"))
 }
 
-// Adds a new row of cells below the last row, using the specified cells.
+// AddRowWithCells adds a new row of cells below the last row, using the specified cells.
 func (x *Matrix) AddRowWithCells(newCells []*Cell) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRowWithCells:"), purego.SliceToNSArray(newCells, func(_v *Cell) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Inserts a new row of cells before the specified row.
+// InsertRow inserts a new row of cells before the specified row.
 func (x *Matrix) InsertRow(row int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertRow:"), row)
 }
 
-// Inserts a new row of cells before the specified row, using the given cells.
+// InsertRowWithCells inserts a new row of cells before the specified row, using the given cells.
 func (x *Matrix) InsertRowWithCells(row int, newCells []*Cell) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertRow:withCells:"), row, purego.SliceToNSArray(newCells, func(_v *Cell) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Removes the specified row from the receiver.
+// RemoveRow removes the specified row from the receiver.
 func (x *Matrix) RemoveRow(row int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeRow:"), row)
 }
 
-// Adds a new column of cells to the right of the last column.
+// AddColumn adds a new column of cells to the right of the last column.
 func (x *Matrix) AddColumn() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addColumn"))
 }
 
-// Adds a new column of cells to the right of the last column, using the given cells.
+// AddColumnWithCells adds a new column of cells to the right of the last column, using the given cells.
 func (x *Matrix) AddColumnWithCells(newCells []*Cell) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addColumnWithCells:"), purego.SliceToNSArray(newCells, func(_v *Cell) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Inserts a new column of cells at the specified location.
+// InsertColumn inserts a new column of cells at the specified location.
 func (x *Matrix) InsertColumn(column int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertColumn:"), column)
 }
 
-// Inserts a new column of cells before the specified column, using the given cells.
+// InsertColumnWithCells inserts a new column of cells before the specified column, using the given cells.
 func (x *Matrix) InsertColumnWithCells(column int, newCells []*Cell) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertColumn:withCells:"), column, purego.SliceToNSArray(newCells, func(_v *Cell) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Removes the specified column at from the receiver.
+// RemoveColumn removes the specified column at from the receiver.
 func (x *Matrix) RemoveColumn(col int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeColumn:"), col)
 }
 
-// Searches the receiver and returns the last cell matching the specified tag.
+// CellWithTag searches the receiver and returns the last cell matching the specified tag.
 func (x *Matrix) CellWithTag(tag int) *Cell {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cellWithTag:"), tag)
 	return CellFromID(_r)
 }
 
-// Changes the width and the height of the receiver’s frame so it exactly contains the cells.
+// SizeToCells changes the width and the height of the receiver’s frame so it exactly contains the cells.
 func (x *Matrix) SizeToCells() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sizeToCells"))
 }
 
-// Specifies whether the receiver’s size information is validated.
+// SetValidateSize specifies whether the receiver’s size information is validated.
 func (x *Matrix) SetValidateSize(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValidateSize:"), flag)
 }
 
-// Displays the cell at the specified row and column.
+// DrawCellAtRowColumn displays the cell at the specified row and column.
 func (x *Matrix) DrawCellAtRowColumn(row int, col int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawCellAtRow:column:"), row, col)
 }
 
-// Highlights or unhighlights the cell at the specified row and column location.
+// HighlightCellAtRowColumn highlights or unhighlights the cell at the specified row and column location.
 func (x *Matrix) HighlightCellAtRowColumn(flag bool, row int, col int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("highlightCell:atRow:column:"), flag, row, col)
 }
 
-// Scrolls the receiver so the specified cell is visible.
+// ScrollCellToVisibleAtRowColumn scrolls the receiver so the specified cell is visible.
 func (x *Matrix) ScrollCellToVisibleAtRowColumn(row int, col int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollCellToVisibleAtRow:column:"), row, col)
 }
 
-// If the selected cell has both an action and a target, sends its action to its target.
+// SendAction if the selected cell has both an action and a target, sends its action to its target.
 func (x *Matrix) SendAction() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendAction"))
 	return _r
 }
 
-// Sends the double-click action message to the target of the receiver.
+// SendDoubleAction sends the double-click action message to the target of the receiver.
 func (x *Matrix) SendDoubleAction() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendDoubleAction"))
 }
 
-// Requests permission to begin editing text.
+// TextShouldBeginEditing requests permission to begin editing text.
 func (x *Matrix) TextShouldBeginEditing(textObject *Text) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("textShouldBeginEditing:"), objref.IDOf(textObject))
 	return _r
 }
 
-// Requests permission to end editing.
+// TextShouldEndEditing requests permission to end editing.
 func (x *Matrix) TextShouldEndEditing(textObject *Text) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("textShouldEndEditing:"), objref.IDOf(textObject))
 	return _r
 }
 
-// Invoked when there’s a change in the text after the receiver gains first responder status.
+// TextDidBeginEditing invoked when there’s a change in the text after the receiver gains first responder status.
 func (x *Matrix) TextDidBeginEditing(notification obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textDidBeginEditing:"), objref.IDOf(notification))
 }
 
-// Invoked when text editing ends.
+// TextDidEndEditing invoked when text editing ends.
 func (x *Matrix) TextDidEndEditing(notification obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textDidEndEditing:"), objref.IDOf(notification))
 }
 
-// Invoked when a key-down event or paste operation occurs that changes the receiver’s contents.
+// TextDidChange invoked when a key-down event or paste operation occurs that changes the receiver’s contents.
 func (x *Matrix) TextDidChange(notification obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textDidChange:"), objref.IDOf(notification))
 }
 
-// Selects text in the currently selected cell or in the key cell.
+// SelectText selects text in the currently selected cell or in the key cell.
 func (x *Matrix) SelectText(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectText:"), objref.IDOf(sender))
 }
 
-// Selects the text in the cell at the specified location and returns the cell.
+// SelectTextAtRowColumn selects the text in the cell at the specified location and returns the cell.
 func (x *Matrix) SelectTextAtRowColumn(row int, col int) *Cell {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectTextAtRow:column:"), row, col)
 	return CellFromID(_r)
 }
 
-// Sets the tooltip for the cell.
+// SetToolTipForCell sets the tooltip for the cell.
 func (x *Matrix) SetToolTipForCell(toolTipString string, cell *Cell) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:forCell:"), purego.NSString(toolTipString), objref.IDOf(cell))
 }
 
-// Returns the tooltip for the specified cell.
+// ToolTipForCell returns the tooltip for the specified cell.
 func (x *Matrix) ToolTipForCell(cell *Cell) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toolTipForCell:"), objref.IDOf(cell))
 	if _r == 0 {
@@ -843,156 +826,213 @@ func (x *Matrix) ToolTipForCell(cell *Cell) string {
 	return purego.GoString(_r)
 }
 
+// Prototype wraps the corresponding Objective-C method.
 func (x *Matrix) Prototype() *Cell {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prototype"))
 	return CellFromID(_r)
 }
 
+// SetPrototype wraps the corresponding Objective-C method.
 func (x *Matrix) SetPrototype(prototype *Cell) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrototype:"), objref.IDOf(prototype))
 }
 
+// Mode wraps the corresponding Objective-C method.
 func (x *Matrix) Mode() MatrixMode {
 	_r := objc.Send[MatrixMode](objref.IDOf(x), objc.RegisterName("mode"))
 	return _r
 }
 
+// SetMode wraps the corresponding Objective-C method.
 func (x *Matrix) SetMode(mode MatrixMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 }
 
+// AllowsEmptySelection wraps the corresponding Objective-C method.
 func (x *Matrix) AllowsEmptySelection() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsEmptySelection"))
 	return _r
 }
 
+// SetAllowsEmptySelection wraps the corresponding Objective-C method.
 func (x *Matrix) SetAllowsEmptySelection(allowsEmptySelection bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEmptySelection:"), allowsEmptySelection)
 }
 
+// Cells wraps the corresponding Objective-C method.
+//
 // Cells returns the collection as a Go slice.
 func (x *Matrix) Cells() []*Cell {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cells"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Cell { return CellFromID(_id) })
 }
 
+// SelectedCells wraps the corresponding Objective-C method.
+//
 // SelectedCells returns the collection as a Go slice.
 func (x *Matrix) SelectedCells() []*Cell {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedCells"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Cell { return CellFromID(_id) })
 }
 
+// SelectedRow wraps the corresponding Objective-C method.
 func (x *Matrix) SelectedRow() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectedRow"))
 	return _r
 }
 
+// SelectedColumn wraps the corresponding Objective-C method.
 func (x *Matrix) SelectedColumn() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectedColumn"))
 	return _r
 }
 
+// IsSelectionByRect wraps the corresponding Objective-C method.
 func (x *Matrix) IsSelectionByRect() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSelectionByRect"))
 	return _r
 }
 
+// SetSelectionByRect wraps the corresponding Objective-C method.
 func (x *Matrix) SetSelectionByRect(selectionByRect bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionByRect:"), selectionByRect)
 }
 
+// CellSize wraps the corresponding Objective-C method.
+func (x *Matrix) CellSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("cellSize"))
+	return _r
+}
+
+// SetCellSize wraps the corresponding Objective-C method.
+func (x *Matrix) SetCellSize(cellSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCellSize:"), cellSize)
+}
+
+// IntercellSpacing wraps the corresponding Objective-C method.
+func (x *Matrix) IntercellSpacing() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("intercellSpacing"))
+	return _r
+}
+
+// SetIntercellSpacing wraps the corresponding Objective-C method.
+func (x *Matrix) SetIntercellSpacing(intercellSpacing corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntercellSpacing:"), intercellSpacing)
+}
+
+// BackgroundColor wraps the corresponding Objective-C method.
 func (x *Matrix) BackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
 }
 
+// SetBackgroundColor wraps the corresponding Objective-C method.
 func (x *Matrix) SetBackgroundColor(backgroundColor *Color) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
+// CellBackgroundColor wraps the corresponding Objective-C method.
 func (x *Matrix) CellBackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cellBackgroundColor"))
 	return ColorFromID(_r)
 }
 
+// SetCellBackgroundColor wraps the corresponding Objective-C method.
 func (x *Matrix) SetCellBackgroundColor(cellBackgroundColor *Color) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCellBackgroundColor:"), objref.IDOf(cellBackgroundColor))
 }
 
+// DrawsCellBackground wraps the corresponding Objective-C method.
 func (x *Matrix) DrawsCellBackground() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawsCellBackground"))
 	return _r
 }
 
+// SetDrawsCellBackground wraps the corresponding Objective-C method.
 func (x *Matrix) SetDrawsCellBackground(drawsCellBackground bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsCellBackground:"), drawsCellBackground)
 }
 
+// DrawsBackground wraps the corresponding Objective-C method.
 func (x *Matrix) DrawsBackground() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawsBackground"))
 	return _r
 }
 
+// SetDrawsBackground wraps the corresponding Objective-C method.
 func (x *Matrix) SetDrawsBackground(drawsBackground bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
 }
 
+// NumberOfRows wraps the corresponding Objective-C method.
 func (x *Matrix) NumberOfRows() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfRows"))
 	return _r
 }
 
+// NumberOfColumns wraps the corresponding Objective-C method.
 func (x *Matrix) NumberOfColumns() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfColumns"))
 	return _r
 }
 
+// AutosizesCells wraps the corresponding Objective-C method.
 func (x *Matrix) AutosizesCells() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autosizesCells"))
 	return _r
 }
 
+// SetAutosizesCells wraps the corresponding Objective-C method.
 func (x *Matrix) SetAutosizesCells(autosizesCells bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutosizesCells:"), autosizesCells)
 }
 
+// IsAutoscroll wraps the corresponding Objective-C method.
 func (x *Matrix) IsAutoscroll() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAutoscroll"))
 	return _r
 }
 
+// SetAutoscroll wraps the corresponding Objective-C method.
 func (x *Matrix) SetAutoscroll(autoscroll bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoscroll:"), autoscroll)
 }
 
+// MouseDownFlags wraps the corresponding Objective-C method.
 func (x *Matrix) MouseDownFlags() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("mouseDownFlags"))
 	return _r
 }
 
+// AutorecalculatesCellSize wraps the corresponding Objective-C method.
 func (x *Matrix) AutorecalculatesCellSize() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autorecalculatesCellSize"))
 	return _r
 }
 
+// SetAutorecalculatesCellSize wraps the corresponding Objective-C method.
 func (x *Matrix) SetAutorecalculatesCellSize(autorecalculatesCellSize bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutorecalculatesCellSize:"), autorecalculatesCellSize)
 }
 
+// TabKeyTraversesCells wraps the corresponding Objective-C method.
 func (x *Matrix) TabKeyTraversesCells() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("tabKeyTraversesCells"))
 	return _r
 }
 
+// SetTabKeyTraversesCells wraps the corresponding Objective-C method.
 func (x *Matrix) SetTabKeyTraversesCells(tabKeyTraversesCells bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabKeyTraversesCells:"), tabKeyTraversesCells)
 }
 
+// KeyCell wraps the corresponding Objective-C method.
 func (x *Matrix) KeyCell() *Cell {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyCell"))
 	return CellFromID(_r)
 }
 
+// SetKeyCell wraps the corresponding Objective-C method.
 func (x *Matrix) SetKeyCell(keyCell *Cell) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyCell:"), objref.IDOf(keyCell))
 }
@@ -1004,6 +1044,8 @@ type Matrixable interface {
 	WithMode(mode MatrixMode) *Matrix
 	WithAllowsEmptySelection(allowsEmptySelection bool) *Matrix
 	WithSelectionByRect(selectionByRect bool) *Matrix
+	WithCellSize(cellSize corefoundation.CGSize) *Matrix
+	WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *Matrix
 	WithBackgroundColor(backgroundColor *Color) *Matrix
 	WithCellBackgroundColor(cellBackgroundColor *Color) *Matrix
 	WithDrawsCellBackground(drawsCellBackground bool) *Matrix
@@ -1041,9 +1083,11 @@ type Matrixable interface {
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Matrix
 	WithAutoresizesSubviews(autoresizesSubviews bool) *Matrix
 	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Matrix
+	WithFrame(frame corefoundation.CGRect) *Matrix
 	WithFrameRotation(frameRotation float64) *Matrix
 	WithFrameCenterRotation(frameCenterRotation float64) *Matrix
 	WithBoundsRotation(boundsRotation float64) *Matrix
+	WithBounds(bounds corefoundation.CGRect) *Matrix
 	WithCanDrawConcurrently(canDrawConcurrently bool) *Matrix
 	WithNeedsDisplay(needsDisplay bool) *Matrix
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Matrix
@@ -1064,10 +1108,12 @@ type Matrixable interface {
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Matrix
 	WithToolTip(toolTip string) *Matrix
 	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Matrix
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Matrix
 	WithNextKeyView(nextKeyView ViewProvider) *Matrix
 	WithFocusRingType(focusRingType FocusRingType) *Matrix
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *Matrix
 	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Matrix
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Matrix
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Matrix
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Matrix
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Matrix
@@ -1090,7 +1136,11 @@ type Matrixable interface {
 	SelectCellWithTag(tag int) bool
 	SetScrollable(flag bool)
 	SetStateAtRowColumn(value int, row int, col int)
+	GetNumberOfRowsColumns() (rowCount int64, colCount int64)
 	CellAtRowColumn(row int, col int) *Cell
+	CellFrameAtRowColumn(row int, col int) corefoundation.CGRect
+	GetRowColumnOfCell(cell *Cell) (ok bool, row int64, col int64)
+	GetRowColumnForPoint(point corefoundation.CGPoint) (ok bool, row int64, col int64)
 	RenewRowsColumns(newRows int, newCols int)
 	PutCellAtRowColumn(newCell *Cell, row int, col int)
 	AddRow()
@@ -1132,6 +1182,10 @@ type Matrixable interface {
 	SelectedColumn() int
 	IsSelectionByRect() bool
 	SetSelectionByRect(selectionByRect bool)
+	CellSize() corefoundation.CGSize
+	SetCellSize(cellSize corefoundation.CGSize)
+	IntercellSpacing() corefoundation.CGSize
+	SetIntercellSpacing(intercellSpacing corefoundation.CGSize)
 	BackgroundColor() *Color
 	SetBackgroundColor(backgroundColor *Color)
 	CellBackgroundColor() *Color
@@ -1156,3 +1210,16 @@ type Matrixable interface {
 }
 
 var _ Matrixable = (*Matrix)(nil)
+
+// isMatrix marks Matrix — and, by embedding promotion, its
+// subclasses — as a member of the Matrix hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Matrix) isMatrix() {}
+
+var _ MatrixProvider = (*Matrix)(nil)
+
+var _ ControlProvider = (*Matrix)(nil)
+
+var _ ViewProvider = (*Matrix)(nil)
+
+var _ ResponderProvider = (*Matrix)(nil)

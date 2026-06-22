@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A formatter that creates string representations of quantities of time.
-//
 // DateComponentsFormatter is an idiomatic wrapper over the Objective-C class NSDateComponentsFormatter.
+//
+// It embeds [Formatter], promoting that type's methods.
+//
+// A formatter that creates string representations of quantities of time.
 type DateComponentsFormatter struct {
-	objref.Handle
+	Formatter
 }
 
 // DateComponentsFormatterFromID adopts an existing Objective-C object as a DateComponentsFormatter
@@ -25,7 +26,8 @@ func DateComponentsFormatterFromID(id objc.ID) *DateComponentsFormatter {
 	if id == 0 {
 		return nil
 	}
-	x := &DateComponentsFormatter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DateComponentsFormatter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func dateComponentsFormatterAdopt(id objc.ID) *DateComponentsFormatter {
 	if id == 0 {
 		return nil
 	}
-	x := &DateComponentsFormatter{Handle: objref.Wrap(id)}
+	x := &DateComponentsFormatter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DateComponentsFormatter) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DateComponentsFormatter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DateComponentsFormatter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDateComponentsFormatter creates a new DateComponentsFormatter.
@@ -64,78 +52,79 @@ func NewDateComponentsFormatter() *DateComponentsFormatter {
 	return dateComponentsFormatterAdopt(_id)
 }
 
-// WithUnitsStyle sets unitsStyle and returns the receiver so calls can be chained.
+// WithUnitsStyle sets the property and returns the receiver so calls can be chained.
 func (x *DateComponentsFormatter) WithUnitsStyle(unitsStyle DateComponentsFormatterUnitsStyle) *DateComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitsStyle:"), unitsStyle)
 	return x
 }
 
-// WithAllowedUnits sets allowedUnits and returns the receiver so calls can be chained.
+// WithAllowedUnits sets the property and returns the receiver so calls can be chained.
 func (x *DateComponentsFormatter) WithAllowedUnits(allowedUnits CalendarUnit) *DateComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedUnits:"), allowedUnits)
 	return x
 }
 
-// WithZeroFormattingBehavior sets zeroFormattingBehavior and returns the receiver so calls can be chained.
+// WithZeroFormattingBehavior sets the property and returns the receiver so calls can be chained.
 func (x *DateComponentsFormatter) WithZeroFormattingBehavior(zeroFormattingBehavior DateComponentsFormatterZeroFormattingBehavior) *DateComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroFormattingBehavior:"), zeroFormattingBehavior)
 	return x
 }
 
-// WithCalendar sets calendar and returns the receiver so calls can be chained.
+// WithCalendar sets the property and returns the receiver so calls can be chained.
 func (x *DateComponentsFormatter) WithCalendar(calendar *Calendar) *DateComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return x
 }
 
-// WithReferenceDate sets referenceDate and returns the receiver so calls can be chained.
+// WithReferenceDate sets the property and returns the receiver so calls can be chained.
 func (x *DateComponentsFormatter) WithReferenceDate(referenceDate DateProvider) *DateComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReferenceDate:"), objref.IDOf(referenceDate))
 	return x
 }
 
-// WithAllowsFractionalUnits sets allowsFractionalUnits and returns the receiver so calls can be chained.
+// WithAllowsFractionalUnits sets the property and returns the receiver so calls can be chained.
 func (x *DateComponentsFormatter) WithAllowsFractionalUnits(allowsFractionalUnits bool) *DateComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsFractionalUnits:"), allowsFractionalUnits)
 	return x
 }
 
-// WithMaximumUnitCount sets maximumUnitCount and returns the receiver so calls can be chained.
+// WithMaximumUnitCount sets the property and returns the receiver so calls can be chained.
 func (x *DateComponentsFormatter) WithMaximumUnitCount(maximumUnitCount int) *DateComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumUnitCount:"), maximumUnitCount)
 	return x
 }
 
-// WithCollapsesLargestUnit sets collapsesLargestUnit and returns the receiver so calls can be chained.
+// WithCollapsesLargestUnit sets the property and returns the receiver so calls can be chained.
 func (x *DateComponentsFormatter) WithCollapsesLargestUnit(collapsesLargestUnit bool) *DateComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapsesLargestUnit:"), collapsesLargestUnit)
 	return x
 }
 
-// WithIncludesApproximationPhrase sets includesApproximationPhrase and returns the receiver so calls can be chained.
+// WithIncludesApproximationPhrase sets the property and returns the receiver so calls can be chained.
 func (x *DateComponentsFormatter) WithIncludesApproximationPhrase(includesApproximationPhrase bool) *DateComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesApproximationPhrase:"), includesApproximationPhrase)
 	return x
 }
 
-// WithIncludesTimeRemainingPhrase sets includesTimeRemainingPhrase and returns the receiver so calls can be chained.
+// WithIncludesTimeRemainingPhrase sets the property and returns the receiver so calls can be chained.
 func (x *DateComponentsFormatter) WithIncludesTimeRemainingPhrase(includesTimeRemainingPhrase bool) *DateComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesTimeRemainingPhrase:"), includesTimeRemainingPhrase)
 	return x
 }
 
-// WithFormattingContext sets formattingContext and returns the receiver so calls can be chained.
+// WithFormattingContext sets the property and returns the receiver so calls can be chained.
 func (x *DateComponentsFormatter) WithFormattingContext(formattingContext FormattingContext) *DateComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormattingContext:"), formattingContext)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *DateComponentsFormatter) WithScriptingProperties(scriptingProperties obj.Object) *DateComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// StringFromDateComponents wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) StringFromDateComponents(components *DateComponents) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromDateComponents:"), objref.IDOf(components))
 	if _r == 0 {
@@ -144,6 +133,7 @@ func (x *DateComponentsFormatter) StringFromDateComponents(components *DateCompo
 	return purego.GoString(_r)
 }
 
+// StringFromDateToDate wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) StringFromDateToDate(startDate *Date, endDate *Date) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromDate:toDate:"), objref.IDOf(startDate), objref.IDOf(endDate))
 	if _r == 0 {
@@ -152,6 +142,7 @@ func (x *DateComponentsFormatter) StringFromDateToDate(startDate *Date, endDate 
 	return purego.GoString(_r)
 }
 
+// StringFromTimeInterval wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) StringFromTimeInterval(ti float64) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromTimeInterval:"), ti)
 	if _r == 0 {
@@ -160,101 +151,123 @@ func (x *DateComponentsFormatter) StringFromTimeInterval(ti float64) string {
 	return purego.GoString(_r)
 }
 
+// UnitsStyle wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) UnitsStyle() DateComponentsFormatterUnitsStyle {
 	_r := objc.Send[DateComponentsFormatterUnitsStyle](objref.IDOf(x), objc.RegisterName("unitsStyle"))
 	return _r
 }
 
+// SetUnitsStyle wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) SetUnitsStyle(unitsStyle DateComponentsFormatterUnitsStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitsStyle:"), unitsStyle)
 }
 
+// AllowedUnits wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) AllowedUnits() CalendarUnit {
 	_r := objc.Send[CalendarUnit](objref.IDOf(x), objc.RegisterName("allowedUnits"))
 	return _r
 }
 
+// SetAllowedUnits wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) SetAllowedUnits(allowedUnits CalendarUnit) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedUnits:"), allowedUnits)
 }
 
+// ZeroFormattingBehavior wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) ZeroFormattingBehavior() DateComponentsFormatterZeroFormattingBehavior {
 	_r := objc.Send[DateComponentsFormatterZeroFormattingBehavior](objref.IDOf(x), objc.RegisterName("zeroFormattingBehavior"))
 	return _r
 }
 
+// SetZeroFormattingBehavior wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) SetZeroFormattingBehavior(zeroFormattingBehavior DateComponentsFormatterZeroFormattingBehavior) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroFormattingBehavior:"), zeroFormattingBehavior)
 }
 
+// Calendar wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) Calendar() *Calendar {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendar"))
 	return CalendarFromID(_r)
 }
 
+// SetCalendar wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) SetCalendar(calendar *Calendar) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 }
 
+// ReferenceDate wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) ReferenceDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("referenceDate"))
 	return DateFromID(_r)
 }
 
+// SetReferenceDate wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) SetReferenceDate(referenceDate *Date) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReferenceDate:"), objref.IDOf(referenceDate))
 }
 
+// AllowsFractionalUnits wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) AllowsFractionalUnits() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsFractionalUnits"))
 	return _r
 }
 
+// SetAllowsFractionalUnits wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) SetAllowsFractionalUnits(allowsFractionalUnits bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsFractionalUnits:"), allowsFractionalUnits)
 }
 
+// MaximumUnitCount wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) MaximumUnitCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumUnitCount"))
 	return _r
 }
 
+// SetMaximumUnitCount wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) SetMaximumUnitCount(maximumUnitCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumUnitCount:"), maximumUnitCount)
 }
 
+// CollapsesLargestUnit wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) CollapsesLargestUnit() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("collapsesLargestUnit"))
 	return _r
 }
 
+// SetCollapsesLargestUnit wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) SetCollapsesLargestUnit(collapsesLargestUnit bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapsesLargestUnit:"), collapsesLargestUnit)
 }
 
+// IncludesApproximationPhrase wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) IncludesApproximationPhrase() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesApproximationPhrase"))
 	return _r
 }
 
+// SetIncludesApproximationPhrase wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) SetIncludesApproximationPhrase(includesApproximationPhrase bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesApproximationPhrase:"), includesApproximationPhrase)
 }
 
+// IncludesTimeRemainingPhrase wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) IncludesTimeRemainingPhrase() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesTimeRemainingPhrase"))
 	return _r
 }
 
+// SetIncludesTimeRemainingPhrase wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) SetIncludesTimeRemainingPhrase(includesTimeRemainingPhrase bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesTimeRemainingPhrase:"), includesTimeRemainingPhrase)
 }
 
+// FormattingContext wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) FormattingContext() FormattingContext {
 	_r := objc.Send[FormattingContext](objref.IDOf(x), objc.RegisterName("formattingContext"))
 	return _r
 }
 
+// SetFormattingContext wraps the corresponding Objective-C method.
 func (x *DateComponentsFormatter) SetFormattingContext(formattingContext FormattingContext) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormattingContext:"), formattingContext)
 }
@@ -302,3 +315,5 @@ type DateComponentsFormatterable interface {
 }
 
 var _ DateComponentsFormatterable = (*DateComponentsFormatter)(nil)
+
+var _ FormatterProvider = (*DateComponentsFormatter)(nil)

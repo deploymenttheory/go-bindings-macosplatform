@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of vocal analysis metrics.
-//
 // VoiceAnalytics is an idiomatic wrapper over the Objective-C class SFVoiceAnalytics.
+//
+// A collection of vocal analysis metrics.
 type VoiceAnalytics struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VoiceAnalyticsFromID(id objc.ID) *VoiceAnalytics {
 	if id == 0 {
 		return nil
 	}
-	x := &VoiceAnalytics{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VoiceAnalytics{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func voiceAnalyticsAdopt(id objc.ID) *VoiceAnalytics {
 	if id == 0 {
 		return nil
 	}
-	x := &VoiceAnalytics{Handle: objref.Wrap(id)}
+	x := &VoiceAnalytics{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,29 +60,37 @@ func (x *VoiceAnalytics) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VoiceAnalytics) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVoiceAnalytics creates a new VoiceAnalytics.
 func NewVoiceAnalytics() *VoiceAnalytics {
 	_id := objc.Send[objc.ID](objc.ID(_class("SFVoiceAnalytics")), objc.RegisterName("new"))
 	return voiceAnalyticsAdopt(_id)
 }
 
+// Jitter wraps the corresponding Objective-C method.
 func (x *VoiceAnalytics) Jitter() *AcousticFeature {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jitter"))
 	return AcousticFeatureFromID(_r)
 }
 
-// The variation in vocal volume stability (amplitude) in each frame of a transcription segment, expressed in decibels.
+// Shimmer the variation in vocal volume stability (amplitude) in each frame of a transcription segment, expressed in decibels.
 func (x *VoiceAnalytics) Shimmer() *AcousticFeature {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shimmer"))
 	return AcousticFeatureFromID(_r)
 }
 
-// The highness or lowness of the tone (fundamental frequency) in each frame of a transcription segment, expressed as a logarithm. The value is a logarithm (base `e`) of the normalized pitch estimate for each frame.
+// Pitch the highness or lowness of the tone (fundamental frequency) in each frame of a transcription segment, expressed as a logarithm. The value is a logarithm (base `e`) of the normalized pitch estimate for each frame.
 func (x *VoiceAnalytics) Pitch() *AcousticFeature {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pitch"))
 	return AcousticFeatureFromID(_r)
 }
 
+// Voicing wraps the corresponding Objective-C method.
 func (x *VoiceAnalytics) Voicing() *AcousticFeature {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("voicing"))
 	return AcousticFeatureFromID(_r)

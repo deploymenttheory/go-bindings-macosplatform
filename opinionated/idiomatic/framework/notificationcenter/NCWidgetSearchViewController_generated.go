@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides a default search view within a macOS Today widget.
-//
 // WidgetSearchViewController is an idiomatic wrapper over the Objective-C class NCWidgetSearchViewController.
+//
+// An object that provides a default search view within a macOS Today widget.
 type WidgetSearchViewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WidgetSearchViewControllerFromID(id objc.ID) *WidgetSearchViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &WidgetSearchViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WidgetSearchViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func widgetSearchViewControllerAdopt(id objc.ID) *WidgetSearchViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &WidgetSearchViewController{Handle: objref.Wrap(id)}
+	x := &WidgetSearchViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,45 +60,48 @@ func (x *WidgetSearchViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WidgetSearchViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWidgetSearchViewController creates a new WidgetSearchViewController.
 func NewWidgetSearchViewController() *WidgetSearchViewController {
 	_id := objc.Send[objc.ID](objc.ID(_class("NCWidgetSearchViewController")), objc.RegisterName("new"))
 	return widgetSearchViewControllerAdopt(_id)
 }
 
-// A localized description of the nature of the search.
-//
-// WithSearchDescription sets searchDescription and returns the receiver so calls can be chained.
+// WithSearchDescription a localized description of the nature of the search.
 func (x *WidgetSearchViewController) WithSearchDescription(searchDescription string) *WidgetSearchViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchDescription:"), purego.NSString(searchDescription))
 	return x
 }
 
-// A localized phrase displayed in the results list when no search results are available.
-//
-// WithSearchResultsPlaceholderString sets searchResultsPlaceholderString and returns the receiver so calls can be chained.
+// WithSearchResultsPlaceholderString a localized phrase displayed in the results list when no search results are available.
 func (x *WidgetSearchViewController) WithSearchResultsPlaceholderString(searchResultsPlaceholderString string) *WidgetSearchViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchResultsPlaceholderString:"), purego.NSString(searchResultsPlaceholderString))
 	return x
 }
 
-// A key path for the string property to display for each object in the search results array.
-//
-// WithSearchResultKeyPath sets searchResultKeyPath and returns the receiver so calls can be chained.
+// WithSearchResultKeyPath a key path for the string property to display for each object in the search results array.
 func (x *WidgetSearchViewController) WithSearchResultKeyPath(searchResultKeyPath string) *WidgetSearchViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchResultKeyPath:"), purego.NSString(searchResultKeyPath))
 	return x
 }
 
+// SearchResults wraps the corresponding Objective-C method.
 func (x *WidgetSearchViewController) SearchResults() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("searchResults"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetSearchResults wraps the corresponding Objective-C method.
 func (x *WidgetSearchViewController) SetSearchResults(searchResults []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchResults:"), purego.SliceToNSArray(searchResults, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SearchDescription wraps the corresponding Objective-C method.
 func (x *WidgetSearchViewController) SearchDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("searchDescription"))
 	if _r == 0 {
@@ -105,10 +110,12 @@ func (x *WidgetSearchViewController) SearchDescription() string {
 	return purego.GoString(_r)
 }
 
+// SetSearchDescription wraps the corresponding Objective-C method.
 func (x *WidgetSearchViewController) SetSearchDescription(searchDescription string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchDescription:"), purego.NSString(searchDescription))
 }
 
+// SearchResultsPlaceholderString wraps the corresponding Objective-C method.
 func (x *WidgetSearchViewController) SearchResultsPlaceholderString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("searchResultsPlaceholderString"))
 	if _r == 0 {
@@ -117,10 +124,12 @@ func (x *WidgetSearchViewController) SearchResultsPlaceholderString() string {
 	return purego.GoString(_r)
 }
 
+// SetSearchResultsPlaceholderString wraps the corresponding Objective-C method.
 func (x *WidgetSearchViewController) SetSearchResultsPlaceholderString(searchResultsPlaceholderString string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchResultsPlaceholderString:"), purego.NSString(searchResultsPlaceholderString))
 }
 
+// SearchResultKeyPath wraps the corresponding Objective-C method.
 func (x *WidgetSearchViewController) SearchResultKeyPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("searchResultKeyPath"))
 	if _r == 0 {
@@ -129,6 +138,7 @@ func (x *WidgetSearchViewController) SearchResultKeyPath() string {
 	return purego.GoString(_r)
 }
 
+// SetSearchResultKeyPath wraps the corresponding Objective-C method.
 func (x *WidgetSearchViewController) SetSearchResultKeyPath(searchResultKeyPath string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchResultKeyPath:"), purego.NSString(searchResultKeyPath))
 }

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A node that smoothly fades between the audio of its child nodes.
-//
 // BlendNodeDefinition is an idiomatic wrapper over the Objective-C class PHASEBlendNodeDefinition.
+//
+// It embeds [SoundEventNodeDefinition], promoting that type's methods.
+//
+// A node that smoothly fades between the audio of its child nodes.
 type BlendNodeDefinition struct {
-	objref.Handle
+	SoundEventNodeDefinition
 }
 
 // BlendNodeDefinitionFromID adopts an existing Objective-C object as a BlendNodeDefinition
@@ -25,7 +26,8 @@ func BlendNodeDefinitionFromID(id objc.ID) *BlendNodeDefinition {
 	if id == 0 {
 		return nil
 	}
-	x := &BlendNodeDefinition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BlendNodeDefinition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,87 +40,67 @@ func blendNodeDefinitionAdopt(id objc.ID) *BlendNodeDefinition {
 	if id == 0 {
 		return nil
 	}
-	x := &BlendNodeDefinition{Handle: objref.Wrap(id)}
+	x := &BlendNodeDefinition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *BlendNodeDefinition) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BlendNodeDefinition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BlendNodeDefinition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a named blend node with a maxiumum blend range value.
-//
-// NewBlendNodeDefinitionWithBlendMetaParameterDefinitionIdentifier creates a new BlendNodeDefinition.
+// NewBlendNodeDefinitionWithBlendMetaParameterDefinitionIdentifier creates a named blend node with a maxiumum blend range value.
 func NewBlendNodeDefinitionWithBlendMetaParameterDefinitionIdentifier(blendMetaParameterDefinition *NumberMetaParameterDefinition, identifier string) *BlendNodeDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEBlendNodeDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBlendMetaParameterDefinition:identifier:"), objref.IDOf(blendMetaParameterDefinition), purego.NSString(identifier))
 	return blendNodeDefinitionAdopt(_id)
 }
 
-// Creates a blend node with a maxiumum blend range value.
-//
-// NewBlendNodeDefinitionWithBlendMetaParameterDefinition creates a new BlendNodeDefinition.
+// NewBlendNodeDefinitionWithBlendMetaParameterDefinition creates a blend node with a maxiumum blend range value.
 func NewBlendNodeDefinitionWithBlendMetaParameterDefinition(blendMetaParameterDefinition *NumberMetaParameterDefinition) *BlendNodeDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEBlendNodeDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBlendMetaParameterDefinition:"), objref.IDOf(blendMetaParameterDefinition))
 	return blendNodeDefinitionAdopt(_id)
 }
 
-// Creates a named blend node for spatial audio output.
-//
-// NewBlendNodeDefinitionDistanceBlendWithSpatialMixerDefinitionIdentifier creates a new BlendNodeDefinition.
+// NewBlendNodeDefinitionDistanceBlendWithSpatialMixerDefinitionIdentifier creates a named blend node for spatial audio output.
 func NewBlendNodeDefinitionDistanceBlendWithSpatialMixerDefinitionIdentifier(spatialMixerDefinition *SpatialMixerDefinition, identifier string) *BlendNodeDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEBlendNodeDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initDistanceBlendWithSpatialMixerDefinition:identifier:"), objref.IDOf(spatialMixerDefinition), purego.NSString(identifier))
 	return blendNodeDefinitionAdopt(_id)
 }
 
-// Creates a blend node for spatial audio output.
-//
-// NewBlendNodeDefinitionDistanceBlendWithSpatialMixerDefinition creates a new BlendNodeDefinition.
+// NewBlendNodeDefinitionDistanceBlendWithSpatialMixerDefinition creates a blend node for spatial audio output.
 func NewBlendNodeDefinitionDistanceBlendWithSpatialMixerDefinition(spatialMixerDefinition *SpatialMixerDefinition) *BlendNodeDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEBlendNodeDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initDistanceBlendWithSpatialMixerDefinition:"), objref.IDOf(spatialMixerDefinition))
 	return blendNodeDefinitionAdopt(_id)
 }
 
-// Adds a child node that blends below a given value.
+// AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree adds a child node that blends below a given value.
 func (x *BlendNodeDefinition) AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType CurveType, subtree *SoundEventNodeDefinition) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRangeForInputValuesBelow:fullGainAtValue:fadeCurveType:subtree:"), value, fullGainAtValue, fadeCurveType, objref.IDOf(subtree))
 }
 
-// Adds a child node that blends between a given high and low value.
+// AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree adds a child node that blends between a given high and low value.
 func (x *BlendNodeDefinition) AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree(lowValue float64, highValue float64, fullGainAtLowValue float64, fullGainAtHighValue float64, lowFadeCurveType CurveType, highFadeCurveType CurveType, subtree *SoundEventNodeDefinition) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRangeForInputValuesBetween:highValue:fullGainAtLowValue:fullGainAtHighValue:lowFadeCurveType:highFadeCurveType:subtree:"), lowValue, highValue, fullGainAtLowValue, fullGainAtHighValue, lowFadeCurveType, highFadeCurveType, objref.IDOf(subtree))
 }
 
-// Adds a child node that blends above a given value.
+// AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree adds a child node that blends above a given value.
 func (x *BlendNodeDefinition) AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType CurveType, subtree *SoundEventNodeDefinition) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRangeForInputValuesAbove:fullGainAtValue:fadeCurveType:subtree:"), value, fullGainAtValue, fadeCurveType, objref.IDOf(subtree))
 }
 
-// Adds a child node with an envelope.
+// AddRangeWithEnvelopeSubtree adds a child node with an envelope.
 func (x *BlendNodeDefinition) AddRangeWithEnvelopeSubtree(envelope *Envelope, subtree *SoundEventNodeDefinition) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRangeWithEnvelope:subtree:"), objref.IDOf(envelope), objref.IDOf(subtree))
 }
 
+// BlendParameterDefinition wraps the corresponding Objective-C method.
 func (x *BlendNodeDefinition) BlendParameterDefinition() *NumberMetaParameterDefinition {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("blendParameterDefinition"))
 	return NumberMetaParameterDefinitionFromID(_r)
 }
 
+// SpatialMixerDefinitionForDistance wraps the corresponding Objective-C method.
 func (x *BlendNodeDefinition) SpatialMixerDefinitionForDistance() *SpatialMixerDefinition {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("spatialMixerDefinitionForDistance"))
 	return SpatialMixerDefinitionFromID(_r)
@@ -136,3 +118,7 @@ type BlendNodeDefinitionable interface {
 }
 
 var _ BlendNodeDefinitionable = (*BlendNodeDefinition)(nil)
+
+var _ SoundEventNodeDefinitionProvider = (*BlendNodeDefinition)(nil)
+
+var _ DefinitionProvider = (*BlendNodeDefinition)(nil)

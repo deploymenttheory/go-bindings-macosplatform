@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A Virtio graphics device.
-//
 // VirtioGraphicsDevice is an idiomatic wrapper over the Objective-C class VZVirtioGraphicsDevice.
+//
+// It embeds [GraphicsDevice], promoting that type's methods.
+//
+// A Virtio graphics device.
 type VirtioGraphicsDevice struct {
-	objref.Handle
+	GraphicsDevice
 }
 
 // VirtioGraphicsDeviceFromID adopts an existing Objective-C object as a VirtioGraphicsDevice
@@ -25,7 +26,8 @@ func VirtioGraphicsDeviceFromID(id objc.ID) *VirtioGraphicsDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioGraphicsDevice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VirtioGraphicsDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func virtioGraphicsDeviceAdopt(id objc.ID) *VirtioGraphicsDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioGraphicsDevice{Handle: objref.Wrap(id)}
+	x := &VirtioGraphicsDevice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *VirtioGraphicsDevice) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VirtioGraphicsDevice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VirtioGraphicsDevice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewVirtioGraphicsDevice creates a new VirtioGraphicsDevice.
@@ -70,3 +58,5 @@ type VirtioGraphicsDeviceable interface {
 }
 
 var _ VirtioGraphicsDeviceable = (*VirtioGraphicsDevice)(nil)
+
+var _ GraphicsDeviceProvider = (*VirtioGraphicsDevice)(nil)

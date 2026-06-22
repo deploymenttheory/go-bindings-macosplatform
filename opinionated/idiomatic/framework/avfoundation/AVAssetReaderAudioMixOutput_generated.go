@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that reads audio samples that result from mixing audio from one or more tracks.
-//
 // AssetReaderAudioMixOutput is an idiomatic wrapper over the Objective-C class AVAssetReaderAudioMixOutput.
+//
+// It embeds [AssetReaderOutput], promoting that type's methods.
+//
+// An object that reads audio samples that result from mixing audio from one or more tracks.
 type AssetReaderAudioMixOutput struct {
-	objref.Handle
+	AssetReaderOutput
 }
 
 // AssetReaderAudioMixOutputFromID adopts an existing Objective-C object as a AssetReaderAudioMixOutput
@@ -25,7 +26,8 @@ func AssetReaderAudioMixOutputFromID(id objc.ID) *AssetReaderAudioMixOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetReaderAudioMixOutput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetReaderAudioMixOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,68 +40,44 @@ func assetReaderAudioMixOutputAdopt(id objc.ID) *AssetReaderAudioMixOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetReaderAudioMixOutput{Handle: objref.Wrap(id)}
+	x := &AssetReaderAudioMixOutput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *AssetReaderAudioMixOutput) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetReaderAudioMixOutput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetReaderAudioMixOutput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates an object that reads mixed audio from the specified audio tracks.
-//
-// NewAssetReaderAudioMixOutputWithAudioTracksAudioSettings creates a new AssetReaderAudioMixOutput.
+// NewAssetReaderAudioMixOutputWithAudioTracksAudioSettings creates an object that reads mixed audio from the specified audio tracks.
 func NewAssetReaderAudioMixOutputWithAudioTracksAudioSettings(audioTracks []*AssetTrack, audioSettings obj.Object) *AssetReaderAudioMixOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetReaderAudioMixOutput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioTracks:audioSettings:"), purego.SliceToNSArray(audioTracks, func(_v *AssetTrack) objc.ID { return objref.IDOf(_v) }), objref.IDOf(audioSettings))
 	return assetReaderAudioMixOutputAdopt(_id)
 }
 
-// The audio mix to use with this output.
-//
-// WithAudioMix sets audioMix and returns the receiver so calls can be chained.
+// WithAudioMix the audio mix to use with this output.
 func (x *AssetReaderAudioMixOutput) WithAudioMix(audioMix AudioMixProvider) *AssetReaderAudioMixOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioMix:"), objref.IDOf(audioMix))
 	return x
 }
 
-// The processing algorithm to use for scaled audio edits.
-//
-// WithAudioTimePitchAlgorithm sets audioTimePitchAlgorithm and returns the receiver so calls can be chained.
+// WithAudioTimePitchAlgorithm the processing algorithm to use for scaled audio edits.
 func (x *AssetReaderAudioMixOutput) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) *AssetReaderAudioMixOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
 	return x
 }
 
-// A Boolean value that indicates whether the output vends copied sample data.
-//
-// WithAlwaysCopiesSampleData sets alwaysCopiesSampleData and returns the receiver so calls can be chained.
+// WithAlwaysCopiesSampleData a Boolean value that indicates whether the output vends copied sample data.
 func (x *AssetReaderAudioMixOutput) WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderAudioMixOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlwaysCopiesSampleData:"), alwaysCopiesSampleData)
 	return x
 }
 
-// A Boolean value that indicates whether the output supports reconfiguring the time ranges it reads.
-//
-// WithSupportsRandomAccess sets supportsRandomAccess and returns the receiver so calls can be chained.
+// WithSupportsRandomAccess a Boolean value that indicates whether the output supports reconfiguring the time ranges it reads.
 func (x *AssetReaderAudioMixOutput) WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderAudioMixOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsRandomAccess:"), supportsRandomAccess)
 	return x
 }
 
-// The tracks from which the receiver reads mixed audio. The value of this property is an NSArray of AVAssetTracks owned by the target AVAssetReader's asset.
+// AudioTracks the tracks from which the receiver reads mixed audio. The value of this property is an NSArray of AVAssetTracks owned by the target AVAssetReader's asset.
 //
 // AudioTracks returns the collection as a Go slice.
 func (x *AssetReaderAudioMixOutput) AudioTracks() []*AssetTrack {
@@ -107,28 +85,30 @@ func (x *AssetReaderAudioMixOutput) AudioTracks() []*AssetTrack {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetTrack { return AssetTrackFromID(_id) })
 }
 
-// The audio settings used by the receiver. The value of this property is an NSDictionary that contains values for keys from AVAudioSettings.h (linear PCM only).  A value of nil indicates that the receiver will return audio samples in a convenient uncompressed format, with sample rate and other properties determined according to the properties of the receiver's audio tracks.
+// AudioSettings the audio settings used by the receiver. The value of this property is an NSDictionary that contains values for keys from AVAudioSettings.h (linear PCM only).  A value of nil indicates that the receiver will return audio samples in a convenient uncompressed format, with sample rate and other properties determined according to the properties of the receiver's audio tracks.
 func (x *AssetReaderAudioMixOutput) AudioSettings() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioSettings"))
 	return obj.Wrap(_r)
 }
 
-// The audio mix used by the receiver. The value of this property is an AVAudioMix that can be used to specify how the volume of audio samples read from each source track will change over the timeline of the source asset. This property throws an exception for any of the following reasons: - an audio mix is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown) - setting an audio mix containing a track that was not used to create the receiver - an audio mix is set containing an invalid audio time pitch algorithm
+// AudioMix the audio mix used by the receiver. The value of this property is an AVAudioMix that can be used to specify how the volume of audio samples read from each source track will change over the timeline of the source asset. This property throws an exception for any of the following reasons: - an audio mix is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown) - setting an audio mix containing a track that was not used to create the receiver - an audio mix is set containing an invalid audio time pitch algorithm
 func (x *AssetReaderAudioMixOutput) AudioMix() *AudioMix {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioMix"))
 	return AudioMixFromID(_r)
 }
 
+// SetAudioMix wraps the corresponding Objective-C method.
 func (x *AssetReaderAudioMixOutput) SetAudioMix(audioMix *AudioMix) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioMix:"), objref.IDOf(audioMix))
 }
 
-// Indicates the processing algorithm used to manage audio pitch for scaled audio edits. Constants for various time pitch algorithms, e.g. AVAudioTimePitchAlgorithmSpectral, are defined in AVAudioProcessingSettings.h.  An NSInvalidArgumentException will be raised if this property is set to a value other than the constants defined in that file. The default value is AVAudioTimePitchAlgorithmSpectral.
+// AudioTimePitchAlgorithm indicates the processing algorithm used to manage audio pitch for scaled audio edits. Constants for various time pitch algorithms, e.g. AVAudioTimePitchAlgorithmSpectral, are defined in AVAudioProcessingSettings.h.  An NSInvalidArgumentException will be raised if this property is set to a value other than the constants defined in that file. The default value is AVAudioTimePitchAlgorithmSpectral.
 func (x *AssetReaderAudioMixOutput) AudioTimePitchAlgorithm() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioTimePitchAlgorithm"))
 	return obj.Wrap(_r)
 }
 
+// SetAudioTimePitchAlgorithm wraps the corresponding Objective-C method.
 func (x *AssetReaderAudioMixOutput) SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
 }
@@ -149,3 +129,5 @@ type AssetReaderAudioMixOutputable interface {
 }
 
 var _ AssetReaderAudioMixOutputable = (*AssetReaderAudioMixOutput)(nil)
+
+var _ AssetReaderOutputProvider = (*AssetReaderAudioMixOutput)(nil)

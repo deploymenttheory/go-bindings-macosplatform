@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The encapsulation of a successful authorization by a controller.
-//
 // Authorization is an idiomatic wrapper over the Objective-C class ASAuthorization.
+//
+// The encapsulation of a successful authorization by a controller.
 type Authorization struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationFromID(id objc.ID) *Authorization {
 	if id == 0 {
 		return nil
 	}
-	x := &Authorization{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Authorization{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationAdopt(id objc.ID) *Authorization {
 	if id == 0 {
 		return nil
 	}
-	x := &Authorization{Handle: objref.Wrap(id)}
+	x := &Authorization{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *Authorization) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *Authorization) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Authorization) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewAuthorization creates a new Authorization.

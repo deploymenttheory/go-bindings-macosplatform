@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An attachment for a Quick Look preview reply that provides additional content for the system to display a preview.
-//
 // PreviewReplyAttachment is an idiomatic wrapper over the Objective-C class QLPreviewReplyAttachment.
+//
+// An attachment for a Quick Look preview reply that provides additional content for the system to display a preview.
 type PreviewReplyAttachment struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PreviewReplyAttachmentFromID(id objc.ID) *PreviewReplyAttachment {
 	if id == 0 {
 		return nil
 	}
-	x := &PreviewReplyAttachment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PreviewReplyAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func previewReplyAttachmentAdopt(id objc.ID) *PreviewReplyAttachment {
 	if id == 0 {
 		return nil
 	}
-	x := &PreviewReplyAttachment{Handle: objref.Wrap(id)}
+	x := &PreviewReplyAttachment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,26 @@ func (x *PreviewReplyAttachment) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a preview reply attachment with the specified type.
-//
-// NewPreviewReplyAttachmentWithDataContentType creates a new PreviewReplyAttachment.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PreviewReplyAttachment) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPreviewReplyAttachmentWithDataContentType creates a preview reply attachment with the specified type.
 func NewPreviewReplyAttachmentWithDataContentType(data obj.Object, contentType obj.Object) *PreviewReplyAttachment {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("QLPreviewReplyAttachment")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:contentType:"), objref.IDOf(data), objref.IDOf(contentType))
 	return previewReplyAttachmentAdopt(_id)
 }
 
-// The data content of an html preview
+// Data the data content of an html preview
 func (x *PreviewReplyAttachment) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// The content type of the attachment for an html preview
+// ContentType the content type of the attachment for an html preview
 func (x *PreviewReplyAttachment) ContentType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
 	return obj.Wrap(_r)

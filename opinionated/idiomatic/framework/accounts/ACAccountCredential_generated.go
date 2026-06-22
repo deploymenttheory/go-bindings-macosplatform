@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A credential object that encapsulates the information needed to authenticate a user.
-//
 // AccountCredential is an idiomatic wrapper over the Objective-C class ACAccountCredential.
+//
+// A credential object that encapsulates the information needed to authenticate a user.
 type AccountCredential struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AccountCredentialFromID(id objc.ID) *AccountCredential {
 	if id == 0 {
 		return nil
 	}
-	x := &AccountCredential{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AccountCredential{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func accountCredentialAdopt(id objc.ID) *AccountCredential {
 	if id == 0 {
 		return nil
 	}
-	x := &AccountCredential{Handle: objref.Wrap(id)}
+	x := &AccountCredential{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,32 +60,33 @@ func (x *AccountCredential) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes an account credential using OAuth.
-//
-// NewAccountCredentialWithOAuthTokenTokenSecret creates a new AccountCredential.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AccountCredential) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAccountCredentialWithOAuthTokenTokenSecret initializes an account credential using OAuth.
 func NewAccountCredentialWithOAuthTokenTokenSecret(token string, secret string) *AccountCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ACAccountCredential")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOAuthToken:tokenSecret:"), purego.NSString(token), purego.NSString(secret))
 	return accountCredentialAdopt(_id)
 }
 
-// Initializes an account credential using OAuth 2.
-//
-// NewAccountCredentialWithOAuth2TokenRefreshTokenExpiryDate creates a new AccountCredential.
+// NewAccountCredentialWithOAuth2TokenRefreshTokenExpiryDate initializes an account credential using OAuth 2.
 func NewAccountCredentialWithOAuth2TokenRefreshTokenExpiryDate(token string, refreshToken string, expiryDate obj.Object) *AccountCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ACAccountCredential")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOAuth2Token:refreshToken:expiryDate:"), purego.NSString(token), purego.NSString(refreshToken), objref.IDOf(expiryDate))
 	return accountCredentialAdopt(_id)
 }
 
-// The token used for the credential.
-//
-// WithOauthToken sets oauthToken and returns the receiver so calls can be chained.
+// WithOauthToken the token used for the credential.
 func (x *AccountCredential) WithOauthToken(oauthToken string) *AccountCredential {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOauthToken:"), purego.NSString(oauthToken))
 	return x
 }
 
+// OauthToken wraps the corresponding Objective-C method.
 func (x *AccountCredential) OauthToken() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("oauthToken"))
 	if _r == 0 {
@@ -92,6 +95,7 @@ func (x *AccountCredential) OauthToken() string {
 	return purego.GoString(_r)
 }
 
+// SetOauthToken wraps the corresponding Objective-C method.
 func (x *AccountCredential) SetOauthToken(oauthToken string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOauthToken:"), purego.NSString(oauthToken))
 }

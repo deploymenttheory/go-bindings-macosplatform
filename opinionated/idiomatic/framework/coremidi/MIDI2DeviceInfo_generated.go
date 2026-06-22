@@ -23,7 +23,8 @@ func MIDI2DeviceInfoFromID(id objc.ID) *MIDI2DeviceInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &MIDI2DeviceInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MIDI2DeviceInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mIDI2DeviceInfoAdopt(id objc.ID) *MIDI2DeviceInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &MIDI2DeviceInfo{Handle: objref.Wrap(id)}
+	x := &MIDI2DeviceInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,19 +58,25 @@ func (x *MIDI2DeviceInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MIDI2DeviceInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMIDI2DeviceInfo creates a new MIDI2DeviceInfo.
 func NewMIDI2DeviceInfo() *MIDI2DeviceInfo {
 	_id := objc.Send[objc.ID](objc.ID(_class("MIDI2DeviceInfo")), objc.RegisterName("new"))
 	return mIDI2DeviceInfoAdopt(_id)
 }
 
-// The family of models to which the device belongs, up to 14 bits.
+// Family the family of models to which the device belongs, up to 14 bits.
 func (x *MIDI2DeviceInfo) Family() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("family"))
 	return _r
 }
 
-// The specific model from the device manufacturer, up to 14 bits.
+// ModelNumber the specific model from the device manufacturer, up to 14 bits.
 func (x *MIDI2DeviceInfo) ModelNumber() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("modelNumber"))
 	return _r

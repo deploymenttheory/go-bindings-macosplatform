@@ -23,7 +23,8 @@ func MTRDeviceEnergyManagementModeClusterModeOptionStructFromID(id objc.ID) *MTR
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceEnergyManagementModeClusterModeOptionStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDeviceEnergyManagementModeClusterModeOptionStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDeviceEnergyManagementModeClusterModeOptionStructAdopt(id objc.ID) *MTRD
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceEnergyManagementModeClusterModeOptionStruct{Handle: objref.Wrap(id)}
+	x := &MTRDeviceEnergyManagementModeClusterModeOptionStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,24 +58,31 @@ func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) IsKind(className 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDeviceEnergyManagementModeClusterModeOptionStruct creates a new MTRDeviceEnergyManagementModeClusterModeOptionStruct.
 func NewMTRDeviceEnergyManagementModeClusterModeOptionStruct() *MTRDeviceEnergyManagementModeClusterModeOptionStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceEnergyManagementModeClusterModeOptionStruct")), objc.RegisterName("new"))
 	return mTRDeviceEnergyManagementModeClusterModeOptionStructAdopt(_id)
 }
 
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) WithLabel(label string) *MTRDeviceEnergyManagementModeClusterModeOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// WithMode sets mode and returns the receiver so calls can be chained.
+// WithMode sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTRDeviceEnergyManagementModeClusterModeOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	return x
 }
 
+// Label wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -82,24 +91,29 @@ func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) Label() string {
 	return purego.GoString(_r)
 }
 
+// SetLabel wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
+// Mode wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) Mode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mode"))
 	return obj.Wrap(_r)
 }
 
+// SetMode wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) SetMode(mode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
 }
 
+// ModeTags wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) ModeTags() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modeTags"))
 	return obj.Wrap(_r)
 }
 
+// SetModeTags wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) SetModeTags(modeTags obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeTags:"), objref.IDOf(modeTags))
 }

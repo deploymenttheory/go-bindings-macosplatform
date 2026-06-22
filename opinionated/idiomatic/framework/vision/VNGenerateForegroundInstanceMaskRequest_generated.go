@@ -6,17 +6,19 @@ package vision
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request that generates an instance mask of noticable objects to separate from the background.
-//
 // GenerateForegroundInstanceMaskRequest is an idiomatic wrapper over the Objective-C class VNGenerateForegroundInstanceMaskRequest.
+//
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// A request that generates an instance mask of noticable objects to separate from the background.
 type GenerateForegroundInstanceMaskRequest struct {
-	objref.Handle
+	ImageBasedRequest
 }
 
 // GenerateForegroundInstanceMaskRequestFromID adopts an existing Objective-C object as a GenerateForegroundInstanceMaskRequest
@@ -25,7 +27,8 @@ func GenerateForegroundInstanceMaskRequestFromID(id objc.ID) *GenerateForeground
 	if id == 0 {
 		return nil
 	}
-	x := &GenerateForegroundInstanceMaskRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GenerateForegroundInstanceMaskRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func generateForegroundInstanceMaskRequestAdopt(id objc.ID) *GenerateForegroundI
 	if id == 0 {
 		return nil
 	}
-	x := &GenerateForegroundInstanceMaskRequest{Handle: objref.Wrap(id)}
+	x := &GenerateForegroundInstanceMaskRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GenerateForegroundInstanceMaskRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GenerateForegroundInstanceMaskRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GenerateForegroundInstanceMaskRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGenerateForegroundInstanceMaskRequest creates a new GenerateForegroundInstanceMaskRequest.
@@ -64,25 +53,25 @@ func NewGenerateForegroundInstanceMaskRequest() *GenerateForegroundInstanceMaskR
 	return generateForegroundInstanceMaskRequestAdopt(_id)
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets preferBackgroundProcessing and returns the receiver so calls can be chained.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
+func (x *GenerateForegroundInstanceMaskRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateForegroundInstanceMaskRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *GenerateForegroundInstanceMaskRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateForegroundInstanceMaskRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets usesCPUOnly and returns the receiver so calls can be chained.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *GenerateForegroundInstanceMaskRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateForegroundInstanceMaskRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets revision and returns the receiver so calls can be chained.
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
 func (x *GenerateForegroundInstanceMaskRequest) WithRevision(revision int) *GenerateForegroundInstanceMaskRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
@@ -91,9 +80,14 @@ func (x *GenerateForegroundInstanceMaskRequest) WithRevision(revision int) *Gene
 // GenerateForegroundInstanceMaskRequestable is the interface implemented by [GenerateForegroundInstanceMaskRequest], for mocking and DI.
 type GenerateForegroundInstanceMaskRequestable interface {
 	obj.Object
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateForegroundInstanceMaskRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateForegroundInstanceMaskRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *GenerateForegroundInstanceMaskRequest
 	WithRevision(revision int) *GenerateForegroundInstanceMaskRequest
 }
 
 var _ GenerateForegroundInstanceMaskRequestable = (*GenerateForegroundInstanceMaskRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*GenerateForegroundInstanceMaskRequest)(nil)
+
+var _ RequestProvider = (*GenerateForegroundInstanceMaskRequest)(nil)

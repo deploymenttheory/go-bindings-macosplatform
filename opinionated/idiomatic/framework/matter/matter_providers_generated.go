@@ -11,584 +11,701 @@ import (
 // MTRAccessControlClusterAccessControlEntryStructProvider is accepted wherever a MTRAccessControlClusterAccessControlEntryStruct (or one of its subclasses) is expected.
 type MTRAccessControlClusterAccessControlEntryStructProvider interface {
 	objref.Object
+	isMTRAccessControlClusterAccessControlEntryStruct()
 }
 
 // MTRAccessControlClusterAccessControlExtensionStructProvider is accepted wherever a MTRAccessControlClusterAccessControlExtensionStruct (or one of its subclasses) is expected.
 type MTRAccessControlClusterAccessControlExtensionStructProvider interface {
 	objref.Object
+	isMTRAccessControlClusterAccessControlExtensionStruct()
 }
 
 // MTRAccessControlClusterAccessControlTargetStructProvider is accepted wherever a MTRAccessControlClusterAccessControlTargetStruct (or one of its subclasses) is expected.
 type MTRAccessControlClusterAccessControlTargetStructProvider interface {
 	objref.Object
+	isMTRAccessControlClusterAccessControlTargetStruct()
 }
 
 // MTRApplicationBasicClusterApplicationStructProvider is accepted wherever a MTRApplicationBasicClusterApplicationStruct (or one of its subclasses) is expected.
 type MTRApplicationBasicClusterApplicationStructProvider interface {
 	objref.Object
+	isMTRApplicationBasicClusterApplicationStruct()
 }
 
 // MTRApplicationLauncherClusterApplicationEPStructProvider is accepted wherever a MTRApplicationLauncherClusterApplicationEPStruct (or one of its subclasses) is expected.
 type MTRApplicationLauncherClusterApplicationEPStructProvider interface {
 	objref.Object
+	isMTRApplicationLauncherClusterApplicationEPStruct()
 }
 
 // MTRApplicationLauncherClusterApplicationStructProvider is accepted wherever a MTRApplicationLauncherClusterApplicationStruct (or one of its subclasses) is expected.
 type MTRApplicationLauncherClusterApplicationStructProvider interface {
 	objref.Object
+	isMTRApplicationLauncherClusterApplicationStruct()
 }
 
 // MTRAudioOutputClusterOutputInfoStructProvider is accepted wherever a MTRAudioOutputClusterOutputInfoStruct (or one of its subclasses) is expected.
 type MTRAudioOutputClusterOutputInfoStructProvider interface {
 	objref.Object
+	isMTRAudioOutputClusterOutputInfoStruct()
 }
 
 // MTRBaseClusterBasicInformationProvider is accepted wherever a MTRBaseClusterBasicInformation (or one of its subclasses) is expected.
 type MTRBaseClusterBasicInformationProvider interface {
 	objref.Object
+	isMTRBaseClusterBasicInformation()
 }
 
 // MTRBaseClusterBridgedDeviceBasicInformationProvider is accepted wherever a MTRBaseClusterBridgedDeviceBasicInformation (or one of its subclasses) is expected.
 type MTRBaseClusterBridgedDeviceBasicInformationProvider interface {
 	objref.Object
+	isMTRBaseClusterBridgedDeviceBasicInformation()
 }
 
 // MTRBaseClusterOTASoftwareUpdateProviderProvider is accepted wherever a MTRBaseClusterOTASoftwareUpdateProvider (or one of its subclasses) is expected.
 type MTRBaseClusterOTASoftwareUpdateProviderProvider interface {
 	objref.Object
+	isMTRBaseClusterOTASoftwareUpdateProvider()
 }
 
 // MTRBaseClusterOTASoftwareUpdateRequestorProvider is accepted wherever a MTRBaseClusterOTASoftwareUpdateRequestor (or one of its subclasses) is expected.
 type MTRBaseClusterOTASoftwareUpdateRequestorProvider interface {
 	objref.Object
+	isMTRBaseClusterOTASoftwareUpdateRequestor()
 }
 
 // MTRBaseClusterUnitTestingProvider is accepted wherever a MTRBaseClusterUnitTesting (or one of its subclasses) is expected.
 type MTRBaseClusterUnitTestingProvider interface {
 	objref.Object
+	isMTRBaseClusterUnitTesting()
 }
 
 // MTRBaseClusterWakeOnLANProvider is accepted wherever a MTRBaseClusterWakeOnLAN (or one of its subclasses) is expected.
 type MTRBaseClusterWakeOnLANProvider interface {
 	objref.Object
+	isMTRBaseClusterWakeOnLAN()
 }
 
 // MTRBasicInformationClusterCapabilityMinimaStructProvider is accepted wherever a MTRBasicInformationClusterCapabilityMinimaStruct (or one of its subclasses) is expected.
 type MTRBasicInformationClusterCapabilityMinimaStructProvider interface {
 	objref.Object
+	isMTRBasicInformationClusterCapabilityMinimaStruct()
 }
 
 // MTRBasicInformationClusterLeaveEventProvider is accepted wherever a MTRBasicInformationClusterLeaveEvent (or one of its subclasses) is expected.
 type MTRBasicInformationClusterLeaveEventProvider interface {
 	objref.Object
+	isMTRBasicInformationClusterLeaveEvent()
 }
 
 // MTRBasicInformationClusterReachableChangedEventProvider is accepted wherever a MTRBasicInformationClusterReachableChangedEvent (or one of its subclasses) is expected.
 type MTRBasicInformationClusterReachableChangedEventProvider interface {
 	objref.Object
+	isMTRBasicInformationClusterReachableChangedEvent()
 }
 
 // MTRBasicInformationClusterShutDownEventProvider is accepted wherever a MTRBasicInformationClusterShutDownEvent (or one of its subclasses) is expected.
 type MTRBasicInformationClusterShutDownEventProvider interface {
 	objref.Object
+	isMTRBasicInformationClusterShutDownEvent()
 }
 
 // MTRBasicInformationClusterStartUpEventProvider is accepted wherever a MTRBasicInformationClusterStartUpEvent (or one of its subclasses) is expected.
 type MTRBasicInformationClusterStartUpEventProvider interface {
 	objref.Object
+	isMTRBasicInformationClusterStartUpEvent()
 }
 
 // MTRBridgedDeviceBasicInformationClusterLeaveEventProvider is accepted wherever a MTRBridgedDeviceBasicInformationClusterLeaveEvent (or one of its subclasses) is expected.
 type MTRBridgedDeviceBasicInformationClusterLeaveEventProvider interface {
 	objref.Object
+	isMTRBridgedDeviceBasicInformationClusterLeaveEvent()
 }
 
 // MTRBridgedDeviceBasicInformationClusterReachableChangedEventProvider is accepted wherever a MTRBridgedDeviceBasicInformationClusterReachableChangedEvent (or one of its subclasses) is expected.
 type MTRBridgedDeviceBasicInformationClusterReachableChangedEventProvider interface {
 	objref.Object
+	isMTRBridgedDeviceBasicInformationClusterReachableChangedEvent()
 }
 
 // MTRBridgedDeviceBasicInformationClusterShutDownEventProvider is accepted wherever a MTRBridgedDeviceBasicInformationClusterShutDownEvent (or one of its subclasses) is expected.
 type MTRBridgedDeviceBasicInformationClusterShutDownEventProvider interface {
 	objref.Object
+	isMTRBridgedDeviceBasicInformationClusterShutDownEvent()
 }
 
 // MTRBridgedDeviceBasicInformationClusterStartUpEventProvider is accepted wherever a MTRBridgedDeviceBasicInformationClusterStartUpEvent (or one of its subclasses) is expected.
 type MTRBridgedDeviceBasicInformationClusterStartUpEventProvider interface {
 	objref.Object
+	isMTRBridgedDeviceBasicInformationClusterStartUpEvent()
 }
 
 // MTRChannelClusterChannelInfoStructProvider is accepted wherever a MTRChannelClusterChannelInfoStruct (or one of its subclasses) is expected.
 type MTRChannelClusterChannelInfoStructProvider interface {
 	objref.Object
+	isMTRChannelClusterChannelInfoStruct()
 }
 
 // MTRChannelClusterLineupInfoStructProvider is accepted wherever a MTRChannelClusterLineupInfoStruct (or one of its subclasses) is expected.
 type MTRChannelClusterLineupInfoStructProvider interface {
 	objref.Object
+	isMTRChannelClusterLineupInfoStruct()
 }
 
 // MTRClusterProvider is accepted wherever a MTRCluster (or one of its subclasses) is expected.
 type MTRClusterProvider interface {
 	objref.Object
+	isMTRCluster()
 }
 
 // MTRClusterBasicInformationProvider is accepted wherever a MTRClusterBasicInformation (or one of its subclasses) is expected.
 type MTRClusterBasicInformationProvider interface {
 	objref.Object
+	isMTRClusterBasicInformation()
 }
 
 // MTRClusterBridgedDeviceBasicInformationProvider is accepted wherever a MTRClusterBridgedDeviceBasicInformation (or one of its subclasses) is expected.
 type MTRClusterBridgedDeviceBasicInformationProvider interface {
 	objref.Object
+	isMTRClusterBridgedDeviceBasicInformation()
 }
 
 // MTRClusterOTASoftwareUpdateProviderProvider is accepted wherever a MTRClusterOTASoftwareUpdateProvider (or one of its subclasses) is expected.
 type MTRClusterOTASoftwareUpdateProviderProvider interface {
 	objref.Object
+	isMTRClusterOTASoftwareUpdateProvider()
 }
 
 // MTRClusterOTASoftwareUpdateRequestorProvider is accepted wherever a MTRClusterOTASoftwareUpdateRequestor (or one of its subclasses) is expected.
 type MTRClusterOTASoftwareUpdateRequestorProvider interface {
 	objref.Object
+	isMTRClusterOTASoftwareUpdateRequestor()
 }
 
 // MTRClusterPathProvider is accepted wherever a MTRClusterPath (or one of its subclasses) is expected.
 type MTRClusterPathProvider interface {
 	objref.Object
+	isMTRClusterPath()
 }
 
 // MTRClusterUnitTestingProvider is accepted wherever a MTRClusterUnitTesting (or one of its subclasses) is expected.
 type MTRClusterUnitTestingProvider interface {
 	objref.Object
+	isMTRClusterUnitTesting()
 }
 
 // MTRClusterWakeOnLANProvider is accepted wherever a MTRClusterWakeOnLAN (or one of its subclasses) is expected.
 type MTRClusterWakeOnLANProvider interface {
 	objref.Object
+	isMTRClusterWakeOnLAN()
 }
 
 // MTRContentLauncherClusterAdditionalInfoStructProvider is accepted wherever a MTRContentLauncherClusterAdditionalInfoStruct (or one of its subclasses) is expected.
 type MTRContentLauncherClusterAdditionalInfoStructProvider interface {
 	objref.Object
+	isMTRContentLauncherClusterAdditionalInfoStruct()
 }
 
 // MTRContentLauncherClusterBrandingInformationStructProvider is accepted wherever a MTRContentLauncherClusterBrandingInformationStruct (or one of its subclasses) is expected.
 type MTRContentLauncherClusterBrandingInformationStructProvider interface {
 	objref.Object
+	isMTRContentLauncherClusterBrandingInformationStruct()
 }
 
 // MTRContentLauncherClusterContentSearchStructProvider is accepted wherever a MTRContentLauncherClusterContentSearchStruct (or one of its subclasses) is expected.
 type MTRContentLauncherClusterContentSearchStructProvider interface {
 	objref.Object
+	isMTRContentLauncherClusterContentSearchStruct()
 }
 
 // MTRContentLauncherClusterDimensionStructProvider is accepted wherever a MTRContentLauncherClusterDimensionStruct (or one of its subclasses) is expected.
 type MTRContentLauncherClusterDimensionStructProvider interface {
 	objref.Object
+	isMTRContentLauncherClusterDimensionStruct()
 }
 
 // MTRContentLauncherClusterLauncherResponseParamsProvider is accepted wherever a MTRContentLauncherClusterLauncherResponseParams (or one of its subclasses) is expected.
 type MTRContentLauncherClusterLauncherResponseParamsProvider interface {
 	objref.Object
+	isMTRContentLauncherClusterLauncherResponseParams()
 }
 
 // MTRContentLauncherClusterParameterStructProvider is accepted wherever a MTRContentLauncherClusterParameterStruct (or one of its subclasses) is expected.
 type MTRContentLauncherClusterParameterStructProvider interface {
 	objref.Object
+	isMTRContentLauncherClusterParameterStruct()
 }
 
 // MTRContentLauncherClusterStyleInformationStructProvider is accepted wherever a MTRContentLauncherClusterStyleInformationStruct (or one of its subclasses) is expected.
 type MTRContentLauncherClusterStyleInformationStructProvider interface {
 	objref.Object
+	isMTRContentLauncherClusterStyleInformationStruct()
 }
 
 // MTRDescriptorClusterDeviceTypeStructProvider is accepted wherever a MTRDescriptorClusterDeviceTypeStruct (or one of its subclasses) is expected.
 type MTRDescriptorClusterDeviceTypeStructProvider interface {
 	objref.Object
+	isMTRDescriptorClusterDeviceTypeStruct()
 }
 
 // MTRDeviceControllerAbstractParametersProvider is accepted wherever a MTRDeviceControllerAbstractParameters (or one of its subclasses) is expected.
 type MTRDeviceControllerAbstractParametersProvider interface {
 	objref.Object
+	isMTRDeviceControllerAbstractParameters()
 }
 
 // MTRDeviceControllerFactoryParamsProvider is accepted wherever a MTRDeviceControllerFactoryParams (or one of its subclasses) is expected.
 type MTRDeviceControllerFactoryParamsProvider interface {
 	objref.Object
+	isMTRDeviceControllerFactoryParams()
 }
 
 // MTRDeviceControllerParametersProvider is accepted wherever a MTRDeviceControllerParameters (or one of its subclasses) is expected.
 type MTRDeviceControllerParametersProvider interface {
 	objref.Object
+	isMTRDeviceControllerParameters()
 }
 
 // MTRDoorLockClusterCredentialStructProvider is accepted wherever a MTRDoorLockClusterCredentialStruct (or one of its subclasses) is expected.
 type MTRDoorLockClusterCredentialStructProvider interface {
 	objref.Object
+	isMTRDoorLockClusterCredentialStruct()
 }
 
 // MTRGeneralDiagnosticsClusterNetworkInterfaceProvider is accepted wherever a MTRGeneralDiagnosticsClusterNetworkInterface (or one of its subclasses) is expected.
 type MTRGeneralDiagnosticsClusterNetworkInterfaceProvider interface {
 	objref.Object
+	isMTRGeneralDiagnosticsClusterNetworkInterface()
 }
 
 // MTRGenericBaseClusterProvider is accepted wherever a MTRGenericBaseCluster (or one of its subclasses) is expected.
 type MTRGenericBaseClusterProvider interface {
 	objref.Object
+	isMTRGenericBaseCluster()
 }
 
 // MTRGenericClusterProvider is accepted wherever a MTRGenericCluster (or one of its subclasses) is expected.
 type MTRGenericClusterProvider interface {
 	objref.Object
+	isMTRGenericCluster()
 }
 
 // MTRMediaInputClusterInputInfoStructProvider is accepted wherever a MTRMediaInputClusterInputInfoStruct (or one of its subclasses) is expected.
 type MTRMediaInputClusterInputInfoStructProvider interface {
 	objref.Object
+	isMTRMediaInputClusterInputInfoStruct()
 }
 
 // MTRMediaPlaybackClusterPlaybackPositionStructProvider is accepted wherever a MTRMediaPlaybackClusterPlaybackPositionStruct (or one of its subclasses) is expected.
 type MTRMediaPlaybackClusterPlaybackPositionStructProvider interface {
 	objref.Object
+	isMTRMediaPlaybackClusterPlaybackPositionStruct()
 }
 
 // MTRMediaPlaybackClusterStopParamsProvider is accepted wherever a MTRMediaPlaybackClusterStopParams (or one of its subclasses) is expected.
 type MTRMediaPlaybackClusterStopParamsProvider interface {
 	objref.Object
+	isMTRMediaPlaybackClusterStopParams()
 }
 
 // MTRModeSelectClusterSemanticTagStructProvider is accepted wherever a MTRModeSelectClusterSemanticTagStruct (or one of its subclasses) is expected.
 type MTRModeSelectClusterSemanticTagStructProvider interface {
 	objref.Object
+	isMTRModeSelectClusterSemanticTagStruct()
 }
 
 // MTRNetworkCommissioningClusterNetworkInfoStructProvider is accepted wherever a MTRNetworkCommissioningClusterNetworkInfoStruct (or one of its subclasses) is expected.
 type MTRNetworkCommissioningClusterNetworkInfoStructProvider interface {
 	objref.Object
+	isMTRNetworkCommissioningClusterNetworkInfoStruct()
 }
 
 // MTRNetworkCommissioningClusterThreadInterfaceScanResultStructProvider is accepted wherever a MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct (or one of its subclasses) is expected.
 type MTRNetworkCommissioningClusterThreadInterfaceScanResultStructProvider interface {
 	objref.Object
+	isMTRNetworkCommissioningClusterThreadInterfaceScanResultStruct()
 }
 
 // MTRNetworkCommissioningClusterWiFiInterfaceScanResultStructProvider is accepted wherever a MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct (or one of its subclasses) is expected.
 type MTRNetworkCommissioningClusterWiFiInterfaceScanResultStructProvider interface {
 	objref.Object
+	isMTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct()
 }
 
 // MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsProvider is accepted wherever a MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams (or one of its subclasses) is expected.
 type MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsProvider interface {
 	objref.Object
+	isMTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams()
 }
 
 // MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsProvider is accepted wherever a MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams (or one of its subclasses) is expected.
 type MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsProvider interface {
 	objref.Object
+	isMTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams()
 }
 
 // MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParamsProvider is accepted wherever a MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams (or one of its subclasses) is expected.
 type MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParamsProvider interface {
 	objref.Object
+	isMTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams()
 }
 
 // MTROTASoftwareUpdateProviderClusterQueryImageParamsProvider is accepted wherever a MTROTASoftwareUpdateProviderClusterQueryImageParams (or one of its subclasses) is expected.
 type MTROTASoftwareUpdateProviderClusterQueryImageParamsProvider interface {
 	objref.Object
+	isMTROTASoftwareUpdateProviderClusterQueryImageParams()
 }
 
 // MTROTASoftwareUpdateProviderClusterQueryImageResponseParamsProvider is accepted wherever a MTROTASoftwareUpdateProviderClusterQueryImageResponseParams (or one of its subclasses) is expected.
 type MTROTASoftwareUpdateProviderClusterQueryImageResponseParamsProvider interface {
 	objref.Object
+	isMTROTASoftwareUpdateProviderClusterQueryImageResponseParams()
 }
 
 // MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsProvider is accepted wherever a MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams (or one of its subclasses) is expected.
 type MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsProvider interface {
 	objref.Object
+	isMTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams()
 }
 
 // MTROTASoftwareUpdateRequestorClusterDownloadErrorEventProvider is accepted wherever a MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent (or one of its subclasses) is expected.
 type MTROTASoftwareUpdateRequestorClusterDownloadErrorEventProvider interface {
 	objref.Object
+	isMTROTASoftwareUpdateRequestorClusterDownloadErrorEvent()
 }
 
 // MTROTASoftwareUpdateRequestorClusterProviderLocationProvider is accepted wherever a MTROTASoftwareUpdateRequestorClusterProviderLocation (or one of its subclasses) is expected.
 type MTROTASoftwareUpdateRequestorClusterProviderLocationProvider interface {
 	objref.Object
+	isMTROTASoftwareUpdateRequestorClusterProviderLocation()
 }
 
 // MTROTASoftwareUpdateRequestorClusterStateTransitionEventProvider is accepted wherever a MTROTASoftwareUpdateRequestorClusterStateTransitionEvent (or one of its subclasses) is expected.
 type MTROTASoftwareUpdateRequestorClusterStateTransitionEventProvider interface {
 	objref.Object
+	isMTROTASoftwareUpdateRequestorClusterStateTransitionEvent()
 }
 
 // MTROTASoftwareUpdateRequestorClusterVersionAppliedEventProvider is accepted wherever a MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent (or one of its subclasses) is expected.
 type MTROTASoftwareUpdateRequestorClusterVersionAppliedEventProvider interface {
 	objref.Object
+	isMTROTASoftwareUpdateRequestorClusterVersionAppliedEvent()
 }
 
 // MTROperationalCredentialsClusterFabricDescriptorStructProvider is accepted wherever a MTROperationalCredentialsClusterFabricDescriptorStruct (or one of its subclasses) is expected.
 type MTROperationalCredentialsClusterFabricDescriptorStructProvider interface {
 	objref.Object
+	isMTROperationalCredentialsClusterFabricDescriptorStruct()
 }
 
 // MTRReadParamsProvider is accepted wherever a MTRReadParams (or one of its subclasses) is expected.
 type MTRReadParamsProvider interface {
 	objref.Object
+	isMTRReadParams()
 }
 
 // MTRSoftwareDiagnosticsClusterThreadMetricsStructProvider is accepted wherever a MTRSoftwareDiagnosticsClusterThreadMetricsStruct (or one of its subclasses) is expected.
 type MTRSoftwareDiagnosticsClusterThreadMetricsStructProvider interface {
 	objref.Object
+	isMTRSoftwareDiagnosticsClusterThreadMetricsStruct()
 }
 
 // MTRTargetNavigatorClusterTargetInfoStructProvider is accepted wherever a MTRTargetNavigatorClusterTargetInfoStruct (or one of its subclasses) is expected.
 type MTRTargetNavigatorClusterTargetInfoStructProvider interface {
 	objref.Object
+	isMTRTargetNavigatorClusterTargetInfoStruct()
 }
 
 // MTRThermostatClusterWeeklyScheduleTransitionStructProvider is accepted wherever a MTRThermostatClusterWeeklyScheduleTransitionStruct (or one of its subclasses) is expected.
 type MTRThermostatClusterWeeklyScheduleTransitionStructProvider interface {
 	objref.Object
+	isMTRThermostatClusterWeeklyScheduleTransitionStruct()
 }
 
 // MTRThreadNetworkDiagnosticsClusterNeighborTableStructProvider is accepted wherever a MTRThreadNetworkDiagnosticsClusterNeighborTableStruct (or one of its subclasses) is expected.
 type MTRThreadNetworkDiagnosticsClusterNeighborTableStructProvider interface {
 	objref.Object
+	isMTRThreadNetworkDiagnosticsClusterNeighborTableStruct()
 }
 
 // MTRThreadNetworkDiagnosticsClusterRouteTableStructProvider is accepted wherever a MTRThreadNetworkDiagnosticsClusterRouteTableStruct (or one of its subclasses) is expected.
 type MTRThreadNetworkDiagnosticsClusterRouteTableStructProvider interface {
 	objref.Object
+	isMTRThreadNetworkDiagnosticsClusterRouteTableStruct()
 }
 
 // MTRTimeSynchronizationClusterDSTOffsetStructProvider is accepted wherever a MTRTimeSynchronizationClusterDSTOffsetStruct (or one of its subclasses) is expected.
 type MTRTimeSynchronizationClusterDSTOffsetStructProvider interface {
 	objref.Object
+	isMTRTimeSynchronizationClusterDSTOffsetStruct()
 }
 
 // MTRTimeSynchronizationClusterSetUTCTimeParamsProvider is accepted wherever a MTRTimeSynchronizationClusterSetUTCTimeParams (or one of its subclasses) is expected.
 type MTRTimeSynchronizationClusterSetUTCTimeParamsProvider interface {
 	objref.Object
+	isMTRTimeSynchronizationClusterSetUTCTimeParams()
 }
 
 // MTRTimeSynchronizationClusterTimeZoneStructProvider is accepted wherever a MTRTimeSynchronizationClusterTimeZoneStruct (or one of its subclasses) is expected.
 type MTRTimeSynchronizationClusterTimeZoneStructProvider interface {
 	objref.Object
+	isMTRTimeSynchronizationClusterTimeZoneStruct()
 }
 
 // MTRUnitTestingClusterBooleanResponseParamsProvider is accepted wherever a MTRUnitTestingClusterBooleanResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterBooleanResponseParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterBooleanResponseParams()
 }
 
 // MTRUnitTestingClusterDoubleNestedStructListProvider is accepted wherever a MTRUnitTestingClusterDoubleNestedStructList (or one of its subclasses) is expected.
 type MTRUnitTestingClusterDoubleNestedStructListProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterDoubleNestedStructList()
 }
 
 // MTRUnitTestingClusterNestedStructProvider is accepted wherever a MTRUnitTestingClusterNestedStruct (or one of its subclasses) is expected.
 type MTRUnitTestingClusterNestedStructProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterNestedStruct()
 }
 
 // MTRUnitTestingClusterNestedStructListProvider is accepted wherever a MTRUnitTestingClusterNestedStructList (or one of its subclasses) is expected.
 type MTRUnitTestingClusterNestedStructListProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterNestedStructList()
 }
 
 // MTRUnitTestingClusterNullablesAndOptionalsStructProvider is accepted wherever a MTRUnitTestingClusterNullablesAndOptionalsStruct (or one of its subclasses) is expected.
 type MTRUnitTestingClusterNullablesAndOptionalsStructProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterNullablesAndOptionalsStruct()
 }
 
 // MTRUnitTestingClusterSimpleStructProvider is accepted wherever a MTRUnitTestingClusterSimpleStruct (or one of its subclasses) is expected.
 type MTRUnitTestingClusterSimpleStructProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterSimpleStruct()
 }
 
 // MTRUnitTestingClusterSimpleStructEchoRequestParamsProvider is accepted wherever a MTRUnitTestingClusterSimpleStructEchoRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterSimpleStructEchoRequestParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterSimpleStructEchoRequestParams()
 }
 
 // MTRUnitTestingClusterSimpleStructResponseParamsProvider is accepted wherever a MTRUnitTestingClusterSimpleStructResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterSimpleStructResponseParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterSimpleStructResponseParams()
 }
 
 // MTRUnitTestingClusterTestAddArgumentsParamsProvider is accepted wherever a MTRUnitTestingClusterTestAddArgumentsParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestAddArgumentsParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestAddArgumentsParams()
 }
 
 // MTRUnitTestingClusterTestAddArgumentsResponseParamsProvider is accepted wherever a MTRUnitTestingClusterTestAddArgumentsResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestAddArgumentsResponseParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestAddArgumentsResponseParams()
 }
 
 // MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestComplexNullableOptionalRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestComplexNullableOptionalRequestParams()
 }
 
 // MTRUnitTestingClusterTestComplexNullableOptionalResponseParamsProvider is accepted wherever a MTRUnitTestingClusterTestComplexNullableOptionalResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestComplexNullableOptionalResponseParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestComplexNullableOptionalResponseParams()
 }
 
 // MTRUnitTestingClusterTestEmitTestEventRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestEmitTestEventRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestEmitTestEventRequestParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestEmitTestEventRequestParams()
 }
 
 // MTRUnitTestingClusterTestEmitTestEventResponseParamsProvider is accepted wherever a MTRUnitTestingClusterTestEmitTestEventResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestEmitTestEventResponseParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestEmitTestEventResponseParams()
 }
 
 // MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams()
 }
 
 // MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsProvider is accepted wherever a MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams()
 }
 
 // MTRUnitTestingClusterTestEnumsRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestEnumsRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestEnumsRequestParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestEnumsRequestParams()
 }
 
 // MTRUnitTestingClusterTestEnumsResponseParamsProvider is accepted wherever a MTRUnitTestingClusterTestEnumsResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestEnumsResponseParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestEnumsResponseParams()
 }
 
 // MTRUnitTestingClusterTestEventEventProvider is accepted wherever a MTRUnitTestingClusterTestEventEvent (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestEventEventProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestEventEvent()
 }
 
 // MTRUnitTestingClusterTestFabricScopedProvider is accepted wherever a MTRUnitTestingClusterTestFabricScoped (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestFabricScopedProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestFabricScoped()
 }
 
 // MTRUnitTestingClusterTestFabricScopedEventEventProvider is accepted wherever a MTRUnitTestingClusterTestFabricScopedEventEvent (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestFabricScopedEventEventProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestFabricScopedEventEvent()
 }
 
 // MTRUnitTestingClusterTestListInt8UArgumentRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestListInt8UArgumentRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestListInt8UArgumentRequestParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestListInt8UArgumentRequestParams()
 }
 
 // MTRUnitTestingClusterTestListInt8UReverseRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestListInt8UReverseRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestListInt8UReverseRequestParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestListInt8UReverseRequestParams()
 }
 
 // MTRUnitTestingClusterTestListInt8UReverseResponseParamsProvider is accepted wherever a MTRUnitTestingClusterTestListInt8UReverseResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestListInt8UReverseResponseParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestListInt8UReverseResponseParams()
 }
 
 // MTRUnitTestingClusterTestListNestedStructListArgumentRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestListNestedStructListArgumentRequestParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestListNestedStructListArgumentRequestParams()
 }
 
 // MTRUnitTestingClusterTestListStructArgumentRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestListStructArgumentRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestListStructArgumentRequestParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestListStructArgumentRequestParams()
 }
 
 // MTRUnitTestingClusterTestListStructOctetProvider is accepted wherever a MTRUnitTestingClusterTestListStructOctet (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestListStructOctetProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestListStructOctet()
 }
 
 // MTRUnitTestingClusterTestNestedStructArgumentRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestNestedStructArgumentRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestNestedStructArgumentRequestParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestNestedStructArgumentRequestParams()
 }
 
 // MTRUnitTestingClusterTestNestedStructListArgumentRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestNestedStructListArgumentRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestNestedStructListArgumentRequestParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestNestedStructListArgumentRequestParams()
 }
 
 // MTRUnitTestingClusterTestNotHandledParamsProvider is accepted wherever a MTRUnitTestingClusterTestNotHandledParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestNotHandledParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestNotHandledParams()
 }
 
 // MTRUnitTestingClusterTestNullableOptionalRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestNullableOptionalRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestNullableOptionalRequestParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestNullableOptionalRequestParams()
 }
 
 // MTRUnitTestingClusterTestNullableOptionalResponseParamsProvider is accepted wherever a MTRUnitTestingClusterTestNullableOptionalResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestNullableOptionalResponseParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestNullableOptionalResponseParams()
 }
 
 // MTRUnitTestingClusterTestParamsProvider is accepted wherever a MTRUnitTestingClusterTestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestParams()
 }
 
 // MTRUnitTestingClusterTestSimpleArgumentRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestSimpleArgumentRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestSimpleArgumentRequestParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestSimpleArgumentRequestParams()
 }
 
 // MTRUnitTestingClusterTestSimpleArgumentResponseParamsProvider is accepted wherever a MTRUnitTestingClusterTestSimpleArgumentResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestSimpleArgumentResponseParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestSimpleArgumentResponseParams()
 }
 
 // MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams()
 }
 
 // MTRUnitTestingClusterTestSpecificParamsProvider is accepted wherever a MTRUnitTestingClusterTestSpecificParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestSpecificParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestSpecificParams()
 }
 
 // MTRUnitTestingClusterTestSpecificResponseParamsProvider is accepted wherever a MTRUnitTestingClusterTestSpecificResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestSpecificResponseParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestSpecificResponseParams()
 }
 
 // MTRUnitTestingClusterTestStructArgumentRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestStructArgumentRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestStructArgumentRequestParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestStructArgumentRequestParams()
 }
 
 // MTRUnitTestingClusterTestStructArrayArgumentRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestStructArrayArgumentRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestStructArrayArgumentRequestParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestStructArrayArgumentRequestParams()
 }
 
 // MTRUnitTestingClusterTestStructArrayArgumentResponseParamsProvider is accepted wherever a MTRUnitTestingClusterTestStructArrayArgumentResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestStructArrayArgumentResponseParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestStructArrayArgumentResponseParams()
 }
 
 // MTRUnitTestingClusterTestUnknownCommandParamsProvider is accepted wherever a MTRUnitTestingClusterTestUnknownCommandParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestUnknownCommandParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTestUnknownCommandParams()
 }
 
 // MTRUnitTestingClusterTimedInvokeRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTimedInvokeRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTimedInvokeRequestParamsProvider interface {
 	objref.Object
+	isMTRUnitTestingClusterTimedInvokeRequestParams()
 }

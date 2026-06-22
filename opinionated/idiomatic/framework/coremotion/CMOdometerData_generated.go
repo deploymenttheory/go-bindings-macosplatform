@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents odometer data for workouts.
-//
 // OdometerData is an idiomatic wrapper over the Objective-C class CMOdometerData.
+//
+// A class that represents odometer data for workouts.
 type OdometerData struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func OdometerDataFromID(id objc.ID) *OdometerData {
 	if id == 0 {
 		return nil
 	}
-	x := &OdometerData{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OdometerData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func odometerDataAdopt(id objc.ID) *OdometerData {
 	if id == 0 {
 		return nil
 	}
-	x := &OdometerData{Handle: objref.Wrap(id)}
+	x := &OdometerData{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,49 @@ func (x *OdometerData) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OdometerData) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewOdometerData creates a new OdometerData.
 func NewOdometerData() *OdometerData {
 	_id := objc.Send[objc.ID](objc.ID(_class("CMOdometerData")), objc.RegisterName("new"))
 	return odometerDataAdopt(_id)
 }
 
+// StartDate wraps the corresponding Objective-C method.
 func (x *OdometerData) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
+// EndDate wraps the corresponding Objective-C method.
 func (x *OdometerData) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
+// GpsDate wraps the corresponding Objective-C method.
 func (x *OdometerData) GpsDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gpsDate"))
 	return obj.Wrap(_r)
 }
 
+// OriginDevice wraps the corresponding Objective-C method.
 func (x *OdometerData) OriginDevice() OdometerOriginDevice {
 	_r := objc.Send[OdometerOriginDevice](objref.IDOf(x), objc.RegisterName("originDevice"))
 	return _r
 }
 
+// Slope wraps the corresponding Objective-C method.
 func (x *OdometerData) Slope() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("slope"))
 	return obj.Wrap(_r)
 }
 
+// MaxAbsSlope wraps the corresponding Objective-C method.
 func (x *OdometerData) MaxAbsSlope() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxAbsSlope"))
 	return obj.Wrap(_r)

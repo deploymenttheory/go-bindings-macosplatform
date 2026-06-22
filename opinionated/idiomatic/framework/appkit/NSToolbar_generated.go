@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages the space above your app’s custom content and either below or integrated with the window’s title bar.
-//
 // Toolbar is an idiomatic wrapper over the Objective-C class NSToolbar.
+//
+// An object that manages the space above your app’s custom content and either below or integrated with the window’s title bar.
 type Toolbar struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ToolbarFromID(id objc.ID) *Toolbar {
 	if id == 0 {
 		return nil
 	}
-	x := &Toolbar{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Toolbar{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func toolbarAdopt(id objc.ID) *Toolbar {
 	if id == 0 {
 		return nil
 	}
-	x := &Toolbar{Handle: objref.Wrap(id)}
+	x := &Toolbar{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,230 +60,209 @@ func (x *Toolbar) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Toolbar) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewToolbar creates a new Toolbar.
 func NewToolbar() *Toolbar {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSToolbar")), objc.RegisterName("new"))
 	return toolbarAdopt(_id)
 }
 
-// Creates a newly allocated toolbar with the specified identifier.
-//
-// NewToolbarWithIdentifier creates a new Toolbar.
+// NewToolbarWithIdentifier creates a newly allocated toolbar with the specified identifier.
 func NewToolbarWithIdentifier(identifier obj.Object) *Toolbar {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSToolbar")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), objref.IDOf(identifier))
 	return toolbarAdopt(_id)
 }
 
-// A Boolean value that indicates whether the toolbar is visible.
-//
-// WithVisible sets visible and returns the receiver so calls can be chained.
+// WithVisible a Boolean value that indicates whether the toolbar is visible.
 func (x *Toolbar) WithVisible(visible bool) *Toolbar {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisible:"), visible)
 	return x
 }
 
-// A value that indicates whether the toolbar displays items using a name, icon, or combination of elements.
-//
-// WithDisplayMode sets displayMode and returns the receiver so calls can be chained.
+// WithDisplayMode a value that indicates whether the toolbar displays items using a name, icon, or combination of elements.
 func (x *Toolbar) WithDisplayMode(displayMode ToolbarDisplayMode) *Toolbar {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayMode:"), displayMode)
 	return x
 }
 
-// The identifier of the toolbar’s currently selected item.
-//
-// WithSelectedItemIdentifier sets selectedItemIdentifier and returns the receiver so calls can be chained.
+// WithSelectedItemIdentifier the identifier of the toolbar’s currently selected item.
 func (x *Toolbar) WithSelectedItemIdentifier(selectedItemIdentifier obj.Object) *Toolbar {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedItemIdentifier:"), objref.IDOf(selectedItemIdentifier))
 	return x
 }
 
-// A Boolean value that indicates whether users can modify the contents of the toolbar.
-//
-// WithAllowsUserCustomization sets allowsUserCustomization and returns the receiver so calls can be chained.
+// WithAllowsUserCustomization a Boolean value that indicates whether users can modify the contents of the toolbar.
 func (x *Toolbar) WithAllowsUserCustomization(allowsUserCustomization bool) *Toolbar {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUserCustomization:"), allowsUserCustomization)
 	return x
 }
 
-// Whether or not the user is allowed to change display modes at run time. This functionality is independent of customizing the order of the items themselves. Only disable when the functionality or legibility of your toolbar could not be improved by another display mode. The user’s selection will be persisted using the toolbar’s identifier when autosavesConfiguration is enabled. The default is YES for apps linked on macOS 15.0 and above.
-//
-// WithAllowsDisplayModeCustomization sets allowsDisplayModeCustomization and returns the receiver so calls can be chained.
+// WithAllowsDisplayModeCustomization whether or not the user is allowed to change display modes at run time. This functionality is independent of customizing the order of the items themselves. Only disable when the functionality or legibility of your toolbar could not be improved by another display mode. The user’s selection will be persisted using the toolbar’s identifier when autosavesConfiguration is enabled. The default is YES for apps linked on macOS 15.0 and above.
 func (x *Toolbar) WithAllowsDisplayModeCustomization(allowsDisplayModeCustomization bool) *Toolbar {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsDisplayModeCustomization:"), allowsDisplayModeCustomization)
 	return x
 }
 
-// An array of itemIdentifiers that represent the current items in the toolbar. Setting this property will set the current items in the toolbar by diffing against items that already exist. Use this with great caution if allowsUserCustomization is enabled as it will override any customizations the user has made. This property is key value observable.
-//
-// WithItemIdentifiers sets the collection and returns the receiver so calls can be chained.
+// WithItemIdentifiers an array of itemIdentifiers that represent the current items in the toolbar. Setting this property will set the current items in the toolbar by diffing against items that already exist. Use this with great caution if allowsUserCustomization is enabled as it will override any customizations the user has made. This property is key value observable.
 func (x *Toolbar) WithItemIdentifiers(items ...obj.Object) *Toolbar {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItemIdentifiers:"), _arr)
 	return x
 }
 
-// The set of custom items to display in the center of the toolbar.
-//
-// WithCenteredItemIdentifiers sets centeredItemIdentifiers and returns the receiver so calls can be chained.
+// WithCenteredItemIdentifiers the set of custom items to display in the center of the toolbar.
 func (x *Toolbar) WithCenteredItemIdentifiers(centeredItemIdentifiers obj.Object) *Toolbar {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCenteredItemIdentifiers:"), objref.IDOf(centeredItemIdentifiers))
 	return x
 }
 
-// A Boolean value that indicates whether the toolbar autosaves its configuration.
-//
-// WithAutosavesConfiguration sets autosavesConfiguration and returns the receiver so calls can be chained.
+// WithAutosavesConfiguration a Boolean value that indicates whether the toolbar autosaves its configuration.
 func (x *Toolbar) WithAutosavesConfiguration(autosavesConfiguration bool) *Toolbar {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutosavesConfiguration:"), autosavesConfiguration)
 	return x
 }
 
-// A Boolean value that indicates whether the toolbar can add items for Action extensions.
-//
-// WithAllowsExtensionItems sets allowsExtensionItems and returns the receiver so calls can be chained.
+// WithAllowsExtensionItems a Boolean value that indicates whether the toolbar can add items for Action extensions.
 func (x *Toolbar) WithAllowsExtensionItems(allowsExtensionItems bool) *Toolbar {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExtensionItems:"), allowsExtensionItems)
 	return x
 }
 
-// The toolbar’s size mode.
-//
-// WithSizeMode sets sizeMode and returns the receiver so calls can be chained.
+// WithSizeMode the toolbar’s size mode.
 func (x *Toolbar) WithSizeMode(sizeMode ToolbarSizeMode) *Toolbar {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSizeMode:"), sizeMode)
 	return x
 }
 
-// The item to display in the center of the toolbar.
-//
-// WithCenteredItemIdentifier sets centeredItemIdentifier and returns the receiver so calls can be chained.
+// WithCenteredItemIdentifier the item to display in the center of the toolbar.
 func (x *Toolbar) WithCenteredItemIdentifier(centeredItemIdentifier obj.Object) *Toolbar {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCenteredItemIdentifier:"), objref.IDOf(centeredItemIdentifier))
 	return x
 }
 
-// The toolbar’s full screen accessory view.
-//
-// WithFullScreenAccessoryView sets fullScreenAccessoryView and returns the receiver so calls can be chained.
+// WithFullScreenAccessoryView the toolbar’s full screen accessory view.
 func (x *Toolbar) WithFullScreenAccessoryView(fullScreenAccessoryView ViewProvider) *Toolbar {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFullScreenAccessoryView:"), objref.IDOf(fullScreenAccessoryView))
 	return x
 }
 
-// The minimum height of the toolbar’s full screen accessory view.
-//
-// WithFullScreenAccessoryViewMinHeight sets fullScreenAccessoryViewMinHeight and returns the receiver so calls can be chained.
+// WithFullScreenAccessoryViewMinHeight the minimum height of the toolbar’s full screen accessory view.
 func (x *Toolbar) WithFullScreenAccessoryViewMinHeight(fullScreenAccessoryViewMinHeight float64) *Toolbar {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFullScreenAccessoryViewMinHeight:"), fullScreenAccessoryViewMinHeight)
 	return x
 }
 
-// The maximum height of the toolbar’s full screen accessory view, in points.
-//
-// WithFullScreenAccessoryViewMaxHeight sets fullScreenAccessoryViewMaxHeight and returns the receiver so calls can be chained.
+// WithFullScreenAccessoryViewMaxHeight the maximum height of the toolbar’s full screen accessory view, in points.
 func (x *Toolbar) WithFullScreenAccessoryViewMaxHeight(fullScreenAccessoryViewMaxHeight float64) *Toolbar {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFullScreenAccessoryViewMaxHeight:"), fullScreenAccessoryViewMaxHeight)
 	return x
 }
 
-// A Boolean value that indicates whether the toolbar shows the separator between the toolbar and the main window contents.
-//
-// WithShowsBaselineSeparator sets showsBaselineSeparator and returns the receiver so calls can be chained.
+// WithShowsBaselineSeparator a Boolean value that indicates whether the toolbar shows the separator between the toolbar and the main window contents.
 func (x *Toolbar) WithShowsBaselineSeparator(showsBaselineSeparator bool) *Toolbar {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsBaselineSeparator:"), showsBaselineSeparator)
 	return x
 }
 
-// Inserts an item into the toolbar at the specified index.
+// InsertItemWithItemIdentifierAtIndex inserts an item into the toolbar at the specified index.
 func (x *Toolbar) InsertItemWithItemIdentifierAtIndex(itemIdentifier obj.Object, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertItemWithItemIdentifier:atIndex:"), objref.IDOf(itemIdentifier), index)
 }
 
-// Removes the item at the specified index in the toolbar.
+// RemoveItemAtIndex removes the item at the specified index in the toolbar.
 func (x *Toolbar) RemoveItemAtIndex(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeItemAtIndex:"), index)
 }
 
-// Removes the item with matching itemIdentifier in the receiving toolbar. If multiple items share the same identifier (as is the case with space items) all matching items will be removed. To remove only a single space item, use -removeItemAtIndex: instead.
+// RemoveItemWithItemIdentifier removes the item with matching itemIdentifier in the receiving toolbar. If multiple items share the same identifier (as is the case with space items) all matching items will be removed. To remove only a single space item, use -removeItemAtIndex: instead.
 func (x *Toolbar) RemoveItemWithItemIdentifier(itemIdentifier obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeItemWithItemIdentifier:"), objref.IDOf(itemIdentifier))
 }
 
-// Displays the toolbar’s customization palette and handles any user-initiated customizations.
+// RunCustomizationPalette displays the toolbar’s customization palette and handles any user-initiated customizations.
 func (x *Toolbar) RunCustomizationPalette(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runCustomizationPalette:"), objref.IDOf(sender))
 }
 
-// Validates the toolbar’s visible items during a window update.
+// ValidateVisibleItems validates the toolbar’s visible items during a window update.
 func (x *Toolbar) ValidateVisibleItems() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validateVisibleItems"))
 }
 
-// Toggles the visibility of the toolbar. This property may be modified by the user in toolbars with `allowsUserCustomization` enabled. This property is key value observable on macOS 14.0 and higher.
+// IsVisible toggles the visibility of the toolbar. This property may be modified by the user in toolbars with `allowsUserCustomization` enabled. This property is key value observable on macOS 14.0 and higher.
 func (x *Toolbar) IsVisible() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVisible"))
 	return _r
 }
 
+// SetVisible wraps the corresponding Objective-C method.
 func (x *Toolbar) SetVisible(visible bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisible:"), visible)
 }
 
-// Whether or not the customization palette is currently running. On macOS 15.0 and above this property is key value observable.
+// CustomizationPaletteIsRunning whether or not the customization palette is currently running. On macOS 15.0 and above this property is key value observable.
 func (x *Toolbar) CustomizationPaletteIsRunning() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("customizationPaletteIsRunning"))
 	return _r
 }
 
-// The current display mode of items in the toolbar. In toolbars with `allowsDisplayModeCustomization` enabled this is a user modifiable property. This property is key value observable.
+// DisplayMode the current display mode of items in the toolbar. In toolbars with `allowsDisplayModeCustomization` enabled this is a user modifiable property. This property is key value observable.
 func (x *Toolbar) DisplayMode() ToolbarDisplayMode {
 	_r := objc.Send[ToolbarDisplayMode](objref.IDOf(x), objc.RegisterName("displayMode"))
 	return _r
 }
 
+// SetDisplayMode wraps the corresponding Objective-C method.
 func (x *Toolbar) SetDisplayMode(displayMode ToolbarDisplayMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayMode:"), displayMode)
 }
 
-// Sets the toolbar's selected item by identifier. Use this to force an item identifier to be selected. Toolbar manages selection of image items automatically. This method can be used to select identifiers of custom view items, or to force a selection change. See `-toolbarSelectableItemIdentifiers:` delegate method for more details. This property is key value observable.
+// SelectedItemIdentifier sets the toolbar's selected item by identifier. Use this to force an item identifier to be selected. Toolbar manages selection of image items automatically. This method can be used to select identifiers of custom view items, or to force a selection change. See `-toolbarSelectableItemIdentifiers:` delegate method for more details. This property is key value observable.
 func (x *Toolbar) SelectedItemIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedItemIdentifier"))
 	return obj.Wrap(_r)
 }
 
+// SetSelectedItemIdentifier wraps the corresponding Objective-C method.
 func (x *Toolbar) SetSelectedItemIdentifier(selectedItemIdentifier obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedItemIdentifier:"), objref.IDOf(selectedItemIdentifier))
 }
 
-// This flag controls whether or not users can configure the toolbar by dragging items around, and whether or not the customization palette can be used. The default value is NO, but can be changed at any time. For instance, a developer may not want users to be able to edit the toolbar while some event is being processed.
+// AllowsUserCustomization this flag controls whether or not users can configure the toolbar by dragging items around, and whether or not the customization palette can be used. The default value is NO, but can be changed at any time. For instance, a developer may not want users to be able to edit the toolbar while some event is being processed.
 func (x *Toolbar) AllowsUserCustomization() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsUserCustomization"))
 	return _r
 }
 
+// SetAllowsUserCustomization wraps the corresponding Objective-C method.
 func (x *Toolbar) SetAllowsUserCustomization(allowsUserCustomization bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUserCustomization:"), allowsUserCustomization)
 }
 
-// Whether or not the user is allowed to change display modes at run time. This functionality is independent of customizing the order of the items themselves. Only disable when the functionality or legibility of your toolbar could not be improved by another display mode. The user's selection will be persisted using the toolbar's `identifier` when `autosavesConfiguration` is enabled. The default is YES for apps linked on macOS 15.0 and above.
+// AllowsDisplayModeCustomization whether or not the user is allowed to change display modes at run time. This functionality is independent of customizing the order of the items themselves. Only disable when the functionality or legibility of your toolbar could not be improved by another display mode. The user's selection will be persisted using the toolbar's `identifier` when `autosavesConfiguration` is enabled. The default is YES for apps linked on macOS 15.0 and above.
 func (x *Toolbar) AllowsDisplayModeCustomization() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsDisplayModeCustomization"))
 	return _r
 }
 
+// SetAllowsDisplayModeCustomization wraps the corresponding Objective-C method.
 func (x *Toolbar) SetAllowsDisplayModeCustomization(allowsDisplayModeCustomization bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsDisplayModeCustomization:"), allowsDisplayModeCustomization)
 }
 
-// All toolbars with the same name will share the same display attributes, and item order. If a toolbar autosaves its configuration, the item identifier will be used as the autosave name.
+// Identifier all toolbars with the same name will share the same display attributes, and item order. If a toolbar autosaves its configuration, the item identifier will be used as the autosave name.
 func (x *Toolbar) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
-// Allows you to access all current items in the toolbar.
+// Items allows you to access all current items in the toolbar.
 //
 // Items returns the collection as a Go slice.
 func (x *Toolbar) Items() []*ToolbarItem {
@@ -289,7 +270,7 @@ func (x *Toolbar) Items() []*ToolbarItem {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ToolbarItem { return ToolbarItemFromID(_id) })
 }
 
-// Allows you to access the current visible items (non clipped).
+// VisibleItems allows you to access the current visible items (non clipped).
 //
 // VisibleItems returns the collection as a Go slice.
 func (x *Toolbar) VisibleItems() []*ToolbarItem {
@@ -297,7 +278,7 @@ func (x *Toolbar) VisibleItems() []*ToolbarItem {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ToolbarItem { return ToolbarItemFromID(_id) })
 }
 
-// An array of itemIdentifiers that represent the current items in the toolbar. Setting this property will set the current items in the toolbar by diffing against items that already exist. Use this with great caution if `allowsUserCustomization` is enabled as it will override any customizations the user has made. This property is key value observable.
+// ItemIdentifiers an array of itemIdentifiers that represent the current items in the toolbar. Setting this property will set the current items in the toolbar by diffing against items that already exist. Use this with great caution if `allowsUserCustomization` is enabled as it will override any customizations the user has made. This property is key value observable.
 //
 // ItemIdentifiers returns the collection as a Go slice.
 func (x *Toolbar) ItemIdentifiers() []obj.Object {
@@ -305,99 +286,116 @@ func (x *Toolbar) ItemIdentifiers() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetItemIdentifiers wraps the corresponding Objective-C method.
 func (x *Toolbar) SetItemIdentifiers(itemIdentifiers []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItemIdentifiers:"), purego.SliceToNSArray(itemIdentifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Items with centered identifiers will be centered together in the Toolbar relative to the window assuming space allows. The order of items is initially defined by the default set of identifiers, but may be customized by the user. Centered items may not be moved outside of the center set of items by the user. This property is archived.
+// CenteredItemIdentifiers items with centered identifiers will be centered together in the Toolbar relative to the window assuming space allows. The order of items is initially defined by the default set of identifiers, but may be customized by the user. Centered items may not be moved outside of the center set of items by the user. This property is archived.
 func (x *Toolbar) CenteredItemIdentifiers() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("centeredItemIdentifiers"))
 	return obj.Wrap(_r)
 }
 
+// SetCenteredItemIdentifiers wraps the corresponding Objective-C method.
 func (x *Toolbar) SetCenteredItemIdentifiers(centeredItemIdentifiers obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCenteredItemIdentifiers:"), objref.IDOf(centeredItemIdentifiers))
 }
 
-// If `autosavesConfiguration` is YES, the toolbar will automatically write changes the user makes to user defaults. Customizable toolbars will want to set this flag to YES. Setting this to NO means changes in configuration are not written automatically, however you can use the `configurationDictionary` method to do it yourself. Default is NO.
+// AutosavesConfiguration if `autosavesConfiguration` is YES, the toolbar will automatically write changes the user makes to user defaults. Customizable toolbars will want to set this flag to YES. Setting this to NO means changes in configuration are not written automatically, however you can use the `configurationDictionary` method to do it yourself. Default is NO.
 func (x *Toolbar) AutosavesConfiguration() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autosavesConfiguration"))
 	return _r
 }
 
+// SetAutosavesConfiguration wraps the corresponding Objective-C method.
 func (x *Toolbar) SetAutosavesConfiguration(autosavesConfiguration bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutosavesConfiguration:"), autosavesConfiguration)
 }
 
-// When YES, the receiver can dynamically create toolbar items for Action extensions in the toolbar configuration panel. To be included, an extension needs to declare NSExtensionServiceAllowsToolbarItem=YES in its Info.plist. The default value is NO.
+// AllowsExtensionItems when YES, the receiver can dynamically create toolbar items for Action extensions in the toolbar configuration panel. To be included, an extension needs to declare NSExtensionServiceAllowsToolbarItem=YES in its Info.plist. The default value is NO.
 func (x *Toolbar) AllowsExtensionItems() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsExtensionItems"))
 	return _r
 }
 
+// SetAllowsExtensionItems wraps the corresponding Objective-C method.
 func (x *Toolbar) SetAllowsExtensionItems(allowsExtensionItems bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExtensionItems:"), allowsExtensionItems)
 }
 
-// Specifies the new configuration details for the toolbar.
+// SetConfigurationFromDictionary specifies the new configuration details for the toolbar.
 func (x *Toolbar) SetConfigurationFromDictionary(configDict obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfigurationFromDictionary:"), objref.IDOf(configDict))
 }
 
+// SizeMode wraps the corresponding Objective-C method.
 func (x *Toolbar) SizeMode() ToolbarSizeMode {
 	_r := objc.Send[ToolbarSizeMode](objref.IDOf(x), objc.RegisterName("sizeMode"))
 	return _r
 }
 
+// SetSizeMode wraps the corresponding Objective-C method.
 func (x *Toolbar) SetSizeMode(sizeMode ToolbarSizeMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSizeMode:"), sizeMode)
 }
 
+// CenteredItemIdentifier wraps the corresponding Objective-C method.
 func (x *Toolbar) CenteredItemIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("centeredItemIdentifier"))
 	return obj.Wrap(_r)
 }
 
+// SetCenteredItemIdentifier wraps the corresponding Objective-C method.
 func (x *Toolbar) SetCenteredItemIdentifier(centeredItemIdentifier obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCenteredItemIdentifier:"), objref.IDOf(centeredItemIdentifier))
 }
 
+// FullScreenAccessoryView wraps the corresponding Objective-C method.
 func (x *Toolbar) FullScreenAccessoryView() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullScreenAccessoryView"))
 	return ViewFromID(_r)
 }
 
+// SetFullScreenAccessoryView wraps the corresponding Objective-C method.
 func (x *Toolbar) SetFullScreenAccessoryView(fullScreenAccessoryView *View) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFullScreenAccessoryView:"), objref.IDOf(fullScreenAccessoryView))
 }
 
+// FullScreenAccessoryViewMinHeight wraps the corresponding Objective-C method.
 func (x *Toolbar) FullScreenAccessoryViewMinHeight() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("fullScreenAccessoryViewMinHeight"))
 	return _r
 }
 
+// SetFullScreenAccessoryViewMinHeight wraps the corresponding Objective-C method.
 func (x *Toolbar) SetFullScreenAccessoryViewMinHeight(fullScreenAccessoryViewMinHeight float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFullScreenAccessoryViewMinHeight:"), fullScreenAccessoryViewMinHeight)
 }
 
+// FullScreenAccessoryViewMaxHeight wraps the corresponding Objective-C method.
 func (x *Toolbar) FullScreenAccessoryViewMaxHeight() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("fullScreenAccessoryViewMaxHeight"))
 	return _r
 }
 
+// SetFullScreenAccessoryViewMaxHeight wraps the corresponding Objective-C method.
 func (x *Toolbar) SetFullScreenAccessoryViewMaxHeight(fullScreenAccessoryViewMaxHeight float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFullScreenAccessoryViewMaxHeight:"), fullScreenAccessoryViewMaxHeight)
 }
 
+// ShowsBaselineSeparator wraps the corresponding Objective-C method.
 func (x *Toolbar) ShowsBaselineSeparator() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsBaselineSeparator"))
 	return _r
 }
 
+// SetShowsBaselineSeparator wraps the corresponding Objective-C method.
 func (x *Toolbar) SetShowsBaselineSeparator(showsBaselineSeparator bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsBaselineSeparator:"), showsBaselineSeparator)
 }
 
+// ConfigurationDictionary wraps the corresponding Objective-C method.
 func (x *Toolbar) ConfigurationDictionary() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configurationDictionary"))
 	return obj.Wrap(_r)

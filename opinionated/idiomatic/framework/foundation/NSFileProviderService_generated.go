@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A service that provides a custom communication channel between your app and a File Provider extension.
-//
 // FileProviderService is an idiomatic wrapper over the Objective-C class NSFileProviderService.
+//
+// A service that provides a custom communication channel between your app and a File Provider extension.
 type FileProviderService struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func FileProviderServiceFromID(id objc.ID) *FileProviderService {
 	if id == 0 {
 		return nil
 	}
-	x := &FileProviderService{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FileProviderService{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func fileProviderServiceAdopt(id objc.ID) *FileProviderService {
 	if id == 0 {
 		return nil
 	}
-	x := &FileProviderService{Handle: objref.Wrap(id)}
+	x := &FileProviderService{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,22 +62,28 @@ func (x *FileProviderService) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FileProviderService) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFileProviderService creates a new FileProviderService.
 func NewFileProviderService() *FileProviderService {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSFileProviderService")), objc.RegisterName("new"))
 	return fileProviderServiceAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *FileProviderService) WithScriptingProperties(scriptingProperties obj.Object) *FileProviderService {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Asynchronously returns the service’s connection object.
+// GetFileProviderConnection asynchronously returns the service’s connection object.
 //
 // GetFileProviderConnection blocks until the operation completes or ctx is cancelled.
-func (x *FileProviderService) GetFileProviderConnection(ctx context.Context) (*XPCConnection, error) {
+func (x *FileProviderService) GetFileProviderConnection(ctx context.Context) (result *XPCConnection, err error) {
 	type _result struct {
 		val *XPCConnection
 		err error
@@ -97,6 +105,7 @@ func (x *FileProviderService) GetFileProviderConnection(ctx context.Context) (*X
 	}
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *FileProviderService) Name() *String {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	return StringFromID(_r)

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract base class for types that represent flows of network data.
-//
 // NEFilterFlow is an idiomatic wrapper over the Objective-C class NEFilterFlow.
+//
+// NEFilterFlow is an abstract base — you do not construct it directly. Construct one of [NEFilterSocketFlow] and pass it where a NEFilterFlow is accepted.
+//
+// The abstract base class for types that represent flows of network data.
 type NEFilterFlow struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func NEFilterFlowFromID(id objc.ID) *NEFilterFlow {
 	if id == 0 {
 		return nil
 	}
-	x := &NEFilterFlow{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEFilterFlow{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func nEFilterFlowAdopt(id objc.ID) *NEFilterFlow {
 	if id == 0 {
 		return nil
 	}
-	x := &NEFilterFlow{Handle: objref.Wrap(id)}
+	x := &NEFilterFlow{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +62,37 @@ func (x *NEFilterFlow) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewNEFilterFlow creates a new NEFilterFlow.
-func NewNEFilterFlow() *NEFilterFlow {
-	_id := objc.Send[objc.ID](objc.ID(_class("NEFilterFlow")), objc.RegisterName("new"))
-	return nEFilterFlowAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEFilterFlow) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The flow's HTTP request URL. Will be nil if the flow did not originate from WebKit.
+// URL the flow's HTTP request URL. Will be nil if the flow did not originate from WebKit.
 func (x *NEFilterFlow) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// Initial direction of the flow (outgoing or incoming flow)
+// Direction initial direction of the flow (outgoing or incoming flow)
 func (x *NEFilterFlow) Direction() NETrafficDirection {
 	_r := objc.Send[NETrafficDirection](objref.IDOf(x), objc.RegisterName("direction"))
 	return _r
 }
 
-// Audit token of the source application of the flow.
+// SourceAppAuditToken audit token of the source application of the flow.
 func (x *NEFilterFlow) SourceAppAuditToken() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceAppAuditToken"))
 	return obj.Wrap(_r)
 }
 
-// The audit token of the process that created the flow. In cases where the connection was created by a system process on behalf of the source application, sourceProcessAuditToken will be different from sourceAppAuditToken and will contain the audit token of the system process. In cases where the source application directly created the connection sourceAppAuditToken and sourceProcessAuditToken will be identical.
+// SourceProcessAuditToken the audit token of the process that created the flow. In cases where the connection was created by a system process on behalf of the source application, sourceProcessAuditToken will be different from sourceAppAuditToken and will contain the audit token of the system process. In cases where the source application directly created the connection sourceAppAuditToken and sourceProcessAuditToken will be identical.
 func (x *NEFilterFlow) SourceProcessAuditToken() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceProcessAuditToken"))
 	return obj.Wrap(_r)
 }
 
-// The unique identifier of the flow.
+// Identifier the unique identifier of the flow.
 func (x *NEFilterFlow) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
@@ -105,3 +109,10 @@ type NEFilterFlowable interface {
 }
 
 var _ NEFilterFlowable = (*NEFilterFlow)(nil)
+
+// isNEFilterFlow marks NEFilterFlow — and, by embedding promotion, its
+// subclasses — as a member of the NEFilterFlow hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NEFilterFlow) isNEFilterFlow() {}
+
+var _ NEFilterFlowProvider = (*NEFilterFlow)(nil)

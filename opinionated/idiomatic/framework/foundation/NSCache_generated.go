@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mutable collection you use to temporarily store transient key-value pairs that are subject to eviction when resources are low.
-//
 // Cache is an idiomatic wrapper over the Objective-C class NSCache.
+//
+// A mutable collection you use to temporarily store transient key-value pairs that are subject to eviction when resources are low.
 type Cache struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CacheFromID(id objc.ID) *Cache {
 	if id == 0 {
 		return nil
 	}
-	x := &Cache{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Cache{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func cacheAdopt(id objc.ID) *Cache {
 	if id == 0 {
 		return nil
 	}
-	x := &Cache{Handle: objref.Wrap(id)}
+	x := &Cache{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,76 +60,75 @@ func (x *Cache) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Cache) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCache creates a new Cache.
 func NewCache() *Cache {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSCache")), objc.RegisterName("new"))
 	return cacheAdopt(_id)
 }
 
-// The name of the cache.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the name of the cache.
 func (x *Cache) WithName(name StringProvider) *Cache {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 	return x
 }
 
-// The maximum total cost that the cache can hold before it starts evicting objects.
-//
-// WithTotalCostLimit sets totalCostLimit and returns the receiver so calls can be chained.
+// WithTotalCostLimit the maximum total cost that the cache can hold before it starts evicting objects.
 func (x *Cache) WithTotalCostLimit(totalCostLimit int) *Cache {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTotalCostLimit:"), totalCostLimit)
 	return x
 }
 
-// The maximum number of objects the cache should hold.
-//
-// WithCountLimit sets countLimit and returns the receiver so calls can be chained.
+// WithCountLimit the maximum number of objects the cache should hold.
 func (x *Cache) WithCountLimit(countLimit int) *Cache {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountLimit:"), countLimit)
 	return x
 }
 
-// Whether the cache will automatically evict discardable-content objects whose content has been discarded.
-//
-// WithEvictsObjectsWithDiscardedContent sets evictsObjectsWithDiscardedContent and returns the receiver so calls can be chained.
+// WithEvictsObjectsWithDiscardedContent whether the cache will automatically evict discardable-content objects whose content has been discarded.
 func (x *Cache) WithEvictsObjectsWithDiscardedContent(evictsObjectsWithDiscardedContent bool) *Cache {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEvictsObjectsWithDiscardedContent:"), evictsObjectsWithDiscardedContent)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Cache) WithScriptingProperties(scriptingProperties obj.Object) *Cache {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Returns the value associated with a given key.
+// ObjectForKey returns the value associated with a given key.
 func (x *Cache) ObjectForKey(key obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKey:"), objref.IDOf(key))
 	return obj.Wrap(_r)
 }
 
-// Sets the value of the specified key in the cache.
+// SetObjectForKey sets the value of the specified key in the cache.
 func (x *Cache) SetObjectForKey(obj_ obj.Object, key obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:forKey:"), objref.IDOf(obj_), objref.IDOf(key))
 }
 
-// Sets the value of the specified key in the cache, and associates the key-value pair with the specified cost.
+// SetObjectForKeyCost sets the value of the specified key in the cache, and associates the key-value pair with the specified cost.
 func (x *Cache) SetObjectForKeyCost(obj_ obj.Object, key obj.Object, g int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:forKey:cost:"), objref.IDOf(obj_), objref.IDOf(key), g)
 }
 
-// Removes the value of the specified key in the cache.
+// RemoveObjectForKey removes the value of the specified key in the cache.
 func (x *Cache) RemoveObjectForKey(key obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectForKey:"), objref.IDOf(key))
 }
 
-// Empties the cache.
+// RemoveAllObjects empties the cache.
 func (x *Cache) RemoveAllObjects() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllObjects"))
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *Cache) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -136,33 +137,40 @@ func (x *Cache) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *Cache) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
+// TotalCostLimit wraps the corresponding Objective-C method.
 func (x *Cache) TotalCostLimit() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("totalCostLimit"))
 	return _r
 }
 
+// SetTotalCostLimit wraps the corresponding Objective-C method.
 func (x *Cache) SetTotalCostLimit(totalCostLimit int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTotalCostLimit:"), totalCostLimit)
 }
 
+// CountLimit wraps the corresponding Objective-C method.
 func (x *Cache) CountLimit() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("countLimit"))
 	return _r
 }
 
+// SetCountLimit wraps the corresponding Objective-C method.
 func (x *Cache) SetCountLimit(countLimit int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountLimit:"), countLimit)
 }
 
+// EvictsObjectsWithDiscardedContent wraps the corresponding Objective-C method.
 func (x *Cache) EvictsObjectsWithDiscardedContent() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("evictsObjectsWithDiscardedContent"))
 	return _r
 }
 
+// SetEvictsObjectsWithDiscardedContent wraps the corresponding Objective-C method.
 func (x *Cache) SetEvictsObjectsWithDiscardedContent(evictsObjectsWithDiscardedContent bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEvictsObjectsWithDiscardedContent:"), evictsObjectsWithDiscardedContent)
 }

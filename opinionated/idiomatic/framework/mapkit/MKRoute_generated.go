@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A single route between a requested start and end point.
-//
 // Route is an idiomatic wrapper over the Objective-C class MKRoute.
+//
+// A single route between a requested start and end point.
 type Route struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RouteFromID(id objc.ID) *Route {
 	if id == 0 {
 		return nil
 	}
-	x := &Route{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Route{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func routeAdopt(id objc.ID) *Route {
 	if id == 0 {
 		return nil
 	}
-	x := &Route{Handle: objref.Wrap(id)}
+	x := &Route{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *Route) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Route) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRoute creates a new Route.
 func NewRoute() *Route {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKRoute")), objc.RegisterName("new"))
 	return routeAdopt(_id)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *Route) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -72,38 +81,47 @@ func (x *Route) Name() string {
 	return purego.GoString(_r)
 }
 
+// AdvisoryNotices wraps the corresponding Objective-C method.
+//
 // AdvisoryNotices returns the collection as a Go slice.
 func (x *Route) AdvisoryNotices() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("advisoryNotices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// ExpectedTravelTime wraps the corresponding Objective-C method.
 func (x *Route) ExpectedTravelTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("expectedTravelTime"))
 	return _r
 }
 
+// TransportType wraps the corresponding Objective-C method.
 func (x *Route) TransportType() DirectionsTransportType {
 	_r := objc.Send[DirectionsTransportType](objref.IDOf(x), objc.RegisterName("transportType"))
 	return _r
 }
 
+// Polyline wraps the corresponding Objective-C method.
 func (x *Route) Polyline() *Polyline {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("polyline"))
 	return PolylineFromID(_r)
 }
 
+// Steps wraps the corresponding Objective-C method.
+//
 // Steps returns the collection as a Go slice.
 func (x *Route) Steps() []*RouteStep {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("steps"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RouteStep { return RouteStepFromID(_id) })
 }
 
+// HasTolls wraps the corresponding Objective-C method.
 func (x *Route) HasTolls() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasTolls"))
 	return _r
 }
 
+// HasHighways wraps the corresponding Objective-C method.
 func (x *Route) HasHighways() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasHighways"))
 	return _r

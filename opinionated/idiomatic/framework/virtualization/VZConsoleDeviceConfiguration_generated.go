@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for a console device configuration.
-//
 // ConsoleDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZConsoleDeviceConfiguration.
+//
+// ConsoleDeviceConfiguration is an abstract base — you do not construct it directly. Construct one of [VirtioConsoleDeviceConfiguration] and pass it where a ConsoleDeviceConfiguration is accepted.
+//
+// The base class for a console device configuration.
 type ConsoleDeviceConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ConsoleDeviceConfigurationFromID(id objc.ID) *ConsoleDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &ConsoleDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ConsoleDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func consoleDeviceConfigurationAdopt(id objc.ID) *ConsoleDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &ConsoleDeviceConfiguration{Handle: objref.Wrap(id)}
+	x := &ConsoleDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *ConsoleDeviceConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewConsoleDeviceConfiguration creates a new ConsoleDeviceConfiguration.
-func NewConsoleDeviceConfiguration() *ConsoleDeviceConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZConsoleDeviceConfiguration")), objc.RegisterName("new"))
-	return consoleDeviceConfigurationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ConsoleDeviceConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // ConsoleDeviceConfigurationable is the interface implemented by [ConsoleDeviceConfiguration], for mocking and DI.
@@ -70,3 +74,10 @@ type ConsoleDeviceConfigurationable interface {
 }
 
 var _ ConsoleDeviceConfigurationable = (*ConsoleDeviceConfiguration)(nil)
+
+// isConsoleDeviceConfiguration marks ConsoleDeviceConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the ConsoleDeviceConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ConsoleDeviceConfiguration) isConsoleDeviceConfiguration() {}
+
+var _ ConsoleDeviceConfigurationProvider = (*ConsoleDeviceConfiguration)(nil)

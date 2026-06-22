@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides playback information for an asset.
-//
 // AssetPlaybackAssistant is an idiomatic wrapper over the Objective-C class AVAssetPlaybackAssistant.
+//
+// An object that provides playback information for an asset.
 type AssetPlaybackAssistant struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func AssetPlaybackAssistantFromID(id objc.ID) *AssetPlaybackAssistant {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetPlaybackAssistant{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetPlaybackAssistant{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func assetPlaybackAssistantAdopt(id objc.ID) *AssetPlaybackAssistant {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetPlaybackAssistant{Handle: objref.Wrap(id)}
+	x := &AssetPlaybackAssistant{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,16 +61,22 @@ func (x *AssetPlaybackAssistant) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetPlaybackAssistant) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetPlaybackAssistant creates a new AssetPlaybackAssistant.
 func NewAssetPlaybackAssistant() *AssetPlaybackAssistant {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetPlaybackAssistant")), objc.RegisterName("new"))
 	return assetPlaybackAssistantAdopt(_id)
 }
 
-// Loads playback configuration options for an asset.
+// LoadPlaybackConfigurationOptions loads playback configuration options for an asset.
 //
 // LoadPlaybackConfigurationOptions blocks until the operation completes or ctx is cancelled.
-func (x *AssetPlaybackAssistant) LoadPlaybackConfigurationOptions(ctx context.Context) (obj.Object, error) {
+func (x *AssetPlaybackAssistant) LoadPlaybackConfigurationOptions(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error

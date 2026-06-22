@@ -33,6 +33,8 @@ const (
 	ATTErrorInsufficientResources         ATTError = 17
 )
 
+// String returns the ATTError constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ATTError) String() string {
 	switch e {
 	case ATTErrorSuccess:
@@ -91,6 +93,8 @@ const (
 	AttributePermissionsWriteEncryptionRequired AttributePermissions = 8
 )
 
+// String returns the AttributePermissions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AttributePermissions) String() string {
 	var parts []string
 	if e&AttributePermissionsReadable != 0 {
@@ -138,6 +142,8 @@ const (
 	CharacteristicPropertyIndicateEncryptionRequired CharacteristicProperties = 512
 )
 
+// String returns the CharacteristicProperties constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CharacteristicProperties) String() string {
 	var parts []string
 	if e&CharacteristicPropertyBroadcast != 0 {
@@ -186,6 +192,8 @@ const (
 	CharacteristicWriteWithoutResponse CharacteristicWriteType = 1
 )
 
+// String returns the CharacteristicWriteType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CharacteristicWriteType) String() string {
 	switch e {
 	case CharacteristicWriteWithResponse:
@@ -211,6 +219,8 @@ const (
 	ManagerAuthorizationAllowedAlways ManagerAuthorization = 3
 )
 
+// String returns the ManagerAuthorization constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ManagerAuthorization) String() string {
 	switch e {
 	case ManagerAuthorizationNotDetermined:
@@ -244,6 +254,8 @@ const (
 	ManagerStatePoweredOn ManagerState = 5
 )
 
+// String returns the ManagerState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ManagerState) String() string {
 	switch e {
 	case ManagerStateUnknown:
@@ -279,6 +291,8 @@ const (
 	PeripheralManagerAuthorizationStatusAuthorized PeripheralManagerAuthorizationStatus = 3
 )
 
+// String returns the PeripheralManagerAuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PeripheralManagerAuthorizationStatus) String() string {
 	switch e {
 	case PeripheralManagerAuthorizationStatusNotDetermined:
@@ -306,6 +320,8 @@ const (
 	PeripheralManagerConnectionLatencyHigh PeripheralManagerConnectionLatency = 2
 )
 
+// String returns the PeripheralManagerConnectionLatency constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PeripheralManagerConnectionLatency) String() string {
 	switch e {
 	case PeripheralManagerConnectionLatencyLow:
@@ -333,6 +349,8 @@ const (
 	PeripheralStateDisconnecting PeripheralState = 3
 )
 
+// String returns the PeripheralState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PeripheralState) String() string {
 	switch e {
 	case PeripheralStateDisconnected:

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cryptographic algorithms used by token keys.
-//
 // TokenKeyAlgorithm is an idiomatic wrapper over the Objective-C class TKTokenKeyAlgorithm.
+//
+// Cryptographic algorithms used by token keys.
 type TokenKeyAlgorithm struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TokenKeyAlgorithmFromID(id objc.ID) *TokenKeyAlgorithm {
 	if id == 0 {
 		return nil
 	}
-	x := &TokenKeyAlgorithm{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TokenKeyAlgorithm{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func tokenKeyAlgorithmAdopt(id objc.ID) *TokenKeyAlgorithm {
 	if id == 0 {
 		return nil
 	}
-	x := &TokenKeyAlgorithm{Handle: objref.Wrap(id)}
+	x := &TokenKeyAlgorithm{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *TokenKeyAlgorithm) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *TokenKeyAlgorithm) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TokenKeyAlgorithm) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewTokenKeyAlgorithm creates a new TokenKeyAlgorithm.

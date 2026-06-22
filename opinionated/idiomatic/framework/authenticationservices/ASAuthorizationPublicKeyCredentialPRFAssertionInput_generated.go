@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that represents input for the web authentication PRF extension in passkey assertion requests.
-//
 // AuthorizationPublicKeyCredentialPRFAssertionInput is an idiomatic wrapper over the Objective-C class ASAuthorizationPublicKeyCredentialPRFAssertionInput.
+//
+// A type that represents input for the web authentication PRF extension in passkey assertion requests.
 type AuthorizationPublicKeyCredentialPRFAssertionInput struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationPublicKeyCredentialPRFAssertionInputFromID(id objc.ID) *Author
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPublicKeyCredentialPRFAssertionInput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationPublicKeyCredentialPRFAssertionInput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationPublicKeyCredentialPRFAssertionInputAdopt(id objc.ID) *Authori
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPublicKeyCredentialPRFAssertionInput{Handle: objref.Wrap(id)}
+	x := &AuthorizationPublicKeyCredentialPRFAssertionInput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +60,12 @@ func (x *AuthorizationPublicKeyCredentialPRFAssertionInput) IsKind(className str
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationPublicKeyCredentialPRFAssertionInput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAuthorizationPublicKeyCredentialPRFAssertionInputWithInputValuesPerCredentialInputValues creates a new AuthorizationPublicKeyCredentialPRFAssertionInput.
 func NewAuthorizationPublicKeyCredentialPRFAssertionInputWithInputValuesPerCredentialInputValues(inputValues *AuthorizationPublicKeyCredentialPRFAssertionInputValues, perCredentialInputValues obj.Object) *AuthorizationPublicKeyCredentialPRFAssertionInput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPublicKeyCredentialPRFAssertionInput")), objc.RegisterName("alloc"))
@@ -65,11 +73,13 @@ func NewAuthorizationPublicKeyCredentialPRFAssertionInputWithInputValuesPerCrede
 	return authorizationPublicKeyCredentialPRFAssertionInputAdopt(_id)
 }
 
+// InputValues wraps the corresponding Objective-C method.
 func (x *AuthorizationPublicKeyCredentialPRFAssertionInput) InputValues() *AuthorizationPublicKeyCredentialPRFAssertionInputValues {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputValues"))
 	return AuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID(_r)
 }
 
+// PerCredentialInputValues wraps the corresponding Objective-C method.
 func (x *AuthorizationPublicKeyCredentialPRFAssertionInput) PerCredentialInputValues() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("perCredentialInputValues"))
 	return obj.Wrap(_r)

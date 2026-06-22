@@ -23,7 +23,8 @@ func TokenWatcherTokenInfoFromID(id objc.ID) *TokenWatcherTokenInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &TokenWatcherTokenInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TokenWatcherTokenInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func tokenWatcherTokenInfoAdopt(id objc.ID) *TokenWatcherTokenInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &TokenWatcherTokenInfo{Handle: objref.Wrap(id)}
+	x := &TokenWatcherTokenInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,13 +58,19 @@ func (x *TokenWatcherTokenInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TokenWatcherTokenInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTokenWatcherTokenInfo creates a new TokenWatcherTokenInfo.
 func NewTokenWatcherTokenInfo() *TokenWatcherTokenInfo {
 	_id := objc.Send[objc.ID](objc.ID(_class("TKTokenWatcherTokenInfo")), objc.RegisterName("new"))
 	return tokenWatcherTokenInfoAdopt(_id)
 }
 
-// TokenID
+// TokenID tokenID
 func (x *TokenWatcherTokenInfo) TokenID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tokenID"))
 	if _r == 0 {
@@ -71,7 +79,7 @@ func (x *TokenWatcherTokenInfo) TokenID() string {
 	return purego.GoString(_r)
 }
 
-// The slot name (if available)
+// SlotName the slot name (if available)
 func (x *TokenWatcherTokenInfo) SlotName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("slotName"))
 	if _r == 0 {
@@ -80,7 +88,7 @@ func (x *TokenWatcherTokenInfo) SlotName() string {
 	return purego.GoString(_r)
 }
 
-// Localized driver name (if available)
+// DriverName localized driver name (if available)
 func (x *TokenWatcherTokenInfo) DriverName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("driverName"))
 	if _r == 0 {

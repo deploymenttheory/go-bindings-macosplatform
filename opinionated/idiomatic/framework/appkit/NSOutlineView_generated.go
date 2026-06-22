@@ -6,17 +6,20 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view that uses a row-and-column format to display hierarchical data like directories and files that can be expanded and collapsed.
-//
 // OutlineView is an idiomatic wrapper over the Objective-C class NSOutlineView.
+//
+// It embeds [TableView], promoting that type's methods.
+//
+// A view that uses a row-and-column format to display hierarchical data like directories and files that can be expanded and collapsed.
 type OutlineView struct {
-	objref.Handle
+	TableView
 }
 
 // OutlineViewFromID adopts an existing Objective-C object as a OutlineView
@@ -25,7 +28,8 @@ func OutlineViewFromID(id objc.ID) *OutlineView {
 	if id == 0 {
 		return nil
 	}
-	x := &OutlineView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OutlineView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func outlineViewAdopt(id objc.ID) *OutlineView {
 	if id == 0 {
 		return nil
 	}
-	x := &OutlineView{Handle: objref.Wrap(id)}
+	x := &OutlineView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *OutlineView) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *OutlineView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *OutlineView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewOutlineView creates a new OutlineView.
@@ -64,905 +54,831 @@ func NewOutlineView() *OutlineView {
 	return outlineViewAdopt(_id)
 }
 
-// The table column in which hierarchical data is displayed.
-//
-// WithOutlineTableColumn sets outlineTableColumn and returns the receiver so calls can be chained.
+// WithOutlineTableColumn the table column in which hierarchical data is displayed.
 func (x *OutlineView) WithOutlineTableColumn(outlineTableColumn *TableColumn) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutlineTableColumn:"), objref.IDOf(outlineTableColumn))
 	return x
 }
 
-// The per-level indentation, measured in points.
-//
-// WithIndentationPerLevel sets indentationPerLevel and returns the receiver so calls can be chained.
+// WithIndentationPerLevel the per-level indentation, measured in points.
 func (x *OutlineView) WithIndentationPerLevel(indentationPerLevel float64) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndentationPerLevel:"), indentationPerLevel)
 	return x
 }
 
-// A Boolean value indicating whether the indentation marker symbol displayed in the outline column should be indented along with the cell contents.
-//
-// WithIndentationMarkerFollowsCell sets indentationMarkerFollowsCell and returns the receiver so calls can be chained.
+// WithIndentationMarkerFollowsCell a Boolean value indicating whether the indentation marker symbol displayed in the outline column should be indented along with the cell contents.
 func (x *OutlineView) WithIndentationMarkerFollowsCell(indentationMarkerFollowsCell bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndentationMarkerFollowsCell:"), indentationMarkerFollowsCell)
 	return x
 }
 
-// A Boolean value that indicates whether the outline view resizes its outline column when the user expands or collapses items.
-//
-// WithAutoresizesOutlineColumn sets autoresizesOutlineColumn and returns the receiver so calls can be chained.
+// WithAutoresizesOutlineColumn a Boolean value that indicates whether the outline view resizes its outline column when the user expands or collapses items.
 func (x *OutlineView) WithAutoresizesOutlineColumn(autoresizesOutlineColumn bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesOutlineColumn:"), autoresizesOutlineColumn)
 	return x
 }
 
-// A Boolean value indicating whether the expanded items are automatically saved across launches of the app.
-//
-// WithAutosaveExpandedItems sets autosaveExpandedItems and returns the receiver so calls can be chained.
+// WithAutosaveExpandedItems a Boolean value indicating whether the expanded items are automatically saved across launches of the app.
 func (x *OutlineView) WithAutosaveExpandedItems(autosaveExpandedItems bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutosaveExpandedItems:"), autosaveExpandedItems)
 	return x
 }
 
-// A Boolean value that indicates whether the outline view retains and releases the objects returned from its data source.
-//
-// WithStronglyReferencesItems sets stronglyReferencesItems and returns the receiver so calls can be chained.
+// WithStronglyReferencesItems a Boolean value that indicates whether the outline view retains and releases the objects returned from its data source.
 func (x *OutlineView) WithStronglyReferencesItems(stronglyReferencesItems bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStronglyReferencesItems:"), stronglyReferencesItems)
 	return x
 }
 
-// The view object used to draw headers over columns.
-//
-// WithHeaderView sets headerView and returns the receiver so calls can be chained.
+// WithHeaderView the view object used to draw headers over columns.
 func (x *OutlineView) WithHeaderView(headerView *TableHeaderView) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaderView:"), objref.IDOf(headerView))
 	return x
 }
 
-// The view used to draw the area to the right of the column headers and above the vertical scroller of the enclosing scroll view.
-//
-// WithCornerView sets cornerView and returns the receiver so calls can be chained.
+// WithCornerView the view used to draw the area to the right of the column headers and above the vertical scroller of the enclosing scroll view.
 func (x *OutlineView) WithCornerView(cornerView ViewProvider) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerView:"), objref.IDOf(cornerView))
 	return x
 }
 
-// A Boolean value indicating whether the table view allows the user to rearrange columns by dragging their headers.
-//
-// WithAllowsColumnReordering sets allowsColumnReordering and returns the receiver so calls can be chained.
+// WithAllowsColumnReordering a Boolean value indicating whether the table view allows the user to rearrange columns by dragging their headers.
 func (x *OutlineView) WithAllowsColumnReordering(allowsColumnReordering bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsColumnReordering:"), allowsColumnReordering)
 	return x
 }
 
-// A Boolean value indicating whether the table view allows the user to resize columns by dragging between their headers.
-//
-// WithAllowsColumnResizing sets allowsColumnResizing and returns the receiver so calls can be chained.
+// WithAllowsColumnResizing a Boolean value indicating whether the table view allows the user to resize columns by dragging between their headers.
 func (x *OutlineView) WithAllowsColumnResizing(allowsColumnResizing bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsColumnResizing:"), allowsColumnResizing)
 	return x
 }
 
-// The table view’s column autoresizing style.
-//
-// WithColumnAutoresizingStyle sets columnAutoresizingStyle and returns the receiver so calls can be chained.
+// WithColumnAutoresizingStyle the table view’s column autoresizing style.
 func (x *OutlineView) WithColumnAutoresizingStyle(columnAutoresizingStyle TableViewColumnAutoresizingStyle) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColumnAutoresizingStyle:"), columnAutoresizingStyle)
 	return x
 }
 
-// The grid lines drawn by the table view.
-//
-// WithGridStyleMask sets gridStyleMask and returns the receiver so calls can be chained.
+// WithGridStyleMask the grid lines drawn by the table view.
 func (x *OutlineView) WithGridStyleMask(gridStyleMask TableViewGridLineStyle) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGridStyleMask:"), gridStyleMask)
 	return x
 }
 
-// A Boolean value indicating whether the table view uses alternating row colors for its background.
-//
-// WithUsesAlternatingRowBackgroundColors sets usesAlternatingRowBackgroundColors and returns the receiver so calls can be chained.
+// WithIntercellSpacing the horizontal and vertical spacing between cells.
+func (x *OutlineView) WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *OutlineView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntercellSpacing:"), intercellSpacing)
+	return x
+}
+
+// WithUsesAlternatingRowBackgroundColors a Boolean value indicating whether the table view uses alternating row colors for its background.
 func (x *OutlineView) WithUsesAlternatingRowBackgroundColors(usesAlternatingRowBackgroundColors bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesAlternatingRowBackgroundColors:"), usesAlternatingRowBackgroundColors)
 	return x
 }
 
-// The color used to draw the background of the table.
-//
-// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+// WithBackgroundColor the color used to draw the background of the table.
 func (x *OutlineView) WithBackgroundColor(backgroundColor *Color) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// The color used to draw grid lines.
-//
-// WithGridColor sets gridColor and returns the receiver so calls can be chained.
+// WithGridColor the color used to draw grid lines.
 func (x *OutlineView) WithGridColor(gridColor *Color) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGridColor:"), objref.IDOf(gridColor))
 	return x
 }
 
-// The row size style (small, medium, large, or custom) used by the table view.
-//
-// WithRowSizeStyle sets rowSizeStyle and returns the receiver so calls can be chained.
+// WithRowSizeStyle the row size style (small, medium, large, or custom) used by the table view.
 func (x *OutlineView) WithRowSizeStyle(rowSizeStyle TableViewRowSizeStyle) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowSizeStyle:"), rowSizeStyle)
 	return x
 }
 
-// The height of each row in the table.
-//
-// WithRowHeight sets rowHeight and returns the receiver so calls can be chained.
+// WithRowHeight the height of each row in the table.
 func (x *OutlineView) WithRowHeight(rowHeight float64) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowHeight:"), rowHeight)
 	return x
 }
 
-// The table view’s sort descriptors.
-//
-// WithSortDescriptors sets the collection and returns the receiver so calls can be chained.
+// WithSortDescriptors the table view’s sort descriptors.
 func (x *OutlineView) WithSortDescriptors(items ...obj.Object) *OutlineView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortDescriptors:"), _arr)
 	return x
 }
 
-// The column highlighted in the table.
-//
-// WithHighlightedTableColumn sets highlightedTableColumn and returns the receiver so calls can be chained.
+// WithHighlightedTableColumn the column highlighted in the table.
 func (x *OutlineView) WithHighlightedTableColumn(highlightedTableColumn *TableColumn) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlightedTableColumn:"), objref.IDOf(highlightedTableColumn))
 	return x
 }
 
-// A Boolean value indicating whether vertical motion is treated as a drag or selection change.
-//
-// WithVerticalMotionCanBeginDrag sets verticalMotionCanBeginDrag and returns the receiver so calls can be chained.
+// WithVerticalMotionCanBeginDrag a Boolean value indicating whether vertical motion is treated as a drag or selection change.
 func (x *OutlineView) WithVerticalMotionCanBeginDrag(verticalMotionCanBeginDrag bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalMotionCanBeginDrag:"), verticalMotionCanBeginDrag)
 	return x
 }
 
-// A Boolean value indicating whether the table view allows the user to select more than one column or row at a time.
-//
-// WithAllowsMultipleSelection sets allowsMultipleSelection and returns the receiver so calls can be chained.
+// WithAllowsMultipleSelection a Boolean value indicating whether the table view allows the user to select more than one column or row at a time.
 func (x *OutlineView) WithAllowsMultipleSelection(allowsMultipleSelection bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMultipleSelection:"), allowsMultipleSelection)
 	return x
 }
 
-// A Boolean value indicating whether the table view allows the user to select zero columns or rows.
-//
-// WithAllowsEmptySelection sets allowsEmptySelection and returns the receiver so calls can be chained.
+// WithAllowsEmptySelection a Boolean value indicating whether the table view allows the user to select zero columns or rows.
 func (x *OutlineView) WithAllowsEmptySelection(allowsEmptySelection bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEmptySelection:"), allowsEmptySelection)
 	return x
 }
 
-// A Boolean value indicating whether the table view allows the user to select columns by clicking their headers.
-//
-// WithAllowsColumnSelection sets allowsColumnSelection and returns the receiver so calls can be chained.
+// WithAllowsColumnSelection a Boolean value indicating whether the table view allows the user to select columns by clicking their headers.
 func (x *OutlineView) WithAllowsColumnSelection(allowsColumnSelection bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsColumnSelection:"), allowsColumnSelection)
 	return x
 }
 
-// A Boolean value indicating whether the table view allows the user to type characters to select rows.
-//
-// WithAllowsTypeSelect sets allowsTypeSelect and returns the receiver so calls can be chained.
+// WithAllowsTypeSelect a Boolean value indicating whether the table view allows the user to type characters to select rows.
 func (x *OutlineView) WithAllowsTypeSelect(allowsTypeSelect bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsTypeSelect:"), allowsTypeSelect)
 	return x
 }
 
-// The style that the table view uses.
-//
-// WithStyle sets style and returns the receiver so calls can be chained.
+// WithStyle the style that the table view uses.
 func (x *OutlineView) WithStyle(style TableViewStyle) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 	return x
 }
 
-// The selection highlight style used by the table view to indicate row and column selection.
-//
-// WithSelectionHighlightStyle sets selectionHighlightStyle and returns the receiver so calls can be chained.
+// WithSelectionHighlightStyle the selection highlight style used by the table view to indicate row and column selection.
 func (x *OutlineView) WithSelectionHighlightStyle(selectionHighlightStyle TableViewSelectionHighlightStyle) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionHighlightStyle:"), selectionHighlightStyle)
 	return x
 }
 
-// The feedback style displayed when the user drags over the table view.
-//
-// WithDraggingDestinationFeedbackStyle sets draggingDestinationFeedbackStyle and returns the receiver so calls can be chained.
+// WithDraggingDestinationFeedbackStyle the feedback style displayed when the user drags over the table view.
 func (x *OutlineView) WithDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle TableViewDraggingDestinationFeedbackStyle) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDraggingDestinationFeedbackStyle:"), draggingDestinationFeedbackStyle)
 	return x
 }
 
-// The name under which table information is automatically saved.
-//
-// WithAutosaveName sets autosaveName and returns the receiver so calls can be chained.
+// WithAutosaveName the name under which table information is automatically saved.
 func (x *OutlineView) WithAutosaveName(autosaveName obj.Object) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutosaveName:"), objref.IDOf(autosaveName))
 	return x
 }
 
-// A Boolean value indicating whether the order and width of the table view’s columns are automatically saved.
-//
-// WithAutosaveTableColumns sets autosaveTableColumns and returns the receiver so calls can be chained.
+// WithAutosaveTableColumns a Boolean value indicating whether the order and width of the table view’s columns are automatically saved.
 func (x *OutlineView) WithAutosaveTableColumns(autosaveTableColumns bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutosaveTableColumns:"), autosaveTableColumns)
 	return x
 }
 
-// A Boolean value indicating whether the table view draws grouped rows as if they are floating.
-//
-// WithFloatsGroupRows sets floatsGroupRows and returns the receiver so calls can be chained.
+// WithFloatsGroupRows a Boolean value indicating whether the table view draws grouped rows as if they are floating.
 func (x *OutlineView) WithFloatsGroupRows(floatsGroupRows bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatsGroupRows:"), floatsGroupRows)
 	return x
 }
 
-// A Boolean value indicating whether a table row’s actions are visible.
-//
-// WithRowActionsVisible sets rowActionsVisible and returns the receiver so calls can be chained.
+// WithRowActionsVisible a Boolean value indicating whether a table row’s actions are visible.
 func (x *OutlineView) WithRowActionsVisible(rowActionsVisible bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowActionsVisible:"), rowActionsVisible)
 	return x
 }
 
-// A Boolean value indicating whether the table uses static data.
-//
-// WithUsesStaticContents sets usesStaticContents and returns the receiver so calls can be chained.
+// WithUsesStaticContents a Boolean value indicating whether the table uses static data.
 func (x *OutlineView) WithUsesStaticContents(usesStaticContents bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesStaticContents:"), usesStaticContents)
 	return x
 }
 
-// A Boolean value that indicates whether the table view uses autolayout to calculate the height of rows.
-//
-// WithUsesAutomaticRowHeights sets usesAutomaticRowHeights and returns the receiver so calls can be chained.
+// WithUsesAutomaticRowHeights a Boolean value that indicates whether the table view uses autolayout to calculate the height of rows.
 func (x *OutlineView) WithUsesAutomaticRowHeights(usesAutomaticRowHeights bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesAutomaticRowHeights:"), usesAutomaticRowHeights)
 	return x
 }
 
-// The target object that receives action messages from the cell.
-//
-// WithTarget sets target and returns the receiver so calls can be chained.
+// WithTarget the target object that receives action messages from the cell.
 func (x *OutlineView) WithTarget(target obj.Object) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// The tag identifying the receiver (not the tag of the receiver’s cell).
-//
-// WithTag sets tag and returns the receiver so calls can be chained.
+// WithTag the tag identifying the receiver (not the tag of the receiver’s cell).
 func (x *OutlineView) WithTag(tag int) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
-//
-// WithIgnoresMultiClick sets ignoresMultiClick and returns the receiver so calls can be chained.
+// WithIgnoresMultiClick a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (x *OutlineView) WithIgnoresMultiClick(ignoresMultiClick bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
 	return x
 }
 
-// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
-//
-// WithContinuous sets continuous and returns the receiver so calls can be chained.
+// WithContinuous a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (x *OutlineView) WithContinuous(continuous bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver reacts to mouse events.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether the receiver reacts to mouse events.
 func (x *OutlineView) WithEnabled(enabled bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A Boolean value indicating whether the receiver refuses the first responder role.
-//
-// WithRefusesFirstResponder sets refusesFirstResponder and returns the receiver so calls can be chained.
+// WithRefusesFirstResponder a Boolean value indicating whether the receiver refuses the first responder role.
 func (x *OutlineView) WithRefusesFirstResponder(refusesFirstResponder bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
-// A Boolean value that indicates whether the cell is highlighted.
-//
-// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
+// WithHighlighted a Boolean value that indicates whether the cell is highlighted.
 func (x *OutlineView) WithHighlighted(highlighted bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// The size of the control.
-//
-// WithControlSize sets controlSize and returns the receiver so calls can be chained.
+// WithControlSize the size of the control.
 func (x *OutlineView) WithControlSize(controlSize ControlSize) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
-// The receiver’s formatter.
-//
-// WithFormatter sets formatter and returns the receiver so calls can be chained.
+// WithFormatter the receiver’s formatter.
 func (x *OutlineView) WithFormatter(formatter obj.Object) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
-// The value of the receiver’s cell as an Objective-C object.
-//
-// WithObjectValue sets objectValue and returns the receiver so calls can be chained.
+// WithObjectValue the value of the receiver’s cell as an Objective-C object.
 func (x *OutlineView) WithObjectValue(objectValue obj.Object) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
-// The value of the receiver’s cell as an NSString object.
-//
-// WithStringValue sets stringValue and returns the receiver so calls can be chained.
+// WithStringValue the value of the receiver’s cell as an NSString object.
 func (x *OutlineView) WithStringValue(stringValue string) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
-// The value of the receiver’s cell as an attributed string.
-//
-// WithAttributedStringValue sets attributedStringValue and returns the receiver so calls can be chained.
+// WithAttributedStringValue the value of the receiver’s cell as an attributed string.
 func (x *OutlineView) WithAttributedStringValue(attributedStringValue obj.Object) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
-// The value of the receiver’s cell as an integer.
-//
-// WithIntValue sets intValue and returns the receiver so calls can be chained.
+// WithIntValue the value of the receiver’s cell as an integer.
 func (x *OutlineView) WithIntValue(intValue int) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
-// The value of the receiver’s cell as an integer value.
-//
-// WithIntegerValue sets integerValue and returns the receiver so calls can be chained.
+// WithIntegerValue the value of the receiver’s cell as an integer value.
 func (x *OutlineView) WithIntegerValue(integerValue int) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
-// The value of the receiver’s cell as a single-precision floating-point number.
-//
-// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
+// WithFloatValue the value of the receiver’s cell as a single-precision floating-point number.
 func (x *OutlineView) WithFloatValue(floatValue float32) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
-// The value of the receiver’s cell as a double-precision floating-point number.
-//
-// WithDoubleValue sets doubleValue and returns the receiver so calls can be chained.
+// WithDoubleValue the value of the receiver’s cell as a double-precision floating-point number.
 func (x *OutlineView) WithDoubleValue(doubleValue float64) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
-// The font used to draw text in the receiver’s cell.
-//
-// WithFont sets font and returns the receiver so calls can be chained.
+// WithFont the font used to draw text in the receiver’s cell.
 func (x *OutlineView) WithFont(font *Font) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
-// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
-//
-// WithUsesSingleLineMode sets usesSingleLineMode and returns the receiver so calls can be chained.
+// WithUsesSingleLineMode a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (x *OutlineView) WithUsesSingleLineMode(usesSingleLineMode bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
-// The line break mode to use for text in the control’s cell.
-//
-// WithLineBreakMode sets lineBreakMode and returns the receiver so calls can be chained.
+// WithLineBreakMode the line break mode to use for text in the control’s cell.
 func (x *OutlineView) WithLineBreakMode(lineBreakMode LineBreakMode) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
-// The alignment mode of the text in the receiver’s cell.
-//
-// WithAlignment sets alignment and returns the receiver so calls can be chained.
+// WithAlignment the alignment mode of the text in the receiver’s cell.
 func (x *OutlineView) WithAlignment(alignment TextAlignment) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
-// The initial writing direction used to determine the actual writing direction for text.
-//
-// WithBaseWritingDirection sets baseWritingDirection and returns the receiver so calls can be chained.
+// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
 func (x *OutlineView) WithBaseWritingDirection(baseWritingDirection WritingDirection) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
-// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
-//
-// WithAllowsExpansionToolTips sets allowsExpansionToolTips and returns the receiver so calls can be chained.
+// WithAllowsExpansionToolTips a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (x *OutlineView) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
 	return x
 }
 
-// WithCell sets cell and returns the receiver so calls can be chained.
+// WithCell sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithCell(cell CellProvider) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return x
 }
 
-// WithSubviews sets the collection and returns the receiver so calls can be chained.
+// WithSubviews sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithSubviews(items ...ViewProvider) *OutlineView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
 	return x
 }
 
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithHidden(hidden bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithPostsFrameChangedNotifications sets postsFrameChangedNotifications and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return x
 }
 
-// WithAutoresizesSubviews sets autoresizesSubviews and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithAutoresizesSubviews(autoresizesSubviews bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return x
 }
 
-// WithAutoresizingMask sets autoresizingMask and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// WithFrameRotation sets frameRotation and returns the receiver so calls can be chained.
+// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (x *OutlineView) WithFrame(frame corefoundation.CGRect) *OutlineView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
+	return x
+}
+
+// WithFrameRotation sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithFrameRotation(frameRotation float64) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return x
 }
 
-// WithFrameCenterRotation sets frameCenterRotation and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithFrameCenterRotation(frameCenterRotation float64) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return x
 }
 
-// WithBoundsRotation sets boundsRotation and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithBoundsRotation(boundsRotation float64) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return x
 }
 
-// WithCanDrawConcurrently sets canDrawConcurrently and returns the receiver so calls can be chained.
+// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (x *OutlineView) WithBounds(bounds corefoundation.CGRect) *OutlineView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithCanDrawConcurrently(canDrawConcurrently bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return x
 }
 
-// A Boolean value that determines whether the view needs to be redrawn before being displayed.
-//
-// WithNeedsDisplay sets needsDisplay and returns the receiver so calls can be chained.
+// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (x *OutlineView) WithNeedsDisplay(needsDisplay bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// WithAcceptsTouchEvents sets acceptsTouchEvents and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return x
 }
 
-// WithWantsRestingTouches sets wantsRestingTouches and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithWantsRestingTouches(wantsRestingTouches bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return x
 }
 
-// WithLayerContentsRedrawPolicy sets layerContentsRedrawPolicy and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return x
 }
 
-// WithLayerContentsPlacement sets layerContentsPlacement and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return x
 }
 
-// WithWantsLayer sets wantsLayer and returns the receiver so calls can be chained.
+// WithWantsLayer sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithWantsLayer(wantsLayer bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return x
 }
 
-// WithLayer sets layer and returns the receiver so calls can be chained.
+// WithLayer sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithLayer(layer obj.Object) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// WithCanDrawSubviewsIntoLayer sets canDrawSubviewsIntoLayer and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return x
 }
 
-// WithNeedsLayout sets needsLayout and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithNeedsLayout(needsLayout bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return x
 }
 
-// WithAlphaValue sets alphaValue and returns the receiver so calls can be chained.
+// WithAlphaValue sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithAlphaValue(alphaValue float64) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// WithLayerUsesCoreImageFilters sets layerUsesCoreImageFilters and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return x
 }
 
-// WithBackgroundFilters sets the collection and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithBackgroundFilters(items ...obj.Object) *OutlineView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return x
 }
 
-// WithCompositingFilter sets compositingFilter and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithCompositingFilter(compositingFilter obj.Object) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// WithContentFilters sets the collection and returns the receiver so calls can be chained.
+// WithContentFilters sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithContentFilters(items ...obj.Object) *OutlineView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
 	return x
 }
 
-// WithShadow sets shadow and returns the receiver so calls can be chained.
+// WithShadow sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithShadow(shadow *Shadow) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return x
 }
 
-// WithClipsToBounds sets clipsToBounds and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithClipsToBounds(clipsToBounds bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return x
 }
 
-// WithPostsBoundsChangedNotifications sets postsBoundsChangedNotifications and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return x
 }
 
-// WithToolTip sets toolTip and returns the receiver so calls can be chained.
+// WithToolTip sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithToolTip(toolTip string) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// WithNextKeyView sets nextKeyView and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+func (x *OutlineView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *OutlineView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithNextKeyView(nextKeyView ViewProvider) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return x
 }
 
-// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+// WithFocusRingType sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithFocusRingType(focusRingType FocusRingType) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// WithGestureRecognizers sets the collection and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithGestureRecognizers(items ...GestureRecognizerProvider) *OutlineView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return x
 }
 
-// WithAllowedTouchTypes sets allowedTouchTypes and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return x
 }
 
-// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-//
-// WithPrefersCompactControlSizeMetrics sets prefersCompactControlSizeMetrics and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+func (x *OutlineView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *OutlineView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (x *OutlineView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
 	return x
 }
 
-// WithWritingToolsCoordinator sets writingToolsCoordinator and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return x
 }
 
-// WithNeedsUpdateConstraints sets needsUpdateConstraints and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return x
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets translatesAutoresizingMaskIntoConstraints and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return x
 }
 
-// WithHorizontalContentSizeConstraintActive sets horizontalContentSizeConstraintActive and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return x
 }
 
-// WithVerticalContentSizeConstraintActive sets verticalContentSizeConstraintActive and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return x
 }
 
-// WithWantsBestResolutionOpenGLSurface sets wantsBestResolutionOpenGLSurface and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return x
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets wantsExtendedDynamicRangeOpenGLSurface and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return x
 }
 
-// WithPressureConfiguration sets pressureConfiguration and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
 func (x *OutlineView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *OutlineView) WithNextResponder(nextResponder ResponderProvider) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets menu and returns the receiver so calls can be chained.
+// WithMenu returns the responder’s menu.
 func (x *OutlineView) WithMenu(menu *Menu) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity an object encapsulating a user activity supported by this responder.
 func (x *OutlineView) WithUserActivity(userActivity obj.Object) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *OutlineView) WithTouchBar(touchBar *TouchBar) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// Returns a Boolean value that indicates whether a given item is expandable.
+// IsExpandable returns a Boolean value that indicates whether a given item is expandable.
 func (x *OutlineView) IsExpandable(item obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isExpandable:"), objref.IDOf(item))
 	return _r
 }
 
-// Returns the number of children for the specified parent item.
+// NumberOfChildrenOfItem returns the number of children for the specified parent item.
 func (x *OutlineView) NumberOfChildrenOfItem(item obj.Object) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfChildrenOfItem:"), objref.IDOf(item))
 	return _r
 }
 
-// Returns the specified child of an item.
+// ChildOfItem returns the specified child of an item.
 func (x *OutlineView) ChildOfItem(index int, item obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("child:ofItem:"), index, objref.IDOf(item))
 	return obj.Wrap(_r)
 }
 
-// Expands a specified item and, optionally, its children.
+// ExpandItemExpandChildren expands a specified item and, optionally, its children.
 func (x *OutlineView) ExpandItemExpandChildren(item obj.Object, expandChildren bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expandItem:expandChildren:"), objref.IDOf(item), expandChildren)
 }
 
-// Expands a given item.
+// ExpandItem expands a given item.
 func (x *OutlineView) ExpandItem(item obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expandItem:"), objref.IDOf(item))
 }
 
-// Collapses a given item and, optionally, its children.
+// CollapseItemCollapseChildren collapses a given item and, optionally, its children.
 func (x *OutlineView) CollapseItemCollapseChildren(item obj.Object, collapseChildren bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collapseItem:collapseChildren:"), objref.IDOf(item), collapseChildren)
 }
 
-// Collapses a given item.
+// CollapseItem collapses a given item.
 func (x *OutlineView) CollapseItem(item obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collapseItem:"), objref.IDOf(item))
 }
 
-// Reloads a given item and, optionally, its children.
+// ReloadItemReloadChildren reloads a given item and, optionally, its children.
 func (x *OutlineView) ReloadItemReloadChildren(item obj.Object, reloadChildren bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadItem:reloadChildren:"), objref.IDOf(item), reloadChildren)
 }
 
-// Reloads and redisplays the data for the given item.
+// ReloadItem reloads and redisplays the data for the given item.
 func (x *OutlineView) ReloadItem(item obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadItem:"), objref.IDOf(item))
 }
 
-// Returns the parent for a given item.
+// ParentForItem returns the parent for a given item.
 func (x *OutlineView) ParentForItem(item obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentForItem:"), objref.IDOf(item))
 	return obj.Wrap(_r)
 }
 
-// Returns the child index of the specified item within its parent.
+// ChildIndexForItem returns the child index of the specified item within its parent.
 func (x *OutlineView) ChildIndexForItem(item obj.Object) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("childIndexForItem:"), objref.IDOf(item))
 	return _r
 }
 
-// Returns the item associated with a given row.
+// ItemAtRow returns the item associated with a given row.
 func (x *OutlineView) ItemAtRow(row int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemAtRow:"), row)
 	return obj.Wrap(_r)
 }
 
-// Returns the row associated with a given item.
+// RowForItem returns the row associated with a given item.
 func (x *OutlineView) RowForItem(item obj.Object) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowForItem:"), objref.IDOf(item))
 	return _r
 }
 
-// Returns the indentation level for a given item.
+// LevelForItem returns the indentation level for a given item.
 func (x *OutlineView) LevelForItem(item obj.Object) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("levelForItem:"), objref.IDOf(item))
 	return _r
 }
 
-// Returns the indentation level for a given row.
+// LevelForRow returns the indentation level for a given row.
 func (x *OutlineView) LevelForRow(row int) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("levelForRow:"), row)
 	return _r
 }
 
-// Returns a Boolean value that indicates whether a given item is expanded.
+// IsItemExpanded returns a Boolean value that indicates whether a given item is expanded.
 func (x *OutlineView) IsItemExpanded(item obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isItemExpanded:"), objref.IDOf(item))
 	return _r
 }
 
-// Used to “retarget” a proposed drop.
+// FrameOfOutlineCellAtRow returns the frame of the outline cell for a given row.
+func (x *OutlineView) FrameOfOutlineCellAtRow(row int) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frameOfOutlineCellAtRow:"), row)
+	return _r
+}
+
+// SetDropItemDropChildIndex used to “retarget” a proposed drop.
 func (x *OutlineView) SetDropItemDropChildIndex(item obj.Object, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDropItem:dropChildIndex:"), objref.IDOf(item), index)
 }
 
-// Returns a Boolean value that indicates whether auto-expanded items should return to their original collapsed state.
+// ShouldCollapseAutoExpandedItemsForDeposited returns a Boolean value that indicates whether auto-expanded items should return to their original collapsed state.
 func (x *OutlineView) ShouldCollapseAutoExpandedItemsForDeposited(deposited bool) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldCollapseAutoExpandedItemsForDeposited:"), deposited)
 	return _r
 }
 
-// Inserts new items at the given indexes in the given parent with the specified optional animations.
+// InsertItemsAtIndexesInParentWithAnimation inserts new items at the given indexes in the given parent with the specified optional animations.
 func (x *OutlineView) InsertItemsAtIndexesInParentWithAnimation(indexes obj.Object, parent obj.Object, animationOptions TableViewAnimationOptions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertItemsAtIndexes:inParent:withAnimation:"), objref.IDOf(indexes), objref.IDOf(parent), animationOptions)
 }
 
-// Removes items at the given indexes in the given parent with the specified optional animations.
+// RemoveItemsAtIndexesInParentWithAnimation removes items at the given indexes in the given parent with the specified optional animations.
 func (x *OutlineView) RemoveItemsAtIndexesInParentWithAnimation(indexes obj.Object, parent obj.Object, animationOptions TableViewAnimationOptions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeItemsAtIndexes:inParent:withAnimation:"), objref.IDOf(indexes), objref.IDOf(parent), animationOptions)
 }
 
-// Moves an item at a given index in the given parent to a new index in a new parent.
+// MoveItemAtIndexInParentToIndexInParent moves an item at a given index in the given parent to a new index in a new parent.
 func (x *OutlineView) MoveItemAtIndexInParentToIndexInParent(fromIndex int, oldParent obj.Object, toIndex int, newParent obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveItemAtIndex:inParent:toIndex:inParent:"), fromIndex, objref.IDOf(oldParent), toIndex, objref.IDOf(newParent))
 }
 
+// OutlineTableColumn wraps the corresponding Objective-C method.
 func (x *OutlineView) OutlineTableColumn() *TableColumn {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outlineTableColumn"))
 	return TableColumnFromID(_r)
 }
 
+// SetOutlineTableColumn wraps the corresponding Objective-C method.
 func (x *OutlineView) SetOutlineTableColumn(outlineTableColumn *TableColumn) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutlineTableColumn:"), objref.IDOf(outlineTableColumn))
 }
 
+// IndentationPerLevel wraps the corresponding Objective-C method.
 func (x *OutlineView) IndentationPerLevel() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("indentationPerLevel"))
 	return _r
 }
 
+// SetIndentationPerLevel wraps the corresponding Objective-C method.
 func (x *OutlineView) SetIndentationPerLevel(indentationPerLevel float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndentationPerLevel:"), indentationPerLevel)
 }
 
+// IndentationMarkerFollowsCell wraps the corresponding Objective-C method.
 func (x *OutlineView) IndentationMarkerFollowsCell() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("indentationMarkerFollowsCell"))
 	return _r
 }
 
+// SetIndentationMarkerFollowsCell wraps the corresponding Objective-C method.
 func (x *OutlineView) SetIndentationMarkerFollowsCell(indentationMarkerFollowsCell bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndentationMarkerFollowsCell:"), indentationMarkerFollowsCell)
 }
 
+// AutoresizesOutlineColumn wraps the corresponding Objective-C method.
 func (x *OutlineView) AutoresizesOutlineColumn() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autoresizesOutlineColumn"))
 	return _r
 }
 
+// SetAutoresizesOutlineColumn wraps the corresponding Objective-C method.
 func (x *OutlineView) SetAutoresizesOutlineColumn(autoresizesOutlineColumn bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesOutlineColumn:"), autoresizesOutlineColumn)
 }
 
+// AutosaveExpandedItems wraps the corresponding Objective-C method.
 func (x *OutlineView) AutosaveExpandedItems() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autosaveExpandedItems"))
 	return _r
 }
 
+// SetAutosaveExpandedItems wraps the corresponding Objective-C method.
 func (x *OutlineView) SetAutosaveExpandedItems(autosaveExpandedItems bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutosaveExpandedItems:"), autosaveExpandedItems)
 }
 
+// StronglyReferencesItems wraps the corresponding Objective-C method.
 func (x *OutlineView) StronglyReferencesItems() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("stronglyReferencesItems"))
 	return _r
 }
 
+// SetStronglyReferencesItems wraps the corresponding Objective-C method.
 func (x *OutlineView) SetStronglyReferencesItems(stronglyReferencesItems bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStronglyReferencesItems:"), stronglyReferencesItems)
 }
@@ -982,6 +898,7 @@ type OutlineViewable interface {
 	WithAllowsColumnResizing(allowsColumnResizing bool) *OutlineView
 	WithColumnAutoresizingStyle(columnAutoresizingStyle TableViewColumnAutoresizingStyle) *OutlineView
 	WithGridStyleMask(gridStyleMask TableViewGridLineStyle) *OutlineView
+	WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *OutlineView
 	WithUsesAlternatingRowBackgroundColors(usesAlternatingRowBackgroundColors bool) *OutlineView
 	WithBackgroundColor(backgroundColor *Color) *OutlineView
 	WithGridColor(gridColor *Color) *OutlineView
@@ -1031,9 +948,11 @@ type OutlineViewable interface {
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *OutlineView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *OutlineView
 	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *OutlineView
+	WithFrame(frame corefoundation.CGRect) *OutlineView
 	WithFrameRotation(frameRotation float64) *OutlineView
 	WithFrameCenterRotation(frameCenterRotation float64) *OutlineView
 	WithBoundsRotation(boundsRotation float64) *OutlineView
+	WithBounds(bounds corefoundation.CGRect) *OutlineView
 	WithCanDrawConcurrently(canDrawConcurrently bool) *OutlineView
 	WithNeedsDisplay(needsDisplay bool) *OutlineView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *OutlineView
@@ -1054,10 +973,12 @@ type OutlineViewable interface {
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *OutlineView
 	WithToolTip(toolTip string) *OutlineView
 	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *OutlineView
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *OutlineView
 	WithNextKeyView(nextKeyView ViewProvider) *OutlineView
 	WithFocusRingType(focusRingType FocusRingType) *OutlineView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *OutlineView
 	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *OutlineView
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *OutlineView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *OutlineView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *OutlineView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *OutlineView
@@ -1087,6 +1008,7 @@ type OutlineViewable interface {
 	LevelForItem(item obj.Object) int
 	LevelForRow(row int) int
 	IsItemExpanded(item obj.Object) bool
+	FrameOfOutlineCellAtRow(row int) corefoundation.CGRect
 	SetDropItemDropChildIndex(item obj.Object, index int)
 	ShouldCollapseAutoExpandedItemsForDeposited(deposited bool) bool
 	InsertItemsAtIndexesInParentWithAnimation(indexes obj.Object, parent obj.Object, animationOptions TableViewAnimationOptions)
@@ -1107,3 +1029,11 @@ type OutlineViewable interface {
 }
 
 var _ OutlineViewable = (*OutlineView)(nil)
+
+var _ TableViewProvider = (*OutlineView)(nil)
+
+var _ ControlProvider = (*OutlineView)(nil)
+
+var _ ViewProvider = (*OutlineView)(nil)
+
+var _ ResponderProvider = (*OutlineView)(nil)

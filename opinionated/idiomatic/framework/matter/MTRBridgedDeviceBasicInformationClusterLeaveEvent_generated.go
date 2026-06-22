@@ -13,6 +13,8 @@ import (
 )
 
 // MTRBridgedDeviceBasicInformationClusterLeaveEvent is an idiomatic wrapper over the Objective-C class MTRBridgedDeviceBasicInformationClusterLeaveEvent.
+//
+// MTRBridgedDeviceBasicInformationClusterLeaveEvent is an abstract base — you do not construct it directly. Construct one of [MTRBridgedDeviceBasicClusterLeaveEvent] and pass it where a MTRBridgedDeviceBasicInformationClusterLeaveEvent is accepted.
 type MTRBridgedDeviceBasicInformationClusterLeaveEvent struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRBridgedDeviceBasicInformationClusterLeaveEventFromID(id objc.ID) *MTRBri
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBridgedDeviceBasicInformationClusterLeaveEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBridgedDeviceBasicInformationClusterLeaveEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRBridgedDeviceBasicInformationClusterLeaveEventAdopt(id objc.ID) *MTRBrid
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBridgedDeviceBasicInformationClusterLeaveEvent{Handle: objref.Wrap(id)}
+	x := &MTRBridgedDeviceBasicInformationClusterLeaveEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,10 +60,10 @@ func (x *MTRBridgedDeviceBasicInformationClusterLeaveEvent) IsKind(className str
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRBridgedDeviceBasicInformationClusterLeaveEvent creates a new MTRBridgedDeviceBasicInformationClusterLeaveEvent.
-func NewMTRBridgedDeviceBasicInformationClusterLeaveEvent() *MTRBridgedDeviceBasicInformationClusterLeaveEvent {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRBridgedDeviceBasicInformationClusterLeaveEvent")), objc.RegisterName("new"))
-	return mTRBridgedDeviceBasicInformationClusterLeaveEventAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRBridgedDeviceBasicInformationClusterLeaveEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // MTRBridgedDeviceBasicInformationClusterLeaveEventable is the interface implemented by [MTRBridgedDeviceBasicInformationClusterLeaveEvent], for mocking and DI.
@@ -68,3 +72,11 @@ type MTRBridgedDeviceBasicInformationClusterLeaveEventable interface {
 }
 
 var _ MTRBridgedDeviceBasicInformationClusterLeaveEventable = (*MTRBridgedDeviceBasicInformationClusterLeaveEvent)(nil)
+
+// isMTRBridgedDeviceBasicInformationClusterLeaveEvent marks MTRBridgedDeviceBasicInformationClusterLeaveEvent — and, by embedding promotion, its
+// subclasses — as a member of the MTRBridgedDeviceBasicInformationClusterLeaveEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRBridgedDeviceBasicInformationClusterLeaveEvent) isMTRBridgedDeviceBasicInformationClusterLeaveEvent() {
+}
+
+var _ MTRBridgedDeviceBasicInformationClusterLeaveEventProvider = (*MTRBridgedDeviceBasicInformationClusterLeaveEvent)(nil)

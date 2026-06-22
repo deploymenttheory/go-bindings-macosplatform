@@ -11,4 +11,5 @@ import (
 // ProjectElementProvider is accepted wherever a PHProjectElement (or one of its subclasses) is expected.
 type ProjectElementProvider interface {
 	objref.Object
+	isProjectElement()
 }

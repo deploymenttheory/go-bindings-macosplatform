@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A static parameter value that represents a single property of the haptic pattern.
-//
 // HapticEventParameter is an idiomatic wrapper over the Objective-C class CHHapticEventParameter.
+//
+// A static parameter value that represents a single property of the haptic pattern.
 type HapticEventParameter struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func HapticEventParameterFromID(id objc.ID) *HapticEventParameter {
 	if id == 0 {
 		return nil
 	}
-	x := &HapticEventParameter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HapticEventParameter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func hapticEventParameterAdopt(id objc.ID) *HapticEventParameter {
 	if id == 0 {
 		return nil
 	}
-	x := &HapticEventParameter{Handle: objref.Wrap(id)}
+	x := &HapticEventParameter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,33 +60,38 @@ func (x *HapticEventParameter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a haptic event parameter from its ID and value.
-//
-// NewHapticEventParameterWithParameterIDValue creates a new HapticEventParameter.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HapticEventParameter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewHapticEventParameterWithParameterIDValue creates a haptic event parameter from its ID and value.
 func NewHapticEventParameterWithParameterIDValue(parameterID obj.Object, value float32) *HapticEventParameter {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticEventParameter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParameterID:value:"), objref.IDOf(parameterID), value)
 	return hapticEventParameterAdopt(_id)
 }
 
-// The value of the parameter.
-//
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue the value of the parameter.
 func (x *HapticEventParameter) WithValue(value float32) *HapticEventParameter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 	return x
 }
 
+// ParameterID wraps the corresponding Objective-C method.
 func (x *HapticEventParameter) ParameterID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameterID"))
 	return obj.Wrap(_r)
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *HapticEventParameter) Value() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("value"))
 	return _r
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *HapticEventParameter) SetValue(value float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 }

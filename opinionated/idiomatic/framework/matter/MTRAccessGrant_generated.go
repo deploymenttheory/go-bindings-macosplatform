@@ -23,7 +23,8 @@ func MTRAccessGrantFromID(id objc.ID) *MTRAccessGrant {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAccessGrant{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRAccessGrant{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRAccessGrantAdopt(id objc.ID) *MTRAccessGrant {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAccessGrant{Handle: objref.Wrap(id)}
+	x := &MTRAccessGrant{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,25 +58,31 @@ func (x *MTRAccessGrant) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRAccessGrant) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRAccessGrant creates a new MTRAccessGrant.
 func NewMTRAccessGrant() *MTRAccessGrant {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRAccessGrant")), objc.RegisterName("new"))
 	return mTRAccessGrantAdopt(_id)
 }
 
-// The matter access control subject ID that access has been granted for.  Nil when access has been granted for all subjects (e.g. via initForAllNodesWithPrivilege).
+// SubjectID the matter access control subject ID that access has been granted for.  Nil when access has been granted for all subjects (e.g. via initForAllNodesWithPrivilege).
 func (x *MTRAccessGrant) SubjectID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subjectID"))
 	return obj.Wrap(_r)
 }
 
-// The privilege that has been granted
+// GrantedPrivilege the privilege that has been granted
 func (x *MTRAccessGrant) GrantedPrivilege() MTRAccessControlEntryPrivilege {
 	_r := objc.Send[MTRAccessControlEntryPrivilege](objref.IDOf(x), objc.RegisterName("grantedPrivilege"))
 	return _r
 }
 
-// The type of authentication mode the access grant is for. MTRAccessControlEntryAuthModeCASE for unicast messages and MTRAccessControlEntryAuthModeGroup for groupcast ones.
+// AuthenticationMode the type of authentication mode the access grant is for. MTRAccessControlEntryAuthModeCASE for unicast messages and MTRAccessControlEntryAuthModeGroup for groupcast ones.
 func (x *MTRAccessGrant) AuthenticationMode() MTRAccessControlEntryAuthMode {
 	_r := objc.Send[MTRAccessControlEntryAuthMode](objref.IDOf(x), objc.RegisterName("authenticationMode"))
 	return _r

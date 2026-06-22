@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that represents the connection to the haptic server.
-//
 // HapticEngine is an idiomatic wrapper over the Objective-C class CHHapticEngine.
+//
+// An object that represents the connection to the haptic server.
 type HapticEngine struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func HapticEngineFromID(id objc.ID) *HapticEngine {
 	if id == 0 {
 		return nil
 	}
-	x := &HapticEngine{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HapticEngine{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func hapticEngineAdopt(id objc.ID) *HapticEngine {
 	if id == 0 {
 		return nil
 	}
-	x := &HapticEngine{Handle: objref.Wrap(id)}
+	x := &HapticEngine{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,20 @@ func (x *HapticEngine) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HapticEngine) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewHapticEngine creates a new HapticEngine.
 func NewHapticEngine() *HapticEngine {
 	_id := objc.Send[objc.ID](objc.ID(_class("CHHapticEngine")), objc.RegisterName("new"))
 	return hapticEngineAdopt(_id)
 }
 
-// Creates a haptic engine from an audio session.
-//
-// NewHapticEngineWithAudioSessionError creates a new HapticEngine.
-func NewHapticEngineWithAudioSessionError(audioSession obj.Object) (*HapticEngine, error) {
+// NewHapticEngineWithAudioSessionError creates a haptic engine from an audio session.
+func NewHapticEngineWithAudioSessionError(audioSession obj.Object) (result *HapticEngine, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticEngine")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioSession:error:"), objref.IDOf(audioSession), unsafe.Pointer(&_nsErr))
@@ -79,55 +85,43 @@ func NewHapticEngineWithAudioSessionError(audioSession obj.Object) (*HapticEngin
 	return hapticEngineAdopt(_id), nil
 }
 
-// A block that the haptic engine calls after recovering from a haptic server error.
-//
-// WithResetHandler sets resetHandler and returns the receiver so calls can be chained.
+// WithResetHandler a block that the haptic engine calls after recovering from a haptic server error.
 func (x *HapticEngine) WithResetHandler(resetHandler func()) *HapticEngine {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResetHandler:"), resetHandler)
 	return x
 }
 
-// A Boolean value that indicates whether the engine ignores audio events.
-//
-// WithPlaysHapticsOnly sets playsHapticsOnly and returns the receiver so calls can be chained.
+// WithPlaysHapticsOnly a Boolean value that indicates whether the engine ignores audio events.
 func (x *HapticEngine) WithPlaysHapticsOnly(playsHapticsOnly bool) *HapticEngine {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaysHapticsOnly:"), playsHapticsOnly)
 	return x
 }
 
-// A Boolean value that indicates whether the engine ignores haptic events and plays audio events only.
-//
-// WithPlaysAudioOnly sets playsAudioOnly and returns the receiver so calls can be chained.
+// WithPlaysAudioOnly a Boolean value that indicates whether the engine ignores haptic events and plays audio events only.
 func (x *HapticEngine) WithPlaysAudioOnly(playsAudioOnly bool) *HapticEngine {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaysAudioOnly:"), playsAudioOnly)
 	return x
 }
 
-// A Boolean value that indicates whether the engine mutes audio.
-//
-// WithIsMutedForAudio sets isMutedForAudio and returns the receiver so calls can be chained.
+// WithIsMutedForAudio a Boolean value that indicates whether the engine mutes audio.
 func (x *HapticEngine) WithIsMutedForAudio(isMutedForAudio bool) *HapticEngine {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsMutedForAudio:"), isMutedForAudio)
 	return x
 }
 
-// A Boolean value that indicates whether the engine mutes haptics.
-//
-// WithIsMutedForHaptics sets isMutedForHaptics and returns the receiver so calls can be chained.
+// WithIsMutedForHaptics a Boolean value that indicates whether the engine mutes haptics.
 func (x *HapticEngine) WithIsMutedForHaptics(isMutedForHaptics bool) *HapticEngine {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsMutedForHaptics:"), isMutedForHaptics)
 	return x
 }
 
-// A Boolean value that indicates whether the haptic engine starts and stops automatically on request from one of its pattern players, or when idle.
-//
-// WithAutoShutdownEnabled sets autoShutdownEnabled and returns the receiver so calls can be chained.
+// WithAutoShutdownEnabled a Boolean value that indicates whether the haptic engine starts and stops automatically on request from one of its pattern players, or when idle.
 func (x *HapticEngine) WithAutoShutdownEnabled(autoShutdownEnabled bool) *HapticEngine {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoShutdownEnabled:"), autoShutdownEnabled)
 	return x
 }
 
-// Synchronously starts the haptic engine.
+// StartAndReturnError synchronously starts the haptic engine.
 //
 // StartAndReturnError returns an error if the operation did not succeed.
 func (x *HapticEngine) StartAndReturnError() error {
@@ -139,8 +133,8 @@ func (x *HapticEngine) StartAndReturnError() error {
 	return nil
 }
 
-// Registers an external audio to use as a custom waveform.
-func (x *HapticEngine) RegisterAudioResourceOptionsError(resourceURL string, options obj.Object) (int, error) {
+// RegisterAudioResourceOptionsError registers an external audio to use as a custom waveform.
+func (x *HapticEngine) RegisterAudioResourceOptionsError(resourceURL string, options obj.Object) (result int, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("registerAudioResource:options:error:"), rt.FileURL(resourceURL), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -149,7 +143,7 @@ func (x *HapticEngine) RegisterAudioResourceOptionsError(resourceURL string, opt
 	return _r, nil
 }
 
-// Unregisters an external audio file that you previously registered with the engine.
+// UnregisterAudioResource unregisters an external audio file that you previously registered with the engine.
 func (x *HapticEngine) UnregisterAudioResource(resourceID int) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("unregisterAudioResource:error:"), resourceID, unsafe.Pointer(&_nsErr))
@@ -159,7 +153,7 @@ func (x *HapticEngine) UnregisterAudioResource(resourceID int) error {
 	return nil
 }
 
-// Plays a pattern that’s defined in a file at the specified URL.
+// PlayPatternFromURL plays a pattern that’s defined in a file at the specified URL.
 func (x *HapticEngine) PlayPatternFromURL(fileURL string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("playPatternFromURL:error:"), rt.FileURL(fileURL), unsafe.Pointer(&_nsErr))
@@ -169,7 +163,7 @@ func (x *HapticEngine) PlayPatternFromURL(fileURL string) error {
 	return nil
 }
 
-// Plays a pattern from the specified data.
+// PlayPatternFromData plays a pattern from the specified data.
 func (x *HapticEngine) PlayPatternFromData(data obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("playPatternFromData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
@@ -179,61 +173,68 @@ func (x *HapticEngine) PlayPatternFromData(data obj.Object) error {
 	return nil
 }
 
+// CurrentTime wraps the corresponding Objective-C method.
 func (x *HapticEngine) CurrentTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("currentTime"))
 	return _r
 }
 
+// SetResetHandler wraps the corresponding Objective-C method.
 func (x *HapticEngine) SetResetHandler(resetHandler func()) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResetHandler:"), resetHandler)
 }
 
-// This behavior change will only take effect after the engine is stopped and restarted. The default is NO.
+// PlaysHapticsOnly this behavior change will only take effect after the engine is stopped and restarted. The default is NO.
 func (x *HapticEngine) PlaysHapticsOnly() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("playsHapticsOnly"))
 	return _r
 }
 
+// SetPlaysHapticsOnly wraps the corresponding Objective-C method.
 func (x *HapticEngine) SetPlaysHapticsOnly(playsHapticsOnly bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaysHapticsOnly:"), playsHapticsOnly)
 }
 
-// This behavior change will only take effect after the engine is stopped and restarted. The default is NO.
+// PlaysAudioOnly this behavior change will only take effect after the engine is stopped and restarted. The default is NO.
 func (x *HapticEngine) PlaysAudioOnly() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("playsAudioOnly"))
 	return _r
 }
 
+// SetPlaysAudioOnly wraps the corresponding Objective-C method.
 func (x *HapticEngine) SetPlaysAudioOnly(playsAudioOnly bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaysAudioOnly:"), playsAudioOnly)
 }
 
-// Default is NO.
+// IsMutedForAudio default is NO.
 func (x *HapticEngine) IsMutedForAudio() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMutedForAudio"))
 	return _r
 }
 
+// SetIsMutedForAudio wraps the corresponding Objective-C method.
 func (x *HapticEngine) SetIsMutedForAudio(isMutedForAudio bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsMutedForAudio:"), isMutedForAudio)
 }
 
-// Default is NO.
+// IsMutedForHaptics default is NO.
 func (x *HapticEngine) IsMutedForHaptics() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMutedForHaptics"))
 	return _r
 }
 
+// SetIsMutedForHaptics wraps the corresponding Objective-C method.
 func (x *HapticEngine) SetIsMutedForHaptics(isMutedForHaptics bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsMutedForHaptics:"), isMutedForHaptics)
 }
 
-// When auto shutdown is enabled, the haptic engine can start and stop the hardware dynamically, to conserve power. To conserve power, it is advised that the client stop the haptic engine when not in use. But when auto shutdown is enabled, the haptic engine will stop the hardware if it was running idle for a certain duration, and restart it later when required. Note that, because this operation is dynamic, it may affect the start times of the pattern players (e.g. `CHHapticPatternplayer`), if the engine has to resume from its shutdown state. This feature is disabled by default, but the client can enable it if needed.
+// IsAutoShutdownEnabled when auto shutdown is enabled, the haptic engine can start and stop the hardware dynamically, to conserve power. To conserve power, it is advised that the client stop the haptic engine when not in use. But when auto shutdown is enabled, the haptic engine will stop the hardware if it was running idle for a certain duration, and restart it later when required. Note that, because this operation is dynamic, it may affect the start times of the pattern players (e.g. `CHHapticPatternplayer`), if the engine has to resume from its shutdown state. This feature is disabled by default, but the client can enable it if needed.
 func (x *HapticEngine) IsAutoShutdownEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAutoShutdownEnabled"))
 	return _r
 }
 
+// SetAutoShutdownEnabled wraps the corresponding Objective-C method.
 func (x *HapticEngine) SetAutoShutdownEnabled(autoShutdownEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoShutdownEnabled:"), autoShutdownEnabled)
 }
@@ -248,7 +249,7 @@ type HapticEngineable interface {
 	WithIsMutedForHaptics(isMutedForHaptics bool) *HapticEngine
 	WithAutoShutdownEnabled(autoShutdownEnabled bool) *HapticEngine
 	StartAndReturnError() error
-	RegisterAudioResourceOptionsError(resourceURL string, options obj.Object) (int, error)
+	RegisterAudioResourceOptionsError(resourceURL string, options obj.Object) (result int, err error)
 	UnregisterAudioResource(resourceID int) error
 	PlayPatternFromURL(fileURL string) error
 	PlayPatternFromData(data obj.Object) error

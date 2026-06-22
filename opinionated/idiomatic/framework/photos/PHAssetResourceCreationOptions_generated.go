@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of options affecting the creation of a new Photos asset from underlying resources.
-//
 // AssetResourceCreationOptions is an idiomatic wrapper over the Objective-C class PHAssetResourceCreationOptions.
+//
+// A set of options affecting the creation of a new Photos asset from underlying resources.
 type AssetResourceCreationOptions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetResourceCreationOptionsFromID(id objc.ID) *AssetResourceCreationOption
 	if id == 0 {
 		return nil
 	}
-	x := &AssetResourceCreationOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetResourceCreationOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetResourceCreationOptionsAdopt(id objc.ID) *AssetResourceCreationOptions
 	if id == 0 {
 		return nil
 	}
-	x := &AssetResourceCreationOptions{Handle: objref.Wrap(id)}
+	x := &AssetResourceCreationOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,44 +60,43 @@ func (x *AssetResourceCreationOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetResourceCreationOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetResourceCreationOptions creates a new AssetResourceCreationOptions.
 func NewAssetResourceCreationOptions() *AssetResourceCreationOptions {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHAssetResourceCreationOptions")), objc.RegisterName("new"))
 	return assetResourceCreationOptionsAdopt(_id)
 }
 
-// The filename for the asset resource being created.
-//
-// WithOriginalFilename sets originalFilename and returns the receiver so calls can be chained.
+// WithOriginalFilename the filename for the asset resource being created.
 func (x *AssetResourceCreationOptions) WithOriginalFilename(originalFilename string) *AssetResourceCreationOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOriginalFilename:"), purego.NSString(originalFilename))
 	return x
 }
 
-// The type of data being provided for this asset resource. If not specified, one will be inferred from the PHAssetResourceType or file URL extension (if provided).
-//
-// WithContentType sets contentType and returns the receiver so calls can be chained.
+// WithContentType the type of data being provided for this asset resource. If not specified, one will be inferred from the PHAssetResourceType or file URL extension (if provided).
 func (x *AssetResourceCreationOptions) WithContentType(contentType obj.Object) *AssetResourceCreationOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentType:"), objref.IDOf(contentType))
 	return x
 }
 
-// The uniform type identifier for the resource.
-//
-// WithUniformTypeIdentifier sets uniformTypeIdentifier and returns the receiver so calls can be chained.
+// WithUniformTypeIdentifier the uniform type identifier for the resource.
 func (x *AssetResourceCreationOptions) WithUniformTypeIdentifier(uniformTypeIdentifier string) *AssetResourceCreationOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniformTypeIdentifier:"), purego.NSString(uniformTypeIdentifier))
 	return x
 }
 
-// A Boolean value that determines whether Photos moves or duplicates files when creating an asset resource.
-//
-// WithShouldMoveFile sets shouldMoveFile and returns the receiver so calls can be chained.
+// WithShouldMoveFile a Boolean value that determines whether Photos moves or duplicates files when creating an asset resource.
 func (x *AssetResourceCreationOptions) WithShouldMoveFile(shouldMoveFile bool) *AssetResourceCreationOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldMoveFile:"), shouldMoveFile)
 	return x
 }
 
+// OriginalFilename wraps the corresponding Objective-C method.
 func (x *AssetResourceCreationOptions) OriginalFilename() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalFilename"))
 	if _r == 0 {
@@ -104,20 +105,23 @@ func (x *AssetResourceCreationOptions) OriginalFilename() string {
 	return purego.GoString(_r)
 }
 
+// SetOriginalFilename wraps the corresponding Objective-C method.
 func (x *AssetResourceCreationOptions) SetOriginalFilename(originalFilename string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOriginalFilename:"), purego.NSString(originalFilename))
 }
 
-// The type of data being provided for this asset resource. If not specified, one will be inferred from the PHAssetResourceType or file URL extension (if provided).
+// ContentType the type of data being provided for this asset resource. If not specified, one will be inferred from the PHAssetResourceType or file URL extension (if provided).
 func (x *AssetResourceCreationOptions) ContentType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
 	return obj.Wrap(_r)
 }
 
+// SetContentType wraps the corresponding Objective-C method.
 func (x *AssetResourceCreationOptions) SetContentType(contentType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentType:"), objref.IDOf(contentType))
 }
 
+// UniformTypeIdentifier wraps the corresponding Objective-C method.
 func (x *AssetResourceCreationOptions) UniformTypeIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniformTypeIdentifier"))
 	if _r == 0 {
@@ -126,15 +130,18 @@ func (x *AssetResourceCreationOptions) UniformTypeIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// SetUniformTypeIdentifier wraps the corresponding Objective-C method.
 func (x *AssetResourceCreationOptions) SetUniformTypeIdentifier(uniformTypeIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniformTypeIdentifier:"), purego.NSString(uniformTypeIdentifier))
 }
 
+// ShouldMoveFile wraps the corresponding Objective-C method.
 func (x *AssetResourceCreationOptions) ShouldMoveFile() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldMoveFile"))
 	return _r
 }
 
+// SetShouldMoveFile wraps the corresponding Objective-C method.
 func (x *AssetResourceCreationOptions) SetShouldMoveFile(shouldMoveFile bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldMoveFile:"), shouldMoveFile)
 }

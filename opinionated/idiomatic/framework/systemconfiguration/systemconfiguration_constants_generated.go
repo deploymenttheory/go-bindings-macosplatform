@@ -14,48 +14,39 @@ func KSCDynamicStoreUseSessionKeys() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCDynamicStoreUseSessionKeys")))
 }
 
-// Value is a CFString
 // KSCResvLink returns the value of the constant kSCResvLink.
 func KSCResvLink() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCResvLink"))) }
 
 // KSCResvInactive returns the value of the constant kSCResvInactive.
 func KSCResvInactive() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCResvInactive"))) }
 
-// Value is a CFString
 // KSCPropInterfaceName returns the value of the constant kSCPropInterfaceName.
 func KSCPropInterfaceName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropInterfaceName")))
 }
 
-// Value is a CFString
 // KSCPropMACAddress returns the value of the constant kSCPropMACAddress.
 func KSCPropMACAddress() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCPropMACAddress"))) }
 
-// Value is a CFString
 // KSCPropUserDefinedName returns the value of the constant kSCPropUserDefinedName.
 func KSCPropUserDefinedName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropUserDefinedName")))
 }
 
-// Value is a CFString
 // KSCPropVersion returns the value of the constant kSCPropVersion.
 func KSCPropVersion() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCPropVersion"))) }
 
-// Value is a CFString
 // KSCPrefCurrentSet returns the value of the constant kSCPrefCurrentSet.
 func KSCPrefCurrentSet() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCPrefCurrentSet"))) }
 
-// Value is a CFDictionary
 // KSCPrefNetworkServices returns the value of the constant kSCPrefNetworkServices.
 func KSCPrefNetworkServices() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPrefNetworkServices")))
 }
 
-// Value is a CFDictionary
 // KSCPrefSets returns the value of the constant kSCPrefSets.
 func KSCPrefSets() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCPrefSets"))) }
 
-// Value is a CFDictionary
 // KSCPrefSystem returns the value of the constant kSCPrefSystem.
 func KSCPrefSystem() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCPrefSystem"))) }
 
@@ -83,153 +74,122 @@ func KSCCompUsers() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCC
 // KSCCompAnyRegex returns the value of the constant kSCCompAnyRegex.
 func KSCCompAnyRegex() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCCompAnyRegex"))) }
 
-// Value is a CFDictionary
 // KSCEntNetAirPort returns the value of the constant kSCEntNetAirPort.
 func KSCEntNetAirPort() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetAirPort"))) }
 
-// Value is a CFDictionary
 // KSCEntNetDHCP returns the value of the constant kSCEntNetDHCP.
 func KSCEntNetDHCP() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetDHCP"))) }
 
-// Value is a CFDictionary
 // KSCEntNetDNS returns the value of the constant kSCEntNetDNS.
 func KSCEntNetDNS() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetDNS"))) }
 
-// Value is a CFDictionary
 // KSCEntNetEthernet returns the value of the constant kSCEntNetEthernet.
 func KSCEntNetEthernet() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetEthernet"))) }
 
-// Value is a CFDictionary
 // KSCEntNetFireWire returns the value of the constant kSCEntNetFireWire.
 func KSCEntNetFireWire() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetFireWire"))) }
 
-// Value is a CFDictionary
 // KSCEntNetInterface returns the value of the constant kSCEntNetInterface.
 func KSCEntNetInterface() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetInterface")))
 }
 
-// Value is a CFDictionary
 // KSCEntNetIPSec returns the value of the constant kSCEntNetIPSec.
 func KSCEntNetIPSec() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetIPSec"))) }
 
-// Value is a CFDictionary
 // KSCEntNetIPv4 returns the value of the constant kSCEntNetIPv4.
 func KSCEntNetIPv4() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetIPv4"))) }
 
-// Value is a CFDictionary
 // KSCEntNetIPv6 returns the value of the constant kSCEntNetIPv6.
 func KSCEntNetIPv6() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetIPv6"))) }
 
-// Value is a CFDictionary
 // KSCEntNetL2TP returns the value of the constant kSCEntNetL2TP.
 func KSCEntNetL2TP() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetL2TP"))) }
 
-// Value is a CFDictionary
 // KSCEntNetLink returns the value of the constant kSCEntNetLink.
 func KSCEntNetLink() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetLink"))) }
 
-// Value is a CFDictionary
 // KSCEntNetModem returns the value of the constant kSCEntNetModem.
 func KSCEntNetModem() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetModem"))) }
 
-// Value is a CFDictionary
 // KSCEntNetPPP returns the value of the constant kSCEntNetPPP.
 func KSCEntNetPPP() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetPPP"))) }
 
-// Value is a CFDictionary
 // KSCEntNetPPPoE returns the value of the constant kSCEntNetPPPoE.
 func KSCEntNetPPPoE() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetPPPoE"))) }
 
-// Value is a CFDictionary
 // KSCEntNetPPPSerial returns the value of the constant kSCEntNetPPPSerial.
 func KSCEntNetPPPSerial() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetPPPSerial")))
 }
 
-// Value is a CFDictionary
 // KSCEntNetPPTP returns the value of the constant kSCEntNetPPTP.
 func KSCEntNetPPTP() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetPPTP"))) }
 
-// Value is a CFDictionary
 // KSCEntNetProxies returns the value of the constant kSCEntNetProxies.
 func KSCEntNetProxies() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetProxies"))) }
 
-// Value is a CFDictionary
 // KSCEntNetSMB returns the value of the constant kSCEntNetSMB.
 func KSCEntNetSMB() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetSMB"))) }
 
-// Value is a CFDictionary
 // KSCEntNet6to4 returns the value of the constant kSCEntNet6to4.
 func KSCEntNet6to4() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNet6to4"))) }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetOverridePrimary returns the value of the constant kSCPropNetOverridePrimary.
 func KSCPropNetOverridePrimary() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetOverridePrimary")))
 }
 
-// Value is a CFArray[CFString]
 // KSCPropNetServiceOrder returns the value of the constant kSCPropNetServiceOrder.
 func KSCPropNetServiceOrder() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetServiceOrder")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetPPPOverridePrimary returns the value of the constant kSCPropNetPPPOverridePrimary.
 func KSCPropNetPPPOverridePrimary() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPOverridePrimary")))
 }
 
-// Value is a CFArray[CFString]
 // KSCPropNetInterfaces returns the value of the constant kSCPropNetInterfaces.
 func KSCPropNetInterfaces() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetInterfaces")))
 }
 
-// Value is a CFString
 // KSCPropNetLocalHostName returns the value of the constant kSCPropNetLocalHostName.
 func KSCPropNetLocalHostName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetLocalHostName")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetAirPortAllowNetCreation returns the value of the constant kSCPropNetAirPortAllowNetCreation.
 func KSCPropNetAirPortAllowNetCreation() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetAirPortAllowNetCreation")))
 }
 
-// Value is a CFData
 // KSCPropNetAirPortAuthPassword returns the value of the constant kSCPropNetAirPortAuthPassword.
 func KSCPropNetAirPortAuthPassword() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetAirPortAuthPassword")))
 }
 
-// Value is a CFString
 // KSCPropNetAirPortAuthPasswordEncryption returns the value of the constant kSCPropNetAirPortAuthPasswordEncryption.
 func KSCPropNetAirPortAuthPasswordEncryption() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetAirPortAuthPasswordEncryption")))
 }
 
-// Value is a CFString
 // KSCPropNetAirPortJoinMode returns the value of the constant kSCPropNetAirPortJoinMode.
 func KSCPropNetAirPortJoinMode() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetAirPortJoinMode")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetAirPortPowerEnabled returns the value of the constant kSCPropNetAirPortPowerEnabled.
 func KSCPropNetAirPortPowerEnabled() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetAirPortPowerEnabled")))
 }
 
-// Value is a CFString
 // KSCPropNetAirPortPreferredNetwork returns the value of the constant kSCPropNetAirPortPreferredNetwork.
 func KSCPropNetAirPortPreferredNetwork() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetAirPortPreferredNetwork")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetAirPortSavePasswords returns the value of the constant kSCPropNetAirPortSavePasswords.
 func KSCPropNetAirPortSavePasswords() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetAirPortSavePasswords")))
@@ -265,109 +225,91 @@ func KSCValNetAirPortAuthPasswordEncryptionKeychain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetAirPortAuthPasswordEncryptionKeychain")))
 }
 
-// Value is a CFString
 // KSCPropNetDNSDomainName returns the value of the constant kSCPropNetDNSDomainName.
 func KSCPropNetDNSDomainName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetDNSDomainName")))
 }
 
-// Value is a CFString
 // KSCPropNetDNSOptions returns the value of the constant kSCPropNetDNSOptions.
 func KSCPropNetDNSOptions() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetDNSOptions")))
 }
 
-// Value is a CFArray[CFString]
 // KSCPropNetDNSSearchDomains returns the value of the constant kSCPropNetDNSSearchDomains.
 func KSCPropNetDNSSearchDomains() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetDNSSearchDomains")))
 }
 
-// Value is a CFNumber
 // KSCPropNetDNSSearchOrder returns the value of the constant kSCPropNetDNSSearchOrder.
 func KSCPropNetDNSSearchOrder() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetDNSSearchOrder")))
 }
 
-// Value is a CFArray[CFString]
 // KSCPropNetDNSServerAddresses returns the value of the constant kSCPropNetDNSServerAddresses.
 func KSCPropNetDNSServerAddresses() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetDNSServerAddresses")))
 }
 
-// Value is a CFNumber
 // KSCPropNetDNSServerPort returns the value of the constant kSCPropNetDNSServerPort.
 func KSCPropNetDNSServerPort() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetDNSServerPort")))
 }
 
-// Value is a CFNumber
 // KSCPropNetDNSServerTimeout returns the value of the constant kSCPropNetDNSServerTimeout.
 func KSCPropNetDNSServerTimeout() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetDNSServerTimeout")))
 }
 
-// Value is a CFArray[CFString]
 // KSCPropNetDNSSortList returns the value of the constant kSCPropNetDNSSortList.
 func KSCPropNetDNSSortList() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetDNSSortList")))
 }
 
-// Value is a CFArray[CFString]
 // KSCPropNetDNSSupplementalMatchDomains returns the value of the constant kSCPropNetDNSSupplementalMatchDomains.
 func KSCPropNetDNSSupplementalMatchDomains() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetDNSSupplementalMatchDomains")))
 }
 
-// Value is a CFArray[CFNumber]
 // KSCPropNetDNSSupplementalMatchOrders returns the value of the constant kSCPropNetDNSSupplementalMatchOrders.
 func KSCPropNetDNSSupplementalMatchOrders() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetDNSSupplementalMatchOrders")))
 }
 
-// Value is a CFString
 // KSCPropNetEthernetMediaSubType returns the value of the constant kSCPropNetEthernetMediaSubType.
 func KSCPropNetEthernetMediaSubType() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetEthernetMediaSubType")))
 }
 
-// Value is a CFArray[CFString]
 // KSCPropNetEthernetMediaOptions returns the value of the constant kSCPropNetEthernetMediaOptions.
 func KSCPropNetEthernetMediaOptions() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetEthernetMediaOptions")))
 }
 
-// Value is a CFNumber
 // KSCPropNetEthernetMTU returns the value of the constant kSCPropNetEthernetMTU.
 func KSCPropNetEthernetMTU() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetEthernetMTU")))
 }
 
-// Value is a CFString
 // KSCPropNetInterfaceDeviceName returns the value of the constant kSCPropNetInterfaceDeviceName.
 func KSCPropNetInterfaceDeviceName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetInterfaceDeviceName")))
 }
 
-// Value is a CFString
 // KSCPropNetInterfaceHardware returns the value of the constant kSCPropNetInterfaceHardware.
 func KSCPropNetInterfaceHardware() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetInterfaceHardware")))
 }
 
-// Value is a CFString
 // KSCPropNetInterfaceType returns the value of the constant kSCPropNetInterfaceType.
 func KSCPropNetInterfaceType() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetInterfaceType")))
 }
 
-// Value is a CFString
 // KSCPropNetInterfaceSubType returns the value of the constant kSCPropNetInterfaceSubType.
 func KSCPropNetInterfaceSubType() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetInterfaceSubType")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetInterfaceSupportsModemOnHold returns the value of the constant kSCPropNetInterfaceSupportsModemOnHold.
 func KSCPropNetInterfaceSupportsModemOnHold() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetInterfaceSupportsModemOnHold")))
@@ -418,79 +360,66 @@ func KSCValNetInterfaceSubTypeL2TP() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetInterfaceSubTypeL2TP")))
 }
 
-// Value is a CFString
 // KSCPropNetIPSecAuthenticationMethod returns the value of the constant kSCPropNetIPSecAuthenticationMethod.
 func KSCPropNetIPSecAuthenticationMethod() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecAuthenticationMethod")))
 }
 
-// Value is a CFData
 // KSCPropNetIPSecLocalCertificate returns the value of the constant kSCPropNetIPSecLocalCertificate.
 func KSCPropNetIPSecLocalCertificate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecLocalCertificate")))
 }
 
-// Value is a CFString
 // KSCPropNetIPSecLocalIdentifier returns the value of the constant kSCPropNetIPSecLocalIdentifier.
 func KSCPropNetIPSecLocalIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecLocalIdentifier")))
 }
 
-// Value is a CFString
 // KSCPropNetIPSecLocalIdentifierType returns the value of the constant kSCPropNetIPSecLocalIdentifierType.
 func KSCPropNetIPSecLocalIdentifierType() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecLocalIdentifierType")))
 }
 
-// Value is a CFString
 // KSCPropNetIPSecSharedSecret returns the value of the constant kSCPropNetIPSecSharedSecret.
 func KSCPropNetIPSecSharedSecret() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecSharedSecret")))
 }
 
-// Value is a CFString
 // KSCPropNetIPSecSharedSecretEncryption returns the value of the constant kSCPropNetIPSecSharedSecretEncryption.
 func KSCPropNetIPSecSharedSecretEncryption() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecSharedSecretEncryption")))
 }
 
-// Value is a CFNumber
 // KSCPropNetIPSecConnectTime returns the value of the constant kSCPropNetIPSecConnectTime.
 func KSCPropNetIPSecConnectTime() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecConnectTime")))
 }
 
-// Value is a CFString
 // KSCPropNetIPSecRemoteAddress returns the value of the constant kSCPropNetIPSecRemoteAddress.
 func KSCPropNetIPSecRemoteAddress() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecRemoteAddress")))
 }
 
-// Value is a CFNumber
 // KSCPropNetIPSecStatus returns the value of the constant kSCPropNetIPSecStatus.
 func KSCPropNetIPSecStatus() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecStatus")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetIPSecXAuthEnabled returns the value of the constant kSCPropNetIPSecXAuthEnabled.
 func KSCPropNetIPSecXAuthEnabled() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecXAuthEnabled")))
 }
 
-// Value is a CFString
 // KSCPropNetIPSecXAuthName returns the value of the constant kSCPropNetIPSecXAuthName.
 func KSCPropNetIPSecXAuthName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecXAuthName")))
 }
 
-// Value is a CFString
 // KSCPropNetIPSecXAuthPassword returns the value of the constant kSCPropNetIPSecXAuthPassword.
 func KSCPropNetIPSecXAuthPassword() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecXAuthPassword")))
 }
 
-// Value is a CFString
 // KSCPropNetIPSecXAuthPasswordEncryption returns the value of the constant kSCPropNetIPSecXAuthPasswordEncryption.
 func KSCPropNetIPSecXAuthPasswordEncryption() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecXAuthPasswordEncryption")))
@@ -531,43 +460,36 @@ func KSCValNetIPSecXAuthPasswordEncryptionPrompt() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetIPSecXAuthPasswordEncryptionPrompt")))
 }
 
-// Value is a CFArray[CFString]
 // KSCPropNetIPv4Addresses returns the value of the constant kSCPropNetIPv4Addresses.
 func KSCPropNetIPv4Addresses() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv4Addresses")))
 }
 
-// Value is a CFString
 // KSCPropNetIPv4ConfigMethod returns the value of the constant kSCPropNetIPv4ConfigMethod.
 func KSCPropNetIPv4ConfigMethod() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv4ConfigMethod")))
 }
 
-// Value is a CFString
 // KSCPropNetIPv4DHCPClientID returns the value of the constant kSCPropNetIPv4DHCPClientID.
 func KSCPropNetIPv4DHCPClientID() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv4DHCPClientID")))
 }
 
-// Value is a CFString
 // KSCPropNetIPv4Router returns the value of the constant kSCPropNetIPv4Router.
 func KSCPropNetIPv4Router() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv4Router")))
 }
 
-// Value is a CFArray[CFString]
 // KSCPropNetIPv4SubnetMasks returns the value of the constant kSCPropNetIPv4SubnetMasks.
 func KSCPropNetIPv4SubnetMasks() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv4SubnetMasks")))
 }
 
-// Value is a CFArray[CFString]
 // KSCPropNetIPv4DestAddresses returns the value of the constant kSCPropNetIPv4DestAddresses.
 func KSCPropNetIPv4DestAddresses() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv4DestAddresses")))
 }
 
-// Value is a CFArray[CFString]
 // KSCPropNetIPv4BroadcastAddresses returns the value of the constant kSCPropNetIPv4BroadcastAddresses.
 func KSCPropNetIPv4BroadcastAddresses() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv4BroadcastAddresses")))
@@ -608,37 +530,31 @@ func KSCValNetIPv4ConfigMethodPPP() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetIPv4ConfigMethodPPP")))
 }
 
-// Value is a CFArray[CFString]
 // KSCPropNetIPv6Addresses returns the value of the constant kSCPropNetIPv6Addresses.
 func KSCPropNetIPv6Addresses() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv6Addresses")))
 }
 
-// Value is a CFString
 // KSCPropNetIPv6ConfigMethod returns the value of the constant kSCPropNetIPv6ConfigMethod.
 func KSCPropNetIPv6ConfigMethod() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv6ConfigMethod")))
 }
 
-// Value is a CFArray[CFString]
 // KSCPropNetIPv6DestAddresses returns the value of the constant kSCPropNetIPv6DestAddresses.
 func KSCPropNetIPv6DestAddresses() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv6DestAddresses")))
 }
 
-// Value is a CFArray[CFNumber]
 // KSCPropNetIPv6Flags returns the value of the constant kSCPropNetIPv6Flags.
 func KSCPropNetIPv6Flags() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv6Flags")))
 }
 
-// Value is a CFArray[CFNumber]
 // KSCPropNetIPv6PrefixLength returns the value of the constant kSCPropNetIPv6PrefixLength.
 func KSCPropNetIPv6PrefixLength() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv6PrefixLength")))
 }
 
-// Value is a CFString
 // KSCPropNetIPv6Router returns the value of the constant kSCPropNetIPv6Router.
 func KSCPropNetIPv6Router() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv6Router")))
@@ -669,133 +585,111 @@ func KSCValNetIPv6ConfigMethod6to4() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetIPv6ConfigMethod6to4")))
 }
 
-// Value is a CFString
 // KSCPropNet6to4Relay returns the value of the constant kSCPropNet6to4Relay.
 func KSCPropNet6to4Relay() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNet6to4Relay")))
 }
 
-// Value is a CFBoolean
 // KSCPropNetLinkActive returns the value of the constant kSCPropNetLinkActive.
 func KSCPropNetLinkActive() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetLinkActive")))
 }
 
-// Value is a CFBoolean
 // KSCPropNetLinkDetaching returns the value of the constant kSCPropNetLinkDetaching.
 func KSCPropNetLinkDetaching() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetLinkDetaching")))
 }
 
-// Value is a CFString
 // KSCPropNetModemAccessPointName returns the value of the constant kSCPropNetModemAccessPointName.
 func KSCPropNetModemAccessPointName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemAccessPointName")))
 }
 
-// Value is a CFString
 // KSCPropNetModemConnectionPersonality returns the value of the constant kSCPropNetModemConnectionPersonality.
 func KSCPropNetModemConnectionPersonality() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemConnectionPersonality")))
 }
 
-// Value is a CFString
 // KSCPropNetModemConnectionScript returns the value of the constant kSCPropNetModemConnectionScript.
 func KSCPropNetModemConnectionScript() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemConnectionScript")))
 }
 
-// Value is a CFNumber
 // KSCPropNetModemConnectSpeed returns the value of the constant kSCPropNetModemConnectSpeed.
 func KSCPropNetModemConnectSpeed() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemConnectSpeed")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetModemDataCompression returns the value of the constant kSCPropNetModemDataCompression.
 func KSCPropNetModemDataCompression() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemDataCompression")))
 }
 
-// Value is a CFString
 // KSCPropNetModemDeviceContextID returns the value of the constant kSCPropNetModemDeviceContextID.
 func KSCPropNetModemDeviceContextID() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemDeviceContextID")))
 }
 
-// Value is a CFString
 // KSCPropNetModemDeviceModel returns the value of the constant kSCPropNetModemDeviceModel.
 func KSCPropNetModemDeviceModel() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemDeviceModel")))
 }
 
-// Value is a CFString
 // KSCPropNetModemDeviceVendor returns the value of the constant kSCPropNetModemDeviceVendor.
 func KSCPropNetModemDeviceVendor() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemDeviceVendor")))
 }
 
-// Value is a CFString
 // KSCPropNetModemDialMode returns the value of the constant kSCPropNetModemDialMode.
 func KSCPropNetModemDialMode() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemDialMode")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetModemErrorCorrection returns the value of the constant kSCPropNetModemErrorCorrection.
 func KSCPropNetModemErrorCorrection() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemErrorCorrection")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetModemHoldCallWaitingAudibleAlert returns the value of the constant kSCPropNetModemHoldCallWaitingAudibleAlert.
 func KSCPropNetModemHoldCallWaitingAudibleAlert() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemHoldCallWaitingAudibleAlert")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetModemHoldDisconnectOnAnswer returns the value of the constant kSCPropNetModemHoldDisconnectOnAnswer.
 func KSCPropNetModemHoldDisconnectOnAnswer() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemHoldDisconnectOnAnswer")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetModemHoldEnabled returns the value of the constant kSCPropNetModemHoldEnabled.
 func KSCPropNetModemHoldEnabled() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemHoldEnabled")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetModemHoldReminder returns the value of the constant kSCPropNetModemHoldReminder.
 func KSCPropNetModemHoldReminder() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemHoldReminder")))
 }
 
-// Value is a CFNumber
 // KSCPropNetModemHoldReminderTime returns the value of the constant kSCPropNetModemHoldReminderTime.
 func KSCPropNetModemHoldReminderTime() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemHoldReminderTime")))
 }
 
-// Value is a CFString
 // KSCPropNetModemNote returns the value of the constant kSCPropNetModemNote.
 func KSCPropNetModemNote() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemNote")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetModemPulseDial returns the value of the constant kSCPropNetModemPulseDial.
 func KSCPropNetModemPulseDial() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemPulseDial")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetModemSpeaker returns the value of the constant kSCPropNetModemSpeaker.
 func KSCPropNetModemSpeaker() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemSpeaker")))
 }
 
-// Value is a CFNumber
 // KSCPropNetModemSpeed returns the value of the constant kSCPropNetModemSpeed.
 func KSCPropNetModemSpeed() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemSpeed")))
@@ -816,157 +710,131 @@ func KSCValNetModemDialModeWaitForDialTone() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetModemDialModeWaitForDialTone")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetPPPACSPEnabled returns the value of the constant kSCPropNetPPPACSPEnabled.
 func KSCPropNetPPPACSPEnabled() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPACSPEnabled")))
 }
 
-// Value is a CFNumber
 // KSCPropNetPPPConnectTime returns the value of the constant kSCPropNetPPPConnectTime.
 func KSCPropNetPPPConnectTime() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPConnectTime")))
 }
 
-// Value is a CFNumber
 // KSCPropNetPPPDeviceLastCause returns the value of the constant kSCPropNetPPPDeviceLastCause.
 func KSCPropNetPPPDeviceLastCause() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPDeviceLastCause")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetPPPDialOnDemand returns the value of the constant kSCPropNetPPPDialOnDemand.
 func KSCPropNetPPPDialOnDemand() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPDialOnDemand")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetPPPDisconnectOnFastUserSwitch returns the value of the constant kSCPropNetPPPDisconnectOnFastUserSwitch.
 func KSCPropNetPPPDisconnectOnFastUserSwitch() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPDisconnectOnFastUserSwitch")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetPPPDisconnectOnIdle returns the value of the constant kSCPropNetPPPDisconnectOnIdle.
 func KSCPropNetPPPDisconnectOnIdle() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPDisconnectOnIdle")))
 }
 
-// Value is a CFNumber
 // KSCPropNetPPPDisconnectOnIdleTimer returns the value of the constant kSCPropNetPPPDisconnectOnIdleTimer.
 func KSCPropNetPPPDisconnectOnIdleTimer() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPDisconnectOnIdleTimer")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetPPPDisconnectOnLogout returns the value of the constant kSCPropNetPPPDisconnectOnLogout.
 func KSCPropNetPPPDisconnectOnLogout() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPDisconnectOnLogout")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetPPPDisconnectOnSleep returns the value of the constant kSCPropNetPPPDisconnectOnSleep.
 func KSCPropNetPPPDisconnectOnSleep() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPDisconnectOnSleep")))
 }
 
-// Value is a CFNumber
 // KSCPropNetPPPDisconnectTime returns the value of the constant kSCPropNetPPPDisconnectTime.
 func KSCPropNetPPPDisconnectTime() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPDisconnectTime")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetPPPIdleReminder returns the value of the constant kSCPropNetPPPIdleReminder.
 func KSCPropNetPPPIdleReminder() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPIdleReminder")))
 }
 
-// Value is a CFNumber
 // KSCPropNetPPPIdleReminderTimer returns the value of the constant kSCPropNetPPPIdleReminderTimer.
 func KSCPropNetPPPIdleReminderTimer() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPIdleReminderTimer")))
 }
 
-// Value is a CFNumber
 // KSCPropNetPPPLastCause returns the value of the constant kSCPropNetPPPLastCause.
 func KSCPropNetPPPLastCause() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPLastCause")))
 }
 
-// Value is a CFString
 // KSCPropNetPPPLogfile returns the value of the constant kSCPropNetPPPLogfile.
 func KSCPropNetPPPLogfile() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPLogfile")))
 }
 
-// Value is a CFArray[CFString]
 // KSCPropNetPPPPlugins returns the value of the constant kSCPropNetPPPPlugins.
 func KSCPropNetPPPPlugins() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPPlugins")))
 }
 
-// Value is a CFNumber
 // KSCPropNetPPPRetryConnectTime returns the value of the constant kSCPropNetPPPRetryConnectTime.
 func KSCPropNetPPPRetryConnectTime() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPRetryConnectTime")))
 }
 
-// Value is a CFNumber
 // KSCPropNetPPPSessionTimer returns the value of the constant kSCPropNetPPPSessionTimer.
 func KSCPropNetPPPSessionTimer() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPSessionTimer")))
 }
 
-// Value is a CFNumber
 // KSCPropNetPPPStatus returns the value of the constant kSCPropNetPPPStatus.
 func KSCPropNetPPPStatus() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPStatus")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetPPPUseSessionTimer returns the value of the constant kSCPropNetPPPUseSessionTimer.
 func KSCPropNetPPPUseSessionTimer() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPUseSessionTimer")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetPPPVerboseLogging returns the value of the constant kSCPropNetPPPVerboseLogging.
 func KSCPropNetPPPVerboseLogging() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPVerboseLogging")))
 }
 
-// Value is a CFArray[CFString]
 // KSCPropNetPPPAuthEAPPlugins returns the value of the constant kSCPropNetPPPAuthEAPPlugins.
 func KSCPropNetPPPAuthEAPPlugins() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPAuthEAPPlugins")))
 }
 
-// Value is a CFString
 // KSCPropNetPPPAuthName returns the value of the constant kSCPropNetPPPAuthName.
 func KSCPropNetPPPAuthName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPAuthName")))
 }
 
-// Value is a CFString
 // KSCPropNetPPPAuthPassword returns the value of the constant kSCPropNetPPPAuthPassword.
 func KSCPropNetPPPAuthPassword() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPAuthPassword")))
 }
 
-// Value is a CFString
 // KSCPropNetPPPAuthPasswordEncryption returns the value of the constant kSCPropNetPPPAuthPasswordEncryption.
 func KSCPropNetPPPAuthPasswordEncryption() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPAuthPasswordEncryption")))
 }
 
-// Value is a CFString
 // KSCPropNetPPPAuthPrompt returns the value of the constant kSCPropNetPPPAuthPrompt.
 func KSCPropNetPPPAuthPrompt() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPAuthPrompt")))
 }
 
-// Value is a CFArray[CFString]
 // KSCPropNetPPPAuthProtocol returns the value of the constant kSCPropNetPPPAuthProtocol.
 func KSCPropNetPPPAuthProtocol() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPAuthProtocol")))
@@ -982,199 +850,166 @@ func KSCValNetPPPAuthPasswordEncryptionToken() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetPPPAuthPasswordEncryptionToken")))
 }
 
-// Value is a CFString
 // KSCValNetPPPAuthPromptBefore returns the value of the constant kSCValNetPPPAuthPromptBefore.
 func KSCValNetPPPAuthPromptBefore() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetPPPAuthPromptBefore")))
 }
 
-// Value is a CFString
 // KSCValNetPPPAuthPromptAfter returns the value of the constant kSCValNetPPPAuthPromptAfter.
 func KSCValNetPPPAuthPromptAfter() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetPPPAuthPromptAfter")))
 }
 
-// Value is a CFString
 // KSCValNetPPPAuthProtocolCHAP returns the value of the constant kSCValNetPPPAuthProtocolCHAP.
 func KSCValNetPPPAuthProtocolCHAP() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetPPPAuthProtocolCHAP")))
 }
 
-// Value is a CFString
 // KSCValNetPPPAuthProtocolEAP returns the value of the constant kSCValNetPPPAuthProtocolEAP.
 func KSCValNetPPPAuthProtocolEAP() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetPPPAuthProtocolEAP")))
 }
 
-// Value is a CFString
 // KSCValNetPPPAuthProtocolMSCHAP1 returns the value of the constant kSCValNetPPPAuthProtocolMSCHAP1.
 func KSCValNetPPPAuthProtocolMSCHAP1() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetPPPAuthProtocolMSCHAP1")))
 }
 
-// Value is a CFString
 // KSCValNetPPPAuthProtocolMSCHAP2 returns the value of the constant kSCValNetPPPAuthProtocolMSCHAP2.
 func KSCValNetPPPAuthProtocolMSCHAP2() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetPPPAuthProtocolMSCHAP2")))
 }
 
-// Value is a CFString
 // KSCValNetPPPAuthProtocolPAP returns the value of the constant kSCValNetPPPAuthProtocolPAP.
 func KSCValNetPPPAuthProtocolPAP() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetPPPAuthProtocolPAP")))
 }
 
-// Value is a CFString
 // KSCPropNetPPPCommAlternateRemoteAddress returns the value of the constant kSCPropNetPPPCommAlternateRemoteAddress.
 func KSCPropNetPPPCommAlternateRemoteAddress() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCommAlternateRemoteAddress")))
 }
 
-// Value is a CFNumber
 // KSCPropNetPPPCommConnectDelay returns the value of the constant kSCPropNetPPPCommConnectDelay.
 func KSCPropNetPPPCommConnectDelay() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCommConnectDelay")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetPPPCommDisplayTerminalWindow returns the value of the constant kSCPropNetPPPCommDisplayTerminalWindow.
 func KSCPropNetPPPCommDisplayTerminalWindow() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCommDisplayTerminalWindow")))
 }
 
-// Value is a CFNumber
 // KSCPropNetPPPCommRedialCount returns the value of the constant kSCPropNetPPPCommRedialCount.
 func KSCPropNetPPPCommRedialCount() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCommRedialCount")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetPPPCommRedialEnabled returns the value of the constant kSCPropNetPPPCommRedialEnabled.
 func KSCPropNetPPPCommRedialEnabled() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCommRedialEnabled")))
 }
 
-// Value is a CFNumber
 // KSCPropNetPPPCommRedialInterval returns the value of the constant kSCPropNetPPPCommRedialInterval.
 func KSCPropNetPPPCommRedialInterval() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCommRedialInterval")))
 }
 
-// Value is a CFString
 // KSCPropNetPPPCommRemoteAddress returns the value of the constant kSCPropNetPPPCommRemoteAddress.
 func KSCPropNetPPPCommRemoteAddress() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCommRemoteAddress")))
 }
 
-// Value is a CFString
 // KSCPropNetPPPCommTerminalScript returns the value of the constant kSCPropNetPPPCommTerminalScript.
 func KSCPropNetPPPCommTerminalScript() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCommTerminalScript")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetPPPCommUseTerminalScript returns the value of the constant kSCPropNetPPPCommUseTerminalScript.
 func KSCPropNetPPPCommUseTerminalScript() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCommUseTerminalScript")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetPPPCCPEnabled returns the value of the constant kSCPropNetPPPCCPEnabled.
 func KSCPropNetPPPCCPEnabled() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCCPEnabled")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetPPPCCPMPPE40Enabled returns the value of the constant kSCPropNetPPPCCPMPPE40Enabled.
 func KSCPropNetPPPCCPMPPE40Enabled() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCCPMPPE40Enabled")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetPPPCCPMPPE128Enabled returns the value of the constant kSCPropNetPPPCCPMPPE128Enabled.
 func KSCPropNetPPPCCPMPPE128Enabled() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCCPMPPE128Enabled")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetPPPIPCPCompressionVJ returns the value of the constant kSCPropNetPPPIPCPCompressionVJ.
 func KSCPropNetPPPIPCPCompressionVJ() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPIPCPCompressionVJ")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetPPPIPCPUsePeerDNS returns the value of the constant kSCPropNetPPPIPCPUsePeerDNS.
 func KSCPropNetPPPIPCPUsePeerDNS() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPIPCPUsePeerDNS")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetPPPLCPEchoEnabled returns the value of the constant kSCPropNetPPPLCPEchoEnabled.
 func KSCPropNetPPPLCPEchoEnabled() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPLCPEchoEnabled")))
 }
 
-// Value is a CFNumber
 // KSCPropNetPPPLCPEchoFailure returns the value of the constant kSCPropNetPPPLCPEchoFailure.
 func KSCPropNetPPPLCPEchoFailure() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPLCPEchoFailure")))
 }
 
-// Value is a CFNumber
 // KSCPropNetPPPLCPEchoInterval returns the value of the constant kSCPropNetPPPLCPEchoInterval.
 func KSCPropNetPPPLCPEchoInterval() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPLCPEchoInterval")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetPPPLCPCompressionACField returns the value of the constant kSCPropNetPPPLCPCompressionACField.
 func KSCPropNetPPPLCPCompressionACField() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPLCPCompressionACField")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetPPPLCPCompressionPField returns the value of the constant kSCPropNetPPPLCPCompressionPField.
 func KSCPropNetPPPLCPCompressionPField() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPLCPCompressionPField")))
 }
 
-// Value is a CFNumber
 // KSCPropNetPPPLCPMRU returns the value of the constant kSCPropNetPPPLCPMRU.
 func KSCPropNetPPPLCPMRU() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPLCPMRU")))
 }
 
-// Value is a CFNumber
 // KSCPropNetPPPLCPMTU returns the value of the constant kSCPropNetPPPLCPMTU.
 func KSCPropNetPPPLCPMTU() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPLCPMTU")))
 }
 
-// Value is a CFNumber
 // KSCPropNetPPPLCPReceiveACCM returns the value of the constant kSCPropNetPPPLCPReceiveACCM.
 func KSCPropNetPPPLCPReceiveACCM() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPLCPReceiveACCM")))
 }
 
-// Value is a CFNumber
 // KSCPropNetPPPLCPTransmitACCM returns the value of the constant kSCPropNetPPPLCPTransmitACCM.
 func KSCPropNetPPPLCPTransmitACCM() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPLCPTransmitACCM")))
 }
 
-// Value is a CFString
 // KSCPropNetL2TPIPSecSharedSecret returns the value of the constant kSCPropNetL2TPIPSecSharedSecret.
 func KSCPropNetL2TPIPSecSharedSecret() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetL2TPIPSecSharedSecret")))
 }
 
-// Value is a CFString
 // KSCPropNetL2TPIPSecSharedSecretEncryption returns the value of the constant kSCPropNetL2TPIPSecSharedSecretEncryption.
 func KSCPropNetL2TPIPSecSharedSecretEncryption() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetL2TPIPSecSharedSecretEncryption")))
 }
 
-// Value is a CFString
 // KSCPropNetL2TPTransport returns the value of the constant kSCPropNetL2TPTransport.
 func KSCPropNetL2TPTransport() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetL2TPTransport")))
@@ -1195,217 +1030,181 @@ func KSCValNetL2TPTransportIPSec() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetL2TPTransportIPSec")))
 }
 
-// Value is a CFArray[CFString]
 // KSCPropNetProxiesExceptionsList returns the value of the constant kSCPropNetProxiesExceptionsList.
 func KSCPropNetProxiesExceptionsList() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesExceptionsList")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetProxiesExcludeSimpleHostnames returns the value of the constant kSCPropNetProxiesExcludeSimpleHostnames.
 func KSCPropNetProxiesExcludeSimpleHostnames() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesExcludeSimpleHostnames")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetProxiesFTPEnable returns the value of the constant kSCPropNetProxiesFTPEnable.
 func KSCPropNetProxiesFTPEnable() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesFTPEnable")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetProxiesFTPPassive returns the value of the constant kSCPropNetProxiesFTPPassive.
 func KSCPropNetProxiesFTPPassive() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesFTPPassive")))
 }
 
-// Value is a CFNumber
 // KSCPropNetProxiesFTPPort returns the value of the constant kSCPropNetProxiesFTPPort.
 func KSCPropNetProxiesFTPPort() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesFTPPort")))
 }
 
-// Value is a CFString
 // KSCPropNetProxiesFTPProxy returns the value of the constant kSCPropNetProxiesFTPProxy.
 func KSCPropNetProxiesFTPProxy() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesFTPProxy")))
 }
 
-// Value is a CFString
 // KSCPropNetProxiesFTPUser returns the value of the constant kSCPropNetProxiesFTPUser.
 func KSCPropNetProxiesFTPUser() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesFTPUser")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetProxiesGopherEnable returns the value of the constant kSCPropNetProxiesGopherEnable.
 func KSCPropNetProxiesGopherEnable() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesGopherEnable")))
 }
 
-// Value is a CFNumber
 // KSCPropNetProxiesGopherPort returns the value of the constant kSCPropNetProxiesGopherPort.
 func KSCPropNetProxiesGopherPort() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesGopherPort")))
 }
 
-// Value is a CFString
 // KSCPropNetProxiesGopherProxy returns the value of the constant kSCPropNetProxiesGopherProxy.
 func KSCPropNetProxiesGopherProxy() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesGopherProxy")))
 }
 
-// Value is a CFString
 // KSCPropNetProxiesGopherUser returns the value of the constant kSCPropNetProxiesGopherUser.
 func KSCPropNetProxiesGopherUser() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesGopherUser")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetProxiesHTTPEnable returns the value of the constant kSCPropNetProxiesHTTPEnable.
 func KSCPropNetProxiesHTTPEnable() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesHTTPEnable")))
 }
 
-// Value is a CFNumber
 // KSCPropNetProxiesHTTPPort returns the value of the constant kSCPropNetProxiesHTTPPort.
 func KSCPropNetProxiesHTTPPort() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesHTTPPort")))
 }
 
-// Value is a CFString
 // KSCPropNetProxiesHTTPProxy returns the value of the constant kSCPropNetProxiesHTTPProxy.
 func KSCPropNetProxiesHTTPProxy() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesHTTPProxy")))
 }
 
-// Value is a CFString
 // KSCPropNetProxiesHTTPUser returns the value of the constant kSCPropNetProxiesHTTPUser.
 func KSCPropNetProxiesHTTPUser() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesHTTPUser")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetProxiesHTTPSEnable returns the value of the constant kSCPropNetProxiesHTTPSEnable.
 func KSCPropNetProxiesHTTPSEnable() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesHTTPSEnable")))
 }
 
-// Value is a CFNumber
 // KSCPropNetProxiesHTTPSPort returns the value of the constant kSCPropNetProxiesHTTPSPort.
 func KSCPropNetProxiesHTTPSPort() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesHTTPSPort")))
 }
 
-// Value is a CFString
 // KSCPropNetProxiesHTTPSProxy returns the value of the constant kSCPropNetProxiesHTTPSProxy.
 func KSCPropNetProxiesHTTPSProxy() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesHTTPSProxy")))
 }
 
-// Value is a CFString
 // KSCPropNetProxiesHTTPSUser returns the value of the constant kSCPropNetProxiesHTTPSUser.
 func KSCPropNetProxiesHTTPSUser() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesHTTPSUser")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetProxiesRTSPEnable returns the value of the constant kSCPropNetProxiesRTSPEnable.
 func KSCPropNetProxiesRTSPEnable() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesRTSPEnable")))
 }
 
-// Value is a CFNumber
 // KSCPropNetProxiesRTSPPort returns the value of the constant kSCPropNetProxiesRTSPPort.
 func KSCPropNetProxiesRTSPPort() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesRTSPPort")))
 }
 
-// Value is a CFString
 // KSCPropNetProxiesRTSPProxy returns the value of the constant kSCPropNetProxiesRTSPProxy.
 func KSCPropNetProxiesRTSPProxy() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesRTSPProxy")))
 }
 
-// Value is a CFString
 // KSCPropNetProxiesRTSPUser returns the value of the constant kSCPropNetProxiesRTSPUser.
 func KSCPropNetProxiesRTSPUser() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesRTSPUser")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetProxiesSOCKSEnable returns the value of the constant kSCPropNetProxiesSOCKSEnable.
 func KSCPropNetProxiesSOCKSEnable() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesSOCKSEnable")))
 }
 
-// Value is a CFNumber
 // KSCPropNetProxiesSOCKSPort returns the value of the constant kSCPropNetProxiesSOCKSPort.
 func KSCPropNetProxiesSOCKSPort() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesSOCKSPort")))
 }
 
-// Value is a CFString
 // KSCPropNetProxiesSOCKSProxy returns the value of the constant kSCPropNetProxiesSOCKSProxy.
 func KSCPropNetProxiesSOCKSProxy() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesSOCKSProxy")))
 }
 
-// Value is a CFString
 // KSCPropNetProxiesSOCKSUser returns the value of the constant kSCPropNetProxiesSOCKSUser.
 func KSCPropNetProxiesSOCKSUser() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesSOCKSUser")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetProxiesProxyAutoConfigEnable returns the value of the constant kSCPropNetProxiesProxyAutoConfigEnable.
 func KSCPropNetProxiesProxyAutoConfigEnable() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesProxyAutoConfigEnable")))
 }
 
-// Value is a CFString
 // KSCPropNetProxiesProxyAutoConfigJavaScript returns the value of the constant kSCPropNetProxiesProxyAutoConfigJavaScript.
 func KSCPropNetProxiesProxyAutoConfigJavaScript() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesProxyAutoConfigJavaScript")))
 }
 
-// Value is a CFString
 // KSCPropNetProxiesProxyAutoConfigURLString returns the value of the constant kSCPropNetProxiesProxyAutoConfigURLString.
 func KSCPropNetProxiesProxyAutoConfigURLString() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesProxyAutoConfigURLString")))
 }
 
-// Value is a CFNumber (0 or 1)
 // KSCPropNetProxiesProxyAutoDiscoveryEnable returns the value of the constant kSCPropNetProxiesProxyAutoDiscoveryEnable.
 func KSCPropNetProxiesProxyAutoDiscoveryEnable() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesProxyAutoDiscoveryEnable")))
 }
 
-// Value is a CFString
 // KSCPropNetSMBNetBIOSName returns the value of the constant kSCPropNetSMBNetBIOSName.
 func KSCPropNetSMBNetBIOSName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetSMBNetBIOSName")))
 }
 
-// Value is a CFString
 // KSCPropNetSMBNetBIOSNodeType returns the value of the constant kSCPropNetSMBNetBIOSNodeType.
 func KSCPropNetSMBNetBIOSNodeType() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetSMBNetBIOSNodeType")))
 }
 
-// Value is a CFString
 // KSCPropNetSMBNetBIOSScope returns the value of the constant kSCPropNetSMBNetBIOSScope.
 func KSCPropNetSMBNetBIOSScope() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetSMBNetBIOSScope")))
 }
 
-// Value is a CFArray[CFString]
 // KSCPropNetSMBWINSAddresses returns the value of the constant kSCPropNetSMBWINSAddresses.
 func KSCPropNetSMBWINSAddresses() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetSMBWINSAddresses")))
 }
 
-// Value is a CFString
 // KSCPropNetSMBWorkgroup returns the value of the constant kSCPropNetSMBWorkgroup.
 func KSCPropNetSMBWorkgroup() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetSMBWorkgroup")))
@@ -1436,13 +1235,11 @@ func KSCEntUsersConsoleUser() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCEntUsersConsoleUser")))
 }
 
-// Value is a CFString
 // KSCPropSystemComputerName returns the value of the constant kSCPropSystemComputerName.
 func KSCPropSystemComputerName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropSystemComputerName")))
 }
 
-// Value is a CFNumber
 // KSCPropSystemComputerNameEncoding returns the value of the constant kSCPropSystemComputerNameEncoding.
 func KSCPropSystemComputerNameEncoding() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropSystemComputerNameEncoding")))
@@ -1473,7 +1270,6 @@ func KSCDynamicStoreDomainPrefs() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCDynamicStoreDomainPrefs")))
 }
 
-// Value is a CFString
 // KSCDynamicStorePropSetupCurrentSet returns the value of the constant kSCDynamicStorePropSetupCurrentSet.
 func KSCDynamicStorePropSetupCurrentSet() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCDynamicStorePropSetupCurrentSet")))
@@ -1484,43 +1280,36 @@ func KSCDynamicStorePropSetupLastUpdated() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCDynamicStorePropSetupLastUpdated")))
 }
 
-// Value is a CFArray[CFString]
 // KSCDynamicStorePropNetInterfaces returns the value of the constant kSCDynamicStorePropNetInterfaces.
 func KSCDynamicStorePropNetInterfaces() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCDynamicStorePropNetInterfaces")))
 }
 
-// Value is a CFString
 // KSCDynamicStorePropNetPrimaryInterface returns the value of the constant kSCDynamicStorePropNetPrimaryInterface.
 func KSCDynamicStorePropNetPrimaryInterface() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCDynamicStorePropNetPrimaryInterface")))
 }
 
-// Value is a CFString
 // KSCDynamicStorePropNetPrimaryService returns the value of the constant kSCDynamicStorePropNetPrimaryService.
 func KSCDynamicStorePropNetPrimaryService() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCDynamicStorePropNetPrimaryService")))
 }
 
-// Value is a CFArray[CFString]
 // KSCDynamicStorePropNetServiceIDs returns the value of the constant kSCDynamicStorePropNetServiceIDs.
 func KSCDynamicStorePropNetServiceIDs() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCDynamicStorePropNetServiceIDs")))
 }
 
-// Value is a CFString
 // KSCPropUsersConsoleUserName returns the value of the constant kSCPropUsersConsoleUserName.
 func KSCPropUsersConsoleUserName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropUsersConsoleUserName")))
 }
 
-// Value is a CFNumber
 // KSCPropUsersConsoleUserUID returns the value of the constant kSCPropUsersConsoleUserUID.
 func KSCPropUsersConsoleUserUID() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropUsersConsoleUserUID")))
 }
 
-// Value is a CFNumber
 // KSCPropUsersConsoleUserGID returns the value of the constant kSCPropUsersConsoleUserGID.
 func KSCPropUsersConsoleUserGID() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCPropUsersConsoleUserGID")))
@@ -1646,7 +1435,6 @@ func KSCNetworkProtocolTypeSMB() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSCNetworkProtocolTypeSMB")))
 }
 
-// CFError domain associated with errors reported by the SystemConfiguration.framework.
 // KCFErrorDomainSystemConfiguration returns the value of the constant kCFErrorDomainSystemConfiguration.
 func KCFErrorDomainSystemConfiguration() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCFErrorDomainSystemConfiguration")))

@@ -23,7 +23,8 @@ func MTRBooleanStateConfigurationClusterSuppressAlarmParamsFromID(id objc.ID) *M
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBooleanStateConfigurationClusterSuppressAlarmParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBooleanStateConfigurationClusterSuppressAlarmParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRBooleanStateConfigurationClusterSuppressAlarmParamsAdopt(id objc.ID) *MT
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBooleanStateConfigurationClusterSuppressAlarmParams{Handle: objref.Wrap(id)}
+	x := &MTRBooleanStateConfigurationClusterSuppressAlarmParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,59 +58,65 @@ func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) IsKind(classNam
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRBooleanStateConfigurationClusterSuppressAlarmParams creates a new MTRBooleanStateConfigurationClusterSuppressAlarmParams.
 func NewMTRBooleanStateConfigurationClusterSuppressAlarmParams() *MTRBooleanStateConfigurationClusterSuppressAlarmParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRBooleanStateConfigurationClusterSuppressAlarmParams")), objc.RegisterName("new"))
 	return mTRBooleanStateConfigurationClusterSuppressAlarmParamsAdopt(_id)
 }
 
-// WithAlarmsToSuppress sets alarmsToSuppress and returns the receiver so calls can be chained.
+// WithAlarmsToSuppress sets the property and returns the receiver so calls can be chained.
 func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) WithAlarmsToSuppress(alarmsToSuppress obj.Object) *MTRBooleanStateConfigurationClusterSuppressAlarmParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarmsToSuppress:"), objref.IDOf(alarmsToSuppress))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRBooleanStateConfigurationClusterSuppressAlarmParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRBooleanStateConfigurationClusterSuppressAlarmParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// AlarmsToSuppress wraps the corresponding Objective-C method.
 func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) AlarmsToSuppress() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alarmsToSuppress"))
 	return obj.Wrap(_r)
 }
 
+// SetAlarmsToSuppress wraps the corresponding Objective-C method.
 func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) SetAlarmsToSuppress(alarmsToSuppress obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarmsToSuppress:"), objref.IDOf(alarmsToSuppress))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

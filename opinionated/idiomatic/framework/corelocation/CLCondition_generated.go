@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract base class for all other monitor conditions.
-//
 // Condition is an idiomatic wrapper over the Objective-C class CLCondition.
+//
+// Condition is an abstract base — you do not construct it directly. Construct one of [BeaconIdentityCondition], [CircularGeographicCondition] and pass it where a Condition is accepted.
+//
+// The abstract base class for all other monitor conditions.
 type Condition struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ConditionFromID(id objc.ID) *Condition {
 	if id == 0 {
 		return nil
 	}
-	x := &Condition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Condition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func conditionAdopt(id objc.ID) *Condition {
 	if id == 0 {
 		return nil
 	}
-	x := &Condition{Handle: objref.Wrap(id)}
+	x := &Condition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *Condition) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewCondition creates a new Condition.
-func NewCondition() *Condition {
-	_id := objc.Send[objc.ID](objc.ID(_class("CLCondition")), objc.RegisterName("new"))
-	return conditionAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Condition) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // Conditionable is the interface implemented by [Condition], for mocking and DI.
@@ -70,3 +74,10 @@ type Conditionable interface {
 }
 
 var _ Conditionable = (*Condition)(nil)
+
+// isCondition marks Condition — and, by embedding promotion, its
+// subclasses — as a member of the Condition hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Condition) isCondition() {}
+
+var _ ConditionProvider = (*Condition)(nil)

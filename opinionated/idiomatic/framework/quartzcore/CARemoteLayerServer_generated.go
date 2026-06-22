@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A legacy class for cross-process rendering.
-//
 // RemoteLayerServer is an idiomatic wrapper over the Objective-C class CARemoteLayerServer.
+//
+// A legacy class for cross-process rendering.
 type RemoteLayerServer struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RemoteLayerServerFromID(id objc.ID) *RemoteLayerServer {
 	if id == 0 {
 		return nil
 	}
-	x := &RemoteLayerServer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RemoteLayerServer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func remoteLayerServerAdopt(id objc.ID) *RemoteLayerServer {
 	if id == 0 {
 		return nil
 	}
-	x := &RemoteLayerServer{Handle: objref.Wrap(id)}
+	x := &RemoteLayerServer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *RemoteLayerServer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RemoteLayerServer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRemoteLayerServer creates a new RemoteLayerServer.
 func NewRemoteLayerServer() *RemoteLayerServer {
 	_id := objc.Send[objc.ID](objc.ID(_class("CARemoteLayerServer")), objc.RegisterName("new"))
 	return remoteLayerServerAdopt(_id)
 }
 
+// ServerPort wraps the corresponding Objective-C method.
 func (x *RemoteLayerServer) ServerPort() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("serverPort"))
 	return _r

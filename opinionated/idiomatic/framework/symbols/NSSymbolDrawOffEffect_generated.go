@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A symbol effect that applies the DrawOff animation to symbol images.
-//
 // SymbolDrawOffEffect is an idiomatic wrapper over the Objective-C class NSSymbolDrawOffEffect.
+//
+// It embeds [SymbolEffect], promoting that type's methods.
+//
+// A symbol effect that applies the DrawOff animation to symbol images.
 type SymbolDrawOffEffect struct {
-	objref.Handle
+	SymbolEffect
 }
 
 // SymbolDrawOffEffectFromID adopts an existing Objective-C object as a SymbolDrawOffEffect
@@ -25,7 +26,8 @@ func SymbolDrawOffEffectFromID(id objc.ID) *SymbolDrawOffEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolDrawOffEffect{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SymbolDrawOffEffect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func symbolDrawOffEffectAdopt(id objc.ID) *SymbolDrawOffEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolDrawOffEffect{Handle: objref.Wrap(id)}
+	x := &SymbolDrawOffEffect{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SymbolDrawOffEffect) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SymbolDrawOffEffect) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SymbolDrawOffEffect) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSymbolDrawOffEffect creates a new SymbolDrawOffEffect.
@@ -64,31 +52,31 @@ func NewSymbolDrawOffEffect() *SymbolDrawOffEffect {
 	return symbolDrawOffEffectAdopt(_id)
 }
 
-// Returns a copy of the effect requesting an animation that applies separately to each motion group.
+// EffectWithByLayer returns a copy of the effect requesting an animation that applies separately to each motion group.
 func (x *SymbolDrawOffEffect) EffectWithByLayer() *SymbolDrawOffEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
 	return SymbolDrawOffEffectFromID(_r)
 }
 
-// Returns a copy of the effect requesting an animation that applies to all motion groups simultaneously.
+// EffectWithWholeSymbol returns a copy of the effect requesting an animation that applies to all motion groups simultaneously.
 func (x *SymbolDrawOffEffect) EffectWithWholeSymbol() *SymbolDrawOffEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolDrawOffEffectFromID(_r)
 }
 
-// Returns a copy of the effect requesting an animation that applies separately to each motion group, where only one motion group is active at a time.
+// EffectWithIndividually returns a copy of the effect requesting an animation that applies separately to each motion group, where only one motion group is active at a time.
 func (x *SymbolDrawOffEffect) EffectWithIndividually() *SymbolDrawOffEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithIndividually"))
 	return SymbolDrawOffEffectFromID(_r)
 }
 
-// Returns a copy of the effect that animates in reverse. This cancels the nonReversed variant.
+// EffectWithReversed returns a copy of the effect that animates in reverse. This cancels the nonReversed variant.
 func (x *SymbolDrawOffEffect) EffectWithReversed() *SymbolDrawOffEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithReversed"))
 	return SymbolDrawOffEffectFromID(_r)
 }
 
-// Returns a copy of the effect that only animates forwards. This cancels the reversed variant.
+// EffectWithNonReversed returns a copy of the effect that only animates forwards. This cancels the reversed variant.
 func (x *SymbolDrawOffEffect) EffectWithNonReversed() *SymbolDrawOffEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithNonReversed"))
 	return SymbolDrawOffEffectFromID(_r)
@@ -105,3 +93,5 @@ type SymbolDrawOffEffectable interface {
 }
 
 var _ SymbolDrawOffEffectable = (*SymbolDrawOffEffect)(nil)
+
+var _ SymbolEffectProvider = (*SymbolDrawOffEffect)(nil)

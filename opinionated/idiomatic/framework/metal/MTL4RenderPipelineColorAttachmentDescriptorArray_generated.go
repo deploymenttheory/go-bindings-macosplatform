@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An array of color attachment descriptions for a render pipeline.
-//
 // MTL4RenderPipelineColorAttachmentDescriptorArray is an idiomatic wrapper over the Objective-C class MTL4RenderPipelineColorAttachmentDescriptorArray.
+//
+// An array of color attachment descriptions for a render pipeline.
 type MTL4RenderPipelineColorAttachmentDescriptorArray struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MTL4RenderPipelineColorAttachmentDescriptorArrayFromID(id objc.ID) *MTL4Ren
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4RenderPipelineColorAttachmentDescriptorArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTL4RenderPipelineColorAttachmentDescriptorArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTL4RenderPipelineColorAttachmentDescriptorArrayAdopt(id objc.ID) *MTL4Rend
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4RenderPipelineColorAttachmentDescriptorArray{Handle: objref.Wrap(id)}
+	x := &MTL4RenderPipelineColorAttachmentDescriptorArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +60,30 @@ func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) IsKind(className stri
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTL4RenderPipelineColorAttachmentDescriptorArray creates a new MTL4RenderPipelineColorAttachmentDescriptorArray.
 func NewMTL4RenderPipelineColorAttachmentDescriptorArray() *MTL4RenderPipelineColorAttachmentDescriptorArray {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTL4RenderPipelineColorAttachmentDescriptorArray")), objc.RegisterName("new"))
 	return mTL4RenderPipelineColorAttachmentDescriptorArrayAdopt(_id)
 }
 
-// Accesses a color attachment at a specific index.
+// ObjectAtIndexedSubscript accesses a color attachment at a specific index.
 func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *MTL4RenderPipelineColorAttachmentDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return MTL4RenderPipelineColorAttachmentDescriptorFromID(_r)
 }
 
-// Sets an attachment at an index.
+// SetObjectAtIndexedSubscript sets an attachment at an index.
 func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *MTL4RenderPipelineColorAttachmentDescriptor, attachmentIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }
 
-// Resets the elements of the descriptor array
+// Reset resets the elements of the descriptor array
 func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) Reset() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }

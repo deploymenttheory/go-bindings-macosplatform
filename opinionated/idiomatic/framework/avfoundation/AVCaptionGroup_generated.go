@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents zero or more captions that intersect in time.
-//
 // CaptionGroup is an idiomatic wrapper over the Objective-C class AVCaptionGroup.
+//
+// An object that represents zero or more captions that intersect in time.
 type CaptionGroup struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CaptionGroupFromID(id objc.ID) *CaptionGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptionGroup{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptionGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func captionGroupAdopt(id objc.ID) *CaptionGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptionGroup{Handle: objref.Wrap(id)}
+	x := &CaptionGroup{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *CaptionGroup) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptionGroup) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCaptionGroup creates a new CaptionGroup.
 func NewCaptionGroup() *CaptionGroup {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptionGroup")), objc.RegisterName("new"))
 	return captionGroupAdopt(_id)
 }
 
-// An array of AVCaption objects. If the value is an empty array, the caption group represents a region of the timeline in which there are no captions.
+// Captions an array of AVCaption objects. If the value is an empty array, the caption group represents a region of the timeline in which there are no captions.
 //
 // Captions returns the collection as a Go slice.
 func (x *CaptionGroup) Captions() []*Caption {

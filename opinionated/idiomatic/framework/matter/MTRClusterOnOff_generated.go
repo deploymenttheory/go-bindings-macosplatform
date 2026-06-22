@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterOnOff is an idiomatic wrapper over the Objective-C class MTRClusterOnOff.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterOnOff struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterOnOffFromID adopts an existing Objective-C object as a MTRClusterOnOff
@@ -23,7 +24,8 @@ func MTRClusterOnOffFromID(id objc.ID) *MTRClusterOnOff {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterOnOff{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterOnOff{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,29 +38,13 @@ func mTRClusterOnOffAdopt(id objc.ID) *MTRClusterOnOff {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterOnOff{Handle: objref.Wrap(id)}
+	x := &MTRClusterOnOff{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterOnOff) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterOnOff) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterOnOff) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterOnOffWithDeviceEndpointIDQueue creates a new MTRClusterOnOff.
+// NewMTRClusterOnOffWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterOnOffWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterOnOff {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterOnOff")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -72,75 +58,91 @@ func NewMTRClusterOnOffWithDeviceEndpointQueue(device *MTRDevice, endpoint uint1
 	return mTRClusterOnOffAdopt(_id)
 }
 
+// ReadAttributeOnOffWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOff) ReadAttributeOnOffWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOnOffWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGlobalSceneControlWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOff) ReadAttributeGlobalSceneControlWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGlobalSceneControlWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeOnTimeWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOff) ReadAttributeOnTimeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOnTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeOnTimeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOff) WriteAttributeOnTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOnTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeOnTimeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOff) WriteAttributeOnTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOnTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeOffWaitTimeWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOff) ReadAttributeOffWaitTimeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOffWaitTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeOffWaitTimeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOff) WriteAttributeOffWaitTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOffWaitTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeOffWaitTimeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOff) WriteAttributeOffWaitTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOffWaitTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeStartUpOnOffWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOff) ReadAttributeStartUpOnOffWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStartUpOnOffWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeStartUpOnOffWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOff) WriteAttributeStartUpOnOffWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeStartUpOnOffWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeStartUpOnOffWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOff) WriteAttributeStartUpOnOffWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeStartUpOnOffWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOff) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOff) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOff) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOff) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOff) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -168,3 +170,7 @@ type MTRClusterOnOffable interface {
 }
 
 var _ MTRClusterOnOffable = (*MTRClusterOnOff)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterOnOff)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterOnOff)(nil)

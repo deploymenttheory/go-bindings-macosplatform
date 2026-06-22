@@ -6,17 +6,19 @@ package vision
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An image-analysis request that finds regions of visible text in an image.
-//
 // DetectTextRectanglesRequest is an idiomatic wrapper over the Objective-C class VNDetectTextRectanglesRequest.
+//
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// An image-analysis request that finds regions of visible text in an image.
 type DetectTextRectanglesRequest struct {
-	objref.Handle
+	ImageBasedRequest
 }
 
 // DetectTextRectanglesRequestFromID adopts an existing Objective-C object as a DetectTextRectanglesRequest
@@ -25,7 +27,8 @@ func DetectTextRectanglesRequestFromID(id objc.ID) *DetectTextRectanglesRequest 
 	if id == 0 {
 		return nil
 	}
-	x := &DetectTextRectanglesRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DetectTextRectanglesRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func detectTextRectanglesRequestAdopt(id objc.ID) *DetectTextRectanglesRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &DetectTextRectanglesRequest{Handle: objref.Wrap(id)}
+	x := &DetectTextRectanglesRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DetectTextRectanglesRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DetectTextRectanglesRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DetectTextRectanglesRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDetectTextRectanglesRequest creates a new DetectTextRectanglesRequest.
@@ -64,44 +53,43 @@ func NewDetectTextRectanglesRequest() *DetectTextRectanglesRequest {
 	return detectTextRectanglesRequestAdopt(_id)
 }
 
-// A Boolean value that indicates whether the request detects character bounding boxes.
-//
-// WithReportCharacterBoxes sets reportCharacterBoxes and returns the receiver so calls can be chained.
+// WithReportCharacterBoxes a Boolean value that indicates whether the request detects character bounding boxes.
 func (x *DetectTextRectanglesRequest) WithReportCharacterBoxes(reportCharacterBoxes bool) *DetectTextRectanglesRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReportCharacterBoxes:"), reportCharacterBoxes)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets preferBackgroundProcessing and returns the receiver so calls can be chained.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
+func (x *DetectTextRectanglesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectTextRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *DetectTextRectanglesRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectTextRectanglesRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets usesCPUOnly and returns the receiver so calls can be chained.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *DetectTextRectanglesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectTextRectanglesRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets revision and returns the receiver so calls can be chained.
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
 func (x *DetectTextRectanglesRequest) WithRevision(revision int) *DetectTextRectanglesRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
 }
 
-// Specify whether or not the bounding boxes of individual characters should also be returned in the resultant VNTextObservations. Default is NO.
+// ReportCharacterBoxes specify whether or not the bounding boxes of individual characters should also be returned in the resultant VNTextObservations. Default is NO.
 func (x *DetectTextRectanglesRequest) ReportCharacterBoxes() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reportCharacterBoxes"))
 	return _r
 }
 
+// SetReportCharacterBoxes wraps the corresponding Objective-C method.
 func (x *DetectTextRectanglesRequest) SetReportCharacterBoxes(reportCharacterBoxes bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReportCharacterBoxes:"), reportCharacterBoxes)
 }
@@ -110,6 +98,7 @@ func (x *DetectTextRectanglesRequest) SetReportCharacterBoxes(reportCharacterBox
 type DetectTextRectanglesRequestable interface {
 	obj.Object
 	WithReportCharacterBoxes(reportCharacterBoxes bool) *DetectTextRectanglesRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectTextRectanglesRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectTextRectanglesRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *DetectTextRectanglesRequest
 	WithRevision(revision int) *DetectTextRectanglesRequest
@@ -118,3 +107,7 @@ type DetectTextRectanglesRequestable interface {
 }
 
 var _ DetectTextRectanglesRequestable = (*DetectTextRectanglesRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*DetectTextRectanglesRequest)(nil)
+
+var _ RequestProvider = (*DetectTextRectanglesRequest)(nil)

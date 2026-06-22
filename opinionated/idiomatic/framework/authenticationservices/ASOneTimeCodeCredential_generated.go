@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A one-time passcode (OTP) credential.
-//
 // OneTimeCodeCredential is an idiomatic wrapper over the Objective-C class ASOneTimeCodeCredential.
+//
+// A one-time passcode (OTP) credential.
 type OneTimeCodeCredential struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func OneTimeCodeCredentialFromID(id objc.ID) *OneTimeCodeCredential {
 	if id == 0 {
 		return nil
 	}
-	x := &OneTimeCodeCredential{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OneTimeCodeCredential{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func oneTimeCodeCredentialAdopt(id objc.ID) *OneTimeCodeCredential {
 	if id == 0 {
 		return nil
 	}
-	x := &OneTimeCodeCredential{Handle: objref.Wrap(id)}
+	x := &OneTimeCodeCredential{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *OneTimeCodeCredential) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a one-time passcode (OTP) credential.
-//
-// NewOneTimeCodeCredentialWithCode creates a new OneTimeCodeCredential.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OneTimeCodeCredential) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewOneTimeCodeCredentialWithCode creates a one-time passcode (OTP) credential.
 func NewOneTimeCodeCredentialWithCode(code string) *OneTimeCodeCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASOneTimeCodeCredential")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:"), purego.NSString(code))
 	return oneTimeCodeCredentialAdopt(_id)
 }
 
+// Code wraps the corresponding Objective-C method.
 func (x *OneTimeCodeCredential) Code() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("code"))
 	if _r == 0 {

@@ -11,209 +11,251 @@ import (
 // ArrayProvider is accepted wherever a NSArray (or one of its subclasses) is expected.
 type ArrayProvider interface {
 	objref.Object
+	isArray()
 }
 
 // AttributedStringProvider is accepted wherever a NSAttributedString (or one of its subclasses) is expected.
 type AttributedStringProvider interface {
 	objref.Object
+	isAttributedString()
 }
 
 // CharacterSetProvider is accepted wherever a NSCharacterSet (or one of its subclasses) is expected.
 type CharacterSetProvider interface {
 	objref.Object
+	isCharacterSet()
 }
 
 // ClassDescriptionProvider is accepted wherever a NSClassDescription (or one of its subclasses) is expected.
 type ClassDescriptionProvider interface {
 	objref.Object
+	isClassDescription()
 }
 
 // CoderProvider is accepted wherever a NSCoder (or one of its subclasses) is expected.
 type CoderProvider interface {
 	objref.Object
+	isCoder()
 }
 
 // DataProvider is accepted wherever a NSData (or one of its subclasses) is expected.
 type DataProvider interface {
 	objref.Object
+	isData()
 }
 
 // DateProvider is accepted wherever a NSDate (or one of its subclasses) is expected.
 type DateProvider interface {
 	objref.Object
+	isDate()
 }
 
 // DictionaryProvider is accepted wherever a NSDictionary (or one of its subclasses) is expected.
 type DictionaryProvider interface {
 	objref.Object
+	isDictionary()
 }
 
 // DimensionProvider is accepted wherever a NSDimension (or one of its subclasses) is expected.
 type DimensionProvider interface {
 	objref.Object
+	isDimension()
 }
 
 // EnumeratorProvider is accepted wherever a NSEnumerator (or one of its subclasses) is expected.
 type EnumeratorProvider interface {
 	objref.Object
+	isEnumerator()
 }
 
 // FormatterProvider is accepted wherever a NSFormatter (or one of its subclasses) is expected.
 type FormatterProvider interface {
 	objref.Object
+	isFormatter()
 }
 
 // IndexSetProvider is accepted wherever a NSIndexSet (or one of its subclasses) is expected.
 type IndexSetProvider interface {
 	objref.Object
+	isIndexSet()
 }
 
 // InflectionRuleProvider is accepted wherever a NSInflectionRule (or one of its subclasses) is expected.
 type InflectionRuleProvider interface {
 	objref.Object
+	isInflectionRule()
 }
 
 // MutableDataProvider is accepted wherever a NSMutableData (or one of its subclasses) is expected.
 type MutableDataProvider interface {
 	objref.Object
+	isMutableData()
 }
 
 // MutableSetProvider is accepted wherever a NSMutableSet (or one of its subclasses) is expected.
 type MutableSetProvider interface {
 	objref.Object
+	isMutableSet()
 }
 
 // NotificationCenterProvider is accepted wherever a NSNotificationCenter (or one of its subclasses) is expected.
 type NotificationCenterProvider interface {
 	objref.Object
+	isNotificationCenter()
 }
 
 // NumberProvider is accepted wherever a NSNumber (or one of its subclasses) is expected.
 type NumberProvider interface {
 	objref.Object
+	isNumber()
 }
 
 // ObjectProvider is accepted wherever a NSObject (or one of its subclasses) is expected.
 type ObjectProvider interface {
 	objref.Object
+	isObject()
 }
 
 // OperationProvider is accepted wherever a NSOperation (or one of its subclasses) is expected.
 type OperationProvider interface {
 	objref.Object
+	isOperation()
 }
 
 // OrderedSetProvider is accepted wherever a NSOrderedSet (or one of its subclasses) is expected.
 type OrderedSetProvider interface {
 	objref.Object
+	isOrderedSet()
 }
 
 // PortProvider is accepted wherever a NSPort (or one of its subclasses) is expected.
 type PortProvider interface {
 	objref.Object
+	isPort()
 }
 
 // PortNameServerProvider is accepted wherever a NSPortNameServer (or one of its subclasses) is expected.
 type PortNameServerProvider interface {
 	objref.Object
+	isPortNameServer()
 }
 
 // PredicateProvider is accepted wherever a NSPredicate (or one of its subclasses) is expected.
 type PredicateProvider interface {
 	objref.Object
+	isPredicate()
 }
 
 // ProxyProvider is accepted wherever a NSProxy (or one of its subclasses) is expected.
 type ProxyProvider interface {
 	objref.Object
+	isProxy()
 }
 
 // RegularExpressionProvider is accepted wherever a NSRegularExpression (or one of its subclasses) is expected.
 type RegularExpressionProvider interface {
 	objref.Object
+	isRegularExpression()
 }
 
 // ScriptCommandProvider is accepted wherever a NSScriptCommand (or one of its subclasses) is expected.
 type ScriptCommandProvider interface {
 	objref.Object
+	isScriptCommand()
 }
 
 // ScriptObjectSpecifierProvider is accepted wherever a NSScriptObjectSpecifier (or one of its subclasses) is expected.
 type ScriptObjectSpecifierProvider interface {
 	objref.Object
+	isScriptObjectSpecifier()
 }
 
 // ScriptWhoseTestProvider is accepted wherever a NSScriptWhoseTest (or one of its subclasses) is expected.
 type ScriptWhoseTestProvider interface {
 	objref.Object
+	isScriptWhoseTest()
 }
 
 // SetProvider is accepted wherever a NSSet (or one of its subclasses) is expected.
 type SetProvider interface {
 	objref.Object
+	isSet()
 }
 
 // SimpleCStringProvider is accepted wherever a NSSimpleCString (or one of its subclasses) is expected.
 type SimpleCStringProvider interface {
 	objref.Object
+	isSimpleCString()
 }
 
 // StreamProvider is accepted wherever a NSStream (or one of its subclasses) is expected.
 type StreamProvider interface {
 	objref.Object
+	isStream()
 }
 
 // StringProvider is accepted wherever a NSString (or one of its subclasses) is expected.
 type StringProvider interface {
 	objref.Object
+	isString()
 }
 
 // URLRequestProvider is accepted wherever a NSURLRequest (or one of its subclasses) is expected.
 type URLRequestProvider interface {
 	objref.Object
+	isURLRequest()
 }
 
 // URLResponseProvider is accepted wherever a NSURLResponse (or one of its subclasses) is expected.
 type URLResponseProvider interface {
 	objref.Object
+	isURLResponse()
 }
 
 // URLSessionDataTaskProvider is accepted wherever a NSURLSessionDataTask (or one of its subclasses) is expected.
 type URLSessionDataTaskProvider interface {
 	objref.Object
+	isURLSessionDataTask()
 }
 
 // URLSessionTaskProvider is accepted wherever a NSURLSessionTask (or one of its subclasses) is expected.
 type URLSessionTaskProvider interface {
 	objref.Object
+	isURLSessionTask()
 }
 
 // UnitProvider is accepted wherever a NSUnit (or one of its subclasses) is expected.
 type UnitProvider interface {
 	objref.Object
+	isUnit()
 }
 
 // UnitConverterProvider is accepted wherever a NSUnitConverter (or one of its subclasses) is expected.
 type UnitConverterProvider interface {
 	objref.Object
+	isUnitConverter()
 }
 
 // UserScriptTaskProvider is accepted wherever a NSUserScriptTask (or one of its subclasses) is expected.
 type UserScriptTaskProvider interface {
 	objref.Object
+	isUserScriptTask()
 }
 
 // ValueProvider is accepted wherever a NSValue (or one of its subclasses) is expected.
 type ValueProvider interface {
 	objref.Object
+	isValue()
 }
 
 // ValueTransformerProvider is accepted wherever a NSValueTransformer (or one of its subclasses) is expected.
 type ValueTransformerProvider interface {
 	objref.Object
+	isValueTransformer()
 }
 
 // XMLNodeProvider is accepted wherever a NSXMLNode (or one of its subclasses) is expected.
 type XMLNodeProvider interface {
 	objref.Object
+	isXMLNode()
 }

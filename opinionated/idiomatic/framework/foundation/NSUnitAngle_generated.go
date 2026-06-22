@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for planar angle and rotation.
-//
 // UnitAngle is an idiomatic wrapper over the Objective-C class NSUnitAngle.
+//
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for planar angle and rotation.
 type UnitAngle struct {
-	objref.Handle
+	Dimension
 }
 
 // UnitAngleFromID adopts an existing Objective-C object as a UnitAngle
@@ -25,7 +26,8 @@ func UnitAngleFromID(id objc.ID) *UnitAngle {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitAngle{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UnitAngle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func unitAngleAdopt(id objc.ID) *UnitAngle {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitAngle{Handle: objref.Wrap(id)}
+	x := &UnitAngle{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UnitAngle) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UnitAngle) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UnitAngle) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUnitAngle creates a new UnitAngle.
@@ -64,7 +52,7 @@ func NewUnitAngle() *UnitAngle {
 	return unitAngleAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UnitAngle) WithScriptingProperties(scriptingProperties obj.Object) *UnitAngle {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
@@ -77,3 +65,7 @@ type UnitAngleable interface {
 }
 
 var _ UnitAngleable = (*UnitAngle)(nil)
+
+var _ DimensionProvider = (*UnitAngle)(nil)
+
+var _ UnitProvider = (*UnitAngle)(nil)

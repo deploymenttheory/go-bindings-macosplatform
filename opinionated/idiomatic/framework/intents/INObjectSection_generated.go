@@ -23,7 +23,8 @@ func ObjectSectionFromID(id objc.ID) *ObjectSection {
 	if id == 0 {
 		return nil
 	}
-	x := &ObjectSection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ObjectSection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func objectSectionAdopt(id objc.ID) *ObjectSection {
 	if id == 0 {
 		return nil
 	}
-	x := &ObjectSection{Handle: objref.Wrap(id)}
+	x := &ObjectSection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *ObjectSection) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ObjectSection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewObjectSectionWithTitleItems creates a new ObjectSection.
 func NewObjectSectionWithTitleItems(title string, items []obj.Object) *ObjectSection {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INObjectSection")), objc.RegisterName("alloc"))
@@ -63,6 +71,7 @@ func NewObjectSectionWithTitleItems(title string, items []obj.Object) *ObjectSec
 	return objectSectionAdopt(_id)
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *ObjectSection) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -71,6 +80,7 @@ func (x *ObjectSection) Title() string {
 	return purego.GoString(_r)
 }
 
+// Items wraps the corresponding Objective-C method.
 func (x *ObjectSection) Items() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("items"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

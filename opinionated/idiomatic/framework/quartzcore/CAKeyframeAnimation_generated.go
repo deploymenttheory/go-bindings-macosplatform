@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides keyframe animation capabilities for a layer object.
-//
 // KeyframeAnimation is an idiomatic wrapper over the Objective-C class CAKeyframeAnimation.
+//
+// It embeds [PropertyAnimation], promoting that type's methods.
+//
+// An object that provides keyframe animation capabilities for a layer object.
 type KeyframeAnimation struct {
-	objref.Handle
+	PropertyAnimation
 }
 
 // KeyframeAnimationFromID adopts an existing Objective-C object as a KeyframeAnimation
@@ -25,7 +26,8 @@ func KeyframeAnimationFromID(id objc.ID) *KeyframeAnimation {
 	if id == 0 {
 		return nil
 	}
-	x := &KeyframeAnimation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &KeyframeAnimation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func keyframeAnimationAdopt(id objc.ID) *KeyframeAnimation {
 	if id == 0 {
 		return nil
 	}
-	x := &KeyframeAnimation{Handle: objref.Wrap(id)}
+	x := &KeyframeAnimation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *KeyframeAnimation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *KeyframeAnimation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *KeyframeAnimation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewKeyframeAnimation creates a new KeyframeAnimation.
@@ -64,205 +52,200 @@ func NewKeyframeAnimation() *KeyframeAnimation {
 	return keyframeAnimationAdopt(_id)
 }
 
-// The path for a point-based property to follow.
-//
-// WithPath sets path and returns the receiver so calls can be chained.
+// WithPath the path for a point-based property to follow.
 func (x *KeyframeAnimation) WithPath(path obj.Object) *KeyframeAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
 	return x
 }
 
-// An optional array of NSNumber objects that define the time at which to apply a given keyframe segment.
-//
-// WithKeyTimes sets the collection and returns the receiver so calls can be chained.
+// WithKeyTimes an optional array of NSNumber objects that define the time at which to apply a given keyframe segment.
 func (x *KeyframeAnimation) WithKeyTimes(items ...obj.Object) *KeyframeAnimation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyTimes:"), _arr)
 	return x
 }
 
-// An optional array of CAMediaTimingFunction objects that define the pacing for each keyframe segment.
-//
-// WithTimingFunctions sets the collection and returns the receiver so calls can be chained.
+// WithTimingFunctions an optional array of CAMediaTimingFunction objects that define the pacing for each keyframe segment.
 func (x *KeyframeAnimation) WithTimingFunctions(items ...*MediaTimingFunction) *KeyframeAnimation {
 	_arr := purego.SliceToNSArray(items, func(_v *MediaTimingFunction) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunctions:"), _arr)
 	return x
 }
 
-// Specifies how intermediate keyframe values are calculated by the receiver.
-//
-// WithCalculationMode sets calculationMode and returns the receiver so calls can be chained.
+// WithCalculationMode specifies how intermediate keyframe values are calculated by the receiver.
 func (x *KeyframeAnimation) WithCalculationMode(calculationMode obj.Object) *KeyframeAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalculationMode:"), objref.IDOf(calculationMode))
 	return x
 }
 
-// An array of numbers that define the tightness of the curve.
-//
-// WithTensionValues sets the collection and returns the receiver so calls can be chained.
+// WithTensionValues an array of numbers that define the tightness of the curve.
 func (x *KeyframeAnimation) WithTensionValues(items ...obj.Object) *KeyframeAnimation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTensionValues:"), _arr)
 	return x
 }
 
-// An array of numbers that define the sharpness of the timing curve’s corners.
-//
-// WithContinuityValues sets the collection and returns the receiver so calls can be chained.
+// WithContinuityValues an array of numbers that define the sharpness of the timing curve’s corners.
 func (x *KeyframeAnimation) WithContinuityValues(items ...obj.Object) *KeyframeAnimation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuityValues:"), _arr)
 	return x
 }
 
-// An array of numbers that define the position of the curve relative to a control point.
-//
-// WithBiasValues sets the collection and returns the receiver so calls can be chained.
+// WithBiasValues an array of numbers that define the position of the curve relative to a control point.
 func (x *KeyframeAnimation) WithBiasValues(items ...obj.Object) *KeyframeAnimation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBiasValues:"), _arr)
 	return x
 }
 
-// Determines whether objects animating along the path rotate to match the path tangent.
-//
-// WithRotationMode sets rotationMode and returns the receiver so calls can be chained.
+// WithRotationMode determines whether objects animating along the path rotate to match the path tangent.
 func (x *KeyframeAnimation) WithRotationMode(rotationMode obj.Object) *KeyframeAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotationMode:"), objref.IDOf(rotationMode))
 	return x
 }
 
-// Specifies the key path the receiver animates.
-//
-// WithKeyPath sets keyPath and returns the receiver so calls can be chained.
+// WithKeyPath specifies the key path the receiver animates.
 func (x *KeyframeAnimation) WithKeyPath(keyPath string) *KeyframeAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyPath:"), purego.NSString(keyPath))
 	return x
 }
 
-// Determines if the value specified by the animation is added to the current render tree value to produce the new render tree value.
-//
-// WithAdditive sets additive and returns the receiver so calls can be chained.
+// WithAdditive determines if the value specified by the animation is added to the current render tree value to produce the new render tree value.
 func (x *KeyframeAnimation) WithAdditive(additive bool) *KeyframeAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditive:"), additive)
 	return x
 }
 
-// Determines if the value of the property is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle.
-//
-// WithCumulative sets cumulative and returns the receiver so calls can be chained.
+// WithCumulative determines if the value of the property is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle.
 func (x *KeyframeAnimation) WithCumulative(cumulative bool) *KeyframeAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCumulative:"), cumulative)
 	return x
 }
 
-// An optional value function that is applied to interpolated values.
-//
-// WithValueFunction sets valueFunction and returns the receiver so calls can be chained.
+// WithValueFunction an optional value function that is applied to interpolated values.
 func (x *KeyframeAnimation) WithValueFunction(valueFunction *ValueFunction) *KeyframeAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueFunction:"), objref.IDOf(valueFunction))
 	return x
 }
 
-// An optional timing function defining the pacing of the animation.
-//
-// WithTimingFunction sets timingFunction and returns the receiver so calls can be chained.
+// WithTimingFunction an optional timing function defining the pacing of the animation.
 func (x *KeyframeAnimation) WithTimingFunction(timingFunction *MediaTimingFunction) *KeyframeAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
 	return x
 }
 
-// Determines if the animation is removed from the target layer’s animations upon completion.
-//
-// WithRemovedOnCompletion sets removedOnCompletion and returns the receiver so calls can be chained.
+// WithRemovedOnCompletion determines if the animation is removed from the target layer’s animations upon completion.
 func (x *KeyframeAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *KeyframeAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
 	return x
 }
 
+// Values wraps the corresponding Objective-C method.
 func (x *KeyframeAnimation) Values() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("values"))
 	return obj.Wrap(_r)
 }
 
+// SetValues wraps the corresponding Objective-C method.
 func (x *KeyframeAnimation) SetValues(values obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValues:"), objref.IDOf(values))
 }
 
+// Path wraps the corresponding Objective-C method.
 func (x *KeyframeAnimation) Path() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
 	return obj.Wrap(_r)
 }
 
+// SetPath wraps the corresponding Objective-C method.
 func (x *KeyframeAnimation) SetPath(path obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
 }
 
+// KeyTimes wraps the corresponding Objective-C method.
+//
 // KeyTimes returns the collection as a Go slice.
 func (x *KeyframeAnimation) KeyTimes() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyTimes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetKeyTimes wraps the corresponding Objective-C method.
 func (x *KeyframeAnimation) SetKeyTimes(keyTimes []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyTimes:"), purego.SliceToNSArray(keyTimes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// TimingFunctions wraps the corresponding Objective-C method.
+//
 // TimingFunctions returns the collection as a Go slice.
 func (x *KeyframeAnimation) TimingFunctions() []*MediaTimingFunction {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timingFunctions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaTimingFunction { return MediaTimingFunctionFromID(_id) })
 }
 
+// SetTimingFunctions wraps the corresponding Objective-C method.
 func (x *KeyframeAnimation) SetTimingFunctions(timingFunctions []*MediaTimingFunction) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunctions:"), purego.SliceToNSArray(timingFunctions, func(_v *MediaTimingFunction) objc.ID { return objref.IDOf(_v) }))
 }
 
+// CalculationMode wraps the corresponding Objective-C method.
 func (x *KeyframeAnimation) CalculationMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calculationMode"))
 	return obj.Wrap(_r)
 }
 
+// SetCalculationMode wraps the corresponding Objective-C method.
 func (x *KeyframeAnimation) SetCalculationMode(calculationMode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalculationMode:"), objref.IDOf(calculationMode))
 }
 
+// TensionValues wraps the corresponding Objective-C method.
+//
 // TensionValues returns the collection as a Go slice.
 func (x *KeyframeAnimation) TensionValues() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tensionValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetTensionValues wraps the corresponding Objective-C method.
 func (x *KeyframeAnimation) SetTensionValues(tensionValues []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTensionValues:"), purego.SliceToNSArray(tensionValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// ContinuityValues wraps the corresponding Objective-C method.
+//
 // ContinuityValues returns the collection as a Go slice.
 func (x *KeyframeAnimation) ContinuityValues() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("continuityValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetContinuityValues wraps the corresponding Objective-C method.
 func (x *KeyframeAnimation) SetContinuityValues(continuityValues []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuityValues:"), purego.SliceToNSArray(continuityValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// BiasValues wraps the corresponding Objective-C method.
+//
 // BiasValues returns the collection as a Go slice.
 func (x *KeyframeAnimation) BiasValues() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biasValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetBiasValues wraps the corresponding Objective-C method.
 func (x *KeyframeAnimation) SetBiasValues(biasValues []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBiasValues:"), purego.SliceToNSArray(biasValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// RotationMode wraps the corresponding Objective-C method.
 func (x *KeyframeAnimation) RotationMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rotationMode"))
 	return obj.Wrap(_r)
 }
 
+// SetRotationMode wraps the corresponding Objective-C method.
 func (x *KeyframeAnimation) SetRotationMode(rotationMode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotationMode:"), objref.IDOf(rotationMode))
 }
@@ -305,3 +288,7 @@ type KeyframeAnimationable interface {
 }
 
 var _ KeyframeAnimationable = (*KeyframeAnimation)(nil)
+
+var _ PropertyAnimationProvider = (*KeyframeAnimation)(nil)
+
+var _ AnimationProvider = (*KeyframeAnimation)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An annotation that represents a map item
-//
 // MapItemAnnotation is an idiomatic wrapper over the Objective-C class MKMapItemAnnotation.
+//
+// An annotation that represents a map item
 type MapItemAnnotation struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MapItemAnnotationFromID(id objc.ID) *MapItemAnnotation {
 	if id == 0 {
 		return nil
 	}
-	x := &MapItemAnnotation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MapItemAnnotation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mapItemAnnotationAdopt(id objc.ID) *MapItemAnnotation {
 	if id == 0 {
 		return nil
 	}
-	x := &MapItemAnnotation{Handle: objref.Wrap(id)}
+	x := &MapItemAnnotation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *MapItemAnnotation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a map item annotation
-//
-// NewMapItemAnnotationWithMapItem creates a new MapItemAnnotation.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MapItemAnnotation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMapItemAnnotationWithMapItem creates a map item annotation
 func NewMapItemAnnotationWithMapItem(mapItem *MapItem) *MapItemAnnotation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItemAnnotation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapItem:"), objref.IDOf(mapItem))
 	return mapItemAnnotationAdopt(_id)
 }
 
+// MapItem wraps the corresponding Objective-C method.
 func (x *MapItemAnnotation) MapItem() *MapItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapItem"))
 	return MapItemFromID(_r)

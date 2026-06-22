@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NDArrayVectorLUTDequantize is an idiomatic wrapper over the Objective-C class MPSNDArrayVectorLUTDequantize.
+//
+// It embeds [NDArrayMultiaryKernel], promoting that type's methods.
 type NDArrayVectorLUTDequantize struct {
-	objref.Handle
+	NDArrayMultiaryKernel
 }
 
 // NDArrayVectorLUTDequantizeFromID adopts an existing Objective-C object as a NDArrayVectorLUTDequantize
@@ -23,7 +24,8 @@ func NDArrayVectorLUTDequantizeFromID(id objc.ID) *NDArrayVectorLUTDequantize {
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayVectorLUTDequantize{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NDArrayVectorLUTDequantize{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func nDArrayVectorLUTDequantizeAdopt(id objc.ID) *NDArrayVectorLUTDequantize {
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayVectorLUTDequantize{Handle: objref.Wrap(id)}
+	x := &NDArrayVectorLUTDequantize{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NDArrayVectorLUTDequantize) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NDArrayVectorLUTDequantize) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NDArrayVectorLUTDequantize) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNDArrayVectorLUTDequantize creates a new NDArrayVectorLUTDequantize.
@@ -62,28 +50,25 @@ func NewNDArrayVectorLUTDequantize() *NDArrayVectorLUTDequantize {
 	return nDArrayVectorLUTDequantizeAdopt(_id)
 }
 
-// Which axis in the destination will receive the vector component, must be less than 4.
-//
-// WithVectorAxis sets vectorAxis and returns the receiver so calls can be chained.
+// WithVectorAxis which axis in the destination will receive the vector component, must be less than 4.
 func (x *NDArrayVectorLUTDequantize) WithVectorAxis(vectorAxis int) *NDArrayVectorLUTDequantize {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVectorAxis:"), vectorAxis)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayVectorLUTDequantize) WithLabel(label string) *NDArrayVectorLUTDequantize {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Which axis in the destination will receive the vector component, must be less than 4.
+// VectorAxis which axis in the destination will receive the vector component, must be less than 4.
 func (x *NDArrayVectorLUTDequantize) VectorAxis() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vectorAxis"))
 	return _r
 }
 
+// SetVectorAxis wraps the corresponding Objective-C method.
 func (x *NDArrayVectorLUTDequantize) SetVectorAxis(vectorAxis int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVectorAxis:"), vectorAxis)
 }
@@ -98,3 +83,9 @@ type NDArrayVectorLUTDequantizeable interface {
 }
 
 var _ NDArrayVectorLUTDequantizeable = (*NDArrayVectorLUTDequantize)(nil)
+
+var _ NDArrayMultiaryKernelProvider = (*NDArrayVectorLUTDequantize)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayVectorLUTDequantize)(nil)
+
+var _ KernelProvider = (*NDArrayVectorLUTDequantize)(nil)

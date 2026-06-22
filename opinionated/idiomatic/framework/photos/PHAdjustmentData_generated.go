@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of the edits made to an asset’s photo, video, or Live Photo content, which allows your app to reconstruct or revert the effects of prior editing sessions.
-//
 // AdjustmentData is an idiomatic wrapper over the Objective-C class PHAdjustmentData.
+//
+// A description of the edits made to an asset’s photo, video, or Live Photo content, which allows your app to reconstruct or revert the effects of prior editing sessions.
 type AdjustmentData struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AdjustmentDataFromID(id objc.ID) *AdjustmentData {
 	if id == 0 {
 		return nil
 	}
-	x := &AdjustmentData{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AdjustmentData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func adjustmentDataAdopt(id objc.ID) *AdjustmentData {
 	if id == 0 {
 		return nil
 	}
-	x := &AdjustmentData{Handle: objref.Wrap(id)}
+	x := &AdjustmentData{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *AdjustmentData) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes an adjustment object with the specified format and data.
-//
-// NewAdjustmentDataWithFormatIdentifierFormatVersionData creates a new AdjustmentData.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AdjustmentData) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAdjustmentDataWithFormatIdentifierFormatVersionData initializes an adjustment object with the specified format and data.
 func NewAdjustmentDataWithFormatIdentifierFormatVersionData(formatIdentifier string, formatVersion string, data obj.Object) *AdjustmentData {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHAdjustmentData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormatIdentifier:formatVersion:data:"), purego.NSString(formatIdentifier), purego.NSString(formatVersion), objref.IDOf(data))
 	return adjustmentDataAdopt(_id)
 }
 
+// FormatIdentifier wraps the corresponding Objective-C method.
 func (x *AdjustmentData) FormatIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formatIdentifier"))
 	if _r == 0 {
@@ -75,6 +82,7 @@ func (x *AdjustmentData) FormatIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// FormatVersion wraps the corresponding Objective-C method.
 func (x *AdjustmentData) FormatVersion() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formatVersion"))
 	if _r == 0 {
@@ -83,6 +91,7 @@ func (x *AdjustmentData) FormatVersion() string {
 	return purego.GoString(_r)
 }
 
+// Data wraps the corresponding Objective-C method.
 func (x *AdjustmentData) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)

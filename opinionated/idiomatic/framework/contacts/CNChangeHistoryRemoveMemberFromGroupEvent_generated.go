@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a user removing a contact from a group.
-//
 // ChangeHistoryRemoveMemberFromGroupEvent is an idiomatic wrapper over the Objective-C class CNChangeHistoryRemoveMemberFromGroupEvent.
+//
+// It embeds [ChangeHistoryEvent], promoting that type's methods.
+//
+// An object that represents a user removing a contact from a group.
 type ChangeHistoryRemoveMemberFromGroupEvent struct {
-	objref.Handle
+	ChangeHistoryEvent
 }
 
 // ChangeHistoryRemoveMemberFromGroupEventFromID adopts an existing Objective-C object as a ChangeHistoryRemoveMemberFromGroupEvent
@@ -25,7 +26,8 @@ func ChangeHistoryRemoveMemberFromGroupEventFromID(id objc.ID) *ChangeHistoryRem
 	if id == 0 {
 		return nil
 	}
-	x := &ChangeHistoryRemoveMemberFromGroupEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ChangeHistoryRemoveMemberFromGroupEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func changeHistoryRemoveMemberFromGroupEventAdopt(id objc.ID) *ChangeHistoryRemo
 	if id == 0 {
 		return nil
 	}
-	x := &ChangeHistoryRemoveMemberFromGroupEvent{Handle: objref.Wrap(id)}
+	x := &ChangeHistoryRemoveMemberFromGroupEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ChangeHistoryRemoveMemberFromGroupEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ChangeHistoryRemoveMemberFromGroupEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ChangeHistoryRemoveMemberFromGroupEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewChangeHistoryRemoveMemberFromGroupEvent creates a new ChangeHistoryRemoveMemberFromGroupEvent.
@@ -64,11 +52,13 @@ func NewChangeHistoryRemoveMemberFromGroupEvent() *ChangeHistoryRemoveMemberFrom
 	return changeHistoryRemoveMemberFromGroupEventAdopt(_id)
 }
 
+// Member wraps the corresponding Objective-C method.
 func (x *ChangeHistoryRemoveMemberFromGroupEvent) Member() *Contact {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("member"))
 	return ContactFromID(_r)
 }
 
+// Group wraps the corresponding Objective-C method.
 func (x *ChangeHistoryRemoveMemberFromGroupEvent) Group() *Group {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("group"))
 	return GroupFromID(_r)
@@ -82,3 +72,5 @@ type ChangeHistoryRemoveMemberFromGroupEventable interface {
 }
 
 var _ ChangeHistoryRemoveMemberFromGroupEventable = (*ChangeHistoryRemoveMemberFromGroupEvent)(nil)
+
+var _ ChangeHistoryEventProvider = (*ChangeHistoryRemoveMemberFromGroupEvent)(nil)

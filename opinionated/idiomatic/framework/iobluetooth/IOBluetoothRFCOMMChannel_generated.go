@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An instance of this class represents an RFCOMM channel as defined by the Bluetooth SDP spec..
-//
 // IOBluetoothRFCOMMChannel is an idiomatic wrapper over the Objective-C class IOBluetoothRFCOMMChannel.
+//
+// It embeds [IOBluetoothObject], promoting that type's methods.
+//
+// An instance of this class represents an RFCOMM channel as defined by the Bluetooth SDP spec..
 type IOBluetoothRFCOMMChannel struct {
-	objref.Handle
+	IOBluetoothObject
 }
 
 // IOBluetoothRFCOMMChannelFromID adopts an existing Objective-C object as a IOBluetoothRFCOMMChannel
@@ -25,7 +26,8 @@ func IOBluetoothRFCOMMChannelFromID(id objc.ID) *IOBluetoothRFCOMMChannel {
 	if id == 0 {
 		return nil
 	}
-	x := &IOBluetoothRFCOMMChannel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IOBluetoothRFCOMMChannel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func iOBluetoothRFCOMMChannelAdopt(id objc.ID) *IOBluetoothRFCOMMChannel {
 	if id == 0 {
 		return nil
 	}
-	x := &IOBluetoothRFCOMMChannel{Handle: objref.Wrap(id)}
+	x := &IOBluetoothRFCOMMChannel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *IOBluetoothRFCOMMChannel) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IOBluetoothRFCOMMChannel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IOBluetoothRFCOMMChannel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewIOBluetoothRFCOMMChannel creates a new IOBluetoothRFCOMMChannel.
@@ -64,79 +52,79 @@ func NewIOBluetoothRFCOMMChannel() *IOBluetoothRFCOMMChannel {
 	return iOBluetoothRFCOMMChannelAdopt(_id)
 }
 
-// Returns an IOBluetoothRFCOMMChannelRef representation of the target IOBluetoothRFCOMMChannel object.
+// GetRFCOMMChannelRef returns an IOBluetoothRFCOMMChannelRef representation of the target IOBluetoothRFCOMMChannel object.
 func (x *IOBluetoothRFCOMMChannel) GetRFCOMMChannelRef() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getRFCOMMChannelRef"))
 	return obj.Wrap(_r)
 }
 
-// Close the channel.
+// CloseChannel close the channel.
 func (x *IOBluetoothRFCOMMChannel) CloseChannel() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("closeChannel"))
 	return _r
 }
 
-// Returns the state of the channel.
+// IsOpen returns the state of the channel.
 func (x *IOBluetoothRFCOMMChannel) IsOpen() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOpen"))
 	return _r
 }
 
-// Returns the channel maximum transfer unit.
+// GetMTU returns the channel maximum transfer unit.
 func (x *IOBluetoothRFCOMMChannel) GetMTU() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getMTU"))
 	return _r
 }
 
-// Returns TRUE if flow control is off.
+// IsTransmissionPaused returns TRUE if flow control is off.
 func (x *IOBluetoothRFCOMMChannel) IsTransmissionPaused() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTransmissionPaused"))
 	return _r
 }
 
-// Changes the parameters of the serial connection.
+// SetSerialParametersDataBitsParityStopBits changes the parameters of the serial connection.
 func (x *IOBluetoothRFCOMMChannel) SetSerialParametersDataBitsParityStopBits(speed int, nBits uint8, parity BluetoothRFCOMMParityType, bitStop uint8) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("setSerialParameters:dataBits:parity:stopBits:"), speed, nBits, parity, bitStop)
 	return _r
 }
 
-// Sends an error to the remote side.
+// SendRemoteLineStatus sends an error to the remote side.
 func (x *IOBluetoothRFCOMMChannel) SendRemoteLineStatus(lineStatus BluetoothRFCOMMLineStatus) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sendRemoteLineStatus:"), lineStatus)
 	return _r
 }
 
-// Allows an object to register itself as a client of the RFCOMM channel.
+// SetDelegate allows an object to register itself as a client of the RFCOMM channel.
 func (x *IOBluetoothRFCOMMChannel) SetDelegate(delegate obj.Object) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return _r
 }
 
-// Returns the object delegate
+// Delegate returns the object delegate
 func (x *IOBluetoothRFCOMMChannel) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
-// Returns the object rfcomm channel ID.
+// GetChannelID returns the object rfcomm channel ID.
 func (x *IOBluetoothRFCOMMChannel) GetChannelID() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("getChannelID"))
 	return _r
 }
 
-// Returns the direction of the channel. An incoming channel is one that was opened by the remote device.
+// IsIncoming returns the direction of the channel. An incoming channel is one that was opened by the remote device.
 func (x *IOBluetoothRFCOMMChannel) IsIncoming() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isIncoming"))
 	return _r
 }
 
-// Returns the Bluetooth Device that carries the rfcomm data.
+// GetDevice returns the Bluetooth Device that carries the rfcomm data.
 func (x *IOBluetoothRFCOMMChannel) GetDevice() *IOBluetoothDevice {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getDevice"))
 	return IOBluetoothDeviceFromID(_r)
 }
 
-// Returns the IOBluetoothObjectID of the given IOBluetoothRFCOMMChannel.
+// GetObjectID returns the IOBluetoothObjectID of the given IOBluetoothRFCOMMChannel.
 func (x *IOBluetoothRFCOMMChannel) GetObjectID() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("getObjectID"))
 	return _r
@@ -161,3 +149,5 @@ type IOBluetoothRFCOMMChannelable interface {
 }
 
 var _ IOBluetoothRFCOMMChannelable = (*IOBluetoothRFCOMMChannel)(nil)
+
+var _ IOBluetoothObjectProvider = (*IOBluetoothRFCOMMChannel)(nil)

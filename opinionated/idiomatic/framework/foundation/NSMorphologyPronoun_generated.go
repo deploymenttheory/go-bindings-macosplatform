@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A custom pronoun for referring to a third person.
-//
 // MorphologyPronoun is an idiomatic wrapper over the Objective-C class NSMorphologyPronoun.
+//
+// A custom pronoun for referring to a third person.
 type MorphologyPronoun struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MorphologyPronounFromID(id objc.ID) *MorphologyPronoun {
 	if id == 0 {
 		return nil
 	}
-	x := &MorphologyPronoun{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MorphologyPronoun{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func morphologyPronounAdopt(id objc.ID) *MorphologyPronoun {
 	if id == 0 {
 		return nil
 	}
-	x := &MorphologyPronoun{Handle: objref.Wrap(id)}
+	x := &MorphologyPronoun{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +60,12 @@ func (x *MorphologyPronoun) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MorphologyPronoun) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMorphologyPronounWithPronounMorphologyDependentMorphology creates a new MorphologyPronoun.
 func NewMorphologyPronounWithPronounMorphologyDependentMorphology(pronoun string, morphology *Morphology, dependentMorphology *Morphology) *MorphologyPronoun {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMorphologyPronoun")), objc.RegisterName("alloc"))
@@ -65,12 +73,13 @@ func NewMorphologyPronounWithPronounMorphologyDependentMorphology(pronoun string
 	return morphologyPronounAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *MorphologyPronoun) WithScriptingProperties(scriptingProperties obj.Object) *MorphologyPronoun {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Pronoun wraps the corresponding Objective-C method.
 func (x *MorphologyPronoun) Pronoun() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pronoun"))
 	if _r == 0 {
@@ -79,11 +88,13 @@ func (x *MorphologyPronoun) Pronoun() string {
 	return purego.GoString(_r)
 }
 
+// Morphology wraps the corresponding Objective-C method.
 func (x *MorphologyPronoun) Morphology() *Morphology {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("morphology"))
 	return MorphologyFromID(_r)
 }
 
+// DependentMorphology wraps the corresponding Objective-C method.
 func (x *MorphologyPronoun) DependentMorphology() *Morphology {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dependentMorphology"))
 	return MorphologyFromID(_r)

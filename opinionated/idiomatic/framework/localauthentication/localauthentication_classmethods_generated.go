@@ -9,49 +9,49 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Creates a requirement that requires biometric authentication or a fallback requirement that you specify.
+// BiometryRequirementWithFallback creates a requirement that requires biometric authentication or a fallback requirement that you specify.
 func BiometryRequirementWithFallback(fallback *BiometryFallbackRequirement) *AuthenticationRequirement {
 	_r := objc.Send[objc.ID](objc.ID(_class("LAAuthenticationRequirement")), objc.RegisterName("biometryRequirementWithFallback:"), objref.IDOf(fallback))
 	return AuthenticationRequirementFromID(_r)
 }
 
-// Requires user authentication
+// DefaultRequirement requires user authentication
 func DefaultRequirement() *AuthenticationRequirement {
 	_r := objc.Send[objc.ID](objc.ID(_class("LAAuthenticationRequirement")), objc.RegisterName("defaultRequirement"))
 	return AuthenticationRequirementFromID(_r)
 }
 
-// Requires biometric authentication The authorization will fail if:
+// BiometryRequirement requires biometric authentication The authorization will fail if:
 func BiometryRequirement() *AuthenticationRequirement {
 	_r := objc.Send[objc.ID](objc.ID(_class("LAAuthenticationRequirement")), objc.RegisterName("biometryRequirement"))
 	return AuthenticationRequirementFromID(_r)
 }
 
-// Requires user authentication with the current biometric set The authorization will fail if:
+// BiometryCurrentSetRequirement requires user authentication with the current biometric set The authorization will fail if:
 func BiometryCurrentSetRequirement() *AuthenticationRequirement {
 	_r := objc.Send[objc.ID](objc.ID(_class("LAAuthenticationRequirement")), objc.RegisterName("biometryCurrentSetRequirement"))
 	return AuthenticationRequirementFromID(_r)
 }
 
-// Use default biometric fallback
+// LABiometryFallbackRequirementDefaultRequirement use default biometric fallback
 func LABiometryFallbackRequirementDefaultRequirement() *BiometryFallbackRequirement {
 	_r := objc.Send[objc.ID](objc.ID(_class("LABiometryFallbackRequirement")), objc.RegisterName("defaultRequirement"))
 	return BiometryFallbackRequirementFromID(_r)
 }
 
-// Requires authorization using the device passcode
+// DevicePasscodeRequirement requires authorization using the device passcode
 func DevicePasscodeRequirement() *BiometryFallbackRequirement {
 	_r := objc.Send[objc.ID](objc.ID(_class("LABiometryFallbackRequirement")), objc.RegisterName("devicePasscodeRequirement"))
 	return BiometryFallbackRequirementFromID(_r)
 }
 
-// Environment of the current user.
+// CurrentUser environment of the current user.
 func CurrentUser() *Environment {
 	_r := objc.Send[objc.ID](objc.ID(_class("LAEnvironment")), objc.RegisterName("currentUser"))
 	return EnvironmentFromID(_r)
 }
 
-// Shared instance of
+// SharedStore shared instance of
 func SharedStore() *RightStore {
 	_r := objc.Send[objc.ID](objc.ID(_class("LARightStore")), objc.RegisterName("sharedStore"))
 	return RightStoreFromID(_r)

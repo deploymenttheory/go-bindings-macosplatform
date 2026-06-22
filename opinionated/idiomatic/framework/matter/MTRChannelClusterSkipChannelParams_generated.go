@@ -23,7 +23,8 @@ func MTRChannelClusterSkipChannelParamsFromID(id objc.ID) *MTRChannelClusterSkip
 	if id == 0 {
 		return nil
 	}
-	x := &MTRChannelClusterSkipChannelParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRChannelClusterSkipChannelParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRChannelClusterSkipChannelParamsAdopt(id objc.ID) *MTRChannelClusterSkipC
 	if id == 0 {
 		return nil
 	}
-	x := &MTRChannelClusterSkipChannelParams{Handle: objref.Wrap(id)}
+	x := &MTRChannelClusterSkipChannelParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,59 +58,65 @@ func (x *MTRChannelClusterSkipChannelParams) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRChannelClusterSkipChannelParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRChannelClusterSkipChannelParams creates a new MTRChannelClusterSkipChannelParams.
 func NewMTRChannelClusterSkipChannelParams() *MTRChannelClusterSkipChannelParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRChannelClusterSkipChannelParams")), objc.RegisterName("new"))
 	return mTRChannelClusterSkipChannelParamsAdopt(_id)
 }
 
-// WithCount sets count and returns the receiver so calls can be chained.
+// WithCount sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterSkipChannelParams) WithCount(count obj.Object) *MTRChannelClusterSkipChannelParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCount:"), objref.IDOf(count))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRChannelClusterSkipChannelParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRChannelClusterSkipChannelParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRChannelClusterSkipChannelParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRChannelClusterSkipChannelParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// GetCount wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterSkipChannelParams) GetCount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getCount"))
 	return obj.Wrap(_r)
 }
 
+// SetCount wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterSkipChannelParams) SetCount(count obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCount:"), objref.IDOf(count))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRChannelClusterSkipChannelParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterSkipChannelParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRChannelClusterSkipChannelParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterSkipChannelParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

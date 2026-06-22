@@ -19,6 +19,8 @@ const (
 	HostAbortOptionSynchronous HostAbortOption = 1
 )
 
+// String returns the HostAbortOption constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HostAbortOption) String() string {
 	switch e {
 	case HostAbortOptionAsynchronous:
@@ -39,6 +41,8 @@ const (
 	HostCIControllerStateActive HostCIControllerState = 2
 )
 
+// String returns the HostCIControllerState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HostCIControllerState) String() string {
 	switch e {
 	case HostCIControllerStateOff:
@@ -66,6 +70,8 @@ const (
 	HostCIDeviceSpeedOther        HostCIDeviceSpeed = 7
 )
 
+// String returns the HostCIDeviceSpeed constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HostCIDeviceSpeed) String() string {
 	switch e {
 	case HostCIDeviceSpeedNone:
@@ -98,6 +104,8 @@ const (
 	HostCIDeviceStateActive    HostCIDeviceState = 2
 )
 
+// String returns the HostCIDeviceState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HostCIDeviceState) String() string {
 	switch e {
 	case HostCIDeviceStateDestroyed:
@@ -121,6 +129,8 @@ const (
 	HostCIEndpointStateActive    HostCIEndpointState = 3
 )
 
+// String returns the HostCIEndpointState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HostCIEndpointState) String() string {
 	switch e {
 	case HostCIEndpointStateDestroyed:
@@ -155,6 +165,8 @@ const (
 	HostCIExceptionTypeFrameUpdateError      HostCIExceptionType = 12
 )
 
+// String returns the HostCIExceptionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HostCIExceptionType) String() string {
 	switch e {
 	case HostCIExceptionTypeUnknown:
@@ -207,6 +219,8 @@ const (
 	HostCILinkStateResume     HostCILinkState = 15
 )
 
+// String returns the HostCILinkState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HostCILinkState) String() string {
 	switch e {
 	case HostCILinkStateU0:
@@ -260,6 +274,8 @@ const (
 	HostCIMessageStatusError              HostCIMessageStatus = 13
 )
 
+// String returns the HostCIMessageStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HostCIMessageStatus) String() string {
 	switch e {
 	case HostCIMessageStatusReserved:
@@ -338,6 +354,8 @@ const (
 	HostCIMessageTypeTransferComplete        HostCIMessageType = 61
 )
 
+// String returns the HostCIMessageType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HostCIMessageType) String() string {
 	switch e {
 	case HostCIMessageTypeControllerCapabilities:
@@ -427,6 +445,8 @@ const (
 	HostCIPortStateActive    HostCIPortState = 3
 )
 
+// String returns the HostCIPortState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HostCIPortState) String() string {
 	switch e {
 	case HostCIPortStateOff:
@@ -450,6 +470,8 @@ const (
 	HostObjectDestroyOptionsDeviceSurrender HostObjectDestroyOptions = 1
 )
 
+// String returns the HostObjectDestroyOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HostObjectDestroyOptions) String() string {
 	var parts []string
 	if e&HostObjectDestroyOptionsDeviceSurrender != 0 {
@@ -473,6 +495,8 @@ const (
 	HostObjectInitOptionsDeviceSeize   HostObjectInitOptions = 2
 )
 
+// String returns the HostObjectInitOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HostObjectInitOptions) String() string {
 	var parts []string
 	if e&HostObjectInitOptionsDeviceCapture != 0 {

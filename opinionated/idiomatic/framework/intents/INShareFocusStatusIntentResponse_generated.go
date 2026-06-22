@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Your app’s response to an intent that shares the user’s focus status.
-//
 // ShareFocusStatusIntentResponse is an idiomatic wrapper over the Objective-C class INShareFocusStatusIntentResponse.
+//
+// It embeds [IntentResponse], promoting that type's methods.
+//
+// Your app’s response to an intent that shares the user’s focus status.
 type ShareFocusStatusIntentResponse struct {
-	objref.Handle
+	IntentResponse
 }
 
 // ShareFocusStatusIntentResponseFromID adopts an existing Objective-C object as a ShareFocusStatusIntentResponse
@@ -25,7 +26,8 @@ func ShareFocusStatusIntentResponseFromID(id objc.ID) *ShareFocusStatusIntentRes
 	if id == 0 {
 		return nil
 	}
-	x := &ShareFocusStatusIntentResponse{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ShareFocusStatusIntentResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,43 +40,26 @@ func shareFocusStatusIntentResponseAdopt(id objc.ID) *ShareFocusStatusIntentResp
 	if id == 0 {
 		return nil
 	}
-	x := &ShareFocusStatusIntentResponse{Handle: objref.Wrap(id)}
+	x := &ShareFocusStatusIntentResponse{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ShareFocusStatusIntentResponse) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ShareFocusStatusIntentResponse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ShareFocusStatusIntentResponse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a response with the specified response code and user activity.
-//
-// NewShareFocusStatusIntentResponseWithCodeUserActivity creates a new ShareFocusStatusIntentResponse.
+// NewShareFocusStatusIntentResponseWithCodeUserActivity creates a response with the specified response code and user activity.
 func NewShareFocusStatusIntentResponseWithCodeUserActivity(code ShareFocusStatusIntentResponseCode, userActivity obj.Object) *ShareFocusStatusIntentResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INShareFocusStatusIntentResponse")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, objref.IDOf(userActivity))
 	return shareFocusStatusIntentResponseAdopt(_id)
 }
 
-// The user activity object to use when launching the app.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity the user activity object to use when launching the app.
 func (x *ShareFocusStatusIntentResponse) WithUserActivity(userActivity obj.Object) *ShareFocusStatusIntentResponse {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
+// Code wraps the corresponding Objective-C method.
 func (x *ShareFocusStatusIntentResponse) Code() ShareFocusStatusIntentResponseCode {
 	_r := objc.Send[ShareFocusStatusIntentResponseCode](objref.IDOf(x), objc.RegisterName("code"))
 	return _r
@@ -88,3 +73,5 @@ type ShareFocusStatusIntentResponseable interface {
 }
 
 var _ ShareFocusStatusIntentResponseable = (*ShareFocusStatusIntentResponse)(nil)
+
+var _ IntentResponseProvider = (*ShareFocusStatusIntentResponse)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A machine learning collection type that stores a series of strings or integers.
-//
 // Sequence is an idiomatic wrapper over the Objective-C class MLSequence.
+//
+// A machine learning collection type that stores a series of strings or integers.
 type Sequence struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SequenceFromID(id objc.ID) *Sequence {
 	if id == 0 {
 		return nil
 	}
-	x := &Sequence{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Sequence{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func sequenceAdopt(id objc.ID) *Sequence {
 	if id == 0 {
 		return nil
 	}
-	x := &Sequence{Handle: objref.Wrap(id)}
+	x := &Sequence{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +60,34 @@ func (x *Sequence) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Sequence) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSequence creates a new Sequence.
 func NewSequence() *Sequence {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLSequence")), objc.RegisterName("new"))
 	return sequenceAdopt(_id)
 }
 
-// Type of values held
+// Type type of values held
 func (x *Sequence) Type() FeatureType {
 	_r := objc.Send[FeatureType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
+// StringValues wraps the corresponding Objective-C method.
+//
 // StringValues returns the collection as a Go slice.
 func (x *Sequence) StringValues() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// Int64Values wraps the corresponding Objective-C method.
+//
 // Int64Values returns the collection as a Go slice.
 func (x *Sequence) Int64Values() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("int64Values"))

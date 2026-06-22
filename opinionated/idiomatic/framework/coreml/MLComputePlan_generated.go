@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class representing the compute plan of a model.
-//
 // ComputePlan is an idiomatic wrapper over the Objective-C class MLComputePlan.
+//
+// A class representing the compute plan of a model.
 type ComputePlan struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ComputePlanFromID(id objc.ID) *ComputePlan {
 	if id == 0 {
 		return nil
 	}
-	x := &ComputePlan{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ComputePlan{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func computePlanAdopt(id objc.ID) *ComputePlan {
 	if id == 0 {
 		return nil
 	}
-	x := &ComputePlan{Handle: objref.Wrap(id)}
+	x := &ComputePlan{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,30 +60,37 @@ func (x *ComputePlan) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ComputePlan) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewComputePlan creates a new ComputePlan.
 func NewComputePlan() *ComputePlan {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLComputePlan")), objc.RegisterName("new"))
 	return computePlanAdopt(_id)
 }
 
-// Returns the estimated cost of executing an ML Program operation.
+// EstimatedCostOfMLProgramOperation returns the estimated cost of executing an ML Program operation.
 func (x *ComputePlan) EstimatedCostOfMLProgramOperation(operation *ModelStructureProgramOperation) *ComputePlanCost {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("estimatedCostOfMLProgramOperation:"), objref.IDOf(operation))
 	return ComputePlanCostFromID(_r)
 }
 
-// Returns the anticipated compute devices that would be used for executing a NeuralNetwork layer.
+// ComputeDeviceUsageForNeuralNetworkLayer returns the anticipated compute devices that would be used for executing a NeuralNetwork layer.
 func (x *ComputePlan) ComputeDeviceUsageForNeuralNetworkLayer(layer *ModelStructureNeuralNetworkLayer) *ComputePlanDeviceUsage {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("computeDeviceUsageForNeuralNetworkLayer:"), objref.IDOf(layer))
 	return ComputePlanDeviceUsageFromID(_r)
 }
 
-// Returns The anticipated compute devices that would be used for executing an ML Program operation.
+// ComputeDeviceUsageForMLProgramOperation returns The anticipated compute devices that would be used for executing an ML Program operation.
 func (x *ComputePlan) ComputeDeviceUsageForMLProgramOperation(operation *ModelStructureProgramOperation) *ComputePlanDeviceUsage {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("computeDeviceUsageForMLProgramOperation:"), objref.IDOf(operation))
 	return ComputePlanDeviceUsageFromID(_r)
 }
 
+// ModelStructure wraps the corresponding Objective-C method.
 func (x *ComputePlan) ModelStructure() *ModelStructure {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modelStructure"))
 	return ModelStructureFromID(_r)

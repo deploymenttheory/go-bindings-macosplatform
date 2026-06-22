@@ -1,0 +1,24 @@
+{{/*
+    slice.tmpl renders an Objective-C array-returning method as a Go method that
+    returns a slice. Each element is converted by ConvClosure (an expression
+    resolved in gather). One shape returns the slice directly; the other also
+    returns an error when the underlying getter reports one.
+*/}}
+{{define "slice"}}{{if .DocComment}}{{.DocComment}}//
+{{end}}// {{.GoName}} returns the collection as a Go slice.
+{{if .HasError -}}
+func {{.Recv}}{{.GoName}}() (result []{{.ElemGoType}}, err error) {
+var _nsErr uintptr
+_arr := objc.Send[objc.ID]({{.RecvExpr}}, objc.RegisterName({{.Selector | printf "%q"}}), unsafe.Pointer(&_nsErr))
+if _nsErr != 0 {
+return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+}
+return purego.NSArrayToSlice(_arr, {{.ConvClosure}}), nil
+}
+{{else -}}
+func {{.Recv}}{{.GoName}}() []{{.ElemGoType}} {
+_arr := objc.Send[objc.ID]({{.RecvExpr}}, objc.RegisterName({{.Selector | printf "%q"}}))
+return purego.NSArrayToSlice(_arr, {{.ConvClosure}})
+}
+{{end}}
+{{end}}

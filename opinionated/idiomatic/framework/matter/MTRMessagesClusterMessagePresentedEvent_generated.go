@@ -23,7 +23,8 @@ func MTRMessagesClusterMessagePresentedEventFromID(id objc.ID) *MTRMessagesClust
 	if id == 0 {
 		return nil
 	}
-	x := &MTRMessagesClusterMessagePresentedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRMessagesClusterMessagePresentedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRMessagesClusterMessagePresentedEventAdopt(id objc.ID) *MTRMessagesCluste
 	if id == 0 {
 		return nil
 	}
-	x := &MTRMessagesClusterMessagePresentedEvent{Handle: objref.Wrap(id)}
+	x := &MTRMessagesClusterMessagePresentedEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTRMessagesClusterMessagePresentedEvent) IsKind(className string) bool 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRMessagesClusterMessagePresentedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRMessagesClusterMessagePresentedEvent creates a new MTRMessagesClusterMessagePresentedEvent.
 func NewMTRMessagesClusterMessagePresentedEvent() *MTRMessagesClusterMessagePresentedEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRMessagesClusterMessagePresentedEvent")), objc.RegisterName("new"))
 	return mTRMessagesClusterMessagePresentedEventAdopt(_id)
 }
 
-// WithMessageID sets messageID and returns the receiver so calls can be chained.
+// WithMessageID sets the property and returns the receiver so calls can be chained.
 func (x *MTRMessagesClusterMessagePresentedEvent) WithMessageID(messageID obj.Object) *MTRMessagesClusterMessagePresentedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
 	return x
 }
 
+// MessageID wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessagePresentedEvent) MessageID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageID"))
 	return obj.Wrap(_r)
 }
 
+// SetMessageID wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessagePresentedEvent) SetMessageID(messageID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
 }

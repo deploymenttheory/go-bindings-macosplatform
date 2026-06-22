@@ -6,17 +6,20 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A convolution kernel that convolves the input image with a set of filters, with each producing one feature map in the output image.
-//
 // CNNConvolution is an idiomatic wrapper over the Objective-C class MPSCNNConvolution.
+//
+// CNNConvolution is an abstract base — you do not construct it directly. Construct one of [CNNFullyConnected] and pass it where a CNNConvolution is accepted.
+//
+// A convolution kernel that convolves the input image with a set of filters, with each producing one feature map in the output image.
 type CNNConvolution struct {
-	objref.Handle
+	CNNKernel
 }
 
 // CNNConvolutionFromID adopts an existing Objective-C object as a CNNConvolution
@@ -25,7 +28,8 @@ func CNNConvolutionFromID(id objc.ID) *CNNConvolution {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNConvolution{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNConvolution{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,124 +42,108 @@ func cNNConvolutionAdopt(id objc.ID) *CNNConvolution {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNConvolution{Handle: objref.Wrap(id)}
+	x := &CNNConvolution{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNConvolution) Description() string {
-	return rt.Description(objref.IDOf(x))
+// WithOffset the position of the destination image’s clip rectangle origin, relative to the source image.
+func (x *CNNConvolution) WithOffset(offset mpscore.MPSOffset) *CNNConvolution {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
 }
 
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNConvolution) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
+func (x *CNNConvolution) WithClipRect(clipRect metal.MTLRegion) *CNNConvolution {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
 }
 
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNConvolution) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewCNNConvolution creates a new CNNConvolution.
-func NewCNNConvolution() *CNNConvolution {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNConvolution")), objc.RegisterName("new"))
-	return cNNConvolutionAdopt(_id)
-}
-
-// The number of channels in the destination image to skip before writing output data.
-//
-// WithDestinationFeatureChannelOffset sets destinationFeatureChannelOffset and returns the receiver so calls can be chained.
+// WithDestinationFeatureChannelOffset the number of channels in the destination image to skip before writing output data.
 func (x *CNNConvolution) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNConvolution {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// The number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-//
-// WithSourceFeatureChannelOffset sets sourceFeatureChannelOffset and returns the receiver so calls can be chained.
+// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
 func (x *CNNConvolution) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNConvolution {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// The maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithSourceFeatureChannelMaxCount sets sourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 func (x *CNNConvolution) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNConvolution {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *CNNConvolution) WithLabel(label string) *CNNConvolution {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Allocate a MPCNNConvolutionGradientSState to hold the results from a -encodeBatchToCommandBuffer... operation
+// ResultStateForSourceImageSourceStatesDestinationImage allocate a MPCNNConvolutionGradientSState to hold the results from a -encodeBatchToCommandBuffer... operation
 func (x *CNNConvolution) ResultStateForSourceImageSourceStatesDestinationImage(sourceImage obj.Object, sourceStates []obj.Object, destinationImage obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultStateForSourceImage:sourceStates:destinationImage:"), objref.IDOf(sourceImage), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationImage))
 	return obj.Wrap(_r)
 }
 
-// CPU side reload. Reload the updated weights and biases from data provider into internal weights and bias buffers. Weights and biases gradients needed for update are obtained from MPSCNNConvolutionGradientState object. Data provider passed in init call is used for this purpose.
+// ReloadWeightsAndBiasesFromDataSource CPU side reload. Reload the updated weights and biases from data provider into internal weights and bias buffers. Weights and biases gradients needed for update are obtained from MPSCNNConvolutionGradientState object. Data provider passed in init call is used for this purpose.
 func (x *CNNConvolution) ReloadWeightsAndBiasesFromDataSource() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadWeightsAndBiasesFromDataSource"))
 }
 
-// The number of feature channels per pixel in the input image.
+// InputFeatureChannels the number of feature channels per pixel in the input image.
 func (x *CNNConvolution) InputFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputFeatureChannels"))
 	return _r
 }
 
-// The number of feature channels per pixel in the output image.
+// OutputFeatureChannels the number of feature channels per pixel in the output image.
 func (x *CNNConvolution) OutputFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputFeatureChannels"))
 	return _r
 }
 
-// Number of groups input and output channels are divided into.
+// Groups number of groups input and output channels are divided into.
 func (x *CNNConvolution) Groups() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("groups"))
 	return _r
 }
 
-// Sub pixel scale factor which was passed in as part of MPSCNNConvolutionDescriptor when creating this MPSCNNConvolution object.
+// SubPixelScaleFactor sub pixel scale factor which was passed in as part of MPSCNNConvolutionDescriptor when creating this MPSCNNConvolution object.
 func (x *CNNConvolution) SubPixelScaleFactor() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("subPixelScaleFactor"))
 	return _r
 }
 
-// Parameter "a" for the neuron.  Default: 1.0f Please see class description for interpretation of a.
+// NeuronParameterA parameter "a" for the neuron.  Default: 1.0f Please see class description for interpretation of a.
 func (x *CNNConvolution) NeuronParameterA() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterA"))
 	return _r
 }
 
-// Parameter "b" for the neuron.  Default: 1.0f Please see class description for interpretation of b.
+// NeuronParameterB parameter "b" for the neuron.  Default: 1.0f Please see class description for interpretation of b.
 func (x *CNNConvolution) NeuronParameterB() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterB"))
 	return _r
 }
 
-// Parameter "c" for the neuron.  Default: 1.0f Please see class description for interpretation of c.
+// NeuronParameterC parameter "c" for the neuron.  Default: 1.0f Please see class description for interpretation of c.
 func (x *CNNConvolution) NeuronParameterC() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterC"))
 	return _r
 }
 
-// Fused neuron descritor passed in convolution descriptor for fusion with convolution. Please see class description for interpretation of c.
+// FusedNeuronDescriptor fused neuron descritor passed in convolution descriptor for fusion with convolution. Please see class description for interpretation of c.
 func (x *CNNConvolution) FusedNeuronDescriptor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fusedNeuronDescriptor"))
 	return obj.Wrap(_r)
 }
 
-// Channel multiplier. For convolution created with MPSCNNDepthWiseConvolutionDescriptor, it is the number of output feature channels for each input channel. See MPSCNNDepthWiseConvolutionDescriptor for more details. Default is 0 which means regular CNN convolution.
+// ChannelMultiplier channel multiplier. For convolution created with MPSCNNDepthWiseConvolutionDescriptor, it is the number of output feature channels for each input channel. See MPSCNNDepthWiseConvolutionDescriptor for more details. Default is 0 which means regular CNN convolution.
 func (x *CNNConvolution) ChannelMultiplier() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("channelMultiplier"))
 	return _r
@@ -164,6 +152,8 @@ func (x *CNNConvolution) ChannelMultiplier() int {
 // CNNConvolutionable is the interface implemented by [CNNConvolution], for mocking and DI.
 type CNNConvolutionable interface {
 	obj.Object
+	WithOffset(offset mpscore.MPSOffset) *CNNConvolution
+	WithClipRect(clipRect metal.MTLRegion) *CNNConvolution
 	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNConvolution
 	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNConvolution
 	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNConvolution
@@ -182,3 +172,14 @@ type CNNConvolutionable interface {
 }
 
 var _ CNNConvolutionable = (*CNNConvolution)(nil)
+
+// isCNNConvolution marks CNNConvolution — and, by embedding promotion, its
+// subclasses — as a member of the CNNConvolution hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CNNConvolution) isCNNConvolution() {}
+
+var _ CNNConvolutionProvider = (*CNNConvolution)(nil)
+
+var _ CNNKernelProvider = (*CNNConvolution)(nil)
+
+var _ KernelProvider = (*CNNConvolution)(nil)

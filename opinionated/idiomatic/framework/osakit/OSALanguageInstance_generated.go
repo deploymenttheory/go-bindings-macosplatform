@@ -23,7 +23,8 @@ func LanguageInstanceFromID(id objc.ID) *LanguageInstance {
 	if id == 0 {
 		return nil
 	}
-	x := &LanguageInstance{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LanguageInstance{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func languageInstanceAdopt(id objc.ID) *LanguageInstance {
 	if id == 0 {
 		return nil
 	}
-	x := &LanguageInstance{Handle: objref.Wrap(id)}
+	x := &LanguageInstance{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *LanguageInstance) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LanguageInstance) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLanguageInstanceWithLanguage creates a new LanguageInstance.
 func NewLanguageInstanceWithLanguage(language *Language) *LanguageInstance {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("OSALanguageInstance")), objc.RegisterName("alloc"))
@@ -63,27 +71,31 @@ func NewLanguageInstanceWithLanguage(language *Language) *LanguageInstance {
 	return languageInstanceAdopt(_id)
 }
 
-// WithDefaultTarget sets defaultTarget and returns the receiver so calls can be chained.
+// WithDefaultTarget sets the property and returns the receiver so calls can be chained.
 func (x *LanguageInstance) WithDefaultTarget(defaultTarget obj.Object) *LanguageInstance {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultTarget:"), objref.IDOf(defaultTarget))
 	return x
 }
 
+// RichTextFromDescriptor wraps the corresponding Objective-C method.
 func (x *LanguageInstance) RichTextFromDescriptor(descriptor obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("richTextFromDescriptor:"), objref.IDOf(descriptor))
 	return obj.Wrap(_r)
 }
 
+// Language wraps the corresponding Objective-C method.
 func (x *LanguageInstance) Language() *Language {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
 	return LanguageFromID(_r)
 }
 
+// DefaultTarget wraps the corresponding Objective-C method.
 func (x *LanguageInstance) DefaultTarget() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultTarget"))
 	return obj.Wrap(_r)
 }
 
+// SetDefaultTarget wraps the corresponding Objective-C method.
 func (x *LanguageInstance) SetDefaultTarget(defaultTarget obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultTarget:"), objref.IDOf(defaultTarget))
 }

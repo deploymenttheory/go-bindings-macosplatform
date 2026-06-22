@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMDocumentFragment is an idiomatic wrapper over the Objective-C class DOMDocumentFragment.
+//
+// It embeds [DOMNode], promoting that type's methods.
 type DOMDocumentFragment struct {
-	objref.Handle
+	DOMNode
 }
 
 // DOMDocumentFragmentFromID adopts an existing Objective-C object as a DOMDocumentFragment
@@ -23,7 +24,8 @@ func DOMDocumentFragmentFromID(id objc.ID) *DOMDocumentFragment {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMDocumentFragment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMDocumentFragment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMDocumentFragmentAdopt(id objc.ID) *DOMDocumentFragment {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMDocumentFragment{Handle: objref.Wrap(id)}
+	x := &DOMDocumentFragment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMDocumentFragment) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMDocumentFragment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMDocumentFragment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMDocumentFragment creates a new DOMDocumentFragment.
@@ -62,19 +50,19 @@ func NewDOMDocumentFragment() *DOMDocumentFragment {
 	return dOMDocumentFragmentAdopt(_id)
 }
 
-// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocumentFragment) WithNodeValue(nodeValue string) *DOMDocumentFragment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets prefix and returns the receiver so calls can be chained.
+// WithPrefix sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocumentFragment) WithPrefix(prefix string) *DOMDocumentFragment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets textContent and returns the receiver so calls can be chained.
+// WithTextContent sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocumentFragment) WithTextContent(textContent string) *DOMDocumentFragment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
@@ -89,3 +77,9 @@ type DOMDocumentFragmentable interface {
 }
 
 var _ DOMDocumentFragmentable = (*DOMDocumentFragment)(nil)
+
+var _ DOMNodeProvider = (*DOMDocumentFragment)(nil)
+
+var _ DOMObjectProvider = (*DOMDocumentFragment)(nil)
+
+var _ WebScriptObjectProvider = (*DOMDocumentFragment)(nil)

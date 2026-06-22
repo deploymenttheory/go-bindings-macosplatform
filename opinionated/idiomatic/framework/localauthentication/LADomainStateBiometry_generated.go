@@ -23,7 +23,8 @@ func DomainStateBiometryFromID(id objc.ID) *DomainStateBiometry {
 	if id == 0 {
 		return nil
 	}
-	x := &DomainStateBiometry{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DomainStateBiometry{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func domainStateBiometryAdopt(id objc.ID) *DomainStateBiometry {
 	if id == 0 {
 		return nil
 	}
-	x := &DomainStateBiometry{Handle: objref.Wrap(id)}
+	x := &DomainStateBiometry{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,19 +58,25 @@ func (x *DomainStateBiometry) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DomainStateBiometry) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDomainStateBiometry creates a new DomainStateBiometry.
 func NewDomainStateBiometry() *DomainStateBiometry {
 	_id := objc.Send[objc.ID](objc.ID(_class("LADomainStateBiometry")), objc.RegisterName("new"))
 	return domainStateBiometryAdopt(_id)
 }
 
-// Indicates biometry type available on the device.
+// BiometryType indicates biometry type available on the device.
 func (x *DomainStateBiometry) BiometryType() BiometryType {
 	_r := objc.Send[BiometryType](objref.IDOf(x), objc.RegisterName("biometryType"))
 	return _r
 }
 
-// Contains state hash data for the available biometry type. Returns `nil` if no biometry entities are enrolled. If biometric database was modified (fingers, faces were removed or added), `stateHash` data will change. Nature of such database changes cannot be determined but comparing data of `stateHash` after different evaluatePolicy calls will reveal the fact database was changed between the calls.
+// StateHash contains state hash data for the available biometry type. Returns `nil` if no biometry entities are enrolled. If biometric database was modified (fingers, faces were removed or added), `stateHash` data will change. Nature of such database changes cannot be determined but comparing data of `stateHash` after different evaluatePolicy calls will reveal the fact database was changed between the calls.
 func (x *DomainStateBiometry) StateHash() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateHash"))
 	return obj.Wrap(_r)

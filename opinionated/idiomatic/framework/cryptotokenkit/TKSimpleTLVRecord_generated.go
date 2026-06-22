@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that implements encoding using Simple-TLV encoding according to ISO 7816-4.
-//
 // SimpleTLVRecord is an idiomatic wrapper over the Objective-C class TKSimpleTLVRecord.
+//
+// It embeds [TLVRecord], promoting that type's methods.
+//
+// An object that implements encoding using Simple-TLV encoding according to ISO 7816-4.
 type SimpleTLVRecord struct {
-	objref.Handle
+	TLVRecord
 }
 
 // SimpleTLVRecordFromID adopts an existing Objective-C object as a SimpleTLVRecord
@@ -25,7 +26,8 @@ func SimpleTLVRecordFromID(id objc.ID) *SimpleTLVRecord {
 	if id == 0 {
 		return nil
 	}
-	x := &SimpleTLVRecord{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SimpleTLVRecord{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func simpleTLVRecordAdopt(id objc.ID) *SimpleTLVRecord {
 	if id == 0 {
 		return nil
 	}
-	x := &SimpleTLVRecord{Handle: objref.Wrap(id)}
+	x := &SimpleTLVRecord{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *SimpleTLVRecord) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SimpleTLVRecord) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SimpleTLVRecord) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a TLV record with the specified tag and value.
-//
-// NewSimpleTLVRecordWithTagValue creates a new SimpleTLVRecord.
+// NewSimpleTLVRecordWithTagValue initializes a TLV record with the specified tag and value.
 func NewSimpleTLVRecordWithTagValue(tag uint8, value obj.Object) *SimpleTLVRecord {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("TKSimpleTLVRecord")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTag:value:"), tag, objref.IDOf(value))
@@ -73,3 +59,5 @@ type SimpleTLVRecordable interface {
 }
 
 var _ SimpleTLVRecordable = (*SimpleTLVRecord)(nil)
+
+var _ TLVRecordProvider = (*SimpleTLVRecord)(nil)

@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ScoredAssessment is an idiomatic wrapper over the Objective-C class HKScoredAssessment.
+//
+// ScoredAssessment is an abstract base — you do not construct it directly. Construct one of [GAD7Assessment], [PHQ9Assessment] and pass it where a ScoredAssessment is accepted.
 type ScoredAssessment struct {
-	objref.Handle
+	Sample
 }
 
 // ScoredAssessmentFromID adopts an existing Objective-C object as a ScoredAssessment
@@ -23,7 +24,8 @@ func ScoredAssessmentFromID(id objc.ID) *ScoredAssessment {
 	if id == 0 {
 		return nil
 	}
-	x := &ScoredAssessment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScoredAssessment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,33 +38,13 @@ func scoredAssessmentAdopt(id objc.ID) *ScoredAssessment {
 	if id == 0 {
 		return nil
 	}
-	x := &ScoredAssessment{Handle: objref.Wrap(id)}
+	x := &ScoredAssessment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ScoredAssessment) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ScoredAssessment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ScoredAssessment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewScoredAssessment creates a new ScoredAssessment.
-func NewScoredAssessment() *ScoredAssessment {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKScoredAssessment")), objc.RegisterName("new"))
-	return scoredAssessmentAdopt(_id)
-}
-
-// The score determined by the answers on an assessment
+// Score the score determined by the answers on an assessment
 func (x *ScoredAssessment) Score() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("score"))
 	return _r
@@ -75,3 +57,14 @@ type ScoredAssessmentable interface {
 }
 
 var _ ScoredAssessmentable = (*ScoredAssessment)(nil)
+
+// isScoredAssessment marks ScoredAssessment — and, by embedding promotion, its
+// subclasses — as a member of the ScoredAssessment hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ScoredAssessment) isScoredAssessment() {}
+
+var _ ScoredAssessmentProvider = (*ScoredAssessment)(nil)
+
+var _ SampleProvider = (*ScoredAssessment)(nil)
+
+var _ ObjectProvider = (*ScoredAssessment)(nil)

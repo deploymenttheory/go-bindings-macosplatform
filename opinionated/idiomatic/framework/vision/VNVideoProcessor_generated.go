@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that performs offline analysis of video content.
-//
 // VideoProcessor is an idiomatic wrapper over the Objective-C class VNVideoProcessor.
+//
+// An object that performs offline analysis of video content.
 type VideoProcessor struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func VideoProcessorFromID(id objc.ID) *VideoProcessor {
 	if id == 0 {
 		return nil
 	}
-	x := &VideoProcessor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VideoProcessor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func videoProcessorAdopt(id objc.ID) *VideoProcessor {
 	if id == 0 {
 		return nil
 	}
-	x := &VideoProcessor{Handle: objref.Wrap(id)}
+	x := &VideoProcessor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,20 @@ func (x *VideoProcessor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a video processor to perform Vision requests against the specified video asset.
-//
-// NewVideoProcessorWithURL creates a new VideoProcessor.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VideoProcessor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVideoProcessorWithURL creates a video processor to perform Vision requests against the specified video asset.
 func NewVideoProcessorWithURL(videoURL string) *VideoProcessor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNVideoProcessor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(videoURL))
 	return videoProcessorAdopt(_id)
 }
 
-// Adds a request with processing options to the video processor.
+// AddRequestProcessingOptions adds a request with processing options to the video processor.
 func (x *VideoProcessor) AddRequestProcessingOptions(request *Request, processingOptions *VideoProcessorRequestProcessingOptions) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addRequest:processingOptions:error:"), objref.IDOf(request), objref.IDOf(processingOptions), unsafe.Pointer(&_nsErr))
@@ -79,7 +85,7 @@ func (x *VideoProcessor) AddRequestProcessingOptions(request *Request, processin
 	return nil
 }
 
-// Adds a Vision request to perform with the specified configuration.
+// AddRequestWithProcessingOptions adds a Vision request to perform with the specified configuration.
 func (x *VideoProcessor) AddRequestWithProcessingOptions(request *Request, processingOptions obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addRequest:withProcessingOptions:error:"), objref.IDOf(request), objref.IDOf(processingOptions), unsafe.Pointer(&_nsErr))
@@ -89,7 +95,7 @@ func (x *VideoProcessor) AddRequestWithProcessingOptions(request *Request, proce
 	return nil
 }
 
-// Removes a Vision request from the video processor’s request queue.
+// RemoveRequest removes a Vision request from the video processor’s request queue.
 func (x *VideoProcessor) RemoveRequest(request *Request) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeRequest:error:"), objref.IDOf(request), unsafe.Pointer(&_nsErr))
@@ -99,7 +105,7 @@ func (x *VideoProcessor) RemoveRequest(request *Request) error {
 	return nil
 }
 
-// Cancels the video processing.
+// Cancel cancels the video processing.
 func (x *VideoProcessor) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }

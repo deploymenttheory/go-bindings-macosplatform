@@ -12,11 +12,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resource that represents a path in the system file space.
-//
 // PathURLResource is an idiomatic wrapper over the Objective-C class FSPathURLResource.
+//
+// It embeds [Resource], promoting that type's methods.
+//
+// A resource that represents a path in the system file space.
 type PathURLResource struct {
-	objref.Handle
+	Resource
 }
 
 // PathURLResourceFromID adopts an existing Objective-C object as a PathURLResource
@@ -25,7 +27,8 @@ func PathURLResourceFromID(id objc.ID) *PathURLResource {
 	if id == 0 {
 		return nil
 	}
-	x := &PathURLResource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PathURLResource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,41 +41,26 @@ func pathURLResourceAdopt(id objc.ID) *PathURLResource {
 	if id == 0 {
 		return nil
 	}
-	x := &PathURLResource{Handle: objref.Wrap(id)}
+	x := &PathURLResource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *PathURLResource) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PathURLResource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PathURLResource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a path URL resource.
-//
-// NewPathURLResourceWithURLWritable creates a new PathURLResource.
+// NewPathURLResourceWithURLWritable creates a path URL resource.
 func NewPathURLResourceWithURLWritable(uRL string, writable bool) *PathURLResource {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("FSPathURLResource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:writable:"), rt.FileURL(uRL), writable)
 	return pathURLResourceAdopt(_id)
 }
 
-// The URL represented by the resource.
+// Url the URL represented by the resource.
 func (x *PathURLResource) Url() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
+// IsWritable wraps the corresponding Objective-C method.
 func (x *PathURLResource) IsWritable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isWritable"))
 	return _r
@@ -86,3 +74,5 @@ type PathURLResourceable interface {
 }
 
 var _ PathURLResourceable = (*PathURLResource)(nil)
+
+var _ ResourceProvider = (*PathURLResource)(nil)

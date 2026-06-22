@@ -13,6 +13,8 @@ import (
 )
 
 // MTRAccessControlClusterAccessControlExtensionStruct is an idiomatic wrapper over the Objective-C class MTRAccessControlClusterAccessControlExtensionStruct.
+//
+// MTRAccessControlClusterAccessControlExtensionStruct is an abstract base — you do not construct it directly. Construct one of [MTRAccessControlClusterExtensionEntry] and pass it where a MTRAccessControlClusterAccessControlExtensionStruct is accepted.
 type MTRAccessControlClusterAccessControlExtensionStruct struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRAccessControlClusterAccessControlExtensionStructFromID(id objc.ID) *MTRA
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAccessControlClusterAccessControlExtensionStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRAccessControlClusterAccessControlExtensionStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRAccessControlClusterAccessControlExtensionStructAdopt(id objc.ID) *MTRAc
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAccessControlClusterAccessControlExtensionStruct{Handle: objref.Wrap(id)}
+	x := &MTRAccessControlClusterAccessControlExtensionStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,38 +60,42 @@ func (x *MTRAccessControlClusterAccessControlExtensionStruct) IsKind(className s
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRAccessControlClusterAccessControlExtensionStruct creates a new MTRAccessControlClusterAccessControlExtensionStruct.
-func NewMTRAccessControlClusterAccessControlExtensionStruct() *MTRAccessControlClusterAccessControlExtensionStruct {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRAccessControlClusterAccessControlExtensionStruct")), objc.RegisterName("new"))
-	return mTRAccessControlClusterAccessControlExtensionStructAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRAccessControlClusterAccessControlExtensionStruct) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithData sets data and returns the receiver so calls can be chained.
+// WithData sets the property and returns the receiver so calls can be chained.
 func (x *MTRAccessControlClusterAccessControlExtensionStruct) WithData(data obj.Object) *MTRAccessControlClusterAccessControlExtensionStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
 	return x
 }
 
-// WithFabricIndex sets fabricIndex and returns the receiver so calls can be chained.
+// WithFabricIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRAccessControlClusterAccessControlExtensionStruct) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessControlExtensionStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return x
 }
 
+// Data wraps the corresponding Objective-C method.
 func (x *MTRAccessControlClusterAccessControlExtensionStruct) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
+// SetData wraps the corresponding Objective-C method.
 func (x *MTRAccessControlClusterAccessControlExtensionStruct) SetData(data obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
 }
 
+// FabricIndex wraps the corresponding Objective-C method.
 func (x *MTRAccessControlClusterAccessControlExtensionStruct) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)
 }
 
+// SetFabricIndex wraps the corresponding Objective-C method.
 func (x *MTRAccessControlClusterAccessControlExtensionStruct) SetFabricIndex(fabricIndex obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 }
@@ -104,3 +112,11 @@ type MTRAccessControlClusterAccessControlExtensionStructable interface {
 }
 
 var _ MTRAccessControlClusterAccessControlExtensionStructable = (*MTRAccessControlClusterAccessControlExtensionStruct)(nil)
+
+// isMTRAccessControlClusterAccessControlExtensionStruct marks MTRAccessControlClusterAccessControlExtensionStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRAccessControlClusterAccessControlExtensionStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRAccessControlClusterAccessControlExtensionStruct) isMTRAccessControlClusterAccessControlExtensionStruct() {
+}
+
+var _ MTRAccessControlClusterAccessControlExtensionStructProvider = (*MTRAccessControlClusterAccessControlExtensionStruct)(nil)

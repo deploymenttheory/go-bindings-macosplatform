@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter provider that evaluates network packets and decides whether to block, allow, or delay the packets.
-//
 // NEFilterPacketProvider is an idiomatic wrapper over the Objective-C class NEFilterPacketProvider.
+//
+// It embeds [NEFilterProvider], promoting that type's methods.
+//
+// A filter provider that evaluates network packets and decides whether to block, allow, or delay the packets.
 type NEFilterPacketProvider struct {
-	objref.Handle
+	NEFilterProvider
 }
 
 // NEFilterPacketProviderFromID adopts an existing Objective-C object as a NEFilterPacketProvider
@@ -25,7 +26,8 @@ func NEFilterPacketProviderFromID(id objc.ID) *NEFilterPacketProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &NEFilterPacketProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEFilterPacketProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func nEFilterPacketProviderAdopt(id objc.ID) *NEFilterPacketProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &NEFilterPacketProvider{Handle: objref.Wrap(id)}
+	x := &NEFilterPacketProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NEFilterPacketProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEFilterPacketProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEFilterPacketProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNEFilterPacketProvider creates a new NEFilterPacketProvider.
@@ -64,13 +52,13 @@ func NewNEFilterPacketProvider() *NEFilterPacketProvider {
 	return nEFilterPacketProviderAdopt(_id)
 }
 
-// Delay a packet currently processed by a packet handler.
+// DelayCurrentPacket delay a packet currently processed by a packet handler.
 func (x *NEFilterPacketProvider) DelayCurrentPacket(context_ *NEFilterPacketContext) *NEPacket {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delayCurrentPacket:"), objref.IDOf(context_))
 	return NEPacketFromID(_r)
 }
 
-// Allow delivery of a previously-delayed packet.
+// AllowPacket allow delivery of a previously-delayed packet.
 func (x *NEFilterPacketProvider) AllowPacket(packet *NEPacket) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowPacket:"), objref.IDOf(packet))
 }
@@ -83,3 +71,7 @@ type NEFilterPacketProviderable interface {
 }
 
 var _ NEFilterPacketProviderable = (*NEFilterPacketProvider)(nil)
+
+var _ NEFilterProviderProvider = (*NEFilterPacketProvider)(nil)
+
+var _ NEProviderProvider = (*NEFilterPacketProvider)(nil)

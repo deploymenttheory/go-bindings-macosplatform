@@ -23,7 +23,8 @@ func FontAssetRequestFromID(id objc.ID) *FontAssetRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &FontAssetRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FontAssetRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func fontAssetRequestAdopt(id objc.ID) *FontAssetRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &FontAssetRequest{Handle: objref.Wrap(id)}
+	x := &FontAssetRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *FontAssetRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FontAssetRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFontAssetRequestWithFontDescriptorsOptions creates a new FontAssetRequest.
 func NewFontAssetRequestWithFontDescriptorsOptions(fontDescriptors []*FontDescriptor, options FontAssetRequestOptions) *FontAssetRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFontAssetRequest")), objc.RegisterName("alloc"))
@@ -63,12 +71,15 @@ func NewFontAssetRequestWithFontDescriptorsOptions(fontDescriptors []*FontDescri
 	return fontAssetRequestAdopt(_id)
 }
 
+// DownloadedFontDescriptors wraps the corresponding Objective-C method.
+//
 // DownloadedFontDescriptors returns the collection as a Go slice.
 func (x *FontAssetRequest) DownloadedFontDescriptors() []*FontDescriptor {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadedFontDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FontDescriptor { return FontDescriptorFromID(_id) })
 }
 
+// Progress wraps the corresponding Objective-C method.
 func (x *FontAssetRequest) Progress() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("progress"))
 	return obj.Wrap(_r)

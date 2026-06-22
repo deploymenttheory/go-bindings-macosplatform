@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The FHIR version.
-//
 // FHIRVersion is an idiomatic wrapper over the Objective-C class HKFHIRVersion.
+//
+// The FHIR version.
 type FHIRVersion struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FHIRVersionFromID(id objc.ID) *FHIRVersion {
 	if id == 0 {
 		return nil
 	}
-	x := &FHIRVersion{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FHIRVersion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func fHIRVersionAdopt(id objc.ID) *FHIRVersion {
 	if id == 0 {
 		return nil
 	}
-	x := &FHIRVersion{Handle: objref.Wrap(id)}
+	x := &FHIRVersion{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,33 +60,43 @@ func (x *FHIRVersion) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FHIRVersion) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFHIRVersion creates a new FHIRVersion.
 func NewFHIRVersion() *FHIRVersion {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKFHIRVersion")), objc.RegisterName("new"))
 	return fHIRVersionAdopt(_id)
 }
 
+// MajorVersion wraps the corresponding Objective-C method.
 func (x *FHIRVersion) MajorVersion() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("majorVersion"))
 	return _r
 }
 
+// MinorVersion wraps the corresponding Objective-C method.
 func (x *FHIRVersion) MinorVersion() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minorVersion"))
 	return _r
 }
 
+// PatchVersion wraps the corresponding Objective-C method.
 func (x *FHIRVersion) PatchVersion() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("patchVersion"))
 	return _r
 }
 
+// FHIRRelease wraps the corresponding Objective-C method.
 func (x *FHIRVersion) FHIRRelease() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("FHIRRelease"))
 	return obj.Wrap(_r)
 }
 
-// A string representation in the format "{major}.{minor}.{patch}".
+// StringRepresentation a string representation in the format "{major}.{minor}.{patch}".
 func (x *FHIRVersion) StringRepresentation() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringRepresentation"))
 	if _r == 0 {

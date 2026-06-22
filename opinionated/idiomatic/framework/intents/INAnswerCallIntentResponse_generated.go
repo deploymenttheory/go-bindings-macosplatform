@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // AnswerCallIntentResponse is an idiomatic wrapper over the Objective-C class INAnswerCallIntentResponse.
+//
+// It embeds [IntentResponse], promoting that type's methods.
 type AnswerCallIntentResponse struct {
-	objref.Handle
+	IntentResponse
 }
 
 // AnswerCallIntentResponseFromID adopts an existing Objective-C object as a AnswerCallIntentResponse
@@ -23,7 +24,8 @@ func AnswerCallIntentResponseFromID(id objc.ID) *AnswerCallIntentResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &AnswerCallIntentResponse{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AnswerCallIntentResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func answerCallIntentResponseAdopt(id objc.ID) *AnswerCallIntentResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &AnswerCallIntentResponse{Handle: objref.Wrap(id)}
+	x := &AnswerCallIntentResponse{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AnswerCallIntentResponse) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AnswerCallIntentResponse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AnswerCallIntentResponse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAnswerCallIntentResponseWithCodeUserActivity creates a new AnswerCallIntentResponse.
@@ -63,32 +51,34 @@ func NewAnswerCallIntentResponseWithCodeUserActivity(code AnswerCallIntentRespon
 	return answerCallIntentResponseAdopt(_id)
 }
 
-// WithCallRecords sets the collection and returns the receiver so calls can be chained.
+// WithCallRecords sets the property and returns the receiver so calls can be chained.
 func (x *AnswerCallIntentResponse) WithCallRecords(items ...*CallRecord) *AnswerCallIntentResponse {
 	_arr := purego.SliceToNSArray(items, func(_v *CallRecord) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCallRecords:"), _arr)
 	return x
 }
 
-// The user activity object to use when launching the app.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity the user activity object to use when launching the app.
 func (x *AnswerCallIntentResponse) WithUserActivity(userActivity obj.Object) *AnswerCallIntentResponse {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
+// Code wraps the corresponding Objective-C method.
 func (x *AnswerCallIntentResponse) Code() AnswerCallIntentResponseCode {
 	_r := objc.Send[AnswerCallIntentResponseCode](objref.IDOf(x), objc.RegisterName("code"))
 	return _r
 }
 
+// CallRecords wraps the corresponding Objective-C method.
+//
 // CallRecords returns the collection as a Go slice.
 func (x *AnswerCallIntentResponse) CallRecords() []*CallRecord {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callRecords"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CallRecord { return CallRecordFromID(_id) })
 }
 
+// SetCallRecords wraps the corresponding Objective-C method.
 func (x *AnswerCallIntentResponse) SetCallRecords(callRecords []*CallRecord) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCallRecords:"), purego.SliceToNSArray(callRecords, func(_v *CallRecord) objc.ID { return objref.IDOf(_v) }))
 }
@@ -104,3 +94,5 @@ type AnswerCallIntentResponseable interface {
 }
 
 var _ AnswerCallIntentResponseable = (*AnswerCallIntentResponse)(nil)
+
+var _ IntentResponseProvider = (*AnswerCallIntentResponse)(nil)

@@ -362,13 +362,11 @@ func MPNowPlayingInfoPropertyExcludeFromSuggestions() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyExcludeFromSuggestions")))
 }
 
-// 1:1 (square) animated artwork for the current media item.
 // MPNowPlayingInfoProperty1x1AnimatedArtwork returns the string constant MPNowPlayingInfoProperty1x1AnimatedArtwork, for use as a dictionary key or argument.
 func MPNowPlayingInfoProperty1x1AnimatedArtwork() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoProperty1x1AnimatedArtwork")))
 }
 
-// 3:4 (tall) animated artwork for the current media item.
 // MPNowPlayingInfoProperty3x4AnimatedArtwork returns the string constant MPNowPlayingInfoProperty3x4AnimatedArtwork, for use as a dictionary key or argument.
 func MPNowPlayingInfoProperty3x4AnimatedArtwork() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoProperty3x4AnimatedArtwork")))

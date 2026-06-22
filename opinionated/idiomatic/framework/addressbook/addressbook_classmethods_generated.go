@@ -11,84 +11,84 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns the unique shared instance of ABAddressBook, or nil if the Address Book database can’t be initialized.
+// SharedAddressBook returns the unique shared instance of ABAddressBook, or nil if the Address Book database can’t be initialized.
 func SharedAddressBook() *AddressBook {
 	_r := objc.Send[objc.ID](objc.ID(_class("ABAddressBook")), objc.RegisterName("sharedAddressBook"))
 	return AddressBookFromID(_r)
 }
 
-// Returns a new instance of ABAddressBook, or nil if the Address Book database can’t be initialized.
+// ABAddressBookAddressBook returns a new instance of ABAddressBook, or nil if the Address Book database can’t be initialized.
 func ABAddressBookAddressBook() *AddressBook {
 	_r := objc.Send[objc.ID](objc.ID(_class("ABAddressBook")), objc.RegisterName("addressBook"))
 	return AddressBookFromID(_r)
 }
 
-// Adds the given properties to all records of this type in the Address Book database.
+// AddPropertiesAndTypes adds the given properties to all records of this type in the Address Book database.
 func AddPropertiesAndTypes(properties obj.Object) int {
 	_r := objc.Send[int](objc.ID(_class("ABGroup")), objc.RegisterName("addPropertiesAndTypes:"), objref.IDOf(properties))
 	return _r
 }
 
-// Removes the given properties from all the records of this type in the Address Book database.
+// RemoveProperties removes the given properties from all the records of this type in the Address Book database.
 func RemoveProperties(properties obj.Object) int {
 	_r := objc.Send[int](objc.ID(_class("ABGroup")), objc.RegisterName("removeProperties:"), objref.IDOf(properties))
 	return _r
 }
 
-// Returns an array of the names of all the properties for this record type in the Address Book database.
+// Properties returns an array of the names of all the properties for this record type in the Address Book database.
 func Properties() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("ABGroup")), objc.RegisterName("properties"))
 	return obj.Wrap(_r)
 }
 
-// Returns the type for a given property.
+// TypeOfProperty returns the type for a given property.
 func TypeOfProperty(property string) int {
 	_r := objc.Send[int](objc.ID(_class("ABGroup")), objc.RegisterName("typeOfProperty:"), purego.NSString(property))
 	return _r
 }
 
-// Returns a search element object that searches for records of this type.
+// SearchElementForPropertyLabelKeyValueComparison returns a search element object that searches for records of this type.
 func SearchElementForPropertyLabelKeyValueComparison(property string, label string, key string, value obj.Object, comparison int) *SearchElement {
 	_r := objc.Send[objc.ID](objc.ID(_class("ABGroup")), objc.RegisterName("searchElementForProperty:label:key:value:comparison:"), purego.NSString(property), purego.NSString(label), purego.NSString(key), objref.IDOf(value), comparison)
 	return SearchElementFromID(_r)
 }
 
-// Adds the given properties to all the records of this type in the Address Book database.
+// ABPersonAddPropertiesAndTypes adds the given properties to all the records of this type in the Address Book database.
 func ABPersonAddPropertiesAndTypes(properties obj.Object) int {
 	_r := objc.Send[int](objc.ID(_class("ABPerson")), objc.RegisterName("addPropertiesAndTypes:"), objref.IDOf(properties))
 	return _r
 }
 
-// Removes the given properties from all the records of this type in the Address Book database.
+// ABPersonRemoveProperties removes the given properties from all the records of this type in the Address Book database.
 func ABPersonRemoveProperties(properties obj.Object) int {
 	_r := objc.Send[int](objc.ID(_class("ABPerson")), objc.RegisterName("removeProperties:"), objref.IDOf(properties))
 	return _r
 }
 
-// Returns an array of the names of all the properties for the record in the Address Book database.
+// ABPersonProperties returns an array of the names of all the properties for the record in the Address Book database.
 func ABPersonProperties() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("ABPerson")), objc.RegisterName("properties"))
 	return obj.Wrap(_r)
 }
 
-// Returns the type of a given property.
+// ABPersonTypeOfProperty returns the type of a given property.
 func ABPersonTypeOfProperty(property string) int {
 	_r := objc.Send[int](objc.ID(_class("ABPerson")), objc.RegisterName("typeOfProperty:"), purego.NSString(property))
 	return _r
 }
 
-// Returns a search element object that specifies a query for records of this type.
+// ABPersonSearchElementForPropertyLabelKeyValueComparison returns a search element object that specifies a query for records of this type.
 func ABPersonSearchElementForPropertyLabelKeyValueComparison(property string, label string, key string, value obj.Object, comparison int) *SearchElement {
 	_r := objc.Send[objc.ID](objc.ID(_class("ABPerson")), objc.RegisterName("searchElementForProperty:label:key:value:comparison:"), purego.NSString(property), purego.NSString(label), purego.NSString(key), objref.IDOf(value), comparison)
 	return SearchElementFromID(_r)
 }
 
-// Cancels an asynchronous fetch of the images for a given tag.
+// CancelLoadingImageDataForTag cancels an asynchronous fetch of the images for a given tag.
 func CancelLoadingImageDataForTag(tag int) {
 	objc.Send[objc.ID](objc.ID(_class("ABPerson")), objc.RegisterName("cancelLoadingImageDataForTag:"), tag)
 }
 
-// Returns a compound search element, created by combining the search elements in an array with the given conjunction.
+// SearchElementForConjunctionChildren returns a compound search element, created by combining the search elements in an array with the given conjunction.
 func SearchElementForConjunctionChildren(conjuction int, children obj.Object) *SearchElement {
 	_r := objc.Send[objc.ID](objc.ID(_class("ABSearchElement")), objc.RegisterName("searchElementForConjunction:children:"), conjuction, objref.IDOf(children))
 	return SearchElementFromID(_r)

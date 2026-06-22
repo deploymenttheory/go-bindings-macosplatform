@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A group of related tracks in an asset.
-//
 // AssetTrackGroup is an idiomatic wrapper over the Objective-C class AVAssetTrackGroup.
+//
+// A group of related tracks in an asset.
 type AssetTrackGroup struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetTrackGroupFromID(id objc.ID) *AssetTrackGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetTrackGroup{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetTrackGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetTrackGroupAdopt(id objc.ID) *AssetTrackGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetTrackGroup{Handle: objref.Wrap(id)}
+	x := &AssetTrackGroup{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,20 @@ func (x *AssetTrackGroup) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetTrackGroup) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetTrackGroup creates a new AssetTrackGroup.
 func NewAssetTrackGroup() *AssetTrackGroup {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetTrackGroup")), objc.RegisterName("new"))
 	return assetTrackGroupAdopt(_id)
 }
 
+// TrackIDs wraps the corresponding Objective-C method.
+//
 // TrackIDs returns the collection as a Go slice.
 func (x *AssetTrackGroup) TrackIDs() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trackIDs"))

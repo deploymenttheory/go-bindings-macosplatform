@@ -23,7 +23,8 @@ func MTRCertificateInfoFromID(id objc.ID) *MTRCertificateInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRCertificateInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRCertificateInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRCertificateInfoAdopt(id objc.ID) *MTRCertificateInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRCertificateInfo{Handle: objref.Wrap(id)}
+	x := &MTRCertificateInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,38 +58,44 @@ func (x *MTRCertificateInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes the receiver with an operational certificate in Matter TLV format. This can be a node operational certificate, a Matter intermediate certificate, or a Matter root certificate.
-//
-// NewMTRCertificateInfoWithTLVBytes creates a new MTRCertificateInfo.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRCertificateInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRCertificateInfoWithTLVBytes initializes the receiver with an operational certificate in Matter TLV format. This can be a node operational certificate, a Matter intermediate certificate, or a Matter root certificate.
 func NewMTRCertificateInfoWithTLVBytes(bytes_ obj.Object) *MTRCertificateInfo {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRCertificateInfo")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTLVBytes:"), objref.IDOf(bytes_))
 	return mTRCertificateInfoAdopt(_id)
 }
 
-// The Distinguished Name of the issuer of the certificate. For a node operational certificate, the issuer will match the subject of the root certificate or intermediate certificate that represents the entity that issued the node operational certificate. For an intermediate certificate, the issuer will match the subject of the root certificate. Matter root certificates are self-signed, i.e. the issuer and the subject are the same.
+// Issuer the Distinguished Name of the issuer of the certificate. For a node operational certificate, the issuer will match the subject of the root certificate or intermediate certificate that represents the entity that issued the node operational certificate. For an intermediate certificate, the issuer will match the subject of the root certificate. Matter root certificates are self-signed, i.e. the issuer and the subject are the same.
 func (x *MTRCertificateInfo) Issuer() *MTRDistinguishedNameInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issuer"))
 	return MTRDistinguishedNameInfoFromID(_r)
 }
 
-// The Distinguished Name of the entity represented by the certificate.
+// Subject the Distinguished Name of the entity represented by the certificate.
 func (x *MTRCertificateInfo) Subject() *MTRDistinguishedNameInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subject"))
 	return MTRDistinguishedNameInfoFromID(_r)
 }
 
+// NotBefore wraps the corresponding Objective-C method.
 func (x *MTRCertificateInfo) NotBefore() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notBefore"))
 	return obj.Wrap(_r)
 }
 
+// NotAfter wraps the corresponding Objective-C method.
 func (x *MTRCertificateInfo) NotAfter() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notAfter"))
 	return obj.Wrap(_r)
 }
 
-// Public key data for this certificate
+// PublicKeyData public key data for this certificate
 func (x *MTRCertificateInfo) PublicKeyData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicKeyData"))
 	return obj.Wrap(_r)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract superclass that represents the account a calendar belongs to.
-//
 // Source is an idiomatic wrapper over the Objective-C class EKSource.
+//
+// It embeds [Object], promoting that type's methods.
+//
+// An abstract superclass that represents the account a calendar belongs to.
 type Source struct {
-	objref.Handle
+	Object
 }
 
 // SourceFromID adopts an existing Objective-C object as a Source
@@ -25,7 +26,8 @@ func SourceFromID(id objc.ID) *Source {
 	if id == 0 {
 		return nil
 	}
-	x := &Source{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Source{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func sourceAdopt(id objc.ID) *Source {
 	if id == 0 {
 		return nil
 	}
-	x := &Source{Handle: objref.Wrap(id)}
+	x := &Source{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *Source) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Source) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Source) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSource creates a new Source.
@@ -64,12 +52,13 @@ func NewSource() *Source {
 	return sourceAdopt(_id)
 }
 
-// Returns the calendars that belong to this source object that support a particular entity type.
+// CalendarsForEntityType returns the calendars that belong to this source object that support a particular entity type.
 func (x *Source) CalendarsForEntityType(entityType EntityType) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendarsForEntityType:"), entityType)
 	return obj.Wrap(_r)
 }
 
+// SourceIdentifier wraps the corresponding Objective-C method.
 func (x *Source) SourceIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceIdentifier"))
 	if _r == 0 {
@@ -78,11 +67,13 @@ func (x *Source) SourceIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// SourceType wraps the corresponding Objective-C method.
 func (x *Source) SourceType() SourceType {
 	_r := objc.Send[SourceType](objref.IDOf(x), objc.RegisterName("sourceType"))
 	return _r
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *Source) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -91,7 +82,7 @@ func (x *Source) Title() string {
 	return purego.GoString(_r)
 }
 
-// Returns YES if this EKSource represents an account delegated by another user.
+// IsDelegate returns YES if this EKSource represents an account delegated by another user.
 func (x *Source) IsDelegate() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDelegate"))
 	return _r
@@ -108,3 +99,5 @@ type Sourceable interface {
 }
 
 var _ Sourceable = (*Source)(nil)
+
+var _ ObjectProvider = (*Source)(nil)

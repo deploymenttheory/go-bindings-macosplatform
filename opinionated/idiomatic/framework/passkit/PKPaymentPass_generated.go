@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a provisioned payment card for in-app payments.
-//
 // PaymentPass is an idiomatic wrapper over the Objective-C class PKPaymentPass.
+//
+// It embeds [SecureElementPass], promoting that type's methods.
+//
+// An object that represents a provisioned payment card for in-app payments.
 type PaymentPass struct {
-	objref.Handle
+	SecureElementPass
 }
 
 // PaymentPassFromID adopts an existing Objective-C object as a PaymentPass
@@ -25,7 +26,8 @@ func PaymentPassFromID(id objc.ID) *PaymentPass {
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentPass{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PaymentPass{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func paymentPassAdopt(id objc.ID) *PaymentPass {
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentPass{Handle: objref.Wrap(id)}
+	x := &PaymentPass{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PaymentPass) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PaymentPass) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PaymentPass) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPaymentPass creates a new PaymentPass.
@@ -64,6 +52,7 @@ func NewPaymentPass() *PaymentPass {
 	return paymentPassAdopt(_id)
 }
 
+// ActivationState wraps the corresponding Objective-C method.
 func (x *PaymentPass) ActivationState() PaymentPassActivationState {
 	_r := objc.Send[PaymentPassActivationState](objref.IDOf(x), objc.RegisterName("activationState"))
 	return _r
@@ -76,3 +65,7 @@ type PaymentPassable interface {
 }
 
 var _ PaymentPassable = (*PaymentPass)(nil)
+
+var _ SecureElementPassProvider = (*PaymentPass)(nil)
+
+var _ PassProvider = (*PaymentPass)(nil)

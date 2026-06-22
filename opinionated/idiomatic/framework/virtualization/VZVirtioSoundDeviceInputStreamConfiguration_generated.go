@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A PCM stream of input audio data, such as from a microphone.
-//
 // VirtioSoundDeviceInputStreamConfiguration is an idiomatic wrapper over the Objective-C class VZVirtioSoundDeviceInputStreamConfiguration.
+//
+// It embeds [VirtioSoundDeviceStreamConfiguration], promoting that type's methods.
+//
+// A PCM stream of input audio data, such as from a microphone.
 type VirtioSoundDeviceInputStreamConfiguration struct {
-	objref.Handle
+	VirtioSoundDeviceStreamConfiguration
 }
 
 // VirtioSoundDeviceInputStreamConfigurationFromID adopts an existing Objective-C object as a VirtioSoundDeviceInputStreamConfiguration
@@ -25,7 +26,8 @@ func VirtioSoundDeviceInputStreamConfigurationFromID(id objc.ID) *VirtioSoundDev
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioSoundDeviceInputStreamConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VirtioSoundDeviceInputStreamConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func virtioSoundDeviceInputStreamConfigurationAdopt(id objc.ID) *VirtioSoundDevi
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioSoundDeviceInputStreamConfiguration{Handle: objref.Wrap(id)}
+	x := &VirtioSoundDeviceInputStreamConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *VirtioSoundDeviceInputStreamConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VirtioSoundDeviceInputStreamConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VirtioSoundDeviceInputStreamConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewVirtioSoundDeviceInputStreamConfiguration creates a new VirtioSoundDeviceInputStreamConfiguration.
@@ -64,19 +52,19 @@ func NewVirtioSoundDeviceInputStreamConfiguration() *VirtioSoundDeviceInputStrea
 	return virtioSoundDeviceInputStreamConfigurationAdopt(_id)
 }
 
-// An audio stream source that defines how the host supplies audio data for the guest.
-//
-// WithSource sets source and returns the receiver so calls can be chained.
+// WithSource an audio stream source that defines how the host supplies audio data for the guest.
 func (x *VirtioSoundDeviceInputStreamConfiguration) WithSource(source AudioInputStreamSourceProvider) *VirtioSoundDeviceInputStreamConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSource:"), objref.IDOf(source))
 	return x
 }
 
+// Source wraps the corresponding Objective-C method.
 func (x *VirtioSoundDeviceInputStreamConfiguration) Source() *AudioInputStreamSource {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
 	return AudioInputStreamSourceFromID(_r)
 }
 
+// SetSource wraps the corresponding Objective-C method.
 func (x *VirtioSoundDeviceInputStreamConfiguration) SetSource(source *AudioInputStreamSource) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSource:"), objref.IDOf(source))
 }
@@ -90,3 +78,5 @@ type VirtioSoundDeviceInputStreamConfigurationable interface {
 }
 
 var _ VirtioSoundDeviceInputStreamConfigurationable = (*VirtioSoundDeviceInputStreamConfiguration)(nil)
+
+var _ VirtioSoundDeviceStreamConfigurationProvider = (*VirtioSoundDeviceInputStreamConfiguration)(nil)

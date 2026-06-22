@@ -23,7 +23,8 @@ func AnimationFromID(id objc.ID) *Animation {
 	if id == 0 {
 		return nil
 	}
-	x := &Animation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Animation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func animationAdopt(id objc.ID) *Animation {
 	if id == 0 {
 		return nil
 	}
-	x := &Animation{Handle: objref.Wrap(id)}
+	x := &Animation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,160 +58,133 @@ func (x *Animation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Animation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAnimation creates a new Animation.
 func NewAnimation() *Animation {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCNAnimation")), objc.RegisterName("new"))
 	return animationAdopt(_id)
 }
 
-// The duration of the animation in seconds. Defaults to 0.
-//
-// WithDuration sets duration and returns the receiver so calls can be chained.
+// WithDuration the duration of the animation in seconds. Defaults to 0.
 func (x *Animation) WithDuration(duration float64) *Animation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
 	return x
 }
 
-// The key-path describing the property to be animated for single-property animations, nil for animations targetting multiple nodes. defaults to nil. The key-path uses the KVC syntax. It's also possible to target a specific sub-node with the following syntax: /<node-name>.property1.property2.field    (field is optional, <node-name> is the name of the targeted node).
-//
-// WithKeyPath sets keyPath and returns the receiver so calls can be chained.
+// WithKeyPath the key-path describing the property to be animated for single-property animations, nil for animations targetting multiple nodes. defaults to nil. The key-path uses the KVC syntax. It's also possible to target a specific sub-node with the following syntax: /<node-name>.property1.property2.field    (field is optional, <node-name> is the name of the targeted node).
 func (x *Animation) WithKeyPath(keyPath string) *Animation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyPath:"), purego.NSString(keyPath))
 	return x
 }
 
-// A timing function defining the pacing of the animation. Defaults to nil indicating linear pacing.
-//
-// WithTimingFunction sets timingFunction and returns the receiver so calls can be chained.
+// WithTimingFunction a timing function defining the pacing of the animation. Defaults to nil indicating linear pacing.
 func (x *Animation) WithTimingFunction(timingFunction *TimingFunction) *Animation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
 	return x
 }
 
-// Determines the receiver's blend-in duration. When the blendInDuration is greater than zero, the effect of the animation progressively increase from 0% to 100% during the specified duration.
-//
-// WithBlendInDuration sets blendInDuration and returns the receiver so calls can be chained.
+// WithBlendInDuration determines the receiver's blend-in duration. When the blendInDuration is greater than zero, the effect of the animation progressively increase from 0% to 100% during the specified duration.
 func (x *Animation) WithBlendInDuration(blendInDuration float64) *Animation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendInDuration:"), blendInDuration)
 	return x
 }
 
-// Determines the receiver's blend-out duration. When the blendOutDuration is greater than zero, the effect of the animation progressively decrease from 100% to 0% at the end of the animation duration.
-//
-// WithBlendOutDuration sets blendOutDuration and returns the receiver so calls can be chained.
+// WithBlendOutDuration determines the receiver's blend-out duration. When the blendOutDuration is greater than zero, the effect of the animation progressively decrease from 100% to 0% at the end of the animation duration.
 func (x *Animation) WithBlendOutDuration(blendOutDuration float64) *Animation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendOutDuration:"), blendOutDuration)
 	return x
 }
 
-// When true, the animation is removed from the render tree once its active duration has passed. Defaults to YES.
-//
-// WithRemovedOnCompletion sets removedOnCompletion and returns the receiver so calls can be chained.
+// WithRemovedOnCompletion when true, the animation is removed from the render tree once its active duration has passed. Defaults to YES.
 func (x *Animation) WithRemovedOnCompletion(removedOnCompletion bool) *Animation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
 	return x
 }
 
-// When true, the animation is applied to the model tree once its active duration has passed. Defaults to NO.
-//
-// WithAppliedOnCompletion sets appliedOnCompletion and returns the receiver so calls can be chained.
+// WithAppliedOnCompletion when true, the animation is applied to the model tree once its active duration has passed. Defaults to NO.
 func (x *Animation) WithAppliedOnCompletion(appliedOnCompletion bool) *Animation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliedOnCompletion:"), appliedOnCompletion)
 	return x
 }
 
-// The repeat count of the object. May be fractional. Defaults to 0.
-//
-// WithRepeatCount sets repeatCount and returns the receiver so calls can be chained.
+// WithRepeatCount the repeat count of the object. May be fractional. Defaults to 0.
 func (x *Animation) WithRepeatCount(repeatCount float64) *Animation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepeatCount:"), repeatCount)
 	return x
 }
 
-// When true, the object plays backwards after playing forwards. Defaults to NO.
-//
-// WithAutoreverses sets autoreverses and returns the receiver so calls can be chained.
+// WithAutoreverses when true, the object plays backwards after playing forwards. Defaults to NO.
 func (x *Animation) WithAutoreverses(autoreverses bool) *Animation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoreverses:"), autoreverses)
 	return x
 }
 
-// The relative delay to start the animation, in relation to its parent animation if applicable. Defaults to 0. This property is bridged with CoreAnimations's beginTime. However, for top level animations, startDelay is relative to the current time (unlike CAAnimation's beginTime that is absolute). So if a CAAnimation has a non-zero beginTime, startDelay is initialized as caAnimation.beginTime - CACurrentMediaTime().
-//
-// WithStartDelay sets startDelay and returns the receiver so calls can be chained.
+// WithStartDelay the relative delay to start the animation, in relation to its parent animation if applicable. Defaults to 0. This property is bridged with CoreAnimations's beginTime. However, for top level animations, startDelay is relative to the current time (unlike CAAnimation's beginTime that is absolute). So if a CAAnimation has a non-zero beginTime, startDelay is initialized as caAnimation.beginTime - CACurrentMediaTime().
 func (x *Animation) WithStartDelay(startDelay float64) *Animation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartDelay:"), startDelay)
 	return x
 }
 
-// Additional offset in active local time. i.e. to convert from parent time tp to active local time t: t = (tp - begin) * speed + offset. Defaults to 0.
-//
-// WithTimeOffset sets timeOffset and returns the receiver so calls can be chained.
+// WithTimeOffset additional offset in active local time. i.e. to convert from parent time tp to active local time t: t = (tp - begin) * speed + offset. Defaults to 0.
 func (x *Animation) WithTimeOffset(timeOffset float64) *Animation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeOffset:"), timeOffset)
 	return x
 }
 
-// When true, the animation remains active after its active duration and evaluates to its end value. Defaults to NO.
-//
-// WithFillsForward sets fillsForward and returns the receiver so calls can be chained.
+// WithFillsForward when true, the animation remains active after its active duration and evaluates to its end value. Defaults to NO.
 func (x *Animation) WithFillsForward(fillsForward bool) *Animation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillsForward:"), fillsForward)
 	return x
 }
 
-// When true, the animation is active before its active duration and evaluates to its start value. Defaults to NO.
-//
-// WithFillsBackward sets fillsBackward and returns the receiver so calls can be chained.
+// WithFillsBackward when true, the animation is active before its active duration and evaluates to its start value. Defaults to NO.
 func (x *Animation) WithFillsBackward(fillsBackward bool) *Animation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillsBackward:"), fillsBackward)
 	return x
 }
 
-// Determines whether the receiver is evaluated using the scene time or the system time. Defaults to NO. A scene-time based animation is evaluated using the "sceneTime" value of the renderer that renders the scene. The "sceneTime" base is typically used by players or editors that need to preview, edit and being able to change the evaluation time.
-//
-// WithUsesSceneTimeBase sets usesSceneTimeBase and returns the receiver so calls can be chained.
+// WithUsesSceneTimeBase determines whether the receiver is evaluated using the scene time or the system time. Defaults to NO. A scene-time based animation is evaluated using the "sceneTime" value of the renderer that renders the scene. The "sceneTime" base is typically used by players or editors that need to preview, edit and being able to change the evaluation time.
 func (x *Animation) WithUsesSceneTimeBase(usesSceneTimeBase bool) *Animation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSceneTimeBase:"), usesSceneTimeBase)
 	return x
 }
 
-// Specifies the animation events attached to the receiver.
-//
-// WithAnimationEvents sets the collection and returns the receiver so calls can be chained.
+// WithAnimationEvents specifies the animation events attached to the receiver.
 func (x *Animation) WithAnimationEvents(items ...*AnimationEvent) *Animation {
 	_arr := purego.SliceToNSArray(items, func(_v *AnimationEvent) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationEvents:"), _arr)
 	return x
 }
 
-// When true the value specified by the animation will be "added" to the current presentation value of the property to produce the new presentation value. The addition function is type-dependent, e.g. for affine transforms the two matrices are concatenated. Defaults to NO.
-//
-// WithAdditive sets additive and returns the receiver so calls can be chained.
+// WithAdditive when true the value specified by the animation will be "added" to the current presentation value of the property to produce the new presentation value. The addition function is type-dependent, e.g. for affine transforms the two matrices are concatenated. Defaults to NO.
 func (x *Animation) WithAdditive(additive bool) *Animation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditive:"), additive)
 	return x
 }
 
-// The `cumulative' property affects how repeating animations produce their result. If true then the current value of the animation is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle. If false, the value is simply the value calculated for the current repeat cycle. Defaults to NO.
-//
-// WithCumulative sets cumulative and returns the receiver so calls can be chained.
+// WithCumulative the `cumulative' property affects how repeating animations produce their result. If true then the current value of the animation is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle. If false, the value is simply the value calculated for the current repeat cycle. Defaults to NO.
 func (x *Animation) WithCumulative(cumulative bool) *Animation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCumulative:"), cumulative)
 	return x
 }
 
-// The duration of the animation in seconds. Defaults to 0.
+// Duration the duration of the animation in seconds. Defaults to 0.
 func (x *Animation) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
 	return _r
 }
 
+// SetDuration wraps the corresponding Objective-C method.
 func (x *Animation) SetDuration(duration float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
 }
 
-// The key-path describing the property to be animated for single-property animations, nil for animations targetting multiple nodes. defaults to nil. The key-path uses the KVC syntax. It's also possible to target a specific sub-node with the following syntax: /<node-name>.property1.property2.field    (field is optional, <node-name> is the name of the targeted node).
+// KeyPath the key-path describing the property to be animated for single-property animations, nil for animations targetting multiple nodes. defaults to nil. The key-path uses the KVC syntax. It's also possible to target a specific sub-node with the following syntax: /<node-name>.property1.property2.field    (field is optional, <node-name> is the name of the targeted node).
 func (x *Animation) KeyPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyPath"))
 	if _r == 0 {
@@ -218,131 +193,144 @@ func (x *Animation) KeyPath() string {
 	return purego.GoString(_r)
 }
 
+// SetKeyPath wraps the corresponding Objective-C method.
 func (x *Animation) SetKeyPath(keyPath string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyPath:"), purego.NSString(keyPath))
 }
 
-// A timing function defining the pacing of the animation. Defaults to nil indicating linear pacing.
+// TimingFunction a timing function defining the pacing of the animation. Defaults to nil indicating linear pacing.
 func (x *Animation) TimingFunction() *TimingFunction {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timingFunction"))
 	return TimingFunctionFromID(_r)
 }
 
+// SetTimingFunction wraps the corresponding Objective-C method.
 func (x *Animation) SetTimingFunction(timingFunction *TimingFunction) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
 }
 
-// Determines the receiver's blend-in duration. When the blendInDuration is greater than zero, the effect of the animation progressively increase from 0% to 100% during the specified duration.
+// BlendInDuration determines the receiver's blend-in duration. When the blendInDuration is greater than zero, the effect of the animation progressively increase from 0% to 100% during the specified duration.
 func (x *Animation) BlendInDuration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("blendInDuration"))
 	return _r
 }
 
+// SetBlendInDuration wraps the corresponding Objective-C method.
 func (x *Animation) SetBlendInDuration(blendInDuration float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendInDuration:"), blendInDuration)
 }
 
-// Determines the receiver's blend-out duration. When the blendOutDuration is greater than zero, the effect of the animation progressively decrease from 100% to 0% at the end of the animation duration.
+// BlendOutDuration determines the receiver's blend-out duration. When the blendOutDuration is greater than zero, the effect of the animation progressively decrease from 100% to 0% at the end of the animation duration.
 func (x *Animation) BlendOutDuration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("blendOutDuration"))
 	return _r
 }
 
+// SetBlendOutDuration wraps the corresponding Objective-C method.
 func (x *Animation) SetBlendOutDuration(blendOutDuration float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendOutDuration:"), blendOutDuration)
 }
 
-// When true, the animation is removed from the render tree once its active duration has passed. Defaults to YES.
+// IsRemovedOnCompletion when true, the animation is removed from the render tree once its active duration has passed. Defaults to YES.
 func (x *Animation) IsRemovedOnCompletion() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRemovedOnCompletion"))
 	return _r
 }
 
+// SetRemovedOnCompletion wraps the corresponding Objective-C method.
 func (x *Animation) SetRemovedOnCompletion(removedOnCompletion bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
 }
 
-// When true, the animation is applied to the model tree once its active duration has passed. Defaults to NO.
+// IsAppliedOnCompletion when true, the animation is applied to the model tree once its active duration has passed. Defaults to NO.
 func (x *Animation) IsAppliedOnCompletion() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAppliedOnCompletion"))
 	return _r
 }
 
+// SetAppliedOnCompletion wraps the corresponding Objective-C method.
 func (x *Animation) SetAppliedOnCompletion(appliedOnCompletion bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliedOnCompletion:"), appliedOnCompletion)
 }
 
-// The repeat count of the object. May be fractional. Defaults to 0.
+// RepeatCount the repeat count of the object. May be fractional. Defaults to 0.
 func (x *Animation) RepeatCount() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("repeatCount"))
 	return _r
 }
 
+// SetRepeatCount wraps the corresponding Objective-C method.
 func (x *Animation) SetRepeatCount(repeatCount float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepeatCount:"), repeatCount)
 }
 
-// When true, the object plays backwards after playing forwards. Defaults to NO.
+// Autoreverses when true, the object plays backwards after playing forwards. Defaults to NO.
 func (x *Animation) Autoreverses() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autoreverses"))
 	return _r
 }
 
+// SetAutoreverses wraps the corresponding Objective-C method.
 func (x *Animation) SetAutoreverses(autoreverses bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoreverses:"), autoreverses)
 }
 
-// The relative delay to start the animation, in relation to its parent animation if applicable. Defaults to 0. This property is bridged with CoreAnimations's beginTime. However, for top level animations, startDelay is relative to the current time (unlike CAAnimation's beginTime that is absolute). So if a CAAnimation has a non-zero beginTime, startDelay is initialized as caAnimation.beginTime - CACurrentMediaTime().
+// StartDelay the relative delay to start the animation, in relation to its parent animation if applicable. Defaults to 0. This property is bridged with CoreAnimations's beginTime. However, for top level animations, startDelay is relative to the current time (unlike CAAnimation's beginTime that is absolute). So if a CAAnimation has a non-zero beginTime, startDelay is initialized as caAnimation.beginTime - CACurrentMediaTime().
 func (x *Animation) StartDelay() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("startDelay"))
 	return _r
 }
 
+// SetStartDelay wraps the corresponding Objective-C method.
 func (x *Animation) SetStartDelay(startDelay float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartDelay:"), startDelay)
 }
 
-// Additional offset in active local time. i.e. to convert from parent time tp to active local time t: t = (tp - begin) * speed + offset. Defaults to 0.
+// TimeOffset additional offset in active local time. i.e. to convert from parent time tp to active local time t: t = (tp - begin) * speed + offset. Defaults to 0.
 func (x *Animation) TimeOffset() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeOffset"))
 	return _r
 }
 
+// SetTimeOffset wraps the corresponding Objective-C method.
 func (x *Animation) SetTimeOffset(timeOffset float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeOffset:"), timeOffset)
 }
 
-// When true, the animation remains active after its active duration and evaluates to its end value. Defaults to NO.
+// FillsForward when true, the animation remains active after its active duration and evaluates to its end value. Defaults to NO.
 func (x *Animation) FillsForward() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("fillsForward"))
 	return _r
 }
 
+// SetFillsForward wraps the corresponding Objective-C method.
 func (x *Animation) SetFillsForward(fillsForward bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillsForward:"), fillsForward)
 }
 
-// When true, the animation is active before its active duration and evaluates to its start value. Defaults to NO.
+// FillsBackward when true, the animation is active before its active duration and evaluates to its start value. Defaults to NO.
 func (x *Animation) FillsBackward() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("fillsBackward"))
 	return _r
 }
 
+// SetFillsBackward wraps the corresponding Objective-C method.
 func (x *Animation) SetFillsBackward(fillsBackward bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillsBackward:"), fillsBackward)
 }
 
-// Determines whether the receiver is evaluated using the scene time or the system time. Defaults to NO. A scene-time based animation is evaluated using the "sceneTime" value of the renderer that renders the scene. The "sceneTime" base is typically used by players or editors that need to preview, edit and being able to change the evaluation time.
+// UsesSceneTimeBase determines whether the receiver is evaluated using the scene time or the system time. Defaults to NO. A scene-time based animation is evaluated using the "sceneTime" value of the renderer that renders the scene. The "sceneTime" base is typically used by players or editors that need to preview, edit and being able to change the evaluation time.
 func (x *Animation) UsesSceneTimeBase() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesSceneTimeBase"))
 	return _r
 }
 
+// SetUsesSceneTimeBase wraps the corresponding Objective-C method.
 func (x *Animation) SetUsesSceneTimeBase(usesSceneTimeBase bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSceneTimeBase:"), usesSceneTimeBase)
 }
 
-// Specifies the animation events attached to the receiver.
+// AnimationEvents specifies the animation events attached to the receiver.
 //
 // AnimationEvents returns the collection as a Go slice.
 func (x *Animation) AnimationEvents() []*AnimationEvent {
@@ -350,26 +338,29 @@ func (x *Animation) AnimationEvents() []*AnimationEvent {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AnimationEvent { return AnimationEventFromID(_id) })
 }
 
+// SetAnimationEvents wraps the corresponding Objective-C method.
 func (x *Animation) SetAnimationEvents(animationEvents []*AnimationEvent) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationEvents:"), purego.SliceToNSArray(animationEvents, func(_v *AnimationEvent) objc.ID { return objref.IDOf(_v) }))
 }
 
-// When true the value specified by the animation will be "added" to the current presentation value of the property to produce the new presentation value. The addition function is type-dependent, e.g. for affine transforms the two matrices are concatenated. Defaults to NO.
+// IsAdditive when true the value specified by the animation will be "added" to the current presentation value of the property to produce the new presentation value. The addition function is type-dependent, e.g. for affine transforms the two matrices are concatenated. Defaults to NO.
 func (x *Animation) IsAdditive() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAdditive"))
 	return _r
 }
 
+// SetAdditive wraps the corresponding Objective-C method.
 func (x *Animation) SetAdditive(additive bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditive:"), additive)
 }
 
-// The `cumulative' property affects how repeating animations produce their result. If true then the current value of the animation is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle. If false, the value is simply the value calculated for the current repeat cycle. Defaults to NO.
+// IsCumulative the `cumulative' property affects how repeating animations produce their result. If true then the current value of the animation is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle. If false, the value is simply the value calculated for the current repeat cycle. Defaults to NO.
 func (x *Animation) IsCumulative() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCumulative"))
 	return _r
 }
 
+// SetCumulative wraps the corresponding Objective-C method.
 func (x *Animation) SetCumulative(cumulative bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCumulative:"), cumulative)
 }

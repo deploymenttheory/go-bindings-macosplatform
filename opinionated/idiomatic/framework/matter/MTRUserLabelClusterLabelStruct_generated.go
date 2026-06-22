@@ -23,7 +23,8 @@ func MTRUserLabelClusterLabelStructFromID(id objc.ID) *MTRUserLabelClusterLabelS
 	if id == 0 {
 		return nil
 	}
-	x := &MTRUserLabelClusterLabelStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRUserLabelClusterLabelStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRUserLabelClusterLabelStructAdopt(id objc.ID) *MTRUserLabelClusterLabelSt
 	if id == 0 {
 		return nil
 	}
-	x := &MTRUserLabelClusterLabelStruct{Handle: objref.Wrap(id)}
+	x := &MTRUserLabelClusterLabelStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,24 +58,31 @@ func (x *MTRUserLabelClusterLabelStruct) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRUserLabelClusterLabelStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRUserLabelClusterLabelStruct creates a new MTRUserLabelClusterLabelStruct.
 func NewMTRUserLabelClusterLabelStruct() *MTRUserLabelClusterLabelStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRUserLabelClusterLabelStruct")), objc.RegisterName("new"))
 	return mTRUserLabelClusterLabelStructAdopt(_id)
 }
 
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel sets the property and returns the receiver so calls can be chained.
 func (x *MTRUserLabelClusterLabelStruct) WithLabel(label string) *MTRUserLabelClusterLabelStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue sets the property and returns the receiver so calls can be chained.
 func (x *MTRUserLabelClusterLabelStruct) WithValue(value string) *MTRUserLabelClusterLabelStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 	return x
 }
 
+// Label wraps the corresponding Objective-C method.
 func (x *MTRUserLabelClusterLabelStruct) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -82,10 +91,12 @@ func (x *MTRUserLabelClusterLabelStruct) Label() string {
 	return purego.GoString(_r)
 }
 
+// SetLabel wraps the corresponding Objective-C method.
 func (x *MTRUserLabelClusterLabelStruct) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *MTRUserLabelClusterLabelStruct) Value() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	if _r == 0 {
@@ -94,6 +105,7 @@ func (x *MTRUserLabelClusterLabelStruct) Value() string {
 	return purego.GoString(_r)
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *MTRUserLabelClusterLabelStruct) SetValue(value string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 }

@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object you use to create and manage a DNS settings configuration.
-//
 // NEDNSSettingsManager is an idiomatic wrapper over the Objective-C class NEDNSSettingsManager.
+//
+// An object you use to create and manage a DNS settings configuration.
 type NEDNSSettingsManager struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func NEDNSSettingsManagerFromID(id objc.ID) *NEDNSSettingsManager {
 	if id == 0 {
 		return nil
 	}
-	x := &NEDNSSettingsManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEDNSSettingsManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func nEDNSSettingsManagerAdopt(id objc.ID) *NEDNSSettingsManager {
 	if id == 0 {
 		return nil
 	}
-	x := &NEDNSSettingsManager{Handle: objref.Wrap(id)}
+	x := &NEDNSSettingsManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,38 +62,38 @@ func (x *NEDNSSettingsManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEDNSSettingsManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNEDNSSettingsManager creates a new NEDNSSettingsManager.
 func NewNEDNSSettingsManager() *NEDNSSettingsManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("NEDNSSettingsManager")), objc.RegisterName("new"))
 	return nEDNSSettingsManagerAdopt(_id)
 }
 
-// A string that contains the display name of the DNS settings configuration.
-//
-// WithLocalizedDescription sets localizedDescription and returns the receiver so calls can be chained.
+// WithLocalizedDescription a string that contains the display name of the DNS settings configuration.
 func (x *NEDNSSettingsManager) WithLocalizedDescription(localizedDescription string) *NEDNSSettingsManager {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
 	return x
 }
 
-// An object that contains the configuration settings for a DNS server.
-//
-// WithDnsSettings sets dnsSettings and returns the receiver so calls can be chained.
+// WithDnsSettings an object that contains the configuration settings for a DNS server.
 func (x *NEDNSSettingsManager) WithDnsSettings(dnsSettings NEDNSSettingsProvider) *NEDNSSettingsManager {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDnsSettings:"), objref.IDOf(dnsSettings))
 	return x
 }
 
-// A list of ordered rules that defines the networks on which the DNS settings will apply.
-//
-// WithOnDemandRules sets the collection and returns the receiver so calls can be chained.
+// WithOnDemandRules a list of ordered rules that defines the networks on which the DNS settings will apply.
 func (x *NEDNSSettingsManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NEDNSSettingsManager {
 	_arr := purego.SliceToNSArray(items, func(_v NEOnDemandRuleProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnDemandRules:"), _arr)
 	return x
 }
 
-// Load your DNS settings configuration from the system networking preferences.
+// LoadFromPreferences load your DNS settings configuration from the system networking preferences.
 //
 // LoadFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEDNSSettingsManager) LoadFromPreferences(ctx context.Context) error {
@@ -110,7 +112,7 @@ func (x *NEDNSSettingsManager) LoadFromPreferences(ctx context.Context) error {
 	}
 }
 
-// Remove your DNS settings configuration from the system networking preferences.
+// RemoveFromPreferences remove your DNS settings configuration from the system networking preferences.
 //
 // RemoveFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEDNSSettingsManager) RemoveFromPreferences(ctx context.Context) error {
@@ -129,7 +131,7 @@ func (x *NEDNSSettingsManager) RemoveFromPreferences(ctx context.Context) error 
 	}
 }
 
-// Save your DNS settings configuration to the system networking preferences.
+// SaveToPreferences save your DNS settings configuration to the system networking preferences.
 //
 // SaveToPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEDNSSettingsManager) SaveToPreferences(ctx context.Context) error {
@@ -148,7 +150,7 @@ func (x *NEDNSSettingsManager) SaveToPreferences(ctx context.Context) error {
 	}
 }
 
-// A string containing a description of the DNS settings.
+// LocalizedDescription a string containing a description of the DNS settings.
 func (x *NEDNSSettingsManager) LocalizedDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
@@ -157,21 +159,23 @@ func (x *NEDNSSettingsManager) LocalizedDescription() string {
 	return purego.GoString(_r)
 }
 
+// SetLocalizedDescription wraps the corresponding Objective-C method.
 func (x *NEDNSSettingsManager) SetLocalizedDescription(localizedDescription string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
 }
 
-// An NEDNSSettings object containing the DNS resolver configuration to apply to the system.
+// DnsSettings an NEDNSSettings object containing the DNS resolver configuration to apply to the system.
 func (x *NEDNSSettingsManager) DnsSettings() *NEDNSSettings {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dnsSettings"))
 	return NEDNSSettingsFromID(_r)
 }
 
+// SetDnsSettings wraps the corresponding Objective-C method.
 func (x *NEDNSSettingsManager) SetDnsSettings(dnsSettings *NEDNSSettings) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDnsSettings:"), objref.IDOf(dnsSettings))
 }
 
-// An array of NEOnDemandRule objects. If nil, the associated DNS settings will always apply. If non-nil, the array describes the networks on which the DNS configuration should take effect or not.
+// OnDemandRules an array of NEOnDemandRule objects. If nil, the associated DNS settings will always apply. If non-nil, the array describes the networks on which the DNS configuration should take effect or not.
 //
 // OnDemandRules returns the collection as a Go slice.
 func (x *NEDNSSettingsManager) OnDemandRules() []*NEOnDemandRule {
@@ -179,11 +183,12 @@ func (x *NEDNSSettingsManager) OnDemandRules() []*NEOnDemandRule {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEOnDemandRule { return NEOnDemandRuleFromID(_id) })
 }
 
+// SetOnDemandRules wraps the corresponding Objective-C method.
 func (x *NEDNSSettingsManager) SetOnDemandRules(onDemandRules []*NEOnDemandRule) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnDemandRules:"), purego.SliceToNSArray(onDemandRules, func(_v *NEOnDemandRule) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Checks the enabled status of the DNS settings. DNS settings must be enabled by the user in Settings or System Preferences.
+// IsEnabled checks the enabled status of the DNS settings. DNS settings must be enabled by the user in Settings or System Preferences.
 func (x *NEDNSSettingsManager) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r

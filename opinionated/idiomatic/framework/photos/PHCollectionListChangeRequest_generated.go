@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request to create, delete, or modify a Photos collection list, for use in a photo library change block.
-//
 // CollectionListChangeRequest is an idiomatic wrapper over the Objective-C class PHCollectionListChangeRequest.
+//
+// It embeds [ChangeRequest], promoting that type's methods.
+//
+// A request to create, delete, or modify a Photos collection list, for use in a photo library change block.
 type CollectionListChangeRequest struct {
-	objref.Handle
+	ChangeRequest
 }
 
 // CollectionListChangeRequestFromID adopts an existing Objective-C object as a CollectionListChangeRequest
@@ -25,7 +26,8 @@ func CollectionListChangeRequestFromID(id objc.ID) *CollectionListChangeRequest 
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionListChangeRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollectionListChangeRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func collectionListChangeRequestAdopt(id objc.ID) *CollectionListChangeRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionListChangeRequest{Handle: objref.Wrap(id)}
+	x := &CollectionListChangeRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CollectionListChangeRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CollectionListChangeRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CollectionListChangeRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCollectionListChangeRequest creates a new CollectionListChangeRequest.
@@ -64,29 +52,29 @@ func NewCollectionListChangeRequest() *CollectionListChangeRequest {
 	return collectionListChangeRequestAdopt(_id)
 }
 
-// The displayed name of the collection list.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the displayed name of the collection list.
 func (x *CollectionListChangeRequest) WithTitle(title string) *CollectionListChangeRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// Removes the child collections at the specified indexes from the collection list.
+// RemoveChildCollectionsAtIndexes removes the child collections at the specified indexes from the collection list.
 func (x *CollectionListChangeRequest) RemoveChildCollectionsAtIndexes(indexes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeChildCollectionsAtIndexes:"), objref.IDOf(indexes))
 }
 
-// Moves the child collections at the specified indexes in the collection list to a new index.
+// MoveChildCollectionsAtIndexesToIndex moves the child collections at the specified indexes in the collection list to a new index.
 func (x *CollectionListChangeRequest) MoveChildCollectionsAtIndexesToIndex(indexes obj.Object, toIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveChildCollectionsAtIndexes:toIndex:"), objref.IDOf(indexes), toIndex)
 }
 
+// PlaceholderForCreatedCollectionList wraps the corresponding Objective-C method.
 func (x *CollectionListChangeRequest) PlaceholderForCreatedCollectionList() *ObjectPlaceholder {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderForCreatedCollectionList"))
 	return ObjectPlaceholderFromID(_r)
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *CollectionListChangeRequest) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -95,6 +83,7 @@ func (x *CollectionListChangeRequest) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *CollectionListChangeRequest) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
@@ -111,3 +100,5 @@ type CollectionListChangeRequestable interface {
 }
 
 var _ CollectionListChangeRequestable = (*CollectionListChangeRequest)(nil)
+
+var _ ChangeRequestProvider = (*CollectionListChangeRequest)(nil)

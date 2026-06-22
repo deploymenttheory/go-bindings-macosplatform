@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NDArrayMultiaryBase is an idiomatic wrapper over the Objective-C class MPSNDArrayMultiaryBase.
+//
+// NDArrayMultiaryBase is an abstract base — you do not construct it directly. Construct one of [NDArrayMultiaryGradientKernel], [NDArrayMultiaryKernel] and pass it where a NDArrayMultiaryBase is accepted.
 type NDArrayMultiaryBase struct {
-	objref.Handle
+	Kernel
 }
 
 // NDArrayMultiaryBaseFromID adopts an existing Objective-C object as a NDArrayMultiaryBase
@@ -23,7 +24,8 @@ func NDArrayMultiaryBaseFromID(id objc.ID) *NDArrayMultiaryBase {
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayMultiaryBase{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NDArrayMultiaryBase{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,51 +38,30 @@ func nDArrayMultiaryBaseAdopt(id objc.ID) *NDArrayMultiaryBase {
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayMultiaryBase{Handle: objref.Wrap(id)}
+	x := &NDArrayMultiaryBase{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NDArrayMultiaryBase) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NDArrayMultiaryBase) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NDArrayMultiaryBase) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewNDArrayMultiaryBase creates a new NDArrayMultiaryBase.
-func NewNDArrayMultiaryBase() *NDArrayMultiaryBase {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayMultiaryBase")), objc.RegisterName("new"))
-	return nDArrayMultiaryBaseAdopt(_id)
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayMultiaryBase) WithLabel(label string) *NDArrayMultiaryBase {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Initialize a MPSNDArrayMultiaryKernel from a NSCoder
+// EncodeWithCoder initialize a MPSNDArrayMultiaryKernel from a NSCoder
 func (x *NDArrayMultiaryBase) EncodeWithCoder(coder obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
 }
 
+// ResultStateForSourceArraysSourceStatesDestinationArray wraps the corresponding Objective-C method.
 func (x *NDArrayMultiaryBase) ResultStateForSourceArraysSourceStatesDestinationArray(sourceArrays []obj.Object, sourceStates []obj.Object, destinationArray obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultStateForSourceArrays:sourceStates:destinationArray:"), purego.SliceToNSArray(sourceArrays, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationArray))
 	return obj.Wrap(_r)
 }
 
-// Return a descriptor suitable for allocating a NSArray to receive the result The object properties (kernelSize, offsets, edgeMode, etc.) should be properly configured as if the -encode call was about to be made, before this method is called. Those properties may affect the results.
+// DestinationArrayDescriptorForSourceArraysSourceState return a descriptor suitable for allocating a NSArray to receive the result The object properties (kernelSize, offsets, edgeMode, etc.) should be properly configured as if the -encode call was about to be made, before this method is called. Those properties may affect the results.
 func (x *NDArrayMultiaryBase) DestinationArrayDescriptorForSourceArraysSourceState(sources []obj.Object, state obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationArrayDescriptorForSourceArrays:sourceState:"), purego.SliceToNSArray(sources, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(state))
 	return obj.Wrap(_r)
@@ -96,3 +77,12 @@ type NDArrayMultiaryBaseable interface {
 }
 
 var _ NDArrayMultiaryBaseable = (*NDArrayMultiaryBase)(nil)
+
+// isNDArrayMultiaryBase marks NDArrayMultiaryBase — and, by embedding promotion, its
+// subclasses — as a member of the NDArrayMultiaryBase hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NDArrayMultiaryBase) isNDArrayMultiaryBase() {}
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayMultiaryBase)(nil)
+
+var _ KernelProvider = (*NDArrayMultiaryBase)(nil)

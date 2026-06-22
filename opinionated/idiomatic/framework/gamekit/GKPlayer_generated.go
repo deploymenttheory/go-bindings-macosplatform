@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A remote player who the local player running your game can invite and communicate with through Game Center.
-//
 // Player is an idiomatic wrapper over the Objective-C class GKPlayer.
+//
+// Player is an abstract base — you do not construct it directly. Construct one of [LocalPlayer] and pass it where a Player is accepted.
+//
+// A remote player who the local player running your game can invite and communicate with through Game Center.
 type Player struct {
-	objref.Handle
+	BasePlayer
 }
 
 // PlayerFromID adopts an existing Objective-C object as a Player
@@ -27,7 +28,8 @@ func PlayerFromID(id objc.ID) *Player {
 	if id == 0 {
 		return nil
 	}
-	x := &Player{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Player{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,39 +42,19 @@ func playerAdopt(id objc.ID) *Player {
 	if id == 0 {
 		return nil
 	}
-	x := &Player{Handle: objref.Wrap(id)}
+	x := &Player{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *Player) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Player) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Player) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewPlayer creates a new Player.
-func NewPlayer() *Player {
-	_id := objc.Send[objc.ID](objc.ID(_class("GKPlayer")), objc.RegisterName("new"))
-	return playerAdopt(_id)
-}
-
-// Returns a Boolean value depending on whether the player identifiers are persistent across game instances or unique to the game instance.
+// ScopedIDsArePersistent returns a Boolean value depending on whether the player identifiers are persistent across game instances or unique to the game instance.
 func (x *Player) ScopedIDsArePersistent() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scopedIDsArePersistent"))
 	return _r
 }
 
-// This is the player's unique and persistent ID that is scoped to this application.
+// GamePlayerID this is the player's unique and persistent ID that is scoped to this application.
 func (x *Player) GamePlayerID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gamePlayerID"))
 	if _r == 0 {
@@ -81,7 +63,7 @@ func (x *Player) GamePlayerID() string {
 	return purego.GoString(_r)
 }
 
-// This is the player's unique and persistent ID that is scoped to the Apple Store Connect Team identifier of this application.
+// TeamPlayerID this is the player's unique and persistent ID that is scoped to the Apple Store Connect Team identifier of this application.
 func (x *Player) TeamPlayerID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("teamPlayerID"))
 	if _r == 0 {
@@ -90,7 +72,7 @@ func (x *Player) TeamPlayerID() string {
 	return purego.GoString(_r)
 }
 
-// The alias property contains the player's nickname. When you need to display the name to the user, consider using displayName instead. The nickname is unique but not invariant: the player may change their nickname. The nickname may be very long, so be sure to use appropriate string truncation API when drawing.
+// Alias the alias property contains the player's nickname. When you need to display the name to the user, consider using displayName instead. The nickname is unique but not invariant: the player may change their nickname. The nickname may be very long, so be sure to use appropriate string truncation API when drawing.
 func (x *Player) Alias() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alias"))
 	if _r == 0 {
@@ -99,6 +81,7 @@ func (x *Player) Alias() string {
 	return purego.GoString(_r)
 }
 
+// GuestIdentifier wraps the corresponding Objective-C method.
 func (x *Player) GuestIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("guestIdentifier"))
 	if _r == 0 {
@@ -107,15 +90,16 @@ func (x *Player) GuestIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// IsInvitable wraps the corresponding Objective-C method.
 func (x *Player) IsInvitable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInvitable"))
 	return _r
 }
 
-// Loads a photo of the player from Game Center.
+// LoadPhotoForSize loads a photo of the player from Game Center.
 //
 // LoadPhotoForSize blocks until the operation completes or ctx is cancelled.
-func (x *Player) LoadPhotoForSize(ctx context.Context, size PhotoSize) (obj.Object, error) {
+func (x *Player) LoadPhotoForSize(ctx context.Context, size PhotoSize) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -137,6 +121,7 @@ func (x *Player) LoadPhotoForSize(ctx context.Context, size PhotoSize) (obj.Obje
 	}
 }
 
+// IsFriend wraps the corresponding Objective-C method.
 func (x *Player) IsFriend() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFriend"))
 	return _r
@@ -156,3 +141,12 @@ type Playerable interface {
 }
 
 var _ Playerable = (*Player)(nil)
+
+// isPlayer marks Player — and, by embedding promotion, its
+// subclasses — as a member of the Player hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Player) isPlayer() {}
+
+var _ PlayerProvider = (*Player)(nil)
+
+var _ BasePlayerProvider = (*Player)(nil)

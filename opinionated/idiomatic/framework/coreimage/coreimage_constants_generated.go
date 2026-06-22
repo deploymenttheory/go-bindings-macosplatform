@@ -14,7 +14,6 @@ func KCIImageColorSpace() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageColorSpace")))
 }
 
-// A Boolean value to control whether an image created with a CVPixelBuffer or an IOSurface should be cropped and offset according clean aperture attachments. For a `CVPixelBuffer` this will use `kCVImageBufferPreferredCleanApertureKey` or `kCVImageBufferCleanApertureKey`. If the value for this option is: * True: then image will be cropped and offset to the clean aperture. * False: then the full image is returned. * “CIVector“ : then use it as a `CGRect` to crop and offset. * Not specified : then it will behave as if False was specified.
 // KCIImageApplyCleanAperture returns the string constant kCIImageApplyCleanAperture, for use as a dictionary key or argument.
 func KCIImageApplyCleanAperture() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageApplyCleanAperture")))
@@ -30,13 +29,11 @@ func KCIImageExpandToHDR() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageExpandToHDR")))
 }
 
-// A value for overriding the automatic behavior of the Content Headroom property when creating an image. The value for this key should be an `NSNumber` instance.
 // KCIImageContentHeadroom returns the string constant kCIImageContentHeadroom, for use as a dictionary key or argument.
 func KCIImageContentHeadroom() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageContentHeadroom")))
 }
 
-// A value for overriding the automatic behavior of the Content Average Light Level property when creating an image. The value for this key should be an `NSNumber` instance.
 // KCIImageContentAverageLightLevel returns the string constant kCIImageContentAverageLightLevel, for use as a dictionary key or argument.
 func KCIImageContentAverageLightLevel() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageContentAverageLightLevel")))
@@ -142,179 +139,149 @@ func KCIImageAutoAdjustLevel() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageAutoAdjustLevel")))
 }
 
-// A Core Image context option key to specify the default destination color space for rendering. This option only affects how Core Image renders using the following methods: * “/CIContext/createCGImage:fromRect:“ * “/CIContext/drawImage:atPoint:fromRect:“ * “/CIContext/drawImage:inRect:fromRect:“ With all other render methods, the destination color space is either specified as a parameter or can be determined from the object being rendered to. The value of this option can be either: * A `CGColorSpace` instance with an RGB or monochrome color model that supports output. * An `NSNull` instance to indicate that the context should not match from the working space to the destination. If this option is not specified, then the default output space is sRGB.
 // KCIContextOutputColorSpace returns the string constant kCIContextOutputColorSpace, for use as a dictionary key or argument.
 func KCIContextOutputColorSpace() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIContextOutputColorSpace")))
 }
 
-// A Core Image context option key to specify the working color space for rendering. Contexts support automatic color management by performing all processing operations in a working color space. This means that unless told otherwise: * All input images are color matched from the input's color space to the working space. * All renders are color matched from the working space to the destination's color space. The default working space is the extended sRGB color space with linear gamma. On macOS before 10.10, the default is extended Generic RGB with linear gamma. The value of this option can be either: * A `CGColorSpace` instance with an RGB color model that supports output. * An `NSNull` instance to request that Core Image perform no color management. If this option is not specified, then the default working space is used.
 // KCIContextWorkingColorSpace returns the string constant kCIContextWorkingColorSpace, for use as a dictionary key or argument.
 func KCIContextWorkingColorSpace() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIContextWorkingColorSpace")))
 }
 
-// A Core Image context option key to specify the pixel format to for intermediate results when rendering. The value for this key is an `NSNumber` instance containing a “CIFormat“ value. The supported values for the working pixel format are: “CIFormat“        | Notes ------------------- | -------------- “kCIFormatRGBA8“  | Uses less memory but has less precision an range “kCIFormatRGBAh“  | Uses 8 bytes per pixel, supports HDR “kCIFormatRGBAf“  | Only on macOS If this option is not specified, then the default is “kCIFormatRGBAh“. (The default is “kCIFormatRGBA8“ if your if app is linked against iOS 12 SDK or earlier.)
 // KCIContextWorkingFormat returns the string constant kCIContextWorkingFormat, for use as a dictionary key or argument.
 func KCIContextWorkingFormat() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIContextWorkingFormat")))
 }
 
-// A Boolean value to control the quality of image downsampling operations performed by the Core Image context. The higher quality behavior performs downsampling operations in multiple passes in order to reduce aliasing artifacts. The lower quality behavior performs downsampling operations a single pass in order to improve performance. If the value for this option is: * True: The higher quality behavior will be used. * False: The lower quality behavior will be used. * Not specified: the default behavior is True on macOS and False on other platforms. > Note: > * This option does affect how “/CIImage/imageByApplyingTransform:“ operations are performed by the context. > * This option does not affect how “/CIImage/imageByApplyingTransform:highQualityDownsample:“ behaves.
 // KCIContextHighQualityDownsample returns the string constant kCIContextHighQualityDownsample, for use as a dictionary key or argument.
 func KCIContextHighQualityDownsample() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIContextHighQualityDownsample")))
 }
 
-// A Boolean value to control how a Core Image context render produces alpha-premultiplied pixels. This option only affects how a context is rendered when using methods where the destination's alpha mode cannot be determined such as: *  “/CIContext/render:toBitmap:rowBytes:bounds:format:colorSpace:“ *  “/CIContext/render:toCVPixelBuffer:“ *  “/CIContext/render:toIOSurface:bounds:colorSpace:“ *  “/CIContext/render:toMTLTexture:commandBuffer:bounds:colorSpace:“ *  “/CIContext/createCGImage:fromRect:“ If the value for this option is: * True: The output will produce alpha-premultiplied pixels. * False: The output will produce un-premultiplied pixels. * Not specified: the default behavior True. This option does not affect how a context is rendered to a “CIRenderDestination“ because that API allows you to set or override the alpha behavior using “/CIRenderDestination/alphaMode“.
 // KCIContextOutputPremultiplied returns the string constant kCIContextOutputPremultiplied, for use as a dictionary key or argument.
 func KCIContextOutputPremultiplied() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIContextOutputPremultiplied")))
 }
 
-// A Boolean value to control how a Core Image context caches the contents of any intermediate image buffers it uses during rendering. If a context caches intermediate buffers, then subsequent renders of a similar image using the same context may be able to render faster. If a context does not cache intermediate buffers, then it may use less memory. If the value for this option is: * True: The context will cache intermediate results for future renders using the same context. * False: The context will not cache intermediate results. * Not specified: the default behavior True. > Note: > * This option does affect how “/CIImage/imageByInsertingIntermediate“ behaves. > * This option does not affect how “/CIImage/imageByInsertingIntermediate:“ behaves.
 // KCIContextCacheIntermediates returns the string constant kCIContextCacheIntermediates, for use as a dictionary key or argument.
 func KCIContextCacheIntermediates() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIContextCacheIntermediates")))
 }
 
-// A Boolean value to control if a Core Image context will use a software renderer. > Note: This option has no effect if the platform does not support OpenCL.
 // KCIContextUseSoftwareRenderer returns the string constant kCIContextUseSoftwareRenderer, for use as a dictionary key or argument.
 func KCIContextUseSoftwareRenderer() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIContextUseSoftwareRenderer")))
 }
 
-// A Boolean value to control the priority Core Image context renders. If this value is True, then rendering with the context from a background thread takes lower priority than other GPU usage from the main thread. This allows your app to perform Core Image rendering without disturbing the frame rate of UI animations.
 // KCIContextPriorityRequestLow returns the string constant kCIContextPriorityRequestLow, for use as a dictionary key or argument.
 func KCIContextPriorityRequestLow() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIContextPriorityRequestLow")))
 }
 
-// A Boolean value to control the power level of Core Image context renders. This option only affects certain macOS devices with more than one available GPU device. If this value is True, then rendering with the context will use a use allow power GPU device if available and the high power device is not already in use. Otherwise, the context will use the highest power/performance GPU device.
 // KCIContextAllowLowPower returns the string constant kCIContextAllowLowPower, for use as a dictionary key or argument.
 func KCIContextAllowLowPower() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIContextAllowLowPower")))
 }
 
-// A Boolean value to specify a client-provided name for a context. This name will be used in QuickLook graphs and the output of CI_PRINT_TREE.
 // KCIContextName returns the string constant kCIContextName, for use as a dictionary key or argument.
 func KCIContextName() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIContextName"))) }
 
-// A Core Video Metal texture cache object to improve the performance of Core Image context renders that use Core Video pixel buffers. Creating a Core Image context with this optional `CVMetalTextureCache` can improve the performance of creating a Metal texture from a `CVPixelBuffer`. It is recommended to specify this option if the context renders to or from pixel buffers that come from a `CVPixelBufferPool`. It is the client's responsibility to flush the cache when appropriate.
 // KCIContextCVMetalTextureCache returns the string constant kCIContextCVMetalTextureCache, for use as a dictionary key or argument.
 func KCIContextCVMetalTextureCache() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIContextCVMetalTextureCache")))
 }
 
-// A number value to control the maximum memory in megabytes that the context allocates for render tasks. Larger values could increase memory  footprint while smaller values could reduce performance.
 // KCIContextMemoryLimit returns the string constant kCIContextMemoryLimit, for use as a dictionary key or argument.
 func KCIContextMemoryLimit() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIContextMemoryLimit")))
 }
 
-// An optional key and value to save additional depth channel information to a JPEG or HEIF representations. The value for this key needs to be an `AVDepthData` instance.
 // KCIImageRepresentationAVDepthData returns the string constant kCIImageRepresentationAVDepthData, for use as a dictionary key or argument.
 func KCIImageRepresentationAVDepthData() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageRepresentationAVDepthData")))
 }
 
-// An optional key and value to save additional depth channel information to a JPEG or HEIF. The value for this key needs to be a monochrome depth “CIImage“ instance.
 // KCIImageRepresentationDepthImage returns the string constant kCIImageRepresentationDepthImage, for use as a dictionary key or argument.
 func KCIImageRepresentationDepthImage() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageRepresentationDepthImage")))
 }
 
-// An optional key and value to save additional depth channel information to a JPEG or HEIF. The value for this key needs to be a monochrome disparity “CIImage“ instance.
 // KCIImageRepresentationDisparityImage returns the string constant kCIImageRepresentationDisparityImage, for use as a dictionary key or argument.
 func KCIImageRepresentationDisparityImage() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageRepresentationDisparityImage")))
 }
 
-// An optional key and value to save a portrait matte channel information to a JPEG or HEIF. The value for this key needs to be a an `AVPortraitEffectsMatte` instance.
 // KCIImageRepresentationAVPortraitEffectsMatte returns the string constant kCIImageRepresentationAVPortraitEffectsMatte, for use as a dictionary key or argument.
 func KCIImageRepresentationAVPortraitEffectsMatte() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageRepresentationAVPortraitEffectsMatte")))
 }
 
-// An optional key and value to save a portrait matte channel to a JPEG or HEIF. The value for this key needs to be a portrait matte “CIImage“ instance where black pixels represent the background region and white pixels represent the primary people in the image. The image will be converted to monochrome before it is saved to the JPEG or HEIF.
 // KCIImageRepresentationPortraitEffectsMatteImage returns the string constant kCIImageRepresentationPortraitEffectsMatteImage, for use as a dictionary key or argument.
 func KCIImageRepresentationPortraitEffectsMatteImage() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageRepresentationPortraitEffectsMatteImage")))
 }
 
-// An optional key and value to save one or more segmentation matte channels to a JPEG or HEIF. The value for this key needs to be an array of AVSemanticSegmentationMatte instances.
 // KCIImageRepresentationAVSemanticSegmentationMattes returns the string constant kCIImageRepresentationAVSemanticSegmentationMattes, for use as a dictionary key or argument.
 func KCIImageRepresentationAVSemanticSegmentationMattes() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageRepresentationAVSemanticSegmentationMattes")))
 }
 
-// An optional key and value to save a skin segmentation channel to a JPEG or HEIF. The value for this key needs to be a “CIImage“ instance where white pixels represent the areas of person's skin are found in the image. The image will be converted to monochrome before it is saved to the JPEG or HEIF.
 // KCIImageRepresentationSemanticSegmentationSkinMatteImage returns the string constant kCIImageRepresentationSemanticSegmentationSkinMatteImage, for use as a dictionary key or argument.
 func KCIImageRepresentationSemanticSegmentationSkinMatteImage() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageRepresentationSemanticSegmentationSkinMatteImage")))
 }
 
-// An optional key and value to save a skin segmentation channel to a JPEG or HEIF. The value for this key needs to be a “CIImage“ instance where white pixels represent the areas of person's head and facial hair are found in the image. The image will be converted to monochrome before it is saved to the JPEG or HEIF.
 // KCIImageRepresentationSemanticSegmentationHairMatteImage returns the string constant kCIImageRepresentationSemanticSegmentationHairMatteImage, for use as a dictionary key or argument.
 func KCIImageRepresentationSemanticSegmentationHairMatteImage() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageRepresentationSemanticSegmentationHairMatteImage")))
 }
 
-// An optional key and value to save a skin segmentation channel to a JPEG or HEIF. The value for this key needs to be a “CIImage“ instance where white pixels represent the areas where a person's teeth are found in the image. The image will be converted to monochrome before it is saved to the JPEG or HEIF.
 // KCIImageRepresentationSemanticSegmentationTeethMatteImage returns the string constant kCIImageRepresentationSemanticSegmentationTeethMatteImage, for use as a dictionary key or argument.
 func KCIImageRepresentationSemanticSegmentationTeethMatteImage() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageRepresentationSemanticSegmentationTeethMatteImage")))
 }
 
-// An optional key and value to save a skin segmentation channel to a JPEG or HEIF. The value for this key needs to be a “CIImage“ instance where white pixels represent the areas where a person's glasses are found in the image. The image will be converted to monochrome before it is saved to the JPEG or HEIF.
 // KCIImageRepresentationSemanticSegmentationGlassesMatteImage returns the string constant kCIImageRepresentationSemanticSegmentationGlassesMatteImage, for use as a dictionary key or argument.
 func KCIImageRepresentationSemanticSegmentationGlassesMatteImage() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageRepresentationSemanticSegmentationGlassesMatteImage")))
 }
 
-// An optional key and value to save a skin segmentation channel to a JPEG or HEIF. The value for this key needs to be a “CIImage“ instance where white pixels represent the areas where a person's skin are found in the image. The image will be converted to monochrome before it is saved to the JPEG or HEIF.
 // KCIImageRepresentationSemanticSegmentationSkyMatteImage returns the string constant kCIImageRepresentationSemanticSegmentationSkyMatteImage, for use as a dictionary key or argument.
 func KCIImageRepresentationSemanticSegmentationSkyMatteImage() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageRepresentationSemanticSegmentationSkyMatteImage")))
 }
 
-// An optional key and value to save a HDR image using the gain map channel to a JPEG or HEIF. The value for this key needs to be a HDR CIImage instance. When provided, Core Image will calculate a gain map auxiliary image from the ratio of the HDR image to the primary SDR image. If the the HDR “CIImage“ instance has a “/CIImage/contentHeadroom“ property, then that will be used when calculating the HDRGainMap image and metadata.
 // KCIImageRepresentationHDRImage returns the string constant kCIImageRepresentationHDRImage, for use as a dictionary key or argument.
 func KCIImageRepresentationHDRImage() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageRepresentationHDRImage")))
 }
 
-// An optional key and value to save a gain map channel to a JPEG or HEIF. The value for this key needs to be a monochrome “CIImage“ instance. If the “kCIImageRepresentationHDRGainMapAsRGB“ option it true, then it needs to be an RGB “CIImage“ instance. The “/CIImage/properties“ should contain metadata information equivalent to what is returned when initializing an image using “kCIImageAuxiliaryHDRGainMap“.
 // KCIImageRepresentationHDRGainMapImage returns the string constant kCIImageRepresentationHDRGainMapImage, for use as a dictionary key or argument.
 func KCIImageRepresentationHDRGainMapImage() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageRepresentationHDRGainMapImage")))
 }
 
-// An optional key and value to request the gain map channel to be color instead of monochrome. This key affects how the gain map image is calculated from the SDR receiver and the “kCIImageRepresentationHDRImage“ image value. The value for this is a Boolean where: * True: the gain map is created as a color ratio between the HDR and SDR images. * False: the gain map is created as a brightness ratio between the HDR and SDR images. * Not specified: the default behavior False.
 // KCIImageRepresentationHDRGainMapAsRGB returns the string constant kCIImageRepresentationHDRGainMapAsRGB, for use as a dictionary key or argument.
 func KCIImageRepresentationHDRGainMapAsRGB() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageRepresentationHDRGainMapAsRGB")))
 }
 
-// Name of the filter
 // KCIAttributeFilterName returns the string constant kCIAttributeFilterName, for use as a dictionary key or argument.
 func KCIAttributeFilterName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIAttributeFilterName")))
 }
 
-// Name of the filter intended for UI display (eg. localized)
 // KCIAttributeFilterDisplayName returns the string constant kCIAttributeFilterDisplayName, for use as a dictionary key or argument.
 func KCIAttributeFilterDisplayName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIAttributeFilterDisplayName")))
 }
 
-// Description of the filter intended for UI display (eg. localized)
 // KCIAttributeDescription returns the string constant kCIAttributeDescription, for use as a dictionary key or argument.
 func KCIAttributeDescription() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIAttributeDescription")))
 }
 
-// The version of OS X and iOS a filter was first available in.
 // KCIAttributeFilterAvailable_Mac returns the string constant kCIAttributeFilterAvailable_Mac, for use as a dictionary key or argument.
 func KCIAttributeFilterAvailable_Mac() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIAttributeFilterAvailable_Mac")))
@@ -325,87 +292,70 @@ func KCIAttributeFilterAvailable_iOS() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIAttributeFilterAvailable_iOS")))
 }
 
-// URL for the reference documentation of the filter. See localizedReferenceDocumentationForFilterName.
 // KCIAttributeReferenceDocumentation returns the string constant kCIAttributeReferenceDocumentation, for use as a dictionary key or argument.
 func KCIAttributeReferenceDocumentation() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIAttributeReferenceDocumentation")))
 }
 
-// Array of filter category names (see below)
 // KCIAttributeFilterCategories returns the string constant kCIAttributeFilterCategories, for use as a dictionary key or argument.
 func KCIAttributeFilterCategories() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIAttributeFilterCategories")))
 }
 
-// Class name of the filter.
 // KCIAttributeClass returns the string constant kCIAttributeClass, for use as a dictionary key or argument.
 func KCIAttributeClass() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIAttributeClass"))) }
 
-// The type of the attribute e.g. scalar, time, distance, etc.
 // KCIAttributeType returns the string constant kCIAttributeType, for use as a dictionary key or argument.
 func KCIAttributeType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIAttributeType"))) }
 
-// Minimum value for the attribute.
 // KCIAttributeMin returns the string constant kCIAttributeMin, for use as a dictionary key or argument.
 func KCIAttributeMin() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIAttributeMin"))) }
 
-// Maximum value for the attribute.
 // KCIAttributeMax returns the string constant kCIAttributeMax, for use as a dictionary key or argument.
 func KCIAttributeMax() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIAttributeMax"))) }
 
-// Minimum value for the slider.
 // KCIAttributeSliderMin returns the string constant kCIAttributeSliderMin, for use as a dictionary key or argument.
 func KCIAttributeSliderMin() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIAttributeSliderMin")))
 }
 
-// Maximum value for the slider.
 // KCIAttributeSliderMax returns the string constant kCIAttributeSliderMax, for use as a dictionary key or argument.
 func KCIAttributeSliderMax() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIAttributeSliderMax")))
 }
 
-// Default value for the slider.
 // KCIAttributeDefault returns the string constant kCIAttributeDefault, for use as a dictionary key or argument.
 func KCIAttributeDefault() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIAttributeDefault")))
 }
 
-// The identity value is the value at which the filter has no effect.
 // KCIAttributeIdentity returns the string constant kCIAttributeIdentity, for use as a dictionary key or argument.
 func KCIAttributeIdentity() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIAttributeIdentity")))
 }
 
-// The non-localized name of the attribute.
 // KCIAttributeName returns the string constant kCIAttributeName, for use as a dictionary key or argument.
 func KCIAttributeName() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIAttributeName"))) }
 
-// The localized name of the attribute to be used for display to the user.
 // KCIAttributeDisplayName returns the string constant kCIAttributeDisplayName, for use as a dictionary key or argument.
 func KCIAttributeDisplayName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIAttributeDisplayName")))
 }
 
-// Key to request the desired set of controls in a filter UIView. The defined values for this key are: CIUISetBasic, CIUISetIntermediate, CIUISetAdvanced and CIUISetDevelopment.
 // KCIUIParameterSet returns the string constant kCIUIParameterSet, for use as a dictionary key or argument.
 func KCIUIParameterSet() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIUIParameterSet"))) }
 
-// Constant for requesting controls that are appropriate in a basic user scenario, meaning the bare minimum of settings to control the filter.
 // KCIUISetBasic returns the string constant kCIUISetBasic, for use as a dictionary key or argument.
 func KCIUISetBasic() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIUISetBasic"))) }
 
-// Constant for requesting controls that are appropriate in an intermediate user scenario.
 // KCIUISetIntermediate returns the string constant kCIUISetIntermediate, for use as a dictionary key or argument.
 func KCIUISetIntermediate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIUISetIntermediate")))
 }
 
-// Constant for requesting controls that are appropriate in an advanced user scenario.
 // KCIUISetAdvanced returns the string constant kCIUISetAdvanced, for use as a dictionary key or argument.
 func KCIUISetAdvanced() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIUISetAdvanced"))) }
 
-// Constant for requesting controls that should only be visible for development purposes.
 // KCIUISetDevelopment returns the string constant kCIUISetDevelopment, for use as a dictionary key or argument.
 func KCIUISetDevelopment() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIUISetDevelopment")))
@@ -436,13 +386,11 @@ func KCIAttributeTypeBoolean() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIAttributeTypeBoolean")))
 }
 
-// Indicates that the key uses integer values.
 // KCIAttributeTypeInteger returns the string constant kCIAttributeTypeInteger, for use as a dictionary key or argument.
 func KCIAttributeTypeInteger() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIAttributeTypeInteger")))
 }
 
-// Indicates that the key uses non negative integer values.
 // KCIAttributeTypeCount returns the string constant kCIAttributeTypeCount, for use as a dictionary key or argument.
 func KCIAttributeTypeCount() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIAttributeTypeCount")))
@@ -614,253 +562,205 @@ func KCIApplyOptionColorSpace() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIApplyOptionColorSpace")))
 }
 
-// A key to get  the output image of a Core Image filter. The value for this key will be a “CIImage“ instance.
 // KCIOutputImageKey returns the string constant kCIOutputImageKey, for use as a dictionary key or argument.
 func KCIOutputImageKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIOutputImageKey"))) }
 
-// A key to get or set the background image of a Core Image filter. The value for this key needs to be a “CIImage“ instance.
 // KCIInputBackgroundImageKey returns the string constant kCIInputBackgroundImageKey, for use as a dictionary key or argument.
 func KCIInputBackgroundImageKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputBackgroundImageKey")))
 }
 
-// A key to get or set the input image of a Core Image filter. The value for this key needs to be a “CIImage“ instance. For filters that also use a background image, this key refers to the foreground image.
 // KCIInputImageKey returns the string constant kCIInputImageKey, for use as a dictionary key or argument.
 func KCIInputImageKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIInputImageKey"))) }
 
-// A key to get or set the depth map image of a Core Image filter. The value for this key needs to be a “CIImage“ instance.
 // KCIInputDepthImageKey returns the string constant kCIInputDepthImageKey, for use as a dictionary key or argument.
 func KCIInputDepthImageKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputDepthImageKey")))
 }
 
-// A key to get or set the disparity map image of a Core Image filter. The value for this key needs to be a “CIImage“ instance.
 // KCIInputDisparityImageKey returns the string constant kCIInputDisparityImageKey, for use as a dictionary key or argument.
 func KCIInputDisparityImageKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputDisparityImageKey")))
 }
 
-// A key to get or set the scalar amount value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
 // KCIInputAmountKey returns the string constant kCIInputAmountKey, for use as a dictionary key or argument.
 func KCIInputAmountKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIInputAmountKey"))) }
 
-// A key to get or set the scalar count value of a Core Image filter. The value for this key needs to be an integer  `NSNumber` instance.
 // KCIInputCountKey returns the string constant kCIInputCountKey, for use as a dictionary key or argument.
 func KCIInputCountKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIInputCountKey"))) }
 
-// A key to get or set the scalar threshold value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
 // KCIInputThresholdKey returns the string constant kCIInputThresholdKey, for use as a dictionary key or argument.
 func KCIInputThresholdKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputThresholdKey")))
 }
 
-// A key to get or set the scalar time value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
 // KCIInputTimeKey returns the string constant kCIInputTimeKey, for use as a dictionary key or argument.
 func KCIInputTimeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIInputTimeKey"))) }
 
-// A key to get or set the geometric 2x3 matrix transform value of a Core Image filter. The value for this key needs to be an `NSAffineTransformStruct` or an `NSValue` instance.
 // KCIInputTransformKey returns the string constant kCIInputTransformKey, for use as a dictionary key or argument.
 func KCIInputTransformKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputTransformKey")))
 }
 
-// A key to get or set the geometric scale value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
 // KCIInputScaleKey returns the string constant kCIInputScaleKey, for use as a dictionary key or argument.
 func KCIInputScaleKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIInputScaleKey"))) }
 
-// A key to get or set the geometric aspect ratio value of a Core Image filter. The value for this key needs to be an `NSNumber` instance containing the `horizontal/vertical` scale ratio .
 // KCIInputAspectRatioKey returns the string constant kCIInputAspectRatioKey, for use as a dictionary key or argument.
 func KCIInputAspectRatioKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputAspectRatioKey")))
 }
 
-// A key to get or set the center value of a Core Image filter. The value for this key needs to be a “CIVector“ instance containing the `x,y` coordinate.
 // KCIInputCenterKey returns the string constant kCIInputCenterKey, for use as a dictionary key or argument.
 func KCIInputCenterKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIInputCenterKey"))) }
 
-// A key to get or set the geometric radius value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
 // KCIInputRadiusKey returns the string constant kCIInputRadiusKey, for use as a dictionary key or argument.
 func KCIInputRadiusKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIInputRadiusKey"))) }
 
-// A key to get or set the geometric radius value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
 // KCIInputRadius0Key returns the string constant kCIInputRadius0Key, for use as a dictionary key or argument.
 func KCIInputRadius0Key() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputRadius0Key")))
 }
 
-// A key to get or set the geometric radius value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
 // KCIInputRadius1Key returns the string constant kCIInputRadius1Key, for use as a dictionary key or argument.
 func KCIInputRadius1Key() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputRadius1Key")))
 }
 
-// A key to get or set the geometric angle value of a Core Image filter.  Typically the angle is in radians. The value for this key needs to be an `NSNumber` instance.
 // KCIInputAngleKey returns the string constant kCIInputAngleKey, for use as a dictionary key or argument.
 func KCIInputAngleKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIInputAngleKey"))) }
 
-// A key to get or set the scalar optical refraction value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
 // KCIInputRefractionKey returns the string constant kCIInputRefractionKey, for use as a dictionary key or argument.
 func KCIInputRefractionKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputRefractionKey")))
 }
 
-// A key to get or set the geometric width value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
 // KCIInputWidthKey returns the string constant kCIInputWidthKey, for use as a dictionary key or argument.
 func KCIInputWidthKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIInputWidthKey"))) }
 
-// A key to get or set the scalar sharpness value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
 // KCIInputSharpnessKey returns the string constant kCIInputSharpnessKey, for use as a dictionary key or argument.
 func KCIInputSharpnessKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputSharpnessKey")))
 }
 
-// A key to get or set the scalar intensity value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
 // KCIInputIntensityKey returns the string constant kCIInputIntensityKey, for use as a dictionary key or argument.
 func KCIInputIntensityKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputIntensityKey")))
 }
 
-// A key to get or set the scalar EV value of a Core Image filter that specifies how many F-stops brighter or darker to make the image. The value for this key needs to be an `NSNumber` instance.
 // KCIInputEVKey returns the string constant kCIInputEVKey, for use as a dictionary key or argument.
 func KCIInputEVKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIInputEVKey"))) }
 
-// A key to get or set the scalar saturation value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
 // KCIInputSaturationKey returns the string constant kCIInputSaturationKey, for use as a dictionary key or argument.
 func KCIInputSaturationKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputSaturationKey")))
 }
 
-// A key to get or set the color value of a Core Image filter. The value for this key needs to be a “CIColor“ instance.
 // KCIInputColorKey returns the string constant kCIInputColorKey, for use as a dictionary key or argument.
 func KCIInputColorKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIInputColorKey"))) }
 
-// A key to get or set a color value of a Core Image filter. The value for this key needs to be a “CIColor“ instance.
 // KCIInputColor0Key returns the string constant kCIInputColor0Key, for use as a dictionary key or argument.
 func KCIInputColor0Key() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIInputColor0Key"))) }
 
-// A key to get or set a color value of a Core Image filter. The value for this key needs to be a “CIColor“ instance.
 // KCIInputColor1Key returns the string constant kCIInputColor1Key, for use as a dictionary key or argument.
 func KCIInputColor1Key() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIInputColor1Key"))) }
 
-// A key to get or set a color space value of a Core Image filter. The value for this key needs to be a `CGColorSpace` instance.
 // KCIInputColorSpaceKey returns the string constant kCIInputColorSpaceKey, for use as a dictionary key or argument.
 func KCIInputColorSpaceKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputColorSpaceKey")))
 }
 
-// A key to get or set the scalar brightness value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
 // KCIInputBrightnessKey returns the string constant kCIInputBrightnessKey, for use as a dictionary key or argument.
 func KCIInputBrightnessKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputBrightnessKey")))
 }
 
-// A key to get or set the scalar contrast value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
 // KCIInputContrastKey returns the string constant kCIInputContrastKey, for use as a dictionary key or argument.
 func KCIInputContrastKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputContrastKey")))
 }
 
-// A key to get or set the boolean behavior of a Core Image filter that specifies if the filter should extrapolate a table beyond the defined range. The value for this key needs to be an `NSNumber` instance.
 // KCIInputExtrapolateKey returns the string constant kCIInputExtrapolateKey, for use as a dictionary key or argument.
 func KCIInputExtrapolateKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputExtrapolateKey")))
 }
 
-// A key to get or set the boolean behavior of a Core Image filter that specifies if the filter should operate in linear or perceptual colors. The value for this key needs to be an `NSNumber` instance.
 // KCIInputPerceptualKey returns the string constant kCIInputPerceptualKey, for use as a dictionary key or argument.
 func KCIInputPerceptualKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputPerceptualKey")))
 }
 
-// A key to get or set the scalar bias value of a Core Image filter. The value for this key needs to be an `NSNumber` instance.
 // KCIInputBiasKey returns the string constant kCIInputBiasKey, for use as a dictionary key or argument.
 func KCIInputBiasKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIInputBiasKey"))) }
 
-// A key to get or set the vector bias value of a Core Image filter. The value for this key needs to be a “CIVector“ instance.
 // KCIInputBiasVectorKey returns the string constant kCIInputBiasVectorKey, for use as a dictionary key or argument.
 func KCIInputBiasVectorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputBiasVectorKey")))
 }
 
-// A key to get or set the vector weights value of a convolution Core Image filter. The value for this key needs to be a “CIVector“ instance.
 // KCIInputWeightsKey returns the string constant kCIInputWeightsKey, for use as a dictionary key or argument.
 func KCIInputWeightsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputWeightsKey")))
 }
 
-// A key to get or set the gradient map image of a Core Image filter that maps luminance to a color with alpha. The value for this key needs to be a 1 pixel tall “CIImage“ instance.
 // KCIInputGradientImageKey returns the string constant kCIInputGradientImageKey, for use as a dictionary key or argument.
 func KCIInputGradientImageKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputGradientImageKey")))
 }
 
-// A key to get or set the mask image of a Core Image filter. The value for this key needs to be a “CIImage“ instance.
 // KCIInputMaskImageKey returns the string constant kCIInputMaskImageKey, for use as a dictionary key or argument.
 func KCIInputMaskImageKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputMaskImageKey")))
 }
 
-// A key to get or set the matte image of a Core Image filter. The value for this key needs to be a “CIImage“ instance.
 // KCIInputMatteImageKey returns the string constant kCIInputMatteImageKey, for use as a dictionary key or argument.
 func KCIInputMatteImageKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputMatteImageKey")))
 }
 
-// A key to get or set the environment map image of a Core Image filter that maps normal directions to a color with alpha. The value for this key needs to be a “CIImage“ instance.
 // KCIInputShadingImageKey returns the string constant kCIInputShadingImageKey, for use as a dictionary key or argument.
 func KCIInputShadingImageKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputShadingImageKey")))
 }
 
-// A key to get or set the target image for a transition Core Image filter. The value for this key needs to be a “CIImage“ instance.
 // KCIInputTargetImageKey returns the string constant kCIInputTargetImageKey, for use as a dictionary key or argument.
 func KCIInputTargetImageKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputTargetImageKey")))
 }
 
-// A key to get or set the backside image for a transition Core Image filter. The value for this key needs to be a “CIImage“ instance.
 // KCIInputBacksideImageKey returns the string constant kCIInputBacksideImageKey, for use as a dictionary key or argument.
 func KCIInputBacksideImageKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputBacksideImageKey")))
 }
 
-// A key to get or set the palette image for a  Core Image filter. The value for this key needs to be a  1 pixel tall “CIImage“ instance.
 // KCIInputPaletteImageKey returns the string constant kCIInputPaletteImageKey, for use as a dictionary key or argument.
 func KCIInputPaletteImageKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputPaletteImageKey")))
 }
 
-// A key to get or set the vector extent value of a Core Image filterthat defines the extent of the effect. The value for this key needs to be a “CIVector“ instance.
 // KCIInputExtentKey returns the string constant kCIInputExtentKey, for use as a dictionary key or argument.
 func KCIInputExtentKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIInputExtentKey"))) }
 
-// A key to get or set the coordinate value of a Core Image filter. The value for this key needs to be a “CIVector“ instance containing the `x,y` coordinate.
 // KCIInputPoint0Key returns the string constant kCIInputPoint0Key, for use as a dictionary key or argument.
 func KCIInputPoint0Key() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIInputPoint0Key"))) }
 
-// A key to get or set a coordinate value of a Core Image filter. The value for this key needs to be a “CIVector“ instance containing the `x,y` coordinate.
 // KCIInputPoint1Key returns the string constant kCIInputPoint1Key, for use as a dictionary key or argument.
 func KCIInputPoint1Key() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCIInputPoint1Key"))) }
 
-// A key to get or set a coordinate value of a Core Image filter. The value for this key needs to be a “CIVector“ instance containing the `x,y` coordinate.
 // KCIInputVersionKey returns the string constant kCIInputVersionKey, for use as a dictionary key or argument.
 func KCIInputVersionKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIInputVersionKey")))
 }
 
-// Use Standard dynamic range. Images with `contentHeadroom` metadata will be tone mapped to a maximum pixel value of 1.0.
 // KCIDynamicRangeStandard returns the string constant kCIDynamicRangeStandard, for use as a dictionary key or argument.
 func KCIDynamicRangeStandard() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIDynamicRangeStandard")))
 }
 
-// Use extended dynamic range, but brightness is modulated to optimize for co-existence with other composited content. For best results, images should contain `contentAverageLightLevel` metadata.
 // KCIDynamicRangeConstrainedHigh returns the string constant kCIDynamicRangeConstrainedHigh, for use as a dictionary key or argument.
 func KCIDynamicRangeConstrainedHigh() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIDynamicRangeConstrainedHigh")))
 }
 
-// Use High dynamic range. The provides the best HDR quality and needs to be reserved for situations where the user is focused on the media, such as larger views in an image editing/viewing app, or annotating/drawing with HDR colors
 // KCIDynamicRangeHigh returns the string constant kCIDynamicRangeHigh, for use as a dictionary key or argument.
 func KCIDynamicRangeHigh() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIDynamicRangeHigh")))
@@ -921,67 +821,55 @@ func CIDetectorNumberOfAngles() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CIDetectorNumberOfAngles")))
 }
 
-// A dictionary key that configures a Core Image feature detection operation to account for the orientation the image. This option is used with “/CIDetector/featuresInImage:options:“ The value of this key is an number object whose value is an integer between 1 and 8. The TIFF and EXIF specifications define the orientation values that describe how the image should be displayed. The default value is 1. For further details, see `CGImagePropertyOrientation`. The “CIDetectorTypeFace“ and “CIDetectorTypeText“ can use this option to correctly find faces or text. Regardless of the orientation values the “/CIFeature/bounds-property“ which is always measured in the cartesean coordinates system of the image that you pass to the detector.
 // CIDetectorImageOrientation returns the string constant CIDetectorImageOrientation, for use as a dictionary key or argument.
 func CIDetectorImageOrientation() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CIDetectorImageOrientation")))
 }
 
-// A dictionary key that configures a Core Image face feature detection operation to perform additional processing to recognize closed eyes in detected faces. This option is used with “/CIDetector/featuresInImage:options:“ If the value of the key is true, then facial expressions such as blinking and smiles are extracted. This is needed for the “/CIFaceFeature/leftEyeClosed-property“ and “/CIFaceFeature/rightEyeClosed-property“ to function.
 // CIDetectorEyeBlink returns the string constant CIDetectorEyeBlink, for use as a dictionary key or argument.
 func CIDetectorEyeBlink() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CIDetectorEyeBlink")))
 }
 
-// A dictionary key that configures a Core Image face feature detection operation to perform additional processing to recognize smiles in detected faces. This option is used with “/CIDetector/featuresInImage:options:“ If the value of the key is true, then facial expressions such as blinking and smiles eyes are extracted. This is needed for the “/CIFaceFeature/hasSmile-property“ to function.
 // CIDetectorSmile returns the string constant CIDetectorSmile, for use as a dictionary key or argument.
 func CIDetectorSmile() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CIDetectorSmile"))) }
 
-// A dictionary key that configures a Core Image rectangle feature detection operation to account for the focal length of the camera used for the image. This option is used with “/CIDetector/featuresInImage:options:“ The value of this key is an NSNumber object whose value is a floating-point number. Use this option with the CIDetectorTypeRectangle detector type to control the effect of the CIDetectorAspectRatio option on feature detection. This option’s value can be 0.0, -1.0, or any positive value: * The special value of -1.0 (the default) disables the aspect ratio test for the returned rectangle. * The special value of 0.0 enables a less precise test of aspect ratio that approximates an orthographic (non-perspective) projection. Use this value if you want to specify the aspect ratio of the rectangle via the CIDetectorAspectRatio option, but have no means of determining the value for the focal length in pixels. See below for a method to compute an approximate value for the focal length in pixels. * Any other value specifies the camera focal length, in pixels, allowing the aspect ratio specification to account for perspective distortion of rectangles in the input image. If you know the diagonal field of view of the camera (the scene angle subtended by the diagonal corners of an image), you can use the following formula to compute an approximate focal length in pixels: `focal_length_pixels = (image_diagonal_pixels/2)/tan(FOV/2)` In this formula, `image_diagonal_pixels` is the length (in pixels) of the image diagonal of the maximum resolution of the camera sensor. For example, this value is: * `4080` pixels for a `3264 x 2448` (8 megapixel) sensor * `5000` pixels for a `4096 x 3024` (12 megapixel) sensor. To measure diagonal field of view, put the camera on a tripod so that it is perpendicular to a surface and the center of the image is oriented on a mark on the surface. Measure the distance from the mark to one of the corner points of the image (Y). Measure the distance from the camera to the surface (Z). The field of view is then `2*arctan(Y/Z)`. You must specify this value in terms of the maximum sensor resolution. If the supplied CIImage has been scaled relative relative to the maximum sensor resolution, the supplied focal length must also be similarly scaled.
 // CIDetectorFocalLength returns the string constant CIDetectorFocalLength, for use as a dictionary key or argument.
 func CIDetectorFocalLength() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CIDetectorFocalLength")))
 }
 
-// A dictionary key that configures a Core Image rectangle feature detection operation to search for a rectangle of a desired aspect ratio (width divided by height). This option is used with “/CIDetector/featuresInImage:options:“ The value for this key needs to be is a positive float number. Use this option with a “CIDetectorTypeRectangle“ detector to fine-tune the accuracy of the detector. For example, to more accurately find a business card (3.5 x 2 inches) in an image, specify an aspect ratio of 1.75. If this key is not specified, the a default value of 1.6 is used.
 // CIDetectorAspectRatio returns the string constant CIDetectorAspectRatio, for use as a dictionary key or argument.
 func CIDetectorAspectRatio() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CIDetectorAspectRatio")))
 }
 
-// A dictionary key that configures a Core Image text feature detection operation to return feature information for components of detected features. This option is used with “/CIDetector/featuresInImage:options:“ If the value for this option configures the “CIDetectorTypeText“ detector as follows: * False: detect only in regions likely to contain text. * True: detect in regions likely to contain individual characters. If this key is not specified, the a default is False.
 // CIDetectorReturnSubFeatures returns the string constant CIDetectorReturnSubFeatures, for use as a dictionary key or argument.
 func CIDetectorReturnSubFeatures() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CIDetectorReturnSubFeatures")))
 }
 
-// A Core Image feature type for person’s face. To detect faces in an image or video, pass this to “/CIDetector/detectorOfType:context:options:“ Use the “CIFaceFeature“ class to find more information about the detected face.
 // CIFeatureTypeFace returns the string constant CIFeatureTypeFace, for use as a dictionary key or argument.
 func CIFeatureTypeFace() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CIFeatureTypeFace"))) }
 
-// A Core Image feature type for rectangular object. To detect rectangles in an image or video, pass this to “/CIDetector/detectorOfType:context:options:“ Use the “CIRectangleFeature“ class to find more information about the detected rectangle.
 // CIFeatureTypeRectangle returns the string constant CIFeatureTypeRectangle, for use as a dictionary key or argument.
 func CIFeatureTypeRectangle() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CIFeatureTypeRectangle")))
 }
 
-// A Core Image feature type for QR code object. To detect QR codes in an image or video, pass this to “/CIDetector/detectorOfType:context:options:“ Use the “CIQRCodeFeature“ class to find more information about the detected QR code.
 // CIFeatureTypeQRCode returns the string constant CIFeatureTypeQRCode, for use as a dictionary key or argument.
 func CIFeatureTypeQRCode() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CIFeatureTypeQRCode")))
 }
 
-// A Core Image feature type for text. To detect text in an image or video, pass this to “/CIDetector/detectorOfType:context:options:“ Use the “CITextFeature“ class to find more information about the detected text.
 // CIFeatureTypeText returns the string constant CIFeatureTypeText, for use as a dictionary key or argument.
 func CIFeatureTypeText() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CIFeatureTypeText"))) }
 
-// Specifies the tile size that the Provide Image Data method will be called for. This key and its value may be passed to: * “/CIImage/imageWithImageProvider:size::format:colorSpace:options:“ * “/CIImage/initWithImageProvider:size::format:colorSpace:options:“ If the value of this key is: Value                      | Behavior of sub-rect passed to “provideImageData:bytesPerRow:origin::size::userData:“ -------------------------- | ---------------------------- Not specified              |  the entire image `NSNumber`                 |  square tiles of size x size `NSArray` with 2 numbers   |  rectangular tiles of width x height. “CIVector“ with 2 values |  rectangular tiles of width x height. `NSNull`                   |  can be called for any possible origin and size.
 // KCIImageProviderTileSize returns the string constant kCIImageProviderTileSize, for use as a dictionary key or argument.
 func KCIImageProviderTileSize() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageProviderTileSize")))
 }
 
-// A key for any data needed by the image provider object. The associated value is an object that contains the needed data. This key and its value may be passed to: * “/CIImage/imageWithImageProvider:size::format:colorSpace:options:“ * “/CIImage/initWithImageProvider:size::format:colorSpace:options:“ The value object is retained until the image is deallocated.
 // KCIImageProviderUserInfo returns the string constant kCIImageProviderUserInfo, for use as a dictionary key or argument.
 func KCIImageProviderUserInfo() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIImageProviderUserInfo")))
@@ -1221,19 +1109,16 @@ func CIRAWDecoderVersion6DNG() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CIRAWDecoderVersion6DNG")))
 }
 
-// The key of the target object that is exported
 // KCIFilterGeneratorExportedKey returns the string constant kCIFilterGeneratorExportedKey, for use as a dictionary key or argument.
 func KCIFilterGeneratorExportedKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIFilterGeneratorExportedKey")))
 }
 
-// Target object for the exported key
 // KCIFilterGeneratorExportedKeyTargetObject returns the string constant kCIFilterGeneratorExportedKeyTargetObject, for use as a dictionary key or argument.
 func KCIFilterGeneratorExportedKeyTargetObject() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIFilterGeneratorExportedKeyTargetObject")))
 }
 
-// Name of the key under which it is exported.
 // KCIFilterGeneratorExportedKeyName returns the string constant kCIFilterGeneratorExportedKeyName, for use as a dictionary key or argument.
 func KCIFilterGeneratorExportedKeyName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIFilterGeneratorExportedKeyName")))

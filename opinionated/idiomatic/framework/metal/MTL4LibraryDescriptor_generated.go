@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Serves as the base descriptor for creating a Metal library.
-//
 // MTL4LibraryDescriptor is an idiomatic wrapper over the Objective-C class MTL4LibraryDescriptor.
+//
+// Serves as the base descriptor for creating a Metal library.
 type MTL4LibraryDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MTL4LibraryDescriptorFromID(id objc.ID) *MTL4LibraryDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4LibraryDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTL4LibraryDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTL4LibraryDescriptorAdopt(id objc.ID) *MTL4LibraryDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4LibraryDescriptor{Handle: objref.Wrap(id)}
+	x := &MTL4LibraryDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,37 @@ func (x *MTL4LibraryDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTL4LibraryDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTL4LibraryDescriptor creates a new MTL4LibraryDescriptor.
 func NewMTL4LibraryDescriptor() *MTL4LibraryDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTL4LibraryDescriptor")), objc.RegisterName("new"))
 	return mTL4LibraryDescriptorAdopt(_id)
 }
 
-// Assigns an optional string containing the source code of the shader language program to compile into a Metal library.
-//
-// WithSource sets source and returns the receiver so calls can be chained.
+// WithSource assigns an optional string containing the source code of the shader language program to compile into a Metal library.
 func (x *MTL4LibraryDescriptor) WithSource(source string) *MTL4LibraryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSource:"), purego.NSString(source))
 	return x
 }
 
-// Provides compile-time options for the Metal library.
-//
-// WithOptions sets options and returns the receiver so calls can be chained.
+// WithOptions provides compile-time options for the Metal library.
 func (x *MTL4LibraryDescriptor) WithOptions(options *CompileOptions) *MTL4LibraryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), objref.IDOf(options))
 	return x
 }
 
-// Assigns an optional name to the Metal library.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName assigns an optional name to the Metal library.
 func (x *MTL4LibraryDescriptor) WithName(name string) *MTL4LibraryDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// Assigns an optional string containing the source code of the shader language program to compile into a Metal library.
+// Source assigns an optional string containing the source code of the shader language program to compile into a Metal library.
 func (x *MTL4LibraryDescriptor) Source() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
 	if _r == 0 {
@@ -97,21 +99,23 @@ func (x *MTL4LibraryDescriptor) Source() string {
 	return purego.GoString(_r)
 }
 
+// SetSource wraps the corresponding Objective-C method.
 func (x *MTL4LibraryDescriptor) SetSource(source string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSource:"), purego.NSString(source))
 }
 
-// Provides compile-time options for the Metal library.
+// Options provides compile-time options for the Metal library.
 func (x *MTL4LibraryDescriptor) Options() *CompileOptions {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
 	return CompileOptionsFromID(_r)
 }
 
+// SetOptions wraps the corresponding Objective-C method.
 func (x *MTL4LibraryDescriptor) SetOptions(options *CompileOptions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), objref.IDOf(options))
 }
 
-// Assigns an optional name to the Metal library.
+// Name assigns an optional name to the Metal library.
 func (x *MTL4LibraryDescriptor) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -120,6 +124,7 @@ func (x *MTL4LibraryDescriptor) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *MTL4LibraryDescriptor) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }

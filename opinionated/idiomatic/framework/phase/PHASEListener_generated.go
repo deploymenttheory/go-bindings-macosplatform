@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A central point of reference that defines the location within the scene that’s most audible to the user.
-//
 // Listener is an idiomatic wrapper over the Objective-C class PHASEListener.
+//
+// It embeds [Object], promoting that type's methods.
+//
+// A central point of reference that defines the location within the scene that’s most audible to the user.
 type Listener struct {
-	objref.Handle
+	Object
 }
 
 // ListenerFromID adopts an existing Objective-C object as a Listener
@@ -25,7 +26,8 @@ func ListenerFromID(id objc.ID) *Listener {
 	if id == 0 {
 		return nil
 	}
-	x := &Listener{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Listener{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,68 +40,49 @@ func listenerAdopt(id objc.ID) *Listener {
 	if id == 0 {
 		return nil
 	}
-	x := &Listener{Handle: objref.Wrap(id)}
+	x := &Listener{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *Listener) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Listener) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Listener) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a listener with the given engine.
-//
-// NewListenerWithEngine creates a new Listener.
+// NewListenerWithEngine creates a listener with the given engine.
 func NewListenerWithEngine(engine *Engine) *Listener {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEListener")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:"), objref.IDOf(engine))
 	return listenerAdopt(_id)
 }
 
-// Modifies the volume of all audio playback for the listener’s mixers.
-//
-// WithGain sets gain and returns the receiver so calls can be chained.
+// WithGain modifies the volume of all audio playback for the listener’s mixers.
 func (x *Listener) WithGain(gain float64) *Listener {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
 	return x
 }
 
-// A combination of flags to express automatic headtracking behaviors for this listener.
-//
-// WithAutomaticHeadTrackingFlags sets automaticHeadTrackingFlags and returns the receiver so calls can be chained.
+// WithAutomaticHeadTrackingFlags a combination of flags to express automatic headtracking behaviors for this listener.
 func (x *Listener) WithAutomaticHeadTrackingFlags(automaticHeadTrackingFlags AutomaticHeadTrackingFlags) *Listener {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticHeadTrackingFlags:"), automaticHeadTrackingFlags)
 	return x
 }
 
-// Linear gain scalar.
+// Gain linear gain scalar.
 func (x *Listener) Gain() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("gain"))
 	return _r
 }
 
+// SetGain wraps the corresponding Objective-C method.
 func (x *Listener) SetGain(gain float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
 }
 
-// A combination of flags to express automatic headtracking behaviors for this listener.
+// AutomaticHeadTrackingFlags a combination of flags to express automatic headtracking behaviors for this listener.
 func (x *Listener) AutomaticHeadTrackingFlags() AutomaticHeadTrackingFlags {
 	_r := objc.Send[AutomaticHeadTrackingFlags](objref.IDOf(x), objc.RegisterName("automaticHeadTrackingFlags"))
 	return _r
 }
 
-// A combination of flags to express automatic headtracking behaviors for this listener.
+// SetAutomaticHeadTrackingFlags a combination of flags to express automatic headtracking behaviors for this listener.
 func (x *Listener) SetAutomaticHeadTrackingFlags(automaticHeadTrackingFlags AutomaticHeadTrackingFlags) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticHeadTrackingFlags:"), automaticHeadTrackingFlags)
 }
@@ -116,3 +99,5 @@ type Listenerable interface {
 }
 
 var _ Listenerable = (*Listener)(nil)
+
+var _ ObjectProvider = (*Listener)(nil)

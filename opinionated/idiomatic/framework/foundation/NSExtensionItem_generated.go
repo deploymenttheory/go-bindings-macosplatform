@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable collection of values representing different aspects of an item for an extension to act upon.
-//
 // ExtensionItem is an idiomatic wrapper over the Objective-C class NSExtensionItem.
+//
+// An immutable collection of values representing different aspects of an item for an extension to act upon.
 type ExtensionItem struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ExtensionItemFromID(id objc.ID) *ExtensionItem {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExtensionItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func extensionItemAdopt(id objc.ID) *ExtensionItem {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionItem{Handle: objref.Wrap(id)}
+	x := &ExtensionItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,84 +60,91 @@ func (x *ExtensionItem) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExtensionItem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewExtensionItem creates a new ExtensionItem.
 func NewExtensionItem() *ExtensionItem {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSExtensionItem")), objc.RegisterName("new"))
 	return extensionItemAdopt(_id)
 }
 
-// An optional title for the item.
-//
-// WithAttributedTitle sets attributedTitle and returns the receiver so calls can be chained.
+// WithAttributedTitle an optional title for the item.
 func (x *ExtensionItem) WithAttributedTitle(attributedTitle AttributedStringProvider) *ExtensionItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	return x
 }
 
-// An optional string describing the extension item content.
-//
-// WithAttributedContentText sets attributedContentText and returns the receiver so calls can be chained.
+// WithAttributedContentText an optional string describing the extension item content.
 func (x *ExtensionItem) WithAttributedContentText(attributedContentText AttributedStringProvider) *ExtensionItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedContentText:"), objref.IDOf(attributedContentText))
 	return x
 }
 
-// An optional array of media data associated with the extension item.
-//
-// WithAttachments sets the collection and returns the receiver so calls can be chained.
+// WithAttachments an optional array of media data associated with the extension item.
 func (x *ExtensionItem) WithAttachments(items ...*ItemProvider) *ExtensionItem {
 	_arr := purego.SliceToNSArray(items, func(_v *ItemProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachments:"), _arr)
 	return x
 }
 
-// An optional dictionary of keys and values corresponding to the extension item’s properties.
-//
-// WithUserInfo sets userInfo and returns the receiver so calls can be chained.
+// WithUserInfo an optional dictionary of keys and values corresponding to the extension item’s properties.
 func (x *ExtensionItem) WithUserInfo(userInfo obj.Object) *ExtensionItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *ExtensionItem) WithScriptingProperties(scriptingProperties obj.Object) *ExtensionItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// AttributedTitle wraps the corresponding Objective-C method.
 func (x *ExtensionItem) AttributedTitle() *AttributedString {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedTitle"))
 	return AttributedStringFromID(_r)
 }
 
+// SetAttributedTitle wraps the corresponding Objective-C method.
 func (x *ExtensionItem) SetAttributedTitle(attributedTitle *AttributedString) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 }
 
+// AttributedContentText wraps the corresponding Objective-C method.
 func (x *ExtensionItem) AttributedContentText() *AttributedString {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedContentText"))
 	return AttributedStringFromID(_r)
 }
 
+// SetAttributedContentText wraps the corresponding Objective-C method.
 func (x *ExtensionItem) SetAttributedContentText(attributedContentText *AttributedString) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedContentText:"), objref.IDOf(attributedContentText))
 }
 
+// Attachments wraps the corresponding Objective-C method.
+//
 // Attachments returns the collection as a Go slice.
 func (x *ExtensionItem) Attachments() []*ItemProvider {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ItemProvider { return ItemProviderFromID(_id) })
 }
 
+// SetAttachments wraps the corresponding Objective-C method.
 func (x *ExtensionItem) SetAttachments(attachments []*ItemProvider) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachments:"), purego.SliceToNSArray(attachments, func(_v *ItemProvider) objc.ID { return objref.IDOf(_v) }))
 }
 
+// UserInfo wraps the corresponding Objective-C method.
 func (x *ExtensionItem) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
+// SetUserInfo wraps the corresponding Objective-C method.
 func (x *ExtensionItem) SetUserInfo(userInfo obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 }

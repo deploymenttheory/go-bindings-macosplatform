@@ -6,15 +6,17 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents a line fragment as a single textual layout and rendering unit inside a text layout fragment.
-//
 // TextLineFragment is an idiomatic wrapper over the Objective-C class NSTextLineFragment.
+//
+// A class that represents a line fragment as a single textual layout and rendering unit inside a text layout fragment.
 type TextLineFragment struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func TextLineFragmentFromID(id objc.ID) *TextLineFragment {
 	if id == 0 {
 		return nil
 	}
-	x := &TextLineFragment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextLineFragment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func textLineFragmentAdopt(id objc.ID) *TextLineFragment {
 	if id == 0 {
 		return nil
 	}
-	x := &TextLineFragment{Handle: objref.Wrap(id)}
+	x := &TextLineFragment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +62,91 @@ func (x *TextLineFragment) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new line fragment with from data in an unarchiver.
-//
-// NewTextLineFragmentWithCoder creates a new TextLineFragment.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextLineFragment) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTextLineFragmentWithAttributedStringRange creates a new line fragment from the attributed string for the range of characters you specify.
+func NewTextLineFragmentWithAttributedStringRange(attributedString obj.Object, range_ foundation.NSRange) *TextLineFragment {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextLineFragment")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttributedString:range:"), objref.IDOf(attributedString), range_)
+	return textLineFragmentAdopt(_id)
+}
+
+// NewTextLineFragmentWithCoder creates a new line fragment with from data in an unarchiver.
 func NewTextLineFragmentWithCoder(aDecoder obj.Object) *TextLineFragment {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextLineFragment")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return textLineFragmentAdopt(_id)
 }
 
+// NewTextLineFragmentWithStringAttributesRange creates a new line fragment using the string, attributes, and range you provide.
+func NewTextLineFragmentWithStringAttributesRange(string_ string, attributes obj.Object, range_ foundation.NSRange) *TextLineFragment {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextLineFragment")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:attributes:range:"), purego.NSString(string_), objref.IDOf(attributes), range_)
+	return textLineFragmentAdopt(_id)
+}
+
+// DrawAtPointInContext renders the line fragment contents at the rendering origin.
+func (x *TextLineFragment) DrawAtPointInContext(point corefoundation.CGPoint, context_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawAtPoint:inContext:"), point, objref.IDOf(context_))
+}
+
+// LocationForCharacterAtIndex returns the location of the character at the specified index.
+func (x *TextLineFragment) LocationForCharacterAtIndex(index int) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("locationForCharacterAtIndex:"), index)
+	return _r
+}
+
+// CharacterIndexForPoint returns character index for a point inside the line fragment coordinate system.
+func (x *TextLineFragment) CharacterIndexForPoint(point corefoundation.CGPoint) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("characterIndexForPoint:"), point)
+	return _r
+}
+
+// FractionOfDistanceThroughGlyphForPoint returns character index for a point inside the line fragment coordinate system.
+func (x *TextLineFragment) FractionOfDistanceThroughGlyphForPoint(point corefoundation.CGPoint) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("fractionOfDistanceThroughGlyphForPoint:"), point)
+	return _r
+}
+
+// AttributedString wraps the corresponding Objective-C method.
 func (x *TextLineFragment) AttributedString() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedString"))
 	return obj.Wrap(_r)
 }
 
+// CharacterRange wraps the corresponding Objective-C method.
+func (x *TextLineFragment) CharacterRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("characterRange"))
+	return _r
+}
+
+// TypographicBounds wraps the corresponding Objective-C method.
+func (x *TextLineFragment) TypographicBounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("typographicBounds"))
+	return _r
+}
+
+// GlyphOrigin wraps the corresponding Objective-C method.
+func (x *TextLineFragment) GlyphOrigin() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("glyphOrigin"))
+	return _r
+}
+
 // TextLineFragmentable is the interface implemented by [TextLineFragment], for mocking and DI.
 type TextLineFragmentable interface {
 	obj.Object
+	DrawAtPointInContext(point corefoundation.CGPoint, context_ obj.Object)
+	LocationForCharacterAtIndex(index int) corefoundation.CGPoint
+	CharacterIndexForPoint(point corefoundation.CGPoint) int
+	FractionOfDistanceThroughGlyphForPoint(point corefoundation.CGPoint) float64
 	AttributedString() obj.Object
+	CharacterRange() foundation.NSRange
+	TypographicBounds() corefoundation.CGRect
+	GlyphOrigin() corefoundation.CGPoint
 }
 
 var _ TextLineFragmentable = (*TextLineFragment)(nil)

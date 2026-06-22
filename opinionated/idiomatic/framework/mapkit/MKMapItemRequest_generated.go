@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A utility class you use to request additional information about a map feature.
-//
 // MapItemRequest is an idiomatic wrapper over the Objective-C class MKMapItemRequest.
+//
+// A utility class you use to request additional information about a map feature.
 type MapItemRequest struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MapItemRequestFromID(id objc.ID) *MapItemRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &MapItemRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MapItemRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mapItemRequestAdopt(id objc.ID) *MapItemRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &MapItemRequest{Handle: objref.Wrap(id)}
+	x := &MapItemRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *MapItemRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Create a request with a map item identifier.
-//
-// NewMapItemRequestWithMapItemIdentifier creates a new MapItemRequest.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MapItemRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMapItemRequestWithMapItemIdentifier create a request with a map item identifier.
 func NewMapItemRequestWithMapItemIdentifier(identifier *MapItemIdentifier) *MapItemRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItemRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapItemIdentifier:"), objref.IDOf(identifier))
 	return mapItemRequestAdopt(_id)
 }
 
+// MapItemIdentifier wraps the corresponding Objective-C method.
 func (x *MapItemRequest) MapItemIdentifier() *MapItemIdentifier {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapItemIdentifier"))
 	return MapItemIdentifierFromID(_r)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The object for registering a new platform public key credential.
-//
 // AuthorizationPlatformPublicKeyCredentialRegistrationRequest is an idiomatic wrapper over the Objective-C class ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest.
+//
+// It embeds [AuthorizationRequest], promoting that type's methods.
+//
+// The object for registering a new platform public key credential.
 type AuthorizationPlatformPublicKeyCredentialRegistrationRequest struct {
-	objref.Handle
+	AuthorizationRequest
 }
 
 // AuthorizationPlatformPublicKeyCredentialRegistrationRequestFromID adopts an existing Objective-C object as a AuthorizationPlatformPublicKeyCredentialRegistrationRequest
@@ -25,7 +26,8 @@ func AuthorizationPlatformPublicKeyCredentialRegistrationRequestFromID(id objc.I
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPlatformPublicKeyCredentialRegistrationRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationPlatformPublicKeyCredentialRegistrationRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func authorizationPlatformPublicKeyCredentialRegistrationRequestAdopt(id objc.ID
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPlatformPublicKeyCredentialRegistrationRequest{Handle: objref.Wrap(id)}
+	x := &AuthorizationPlatformPublicKeyCredentialRegistrationRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAuthorizationPlatformPublicKeyCredentialRegistrationRequest creates a new AuthorizationPlatformPublicKeyCredentialRegistrationRequest.
@@ -64,49 +52,53 @@ func NewAuthorizationPlatformPublicKeyCredentialRegistrationRequest() *Authoriza
 	return authorizationPlatformPublicKeyCredentialRegistrationRequestAdopt(_id)
 }
 
-// The request’s binary large object value.
-//
-// WithLargeBlob sets largeBlob and returns the receiver so calls can be chained.
+// WithLargeBlob the request’s binary large object value.
 func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) WithLargeBlob(largeBlob *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLargeBlob:"), objref.IDOf(largeBlob))
 	return x
 }
 
-// WithPrf sets prf and returns the receiver so calls can be chained.
+// WithPrf sets the property and returns the receiver so calls can be chained.
 func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) WithPrf(prf *AuthorizationPublicKeyCredentialPRFRegistrationInput) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrf:"), objref.IDOf(prf))
 	return x
 }
 
-// WithRequestStyle sets requestStyle and returns the receiver so calls can be chained.
+// WithRequestStyle sets the property and returns the receiver so calls can be chained.
 func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) WithRequestStyle(requestStyle AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestStyle:"), requestStyle)
 	return x
 }
 
+// LargeBlob wraps the corresponding Objective-C method.
 func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("largeBlob"))
 	return AuthorizationPublicKeyCredentialLargeBlobRegistrationInputFromID(_r)
 }
 
+// SetLargeBlob wraps the corresponding Objective-C method.
 func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) SetLargeBlob(largeBlob *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLargeBlob:"), objref.IDOf(largeBlob))
 }
 
+// Prf wraps the corresponding Objective-C method.
 func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) Prf() *AuthorizationPublicKeyCredentialPRFRegistrationInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFRegistrationInputFromID(_r)
 }
 
+// SetPrf wraps the corresponding Objective-C method.
 func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) SetPrf(prf *AuthorizationPublicKeyCredentialPRFRegistrationInput) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrf:"), objref.IDOf(prf))
 }
 
+// RequestStyle wraps the corresponding Objective-C method.
 func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) RequestStyle() AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle {
 	_r := objc.Send[AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle](objref.IDOf(x), objc.RegisterName("requestStyle"))
 	return _r
 }
 
+// SetRequestStyle wraps the corresponding Objective-C method.
 func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) SetRequestStyle(requestStyle AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestStyle:"), requestStyle)
 }
@@ -126,3 +118,5 @@ type AuthorizationPlatformPublicKeyCredentialRegistrationRequestable interface {
 }
 
 var _ AuthorizationPlatformPublicKeyCredentialRegistrationRequestable = (*AuthorizationPlatformPublicKeyCredentialRegistrationRequest)(nil)
+
+var _ AuthorizationRequestProvider = (*AuthorizationPlatformPublicKeyCredentialRegistrationRequest)(nil)

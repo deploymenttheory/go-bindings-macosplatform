@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMHTMLOptionsCollection is an idiomatic wrapper over the Objective-C class DOMHTMLOptionsCollection.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMHTMLOptionsCollection struct {
-	objref.Handle
+	DOMObject
 }
 
 // DOMHTMLOptionsCollectionFromID adopts an existing Objective-C object as a DOMHTMLOptionsCollection
@@ -23,7 +24,8 @@ func DOMHTMLOptionsCollectionFromID(id objc.ID) *DOMHTMLOptionsCollection {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMHTMLOptionsCollection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMHTMLOptionsCollection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMHTMLOptionsCollectionAdopt(id objc.ID) *DOMHTMLOptionsCollection {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMHTMLOptionsCollection{Handle: objref.Wrap(id)}
+	x := &DOMHTMLOptionsCollection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMHTMLOptionsCollection) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMHTMLOptionsCollection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMHTMLOptionsCollection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMHTMLOptionsCollection creates a new DOMHTMLOptionsCollection.
@@ -62,50 +50,58 @@ func NewDOMHTMLOptionsCollection() *DOMHTMLOptionsCollection {
 	return dOMHTMLOptionsCollectionAdopt(_id)
 }
 
-// WithSelectedIndex sets selectedIndex and returns the receiver so calls can be chained.
+// WithSelectedIndex sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLOptionsCollection) WithSelectedIndex(selectedIndex int) *DOMHTMLOptionsCollection {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedIndex:"), selectedIndex)
 	return x
 }
 
-// WithLength sets length and returns the receiver so calls can be chained.
+// WithLength sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLOptionsCollection) WithLength(length int) *DOMHTMLOptionsCollection {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
 	return x
 }
 
+// NamedItem wraps the corresponding Objective-C method.
 func (x *DOMHTMLOptionsCollection) NamedItem(name string) *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("namedItem:"), purego.NSString(name))
 	return DOMNodeFromID(_r)
 }
 
+// AddIndex wraps the corresponding Objective-C method.
 func (x *DOMHTMLOptionsCollection) AddIndex(option *DOMHTMLOptionElement, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("add:index:"), objref.IDOf(option), index)
 }
 
+// Remove wraps the corresponding Objective-C method.
 func (x *DOMHTMLOptionsCollection) Remove(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remove:"), index)
 }
 
+// Item wraps the corresponding Objective-C method.
 func (x *DOMHTMLOptionsCollection) Item(index int) *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
 	return DOMNodeFromID(_r)
 }
 
+// SelectedIndex wraps the corresponding Objective-C method.
 func (x *DOMHTMLOptionsCollection) SelectedIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectedIndex"))
 	return _r
 }
 
+// SetSelectedIndex wraps the corresponding Objective-C method.
 func (x *DOMHTMLOptionsCollection) SetSelectedIndex(selectedIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedIndex:"), selectedIndex)
 }
 
+// Length wraps the corresponding Objective-C method.
 func (x *DOMHTMLOptionsCollection) Length() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
 	return _r
 }
 
+// SetLength wraps the corresponding Objective-C method.
 func (x *DOMHTMLOptionsCollection) SetLength(length int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
 }
@@ -126,3 +122,7 @@ type DOMHTMLOptionsCollectionable interface {
 }
 
 var _ DOMHTMLOptionsCollectionable = (*DOMHTMLOptionsCollection)(nil)
+
+var _ DOMObjectProvider = (*DOMHTMLOptionsCollection)(nil)
+
+var _ WebScriptObjectProvider = (*DOMHTMLOptionsCollection)(nil)

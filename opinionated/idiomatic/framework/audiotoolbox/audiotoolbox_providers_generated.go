@@ -11,14 +11,17 @@ import (
 // AudioUnitProvider is accepted wherever a AUAudioUnit (or one of its subclasses) is expected.
 type AudioUnitProvider interface {
 	objref.Object
+	isAudioUnit()
 }
 
 // ParameterGroupProvider is accepted wherever a AUParameterGroup (or one of its subclasses) is expected.
 type ParameterGroupProvider interface {
 	objref.Object
+	isParameterGroup()
 }
 
 // ParameterNodeProvider is accepted wherever a AUParameterNode (or one of its subclasses) is expected.
 type ParameterNodeProvider interface {
 	objref.Object
+	isParameterNode()
 }

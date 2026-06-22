@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A detected object observation with an array of classification labels that classify the recognized object.
-//
 // RecognizedObjectObservation is an idiomatic wrapper over the Objective-C class VNRecognizedObjectObservation.
+//
+// It embeds [DetectedObjectObservation], promoting that type's methods.
+//
+// A detected object observation with an array of classification labels that classify the recognized object.
 type RecognizedObjectObservation struct {
-	objref.Handle
+	DetectedObjectObservation
 }
 
 // RecognizedObjectObservationFromID adopts an existing Objective-C object as a RecognizedObjectObservation
@@ -25,7 +26,8 @@ func RecognizedObjectObservationFromID(id objc.ID) *RecognizedObjectObservation 
 	if id == 0 {
 		return nil
 	}
-	x := &RecognizedObjectObservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RecognizedObjectObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func recognizedObjectObservationAdopt(id objc.ID) *RecognizedObjectObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &RecognizedObjectObservation{Handle: objref.Wrap(id)}
+	x := &RecognizedObjectObservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RecognizedObjectObservation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RecognizedObjectObservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RecognizedObjectObservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRecognizedObjectObservation creates a new RecognizedObjectObservation.
@@ -64,6 +52,8 @@ func NewRecognizedObjectObservation() *RecognizedObjectObservation {
 	return recognizedObjectObservationAdopt(_id)
 }
 
+// Labels wraps the corresponding Objective-C method.
+//
 // Labels returns the collection as a Go slice.
 func (x *RecognizedObjectObservation) Labels() []*ClassificationObservation {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labels"))
@@ -77,3 +67,7 @@ type RecognizedObjectObservationable interface {
 }
 
 var _ RecognizedObjectObservationable = (*RecognizedObjectObservation)(nil)
+
+var _ DetectedObjectObservationProvider = (*RecognizedObjectObservation)(nil)
+
+var _ ObservationProvider = (*RecognizedObjectObservation)(nil)

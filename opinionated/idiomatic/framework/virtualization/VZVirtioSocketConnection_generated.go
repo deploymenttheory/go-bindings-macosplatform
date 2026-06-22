@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A port-based connection between the guest operating system and the host computer.
-//
 // VirtioSocketConnection is an idiomatic wrapper over the Objective-C class VZVirtioSocketConnection.
+//
+// A port-based connection between the guest operating system and the host computer.
 type VirtioSocketConnection struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VirtioSocketConnectionFromID(id objc.ID) *VirtioSocketConnection {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioSocketConnection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VirtioSocketConnection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func virtioSocketConnectionAdopt(id objc.ID) *VirtioSocketConnection {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioSocketConnection{Handle: objref.Wrap(id)}
+	x := &VirtioSocketConnection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,30 +60,36 @@ func (x *VirtioSocketConnection) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VirtioSocketConnection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVirtioSocketConnection creates a new VirtioSocketConnection.
 func NewVirtioSocketConnection() *VirtioSocketConnection {
 	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioSocketConnection")), objc.RegisterName("new"))
 	return virtioSocketConnectionAdopt(_id)
 }
 
-// Close the file descriptor associated with the socket.
+// Close close the file descriptor associated with the socket.
 func (x *VirtioSocketConnection) Close() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
 }
 
-// The destination port number of the connection.
+// DestinationPort the destination port number of the connection.
 func (x *VirtioSocketConnection) DestinationPort() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("destinationPort"))
 	return _r
 }
 
-// The source port number of the connection.
+// SourcePort the source port number of the connection.
 func (x *VirtioSocketConnection) SourcePort() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("sourcePort"))
 	return _r
 }
 
-// The file descriptor associated with the socket. Data is sent by writing to the file descriptor. Data is received by reading from the file descriptor. A file descriptor of -1 indicates a closed connection. The file descriptor is owned by the VZVirtioSocketConnection. It is automatically closed when the object is destroyed.
+// FileDescriptor the file descriptor associated with the socket. Data is sent by writing to the file descriptor. Data is received by reading from the file descriptor. A file descriptor of -1 indicates a closed connection. The file descriptor is owned by the VZVirtioSocketConnection. It is automatically closed when the object is destroyed.
 func (x *VirtioSocketConnection) FileDescriptor() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fileDescriptor"))
 	return _r

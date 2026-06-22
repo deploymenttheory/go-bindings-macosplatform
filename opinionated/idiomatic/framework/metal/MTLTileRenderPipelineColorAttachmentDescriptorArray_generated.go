@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An array of color attachment descriptors for the tile render pipeline.
-//
 // TileRenderPipelineColorAttachmentDescriptorArray is an idiomatic wrapper over the Objective-C class MTLTileRenderPipelineColorAttachmentDescriptorArray.
+//
+// An array of color attachment descriptors for the tile render pipeline.
 type TileRenderPipelineColorAttachmentDescriptorArray struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TileRenderPipelineColorAttachmentDescriptorArrayFromID(id objc.ID) *TileRen
 	if id == 0 {
 		return nil
 	}
-	x := &TileRenderPipelineColorAttachmentDescriptorArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TileRenderPipelineColorAttachmentDescriptorArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func tileRenderPipelineColorAttachmentDescriptorArrayAdopt(id objc.ID) *TileRend
 	if id == 0 {
 		return nil
 	}
-	x := &TileRenderPipelineColorAttachmentDescriptorArray{Handle: objref.Wrap(id)}
+	x := &TileRenderPipelineColorAttachmentDescriptorArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *TileRenderPipelineColorAttachmentDescriptorArray) IsKind(className stri
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TileRenderPipelineColorAttachmentDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTileRenderPipelineColorAttachmentDescriptorArray creates a new TileRenderPipelineColorAttachmentDescriptorArray.
 func NewTileRenderPipelineColorAttachmentDescriptorArray() *TileRenderPipelineColorAttachmentDescriptorArray {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLTileRenderPipelineColorAttachmentDescriptorArray")), objc.RegisterName("new"))
 	return tileRenderPipelineColorAttachmentDescriptorArrayAdopt(_id)
 }
 
-// Returns the render pipeline state for the specified color attachment.
+// ObjectAtIndexedSubscript returns the render pipeline state for the specified color attachment.
 func (x *TileRenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *TileRenderPipelineColorAttachmentDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return TileRenderPipelineColorAttachmentDescriptorFromID(_r)
 }
 
-// Sets the render pipeline state for a specified color attachment.
+// SetObjectAtIndexedSubscript sets the render pipeline state for a specified color attachment.
 func (x *TileRenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *TileRenderPipelineColorAttachmentDescriptor, attachmentIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }

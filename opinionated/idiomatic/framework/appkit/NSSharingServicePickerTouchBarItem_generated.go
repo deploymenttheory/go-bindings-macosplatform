@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A bar item that, along with its delegate, provides a list of objects eligible for sharing.
-//
 // SharingServicePickerTouchBarItem is an idiomatic wrapper over the Objective-C class NSSharingServicePickerTouchBarItem.
+//
+// It embeds [TouchBarItem], promoting that type's methods.
+//
+// A bar item that, along with its delegate, provides a list of objects eligible for sharing.
 type SharingServicePickerTouchBarItem struct {
-	objref.Handle
+	TouchBarItem
 }
 
 // SharingServicePickerTouchBarItemFromID adopts an existing Objective-C object as a SharingServicePickerTouchBarItem
@@ -25,7 +26,8 @@ func SharingServicePickerTouchBarItemFromID(id objc.ID) *SharingServicePickerTou
 	if id == 0 {
 		return nil
 	}
-	x := &SharingServicePickerTouchBarItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SharingServicePickerTouchBarItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func sharingServicePickerTouchBarItemAdopt(id objc.ID) *SharingServicePickerTouc
 	if id == 0 {
 		return nil
 	}
-	x := &SharingServicePickerTouchBarItem{Handle: objref.Wrap(id)}
+	x := &SharingServicePickerTouchBarItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SharingServicePickerTouchBarItem) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SharingServicePickerTouchBarItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SharingServicePickerTouchBarItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSharingServicePickerTouchBarItem creates a new SharingServicePickerTouchBarItem.
@@ -64,47 +52,42 @@ func NewSharingServicePickerTouchBarItem() *SharingServicePickerTouchBarItem {
 	return sharingServicePickerTouchBarItemAdopt(_id)
 }
 
-// A Boolean value that specifies whether the sharing service picker item is enabled.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that specifies whether the sharing service picker item is enabled.
 func (x *SharingServicePickerTouchBarItem) WithEnabled(enabled bool) *SharingServicePickerTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The text displayed in the sharing service picker item button.
-//
-// WithButtonTitle sets buttonTitle and returns the receiver so calls can be chained.
+// WithButtonTitle the text displayed in the sharing service picker item button.
 func (x *SharingServicePickerTouchBarItem) WithButtonTitle(buttonTitle string) *SharingServicePickerTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonTitle:"), purego.NSString(buttonTitle))
 	return x
 }
 
-// The image displayed in the sharing service picker item button.
-//
-// WithButtonImage sets buttonImage and returns the receiver so calls can be chained.
+// WithButtonImage the image displayed in the sharing service picker item button.
 func (x *SharingServicePickerTouchBarItem) WithButtonImage(buttonImage *Image) *SharingServicePickerTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonImage:"), objref.IDOf(buttonImage))
 	return x
 }
 
-// Determines which items are shown in a bar when space is limited.
-//
-// WithVisibilityPriority sets visibilityPriority and returns the receiver so calls can be chained.
+// WithVisibilityPriority determines which items are shown in a bar when space is limited.
 func (x *SharingServicePickerTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *SharingServicePickerTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
 	return x
 }
 
+// IsEnabled wraps the corresponding Objective-C method.
 func (x *SharingServicePickerTouchBarItem) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r
 }
 
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *SharingServicePickerTouchBarItem) SetEnabled(enabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
+// ButtonTitle wraps the corresponding Objective-C method.
 func (x *SharingServicePickerTouchBarItem) ButtonTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonTitle"))
 	if _r == 0 {
@@ -113,15 +96,18 @@ func (x *SharingServicePickerTouchBarItem) ButtonTitle() string {
 	return purego.GoString(_r)
 }
 
+// SetButtonTitle wraps the corresponding Objective-C method.
 func (x *SharingServicePickerTouchBarItem) SetButtonTitle(buttonTitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonTitle:"), purego.NSString(buttonTitle))
 }
 
+// ButtonImage wraps the corresponding Objective-C method.
 func (x *SharingServicePickerTouchBarItem) ButtonImage() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonImage"))
 	return ImageFromID(_r)
 }
 
+// SetButtonImage wraps the corresponding Objective-C method.
 func (x *SharingServicePickerTouchBarItem) SetButtonImage(buttonImage *Image) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonImage:"), objref.IDOf(buttonImage))
 }
@@ -142,3 +128,5 @@ type SharingServicePickerTouchBarItemable interface {
 }
 
 var _ SharingServicePickerTouchBarItemable = (*SharingServicePickerTouchBarItem)(nil)
+
+var _ TouchBarItemProvider = (*SharingServicePickerTouchBarItem)(nil)

@@ -6,6 +6,7 @@ package naturallanguage
 
 import (
 	"fmt"
+	"strings"
 )
 
 // The means of calculating a distance between two locations in a text embedding.
@@ -16,6 +17,8 @@ const (
 	DistanceTypeCosine DistanceType = 0
 )
 
+// String returns the DistanceType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DistanceType) String() string {
 	switch e {
 	case DistanceTypeCosine:
@@ -33,6 +36,8 @@ const (
 	ModelTypeSequence   ModelType = 1
 )
 
+// String returns the ModelType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ModelType) String() string {
 	switch e {
 	case ModelTypeClassifier:
@@ -42,6 +47,47 @@ func (e ModelType) String() string {
 	default:
 		return fmt.Sprintf("ModelType(%d)", int64(e))
 	}
+}
+
+// Constants for linguistic tagger enumeration specifying which tokens to omit and whether to join names.
+// Bitmask — values may be combined with |.
+type TaggerOptions uint64
+
+const (
+	TaggerOmitWords        TaggerOptions = 1
+	TaggerOmitPunctuation  TaggerOptions = 2
+	TaggerOmitWhitespace   TaggerOptions = 4
+	TaggerOmitOther        TaggerOptions = 8
+	TaggerJoinNames        TaggerOptions = 16
+	TaggerJoinContractions TaggerOptions = 32
+)
+
+// String returns the TaggerOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TaggerOptions) String() string {
+	var parts []string
+	if e&TaggerOmitWords != 0 {
+		parts = append(parts, "TaggerOmitWords")
+	}
+	if e&TaggerOmitPunctuation != 0 {
+		parts = append(parts, "TaggerOmitPunctuation")
+	}
+	if e&TaggerOmitWhitespace != 0 {
+		parts = append(parts, "TaggerOmitWhitespace")
+	}
+	if e&TaggerOmitOther != 0 {
+		parts = append(parts, "TaggerOmitOther")
+	}
+	if e&TaggerJoinNames != 0 {
+		parts = append(parts, "TaggerJoinNames")
+	}
+	if e&TaggerJoinContractions != 0 {
+		parts = append(parts, "TaggerJoinContractions")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
 }
 
 // Constants representing linguistic units.
@@ -58,6 +104,8 @@ const (
 	TokenUnitDocument TokenUnit = 3
 )
 
+// String returns the TokenUnit constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TokenUnit) String() string {
 	switch e {
 	case TokenUnitWord:

@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that supports safely sharing Thread credentials between multiple clients.
-//
 // THClient is an idiomatic wrapper over the Objective-C class THClient.
+//
+// A class that supports safely sharing Thread credentials between multiple clients.
 type THClient struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func THClientFromID(id objc.ID) *THClient {
 	if id == 0 {
 		return nil
 	}
-	x := &THClient{Handle: objref.Wrap(purego.Retain(id))}
+	x := &THClient{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func tHClientAdopt(id objc.ID) *THClient {
 	if id == 0 {
 		return nil
 	}
-	x := &THClient{Handle: objref.Wrap(id)}
+	x := &THClient{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,22 @@ func (x *THClient) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *THClient) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTHClient creates a new THClient.
 func NewTHClient() *THClient {
 	_id := objc.Send[objc.ID](objc.ID(_class("THClient")), objc.RegisterName("new"))
 	return tHClientAdopt(_id)
 }
 
-// Requests all Thread credentials from the framework.
+// RetrieveAllCredentials requests all Thread credentials from the framework.
 //
 // RetrieveAllCredentials blocks until the operation completes or ctx is cancelled.
-func (x *THClient) RetrieveAllCredentials(ctx context.Context) (obj.Object, error) {
+func (x *THClient) RetrieveAllCredentials(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -91,10 +99,10 @@ func (x *THClient) RetrieveAllCredentials(ctx context.Context) (obj.Object, erro
 	}
 }
 
-// Returns a set of the active credentials.
+// RetrieveAllActiveCredentials returns a set of the active credentials.
 //
 // RetrieveAllActiveCredentials blocks until the operation completes or ctx is cancelled.
-func (x *THClient) RetrieveAllActiveCredentials(ctx context.Context) (obj.Object, error) {
+func (x *THClient) RetrieveAllActiveCredentials(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -116,7 +124,7 @@ func (x *THClient) RetrieveAllActiveCredentials(ctx context.Context) (obj.Object
 	}
 }
 
-// Deletes Thread network credentials from the framework database for a Border Agent.
+// DeleteCredentialsForBorderAgentCompletion deletes Thread network credentials from the framework database for a Border Agent.
 //
 // DeleteCredentialsForBorderAgentCompletion blocks until the operation completes or ctx is cancelled.
 func (x *THClient) DeleteCredentialsForBorderAgentCompletion(ctx context.Context, borderAgentID obj.Object) error {
@@ -135,10 +143,10 @@ func (x *THClient) DeleteCredentialsForBorderAgentCompletion(ctx context.Context
 	}
 }
 
-// Requests Thread credentials for a Border Agent.
+// RetrieveCredentialsForBorderAgentCompletion requests Thread credentials for a Border Agent.
 //
 // RetrieveCredentialsForBorderAgentCompletion blocks until the operation completes or ctx is cancelled.
-func (x *THClient) RetrieveCredentialsForBorderAgentCompletion(ctx context.Context, borderAgentID obj.Object) (*THCredentials, error) {
+func (x *THClient) RetrieveCredentialsForBorderAgentCompletion(ctx context.Context, borderAgentID obj.Object) (result *THCredentials, err error) {
 	type _result struct {
 		val *THCredentials
 		err error
@@ -160,7 +168,7 @@ func (x *THClient) RetrieveCredentialsForBorderAgentCompletion(ctx context.Conte
 	}
 }
 
-// Stores Thread network credentials into the framework database that a Border Agent provides.
+// StoreCredentialsForBorderAgentActiveOperationalDataSetCompletion stores Thread network credentials into the framework database that a Border Agent provides.
 //
 // StoreCredentialsForBorderAgentActiveOperationalDataSetCompletion blocks until the operation completes or ctx is cancelled.
 func (x *THClient) StoreCredentialsForBorderAgentActiveOperationalDataSetCompletion(ctx context.Context, borderAgentID obj.Object, activeOperationalDataSet obj.Object) error {
@@ -179,10 +187,10 @@ func (x *THClient) StoreCredentialsForBorderAgentActiveOperationalDataSetComplet
 	}
 }
 
-// Requests Thread credentials for the preferred network.
+// RetrievePreferredCredentials requests Thread credentials for the preferred network.
 //
 // RetrievePreferredCredentials blocks until the operation completes or ctx is cancelled.
-func (x *THClient) RetrievePreferredCredentials(ctx context.Context) (*THCredentials, error) {
+func (x *THClient) RetrievePreferredCredentials(ctx context.Context) (result *THCredentials, err error) {
 	type _result struct {
 		val *THCredentials
 		err error
@@ -204,10 +212,10 @@ func (x *THClient) RetrievePreferredCredentials(ctx context.Context) (*THCredent
 	}
 }
 
-// Requests Thread credentials for an extended Personal Area Network (PAN) ID.
+// RetrieveCredentialsForExtendedPANIDCompletion requests Thread credentials for an extended Personal Area Network (PAN) ID.
 //
 // RetrieveCredentialsForExtendedPANIDCompletion blocks until the operation completes or ctx is cancelled.
-func (x *THClient) RetrieveCredentialsForExtendedPANIDCompletion(ctx context.Context, extendedPANID obj.Object) (*THCredentials, error) {
+func (x *THClient) RetrieveCredentialsForExtendedPANIDCompletion(ctx context.Context, extendedPANID obj.Object) (result *THCredentials, err error) {
 	type _result struct {
 		val *THCredentials
 		err error
@@ -229,12 +237,12 @@ func (x *THClient) RetrieveCredentialsForExtendedPANIDCompletion(ctx context.Con
 	}
 }
 
-// Determines if the essential operating parameters match the preferred network’s parameters.
+// CheckPreferredNetworkForActiveOperationalDatasetCompletion determines if the essential operating parameters match the preferred network’s parameters.
 func (x *THClient) CheckPreferredNetworkForActiveOperationalDatasetCompletion(activeOperationalDataSet obj.Object, completion func(bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("checkPreferredNetworkForActiveOperationalDataset:completion:"), objref.IDOf(activeOperationalDataSet), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
 }
 
-// Indicates whether a preferred network is available.
+// IsPreferredNetworkAvailableWithCompletion indicates whether a preferred network is available.
 func (x *THClient) IsPreferredNetworkAvailableWithCompletion(completion func(bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isPreferredNetworkAvailableWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
 }

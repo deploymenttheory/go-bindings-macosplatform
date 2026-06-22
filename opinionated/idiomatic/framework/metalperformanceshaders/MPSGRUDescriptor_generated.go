@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of a gated recurrent unit block or layer.
-//
 // GRUDescriptor is an idiomatic wrapper over the Objective-C class MPSGRUDescriptor.
+//
+// It embeds [RNNDescriptor], promoting that type's methods.
+//
+// A description of a gated recurrent unit block or layer.
 type GRUDescriptor struct {
-	objref.Handle
+	RNNDescriptor
 }
 
 // GRUDescriptorFromID adopts an existing Objective-C object as a GRUDescriptor
@@ -25,7 +26,8 @@ func GRUDescriptorFromID(id objc.ID) *GRUDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &GRUDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GRUDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func gRUDescriptorAdopt(id objc.ID) *GRUDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &GRUDescriptor{Handle: objref.Wrap(id)}
+	x := &GRUDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GRUDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GRUDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GRUDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGRUDescriptor creates a new GRUDescriptor.
@@ -64,70 +52,60 @@ func NewGRUDescriptor() *GRUDescriptor {
 	return gRUDescriptorAdopt(_id)
 }
 
-// The p-norm gating norm value as specified by the GRU formulae. Defaults to 1.0f.
-//
-// WithGatePnormValue sets gatePnormValue and returns the receiver so calls can be chained.
+// WithGatePnormValue the p-norm gating norm value as specified by the GRU formulae. Defaults to 1.0f.
 func (x *GRUDescriptor) WithGatePnormValue(gatePnormValue float32) *GRUDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGatePnormValue:"), gatePnormValue)
 	return x
 }
 
-// If YES then the GRU-block output formula is changed to: h1_i = ( 1 - z_i ^ p)^(1/p) h0_i + z_i h_i. Defaults to NO.
-//
-// WithFlipOutputGates sets flipOutputGates and returns the receiver so calls can be chained.
+// WithFlipOutputGates if YES then the GRU-block output formula is changed to: h1_i = ( 1 - z_i ^ p)^(1/p) h0_i + z_i h_i. Defaults to NO.
 func (x *GRUDescriptor) WithFlipOutputGates(flipOutputGates bool) *GRUDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlipOutputGates:"), flipOutputGates)
 	return x
 }
 
-// The number of feature channels per pixel in the input image or number of rows in the input matrix.
-//
-// WithInputFeatureChannels sets inputFeatureChannels and returns the receiver so calls can be chained.
+// WithInputFeatureChannels the number of feature channels per pixel in the input image or number of rows in the input matrix.
 func (x *GRUDescriptor) WithInputFeatureChannels(inputFeatureChannels int) *GRUDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputFeatureChannels:"), inputFeatureChannels)
 	return x
 }
 
-// The number of feature channels per pixel in the destination image or number of rows in the destination matrix.
-//
-// WithOutputFeatureChannels sets outputFeatureChannels and returns the receiver so calls can be chained.
+// WithOutputFeatureChannels the number of feature channels per pixel in the destination image or number of rows in the destination matrix.
 func (x *GRUDescriptor) WithOutputFeatureChannels(outputFeatureChannels int) *GRUDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFeatureChannels:"), outputFeatureChannels)
 	return x
 }
 
-// if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in
-//
-// WithUseLayerInputUnitTransformMode sets useLayerInputUnitTransformMode and returns the receiver so calls can be chained.
+// WithUseLayerInputUnitTransformMode if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in
 func (x *GRUDescriptor) WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *GRUDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseLayerInputUnitTransformMode:"), useLayerInputUnitTransformMode)
 	return x
 }
 
-// If YES, then
-//
-// WithUseFloat32Weights sets useFloat32Weights and returns the receiver so calls can be chained.
+// WithUseFloat32Weights if YES, then
 func (x *GRUDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *GRUDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseFloat32Weights:"), useFloat32Weights)
 	return x
 }
 
-// The p-norm gating norm value as specified by the GRU formulae. Defaults to 1.0f.
+// GatePnormValue the p-norm gating norm value as specified by the GRU formulae. Defaults to 1.0f.
 func (x *GRUDescriptor) GatePnormValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gatePnormValue"))
 	return _r
 }
 
+// SetGatePnormValue wraps the corresponding Objective-C method.
 func (x *GRUDescriptor) SetGatePnormValue(gatePnormValue float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGatePnormValue:"), gatePnormValue)
 }
 
-// If YES then the GRU-block output formula is changed to: h1_i = ( 1 - z_i ^ p)^(1/p) h0_i + z_i h_i. Defaults to NO.
+// FlipOutputGates if YES then the GRU-block output formula is changed to: h1_i = ( 1 - z_i ^ p)^(1/p) h0_i + z_i h_i. Defaults to NO.
 func (x *GRUDescriptor) FlipOutputGates() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("flipOutputGates"))
 	return _r
 }
 
+// SetFlipOutputGates wraps the corresponding Objective-C method.
 func (x *GRUDescriptor) SetFlipOutputGates(flipOutputGates bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlipOutputGates:"), flipOutputGates)
 }
@@ -148,3 +126,5 @@ type GRUDescriptorable interface {
 }
 
 var _ GRUDescriptorable = (*GRUDescriptor)(nil)
+
+var _ RNNDescriptorProvider = (*GRUDescriptor)(nil)

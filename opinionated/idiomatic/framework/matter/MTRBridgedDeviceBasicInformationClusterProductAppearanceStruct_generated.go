@@ -23,7 +23,8 @@ func MTRBridgedDeviceBasicInformationClusterProductAppearanceStructFromID(id obj
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRBridgedDeviceBasicInformationClusterProductAppearanceStructAdopt(id objc
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct{Handle: objref.Wrap(id)}
+	x := &MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,38 +58,48 @@ func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) IsKind(
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRBridgedDeviceBasicInformationClusterProductAppearanceStruct creates a new MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct.
 func NewMTRBridgedDeviceBasicInformationClusterProductAppearanceStruct() *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct")), objc.RegisterName("new"))
 	return mTRBridgedDeviceBasicInformationClusterProductAppearanceStructAdopt(_id)
 }
 
-// WithFinish sets finish and returns the receiver so calls can be chained.
+// WithFinish sets the property and returns the receiver so calls can be chained.
 func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) WithFinish(finish obj.Object) *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFinish:"), objref.IDOf(finish))
 	return x
 }
 
-// WithPrimaryColor sets primaryColor and returns the receiver so calls can be chained.
+// WithPrimaryColor sets the property and returns the receiver so calls can be chained.
 func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) WithPrimaryColor(primaryColor obj.Object) *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryColor:"), objref.IDOf(primaryColor))
 	return x
 }
 
+// Finish wraps the corresponding Objective-C method.
 func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) Finish() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finish"))
 	return obj.Wrap(_r)
 }
 
+// SetFinish wraps the corresponding Objective-C method.
 func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) SetFinish(finish obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFinish:"), objref.IDOf(finish))
 }
 
+// PrimaryColor wraps the corresponding Objective-C method.
 func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) PrimaryColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryColor"))
 	return obj.Wrap(_r)
 }
 
+// SetPrimaryColor wraps the corresponding Objective-C method.
 func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) SetPrimaryColor(primaryColor obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryColor:"), objref.IDOf(primaryColor))
 }

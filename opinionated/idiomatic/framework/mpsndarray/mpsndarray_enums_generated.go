@@ -17,6 +17,8 @@ const (
 	ArrayQuantizationTypeLUT    ArrayQuantizationScheme = 2
 )
 
+// String returns the ArrayQuantizationScheme constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ArrayQuantizationScheme) String() string {
 	var parts []string
 	if e&ArrayQuantizationTypeAffine != 0 {

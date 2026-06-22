@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that controls the process of requesting App Store ratings and reviews from customers.
-//
 // StoreReviewController is an idiomatic wrapper over the Objective-C class SKStoreReviewController.
+//
+// An object that controls the process of requesting App Store ratings and reviews from customers.
 type StoreReviewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func StoreReviewControllerFromID(id objc.ID) *StoreReviewController {
 	if id == 0 {
 		return nil
 	}
-	x := &StoreReviewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StoreReviewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func storeReviewControllerAdopt(id objc.ID) *StoreReviewController {
 	if id == 0 {
 		return nil
 	}
-	x := &StoreReviewController{Handle: objref.Wrap(id)}
+	x := &StoreReviewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *StoreReviewController) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *StoreReviewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StoreReviewController) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewStoreReviewController creates a new StoreReviewController.

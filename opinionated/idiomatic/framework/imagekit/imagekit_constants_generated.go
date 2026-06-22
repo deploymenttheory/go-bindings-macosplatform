@@ -224,75 +224,61 @@ func IKPictureTakerRemainOpenAfterValidateKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("IKPictureTakerRemainOpenAfterValidateKey")))
 }
 
-// IKUISizeFlavor Key to request the desired size of controls in a filter UIView - defined values are IKUISizeMini, IKUISizeSmall and IKUISizeRegular.
 // IKUISizeFlavor returns the string constant IKUISizeFlavor, for use as a dictionary key or argument.
 func IKUISizeFlavor() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("IKUISizeFlavor"))) }
 
-// IKUISizeMini Constant for requesting controls in mini size.
 // IKUISizeMini returns the string constant IKUISizeMini, for use as a dictionary key or argument.
 func IKUISizeMini() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("IKUISizeMini"))) }
 
-// IKUISizeSmall Constant for requesting controls in small size.
 // IKUISizeSmall returns the string constant IKUISizeSmall, for use as a dictionary key or argument.
 func IKUISizeSmall() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("IKUISizeSmall"))) }
 
-// IKUISizeRegular Constant for requesting controls in regular or normal size.
 // IKUISizeRegular returns the string constant IKUISizeRegular, for use as a dictionary key or argument.
 func IKUISizeRegular() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("IKUISizeRegular"))) }
 
-// IKUImaxSize Maximum allowed dimensions of the view for the filter UI. If width or height is zero it means that that dimension of the view is not restricted.
 // IKUImaxSize returns the string constant IKUImaxSize, for use as a dictionary key or argument.
 func IKUImaxSize() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("IKUImaxSize"))) }
 
-// IKUIFlavorAllowFallback Allow the filter to provide a view with controls of a different size and set than requested, if it cannot provide a view for the requested flavor.
 // IKUIFlavorAllowFallback returns the string constant IKUIFlavorAllowFallback, for use as a dictionary key or argument.
 func IKUIFlavorAllowFallback() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("IKUIFlavorAllowFallback")))
 }
 
-// IKFilterBrowserFilterSelectedNotification Send when the user clicked on a filter in the Filter Browser. The name of the selected filter is send as the object in the notification
 // IKFilterBrowserFilterSelectedNotification returns the string constant IKFilterBrowserFilterSelectedNotification, for use as a dictionary key or argument.
 func IKFilterBrowserFilterSelectedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("IKFilterBrowserFilterSelectedNotification")))
 }
 
-// IKFilterBrowserFilterDoubleClickNotification Send when the user made a double click on a filter in the Filter Browser. The name of the selected filter is send as the object in the notification
 // IKFilterBrowserFilterDoubleClickNotification returns the string constant IKFilterBrowserFilterDoubleClickNotification, for use as a dictionary key or argument.
 func IKFilterBrowserFilterDoubleClickNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("IKFilterBrowserFilterDoubleClickNotification")))
 }
 
-// IKFilterBrowserWillPreviewFilterNotification Send before a filter is previewed allowing for setting parameters of that filter. The selected CIFilter object is send as the object in the notification
 // IKFilterBrowserWillPreviewFilterNotification returns the string constant IKFilterBrowserWillPreviewFilterNotification, for use as a dictionary key or argument.
 func IKFilterBrowserWillPreviewFilterNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("IKFilterBrowserWillPreviewFilterNotification")))
 }
 
-// IKFilterBrowserShowCategories BOOL - Determines if the filter browser should show the category list
 // IKFilterBrowserShowCategories returns the string constant IKFilterBrowserShowCategories, for use as a dictionary key or argument.
 func IKFilterBrowserShowCategories() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("IKFilterBrowserShowCategories")))
 }
 
-// IKFilterBrowserShowPreview BOOL - Determines if the filter browser should show the preview well
 // IKFilterBrowserShowPreview returns the string constant IKFilterBrowserShowPreview, for use as a dictionary key or argument.
 func IKFilterBrowserShowPreview() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("IKFilterBrowserShowPreview")))
 }
 
-// IKFilterBrowserExcludeCategories NSArray - The categories in this array will not be displayed in the browser
 // IKFilterBrowserExcludeCategories returns the string constant IKFilterBrowserExcludeCategories, for use as a dictionary key or argument.
 func IKFilterBrowserExcludeCategories() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("IKFilterBrowserExcludeCategories")))
 }
 
-// IKFilterBrowserExcludeFilters NSArray - The filters in this array will not be displayed in the browser
 // IKFilterBrowserExcludeFilters returns the string constant IKFilterBrowserExcludeFilters, for use as a dictionary key or argument.
 func IKFilterBrowserExcludeFilters() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("IKFilterBrowserExcludeFilters")))
 }
 
-// IKFilterBrowserDefaultInputImage - Allows you to set a custom image to be used as the inputImage for the filter preview. CIImage* - You can also set the inputImage among other parameters during the IKFilterBrowserWillPreviewFilterNotification. This image will be set before the notification is called. Setting the image to nil falls back to the image suplied by the framework.
 // IKFilterBrowserDefaultInputImage returns the string constant IKFilterBrowserDefaultInputImage, for use as a dictionary key or argument.
 func IKFilterBrowserDefaultInputImage() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("IKFilterBrowserDefaultInputImage")))

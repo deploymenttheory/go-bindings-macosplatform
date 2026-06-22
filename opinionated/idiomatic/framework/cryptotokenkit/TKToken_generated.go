@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a hardware-based cryptographic token.
-//
 // Token is an idiomatic wrapper over the Objective-C class TKToken.
+//
+// Token is an abstract base — you do not construct it directly. Construct one of [SmartCardToken] and pass it where a Token is accepted.
+//
+// A representation of a hardware-based cryptographic token.
 type Token struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func TokenFromID(id objc.ID) *Token {
 	if id == 0 {
 		return nil
 	}
-	x := &Token{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Token{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func tokenAdopt(id objc.ID) *Token {
 	if id == 0 {
 		return nil
 	}
-	x := &Token{Handle: objref.Wrap(id)}
+	x := &Token{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,27 +62,32 @@ func (x *Token) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a token with the driver you specify.
-//
-// NewTokenWithTokenDriverInstanceID creates a new Token.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Token) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTokenWithTokenDriverInstanceID initializes a token with the driver you specify.
 func NewTokenWithTokenDriverInstanceID(tokenDriver *TokenDriver, instanceID obj.Object) *Token {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("TKToken")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTokenDriver:instanceID:"), objref.IDOf(tokenDriver), objref.IDOf(instanceID))
 	return tokenAdopt(_id)
 }
 
+// TokenDriver wraps the corresponding Objective-C method.
 func (x *Token) TokenDriver() *TokenDriver {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tokenDriver"))
 	return TokenDriverFromID(_r)
 }
 
-// Token configuration associated with this token instance.
+// Configuration token configuration associated with this token instance.
 func (x *Token) Configuration() *TokenConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
 	return TokenConfigurationFromID(_r)
 }
 
-// Keychain contents (certificate and key items) representing this token.
+// KeychainContents keychain contents (certificate and key items) representing this token.
 func (x *Token) KeychainContents() *TokenKeychainContents {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keychainContents"))
 	return TokenKeychainContentsFromID(_r)
@@ -93,3 +102,10 @@ type Tokenable interface {
 }
 
 var _ Tokenable = (*Token)(nil)
+
+// isToken marks Token — and, by embedding promotion, its
+// subclasses — as a member of the Token hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Token) isToken() {}
+
+var _ TokenProvider = (*Token)(nil)

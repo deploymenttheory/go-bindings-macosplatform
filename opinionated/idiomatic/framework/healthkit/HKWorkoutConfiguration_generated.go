@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains configuration information about a workout session.
-//
 // WorkoutConfiguration is an idiomatic wrapper over the Objective-C class HKWorkoutConfiguration.
+//
+// An object that contains configuration information about a workout session.
 type WorkoutConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WorkoutConfigurationFromID(id objc.ID) *WorkoutConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &WorkoutConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WorkoutConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func workoutConfigurationAdopt(id objc.ID) *WorkoutConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &WorkoutConfiguration{Handle: objref.Wrap(id)}
+	x := &WorkoutConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,80 +60,82 @@ func (x *WorkoutConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WorkoutConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWorkoutConfiguration creates a new WorkoutConfiguration.
 func NewWorkoutConfiguration() *WorkoutConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKWorkoutConfiguration")), objc.RegisterName("new"))
 	return workoutConfigurationAdopt(_id)
 }
 
-// The workout session’s activity type.
-//
-// WithActivityType sets activityType and returns the receiver so calls can be chained.
+// WithActivityType the workout session’s activity type.
 func (x *WorkoutConfiguration) WithActivityType(activityType WorkoutActivityType) *WorkoutConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivityType:"), activityType)
 	return x
 }
 
-// The workout session’s location.
-//
-// WithLocationType sets locationType and returns the receiver so calls can be chained.
+// WithLocationType the workout session’s location.
 func (x *WorkoutConfiguration) WithLocationType(locationType WorkoutSessionLocationType) *WorkoutConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocationType:"), locationType)
 	return x
 }
 
-// The workout session’s swimming location.
-//
-// WithSwimmingLocationType sets swimmingLocationType and returns the receiver so calls can be chained.
+// WithSwimmingLocationType the workout session’s swimming location.
 func (x *WorkoutConfiguration) WithSwimmingLocationType(swimmingLocationType WorkoutSwimmingLocationType) *WorkoutConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSwimmingLocationType:"), swimmingLocationType)
 	return x
 }
 
-// The length of the lap for a workout session.
-//
-// WithLapLength sets lapLength and returns the receiver so calls can be chained.
+// WithLapLength the length of the lap for a workout session.
 func (x *WorkoutConfiguration) WithLapLength(lapLength *Quantity) *WorkoutConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLapLength:"), objref.IDOf(lapLength))
 	return x
 }
 
-// Indicates the type of workout for the configuration.
+// ActivityType indicates the type of workout for the configuration.
 func (x *WorkoutConfiguration) ActivityType() WorkoutActivityType {
 	_r := objc.Send[WorkoutActivityType](objref.IDOf(x), objc.RegisterName("activityType"))
 	return _r
 }
 
+// SetActivityType wraps the corresponding Objective-C method.
 func (x *WorkoutConfiguration) SetActivityType(activityType WorkoutActivityType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivityType:"), activityType)
 }
 
-// Indicates the type of location (indoors vs. outdoors) for the configuration.
+// LocationType indicates the type of location (indoors vs. outdoors) for the configuration.
 func (x *WorkoutConfiguration) LocationType() WorkoutSessionLocationType {
 	_r := objc.Send[WorkoutSessionLocationType](objref.IDOf(x), objc.RegisterName("locationType"))
 	return _r
 }
 
+// SetLocationType wraps the corresponding Objective-C method.
 func (x *WorkoutConfiguration) SetLocationType(locationType WorkoutSessionLocationType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocationType:"), locationType)
 }
 
-// Indicates the type of swimming location (pool vs. open water) where the workout will take place.
+// SwimmingLocationType indicates the type of swimming location (pool vs. open water) where the workout will take place.
 func (x *WorkoutConfiguration) SwimmingLocationType() WorkoutSwimmingLocationType {
 	_r := objc.Send[WorkoutSwimmingLocationType](objref.IDOf(x), objc.RegisterName("swimmingLocationType"))
 	return _r
 }
 
+// SetSwimmingLocationType wraps the corresponding Objective-C method.
 func (x *WorkoutConfiguration) SetSwimmingLocationType(swimmingLocationType WorkoutSwimmingLocationType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSwimmingLocationType:"), swimmingLocationType)
 }
 
-// Indicates the length of the pool, when the workout location type is pool. This metric represents the length of the pool where the workout takes place. It should be a quantity with a unit representing length.
+// LapLength indicates the length of the pool, when the workout location type is pool. This metric represents the length of the pool where the workout takes place. It should be a quantity with a unit representing length.
 func (x *WorkoutConfiguration) LapLength() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lapLength"))
 	return QuantityFromID(_r)
 }
 
+// SetLapLength wraps the corresponding Objective-C method.
 func (x *WorkoutConfiguration) SetLapLength(lapLength *Quantity) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLapLength:"), objref.IDOf(lapLength))
 }

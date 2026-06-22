@@ -18,6 +18,8 @@ const (
 	AudioUnitBusTypeOutput AudioUnitBusType = 2
 )
 
+// String returns the AudioUnitBusType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudioUnitBusType) String() string {
 	switch e {
 	case AudioUnitBusTypeInput:
@@ -37,6 +39,8 @@ const (
 	KAudioComponentInstantiation_LoadInProcess    AudioComponentInstantiationOptions = 2
 )
 
+// String returns the AudioComponentInstantiationOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudioComponentInstantiationOptions) String() string {
 	var parts []string
 	if e&KAudioComponentInstantiation_LoadOutOfProcess != 0 {
@@ -63,6 +67,8 @@ const (
 	KAudioFileReadWritePermission AudioFilePermissions = 3
 )
 
+// String returns the AudioFilePermissions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudioFilePermissions) String() string {
 	switch e {
 	case KAudioFileReadPermission:
@@ -107,6 +113,8 @@ const (
 	KAudioUnitParameterFlag_IsWritable         AudioUnitParameterOptions = 2147483648
 )
 
+// String returns the AudioUnitParameterOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudioUnitParameterOptions) String() string {
 	var parts []string
 	if e&KAudioUnitParameterFlag_CFNameRelease != 0 {
@@ -242,6 +250,8 @@ const (
 	KAudioUnitParameterUnit_MIDI2Controller AudioUnitParameterUnit = 27
 )
 
+// String returns the AudioUnitParameterUnit constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudioUnitParameterUnit) String() string {
 	switch e {
 	case KAudioUnitParameterUnit_Generic:
@@ -323,6 +333,8 @@ const (
 	KCAClockProperty_SendMIDISPP           CAClockPropertyID = 1836281968
 )
 
+// String returns the CAClockPropertyID constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CAClockPropertyID) String() string {
 	switch e {
 	case KCAClockProperty_InternalTimebase:
@@ -368,6 +380,8 @@ const (
 	KCAClockTimeFormat_AbsoluteSeconds CAClockTimeFormat = 1634952547
 )
 
+// String returns the CAClockTimeFormat constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CAClockTimeFormat) String() string {
 	switch e {
 	case KCAClockTimeFormat_HostTime:
@@ -399,6 +413,8 @@ const (
 	KMusicSequenceFileFlags_EraseFile MusicSequenceFileFlags = 1
 )
 
+// String returns the MusicSequenceFileFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MusicSequenceFileFlags) String() string {
 	var parts []string
 	if e&KMusicSequenceFileFlags_EraseFile != 0 {
@@ -421,6 +437,8 @@ const (
 	KMusicSequenceFile_iMelodyType MusicSequenceFileTypeID = 1768777068
 )
 
+// String returns the MusicSequenceFileTypeID constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MusicSequenceFileTypeID) String() string {
 	switch e {
 	case KMusicSequenceFile_AnyType:
@@ -444,6 +462,8 @@ const (
 	KMusicSequenceLoadSMF_ChannelsToTracks MusicSequenceLoadFlags = 1
 )
 
+// String returns the MusicSequenceLoadFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MusicSequenceLoadFlags) String() string {
 	var parts []string
 	if e&KMusicSequenceLoadSMF_ChannelsToTracks != 0 {
@@ -467,6 +487,8 @@ const (
 	KMusicSequenceType_Samples MusicSequenceType = 1935764848
 )
 
+// String returns the MusicSequenceType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MusicSequenceType) String() string {
 	switch e {
 	case KMusicSequenceType_Beats:

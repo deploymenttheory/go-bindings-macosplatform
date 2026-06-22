@@ -6,17 +6,19 @@ package mapkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An annotation view that displays a pin image on the map.
-//
 // PinAnnotationView is an idiomatic wrapper over the Objective-C class MKPinAnnotationView.
+//
+// It embeds [AnnotationView], promoting that type's methods.
+//
+// An annotation view that displays a pin image on the map.
 type PinAnnotationView struct {
-	objref.Handle
+	AnnotationView
 }
 
 // PinAnnotationViewFromID adopts an existing Objective-C object as a PinAnnotationView
@@ -25,7 +27,8 @@ func PinAnnotationViewFromID(id objc.ID) *PinAnnotationView {
 	if id == 0 {
 		return nil
 	}
-	x := &PinAnnotationView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PinAnnotationView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func pinAnnotationViewAdopt(id objc.ID) *PinAnnotationView {
 	if id == 0 {
 		return nil
 	}
-	x := &PinAnnotationView{Handle: objref.Wrap(id)}
+	x := &PinAnnotationView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PinAnnotationView) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PinAnnotationView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PinAnnotationView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPinAnnotationView creates a new PinAnnotationView.
@@ -64,173 +53,173 @@ func NewPinAnnotationView() *PinAnnotationView {
 	return pinAnnotationViewAdopt(_id)
 }
 
-// The color of the pin head.
-//
-// WithPinTintColor sets pinTintColor and returns the receiver so calls can be chained.
+// WithPinTintColor the color of the pin head.
 func (x *PinAnnotationView) WithPinTintColor(pinTintColor obj.Object) *PinAnnotationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPinTintColor:"), objref.IDOf(pinTintColor))
 	return x
 }
 
-// A Boolean value indicating whether the annotation view is animated onto the screen.
-//
-// WithAnimatesDrop sets animatesDrop and returns the receiver so calls can be chained.
+// WithAnimatesDrop a Boolean value indicating whether the annotation view is animated onto the screen.
 func (x *PinAnnotationView) WithAnimatesDrop(animatesDrop bool) *PinAnnotationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimatesDrop:"), animatesDrop)
 	return x
 }
 
-// The color of the pin head.
-//
-// WithPinColor sets pinColor and returns the receiver so calls can be chained.
+// WithPinColor the color of the pin head.
 func (x *PinAnnotationView) WithPinColor(pinColor PinAnnotationColor) *PinAnnotationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPinColor:"), pinColor)
 	return x
 }
 
-// The image the annotation view displays.
-//
-// WithImage sets image and returns the receiver so calls can be chained.
+// WithImage the image the annotation view displays.
 func (x *PinAnnotationView) WithImage(image obj.Object) *PinAnnotationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
-// A Boolean value that indicates whether the annotation is in an enabled state.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithCenterOffset the offset (in points) at which to display the view.
+func (x *PinAnnotationView) WithCenterOffset(centerOffset corefoundation.CGPoint) *PinAnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCenterOffset:"), centerOffset)
+	return x
+}
+
+// WithAccessoryOffset an offset that changes the accessory’s default anchor point.
+func (x *PinAnnotationView) WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *PinAnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryOffset:"), accessoryOffset)
+	return x
+}
+
+// WithCalloutOffset the offset (in points) at which to place the callout.
+func (x *PinAnnotationView) WithCalloutOffset(calloutOffset corefoundation.CGPoint) *PinAnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalloutOffset:"), calloutOffset)
+	return x
+}
+
+// WithLeftCalloutOffset the offset in points from the middle-left of the annotation view.
+func (x *PinAnnotationView) WithLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) *PinAnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeftCalloutOffset:"), leftCalloutOffset)
+	return x
+}
+
+// WithRightCalloutOffset the offset in points from the middle-right of the annotation view.
+func (x *PinAnnotationView) WithRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) *PinAnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRightCalloutOffset:"), rightCalloutOffset)
+	return x
+}
+
+// WithEnabled a Boolean value that indicates whether the annotation is in an enabled state.
 func (x *PinAnnotationView) WithEnabled(enabled bool) *PinAnnotationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A Boolean value that indicates whether the map view highlights the annotation view.
-//
-// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
+// WithHighlighted a Boolean value that indicates whether the map view highlights the annotation view.
 func (x *PinAnnotationView) WithHighlighted(highlighted bool) *PinAnnotationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// A Boolean value that indicates whether the annotation view is in a selected state.
-//
-// WithSelected sets selected and returns the receiver so calls can be chained.
+// WithSelected a Boolean value that indicates whether the annotation view is in a selected state.
 func (x *PinAnnotationView) WithSelected(selected bool) *PinAnnotationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelected:"), selected)
 	return x
 }
 
-// A Boolean value that indicates whether the annotation view is able to display extra information in a callout.
-//
-// WithCanShowCallout sets canShowCallout and returns the receiver so calls can be chained.
+// WithCanShowCallout a Boolean value that indicates whether the annotation view is able to display extra information in a callout.
 func (x *PinAnnotationView) WithCanShowCallout(canShowCallout bool) *PinAnnotationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanShowCallout:"), canShowCallout)
 	return x
 }
 
-// The view to display on the left side of the standard callout.
-//
-// WithLeftCalloutAccessoryView sets leftCalloutAccessoryView and returns the receiver so calls can be chained.
+// WithLeftCalloutAccessoryView the view to display on the left side of the standard callout.
 func (x *PinAnnotationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView obj.Object) *PinAnnotationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeftCalloutAccessoryView:"), objref.IDOf(leftCalloutAccessoryView))
 	return x
 }
 
-// The view to display on the right side of the standard callout.
-//
-// WithRightCalloutAccessoryView sets rightCalloutAccessoryView and returns the receiver so calls can be chained.
+// WithRightCalloutAccessoryView the view to display on the right side of the standard callout.
 func (x *PinAnnotationView) WithRightCalloutAccessoryView(rightCalloutAccessoryView obj.Object) *PinAnnotationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRightCalloutAccessoryView:"), objref.IDOf(rightCalloutAccessoryView))
 	return x
 }
 
-// The detail accessory view to use in the standard callout.
-//
-// WithDetailCalloutAccessoryView sets detailCalloutAccessoryView and returns the receiver so calls can be chained.
+// WithDetailCalloutAccessoryView the detail accessory view to use in the standard callout.
 func (x *PinAnnotationView) WithDetailCalloutAccessoryView(detailCalloutAccessoryView obj.Object) *PinAnnotationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetailCalloutAccessoryView:"), objref.IDOf(detailCalloutAccessoryView))
 	return x
 }
 
-// A Boolean value that indicates whether the annotation view is draggable.
-//
-// WithDraggable sets draggable and returns the receiver so calls can be chained.
+// WithDraggable a Boolean value that indicates whether the annotation view is draggable.
 func (x *PinAnnotationView) WithDraggable(draggable bool) *PinAnnotationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDraggable:"), draggable)
 	return x
 }
 
-// The drag state of the annotation view.
-//
-// WithDragState sets dragState and returns the receiver so calls can be chained.
+// WithDragState the drag state of the annotation view.
 func (x *PinAnnotationView) WithDragState(dragState AnnotationViewDragState) *PinAnnotationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDragState:"), dragState)
 	return x
 }
 
-// An identifier that determines whether the annotation view participates in clustering.
-//
-// WithClusteringIdentifier sets clusteringIdentifier and returns the receiver so calls can be chained.
+// WithClusteringIdentifier an identifier that determines whether the annotation view participates in clustering.
 func (x *PinAnnotationView) WithClusteringIdentifier(clusteringIdentifier string) *PinAnnotationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClusteringIdentifier:"), purego.NSString(clusteringIdentifier))
 	return x
 }
 
-// The display priority of the annotation view.
-//
-// WithDisplayPriority sets displayPriority and returns the receiver so calls can be chained.
+// WithDisplayPriority the display priority of the annotation view.
 func (x *PinAnnotationView) WithDisplayPriority(displayPriority float32) *PinAnnotationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayPriority:"), displayPriority)
 	return x
 }
 
-// The relative importance of the annotation view when in an unselected state with respect to its ordering along the z-axis.
-//
-// WithZPriority sets zPriority and returns the receiver so calls can be chained.
+// WithZPriority the relative importance of the annotation view when in an unselected state with respect to its ordering along the z-axis.
 func (x *PinAnnotationView) WithZPriority(zPriority float32) *PinAnnotationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPriority:"), zPriority)
 	return x
 }
 
-// The relative importance of the annotation view when in a selected state with respect to its ordering along the z-axis.
-//
-// WithSelectedZPriority sets selectedZPriority and returns the receiver so calls can be chained.
+// WithSelectedZPriority the relative importance of the annotation view when in a selected state with respect to its ordering along the z-axis.
 func (x *PinAnnotationView) WithSelectedZPriority(selectedZPriority float32) *PinAnnotationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedZPriority:"), selectedZPriority)
 	return x
 }
 
-// The collision mode to use when interpreting the collision frame rectangle.
-//
-// WithCollisionMode sets collisionMode and returns the receiver so calls can be chained.
+// WithCollisionMode the collision mode to use when interpreting the collision frame rectangle.
 func (x *PinAnnotationView) WithCollisionMode(collisionMode AnnotationViewCollisionMode) *PinAnnotationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollisionMode:"), collisionMode)
 	return x
 }
 
+// PinTintColor wraps the corresponding Objective-C method.
 func (x *PinAnnotationView) PinTintColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pinTintColor"))
 	return obj.Wrap(_r)
 }
 
+// SetPinTintColor wraps the corresponding Objective-C method.
 func (x *PinAnnotationView) SetPinTintColor(pinTintColor obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPinTintColor:"), objref.IDOf(pinTintColor))
 }
 
+// AnimatesDrop wraps the corresponding Objective-C method.
 func (x *PinAnnotationView) AnimatesDrop() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("animatesDrop"))
 	return _r
 }
 
+// SetAnimatesDrop wraps the corresponding Objective-C method.
 func (x *PinAnnotationView) SetAnimatesDrop(animatesDrop bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimatesDrop:"), animatesDrop)
 }
 
+// PinColor wraps the corresponding Objective-C method.
 func (x *PinAnnotationView) PinColor() PinAnnotationColor {
 	_r := objc.Send[PinAnnotationColor](objref.IDOf(x), objc.RegisterName("pinColor"))
 	return _r
 }
 
+// SetPinColor wraps the corresponding Objective-C method.
 func (x *PinAnnotationView) SetPinColor(pinColor PinAnnotationColor) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPinColor:"), pinColor)
 }
@@ -242,6 +231,11 @@ type PinAnnotationViewable interface {
 	WithAnimatesDrop(animatesDrop bool) *PinAnnotationView
 	WithPinColor(pinColor PinAnnotationColor) *PinAnnotationView
 	WithImage(image obj.Object) *PinAnnotationView
+	WithCenterOffset(centerOffset corefoundation.CGPoint) *PinAnnotationView
+	WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *PinAnnotationView
+	WithCalloutOffset(calloutOffset corefoundation.CGPoint) *PinAnnotationView
+	WithLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) *PinAnnotationView
+	WithRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) *PinAnnotationView
 	WithEnabled(enabled bool) *PinAnnotationView
 	WithHighlighted(highlighted bool) *PinAnnotationView
 	WithSelected(selected bool) *PinAnnotationView
@@ -265,3 +259,5 @@ type PinAnnotationViewable interface {
 }
 
 var _ PinAnnotationViewable = (*PinAnnotationView)(nil)
+
+var _ AnnotationViewProvider = (*PinAnnotationView)(nil)

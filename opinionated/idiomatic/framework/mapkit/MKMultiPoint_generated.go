@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that defines the common behavior that open and closed polygon overlays share.
-//
 // MultiPoint is an idiomatic wrapper over the Objective-C class MKMultiPoint.
+//
+// MultiPoint is an abstract base — you do not construct it directly. Construct one of [Polygon], [Polyline] and pass it where a MultiPoint is accepted.
+//
+// An abstract class that defines the common behavior that open and closed polygon overlays share.
 type MultiPoint struct {
-	objref.Handle
+	Shape
 }
 
 // MultiPointFromID adopts an existing Objective-C object as a MultiPoint
@@ -25,7 +26,8 @@ func MultiPointFromID(id objc.ID) *MultiPoint {
 	if id == 0 {
 		return nil
 	}
-	x := &MultiPoint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MultiPoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,60 +40,37 @@ func multiPointAdopt(id objc.ID) *MultiPoint {
 	if id == 0 {
 		return nil
 	}
-	x := &MultiPoint{Handle: objref.Wrap(id)}
+	x := &MultiPoint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MultiPoint) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MultiPoint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MultiPoint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewMultiPoint creates a new MultiPoint.
-func NewMultiPoint() *MultiPoint {
-	_id := objc.Send[objc.ID](objc.ID(_class("MKMultiPoint")), objc.RegisterName("new"))
-	return multiPointAdopt(_id)
-}
-
-// The title of the shape annotation.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the title of the shape annotation.
 func (x *MultiPoint) WithTitle(title string) *MultiPoint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The subtitle of the shape annotation.
-//
-// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
+// WithSubtitle the subtitle of the shape annotation.
 func (x *MultiPoint) WithSubtitle(subtitle string) *MultiPoint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
-// Translates a point index into a unit distance along the shape.
+// LocationAtPointIndex translates a point index into a unit distance along the shape.
 func (x *MultiPoint) LocationAtPointIndex(index int) float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("locationAtPointIndex:"), index)
 	return _r
 }
 
-// Returns a set of unit distance values that correspond to the point indexes along the shape.
+// LocationsAtPointIndexes returns a set of unit distance values that correspond to the point indexes along the shape.
 func (x *MultiPoint) LocationsAtPointIndexes(indexes obj.Object) []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locationsAtPointIndexes:"), objref.IDOf(indexes))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// PointCount wraps the corresponding Objective-C method.
 func (x *MultiPoint) PointCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pointCount"))
 	return _r
@@ -108,3 +87,12 @@ type MultiPointable interface {
 }
 
 var _ MultiPointable = (*MultiPoint)(nil)
+
+// isMultiPoint marks MultiPoint — and, by embedding promotion, its
+// subclasses — as a member of the MultiPoint hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MultiPoint) isMultiPoint() {}
+
+var _ MultiPointProvider = (*MultiPoint)(nil)
+
+var _ ShapeProvider = (*MultiPoint)(nil)

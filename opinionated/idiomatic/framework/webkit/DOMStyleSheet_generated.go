@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMStyleSheet is an idiomatic wrapper over the Objective-C class DOMStyleSheet.
+//
+// DOMStyleSheet is an abstract base — you do not construct it directly. Construct one of [DOMCSSStyleSheet] and pass it where a DOMStyleSheet is accepted.
 type DOMStyleSheet struct {
-	objref.Handle
+	DOMObject
 }
 
 // DOMStyleSheetFromID adopts an existing Objective-C object as a DOMStyleSheet
@@ -23,7 +24,8 @@ func DOMStyleSheetFromID(id objc.ID) *DOMStyleSheet {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMStyleSheet{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMStyleSheet{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,38 +38,19 @@ func dOMStyleSheetAdopt(id objc.ID) *DOMStyleSheet {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMStyleSheet{Handle: objref.Wrap(id)}
+	x := &DOMStyleSheet{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *DOMStyleSheet) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMStyleSheet) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMStyleSheet) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewDOMStyleSheet creates a new DOMStyleSheet.
-func NewDOMStyleSheet() *DOMStyleSheet {
-	_id := objc.Send[objc.ID](objc.ID(_class("DOMStyleSheet")), objc.RegisterName("new"))
-	return dOMStyleSheetAdopt(_id)
-}
-
-// WithDisabled sets disabled and returns the receiver so calls can be chained.
+// WithDisabled sets the property and returns the receiver so calls can be chained.
 func (x *DOMStyleSheet) WithDisabled(disabled bool) *DOMStyleSheet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabled:"), disabled)
 	return x
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *DOMStyleSheet) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
 	if _r == 0 {
@@ -76,25 +59,30 @@ func (x *DOMStyleSheet) Type() string {
 	return purego.GoString(_r)
 }
 
+// Disabled wraps the corresponding Objective-C method.
 func (x *DOMStyleSheet) Disabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("disabled"))
 	return _r
 }
 
+// SetDisabled wraps the corresponding Objective-C method.
 func (x *DOMStyleSheet) SetDisabled(disabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabled:"), disabled)
 }
 
+// OwnerNode wraps the corresponding Objective-C method.
 func (x *DOMStyleSheet) OwnerNode() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ownerNode"))
 	return DOMNodeFromID(_r)
 }
 
+// ParentStyleSheet wraps the corresponding Objective-C method.
 func (x *DOMStyleSheet) ParentStyleSheet() *DOMStyleSheet {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentStyleSheet"))
 	return DOMStyleSheetFromID(_r)
 }
 
+// Href wraps the corresponding Objective-C method.
 func (x *DOMStyleSheet) Href() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("href"))
 	if _r == 0 {
@@ -103,6 +91,7 @@ func (x *DOMStyleSheet) Href() string {
 	return purego.GoString(_r)
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *DOMStyleSheet) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -111,6 +100,7 @@ func (x *DOMStyleSheet) Title() string {
 	return purego.GoString(_r)
 }
 
+// Media wraps the corresponding Objective-C method.
 func (x *DOMStyleSheet) Media() *DOMMediaList {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("media"))
 	return DOMMediaListFromID(_r)
@@ -131,3 +121,14 @@ type DOMStyleSheetable interface {
 }
 
 var _ DOMStyleSheetable = (*DOMStyleSheet)(nil)
+
+// isDOMStyleSheet marks DOMStyleSheet — and, by embedding promotion, its
+// subclasses — as a member of the DOMStyleSheet hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DOMStyleSheet) isDOMStyleSheet() {}
+
+var _ DOMStyleSheetProvider = (*DOMStyleSheet)(nil)
+
+var _ DOMObjectProvider = (*DOMStyleSheet)(nil)
+
+var _ WebScriptObjectProvider = (*DOMStyleSheet)(nil)

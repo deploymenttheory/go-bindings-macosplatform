@@ -23,7 +23,8 @@ func MTRDoorLockClusterDoorStateChangeEventFromID(id objc.ID) *MTRDoorLockCluste
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDoorLockClusterDoorStateChangeEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDoorLockClusterDoorStateChangeEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDoorLockClusterDoorStateChangeEventAdopt(id objc.ID) *MTRDoorLockCluster
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDoorLockClusterDoorStateChangeEvent{Handle: objref.Wrap(id)}
+	x := &MTRDoorLockClusterDoorStateChangeEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTRDoorLockClusterDoorStateChangeEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDoorLockClusterDoorStateChangeEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDoorLockClusterDoorStateChangeEvent creates a new MTRDoorLockClusterDoorStateChangeEvent.
 func NewMTRDoorLockClusterDoorStateChangeEvent() *MTRDoorLockClusterDoorStateChangeEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDoorLockClusterDoorStateChangeEvent")), objc.RegisterName("new"))
 	return mTRDoorLockClusterDoorStateChangeEventAdopt(_id)
 }
 
-// WithDoorState sets doorState and returns the receiver so calls can be chained.
+// WithDoorState sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterDoorStateChangeEvent) WithDoorState(doorState obj.Object) *MTRDoorLockClusterDoorStateChangeEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoorState:"), objref.IDOf(doorState))
 	return x
 }
 
+// DoorState wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterDoorStateChangeEvent) DoorState() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("doorState"))
 	return obj.Wrap(_r)
 }
 
+// SetDoorState wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterDoorStateChangeEvent) SetDoorState(doorState obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoorState:"), objref.IDOf(doorState))
 }

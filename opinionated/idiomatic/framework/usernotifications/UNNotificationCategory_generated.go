@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type of notification your app supports and the custom actions that the system displays.
-//
 // NotificationCategory is an idiomatic wrapper over the Objective-C class UNNotificationCategory.
+//
+// A type of notification your app supports and the custom actions that the system displays.
 type NotificationCategory struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NotificationCategoryFromID(id objc.ID) *NotificationCategory {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationCategory{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NotificationCategory{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func notificationCategoryAdopt(id objc.ID) *NotificationCategory {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationCategory{Handle: objref.Wrap(id)}
+	x := &NotificationCategory{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *NotificationCategory) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationCategory) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNotificationCategory creates a new NotificationCategory.
 func NewNotificationCategory() *NotificationCategory {
 	_id := objc.Send[objc.ID](objc.ID(_class("UNNotificationCategory")), objc.RegisterName("new"))
 	return notificationCategoryAdopt(_id)
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *NotificationCategory) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -72,23 +81,29 @@ func (x *NotificationCategory) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// Actions wraps the corresponding Objective-C method.
+//
 // Actions returns the collection as a Go slice.
 func (x *NotificationCategory) Actions() []*NotificationAction {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NotificationAction { return NotificationActionFromID(_id) })
 }
 
+// IntentIdentifiers wraps the corresponding Objective-C method.
+//
 // IntentIdentifiers returns the collection as a Go slice.
 func (x *NotificationCategory) IntentIdentifiers() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intentIdentifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// Options wraps the corresponding Objective-C method.
 func (x *NotificationCategory) Options() NotificationCategoryOptions {
 	_r := objc.Send[NotificationCategoryOptions](objref.IDOf(x), objc.RegisterName("options"))
 	return _r
 }
 
+// HiddenPreviewsBodyPlaceholder wraps the corresponding Objective-C method.
 func (x *NotificationCategory) HiddenPreviewsBodyPlaceholder() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hiddenPreviewsBodyPlaceholder"))
 	if _r == 0 {
@@ -97,7 +112,7 @@ func (x *NotificationCategory) HiddenPreviewsBodyPlaceholder() string {
 	return purego.GoString(_r)
 }
 
-// A format string for a summary description when notifications from this category are grouped together. It should contain descriptive text and format arguments that will be replaced with the information from the notifications that have been grouped together. The arguments are replaced with the number of notifications and the list created by joining the argument in each grouped notification. For example: "%u new messages from %
+// CategorySummaryFormat a format string for a summary description when notifications from this category are grouped together. It should contain descriptive text and format arguments that will be replaced with the information from the notifications that have been grouped together. The arguments are replaced with the number of notifications and the list created by joining the argument in each grouped notification. For example: "%u new messages from %
 func (x *NotificationCategory) CategorySummaryFormat() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("categorySummaryFormat"))
 	if _r == 0 {

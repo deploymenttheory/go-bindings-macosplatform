@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract superclass for objects that provide input data to a capture session.
-//
 // CaptureInput is an idiomatic wrapper over the Objective-C class AVCaptureInput.
+//
+// CaptureInput is an abstract base — you do not construct it directly. Construct one of [CaptureDeviceInput], [CaptureScreenInput] and pass it where a CaptureInput is accepted.
+//
+// An abstract superclass for objects that provide input data to a capture session.
 type CaptureInput struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func CaptureInputFromID(id objc.ID) *CaptureInput {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureInput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptureInput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func captureInputAdopt(id objc.ID) *CaptureInput {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureInput{Handle: objref.Wrap(id)}
+	x := &CaptureInput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +62,14 @@ func (x *CaptureInput) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewCaptureInput creates a new CaptureInput.
-func NewCaptureInput() *CaptureInput {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureInput")), objc.RegisterName("new"))
-	return captureInputAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptureInput) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// Ports wraps the corresponding Objective-C method.
+//
 // Ports returns the collection as a Go slice.
 func (x *CaptureInput) Ports() []*CaptureInputPort {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ports"))
@@ -77,3 +83,10 @@ type CaptureInputable interface {
 }
 
 var _ CaptureInputable = (*CaptureInput)(nil)
+
+// isCaptureInput marks CaptureInput — and, by embedding promotion, its
+// subclasses — as a member of the CaptureInput hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CaptureInput) isCaptureInput() {}
+
+var _ CaptureInputProvider = (*CaptureInput)(nil)

@@ -20,6 +20,8 @@ const (
 	AttributionViewBackgroundStyleMaterial AttributionViewBackgroundStyle = 2
 )
 
+// String returns the AttributionViewBackgroundStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AttributionViewBackgroundStyle) String() string {
 	switch e {
 	case AttributionViewBackgroundStyleDefault:
@@ -43,6 +45,8 @@ const (
 	AttributionViewDisplayContextDetail AttributionViewDisplayContext = 1
 )
 
+// String returns the AttributionViewDisplayContext constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AttributionViewDisplayContext) String() string {
 	switch e {
 	case AttributionViewDisplayContextSummary:
@@ -68,6 +72,8 @@ const (
 	AttributionViewHorizontalAlignmentTrailing AttributionViewHorizontalAlignment = 3
 )
 
+// String returns the AttributionViewHorizontalAlignment constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AttributionViewHorizontalAlignment) String() string {
 	switch e {
 	case AttributionViewHorizontalAlignmentDefault:
@@ -97,6 +103,8 @@ const (
 	HighlightCenterErrorCodeAccessDenied HighlightCenterErrorCode = 3
 )
 
+// String returns the HighlightCenterErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HighlightCenterErrorCode) String() string {
 	switch e {
 	case HighlightCenterErrorCodeNoError:
@@ -122,6 +130,8 @@ const (
 	HighlightChangeEventTriggerComment HighlightChangeEventTrigger = 2
 )
 
+// String returns the HighlightChangeEventTrigger constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HighlightChangeEventTrigger) String() string {
 	switch e {
 	case HighlightChangeEventTriggerEdit:
@@ -143,6 +153,8 @@ const (
 	HighlightMembershipEventTriggerRemovedCollaborator HighlightMembershipEventTrigger = 2
 )
 
+// String returns the HighlightMembershipEventTrigger constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HighlightMembershipEventTrigger) String() string {
 	switch e {
 	case HighlightMembershipEventTriggerAddedCollaborator:
@@ -168,6 +180,8 @@ const (
 	HighlightPersistenceEventTriggerMoved HighlightPersistenceEventTrigger = 4
 )
 
+// String returns the HighlightPersistenceEventTrigger constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HighlightPersistenceEventTrigger) String() string {
 	switch e {
 	case HighlightPersistenceEventTriggerCreated:

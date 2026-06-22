@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specification for dynamic per-node data used with a custom shader.
-//
 // Attribute is an idiomatic wrapper over the Objective-C class SKAttribute.
+//
+// A specification for dynamic per-node data used with a custom shader.
 type Attribute struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AttributeFromID(id objc.ID) *Attribute {
 	if id == 0 {
 		return nil
 	}
-	x := &Attribute{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Attribute{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func attributeAdopt(id objc.ID) *Attribute {
 	if id == 0 {
 		return nil
 	}
-	x := &Attribute{Handle: objref.Wrap(id)}
+	x := &Attribute{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *Attribute) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates and initializes a new attribute object of a specified type with a name that can be referenced within the shader.
-//
-// NewAttributeWithNameType creates a new Attribute.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Attribute) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAttributeWithNameType creates and initializes a new attribute object of a specified type with a name that can be referenced within the shader.
 func NewAttributeWithNameType(name string, type_ AttributeType) *Attribute {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKAttribute")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:type:"), purego.NSString(name), type_)
 	return attributeAdopt(_id)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *Attribute) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -75,6 +82,7 @@ func (x *Attribute) Name() string {
 	return purego.GoString(_r)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *Attribute) Type() AttributeType {
 	_r := objc.Send[AttributeType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r

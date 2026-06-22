@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a location update.
-//
 // Update is an idiomatic wrapper over the Objective-C class CLUpdate.
+//
+// An object that represents a location update.
 type Update struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func UpdateFromID(id objc.ID) *Update {
 	if id == 0 {
 		return nil
 	}
-	x := &Update{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Update{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func updateAdopt(id objc.ID) *Update {
 	if id == 0 {
 		return nil
 	}
-	x := &Update{Handle: objref.Wrap(id)}
+	x := &Update{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,57 +60,73 @@ func (x *Update) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Update) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewUpdate creates a new Update.
 func NewUpdate() *Update {
 	_id := objc.Send[objc.ID](objc.ID(_class("CLUpdate")), objc.RegisterName("new"))
 	return updateAdopt(_id)
 }
 
+// AuthorizationDenied wraps the corresponding Objective-C method.
 func (x *Update) AuthorizationDenied() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationDenied"))
 	return _r
 }
 
+// AuthorizationDeniedGlobally wraps the corresponding Objective-C method.
 func (x *Update) AuthorizationDeniedGlobally() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationDeniedGlobally"))
 	return _r
 }
 
+// AuthorizationRestricted wraps the corresponding Objective-C method.
 func (x *Update) AuthorizationRestricted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationRestricted"))
 	return _r
 }
 
+// IsStationary wraps the corresponding Objective-C method.
 func (x *Update) IsStationary() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStationary"))
 	return _r
 }
 
+// Stationary wraps the corresponding Objective-C method.
 func (x *Update) Stationary() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("stationary"))
 	return _r
 }
 
+// InsufficientlyInUse wraps the corresponding Objective-C method.
 func (x *Update) InsufficientlyInUse() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("insufficientlyInUse"))
 	return _r
 }
 
+// LocationUnavailable wraps the corresponding Objective-C method.
 func (x *Update) LocationUnavailable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("locationUnavailable"))
 	return _r
 }
 
+// AccuracyLimited wraps the corresponding Objective-C method.
 func (x *Update) AccuracyLimited() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("accuracyLimited"))
 	return _r
 }
 
+// ServiceSessionRequired wraps the corresponding Objective-C method.
 func (x *Update) ServiceSessionRequired() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("serviceSessionRequired"))
 	return _r
 }
 
+// AuthorizationRequestInProgress wraps the corresponding Objective-C method.
 func (x *Update) AuthorizationRequestInProgress() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationRequestInProgress"))
 	return _r

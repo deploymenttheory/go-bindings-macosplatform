@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The IMKServer class manages client connections to your input method. When you write the main function for your input method, you create an IMKServer object. You should never need to override this class.
-//
 // Server is an idiomatic wrapper over the Objective-C class IMKServer.
+//
+// The IMKServer class manages client connections to your input method. When you write the main function for your input method, you create an IMKServer object. You should never need to override this class.
 type Server struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ServerFromID(id objc.ID) *Server {
 	if id == 0 {
 		return nil
 	}
-	x := &Server{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Server{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func serverAdopt(id objc.ID) *Server {
 	if id == 0 {
 		return nil
 	}
-	x := &Server{Handle: objref.Wrap(id)}
+	x := &Server{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,32 @@ func (x *Server) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates and returns a server object from property list information contained in the provided bundle.
-//
-// NewServerWithNameBundleIdentifier creates a new Server.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Server) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewServerWithNameBundleIdentifier creates and returns a server object from property list information contained in the provided bundle.
 func NewServerWithNameBundleIdentifier(name string, bundleIdentifier string) *Server {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IMKServer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:bundleIdentifier:"), purego.NSString(name), purego.NSString(bundleIdentifier))
 	return serverAdopt(_id)
 }
 
-// Returns an NSBundle object for the input method.
+// Bundle returns an NSBundle object for the input method.
 func (x *Server) Bundle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundle"))
 	return obj.Wrap(_r)
 }
 
-// Call this before terminating a palette IM. Palettes need to be able to terminate.  When this method is called the IMKServer will notify each client of the palette that the palette is about to terminate.  The palette can terminate safely if a value of YES is returned.  If the caller of this method is not an input method of type palette an exception will be thrown. If the method returns NO the palette should not terminate.
+// PaletteWillTerminate call this before terminating a palette IM. Palettes need to be able to terminate.  When this method is called the IMKServer will notify each client of the palette that the palette is about to terminate.  The palette can terminate safely if a value of YES is returned.  If the caller of this method is not an input method of type palette an exception will be thrown. If the method returns NO the palette should not terminate.
 func (x *Server) PaletteWillTerminate() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("paletteWillTerminate"))
 	return _r
 }
 
-// Returns a BOOL indicating whether or not the last key press was a dead key.
+// LastKeyEventWasDeadKey returns a BOOL indicating whether or not the last key press was a dead key.
 func (x *Server) LastKeyEventWasDeadKey() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("lastKeyEventWasDeadKey"))
 	return _r

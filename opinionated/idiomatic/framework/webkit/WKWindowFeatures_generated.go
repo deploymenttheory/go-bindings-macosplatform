@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Display-related attributes that a webpage requests for its window.
-//
 // WKWindowFeatures is an idiomatic wrapper over the Objective-C class WKWindowFeatures.
+//
+// Display-related attributes that a webpage requests for its window.
 type WKWindowFeatures struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKWindowFeaturesFromID(id objc.ID) *WKWindowFeatures {
 	if id == 0 {
 		return nil
 	}
-	x := &WKWindowFeatures{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKWindowFeatures{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKWindowFeaturesAdopt(id objc.ID) *WKWindowFeatures {
 	if id == 0 {
 		return nil
 	}
-	x := &WKWindowFeatures{Handle: objref.Wrap(id)}
+	x := &WKWindowFeatures{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,55 +60,61 @@ func (x *WKWindowFeatures) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKWindowFeatures) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKWindowFeatures creates a new WKWindowFeatures.
 func NewWKWindowFeatures() *WKWindowFeatures {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKWindowFeatures")), objc.RegisterName("new"))
 	return wKWindowFeaturesAdopt(_id)
 }
 
-// BOOL. Whether the menu bar should be visible. nil if menu bar visibility was not specified.
+// MenuBarVisibility BOOL. Whether the menu bar should be visible. nil if menu bar visibility was not specified.
 func (x *WKWindowFeatures) MenuBarVisibility() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuBarVisibility"))
 	return obj.Wrap(_r)
 }
 
-// BOOL. Whether the status bar should be visible. nil if status bar visibility was not specified.
+// StatusBarVisibility BOOL. Whether the status bar should be visible. nil if status bar visibility was not specified.
 func (x *WKWindowFeatures) StatusBarVisibility() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statusBarVisibility"))
 	return obj.Wrap(_r)
 }
 
-// BOOL. Whether toolbars should be visible. nil if toolbar visibility was not specified.
+// ToolbarsVisibility BOOL. Whether toolbars should be visible. nil if toolbar visibility was not specified.
 func (x *WKWindowFeatures) ToolbarsVisibility() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toolbarsVisibility"))
 	return obj.Wrap(_r)
 }
 
-// BOOL. Whether the containing window should be resizable. nil if resizability was not specified.
+// AllowsResizing BOOL. Whether the containing window should be resizable. nil if resizability was not specified.
 func (x *WKWindowFeatures) AllowsResizing() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowsResizing"))
 	return obj.Wrap(_r)
 }
 
-// CGFloat. The x coordinate of the containing window. nil if the x coordinate was not specified.
+// X CGFloat. The x coordinate of the containing window. nil if the x coordinate was not specified.
 func (x *WKWindowFeatures) X() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("x"))
 	return obj.Wrap(_r)
 }
 
-// CGFloat. The y coordinate of the containing window. nil if the y coordinate was not specified.
+// Y CGFloat. The y coordinate of the containing window. nil if the y coordinate was not specified.
 func (x *WKWindowFeatures) Y() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("y"))
 	return obj.Wrap(_r)
 }
 
-// CGFloat. The width coordinate of the containing window. nil if the width was not specified.
+// Width CGFloat. The width coordinate of the containing window. nil if the width was not specified.
 func (x *WKWindowFeatures) Width() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("width"))
 	return obj.Wrap(_r)
 }
 
-// CGFloat. The height coordinate of the containing window. nil if the height was not specified.
+// Height CGFloat. The height coordinate of the containing window. nil if the height was not specified.
 func (x *WKWindowFeatures) Height() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("height"))
 	return obj.Wrap(_r)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains both input and output parameters that the super-resolution processor needs to run on a frame.
-//
 // SuperResolutionScalerParameters is an idiomatic wrapper over the Objective-C class VTSuperResolutionScalerParameters.
+//
+// An object that contains both input and output parameters that the super-resolution processor needs to run on a frame.
 type SuperResolutionScalerParameters struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SuperResolutionScalerParametersFromID(id objc.ID) *SuperResolutionScalerPar
 	if id == 0 {
 		return nil
 	}
-	x := &SuperResolutionScalerParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SuperResolutionScalerParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func superResolutionScalerParametersAdopt(id objc.ID) *SuperResolutionScalerPara
 	if id == 0 {
 		return nil
 	}
-	x := &SuperResolutionScalerParameters{Handle: objref.Wrap(id)}
+	x := &SuperResolutionScalerParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,46 +60,50 @@ func (x *SuperResolutionScalerParameters) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new super-resolution scaler parameters instance.
-//
-// NewSuperResolutionScalerParametersWithSourceFramePreviousFramePreviousOutputFrameOpticalFlowSubmissionModeDestinationFrame creates a new SuperResolutionScalerParameters.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SuperResolutionScalerParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSuperResolutionScalerParametersWithSourceFramePreviousFramePreviousOutputFrameOpticalFlowSubmissionModeDestinationFrame creates a new super-resolution scaler parameters instance.
 func NewSuperResolutionScalerParametersWithSourceFramePreviousFramePreviousOutputFrameOpticalFlowSubmissionModeDestinationFrame(sourceFrame *FrameProcessorFrame, previousFrame *FrameProcessorFrame, previousOutputFrame *FrameProcessorFrame, opticalFlow *FrameProcessorOpticalFlow, submissionMode SuperResolutionScalerParametersSubmissionMode, destinationFrame *FrameProcessorFrame) *SuperResolutionScalerParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VTSuperResolutionScalerParameters")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:previousFrame:previousOutputFrame:opticalFlow:submissionMode:destinationFrame:"), objref.IDOf(sourceFrame), objref.IDOf(previousFrame), objref.IDOf(previousOutputFrame), objref.IDOf(opticalFlow), submissionMode, objref.IDOf(destinationFrame))
 	return superResolutionScalerParametersAdopt(_id)
 }
 
-// Current source frame, which must be non `nil`.
+// SourceFrame current source frame, which must be non `nil`.
 func (x *SuperResolutionScalerParameters) SourceFrame() *FrameProcessorFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// Previous source frame in presentation time order, which is `nil` for the first frame.
+// PreviousFrame previous source frame in presentation time order, which is `nil` for the first frame.
 func (x *SuperResolutionScalerParameters) PreviousFrame() *FrameProcessorFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// Previous output frame in presentation time order, which is `nil` for the first frame.
+// PreviousOutputFrame previous output frame in presentation time order, which is `nil` for the first frame.
 func (x *SuperResolutionScalerParameters) PreviousOutputFrame() *FrameProcessorFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousOutputFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// Optional object that contains forward and backward optical flow with the previous frame. You only need this if optical flow is pre-computed. For the first frame this is `nil`.
+// OpticalFlow optional object that contains forward and backward optical flow with the previous frame. You only need this if optical flow is pre-computed. For the first frame this is `nil`.
 func (x *SuperResolutionScalerParameters) OpticalFlow() *FrameProcessorOpticalFlow {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("opticalFlow"))
 	return FrameProcessorOpticalFlowFromID(_r)
 }
 
-// Ordering of the input frames in this submission relative to the previous submission.
+// SubmissionMode ordering of the input frames in this submission relative to the previous submission.
 func (x *SuperResolutionScalerParameters) SubmissionMode() SuperResolutionScalerParametersSubmissionMode {
 	_r := objc.Send[SuperResolutionScalerParametersSubmissionMode](objref.IDOf(x), objc.RegisterName("submissionMode"))
 	return _r
 }
 
-// Destination frame that contains user-allocated pixel buffer that receives the results.
+// DestinationFrame destination frame that contains user-allocated pixel buffer that receives the results.
 func (x *SuperResolutionScalerParameters) DestinationFrame() *FrameProcessorFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationFrame"))
 	return FrameProcessorFrameFromID(_r)

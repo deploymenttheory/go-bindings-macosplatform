@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The values to use as inputs to the salts for deriving the symmetric key.
-//
 // AuthorizationPublicKeyCredentialPRFAssertionInputValues is an idiomatic wrapper over the Objective-C class ASAuthorizationPublicKeyCredentialPRFAssertionInputValues.
+//
+// The values to use as inputs to the salts for deriving the symmetric key.
 type AuthorizationPublicKeyCredentialPRFAssertionInputValues struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID(id objc.ID) *
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPublicKeyCredentialPRFAssertionInputValues{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationPublicKeyCredentialPRFAssertionInputValues{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationPublicKeyCredentialPRFAssertionInputValuesAdopt(id objc.ID) *A
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPublicKeyCredentialPRFAssertionInputValues{Handle: objref.Wrap(id)}
+	x := &AuthorizationPublicKeyCredentialPRFAssertionInputValues{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,20 +60,26 @@ func (x *AuthorizationPublicKeyCredentialPRFAssertionInputValues) IsKind(classNa
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes an input values object with the given salts.
-//
-// NewAuthorizationPublicKeyCredentialPRFAssertionInputValuesWithSaltInput1SaltInput2 creates a new AuthorizationPublicKeyCredentialPRFAssertionInputValues.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationPublicKeyCredentialPRFAssertionInputValues) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAuthorizationPublicKeyCredentialPRFAssertionInputValuesWithSaltInput1SaltInput2 initializes an input values object with the given salts.
 func NewAuthorizationPublicKeyCredentialPRFAssertionInputValuesWithSaltInput1SaltInput2(saltInput1 obj.Object, saltInput2 obj.Object) *AuthorizationPublicKeyCredentialPRFAssertionInputValues {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPublicKeyCredentialPRFAssertionInputValues")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSaltInput1:saltInput2:"), objref.IDOf(saltInput1), objref.IDOf(saltInput2))
 	return authorizationPublicKeyCredentialPRFAssertionInputValuesAdopt(_id)
 }
 
+// SaltInput1 wraps the corresponding Objective-C method.
 func (x *AuthorizationPublicKeyCredentialPRFAssertionInputValues) SaltInput1() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saltInput1"))
 	return obj.Wrap(_r)
 }
 
+// SaltInput2 wraps the corresponding Objective-C method.
 func (x *AuthorizationPublicKeyCredentialPRFAssertionInputValues) SaltInput2() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saltInput2"))
 	return obj.Wrap(_r)

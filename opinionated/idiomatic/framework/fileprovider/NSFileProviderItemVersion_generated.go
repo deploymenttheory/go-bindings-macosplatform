@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The version of the item’s content and its metadata.
-//
 // FileProviderItemVersion is an idiomatic wrapper over the Objective-C class NSFileProviderItemVersion.
+//
+// The version of the item’s content and its metadata.
 type FileProviderItemVersion struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FileProviderItemVersionFromID(id objc.ID) *FileProviderItemVersion {
 	if id == 0 {
 		return nil
 	}
-	x := &FileProviderItemVersion{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FileProviderItemVersion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func fileProviderItemVersionAdopt(id objc.ID) *FileProviderItemVersion {
 	if id == 0 {
 		return nil
 	}
-	x := &FileProviderItemVersion{Handle: objref.Wrap(id)}
+	x := &FileProviderItemVersion{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,26 @@ func (x *FileProviderItemVersion) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new version object.
-//
-// NewFileProviderItemVersionWithContentVersionMetadataVersion creates a new FileProviderItemVersion.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FileProviderItemVersion) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFileProviderItemVersionWithContentVersionMetadataVersion creates a new version object.
 func NewFileProviderItemVersionWithContentVersionMetadataVersion(contentVersion obj.Object, metadataVersion obj.Object) *FileProviderItemVersion {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileProviderItemVersion")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentVersion:metadataVersion:"), objref.IDOf(contentVersion), objref.IDOf(metadataVersion))
 	return fileProviderItemVersionAdopt(_id)
 }
 
-// Version data for the content of the file. This property is used by the system for two purposes: if the contentVersion changes, - the system assumes that the contents have changed and will trigger a redownload if necessary. The exception to this is the case where the extension accepts a content sent by the system when replying to a createItemBasedOnTemplate or modifyItem call with shouldFetchContent set to NO. - the thumbnail cache is invalidated Note that the resource fork of the file is considered content, so this version data should change when either the data fork or the resource fork changes.
+// ContentVersion version data for the content of the file. This property is used by the system for two purposes: if the contentVersion changes, - the system assumes that the contents have changed and will trigger a redownload if necessary. The exception to this is the case where the extension accepts a content sent by the system when replying to a createItemBasedOnTemplate or modifyItem call with shouldFetchContent set to NO. - the thumbnail cache is invalidated Note that the resource fork of the file is considered content, so this version data should change when either the data fork or the resource fork changes.
 func (x *FileProviderItemVersion) ContentVersion() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentVersion"))
 	return obj.Wrap(_r)
 }
 
-// Version data for the metadata of the item, i.e everything but the data fork and the resource fork. The system will store this version, but otherwise ignore it: - metadata changes on an item will be applied even if the metadataVersion remains unchanged - if the metadata version changes without any corresponding observable changes in the metadata returned to the system, the system will simply store the updated metadata version (to return it as the base version of a possible future change request).
+// MetadataVersion version data for the metadata of the item, i.e everything but the data fork and the resource fork. The system will store this version, but otherwise ignore it: - metadata changes on an item will be applied even if the metadataVersion remains unchanged - if the metadata version changes without any corresponding observable changes in the metadata returned to the system, the system will simply store the updated metadata version (to return it as the base version of a possible future change request).
 func (x *FileProviderItemVersion) MetadataVersion() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadataVersion"))
 	return obj.Wrap(_r)

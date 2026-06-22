@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The entry point for an Intents extension.
-//
 // Extension is an idiomatic wrapper over the Objective-C class INExtension.
+//
+// The entry point for an Intents extension.
 type Extension struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ExtensionFromID(id objc.ID) *Extension {
 	if id == 0 {
 		return nil
 	}
-	x := &Extension{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Extension{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func extensionAdopt(id objc.ID) *Extension {
 	if id == 0 {
 		return nil
 	}
-	x := &Extension{Handle: objref.Wrap(id)}
+	x := &Extension{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *Extension) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *Extension) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Extension) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewExtension creates a new Extension.

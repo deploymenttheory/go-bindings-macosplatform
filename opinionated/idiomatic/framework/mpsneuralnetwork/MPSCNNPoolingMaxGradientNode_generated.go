@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // CNNPoolingMaxGradientNode is an idiomatic wrapper over the Objective-C class MPSCNNPoolingMaxGradientNode.
+//
+// It embeds [CNNPoolingGradientNode], promoting that type's methods.
 type CNNPoolingMaxGradientNode struct {
-	objref.Handle
+	CNNPoolingGradientNode
 }
 
 // CNNPoolingMaxGradientNodeFromID adopts an existing Objective-C object as a CNNPoolingMaxGradientNode
@@ -23,7 +24,8 @@ func CNNPoolingMaxGradientNodeFromID(id objc.ID) *CNNPoolingMaxGradientNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNPoolingMaxGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNPoolingMaxGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func cNNPoolingMaxGradientNodeAdopt(id objc.ID) *CNNPoolingMaxGradientNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNPoolingMaxGradientNode{Handle: objref.Wrap(id)}
+	x := &CNNPoolingMaxGradientNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNPoolingMaxGradientNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNPoolingMaxGradientNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNPoolingMaxGradientNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNPoolingMaxGradientNode creates a new CNNPoolingMaxGradientNode.
@@ -62,9 +50,7 @@ func NewCNNPoolingMaxGradientNode() *CNNPoolingMaxGradientNode {
 	return cNNPoolingMaxGradientNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNPoolingMaxGradientNode) WithLabel(label string) *CNNPoolingMaxGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -77,3 +63,9 @@ type CNNPoolingMaxGradientNodeable interface {
 }
 
 var _ CNNPoolingMaxGradientNodeable = (*CNNPoolingMaxGradientNode)(nil)
+
+var _ CNNPoolingGradientNodeProvider = (*CNNPoolingMaxGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*CNNPoolingMaxGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNPoolingMaxGradientNode)(nil)

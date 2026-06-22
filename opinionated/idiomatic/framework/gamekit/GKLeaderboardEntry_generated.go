@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information about a single score by a player on a leaderboard.
-//
 // LeaderboardEntry is an idiomatic wrapper over the Objective-C class GKLeaderboardEntry.
+//
+// Information about a single score by a player on a leaderboard.
 type LeaderboardEntry struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LeaderboardEntryFromID(id objc.ID) *LeaderboardEntry {
 	if id == 0 {
 		return nil
 	}
-	x := &LeaderboardEntry{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LeaderboardEntry{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func leaderboardEntryAdopt(id objc.ID) *LeaderboardEntry {
 	if id == 0 {
 		return nil
 	}
-	x := &LeaderboardEntry{Handle: objref.Wrap(id)}
+	x := &LeaderboardEntry{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,27 +60,37 @@ func (x *LeaderboardEntry) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LeaderboardEntry) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLeaderboardEntry creates a new LeaderboardEntry.
 func NewLeaderboardEntry() *LeaderboardEntry {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKLeaderboardEntry")), objc.RegisterName("new"))
 	return leaderboardEntryAdopt(_id)
 }
 
+// Player wraps the corresponding Objective-C method.
 func (x *LeaderboardEntry) Player() *Player {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("player"))
 	return PlayerFromID(_r)
 }
 
+// Rank wraps the corresponding Objective-C method.
 func (x *LeaderboardEntry) Rank() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rank"))
 	return _r
 }
 
+// Score wraps the corresponding Objective-C method.
 func (x *LeaderboardEntry) Score() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("score"))
 	return _r
 }
 
+// FormattedScore wraps the corresponding Objective-C method.
 func (x *LeaderboardEntry) FormattedScore() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formattedScore"))
 	if _r == 0 {
@@ -87,11 +99,13 @@ func (x *LeaderboardEntry) FormattedScore() string {
 	return purego.GoString(_r)
 }
 
+// Context wraps the corresponding Objective-C method.
 func (x *LeaderboardEntry) Context() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("context"))
 	return _r
 }
 
+// Date wraps the corresponding Objective-C method.
 func (x *LeaderboardEntry) Date() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
 	return obj.Wrap(_r)

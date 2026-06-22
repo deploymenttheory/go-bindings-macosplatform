@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of the input and output data of a function.
-//
 // StageInputOutputDescriptor is an idiomatic wrapper over the Objective-C class MTLStageInputOutputDescriptor.
+//
+// A description of the input and output data of a function.
 type StageInputOutputDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func StageInputOutputDescriptorFromID(id objc.ID) *StageInputOutputDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &StageInputOutputDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StageInputOutputDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func stageInputOutputDescriptorAdopt(id objc.ID) *StageInputOutputDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &StageInputOutputDescriptor{Handle: objref.Wrap(id)}
+	x := &StageInputOutputDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,57 +60,65 @@ func (x *StageInputOutputDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StageInputOutputDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewStageInputOutputDescriptor creates a new StageInputOutputDescriptor.
 func NewStageInputOutputDescriptor() *StageInputOutputDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLStageInputOutputDescriptor")), objc.RegisterName("new"))
 	return stageInputOutputDescriptorAdopt(_id)
 }
 
-// The data type of the indices stored in the index buffer.
-//
-// WithIndexType sets indexType and returns the receiver so calls can be chained.
+// WithIndexType the data type of the indices stored in the index buffer.
 func (x *StageInputOutputDescriptor) WithIndexType(indexType IndexType) *StageInputOutputDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexType:"), indexType)
 	return x
 }
 
-// The location of the index buffer for a compute function using indexed thread addressing.
-//
-// WithIndexBufferIndex sets indexBufferIndex and returns the receiver so calls can be chained.
+// WithIndexBufferIndex the location of the index buffer for a compute function using indexed thread addressing.
 func (x *StageInputOutputDescriptor) WithIndexBufferIndex(indexBufferIndex int) *StageInputOutputDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexBufferIndex:"), indexBufferIndex)
 	return x
 }
 
-// Resets the default state for the descriptor.
+// Reset resets the default state for the descriptor.
 func (x *StageInputOutputDescriptor) Reset() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
+// Layouts wraps the corresponding Objective-C method.
 func (x *StageInputOutputDescriptor) Layouts() *BufferLayoutDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layouts"))
 	return BufferLayoutDescriptorArrayFromID(_r)
 }
 
+// Attributes wraps the corresponding Objective-C method.
 func (x *StageInputOutputDescriptor) Attributes() *AttributeDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
 	return AttributeDescriptorArrayFromID(_r)
 }
 
+// IndexType wraps the corresponding Objective-C method.
 func (x *StageInputOutputDescriptor) IndexType() IndexType {
 	_r := objc.Send[IndexType](objref.IDOf(x), objc.RegisterName("indexType"))
 	return _r
 }
 
+// SetIndexType wraps the corresponding Objective-C method.
 func (x *StageInputOutputDescriptor) SetIndexType(indexType IndexType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexType:"), indexType)
 }
 
+// IndexBufferIndex wraps the corresponding Objective-C method.
 func (x *StageInputOutputDescriptor) IndexBufferIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexBufferIndex"))
 	return _r
 }
 
+// SetIndexBufferIndex wraps the corresponding Objective-C method.
 func (x *StageInputOutputDescriptor) SetIndexBufferIndex(indexBufferIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexBufferIndex:"), indexBufferIndex)
 }

@@ -12,11 +12,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The metadata associated with the response to an HTTP protocol URL load request.
-//
 // HTTPURLResponse is an idiomatic wrapper over the Objective-C class NSHTTPURLResponse.
+//
+// It embeds [URLResponse], promoting that type's methods.
+//
+// The metadata associated with the response to an HTTP protocol URL load request.
 type HTTPURLResponse struct {
-	objref.Handle
+	URLResponse
 }
 
 // HTTPURLResponseFromID adopts an existing Objective-C object as a HTTPURLResponse
@@ -25,7 +27,8 @@ func HTTPURLResponseFromID(id objc.ID) *HTTPURLResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &HTTPURLResponse{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HTTPURLResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,42 +41,26 @@ func hTTPURLResponseAdopt(id objc.ID) *HTTPURLResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &HTTPURLResponse{Handle: objref.Wrap(id)}
+	x := &HTTPURLResponse{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *HTTPURLResponse) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HTTPURLResponse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HTTPURLResponse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// initializer for NSHTTPURLResponse objects. This API was introduced in Mac OS X 10.7.2 and iOS 5.0 and is not available prior to those releases.
-//
-// NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields creates a new HTTPURLResponse.
+// NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields initializer for NSHTTPURLResponse objects. This API was introduced in Mac OS X 10.7.2 and iOS 5.0 and is not available prior to those releases.
 func NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields(url string, statusCode int, hTTPVersion string, headerFields obj.Object) *HTTPURLResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSHTTPURLResponse")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:statusCode:HTTPVersion:headerFields:"), rt.FileURL(url), statusCode, purego.NSString(hTTPVersion), objref.IDOf(headerFields))
 	return hTTPURLResponseAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *HTTPURLResponse) WithScriptingProperties(scriptingProperties obj.Object) *HTTPURLResponse {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Returns the value which corresponds to the given header field. Note that, in keeping with the HTTP RFC, HTTP header field names are case-insensitive.
+// ValueForHTTPHeaderField returns the value which corresponds to the given header field. Note that, in keeping with the HTTP RFC, HTTP header field names are case-insensitive.
 func (x *HTTPURLResponse) ValueForHTTPHeaderField(field string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForHTTPHeaderField:"), purego.NSString(field))
 	if _r == 0 {
@@ -82,13 +69,13 @@ func (x *HTTPURLResponse) ValueForHTTPHeaderField(field string) string {
 	return purego.GoString(_r)
 }
 
-// Returns the HTTP status code of the receiver.
+// StatusCode returns the HTTP status code of the receiver.
 func (x *HTTPURLResponse) StatusCode() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("statusCode"))
 	return _r
 }
 
-// Returns a dictionary containing all the HTTP header fields of the receiver. By examining this header dictionary, clients can see the "raw" header information which was reported to the protocol implementation by the HTTP server. This may be of use to sophisticated or special-purpose HTTP clients.
+// AllHeaderFields returns a dictionary containing all the HTTP header fields of the receiver. By examining this header dictionary, clients can see the "raw" header information which was reported to the protocol implementation by the HTTP server. This may be of use to sophisticated or special-purpose HTTP clients.
 func (x *HTTPURLResponse) AllHeaderFields() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allHeaderFields"))
 	return obj.Wrap(_r)
@@ -104,3 +91,5 @@ type HTTPURLResponseable interface {
 }
 
 var _ HTTPURLResponseable = (*HTTPURLResponse)(nil)
+
+var _ URLResponseProvider = (*HTTPURLResponse)(nil)

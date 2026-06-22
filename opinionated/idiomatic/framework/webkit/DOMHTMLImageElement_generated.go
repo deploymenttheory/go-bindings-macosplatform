@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMHTMLImageElement is an idiomatic wrapper over the Objective-C class DOMHTMLImageElement.
+//
+// It embeds [DOMHTMLElement], promoting that type's methods.
 type DOMHTMLImageElement struct {
-	objref.Handle
+	DOMHTMLElement
 }
 
 // DOMHTMLImageElementFromID adopts an existing Objective-C object as a DOMHTMLImageElement
@@ -23,7 +24,8 @@ func DOMHTMLImageElementFromID(id objc.ID) *DOMHTMLImageElement {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMHTMLImageElement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMHTMLImageElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMHTMLImageElementAdopt(id objc.ID) *DOMHTMLImageElement {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMHTMLImageElement{Handle: objref.Wrap(id)}
+	x := &DOMHTMLImageElement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMHTMLImageElement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMHTMLImageElement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMHTMLImageElement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMHTMLImageElement creates a new DOMHTMLImageElement.
@@ -62,186 +50,187 @@ func NewDOMHTMLImageElement() *DOMHTMLImageElement {
 	return dOMHTMLImageElementAdopt(_id)
 }
 
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithName(name string) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// WithAlign sets align and returns the receiver so calls can be chained.
+// WithAlign sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithAlign(align string) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlign:"), purego.NSString(align))
 	return x
 }
 
-// WithAlt sets alt and returns the receiver so calls can be chained.
+// WithAlt sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithAlt(alt string) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlt:"), purego.NSString(alt))
 	return x
 }
 
-// WithBorder sets border and returns the receiver so calls can be chained.
+// WithBorder sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithBorder(border string) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorder:"), purego.NSString(border))
 	return x
 }
 
-// WithHeight sets height and returns the receiver so calls can be chained.
+// WithHeight sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithHeight(height int) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 	return x
 }
 
-// WithHspace sets hspace and returns the receiver so calls can be chained.
+// WithHspace sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithHspace(hspace int) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHspace:"), hspace)
 	return x
 }
 
-// WithIsMap sets isMap and returns the receiver so calls can be chained.
+// WithIsMap sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithIsMap(isMap bool) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsMap:"), isMap)
 	return x
 }
 
-// WithLongDesc sets longDesc and returns the receiver so calls can be chained.
+// WithLongDesc sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithLongDesc(longDesc string) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongDesc:"), purego.NSString(longDesc))
 	return x
 }
 
-// WithSrc sets src and returns the receiver so calls can be chained.
+// WithSrc sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithSrc(src string) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSrc:"), purego.NSString(src))
 	return x
 }
 
-// WithUseMap sets useMap and returns the receiver so calls can be chained.
+// WithUseMap sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithUseMap(useMap string) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseMap:"), purego.NSString(useMap))
 	return x
 }
 
-// WithVspace sets vspace and returns the receiver so calls can be chained.
+// WithVspace sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithVspace(vspace int) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVspace:"), vspace)
 	return x
 }
 
-// WithWidth sets width and returns the receiver so calls can be chained.
+// WithWidth sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithWidth(width int) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
 	return x
 }
 
-// WithLowsrc sets lowsrc and returns the receiver so calls can be chained.
+// WithLowsrc sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithLowsrc(lowsrc string) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowsrc:"), purego.NSString(lowsrc))
 	return x
 }
 
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithTitle(title string) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// WithLang sets lang and returns the receiver so calls can be chained.
+// WithLang sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithLang(lang string) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return x
 }
 
-// WithDir sets dir and returns the receiver so calls can be chained.
+// WithDir sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithDir(dir string) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return x
 }
 
-// WithTabIndex sets tabIndex and returns the receiver so calls can be chained.
+// WithTabIndex sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithTabIndex(tabIndex int) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
 	return x
 }
 
-// WithAccessKey sets accessKey and returns the receiver so calls can be chained.
+// WithAccessKey sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithAccessKey(accessKey string) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return x
 }
 
-// WithInnerText sets innerText and returns the receiver so calls can be chained.
+// WithInnerText sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithInnerText(innerText string) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return x
 }
 
-// WithOuterText sets outerText and returns the receiver so calls can be chained.
+// WithOuterText sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithOuterText(outerText string) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return x
 }
 
-// WithContentEditable sets contentEditable and returns the receiver so calls can be chained.
+// WithContentEditable sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithContentEditable(contentEditable string) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return x
 }
 
-// WithIdName sets idName and returns the receiver so calls can be chained.
+// WithIdName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithIdName(idName string) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return x
 }
 
-// WithScrollLeft sets scrollLeft and returns the receiver so calls can be chained.
+// WithScrollLeft sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithScrollLeft(scrollLeft int) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return x
 }
 
-// WithScrollTop sets scrollTop and returns the receiver so calls can be chained.
+// WithScrollTop sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithScrollTop(scrollTop int) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
 	return x
 }
 
-// WithInnerHTML sets innerHTML and returns the receiver so calls can be chained.
+// WithInnerHTML sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithInnerHTML(innerHTML string) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return x
 }
 
-// WithOuterHTML sets outerHTML and returns the receiver so calls can be chained.
+// WithOuterHTML sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithOuterHTML(outerHTML string) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return x
 }
 
-// WithClassName sets className and returns the receiver so calls can be chained.
+// WithClassName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithClassName(className string) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return x
 }
 
-// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithNodeValue(nodeValue string) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets prefix and returns the receiver so calls can be chained.
+// WithPrefix sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithPrefix(prefix string) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets textContent and returns the receiver so calls can be chained.
+// WithTextContent sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLImageElement) WithTextContent(textContent string) *DOMHTMLImageElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -250,10 +239,12 @@ func (x *DOMHTMLImageElement) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
+// Align wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) Align() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("align"))
 	if _r == 0 {
@@ -262,10 +253,12 @@ func (x *DOMHTMLImageElement) Align() string {
 	return purego.GoString(_r)
 }
 
+// SetAlign wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) SetAlign(align string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlign:"), purego.NSString(align))
 }
 
+// Alt wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) Alt() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alt"))
 	if _r == 0 {
@@ -274,10 +267,12 @@ func (x *DOMHTMLImageElement) Alt() string {
 	return purego.GoString(_r)
 }
 
+// SetAlt wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) SetAlt(alt string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlt:"), purego.NSString(alt))
 }
 
+// Border wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) Border() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("border"))
 	if _r == 0 {
@@ -286,37 +281,45 @@ func (x *DOMHTMLImageElement) Border() string {
 	return purego.GoString(_r)
 }
 
+// SetBorder wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) SetBorder(border string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorder:"), purego.NSString(border))
 }
 
+// Height wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) Height() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("height"))
 	return _r
 }
 
+// SetHeight wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) SetHeight(height int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 }
 
+// Hspace wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) Hspace() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("hspace"))
 	return _r
 }
 
+// SetHspace wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) SetHspace(hspace int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHspace:"), hspace)
 }
 
+// IsMap wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) IsMap() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMap"))
 	return _r
 }
 
+// SetIsMap wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) SetIsMap(isMap bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsMap:"), isMap)
 }
 
+// LongDesc wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) LongDesc() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("longDesc"))
 	if _r == 0 {
@@ -325,10 +328,12 @@ func (x *DOMHTMLImageElement) LongDesc() string {
 	return purego.GoString(_r)
 }
 
+// SetLongDesc wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) SetLongDesc(longDesc string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongDesc:"), purego.NSString(longDesc))
 }
 
+// Src wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) Src() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("src"))
 	if _r == 0 {
@@ -337,10 +342,12 @@ func (x *DOMHTMLImageElement) Src() string {
 	return purego.GoString(_r)
 }
 
+// SetSrc wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) SetSrc(src string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSrc:"), purego.NSString(src))
 }
 
+// UseMap wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) UseMap() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("useMap"))
 	if _r == 0 {
@@ -349,33 +356,40 @@ func (x *DOMHTMLImageElement) UseMap() string {
 	return purego.GoString(_r)
 }
 
+// SetUseMap wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) SetUseMap(useMap string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseMap:"), purego.NSString(useMap))
 }
 
+// Vspace wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) Vspace() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vspace"))
 	return _r
 }
 
+// SetVspace wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) SetVspace(vspace int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVspace:"), vspace)
 }
 
+// Width wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) Width() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("width"))
 	return _r
 }
 
+// SetWidth wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) SetWidth(width int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
 }
 
+// Complete wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) Complete() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("complete"))
 	return _r
 }
 
+// Lowsrc wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) Lowsrc() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lowsrc"))
 	if _r == 0 {
@@ -384,30 +398,36 @@ func (x *DOMHTMLImageElement) Lowsrc() string {
 	return purego.GoString(_r)
 }
 
+// SetLowsrc wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) SetLowsrc(lowsrc string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowsrc:"), purego.NSString(lowsrc))
 }
 
+// NaturalHeight wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) NaturalHeight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("naturalHeight"))
 	return _r
 }
 
+// NaturalWidth wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) NaturalWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("naturalWidth"))
 	return _r
 }
 
+// X wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) X() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("x"))
 	return _r
 }
 
+// Y wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) Y() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("y"))
 	return _r
 }
 
+// AltDisplayString wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) AltDisplayString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("altDisplayString"))
 	if _r == 0 {
@@ -416,6 +436,7 @@ func (x *DOMHTMLImageElement) AltDisplayString() string {
 	return purego.GoString(_r)
 }
 
+// AbsoluteImageURL wraps the corresponding Objective-C method.
 func (x *DOMHTMLImageElement) AbsoluteImageURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("absoluteImageURL"))
 	return obj.Wrap(_r)
@@ -490,3 +511,13 @@ type DOMHTMLImageElementable interface {
 }
 
 var _ DOMHTMLImageElementable = (*DOMHTMLImageElement)(nil)
+
+var _ DOMHTMLElementProvider = (*DOMHTMLImageElement)(nil)
+
+var _ DOMElementProvider = (*DOMHTMLImageElement)(nil)
+
+var _ DOMNodeProvider = (*DOMHTMLImageElement)(nil)
+
+var _ DOMObjectProvider = (*DOMHTMLImageElement)(nil)
+
+var _ WebScriptObjectProvider = (*DOMHTMLImageElement)(nil)

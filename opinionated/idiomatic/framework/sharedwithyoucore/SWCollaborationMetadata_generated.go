@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A model object for conveying data during a collaboration.
-//
 // CollaborationMetadata is an idiomatic wrapper over the Objective-C class SWCollaborationMetadata.
+//
+// A model object for conveying data during a collaboration.
 type CollaborationMetadata struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CollaborationMetadataFromID(id objc.ID) *CollaborationMetadata {
 	if id == 0 {
 		return nil
 	}
-	x := &CollaborationMetadata{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollaborationMetadata{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func collaborationMetadataAdopt(id objc.ID) *CollaborationMetadata {
 	if id == 0 {
 		return nil
 	}
-	x := &CollaborationMetadata{Handle: objref.Wrap(id)}
+	x := &CollaborationMetadata{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,83 +60,75 @@ func (x *CollaborationMetadata) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CollaborationMetadata) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCollaborationMetadata creates a new CollaborationMetadata.
 func NewCollaborationMetadata() *CollaborationMetadata {
 	_id := objc.Send[objc.ID](objc.ID(_class("SWCollaborationMetadata")), objc.RegisterName("new"))
 	return collaborationMetadataAdopt(_id)
 }
 
-// Creates and initializes a collaboration metadata object for the specified local identifier.
-//
-// NewCollaborationMetadataWithLocalIdentifier creates a new CollaborationMetadata.
+// NewCollaborationMetadataWithLocalIdentifier creates and initializes a collaboration metadata object for the specified local identifier.
 func NewCollaborationMetadataWithLocalIdentifier(localIdentifier obj.Object) *CollaborationMetadata {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWCollaborationMetadata")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalIdentifier:"), objref.IDOf(localIdentifier))
 	return collaborationMetadataAdopt(_id)
 }
 
-// Creates and initializes a collaboration metadata object for the specified global identifier.
-//
-// NewCollaborationMetadataWithCollaborationIdentifier creates a new CollaborationMetadata.
+// NewCollaborationMetadataWithCollaborationIdentifier creates and initializes a collaboration metadata object for the specified global identifier.
 func NewCollaborationMetadataWithCollaborationIdentifier(collaborationIdentifier obj.Object) *CollaborationMetadata {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWCollaborationMetadata")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCollaborationIdentifier:"), objref.IDOf(collaborationIdentifier))
 	return collaborationMetadataAdopt(_id)
 }
 
-// The title of the content.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the title of the content.
 func (x *CollaborationMetadata) WithTitle(title string) *CollaborationMetadata {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The collaboration options that the content supports.
-//
-// WithDefaultShareOptions sets defaultShareOptions and returns the receiver so calls can be chained.
+// WithDefaultShareOptions the collaboration options that the content supports.
 func (x *CollaborationMetadata) WithDefaultShareOptions(defaultShareOptions *CollaborationShareOptions) *CollaborationMetadata {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultShareOptions:"), objref.IDOf(defaultShareOptions))
 	return x
 }
 
-// The selected collaboration options from the person who sends the invitation.
-//
-// WithUserSelectedShareOptions sets userSelectedShareOptions and returns the receiver so calls can be chained.
+// WithUserSelectedShareOptions the selected collaboration options from the person who sends the invitation.
 func (x *CollaborationMetadata) WithUserSelectedShareOptions(userSelectedShareOptions *CollaborationShareOptions) *CollaborationMetadata {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserSelectedShareOptions:"), objref.IDOf(userSelectedShareOptions))
 	return x
 }
 
-// The handle of the person who initiates the collaboration.
-//
-// WithInitiatorHandle sets initiatorHandle and returns the receiver so calls can be chained.
+// WithInitiatorHandle the handle of the person who initiates the collaboration.
 func (x *CollaborationMetadata) WithInitiatorHandle(initiatorHandle string) *CollaborationMetadata {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitiatorHandle:"), purego.NSString(initiatorHandle))
 	return x
 }
 
-// The name of the person who initiates the collaboration.
-//
-// WithInitiatorNameComponents sets initiatorNameComponents and returns the receiver so calls can be chained.
+// WithInitiatorNameComponents the name of the person who initiates the collaboration.
 func (x *CollaborationMetadata) WithInitiatorNameComponents(initiatorNameComponents obj.Object) *CollaborationMetadata {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitiatorNameComponents:"), objref.IDOf(initiatorNameComponents))
 	return x
 }
 
-// Globally unique identifier for the item represented by this metadata. This identifier is unique across platforms and shares of the same item.
+// CollaborationIdentifier globally unique identifier for the item represented by this metadata. This identifier is unique across platforms and shares of the same item.
 func (x *CollaborationMetadata) CollaborationIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collaborationIdentifier"))
 	return obj.Wrap(_r)
 }
 
-// Locally unique identifier for the item represented by this metadata. Use this identifier to uniquely identify this metadata before a collaborationIdentifier can be created
+// LocalIdentifier locally unique identifier for the item represented by this metadata. Use this identifier to uniquely identify this metadata before a collaborationIdentifier can be created
 func (x *CollaborationMetadata) LocalIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localIdentifier"))
 	return obj.Wrap(_r)
 }
 
-// Title of the content. Title of the collaboration if provided by the app which owns the collaboration item.
+// Title title of the content. Title of the collaboration if provided by the app which owns the collaboration item.
 func (x *CollaborationMetadata) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -143,34 +137,39 @@ func (x *CollaborationMetadata) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *CollaborationMetadata) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// The collaboration options that this content supports (updated).
+// DefaultShareOptions the collaboration options that this content supports (updated).
 func (x *CollaborationMetadata) DefaultShareOptions() *CollaborationShareOptions {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultShareOptions"))
 	return CollaborationShareOptionsFromID(_r)
 }
 
+// SetDefaultShareOptions wraps the corresponding Objective-C method.
 func (x *CollaborationMetadata) SetDefaultShareOptions(defaultShareOptions *CollaborationShareOptions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultShareOptions:"), objref.IDOf(defaultShareOptions))
 }
 
-// The collaboration options that the user selected when sending the invite (updated).
+// UserSelectedShareOptions the collaboration options that the user selected when sending the invite (updated).
 func (x *CollaborationMetadata) UserSelectedShareOptions() *CollaborationShareOptions {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userSelectedShareOptions"))
 	return CollaborationShareOptionsFromID(_r)
 }
 
+// SetUserSelectedShareOptions wraps the corresponding Objective-C method.
 func (x *CollaborationMetadata) SetUserSelectedShareOptions(userSelectedShareOptions *CollaborationShareOptions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserSelectedShareOptions:"), objref.IDOf(userSelectedShareOptions))
 }
 
+// SetInitiatorHandle wraps the corresponding Objective-C method.
 func (x *CollaborationMetadata) SetInitiatorHandle(initiatorHandle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitiatorHandle:"), purego.NSString(initiatorHandle))
 }
 
+// SetInitiatorNameComponents wraps the corresponding Objective-C method.
 func (x *CollaborationMetadata) SetInitiatorNameComponents(initiatorNameComponents obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitiatorNameComponents:"), objref.IDOf(initiatorNameComponents))
 }

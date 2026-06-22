@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NDArrayMultiaryKernel is an idiomatic wrapper over the Objective-C class MPSNDArrayMultiaryKernel.
+//
+// NDArrayMultiaryKernel is an abstract base — you do not construct it directly. Construct one of [NDArrayAffineInt4Dequantize], [NDArrayBinaryKernel], [NDArrayLUTDequantize], [NDArrayMatrixMultiplication], [NDArrayUnaryKernel], [NDArrayVectorLUTDequantize] and pass it where a NDArrayMultiaryKernel is accepted.
 type NDArrayMultiaryKernel struct {
-	objref.Handle
+	NDArrayMultiaryBase
 }
 
 // NDArrayMultiaryKernelFromID adopts an existing Objective-C object as a NDArrayMultiaryKernel
@@ -23,7 +24,8 @@ func NDArrayMultiaryKernelFromID(id objc.ID) *NDArrayMultiaryKernel {
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayMultiaryKernel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NDArrayMultiaryKernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,35 +38,13 @@ func nDArrayMultiaryKernelAdopt(id objc.ID) *NDArrayMultiaryKernel {
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayMultiaryKernel{Handle: objref.Wrap(id)}
+	x := &NDArrayMultiaryKernel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NDArrayMultiaryKernel) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NDArrayMultiaryKernel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NDArrayMultiaryKernel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewNDArrayMultiaryKernel creates a new NDArrayMultiaryKernel.
-func NewNDArrayMultiaryKernel() *NDArrayMultiaryKernel {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayMultiaryKernel")), objc.RegisterName("new"))
-	return nDArrayMultiaryKernelAdopt(_id)
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayMultiaryKernel) WithLabel(label string) *NDArrayMultiaryKernel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -77,3 +57,14 @@ type NDArrayMultiaryKernelable interface {
 }
 
 var _ NDArrayMultiaryKernelable = (*NDArrayMultiaryKernel)(nil)
+
+// isNDArrayMultiaryKernel marks NDArrayMultiaryKernel — and, by embedding promotion, its
+// subclasses — as a member of the NDArrayMultiaryKernel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NDArrayMultiaryKernel) isNDArrayMultiaryKernel() {}
+
+var _ NDArrayMultiaryKernelProvider = (*NDArrayMultiaryKernel)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayMultiaryKernel)(nil)
+
+var _ KernelProvider = (*NDArrayMultiaryKernel)(nil)

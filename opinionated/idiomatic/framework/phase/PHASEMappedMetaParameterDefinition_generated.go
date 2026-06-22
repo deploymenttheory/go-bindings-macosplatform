@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A metaparameter that graphs an input value on a set of mathematical curves.
-//
 // MappedMetaParameterDefinition is an idiomatic wrapper over the Objective-C class PHASEMappedMetaParameterDefinition.
+//
+// It embeds [NumberMetaParameterDefinition], promoting that type's methods.
+//
+// A metaparameter that graphs an input value on a set of mathematical curves.
 type MappedMetaParameterDefinition struct {
-	objref.Handle
+	NumberMetaParameterDefinition
 }
 
 // MappedMetaParameterDefinitionFromID adopts an existing Objective-C object as a MappedMetaParameterDefinition
@@ -25,7 +26,8 @@ func MappedMetaParameterDefinitionFromID(id objc.ID) *MappedMetaParameterDefinit
 	if id == 0 {
 		return nil
 	}
-	x := &MappedMetaParameterDefinition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MappedMetaParameterDefinition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,51 +40,33 @@ func mappedMetaParameterDefinitionAdopt(id objc.ID) *MappedMetaParameterDefiniti
 	if id == 0 {
 		return nil
 	}
-	x := &MappedMetaParameterDefinition{Handle: objref.Wrap(id)}
+	x := &MappedMetaParameterDefinition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MappedMetaParameterDefinition) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MappedMetaParameterDefinition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MappedMetaParameterDefinition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a specification for a named metaparameter that the app plots on a graph defined by the given set of curves.
-//
-// NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelopeIdentifier creates a new MappedMetaParameterDefinition.
+// NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelopeIdentifier creates a specification for a named metaparameter that the app plots on a graph defined by the given set of curves.
 func NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelopeIdentifier(inputMetaParameterDefinition *NumberMetaParameterDefinition, envelope *Envelope, identifier string) *MappedMetaParameterDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEMappedMetaParameterDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputMetaParameterDefinition:envelope:identifier:"), objref.IDOf(inputMetaParameterDefinition), objref.IDOf(envelope), purego.NSString(identifier))
 	return mappedMetaParameterDefinitionAdopt(_id)
 }
 
-// Creates a specification for a metaparameter that the app plots on a graph defined by the given set of curves.
-//
-// NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelope creates a new MappedMetaParameterDefinition.
+// NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelope creates a specification for a metaparameter that the app plots on a graph defined by the given set of curves.
 func NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelope(inputMetaParameterDefinition *NumberMetaParameterDefinition, envelope *Envelope) *MappedMetaParameterDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEMappedMetaParameterDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputMetaParameterDefinition:envelope:"), objref.IDOf(inputMetaParameterDefinition), objref.IDOf(envelope))
 	return mappedMetaParameterDefinitionAdopt(_id)
 }
 
-// An Envelope to define segments of curves
+// Envelope an Envelope to define segments of curves
 func (x *MappedMetaParameterDefinition) Envelope() *Envelope {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("envelope"))
 	return EnvelopeFromID(_r)
 }
 
-// The readonly PHASENumberMetaParameterDefinition that this metaparameter definition was initialized with
+// InputMetaParameterDefinition the readonly PHASENumberMetaParameterDefinition that this metaparameter definition was initialized with
 func (x *MappedMetaParameterDefinition) InputMetaParameterDefinition() *NumberMetaParameterDefinition {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputMetaParameterDefinition"))
 	return NumberMetaParameterDefinitionFromID(_r)
@@ -96,3 +80,9 @@ type MappedMetaParameterDefinitionable interface {
 }
 
 var _ MappedMetaParameterDefinitionable = (*MappedMetaParameterDefinition)(nil)
+
+var _ NumberMetaParameterDefinitionProvider = (*MappedMetaParameterDefinition)(nil)
+
+var _ MetaParameterDefinitionProvider = (*MappedMetaParameterDefinition)(nil)
+
+var _ DefinitionProvider = (*MappedMetaParameterDefinition)(nil)

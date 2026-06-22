@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBridgedDeviceBasicClusterReachableChangedEvent is an idiomatic wrapper over the Objective-C class MTRBridgedDeviceBasicClusterReachableChangedEvent.
+//
+// It embeds [MTRBridgedDeviceBasicInformationClusterReachableChangedEvent], promoting that type's methods.
 type MTRBridgedDeviceBasicClusterReachableChangedEvent struct {
-	objref.Handle
+	MTRBridgedDeviceBasicInformationClusterReachableChangedEvent
 }
 
 // MTRBridgedDeviceBasicClusterReachableChangedEventFromID adopts an existing Objective-C object as a MTRBridgedDeviceBasicClusterReachableChangedEvent
@@ -23,7 +24,8 @@ func MTRBridgedDeviceBasicClusterReachableChangedEventFromID(id objc.ID) *MTRBri
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBridgedDeviceBasicClusterReachableChangedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBridgedDeviceBasicClusterReachableChangedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRBridgedDeviceBasicClusterReachableChangedEventAdopt(id objc.ID) *MTRBrid
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBridgedDeviceBasicClusterReachableChangedEvent{Handle: objref.Wrap(id)}
+	x := &MTRBridgedDeviceBasicClusterReachableChangedEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRBridgedDeviceBasicClusterReachableChangedEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBridgedDeviceBasicClusterReachableChangedEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBridgedDeviceBasicClusterReachableChangedEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRBridgedDeviceBasicClusterReachableChangedEvent creates a new MTRBridgedDeviceBasicClusterReachableChangedEvent.
@@ -62,7 +50,7 @@ func NewMTRBridgedDeviceBasicClusterReachableChangedEvent() *MTRBridgedDeviceBas
 	return mTRBridgedDeviceBasicClusterReachableChangedEventAdopt(_id)
 }
 
-// WithReachableNewValue sets reachableNewValue and returns the receiver so calls can be chained.
+// WithReachableNewValue sets the property and returns the receiver so calls can be chained.
 func (x *MTRBridgedDeviceBasicClusterReachableChangedEvent) WithReachableNewValue(reachableNewValue obj.Object) *MTRBridgedDeviceBasicClusterReachableChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachableNewValue:"), objref.IDOf(reachableNewValue))
 	return x
@@ -75,3 +63,5 @@ type MTRBridgedDeviceBasicClusterReachableChangedEventable interface {
 }
 
 var _ MTRBridgedDeviceBasicClusterReachableChangedEventable = (*MTRBridgedDeviceBasicClusterReachableChangedEvent)(nil)
+
+var _ MTRBridgedDeviceBasicInformationClusterReachableChangedEventProvider = (*MTRBridgedDeviceBasicClusterReachableChangedEvent)(nil)

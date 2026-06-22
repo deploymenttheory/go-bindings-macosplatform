@@ -23,7 +23,8 @@ func MTRDeviceAttestationDeviceInfoFromID(id objc.ID) *MTRDeviceAttestationDevic
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceAttestationDeviceInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDeviceAttestationDeviceInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDeviceAttestationDeviceInfoAdopt(id objc.ID) *MTRDeviceAttestationDevice
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceAttestationDeviceInfo{Handle: objref.Wrap(id)}
+	x := &MTRDeviceAttestationDeviceInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,76 +58,85 @@ func (x *MTRDeviceAttestationDeviceInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceAttestationDeviceInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDeviceAttestationDeviceInfo creates a new MTRDeviceAttestationDeviceInfo.
 func NewMTRDeviceAttestationDeviceInfo() *MTRDeviceAttestationDeviceInfo {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceAttestationDeviceInfo")), objc.RegisterName("new"))
 	return mTRDeviceAttestationDeviceInfoAdopt(_id)
 }
 
-// The vendor ID from the Device Attestation Certificate. May be nil only if attestation verification failed.
+// VendorID the vendor ID from the Device Attestation Certificate. May be nil only if attestation verification failed.
 func (x *MTRDeviceAttestationDeviceInfo) VendorID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorID"))
 	return obj.Wrap(_r)
 }
 
-// The product ID from the Device Attestation Certificate. May be nil only if attestation verification failed.
+// ProductID the product ID from the Device Attestation Certificate. May be nil only if attestation verification failed.
 func (x *MTRDeviceAttestationDeviceInfo) ProductID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productID"))
 	return obj.Wrap(_r)
 }
 
-// The vendor ID value from the device's Basic Information cluster that was used for device attestation.  If attestation succeeds, this must match the vendor ID from the certification declaration.
+// BasicInformationVendorID the vendor ID value from the device's Basic Information cluster that was used for device attestation.  If attestation succeeds, this must match the vendor ID from the certification declaration.
 func (x *MTRDeviceAttestationDeviceInfo) BasicInformationVendorID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("basicInformationVendorID"))
 	return obj.Wrap(_r)
 }
 
-// The product ID value from the device's Basic Information cluster that was used for device attestation.  If attestation succeeds, this must match one of the product IDs from the certification declaration.
+// BasicInformationProductID the product ID value from the device's Basic Information cluster that was used for device attestation.  If attestation succeeds, this must match one of the product IDs from the certification declaration.
 func (x *MTRDeviceAttestationDeviceInfo) BasicInformationProductID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("basicInformationProductID"))
 	return obj.Wrap(_r)
 }
 
+// DacCertificate wraps the corresponding Objective-C method.
 func (x *MTRDeviceAttestationDeviceInfo) DacCertificate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dacCertificate"))
 	return obj.Wrap(_r)
 }
 
+// DacPAICertificate wraps the corresponding Objective-C method.
 func (x *MTRDeviceAttestationDeviceInfo) DacPAICertificate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dacPAICertificate"))
 	return obj.Wrap(_r)
 }
 
+// CertificateDeclaration wraps the corresponding Objective-C method.
 func (x *MTRDeviceAttestationDeviceInfo) CertificateDeclaration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificateDeclaration"))
 	return obj.Wrap(_r)
 }
 
-// The attestation challenge from the secure session.
+// AttestationChallenge the attestation challenge from the secure session.
 func (x *MTRDeviceAttestationDeviceInfo) AttestationChallenge() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attestationChallenge"))
 	return obj.Wrap(_r)
 }
 
-// The attestation nonce from the AttestationRequest command.
+// AttestationNonce the attestation nonce from the AttestationRequest command.
 func (x *MTRDeviceAttestationDeviceInfo) AttestationNonce() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attestationNonce"))
 	return obj.Wrap(_r)
 }
 
-// The TLV-encoded attestation_elements_message that was used to find the certificationDeclaration (possibly unsuccessfully).
+// ElementsTLV the TLV-encoded attestation_elements_message that was used to find the certificationDeclaration (possibly unsuccessfully).
 func (x *MTRDeviceAttestationDeviceInfo) ElementsTLV() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementsTLV"))
 	return obj.Wrap(_r)
 }
 
-// The certification declaration of the device, if available.  This is a DER-encoded string representing a CMS-formatted certification declaration.  May be nil only if attestation verification failed.
+// CertificationDeclaration the certification declaration of the device, if available.  This is a DER-encoded string representing a CMS-formatted certification declaration.  May be nil only if attestation verification failed.
 func (x *MTRDeviceAttestationDeviceInfo) CertificationDeclaration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificationDeclaration"))
 	return obj.Wrap(_r)
 }
 
-// A signature, using the device attestation private key of the device that sent the attestation information, over the concatenation of elementsTLV and attestationChallenge.
+// ElementsSignature a signature, using the device attestation private key of the device that sent the attestation information, over the concatenation of elementsTLV and attestationChallenge.
 func (x *MTRDeviceAttestationDeviceInfo) ElementsSignature() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementsSignature"))
 	return obj.Wrap(_r)

@@ -25,7 +25,8 @@ func CalCalendarStoreFromID(id objc.ID) *CalCalendarStore {
 	if id == 0 {
 		return nil
 	}
-	x := &CalCalendarStore{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CalCalendarStore{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func calCalendarStoreAdopt(id objc.ID) *CalCalendarStore {
 	if id == 0 {
 		return nil
 	}
-	x := &CalCalendarStore{Handle: objref.Wrap(id)}
+	x := &CalCalendarStore{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,31 @@ func (x *CalCalendarStore) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CalCalendarStore) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCalCalendarStore creates a new CalCalendarStore.
 func NewCalCalendarStore() *CalCalendarStore {
 	_id := objc.Send[objc.ID](objc.ID(_class("CalCalendarStore")), objc.RegisterName("new"))
 	return calCalendarStoreAdopt(_id)
 }
 
+// Calendars wraps the corresponding Objective-C method.
 func (x *CalCalendarStore) Calendars() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendars"))
 	return obj.Wrap(_r)
 }
 
+// CalendarWithUID wraps the corresponding Objective-C method.
 func (x *CalCalendarStore) CalendarWithUID(uID string) *CalCalendar {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendarWithUID:"), purego.NSString(uID))
 	return CalCalendarFromID(_r)
 }
 
+// SaveCalendar wraps the corresponding Objective-C method.
 func (x *CalCalendarStore) SaveCalendar(calendar *CalCalendar) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("saveCalendar:error:"), objref.IDOf(calendar), unsafe.Pointer(&_nsErr))
@@ -83,6 +94,7 @@ func (x *CalCalendarStore) SaveCalendar(calendar *CalCalendar) error {
 	return nil
 }
 
+// RemoveCalendar wraps the corresponding Objective-C method.
 func (x *CalCalendarStore) RemoveCalendar(calendar *CalCalendar) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeCalendar:error:"), objref.IDOf(calendar), unsafe.Pointer(&_nsErr))
@@ -92,26 +104,31 @@ func (x *CalCalendarStore) RemoveCalendar(calendar *CalCalendar) error {
 	return nil
 }
 
+// EventsWithPredicate wraps the corresponding Objective-C method.
 func (x *CalCalendarStore) EventsWithPredicate(predicate obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eventsWithPredicate:"), objref.IDOf(predicate))
 	return obj.Wrap(_r)
 }
 
+// EventWithUIDOccurrence wraps the corresponding Objective-C method.
 func (x *CalCalendarStore) EventWithUIDOccurrence(uid string, date obj.Object) *CalEvent {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eventWithUID:occurrence:"), purego.NSString(uid), objref.IDOf(date))
 	return CalEventFromID(_r)
 }
 
+// TasksWithPredicate wraps the corresponding Objective-C method.
 func (x *CalCalendarStore) TasksWithPredicate(predicate obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tasksWithPredicate:"), objref.IDOf(predicate))
 	return obj.Wrap(_r)
 }
 
+// TaskWithUID wraps the corresponding Objective-C method.
 func (x *CalCalendarStore) TaskWithUID(uid string) *CalTask {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("taskWithUID:"), purego.NSString(uid))
 	return CalTaskFromID(_r)
 }
 
+// SaveEventSpan wraps the corresponding Objective-C method.
 func (x *CalCalendarStore) SaveEventSpan(event *CalEvent, span CalSpan) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("saveEvent:span:error:"), objref.IDOf(event), span, unsafe.Pointer(&_nsErr))
@@ -121,6 +138,7 @@ func (x *CalCalendarStore) SaveEventSpan(event *CalEvent, span CalSpan) error {
 	return nil
 }
 
+// RemoveEventSpan wraps the corresponding Objective-C method.
 func (x *CalCalendarStore) RemoveEventSpan(event *CalEvent, span CalSpan) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeEvent:span:error:"), objref.IDOf(event), span, unsafe.Pointer(&_nsErr))
@@ -130,6 +148,7 @@ func (x *CalCalendarStore) RemoveEventSpan(event *CalEvent, span CalSpan) error 
 	return nil
 }
 
+// SaveTask wraps the corresponding Objective-C method.
 func (x *CalCalendarStore) SaveTask(task *CalTask) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("saveTask:error:"), objref.IDOf(task), unsafe.Pointer(&_nsErr))
@@ -139,6 +158,7 @@ func (x *CalCalendarStore) SaveTask(task *CalTask) error {
 	return nil
 }
 
+// RemoveTask wraps the corresponding Objective-C method.
 func (x *CalCalendarStore) RemoveTask(task *CalTask) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeTask:error:"), objref.IDOf(task), unsafe.Pointer(&_nsErr))

@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterRVCCleanMode is an idiomatic wrapper over the Objective-C class MTRClusterRVCCleanMode.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterRVCCleanMode struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterRVCCleanModeFromID adopts an existing Objective-C object as a MTRClusterRVCCleanMode
@@ -25,7 +26,8 @@ func MTRClusterRVCCleanModeFromID(id objc.ID) *MTRClusterRVCCleanMode {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterRVCCleanMode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterRVCCleanMode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,37 +40,23 @@ func mTRClusterRVCCleanModeAdopt(id objc.ID) *MTRClusterRVCCleanMode {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterRVCCleanMode{Handle: objref.Wrap(id)}
+	x := &MTRClusterRVCCleanMode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterRVCCleanMode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterRVCCleanMode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterRVCCleanMode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterRVCCleanModeWithDeviceEndpointIDQueue creates a new MTRClusterRVCCleanMode.
+// NewMTRClusterRVCCleanModeWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterRVCCleanModeWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterRVCCleanMode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterRVCCleanMode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterRVCCleanModeAdopt(_id)
 }
 
+// ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterRVCCleanMode) ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRRVCCleanModeClusterChangeToModeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRRVCCleanModeClusterChangeToModeResponseParams, error) {
+func (x *MTRClusterRVCCleanMode) ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRRVCCleanModeClusterChangeToModeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRRVCCleanModeClusterChangeToModeResponseParams, err error) {
 	type _result struct {
 		val *MTRRVCCleanModeClusterChangeToModeResponseParams
 		err error
@@ -90,36 +78,43 @@ func (x *MTRClusterRVCCleanMode) ChangeToModeWithParamsExpectedValuesExpectedVal
 	}
 }
 
+// ReadAttributeSupportedModesWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRVCCleanMode) ReadAttributeSupportedModesWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedModesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeCurrentModeWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRVCCleanMode) ReadAttributeCurrentModeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRVCCleanMode) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRVCCleanMode) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRVCCleanMode) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRVCCleanMode) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterRVCCleanMode) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -139,3 +134,7 @@ type MTRClusterRVCCleanModeable interface {
 }
 
 var _ MTRClusterRVCCleanModeable = (*MTRClusterRVCCleanMode)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterRVCCleanMode)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterRVCCleanMode)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view controller that delivers input either from the responder chain to views, or from game controllers to profiles.
-//
 // EventViewController is an idiomatic wrapper over the Objective-C class GCEventViewController.
+//
+// A view controller that delivers input either from the responder chain to views, or from game controllers to profiles.
 type EventViewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func EventViewControllerFromID(id objc.ID) *EventViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &EventViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EventViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func eventViewControllerAdopt(id objc.ID) *EventViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &EventViewController{Handle: objref.Wrap(id)}
+	x := &EventViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *EventViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *EventViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewEventViewController creates a new EventViewController.
 func NewEventViewController() *EventViewController {
 	_id := objc.Send[objc.ID](objc.ID(_class("GCEventViewController")), objc.RegisterName("new"))
 	return eventViewControllerAdopt(_id)
 }
 
-// A Boolean value that indicates whether the system delivers game controller input to profile objects or to views using the responder chain.
-//
-// WithControllerUserInteractionEnabled sets controllerUserInteractionEnabled and returns the receiver so calls can be chained.
+// WithControllerUserInteractionEnabled a Boolean value that indicates whether the system delivers game controller input to profile objects or to views using the responder chain.
 func (x *EventViewController) WithControllerUserInteractionEnabled(controllerUserInteractionEnabled bool) *EventViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControllerUserInteractionEnabled:"), controllerUserInteractionEnabled)
 	return x
 }
 
+// ControllerUserInteractionEnabled wraps the corresponding Objective-C method.
 func (x *EventViewController) ControllerUserInteractionEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("controllerUserInteractionEnabled"))
 	return _r
 }
 
+// SetControllerUserInteractionEnabled wraps the corresponding Objective-C method.
 func (x *EventViewController) SetControllerUserInteractionEnabled(controllerUserInteractionEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControllerUserInteractionEnabled:"), controllerUserInteractionEnabled)
 }

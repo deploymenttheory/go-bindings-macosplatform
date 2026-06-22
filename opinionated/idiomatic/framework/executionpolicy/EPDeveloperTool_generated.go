@@ -23,7 +23,8 @@ func DeveloperToolFromID(id objc.ID) *DeveloperTool {
 	if id == 0 {
 		return nil
 	}
-	x := &DeveloperTool{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DeveloperTool{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func developerToolAdopt(id objc.ID) *DeveloperTool {
 	if id == 0 {
 		return nil
 	}
-	x := &DeveloperTool{Handle: objref.Wrap(id)}
+	x := &DeveloperTool{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,18 +58,24 @@ func (x *DeveloperTool) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DeveloperTool) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDeveloperTool creates a new DeveloperTool.
 func NewDeveloperTool() *DeveloperTool {
 	_id := objc.Send[objc.ID](objc.ID(_class("EPDeveloperTool")), objc.RegisterName("new"))
 	return developerToolAdopt(_id)
 }
 
-// Checks whether developer tool privileges are already available and if not populates an entry in Settings for user approval. This method does not show any UI to the user or guide them towards Settings for approval, if necessary. - Parameter handler: A block called asynchronously with whether the privilege is available. > New info > Concurrency Note: You can call this method from synchronous code using a completion handler, > as shown on this page, or you can call it as an asynchronous method that has the > following declaration: > > ```swift > func requestAccess() async -> Bool > ``` > > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
+// RequestDeveloperToolAccessWithCompletionHandler checks whether developer tool privileges are already available and if not populates an entry in Settings for user approval. This method does not show any UI to the user or guide them towards Settings for approval, if necessary. - Parameter handler: A block called asynchronously with whether the privilege is available. > New info > Concurrency Note: You can call this method from synchronous code using a completion handler, > as shown on this page, or you can call it as an asynchronous method that has the > following declaration: > > ```swift > func requestAccess() async -> Bool > ``` > > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
 func (x *DeveloperTool) RequestDeveloperToolAccessWithCompletionHandler(handler func(bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestDeveloperToolAccessWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { handler(_b0) }))
 }
 
-// The current authorization status of the current process. - Returns: An EPDeveloperToolStatus indicating whether the current process has developer tool privileges.
+// AuthorizationStatus the current authorization status of the current process. - Returns: An EPDeveloperToolStatus indicating whether the current process has developer tool privileges.
 func (x *DeveloperTool) AuthorizationStatus() DeveloperToolStatus {
 	_r := objc.Send[DeveloperToolStatus](objref.IDOf(x), objc.RegisterName("authorizationStatus"))
 	return _r

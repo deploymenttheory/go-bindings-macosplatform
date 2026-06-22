@@ -23,6 +23,8 @@ const (
 	ContainerStateActive ContainerState = 3
 )
 
+// String returns the ContainerState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ContainerState) String() string {
 	switch e {
 	case ContainerStateNotReady:
@@ -57,6 +59,8 @@ const (
 	ErrorInvalidDirectoryCookie ErrorCode = 4506
 )
 
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ErrorCode) String() string {
 	switch e {
 	case ErrorModuleLoadFailed:
@@ -88,6 +92,8 @@ const (
 	ExtentTypeZeroFill ExtentType = 1
 )
 
+// String returns the ExtentType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ExtentType) String() string {
 	switch e {
 	case ExtentTypeData:
@@ -141,6 +147,8 @@ const (
 	ItemAttributeInhibitKernelOffloadedIO ItemAttribute = 131072
 )
 
+// String returns the ItemAttribute constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ItemAttribute) String() string {
 	var parts []string
 	if e&ItemAttributeType != 0 {
@@ -214,6 +222,8 @@ const (
 	ItemIDRootDirectory ItemID = 2
 )
 
+// String returns the ItemID constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ItemID) String() string {
 	switch e {
 	case ItemIDInvalid:
@@ -248,6 +258,8 @@ const (
 	ItemTypeSocket ItemType = 7
 )
 
+// String returns the ItemType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ItemType) String() string {
 	switch e {
 	case ItemTypeUnknown:
@@ -285,6 +297,8 @@ const (
 	MatchResultUsable MatchResult = 3
 )
 
+// String returns the MatchResult constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MatchResult) String() string {
 	switch e {
 	case MatchResultNotRecognized:
@@ -311,6 +325,8 @@ const (
 	VolumeCaseFormatInsensitiveCasePreserving VolumeCaseFormat = 2
 )
 
+// String returns the VolumeCaseFormat constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VolumeCaseFormat) String() string {
 	switch e {
 	case VolumeCaseFormatSensitive:

@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // CNNPoolingGradientNode is an idiomatic wrapper over the Objective-C class MPSCNNPoolingGradientNode.
+//
+// CNNPoolingGradientNode is an abstract base — you do not construct it directly. Construct one of [CNNDilatedPoolingMaxGradientNode], [CNNPoolingAverageGradientNode], [CNNPoolingL2NormGradientNode], [CNNPoolingMaxGradientNode] and pass it where a CNNPoolingGradientNode is accepted.
 type CNNPoolingGradientNode struct {
-	objref.Handle
+	NNGradientFilterNode
 }
 
 // CNNPoolingGradientNodeFromID adopts an existing Objective-C object as a CNNPoolingGradientNode
@@ -23,7 +24,8 @@ func CNNPoolingGradientNodeFromID(id objc.ID) *CNNPoolingGradientNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNPoolingGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNPoolingGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,55 +38,37 @@ func cNNPoolingGradientNodeAdopt(id objc.ID) *CNNPoolingGradientNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNPoolingGradientNode{Handle: objref.Wrap(id)}
+	x := &CNNPoolingGradientNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNPoolingGradientNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNPoolingGradientNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNPoolingGradientNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewCNNPoolingGradientNode creates a new CNNPoolingGradientNode.
-func NewCNNPoolingGradientNode() *CNNPoolingGradientNode {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNPoolingGradientNode")), objc.RegisterName("new"))
-	return cNNPoolingGradientNodeAdopt(_id)
-}
-
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNPoolingGradientNode) WithLabel(label string) *CNNPoolingGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// KernelWidth wraps the corresponding Objective-C method.
 func (x *CNNPoolingGradientNode) KernelWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
+// KernelHeight wraps the corresponding Objective-C method.
 func (x *CNNPoolingGradientNode) KernelHeight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
+// StrideInPixelsX wraps the corresponding Objective-C method.
 func (x *CNNPoolingGradientNode) StrideInPixelsX() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInPixelsX"))
 	return _r
 }
 
+// StrideInPixelsY wraps the corresponding Objective-C method.
 func (x *CNNPoolingGradientNode) StrideInPixelsY() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInPixelsY"))
 	return _r
@@ -101,3 +85,14 @@ type CNNPoolingGradientNodeable interface {
 }
 
 var _ CNNPoolingGradientNodeable = (*CNNPoolingGradientNode)(nil)
+
+// isCNNPoolingGradientNode marks CNNPoolingGradientNode — and, by embedding promotion, its
+// subclasses — as a member of the CNNPoolingGradientNode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CNNPoolingGradientNode) isCNNPoolingGradientNode() {}
+
+var _ CNNPoolingGradientNodeProvider = (*CNNPoolingGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*CNNPoolingGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNPoolingGradientNode)(nil)

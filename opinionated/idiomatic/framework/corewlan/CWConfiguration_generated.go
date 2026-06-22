@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Encapsulates an immutable configuration for an AirPort WLAN interface.
-//
 // Configuration is an idiomatic wrapper over the Objective-C class CWConfiguration.
+//
+// Configuration is an abstract base — you do not construct it directly. Construct one of [MutableConfiguration] and pass it where a Configuration is accepted.
+//
+// Encapsulates an immutable configuration for an AirPort WLAN interface.
 type Configuration struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ConfigurationFromID(id objc.ID) *Configuration {
 	if id == 0 {
 		return nil
 	}
-	x := &Configuration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Configuration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func configurationAdopt(id objc.ID) *Configuration {
 	if id == 0 {
 		return nil
 	}
-	x := &Configuration{Handle: objref.Wrap(id)}
+	x := &Configuration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,52 +62,50 @@ func (x *Configuration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewConfiguration creates a new Configuration.
-func NewConfiguration() *Configuration {
-	_id := objc.Send[objc.ID](objc.ID(_class("CWConfiguration")), objc.RegisterName("new"))
-	return configurationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Configuration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Creates and returns a CWConfiguration object initialized with the given CWConfiguration object.
-//
-// NewConfigurationWithConfiguration creates a new Configuration.
+// NewConfigurationWithConfiguration creates and returns a CWConfiguration object initialized with the given CWConfiguration object.
 func NewConfigurationWithConfiguration(configuration *Configuration) *Configuration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CWConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), objref.IDOf(configuration))
 	return configurationAdopt(_id)
 }
 
-// Determine CWConfiguration object equality.
+// IsEqualToConfiguration determine CWConfiguration object equality.
 func (x *Configuration) IsEqualToConfiguration(configuration *Configuration) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToConfiguration:"), objref.IDOf(configuration))
 	return _r
 }
 
-// Returns the preferred networks list. The order of the ordered set corresponds to the order the preferred networks list.
+// NetworkProfiles returns the preferred networks list. The order of the ordered set corresponds to the order the preferred networks list.
 func (x *Configuration) NetworkProfiles() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkProfiles"))
 	return obj.Wrap(_r)
 }
 
-// Returns the preference to require an administrator password to change networks. If YES, the user may be prompted to enter an administrator password upon attempting to join a Wi-Fi network. This preference is enforced at the API layer.
+// RequireAdministratorForAssociation returns the preference to require an administrator password to change networks. If YES, the user may be prompted to enter an administrator password upon attempting to join a Wi-Fi network. This preference is enforced at the API layer.
 func (x *Configuration) RequireAdministratorForAssociation() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requireAdministratorForAssociation"))
 	return _r
 }
 
-// Returns the preference to require an administrator password to change the interface power state. If YES, the user may be prompted to enter an administrator password upon attempting to turn Wi-Fi on or off. This preference is enforced at the API layer.
+// RequireAdministratorForPower returns the preference to require an administrator password to change the interface power state. If YES, the user may be prompted to enter an administrator password upon attempting to turn Wi-Fi on or off. This preference is enforced at the API layer.
 func (x *Configuration) RequireAdministratorForPower() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requireAdministratorForPower"))
 	return _r
 }
 
-// Returns the preference to require an administrator password to create a computer-to-computer network. If YES, the user may be prompted to enter an administrator password upon attempting to create an IBSS network. This preference is enforced at the API layer.
+// RequireAdministratorForIBSSMode returns the preference to require an administrator password to create a computer-to-computer network. If YES, the user may be prompted to enter an administrator password upon attempting to create an IBSS network. This preference is enforced at the API layer.
 func (x *Configuration) RequireAdministratorForIBSSMode() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requireAdministratorForIBSSMode"))
 	return _r
 }
 
-// Returns the preference to remember all Wi-Fi networks joined unless otherwise specified by the user when joining a particular Wi-Fi network.
+// RememberJoinedNetworks returns the preference to remember all Wi-Fi networks joined unless otherwise specified by the user when joining a particular Wi-Fi network.
 func (x *Configuration) RememberJoinedNetworks() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("rememberJoinedNetworks"))
 	return _r
@@ -121,3 +123,10 @@ type Configurationable interface {
 }
 
 var _ Configurationable = (*Configuration)(nil)
+
+// isConfiguration marks Configuration — and, by embedding promotion, its
+// subclasses — as a member of the Configuration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Configuration) isConfiguration() {}
+
+var _ ConfigurationProvider = (*Configuration)(nil)

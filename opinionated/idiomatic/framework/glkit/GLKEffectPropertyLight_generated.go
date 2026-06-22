@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Lighting information for use in GLKit rendering effects.
-//
 // EffectPropertyLight is an idiomatic wrapper over the Objective-C class GLKEffectPropertyLight.
+//
+// It embeds [EffectProperty], promoting that type's methods.
+//
+// Lighting information for use in GLKit rendering effects.
 type EffectPropertyLight struct {
-	objref.Handle
+	EffectProperty
 }
 
 // EffectPropertyLightFromID adopts an existing Objective-C object as a EffectPropertyLight
@@ -25,7 +26,8 @@ func EffectPropertyLightFromID(id objc.ID) *EffectPropertyLight {
 	if id == 0 {
 		return nil
 	}
-	x := &EffectPropertyLight{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EffectPropertyLight{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func effectPropertyLightAdopt(id objc.ID) *EffectPropertyLight {
 	if id == 0 {
 		return nil
 	}
-	x := &EffectPropertyLight{Handle: objref.Wrap(id)}
+	x := &EffectPropertyLight{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *EffectPropertyLight) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EffectPropertyLight) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EffectPropertyLight) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewEffectPropertyLight creates a new EffectPropertyLight.
@@ -64,121 +52,121 @@ func NewEffectPropertyLight() *EffectPropertyLight {
 	return effectPropertyLightAdopt(_id)
 }
 
-// A Boolean value that indicates whether calculations should be performed on this light.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether calculations should be performed on this light.
 func (x *EffectPropertyLight) WithEnabled(enabled uint8) *EffectPropertyLight {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A value indicating how focused the spotlight is.
-//
-// WithSpotExponent sets spotExponent and returns the receiver so calls can be chained.
+// WithSpotExponent a value indicating how focused the spotlight is.
 func (x *EffectPropertyLight) WithSpotExponent(spotExponent float32) *EffectPropertyLight {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpotExponent:"), spotExponent)
 	return x
 }
 
-// The angle in degrees where the spotlight is cut off.
-//
-// WithSpotCutoff sets spotCutoff and returns the receiver so calls can be chained.
+// WithSpotCutoff the angle in degrees where the spotlight is cut off.
 func (x *EffectPropertyLight) WithSpotCutoff(spotCutoff float32) *EffectPropertyLight {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpotCutoff:"), spotCutoff)
 	return x
 }
 
-// A constant factor applied to the attenuation of a point light or spotlight.
-//
-// WithConstantAttenuation sets constantAttenuation and returns the receiver so calls can be chained.
+// WithConstantAttenuation a constant factor applied to the attenuation of a point light or spotlight.
 func (x *EffectPropertyLight) WithConstantAttenuation(constantAttenuation float32) *EffectPropertyLight {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstantAttenuation:"), constantAttenuation)
 	return x
 }
 
-// A linear factor applied to the attenuation of a point light or spotlight.
-//
-// WithLinearAttenuation sets linearAttenuation and returns the receiver so calls can be chained.
+// WithLinearAttenuation a linear factor applied to the attenuation of a point light or spotlight.
 func (x *EffectPropertyLight) WithLinearAttenuation(linearAttenuation float32) *EffectPropertyLight {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinearAttenuation:"), linearAttenuation)
 	return x
 }
 
-// A quadratic factor applied to the attenuation of a point light or spotlight.
-//
-// WithQuadraticAttenuation sets quadraticAttenuation and returns the receiver so calls can be chained.
+// WithQuadraticAttenuation a quadratic factor applied to the attenuation of a point light or spotlight.
 func (x *EffectPropertyLight) WithQuadraticAttenuation(quadraticAttenuation float32) *EffectPropertyLight {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuadraticAttenuation:"), quadraticAttenuation)
 	return x
 }
 
-// A transform applied to the light’s position and direction before calculating the contribution of the light.
-//
-// WithTransform sets transform and returns the receiver so calls can be chained.
+// WithTransform a transform applied to the light’s position and direction before calculating the contribution of the light.
 func (x *EffectPropertyLight) WithTransform(transform *EffectPropertyTransform) *EffectPropertyLight {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransform:"), objref.IDOf(transform))
 	return x
 }
 
+// Enabled wraps the corresponding Objective-C method.
 func (x *EffectPropertyLight) Enabled() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("enabled"))
 	return _r
 }
 
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *EffectPropertyLight) SetEnabled(enabled uint8) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
+// SpotExponent wraps the corresponding Objective-C method.
 func (x *EffectPropertyLight) SpotExponent() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("spotExponent"))
 	return _r
 }
 
+// SetSpotExponent wraps the corresponding Objective-C method.
 func (x *EffectPropertyLight) SetSpotExponent(spotExponent float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpotExponent:"), spotExponent)
 }
 
+// SpotCutoff wraps the corresponding Objective-C method.
 func (x *EffectPropertyLight) SpotCutoff() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("spotCutoff"))
 	return _r
 }
 
+// SetSpotCutoff wraps the corresponding Objective-C method.
 func (x *EffectPropertyLight) SetSpotCutoff(spotCutoff float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpotCutoff:"), spotCutoff)
 }
 
+// ConstantAttenuation wraps the corresponding Objective-C method.
 func (x *EffectPropertyLight) ConstantAttenuation() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("constantAttenuation"))
 	return _r
 }
 
+// SetConstantAttenuation wraps the corresponding Objective-C method.
 func (x *EffectPropertyLight) SetConstantAttenuation(constantAttenuation float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstantAttenuation:"), constantAttenuation)
 }
 
+// LinearAttenuation wraps the corresponding Objective-C method.
 func (x *EffectPropertyLight) LinearAttenuation() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("linearAttenuation"))
 	return _r
 }
 
+// SetLinearAttenuation wraps the corresponding Objective-C method.
 func (x *EffectPropertyLight) SetLinearAttenuation(linearAttenuation float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinearAttenuation:"), linearAttenuation)
 }
 
+// QuadraticAttenuation wraps the corresponding Objective-C method.
 func (x *EffectPropertyLight) QuadraticAttenuation() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("quadraticAttenuation"))
 	return _r
 }
 
+// SetQuadraticAttenuation wraps the corresponding Objective-C method.
 func (x *EffectPropertyLight) SetQuadraticAttenuation(quadraticAttenuation float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuadraticAttenuation:"), quadraticAttenuation)
 }
 
+// Transform wraps the corresponding Objective-C method.
 func (x *EffectPropertyLight) Transform() *EffectPropertyTransform {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transform"))
 	return EffectPropertyTransformFromID(_r)
 }
 
+// SetTransform wraps the corresponding Objective-C method.
 func (x *EffectPropertyLight) SetTransform(transform *EffectPropertyTransform) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransform:"), objref.IDOf(transform))
 }
@@ -210,3 +198,5 @@ type EffectPropertyLightable interface {
 }
 
 var _ EffectPropertyLightable = (*EffectPropertyLight)(nil)
+
+var _ EffectPropertyProvider = (*EffectPropertyLight)(nil)

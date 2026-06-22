@@ -6,17 +6,20 @@ package vision
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An observation that provides the recognized feature print.
-//
 // FeaturePrintObservation is an idiomatic wrapper over the Objective-C class VNFeaturePrintObservation.
+//
+// It embeds [Observation], promoting that type's methods.
+//
+// An observation that provides the recognized feature print.
 type FeaturePrintObservation struct {
-	objref.Handle
+	Observation
 }
 
 // FeaturePrintObservationFromID adopts an existing Objective-C object as a FeaturePrintObservation
@@ -25,7 +28,8 @@ func FeaturePrintObservationFromID(id objc.ID) *FeaturePrintObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &FeaturePrintObservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FeaturePrintObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func featurePrintObservationAdopt(id objc.ID) *FeaturePrintObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &FeaturePrintObservation{Handle: objref.Wrap(id)}
+	x := &FeaturePrintObservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *FeaturePrintObservation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FeaturePrintObservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FeaturePrintObservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewFeaturePrintObservation creates a new FeaturePrintObservation.
@@ -64,19 +54,30 @@ func NewFeaturePrintObservation() *FeaturePrintObservation {
 	return featurePrintObservationAdopt(_id)
 }
 
-// The type of each element in the data.
+// ComputeDistanceToFeaturePrintObservation computes the distance between two feature print observations.
+func (x *FeaturePrintObservation) ComputeDistanceToFeaturePrintObservation(featurePrint *FeaturePrintObservation) (outDistance float32, err error) {
+	var _out0 float32
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("computeDistance:toFeaturePrintObservation:error:"), unsafe.Pointer(&_out0), objref.IDOf(featurePrint), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _out0, nil
+}
+
+// ElementType the type of each element in the data.
 func (x *FeaturePrintObservation) ElementType() ElementType {
 	_r := objc.Send[ElementType](objref.IDOf(x), objc.RegisterName("elementType"))
 	return _r
 }
 
-// The total number of elements in the data.
+// ElementCount the total number of elements in the data.
 func (x *FeaturePrintObservation) ElementCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("elementCount"))
 	return _r
 }
 
-// The feature print data.
+// Data the feature print data.
 func (x *FeaturePrintObservation) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
@@ -85,9 +86,12 @@ func (x *FeaturePrintObservation) Data() obj.Object {
 // FeaturePrintObservationable is the interface implemented by [FeaturePrintObservation], for mocking and DI.
 type FeaturePrintObservationable interface {
 	obj.Object
+	ComputeDistanceToFeaturePrintObservation(featurePrint *FeaturePrintObservation) (outDistance float32, err error)
 	ElementType() ElementType
 	ElementCount() int
 	Data() obj.Object
 }
 
 var _ FeaturePrintObservationable = (*FeaturePrintObservation)(nil)
+
+var _ ObservationProvider = (*FeaturePrintObservation)(nil)

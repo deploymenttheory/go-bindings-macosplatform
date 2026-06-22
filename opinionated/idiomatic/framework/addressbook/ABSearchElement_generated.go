@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object you use to specify a search query for records in the Address Book database.
-//
 // SearchElement is an idiomatic wrapper over the Objective-C class ABSearchElement.
+//
+// An object you use to specify a search query for records in the Address Book database.
 type SearchElement struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SearchElementFromID(id objc.ID) *SearchElement {
 	if id == 0 {
 		return nil
 	}
-	x := &SearchElement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SearchElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func searchElementAdopt(id objc.ID) *SearchElement {
 	if id == 0 {
 		return nil
 	}
-	x := &SearchElement{Handle: objref.Wrap(id)}
+	x := &SearchElement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *SearchElement) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SearchElement) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSearchElement creates a new SearchElement.
 func NewSearchElement() *SearchElement {
 	_id := objc.Send[objc.ID](objc.ID(_class("ABSearchElement")), objc.RegisterName("new"))
 	return searchElementAdopt(_id)
 }
 
-// Tests whether or not a record matches a search element.
+// MatchesRecord tests whether or not a record matches a search element.
 func (x *SearchElement) MatchesRecord(record *Record) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("matchesRecord:"), objref.IDOf(record))
 	return _r

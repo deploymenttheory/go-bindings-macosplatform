@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Downloadable content associated with a product.
-//
 // Download is an idiomatic wrapper over the Objective-C class SKDownload.
+//
+// Downloadable content associated with a product.
 type Download struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DownloadFromID(id objc.ID) *Download {
 	if id == 0 {
 		return nil
 	}
-	x := &Download{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Download{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func downloadAdopt(id objc.ID) *Download {
 	if id == 0 {
 		return nil
 	}
-	x := &Download{Handle: objref.Wrap(id)}
+	x := &Download{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,31 @@ func (x *Download) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Download) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDownload creates a new Download.
 func NewDownload() *Download {
 	_id := objc.Send[objc.ID](objc.ID(_class("SKDownload")), objc.RegisterName("new"))
 	return downloadAdopt(_id)
 }
 
+// State wraps the corresponding Objective-C method.
 func (x *Download) State() DownloadState {
 	_r := objc.Send[DownloadState](objref.IDOf(x), objc.RegisterName("state"))
 	return _r
 }
 
+// ExpectedContentLength wraps the corresponding Objective-C method.
 func (x *Download) ExpectedContentLength() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("expectedContentLength"))
 	return _r
 }
 
+// ContentIdentifier wraps the corresponding Objective-C method.
 func (x *Download) ContentIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentIdentifier"))
 	if _r == 0 {
@@ -82,11 +93,13 @@ func (x *Download) ContentIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// ContentURL wraps the corresponding Objective-C method.
 func (x *Download) ContentURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentURL"))
 	return obj.Wrap(_r)
 }
 
+// ContentVersion wraps the corresponding Objective-C method.
 func (x *Download) ContentVersion() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentVersion"))
 	if _r == 0 {
@@ -95,16 +108,19 @@ func (x *Download) ContentVersion() string {
 	return purego.GoString(_r)
 }
 
+// Progress wraps the corresponding Objective-C method.
 func (x *Download) Progress() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("progress"))
 	return _r
 }
 
+// TimeRemaining wraps the corresponding Objective-C method.
 func (x *Download) TimeRemaining() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeRemaining"))
 	return _r
 }
 
+// Transaction wraps the corresponding Objective-C method.
 func (x *Download) Transaction() *PaymentTransaction {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transaction"))
 	return PaymentTransactionFromID(_r)

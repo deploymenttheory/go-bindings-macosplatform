@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An optimization layer that performs an Adam pdate.
-//
 // NNOptimizerAdam is an idiomatic wrapper over the Objective-C class MPSNNOptimizerAdam.
+//
+// It embeds [NNOptimizer], promoting that type's methods.
+//
+// An optimization layer that performs an Adam pdate.
 type NNOptimizerAdam struct {
-	objref.Handle
+	NNOptimizer
 }
 
 // NNOptimizerAdamFromID adopts an existing Objective-C object as a NNOptimizerAdam
@@ -25,7 +26,8 @@ func NNOptimizerAdamFromID(id objc.ID) *NNOptimizerAdam {
 	if id == 0 {
 		return nil
 	}
-	x := &NNOptimizerAdam{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNOptimizerAdam{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func nNOptimizerAdamAdopt(id objc.ID) *NNOptimizerAdam {
 	if id == 0 {
 		return nil
 	}
-	x := &NNOptimizerAdam{Handle: objref.Wrap(id)}
+	x := &NNOptimizerAdam{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NNOptimizerAdam) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNOptimizerAdam) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNOptimizerAdam) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNNOptimizerAdam creates a new NNOptimizerAdam.
@@ -64,62 +52,55 @@ func NewNNOptimizerAdam() *NNOptimizerAdam {
 	return nNOptimizerAdamAdopt(_id)
 }
 
-// Current timeStep for the update, number of times update has occurred
-//
-// WithTimeStep sets timeStep and returns the receiver so calls can be chained.
+// WithTimeStep current timeStep for the update, number of times update has occurred
 func (x *NNOptimizerAdam) WithTimeStep(timeStep int) *NNOptimizerAdam {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeStep:"), timeStep)
 	return x
 }
 
-// The learningRate at which we update values The default value is 1e-3
-//
-// WithLearningRate sets learningRate and returns the receiver so calls can be chained.
+// WithLearningRate the learningRate at which we update values The default value is 1e-3
 func (x *NNOptimizerAdam) WithLearningRate(learningRate float32) *NNOptimizerAdam {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
 	return x
 }
 
-// A bool which decides if gradient will be clipped The default value is NO
-//
-// WithApplyGradientClipping sets applyGradientClipping and returns the receiver so calls can be chained.
+// WithApplyGradientClipping a bool which decides if gradient will be clipped The default value is NO
 func (x *NNOptimizerAdam) WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerAdam {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplyGradientClipping:"), applyGradientClipping)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *NNOptimizerAdam) WithLabel(label string) *NNOptimizerAdam {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The beta1 at which we update values Default value is 0.9
+// Beta1 the beta1 at which we update values Default value is 0.9
 func (x *NNOptimizerAdam) Beta1() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("beta1"))
 	return _r
 }
 
-// The beta2 at which we update values Default value is 0.999
+// Beta2 the beta2 at which we update values Default value is 0.999
 func (x *NNOptimizerAdam) Beta2() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("beta2"))
 	return _r
 }
 
-// The epsilon at which we update values This value is usually used to ensure to avoid divide by 0, default value is 1e-8
+// Epsilon the epsilon at which we update values This value is usually used to ensure to avoid divide by 0, default value is 1e-8
 func (x *NNOptimizerAdam) Epsilon() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
 	return _r
 }
 
-// Current timeStep for the update, number of times update has occurred
+// TimeStep current timeStep for the update, number of times update has occurred
 func (x *NNOptimizerAdam) TimeStep() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("timeStep"))
 	return _r
 }
 
+// SetTimeStep wraps the corresponding Objective-C method.
 func (x *NNOptimizerAdam) SetTimeStep(timeStep int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeStep:"), timeStep)
 }
@@ -139,3 +120,7 @@ type NNOptimizerAdamable interface {
 }
 
 var _ NNOptimizerAdamable = (*NNOptimizerAdam)(nil)
+
+var _ NNOptimizerProvider = (*NNOptimizerAdam)(nil)
+
+var _ KernelProvider = (*NNOptimizerAdam)(nil)

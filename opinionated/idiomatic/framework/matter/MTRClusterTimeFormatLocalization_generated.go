@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterTimeFormatLocalization is an idiomatic wrapper over the Objective-C class MTRClusterTimeFormatLocalization.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterTimeFormatLocalization struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterTimeFormatLocalizationFromID adopts an existing Objective-C object as a MTRClusterTimeFormatLocalization
@@ -23,7 +24,8 @@ func MTRClusterTimeFormatLocalizationFromID(id objc.ID) *MTRClusterTimeFormatLoc
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterTimeFormatLocalization{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterTimeFormatLocalization{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,29 +38,13 @@ func mTRClusterTimeFormatLocalizationAdopt(id objc.ID) *MTRClusterTimeFormatLoca
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterTimeFormatLocalization{Handle: objref.Wrap(id)}
+	x := &MTRClusterTimeFormatLocalization{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterTimeFormatLocalization) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterTimeFormatLocalization) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterTimeFormatLocalization) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
-//
-// NewMTRClusterTimeFormatLocalizationWithDeviceEndpointIDQueue creates a new MTRClusterTimeFormatLocalization.
+// NewMTRClusterTimeFormatLocalizationWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func NewMTRClusterTimeFormatLocalizationWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterTimeFormatLocalization {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterTimeFormatLocalization")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -72,57 +58,69 @@ func NewMTRClusterTimeFormatLocalizationWithDeviceEndpointQueue(device *MTRDevic
 	return mTRClusterTimeFormatLocalizationAdopt(_id)
 }
 
+// ReadAttributeHourFormatWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTimeFormatLocalization) ReadAttributeHourFormatWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeHourFormatWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeHourFormatWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterTimeFormatLocalization) WriteAttributeHourFormatWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeHourFormatWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeHourFormatWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTimeFormatLocalization) WriteAttributeHourFormatWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeHourFormatWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeActiveCalendarTypeWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTimeFormatLocalization) ReadAttributeActiveCalendarTypeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveCalendarTypeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeActiveCalendarTypeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterTimeFormatLocalization) WriteAttributeActiveCalendarTypeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeActiveCalendarTypeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeActiveCalendarTypeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTimeFormatLocalization) WriteAttributeActiveCalendarTypeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeActiveCalendarTypeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeSupportedCalendarTypesWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTimeFormatLocalization) ReadAttributeSupportedCalendarTypesWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedCalendarTypesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTimeFormatLocalization) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTimeFormatLocalization) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTimeFormatLocalization) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTimeFormatLocalization) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTimeFormatLocalization) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -146,3 +144,7 @@ type MTRClusterTimeFormatLocalizationable interface {
 }
 
 var _ MTRClusterTimeFormatLocalizationable = (*MTRClusterTimeFormatLocalization)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterTimeFormatLocalization)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterTimeFormatLocalization)(nil)

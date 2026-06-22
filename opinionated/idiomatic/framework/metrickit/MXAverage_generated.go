@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for an average.
-//
 // Average is an idiomatic wrapper over the Objective-C class MXAverage.
+//
+// A unit of measure for an average.
 type Average struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AverageFromID(id objc.ID) *Average {
 	if id == 0 {
 		return nil
 	}
-	x := &Average{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Average{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func averageAdopt(id objc.ID) *Average {
 	if id == 0 {
 		return nil
 	}
-	x := &Average{Handle: objref.Wrap(id)}
+	x := &Average{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *Average) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Average) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAverage creates a new Average.
 func NewAverage() *Average {
 	_id := objc.Send[objc.ID](objc.ID(_class("MXAverage")), objc.RegisterName("new"))
 	return averageAdopt(_id)
 }
 
-// An NSMeasurement that contains the average measurement.
+// AverageMeasurement an NSMeasurement that contains the average measurement.
 func (x *Average) AverageMeasurement() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("averageMeasurement"))
 	return obj.Wrap(_r)
 }
 
-// An NSInteger representation of the number of samples in the distribution used to formulate the average. This value is negative if an unknown number of samples was used to compute the average.
+// SampleCount an NSInteger representation of the number of samples in the distribution used to formulate the average. This value is negative if an unknown number of samples was used to compute the average.
 func (x *Average) SampleCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sampleCount"))
 	return _r
 }
 
-// An double representation of the standard deviation of the distribution. This value is negative an unknown number of samples was used to compute the standard deviation.
+// StandardDeviation an double representation of the standard deviation of the distribution. This value is negative an unknown number of samples was used to compute the standard deviation.
 func (x *Average) StandardDeviation() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("standardDeviation"))
 	return _r

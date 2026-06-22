@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The class that defines the parameters for a single gate RNN operation.
-//
 // GraphSingleGateRNNDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphSingleGateRNNDescriptor.
+//
+// It embeds [GraphObject], promoting that type's methods.
+//
+// The class that defines the parameters for a single gate RNN operation.
 type GraphSingleGateRNNDescriptor struct {
-	objref.Handle
+	GraphObject
 }
 
 // GraphSingleGateRNNDescriptorFromID adopts an existing Objective-C object as a GraphSingleGateRNNDescriptor
@@ -25,7 +26,8 @@ func GraphSingleGateRNNDescriptorFromID(id objc.ID) *GraphSingleGateRNNDescripto
 	if id == 0 {
 		return nil
 	}
-	x := &GraphSingleGateRNNDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphSingleGateRNNDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func graphSingleGateRNNDescriptorAdopt(id objc.ID) *GraphSingleGateRNNDescriptor
 	if id == 0 {
 		return nil
 	}
-	x := &GraphSingleGateRNNDescriptor{Handle: objref.Wrap(id)}
+	x := &GraphSingleGateRNNDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GraphSingleGateRNNDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphSingleGateRNNDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphSingleGateRNNDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGraphSingleGateRNNDescriptor creates a new GraphSingleGateRNNDescriptor.
@@ -64,74 +52,70 @@ func NewGraphSingleGateRNNDescriptor() *GraphSingleGateRNNDescriptor {
 	return graphSingleGateRNNDescriptorAdopt(_id)
 }
 
-// A parameter that defines time direction of the input sequence.
-//
-// WithReverse sets reverse and returns the receiver so calls can be chained.
+// WithReverse a parameter that defines time direction of the input sequence.
 func (x *GraphSingleGateRNNDescriptor) WithReverse(reverse bool) *GraphSingleGateRNNDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReverse:"), reverse)
 	return x
 }
 
-// A parameter that defines a bidirectional RNN layer.
-//
-// WithBidirectional sets bidirectional and returns the receiver so calls can be chained.
+// WithBidirectional a parameter that defines a bidirectional RNN layer.
 func (x *GraphSingleGateRNNDescriptor) WithBidirectional(bidirectional bool) *GraphSingleGateRNNDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBidirectional:"), bidirectional)
 	return x
 }
 
-// A parameter that makes the RNN layer support training.
-//
-// WithTraining sets training and returns the receiver so calls can be chained.
+// WithTraining a parameter that makes the RNN layer support training.
 func (x *GraphSingleGateRNNDescriptor) WithTraining(training bool) *GraphSingleGateRNNDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTraining:"), training)
 	return x
 }
 
-// A parameter that defines the activation function to use with the RNN operation.
-//
-// WithActivation sets activation and returns the receiver so calls can be chained.
+// WithActivation a parameter that defines the activation function to use with the RNN operation.
 func (x *GraphSingleGateRNNDescriptor) WithActivation(activation GraphRNNActivation) *GraphSingleGateRNNDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivation:"), activation)
 	return x
 }
 
-// A parameter that defines time direction of the input sequence. If set to `YES` then the input sequence is passed in reverse time order to the layer. Note: Ignored when `bidirectional = YES`. Default value: `NO`.
+// Reverse a parameter that defines time direction of the input sequence. If set to `YES` then the input sequence is passed in reverse time order to the layer. Note: Ignored when `bidirectional = YES`. Default value: `NO`.
 func (x *GraphSingleGateRNNDescriptor) Reverse() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reverse"))
 	return _r
 }
 
+// SetReverse wraps the corresponding Objective-C method.
 func (x *GraphSingleGateRNNDescriptor) SetReverse(reverse bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReverse:"), reverse)
 }
 
-// A parameter that defines a bidirectional RNN layer. If set to `YES` then the input sequence is traversed in both directions and the two results are concatenated together on the channel-axis. Default value: `NO`.
+// Bidirectional a parameter that defines a bidirectional RNN layer. If set to `YES` then the input sequence is traversed in both directions and the two results are concatenated together on the channel-axis. Default value: `NO`.
 func (x *GraphSingleGateRNNDescriptor) Bidirectional() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bidirectional"))
 	return _r
 }
 
+// SetBidirectional wraps the corresponding Objective-C method.
 func (x *GraphSingleGateRNNDescriptor) SetBidirectional(bidirectional bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBidirectional:"), bidirectional)
 }
 
-// A parameter that makes the RNN layer support training. If set to `YES` then the layer will produce training state tensor as a secondary output. Default value: `NO`.
+// Training a parameter that makes the RNN layer support training. If set to `YES` then the layer will produce training state tensor as a secondary output. Default value: `NO`.
 func (x *GraphSingleGateRNNDescriptor) Training() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("training"))
 	return _r
 }
 
+// SetTraining wraps the corresponding Objective-C method.
 func (x *GraphSingleGateRNNDescriptor) SetTraining(training bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTraining:"), training)
 }
 
-// A parameter that defines the activation function to use with the RNN operation. Default value: `MPSGraphRNNActivationRelu`.
+// Activation a parameter that defines the activation function to use with the RNN operation. Default value: `MPSGraphRNNActivationRelu`.
 func (x *GraphSingleGateRNNDescriptor) Activation() GraphRNNActivation {
 	_r := objc.Send[GraphRNNActivation](objref.IDOf(x), objc.RegisterName("activation"))
 	return _r
 }
 
+// SetActivation wraps the corresponding Objective-C method.
 func (x *GraphSingleGateRNNDescriptor) SetActivation(activation GraphRNNActivation) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivation:"), activation)
 }
@@ -154,3 +138,5 @@ type GraphSingleGateRNNDescriptorable interface {
 }
 
 var _ GraphSingleGateRNNDescriptorable = (*GraphSingleGateRNNDescriptor)(nil)
+
+var _ GraphObjectProvider = (*GraphSingleGateRNNDescriptor)(nil)

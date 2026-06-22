@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a bit rate variant.
-//
 // AssetVariant is an idiomatic wrapper over the Objective-C class AVAssetVariant.
+//
+// An object that represents a bit rate variant.
 type AssetVariant struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetVariantFromID(id objc.ID) *AssetVariant {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetVariant{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetVariant{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetVariantAdopt(id objc.ID) *AssetVariant {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetVariant{Handle: objref.Wrap(id)}
+	x := &AssetVariant{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,43 @@ func (x *AssetVariant) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetVariant) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetVariant creates a new AssetVariant.
 func NewAssetVariant() *AssetVariant {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetVariant")), objc.RegisterName("new"))
 	return assetVariantAdopt(_id)
 }
 
-// If it is not declared, the value will be negative.
+// PeakBitRate if it is not declared, the value will be negative.
 func (x *AssetVariant) PeakBitRate() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("peakBitRate"))
 	return _r
 }
 
-// If it is not declared, the value will be negative.
+// AverageBitRate if it is not declared, the value will be negative.
 func (x *AssetVariant) AverageBitRate() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("averageBitRate"))
 	return _r
 }
 
-// Provides variant's video rendition attributes. If no video attributes are declared, it will be nil.
+// VideoAttributes provides variant's video rendition attributes. If no video attributes are declared, it will be nil.
 func (x *AssetVariant) VideoAttributes() *AssetVariantVideoAttributes {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoAttributes"))
 	return AssetVariantVideoAttributesFromID(_r)
 }
 
-// Provides variant's audio rendition attributes. If no audio attributes are declared, it will be nil.
+// AudioAttributes provides variant's audio rendition attributes. If no audio attributes are declared, it will be nil.
 func (x *AssetVariant) AudioAttributes() *AssetVariantAudioAttributes {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioAttributes"))
 	return AssetVariantAudioAttributesFromID(_r)
 }
 
-// Provides URL to media playlist corresponding to variant
+// URL provides URL to media playlist corresponding to variant
 func (x *AssetVariant) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The data object you use throughout the framework.
-//
 // Tensor is an idiomatic wrapper over the Objective-C class MLCTensor.
+//
+// The data object you use throughout the framework.
 type Tensor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TensorFromID(id objc.ID) *Tensor {
 	if id == 0 {
 		return nil
 	}
-	x := &Tensor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Tensor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func tensorAdopt(id objc.ID) *Tensor {
 	if id == 0 {
 		return nil
 	}
-	x := &Tensor{Handle: objref.Wrap(id)}
+	x := &Tensor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,87 +60,91 @@ func (x *Tensor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Tensor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTensor creates a new Tensor.
 func NewTensor() *Tensor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("new"))
 	return tensorAdopt(_id)
 }
 
-// A string that identifes this tensor.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string that identifes this tensor.
 func (x *Tensor) WithLabel(label string) *Tensor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Synchronizes the data in host memory.
+// SynchronizeData synchronizes the data in host memory.
 func (x *Tensor) SynchronizeData() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("synchronizeData"))
 	return _r
 }
 
-// Synchronizes the optimizer data in host memory.
+// SynchronizeOptimizerData synchronizes the optimizer data in host memory.
 func (x *Tensor) SynchronizeOptimizerData() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("synchronizeOptimizerData"))
 	return _r
 }
 
-// Associates the given data to the tensor, and if the device is a GPU, also copies the data to the device memory.
+// BindAndWriteDataToDevice associates the given data to the tensor, and if the device is a GPU, also copies the data to the device memory.
 func (x *Tensor) BindAndWriteDataToDevice(data *TensorData, device *Device) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bindAndWriteData:toDevice:"), objref.IDOf(data), objref.IDOf(device))
 	return _r
 }
 
-// Associates the optimizer and device data buffers you specify to the tensor.
+// BindOptimizerDataDeviceData associates the optimizer and device data buffers you specify to the tensor.
 func (x *Tensor) BindOptimizerDataDeviceData(data []*TensorData, deviceData []*TensorOptimizerDeviceData) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bindOptimizerData:deviceData:"), purego.SliceToNSArray(data, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(deviceData, func(_v *TensorOptimizerDeviceData) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
-// Converts a 32-bit floating-point tensor with the scale and bias you specify.
+// TensorByQuantizingToTypeScaleBias converts a 32-bit floating-point tensor with the scale and bias you specify.
 func (x *Tensor) TensorByQuantizingToTypeScaleBias(type_ DataType, scale float32, bias int) *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tensorByQuantizingToType:scale:bias:"), type_, scale, bias)
 	return TensorFromID(_r)
 }
 
-// Converts a 32-bit floating-point tensor with the scale and bias you specify.
+// TensorByQuantizingToTypeScaleBiasAxis converts a 32-bit floating-point tensor with the scale and bias you specify.
 func (x *Tensor) TensorByQuantizingToTypeScaleBiasAxis(type_ DataType, scale *Tensor, bias *Tensor, axis int) *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tensorByQuantizingToType:scale:bias:axis:"), type_, objref.IDOf(scale), objref.IDOf(bias), axis)
 	return TensorFromID(_r)
 }
 
-// Converts a tensor you quantize to a 32-bit floating-point tensor.
+// TensorByDequantizingToTypeScaleBias converts a tensor you quantize to a 32-bit floating-point tensor.
 func (x *Tensor) TensorByDequantizingToTypeScaleBias(type_ DataType, scale *Tensor, bias *Tensor) *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tensorByDequantizingToType:scale:bias:"), type_, objref.IDOf(scale), objref.IDOf(bias))
 	return TensorFromID(_r)
 }
 
-// Converts a tensor you quantize to a 32-bit floating-point tensor.
+// TensorByDequantizingToTypeScaleBiasAxis converts a tensor you quantize to a 32-bit floating-point tensor.
 func (x *Tensor) TensorByDequantizingToTypeScaleBiasAxis(type_ DataType, scale *Tensor, bias *Tensor, axis int) *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tensorByDequantizingToType:scale:bias:axis:"), type_, objref.IDOf(scale), objref.IDOf(bias), axis)
 	return TensorFromID(_r)
 }
 
-// The tensor ID A unique number to identify each tensor.  Assigned when the tensor is created.
+// TensorID the tensor ID A unique number to identify each tensor.  Assigned when the tensor is created.
 func (x *Tensor) TensorID() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("tensorID"))
 	return _r
 }
 
-// The tensor descriptor
+// Descriptor the tensor descriptor
 func (x *Tensor) Descriptor() *TensorDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
 	return TensorDescriptorFromID(_r)
 }
 
-// The tensor data
+// Data the tensor data
 func (x *Tensor) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// A string to help identify this object.
+// Label a string to help identify this object.
 func (x *Tensor) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -147,17 +153,18 @@ func (x *Tensor) Label() string {
 	return purego.GoString(_r)
 }
 
+// SetLabel wraps the corresponding Objective-C method.
 func (x *Tensor) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// The device associated with this tensor.
+// Device the device associated with this tensor.
 func (x *Tensor) Device() *Device {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
 	return DeviceFromID(_r)
 }
 
-// These are the host side optimizer (momentum and velocity) buffers which developers can query and initialize When customizing optimizer data, the contents of these buffers must be initialized before executing optimizer update for a graph.
+// OptimizerData these are the host side optimizer (momentum and velocity) buffers which developers can query and initialize When customizing optimizer data, the contents of these buffers must be initialized before executing optimizer update for a graph.
 //
 // OptimizerData returns the collection as a Go slice.
 func (x *Tensor) OptimizerData() []*TensorData {
@@ -165,7 +172,7 @@ func (x *Tensor) OptimizerData() []*TensorData {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TensorData { return TensorDataFromID(_id) })
 }
 
-// These are the device side optimizer (momentum and velocity) buffers which developers can query
+// OptimizerDeviceData these are the device side optimizer (momentum and velocity) buffers which developers can query
 //
 // OptimizerDeviceData returns the collection as a Go slice.
 func (x *Tensor) OptimizerDeviceData() []*TensorOptimizerDeviceData {
@@ -173,7 +180,7 @@ func (x *Tensor) OptimizerDeviceData() []*TensorOptimizerDeviceData {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TensorOptimizerDeviceData { return TensorOptimizerDeviceDataFromID(_id) })
 }
 
-// Returns a Boolean value indicating whether the underlying data has valid floating-point numerics, i.e. it does not contain NaN or INF floating-point values.
+// HasValidNumerics returns a Boolean value indicating whether the underlying data has valid floating-point numerics, i.e. it does not contain NaN or INF floating-point values.
 func (x *Tensor) HasValidNumerics() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasValidNumerics"))
 	return _r

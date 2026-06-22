@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for all framework optimizers.
-//
 // Optimizer is an idiomatic wrapper over the Objective-C class MLCOptimizer.
+//
+// Optimizer is an abstract base — you do not construct it directly. Construct one of [AdamOptimizer], [AdamWOptimizer], [RMSPropOptimizer], [SGDOptimizer] and pass it where a Optimizer is accepted.
+//
+// The base class for all framework optimizers.
 type Optimizer struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func OptimizerFromID(id objc.ID) *Optimizer {
 	if id == 0 {
 		return nil
 	}
-	x := &Optimizer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Optimizer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func optimizerAdopt(id objc.ID) *Optimizer {
 	if id == 0 {
 		return nil
 	}
-	x := &Optimizer{Handle: objref.Wrap(id)}
+	x := &Optimizer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,91 +62,89 @@ func (x *Optimizer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewOptimizer creates a new Optimizer.
-func NewOptimizer() *Optimizer {
-	_id := objc.Send[objc.ID](objc.ID(_class("MLCOptimizer")), objc.RegisterName("new"))
-	return optimizerAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Optimizer) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The learning rate.
-//
-// WithLearningRate sets learningRate and returns the receiver so calls can be chained.
+// WithLearningRate the learning rate.
 func (x *Optimizer) WithLearningRate(learningRate float32) *Optimizer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
 	return x
 }
 
-// A Boolean value that indicates whether you apply gradient clipping.
-//
-// WithAppliesGradientClipping sets appliesGradientClipping and returns the receiver so calls can be chained.
+// WithAppliesGradientClipping a Boolean value that indicates whether you apply gradient clipping.
 func (x *Optimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *Optimizer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesGradientClipping:"), appliesGradientClipping)
 	return x
 }
 
-// The learning rate.  This property is 'readwrite' so that callers can implement a 'decay' during training
+// LearningRate the learning rate.  This property is 'readwrite' so that callers can implement a 'decay' during training
 func (x *Optimizer) LearningRate() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("learningRate"))
 	return _r
 }
 
+// SetLearningRate wraps the corresponding Objective-C method.
 func (x *Optimizer) SetLearningRate(learningRate float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
 }
 
-// The rescale value applied to gradients during optimizer update
+// GradientRescale the rescale value applied to gradients during optimizer update
 func (x *Optimizer) GradientRescale() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gradientRescale"))
 	return _r
 }
 
-// Whether gradient clipping should be applied or not.
+// AppliesGradientClipping whether gradient clipping should be applied or not.
 func (x *Optimizer) AppliesGradientClipping() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appliesGradientClipping"))
 	return _r
 }
 
+// SetAppliesGradientClipping wraps the corresponding Objective-C method.
 func (x *Optimizer) SetAppliesGradientClipping(appliesGradientClipping bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesGradientClipping:"), appliesGradientClipping)
 }
 
-// The maximum gradient value if gradient clipping is enabled before gradient is rescaled.
+// GradientClipMax the maximum gradient value if gradient clipping is enabled before gradient is rescaled.
 func (x *Optimizer) GradientClipMax() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gradientClipMax"))
 	return _r
 }
 
-// The minimum gradient value if gradient clipping is enabled before gradient is rescaled.
+// GradientClipMin the minimum gradient value if gradient clipping is enabled before gradient is rescaled.
 func (x *Optimizer) GradientClipMin() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gradientClipMin"))
 	return _r
 }
 
-// The regularization scale.
+// RegularizationScale the regularization scale.
 func (x *Optimizer) RegularizationScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("regularizationScale"))
 	return _r
 }
 
-// The regularization type.
+// RegularizationType the regularization type.
 func (x *Optimizer) RegularizationType() RegularizationType {
 	_r := objc.Send[RegularizationType](objref.IDOf(x), objc.RegisterName("regularizationType"))
 	return _r
 }
 
-// The type of clipping applied to gradient
+// GradientClippingType the type of clipping applied to gradient
 func (x *Optimizer) GradientClippingType() GradientClippingType {
 	_r := objc.Send[GradientClippingType](objref.IDOf(x), objc.RegisterName("gradientClippingType"))
 	return _r
 }
 
-// The maximum clipping value
+// MaximumClippingNorm the maximum clipping value
 func (x *Optimizer) MaximumClippingNorm() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumClippingNorm"))
 	return _r
 }
 
-// Used only with MLCGradientClippingTypeByGlobalNorm. If non zero, this norm will be used in place of global norm.
+// CustomGlobalNorm used only with MLCGradientClippingTypeByGlobalNorm. If non zero, this norm will be used in place of global norm.
 func (x *Optimizer) CustomGlobalNorm() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("customGlobalNorm"))
 	return _r
@@ -168,3 +170,10 @@ type Optimizerable interface {
 }
 
 var _ Optimizerable = (*Optimizer)(nil)
+
+// isOptimizer marks Optimizer — and, by embedding promotion, its
+// subclasses — as a member of the Optimizer hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Optimizer) isOptimizer() {}
+
+var _ OptimizerProvider = (*Optimizer)(nil)

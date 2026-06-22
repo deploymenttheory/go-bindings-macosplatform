@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object with a shape and position that blocks audio from reaching the listener.
-//
 // Occluder is an idiomatic wrapper over the Objective-C class PHASEOccluder.
+//
+// It embeds [Object], promoting that type's methods.
+//
+// An object with a shape and position that blocks audio from reaching the listener.
 type Occluder struct {
-	objref.Handle
+	Object
 }
 
 // OccluderFromID adopts an existing Objective-C object as a Occluder
@@ -25,7 +26,8 @@ func OccluderFromID(id objc.ID) *Occluder {
 	if id == 0 {
 		return nil
 	}
-	x := &Occluder{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Occluder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,35 +40,21 @@ func occluderAdopt(id objc.ID) *Occluder {
 	if id == 0 {
 		return nil
 	}
-	x := &Occluder{Handle: objref.Wrap(id)}
+	x := &Occluder{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *Occluder) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Occluder) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Occluder) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates an occluder with the given engine and shapes.
-//
-// NewOccluderWithEngineShapes creates a new Occluder.
+// NewOccluderWithEngineShapes creates an occluder with the given engine and shapes.
 func NewOccluderWithEngineShapes(engine *Engine, shapes []*Shape) *Occluder {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEOccluder")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:shapes:"), objref.IDOf(engine), purego.SliceToNSArray(shapes, func(_v *Shape) objc.ID { return objref.IDOf(_v) }))
 	return occluderAdopt(_id)
 }
 
+// Shapes wraps the corresponding Objective-C method.
+//
 // Shapes returns the collection as a Go slice.
 func (x *Occluder) Shapes() []*Shape {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shapes"))
@@ -80,3 +68,5 @@ type Occluderable interface {
 }
 
 var _ Occluderable = (*Occluder)(nil)
+
+var _ ObjectProvider = (*Occluder)(nil)

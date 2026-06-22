@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBaseClusterOccupancySensing is an idiomatic wrapper over the Objective-C class MTRBaseClusterOccupancySensing.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
 type MTRBaseClusterOccupancySensing struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterOccupancySensingFromID adopts an existing Objective-C object as a MTRBaseClusterOccupancySensing
@@ -25,7 +26,8 @@ func MTRBaseClusterOccupancySensingFromID(id objc.ID) *MTRBaseClusterOccupancySe
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterOccupancySensing{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterOccupancySensing{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func mTRBaseClusterOccupancySensingAdopt(id objc.ID) *MTRBaseClusterOccupancySen
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterOccupancySensing{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterOccupancySensing{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterOccupancySensing) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterOccupancySensing) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterOccupancySensing) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterOccupancySensingWithDeviceEndpointIDQueue creates a new MTRBaseClusterOccupancySensing.
+// NewMTRBaseClusterOccupancySensingWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterOccupancySensingWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterOccupancySensing {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterOccupancySensing")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -74,8 +60,10 @@ func NewMTRBaseClusterOccupancySensingWithDeviceEndpointQueue(device *MTRBaseDev
 	return mTRBaseClusterOccupancySensingAdopt(_id)
 }
 
+// ReadAttributeOccupancyWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeOccupancyWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeOccupancyWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeOccupancyWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -97,8 +85,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeOccupancyWithCompletion(ct
 	}
 }
 
+// SubscribeAttributeOccupancyWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOccupancyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -120,8 +110,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancyWithParamsSu
 	}
 }
 
+// ReadAttributeOccupancySensorTypeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeOccupancySensorTypeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorTypeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -143,8 +135,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorTypeWithCom
 	}
 }
 
+// SubscribeAttributeOccupancySensorTypeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOccupancySensorTypeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -166,8 +160,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTypeWi
 	}
 }
 
+// ReadAttributeOccupancySensorTypeBitmapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeOccupancySensorTypeBitmapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorTypeBitmapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorTypeBitmapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -189,8 +185,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorTypeBitmapW
 	}
 }
 
+// SubscribeAttributeOccupancySensorTypeBitmapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOccupancySensorTypeBitmapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTypeBitmapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTypeBitmapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -212,8 +210,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTypeBi
 	}
 }
 
+// ReadAttributeHoldTimeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeHoldTimeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeHoldTimeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeHoldTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -235,8 +235,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeHoldTimeWithCompletion(ctx
 	}
 }
 
+// SubscribeAttributeHoldTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeHoldTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeHoldTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeHoldTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -258,8 +260,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeHoldTimeWithParamsSub
 	}
 }
 
+// ReadAttributeHoldTimeLimitsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeHoldTimeLimitsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeHoldTimeLimitsWithCompletion(ctx context.Context) (*MTROccupancySensingClusterHoldTimeLimitsStruct, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeHoldTimeLimitsWithCompletion(ctx context.Context) (result *MTROccupancySensingClusterHoldTimeLimitsStruct, err error) {
 	type _result struct {
 		val *MTROccupancySensingClusterHoldTimeLimitsStruct
 		err error
@@ -281,8 +285,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeHoldTimeLimitsWithCompleti
 	}
 }
 
+// SubscribeAttributeHoldTimeLimitsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeHoldTimeLimitsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeHoldTimeLimitsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTROccupancySensingClusterHoldTimeLimitsStruct, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeHoldTimeLimitsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTROccupancySensingClusterHoldTimeLimitsStruct, err error) {
 	type _result struct {
 		val *MTROccupancySensingClusterHoldTimeLimitsStruct
 		err error
@@ -304,8 +310,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeHoldTimeLimitsWithPar
 	}
 }
 
+// ReadAttributePIROccupiedToUnoccupiedDelayWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePIROccupiedToUnoccupiedDelayWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributePIROccupiedToUnoccupiedDelayWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributePIROccupiedToUnoccupiedDelayWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -327,8 +335,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributePIROccupiedToUnoccupiedDel
 	}
 }
 
+// SubscribeAttributePIROccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePIROccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePIROccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePIROccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -350,8 +360,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePIROccupiedToUnoccupi
 	}
 }
 
+// ReadAttributePIRUnoccupiedToOccupiedDelayWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePIRUnoccupiedToOccupiedDelayWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributePIRUnoccupiedToOccupiedDelayWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributePIRUnoccupiedToOccupiedDelayWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -373,8 +385,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributePIRUnoccupiedToOccupiedDel
 	}
 }
 
+// SubscribeAttributePIRUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePIRUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePIRUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePIRUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -396,8 +410,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePIRUnoccupiedToOccupi
 	}
 }
 
+// ReadAttributePIRUnoccupiedToOccupiedThresholdWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePIRUnoccupiedToOccupiedThresholdWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributePIRUnoccupiedToOccupiedThresholdWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributePIRUnoccupiedToOccupiedThresholdWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -419,8 +435,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributePIRUnoccupiedToOccupiedThr
 	}
 }
 
+// SubscribeAttributePIRUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePIRUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePIRUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePIRUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -442,8 +460,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePIRUnoccupiedToOccupi
 	}
 }
 
+// ReadAttributeUltrasonicOccupiedToUnoccupiedDelayWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeUltrasonicOccupiedToUnoccupiedDelayWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicOccupiedToUnoccupiedDelayWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicOccupiedToUnoccupiedDelayWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,8 +485,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicOccupiedToUnoccu
 	}
 }
 
+// SubscribeAttributeUltrasonicOccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeUltrasonicOccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicOccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicOccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -488,8 +510,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicOccupiedToU
 	}
 }
 
+// ReadAttributeUltrasonicUnoccupiedToOccupiedDelayWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeUltrasonicUnoccupiedToOccupiedDelayWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedToOccupiedDelayWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedToOccupiedDelayWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -511,8 +535,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedToOccu
 	}
 }
 
+// SubscribeAttributeUltrasonicUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeUltrasonicUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -534,8 +560,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccupiedT
 	}
 }
 
+// ReadAttributeUltrasonicUnoccupiedToOccupiedThresholdWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeUltrasonicUnoccupiedToOccupiedThresholdWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedToOccupiedThresholdWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedToOccupiedThresholdWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -557,8 +585,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedToOccu
 	}
 }
 
+// SubscribeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -580,8 +610,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccupiedT
 	}
 }
 
+// ReadAttributePhysicalContactOccupiedToUnoccupiedDelayWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePhysicalContactOccupiedToUnoccupiedDelayWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactOccupiedToUnoccupiedDelayWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactOccupiedToUnoccupiedDelayWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -603,8 +635,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactOccupiedToU
 	}
 }
 
+// SubscribeAttributePhysicalContactOccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePhysicalContactOccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactOccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactOccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -626,8 +660,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactOccupi
 	}
 }
 
+// ReadAttributePhysicalContactUnoccupiedToOccupiedDelayWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePhysicalContactUnoccupiedToOccupiedDelayWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccupiedToOccupiedDelayWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccupiedToOccupiedDelayWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -649,8 +685,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccupiedT
 	}
 }
 
+// SubscribeAttributePhysicalContactUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePhysicalContactUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -672,8 +710,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUnoccu
 	}
 }
 
+// ReadAttributePhysicalContactUnoccupiedToOccupiedThresholdWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePhysicalContactUnoccupiedToOccupiedThresholdWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccupiedToOccupiedThresholdWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccupiedToOccupiedThresholdWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -695,8 +735,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccupiedT
 	}
 }
 
+// SubscribeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -718,8 +760,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUnoccu
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -741,8 +785,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeGeneratedCommandListWithCo
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -764,8 +810,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeGeneratedCommandListW
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -787,8 +835,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeAcceptedCommandListWithCom
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -810,8 +860,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeAcceptedCommandListWi
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -833,8 +885,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeAttributeListWithCompletio
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -856,8 +910,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeAttributeListWithPara
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -879,8 +935,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeFeatureMapWithCompletion(c
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -902,8 +960,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeFeatureMapWithParamsS
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -925,8 +985,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeClusterRevisionWithComplet
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -948,8 +1010,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeClusterRevisionWithPa
 	}
 }
 
+// ReadAttributeOccupancy wraps the corresponding Objective-C method.
+//
 // ReadAttributeOccupancy blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeOccupancy(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeOccupancy(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -971,8 +1035,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeOccupancy(ctx context.Cont
 	}
 }
 
+// SubscribeAttributeOccupancyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOccupancyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -994,8 +1060,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancyWithMinInter
 	}
 }
 
+// ReadAttributeOccupancySensorType wraps the corresponding Objective-C method.
+//
 // ReadAttributeOccupancySensorType blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorType(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorType(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1017,8 +1085,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorType(ctx co
 	}
 }
 
+// SubscribeAttributeOccupancySensorTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOccupancySensorTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1040,8 +1110,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTypeWi
 	}
 }
 
+// ReadAttributeOccupancySensorTypeBitmap wraps the corresponding Objective-C method.
+//
 // ReadAttributeOccupancySensorTypeBitmap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorTypeBitmap(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorTypeBitmap(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1063,8 +1135,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorTypeBitmap(
 	}
 }
 
+// SubscribeAttributeOccupancySensorTypeBitmapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOccupancySensorTypeBitmapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTypeBitmapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTypeBitmapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1086,8 +1160,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTypeBi
 	}
 }
 
+// ReadAttributePirOccupiedToUnoccupiedDelay wraps the corresponding Objective-C method.
+//
 // ReadAttributePirOccupiedToUnoccupiedDelay blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributePirOccupiedToUnoccupiedDelay(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributePirOccupiedToUnoccupiedDelay(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1109,8 +1185,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributePirOccupiedToUnoccupiedDel
 	}
 }
 
+// SubscribeAttributePirOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePirOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePirOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePirOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1132,8 +1210,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePirOccupiedToUnoccupi
 	}
 }
 
+// ReadAttributePirUnoccupiedToOccupiedDelay wraps the corresponding Objective-C method.
+//
 // ReadAttributePirUnoccupiedToOccupiedDelay blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributePirUnoccupiedToOccupiedDelay(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributePirUnoccupiedToOccupiedDelay(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1155,8 +1235,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributePirUnoccupiedToOccupiedDel
 	}
 }
 
+// SubscribeAttributePirUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePirUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePirUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePirUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1178,8 +1260,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePirUnoccupiedToOccupi
 	}
 }
 
+// ReadAttributePirUnoccupiedToOccupiedThreshold wraps the corresponding Objective-C method.
+//
 // ReadAttributePirUnoccupiedToOccupiedThreshold blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributePirUnoccupiedToOccupiedThreshold(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributePirUnoccupiedToOccupiedThreshold(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1201,8 +1285,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributePirUnoccupiedToOccupiedThr
 	}
 }
 
+// SubscribeAttributePirUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePirUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePirUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePirUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1224,8 +1310,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePirUnoccupiedToOccupi
 	}
 }
 
+// ReadAttributeUltrasonicOccupiedToUnoccupiedDelay wraps the corresponding Objective-C method.
+//
 // ReadAttributeUltrasonicOccupiedToUnoccupiedDelay blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicOccupiedToUnoccupiedDelay(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicOccupiedToUnoccupiedDelay(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1247,8 +1335,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicOccupiedToUnoccu
 	}
 }
 
+// SubscribeAttributeUltrasonicOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeUltrasonicOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1270,8 +1360,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicOccupiedToU
 	}
 }
 
+// ReadAttributeUltrasonicUnoccupiedToOccupiedDelay wraps the corresponding Objective-C method.
+//
 // ReadAttributeUltrasonicUnoccupiedToOccupiedDelay blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedToOccupiedDelay(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedToOccupiedDelay(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1293,8 +1385,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedToOccu
 	}
 }
 
+// SubscribeAttributeUltrasonicUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeUltrasonicUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1316,8 +1410,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccupiedT
 	}
 }
 
+// ReadAttributeUltrasonicUnoccupiedToOccupiedThreshold wraps the corresponding Objective-C method.
+//
 // ReadAttributeUltrasonicUnoccupiedToOccupiedThreshold blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedToOccupiedThreshold(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedToOccupiedThreshold(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1339,8 +1435,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedToOccu
 	}
 }
 
+// SubscribeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1362,8 +1460,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccupiedT
 	}
 }
 
+// ReadAttributePhysicalContactOccupiedToUnoccupiedDelay wraps the corresponding Objective-C method.
+//
 // ReadAttributePhysicalContactOccupiedToUnoccupiedDelay blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactOccupiedToUnoccupiedDelay(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactOccupiedToUnoccupiedDelay(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1385,8 +1485,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactOccupiedToU
 	}
 }
 
+// SubscribeAttributePhysicalContactOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePhysicalContactOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1408,8 +1510,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactOccupi
 	}
 }
 
+// ReadAttributePhysicalContactUnoccupiedToOccupiedDelay wraps the corresponding Objective-C method.
+//
 // ReadAttributePhysicalContactUnoccupiedToOccupiedDelay blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccupiedToOccupiedDelay(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccupiedToOccupiedDelay(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1431,8 +1535,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccupiedT
 	}
 }
 
+// SubscribeAttributePhysicalContactUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePhysicalContactUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1454,8 +1560,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUnoccu
 	}
 }
 
+// ReadAttributePhysicalContactUnoccupiedToOccupiedThreshold wraps the corresponding Objective-C method.
+//
 // ReadAttributePhysicalContactUnoccupiedToOccupiedThreshold blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccupiedToOccupiedThreshold(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccupiedToOccupiedThreshold(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1477,8 +1585,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccupiedT
 	}
 }
 
+// SubscribeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1500,8 +1610,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUnoccu
 	}
 }
 
+// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1523,8 +1635,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeGeneratedCommandList(ctx c
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1546,8 +1660,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeGeneratedCommandListW
 	}
 }
 
+// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1569,8 +1685,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeAcceptedCommandList(ctx co
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1592,8 +1710,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeAcceptedCommandListWi
 	}
 }
 
+// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeAttributeList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1615,8 +1735,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeAttributeList(ctx context.
 	}
 }
 
+// SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1638,8 +1760,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeAttributeListWithMinI
 	}
 }
 
+// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1661,8 +1785,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeFeatureMap(ctx context.Con
 	}
 }
 
+// SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1684,8 +1810,10 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeFeatureMapWithMinInte
 	}
 }
 
+// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1707,8 +1835,10 @@ func (x *MTRBaseClusterOccupancySensing) ReadAttributeClusterRevision(ctx contex
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1808,3 +1938,7 @@ type MTRBaseClusterOccupancySensingable interface {
 }
 
 var _ MTRBaseClusterOccupancySensingable = (*MTRBaseClusterOccupancySensing)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterOccupancySensing)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterOccupancySensing)(nil)

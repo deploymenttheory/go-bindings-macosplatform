@@ -6,15 +6,16 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A single dragged item within a dragging session.
-//
 // DraggingItem is an idiomatic wrapper over the Objective-C class NSDraggingItem.
+//
+// A single dragged item within a dragging session.
 type DraggingItem struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func DraggingItemFromID(id objc.ID) *DraggingItem {
 	if id == 0 {
 		return nil
 	}
-	x := &DraggingItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DraggingItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func draggingItemAdopt(id objc.ID) *DraggingItem {
 	if id == 0 {
 		return nil
 	}
-	x := &DraggingItem{Handle: objref.Wrap(id)}
+	x := &DraggingItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +61,48 @@ func (x *DraggingItem) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DraggingItem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDraggingItem creates a new DraggingItem.
 func NewDraggingItem() *DraggingItem {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSDraggingItem")), objc.RegisterName("new"))
 	return draggingItemAdopt(_id)
 }
 
+// WithDraggingFrame the frame of the dragging item.
+func (x *DraggingItem) WithDraggingFrame(draggingFrame corefoundation.CGRect) *DraggingItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDraggingFrame:"), draggingFrame)
+	return x
+}
+
+// SetDraggingFrameContents sets the item’s dragging frame and contents.
+func (x *DraggingItem) SetDraggingFrameContents(frame corefoundation.CGRect, contents obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDraggingFrame:contents:"), frame, objref.IDOf(contents))
+}
+
+// Item wraps the corresponding Objective-C method.
 func (x *DraggingItem) Item() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item"))
 	return obj.Wrap(_r)
 }
 
+// DraggingFrame wraps the corresponding Objective-C method.
+func (x *DraggingItem) DraggingFrame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("draggingFrame"))
+	return _r
+}
+
+// SetDraggingFrame wraps the corresponding Objective-C method.
+func (x *DraggingItem) SetDraggingFrame(draggingFrame corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDraggingFrame:"), draggingFrame)
+}
+
+// ImageComponents wraps the corresponding Objective-C method.
+//
 // ImageComponents returns the collection as a Go slice.
 func (x *DraggingItem) ImageComponents() []*DraggingImageComponent {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageComponents"))
@@ -78,7 +112,11 @@ func (x *DraggingItem) ImageComponents() []*DraggingImageComponent {
 // DraggingItemable is the interface implemented by [DraggingItem], for mocking and DI.
 type DraggingItemable interface {
 	obj.Object
+	WithDraggingFrame(draggingFrame corefoundation.CGRect) *DraggingItem
+	SetDraggingFrameContents(frame corefoundation.CGRect, contents obj.Object)
 	Item() obj.Object
+	DraggingFrame() corefoundation.CGRect
+	SetDraggingFrame(draggingFrame corefoundation.CGRect)
 	ImageComponents() []*DraggingImageComponent
 }
 

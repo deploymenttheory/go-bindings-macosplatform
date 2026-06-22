@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A queue of payment transactions for the App Store to process.
-//
 // PaymentQueue is an idiomatic wrapper over the Objective-C class SKPaymentQueue.
+//
+// A queue of payment transactions for the App Store to process.
 type PaymentQueue struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PaymentQueueFromID(id objc.ID) *PaymentQueue {
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentQueue{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PaymentQueue{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func paymentQueueAdopt(id objc.ID) *PaymentQueue {
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentQueue{Handle: objref.Wrap(id)}
+	x := &PaymentQueue{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,62 +60,72 @@ func (x *PaymentQueue) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PaymentQueue) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPaymentQueue creates a new PaymentQueue.
 func NewPaymentQueue() *PaymentQueue {
 	_id := objc.Send[objc.ID](objc.ID(_class("SKPaymentQueue")), objc.RegisterName("new"))
 	return paymentQueueAdopt(_id)
 }
 
-// Adds a payment request to the queue.
+// AddPayment adds a payment request to the queue.
 func (x *PaymentQueue) AddPayment(payment *Payment) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addPayment:"), objref.IDOf(payment))
 }
 
-// Asks the payment queue to restore previously completed purchases.
+// RestoreCompletedTransactions asks the payment queue to restore previously completed purchases.
 func (x *PaymentQueue) RestoreCompletedTransactions() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restoreCompletedTransactions"))
 }
 
-// Asks the payment queue to restore previously completed purchases, providing an opaque identifier for the user’s account.
+// RestoreCompletedTransactionsWithApplicationUsername asks the payment queue to restore previously completed purchases, providing an opaque identifier for the user’s account.
 func (x *PaymentQueue) RestoreCompletedTransactionsWithApplicationUsername(username string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restoreCompletedTransactionsWithApplicationUsername:"), purego.NSString(username))
 }
 
-// Notifies the App Store that the app finished processing the transaction.
+// FinishTransaction notifies the App Store that the app finished processing the transaction.
 func (x *PaymentQueue) FinishTransaction(transaction *PaymentTransaction) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishTransaction:"), objref.IDOf(transaction))
 }
 
-// Adds a set of downloads to the download list.
+// StartDownloads adds a set of downloads to the download list.
 func (x *PaymentQueue) StartDownloads(downloads []*Download) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDownloads:"), purego.SliceToNSArray(downloads, func(_v *Download) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Pauses a set of downloads.
+// PauseDownloads pauses a set of downloads.
 func (x *PaymentQueue) PauseDownloads(downloads []*Download) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseDownloads:"), purego.SliceToNSArray(downloads, func(_v *Download) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Resumes a set of downloads.
+// ResumeDownloads resumes a set of downloads.
 func (x *PaymentQueue) ResumeDownloads(downloads []*Download) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeDownloads:"), purego.SliceToNSArray(downloads, func(_v *Download) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Removes a set of downloads from the download list.
+// CancelDownloads removes a set of downloads from the download list.
 func (x *PaymentQueue) CancelDownloads(downloads []*Download) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelDownloads:"), purego.SliceToNSArray(downloads, func(_v *Download) objc.ID { return objref.IDOf(_v) }))
 }
 
+// Storefront wraps the corresponding Objective-C method.
 func (x *PaymentQueue) Storefront() *Storefront {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("storefront"))
 	return StorefrontFromID(_r)
 }
 
+// TransactionObservers wraps the corresponding Objective-C method.
 func (x *PaymentQueue) TransactionObservers() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactionObservers"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// Transactions wraps the corresponding Objective-C method.
+//
 // Transactions returns the collection as a Go slice.
 func (x *PaymentQueue) Transactions() []*PaymentTransaction {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactions"))

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An observation that describes a detected trajectory.
-//
 // TrajectoryObservation is an idiomatic wrapper over the Objective-C class VNTrajectoryObservation.
+//
+// It embeds [Observation], promoting that type's methods.
+//
+// An observation that describes a detected trajectory.
 type TrajectoryObservation struct {
-	objref.Handle
+	Observation
 }
 
 // TrajectoryObservationFromID adopts an existing Objective-C object as a TrajectoryObservation
@@ -25,7 +26,8 @@ func TrajectoryObservationFromID(id objc.ID) *TrajectoryObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &TrajectoryObservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TrajectoryObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func trajectoryObservationAdopt(id objc.ID) *TrajectoryObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &TrajectoryObservation{Handle: objref.Wrap(id)}
+	x := &TrajectoryObservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *TrajectoryObservation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TrajectoryObservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TrajectoryObservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewTrajectoryObservation creates a new TrajectoryObservation.
@@ -64,7 +52,7 @@ func NewTrajectoryObservation() *TrajectoryObservation {
 	return trajectoryObservationAdopt(_id)
 }
 
-// The centroids of the contour being detected along the trajectory. These are the unprocessed centroid points of the detected contour that is tracked on the trajectory. The points may be slightly off the ideal trajectory as these are the measured points that fall within the allowed tolerance. The maximum number or past points is limited by the maximum trajectory length set in the request.
+// DetectedPoints the centroids of the contour being detected along the trajectory. These are the unprocessed centroid points of the detected contour that is tracked on the trajectory. The points may be slightly off the ideal trajectory as these are the measured points that fall within the allowed tolerance. The maximum number or past points is limited by the maximum trajectory length set in the request.
 //
 // DetectedPoints returns the collection as a Go slice.
 func (x *TrajectoryObservation) DetectedPoints() []*Point {
@@ -72,7 +60,7 @@ func (x *TrajectoryObservation) DetectedPoints() []*Point {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Point { return PointFromID(_id) })
 }
 
-// The centroids of  the calculated trajectory from the detected points. These are the calculated centroid points along the ideal trajectory described by the parabolic equation. The equation and the projected points of the detected trajectory get refined over time. The maximum number of cached points is limited by the maximum points needed to describe the trajectory together with the parabolic equation.
+// ProjectedPoints the centroids of  the calculated trajectory from the detected points. These are the calculated centroid points along the ideal trajectory described by the parabolic equation. The equation and the projected points of the detected trajectory get refined over time. The maximum number of cached points is limited by the maximum points needed to describe the trajectory together with the parabolic equation.
 //
 // ProjectedPoints returns the collection as a Go slice.
 func (x *TrajectoryObservation) ProjectedPoints() []*Point {
@@ -80,7 +68,7 @@ func (x *TrajectoryObservation) ProjectedPoints() []*Point {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Point { return PointFromID(_id) })
 }
 
-// The moving average radius of the object being tracked. This is the radius of the object at each detected point (used to determine the trajectory) averaged.
+// MovingAverageRadius the moving average radius of the object being tracked. This is the radius of the object at each detected point (used to determine the trajectory) averaged.
 func (x *TrajectoryObservation) MovingAverageRadius() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("movingAverageRadius"))
 	return _r
@@ -95,3 +83,5 @@ type TrajectoryObservationable interface {
 }
 
 var _ TrajectoryObservationable = (*TrajectoryObservation)(nil)
+
+var _ ObservationProvider = (*TrajectoryObservation)(nil)

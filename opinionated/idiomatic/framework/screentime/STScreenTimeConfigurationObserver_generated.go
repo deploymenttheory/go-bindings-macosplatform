@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The object you use to observe changes to the current configuration.
-//
 // ScreenTimeConfigurationObserver is an idiomatic wrapper over the Objective-C class STScreenTimeConfigurationObserver.
+//
+// The object you use to observe changes to the current configuration.
 type ScreenTimeConfigurationObserver struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ScreenTimeConfigurationObserverFromID(id objc.ID) *ScreenTimeConfigurationO
 	if id == 0 {
 		return nil
 	}
-	x := &ScreenTimeConfigurationObserver{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScreenTimeConfigurationObserver{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func screenTimeConfigurationObserverAdopt(id objc.ID) *ScreenTimeConfigurationOb
 	if id == 0 {
 		return nil
 	}
-	x := &ScreenTimeConfigurationObserver{Handle: objref.Wrap(id)}
+	x := &ScreenTimeConfigurationObserver{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,26 +60,30 @@ func (x *ScreenTimeConfigurationObserver) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a configuration observer that reports updates on the queue you specify.
-//
-// NewScreenTimeConfigurationObserverWithUpdateQueue creates a new ScreenTimeConfigurationObserver.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScreenTimeConfigurationObserver) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewScreenTimeConfigurationObserverWithUpdateQueue creates a configuration observer that reports updates on the queue you specify.
 func NewScreenTimeConfigurationObserverWithUpdateQueue(updateQueue obj.Object) *ScreenTimeConfigurationObserver {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("STScreenTimeConfigurationObserver")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUpdateQueue:"), objref.IDOf(updateQueue))
 	return screenTimeConfigurationObserverAdopt(_id)
 }
 
-// Starts observing changes to the current configuration.
+// StartObserving starts observing changes to the current configuration.
 func (x *ScreenTimeConfigurationObserver) StartObserving() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startObserving"))
 }
 
-// Stops observing changes to the current configuration.
+// StopObserving stops observing changes to the current configuration.
 func (x *ScreenTimeConfigurationObserver) StopObserving() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopObserving"))
 }
 
-// The configuration being observed.
+// Configuration the configuration being observed.
 func (x *ScreenTimeConfigurationObserver) Configuration() *ScreenTimeConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
 	return ScreenTimeConfigurationFromID(_r)

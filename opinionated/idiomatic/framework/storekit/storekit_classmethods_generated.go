@@ -11,52 +11,53 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// RepairArcadeApp wraps the corresponding Objective-C method.
 func RepairArcadeApp() {
 	objc.Send[objc.ID](objc.ID(_class("SKArcadeService")), objc.RegisterName("repairArcadeApp"))
 }
 
-// Returns the type of authorization the customer has for accessing the Music library on the device.
+// AuthorizationStatus returns the type of authorization the customer has for accessing the Music library on the device.
 func AuthorizationStatus() CloudServiceAuthorizationStatus {
 	_r := objc.Send[CloudServiceAuthorizationStatus](objc.ID(_class("SKCloudServiceController")), objc.RegisterName("authorizationStatus"))
 	return _r
 }
 
-// Returns the local location for the previously downloaded flie.
+// ContentURLForProductID returns the local location for the previously downloaded flie.
 func ContentURLForProductID(productID string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKDownload")), objc.RegisterName("contentURLForProductID:"), purego.NSString(productID))
 	return obj.Wrap(_r)
 }
 
-// Deletes the previously downloaded file.
+// DeleteContentForProductID deletes the previously downloaded file.
 func DeleteContentForProductID(productID string) {
 	objc.Send[objc.ID](objc.ID(_class("SKDownload")), objc.RegisterName("deleteContentForProductID:"), purego.NSString(productID))
 }
 
-// Returns a new payment for the specified product.
+// PaymentWithProduct returns a new payment for the specified product.
 func PaymentWithProduct(product *Product) *Payment {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKPayment")), objc.RegisterName("paymentWithProduct:"), objref.IDOf(product))
 	return PaymentFromID(_r)
 }
 
-// Returns the default payment queue instance.
+// DefaultQueue returns the default payment queue instance.
 func DefaultQueue() *PaymentQueue {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKPaymentQueue")), objc.RegisterName("defaultQueue"))
 	return PaymentQueueFromID(_r)
 }
 
-// A method that indicates whether the person can make purchases.
+// CanMakePayments a method that indicates whether the person can make purchases.
 func CanMakePayments() bool {
 	_r := objc.Send[bool](objc.ID(_class("SKPaymentQueue")), objc.RegisterName("canMakePayments"))
 	return _r
 }
 
-// Returns the default product store promotion controller.
+// DefaultController returns the default product store promotion controller.
 func DefaultController() *ProductStorePromotionController {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKProductStorePromotionController")), objc.RegisterName("defaultController"))
 	return ProductStorePromotionControllerFromID(_r)
 }
 
-// Tells StoreKit to ask the customer to rate or review your app, if appropriate.
+// RequestReview tells StoreKit to ask the customer to rate or review your app, if appropriate.
 func RequestReview() {
 	objc.Send[objc.ID](objc.ID(_class("SKStoreReviewController")), objc.RegisterName("requestReview"))
 }

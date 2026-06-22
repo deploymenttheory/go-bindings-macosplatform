@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A panel that queries the user for information such as paper type and orientation.
-//
 // PageLayout is an idiomatic wrapper over the Objective-C class NSPageLayout.
+//
+// A panel that queries the user for information such as paper type and orientation.
 type PageLayout struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PageLayoutFromID(id objc.ID) *PageLayout {
 	if id == 0 {
 		return nil
 	}
-	x := &PageLayout{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PageLayout{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func pageLayoutAdopt(id objc.ID) *PageLayout {
 	if id == 0 {
 		return nil
 	}
-	x := &PageLayout{Handle: objref.Wrap(id)}
+	x := &PageLayout{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,62 +60,71 @@ func (x *PageLayout) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PageLayout) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPageLayout creates a new PageLayout.
 func NewPageLayout() *PageLayout {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSPageLayout")), objc.RegisterName("new"))
 	return pageLayoutAdopt(_id)
 }
 
-// Adds the specified controller of an accessory view to be presented in the page setup panel.
+// AddAccessoryController adds the specified controller of an accessory view to be presented in the page setup panel.
 func (x *PageLayout) AddAccessoryController(accessoryController *ViewController) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAccessoryController:"), objref.IDOf(accessoryController))
 }
 
-// Removes the specified controller of an accessory view.
+// RemoveAccessoryController removes the specified controller of an accessory view.
 func (x *PageLayout) RemoveAccessoryController(accessoryController *ViewController) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAccessoryController:"), objref.IDOf(accessoryController))
 }
 
-// Displays the page layout panel and begins the modal loop using the specified print info object.
+// RunModalWithPrintInfo displays the page layout panel and begins the modal loop using the specified print info object.
 func (x *PageLayout) RunModalWithPrintInfo(printInfo *PrintInfo) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalWithPrintInfo:"), objref.IDOf(printInfo))
 	return _r
 }
 
-// Displays the page layout panel and begins the modal loop using the shared print info object.
+// RunModal displays the page layout panel and begins the modal loop using the shared print info object.
 func (x *PageLayout) RunModal() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModal"))
 	return _r
 }
 
+// AccessoryControllers wraps the corresponding Objective-C method.
+//
 // AccessoryControllers returns the collection as a Go slice.
 func (x *PageLayout) AccessoryControllers() []*ViewController {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessoryControllers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ViewController { return ViewControllerFromID(_id) })
 }
 
+// PrintInfo wraps the corresponding Objective-C method.
 func (x *PageLayout) PrintInfo() *PrintInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printInfo"))
 	return PrintInfoFromID(_r)
 }
 
-// Adds a view object to the page layout panel.
+// SetAccessoryView adds a view object to the page layout panel.
 func (x *PageLayout) SetAccessoryView(accessoryView *View) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 }
 
-// Returns the page layout panel’s accessory view.
+// AccessoryView returns the page layout panel’s accessory view.
 func (x *PageLayout) AccessoryView() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessoryView"))
 	return ViewFromID(_r)
 }
 
-// Sets the page layout’s values to those stored in the print info object used when the page layout panel is run.
+// ReadPrintInfo sets the page layout’s values to those stored in the print info object used when the page layout panel is run.
 func (x *PageLayout) ReadPrintInfo() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readPrintInfo"))
 }
 
-// Writes the page layout’s values to the print info object used when the page layout panel is run.
+// WritePrintInfo writes the page layout’s values to the print info object used when the page layout panel is run.
 func (x *PageLayout) WritePrintInfo() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writePrintInfo"))
 }

@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMCharacterData is an idiomatic wrapper over the Objective-C class DOMCharacterData.
+//
+// DOMCharacterData is an abstract base — you do not construct it directly. Construct one of [DOMComment], [DOMProcessingInstruction], [DOMText] and pass it where a DOMCharacterData is accepted.
 type DOMCharacterData struct {
-	objref.Handle
+	DOMNode
 }
 
 // DOMCharacterDataFromID adopts an existing Objective-C object as a DOMCharacterData
@@ -23,7 +24,8 @@ func DOMCharacterDataFromID(id objc.ID) *DOMCharacterData {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMCharacterData{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMCharacterData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,56 +38,37 @@ func dOMCharacterDataAdopt(id objc.ID) *DOMCharacterData {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMCharacterData{Handle: objref.Wrap(id)}
+	x := &DOMCharacterData{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *DOMCharacterData) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMCharacterData) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMCharacterData) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewDOMCharacterData creates a new DOMCharacterData.
-func NewDOMCharacterData() *DOMCharacterData {
-	_id := objc.Send[objc.ID](objc.ID(_class("DOMCharacterData")), objc.RegisterName("new"))
-	return dOMCharacterDataAdopt(_id)
-}
-
-// WithData sets data and returns the receiver so calls can be chained.
+// WithData sets the property and returns the receiver so calls can be chained.
 func (x *DOMCharacterData) WithData(data string) *DOMCharacterData {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 	return x
 }
 
-// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMCharacterData) WithNodeValue(nodeValue string) *DOMCharacterData {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets prefix and returns the receiver so calls can be chained.
+// WithPrefix sets the property and returns the receiver so calls can be chained.
 func (x *DOMCharacterData) WithPrefix(prefix string) *DOMCharacterData {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets textContent and returns the receiver so calls can be chained.
+// WithTextContent sets the property and returns the receiver so calls can be chained.
 func (x *DOMCharacterData) WithTextContent(textContent string) *DOMCharacterData {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
+// SubstringDataLength wraps the corresponding Objective-C method.
 func (x *DOMCharacterData) SubstringDataLength(offset int, length int) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("substringData:length:"), offset, length)
 	if _r == 0 {
@@ -94,22 +77,27 @@ func (x *DOMCharacterData) SubstringDataLength(offset int, length int) string {
 	return purego.GoString(_r)
 }
 
+// AppendData wraps the corresponding Objective-C method.
 func (x *DOMCharacterData) AppendData(data string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendData:"), purego.NSString(data))
 }
 
+// InsertDataData wraps the corresponding Objective-C method.
 func (x *DOMCharacterData) InsertDataData(offset int, data string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertData:data:"), offset, purego.NSString(data))
 }
 
+// DeleteDataLength wraps the corresponding Objective-C method.
 func (x *DOMCharacterData) DeleteDataLength(offset int, length int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteData:length:"), offset, length)
 }
 
+// ReplaceDataLengthData wraps the corresponding Objective-C method.
 func (x *DOMCharacterData) ReplaceDataLengthData(offset int, length int, data string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceData:length:data:"), offset, length, purego.NSString(data))
 }
 
+// Data wraps the corresponding Objective-C method.
 func (x *DOMCharacterData) Data() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	if _r == 0 {
@@ -118,15 +106,18 @@ func (x *DOMCharacterData) Data() string {
 	return purego.GoString(_r)
 }
 
+// SetData wraps the corresponding Objective-C method.
 func (x *DOMCharacterData) SetData(data string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 }
 
+// Length wraps the corresponding Objective-C method.
 func (x *DOMCharacterData) Length() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
 	return _r
 }
 
+// SubstringData wraps the corresponding Objective-C method.
 func (x *DOMCharacterData) SubstringData(offset int, length int) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("substringData::"), offset, length)
 	if _r == 0 {
@@ -135,14 +126,17 @@ func (x *DOMCharacterData) SubstringData(offset int, length int) string {
 	return purego.GoString(_r)
 }
 
+// InsertData wraps the corresponding Objective-C method.
 func (x *DOMCharacterData) InsertData(offset int, data string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertData::"), offset, purego.NSString(data))
 }
 
+// DeleteData wraps the corresponding Objective-C method.
 func (x *DOMCharacterData) DeleteData(offset int, length int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteData::"), offset, length)
 }
 
+// ReplaceData wraps the corresponding Objective-C method.
 func (x *DOMCharacterData) ReplaceData(offset int, length int, data string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceData:::"), offset, length, purego.NSString(data))
 }
@@ -169,3 +163,16 @@ type DOMCharacterDataable interface {
 }
 
 var _ DOMCharacterDataable = (*DOMCharacterData)(nil)
+
+// isDOMCharacterData marks DOMCharacterData — and, by embedding promotion, its
+// subclasses — as a member of the DOMCharacterData hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DOMCharacterData) isDOMCharacterData() {}
+
+var _ DOMCharacterDataProvider = (*DOMCharacterData)(nil)
+
+var _ DOMNodeProvider = (*DOMCharacterData)(nil)
+
+var _ DOMObjectProvider = (*DOMCharacterData)(nil)
+
+var _ WebScriptObjectProvider = (*DOMCharacterData)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Node representing a MPSCNNLogSoftMax kernel
-//
 // CNNLogSoftMaxNode is an idiomatic wrapper over the Objective-C class MPSCNNLogSoftMaxNode.
+//
+// It embeds [NNFilterNode], promoting that type's methods.
+//
+// Node representing a MPSCNNLogSoftMax kernel
 type CNNLogSoftMaxNode struct {
-	objref.Handle
+	NNFilterNode
 }
 
 // CNNLogSoftMaxNodeFromID adopts an existing Objective-C object as a CNNLogSoftMaxNode
@@ -25,7 +26,8 @@ func CNNLogSoftMaxNodeFromID(id objc.ID) *CNNLogSoftMaxNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNLogSoftMaxNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNLogSoftMaxNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,38 +40,20 @@ func cNNLogSoftMaxNodeAdopt(id objc.ID) *CNNLogSoftMaxNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNLogSoftMaxNode{Handle: objref.Wrap(id)}
+	x := &CNNLogSoftMaxNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNLogSoftMaxNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNLogSoftMaxNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNLogSoftMaxNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Init a node representing a MPSCNNLogSoftMax kernel
-//
-// NewCNNLogSoftMaxNodeWithSource creates a new CNNLogSoftMaxNode.
+// NewCNNLogSoftMaxNodeWithSource init a node representing a MPSCNNLogSoftMax kernel
 func NewCNNLogSoftMaxNodeWithSource(sourceNode *NNImageNode) *CNNLogSoftMaxNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNLogSoftMaxNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return cNNLogSoftMaxNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNLogSoftMaxNode) WithLabel(label string) *CNNLogSoftMaxNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -82,3 +66,5 @@ type CNNLogSoftMaxNodeable interface {
 }
 
 var _ CNNLogSoftMaxNodeable = (*CNNLogSoftMaxNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNLogSoftMaxNode)(nil)

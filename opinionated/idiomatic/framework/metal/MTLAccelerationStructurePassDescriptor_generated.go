@@ -23,7 +23,8 @@ func AccelerationStructurePassDescriptorFromID(id objc.ID) *AccelerationStructur
 	if id == 0 {
 		return nil
 	}
-	x := &AccelerationStructurePassDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AccelerationStructurePassDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func accelerationStructurePassDescriptorAdopt(id objc.ID) *AccelerationStructure
 	if id == 0 {
 		return nil
 	}
-	x := &AccelerationStructurePassDescriptor{Handle: objref.Wrap(id)}
+	x := &AccelerationStructurePassDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,12 +58,19 @@ func (x *AccelerationStructurePassDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AccelerationStructurePassDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAccelerationStructurePassDescriptor creates a new AccelerationStructurePassDescriptor.
 func NewAccelerationStructurePassDescriptor() *AccelerationStructurePassDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLAccelerationStructurePassDescriptor")), objc.RegisterName("new"))
 	return accelerationStructurePassDescriptorAdopt(_id)
 }
 
+// SampleBufferAttachments wraps the corresponding Objective-C method.
 func (x *AccelerationStructurePassDescriptor) SampleBufferAttachments() *AccelerationStructurePassSampleBufferAttachmentDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleBufferAttachments"))
 	return AccelerationStructurePassSampleBufferAttachmentDescriptorArrayFromID(_r)

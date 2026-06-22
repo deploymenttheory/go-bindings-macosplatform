@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The MLMediaLibrary class provides an interface for accessing a collection of media objects from various sources. It serves as the initial access point of the Media Library framework.
-//
 // MediaLibrary is an idiomatic wrapper over the Objective-C class MLMediaLibrary.
+//
+// The MLMediaLibrary class provides an interface for accessing a collection of media objects from various sources. It serves as the initial access point of the Media Library framework.
 type MediaLibrary struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MediaLibraryFromID(id objc.ID) *MediaLibrary {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaLibrary{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MediaLibrary{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mediaLibraryAdopt(id objc.ID) *MediaLibrary {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaLibrary{Handle: objref.Wrap(id)}
+	x := &MediaLibrary{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *MediaLibrary) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes the media library based on the specified load options.
-//
-// NewMediaLibraryWithOptions creates a new MediaLibrary.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MediaLibrary) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMediaLibraryWithOptions initializes the media library based on the specified load options.
 func NewMediaLibraryWithOptions(options obj.Object) *MediaLibrary {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MLMediaLibrary")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), objref.IDOf(options))
 	return mediaLibraryAdopt(_id)
 }
 
+// MediaSources wraps the corresponding Objective-C method.
 func (x *MediaLibrary) MediaSources() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSources"))
 	return obj.Wrap(_r)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mutable object that represents a complete rendition of media selection options on an asset.
-//
 // MutableMediaSelection is an idiomatic wrapper over the Objective-C class AVMutableMediaSelection.
+//
+// It embeds [MediaSelection], promoting that type's methods.
+//
+// A mutable object that represents a complete rendition of media selection options on an asset.
 type MutableMediaSelection struct {
-	objref.Handle
+	MediaSelection
 }
 
 // MutableMediaSelectionFromID adopts an existing Objective-C object as a MutableMediaSelection
@@ -25,7 +26,8 @@ func MutableMediaSelectionFromID(id objc.ID) *MutableMediaSelection {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableMediaSelection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableMediaSelection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func mutableMediaSelectionAdopt(id objc.ID) *MutableMediaSelection {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableMediaSelection{Handle: objref.Wrap(id)}
+	x := &MutableMediaSelection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MutableMediaSelection) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableMediaSelection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableMediaSelection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMutableMediaSelection creates a new MutableMediaSelection.
@@ -64,7 +52,7 @@ func NewMutableMediaSelection() *MutableMediaSelection {
 	return mutableMediaSelectionAdopt(_id)
 }
 
-// Selects the media option in the specified media selection group.
+// SelectMediaOptionInMediaSelectionGroup selects the media option in the specified media selection group.
 func (x *MutableMediaSelection) SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *MediaSelectionOption, mediaSelectionGroup *MediaSelectionGroup) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectMediaOption:inMediaSelectionGroup:"), objref.IDOf(mediaSelectionOption), objref.IDOf(mediaSelectionGroup))
 }
@@ -76,3 +64,5 @@ type MutableMediaSelectionable interface {
 }
 
 var _ MutableMediaSelectionable = (*MutableMediaSelection)(nil)
+
+var _ MediaSelectionProvider = (*MutableMediaSelection)(nil)

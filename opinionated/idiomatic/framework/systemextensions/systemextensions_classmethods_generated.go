@@ -11,29 +11,31 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// SharedManager wraps the corresponding Objective-C method.
 func SharedManager() *SystemExtensionManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionManager")), objc.RegisterName("sharedManager"))
 	return SystemExtensionManagerFromID(_r)
 }
 
-// Creates a request to activate a System Extension.
+// ActivationRequestForExtensionQueue creates a request to activate a System Extension.
 func ActivationRequestForExtensionQueue(identifier string, queue obj.Object) *SystemExtensionRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionRequest")), objc.RegisterName("activationRequestForExtension:queue:"), purego.NSString(identifier), objref.IDOf(queue))
 	return SystemExtensionRequestFromID(_r)
 }
 
-// Creates a request to deactivate a System Extension.
+// DeactivationRequestForExtensionQueue creates a request to deactivate a System Extension.
 func DeactivationRequestForExtensionQueue(identifier string, queue obj.Object) *SystemExtensionRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionRequest")), objc.RegisterName("deactivationRequestForExtension:queue:"), purego.NSString(identifier), objref.IDOf(queue))
 	return SystemExtensionRequestFromID(_r)
 }
 
-// Creates a request to get information about System Extensions. This method creates a new request to retrieve the properties of any System Extensions matching the given identifier.
+// PropertiesRequestForExtensionQueue creates a request to get information about System Extensions. This method creates a new request to retrieve the properties of any System Extensions matching the given identifier.
 func PropertiesRequestForExtensionQueue(identifier string, queue obj.Object) *SystemExtensionRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionRequest")), objc.RegisterName("propertiesRequestForExtension:queue:"), purego.NSString(identifier), objref.IDOf(queue))
 	return SystemExtensionRequestFromID(_r)
 }
 
+// SharedWorkspace wraps the corresponding Objective-C method.
 func SharedWorkspace() *SystemExtensionsWorkspace {
 	_r := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionsWorkspace")), objc.RegisterName("sharedWorkspace"))
 	return SystemExtensionsWorkspaceFromID(_r)

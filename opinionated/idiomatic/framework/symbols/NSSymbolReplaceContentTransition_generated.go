@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that replaces the layers of one symbol-based image with those of another.
-//
 // SymbolReplaceContentTransition is an idiomatic wrapper over the Objective-C class NSSymbolReplaceContentTransition.
+//
+// It embeds [SymbolContentTransition], promoting that type's methods.
+//
+// A type that replaces the layers of one symbol-based image with those of another.
 type SymbolReplaceContentTransition struct {
-	objref.Handle
+	SymbolContentTransition
 }
 
 // SymbolReplaceContentTransitionFromID adopts an existing Objective-C object as a SymbolReplaceContentTransition
@@ -25,7 +26,8 @@ func SymbolReplaceContentTransitionFromID(id objc.ID) *SymbolReplaceContentTrans
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolReplaceContentTransition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SymbolReplaceContentTransition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func symbolReplaceContentTransitionAdopt(id objc.ID) *SymbolReplaceContentTransi
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolReplaceContentTransition{Handle: objref.Wrap(id)}
+	x := &SymbolReplaceContentTransition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SymbolReplaceContentTransition) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SymbolReplaceContentTransition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SymbolReplaceContentTransition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSymbolReplaceContentTransition creates a new SymbolReplaceContentTransition.
@@ -64,13 +52,13 @@ func NewSymbolReplaceContentTransition() *SymbolReplaceContentTransition {
 	return symbolReplaceContentTransitionAdopt(_id)
 }
 
-// An effect that replaces each layer separately.
+// TransitionWithByLayer an effect that replaces each layer separately.
 func (x *SymbolReplaceContentTransition) TransitionWithByLayer() *SymbolReplaceContentTransition {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitionWithByLayer"))
 	return SymbolReplaceContentTransitionFromID(_r)
 }
 
-// An effect that replaces all layers simultaneously.
+// TransitionWithWholeSymbol an effect that replaces all layers simultaneously.
 func (x *SymbolReplaceContentTransition) TransitionWithWholeSymbol() *SymbolReplaceContentTransition {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitionWithWholeSymbol"))
 	return SymbolReplaceContentTransitionFromID(_r)
@@ -84,3 +72,5 @@ type SymbolReplaceContentTransitionable interface {
 }
 
 var _ SymbolReplaceContentTransitionable = (*SymbolReplaceContentTransition)(nil)
+
+var _ SymbolContentTransitionProvider = (*SymbolReplaceContentTransition)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Host audio output stream sink plays audio to the host system’s default output device.
-//
 // HostAudioOutputStreamSink is an idiomatic wrapper over the Objective-C class VZHostAudioOutputStreamSink.
+//
+// It embeds [AudioOutputStreamSink], promoting that type's methods.
+//
+// Host audio output stream sink plays audio to the host system’s default output device.
 type HostAudioOutputStreamSink struct {
-	objref.Handle
+	AudioOutputStreamSink
 }
 
 // HostAudioOutputStreamSinkFromID adopts an existing Objective-C object as a HostAudioOutputStreamSink
@@ -25,7 +26,8 @@ func HostAudioOutputStreamSinkFromID(id objc.ID) *HostAudioOutputStreamSink {
 	if id == 0 {
 		return nil
 	}
-	x := &HostAudioOutputStreamSink{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HostAudioOutputStreamSink{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func hostAudioOutputStreamSinkAdopt(id objc.ID) *HostAudioOutputStreamSink {
 	if id == 0 {
 		return nil
 	}
-	x := &HostAudioOutputStreamSink{Handle: objref.Wrap(id)}
+	x := &HostAudioOutputStreamSink{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *HostAudioOutputStreamSink) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HostAudioOutputStreamSink) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HostAudioOutputStreamSink) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewHostAudioOutputStreamSink creates a new HostAudioOutputStreamSink.
@@ -70,3 +58,5 @@ type HostAudioOutputStreamSinkable interface {
 }
 
 var _ HostAudioOutputStreamSinkable = (*HostAudioOutputStreamSink)(nil)
+
+var _ AudioOutputStreamSinkProvider = (*HostAudioOutputStreamSink)(nil)

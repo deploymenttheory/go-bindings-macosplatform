@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the parameters that you apply when adding an audio track to a mix.
-//
 // AudioMixInputParameters is an idiomatic wrapper over the Objective-C class AVAudioMixInputParameters.
+//
+// AudioMixInputParameters is an abstract base — you do not construct it directly. Construct one of [MutableAudioMixInputParameters] and pass it where a AudioMixInputParameters is accepted.
+//
+// An object that represents the parameters that you apply when adding an audio track to a mix.
 type AudioMixInputParameters struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func AudioMixInputParametersFromID(id objc.ID) *AudioMixInputParameters {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioMixInputParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioMixInputParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func audioMixInputParametersAdopt(id objc.ID) *AudioMixInputParameters {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioMixInputParameters{Handle: objref.Wrap(id)}
+	x := &AudioMixInputParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +62,25 @@ func (x *AudioMixInputParameters) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewAudioMixInputParameters creates a new AudioMixInputParameters.
-func NewAudioMixInputParameters() *AudioMixInputParameters {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioMixInputParameters")), objc.RegisterName("new"))
-	return audioMixInputParametersAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioMixInputParameters) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Indicates the trackID of the audio track to which the parameters should be applied.
+// TrackID indicates the trackID of the audio track to which the parameters should be applied.
 func (x *AudioMixInputParameters) TrackID() int32 {
 	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("trackID"))
 	return _r
 }
 
-// Indicates the processing algorithm used to manage audio pitch at varying rates and for scaled audio edits. Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h. Can be nil, in which case the audioTimePitchAlgorithm set on the AVPlayerItem, AVAssetExportSession, or AVAssetReaderAudioMixOutput on which the AVAudioMix is set will be used for the associated track.
+// AudioTimePitchAlgorithm indicates the processing algorithm used to manage audio pitch at varying rates and for scaled audio edits. Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h. Can be nil, in which case the audioTimePitchAlgorithm set on the AVPlayerItem, AVAssetExportSession, or AVAssetReaderAudioMixOutput on which the AVAudioMix is set will be used for the associated track.
 func (x *AudioMixInputParameters) AudioTimePitchAlgorithm() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioTimePitchAlgorithm"))
 	return obj.Wrap(_r)
 }
 
-// Indicates the audio processing tap that will be used for the audio track.
+// AudioTapProcessor indicates the audio processing tap that will be used for the audio track.
 func (x *AudioMixInputParameters) AudioTapProcessor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioTapProcessor"))
 	return obj.Wrap(_r)
@@ -91,3 +95,10 @@ type AudioMixInputParametersable interface {
 }
 
 var _ AudioMixInputParametersable = (*AudioMixInputParameters)(nil)
+
+// isAudioMixInputParameters marks AudioMixInputParameters — and, by embedding promotion, its
+// subclasses — as a member of the AudioMixInputParameters hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AudioMixInputParameters) isAudioMixInputParameters() {}
+
+var _ AudioMixInputParametersProvider = (*AudioMixInputParameters)(nil)

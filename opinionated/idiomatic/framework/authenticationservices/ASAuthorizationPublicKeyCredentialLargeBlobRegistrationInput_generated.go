@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that encapsulates input for large binary object extensions during registration.
-//
 // AuthorizationPublicKeyCredentialLargeBlobRegistrationInput is an idiomatic wrapper over the Objective-C class ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput.
+//
+// A type that encapsulates input for large binary object extensions during registration.
 type AuthorizationPublicKeyCredentialLargeBlobRegistrationInput struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationPublicKeyCredentialLargeBlobRegistrationInputFromID(id objc.ID
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPublicKeyCredentialLargeBlobRegistrationInput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationPublicKeyCredentialLargeBlobRegistrationInput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationPublicKeyCredentialLargeBlobRegistrationInputAdopt(id objc.ID)
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPublicKeyCredentialLargeBlobRegistrationInput{Handle: objref.Wrap(id)}
+	x := &AuthorizationPublicKeyCredentialLargeBlobRegistrationInput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +60,12 @@ func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) IsKind(clas
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAuthorizationPublicKeyCredentialLargeBlobRegistrationInputWithSupportRequirement creates a new AuthorizationPublicKeyCredentialLargeBlobRegistrationInput.
 func NewAuthorizationPublicKeyCredentialLargeBlobRegistrationInputWithSupportRequirement(requirement AuthorizationPublicKeyCredentialLargeBlobSupportRequirement) *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput")), objc.RegisterName("alloc"))
@@ -65,17 +73,19 @@ func NewAuthorizationPublicKeyCredentialLargeBlobRegistrationInputWithSupportReq
 	return authorizationPublicKeyCredentialLargeBlobRegistrationInputAdopt(_id)
 }
 
-// WithSupportRequirement sets supportRequirement and returns the receiver so calls can be chained.
+// WithSupportRequirement sets the property and returns the receiver so calls can be chained.
 func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) WithSupportRequirement(supportRequirement AuthorizationPublicKeyCredentialLargeBlobSupportRequirement) *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportRequirement:"), supportRequirement)
 	return x
 }
 
+// SupportRequirement wraps the corresponding Objective-C method.
 func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) SupportRequirement() AuthorizationPublicKeyCredentialLargeBlobSupportRequirement {
 	_r := objc.Send[AuthorizationPublicKeyCredentialLargeBlobSupportRequirement](objref.IDOf(x), objc.RegisterName("supportRequirement"))
 	return _r
 }
 
+// SetSupportRequirement wraps the corresponding Objective-C method.
 func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) SetSupportRequirement(supportRequirement AuthorizationPublicKeyCredentialLargeBlobSupportRequirement) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportRequirement:"), supportRequirement)
 }

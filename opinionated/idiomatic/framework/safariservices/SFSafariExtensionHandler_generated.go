@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class that you subclass to handle events in your Safari app extension.
-//
 // SafariExtensionHandler is an idiomatic wrapper over the Objective-C class SFSafariExtensionHandler.
+//
+// A base class that you subclass to handle events in your Safari app extension.
 type SafariExtensionHandler struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SafariExtensionHandlerFromID(id objc.ID) *SafariExtensionHandler {
 	if id == 0 {
 		return nil
 	}
-	x := &SafariExtensionHandler{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SafariExtensionHandler{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func safariExtensionHandlerAdopt(id objc.ID) *SafariExtensionHandler {
 	if id == 0 {
 		return nil
 	}
-	x := &SafariExtensionHandler{Handle: objref.Wrap(id)}
+	x := &SafariExtensionHandler{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *SafariExtensionHandler) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *SafariExtensionHandler) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SafariExtensionHandler) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewSafariExtensionHandler creates a new SafariExtensionHandler.

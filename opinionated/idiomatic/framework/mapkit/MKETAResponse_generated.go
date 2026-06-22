@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The travel-time information that Apple servers return.
-//
 // ETAResponse is an idiomatic wrapper over the Objective-C class MKETAResponse.
+//
+// The travel-time information that Apple servers return.
 type ETAResponse struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ETAResponseFromID(id objc.ID) *ETAResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &ETAResponse{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ETAResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func eTAResponseAdopt(id objc.ID) *ETAResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &ETAResponse{Handle: objref.Wrap(id)}
+	x := &ETAResponse{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,49 @@ func (x *ETAResponse) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ETAResponse) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewETAResponse creates a new ETAResponse.
 func NewETAResponse() *ETAResponse {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKETAResponse")), objc.RegisterName("new"))
 	return eTAResponseAdopt(_id)
 }
 
+// Source wraps the corresponding Objective-C method.
 func (x *ETAResponse) Source() *MapItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
 	return MapItemFromID(_r)
 }
 
+// Destination wraps the corresponding Objective-C method.
 func (x *ETAResponse) Destination() *MapItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destination"))
 	return MapItemFromID(_r)
 }
 
+// ExpectedTravelTime wraps the corresponding Objective-C method.
 func (x *ETAResponse) ExpectedTravelTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("expectedTravelTime"))
 	return _r
 }
 
+// ExpectedArrivalDate wraps the corresponding Objective-C method.
 func (x *ETAResponse) ExpectedArrivalDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expectedArrivalDate"))
 	return obj.Wrap(_r)
 }
 
+// ExpectedDepartureDate wraps the corresponding Objective-C method.
 func (x *ETAResponse) ExpectedDepartureDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expectedDepartureDate"))
 	return obj.Wrap(_r)
 }
 
+// TransportType wraps the corresponding Objective-C method.
 func (x *ETAResponse) TransportType() DirectionsTransportType {
 	_r := objc.Send[DirectionsTransportType](objref.IDOf(x), objc.RegisterName("transportType"))
 	return _r

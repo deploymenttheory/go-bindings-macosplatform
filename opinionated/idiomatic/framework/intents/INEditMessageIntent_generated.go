@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // EditMessageIntent is an idiomatic wrapper over the Objective-C class INEditMessageIntent.
+//
+// It embeds [Intent], promoting that type's methods.
 type EditMessageIntent struct {
-	objref.Handle
+	Intent
 }
 
 // EditMessageIntentFromID adopts an existing Objective-C object as a EditMessageIntent
@@ -23,7 +24,8 @@ func EditMessageIntentFromID(id objc.ID) *EditMessageIntent {
 	if id == 0 {
 		return nil
 	}
-	x := &EditMessageIntent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EditMessageIntent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func editMessageIntentAdopt(id objc.ID) *EditMessageIntent {
 	if id == 0 {
 		return nil
 	}
-	x := &EditMessageIntent{Handle: objref.Wrap(id)}
+	x := &EditMessageIntent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *EditMessageIntent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EditMessageIntent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EditMessageIntent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewEditMessageIntentWithMessageIdentifierEditedContent creates a new EditMessageIntent.
@@ -63,20 +51,19 @@ func NewEditMessageIntentWithMessageIdentifierEditedContent(messageIdentifier st
 	return editMessageIntentAdopt(_id)
 }
 
-// The intent’s display name.
-//
-// WithSuggestedInvocationPhrase sets suggestedInvocationPhrase and returns the receiver so calls can be chained.
+// WithSuggestedInvocationPhrase the intent’s display name.
 func (x *EditMessageIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *EditMessageIntent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
 	return x
 }
 
-// WithDonationMetadata sets donationMetadata and returns the receiver so calls can be chained.
+// WithDonationMetadata sets the property and returns the receiver so calls can be chained.
 func (x *EditMessageIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *EditMessageIntent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return x
 }
 
+// MessageIdentifier wraps the corresponding Objective-C method.
 func (x *EditMessageIntent) MessageIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageIdentifier"))
 	if _r == 0 {
@@ -85,6 +72,7 @@ func (x *EditMessageIntent) MessageIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// EditedContent wraps the corresponding Objective-C method.
 func (x *EditMessageIntent) EditedContent() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("editedContent"))
 	if _r == 0 {
@@ -103,3 +91,5 @@ type EditMessageIntentable interface {
 }
 
 var _ EditMessageIntentable = (*EditMessageIntent)(nil)
+
+var _ IntentProvider = (*EditMessageIntent)(nil)

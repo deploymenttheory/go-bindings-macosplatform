@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that includes or excludes point of interest categories from a map view, local search, or local search completer.
-//
 // PointOfInterestFilter is an idiomatic wrapper over the Objective-C class MKPointOfInterestFilter.
+//
+// A filter that includes or excludes point of interest categories from a map view, local search, or local search completer.
 type PointOfInterestFilter struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PointOfInterestFilterFromID(id objc.ID) *PointOfInterestFilter {
 	if id == 0 {
 		return nil
 	}
-	x := &PointOfInterestFilter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PointOfInterestFilter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func pointOfInterestFilterAdopt(id objc.ID) *PointOfInterestFilter {
 	if id == 0 {
 		return nil
 	}
-	x := &PointOfInterestFilter{Handle: objref.Wrap(id)}
+	x := &PointOfInterestFilter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,33 @@ func (x *PointOfInterestFilter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize the point of interest filter with a list of categories to include.
-//
-// NewPointOfInterestFilterIncludingCategories creates a new PointOfInterestFilter.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PointOfInterestFilter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPointOfInterestFilterIncludingCategories initialize the point of interest filter with a list of categories to include.
 func NewPointOfInterestFilterIncludingCategories(categories []obj.Object) *PointOfInterestFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKPointOfInterestFilter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initIncludingCategories:"), purego.SliceToNSArray(categories, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return pointOfInterestFilterAdopt(_id)
 }
 
-// Initialize the point of interest filter with a list of categories to exclude.
-//
-// NewPointOfInterestFilterExcludingCategories creates a new PointOfInterestFilter.
+// NewPointOfInterestFilterExcludingCategories initialize the point of interest filter with a list of categories to exclude.
 func NewPointOfInterestFilterExcludingCategories(categories []obj.Object) *PointOfInterestFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKPointOfInterestFilter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initExcludingCategories:"), purego.SliceToNSArray(categories, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return pointOfInterestFilterAdopt(_id)
 }
 
-// Returns a Boolean value indicating whether the filter includes the point of interest category.
+// IncludesCategory returns a Boolean value indicating whether the filter includes the point of interest category.
 func (x *PointOfInterestFilter) IncludesCategory(category obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesCategory:"), objref.IDOf(category))
 	return _r
 }
 
-// Returns a Boolean value indicating whether the filter excludes the point of interest category.
+// ExcludesCategory returns a Boolean value indicating whether the filter excludes the point of interest category.
 func (x *PointOfInterestFilter) ExcludesCategory(category obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("excludesCategory:"), objref.IDOf(category))
 	return _r

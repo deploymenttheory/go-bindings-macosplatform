@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request to the App Store to get the app receipt, which represents the customer’s transactions with your app.
-//
 // ReceiptRefreshRequest is an idiomatic wrapper over the Objective-C class SKReceiptRefreshRequest.
+//
+// It embeds [Request], promoting that type's methods.
+//
+// A request to the App Store to get the app receipt, which represents the customer’s transactions with your app.
 type ReceiptRefreshRequest struct {
-	objref.Handle
+	Request
 }
 
 // ReceiptRefreshRequestFromID adopts an existing Objective-C object as a ReceiptRefreshRequest
@@ -25,7 +26,8 @@ func ReceiptRefreshRequestFromID(id objc.ID) *ReceiptRefreshRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &ReceiptRefreshRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ReceiptRefreshRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,35 +40,20 @@ func receiptRefreshRequestAdopt(id objc.ID) *ReceiptRefreshRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &ReceiptRefreshRequest{Handle: objref.Wrap(id)}
+	x := &ReceiptRefreshRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ReceiptRefreshRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ReceiptRefreshRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ReceiptRefreshRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a receipt refresh request with optional properties.
-//
-// NewReceiptRefreshRequestWithReceiptProperties creates a new ReceiptRefreshRequest.
+// NewReceiptRefreshRequestWithReceiptProperties creates a receipt refresh request with optional properties.
 func NewReceiptRefreshRequestWithReceiptProperties(properties obj.Object) *ReceiptRefreshRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKReceiptRefreshRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReceiptProperties:"), objref.IDOf(properties))
 	return receiptRefreshRequestAdopt(_id)
 }
 
+// ReceiptProperties wraps the corresponding Objective-C method.
 func (x *ReceiptRefreshRequest) ReceiptProperties() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("receiptProperties"))
 	return obj.Wrap(_r)
@@ -79,3 +66,5 @@ type ReceiptRefreshRequestable interface {
 }
 
 var _ ReceiptRefreshRequestable = (*ReceiptRefreshRequest)(nil)
+
+var _ RequestProvider = (*ReceiptRefreshRequest)(nil)

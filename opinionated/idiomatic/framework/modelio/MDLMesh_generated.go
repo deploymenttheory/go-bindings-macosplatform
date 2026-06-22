@@ -9,16 +9,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// A container for vertex buffer data to be used in rendering a 3D object.
-//
 // Mesh is an idiomatic wrapper over the Objective-C class MDLMesh.
+//
+// It embeds [Object], promoting that type's methods.
+//
+// A container for vertex buffer data to be used in rendering a 3D object.
 type Mesh struct {
-	objref.Handle
+	Object
 }
 
 // MeshFromID adopts an existing Objective-C object as a Mesh
@@ -27,7 +28,8 @@ func MeshFromID(id objc.ID) *Mesh {
 	if id == 0 {
 		return nil
 	}
-	x := &Mesh{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Mesh{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,127 +42,102 @@ func meshAdopt(id objc.ID) *Mesh {
 	if id == 0 {
 		return nil
 	}
-	x := &Mesh{Handle: objref.Wrap(id)}
+	x := &Mesh{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *Mesh) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Mesh) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Mesh) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a mesh by unifying vertex data from multiple sources with the specified parameters.
-//
-// NewMeshWithVertexBuffersVertexCountDescriptorSubmeshes creates a new Mesh.
+// NewMeshWithVertexBuffersVertexCountDescriptorSubmeshes creates a mesh by unifying vertex data from multiple sources with the specified parameters.
 func NewMeshWithVertexBuffersVertexCountDescriptorSubmeshes(vertexBuffers []obj.Object, vertexCount int, descriptor *VertexDescriptor, submeshes []*Submesh) *Mesh {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMesh")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVertexBuffers:vertexCount:descriptor:submeshes:"), purego.SliceToNSArray(vertexBuffers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), vertexCount, objref.IDOf(descriptor), purego.SliceToNSArray(submeshes, func(_v *Submesh) objc.ID { return objref.IDOf(_v) }))
 	return meshAdopt(_id)
 }
 
-// A description of the format and layout of the mesh’s vertex buffers.
-//
-// WithVertexDescriptor sets vertexDescriptor and returns the receiver so calls can be chained.
+// WithVertexDescriptor a description of the format and layout of the mesh’s vertex buffers.
 func (x *Mesh) WithVertexDescriptor(vertexDescriptor *VertexDescriptor) *Mesh {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexDescriptor:"), objref.IDOf(vertexDescriptor))
 	return x
 }
 
-// The number of vertices in the mesh.
-//
-// WithVertexCount sets vertexCount and returns the receiver so calls can be chained.
+// WithVertexCount the number of vertices in the mesh.
 func (x *Mesh) WithVertexCount(vertexCount int) *Mesh {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexCount:"), vertexCount)
 	return x
 }
 
-// The array of submeshes to be used in rendering the mesh.
-//
-// WithSubmeshes sets the collection and returns the receiver so calls can be chained.
+// WithSubmeshes the array of submeshes to be used in rendering the mesh.
 func (x *Mesh) WithSubmeshes(items ...*Submesh) *Mesh {
 	_arr := purego.SliceToNSArray(items, func(_v *Submesh) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubmeshes:"), _arr)
 	return x
 }
 
-// The parent object that contains this object.
-//
-// WithParent sets parent and returns the receiver so calls can be chained.
+// WithParent the parent object that contains this object.
 func (x *Mesh) WithParent(parent ObjectProvider) *Mesh {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return x
 }
 
-// The primary object, if applicable, of which this object is an instance.
-//
-// WithInstance sets instance and returns the receiver so calls can be chained.
+// WithInstance the primary object, if applicable, of which this object is an instance.
 func (x *Mesh) WithInstance(instance ObjectProvider) *Mesh {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return x
 }
 
-// A Boolean value indicating whether this object should be used in rendering.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden a Boolean value indicating whether this object should be used in rendering.
 func (x *Mesh) WithHidden(hidden bool) *Mesh {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// Returns the vertex data for the specified attribute.
+// VertexAttributeDataForAttributeNamed returns the vertex data for the specified attribute.
 func (x *Mesh) VertexAttributeDataForAttributeNamed(name string) *VertexAttributeData {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexAttributeDataForAttributeNamed:"), purego.NSString(name))
 	return VertexAttributeDataFromID(_r)
 }
 
-// convenience selector to get quick access to vertex attribute data reformatted to the requested format if necessary. If the desired format has less elements than the source attribute elements, excess elements will be discarded. If the desired format has more elements than the source attribute, then the destination elements will be set to zero. The vertex buffer will remain mapped until the MDLVertexAttributeData is freed.
+// VertexAttributeDataForAttributeNamedAsFormat convenience selector to get quick access to vertex attribute data reformatted to the requested format if necessary. If the desired format has less elements than the source attribute elements, excess elements will be discarded. If the desired format has more elements than the source attribute, then the destination elements will be set to zero. The vertex buffer will remain mapped until the MDLVertexAttributeData is freed.
 func (x *Mesh) VertexAttributeDataForAttributeNamedAsFormat(name string, format VertexFormat) *VertexAttributeData {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexAttributeDataForAttributeNamed:asFormat:"), purego.NSString(name), format)
 	return VertexAttributeDataFromID(_r)
 }
 
-// Immutable vertex descriptor for interpreting data in vertexBuffers Setting this applies the new layout in 'vertexBuffers' thus is a heavyweight operation as structured copies of almost all vertex buffer data could be made.  Additionally, if the new vertexDescriptor does not have an attribute in the original vertexDescriptor, that attribute will be deleted.  If the original vertexDescriptor does not have an attribute in the new vertexDescriptor, the data for the added attribute set as the added attribute's initializationValue property. The allocator associated with each original meshbuffer is used to reallocate the corresponding resultant meshbuffer.
+// VertexDescriptor immutable vertex descriptor for interpreting data in vertexBuffers Setting this applies the new layout in 'vertexBuffers' thus is a heavyweight operation as structured copies of almost all vertex buffer data could be made.  Additionally, if the new vertexDescriptor does not have an attribute in the original vertexDescriptor, that attribute will be deleted.  If the original vertexDescriptor does not have an attribute in the new vertexDescriptor, the data for the added attribute set as the added attribute's initializationValue property. The allocator associated with each original meshbuffer is used to reallocate the corresponding resultant meshbuffer.
 func (x *Mesh) VertexDescriptor() *VertexDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexDescriptor"))
 	return VertexDescriptorFromID(_r)
 }
 
+// SetVertexDescriptor wraps the corresponding Objective-C method.
 func (x *Mesh) SetVertexDescriptor(vertexDescriptor *VertexDescriptor) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexDescriptor:"), objref.IDOf(vertexDescriptor))
 }
 
-// Number of vertices in the vertexBuffers The size of vertex data in each buffer can be computed by multiplying this value with the stride of the buffer in the vertexDescriptor's layout
+// VertexCount number of vertices in the vertexBuffers The size of vertex data in each buffer can be computed by multiplying this value with the stride of the buffer in the vertexDescriptor's layout
 func (x *Mesh) VertexCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vertexCount"))
 	return _r
 }
 
+// SetVertexCount wraps the corresponding Objective-C method.
 func (x *Mesh) SetVertexCount(vertexCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexCount:"), vertexCount)
 }
 
-// Array of buffers containing vertex data The vertex buffers in this array are indexed by the vertex descriptor.
+// VertexBuffers array of buffers containing vertex data The vertex buffers in this array are indexed by the vertex descriptor.
 func (x *Mesh) VertexBuffers() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexBuffers"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetVertexBuffers wraps the corresponding Objective-C method.
 func (x *Mesh) SetVertexBuffers(vertexBuffers []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexBuffers:"), purego.SliceToNSArray(vertexBuffers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Array of submeshes containing an indexbuffer referencing the vertex data and material to be applied when the mesh is rendered
+// Submeshes array of submeshes containing an indexbuffer referencing the vertex data and material to be applied when the mesh is rendered
 //
 // Submeshes returns the collection as a Go slice.
 func (x *Mesh) Submeshes() []*Submesh {
@@ -168,60 +145,62 @@ func (x *Mesh) Submeshes() []*Submesh {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Submesh { return SubmeshFromID(_id) })
 }
 
+// SetSubmeshes wraps the corresponding Objective-C method.
 func (x *Mesh) SetSubmeshes(submeshes []*Submesh) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubmeshes:"), purego.SliceToNSArray(submeshes, func(_v *Submesh) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Adds a vertex attribute to the mesh and creates a new, empty corresponding vertex buffer.
+// AddAttributeWithNameFormat adds a vertex attribute to the mesh and creates a new, empty corresponding vertex buffer.
 func (x *Mesh) AddAttributeWithNameFormat(name string, format VertexFormat) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAttributeWithName:format:"), purego.NSString(name), format)
 }
 
-// Create a new vertex attribute including an associated buffer with a copy of the supplied data, and update the vertex descriptor accordingly
+// AddAttributeWithNameFormatTypeDataStride create a new vertex attribute including an associated buffer with a copy of the supplied data, and update the vertex descriptor accordingly
 func (x *Mesh) AddAttributeWithNameFormatTypeDataStride(name string, format VertexFormat, type_ string, data obj.Object, stride int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAttributeWithName:format:type:data:stride:"), purego.NSString(name), format, purego.NSString(type_), objref.IDOf(data), stride)
 }
 
-// Create a new vertex attribute including an associated buffer with a copy of the supplied data, and update the vertex descriptor accordingly Adding an attribute, such as position data, at multiple times will result in attributes being created for each of those times. Attributes corresponding to multiple times can be retrieved from the vertex descriptor.
+// AddAttributeWithNameFormatTypeDataStrideTime create a new vertex attribute including an associated buffer with a copy of the supplied data, and update the vertex descriptor accordingly Adding an attribute, such as position data, at multiple times will result in attributes being created for each of those times. Attributes corresponding to multiple times can be retrieved from the vertex descriptor.
 func (x *Mesh) AddAttributeWithNameFormatTypeDataStrideTime(name string, format VertexFormat, type_ string, data obj.Object, stride int, time_ float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAttributeWithName:format:type:data:stride:time:"), purego.NSString(name), format, purego.NSString(type_), objref.IDOf(data), stride, time_)
 }
 
-// Generates surface normal data for the mesh based on its vertex position data.
+// AddNormalsWithAttributeNamedCreaseThreshold generates surface normal data for the mesh based on its vertex position data.
 func (x *Mesh) AddNormalsWithAttributeNamedCreaseThreshold(attributeName string, creaseThreshold float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addNormalsWithAttributeNamed:creaseThreshold:"), purego.NSString(attributeName), creaseThreshold)
 }
 
-// Generates surface tangent and bitangent data for the mesh based on its vertex position and texture coordinate data.
+// AddTangentBasisForTextureCoordinateAttributeNamedTangentAttributeNamedBitangentAttributeNamed generates surface tangent and bitangent data for the mesh based on its vertex position and texture coordinate data.
 func (x *Mesh) AddTangentBasisForTextureCoordinateAttributeNamedTangentAttributeNamedBitangentAttributeNamed(textureCoordinateAttributeName string, tangentAttributeName string, bitangentAttributeName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTangentBasisForTextureCoordinateAttributeNamed:tangentAttributeNamed:bitangentAttributeNamed:"), purego.NSString(textureCoordinateAttributeName), purego.NSString(tangentAttributeName), purego.NSString(bitangentAttributeName))
 }
 
-// Generates surface tangent data for the mesh based on its vertex position, surface normal, and texture coordinate data.
+// AddTangentBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed generates surface tangent data for the mesh based on its vertex position, surface normal, and texture coordinate data.
 func (x *Mesh) AddTangentBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed(textureCoordinateAttributeName string, normalAttributeName string, tangentAttributeName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTangentBasisForTextureCoordinateAttributeNamed:normalAttributeNamed:tangentAttributeNamed:"), purego.NSString(textureCoordinateAttributeName), purego.NSString(normalAttributeName), purego.NSString(tangentAttributeName))
 }
 
+// AddOrthTanBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed wraps the corresponding Objective-C method.
 func (x *Mesh) AddOrthTanBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed(textureCoordinateAttributeName string, normalAttributeName string, tangentAttributeName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOrthTanBasisForTextureCoordinateAttributeNamed:normalAttributeNamed:tangentAttributeNamed:"), purego.NSString(textureCoordinateAttributeName), purego.NSString(normalAttributeName), purego.NSString(tangentAttributeName))
 }
 
-// Creates texture coordinates by unwrapping the mesh Uses the attribute named MDLVertexAttributePosition and if available, the attribute named MDLVertexAttributeNormal to calculate texture coordinates
+// AddUnwrappedTextureCoordinatesForAttributeNamed creates texture coordinates by unwrapping the mesh Uses the attribute named MDLVertexAttributePosition and if available, the attribute named MDLVertexAttributeNormal to calculate texture coordinates
 func (x *Mesh) AddUnwrappedTextureCoordinatesForAttributeNamed(textureCoordinateAttributeName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addUnwrappedTextureCoordinatesForAttributeNamed:"), purego.NSString(textureCoordinateAttributeName))
 }
 
-// Flips texture coordinates by performing the operation (u,v) = (u, 1-v) Many application generate model files with texture coordinate mapping assuming a bottom left bitmap origin. It can be more convenient to have texture coordinates corresponding to an upper left bitmap origin. This selector will perform the flip operation if the requested texture coordinate attribute exists on the mesh. An exception will be raised if the attribute cannot be found
+// FlipTextureCoordinatesInAttributeNamed flips texture coordinates by performing the operation (u,v) = (u, 1-v) Many application generate model files with texture coordinate mapping assuming a bottom left bitmap origin. It can be more convenient to have texture coordinates corresponding to an upper left bitmap origin. This selector will perform the flip operation if the requested texture coordinate attribute exists on the mesh. An exception will be raised if the attribute cannot be found
 func (x *Mesh) FlipTextureCoordinatesInAttributeNamed(textureCoordinateAttributeName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flipTextureCoordinatesInAttributeNamed:"), purego.NSString(textureCoordinateAttributeName))
 }
 
-// Modifies the mesh’s vertex buffers so that no vertices are shared by multiple faces.
+// MakeVerticesUnique modifies the mesh’s vertex buffers so that no vertices are shared by multiple faces.
 func (x *Mesh) MakeVerticesUnique() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeVerticesUnique"))
 }
 
-// Deindexes the vertex array If any vertices are shared on multiple faces, duplicate those vertices so faces do not share vertices. The vertex buffer and index buffers on submeshes may grow to accommodate any vertices added.
+// MakeVerticesUniqueAndReturnError deindexes the vertex array If any vertices are shared on multiple faces, duplicate those vertices so faces do not share vertices. The vertex buffer and index buffers on submeshes may grow to accommodate any vertices added.
 //
 // MakeVerticesUniqueAndReturnError returns an error if the operation did not succeed.
 func (x *Mesh) MakeVerticesUniqueAndReturnError() error {
@@ -233,46 +212,46 @@ func (x *Mesh) MakeVerticesUniqueAndReturnError() error {
 	return nil
 }
 
-// replace existing attribute data with new attribute data retaining the format of the replacement data. If the specified attribute does not already exist, it will be created.
+// ReplaceAttributeNamedWithData replace existing attribute data with new attribute data retaining the format of the replacement data. If the specified attribute does not already exist, it will be created.
 func (x *Mesh) ReplaceAttributeNamedWithData(name string, newData *VertexAttributeData) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceAttributeNamed:withData:"), purego.NSString(name), objref.IDOf(newData))
 }
 
-// update existing attribute data with new attribute data retaining the format of the existing data. If the specified attribute does not already exist, it will be created with the same format as the newData.
+// UpdateAttributeNamedWithData update existing attribute data with new attribute data retaining the format of the existing data. If the specified attribute does not already exist, it will be created with the same format as the newData.
 func (x *Mesh) UpdateAttributeNamedWithData(name string, newData *VertexAttributeData) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateAttributeNamed:withData:"), purego.NSString(name), objref.IDOf(newData))
 }
 
-// remove an attribute if the named attribute does not exist, nothing happens.
+// RemoveAttributeNamed remove an attribute if the named attribute does not exist, nothing happens.
 func (x *Mesh) RemoveAttributeNamed(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAttributeNamed:"), purego.NSString(name))
 }
 
-// Calculates ambient occlusion (AO) information for the mesh and saves it in the mesh as a material property texture.
+// GenerateAmbientOcclusionTextureWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed calculates ambient occlusion (AO) information for the mesh and saves it in the mesh as a material property texture.
 func (x *Mesh) GenerateAmbientOcclusionTextureWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(bakeQuality float32, attenuationFactor float32, objectsToConsider []*Object, vertexAttributeName string, materialPropertyName string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("generateAmbientOcclusionTextureWithQuality:attenuationFactor:objectsToConsider:vertexAttributeNamed:materialPropertyNamed:"), bakeQuality, attenuationFactor, purego.SliceToNSArray(objectsToConsider, func(_v *Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(vertexAttributeName), purego.NSString(materialPropertyName))
 	return _r
 }
 
-// Calculates ambient occlusion (AO) information for the mesh, using the specified number of rays per sample, and saves it in the mesh as a vertex color attribute.
+// GenerateAmbientOcclusionVertexColorsWithRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamed calculates ambient occlusion (AO) information for the mesh, using the specified number of rays per sample, and saves it in the mesh as a vertex color attribute.
 func (x *Mesh) GenerateAmbientOcclusionVertexColorsWithRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamed(raysPerSample int, attenuationFactor float32, objectsToConsider []*Object, vertexAttributeName string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("generateAmbientOcclusionVertexColorsWithRaysPerSample:attenuationFactor:objectsToConsider:vertexAttributeNamed:"), raysPerSample, attenuationFactor, purego.SliceToNSArray(objectsToConsider, func(_v *Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(vertexAttributeName))
 	return _r
 }
 
-// Calculates ambient occlusion (AO) information for the mesh and saves it in the mesh as a vertex color attribute.
+// GenerateAmbientOcclusionVertexColorsWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamed calculates ambient occlusion (AO) information for the mesh and saves it in the mesh as a vertex color attribute.
 func (x *Mesh) GenerateAmbientOcclusionVertexColorsWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamed(bakeQuality float32, attenuationFactor float32, objectsToConsider []*Object, vertexAttributeName string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("generateAmbientOcclusionVertexColorsWithQuality:attenuationFactor:objectsToConsider:vertexAttributeNamed:"), bakeQuality, attenuationFactor, purego.SliceToNSArray(objectsToConsider, func(_v *Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(vertexAttributeName))
 	return _r
 }
 
-// Calculates static lighting information for the mesh and saves it in the mesh as a material property texture.
+// GenerateLightMapTextureWithQualityLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed calculates static lighting information for the mesh and saves it in the mesh as a material property texture.
 func (x *Mesh) GenerateLightMapTextureWithQualityLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(bakeQuality float32, lightsToConsider []*Light, objectsToConsider []*Object, vertexAttributeName string, materialPropertyName string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("generateLightMapTextureWithQuality:lightsToConsider:objectsToConsider:vertexAttributeNamed:materialPropertyNamed:"), bakeQuality, purego.SliceToNSArray(lightsToConsider, func(_v *Light) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(objectsToConsider, func(_v *Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(vertexAttributeName), purego.NSString(materialPropertyName))
 	return _r
 }
 
-// Calculates static lighting information for the mesh and saves it in the mesh as a vertex color attribute.
+// GenerateLightMapVertexColorsWithLightsToConsiderObjectsToConsiderVertexAttributeNamed calculates static lighting information for the mesh and saves it in the mesh as a vertex color attribute.
 func (x *Mesh) GenerateLightMapVertexColorsWithLightsToConsiderObjectsToConsiderVertexAttributeNamed(lightsToConsider []*Light, objectsToConsider []*Object, vertexAttributeName string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("generateLightMapVertexColorsWithLightsToConsider:objectsToConsider:vertexAttributeNamed:"), purego.SliceToNSArray(lightsToConsider, func(_v *Light) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(objectsToConsider, func(_v *Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(vertexAttributeName))
 	return _r
@@ -319,3 +298,5 @@ type Meshable interface {
 }
 
 var _ Meshable = (*Mesh)(nil)
+
+var _ ObjectProvider = (*Mesh)(nil)

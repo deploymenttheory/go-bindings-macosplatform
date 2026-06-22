@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing metrics about the use of the CPU.
-//
 // CPUMetric is an idiomatic wrapper over the Objective-C class MXCPUMetric.
+//
+// It embeds [Metric], promoting that type's methods.
+//
+// An object representing metrics about the use of the CPU.
 type CPUMetric struct {
-	objref.Handle
+	Metric
 }
 
 // CPUMetricFromID adopts an existing Objective-C object as a CPUMetric
@@ -25,7 +26,8 @@ func CPUMetricFromID(id objc.ID) *CPUMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &CPUMetric{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CPUMetric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func cPUMetricAdopt(id objc.ID) *CPUMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &CPUMetric{Handle: objref.Wrap(id)}
+	x := &CPUMetric{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CPUMetric) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CPUMetric) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CPUMetric) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCPUMetric creates a new CPUMetric.
@@ -64,13 +52,13 @@ func NewCPUMetric() *CPUMetric {
 	return cPUMetricAdopt(_id)
 }
 
-// CPU time aggregated cumulatively. The data here represents the total CPU time an application consumed over the date range of the containing payload. Dimensioned as NSUnitDuration.
+// CumulativeCPUTime CPU time aggregated cumulatively. The data here represents the total CPU time an application consumed over the date range of the containing payload. Dimensioned as NSUnitDuration.
 func (x *CPUMetric) CumulativeCPUTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeCPUTime"))
 	return obj.Wrap(_r)
 }
 
-// CPU instructions retired aggregated cumulatively. The data here represents the total number of CPU instructions an application retired over the date range of the containing payload. Dimensionless.
+// CumulativeCPUInstructions CPU instructions retired aggregated cumulatively. The data here represents the total number of CPU instructions an application retired over the date range of the containing payload. Dimensionless.
 func (x *CPUMetric) CumulativeCPUInstructions() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeCPUInstructions"))
 	return obj.Wrap(_r)
@@ -84,3 +72,5 @@ type CPUMetricable interface {
 }
 
 var _ CPUMetricable = (*CPUMetric)(nil)
+
+var _ MetricProvider = (*CPUMetric)(nil)

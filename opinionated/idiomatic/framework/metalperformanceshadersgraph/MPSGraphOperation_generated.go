@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A symbolic representation of a compute operation.
-//
 // GraphOperation is an idiomatic wrapper over the Objective-C class MPSGraphOperation.
+//
+// GraphOperation is an abstract base — you do not construct it directly. Construct one of [GraphVariableOp] and pass it where a GraphOperation is accepted.
+//
+// A symbolic representation of a compute operation.
 type GraphOperation struct {
-	objref.Handle
+	GraphObject
 }
 
 // GraphOperationFromID adopts an existing Objective-C object as a GraphOperation
@@ -25,7 +26,8 @@ func GraphOperationFromID(id objc.ID) *GraphOperation {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphOperation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,33 +40,13 @@ func graphOperationAdopt(id objc.ID) *GraphOperation {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphOperation{Handle: objref.Wrap(id)}
+	x := &GraphOperation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *GraphOperation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphOperation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphOperation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewGraphOperation creates a new GraphOperation.
-func NewGraphOperation() *GraphOperation {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphOperation")), objc.RegisterName("new"))
-	return graphOperationAdopt(_id)
-}
-
-// The input tensors of the operation.
+// InputTensors the input tensors of the operation.
 //
 // InputTensors returns the collection as a Go slice.
 func (x *GraphOperation) InputTensors() []*GraphTensor {
@@ -72,7 +54,7 @@ func (x *GraphOperation) InputTensors() []*GraphTensor {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// The output tensors of the operation.
+// OutputTensors the output tensors of the operation.
 //
 // OutputTensors returns the collection as a Go slice.
 func (x *GraphOperation) OutputTensors() []*GraphTensor {
@@ -80,7 +62,7 @@ func (x *GraphOperation) OutputTensors() []*GraphTensor {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// The set of operations guaranteed to execute before this operation.
+// ControlDependencies the set of operations guaranteed to execute before this operation.
 //
 // ControlDependencies returns the collection as a Go slice.
 func (x *GraphOperation) ControlDependencies() []*GraphOperation {
@@ -88,13 +70,13 @@ func (x *GraphOperation) ControlDependencies() []*GraphOperation {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphOperation { return GraphOperationFromID(_id) })
 }
 
-// The graph on which the operation is defined.
+// Graph the graph on which the operation is defined.
 func (x *GraphOperation) Graph() *Graph {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("graph"))
 	return GraphFromID(_r)
 }
 
-// Name of the operation.
+// Name name of the operation.
 func (x *GraphOperation) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -114,3 +96,12 @@ type GraphOperationable interface {
 }
 
 var _ GraphOperationable = (*GraphOperation)(nil)
+
+// isGraphOperation marks GraphOperation — and, by embedding promotion, its
+// subclasses — as a member of the GraphOperation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *GraphOperation) isGraphOperation() {}
+
+var _ GraphOperationProvider = (*GraphOperation)(nil)
+
+var _ GraphObjectProvider = (*GraphOperation)(nil)

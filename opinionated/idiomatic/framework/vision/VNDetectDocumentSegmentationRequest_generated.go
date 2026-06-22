@@ -6,17 +6,19 @@ package vision
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that detects rectangular regions that contain text in the input image.
-//
 // DetectDocumentSegmentationRequest is an idiomatic wrapper over the Objective-C class VNDetectDocumentSegmentationRequest.
+//
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// An object that detects rectangular regions that contain text in the input image.
 type DetectDocumentSegmentationRequest struct {
-	objref.Handle
+	ImageBasedRequest
 }
 
 // DetectDocumentSegmentationRequestFromID adopts an existing Objective-C object as a DetectDocumentSegmentationRequest
@@ -25,7 +27,8 @@ func DetectDocumentSegmentationRequestFromID(id objc.ID) *DetectDocumentSegmenta
 	if id == 0 {
 		return nil
 	}
-	x := &DetectDocumentSegmentationRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DetectDocumentSegmentationRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func detectDocumentSegmentationRequestAdopt(id objc.ID) *DetectDocumentSegmentat
 	if id == 0 {
 		return nil
 	}
-	x := &DetectDocumentSegmentationRequest{Handle: objref.Wrap(id)}
+	x := &DetectDocumentSegmentationRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DetectDocumentSegmentationRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DetectDocumentSegmentationRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DetectDocumentSegmentationRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDetectDocumentSegmentationRequest creates a new DetectDocumentSegmentationRequest.
@@ -64,25 +53,25 @@ func NewDetectDocumentSegmentationRequest() *DetectDocumentSegmentationRequest {
 	return detectDocumentSegmentationRequestAdopt(_id)
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets preferBackgroundProcessing and returns the receiver so calls can be chained.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
+func (x *DetectDocumentSegmentationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectDocumentSegmentationRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *DetectDocumentSegmentationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectDocumentSegmentationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets usesCPUOnly and returns the receiver so calls can be chained.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *DetectDocumentSegmentationRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectDocumentSegmentationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets revision and returns the receiver so calls can be chained.
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
 func (x *DetectDocumentSegmentationRequest) WithRevision(revision int) *DetectDocumentSegmentationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
@@ -91,9 +80,14 @@ func (x *DetectDocumentSegmentationRequest) WithRevision(revision int) *DetectDo
 // DetectDocumentSegmentationRequestable is the interface implemented by [DetectDocumentSegmentationRequest], for mocking and DI.
 type DetectDocumentSegmentationRequestable interface {
 	obj.Object
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectDocumentSegmentationRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectDocumentSegmentationRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *DetectDocumentSegmentationRequest
 	WithRevision(revision int) *DetectDocumentSegmentationRequest
 }
 
 var _ DetectDocumentSegmentationRequestable = (*DetectDocumentSegmentationRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*DetectDocumentSegmentationRequest)(nil)
+
+var _ RequestProvider = (*DetectDocumentSegmentationRequest)(nil)

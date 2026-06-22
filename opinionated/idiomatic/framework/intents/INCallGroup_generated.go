@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The details of a group call handled by your app.
-//
 // CallGroup is an idiomatic wrapper over the Objective-C class INCallGroup.
+//
+// The details of a group call handled by your app.
 type CallGroup struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CallGroupFromID(id objc.ID) *CallGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &CallGroup{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CallGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func callGroupAdopt(id objc.ID) *CallGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &CallGroup{Handle: objref.Wrap(id)}
+	x := &CallGroup{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *CallGroup) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a call record with the group details.
-//
-// NewCallGroupWithGroupNameGroupId creates a new CallGroup.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CallGroup) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCallGroupWithGroupNameGroupId creates a call record with the group details.
 func NewCallGroupWithGroupNameGroupId(groupName string, groupId string) *CallGroup {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INCallGroup")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGroupName:groupId:"), purego.NSString(groupName), purego.NSString(groupId))
 	return callGroupAdopt(_id)
 }
 
+// GroupName wraps the corresponding Objective-C method.
 func (x *CallGroup) GroupName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupName"))
 	if _r == 0 {
@@ -75,6 +82,7 @@ func (x *CallGroup) GroupName() string {
 	return purego.GoString(_r)
 }
 
+// GroupId wraps the corresponding Objective-C method.
 func (x *CallGroup) GroupId() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupId"))
 	if _r == 0 {

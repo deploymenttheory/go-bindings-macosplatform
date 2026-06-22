@@ -25,7 +25,8 @@ func AudiogramSensitivityTestFromID(id objc.ID) *AudiogramSensitivityTest {
 	if id == 0 {
 		return nil
 	}
-	x := &AudiogramSensitivityTest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudiogramSensitivityTest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func audiogramSensitivityTestAdopt(id objc.ID) *AudiogramSensitivityTest {
 	if id == 0 {
 		return nil
 	}
-	x := &AudiogramSensitivityTest{Handle: objref.Wrap(id)}
+	x := &AudiogramSensitivityTest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *AudiogramSensitivityTest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a sensitivity test which can be added to a HKAudiogramSensitivityPoint
-//
-// NewAudiogramSensitivityTestWithSensitivityTypeMaskedSideClampingRangeError creates a new AudiogramSensitivityTest.
-func NewAudiogramSensitivityTestWithSensitivityTypeMaskedSideClampingRangeError(sensitivity *Quantity, type_ AudiogramConductionType, masked bool, side AudiogramSensitivityTestSide, clampingRange *AudiogramSensitivityPointClampingRange) (*AudiogramSensitivityTest, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudiogramSensitivityTest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudiogramSensitivityTestWithSensitivityTypeMaskedSideClampingRangeError creates a sensitivity test which can be added to a HKAudiogramSensitivityPoint
+func NewAudiogramSensitivityTestWithSensitivityTypeMaskedSideClampingRangeError(sensitivity *Quantity, type_ AudiogramConductionType, masked bool, side AudiogramSensitivityTestSide, clampingRange *AudiogramSensitivityPointClampingRange) (result *AudiogramSensitivityTest, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKAudiogramSensitivityTest")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSensitivity:type:masked:side:clampingRange:error:"), objref.IDOf(sensitivity), type_, masked, side, objref.IDOf(clampingRange), unsafe.Pointer(&_nsErr))
@@ -71,31 +77,31 @@ func NewAudiogramSensitivityTestWithSensitivityTypeMaskedSideClampingRangeError(
 	return audiogramSensitivityTestAdopt(_id), nil
 }
 
-// Ear sensitivity measured in dB from a baseline of 0 dB. Reduced hearing sensitivity corresponds to an increase from 0 dB. The unit of measurement is `HKUnit.decibelHearingLevelUnit` or "dBHL".
+// Sensitivity ear sensitivity measured in dB from a baseline of 0 dB. Reduced hearing sensitivity corresponds to an increase from 0 dB. The unit of measurement is `HKUnit.decibelHearingLevelUnit` or "dBHL".
 func (x *AudiogramSensitivityTest) Sensitivity() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sensitivity"))
 	return QuantityFromID(_r)
 }
 
-// The conduction type
+// Type the conduction type
 func (x *AudiogramSensitivityTest) Type() AudiogramConductionType {
 	_r := objc.Send[AudiogramConductionType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
-// Indicates if the test was conducted with or without masking
+// Masked indicates if the test was conducted with or without masking
 func (x *AudiogramSensitivityTest) Masked() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("masked"))
 	return _r
 }
 
-// The test side
+// Side the test side
 func (x *AudiogramSensitivityTest) Side() AudiogramSensitivityTestSide {
 	_r := objc.Send[AudiogramSensitivityTestSide](objref.IDOf(x), objc.RegisterName("side"))
 	return _r
 }
 
-// If present, indicates that the range within which the sensitivity point should be clamped.
+// ClampingRange if present, indicates that the range within which the sensitivity point should be clamped.
 func (x *AudiogramSensitivityTest) ClampingRange() *AudiogramSensitivityPointClampingRange {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clampingRange"))
 	return AudiogramSensitivityPointClampingRangeFromID(_r)

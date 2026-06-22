@@ -16,6 +16,8 @@ const (
 	ComposeSessionErrorCodeInvalidBody       ComposeSessionErrorCode = 2
 )
 
+// String returns the ComposeSessionErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ComposeSessionErrorCode) String() string {
 	switch e {
 	case ComposeSessionErrorCodeInvalidRecipients:
@@ -42,6 +44,8 @@ const (
 	ComposeUserActionForward ComposeUserAction = 4
 )
 
+// String returns the ComposeUserAction constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ComposeUserAction) String() string {
 	switch e {
 	case ComposeUserActionNewMessage:
@@ -71,6 +75,8 @@ const (
 	MessageActionFlagGray         MessageActionFlag = 8
 )
 
+// String returns the MessageActionFlag constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MessageActionFlag) String() string {
 	switch e {
 	case MessageActionFlagNone:
@@ -110,6 +116,8 @@ const (
 	MessageActionMessageColorGray   MessageActionMessageColor = 7
 )
 
+// String returns the MessageActionMessageColor constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MessageActionMessageColor) String() string {
 	switch e {
 	case MessageActionMessageColorNone:
@@ -141,6 +149,8 @@ const (
 	MessageEncryptionStateEncrypted    MessageEncryptionState = 2
 )
 
+// String returns the MessageEncryptionState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MessageEncryptionState) String() string {
 	switch e {
 	case MessageEncryptionStateUnknown:
@@ -161,6 +171,8 @@ const (
 	MessageSecurityDecodingError MessageSecurityErrorCode = 1
 )
 
+// String returns the MessageSecurityErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MessageSecurityErrorCode) String() string {
 	switch e {
 	case MessageSecurityEncodingError:
@@ -184,6 +196,8 @@ const (
 	MessageStateSending MessageState = 2
 )
 
+// String returns the MessageState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MessageState) String() string {
 	switch e {
 	case MessageStateReceived:

@@ -13,6 +13,8 @@ import (
 )
 
 // StreamNode is an idiomatic wrapper over the Objective-C class PHASEStreamNode.
+//
+// StreamNode is an abstract base — you do not construct it directly. Construct one of [PullStreamNode], [PushStreamNode] and pass it where a StreamNode is accepted.
 type StreamNode struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func StreamNodeFromID(id objc.ID) *StreamNode {
 	if id == 0 {
 		return nil
 	}
-	x := &StreamNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StreamNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func streamNodeAdopt(id objc.ID) *StreamNode {
 	if id == 0 {
 		return nil
 	}
-	x := &StreamNode{Handle: objref.Wrap(id)}
+	x := &StreamNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,31 +60,31 @@ func (x *StreamNode) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewStreamNode creates a new StreamNode.
-func NewStreamNode() *StreamNode {
-	_id := objc.Send[objc.ID](objc.ID(_class("PHASEStreamNode")), objc.RegisterName("new"))
-	return streamNodeAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StreamNode) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// If specified during construction, the metaparameter for controlling gain will be available here
+// GainMetaParameter if specified during construction, the metaparameter for controlling gain will be available here
 func (x *StreamNode) GainMetaParameter() *NumberMetaParameter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gainMetaParameter"))
 	return NumberMetaParameterFromID(_r)
 }
 
-// If specified during construction, the metaparameter for controlling rate/pitch will be available here
+// RateMetaParameter if specified during construction, the metaparameter for controlling rate/pitch will be available here
 func (x *StreamNode) RateMetaParameter() *NumberMetaParameter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rateMetaParameter"))
 	return NumberMetaParameterFromID(_r)
 }
 
-// The readonly property that returns the PHASEMixer this stream was created with and assigned to.
+// Mixer the readonly property that returns the PHASEMixer this stream was created with and assigned to.
 func (x *StreamNode) Mixer() *Mixer {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mixer"))
 	return MixerFromID(_r)
 }
 
-// The readonly property that returns the AVAudioFormat that this stream was initialized with.
+// Format the readonly property that returns the AVAudioFormat that this stream was initialized with.
 func (x *StreamNode) Format() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("format"))
 	return obj.Wrap(_r)
@@ -96,3 +100,10 @@ type StreamNodeable interface {
 }
 
 var _ StreamNodeable = (*StreamNode)(nil)
+
+// isStreamNode marks StreamNode — and, by embedding promotion, its
+// subclasses — as a member of the StreamNode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *StreamNode) isStreamNode() {}
+
+var _ StreamNodeProvider = (*StreamNode)(nil)

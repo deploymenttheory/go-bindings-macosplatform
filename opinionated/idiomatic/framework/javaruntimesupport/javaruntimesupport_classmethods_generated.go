@@ -11,30 +11,36 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// RegisterAWTAppWithOptions wraps the corresponding Objective-C method.
 func RegisterAWTAppWithOptions(options obj.Object) {
 	objc.Send[objc.ID](objc.ID(_class("JRSAppKitAWT")), objc.RegisterName("registerAWTAppWithOptions:"), objref.IDOf(options))
 }
 
+// MarkAppIsDaemon wraps the corresponding Objective-C method.
 func MarkAppIsDaemon() bool {
 	_r := objc.Send[bool](objc.ID(_class("JRSAppKitAWT")), objc.RegisterName("markAppIsDaemon"))
 	return _r
 }
 
+// CurrentModifiers wraps the corresponding Objective-C method.
 func CurrentModifiers() int {
 	_r := objc.Send[int](objc.ID(_class("JRSDrag")), objc.RegisterName("currentModifiers"))
 	return _r
 }
 
+// Controller wraps the corresponding Objective-C method.
 func Controller() *InputMethodController {
 	_r := objc.Send[objc.ID](objc.ID(_class("JRSInputMethodController")), objc.RegisterName("controller"))
 	return InputMethodControllerFromID(_r)
 }
 
+// StartRenderServer wraps the corresponding Objective-C method.
 func StartRenderServer() int {
 	_r := objc.Send[int](objc.ID(_class("JRSRenderServer")), objc.RegisterName("startRenderServer"))
 	return _r
 }
 
+// SendRenderServer wraps the corresponding Objective-C method.
 func SendRenderServer(serverPort int) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("JRSRenderServer")), objc.RegisterName("sendRenderServer:"), serverPort)
 	if _r == 0 {
@@ -43,11 +49,13 @@ func SendRenderServer(serverPort int) string {
 	return purego.GoString(_r)
 }
 
+// RecieveRenderServer wraps the corresponding Objective-C method.
 func RecieveRenderServer(serverName string) int {
 	_r := objc.Send[int](objc.ID(_class("JRSRenderServer")), objc.RegisterName("recieveRenderServer:"), purego.NSString(serverName))
 	return _r
 }
 
+// SymbolicatorForPid wraps the corresponding Objective-C method.
 func SymbolicatorForPid(pid int) *Symbolicator {
 	_r := objc.Send[objc.ID](objc.ID(_class("JRSSymbolicator")), objc.RegisterName("symbolicatorForPid:"), pid)
 	return SymbolicatorFromID(_r)

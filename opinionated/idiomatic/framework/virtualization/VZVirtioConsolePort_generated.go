@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents a Virtio console port in a VM.
-//
 // VirtioConsolePort is an idiomatic wrapper over the Objective-C class VZVirtioConsolePort.
+//
+// A class that represents a Virtio console port in a VM.
 type VirtioConsolePort struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VirtioConsolePortFromID(id objc.ID) *VirtioConsolePort {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioConsolePort{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VirtioConsolePort{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func virtioConsolePortAdopt(id objc.ID) *VirtioConsolePort {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioConsolePort{Handle: objref.Wrap(id)}
+	x := &VirtioConsolePort{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +60,25 @@ func (x *VirtioConsolePort) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VirtioConsolePort) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVirtioConsolePort creates a new VirtioConsolePort.
 func NewVirtioConsolePort() *VirtioConsolePort {
 	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioConsolePort")), objc.RegisterName("new"))
 	return virtioConsolePortAdopt(_id)
 }
 
-// An array of serial port attachments.
-//
-// WithAttachment sets attachment and returns the receiver so calls can be chained.
+// WithAttachment an array of serial port attachments.
 func (x *VirtioConsolePort) WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsolePort {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 	return x
 }
 
-// The console port name currently being used by this port. This property may not change while the VM is running. A null value indicates no name has been set.
+// Name the console port name currently being used by this port. This property may not change while the VM is running. A null value indicates no name has been set.
 func (x *VirtioConsolePort) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -81,12 +87,13 @@ func (x *VirtioConsolePort) Name() string {
 	return purego.GoString(_r)
 }
 
-// The console port attachment that's currently connected to this console port. This property may change at any time while the VM is running.
+// Attachment the console port attachment that's currently connected to this console port. This property may change at any time while the VM is running.
 func (x *VirtioConsolePort) Attachment() *SerialPortAttachment {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachment"))
 	return SerialPortAttachmentFromID(_r)
 }
 
+// SetAttachment wraps the corresponding Objective-C method.
 func (x *VirtioConsolePort) SetAttachment(attachment *SerialPortAttachment) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 }

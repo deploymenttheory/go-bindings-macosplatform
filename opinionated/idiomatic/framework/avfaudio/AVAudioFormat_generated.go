@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes the representation of an audio format.
-//
 // AudioFormat is an idiomatic wrapper over the Objective-C class AVAudioFormat.
+//
+// An object that describes the representation of an audio format.
 type AudioFormat struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AudioFormatFromID(id objc.ID) *AudioFormat {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioFormat{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioFormat{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func audioFormatAdopt(id objc.ID) *AudioFormat {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioFormat{Handle: objref.Wrap(id)}
+	x := &AudioFormat{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,106 +60,101 @@ func (x *AudioFormat) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an audio format instance with the specified sample rate and channel count.
-//
-// NewAudioFormatStandardFormatWithSampleRateChannels creates a new AudioFormat.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioFormat) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudioFormatStandardFormatWithSampleRateChannels creates an audio format instance with the specified sample rate and channel count.
 func NewAudioFormatStandardFormatWithSampleRateChannels(sampleRate float64, channels uint32) *AudioFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFormat")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initStandardFormatWithSampleRate:channels:"), sampleRate, channels)
 	return audioFormatAdopt(_id)
 }
 
-// Creates an audio format instance as a deinterleaved float with the specified sample rate and channel layout.
-//
-// NewAudioFormatStandardFormatWithSampleRateChannelLayout creates a new AudioFormat.
+// NewAudioFormatStandardFormatWithSampleRateChannelLayout creates an audio format instance as a deinterleaved float with the specified sample rate and channel layout.
 func NewAudioFormatStandardFormatWithSampleRateChannelLayout(sampleRate float64, layout *AudioChannelLayout) *AudioFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFormat")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initStandardFormatWithSampleRate:channelLayout:"), sampleRate, objref.IDOf(layout))
 	return audioFormatAdopt(_id)
 }
 
-// Creates an audio format instance.
-//
-// NewAudioFormatWithCommonFormatSampleRateChannelsInterleaved creates a new AudioFormat.
+// NewAudioFormatWithCommonFormatSampleRateChannelsInterleaved creates an audio format instance.
 func NewAudioFormatWithCommonFormatSampleRateChannelsInterleaved(format AudioCommonFormat, sampleRate float64, channels uint32, interleaved bool) *AudioFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFormat")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCommonFormat:sampleRate:channels:interleaved:"), format, sampleRate, channels, interleaved)
 	return audioFormatAdopt(_id)
 }
 
-// Creates an audio format instance with the specified audio format, sample rate, interleaved state, and channel layout.
-//
-// NewAudioFormatWithCommonFormatSampleRateInterleavedChannelLayout creates a new AudioFormat.
+// NewAudioFormatWithCommonFormatSampleRateInterleavedChannelLayout creates an audio format instance with the specified audio format, sample rate, interleaved state, and channel layout.
 func NewAudioFormatWithCommonFormatSampleRateInterleavedChannelLayout(format AudioCommonFormat, sampleRate float64, interleaved bool, layout *AudioChannelLayout) *AudioFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFormat")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCommonFormat:sampleRate:interleaved:channelLayout:"), format, sampleRate, interleaved, objref.IDOf(layout))
 	return audioFormatAdopt(_id)
 }
 
-// Creates an audio format instance using the specified settings dictionary.
-//
-// NewAudioFormatWithSettings creates a new AudioFormat.
+// NewAudioFormatWithSettings creates an audio format instance using the specified settings dictionary.
 func NewAudioFormatWithSettings(settings obj.Object) *AudioFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFormat")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSettings:"), objref.IDOf(settings))
 	return audioFormatAdopt(_id)
 }
 
-// An object that contains metadata that encoders and decoders require.
-//
-// WithMagicCookie sets magicCookie and returns the receiver so calls can be chained.
+// WithMagicCookie an object that contains metadata that encoders and decoders require.
 func (x *AudioFormat) WithMagicCookie(magicCookie obj.Object) *AudioFormat {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagicCookie:"), objref.IDOf(magicCookie))
 	return x
 }
 
-// Describes whether the format is deinterleaved native-endian float.
+// IsStandard describes whether the format is deinterleaved native-endian float.
 func (x *AudioFormat) IsStandard() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStandard"))
 	return _r
 }
 
-// An `AVAudioCommonFormat` identifying the format
+// CommonFormat an `AVAudioCommonFormat` identifying the format
 func (x *AudioFormat) CommonFormat() AudioCommonFormat {
 	_r := objc.Send[AudioCommonFormat](objref.IDOf(x), objc.RegisterName("commonFormat"))
 	return _r
 }
 
-// The number of channels of audio data.
+// ChannelCount the number of channels of audio data.
 func (x *AudioFormat) ChannelCount() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("channelCount"))
 	return _r
 }
 
-// A sampling rate in Hertz.
+// SampleRate a sampling rate in Hertz.
 func (x *AudioFormat) SampleRate() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("sampleRate"))
 	return _r
 }
 
-// Describes whether the samples are interleaved. For non-PCM formats, the value is undefined.
+// IsInterleaved describes whether the samples are interleaved. For non-PCM formats, the value is undefined.
 func (x *AudioFormat) IsInterleaved() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInterleaved"))
 	return _r
 }
 
-// The underlying AVAudioChannelLayout, if any. Only formats with more than 2 channels are required to have channel layouts.
+// ChannelLayout the underlying AVAudioChannelLayout, if any. Only formats with more than 2 channels are required to have channel layouts.
 func (x *AudioFormat) ChannelLayout() *AudioChannelLayout {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("channelLayout"))
 	return AudioChannelLayoutFromID(_r)
 }
 
-// The underlying magic cookie, if any. A magic cookie contains metadata associated with encoders and decoders. Encoders produce a magic cookie, and some decoders require a magic cookie to decode properly.
+// MagicCookie the underlying magic cookie, if any. A magic cookie contains metadata associated with encoders and decoders. Encoders produce a magic cookie, and some decoders require a magic cookie to decode properly.
 func (x *AudioFormat) MagicCookie() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("magicCookie"))
 	return obj.Wrap(_r)
 }
 
+// SetMagicCookie wraps the corresponding Objective-C method.
 func (x *AudioFormat) SetMagicCookie(magicCookie obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagicCookie:"), objref.IDOf(magicCookie))
 }
 
-// Returns the format represented as a dictionary with keys from AVAudioSettings.h.
+// Settings returns the format represented as a dictionary with keys from AVAudioSettings.h.
 func (x *AudioFormat) Settings() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("settings"))
 	return obj.Wrap(_r)

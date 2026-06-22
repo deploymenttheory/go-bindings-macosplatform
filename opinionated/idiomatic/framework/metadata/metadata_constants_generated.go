@@ -806,7 +806,6 @@ func KMDQueryScopeNetworkIndexed() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kMDQueryScopeNetworkIndexed")))
 }
 
-// This is the bundle URL for the label. Type is a CFURL. This attribute is read-only. This is the date the the label content last changed. Type is a CFDate. This attribute is read-only, but its value will be altered by setting any of the writable attributes described below. This is the localized name of the label. Type is a CFString. This is the data that should be used to create an icon image source for the label. Pass this data to the ImageIO framework to create a CGImageSourceRef. To reset a label's icon to its default image, set kMDLabelIconData to kCFNull. Type is a CFData. This is the UUID of the icon image source for the label. Labels that share the same icon image source will have the same icon UUID. Type is a CFUUID. This attribute is read-only, but its value may be altered by setting the kMDLabelIconData attribute described above. This attribute is true if the label kind specifies a mutually-exclusive set of labels. Type is a CFBoolean. This attribute is read-only. This is the kind string for the label. The label kind is the name of the bundle the label is defined in. Type is a CFString. This attribute is read-only. This attribute is optional and applicable only to labels with "Public" visibility. If it is present, then when the label is set on a file the file's Finder color will be set to the specified value (0 - 7). If the label is later removed, the file's Finder color will be reverted either to the color specified by the most-recently-set label with this attribute that remains set on the file, or to 0 (none). Type is a CFNumber. This attribute is ignored for unless the label's visibility is "Public". This is the UUID of the label. Type is a CFUUID. This attribute is read-only. This is a constant describing the label's visibility, either "Public" (kMDPublicVisibility) or "Private" (kMDPrivateVisibility). Type is a CFString. This attribute is read-only.
 // KMDLabelBundleURL returns the value of the constant kMDLabelBundleURL.
 func KMDLabelBundleURL() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDLabelBundleURL"))) }
 
@@ -847,7 +846,6 @@ func KMDLabelVisibility() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kMDLabelVisibility")))
 }
 
-// This key is used in the Info.plist file of a label bundle to specify that the label kind constitutes a mutually exclusive set. The value is a CFBoolean. This key is used in the Info.plist file of a label bundle to specify the visibility of the labels defined by the bundle. The value is a CFString constant, either "Public" (kMDPublicVisibility) or "Private" (kMDPrivateVisibility).
 // KMDLabelKindIsMutuallyExclusiveSetKey returns the value of the constant kMDLabelKindIsMutuallyExclusiveSetKey.
 func KMDLabelKindIsMutuallyExclusiveSetKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kMDLabelKindIsMutuallyExclusiveSetKey")))
@@ -868,19 +866,16 @@ func KMDPublicVisibility() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kMDPublicVisibility")))
 }
 
-// The name of the notification sent when a label has been added. The notification object is the subject MDLabelRef. All label notifications are distributed to processes owned by the same uid that have initialized the Metadata framework label APIs.
 // KMDLabelAddedNotification returns the value of the constant kMDLabelAddedNotification.
 func KMDLabelAddedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kMDLabelAddedNotification")))
 }
 
-// The name of the notification sent when a label has been changed. The notification object is the subject MDLabelRef. The label's new attributes can be retrieved using MDLabelCopyAttribute().
 // KMDLabelChangedNotification returns the value of the constant kMDLabelChangedNotification.
 func KMDLabelChangedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kMDLabelChangedNotification")))
 }
 
-// The name of the notification sent when a label has been deleted. The notification object is the subject MDLabelRef. The label's kMDLabelIconUUID, kMDLabelKind, kMDLabelKindBundleURL and kMDLabelUUID attributes can still be retrieved using MDLabelCopyAttribute(), and the label may still be passed to MDLabelCopyAttributeName().
 // KMDLabelRemovedNotification returns the value of the constant kMDLabelRemovedNotification.
 func KMDLabelRemovedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kMDLabelRemovedNotification")))

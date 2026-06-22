@@ -23,7 +23,8 @@ func MTRChannelClusterRecordProgramParamsFromID(id objc.ID) *MTRChannelClusterRe
 	if id == 0 {
 		return nil
 	}
-	x := &MTRChannelClusterRecordProgramParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRChannelClusterRecordProgramParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRChannelClusterRecordProgramParamsAdopt(id objc.ID) *MTRChannelClusterRec
 	if id == 0 {
 		return nil
 	}
-	x := &MTRChannelClusterRecordProgramParams{Handle: objref.Wrap(id)}
+	x := &MTRChannelClusterRecordProgramParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,46 +58,49 @@ func (x *MTRChannelClusterRecordProgramParams) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRChannelClusterRecordProgramParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRChannelClusterRecordProgramParams creates a new MTRChannelClusterRecordProgramParams.
 func NewMTRChannelClusterRecordProgramParams() *MTRChannelClusterRecordProgramParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRChannelClusterRecordProgramParams")), objc.RegisterName("new"))
 	return mTRChannelClusterRecordProgramParamsAdopt(_id)
 }
 
-// WithProgramIdentifier sets programIdentifier and returns the receiver so calls can be chained.
+// WithProgramIdentifier sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterRecordProgramParams) WithProgramIdentifier(programIdentifier string) *MTRChannelClusterRecordProgramParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgramIdentifier:"), purego.NSString(programIdentifier))
 	return x
 }
 
-// WithShouldRecordSeries sets shouldRecordSeries and returns the receiver so calls can be chained.
+// WithShouldRecordSeries sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterRecordProgramParams) WithShouldRecordSeries(shouldRecordSeries obj.Object) *MTRChannelClusterRecordProgramParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRecordSeries:"), objref.IDOf(shouldRecordSeries))
 	return x
 }
 
-// WithData sets data and returns the receiver so calls can be chained.
+// WithData sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterRecordProgramParams) WithData(data obj.Object) *MTRChannelClusterRecordProgramParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke).
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
 func (x *MTRChannelClusterRecordProgramParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRChannelClusterRecordProgramParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
 func (x *MTRChannelClusterRecordProgramParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRChannelClusterRecordProgramParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// ProgramIdentifier wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterRecordProgramParams) ProgramIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("programIdentifier"))
 	if _r == 0 {
@@ -104,44 +109,51 @@ func (x *MTRChannelClusterRecordProgramParams) ProgramIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// SetProgramIdentifier wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterRecordProgramParams) SetProgramIdentifier(programIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgramIdentifier:"), purego.NSString(programIdentifier))
 }
 
+// ShouldRecordSeries wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterRecordProgramParams) ShouldRecordSeries() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shouldRecordSeries"))
 	return obj.Wrap(_r)
 }
 
+// SetShouldRecordSeries wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterRecordProgramParams) SetShouldRecordSeries(shouldRecordSeries obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRecordSeries:"), objref.IDOf(shouldRecordSeries))
 }
 
+// Data wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterRecordProgramParams) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
+// SetData wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterRecordProgramParams) SetData(data obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRChannelClusterRecordProgramParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterRecordProgramParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRChannelClusterRecordProgramParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterRecordProgramParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

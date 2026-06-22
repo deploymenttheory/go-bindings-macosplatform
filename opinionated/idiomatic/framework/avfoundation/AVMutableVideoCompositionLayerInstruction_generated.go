@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object used to modify the transform, cropping, and opacity ramps applied to a given track in a mutable composition.
-//
 // MutableVideoCompositionLayerInstruction is an idiomatic wrapper over the Objective-C class AVMutableVideoCompositionLayerInstruction.
+//
+// It embeds [VideoCompositionLayerInstruction], promoting that type's methods.
+//
+// An object used to modify the transform, cropping, and opacity ramps applied to a given track in a mutable composition.
 type MutableVideoCompositionLayerInstruction struct {
-	objref.Handle
+	VideoCompositionLayerInstruction
 }
 
 // MutableVideoCompositionLayerInstructionFromID adopts an existing Objective-C object as a MutableVideoCompositionLayerInstruction
@@ -25,7 +26,8 @@ func MutableVideoCompositionLayerInstructionFromID(id objc.ID) *MutableVideoComp
 	if id == 0 {
 		return nil
 	}
-	x := &MutableVideoCompositionLayerInstruction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableVideoCompositionLayerInstruction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func mutableVideoCompositionLayerInstructionAdopt(id objc.ID) *MutableVideoCompo
 	if id == 0 {
 		return nil
 	}
-	x := &MutableVideoCompositionLayerInstruction{Handle: objref.Wrap(id)}
+	x := &MutableVideoCompositionLayerInstruction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MutableVideoCompositionLayerInstruction) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableVideoCompositionLayerInstruction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableVideoCompositionLayerInstruction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMutableVideoCompositionLayerInstruction creates a new MutableVideoCompositionLayerInstruction.
@@ -64,20 +52,19 @@ func NewMutableVideoCompositionLayerInstruction() *MutableVideoCompositionLayerI
 	return mutableVideoCompositionLayerInstructionAdopt(_id)
 }
 
-// The track identifier of the source track to which the compositor applies the instruction.
-//
-// WithTrackID sets trackID and returns the receiver so calls can be chained.
+// WithTrackID the track identifier of the source track to which the compositor applies the instruction.
 func (x *MutableVideoCompositionLayerInstruction) WithTrackID(trackID int32) *MutableVideoCompositionLayerInstruction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackID:"), trackID)
 	return x
 }
 
-// Indicates the trackID of the source track to which the compositor will apply the instruction.
+// TrackID indicates the trackID of the source track to which the compositor will apply the instruction.
 func (x *MutableVideoCompositionLayerInstruction) TrackID() int32 {
 	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("trackID"))
 	return _r
 }
 
+// SetTrackID wraps the corresponding Objective-C method.
 func (x *MutableVideoCompositionLayerInstruction) SetTrackID(trackID int32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackID:"), trackID)
 }
@@ -91,3 +78,5 @@ type MutableVideoCompositionLayerInstructionable interface {
 }
 
 var _ MutableVideoCompositionLayerInstructionable = (*MutableVideoCompositionLayerInstruction)(nil)
+
+var _ VideoCompositionLayerInstructionProvider = (*MutableVideoCompositionLayerInstruction)(nil)

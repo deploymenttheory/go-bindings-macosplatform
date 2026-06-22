@@ -17,6 +17,8 @@ const (
 	CalRecurrenceYearly  CalRecurrenceType = 3
 )
 
+// String returns the CalRecurrenceType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CalRecurrenceType) String() string {
 	switch e {
 	case CalRecurrenceDaily:
@@ -40,6 +42,8 @@ const (
 	CalSpanAllEvents    CalSpan = 2
 )
 
+// String returns the CalSpan constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CalSpan) String() string {
 	switch e {
 	case CalSpanThisEvent:

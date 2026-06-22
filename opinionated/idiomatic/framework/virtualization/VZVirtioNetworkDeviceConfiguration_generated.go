@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration object that requests the creation of a network device for the guest system.
-//
 // VirtioNetworkDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZVirtioNetworkDeviceConfiguration.
+//
+// It embeds [NetworkDeviceConfiguration], promoting that type's methods.
+//
+// A configuration object that requests the creation of a network device for the guest system.
 type VirtioNetworkDeviceConfiguration struct {
-	objref.Handle
+	NetworkDeviceConfiguration
 }
 
 // VirtioNetworkDeviceConfigurationFromID adopts an existing Objective-C object as a VirtioNetworkDeviceConfiguration
@@ -25,7 +26,8 @@ func VirtioNetworkDeviceConfigurationFromID(id objc.ID) *VirtioNetworkDeviceConf
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioNetworkDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VirtioNetworkDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func virtioNetworkDeviceConfigurationAdopt(id objc.ID) *VirtioNetworkDeviceConfi
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioNetworkDeviceConfiguration{Handle: objref.Wrap(id)}
+	x := &VirtioNetworkDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *VirtioNetworkDeviceConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VirtioNetworkDeviceConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VirtioNetworkDeviceConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewVirtioNetworkDeviceConfiguration creates a new VirtioNetworkDeviceConfiguration.
@@ -64,17 +52,13 @@ func NewVirtioNetworkDeviceConfiguration() *VirtioNetworkDeviceConfiguration {
 	return virtioNetworkDeviceConfigurationAdopt(_id)
 }
 
-// The media access control (MAC) address to assign to the network device.
-//
-// WithMACAddress sets mACAddress and returns the receiver so calls can be chained.
+// WithMACAddress the media access control (MAC) address to assign to the network device.
 func (x *VirtioNetworkDeviceConfiguration) WithMACAddress(mACAddress *MACAddress) *VirtioNetworkDeviceConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMACAddress:"), objref.IDOf(mACAddress))
 	return x
 }
 
-// The object that defines how the virtual network device communicates with the host system.
-//
-// WithAttachment sets attachment and returns the receiver so calls can be chained.
+// WithAttachment the object that defines how the virtual network device communicates with the host system.
 func (x *VirtioNetworkDeviceConfiguration) WithAttachment(attachment NetworkDeviceAttachmentProvider) *VirtioNetworkDeviceConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 	return x
@@ -88,3 +72,5 @@ type VirtioNetworkDeviceConfigurationable interface {
 }
 
 var _ VirtioNetworkDeviceConfigurationable = (*VirtioNetworkDeviceConfiguration)(nil)
+
+var _ NetworkDeviceConfigurationProvider = (*VirtioNetworkDeviceConfiguration)(nil)

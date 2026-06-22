@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An audio stream you manage to provide a sound buffer data.
-//
 // PushStreamNode is an idiomatic wrapper over the Objective-C class PHASEPushStreamNode.
+//
+// It embeds [StreamNode], promoting that type's methods.
+//
+// An audio stream you manage to provide a sound buffer data.
 type PushStreamNode struct {
-	objref.Handle
+	StreamNode
 }
 
 // PushStreamNodeFromID adopts an existing Objective-C object as a PushStreamNode
@@ -25,7 +26,8 @@ func PushStreamNodeFromID(id objc.ID) *PushStreamNode {
 	if id == 0 {
 		return nil
 	}
-	x := &PushStreamNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PushStreamNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func pushStreamNodeAdopt(id objc.ID) *PushStreamNode {
 	if id == 0 {
 		return nil
 	}
-	x := &PushStreamNode{Handle: objref.Wrap(id)}
+	x := &PushStreamNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PushStreamNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PushStreamNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PushStreamNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPushStreamNode creates a new PushStreamNode.
@@ -64,12 +52,12 @@ func NewPushStreamNode() *PushStreamNode {
 	return pushStreamNodeAdopt(_id)
 }
 
-// Schedules audio data for playback.
+// ScheduleBuffer schedules audio data for playback.
 func (x *PushStreamNode) ScheduleBuffer(buffer obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleBuffer:"), objref.IDOf(buffer))
 }
 
-// Schedules audio data playback at a specific time.
+// ScheduleBufferAtTimeOptions schedules audio data playback at a specific time.
 func (x *PushStreamNode) ScheduleBufferAtTimeOptions(buffer obj.Object, when obj.Object, options PushStreamBufferOptions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleBuffer:atTime:options:"), objref.IDOf(buffer), objref.IDOf(when), options)
 }
@@ -82,3 +70,5 @@ type PushStreamNodeable interface {
 }
 
 var _ PushStreamNodeable = (*PushStreamNode)(nil)
+
+var _ StreamNodeProvider = (*PushStreamNode)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mechanism for generating requests to perform keychain credential sharing.
-//
 // AuthorizationPasswordProvider is an idiomatic wrapper over the Objective-C class ASAuthorizationPasswordProvider.
+//
+// A mechanism for generating requests to perform keychain credential sharing.
 type AuthorizationPasswordProvider struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationPasswordProviderFromID(id objc.ID) *AuthorizationPasswordProvi
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPasswordProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationPasswordProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationPasswordProviderAdopt(id objc.ID) *AuthorizationPasswordProvid
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPasswordProvider{Handle: objref.Wrap(id)}
+	x := &AuthorizationPasswordProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *AuthorizationPasswordProvider) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationPasswordProvider) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAuthorizationPasswordProvider creates a new AuthorizationPasswordProvider.
 func NewAuthorizationPasswordProvider() *AuthorizationPasswordProvider {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPasswordProvider")), objc.RegisterName("new"))
 	return authorizationPasswordProviderAdopt(_id)
 }
 
-// Creates a new password authorization request.
+// CreateRequest creates a new password authorization request.
 func (x *AuthorizationPasswordProvider) CreateRequest() *AuthorizationPasswordRequest {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createRequest"))
 	return AuthorizationPasswordRequestFromID(_r)

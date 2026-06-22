@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that analyzes media for sensitive content.
-//
 // SensitivityAnalyzer is an idiomatic wrapper over the Objective-C class SCSensitivityAnalyzer.
+//
+// An object that analyzes media for sensitive content.
 type SensitivityAnalyzer struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func SensitivityAnalyzerFromID(id objc.ID) *SensitivityAnalyzer {
 	if id == 0 {
 		return nil
 	}
-	x := &SensitivityAnalyzer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SensitivityAnalyzer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func sensitivityAnalyzerAdopt(id objc.ID) *SensitivityAnalyzer {
 	if id == 0 {
 		return nil
 	}
-	x := &SensitivityAnalyzer{Handle: objref.Wrap(id)}
+	x := &SensitivityAnalyzer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,22 @@ func (x *SensitivityAnalyzer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SensitivityAnalyzer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSensitivityAnalyzer creates a new SensitivityAnalyzer.
 func NewSensitivityAnalyzer() *SensitivityAnalyzer {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCSensitivityAnalyzer")), objc.RegisterName("new"))
 	return sensitivityAnalyzerAdopt(_id)
 }
 
-// Analyzes an image file on disk at a URL and runs code on completion.
+// AnalyzeImageFile analyzes an image file on disk at a URL and runs code on completion.
 //
 // AnalyzeImageFile blocks until the operation completes or ctx is cancelled.
-func (x *SensitivityAnalyzer) AnalyzeImageFile(ctx context.Context, fileURL string) (*SensitivityAnalysis, error) {
+func (x *SensitivityAnalyzer) AnalyzeImageFile(ctx context.Context, fileURL string) (result *SensitivityAnalysis, err error) {
 	type _result struct {
 		val *SensitivityAnalysis
 		err error
@@ -91,10 +99,10 @@ func (x *SensitivityAnalyzer) AnalyzeImageFile(ctx context.Context, fileURL stri
 	}
 }
 
-// Analyzes an image for sensitive content and runs code on completion.
+// AnalyzeCGImage analyzes an image for sensitive content and runs code on completion.
 //
 // AnalyzeCGImage blocks until the operation completes or ctx is cancelled.
-func (x *SensitivityAnalyzer) AnalyzeCGImage(ctx context.Context, image obj.Object) (*SensitivityAnalysis, error) {
+func (x *SensitivityAnalyzer) AnalyzeCGImage(ctx context.Context, image obj.Object) (result *SensitivityAnalysis, err error) {
 	type _result struct {
 		val *SensitivityAnalysis
 		err error
@@ -116,7 +124,7 @@ func (x *SensitivityAnalyzer) AnalyzeCGImage(ctx context.Context, image obj.Obje
 	}
 }
 
-// Current SCSensitivityAnalysisPolicy set on device. Can be used to determine whether analysis is available or not
+// AnalysisPolicy current SCSensitivityAnalysisPolicy set on device. Can be used to determine whether analysis is available or not
 func (x *SensitivityAnalyzer) AnalysisPolicy() SensitivityAnalysisPolicy {
 	_r := objc.Send[SensitivityAnalysisPolicy](objref.IDOf(x), objc.RegisterName("analysisPolicy"))
 	return _r

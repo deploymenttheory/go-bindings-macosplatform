@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object to create and manage an DNS proxy provider’s configuration.
-//
 // NEDNSProxyManager is an idiomatic wrapper over the Objective-C class NEDNSProxyManager.
+//
+// An object to create and manage an DNS proxy provider’s configuration.
 type NEDNSProxyManager struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func NEDNSProxyManagerFromID(id objc.ID) *NEDNSProxyManager {
 	if id == 0 {
 		return nil
 	}
-	x := &NEDNSProxyManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEDNSProxyManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func nEDNSProxyManagerAdopt(id objc.ID) *NEDNSProxyManager {
 	if id == 0 {
 		return nil
 	}
-	x := &NEDNSProxyManager{Handle: objref.Wrap(id)}
+	x := &NEDNSProxyManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,37 +62,37 @@ func (x *NEDNSProxyManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEDNSProxyManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNEDNSProxyManager creates a new NEDNSProxyManager.
 func NewNEDNSProxyManager() *NEDNSProxyManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("NEDNSProxyManager")), objc.RegisterName("new"))
 	return nEDNSProxyManagerAdopt(_id)
 }
 
-// A description of the DNS proxy.
-//
-// WithLocalizedDescription sets localizedDescription and returns the receiver so calls can be chained.
+// WithLocalizedDescription a description of the DNS proxy.
 func (x *NEDNSProxyManager) WithLocalizedDescription(localizedDescription string) *NEDNSProxyManager {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
 	return x
 }
 
-// The provider-specific portion of the DNS proxy configuration.
-//
-// WithProviderProtocol sets providerProtocol and returns the receiver so calls can be chained.
+// WithProviderProtocol the provider-specific portion of the DNS proxy configuration.
 func (x *NEDNSProxyManager) WithProviderProtocol(providerProtocol *NEDNSProxyProviderProtocol) *NEDNSProxyManager {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderProtocol:"), objref.IDOf(providerProtocol))
 	return x
 }
 
-// The status of a DNS proxy.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled the status of a DNS proxy.
 func (x *NEDNSProxyManager) WithEnabled(enabled bool) *NEDNSProxyManager {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// Loads the current DNS proxy configuration from the caller’s DNS proxy preferences.
+// LoadFromPreferences loads the current DNS proxy configuration from the caller’s DNS proxy preferences.
 //
 // LoadFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEDNSProxyManager) LoadFromPreferences(ctx context.Context) error {
@@ -109,7 +111,7 @@ func (x *NEDNSProxyManager) LoadFromPreferences(ctx context.Context) error {
 	}
 }
 
-// Removes the DNS proxy configuration from the caller’s DNS proxy preferences.
+// RemoveFromPreferences removes the DNS proxy configuration from the caller’s DNS proxy preferences.
 //
 // RemoveFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEDNSProxyManager) RemoveFromPreferences(ctx context.Context) error {
@@ -128,7 +130,7 @@ func (x *NEDNSProxyManager) RemoveFromPreferences(ctx context.Context) error {
 	}
 }
 
-// Saves the DNS proxy configuration in the caller’s DNS proxy preferences.
+// SaveToPreferences saves the DNS proxy configuration in the caller’s DNS proxy preferences.
 //
 // SaveToPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEDNSProxyManager) SaveToPreferences(ctx context.Context) error {
@@ -147,7 +149,7 @@ func (x *NEDNSProxyManager) SaveToPreferences(ctx context.Context) error {
 	}
 }
 
-// A string containing a description of the DNS proxy.
+// LocalizedDescription a string containing a description of the DNS proxy.
 func (x *NEDNSProxyManager) LocalizedDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
@@ -156,26 +158,29 @@ func (x *NEDNSProxyManager) LocalizedDescription() string {
 	return purego.GoString(_r)
 }
 
+// SetLocalizedDescription wraps the corresponding Objective-C method.
 func (x *NEDNSProxyManager) SetLocalizedDescription(localizedDescription string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
 }
 
-// An NEDNSProxyProviderProtocol object containing the provider-specific portion of the DNS proxy configuration.
+// ProviderProtocol an NEDNSProxyProviderProtocol object containing the provider-specific portion of the DNS proxy configuration.
 func (x *NEDNSProxyManager) ProviderProtocol() *NEDNSProxyProviderProtocol {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("providerProtocol"))
 	return NEDNSProxyProviderProtocolFromID(_r)
 }
 
+// SetProviderProtocol wraps the corresponding Objective-C method.
 func (x *NEDNSProxyManager) SetProviderProtocol(providerProtocol *NEDNSProxyProviderProtocol) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderProtocol:"), objref.IDOf(providerProtocol))
 }
 
-// Toggles the enabled status of the DNS proxy. Setting this property will disable DNS proxy configurations of other apps. This property will be set to NO when other DNS proxy configurations are enabled.
+// IsEnabled toggles the enabled status of the DNS proxy. Setting this property will disable DNS proxy configurations of other apps. This property will be set to NO when other DNS proxy configurations are enabled.
 func (x *NEDNSProxyManager) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r
 }
 
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *NEDNSProxyManager) SetEnabled(enabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }

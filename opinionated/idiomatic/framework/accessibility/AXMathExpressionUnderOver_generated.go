@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MathExpressionUnderOver is an idiomatic wrapper over the Objective-C class AXMathExpressionUnderOver.
+//
+// It embeds [MathExpression], promoting that type's methods.
 type MathExpressionUnderOver struct {
-	objref.Handle
+	MathExpression
 }
 
 // MathExpressionUnderOverFromID adopts an existing Objective-C object as a MathExpressionUnderOver
@@ -23,7 +24,8 @@ func MathExpressionUnderOverFromID(id objc.ID) *MathExpressionUnderOver {
 	if id == 0 {
 		return nil
 	}
-	x := &MathExpressionUnderOver{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MathExpressionUnderOver{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mathExpressionUnderOverAdopt(id objc.ID) *MathExpressionUnderOver {
 	if id == 0 {
 		return nil
 	}
-	x := &MathExpressionUnderOver{Handle: objref.Wrap(id)}
+	x := &MathExpressionUnderOver{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MathExpressionUnderOver) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MathExpressionUnderOver) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MathExpressionUnderOver) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMathExpressionUnderOverWithBaseExpressionUnderExpressionOverExpression creates a new MathExpressionUnderOver.
@@ -63,16 +51,19 @@ func NewMathExpressionUnderOverWithBaseExpressionUnderExpressionOverExpression(b
 	return mathExpressionUnderOverAdopt(_id)
 }
 
+// BaseExpression wraps the corresponding Objective-C method.
 func (x *MathExpressionUnderOver) BaseExpression() *MathExpression {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseExpression"))
 	return MathExpressionFromID(_r)
 }
 
+// UnderExpression wraps the corresponding Objective-C method.
 func (x *MathExpressionUnderOver) UnderExpression() *MathExpression {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("underExpression"))
 	return MathExpressionFromID(_r)
 }
 
+// OverExpression wraps the corresponding Objective-C method.
 func (x *MathExpressionUnderOver) OverExpression() *MathExpression {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("overExpression"))
 	return MathExpressionFromID(_r)
@@ -87,3 +78,5 @@ type MathExpressionUnderOverable interface {
 }
 
 var _ MathExpressionUnderOverable = (*MathExpressionUnderOver)(nil)
+
+var _ MathExpressionProvider = (*MathExpressionUnderOver)(nil)

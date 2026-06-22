@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that can filter the movement of an object and provides haptic feedback when alignment occurs.
-//
 // AlignmentFeedbackFilter is an idiomatic wrapper over the Objective-C class NSAlignmentFeedbackFilter.
+//
+// An object that can filter the movement of an object and provides haptic feedback when alignment occurs.
 type AlignmentFeedbackFilter struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AlignmentFeedbackFilterFromID(id objc.ID) *AlignmentFeedbackFilter {
 	if id == 0 {
 		return nil
 	}
-	x := &AlignmentFeedbackFilter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AlignmentFeedbackFilter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func alignmentFeedbackFilterAdopt(id objc.ID) *AlignmentFeedbackFilter {
 	if id == 0 {
 		return nil
 	}
-	x := &AlignmentFeedbackFilter{Handle: objref.Wrap(id)}
+	x := &AlignmentFeedbackFilter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,23 +60,29 @@ func (x *AlignmentFeedbackFilter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AlignmentFeedbackFilter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAlignmentFeedbackFilter creates a new AlignmentFeedbackFilter.
 func NewAlignmentFeedbackFilter() *AlignmentFeedbackFilter {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSAlignmentFeedbackFilter")), objc.RegisterName("new"))
 	return alignmentFeedbackFilterAdopt(_id)
 }
 
-// Informs the feedback filter about a new event.
+// UpdateWithEvent informs the feedback filter about a new event.
 func (x *AlignmentFeedbackFilter) UpdateWithEvent(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithEvent:"), objref.IDOf(event))
 }
 
-// Informs the feedback filter about a new pan (drag) gesture recognizer event.
+// UpdateWithPanRecognizer informs the feedback filter about a new pan (drag) gesture recognizer event.
 func (x *AlignmentFeedbackFilter) UpdateWithPanRecognizer(panRecognizer *PanGestureRecognizer) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithPanRecognizer:"), objref.IDOf(panRecognizer))
 }
 
-// Performs the haptic feedback described by one or more alignment feedback tokens.
+// PerformFeedbackPerformanceTime performs the haptic feedback described by one or more alignment feedback tokens.
 func (x *AlignmentFeedbackFilter) PerformFeedbackPerformanceTime(alignmentFeedbackTokens []obj.Object, performanceTime HapticFeedbackPerformanceTime) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performFeedback:performanceTime:"), purego.SliceToNSArray(alignmentFeedbackTokens, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), performanceTime)
 }

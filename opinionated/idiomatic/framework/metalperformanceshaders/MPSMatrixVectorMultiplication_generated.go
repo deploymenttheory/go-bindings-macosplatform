@@ -6,17 +6,19 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A matrix-vector multiplication kernel
-//
 // MatrixVectorMultiplication is an idiomatic wrapper over the Objective-C class MPSMatrixVectorMultiplication.
+//
+// It embeds [MatrixBinaryKernel], promoting that type's methods.
+//
+// A matrix-vector multiplication kernel
 type MatrixVectorMultiplication struct {
-	objref.Handle
+	MatrixBinaryKernel
 }
 
 // MatrixVectorMultiplicationFromID adopts an existing Objective-C object as a MatrixVectorMultiplication
@@ -25,7 +27,8 @@ func MatrixVectorMultiplicationFromID(id objc.ID) *MatrixVectorMultiplication {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixVectorMultiplication{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatrixVectorMultiplication{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func matrixVectorMultiplicationAdopt(id objc.ID) *MatrixVectorMultiplication {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixVectorMultiplication{Handle: objref.Wrap(id)}
+	x := &MatrixVectorMultiplication{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MatrixVectorMultiplication) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatrixVectorMultiplication) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatrixVectorMultiplication) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMatrixVectorMultiplication creates a new MatrixVectorMultiplication.
@@ -64,25 +53,37 @@ func NewMatrixVectorMultiplication() *MatrixVectorMultiplication {
 	return matrixVectorMultiplicationAdopt(_id)
 }
 
-// The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
-//
-// WithBatchStart sets batchStart and returns the receiver so calls can be chained.
+// WithPrimarySourceMatrixOrigin the origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixVectorMultiplication) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixVectorMultiplication {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceMatrixOrigin:"), primarySourceMatrixOrigin)
+	return x
+}
+
+// WithSecondarySourceMatrixOrigin the origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixVectorMultiplication) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixVectorMultiplication {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceMatrixOrigin:"), secondarySourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixVectorMultiplication) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixVectorMultiplication {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
 func (x *MatrixVectorMultiplication) WithBatchStart(batchStart int) *MatrixVectorMultiplication {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 	return x
 }
 
-// The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
-//
-// WithBatchSize sets batchSize and returns the receiver so calls can be chained.
+// WithBatchSize the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
 func (x *MatrixVectorMultiplication) WithBatchSize(batchSize int) *MatrixVectorMultiplication {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *MatrixVectorMultiplication) WithLabel(label string) *MatrixVectorMultiplication {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -91,9 +92,16 @@ func (x *MatrixVectorMultiplication) WithLabel(label string) *MatrixVectorMultip
 // MatrixVectorMultiplicationable is the interface implemented by [MatrixVectorMultiplication], for mocking and DI.
 type MatrixVectorMultiplicationable interface {
 	obj.Object
+	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixVectorMultiplication
+	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixVectorMultiplication
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixVectorMultiplication
 	WithBatchStart(batchStart int) *MatrixVectorMultiplication
 	WithBatchSize(batchSize int) *MatrixVectorMultiplication
 	WithLabel(label string) *MatrixVectorMultiplication
 }
 
 var _ MatrixVectorMultiplicationable = (*MatrixVectorMultiplication)(nil)
+
+var _ MatrixBinaryKernelProvider = (*MatrixVectorMultiplication)(nil)
+
+var _ KernelProvider = (*MatrixVectorMultiplication)(nil)

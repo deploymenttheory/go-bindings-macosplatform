@@ -6,17 +6,19 @@ package coreimage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information about a Quick Response code detected in a still or video image.
-//
 // QRCodeFeature is an idiomatic wrapper over the Objective-C class CIQRCodeFeature.
+//
+// It embeds [Feature], promoting that type's methods.
+//
+// Information about a Quick Response code detected in a still or video image.
 type QRCodeFeature struct {
-	objref.Handle
+	Feature
 }
 
 // QRCodeFeatureFromID adopts an existing Objective-C object as a QRCodeFeature
@@ -25,7 +27,8 @@ func QRCodeFeatureFromID(id objc.ID) *QRCodeFeature {
 	if id == 0 {
 		return nil
 	}
-	x := &QRCodeFeature{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QRCodeFeature{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func qRCodeFeatureAdopt(id objc.ID) *QRCodeFeature {
 	if id == 0 {
 		return nil
 	}
-	x := &QRCodeFeature{Handle: objref.Wrap(id)}
+	x := &QRCodeFeature{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *QRCodeFeature) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *QRCodeFeature) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *QRCodeFeature) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewQRCodeFeature creates a new QRCodeFeature.
@@ -64,7 +53,31 @@ func NewQRCodeFeature() *QRCodeFeature {
 	return qRCodeFeatureAdopt(_id)
 }
 
-// The string decoded from the detected barcode.
+// TopLeft the image coordinate of the upper-left corner of the detected QR code.
+func (x *QRCodeFeature) TopLeft() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("topLeft"))
+	return _r
+}
+
+// TopRight the image coordinate of the upper-right corner of the detected QR code.
+func (x *QRCodeFeature) TopRight() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("topRight"))
+	return _r
+}
+
+// BottomLeft the image coordinate of the lower-left corner of the detected QR code.
+func (x *QRCodeFeature) BottomLeft() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("bottomLeft"))
+	return _r
+}
+
+// BottomRight the image coordinate of the lower-right corner of the detected QR code.
+func (x *QRCodeFeature) BottomRight() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("bottomRight"))
+	return _r
+}
+
+// MessageString the string decoded from the detected barcode.
 func (x *QRCodeFeature) MessageString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageString"))
 	if _r == 0 {
@@ -73,7 +86,7 @@ func (x *QRCodeFeature) MessageString() string {
 	return purego.GoString(_r)
 }
 
-// An abstract representation of a QR Code symbol. The property is a “CIQRCodeDescriptor“ instance that contains the payload, symbol version, mask pattern, and error correction level, so the QR Code can be reproduced.
+// SymbolDescriptor an abstract representation of a QR Code symbol. The property is a “CIQRCodeDescriptor“ instance that contains the payload, symbol version, mask pattern, and error correction level, so the QR Code can be reproduced.
 func (x *QRCodeFeature) SymbolDescriptor() *QRCodeDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("symbolDescriptor"))
 	return QRCodeDescriptorFromID(_r)
@@ -82,8 +95,14 @@ func (x *QRCodeFeature) SymbolDescriptor() *QRCodeDescriptor {
 // QRCodeFeatureable is the interface implemented by [QRCodeFeature], for mocking and DI.
 type QRCodeFeatureable interface {
 	obj.Object
+	TopLeft() corefoundation.CGPoint
+	TopRight() corefoundation.CGPoint
+	BottomLeft() corefoundation.CGPoint
+	BottomRight() corefoundation.CGPoint
 	MessageString() string
 	SymbolDescriptor() *QRCodeDescriptor
 }
 
 var _ QRCodeFeatureable = (*QRCodeFeature)(nil)
+
+var _ FeatureProvider = (*QRCodeFeature)(nil)

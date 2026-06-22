@@ -11,56 +11,67 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// CompositionWithFile wraps the corresponding Objective-C method.
 func CompositionWithFile(path string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCComposition")), objc.RegisterName("compositionWithFile:"), purego.NSString(path))
 	return obj.Wrap(_r)
 }
 
+// CompositionWithData wraps the corresponding Objective-C method.
 func CompositionWithData(data obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCComposition")), objc.RegisterName("compositionWithData:"), objref.IDOf(data))
 	return obj.Wrap(_r)
 }
 
+// CompositionLayerWithFile wraps the corresponding Objective-C method.
 func CompositionLayerWithFile(path string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCCompositionLayer")), objc.RegisterName("compositionLayerWithFile:"), purego.NSString(path))
 	return obj.Wrap(_r)
 }
 
+// CompositionLayerWithComposition wraps the corresponding Objective-C method.
 func CompositionLayerWithComposition(composition obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCCompositionLayer")), objc.RegisterName("compositionLayerWithComposition:"), objref.IDOf(composition))
 	return obj.Wrap(_r)
 }
 
+// SharedCompositionPickerPanel wraps the corresponding Objective-C method.
 func SharedCompositionPickerPanel() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCCompositionPickerPanel")), objc.RegisterName("sharedCompositionPickerPanel"))
 	return obj.Wrap(_r)
 }
 
+// SharedCompositionRepository wraps the corresponding Objective-C method.
 func SharedCompositionRepository() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCCompositionRepository")), objc.RegisterName("sharedCompositionRepository"))
 	return obj.Wrap(_r)
 }
 
+// Attributes wraps the corresponding Objective-C method.
 func Attributes() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCPlugIn")), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
+// AttributesForPropertyPortWithKey wraps the corresponding Objective-C method.
 func AttributesForPropertyPortWithKey(key string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCPlugIn")), objc.RegisterName("attributesForPropertyPortWithKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
+// SortedPropertyPortKeys wraps the corresponding Objective-C method.
 func SortedPropertyPortKeys() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCPlugIn")), objc.RegisterName("sortedPropertyPortKeys"))
 	return obj.Wrap(_r)
 }
 
+// PlugInKeys wraps the corresponding Objective-C method.
 func PlugInKeys() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCPlugIn")), objc.RegisterName("plugInKeys"))
 	return obj.Wrap(_r)
 }
 
+// LoadPlugInAtPath wraps the corresponding Objective-C method.
 func LoadPlugInAtPath(path string) bool {
 	_r := objc.Send[bool](objc.ID(_class("QCPlugIn")), objc.RegisterName("loadPlugInAtPath:"), purego.NSString(path))
 	return _r

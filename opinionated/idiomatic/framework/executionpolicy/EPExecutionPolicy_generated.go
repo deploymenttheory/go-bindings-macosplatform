@@ -25,7 +25,8 @@ func ExecutionPolicyFromID(id objc.ID) *ExecutionPolicy {
 	if id == 0 {
 		return nil
 	}
-	x := &ExecutionPolicy{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExecutionPolicy{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func executionPolicyAdopt(id objc.ID) *ExecutionPolicy {
 	if id == 0 {
 		return nil
 	}
-	x := &ExecutionPolicy{Handle: objref.Wrap(id)}
+	x := &ExecutionPolicy{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *ExecutionPolicy) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExecutionPolicy) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewExecutionPolicy creates a new ExecutionPolicy.
 func NewExecutionPolicy() *ExecutionPolicy {
 	_id := objc.Send[objc.ID](objc.ID(_class("EPExecutionPolicy")), objc.RegisterName("new"))
 	return executionPolicyAdopt(_id)
 }
 
+// AddPolicyExceptionForURL wraps the corresponding Objective-C method.
 func (x *ExecutionPolicy) AddPolicyExceptionForURL(url string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addPolicyExceptionForURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))

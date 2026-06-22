@@ -6,15 +6,18 @@ package mpsimage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ImageConvolution is an idiomatic wrapper over the Objective-C class MPSImageConvolution.
+//
+// It embeds [UnaryImageKernel], promoting that type's methods.
 type ImageConvolution struct {
-	objref.Handle
+	UnaryImageKernel
 }
 
 // ImageConvolutionFromID adopts an existing Objective-C object as a ImageConvolution
@@ -23,7 +26,8 @@ func ImageConvolutionFromID(id objc.ID) *ImageConvolution {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageConvolution{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageConvolution{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +40,10 @@ func imageConvolutionAdopt(id objc.ID) *ImageConvolution {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageConvolution{Handle: objref.Wrap(id)}
+	x := &ImageConvolution{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ImageConvolution) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageConvolution) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageConvolution) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewImageConvolution creates a new ImageConvolution.
@@ -62,32 +52,43 @@ func NewImageConvolution() *ImageConvolution {
 	return imageConvolutionAdopt(_id)
 }
 
-// The bias is a value to be added to convolved pixel before it is converted back to the storage format. It can be used to convert negative values into a representable range for a unsigned MTLPixelFormat. For example, many edge detection filters produce results in the range [-k,k]. By scaling the filter weights by 0.5/k and adding 0.5, the results will be in range [0,1] suitable for use with unorm formats. It can be used in combination with renormalization of the filter weights to do video ranging as part of the convolution effect. It can also just be used to increase the brightness of the image. Default value is 0.0f.
-//
-// WithBias sets bias and returns the receiver so calls can be chained.
+// WithBias the bias is a value to be added to convolved pixel before it is converted back to the storage format. It can be used to convert negative values into a representable range for a unsigned MTLPixelFormat. For example, many edge detection filters produce results in the range [-k,k]. By scaling the filter weights by 0.5/k and adding 0.5, the results will be in range [0,1] suitable for use with unorm formats. It can be used in combination with renormalization of the filter weights to do video ranging as part of the convolution effect. It can also just be used to increase the brightness of the image. Default value is 0.0f.
 func (x *ImageConvolution) WithBias(bias float32) *ImageConvolution {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 	return x
 }
 
-// The height of the filter window. Must be an odd number.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
+func (x *ImageConvolution) WithOffset(offset mpscore.MPSOffset) *ImageConvolution {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (x *ImageConvolution) WithClipRect(clipRect metal.MTLRegion) *ImageConvolution {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
+// KernelHeight the height of the filter window. Must be an odd number.
 func (x *ImageConvolution) KernelHeight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
-// The width of the filter window. Must be an odd number.
+// KernelWidth the width of the filter window. Must be an odd number.
 func (x *ImageConvolution) KernelWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
-// The bias is a value to be added to convolved pixel before it is converted back to the storage format. It can be used to convert negative values into a representable range for a unsigned MTLPixelFormat. For example, many edge detection filters produce results in the range [-k,k]. By scaling the filter weights by 0.5/k and adding 0.5, the results will be in range [0,1] suitable for use with unorm formats. It can be used in combination with renormalization of the filter weights to do video ranging as part of the convolution effect. It can also just be used to increase the brightness of the image. Default value is 0.0f.
+// Bias the bias is a value to be added to convolved pixel before it is converted back to the storage format. It can be used to convert negative values into a representable range for a unsigned MTLPixelFormat. For example, many edge detection filters produce results in the range [-k,k]. By scaling the filter weights by 0.5/k and adding 0.5, the results will be in range [0,1] suitable for use with unorm formats. It can be used in combination with renormalization of the filter weights to do video ranging as part of the convolution effect. It can also just be used to increase the brightness of the image. Default value is 0.0f.
 func (x *ImageConvolution) Bias() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("bias"))
 	return _r
 }
 
+// SetBias wraps the corresponding Objective-C method.
 func (x *ImageConvolution) SetBias(bias float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 }
@@ -96,6 +97,8 @@ func (x *ImageConvolution) SetBias(bias float32) {
 type ImageConvolutionable interface {
 	obj.Object
 	WithBias(bias float32) *ImageConvolution
+	WithOffset(offset mpscore.MPSOffset) *ImageConvolution
+	WithClipRect(clipRect metal.MTLRegion) *ImageConvolution
 	KernelHeight() int
 	KernelWidth() int
 	Bias() float32
@@ -103,3 +106,5 @@ type ImageConvolutionable interface {
 }
 
 var _ ImageConvolutionable = (*ImageConvolution)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageConvolution)(nil)

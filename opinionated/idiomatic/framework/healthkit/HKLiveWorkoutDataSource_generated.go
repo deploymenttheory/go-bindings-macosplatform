@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A data source that automatically provides live data from an active workout session.
-//
 // LiveWorkoutDataSource is an idiomatic wrapper over the Objective-C class HKLiveWorkoutDataSource.
+//
+// A data source that automatically provides live data from an active workout session.
 type LiveWorkoutDataSource struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LiveWorkoutDataSourceFromID(id objc.ID) *LiveWorkoutDataSource {
 	if id == 0 {
 		return nil
 	}
-	x := &LiveWorkoutDataSource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LiveWorkoutDataSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func liveWorkoutDataSourceAdopt(id objc.ID) *LiveWorkoutDataSource {
 	if id == 0 {
 		return nil
 	}
-	x := &LiveWorkoutDataSource{Handle: objref.Wrap(id)}
+	x := &LiveWorkoutDataSource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,26 +60,30 @@ func (x *LiveWorkoutDataSource) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new data source based on the provided workout configuration.
-//
-// NewLiveWorkoutDataSourceWithHealthStoreWorkoutConfiguration creates a new LiveWorkoutDataSource.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LiveWorkoutDataSource) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLiveWorkoutDataSourceWithHealthStoreWorkoutConfiguration creates a new data source based on the provided workout configuration.
 func NewLiveWorkoutDataSourceWithHealthStoreWorkoutConfiguration(healthStore *HealthStore, configuration *WorkoutConfiguration) *LiveWorkoutDataSource {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKLiveWorkoutDataSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:workoutConfiguration:"), objref.IDOf(healthStore), objref.IDOf(configuration))
 	return liveWorkoutDataSourceAdopt(_id)
 }
 
-// Begins automatically calculating statistics for samples that match the quantity type and predicate.
+// EnableCollectionForTypePredicate begins automatically calculating statistics for samples that match the quantity type and predicate.
 func (x *LiveWorkoutDataSource) EnableCollectionForTypePredicate(quantityType *QuantityType, predicate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enableCollectionForType:predicate:"), objref.IDOf(quantityType), objref.IDOf(predicate))
 }
 
-// Stops automatically calculating statistics for the quantity type.
+// DisableCollectionForType stops automatically calculating statistics for the quantity type.
 func (x *LiveWorkoutDataSource) DisableCollectionForType(quantityType *QuantityType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disableCollectionForType:"), objref.IDOf(quantityType))
 }
 
-// The quantity types the receiver is collecting.
+// TypesToCollect the quantity types the receiver is collecting.
 func (x *LiveWorkoutDataSource) TypesToCollect() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typesToCollect"))
 	return obj.Wrap(_r)

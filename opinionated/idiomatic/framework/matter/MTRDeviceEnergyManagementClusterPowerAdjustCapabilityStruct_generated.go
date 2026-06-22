@@ -23,7 +23,8 @@ func MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructFromID(id objc.I
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructAdopt(id objc.ID
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct{Handle: objref.Wrap(id)}
+	x := &MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,32 +58,42 @@ func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) IsKind(cla
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct creates a new MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct.
 func NewMTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct() *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct")), objc.RegisterName("new"))
 	return mTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructAdopt(_id)
 }
 
-// WithCause sets cause and returns the receiver so calls can be chained.
+// WithCause sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
 	return x
 }
 
+// PowerAdjustCapability wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) PowerAdjustCapability() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("powerAdjustCapability"))
 	return obj.Wrap(_r)
 }
 
+// SetPowerAdjustCapability wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) SetPowerAdjustCapability(powerAdjustCapability obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPowerAdjustCapability:"), objref.IDOf(powerAdjustCapability))
 }
 
+// Cause wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) Cause() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cause"))
 	return obj.Wrap(_r)
 }
 
+// SetCause wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) SetCause(cause obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
 }

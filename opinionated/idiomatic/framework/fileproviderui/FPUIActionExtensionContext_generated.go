@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An extension context provided to File Provider UI extensions.
-//
 // ActionExtensionContext is an idiomatic wrapper over the Objective-C class FPUIActionExtensionContext.
+//
+// An extension context provided to File Provider UI extensions.
 type ActionExtensionContext struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ActionExtensionContextFromID(id objc.ID) *ActionExtensionContext {
 	if id == 0 {
 		return nil
 	}
-	x := &ActionExtensionContext{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ActionExtensionContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func actionExtensionContextAdopt(id objc.ID) *ActionExtensionContext {
 	if id == 0 {
 		return nil
 	}
-	x := &ActionExtensionContext{Handle: objref.Wrap(id)}
+	x := &ActionExtensionContext{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +60,24 @@ func (x *ActionExtensionContext) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ActionExtensionContext) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewActionExtensionContext creates a new ActionExtensionContext.
 func NewActionExtensionContext() *ActionExtensionContext {
 	_id := objc.Send[objc.ID](objc.ID(_class("FPUIActionExtensionContext")), objc.RegisterName("new"))
 	return actionExtensionContextAdopt(_id)
 }
 
-// Marks the action as complete.
+// CompleteRequest marks the action as complete.
 func (x *ActionExtensionContext) CompleteRequest() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeRequest"))
 }
 
-// The identifier for the domain managed by the current file provider.
+// DomainIdentifier the identifier for the domain managed by the current file provider.
 func (x *ActionExtensionContext) DomainIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domainIdentifier"))
 	return obj.Wrap(_r)

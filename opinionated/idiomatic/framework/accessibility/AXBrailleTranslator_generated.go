@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Translates print text to Braille and Braille to print text according to the given Braille table.
-//
 // BrailleTranslator is an idiomatic wrapper over the Objective-C class AXBrailleTranslator.
+//
+// Translates print text to Braille and Braille to print text according to the given Braille table.
 type BrailleTranslator struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func BrailleTranslatorFromID(id objc.ID) *BrailleTranslator {
 	if id == 0 {
 		return nil
 	}
-	x := &BrailleTranslator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BrailleTranslator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func brailleTranslatorAdopt(id objc.ID) *BrailleTranslator {
 	if id == 0 {
 		return nil
 	}
-	x := &BrailleTranslator{Handle: objref.Wrap(id)}
+	x := &BrailleTranslator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +60,12 @@ func (x *BrailleTranslator) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BrailleTranslator) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBrailleTranslatorWithBrailleTable creates a new BrailleTranslator.
 func NewBrailleTranslatorWithBrailleTable(brailleTable *BrailleTable) *BrailleTranslator {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AXBrailleTranslator")), objc.RegisterName("alloc"))
@@ -65,13 +73,13 @@ func NewBrailleTranslatorWithBrailleTable(brailleTable *BrailleTable) *BrailleTr
 	return brailleTranslatorAdopt(_id)
 }
 
-// Output Braille uses the unicode Braille characters (0x2800-0x28FF).
+// TranslatePrintText output Braille uses the unicode Braille characters (0x2800-0x28FF).
 func (x *BrailleTranslator) TranslatePrintText(printText string) *BrailleTranslationResult {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("translatePrintText:"), purego.NSString(printText))
 	return BrailleTranslationResultFromID(_r)
 }
 
-// Input Braille should use the unicode Braille characters (0x2800-0x28FF).
+// BackTranslateBraille input Braille should use the unicode Braille characters (0x2800-0x28FF).
 func (x *BrailleTranslator) BackTranslateBraille(braille string) *BrailleTranslationResult {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backTranslateBraille:"), purego.NSString(braille))
 	return BrailleTranslationResultFromID(_r)

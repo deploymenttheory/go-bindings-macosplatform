@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NDArrayQuantizedMatrixMultiplication is an idiomatic wrapper over the Objective-C class MPSNDArrayQuantizedMatrixMultiplication.
+//
+// It embeds [NDArrayMatrixMultiplication], promoting that type's methods.
 type NDArrayQuantizedMatrixMultiplication struct {
-	objref.Handle
+	NDArrayMatrixMultiplication
 }
 
 // NDArrayQuantizedMatrixMultiplicationFromID adopts an existing Objective-C object as a NDArrayQuantizedMatrixMultiplication
@@ -23,7 +24,8 @@ func NDArrayQuantizedMatrixMultiplicationFromID(id objc.ID) *NDArrayQuantizedMat
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayQuantizedMatrixMultiplication{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NDArrayQuantizedMatrixMultiplication{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func nDArrayQuantizedMatrixMultiplicationAdopt(id objc.ID) *NDArrayQuantizedMatr
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayQuantizedMatrixMultiplication{Handle: objref.Wrap(id)}
+	x := &NDArrayQuantizedMatrixMultiplication{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NDArrayQuantizedMatrixMultiplication) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NDArrayQuantizedMatrixMultiplication) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NDArrayQuantizedMatrixMultiplication) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNDArrayQuantizedMatrixMultiplication creates a new NDArrayQuantizedMatrixMultiplication.
@@ -62,25 +50,19 @@ func NewNDArrayQuantizedMatrixMultiplication() *NDArrayQuantizedMatrixMultiplica
 	return nDArrayQuantizedMatrixMultiplicationAdopt(_id)
 }
 
-// The scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (x *NDArrayQuantizedMatrixMultiplication) WithAlpha(alpha float64) *NDArrayQuantizedMatrixMultiplication {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// The scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-//
-// WithBeta sets beta and returns the receiver so calls can be chained.
+// WithBeta the scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (x *NDArrayQuantizedMatrixMultiplication) WithBeta(beta float64) *NDArrayQuantizedMatrixMultiplication {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayQuantizedMatrixMultiplication) WithLabel(label string) *NDArrayQuantizedMatrixMultiplication {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -95,3 +77,11 @@ type NDArrayQuantizedMatrixMultiplicationable interface {
 }
 
 var _ NDArrayQuantizedMatrixMultiplicationable = (*NDArrayQuantizedMatrixMultiplication)(nil)
+
+var _ NDArrayMatrixMultiplicationProvider = (*NDArrayQuantizedMatrixMultiplication)(nil)
+
+var _ NDArrayMultiaryKernelProvider = (*NDArrayQuantizedMatrixMultiplication)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayQuantizedMatrixMultiplication)(nil)
+
+var _ KernelProvider = (*NDArrayQuantizedMatrixMultiplication)(nil)

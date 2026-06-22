@@ -6,17 +6,19 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages a custom view—known as an accessory view—in the title bar–toolbar area of a window.
-//
 // TitlebarAccessoryViewController is an idiomatic wrapper over the Objective-C class NSTitlebarAccessoryViewController.
+//
+// It embeds [ViewController], promoting that type's methods.
+//
+// An object that manages a custom view—known as an accessory view—in the title bar–toolbar area of a window.
 type TitlebarAccessoryViewController struct {
-	objref.Handle
+	ViewController
 }
 
 // TitlebarAccessoryViewControllerFromID adopts an existing Objective-C object as a TitlebarAccessoryViewController
@@ -25,7 +27,8 @@ func TitlebarAccessoryViewControllerFromID(id objc.ID) *TitlebarAccessoryViewCon
 	if id == 0 {
 		return nil
 	}
-	x := &TitlebarAccessoryViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TitlebarAccessoryViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func titlebarAccessoryViewControllerAdopt(id objc.ID) *TitlebarAccessoryViewCont
 	if id == 0 {
 		return nil
 	}
-	x := &TitlebarAccessoryViewController{Handle: objref.Wrap(id)}
+	x := &TitlebarAccessoryViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *TitlebarAccessoryViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TitlebarAccessoryViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TitlebarAccessoryViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewTitlebarAccessoryViewController creates a new TitlebarAccessoryViewController.
@@ -64,156 +53,154 @@ func NewTitlebarAccessoryViewController() *TitlebarAccessoryViewController {
 	return titlebarAccessoryViewControllerAdopt(_id)
 }
 
-// The location of the accessory view, in relation to the window’s title bar.
-//
-// WithLayoutAttribute sets layoutAttribute and returns the receiver so calls can be chained.
+// WithLayoutAttribute the location of the accessory view, in relation to the window’s title bar.
 func (x *TitlebarAccessoryViewController) WithLayoutAttribute(layoutAttribute LayoutAttribute) *TitlebarAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutAttribute:"), layoutAttribute)
 	return x
 }
 
-// The visual minimum height of an accessory view that displays below the title bar when the window is in full screen mode.
-//
-// WithFullScreenMinHeight sets fullScreenMinHeight and returns the receiver so calls can be chained.
+// WithFullScreenMinHeight the visual minimum height of an accessory view that displays below the title bar when the window is in full screen mode.
 func (x *TitlebarAccessoryViewController) WithFullScreenMinHeight(fullScreenMinHeight float64) *TitlebarAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFullScreenMinHeight:"), fullScreenMinHeight)
 	return x
 }
 
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden sets the property and returns the receiver so calls can be chained.
 func (x *TitlebarAccessoryViewController) WithHidden(hidden bool) *TitlebarAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithAutomaticallyAdjustsSize sets automaticallyAdjustsSize and returns the receiver so calls can be chained.
+// WithAutomaticallyAdjustsSize sets the property and returns the receiver so calls can be chained.
 func (x *TitlebarAccessoryViewController) WithAutomaticallyAdjustsSize(automaticallyAdjustsSize bool) *TitlebarAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyAdjustsSize:"), automaticallyAdjustsSize)
 	return x
 }
 
-// The titlebar accessory’s preferred effect for content scrolling behind it.
-//
-// WithPreferredScrollEdgeEffectStyle sets preferredScrollEdgeEffectStyle and returns the receiver so calls can be chained.
+// WithPreferredScrollEdgeEffectStyle the titlebar accessory’s preferred effect for content scrolling behind it.
 func (x *TitlebarAccessoryViewController) WithPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *ScrollEdgeEffectStyle) *TitlebarAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredScrollEdgeEffectStyle:"), objref.IDOf(preferredScrollEdgeEffectStyle))
 	return x
 }
 
-// The object whose value is presented in the receiver’s primary view.
-//
-// WithRepresentedObject sets representedObject and returns the receiver so calls can be chained.
+// WithRepresentedObject the object whose value is presented in the receiver’s primary view.
 func (x *TitlebarAccessoryViewController) WithRepresentedObject(representedObject obj.Object) *TitlebarAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return x
 }
 
-// The localized title of the receiver’s primary view.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the localized title of the receiver’s primary view.
 func (x *TitlebarAccessoryViewController) WithTitle(title string) *TitlebarAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The view controller’s primary view.
-//
-// WithView sets view and returns the receiver so calls can be chained.
+// WithView the view controller’s primary view.
 func (x *TitlebarAccessoryViewController) WithView(view ViewProvider) *TitlebarAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 	return x
 }
 
-// An array of view controllers that are hierarchical children of the view controller.
-//
-// WithChildViewControllers sets the collection and returns the receiver so calls can be chained.
+// WithPreferredContentSize the desired size of the view controller’s view, in screen units.
+func (x *TitlebarAccessoryViewController) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *TitlebarAccessoryViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredContentSize:"), preferredContentSize)
+	return x
+}
+
+// WithChildViewControllers an array of view controllers that are hierarchical children of the view controller.
 func (x *TitlebarAccessoryViewController) WithChildViewControllers(items ...ViewControllerProvider) *TitlebarAccessoryViewController {
 	_arr := purego.SliceToNSArray(items, func(_v ViewControllerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildViewControllers:"), _arr)
 	return x
 }
 
-// WithSourceItemView sets sourceItemView and returns the receiver so calls can be chained.
+// WithSourceItemView sets the property and returns the receiver so calls can be chained.
 func (x *TitlebarAccessoryViewController) WithSourceItemView(sourceItemView ViewProvider) *TitlebarAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
+// WithPreferredScreenOrigin for a view controller that is part of an app extension, the preferred screen origin.
+func (x *TitlebarAccessoryViewController) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *TitlebarAccessoryViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredScreenOrigin:"), preferredScreenOrigin)
+	return x
+}
+
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *TitlebarAccessoryViewController) WithNextResponder(nextResponder ResponderProvider) *TitlebarAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets menu and returns the receiver so calls can be chained.
+// WithMenu returns the responder’s menu.
 func (x *TitlebarAccessoryViewController) WithMenu(menu *Menu) *TitlebarAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity an object encapsulating a user activity supported by this responder.
 func (x *TitlebarAccessoryViewController) WithUserActivity(userActivity obj.Object) *TitlebarAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *TitlebarAccessoryViewController) WithTouchBar(touchBar *TouchBar) *TitlebarAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
+// LayoutAttribute wraps the corresponding Objective-C method.
 func (x *TitlebarAccessoryViewController) LayoutAttribute() LayoutAttribute {
 	_r := objc.Send[LayoutAttribute](objref.IDOf(x), objc.RegisterName("layoutAttribute"))
 	return _r
 }
 
+// SetLayoutAttribute wraps the corresponding Objective-C method.
 func (x *TitlebarAccessoryViewController) SetLayoutAttribute(layoutAttribute LayoutAttribute) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutAttribute:"), layoutAttribute)
 }
 
+// FullScreenMinHeight wraps the corresponding Objective-C method.
 func (x *TitlebarAccessoryViewController) FullScreenMinHeight() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("fullScreenMinHeight"))
 	return _r
 }
 
+// SetFullScreenMinHeight wraps the corresponding Objective-C method.
 func (x *TitlebarAccessoryViewController) SetFullScreenMinHeight(fullScreenMinHeight float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFullScreenMinHeight:"), fullScreenMinHeight)
 }
 
+// IsHidden wraps the corresponding Objective-C method.
 func (x *TitlebarAccessoryViewController) IsHidden() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
 	return _r
 }
 
+// SetHidden wraps the corresponding Objective-C method.
 func (x *TitlebarAccessoryViewController) SetHidden(hidden bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 }
 
+// AutomaticallyAdjustsSize wraps the corresponding Objective-C method.
 func (x *TitlebarAccessoryViewController) AutomaticallyAdjustsSize() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallyAdjustsSize"))
 	return _r
 }
 
+// SetAutomaticallyAdjustsSize wraps the corresponding Objective-C method.
 func (x *TitlebarAccessoryViewController) SetAutomaticallyAdjustsSize(automaticallyAdjustsSize bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyAdjustsSize:"), automaticallyAdjustsSize)
 }
 
-// The titlebar accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the bottom edge of a titlebar accessory: titlebarAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
+// PreferredScrollEdgeEffectStyle the titlebar accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the bottom edge of a titlebar accessory: titlebarAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
 func (x *TitlebarAccessoryViewController) PreferredScrollEdgeEffectStyle() *ScrollEdgeEffectStyle {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredScrollEdgeEffectStyle"))
 	return ScrollEdgeEffectStyleFromID(_r)
 }
 
-// The titlebar accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the bottom edge of a titlebar accessory: titlebarAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
+// SetPreferredScrollEdgeEffectStyle the titlebar accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the bottom edge of a titlebar accessory: titlebarAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
 func (x *TitlebarAccessoryViewController) SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *ScrollEdgeEffectStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredScrollEdgeEffectStyle:"), objref.IDOf(preferredScrollEdgeEffectStyle))
 }
@@ -229,8 +216,10 @@ type TitlebarAccessoryViewControllerable interface {
 	WithRepresentedObject(representedObject obj.Object) *TitlebarAccessoryViewController
 	WithTitle(title string) *TitlebarAccessoryViewController
 	WithView(view ViewProvider) *TitlebarAccessoryViewController
+	WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *TitlebarAccessoryViewController
 	WithChildViewControllers(items ...ViewControllerProvider) *TitlebarAccessoryViewController
 	WithSourceItemView(sourceItemView ViewProvider) *TitlebarAccessoryViewController
+	WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *TitlebarAccessoryViewController
 	WithNextResponder(nextResponder ResponderProvider) *TitlebarAccessoryViewController
 	WithMenu(menu *Menu) *TitlebarAccessoryViewController
 	WithUserActivity(userActivity obj.Object) *TitlebarAccessoryViewController
@@ -248,3 +237,7 @@ type TitlebarAccessoryViewControllerable interface {
 }
 
 var _ TitlebarAccessoryViewControllerable = (*TitlebarAccessoryViewController)(nil)
+
+var _ ViewControllerProvider = (*TitlebarAccessoryViewController)(nil)
+
+var _ ResponderProvider = (*TitlebarAccessoryViewController)(nil)

@@ -6,15 +6,17 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NNReductionColumnMinNode is an idiomatic wrapper over the Objective-C class MPSNNReductionColumnMinNode.
+//
+// It embeds [NNUnaryReductionNode], promoting that type's methods.
 type NNReductionColumnMinNode struct {
-	objref.Handle
+	NNUnaryReductionNode
 }
 
 // NNReductionColumnMinNodeFromID adopts an existing Objective-C object as a NNReductionColumnMinNode
@@ -23,7 +25,8 @@ func NNReductionColumnMinNodeFromID(id objc.ID) *NNReductionColumnMinNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNReductionColumnMinNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNReductionColumnMinNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +39,10 @@ func nNReductionColumnMinNodeAdopt(id objc.ID) *NNReductionColumnMinNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNReductionColumnMinNode{Handle: objref.Wrap(id)}
+	x := &NNReductionColumnMinNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NNReductionColumnMinNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNReductionColumnMinNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNReductionColumnMinNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNNReductionColumnMinNode creates a new NNReductionColumnMinNode.
@@ -62,9 +51,13 @@ func NewNNReductionColumnMinNode() *NNReductionColumnMinNode {
 	return nNReductionColumnMinNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithClipRectSource the clip rectangle to apply to the source image.
+func (x *NNReductionColumnMinNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnMinNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return x
+}
+
+// WithLabel a string to help identify this object.
 func (x *NNReductionColumnMinNode) WithLabel(label string) *NNReductionColumnMinNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -73,7 +66,12 @@ func (x *NNReductionColumnMinNode) WithLabel(label string) *NNReductionColumnMin
 // NNReductionColumnMinNodeable is the interface implemented by [NNReductionColumnMinNode], for mocking and DI.
 type NNReductionColumnMinNodeable interface {
 	obj.Object
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnMinNode
 	WithLabel(label string) *NNReductionColumnMinNode
 }
 
 var _ NNReductionColumnMinNodeable = (*NNReductionColumnMinNode)(nil)
+
+var _ NNUnaryReductionNodeProvider = (*NNReductionColumnMinNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNReductionColumnMinNode)(nil)

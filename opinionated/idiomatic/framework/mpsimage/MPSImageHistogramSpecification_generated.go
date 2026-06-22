@@ -6,15 +6,18 @@ package mpsimage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ImageHistogramSpecification is an idiomatic wrapper over the Objective-C class MPSImageHistogramSpecification.
+//
+// It embeds [UnaryImageKernel], promoting that type's methods.
 type ImageHistogramSpecification struct {
-	objref.Handle
+	UnaryImageKernel
 }
 
 // ImageHistogramSpecificationFromID adopts an existing Objective-C object as a ImageHistogramSpecification
@@ -23,7 +26,8 @@ func ImageHistogramSpecificationFromID(id objc.ID) *ImageHistogramSpecification 
 	if id == 0 {
 		return nil
 	}
-	x := &ImageHistogramSpecification{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageHistogramSpecification{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +40,10 @@ func imageHistogramSpecificationAdopt(id objc.ID) *ImageHistogramSpecification {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageHistogramSpecification{Handle: objref.Wrap(id)}
+	x := &ImageHistogramSpecification{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ImageHistogramSpecification) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageHistogramSpecification) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageHistogramSpecification) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewImageHistogramSpecification creates a new ImageHistogramSpecification.
@@ -62,9 +52,25 @@ func NewImageHistogramSpecification() *ImageHistogramSpecification {
 	return imageHistogramSpecificationAdopt(_id)
 }
 
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
+func (x *ImageHistogramSpecification) WithOffset(offset mpscore.MPSOffset) *ImageHistogramSpecification {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (x *ImageHistogramSpecification) WithClipRect(clipRect metal.MTLRegion) *ImageHistogramSpecification {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
 // ImageHistogramSpecificationable is the interface implemented by [ImageHistogramSpecification], for mocking and DI.
 type ImageHistogramSpecificationable interface {
 	obj.Object
+	WithOffset(offset mpscore.MPSOffset) *ImageHistogramSpecification
+	WithClipRect(clipRect metal.MTLRegion) *ImageHistogramSpecification
 }
 
 var _ ImageHistogramSpecificationable = (*ImageHistogramSpecification)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageHistogramSpecification)(nil)

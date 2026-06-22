@@ -13,6 +13,8 @@ import (
 )
 
 // MTRUnitTestingClusterNullablesAndOptionalsStruct is an idiomatic wrapper over the Objective-C class MTRUnitTestingClusterNullablesAndOptionalsStruct.
+//
+// MTRUnitTestingClusterNullablesAndOptionalsStruct is an abstract base — you do not construct it directly. Construct one of [MTRTestClusterClusterNullablesAndOptionalsStruct] and pass it where a MTRUnitTestingClusterNullablesAndOptionalsStruct is accepted.
 type MTRUnitTestingClusterNullablesAndOptionalsStruct struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRUnitTestingClusterNullablesAndOptionalsStructFromID(id objc.ID) *MTRUnit
 	if id == 0 {
 		return nil
 	}
-	x := &MTRUnitTestingClusterNullablesAndOptionalsStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRUnitTestingClusterNullablesAndOptionalsStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRUnitTestingClusterNullablesAndOptionalsStructAdopt(id objc.ID) *MTRUnitT
 	if id == 0 {
 		return nil
 	}
-	x := &MTRUnitTestingClusterNullablesAndOptionalsStruct{Handle: objref.Wrap(id)}
+	x := &MTRUnitTestingClusterNullablesAndOptionalsStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,93 +60,100 @@ func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) IsKind(className stri
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRUnitTestingClusterNullablesAndOptionalsStruct creates a new MTRUnitTestingClusterNullablesAndOptionalsStruct.
-func NewMTRUnitTestingClusterNullablesAndOptionalsStruct() *MTRUnitTestingClusterNullablesAndOptionalsStruct {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRUnitTestingClusterNullablesAndOptionalsStruct")), objc.RegisterName("new"))
-	return mTRUnitTestingClusterNullablesAndOptionalsStructAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithNullableInt sets nullableInt and returns the receiver so calls can be chained.
+// WithNullableInt sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) WithNullableInt(nullableInt obj.Object) *MTRUnitTestingClusterNullablesAndOptionalsStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableInt:"), objref.IDOf(nullableInt))
 	return x
 }
 
-// WithOptionalInt sets optionalInt and returns the receiver so calls can be chained.
+// WithOptionalInt sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) WithOptionalInt(optionalInt obj.Object) *MTRUnitTestingClusterNullablesAndOptionalsStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalInt:"), objref.IDOf(optionalInt))
 	return x
 }
 
-// WithNullableOptionalInt sets nullableOptionalInt and returns the receiver so calls can be chained.
+// WithNullableOptionalInt sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) WithNullableOptionalInt(nullableOptionalInt obj.Object) *MTRUnitTestingClusterNullablesAndOptionalsStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalInt:"), objref.IDOf(nullableOptionalInt))
 	return x
 }
 
-// WithNullableString sets nullableString and returns the receiver so calls can be chained.
+// WithNullableString sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) WithNullableString(nullableString string) *MTRUnitTestingClusterNullablesAndOptionalsStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableString:"), purego.NSString(nullableString))
 	return x
 }
 
-// WithOptionalString sets optionalString and returns the receiver so calls can be chained.
+// WithOptionalString sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) WithOptionalString(optionalString string) *MTRUnitTestingClusterNullablesAndOptionalsStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalString:"), purego.NSString(optionalString))
 	return x
 }
 
-// WithNullableOptionalString sets nullableOptionalString and returns the receiver so calls can be chained.
+// WithNullableOptionalString sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) WithNullableOptionalString(nullableOptionalString string) *MTRUnitTestingClusterNullablesAndOptionalsStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalString:"), purego.NSString(nullableOptionalString))
 	return x
 }
 
-// WithNullableStruct sets nullableStruct and returns the receiver so calls can be chained.
+// WithNullableStruct sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) WithNullableStruct(nullableStruct MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterNullablesAndOptionalsStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableStruct:"), objref.IDOf(nullableStruct))
 	return x
 }
 
-// WithOptionalStruct sets optionalStruct and returns the receiver so calls can be chained.
+// WithOptionalStruct sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) WithOptionalStruct(optionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterNullablesAndOptionalsStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalStruct:"), objref.IDOf(optionalStruct))
 	return x
 }
 
-// WithNullableOptionalStruct sets nullableOptionalStruct and returns the receiver so calls can be chained.
+// WithNullableOptionalStruct sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) WithNullableOptionalStruct(nullableOptionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterNullablesAndOptionalsStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalStruct:"), objref.IDOf(nullableOptionalStruct))
 	return x
 }
 
+// NullableInt wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableInt() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableInt"))
 	return obj.Wrap(_r)
 }
 
+// SetNullableInt wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableInt(nullableInt obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableInt:"), objref.IDOf(nullableInt))
 }
 
+// OptionalInt wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) OptionalInt() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionalInt"))
 	return obj.Wrap(_r)
 }
 
+// SetOptionalInt wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetOptionalInt(optionalInt obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalInt:"), objref.IDOf(optionalInt))
 }
 
+// NullableOptionalInt wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableOptionalInt() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableOptionalInt"))
 	return obj.Wrap(_r)
 }
 
+// SetNullableOptionalInt wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableOptionalInt(nullableOptionalInt obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalInt:"), objref.IDOf(nullableOptionalInt))
 }
 
+// NullableString wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableString"))
 	if _r == 0 {
@@ -151,10 +162,12 @@ func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableString() stri
 	return purego.GoString(_r)
 }
 
+// SetNullableString wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableString(nullableString string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableString:"), purego.NSString(nullableString))
 }
 
+// OptionalString wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) OptionalString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionalString"))
 	if _r == 0 {
@@ -163,10 +176,12 @@ func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) OptionalString() stri
 	return purego.GoString(_r)
 }
 
+// SetOptionalString wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetOptionalString(optionalString string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalString:"), purego.NSString(optionalString))
 }
 
+// NullableOptionalString wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableOptionalString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableOptionalString"))
 	if _r == 0 {
@@ -175,60 +190,73 @@ func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableOptionalStrin
 	return purego.GoString(_r)
 }
 
+// SetNullableOptionalString wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableOptionalString(nullableOptionalString string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalString:"), purego.NSString(nullableOptionalString))
 }
 
+// NullableStruct wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableStruct() *MTRUnitTestingClusterSimpleStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableStruct"))
 	return MTRUnitTestingClusterSimpleStructFromID(_r)
 }
 
+// SetNullableStruct wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableStruct(nullableStruct *MTRUnitTestingClusterSimpleStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableStruct:"), objref.IDOf(nullableStruct))
 }
 
+// OptionalStruct wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) OptionalStruct() *MTRUnitTestingClusterSimpleStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionalStruct"))
 	return MTRUnitTestingClusterSimpleStructFromID(_r)
 }
 
+// SetOptionalStruct wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetOptionalStruct(optionalStruct *MTRUnitTestingClusterSimpleStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalStruct:"), objref.IDOf(optionalStruct))
 }
 
+// NullableOptionalStruct wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableOptionalStruct() *MTRUnitTestingClusterSimpleStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableOptionalStruct"))
 	return MTRUnitTestingClusterSimpleStructFromID(_r)
 }
 
+// SetNullableOptionalStruct wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableOptionalStruct(nullableOptionalStruct *MTRUnitTestingClusterSimpleStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalStruct:"), objref.IDOf(nullableOptionalStruct))
 }
 
+// NullableList wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableList() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableList"))
 	return obj.Wrap(_r)
 }
 
+// SetNullableList wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableList(nullableList obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableList:"), objref.IDOf(nullableList))
 }
 
+// OptionalList wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) OptionalList() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionalList"))
 	return obj.Wrap(_r)
 }
 
+// SetOptionalList wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetOptionalList(optionalList obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalList:"), objref.IDOf(optionalList))
 }
 
+// NullableOptionalList wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableOptionalList() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableOptionalList"))
 	return obj.Wrap(_r)
 }
 
+// SetNullableOptionalList wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableOptionalList(nullableOptionalList obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalList:"), objref.IDOf(nullableOptionalList))
 }
@@ -272,3 +300,11 @@ type MTRUnitTestingClusterNullablesAndOptionalsStructable interface {
 }
 
 var _ MTRUnitTestingClusterNullablesAndOptionalsStructable = (*MTRUnitTestingClusterNullablesAndOptionalsStruct)(nil)
+
+// isMTRUnitTestingClusterNullablesAndOptionalsStruct marks MTRUnitTestingClusterNullablesAndOptionalsStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRUnitTestingClusterNullablesAndOptionalsStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) isMTRUnitTestingClusterNullablesAndOptionalsStruct() {
+}
+
+var _ MTRUnitTestingClusterNullablesAndOptionalsStructProvider = (*MTRUnitTestingClusterNullablesAndOptionalsStruct)(nil)

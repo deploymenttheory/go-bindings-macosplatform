@@ -13,6 +13,8 @@ import (
 )
 
 // RNNDescriptor is an idiomatic wrapper over the Objective-C class MPSRNNDescriptor.
+//
+// RNNDescriptor is an abstract base — you do not construct it directly. Construct one of [GRUDescriptor], [LSTMDescriptor], [RNNSingleGateDescriptor] and pass it where a RNNDescriptor is accepted.
 type RNNDescriptor struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func RNNDescriptorFromID(id objc.ID) *RNNDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &RNNDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RNNDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func rNNDescriptorAdopt(id objc.ID) *RNNDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &RNNDescriptor{Handle: objref.Wrap(id)}
+	x := &RNNDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,98 +60,93 @@ func (x *RNNDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewRNNDescriptor creates a new RNNDescriptor.
-func NewRNNDescriptor() *RNNDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSRNNDescriptor")), objc.RegisterName("new"))
-	return rNNDescriptorAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RNNDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The number of feature channels per pixel in the input image or number of rows in the input matrix.
-//
-// WithInputFeatureChannels sets inputFeatureChannels and returns the receiver so calls can be chained.
+// WithInputFeatureChannels the number of feature channels per pixel in the input image or number of rows in the input matrix.
 func (x *RNNDescriptor) WithInputFeatureChannels(inputFeatureChannels int) *RNNDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputFeatureChannels:"), inputFeatureChannels)
 	return x
 }
 
-// The number of feature channels per pixel in the destination image or number of rows in the destination matrix.
-//
-// WithOutputFeatureChannels sets outputFeatureChannels and returns the receiver so calls can be chained.
+// WithOutputFeatureChannels the number of feature channels per pixel in the destination image or number of rows in the destination matrix.
 func (x *RNNDescriptor) WithOutputFeatureChannels(outputFeatureChannels int) *RNNDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFeatureChannels:"), outputFeatureChannels)
 	return x
 }
 
-// if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in
-//
-// WithUseLayerInputUnitTransformMode sets useLayerInputUnitTransformMode and returns the receiver so calls can be chained.
+// WithUseLayerInputUnitTransformMode if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in
 func (x *RNNDescriptor) WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *RNNDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseLayerInputUnitTransformMode:"), useLayerInputUnitTransformMode)
 	return x
 }
 
-// If YES, then
-//
-// WithUseFloat32Weights sets useFloat32Weights and returns the receiver so calls can be chained.
+// WithUseFloat32Weights if YES, then
 func (x *RNNDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *RNNDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseFloat32Weights:"), useFloat32Weights)
 	return x
 }
 
-// When the layer specified with this descriptor is used to process a sequence of inputs by calling
-//
-// WithLayerSequenceDirection sets layerSequenceDirection and returns the receiver so calls can be chained.
+// WithLayerSequenceDirection when the layer specified with this descriptor is used to process a sequence of inputs by calling
 func (x *RNNDescriptor) WithLayerSequenceDirection(layerSequenceDirection RNNSequenceDirection) *RNNDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerSequenceDirection:"), layerSequenceDirection)
 	return x
 }
 
-// The number of feature channels per pixel in the input image or number of rows in the input matrix.
+// InputFeatureChannels the number of feature channels per pixel in the input image or number of rows in the input matrix.
 func (x *RNNDescriptor) InputFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputFeatureChannels"))
 	return _r
 }
 
+// SetInputFeatureChannels wraps the corresponding Objective-C method.
 func (x *RNNDescriptor) SetInputFeatureChannels(inputFeatureChannels int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputFeatureChannels:"), inputFeatureChannels)
 }
 
-// The number of feature channels per pixel in the destination image or number of rows in the destination matrix.
+// OutputFeatureChannels the number of feature channels per pixel in the destination image or number of rows in the destination matrix.
 func (x *RNNDescriptor) OutputFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputFeatureChannels"))
 	return _r
 }
 
+// SetOutputFeatureChannels wraps the corresponding Objective-C method.
 func (x *RNNDescriptor) SetOutputFeatureChannels(outputFeatureChannels int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFeatureChannels:"), outputFeatureChannels)
 }
 
-// if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in
+// UseLayerInputUnitTransformMode if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in
 func (x *RNNDescriptor) UseLayerInputUnitTransformMode() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("useLayerInputUnitTransformMode"))
 	return _r
 }
 
+// SetUseLayerInputUnitTransformMode wraps the corresponding Objective-C method.
 func (x *RNNDescriptor) SetUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseLayerInputUnitTransformMode:"), useLayerInputUnitTransformMode)
 }
 
-// If YES, then
+// UseFloat32Weights if YES, then
 func (x *RNNDescriptor) UseFloat32Weights() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("useFloat32Weights"))
 	return _r
 }
 
+// SetUseFloat32Weights wraps the corresponding Objective-C method.
 func (x *RNNDescriptor) SetUseFloat32Weights(useFloat32Weights bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseFloat32Weights:"), useFloat32Weights)
 }
 
-// When the layer specified with this descriptor is used to process a sequence of inputs by calling
+// LayerSequenceDirection when the layer specified with this descriptor is used to process a sequence of inputs by calling
 func (x *RNNDescriptor) LayerSequenceDirection() RNNSequenceDirection {
 	_r := objc.Send[RNNSequenceDirection](objref.IDOf(x), objc.RegisterName("layerSequenceDirection"))
 	return _r
 }
 
+// SetLayerSequenceDirection wraps the corresponding Objective-C method.
 func (x *RNNDescriptor) SetLayerSequenceDirection(layerSequenceDirection RNNSequenceDirection) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerSequenceDirection:"), layerSequenceDirection)
 }
@@ -173,3 +172,10 @@ type RNNDescriptorable interface {
 }
 
 var _ RNNDescriptorable = (*RNNDescriptor)(nil)
+
+// isRNNDescriptor marks RNNDescriptor — and, by embedding promotion, its
+// subclasses — as a member of the RNNDescriptor hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *RNNDescriptor) isRNNDescriptor() {}
+
+var _ RNNDescriptorProvider = (*RNNDescriptor)(nil)

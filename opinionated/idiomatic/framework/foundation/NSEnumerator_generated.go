@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class whose subclasses enumerate collections of objects, such as arrays and dictionaries.
-//
 // Enumerator is an idiomatic wrapper over the Objective-C class NSEnumerator.
+//
+// Enumerator is an abstract base — you do not construct it directly. Construct one of [DirectoryEnumerator] and pass it where a Enumerator is accepted.
+//
+// An abstract class whose subclasses enumerate collections of objects, such as arrays and dictionaries.
 type Enumerator struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func EnumeratorFromID(id objc.ID) *Enumerator {
 	if id == 0 {
 		return nil
 	}
-	x := &Enumerator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Enumerator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func enumeratorAdopt(id objc.ID) *Enumerator {
 	if id == 0 {
 		return nil
 	}
-	x := &Enumerator{Handle: objref.Wrap(id)}
+	x := &Enumerator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +62,25 @@ func (x *Enumerator) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewEnumerator creates a new Enumerator.
-func NewEnumerator() *Enumerator {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSEnumerator")), objc.RegisterName("new"))
-	return enumeratorAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Enumerator) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Enumerator) WithScriptingProperties(scriptingProperties obj.Object) *Enumerator {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Returns the next object from the collection being enumerated.
+// NextObject returns the next object from the collection being enumerated.
 func (x *Enumerator) NextObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextObject"))
 	return obj.Wrap(_r)
 }
 
+// AllObjects wraps the corresponding Objective-C method.
 func (x *Enumerator) AllObjects() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
@@ -90,3 +95,10 @@ type Enumeratorable interface {
 }
 
 var _ Enumeratorable = (*Enumerator)(nil)
+
+// isEnumerator marks Enumerator — and, by embedding promotion, its
+// subclasses — as a member of the Enumerator hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Enumerator) isEnumerator() {}
+
+var _ EnumeratorProvider = (*Enumerator)(nil)

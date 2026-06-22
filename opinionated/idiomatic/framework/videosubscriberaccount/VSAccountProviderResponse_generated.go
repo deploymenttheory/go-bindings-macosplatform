@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains the response from the account provider.
-//
 // VSAccountProviderResponse is an idiomatic wrapper over the Objective-C class VSAccountProviderResponse.
+//
+// An object that contains the response from the account provider.
 type VSAccountProviderResponse struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VSAccountProviderResponseFromID(id objc.ID) *VSAccountProviderResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &VSAccountProviderResponse{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VSAccountProviderResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func vSAccountProviderResponseAdopt(id objc.ID) *VSAccountProviderResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &VSAccountProviderResponse{Handle: objref.Wrap(id)}
+	x := &VSAccountProviderResponse{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *VSAccountProviderResponse) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VSAccountProviderResponse) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVSAccountProviderResponse creates a new VSAccountProviderResponse.
 func NewVSAccountProviderResponse() *VSAccountProviderResponse {
 	_id := objc.Send[objc.ID](objc.ID(_class("VSAccountProviderResponse")), objc.RegisterName("new"))
 	return vSAccountProviderResponseAdopt(_id)
 }
 
-// Identifies the protocol used in constructing this response.
+// AuthenticationScheme identifies the protocol used in constructing this response.
 func (x *VSAccountProviderResponse) AuthenticationScheme() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authenticationScheme"))
 	return obj.Wrap(_r)
 }
 
-// The status code for this response. May be nil if there is no meaningful value for this type of response.
+// Status the status code for this response. May be nil if there is no meaningful value for this type of response.
 func (x *VSAccountProviderResponse) Status() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
 	if _r == 0 {
@@ -79,7 +87,7 @@ func (x *VSAccountProviderResponse) Status() string {
 	return purego.GoString(_r)
 }
 
-// The raw response from the provider. May be nil if the response contained security-sensitive information.
+// Body the raw response from the provider. May be nil if the response contained security-sensitive information.
 func (x *VSAccountProviderResponse) Body() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("body"))
 	if _r == 0 {

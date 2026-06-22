@@ -18,6 +18,8 @@ const (
 	Nw_parameters_attribution_user Nw_parameters_attribution_t = 2
 )
 
+// String returns the Nw_parameters_attribution_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Nw_parameters_attribution_t) String() string {
 	switch e {
 	case Nw_parameters_attribution_developer:

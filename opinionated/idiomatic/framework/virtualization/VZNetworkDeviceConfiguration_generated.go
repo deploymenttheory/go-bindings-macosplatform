@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The common configuration traits for network devices.
-//
 // NetworkDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZNetworkDeviceConfiguration.
+//
+// NetworkDeviceConfiguration is an abstract base — you do not construct it directly. Construct one of [VirtioNetworkDeviceConfiguration] and pass it where a NetworkDeviceConfiguration is accepted.
+//
+// The common configuration traits for network devices.
 type NetworkDeviceConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func NetworkDeviceConfigurationFromID(id objc.ID) *NetworkDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &NetworkDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NetworkDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func networkDeviceConfigurationAdopt(id objc.ID) *NetworkDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &NetworkDeviceConfiguration{Handle: objref.Wrap(id)}
+	x := &NetworkDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,44 +62,42 @@ func (x *NetworkDeviceConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewNetworkDeviceConfiguration creates a new NetworkDeviceConfiguration.
-func NewNetworkDeviceConfiguration() *NetworkDeviceConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZNetworkDeviceConfiguration")), objc.RegisterName("new"))
-	return networkDeviceConfigurationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NetworkDeviceConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The media access control (MAC) address to assign to the network device.
-//
-// WithMACAddress sets mACAddress and returns the receiver so calls can be chained.
+// WithMACAddress the media access control (MAC) address to assign to the network device.
 func (x *NetworkDeviceConfiguration) WithMACAddress(mACAddress *MACAddress) *NetworkDeviceConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMACAddress:"), objref.IDOf(mACAddress))
 	return x
 }
 
-// The object that defines how the virtual network device communicates with the host system.
-//
-// WithAttachment sets attachment and returns the receiver so calls can be chained.
+// WithAttachment the object that defines how the virtual network device communicates with the host system.
 func (x *NetworkDeviceConfiguration) WithAttachment(attachment NetworkDeviceAttachmentProvider) *NetworkDeviceConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 	return x
 }
 
-// The media access control address of the device. The default is a random, locally administered, unicast address.
+// MACAddress the media access control address of the device. The default is a random, locally administered, unicast address.
 func (x *NetworkDeviceConfiguration) MACAddress() *MACAddress {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("MACAddress"))
 	return MACAddressFromID(_r)
 }
 
+// SetMACAddress wraps the corresponding Objective-C method.
 func (x *NetworkDeviceConfiguration) SetMACAddress(mACAddress *MACAddress) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMACAddress:"), objref.IDOf(mACAddress))
 }
 
-// Network device attachment. Defines how the virtual device interfaces with the host system. The default is nil.
+// Attachment network device attachment. Defines how the virtual device interfaces with the host system. The default is nil.
 func (x *NetworkDeviceConfiguration) Attachment() *NetworkDeviceAttachment {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachment"))
 	return NetworkDeviceAttachmentFromID(_r)
 }
 
+// SetAttachment wraps the corresponding Objective-C method.
 func (x *NetworkDeviceConfiguration) SetAttachment(attachment *NetworkDeviceAttachment) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 }
@@ -112,3 +114,10 @@ type NetworkDeviceConfigurationable interface {
 }
 
 var _ NetworkDeviceConfigurationable = (*NetworkDeviceConfiguration)(nil)
+
+// isNetworkDeviceConfiguration marks NetworkDeviceConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the NetworkDeviceConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NetworkDeviceConfiguration) isNetworkDeviceConfiguration() {}
+
+var _ NetworkDeviceConfigurationProvider = (*NetworkDeviceConfiguration)(nil)

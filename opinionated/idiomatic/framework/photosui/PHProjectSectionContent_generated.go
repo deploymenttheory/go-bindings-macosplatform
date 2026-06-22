@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object containing section elements and layout information for a single level of curation.
-//
 // ProjectSectionContent is an idiomatic wrapper over the Objective-C class PHProjectSectionContent.
+//
+// An object containing section elements and layout information for a single level of curation.
 type ProjectSectionContent struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ProjectSectionContentFromID(id objc.ID) *ProjectSectionContent {
 	if id == 0 {
 		return nil
 	}
-	x := &ProjectSectionContent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ProjectSectionContent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func projectSectionContentAdopt(id objc.ID) *ProjectSectionContent {
 	if id == 0 {
 		return nil
 	}
-	x := &ProjectSectionContent{Handle: objref.Wrap(id)}
+	x := &ProjectSectionContent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *ProjectSectionContent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ProjectSectionContent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewProjectSectionContent creates a new ProjectSectionContent.
 func NewProjectSectionContent() *ProjectSectionContent {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHProjectSectionContent")), objc.RegisterName("new"))
 	return projectSectionContentAdopt(_id)
 }
 
-// Array of asset, text, or journal entry elements contained in the content.
+// Elements array of asset, text, or journal entry elements contained in the content.
 //
 // Elements returns the collection as a Go slice.
 func (x *ProjectSectionContent) Elements() []*ProjectElement {
@@ -72,19 +80,19 @@ func (x *ProjectSectionContent) Elements() []*ProjectElement {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ProjectElement { return ProjectElementFromID(_id) })
 }
 
-// The suggested layout of the content is provided in resolution-independent "grid space" units where one grid space is the width of the defined project canvas divided by numberOfColumns. If a project represents a "fixed layout" (e.g., it was created from an existing Apple Book, Card, or Calendar) the specified numberOfColumns will always be 1.
+// NumberOfColumns the suggested layout of the content is provided in resolution-independent "grid space" units where one grid space is the width of the defined project canvas divided by numberOfColumns. If a project represents a "fixed layout" (e.g., it was created from an existing Apple Book, Card, or Calendar) the specified numberOfColumns will always be 1.
 func (x *ProjectSectionContent) NumberOfColumns() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfColumns"))
 	return _r
 }
 
-// Overall aspect ratio of the full content layout (width/height) to enable faithful replication in the project's layout.
+// AspectRatio overall aspect ratio of the full content layout (width/height) to enable faithful replication in the project's layout.
 func (x *ProjectSectionContent) AspectRatio() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("aspectRatio"))
 	return _r
 }
 
-// Convenience for getting a single array of all cloud asset identifiers referenced in the content without needing to enumerate elements.
+// CloudAssetIdentifiers convenience for getting a single array of all cloud asset identifiers referenced in the content without needing to enumerate elements.
 //
 // CloudAssetIdentifiers returns the collection as a Go slice.
 func (x *ProjectSectionContent) CloudAssetIdentifiers() []obj.Object {
@@ -92,7 +100,7 @@ func (x *ProjectSectionContent) CloudAssetIdentifiers() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Background color of the section content. This property is only used when the user creates a new project from an existing Apple Print Product
+// BackgroundColor background color of the section content. This property is only used when the user creates a new project from an existing Apple Print Product
 func (x *ProjectSectionContent) BackgroundColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)

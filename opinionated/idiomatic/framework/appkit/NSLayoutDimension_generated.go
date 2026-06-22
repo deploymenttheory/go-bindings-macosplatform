@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A factory class for creating size-based layout constraint objects using a fluent API.
-//
 // LayoutDimension is an idiomatic wrapper over the Objective-C class NSLayoutDimension.
+//
+// It embeds [LayoutAnchor], promoting that type's methods.
+//
+// A factory class for creating size-based layout constraint objects using a fluent API.
 type LayoutDimension struct {
-	objref.Handle
+	LayoutAnchor
 }
 
 // LayoutDimensionFromID adopts an existing Objective-C object as a LayoutDimension
@@ -25,7 +26,8 @@ func LayoutDimensionFromID(id objc.ID) *LayoutDimension {
 	if id == 0 {
 		return nil
 	}
-	x := &LayoutDimension{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LayoutDimension{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func layoutDimensionAdopt(id objc.ID) *LayoutDimension {
 	if id == 0 {
 		return nil
 	}
-	x := &LayoutDimension{Handle: objref.Wrap(id)}
+	x := &LayoutDimension{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *LayoutDimension) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LayoutDimension) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LayoutDimension) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewLayoutDimension creates a new LayoutDimension.
@@ -64,55 +52,55 @@ func NewLayoutDimension() *LayoutDimension {
 	return layoutDimensionAdopt(_id)
 }
 
-// Returns a constraint that defines a constant size for the anchor’s size attribute.
+// ConstraintEqualToConstant returns a constraint that defines a constant size for the anchor’s size attribute.
 func (x *LayoutDimension) ConstraintEqualToConstant(c float64) *LayoutConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintEqualToConstant:"), c)
 	return LayoutConstraintFromID(_r)
 }
 
-// Returns a constraint that defines the minimum size for the anchor’s size attribute.
+// ConstraintGreaterThanOrEqualToConstant returns a constraint that defines the minimum size for the anchor’s size attribute.
 func (x *LayoutDimension) ConstraintGreaterThanOrEqualToConstant(c float64) *LayoutConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintGreaterThanOrEqualToConstant:"), c)
 	return LayoutConstraintFromID(_r)
 }
 
-// Returns a constraint that defines the maximum size for the anchor’s size attribute.
+// ConstraintLessThanOrEqualToConstant returns a constraint that defines the maximum size for the anchor’s size attribute.
 func (x *LayoutDimension) ConstraintLessThanOrEqualToConstant(c float64) *LayoutConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintLessThanOrEqualToConstant:"), c)
 	return LayoutConstraintFromID(_r)
 }
 
-// Returns a constraint that defines the anchor’s size attribute as equal to the specified anchor multiplied by the constant.
+// ConstraintEqualToAnchorMultiplier returns a constraint that defines the anchor’s size attribute as equal to the specified anchor multiplied by the constant.
 func (x *LayoutDimension) ConstraintEqualToAnchorMultiplier(anchor *LayoutDimension, m float64) *LayoutConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintEqualToAnchor:multiplier:"), objref.IDOf(anchor), m)
 	return LayoutConstraintFromID(_r)
 }
 
-// Returns a constraint that defines the anchor’s size attribute as greater than or equal to the specified anchor multiplied by the constant.
+// ConstraintGreaterThanOrEqualToAnchorMultiplier returns a constraint that defines the anchor’s size attribute as greater than or equal to the specified anchor multiplied by the constant.
 func (x *LayoutDimension) ConstraintGreaterThanOrEqualToAnchorMultiplier(anchor *LayoutDimension, m float64) *LayoutConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintGreaterThanOrEqualToAnchor:multiplier:"), objref.IDOf(anchor), m)
 	return LayoutConstraintFromID(_r)
 }
 
-// Returns a constraint that defines the anchor’s size attribute as less than or equal to the specified anchor multiplied by the constant.
+// ConstraintLessThanOrEqualToAnchorMultiplier returns a constraint that defines the anchor’s size attribute as less than or equal to the specified anchor multiplied by the constant.
 func (x *LayoutDimension) ConstraintLessThanOrEqualToAnchorMultiplier(anchor *LayoutDimension, m float64) *LayoutConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintLessThanOrEqualToAnchor:multiplier:"), objref.IDOf(anchor), m)
 	return LayoutConstraintFromID(_r)
 }
 
-// Returns a constraint that defines the anchor’s size attribute as equal to the specified size attribute multiplied by a constant plus an offset.
+// ConstraintEqualToAnchorMultiplierConstant returns a constraint that defines the anchor’s size attribute as equal to the specified size attribute multiplied by a constant plus an offset.
 func (x *LayoutDimension) ConstraintEqualToAnchorMultiplierConstant(anchor *LayoutDimension, m float64, c float64) *LayoutConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintEqualToAnchor:multiplier:constant:"), objref.IDOf(anchor), m, c)
 	return LayoutConstraintFromID(_r)
 }
 
-// Returns a constraint that defines the anchor’s size attribute as greater than or equal to the specified anchor multiplied by the constant plus an offset.
+// ConstraintGreaterThanOrEqualToAnchorMultiplierConstant returns a constraint that defines the anchor’s size attribute as greater than or equal to the specified anchor multiplied by the constant plus an offset.
 func (x *LayoutDimension) ConstraintGreaterThanOrEqualToAnchorMultiplierConstant(anchor *LayoutDimension, m float64, c float64) *LayoutConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintGreaterThanOrEqualToAnchor:multiplier:constant:"), objref.IDOf(anchor), m, c)
 	return LayoutConstraintFromID(_r)
 }
 
-// Returns a constraint that defines the anchor’s size attribute as greater than or equal to the specified anchor multiplied by the constant plus an offset.
+// ConstraintLessThanOrEqualToAnchorMultiplierConstant returns a constraint that defines the anchor’s size attribute as greater than or equal to the specified anchor multiplied by the constant plus an offset.
 func (x *LayoutDimension) ConstraintLessThanOrEqualToAnchorMultiplierConstant(anchor *LayoutDimension, m float64, c float64) *LayoutConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintLessThanOrEqualToAnchor:multiplier:constant:"), objref.IDOf(anchor), m, c)
 	return LayoutConstraintFromID(_r)
@@ -133,3 +121,5 @@ type LayoutDimensionable interface {
 }
 
 var _ LayoutDimensionable = (*LayoutDimension)(nil)
+
+var _ LayoutAnchorProvider = (*LayoutDimension)(nil)

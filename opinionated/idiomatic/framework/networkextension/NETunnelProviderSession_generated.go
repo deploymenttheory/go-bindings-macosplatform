@@ -9,16 +9,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object to start and stop a tunnel connection and get its status.
-//
 // NETunnelProviderSession is an idiomatic wrapper over the Objective-C class NETunnelProviderSession.
+//
+// It embeds [NEVPNConnection], promoting that type's methods.
+//
+// An object to start and stop a tunnel connection and get its status.
 type NETunnelProviderSession struct {
-	objref.Handle
+	NEVPNConnection
 }
 
 // NETunnelProviderSessionFromID adopts an existing Objective-C object as a NETunnelProviderSession
@@ -27,7 +28,8 @@ func NETunnelProviderSessionFromID(id objc.ID) *NETunnelProviderSession {
 	if id == 0 {
 		return nil
 	}
-	x := &NETunnelProviderSession{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NETunnelProviderSession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,24 +42,10 @@ func nETunnelProviderSessionAdopt(id objc.ID) *NETunnelProviderSession {
 	if id == 0 {
 		return nil
 	}
-	x := &NETunnelProviderSession{Handle: objref.Wrap(id)}
+	x := &NETunnelProviderSession{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NETunnelProviderSession) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NETunnelProviderSession) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NETunnelProviderSession) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNETunnelProviderSession creates a new NETunnelProviderSession.
@@ -66,7 +54,7 @@ func NewNETunnelProviderSession() *NETunnelProviderSession {
 	return nETunnelProviderSessionAdopt(_id)
 }
 
-// Start the process of connecting the tunnel.
+// StartTunnelWithOptionsAndReturnError start the process of connecting the tunnel.
 func (x *NETunnelProviderSession) StartTunnelWithOptionsAndReturnError(options obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("startTunnelWithOptions:andReturnError:"), objref.IDOf(options), unsafe.Pointer(&_nsErr))
@@ -76,7 +64,7 @@ func (x *NETunnelProviderSession) StartTunnelWithOptionsAndReturnError(options o
 	return nil
 }
 
-// Start the process of disconnecting the tunnel.
+// StopTunnel start the process of disconnecting the tunnel.
 func (x *NETunnelProviderSession) StopTunnel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopTunnel"))
 }
@@ -89,3 +77,5 @@ type NETunnelProviderSessionable interface {
 }
 
 var _ NETunnelProviderSessionable = (*NETunnelProviderSession)(nil)
+
+var _ NEVPNConnectionProvider = (*NETunnelProviderSession)(nil)

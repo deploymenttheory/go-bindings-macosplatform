@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides information about a finished record zone fetch.
-//
 // SyncEngineDidFetchRecordZoneChangesEvent is an idiomatic wrapper over the Objective-C class CKSyncEngineDidFetchRecordZoneChangesEvent.
+//
+// It embeds [SyncEngineEvent], promoting that type's methods.
+//
+// An object that provides information about a finished record zone fetch.
 type SyncEngineDidFetchRecordZoneChangesEvent struct {
-	objref.Handle
+	SyncEngineEvent
 }
 
 // SyncEngineDidFetchRecordZoneChangesEventFromID adopts an existing Objective-C object as a SyncEngineDidFetchRecordZoneChangesEvent
@@ -25,7 +26,8 @@ func SyncEngineDidFetchRecordZoneChangesEventFromID(id objc.ID) *SyncEngineDidFe
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineDidFetchRecordZoneChangesEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SyncEngineDidFetchRecordZoneChangesEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func syncEngineDidFetchRecordZoneChangesEventAdopt(id objc.ID) *SyncEngineDidFet
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineDidFetchRecordZoneChangesEvent{Handle: objref.Wrap(id)}
+	x := &SyncEngineDidFetchRecordZoneChangesEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SyncEngineDidFetchRecordZoneChangesEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SyncEngineDidFetchRecordZoneChangesEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SyncEngineDidFetchRecordZoneChangesEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSyncEngineDidFetchRecordZoneChangesEvent creates a new SyncEngineDidFetchRecordZoneChangesEvent.
@@ -64,7 +52,7 @@ func NewSyncEngineDidFetchRecordZoneChangesEvent() *SyncEngineDidFetchRecordZone
 	return syncEngineDidFetchRecordZoneChangesEventAdopt(_id)
 }
 
-// The associated record zone's unique identifier.
+// ZoneID the associated record zone's unique identifier.
 func (x *SyncEngineDidFetchRecordZoneChangesEvent) ZoneID() *RecordZoneID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneID"))
 	return RecordZoneIDFromID(_r)
@@ -77,3 +65,5 @@ type SyncEngineDidFetchRecordZoneChangesEventable interface {
 }
 
 var _ SyncEngineDidFetchRecordZoneChangesEventable = (*SyncEngineDidFetchRecordZoneChangesEvent)(nil)
+
+var _ SyncEngineEventProvider = (*SyncEngineDidFetchRecordZoneChangesEvent)(nil)

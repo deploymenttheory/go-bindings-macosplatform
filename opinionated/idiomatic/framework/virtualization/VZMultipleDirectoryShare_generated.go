@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes a directory share for multiple directories.
-//
 // MultipleDirectoryShare is an idiomatic wrapper over the Objective-C class VZMultipleDirectoryShare.
+//
+// It embeds [DirectoryShare], promoting that type's methods.
+//
+// An object that describes a directory share for multiple directories.
 type MultipleDirectoryShare struct {
-	objref.Handle
+	DirectoryShare
 }
 
 // MultipleDirectoryShareFromID adopts an existing Objective-C object as a MultipleDirectoryShare
@@ -25,7 +26,8 @@ func MultipleDirectoryShareFromID(id objc.ID) *MultipleDirectoryShare {
 	if id == 0 {
 		return nil
 	}
-	x := &MultipleDirectoryShare{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MultipleDirectoryShare{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func multipleDirectoryShareAdopt(id objc.ID) *MultipleDirectoryShare {
 	if id == 0 {
 		return nil
 	}
-	x := &MultipleDirectoryShare{Handle: objref.Wrap(id)}
+	x := &MultipleDirectoryShare{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MultipleDirectoryShare) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MultipleDirectoryShare) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MultipleDirectoryShare) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMultipleDirectoryShare creates a new MultipleDirectoryShare.
@@ -64,16 +52,14 @@ func NewMultipleDirectoryShare() *MultipleDirectoryShare {
 	return multipleDirectoryShareAdopt(_id)
 }
 
-// Creates the directory share with a set of directories on the host.
-//
-// NewMultipleDirectoryShareWithDirectories creates a new MultipleDirectoryShare.
+// NewMultipleDirectoryShareWithDirectories creates the directory share with a set of directories on the host.
 func NewMultipleDirectoryShareWithDirectories(directories obj.Object) *MultipleDirectoryShare {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMultipleDirectoryShare")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDirectories:"), objref.IDOf(directories))
 	return multipleDirectoryShareAdopt(_id)
 }
 
-// The directories on the host to expose to the guest. The dictionary string keys will be the name for the directory. The keys must be valid names or an exception will be raised.
+// Directories the directories on the host to expose to the guest. The dictionary string keys will be the name for the directory. The keys must be valid names or an exception will be raised.
 func (x *MultipleDirectoryShare) Directories() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("directories"))
 	return obj.Wrap(_r)
@@ -86,3 +72,5 @@ type MultipleDirectoryShareable interface {
 }
 
 var _ MultipleDirectoryShareable = (*MultipleDirectoryShare)(nil)
+
+var _ DirectoryShareProvider = (*MultipleDirectoryShare)(nil)

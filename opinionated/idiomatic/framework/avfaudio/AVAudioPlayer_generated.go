@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that plays audio data from a file or buffer.
-//
 // AudioPlayer is an idiomatic wrapper over the Objective-C class AVAudioPlayer.
+//
+// An object that plays audio data from a file or buffer.
 type AudioPlayer struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func AudioPlayerFromID(id objc.ID) *AudioPlayer {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioPlayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioPlayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func audioPlayerAdopt(id objc.ID) *AudioPlayer {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioPlayer{Handle: objref.Wrap(id)}
+	x := &AudioPlayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,10 +62,14 @@ func (x *AudioPlayer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a player to play audio from a file.
-//
-// NewAudioPlayerWithContentsOfURLError creates a new AudioPlayer.
-func NewAudioPlayerWithContentsOfURLError(url string) (*AudioPlayer, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioPlayer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudioPlayerWithContentsOfURLError creates a player to play audio from a file.
+func NewAudioPlayerWithContentsOfURLError(url string) (result *AudioPlayer, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioPlayer")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
@@ -73,10 +79,8 @@ func NewAudioPlayerWithContentsOfURLError(url string) (*AudioPlayer, error) {
 	return audioPlayerAdopt(_id), nil
 }
 
-// Creates a player to play in-memory audio data.
-//
-// NewAudioPlayerWithDataError creates a new AudioPlayer.
-func NewAudioPlayerWithDataError(data obj.Object) (*AudioPlayer, error) {
+// NewAudioPlayerWithDataError creates a player to play in-memory audio data.
+func NewAudioPlayerWithDataError(data obj.Object) (result *AudioPlayer, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioPlayer")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
@@ -86,10 +90,8 @@ func NewAudioPlayerWithDataError(data obj.Object) (*AudioPlayer, error) {
 	return audioPlayerAdopt(_id), nil
 }
 
-// Creates a player to play audio from a file of a particular type.
-//
-// NewAudioPlayerWithContentsOfURLFileTypeHintError creates a new AudioPlayer.
-func NewAudioPlayerWithContentsOfURLFileTypeHintError(url string, utiString string) (*AudioPlayer, error) {
+// NewAudioPlayerWithContentsOfURLFileTypeHintError creates a player to play audio from a file of a particular type.
+func NewAudioPlayerWithContentsOfURLFileTypeHintError(url string, utiString string) (result *AudioPlayer, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioPlayer")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:fileTypeHint:error:"), rt.FileURL(url), purego.NSString(utiString), unsafe.Pointer(&_nsErr))
@@ -99,10 +101,8 @@ func NewAudioPlayerWithContentsOfURLFileTypeHintError(url string, utiString stri
 	return audioPlayerAdopt(_id), nil
 }
 
-// Creates a player to play in-memory audio data of a particular type.
-//
-// NewAudioPlayerWithDataFileTypeHintError creates a new AudioPlayer.
-func NewAudioPlayerWithDataFileTypeHintError(data obj.Object, utiString string) (*AudioPlayer, error) {
+// NewAudioPlayerWithDataFileTypeHintError creates a player to play in-memory audio data of a particular type.
+func NewAudioPlayerWithDataFileTypeHintError(data obj.Object, utiString string) (result *AudioPlayer, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioPlayer")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:fileTypeHint:error:"), objref.IDOf(data), purego.NSString(utiString), unsafe.Pointer(&_nsErr))
@@ -112,135 +112,123 @@ func NewAudioPlayerWithDataFileTypeHintError(data obj.Object, utiString string) 
 	return audioPlayerAdopt(_id), nil
 }
 
-// The unique identifier of the current audio player.
-//
-// WithCurrentDevice sets currentDevice and returns the receiver so calls can be chained.
+// WithCurrentDevice the unique identifier of the current audio player.
 func (x *AudioPlayer) WithCurrentDevice(currentDevice string) *AudioPlayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentDevice:"), purego.NSString(currentDevice))
 	return x
 }
 
-// The audio player’s stereo pan position.
-//
-// WithPan sets pan and returns the receiver so calls can be chained.
+// WithPan the audio player’s stereo pan position.
 func (x *AudioPlayer) WithPan(pan float32) *AudioPlayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPan:"), pan)
 	return x
 }
 
-// The audio player’s volume relative to other audio output.
-//
-// WithVolume sets volume and returns the receiver so calls can be chained.
+// WithVolume the audio player’s volume relative to other audio output.
 func (x *AudioPlayer) WithVolume(volume float32) *AudioPlayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 	return x
 }
 
-// A Boolean value that indicates whether you can adjust the playback rate of the audio player.
-//
-// WithEnableRate sets enableRate and returns the receiver so calls can be chained.
+// WithEnableRate a Boolean value that indicates whether you can adjust the playback rate of the audio player.
 func (x *AudioPlayer) WithEnableRate(enableRate bool) *AudioPlayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableRate:"), enableRate)
 	return x
 }
 
-// The audio player’s playback rate.
-//
-// WithRate sets rate and returns the receiver so calls can be chained.
+// WithRate the audio player’s playback rate.
 func (x *AudioPlayer) WithRate(rate float32) *AudioPlayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 	return x
 }
 
-// The current playback time, in seconds, within the audio timeline.
-//
-// WithCurrentTime sets currentTime and returns the receiver so calls can be chained.
+// WithCurrentTime the current playback time, in seconds, within the audio timeline.
 func (x *AudioPlayer) WithCurrentTime(currentTime float64) *AudioPlayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentTime:"), currentTime)
 	return x
 }
 
-// The number of times the audio repeats playback.
-//
-// WithNumberOfLoops sets numberOfLoops and returns the receiver so calls can be chained.
+// WithNumberOfLoops the number of times the audio repeats playback.
 func (x *AudioPlayer) WithNumberOfLoops(numberOfLoops int) *AudioPlayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfLoops:"), numberOfLoops)
 	return x
 }
 
-// A Boolean value that indicates whether the player is able to generate audio-level metering data.
-//
-// WithMeteringEnabled sets meteringEnabled and returns the receiver so calls can be chained.
+// WithMeteringEnabled a Boolean value that indicates whether the player is able to generate audio-level metering data.
 func (x *AudioPlayer) WithMeteringEnabled(meteringEnabled bool) *AudioPlayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeteringEnabled:"), meteringEnabled)
 	return x
 }
 
-// Prepares the player for audio playback.
+// PrepareToPlay prepares the player for audio playback.
 func (x *AudioPlayer) PrepareToPlay() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("prepareToPlay"))
 	return _r
 }
 
-// Plays audio asynchronously.
+// Play plays audio asynchronously.
 func (x *AudioPlayer) Play() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("play"))
 	return _r
 }
 
-// Plays audio asynchronously, starting at a specified point in the audio output device’s timeline.
+// PlayAtTime plays audio asynchronously, starting at a specified point in the audio output device’s timeline.
 func (x *AudioPlayer) PlayAtTime(time_ float64) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("playAtTime:"), time_)
 	return _r
 }
 
-// Pauses audio playback.
+// Pause pauses audio playback.
 func (x *AudioPlayer) Pause() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pause"))
 }
 
-// Stops playback and undoes the setup the system requires for playback.
+// Stop stops playback and undoes the setup the system requires for playback.
 func (x *AudioPlayer) Stop() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
-// Changes the audio player’s volume over a duration of time.
+// SetVolumeFadeDuration changes the audio player’s volume over a duration of time.
 func (x *AudioPlayer) SetVolumeFadeDuration(volume float32, duration float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:fadeDuration:"), volume, duration)
 }
 
-// Refreshes the average and peak power values for all channels of an audio player.
+// UpdateMeters refreshes the average and peak power values for all channels of an audio player.
 func (x *AudioPlayer) UpdateMeters() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateMeters"))
 }
 
-// Returns the peak power, in decibels full-scale (dBFS), for an audio channel.
+// PeakPowerForChannel returns the peak power, in decibels full-scale (dBFS), for an audio channel.
 func (x *AudioPlayer) PeakPowerForChannel(channelNumber int) float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("peakPowerForChannel:"), channelNumber)
 	return _r
 }
 
-// Returns the average power, in decibels full-scale (dBFS), for an audio channel.
+// AveragePowerForChannel returns the average power, in decibels full-scale (dBFS), for an audio channel.
 func (x *AudioPlayer) AveragePowerForChannel(channelNumber int) float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("averagePowerForChannel:"), channelNumber)
 	return _r
 }
 
+// IsPlaying wraps the corresponding Objective-C method.
 func (x *AudioPlayer) IsPlaying() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPlaying"))
 	return _r
 }
 
+// NumberOfChannels wraps the corresponding Objective-C method.
 func (x *AudioPlayer) NumberOfChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfChannels"))
 	return _r
 }
 
+// Duration wraps the corresponding Objective-C method.
 func (x *AudioPlayer) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
 	return _r
 }
 
+// CurrentDevice wraps the corresponding Objective-C method.
 func (x *AudioPlayer) CurrentDevice() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentDevice"))
 	if _r == 0 {
@@ -249,94 +237,114 @@ func (x *AudioPlayer) CurrentDevice() string {
 	return purego.GoString(_r)
 }
 
+// SetCurrentDevice wraps the corresponding Objective-C method.
 func (x *AudioPlayer) SetCurrentDevice(currentDevice string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentDevice:"), purego.NSString(currentDevice))
 }
 
+// Url wraps the corresponding Objective-C method.
 func (x *AudioPlayer) Url() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
+// Data wraps the corresponding Objective-C method.
 func (x *AudioPlayer) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
+// Pan wraps the corresponding Objective-C method.
 func (x *AudioPlayer) Pan() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("pan"))
 	return _r
 }
 
+// SetPan wraps the corresponding Objective-C method.
 func (x *AudioPlayer) SetPan(pan float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPan:"), pan)
 }
 
+// Volume wraps the corresponding Objective-C method.
 func (x *AudioPlayer) Volume() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("volume"))
 	return _r
 }
 
+// SetVolume wraps the corresponding Objective-C method.
 func (x *AudioPlayer) SetVolume(volume float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 }
 
+// EnableRate wraps the corresponding Objective-C method.
 func (x *AudioPlayer) EnableRate() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enableRate"))
 	return _r
 }
 
+// SetEnableRate wraps the corresponding Objective-C method.
 func (x *AudioPlayer) SetEnableRate(enableRate bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableRate:"), enableRate)
 }
 
+// Rate wraps the corresponding Objective-C method.
 func (x *AudioPlayer) Rate() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rate"))
 	return _r
 }
 
+// SetRate wraps the corresponding Objective-C method.
 func (x *AudioPlayer) SetRate(rate float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 }
 
+// CurrentTime wraps the corresponding Objective-C method.
 func (x *AudioPlayer) CurrentTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("currentTime"))
 	return _r
 }
 
+// SetCurrentTime wraps the corresponding Objective-C method.
 func (x *AudioPlayer) SetCurrentTime(currentTime float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentTime:"), currentTime)
 }
 
+// DeviceCurrentTime wraps the corresponding Objective-C method.
 func (x *AudioPlayer) DeviceCurrentTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("deviceCurrentTime"))
 	return _r
 }
 
+// NumberOfLoops wraps the corresponding Objective-C method.
 func (x *AudioPlayer) NumberOfLoops() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfLoops"))
 	return _r
 }
 
+// SetNumberOfLoops wraps the corresponding Objective-C method.
 func (x *AudioPlayer) SetNumberOfLoops(numberOfLoops int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfLoops:"), numberOfLoops)
 }
 
+// Settings wraps the corresponding Objective-C method.
 func (x *AudioPlayer) Settings() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("settings"))
 	return obj.Wrap(_r)
 }
 
+// Format wraps the corresponding Objective-C method.
 func (x *AudioPlayer) Format() *AudioFormat {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("format"))
 	return AudioFormatFromID(_r)
 }
 
+// IsMeteringEnabled wraps the corresponding Objective-C method.
 func (x *AudioPlayer) IsMeteringEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMeteringEnabled"))
 	return _r
 }
 
+// SetMeteringEnabled wraps the corresponding Objective-C method.
 func (x *AudioPlayer) SetMeteringEnabled(meteringEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeteringEnabled:"), meteringEnabled)
 }

@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract base class shared by content filters.
-//
 // NEFilterProvider is an idiomatic wrapper over the Objective-C class NEFilterProvider.
+//
+// NEFilterProvider is an abstract base — you do not construct it directly. Construct one of [NEFilterDataProvider], [NEFilterPacketProvider] and pass it where a NEFilterProvider is accepted.
+//
+// An abstract base class shared by content filters.
 type NEFilterProvider struct {
-	objref.Handle
+	NEProvider
 }
 
 // NEFilterProviderFromID adopts an existing Objective-C object as a NEFilterProvider
@@ -27,7 +28,8 @@ func NEFilterProviderFromID(id objc.ID) *NEFilterProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &NEFilterProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEFilterProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,33 +42,13 @@ func nEFilterProviderAdopt(id objc.ID) *NEFilterProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &NEFilterProvider{Handle: objref.Wrap(id)}
+	x := &NEFilterProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NEFilterProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEFilterProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEFilterProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewNEFilterProvider creates a new NEFilterProvider.
-func NewNEFilterProvider() *NEFilterProvider {
-	_id := objc.Send[objc.ID](objc.ID(_class("NEFilterProvider")), objc.RegisterName("new"))
-	return nEFilterProviderAdopt(_id)
-}
-
-// Start the filter.
+// StartFilter start the filter.
 //
 // StartFilter blocks until the operation completes or ctx is cancelled.
 func (x *NEFilterProvider) StartFilter(ctx context.Context) error {
@@ -85,7 +67,7 @@ func (x *NEFilterProvider) StartFilter(ctx context.Context) error {
 	}
 }
 
-// Stop the filter.
+// StopFilterWithReason stop the filter.
 //
 // StopFilterWithReason blocks until the operation completes or ctx is cancelled.
 func (x *NEFilterProvider) StopFilterWithReason(ctx context.Context, reason NEProviderStopReason) error {
@@ -102,12 +84,12 @@ func (x *NEFilterProvider) StopFilterWithReason(ctx context.Context, reason NEPr
 	}
 }
 
-// Receives a report from the framework.
+// HandleReport receives a report from the framework.
 func (x *NEFilterProvider) HandleReport(report *NEFilterReport) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleReport:"), objref.IDOf(report))
 }
 
-// An NEContentFilterConfiguration object containing the current filter configuration. The value of this property can change during the lifetime of a filter. Filter implementations can use KVO to be notified when the configuration changes.
+// FilterConfiguration an NEContentFilterConfiguration object containing the current filter configuration. The value of this property can change during the lifetime of a filter. Filter implementations can use KVO to be notified when the configuration changes.
 func (x *NEFilterProvider) FilterConfiguration() *NEFilterProviderConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterConfiguration"))
 	return NEFilterProviderConfigurationFromID(_r)
@@ -123,3 +105,12 @@ type NEFilterProviderable interface {
 }
 
 var _ NEFilterProviderable = (*NEFilterProvider)(nil)
+
+// isNEFilterProvider marks NEFilterProvider — and, by embedding promotion, its
+// subclasses — as a member of the NEFilterProvider hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NEFilterProvider) isNEFilterProvider() {}
+
+var _ NEFilterProviderProvider = (*NEFilterProvider)(nil)
+
+var _ NEProviderProvider = (*NEFilterProvider)(nil)

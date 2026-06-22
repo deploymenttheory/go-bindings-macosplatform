@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that contains details of a string-based search request.
-//
 // FileProviderStringSearchRequest is an idiomatic wrapper over the Objective-C class NSFileProviderStringSearchRequest.
+//
+// A type that contains details of a string-based search request.
 type FileProviderStringSearchRequest struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FileProviderStringSearchRequestFromID(id objc.ID) *FileProviderStringSearch
 	if id == 0 {
 		return nil
 	}
-	x := &FileProviderStringSearchRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FileProviderStringSearchRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func fileProviderStringSearchRequestAdopt(id objc.ID) *FileProviderStringSearchR
 	if id == 0 {
 		return nil
 	}
-	x := &FileProviderStringSearchRequest{Handle: objref.Wrap(id)}
+	x := &FileProviderStringSearchRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *FileProviderStringSearchRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FileProviderStringSearchRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFileProviderStringSearchRequest creates a new FileProviderStringSearchRequest.
 func NewFileProviderStringSearchRequest() *FileProviderStringSearchRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSFileProviderStringSearchRequest")), objc.RegisterName("new"))
 	return fileProviderStringSearchRequestAdopt(_id)
 }
 
-// A plaintext string, representing the query the user entered into the system search UI.
+// Query a plaintext string, representing the query the user entered into the system search UI.
 func (x *FileProviderStringSearchRequest) Query() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("query"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *FileProviderStringSearchRequest) Query() string {
 	return purego.GoString(_r)
 }
 
-// How many results the system is requesting. This is a hint to the extension, to help avoid unnecessary work. The extension may return more results than this.
+// DesiredNumberOfResults how many results the system is requesting. This is a hint to the extension, to help avoid unnecessary work. The extension may return more results than this.
 func (x *FileProviderStringSearchRequest) DesiredNumberOfResults() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("desiredNumberOfResults"))
 	return _r

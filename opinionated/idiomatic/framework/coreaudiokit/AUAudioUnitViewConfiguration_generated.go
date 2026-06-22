@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration object that describes how to present the audio unit’s user interface.
-//
 // AUAudioUnitViewConfiguration is an idiomatic wrapper over the Objective-C class AUAudioUnitViewConfiguration.
+//
+// A configuration object that describes how to present the audio unit’s user interface.
 type AUAudioUnitViewConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AUAudioUnitViewConfigurationFromID(id objc.ID) *AUAudioUnitViewConfiguratio
 	if id == 0 {
 		return nil
 	}
-	x := &AUAudioUnitViewConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AUAudioUnitViewConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func aUAudioUnitViewConfigurationAdopt(id objc.ID) *AUAudioUnitViewConfiguration
 	if id == 0 {
 		return nil
 	}
-	x := &AUAudioUnitViewConfiguration{Handle: objref.Wrap(id)}
+	x := &AUAudioUnitViewConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,32 @@ func (x *AUAudioUnitViewConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new configuration object.
-//
-// NewAUAudioUnitViewConfigurationWithWidthHeightHostHasController creates a new AUAudioUnitViewConfiguration.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AUAudioUnitViewConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAUAudioUnitViewConfigurationWithWidthHeightHostHasController creates a new configuration object.
 func NewAUAudioUnitViewConfigurationWithWidthHeightHostHasController(width float64, height float64, hostHasController bool) *AUAudioUnitViewConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AUAudioUnitViewConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWidth:height:hostHasController:"), width, height, hostHasController)
 	return aUAudioUnitViewConfigurationAdopt(_id)
 }
 
-// The width of the view, measured in points. Setting the width to 0 will match any width.
+// Width the width of the view, measured in points. Setting the width to 0 will match any width.
 func (x *AUAudioUnitViewConfiguration) Width() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("width"))
 	return _r
 }
 
-// The height of the view, measured in points. Setting the height to 0 will match any height.
+// Height the height of the view, measured in points. Setting the height to 0 will match any height.
 func (x *AUAudioUnitViewConfiguration) Height() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("height"))
 	return _r
 }
 
-// Boolean property specifying whether the host displays its own control surface when showing the view of the audio unit.
+// HostHasController boolean property specifying whether the host displays its own control surface when showing the view of the audio unit.
 func (x *AUAudioUnitViewConfiguration) HostHasController() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hostHasController"))
 	return _r

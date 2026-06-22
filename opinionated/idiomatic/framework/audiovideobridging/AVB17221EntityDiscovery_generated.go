@@ -25,7 +25,8 @@ func AVB17221EntityDiscoveryFromID(id objc.ID) *AVB17221EntityDiscovery {
 	if id == 0 {
 		return nil
 	}
-	x := &AVB17221EntityDiscovery{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AVB17221EntityDiscovery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func aVB17221EntityDiscoveryAdopt(id objc.ID) *AVB17221EntityDiscovery {
 	if id == 0 {
 		return nil
 	}
-	x := &AVB17221EntityDiscovery{Handle: objref.Wrap(id)}
+	x := &AVB17221EntityDiscovery{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,41 +60,43 @@ func (x *AVB17221EntityDiscovery) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes the receiver with a particular interface name.
-//
-// NewAVB17221EntityDiscoveryWithInterfaceName creates a new AVB17221EntityDiscovery.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AVB17221EntityDiscovery) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAVB17221EntityDiscoveryWithInterfaceName initializes the receiver with a particular interface name.
 func NewAVB17221EntityDiscoveryWithInterfaceName(anInterfaceName string) *AVB17221EntityDiscovery {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVB17221EntityDiscovery")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterfaceName:"), purego.NSString(anInterfaceName))
 	return aVB17221EntityDiscoveryAdopt(_id)
 }
 
-// The BSD interface name for the interface that discovery is being performed on.
-//
-// WithInterfaceName sets interfaceName and returns the receiver so calls can be chained.
+// WithInterfaceName the BSD interface name for the interface that discovery is being performed on.
 func (x *AVB17221EntityDiscovery) WithInterfaceName(interfaceName string) *AVB17221EntityDiscovery {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterfaceName:"), purego.NSString(interfaceName))
 	return x
 }
 
-// Prepares the IOIterators for receiving entity arrival, departure and property change notifications. This method primes the iterators by iterating over any already available entities. This may be called once, at any time after object creation, but if the discoveryDelegate property has not been set, any already discovered entity notifications will be lost.
+// PrimeIterators prepares the IOIterators for receiving entity arrival, departure and property change notifications. This method primes the iterators by iterating over any already available entities. This may be called once, at any time after object creation, but if the discoveryDelegate property has not been set, any already discovered entity notifications will be lost.
 func (x *AVB17221EntityDiscovery) PrimeIterators() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primeIterators"))
 }
 
-// Triggers the IEEE Std 1722.1™-2013 ADP service to perform an ENTITY_DISCOVER for all entities (an entity_id of 0).
+// DiscoverEntities triggers the IEEE Std 1722.1™-2013 ADP service to perform an ENTITY_DISCOVER for all entities (an entity_id of 0).
 func (x *AVB17221EntityDiscovery) DiscoverEntities() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("discoverEntities"))
 	return _r
 }
 
-// Triggers the IEEE Std 1722.1™-2013 ADP service to perform an ENTITY_DISCOVER for a specified entity.
+// DiscoverEntity triggers the IEEE Std 1722.1™-2013 ADP service to perform an ENTITY_DISCOVER for a specified entity.
 func (x *AVB17221EntityDiscovery) DiscoverEntity(entityID uint64) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("discoverEntity:"), entityID)
 	return _r
 }
 
-// Publishes a entity as being available on the interface. The in kernel portion creates an IOAVB17221LocalEntity and maintains the ADP messaging.
+// AddLocalEntity publishes a entity as being available on the interface. The in kernel portion creates an IOAVB17221LocalEntity and maintains the ADP messaging.
 func (x *AVB17221EntityDiscovery) AddLocalEntity(anEntity *AVB17221Entity) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addLocalEntity:error:"), objref.IDOf(anEntity), unsafe.Pointer(&_nsErr))
@@ -102,7 +106,7 @@ func (x *AVB17221EntityDiscovery) AddLocalEntity(anEntity *AVB17221Entity) error
 	return nil
 }
 
-// Removes a published local entity with the given GUID.
+// RemoveLocalEntity removes a published local entity with the given GUID.
 func (x *AVB17221EntityDiscovery) RemoveLocalEntity(guid uint64) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeLocalEntity:error:"), guid, unsafe.Pointer(&_nsErr))
@@ -112,7 +116,7 @@ func (x *AVB17221EntityDiscovery) RemoveLocalEntity(guid uint64) error {
 	return nil
 }
 
-// Change the gptp_grandmaster_id value of the entity when the grandmaster changes.
+// ChangeEntityWithEntityIDToNewGPTPGrandmasterID change the gptp_grandmaster_id value of the entity when the grandmaster changes.
 func (x *AVB17221EntityDiscovery) ChangeEntityWithEntityIDToNewGPTPGrandmasterID(entityID uint64, gPTPGrandmasterID uint64) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("changeEntityWithEntityID:toNewGPTPGrandmasterID:error:"), entityID, gPTPGrandmasterID, unsafe.Pointer(&_nsErr))
@@ -122,7 +126,7 @@ func (x *AVB17221EntityDiscovery) ChangeEntityWithEntityIDToNewGPTPGrandmasterID
 	return nil
 }
 
-// The BSD interface name for the interface that discovery is being performed on.
+// InterfaceName the BSD interface name for the interface that discovery is being performed on.
 func (x *AVB17221EntityDiscovery) InterfaceName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interfaceName"))
 	if _r == 0 {
@@ -131,11 +135,12 @@ func (x *AVB17221EntityDiscovery) InterfaceName() string {
 	return purego.GoString(_r)
 }
 
+// SetInterfaceName wraps the corresponding Objective-C method.
 func (x *AVB17221EntityDiscovery) SetInterfaceName(interfaceName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterfaceName:"), purego.NSString(interfaceName))
 }
 
-// The AVBInterface object which owns this object. This may be nil if it was not created by an instance of AVBInterface
+// Interface the AVBInterface object which owns this object. This may be nil if it was not created by an instance of AVBInterface
 func (x *AVB17221EntityDiscovery) Interface() *Interface {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interface"))
 	return InterfaceFromID(_r)

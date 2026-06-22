@@ -23,7 +23,8 @@ func LocalizedNumberFormatRuleFromID(id objc.ID) *LocalizedNumberFormatRule {
 	if id == 0 {
 		return nil
 	}
-	x := &LocalizedNumberFormatRule{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LocalizedNumberFormatRule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func localizedNumberFormatRuleAdopt(id objc.ID) *LocalizedNumberFormatRule {
 	if id == 0 {
 		return nil
 	}
-	x := &LocalizedNumberFormatRule{Handle: objref.Wrap(id)}
+	x := &LocalizedNumberFormatRule{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,13 +58,19 @@ func (x *LocalizedNumberFormatRule) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LocalizedNumberFormatRule) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLocalizedNumberFormatRule creates a new LocalizedNumberFormatRule.
 func NewLocalizedNumberFormatRule() *LocalizedNumberFormatRule {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSLocalizedNumberFormatRule")), objc.RegisterName("new"))
 	return localizedNumberFormatRuleAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *LocalizedNumberFormatRule) WithScriptingProperties(scriptingProperties obj.Object) *LocalizedNumberFormatRule {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x

@@ -21,6 +21,8 @@ const (
 	MeshGraphTriangulationModeEdgeMidpoints MeshGraphTriangulationMode = 4
 )
 
+// String returns the MeshGraphTriangulationMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MeshGraphTriangulationMode) String() string {
 	var parts []string
 	if e&MeshGraphTriangulationModeVertices != 0 {

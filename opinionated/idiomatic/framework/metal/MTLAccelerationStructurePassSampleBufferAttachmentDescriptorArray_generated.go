@@ -23,7 +23,8 @@ func AccelerationStructurePassSampleBufferAttachmentDescriptorArrayFromID(id obj
 	if id == 0 {
 		return nil
 	}
-	x := &AccelerationStructurePassSampleBufferAttachmentDescriptorArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AccelerationStructurePassSampleBufferAttachmentDescriptorArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func accelerationStructurePassSampleBufferAttachmentDescriptorArrayAdopt(id objc
 	if id == 0 {
 		return nil
 	}
-	x := &AccelerationStructurePassSampleBufferAttachmentDescriptorArray{Handle: objref.Wrap(id)}
+	x := &AccelerationStructurePassSampleBufferAttachmentDescriptorArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,17 +58,25 @@ func (x *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) IsKind(
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAccelerationStructurePassSampleBufferAttachmentDescriptorArray creates a new AccelerationStructurePassSampleBufferAttachmentDescriptorArray.
 func NewAccelerationStructurePassSampleBufferAttachmentDescriptorArray() *AccelerationStructurePassSampleBufferAttachmentDescriptorArray {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLAccelerationStructurePassSampleBufferAttachmentDescriptorArray")), objc.RegisterName("new"))
 	return accelerationStructurePassSampleBufferAttachmentDescriptorArrayAdopt(_id)
 }
 
+// ObjectAtIndexedSubscript wraps the corresponding Objective-C method.
 func (x *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *AccelerationStructurePassSampleBufferAttachmentDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return AccelerationStructurePassSampleBufferAttachmentDescriptorFromID(_r)
 }
 
+// SetObjectAtIndexedSubscript wraps the corresponding Objective-C method.
 func (x *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *AccelerationStructurePassSampleBufferAttachmentDescriptor, attachmentIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }

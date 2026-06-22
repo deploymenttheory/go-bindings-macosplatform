@@ -23,6 +23,8 @@ const (
 	ActionTimingEaseInEaseOut ActionTimingMode = 3
 )
 
+// String returns the ActionTimingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ActionTimingMode) String() string {
 	switch e {
 	case ActionTimingLinear:
@@ -53,6 +55,8 @@ const (
 	AttributeTypeVectorHalfFloat4 AttributeType = 8
 )
 
+// String returns the AttributeType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AttributeType) String() string {
 	switch e {
 	case AttributeTypeNone:
@@ -99,6 +103,8 @@ const (
 	BlendModeMultiplyAlpha BlendMode = 7
 )
 
+// String returns the BlendMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BlendMode) String() string {
 	switch e {
 	case BlendModeAlpha:
@@ -134,6 +140,8 @@ const (
 	InterpolationModeStep InterpolationMode = 3
 )
 
+// String returns the InterpolationMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e InterpolationMode) String() string {
 	switch e {
 	case InterpolationModeLinear:
@@ -159,6 +167,8 @@ const (
 	LabelHorizontalAlignmentModeRight LabelHorizontalAlignmentMode = 2
 )
 
+// String returns the LabelHorizontalAlignmentMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LabelHorizontalAlignmentMode) String() string {
 	switch e {
 	case LabelHorizontalAlignmentModeCenter:
@@ -186,6 +196,8 @@ const (
 	LabelVerticalAlignmentModeBottom LabelVerticalAlignmentMode = 3
 )
 
+// String returns the LabelVerticalAlignmentMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LabelVerticalAlignmentMode) String() string {
 	switch e {
 	case LabelVerticalAlignmentModeBaseline:
@@ -213,6 +225,8 @@ const (
 	ParticleRenderOrderDontCare ParticleRenderOrder = 2
 )
 
+// String returns the ParticleRenderOrder constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ParticleRenderOrder) String() string {
 	switch e {
 	case ParticleRenderOrderOldestLast:
@@ -236,6 +250,8 @@ const (
 	RepeatModeLoop RepeatMode = 2
 )
 
+// String returns the RepeatMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RepeatMode) String() string {
 	switch e {
 	case RepeatModeClamp:
@@ -261,6 +277,8 @@ const (
 	SceneScaleModeResizeFill SceneScaleMode = 3
 )
 
+// String returns the SceneScaleMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SceneScaleMode) String() string {
 	switch e {
 	case SceneScaleModeFill:
@@ -286,6 +304,8 @@ const (
 	TextureFilteringLinear TextureFilteringMode = 1
 )
 
+// String returns the TextureFilteringMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextureFilteringMode) String() string {
 	switch e {
 	case TextureFilteringNearest:
@@ -339,6 +359,8 @@ const (
 	TileAdjacencyUpperLeftCorner     TileAdjacencyMask = 247
 )
 
+// String returns the TileAdjacencyMask constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TileAdjacencyMask) String() string {
 	var parts []string
 	if e&TileAdjacencyUp != 0 {
@@ -462,6 +484,8 @@ const (
 	TileDefinitionRotation270 TileDefinitionRotation = 3
 )
 
+// String returns the TileDefinitionRotation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TileDefinitionRotation) String() string {
 	switch e {
 	case TileDefinitionRotation0:
@@ -487,6 +511,8 @@ const (
 	TileSetTypeHexagonalPointy TileSetType = 3
 )
 
+// String returns the TileSetType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TileSetType) String() string {
 	switch e {
 	case TileSetTypeGrid:
@@ -516,6 +542,8 @@ const (
 	TransitionDirectionLeft TransitionDirection = 3
 )
 
+// String returns the TransitionDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TransitionDirection) String() string {
 	switch e {
 	case TransitionDirectionUp:
@@ -555,6 +583,8 @@ const (
 	UniformTypeTexture UniformType = 8
 )
 
+// String returns the UniformType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e UniformType) String() string {
 	switch e {
 	case UniformTypeNone:

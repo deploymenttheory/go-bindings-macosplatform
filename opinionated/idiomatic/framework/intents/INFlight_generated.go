@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The information that describes a flight.
-//
 // Flight is an idiomatic wrapper over the Objective-C class INFlight.
+//
+// The information that describes a flight.
 type Flight struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FlightFromID(id objc.ID) *Flight {
 	if id == 0 {
 		return nil
 	}
-	x := &Flight{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Flight{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func flightAdopt(id objc.ID) *Flight {
 	if id == 0 {
 		return nil
 	}
-	x := &Flight{Handle: objref.Wrap(id)}
+	x := &Flight{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,20 +60,26 @@ func (x *Flight) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new object containing information about a flight.
-//
-// NewFlightWithAirlineFlightNumberBoardingTimeFlightDurationDepartureAirportGateArrivalAirportGate creates a new Flight.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Flight) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFlightWithAirlineFlightNumberBoardingTimeFlightDurationDepartureAirportGateArrivalAirportGate creates a new object containing information about a flight.
 func NewFlightWithAirlineFlightNumberBoardingTimeFlightDurationDepartureAirportGateArrivalAirportGate(airline *Airline, flightNumber string, boardingTime *DateComponentsRange, flightDuration *DateComponentsRange, departureAirportGate *AirportGate, arrivalAirportGate *AirportGate) *Flight {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INFlight")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAirline:flightNumber:boardingTime:flightDuration:departureAirportGate:arrivalAirportGate:"), objref.IDOf(airline), purego.NSString(flightNumber), objref.IDOf(boardingTime), objref.IDOf(flightDuration), objref.IDOf(departureAirportGate), objref.IDOf(arrivalAirportGate))
 	return flightAdopt(_id)
 }
 
+// Airline wraps the corresponding Objective-C method.
 func (x *Flight) Airline() *Airline {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("airline"))
 	return AirlineFromID(_r)
 }
 
+// FlightNumber wraps the corresponding Objective-C method.
 func (x *Flight) FlightNumber() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flightNumber"))
 	if _r == 0 {
@@ -80,21 +88,25 @@ func (x *Flight) FlightNumber() string {
 	return purego.GoString(_r)
 }
 
+// BoardingTime wraps the corresponding Objective-C method.
 func (x *Flight) BoardingTime() *DateComponentsRange {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boardingTime"))
 	return DateComponentsRangeFromID(_r)
 }
 
+// FlightDuration wraps the corresponding Objective-C method.
 func (x *Flight) FlightDuration() *DateComponentsRange {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flightDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
+// DepartureAirportGate wraps the corresponding Objective-C method.
 func (x *Flight) DepartureAirportGate() *AirportGate {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("departureAirportGate"))
 	return AirportGateFromID(_r)
 }
 
+// ArrivalAirportGate wraps the corresponding Objective-C method.
 func (x *Flight) ArrivalAirportGate() *AirportGate {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrivalAirportGate"))
 	return AirportGateFromID(_r)

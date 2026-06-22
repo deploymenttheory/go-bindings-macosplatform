@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that normalizes a batch of inputs.
-//
 // BatchNormalizationLayer is an idiomatic wrapper over the Objective-C class MLCBatchNormalizationLayer.
+//
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that normalizes a batch of inputs.
 type BatchNormalizationLayer struct {
-	objref.Handle
+	Layer
 }
 
 // BatchNormalizationLayerFromID adopts an existing Objective-C object as a BatchNormalizationLayer
@@ -25,7 +26,8 @@ func BatchNormalizationLayerFromID(id objc.ID) *BatchNormalizationLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &BatchNormalizationLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BatchNormalizationLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func batchNormalizationLayerAdopt(id objc.ID) *BatchNormalizationLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &BatchNormalizationLayer{Handle: objref.Wrap(id)}
+	x := &BatchNormalizationLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *BatchNormalizationLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BatchNormalizationLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BatchNormalizationLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewBatchNormalizationLayer creates a new BatchNormalizationLayer.
@@ -64,71 +52,67 @@ func NewBatchNormalizationLayer() *BatchNormalizationLayer {
 	return batchNormalizationLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string that helps identify this layer.
 func (x *BatchNormalizationLayer) WithLabel(label string) *BatchNormalizationLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *BatchNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *BatchNormalizationLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// The number of feature channels
+// FeatureChannelCount the number of feature channels
 func (x *BatchNormalizationLayer) FeatureChannelCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("featureChannelCount"))
 	return _r
 }
 
-// The mean tensor
+// Mean the mean tensor
 func (x *BatchNormalizationLayer) Mean() *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mean"))
 	return TensorFromID(_r)
 }
 
-// The variance tensor
+// Variance the variance tensor
 func (x *BatchNormalizationLayer) Variance() *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variance"))
 	return TensorFromID(_r)
 }
 
-// The beta tensor
+// Beta the beta tensor
 func (x *BatchNormalizationLayer) Beta() *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beta"))
 	return TensorFromID(_r)
 }
 
-// The gamma tensor
+// Gamma the gamma tensor
 func (x *BatchNormalizationLayer) Gamma() *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gamma"))
 	return TensorFromID(_r)
 }
 
-// The beta tensor parameter used for optimizer update
+// BetaParameter the beta tensor parameter used for optimizer update
 func (x *BatchNormalizationLayer) BetaParameter() *TensorParameter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("betaParameter"))
 	return TensorParameterFromID(_r)
 }
 
-// The gamma tensor parameter used for optimizer update
+// GammaParameter the gamma tensor parameter used for optimizer update
 func (x *BatchNormalizationLayer) GammaParameter() *TensorParameter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gammaParameter"))
 	return TensorParameterFromID(_r)
 }
 
-// A value used for numerical stability
+// VarianceEpsilon a value used for numerical stability
 func (x *BatchNormalizationLayer) VarianceEpsilon() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("varianceEpsilon"))
 	return _r
 }
 
-// The value used for the running mean and variance computation The default is 0.99f.
+// Momentum the value used for the running mean and variance computation The default is 0.99f.
 func (x *BatchNormalizationLayer) Momentum() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("momentum"))
 	return _r
@@ -151,3 +135,5 @@ type BatchNormalizationLayerable interface {
 }
 
 var _ BatchNormalizationLayerable = (*BatchNormalizationLayer)(nil)
+
+var _ LayerProvider = (*BatchNormalizationLayer)(nil)

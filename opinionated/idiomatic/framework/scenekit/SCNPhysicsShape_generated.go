@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstraction of a physics body’s solid volume for tuning collision detection.
-//
 // PhysicsShape is an idiomatic wrapper over the Objective-C class SCNPhysicsShape.
+//
+// An abstraction of a physics body’s solid volume for tuning collision detection.
 type PhysicsShape struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PhysicsShapeFromID(id objc.ID) *PhysicsShape {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsShape{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PhysicsShape{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func physicsShapeAdopt(id objc.ID) *PhysicsShape {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsShape{Handle: objref.Wrap(id)}
+	x := &PhysicsShape{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,32 @@ func (x *PhysicsShape) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PhysicsShape) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPhysicsShape creates a new PhysicsShape.
 func NewPhysicsShape() *PhysicsShape {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsShape")), objc.RegisterName("new"))
 	return physicsShapeAdopt(_id)
 }
 
+// Options wraps the corresponding Objective-C method.
 func (x *PhysicsShape) Options() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
 	return obj.Wrap(_r)
 }
 
+// SourceObject wraps the corresponding Objective-C method.
 func (x *PhysicsShape) SourceObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceObject"))
 	return obj.Wrap(_r)
 }
 
+// Transforms wraps the corresponding Objective-C method.
+//
 // Transforms returns the collection as a Go slice.
 func (x *PhysicsShape) Transforms() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transforms"))

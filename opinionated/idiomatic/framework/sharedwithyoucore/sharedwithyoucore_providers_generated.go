@@ -11,14 +11,17 @@ import (
 // ActionProvider is accepted wherever a SWAction (or one of its subclasses) is expected.
 type ActionProvider interface {
 	objref.Object
+	isAction()
 }
 
 // CollaborationOptionsGroupProvider is accepted wherever a SWCollaborationOptionsGroup (or one of its subclasses) is expected.
 type CollaborationOptionsGroupProvider interface {
 	objref.Object
+	isCollaborationOptionsGroup()
 }
 
 // PersonIdentityProofProvider is accepted wherever a SWPersonIdentityProof (or one of its subclasses) is expected.
 type PersonIdentityProofProvider interface {
 	objref.Object
+	isPersonIdentityProof()
 }

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that vends attributed strings for media with a legible characteristic.
-//
 // PlayerItemLegibleOutput is an idiomatic wrapper over the Objective-C class AVPlayerItemLegibleOutput.
+//
+// It embeds [PlayerItemOutput], promoting that type's methods.
+//
+// An object that vends attributed strings for media with a legible characteristic.
 type PlayerItemLegibleOutput struct {
-	objref.Handle
+	PlayerItemOutput
 }
 
 // PlayerItemLegibleOutputFromID adopts an existing Objective-C object as a PlayerItemLegibleOutput
@@ -25,7 +26,8 @@ func PlayerItemLegibleOutputFromID(id objc.ID) *PlayerItemLegibleOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemLegibleOutput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlayerItemLegibleOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,80 +40,61 @@ func playerItemLegibleOutputAdopt(id objc.ID) *PlayerItemLegibleOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemLegibleOutput{Handle: objref.Wrap(id)}
+	x := &PlayerItemLegibleOutput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *PlayerItemLegibleOutput) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlayerItemLegibleOutput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlayerItemLegibleOutput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates an initialized legible-output object.
-//
-// NewPlayerItemLegibleOutputWithMediaSubtypesForNativeRepresentation creates a new PlayerItemLegibleOutput.
+// NewPlayerItemLegibleOutputWithMediaSubtypesForNativeRepresentation creates an initialized legible-output object.
 func NewPlayerItemLegibleOutputWithMediaSubtypesForNativeRepresentation(subtypes []obj.Object) *PlayerItemLegibleOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemLegibleOutput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMediaSubtypesForNativeRepresentation:"), purego.SliceToNSArray(subtypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return playerItemLegibleOutputAdopt(_id)
 }
 
-// The time interval, in seconds, that a player item legible output object messages its delegate earlier than normal.
-//
-// WithAdvanceIntervalForDelegateInvocation sets advanceIntervalForDelegateInvocation and returns the receiver so calls can be chained.
+// WithAdvanceIntervalForDelegateInvocation the time interval, in seconds, that a player item legible output object messages its delegate earlier than normal.
 func (x *PlayerItemLegibleOutput) WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemLegibleOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdvanceIntervalForDelegateInvocation:"), advanceIntervalForDelegateInvocation)
 	return x
 }
 
-// A string identifier indicating the degree of text styling to be applied to attributed strings vended by the object.
-//
-// WithTextStylingResolution sets textStylingResolution and returns the receiver so calls can be chained.
+// WithTextStylingResolution a string identifier indicating the degree of text styling to be applied to attributed strings vended by the object.
 func (x *PlayerItemLegibleOutput) WithTextStylingResolution(textStylingResolution obj.Object) *PlayerItemLegibleOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextStylingResolution:"), objref.IDOf(textStylingResolution))
 	return x
 }
 
-// A Boolean value that indicates whether the player object renders the receiver’s output.
-//
-// WithSuppressesPlayerRendering sets suppressesPlayerRendering and returns the receiver so calls can be chained.
+// WithSuppressesPlayerRendering a Boolean value that indicates whether the player object renders the receiver’s output.
 func (x *PlayerItemLegibleOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemLegibleOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
 	return x
 }
 
-// The dispatch queue where the delegate is messaged. This property is not key-value observable.
+// DelegateQueue the dispatch queue where the delegate is messaged. This property is not key-value observable.
 func (x *PlayerItemLegibleOutput) DelegateQueue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegateQueue"))
 	return obj.Wrap(_r)
 }
 
-// Permits advance invocation of the associated delegate, if any. If it is possible, an AVPlayerItemLegibleOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemLegibleOutput is prepared to act on them, the delegate will be invoked as soon as possible.
+// AdvanceIntervalForDelegateInvocation permits advance invocation of the associated delegate, if any. If it is possible, an AVPlayerItemLegibleOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemLegibleOutput is prepared to act on them, the delegate will be invoked as soon as possible.
 func (x *PlayerItemLegibleOutput) AdvanceIntervalForDelegateInvocation() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("advanceIntervalForDelegateInvocation"))
 	return _r
 }
 
+// SetAdvanceIntervalForDelegateInvocation wraps the corresponding Objective-C method.
 func (x *PlayerItemLegibleOutput) SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdvanceIntervalForDelegateInvocation:"), advanceIntervalForDelegateInvocation)
 }
 
+// TextStylingResolution wraps the corresponding Objective-C method.
 func (x *PlayerItemLegibleOutput) TextStylingResolution() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textStylingResolution"))
 	return obj.Wrap(_r)
 }
 
+// SetTextStylingResolution wraps the corresponding Objective-C method.
 func (x *PlayerItemLegibleOutput) SetTextStylingResolution(textStylingResolution obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextStylingResolution:"), objref.IDOf(textStylingResolution))
 }
@@ -130,3 +113,5 @@ type PlayerItemLegibleOutputable interface {
 }
 
 var _ PlayerItemLegibleOutputable = (*PlayerItemLegibleOutput)(nil)
+
+var _ PlayerItemOutputProvider = (*PlayerItemLegibleOutput)(nil)

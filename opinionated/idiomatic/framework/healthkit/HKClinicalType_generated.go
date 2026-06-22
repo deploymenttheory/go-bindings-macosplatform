@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that identifies samples that contain clinical record data.
-//
 // ClinicalType is an idiomatic wrapper over the Objective-C class HKClinicalType.
+//
+// It embeds [SampleType], promoting that type's methods.
+//
+// A type that identifies samples that contain clinical record data.
 type ClinicalType struct {
-	objref.Handle
+	SampleType
 }
 
 // ClinicalTypeFromID adopts an existing Objective-C object as a ClinicalType
@@ -25,7 +26,8 @@ func ClinicalTypeFromID(id objc.ID) *ClinicalType {
 	if id == 0 {
 		return nil
 	}
-	x := &ClinicalType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ClinicalType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func clinicalTypeAdopt(id objc.ID) *ClinicalType {
 	if id == 0 {
 		return nil
 	}
-	x := &ClinicalType{Handle: objref.Wrap(id)}
+	x := &ClinicalType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ClinicalType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ClinicalType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ClinicalType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewClinicalType creates a new ClinicalType.
@@ -70,3 +58,7 @@ type ClinicalTypeable interface {
 }
 
 var _ ClinicalTypeable = (*ClinicalType)(nil)
+
+var _ SampleTypeProvider = (*ClinicalType)(nil)
+
+var _ ObjectTypeProvider = (*ClinicalType)(nil)

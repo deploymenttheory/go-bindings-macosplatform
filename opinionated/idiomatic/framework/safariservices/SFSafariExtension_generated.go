@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A proxy for the Safari extension.
-//
 // SafariExtension is an idiomatic wrapper over the Objective-C class SFSafariExtension.
+//
+// A proxy for the Safari extension.
 type SafariExtension struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SafariExtensionFromID(id objc.ID) *SafariExtension {
 	if id == 0 {
 		return nil
 	}
-	x := &SafariExtension{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SafariExtension{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func safariExtensionAdopt(id objc.ID) *SafariExtension {
 	if id == 0 {
 		return nil
 	}
-	x := &SafariExtension{Handle: objref.Wrap(id)}
+	x := &SafariExtension{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *SafariExtension) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *SafariExtension) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SafariExtension) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewSafariExtension creates a new SafariExtension.

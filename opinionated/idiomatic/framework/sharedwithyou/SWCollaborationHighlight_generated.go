@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A highlight object that represents an active collaboration.
-//
 // CollaborationHighlight is an idiomatic wrapper over the Objective-C class SWCollaborationHighlight.
+//
+// It embeds [Highlight], promoting that type's methods.
+//
+// A highlight object that represents an active collaboration.
 type CollaborationHighlight struct {
-	objref.Handle
+	Highlight
 }
 
 // CollaborationHighlightFromID adopts an existing Objective-C object as a CollaborationHighlight
@@ -25,7 +26,8 @@ func CollaborationHighlightFromID(id objc.ID) *CollaborationHighlight {
 	if id == 0 {
 		return nil
 	}
-	x := &CollaborationHighlight{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollaborationHighlight{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func collaborationHighlightAdopt(id objc.ID) *CollaborationHighlight {
 	if id == 0 {
 		return nil
 	}
-	x := &CollaborationHighlight{Handle: objref.Wrap(id)}
+	x := &CollaborationHighlight{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CollaborationHighlight) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CollaborationHighlight) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CollaborationHighlight) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCollaborationHighlight creates a new CollaborationHighlight.
@@ -64,7 +52,7 @@ func NewCollaborationHighlight() *CollaborationHighlight {
 	return collaborationHighlightAdopt(_id)
 }
 
-// Unique identifier as provided by the app hosting the collaboration This identifier is unique across platforms and shares
+// CollaborationIdentifier unique identifier as provided by the app hosting the collaboration This identifier is unique across platforms and shares
 func (x *CollaborationHighlight) CollaborationIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collaborationIdentifier"))
 	if _r == 0 {
@@ -73,7 +61,7 @@ func (x *CollaborationHighlight) CollaborationIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Title of the collaboration highlight Title of the collaboration if provided by the app hosting the collaboration
+// Title title of the collaboration highlight Title of the collaboration if provided by the app hosting the collaboration
 func (x *CollaborationHighlight) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -82,13 +70,13 @@ func (x *CollaborationHighlight) Title() string {
 	return purego.GoString(_r)
 }
 
-// Date when the file was created
+// CreationDate date when the file was created
 func (x *CollaborationHighlight) CreationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creationDate"))
 	return obj.Wrap(_r)
 }
 
-// UTI type for this collaboration highlight
+// ContentType UTI type for this collaboration highlight
 func (x *CollaborationHighlight) ContentType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
 	return obj.Wrap(_r)
@@ -104,3 +92,5 @@ type CollaborationHighlightable interface {
 }
 
 var _ CollaborationHighlightable = (*CollaborationHighlight)(nil)
+
+var _ HighlightProvider = (*CollaborationHighlight)(nil)

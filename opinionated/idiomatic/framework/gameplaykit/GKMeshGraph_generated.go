@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A navigation graph for 2D game worlds that creates a space-filling network for smooth pathfinding around obstacles.
-//
 // MeshGraph is an idiomatic wrapper over the Objective-C class GKMeshGraph.
+//
+// It embeds [Graph], promoting that type's methods.
+//
+// A navigation graph for 2D game worlds that creates a space-filling network for smooth pathfinding around obstacles.
 type MeshGraph struct {
-	objref.Handle
+	Graph
 }
 
 // MeshGraphFromID adopts an existing Objective-C object as a MeshGraph
@@ -25,7 +26,8 @@ func MeshGraphFromID(id objc.ID) *MeshGraph {
 	if id == 0 {
 		return nil
 	}
-	x := &MeshGraph{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MeshGraph{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func meshGraphAdopt(id objc.ID) *MeshGraph {
 	if id == 0 {
 		return nil
 	}
-	x := &MeshGraph{Handle: objref.Wrap(id)}
+	x := &MeshGraph{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MeshGraph) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MeshGraph) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MeshGraph) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMeshGraph creates a new MeshGraph.
@@ -64,35 +52,33 @@ func NewMeshGraph() *MeshGraph {
 	return meshGraphAdopt(_id)
 }
 
-// A set of options for how to place graph nodes when triangulating the graph.
-//
-// WithTriangulationMode sets triangulationMode and returns the receiver so calls can be chained.
+// WithTriangulationMode a set of options for how to place graph nodes when triangulating the graph.
 func (x *MeshGraph) WithTriangulationMode(triangulationMode MeshGraphTriangulationMode) *MeshGraph {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTriangulationMode:"), triangulationMode)
 	return x
 }
 
-// Adds new obstacles to the graph.
+// AddObstacles adds new obstacles to the graph.
 func (x *MeshGraph) AddObstacles(obstacles []*PolygonObstacle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObstacles:"), purego.SliceToNSArray(obstacles, func(_v *PolygonObstacle) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Removes the specified obstacle from the graph.
+// RemoveObstacles removes the specified obstacle from the graph.
 func (x *MeshGraph) RemoveObstacles(obstacles []*PolygonObstacle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObstacles:"), purego.SliceToNSArray(obstacles, func(_v *PolygonObstacle) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Adds the specified node to the graph, connecting it to its nearest neighbors without creating connections that pass through obstacles or their buffer regions.
+// ConnectNodeUsingObstacles adds the specified node to the graph, connecting it to its nearest neighbors without creating connections that pass through obstacles or their buffer regions.
 func (x *MeshGraph) ConnectNodeUsingObstacles(node obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectNodeUsingObstacles:"), objref.IDOf(node))
 }
 
-// Creates or updates the graph with a network of nodes that describes the open space around its obstacles.
+// Triangulate creates or updates the graph with a network of nodes that describes the open space around its obstacles.
 func (x *MeshGraph) Triangulate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("triangulate"))
 }
 
-// Array of the extruded obstacles currently represented by this graph
+// Obstacles array of the extruded obstacles currently represented by this graph
 //
 // Obstacles returns the collection as a Go slice.
 func (x *MeshGraph) Obstacles() []*PolygonObstacle {
@@ -100,23 +86,24 @@ func (x *MeshGraph) Obstacles() []*PolygonObstacle {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PolygonObstacle { return PolygonObstacleFromID(_id) })
 }
 
-// The distance by which all obstacles are extruded. This is most commonly the spatial bounding radius of a potential traveler on this path
+// BufferRadius the distance by which all obstacles are extruded. This is most commonly the spatial bounding radius of a potential traveler on this path
 func (x *MeshGraph) BufferRadius() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("bufferRadius"))
 	return _r
 }
 
-// Specifies how graph nodes are generated when you triangulate this graph. You can combine triangulation modes using the | (OR) operator
+// TriangulationMode specifies how graph nodes are generated when you triangulate this graph. You can combine triangulation modes using the | (OR) operator
 func (x *MeshGraph) TriangulationMode() MeshGraphTriangulationMode {
 	_r := objc.Send[MeshGraphTriangulationMode](objref.IDOf(x), objc.RegisterName("triangulationMode"))
 	return _r
 }
 
+// SetTriangulationMode wraps the corresponding Objective-C method.
 func (x *MeshGraph) SetTriangulationMode(triangulationMode MeshGraphTriangulationMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTriangulationMode:"), triangulationMode)
 }
 
-// The number of triangles currently in this mesh graph
+// TriangleCount the number of triangles currently in this mesh graph
 func (x *MeshGraph) TriangleCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("triangleCount"))
 	return _r
@@ -138,3 +125,5 @@ type MeshGraphable interface {
 }
 
 var _ MeshGraphable = (*MeshGraph)(nil)
+
+var _ GraphProvider = (*MeshGraph)(nil)

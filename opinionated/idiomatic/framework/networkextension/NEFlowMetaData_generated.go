@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Additional information about data flowing through a per-app VPN provider.
-//
 // NEFlowMetaData is an idiomatic wrapper over the Objective-C class NEFlowMetaData.
+//
+// Additional information about data flowing through a per-app VPN provider.
 type NEFlowMetaData struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NEFlowMetaDataFromID(id objc.ID) *NEFlowMetaData {
 	if id == 0 {
 		return nil
 	}
-	x := &NEFlowMetaData{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEFlowMetaData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nEFlowMetaDataAdopt(id objc.ID) *NEFlowMetaData {
 	if id == 0 {
 		return nil
 	}
-	x := &NEFlowMetaData{Handle: objref.Wrap(id)}
+	x := &NEFlowMetaData{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *NEFlowMetaData) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEFlowMetaData) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNEFlowMetaData creates a new NEFlowMetaData.
 func NewNEFlowMetaData() *NEFlowMetaData {
 	_id := objc.Send[objc.ID](objc.ID(_class("NEFlowMetaData")), objc.RegisterName("new"))
 	return nEFlowMetaDataAdopt(_id)
 }
 
-// A byte string that uniquely identifies the binary for each build of the source application of the flow. The data object may be empty in cases where the flow originates from a system process.
+// SourceAppUniqueIdentifier a byte string that uniquely identifies the binary for each build of the source application of the flow. The data object may be empty in cases where the flow originates from a system process.
 func (x *NEFlowMetaData) SourceAppUniqueIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceAppUniqueIdentifier"))
 	return obj.Wrap(_r)
 }
 
-// A string containing the signing identifier (almost always equivalent to the bundle identifier) of the source app of the flow. The string may be empty in cases where the flow originates from a system process.
+// SourceAppSigningIdentifier a string containing the signing identifier (almost always equivalent to the bundle identifier) of the source app of the flow. The string may be empty in cases where the flow originates from a system process.
 func (x *NEFlowMetaData) SourceAppSigningIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceAppSigningIdentifier"))
 	if _r == 0 {
@@ -79,13 +87,13 @@ func (x *NEFlowMetaData) SourceAppSigningIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Audit token of the source application of the flow.
+// SourceAppAuditToken audit token of the source application of the flow.
 func (x *NEFlowMetaData) SourceAppAuditToken() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceAppAuditToken"))
 	return obj.Wrap(_r)
 }
 
-// The identifier of the content filter flow corresponding to this flow.
+// FilterFlowIdentifier the identifier of the content filter flow corresponding to this flow.
 func (x *NEFlowMetaData) FilterFlowIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterFlowIdentifier"))
 	return obj.Wrap(_r)

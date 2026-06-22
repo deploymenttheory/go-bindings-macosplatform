@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ShareRequestAccessOperation is an idiomatic wrapper over the Objective-C class CKShareRequestAccessOperation.
+//
+// It embeds [Operation], promoting that type's methods.
 type ShareRequestAccessOperation struct {
-	objref.Handle
+	Operation
 }
 
 // ShareRequestAccessOperationFromID adopts an existing Objective-C object as a ShareRequestAccessOperation
@@ -25,7 +26,8 @@ func ShareRequestAccessOperationFromID(id objc.ID) *ShareRequestAccessOperation 
 	if id == 0 {
 		return nil
 	}
-	x := &ShareRequestAccessOperation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ShareRequestAccessOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func shareRequestAccessOperationAdopt(id objc.ID) *ShareRequestAccessOperation {
 	if id == 0 {
 		return nil
 	}
-	x := &ShareRequestAccessOperation{Handle: objref.Wrap(id)}
+	x := &ShareRequestAccessOperation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ShareRequestAccessOperation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ShareRequestAccessOperation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ShareRequestAccessOperation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewShareRequestAccessOperation creates a new ShareRequestAccessOperation.
@@ -64,89 +52,69 @@ func NewShareRequestAccessOperation() *ShareRequestAccessOperation {
 	return shareRequestAccessOperationAdopt(_id)
 }
 
-// Creates a share request access operation configured with specified share URLs.
-//
-// NewShareRequestAccessOperationWithShareURLs creates a new ShareRequestAccessOperation.
+// NewShareRequestAccessOperationWithShareURLs creates a share request access operation configured with specified share URLs.
 func NewShareRequestAccessOperationWithShareURLs(shareURLs []obj.Object) *ShareRequestAccessOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKShareRequestAccessOperation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShareURLs:"), purego.SliceToNSArray(shareURLs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return shareRequestAccessOperationAdopt(_id)
 }
 
-// The URLs of the shares to request access to.
-//
-// WithShareURLs sets the collection and returns the receiver so calls can be chained.
+// WithShareURLs the URLs of the shares to request access to.
 func (x *ShareRequestAccessOperation) WithShareURLs(items ...obj.Object) *ShareRequestAccessOperation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShareURLs:"), _arr)
 	return x
 }
 
-// The operation’s configuration.
-//
-// WithConfiguration sets configuration and returns the receiver so calls can be chained.
+// WithConfiguration the operation’s configuration.
 func (x *ShareRequestAccessOperation) WithConfiguration(configuration *OperationConfiguration) *ShareRequestAccessOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
-// The operation’s group.
-//
-// WithGroup sets group and returns the receiver so calls can be chained.
+// WithGroup the operation’s group.
 func (x *ShareRequestAccessOperation) WithGroup(group *OperationGroup) *ShareRequestAccessOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation.
-//
-// WithLongLivedOperationWasPersistedBlock sets longLivedOperationWasPersistedBlock and returns the receiver so calls can be chained.
+// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
 func (x *ShareRequestAccessOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ShareRequestAccessOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
 	return x
 }
 
-// The operation's container.
-//
-// WithContainer sets container and returns the receiver so calls can be chained.
+// WithContainer the operation's container.
 func (x *ShareRequestAccessOperation) WithContainer(container *Container) *ShareRequestAccessOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network.
-//
-// WithAllowsCellularAccess sets allowsCellularAccess and returns the receiver so calls can be chained.
+// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
 func (x *ShareRequestAccessOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *ShareRequestAccessOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived.
-//
-// WithLongLived sets longLived and returns the receiver so calls can be chained.
+// WithLongLived a Boolean value that indicates whether the operation is long-lived.
 func (x *ShareRequestAccessOperation) WithLongLived(longLived bool) *ShareRequestAccessOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The timeout interval when waiting for additional data.
-//
-// WithTimeoutIntervalForRequest sets timeoutIntervalForRequest and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
 func (x *ShareRequestAccessOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ShareRequestAccessOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can use.
-//
-// WithTimeoutIntervalForResource sets timeoutIntervalForResource and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
 func (x *ShareRequestAccessOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ShareRequestAccessOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
-// The URLs of the shares to request access to. Include multiple URLs to request access to multiple shares simultaneously. The server processes each URL independently.
+// ShareURLs the URLs of the shares to request access to. Include multiple URLs to request access to multiple shares simultaneously. The server processes each URL independently.
 //
 // ShareURLs returns the collection as a Go slice.
 func (x *ShareRequestAccessOperation) ShareURLs() []obj.Object {
@@ -154,12 +122,15 @@ func (x *ShareRequestAccessOperation) ShareURLs() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetShareURLs wraps the corresponding Objective-C method.
 func (x *ShareRequestAccessOperation) SetShareURLs(shareURLs []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShareURLs:"), purego.SliceToNSArray(shareURLs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SetPerShareAccessRequestCompletionBlock wraps the corresponding Objective-C method.
+//
 // SetPerShareAccessRequestCompletionBlock blocks until the operation completes or ctx is cancelled.
-func (x *ShareRequestAccessOperation) SetPerShareAccessRequestCompletionBlock(ctx context.Context) (obj.Object, error) {
+func (x *ShareRequestAccessOperation) SetPerShareAccessRequestCompletionBlock(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -181,6 +152,8 @@ func (x *ShareRequestAccessOperation) SetPerShareAccessRequestCompletionBlock(ct
 	}
 }
 
+// SetShareRequestAccessCompletionBlock wraps the corresponding Objective-C method.
+//
 // SetShareRequestAccessCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (x *ShareRequestAccessOperation) SetShareRequestAccessCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -217,3 +190,5 @@ type ShareRequestAccessOperationable interface {
 }
 
 var _ ShareRequestAccessOperationable = (*ShareRequestAccessOperation)(nil)
+
+var _ OperationProvider = (*ShareRequestAccessOperation)(nil)

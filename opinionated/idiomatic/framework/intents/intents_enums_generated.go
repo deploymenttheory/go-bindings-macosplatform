@@ -21,6 +21,8 @@ const (
 	AnswerCallIntentResponseCodeFailureRequiringAppLaunch AnswerCallIntentResponseCode = 6
 )
 
+// String returns the AnswerCallIntentResponseCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AnswerCallIntentResponseCode) String() string {
 	switch e {
 	case AnswerCallIntentResponseCodeUnspecified:
@@ -54,6 +56,8 @@ const (
 	CallAudioRouteBluetoothAudioRoute CallAudioRoute = 2
 )
 
+// String returns the CallAudioRoute constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CallAudioRoute) String() string {
 	switch e {
 	case CallAudioRouteUnknown:
@@ -79,6 +83,8 @@ const (
 	CallCapabilityVideoCall CallCapability = 2
 )
 
+// String returns the CallCapability constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CallCapability) String() string {
 	switch e {
 	case CallCapabilityUnknown:
@@ -126,6 +132,8 @@ const (
 	CallDestinationTypeRedialDestination CallDestinationType = 4
 )
 
+// String returns the CallDestinationType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CallDestinationType) String() string {
 	switch e {
 	case CallDestinationTypeUnknown:
@@ -169,6 +177,8 @@ const (
 	CallRecordTypeOnHold CallRecordType = 8
 )
 
+// String returns the CallRecordType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CallRecordType) String() string {
 	switch e {
 	case CallRecordTypeUnknown:
@@ -217,6 +227,8 @@ const (
 	CallRecordTypeOptionOnHold CallRecordTypeOptions = 128
 )
 
+// String returns the CallRecordTypeOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CallRecordTypeOptions) String() string {
 	var parts []string
 	if e&CallRecordTypeOptionOutgoing != 0 {
@@ -266,6 +278,8 @@ const (
 	EditMessageIntentResponseCodeFailureRequiringInAppAuthentication EditMessageIntentResponseCode = 11
 )
 
+// String returns the EditMessageIntentResponseCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EditMessageIntentResponseCode) String() string {
 	switch e {
 	case EditMessageIntentResponseCodeUnspecified:
@@ -311,6 +325,8 @@ const (
 	FocusStatusAuthorizationStatusAuthorized FocusStatusAuthorizationStatus = 3
 )
 
+// String returns the FocusStatusAuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FocusStatusAuthorizationStatus) String() string {
 	switch e {
 	case FocusStatusAuthorizationStatusNotDetermined:
@@ -344,6 +360,8 @@ const (
 	GetReservationDetailsIntentResponseCodeFailureRequiringAppLaunch GetReservationDetailsIntentResponseCode = 5
 )
 
+// String returns the GetReservationDetailsIntentResponseCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GetReservationDetailsIntentResponseCode) String() string {
 	switch e {
 	case GetReservationDetailsIntentResponseCodeUnspecified:
@@ -375,6 +393,8 @@ const (
 	HangUpCallIntentResponseCodeFailureNoCallToHangUp     HangUpCallIntentResponseCode = 6
 )
 
+// String returns the HangUpCallIntentResponseCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HangUpCallIntentResponseCode) String() string {
 	switch e {
 	case HangUpCallIntentResponseCodeUnspecified:
@@ -435,6 +455,8 @@ const (
 	IntentErrorNoAppIntent                              IntentErrorCode = 10001
 )
 
+// String returns the IntentErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e IntentErrorCode) String() string {
 	switch e {
 	case IntentErrorInteractionOperationNotSupported:
@@ -529,6 +551,8 @@ const (
 	IntentHandlingStatusUserConfirmationRequired IntentHandlingStatus = 6
 )
 
+// String returns the IntentHandlingStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e IntentHandlingStatus) String() string {
 	switch e {
 	case IntentHandlingStatusUnspecified:
@@ -562,6 +586,8 @@ const (
 	InteractionDirectionIncoming InteractionDirection = 2
 )
 
+// String returns the InteractionDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e InteractionDirection) String() string {
 	switch e {
 	case InteractionDirectionUnspecified:
@@ -583,6 +609,8 @@ const (
 	MessageReactionTypeGeneric MessageReactionType = 2
 )
 
+// String returns the MessageReactionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MessageReactionType) String() string {
 	switch e {
 	case MessageReactionTypeUnknown:
@@ -608,6 +636,8 @@ const (
 	OutgoingMessageTypeOutgoingMessageAudio OutgoingMessageType = 2
 )
 
+// String returns the OutgoingMessageType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e OutgoingMessageType) String() string {
 	switch e {
 	case OutgoingMessageTypeUnknown:
@@ -645,6 +675,8 @@ const (
 	PaymentMethodTypeApplePay PaymentMethodType = 8
 )
 
+// String returns the PaymentMethodType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PaymentMethodType) String() string {
 	switch e {
 	case PaymentMethodTypeUnknown:
@@ -682,6 +714,8 @@ const (
 	PersonHandleTypePhoneNumber PersonHandleType = 2
 )
 
+// String returns the PersonHandleType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PersonHandleType) String() string {
 	switch e {
 	case PersonHandleTypeUnknown:
@@ -707,6 +741,8 @@ const (
 	PersonSuggestionTypeInstantMessageAddress PersonSuggestionType = 2
 )
 
+// String returns the PersonSuggestionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PersonSuggestionType) String() string {
 	switch e {
 	case PersonSuggestionTypeNone:
@@ -730,6 +766,8 @@ const (
 	ReservationActionTypeCheckIn ReservationActionType = 1
 )
 
+// String returns the ReservationActionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ReservationActionType) String() string {
 	switch e {
 	case ReservationActionTypeUnknown:
@@ -757,6 +795,8 @@ const (
 	ReservationStatusConfirmed ReservationStatus = 4
 )
 
+// String returns the ReservationStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ReservationStatus) String() string {
 	switch e {
 	case ReservationStatusUnknown:
@@ -795,6 +835,8 @@ const (
 	SendMessageIntentResponseCodeFailureRequiringInAppAuthentication SendMessageIntentResponseCode = 7
 )
 
+// String returns the SendMessageIntentResponseCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SendMessageIntentResponseCode) String() string {
 	switch e {
 	case SendMessageIntentResponseCodeUnspecified:
@@ -837,6 +879,8 @@ const (
 	SendMessageRecipientUnsupportedReasonRequiringInAppAuthentication SendMessageRecipientUnsupportedReason = 7
 )
 
+// String returns the SendMessageRecipientUnsupportedReason constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SendMessageRecipientUnsupportedReason) String() string {
 	switch e {
 	case SendMessageRecipientUnsupportedReasonNoAccount:
@@ -876,6 +920,8 @@ const (
 	ShareFocusStatusIntentResponseCodeFailureRequiringAppLaunch ShareFocusStatusIntentResponseCode = 5
 )
 
+// String returns the ShareFocusStatusIntentResponseCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ShareFocusStatusIntentResponseCode) String() string {
 	switch e {
 	case ShareFocusStatusIntentResponseCodeUnspecified:
@@ -903,6 +949,8 @@ const (
 	StartCallCallRecordToCallBackUnsupportedReasonNoMatchingCall StartCallCallRecordToCallBackUnsupportedReason = 1
 )
 
+// String returns the StartCallCallRecordToCallBackUnsupportedReason constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StartCallCallRecordToCallBackUnsupportedReason) String() string {
 	switch e {
 	case StartCallCallRecordToCallBackUnsupportedReasonNoMatchingCall:
@@ -920,6 +968,8 @@ const (
 	StickerTypeGeneric StickerType = 2
 )
 
+// String returns the StickerType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StickerType) String() string {
 	switch e {
 	case StickerTypeUnknown:
@@ -943,6 +993,8 @@ const (
 	TicketedEventCategoryMovie TicketedEventCategory = 1
 )
 
+// String returns the TicketedEventCategory constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TicketedEventCategory) String() string {
 	switch e {
 	case TicketedEventCategoryUnknown:
@@ -971,6 +1023,8 @@ const (
 	UnsendMessagesIntentResponseCodeFailureRequiringInAppAuthentication UnsendMessagesIntentResponseCode = 11
 )
 
+// String returns the UnsendMessagesIntentResponseCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e UnsendMessagesIntentResponseCode) String() string {
 	switch e {
 	case UnsendMessagesIntentResponseCodeUnspecified:

@@ -21,6 +21,8 @@ const (
 	FileProviderDomainRemovalModePreserveDownloadedUserData FileProviderDomainRemovalMode = 2
 )
 
+// String returns the FileProviderDomainRemovalMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FileProviderDomainRemovalMode) String() string {
 	switch e {
 	case FileProviderDomainRemovalModeRemoveAll:
@@ -45,6 +47,8 @@ const (
 	FileProviderDomainTestingModeInteractive FileProviderDomainTestingModes = 2
 )
 
+// String returns the FileProviderDomainTestingModes constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FileProviderDomainTestingModes) String() string {
 	var parts []string
 	if e&FileProviderDomainTestingModeAlwaysEnabled != 0 {
@@ -106,6 +110,8 @@ const (
 	FileProviderErrorLocalVersionConflictingWithServer    FileProviderErrorCode = -2015
 )
 
+// String returns the FileProviderErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FileProviderErrorCode) String() string {
 	switch e {
 	case FileProviderErrorNotAuthenticated:
@@ -166,6 +172,8 @@ const (
 	FileProviderDocuments FileProviderKnownFolders = 2
 )
 
+// String returns the FileProviderKnownFolders constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FileProviderKnownFolders) String() string {
 	var parts []string
 	if e&FileProviderDesktop != 0 {
@@ -188,10 +196,54 @@ const (
 	FileProviderManagerDisconnectionOptionsTemporary FileProviderManagerDisconnectionOptions = 1
 )
 
+// String returns the FileProviderManagerDisconnectionOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FileProviderManagerDisconnectionOptions) String() string {
 	var parts []string
 	if e&FileProviderManagerDisconnectionOptionsTemporary != 0 {
 		parts = append(parts, "FileProviderManagerDisconnectionOptionsTemporary")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Constants that describe why an external volume might not be eligible for storing a domain.
+// Bitmask — values may be combined with |.
+type FileProviderVolumeUnsupportedReason uint64
+
+const (
+	FileProviderVolumeUnsupportedReasonNone         FileProviderVolumeUnsupportedReason = 0
+	FileProviderVolumeUnsupportedReasonUnknown      FileProviderVolumeUnsupportedReason = 1
+	FileProviderVolumeUnsupportedReasonNonAPFS      FileProviderVolumeUnsupportedReason = 2
+	FileProviderVolumeUnsupportedReasonNonEncrypted FileProviderVolumeUnsupportedReason = 4
+	FileProviderVolumeUnsupportedReasonReadOnly     FileProviderVolumeUnsupportedReason = 8
+	FileProviderVolumeUnsupportedReasonNetwork      FileProviderVolumeUnsupportedReason = 16
+	FileProviderVolumeUnsupportedReasonQuarantined  FileProviderVolumeUnsupportedReason = 32
+)
+
+// String returns the FileProviderVolumeUnsupportedReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FileProviderVolumeUnsupportedReason) String() string {
+	var parts []string
+	if e&FileProviderVolumeUnsupportedReasonUnknown != 0 {
+		parts = append(parts, "FileProviderVolumeUnsupportedReasonUnknown")
+	}
+	if e&FileProviderVolumeUnsupportedReasonNonAPFS != 0 {
+		parts = append(parts, "FileProviderVolumeUnsupportedReasonNonAPFS")
+	}
+	if e&FileProviderVolumeUnsupportedReasonNonEncrypted != 0 {
+		parts = append(parts, "FileProviderVolumeUnsupportedReasonNonEncrypted")
+	}
+	if e&FileProviderVolumeUnsupportedReasonReadOnly != 0 {
+		parts = append(parts, "FileProviderVolumeUnsupportedReasonReadOnly")
+	}
+	if e&FileProviderVolumeUnsupportedReasonNetwork != 0 {
+		parts = append(parts, "FileProviderVolumeUnsupportedReasonNetwork")
+	}
+	if e&FileProviderVolumeUnsupportedReasonQuarantined != 0 {
+		parts = append(parts, "FileProviderVolumeUnsupportedReasonQuarantined")
 	}
 	if len(parts) == 0 {
 		return "0"

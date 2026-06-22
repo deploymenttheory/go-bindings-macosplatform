@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The context object provided to the filter packet handler.
-//
 // NEFilterPacketContext is an idiomatic wrapper over the Objective-C class NEFilterPacketContext.
+//
+// The context object provided to the filter packet handler.
 type NEFilterPacketContext struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NEFilterPacketContextFromID(id objc.ID) *NEFilterPacketContext {
 	if id == 0 {
 		return nil
 	}
-	x := &NEFilterPacketContext{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEFilterPacketContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nEFilterPacketContextAdopt(id objc.ID) *NEFilterPacketContext {
 	if id == 0 {
 		return nil
 	}
-	x := &NEFilterPacketContext{Handle: objref.Wrap(id)}
+	x := &NEFilterPacketContext{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *NEFilterPacketContext) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *NEFilterPacketContext) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEFilterPacketContext) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewNEFilterPacketContext creates a new NEFilterPacketContext.

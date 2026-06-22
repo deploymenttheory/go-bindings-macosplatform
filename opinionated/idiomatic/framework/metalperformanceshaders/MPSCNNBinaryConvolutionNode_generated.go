@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a convolution kernel with binary weights and an input image using binary approximations.
-//
 // CNNBinaryConvolutionNode is an idiomatic wrapper over the Objective-C class MPSCNNBinaryConvolutionNode.
+//
+// CNNBinaryConvolutionNode is an abstract base — you do not construct it directly. Construct one of [CNNBinaryFullyConnectedNode] and pass it where a CNNBinaryConvolutionNode is accepted.
+//
+// A representation of a convolution kernel with binary weights and an input image using binary approximations.
 type CNNBinaryConvolutionNode struct {
-	objref.Handle
+	CNNConvolutionNode
 }
 
 // CNNBinaryConvolutionNodeFromID adopts an existing Objective-C object as a CNNBinaryConvolutionNode
@@ -25,7 +26,8 @@ func CNNBinaryConvolutionNodeFromID(id objc.ID) *CNNBinaryConvolutionNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNBinaryConvolutionNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNBinaryConvolutionNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,35 +40,13 @@ func cNNBinaryConvolutionNodeAdopt(id objc.ID) *CNNBinaryConvolutionNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNBinaryConvolutionNode{Handle: objref.Wrap(id)}
+	x := &CNNBinaryConvolutionNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNBinaryConvolutionNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNBinaryConvolutionNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNBinaryConvolutionNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewCNNBinaryConvolutionNode creates a new CNNBinaryConvolutionNode.
-func NewCNNBinaryConvolutionNode() *CNNBinaryConvolutionNode {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNBinaryConvolutionNode")), objc.RegisterName("new"))
-	return cNNBinaryConvolutionNodeAdopt(_id)
-}
-
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNBinaryConvolutionNode) WithLabel(label string) *CNNBinaryConvolutionNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -79,3 +59,14 @@ type CNNBinaryConvolutionNodeable interface {
 }
 
 var _ CNNBinaryConvolutionNodeable = (*CNNBinaryConvolutionNode)(nil)
+
+// isCNNBinaryConvolutionNode marks CNNBinaryConvolutionNode — and, by embedding promotion, its
+// subclasses — as a member of the CNNBinaryConvolutionNode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CNNBinaryConvolutionNode) isCNNBinaryConvolutionNode() {}
+
+var _ CNNBinaryConvolutionNodeProvider = (*CNNBinaryConvolutionNode)(nil)
+
+var _ CNNConvolutionNodeProvider = (*CNNBinaryConvolutionNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNBinaryConvolutionNode)(nil)

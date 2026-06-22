@@ -25,7 +25,8 @@ func MTROperationalStateClusterOperationalCommandResponseParamsFromID(id objc.ID
 	if id == 0 {
 		return nil
 	}
-	x := &MTROperationalStateClusterOperationalCommandResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTROperationalStateClusterOperationalCommandResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTROperationalStateClusterOperationalCommandResponseParamsAdopt(id objc.ID)
 	if id == 0 {
 		return nil
 	}
-	x := &MTROperationalStateClusterOperationalCommandResponseParams{Handle: objref.Wrap(id)}
+	x := &MTROperationalStateClusterOperationalCommandResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTROperationalStateClusterOperationalCommandResponseParams) IsKind(clas
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTROperationalStateClusterOperationalCommandResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTROperationalStateClusterOperationalCommandResponseParamsWithResponseValueError creates a new MTROperationalStateClusterOperationalCommandResponseParams.
-func NewMTROperationalStateClusterOperationalCommandResponseParamsWithResponseValueError(responseValue obj.Object) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTROperationalStateClusterOperationalCommandResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTROperationalStateClusterOperationalCommandResponseParamsWithResponseValueError initialize an MTROperationalStateClusterOperationalCommandResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTROperationalStateClusterOperationalCommandResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTROperationalStateClusterOperationalCommandResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,17 +77,19 @@ func NewMTROperationalStateClusterOperationalCommandResponseParamsWithResponseVa
 	return mTROperationalStateClusterOperationalCommandResponseParamsAdopt(_id), nil
 }
 
-// WithCommandResponseState sets commandResponseState and returns the receiver so calls can be chained.
+// WithCommandResponseState sets the property and returns the receiver so calls can be chained.
 func (x *MTROperationalStateClusterOperationalCommandResponseParams) WithCommandResponseState(commandResponseState *MTROperationalStateClusterErrorStateStruct) *MTROperationalStateClusterOperationalCommandResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandResponseState:"), objref.IDOf(commandResponseState))
 	return x
 }
 
+// CommandResponseState wraps the corresponding Objective-C method.
 func (x *MTROperationalStateClusterOperationalCommandResponseParams) CommandResponseState() *MTROperationalStateClusterErrorStateStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commandResponseState"))
 	return MTROperationalStateClusterErrorStateStructFromID(_r)
 }
 
+// SetCommandResponseState wraps the corresponding Objective-C method.
 func (x *MTROperationalStateClusterOperationalCommandResponseParams) SetCommandResponseState(commandResponseState *MTROperationalStateClusterErrorStateStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandResponseState:"), objref.IDOf(commandResponseState))
 }

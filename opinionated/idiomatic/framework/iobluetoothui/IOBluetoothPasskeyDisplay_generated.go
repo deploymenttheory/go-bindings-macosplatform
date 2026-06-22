@@ -23,7 +23,8 @@ func BluetoothPasskeyDisplayFromID(id objc.ID) *BluetoothPasskeyDisplay {
 	if id == 0 {
 		return nil
 	}
-	x := &BluetoothPasskeyDisplay{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BluetoothPasskeyDisplay{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func bluetoothPasskeyDisplayAdopt(id objc.ID) *BluetoothPasskeyDisplay {
 	if id == 0 {
 		return nil
 	}
-	x := &BluetoothPasskeyDisplay{Handle: objref.Wrap(id)}
+	x := &BluetoothPasskeyDisplay{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,108 +58,128 @@ func (x *BluetoothPasskeyDisplay) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BluetoothPasskeyDisplay) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBluetoothPasskeyDisplay creates a new BluetoothPasskeyDisplay.
 func NewBluetoothPasskeyDisplay() *BluetoothPasskeyDisplay {
 	_id := objc.Send[objc.ID](objc.ID(_class("IOBluetoothPasskeyDisplay")), objc.RegisterName("new"))
 	return bluetoothPasskeyDisplayAdopt(_id)
 }
 
-// WithUsePasskeyNotificaitons sets usePasskeyNotificaitons and returns the receiver so calls can be chained.
+// WithUsePasskeyNotificaitons sets the property and returns the receiver so calls can be chained.
 func (x *BluetoothPasskeyDisplay) WithUsePasskeyNotificaitons(usePasskeyNotificaitons bool) *BluetoothPasskeyDisplay {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsePasskeyNotificaitons:"), usePasskeyNotificaitons)
 	return x
 }
 
-// WithIsIncomingRequest sets isIncomingRequest and returns the receiver so calls can be chained.
+// WithIsIncomingRequest sets the property and returns the receiver so calls can be chained.
 func (x *BluetoothPasskeyDisplay) WithIsIncomingRequest(isIncomingRequest bool) *BluetoothPasskeyDisplay {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsIncomingRequest:"), isIncomingRequest)
 	return x
 }
 
-// WithPasskey sets passkey and returns the receiver so calls can be chained.
+// WithPasskey sets the property and returns the receiver so calls can be chained.
 func (x *BluetoothPasskeyDisplay) WithPasskey(passkey string) *BluetoothPasskeyDisplay {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPasskey:"), purego.NSString(passkey))
 	return x
 }
 
-// WithReturnImage sets returnImage and returns the receiver so calls can be chained.
+// WithReturnImage sets the property and returns the receiver so calls can be chained.
 func (x *BluetoothPasskeyDisplay) WithReturnImage(returnImage obj.Object) *BluetoothPasskeyDisplay {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnImage:"), objref.IDOf(returnImage))
 	return x
 }
 
-// WithReturnHighlightImage sets returnHighlightImage and returns the receiver so calls can be chained.
+// WithReturnHighlightImage sets the property and returns the receiver so calls can be chained.
 func (x *BluetoothPasskeyDisplay) WithReturnHighlightImage(returnHighlightImage obj.Object) *BluetoothPasskeyDisplay {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnHighlightImage:"), objref.IDOf(returnHighlightImage))
 	return x
 }
 
-// WithCenteredView sets centeredView and returns the receiver so calls can be chained.
+// WithCenteredView sets the property and returns the receiver so calls can be chained.
 func (x *BluetoothPasskeyDisplay) WithCenteredView(centeredView obj.Object) *BluetoothPasskeyDisplay {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCenteredView:"), objref.IDOf(centeredView))
 	return x
 }
 
-// WithBackgroundImageConstraint sets backgroundImageConstraint and returns the receiver so calls can be chained.
+// WithBackgroundImageConstraint sets the property and returns the receiver so calls can be chained.
 func (x *BluetoothPasskeyDisplay) WithBackgroundImageConstraint(backgroundImageConstraint obj.Object) *BluetoothPasskeyDisplay {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundImageConstraint:"), objref.IDOf(backgroundImageConstraint))
 	return x
 }
 
+// SetPasskeyForDeviceUsingSSP wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) SetPasskeyForDeviceUsingSSP(inString string, device obj.Object, isSSP bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPasskey:forDevice:usingSSP:"), purego.NSString(inString), objref.IDOf(device), isSSP)
 }
 
+// AdvancePasskeyIndicator wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) AdvancePasskeyIndicator() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("advancePasskeyIndicator"))
 }
 
+// RetreatPasskeyIndicator wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) RetreatPasskeyIndicator() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("retreatPasskeyIndicator"))
 }
 
+// ResetPasskeyIndicator wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) ResetPasskeyIndicator() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetPasskeyIndicator"))
 }
 
+// SetupUIForDevice wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) SetupUIForDevice(device obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setupUIForDevice:"), objref.IDOf(device))
 }
 
+// SetupUIForSSPDevice wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) SetupUIForSSPDevice(device obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setupUIForSSPDevice:"), objref.IDOf(device))
 }
 
+// SetPasskeyString wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) SetPasskeyString(inString string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPasskeyString:"), purego.NSString(inString))
 }
 
+// SetPasskeyIndicatorEnabled wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) SetPasskeyIndicatorEnabled(inEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPasskeyIndicatorEnabled:"), inEnabled)
 }
 
+// ResetAll wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) ResetAll() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetAll"))
 }
 
+// UsePasskeyNotificaitons wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) UsePasskeyNotificaitons() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usePasskeyNotificaitons"))
 	return _r
 }
 
+// SetUsePasskeyNotificaitons wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) SetUsePasskeyNotificaitons(usePasskeyNotificaitons bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsePasskeyNotificaitons:"), usePasskeyNotificaitons)
 }
 
+// IsIncomingRequest wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) IsIncomingRequest() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isIncomingRequest"))
 	return _r
 }
 
+// SetIsIncomingRequest wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) SetIsIncomingRequest(isIncomingRequest bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsIncomingRequest:"), isIncomingRequest)
 }
 
+// Passkey wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) Passkey() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("passkey"))
 	if _r == 0 {
@@ -166,42 +188,51 @@ func (x *BluetoothPasskeyDisplay) Passkey() string {
 	return purego.GoString(_r)
 }
 
+// SetPasskey wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) SetPasskey(passkey string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPasskey:"), purego.NSString(passkey))
 }
 
+// ReturnImage wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) ReturnImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("returnImage"))
 	return obj.Wrap(_r)
 }
 
+// SetReturnImage wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) SetReturnImage(returnImage obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnImage:"), objref.IDOf(returnImage))
 }
 
+// ReturnHighlightImage wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) ReturnHighlightImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("returnHighlightImage"))
 	return obj.Wrap(_r)
 }
 
+// SetReturnHighlightImage wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) SetReturnHighlightImage(returnHighlightImage obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnHighlightImage:"), objref.IDOf(returnHighlightImage))
 }
 
+// CenteredView wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) CenteredView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("centeredView"))
 	return obj.Wrap(_r)
 }
 
+// SetCenteredView wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) SetCenteredView(centeredView obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCenteredView:"), objref.IDOf(centeredView))
 }
 
+// BackgroundImageConstraint wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) BackgroundImageConstraint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundImageConstraint"))
 	return obj.Wrap(_r)
 }
 
+// SetBackgroundImageConstraint wraps the corresponding Objective-C method.
 func (x *BluetoothPasskeyDisplay) SetBackgroundImageConstraint(backgroundImageConstraint obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundImageConstraint:"), objref.IDOf(backgroundImageConstraint))
 }

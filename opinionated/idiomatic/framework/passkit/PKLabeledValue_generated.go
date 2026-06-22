@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that can represent a detail about a payment card or other item.
-//
 // LabeledValue is an idiomatic wrapper over the Objective-C class PKLabeledValue.
+//
+// An object that can represent a detail about a payment card or other item.
 type LabeledValue struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LabeledValueFromID(id objc.ID) *LabeledValue {
 	if id == 0 {
 		return nil
 	}
-	x := &LabeledValue{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LabeledValue{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func labeledValueAdopt(id objc.ID) *LabeledValue {
 	if id == 0 {
 		return nil
 	}
-	x := &LabeledValue{Handle: objref.Wrap(id)}
+	x := &LabeledValue{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *LabeledValue) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Instantiates a new labeled value object with the specified label and value strings.
-//
-// NewLabeledValueWithLabelValue creates a new LabeledValue.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LabeledValue) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLabeledValueWithLabelValue instantiates a new labeled value object with the specified label and value strings.
 func NewLabeledValueWithLabelValue(label string, value string) *LabeledValue {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKLabeledValue")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLabel:value:"), purego.NSString(label), purego.NSString(value))
 	return labeledValueAdopt(_id)
 }
 
+// Label wraps the corresponding Objective-C method.
 func (x *LabeledValue) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -75,6 +82,7 @@ func (x *LabeledValue) Label() string {
 	return purego.GoString(_r)
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *LabeledValue) Value() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	if _r == 0 {

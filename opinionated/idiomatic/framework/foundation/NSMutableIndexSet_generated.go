@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mutable collection of unique integer values that represent indexes in another collection.
-//
 // MutableIndexSet is an idiomatic wrapper over the Objective-C class NSMutableIndexSet.
+//
+// It embeds [IndexSet], promoting that type's methods.
+//
+// A mutable collection of unique integer values that represent indexes in another collection.
 type MutableIndexSet struct {
-	objref.Handle
+	IndexSet
 }
 
 // MutableIndexSetFromID adopts an existing Objective-C object as a MutableIndexSet
@@ -25,7 +26,8 @@ func MutableIndexSetFromID(id objc.ID) *MutableIndexSet {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableIndexSet{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableIndexSet{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func mutableIndexSetAdopt(id objc.ID) *MutableIndexSet {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableIndexSet{Handle: objref.Wrap(id)}
+	x := &MutableIndexSet{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MutableIndexSet) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableIndexSet) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableIndexSet) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMutableIndexSet creates a new MutableIndexSet.
@@ -64,38 +52,38 @@ func NewMutableIndexSet() *MutableIndexSet {
 	return mutableIndexSetAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *MutableIndexSet) WithScriptingProperties(scriptingProperties obj.Object) *MutableIndexSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Adds the indexes in an index set to the receiver.
+// AddIndexes adds the indexes in an index set to the receiver.
 func (x *MutableIndexSet) AddIndexes(indexSet *IndexSet) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addIndexes:"), objref.IDOf(indexSet))
 }
 
-// Removes the indexes in an index set from the receiver.
+// RemoveIndexes removes the indexes in an index set from the receiver.
 func (x *MutableIndexSet) RemoveIndexes(indexSet *IndexSet) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeIndexes:"), objref.IDOf(indexSet))
 }
 
-// Removes the receiver’s indexes.
+// RemoveAllIndexes removes the receiver’s indexes.
 func (x *MutableIndexSet) RemoveAllIndexes() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllIndexes"))
 }
 
-// Adds an index to the receiver.
+// AddIndex adds an index to the receiver.
 func (x *MutableIndexSet) AddIndex(value int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addIndex:"), value)
 }
 
-// Removes an index from the receiver.
+// RemoveIndex removes an index from the receiver.
 func (x *MutableIndexSet) RemoveIndex(value int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeIndex:"), value)
 }
 
-// Shifts a group of indexes to the left or the right within the receiver.
+// ShiftIndexesStartingAtIndexBy shifts a group of indexes to the left or the right within the receiver.
 func (x *MutableIndexSet) ShiftIndexesStartingAtIndexBy(index int, delta int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shiftIndexesStartingAtIndex:by:"), index, delta)
 }
@@ -113,3 +101,5 @@ type MutableIndexSetable interface {
 }
 
 var _ MutableIndexSetable = (*MutableIndexSet)(nil)
+
+var _ IndexSetProvider = (*MutableIndexSet)(nil)

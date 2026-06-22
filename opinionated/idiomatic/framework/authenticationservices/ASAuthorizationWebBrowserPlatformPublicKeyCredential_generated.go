@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A structure that describes a passkey stored in the keychain, or managed by a third-party credential manager.
-//
 // AuthorizationWebBrowserPlatformPublicKeyCredential is an idiomatic wrapper over the Objective-C class ASAuthorizationWebBrowserPlatformPublicKeyCredential.
+//
+// A structure that describes a passkey stored in the keychain, or managed by a third-party credential manager.
 type AuthorizationWebBrowserPlatformPublicKeyCredential struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationWebBrowserPlatformPublicKeyCredentialFromID(id objc.ID) *Autho
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationWebBrowserPlatformPublicKeyCredential{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationWebBrowserPlatformPublicKeyCredential{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationWebBrowserPlatformPublicKeyCredentialAdopt(id objc.ID) *Author
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationWebBrowserPlatformPublicKeyCredential{Handle: objref.Wrap(id)}
+	x := &AuthorizationWebBrowserPlatformPublicKeyCredential{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) IsKind(className st
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAuthorizationWebBrowserPlatformPublicKeyCredential creates a new AuthorizationWebBrowserPlatformPublicKeyCredential.
 func NewAuthorizationWebBrowserPlatformPublicKeyCredential() *AuthorizationWebBrowserPlatformPublicKeyCredential {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationWebBrowserPlatformPublicKeyCredential")), objc.RegisterName("new"))
 	return authorizationWebBrowserPlatformPublicKeyCredentialAdopt(_id)
 }
 
-// The user name of the saved credential.
+// Name the user name of the saved credential.
 func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) Name() string {
 	return purego.GoString(_r)
 }
 
-// A user-specified title for the credential.
+// CustomTitle a user-specified title for the credential.
 func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) CustomTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customTitle"))
 	if _r == 0 {
@@ -82,7 +90,7 @@ func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) CustomTitle() strin
 	return purego.GoString(_r)
 }
 
-// The "relying party" (generally website) the credential was saved for.
+// RelyingParty the "relying party" (generally website) the credential was saved for.
 func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) RelyingParty() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relyingParty"))
 	if _r == 0 {
@@ -91,19 +99,19 @@ func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) RelyingParty() stri
 	return purego.GoString(_r)
 }
 
-// A unique identifier for this credential.
+// CredentialID a unique identifier for this credential.
 func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) CredentialID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentialID"))
 	return obj.Wrap(_r)
 }
 
-// A unique identifier for the user account associated with this credential. One account may have multiple associated credentials.
+// UserHandle a unique identifier for the user account associated with this credential. One account may have multiple associated credentials.
 func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) UserHandle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userHandle"))
 	return obj.Wrap(_r)
 }
 
-// The localized name of the credential provider that provided this passkey.
+// ProviderName the localized name of the credential provider that provided this passkey.
 func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) ProviderName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("providerName"))
 	if _r == 0 {

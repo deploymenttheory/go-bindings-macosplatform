@@ -25,7 +25,8 @@ func MTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsFromID(id objc.ID) *M
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsAdopt(id objc.ID) *MT
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams{Handle: objref.Wrap(id)}
+	x := &MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) IsKind(classNam
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-//
-// NewMTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsWithResponseValueError creates a new MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams.
-func NewMTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsWithResponseValueError initialize an MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,32 +77,36 @@ func NewMTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsWithResponseValueE
 	return mTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsAdopt(_id), nil
 }
 
-// WithSystemTimeMs sets systemTimeMs and returns the receiver so calls can be chained.
+// WithSystemTimeMs sets the property and returns the receiver so calls can be chained.
 func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) WithSystemTimeMs(systemTimeMs obj.Object) *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSystemTimeMs:"), objref.IDOf(systemTimeMs))
 	return x
 }
 
-// WithPosixTimeMs sets posixTimeMs and returns the receiver so calls can be chained.
+// WithPosixTimeMs sets the property and returns the receiver so calls can be chained.
 func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) WithPosixTimeMs(posixTimeMs obj.Object) *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosixTimeMs:"), objref.IDOf(posixTimeMs))
 	return x
 }
 
+// SystemTimeMs wraps the corresponding Objective-C method.
 func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) SystemTimeMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("systemTimeMs"))
 	return obj.Wrap(_r)
 }
 
+// SetSystemTimeMs wraps the corresponding Objective-C method.
 func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) SetSystemTimeMs(systemTimeMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSystemTimeMs:"), objref.IDOf(systemTimeMs))
 }
 
+// PosixTimeMs wraps the corresponding Objective-C method.
 func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) PosixTimeMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("posixTimeMs"))
 	return obj.Wrap(_r)
 }
 
+// SetPosixTimeMs wraps the corresponding Objective-C method.
 func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) SetPosixTimeMs(posixTimeMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosixTimeMs:"), objref.IDOf(posixTimeMs))
 }

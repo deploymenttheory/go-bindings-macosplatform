@@ -6,15 +6,17 @@ package mpsneuralnetwork
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NNReductionColumnMaxNode is an idiomatic wrapper over the Objective-C class MPSNNReductionColumnMaxNode.
+//
+// It embeds [NNUnaryReductionNode], promoting that type's methods.
 type NNReductionColumnMaxNode struct {
-	objref.Handle
+	NNUnaryReductionNode
 }
 
 // NNReductionColumnMaxNodeFromID adopts an existing Objective-C object as a NNReductionColumnMaxNode
@@ -23,7 +25,8 @@ func NNReductionColumnMaxNodeFromID(id objc.ID) *NNReductionColumnMaxNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNReductionColumnMaxNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNReductionColumnMaxNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +39,10 @@ func nNReductionColumnMaxNodeAdopt(id objc.ID) *NNReductionColumnMaxNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNReductionColumnMaxNode{Handle: objref.Wrap(id)}
+	x := &NNReductionColumnMaxNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NNReductionColumnMaxNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNReductionColumnMaxNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNReductionColumnMaxNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNNReductionColumnMaxNode creates a new NNReductionColumnMaxNode.
@@ -62,9 +51,13 @@ func NewNNReductionColumnMaxNode() *NNReductionColumnMaxNode {
 	return nNReductionColumnMaxNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithClipRectSource the clip rectangle to apply to the source image.
+func (x *NNReductionColumnMaxNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnMaxNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return x
+}
+
+// WithLabel a string to help identify this object.
 func (x *NNReductionColumnMaxNode) WithLabel(label string) *NNReductionColumnMaxNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -73,7 +66,12 @@ func (x *NNReductionColumnMaxNode) WithLabel(label string) *NNReductionColumnMax
 // NNReductionColumnMaxNodeable is the interface implemented by [NNReductionColumnMaxNode], for mocking and DI.
 type NNReductionColumnMaxNodeable interface {
 	obj.Object
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnMaxNode
 	WithLabel(label string) *NNReductionColumnMaxNode
 }
 
 var _ NNReductionColumnMaxNodeable = (*NNReductionColumnMaxNode)(nil)
+
+var _ NNUnaryReductionNodeProvider = (*NNReductionColumnMaxNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNReductionColumnMaxNode)(nil)

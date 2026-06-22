@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A sample that store a prescription for contacts.
-//
 // ContactsPrescription is an idiomatic wrapper over the Objective-C class HKContactsPrescription.
+//
+// It embeds [VisionPrescription], promoting that type's methods.
+//
+// A sample that store a prescription for contacts.
 type ContactsPrescription struct {
-	objref.Handle
+	VisionPrescription
 }
 
 // ContactsPrescriptionFromID adopts an existing Objective-C object as a ContactsPrescription
@@ -25,7 +26,8 @@ func ContactsPrescriptionFromID(id objc.ID) *ContactsPrescription {
 	if id == 0 {
 		return nil
 	}
-	x := &ContactsPrescription{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContactsPrescription{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func contactsPrescriptionAdopt(id objc.ID) *ContactsPrescription {
 	if id == 0 {
 		return nil
 	}
-	x := &ContactsPrescription{Handle: objref.Wrap(id)}
+	x := &ContactsPrescription{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ContactsPrescription) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContactsPrescription) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContactsPrescription) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewContactsPrescription creates a new ContactsPrescription.
@@ -64,19 +52,19 @@ func NewContactsPrescription() *ContactsPrescription {
 	return contactsPrescriptionAdopt(_id)
 }
 
-// The right eye lens specification
+// RightEye the right eye lens specification
 func (x *ContactsPrescription) RightEye() *ContactsLensSpecification {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightEye"))
 	return ContactsLensSpecificationFromID(_r)
 }
 
-// The left eye lens specification
+// LeftEye the left eye lens specification
 func (x *ContactsPrescription) LeftEye() *ContactsLensSpecification {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftEye"))
 	return ContactsLensSpecificationFromID(_r)
 }
 
-// The prescribed brand after contact lens fitting
+// Brand the prescribed brand after contact lens fitting
 func (x *ContactsPrescription) Brand() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("brand"))
 	if _r == 0 {
@@ -94,3 +82,9 @@ type ContactsPrescriptionable interface {
 }
 
 var _ ContactsPrescriptionable = (*ContactsPrescription)(nil)
+
+var _ VisionPrescriptionProvider = (*ContactsPrescription)(nil)
+
+var _ SampleProvider = (*ContactsPrescription)(nil)
+
+var _ ObjectProvider = (*ContactsPrescription)(nil)

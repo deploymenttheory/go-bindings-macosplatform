@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRAccessControlClusterExtensionEntry is an idiomatic wrapper over the Objective-C class MTRAccessControlClusterExtensionEntry.
+//
+// It embeds [MTRAccessControlClusterAccessControlExtensionStruct], promoting that type's methods.
 type MTRAccessControlClusterExtensionEntry struct {
-	objref.Handle
+	MTRAccessControlClusterAccessControlExtensionStruct
 }
 
 // MTRAccessControlClusterExtensionEntryFromID adopts an existing Objective-C object as a MTRAccessControlClusterExtensionEntry
@@ -23,7 +24,8 @@ func MTRAccessControlClusterExtensionEntryFromID(id objc.ID) *MTRAccessControlCl
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAccessControlClusterExtensionEntry{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRAccessControlClusterExtensionEntry{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRAccessControlClusterExtensionEntryAdopt(id objc.ID) *MTRAccessControlClu
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAccessControlClusterExtensionEntry{Handle: objref.Wrap(id)}
+	x := &MTRAccessControlClusterExtensionEntry{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRAccessControlClusterExtensionEntry) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRAccessControlClusterExtensionEntry) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRAccessControlClusterExtensionEntry) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRAccessControlClusterExtensionEntry creates a new MTRAccessControlClusterExtensionEntry.
@@ -62,13 +50,13 @@ func NewMTRAccessControlClusterExtensionEntry() *MTRAccessControlClusterExtensio
 	return mTRAccessControlClusterExtensionEntryAdopt(_id)
 }
 
-// WithData sets data and returns the receiver so calls can be chained.
+// WithData sets the property and returns the receiver so calls can be chained.
 func (x *MTRAccessControlClusterExtensionEntry) WithData(data obj.Object) *MTRAccessControlClusterExtensionEntry {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
 	return x
 }
 
-// WithFabricIndex sets fabricIndex and returns the receiver so calls can be chained.
+// WithFabricIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRAccessControlClusterExtensionEntry) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterExtensionEntry {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return x
@@ -82,3 +70,5 @@ type MTRAccessControlClusterExtensionEntryable interface {
 }
 
 var _ MTRAccessControlClusterExtensionEntryable = (*MTRAccessControlClusterExtensionEntry)(nil)
+
+var _ MTRAccessControlClusterAccessControlExtensionStructProvider = (*MTRAccessControlClusterExtensionEntry)(nil)

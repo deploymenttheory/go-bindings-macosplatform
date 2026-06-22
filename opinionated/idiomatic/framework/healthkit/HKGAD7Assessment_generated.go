@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // GAD7Assessment is an idiomatic wrapper over the Objective-C class HKGAD7Assessment.
+//
+// It embeds [ScoredAssessment], promoting that type's methods.
 type GAD7Assessment struct {
-	objref.Handle
+	ScoredAssessment
 }
 
 // GAD7AssessmentFromID adopts an existing Objective-C object as a GAD7Assessment
@@ -23,7 +24,8 @@ func GAD7AssessmentFromID(id objc.ID) *GAD7Assessment {
 	if id == 0 {
 		return nil
 	}
-	x := &GAD7Assessment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GAD7Assessment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func gAD7AssessmentAdopt(id objc.ID) *GAD7Assessment {
 	if id == 0 {
 		return nil
 	}
-	x := &GAD7Assessment{Handle: objref.Wrap(id)}
+	x := &GAD7Assessment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GAD7Assessment) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GAD7Assessment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GAD7Assessment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGAD7Assessment creates a new GAD7Assessment.
@@ -62,7 +50,7 @@ func NewGAD7Assessment() *GAD7Assessment {
 	return gAD7AssessmentAdopt(_id)
 }
 
-// Answers on the GAD-7 assessment. There are exactly 7 answers, one for each multiple choice question. Each answer is of type `HKGAD7AssessmentAnswer`.
+// Answers answers on the GAD-7 assessment. There are exactly 7 answers, one for each multiple choice question. Each answer is of type `HKGAD7AssessmentAnswer`.
 //
 // Answers returns the collection as a Go slice.
 func (x *GAD7Assessment) Answers() []obj.Object {
@@ -70,7 +58,7 @@ func (x *GAD7Assessment) Answers() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The risk determined by the score on a GAD-7 assessment.
+// Risk the risk determined by the score on a GAD-7 assessment.
 func (x *GAD7Assessment) Risk() GAD7AssessmentRisk {
 	_r := objc.Send[GAD7AssessmentRisk](objref.IDOf(x), objc.RegisterName("risk"))
 	return _r
@@ -84,3 +72,9 @@ type GAD7Assessmentable interface {
 }
 
 var _ GAD7Assessmentable = (*GAD7Assessment)(nil)
+
+var _ ScoredAssessmentProvider = (*GAD7Assessment)(nil)
+
+var _ SampleProvider = (*GAD7Assessment)(nil)
+
+var _ ObjectProvider = (*GAD7Assessment)(nil)

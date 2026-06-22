@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object for reading and writing data to and from a UDP conversation being proxied by the provider.
-//
 // NEAppProxyUDPFlow is an idiomatic wrapper over the Objective-C class NEAppProxyUDPFlow.
+//
+// It embeds [NEAppProxyFlow], promoting that type's methods.
+//
+// An object for reading and writing data to and from a UDP conversation being proxied by the provider.
 type NEAppProxyUDPFlow struct {
-	objref.Handle
+	NEAppProxyFlow
 }
 
 // NEAppProxyUDPFlowFromID adopts an existing Objective-C object as a NEAppProxyUDPFlow
@@ -27,7 +28,8 @@ func NEAppProxyUDPFlowFromID(id objc.ID) *NEAppProxyUDPFlow {
 	if id == 0 {
 		return nil
 	}
-	x := &NEAppProxyUDPFlow{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEAppProxyUDPFlow{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,24 +42,10 @@ func nEAppProxyUDPFlowAdopt(id objc.ID) *NEAppProxyUDPFlow {
 	if id == 0 {
 		return nil
 	}
-	x := &NEAppProxyUDPFlow{Handle: objref.Wrap(id)}
+	x := &NEAppProxyUDPFlow{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NEAppProxyUDPFlow) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEAppProxyUDPFlow) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEAppProxyUDPFlow) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNEAppProxyUDPFlow creates a new NEAppProxyUDPFlow.
@@ -66,15 +54,13 @@ func NewNEAppProxyUDPFlow() *NEAppProxyUDPFlow {
 	return nEAppProxyUDPFlowAdopt(_id)
 }
 
-// The network interface, if any, used by this flow.
-//
-// WithNetworkInterface sets networkInterface and returns the receiver so calls can be chained.
+// WithNetworkInterface the network interface, if any, used by this flow.
 func (x *NEAppProxyUDPFlow) WithNetworkInterface(networkInterface obj.Object) *NEAppProxyUDPFlow {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkInterface:"), objref.IDOf(networkInterface))
 	return x
 }
 
-// Write datagrams to the flow.
+// WriteDatagramsSentByEndpoints write datagrams to the flow.
 //
 // WriteDatagramsSentByEndpoints blocks until the operation completes or ctx is cancelled.
 func (x *NEAppProxyUDPFlow) WriteDatagramsSentByEndpoints(ctx context.Context, datagrams []obj.Object, remoteEndpoints []obj.Object) error {
@@ -93,7 +79,7 @@ func (x *NEAppProxyUDPFlow) WriteDatagramsSentByEndpoints(ctx context.Context, d
 	}
 }
 
-// An `nw_endpoint_t` object containing the local endpoint of the flow's corresponding socket.
+// LocalFlowEndpoint an `nw_endpoint_t` object containing the local endpoint of the flow's corresponding socket.
 func (x *NEAppProxyUDPFlow) LocalFlowEndpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localFlowEndpoint"))
 	return obj.Wrap(_r)
@@ -108,3 +94,5 @@ type NEAppProxyUDPFlowable interface {
 }
 
 var _ NEAppProxyUDPFlowable = (*NEAppProxyUDPFlow)(nil)
+
+var _ NEAppProxyFlowProvider = (*NEAppProxyUDPFlow)(nil)

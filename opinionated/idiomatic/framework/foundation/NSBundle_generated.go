@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// A representation of the code and resources stored in a bundle directory on disk.
-//
 // Bundle is an idiomatic wrapper over the Objective-C class NSBundle.
+//
+// A representation of the code and resources stored in a bundle directory on disk.
 type Bundle struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func BundleFromID(id objc.ID) *Bundle {
 	if id == 0 {
 		return nil
 	}
-	x := &Bundle{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Bundle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func bundleAdopt(id objc.ID) *Bundle {
 	if id == 0 {
 		return nil
 	}
-	x := &Bundle{Handle: objref.Wrap(id)}
+	x := &Bundle{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,6 +62,12 @@ func (x *Bundle) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Bundle) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBundleWithPath creates a new Bundle.
 func NewBundleWithPath(path string) *Bundle {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("alloc"))
@@ -74,22 +82,26 @@ func NewBundleWithURL(url string) *Bundle {
 	return bundleAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Bundle) WithScriptingProperties(scriptingProperties obj.Object) *Bundle {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Load wraps the corresponding Objective-C method.
 func (x *Bundle) Load() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("load"))
 	return _r
 }
 
+// Unload wraps the corresponding Objective-C method.
 func (x *Bundle) Unload() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("unload"))
 	return _r
 }
 
+// PreflightAndReturnError wraps the corresponding Objective-C method.
+//
 // PreflightAndReturnError returns an error if the operation did not succeed.
 func (x *Bundle) PreflightAndReturnError() error {
 	var _nsErr uintptr
@@ -100,6 +112,8 @@ func (x *Bundle) PreflightAndReturnError() error {
 	return nil
 }
 
+// LoadAndReturnError wraps the corresponding Objective-C method.
+//
 // LoadAndReturnError returns an error if the operation did not succeed.
 func (x *Bundle) LoadAndReturnError() error {
 	var _nsErr uintptr
@@ -110,11 +124,13 @@ func (x *Bundle) LoadAndReturnError() error {
 	return nil
 }
 
+// URLForAuxiliaryExecutable wraps the corresponding Objective-C method.
 func (x *Bundle) URLForAuxiliaryExecutable(executableName string) *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLForAuxiliaryExecutable:"), purego.NSString(executableName))
 	return URLFromID(_r)
 }
 
+// PathForAuxiliaryExecutable wraps the corresponding Objective-C method.
 func (x *Bundle) PathForAuxiliaryExecutable(executableName string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathForAuxiliaryExecutable:"), purego.NSString(executableName))
 	if _r == 0 {
@@ -123,31 +139,37 @@ func (x *Bundle) PathForAuxiliaryExecutable(executableName string) string {
 	return purego.GoString(_r)
 }
 
+// URLForResourceWithExtension wraps the corresponding Objective-C method.
 func (x *Bundle) URLForResourceWithExtension(name string, ext string) *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLForResource:withExtension:"), purego.NSString(name), purego.NSString(ext))
 	return URLFromID(_r)
 }
 
+// URLForResourceWithExtensionSubdirectory wraps the corresponding Objective-C method.
 func (x *Bundle) URLForResourceWithExtensionSubdirectory(name string, ext string, subpath string) *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLForResource:withExtension:subdirectory:"), purego.NSString(name), purego.NSString(ext), purego.NSString(subpath))
 	return URLFromID(_r)
 }
 
+// URLForResourceWithExtensionSubdirectoryLocalization wraps the corresponding Objective-C method.
 func (x *Bundle) URLForResourceWithExtensionSubdirectoryLocalization(name string, ext string, subpath string, localizationName string) *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLForResource:withExtension:subdirectory:localization:"), purego.NSString(name), purego.NSString(ext), purego.NSString(subpath), purego.NSString(localizationName))
 	return URLFromID(_r)
 }
 
+// URLsForResourcesWithExtensionSubdirectory wraps the corresponding Objective-C method.
 func (x *Bundle) URLsForResourcesWithExtensionSubdirectory(ext string, subpath string) []*URL {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLsForResourcesWithExtension:subdirectory:"), purego.NSString(ext), purego.NSString(subpath))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *URL { return URLFromID(_id) })
 }
 
+// URLsForResourcesWithExtensionSubdirectoryLocalization wraps the corresponding Objective-C method.
 func (x *Bundle) URLsForResourcesWithExtensionSubdirectoryLocalization(ext string, subpath string, localizationName string) []*URL {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLsForResourcesWithExtension:subdirectory:localization:"), purego.NSString(ext), purego.NSString(subpath), purego.NSString(localizationName))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *URL { return URLFromID(_id) })
 }
 
+// PathForResourceOfType wraps the corresponding Objective-C method.
 func (x *Bundle) PathForResourceOfType(name string, ext string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathForResource:ofType:"), purego.NSString(name), purego.NSString(ext))
 	if _r == 0 {
@@ -156,6 +178,7 @@ func (x *Bundle) PathForResourceOfType(name string, ext string) string {
 	return purego.GoString(_r)
 }
 
+// PathForResourceOfTypeInDirectory wraps the corresponding Objective-C method.
 func (x *Bundle) PathForResourceOfTypeInDirectory(name string, ext string, subpath string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathForResource:ofType:inDirectory:"), purego.NSString(name), purego.NSString(ext), purego.NSString(subpath))
 	if _r == 0 {
@@ -164,6 +187,7 @@ func (x *Bundle) PathForResourceOfTypeInDirectory(name string, ext string, subpa
 	return purego.GoString(_r)
 }
 
+// PathForResourceOfTypeInDirectoryForLocalization wraps the corresponding Objective-C method.
 func (x *Bundle) PathForResourceOfTypeInDirectoryForLocalization(name string, ext string, subpath string, localizationName string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathForResource:ofType:inDirectory:forLocalization:"), purego.NSString(name), purego.NSString(ext), purego.NSString(subpath), purego.NSString(localizationName))
 	if _r == 0 {
@@ -172,16 +196,19 @@ func (x *Bundle) PathForResourceOfTypeInDirectoryForLocalization(name string, ex
 	return purego.GoString(_r)
 }
 
+// PathsForResourcesOfTypeInDirectory wraps the corresponding Objective-C method.
 func (x *Bundle) PathsForResourcesOfTypeInDirectory(ext string, subpath string) []string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathsForResourcesOfType:inDirectory:"), purego.NSString(ext), purego.NSString(subpath))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// PathsForResourcesOfTypeInDirectoryForLocalization wraps the corresponding Objective-C method.
 func (x *Bundle) PathsForResourcesOfTypeInDirectoryForLocalization(ext string, subpath string, localizationName string) []string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathsForResourcesOfType:inDirectory:forLocalization:"), purego.NSString(ext), purego.NSString(subpath), purego.NSString(localizationName))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// LocalizedStringForKeyValueTable wraps the corresponding Objective-C method.
 func (x *Bundle) LocalizedStringForKeyValueTable(key string, value string, tableName string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringForKey:value:table:"), purego.NSString(key), purego.NSString(value), purego.NSString(tableName))
 	if _r == 0 {
@@ -190,12 +217,13 @@ func (x *Bundle) LocalizedStringForKeyValueTable(key string, value string, table
 	return purego.GoString(_r)
 }
 
+// LocalizedAttributedStringForKeyValueTable wraps the corresponding Objective-C method.
 func (x *Bundle) LocalizedAttributedStringForKeyValueTable(key string, value string, tableName string) *AttributedString {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedAttributedStringForKey:value:table:"), purego.NSString(key), purego.NSString(value), purego.NSString(tableName))
 	return AttributedStringFromID(_r)
 }
 
-// Look up a localized string given a list of available localizations.
+// LocalizedStringForKeyValueTableLocalizations look up a localized string given a list of available localizations.
 func (x *Bundle) LocalizedStringForKeyValueTableLocalizations(key string, value string, tableName string, localizations []string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringForKey:value:table:localizations:"), purego.NSString(key), purego.NSString(value), purego.NSString(tableName), purego.SliceToNSArray(localizations, func(_v string) objc.ID { return purego.NSString(_v) }))
 	if _r == 0 {
@@ -204,56 +232,67 @@ func (x *Bundle) LocalizedStringForKeyValueTableLocalizations(key string, value 
 	return purego.GoString(_r)
 }
 
+// ObjectForInfoDictionaryKey wraps the corresponding Objective-C method.
 func (x *Bundle) ObjectForInfoDictionaryKey(key string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForInfoDictionaryKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
+// IsLoaded wraps the corresponding Objective-C method.
 func (x *Bundle) IsLoaded() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLoaded"))
 	return _r
 }
 
+// BundleURL wraps the corresponding Objective-C method.
 func (x *Bundle) BundleURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleURL"))
 	return URLFromID(_r)
 }
 
+// ResourceURL wraps the corresponding Objective-C method.
 func (x *Bundle) ResourceURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resourceURL"))
 	return URLFromID(_r)
 }
 
+// ExecutableURL wraps the corresponding Objective-C method.
 func (x *Bundle) ExecutableURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executableURL"))
 	return URLFromID(_r)
 }
 
+// PrivateFrameworksURL wraps the corresponding Objective-C method.
 func (x *Bundle) PrivateFrameworksURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("privateFrameworksURL"))
 	return URLFromID(_r)
 }
 
+// SharedFrameworksURL wraps the corresponding Objective-C method.
 func (x *Bundle) SharedFrameworksURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sharedFrameworksURL"))
 	return URLFromID(_r)
 }
 
+// SharedSupportURL wraps the corresponding Objective-C method.
 func (x *Bundle) SharedSupportURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sharedSupportURL"))
 	return URLFromID(_r)
 }
 
+// BuiltInPlugInsURL wraps the corresponding Objective-C method.
 func (x *Bundle) BuiltInPlugInsURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("builtInPlugInsURL"))
 	return URLFromID(_r)
 }
 
+// AppStoreReceiptURL wraps the corresponding Objective-C method.
 func (x *Bundle) AppStoreReceiptURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appStoreReceiptURL"))
 	return URLFromID(_r)
 }
 
+// BundlePath wraps the corresponding Objective-C method.
 func (x *Bundle) BundlePath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundlePath"))
 	if _r == 0 {
@@ -262,6 +301,7 @@ func (x *Bundle) BundlePath() string {
 	return purego.GoString(_r)
 }
 
+// ResourcePath wraps the corresponding Objective-C method.
 func (x *Bundle) ResourcePath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resourcePath"))
 	if _r == 0 {
@@ -270,6 +310,7 @@ func (x *Bundle) ResourcePath() string {
 	return purego.GoString(_r)
 }
 
+// ExecutablePath wraps the corresponding Objective-C method.
 func (x *Bundle) ExecutablePath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executablePath"))
 	if _r == 0 {
@@ -278,6 +319,7 @@ func (x *Bundle) ExecutablePath() string {
 	return purego.GoString(_r)
 }
 
+// PrivateFrameworksPath wraps the corresponding Objective-C method.
 func (x *Bundle) PrivateFrameworksPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("privateFrameworksPath"))
 	if _r == 0 {
@@ -286,6 +328,7 @@ func (x *Bundle) PrivateFrameworksPath() string {
 	return purego.GoString(_r)
 }
 
+// SharedFrameworksPath wraps the corresponding Objective-C method.
 func (x *Bundle) SharedFrameworksPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sharedFrameworksPath"))
 	if _r == 0 {
@@ -294,6 +337,7 @@ func (x *Bundle) SharedFrameworksPath() string {
 	return purego.GoString(_r)
 }
 
+// SharedSupportPath wraps the corresponding Objective-C method.
 func (x *Bundle) SharedSupportPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sharedSupportPath"))
 	if _r == 0 {
@@ -302,6 +346,7 @@ func (x *Bundle) SharedSupportPath() string {
 	return purego.GoString(_r)
 }
 
+// BuiltInPlugInsPath wraps the corresponding Objective-C method.
 func (x *Bundle) BuiltInPlugInsPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("builtInPlugInsPath"))
 	if _r == 0 {
@@ -310,6 +355,7 @@ func (x *Bundle) BuiltInPlugInsPath() string {
 	return purego.GoString(_r)
 }
 
+// BundleIdentifier wraps the corresponding Objective-C method.
 func (x *Bundle) BundleIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {
@@ -318,28 +364,35 @@ func (x *Bundle) BundleIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// InfoDictionary wraps the corresponding Objective-C method.
 func (x *Bundle) InfoDictionary() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("infoDictionary"))
 	return obj.Wrap(_r)
 }
 
+// LocalizedInfoDictionary wraps the corresponding Objective-C method.
 func (x *Bundle) LocalizedInfoDictionary() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedInfoDictionary"))
 	return obj.Wrap(_r)
 }
 
+// PreferredLocalizations wraps the corresponding Objective-C method.
+//
 // PreferredLocalizations returns the collection as a Go slice.
 func (x *Bundle) PreferredLocalizations() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredLocalizations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// Localizations wraps the corresponding Objective-C method.
+//
 // Localizations returns the collection as a Go slice.
 func (x *Bundle) Localizations() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// DevelopmentLocalization wraps the corresponding Objective-C method.
 func (x *Bundle) DevelopmentLocalization() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("developmentLocalization"))
 	if _r == 0 {
@@ -348,6 +401,8 @@ func (x *Bundle) DevelopmentLocalization() string {
 	return purego.GoString(_r)
 }
 
+// ExecutableArchitectures wraps the corresponding Objective-C method.
+//
 // ExecutableArchitectures returns the collection as a Go slice.
 func (x *Bundle) ExecutableArchitectures() []*Number {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executableArchitectures"))

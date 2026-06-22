@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that applies a convolution over a signal.
-//
 // ConvolutionLayer is an idiomatic wrapper over the Objective-C class MLCConvolutionLayer.
+//
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that applies a convolution over a signal.
 type ConvolutionLayer struct {
-	objref.Handle
+	Layer
 }
 
 // ConvolutionLayerFromID adopts an existing Objective-C object as a ConvolutionLayer
@@ -25,7 +26,8 @@ func ConvolutionLayerFromID(id objc.ID) *ConvolutionLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &ConvolutionLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ConvolutionLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func convolutionLayerAdopt(id objc.ID) *ConvolutionLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &ConvolutionLayer{Handle: objref.Wrap(id)}
+	x := &ConvolutionLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ConvolutionLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ConvolutionLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ConvolutionLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewConvolutionLayer creates a new ConvolutionLayer.
@@ -64,47 +52,43 @@ func NewConvolutionLayer() *ConvolutionLayer {
 	return convolutionLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string that helps identify this layer.
 func (x *ConvolutionLayer) WithLabel(label string) *ConvolutionLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *ConvolutionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ConvolutionLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// The convolution descriptor
+// Descriptor the convolution descriptor
 func (x *ConvolutionLayer) Descriptor() *ConvolutionDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
 	return ConvolutionDescriptorFromID(_r)
 }
 
-// The weights tensor used by the convolution layer
+// Weights the weights tensor used by the convolution layer
 func (x *ConvolutionLayer) Weights() *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weights"))
 	return TensorFromID(_r)
 }
 
-// The bias tensor used by the convolution layer
+// Biases the bias tensor used by the convolution layer
 func (x *ConvolutionLayer) Biases() *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biases"))
 	return TensorFromID(_r)
 }
 
-// The weights tensor parameter used for optimizer update
+// WeightsParameter the weights tensor parameter used for optimizer update
 func (x *ConvolutionLayer) WeightsParameter() *TensorParameter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weightsParameter"))
 	return TensorParameterFromID(_r)
 }
 
-// The bias tensor parameter used for optimizer update
+// BiasesParameter the bias tensor parameter used for optimizer update
 func (x *ConvolutionLayer) BiasesParameter() *TensorParameter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biasesParameter"))
 	return TensorParameterFromID(_r)
@@ -123,3 +107,5 @@ type ConvolutionLayerable interface {
 }
 
 var _ ConvolutionLayerable = (*ConvolutionLayer)(nil)
+
+var _ LayerProvider = (*ConvolutionLayer)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A query that accesses the series data associated with a quantity sample.
-//
 // QuantitySeriesSampleQuery is an idiomatic wrapper over the Objective-C class HKQuantitySeriesSampleQuery.
+//
+// It embeds [Query], promoting that type's methods.
+//
+// A query that accesses the series data associated with a quantity sample.
 type QuantitySeriesSampleQuery struct {
-	objref.Handle
+	Query
 }
 
 // QuantitySeriesSampleQueryFromID adopts an existing Objective-C object as a QuantitySeriesSampleQuery
@@ -25,7 +26,8 @@ func QuantitySeriesSampleQueryFromID(id objc.ID) *QuantitySeriesSampleQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &QuantitySeriesSampleQuery{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QuantitySeriesSampleQuery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func quantitySeriesSampleQueryAdopt(id objc.ID) *QuantitySeriesSampleQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &QuantitySeriesSampleQuery{Handle: objref.Wrap(id)}
+	x := &QuantitySeriesSampleQuery{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *QuantitySeriesSampleQuery) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *QuantitySeriesSampleQuery) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *QuantitySeriesSampleQuery) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewQuantitySeriesSampleQuery creates a new QuantitySeriesSampleQuery.
@@ -64,38 +52,36 @@ func NewQuantitySeriesSampleQuery() *QuantitySeriesSampleQuery {
 	return quantitySeriesSampleQueryAdopt(_id)
 }
 
-// A Boolean value that determines whether the query should return the series sample.
-//
-// WithIncludeSample sets includeSample and returns the receiver so calls can be chained.
+// WithIncludeSample a Boolean value that determines whether the query should return the series sample.
 func (x *QuantitySeriesSampleQuery) WithIncludeSample(includeSample bool) *QuantitySeriesSampleQuery {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeSample:"), includeSample)
 	return x
 }
 
-// A Boolean value that determines whether the query groups the results based on the quantity sample’s start date.
-//
-// WithOrderByQuantitySampleStartDate sets orderByQuantitySampleStartDate and returns the receiver so calls can be chained.
+// WithOrderByQuantitySampleStartDate a Boolean value that determines whether the query groups the results based on the quantity sample’s start date.
 func (x *QuantitySeriesSampleQuery) WithOrderByQuantitySampleStartDate(orderByQuantitySampleStartDate bool) *QuantitySeriesSampleQuery {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrderByQuantitySampleStartDate:"), orderByQuantitySampleStartDate)
 	return x
 }
 
-// Include owning HKQuantitySample in quantityHandler handler. Default value is NO. If includeSample is set then the quantitySample parameter of quantityHandler will be non-nil anytime the quantity parameter is non-nil. Specifying this option has a performance cost. This property may not be modified once the query has been executed.
+// IncludeSample include owning HKQuantitySample in quantityHandler handler. Default value is NO. If includeSample is set then the quantitySample parameter of quantityHandler will be non-nil anytime the quantity parameter is non-nil. Specifying this option has a performance cost. This property may not be modified once the query has been executed.
 func (x *QuantitySeriesSampleQuery) IncludeSample() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includeSample"))
 	return _r
 }
 
+// SetIncludeSample wraps the corresponding Objective-C method.
 func (x *QuantitySeriesSampleQuery) SetIncludeSample(includeSample bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeSample:"), includeSample)
 }
 
-// Order enumerated results first by quantitySample.startDate, then by the quantity's dateInterval.startDate. Default value is NO. All quantities owned by a given quantitySample will be enumerated before any quantities owned by any other quantity sample, and the quantity samples will be enumerated in their startDate order. Note that individual quantities may not be returned in their dateInterval.startDate order if more than one quantitySample overlap in time. This property may not be modified once the query has been executed.
+// OrderByQuantitySampleStartDate order enumerated results first by quantitySample.startDate, then by the quantity's dateInterval.startDate. Default value is NO. All quantities owned by a given quantitySample will be enumerated before any quantities owned by any other quantity sample, and the quantity samples will be enumerated in their startDate order. Note that individual quantities may not be returned in their dateInterval.startDate order if more than one quantitySample overlap in time. This property may not be modified once the query has been executed.
 func (x *QuantitySeriesSampleQuery) OrderByQuantitySampleStartDate() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("orderByQuantitySampleStartDate"))
 	return _r
 }
 
+// SetOrderByQuantitySampleStartDate wraps the corresponding Objective-C method.
 func (x *QuantitySeriesSampleQuery) SetOrderByQuantitySampleStartDate(orderByQuantitySampleStartDate bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrderByQuantitySampleStartDate:"), orderByQuantitySampleStartDate)
 }
@@ -112,3 +98,5 @@ type QuantitySeriesSampleQueryable interface {
 }
 
 var _ QuantitySeriesSampleQueryable = (*QuantitySeriesSampleQuery)(nil)
+
+var _ QueryProvider = (*QuantitySeriesSampleQuery)(nil)

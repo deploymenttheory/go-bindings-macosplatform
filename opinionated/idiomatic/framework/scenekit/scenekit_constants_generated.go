@@ -67,49 +67,41 @@ func SCNHitTestSortResultsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNHitTestSortResultsKey")))
 }
 
-// Valid keys for the option parameter of setSemantic:forSymbol:options:
 // SCNProgramMappingChannelKey returns the string constant SCNProgramMappingChannelKey, for use as a dictionary key or argument.
 func SCNProgramMappingChannelKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNProgramMappingChannelKey")))
 }
 
-// This is the entry point to operate on the geometry vertices, for example deforming them. It operates entirely in the vertex shader stage. It's input is the geometry structure: Structures available from the SCNShaderModifierEntryPointGeometry entry point: | struct SCNShaderGeometry { |    float4 position; |    float3 normal; |    float4 tangent; |    float4 color; |    float2 texcoords[kSCNTexcoordCount]; | } _geometry; | | Access: ReadWrite | Stages: Vertex shader only kSCNTexcoordCount is a constant integer set to the number of texture coordinates used. All the geometric fields (position, normal and tangent) are in model space. You can use one of the provided automatic uniforms such as u_modelTransform or u_modelViewTransform if you want to operate in another space (but the results must stay in the model space, otherwise remaining computations won't be correct). The texture coordinates are the raw values found in the mesh, they have not been transformed yet by their optional contentsTransform. The contentsTransform if any is applied after the geometry shader modifier. Example: Simple sinusoidal deformation GLSL | uniform float Amplitude = 0.1; | | _geometry.position.xyz += _geometry.normal * (Amplitude * _geometry.position.y * _geometry.position.x) * sin(u_time); Metal Shading Language | #pragma arguments | float Amplitude; | | _geometry.position.xyz += _geometry.normal * (Amplitude * _geometry.position.y * _geometry.position.x) * sin(scn_frame.time);
 // SCNShaderModifierEntryPointGeometry returns the string constant SCNShaderModifierEntryPointGeometry, for use as a dictionary key or argument.
 func SCNShaderModifierEntryPointGeometry() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNShaderModifierEntryPointGeometry")))
 }
 
-// This is the entry point to alter the surface representation of the material, before the lighting has taken place. Structures available from the SCNShaderModifierEntryPointSurface entry point: | struct SCNShaderSurface { |    float3 view;                       // Direction from the point on the surface toward the camera (V) |    float3 position;                   // Position of the fragment |    float3 normal;                     // Normal of the fragment (N) |    float3 geometryNormal;             // Geometric normal of the fragment (normal map is ignored) |    float3 tangent;                    // Tangent of the fragment |    float3 bitangent;                  // Bitangent of the fragment |    float4 ambient;                    // Ambient property of the fragment |    float2 ambientTexcoord;            // Ambient texture coordinates |    float4 diffuse;                    // Diffuse property of the fragment. Alpha contains the opacity. |    float2 diffuseTexcoord;            // Diffuse texture coordinates |    float4 specular;                   // Specular property of the fragment |    float2 specularTexcoord;           // Specular texture coordinates |    float4 emission;                   // Emission property of the fragment |    float2 emissionTexcoord;           // Emission texture coordinates |    float4 multiply;                   // Multiply property of the fragment |    float2 multiplyTexcoord;           // Multiply texture coordinates |    float4 transparent;                // Transparent property of the fragment |    float2 transparentTexcoord;        // Transparent texture coordinates |    float4 reflective;                 // Reflective property of the fragment |    float  metalness;                  // Metalness property of the fragment |    float2 metalnessTexcoord;          // Metalness texture coordinates |    float  roughness;                  // Roughness property of the fragment |    float2 roughnessTexcoord;          // Roughness texture coordinates |    float  clearCoat;                  // Clear Coat property of the fragment.           Available since macOS 10.15, iOS 13, tvOS 13 and watchOS 6. |    float2 clearCoatTexcoord;          // Clear Coat texture coordinates.                Available since macOS 10.15, iOS 13, tvOS 13 and watchOS 6. |    float  clearCoatRoughness;         // Clear Coat Roughness property of the fragment. Available since macOS 10.15, iOS 13, tvOS 13 and watchOS 6. |    float2 clearCoatRoughnessTexcoord; // Clear Coat Roughness texture coordinates.      Available since macOS 10.15, iOS 13, tvOS 13 and watchOS 6. |    float3 clearCoatNormal;            // Clear Coat Normal property of the fragment.    Available since macOS 10.15, iOS 13, tvOS 13 and watchOS 6. |    float2 clearCoatNormalTexcoord;    // Clear Coat Normnal texture coordinates.        Available since macOS 10.15, iOS 13, tvOS 13 and watchOS 6. |    float4 selfIllumination;           // Self Illumination property of the fragment.    Available since macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Available as `emission` in previous versions. |    float2 selfIlluminationTexcoord;   // Self Illumination texture coordinates.         Available since macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Available as `emissionTexcoord` in previous versions. |    float  ambientOcclusion;           // Ambient Occlusion property of the fragment.    Available since macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Available as `multiply` in previous versions. |    float2 ambientOcclusionTexcoord;   // Ambient Occlusion texture coordinates.         Available since macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Available as `multiplyTexcoord` in previous versions. |    float  shininess;                  // Shininess property of the fragment |    float  fresnel;                    // Fresnel property of the fragment | } _surface; | | Access: ReadWrite | Stages: Fragment shader only All geometric fields are in view space. All the other properties will be colors (texture have already been sampled at this stage) or floats. You can however do an extra sampling of standard textures if you want. In this case the naming pattern is u_<property>Texture. For example u_diffuseTexture or u_reflectiveTexture. Note that you have to be sure that the material do have a texture set for this property, otherwise you'll trigger a shader compilation error. Example: Procedural black and white stripes GLSL | uniform float Scale = 12.0; | uniform float Width = 0.25; | uniform float Blend = 0.3; | | vec2 position = fract(_surface.diffuseTexcoord * Scale); | float f1 = clamp(position.y / Blend, 0.0, 1.0); | float f2 = clamp((position.y - Width) / Blend, 0.0, 1.0); | f1 = f1 * (1.0 - f2); | f1 = f1 * f1 * 2.0 * (3. * 2. * f1); | _surface.diffuse = mix(vec4(1.0), vec4(0.0), f1); Metal Shading Language | #pragma arguments | float Scale; | float Width; | float Blend; | | float2 position = fract(_surface.diffuseTexcoord * Scale); | float f1 = clamp(position.y / Blend, 0.0, 1.0); | float f2 = clamp((position.y - Width) / Blend, 0.0, 1.0); | f1 = f1 * (1.0 - f2); | f1 = f1 * f1 * 2.0 * (3. * 2. * f1); | _surface.diffuse = mix(float4(1.0), float4(0.0), f1);
 // SCNShaderModifierEntryPointSurface returns the string constant SCNShaderModifierEntryPointSurface, for use as a dictionary key or argument.
 func SCNShaderModifierEntryPointSurface() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNShaderModifierEntryPointSurface")))
 }
 
-// This is the entry point to provide custom lighting equation. The fragment will be called for each active light of the scene and will need to accumulate lighting contribution for the vertex or the fragment in the _lightingContribution structure, using the light structure given. Structures available from the SCNShaderModifierEntryPointLightingModel entry point: | All the structures available from the SCNShaderModifierEntryPointSurface entry point | | Access: ReadOnly | Stages: Vertex shader and fragment shader | struct SCNShaderLightingContribution { |    float3 ambient; |    float3 diffuse; |    float3 specular; | } _lightingContribution; | | Access: ReadWrite | Stages: Vertex shader and fragment shader | struct SCNShaderLight { |    float4 intensity; |    float3 direction; // Direction from the point on the surface toward the light (L) | } _light; | | Access: ReadOnly | Stages: Vertex shader and fragment shader Example: Wrap diffuse lighting GLSL | uniform float WrapFactor = 0.5; | | float dotProduct = (WrapFactor + max(0.0, dot(_surface.normal,_light.direction))) / (1 + WrapFactor); | _lightingContribution.diffuse += (dotProduct * _light.intensity.rgb); | vec3 halfVector = normalize(_light.direction + _surface.view); | dotProduct = max(0.0, pow(max(0.0, dot(_surface.normal, halfVector)), _surface.shininess)); | _lightingContribution.specular += (dotProduct * _light.intensity.rgb); Metal Shading Language | #pragma arguments | float WrapFactor; | | float dotProduct = (WrapFactor + max(0.0, dot(_surface.normal,_light.direction))) / (1 + WrapFactor); | _lightingContribution.diffuse += (dotProduct * _light.intensity.rgb); | float3 halfVector = normalize(_light.direction + _surface.view); | dotProduct = max(0.0, pow(max(0.0, dot(_surface.normal, halfVector)), _surface.shininess)); | _lightingContribution.specular += (dotProduct * _light.intensity.rgb);
 // SCNShaderModifierEntryPointLightingModel returns the string constant SCNShaderModifierEntryPointLightingModel, for use as a dictionary key or argument.
 func SCNShaderModifierEntryPointLightingModel() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNShaderModifierEntryPointLightingModel")))
 }
 
-// This is the last entry point in the fragment shader, where you can alter the final color returned by the shader. You can alter the final color by reading and writing to the output color via the output structure below. Structures available from the SCNShaderModifierEntryPointFragment entry point: | All the structures available from the SCNShaderModifierEntryPointSurface entry point | | Access: ReadOnly | Stages: Fragment shader only | struct SCNFramebuffer { |    float4 color; // Contents of the destination framebuffer corresponding to the fragment being processed | } _framebuffer;  // Available since macOS 13, iOS 16, tvOS 16 and watchOS 9. | | Access: ReadOnly | Stages: Fragment shader only | struct SCNShaderOutput { |    float4 color; | } _output; | | Access: ReadWrite | Stages: Fragment shader only Example: Inverse final color GLSL | _output.color.rgb = vec3(1.0) - _output.color.rgb; Metal Shading Language | _output.color.rgb = 1.0 - _output.color.rgb;
 // SCNShaderModifierEntryPointFragment returns the string constant SCNShaderModifierEntryPointFragment, for use as a dictionary key or argument.
 func SCNShaderModifierEntryPointFragment() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNShaderModifierEntryPointFragment")))
 }
 
-// Pass it as the key in the options dictionary given to initWithFrame:options:. The value is a NSNumber wrapping a SCNRenderingAPI. You can also select the preferred rendering API directly from the SCNView inspector in InterfaceBuilder.
 // SCNPreferredRenderingAPIKey returns the string constant SCNPreferredRenderingAPIKey, for use as a dictionary key or argument.
 func SCNPreferredRenderingAPIKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNPreferredRenderingAPIKey")))
 }
 
-// The value is directly a id <MTLDevice>.
 // SCNPreferredDeviceKey returns the string constant SCNPreferredDeviceKey, for use as a dictionary key or argument.
 func SCNPreferredDeviceKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNPreferredDeviceKey")))
 }
 
-// The value is a NSNumber wrapping a BOOL. Defaults to NO.
 // SCNPreferLowPowerDeviceKey returns the string constant SCNPreferLowPowerDeviceKey, for use as a dictionary key or argument.
 func SCNPreferLowPowerDeviceKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNPreferLowPowerDeviceKey")))
@@ -120,25 +112,21 @@ func SCNSceneSourceAssetContributorsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceAssetContributorsKey")))
 }
 
-// When the file was created. The value is a NSDate instance.
 // SCNSceneSourceAssetCreatedDateKey returns the string constant SCNSceneSourceAssetCreatedDateKey, for use as a dictionary key or argument.
 func SCNSceneSourceAssetCreatedDateKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceAssetCreatedDateKey")))
 }
 
-// When the file was last modified. The value is a NSDate instance.
 // SCNSceneSourceAssetModifiedDateKey returns the string constant SCNSceneSourceAssetModifiedDateKey, for use as a dictionary key or argument.
 func SCNSceneSourceAssetModifiedDateKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceAssetModifiedDateKey")))
 }
 
-// The up axis of the file. If the file is oriented Y-up, for example, then this is the string \
 // SCNSceneSourceAssetUpAxisKey returns the string constant SCNSceneSourceAssetUpAxisKey, for use as a dictionary key or argument.
 func SCNSceneSourceAssetUpAxisKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceAssetUpAxisKey")))
 }
 
-// The unit used in the file. The value is a dictionary populated with keys documented in the "Unit dictionary keys" group.
 // SCNSceneSourceAssetUnitKey returns the string constant SCNSceneSourceAssetUnitKey, for use as a dictionary key or argument.
 func SCNSceneSourceAssetUnitKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceAssetUnitKey")))
@@ -149,7 +137,6 @@ func SCNSceneSourceAssetAuthoringToolKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceAssetAuthoringToolKey")))
 }
 
-// The file's author. The corresponding value is an NSString.
 // SCNSceneSourceAssetAuthorKey returns the string constant SCNSceneSourceAssetAuthorKey, for use as a dictionary key or argument.
 func SCNSceneSourceAssetAuthorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceAssetAuthorKey")))
@@ -160,97 +147,81 @@ func SCNSceneSourceAssetUnitNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceAssetUnitNameKey")))
 }
 
-// A NSNumber encapsulating a floating-point value indicating how many meters the unit is. For example, if the name is \
 // SCNSceneSourceAssetUnitMeterKey returns the string constant SCNSceneSourceAssetUnitMeterKey, for use as a dictionary key or argument.
 func SCNSceneSourceAssetUnitMeterKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceAssetUnitMeterKey")))
 }
 
-// Enable to try to guess acceptable normals for the vertices if none are given in the file Use this with a boolean value encapsulated in a NSNumber. The default value is NO.
 // SCNSceneSourceCreateNormalsIfAbsentKey returns the string constant SCNSceneSourceCreateNormalsIfAbsentKey, for use as a dictionary key or argument.
 func SCNSceneSourceCreateNormalsIfAbsentKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceCreateNormalsIfAbsentKey")))
 }
 
-// Pass YES in order to perform the document validation. This option can be set in the options dictionary of the SCNScene and SCNSceneSource loading methods. The value for this option should be a boolean NSNumber. If its boolean value is YES (the default is NO), SceneKit will attempt to check the document for consistency. If the document doesn't pass the consistency check it is then not loaded and an error is returned. This is slower, but for security reasons it should be set to YES if you are not sure the files you load are valid and have not been tampered with.
 // SCNSceneSourceCheckConsistencyKey returns the string constant SCNSceneSourceCheckConsistencyKey, for use as a dictionary key or argument.
 func SCNSceneSourceCheckConsistencyKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceCheckConsistencyKey")))
 }
 
-// Pass YES to flatten the scene graph when possible. This option can be set in the options dictionary of the SCNScene and SCNSceneSource loading methods. The value for this option should be a boolean NSNumber. If its boolean value is YES (the default is NO), SceneKit will attempt to reduce the scene graph by merging the geometries. This option is suitable to preview a 3D scene efficiently and when manipulating the scene graph is not needed.
 // SCNSceneSourceFlattenSceneKey returns the string constant SCNSceneSourceFlattenSceneKey, for use as a dictionary key or argument.
 func SCNSceneSourceFlattenSceneKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceFlattenSceneKey")))
 }
 
-// Pass YES in order to enable the safe mode. This option can be set in the options dictionary of the SCNScene and SCNSceneSource loading methods. The value for this option should be a boolean NSNumber. If its boolean value is YES (the default is NO), SceneKit will forbid network accesses, prevent the loading of resources from arbitrary directories, and will not execute any code present in the loaded files.
 // SCNSceneSourceUseSafeModeKey returns the string constant SCNSceneSourceUseSafeModeKey, for use as a dictionary key or argument.
 func SCNSceneSourceUseSafeModeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceUseSafeModeKey")))
 }
 
-// Pass an array of directory URLs where SceneKit should look for resources By default, SceneKit will look for the external resources it cannot find in the parent directory of the imported file. You can add additional directories by setting an array of URLs for this key when calling sceneWithOptions:error:. This is recommended if you want to construct your scene source from a data object, not from an URL, and need to load resources whose paths are not absolute.
 // SCNSceneSourceAssetDirectoryURLsKey returns the string constant SCNSceneSourceAssetDirectoryURLsKey, for use as a dictionary key or argument.
 func SCNSceneSourceAssetDirectoryURLsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceAssetDirectoryURLsKey")))
 }
 
-// Pass YES in order to override assets URLs with the directory URLs passed via SCNSceneSourceAssetDirectoryURLsKey. By default, SceneKit will look for the external resources using the paths/urls as described in the imported file. You can force SceneKit to only search for extern resources within the directories specified by the SCNSceneSourceAssetDirectoryURLsKey key. This can be useful to load a file and its resources from a specific bundle for instance.
 // SCNSceneSourceOverrideAssetURLsKey returns the string constant SCNSceneSourceOverrideAssetURLsKey, for use as a dictionary key or argument.
 func SCNSceneSourceOverrideAssetURLsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceOverrideAssetURLsKey")))
 }
 
-// Pass YES to interpret the 3D format of the file in a strict way. This option defaults to NO. In this case SceneKit will try to read any additional metadata present in the file to enable additional features and make the rendering as close as possible to the original intent. If you pass YES, SceneKit will instead only consider features which are part of the file format specification.
 // SCNSceneSourceStrictConformanceKey returns the string constant SCNSceneSourceStrictConformanceKey, for use as a dictionary key or argument.
 func SCNSceneSourceStrictConformanceKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceStrictConformanceKey")))
 }
 
-// Pass the units you want the scene to be converted to (in meter). Use this with a floating value encapsulated in a NSNumber. The default value is nil which means no conversion done. Passing a non-zero value will convert the scene coordinates so that 1 unit corresponds to N meters. For example pass 0.01 for 1 unit == 1 centimeter, pass 0.3048 for 1 unit == 1 foot... For better physics simulation it is recommended to use 1 unit equals to 1 meter. This option has no effect for SCN files or if the asset is already compressed by Xcode (use the compression options instead).
 // SCNSceneSourceConvertUnitsToMetersKey returns the string constant SCNSceneSourceConvertUnitsToMetersKey, for use as a dictionary key or argument.
 func SCNSceneSourceConvertUnitsToMetersKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceConvertUnitsToMetersKey")))
 }
 
-// Pass YES if a scene should be converted to Y up if it currently has a different up axis. Use this with a boolean value encapsulated in a NSNumber. The default value is NO. This option has no effect for SCN files or if the asset is already compressed by Xcode (use the compression options instead).
 // SCNSceneSourceConvertToYUpKey returns the string constant SCNSceneSourceConvertToYUpKey, for use as a dictionary key or argument.
 func SCNSceneSourceConvertToYUpKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceConvertToYUpKey")))
 }
 
-// Pass one of the value below to specify what to do with loaded animations. See below for the description of each individual key. Defaults to SCNSceneSourceAnimationImportPolicyPlayRepeatedly. On 10.9 and before the behavior is SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase. For compatibility reason if the application was built on 10.9 or before the default behavior is SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase.
 // SCNSceneSourceAnimationImportPolicyKey returns the string constant SCNSceneSourceAnimationImportPolicyKey, for use as a dictionary key or argument.
 func SCNSceneSourceAnimationImportPolicyKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceAnimationImportPolicyKey")))
 }
 
-// Pass YES to make SceneKit preserve the original topology instead of triangulating at load time. This can be useful to get better results when subdividing a geometry. Defaults to YES starting macOS 10.15, iOS 13, tvOS 13 and watchOS 6. Defaults to NO in previous versions.
 // SCNSceneSourceLoadingOptionPreserveOriginalTopology returns the string constant SCNSceneSourceLoadingOptionPreserveOriginalTopology, for use as a dictionary key or argument.
 func SCNSceneSourceLoadingOptionPreserveOriginalTopology() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceLoadingOptionPreserveOriginalTopology")))
 }
 
-// Add animations to the scene and play them once (repeatCount set to 1).
 // SCNSceneSourceAnimationImportPolicyPlay returns the string constant SCNSceneSourceAnimationImportPolicyPlay, for use as a dictionary key or argument.
 func SCNSceneSourceAnimationImportPolicyPlay() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceAnimationImportPolicyPlay")))
 }
 
-// Add animations to the scene and play them repeatedly (repeatCount set to infinity).
 // SCNSceneSourceAnimationImportPolicyPlayRepeatedly returns the string constant SCNSceneSourceAnimationImportPolicyPlayRepeatedly, for use as a dictionary key or argument.
 func SCNSceneSourceAnimationImportPolicyPlayRepeatedly() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceAnimationImportPolicyPlayRepeatedly")))
 }
 
-// Only keep animations in the SCNSceneSource and don't add to the animatable elements of the scene.
 // SCNSceneSourceAnimationImportPolicyDoNotPlay returns the string constant SCNSceneSourceAnimationImportPolicyDoNotPlay, for use as a dictionary key or argument.
 func SCNSceneSourceAnimationImportPolicyDoNotPlay() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceAnimationImportPolicyDoNotPlay")))
 }
 
-// Add animations to the scene and play them using the SCNView/SCNRenderer's scene time (usesSceneTimeBase set to YES)
 // SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase returns the string constant SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase, for use as a dictionary key or argument.
 func SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase")))
@@ -276,7 +247,6 @@ func SCNConsistencyLineNumberErrorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNConsistencyLineNumberErrorKey")))
 }
 
-// Specifies the final destination (as a NSURL) of the scene being exported. The destination URL is required if the scene is exported to a temporary directory and then moved to a final destination. This enables the exported document to get correct relative paths to referenced images.
 // SCNSceneExportDestinationURL returns the string constant SCNSceneExportDestinationURL, for use as a dictionary key or argument.
 func SCNSceneExportDestinationURL() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneExportDestinationURL")))
@@ -302,7 +272,6 @@ func SCNSceneUpAxisAttributeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNSceneUpAxisAttributeKey")))
 }
 
-// These keys are used for the 'semantic' argument of -[SCNProgram setSemantic:forSymbol:options:] Transforms are SCNMatrix4 wrapped in NSValues.
 // SCNModelTransform returns the string constant SCNModelTransform, for use as a dictionary key or argument.
 func SCNModelTransform() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("SCNModelTransform"))) }
 
@@ -574,7 +543,6 @@ func SCNPhysicsTestSearchModeAll() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNPhysicsTestSearchModeAll")))
 }
 
-// Attributes affecting the lighting computations. These keys are deprecated in 10.10. Please use the properties of SCNLight instead.
 // SCNLightAttenuationStartKey returns the string constant SCNLightAttenuationStartKey, for use as a dictionary key or argument.
 func SCNLightAttenuationStartKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNLightAttenuationStartKey")))

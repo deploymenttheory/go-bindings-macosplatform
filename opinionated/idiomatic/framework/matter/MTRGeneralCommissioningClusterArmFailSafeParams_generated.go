@@ -23,7 +23,8 @@ func MTRGeneralCommissioningClusterArmFailSafeParamsFromID(id objc.ID) *MTRGener
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGeneralCommissioningClusterArmFailSafeParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRGeneralCommissioningClusterArmFailSafeParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRGeneralCommissioningClusterArmFailSafeParamsAdopt(id objc.ID) *MTRGenera
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGeneralCommissioningClusterArmFailSafeParams{Handle: objref.Wrap(id)}
+	x := &MTRGeneralCommissioningClusterArmFailSafeParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,74 +58,82 @@ func (x *MTRGeneralCommissioningClusterArmFailSafeParams) IsKind(className strin
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRGeneralCommissioningClusterArmFailSafeParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRGeneralCommissioningClusterArmFailSafeParams creates a new MTRGeneralCommissioningClusterArmFailSafeParams.
 func NewMTRGeneralCommissioningClusterArmFailSafeParams() *MTRGeneralCommissioningClusterArmFailSafeParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRGeneralCommissioningClusterArmFailSafeParams")), objc.RegisterName("new"))
 	return mTRGeneralCommissioningClusterArmFailSafeParamsAdopt(_id)
 }
 
-// WithExpiryLengthSeconds sets expiryLengthSeconds and returns the receiver so calls can be chained.
+// WithExpiryLengthSeconds sets the property and returns the receiver so calls can be chained.
 func (x *MTRGeneralCommissioningClusterArmFailSafeParams) WithExpiryLengthSeconds(expiryLengthSeconds obj.Object) *MTRGeneralCommissioningClusterArmFailSafeParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpiryLengthSeconds:"), objref.IDOf(expiryLengthSeconds))
 	return x
 }
 
-// WithBreadcrumb sets breadcrumb and returns the receiver so calls can be chained.
+// WithBreadcrumb sets the property and returns the receiver so calls can be chained.
 func (x *MTRGeneralCommissioningClusterArmFailSafeParams) WithBreadcrumb(breadcrumb obj.Object) *MTRGeneralCommissioningClusterArmFailSafeParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRGeneralCommissioningClusterArmFailSafeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGeneralCommissioningClusterArmFailSafeParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRGeneralCommissioningClusterArmFailSafeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGeneralCommissioningClusterArmFailSafeParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// ExpiryLengthSeconds wraps the corresponding Objective-C method.
 func (x *MTRGeneralCommissioningClusterArmFailSafeParams) ExpiryLengthSeconds() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expiryLengthSeconds"))
 	return obj.Wrap(_r)
 }
 
+// SetExpiryLengthSeconds wraps the corresponding Objective-C method.
 func (x *MTRGeneralCommissioningClusterArmFailSafeParams) SetExpiryLengthSeconds(expiryLengthSeconds obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpiryLengthSeconds:"), objref.IDOf(expiryLengthSeconds))
 }
 
+// Breadcrumb wraps the corresponding Objective-C method.
 func (x *MTRGeneralCommissioningClusterArmFailSafeParams) Breadcrumb() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("breadcrumb"))
 	return obj.Wrap(_r)
 }
 
+// SetBreadcrumb wraps the corresponding Objective-C method.
 func (x *MTRGeneralCommissioningClusterArmFailSafeParams) SetBreadcrumb(breadcrumb obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRGeneralCommissioningClusterArmFailSafeParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRGeneralCommissioningClusterArmFailSafeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRGeneralCommissioningClusterArmFailSafeParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRGeneralCommissioningClusterArmFailSafeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

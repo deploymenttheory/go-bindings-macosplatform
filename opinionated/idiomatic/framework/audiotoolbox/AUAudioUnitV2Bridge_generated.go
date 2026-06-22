@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that wraps a version 2 audio unit as version 3 audio unit.
-//
 // AudioUnitV2Bridge is an idiomatic wrapper over the Objective-C class AUAudioUnitV2Bridge.
+//
+// It embeds [AudioUnit], promoting that type's methods.
+//
+// A class that wraps a version 2 audio unit as version 3 audio unit.
 type AudioUnitV2Bridge struct {
-	objref.Handle
+	AudioUnit
 }
 
 // AudioUnitV2BridgeFromID adopts an existing Objective-C object as a AudioUnitV2Bridge
@@ -25,7 +26,8 @@ func AudioUnitV2BridgeFromID(id objc.ID) *AudioUnitV2Bridge {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitV2Bridge{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioUnitV2Bridge{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func audioUnitV2BridgeAdopt(id objc.ID) *AudioUnitV2Bridge {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitV2Bridge{Handle: objref.Wrap(id)}
+	x := &AudioUnitV2Bridge{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AudioUnitV2Bridge) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioUnitV2Bridge) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioUnitV2Bridge) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAudioUnitV2Bridge creates a new AudioUnitV2Bridge.
@@ -64,122 +52,92 @@ func NewAudioUnitV2Bridge() *AudioUnitV2Bridge {
 	return audioUnitV2BridgeAdopt(_id)
 }
 
-// Determines whether the audio unit has allocated render resources.
-//
-// WithRenderResourcesAllocated sets renderResourcesAllocated and returns the receiver so calls can be chained.
+// WithRenderResourcesAllocated determines whether the audio unit has allocated render resources.
 func (x *AudioUnitV2Bridge) WithRenderResourcesAllocated(renderResourcesAllocated bool) *AudioUnitV2Bridge {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderResourcesAllocated:"), renderResourcesAllocated)
 	return x
 }
 
-// The maximum number of frames that the audio unit can render at once.
-//
-// WithMaximumFramesToRender sets maximumFramesToRender and returns the receiver so calls can be chained.
+// WithMaximumFramesToRender the maximum number of frames that the audio unit can render at once.
 func (x *AudioUnitV2Bridge) WithMaximumFramesToRender(maximumFramesToRender uint32) *AudioUnitV2Bridge {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumFramesToRender:"), maximumFramesToRender)
 	return x
 }
 
-// An audio unit’s parameters, organized in a tree hierarchy.
-//
-// WithParameterTree sets parameterTree and returns the receiver so calls can be chained.
+// WithParameterTree an audio unit’s parameters, organized in a tree hierarchy.
 func (x *AudioUnitV2Bridge) WithParameterTree(parameterTree *ParameterTree) *AudioUnitV2Bridge {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParameterTree:"), objref.IDOf(parameterTree))
 	return x
 }
 
-// The MIDI protocol to be used by the host for receiving MIDIEventList data. Hosts should set this property to the protocol they wish to receive MIDIEventList data from the Audio Unit. This should be set prior to initialization, all translatable messages will be converted  (if necessary) to this property's protocol prior to delivery to the host. Host should setup in the following order: - Set hostMIDIProtocol - Set MIDIOutputEventListBlock - Call allocateRenderResourcesAndReturnError This is bridged to the v2 API property kAudioUnitProperty_HostMIDIProtocol. Notes: - If overriding this property, subclassers must call [super setHostMIDIProtocol:] - hostMIDIProtocol should be set before attempting to query AudioUnitMIDIProtocol or calling allocateRenderResourcesAndReturnError to allow Audio Units to optionally match their input MIDI protocol to the desired host protocol and prevent protocol conversion.
-//
-// WithHostMIDIProtocol sets hostMIDIProtocol and returns the receiver so calls can be chained.
+// WithHostMIDIProtocol the MIDI protocol to be used by the host for receiving MIDIEventList data. Hosts should set this property to the protocol they wish to receive MIDIEventList data from the Audio Unit. This should be set prior to initialization, all translatable messages will be converted  (if necessary) to this property's protocol prior to delivery to the host. Host should setup in the following order: - Set hostMIDIProtocol - Set MIDIOutputEventListBlock - Call allocateRenderResourcesAndReturnError This is bridged to the v2 API property kAudioUnitProperty_HostMIDIProtocol. Notes: - If overriding this property, subclassers must call [super setHostMIDIProtocol:] - hostMIDIProtocol should be set before attempting to query AudioUnitMIDIProtocol or calling allocateRenderResourcesAndReturnError to allow Audio Units to optionally match their input MIDI protocol to the desired host protocol and prevent protocol conversion.
 func (x *AudioUnitV2Bridge) WithHostMIDIProtocol(hostMIDIProtocol obj.Object) *AudioUnitV2Bridge {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHostMIDIProtocol:"), objref.IDOf(hostMIDIProtocol))
 	return x
 }
 
-// A persistable snapshot of the audio unit’s properties and parameters, suitable for saving as a user preset.
-//
-// WithFullState sets fullState and returns the receiver so calls can be chained.
+// WithFullState a persistable snapshot of the audio unit’s properties and parameters, suitable for saving as a user preset.
 func (x *AudioUnitV2Bridge) WithFullState(fullState obj.Object) *AudioUnitV2Bridge {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFullState:"), objref.IDOf(fullState))
 	return x
 }
 
-// A persistable snapshot of the audio unit’s properties and parameters, suitable for saving in a user’s document.
-//
-// WithFullStateForDocument sets fullStateForDocument and returns the receiver so calls can be chained.
+// WithFullStateForDocument a persistable snapshot of the audio unit’s properties and parameters, suitable for saving in a user’s document.
 func (x *AudioUnitV2Bridge) WithFullStateForDocument(fullStateForDocument obj.Object) *AudioUnitV2Bridge {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFullStateForDocument:"), objref.IDOf(fullStateForDocument))
 	return x
 }
 
-// The audio unit’s last-selected preset.
-//
-// WithCurrentPreset sets currentPreset and returns the receiver so calls can be chained.
+// WithCurrentPreset the audio unit’s last-selected preset.
 func (x *AudioUnitV2Bridge) WithCurrentPreset(currentPreset *AudioUnitPreset) *AudioUnitV2Bridge {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentPreset:"), objref.IDOf(currentPreset))
 	return x
 }
 
-// Provides a trade-off between rendering quality and CPU load.
-//
-// WithRenderQuality sets renderQuality and returns the receiver so calls can be chained.
+// WithRenderQuality provides a trade-off between rendering quality and CPU load.
 func (x *AudioUnitV2Bridge) WithRenderQuality(renderQuality int) *AudioUnitV2Bridge {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderQuality:"), renderQuality)
 	return x
 }
 
-// Determines whether an effect should route input directly to output, without any processing.
-//
-// WithShouldBypassEffect sets shouldBypassEffect and returns the receiver so calls can be chained.
+// WithShouldBypassEffect determines whether an effect should route input directly to output, without any processing.
 func (x *AudioUnitV2Bridge) WithShouldBypassEffect(shouldBypassEffect bool) *AudioUnitV2Bridge {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldBypassEffect:"), shouldBypassEffect)
 	return x
 }
 
-// Communicates to an audio unit that it is rendering offline.
-//
-// WithRenderingOffline sets renderingOffline and returns the receiver so calls can be chained.
+// WithRenderingOffline communicates to an audio unit that it is rendering offline.
 func (x *AudioUnitV2Bridge) WithRenderingOffline(renderingOffline bool) *AudioUnitV2Bridge {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderingOffline:"), renderingOffline)
 	return x
 }
 
-// Information about the host context in which the audio unit is connected, for display in the audio unit’s view.
-//
-// WithContextName sets contextName and returns the receiver so calls can be chained.
+// WithContextName information about the host context in which the audio unit is connected, for display in the audio unit’s view.
 func (x *AudioUnitV2Bridge) WithContextName(contextName string) *AudioUnitV2Bridge {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContextName:"), purego.NSString(contextName))
 	return x
 }
 
-// Specify a mapping of input channels to output channels. Converter and input/output audio units may support re-ordering or splitting of input channels to output channels. The number of channels in the channel map is the number of channels of the destination (output format). The channel map entries contain a channel number of the source channel that should be mapped to that destination channel. If -1 is specified, then that destination channel will not contain any channel from the source (so it will be silent). If the property value is nil, then the audio unit does not support this property. Bridged to the v2 property kAudioOutputUnitProperty_ChannelMap.
-//
-// WithChannelMap sets the collection and returns the receiver so calls can be chained.
+// WithChannelMap specify a mapping of input channels to output channels. Converter and input/output audio units may support re-ordering or splitting of input channels to output channels. The number of channels in the channel map is the number of channels of the destination (output format). The channel map entries contain a channel number of the source channel that should be mapped to that destination channel. If -1 is specified, then that destination channel will not contain any channel from the source (so it will be silent). If the property value is nil, then the audio unit does not support this property. Bridged to the v2 property kAudioOutputUnitProperty_ChannelMap.
 func (x *AudioUnitV2Bridge) WithChannelMap(items ...obj.Object) *AudioUnitV2Bridge {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannelMap:"), _arr)
 	return x
 }
 
-// A flag enabling audio input from the unit.
-//
-// WithInputEnabled sets inputEnabled and returns the receiver so calls can be chained.
+// WithInputEnabled a flag enabling audio input from the unit.
 func (x *AudioUnitV2Bridge) WithInputEnabled(inputEnabled bool) *AudioUnitV2Bridge {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputEnabled:"), inputEnabled)
 	return x
 }
 
-// A flag enabling audio output from the unit.
-//
-// WithOutputEnabled sets outputEnabled and returns the receiver so calls can be chained.
+// WithOutputEnabled a flag enabling audio output from the unit.
 func (x *AudioUnitV2Bridge) WithOutputEnabled(outputEnabled bool) *AudioUnitV2Bridge {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputEnabled:"), outputEnabled)
 	return x
 }
 
-// Hint to control the size of the allocated buffer for outgoing MIDI events. This property allows the plug-in to provide a hint to the framework regarding the size of its outgoing MIDI data buffer. If the plug-in produces more MIDI output data than the default size of the allocated buffer, then the plug-in can provide this property to increase the size of this buffer. The value represents the number of 3-byte Legacy MIDI messages that fit into the buffer or a single MIDIEventList containing 1 MIDIEventPacket of 2 words when using MIDI 2.0 (MIDIEventList based API's). This property is set to the default value by the framework. In case of kAudioUnitErr_MIDIOutputBufferFull errors caused by producing too much MIDI output in one render call, set this property to increase the buffer. This only provides a recommendation to the framework. Bridged to kAudioUnitProperty_MIDIOutputBufferSizeHint.
-//
-// WithMIDIOutputBufferSizeHint sets mIDIOutputBufferSizeHint and returns the receiver so calls can be chained.
+// WithMIDIOutputBufferSizeHint hint to control the size of the allocated buffer for outgoing MIDI events. This property allows the plug-in to provide a hint to the framework regarding the size of its outgoing MIDI data buffer. If the plug-in produces more MIDI output data than the default size of the allocated buffer, then the plug-in can provide this property to increase the size of this buffer. The value represents the number of 3-byte Legacy MIDI messages that fit into the buffer or a single MIDIEventList containing 1 MIDIEventPacket of 2 words when using MIDI 2.0 (MIDIEventList based API's). This property is set to the default value by the framework. In case of kAudioUnitErr_MIDIOutputBufferFull errors caused by producing too much MIDI output in one render call, set this property to increase the buffer. This only provides a recommendation to the framework. Bridged to kAudioUnitProperty_MIDIOutputBufferSizeHint.
 func (x *AudioUnitV2Bridge) WithMIDIOutputBufferSizeHint(mIDIOutputBufferSizeHint int) *AudioUnitV2Bridge {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMIDIOutputBufferSizeHint:"), mIDIOutputBufferSizeHint)
 	return x
@@ -206,3 +164,5 @@ type AudioUnitV2Bridgeable interface {
 }
 
 var _ AudioUnitV2Bridgeable = (*AudioUnitV2Bridge)(nil)
+
+var _ AudioUnitProvider = (*AudioUnitV2Bridge)(nil)

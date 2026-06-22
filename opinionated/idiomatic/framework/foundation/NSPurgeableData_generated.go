@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mutable data object containing bytes that can be discarded when they’re no longer needed.
-//
 // PurgeableData is an idiomatic wrapper over the Objective-C class NSPurgeableData.
+//
+// It embeds [MutableData], promoting that type's methods.
+//
+// A mutable data object containing bytes that can be discarded when they’re no longer needed.
 type PurgeableData struct {
-	objref.Handle
+	MutableData
 }
 
 // PurgeableDataFromID adopts an existing Objective-C object as a PurgeableData
@@ -25,7 +26,8 @@ func PurgeableDataFromID(id objc.ID) *PurgeableData {
 	if id == 0 {
 		return nil
 	}
-	x := &PurgeableData{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PurgeableData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func purgeableDataAdopt(id objc.ID) *PurgeableData {
 	if id == 0 {
 		return nil
 	}
-	x := &PurgeableData{Handle: objref.Wrap(id)}
+	x := &PurgeableData{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PurgeableData) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PurgeableData) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PurgeableData) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPurgeableData creates a new PurgeableData.
@@ -64,15 +52,13 @@ func NewPurgeableData() *PurgeableData {
 	return purgeableDataAdopt(_id)
 }
 
-// The number of bytes contained in the mutable data object.
-//
-// WithLength sets length and returns the receiver so calls can be chained.
+// WithLength the number of bytes contained in the mutable data object.
 func (x *PurgeableData) WithLength(length int) *PurgeableData {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *PurgeableData) WithScriptingProperties(scriptingProperties obj.Object) *PurgeableData {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
@@ -86,3 +72,7 @@ type PurgeableDataable interface {
 }
 
 var _ PurgeableDataable = (*PurgeableData)(nil)
+
+var _ MutableDataProvider = (*PurgeableData)(nil)
+
+var _ DataProvider = (*PurgeableData)(nil)

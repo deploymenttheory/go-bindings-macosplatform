@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ArrayMultiaryGradientKernel is an idiomatic wrapper over the Objective-C class MPSNDArrayMultiaryGradientKernel.
+//
+// ArrayMultiaryGradientKernel is an abstract base — you do not construct it directly. Construct one of [ArrayBinaryPrimaryGradientKernel], [ArrayBinarySecondaryGradientKernel], [ArrayUnaryGradientKernel] and pass it where a ArrayMultiaryGradientKernel is accepted.
 type ArrayMultiaryGradientKernel struct {
-	objref.Handle
+	ArrayMultiaryBase
 }
 
 // ArrayMultiaryGradientKernelFromID adopts an existing Objective-C object as a ArrayMultiaryGradientKernel
@@ -23,7 +24,8 @@ func ArrayMultiaryGradientKernelFromID(id objc.ID) *ArrayMultiaryGradientKernel 
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayMultiaryGradientKernel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ArrayMultiaryGradientKernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,30 +38,10 @@ func arrayMultiaryGradientKernelAdopt(id objc.ID) *ArrayMultiaryGradientKernel {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayMultiaryGradientKernel{Handle: objref.Wrap(id)}
+	x := &ArrayMultiaryGradientKernel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ArrayMultiaryGradientKernel) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ArrayMultiaryGradientKernel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ArrayMultiaryGradientKernel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewArrayMultiaryGradientKernel creates a new ArrayMultiaryGradientKernel.
-func NewArrayMultiaryGradientKernel() *ArrayMultiaryGradientKernel {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayMultiaryGradientKernel")), objc.RegisterName("new"))
-	return arrayMultiaryGradientKernelAdopt(_id)
 }
 
 // ArrayMultiaryGradientKernelable is the interface implemented by [ArrayMultiaryGradientKernel], for mocking and DI.
@@ -68,3 +50,12 @@ type ArrayMultiaryGradientKernelable interface {
 }
 
 var _ ArrayMultiaryGradientKernelable = (*ArrayMultiaryGradientKernel)(nil)
+
+// isArrayMultiaryGradientKernel marks ArrayMultiaryGradientKernel — and, by embedding promotion, its
+// subclasses — as a member of the ArrayMultiaryGradientKernel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ArrayMultiaryGradientKernel) isArrayMultiaryGradientKernel() {}
+
+var _ ArrayMultiaryGradientKernelProvider = (*ArrayMultiaryGradientKernel)(nil)
+
+var _ ArrayMultiaryBaseProvider = (*ArrayMultiaryGradientKernel)(nil)

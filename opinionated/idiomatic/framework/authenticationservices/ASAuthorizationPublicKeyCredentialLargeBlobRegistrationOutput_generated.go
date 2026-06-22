@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The result of the large binary object support check, resulting from a passkey registration response.
-//
 // AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput is an idiomatic wrapper over the Objective-C class ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput.
+//
+// The result of the large binary object support check, resulting from a passkey registration response.
 type AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationPublicKeyCredentialLargeBlobRegistrationOutputFromID(id objc.I
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationPublicKeyCredentialLargeBlobRegistrationOutputAdopt(id objc.ID
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput{Handle: objref.Wrap(id)}
+	x := &AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) IsKind(cla
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput creates a new AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput.
 func NewAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput() *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput")), objc.RegisterName("new"))
 	return authorizationPublicKeyCredentialLargeBlobRegistrationOutputAdopt(_id)
 }
 
+// IsSupported wraps the corresponding Objective-C method.
 func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) IsSupported() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSupported"))
 	return _r

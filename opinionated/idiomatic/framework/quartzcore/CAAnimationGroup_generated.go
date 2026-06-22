@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that allows multiple animations to be grouped and run concurrently.
-//
 // AnimationGroup is an idiomatic wrapper over the Objective-C class CAAnimationGroup.
+//
+// It embeds [Animation], promoting that type's methods.
+//
+// An object that allows multiple animations to be grouped and run concurrently.
 type AnimationGroup struct {
-	objref.Handle
+	Animation
 }
 
 // AnimationGroupFromID adopts an existing Objective-C object as a AnimationGroup
@@ -25,7 +26,8 @@ func AnimationGroupFromID(id objc.ID) *AnimationGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &AnimationGroup{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AnimationGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func animationGroupAdopt(id objc.ID) *AnimationGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &AnimationGroup{Handle: objref.Wrap(id)}
+	x := &AnimationGroup{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AnimationGroup) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AnimationGroup) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AnimationGroup) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAnimationGroup creates a new AnimationGroup.
@@ -64,37 +52,34 @@ func NewAnimationGroup() *AnimationGroup {
 	return animationGroupAdopt(_id)
 }
 
-// An array of CAAnimation objects to be evaluated in the time space of the receiver.
-//
-// WithAnimations sets the collection and returns the receiver so calls can be chained.
+// WithAnimations an array of CAAnimation objects to be evaluated in the time space of the receiver.
 func (x *AnimationGroup) WithAnimations(items ...AnimationProvider) *AnimationGroup {
 	_arr := purego.SliceToNSArray(items, func(_v AnimationProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimations:"), _arr)
 	return x
 }
 
-// An optional timing function defining the pacing of the animation.
-//
-// WithTimingFunction sets timingFunction and returns the receiver so calls can be chained.
+// WithTimingFunction an optional timing function defining the pacing of the animation.
 func (x *AnimationGroup) WithTimingFunction(timingFunction *MediaTimingFunction) *AnimationGroup {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
 	return x
 }
 
-// Determines if the animation is removed from the target layer’s animations upon completion.
-//
-// WithRemovedOnCompletion sets removedOnCompletion and returns the receiver so calls can be chained.
+// WithRemovedOnCompletion determines if the animation is removed from the target layer’s animations upon completion.
 func (x *AnimationGroup) WithRemovedOnCompletion(removedOnCompletion bool) *AnimationGroup {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
 	return x
 }
 
+// Animations wraps the corresponding Objective-C method.
+//
 // Animations returns the collection as a Go slice.
 func (x *AnimationGroup) Animations() []*Animation {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Animation { return AnimationFromID(_id) })
 }
 
+// SetAnimations wraps the corresponding Objective-C method.
 func (x *AnimationGroup) SetAnimations(animations []*Animation) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimations:"), purego.SliceToNSArray(animations, func(_v *Animation) objc.ID { return objref.IDOf(_v) }))
 }
@@ -110,3 +95,5 @@ type AnimationGroupable interface {
 }
 
 var _ AnimationGroupable = (*AnimationGroup)(nil)
+
+var _ AnimationProvider = (*AnimationGroup)(nil)

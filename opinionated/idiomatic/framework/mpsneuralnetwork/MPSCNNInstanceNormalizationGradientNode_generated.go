@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // CNNInstanceNormalizationGradientNode is an idiomatic wrapper over the Objective-C class MPSCNNInstanceNormalizationGradientNode.
+//
+// It embeds [NNGradientFilterNode], promoting that type's methods.
 type CNNInstanceNormalizationGradientNode struct {
-	objref.Handle
+	NNGradientFilterNode
 }
 
 // CNNInstanceNormalizationGradientNodeFromID adopts an existing Objective-C object as a CNNInstanceNormalizationGradientNode
@@ -23,7 +24,8 @@ func CNNInstanceNormalizationGradientNodeFromID(id objc.ID) *CNNInstanceNormaliz
 	if id == 0 {
 		return nil
 	}
-	x := &CNNInstanceNormalizationGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNInstanceNormalizationGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func cNNInstanceNormalizationGradientNodeAdopt(id objc.ID) *CNNInstanceNormaliza
 	if id == 0 {
 		return nil
 	}
-	x := &CNNInstanceNormalizationGradientNode{Handle: objref.Wrap(id)}
+	x := &CNNInstanceNormalizationGradientNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNInstanceNormalizationGradientNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNInstanceNormalizationGradientNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNInstanceNormalizationGradientNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNInstanceNormalizationGradientNodeWithSourceGradientSourceImageGradientState creates a new CNNInstanceNormalizationGradientNode.
@@ -63,9 +51,7 @@ func NewCNNInstanceNormalizationGradientNodeWithSourceGradientSourceImageGradien
 	return cNNInstanceNormalizationGradientNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNInstanceNormalizationGradientNode) WithLabel(label string) *CNNInstanceNormalizationGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -78,3 +64,7 @@ type CNNInstanceNormalizationGradientNodeable interface {
 }
 
 var _ CNNInstanceNormalizationGradientNodeable = (*CNNInstanceNormalizationGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*CNNInstanceNormalizationGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNInstanceNormalizationGradientNode)(nil)

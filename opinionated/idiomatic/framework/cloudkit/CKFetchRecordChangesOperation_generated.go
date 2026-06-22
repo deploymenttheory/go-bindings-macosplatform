@@ -9,15 +9,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An operation that reports on the changed and deleted records in the specified record zone.
-//
 // FetchRecordChangesOperation is an idiomatic wrapper over the Objective-C class CKFetchRecordChangesOperation.
+//
+// It embeds [DatabaseOperation], promoting that type's methods.
+//
+// An operation that reports on the changed and deleted records in the specified record zone.
 type FetchRecordChangesOperation struct {
-	objref.Handle
+	DatabaseOperation
 }
 
 // FetchRecordChangesOperationFromID adopts an existing Objective-C object as a FetchRecordChangesOperation
@@ -26,7 +27,8 @@ func FetchRecordChangesOperationFromID(id objc.ID) *FetchRecordChangesOperation 
 	if id == 0 {
 		return nil
 	}
-	x := &FetchRecordChangesOperation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FetchRecordChangesOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,24 +41,10 @@ func fetchRecordChangesOperationAdopt(id objc.ID) *FetchRecordChangesOperation {
 	if id == 0 {
 		return nil
 	}
-	x := &FetchRecordChangesOperation{Handle: objref.Wrap(id)}
+	x := &FetchRecordChangesOperation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *FetchRecordChangesOperation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FetchRecordChangesOperation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FetchRecordChangesOperation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewFetchRecordChangesOperation creates a new FetchRecordChangesOperation.
@@ -65,167 +53,138 @@ func NewFetchRecordChangesOperation() *FetchRecordChangesOperation {
 	return fetchRecordChangesOperationAdopt(_id)
 }
 
-// Creates an operation for fetching changes in the specified record zone.
-//
-// NewFetchRecordChangesOperationWithRecordZoneIDPreviousServerChangeToken creates a new FetchRecordChangesOperation.
+// NewFetchRecordChangesOperationWithRecordZoneIDPreviousServerChangeToken creates an operation for fetching changes in the specified record zone.
 func NewFetchRecordChangesOperationWithRecordZoneIDPreviousServerChangeToken(recordZoneID *RecordZoneID, previousServerChangeToken *ServerChangeToken) *FetchRecordChangesOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKFetchRecordChangesOperation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordZoneID:previousServerChangeToken:"), objref.IDOf(recordZoneID), objref.IDOf(previousServerChangeToken))
 	return fetchRecordChangesOperationAdopt(_id)
 }
 
-// The ID of the record zone with the records you want to fetch.
-//
-// WithRecordZoneID sets recordZoneID and returns the receiver so calls can be chained.
+// WithRecordZoneID the ID of the record zone with the records you want to fetch.
 func (x *FetchRecordChangesOperation) WithRecordZoneID(recordZoneID *RecordZoneID) *FetchRecordChangesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneID:"), objref.IDOf(recordZoneID))
 	return x
 }
 
-// The token that identifies the starting point for retrieving changes.
-//
-// WithPreviousServerChangeToken sets previousServerChangeToken and returns the receiver so calls can be chained.
+// WithPreviousServerChangeToken the token that identifies the starting point for retrieving changes.
 func (x *FetchRecordChangesOperation) WithPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) *FetchRecordChangesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousServerChangeToken:"), objref.IDOf(previousServerChangeToken))
 	return x
 }
 
-// The maximum number of changed records to report with this operation object.
-//
-// WithResultsLimit sets resultsLimit and returns the receiver so calls can be chained.
+// WithResultsLimit the maximum number of changed records to report with this operation object.
 func (x *FetchRecordChangesOperation) WithResultsLimit(resultsLimit int) *FetchRecordChangesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultsLimit:"), resultsLimit)
 	return x
 }
 
-// The fields to fetch for the requested records.
-//
-// WithDesiredKeys sets the collection and returns the receiver so calls can be chained.
+// WithDesiredKeys the fields to fetch for the requested records.
 func (x *FetchRecordChangesOperation) WithDesiredKeys(items ...obj.Object) *FetchRecordChangesOperation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredKeys:"), _arr)
 	return x
 }
 
-// The block to execute with the contents of a changed record.
-//
-// WithRecordChangedBlock sets recordChangedBlock and returns the receiver so calls can be chained.
+// WithRecordChangedBlock the block to execute with the contents of a changed record.
 func (x *FetchRecordChangesOperation) WithRecordChangedBlock(recordChangedBlock func(obj.Object)) *FetchRecordChangesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordChangedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { recordChangedBlock(obj.Wrap(_b0)) }))
 	return x
 }
 
-// The block to execute with the ID of a deleted record.
-//
-// WithRecordWithIDWasDeletedBlock sets recordWithIDWasDeletedBlock and returns the receiver so calls can be chained.
+// WithRecordWithIDWasDeletedBlock the block to execute with the ID of a deleted record.
 func (x *FetchRecordChangesOperation) WithRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(obj.Object)) *FetchRecordChangesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordWithIDWasDeletedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { recordWithIDWasDeletedBlock(obj.Wrap(_b0)) }))
 	return x
 }
 
-// The database that the operation uses.
-//
-// WithDatabase sets database and returns the receiver so calls can be chained.
+// WithDatabase the database that the operation uses.
 func (x *FetchRecordChangesOperation) WithDatabase(database *Database) *FetchRecordChangesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return x
 }
 
-// The operation’s configuration.
-//
-// WithConfiguration sets configuration and returns the receiver so calls can be chained.
+// WithConfiguration the operation’s configuration.
 func (x *FetchRecordChangesOperation) WithConfiguration(configuration *OperationConfiguration) *FetchRecordChangesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
-// The operation’s group.
-//
-// WithGroup sets group and returns the receiver so calls can be chained.
+// WithGroup the operation’s group.
 func (x *FetchRecordChangesOperation) WithGroup(group *OperationGroup) *FetchRecordChangesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation.
-//
-// WithLongLivedOperationWasPersistedBlock sets longLivedOperationWasPersistedBlock and returns the receiver so calls can be chained.
+// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
 func (x *FetchRecordChangesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchRecordChangesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
 	return x
 }
 
-// The operation's container.
-//
-// WithContainer sets container and returns the receiver so calls can be chained.
+// WithContainer the operation's container.
 func (x *FetchRecordChangesOperation) WithContainer(container *Container) *FetchRecordChangesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network.
-//
-// WithAllowsCellularAccess sets allowsCellularAccess and returns the receiver so calls can be chained.
+// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
 func (x *FetchRecordChangesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchRecordChangesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived.
-//
-// WithLongLived sets longLived and returns the receiver so calls can be chained.
+// WithLongLived a Boolean value that indicates whether the operation is long-lived.
 func (x *FetchRecordChangesOperation) WithLongLived(longLived bool) *FetchRecordChangesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The timeout interval when waiting for additional data.
-//
-// WithTimeoutIntervalForRequest sets timeoutIntervalForRequest and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
 func (x *FetchRecordChangesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchRecordChangesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can use.
-//
-// WithTimeoutIntervalForResource sets timeoutIntervalForResource and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
 func (x *FetchRecordChangesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchRecordChangesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
-// The ID of the record zone with the records you want to fetch. Typically, you set the value of this property when you initialize the operation object. If you intend to change the record zone, update the value before executing the operation or submitting it to a queue.
+// RecordZoneID the ID of the record zone with the records you want to fetch. Typically, you set the value of this property when you initialize the operation object. If you intend to change the record zone, update the value before executing the operation or submitting it to a queue.
 func (x *FetchRecordChangesOperation) RecordZoneID() *RecordZoneID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordZoneID"))
 	return RecordZoneIDFromID(_r)
 }
 
+// SetRecordZoneID wraps the corresponding Objective-C method.
 func (x *FetchRecordChangesOperation) SetRecordZoneID(recordZoneID *RecordZoneID) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneID:"), objref.IDOf(recordZoneID))
 }
 
-// The token that identifies the starting point for retrieving changes. Each fetch request returns a unique token in addition to any changes. The token passes as a parameter to your “CKFetchRecordChangesOperation/fetchRecordChangesCompletionBlock“ handler. During a subsequent fetch request, providing the previous token causes the server to return only the changes that occur after the previous fetch request. Tokens are opaque data objects that you can write to disk safely and reuse later. Typically, you set the value of this property when you initialize the operation object. If you intend to change the record zone, update the value of the property before executing the operation or submitting it to a queue.
+// PreviousServerChangeToken the token that identifies the starting point for retrieving changes. Each fetch request returns a unique token in addition to any changes. The token passes as a parameter to your “CKFetchRecordChangesOperation/fetchRecordChangesCompletionBlock“ handler. During a subsequent fetch request, providing the previous token causes the server to return only the changes that occur after the previous fetch request. Tokens are opaque data objects that you can write to disk safely and reuse later. Typically, you set the value of this property when you initialize the operation object. If you intend to change the record zone, update the value of the property before executing the operation or submitting it to a queue.
 func (x *FetchRecordChangesOperation) PreviousServerChangeToken() *ServerChangeToken {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousServerChangeToken"))
 	return ServerChangeTokenFromID(_r)
 }
 
+// SetPreviousServerChangeToken wraps the corresponding Objective-C method.
 func (x *FetchRecordChangesOperation) SetPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousServerChangeToken:"), objref.IDOf(previousServerChangeToken))
 }
 
-// The maximum number of changed records to report with this operation object. Use this property to limit the number of results in situations where you expect the number of changed records to be large. The default value is 0, which causes the server to return an appropriate number of results using dynamic conditions. When the number of returned results exceeds the results limit, the operation object sets the “CKFetchRecordChangesOperation/moreComing“ property to <doc://com.apple.documentation/documentation/swift/true> before executing the block in the “CKFetchRecordChangesOperation/fetchRecordChangesCompletionBlock“ property. In your block, check the value of that property, and if it's <doc://com.apple.documentation/documentation/swift/true>, create a new “CKFetchRecordChangesOperation“ object to fetch more results.
+// ResultsLimit the maximum number of changed records to report with this operation object. Use this property to limit the number of results in situations where you expect the number of changed records to be large. The default value is 0, which causes the server to return an appropriate number of results using dynamic conditions. When the number of returned results exceeds the results limit, the operation object sets the “CKFetchRecordChangesOperation/moreComing“ property to <doc://com.apple.documentation/documentation/swift/true> before executing the block in the “CKFetchRecordChangesOperation/fetchRecordChangesCompletionBlock“ property. In your block, check the value of that property, and if it's <doc://com.apple.documentation/documentation/swift/true>, create a new “CKFetchRecordChangesOperation“ object to fetch more results.
 func (x *FetchRecordChangesOperation) ResultsLimit() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resultsLimit"))
 	return _r
 }
 
+// SetResultsLimit wraps the corresponding Objective-C method.
 func (x *FetchRecordChangesOperation) SetResultsLimit(resultsLimit int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultsLimit:"), resultsLimit)
 }
 
-// The fields to fetch for the requested records. Use this property to limit the amount of data that the system retrieves for each record during the fetch operation. This property contains an array of strings, each of which contains the name of a field from the target records. When you retrieve a record, the returned records only include fields with names that match one of the keys in this property. The default value is `nil`, which causes the system to fetch all keys of the record. Because you can fetch records of different types, configure the array to include the merged set of all field names for the requested records and at least one field name from each record type. If you intend to specify the desired set of keys, set the value of this property before executing the operation or submitting it to a queue.
+// DesiredKeys the fields to fetch for the requested records. Use this property to limit the amount of data that the system retrieves for each record during the fetch operation. This property contains an array of strings, each of which contains the name of a field from the target records. When you retrieve a record, the returned records only include fields with names that match one of the keys in this property. The default value is `nil`, which causes the system to fetch all keys of the record. Because you can fetch records of different types, configure the array to include the merged set of all field names for the requested records and at least one field name from each record type. If you intend to specify the desired set of keys, set the value of this property before executing the operation or submitting it to a queue.
 //
 // DesiredKeys returns the collection as a Go slice.
 func (x *FetchRecordChangesOperation) DesiredKeys() []obj.Object {
@@ -233,12 +192,15 @@ func (x *FetchRecordChangesOperation) DesiredKeys() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetDesiredKeys wraps the corresponding Objective-C method.
 func (x *FetchRecordChangesOperation) SetDesiredKeys(desiredKeys []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredKeys:"), purego.SliceToNSArray(desiredKeys, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SetRecordChangedBlock wraps the corresponding Objective-C method.
+//
 // SetRecordChangedBlock blocks until the operation completes or ctx is cancelled.
-func (x *FetchRecordChangesOperation) SetRecordChangedBlock(ctx context.Context) (*Record, error) {
+func (x *FetchRecordChangesOperation) SetRecordChangedBlock(ctx context.Context) (result *Record, err error) {
 	type _result struct {
 		val *Record
 		err error
@@ -259,8 +221,10 @@ func (x *FetchRecordChangesOperation) SetRecordChangedBlock(ctx context.Context)
 	}
 }
 
+// SetRecordWithIDWasDeletedBlock wraps the corresponding Objective-C method.
+//
 // SetRecordWithIDWasDeletedBlock blocks until the operation completes or ctx is cancelled.
-func (x *FetchRecordChangesOperation) SetRecordWithIDWasDeletedBlock(ctx context.Context) (*RecordID, error) {
+func (x *FetchRecordChangesOperation) SetRecordWithIDWasDeletedBlock(ctx context.Context) (result *RecordID, err error) {
 	type _result struct {
 		val *RecordID
 		err error
@@ -281,7 +245,7 @@ func (x *FetchRecordChangesOperation) SetRecordWithIDWasDeletedBlock(ctx context
 	}
 }
 
-// A Boolean value that indicates whether more results are available. If the server is unable to deliver all of the changed results with this operation object, it sets this property to <doc://com.apple.documentation/documentation/swift/true> before executing the block in the “CKFetchRecordChangesOperation/fetchRecordChangesCompletionBlock“ property. To fetch the remaining changes, create a new “CKFetchRecordChangesOperation“ object using the change token that the server returns.
+// MoreComing a Boolean value that indicates whether more results are available. If the server is unable to deliver all of the changed results with this operation object, it sets this property to <doc://com.apple.documentation/documentation/swift/true> before executing the block in the “CKFetchRecordChangesOperation/fetchRecordChangesCompletionBlock“ property. To fetch the remaining changes, create a new “CKFetchRecordChangesOperation“ object using the change token that the server returns.
 func (x *FetchRecordChangesOperation) MoreComing() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("moreComing"))
 	return _r
@@ -319,3 +283,7 @@ type FetchRecordChangesOperationable interface {
 }
 
 var _ FetchRecordChangesOperationable = (*FetchRecordChangesOperation)(nil)
+
+var _ DatabaseOperationProvider = (*FetchRecordChangesOperation)(nil)
+
+var _ OperationProvider = (*FetchRecordChangesOperation)(nil)

@@ -13,6 +13,8 @@ import (
 )
 
 // IOBluetoothObject is an idiomatic wrapper over the Objective-C class IOBluetoothObject.
+//
+// IOBluetoothObject is an abstract base — you do not construct it directly. Construct one of [IOBluetoothDevice], [IOBluetoothL2CAPChannel], [IOBluetoothRFCOMMChannel] and pass it where a IOBluetoothObject is accepted.
 type IOBluetoothObject struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func IOBluetoothObjectFromID(id objc.ID) *IOBluetoothObject {
 	if id == 0 {
 		return nil
 	}
-	x := &IOBluetoothObject{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IOBluetoothObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func iOBluetoothObjectAdopt(id objc.ID) *IOBluetoothObject {
 	if id == 0 {
 		return nil
 	}
-	x := &IOBluetoothObject{Handle: objref.Wrap(id)}
+	x := &IOBluetoothObject{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,10 +60,10 @@ func (x *IOBluetoothObject) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewIOBluetoothObject creates a new IOBluetoothObject.
-func NewIOBluetoothObject() *IOBluetoothObject {
-	_id := objc.Send[objc.ID](objc.ID(_class("IOBluetoothObject")), objc.RegisterName("new"))
-	return iOBluetoothObjectAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IOBluetoothObject) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // IOBluetoothObjectable is the interface implemented by [IOBluetoothObject], for mocking and DI.
@@ -68,3 +72,10 @@ type IOBluetoothObjectable interface {
 }
 
 var _ IOBluetoothObjectable = (*IOBluetoothObject)(nil)
+
+// isIOBluetoothObject marks IOBluetoothObject — and, by embedding promotion, its
+// subclasses — as a member of the IOBluetoothObject hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *IOBluetoothObject) isIOBluetoothObject() {}
+
+var _ IOBluetoothObjectProvider = (*IOBluetoothObject)(nil)

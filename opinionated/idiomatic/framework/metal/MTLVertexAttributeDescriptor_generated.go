@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that determines how to store attribute data in memory and map it to the arguments of a vertex function.
-//
 // VertexAttributeDescriptor is an idiomatic wrapper over the Objective-C class MTLVertexAttributeDescriptor.
+//
+// An object that determines how to store attribute data in memory and map it to the arguments of a vertex function.
 type VertexAttributeDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VertexAttributeDescriptorFromID(id objc.ID) *VertexAttributeDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &VertexAttributeDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VertexAttributeDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func vertexAttributeDescriptorAdopt(id objc.ID) *VertexAttributeDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &VertexAttributeDescriptor{Handle: objref.Wrap(id)}
+	x := &VertexAttributeDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,59 +60,65 @@ func (x *VertexAttributeDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VertexAttributeDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVertexAttributeDescriptor creates a new VertexAttributeDescriptor.
 func NewVertexAttributeDescriptor() *VertexAttributeDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLVertexAttributeDescriptor")), objc.RegisterName("new"))
 	return vertexAttributeDescriptorAdopt(_id)
 }
 
-// The format of the vertex attribute.
-//
-// WithFormat sets format and returns the receiver so calls can be chained.
+// WithFormat the format of the vertex attribute.
 func (x *VertexAttributeDescriptor) WithFormat(format VertexFormat) *VertexAttributeDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormat:"), format)
 	return x
 }
 
-// The location of an attribute in vertex data, determined by the byte offset from the start of the vertex data.
-//
-// WithOffset sets offset and returns the receiver so calls can be chained.
+// WithOffset the location of an attribute in vertex data, determined by the byte offset from the start of the vertex data.
 func (x *VertexAttributeDescriptor) WithOffset(offset int) *VertexAttributeDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// The index in the argument table for the associated vertex buffer.
-//
-// WithBufferIndex sets bufferIndex and returns the receiver so calls can be chained.
+// WithBufferIndex the index in the argument table for the associated vertex buffer.
 func (x *VertexAttributeDescriptor) WithBufferIndex(bufferIndex int) *VertexAttributeDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferIndex:"), bufferIndex)
 	return x
 }
 
+// Format wraps the corresponding Objective-C method.
 func (x *VertexAttributeDescriptor) Format() VertexFormat {
 	_r := objc.Send[VertexFormat](objref.IDOf(x), objc.RegisterName("format"))
 	return _r
 }
 
+// SetFormat wraps the corresponding Objective-C method.
 func (x *VertexAttributeDescriptor) SetFormat(format VertexFormat) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormat:"), format)
 }
 
+// Offset wraps the corresponding Objective-C method.
 func (x *VertexAttributeDescriptor) Offset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
 	return _r
 }
 
+// SetOffset wraps the corresponding Objective-C method.
 func (x *VertexAttributeDescriptor) SetOffset(offset int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 }
 
+// BufferIndex wraps the corresponding Objective-C method.
 func (x *VertexAttributeDescriptor) BufferIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bufferIndex"))
 	return _r
 }
 
+// SetBufferIndex wraps the corresponding Objective-C method.
 func (x *VertexAttributeDescriptor) SetBufferIndex(bufferIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferIndex:"), bufferIndex)
 }

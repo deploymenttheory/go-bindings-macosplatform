@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides a list view for displaying content in a macOS Today widget.
-//
 // WidgetListViewController is an idiomatic wrapper over the Objective-C class NCWidgetListViewController.
+//
+// An object that provides a list view for displaying content in a macOS Today widget.
 type WidgetListViewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WidgetListViewControllerFromID(id objc.ID) *WidgetListViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &WidgetListViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WidgetListViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func widgetListViewControllerAdopt(id objc.ID) *WidgetListViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &WidgetListViewController{Handle: objref.Wrap(id)}
+	x := &WidgetListViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,97 +60,105 @@ func (x *WidgetListViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WidgetListViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWidgetListViewController creates a new WidgetListViewController.
 func NewWidgetListViewController() *WidgetListViewController {
 	_id := objc.Send[objc.ID](objc.ID(_class("NCWidgetListViewController")), objc.RegisterName("new"))
 	return widgetListViewControllerAdopt(_id)
 }
 
-// The minimum number of visible rows to display.
-//
-// WithMinimumVisibleRowCount sets minimumVisibleRowCount and returns the receiver so calls can be chained.
+// WithMinimumVisibleRowCount the minimum number of visible rows to display.
 func (x *WidgetListViewController) WithMinimumVisibleRowCount(minimumVisibleRowCount int) *WidgetListViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumVisibleRowCount:"), minimumVisibleRowCount)
 	return x
 }
 
-// A Boolean value that indicates whether list displays divider lines between rows.
-//
-// WithHasDividerLines sets hasDividerLines and returns the receiver so calls can be chained.
+// WithHasDividerLines a Boolean value that indicates whether list displays divider lines between rows.
 func (x *WidgetListViewController) WithHasDividerLines(hasDividerLines bool) *WidgetListViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDividerLines:"), hasDividerLines)
 	return x
 }
 
-// A Boolean value that indicates whether the list is in editing mode.
-//
-// WithEditing sets editing and returns the receiver so calls can be chained.
+// WithEditing a Boolean value that indicates whether the list is in editing mode.
 func (x *WidgetListViewController) WithEditing(editing bool) *WidgetListViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditing:"), editing)
 	return x
 }
 
-// A Boolean value that indicates whether an Add (+) button is displayed while the list is in editing mode.
-//
-// WithShowsAddButtonWhenEditing sets showsAddButtonWhenEditing and returns the receiver so calls can be chained.
+// WithShowsAddButtonWhenEditing a Boolean value that indicates whether an Add (+) button is displayed while the list is in editing mode.
 func (x *WidgetListViewController) WithShowsAddButtonWhenEditing(showsAddButtonWhenEditing bool) *WidgetListViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsAddButtonWhenEditing:"), showsAddButtonWhenEditing)
 	return x
 }
 
-// Returns the content view controller associated with the specified row, or a new content view controller if desired.
+// ViewControllerAtRowMakeIfNecessary returns the content view controller associated with the specified row, or a new content view controller if desired.
 func (x *WidgetListViewController) ViewControllerAtRowMakeIfNecessary(row int, makeIfNecesary bool) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewControllerAtRow:makeIfNecessary:"), row, makeIfNecesary)
 	return obj.Wrap(_r)
 }
 
-// Returns the row represented by the specified content view controller.
+// RowForViewController returns the row represented by the specified content view controller.
 func (x *WidgetListViewController) RowForViewController(viewController obj.Object) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowForViewController:"), objref.IDOf(viewController))
 	return _r
 }
 
+// Contents wraps the corresponding Objective-C method.
 func (x *WidgetListViewController) Contents() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contents"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetContents wraps the corresponding Objective-C method.
 func (x *WidgetListViewController) SetContents(contents []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), purego.SliceToNSArray(contents, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// MinimumVisibleRowCount wraps the corresponding Objective-C method.
 func (x *WidgetListViewController) MinimumVisibleRowCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumVisibleRowCount"))
 	return _r
 }
 
+// SetMinimumVisibleRowCount wraps the corresponding Objective-C method.
 func (x *WidgetListViewController) SetMinimumVisibleRowCount(minimumVisibleRowCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumVisibleRowCount:"), minimumVisibleRowCount)
 }
 
+// HasDividerLines wraps the corresponding Objective-C method.
 func (x *WidgetListViewController) HasDividerLines() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasDividerLines"))
 	return _r
 }
 
+// SetHasDividerLines wraps the corresponding Objective-C method.
 func (x *WidgetListViewController) SetHasDividerLines(hasDividerLines bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDividerLines:"), hasDividerLines)
 }
 
+// Editing wraps the corresponding Objective-C method.
 func (x *WidgetListViewController) Editing() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("editing"))
 	return _r
 }
 
+// SetEditing wraps the corresponding Objective-C method.
 func (x *WidgetListViewController) SetEditing(editing bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditing:"), editing)
 }
 
+// ShowsAddButtonWhenEditing wraps the corresponding Objective-C method.
 func (x *WidgetListViewController) ShowsAddButtonWhenEditing() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsAddButtonWhenEditing"))
 	return _r
 }
 
+// SetShowsAddButtonWhenEditing wraps the corresponding Objective-C method.
 func (x *WidgetListViewController) SetShowsAddButtonWhenEditing(showsAddButtonWhenEditing bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsAddButtonWhenEditing:"), showsAddButtonWhenEditing)
 }

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains an email address that the data detection system matches.
-//
 // MatchEmailAddress is an idiomatic wrapper over the Objective-C class DDMatchEmailAddress.
+//
+// It embeds [Match], promoting that type's methods.
+//
+// An object that contains an email address that the data detection system matches.
 type MatchEmailAddress struct {
-	objref.Handle
+	Match
 }
 
 // MatchEmailAddressFromID adopts an existing Objective-C object as a MatchEmailAddress
@@ -25,7 +26,8 @@ func MatchEmailAddressFromID(id objc.ID) *MatchEmailAddress {
 	if id == 0 {
 		return nil
 	}
-	x := &MatchEmailAddress{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatchEmailAddress{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func matchEmailAddressAdopt(id objc.ID) *MatchEmailAddress {
 	if id == 0 {
 		return nil
 	}
-	x := &MatchEmailAddress{Handle: objref.Wrap(id)}
+	x := &MatchEmailAddress{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MatchEmailAddress) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatchEmailAddress) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatchEmailAddress) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMatchEmailAddress creates a new MatchEmailAddress.
@@ -64,7 +52,7 @@ func NewMatchEmailAddress() *MatchEmailAddress {
 	return matchEmailAddressAdopt(_id)
 }
 
-// A string that represents an email address.
+// EmailAddress a string that represents an email address.
 func (x *MatchEmailAddress) EmailAddress() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emailAddress"))
 	if _r == 0 {
@@ -73,7 +61,7 @@ func (x *MatchEmailAddress) EmailAddress() string {
 	return purego.GoString(_r)
 }
 
-// A string that categorizes an email address, such as Home or Work.
+// Label a string that categorizes an email address, such as Home or Work.
 func (x *MatchEmailAddress) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -90,3 +78,5 @@ type MatchEmailAddressable interface {
 }
 
 var _ MatchEmailAddressable = (*MatchEmailAddress)(nil)
+
+var _ MatchProvider = (*MatchEmailAddress)(nil)

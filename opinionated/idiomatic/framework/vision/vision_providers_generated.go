@@ -11,99 +11,119 @@ import (
 // DetectedObjectObservationProvider is accepted wherever a VNDetectedObjectObservation (or one of its subclasses) is expected.
 type DetectedObjectObservationProvider interface {
 	objref.Object
+	isDetectedObjectObservation()
 }
 
 // DetectedPointProvider is accepted wherever a VNDetectedPoint (or one of its subclasses) is expected.
 type DetectedPointProvider interface {
 	objref.Object
+	isDetectedPoint()
 }
 
 // FaceLandmarkRegionProvider is accepted wherever a VNFaceLandmarkRegion (or one of its subclasses) is expected.
 type FaceLandmarkRegionProvider interface {
 	objref.Object
+	isFaceLandmarkRegion()
 }
 
 // FaceLandmarksProvider is accepted wherever a VNFaceLandmarks (or one of its subclasses) is expected.
 type FaceLandmarksProvider interface {
 	objref.Object
+	isFaceLandmarks()
 }
 
 // ImageAlignmentObservationProvider is accepted wherever a VNImageAlignmentObservation (or one of its subclasses) is expected.
 type ImageAlignmentObservationProvider interface {
 	objref.Object
+	isImageAlignmentObservation()
 }
 
 // ImageBasedRequestProvider is accepted wherever a VNImageBasedRequest (or one of its subclasses) is expected.
 type ImageBasedRequestProvider interface {
 	objref.Object
+	isImageBasedRequest()
 }
 
 // ImageRegistrationRequestProvider is accepted wherever a VNImageRegistrationRequest (or one of its subclasses) is expected.
 type ImageRegistrationRequestProvider interface {
 	objref.Object
+	isImageRegistrationRequest()
 }
 
 // ObservationProvider is accepted wherever a VNObservation (or one of its subclasses) is expected.
 type ObservationProvider interface {
 	objref.Object
+	isObservation()
 }
 
 // PixelBufferObservationProvider is accepted wherever a VNPixelBufferObservation (or one of its subclasses) is expected.
 type PixelBufferObservationProvider interface {
 	objref.Object
+	isPixelBufferObservation()
 }
 
 // PointProvider is accepted wherever a VNPoint (or one of its subclasses) is expected.
 type PointProvider interface {
 	objref.Object
+	isPoint()
 }
 
 // Point3DProvider is accepted wherever a VNPoint3D (or one of its subclasses) is expected.
 type Point3DProvider interface {
 	objref.Object
+	isPoint3D()
 }
 
 // RecognizedPoint3DProvider is accepted wherever a VNRecognizedPoint3D (or one of its subclasses) is expected.
 type RecognizedPoint3DProvider interface {
 	objref.Object
+	isRecognizedPoint3D()
 }
 
 // RecognizedPoints3DObservationProvider is accepted wherever a VNRecognizedPoints3DObservation (or one of its subclasses) is expected.
 type RecognizedPoints3DObservationProvider interface {
 	objref.Object
+	isRecognizedPoints3DObservation()
 }
 
 // RecognizedPointsObservationProvider is accepted wherever a VNRecognizedPointsObservation (or one of its subclasses) is expected.
 type RecognizedPointsObservationProvider interface {
 	objref.Object
+	isRecognizedPointsObservation()
 }
 
 // RectangleObservationProvider is accepted wherever a VNRectangleObservation (or one of its subclasses) is expected.
 type RectangleObservationProvider interface {
 	objref.Object
+	isRectangleObservation()
 }
 
 // RequestProvider is accepted wherever a VNRequest (or one of its subclasses) is expected.
 type RequestProvider interface {
 	objref.Object
+	isRequest()
 }
 
 // StatefulRequestProvider is accepted wherever a VNStatefulRequest (or one of its subclasses) is expected.
 type StatefulRequestProvider interface {
 	objref.Object
+	isStatefulRequest()
 }
 
 // TargetedImageRequestProvider is accepted wherever a VNTargetedImageRequest (or one of its subclasses) is expected.
 type TargetedImageRequestProvider interface {
 	objref.Object
+	isTargetedImageRequest()
 }
 
 // TrackingRequestProvider is accepted wherever a VNTrackingRequest (or one of its subclasses) is expected.
 type TrackingRequestProvider interface {
 	objref.Object
+	isTrackingRequest()
 }
 
 // VideoProcessorCadenceProvider is accepted wherever a VNVideoProcessorCadence (or one of its subclasses) is expected.
 type VideoProcessorCadenceProvider interface {
 	objref.Object
+	isVideoProcessorCadence()
 }

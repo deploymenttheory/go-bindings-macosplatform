@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that processes audio in real time.
-//
 // AudioUnitEffect is an idiomatic wrapper over the Objective-C class AVAudioUnitEffect.
+//
+// AudioUnitEffect is an abstract base — you do not construct it directly. Construct one of [AudioUnitDelay], [AudioUnitDistortion], [AudioUnitEQ], [AudioUnitReverb] and pass it where a AudioUnitEffect is accepted.
+//
+// An object that processes audio in real time.
 type AudioUnitEffect struct {
-	objref.Handle
+	AudioUnit
 }
 
 // AudioUnitEffectFromID adopts an existing Objective-C object as a AudioUnitEffect
@@ -25,7 +26,8 @@ func AudioUnitEffectFromID(id objc.ID) *AudioUnitEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitEffect{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioUnitEffect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,48 +40,32 @@ func audioUnitEffectAdopt(id objc.ID) *AudioUnitEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitEffect{Handle: objref.Wrap(id)}
+	x := &AudioUnitEffect{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *AudioUnitEffect) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioUnitEffect) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioUnitEffect) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates an audio unit effect object with the specified description.
-//
-// NewAudioUnitEffectWithAudioComponentDescription creates a new AudioUnitEffect.
+// NewAudioUnitEffectWithAudioComponentDescription creates an audio unit effect object with the specified description.
 func NewAudioUnitEffectWithAudioComponentDescription(audioComponentDescription obj.Object) *AudioUnitEffect {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioUnitEffect")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioComponentDescription:"), objref.IDOf(audioComponentDescription))
 	return audioUnitEffectAdopt(_id)
 }
 
-// The bypass state of the audio unit.
-//
-// WithBypass sets bypass and returns the receiver so calls can be chained.
+// WithBypass the bypass state of the audio unit.
 func (x *AudioUnitEffect) WithBypass(bypass bool) *AudioUnitEffect {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
 	return x
 }
 
+// Bypass wraps the corresponding Objective-C method.
 func (x *AudioUnitEffect) Bypass() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bypass"))
 	return _r
 }
 
+// SetBypass wraps the corresponding Objective-C method.
 func (x *AudioUnitEffect) SetBypass(bypass bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
 }
@@ -93,3 +79,14 @@ type AudioUnitEffectable interface {
 }
 
 var _ AudioUnitEffectable = (*AudioUnitEffect)(nil)
+
+// isAudioUnitEffect marks AudioUnitEffect — and, by embedding promotion, its
+// subclasses — as a member of the AudioUnitEffect hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AudioUnitEffect) isAudioUnitEffect() {}
+
+var _ AudioUnitEffectProvider = (*AudioUnitEffect)(nil)
+
+var _ AudioUnitProvider = (*AudioUnitEffect)(nil)
+
+var _ AudioNodeProvider = (*AudioUnitEffect)(nil)

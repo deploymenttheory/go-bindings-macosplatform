@@ -3,4 +3,11 @@
 //go:build darwin
 
 // Package mediaextension provides a fluent Go API over the macOS MediaExtension framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - RAWProcessingParameter: [RAWProcessingBooleanParameter], [RAWProcessingFloatParameter], [RAWProcessingIntegerParameter], [RAWProcessingListElementParameter], [RAWProcessingListParameter], [RAWProcessingSubGroupParameter]
 package mediaextension

@@ -23,7 +23,8 @@ func MTRAccessControlClusterAccessControlEntryChangedEventFromID(id objc.ID) *MT
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAccessControlClusterAccessControlEntryChangedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRAccessControlClusterAccessControlEntryChangedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRAccessControlClusterAccessControlEntryChangedEventAdopt(id objc.ID) *MTR
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAccessControlClusterAccessControlEntryChangedEvent{Handle: objref.Wrap(id)}
+	x := &MTRAccessControlClusterAccessControlEntryChangedEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,83 +58,99 @@ func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) IsKind(className
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRAccessControlClusterAccessControlEntryChangedEvent creates a new MTRAccessControlClusterAccessControlEntryChangedEvent.
 func NewMTRAccessControlClusterAccessControlEntryChangedEvent() *MTRAccessControlClusterAccessControlEntryChangedEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRAccessControlClusterAccessControlEntryChangedEvent")), objc.RegisterName("new"))
 	return mTRAccessControlClusterAccessControlEntryChangedEventAdopt(_id)
 }
 
-// WithAdminNodeID sets adminNodeID and returns the receiver so calls can be chained.
+// WithAdminNodeID sets the property and returns the receiver so calls can be chained.
 func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) WithAdminNodeID(adminNodeID obj.Object) *MTRAccessControlClusterAccessControlEntryChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdminNodeID:"), objref.IDOf(adminNodeID))
 	return x
 }
 
-// WithAdminPasscodeID sets adminPasscodeID and returns the receiver so calls can be chained.
+// WithAdminPasscodeID sets the property and returns the receiver so calls can be chained.
 func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) WithAdminPasscodeID(adminPasscodeID obj.Object) *MTRAccessControlClusterAccessControlEntryChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdminPasscodeID:"), objref.IDOf(adminPasscodeID))
 	return x
 }
 
-// WithChangeType sets changeType and returns the receiver so calls can be chained.
+// WithChangeType sets the property and returns the receiver so calls can be chained.
 func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) WithChangeType(changeType obj.Object) *MTRAccessControlClusterAccessControlEntryChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChangeType:"), objref.IDOf(changeType))
 	return x
 }
 
-// WithLatestValue sets latestValue and returns the receiver so calls can be chained.
+// WithLatestValue sets the property and returns the receiver so calls can be chained.
 func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) WithLatestValue(latestValue MTRAccessControlClusterAccessControlEntryStructProvider) *MTRAccessControlClusterAccessControlEntryChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLatestValue:"), objref.IDOf(latestValue))
 	return x
 }
 
-// WithFabricIndex sets fabricIndex and returns the receiver so calls can be chained.
+// WithFabricIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessControlEntryChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return x
 }
 
+// AdminNodeID wraps the corresponding Objective-C method.
 func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) AdminNodeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adminNodeID"))
 	return obj.Wrap(_r)
 }
 
+// SetAdminNodeID wraps the corresponding Objective-C method.
 func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) SetAdminNodeID(adminNodeID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdminNodeID:"), objref.IDOf(adminNodeID))
 }
 
+// AdminPasscodeID wraps the corresponding Objective-C method.
 func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) AdminPasscodeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adminPasscodeID"))
 	return obj.Wrap(_r)
 }
 
+// SetAdminPasscodeID wraps the corresponding Objective-C method.
 func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) SetAdminPasscodeID(adminPasscodeID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdminPasscodeID:"), objref.IDOf(adminPasscodeID))
 }
 
+// ChangeType wraps the corresponding Objective-C method.
 func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) ChangeType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeType"))
 	return obj.Wrap(_r)
 }
 
+// SetChangeType wraps the corresponding Objective-C method.
 func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) SetChangeType(changeType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChangeType:"), objref.IDOf(changeType))
 }
 
+// LatestValue wraps the corresponding Objective-C method.
 func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) LatestValue() *MTRAccessControlClusterAccessControlEntryStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("latestValue"))
 	return MTRAccessControlClusterAccessControlEntryStructFromID(_r)
 }
 
+// SetLatestValue wraps the corresponding Objective-C method.
 func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) SetLatestValue(latestValue *MTRAccessControlClusterAccessControlEntryStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLatestValue:"), objref.IDOf(latestValue))
 }
 
+// FabricIndex wraps the corresponding Objective-C method.
 func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)
 }
 
+// SetFabricIndex wraps the corresponding Objective-C method.
 func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) SetFabricIndex(fabricIndex obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 }

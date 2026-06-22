@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The identifying information for a user of your app.
-//
 // PersonHandle is an idiomatic wrapper over the Objective-C class INPersonHandle.
+//
+// The identifying information for a user of your app.
 type PersonHandle struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PersonHandleFromID(id objc.ID) *PersonHandle {
 	if id == 0 {
 		return nil
 	}
-	x := &PersonHandle{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PersonHandle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func personHandleAdopt(id objc.ID) *PersonHandle {
 	if id == 0 {
 		return nil
 	}
-	x := &PersonHandle{Handle: objref.Wrap(id)}
+	x := &PersonHandle{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +60,27 @@ func (x *PersonHandle) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes and returns a person handle with the specified data.
-//
-// NewPersonHandleWithValueTypeLabel creates a new PersonHandle.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PersonHandle) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPersonHandleWithValueTypeLabel initializes and returns a person handle with the specified data.
 func NewPersonHandleWithValueTypeLabel(value string, type_ PersonHandleType, label obj.Object) *PersonHandle {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INPersonHandle")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:type:label:"), purego.NSString(value), type_, objref.IDOf(label))
 	return personHandleAdopt(_id)
 }
 
-// Initializes and returns a person handle with the specified data.
-//
-// NewPersonHandleWithValueType creates a new PersonHandle.
+// NewPersonHandleWithValueType initializes and returns a person handle with the specified data.
 func NewPersonHandleWithValueType(value string, type_ PersonHandleType) *PersonHandle {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INPersonHandle")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:type:"), purego.NSString(value), type_)
 	return personHandleAdopt(_id)
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *PersonHandle) Value() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	if _r == 0 {
@@ -84,11 +89,13 @@ func (x *PersonHandle) Value() string {
 	return purego.GoString(_r)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *PersonHandle) Type() PersonHandleType {
 	_r := objc.Send[PersonHandleType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
+// Label wraps the corresponding Objective-C method.
 func (x *PersonHandle) Label() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	return obj.Wrap(_r)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event that represents a live streaming content key resource request.
-//
 // MetricContentKeyRequestEvent is an idiomatic wrapper over the Objective-C class AVMetricContentKeyRequestEvent.
+//
+// It embeds [MetricEvent], promoting that type's methods.
+//
+// An event that represents a live streaming content key resource request.
 type MetricContentKeyRequestEvent struct {
-	objref.Handle
+	MetricEvent
 }
 
 // MetricContentKeyRequestEventFromID adopts an existing Objective-C object as a MetricContentKeyRequestEvent
@@ -25,7 +26,8 @@ func MetricContentKeyRequestEventFromID(id objc.ID) *MetricContentKeyRequestEven
 	if id == 0 {
 		return nil
 	}
-	x := &MetricContentKeyRequestEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetricContentKeyRequestEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func metricContentKeyRequestEventAdopt(id objc.ID) *MetricContentKeyRequestEvent
 	if id == 0 {
 		return nil
 	}
-	x := &MetricContentKeyRequestEvent{Handle: objref.Wrap(id)}
+	x := &MetricContentKeyRequestEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MetricContentKeyRequestEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetricContentKeyRequestEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetricContentKeyRequestEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMetricContentKeyRequestEvent creates a new MetricContentKeyRequestEvent.
@@ -64,25 +52,25 @@ func NewMetricContentKeyRequestEvent() *MetricContentKeyRequestEvent {
 	return metricContentKeyRequestEventAdopt(_id)
 }
 
-// Returns the content key specifier for the request.
+// ContentKeySpecifier returns the content key specifier for the request.
 func (x *MetricContentKeyRequestEvent) ContentKeySpecifier() *ContentKeySpecifier {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentKeySpecifier"))
 	return ContentKeySpecifierFromID(_r)
 }
 
-// Returns the media type. If the value cannot be determined, returns AVMediaTypeMuxed.
+// MediaType returns the media type. If the value cannot be determined, returns AVMediaTypeMuxed.
 func (x *MetricContentKeyRequestEvent) MediaType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaType"))
 	return obj.Wrap(_r)
 }
 
-// Returns whether the content key resource request was initiated by the client.
+// IsClientInitiated returns whether the content key resource request was initiated by the client.
 func (x *MetricContentKeyRequestEvent) IsClientInitiated() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isClientInitiated"))
 	return _r
 }
 
-// Returns the media resource request event which was used to satisfy the content key.
+// MediaResourceRequestEvent returns the media resource request event which was used to satisfy the content key.
 func (x *MetricContentKeyRequestEvent) MediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaResourceRequestEvent"))
 	return MetricMediaResourceRequestEventFromID(_r)
@@ -98,3 +86,5 @@ type MetricContentKeyRequestEventable interface {
 }
 
 var _ MetricContentKeyRequestEventable = (*MetricContentKeyRequestEvent)(nil)
+
+var _ MetricEventProvider = (*MetricContentKeyRequestEvent)(nil)

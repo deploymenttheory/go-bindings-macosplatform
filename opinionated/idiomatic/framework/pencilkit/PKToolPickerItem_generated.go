@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for an item in the tool picker.
-//
 // ToolPickerItem is an idiomatic wrapper over the Objective-C class PKToolPickerItem.
+//
+// ToolPickerItem is an abstract base — you do not construct it directly. Construct one of [ToolPickerEraserItem], [ToolPickerInkingItem] and pass it where a ToolPickerItem is accepted.
+//
+// The base class for an item in the tool picker.
 type ToolPickerItem struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ToolPickerItemFromID(id objc.ID) *ToolPickerItem {
 	if id == 0 {
 		return nil
 	}
-	x := &ToolPickerItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ToolPickerItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func toolPickerItemAdopt(id objc.ID) *ToolPickerItem {
 	if id == 0 {
 		return nil
 	}
-	x := &ToolPickerItem{Handle: objref.Wrap(id)}
+	x := &ToolPickerItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +62,13 @@ func (x *ToolPickerItem) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewToolPickerItem creates a new ToolPickerItem.
-func NewToolPickerItem() *ToolPickerItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("PKToolPickerItem")), objc.RegisterName("new"))
-	return toolPickerItemAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ToolPickerItem) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// A string that identifies the item in the picker. For example, com.example.myapp.toolpicker.pencil. If multiple items with the same identifier are used to create the picker, only the first instance is used.
+// Identifier a string that identifies the item in the picker. For example, com.example.myapp.toolpicker.pencil. If multiple items with the same identifier are used to create the picker, only the first instance is used.
 func (x *ToolPickerItem) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -73,7 +77,7 @@ func (x *ToolPickerItem) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// The `PKTool` this tool picker item represents.
+// Tool the `PKTool` this tool picker item represents.
 func (x *ToolPickerItem) Tool() *Tool {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tool"))
 	return ToolFromID(_r)
@@ -87,3 +91,10 @@ type ToolPickerItemable interface {
 }
 
 var _ ToolPickerItemable = (*ToolPickerItem)(nil)
+
+// isToolPickerItem marks ToolPickerItem — and, by embedding promotion, its
+// subclasses — as a member of the ToolPickerItem hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ToolPickerItem) isToolPickerItem() {}
+
+var _ ToolPickerItemProvider = (*ToolPickerItem)(nil)

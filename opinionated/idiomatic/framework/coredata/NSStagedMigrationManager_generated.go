@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that handles the migration event loop and provides access to the migrating persistent store.
-//
 // StagedMigrationManager is an idiomatic wrapper over the Objective-C class NSStagedMigrationManager.
+//
+// An object that handles the migration event loop and provides access to the migrating persistent store.
 type StagedMigrationManager struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func StagedMigrationManagerFromID(id objc.ID) *StagedMigrationManager {
 	if id == 0 {
 		return nil
 	}
-	x := &StagedMigrationManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StagedMigrationManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func stagedMigrationManagerAdopt(id objc.ID) *StagedMigrationManager {
 	if id == 0 {
 		return nil
 	}
-	x := &StagedMigrationManager{Handle: objref.Wrap(id)}
+	x := &StagedMigrationManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +60,28 @@ func (x *StagedMigrationManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a migration manager with the specified stages.
-//
-// NewStagedMigrationManagerWithMigrationStages creates a new StagedMigrationManager.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StagedMigrationManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewStagedMigrationManagerWithMigrationStages creates a migration manager with the specified stages.
 func NewStagedMigrationManagerWithMigrationStages(stages []*MigrationStage) *StagedMigrationManager {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSStagedMigrationManager")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMigrationStages:"), purego.SliceToNSArray(stages, func(_v *MigrationStage) objc.ID { return objref.IDOf(_v) }))
 	return stagedMigrationManagerAdopt(_id)
 }
 
+// Stages wraps the corresponding Objective-C method.
+//
 // Stages returns the collection as a Go slice.
 func (x *StagedMigrationManager) Stages() []*MigrationStage {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MigrationStage { return MigrationStageFromID(_id) })
 }
 
+// Container wraps the corresponding Objective-C method.
 func (x *StagedMigrationManager) Container() *PersistentContainer {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("container"))
 	return PersistentContainerFromID(_r)

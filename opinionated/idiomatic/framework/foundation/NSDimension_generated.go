@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class representing a dimensional unit of measure.
-//
 // Dimension is an idiomatic wrapper over the Objective-C class NSDimension.
+//
+// Dimension is an abstract base — you do not construct it directly. Construct one of [UnitAcceleration], [UnitAngle], [UnitArea], [UnitConcentrationMass], [UnitDispersion], [UnitDuration], [UnitElectricCharge], [UnitElectricCurrent], [UnitElectricPotentialDifference], [UnitElectricResistance], [UnitEnergy], [UnitFrequency], [UnitFuelEfficiency], [UnitIlluminance], [UnitInformationStorage], [UnitLength], [UnitMass], [UnitPower], [UnitPressure], [UnitSpeed], [UnitTemperature], [UnitVolume] and pass it where a Dimension is accepted.
+//
+// An abstract class representing a dimensional unit of measure.
 type Dimension struct {
-	objref.Handle
+	Unit
 }
 
 // DimensionFromID adopts an existing Objective-C object as a Dimension
@@ -25,7 +26,8 @@ func DimensionFromID(id objc.ID) *Dimension {
 	if id == 0 {
 		return nil
 	}
-	x := &Dimension{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Dimension{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func dimensionAdopt(id objc.ID) *Dimension {
 	if id == 0 {
 		return nil
 	}
-	x := &Dimension{Handle: objref.Wrap(id)}
+	x := &Dimension{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *Dimension) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Dimension) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Dimension) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDimensionWithSymbolConverter creates a new Dimension.
@@ -65,12 +53,13 @@ func NewDimensionWithSymbolConverter(symbol string, converter *UnitConverter) *D
 	return dimensionAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Dimension) WithScriptingProperties(scriptingProperties obj.Object) *Dimension {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Converter wraps the corresponding Objective-C method.
 func (x *Dimension) Converter() *UnitConverter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("converter"))
 	return UnitConverterFromID(_r)
@@ -84,3 +73,12 @@ type Dimensionable interface {
 }
 
 var _ Dimensionable = (*Dimension)(nil)
+
+// isDimension marks Dimension — and, by embedding promotion, its
+// subclasses — as a member of the Dimension hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Dimension) isDimension() {}
+
+var _ DimensionProvider = (*Dimension)(nil)
+
+var _ UnitProvider = (*Dimension)(nil)

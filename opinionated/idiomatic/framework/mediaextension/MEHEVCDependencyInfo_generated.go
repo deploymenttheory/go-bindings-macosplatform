@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides information about the HEVC dependency attributes of a sample.
-//
 // HEVCDependencyInfo is an idiomatic wrapper over the Objective-C class MEHEVCDependencyInfo.
+//
+// An object that provides information about the HEVC dependency attributes of a sample.
 type HEVCDependencyInfo struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func HEVCDependencyInfoFromID(id objc.ID) *HEVCDependencyInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &HEVCDependencyInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HEVCDependencyInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func hEVCDependencyInfoAdopt(id objc.ID) *HEVCDependencyInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &HEVCDependencyInfo{Handle: objref.Wrap(id)}
+	x := &HEVCDependencyInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,188 +60,184 @@ func (x *HEVCDependencyInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HEVCDependencyInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewHEVCDependencyInfo creates a new HEVCDependencyInfo.
 func NewHEVCDependencyInfo() *HEVCDependencyInfo {
 	_id := objc.Send[objc.ID](objc.ID(_class("MEHEVCDependencyInfo")), objc.RegisterName("new"))
 	return hEVCDependencyInfoAdopt(_id)
 }
 
-// A Boolean value that indicates if the sample has an HEVC temporal sublayer access (TSA) picture.
-//
-// WithTemporalSubLayerAccess sets temporalSubLayerAccess and returns the receiver so calls can be chained.
+// WithTemporalSubLayerAccess a Boolean value that indicates if the sample has an HEVC temporal sublayer access (TSA) picture.
 func (x *HEVCDependencyInfo) WithTemporalSubLayerAccess(temporalSubLayerAccess bool) *HEVCDependencyInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemporalSubLayerAccess:"), temporalSubLayerAccess)
 	return x
 }
 
-// A Boolean value that indicates if the sample has an HEVC stepwise temporal sublayer access (STSA) picture.
-//
-// WithStepwiseTemporalSubLayerAccess sets stepwiseTemporalSubLayerAccess and returns the receiver so calls can be chained.
+// WithStepwiseTemporalSubLayerAccess a Boolean value that indicates if the sample has an HEVC stepwise temporal sublayer access (STSA) picture.
 func (x *HEVCDependencyInfo) WithStepwiseTemporalSubLayerAccess(stepwiseTemporalSubLayerAccess bool) *HEVCDependencyInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepwiseTemporalSubLayerAccess:"), stepwiseTemporalSubLayerAccess)
 	return x
 }
 
-// The NAL unit type for HEVC sync sample groups.
-//
-// WithSyncSampleNALUnitType sets syncSampleNALUnitType and returns the receiver so calls can be chained.
+// WithSyncSampleNALUnitType the NAL unit type for HEVC sync sample groups.
 func (x *HEVCDependencyInfo) WithSyncSampleNALUnitType(syncSampleNALUnitType int16) *HEVCDependencyInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSyncSampleNALUnitType:"), syncSampleNALUnitType)
 	return x
 }
 
-// The HEVC temporal level, if available.
-//
-// WithTemporalLevel sets temporalLevel and returns the receiver so calls can be chained.
+// WithTemporalLevel the HEVC temporal level, if available.
 func (x *HEVCDependencyInfo) WithTemporalLevel(temporalLevel int16) *HEVCDependencyInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemporalLevel:"), temporalLevel)
 	return x
 }
 
-// The HEVC profile space, if available.
-//
-// WithProfileSpace sets profileSpace and returns the receiver so calls can be chained.
+// WithProfileSpace the HEVC profile space, if available.
 func (x *HEVCDependencyInfo) WithProfileSpace(profileSpace int16) *HEVCDependencyInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProfileSpace:"), profileSpace)
 	return x
 }
 
-// The HEVC tier level flag, if available.
-//
-// WithTierFlag sets tierFlag and returns the receiver so calls can be chained.
+// WithTierFlag the HEVC tier level flag, if available.
 func (x *HEVCDependencyInfo) WithTierFlag(tierFlag int16) *HEVCDependencyInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTierFlag:"), tierFlag)
 	return x
 }
 
-// The HEVC profile index, if available.
-//
-// WithProfileIndex sets profileIndex and returns the receiver so calls can be chained.
+// WithProfileIndex the HEVC profile index, if available.
 func (x *HEVCDependencyInfo) WithProfileIndex(profileIndex int16) *HEVCDependencyInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProfileIndex:"), profileIndex)
 	return x
 }
 
-// The HEVC profile compatibility flags (4 bytes), if available.
-//
-// WithProfileCompatibilityFlags sets profileCompatibilityFlags and returns the receiver so calls can be chained.
+// WithProfileCompatibilityFlags the HEVC profile compatibility flags (4 bytes), if available.
 func (x *HEVCDependencyInfo) WithProfileCompatibilityFlags(profileCompatibilityFlags obj.Object) *HEVCDependencyInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProfileCompatibilityFlags:"), objref.IDOf(profileCompatibilityFlags))
 	return x
 }
 
-// The HEVC constraint indicator flags (6 bytes), if available.
-//
-// WithConstraintIndicatorFlags sets constraintIndicatorFlags and returns the receiver so calls can be chained.
+// WithConstraintIndicatorFlags the HEVC constraint indicator flags (6 bytes), if available.
 func (x *HEVCDependencyInfo) WithConstraintIndicatorFlags(constraintIndicatorFlags obj.Object) *HEVCDependencyInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraintIndicatorFlags:"), objref.IDOf(constraintIndicatorFlags))
 	return x
 }
 
-// The HEVC level index, if available.
-//
-// WithLevelIndex sets levelIndex and returns the receiver so calls can be chained.
+// WithLevelIndex the HEVC level index, if available.
 func (x *HEVCDependencyInfo) WithLevelIndex(levelIndex int16) *HEVCDependencyInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelIndex:"), levelIndex)
 	return x
 }
 
-// YES if the sample is an HEVC 'TSA' picture, NO otherwise. Maps to the kCMSampleAttachmentKey_HEVCTemporalSubLayerAccess sample buffer attachment.
+// HasTemporalSubLayerAccess YES if the sample is an HEVC 'TSA' picture, NO otherwise. Maps to the kCMSampleAttachmentKey_HEVCTemporalSubLayerAccess sample buffer attachment.
 func (x *HEVCDependencyInfo) HasTemporalSubLayerAccess() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasTemporalSubLayerAccess"))
 	return _r
 }
 
+// SetTemporalSubLayerAccess wraps the corresponding Objective-C method.
 func (x *HEVCDependencyInfo) SetTemporalSubLayerAccess(temporalSubLayerAccess bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemporalSubLayerAccess:"), temporalSubLayerAccess)
 }
 
-// YES if the sample is an HEVC 'STSA' picture, NO otherwise. Maps to the kCMSampleAttachmentKey_HEVCStepwiseTemporalSubLayerAccess sample buffer attachment.
+// HasStepwiseTemporalSubLayerAccess YES if the sample is an HEVC 'STSA' picture, NO otherwise. Maps to the kCMSampleAttachmentKey_HEVCStepwiseTemporalSubLayerAccess sample buffer attachment.
 func (x *HEVCDependencyInfo) HasStepwiseTemporalSubLayerAccess() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasStepwiseTemporalSubLayerAccess"))
 	return _r
 }
 
+// SetStepwiseTemporalSubLayerAccess wraps the corresponding Objective-C method.
 func (x *HEVCDependencyInfo) SetStepwiseTemporalSubLayerAccess(stepwiseTemporalSubLayerAccess bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepwiseTemporalSubLayerAccess:"), stepwiseTemporalSubLayerAccess)
 }
 
-// The NAL unit type for HEVC 'sync' sample groups, or -1 if this information is not available. Maps to the kCMSampleAttachmentKey_HEVCSyncSampleNALUnitType sample buffer attachment.
+// SyncSampleNALUnitType the NAL unit type for HEVC 'sync' sample groups, or -1 if this information is not available. Maps to the kCMSampleAttachmentKey_HEVCSyncSampleNALUnitType sample buffer attachment.
 func (x *HEVCDependencyInfo) SyncSampleNALUnitType() int16 {
 	_r := objc.Send[int16](objref.IDOf(x), objc.RegisterName("syncSampleNALUnitType"))
 	return _r
 }
 
+// SetSyncSampleNALUnitType wraps the corresponding Objective-C method.
 func (x *HEVCDependencyInfo) SetSyncSampleNALUnitType(syncSampleNALUnitType int16) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSyncSampleNALUnitType:"), syncSampleNALUnitType)
 }
 
-// The HEVC temporal level, or -1 if this information is not available. Maps to the kCMHEVCTemporalLevelInfoKey_TemporalLevel sample buffer attachment.
+// TemporalLevel the HEVC temporal level, or -1 if this information is not available. Maps to the kCMHEVCTemporalLevelInfoKey_TemporalLevel sample buffer attachment.
 func (x *HEVCDependencyInfo) TemporalLevel() int16 {
 	_r := objc.Send[int16](objref.IDOf(x), objc.RegisterName("temporalLevel"))
 	return _r
 }
 
+// SetTemporalLevel wraps the corresponding Objective-C method.
 func (x *HEVCDependencyInfo) SetTemporalLevel(temporalLevel int16) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemporalLevel:"), temporalLevel)
 }
 
-// The HEVC profile space, or -1 if this information is not available. Maps to the kCMHEVCTemporalLevelInfoKey_ProfileSpace sample buffer attachment.
+// ProfileSpace the HEVC profile space, or -1 if this information is not available. Maps to the kCMHEVCTemporalLevelInfoKey_ProfileSpace sample buffer attachment.
 func (x *HEVCDependencyInfo) ProfileSpace() int16 {
 	_r := objc.Send[int16](objref.IDOf(x), objc.RegisterName("profileSpace"))
 	return _r
 }
 
+// SetProfileSpace wraps the corresponding Objective-C method.
 func (x *HEVCDependencyInfo) SetProfileSpace(profileSpace int16) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProfileSpace:"), profileSpace)
 }
 
-// The HEVC tier level flag, or -1 if this information is not available. Maps to the kCMHEVCTemporalLevelInfoKey_TierFlag sample buffer attachment.
+// TierFlag the HEVC tier level flag, or -1 if this information is not available. Maps to the kCMHEVCTemporalLevelInfoKey_TierFlag sample buffer attachment.
 func (x *HEVCDependencyInfo) TierFlag() int16 {
 	_r := objc.Send[int16](objref.IDOf(x), objc.RegisterName("tierFlag"))
 	return _r
 }
 
+// SetTierFlag wraps the corresponding Objective-C method.
 func (x *HEVCDependencyInfo) SetTierFlag(tierFlag int16) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTierFlag:"), tierFlag)
 }
 
-// The HEVC profile index, or -1 if this information is not available. Maps to the kCMHEVCTemporalLevelInfoKey_ProfileIndex sample buffer attachment.
+// ProfileIndex the HEVC profile index, or -1 if this information is not available. Maps to the kCMHEVCTemporalLevelInfoKey_ProfileIndex sample buffer attachment.
 func (x *HEVCDependencyInfo) ProfileIndex() int16 {
 	_r := objc.Send[int16](objref.IDOf(x), objc.RegisterName("profileIndex"))
 	return _r
 }
 
+// SetProfileIndex wraps the corresponding Objective-C method.
 func (x *HEVCDependencyInfo) SetProfileIndex(profileIndex int16) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProfileIndex:"), profileIndex)
 }
 
-// The HEVC profile compatibility flags (4 bytes), or nil of this information is not available. Maps to the kCMHEVCTemporalLevelInfoKey_ProfileCompatibilityFlags sample buffer attachment.
+// ProfileCompatibilityFlags the HEVC profile compatibility flags (4 bytes), or nil of this information is not available. Maps to the kCMHEVCTemporalLevelInfoKey_ProfileCompatibilityFlags sample buffer attachment.
 func (x *HEVCDependencyInfo) ProfileCompatibilityFlags() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("profileCompatibilityFlags"))
 	return obj.Wrap(_r)
 }
 
+// SetProfileCompatibilityFlags wraps the corresponding Objective-C method.
 func (x *HEVCDependencyInfo) SetProfileCompatibilityFlags(profileCompatibilityFlags obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProfileCompatibilityFlags:"), objref.IDOf(profileCompatibilityFlags))
 }
 
-// The HEVC constraint indicator flags (6 bytes), or nil of this information is not available. Maps to the kCMHEVCTemporalLevelInfoKey_ConstraintIndicatorFlags sample buffer attachment.
+// ConstraintIndicatorFlags the HEVC constraint indicator flags (6 bytes), or nil of this information is not available. Maps to the kCMHEVCTemporalLevelInfoKey_ConstraintIndicatorFlags sample buffer attachment.
 func (x *HEVCDependencyInfo) ConstraintIndicatorFlags() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintIndicatorFlags"))
 	return obj.Wrap(_r)
 }
 
+// SetConstraintIndicatorFlags wraps the corresponding Objective-C method.
 func (x *HEVCDependencyInfo) SetConstraintIndicatorFlags(constraintIndicatorFlags obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraintIndicatorFlags:"), objref.IDOf(constraintIndicatorFlags))
 }
 
-// The HEVC level index, or -1 if this information is not available. Maps to the kCMHEVCTemporalLevelInfoKey_LevelIndex sample buffer attachment.
+// LevelIndex the HEVC level index, or -1 if this information is not available. Maps to the kCMHEVCTemporalLevelInfoKey_LevelIndex sample buffer attachment.
 func (x *HEVCDependencyInfo) LevelIndex() int16 {
 	_r := objc.Send[int16](objref.IDOf(x), objc.RegisterName("levelIndex"))
 	return _r
 }
 
+// SetLevelIndex wraps the corresponding Objective-C method.
 func (x *HEVCDependencyInfo) SetLevelIndex(levelIndex int16) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelIndex:"), levelIndex)
 }

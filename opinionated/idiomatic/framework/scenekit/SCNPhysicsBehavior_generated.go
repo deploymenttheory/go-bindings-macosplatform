@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for joints, vehicle simulations, and other high-level behaviors that incorporate multiple physics bodies.
-//
 // PhysicsBehavior is an idiomatic wrapper over the Objective-C class SCNPhysicsBehavior.
+//
+// PhysicsBehavior is an abstract base — you do not construct it directly. Construct one of [PhysicsBallSocketJoint], [PhysicsConeTwistJoint], [PhysicsHingeJoint], [PhysicsSliderJoint], [PhysicsVehicle] and pass it where a PhysicsBehavior is accepted.
+//
+// The abstract superclass for joints, vehicle simulations, and other high-level behaviors that incorporate multiple physics bodies.
 type PhysicsBehavior struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func PhysicsBehaviorFromID(id objc.ID) *PhysicsBehavior {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsBehavior{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PhysicsBehavior{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func physicsBehaviorAdopt(id objc.ID) *PhysicsBehavior {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsBehavior{Handle: objref.Wrap(id)}
+	x := &PhysicsBehavior{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *PhysicsBehavior) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewPhysicsBehavior creates a new PhysicsBehavior.
-func NewPhysicsBehavior() *PhysicsBehavior {
-	_id := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsBehavior")), objc.RegisterName("new"))
-	return physicsBehaviorAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PhysicsBehavior) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // PhysicsBehaviorable is the interface implemented by [PhysicsBehavior], for mocking and DI.
@@ -70,3 +74,10 @@ type PhysicsBehaviorable interface {
 }
 
 var _ PhysicsBehaviorable = (*PhysicsBehavior)(nil)
+
+// isPhysicsBehavior marks PhysicsBehavior — and, by embedding promotion, its
+// subclasses — as a member of the PhysicsBehavior hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *PhysicsBehavior) isPhysicsBehavior() {}
+
+var _ PhysicsBehaviorProvider = (*PhysicsBehavior)(nil)

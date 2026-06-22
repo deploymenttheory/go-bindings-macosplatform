@@ -23,7 +23,8 @@ func MTRColorControlClusterMoveSaturationParamsFromID(id objc.ID) *MTRColorContr
 	if id == 0 {
 		return nil
 	}
-	x := &MTRColorControlClusterMoveSaturationParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRColorControlClusterMoveSaturationParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRColorControlClusterMoveSaturationParamsAdopt(id objc.ID) *MTRColorContro
 	if id == 0 {
 		return nil
 	}
-	x := &MTRColorControlClusterMoveSaturationParams{Handle: objref.Wrap(id)}
+	x := &MTRColorControlClusterMoveSaturationParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,104 +58,116 @@ func (x *MTRColorControlClusterMoveSaturationParams) IsKind(className string) bo
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRColorControlClusterMoveSaturationParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRColorControlClusterMoveSaturationParams creates a new MTRColorControlClusterMoveSaturationParams.
 func NewMTRColorControlClusterMoveSaturationParams() *MTRColorControlClusterMoveSaturationParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRColorControlClusterMoveSaturationParams")), objc.RegisterName("new"))
 	return mTRColorControlClusterMoveSaturationParamsAdopt(_id)
 }
 
-// WithMoveMode sets moveMode and returns the receiver so calls can be chained.
+// WithMoveMode sets the property and returns the receiver so calls can be chained.
 func (x *MTRColorControlClusterMoveSaturationParams) WithMoveMode(moveMode obj.Object) *MTRColorControlClusterMoveSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMoveMode:"), objref.IDOf(moveMode))
 	return x
 }
 
-// WithRate sets rate and returns the receiver so calls can be chained.
+// WithRate sets the property and returns the receiver so calls can be chained.
 func (x *MTRColorControlClusterMoveSaturationParams) WithRate(rate obj.Object) *MTRColorControlClusterMoveSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), objref.IDOf(rate))
 	return x
 }
 
-// WithOptionsMask sets optionsMask and returns the receiver so calls can be chained.
+// WithOptionsMask sets the property and returns the receiver so calls can be chained.
 func (x *MTRColorControlClusterMoveSaturationParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterMoveSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return x
 }
 
-// WithOptionsOverride sets optionsOverride and returns the receiver so calls can be chained.
+// WithOptionsOverride sets the property and returns the receiver so calls can be chained.
 func (x *MTRColorControlClusterMoveSaturationParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterMoveSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRColorControlClusterMoveSaturationParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterMoveSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRColorControlClusterMoveSaturationParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterMoveSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// MoveMode wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveSaturationParams) MoveMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveMode"))
 	return obj.Wrap(_r)
 }
 
+// SetMoveMode wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveSaturationParams) SetMoveMode(moveMode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMoveMode:"), objref.IDOf(moveMode))
 }
 
+// Rate wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveSaturationParams) Rate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rate"))
 	return obj.Wrap(_r)
 }
 
+// SetRate wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveSaturationParams) SetRate(rate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), objref.IDOf(rate))
 }
 
+// OptionsMask wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveSaturationParams) OptionsMask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
 }
 
+// SetOptionsMask wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveSaturationParams) SetOptionsMask(optionsMask obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 }
 
+// OptionsOverride wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveSaturationParams) OptionsOverride() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)
 }
 
+// SetOptionsOverride wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveSaturationParams) SetOptionsOverride(optionsOverride obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRColorControlClusterMoveSaturationParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveSaturationParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRColorControlClusterMoveSaturationParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveSaturationParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

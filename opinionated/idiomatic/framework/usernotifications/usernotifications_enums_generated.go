@@ -32,6 +32,8 @@ const (
 	AuthorizationOptionTimeSensitive AuthorizationOptions = 256
 )
 
+// String returns the AuthorizationOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationOptions) String() string {
 	var parts []string
 	if e&AuthorizationOptionBadge != 0 {
@@ -78,6 +80,8 @@ const (
 	AuthorizationStatusProvisional AuthorizationStatus = 3
 )
 
+// String returns the AuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationStatus) String() string {
 	switch e {
 	case AuthorizationStatusNotDetermined:
@@ -111,6 +115,8 @@ const (
 	ErrorCodeBadgeInputInvalid                 ErrorCode = 1600
 )
 
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ErrorCode) String() string {
 	switch e {
 	case ErrorCodeNotificationsNotAllowed:
@@ -155,6 +161,8 @@ const (
 	NotificationActionOptionForeground NotificationActionOptions = 4
 )
 
+// String returns the NotificationActionOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NotificationActionOptions) String() string {
 	var parts []string
 	if e&NotificationActionOptionAuthenticationRequired != 0 {
@@ -185,6 +193,8 @@ const (
 	NotificationCategoryOptionHiddenPreviewsShowSubtitle NotificationCategoryOptions = 8
 )
 
+// String returns the NotificationCategoryOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NotificationCategoryOptions) String() string {
 	var parts []string
 	if e&NotificationCategoryOptionCustomDismissAction != 0 {
@@ -216,6 +226,8 @@ const (
 	NotificationInterruptionLevelCritical NotificationInterruptionLevel = 3
 )
 
+// String returns the NotificationInterruptionLevel constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NotificationInterruptionLevel) String() string {
 	switch e {
 	case NotificationInterruptionLevelPassive:
@@ -243,6 +255,8 @@ const (
 	NotificationSettingEnabled NotificationSetting = 2
 )
 
+// String returns the NotificationSetting constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NotificationSetting) String() string {
 	switch e {
 	case NotificationSettingNotSupported:
@@ -268,6 +282,8 @@ const (
 	ShowPreviewsSettingNever ShowPreviewsSetting = 2
 )
 
+// String returns the ShowPreviewsSetting constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ShowPreviewsSetting) String() string {
 	switch e {
 	case ShowPreviewsSettingAlways:

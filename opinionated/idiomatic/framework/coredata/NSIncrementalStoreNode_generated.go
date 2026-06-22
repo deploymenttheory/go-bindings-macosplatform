@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A concrete class used to represent basic nodes in a Core Data incremental store.
-//
 // IncrementalStoreNode is an idiomatic wrapper over the Objective-C class NSIncrementalStoreNode.
+//
+// A concrete class used to represent basic nodes in a Core Data incremental store.
 type IncrementalStoreNode struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func IncrementalStoreNodeFromID(id objc.ID) *IncrementalStoreNode {
 	if id == 0 {
 		return nil
 	}
-	x := &IncrementalStoreNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IncrementalStoreNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func incrementalStoreNodeAdopt(id objc.ID) *IncrementalStoreNode {
 	if id == 0 {
 		return nil
 	}
-	x := &IncrementalStoreNode{Handle: objref.Wrap(id)}
+	x := &IncrementalStoreNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,26 +60,31 @@ func (x *IncrementalStoreNode) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns an object initialized with the given values.
-//
-// NewIncrementalStoreNodeWithObjectIDWithValuesVersion creates a new IncrementalStoreNode.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IncrementalStoreNode) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewIncrementalStoreNodeWithObjectIDWithValuesVersion returns an object initialized with the given values.
 func NewIncrementalStoreNodeWithObjectIDWithValuesVersion(objectID *ManagedObjectID, values obj.Object, version uint64) *IncrementalStoreNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSIncrementalStoreNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjectID:withValues:version:"), objref.IDOf(objectID), objref.IDOf(values), version)
 	return incrementalStoreNodeAdopt(_id)
 }
 
-// Update the values and version to reflect new data being saved to or loaded from the external store.
+// UpdateWithValuesVersion update the values and version to reflect new data being saved to or loaded from the external store.
 func (x *IncrementalStoreNode) UpdateWithValuesVersion(values obj.Object, version uint64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithValues:version:"), objref.IDOf(values), version)
 }
 
-// Returns the value for the given property.
+// ValueForPropertyDescription returns the value for the given property.
 func (x *IncrementalStoreNode) ValueForPropertyDescription(prop *PropertyDescription) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForPropertyDescription:"), objref.IDOf(prop))
 	return obj.Wrap(_r)
 }
 
+// ObjectID wraps the corresponding Objective-C method.
 func (x *IncrementalStoreNode) ObjectID() *ManagedObjectID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectID"))
 	return ManagedObjectIDFromID(_r)

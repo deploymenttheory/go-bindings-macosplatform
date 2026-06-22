@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that lets you manage an Automator workflow in your app.
-//
 // WorkflowController is an idiomatic wrapper over the Objective-C class AMWorkflowController.
+//
+// An object that lets you manage an Automator workflow in your app.
 type WorkflowController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WorkflowControllerFromID(id objc.ID) *WorkflowController {
 	if id == 0 {
 		return nil
 	}
-	x := &WorkflowController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WorkflowController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func workflowControllerAdopt(id objc.ID) *WorkflowController {
 	if id == 0 {
 		return nil
 	}
-	x := &WorkflowController{Handle: objref.Wrap(id)}
+	x := &WorkflowController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,81 +60,90 @@ func (x *WorkflowController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WorkflowController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWorkflowController creates a new WorkflowController.
 func NewWorkflowController() *WorkflowController {
 	_id := objc.Send[objc.ID](objc.ID(_class("AMWorkflowController")), objc.RegisterName("new"))
 	return workflowControllerAdopt(_id)
 }
 
-// The controller’s workflow.
-//
-// WithWorkflow sets workflow and returns the receiver so calls can be chained.
+// WithWorkflow the controller’s workflow.
 func (x *WorkflowController) WithWorkflow(workflow *Workflow) *WorkflowController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorkflow:"), objref.IDOf(workflow))
 	return x
 }
 
-// The controller’s workflow view.
-//
-// WithWorkflowView sets workflowView and returns the receiver so calls can be chained.
+// WithWorkflowView the controller’s workflow view.
 func (x *WorkflowController) WithWorkflowView(workflowView *WorkflowView) *WorkflowController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorkflowView:"), objref.IDOf(workflowView))
 	return x
 }
 
-// Runs the associated workflow, after first clearing any results stored by its actions during any previous run.
+// Run runs the associated workflow, after first clearing any results stored by its actions during any previous run.
 func (x *WorkflowController) Run(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("run:"), objref.IDOf(sender))
 }
 
-// Stops the associated workflow.
+// Stop stops the associated workflow.
 func (x *WorkflowController) Stop(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop:"), objref.IDOf(sender))
 }
 
-// Pauses a workflow that’s running.
+// Pause pauses a workflow that’s running.
 func (x *WorkflowController) Pause(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pause:"), objref.IDOf(sender))
 }
 
-// In a paused workflow, runs the next action in the workflow and then pauses again.
+// Step in a paused workflow, runs the next action in the workflow and then pauses again.
 func (x *WorkflowController) Step(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("step:"), objref.IDOf(sender))
 }
 
-// Stops a workflow, clears any action results, and resets the workflow back to an un-run state.
+// Reset stops a workflow, clears any action results, and resets the workflow back to an un-run state.
 func (x *WorkflowController) Reset(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset:"), objref.IDOf(sender))
 }
 
+// Workflow wraps the corresponding Objective-C method.
 func (x *WorkflowController) Workflow() *Workflow {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workflow"))
 	return WorkflowFromID(_r)
 }
 
+// SetWorkflow wraps the corresponding Objective-C method.
 func (x *WorkflowController) SetWorkflow(workflow *Workflow) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorkflow:"), objref.IDOf(workflow))
 }
 
+// WorkflowView wraps the corresponding Objective-C method.
 func (x *WorkflowController) WorkflowView() *WorkflowView {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workflowView"))
 	return WorkflowViewFromID(_r)
 }
 
+// SetWorkflowView wraps the corresponding Objective-C method.
 func (x *WorkflowController) SetWorkflowView(workflowView *WorkflowView) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorkflowView:"), objref.IDOf(workflowView))
 }
 
+// CanRun wraps the corresponding Objective-C method.
 func (x *WorkflowController) CanRun() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canRun"))
 	return _r
 }
 
+// IsRunning wraps the corresponding Objective-C method.
 func (x *WorkflowController) IsRunning() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRunning"))
 	return _r
 }
 
+// IsPaused wraps the corresponding Objective-C method.
 func (x *WorkflowController) IsPaused() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaused"))
 	return _r

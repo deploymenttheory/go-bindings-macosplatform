@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that downloads a resource asynchronously and saves the data to a file.
-//
 // URLDownload is an idiomatic wrapper over the Objective-C class NSURLDownload.
+//
+// An object that downloads a resource asynchronously and saves the data to a file.
 type URLDownload struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func URLDownloadFromID(id objc.ID) *URLDownload {
 	if id == 0 {
 		return nil
 	}
-	x := &URLDownload{Handle: objref.Wrap(purego.Retain(id))}
+	x := &URLDownload{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func uRLDownloadAdopt(id objc.ID) *URLDownload {
 	if id == 0 {
 		return nil
 	}
-	x := &URLDownload{Handle: objref.Wrap(id)}
+	x := &URLDownload{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,54 +60,59 @@ func (x *URLDownload) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *URLDownload) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewURLDownload creates a new URLDownload.
 func NewURLDownload() *URLDownload {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSURLDownload")), objc.RegisterName("new"))
 	return uRLDownloadAdopt(_id)
 }
 
-// Returns whether the receiver deletes partially downloaded files when a download stops prematurely.
-//
-// WithDeletesFileUponFailure sets deletesFileUponFailure and returns the receiver so calls can be chained.
+// WithDeletesFileUponFailure returns whether the receiver deletes partially downloaded files when a download stops prematurely.
 func (x *URLDownload) WithDeletesFileUponFailure(deletesFileUponFailure bool) *URLDownload {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeletesFileUponFailure:"), deletesFileUponFailure)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *URLDownload) WithScriptingProperties(scriptingProperties obj.Object) *URLDownload {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Cancels the receiver’s download and deletes the downloaded file.
+// Cancel cancels the receiver’s download and deletes the downloaded file.
 func (x *URLDownload) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// Sets the destination path of the downloaded file.
+// SetDestinationAllowOverwrite sets the destination path of the downloaded file.
 func (x *URLDownload) SetDestinationAllowOverwrite(path string, allowOverwrite bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:allowOverwrite:"), purego.NSString(path), allowOverwrite)
 }
 
-// Returns the request of the download.
+// Request returns the request of the download.
 func (x *URLDownload) Request() *URLRequest {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("request"))
 	return URLRequestFromID(_r)
 }
 
-// Returns the resume data of a download that is incomplete.
+// ResumeData returns the resume data of a download that is incomplete.
 func (x *URLDownload) ResumeData() *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeData"))
 	return DataFromID(_r)
 }
 
-// Sets whether or not the downloaded file should be deleted upon failure. 1
+// DeletesFileUponFailure sets whether or not the downloaded file should be deleted upon failure. 1
 func (x *URLDownload) DeletesFileUponFailure() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("deletesFileUponFailure"))
 	return _r
 }
 
+// SetDeletesFileUponFailure wraps the corresponding Objective-C method.
 func (x *URLDownload) SetDeletesFileUponFailure(deletesFileUponFailure bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeletesFileUponFailure:"), deletesFileUponFailure)
 }

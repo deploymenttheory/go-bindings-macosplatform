@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An audio layer with an adjustable volume for a spatial mixer’s output.
-//
 // SpatialPipelineEntry is an idiomatic wrapper over the Objective-C class PHASESpatialPipelineEntry.
+//
+// An audio layer with an adjustable volume for a spatial mixer’s output.
 type SpatialPipelineEntry struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SpatialPipelineEntryFromID(id objc.ID) *SpatialPipelineEntry {
 	if id == 0 {
 		return nil
 	}
-	x := &SpatialPipelineEntry{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SpatialPipelineEntry{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func spatialPipelineEntryAdopt(id objc.ID) *SpatialPipelineEntry {
 	if id == 0 {
 		return nil
 	}
-	x := &SpatialPipelineEntry{Handle: objref.Wrap(id)}
+	x := &SpatialPipelineEntry{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,44 +60,48 @@ func (x *SpatialPipelineEntry) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpatialPipelineEntry) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSpatialPipelineEntry creates a new SpatialPipelineEntry.
 func NewSpatialPipelineEntry() *SpatialPipelineEntry {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHASESpatialPipelineEntry")), objc.RegisterName("new"))
 	return spatialPipelineEntryAdopt(_id)
 }
 
-// The amount of audio signal to add to the output.
-//
-// WithSendLevel sets sendLevel and returns the receiver so calls can be chained.
+// WithSendLevel the amount of audio signal to add to the output.
 func (x *SpatialPipelineEntry) WithSendLevel(sendLevel float64) *SpatialPipelineEntry {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendLevel:"), sendLevel)
 	return x
 }
 
-// A parameter that gradually updates the amount of audio signal that passes through to the output.
-//
-// WithSendLevelMetaParameterDefinition sets sendLevelMetaParameterDefinition and returns the receiver so calls can be chained.
+// WithSendLevelMetaParameterDefinition a parameter that gradually updates the amount of audio signal that passes through to the output.
 func (x *SpatialPipelineEntry) WithSendLevelMetaParameterDefinition(sendLevelMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SpatialPipelineEntry {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendLevelMetaParameterDefinition:"), objref.IDOf(sendLevelMetaParameterDefinition))
 	return x
 }
 
-// Send level.
+// SendLevel send level.
 func (x *SpatialPipelineEntry) SendLevel() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("sendLevel"))
 	return _r
 }
 
+// SetSendLevel wraps the corresponding Objective-C method.
 func (x *SpatialPipelineEntry) SetSendLevel(sendLevel float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendLevel:"), sendLevel)
 }
 
-// An optional metaparameter used to drive the send level during playback.
+// SendLevelMetaParameterDefinition an optional metaparameter used to drive the send level during playback.
 func (x *SpatialPipelineEntry) SendLevelMetaParameterDefinition() *NumberMetaParameterDefinition {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendLevelMetaParameterDefinition"))
 	return NumberMetaParameterDefinitionFromID(_r)
 }
 
+// SetSendLevelMetaParameterDefinition wraps the corresponding Objective-C method.
 func (x *SpatialPipelineEntry) SetSendLevelMetaParameterDefinition(sendLevelMetaParameterDefinition *NumberMetaParameterDefinition) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendLevelMetaParameterDefinition:"), objref.IDOf(sendLevelMetaParameterDefinition))
 }

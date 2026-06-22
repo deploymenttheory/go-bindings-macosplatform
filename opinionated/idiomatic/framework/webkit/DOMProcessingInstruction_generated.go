@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMProcessingInstruction is an idiomatic wrapper over the Objective-C class DOMProcessingInstruction.
+//
+// It embeds [DOMCharacterData], promoting that type's methods.
 type DOMProcessingInstruction struct {
-	objref.Handle
+	DOMCharacterData
 }
 
 // DOMProcessingInstructionFromID adopts an existing Objective-C object as a DOMProcessingInstruction
@@ -23,7 +24,8 @@ func DOMProcessingInstructionFromID(id objc.ID) *DOMProcessingInstruction {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMProcessingInstruction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMProcessingInstruction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMProcessingInstructionAdopt(id objc.ID) *DOMProcessingInstruction {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMProcessingInstruction{Handle: objref.Wrap(id)}
+	x := &DOMProcessingInstruction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMProcessingInstruction) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMProcessingInstruction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMProcessingInstruction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMProcessingInstruction creates a new DOMProcessingInstruction.
@@ -62,30 +50,31 @@ func NewDOMProcessingInstruction() *DOMProcessingInstruction {
 	return dOMProcessingInstructionAdopt(_id)
 }
 
-// WithData sets data and returns the receiver so calls can be chained.
+// WithData sets the property and returns the receiver so calls can be chained.
 func (x *DOMProcessingInstruction) WithData(data string) *DOMProcessingInstruction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 	return x
 }
 
-// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMProcessingInstruction) WithNodeValue(nodeValue string) *DOMProcessingInstruction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets prefix and returns the receiver so calls can be chained.
+// WithPrefix sets the property and returns the receiver so calls can be chained.
 func (x *DOMProcessingInstruction) WithPrefix(prefix string) *DOMProcessingInstruction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets textContent and returns the receiver so calls can be chained.
+// WithTextContent sets the property and returns the receiver so calls can be chained.
 func (x *DOMProcessingInstruction) WithTextContent(textContent string) *DOMProcessingInstruction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
+// Target wraps the corresponding Objective-C method.
 func (x *DOMProcessingInstruction) Target() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
 	if _r == 0 {
@@ -105,3 +94,11 @@ type DOMProcessingInstructionable interface {
 }
 
 var _ DOMProcessingInstructionable = (*DOMProcessingInstruction)(nil)
+
+var _ DOMCharacterDataProvider = (*DOMProcessingInstruction)(nil)
+
+var _ DOMNodeProvider = (*DOMProcessingInstruction)(nil)
+
+var _ DOMObjectProvider = (*DOMProcessingInstruction)(nil)
+
+var _ WebScriptObjectProvider = (*DOMProcessingInstruction)(nil)

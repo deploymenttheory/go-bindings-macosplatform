@@ -19,6 +19,8 @@ const (
 	AccessLevelReadWrite AccessLevel = 2
 )
 
+// String returns the AccessLevel constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AccessLevel) String() string {
 	switch e {
 	case AccessLevelAddOnly:
@@ -43,6 +45,8 @@ const (
 	AssetBurstSelectionTypeUserPick AssetBurstSelectionType = 2
 )
 
+// String returns the AssetBurstSelectionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AssetBurstSelectionType) String() string {
 	var parts []string
 	if e&AssetBurstSelectionTypeAutoPick != 0 {
@@ -67,6 +71,8 @@ const (
 	AssetCollectionTypeSmartAlbum AssetCollectionType = 2
 )
 
+// String returns the AssetCollectionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AssetCollectionType) String() string {
 	switch e {
 	case AssetCollectionTypeAlbum:
@@ -90,6 +96,8 @@ const (
 	AssetEditOperationProperties AssetEditOperation = 3
 )
 
+// String returns the AssetEditOperation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AssetEditOperation) String() string {
 	switch e {
 	case AssetEditOperationDelete:
@@ -133,6 +141,8 @@ const (
 	AssetMediaSubtypeVideoCinematic AssetMediaSubtype = 2097152
 )
 
+// String returns the AssetMediaSubtype constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AssetMediaSubtype) String() string {
 	var parts []string
 	if e&AssetMediaSubtypePhotoPanorama != 0 {
@@ -188,6 +198,8 @@ const (
 	AssetMediaTypeAudio AssetMediaType = 3
 )
 
+// String returns the AssetMediaType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AssetMediaType) String() string {
 	switch e {
 	case AssetMediaTypeUnknown:
@@ -215,6 +227,8 @@ const (
 	AssetPlaybackStyleVideoLooping  AssetPlaybackStyle = 5
 )
 
+// String returns the AssetPlaybackStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AssetPlaybackStyle) String() string {
 	switch e {
 	case AssetPlaybackStyleUnsupported:
@@ -265,6 +279,8 @@ const (
 	AssetResourceTypePhotoProxy          AssetResourceType = 19
 )
 
+// String returns the AssetResourceType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AssetResourceType) String() string {
 	switch e {
 	case AssetResourceTypePhoto:
@@ -313,6 +329,8 @@ const (
 	AssetSourceTypeiTunesSynced AssetSourceType = 4
 )
 
+// String returns the AssetSourceType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AssetSourceType) String() string {
 	var parts []string
 	if e&AssetSourceTypeUserLibrary != 0 {
@@ -346,6 +364,8 @@ const (
 	AuthorizationStatusLimited AuthorizationStatus = 4
 )
 
+// String returns the AuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationStatus) String() string {
 	switch e {
 	case AuthorizationStatusNotDetermined:
@@ -383,6 +403,8 @@ const (
 	CollectionEditOperationRename CollectionEditOperation = 7
 )
 
+// String returns the CollectionEditOperation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CollectionEditOperation) String() string {
 	switch e {
 	case CollectionEditOperationDeleteContent:
@@ -416,6 +438,8 @@ const (
 	CollectionListSubtypeAny CollectionListSubtype = 9223372036854775807
 )
 
+// String returns the CollectionListSubtype constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CollectionListSubtype) String() string {
 	switch e {
 	case CollectionListSubtypeSmartFolderEvents:
@@ -426,6 +450,31 @@ func (e CollectionListSubtype) String() string {
 		return "CollectionListSubtypeAny"
 	default:
 		return fmt.Sprintf("CollectionListSubtype(%d)", int64(e))
+	}
+}
+
+// Options for fitting an image’s aspect ratio to a requested size, used by the requestImageForAsset:targetSize:contentMode:options:resultHandler: method.
+type ImageContentMode int64
+
+const (
+	// Scales the image so that its larger dimension fits the target size.
+	ImageContentModeAspectFit ImageContentMode = 0
+	// Scales the image so that it completely fills the target size.
+	ImageContentModeAspectFill ImageContentMode = 1
+	// Fits the image to the requested size using the default option, PHImageContentModeAspectFit.
+	ImageContentModeDefault ImageContentMode = 0
+)
+
+// String returns the ImageContentMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ImageContentMode) String() string {
+	switch e {
+	case ImageContentModeAspectFit:
+		return "ImageContentModeAspectFit"
+	case ImageContentModeAspectFill:
+		return "ImageContentModeAspectFill"
+	default:
+		return fmt.Sprintf("ImageContentMode(%d)", int64(e))
 	}
 }
 
@@ -441,6 +490,8 @@ const (
 	ImageRequestOptionsDeliveryModeFastFormat ImageRequestOptionsDeliveryMode = 2
 )
 
+// String returns the ImageRequestOptionsDeliveryMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ImageRequestOptionsDeliveryMode) String() string {
 	switch e {
 	case ImageRequestOptionsDeliveryModeOpportunistic:
@@ -466,6 +517,8 @@ const (
 	ImageRequestOptionsResizeModeExact ImageRequestOptionsResizeMode = 2
 )
 
+// String returns the ImageRequestOptionsResizeMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ImageRequestOptionsResizeMode) String() string {
 	switch e {
 	case ImageRequestOptionsResizeModeNone:
@@ -495,6 +548,8 @@ const (
 	LivePhotoEditingErrorCodeAborted LivePhotoEditingErrorCode = 1
 )
 
+// String returns the LivePhotoEditingErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LivePhotoEditingErrorCode) String() string {
 	switch e {
 	case LivePhotoEditingErrorCodeUnknown:
@@ -518,6 +573,8 @@ const (
 	ObjectTypeCollectionList ObjectType = 3
 )
 
+// String returns the ObjectType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ObjectType) String() string {
 	switch e {
 	case ObjectTypeAsset:
@@ -545,6 +602,8 @@ const (
 	VideoRequestOptionsDeliveryModeFastFormat VideoRequestOptionsDeliveryMode = 3
 )
 
+// String returns the VideoRequestOptionsDeliveryMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VideoRequestOptionsDeliveryMode) String() string {
 	switch e {
 	case VideoRequestOptionsDeliveryModeAutomatic:

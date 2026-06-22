@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that combines multiple audio signals into a single signal.
-//
 // Mixer is an idiomatic wrapper over the Objective-C class PHASEMixer.
+//
+// An object that combines multiple audio signals into a single signal.
 type Mixer struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MixerFromID(id objc.ID) *Mixer {
 	if id == 0 {
 		return nil
 	}
-	x := &Mixer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Mixer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mixerAdopt(id objc.ID) *Mixer {
 	if id == 0 {
 		return nil
 	}
-	x := &Mixer{Handle: objref.Wrap(id)}
+	x := &Mixer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *Mixer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Mixer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMixer creates a new Mixer.
 func NewMixer() *Mixer {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHASEMixer")), objc.RegisterName("new"))
 	return mixerAdopt(_id)
 }
 
-// The identifier that uniquely represents this mixer.
+// Identifier the identifier that uniquely represents this mixer.
 func (x *Mixer) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -73,13 +81,13 @@ func (x *Mixer) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Linear gain scalar.
+// Gain linear gain scalar.
 func (x *Mixer) Gain() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("gain"))
 	return _r
 }
 
-// The metaparameter that can be used to adjust the gain during playback
+// GainMetaParameter the metaparameter that can be used to adjust the gain during playback
 func (x *Mixer) GainMetaParameter() *MetaParameter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gainMetaParameter"))
 	return MetaParameterFromID(_r)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that appends timed metadata groups to an asset writer input.
-//
 // AssetWriterInputMetadataAdaptor is an idiomatic wrapper over the Objective-C class AVAssetWriterInputMetadataAdaptor.
+//
+// An object that appends timed metadata groups to an asset writer input.
 type AssetWriterInputMetadataAdaptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetWriterInputMetadataAdaptorFromID(id objc.ID) *AssetWriterInputMetadata
 	if id == 0 {
 		return nil
 	}
-	x := &AssetWriterInputMetadataAdaptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetWriterInputMetadataAdaptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetWriterInputMetadataAdaptorAdopt(id objc.ID) *AssetWriterInputMetadataA
 	if id == 0 {
 		return nil
 	}
-	x := &AssetWriterInputMetadataAdaptor{Handle: objref.Wrap(id)}
+	x := &AssetWriterInputMetadataAdaptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,26 @@ func (x *AssetWriterInputMetadataAdaptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a metadata group adaptor to append timed metadata groups to write to an output file.
-//
-// NewAssetWriterInputMetadataAdaptorWithAssetWriterInput creates a new AssetWriterInputMetadataAdaptor.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetWriterInputMetadataAdaptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetWriterInputMetadataAdaptorWithAssetWriterInput creates a metadata group adaptor to append timed metadata groups to write to an output file.
 func NewAssetWriterInputMetadataAdaptorWithAssetWriterInput(input *AssetWriterInput) *AssetWriterInputMetadataAdaptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInputMetadataAdaptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetWriterInput:"), objref.IDOf(input))
 	return assetWriterInputMetadataAdaptorAdopt(_id)
 }
 
-// Appends a timed metadata group to the adaptor.
+// AppendTimedMetadataGroup appends a timed metadata group to the adaptor.
 func (x *AssetWriterInputMetadataAdaptor) AppendTimedMetadataGroup(timedMetadataGroup *TimedMetadataGroup) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appendTimedMetadataGroup:"), objref.IDOf(timedMetadataGroup))
 	return _r
 }
 
-// The asset writer input to which the receiver should append timed metadata groups.
+// AssetWriterInput the asset writer input to which the receiver should append timed metadata groups.
 func (x *AssetWriterInputMetadataAdaptor) AssetWriterInput() *AssetWriterInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetWriterInput"))
 	return AssetWriterInputFromID(_r)

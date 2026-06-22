@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description that uniquely identifies a particular passkey credential.
-//
 // PasskeyCredentialIdentity is an idiomatic wrapper over the Objective-C class ASPasskeyCredentialIdentity.
+//
+// A description that uniquely identifies a particular passkey credential.
 type PasskeyCredentialIdentity struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PasskeyCredentialIdentityFromID(id objc.ID) *PasskeyCredentialIdentity {
 	if id == 0 {
 		return nil
 	}
-	x := &PasskeyCredentialIdentity{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PasskeyCredentialIdentity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func passkeyCredentialIdentityAdopt(id objc.ID) *PasskeyCredentialIdentity {
 	if id == 0 {
 		return nil
 	}
-	x := &PasskeyCredentialIdentity{Handle: objref.Wrap(id)}
+	x := &PasskeyCredentialIdentity{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +60,26 @@ func (x *PasskeyCredentialIdentity) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a passkey credential identity.
-//
-// NewPasskeyCredentialIdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier creates a new PasskeyCredentialIdentity.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PasskeyCredentialIdentity) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPasskeyCredentialIdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier initializes a passkey credential identity.
 func NewPasskeyCredentialIdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier(relyingPartyIdentifier string, userName string, credentialID obj.Object, userHandle obj.Object, recordIdentifier string) *PasskeyCredentialIdentity {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasskeyCredentialIdentity")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRelyingPartyIdentifier:userName:credentialID:userHandle:recordIdentifier:"), purego.NSString(relyingPartyIdentifier), purego.NSString(userName), objref.IDOf(credentialID), objref.IDOf(userHandle), purego.NSString(recordIdentifier))
 	return passkeyCredentialIdentityAdopt(_id)
 }
 
-// An indicator that enables you to prioritize credential identities relative to each other.
-//
-// WithRank sets rank and returns the receiver so calls can be chained.
+// WithRank an indicator that enables you to prioritize credential identities relative to each other.
 func (x *PasskeyCredentialIdentity) WithRank(rank int) *PasskeyCredentialIdentity {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRank:"), rank)
 	return x
 }
 
-// The relying party identifier of this passkey credential. This field is reported as the serviceIdentifier property of ASCredentialIdentity.
+// RelyingPartyIdentifier the relying party identifier of this passkey credential. This field is reported as the serviceIdentifier property of ASCredentialIdentity.
 func (x *PasskeyCredentialIdentity) RelyingPartyIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relyingPartyIdentifier"))
 	if _r == 0 {
@@ -84,7 +88,7 @@ func (x *PasskeyCredentialIdentity) RelyingPartyIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// The user name of this passkey credential. This field is reported as the user property of ASCredentialIdentity.
+// UserName the user name of this passkey credential. This field is reported as the user property of ASCredentialIdentity.
 func (x *PasskeyCredentialIdentity) UserName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userName"))
 	if _r == 0 {
@@ -93,19 +97,19 @@ func (x *PasskeyCredentialIdentity) UserName() string {
 	return purego.GoString(_r)
 }
 
-// The credential ID of this passkey credential. This field is used to identify the correct credential to use based on relying party request parameters.
+// CredentialID the credential ID of this passkey credential. This field is used to identify the correct credential to use based on relying party request parameters.
 func (x *PasskeyCredentialIdentity) CredentialID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentialID"))
 	return obj.Wrap(_r)
 }
 
-// The user handle of this passkey credential. This field is used to identify the correct credential to use based on relying party request parameters.
+// UserHandle the user handle of this passkey credential. This field is used to identify the correct credential to use based on relying party request parameters.
 func (x *PasskeyCredentialIdentity) UserHandle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userHandle"))
 	return obj.Wrap(_r)
 }
 
-// Get the record identifier. You can utilize the record identifier to uniquely identify the credential identity in your local database.
+// RecordIdentifier get the record identifier. You can utilize the record identifier to uniquely identify the credential identity in your local database.
 func (x *PasskeyCredentialIdentity) RecordIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordIdentifier"))
 	if _r == 0 {
@@ -114,12 +118,13 @@ func (x *PasskeyCredentialIdentity) RecordIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Get or set the rank of the credential identity object. The system may utilize the rank to decide which credential identity precedes the other if two identities have the same service identifier. A credential identity with a larger rank value precedes one with a smaller value if both credential identities have the same service identifier. The default value of this property is 0.
+// Rank get or set the rank of the credential identity object. The system may utilize the rank to decide which credential identity precedes the other if two identities have the same service identifier. A credential identity with a larger rank value precedes one with a smaller value if both credential identities have the same service identifier. The default value of this property is 0.
 func (x *PasskeyCredentialIdentity) Rank() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rank"))
 	return _r
 }
 
+// SetRank wraps the corresponding Objective-C method.
 func (x *PasskeyCredentialIdentity) SetRank(rank int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRank:"), rank)
 }

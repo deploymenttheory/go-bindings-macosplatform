@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that validates the identity of a merchant for a payment request.
-//
 // PaymentMerchantSession is an idiomatic wrapper over the Objective-C class PKPaymentMerchantSession.
+//
+// An object that validates the identity of a merchant for a payment request.
 type PaymentMerchantSession struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PaymentMerchantSessionFromID(id objc.ID) *PaymentMerchantSession {
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentMerchantSession{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PaymentMerchantSession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func paymentMerchantSessionAdopt(id objc.ID) *PaymentMerchantSession {
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentMerchantSession{Handle: objref.Wrap(id)}
+	x := &PaymentMerchantSession{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,9 +60,13 @@ func (x *PaymentMerchantSession) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an object that validates the identity of a merchant for a payment request.
-//
-// NewPaymentMerchantSessionWithDictionary creates a new PaymentMerchantSession.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PaymentMerchantSession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPaymentMerchantSessionWithDictionary creates an object that validates the identity of a merchant for a payment request.
 func NewPaymentMerchantSessionWithDictionary(dictionary obj.Object) *PaymentMerchantSession {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentMerchantSession")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:"), objref.IDOf(dictionary))

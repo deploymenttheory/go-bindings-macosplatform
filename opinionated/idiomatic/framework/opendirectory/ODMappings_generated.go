@@ -23,7 +23,8 @@ func MappingsFromID(id objc.ID) *Mappings {
 	if id == 0 {
 		return nil
 	}
-	x := &Mappings{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Mappings{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mappingsAdopt(id objc.ID) *Mappings {
 	if id == 0 {
 		return nil
 	}
-	x := &Mappings{Handle: objref.Wrap(id)}
+	x := &Mappings{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,47 +58,54 @@ func (x *Mappings) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Mappings) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMappings creates a new Mappings.
 func NewMappings() *Mappings {
 	_id := objc.Send[objc.ID](objc.ID(_class("ODMappings")), objc.RegisterName("new"))
 	return mappingsAdopt(_id)
 }
 
-// WithComment sets comment and returns the receiver so calls can be chained.
+// WithComment sets the property and returns the receiver so calls can be chained.
 func (x *Mappings) WithComment(comment string) *Mappings {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComment:"), purego.NSString(comment))
 	return x
 }
 
-// WithTemplateName sets templateName and returns the receiver so calls can be chained.
+// WithTemplateName sets the property and returns the receiver so calls can be chained.
 func (x *Mappings) WithTemplateName(templateName string) *Mappings {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemplateName:"), purego.NSString(templateName))
 	return x
 }
 
-// WithIdentifier sets identifier and returns the receiver so calls can be chained.
+// WithIdentifier sets the property and returns the receiver so calls can be chained.
 func (x *Mappings) WithIdentifier(identifier string) *Mappings {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 	return x
 }
 
-// WithFunction sets function and returns the receiver so calls can be chained.
+// WithFunction sets the property and returns the receiver so calls can be chained.
 func (x *Mappings) WithFunction(function string) *Mappings {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunction:"), purego.NSString(function))
 	return x
 }
 
-// Returns an ODRecordMap associated with the provided recordtype. Returns an ODRecordMap associated with the provided recordtype.
+// RecordMapForStandardRecordType returns an ODRecordMap associated with the provided recordtype. Returns an ODRecordMap associated with the provided recordtype.
 func (x *Mappings) RecordMapForStandardRecordType(stdType string) *RecordMap {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordMapForStandardRecordType:"), purego.NSString(stdType))
 	return RecordMapFromID(_r)
 }
 
-// Sets a particular ODRecordMap for a given standard record type. Sets a particular ODRecordMap for a given standard record type.
+// SetRecordMapForStandardRecordType sets a particular ODRecordMap for a given standard record type. Sets a particular ODRecordMap for a given standard record type.
 func (x *Mappings) SetRecordMapForStandardRecordType(map_ *RecordMap, stdType string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordMap:forStandardRecordType:"), objref.IDOf(map_), purego.NSString(stdType))
 }
 
+// Comment wraps the corresponding Objective-C method.
 func (x *Mappings) Comment() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("comment"))
 	if _r == 0 {
@@ -105,10 +114,12 @@ func (x *Mappings) Comment() string {
 	return purego.GoString(_r)
 }
 
+// SetComment wraps the corresponding Objective-C method.
 func (x *Mappings) SetComment(comment string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComment:"), purego.NSString(comment))
 }
 
+// TemplateName wraps the corresponding Objective-C method.
 func (x *Mappings) TemplateName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("templateName"))
 	if _r == 0 {
@@ -117,10 +128,12 @@ func (x *Mappings) TemplateName() string {
 	return purego.GoString(_r)
 }
 
+// SetTemplateName wraps the corresponding Objective-C method.
 func (x *Mappings) SetTemplateName(templateName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemplateName:"), purego.NSString(templateName))
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *Mappings) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -129,15 +142,18 @@ func (x *Mappings) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// SetIdentifier wraps the corresponding Objective-C method.
 func (x *Mappings) SetIdentifier(identifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 }
 
+// RecordTypes wraps the corresponding Objective-C method.
 func (x *Mappings) RecordTypes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordTypes"))
 	return obj.Wrap(_r)
 }
 
+// Function wraps the corresponding Objective-C method.
 func (x *Mappings) Function() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("function"))
 	if _r == 0 {
@@ -146,15 +162,18 @@ func (x *Mappings) Function() string {
 	return purego.GoString(_r)
 }
 
+// SetFunction wraps the corresponding Objective-C method.
 func (x *Mappings) SetFunction(function string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunction:"), purego.NSString(function))
 }
 
+// FunctionAttributes wraps the corresponding Objective-C method.
 func (x *Mappings) FunctionAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("functionAttributes"))
 	return obj.Wrap(_r)
 }
 
+// SetFunctionAttributes wraps the corresponding Objective-C method.
 func (x *Mappings) SetFunctionAttributes(functionAttributes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionAttributes:"), objref.IDOf(functionAttributes))
 }

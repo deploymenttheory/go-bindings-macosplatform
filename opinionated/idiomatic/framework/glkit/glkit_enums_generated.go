@@ -18,6 +18,8 @@ const (
 	LightingTypePerPixel LightingType = 1
 )
 
+// String returns the LightingType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LightingType) String() string {
 	switch e {
 	case LightingTypePerVertex:
@@ -41,6 +43,8 @@ const (
 	TextureEnvModeDecal TextureEnvMode = 2
 )
 
+// String returns the TextureEnvMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextureEnvMode) String() string {
 	switch e {
 	case TextureEnvModeReplace:
@@ -66,6 +70,8 @@ const (
 	TextureInfoAlphaStatePremultiplied TextureInfoAlphaState = 2
 )
 
+// String returns the TextureInfoAlphaState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextureInfoAlphaState) String() string {
 	switch e {
 	case TextureInfoAlphaStateNone:
@@ -91,6 +97,8 @@ const (
 	TextureInfoOriginBottomLeft TextureInfoOrigin = 2
 )
 
+// String returns the TextureInfoOrigin constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextureInfoOrigin) String() string {
 	switch e {
 	case TextureInfoOriginUnknown:
@@ -116,6 +124,8 @@ const (
 	TextureTargetCt TextureTarget = 2
 )
 
+// String returns the TextureTarget constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextureTarget) String() string {
 	switch e {
 	case TextureTarget2D:

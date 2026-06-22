@@ -12,7 +12,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Initializes a newly created request object with the specified properties.
+// RequestForServiceTypeRequestMethodURLParameters initializes a newly created request object with the specified properties.
 func RequestForServiceTypeRequestMethodURLParameters(serviceType string, requestMethod RequestMethod, url string, parameters obj.Object) *Request {
 	_r := objc.Send[objc.ID](objc.ID(_class("SLRequest")), objc.RegisterName("requestForServiceType:requestMethod:URL:parameters:"), purego.NSString(serviceType), requestMethod, rt.FileURL(url), objref.IDOf(parameters))
 	return RequestFromID(_r)

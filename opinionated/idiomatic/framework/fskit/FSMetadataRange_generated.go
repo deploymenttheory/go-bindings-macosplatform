@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A range that describes contiguous metadata segments on disk.
-//
 // MetadataRange is an idiomatic wrapper over the Objective-C class FSMetadataRange.
+//
+// A range that describes contiguous metadata segments on disk.
 type MetadataRange struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MetadataRangeFromID(id objc.ID) *MetadataRange {
 	if id == 0 {
 		return nil
 	}
-	x := &MetadataRange{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetadataRange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func metadataRangeAdopt(id objc.ID) *MetadataRange {
 	if id == 0 {
 		return nil
 	}
-	x := &MetadataRange{Handle: objref.Wrap(id)}
+	x := &MetadataRange{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,32 @@ func (x *MetadataRange) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a metadata range with the given properties.
-//
-// NewMetadataRangeWithOffsetSegmentLengthSegmentCount creates a new MetadataRange.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetadataRange) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMetadataRangeWithOffsetSegmentLengthSegmentCount initializes a metadata range with the given properties.
 func NewMetadataRangeWithOffsetSegmentLengthSegmentCount(startOffset int64, segmentLength uint64, segmentCount uint64) *MetadataRange {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("FSMetadataRange")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOffset:segmentLength:segmentCount:"), startOffset, segmentLength, segmentCount)
 	return metadataRangeAdopt(_id)
 }
 
-// The start offset of the range in bytes. Ensure this value is a multiple of the corresponding resource's “FSBlockDeviceResource-c.class/blockSize“.
+// StartOffset the start offset of the range in bytes. Ensure this value is a multiple of the corresponding resource's “FSBlockDeviceResource-c.class/blockSize“.
 func (x *MetadataRange) StartOffset() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("startOffset"))
 	return _r
 }
 
-// The segment length in bytes. Ensure this value is a multiple of the corresponding resource's “FSBlockDeviceResource-c.class/blockSize“.
+// SegmentLength the segment length in bytes. Ensure this value is a multiple of the corresponding resource's “FSBlockDeviceResource-c.class/blockSize“.
 func (x *MetadataRange) SegmentLength() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("segmentLength"))
 	return _r
 }
 
-// The number of segments in the range.
+// SegmentCount the number of segments in the range.
 func (x *MetadataRange) SegmentCount() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("segmentCount"))
 	return _r

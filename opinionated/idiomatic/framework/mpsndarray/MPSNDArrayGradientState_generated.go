@@ -13,6 +13,8 @@ import (
 )
 
 // ArrayGradientState is an idiomatic wrapper over the Objective-C class MPSNDArrayGradientState.
+//
+// ArrayGradientState is an abstract base — you do not construct it directly. Construct one of [ArrayGatherGradientState] and pass it where a ArrayGradientState is accepted.
 type ArrayGradientState struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func ArrayGradientStateFromID(id objc.ID) *ArrayGradientState {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayGradientState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ArrayGradientState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func arrayGradientStateAdopt(id objc.ID) *ArrayGradientState {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayGradientState{Handle: objref.Wrap(id)}
+	x := &ArrayGradientState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,10 +60,10 @@ func (x *ArrayGradientState) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewArrayGradientState creates a new ArrayGradientState.
-func NewArrayGradientState() *ArrayGradientState {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayGradientState")), objc.RegisterName("new"))
-	return arrayGradientStateAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ArrayGradientState) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // ArrayGradientStateable is the interface implemented by [ArrayGradientState], for mocking and DI.
@@ -68,3 +72,10 @@ type ArrayGradientStateable interface {
 }
 
 var _ ArrayGradientStateable = (*ArrayGradientState)(nil)
+
+// isArrayGradientState marks ArrayGradientState — and, by embedding promotion, its
+// subclasses — as a member of the ArrayGradientState hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ArrayGradientState) isArrayGradientState() {}
+
+var _ ArrayGradientStateProvider = (*ArrayGradientState)(nil)

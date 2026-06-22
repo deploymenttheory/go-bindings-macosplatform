@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that allows clients to add publishers and then subscribe to specific metric event classes from those publishers.
-//
 // MetricEventStream is an idiomatic wrapper over the Objective-C class AVMetricEventStream.
+//
+// An object that allows clients to add publishers and then subscribe to specific metric event classes from those publishers.
 type MetricEventStream struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MetricEventStreamFromID(id objc.ID) *MetricEventStream {
 	if id == 0 {
 		return nil
 	}
-	x := &MetricEventStream{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetricEventStream{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func metricEventStreamAdopt(id objc.ID) *MetricEventStream {
 	if id == 0 {
 		return nil
 	}
-	x := &MetricEventStream{Handle: objref.Wrap(id)}
+	x := &MetricEventStream{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +60,24 @@ func (x *MetricEventStream) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetricEventStream) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMetricEventStream creates a new MetricEventStream.
 func NewMetricEventStream() *MetricEventStream {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVMetricEventStream")), objc.RegisterName("new"))
 	return metricEventStreamAdopt(_id)
 }
 
-// Subscribe to set of metric event classes. - Parameter metricEventClasses: Set of metric event classes to subscribe to.
+// SubscribeToMetricEvents subscribe to set of metric event classes. - Parameter metricEventClasses: Set of metric event classes to subscribe to.
 func (x *MetricEventStream) SubscribeToMetricEvents(metricEventClasses []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeToMetricEvents:"), purego.SliceToNSArray(metricEventClasses, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Subscribe to all metric event classes.
+// SubscribeToAllMetricEvents subscribe to all metric event classes.
 func (x *MetricEventStream) SubscribeToAllMetricEvents() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeToAllMetricEvents"))
 }

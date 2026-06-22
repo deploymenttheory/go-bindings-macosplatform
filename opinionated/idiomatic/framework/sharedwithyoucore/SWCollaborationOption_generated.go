@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that determines how the system shares a document in a collaboration.
-//
 // CollaborationOption is an idiomatic wrapper over the Objective-C class SWCollaborationOption.
+//
+// An object that determines how the system shares a document in a collaboration.
 type CollaborationOption struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CollaborationOptionFromID(id objc.ID) *CollaborationOption {
 	if id == 0 {
 		return nil
 	}
-	x := &CollaborationOption{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollaborationOption{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func collaborationOptionAdopt(id objc.ID) *CollaborationOption {
 	if id == 0 {
 		return nil
 	}
-	x := &CollaborationOption{Handle: objref.Wrap(id)}
+	x := &CollaborationOption{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,49 +60,45 @@ func (x *CollaborationOption) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates and initializes a collaboration option object.
-//
-// NewCollaborationOptionWithTitleIdentifier creates a new CollaborationOption.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CollaborationOption) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCollaborationOptionWithTitleIdentifier creates and initializes a collaboration option object.
 func NewCollaborationOptionWithTitleIdentifier(title string, identifier string) *CollaborationOption {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWCollaborationOption")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:identifier:"), purego.NSString(title), purego.NSString(identifier))
 	return collaborationOptionAdopt(_id)
 }
 
-// A localized string the system displays as a title to represent the permissions option.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle a localized string the system displays as a title to represent the permissions option.
 func (x *CollaborationOption) WithTitle(title string) *CollaborationOption {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A localized string the system displays to represent the permissions option in the collaboration view.
-//
-// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
+// WithSubtitle a localized string the system displays to represent the permissions option in the collaboration view.
 func (x *CollaborationOption) WithSubtitle(subtitle string) *CollaborationOption {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
-// A Boolean value that represents the selected state of an option.
-//
-// WithSelected sets selected and returns the receiver so calls can be chained.
+// WithSelected a Boolean value that represents the selected state of an option.
 func (x *CollaborationOption) WithSelected(selected bool) *CollaborationOption {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelected:"), selected)
 	return x
 }
 
-// An array of option identifiers that the app must select before the system makes the option interactive.
-//
-// WithRequiredOptionsIdentifiers sets the collection and returns the receiver so calls can be chained.
+// WithRequiredOptionsIdentifiers an array of option identifiers that the app must select before the system makes the option interactive.
 func (x *CollaborationOption) WithRequiredOptionsIdentifiers(items ...obj.Object) *CollaborationOption {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredOptionsIdentifiers:"), _arr)
 	return x
 }
 
-// A localized title string to be used when displaying the option
+// Title a localized title string to be used when displaying the option
 func (x *CollaborationOption) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -109,11 +107,12 @@ func (x *CollaborationOption) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *CollaborationOption) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// Unique identifier
+// Identifier unique identifier
 func (x *CollaborationOption) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -122,7 +121,7 @@ func (x *CollaborationOption) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// A localized subtitle string to be used when displaying the option
+// Subtitle a localized subtitle string to be used when displaying the option
 func (x *CollaborationOption) Subtitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitle"))
 	if _r == 0 {
@@ -131,21 +130,23 @@ func (x *CollaborationOption) Subtitle() string {
 	return purego.GoString(_r)
 }
 
+// SetSubtitle wraps the corresponding Objective-C method.
 func (x *CollaborationOption) SetSubtitle(subtitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 }
 
-// A flag that indicates whether the option is selected. This property should only be set directly when the option represents an individual switch. Defaults to NO
+// IsSelected a flag that indicates whether the option is selected. This property should only be set directly when the option represents an individual switch. Defaults to NO
 func (x *CollaborationOption) IsSelected() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSelected"))
 	return _r
 }
 
+// SetSelected wraps the corresponding Objective-C method.
 func (x *CollaborationOption) SetSelected(selected bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelected:"), selected)
 }
 
-// An array of option identifiers that must already be selected in order to be interacted with
+// RequiredOptionsIdentifiers an array of option identifiers that must already be selected in order to be interacted with
 //
 // RequiredOptionsIdentifiers returns the collection as a Go slice.
 func (x *CollaborationOption) RequiredOptionsIdentifiers() []string {
@@ -153,6 +154,7 @@ func (x *CollaborationOption) RequiredOptionsIdentifiers() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetRequiredOptionsIdentifiers wraps the corresponding Objective-C method.
 func (x *CollaborationOption) SetRequiredOptionsIdentifiers(requiredOptionsIdentifiers []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredOptionsIdentifiers:"), purego.SliceToNSArray(requiredOptionsIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
 }

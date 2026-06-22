@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a gradient subtraction operator.
-//
 // NNSubtractionGradientNode is an idiomatic wrapper over the Objective-C class MPSNNSubtractionGradientNode.
+//
+// It embeds [NNArithmeticGradientNode], promoting that type's methods.
+//
+// A representation of a gradient subtraction operator.
 type NNSubtractionGradientNode struct {
-	objref.Handle
+	NNArithmeticGradientNode
 }
 
 // NNSubtractionGradientNodeFromID adopts an existing Objective-C object as a NNSubtractionGradientNode
@@ -25,7 +26,8 @@ func NNSubtractionGradientNodeFromID(id objc.ID) *NNSubtractionGradientNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNSubtractionGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNSubtractionGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func nNSubtractionGradientNodeAdopt(id objc.ID) *NNSubtractionGradientNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNSubtractionGradientNode{Handle: objref.Wrap(id)}
+	x := &NNSubtractionGradientNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NNSubtractionGradientNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNSubtractionGradientNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNSubtractionGradientNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNNSubtractionGradientNode creates a new NNSubtractionGradientNode.
@@ -64,57 +52,55 @@ func NewNNSubtractionGradientNode() *NNSubtractionGradientNode {
 	return nNSubtractionGradientNodeAdopt(_id)
 }
 
-// WithPrimaryScale sets primaryScale and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
 func (x *NNSubtractionGradientNode) WithPrimaryScale(primaryScale float32) *NNSubtractionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return x
 }
 
-// WithSecondaryScale sets secondaryScale and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
 func (x *NNSubtractionGradientNode) WithSecondaryScale(secondaryScale float32) *NNSubtractionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return x
 }
 
-// WithBias sets bias and returns the receiver so calls can be chained.
+// WithBias sets the property and returns the receiver so calls can be chained.
 func (x *NNSubtractionGradientNode) WithBias(bias float32) *NNSubtractionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 	return x
 }
 
-// WithSecondaryStrideInPixelsX sets secondaryStrideInPixelsX and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
 func (x *NNSubtractionGradientNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNSubtractionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 	return x
 }
 
-// WithSecondaryStrideInPixelsY sets secondaryStrideInPixelsY and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
 func (x *NNSubtractionGradientNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNSubtractionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 	return x
 }
 
-// WithSecondaryStrideInFeatureChannels sets secondaryStrideInFeatureChannels and returns the receiver so calls can be chained.
+// WithSecondaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
 func (x *NNSubtractionGradientNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNSubtractionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
 	return x
 }
 
-// WithMinimumValue sets minimumValue and returns the receiver so calls can be chained.
+// WithMinimumValue sets the property and returns the receiver so calls can be chained.
 func (x *NNSubtractionGradientNode) WithMinimumValue(minimumValue float32) *NNSubtractionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
 	return x
 }
 
-// WithMaximumValue sets maximumValue and returns the receiver so calls can be chained.
+// WithMaximumValue sets the property and returns the receiver so calls can be chained.
 func (x *NNSubtractionGradientNode) WithMaximumValue(maximumValue float32) *NNSubtractionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *NNSubtractionGradientNode) WithLabel(label string) *NNSubtractionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -135,3 +121,9 @@ type NNSubtractionGradientNodeable interface {
 }
 
 var _ NNSubtractionGradientNodeable = (*NNSubtractionGradientNode)(nil)
+
+var _ NNArithmeticGradientNodeProvider = (*NNSubtractionGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*NNSubtractionGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNSubtractionGradientNode)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of attributes used to create an MPS matrix.
-//
 // MatrixDescriptor is an idiomatic wrapper over the Objective-C class MPSMatrixDescriptor.
+//
+// A description of attributes used to create an MPS matrix.
 type MatrixDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MatrixDescriptorFromID(id objc.ID) *MatrixDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatrixDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func matrixDescriptorAdopt(id objc.ID) *MatrixDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixDescriptor{Handle: objref.Wrap(id)}
+	x := &MatrixDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,73 +60,76 @@ func (x *MatrixDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MatrixDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMatrixDescriptor creates a new MatrixDescriptor.
 func NewMatrixDescriptor() *MatrixDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixDescriptor")), objc.RegisterName("new"))
 	return matrixDescriptorAdopt(_id)
 }
 
-// The number of rows in the matrix.
-//
-// WithRows sets rows and returns the receiver so calls can be chained.
+// WithRows the number of rows in the matrix.
 func (x *MatrixDescriptor) WithRows(rows int) *MatrixDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRows:"), rows)
 	return x
 }
 
-// The number of columns in the matrix.
-//
-// WithColumns sets columns and returns the receiver so calls can be chained.
+// WithColumns the number of columns in the matrix.
 func (x *MatrixDescriptor) WithColumns(columns int) *MatrixDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColumns:"), columns)
 	return x
 }
 
-// The stride, in bytes, between corresponding elements of consecutive rows in the matrix.
-//
-// WithRowBytes sets rowBytes and returns the receiver so calls can be chained.
+// WithRowBytes the stride, in bytes, between corresponding elements of consecutive rows in the matrix.
 func (x *MatrixDescriptor) WithRowBytes(rowBytes int) *MatrixDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowBytes:"), rowBytes)
 	return x
 }
 
-// The number of rows in a matrix.
+// Rows the number of rows in a matrix.
 func (x *MatrixDescriptor) Rows() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rows"))
 	return _r
 }
 
+// SetRows wraps the corresponding Objective-C method.
 func (x *MatrixDescriptor) SetRows(rows int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRows:"), rows)
 }
 
-// The number of columns in a matrix.
+// Columns the number of columns in a matrix.
 func (x *MatrixDescriptor) Columns() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columns"))
 	return _r
 }
 
+// SetColumns wraps the corresponding Objective-C method.
 func (x *MatrixDescriptor) SetColumns(columns int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColumns:"), columns)
 }
 
-// The number of matrices.
+// Matrices the number of matrices.
 func (x *MatrixDescriptor) Matrices() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("matrices"))
 	return _r
 }
 
-// The stride, in bytes, between corresponding elements of consecutive rows.  Must be a multiple of the element size.
+// RowBytes the stride, in bytes, between corresponding elements of consecutive rows.  Must be a multiple of the element size.
 func (x *MatrixDescriptor) RowBytes() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowBytes"))
 	return _r
 }
 
+// SetRowBytes wraps the corresponding Objective-C method.
 func (x *MatrixDescriptor) SetRowBytes(rowBytes int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowBytes:"), rowBytes)
 }
 
-// The stride, in bytes, between corresponding elements of consecutive matrices.  Must be a multiple of rowBytes.
+// MatrixBytes the stride, in bytes, between corresponding elements of consecutive matrices.  Must be a multiple of rowBytes.
 func (x *MatrixDescriptor) MatrixBytes() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("matrixBytes"))
 	return _r

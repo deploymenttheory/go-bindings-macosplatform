@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The object that coordinates your app’s user account actions.
-//
 // VSUserAccountManager is an idiomatic wrapper over the Objective-C class VSUserAccountManager.
+//
+// The object that coordinates your app’s user account actions.
 type VSUserAccountManager struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func VSUserAccountManagerFromID(id objc.ID) *VSUserAccountManager {
 	if id == 0 {
 		return nil
 	}
-	x := &VSUserAccountManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VSUserAccountManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func vSUserAccountManagerAdopt(id objc.ID) *VSUserAccountManager {
 	if id == 0 {
 		return nil
 	}
-	x := &VSUserAccountManager{Handle: objref.Wrap(id)}
+	x := &VSUserAccountManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,13 +62,19 @@ func (x *VSUserAccountManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VSUserAccountManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVSUserAccountManager creates a new VSUserAccountManager.
 func NewVSUserAccountManager() *VSUserAccountManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("VSUserAccountManager")), objc.RegisterName("new"))
 	return vSUserAccountManagerAdopt(_id)
 }
 
-// Registers a new user account.
+// UpdateUserAccountCompletion registers a new user account.
 //
 // UpdateUserAccountCompletion blocks until the operation completes or ctx is cancelled.
 func (x *VSUserAccountManager) UpdateUserAccountCompletion(ctx context.Context, account *VSUserAccount) error {
@@ -85,10 +93,10 @@ func (x *VSUserAccountManager) UpdateUserAccountCompletion(ctx context.Context, 
 	}
 }
 
-// Returns a list of registered user accounts for your app.
+// QueryUserAccountsWithOptionsCompletion returns a list of registered user accounts for your app.
 //
 // QueryUserAccountsWithOptionsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *VSUserAccountManager) QueryUserAccountsWithOptionsCompletion(ctx context.Context, options VSUserAccountQueryOptions) (obj.Object, error) {
+func (x *VSUserAccountManager) QueryUserAccountsWithOptionsCompletion(ctx context.Context, options VSUserAccountQueryOptions) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -110,10 +118,10 @@ func (x *VSUserAccountManager) QueryUserAccountsWithOptionsCompletion(ctx contex
 	}
 }
 
-// Retrieves the current Automatic Sign-In token.
+// QueryAutoSignInToken retrieves the current Automatic Sign-In token.
 //
 // QueryAutoSignInToken blocks until the operation completes or ctx is cancelled.
-func (x *VSUserAccountManager) QueryAutoSignInToken(ctx context.Context) (*VSAutoSignInToken, error) {
+func (x *VSUserAccountManager) QueryAutoSignInToken(ctx context.Context) (result *VSAutoSignInToken, err error) {
 	type _result struct {
 		val *VSAutoSignInToken
 		err error
@@ -135,7 +143,7 @@ func (x *VSUserAccountManager) QueryAutoSignInToken(ctx context.Context) (*VSAut
 	}
 }
 
-// Deletes the value of the current Automatic Sign-In token.
+// DeleteAutoSignInToken deletes the value of the current Automatic Sign-In token.
 //
 // DeleteAutoSignInToken blocks until the operation completes or ctx is cancelled.
 func (x *VSUserAccountManager) DeleteAutoSignInToken(ctx context.Context) error {

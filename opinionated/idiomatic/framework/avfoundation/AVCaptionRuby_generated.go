@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that presents ruby characters.
-//
 // CaptionRuby is an idiomatic wrapper over the Objective-C class AVCaptionRuby.
+//
+// An object that presents ruby characters.
 type CaptionRuby struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CaptionRubyFromID(id objc.ID) *CaptionRuby {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptionRuby{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptionRuby{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func captionRubyAdopt(id objc.ID) *CaptionRuby {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptionRuby{Handle: objref.Wrap(id)}
+	x := &CaptionRuby{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +60,12 @@ func (x *CaptionRuby) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptionRuby) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCaptionRubyWithText creates a new CaptionRuby.
 func NewCaptionRubyWithText(text string) *CaptionRuby {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptionRuby")), objc.RegisterName("alloc"))
@@ -72,7 +80,7 @@ func NewCaptionRubyWithTextPositionAlignment(text string, position CaptionRubyPo
 	return captionRubyAdopt(_id)
 }
 
-// The ruby text
+// Text the ruby text
 func (x *CaptionRuby) Text() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("text"))
 	if _r == 0 {
@@ -81,13 +89,13 @@ func (x *CaptionRuby) Text() string {
 	return purego.GoString(_r)
 }
 
-// The position of ruby text with respect to the ruby base.
+// Position the position of ruby text with respect to the ruby base.
 func (x *CaptionRuby) Position() CaptionRubyPosition {
 	_r := objc.Send[CaptionRubyPosition](objref.IDOf(x), objc.RegisterName("position"))
 	return _r
 }
 
-// The alignment of ruby text.
+// Alignment the alignment of ruby text.
 func (x *CaptionRuby) Alignment() CaptionRubyAlignment {
 	_r := objc.Send[CaptionRubyAlignment](objref.IDOf(x), objc.RegisterName("alignment"))
 	return _r

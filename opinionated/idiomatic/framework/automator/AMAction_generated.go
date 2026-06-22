@@ -14,9 +14,11 @@ import (
 	"unsafe"
 )
 
-// An abstract class that defines the interface and general characteristics of Automator actions.
-//
 // Action is an idiomatic wrapper over the Objective-C class AMAction.
+//
+// Action is an abstract base — you do not construct it directly. Construct one of [BundleAction] and pass it where a Action is accepted.
+//
+// An abstract class that defines the interface and general characteristics of Automator actions.
 type Action struct {
 	objref.Handle
 }
@@ -27,7 +29,8 @@ func ActionFromID(id objc.ID) *Action {
 	if id == 0 {
 		return nil
 	}
-	x := &Action{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Action{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +43,8 @@ func actionAdopt(id objc.ID) *Action {
 	if id == 0 {
 		return nil
 	}
-	x := &Action{Handle: objref.Wrap(id)}
+	x := &Action{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,19 +64,21 @@ func (x *Action) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes the action with the specified definition.
-//
-// NewActionWithDefinitionFromArchive creates a new Action.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Action) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewActionWithDefinitionFromArchive initializes the action with the specified definition.
 func NewActionWithDefinitionFromArchive(dict obj.Object, archived bool) *Action {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AMAction")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDefinition:fromArchive:"), objref.IDOf(dict), archived)
 	return actionAdopt(_id)
 }
 
-// Loads an Automator action from a file URL.
-//
-// NewActionWithContentsOfURLError creates a new Action.
-func NewActionWithContentsOfURLError(fileURL string) (*Action, error) {
+// NewActionWithContentsOfURLError loads an Automator action from a file URL.
+func NewActionWithContentsOfURLError(fileURL string) (result *Action, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AMAction")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), rt.FileURL(fileURL), unsafe.Pointer(&_nsErr))
@@ -82,22 +88,20 @@ func NewActionWithContentsOfURLError(fileURL string) (*Action, error) {
 	return actionAdopt(_id), nil
 }
 
-// A float value between 0 and 1, which indicates how far along the action is while processing.
-//
-// WithProgressValue sets progressValue and returns the receiver so calls can be chained.
+// WithProgressValue a float value between 0 and 1, which indicates how far along the action is while processing.
 func (x *Action) WithProgressValue(progressValue float64) *Action {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressValue:"), progressValue)
 	return x
 }
 
-// Requests the action to perform its task using the specified input from the specified action.
+// RunWithInputFromActionError requests the action to perform its task using the specified input from the specified action.
 func (x *Action) RunWithInputFromActionError(input obj.Object, anAction *Action, errorInfo obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runWithInput:fromAction:error:"), objref.IDOf(input), objref.IDOf(anAction), objref.IDOf(errorInfo))
 	return obj.Wrap(_r)
 }
 
-// Requests the action to perform its task using the specified input.
-func (x *Action) RunWithInputError(input obj.Object) (obj.Object, error) {
+// RunWithInputError requests the action to perform its task using the specified input.
+func (x *Action) RunWithInputError(input obj.Object) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runWithInput:error:"), objref.IDOf(input), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -106,80 +110,84 @@ func (x *Action) RunWithInputError(input obj.Object) (obj.Object, error) {
 	return obj.Wrap(_r), nil
 }
 
-// Causes Automator to wait for notification that the action has completed execution, which allows the action to perform an asynchronous operation.
+// RunAsynchronouslyWithInput causes Automator to wait for notification that the action has completed execution, which allows the action to perform an asynchronous operation.
 func (x *Action) RunAsynchronouslyWithInput(input obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runAsynchronouslyWithInput:"), objref.IDOf(input))
 }
 
-// Provides an opportunity for an action to perform cleanup operations, such as closing windows and deallocating memory.
+// WillFinishRunning provides an opportunity for an action to perform cleanup operations, such as closing windows and deallocating memory.
 func (x *Action) WillFinishRunning() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willFinishRunning"))
 }
 
-// Sent by the action to itself when it has finished running asynchronously.
+// DidFinishRunningWithError sent by the action to itself when it has finished running asynchronously.
 func (x *Action) DidFinishRunningWithError(errorInfo obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didFinishRunningWithError:"), objref.IDOf(errorInfo))
 }
 
-// Stops the action from running.
+// Stop stops the action from running.
 func (x *Action) Stop() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
-// Resets the action to its initial state.
+// Reset resets the action to its initial state.
 func (x *Action) Reset() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
-// Examines the parameters and other configuration information specified in the passed dictionary and adds its own information to it if appropriate.
+// WriteToDictionary examines the parameters and other configuration information specified in the passed dictionary and adds its own information to it if appropriate.
 func (x *Action) WriteToDictionary(dictionary obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeToDictionary:"), objref.IDOf(dictionary))
 }
 
-// Allows the action to initialize its user interface.
+// Opened allows the action to initialize its user interface.
 func (x *Action) Opened() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("opened"))
 }
 
-// Allows the action to synchronize its information with settings in another app.
+// Activated allows the action to synchronize its information with settings in another app.
 func (x *Action) Activated() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activated"))
 }
 
-// Invoked by Automator when the receiving action is removed from a workflow, allowing it to perform cleanup operations.
+// Closed invoked by Automator when the receiving action is removed from a workflow, allowing it to perform cleanup operations.
 func (x *Action) Closed() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("closed"))
 }
 
-// Requests the action to update its stored set of parameters from the settings in the action’s user interface.
+// UpdateParameters requests the action to update its stored set of parameters from the settings in the action’s user interface.
 func (x *Action) UpdateParameters() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateParameters"))
 }
 
-// Requests the action to update its user interface from its stored parameters, which have changed.
+// ParametersUpdated requests the action to update its user interface from its stored parameters, which have changed.
 func (x *Action) ParametersUpdated() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parametersUpdated"))
 }
 
-// Displays a message in Automator’s log area.
+// LogMessageWithLevelFormat displays a message in Automator’s log area.
 func (x *Action) LogMessageWithLevelFormat(level LogLevel, format string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logMessageWithLevel:format:"), level, purego.NSString(format))
 }
 
+// IgnoresInput wraps the corresponding Objective-C method.
 func (x *Action) IgnoresInput() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ignoresInput"))
 	return _r
 }
 
+// ProgressValue wraps the corresponding Objective-C method.
 func (x *Action) ProgressValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("progressValue"))
 	return _r
 }
 
+// SetProgressValue wraps the corresponding Objective-C method.
 func (x *Action) SetProgressValue(progressValue float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressValue:"), progressValue)
 }
 
+// IsStopped wraps the corresponding Objective-C method.
 func (x *Action) IsStopped() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStopped"))
 	return _r
@@ -190,7 +198,7 @@ type Actionable interface {
 	obj.Object
 	WithProgressValue(progressValue float64) *Action
 	RunWithInputFromActionError(input obj.Object, anAction *Action, errorInfo obj.Object) obj.Object
-	RunWithInputError(input obj.Object) (obj.Object, error)
+	RunWithInputError(input obj.Object) (result obj.Object, err error)
 	RunAsynchronouslyWithInput(input obj.Object)
 	WillFinishRunning()
 	DidFinishRunningWithError(errorInfo obj.Object)
@@ -210,3 +218,10 @@ type Actionable interface {
 }
 
 var _ Actionable = (*Action)(nil)
+
+// isAction marks Action — and, by embedding promotion, its
+// subclasses — as a member of the Action hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Action) isAction() {}
+
+var _ ActionProvider = (*Action)(nil)

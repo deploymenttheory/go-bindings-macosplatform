@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages the input parameters for mixing audio tracks.
-//
 // MutableAudioMix is an idiomatic wrapper over the Objective-C class AVMutableAudioMix.
+//
+// It embeds [AudioMix], promoting that type's methods.
+//
+// An object that manages the input parameters for mixing audio tracks.
 type MutableAudioMix struct {
-	objref.Handle
+	AudioMix
 }
 
 // MutableAudioMixFromID adopts an existing Objective-C object as a MutableAudioMix
@@ -25,7 +26,8 @@ func MutableAudioMixFromID(id objc.ID) *MutableAudioMix {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableAudioMix{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableAudioMix{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func mutableAudioMixAdopt(id objc.ID) *MutableAudioMix {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableAudioMix{Handle: objref.Wrap(id)}
+	x := &MutableAudioMix{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MutableAudioMix) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableAudioMix) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableAudioMix) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMutableAudioMix creates a new MutableAudioMix.
@@ -64,15 +52,14 @@ func NewMutableAudioMix() *MutableAudioMix {
 	return mutableAudioMixAdopt(_id)
 }
 
-// An array of input parameters for the mix.
-//
-// WithInputParameters sets the collection and returns the receiver so calls can be chained.
+// WithInputParameters an array of input parameters for the mix.
 func (x *MutableAudioMix) WithInputParameters(items ...AudioMixInputParametersProvider) *MutableAudioMix {
 	_arr := purego.SliceToNSArray(items, func(_v AudioMixInputParametersProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputParameters:"), _arr)
 	return x
 }
 
+// SetInputParameters wraps the corresponding Objective-C method.
 func (x *MutableAudioMix) SetInputParameters(inputParameters []*AudioMixInputParameters) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputParameters:"), purego.SliceToNSArray(inputParameters, func(_v *AudioMixInputParameters) objc.ID { return objref.IDOf(_v) }))
 }
@@ -85,3 +72,5 @@ type MutableAudioMixable interface {
 }
 
 var _ MutableAudioMixable = (*MutableAudioMix)(nil)
+
+var _ AudioMixProvider = (*MutableAudioMix)(nil)

@@ -15,9 +15,9 @@ import (
 	"unsafe"
 )
 
-// The access point for all data managed by HealthKit.
-//
 // HealthStore is an idiomatic wrapper over the Objective-C class HKHealthStore.
+//
+// The access point for all data managed by HealthKit.
 type HealthStore struct {
 	objref.Handle
 }
@@ -28,7 +28,8 @@ func HealthStoreFromID(id objc.ID) *HealthStore {
 	if id == 0 {
 		return nil
 	}
-	x := &HealthStore{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HealthStore{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -41,7 +42,8 @@ func healthStoreAdopt(id objc.ID) *HealthStore {
 	if id == 0 {
 		return nil
 	}
-	x := &HealthStore{Handle: objref.Wrap(id)}
+	x := &HealthStore{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -61,50 +63,54 @@ func (x *HealthStore) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HealthStore) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewHealthStore creates a new HealthStore.
 func NewHealthStore() *HealthStore {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKHealthStore")), objc.RegisterName("new"))
 	return healthStoreAdopt(_id)
 }
 
-// A block that the system calls when it starts a mirrored workout session.
-//
-// WithWorkoutSessionMirroringStartHandler sets workoutSessionMirroringStartHandler and returns the receiver so calls can be chained.
+// WithWorkoutSessionMirroringStartHandler a block that the system calls when it starts a mirrored workout session.
 func (x *HealthStore) WithWorkoutSessionMirroringStartHandler(workoutSessionMirroringStartHandler func(obj.Object)) *HealthStore {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorkoutSessionMirroringStartHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { workoutSessionMirroringStartHandler(obj.Wrap(_b0)) }))
 	return x
 }
 
-// Returns a Boolean value that indicates whether the current device supports clinical records.
+// SupportsHealthRecords returns a Boolean value that indicates whether the current device supports clinical records.
 func (x *HealthStore) SupportsHealthRecords() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsHealthRecords"))
 	return _r
 }
 
-// Returns the app’s authorization status for sharing the specified data type.
+// AuthorizationStatusForType returns the app’s authorization status for sharing the specified data type.
 func (x *HealthStore) AuthorizationStatusForType(type_ *ObjectType) AuthorizationStatus {
 	_r := objc.Send[AuthorizationStatus](objref.IDOf(x), objc.RegisterName("authorizationStatusForType:"), objref.IDOf(type_))
 	return _r
 }
 
-// Returns the earliest date permitted for samples.
+// EarliestPermittedSampleDate returns the earliest date permitted for samples.
 func (x *HealthStore) EarliestPermittedSampleDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("earliestPermittedSampleDate"))
 	return obj.Wrap(_r)
 }
 
-// Starts executing the provided query.
+// ExecuteQuery starts executing the provided query.
 func (x *HealthStore) ExecuteQuery(query *Query) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executeQuery:"), objref.IDOf(query))
 }
 
-// Stops a long-running query.
+// StopQuery stops a long-running query.
 func (x *HealthStore) StopQuery(query *Query) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopQuery:"), objref.IDOf(query))
 }
 
-// Reads the user’s date of birth from the HealthKit store as a date value.
-func (x *HealthStore) DateOfBirthWithError() (obj.Object, error) {
+// DateOfBirthWithError reads the user’s date of birth from the HealthKit store as a date value.
+func (x *HealthStore) DateOfBirthWithError() (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateOfBirthWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -113,8 +119,8 @@ func (x *HealthStore) DateOfBirthWithError() (obj.Object, error) {
 	return obj.Wrap(_r), nil
 }
 
-// Reads the user’s date of birth from the HealthKit store as date components.
-func (x *HealthStore) DateOfBirthComponentsWithError() (obj.Object, error) {
+// DateOfBirthComponentsWithError reads the user’s date of birth from the HealthKit store as date components.
+func (x *HealthStore) DateOfBirthComponentsWithError() (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateOfBirthComponentsWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -123,8 +129,8 @@ func (x *HealthStore) DateOfBirthComponentsWithError() (obj.Object, error) {
 	return obj.Wrap(_r), nil
 }
 
-// Reads someone’s biological sex from the HealthKit store.
-func (x *HealthStore) BiologicalSexWithError() (*BiologicalSexObject, error) {
+// BiologicalSexWithError reads someone’s biological sex from the HealthKit store.
+func (x *HealthStore) BiologicalSexWithError() (result *BiologicalSexObject, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biologicalSexWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -133,8 +139,8 @@ func (x *HealthStore) BiologicalSexWithError() (*BiologicalSexObject, error) {
 	return BiologicalSexObjectFromID(_r), nil
 }
 
-// Reads the user’s blood type from the HealthKit store.
-func (x *HealthStore) BloodTypeWithError() (*BloodTypeObject, error) {
+// BloodTypeWithError reads the user’s blood type from the HealthKit store.
+func (x *HealthStore) BloodTypeWithError() (result *BloodTypeObject, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bloodTypeWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -143,8 +149,8 @@ func (x *HealthStore) BloodTypeWithError() (*BloodTypeObject, error) {
 	return BloodTypeObjectFromID(_r), nil
 }
 
-// Reads the user’s Fitzpatrick Skin Type from the HealthKit store.
-func (x *HealthStore) FitzpatrickSkinTypeWithError() (*FitzpatrickSkinTypeObject, error) {
+// FitzpatrickSkinTypeWithError reads the user’s Fitzpatrick Skin Type from the HealthKit store.
+func (x *HealthStore) FitzpatrickSkinTypeWithError() (result *FitzpatrickSkinTypeObject, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fitzpatrickSkinTypeWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -153,8 +159,8 @@ func (x *HealthStore) FitzpatrickSkinTypeWithError() (*FitzpatrickSkinTypeObject
 	return FitzpatrickSkinTypeObjectFromID(_r), nil
 }
 
-// Reads the user’s wheelchair use from the HealthKit store.
-func (x *HealthStore) WheelchairUseWithError() (*WheelchairUseObject, error) {
+// WheelchairUseWithError reads the user’s wheelchair use from the HealthKit store.
+func (x *HealthStore) WheelchairUseWithError() (result *WheelchairUseObject, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wheelchairUseWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -163,8 +169,8 @@ func (x *HealthStore) WheelchairUseWithError() (*WheelchairUseObject, error) {
 	return WheelchairUseObjectFromID(_r), nil
 }
 
-// Returns the activity move mode for the current user.
-func (x *HealthStore) ActivityMoveModeWithError() (*ActivityMoveModeObject, error) {
+// ActivityMoveModeWithError returns the activity move mode for the current user.
+func (x *HealthStore) ActivityMoveModeWithError() (result *ActivityMoveModeObject, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activityMoveModeWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -173,18 +179,20 @@ func (x *HealthStore) ActivityMoveModeWithError() (*ActivityMoveModeObject, erro
 	return ActivityMoveModeObjectFromID(_r), nil
 }
 
-// Pauses the provided workout session.
+// PauseWorkoutSession pauses the provided workout session.
 func (x *HealthStore) PauseWorkoutSession(workoutSession *WorkoutSession) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseWorkoutSession:"), objref.IDOf(workoutSession))
 }
 
-// Resumes the provided workout session.
+// ResumeWorkoutSession resumes the provided workout session.
 func (x *HealthStore) ResumeWorkoutSession(workoutSession *WorkoutSession) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeWorkoutSession:"), objref.IDOf(workoutSession))
 }
 
+// SetWorkoutSessionMirroringStartHandler wraps the corresponding Objective-C method.
+//
 // SetWorkoutSessionMirroringStartHandler blocks until the operation completes or ctx is cancelled.
-func (x *HealthStore) SetWorkoutSessionMirroringStartHandler(ctx context.Context) (*WorkoutSession, error) {
+func (x *HealthStore) SetWorkoutSessionMirroringStartHandler(ctx context.Context) (result *WorkoutSession, err error) {
 	type _result struct {
 		val *WorkoutSession
 		err error
@@ -214,13 +222,13 @@ type HealthStoreable interface {
 	EarliestPermittedSampleDate() obj.Object
 	ExecuteQuery(query *Query)
 	StopQuery(query *Query)
-	DateOfBirthWithError() (obj.Object, error)
-	DateOfBirthComponentsWithError() (obj.Object, error)
-	BiologicalSexWithError() (*BiologicalSexObject, error)
-	BloodTypeWithError() (*BloodTypeObject, error)
-	FitzpatrickSkinTypeWithError() (*FitzpatrickSkinTypeObject, error)
-	WheelchairUseWithError() (*WheelchairUseObject, error)
-	ActivityMoveModeWithError() (*ActivityMoveModeObject, error)
+	DateOfBirthWithError() (result obj.Object, err error)
+	DateOfBirthComponentsWithError() (result obj.Object, err error)
+	BiologicalSexWithError() (result *BiologicalSexObject, err error)
+	BloodTypeWithError() (result *BloodTypeObject, err error)
+	FitzpatrickSkinTypeWithError() (result *FitzpatrickSkinTypeObject, err error)
+	WheelchairUseWithError() (result *WheelchairUseObject, err error)
+	ActivityMoveModeWithError() (result *ActivityMoveModeObject, err error)
 	PauseWorkoutSession(workoutSession *WorkoutSession)
 	ResumeWorkoutSession(workoutSession *WorkoutSession)
 	SetWorkoutSessionMirroringStartHandler(ctx context.Context) (*WorkoutSession, error)

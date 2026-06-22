@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class representing an area that can be monitored.
-//
 // Region is an idiomatic wrapper over the Objective-C class CLRegion.
+//
+// Region is an abstract base — you do not construct it directly. Construct one of [BeaconRegion], [CircularRegion] and pass it where a Region is accepted.
+//
+// A base class representing an area that can be monitored.
 type Region struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func RegionFromID(id objc.ID) *Region {
 	if id == 0 {
 		return nil
 	}
-	x := &Region{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Region{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func regionAdopt(id objc.ID) *Region {
 	if id == 0 {
 		return nil
 	}
-	x := &Region{Handle: objref.Wrap(id)}
+	x := &Region{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +62,25 @@ func (x *Region) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewRegion creates a new Region.
-func NewRegion() *Region {
-	_id := objc.Send[objc.ID](objc.ID(_class("CLRegion")), objc.RegisterName("new"))
-	return regionAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Region) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// A Boolean indicating that notifications are generated upon entry into the region.
-//
-// WithNotifyOnEntry sets notifyOnEntry and returns the receiver so calls can be chained.
+// WithNotifyOnEntry a Boolean indicating that notifications are generated upon entry into the region.
 func (x *Region) WithNotifyOnEntry(notifyOnEntry bool) *Region {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyOnEntry:"), notifyOnEntry)
 	return x
 }
 
-// A Boolean indicating that notifications are generated upon exit from the region.
-//
-// WithNotifyOnExit sets notifyOnExit and returns the receiver so calls can be chained.
+// WithNotifyOnExit a Boolean indicating that notifications are generated upon exit from the region.
 func (x *Region) WithNotifyOnExit(notifyOnExit bool) *Region {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyOnExit:"), notifyOnExit)
 	return x
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *Region) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -88,20 +89,24 @@ func (x *Region) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// NotifyOnEntry wraps the corresponding Objective-C method.
 func (x *Region) NotifyOnEntry() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("notifyOnEntry"))
 	return _r
 }
 
+// SetNotifyOnEntry wraps the corresponding Objective-C method.
 func (x *Region) SetNotifyOnEntry(notifyOnEntry bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyOnEntry:"), notifyOnEntry)
 }
 
+// NotifyOnExit wraps the corresponding Objective-C method.
 func (x *Region) NotifyOnExit() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("notifyOnExit"))
 	return _r
 }
 
+// SetNotifyOnExit wraps the corresponding Objective-C method.
 func (x *Region) SetNotifyOnExit(notifyOnExit bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyOnExit:"), notifyOnExit)
 }
@@ -119,3 +124,10 @@ type Regionable interface {
 }
 
 var _ Regionable = (*Region)(nil)
+
+// isRegion marks Region — and, by embedding promotion, its
+// subclasses — as a member of the Region hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Region) isRegion() {}
+
+var _ RegionProvider = (*Region)(nil)

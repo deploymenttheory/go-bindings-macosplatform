@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MatrixRandomPhilox is an idiomatic wrapper over the Objective-C class MPSMatrixRandomPhilox.
+//
+// It embeds [MatrixRandom], promoting that type's methods.
 type MatrixRandomPhilox struct {
-	objref.Handle
+	MatrixRandom
 }
 
 // MatrixRandomPhiloxFromID adopts an existing Objective-C object as a MatrixRandomPhilox
@@ -23,7 +24,8 @@ func MatrixRandomPhiloxFromID(id objc.ID) *MatrixRandomPhilox {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixRandomPhilox{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatrixRandomPhilox{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func matrixRandomPhiloxAdopt(id objc.ID) *MatrixRandomPhilox {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixRandomPhilox{Handle: objref.Wrap(id)}
+	x := &MatrixRandomPhilox{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MatrixRandomPhilox) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatrixRandomPhilox) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatrixRandomPhilox) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMatrixRandomPhilox creates a new MatrixRandomPhilox.
@@ -62,25 +50,19 @@ func NewMatrixRandomPhilox() *MatrixRandomPhilox {
 	return matrixRandomPhiloxAdopt(_id)
 }
 
-// The starting index in the destination batch.
-//
-// WithBatchStart sets batchStart and returns the receiver so calls can be chained.
+// WithBatchStart the starting index in the destination batch.
 func (x *MatrixRandomPhilox) WithBatchStart(batchStart int) *MatrixRandomPhilox {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 	return x
 }
 
-// The size of the batch to process.
-//
-// WithBatchSize sets batchSize and returns the receiver so calls can be chained.
+// WithBatchSize the size of the batch to process.
 func (x *MatrixRandomPhilox) WithBatchSize(batchSize int) *MatrixRandomPhilox {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *MatrixRandomPhilox) WithLabel(label string) *MatrixRandomPhilox {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -95,3 +77,7 @@ type MatrixRandomPhiloxable interface {
 }
 
 var _ MatrixRandomPhiloxable = (*MatrixRandomPhilox)(nil)
+
+var _ MatrixRandomProvider = (*MatrixRandomPhilox)(nil)
+
+var _ KernelProvider = (*MatrixRandomPhilox)(nil)

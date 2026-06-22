@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information about the arguments of a compute function.
-//
 // ComputePipelineReflection is an idiomatic wrapper over the Objective-C class MTLComputePipelineReflection.
+//
+// Information about the arguments of a compute function.
 type ComputePipelineReflection struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ComputePipelineReflectionFromID(id objc.ID) *ComputePipelineReflection {
 	if id == 0 {
 		return nil
 	}
-	x := &ComputePipelineReflection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ComputePipelineReflection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func computePipelineReflectionAdopt(id objc.ID) *ComputePipelineReflection {
 	if id == 0 {
 		return nil
 	}
-	x := &ComputePipelineReflection{Handle: objref.Wrap(id)}
+	x := &ComputePipelineReflection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,26 @@ func (x *ComputePipelineReflection) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ComputePipelineReflection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewComputePipelineReflection creates a new ComputePipelineReflection.
 func NewComputePipelineReflection() *ComputePipelineReflection {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLComputePipelineReflection")), objc.RegisterName("new"))
 	return computePipelineReflectionAdopt(_id)
 }
 
+// Bindings wraps the corresponding Objective-C method.
 func (x *ComputePipelineReflection) Bindings() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// Arguments wraps the corresponding Objective-C method.
+//
 // Arguments returns the collection as a Go slice.
 func (x *ComputePipelineReflection) Arguments() []*Argument {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arguments"))

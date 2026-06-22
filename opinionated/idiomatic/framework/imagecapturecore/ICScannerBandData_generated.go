@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The options for each band of data that the scanner reads.
-//
 // ScannerBandData is an idiomatic wrapper over the Objective-C class ICScannerBandData.
+//
+// The options for each band of data that the scanner reads.
 type ScannerBandData struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ScannerBandDataFromID(id objc.ID) *ScannerBandData {
 	if id == 0 {
 		return nil
 	}
-	x := &ScannerBandData{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScannerBandData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func scannerBandDataAdopt(id objc.ID) *ScannerBandData {
 	if id == 0 {
 		return nil
 	}
-	x := &ScannerBandData{Handle: objref.Wrap(id)}
+	x := &ScannerBandData{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,73 +60,79 @@ func (x *ScannerBandData) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScannerBandData) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewScannerBandData creates a new ScannerBandData.
 func NewScannerBandData() *ScannerBandData {
 	_id := objc.Send[objc.ID](objc.ID(_class("ICScannerBandData")), objc.RegisterName("new"))
 	return scannerBandDataAdopt(_id)
 }
 
-// Describes the full image width of the banded image.
+// FullImageWidth describes the full image width of the banded image.
 func (x *ScannerBandData) FullImageWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fullImageWidth"))
 	return _r
 }
 
-// Describes the full image height of the banded image.
+// FullImageHeight describes the full image height of the banded image.
 func (x *ScannerBandData) FullImageHeight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fullImageHeight"))
 	return _r
 }
 
-// Describes the number of bits per pixel for banded the image.
+// BitsPerPixel describes the number of bits per pixel for banded the image.
 func (x *ScannerBandData) BitsPerPixel() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bitsPerPixel"))
 	return _r
 }
 
-// Describes the number of bits per component for the banded image.
+// BitsPerComponent describes the number of bits per component for the banded image.
 func (x *ScannerBandData) BitsPerComponent() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bitsPerComponent"))
 	return _r
 }
 
-// Describes how many components are contained within the banded image.
+// NumComponents describes how many components are contained within the banded image.
 func (x *ScannerBandData) NumComponents() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numComponents"))
 	return _r
 }
 
-// Describes if the banded image data is reported in big endian.
+// IsBigEndian describes if the banded image data is reported in big endian.
 func (x *ScannerBandData) IsBigEndian() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBigEndian"))
 	return _r
 }
 
-// Type of pixel data that is contained in the band.
+// PixelDataType type of pixel data that is contained in the band.
 func (x *ScannerBandData) PixelDataType() ScannerPixelDataType {
 	_r := objc.Send[ScannerPixelDataType](objref.IDOf(x), objc.RegisterName("pixelDataType"))
 	return _r
 }
 
-// Descries how many bytes are in each image band row.
+// BytesPerRow descries how many bytes are in each image band row.
 func (x *ScannerBandData) BytesPerRow() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bytesPerRow"))
 	return _r
 }
 
-// Describes the start row of the image band.
+// DataStartRow describes the start row of the image band.
 func (x *ScannerBandData) DataStartRow() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataStartRow"))
 	return _r
 }
 
-// Describes the number of rows contained in the image band.
+// DataNumRows describes the number of rows contained in the image band.
 func (x *ScannerBandData) DataNumRows() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataNumRows"))
 	return _r
 }
 
-// Describes the actual data size of the image band buffer.
+// DataSize describes the actual data size of the image band buffer.
 func (x *ScannerBandData) DataSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataSize"))
 	return _r

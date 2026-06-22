@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The QCCompositionRepository class represents a system-wide centralized repository of built-in and installed Quartz Composer compositions (/Library/Compositions and ~/Library/Compositions). The QCCompositionRepository class cannot be subclassed.
-//
 // QCCompositionRepository is an idiomatic wrapper over the Objective-C class QCCompositionRepository.
+//
+// The QCCompositionRepository class represents a system-wide centralized repository of built-in and installed Quartz Composer compositions (/Library/Compositions and ~/Library/Compositions). The QCCompositionRepository class cannot be subclassed.
 type QCCompositionRepository struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func QCCompositionRepositoryFromID(id objc.ID) *QCCompositionRepository {
 	if id == 0 {
 		return nil
 	}
-	x := &QCCompositionRepository{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QCCompositionRepository{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func qCCompositionRepositoryAdopt(id objc.ID) *QCCompositionRepository {
 	if id == 0 {
 		return nil
 	}
-	x := &QCCompositionRepository{Handle: objref.Wrap(id)}
+	x := &QCCompositionRepository{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *QCCompositionRepository) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *QCCompositionRepository) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewQCCompositionRepository creates a new QCCompositionRepository.
 func NewQCCompositionRepository() *QCCompositionRepository {
 	_id := objc.Send[objc.ID](objc.ID(_class("QCCompositionRepository")), objc.RegisterName("new"))
 	return qCCompositionRepositoryAdopt(_id)
 }
 
-// Returns the composition that corresponds to the identifier.
+// CompositionWithIdentifier returns the composition that corresponds to the identifier.
 func (x *QCCompositionRepository) CompositionWithIdentifier(identifier string) *QCComposition {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositionWithIdentifier:"), purego.NSString(identifier))
 	return QCCompositionFromID(_r)
 }
 
-// Returns an array of compositions that match a set of criteria.
+// CompositionsWithProtocolsAndAttributes returns an array of compositions that match a set of criteria.
 func (x *QCCompositionRepository) CompositionsWithProtocolsAndAttributes(protocols obj.Object, attributes obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositionsWithProtocols:andAttributes:"), objref.IDOf(protocols), objref.IDOf(attributes))
 	return obj.Wrap(_r)
 }
 
-// Returns an array that contains all compositions currently in the composition repository.
+// AllCompositions returns an array that contains all compositions currently in the composition repository.
 func (x *QCCompositionRepository) AllCompositions() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allCompositions"))
 	return obj.Wrap(_r)

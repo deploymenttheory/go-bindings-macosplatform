@@ -23,7 +23,8 @@ func MTRServiceAreaClusterLandmarkInfoStructFromID(id objc.ID) *MTRServiceAreaCl
 	if id == 0 {
 		return nil
 	}
-	x := &MTRServiceAreaClusterLandmarkInfoStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRServiceAreaClusterLandmarkInfoStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRServiceAreaClusterLandmarkInfoStructAdopt(id objc.ID) *MTRServiceAreaClu
 	if id == 0 {
 		return nil
 	}
-	x := &MTRServiceAreaClusterLandmarkInfoStruct{Handle: objref.Wrap(id)}
+	x := &MTRServiceAreaClusterLandmarkInfoStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,38 +58,48 @@ func (x *MTRServiceAreaClusterLandmarkInfoStruct) IsKind(className string) bool 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRServiceAreaClusterLandmarkInfoStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRServiceAreaClusterLandmarkInfoStruct creates a new MTRServiceAreaClusterLandmarkInfoStruct.
 func NewMTRServiceAreaClusterLandmarkInfoStruct() *MTRServiceAreaClusterLandmarkInfoStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRServiceAreaClusterLandmarkInfoStruct")), objc.RegisterName("new"))
 	return mTRServiceAreaClusterLandmarkInfoStructAdopt(_id)
 }
 
-// WithLandmarkTag sets landmarkTag and returns the receiver so calls can be chained.
+// WithLandmarkTag sets the property and returns the receiver so calls can be chained.
 func (x *MTRServiceAreaClusterLandmarkInfoStruct) WithLandmarkTag(landmarkTag obj.Object) *MTRServiceAreaClusterLandmarkInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLandmarkTag:"), objref.IDOf(landmarkTag))
 	return x
 }
 
-// WithRelativePositionTag sets relativePositionTag and returns the receiver so calls can be chained.
+// WithRelativePositionTag sets the property and returns the receiver so calls can be chained.
 func (x *MTRServiceAreaClusterLandmarkInfoStruct) WithRelativePositionTag(relativePositionTag obj.Object) *MTRServiceAreaClusterLandmarkInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativePositionTag:"), objref.IDOf(relativePositionTag))
 	return x
 }
 
+// LandmarkTag wraps the corresponding Objective-C method.
 func (x *MTRServiceAreaClusterLandmarkInfoStruct) LandmarkTag() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("landmarkTag"))
 	return obj.Wrap(_r)
 }
 
+// SetLandmarkTag wraps the corresponding Objective-C method.
 func (x *MTRServiceAreaClusterLandmarkInfoStruct) SetLandmarkTag(landmarkTag obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLandmarkTag:"), objref.IDOf(landmarkTag))
 }
 
+// RelativePositionTag wraps the corresponding Objective-C method.
 func (x *MTRServiceAreaClusterLandmarkInfoStruct) RelativePositionTag() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relativePositionTag"))
 	return obj.Wrap(_r)
 }
 
+// SetRelativePositionTag wraps the corresponding Objective-C method.
 func (x *MTRServiceAreaClusterLandmarkInfoStruct) SetRelativePositionTag(relativePositionTag obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativePositionTag:"), objref.IDOf(relativePositionTag))
 }

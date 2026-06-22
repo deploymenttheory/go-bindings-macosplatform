@@ -39,6 +39,8 @@ const (
 	KCTAdobeKorea1CharacterCollection CTCharacterCollection = 5
 )
 
+// String returns the CTCharacterCollection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CTCharacterCollection) String() string {
 	switch e {
 	case KCTCharacterCollectionIdentityMapping:
@@ -71,6 +73,8 @@ const (
 	KCTFontCollectionCopyStandardSort CTFontCollectionCopyOptions = 2
 )
 
+// String returns the CTFontCollectionCopyOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CTFontCollectionCopyOptions) String() string {
 	var parts []string
 	if e&KCTFontCollectionCopyUnique != 0 {
@@ -95,6 +99,8 @@ const (
 	KCTFontManagerAutoActivationPromptUser CTFontManagerAutoActivationSetting = 3
 )
 
+// String returns the CTFontManagerAutoActivationSetting constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CTFontManagerAutoActivationSetting) String() string {
 	switch e {
 	case KCTFontManagerAutoActivationDefault:
@@ -126,6 +132,8 @@ const (
 	KCTFontManagerScopeUser CTFontManagerScope = 2
 )
 
+// String returns the CTFontManagerScope constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CTFontManagerScope) String() string {
 	switch e {
 	case KCTFontManagerScopeNone:
@@ -159,6 +167,8 @@ const (
 	KCTFontVerticalOrientation CTFontOrientation = 2
 )
 
+// String returns the CTFontOrientation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CTFontOrientation) String() string {
 	switch e {
 	case KCTFontOrientationDefault:
@@ -219,6 +229,8 @@ const (
 	KCTFontClassMaskTrait CTFontSymbolicTraits = 4026531840
 )
 
+// String returns the CTFontSymbolicTraits constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CTFontSymbolicTraits) String() string {
 	var parts []string
 	if e&KCTFontTraitItalic != 0 {
@@ -298,6 +310,8 @@ const (
 	KCTFontTableOptionExcludeSynthetic CTFontTableOptions = 1
 )
 
+// String returns the CTFontTableOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CTFontTableOptions) String() string {
 	var parts []string
 	if e&KCTFontTableOptionExcludeSynthetic != 0 {
@@ -427,6 +441,8 @@ const (
 	KCTFontControlContentFontType CTFontUIFontType = 26
 )
 
+// String returns the CTFontUIFontType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CTFontUIFontType) String() string {
 	switch e {
 	case KCTFontUIFontNone:
@@ -509,6 +525,8 @@ const (
 	KCTLineBoundsIncludeLanguageExtents CTLineBoundsOptions = 32
 )
 
+// String returns the CTLineBoundsOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CTLineBoundsOptions) String() string {
 	var parts []string
 	if e&KCTLineBoundsExcludeTypographicLeading != 0 {
@@ -544,6 +562,8 @@ const (
 	KCTLineTruncationMiddle CTLineTruncationType = 2
 )
 
+// String returns the CTLineTruncationType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CTLineTruncationType) String() string {
 	switch e {
 	case KCTLineTruncationStart:
@@ -601,6 +621,8 @@ const (
 	KCTParagraphStyleSpecifierCount CTParagraphStyleSpecifier = 18
 )
 
+// String returns the CTParagraphStyleSpecifier constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CTParagraphStyleSpecifier) String() string {
 	switch e {
 	case KCTParagraphStyleSpecifierAlignment:
@@ -668,6 +690,8 @@ const (
 	KCTRubyAlignmentLineEdge CTRubyAlignment = 6
 )
 
+// String returns the CTRubyAlignment constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CTRubyAlignment) String() string {
 	switch e {
 	case KCTRubyAlignmentInvalid:
@@ -707,6 +731,8 @@ const (
 	KCTRubyOverhangNone CTRubyOverhang = 3
 )
 
+// String returns the CTRubyOverhang constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CTRubyOverhang) String() string {
 	switch e {
 	case KCTRubyOverhangInvalid:
@@ -740,6 +766,8 @@ const (
 	KCTRubyPositionCount CTRubyPosition = 4
 )
 
+// String returns the CTRubyPosition constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CTRubyPosition) String() string {
 	switch e {
 	case KCTRubyPositionBefore:
@@ -772,6 +800,8 @@ const (
 	KCTRunStatusHasNonIdentityMatrix CTRunStatus = 4
 )
 
+// String returns the CTRunStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CTRunStatus) String() string {
 	var parts []string
 	if e&KCTRunStatusRightToLeft != 0 {
@@ -815,6 +845,8 @@ const (
 	KCTNaturalTextAlignment CTTextAlignment = 4
 )
 
+// String returns the CTTextAlignment constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CTTextAlignment) String() string {
 	switch e {
 	case KCTTextAlignmentLeft:

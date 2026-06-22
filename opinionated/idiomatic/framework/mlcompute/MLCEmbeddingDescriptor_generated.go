@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration object you use to create an embedding layer.
-//
 // EmbeddingDescriptor is an idiomatic wrapper over the Objective-C class MLCEmbeddingDescriptor.
+//
+// A configuration object you use to create an embedding layer.
 type EmbeddingDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func EmbeddingDescriptorFromID(id objc.ID) *EmbeddingDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &EmbeddingDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EmbeddingDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func embeddingDescriptorAdopt(id objc.ID) *EmbeddingDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &EmbeddingDescriptor{Handle: objref.Wrap(id)}
+	x := &EmbeddingDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,43 +60,49 @@ func (x *EmbeddingDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *EmbeddingDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewEmbeddingDescriptor creates a new EmbeddingDescriptor.
 func NewEmbeddingDescriptor() *EmbeddingDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLCEmbeddingDescriptor")), objc.RegisterName("new"))
 	return embeddingDescriptorAdopt(_id)
 }
 
-// The size of the dictionary
+// EmbeddingCount the size of the dictionary
 func (x *EmbeddingDescriptor) EmbeddingCount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("embeddingCount"))
 	return obj.Wrap(_r)
 }
 
-// The dimension of embedding vectors
+// EmbeddingDimension the dimension of embedding vectors
 func (x *EmbeddingDescriptor) EmbeddingDimension() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("embeddingDimension"))
 	return obj.Wrap(_r)
 }
 
-// If set, the embedding vector at paddingIndex is initialized with zero and will not be updated in gradient pass, Default=nil
+// PaddingIndex if set, the embedding vector at paddingIndex is initialized with zero and will not be updated in gradient pass, Default=nil
 func (x *EmbeddingDescriptor) PaddingIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paddingIndex"))
 	return obj.Wrap(_r)
 }
 
-// A float, if set, in the forward pass only, the selected embedding vectors will be re-normalized to have an Lp norm of less than maximumNorm in the dictionary, Default=nil
+// MaximumNorm a float, if set, in the forward pass only, the selected embedding vectors will be re-normalized to have an Lp norm of less than maximumNorm in the dictionary, Default=nil
 func (x *EmbeddingDescriptor) MaximumNorm() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maximumNorm"))
 	return obj.Wrap(_r)
 }
 
-// A float, the p of the Lp norm, can be set to infinity norm by [NSNumber numberWithFloat:INFINITY]. Default=2.0
+// PNorm a float, the p of the Lp norm, can be set to infinity norm by [NSNumber numberWithFloat:INFINITY]. Default=2.0
 func (x *EmbeddingDescriptor) PNorm() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pNorm"))
 	return obj.Wrap(_r)
 }
 
-// If set, the gradients are scaled by the inverse of the frequency of the words in batch before the weight update. Default=NO
+// ScalesGradientByFrequency if set, the gradients are scaled by the inverse of the frequency of the words in batch before the weight update. Default=NO
 func (x *EmbeddingDescriptor) ScalesGradientByFrequency() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scalesGradientByFrequency"))
 	return _r

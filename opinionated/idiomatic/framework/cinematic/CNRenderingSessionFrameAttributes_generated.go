@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Creates an object with the per frame attributes that control the appearance of a single frame of the Cinematic movie.
-//
 // RenderingSessionFrameAttributes is an idiomatic wrapper over the Objective-C class CNRenderingSessionFrameAttributes.
+//
+// Creates an object with the per frame attributes that control the appearance of a single frame of the Cinematic movie.
 type RenderingSessionFrameAttributes struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RenderingSessionFrameAttributesFromID(id objc.ID) *RenderingSessionFrameAtt
 	if id == 0 {
 		return nil
 	}
-	x := &RenderingSessionFrameAttributes{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RenderingSessionFrameAttributes{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func renderingSessionFrameAttributesAdopt(id objc.ID) *RenderingSessionFrameAttr
 	if id == 0 {
 		return nil
 	}
-	x := &RenderingSessionFrameAttributes{Handle: objref.Wrap(id)}
+	x := &RenderingSessionFrameAttributes{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,56 +60,56 @@ func (x *RenderingSessionFrameAttributes) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes the rendering frame attributes from a sample buffer read from a Cinematic metadata track.
-//
-// NewRenderingSessionFrameAttributesWithSampleBufferSessionAttributes creates a new RenderingSessionFrameAttributes.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RenderingSessionFrameAttributes) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRenderingSessionFrameAttributesWithSampleBufferSessionAttributes initializes the rendering frame attributes from a sample buffer read from a Cinematic metadata track.
 func NewRenderingSessionFrameAttributesWithSampleBufferSessionAttributes(sampleBuffer obj.Object, sessionAttributes *RenderingSessionAttributes) *RenderingSessionFrameAttributes {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CNRenderingSessionFrameAttributes")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleBuffer:sessionAttributes:"), objref.IDOf(sampleBuffer), objref.IDOf(sessionAttributes))
 	return renderingSessionFrameAttributesAdopt(_id)
 }
 
-// Initializes the rendering frame attributes from a timed metadata group read from a Cinematic metadata track.
-//
-// NewRenderingSessionFrameAttributesWithTimedMetadataGroupSessionAttributes creates a new RenderingSessionFrameAttributes.
+// NewRenderingSessionFrameAttributesWithTimedMetadataGroupSessionAttributes initializes the rendering frame attributes from a timed metadata group read from a Cinematic metadata track.
 func NewRenderingSessionFrameAttributesWithTimedMetadataGroupSessionAttributes(metadataGroup obj.Object, sessionAttributes *RenderingSessionAttributes) *RenderingSessionFrameAttributes {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CNRenderingSessionFrameAttributes")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTimedMetadataGroup:sessionAttributes:"), objref.IDOf(metadataGroup), objref.IDOf(sessionAttributes))
 	return renderingSessionFrameAttributesAdopt(_id)
 }
 
-// Represents the focus plane at which the rendered image should be in focus.
-//
-// WithFocusDisparity sets focusDisparity and returns the receiver so calls can be chained.
+// WithFocusDisparity represents the focus plane at which the rendered image should be in focus.
 func (x *RenderingSessionFrameAttributes) WithFocusDisparity(focusDisparity float32) *RenderingSessionFrameAttributes {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusDisparity:"), focusDisparity)
 	return x
 }
 
-// The f-stop value that inversely affects the aperture used to render the Cinematic image.
-//
-// WithFNumber sets fNumber and returns the receiver so calls can be chained.
+// WithFNumber the f-stop value that inversely affects the aperture used to render the Cinematic image.
 func (x *RenderingSessionFrameAttributes) WithFNumber(fNumber float32) *RenderingSessionFrameAttributes {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFNumber:"), fNumber)
 	return x
 }
 
-// The disparity value which represents the focus plane at which the rendered image should be in focus. A larger disparity results in the focus plane being closer to the camera. The scale and offset of disparity is not defined. It is best practice to obtain disparity values from detections or by interpolation between known disparity values.
+// FocusDisparity the disparity value which represents the focus plane at which the rendered image should be in focus. A larger disparity results in the focus plane being closer to the camera. The scale and offset of disparity is not defined. It is best practice to obtain disparity values from detections or by interpolation between known disparity values.
 func (x *RenderingSessionFrameAttributes) FocusDisparity() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("focusDisparity"))
 	return _r
 }
 
+// SetFocusDisparity wraps the corresponding Objective-C method.
 func (x *RenderingSessionFrameAttributes) SetFocusDisparity(focusDisparity float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusDisparity:"), focusDisparity)
 }
 
-// The f-stop value which inversely affects the aperture used to render the image. A smaller f/ number results in larger bokeh and a shallower depth of field in the rendered image.
+// FNumber the f-stop value which inversely affects the aperture used to render the image. A smaller f/ number results in larger bokeh and a shallower depth of field in the rendered image.
 func (x *RenderingSessionFrameAttributes) FNumber() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("fNumber"))
 	return _r
 }
 
+// SetFNumber wraps the corresponding Objective-C method.
 func (x *RenderingSessionFrameAttributes) SetFNumber(fNumber float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFNumber:"), fNumber)
 }

@@ -23,7 +23,8 @@ func MTRPumpConfigurationAndControlClusterSensorFailureEventFromID(id objc.ID) *
 	if id == 0 {
 		return nil
 	}
-	x := &MTRPumpConfigurationAndControlClusterSensorFailureEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRPumpConfigurationAndControlClusterSensorFailureEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRPumpConfigurationAndControlClusterSensorFailureEventAdopt(id objc.ID) *M
 	if id == 0 {
 		return nil
 	}
-	x := &MTRPumpConfigurationAndControlClusterSensorFailureEvent{Handle: objref.Wrap(id)}
+	x := &MTRPumpConfigurationAndControlClusterSensorFailureEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *MTRPumpConfigurationAndControlClusterSensorFailureEvent) IsEqual(other 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MTRPumpConfigurationAndControlClusterSensorFailureEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRPumpConfigurationAndControlClusterSensorFailureEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMTRPumpConfigurationAndControlClusterSensorFailureEvent creates a new MTRPumpConfigurationAndControlClusterSensorFailureEvent.

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A session manager that mediates sharing data between an app and a web browser.
-//
 // WebAuthenticationSessionWebBrowserSessionManager is an idiomatic wrapper over the Objective-C class ASWebAuthenticationSessionWebBrowserSessionManager.
+//
+// A session manager that mediates sharing data between an app and a web browser.
 type WebAuthenticationSessionWebBrowserSessionManager struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WebAuthenticationSessionWebBrowserSessionManagerFromID(id objc.ID) *WebAuth
 	if id == 0 {
 		return nil
 	}
-	x := &WebAuthenticationSessionWebBrowserSessionManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WebAuthenticationSessionWebBrowserSessionManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func webAuthenticationSessionWebBrowserSessionManagerAdopt(id objc.ID) *WebAuthe
 	if id == 0 {
 		return nil
 	}
-	x := &WebAuthenticationSessionWebBrowserSessionManager{Handle: objref.Wrap(id)}
+	x := &WebAuthenticationSessionWebBrowserSessionManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *WebAuthenticationSessionWebBrowserSessionManager) IsKind(className stri
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WebAuthenticationSessionWebBrowserSessionManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWebAuthenticationSessionWebBrowserSessionManager creates a new WebAuthenticationSessionWebBrowserSessionManager.
 func NewWebAuthenticationSessionWebBrowserSessionManager() *WebAuthenticationSessionWebBrowserSessionManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASWebAuthenticationSessionWebBrowserSessionManager")), objc.RegisterName("new"))
 	return webAuthenticationSessionWebBrowserSessionManagerAdopt(_id)
 }
 
+// WasLaunchedByAuthenticationServices wraps the corresponding Objective-C method.
 func (x *WebAuthenticationSessionWebBrowserSessionManager) WasLaunchedByAuthenticationServices() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wasLaunchedByAuthenticationServices"))
 	return _r

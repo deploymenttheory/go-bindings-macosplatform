@@ -6,15 +6,16 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides a rendered pixel buffer and its position in pixels.
-//
 // RenderedCaptionImage is an idiomatic wrapper over the Objective-C class AVRenderedCaptionImage.
+//
+// An object that provides a rendered pixel buffer and its position in pixels.
 type RenderedCaptionImage struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func RenderedCaptionImageFromID(id objc.ID) *RenderedCaptionImage {
 	if id == 0 {
 		return nil
 	}
-	x := &RenderedCaptionImage{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RenderedCaptionImage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func renderedCaptionImageAdopt(id objc.ID) *RenderedCaptionImage {
 	if id == 0 {
 		return nil
 	}
-	x := &RenderedCaptionImage{Handle: objref.Wrap(id)}
+	x := &RenderedCaptionImage{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +61,28 @@ func (x *RenderedCaptionImage) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RenderedCaptionImage) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRenderedCaptionImage creates a new RenderedCaptionImage.
 func NewRenderedCaptionImage() *RenderedCaptionImage {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVRenderedCaptionImage")), objc.RegisterName("new"))
 	return renderedCaptionImageAdopt(_id)
 }
 
+// Position a CGPoint that defines the position (in pixels) of the rendered caption image relative to the video frame To place the caption image correcly, the size of pixel buffer can be extracted from CVPixelBufferGetWidth and CVPixelBufferGetHeight. Origin is assumed at upper-left. So, a caption image is rendered to the right and bottom of the origin point.
+func (x *RenderedCaptionImage) Position() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("position"))
+	return _r
+}
+
 // RenderedCaptionImageable is the interface implemented by [RenderedCaptionImage], for mocking and DI.
 type RenderedCaptionImageable interface {
 	obj.Object
+	Position() corefoundation.CGPoint
 }
 
 var _ RenderedCaptionImageable = (*RenderedCaptionImage)(nil)

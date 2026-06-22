@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // SimpleCString is an idiomatic wrapper over the Objective-C class NSSimpleCString.
+//
+// SimpleCString is an abstract base — you do not construct it directly. Construct one of [ConstantString] and pass it where a SimpleCString is accepted.
 type SimpleCString struct {
-	objref.Handle
+	String
 }
 
 // SimpleCStringFromID adopts an existing Objective-C object as a SimpleCString
@@ -23,7 +24,8 @@ func SimpleCStringFromID(id objc.ID) *SimpleCString {
 	if id == 0 {
 		return nil
 	}
-	x := &SimpleCString{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SimpleCString{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,33 +38,13 @@ func simpleCStringAdopt(id objc.ID) *SimpleCString {
 	if id == 0 {
 		return nil
 	}
-	x := &SimpleCString{Handle: objref.Wrap(id)}
+	x := &SimpleCString{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *SimpleCString) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SimpleCString) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SimpleCString) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewSimpleCString creates a new SimpleCString.
-func NewSimpleCString() *SimpleCString {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSSimpleCString")), objc.RegisterName("new"))
-	return simpleCStringAdopt(_id)
-}
-
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *SimpleCString) WithScriptingProperties(scriptingProperties obj.Object) *SimpleCString {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
@@ -75,3 +57,12 @@ type SimpleCStringable interface {
 }
 
 var _ SimpleCStringable = (*SimpleCString)(nil)
+
+// isSimpleCString marks SimpleCString — and, by embedding promotion, its
+// subclasses — as a member of the SimpleCString hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SimpleCString) isSimpleCString() {}
+
+var _ SimpleCStringProvider = (*SimpleCString)(nil)
+
+var _ StringProvider = (*SimpleCString)(nil)

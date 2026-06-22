@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A rule that affects how an attributed string performs automatic grammatical agreement.
-//
 // InflectionRule is an idiomatic wrapper over the Objective-C class NSInflectionRule.
+//
+// InflectionRule is an abstract base — you do not construct it directly. Construct one of [InflectionRuleExplicit] and pass it where a InflectionRule is accepted.
+//
+// A rule that affects how an attributed string performs automatic grammatical agreement.
 type InflectionRule struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func InflectionRuleFromID(id objc.ID) *InflectionRule {
 	if id == 0 {
 		return nil
 	}
-	x := &InflectionRule{Handle: objref.Wrap(purego.Retain(id))}
+	x := &InflectionRule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func inflectionRuleAdopt(id objc.ID) *InflectionRule {
 	if id == 0 {
 		return nil
 	}
-	x := &InflectionRule{Handle: objref.Wrap(id)}
+	x := &InflectionRule{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +62,13 @@ func (x *InflectionRule) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewInflectionRule creates a new InflectionRule.
-func NewInflectionRule() *InflectionRule {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSInflectionRule")), objc.RegisterName("new"))
-	return inflectionRuleAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *InflectionRule) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *InflectionRule) WithScriptingProperties(scriptingProperties obj.Object) *InflectionRule {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
@@ -77,3 +81,10 @@ type InflectionRuleable interface {
 }
 
 var _ InflectionRuleable = (*InflectionRule)(nil)
+
+// isInflectionRule marks InflectionRule — and, by embedding promotion, its
+// subclasses — as a member of the InflectionRule hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *InflectionRule) isInflectionRule() {}
+
+var _ InflectionRuleProvider = (*InflectionRule)(nil)

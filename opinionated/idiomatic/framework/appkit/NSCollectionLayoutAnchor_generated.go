@@ -6,15 +6,16 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines how to attach a supplementary item to an item in a collection view.
-//
 // CollectionLayoutAnchor is an idiomatic wrapper over the Objective-C class NSCollectionLayoutAnchor.
+//
+// An object that defines how to attach a supplementary item to an item in a collection view.
 type CollectionLayoutAnchor struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func CollectionLayoutAnchorFromID(id objc.ID) *CollectionLayoutAnchor {
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionLayoutAnchor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollectionLayoutAnchor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func collectionLayoutAnchorAdopt(id objc.ID) *CollectionLayoutAnchor {
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionLayoutAnchor{Handle: objref.Wrap(id)}
+	x := &CollectionLayoutAnchor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +61,37 @@ func (x *CollectionLayoutAnchor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CollectionLayoutAnchor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCollectionLayoutAnchor creates a new CollectionLayoutAnchor.
 func NewCollectionLayoutAnchor() *CollectionLayoutAnchor {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutAnchor")), objc.RegisterName("new"))
 	return collectionLayoutAnchorAdopt(_id)
 }
 
+// Edges wraps the corresponding Objective-C method.
 func (x *CollectionLayoutAnchor) Edges() DirectionalRectEdge {
 	_r := objc.Send[DirectionalRectEdge](objref.IDOf(x), objc.RegisterName("edges"))
 	return _r
 }
 
+// Offset wraps the corresponding Objective-C method.
+func (x *CollectionLayoutAnchor) Offset() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("offset"))
+	return _r
+}
+
+// IsAbsoluteOffset wraps the corresponding Objective-C method.
 func (x *CollectionLayoutAnchor) IsAbsoluteOffset() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAbsoluteOffset"))
 	return _r
 }
 
+// IsFractionalOffset wraps the corresponding Objective-C method.
 func (x *CollectionLayoutAnchor) IsFractionalOffset() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFractionalOffset"))
 	return _r
@@ -83,6 +101,7 @@ func (x *CollectionLayoutAnchor) IsFractionalOffset() bool {
 type CollectionLayoutAnchorable interface {
 	obj.Object
 	Edges() DirectionalRectEdge
+	Offset() corefoundation.CGPoint
 	IsAbsoluteOffset() bool
 	IsFractionalOffset() bool
 }

@@ -3,4 +3,52 @@
 //go:build darwin
 
 // Package avfoundation provides a fluent Go API over the macOS AVFoundation framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - Asset: [Composition], [Movie], [URLAsset]
+//   - AssetDownloadStorageManagementPolicy: [MutableAssetDownloadStorageManagementPolicy]
+//   - AssetReaderOutput: [AssetReaderAudioMixOutput], [AssetReaderSampleReferenceOutput], [AssetReaderTrackOutput], [AssetReaderVideoCompositionOutput]
+//   - AssetResourceLoadingRequest: [AssetResourceRenewalRequest]
+//   - AssetTrack: [CompositionTrack], [FragmentedAssetTrack], [MovieTrack]
+//   - AssetTrackSegment: [CompositionTrackSegment]
+//   - AudioMix: [MutableAudioMix]
+//   - AudioMixInputParameters: [MutableAudioMixInputParameters]
+//   - Caption: [MutableCaption]
+//   - CaptionConversionAdjustment: [CaptionConversionTimeRangeAdjustment]
+//   - CaptionRegion: [MutableCaptionRegion]
+//   - CaptureControl: [CaptureIndexPicker], [CaptureSlider], [CaptureSystemExposureBiasSlider], [CaptureSystemZoomSlider]
+//   - CaptureFileOutput: [CaptureAudioFileOutput], [CaptureMovieFileOutput]
+//   - CaptureInput: [CaptureDeviceInput], [CaptureScreenInput]
+//   - CaptureOutput: [CaptureAudioDataOutput], [CaptureAudioPreviewOutput], [CaptureFileOutput], [CaptureMetadataOutput], [CapturePhotoOutput], [CaptureStillImageOutput], [CaptureVideoDataOutput]
+//   - Composition: [MutableComposition]
+//   - CompositionTrack: [MutableCompositionTrack]
+//   - ContentKeyRequest: [PersistableContentKeyRequest]
+//   - DateRangeMetadataGroup: [MutableDateRangeMetadataGroup]
+//   - DelegatingPlaybackCoordinatorPlaybackControlCommand: [DelegatingPlaybackCoordinatorBufferingCommand], [DelegatingPlaybackCoordinatorPauseCommand], [DelegatingPlaybackCoordinatorPlayCommand], [DelegatingPlaybackCoordinatorSeekCommand]
+//   - FragmentedAssetMinder: [FragmentedMovieMinder]
+//   - MediaSelection: [MutableMediaSelection]
+//   - MediaSelectionGroup: [AssetWriterInputGroup]
+//   - MetadataBodyObject: [MetadataCatBodyObject], [MetadataDogBodyObject], [MetadataHumanBodyObject], [MetadataHumanFullBodyObject]
+//   - MetadataGroup: [DateRangeMetadataGroup], [TimedMetadataGroup]
+//   - MetadataItem: [MutableMetadataItem]
+//   - MetadataObject: [MetadataBodyObject], [MetadataCatHeadObject], [MetadataDogHeadObject], [MetadataFaceObject], [MetadataMachineReadableCodeObject], [MetadataSalientObject]
+//   - MetricEvent: [MetricContentKeyRequestEvent], [MetricDownloadSummaryEvent], [MetricErrorEvent], [MetricHLSMediaSegmentRequestEvent], [MetricHLSPlaylistRequestEvent], [MetricMediaResourceRequestEvent], [MetricPlayerItemLikelyToKeepUpEvent], [MetricPlayerItemPlaybackSummaryEvent], [MetricPlayerItemRateChangeEvent], [MetricPlayerItemVariantSwitchEvent], [MetricPlayerItemVariantSwitchStartEvent]
+//   - MetricPlayerItemLikelyToKeepUpEvent: [MetricPlayerItemInitialLikelyToKeepUpEvent]
+//   - MetricPlayerItemRateChangeEvent: [MetricPlayerItemSeekDidCompleteEvent], [MetricPlayerItemSeekEvent], [MetricPlayerItemStallEvent]
+//   - Movie: [FragmentedMovie], [MutableMovie]
+//   - MovieTrack: [FragmentedMovieTrack], [MutableMovieTrack]
+//   - PlaybackCoordinator: [DelegatingPlaybackCoordinator], [PlayerPlaybackCoordinator]
+//   - Player: [QueuePlayer]
+//   - PlayerInterstitialEventMonitor: [PlayerInterstitialEventController]
+//   - PlayerItemMediaDataCollector: [PlayerItemMetadataCollector]
+//   - PlayerItemOutput: [PlayerItemLegibleOutput], [PlayerItemMetadataOutput], [PlayerItemRenderedLegibleOutput], [PlayerItemVideoOutput]
+//   - TimedMetadataGroup: [MutableTimedMetadataGroup]
+//   - URLAsset: [FragmentedAsset]
+//   - VideoComposition: [MutableVideoComposition]
+//   - VideoCompositionInstruction: [MutableVideoCompositionInstruction]
+//   - VideoCompositionLayerInstruction: [MutableVideoCompositionLayerInstruction]
 package avfoundation

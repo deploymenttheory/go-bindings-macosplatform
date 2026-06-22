@@ -19,6 +19,8 @@ const (
 	ActivityMoveModeAppleMoveTime ActivityMoveMode = 2
 )
 
+// String returns the ActivityMoveMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ActivityMoveMode) String() string {
 	switch e {
 	case ActivityMoveModeActiveEnergy:
@@ -37,6 +39,8 @@ const (
 	AppleSleepingBreathingDisturbancesClassificationElevated    AppleSleepingBreathingDisturbancesClassification = 1
 )
 
+// String returns the AppleSleepingBreathingDisturbancesClassification constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AppleSleepingBreathingDisturbancesClassification) String() string {
 	switch e {
 	case AppleSleepingBreathingDisturbancesClassificationNotElevated:
@@ -60,6 +64,8 @@ const (
 	AppleWalkingSteadinessClassificationVeryLow AppleWalkingSteadinessClassification = 3
 )
 
+// String returns the AppleWalkingSteadinessClassification constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AppleWalkingSteadinessClassification) String() string {
 	switch e {
 	case AppleWalkingSteadinessClassificationOK:
@@ -79,6 +85,8 @@ const (
 	AudiogramConductionTypeAir AudiogramConductionType = 0
 )
 
+// String returns the AudiogramConductionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudiogramConductionType) String() string {
 	switch e {
 	case AudiogramConductionTypeAir:
@@ -95,6 +103,8 @@ const (
 	AudiogramSensitivityTestSideRight AudiogramSensitivityTestSide = 1
 )
 
+// String returns the AudiogramSensitivityTestSide constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudiogramSensitivityTestSide) String() string {
 	switch e {
 	case AudiogramSensitivityTestSideLeft:
@@ -118,6 +128,8 @@ const (
 	AuthorizationStatusSharingAuthorized AuthorizationStatus = 2
 )
 
+// String returns the AuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationStatus) String() string {
 	switch e {
 	case AuthorizationStatusNotDetermined:
@@ -145,6 +157,8 @@ const (
 	BiologicalSexOther BiologicalSex = 3
 )
 
+// String returns the BiologicalSex constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BiologicalSex) String() string {
 	switch e {
 	case BiologicalSexNotSet:
@@ -184,6 +198,8 @@ const (
 	BloodTypeONegative BloodType = 8
 )
 
+// String returns the BloodType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BloodType) String() string {
 	switch e {
 	case BloodTypeNotSet:
@@ -223,6 +239,8 @@ const (
 	ElectrocardiogramClassificationUnrecognized              ElectrocardiogramClassification = 100
 )
 
+// String returns the ElectrocardiogramClassification constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ElectrocardiogramClassification) String() string {
 	switch e {
 	case ElectrocardiogramClassificationNotSet:
@@ -253,6 +271,8 @@ const (
 	ElectrocardiogramLeadAppleWatchSimilarToLeadI ElectrocardiogramLead = 1
 )
 
+// String returns the ElectrocardiogramLead constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ElectrocardiogramLead) String() string {
 	switch e {
 	case ElectrocardiogramLeadAppleWatchSimilarToLeadI:
@@ -271,6 +291,8 @@ const (
 	ElectrocardiogramSymptomsStatusPresent ElectrocardiogramSymptomsStatus = 2
 )
 
+// String returns the ElectrocardiogramSymptomsStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ElectrocardiogramSymptomsStatus) String() string {
 	switch e {
 	case ElectrocardiogramSymptomsStatusNotSet:
@@ -308,6 +330,8 @@ const (
 	ErrorNotPermissibleForGuestUserMode     ErrorCode = 15
 )
 
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ErrorCode) String() string {
 	switch e {
 	case UnknownError:
@@ -367,6 +391,8 @@ const (
 	FitzpatrickSkinTypeVI FitzpatrickSkinType = 6
 )
 
+// String returns the FitzpatrickSkinType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FitzpatrickSkinType) String() string {
 	switch e {
 	case FitzpatrickSkinTypeNotSet:
@@ -397,6 +423,8 @@ const (
 	GAD7AssessmentRiskSevere        GAD7AssessmentRisk = 4
 )
 
+// String returns the GAD7AssessmentRisk constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GAD7AssessmentRisk) String() string {
 	switch e {
 	case GAD7AssessmentRiskNoneToMinimal:
@@ -429,6 +457,8 @@ const (
 	MedicationDoseEventLogStatusNotLogged MedicationDoseEventLogStatus = 6
 )
 
+// String returns the MedicationDoseEventLogStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MedicationDoseEventLogStatus) String() string {
 	switch e {
 	case MedicationDoseEventLogStatusNotInteracted:
@@ -457,6 +487,8 @@ const (
 	MedicationDoseEventScheduleTypeSchedule MedicationDoseEventScheduleType = 2
 )
 
+// String returns the MedicationDoseEventScheduleType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MedicationDoseEventScheduleType) String() string {
 	switch e {
 	case MedicationDoseEventScheduleTypeAsNeeded:
@@ -502,6 +534,8 @@ const (
 	MetricPrefixTera MetricPrefix = 12
 )
 
+// String returns the MetricPrefix constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MetricPrefix) String() string {
 	switch e {
 	case MetricPrefixNone:
@@ -547,6 +581,8 @@ const (
 	PHQ9AssessmentRiskSevere           PHQ9AssessmentRisk = 5
 )
 
+// String returns the PHQ9AssessmentRisk constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PHQ9AssessmentRisk) String() string {
 	switch e {
 	case PHQ9AssessmentRiskNoneToMinimal:
@@ -580,6 +616,8 @@ const (
 	PrismBaseOut PrismBase = 4
 )
 
+// String returns the PrismBase constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PrismBase) String() string {
 	switch e {
 	case PrismBaseNone:
@@ -613,6 +651,8 @@ const (
 	QuantityAggregationStyleDiscreteEquivalentContinuousLevel QuantityAggregationStyle = 3
 )
 
+// String returns the QuantityAggregationStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e QuantityAggregationStyle) String() string {
 	switch e {
 	case QuantityAggregationStyleCumulative:
@@ -641,6 +681,8 @@ const (
 	QueryOptionStrictEndDate QueryOptions = 2
 )
 
+// String returns the QueryOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e QueryOptions) String() string {
 	var parts []string
 	if e&QueryOptionStrictStartDate != 0 {
@@ -678,6 +720,8 @@ const (
 	StateOfMindAssociationWeather       StateOfMindAssociation = 18
 )
 
+// String returns the StateOfMindAssociation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StateOfMindAssociation) String() string {
 	switch e {
 	case StateOfMindAssociationCommunity:
@@ -728,6 +772,8 @@ const (
 	StateOfMindKindDailyMood        StateOfMindKind = 2
 )
 
+// String returns the StateOfMindKind constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StateOfMindKind) String() string {
 	switch e {
 	case StateOfMindKindMomentaryEmotion:
@@ -782,6 +828,8 @@ const (
 	StateOfMindLabelSatisfied    StateOfMindLabel = 38
 )
 
+// String returns the StateOfMindLabel constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StateOfMindLabel) String() string {
 	switch e {
 	case StateOfMindLabelAmazed:
@@ -877,6 +925,8 @@ const (
 	StateOfMindValenceClassificationVeryPleasant       StateOfMindValenceClassification = 7
 )
 
+// String returns the StateOfMindValenceClassification constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StateOfMindValenceClassification) String() string {
 	switch e {
 	case StateOfMindValenceClassificationVeryUnpleasant:
@@ -923,6 +973,8 @@ const (
 	StatisticsOptionDuration StatisticsOptions = 64
 )
 
+// String returns the StatisticsOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StatisticsOptions) String() string {
 	var parts []string
 	if e&StatisticsOptionSeparateBySource != 0 {
@@ -969,6 +1021,8 @@ const (
 	UpdateFrequencyWeekly UpdateFrequency = 4
 )
 
+// String returns the UpdateFrequency constant's name, or its numeric form when the
+// value is not a known constant.
 func (e UpdateFrequency) String() string {
 	switch e {
 	case UpdateFrequencyImmediate:
@@ -994,6 +1048,8 @@ const (
 	VisionEyeRight VisionEye = 2
 )
 
+// String returns the VisionEye constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VisionEye) String() string {
 	switch e {
 	case VisionEyeLeft:
@@ -1015,6 +1071,8 @@ const (
 	VisionPrescriptionTypeContacts VisionPrescriptionType = 2
 )
 
+// String returns the VisionPrescriptionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VisionPrescriptionType) String() string {
 	switch e {
 	case VisionPrescriptionTypeGlasses:
@@ -1038,6 +1096,8 @@ const (
 	WheelchairUseYes WheelchairUse = 2
 )
 
+// String returns the WheelchairUse constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WheelchairUse) String() string {
 	switch e {
 	case WheelchairUseNotSet:
@@ -1225,6 +1285,8 @@ const (
 	WorkoutActivityTypeOther WorkoutActivityType = 3000
 )
 
+// String returns the WorkoutActivityType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WorkoutActivityType) String() string {
 	switch e {
 	case WorkoutActivityTypeAmericanFootball:
@@ -1407,6 +1469,8 @@ const (
 	WorkoutEffortRelationshipQueryOptionsMostRelevant WorkoutEffortRelationshipQueryOptions = 1
 )
 
+// String returns the WorkoutEffortRelationshipQueryOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WorkoutEffortRelationshipQueryOptions) String() string {
 	switch e {
 	case WorkoutEffortRelationshipQueryOptionsDefault:
@@ -1440,6 +1504,8 @@ const (
 	WorkoutEventTypePauseOrResumeRequest WorkoutEventType = 8
 )
 
+// String returns the WorkoutEventType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WorkoutEventType) String() string {
 	switch e {
 	case WorkoutEventTypePause:
@@ -1475,6 +1541,8 @@ const (
 	WorkoutSessionLocationTypeOutdoor WorkoutSessionLocationType = 3
 )
 
+// String returns the WorkoutSessionLocationType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WorkoutSessionLocationType) String() string {
 	switch e {
 	case WorkoutSessionLocationTypeUnknown:
@@ -1506,6 +1574,8 @@ const (
 	WorkoutSessionStateStopped WorkoutSessionState = 6
 )
 
+// String returns the WorkoutSessionState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WorkoutSessionState) String() string {
 	switch e {
 	case WorkoutSessionStateNotStarted:
@@ -1535,6 +1605,8 @@ const (
 	WorkoutSessionTypeMirrored WorkoutSessionType = 1
 )
 
+// String returns the WorkoutSessionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WorkoutSessionType) String() string {
 	switch e {
 	case WorkoutSessionTypePrimary:
@@ -1558,6 +1630,8 @@ const (
 	WorkoutSwimmingLocationTypeOpenWater WorkoutSwimmingLocationType = 2
 )
 
+// String returns the WorkoutSwimmingLocationType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WorkoutSwimmingLocationType) String() string {
 	switch e {
 	case WorkoutSwimmingLocationTypeUnknown:

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that identifies samples that contain audiogram data.
-//
 // AudiogramSampleType is an idiomatic wrapper over the Objective-C class HKAudiogramSampleType.
+//
+// It embeds [SampleType], promoting that type's methods.
+//
+// A type that identifies samples that contain audiogram data.
 type AudiogramSampleType struct {
-	objref.Handle
+	SampleType
 }
 
 // AudiogramSampleTypeFromID adopts an existing Objective-C object as a AudiogramSampleType
@@ -25,7 +26,8 @@ func AudiogramSampleTypeFromID(id objc.ID) *AudiogramSampleType {
 	if id == 0 {
 		return nil
 	}
-	x := &AudiogramSampleType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudiogramSampleType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func audiogramSampleTypeAdopt(id objc.ID) *AudiogramSampleType {
 	if id == 0 {
 		return nil
 	}
-	x := &AudiogramSampleType{Handle: objref.Wrap(id)}
+	x := &AudiogramSampleType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AudiogramSampleType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudiogramSampleType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudiogramSampleType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAudiogramSampleType creates a new AudiogramSampleType.
@@ -70,3 +58,7 @@ type AudiogramSampleTypeable interface {
 }
 
 var _ AudiogramSampleTypeable = (*AudiogramSampleType)(nil)
+
+var _ SampleTypeProvider = (*AudiogramSampleType)(nil)
+
+var _ ObjectTypeProvider = (*AudiogramSampleType)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The IKFilterBrowserView class is used as a container for the elements of an IKFilterBrowserPanel object.
-//
 // IKFilterBrowserView is an idiomatic wrapper over the Objective-C class IKFilterBrowserView.
+//
+// The IKFilterBrowserView class is used as a container for the elements of an IKFilterBrowserPanel object.
 type IKFilterBrowserView struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func IKFilterBrowserViewFromID(id objc.ID) *IKFilterBrowserView {
 	if id == 0 {
 		return nil
 	}
-	x := &IKFilterBrowserView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IKFilterBrowserView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func iKFilterBrowserViewAdopt(id objc.ID) *IKFilterBrowserView {
 	if id == 0 {
 		return nil
 	}
-	x := &IKFilterBrowserView{Handle: objref.Wrap(id)}
+	x := &IKFilterBrowserView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +60,24 @@ func (x *IKFilterBrowserView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IKFilterBrowserView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewIKFilterBrowserView creates a new IKFilterBrowserView.
 func NewIKFilterBrowserView() *IKFilterBrowserView {
 	_id := objc.Send[objc.ID](objc.ID(_class("IKFilterBrowserView")), objc.RegisterName("new"))
 	return iKFilterBrowserViewAdopt(_id)
 }
 
-// Sets the preview state.
+// SetPreviewState sets the preview state.
 func (x *IKFilterBrowserView) SetPreviewState(inState bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviewState:"), inState)
 }
 
-// Returns the name of the filter that is currently selected in the filter browser.
+// FilterName returns the name of the filter that is currently selected in the filter browser.
 func (x *IKFilterBrowserView) FilterName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterName"))
 	if _r == 0 {

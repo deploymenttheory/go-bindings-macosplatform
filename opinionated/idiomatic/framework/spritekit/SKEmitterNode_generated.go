@@ -6,17 +6,19 @@ package spritekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A source of various particle effects.
-//
 // EmitterNode is an idiomatic wrapper over the Objective-C class SKEmitterNode.
+//
+// It embeds [Node], promoting that type's methods.
+//
+// A source of various particle effects.
 type EmitterNode struct {
-	objref.Handle
+	Node
 }
 
 // EmitterNodeFromID adopts an existing Objective-C object as a EmitterNode
@@ -25,7 +27,8 @@ func EmitterNodeFromID(id objc.ID) *EmitterNode {
 	if id == 0 {
 		return nil
 	}
-	x := &EmitterNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EmitterNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func emitterNodeAdopt(id objc.ID) *EmitterNode {
 	if id == 0 {
 		return nil
 	}
-	x := &EmitterNode{Handle: objref.Wrap(id)}
+	x := &EmitterNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *EmitterNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EmitterNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EmitterNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewEmitterNode creates a new EmitterNode.
@@ -64,995 +53,979 @@ func NewEmitterNode() *EmitterNode {
 	return emitterNodeAdopt(_id)
 }
 
-// The texture to use to render a particle.
-//
-// WithParticleTexture sets particleTexture and returns the receiver so calls can be chained.
+// WithParticleTexture the texture to use to render a particle.
 func (x *EmitterNode) WithParticleTexture(particleTexture TextureProvider) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleTexture:"), objref.IDOf(particleTexture))
 	return x
 }
 
-// The blending mode used to blend particles into the framebuffer.
-//
-// WithParticleBlendMode sets particleBlendMode and returns the receiver so calls can be chained.
+// WithParticleBlendMode the blending mode used to blend particles into the framebuffer.
 func (x *EmitterNode) WithParticleBlendMode(particleBlendMode BlendMode) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleBlendMode:"), particleBlendMode)
 	return x
 }
 
-// The average initial color for a particle.
-//
-// WithParticleColor sets particleColor and returns the receiver so calls can be chained.
+// WithParticleColor the average initial color for a particle.
 func (x *EmitterNode) WithParticleColor(particleColor obj.Object) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColor:"), objref.IDOf(particleColor))
 	return x
 }
 
-// The range of allowed random values for the red component of a particle’s initial color.
-//
-// WithParticleColorRedRange sets particleColorRedRange and returns the receiver so calls can be chained.
+// WithParticleColorRedRange the range of allowed random values for the red component of a particle’s initial color.
 func (x *EmitterNode) WithParticleColorRedRange(particleColorRedRange float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorRedRange:"), particleColorRedRange)
 	return x
 }
 
-// The range of allowed random values for the green component of a particle’s initial color.
-//
-// WithParticleColorGreenRange sets particleColorGreenRange and returns the receiver so calls can be chained.
+// WithParticleColorGreenRange the range of allowed random values for the green component of a particle’s initial color.
 func (x *EmitterNode) WithParticleColorGreenRange(particleColorGreenRange float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorGreenRange:"), particleColorGreenRange)
 	return x
 }
 
-// The range of allowed random values for the blue component of a particle’s initial color.
-//
-// WithParticleColorBlueRange sets particleColorBlueRange and returns the receiver so calls can be chained.
+// WithParticleColorBlueRange the range of allowed random values for the blue component of a particle’s initial color.
 func (x *EmitterNode) WithParticleColorBlueRange(particleColorBlueRange float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorBlueRange:"), particleColorBlueRange)
 	return x
 }
 
-// The range of allowed random values for the alpha component of a particle’s initial color.
-//
-// WithParticleColorAlphaRange sets particleColorAlphaRange and returns the receiver so calls can be chained.
+// WithParticleColorAlphaRange the range of allowed random values for the alpha component of a particle’s initial color.
 func (x *EmitterNode) WithParticleColorAlphaRange(particleColorAlphaRange float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorAlphaRange:"), particleColorAlphaRange)
 	return x
 }
 
-// The rate at which the red component of a particle’s color changes per second.
-//
-// WithParticleColorRedSpeed sets particleColorRedSpeed and returns the receiver so calls can be chained.
+// WithParticleColorRedSpeed the rate at which the red component of a particle’s color changes per second.
 func (x *EmitterNode) WithParticleColorRedSpeed(particleColorRedSpeed float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorRedSpeed:"), particleColorRedSpeed)
 	return x
 }
 
-// The rate at which the green component of a particle’s color changes per second.
-//
-// WithParticleColorGreenSpeed sets particleColorGreenSpeed and returns the receiver so calls can be chained.
+// WithParticleColorGreenSpeed the rate at which the green component of a particle’s color changes per second.
 func (x *EmitterNode) WithParticleColorGreenSpeed(particleColorGreenSpeed float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorGreenSpeed:"), particleColorGreenSpeed)
 	return x
 }
 
-// The rate at which the blue component of a particle’s color changes per second.
-//
-// WithParticleColorBlueSpeed sets particleColorBlueSpeed and returns the receiver so calls can be chained.
+// WithParticleColorBlueSpeed the rate at which the blue component of a particle’s color changes per second.
 func (x *EmitterNode) WithParticleColorBlueSpeed(particleColorBlueSpeed float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorBlueSpeed:"), particleColorBlueSpeed)
 	return x
 }
 
-// The rate at which the alpha component of a particle’s color changes per second.
-//
-// WithParticleColorAlphaSpeed sets particleColorAlphaSpeed and returns the receiver so calls can be chained.
+// WithParticleColorAlphaSpeed the rate at which the alpha component of a particle’s color changes per second.
 func (x *EmitterNode) WithParticleColorAlphaSpeed(particleColorAlphaSpeed float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorAlphaSpeed:"), particleColorAlphaSpeed)
 	return x
 }
 
-// The sequence used to specify the color components of a particle over its lifetime.
-//
-// WithParticleColorSequence sets particleColorSequence and returns the receiver so calls can be chained.
+// WithParticleColorSequence the sequence used to specify the color components of a particle over its lifetime.
 func (x *EmitterNode) WithParticleColorSequence(particleColorSequence *KeyframeSequence) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorSequence:"), objref.IDOf(particleColorSequence))
 	return x
 }
 
-// The average starting value for the color blend factor.
-//
-// WithParticleColorBlendFactor sets particleColorBlendFactor and returns the receiver so calls can be chained.
+// WithParticleColorBlendFactor the average starting value for the color blend factor.
 func (x *EmitterNode) WithParticleColorBlendFactor(particleColorBlendFactor float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorBlendFactor:"), particleColorBlendFactor)
 	return x
 }
 
-// The range of allowed random values for a particle’s starting color blend factor.
-//
-// WithParticleColorBlendFactorRange sets particleColorBlendFactorRange and returns the receiver so calls can be chained.
+// WithParticleColorBlendFactorRange the range of allowed random values for a particle’s starting color blend factor.
 func (x *EmitterNode) WithParticleColorBlendFactorRange(particleColorBlendFactorRange float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorBlendFactorRange:"), particleColorBlendFactorRange)
 	return x
 }
 
-// The rate at which the color blend factor changes per second.
-//
-// WithParticleColorBlendFactorSpeed sets particleColorBlendFactorSpeed and returns the receiver so calls can be chained.
+// WithParticleColorBlendFactorSpeed the rate at which the color blend factor changes per second.
 func (x *EmitterNode) WithParticleColorBlendFactorSpeed(particleColorBlendFactorSpeed float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorBlendFactorSpeed:"), particleColorBlendFactorSpeed)
 	return x
 }
 
-// The sequence used to specify the color blend factor of a particle over its lifetime.
-//
-// WithParticleColorBlendFactorSequence sets particleColorBlendFactorSequence and returns the receiver so calls can be chained.
+// WithParticleColorBlendFactorSequence the sequence used to specify the color blend factor of a particle over its lifetime.
 func (x *EmitterNode) WithParticleColorBlendFactorSequence(particleColorBlendFactorSequence *KeyframeSequence) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorBlendFactorSequence:"), objref.IDOf(particleColorBlendFactorSequence))
 	return x
 }
 
-// The average initial speed of a new particle, in points per second.
-//
-// WithParticleSpeed sets particleSpeed and returns the receiver so calls can be chained.
+// WithParticlePosition the average starting position for a particle.
+func (x *EmitterNode) WithParticlePosition(particlePosition corefoundation.CGPoint) *EmitterNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticlePosition:"), particlePosition)
+	return x
+}
+
+// WithParticlePositionRange the range of allowed random values for a particle’s position.
+func (x *EmitterNode) WithParticlePositionRange(particlePositionRange corefoundation.CGVector) *EmitterNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticlePositionRange:"), particlePositionRange)
+	return x
+}
+
+// WithParticleSpeed the average initial speed of a new particle, in points per second.
 func (x *EmitterNode) WithParticleSpeed(particleSpeed float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleSpeed:"), particleSpeed)
 	return x
 }
 
-// The range of allowed random values for a particle’s initial speed.
-//
-// WithParticleSpeedRange sets particleSpeedRange and returns the receiver so calls can be chained.
+// WithParticleSpeedRange the range of allowed random values for a particle’s initial speed.
 func (x *EmitterNode) WithParticleSpeedRange(particleSpeedRange float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleSpeedRange:"), particleSpeedRange)
 	return x
 }
 
-// The average initial direction of a particle, expressed as an angle in radians.
-//
-// WithEmissionAngle sets emissionAngle and returns the receiver so calls can be chained.
+// WithEmissionAngle the average initial direction of a particle, expressed as an angle in radians.
 func (x *EmitterNode) WithEmissionAngle(emissionAngle float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmissionAngle:"), emissionAngle)
 	return x
 }
 
-// The range of allowed random values for a particle’s initial direction, expressed as an angle in radians.
-//
-// WithEmissionAngleRange sets emissionAngleRange and returns the receiver so calls can be chained.
+// WithEmissionAngleRange the range of allowed random values for a particle’s initial direction, expressed as an angle in radians.
 func (x *EmitterNode) WithEmissionAngleRange(emissionAngleRange float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmissionAngleRange:"), emissionAngleRange)
 	return x
 }
 
-// The acceleration to apply to a particle’s horizontal velocity.
-//
-// WithXAcceleration sets xAcceleration and returns the receiver so calls can be chained.
+// WithXAcceleration the acceleration to apply to a particle’s horizontal velocity.
 func (x *EmitterNode) WithXAcceleration(xAcceleration float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXAcceleration:"), xAcceleration)
 	return x
 }
 
-// The acceleration to apply to a particle’s vertical velocity.
-//
-// WithYAcceleration sets yAcceleration and returns the receiver so calls can be chained.
+// WithYAcceleration the acceleration to apply to a particle’s vertical velocity.
 func (x *EmitterNode) WithYAcceleration(yAcceleration float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYAcceleration:"), yAcceleration)
 	return x
 }
 
-// The rate at which new particles are created.
-//
-// WithParticleBirthRate sets particleBirthRate and returns the receiver so calls can be chained.
+// WithParticleBirthRate the rate at which new particles are created.
 func (x *EmitterNode) WithParticleBirthRate(particleBirthRate float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleBirthRate:"), particleBirthRate)
 	return x
 }
 
-// The number of particles the emitter should emit before stopping.
-//
-// WithNumParticlesToEmit sets numParticlesToEmit and returns the receiver so calls can be chained.
+// WithNumParticlesToEmit the number of particles the emitter should emit before stopping.
 func (x *EmitterNode) WithNumParticlesToEmit(numParticlesToEmit int) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumParticlesToEmit:"), numParticlesToEmit)
 	return x
 }
 
-// The average lifetime of a particle, in seconds.
-//
-// WithParticleLifetime sets particleLifetime and returns the receiver so calls can be chained.
+// WithParticleLifetime the average lifetime of a particle, in seconds.
 func (x *EmitterNode) WithParticleLifetime(particleLifetime float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleLifetime:"), particleLifetime)
 	return x
 }
 
-// The range of allowed random values for a particle’s lifetime.
-//
-// WithParticleLifetimeRange sets particleLifetimeRange and returns the receiver so calls can be chained.
+// WithParticleLifetimeRange the range of allowed random values for a particle’s lifetime.
 func (x *EmitterNode) WithParticleLifetimeRange(particleLifetimeRange float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleLifetimeRange:"), particleLifetimeRange)
 	return x
 }
 
-// The average initial rotation of a particle, expressed as an angle in radians.
-//
-// WithParticleRotation sets particleRotation and returns the receiver so calls can be chained.
+// WithParticleRotation the average initial rotation of a particle, expressed as an angle in radians.
 func (x *EmitterNode) WithParticleRotation(particleRotation float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleRotation:"), particleRotation)
 	return x
 }
 
-// The range of allowed random values for a particle’s initial rotation, expressed as an angle in radians.
-//
-// WithParticleRotationRange sets particleRotationRange and returns the receiver so calls can be chained.
+// WithParticleRotationRange the range of allowed random values for a particle’s initial rotation, expressed as an angle in radians.
 func (x *EmitterNode) WithParticleRotationRange(particleRotationRange float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleRotationRange:"), particleRotationRange)
 	return x
 }
 
-// The speed at which a particle rotates, expressed in radians per second.
-//
-// WithParticleRotationSpeed sets particleRotationSpeed and returns the receiver so calls can be chained.
+// WithParticleRotationSpeed the speed at which a particle rotates, expressed in radians per second.
 func (x *EmitterNode) WithParticleRotationSpeed(particleRotationSpeed float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleRotationSpeed:"), particleRotationSpeed)
 	return x
 }
 
-// The average initial scale factor of a particle.
-//
-// WithParticleScale sets particleScale and returns the receiver so calls can be chained.
+// WithParticleSize the starting size of each particle.
+func (x *EmitterNode) WithParticleSize(particleSize corefoundation.CGSize) *EmitterNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleSize:"), particleSize)
+	return x
+}
+
+// WithParticleScale the average initial scale factor of a particle.
 func (x *EmitterNode) WithParticleScale(particleScale float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleScale:"), particleScale)
 	return x
 }
 
-// The range of allowed random values for a particle’s initial scale.
-//
-// WithParticleScaleRange sets particleScaleRange and returns the receiver so calls can be chained.
+// WithParticleScaleRange the range of allowed random values for a particle’s initial scale.
 func (x *EmitterNode) WithParticleScaleRange(particleScaleRange float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleScaleRange:"), particleScaleRange)
 	return x
 }
 
-// The rate at which a particle’s scale factor changes per second.
-//
-// WithParticleScaleSpeed sets particleScaleSpeed and returns the receiver so calls can be chained.
+// WithParticleScaleSpeed the rate at which a particle’s scale factor changes per second.
 func (x *EmitterNode) WithParticleScaleSpeed(particleScaleSpeed float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleScaleSpeed:"), particleScaleSpeed)
 	return x
 }
 
-// The sequence used to specify the scale factor of a particle over its lifetime.
-//
-// WithParticleScaleSequence sets particleScaleSequence and returns the receiver so calls can be chained.
+// WithParticleScaleSequence the sequence used to specify the scale factor of a particle over its lifetime.
 func (x *EmitterNode) WithParticleScaleSequence(particleScaleSequence *KeyframeSequence) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleScaleSequence:"), objref.IDOf(particleScaleSequence))
 	return x
 }
 
-// The average starting alpha value for a particle.
-//
-// WithParticleAlpha sets particleAlpha and returns the receiver so calls can be chained.
+// WithParticleAlpha the average starting alpha value for a particle.
 func (x *EmitterNode) WithParticleAlpha(particleAlpha float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleAlpha:"), particleAlpha)
 	return x
 }
 
-// The range of allowed random values for a particle’s starting alpha value.
-//
-// WithParticleAlphaRange sets particleAlphaRange and returns the receiver so calls can be chained.
+// WithParticleAlphaRange the range of allowed random values for a particle’s starting alpha value.
 func (x *EmitterNode) WithParticleAlphaRange(particleAlphaRange float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleAlphaRange:"), particleAlphaRange)
 	return x
 }
 
-// The rate at which the alpha value of a particle changes per second.
-//
-// WithParticleAlphaSpeed sets particleAlphaSpeed and returns the receiver so calls can be chained.
+// WithParticleAlphaSpeed the rate at which the alpha value of a particle changes per second.
 func (x *EmitterNode) WithParticleAlphaSpeed(particleAlphaSpeed float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleAlphaSpeed:"), particleAlphaSpeed)
 	return x
 }
 
-// The sequence used to specify the alpha value of a particle over its lifetime.
-//
-// WithParticleAlphaSequence sets particleAlphaSequence and returns the receiver so calls can be chained.
+// WithParticleAlphaSequence the sequence used to specify the alpha value of a particle over its lifetime.
 func (x *EmitterNode) WithParticleAlphaSequence(particleAlphaSequence *KeyframeSequence) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleAlphaSequence:"), objref.IDOf(particleAlphaSequence))
 	return x
 }
 
-// An action executed by new particles.
-//
-// WithParticleAction sets particleAction and returns the receiver so calls can be chained.
+// WithParticleAction an action executed by new particles.
 func (x *EmitterNode) WithParticleAction(particleAction *Action) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleAction:"), objref.IDOf(particleAction))
 	return x
 }
 
-// A mask that defines which categories of physics fields can exert forces on the particles.
-//
-// WithFieldBitMask sets fieldBitMask and returns the receiver so calls can be chained.
+// WithFieldBitMask a mask that defines which categories of physics fields can exert forces on the particles.
 func (x *EmitterNode) WithFieldBitMask(fieldBitMask uint32) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFieldBitMask:"), fieldBitMask)
 	return x
 }
 
-// The target node that renders the emitter’s particles.
-//
-// WithTargetNode sets targetNode and returns the receiver so calls can be chained.
+// WithTargetNode the target node that renders the emitter’s particles.
 func (x *EmitterNode) WithTargetNode(targetNode NodeProvider) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetNode:"), objref.IDOf(targetNode))
 	return x
 }
 
-// A custom shader used to determine how particles are rendered.
-//
-// WithShader sets shader and returns the receiver so calls can be chained.
+// WithShader a custom shader used to determine how particles are rendered.
 func (x *EmitterNode) WithShader(shader *Shader) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShader:"), objref.IDOf(shader))
 	return x
 }
 
-// The average starting depth of a particle.
-//
-// WithParticleZPosition sets particleZPosition and returns the receiver so calls can be chained.
+// WithParticleZPosition the average starting depth of a particle.
 func (x *EmitterNode) WithParticleZPosition(particleZPosition float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleZPosition:"), particleZPosition)
 	return x
 }
 
-// The order in which the emitter’s particles are rendered.
-//
-// WithParticleRenderOrder sets particleRenderOrder and returns the receiver so calls can be chained.
+// WithParticleRenderOrder the order in which the emitter’s particles are rendered.
 func (x *EmitterNode) WithParticleRenderOrder(particleRenderOrder ParticleRenderOrder) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleRenderOrder:"), particleRenderOrder)
 	return x
 }
 
-// The range of allowed random values for a particle’s depth.
-//
-// WithParticleZPositionRange sets particleZPositionRange and returns the receiver so calls can be chained.
+// WithParticleZPositionRange the range of allowed random values for a particle’s depth.
 func (x *EmitterNode) WithParticleZPositionRange(particleZPositionRange float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleZPositionRange:"), particleZPositionRange)
 	return x
 }
 
-// The speed at which the particle’s depth changes.
-//
-// WithParticleZPositionSpeed sets particleZPositionSpeed and returns the receiver so calls can be chained.
+// WithParticleZPositionSpeed the speed at which the particle’s depth changes.
 func (x *EmitterNode) WithParticleZPositionSpeed(particleZPositionSpeed float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleZPositionSpeed:"), particleZPositionSpeed)
 	return x
 }
 
-// The height of the node relative to its parent.
-//
-// WithZPosition sets zPosition and returns the receiver so calls can be chained.
+// WithPosition the position of the node in its parent’s coordinate system.
+func (x *EmitterNode) WithPosition(position corefoundation.CGPoint) *EmitterNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
+	return x
+}
+
+// WithZPosition the height of the node relative to its parent.
 func (x *EmitterNode) WithZPosition(zPosition float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
 	return x
 }
 
-// The Euler rotation about the z axis (in radians).
-//
-// WithZRotation sets zRotation and returns the receiver so calls can be chained.
+// WithZRotation the Euler rotation about the z axis (in radians).
 func (x *EmitterNode) WithZRotation(zRotation float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
 	return x
 }
 
-// A scaling factor that multiplies the width of a node and its children.
-//
-// WithXScale sets xScale and returns the receiver so calls can be chained.
+// WithXScale a scaling factor that multiplies the width of a node and its children.
 func (x *EmitterNode) WithXScale(xScale float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
 	return x
 }
 
-// A scaling factor that multiplies the height of a node and its children.
-//
-// WithYScale sets yScale and returns the receiver so calls can be chained.
+// WithYScale a scaling factor that multiplies the height of a node and its children.
 func (x *EmitterNode) WithYScale(yScale float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
 	return x
 }
 
-// A speed modifier applied to all actions executed by a node and its descendants.
-//
-// WithSpeed sets speed and returns the receiver so calls can be chained.
+// WithSpeed a speed modifier applied to all actions executed by a node and its descendants.
 func (x *EmitterNode) WithSpeed(speed float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
-// The transparency value applied to the node’s contents.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the transparency value applied to the node’s contents.
 func (x *EmitterNode) WithAlpha(alpha float64) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// A Boolean value that determines whether actions on the node and its descendants are processed.
-//
-// WithPaused sets paused and returns the receiver so calls can be chained.
+// WithPaused a Boolean value that determines whether actions on the node and its descendants are processed.
 func (x *EmitterNode) WithPaused(paused bool) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
-// A Boolean value that determines whether a node and its descendants are rendered.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden a Boolean value that determines whether a node and its descendants are rendered.
 func (x *EmitterNode) WithHidden(hidden bool) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// A Boolean value that indicates whether the node receives touch events.
-//
-// WithUserInteractionEnabled sets userInteractionEnabled and returns the receiver so calls can be chained.
+// WithUserInteractionEnabled a Boolean value that indicates whether the node receives touch events.
 func (x *EmitterNode) WithUserInteractionEnabled(userInteractionEnabled bool) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
 	return x
 }
 
-// The node’s assignable name.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the node’s assignable name.
 func (x *EmitterNode) WithName(name string) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The physics body associated with the node.
-//
-// WithPhysicsBody sets physicsBody and returns the receiver so calls can be chained.
+// WithPhysicsBody the physics body associated with the node.
 func (x *EmitterNode) WithPhysicsBody(physicsBody *PhysicsBody) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	return x
 }
 
-// A dictionary containing arbitrary data.
-//
-// WithUserData sets userData and returns the receiver so calls can be chained.
+// WithUserData a dictionary containing arbitrary data.
 func (x *EmitterNode) WithUserData(userData obj.Object) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	return x
 }
 
-// The reach constraints to apply to the node when executing a reach action.
-//
-// WithReachConstraints sets reachConstraints and returns the receiver so calls can be chained.
+// WithReachConstraints the reach constraints to apply to the node when executing a reach action.
 func (x *EmitterNode) WithReachConstraints(reachConstraints *ReachConstraints) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	return x
 }
 
-// A list of constraints to apply to the node.
-//
-// WithConstraints sets the collection and returns the receiver so calls can be chained.
+// WithConstraints a list of constraints to apply to the node.
 func (x *EmitterNode) WithConstraints(items ...*Constraint) *EmitterNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
-// The values of each attribute associated with the node’s attached shader.
-//
-// WithAttributeValues sets attributeValues and returns the receiver so calls can be chained.
+// WithAttributeValues the values of each attribute associated with the node’s attached shader.
 func (x *EmitterNode) WithAttributeValues(attributeValues obj.Object) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
-//
-// WithAccessibilityElement sets accessibilityElement and returns the receiver so calls can be chained.
+// WithAccessibilityElement a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (x *EmitterNode) WithAccessibilityElement(accessibilityElement bool) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
 	return x
 }
 
-// A string value describing the user interface element type; for example, a button.
-//
-// WithAccessibilityRole sets accessibilityRole and returns the receiver so calls can be chained.
+// WithAccessibilityRole a string value describing the user interface element type; for example, a button.
 func (x *EmitterNode) WithAccessibilityRole(accessibilityRole string) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
 	return x
 }
 
-// A string value describing the user interface element name and type; for example, the Buy button.
-//
-// WithAccessibilityRoleDescription sets accessibilityRoleDescription and returns the receiver so calls can be chained.
+// WithAccessibilityRoleDescription a string value describing the user interface element name and type; for example, the Buy button.
 func (x *EmitterNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
 	return x
 }
 
-// A string that defines this user interface element’s subrole; for example, a full-screen button.
-//
-// WithAccessibilitySubrole sets accessibilitySubrole and returns the receiver so calls can be chained.
+// WithAccessibilitySubrole a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (x *EmitterNode) WithAccessibilitySubrole(accessibilitySubrole string) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
 	return x
 }
 
-// The user interface element that contains this element.
-//
-// WithAccessibilityParent sets accessibilityParent and returns the receiver so calls can be chained.
+// WithAccessibilityFrame the size of this user interface element, in screen points.
+func (x *EmitterNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *EmitterNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	return x
+}
+
+// WithAccessibilityParent the user interface element that contains this element.
 func (x *EmitterNode) WithAccessibilityParent(accessibilityParent obj.Object) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	return x
 }
 
-// The help description of this user interface element; for example, the text shown in a tooltip.
-//
-// WithAccessibilityHelp sets accessibilityHelp and returns the receiver so calls can be chained.
+// WithAccessibilityHelp the help description of this user interface element; for example, the text shown in a tooltip.
 func (x *EmitterNode) WithAccessibilityHelp(accessibilityHelp string) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
 	return x
 }
 
-// A short description of this user interface element.
-//
-// WithAccessibilityLabel sets accessibilityLabel and returns the receiver so calls can be chained.
+// WithAccessibilityLabel a short description of this user interface element.
 func (x *EmitterNode) WithAccessibilityLabel(accessibilityLabel string) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
-//
-// WithAccessibilityEnabled sets accessibilityEnabled and returns the receiver so calls can be chained.
+// WithAccessibilityEnabled a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (x *EmitterNode) WithAccessibilityEnabled(accessibilityEnabled bool) *EmitterNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
 	return x
 }
 
-// Advances the emitter particle simulation.
+// AdvanceSimulationTime advances the emitter particle simulation.
 func (x *EmitterNode) AdvanceSimulationTime(sec float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("advanceSimulationTime:"), sec)
 }
 
-// Removes all existing particles and restarts the simulation.
+// ResetSimulation removes all existing particles and restarts the simulation.
 func (x *EmitterNode) ResetSimulation() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetSimulation"))
 }
 
-// The texture to be used for the particles.
+// ParticleTexture the texture to be used for the particles.
 func (x *EmitterNode) ParticleTexture() *Texture {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("particleTexture"))
 	return TextureFromID(_r)
 }
 
+// SetParticleTexture wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleTexture(particleTexture *Texture) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleTexture:"), objref.IDOf(particleTexture))
 }
 
-// The blend mode for each particle. Defaults to SKBlendModeAlpha.
+// ParticleBlendMode the blend mode for each particle. Defaults to SKBlendModeAlpha.
 func (x *EmitterNode) ParticleBlendMode() BlendMode {
 	_r := objc.Send[BlendMode](objref.IDOf(x), objc.RegisterName("particleBlendMode"))
 	return _r
 }
 
+// SetParticleBlendMode wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleBlendMode(particleBlendMode BlendMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleBlendMode:"), particleBlendMode)
 }
 
-// The starting color for each particle. Defaults to clear.
+// ParticleColor the starting color for each particle. Defaults to clear.
 func (x *EmitterNode) ParticleColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("particleColor"))
 	return obj.Wrap(_r)
 }
 
+// SetParticleColor wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleColor(particleColor obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColor:"), objref.IDOf(particleColor))
 }
 
-// The random variance about each color component for each particle. Defaults to 0.0.
+// ParticleColorRedRange the random variance about each color component for each particle. Defaults to 0.0.
 func (x *EmitterNode) ParticleColorRedRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleColorRedRange"))
 	return _r
 }
 
+// SetParticleColorRedRange wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleColorRedRange(particleColorRedRange float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorRedRange:"), particleColorRedRange)
 }
 
+// ParticleColorGreenRange wraps the corresponding Objective-C method.
 func (x *EmitterNode) ParticleColorGreenRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleColorGreenRange"))
 	return _r
 }
 
+// SetParticleColorGreenRange wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleColorGreenRange(particleColorGreenRange float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorGreenRange:"), particleColorGreenRange)
 }
 
+// ParticleColorBlueRange wraps the corresponding Objective-C method.
 func (x *EmitterNode) ParticleColorBlueRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleColorBlueRange"))
 	return _r
 }
 
+// SetParticleColorBlueRange wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleColorBlueRange(particleColorBlueRange float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorBlueRange:"), particleColorBlueRange)
 }
 
+// ParticleColorAlphaRange wraps the corresponding Objective-C method.
 func (x *EmitterNode) ParticleColorAlphaRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleColorAlphaRange"))
 	return _r
 }
 
+// SetParticleColorAlphaRange wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleColorAlphaRange(particleColorAlphaRange float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorAlphaRange:"), particleColorAlphaRange)
 }
 
-// The rate at which to modify each color component for each particle (per second).
+// ParticleColorRedSpeed the rate at which to modify each color component for each particle (per second).
 func (x *EmitterNode) ParticleColorRedSpeed() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleColorRedSpeed"))
 	return _r
 }
 
+// SetParticleColorRedSpeed wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleColorRedSpeed(particleColorRedSpeed float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorRedSpeed:"), particleColorRedSpeed)
 }
 
+// ParticleColorGreenSpeed wraps the corresponding Objective-C method.
 func (x *EmitterNode) ParticleColorGreenSpeed() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleColorGreenSpeed"))
 	return _r
 }
 
+// SetParticleColorGreenSpeed wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleColorGreenSpeed(particleColorGreenSpeed float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorGreenSpeed:"), particleColorGreenSpeed)
 }
 
+// ParticleColorBlueSpeed wraps the corresponding Objective-C method.
 func (x *EmitterNode) ParticleColorBlueSpeed() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleColorBlueSpeed"))
 	return _r
 }
 
+// SetParticleColorBlueSpeed wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleColorBlueSpeed(particleColorBlueSpeed float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorBlueSpeed:"), particleColorBlueSpeed)
 }
 
+// ParticleColorAlphaSpeed wraps the corresponding Objective-C method.
 func (x *EmitterNode) ParticleColorAlphaSpeed() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleColorAlphaSpeed"))
 	return _r
 }
 
+// SetParticleColorAlphaSpeed wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleColorAlphaSpeed(particleColorAlphaSpeed float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorAlphaSpeed:"), particleColorAlphaSpeed)
 }
 
+// ParticleColorSequence wraps the corresponding Objective-C method.
 func (x *EmitterNode) ParticleColorSequence() *KeyframeSequence {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("particleColorSequence"))
 	return KeyframeSequenceFromID(_r)
 }
 
+// SetParticleColorSequence wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleColorSequence(particleColorSequence *KeyframeSequence) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorSequence:"), objref.IDOf(particleColorSequence))
 }
 
-// The starting color blend for each particle. Behaves the same as SKSpriteNode. Defaults to 0.0.
+// ParticleColorBlendFactor the starting color blend for each particle. Behaves the same as SKSpriteNode. Defaults to 0.0.
 func (x *EmitterNode) ParticleColorBlendFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleColorBlendFactor"))
 	return _r
 }
 
+// SetParticleColorBlendFactor wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleColorBlendFactor(particleColorBlendFactor float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorBlendFactor:"), particleColorBlendFactor)
 }
 
-// The random variance about the starting color blend for each particle. Defaults to 0.0.
+// ParticleColorBlendFactorRange the random variance about the starting color blend for each particle. Defaults to 0.0.
 func (x *EmitterNode) ParticleColorBlendFactorRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleColorBlendFactorRange"))
 	return _r
 }
 
+// SetParticleColorBlendFactorRange wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleColorBlendFactorRange(particleColorBlendFactorRange float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorBlendFactorRange:"), particleColorBlendFactorRange)
 }
 
-// The rate at which to modify the color blend for each particle. Defaults to 0.0.
+// ParticleColorBlendFactorSpeed the rate at which to modify the color blend for each particle. Defaults to 0.0.
 func (x *EmitterNode) ParticleColorBlendFactorSpeed() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleColorBlendFactorSpeed"))
 	return _r
 }
 
+// SetParticleColorBlendFactorSpeed wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleColorBlendFactorSpeed(particleColorBlendFactorSpeed float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorBlendFactorSpeed:"), particleColorBlendFactorSpeed)
 }
 
+// ParticleColorBlendFactorSequence wraps the corresponding Objective-C method.
 func (x *EmitterNode) ParticleColorBlendFactorSequence() *KeyframeSequence {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("particleColorBlendFactorSequence"))
 	return KeyframeSequenceFromID(_r)
 }
 
+// SetParticleColorBlendFactorSequence wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleColorBlendFactorSequence(particleColorBlendFactorSequence *KeyframeSequence) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleColorBlendFactorSequence:"), objref.IDOf(particleColorBlendFactorSequence))
 }
 
-// The starting speed for each particle along its emission vector. Defaults to 0.0.
+// ParticlePosition the starting position for each particle in the emitter's coordinate space. Defaults to (0.0, 0,0).
+func (x *EmitterNode) ParticlePosition() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("particlePosition"))
+	return _r
+}
+
+// SetParticlePosition wraps the corresponding Objective-C method.
+func (x *EmitterNode) SetParticlePosition(particlePosition corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticlePosition:"), particlePosition)
+}
+
+// ParticlePositionRange the random variance about the starting position for each particle in the emitter's coordinate space. Defaults to (0.0, 0,0).
+func (x *EmitterNode) ParticlePositionRange() corefoundation.CGVector {
+	_r := objc.Send[corefoundation.CGVector](objref.IDOf(x), objc.RegisterName("particlePositionRange"))
+	return _r
+}
+
+// SetParticlePositionRange wraps the corresponding Objective-C method.
+func (x *EmitterNode) SetParticlePositionRange(particlePositionRange corefoundation.CGVector) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticlePositionRange:"), particlePositionRange)
+}
+
+// ParticleSpeed the starting speed for each particle along its emission vector. Defaults to 0.0.
 func (x *EmitterNode) ParticleSpeed() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleSpeed"))
 	return _r
 }
 
+// SetParticleSpeed wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleSpeed(particleSpeed float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleSpeed:"), particleSpeed)
 }
 
-// The random variance about the starting speed for each particle along its emission vector. Defaults to 0.0.
+// ParticleSpeedRange the random variance about the starting speed for each particle along its emission vector. Defaults to 0.0.
 func (x *EmitterNode) ParticleSpeedRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleSpeedRange"))
 	return _r
 }
 
+// SetParticleSpeedRange wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleSpeedRange(particleSpeedRange float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleSpeedRange:"), particleSpeedRange)
 }
 
-// The angle at which to emit each new particle, in radians. Defaults to 0.0.
+// EmissionAngle the angle at which to emit each new particle, in radians. Defaults to 0.0.
 func (x *EmitterNode) EmissionAngle() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("emissionAngle"))
 	return _r
 }
 
+// SetEmissionAngle wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetEmissionAngle(emissionAngle float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmissionAngle:"), emissionAngle)
 }
 
-// The random variance about the angle at which to emit each new particle, in radians. Defaults to 0.0.
+// EmissionAngleRange the random variance about the angle at which to emit each new particle, in radians. Defaults to 0.0.
 func (x *EmitterNode) EmissionAngleRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("emissionAngleRange"))
 	return _r
 }
 
+// SetEmissionAngleRange wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetEmissionAngleRange(emissionAngleRange float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmissionAngleRange:"), emissionAngleRange)
 }
 
-// The acceleration to apply to each particles velocity. Useful for simulating effects such as wind or gravity. Defaults to 0.0.
+// XAcceleration the acceleration to apply to each particles velocity. Useful for simulating effects such as wind or gravity. Defaults to 0.0.
 func (x *EmitterNode) XAcceleration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("xAcceleration"))
 	return _r
 }
 
+// SetXAcceleration wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetXAcceleration(xAcceleration float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXAcceleration:"), xAcceleration)
 }
 
+// YAcceleration wraps the corresponding Objective-C method.
 func (x *EmitterNode) YAcceleration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("yAcceleration"))
 	return _r
 }
 
+// SetYAcceleration wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetYAcceleration(yAcceleration float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYAcceleration:"), yAcceleration)
 }
 
-// The rate at which new particles are generated, in particles per second. Defaults to 0.0.
+// ParticleBirthRate the rate at which new particles are generated, in particles per second. Defaults to 0.0.
 func (x *EmitterNode) ParticleBirthRate() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleBirthRate"))
 	return _r
 }
 
+// SetParticleBirthRate wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleBirthRate(particleBirthRate float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleBirthRate:"), particleBirthRate)
 }
 
-// The number of particles that will be emitted. If set to 0, there is no limit. Defaults to 0.
+// NumParticlesToEmit the number of particles that will be emitted. If set to 0, there is no limit. Defaults to 0.
 func (x *EmitterNode) NumParticlesToEmit() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numParticlesToEmit"))
 	return _r
 }
 
+// SetNumParticlesToEmit wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetNumParticlesToEmit(numParticlesToEmit int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumParticlesToEmit:"), numParticlesToEmit)
 }
 
-// The lifetime of each particle, in seconds. Defaults to 0.0.
+// ParticleLifetime the lifetime of each particle, in seconds. Defaults to 0.0.
 func (x *EmitterNode) ParticleLifetime() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleLifetime"))
 	return _r
 }
 
+// SetParticleLifetime wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleLifetime(particleLifetime float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleLifetime:"), particleLifetime)
 }
 
-// The random variance about the lifetime of each particle, in seconds. Defaults to 0.0.
+// ParticleLifetimeRange the random variance about the lifetime of each particle, in seconds. Defaults to 0.0.
 func (x *EmitterNode) ParticleLifetimeRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleLifetimeRange"))
 	return _r
 }
 
+// SetParticleLifetimeRange wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleLifetimeRange(particleLifetimeRange float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleLifetimeRange:"), particleLifetimeRange)
 }
 
-// The starting z-rotation for each particle. Defaults to 0.0.
+// ParticleRotation the starting z-rotation for each particle. Defaults to 0.0.
 func (x *EmitterNode) ParticleRotation() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleRotation"))
 	return _r
 }
 
+// SetParticleRotation wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleRotation(particleRotation float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleRotation:"), particleRotation)
 }
 
-// The random variance about the starting z-rotation for each particle. Defaults to 0.0.
+// ParticleRotationRange the random variance about the starting z-rotation for each particle. Defaults to 0.0.
 func (x *EmitterNode) ParticleRotationRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleRotationRange"))
 	return _r
 }
 
+// SetParticleRotationRange wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleRotationRange(particleRotationRange float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleRotationRange:"), particleRotationRange)
 }
 
-// The rate at which to modify the z-rotation for each particle. Defaults to 0.0.
+// ParticleRotationSpeed the rate at which to modify the z-rotation for each particle. Defaults to 0.0.
 func (x *EmitterNode) ParticleRotationSpeed() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleRotationSpeed"))
 	return _r
 }
 
+// SetParticleRotationSpeed wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleRotationSpeed(particleRotationSpeed float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleRotationSpeed:"), particleRotationSpeed)
 }
 
-// The starting scale for each particle. Defaults to 1.0.
+// ParticleSize the starting size for each particle. If set to CGSizeZero (the default) the particles will start at the size of the texture assigned to particleTexture. Note that particleScale and particleScaleRange will also have an effect on the effective size of each new particle.
+func (x *EmitterNode) ParticleSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("particleSize"))
+	return _r
+}
+
+// SetParticleSize wraps the corresponding Objective-C method.
+func (x *EmitterNode) SetParticleSize(particleSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleSize:"), particleSize)
+}
+
+// ParticleScale the starting scale for each particle. Defaults to 1.0.
 func (x *EmitterNode) ParticleScale() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleScale"))
 	return _r
 }
 
+// SetParticleScale wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleScale(particleScale float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleScale:"), particleScale)
 }
 
-// The random variance about the starting scale for each particle. Defaults to 0.0.
+// ParticleScaleRange the random variance about the starting scale for each particle. Defaults to 0.0.
 func (x *EmitterNode) ParticleScaleRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleScaleRange"))
 	return _r
 }
 
+// SetParticleScaleRange wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleScaleRange(particleScaleRange float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleScaleRange:"), particleScaleRange)
 }
 
-// The rate at which to modify the scale for each particle. Defaults to 0.0.
+// ParticleScaleSpeed the rate at which to modify the scale for each particle. Defaults to 0.0.
 func (x *EmitterNode) ParticleScaleSpeed() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleScaleSpeed"))
 	return _r
 }
 
+// SetParticleScaleSpeed wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleScaleSpeed(particleScaleSpeed float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleScaleSpeed:"), particleScaleSpeed)
 }
 
+// ParticleScaleSequence wraps the corresponding Objective-C method.
 func (x *EmitterNode) ParticleScaleSequence() *KeyframeSequence {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("particleScaleSequence"))
 	return KeyframeSequenceFromID(_r)
 }
 
+// SetParticleScaleSequence wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleScaleSequence(particleScaleSequence *KeyframeSequence) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleScaleSequence:"), objref.IDOf(particleScaleSequence))
 }
 
-// The starting alpha for each particle. Defaults to 1.0.
+// ParticleAlpha the starting alpha for each particle. Defaults to 1.0.
 func (x *EmitterNode) ParticleAlpha() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleAlpha"))
 	return _r
 }
 
+// SetParticleAlpha wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleAlpha(particleAlpha float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleAlpha:"), particleAlpha)
 }
 
-// The random variance about the starting alpha for each particle. Defaults to 1.0.
+// ParticleAlphaRange the random variance about the starting alpha for each particle. Defaults to 1.0.
 func (x *EmitterNode) ParticleAlphaRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleAlphaRange"))
 	return _r
 }
 
+// SetParticleAlphaRange wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleAlphaRange(particleAlphaRange float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleAlphaRange:"), particleAlphaRange)
 }
 
-// The rate at which to modify the alpha for each particle. Defaults to 1.0.
+// ParticleAlphaSpeed the rate at which to modify the alpha for each particle. Defaults to 1.0.
 func (x *EmitterNode) ParticleAlphaSpeed() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleAlphaSpeed"))
 	return _r
 }
 
+// SetParticleAlphaSpeed wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleAlphaSpeed(particleAlphaSpeed float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleAlphaSpeed:"), particleAlphaSpeed)
 }
 
+// ParticleAlphaSequence wraps the corresponding Objective-C method.
 func (x *EmitterNode) ParticleAlphaSequence() *KeyframeSequence {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("particleAlphaSequence"))
 	return KeyframeSequenceFromID(_r)
 }
 
+// SetParticleAlphaSequence wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleAlphaSequence(particleAlphaSequence *KeyframeSequence) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleAlphaSequence:"), objref.IDOf(particleAlphaSequence))
 }
 
-// Specifies an action executed by new particles.
+// ParticleAction specifies an action executed by new particles.
 func (x *EmitterNode) ParticleAction() *Action {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("particleAction"))
 	return ActionFromID(_r)
 }
 
+// SetParticleAction wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleAction(particleAction *Action) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleAction:"), objref.IDOf(particleAction))
 }
 
-// Defines what logical 'categories' of fields this particles emitted respond to. Defaults to all bits set (all categories). Can be forced off via affectedByGravity.
+// FieldBitMask defines what logical 'categories' of fields this particles emitted respond to. Defaults to all bits set (all categories). Can be forced off via affectedByGravity.
 func (x *EmitterNode) FieldBitMask() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("fieldBitMask"))
 	return _r
 }
 
+// SetFieldBitMask wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetFieldBitMask(fieldBitMask uint32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFieldBitMask:"), fieldBitMask)
 }
 
-// Normally the particles are rendered as if they were a child of the SKEmitterNode, they can also be rendered as if they were a child of any other node in the scene by setting the targetNode property. Defaults to nil (standard behavior).
+// TargetNode normally the particles are rendered as if they were a child of the SKEmitterNode, they can also be rendered as if they were a child of any other node in the scene by setting the targetNode property. Defaults to nil (standard behavior).
 func (x *EmitterNode) TargetNode() *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetNode"))
 	return NodeFromID(_r)
 }
 
+// SetTargetNode wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetTargetNode(targetNode *Node) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetNode:"), objref.IDOf(targetNode))
 }
 
+// Shader wraps the corresponding Objective-C method.
 func (x *EmitterNode) Shader() *Shader {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shader"))
 	return ShaderFromID(_r)
 }
 
+// SetShader wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetShader(shader *Shader) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShader:"), objref.IDOf(shader))
 }
 
-// The starting z-position for each particle. Defaults to 0.0.
+// ParticleZPosition the starting z-position for each particle. Defaults to 0.0.
 func (x *EmitterNode) ParticleZPosition() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleZPosition"))
 	return _r
 }
 
+// SetParticleZPosition wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleZPosition(particleZPosition float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleZPosition:"), particleZPosition)
 }
 
-// The order in which particles will be rendered. Defaults to SKParticleRenderOrderOldestLast.
+// ParticleRenderOrder the order in which particles will be rendered. Defaults to SKParticleRenderOrderOldestLast.
 func (x *EmitterNode) ParticleRenderOrder() ParticleRenderOrder {
 	_r := objc.Send[ParticleRenderOrder](objref.IDOf(x), objc.RegisterName("particleRenderOrder"))
 	return _r
 }
 
+// SetParticleRenderOrder wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleRenderOrder(particleRenderOrder ParticleRenderOrder) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleRenderOrder:"), particleRenderOrder)
 }
 
-// The random variance about the starting z-position for each particle. Defaults to 0.0.
+// ParticleZPositionRange the random variance about the starting z-position for each particle. Defaults to 0.0.
 func (x *EmitterNode) ParticleZPositionRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleZPositionRange"))
 	return _r
 }
 
+// SetParticleZPositionRange wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleZPositionRange(particleZPositionRange float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleZPositionRange:"), particleZPositionRange)
 }
 
-// The rate at which to modify the z-position for each particle. Defaults to 0.0.
+// ParticleZPositionSpeed the rate at which to modify the z-position for each particle. Defaults to 0.0.
 func (x *EmitterNode) ParticleZPositionSpeed() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("particleZPositionSpeed"))
 	return _r
 }
 
+// SetParticleZPositionSpeed wraps the corresponding Objective-C method.
 func (x *EmitterNode) SetParticleZPositionSpeed(particleZPositionSpeed float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticleZPositionSpeed:"), particleZPositionSpeed)
 }
@@ -1076,6 +1049,8 @@ type EmitterNodeable interface {
 	WithParticleColorBlendFactorRange(particleColorBlendFactorRange float64) *EmitterNode
 	WithParticleColorBlendFactorSpeed(particleColorBlendFactorSpeed float64) *EmitterNode
 	WithParticleColorBlendFactorSequence(particleColorBlendFactorSequence *KeyframeSequence) *EmitterNode
+	WithParticlePosition(particlePosition corefoundation.CGPoint) *EmitterNode
+	WithParticlePositionRange(particlePositionRange corefoundation.CGVector) *EmitterNode
 	WithParticleSpeed(particleSpeed float64) *EmitterNode
 	WithParticleSpeedRange(particleSpeedRange float64) *EmitterNode
 	WithEmissionAngle(emissionAngle float64) *EmitterNode
@@ -1089,6 +1064,7 @@ type EmitterNodeable interface {
 	WithParticleRotation(particleRotation float64) *EmitterNode
 	WithParticleRotationRange(particleRotationRange float64) *EmitterNode
 	WithParticleRotationSpeed(particleRotationSpeed float64) *EmitterNode
+	WithParticleSize(particleSize corefoundation.CGSize) *EmitterNode
 	WithParticleScale(particleScale float64) *EmitterNode
 	WithParticleScaleRange(particleScaleRange float64) *EmitterNode
 	WithParticleScaleSpeed(particleScaleSpeed float64) *EmitterNode
@@ -1105,6 +1081,7 @@ type EmitterNodeable interface {
 	WithParticleRenderOrder(particleRenderOrder ParticleRenderOrder) *EmitterNode
 	WithParticleZPositionRange(particleZPositionRange float64) *EmitterNode
 	WithParticleZPositionSpeed(particleZPositionSpeed float64) *EmitterNode
+	WithPosition(position corefoundation.CGPoint) *EmitterNode
 	WithZPosition(zPosition float64) *EmitterNode
 	WithZRotation(zRotation float64) *EmitterNode
 	WithXScale(xScale float64) *EmitterNode
@@ -1124,6 +1101,7 @@ type EmitterNodeable interface {
 	WithAccessibilityRole(accessibilityRole string) *EmitterNode
 	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *EmitterNode
 	WithAccessibilitySubrole(accessibilitySubrole string) *EmitterNode
+	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *EmitterNode
 	WithAccessibilityParent(accessibilityParent obj.Object) *EmitterNode
 	WithAccessibilityHelp(accessibilityHelp string) *EmitterNode
 	WithAccessibilityLabel(accessibilityLabel string) *EmitterNode
@@ -1162,6 +1140,10 @@ type EmitterNodeable interface {
 	SetParticleColorBlendFactorSpeed(particleColorBlendFactorSpeed float64)
 	ParticleColorBlendFactorSequence() *KeyframeSequence
 	SetParticleColorBlendFactorSequence(particleColorBlendFactorSequence *KeyframeSequence)
+	ParticlePosition() corefoundation.CGPoint
+	SetParticlePosition(particlePosition corefoundation.CGPoint)
+	ParticlePositionRange() corefoundation.CGVector
+	SetParticlePositionRange(particlePositionRange corefoundation.CGVector)
 	ParticleSpeed() float64
 	SetParticleSpeed(particleSpeed float64)
 	ParticleSpeedRange() float64
@@ -1188,6 +1170,8 @@ type EmitterNodeable interface {
 	SetParticleRotationRange(particleRotationRange float64)
 	ParticleRotationSpeed() float64
 	SetParticleRotationSpeed(particleRotationSpeed float64)
+	ParticleSize() corefoundation.CGSize
+	SetParticleSize(particleSize corefoundation.CGSize)
 	ParticleScale() float64
 	SetParticleScale(particleScale float64)
 	ParticleScaleRange() float64
@@ -1223,3 +1207,5 @@ type EmitterNodeable interface {
 }
 
 var _ EmitterNodeable = (*EmitterNode)(nil)
+
+var _ NodeProvider = (*EmitterNode)(nil)

@@ -25,7 +25,8 @@ func AuthorizationProviderExtensionUserLoginConfigurationFromID(id objc.ID) *Aut
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationProviderExtensionUserLoginConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationProviderExtensionUserLoginConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationProviderExtensionUserLoginConfigurationAdopt(id objc.ID) *Auth
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationProviderExtensionUserLoginConfiguration{Handle: objref.Wrap(id)}
+	x := &AuthorizationProviderExtensionUserLoginConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +60,12 @@ func (x *AuthorizationProviderExtensionUserLoginConfiguration) IsKind(className 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationProviderExtensionUserLoginConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAuthorizationProviderExtensionUserLoginConfigurationWithLoginUserName creates a new AuthorizationProviderExtensionUserLoginConfiguration.
 func NewAuthorizationProviderExtensionUserLoginConfigurationWithLoginUserName(loginUserName string) *AuthorizationProviderExtensionUserLoginConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationProviderExtensionUserLoginConfiguration")), objc.RegisterName("alloc"))
@@ -65,15 +73,13 @@ func NewAuthorizationProviderExtensionUserLoginConfigurationWithLoginUserName(lo
 	return authorizationProviderExtensionUserLoginConfigurationAdopt(_id)
 }
 
-// The user name to use when authenticating with the identity provider.
-//
-// WithLoginUserName sets loginUserName and returns the receiver so calls can be chained.
+// WithLoginUserName the user name to use when authenticating with the identity provider.
 func (x *AuthorizationProviderExtensionUserLoginConfiguration) WithLoginUserName(loginUserName string) *AuthorizationProviderExtensionUserLoginConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoginUserName:"), purego.NSString(loginUserName))
 	return x
 }
 
-// Sets custom claims to be added to the embedded assertion request header.
+// SetCustomAssertionRequestHeaderClaimsReturningError sets custom claims to be added to the embedded assertion request header.
 func (x *AuthorizationProviderExtensionUserLoginConfiguration) SetCustomAssertionRequestHeaderClaimsReturningError(claims obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setCustomAssertionRequestHeaderClaims:returningError:"), objref.IDOf(claims), unsafe.Pointer(&_nsErr))
@@ -83,7 +89,7 @@ func (x *AuthorizationProviderExtensionUserLoginConfiguration) SetCustomAssertio
 	return nil
 }
 
-// Sets custom claims to be added to the embedded assertion request body.
+// SetCustomAssertionRequestBodyClaimsReturningError sets custom claims to be added to the embedded assertion request body.
 func (x *AuthorizationProviderExtensionUserLoginConfiguration) SetCustomAssertionRequestBodyClaimsReturningError(claims obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setCustomAssertionRequestBodyClaims:returningError:"), objref.IDOf(claims), unsafe.Pointer(&_nsErr))
@@ -93,7 +99,7 @@ func (x *AuthorizationProviderExtensionUserLoginConfiguration) SetCustomAssertio
 	return nil
 }
 
-// Sets custom claims to be added to the login request header.
+// SetCustomLoginRequestHeaderClaimsReturningError sets custom claims to be added to the login request header.
 func (x *AuthorizationProviderExtensionUserLoginConfiguration) SetCustomLoginRequestHeaderClaimsReturningError(claims obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setCustomLoginRequestHeaderClaims:returningError:"), objref.IDOf(claims), unsafe.Pointer(&_nsErr))
@@ -103,7 +109,7 @@ func (x *AuthorizationProviderExtensionUserLoginConfiguration) SetCustomLoginReq
 	return nil
 }
 
-// Sets custom claims to be added to the login request body.
+// SetCustomLoginRequestBodyClaimsReturningError sets custom claims to be added to the login request body.
 func (x *AuthorizationProviderExtensionUserLoginConfiguration) SetCustomLoginRequestBodyClaimsReturningError(claims obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setCustomLoginRequestBodyClaims:returningError:"), objref.IDOf(claims), unsafe.Pointer(&_nsErr))
@@ -113,7 +119,7 @@ func (x *AuthorizationProviderExtensionUserLoginConfiguration) SetCustomLoginReq
 	return nil
 }
 
-// The user name to use when authenticating with the identity provider.
+// LoginUserName the user name to use when authenticating with the identity provider.
 func (x *AuthorizationProviderExtensionUserLoginConfiguration) LoginUserName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loginUserName"))
 	if _r == 0 {
@@ -122,6 +128,7 @@ func (x *AuthorizationProviderExtensionUserLoginConfiguration) LoginUserName() s
 	return purego.GoString(_r)
 }
 
+// SetLoginUserName wraps the corresponding Objective-C method.
 func (x *AuthorizationProviderExtensionUserLoginConfiguration) SetLoginUserName(loginUserName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoginUserName:"), purego.NSString(loginUserName))
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains information about an action that causes navigation to occur.
-//
 // WKNavigationAction is an idiomatic wrapper over the Objective-C class WKNavigationAction.
+//
+// An object that contains information about an action that causes navigation to occur.
 type WKNavigationAction struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKNavigationActionFromID(id objc.ID) *WKNavigationAction {
 	if id == 0 {
 		return nil
 	}
-	x := &WKNavigationAction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKNavigationAction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKNavigationActionAdopt(id objc.ID) *WKNavigationAction {
 	if id == 0 {
 		return nil
 	}
-	x := &WKNavigationAction{Handle: objref.Wrap(id)}
+	x := &WKNavigationAction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,49 +60,55 @@ func (x *WKNavigationAction) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKNavigationAction) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKNavigationAction creates a new WKNavigationAction.
 func NewWKNavigationAction() *WKNavigationAction {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKNavigationAction")), objc.RegisterName("new"))
 	return wKNavigationActionAdopt(_id)
 }
 
-// The frame requesting the navigation.
+// SourceFrame the frame requesting the navigation.
 func (x *WKNavigationAction) SourceFrame() *WKFrameInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceFrame"))
 	return WKFrameInfoFromID(_r)
 }
 
-// The target frame, or nil if this is a new window navigation.
+// TargetFrame the target frame, or nil if this is a new window navigation.
 func (x *WKNavigationAction) TargetFrame() *WKFrameInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetFrame"))
 	return WKFrameInfoFromID(_r)
 }
 
-// The type of action that triggered the navigation. The value is one of the constants of the enumerated type WKNavigationType.
+// NavigationType the type of action that triggered the navigation. The value is one of the constants of the enumerated type WKNavigationType.
 func (x *WKNavigationAction) NavigationType() WKNavigationType {
 	_r := objc.Send[WKNavigationType](objref.IDOf(x), objc.RegisterName("navigationType"))
 	return _r
 }
 
-// The navigation's request.
+// Request the navigation's request.
 func (x *WKNavigationAction) Request() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("request"))
 	return obj.Wrap(_r)
 }
 
-// A value indicating whether the web content used a download attribute to indicate that this should be downloaded.
+// ShouldPerformDownload a value indicating whether the web content used a download attribute to indicate that this should be downloaded.
 func (x *WKNavigationAction) ShouldPerformDownload() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldPerformDownload"))
 	return _r
 }
 
-// Whether or not the navigation is a redirect from a content rule list.
+// IsContentRuleListRedirect whether or not the navigation is a redirect from a content rule list.
 func (x *WKNavigationAction) IsContentRuleListRedirect() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isContentRuleListRedirect"))
 	return _r
 }
 
-// The number of the mouse button causing the navigation to be requested.
+// ButtonNumber the number of the mouse button causing the navigation to be requested.
 func (x *WKNavigationAction) ButtonNumber() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("buttonNumber"))
 	return _r

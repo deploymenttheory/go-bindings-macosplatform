@@ -12,11 +12,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A dynamic collection of objects associated with unique keys.
-//
 // MutableDictionary is an idiomatic wrapper over the Objective-C class NSMutableDictionary.
+//
+// It embeds [Dictionary], promoting that type's methods.
+//
+// A dynamic collection of objects associated with unique keys.
 type MutableDictionary struct {
-	objref.Handle
+	Dictionary
 }
 
 // MutableDictionaryFromID adopts an existing Objective-C object as a MutableDictionary
@@ -25,7 +27,8 @@ func MutableDictionaryFromID(id objc.ID) *MutableDictionary {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableDictionary{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableDictionary{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func mutableDictionaryAdopt(id objc.ID) *MutableDictionary {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableDictionary{Handle: objref.Wrap(id)}
+	x := &MutableDictionary{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MutableDictionary) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableDictionary) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableDictionary) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMutableDictionary creates a new MutableDictionary.
@@ -64,9 +53,7 @@ func NewMutableDictionary() *MutableDictionary {
 	return mutableDictionaryAdopt(_id)
 }
 
-// Initializes a newly allocated mutable dictionary, allocating enough memory to hold numItems entries.
-//
-// NewMutableDictionaryWithCapacity creates a new MutableDictionary.
+// NewMutableDictionaryWithCapacity initializes a newly allocated mutable dictionary, allocating enough memory to hold numItems entries.
 func NewMutableDictionaryWithCapacity(numItems int) *MutableDictionary {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableDictionary")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCapacity:"), numItems)
@@ -94,33 +81,33 @@ func NewMutableDictionaryWithContentsOfURL(url string) *MutableDictionary {
 	return mutableDictionaryAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *MutableDictionary) WithScriptingProperties(scriptingProperties obj.Object) *MutableDictionary {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Removes a given key and its associated value from the dictionary.
+// RemoveObjectForKey removes a given key and its associated value from the dictionary.
 func (x *MutableDictionary) RemoveObjectForKey(aKey obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectForKey:"), objref.IDOf(aKey))
 }
 
-// Adds to the receiving dictionary the entries from another dictionary.
+// AddEntriesFromDictionary adds to the receiving dictionary the entries from another dictionary.
 func (x *MutableDictionary) AddEntriesFromDictionary(otherDictionary obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addEntriesFromDictionary:"), objref.IDOf(otherDictionary))
 }
 
-// Empties the dictionary of its entries.
+// RemoveAllObjects empties the dictionary of its entries.
 func (x *MutableDictionary) RemoveAllObjects() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllObjects"))
 }
 
-// Removes from the dictionary entries specified by elements in a given array.
+// RemoveObjectsForKeys removes from the dictionary entries specified by elements in a given array.
 func (x *MutableDictionary) RemoveObjectsForKeys(keyArray []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectsForKeys:"), purego.SliceToNSArray(keyArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Sets the contents of the receiving dictionary to entries in a given dictionary.
+// SetDictionary sets the contents of the receiving dictionary to entries in a given dictionary.
 func (x *MutableDictionary) SetDictionary(otherDictionary obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDictionary:"), objref.IDOf(otherDictionary))
 }
@@ -157,3 +144,5 @@ type MutableDictionaryable interface {
 }
 
 var _ MutableDictionaryable = (*MutableDictionary)(nil)
+
+var _ DictionaryProvider = (*MutableDictionary)(nil)

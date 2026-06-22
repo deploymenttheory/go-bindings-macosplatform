@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A string-based piece of location-specific data that you apply to a specific point on a map.
-//
 // PointAnnotation is an idiomatic wrapper over the Objective-C class MKPointAnnotation.
+//
+// It embeds [Shape], promoting that type's methods.
+//
+// A string-based piece of location-specific data that you apply to a specific point on a map.
 type PointAnnotation struct {
-	objref.Handle
+	Shape
 }
 
 // PointAnnotationFromID adopts an existing Objective-C object as a PointAnnotation
@@ -25,7 +26,8 @@ func PointAnnotationFromID(id objc.ID) *PointAnnotation {
 	if id == 0 {
 		return nil
 	}
-	x := &PointAnnotation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PointAnnotation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func pointAnnotationAdopt(id objc.ID) *PointAnnotation {
 	if id == 0 {
 		return nil
 	}
-	x := &PointAnnotation{Handle: objref.Wrap(id)}
+	x := &PointAnnotation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PointAnnotation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PointAnnotation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PointAnnotation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPointAnnotation creates a new PointAnnotation.
@@ -64,17 +52,13 @@ func NewPointAnnotation() *PointAnnotation {
 	return pointAnnotationAdopt(_id)
 }
 
-// The title of the shape annotation.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the title of the shape annotation.
 func (x *PointAnnotation) WithTitle(title string) *PointAnnotation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The subtitle of the shape annotation.
-//
-// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
+// WithSubtitle the subtitle of the shape annotation.
 func (x *PointAnnotation) WithSubtitle(subtitle string) *PointAnnotation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
@@ -88,3 +72,5 @@ type PointAnnotationable interface {
 }
 
 var _ PointAnnotationable = (*PointAnnotation)(nil)
+
+var _ ShapeProvider = (*PointAnnotation)(nil)

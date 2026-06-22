@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The signed discount to apply to a payment.
-//
 // PaymentDiscount is an idiomatic wrapper over the Objective-C class SKPaymentDiscount.
+//
+// The signed discount to apply to a payment.
 type PaymentDiscount struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PaymentDiscountFromID(id objc.ID) *PaymentDiscount {
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentDiscount{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PaymentDiscount{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func paymentDiscountAdopt(id objc.ID) *PaymentDiscount {
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentDiscount{Handle: objref.Wrap(id)}
+	x := &PaymentDiscount{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *PaymentDiscount) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes the payment discount with a signature and the parameters used by the signature.
-//
-// NewPaymentDiscountWithIdentifierKeyIdentifierNonceSignatureTimestamp creates a new PaymentDiscount.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PaymentDiscount) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPaymentDiscountWithIdentifierKeyIdentifierNonceSignatureTimestamp initializes the payment discount with a signature and the parameters used by the signature.
 func NewPaymentDiscountWithIdentifierKeyIdentifierNonceSignatureTimestamp(identifier string, keyIdentifier string, nonce obj.Object, signature string, timestamp obj.Object) *PaymentDiscount {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKPaymentDiscount")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:keyIdentifier:nonce:signature:timestamp:"), purego.NSString(identifier), purego.NSString(keyIdentifier), objref.IDOf(nonce), purego.NSString(signature), objref.IDOf(timestamp))
 	return paymentDiscountAdopt(_id)
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *PaymentDiscount) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -75,6 +82,7 @@ func (x *PaymentDiscount) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// KeyIdentifier wraps the corresponding Objective-C method.
 func (x *PaymentDiscount) KeyIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyIdentifier"))
 	if _r == 0 {
@@ -83,11 +91,13 @@ func (x *PaymentDiscount) KeyIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// Nonce wraps the corresponding Objective-C method.
 func (x *PaymentDiscount) Nonce() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nonce"))
 	return obj.Wrap(_r)
 }
 
+// Signature wraps the corresponding Objective-C method.
 func (x *PaymentDiscount) Signature() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signature"))
 	if _r == 0 {
@@ -96,6 +106,7 @@ func (x *PaymentDiscount) Signature() string {
 	return purego.GoString(_r)
 }
 
+// Timestamp wraps the corresponding Objective-C method.
 func (x *PaymentDiscount) Timestamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timestamp"))
 	return obj.Wrap(_r)

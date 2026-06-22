@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of Kerberos mappings that the system login process uses.
-//
 // AuthorizationProviderExtensionKerberosMapping is an idiomatic wrapper over the Objective-C class ASAuthorizationProviderExtensionKerberosMapping.
+//
+// A set of Kerberos mappings that the system login process uses.
 type AuthorizationProviderExtensionKerberosMapping struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationProviderExtensionKerberosMappingFromID(id objc.ID) *Authorizat
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationProviderExtensionKerberosMapping{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationProviderExtensionKerberosMapping{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationProviderExtensionKerberosMappingAdopt(id objc.ID) *Authorizati
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationProviderExtensionKerberosMapping{Handle: objref.Wrap(id)}
+	x := &AuthorizationProviderExtensionKerberosMapping{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,69 +60,61 @@ func (x *AuthorizationProviderExtensionKerberosMapping) IsKind(className string)
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationProviderExtensionKerberosMapping) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAuthorizationProviderExtensionKerberosMapping creates a new AuthorizationProviderExtensionKerberosMapping.
 func NewAuthorizationProviderExtensionKerberosMapping() *AuthorizationProviderExtensionKerberosMapping {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationProviderExtensionKerberosMapping")), objc.RegisterName("new"))
 	return authorizationProviderExtensionKerberosMappingAdopt(_id)
 }
 
-// The keypath in the response JSON that uses this set of mappings.
-//
-// WithTicketKeyPath sets ticketKeyPath and returns the receiver so calls can be chained.
+// WithTicketKeyPath the keypath in the response JSON that uses this set of mappings.
 func (x *AuthorizationProviderExtensionKerberosMapping) WithTicketKeyPath(ticketKeyPath string) *AuthorizationProviderExtensionKerberosMapping {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTicketKeyPath:"), purego.NSString(ticketKeyPath))
 	return x
 }
 
-// The key name of the Base 64-encoded Kerberos AS-REP string.
-//
-// WithMessageBufferKeyName sets messageBufferKeyName and returns the receiver so calls can be chained.
+// WithMessageBufferKeyName the key name of the Base 64-encoded Kerberos AS-REP string.
 func (x *AuthorizationProviderExtensionKerberosMapping) WithMessageBufferKeyName(messageBufferKeyName string) *AuthorizationProviderExtensionKerberosMapping {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageBufferKeyName:"), purego.NSString(messageBufferKeyName))
 	return x
 }
 
-// The key name of the Kerberos realm string.
-//
-// WithRealmKeyName sets realmKeyName and returns the receiver so calls can be chained.
+// WithRealmKeyName the key name of the Kerberos realm string.
 func (x *AuthorizationProviderExtensionKerberosMapping) WithRealmKeyName(realmKeyName string) *AuthorizationProviderExtensionKerberosMapping {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRealmKeyName:"), purego.NSString(realmKeyName))
 	return x
 }
 
-// The key name of the Kerberos service name string.
-//
-// WithServiceNameKeyName sets serviceNameKeyName and returns the receiver so calls can be chained.
+// WithServiceNameKeyName the key name of the Kerberos service name string.
 func (x *AuthorizationProviderExtensionKerberosMapping) WithServiceNameKeyName(serviceNameKeyName string) *AuthorizationProviderExtensionKerberosMapping {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServiceNameKeyName:"), purego.NSString(serviceNameKeyName))
 	return x
 }
 
-// The key name of the Kerberos client name string.
-//
-// WithClientNameKeyName sets clientNameKeyName and returns the receiver so calls can be chained.
+// WithClientNameKeyName the key name of the Kerberos client name string.
 func (x *AuthorizationProviderExtensionKerberosMapping) WithClientNameKeyName(clientNameKeyName string) *AuthorizationProviderExtensionKerberosMapping {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClientNameKeyName:"), purego.NSString(clientNameKeyName))
 	return x
 }
 
-// The key name of the Kerberos session key type number.
-//
-// WithEncryptionKeyTypeKeyName sets encryptionKeyTypeKeyName and returns the receiver so calls can be chained.
+// WithEncryptionKeyTypeKeyName the key name of the Kerberos session key type number.
 func (x *AuthorizationProviderExtensionKerberosMapping) WithEncryptionKeyTypeKeyName(encryptionKeyTypeKeyName string) *AuthorizationProviderExtensionKerberosMapping {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncryptionKeyTypeKeyName:"), purego.NSString(encryptionKeyTypeKeyName))
 	return x
 }
 
-// The key name of the Kerberos session key.
-//
-// WithSessionKeyKeyName sets sessionKeyKeyName and returns the receiver so calls can be chained.
+// WithSessionKeyKeyName the key name of the Kerberos session key.
 func (x *AuthorizationProviderExtensionKerberosMapping) WithSessionKeyKeyName(sessionKeyKeyName string) *AuthorizationProviderExtensionKerberosMapping {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionKeyKeyName:"), purego.NSString(sessionKeyKeyName))
 	return x
 }
 
-// The keypath in the response JSON that uses this set of mappings. If the response tokens from login contain this keypath, then the mapping in this class will be used to create a Kerberos ticket. The expected response is a JSON dictionary with the supplied key names.
+// TicketKeyPath the keypath in the response JSON that uses this set of mappings. If the response tokens from login contain this keypath, then the mapping in this class will be used to create a Kerberos ticket. The expected response is a JSON dictionary with the supplied key names.
 func (x *AuthorizationProviderExtensionKerberosMapping) TicketKeyPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ticketKeyPath"))
 	if _r == 0 {
@@ -129,11 +123,12 @@ func (x *AuthorizationProviderExtensionKerberosMapping) TicketKeyPath() string {
 	return purego.GoString(_r)
 }
 
+// SetTicketKeyPath wraps the corresponding Objective-C method.
 func (x *AuthorizationProviderExtensionKerberosMapping) SetTicketKeyPath(ticketKeyPath string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTicketKeyPath:"), purego.NSString(ticketKeyPath))
 }
 
-// The key name that contains the base64 encoded kerberos AS-REP string.
+// MessageBufferKeyName the key name that contains the base64 encoded kerberos AS-REP string.
 func (x *AuthorizationProviderExtensionKerberosMapping) MessageBufferKeyName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageBufferKeyName"))
 	if _r == 0 {
@@ -142,11 +137,12 @@ func (x *AuthorizationProviderExtensionKerberosMapping) MessageBufferKeyName() s
 	return purego.GoString(_r)
 }
 
+// SetMessageBufferKeyName wraps the corresponding Objective-C method.
 func (x *AuthorizationProviderExtensionKerberosMapping) SetMessageBufferKeyName(messageBufferKeyName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageBufferKeyName:"), purego.NSString(messageBufferKeyName))
 }
 
-// The key name that contains the Kerberos Realm string.
+// RealmKeyName the key name that contains the Kerberos Realm string.
 func (x *AuthorizationProviderExtensionKerberosMapping) RealmKeyName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("realmKeyName"))
 	if _r == 0 {
@@ -155,11 +151,12 @@ func (x *AuthorizationProviderExtensionKerberosMapping) RealmKeyName() string {
 	return purego.GoString(_r)
 }
 
+// SetRealmKeyName wraps the corresponding Objective-C method.
 func (x *AuthorizationProviderExtensionKerberosMapping) SetRealmKeyName(realmKeyName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRealmKeyName:"), purego.NSString(realmKeyName))
 }
 
-// The key name that contains the Kerberos service name string.
+// ServiceNameKeyName the key name that contains the Kerberos service name string.
 func (x *AuthorizationProviderExtensionKerberosMapping) ServiceNameKeyName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceNameKeyName"))
 	if _r == 0 {
@@ -168,11 +165,12 @@ func (x *AuthorizationProviderExtensionKerberosMapping) ServiceNameKeyName() str
 	return purego.GoString(_r)
 }
 
+// SetServiceNameKeyName wraps the corresponding Objective-C method.
 func (x *AuthorizationProviderExtensionKerberosMapping) SetServiceNameKeyName(serviceNameKeyName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServiceNameKeyName:"), purego.NSString(serviceNameKeyName))
 }
 
-// The key name that contains the Kerberos client name string.
+// ClientNameKeyName the key name that contains the Kerberos client name string.
 func (x *AuthorizationProviderExtensionKerberosMapping) ClientNameKeyName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientNameKeyName"))
 	if _r == 0 {
@@ -181,11 +179,12 @@ func (x *AuthorizationProviderExtensionKerberosMapping) ClientNameKeyName() stri
 	return purego.GoString(_r)
 }
 
+// SetClientNameKeyName wraps the corresponding Objective-C method.
 func (x *AuthorizationProviderExtensionKerberosMapping) SetClientNameKeyName(clientNameKeyName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClientNameKeyName:"), purego.NSString(clientNameKeyName))
 }
 
-// The key name that contains the Kerberos session key type number. The value for this key should be the correct encryption type per RFC3962, section 7 for the session key.
+// EncryptionKeyTypeKeyName the key name that contains the Kerberos session key type number. The value for this key should be the correct encryption type per RFC3962, section 7 for the session key.
 func (x *AuthorizationProviderExtensionKerberosMapping) EncryptionKeyTypeKeyName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encryptionKeyTypeKeyName"))
 	if _r == 0 {
@@ -194,11 +193,12 @@ func (x *AuthorizationProviderExtensionKerberosMapping) EncryptionKeyTypeKeyName
 	return purego.GoString(_r)
 }
 
+// SetEncryptionKeyTypeKeyName wraps the corresponding Objective-C method.
 func (x *AuthorizationProviderExtensionKerberosMapping) SetEncryptionKeyTypeKeyName(encryptionKeyTypeKeyName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncryptionKeyTypeKeyName:"), purego.NSString(encryptionKeyTypeKeyName))
 }
 
-// The key name that contains the Kerberos session key.
+// SessionKeyKeyName the key name that contains the Kerberos session key.
 func (x *AuthorizationProviderExtensionKerberosMapping) SessionKeyKeyName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sessionKeyKeyName"))
 	if _r == 0 {
@@ -207,6 +207,7 @@ func (x *AuthorizationProviderExtensionKerberosMapping) SessionKeyKeyName() stri
 	return purego.GoString(_r)
 }
 
+// SetSessionKeyKeyName wraps the corresponding Objective-C method.
 func (x *AuthorizationProviderExtensionKerberosMapping) SetSessionKeyKeyName(sessionKeyKeyName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionKeyKeyName:"), purego.NSString(sessionKeyKeyName))
 }

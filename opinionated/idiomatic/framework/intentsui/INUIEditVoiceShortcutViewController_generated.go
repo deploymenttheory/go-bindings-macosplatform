@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view controller that lets the user edit or remove an existing shortcut.
-//
 // EditVoiceShortcutViewController is an idiomatic wrapper over the Objective-C class INUIEditVoiceShortcutViewController.
+//
+// A view controller that lets the user edit or remove an existing shortcut.
 type EditVoiceShortcutViewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func EditVoiceShortcutViewControllerFromID(id objc.ID) *EditVoiceShortcutViewCon
 	if id == 0 {
 		return nil
 	}
-	x := &EditVoiceShortcutViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EditVoiceShortcutViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func editVoiceShortcutViewControllerAdopt(id objc.ID) *EditVoiceShortcutViewCont
 	if id == 0 {
 		return nil
 	}
-	x := &EditVoiceShortcutViewController{Handle: objref.Wrap(id)}
+	x := &EditVoiceShortcutViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,9 +60,13 @@ func (x *EditVoiceShortcutViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a view controller with the shortcut to edit or remove.
-//
-// NewEditVoiceShortcutViewControllerWithVoiceShortcut creates a new EditVoiceShortcutViewController.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *EditVoiceShortcutViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewEditVoiceShortcutViewControllerWithVoiceShortcut creates a view controller with the shortcut to edit or remove.
 func NewEditVoiceShortcutViewControllerWithVoiceShortcut(voiceShortcut obj.Object) *EditVoiceShortcutViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INUIEditVoiceShortcutViewController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVoiceShortcut:"), objref.IDOf(voiceShortcut))

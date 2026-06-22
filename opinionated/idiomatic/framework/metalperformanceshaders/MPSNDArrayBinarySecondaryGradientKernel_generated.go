@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NDArrayBinarySecondaryGradientKernel is an idiomatic wrapper over the Objective-C class MPSNDArrayBinarySecondaryGradientKernel.
+//
+// It embeds [NDArrayMultiaryGradientKernel], promoting that type's methods.
 type NDArrayBinarySecondaryGradientKernel struct {
-	objref.Handle
+	NDArrayMultiaryGradientKernel
 }
 
 // NDArrayBinarySecondaryGradientKernelFromID adopts an existing Objective-C object as a NDArrayBinarySecondaryGradientKernel
@@ -23,7 +24,8 @@ func NDArrayBinarySecondaryGradientKernelFromID(id objc.ID) *NDArrayBinarySecond
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayBinarySecondaryGradientKernel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NDArrayBinarySecondaryGradientKernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func nDArrayBinarySecondaryGradientKernelAdopt(id objc.ID) *NDArrayBinarySeconda
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayBinarySecondaryGradientKernel{Handle: objref.Wrap(id)}
+	x := &NDArrayBinarySecondaryGradientKernel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NDArrayBinarySecondaryGradientKernel) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NDArrayBinarySecondaryGradientKernel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NDArrayBinarySecondaryGradientKernel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNDArrayBinarySecondaryGradientKernel creates a new NDArrayBinarySecondaryGradientKernel.
@@ -62,9 +50,7 @@ func NewNDArrayBinarySecondaryGradientKernel() *NDArrayBinarySecondaryGradientKe
 	return nDArrayBinarySecondaryGradientKernelAdopt(_id)
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayBinarySecondaryGradientKernel) WithLabel(label string) *NDArrayBinarySecondaryGradientKernel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -77,3 +63,9 @@ type NDArrayBinarySecondaryGradientKernelable interface {
 }
 
 var _ NDArrayBinarySecondaryGradientKernelable = (*NDArrayBinarySecondaryGradientKernel)(nil)
+
+var _ NDArrayMultiaryGradientKernelProvider = (*NDArrayBinarySecondaryGradientKernel)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayBinarySecondaryGradientKernel)(nil)
+
+var _ KernelProvider = (*NDArrayBinarySecondaryGradientKernel)(nil)

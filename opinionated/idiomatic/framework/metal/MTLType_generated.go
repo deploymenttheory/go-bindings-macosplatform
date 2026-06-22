@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of a data type.
-//
 // Type is an idiomatic wrapper over the Objective-C class MTLType.
+//
+// Type is an abstract base — you do not construct it directly. Construct one of [ArrayType], [PointerType], [StructType], [TensorReferenceType], [TextureReferenceType] and pass it where a Type is accepted.
+//
+// A description of a data type.
 type Type struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func TypeFromID(id objc.ID) *Type {
 	if id == 0 {
 		return nil
 	}
-	x := &Type{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Type{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func typeAdopt(id objc.ID) *Type {
 	if id == 0 {
 		return nil
 	}
-	x := &Type{Handle: objref.Wrap(id)}
+	x := &Type{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +62,13 @@ func (x *Type) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewType creates a new Type.
-func NewType() *Type {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTLType")), objc.RegisterName("new"))
-	return typeAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Type) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// DataType wraps the corresponding Objective-C method.
 func (x *Type) DataType() DataType {
 	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("dataType"))
 	return _r
@@ -76,3 +81,10 @@ type Typeable interface {
 }
 
 var _ Typeable = (*Type)(nil)
+
+// isType marks Type — and, by embedding promotion, its
+// subclasses — as a member of the Type hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Type) isType() {}
+
+var _ TypeProvider = (*Type)(nil)

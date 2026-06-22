@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A physics behavior that connects two bodies and allows them to pivot around each other on a single axis.
-//
 // PhysicsHingeJoint is an idiomatic wrapper over the Objective-C class SCNPhysicsHingeJoint.
+//
+// It embeds [PhysicsBehavior], promoting that type's methods.
+//
+// A physics behavior that connects two bodies and allows them to pivot around each other on a single axis.
 type PhysicsHingeJoint struct {
-	objref.Handle
+	PhysicsBehavior
 }
 
 // PhysicsHingeJointFromID adopts an existing Objective-C object as a PhysicsHingeJoint
@@ -25,7 +26,8 @@ func PhysicsHingeJointFromID(id objc.ID) *PhysicsHingeJoint {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsHingeJoint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PhysicsHingeJoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func physicsHingeJointAdopt(id objc.ID) *PhysicsHingeJoint {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsHingeJoint{Handle: objref.Wrap(id)}
+	x := &PhysicsHingeJoint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PhysicsHingeJoint) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PhysicsHingeJoint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PhysicsHingeJoint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPhysicsHingeJoint creates a new PhysicsHingeJoint.
@@ -64,11 +52,13 @@ func NewPhysicsHingeJoint() *PhysicsHingeJoint {
 	return physicsHingeJointAdopt(_id)
 }
 
+// BodyA wraps the corresponding Objective-C method.
 func (x *PhysicsHingeJoint) BodyA() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyA"))
 	return PhysicsBodyFromID(_r)
 }
 
+// BodyB wraps the corresponding Objective-C method.
 func (x *PhysicsHingeJoint) BodyB() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyB"))
 	return PhysicsBodyFromID(_r)
@@ -82,3 +72,5 @@ type PhysicsHingeJointable interface {
 }
 
 var _ PhysicsHingeJointable = (*PhysicsHingeJoint)(nil)
+
+var _ PhysicsBehaviorProvider = (*PhysicsHingeJoint)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The action that the system performs on a message, or a request to ask the action handler again later when the message content is available.
-//
 // MessageActionDecision is an idiomatic wrapper over the Objective-C class MEMessageActionDecision.
+//
+// The action that the system performs on a message, or a request to ask the action handler again later when the message content is available.
 type MessageActionDecision struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MessageActionDecisionFromID(id objc.ID) *MessageActionDecision {
 	if id == 0 {
 		return nil
 	}
-	x := &MessageActionDecision{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MessageActionDecision{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func messageActionDecisionAdopt(id objc.ID) *MessageActionDecision {
 	if id == 0 {
 		return nil
 	}
-	x := &MessageActionDecision{Handle: objref.Wrap(id)}
+	x := &MessageActionDecision{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *MessageActionDecision) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MessageActionDecision) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MessageActionDecision) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMessageActionDecision creates a new MessageActionDecision.

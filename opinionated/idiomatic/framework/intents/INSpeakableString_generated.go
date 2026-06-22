@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A custom phrase to be resolved by an Intents extension.
-//
 // SpeakableString is an idiomatic wrapper over the Objective-C class INSpeakableString.
+//
+// A custom phrase to be resolved by an Intents extension.
 type SpeakableString struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SpeakableStringFromID(id objc.ID) *SpeakableString {
 	if id == 0 {
 		return nil
 	}
-	x := &SpeakableString{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SpeakableString{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func speakableStringAdopt(id objc.ID) *SpeakableString {
 	if id == 0 {
 		return nil
 	}
-	x := &SpeakableString{Handle: objref.Wrap(id)}
+	x := &SpeakableString{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,9 +60,13 @@ func (x *SpeakableString) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes the string with a phrase from your app’s vocabulary.
-//
-// NewSpeakableStringWithVocabularyIdentifierSpokenPhrasePronunciationHint creates a new SpeakableString.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpeakableString) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSpeakableStringWithVocabularyIdentifierSpokenPhrasePronunciationHint initializes the string with a phrase from your app’s vocabulary.
 func NewSpeakableStringWithVocabularyIdentifierSpokenPhrasePronunciationHint(vocabularyIdentifier string, spokenPhrase string, pronunciationHint string) *SpeakableString {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INSpeakableString")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVocabularyIdentifier:spokenPhrase:pronunciationHint:"), purego.NSString(vocabularyIdentifier), purego.NSString(spokenPhrase), purego.NSString(pronunciationHint))

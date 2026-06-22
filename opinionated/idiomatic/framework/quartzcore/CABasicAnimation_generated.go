@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides basic, single-keyframe animation capabilities for a layer property.
-//
 // BasicAnimation is an idiomatic wrapper over the Objective-C class CABasicAnimation.
+//
+// BasicAnimation is an abstract base — you do not construct it directly. Construct one of [SpringAnimation] and pass it where a BasicAnimation is accepted.
+//
+// An object that provides basic, single-keyframe animation capabilities for a layer property.
 type BasicAnimation struct {
-	objref.Handle
+	PropertyAnimation
 }
 
 // BasicAnimationFromID adopts an existing Objective-C object as a BasicAnimation
@@ -25,7 +26,8 @@ func BasicAnimationFromID(id objc.ID) *BasicAnimation {
 	if id == 0 {
 		return nil
 	}
-	x := &BasicAnimation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BasicAnimation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,127 +40,95 @@ func basicAnimationAdopt(id objc.ID) *BasicAnimation {
 	if id == 0 {
 		return nil
 	}
-	x := &BasicAnimation{Handle: objref.Wrap(id)}
+	x := &BasicAnimation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *BasicAnimation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BasicAnimation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BasicAnimation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewBasicAnimation creates a new BasicAnimation.
-func NewBasicAnimation() *BasicAnimation {
-	_id := objc.Send[objc.ID](objc.ID(_class("CABasicAnimation")), objc.RegisterName("new"))
-	return basicAnimationAdopt(_id)
-}
-
-// Defines the value the receiver uses to start interpolation.
-//
-// WithFromValue sets fromValue and returns the receiver so calls can be chained.
+// WithFromValue defines the value the receiver uses to start interpolation.
 func (x *BasicAnimation) WithFromValue(fromValue obj.Object) *BasicAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFromValue:"), objref.IDOf(fromValue))
 	return x
 }
 
-// Defines the value the receiver uses to end interpolation.
-//
-// WithToValue sets toValue and returns the receiver so calls can be chained.
+// WithToValue defines the value the receiver uses to end interpolation.
 func (x *BasicAnimation) WithToValue(toValue obj.Object) *BasicAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToValue:"), objref.IDOf(toValue))
 	return x
 }
 
-// Defines the value the receiver uses to perform relative interpolation.
-//
-// WithByValue sets byValue and returns the receiver so calls can be chained.
+// WithByValue defines the value the receiver uses to perform relative interpolation.
 func (x *BasicAnimation) WithByValue(byValue obj.Object) *BasicAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setByValue:"), objref.IDOf(byValue))
 	return x
 }
 
-// Specifies the key path the receiver animates.
-//
-// WithKeyPath sets keyPath and returns the receiver so calls can be chained.
+// WithKeyPath specifies the key path the receiver animates.
 func (x *BasicAnimation) WithKeyPath(keyPath string) *BasicAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyPath:"), purego.NSString(keyPath))
 	return x
 }
 
-// Determines if the value specified by the animation is added to the current render tree value to produce the new render tree value.
-//
-// WithAdditive sets additive and returns the receiver so calls can be chained.
+// WithAdditive determines if the value specified by the animation is added to the current render tree value to produce the new render tree value.
 func (x *BasicAnimation) WithAdditive(additive bool) *BasicAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditive:"), additive)
 	return x
 }
 
-// Determines if the value of the property is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle.
-//
-// WithCumulative sets cumulative and returns the receiver so calls can be chained.
+// WithCumulative determines if the value of the property is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle.
 func (x *BasicAnimation) WithCumulative(cumulative bool) *BasicAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCumulative:"), cumulative)
 	return x
 }
 
-// An optional value function that is applied to interpolated values.
-//
-// WithValueFunction sets valueFunction and returns the receiver so calls can be chained.
+// WithValueFunction an optional value function that is applied to interpolated values.
 func (x *BasicAnimation) WithValueFunction(valueFunction *ValueFunction) *BasicAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueFunction:"), objref.IDOf(valueFunction))
 	return x
 }
 
-// An optional timing function defining the pacing of the animation.
-//
-// WithTimingFunction sets timingFunction and returns the receiver so calls can be chained.
+// WithTimingFunction an optional timing function defining the pacing of the animation.
 func (x *BasicAnimation) WithTimingFunction(timingFunction *MediaTimingFunction) *BasicAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
 	return x
 }
 
-// Determines if the animation is removed from the target layer’s animations upon completion.
-//
-// WithRemovedOnCompletion sets removedOnCompletion and returns the receiver so calls can be chained.
+// WithRemovedOnCompletion determines if the animation is removed from the target layer’s animations upon completion.
 func (x *BasicAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *BasicAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
 	return x
 }
 
+// FromValue wraps the corresponding Objective-C method.
 func (x *BasicAnimation) FromValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fromValue"))
 	return obj.Wrap(_r)
 }
 
+// SetFromValue wraps the corresponding Objective-C method.
 func (x *BasicAnimation) SetFromValue(fromValue obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFromValue:"), objref.IDOf(fromValue))
 }
 
+// ToValue wraps the corresponding Objective-C method.
 func (x *BasicAnimation) ToValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toValue"))
 	return obj.Wrap(_r)
 }
 
+// SetToValue wraps the corresponding Objective-C method.
 func (x *BasicAnimation) SetToValue(toValue obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToValue:"), objref.IDOf(toValue))
 }
 
+// ByValue wraps the corresponding Objective-C method.
 func (x *BasicAnimation) ByValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("byValue"))
 	return obj.Wrap(_r)
 }
 
+// SetByValue wraps the corresponding Objective-C method.
 func (x *BasicAnimation) SetByValue(byValue obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setByValue:"), objref.IDOf(byValue))
 }
@@ -184,3 +154,14 @@ type BasicAnimationable interface {
 }
 
 var _ BasicAnimationable = (*BasicAnimation)(nil)
+
+// isBasicAnimation marks BasicAnimation — and, by embedding promotion, its
+// subclasses — as a member of the BasicAnimation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *BasicAnimation) isBasicAnimation() {}
+
+var _ BasicAnimationProvider = (*BasicAnimation)(nil)
+
+var _ PropertyAnimationProvider = (*BasicAnimation)(nil)
+
+var _ AnimationProvider = (*BasicAnimation)(nil)

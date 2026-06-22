@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mutable object that you use to create a new storage management policy.
-//
 // MutableAssetDownloadStorageManagementPolicy is an idiomatic wrapper over the Objective-C class AVMutableAssetDownloadStorageManagementPolicy.
+//
+// It embeds [AssetDownloadStorageManagementPolicy], promoting that type's methods.
+//
+// A mutable object that you use to create a new storage management policy.
 type MutableAssetDownloadStorageManagementPolicy struct {
-	objref.Handle
+	AssetDownloadStorageManagementPolicy
 }
 
 // MutableAssetDownloadStorageManagementPolicyFromID adopts an existing Objective-C object as a MutableAssetDownloadStorageManagementPolicy
@@ -25,7 +26,8 @@ func MutableAssetDownloadStorageManagementPolicyFromID(id objc.ID) *MutableAsset
 	if id == 0 {
 		return nil
 	}
-	x := &MutableAssetDownloadStorageManagementPolicy{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableAssetDownloadStorageManagementPolicy{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func mutableAssetDownloadStorageManagementPolicyAdopt(id objc.ID) *MutableAssetD
 	if id == 0 {
 		return nil
 	}
-	x := &MutableAssetDownloadStorageManagementPolicy{Handle: objref.Wrap(id)}
+	x := &MutableAssetDownloadStorageManagementPolicy{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MutableAssetDownloadStorageManagementPolicy) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableAssetDownloadStorageManagementPolicy) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableAssetDownloadStorageManagementPolicy) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMutableAssetDownloadStorageManagementPolicy creates a new MutableAssetDownloadStorageManagementPolicy.
@@ -64,26 +52,24 @@ func NewMutableAssetDownloadStorageManagementPolicy() *MutableAssetDownloadStora
 	return mutableAssetDownloadStorageManagementPolicyAdopt(_id)
 }
 
-// The eviction priority for a downloaded asset.
-//
-// WithPriority sets priority and returns the receiver so calls can be chained.
+// WithPriority the eviction priority for a downloaded asset.
 func (x *MutableAssetDownloadStorageManagementPolicy) WithPriority(priority obj.Object) *MutableAssetDownloadStorageManagementPolicy {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), objref.IDOf(priority))
 	return x
 }
 
-// The expiration date for an asset.
-//
-// WithExpirationDate sets expirationDate and returns the receiver so calls can be chained.
+// WithExpirationDate the expiration date for an asset.
 func (x *MutableAssetDownloadStorageManagementPolicy) WithExpirationDate(expirationDate obj.Object) *MutableAssetDownloadStorageManagementPolicy {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpirationDate:"), objref.IDOf(expirationDate))
 	return x
 }
 
+// SetPriority wraps the corresponding Objective-C method.
 func (x *MutableAssetDownloadStorageManagementPolicy) SetPriority(priority obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), objref.IDOf(priority))
 }
 
+// SetExpirationDate wraps the corresponding Objective-C method.
 func (x *MutableAssetDownloadStorageManagementPolicy) SetExpirationDate(expirationDate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpirationDate:"), objref.IDOf(expirationDate))
 }
@@ -98,3 +84,5 @@ type MutableAssetDownloadStorageManagementPolicyable interface {
 }
 
 var _ MutableAssetDownloadStorageManagementPolicyable = (*MutableAssetDownloadStorageManagementPolicy)(nil)
+
+var _ AssetDownloadStorageManagementPolicyProvider = (*MutableAssetDownloadStorageManagementPolicy)(nil)

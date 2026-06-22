@@ -11,4 +11,5 @@ import (
 // MathExpressionProvider is accepted wherever a AXMathExpression (or one of its subclasses) is expected.
 type MathExpressionProvider interface {
 	objref.Object
+	isMathExpression()
 }

@@ -25,7 +25,8 @@ func MTRThreadBorderRouterManagementClusterDatasetResponseParamsFromID(id objc.I
 	if id == 0 {
 		return nil
 	}
-	x := &MTRThreadBorderRouterManagementClusterDatasetResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRThreadBorderRouterManagementClusterDatasetResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRThreadBorderRouterManagementClusterDatasetResponseParamsAdopt(id objc.ID
 	if id == 0 {
 		return nil
 	}
-	x := &MTRThreadBorderRouterManagementClusterDatasetResponseParams{Handle: objref.Wrap(id)}
+	x := &MTRThreadBorderRouterManagementClusterDatasetResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) IsKind(cla
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRThreadBorderRouterManagementClusterDatasetResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-//
-// NewMTRThreadBorderRouterManagementClusterDatasetResponseParamsWithResponseValueError creates a new MTRThreadBorderRouterManagementClusterDatasetResponseParams.
-func NewMTRThreadBorderRouterManagementClusterDatasetResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRThreadBorderRouterManagementClusterDatasetResponseParamsWithResponseValueError initialize an MTRThreadBorderRouterManagementClusterDatasetResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRThreadBorderRouterManagementClusterDatasetResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRThreadBorderRouterManagementClusterDatasetResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRThreadBorderRouterManagementClusterDatasetResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,17 +77,19 @@ func NewMTRThreadBorderRouterManagementClusterDatasetResponseParamsWithResponseV
 	return mTRThreadBorderRouterManagementClusterDatasetResponseParamsAdopt(_id), nil
 }
 
-// WithDataset sets dataset and returns the receiver so calls can be chained.
+// WithDataset sets the property and returns the receiver so calls can be chained.
 func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) WithDataset(dataset obj.Object) *MTRThreadBorderRouterManagementClusterDatasetResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataset:"), objref.IDOf(dataset))
 	return x
 }
 
+// Dataset wraps the corresponding Objective-C method.
 func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) Dataset() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataset"))
 	return obj.Wrap(_r)
 }
 
+// SetDataset wraps the corresponding Objective-C method.
 func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) SetDataset(dataset obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataset:"), objref.IDOf(dataset))
 }

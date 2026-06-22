@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The keys for the parameter dictionary in a model configuration or a model update context.
-//
 // ParameterKey is an idiomatic wrapper over the Objective-C class MLParameterKey.
+//
+// It embeds [Key], promoting that type's methods.
+//
+// The keys for the parameter dictionary in a model configuration or a model update context.
 type ParameterKey struct {
-	objref.Handle
+	Key
 }
 
 // ParameterKeyFromID adopts an existing Objective-C object as a ParameterKey
@@ -25,7 +26,8 @@ func ParameterKeyFromID(id objc.ID) *ParameterKey {
 	if id == 0 {
 		return nil
 	}
-	x := &ParameterKey{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ParameterKey{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func parameterKeyAdopt(id objc.ID) *ParameterKey {
 	if id == 0 {
 		return nil
 	}
-	x := &ParameterKey{Handle: objref.Wrap(id)}
+	x := &ParameterKey{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ParameterKey) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ParameterKey) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ParameterKey) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewParameterKey creates a new ParameterKey.
@@ -64,7 +52,7 @@ func NewParameterKey() *ParameterKey {
 	return parameterKeyAdopt(_id)
 }
 
-// Creates a copy of a parameter key and adds the scope to it.
+// ScopedTo creates a copy of a parameter key and adds the scope to it.
 func (x *ParameterKey) ScopedTo(scope string) *ParameterKey {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scopedTo:"), purego.NSString(scope))
 	return ParameterKeyFromID(_r)
@@ -77,3 +65,5 @@ type ParameterKeyable interface {
 }
 
 var _ ParameterKeyable = (*ParameterKey)(nil)
+
+var _ KeyProvider = (*ParameterKey)(nil)

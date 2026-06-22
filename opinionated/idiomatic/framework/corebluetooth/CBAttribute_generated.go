@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of common aspects of services offered by a peripheral.
-//
 // Attribute is an idiomatic wrapper over the Objective-C class CBAttribute.
+//
+// Attribute is an abstract base — you do not construct it directly. Construct one of [Characteristic], [Descriptor], [Service] and pass it where a Attribute is accepted.
+//
+// A representation of common aspects of services offered by a peripheral.
 type Attribute struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func AttributeFromID(id objc.ID) *Attribute {
 	if id == 0 {
 		return nil
 	}
-	x := &Attribute{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Attribute{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func attributeAdopt(id objc.ID) *Attribute {
 	if id == 0 {
 		return nil
 	}
-	x := &Attribute{Handle: objref.Wrap(id)}
+	x := &Attribute{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +62,13 @@ func (x *Attribute) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewAttribute creates a new Attribute.
-func NewAttribute() *Attribute {
-	_id := objc.Send[objc.ID](objc.ID(_class("CBAttribute")), objc.RegisterName("new"))
-	return attributeAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Attribute) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// UUID wraps the corresponding Objective-C method.
 func (x *Attribute) UUID() *UUID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
 	return UUIDFromID(_r)
@@ -76,3 +81,10 @@ type Attributeable interface {
 }
 
 var _ Attributeable = (*Attribute)(nil)
+
+// isAttribute marks Attribute — and, by embedding promotion, its
+// subclasses — as a member of the Attribute hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Attribute) isAttribute() {}
+
+var _ AttributeProvider = (*Attribute)(nil)

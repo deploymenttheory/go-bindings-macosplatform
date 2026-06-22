@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An identity authority is a database that stores information about identities. The CBIdentityAuthority class defines one or more identity authorities. You can search this database for identities in conjunction with the CBIdentity class factory methods.
-//
 // IdentityAuthority is an idiomatic wrapper over the Objective-C class CBIdentityAuthority.
+//
+// An identity authority is a database that stores information about identities. The CBIdentityAuthority class defines one or more identity authorities. You can search this database for identities in conjunction with the CBIdentity class factory methods.
 type IdentityAuthority struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func IdentityAuthorityFromID(id objc.ID) *IdentityAuthority {
 	if id == 0 {
 		return nil
 	}
-	x := &IdentityAuthority{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IdentityAuthority{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func identityAuthorityAdopt(id objc.ID) *IdentityAuthority {
 	if id == 0 {
 		return nil
 	}
-	x := &IdentityAuthority{Handle: objref.Wrap(id)}
+	x := &IdentityAuthority{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *IdentityAuthority) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IdentityAuthority) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewIdentityAuthority creates a new IdentityAuthority.
 func NewIdentityAuthority() *IdentityAuthority {
 	_id := objc.Send[objc.ID](objc.ID(_class("CBIdentityAuthority")), objc.RegisterName("new"))
 	return identityAuthorityAdopt(_id)
 }
 
-// Returns an identity authority for use with the Core Services Identity API. This method, along with “CBIdentityAuthority/identityAuthorityWithCSIdentityAuthority:“, is used for interoperability with the Core Services Identity API. - Returns: The opaque authority object for use with the Core Services Identity API.
+// CSIdentityAuthority returns an identity authority for use with the Core Services Identity API. This method, along with “CBIdentityAuthority/identityAuthorityWithCSIdentityAuthority:“, is used for interoperability with the Core Services Identity API. - Returns: The opaque authority object for use with the Core Services Identity API.
 func (x *IdentityAuthority) CSIdentityAuthority() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CSIdentityAuthority"))
 	return obj.Wrap(_r)
 }
 
-// Returns the localized name of the identity authority. - Returns: The computer’s name if the authority is local, or Managed Network Directory if the authority is managed.
+// LocalizedName returns the localized name of the identity authority. - Returns: The computer’s name if the authority is local, or Managed Network Directory if the authority is managed.
 func (x *IdentityAuthority) LocalizedName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
 	if _r == 0 {

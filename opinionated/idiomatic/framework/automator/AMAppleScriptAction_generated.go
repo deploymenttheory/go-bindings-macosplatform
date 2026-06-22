@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents Automator actions whose runtime behavior is driven by an AppleScript script.
-//
 // AppleScriptAction is an idiomatic wrapper over the Objective-C class AMAppleScriptAction.
+//
+// It embeds [BundleAction], promoting that type's methods.
+//
+// An object that represents Automator actions whose runtime behavior is driven by an AppleScript script.
 type AppleScriptAction struct {
-	objref.Handle
+	BundleAction
 }
 
 // AppleScriptActionFromID adopts an existing Objective-C object as a AppleScriptAction
@@ -25,7 +26,8 @@ func AppleScriptActionFromID(id objc.ID) *AppleScriptAction {
 	if id == 0 {
 		return nil
 	}
-	x := &AppleScriptAction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AppleScriptAction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func appleScriptActionAdopt(id objc.ID) *AppleScriptAction {
 	if id == 0 {
 		return nil
 	}
-	x := &AppleScriptAction{Handle: objref.Wrap(id)}
+	x := &AppleScriptAction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AppleScriptAction) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AppleScriptAction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AppleScriptAction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAppleScriptAction creates a new AppleScriptAction.
@@ -64,35 +52,31 @@ func NewAppleScriptAction() *AppleScriptAction {
 	return appleScriptActionAdopt(_id)
 }
 
-// An OSAScript object representing the receiver’s script containing the on run command handler.
-//
-// WithScript sets script and returns the receiver so calls can be chained.
+// WithScript an OSAScript object representing the receiver’s script containing the on run command handler.
 func (x *AppleScriptAction) WithScript(script obj.Object) *AppleScriptAction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScript:"), objref.IDOf(script))
 	return x
 }
 
-// The action’s parameters.
-//
-// WithParameters sets parameters and returns the receiver so calls can be chained.
+// WithParameters the action’s parameters.
 func (x *AppleScriptAction) WithParameters(parameters obj.Object) *AppleScriptAction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
 	return x
 }
 
-// A float value between 0 and 1, which indicates how far along the action is while processing.
-//
-// WithProgressValue sets progressValue and returns the receiver so calls can be chained.
+// WithProgressValue a float value between 0 and 1, which indicates how far along the action is while processing.
 func (x *AppleScriptAction) WithProgressValue(progressValue float64) *AppleScriptAction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressValue:"), progressValue)
 	return x
 }
 
+// Script wraps the corresponding Objective-C method.
 func (x *AppleScriptAction) Script() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("script"))
 	return obj.Wrap(_r)
 }
 
+// SetScript wraps the corresponding Objective-C method.
 func (x *AppleScriptAction) SetScript(script obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScript:"), objref.IDOf(script))
 }
@@ -108,3 +92,7 @@ type AppleScriptActionable interface {
 }
 
 var _ AppleScriptActionable = (*AppleScriptAction)(nil)
+
+var _ BundleActionProvider = (*AppleScriptAction)(nil)
+
+var _ ActionProvider = (*AppleScriptAction)(nil)

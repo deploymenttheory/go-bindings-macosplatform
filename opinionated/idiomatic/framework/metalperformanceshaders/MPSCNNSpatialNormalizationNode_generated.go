@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a spatial normalization kernel.
-//
 // CNNSpatialNormalizationNode is an idiomatic wrapper over the Objective-C class MPSCNNSpatialNormalizationNode.
+//
+// It embeds [CNNNormalizationNode], promoting that type's methods.
+//
+// A representation of a spatial normalization kernel.
 type CNNSpatialNormalizationNode struct {
-	objref.Handle
+	CNNNormalizationNode
 }
 
 // CNNSpatialNormalizationNodeFromID adopts an existing Objective-C object as a CNNSpatialNormalizationNode
@@ -25,7 +26,8 @@ func CNNSpatialNormalizationNodeFromID(id objc.ID) *CNNSpatialNormalizationNode 
 	if id == 0 {
 		return nil
 	}
-	x := &CNNSpatialNormalizationNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNSpatialNormalizationNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func cNNSpatialNormalizationNodeAdopt(id objc.ID) *CNNSpatialNormalizationNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNSpatialNormalizationNode{Handle: objref.Wrap(id)}
+	x := &CNNSpatialNormalizationNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNSpatialNormalizationNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNSpatialNormalizationNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNSpatialNormalizationNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNSpatialNormalizationNodeWithSourceKernelSize creates a new CNNSpatialNormalizationNode.
@@ -72,64 +60,60 @@ func NewCNNSpatialNormalizationNodeWithSource(sourceNode obj.Object) *CNNSpatial
 	return cNNSpatialNormalizationNodeAdopt(_id)
 }
 
-// WithKernelWidth sets kernelWidth and returns the receiver so calls can be chained.
+// WithKernelWidth sets the property and returns the receiver so calls can be chained.
 func (x *CNNSpatialNormalizationNode) WithKernelWidth(kernelWidth int) *CNNSpatialNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelWidth:"), kernelWidth)
 	return x
 }
 
-// WithKernelHeight sets kernelHeight and returns the receiver so calls can be chained.
+// WithKernelHeight sets the property and returns the receiver so calls can be chained.
 func (x *CNNSpatialNormalizationNode) WithKernelHeight(kernelHeight int) *CNNSpatialNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelHeight:"), kernelHeight)
 	return x
 }
 
-// The value of alpha.  Default is 1.0. Must be non-negative.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the value of alpha.  Default is 1.0. Must be non-negative.
 func (x *CNNSpatialNormalizationNode) WithAlpha(alpha float32) *CNNSpatialNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// The value of beta.  Default is 5.0
-//
-// WithBeta sets beta and returns the receiver so calls can be chained.
+// WithBeta the value of beta.  Default is 5.0
 func (x *CNNSpatialNormalizationNode) WithBeta(beta float32) *CNNSpatialNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
 	return x
 }
 
-// The value of delta.  Default is 1.0
-//
-// WithDelta sets delta and returns the receiver so calls can be chained.
+// WithDelta the value of delta.  Default is 1.0
 func (x *CNNSpatialNormalizationNode) WithDelta(delta float32) *CNNSpatialNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNSpatialNormalizationNode) WithLabel(label string) *CNNSpatialNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// KernelWidth wraps the corresponding Objective-C method.
 func (x *CNNSpatialNormalizationNode) KernelWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
+// SetKernelWidth wraps the corresponding Objective-C method.
 func (x *CNNSpatialNormalizationNode) SetKernelWidth(kernelWidth int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelWidth:"), kernelWidth)
 }
 
+// KernelHeight wraps the corresponding Objective-C method.
 func (x *CNNSpatialNormalizationNode) KernelHeight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
+// SetKernelHeight wraps the corresponding Objective-C method.
 func (x *CNNSpatialNormalizationNode) SetKernelHeight(kernelHeight int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelHeight:"), kernelHeight)
 }
@@ -150,3 +134,7 @@ type CNNSpatialNormalizationNodeable interface {
 }
 
 var _ CNNSpatialNormalizationNodeable = (*CNNSpatialNormalizationNode)(nil)
+
+var _ CNNNormalizationNodeProvider = (*CNNSpatialNormalizationNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNSpatialNormalizationNode)(nil)

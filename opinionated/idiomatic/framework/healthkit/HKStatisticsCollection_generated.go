@@ -13,9 +13,9 @@ import (
 	"unsafe"
 )
 
-// An object that manages a collection of statistics, representing the results calculated over separate time intervals.
-//
 // StatisticsCollection is an idiomatic wrapper over the Objective-C class HKStatisticsCollection.
+//
+// An object that manages a collection of statistics, representing the results calculated over separate time intervals.
 type StatisticsCollection struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func StatisticsCollectionFromID(id objc.ID) *StatisticsCollection {
 	if id == 0 {
 		return nil
 	}
-	x := &StatisticsCollection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StatisticsCollection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func statisticsCollectionAdopt(id objc.ID) *StatisticsCollection {
 	if id == 0 {
 		return nil
 	}
-	x := &StatisticsCollection{Handle: objref.Wrap(id)}
+	x := &StatisticsCollection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,24 +61,30 @@ func (x *StatisticsCollection) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StatisticsCollection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewStatisticsCollection creates a new StatisticsCollection.
 func NewStatisticsCollection() *StatisticsCollection {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKStatisticsCollection")), objc.RegisterName("new"))
 	return statisticsCollectionAdopt(_id)
 }
 
-// Returns the statistics object for the time interval that contains the provided date.
+// StatisticsForDate returns the statistics object for the time interval that contains the provided date.
 func (x *StatisticsCollection) StatisticsForDate(date obj.Object) *Statistics {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statisticsForDate:"), objref.IDOf(date))
 	return StatisticsFromID(_r)
 }
 
-// Enumerates the statistics objects for all the time intervals from the start date until the end date.
+// EnumerateStatisticsFromDateToDateWith enumerates the statistics objects for all the time intervals from the start date until the end date.
 func (x *StatisticsCollection) EnumerateStatisticsFromDateToDateWith(startDate obj.Object, endDate obj.Object, block func(obj.Object, *bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateStatisticsFromDate:toDate:withBlock:"), objref.IDOf(startDate), objref.IDOf(endDate), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
-// Returns an array of statistics objects representing the populated time intervals covered by the statistics collection query.
+// Statistics returns an array of statistics objects representing the populated time intervals covered by the statistics collection query.
 //
 // Statistics returns the collection as a Go slice.
 func (x *StatisticsCollection) Statistics() []*Statistics {
@@ -84,7 +92,7 @@ func (x *StatisticsCollection) Statistics() []*Statistics {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Statistics { return StatisticsFromID(_id) })
 }
 
-// Returns a set containing all the sources that had samples matched by the statistics collection query.
+// Sources returns a set containing all the sources that had samples matched by the statistics collection query.
 func (x *StatisticsCollection) Sources() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sources"))
 	return obj.Wrap(_r)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// This class acts as a wrapper for the HKBloodType enumeration.
-//
 // BloodTypeObject is an idiomatic wrapper over the Objective-C class HKBloodTypeObject.
+//
+// This class acts as a wrapper for the HKBloodType enumeration.
 type BloodTypeObject struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func BloodTypeObjectFromID(id objc.ID) *BloodTypeObject {
 	if id == 0 {
 		return nil
 	}
-	x := &BloodTypeObject{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BloodTypeObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func bloodTypeObjectAdopt(id objc.ID) *BloodTypeObject {
 	if id == 0 {
 		return nil
 	}
-	x := &BloodTypeObject{Handle: objref.Wrap(id)}
+	x := &BloodTypeObject{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *BloodTypeObject) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BloodTypeObject) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBloodTypeObject creates a new BloodTypeObject.
 func NewBloodTypeObject() *BloodTypeObject {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKBloodTypeObject")), objc.RegisterName("new"))
 	return bloodTypeObjectAdopt(_id)
 }
 
+// BloodType wraps the corresponding Objective-C method.
 func (x *BloodTypeObject) BloodType() BloodType {
 	_r := objc.Send[BloodType](objref.IDOf(x), objc.RegisterName("bloodType"))
 	return _r

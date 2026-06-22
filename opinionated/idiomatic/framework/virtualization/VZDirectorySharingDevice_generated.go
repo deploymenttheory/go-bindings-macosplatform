@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class that represents a directory sharing device in a VM.
-//
 // DirectorySharingDevice is an idiomatic wrapper over the Objective-C class VZDirectorySharingDevice.
+//
+// DirectorySharingDevice is an abstract base — you do not construct it directly. Construct one of [VirtioFileSystemDevice] and pass it where a DirectorySharingDevice is accepted.
+//
+// The base class that represents a directory sharing device in a VM.
 type DirectorySharingDevice struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func DirectorySharingDeviceFromID(id objc.ID) *DirectorySharingDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &DirectorySharingDevice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DirectorySharingDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func directorySharingDeviceAdopt(id objc.ID) *DirectorySharingDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &DirectorySharingDevice{Handle: objref.Wrap(id)}
+	x := &DirectorySharingDevice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *DirectorySharingDevice) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewDirectorySharingDevice creates a new DirectorySharingDevice.
-func NewDirectorySharingDevice() *DirectorySharingDevice {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZDirectorySharingDevice")), objc.RegisterName("new"))
-	return directorySharingDeviceAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DirectorySharingDevice) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // DirectorySharingDeviceable is the interface implemented by [DirectorySharingDevice], for mocking and DI.
@@ -70,3 +74,10 @@ type DirectorySharingDeviceable interface {
 }
 
 var _ DirectorySharingDeviceable = (*DirectorySharingDevice)(nil)
+
+// isDirectorySharingDevice marks DirectorySharingDevice — and, by embedding promotion, its
+// subclasses — as a member of the DirectorySharingDevice hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DirectorySharingDevice) isDirectorySharingDevice() {}
+
+var _ DirectorySharingDeviceProvider = (*DirectorySharingDevice)(nil)

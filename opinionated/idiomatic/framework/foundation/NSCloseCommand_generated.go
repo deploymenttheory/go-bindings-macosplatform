@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A command that closes one or more scriptable objects.
-//
 // CloseCommand is an idiomatic wrapper over the Objective-C class NSCloseCommand.
+//
+// It embeds [ScriptCommand], promoting that type's methods.
+//
+// A command that closes one or more scriptable objects.
 type CloseCommand struct {
-	objref.Handle
+	ScriptCommand
 }
 
 // CloseCommandFromID adopts an existing Objective-C object as a CloseCommand
@@ -25,7 +26,8 @@ func CloseCommandFromID(id objc.ID) *CloseCommand {
 	if id == 0 {
 		return nil
 	}
-	x := &CloseCommand{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CloseCommand{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func closeCommandAdopt(id objc.ID) *CloseCommand {
 	if id == 0 {
 		return nil
 	}
-	x := &CloseCommand{Handle: objref.Wrap(id)}
+	x := &CloseCommand{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CloseCommand) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CloseCommand) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CloseCommand) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCloseCommand creates a new CloseCommand.
@@ -64,68 +52,55 @@ func NewCloseCommand() *CloseCommand {
 	return closeCommandAdopt(_id)
 }
 
-// Sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
-//
-// WithDirectParameter sets directParameter and returns the receiver so calls can be chained.
+// WithDirectParameter sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
 func (x *CloseCommand) WithDirectParameter(directParameter obj.Object) *CloseCommand {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirectParameter:"), objref.IDOf(directParameter))
 	return x
 }
 
-// Sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
-//
-// WithReceiversSpecifier sets receiversSpecifier and returns the receiver so calls can be chained.
+// WithReceiversSpecifier sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
 func (x *CloseCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *CloseCommand {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReceiversSpecifier:"), objref.IDOf(receiversSpecifier))
 	return x
 }
 
-// Sets the arguments of the command to args.
-//
-// WithArguments sets arguments and returns the receiver so calls can be chained.
+// WithArguments sets the arguments of the command to args.
 func (x *CloseCommand) WithArguments(arguments obj.Object) *CloseCommand {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArguments:"), objref.IDOf(arguments))
 	return x
 }
 
-// Sets a script error number that is associated with the execution of the command and is returned in the reply Apple event, if a reply was requested by the sender.
-//
-// WithScriptErrorNumber sets scriptErrorNumber and returns the receiver so calls can be chained.
+// WithScriptErrorNumber sets a script error number that is associated with the execution of the command and is returned in the reply Apple event, if a reply was requested by the sender.
 func (x *CloseCommand) WithScriptErrorNumber(scriptErrorNumber int) *CloseCommand {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorNumber:"), scriptErrorNumber)
 	return x
 }
 
-// Sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
-//
-// WithScriptErrorOffendingObjectDescriptor sets scriptErrorOffendingObjectDescriptor and returns the receiver so calls can be chained.
+// WithScriptErrorOffendingObjectDescriptor sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
 func (x *CloseCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *CloseCommand {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorOffendingObjectDescriptor:"), objref.IDOf(scriptErrorOffendingObjectDescriptor))
 	return x
 }
 
-// Sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
-//
-// WithScriptErrorExpectedTypeDescriptor sets scriptErrorExpectedTypeDescriptor and returns the receiver so calls can be chained.
+// WithScriptErrorExpectedTypeDescriptor sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
 func (x *CloseCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *CloseCommand {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorExpectedTypeDescriptor:"), objref.IDOf(scriptErrorExpectedTypeDescriptor))
 	return x
 }
 
-// Sets a script error string that is associated with execution of the command.
-//
-// WithScriptErrorString sets scriptErrorString and returns the receiver so calls can be chained.
+// WithScriptErrorString sets a script error string that is associated with execution of the command.
 func (x *CloseCommand) WithScriptErrorString(scriptErrorString StringProvider) *CloseCommand {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorString:"), objref.IDOf(scriptErrorString))
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *CloseCommand) WithScriptingProperties(scriptingProperties obj.Object) *CloseCommand {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// SaveOptions wraps the corresponding Objective-C method.
 func (x *CloseCommand) SaveOptions() SaveOptions {
 	_r := objc.Send[SaveOptions](objref.IDOf(x), objc.RegisterName("saveOptions"))
 	return _r
@@ -146,3 +121,5 @@ type CloseCommandable interface {
 }
 
 var _ CloseCommandable = (*CloseCommand)(nil)
+
+var _ ScriptCommandProvider = (*CloseCommand)(nil)

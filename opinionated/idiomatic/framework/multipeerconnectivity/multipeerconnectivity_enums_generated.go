@@ -20,6 +20,8 @@ const (
 	EncryptionNone EncryptionPreference = 2
 )
 
+// String returns the EncryptionPreference constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EncryptionPreference) String() string {
 	switch e {
 	case EncryptionOptional:
@@ -46,6 +48,8 @@ const (
 	ErrorUnavailable      ErrorCode = 6
 )
 
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ErrorCode) String() string {
 	switch e {
 	case ErrorUnknown:
@@ -77,6 +81,8 @@ const (
 	SessionSendDataUnreliable SessionSendDataMode = 1
 )
 
+// String returns the SessionSendDataMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SessionSendDataMode) String() string {
 	switch e {
 	case SessionSendDataReliable:

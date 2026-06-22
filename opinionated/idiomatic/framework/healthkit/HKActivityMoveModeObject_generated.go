@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains a movement mode value.
-//
 // ActivityMoveModeObject is an idiomatic wrapper over the Objective-C class HKActivityMoveModeObject.
+//
+// An object that contains a movement mode value.
 type ActivityMoveModeObject struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ActivityMoveModeObjectFromID(id objc.ID) *ActivityMoveModeObject {
 	if id == 0 {
 		return nil
 	}
-	x := &ActivityMoveModeObject{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ActivityMoveModeObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func activityMoveModeObjectAdopt(id objc.ID) *ActivityMoveModeObject {
 	if id == 0 {
 		return nil
 	}
-	x := &ActivityMoveModeObject{Handle: objref.Wrap(id)}
+	x := &ActivityMoveModeObject{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *ActivityMoveModeObject) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ActivityMoveModeObject) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewActivityMoveModeObject creates a new ActivityMoveModeObject.
 func NewActivityMoveModeObject() *ActivityMoveModeObject {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKActivityMoveModeObject")), objc.RegisterName("new"))
 	return activityMoveModeObjectAdopt(_id)
 }
 
+// ActivityMoveMode wraps the corresponding Objective-C method.
 func (x *ActivityMoveModeObject) ActivityMoveMode() ActivityMoveMode {
 	_r := objc.Send[ActivityMoveMode](objref.IDOf(x), objc.RegisterName("activityMoveMode"))
 	return _r

@@ -12,11 +12,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The compiled representation of a compute graph executable.
-//
 // GraphExecutable is an idiomatic wrapper over the Objective-C class MPSGraphExecutable.
+//
+// It embeds [GraphObject], promoting that type's methods.
+//
+// The compiled representation of a compute graph executable.
 type GraphExecutable struct {
-	objref.Handle
+	GraphObject
 }
 
 // GraphExecutableFromID adopts an existing Objective-C object as a GraphExecutable
@@ -25,7 +27,8 @@ func GraphExecutableFromID(id objc.ID) *GraphExecutable {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphExecutable{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphExecutable{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,85 +41,66 @@ func graphExecutableAdopt(id objc.ID) *GraphExecutable {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphExecutable{Handle: objref.Wrap(id)}
+	x := &GraphExecutable{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *GraphExecutable) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphExecutable) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphExecutable) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initialize the executable with the Metal Performance Shaders Graph package at the provided URL.
-//
-// NewGraphExecutableWithMPSGraphPackageAtURLCompilationDescriptor creates a new GraphExecutable.
+// NewGraphExecutableWithMPSGraphPackageAtURLCompilationDescriptor initialize the executable with the Metal Performance Shaders Graph package at the provided URL.
 func NewGraphExecutableWithMPSGraphPackageAtURLCompilationDescriptor(mpsgraphPackageURL string, compilationDescriptor *GraphCompilationDescriptor) *GraphExecutable {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSGraphExecutable")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMPSGraphPackageAtURL:compilationDescriptor:"), rt.FileURL(mpsgraphPackageURL), objref.IDOf(compilationDescriptor))
 	return graphExecutableAdopt(_id)
 }
 
-// Initialize the executable with the Core ML model package at the provided URL.
-//
-// NewGraphExecutableWithCoreMLPackageAtURLCompilationDescriptor creates a new GraphExecutable.
+// NewGraphExecutableWithCoreMLPackageAtURLCompilationDescriptor initialize the executable with the Core ML model package at the provided URL.
 func NewGraphExecutableWithCoreMLPackageAtURLCompilationDescriptor(coreMLPackageURL string, compilationDescriptor *GraphCompilationDescriptor) *GraphExecutable {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSGraphExecutable")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoreMLPackageAtURL:compilationDescriptor:"), rt.FileURL(coreMLPackageURL), objref.IDOf(compilationDescriptor))
 	return graphExecutableAdopt(_id)
 }
 
-// Options for the graph executable.
-//
-// WithOptions sets options and returns the receiver so calls can be chained.
+// WithOptions options for the graph executable.
 func (x *GraphExecutable) WithOptions(options GraphOptions) *GraphExecutable {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
 	return x
 }
 
-// Specialize the executable and optimize it.
+// SpecializeWithDeviceInputTypesCompilationDescriptor specialize the executable and optimize it.
 func (x *GraphExecutable) SpecializeWithDeviceInputTypesCompilationDescriptor(device *GraphDevice, inputTypes []*GraphType, compilationDescriptor *GraphCompilationDescriptor) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("specializeWithDevice:inputTypes:compilationDescriptor:"), objref.IDOf(device), purego.SliceToNSArray(inputTypes, func(_v *GraphType) objc.ID { return objref.IDOf(_v) }), objref.IDOf(compilationDescriptor))
 }
 
-// Get output shapes for a specialized executable.
+// GetOutputTypesWithDeviceInputTypesCompilationDescriptor get output shapes for a specialized executable.
 func (x *GraphExecutable) GetOutputTypesWithDeviceInputTypesCompilationDescriptor(device *GraphDevice, inputTypes []*GraphType, compilationDescriptor *GraphCompilationDescriptor) []*GraphShapedType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getOutputTypesWithDevice:inputTypes:compilationDescriptor:"), objref.IDOf(device), purego.SliceToNSArray(inputTypes, func(_v *GraphType) objc.ID { return objref.IDOf(_v) }), objref.IDOf(compilationDescriptor))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphShapedType { return GraphShapedTypeFromID(_id) })
 }
 
-// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed. This call is asynchronous and will return immediately after finishing encoding.
+// EncodeToCommandBufferInputsArrayResultsArrayExecutionDescriptor runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed. This call is asynchronous and will return immediately after finishing encoding.
 func (x *GraphExecutable) EncodeToCommandBufferInputsArrayResultsArrayExecutionDescriptor(commandBuffer obj.Object, inputsArray []*GraphTensorData, resultsArray []*GraphTensorData, executionDescriptor *GraphExecutableExecutionDescriptor) []*GraphTensorData {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeToCommandBuffer:inputsArray:resultsArray:executionDescriptor:"), objref.IDOf(commandBuffer), purego.SliceToNSArray(inputsArray, func(_v *GraphTensorData) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(resultsArray, func(_v *GraphTensorData) objc.ID { return objref.IDOf(_v) }), objref.IDOf(executionDescriptor))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensorData { return GraphTensorDataFromID(_id) })
 }
 
-// Serialize the MPSGraph executable at the provided url.
+// SerializeToMPSGraphPackageAtURLDescriptor serialize the MPSGraph executable at the provided url.
 func (x *GraphExecutable) SerializeToMPSGraphPackageAtURLDescriptor(url string, descriptor *GraphExecutableSerializationDescriptor) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serializeToMPSGraphPackageAtURL:descriptor:"), rt.FileURL(url), objref.IDOf(descriptor))
 }
 
-// Options for the graph executable. Default value is `MPSGraphOptionsDefault`.
+// Options options for the graph executable. Default value is `MPSGraphOptionsDefault`.
 func (x *GraphExecutable) Options() GraphOptions {
 	_r := objc.Send[GraphOptions](objref.IDOf(x), objc.RegisterName("options"))
 	return _r
 }
 
+// SetOptions wraps the corresponding Objective-C method.
 func (x *GraphExecutable) SetOptions(options GraphOptions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
 }
 
-// Tensors fed to the graph, can be used to order the inputs when executable is created with a graph.
+// FeedTensors tensors fed to the graph, can be used to order the inputs when executable is created with a graph.
 //
 // FeedTensors returns the collection as a Go slice.
 func (x *GraphExecutable) FeedTensors() []*GraphTensor {
@@ -124,7 +108,7 @@ func (x *GraphExecutable) FeedTensors() []*GraphTensor {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Tensors targeted by the graph, can be used to order the outputs when executable was created with a graph.
+// TargetTensors tensors targeted by the graph, can be used to order the outputs when executable was created with a graph.
 //
 // TargetTensors returns the collection as a Go slice.
 func (x *GraphExecutable) TargetTensors() []*GraphTensor {
@@ -147,3 +131,5 @@ type GraphExecutableable interface {
 }
 
 var _ GraphExecutableable = (*GraphExecutable)(nil)
+
+var _ GraphObjectProvider = (*GraphExecutable)(nil)

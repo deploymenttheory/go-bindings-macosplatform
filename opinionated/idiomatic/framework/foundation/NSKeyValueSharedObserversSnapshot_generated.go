@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of key-value observations which may be registered with multiple observable objects. Create using -[NSKeyValueSharedObservers snapshot]
-//
 // KeyValueSharedObserversSnapshot is an idiomatic wrapper over the Objective-C class NSKeyValueSharedObserversSnapshot.
+//
+// A collection of key-value observations which may be registered with multiple observable objects. Create using -[NSKeyValueSharedObservers snapshot]
 type KeyValueSharedObserversSnapshot struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func KeyValueSharedObserversSnapshotFromID(id objc.ID) *KeyValueSharedObserversS
 	if id == 0 {
 		return nil
 	}
-	x := &KeyValueSharedObserversSnapshot{Handle: objref.Wrap(purego.Retain(id))}
+	x := &KeyValueSharedObserversSnapshot{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func keyValueSharedObserversSnapshotAdopt(id objc.ID) *KeyValueSharedObserversSn
 	if id == 0 {
 		return nil
 	}
-	x := &KeyValueSharedObserversSnapshot{Handle: objref.Wrap(id)}
+	x := &KeyValueSharedObserversSnapshot{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *KeyValueSharedObserversSnapshot) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *KeyValueSharedObserversSnapshot) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewKeyValueSharedObserversSnapshot creates a new KeyValueSharedObserversSnapshot.
 func NewKeyValueSharedObserversSnapshot() *KeyValueSharedObserversSnapshot {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSKeyValueSharedObserversSnapshot")), objc.RegisterName("new"))
 	return keyValueSharedObserversSnapshotAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *KeyValueSharedObserversSnapshot) WithScriptingProperties(scriptingProperties obj.Object) *KeyValueSharedObserversSnapshot {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x

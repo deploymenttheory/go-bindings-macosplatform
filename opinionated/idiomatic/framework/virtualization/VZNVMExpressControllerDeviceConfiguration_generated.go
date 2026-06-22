@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The configuration object that represents an NVM Express Controller storage device.
-//
 // NVMExpressControllerDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZNVMExpressControllerDeviceConfiguration.
+//
+// It embeds [StorageDeviceConfiguration], promoting that type's methods.
+//
+// The configuration object that represents an NVM Express Controller storage device.
 type NVMExpressControllerDeviceConfiguration struct {
-	objref.Handle
+	StorageDeviceConfiguration
 }
 
 // NVMExpressControllerDeviceConfigurationFromID adopts an existing Objective-C object as a NVMExpressControllerDeviceConfiguration
@@ -25,7 +26,8 @@ func NVMExpressControllerDeviceConfigurationFromID(id objc.ID) *NVMExpressContro
 	if id == 0 {
 		return nil
 	}
-	x := &NVMExpressControllerDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NVMExpressControllerDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func nVMExpressControllerDeviceConfigurationAdopt(id objc.ID) *NVMExpressControl
 	if id == 0 {
 		return nil
 	}
-	x := &NVMExpressControllerDeviceConfiguration{Handle: objref.Wrap(id)}
+	x := &NVMExpressControllerDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NVMExpressControllerDeviceConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NVMExpressControllerDeviceConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NVMExpressControllerDeviceConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a new NVM Express controller configuration with the storage device attachment you provide.
-//
-// NewNVMExpressControllerDeviceConfigurationWithAttachment creates a new NVMExpressControllerDeviceConfiguration.
+// NewNVMExpressControllerDeviceConfigurationWithAttachment creates a new NVM Express controller configuration with the storage device attachment you provide.
 func NewNVMExpressControllerDeviceConfigurationWithAttachment(attachment *StorageDeviceAttachment) *NVMExpressControllerDeviceConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZNVMExpressControllerDeviceConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttachment:"), objref.IDOf(attachment))
@@ -73,3 +59,5 @@ type NVMExpressControllerDeviceConfigurationable interface {
 }
 
 var _ NVMExpressControllerDeviceConfigurationable = (*NVMExpressControllerDeviceConfiguration)(nil)
+
+var _ StorageDeviceConfigurationProvider = (*NVMExpressControllerDeviceConfiguration)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that passes command options to a task, optionally providing security-scoped URLs.
-//
 // TaskOptions is an idiomatic wrapper over the Objective-C class FSTaskOptions.
+//
+// A class that passes command options to a task, optionally providing security-scoped URLs.
 type TaskOptions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TaskOptionsFromID(id objc.ID) *TaskOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &TaskOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TaskOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func taskOptionsAdopt(id objc.ID) *TaskOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &TaskOptions{Handle: objref.Wrap(id)}
+	x := &TaskOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *TaskOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TaskOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTaskOptions creates a new TaskOptions.
 func NewTaskOptions() *TaskOptions {
 	_id := objc.Send[objc.ID](objc.ID(_class("FSTaskOptions")), objc.RegisterName("new"))
 	return taskOptionsAdopt(_id)
 }
 
-// Retrieves a URL for a given option.
+// UrlForOption retrieves a URL for a given option.
 func (x *TaskOptions) UrlForOption(option string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("urlForOption:"), purego.NSString(option))
 	return obj.Wrap(_r)
 }
 
-// An array of strings that represent command-line options for the task. This property is equivalent to the `argv` array of C strings passed to a command-line tool.
+// TaskOptions an array of strings that represent command-line options for the task. This property is equivalent to the `argv` array of C strings passed to a command-line tool.
 //
 // TaskOptions returns the collection as a Go slice.
 func (x *TaskOptions) TaskOptions() []string {

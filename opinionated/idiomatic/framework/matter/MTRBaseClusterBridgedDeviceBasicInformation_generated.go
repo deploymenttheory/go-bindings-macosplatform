@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBaseClusterBridgedDeviceBasicInformation is an idiomatic wrapper over the Objective-C class MTRBaseClusterBridgedDeviceBasicInformation.
+//
+// MTRBaseClusterBridgedDeviceBasicInformation is an abstract base — you do not construct it directly. Construct one of [MTRBaseClusterBridgedDeviceBasic] and pass it where a MTRBaseClusterBridgedDeviceBasicInformation is accepted.
 type MTRBaseClusterBridgedDeviceBasicInformation struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterBridgedDeviceBasicInformationFromID adopts an existing Objective-C object as a MTRBaseClusterBridgedDeviceBasicInformation
@@ -25,7 +26,8 @@ func MTRBaseClusterBridgedDeviceBasicInformationFromID(id objc.ID) *MTRBaseClust
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterBridgedDeviceBasicInformation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterBridgedDeviceBasicInformation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,37 +40,23 @@ func mTRBaseClusterBridgedDeviceBasicInformationAdopt(id objc.ID) *MTRBaseCluste
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterBridgedDeviceBasicInformation{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterBridgedDeviceBasicInformation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue creates a new MTRBaseClusterBridgedDeviceBasicInformation.
+// NewMTRBaseClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterBridgedDeviceBasicInformation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterBridgedDeviceBasicInformation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterBridgedDeviceBasicInformationAdopt(_id)
 }
 
+// ReadAttributeVendorNameWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeVendorNameWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeVendorNameWithCompletion(ctx context.Context) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeVendorNameWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -90,8 +78,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeVendorNameWit
 	}
 }
 
+// SubscribeAttributeVendorNameWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeVendorNameWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeVendorNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeVendorNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -113,8 +103,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeVendorNa
 	}
 }
 
+// ReadAttributeVendorIDWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeVendorIDWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeVendorIDWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeVendorIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -136,8 +128,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeVendorIDWithC
 	}
 }
 
+// SubscribeAttributeVendorIDWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeVendorIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeVendorIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeVendorIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -159,8 +153,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeVendorID
 	}
 }
 
+// ReadAttributeProductNameWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeProductNameWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductNameWithCompletion(ctx context.Context) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductNameWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -182,8 +178,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductNameWi
 	}
 }
 
+// SubscribeAttributeProductNameWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeProductNameWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -205,8 +203,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductN
 	}
 }
 
+// ReadAttributeProductIDWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeProductIDWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductIDWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -228,8 +228,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductIDWith
 	}
 }
 
+// SubscribeAttributeProductIDWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeProductIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -251,8 +253,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductI
 	}
 }
 
+// ReadAttributeNodeLabelWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeNodeLabelWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeNodeLabelWithCompletion(ctx context.Context) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeNodeLabelWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -274,8 +278,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeNodeLabelWith
 	}
 }
 
+// SubscribeAttributeNodeLabelWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNodeLabelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeNodeLabelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeNodeLabelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -297,8 +303,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeNodeLabe
 	}
 }
 
+// ReadAttributeHardwareVersionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeHardwareVersionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -320,8 +328,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersi
 	}
 }
 
+// SubscribeAttributeHardwareVersionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeHardwareVersionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeHardwareVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeHardwareVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -343,8 +353,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeHardware
 	}
 }
 
+// ReadAttributeHardwareVersionStringWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeHardwareVersionStringWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersionStringWithCompletion(ctx context.Context) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersionStringWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -366,8 +378,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersi
 	}
 }
 
+// SubscribeAttributeHardwareVersionStringWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeHardwareVersionStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeHardwareVersionStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeHardwareVersionStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -389,8 +403,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeHardware
 	}
 }
 
+// ReadAttributeSoftwareVersionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSoftwareVersionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -412,8 +428,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersi
 	}
 }
 
+// SubscribeAttributeSoftwareVersionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSoftwareVersionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSoftwareVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSoftwareVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -435,8 +453,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSoftware
 	}
 }
 
+// ReadAttributeSoftwareVersionStringWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSoftwareVersionStringWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersionStringWithCompletion(ctx context.Context) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersionStringWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -458,8 +478,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersi
 	}
 }
 
+// SubscribeAttributeSoftwareVersionStringWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSoftwareVersionStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSoftwareVersionStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSoftwareVersionStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -481,8 +503,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSoftware
 	}
 }
 
+// ReadAttributeManufacturingDateWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeManufacturingDateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeManufacturingDateWithCompletion(ctx context.Context) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeManufacturingDateWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -504,8 +528,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeManufacturing
 	}
 }
 
+// SubscribeAttributeManufacturingDateWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeManufacturingDateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeManufacturingDateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeManufacturingDateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -527,8 +553,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeManufact
 	}
 }
 
+// ReadAttributePartNumberWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePartNumberWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributePartNumberWithCompletion(ctx context.Context) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributePartNumberWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -550,8 +578,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributePartNumberWit
 	}
 }
 
+// SubscribeAttributePartNumberWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePartNumberWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributePartNumberWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributePartNumberWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -573,8 +603,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributePartNumb
 	}
 }
 
+// ReadAttributeProductURLWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeProductURLWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductURLWithCompletion(ctx context.Context) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductURLWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -596,8 +628,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductURLWit
 	}
 }
 
+// SubscribeAttributeProductURLWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeProductURLWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductURLWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductURLWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -619,8 +653,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductU
 	}
 }
 
+// ReadAttributeProductLabelWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeProductLabelWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductLabelWithCompletion(ctx context.Context) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductLabelWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -642,8 +678,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductLabelW
 	}
 }
 
+// SubscribeAttributeProductLabelWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeProductLabelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductLabelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductLabelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -665,8 +703,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductL
 	}
 }
 
+// ReadAttributeSerialNumberWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSerialNumberWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSerialNumberWithCompletion(ctx context.Context) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSerialNumberWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -688,8 +728,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSerialNumberW
 	}
 }
 
+// SubscribeAttributeSerialNumberWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSerialNumberWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSerialNumberWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSerialNumberWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -711,8 +753,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSerialNu
 	}
 }
 
+// ReadAttributeReachableWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeReachableWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeReachableWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeReachableWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -734,8 +778,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeReachableWith
 	}
 }
 
+// SubscribeAttributeReachableWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeReachableWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeReachableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeReachableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -757,8 +803,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeReachabl
 	}
 }
 
+// ReadAttributeUniqueIDWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeUniqueIDWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeUniqueIDWithCompletion(ctx context.Context) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeUniqueIDWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -780,8 +828,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeUniqueIDWithC
 	}
 }
 
+// SubscribeAttributeUniqueIDWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeUniqueIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeUniqueIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeUniqueIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -803,8 +853,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeUniqueID
 	}
 }
 
+// ReadAttributeProductAppearanceWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeProductAppearanceWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductAppearanceWithCompletion(ctx context.Context) (*MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductAppearanceWithCompletion(ctx context.Context) (result *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct, err error) {
 	type _result struct {
 		val *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct
 		err error
@@ -826,8 +878,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductAppear
 	}
 }
 
+// SubscribeAttributeProductAppearanceWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeProductAppearanceWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductAppearanceWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductAppearanceWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct, err error) {
 	type _result struct {
 		val *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct
 		err error
@@ -849,8 +903,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductA
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -872,8 +928,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeGeneratedComm
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -895,8 +953,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeGenerate
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -918,8 +978,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeAcceptedComma
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -941,8 +1003,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeAccepted
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -964,8 +1028,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeAttributeList
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -987,8 +1053,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeAttribut
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1010,8 +1078,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeFeatureMapWit
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1033,8 +1103,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeFeatureM
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1056,8 +1128,10 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeClusterRevisi
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1129,3 +1203,15 @@ type MTRBaseClusterBridgedDeviceBasicInformationable interface {
 }
 
 var _ MTRBaseClusterBridgedDeviceBasicInformationable = (*MTRBaseClusterBridgedDeviceBasicInformation)(nil)
+
+// isMTRBaseClusterBridgedDeviceBasicInformation marks MTRBaseClusterBridgedDeviceBasicInformation — and, by embedding promotion, its
+// subclasses — as a member of the MTRBaseClusterBridgedDeviceBasicInformation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) isMTRBaseClusterBridgedDeviceBasicInformation() {
+}
+
+var _ MTRBaseClusterBridgedDeviceBasicInformationProvider = (*MTRBaseClusterBridgedDeviceBasicInformation)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterBridgedDeviceBasicInformation)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterBridgedDeviceBasicInformation)(nil)

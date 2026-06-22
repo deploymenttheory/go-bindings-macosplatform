@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMDocument is an idiomatic wrapper over the Objective-C class DOMDocument.
+//
+// DOMDocument is an abstract base — you do not construct it directly. Construct one of [DOMHTMLDocument] and pass it where a DOMDocument is accepted.
 type DOMDocument struct {
-	objref.Handle
+	DOMNode
 }
 
 // DOMDocumentFromID adopts an existing Objective-C object as a DOMDocument
@@ -23,7 +24,8 @@ func DOMDocumentFromID(id objc.ID) *DOMDocument {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMDocument{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMDocument{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,218 +38,223 @@ func dOMDocumentAdopt(id objc.ID) *DOMDocument {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMDocument{Handle: objref.Wrap(id)}
+	x := &DOMDocument{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *DOMDocument) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMDocument) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMDocument) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewDOMDocument creates a new DOMDocument.
-func NewDOMDocument() *DOMDocument {
-	_id := objc.Send[objc.ID](objc.ID(_class("DOMDocument")), objc.RegisterName("new"))
-	return dOMDocumentAdopt(_id)
-}
-
-// WithXmlVersion sets xmlVersion and returns the receiver so calls can be chained.
+// WithXmlVersion sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocument) WithXmlVersion(xmlVersion string) *DOMDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXmlVersion:"), purego.NSString(xmlVersion))
 	return x
 }
 
-// WithXmlStandalone sets xmlStandalone and returns the receiver so calls can be chained.
+// WithXmlStandalone sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocument) WithXmlStandalone(xmlStandalone bool) *DOMDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXmlStandalone:"), xmlStandalone)
 	return x
 }
 
-// WithDocumentURI sets documentURI and returns the receiver so calls can be chained.
+// WithDocumentURI sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocument) WithDocumentURI(documentURI string) *DOMDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentURI:"), purego.NSString(documentURI))
 	return x
 }
 
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocument) WithTitle(title string) *DOMDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// WithCookie sets cookie and returns the receiver so calls can be chained.
+// WithCookie sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocument) WithCookie(cookie string) *DOMDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCookie:"), purego.NSString(cookie))
 	return x
 }
 
-// WithBody sets body and returns the receiver so calls can be chained.
+// WithBody sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocument) WithBody(body DOMHTMLElementProvider) *DOMDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBody:"), objref.IDOf(body))
 	return x
 }
 
-// WithCharset sets charset and returns the receiver so calls can be chained.
+// WithCharset sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocument) WithCharset(charset string) *DOMDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharset:"), purego.NSString(charset))
 	return x
 }
 
-// WithSelectedStylesheetSet sets selectedStylesheetSet and returns the receiver so calls can be chained.
+// WithSelectedStylesheetSet sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocument) WithSelectedStylesheetSet(selectedStylesheetSet string) *DOMDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedStylesheetSet:"), purego.NSString(selectedStylesheetSet))
 	return x
 }
 
-// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocument) WithNodeValue(nodeValue string) *DOMDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets prefix and returns the receiver so calls can be chained.
+// WithPrefix sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocument) WithPrefix(prefix string) *DOMDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets textContent and returns the receiver so calls can be chained.
+// WithTextContent sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocument) WithTextContent(textContent string) *DOMDocument {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
+// CreateElement wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateElement(tagName string) *DOMElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createElement:"), purego.NSString(tagName))
 	return DOMElementFromID(_r)
 }
 
+// CreateDocumentFragment wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateDocumentFragment() *DOMDocumentFragment {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createDocumentFragment"))
 	return DOMDocumentFragmentFromID(_r)
 }
 
+// CreateTextNode wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateTextNode(data string) *DOMText {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createTextNode:"), purego.NSString(data))
 	return DOMTextFromID(_r)
 }
 
+// CreateComment wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateComment(data string) *DOMComment {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createComment:"), purego.NSString(data))
 	return DOMCommentFromID(_r)
 }
 
+// CreateCDATASection wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateCDATASection(data string) *DOMCDATASection {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createCDATASection:"), purego.NSString(data))
 	return DOMCDATASectionFromID(_r)
 }
 
+// CreateProcessingInstructionData wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateProcessingInstructionData(target string, data string) *DOMProcessingInstruction {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createProcessingInstruction:data:"), purego.NSString(target), purego.NSString(data))
 	return DOMProcessingInstructionFromID(_r)
 }
 
+// CreateAttribute wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateAttribute(name string) *DOMAttr {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createAttribute:"), purego.NSString(name))
 	return DOMAttrFromID(_r)
 }
 
+// CreateEntityReference wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateEntityReference(name string) *DOMEntityReference {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createEntityReference:"), purego.NSString(name))
 	return DOMEntityReferenceFromID(_r)
 }
 
+// GetElementsByTagName wraps the corresponding Objective-C method.
 func (x *DOMDocument) GetElementsByTagName(tagname string) *DOMNodeList {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getElementsByTagName:"), purego.NSString(tagname))
 	return DOMNodeListFromID(_r)
 }
 
+// ImportNodeDeep wraps the corresponding Objective-C method.
 func (x *DOMDocument) ImportNodeDeep(importedNode *DOMNode, deep bool) *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("importNode:deep:"), objref.IDOf(importedNode), deep)
 	return DOMNodeFromID(_r)
 }
 
+// CreateElementNSQualifiedName wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateElementNSQualifiedName(namespaceURI string, qualifiedName string) *DOMElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createElementNS:qualifiedName:"), purego.NSString(namespaceURI), purego.NSString(qualifiedName))
 	return DOMElementFromID(_r)
 }
 
+// CreateAttributeNSQualifiedName wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateAttributeNSQualifiedName(namespaceURI string, qualifiedName string) *DOMAttr {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createAttributeNS:qualifiedName:"), purego.NSString(namespaceURI), purego.NSString(qualifiedName))
 	return DOMAttrFromID(_r)
 }
 
+// GetElementsByTagNameNSLocalName wraps the corresponding Objective-C method.
 func (x *DOMDocument) GetElementsByTagNameNSLocalName(namespaceURI string, localName string) *DOMNodeList {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getElementsByTagNameNS:localName:"), purego.NSString(namespaceURI), purego.NSString(localName))
 	return DOMNodeListFromID(_r)
 }
 
+// AdoptNode wraps the corresponding Objective-C method.
 func (x *DOMDocument) AdoptNode(source *DOMNode) *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adoptNode:"), objref.IDOf(source))
 	return DOMNodeFromID(_r)
 }
 
+// CreateEvent wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateEvent(eventType string) *DOMEvent {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createEvent:"), purego.NSString(eventType))
 	return DOMEventFromID(_r)
 }
 
+// CreateRange wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateRange() *DOMRange {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createRange"))
 	return DOMRangeFromID(_r)
 }
 
+// GetOverrideStylePseudoElement wraps the corresponding Objective-C method.
 func (x *DOMDocument) GetOverrideStylePseudoElement(element *DOMElement, pseudoElement string) *DOMCSSStyleDeclaration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getOverrideStyle:pseudoElement:"), objref.IDOf(element), purego.NSString(pseudoElement))
 	return DOMCSSStyleDeclarationFromID(_r)
 }
 
+// ExecCommandUserInterfaceValue wraps the corresponding Objective-C method.
 func (x *DOMDocument) ExecCommandUserInterfaceValue(command string, userInterface bool, value string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("execCommand:userInterface:value:"), purego.NSString(command), userInterface, purego.NSString(value))
 	return _r
 }
 
+// ExecCommandUserInterface wraps the corresponding Objective-C method.
 func (x *DOMDocument) ExecCommandUserInterface(command string, userInterface bool) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("execCommand:userInterface:"), purego.NSString(command), userInterface)
 	return _r
 }
 
+// ExecCommand wraps the corresponding Objective-C method.
 func (x *DOMDocument) ExecCommand(command string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("execCommand:"), purego.NSString(command))
 	return _r
 }
 
+// QueryCommandEnabled wraps the corresponding Objective-C method.
 func (x *DOMDocument) QueryCommandEnabled(command string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("queryCommandEnabled:"), purego.NSString(command))
 	return _r
 }
 
+// QueryCommandIndeterm wraps the corresponding Objective-C method.
 func (x *DOMDocument) QueryCommandIndeterm(command string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("queryCommandIndeterm:"), purego.NSString(command))
 	return _r
 }
 
+// QueryCommandState wraps the corresponding Objective-C method.
 func (x *DOMDocument) QueryCommandState(command string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("queryCommandState:"), purego.NSString(command))
 	return _r
 }
 
+// QueryCommandSupported wraps the corresponding Objective-C method.
 func (x *DOMDocument) QueryCommandSupported(command string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("queryCommandSupported:"), purego.NSString(command))
 	return _r
 }
 
+// QueryCommandValue wraps the corresponding Objective-C method.
 func (x *DOMDocument) QueryCommandValue(command string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queryCommandValue:"), purego.NSString(command))
 	if _r == 0 {
@@ -256,80 +263,96 @@ func (x *DOMDocument) QueryCommandValue(command string) string {
 	return purego.GoString(_r)
 }
 
+// GetElementsByName wraps the corresponding Objective-C method.
 func (x *DOMDocument) GetElementsByName(elementName string) *DOMNodeList {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getElementsByName:"), purego.NSString(elementName))
 	return DOMNodeListFromID(_r)
 }
 
+// ElementFromPointY wraps the corresponding Objective-C method.
 func (x *DOMDocument) ElementFromPointY(x_ int, y int) *DOMElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementFromPoint:y:"), x_, y)
 	return DOMElementFromID(_r)
 }
 
+// CreateCSSStyleDeclaration wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateCSSStyleDeclaration() *DOMCSSStyleDeclaration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createCSSStyleDeclaration"))
 	return DOMCSSStyleDeclarationFromID(_r)
 }
 
+// GetComputedStylePseudoElement wraps the corresponding Objective-C method.
 func (x *DOMDocument) GetComputedStylePseudoElement(element *DOMElement, pseudoElement string) *DOMCSSStyleDeclaration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getComputedStyle:pseudoElement:"), objref.IDOf(element), purego.NSString(pseudoElement))
 	return DOMCSSStyleDeclarationFromID(_r)
 }
 
+// GetMatchedCSSRulesPseudoElement wraps the corresponding Objective-C method.
 func (x *DOMDocument) GetMatchedCSSRulesPseudoElement(element *DOMElement, pseudoElement string) *DOMCSSRuleList {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getMatchedCSSRules:pseudoElement:"), objref.IDOf(element), purego.NSString(pseudoElement))
 	return DOMCSSRuleListFromID(_r)
 }
 
+// GetMatchedCSSRulesPseudoElementAuthorOnly wraps the corresponding Objective-C method.
 func (x *DOMDocument) GetMatchedCSSRulesPseudoElementAuthorOnly(element *DOMElement, pseudoElement string, authorOnly bool) *DOMCSSRuleList {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getMatchedCSSRules:pseudoElement:authorOnly:"), objref.IDOf(element), purego.NSString(pseudoElement), authorOnly)
 	return DOMCSSRuleListFromID(_r)
 }
 
+// GetElementsByClassName wraps the corresponding Objective-C method.
 func (x *DOMDocument) GetElementsByClassName(classNames string) *DOMNodeList {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getElementsByClassName:"), purego.NSString(classNames))
 	return DOMNodeListFromID(_r)
 }
 
+// HasFocus wraps the corresponding Objective-C method.
 func (x *DOMDocument) HasFocus() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasFocus"))
 	return _r
 }
 
+// WebkitCancelFullScreen wraps the corresponding Objective-C method.
 func (x *DOMDocument) WebkitCancelFullScreen() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webkitCancelFullScreen"))
 }
 
+// GetElementById wraps the corresponding Objective-C method.
 func (x *DOMDocument) GetElementById(elementId string) *DOMElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getElementById:"), purego.NSString(elementId))
 	return DOMElementFromID(_r)
 }
 
+// QuerySelector wraps the corresponding Objective-C method.
 func (x *DOMDocument) QuerySelector(selectors string) *DOMElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("querySelector:"), purego.NSString(selectors))
 	return DOMElementFromID(_r)
 }
 
+// QuerySelectorAll wraps the corresponding Objective-C method.
 func (x *DOMDocument) QuerySelectorAll(selectors string) *DOMNodeList {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("querySelectorAll:"), purego.NSString(selectors))
 	return DOMNodeListFromID(_r)
 }
 
+// Doctype wraps the corresponding Objective-C method.
 func (x *DOMDocument) Doctype() *DOMDocumentType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("doctype"))
 	return DOMDocumentTypeFromID(_r)
 }
 
+// Implementation wraps the corresponding Objective-C method.
 func (x *DOMDocument) Implementation() *DOMImplementation {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("implementation"))
 	return DOMImplementationFromID(_r)
 }
 
+// DocumentElement wraps the corresponding Objective-C method.
 func (x *DOMDocument) DocumentElement() *DOMElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentElement"))
 	return DOMElementFromID(_r)
 }
 
+// InputEncoding wraps the corresponding Objective-C method.
 func (x *DOMDocument) InputEncoding() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputEncoding"))
 	if _r == 0 {
@@ -338,6 +361,7 @@ func (x *DOMDocument) InputEncoding() string {
 	return purego.GoString(_r)
 }
 
+// XmlEncoding wraps the corresponding Objective-C method.
 func (x *DOMDocument) XmlEncoding() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("xmlEncoding"))
 	if _r == 0 {
@@ -346,6 +370,7 @@ func (x *DOMDocument) XmlEncoding() string {
 	return purego.GoString(_r)
 }
 
+// XmlVersion wraps the corresponding Objective-C method.
 func (x *DOMDocument) XmlVersion() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("xmlVersion"))
 	if _r == 0 {
@@ -354,19 +379,23 @@ func (x *DOMDocument) XmlVersion() string {
 	return purego.GoString(_r)
 }
 
+// SetXmlVersion wraps the corresponding Objective-C method.
 func (x *DOMDocument) SetXmlVersion(xmlVersion string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXmlVersion:"), purego.NSString(xmlVersion))
 }
 
+// XmlStandalone wraps the corresponding Objective-C method.
 func (x *DOMDocument) XmlStandalone() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("xmlStandalone"))
 	return _r
 }
 
+// SetXmlStandalone wraps the corresponding Objective-C method.
 func (x *DOMDocument) SetXmlStandalone(xmlStandalone bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXmlStandalone:"), xmlStandalone)
 }
 
+// DocumentURI wraps the corresponding Objective-C method.
 func (x *DOMDocument) DocumentURI() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentURI"))
 	if _r == 0 {
@@ -375,20 +404,24 @@ func (x *DOMDocument) DocumentURI() string {
 	return purego.GoString(_r)
 }
 
+// SetDocumentURI wraps the corresponding Objective-C method.
 func (x *DOMDocument) SetDocumentURI(documentURI string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentURI:"), purego.NSString(documentURI))
 }
 
+// DefaultView wraps the corresponding Objective-C method.
 func (x *DOMDocument) DefaultView() *DOMAbstractView {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultView"))
 	return DOMAbstractViewFromID(_r)
 }
 
+// StyleSheets wraps the corresponding Objective-C method.
 func (x *DOMDocument) StyleSheets() *DOMStyleSheetList {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("styleSheets"))
 	return DOMStyleSheetListFromID(_r)
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *DOMDocument) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -397,10 +430,12 @@ func (x *DOMDocument) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *DOMDocument) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
+// Referrer wraps the corresponding Objective-C method.
 func (x *DOMDocument) Referrer() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("referrer"))
 	if _r == 0 {
@@ -409,6 +444,7 @@ func (x *DOMDocument) Referrer() string {
 	return purego.GoString(_r)
 }
 
+// Domain wraps the corresponding Objective-C method.
 func (x *DOMDocument) Domain() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domain"))
 	if _r == 0 {
@@ -417,6 +453,7 @@ func (x *DOMDocument) Domain() string {
 	return purego.GoString(_r)
 }
 
+// URL wraps the corresponding Objective-C method.
 func (x *DOMDocument) URL() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	if _r == 0 {
@@ -425,6 +462,7 @@ func (x *DOMDocument) URL() string {
 	return purego.GoString(_r)
 }
 
+// Cookie wraps the corresponding Objective-C method.
 func (x *DOMDocument) Cookie() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cookie"))
 	if _r == 0 {
@@ -433,44 +471,53 @@ func (x *DOMDocument) Cookie() string {
 	return purego.GoString(_r)
 }
 
+// SetCookie wraps the corresponding Objective-C method.
 func (x *DOMDocument) SetCookie(cookie string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCookie:"), purego.NSString(cookie))
 }
 
+// Body wraps the corresponding Objective-C method.
 func (x *DOMDocument) Body() *DOMHTMLElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("body"))
 	return DOMHTMLElementFromID(_r)
 }
 
+// SetBody wraps the corresponding Objective-C method.
 func (x *DOMDocument) SetBody(body *DOMHTMLElement) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBody:"), objref.IDOf(body))
 }
 
+// Images wraps the corresponding Objective-C method.
 func (x *DOMDocument) Images() *DOMHTMLCollection {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("images"))
 	return DOMHTMLCollectionFromID(_r)
 }
 
+// Applets wraps the corresponding Objective-C method.
 func (x *DOMDocument) Applets() *DOMHTMLCollection {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applets"))
 	return DOMHTMLCollectionFromID(_r)
 }
 
+// Links wraps the corresponding Objective-C method.
 func (x *DOMDocument) Links() *DOMHTMLCollection {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("links"))
 	return DOMHTMLCollectionFromID(_r)
 }
 
+// Forms wraps the corresponding Objective-C method.
 func (x *DOMDocument) Forms() *DOMHTMLCollection {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("forms"))
 	return DOMHTMLCollectionFromID(_r)
 }
 
+// Anchors wraps the corresponding Objective-C method.
 func (x *DOMDocument) Anchors() *DOMHTMLCollection {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("anchors"))
 	return DOMHTMLCollectionFromID(_r)
 }
 
+// LastModified wraps the corresponding Objective-C method.
 func (x *DOMDocument) LastModified() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastModified"))
 	if _r == 0 {
@@ -479,6 +526,7 @@ func (x *DOMDocument) LastModified() string {
 	return purego.GoString(_r)
 }
 
+// Charset wraps the corresponding Objective-C method.
 func (x *DOMDocument) Charset() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("charset"))
 	if _r == 0 {
@@ -487,10 +535,12 @@ func (x *DOMDocument) Charset() string {
 	return purego.GoString(_r)
 }
 
+// SetCharset wraps the corresponding Objective-C method.
 func (x *DOMDocument) SetCharset(charset string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharset:"), purego.NSString(charset))
 }
 
+// DefaultCharset wraps the corresponding Objective-C method.
 func (x *DOMDocument) DefaultCharset() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultCharset"))
 	if _r == 0 {
@@ -499,6 +549,7 @@ func (x *DOMDocument) DefaultCharset() string {
 	return purego.GoString(_r)
 }
 
+// ReadyState wraps the corresponding Objective-C method.
 func (x *DOMDocument) ReadyState() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readyState"))
 	if _r == 0 {
@@ -507,6 +558,7 @@ func (x *DOMDocument) ReadyState() string {
 	return purego.GoString(_r)
 }
 
+// CharacterSet wraps the corresponding Objective-C method.
 func (x *DOMDocument) CharacterSet() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("characterSet"))
 	if _r == 0 {
@@ -515,6 +567,7 @@ func (x *DOMDocument) CharacterSet() string {
 	return purego.GoString(_r)
 }
 
+// PreferredStylesheetSet wraps the corresponding Objective-C method.
 func (x *DOMDocument) PreferredStylesheetSet() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredStylesheetSet"))
 	if _r == 0 {
@@ -523,6 +576,7 @@ func (x *DOMDocument) PreferredStylesheetSet() string {
 	return purego.GoString(_r)
 }
 
+// SelectedStylesheetSet wraps the corresponding Objective-C method.
 func (x *DOMDocument) SelectedStylesheetSet() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedStylesheetSet"))
 	if _r == 0 {
@@ -531,57 +585,66 @@ func (x *DOMDocument) SelectedStylesheetSet() string {
 	return purego.GoString(_r)
 }
 
+// SetSelectedStylesheetSet wraps the corresponding Objective-C method.
 func (x *DOMDocument) SetSelectedStylesheetSet(selectedStylesheetSet string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedStylesheetSet:"), purego.NSString(selectedStylesheetSet))
 }
 
+// ActiveElement wraps the corresponding Objective-C method.
 func (x *DOMDocument) ActiveElement() *DOMElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activeElement"))
 	return DOMElementFromID(_r)
 }
 
+// CreateProcessingInstruction wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateProcessingInstruction(target string, data string) *DOMProcessingInstruction {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createProcessingInstruction::"), purego.NSString(target), purego.NSString(data))
 	return DOMProcessingInstructionFromID(_r)
 }
 
+// ImportNode wraps the corresponding Objective-C method.
 func (x *DOMDocument) ImportNode(importedNode *DOMNode, deep bool) *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("importNode::"), objref.IDOf(importedNode), deep)
 	return DOMNodeFromID(_r)
 }
 
+// CreateElementNS wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateElementNS(namespaceURI string, qualifiedName string) *DOMElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createElementNS::"), purego.NSString(namespaceURI), purego.NSString(qualifiedName))
 	return DOMElementFromID(_r)
 }
 
+// CreateAttributeNS wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateAttributeNS(namespaceURI string, qualifiedName string) *DOMAttr {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createAttributeNS::"), purego.NSString(namespaceURI), purego.NSString(qualifiedName))
 	return DOMAttrFromID(_r)
 }
 
+// GetElementsByTagNameNS wraps the corresponding Objective-C method.
 func (x *DOMDocument) GetElementsByTagNameNS(namespaceURI string, localName string) *DOMNodeList {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getElementsByTagNameNS::"), purego.NSString(namespaceURI), purego.NSString(localName))
 	return DOMNodeListFromID(_r)
 }
 
+// GetOverrideStyle wraps the corresponding Objective-C method.
 func (x *DOMDocument) GetOverrideStyle(element *DOMElement, pseudoElement string) *DOMCSSStyleDeclaration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getOverrideStyle::"), objref.IDOf(element), purego.NSString(pseudoElement))
 	return DOMCSSStyleDeclarationFromID(_r)
 }
 
+// GetComputedStyle wraps the corresponding Objective-C method.
 func (x *DOMDocument) GetComputedStyle(element *DOMElement, pseudoElement string) *DOMCSSStyleDeclaration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getComputedStyle::"), objref.IDOf(element), purego.NSString(pseudoElement))
 	return DOMCSSStyleDeclarationFromID(_r)
 }
 
-// Constructs a URL given an attribute string.
+// URLWithAttributeString constructs a URL given an attribute string.
 func (x *DOMDocument) URLWithAttributeString(string_ string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLWithAttributeString:"), purego.NSString(string_))
 	return obj.Wrap(_r)
 }
 
-// The frame of the DOM document.
+// WebFrame the frame of the DOM document.
 func (x *DOMDocument) WebFrame() *WebFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webFrame"))
 	return WebFrameFromID(_r)
@@ -687,3 +750,16 @@ type DOMDocumentable interface {
 }
 
 var _ DOMDocumentable = (*DOMDocument)(nil)
+
+// isDOMDocument marks DOMDocument — and, by embedding promotion, its
+// subclasses — as a member of the DOMDocument hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DOMDocument) isDOMDocument() {}
+
+var _ DOMDocumentProvider = (*DOMDocument)(nil)
+
+var _ DOMNodeProvider = (*DOMDocument)(nil)
+
+var _ DOMObjectProvider = (*DOMDocument)(nil)
+
+var _ WebScriptObjectProvider = (*DOMDocument)(nil)

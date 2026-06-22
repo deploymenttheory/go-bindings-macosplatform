@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The identity of a user.
-//
 // UserIdentity is an idiomatic wrapper over the Objective-C class CKUserIdentity.
+//
+// The identity of a user.
 type UserIdentity struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func UserIdentityFromID(id objc.ID) *UserIdentity {
 	if id == 0 {
 		return nil
 	}
-	x := &UserIdentity{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UserIdentity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func userIdentityAdopt(id objc.ID) *UserIdentity {
 	if id == 0 {
 		return nil
 	}
-	x := &UserIdentity{Handle: objref.Wrap(id)}
+	x := &UserIdentity{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,43 @@ func (x *UserIdentity) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UserIdentity) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewUserIdentity creates a new UserIdentity.
 func NewUserIdentity() *UserIdentity {
 	_id := objc.Send[objc.ID](objc.ID(_class("CKUserIdentity")), objc.RegisterName("new"))
 	return userIdentityAdopt(_id)
 }
 
-// The user record ID for the corresponding user record.
+// UserRecordID the user record ID for the corresponding user record.
 func (x *UserIdentity) UserRecordID() *RecordID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userRecordID"))
 	return RecordIDFromID(_r)
 }
 
-// The lookup info for retrieving the user identity. Use this property's value to retrieve the user identity when using the “CKDiscoverUserIdentitiesOperation“ and “CKFetchShareParticipantsOperation“ operations.
+// LookupInfo the lookup info for retrieving the user identity. Use this property's value to retrieve the user identity when using the “CKDiscoverUserIdentitiesOperation“ and “CKFetchShareParticipantsOperation“ operations.
 func (x *UserIdentity) LookupInfo() *UserIdentityLookupInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lookupInfo"))
 	return UserIdentityLookupInfoFromID(_r)
 }
 
-// The user's name. You can use this property to construct the user's name for display. Use the components with an instance of <doc://com.apple.documentation/documentation/foundation/personnamecomponentsformatter> to create a string representation for the current locale.
+// NameComponents the user's name. You can use this property to construct the user's name for display. Use the components with an instance of <doc://com.apple.documentation/documentation/foundation/personnamecomponentsformatter> to create a string representation for the current locale.
 func (x *UserIdentity) NameComponents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nameComponents"))
 	return obj.Wrap(_r)
 }
 
-// A Boolean value that indicates whether the user has an iCloud account. `true` if the user identity has an iCloud account; otherwise, `false`.
+// HasiCloudAccount a Boolean value that indicates whether the user has an iCloud account. `true` if the user identity has an iCloud account; otherwise, `false`.
 func (x *UserIdentity) HasiCloudAccount() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasiCloudAccount"))
 	return _r
 }
 
-// Identifiers that match contacts in the local Contacts database. Identities that CloudKit discovers using “CKDiscoverAllUserIdentitiesOperation“ correspond to entries in the local Contacts database, matching the identifier on <doc://com.apple.documentation/documentation/contacts/cncontact>.  Use these identifiers with the Contacts database to get additional information about the contacts. Multiple identifiers can exist for a single discovered user because multiple contacts can contain the same email addresses or phone numbers. To transform these identifiers into an array of unified contact identifiers, create a predicate by calling the <doc://com.apple.documentation/documentation/contacts/cncontact/predicateforcontacts(withidentifiers:)> method, and then pass that predicate to the <doc://com.apple.documentation/documentation/contacts/cncontactstore/unifiedcontacts(matching:keystofetch:)> method.
+// ContactIdentifiers identifiers that match contacts in the local Contacts database. Identities that CloudKit discovers using “CKDiscoverAllUserIdentitiesOperation“ correspond to entries in the local Contacts database, matching the identifier on <doc://com.apple.documentation/documentation/contacts/cncontact>.  Use these identifiers with the Contacts database to get additional information about the contacts. Multiple identifiers can exist for a single discovered user because multiple contacts can contain the same email addresses or phone numbers. To transform these identifiers into an array of unified contact identifiers, create a predicate by calling the <doc://com.apple.documentation/documentation/contacts/cncontact/predicateforcontacts(withidentifiers:)> method, and then pass that predicate to the <doc://com.apple.documentation/documentation/contacts/cncontactstore/unifiedcontacts(matching:keystofetch:)> method.
 //
 // ContactIdentifiers returns the collection as a Go slice.
 func (x *UserIdentity) ContactIdentifiers() []string {

@@ -8,16 +8,18 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns the shared Finder Sync controller object.
+// DefaultController returns the shared Finder Sync controller object.
 func DefaultController() *FinderSyncController {
 	_r := objc.Send[objc.ID](objc.ID(_class("FIFinderSyncController")), objc.RegisterName("defaultController"))
 	return FinderSyncControllerFromID(_r)
 }
 
+// ShowExtensionManagementInterface wraps the corresponding Objective-C method.
 func ShowExtensionManagementInterface() {
 	objc.Send[objc.ID](objc.ID(_class("FIFinderSyncController")), objc.RegisterName("showExtensionManagementInterface"))
 }
 
+// IsExtensionEnabled wraps the corresponding Objective-C method.
 func IsExtensionEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("FIFinderSyncController")), objc.RegisterName("isExtensionEnabled"))
 	return _r

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides alternative text suggestions for a person’s text selection.
-//
 // TextAlternatives is an idiomatic wrapper over the Objective-C class BETextAlternatives.
+//
+// An object that provides alternative text suggestions for a person’s text selection.
 type TextAlternatives struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TextAlternativesFromID(id objc.ID) *TextAlternatives {
 	if id == 0 {
 		return nil
 	}
-	x := &TextAlternatives{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextAlternatives{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func textAlternativesAdopt(id objc.ID) *TextAlternatives {
 	if id == 0 {
 		return nil
 	}
-	x := &TextAlternatives{Handle: objref.Wrap(id)}
+	x := &TextAlternatives{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *TextAlternatives) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextAlternatives) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTextAlternatives creates a new TextAlternatives.
 func NewTextAlternatives() *TextAlternatives {
 	_id := objc.Send[objc.ID](objc.ID(_class("BETextAlternatives")), objc.RegisterName("new"))
 	return textAlternativesAdopt(_id)
 }
 
-// Original text for which alternative strings are provided
+// PrimaryString original text for which alternative strings are provided
 func (x *TextAlternatives) PrimaryString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryString"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *TextAlternatives) PrimaryString() string {
 	return purego.GoString(_r)
 }
 
-// Array of available aternative strings
+// AlternativeStrings array of available aternative strings
 //
 // AlternativeStrings returns the collection as a Go slice.
 func (x *TextAlternatives) AlternativeStrings() []string {

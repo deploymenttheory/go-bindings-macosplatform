@@ -6,15 +6,16 @@ package cinematic
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A structure representing the bounds of the predicted subject.
-//
 // BoundsPrediction is an idiomatic wrapper over the Objective-C class CNBoundsPrediction.
+//
+// A structure representing the bounds of the predicted subject.
 type BoundsPrediction struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func BoundsPredictionFromID(id objc.ID) *BoundsPrediction {
 	if id == 0 {
 		return nil
 	}
-	x := &BoundsPrediction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BoundsPrediction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func boundsPredictionAdopt(id objc.ID) *BoundsPrediction {
 	if id == 0 {
 		return nil
 	}
-	x := &BoundsPrediction{Handle: objref.Wrap(id)}
+	x := &BoundsPrediction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,26 +61,48 @@ func (x *BoundsPrediction) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BoundsPrediction) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBoundsPrediction creates a new BoundsPrediction.
 func NewBoundsPrediction() *BoundsPrediction {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNBoundsPrediction")), objc.RegisterName("new"))
 	return boundsPredictionAdopt(_id)
 }
 
-// the probability that a well-defined object is within the bounds — a number between 0.0 and 1.0.
-//
-// WithConfidence sets confidence and returns the receiver so calls can be chained.
+// WithNormalizedBounds bounds of the detected object in normalized coordinates where (0.0, 0.0) is the upper left corner, and (1.0, 1.0) is the lower right
+func (x *BoundsPrediction) WithNormalizedBounds(normalizedBounds corefoundation.CGRect) *BoundsPrediction {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNormalizedBounds:"), normalizedBounds)
+	return x
+}
+
+// WithConfidence the probability that a well-defined object is within the bounds — a number between 0.0 and 1.0.
 func (x *BoundsPrediction) WithConfidence(confidence float32) *BoundsPrediction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfidence:"), confidence)
 	return x
 }
 
-// the probability that a well-defined object is within the bounds — a number between 0.0 and 1.0.
+// NormalizedBounds bounds of the detected object in normalized coordinates where (0.0, 0.0) is the upper left corner, and (1.0, 1.0) is the lower right
+func (x *BoundsPrediction) NormalizedBounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("normalizedBounds"))
+	return _r
+}
+
+// SetNormalizedBounds wraps the corresponding Objective-C method.
+func (x *BoundsPrediction) SetNormalizedBounds(normalizedBounds corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNormalizedBounds:"), normalizedBounds)
+}
+
+// Confidence the probability that a well-defined object is within the bounds — a number between 0.0 and 1.0.
 func (x *BoundsPrediction) Confidence() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("confidence"))
 	return _r
 }
 
+// SetConfidence wraps the corresponding Objective-C method.
 func (x *BoundsPrediction) SetConfidence(confidence float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfidence:"), confidence)
 }
@@ -85,7 +110,10 @@ func (x *BoundsPrediction) SetConfidence(confidence float32) {
 // BoundsPredictionable is the interface implemented by [BoundsPrediction], for mocking and DI.
 type BoundsPredictionable interface {
 	obj.Object
+	WithNormalizedBounds(normalizedBounds corefoundation.CGRect) *BoundsPrediction
 	WithConfidence(confidence float32) *BoundsPrediction
+	NormalizedBounds() corefoundation.CGRect
+	SetNormalizedBounds(normalizedBounds corefoundation.CGRect)
 	Confidence() float32
 	SetConfidence(confidence float32)
 }

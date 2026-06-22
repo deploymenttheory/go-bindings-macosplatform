@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterOccupancySensing is an idiomatic wrapper over the Objective-C class MTRClusterOccupancySensing.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterOccupancySensing struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterOccupancySensingFromID adopts an existing Objective-C object as a MTRClusterOccupancySensing
@@ -23,7 +24,8 @@ func MTRClusterOccupancySensingFromID(id objc.ID) *MTRClusterOccupancySensing {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterOccupancySensing{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterOccupancySensing{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,29 +38,13 @@ func mTRClusterOccupancySensingAdopt(id objc.ID) *MTRClusterOccupancySensing {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterOccupancySensing{Handle: objref.Wrap(id)}
+	x := &MTRClusterOccupancySensing{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterOccupancySensing) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterOccupancySensing) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterOccupancySensing) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
-//
-// NewMTRClusterOccupancySensingWithDeviceEndpointIDQueue creates a new MTRClusterOccupancySensing.
+// NewMTRClusterOccupancySensingWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func NewMTRClusterOccupancySensingWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterOccupancySensing {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterOccupancySensing")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -72,216 +58,264 @@ func NewMTRClusterOccupancySensingWithDeviceEndpointQueue(device *MTRDevice, end
 	return mTRClusterOccupancySensingAdopt(_id)
 }
 
+// ReadAttributeOccupancyWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) ReadAttributeOccupancyWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOccupancyWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeOccupancySensorTypeWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) ReadAttributeOccupancySensorTypeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOccupancySensorTypeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeOccupancySensorTypeBitmapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) ReadAttributeOccupancySensorTypeBitmapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOccupancySensorTypeBitmapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeHoldTimeWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) ReadAttributeHoldTimeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeHoldTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeHoldTimeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributeHoldTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeHoldTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeHoldTimeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributeHoldTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeHoldTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeHoldTimeLimitsWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) ReadAttributeHoldTimeLimitsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeHoldTimeLimitsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributePIROccupiedToUnoccupiedDelayWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) ReadAttributePIROccupiedToUnoccupiedDelayWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePIROccupiedToUnoccupiedDelayWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributePIROccupiedToUnoccupiedDelayWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributePIROccupiedToUnoccupiedDelayWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePIROccupiedToUnoccupiedDelayWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributePIROccupiedToUnoccupiedDelayWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributePIROccupiedToUnoccupiedDelayWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePIROccupiedToUnoccupiedDelayWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributePIRUnoccupiedToOccupiedDelayWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) ReadAttributePIRUnoccupiedToOccupiedDelayWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePIRUnoccupiedToOccupiedDelayWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributePIRUnoccupiedToOccupiedDelayWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributePIRUnoccupiedToOccupiedDelayWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePIRUnoccupiedToOccupiedDelayWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributePIRUnoccupiedToOccupiedDelayWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributePIRUnoccupiedToOccupiedDelayWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePIRUnoccupiedToOccupiedDelayWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributePIRUnoccupiedToOccupiedThresholdWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) ReadAttributePIRUnoccupiedToOccupiedThresholdWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePIRUnoccupiedToOccupiedThresholdWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributePIRUnoccupiedToOccupiedThresholdWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributePIRUnoccupiedToOccupiedThresholdWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePIRUnoccupiedToOccupiedThresholdWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributePIRUnoccupiedToOccupiedThresholdWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributePIRUnoccupiedToOccupiedThresholdWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePIRUnoccupiedToOccupiedThresholdWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeUltrasonicOccupiedToUnoccupiedDelayWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) ReadAttributeUltrasonicOccupiedToUnoccupiedDelayWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUltrasonicOccupiedToUnoccupiedDelayWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeUltrasonicOccupiedToUnoccupiedDelayWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributeUltrasonicOccupiedToUnoccupiedDelayWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeUltrasonicOccupiedToUnoccupiedDelayWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeUltrasonicOccupiedToUnoccupiedDelayWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributeUltrasonicOccupiedToUnoccupiedDelayWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeUltrasonicOccupiedToUnoccupiedDelayWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeUltrasonicUnoccupiedToOccupiedDelayWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedToOccupiedDelayWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUltrasonicUnoccupiedToOccupiedDelayWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeUltrasonicUnoccupiedToOccupiedDelayWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributeUltrasonicUnoccupiedToOccupiedDelayWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeUltrasonicUnoccupiedToOccupiedDelayWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeUltrasonicUnoccupiedToOccupiedDelayWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributeUltrasonicUnoccupiedToOccupiedDelayWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeUltrasonicUnoccupiedToOccupiedDelayWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeUltrasonicUnoccupiedToOccupiedThresholdWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedToOccupiedThresholdWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUltrasonicUnoccupiedToOccupiedThresholdWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeUltrasonicUnoccupiedToOccupiedThresholdWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributeUltrasonicUnoccupiedToOccupiedThresholdWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeUltrasonicUnoccupiedToOccupiedThresholdWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributeUltrasonicUnoccupiedToOccupiedThresholdWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributePhysicalContactOccupiedToUnoccupiedDelayWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) ReadAttributePhysicalContactOccupiedToUnoccupiedDelayWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePhysicalContactOccupiedToUnoccupiedDelayWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributePhysicalContactOccupiedToUnoccupiedDelayWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributePhysicalContactOccupiedToUnoccupiedDelayWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePhysicalContactOccupiedToUnoccupiedDelayWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributePhysicalContactOccupiedToUnoccupiedDelayWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributePhysicalContactOccupiedToUnoccupiedDelayWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePhysicalContactOccupiedToUnoccupiedDelayWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributePhysicalContactUnoccupiedToOccupiedDelayWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) ReadAttributePhysicalContactUnoccupiedToOccupiedDelayWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePhysicalContactUnoccupiedToOccupiedDelayWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributePhysicalContactUnoccupiedToOccupiedDelayWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributePhysicalContactUnoccupiedToOccupiedDelayWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePhysicalContactUnoccupiedToOccupiedDelayWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributePhysicalContactUnoccupiedToOccupiedDelayWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributePhysicalContactUnoccupiedToOccupiedDelayWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePhysicalContactUnoccupiedToOccupiedDelayWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributePhysicalContactUnoccupiedToOccupiedThresholdWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) ReadAttributePhysicalContactUnoccupiedToOccupiedThresholdWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePhysicalContactUnoccupiedToOccupiedThresholdWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributePhysicalContactUnoccupiedToOccupiedThresholdWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributePhysicalContactUnoccupiedToOccupiedThresholdWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributePhysicalContactUnoccupiedToOccupiedThresholdWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributePhysicalContactUnoccupiedToOccupiedThresholdWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributePirOccupiedToUnoccupiedDelayWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) ReadAttributePirOccupiedToUnoccupiedDelayWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePirOccupiedToUnoccupiedDelayWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributePirOccupiedToUnoccupiedDelayWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributePirOccupiedToUnoccupiedDelayWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePirOccupiedToUnoccupiedDelayWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributePirOccupiedToUnoccupiedDelayWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributePirOccupiedToUnoccupiedDelayWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePirOccupiedToUnoccupiedDelayWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributePirUnoccupiedToOccupiedDelayWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) ReadAttributePirUnoccupiedToOccupiedDelayWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePirUnoccupiedToOccupiedDelayWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributePirUnoccupiedToOccupiedDelayWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributePirUnoccupiedToOccupiedDelayWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePirUnoccupiedToOccupiedDelayWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributePirUnoccupiedToOccupiedDelayWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributePirUnoccupiedToOccupiedDelayWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePirUnoccupiedToOccupiedDelayWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributePirUnoccupiedToOccupiedThresholdWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) ReadAttributePirUnoccupiedToOccupiedThresholdWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePirUnoccupiedToOccupiedThresholdWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributePirUnoccupiedToOccupiedThresholdWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributePirUnoccupiedToOccupiedThresholdWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePirUnoccupiedToOccupiedThresholdWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributePirUnoccupiedToOccupiedThresholdWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOccupancySensing) WriteAttributePirUnoccupiedToOccupiedThresholdWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePirUnoccupiedToOccupiedThresholdWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
@@ -340,3 +374,7 @@ type MTRClusterOccupancySensingable interface {
 }
 
 var _ MTRClusterOccupancySensingable = (*MTRClusterOccupancySensing)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterOccupancySensing)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterOccupancySensing)(nil)

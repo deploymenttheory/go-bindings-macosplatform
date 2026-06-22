@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A read-only proxy object that represents a Photos asset or collection to create.
-//
 // ObjectPlaceholder is an idiomatic wrapper over the Objective-C class PHObjectPlaceholder.
+//
+// It embeds [Object], promoting that type's methods.
+//
+// A read-only proxy object that represents a Photos asset or collection to create.
 type ObjectPlaceholder struct {
-	objref.Handle
+	Object
 }
 
 // ObjectPlaceholderFromID adopts an existing Objective-C object as a ObjectPlaceholder
@@ -25,7 +26,8 @@ func ObjectPlaceholderFromID(id objc.ID) *ObjectPlaceholder {
 	if id == 0 {
 		return nil
 	}
-	x := &ObjectPlaceholder{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ObjectPlaceholder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func objectPlaceholderAdopt(id objc.ID) *ObjectPlaceholder {
 	if id == 0 {
 		return nil
 	}
-	x := &ObjectPlaceholder{Handle: objref.Wrap(id)}
+	x := &ObjectPlaceholder{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ObjectPlaceholder) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ObjectPlaceholder) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ObjectPlaceholder) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewObjectPlaceholder creates a new ObjectPlaceholder.
@@ -70,3 +58,5 @@ type ObjectPlaceholderable interface {
 }
 
 var _ ObjectPlaceholderable = (*ObjectPlaceholder)(nil)
+
+var _ ObjectProvider = (*ObjectPlaceholder)(nil)

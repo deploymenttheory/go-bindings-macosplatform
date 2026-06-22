@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The behavior of repetition to use when a symbol effect is animating.
-//
 // SymbolEffectOptionsRepeatBehavior is an idiomatic wrapper over the Objective-C class NSSymbolEffectOptionsRepeatBehavior.
+//
+// The behavior of repetition to use when a symbol effect is animating.
 type SymbolEffectOptionsRepeatBehavior struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SymbolEffectOptionsRepeatBehaviorFromID(id objc.ID) *SymbolEffectOptionsRep
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolEffectOptionsRepeatBehavior{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SymbolEffectOptionsRepeatBehavior{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func symbolEffectOptionsRepeatBehaviorAdopt(id objc.ID) *SymbolEffectOptionsRepe
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolEffectOptionsRepeatBehavior{Handle: objref.Wrap(id)}
+	x := &SymbolEffectOptionsRepeatBehavior{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *SymbolEffectOptionsRepeatBehavior) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *SymbolEffectOptionsRepeatBehavior) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SymbolEffectOptionsRepeatBehavior) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewSymbolEffectOptionsRepeatBehavior creates a new SymbolEffectOptionsRepeatBehavior.

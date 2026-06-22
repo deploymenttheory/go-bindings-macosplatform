@@ -8,15 +8,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// A formatter that provides localized descriptions of mass and weight values.
-//
 // MassFormatter is an idiomatic wrapper over the Objective-C class NSMassFormatter.
+//
+// It embeds [Formatter], promoting that type's methods.
+//
+// A formatter that provides localized descriptions of mass and weight values.
 type MassFormatter struct {
-	objref.Handle
+	Formatter
 }
 
 // MassFormatterFromID adopts an existing Objective-C object as a MassFormatter
@@ -25,7 +27,8 @@ func MassFormatterFromID(id objc.ID) *MassFormatter {
 	if id == 0 {
 		return nil
 	}
-	x := &MassFormatter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MassFormatter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func massFormatterAdopt(id objc.ID) *MassFormatter {
 	if id == 0 {
 		return nil
 	}
-	x := &MassFormatter{Handle: objref.Wrap(id)}
+	x := &MassFormatter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MassFormatter) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MassFormatter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MassFormatter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMassFormatter creates a new MassFormatter.
@@ -64,30 +53,31 @@ func NewMassFormatter() *MassFormatter {
 	return massFormatterAdopt(_id)
 }
 
-// WithNumberFormatter sets numberFormatter and returns the receiver so calls can be chained.
+// WithNumberFormatter sets the property and returns the receiver so calls can be chained.
 func (x *MassFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) *MassFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberFormatter:"), objref.IDOf(numberFormatter))
 	return x
 }
 
-// WithUnitStyle sets unitStyle and returns the receiver so calls can be chained.
+// WithUnitStyle sets the property and returns the receiver so calls can be chained.
 func (x *MassFormatter) WithUnitStyle(unitStyle FormattingUnitStyle) *MassFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitStyle:"), unitStyle)
 	return x
 }
 
-// WithForPersonMassUse sets forPersonMassUse and returns the receiver so calls can be chained.
+// WithForPersonMassUse sets the property and returns the receiver so calls can be chained.
 func (x *MassFormatter) WithForPersonMassUse(forPersonMassUse bool) *MassFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForPersonMassUse:"), forPersonMassUse)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *MassFormatter) WithScriptingProperties(scriptingProperties obj.Object) *MassFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// StringFromValueUnit wraps the corresponding Objective-C method.
 func (x *MassFormatter) StringFromValueUnit(value float64, unit MassFormatterUnit) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromValue:unit:"), value, unit)
 	if _r == 0 {
@@ -96,6 +86,7 @@ func (x *MassFormatter) StringFromValueUnit(value float64, unit MassFormatterUni
 	return purego.GoString(_r)
 }
 
+// StringFromKilograms wraps the corresponding Objective-C method.
 func (x *MassFormatter) StringFromKilograms(numberInKilograms float64) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromKilograms:"), numberInKilograms)
 	if _r == 0 {
@@ -104,6 +95,7 @@ func (x *MassFormatter) StringFromKilograms(numberInKilograms float64) string {
 	return purego.GoString(_r)
 }
 
+// UnitStringFromValueUnit wraps the corresponding Objective-C method.
 func (x *MassFormatter) UnitStringFromValueUnit(value float64, unit MassFormatterUnit) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unitStringFromValue:unit:"), value, unit)
 	if _r == 0 {
@@ -112,29 +104,46 @@ func (x *MassFormatter) UnitStringFromValueUnit(value float64, unit MassFormatte
 	return purego.GoString(_r)
 }
 
+// UnitStringFromKilogramsUsedUnit wraps the corresponding Objective-C method.
+func (x *MassFormatter) UnitStringFromKilogramsUsedUnit(numberInKilograms float64) (result string, unitp MassFormatterUnit) {
+	var _out0 MassFormatterUnit
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unitStringFromKilograms:usedUnit:"), numberInKilograms, unsafe.Pointer(&_out0))
+	_v := ""
+	if _r != 0 {
+		_v = purego.GoString(_r)
+	}
+	return _v, _out0
+}
+
+// NumberFormatter wraps the corresponding Objective-C method.
 func (x *MassFormatter) NumberFormatter() *NumberFormatter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberFormatter"))
 	return NumberFormatterFromID(_r)
 }
 
+// SetNumberFormatter wraps the corresponding Objective-C method.
 func (x *MassFormatter) SetNumberFormatter(numberFormatter *NumberFormatter) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberFormatter:"), objref.IDOf(numberFormatter))
 }
 
+// UnitStyle wraps the corresponding Objective-C method.
 func (x *MassFormatter) UnitStyle() FormattingUnitStyle {
 	_r := objc.Send[FormattingUnitStyle](objref.IDOf(x), objc.RegisterName("unitStyle"))
 	return _r
 }
 
+// SetUnitStyle wraps the corresponding Objective-C method.
 func (x *MassFormatter) SetUnitStyle(unitStyle FormattingUnitStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitStyle:"), unitStyle)
 }
 
+// IsForPersonMassUse wraps the corresponding Objective-C method.
 func (x *MassFormatter) IsForPersonMassUse() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isForPersonMassUse"))
 	return _r
 }
 
+// SetForPersonMassUse wraps the corresponding Objective-C method.
 func (x *MassFormatter) SetForPersonMassUse(forPersonMassUse bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForPersonMassUse:"), forPersonMassUse)
 }
@@ -149,6 +158,7 @@ type MassFormatterable interface {
 	StringFromValueUnit(value float64, unit MassFormatterUnit) string
 	StringFromKilograms(numberInKilograms float64) string
 	UnitStringFromValueUnit(value float64, unit MassFormatterUnit) string
+	UnitStringFromKilogramsUsedUnit(numberInKilograms float64) (result string, unitp MassFormatterUnit)
 	NumberFormatter() *NumberFormatter
 	SetNumberFormatter(numberFormatter *NumberFormatter)
 	UnitStyle() FormattingUnitStyle
@@ -158,3 +168,5 @@ type MassFormatterable interface {
 }
 
 var _ MassFormatterable = (*MassFormatter)(nil)
+
+var _ FormatterProvider = (*MassFormatter)(nil)

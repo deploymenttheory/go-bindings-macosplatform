@@ -13,6 +13,8 @@ import (
 )
 
 // ItemAttributes is an idiomatic wrapper over the Objective-C class FSItemAttributes.
+//
+// ItemAttributes is an abstract base — you do not construct it directly. Construct one of [ItemSetAttributesRequest] and pass it where a ItemAttributes is accepted.
 type ItemAttributes struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func ItemAttributesFromID(id objc.ID) *ItemAttributes {
 	if id == 0 {
 		return nil
 	}
-	x := &ItemAttributes{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ItemAttributes{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func itemAttributesAdopt(id objc.ID) *ItemAttributes {
 	if id == 0 {
 		return nil
 	}
-	x := &ItemAttributes{Handle: objref.Wrap(id)}
+	x := &ItemAttributes{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,235 +60,223 @@ func (x *ItemAttributes) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewItemAttributes creates a new ItemAttributes.
-func NewItemAttributes() *ItemAttributes {
-	_id := objc.Send[objc.ID](objc.ID(_class("FSItemAttributes")), objc.RegisterName("new"))
-	return itemAttributesAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ItemAttributes) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The user identifier.
-//
-// WithUid sets uid and returns the receiver so calls can be chained.
+// WithUid the user identifier.
 func (x *ItemAttributes) WithUid(uid uint32) *ItemAttributes {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUid:"), uid)
 	return x
 }
 
-// The group identifier.
-//
-// WithGid sets gid and returns the receiver so calls can be chained.
+// WithGid the group identifier.
 func (x *ItemAttributes) WithGid(gid uint32) *ItemAttributes {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGid:"), gid)
 	return x
 }
 
-// The mode of the item. The mode is often used for `setuid`, `setgid`, and `sticky` bits.
-//
-// WithMode sets mode and returns the receiver so calls can be chained.
+// WithMode the mode of the item. The mode is often used for `setuid`, `setgid`, and `sticky` bits.
 func (x *ItemAttributes) WithMode(mode uint32) *ItemAttributes {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 	return x
 }
 
-// The item type, such as a regular file, directory, or symbolic link.
-//
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithType the item type, such as a regular file, directory, or symbolic link.
 func (x *ItemAttributes) WithType(type_ ItemType) *ItemAttributes {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
-// The number of hard links to the item.
-//
-// WithLinkCount sets linkCount and returns the receiver so calls can be chained.
+// WithLinkCount the number of hard links to the item.
 func (x *ItemAttributes) WithLinkCount(linkCount uint32) *ItemAttributes {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinkCount:"), linkCount)
 	return x
 }
 
-// The item's behavior flags. See `st_flags` in `stat.h` for flag definitions.
-//
-// WithFlags sets flags and returns the receiver so calls can be chained.
+// WithFlags the item's behavior flags. See `st_flags` in `stat.h` for flag definitions.
 func (x *ItemAttributes) WithFlags(flags uint32) *ItemAttributes {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlags:"), flags)
 	return x
 }
 
-// The item's size.
-//
-// WithSize sets size and returns the receiver so calls can be chained.
+// WithSize the item's size.
 func (x *ItemAttributes) WithSize(size uint64) *ItemAttributes {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
 	return x
 }
 
-// The item's allocated size.
-//
-// WithAllocSize sets allocSize and returns the receiver so calls can be chained.
+// WithAllocSize the item's allocated size.
 func (x *ItemAttributes) WithAllocSize(allocSize uint64) *ItemAttributes {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllocSize:"), allocSize)
 	return x
 }
 
-// The item's file identifier.
-//
-// WithFileID sets fileID and returns the receiver so calls can be chained.
+// WithFileID the item's file identifier.
 func (x *ItemAttributes) WithFileID(fileID ItemID) *ItemAttributes {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileID:"), fileID)
 	return x
 }
 
-// The identifier of the item's parent.
-//
-// WithParentID sets parentID and returns the receiver so calls can be chained.
+// WithParentID the identifier of the item's parent.
 func (x *ItemAttributes) WithParentID(parentID ItemID) *ItemAttributes {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentID:"), parentID)
 	return x
 }
 
-// A Boolean value that indicates whether the item supports a limited set of extended attributes.
-//
-// WithSupportsLimitedXAttrs sets supportsLimitedXAttrs and returns the receiver so calls can be chained.
+// WithSupportsLimitedXAttrs a Boolean value that indicates whether the item supports a limited set of extended attributes.
 func (x *ItemAttributes) WithSupportsLimitedXAttrs(supportsLimitedXAttrs bool) *ItemAttributes {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsLimitedXAttrs:"), supportsLimitedXAttrs)
 	return x
 }
 
-// A Boolean value that indicates whether the file system overrides the per-volume settings for kernel offloaded I/O for a specific file. This property has no meaning if the volume doesn't conform to “FSVolumeKernelOffloadedIOOperations“.
-//
-// WithInhibitKernelOffloadedIO sets inhibitKernelOffloadedIO and returns the receiver so calls can be chained.
+// WithInhibitKernelOffloadedIO a Boolean value that indicates whether the file system overrides the per-volume settings for kernel offloaded I/O for a specific file. This property has no meaning if the volume doesn't conform to “FSVolumeKernelOffloadedIOOperations“.
 func (x *ItemAttributes) WithInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool) *ItemAttributes {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInhibitKernelOffloadedIO:"), inhibitKernelOffloadedIO)
 	return x
 }
 
-// Marks all attributes inactive.
+// InvalidateAllProperties marks all attributes inactive.
 func (x *ItemAttributes) InvalidateAllProperties() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateAllProperties"))
 }
 
-// Returns a Boolean value that indicates whether the attribute is valid. If the value returned by this method is `YES` (Objective-C) or `true` (Swift), a caller can safely use the given attribute.
+// IsValid returns a Boolean value that indicates whether the attribute is valid. If the value returned by this method is `YES` (Objective-C) or `true` (Swift), a caller can safely use the given attribute.
 func (x *ItemAttributes) IsValid(attribute ItemAttribute) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isValid:"), attribute)
 	return _r
 }
 
-// The user identifier.
+// Uid the user identifier.
 func (x *ItemAttributes) Uid() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("uid"))
 	return _r
 }
 
+// SetUid wraps the corresponding Objective-C method.
 func (x *ItemAttributes) SetUid(uid uint32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUid:"), uid)
 }
 
-// The group identifier.
+// Gid the group identifier.
 func (x *ItemAttributes) Gid() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("gid"))
 	return _r
 }
 
+// SetGid wraps the corresponding Objective-C method.
 func (x *ItemAttributes) SetGid(gid uint32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGid:"), gid)
 }
 
-// The mode of the item. The mode is often used for `setuid`, `setgid`, and `sticky` bits.
+// Mode the mode of the item. The mode is often used for `setuid`, `setgid`, and `sticky` bits.
 func (x *ItemAttributes) Mode() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("mode"))
 	return _r
 }
 
+// SetMode wraps the corresponding Objective-C method.
 func (x *ItemAttributes) SetMode(mode uint32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 }
 
-// The item type, such as a regular file, directory, or symbolic link.
+// Type the item type, such as a regular file, directory, or symbolic link.
 func (x *ItemAttributes) Type() ItemType {
 	_r := objc.Send[ItemType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
+// SetType wraps the corresponding Objective-C method.
 func (x *ItemAttributes) SetType(type_ ItemType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 }
 
-// The number of hard links to the item.
+// LinkCount the number of hard links to the item.
 func (x *ItemAttributes) LinkCount() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("linkCount"))
 	return _r
 }
 
+// SetLinkCount wraps the corresponding Objective-C method.
 func (x *ItemAttributes) SetLinkCount(linkCount uint32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinkCount:"), linkCount)
 }
 
-// The item's behavior flags. See `st_flags` in `stat.h` for flag definitions.
+// Flags the item's behavior flags. See `st_flags` in `stat.h` for flag definitions.
 func (x *ItemAttributes) Flags() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("flags"))
 	return _r
 }
 
+// SetFlags wraps the corresponding Objective-C method.
 func (x *ItemAttributes) SetFlags(flags uint32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlags:"), flags)
 }
 
-// The item's size.
+// Size the item's size.
 func (x *ItemAttributes) Size() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("size"))
 	return _r
 }
 
+// SetSize wraps the corresponding Objective-C method.
 func (x *ItemAttributes) SetSize(size uint64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
 }
 
-// The item's allocated size.
+// AllocSize the item's allocated size.
 func (x *ItemAttributes) AllocSize() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("allocSize"))
 	return _r
 }
 
+// SetAllocSize wraps the corresponding Objective-C method.
 func (x *ItemAttributes) SetAllocSize(allocSize uint64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllocSize:"), allocSize)
 }
 
-// The item's file identifier.
+// FileID the item's file identifier.
 func (x *ItemAttributes) FileID() ItemID {
 	_r := objc.Send[ItemID](objref.IDOf(x), objc.RegisterName("fileID"))
 	return _r
 }
 
+// SetFileID wraps the corresponding Objective-C method.
 func (x *ItemAttributes) SetFileID(fileID ItemID) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileID:"), fileID)
 }
 
-// The identifier of the item's parent.
+// ParentID the identifier of the item's parent.
 func (x *ItemAttributes) ParentID() ItemID {
 	_r := objc.Send[ItemID](objref.IDOf(x), objc.RegisterName("parentID"))
 	return _r
 }
 
+// SetParentID wraps the corresponding Objective-C method.
 func (x *ItemAttributes) SetParentID(parentID ItemID) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentID:"), parentID)
 }
 
-// A Boolean value that indicates whether the item supports a limited set of extended attributes.
+// SupportsLimitedXAttrs a Boolean value that indicates whether the item supports a limited set of extended attributes.
 func (x *ItemAttributes) SupportsLimitedXAttrs() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsLimitedXAttrs"))
 	return _r
 }
 
+// SetSupportsLimitedXAttrs wraps the corresponding Objective-C method.
 func (x *ItemAttributes) SetSupportsLimitedXAttrs(supportsLimitedXAttrs bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsLimitedXAttrs:"), supportsLimitedXAttrs)
 }
 
-// A Boolean value that indicates whether the file system overrides the per-volume settings for kernel offloaded I/O for a specific file. This property has no meaning if the volume doesn't conform to “FSVolumeKernelOffloadedIOOperations“.
+// InhibitKernelOffloadedIO a Boolean value that indicates whether the file system overrides the per-volume settings for kernel offloaded I/O for a specific file. This property has no meaning if the volume doesn't conform to “FSVolumeKernelOffloadedIOOperations“.
 func (x *ItemAttributes) InhibitKernelOffloadedIO() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("inhibitKernelOffloadedIO"))
 	return _r
 }
 
+// SetInhibitKernelOffloadedIO wraps the corresponding Objective-C method.
 func (x *ItemAttributes) SetInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInhibitKernelOffloadedIO:"), inhibitKernelOffloadedIO)
 }
@@ -333,3 +325,10 @@ type ItemAttributesable interface {
 }
 
 var _ ItemAttributesable = (*ItemAttributes)(nil)
+
+// isItemAttributes marks ItemAttributes — and, by embedding promotion, its
+// subclasses — as a member of the ItemAttributes hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ItemAttributes) isItemAttributes() {}
+
+var _ ItemAttributesProvider = (*ItemAttributes)(nil)

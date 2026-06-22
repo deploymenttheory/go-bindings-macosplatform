@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that encapsulates output for various WebAuthn extensions during passkey assertion.
-//
 // PasskeyAssertionCredentialExtensionOutput is an idiomatic wrapper over the Objective-C class ASPasskeyAssertionCredentialExtensionOutput.
+//
+// A type that encapsulates output for various WebAuthn extensions during passkey assertion.
 type PasskeyAssertionCredentialExtensionOutput struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PasskeyAssertionCredentialExtensionOutputFromID(id objc.ID) *PasskeyAsserti
 	if id == 0 {
 		return nil
 	}
-	x := &PasskeyAssertionCredentialExtensionOutput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PasskeyAssertionCredentialExtensionOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func passkeyAssertionCredentialExtensionOutputAdopt(id objc.ID) *PasskeyAssertio
 	if id == 0 {
 		return nil
 	}
-	x := &PasskeyAssertionCredentialExtensionOutput{Handle: objref.Wrap(id)}
+	x := &PasskeyAssertionCredentialExtensionOutput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +60,12 @@ func (x *PasskeyAssertionCredentialExtensionOutput) IsKind(className string) boo
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PasskeyAssertionCredentialExtensionOutput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPasskeyAssertionCredentialExtensionOutputWithLargeBlobOutput creates a new PasskeyAssertionCredentialExtensionOutput.
 func NewPasskeyAssertionCredentialExtensionOutputWithLargeBlobOutput(largeBlob *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) *PasskeyAssertionCredentialExtensionOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasskeyAssertionCredentialExtensionOutput")), objc.RegisterName("alloc"))
@@ -65,6 +73,7 @@ func NewPasskeyAssertionCredentialExtensionOutputWithLargeBlobOutput(largeBlob *
 	return passkeyAssertionCredentialExtensionOutputAdopt(_id)
 }
 
+// LargeBlobAssertionOutput wraps the corresponding Objective-C method.
 func (x *PasskeyAssertionCredentialExtensionOutput) LargeBlobAssertionOutput() *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("largeBlobAssertionOutput"))
 	return AuthorizationPublicKeyCredentialLargeBlobAssertionOutputFromID(_r)

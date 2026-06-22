@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An icon associated with an action.
-//
 // NotificationActionIcon is an idiomatic wrapper over the Objective-C class UNNotificationActionIcon.
+//
+// An icon associated with an action.
 type NotificationActionIcon struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NotificationActionIconFromID(id objc.ID) *NotificationActionIcon {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationActionIcon{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NotificationActionIcon{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func notificationActionIconAdopt(id objc.ID) *NotificationActionIcon {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationActionIcon{Handle: objref.Wrap(id)}
+	x := &NotificationActionIcon{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *NotificationActionIcon) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *NotificationActionIcon) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationActionIcon) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewNotificationActionIcon creates a new NotificationActionIcon.

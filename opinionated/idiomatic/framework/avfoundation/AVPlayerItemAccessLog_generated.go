@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object used to retrieve the access log associated with a player item.
-//
 // PlayerItemAccessLog is an idiomatic wrapper over the Objective-C class AVPlayerItemAccessLog.
+//
+// An object used to retrieve the access log associated with a player item.
 type PlayerItemAccessLog struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PlayerItemAccessLogFromID(id objc.ID) *PlayerItemAccessLog {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemAccessLog{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlayerItemAccessLog{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func playerItemAccessLogAdopt(id objc.ID) *PlayerItemAccessLog {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemAccessLog{Handle: objref.Wrap(id)}
+	x := &PlayerItemAccessLog{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *PlayerItemAccessLog) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerItemAccessLog) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPlayerItemAccessLog creates a new PlayerItemAccessLog.
 func NewPlayerItemAccessLog() *PlayerItemAccessLog {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemAccessLog")), objc.RegisterName("new"))
 	return playerItemAccessLogAdopt(_id)
 }
 
-// Returns a serialized representation of the access log in the Extended Log File Format.
+// ExtendedLogData returns a serialized representation of the access log in the Extended Log File Format.
 func (x *PlayerItemAccessLog) ExtendedLogData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendedLogData"))
 	return obj.Wrap(_r)
 }
 
-// Returns the NSStringEncoding for extendedLogData, see above. A string suitable for console output is obtainable by: [[NSString alloc] initWithData:[myLog extendedLogData] encoding:[myLog extendedLogDataStringEncoding]]
+// ExtendedLogDataStringEncoding returns the NSStringEncoding for extendedLogData, see above. A string suitable for console output is obtainable by: [[NSString alloc] initWithData:[myLog extendedLogData] encoding:[myLog extendedLogDataStringEncoding]]
 func (x *PlayerItemAccessLog) ExtendedLogDataStringEncoding() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("extendedLogDataStringEncoding"))
 	return _r
 }
 
-// An ordered collection of AVPlayerItemAccessLogEvent instances. An ordered collection of AVPlayerItemAccessLogEvent instances that represent the chronological sequence of events contained in the access log. This property is not observable.
+// Events an ordered collection of AVPlayerItemAccessLogEvent instances. An ordered collection of AVPlayerItemAccessLogEvent instances that represent the chronological sequence of events contained in the access log. This property is not observable.
 //
 // Events returns the collection as a Go slice.
 func (x *PlayerItemAccessLog) Events() []*PlayerItemAccessLogEvent {

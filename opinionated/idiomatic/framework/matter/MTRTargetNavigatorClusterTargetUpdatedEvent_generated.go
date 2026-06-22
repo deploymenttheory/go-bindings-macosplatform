@@ -23,7 +23,8 @@ func MTRTargetNavigatorClusterTargetUpdatedEventFromID(id objc.ID) *MTRTargetNav
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTargetNavigatorClusterTargetUpdatedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRTargetNavigatorClusterTargetUpdatedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRTargetNavigatorClusterTargetUpdatedEventAdopt(id objc.ID) *MTRTargetNavi
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTargetNavigatorClusterTargetUpdatedEvent{Handle: objref.Wrap(id)}
+	x := &MTRTargetNavigatorClusterTargetUpdatedEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,47 +58,59 @@ func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) IsKind(className string) b
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRTargetNavigatorClusterTargetUpdatedEvent creates a new MTRTargetNavigatorClusterTargetUpdatedEvent.
 func NewMTRTargetNavigatorClusterTargetUpdatedEvent() *MTRTargetNavigatorClusterTargetUpdatedEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRTargetNavigatorClusterTargetUpdatedEvent")), objc.RegisterName("new"))
 	return mTRTargetNavigatorClusterTargetUpdatedEventAdopt(_id)
 }
 
-// WithCurrentTarget sets currentTarget and returns the receiver so calls can be chained.
+// WithCurrentTarget sets the property and returns the receiver so calls can be chained.
 func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) WithCurrentTarget(currentTarget obj.Object) *MTRTargetNavigatorClusterTargetUpdatedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentTarget:"), objref.IDOf(currentTarget))
 	return x
 }
 
-// WithData sets data and returns the receiver so calls can be chained.
+// WithData sets the property and returns the receiver so calls can be chained.
 func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) WithData(data obj.Object) *MTRTargetNavigatorClusterTargetUpdatedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
 	return x
 }
 
+// TargetList wraps the corresponding Objective-C method.
 func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) TargetList() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetList"))
 	return obj.Wrap(_r)
 }
 
+// SetTargetList wraps the corresponding Objective-C method.
 func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) SetTargetList(targetList obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetList:"), objref.IDOf(targetList))
 }
 
+// CurrentTarget wraps the corresponding Objective-C method.
 func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) CurrentTarget() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentTarget"))
 	return obj.Wrap(_r)
 }
 
+// SetCurrentTarget wraps the corresponding Objective-C method.
 func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) SetCurrentTarget(currentTarget obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentTarget:"), objref.IDOf(currentTarget))
 }
 
+// Data wraps the corresponding Objective-C method.
 func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
+// SetData wraps the corresponding Objective-C method.
 func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) SetData(data obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
 }

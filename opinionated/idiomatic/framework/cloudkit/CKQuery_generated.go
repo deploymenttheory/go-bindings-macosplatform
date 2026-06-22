@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A query that describes the criteria to apply when searching for records in a database.
-//
 // Query is an idiomatic wrapper over the Objective-C class CKQuery.
+//
+// A query that describes the criteria to apply when searching for records in a database.
 type Query struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func QueryFromID(id objc.ID) *Query {
 	if id == 0 {
 		return nil
 	}
-	x := &Query{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Query{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func queryAdopt(id objc.ID) *Query {
 	if id == 0 {
 		return nil
 	}
-	x := &Query{Handle: objref.Wrap(id)}
+	x := &Query{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,46 +60,46 @@ func (x *Query) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an operation group from a serialized instance.
-//
-// NewQueryWithCoder creates a new Query.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Query) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewQueryWithCoder creates an operation group from a serialized instance.
 func NewQueryWithCoder(aDecoder obj.Object) *Query {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKQuery")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return queryAdopt(_id)
 }
 
-// Creates a query with the specified record type and predicate.
-//
-// NewQueryWithRecordTypePredicate creates a new Query.
+// NewQueryWithRecordTypePredicate creates a query with the specified record type and predicate.
 func NewQueryWithRecordTypePredicate(recordType obj.Object, predicate obj.Object) *Query {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKQuery")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordType:predicate:"), objref.IDOf(recordType), objref.IDOf(predicate))
 	return queryAdopt(_id)
 }
 
-// The sort descriptors for organizing the query’s results.
-//
-// WithSortDescriptors sets the collection and returns the receiver so calls can be chained.
+// WithSortDescriptors the sort descriptors for organizing the query’s results.
 func (x *Query) WithSortDescriptors(items ...obj.Object) *Query {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortDescriptors:"), _arr)
 	return x
 }
 
-// The record type to search. A query's results include only records of the specified type. The record type is an app-specific string that you use to distinguish among the records of your app. The records of a particular type all represent different instances of the same information. For example, an employee record type might store the employee's name, phone number, and a reference to the employee's manager.
+// RecordType the record type to search. A query's results include only records of the specified type. The record type is an app-specific string that you use to distinguish among the records of your app. The records of a particular type all represent different instances of the same information. For example, an employee record type might store the employee's name, phone number, and a reference to the employee's manager.
 func (x *Query) RecordType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordType"))
 	return obj.Wrap(_r)
 }
 
-// The predicate to use for matching records. A predicate contains one or more expressions that evaluate to <doc://com.apple.documentation/documentation/swift/true> or <doc://com.apple.documentation/documentation/swift/false>. Expressions are often value-based comparisons, but predicates support other types of operators, including string comparisons and aggregate operations. For guidelines on how to construct predicates for your queries, see <doc:CKQuery#Predicate-Rules-for-Query-Objects>.
+// Predicate the predicate to use for matching records. A predicate contains one or more expressions that evaluate to <doc://com.apple.documentation/documentation/swift/true> or <doc://com.apple.documentation/documentation/swift/false>. Expressions are often value-based comparisons, but predicates support other types of operators, including string comparisons and aggregate operations. For guidelines on how to construct predicates for your queries, see <doc:CKQuery#Predicate-Rules-for-Query-Objects>.
 func (x *Query) Predicate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
 	return obj.Wrap(_r)
 }
 
-// The sort descriptors for organizing the query's results. You can add sort descriptors to a query and change them later as necessary. Each sort descriptor contains a field name of the intended record type and information about whether to sort values in that field in ascending or descending order. The default value of this property is `nil`, which means that records return in an indeterminate order. The order of the items in the array defines the order that CloudKit applies the sort descriptors to the results. In other words, CloudKit applies the first sort descriptor in the array, then the second sort descriptor, if necessary, then the third, and so on.
+// SortDescriptors the sort descriptors for organizing the query's results. You can add sort descriptors to a query and change them later as necessary. Each sort descriptor contains a field name of the intended record type and information about whether to sort values in that field in ascending or descending order. The default value of this property is `nil`, which means that records return in an indeterminate order. The order of the items in the array defines the order that CloudKit applies the sort descriptors to the results. In other words, CloudKit applies the first sort descriptor in the array, then the second sort descriptor, if necessary, then the third, and so on.
 //
 // SortDescriptors returns the collection as a Go slice.
 func (x *Query) SortDescriptors() []obj.Object {
@@ -105,6 +107,7 @@ func (x *Query) SortDescriptors() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetSortDescriptors wraps the corresponding Objective-C method.
 func (x *Query) SetSortDescriptors(sortDescriptors []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortDescriptors:"), purego.SliceToNSArray(sortDescriptors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }

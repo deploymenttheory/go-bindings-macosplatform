@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class to subclass for writing custom patches.
-//
 // QCPlugIn is an idiomatic wrapper over the Objective-C class QCPlugIn.
+//
+// A base class to subclass for writing custom patches.
 type QCPlugIn struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func QCPlugInFromID(id objc.ID) *QCPlugIn {
 	if id == 0 {
 		return nil
 	}
-	x := &QCPlugIn{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QCPlugIn{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func qCPlugInAdopt(id objc.ID) *QCPlugIn {
 	if id == 0 {
 		return nil
 	}
-	x := &QCPlugIn{Handle: objref.Wrap(id)}
+	x := &QCPlugIn{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,51 +60,58 @@ func (x *QCPlugIn) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *QCPlugIn) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewQCPlugIn creates a new QCPlugIn.
 func NewQCPlugIn() *QCPlugIn {
 	_id := objc.Send[objc.ID](objc.ID(_class("QCPlugIn")), objc.RegisterName("new"))
 	return qCPlugInAdopt(_id)
 }
 
-// Allows you to perform custom setup tasks before the Quartz Composer engine starts rendering.
+// StartExecution allows you to perform custom setup tasks before the Quartz Composer engine starts rendering.
 func (x *QCPlugIn) StartExecution(context_ obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startExecution:"), objref.IDOf(context_))
 	return _r
 }
 
-// Allows you to perform custom tasks when the execution of the QCPlugIn object is resumed.
+// EnableExecution allows you to perform custom tasks when the execution of the QCPlugIn object is resumed.
 func (x *QCPlugIn) EnableExecution(context_ obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enableExecution:"), objref.IDOf(context_))
 }
 
+// ExecutionTimeForContextAtTimeWithArguments wraps the corresponding Objective-C method.
 func (x *QCPlugIn) ExecutionTimeForContextAtTimeWithArguments(context_ obj.Object, time_ float64, arguments obj.Object) float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("executionTimeForContext:atTime:withArguments:"), objref.IDOf(context_), time_, objref.IDOf(arguments))
 	return _r
 }
 
-// Performs the processing or rendering tasks appropriate for the custom patch.
+// ExecuteAtTimeWithArguments performs the processing or rendering tasks appropriate for the custom patch.
 func (x *QCPlugIn) ExecuteAtTimeWithArguments(context_ obj.Object, time_ float64, arguments obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("execute:atTime:withArguments:"), objref.IDOf(context_), time_, objref.IDOf(arguments))
 	return _r
 }
 
-// Allows you to perform custom tasks when the execution of the QCPlugIn object is paused.
+// DisableExecution allows you to perform custom tasks when the execution of the QCPlugIn object is paused.
 func (x *QCPlugIn) DisableExecution(context_ obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disableExecution:"), objref.IDOf(context_))
 }
 
-// Allows you to perform custom tasks when the QCPlugIn object stops executing.
+// StopExecution allows you to perform custom tasks when the QCPlugIn object stops executing.
 func (x *QCPlugIn) StopExecution(context_ obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopExecution:"), objref.IDOf(context_))
 }
 
-// A method implemented to override serialization.
+// SerializedValueForKey a method implemented to override serialization.
 func (x *QCPlugIn) SerializedValueForKey(key string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serializedValueForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
-// Provides custom deserialization for patch internal settings that were previously serialized using the method serializedValueForKey:.
+// SetSerializedValueForKey provides custom deserialization for patch internal settings that were previously serialized using the method serializedValueForKey:.
 func (x *QCPlugIn) SetSerializedValueForKey(serializedValue obj.Object, key string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSerializedValue:forKey:"), objref.IDOf(serializedValue), purego.NSString(key))
 }

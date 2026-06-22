@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A sample with values from a short list of possible values.
-//
 // CategorySample is an idiomatic wrapper over the Objective-C class HKCategorySample.
+//
+// It embeds [Sample], promoting that type's methods.
+//
+// A sample with values from a short list of possible values.
 type CategorySample struct {
-	objref.Handle
+	Sample
 }
 
 // CategorySampleFromID adopts an existing Objective-C object as a CategorySample
@@ -25,7 +26,8 @@ func CategorySampleFromID(id objc.ID) *CategorySample {
 	if id == 0 {
 		return nil
 	}
-	x := &CategorySample{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CategorySample{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func categorySampleAdopt(id objc.ID) *CategorySample {
 	if id == 0 {
 		return nil
 	}
-	x := &CategorySample{Handle: objref.Wrap(id)}
+	x := &CategorySample{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CategorySample) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CategorySample) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CategorySample) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCategorySample creates a new CategorySample.
@@ -64,12 +52,13 @@ func NewCategorySample() *CategorySample {
 	return categorySampleAdopt(_id)
 }
 
+// CategoryType wraps the corresponding Objective-C method.
 func (x *CategorySample) CategoryType() *CategoryType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("categoryType"))
 	return CategoryTypeFromID(_r)
 }
 
-// The preferred enum for the value is determined by the receiver's category type.
+// Value the preferred enum for the value is determined by the receiver's category type.
 func (x *CategorySample) Value() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("value"))
 	return _r
@@ -83,3 +72,7 @@ type CategorySampleable interface {
 }
 
 var _ CategorySampleable = (*CategorySample)(nil)
+
+var _ SampleProvider = (*CategorySample)(nil)
+
+var _ ObjectProvider = (*CategorySample)(nil)

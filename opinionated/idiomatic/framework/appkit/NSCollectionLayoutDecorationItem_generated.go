@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object used to add a background to a section of a collection view.
-//
 // CollectionLayoutDecorationItem is an idiomatic wrapper over the Objective-C class NSCollectionLayoutDecorationItem.
+//
+// It embeds [CollectionLayoutItem], promoting that type's methods.
+//
+// An object used to add a background to a section of a collection view.
 type CollectionLayoutDecorationItem struct {
-	objref.Handle
+	CollectionLayoutItem
 }
 
 // CollectionLayoutDecorationItemFromID adopts an existing Objective-C object as a CollectionLayoutDecorationItem
@@ -25,7 +26,8 @@ func CollectionLayoutDecorationItemFromID(id objc.ID) *CollectionLayoutDecoratio
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionLayoutDecorationItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollectionLayoutDecorationItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func collectionLayoutDecorationItemAdopt(id objc.ID) *CollectionLayoutDecoration
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionLayoutDecorationItem{Handle: objref.Wrap(id)}
+	x := &CollectionLayoutDecorationItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CollectionLayoutDecorationItem) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CollectionLayoutDecorationItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CollectionLayoutDecorationItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCollectionLayoutDecorationItem creates a new CollectionLayoutDecorationItem.
@@ -64,31 +52,30 @@ func NewCollectionLayoutDecorationItem() *CollectionLayoutDecorationItem {
 	return collectionLayoutDecorationItemAdopt(_id)
 }
 
-// The vertical stacking order of the decoration item in relation to other items in the section.
-//
-// WithZIndex sets zIndex and returns the receiver so calls can be chained.
+// WithZIndex the vertical stacking order of the decoration item in relation to other items in the section.
 func (x *CollectionLayoutDecorationItem) WithZIndex(zIndex int) *CollectionLayoutDecorationItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZIndex:"), zIndex)
 	return x
 }
 
-// The amount of space added around the boundaries of the item between other items and this item’s container.
-//
-// WithEdgeSpacing sets edgeSpacing and returns the receiver so calls can be chained.
+// WithEdgeSpacing the amount of space added around the boundaries of the item between other items and this item’s container.
 func (x *CollectionLayoutDecorationItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutDecorationItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
 	return x
 }
 
+// ZIndex wraps the corresponding Objective-C method.
 func (x *CollectionLayoutDecorationItem) ZIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("zIndex"))
 	return _r
 }
 
+// SetZIndex wraps the corresponding Objective-C method.
 func (x *CollectionLayoutDecorationItem) SetZIndex(zIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZIndex:"), zIndex)
 }
 
+// ElementKind wraps the corresponding Objective-C method.
 func (x *CollectionLayoutDecorationItem) ElementKind() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementKind"))
 	if _r == 0 {
@@ -108,3 +95,5 @@ type CollectionLayoutDecorationItemable interface {
 }
 
 var _ CollectionLayoutDecorationItemable = (*CollectionLayoutDecorationItem)(nil)
+
+var _ CollectionLayoutItemProvider = (*CollectionLayoutDecorationItem)(nil)

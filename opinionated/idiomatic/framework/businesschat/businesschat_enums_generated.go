@@ -16,6 +16,8 @@ const (
 	ChatButtonStyleDark  ChatButtonStyle = 1
 )
 
+// String returns the ChatButtonStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ChatButtonStyle) String() string {
 	switch e {
 	case ChatButtonStyleLight:

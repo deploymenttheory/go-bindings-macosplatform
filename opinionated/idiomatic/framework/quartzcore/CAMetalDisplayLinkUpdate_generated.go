@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Stores information about a single update from a Metal display link instance.
-//
 // MetalDisplayLinkUpdate is an idiomatic wrapper over the Objective-C class CAMetalDisplayLinkUpdate.
+//
+// Stores information about a single update from a Metal display link instance.
 type MetalDisplayLinkUpdate struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MetalDisplayLinkUpdateFromID(id objc.ID) *MetalDisplayLinkUpdate {
 	if id == 0 {
 		return nil
 	}
-	x := &MetalDisplayLinkUpdate{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetalDisplayLinkUpdate{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func metalDisplayLinkUpdateAdopt(id objc.ID) *MetalDisplayLinkUpdate {
 	if id == 0 {
 		return nil
 	}
-	x := &MetalDisplayLinkUpdate{Handle: objref.Wrap(id)}
+	x := &MetalDisplayLinkUpdate{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,25 @@ func (x *MetalDisplayLinkUpdate) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetalDisplayLinkUpdate) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMetalDisplayLinkUpdate creates a new MetalDisplayLinkUpdate.
 func NewMetalDisplayLinkUpdate() *MetalDisplayLinkUpdate {
 	_id := objc.Send[objc.ID](objc.ID(_class("CAMetalDisplayLinkUpdate")), objc.RegisterName("new"))
 	return metalDisplayLinkUpdateAdopt(_id)
 }
 
+// TargetTimestamp wraps the corresponding Objective-C method.
 func (x *MetalDisplayLinkUpdate) TargetTimestamp() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("targetTimestamp"))
 	return _r
 }
 
+// TargetPresentationTimestamp wraps the corresponding Objective-C method.
 func (x *MetalDisplayLinkUpdate) TargetPresentationTimestamp() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("targetPresentationTimestamp"))
 	return _r

@@ -6,17 +6,19 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that handles the measurement and display of a single menu item in its encompassing frame.
-//
 // MenuItemCell is an idiomatic wrapper over the Objective-C class NSMenuItemCell.
+//
+// MenuItemCell is an abstract base — you do not construct it directly. Construct one of [PopUpButtonCell] and pass it where a MenuItemCell is accepted.
+//
+// An object that handles the measurement and display of a single menu item in its encompassing frame.
 type MenuItemCell struct {
-	objref.Handle
+	ButtonCell
 }
 
 // MenuItemCellFromID adopts an existing Objective-C object as a MenuItemCell
@@ -25,7 +27,8 @@ func MenuItemCellFromID(id objc.ID) *MenuItemCell {
 	if id == 0 {
 		return nil
 	}
-	x := &MenuItemCell{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MenuItemCell{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func menuItemCellAdopt(id objc.ID) *MenuItemCell {
 	if id == 0 {
 		return nil
 	}
-	x := &MenuItemCell{Handle: objref.Wrap(id)}
+	x := &MenuItemCell{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MenuItemCell) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MenuItemCell) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MenuItemCell) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMenuItemCellTextCell creates a new MenuItemCell.
@@ -72,573 +61,495 @@ func NewMenuItemCellWithCoder(coder obj.Object) *MenuItemCell {
 	return menuItemCellAdopt(_id)
 }
 
-// The menu item object associated with the cell.
-//
-// WithMenuItem sets menuItem and returns the receiver so calls can be chained.
+// WithMenuItem the menu item object associated with the cell.
 func (x *MenuItemCell) WithMenuItem(menuItem *MenuItem) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenuItem:"), objref.IDOf(menuItem))
 	return x
 }
 
-// A Boolean value indicating whether the size of the menu needs to be calculated.
-//
-// WithNeedsSizing sets needsSizing and returns the receiver so calls can be chained.
+// WithNeedsSizing a Boolean value indicating whether the size of the menu needs to be calculated.
 func (x *MenuItemCell) WithNeedsSizing(needsSizing bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsSizing:"), needsSizing)
 	return x
 }
 
-// A Boolean value indicating whether the menu item needs to be displayed.
-//
-// WithNeedsDisplay sets needsDisplay and returns the receiver so calls can be chained.
+// WithNeedsDisplay a Boolean value indicating whether the menu item needs to be displayed.
 func (x *MenuItemCell) WithNeedsDisplay(needsDisplay bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// The appearance of the button’s border, if it has one.
-//
-// WithBezelStyle sets bezelStyle and returns the receiver so calls can be chained.
+// WithBezelStyle the appearance of the button’s border, if it has one.
 func (x *MenuItemCell) WithBezelStyle(bezelStyle BezelStyle) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelStyle:"), bezelStyle)
 	return x
 }
 
-// A set of flags that indicate how the button highlights when it receives a mouse-down event (that is, when the button is pressed).
-//
-// WithHighlightsBy sets highlightsBy and returns the receiver so calls can be chained.
+// WithHighlightsBy a set of flags that indicate how the button highlights when it receives a mouse-down event (that is, when the button is pressed).
 func (x *MenuItemCell) WithHighlightsBy(highlightsBy CellStyleMask) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlightsBy:"), highlightsBy)
 	return x
 }
 
-// The flags that indicate how the button cell shows its alternate state.
-//
-// WithShowsStateBy sets showsStateBy and returns the receiver so calls can be chained.
+// WithShowsStateBy the flags that indicate how the button cell shows its alternate state.
 func (x *MenuItemCell) WithShowsStateBy(showsStateBy CellStyleMask) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsStateBy:"), showsStateBy)
 	return x
 }
 
-// The title displayed by the button when it’s in its normal state as an attributed string.
-//
-// WithAttributedTitle sets attributedTitle and returns the receiver so calls can be chained.
+// WithAttributedTitle the title displayed by the button when it’s in its normal state as an attributed string.
 func (x *MenuItemCell) WithAttributedTitle(attributedTitle obj.Object) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	return x
 }
 
-// The string displayed by the button when it’s in its alternate state.
-//
-// WithAlternateTitle sets alternateTitle and returns the receiver so calls can be chained.
+// WithAlternateTitle the string displayed by the button when it’s in its alternate state.
 func (x *MenuItemCell) WithAlternateTitle(alternateTitle string) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateTitle:"), purego.NSString(alternateTitle))
 	return x
 }
 
-// The title displayed by the button when it’s in its alternate state, as an attributed string.
-//
-// WithAttributedAlternateTitle sets attributedAlternateTitle and returns the receiver so calls can be chained.
+// WithAttributedAlternateTitle the title displayed by the button when it’s in its alternate state, as an attributed string.
 func (x *MenuItemCell) WithAttributedAlternateTitle(attributedAlternateTitle obj.Object) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedAlternateTitle:"), objref.IDOf(attributedAlternateTitle))
 	return x
 }
 
-// The image the button displays in its alternate state.
-//
-// WithAlternateImage sets alternateImage and returns the receiver so calls can be chained.
+// WithAlternateImage the image the button displays in its alternate state.
 func (x *MenuItemCell) WithAlternateImage(alternateImage *Image) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
 	return x
 }
 
-// The position of the button’s image relative to its title.
-//
-// WithImagePosition sets imagePosition and returns the receiver so calls can be chained.
+// WithImagePosition the position of the button’s image relative to its title.
 func (x *MenuItemCell) WithImagePosition(imagePosition CellImagePosition) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImagePosition:"), imagePosition)
 	return x
 }
 
-// The scale factor for the button’s image.
-//
-// WithImageScaling sets imageScaling and returns the receiver so calls can be chained.
+// WithImageScaling the scale factor for the button’s image.
 func (x *MenuItemCell) WithImageScaling(imageScaling ImageScaling) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageScaling:"), imageScaling)
 	return x
 }
 
-// The button’s key-equivalent character.
-//
-// WithKeyEquivalent sets keyEquivalent and returns the receiver so calls can be chained.
+// WithKeyEquivalent the button’s key-equivalent character.
 func (x *MenuItemCell) WithKeyEquivalent(keyEquivalent string) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalent:"), purego.NSString(keyEquivalent))
 	return x
 }
 
-// The mask that identifies the modifier keys for the button’s key equivalent.
-//
-// WithKeyEquivalentModifierMask sets keyEquivalentModifierMask and returns the receiver so calls can be chained.
+// WithKeyEquivalentModifierMask the mask that identifies the modifier keys for the button’s key equivalent.
 func (x *MenuItemCell) WithKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalentModifierMask:"), keyEquivalentModifierMask)
 	return x
 }
 
-// A Boolean value that indicates if the button is transparent.
-//
-// WithTransparent sets transparent and returns the receiver so calls can be chained.
+// WithTransparent a Boolean value that indicates if the button is transparent.
 func (x *MenuItemCell) WithTransparent(transparent bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransparent:"), transparent)
 	return x
 }
 
-// A Boolean value that indicates if the button’s image and text appear “dim” when the button is disabled.
-//
-// WithImageDimsWhenDisabled sets imageDimsWhenDisabled and returns the receiver so calls can be chained.
+// WithImageDimsWhenDisabled a Boolean value that indicates if the button’s image and text appear “dim” when the button is disabled.
 func (x *MenuItemCell) WithImageDimsWhenDisabled(imageDimsWhenDisabled bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageDimsWhenDisabled:"), imageDimsWhenDisabled)
 	return x
 }
 
-// A Boolean value that indicates if the button displays its border only when the pointer is over it.
-//
-// WithShowsBorderOnlyWhileMouseInside sets showsBorderOnlyWhileMouseInside and returns the receiver so calls can be chained.
+// WithShowsBorderOnlyWhileMouseInside a Boolean value that indicates if the button displays its border only when the pointer is over it.
 func (x *MenuItemCell) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsBorderOnlyWhileMouseInside:"), showsBorderOnlyWhileMouseInside)
 	return x
 }
 
-// The sound that’s played when the user presses the button (that is during a mouse-down event).
-//
-// WithSound sets sound and returns the receiver so calls can be chained.
+// WithSound the sound that’s played when the user presses the button (that is during a mouse-down event).
 func (x *MenuItemCell) WithSound(sound *Sound) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSound:"), objref.IDOf(sound))
 	return x
 }
 
-// The background color of the button.
-//
-// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+// WithBackgroundColor the background color of the button.
 func (x *MenuItemCell) WithBackgroundColor(backgroundColor *Color) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// The gradient of the button’s border.
-//
-// WithGradientType sets gradientType and returns the receiver so calls can be chained.
+// WithGradientType the gradient of the button’s border.
 func (x *MenuItemCell) WithGradientType(gradientType GradientType) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGradientType:"), gradientType)
 	return x
 }
 
-// The font used to draw the button’s key equivalent.
-//
-// WithKeyEquivalentFont sets keyEquivalentFont and returns the receiver so calls can be chained.
+// WithKeyEquivalentFont the font used to draw the button’s key equivalent.
 func (x *MenuItemCell) WithKeyEquivalentFont(keyEquivalentFont *Font) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalentFont:"), objref.IDOf(keyEquivalentFont))
 	return x
 }
 
-// The view associated with the cell.
-//
-// WithControlView sets controlView and returns the receiver so calls can be chained.
+// WithControlView the view associated with the cell.
 func (x *MenuItemCell) WithControlView(controlView ViewProvider) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	return x
 }
 
-// The type of the cell.
-//
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithType the type of the cell.
 func (x *MenuItemCell) WithType(type_ CellType) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
-// The cell’s current state.
-//
-// WithState sets state and returns the receiver so calls can be chained.
+// WithState the cell’s current state.
 func (x *MenuItemCell) WithState(state int) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 	return x
 }
 
-// The object that receives the cell’s action messages.
-//
-// WithTarget sets target and returns the receiver so calls can be chained.
+// WithTarget the object that receives the cell’s action messages.
 func (x *MenuItemCell) WithTarget(target obj.Object) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// A tag for identifying the cell.
-//
-// WithTag sets tag and returns the receiver so calls can be chained.
+// WithTag a tag for identifying the cell.
 func (x *MenuItemCell) WithTag(tag int) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// The cell’s title text.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the cell’s title text.
 func (x *MenuItemCell) WithTitle(title string) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A Boolean value indicating whether the cell is currently enabled.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value indicating whether the cell is currently enabled.
 func (x *MenuItemCell) WithEnabled(enabled bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
-//
-// WithContinuous sets continuous and returns the receiver so calls can be chained.
+// WithContinuous a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 func (x *MenuItemCell) WithContinuous(continuous bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
-// A Boolean value indicating whether the cell is editable.
-//
-// WithEditable sets editable and returns the receiver so calls can be chained.
+// WithEditable a Boolean value indicating whether the cell is editable.
 func (x *MenuItemCell) WithEditable(editable bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
-// A Boolean value indicating whether the cell’s text can be selected.
-//
-// WithSelectable sets selectable and returns the receiver so calls can be chained.
+// WithSelectable a Boolean value indicating whether the cell’s text can be selected.
 func (x *MenuItemCell) WithSelectable(selectable bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 	return x
 }
 
-// A Boolean value indicating whether the cell draws itself outlined with a plain border.
-//
-// WithBordered sets bordered and returns the receiver so calls can be chained.
+// WithBordered a Boolean value indicating whether the cell draws itself outlined with a plain border.
 func (x *MenuItemCell) WithBordered(bordered bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
-// A Boolean value indicating whether the cell has a bezeled border.
-//
-// WithBezeled sets bezeled and returns the receiver so calls can be chained.
+// WithBezeled a Boolean value indicating whether the cell has a bezeled border.
 func (x *MenuItemCell) WithBezeled(bezeled bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 	return x
 }
 
-// A Boolean value indicating whether excess text scrolls past the cell’s bounds.
-//
-// WithScrollable sets scrollable and returns the receiver so calls can be chained.
+// WithScrollable a Boolean value indicating whether excess text scrolls past the cell’s bounds.
 func (x *MenuItemCell) WithScrollable(scrollable bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
 	return x
 }
 
-// A Boolean value indicating whether the cell has a highlighted appearance.
-//
-// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
+// WithHighlighted a Boolean value indicating whether the cell has a highlighted appearance.
 func (x *MenuItemCell) WithHighlighted(highlighted bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// The alignment of the cell’s text.
-//
-// WithAlignment sets alignment and returns the receiver so calls can be chained.
+// WithAlignment the alignment of the cell’s text.
 func (x *MenuItemCell) WithAlignment(alignment TextAlignment) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
-// A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
-//
-// WithWraps sets wraps and returns the receiver so calls can be chained.
+// WithWraps a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 func (x *MenuItemCell) WithWraps(wraps bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
 	return x
 }
 
-// The font that the cell uses to display text.
-//
-// WithFont sets font and returns the receiver so calls can be chained.
+// WithFont the font that the cell uses to display text.
 func (x *MenuItemCell) WithFont(font *Font) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
-// The cell’s formatter object.
-//
-// WithFormatter sets formatter and returns the receiver so calls can be chained.
+// WithFormatter the cell’s formatter object.
 func (x *MenuItemCell) WithFormatter(formatter obj.Object) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
-// The cell’s value as an Objective-C object.
-//
-// WithObjectValue sets objectValue and returns the receiver so calls can be chained.
+// WithObjectValue the cell’s value as an Objective-C object.
 func (x *MenuItemCell) WithObjectValue(objectValue obj.Object) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
-// The cell’s value as a string.
-//
-// WithStringValue sets stringValue and returns the receiver so calls can be chained.
+// WithStringValue the cell’s value as a string.
 func (x *MenuItemCell) WithStringValue(stringValue string) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
-// The cell’s value as an integer.
-//
-// WithIntValue sets intValue and returns the receiver so calls can be chained.
+// WithIntValue the cell’s value as an integer.
 func (x *MenuItemCell) WithIntValue(intValue int) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
-// The cell’s value as a single-precision floating-point number.
-//
-// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
+// WithFloatValue the cell’s value as a single-precision floating-point number.
 func (x *MenuItemCell) WithFloatValue(floatValue float32) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
-// The cell’s value as a double-precision floating-point number.
-//
-// WithDoubleValue sets doubleValue and returns the receiver so calls can be chained.
+// WithDoubleValue the cell’s value as a double-precision floating-point number.
 func (x *MenuItemCell) WithDoubleValue(doubleValue float64) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
-// The cell’s value as an integer value.
-//
-// WithIntegerValue sets integerValue and returns the receiver so calls can be chained.
+// WithIntegerValue the cell’s value as an integer value.
 func (x *MenuItemCell) WithIntegerValue(integerValue int) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
-// The image displayed by the cell, if any.
-//
-// WithImage sets image and returns the receiver so calls can be chained.
+// WithImage the image displayed by the cell, if any.
 func (x *MenuItemCell) WithImage(image *Image) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
-// The size of the cell.
-//
-// WithControlSize sets controlSize and returns the receiver so calls can be chained.
+// WithControlSize the size of the cell.
 func (x *MenuItemCell) WithControlSize(controlSize ControlSize) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
-// The object represented by the cell.
-//
-// WithRepresentedObject sets representedObject and returns the receiver so calls can be chained.
+// WithRepresentedObject the object represented by the cell.
 func (x *MenuItemCell) WithRepresentedObject(representedObject obj.Object) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return x
 }
 
-// The cell’s contextual menu.
-//
-// WithMenu sets menu and returns the receiver so calls can be chained.
+// WithMenu the cell’s contextual menu.
 func (x *MenuItemCell) WithMenu(menu *Menu) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
-//
-// WithSendsActionOnEndEditing sets sendsActionOnEndEditing and returns the receiver so calls can be chained.
+// WithSendsActionOnEndEditing a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 func (x *MenuItemCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
 	return x
 }
 
-// The initial writing direction used to determine the actual writing direction for text.
-//
-// WithBaseWritingDirection sets baseWritingDirection and returns the receiver so calls can be chained.
+// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
 func (x *MenuItemCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
-// The line break mode to use when drawing text in the cell.
-//
-// WithLineBreakMode sets lineBreakMode and returns the receiver so calls can be chained.
+// WithLineBreakMode the line break mode to use when drawing text in the cell.
 func (x *MenuItemCell) WithLineBreakMode(lineBreakMode LineBreakMode) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
-// A Boolean value indicating whether the cell assumes responsibility for undo operations.
-//
-// WithAllowsUndo sets allowsUndo and returns the receiver so calls can be chained.
+// WithAllowsUndo a Boolean value indicating whether the cell assumes responsibility for undo operations.
 func (x *MenuItemCell) WithAllowsUndo(allowsUndo bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
 	return x
 }
 
-// A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
-//
-// WithTruncatesLastVisibleLine sets truncatesLastVisibleLine and returns the receiver so calls can be chained.
+// WithTruncatesLastVisibleLine a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 func (x *MenuItemCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
 	return x
 }
 
-// The layout direction of the user interface.
-//
-// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection the layout direction of the user interface.
 func (x *MenuItemCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
-//
-// WithUsesSingleLineMode sets usesSingleLineMode and returns the receiver so calls can be chained.
+// WithUsesSingleLineMode a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 func (x *MenuItemCell) WithUsesSingleLineMode(usesSingleLineMode bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
-// A Boolean value indicating whether the cell refuses the first responder status.
-//
-// WithRefusesFirstResponder sets refusesFirstResponder and returns the receiver so calls can be chained.
+// WithRefusesFirstResponder a Boolean value indicating whether the cell refuses the first responder status.
 func (x *MenuItemCell) WithRefusesFirstResponder(refusesFirstResponder bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
-// A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
-//
-// WithShowsFirstResponder sets showsFirstResponder and returns the receiver so calls can be chained.
+// WithShowsFirstResponder a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 func (x *MenuItemCell) WithShowsFirstResponder(showsFirstResponder bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
 	return x
 }
 
-// The type of focus ring to use with the associated view.
-//
-// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+// WithFocusRingType the type of focus ring to use with the associated view.
 func (x *MenuItemCell) WithFocusRingType(focusRingType FocusRingType) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// The cell’s value as an attributed string.
-//
-// WithAttributedStringValue sets attributedStringValue and returns the receiver so calls can be chained.
+// WithAttributedStringValue the cell’s value as an attributed string.
 func (x *MenuItemCell) WithAttributedStringValue(attributedStringValue obj.Object) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
-// A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
-//
-// WithAllowsEditingTextAttributes sets allowsEditingTextAttributes and returns the receiver so calls can be chained.
+// WithAllowsEditingTextAttributes a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 func (x *MenuItemCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
 	return x
 }
 
-// A Boolean value indicating whether the cell supports the importation of images into its text.
-//
-// WithImportsGraphics sets importsGraphics and returns the receiver so calls can be chained.
+// WithImportsGraphics a Boolean value indicating whether the cell supports the importation of images into its text.
 func (x *MenuItemCell) WithImportsGraphics(importsGraphics bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
 	return x
 }
 
-// A Boolean value indicating whether the cell supports three states instead of two.
-//
-// WithAllowsMixedState sets allowsMixedState and returns the receiver so calls can be chained.
+// WithAllowsMixedState a Boolean value indicating whether the cell supports three states instead of two.
 func (x *MenuItemCell) WithAllowsMixedState(allowsMixedState bool) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
 	return x
 }
 
-// The cell’s background style.
-//
-// WithBackgroundStyle sets backgroundStyle and returns the receiver so calls can be chained.
+// WithBackgroundStyle the cell’s background style.
 func (x *MenuItemCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
 	return x
 }
 
-// The cell’s control tint.
-//
-// WithControlTint sets controlTint and returns the receiver so calls can be chained.
+// WithControlTint the cell’s control tint.
 func (x *MenuItemCell) WithControlTint(controlTint ControlTint) *MenuItemCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
 	return x
 }
 
-// Calculates the minimum required width and height of the receiver’s menu item.
+// CalcSize calculates the minimum required width and height of the receiver’s menu item.
 func (x *MenuItemCell) CalcSize() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calcSize"))
 }
 
+// StateImageRectForBounds returns the rectangle into which the menu item’s state image should be drawn.
+func (x *MenuItemCell) StateImageRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("stateImageRectForBounds:"), cellFrame)
+	return _r
+}
+
+// KeyEquivalentRectForBounds returns the rectangle into which the menu item’s key equivalent should be drawn.
+func (x *MenuItemCell) KeyEquivalentRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("keyEquivalentRectForBounds:"), cellFrame)
+	return _r
+}
+
+// DrawSeparatorItemWithFrameInView draws a menu item separator.
+func (x *MenuItemCell) DrawSeparatorItemWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawSeparatorItemWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+}
+
+// DrawStateImageWithFrameInView draws the state image associated with the menu item.
+func (x *MenuItemCell) DrawStateImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawStateImageWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+}
+
+// DrawImageWithFrameInView draws the image associated with the menu item.
+func (x *MenuItemCell) DrawImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawImageWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+}
+
+// DrawTitleWithFrameInView draws the title associated with the menu item.
+func (x *MenuItemCell) DrawTitleWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawTitleWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+}
+
+// DrawKeyEquivalentWithFrameInView draws the key equivalent associated with the menu item.
+func (x *MenuItemCell) DrawKeyEquivalentWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawKeyEquivalentWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+}
+
+// DrawBorderAndBackgroundWithFrameInView draws the borders and background associated with the receiver’s menu item (if any).
+func (x *MenuItemCell) DrawBorderAndBackgroundWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawBorderAndBackgroundWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+}
+
+// MenuItem wraps the corresponding Objective-C method.
 func (x *MenuItemCell) MenuItem() *MenuItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuItem"))
 	return MenuItemFromID(_r)
 }
 
+// SetMenuItem wraps the corresponding Objective-C method.
 func (x *MenuItemCell) SetMenuItem(menuItem *MenuItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenuItem:"), objref.IDOf(menuItem))
 }
 
+// NeedsSizing wraps the corresponding Objective-C method.
 func (x *MenuItemCell) NeedsSizing() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("needsSizing"))
 	return _r
 }
 
+// SetNeedsSizing wraps the corresponding Objective-C method.
 func (x *MenuItemCell) SetNeedsSizing(needsSizing bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsSizing:"), needsSizing)
 }
 
+// NeedsDisplay wraps the corresponding Objective-C method.
 func (x *MenuItemCell) NeedsDisplay() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("needsDisplay"))
 	return _r
 }
 
+// SetNeedsDisplay wraps the corresponding Objective-C method.
 func (x *MenuItemCell) SetNeedsDisplay(needsDisplay bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 }
 
+// StateImageWidth wraps the corresponding Objective-C method.
 func (x *MenuItemCell) StateImageWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("stateImageWidth"))
 	return _r
 }
 
+// ImageWidth wraps the corresponding Objective-C method.
 func (x *MenuItemCell) ImageWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("imageWidth"))
 	return _r
 }
 
+// TitleWidth wraps the corresponding Objective-C method.
 func (x *MenuItemCell) TitleWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("titleWidth"))
 	return _r
 }
 
+// KeyEquivalentWidth wraps the corresponding Objective-C method.
 func (x *MenuItemCell) KeyEquivalentWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("keyEquivalentWidth"))
 	return _r
@@ -713,6 +624,14 @@ type MenuItemCellable interface {
 	WithBackgroundStyle(backgroundStyle BackgroundStyle) *MenuItemCell
 	WithControlTint(controlTint ControlTint) *MenuItemCell
 	CalcSize()
+	StateImageRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect
+	KeyEquivalentRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect
+	DrawSeparatorItemWithFrameInView(cellFrame corefoundation.CGRect, controlView *View)
+	DrawStateImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *View)
+	DrawImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *View)
+	DrawTitleWithFrameInView(cellFrame corefoundation.CGRect, controlView *View)
+	DrawKeyEquivalentWithFrameInView(cellFrame corefoundation.CGRect, controlView *View)
+	DrawBorderAndBackgroundWithFrameInView(cellFrame corefoundation.CGRect, controlView *View)
 	MenuItem() *MenuItem
 	SetMenuItem(menuItem *MenuItem)
 	NeedsSizing() bool
@@ -726,3 +645,16 @@ type MenuItemCellable interface {
 }
 
 var _ MenuItemCellable = (*MenuItemCell)(nil)
+
+// isMenuItemCell marks MenuItemCell — and, by embedding promotion, its
+// subclasses — as a member of the MenuItemCell hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MenuItemCell) isMenuItemCell() {}
+
+var _ MenuItemCellProvider = (*MenuItemCell)(nil)
+
+var _ ButtonCellProvider = (*MenuItemCell)(nil)
+
+var _ ActionCellProvider = (*MenuItemCell)(nil)
+
+var _ CellProvider = (*MenuItemCell)(nil)

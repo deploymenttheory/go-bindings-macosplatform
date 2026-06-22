@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that makes the layers of a symbol-based image appear separately or as a whole.
-//
 // SymbolAppearEffect is an idiomatic wrapper over the Objective-C class NSSymbolAppearEffect.
+//
+// It embeds [SymbolEffect], promoting that type's methods.
+//
+// A type that makes the layers of a symbol-based image appear separately or as a whole.
 type SymbolAppearEffect struct {
-	objref.Handle
+	SymbolEffect
 }
 
 // SymbolAppearEffectFromID adopts an existing Objective-C object as a SymbolAppearEffect
@@ -25,7 +26,8 @@ func SymbolAppearEffectFromID(id objc.ID) *SymbolAppearEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolAppearEffect{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SymbolAppearEffect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func symbolAppearEffectAdopt(id objc.ID) *SymbolAppearEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolAppearEffect{Handle: objref.Wrap(id)}
+	x := &SymbolAppearEffect{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SymbolAppearEffect) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SymbolAppearEffect) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SymbolAppearEffect) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSymbolAppearEffect creates a new SymbolAppearEffect.
@@ -64,13 +52,13 @@ func NewSymbolAppearEffect() *SymbolAppearEffect {
 	return symbolAppearEffectAdopt(_id)
 }
 
-// An effect that makes each layer appear separately.
+// EffectWithByLayer an effect that makes each layer appear separately.
 func (x *SymbolAppearEffect) EffectWithByLayer() *SymbolAppearEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
 	return SymbolAppearEffectFromID(_r)
 }
 
-// An effect that makes all layers appear simultaneously.
+// EffectWithWholeSymbol an effect that makes all layers appear simultaneously.
 func (x *SymbolAppearEffect) EffectWithWholeSymbol() *SymbolAppearEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolAppearEffectFromID(_r)
@@ -84,3 +72,5 @@ type SymbolAppearEffectable interface {
 }
 
 var _ SymbolAppearEffectable = (*SymbolAppearEffect)(nil)
+
+var _ SymbolEffectProvider = (*SymbolAppearEffect)(nil)

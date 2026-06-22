@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A GPU-based image-processing routine that is optimized for blending two images.
-//
 // BlendKernel is an idiomatic wrapper over the Objective-C class CIBlendKernel.
+//
+// It embeds [ColorKernel], promoting that type's methods.
+//
+// A GPU-based image-processing routine that is optimized for blending two images.
 type BlendKernel struct {
-	objref.Handle
+	ColorKernel
 }
 
 // BlendKernelFromID adopts an existing Objective-C object as a BlendKernel
@@ -25,7 +26,8 @@ func BlendKernelFromID(id objc.ID) *BlendKernel {
 	if id == 0 {
 		return nil
 	}
-	x := &BlendKernel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BlendKernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func blendKernelAdopt(id objc.ID) *BlendKernel {
 	if id == 0 {
 		return nil
 	}
-	x := &BlendKernel{Handle: objref.Wrap(id)}
+	x := &BlendKernel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *BlendKernel) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BlendKernel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BlendKernel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewBlendKernel creates a new BlendKernel.
@@ -64,12 +52,13 @@ func NewBlendKernel() *BlendKernel {
 	return blendKernelAdopt(_id)
 }
 
-// Creates a new image using the blend kernel and specified foreground and background images.
+// ApplyWithForegroundBackground creates a new image using the blend kernel and specified foreground and background images.
 func (x *BlendKernel) ApplyWithForegroundBackground(foreground *Image, background *Image) *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyWithForeground:background:"), objref.IDOf(foreground), objref.IDOf(background))
 	return ImageFromID(_r)
 }
 
+// ApplyWithForegroundBackgroundColorSpace wraps the corresponding Objective-C method.
 func (x *BlendKernel) ApplyWithForegroundBackgroundColorSpace(foreground *Image, background *Image, colorSpace obj.Object) *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyWithForeground:background:colorSpace:"), objref.IDOf(foreground), objref.IDOf(background), objref.IDOf(colorSpace))
 	return ImageFromID(_r)
@@ -83,3 +72,7 @@ type BlendKernelable interface {
 }
 
 var _ BlendKernelable = (*BlendKernel)(nil)
+
+var _ ColorKernelProvider = (*BlendKernel)(nil)
+
+var _ KernelProvider = (*BlendKernel)(nil)

@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that presents a sheet that prompts the user to authorize a payment request.
-//
 // PaymentAuthorizationController is an idiomatic wrapper over the Objective-C class PKPaymentAuthorizationController.
+//
+// An object that presents a sheet that prompts the user to authorize a payment request.
 type PaymentAuthorizationController struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func PaymentAuthorizationControllerFromID(id objc.ID) *PaymentAuthorizationContr
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentAuthorizationController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PaymentAuthorizationController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func paymentAuthorizationControllerAdopt(id objc.ID) *PaymentAuthorizationContro
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentAuthorizationController{Handle: objref.Wrap(id)}
+	x := &PaymentAuthorizationController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,30 +61,32 @@ func (x *PaymentAuthorizationController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes and returns a payment authorization controller.
-//
-// NewPaymentAuthorizationControllerWithPaymentRequest creates a new PaymentAuthorizationController.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PaymentAuthorizationController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPaymentAuthorizationControllerWithPaymentRequest initializes and returns a payment authorization controller.
 func NewPaymentAuthorizationControllerWithPaymentRequest(request *PaymentRequest) *PaymentAuthorizationController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentAuthorizationController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentRequest:"), objref.IDOf(request))
 	return paymentAuthorizationControllerAdopt(_id)
 }
 
-// Creates a new payment authorization controller with the disbursement request you provide.
-//
-// NewPaymentAuthorizationControllerWithDisbursementRequest creates a new PaymentAuthorizationController.
+// NewPaymentAuthorizationControllerWithDisbursementRequest creates a new payment authorization controller with the disbursement request you provide.
 func NewPaymentAuthorizationControllerWithDisbursementRequest(request *DisbursementRequest) *PaymentAuthorizationController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentAuthorizationController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisbursementRequest:"), objref.IDOf(request))
 	return paymentAuthorizationControllerAdopt(_id)
 }
 
-// Presents the payment sheet modally over your app.
+// PresentWithCompletion presents the payment sheet modally over your app.
 func (x *PaymentAuthorizationController) PresentWithCompletion(completion func(bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
 }
 
-// Dismisses the payment sheet.
+// DismissWithCompletion dismisses the payment sheet.
 //
 // DismissWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *PaymentAuthorizationController) DismissWithCompletion(ctx context.Context) error {

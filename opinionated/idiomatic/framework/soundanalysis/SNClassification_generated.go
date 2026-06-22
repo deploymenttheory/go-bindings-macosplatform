@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that pairs a sound classifier’s prediction with its confidence in that prediction.
-//
 // Classification is an idiomatic wrapper over the Objective-C class SNClassification.
+//
+// A type that pairs a sound classifier’s prediction with its confidence in that prediction.
 type Classification struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ClassificationFromID(id objc.ID) *Classification {
 	if id == 0 {
 		return nil
 	}
-	x := &Classification{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Classification{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func classificationAdopt(id objc.ID) *Classification {
 	if id == 0 {
 		return nil
 	}
-	x := &Classification{Handle: objref.Wrap(id)}
+	x := &Classification{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *Classification) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Classification) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewClassification creates a new Classification.
 func NewClassification() *Classification {
 	_id := objc.Send[objc.ID](objc.ID(_class("SNClassification")), objc.RegisterName("new"))
 	return classificationAdopt(_id)
 }
 
-// The identifier of a classification request. An example classification could be a string like 'laughter' or 'applause'. The string is defined in the model that was used for the classification. Usually these are technical labels that are not localized and not meant to be used directly to be presented to an end user in the UI.
+// Identifier the identifier of a classification request. An example classification could be a string like 'laughter' or 'applause'. The string is defined in the model that was used for the classification. Usually these are technical labels that are not localized and not meant to be used directly to be presented to an end user in the UI.
 func (x *Classification) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *Classification) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// The level of confidence normalized to [0, 1], where 1 is most confident
+// Confidence the level of confidence normalized to [0, 1], where 1 is most confident
 func (x *Classification) Confidence() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("confidence"))
 	return _r

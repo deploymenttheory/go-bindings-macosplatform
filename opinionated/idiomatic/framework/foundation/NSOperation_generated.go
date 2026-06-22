@@ -13,9 +13,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that represents the code and data associated with a single task.
-//
 // Operation is an idiomatic wrapper over the Objective-C class NSOperation.
+//
+// Operation is an abstract base — you do not construct it directly. Construct one of [BlockOperation], [InvocationOperation] and pass it where a Operation is accepted.
+//
+// An abstract class that represents the code and data associated with a single task.
 type Operation struct {
 	objref.Handle
 }
@@ -26,7 +28,8 @@ func OperationFromID(id objc.ID) *Operation {
 	if id == 0 {
 		return nil
 	}
-	x := &Operation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Operation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +42,8 @@ func operationAdopt(id objc.ID) *Operation {
 	if id == 0 {
 		return nil
 	}
-	x := &Operation{Handle: objref.Wrap(id)}
+	x := &Operation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,117 +63,135 @@ func (x *Operation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewOperation creates a new Operation.
-func NewOperation() *Operation {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSOperation")), objc.RegisterName("new"))
-	return operationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Operation) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithQueuePriority sets queuePriority and returns the receiver so calls can be chained.
+// WithQueuePriority sets the property and returns the receiver so calls can be chained.
 func (x *Operation) WithQueuePriority(queuePriority OperationQueuePriority) *Operation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueuePriority:"), queuePriority)
 	return x
 }
 
-// WithCompletionBlock sets completionBlock and returns the receiver so calls can be chained.
+// WithCompletionBlock sets the property and returns the receiver so calls can be chained.
 func (x *Operation) WithCompletionBlock(completionBlock func()) *Operation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionBlock:"), objc.NewBlock(func(_ objc.Block) { completionBlock() }))
 	return x
 }
 
-// WithThreadPriority sets threadPriority and returns the receiver so calls can be chained.
+// WithThreadPriority sets the property and returns the receiver so calls can be chained.
 func (x *Operation) WithThreadPriority(threadPriority float64) *Operation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadPriority:"), threadPriority)
 	return x
 }
 
-// WithQualityOfService sets qualityOfService and returns the receiver so calls can be chained.
+// WithQualityOfService sets the property and returns the receiver so calls can be chained.
 func (x *Operation) WithQualityOfService(qualityOfService QualityOfService) *Operation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityOfService:"), qualityOfService)
 	return x
 }
 
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *Operation) WithName(name StringProvider) *Operation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Operation) WithScriptingProperties(scriptingProperties obj.Object) *Operation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Start wraps the corresponding Objective-C method.
 func (x *Operation) Start() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
 }
 
+// Main wraps the corresponding Objective-C method.
 func (x *Operation) Main() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("main"))
 }
 
+// Cancel wraps the corresponding Objective-C method.
 func (x *Operation) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
+// AddDependency wraps the corresponding Objective-C method.
 func (x *Operation) AddDependency(op *Operation) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addDependency:"), objref.IDOf(op))
 }
 
+// RemoveDependency wraps the corresponding Objective-C method.
 func (x *Operation) RemoveDependency(op *Operation) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeDependency:"), objref.IDOf(op))
 }
 
+// WaitUntilFinished wraps the corresponding Objective-C method.
 func (x *Operation) WaitUntilFinished() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("waitUntilFinished"))
 }
 
+// IsCancelled wraps the corresponding Objective-C method.
 func (x *Operation) IsCancelled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCancelled"))
 	return _r
 }
 
+// IsExecuting wraps the corresponding Objective-C method.
 func (x *Operation) IsExecuting() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isExecuting"))
 	return _r
 }
 
+// IsFinished wraps the corresponding Objective-C method.
 func (x *Operation) IsFinished() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFinished"))
 	return _r
 }
 
+// IsConcurrent wraps the corresponding Objective-C method.
 func (x *Operation) IsConcurrent() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConcurrent"))
 	return _r
 }
 
+// IsAsynchronous wraps the corresponding Objective-C method.
 func (x *Operation) IsAsynchronous() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAsynchronous"))
 	return _r
 }
 
+// IsReady wraps the corresponding Objective-C method.
 func (x *Operation) IsReady() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReady"))
 	return _r
 }
 
+// Dependencies wraps the corresponding Objective-C method.
+//
 // Dependencies returns the collection as a Go slice.
 func (x *Operation) Dependencies() []*Operation {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dependencies"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Operation { return OperationFromID(_id) })
 }
 
+// QueuePriority wraps the corresponding Objective-C method.
 func (x *Operation) QueuePriority() OperationQueuePriority {
 	_r := objc.Send[OperationQueuePriority](objref.IDOf(x), objc.RegisterName("queuePriority"))
 	return _r
 }
 
+// SetQueuePriority wraps the corresponding Objective-C method.
 func (x *Operation) SetQueuePriority(queuePriority OperationQueuePriority) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueuePriority:"), queuePriority)
 }
 
+// SetCompletionBlock wraps the corresponding Objective-C method.
+//
 // SetCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (x *Operation) SetCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -185,24 +207,29 @@ func (x *Operation) SetCompletionBlock(ctx context.Context) error {
 	}
 }
 
+// ThreadPriority wraps the corresponding Objective-C method.
 func (x *Operation) ThreadPriority() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("threadPriority"))
 	return _r
 }
 
+// SetThreadPriority wraps the corresponding Objective-C method.
 func (x *Operation) SetThreadPriority(threadPriority float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadPriority:"), threadPriority)
 }
 
+// QualityOfService wraps the corresponding Objective-C method.
 func (x *Operation) QualityOfService() QualityOfService {
 	_r := objc.Send[QualityOfService](objref.IDOf(x), objc.RegisterName("qualityOfService"))
 	return _r
 }
 
+// SetQualityOfService wraps the corresponding Objective-C method.
 func (x *Operation) SetQualityOfService(qualityOfService QualityOfService) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityOfService:"), qualityOfService)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *Operation) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -211,6 +238,7 @@ func (x *Operation) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *Operation) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
@@ -249,3 +277,10 @@ type Operationable interface {
 }
 
 var _ Operationable = (*Operation)(nil)
+
+// isOperation marks Operation — and, by embedding promotion, its
+// subclasses — as a member of the Operation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Operation) isOperation() {}
+
+var _ OperationProvider = (*Operation)(nil)

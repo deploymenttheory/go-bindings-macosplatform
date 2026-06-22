@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A sample type used to create queries for documents.
-//
 // DocumentType is an idiomatic wrapper over the Objective-C class HKDocumentType.
+//
+// It embeds [SampleType], promoting that type's methods.
+//
+// A sample type used to create queries for documents.
 type DocumentType struct {
-	objref.Handle
+	SampleType
 }
 
 // DocumentTypeFromID adopts an existing Objective-C object as a DocumentType
@@ -25,7 +26,8 @@ func DocumentTypeFromID(id objc.ID) *DocumentType {
 	if id == 0 {
 		return nil
 	}
-	x := &DocumentType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DocumentType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func documentTypeAdopt(id objc.ID) *DocumentType {
 	if id == 0 {
 		return nil
 	}
-	x := &DocumentType{Handle: objref.Wrap(id)}
+	x := &DocumentType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DocumentType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DocumentType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DocumentType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDocumentType creates a new DocumentType.
@@ -70,3 +58,7 @@ type DocumentTypeable interface {
 }
 
 var _ DocumentTypeable = (*DocumentType)(nil)
+
+var _ SampleTypeProvider = (*DocumentType)(nil)
+
+var _ ObjectTypeProvider = (*DocumentType)(nil)

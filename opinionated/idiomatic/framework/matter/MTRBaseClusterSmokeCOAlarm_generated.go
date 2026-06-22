@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBaseClusterSmokeCOAlarm is an idiomatic wrapper over the Objective-C class MTRBaseClusterSmokeCOAlarm.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
 type MTRBaseClusterSmokeCOAlarm struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterSmokeCOAlarmFromID adopts an existing Objective-C object as a MTRBaseClusterSmokeCOAlarm
@@ -25,7 +26,8 @@ func MTRBaseClusterSmokeCOAlarmFromID(id objc.ID) *MTRBaseClusterSmokeCOAlarm {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterSmokeCOAlarm{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterSmokeCOAlarm{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,37 +40,23 @@ func mTRBaseClusterSmokeCOAlarmAdopt(id objc.ID) *MTRBaseClusterSmokeCOAlarm {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterSmokeCOAlarm{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterSmokeCOAlarm{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterSmokeCOAlarm) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterSmokeCOAlarm) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterSmokeCOAlarm) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterSmokeCOAlarmWithDeviceEndpointIDQueue creates a new MTRBaseClusterSmokeCOAlarm.
+// NewMTRBaseClusterSmokeCOAlarmWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterSmokeCOAlarmWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterSmokeCOAlarm {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterSmokeCOAlarm")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterSmokeCOAlarmAdopt(_id)
 }
 
+// ReadAttributeExpressedStateWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeExpressedStateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeExpressedStateWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeExpressedStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -90,8 +78,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeExpressedStateWithCompletion(c
 	}
 }
 
+// SubscribeAttributeExpressedStateWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeExpressedStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeExpressedStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeExpressedStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -113,8 +103,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeExpressedStateWithParamsS
 	}
 }
 
+// ReadAttributeSmokeStateWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSmokeStateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeSmokeStateWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeSmokeStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -136,8 +128,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeSmokeStateWithCompletion(ctx c
 	}
 }
 
+// SubscribeAttributeSmokeStateWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSmokeStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeSmokeStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeSmokeStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -159,8 +153,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeSmokeStateWithParamsSubsc
 	}
 }
 
+// ReadAttributeCOStateWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCOStateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeCOStateWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeCOStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -182,8 +178,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeCOStateWithCompletion(ctx cont
 	}
 }
 
+// SubscribeAttributeCOStateWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCOStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeCOStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeCOStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -205,8 +203,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeCOStateWithParamsSubscrip
 	}
 }
 
+// ReadAttributeBatteryAlertWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeBatteryAlertWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeBatteryAlertWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeBatteryAlertWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -228,8 +228,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeBatteryAlertWithCompletion(ctx
 	}
 }
 
+// SubscribeAttributeBatteryAlertWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeBatteryAlertWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeBatteryAlertWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeBatteryAlertWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -251,8 +253,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeBatteryAlertWithParamsSub
 	}
 }
 
+// ReadAttributeDeviceMutedWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDeviceMutedWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeDeviceMutedWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeDeviceMutedWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -274,8 +278,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeDeviceMutedWithCompletion(ctx 
 	}
 }
 
+// SubscribeAttributeDeviceMutedWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDeviceMutedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeDeviceMutedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeDeviceMutedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -297,8 +303,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeDeviceMutedWithParamsSubs
 	}
 }
 
+// ReadAttributeTestInProgressWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeTestInProgressWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeTestInProgressWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeTestInProgressWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -320,8 +328,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeTestInProgressWithCompletion(c
 	}
 }
 
+// SubscribeAttributeTestInProgressWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTestInProgressWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeTestInProgressWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeTestInProgressWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -343,8 +353,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeTestInProgressWithParamsS
 	}
 }
 
+// ReadAttributeHardwareFaultAlertWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeHardwareFaultAlertWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeHardwareFaultAlertWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeHardwareFaultAlertWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -366,8 +378,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeHardwareFaultAlertWithCompleti
 	}
 }
 
+// SubscribeAttributeHardwareFaultAlertWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeHardwareFaultAlertWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeHardwareFaultAlertWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeHardwareFaultAlertWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -389,8 +403,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeHardwareFaultAlertWithPar
 	}
 }
 
+// ReadAttributeEndOfServiceAlertWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeEndOfServiceAlertWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeEndOfServiceAlertWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeEndOfServiceAlertWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -412,8 +428,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeEndOfServiceAlertWithCompletio
 	}
 }
 
+// SubscribeAttributeEndOfServiceAlertWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeEndOfServiceAlertWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeEndOfServiceAlertWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeEndOfServiceAlertWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -435,8 +453,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeEndOfServiceAlertWithPara
 	}
 }
 
+// ReadAttributeInterconnectSmokeAlarmWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeInterconnectSmokeAlarmWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeInterconnectSmokeAlarmWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeInterconnectSmokeAlarmWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -458,8 +478,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeInterconnectSmokeAlarmWithComp
 	}
 }
 
+// SubscribeAttributeInterconnectSmokeAlarmWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeInterconnectSmokeAlarmWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeInterconnectSmokeAlarmWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeInterconnectSmokeAlarmWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -481,8 +503,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeInterconnectSmokeAlarmWit
 	}
 }
 
+// ReadAttributeInterconnectCOAlarmWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeInterconnectCOAlarmWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeInterconnectCOAlarmWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeInterconnectCOAlarmWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -504,8 +528,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeInterconnectCOAlarmWithComplet
 	}
 }
 
+// SubscribeAttributeInterconnectCOAlarmWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeInterconnectCOAlarmWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeInterconnectCOAlarmWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeInterconnectCOAlarmWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -527,8 +553,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeInterconnectCOAlarmWithPa
 	}
 }
 
+// ReadAttributeContaminationStateWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeContaminationStateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeContaminationStateWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeContaminationStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -550,8 +578,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeContaminationStateWithCompleti
 	}
 }
 
+// SubscribeAttributeContaminationStateWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeContaminationStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeContaminationStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeContaminationStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -573,8 +603,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeContaminationStateWithPar
 	}
 }
 
+// ReadAttributeSmokeSensitivityLevelWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSmokeSensitivityLevelWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeSmokeSensitivityLevelWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeSmokeSensitivityLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -596,8 +628,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeSmokeSensitivityLevelWithCompl
 	}
 }
 
+// SubscribeAttributeSmokeSensitivityLevelWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSmokeSensitivityLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeSmokeSensitivityLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeSmokeSensitivityLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -619,8 +653,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeSmokeSensitivityLevelWith
 	}
 }
 
+// ReadAttributeExpiryDateWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeExpiryDateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeExpiryDateWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeExpiryDateWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -642,8 +678,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeExpiryDateWithCompletion(ctx c
 	}
 }
 
+// SubscribeAttributeExpiryDateWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeExpiryDateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeExpiryDateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeExpiryDateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -665,8 +703,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeExpiryDateWithParamsSubsc
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -688,8 +728,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeGeneratedCommandListWithComple
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -711,8 +753,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeGeneratedCommandListWithP
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -734,8 +778,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeAcceptedCommandListWithComplet
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -757,8 +803,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeAcceptedCommandListWithPa
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -780,8 +828,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeAttributeListWithCompletion(ct
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -803,8 +853,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeAttributeListWithParamsSu
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -826,8 +878,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeFeatureMapWithCompletion(ctx c
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -849,8 +903,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeFeatureMapWithParamsSubsc
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -872,8 +928,10 @@ func (x *MTRBaseClusterSmokeCOAlarm) ReadAttributeClusterRevisionWithCompletion(
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -937,3 +995,7 @@ type MTRBaseClusterSmokeCOAlarmable interface {
 }
 
 var _ MTRBaseClusterSmokeCOAlarmable = (*MTRBaseClusterSmokeCOAlarm)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterSmokeCOAlarm)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterSmokeCOAlarm)(nil)

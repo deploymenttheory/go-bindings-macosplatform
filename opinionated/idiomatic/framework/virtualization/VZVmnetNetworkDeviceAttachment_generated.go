@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A network device attachment that allows a custom network topology.
-//
 // VmnetNetworkDeviceAttachment is an idiomatic wrapper over the Objective-C class VZVmnetNetworkDeviceAttachment.
+//
+// It embeds [NetworkDeviceAttachment], promoting that type's methods.
+//
+// A network device attachment that allows a custom network topology.
 type VmnetNetworkDeviceAttachment struct {
-	objref.Handle
+	NetworkDeviceAttachment
 }
 
 // VmnetNetworkDeviceAttachmentFromID adopts an existing Objective-C object as a VmnetNetworkDeviceAttachment
@@ -25,7 +26,8 @@ func VmnetNetworkDeviceAttachmentFromID(id objc.ID) *VmnetNetworkDeviceAttachmen
 	if id == 0 {
 		return nil
 	}
-	x := &VmnetNetworkDeviceAttachment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VmnetNetworkDeviceAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,35 +40,20 @@ func vmnetNetworkDeviceAttachmentAdopt(id objc.ID) *VmnetNetworkDeviceAttachment
 	if id == 0 {
 		return nil
 	}
-	x := &VmnetNetworkDeviceAttachment{Handle: objref.Wrap(id)}
+	x := &VmnetNetworkDeviceAttachment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *VmnetNetworkDeviceAttachment) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VmnetNetworkDeviceAttachment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VmnetNetworkDeviceAttachment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates the attachment and configures it with the specified data.
-//
-// NewVmnetNetworkDeviceAttachmentWithNetwork creates a new VmnetNetworkDeviceAttachment.
+// NewVmnetNetworkDeviceAttachmentWithNetwork creates the attachment and configures it with the specified data.
 func NewVmnetNetworkDeviceAttachmentWithNetwork(network obj.Object) *VmnetNetworkDeviceAttachment {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZVmnetNetworkDeviceAttachment")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNetwork:"), objref.IDOf(network))
 	return vmnetNetworkDeviceAttachmentAdopt(_id)
 }
 
+// Network wraps the corresponding Objective-C method.
 func (x *VmnetNetworkDeviceAttachment) Network() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("network"))
 	return obj.Wrap(_r)
@@ -79,3 +66,5 @@ type VmnetNetworkDeviceAttachmentable interface {
 }
 
 var _ VmnetNetworkDeviceAttachmentable = (*VmnetNetworkDeviceAttachment)(nil)
+
+var _ NetworkDeviceAttachmentProvider = (*VmnetNetworkDeviceAttachment)(nil)

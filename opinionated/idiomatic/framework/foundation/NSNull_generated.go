@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A singleton object used to represent null values in collection objects that don’t allow nil values.
-//
 // Null is an idiomatic wrapper over the Objective-C class NSNull.
+//
+// A singleton object used to represent null values in collection objects that don’t allow nil values.
 type Null struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NullFromID(id objc.ID) *Null {
 	if id == 0 {
 		return nil
 	}
-	x := &Null{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Null{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nullAdopt(id objc.ID) *Null {
 	if id == 0 {
 		return nil
 	}
-	x := &Null{Handle: objref.Wrap(id)}
+	x := &Null{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *Null) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Null) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNull creates a new Null.
 func NewNull() *Null {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSNull")), objc.RegisterName("new"))
 	return nullAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Null) WithScriptingProperties(scriptingProperties obj.Object) *Null {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x

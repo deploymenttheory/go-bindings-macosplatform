@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// This class provides basic functionality for deriving pipe and stream classes.
-//
 // HostIOSource is an idiomatic wrapper over the Objective-C class IOUSBHostIOSource.
+//
+// HostIOSource is an abstract base — you do not construct it directly. Construct one of [HostPipe], [HostStream] and pass it where a HostIOSource is accepted.
+//
+// This class provides basic functionality for deriving pipe and stream classes.
 type HostIOSource struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func HostIOSourceFromID(id objc.ID) *HostIOSource {
 	if id == 0 {
 		return nil
 	}
-	x := &HostIOSource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HostIOSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func hostIOSourceAdopt(id objc.ID) *HostIOSource {
 	if id == 0 {
 		return nil
 	}
-	x := &HostIOSource{Handle: objref.Wrap(id)}
+	x := &HostIOSource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +62,25 @@ func (x *HostIOSource) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewHostIOSource creates a new HostIOSource.
-func NewHostIOSource() *HostIOSource {
-	_id := objc.Send[objc.ID](objc.ID(_class("IOUSBHostIOSource")), objc.RegisterName("new"))
-	return hostIOSourceAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HostIOSource) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Retrieve the source's IOUSBHostInterface
+// HostInterface retrieve the source's IOUSBHostInterface
 func (x *HostIOSource) HostInterface() *HostInterface {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hostInterface"))
 	return HostInterfaceFromID(_r)
 }
 
-// Retrieve the device's address
+// DeviceAddress retrieve the device's address
 func (x *HostIOSource) DeviceAddress() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("deviceAddress"))
 	return _r
 }
 
-// Retrieve the IOSource's endpoint address
+// EndpointAddress retrieve the IOSource's endpoint address
 func (x *HostIOSource) EndpointAddress() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("endpointAddress"))
 	return _r
@@ -91,3 +95,10 @@ type HostIOSourceable interface {
 }
 
 var _ HostIOSourceable = (*HostIOSource)(nil)
+
+// isHostIOSource marks HostIOSource — and, by embedding promotion, its
+// subclasses — as a member of the HostIOSource hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *HostIOSource) isHostIOSource() {}
+
+var _ HostIOSourceProvider = (*HostIOSource)(nil)

@@ -14,11 +14,13 @@ import (
 	"unsafe"
 )
 
-// A device that stores content in a disk image.
-//
 // DiskImageStorageDeviceAttachment is an idiomatic wrapper over the Objective-C class VZDiskImageStorageDeviceAttachment.
+//
+// It embeds [StorageDeviceAttachment], promoting that type's methods.
+//
+// A device that stores content in a disk image.
 type DiskImageStorageDeviceAttachment struct {
-	objref.Handle
+	StorageDeviceAttachment
 }
 
 // DiskImageStorageDeviceAttachmentFromID adopts an existing Objective-C object as a DiskImageStorageDeviceAttachment
@@ -27,7 +29,8 @@ func DiskImageStorageDeviceAttachmentFromID(id objc.ID) *DiskImageStorageDeviceA
 	if id == 0 {
 		return nil
 	}
-	x := &DiskImageStorageDeviceAttachment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DiskImageStorageDeviceAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,30 +43,14 @@ func diskImageStorageDeviceAttachmentAdopt(id objc.ID) *DiskImageStorageDeviceAt
 	if id == 0 {
 		return nil
 	}
-	x := &DiskImageStorageDeviceAttachment{Handle: objref.Wrap(id)}
+	x := &DiskImageStorageDeviceAttachment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *DiskImageStorageDeviceAttachment) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DiskImageStorageDeviceAttachment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DiskImageStorageDeviceAttachment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates the attachment object from the specified disk image.
-//
-// NewDiskImageStorageDeviceAttachmentWithURLReadOnlyError creates a new DiskImageStorageDeviceAttachment.
-func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyError(url string, readOnly bool) (*DiskImageStorageDeviceAttachment, error) {
+// NewDiskImageStorageDeviceAttachmentWithURLReadOnlyError creates the attachment object from the specified disk image.
+func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyError(url string, readOnly bool) (result *DiskImageStorageDeviceAttachment, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZDiskImageStorageDeviceAttachment")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:readOnly:error:"), rt.FileURL(url), readOnly, unsafe.Pointer(&_nsErr))
@@ -73,10 +60,8 @@ func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyError(url string, readOnl
 	return diskImageStorageDeviceAttachmentAdopt(_id), nil
 }
 
-// Initialize the attachment from a local file URL.
-//
-// NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizationModeError creates a new DiskImageStorageDeviceAttachment.
-func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizationModeError(url string, readOnly bool, cachingMode DiskImageCachingMode, synchronizationMode DiskImageSynchronizationMode) (*DiskImageStorageDeviceAttachment, error) {
+// NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizationModeError initialize the attachment from a local file URL.
+func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizationModeError(url string, readOnly bool, cachingMode DiskImageCachingMode, synchronizationMode DiskImageSynchronizationMode) (result *DiskImageStorageDeviceAttachment, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZDiskImageStorageDeviceAttachment")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:readOnly:cachingMode:synchronizationMode:error:"), rt.FileURL(url), readOnly, cachingMode, synchronizationMode, unsafe.Pointer(&_nsErr))
@@ -86,25 +71,25 @@ func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizatio
 	return diskImageStorageDeviceAttachmentAdopt(_id), nil
 }
 
-// URL of the underlying disk image.
+// URL URL of the underlying disk image.
 func (x *DiskImageStorageDeviceAttachment) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// Whether the underlying disk image is read-only.
+// IsReadOnly whether the underlying disk image is read-only.
 func (x *DiskImageStorageDeviceAttachment) IsReadOnly() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadOnly"))
 	return _r
 }
 
-// How disk image data is cached by the host.
+// CachingMode how disk image data is cached by the host.
 func (x *DiskImageStorageDeviceAttachment) CachingMode() DiskImageCachingMode {
 	_r := objc.Send[DiskImageCachingMode](objref.IDOf(x), objc.RegisterName("cachingMode"))
 	return _r
 }
 
-// The mode in which the disk image synchronizes data with the underlying storage device.
+// SynchronizationMode the mode in which the disk image synchronizes data with the underlying storage device.
 func (x *DiskImageStorageDeviceAttachment) SynchronizationMode() DiskImageSynchronizationMode {
 	_r := objc.Send[DiskImageSynchronizationMode](objref.IDOf(x), objc.RegisterName("synchronizationMode"))
 	return _r
@@ -120,3 +105,5 @@ type DiskImageStorageDeviceAttachmentable interface {
 }
 
 var _ DiskImageStorageDeviceAttachmentable = (*DiskImageStorageDeviceAttachment)(nil)
+
+var _ StorageDeviceAttachmentProvider = (*DiskImageStorageDeviceAttachment)(nil)

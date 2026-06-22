@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMHTMLMenuElement is an idiomatic wrapper over the Objective-C class DOMHTMLMenuElement.
+//
+// It embeds [DOMHTMLElement], promoting that type's methods.
 type DOMHTMLMenuElement struct {
-	objref.Handle
+	DOMHTMLElement
 }
 
 // DOMHTMLMenuElementFromID adopts an existing Objective-C object as a DOMHTMLMenuElement
@@ -23,7 +24,8 @@ func DOMHTMLMenuElementFromID(id objc.ID) *DOMHTMLMenuElement {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMHTMLMenuElement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMHTMLMenuElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMHTMLMenuElementAdopt(id objc.ID) *DOMHTMLMenuElement {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMHTMLMenuElement{Handle: objref.Wrap(id)}
+	x := &DOMHTMLMenuElement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMHTMLMenuElement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMHTMLMenuElement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMHTMLMenuElement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMHTMLMenuElement creates a new DOMHTMLMenuElement.
@@ -62,119 +50,121 @@ func NewDOMHTMLMenuElement() *DOMHTMLMenuElement {
 	return dOMHTMLMenuElementAdopt(_id)
 }
 
-// WithCompact sets compact and returns the receiver so calls can be chained.
+// WithCompact sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMenuElement) WithCompact(compact bool) *DOMHTMLMenuElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompact:"), compact)
 	return x
 }
 
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMenuElement) WithTitle(title string) *DOMHTMLMenuElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// WithLang sets lang and returns the receiver so calls can be chained.
+// WithLang sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMenuElement) WithLang(lang string) *DOMHTMLMenuElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return x
 }
 
-// WithDir sets dir and returns the receiver so calls can be chained.
+// WithDir sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMenuElement) WithDir(dir string) *DOMHTMLMenuElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return x
 }
 
-// WithTabIndex sets tabIndex and returns the receiver so calls can be chained.
+// WithTabIndex sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMenuElement) WithTabIndex(tabIndex int) *DOMHTMLMenuElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
 	return x
 }
 
-// WithAccessKey sets accessKey and returns the receiver so calls can be chained.
+// WithAccessKey sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMenuElement) WithAccessKey(accessKey string) *DOMHTMLMenuElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return x
 }
 
-// WithInnerText sets innerText and returns the receiver so calls can be chained.
+// WithInnerText sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMenuElement) WithInnerText(innerText string) *DOMHTMLMenuElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return x
 }
 
-// WithOuterText sets outerText and returns the receiver so calls can be chained.
+// WithOuterText sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMenuElement) WithOuterText(outerText string) *DOMHTMLMenuElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return x
 }
 
-// WithContentEditable sets contentEditable and returns the receiver so calls can be chained.
+// WithContentEditable sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMenuElement) WithContentEditable(contentEditable string) *DOMHTMLMenuElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return x
 }
 
-// WithIdName sets idName and returns the receiver so calls can be chained.
+// WithIdName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMenuElement) WithIdName(idName string) *DOMHTMLMenuElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return x
 }
 
-// WithScrollLeft sets scrollLeft and returns the receiver so calls can be chained.
+// WithScrollLeft sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMenuElement) WithScrollLeft(scrollLeft int) *DOMHTMLMenuElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return x
 }
 
-// WithScrollTop sets scrollTop and returns the receiver so calls can be chained.
+// WithScrollTop sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMenuElement) WithScrollTop(scrollTop int) *DOMHTMLMenuElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
 	return x
 }
 
-// WithInnerHTML sets innerHTML and returns the receiver so calls can be chained.
+// WithInnerHTML sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMenuElement) WithInnerHTML(innerHTML string) *DOMHTMLMenuElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return x
 }
 
-// WithOuterHTML sets outerHTML and returns the receiver so calls can be chained.
+// WithOuterHTML sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMenuElement) WithOuterHTML(outerHTML string) *DOMHTMLMenuElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return x
 }
 
-// WithClassName sets className and returns the receiver so calls can be chained.
+// WithClassName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMenuElement) WithClassName(className string) *DOMHTMLMenuElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return x
 }
 
-// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMenuElement) WithNodeValue(nodeValue string) *DOMHTMLMenuElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets prefix and returns the receiver so calls can be chained.
+// WithPrefix sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMenuElement) WithPrefix(prefix string) *DOMHTMLMenuElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets textContent and returns the receiver so calls can be chained.
+// WithTextContent sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLMenuElement) WithTextContent(textContent string) *DOMHTMLMenuElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
+// Compact wraps the corresponding Objective-C method.
 func (x *DOMHTMLMenuElement) Compact() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("compact"))
 	return _r
 }
 
+// SetCompact wraps the corresponding Objective-C method.
 func (x *DOMHTMLMenuElement) SetCompact(compact bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompact:"), compact)
 }
@@ -205,3 +195,13 @@ type DOMHTMLMenuElementable interface {
 }
 
 var _ DOMHTMLMenuElementable = (*DOMHTMLMenuElement)(nil)
+
+var _ DOMHTMLElementProvider = (*DOMHTMLMenuElement)(nil)
+
+var _ DOMElementProvider = (*DOMHTMLMenuElement)(nil)
+
+var _ DOMNodeProvider = (*DOMHTMLMenuElement)(nil)
+
+var _ DOMObjectProvider = (*DOMHTMLMenuElement)(nil)
+
+var _ WebScriptObjectProvider = (*DOMHTMLMenuElement)(nil)

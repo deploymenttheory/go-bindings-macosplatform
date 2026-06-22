@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An interface that may be sent to an exported object or remote object proxy.
-//
 // XPCInterface is an idiomatic wrapper over the Objective-C class NSXPCInterface.
+//
+// An interface that may be sent to an exported object or remote object proxy.
 type XPCInterface struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func XPCInterfaceFromID(id objc.ID) *XPCInterface {
 	if id == 0 {
 		return nil
 	}
-	x := &XPCInterface{Handle: objref.Wrap(purego.Retain(id))}
+	x := &XPCInterface{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func xPCInterfaceAdopt(id objc.ID) *XPCInterface {
 	if id == 0 {
 		return nil
 	}
-	x := &XPCInterface{Handle: objref.Wrap(id)}
+	x := &XPCInterface{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *XPCInterface) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *XPCInterface) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewXPCInterface creates a new XPCInterface.
 func NewXPCInterface() *XPCInterface {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSXPCInterface")), objc.RegisterName("new"))
 	return xPCInterfaceAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *XPCInterface) WithScriptingProperties(scriptingProperties obj.Object) *XPCInterface {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x

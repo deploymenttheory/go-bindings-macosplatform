@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A simple, reusable audio source—music or sound effects loaded from a file—for use in positional audio playback.
-//
 // AudioSource is an idiomatic wrapper over the Objective-C class SCNAudioSource.
+//
+// A simple, reusable audio source—music or sound effects loaded from a file—for use in positional audio playback.
 type AudioSource struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AudioSourceFromID(id objc.ID) *AudioSource {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioSource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func audioSourceAdopt(id objc.ID) *AudioSource {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioSource{Handle: objref.Wrap(id)}
+	x := &AudioSource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,133 +60,129 @@ func (x *AudioSource) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes an audio source from an audio file in the application’s main bundle.
-//
-// NewAudioSourceWithFileNamed creates a new AudioSource.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioSource) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudioSourceWithFileNamed initializes an audio source from an audio file in the application’s main bundle.
 func NewAudioSourceWithFileNamed(name string) *AudioSource {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCNAudioSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileNamed:"), purego.NSString(name))
 	return audioSourceAdopt(_id)
 }
 
-// Initializes an audio source from the specified audio file.
-//
-// NewAudioSourceWithURL creates a new AudioSource.
+// NewAudioSourceWithURL initializes an audio source from the specified audio file.
 func NewAudioSourceWithURL(url string) *AudioSource {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCNAudioSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
 	return audioSourceAdopt(_id)
 }
 
-// A Boolean value that determines whether audio from this source uses 3D positional mixing.
-//
-// WithPositional sets positional and returns the receiver so calls can be chained.
+// WithPositional a Boolean value that determines whether audio from this source uses 3D positional mixing.
 func (x *AudioSource) WithPositional(positional bool) *AudioSource {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPositional:"), positional)
 	return x
 }
 
-// The default playback volume for the audio source.
-//
-// WithVolume sets volume and returns the receiver so calls can be chained.
+// WithVolume the default playback volume for the audio source.
 func (x *AudioSource) WithVolume(volume float32) *AudioSource {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 	return x
 }
 
-// The default playback rate for the audio source.
-//
-// WithRate sets rate and returns the receiver so calls can be chained.
+// WithRate the default playback rate for the audio source.
 func (x *AudioSource) WithRate(rate float32) *AudioSource {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 	return x
 }
 
-// The default blend of blend of unmodified and reverb-processed (also called dry and wet) audio for playback of the audio source.
-//
-// WithReverbBlend sets reverbBlend and returns the receiver so calls can be chained.
+// WithReverbBlend the default blend of blend of unmodified and reverb-processed (also called dry and wet) audio for playback of the audio source.
 func (x *AudioSource) WithReverbBlend(reverbBlend float32) *AudioSource {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReverbBlend:"), reverbBlend)
 	return x
 }
 
-// A Boolean value that determines whether the audio source should play repeatedly.
-//
-// WithLoops sets loops and returns the receiver so calls can be chained.
+// WithLoops a Boolean value that determines whether the audio source should play repeatedly.
 func (x *AudioSource) WithLoops(loops bool) *AudioSource {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoops:"), loops)
 	return x
 }
 
-// A Boolean value that determines whether the audio source should stream content from its source URL when playing.
-//
-// WithShouldStream sets shouldStream and returns the receiver so calls can be chained.
+// WithShouldStream a Boolean value that determines whether the audio source should stream content from its source URL when playing.
 func (x *AudioSource) WithShouldStream(shouldStream bool) *AudioSource {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldStream:"), shouldStream)
 	return x
 }
 
-// Loads audio data from the source and prepares it for playing.
+// Load loads audio data from the source and prepares it for playing.
 func (x *AudioSource) Load() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("load"))
 }
 
-// Marks the audio source as positional so that the audio mix considers relative position and velocity with regards to the SCNSceneRenderer's current listener node. Defaults to YES. shouldStream must be set to false in order to get positional audio (see shouldStream).
+// IsPositional marks the audio source as positional so that the audio mix considers relative position and velocity with regards to the SCNSceneRenderer's current listener node. Defaults to YES. shouldStream must be set to false in order to get positional audio (see shouldStream).
 func (x *AudioSource) IsPositional() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPositional"))
 	return _r
 }
 
+// SetPositional wraps the corresponding Objective-C method.
 func (x *AudioSource) SetPositional(positional bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPositional:"), positional)
 }
 
-// The default volume for this audio buffer. Default is 1.0 (full volume).
+// Volume the default volume for this audio buffer. Default is 1.0 (full volume).
 func (x *AudioSource) Volume() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("volume"))
 	return _r
 }
 
+// SetVolume wraps the corresponding Objective-C method.
 func (x *AudioSource) SetVolume(volume float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 }
 
-// The default rate for this audio buffer. Default is 1.0 (original rate of the audio source).
+// Rate the default rate for this audio buffer. Default is 1.0 (original rate of the audio source).
 func (x *AudioSource) Rate() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rate"))
 	return _r
 }
 
+// SetRate wraps the corresponding Objective-C method.
 func (x *AudioSource) SetRate(rate float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 }
 
-// The default reverbBlend for this audio buffer. Default is 0.0 (no sound is sent to the reverb).
+// ReverbBlend the default reverbBlend for this audio buffer. Default is 0.0 (no sound is sent to the reverb).
 func (x *AudioSource) ReverbBlend() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("reverbBlend"))
 	return _r
 }
 
+// SetReverbBlend wraps the corresponding Objective-C method.
 func (x *AudioSource) SetReverbBlend(reverbBlend float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReverbBlend:"), reverbBlend)
 }
 
-// Specifies whether the audio source should loop or not. Defaults to NO.
+// Loops specifies whether the audio source should loop or not. Defaults to NO.
 func (x *AudioSource) Loops() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("loops"))
 	return _r
 }
 
+// SetLoops wraps the corresponding Objective-C method.
 func (x *AudioSource) SetLoops(loops bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoops:"), loops)
 }
 
-// Specifies whether the audio source should be streamed or not. Defaults to NO.
+// ShouldStream specifies whether the audio source should be streamed or not. Defaults to NO.
 func (x *AudioSource) ShouldStream() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldStream"))
 	return _r
 }
 
+// SetShouldStream wraps the corresponding Objective-C method.
 func (x *AudioSource) SetShouldStream(shouldStream bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldStream:"), shouldStream)
 }

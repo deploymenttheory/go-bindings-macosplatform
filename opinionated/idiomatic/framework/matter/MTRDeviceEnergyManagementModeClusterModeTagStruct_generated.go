@@ -23,7 +23,8 @@ func MTRDeviceEnergyManagementModeClusterModeTagStructFromID(id objc.ID) *MTRDev
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceEnergyManagementModeClusterModeTagStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDeviceEnergyManagementModeClusterModeTagStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDeviceEnergyManagementModeClusterModeTagStructAdopt(id objc.ID) *MTRDevi
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceEnergyManagementModeClusterModeTagStruct{Handle: objref.Wrap(id)}
+	x := &MTRDeviceEnergyManagementModeClusterModeTagStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,38 +58,48 @@ func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) IsKind(className str
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDeviceEnergyManagementModeClusterModeTagStruct creates a new MTRDeviceEnergyManagementModeClusterModeTagStruct.
 func NewMTRDeviceEnergyManagementModeClusterModeTagStruct() *MTRDeviceEnergyManagementModeClusterModeTagStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceEnergyManagementModeClusterModeTagStruct")), objc.RegisterName("new"))
 	return mTRDeviceEnergyManagementModeClusterModeTagStructAdopt(_id)
 }
 
-// WithMfgCode sets mfgCode and returns the receiver so calls can be chained.
+// WithMfgCode sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRDeviceEnergyManagementModeClusterModeTagStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 	return x
 }
 
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) WithValue(value obj.Object) *MTRDeviceEnergyManagementModeClusterModeTagStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return x
 }
 
+// MfgCode wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) MfgCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mfgCode"))
 	return obj.Wrap(_r)
 }
 
+// SetMfgCode wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) SetMfgCode(mfgCode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) SetValue(value obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 }

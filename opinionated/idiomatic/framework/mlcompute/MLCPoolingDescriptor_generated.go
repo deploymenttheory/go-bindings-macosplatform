@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration object you use to create a pooling layer.
-//
 // PoolingDescriptor is an idiomatic wrapper over the Objective-C class MLCPoolingDescriptor.
+//
+// A configuration object you use to create a pooling layer.
 type PoolingDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PoolingDescriptorFromID(id objc.ID) *PoolingDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &PoolingDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PoolingDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func poolingDescriptorAdopt(id objc.ID) *PoolingDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &PoolingDescriptor{Handle: objref.Wrap(id)}
+	x := &PoolingDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,73 +60,79 @@ func (x *PoolingDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PoolingDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPoolingDescriptor creates a new PoolingDescriptor.
 func NewPoolingDescriptor() *PoolingDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLCPoolingDescriptor")), objc.RegisterName("new"))
 	return poolingDescriptorAdopt(_id)
 }
 
-// The pooling operation
+// PoolingType the pooling operation
 func (x *PoolingDescriptor) PoolingType() PoolingType {
 	_r := objc.Send[PoolingType](objref.IDOf(x), objc.RegisterName("poolingType"))
 	return _r
 }
 
-// The pooling kernel size in x.
+// KernelWidth the pooling kernel size in x.
 func (x *PoolingDescriptor) KernelWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
-// The pooling kernel size in y.
+// KernelHeight the pooling kernel size in y.
 func (x *PoolingDescriptor) KernelHeight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
-// The stride of the kernel in x.
+// StrideInX the stride of the kernel in x.
 func (x *PoolingDescriptor) StrideInX() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInX"))
 	return _r
 }
 
-// The stride of the kernel in y.
+// StrideInY the stride of the kernel in y.
 func (x *PoolingDescriptor) StrideInY() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInY"))
 	return _r
 }
 
-// The dilation rate i.e. stride of elements in the kernel in x.
+// DilationRateInX the dilation rate i.e. stride of elements in the kernel in x.
 func (x *PoolingDescriptor) DilationRateInX() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateInX"))
 	return _r
 }
 
-// The dilation rate i.e. stride of elements in the kernel in y.
+// DilationRateInY the dilation rate i.e. stride of elements in the kernel in y.
 func (x *PoolingDescriptor) DilationRateInY() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateInY"))
 	return _r
 }
 
-// The padding policy to use.
+// PaddingPolicy the padding policy to use.
 func (x *PoolingDescriptor) PaddingPolicy() PaddingPolicy {
 	_r := objc.Send[PaddingPolicy](objref.IDOf(x), objc.RegisterName("paddingPolicy"))
 	return _r
 }
 
-// The padding size in x (left and right) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
+// PaddingSizeInX the padding size in x (left and right) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
 func (x *PoolingDescriptor) PaddingSizeInX() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingSizeInX"))
 	return _r
 }
 
-// The padding size in y (top and bottom) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
+// PaddingSizeInY the padding size in y (top and bottom) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
 func (x *PoolingDescriptor) PaddingSizeInY() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingSizeInY"))
 	return _r
 }
 
-// Include the zero-padding in the averaging calculation if true.  Used only with average pooling.
+// CountIncludesPadding include the zero-padding in the averaging calculation if true.  Used only with average pooling.
 func (x *PoolingDescriptor) CountIncludesPadding() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("countIncludesPadding"))
 	return _r

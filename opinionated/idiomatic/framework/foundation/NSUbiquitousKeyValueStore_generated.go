@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An iCloud-based container of key-value pairs you share among instances of your app running on a person’s devices.
-//
 // UbiquitousKeyValueStore is an idiomatic wrapper over the Objective-C class NSUbiquitousKeyValueStore.
+//
+// An iCloud-based container of key-value pairs you share among instances of your app running on a person’s devices.
 type UbiquitousKeyValueStore struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func UbiquitousKeyValueStoreFromID(id objc.ID) *UbiquitousKeyValueStore {
 	if id == 0 {
 		return nil
 	}
-	x := &UbiquitousKeyValueStore{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UbiquitousKeyValueStore{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func ubiquitousKeyValueStoreAdopt(id objc.ID) *UbiquitousKeyValueStore {
 	if id == 0 {
 		return nil
 	}
-	x := &UbiquitousKeyValueStore{Handle: objref.Wrap(id)}
+	x := &UbiquitousKeyValueStore{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,35 +60,41 @@ func (x *UbiquitousKeyValueStore) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UbiquitousKeyValueStore) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewUbiquitousKeyValueStore creates a new UbiquitousKeyValueStore.
 func NewUbiquitousKeyValueStore() *UbiquitousKeyValueStore {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSUbiquitousKeyValueStore")), objc.RegisterName("new"))
 	return ubiquitousKeyValueStoreAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UbiquitousKeyValueStore) WithScriptingProperties(scriptingProperties obj.Object) *UbiquitousKeyValueStore {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Returns the object associated with the specified key.
+// ObjectForKey returns the object associated with the specified key.
 func (x *UbiquitousKeyValueStore) ObjectForKey(aKey string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKey:"), purego.NSString(aKey))
 	return obj.Wrap(_r)
 }
 
-// Sets the value of the specified key to a property list object.
+// SetObjectForKey sets the value of the specified key to a property list object.
 func (x *UbiquitousKeyValueStore) SetObjectForKey(anObject obj.Object, aKey string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:forKey:"), objref.IDOf(anObject), purego.NSString(aKey))
 }
 
-// Removes the value for the specified key from the iCloud key-value store.
+// RemoveObjectForKey removes the value for the specified key from the iCloud key-value store.
 func (x *UbiquitousKeyValueStore) RemoveObjectForKey(aKey string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectForKey:"), purego.NSString(aKey))
 }
 
-// Returns the string associated with the specified key.
+// StringForKey returns the string associated with the specified key.
 func (x *UbiquitousKeyValueStore) StringForKey(aKey string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringForKey:"), purego.NSString(aKey))
 	if _r == 0 {
@@ -95,83 +103,84 @@ func (x *UbiquitousKeyValueStore) StringForKey(aKey string) string {
 	return purego.GoString(_r)
 }
 
-// Returns the array associated with the specified key.
+// ArrayForKey returns the array associated with the specified key.
 func (x *UbiquitousKeyValueStore) ArrayForKey(aKey string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrayForKey:"), purego.NSString(aKey))
 	return obj.Wrap(_r)
 }
 
-// Returns the dictionary object associated with the specified key.
+// DictionaryForKey returns the dictionary object associated with the specified key.
 func (x *UbiquitousKeyValueStore) DictionaryForKey(aKey string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryForKey:"), purego.NSString(aKey))
 	return obj.Wrap(_r)
 }
 
-// Returns the data object associated with the specified key.
+// DataForKey returns the data object associated with the specified key.
 func (x *UbiquitousKeyValueStore) DataForKey(aKey string) *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataForKey:"), purego.NSString(aKey))
 	return DataFromID(_r)
 }
 
-// Returns the 64-bit integer value associated with the specified key.
+// LongLongForKey returns the 64-bit integer value associated with the specified key.
 func (x *UbiquitousKeyValueStore) LongLongForKey(aKey string) int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("longLongForKey:"), purego.NSString(aKey))
 	return _r
 }
 
-// Returns the double value associated with the specified key.
+// DoubleForKey returns the double value associated with the specified key.
 func (x *UbiquitousKeyValueStore) DoubleForKey(aKey string) float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("doubleForKey:"), purego.NSString(aKey))
 	return _r
 }
 
-// Returns the Boolean value associated with the specified key.
+// BoolForKey returns the Boolean value associated with the specified key.
 func (x *UbiquitousKeyValueStore) BoolForKey(aKey string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("boolForKey:"), purego.NSString(aKey))
 	return _r
 }
 
-// Sets the value of the specified key to a string value.
+// SetStringForKey sets the value of the specified key to a string value.
 func (x *UbiquitousKeyValueStore) SetStringForKey(aString string, aKey string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:forKey:"), purego.NSString(aString), purego.NSString(aKey))
 }
 
-// Sets the value of the specified key to a data object.
+// SetDataForKey sets the value of the specified key to a data object.
 func (x *UbiquitousKeyValueStore) SetDataForKey(aData *Data, aKey string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:forKey:"), objref.IDOf(aData), purego.NSString(aKey))
 }
 
-// Sets the value of the specified key to an array of property list objects.
+// SetArrayForKey sets the value of the specified key to an array of property list objects.
 func (x *UbiquitousKeyValueStore) SetArrayForKey(anArray obj.Object, aKey string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArray:forKey:"), objref.IDOf(anArray), purego.NSString(aKey))
 }
 
-// Sets the value of the specified key to a dictionary of property list objects.
+// SetDictionaryForKey sets the value of the specified key to a dictionary of property list objects.
 func (x *UbiquitousKeyValueStore) SetDictionaryForKey(aDictionary obj.Object, aKey string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDictionary:forKey:"), objref.IDOf(aDictionary), purego.NSString(aKey))
 }
 
-// Sets the value of the specified key to a 64-bit integer value.
+// SetLongLongForKey sets the value of the specified key to a 64-bit integer value.
 func (x *UbiquitousKeyValueStore) SetLongLongForKey(value int64, aKey string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLong:forKey:"), value, purego.NSString(aKey))
 }
 
-// Sets the value of the specified key to a double value.
+// SetDoubleForKey sets the value of the specified key to a double value.
 func (x *UbiquitousKeyValueStore) SetDoubleForKey(value float64, aKey string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDouble:forKey:"), value, purego.NSString(aKey))
 }
 
-// Sets the value of the specified key to a Boolean value.
+// SetBoolForKey sets the value of the specified key to a Boolean value.
 func (x *UbiquitousKeyValueStore) SetBoolForKey(value bool, aKey string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBool:forKey:"), value, purego.NSString(aKey))
 }
 
-// Synchronizes the in-memory keys and values with the ones stored in iCloud.
+// Synchronize synchronizes the in-memory keys and values with the ones stored in iCloud.
 func (x *UbiquitousKeyValueStore) Synchronize() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("synchronize"))
 	return _r
 }
 
+// DictionaryRepresentation wraps the corresponding Objective-C method.
 func (x *UbiquitousKeyValueStore) DictionaryRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)

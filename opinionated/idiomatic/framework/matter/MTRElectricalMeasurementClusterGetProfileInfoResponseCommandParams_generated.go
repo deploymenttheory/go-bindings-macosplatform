@@ -25,7 +25,8 @@ func MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParamsFromID(id
 	if id == 0 {
 		return nil
 	}
-	x := &MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRElectricalMeasurementClusterGetProfileInfoResponseCommandParamsAdopt(id 
 	if id == 0 {
 		return nil
 	}
-	x := &MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams{Handle: objref.Wrap(id)}
+	x := &MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) IsK
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTRElectricalMeasurementClusterGetProfileInfoResponseCommandParamsWithResponseValueError creates a new MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams.
-func NewMTRElectricalMeasurementClusterGetProfileInfoResponseCommandParamsWithResponseValueError(responseValue obj.Object) (*MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRElectricalMeasurementClusterGetProfileInfoResponseCommandParamsWithResponseValueError initialize an MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRElectricalMeasurementClusterGetProfileInfoResponseCommandParamsWithResponseValueError(responseValue obj.Object) (result *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,74 +77,81 @@ func NewMTRElectricalMeasurementClusterGetProfileInfoResponseCommandParamsWithRe
 	return mTRElectricalMeasurementClusterGetProfileInfoResponseCommandParamsAdopt(_id), nil
 }
 
-// WithProfileCount sets profileCount and returns the receiver so calls can be chained.
+// WithProfileCount sets the property and returns the receiver so calls can be chained.
 func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) WithProfileCount(profileCount obj.Object) *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProfileCount:"), objref.IDOf(profileCount))
 	return x
 }
 
-// WithProfileIntervalPeriod sets profileIntervalPeriod and returns the receiver so calls can be chained.
+// WithProfileIntervalPeriod sets the property and returns the receiver so calls can be chained.
 func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) WithProfileIntervalPeriod(profileIntervalPeriod obj.Object) *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProfileIntervalPeriod:"), objref.IDOf(profileIntervalPeriod))
 	return x
 }
 
-// WithMaxNumberOfIntervals sets maxNumberOfIntervals and returns the receiver so calls can be chained.
+// WithMaxNumberOfIntervals sets the property and returns the receiver so calls can be chained.
 func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) WithMaxNumberOfIntervals(maxNumberOfIntervals obj.Object) *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxNumberOfIntervals:"), objref.IDOf(maxNumberOfIntervals))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
+// ProfileCount wraps the corresponding Objective-C method.
 func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) ProfileCount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("profileCount"))
 	return obj.Wrap(_r)
 }
 
+// SetProfileCount wraps the corresponding Objective-C method.
 func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) SetProfileCount(profileCount obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProfileCount:"), objref.IDOf(profileCount))
 }
 
+// ProfileIntervalPeriod wraps the corresponding Objective-C method.
 func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) ProfileIntervalPeriod() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("profileIntervalPeriod"))
 	return obj.Wrap(_r)
 }
 
+// SetProfileIntervalPeriod wraps the corresponding Objective-C method.
 func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) SetProfileIntervalPeriod(profileIntervalPeriod obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProfileIntervalPeriod:"), objref.IDOf(profileIntervalPeriod))
 }
 
+// MaxNumberOfIntervals wraps the corresponding Objective-C method.
 func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) MaxNumberOfIntervals() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxNumberOfIntervals"))
 	return obj.Wrap(_r)
 }
 
+// SetMaxNumberOfIntervals wraps the corresponding Objective-C method.
 func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) SetMaxNumberOfIntervals(maxNumberOfIntervals obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxNumberOfIntervals:"), objref.IDOf(maxNumberOfIntervals))
 }
 
+// ListOfAttributes wraps the corresponding Objective-C method.
 func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) ListOfAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("listOfAttributes"))
 	return obj.Wrap(_r)
 }
 
+// SetListOfAttributes wraps the corresponding Objective-C method.
 func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) SetListOfAttributes(listOfAttributes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListOfAttributes:"), objref.IDOf(listOfAttributes))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }

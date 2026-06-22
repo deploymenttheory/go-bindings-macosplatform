@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view that presents a list of nearby media receivers.
-//
 // RoutePickerView is an idiomatic wrapper over the Objective-C class AVRoutePickerView.
+//
+// A view that presents a list of nearby media receivers.
 type RoutePickerView struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RoutePickerViewFromID(id objc.ID) *RoutePickerView {
 	if id == 0 {
 		return nil
 	}
-	x := &RoutePickerView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RoutePickerView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func routePickerViewAdopt(id objc.ID) *RoutePickerView {
 	if id == 0 {
 		return nil
 	}
-	x := &RoutePickerView{Handle: objref.Wrap(id)}
+	x := &RoutePickerView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,55 +60,59 @@ func (x *RoutePickerView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RoutePickerView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRoutePickerView creates a new RoutePickerView.
 func NewRoutePickerView() *RoutePickerView {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVRoutePickerView")), objc.RegisterName("new"))
 	return routePickerViewAdopt(_id)
 }
 
-// The player object to perform routing operations for.
-//
-// WithPlayer sets player and returns the receiver so calls can be chained.
+// WithPlayer the player object to perform routing operations for.
 func (x *RoutePickerView) WithPlayer(player obj.Object) *RoutePickerView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayer:"), objref.IDOf(player))
 	return x
 }
 
-// A Boolean value that indicates whether the route picker button has a border.
-//
-// WithRoutePickerButtonBordered sets routePickerButtonBordered and returns the receiver so calls can be chained.
+// WithRoutePickerButtonBordered a Boolean value that indicates whether the route picker button has a border.
 func (x *RoutePickerView) WithRoutePickerButtonBordered(routePickerButtonBordered bool) *RoutePickerView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRoutePickerButtonBordered:"), routePickerButtonBordered)
 	return x
 }
 
-// Returns the color of the picker button for the specified state.
+// RoutePickerButtonColorForState returns the color of the picker button for the specified state.
 func (x *RoutePickerView) RoutePickerButtonColorForState(state RoutePickerViewButtonState) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("routePickerButtonColorForState:"), state)
 	return obj.Wrap(_r)
 }
 
-// Sets the route picker button color for the specified state.
+// SetRoutePickerButtonColorForState sets the route picker button color for the specified state.
 func (x *RoutePickerView) SetRoutePickerButtonColorForState(color obj.Object, state RoutePickerViewButtonState) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRoutePickerButtonColor:forState:"), objref.IDOf(color), state)
 }
 
-// The player for which to perform routing operations.
+// Player the player for which to perform routing operations.
 func (x *RoutePickerView) Player() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("player"))
 	return obj.Wrap(_r)
 }
 
+// SetPlayer wraps the corresponding Objective-C method.
 func (x *RoutePickerView) SetPlayer(player obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayer:"), objref.IDOf(player))
 }
 
-// Whether or not the picker button has a border. Default is YES.
+// IsRoutePickerButtonBordered whether or not the picker button has a border. Default is YES.
 func (x *RoutePickerView) IsRoutePickerButtonBordered() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRoutePickerButtonBordered"))
 	return _r
 }
 
+// SetRoutePickerButtonBordered wraps the corresponding Objective-C method.
 func (x *RoutePickerView) SetRoutePickerButtonBordered(routePickerButtonBordered bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRoutePickerButtonBordered:"), routePickerButtonBordered)
 }

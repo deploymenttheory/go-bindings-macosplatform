@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The common behavior of socket devices.
-//
 // SocketDevice is an idiomatic wrapper over the Objective-C class VZSocketDevice.
+//
+// SocketDevice is an abstract base — you do not construct it directly. Construct one of [VirtioSocketDevice] and pass it where a SocketDevice is accepted.
+//
+// The common behavior of socket devices.
 type SocketDevice struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func SocketDeviceFromID(id objc.ID) *SocketDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &SocketDevice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SocketDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func socketDeviceAdopt(id objc.ID) *SocketDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &SocketDevice{Handle: objref.Wrap(id)}
+	x := &SocketDevice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *SocketDevice) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewSocketDevice creates a new SocketDevice.
-func NewSocketDevice() *SocketDevice {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZSocketDevice")), objc.RegisterName("new"))
-	return socketDeviceAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SocketDevice) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // SocketDeviceable is the interface implemented by [SocketDevice], for mocking and DI.
@@ -70,3 +74,10 @@ type SocketDeviceable interface {
 }
 
 var _ SocketDeviceable = (*SocketDevice)(nil)
+
+// isSocketDevice marks SocketDevice — and, by embedding promotion, its
+// subclasses — as a member of the SocketDevice hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SocketDevice) isSocketDevice() {}
+
+var _ SocketDeviceProvider = (*SocketDevice)(nil)

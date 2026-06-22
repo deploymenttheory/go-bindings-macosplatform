@@ -23,7 +23,8 @@ func MTRDeviceEnergyManagementClusterSlotStructFromID(id objc.ID) *MTRDeviceEner
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceEnergyManagementClusterSlotStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDeviceEnergyManagementClusterSlotStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDeviceEnergyManagementClusterSlotStructAdopt(id objc.ID) *MTRDeviceEnerg
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceEnergyManagementClusterSlotStruct{Handle: objref.Wrap(id)}
+	x := &MTRDeviceEnergyManagementClusterSlotStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,272 +58,314 @@ func (x *MTRDeviceEnergyManagementClusterSlotStruct) IsKind(className string) bo
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDeviceEnergyManagementClusterSlotStruct creates a new MTRDeviceEnergyManagementClusterSlotStruct.
 func NewMTRDeviceEnergyManagementClusterSlotStruct() *MTRDeviceEnergyManagementClusterSlotStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceEnergyManagementClusterSlotStruct")), objc.RegisterName("new"))
 	return mTRDeviceEnergyManagementClusterSlotStructAdopt(_id)
 }
 
-// WithMinDuration sets minDuration and returns the receiver so calls can be chained.
+// WithMinDuration sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMinDuration(minDuration obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinDuration:"), objref.IDOf(minDuration))
 	return x
 }
 
-// WithMaxDuration sets maxDuration and returns the receiver so calls can be chained.
+// WithMaxDuration sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMaxDuration(maxDuration obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxDuration:"), objref.IDOf(maxDuration))
 	return x
 }
 
-// WithDefaultDuration sets defaultDuration and returns the receiver so calls can be chained.
+// WithDefaultDuration sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithDefaultDuration(defaultDuration obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultDuration:"), objref.IDOf(defaultDuration))
 	return x
 }
 
-// WithElapsedSlotTime sets elapsedSlotTime and returns the receiver so calls can be chained.
+// WithElapsedSlotTime sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithElapsedSlotTime(elapsedSlotTime obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElapsedSlotTime:"), objref.IDOf(elapsedSlotTime))
 	return x
 }
 
-// WithRemainingSlotTime sets remainingSlotTime and returns the receiver so calls can be chained.
+// WithRemainingSlotTime sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithRemainingSlotTime(remainingSlotTime obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemainingSlotTime:"), objref.IDOf(remainingSlotTime))
 	return x
 }
 
-// WithSlotIsPausable sets slotIsPausable and returns the receiver so calls can be chained.
+// WithSlotIsPausable sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithSlotIsPausable(slotIsPausable obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSlotIsPausable:"), objref.IDOf(slotIsPausable))
 	return x
 }
 
-// WithMinPauseDuration sets minPauseDuration and returns the receiver so calls can be chained.
+// WithMinPauseDuration sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMinPauseDuration(minPauseDuration obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinPauseDuration:"), objref.IDOf(minPauseDuration))
 	return x
 }
 
-// WithMaxPauseDuration sets maxPauseDuration and returns the receiver so calls can be chained.
+// WithMaxPauseDuration sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMaxPauseDuration(maxPauseDuration obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPauseDuration:"), objref.IDOf(maxPauseDuration))
 	return x
 }
 
-// WithManufacturerESAState sets manufacturerESAState and returns the receiver so calls can be chained.
+// WithManufacturerESAState sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithManufacturerESAState(manufacturerESAState obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManufacturerESAState:"), objref.IDOf(manufacturerESAState))
 	return x
 }
 
-// WithNominalPower sets nominalPower and returns the receiver so calls can be chained.
+// WithNominalPower sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithNominalPower(nominalPower obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNominalPower:"), objref.IDOf(nominalPower))
 	return x
 }
 
-// WithMinPower sets minPower and returns the receiver so calls can be chained.
+// WithMinPower sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMinPower(minPower obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinPower:"), objref.IDOf(minPower))
 	return x
 }
 
-// WithMaxPower sets maxPower and returns the receiver so calls can be chained.
+// WithMaxPower sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMaxPower(maxPower obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPower:"), objref.IDOf(maxPower))
 	return x
 }
 
-// WithNominalEnergy sets nominalEnergy and returns the receiver so calls can be chained.
+// WithNominalEnergy sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithNominalEnergy(nominalEnergy obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNominalEnergy:"), objref.IDOf(nominalEnergy))
 	return x
 }
 
-// WithMinPowerAdjustment sets minPowerAdjustment and returns the receiver so calls can be chained.
+// WithMinPowerAdjustment sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMinPowerAdjustment(minPowerAdjustment obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinPowerAdjustment:"), objref.IDOf(minPowerAdjustment))
 	return x
 }
 
-// WithMaxPowerAdjustment sets maxPowerAdjustment and returns the receiver so calls can be chained.
+// WithMaxPowerAdjustment sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMaxPowerAdjustment(maxPowerAdjustment obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPowerAdjustment:"), objref.IDOf(maxPowerAdjustment))
 	return x
 }
 
-// WithMinDurationAdjustment sets minDurationAdjustment and returns the receiver so calls can be chained.
+// WithMinDurationAdjustment sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMinDurationAdjustment(minDurationAdjustment obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinDurationAdjustment:"), objref.IDOf(minDurationAdjustment))
 	return x
 }
 
-// WithMaxDurationAdjustment sets maxDurationAdjustment and returns the receiver so calls can be chained.
+// WithMaxDurationAdjustment sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMaxDurationAdjustment(maxDurationAdjustment obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxDurationAdjustment:"), objref.IDOf(maxDurationAdjustment))
 	return x
 }
 
+// MinDuration wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) MinDuration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minDuration"))
 	return obj.Wrap(_r)
 }
 
+// SetMinDuration wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMinDuration(minDuration obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinDuration:"), objref.IDOf(minDuration))
 }
 
+// MaxDuration wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) MaxDuration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxDuration"))
 	return obj.Wrap(_r)
 }
 
+// SetMaxDuration wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxDuration(maxDuration obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxDuration:"), objref.IDOf(maxDuration))
 }
 
+// DefaultDuration wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) DefaultDuration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultDuration"))
 	return obj.Wrap(_r)
 }
 
+// SetDefaultDuration wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetDefaultDuration(defaultDuration obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultDuration:"), objref.IDOf(defaultDuration))
 }
 
+// ElapsedSlotTime wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) ElapsedSlotTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elapsedSlotTime"))
 	return obj.Wrap(_r)
 }
 
+// SetElapsedSlotTime wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetElapsedSlotTime(elapsedSlotTime obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElapsedSlotTime:"), objref.IDOf(elapsedSlotTime))
 }
 
+// RemainingSlotTime wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) RemainingSlotTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remainingSlotTime"))
 	return obj.Wrap(_r)
 }
 
+// SetRemainingSlotTime wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetRemainingSlotTime(remainingSlotTime obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemainingSlotTime:"), objref.IDOf(remainingSlotTime))
 }
 
+// SlotIsPausable wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) SlotIsPausable() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("slotIsPausable"))
 	return obj.Wrap(_r)
 }
 
+// SetSlotIsPausable wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetSlotIsPausable(slotIsPausable obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSlotIsPausable:"), objref.IDOf(slotIsPausable))
 }
 
+// MinPauseDuration wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) MinPauseDuration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minPauseDuration"))
 	return obj.Wrap(_r)
 }
 
+// SetMinPauseDuration wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMinPauseDuration(minPauseDuration obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinPauseDuration:"), objref.IDOf(minPauseDuration))
 }
 
+// MaxPauseDuration wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) MaxPauseDuration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPauseDuration"))
 	return obj.Wrap(_r)
 }
 
+// SetMaxPauseDuration wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxPauseDuration(maxPauseDuration obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPauseDuration:"), objref.IDOf(maxPauseDuration))
 }
 
+// ManufacturerESAState wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) ManufacturerESAState() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manufacturerESAState"))
 	return obj.Wrap(_r)
 }
 
+// SetManufacturerESAState wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetManufacturerESAState(manufacturerESAState obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManufacturerESAState:"), objref.IDOf(manufacturerESAState))
 }
 
+// NominalPower wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) NominalPower() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nominalPower"))
 	return obj.Wrap(_r)
 }
 
+// SetNominalPower wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetNominalPower(nominalPower obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNominalPower:"), objref.IDOf(nominalPower))
 }
 
+// MinPower wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) MinPower() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minPower"))
 	return obj.Wrap(_r)
 }
 
+// SetMinPower wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMinPower(minPower obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinPower:"), objref.IDOf(minPower))
 }
 
+// MaxPower wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) MaxPower() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPower"))
 	return obj.Wrap(_r)
 }
 
+// SetMaxPower wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxPower(maxPower obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPower:"), objref.IDOf(maxPower))
 }
 
+// NominalEnergy wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) NominalEnergy() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nominalEnergy"))
 	return obj.Wrap(_r)
 }
 
+// SetNominalEnergy wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetNominalEnergy(nominalEnergy obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNominalEnergy:"), objref.IDOf(nominalEnergy))
 }
 
+// Costs wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) Costs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("costs"))
 	return obj.Wrap(_r)
 }
 
+// SetCosts wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetCosts(costs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCosts:"), objref.IDOf(costs))
 }
 
+// MinPowerAdjustment wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) MinPowerAdjustment() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minPowerAdjustment"))
 	return obj.Wrap(_r)
 }
 
+// SetMinPowerAdjustment wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMinPowerAdjustment(minPowerAdjustment obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinPowerAdjustment:"), objref.IDOf(minPowerAdjustment))
 }
 
+// MaxPowerAdjustment wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) MaxPowerAdjustment() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPowerAdjustment"))
 	return obj.Wrap(_r)
 }
 
+// SetMaxPowerAdjustment wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxPowerAdjustment(maxPowerAdjustment obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPowerAdjustment:"), objref.IDOf(maxPowerAdjustment))
 }
 
+// MinDurationAdjustment wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) MinDurationAdjustment() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minDurationAdjustment"))
 	return obj.Wrap(_r)
 }
 
+// SetMinDurationAdjustment wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMinDurationAdjustment(minDurationAdjustment obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinDurationAdjustment:"), objref.IDOf(minDurationAdjustment))
 }
 
+// MaxDurationAdjustment wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) MaxDurationAdjustment() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxDurationAdjustment"))
 	return obj.Wrap(_r)
 }
 
+// SetMaxDurationAdjustment wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxDurationAdjustment(maxDurationAdjustment obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxDurationAdjustment:"), objref.IDOf(maxDurationAdjustment))
 }

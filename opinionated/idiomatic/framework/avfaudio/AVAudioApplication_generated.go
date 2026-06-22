@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that manages one or more audio sessions that belong to an app.
-//
 // AudioApplication is an idiomatic wrapper over the Objective-C class AVAudioApplication.
+//
+// An object that manages one or more audio sessions that belong to an app.
 type AudioApplication struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func AudioApplicationFromID(id objc.ID) *AudioApplication {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioApplication{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioApplication{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func audioApplicationAdopt(id objc.ID) *AudioApplication {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioApplication{Handle: objref.Wrap(id)}
+	x := &AudioApplication{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,13 +62,19 @@ func (x *AudioApplication) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioApplication) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAudioApplication creates a new AudioApplication.
 func NewAudioApplication() *AudioApplication {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioApplication")), objc.RegisterName("new"))
 	return audioApplicationAdopt(_id)
 }
 
-// Sets a Boolean value that indicates whether the app’s audio input is in a muted state.
+// SetInputMuted sets a Boolean value that indicates whether the app’s audio input is in a muted state.
 func (x *AudioApplication) SetInputMuted(muted bool) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setInputMuted:error:"), muted, unsafe.Pointer(&_nsErr))
@@ -76,7 +84,7 @@ func (x *AudioApplication) SetInputMuted(muted bool) error {
 	return nil
 }
 
-// Sets a callback to handle changes to application-level audio muting states.
+// SetInputMuteStateChangeHandler sets a callback to handle changes to application-level audio muting states.
 func (x *AudioApplication) SetInputMuteStateChangeHandler(inputMuteHandler func(bool) bool) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setInputMuteStateChangeHandler:error:"), objc.NewBlock(func(_ objc.Block, _b0 bool) bool { return inputMuteHandler(_b0) }), unsafe.Pointer(&_nsErr))
@@ -86,13 +94,13 @@ func (x *AudioApplication) SetInputMuteStateChangeHandler(inputMuteHandler func(
 	return nil
 }
 
-// Get the input muted state - return value is boolean 0 for unmuted or value 1 for muted (input samples zeroed out)
+// IsInputMuted get the input muted state - return value is boolean 0 for unmuted or value 1 for muted (input samples zeroed out)
 func (x *AudioApplication) IsInputMuted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInputMuted"))
 	return _r
 }
 
-// Returns an enum indicating whether the user has granted or denied permission to record, or has not been asked
+// RecordPermission returns an enum indicating whether the user has granted or denied permission to record, or has not been asked
 func (x *AudioApplication) RecordPermission() AudioApplicationRecordPermission {
 	_r := objc.Send[AudioApplicationRecordPermission](objref.IDOf(x), objc.RegisterName("recordPermission"))
 	return _r

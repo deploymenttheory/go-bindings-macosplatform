@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Wi-Fi Network Management
-//
 // MTRBaseClusterWiFiNetworkManagement is an idiomatic wrapper over the Objective-C class MTRBaseClusterWiFiNetworkManagement.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
+//
+// Cluster Wi-Fi Network Management
 type MTRBaseClusterWiFiNetworkManagement struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterWiFiNetworkManagementFromID adopts an existing Objective-C object as a MTRBaseClusterWiFiNetworkManagement
@@ -27,7 +28,8 @@ func MTRBaseClusterWiFiNetworkManagementFromID(id objc.ID) *MTRBaseClusterWiFiNe
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterWiFiNetworkManagement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterWiFiNetworkManagement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,39 +42,23 @@ func mTRBaseClusterWiFiNetworkManagementAdopt(id objc.ID) *MTRBaseClusterWiFiNet
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterWiFiNetworkManagement{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterWiFiNetworkManagement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterWiFiNetworkManagement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterWiFiNetworkManagement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterWiFiNetworkManagement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterWiFiNetworkManagementWithDeviceEndpointIDQueue creates a new MTRBaseClusterWiFiNetworkManagement.
+// NewMTRBaseClusterWiFiNetworkManagementWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterWiFiNetworkManagementWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterWiFiNetworkManagement {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterWiFiNetworkManagement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterWiFiNetworkManagementAdopt(_id)
 }
 
-// Command NetworkPassphraseRequest
+// NetworkPassphraseRequestWithParamsCompletion command NetworkPassphraseRequest
 //
 // NetworkPassphraseRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkManagement) NetworkPassphraseRequestWithParamsCompletion(ctx context.Context, params *MTRWiFiNetworkManagementClusterNetworkPassphraseRequestParams) (*MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams, error) {
+func (x *MTRBaseClusterWiFiNetworkManagement) NetworkPassphraseRequestWithParamsCompletion(ctx context.Context, params *MTRWiFiNetworkManagementClusterNetworkPassphraseRequestParams) (result *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams, err error) {
 	type _result struct {
 		val *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams
 		err error
@@ -94,8 +80,10 @@ func (x *MTRBaseClusterWiFiNetworkManagement) NetworkPassphraseRequestWithParams
 	}
 }
 
+// NetworkPassphraseRequestWithCompletion wraps the corresponding Objective-C method.
+//
 // NetworkPassphraseRequestWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkManagement) NetworkPassphraseRequestWithCompletion(ctx context.Context) (*MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams, error) {
+func (x *MTRBaseClusterWiFiNetworkManagement) NetworkPassphraseRequestWithCompletion(ctx context.Context) (result *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams, err error) {
 	type _result struct {
 		val *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams
 		err error
@@ -117,8 +105,10 @@ func (x *MTRBaseClusterWiFiNetworkManagement) NetworkPassphraseRequestWithComple
 	}
 }
 
+// ReadAttributeSSIDWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSSIDWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkManagement) ReadAttributeSSIDWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkManagement) ReadAttributeSSIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -140,8 +130,10 @@ func (x *MTRBaseClusterWiFiNetworkManagement) ReadAttributeSSIDWithCompletion(ct
 	}
 }
 
+// SubscribeAttributeSSIDWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSSIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributeSSIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributeSSIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -163,8 +155,10 @@ func (x *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributeSSIDWithParamsSu
 	}
 }
 
+// ReadAttributePassphraseSurrogateWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePassphraseSurrogateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkManagement) ReadAttributePassphraseSurrogateWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkManagement) ReadAttributePassphraseSurrogateWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -186,8 +180,10 @@ func (x *MTRBaseClusterWiFiNetworkManagement) ReadAttributePassphraseSurrogateWi
 	}
 }
 
+// SubscribeAttributePassphraseSurrogateWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePassphraseSurrogateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributePassphraseSurrogateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributePassphraseSurrogateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -209,8 +205,10 @@ func (x *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributePassphraseSurrog
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkManagement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkManagement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -232,8 +230,10 @@ func (x *MTRBaseClusterWiFiNetworkManagement) ReadAttributeGeneratedCommandListW
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -255,8 +255,10 @@ func (x *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributeGeneratedCommand
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkManagement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkManagement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -278,8 +280,10 @@ func (x *MTRBaseClusterWiFiNetworkManagement) ReadAttributeAcceptedCommandListWi
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -301,8 +305,10 @@ func (x *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributeAcceptedCommandL
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkManagement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkManagement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -324,8 +330,10 @@ func (x *MTRBaseClusterWiFiNetworkManagement) ReadAttributeAttributeListWithComp
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -347,8 +355,10 @@ func (x *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributeAttributeListWit
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkManagement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkManagement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -370,8 +380,10 @@ func (x *MTRBaseClusterWiFiNetworkManagement) ReadAttributeFeatureMapWithComplet
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -393,8 +405,10 @@ func (x *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributeFeatureMapWithPa
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkManagement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkManagement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -416,8 +430,10 @@ func (x *MTRBaseClusterWiFiNetworkManagement) ReadAttributeClusterRevisionWithCo
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -461,3 +477,7 @@ type MTRBaseClusterWiFiNetworkManagementable interface {
 }
 
 var _ MTRBaseClusterWiFiNetworkManagementable = (*MTRBaseClusterWiFiNetworkManagement)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterWiFiNetworkManagement)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterWiFiNetworkManagement)(nil)

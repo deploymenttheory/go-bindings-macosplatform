@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request to fetch setup, import, or export events in a persistent CloudKit container.
-//
 // PersistentCloudKitContainerEventRequest is an idiomatic wrapper over the Objective-C class NSPersistentCloudKitContainerEventRequest.
+//
+// It embeds [PersistentStoreRequest], promoting that type's methods.
+//
+// A request to fetch setup, import, or export events in a persistent CloudKit container.
 type PersistentCloudKitContainerEventRequest struct {
-	objref.Handle
+	PersistentStoreRequest
 }
 
 // PersistentCloudKitContainerEventRequestFromID adopts an existing Objective-C object as a PersistentCloudKitContainerEventRequest
@@ -25,7 +26,8 @@ func PersistentCloudKitContainerEventRequestFromID(id objc.ID) *PersistentCloudK
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentCloudKitContainerEventRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PersistentCloudKitContainerEventRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func persistentCloudKitContainerEventRequestAdopt(id objc.ID) *PersistentCloudKi
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentCloudKitContainerEventRequest{Handle: objref.Wrap(id)}
+	x := &PersistentCloudKitContainerEventRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PersistentCloudKitContainerEventRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PersistentCloudKitContainerEventRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PersistentCloudKitContainerEventRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPersistentCloudKitContainerEventRequest creates a new PersistentCloudKitContainerEventRequest.
@@ -64,28 +52,26 @@ func NewPersistentCloudKitContainerEventRequest() *PersistentCloudKitContainerEv
 	return persistentCloudKitContainerEventRequestAdopt(_id)
 }
 
-// The type of result that the request returns.
-//
-// WithResultType sets resultType and returns the receiver so calls can be chained.
+// WithResultType the type of result that the request returns.
 func (x *PersistentCloudKitContainerEventRequest) WithResultType(resultType PersistentCloudKitContainerEventResultType) *PersistentCloudKitContainerEventRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
 	return x
 }
 
-// The stores the request should be sent to.
-//
-// WithAffectedStores sets the collection and returns the receiver so calls can be chained.
+// WithAffectedStores the stores the request should be sent to.
 func (x *PersistentCloudKitContainerEventRequest) WithAffectedStores(items ...PersistentStoreProvider) *PersistentCloudKitContainerEventRequest {
 	_arr := purego.SliceToNSArray(items, func(_v PersistentStoreProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), _arr)
 	return x
 }
 
+// ResultType wraps the corresponding Objective-C method.
 func (x *PersistentCloudKitContainerEventRequest) ResultType() PersistentCloudKitContainerEventResultType {
 	_r := objc.Send[PersistentCloudKitContainerEventResultType](objref.IDOf(x), objc.RegisterName("resultType"))
 	return _r
 }
 
+// SetResultType wraps the corresponding Objective-C method.
 func (x *PersistentCloudKitContainerEventRequest) SetResultType(resultType PersistentCloudKitContainerEventResultType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
 }
@@ -100,3 +86,5 @@ type PersistentCloudKitContainerEventRequestable interface {
 }
 
 var _ PersistentCloudKitContainerEventRequestable = (*PersistentCloudKitContainerEventRequest)(nil)
+
+var _ PersistentStoreRequestProvider = (*PersistentCloudKitContainerEventRequest)(nil)

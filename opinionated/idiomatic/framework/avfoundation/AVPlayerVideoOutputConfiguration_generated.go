@@ -6,15 +6,16 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides configuration information for the related player item.
-//
 // PlayerVideoOutputConfiguration is an idiomatic wrapper over the Objective-C class AVPlayerVideoOutputConfiguration.
+//
+// An object that provides configuration information for the related player item.
 type PlayerVideoOutputConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func PlayerVideoOutputConfigurationFromID(id objc.ID) *PlayerVideoOutputConfigur
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerVideoOutputConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlayerVideoOutputConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func playerVideoOutputConfigurationAdopt(id objc.ID) *PlayerVideoOutputConfigura
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerVideoOutputConfiguration{Handle: objref.Wrap(id)}
+	x := &PlayerVideoOutputConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +61,34 @@ func (x *PlayerVideoOutputConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerVideoOutputConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPlayerVideoOutputConfiguration creates a new PlayerVideoOutputConfiguration.
 func NewPlayerVideoOutputConfiguration() *PlayerVideoOutputConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerVideoOutputConfiguration")), objc.RegisterName("new"))
 	return playerVideoOutputConfigurationAdopt(_id)
 }
 
-// The AVPlayerItem which is the source of this configuration. This AVPlayerItem can be seen as the source of all samples this configuration vended alongside.
+// SourcePlayerItem the AVPlayerItem which is the source of this configuration. This AVPlayerItem can be seen as the source of all samples this configuration vended alongside.
 func (x *PlayerVideoOutputConfiguration) SourcePlayerItem() *PlayerItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourcePlayerItem"))
 	return PlayerItemFromID(_r)
 }
 
-// List of data channels, represented as CMTagCollections, selected for this configuration. Returns an Array of CMTagCollections
+// DataChannelDescriptions list of data channels, represented as CMTagCollections, selected for this configuration. Returns an Array of CMTagCollections
 func (x *PlayerVideoOutputConfiguration) DataChannelDescriptions() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataChannelDescriptions"))
 	return obj.Wrap(_r)
+}
+
+// PreferredTransform the preferred transformation of the visual media data vended with this configuration. This transformation is acquired from the AVAssetTrack that was used to source the media data accompanying this configuration. If no transform was specified by the source track a default value of CGAffineTransformIdentity is returned.
+func (x *PlayerVideoOutputConfiguration) PreferredTransform() corefoundation.CGAffineTransform {
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("preferredTransform"))
+	return _r
 }
 
 // PlayerVideoOutputConfigurationable is the interface implemented by [PlayerVideoOutputConfiguration], for mocking and DI.
@@ -81,6 +96,7 @@ type PlayerVideoOutputConfigurationable interface {
 	obj.Object
 	SourcePlayerItem() *PlayerItem
 	DataChannelDescriptions() obj.Object
+	PreferredTransform() corefoundation.CGAffineTransform
 }
 
 var _ PlayerVideoOutputConfigurationable = (*PlayerVideoOutputConfiguration)(nil)

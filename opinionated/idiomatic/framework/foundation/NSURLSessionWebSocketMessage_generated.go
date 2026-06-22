@@ -23,7 +23,8 @@ func URLSessionWebSocketMessageFromID(id objc.ID) *URLSessionWebSocketMessage {
 	if id == 0 {
 		return nil
 	}
-	x := &URLSessionWebSocketMessage{Handle: objref.Wrap(purego.Retain(id))}
+	x := &URLSessionWebSocketMessage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func uRLSessionWebSocketMessageAdopt(id objc.ID) *URLSessionWebSocketMessage {
 	if id == 0 {
 		return nil
 	}
-	x := &URLSessionWebSocketMessage{Handle: objref.Wrap(id)}
+	x := &URLSessionWebSocketMessage{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *URLSessionWebSocketMessage) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *URLSessionWebSocketMessage) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewURLSessionWebSocketMessageWithData creates a new URLSessionWebSocketMessage.
 func NewURLSessionWebSocketMessageWithData(data *Data) *URLSessionWebSocketMessage {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLSessionWebSocketMessage")), objc.RegisterName("alloc"))
@@ -70,28 +78,22 @@ func NewURLSessionWebSocketMessageWithString(string_ string) *URLSessionWebSocke
 	return uRLSessionWebSocketMessageAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionWebSocketMessage) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionWebSocketMessage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *URLSessionWebSocketMessage) Type() URLSessionWebSocketMessageType {
 	_r := objc.Send[URLSessionWebSocketMessageType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
+// Data wraps the corresponding Objective-C method.
 func (x *URLSessionWebSocketMessage) Data() *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return DataFromID(_r)
-}
-
-func (x *URLSessionWebSocketMessage) String() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("string"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
 }
 
 // URLSessionWebSocketMessageable is the interface implemented by [URLSessionWebSocketMessage], for mocking and DI.
@@ -100,7 +102,6 @@ type URLSessionWebSocketMessageable interface {
 	WithScriptingProperties(scriptingProperties obj.Object) *URLSessionWebSocketMessage
 	Type() URLSessionWebSocketMessageType
 	Data() *Data
-	String() string
 }
 
 var _ URLSessionWebSocketMessageable = (*URLSessionWebSocketMessage)(nil)

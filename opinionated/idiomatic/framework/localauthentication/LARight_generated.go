@@ -14,9 +14,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A grouped set of requirements that gate access to a resource or operation.
-//
 // Right is an idiomatic wrapper over the Objective-C class LARight.
+//
+// Right is an abstract base — you do not construct it directly. Construct one of [PersistedRight] and pass it where a Right is accepted.
+//
+// A grouped set of requirements that gate access to a resource or operation.
 type Right struct {
 	objref.Handle
 }
@@ -27,7 +29,8 @@ func RightFromID(id objc.ID) *Right {
 	if id == 0 {
 		return nil
 	}
-	x := &Right{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Right{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +43,8 @@ func rightAdopt(id objc.ID) *Right {
 	if id == 0 {
 		return nil
 	}
-	x := &Right{Handle: objref.Wrap(id)}
+	x := &Right{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,30 +64,26 @@ func (x *Right) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewRight creates a new Right.
-func NewRight() *Right {
-	_id := objc.Send[objc.ID](objc.ID(_class("LARight")), objc.RegisterName("new"))
-	return rightAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Right) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Creates a right with the authentication requirements you supply.
-//
-// NewRightWithRequirement creates a new Right.
+// NewRightWithRequirement creates a right with the authentication requirements you supply.
 func NewRightWithRequirement(requirement *AuthenticationRequirement) *Right {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("LARight")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequirement:"), objref.IDOf(requirement))
 	return rightAdopt(_id)
 }
 
-// An integer you use to identify a right.
-//
-// WithTag sets tag and returns the receiver so calls can be chained.
+// WithTag an integer you use to identify a right.
 func (x *Right) WithTag(tag int) *Right {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// Performs an authorization on the right.
+// AuthorizeWithLocalizedReasonCompletion performs an authorization on the right.
 //
 // AuthorizeWithLocalizedReasonCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Right) AuthorizeWithLocalizedReasonCompletion(ctx context.Context, localizedReason string) error {
@@ -102,7 +102,7 @@ func (x *Right) AuthorizeWithLocalizedReasonCompletion(ctx context.Context, loca
 	}
 }
 
-// Checks whether the right has permission to perform authorization.
+// CheckCanAuthorizeWithCompletion checks whether the right has permission to perform authorization.
 //
 // CheckCanAuthorizeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Right) CheckCanAuthorizeWithCompletion(ctx context.Context) error {
@@ -121,7 +121,7 @@ func (x *Right) CheckCanAuthorizeWithCompletion(ctx context.Context) error {
 	}
 }
 
-// Invalidates a previously authorized right.
+// DeauthorizeWithCompletion invalidates a previously authorized right.
 //
 // DeauthorizeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Right) DeauthorizeWithCompletion(ctx context.Context) error {
@@ -138,18 +138,19 @@ func (x *Right) DeauthorizeWithCompletion(ctx context.Context) error {
 	}
 }
 
-// Provides the current authorization state of the
+// State provides the current authorization state of the
 func (x *Right) State() RightState {
 	_r := objc.Send[RightState](objref.IDOf(x), objc.RegisterName("state"))
 	return _r
 }
 
-// An application-supplied integer that can be used to identify right instances. The default value is
+// Tag an application-supplied integer that can be used to identify right instances. The default value is
 func (x *Right) Tag() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("tag"))
 	return _r
 }
 
+// SetTag wraps the corresponding Objective-C method.
 func (x *Right) SetTag(tag int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 }
@@ -167,3 +168,10 @@ type Rightable interface {
 }
 
 var _ Rightable = (*Right)(nil)
+
+// isRight marks Right — and, by embedding promotion, its
+// subclasses — as a member of the Right hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Right) isRight() {}
+
+var _ RightProvider = (*Right)(nil)

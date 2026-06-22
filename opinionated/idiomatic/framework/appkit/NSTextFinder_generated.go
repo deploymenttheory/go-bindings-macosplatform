@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An optional search-and-replace find interface inside a view, usually a scroll view.
-//
 // TextFinder is an idiomatic wrapper over the Objective-C class NSTextFinder.
+//
+// An optional search-and-replace find interface inside a view, usually a scroll view.
 type TextFinder struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TextFinderFromID(id objc.ID) *TextFinder {
 	if id == 0 {
 		return nil
 	}
-	x := &TextFinder{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextFinder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func textFinderAdopt(id objc.ID) *TextFinder {
 	if id == 0 {
 		return nil
 	}
-	x := &TextFinder{Handle: objref.Wrap(id)}
+	x := &TextFinder{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +60,12 @@ func (x *TextFinder) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextFinder) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTextFinder creates a new TextFinder.
 func NewTextFinder() *TextFinder {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSTextFinder")), objc.RegisterName("new"))
@@ -71,78 +79,80 @@ func NewTextFinderWithCoder(coder obj.Object) *TextFinder {
 	return textFinderAdopt(_id)
 }
 
-// Invoke to specify that the find indicator needs updating when not contained within a scroll view.
-//
-// WithFindIndicatorNeedsUpdate sets findIndicatorNeedsUpdate and returns the receiver so calls can be chained.
+// WithFindIndicatorNeedsUpdate invoke to specify that the find indicator needs updating when not contained within a scroll view.
 func (x *TextFinder) WithFindIndicatorNeedsUpdate(findIndicatorNeedsUpdate bool) *TextFinder {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFindIndicatorNeedsUpdate:"), findIndicatorNeedsUpdate)
 	return x
 }
 
-// Determines if incremental searching is enabled.
-//
-// WithIncrementalSearchingEnabled sets incrementalSearchingEnabled and returns the receiver so calls can be chained.
+// WithIncrementalSearchingEnabled determines if incremental searching is enabled.
 func (x *TextFinder) WithIncrementalSearchingEnabled(incrementalSearchingEnabled bool) *TextFinder {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncrementalSearchingEnabled:"), incrementalSearchingEnabled)
 	return x
 }
 
-// Determines the type of incremental search feedback to be presented
-//
-// WithIncrementalSearchingShouldDimContentView sets incrementalSearchingShouldDimContentView and returns the receiver so calls can be chained.
+// WithIncrementalSearchingShouldDimContentView determines the type of incremental search feedback to be presented
 func (x *TextFinder) WithIncrementalSearchingShouldDimContentView(incrementalSearchingShouldDimContentView bool) *TextFinder {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncrementalSearchingShouldDimContentView:"), incrementalSearchingShouldDimContentView)
 	return x
 }
 
-// Performs the specified text finding action.
+// PerformAction performs the specified text finding action.
 func (x *TextFinder) PerformAction(op TextFinderAction) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performAction:"), op)
 }
 
-// Allows validation of the find action before performing.
+// ValidateAction allows validation of the find action before performing.
 func (x *TextFinder) ValidateAction(op TextFinderAction) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("validateAction:"), op)
 	return _r
 }
 
-// Cancels the find indicator immediately.
+// CancelFindIndicator cancels the find indicator immediately.
 func (x *TextFinder) CancelFindIndicator() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelFindIndicator"))
 }
 
-// Invoke this method when the searched content will change.
+// NoteClientStringWillChange invoke this method when the searched content will change.
 func (x *TextFinder) NoteClientStringWillChange() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("noteClientStringWillChange"))
 }
 
+// FindIndicatorNeedsUpdate wraps the corresponding Objective-C method.
 func (x *TextFinder) FindIndicatorNeedsUpdate() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("findIndicatorNeedsUpdate"))
 	return _r
 }
 
+// SetFindIndicatorNeedsUpdate wraps the corresponding Objective-C method.
 func (x *TextFinder) SetFindIndicatorNeedsUpdate(findIndicatorNeedsUpdate bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFindIndicatorNeedsUpdate:"), findIndicatorNeedsUpdate)
 }
 
+// IsIncrementalSearchingEnabled wraps the corresponding Objective-C method.
 func (x *TextFinder) IsIncrementalSearchingEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isIncrementalSearchingEnabled"))
 	return _r
 }
 
+// SetIncrementalSearchingEnabled wraps the corresponding Objective-C method.
 func (x *TextFinder) SetIncrementalSearchingEnabled(incrementalSearchingEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncrementalSearchingEnabled:"), incrementalSearchingEnabled)
 }
 
+// IncrementalSearchingShouldDimContentView wraps the corresponding Objective-C method.
 func (x *TextFinder) IncrementalSearchingShouldDimContentView() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("incrementalSearchingShouldDimContentView"))
 	return _r
 }
 
+// SetIncrementalSearchingShouldDimContentView wraps the corresponding Objective-C method.
 func (x *TextFinder) SetIncrementalSearchingShouldDimContentView(incrementalSearchingShouldDimContentView bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncrementalSearchingShouldDimContentView:"), incrementalSearchingShouldDimContentView)
 }
 
+// IncrementalMatchRanges wraps the corresponding Objective-C method.
+//
 // IncrementalMatchRanges returns the collection as a Go slice.
 func (x *TextFinder) IncrementalMatchRanges() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("incrementalMatchRanges"))

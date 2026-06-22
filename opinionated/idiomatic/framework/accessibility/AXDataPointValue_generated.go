@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A single data value.
-//
 // DataPointValue is an idiomatic wrapper over the Objective-C class AXDataPointValue.
+//
+// A single data value.
 type DataPointValue struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DataPointValueFromID(id objc.ID) *DataPointValue {
 	if id == 0 {
 		return nil
 	}
-	x := &DataPointValue{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DataPointValue{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func dataPointValueAdopt(id objc.ID) *DataPointValue {
 	if id == 0 {
 		return nil
 	}
-	x := &DataPointValue{Handle: objref.Wrap(id)}
+	x := &DataPointValue{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,42 @@ func (x *DataPointValue) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DataPointValue) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDataPointValue creates a new DataPointValue.
 func NewDataPointValue() *DataPointValue {
 	_id := objc.Send[objc.ID](objc.ID(_class("AXDataPointValue")), objc.RegisterName("new"))
 	return dataPointValueAdopt(_id)
 }
 
-// A number that represents the numeric data value.
-//
-// WithNumber sets number and returns the receiver so calls can be chained.
+// WithNumber a number that represents the numeric data value.
 func (x *DataPointValue) WithNumber(number float64) *DataPointValue {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumber:"), number)
 	return x
 }
 
-// A string that represents the categorical data value.
-//
-// WithCategory sets category and returns the receiver so calls can be chained.
+// WithCategory a string that represents the categorical data value.
 func (x *DataPointValue) WithCategory(category string) *DataPointValue {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategory:"), purego.NSString(category))
 	return x
 }
 
+// Number wraps the corresponding Objective-C method.
 func (x *DataPointValue) Number() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("number"))
 	return _r
 }
 
+// SetNumber wraps the corresponding Objective-C method.
 func (x *DataPointValue) SetNumber(number float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumber:"), number)
 }
 
+// Category wraps the corresponding Objective-C method.
 func (x *DataPointValue) Category() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("category"))
 	if _r == 0 {
@@ -97,6 +104,7 @@ func (x *DataPointValue) Category() string {
 	return purego.GoString(_r)
 }
 
+// SetCategory wraps the corresponding Objective-C method.
 func (x *DataPointValue) SetCategory(category string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategory:"), purego.NSString(category))
 }

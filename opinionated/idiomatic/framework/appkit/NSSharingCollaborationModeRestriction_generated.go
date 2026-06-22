@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Specifies whether a specific type of sharing should be disabled in the share picker, and if so, whether a reason should be provided for the disablement.
-//
 // SharingCollaborationModeRestriction is an idiomatic wrapper over the Objective-C class NSSharingCollaborationModeRestriction.
+//
+// Specifies whether a specific type of sharing should be disabled in the share picker, and if so, whether a reason should be provided for the disablement.
 type SharingCollaborationModeRestriction struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SharingCollaborationModeRestrictionFromID(id objc.ID) *SharingCollaboration
 	if id == 0 {
 		return nil
 	}
-	x := &SharingCollaborationModeRestriction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SharingCollaborationModeRestriction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func sharingCollaborationModeRestrictionAdopt(id objc.ID) *SharingCollaborationM
 	if id == 0 {
 		return nil
 	}
-	x := &SharingCollaborationModeRestriction{Handle: objref.Wrap(id)}
+	x := &SharingCollaborationModeRestriction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,49 +60,47 @@ func (x *SharingCollaborationModeRestriction) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// - Parameters: - disabledMode: The disabled type of sharing
-//
-// NewSharingCollaborationModeRestrictionWithDisabledMode creates a new SharingCollaborationModeRestriction.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SharingCollaborationModeRestriction) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSharingCollaborationModeRestrictionWithDisabledMode - Parameters: - disabledMode: The disabled type of sharing
 func NewSharingCollaborationModeRestrictionWithDisabledMode(disabledMode SharingCollaborationMode) *SharingCollaborationModeRestriction {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSharingCollaborationModeRestriction")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisabledMode:"), disabledMode)
 	return sharingCollaborationModeRestrictionAdopt(_id)
 }
 
-// - Parameters: - disabledMode: The disabled type of sharing - alertTitle: The alert title - alertMessage: The alert message
-//
-// NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessage creates a new SharingCollaborationModeRestriction.
+// NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessage - Parameters: - disabledMode: The disabled type of sharing - alertTitle: The alert title - alertMessage: The alert message
 func NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessage(disabledMode SharingCollaborationMode, alertTitle string, alertMessage string) *SharingCollaborationModeRestriction {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSharingCollaborationModeRestriction")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisabledMode:alertTitle:alertMessage:"), disabledMode, purego.NSString(alertTitle), purego.NSString(alertMessage))
 	return sharingCollaborationModeRestrictionAdopt(_id)
 }
 
-// - Parameters: - disabledMode: The disabled type of sharing - alertTitle: The alert title - alertMessage: The alert message - alertDismissButtonTitle: The label on the default alert button
-//
-// NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessageAlertDismissButtonTitle creates a new SharingCollaborationModeRestriction.
+// NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessageAlertDismissButtonTitle - Parameters: - disabledMode: The disabled type of sharing - alertTitle: The alert title - alertMessage: The alert message - alertDismissButtonTitle: The label on the default alert button
 func NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessageAlertDismissButtonTitle(disabledMode SharingCollaborationMode, alertTitle string, alertMessage string, alertDismissButtonTitle string) *SharingCollaborationModeRestriction {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSharingCollaborationModeRestriction")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisabledMode:alertTitle:alertMessage:alertDismissButtonTitle:"), disabledMode, purego.NSString(alertTitle), purego.NSString(alertMessage), purego.NSString(alertDismissButtonTitle))
 	return sharingCollaborationModeRestrictionAdopt(_id)
 }
 
-// - Parameters: - disabledMode: The disabled type of sharing - alertTitle: The alert title - alertMessage: The alert message - alertDismissButtonTitle: The label on the default alert button - alertRecoverySuggestionButtonTitle: The label on the optional recovery suggestion button on the alert - alertRecoverySuggestionButtonLaunchURL: The URL that is opened when the optional recovery suggestion button is selected
-//
-// NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessageAlertDismissButtonTitleAlertRecoverySuggestionButtonTitleAlertRecoverySuggestionButtonLaunchURL creates a new SharingCollaborationModeRestriction.
+// NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessageAlertDismissButtonTitleAlertRecoverySuggestionButtonTitleAlertRecoverySuggestionButtonLaunchURL - Parameters: - disabledMode: The disabled type of sharing - alertTitle: The alert title - alertMessage: The alert message - alertDismissButtonTitle: The label on the default alert button - alertRecoverySuggestionButtonTitle: The label on the optional recovery suggestion button on the alert - alertRecoverySuggestionButtonLaunchURL: The URL that is opened when the optional recovery suggestion button is selected
 func NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessageAlertDismissButtonTitleAlertRecoverySuggestionButtonTitleAlertRecoverySuggestionButtonLaunchURL(disabledMode SharingCollaborationMode, alertTitle string, alertMessage string, alertDismissButtonTitle string, alertRecoverySuggestionButtonTitle string, alertRecoverySuggestionButtonLaunchURL string) *SharingCollaborationModeRestriction {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSharingCollaborationModeRestriction")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisabledMode:alertTitle:alertMessage:alertDismissButtonTitle:alertRecoverySuggestionButtonTitle:alertRecoverySuggestionButtonLaunchURL:"), disabledMode, purego.NSString(alertTitle), purego.NSString(alertMessage), purego.NSString(alertDismissButtonTitle), purego.NSString(alertRecoverySuggestionButtonTitle), rt.FileURL(alertRecoverySuggestionButtonLaunchURL))
 	return sharingCollaborationModeRestrictionAdopt(_id)
 }
 
-// The type of sharing which should be disabled
+// DisabledMode the type of sharing which should be disabled
 func (x *SharingCollaborationModeRestriction) DisabledMode() SharingCollaborationMode {
 	_r := objc.Send[SharingCollaborationMode](objref.IDOf(x), objc.RegisterName("disabledMode"))
 	return _r
 }
 
-// The title of the alert if a reason for disabling is provided
+// AlertTitle the title of the alert if a reason for disabling is provided
 func (x *SharingCollaborationModeRestriction) AlertTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alertTitle"))
 	if _r == 0 {
@@ -109,7 +109,7 @@ func (x *SharingCollaborationModeRestriction) AlertTitle() string {
 	return purego.GoString(_r)
 }
 
-// The message of the alert if a reason for disabling is provided
+// AlertMessage the message of the alert if a reason for disabling is provided
 func (x *SharingCollaborationModeRestriction) AlertMessage() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alertMessage"))
 	if _r == 0 {
@@ -118,7 +118,7 @@ func (x *SharingCollaborationModeRestriction) AlertMessage() string {
 	return purego.GoString(_r)
 }
 
-// The label on the alert button which will simply confirm that the alert was viewed and dismiss it Defaults to "OK"
+// AlertDismissButtonTitle the label on the alert button which will simply confirm that the alert was viewed and dismiss it Defaults to "OK"
 func (x *SharingCollaborationModeRestriction) AlertDismissButtonTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alertDismissButtonTitle"))
 	if _r == 0 {
@@ -127,7 +127,7 @@ func (x *SharingCollaborationModeRestriction) AlertDismissButtonTitle() string {
 	return purego.GoString(_r)
 }
 
-// The label on the recovery suggestion button if it is provided
+// AlertRecoverySuggestionButtonTitle the label on the recovery suggestion button if it is provided
 func (x *SharingCollaborationModeRestriction) AlertRecoverySuggestionButtonTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alertRecoverySuggestionButtonTitle"))
 	if _r == 0 {
@@ -136,7 +136,7 @@ func (x *SharingCollaborationModeRestriction) AlertRecoverySuggestionButtonTitle
 	return purego.GoString(_r)
 }
 
-// The URL that is opened when the user selects the recovery suggestion, if any
+// AlertRecoverySuggestionButtonLaunchURL the URL that is opened when the user selects the recovery suggestion, if any
 func (x *SharingCollaborationModeRestriction) AlertRecoverySuggestionButtonLaunchURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alertRecoverySuggestionButtonLaunchURL"))
 	return obj.Wrap(_r)

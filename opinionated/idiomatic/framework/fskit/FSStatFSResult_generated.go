@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type used to report a volume’s statistics.
-//
 // StatFSResult is an idiomatic wrapper over the Objective-C class FSStatFSResult.
+//
+// A type used to report a volume’s statistics.
 type StatFSResult struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func StatFSResultFromID(id objc.ID) *StatFSResult {
 	if id == 0 {
 		return nil
 	}
-	x := &StatFSResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StatFSResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func statFSResultAdopt(id objc.ID) *StatFSResult {
 	if id == 0 {
 		return nil
 	}
-	x := &StatFSResult{Handle: objref.Wrap(id)}
+	x := &StatFSResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,250 +60,241 @@ func (x *StatFSResult) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an statistics result instance, using the given file system type name.
-//
-// NewStatFSResultWithFileSystemTypeName creates a new StatFSResult.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StatFSResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewStatFSResultWithFileSystemTypeName creates an statistics result instance, using the given file system type name.
 func NewStatFSResultWithFileSystemTypeName(fileSystemTypeName string) *StatFSResult {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("FSStatFSResult")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileSystemTypeName:"), purego.NSString(fileSystemTypeName))
 	return statFSResultAdopt(_id)
 }
 
-// A property for the volume’s block size, in bytes.
-//
-// WithBlockSize sets blockSize and returns the receiver so calls can be chained.
+// WithBlockSize a property for the volume’s block size, in bytes.
 func (x *StatFSResult) WithBlockSize(blockSize int) *StatFSResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlockSize:"), blockSize)
 	return x
 }
 
-// A property for the optimal block size with which to perform I/O.
-//
-// WithIoSize sets ioSize and returns the receiver so calls can be chained.
+// WithIoSize a property for the optimal block size with which to perform I/O.
 func (x *StatFSResult) WithIoSize(ioSize int) *StatFSResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIoSize:"), ioSize)
 	return x
 }
 
-// A property for the volume’s total data block count.
-//
-// WithTotalBlocks sets totalBlocks and returns the receiver so calls can be chained.
+// WithTotalBlocks a property for the volume’s total data block count.
 func (x *StatFSResult) WithTotalBlocks(totalBlocks uint64) *StatFSResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTotalBlocks:"), totalBlocks)
 	return x
 }
 
-// A property for the number of free blocks available to a non-superuser on the volume.
-//
-// WithAvailableBlocks sets availableBlocks and returns the receiver so calls can be chained.
+// WithAvailableBlocks a property for the number of free blocks available to a non-superuser on the volume.
 func (x *StatFSResult) WithAvailableBlocks(availableBlocks uint64) *StatFSResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAvailableBlocks:"), availableBlocks)
 	return x
 }
 
-// A property for the number of free blocks in the volume.
-//
-// WithFreeBlocks sets freeBlocks and returns the receiver so calls can be chained.
+// WithFreeBlocks a property for the number of free blocks in the volume.
 func (x *StatFSResult) WithFreeBlocks(freeBlocks uint64) *StatFSResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFreeBlocks:"), freeBlocks)
 	return x
 }
 
-// A property for the number of used blocks in the volume.
-//
-// WithUsedBlocks sets usedBlocks and returns the receiver so calls can be chained.
+// WithUsedBlocks a property for the number of used blocks in the volume.
 func (x *StatFSResult) WithUsedBlocks(usedBlocks uint64) *StatFSResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsedBlocks:"), usedBlocks)
 	return x
 }
 
-// A property for the total size, in bytes, of the volume.
-//
-// WithTotalBytes sets totalBytes and returns the receiver so calls can be chained.
+// WithTotalBytes a property for the total size, in bytes, of the volume.
 func (x *StatFSResult) WithTotalBytes(totalBytes uint64) *StatFSResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTotalBytes:"), totalBytes)
 	return x
 }
 
-// A property for the amount of space available to users, in bytes, in the volume.
-//
-// WithAvailableBytes sets availableBytes and returns the receiver so calls can be chained.
+// WithAvailableBytes a property for the amount of space available to users, in bytes, in the volume.
 func (x *StatFSResult) WithAvailableBytes(availableBytes uint64) *StatFSResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAvailableBytes:"), availableBytes)
 	return x
 }
 
-// A property for the amount of free space, in bytes, in the volume.
-//
-// WithFreeBytes sets freeBytes and returns the receiver so calls can be chained.
+// WithFreeBytes a property for the amount of free space, in bytes, in the volume.
 func (x *StatFSResult) WithFreeBytes(freeBytes uint64) *StatFSResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFreeBytes:"), freeBytes)
 	return x
 }
 
-// A property for the amount of used space, in bytes, in the volume.
-//
-// WithUsedBytes sets usedBytes and returns the receiver so calls can be chained.
+// WithUsedBytes a property for the amount of used space, in bytes, in the volume.
 func (x *StatFSResult) WithUsedBytes(usedBytes uint64) *StatFSResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsedBytes:"), usedBytes)
 	return x
 }
 
-// A property for the total number of file slots in the volume,
-//
-// WithTotalFiles sets totalFiles and returns the receiver so calls can be chained.
+// WithTotalFiles a property for the total number of file slots in the volume,
 func (x *StatFSResult) WithTotalFiles(totalFiles uint64) *StatFSResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTotalFiles:"), totalFiles)
 	return x
 }
 
-// A property for the total number of free file slots in the volume.
-//
-// WithFreeFiles sets freeFiles and returns the receiver so calls can be chained.
+// WithFreeFiles a property for the total number of free file slots in the volume.
 func (x *StatFSResult) WithFreeFiles(freeFiles uint64) *StatFSResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFreeFiles:"), freeFiles)
 	return x
 }
 
-// A property for the file system’s subtype or flavor.
-//
-// WithFileSystemSubType sets fileSystemSubType and returns the receiver so calls can be chained.
+// WithFileSystemSubType a property for the file system’s subtype or flavor.
 func (x *StatFSResult) WithFileSystemSubType(fileSystemSubType int) *StatFSResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileSystemSubType:"), fileSystemSubType)
 	return x
 }
 
-// A property for the volume's block size, in bytes. This value defaults to `4096`. Zero isn't a valid block size.
+// BlockSize a property for the volume's block size, in bytes. This value defaults to `4096`. Zero isn't a valid block size.
 func (x *StatFSResult) BlockSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("blockSize"))
 	return _r
 }
 
+// SetBlockSize wraps the corresponding Objective-C method.
 func (x *StatFSResult) SetBlockSize(blockSize int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlockSize:"), blockSize)
 }
 
-// A property for the optimal block size with which to perform I/O. For best performance, specify an `ioSize` that's an even multiple of “blockSize“.
+// IoSize a property for the optimal block size with which to perform I/O. For best performance, specify an `ioSize` that's an even multiple of “blockSize“.
 func (x *StatFSResult) IoSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("ioSize"))
 	return _r
 }
 
+// SetIoSize wraps the corresponding Objective-C method.
 func (x *StatFSResult) SetIoSize(ioSize int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIoSize:"), ioSize)
 }
 
-// A property for the volume's total data block count.
+// TotalBlocks a property for the volume's total data block count.
 func (x *StatFSResult) TotalBlocks() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("totalBlocks"))
 	return _r
 }
 
+// SetTotalBlocks wraps the corresponding Objective-C method.
 func (x *StatFSResult) SetTotalBlocks(totalBlocks uint64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTotalBlocks:"), totalBlocks)
 }
 
-// A property for the number of free blocks available to a non-superuser on the volume.
+// AvailableBlocks a property for the number of free blocks available to a non-superuser on the volume.
 func (x *StatFSResult) AvailableBlocks() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("availableBlocks"))
 	return _r
 }
 
+// SetAvailableBlocks wraps the corresponding Objective-C method.
 func (x *StatFSResult) SetAvailableBlocks(availableBlocks uint64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAvailableBlocks:"), availableBlocks)
 }
 
-// A property for the number of free blocks in the volume.
+// FreeBlocks a property for the number of free blocks in the volume.
 func (x *StatFSResult) FreeBlocks() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("freeBlocks"))
 	return _r
 }
 
+// SetFreeBlocks wraps the corresponding Objective-C method.
 func (x *StatFSResult) SetFreeBlocks(freeBlocks uint64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFreeBlocks:"), freeBlocks)
 }
 
-// A property for the number of used blocks in the volume.
+// UsedBlocks a property for the number of used blocks in the volume.
 func (x *StatFSResult) UsedBlocks() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("usedBlocks"))
 	return _r
 }
 
+// SetUsedBlocks wraps the corresponding Objective-C method.
 func (x *StatFSResult) SetUsedBlocks(usedBlocks uint64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsedBlocks:"), usedBlocks)
 }
 
-// A property for the total size, in bytes, of the volume.
+// TotalBytes a property for the total size, in bytes, of the volume.
 func (x *StatFSResult) TotalBytes() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("totalBytes"))
 	return _r
 }
 
+// SetTotalBytes wraps the corresponding Objective-C method.
 func (x *StatFSResult) SetTotalBytes(totalBytes uint64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTotalBytes:"), totalBytes)
 }
 
-// A property for the amount of space available to users, in bytes, in the volume.
+// AvailableBytes a property for the amount of space available to users, in bytes, in the volume.
 func (x *StatFSResult) AvailableBytes() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("availableBytes"))
 	return _r
 }
 
+// SetAvailableBytes wraps the corresponding Objective-C method.
 func (x *StatFSResult) SetAvailableBytes(availableBytes uint64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAvailableBytes:"), availableBytes)
 }
 
-// A property for the amount of free space, in bytes, in the volume.
+// FreeBytes a property for the amount of free space, in bytes, in the volume.
 func (x *StatFSResult) FreeBytes() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("freeBytes"))
 	return _r
 }
 
+// SetFreeBytes wraps the corresponding Objective-C method.
 func (x *StatFSResult) SetFreeBytes(freeBytes uint64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFreeBytes:"), freeBytes)
 }
 
-// A property for the amount of used space, in bytes, in the volume.
+// UsedBytes a property for the amount of used space, in bytes, in the volume.
 func (x *StatFSResult) UsedBytes() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("usedBytes"))
 	return _r
 }
 
+// SetUsedBytes wraps the corresponding Objective-C method.
 func (x *StatFSResult) SetUsedBytes(usedBytes uint64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsedBytes:"), usedBytes)
 }
 
-// A property for the total number of file slots in the volume,
+// TotalFiles a property for the total number of file slots in the volume,
 func (x *StatFSResult) TotalFiles() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("totalFiles"))
 	return _r
 }
 
+// SetTotalFiles wraps the corresponding Objective-C method.
 func (x *StatFSResult) SetTotalFiles(totalFiles uint64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTotalFiles:"), totalFiles)
 }
 
-// A property for the total number of free file slots in the volume.
+// FreeFiles a property for the total number of free file slots in the volume.
 func (x *StatFSResult) FreeFiles() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("freeFiles"))
 	return _r
 }
 
+// SetFreeFiles wraps the corresponding Objective-C method.
 func (x *StatFSResult) SetFreeFiles(freeFiles uint64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFreeFiles:"), freeFiles)
 }
 
-// A property for the file system's subtype or flavor. Match this value to the `FSPersonalities`'s `FSSubType` attribute, if it exists within the `EXAppExtensionAttributes` dictionary of the module's `Info.plist`.
+// FileSystemSubType a property for the file system's subtype or flavor. Match this value to the `FSPersonalities`'s `FSSubType` attribute, if it exists within the `EXAppExtensionAttributes` dictionary of the module's `Info.plist`.
 func (x *StatFSResult) FileSystemSubType() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fileSystemSubType"))
 	return _r
 }
 
+// SetFileSystemSubType wraps the corresponding Objective-C method.
 func (x *StatFSResult) SetFileSystemSubType(fileSystemSubType int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileSystemSubType:"), fileSystemSubType)
 }
 
-// A property for the file system type name. Match this value to the `FSShortName` attribute within the `EXAppExtensionAttributes` dictionary of the module's `Info.plist`. The maximum allowed length is `MFSTYPENAMELEN`, including the terminating `NUL` character.
+// FileSystemTypeName a property for the file system type name. Match this value to the `FSShortName` attribute within the `EXAppExtensionAttributes` dictionary of the module's `Info.plist`. The maximum allowed length is `MFSTYPENAMELEN`, including the terminating `NUL` character.
 func (x *StatFSResult) FileSystemTypeName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileSystemTypeName"))
 	if _r == 0 {

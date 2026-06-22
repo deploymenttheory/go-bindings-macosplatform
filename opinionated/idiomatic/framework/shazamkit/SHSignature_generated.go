@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that contains the opaque data and other information for a signature.
-//
 // Signature is an idiomatic wrapper over the Objective-C class SHSignature.
+//
+// An object that contains the opaque data and other information for a signature.
 type Signature struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func SignatureFromID(id objc.ID) *Signature {
 	if id == 0 {
 		return nil
 	}
-	x := &Signature{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Signature{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func signatureAdopt(id objc.ID) *Signature {
 	if id == 0 {
 		return nil
 	}
-	x := &Signature{Handle: objref.Wrap(id)}
+	x := &Signature{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,10 +62,14 @@ func (x *Signature) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a signature object from raw data.
-//
-// NewSignatureWithDataRepresentationError creates a new Signature.
-func NewSignatureWithDataRepresentationError(dataRepresentation obj.Object) (*Signature, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Signature) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSignatureWithDataRepresentationError creates a signature object from raw data.
+func NewSignatureWithDataRepresentationError(dataRepresentation obj.Object) (result *Signature, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SHSignature")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:error:"), objref.IDOf(dataRepresentation), unsafe.Pointer(&_nsErr))
@@ -73,13 +79,13 @@ func NewSignatureWithDataRepresentationError(dataRepresentation obj.Object) (*Si
 	return signatureAdopt(_id), nil
 }
 
-// The duration of the audio you use to generate the signature. Audio that contains periods of silence may result in a duration value that's shorter than the full duration of the original audio track.
+// Duration the duration of the audio you use to generate the signature. Audio that contains periods of silence may result in a duration value that's shorter than the full duration of the original audio track.
 func (x *Signature) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
 	return _r
 }
 
-// The raw data for the signature.
+// DataRepresentation the raw data for the signature.
 func (x *Signature) DataRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
 	return obj.Wrap(_r)

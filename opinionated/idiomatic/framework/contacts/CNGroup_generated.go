@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable object that represents a group of contacts.
-//
 // Group is an idiomatic wrapper over the Objective-C class CNGroup.
+//
+// Group is an abstract base — you do not construct it directly. Construct one of [MutableGroup] and pass it where a Group is accepted.
+//
+// An immutable object that represents a group of contacts.
 type Group struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func GroupFromID(id objc.ID) *Group {
 	if id == 0 {
 		return nil
 	}
-	x := &Group{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Group{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func groupAdopt(id objc.ID) *Group {
 	if id == 0 {
 		return nil
 	}
-	x := &Group{Handle: objref.Wrap(id)}
+	x := &Group{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +62,13 @@ func (x *Group) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewGroup creates a new Group.
-func NewGroup() *Group {
-	_id := objc.Send[objc.ID](objc.ID(_class("CNGroup")), objc.RegisterName("new"))
-	return groupAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Group) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The identifier is unique among groups on the device. It can be saved and used for fetching groups next application launch.
+// Identifier the identifier is unique among groups on the device. It can be saved and used for fetching groups next application launch.
 func (x *Group) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -73,6 +77,7 @@ func (x *Group) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *Group) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -89,3 +94,10 @@ type Groupable interface {
 }
 
 var _ Groupable = (*Group)(nil)
+
+// isGroup marks Group — and, by embedding promotion, its
+// subclasses — as a member of the Group hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Group) isGroup() {}
+
+var _ GroupProvider = (*Group)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The class that represents the configuration for a Mac trackpad.
-//
 // MacTrackpadConfiguration is an idiomatic wrapper over the Objective-C class VZMacTrackpadConfiguration.
+//
+// It embeds [PointingDeviceConfiguration], promoting that type's methods.
+//
+// The class that represents the configuration for a Mac trackpad.
 type MacTrackpadConfiguration struct {
-	objref.Handle
+	PointingDeviceConfiguration
 }
 
 // MacTrackpadConfigurationFromID adopts an existing Objective-C object as a MacTrackpadConfiguration
@@ -25,7 +26,8 @@ func MacTrackpadConfigurationFromID(id objc.ID) *MacTrackpadConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &MacTrackpadConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MacTrackpadConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func macTrackpadConfigurationAdopt(id objc.ID) *MacTrackpadConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &MacTrackpadConfiguration{Handle: objref.Wrap(id)}
+	x := &MacTrackpadConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MacTrackpadConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MacTrackpadConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MacTrackpadConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMacTrackpadConfiguration creates a new MacTrackpadConfiguration.
@@ -70,3 +58,5 @@ type MacTrackpadConfigurationable interface {
 }
 
 var _ MacTrackpadConfigurationable = (*MacTrackpadConfiguration)(nil)
+
+var _ PointingDeviceConfigurationProvider = (*MacTrackpadConfiguration)(nil)

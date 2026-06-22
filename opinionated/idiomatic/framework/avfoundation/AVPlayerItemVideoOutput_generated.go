@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that outputs video frames from a player item.
-//
 // PlayerItemVideoOutput is an idiomatic wrapper over the Objective-C class AVPlayerItemVideoOutput.
+//
+// It embeds [PlayerItemOutput], promoting that type's methods.
+//
+// An object that outputs video frames from a player item.
 type PlayerItemVideoOutput struct {
-	objref.Handle
+	PlayerItemOutput
 }
 
 // PlayerItemVideoOutputFromID adopts an existing Objective-C object as a PlayerItemVideoOutput
@@ -25,7 +26,8 @@ func PlayerItemVideoOutputFromID(id objc.ID) *PlayerItemVideoOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemVideoOutput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlayerItemVideoOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,57 +40,38 @@ func playerItemVideoOutputAdopt(id objc.ID) *PlayerItemVideoOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemVideoOutput{Handle: objref.Wrap(id)}
+	x := &PlayerItemVideoOutput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *PlayerItemVideoOutput) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlayerItemVideoOutput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlayerItemVideoOutput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a video output object using the specified pixel buffer attributes.
-//
-// NewPlayerItemVideoOutputWithPixelBufferAttributes creates a new PlayerItemVideoOutput.
+// NewPlayerItemVideoOutputWithPixelBufferAttributes creates a video output object using the specified pixel buffer attributes.
 func NewPlayerItemVideoOutputWithPixelBufferAttributes(pixelBufferAttributes obj.Object) *PlayerItemVideoOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemVideoOutput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPixelBufferAttributes:"), objref.IDOf(pixelBufferAttributes))
 	return playerItemVideoOutputAdopt(_id)
 }
 
-// Creates a video output object initialized with the specified output settings.
-//
-// NewPlayerItemVideoOutputWithOutputSettings creates a new PlayerItemVideoOutput.
+// NewPlayerItemVideoOutputWithOutputSettings creates a video output object initialized with the specified output settings.
 func NewPlayerItemVideoOutputWithOutputSettings(outputSettings obj.Object) *PlayerItemVideoOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemVideoOutput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOutputSettings:"), objref.IDOf(outputSettings))
 	return playerItemVideoOutputAdopt(_id)
 }
 
-// A Boolean value that indicates whether the player object renders the receiver’s output.
-//
-// WithSuppressesPlayerRendering sets suppressesPlayerRendering and returns the receiver so calls can be chained.
+// WithSuppressesPlayerRendering a Boolean value that indicates whether the player object renders the receiver’s output.
 func (x *PlayerItemVideoOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemVideoOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
 	return x
 }
 
-// Tells the receiver that the video out put client is entering a quiescent state.
+// RequestNotificationOfMediaDataChangeWithAdvanceInterval tells the receiver that the video out put client is entering a quiescent state.
 func (x *PlayerItemVideoOutput) RequestNotificationOfMediaDataChangeWithAdvanceInterval(interval float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestNotificationOfMediaDataChangeWithAdvanceInterval:"), interval)
 }
 
+// DelegateQueue wraps the corresponding Objective-C method.
 func (x *PlayerItemVideoOutput) DelegateQueue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegateQueue"))
 	return obj.Wrap(_r)
@@ -103,3 +86,5 @@ type PlayerItemVideoOutputable interface {
 }
 
 var _ PlayerItemVideoOutputable = (*PlayerItemVideoOutput)(nil)
+
+var _ PlayerItemOutputProvider = (*PlayerItemVideoOutput)(nil)

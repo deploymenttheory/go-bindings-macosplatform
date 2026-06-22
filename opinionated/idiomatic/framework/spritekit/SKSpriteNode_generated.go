@@ -6,17 +6,19 @@ package spritekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An image or solid color.
-//
 // SpriteNode is an idiomatic wrapper over the Objective-C class SKSpriteNode.
+//
+// It embeds [Node], promoting that type's methods.
+//
+// An image or solid color.
 type SpriteNode struct {
-	objref.Handle
+	Node
 }
 
 // SpriteNodeFromID adopts an existing Objective-C object as a SpriteNode
@@ -25,7 +27,8 @@ func SpriteNodeFromID(id objc.ID) *SpriteNode {
 	if id == 0 {
 		return nil
 	}
-	x := &SpriteNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SpriteNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,393 +41,403 @@ func spriteNodeAdopt(id objc.ID) *SpriteNode {
 	if id == 0 {
 		return nil
 	}
-	x := &SpriteNode{Handle: objref.Wrap(id)}
+	x := &SpriteNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *SpriteNode) Description() string {
-	return rt.Description(objref.IDOf(x))
+// NewSpriteNodeWithTextureColorSize initializes a textured sprite in color using an existing texture object.
+func NewSpriteNodeWithTextureColorSize(texture *Texture, color obj.Object, size corefoundation.CGSize) *SpriteNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTexture:color:size:"), objref.IDOf(texture), objref.IDOf(color), size)
+	return spriteNodeAdopt(_id)
 }
 
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SpriteNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SpriteNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a textured sprite using an existing texture object.
-//
-// NewSpriteNodeWithTexture creates a new SpriteNode.
+// NewSpriteNodeWithTexture initializes a textured sprite using an existing texture object.
 func NewSpriteNodeWithTexture(texture *Texture) *SpriteNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTexture:"), objref.IDOf(texture))
 	return spriteNodeAdopt(_id)
 }
 
-// Initializes a textured sprite using an image file.
-//
-// NewSpriteNodeWithImageNamed creates a new SpriteNode.
+// NewSpriteNodeWithImageNamed initializes a textured sprite using an image file.
 func NewSpriteNodeWithImageNamed(name string) *SpriteNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImageNamed:"), purego.NSString(name))
 	return spriteNodeAdopt(_id)
 }
 
-// Tells you when to initialize a sprite from an archive.
-//
-// NewSpriteNodeWithCoder creates a new SpriteNode.
+// NewSpriteNodeWithColorSize initializes a single-color sprite node.
+func NewSpriteNodeWithColorSize(color obj.Object, size corefoundation.CGSize) *SpriteNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithColor:size:"), objref.IDOf(color), size)
+	return spriteNodeAdopt(_id)
+}
+
+// NewSpriteNodeWithCoder tells you when to initialize a sprite from an archive.
 func NewSpriteNodeWithCoder(aDecoder obj.Object) *SpriteNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return spriteNodeAdopt(_id)
 }
 
-// The texture used to draw the sprite.
-//
-// WithTexture sets texture and returns the receiver so calls can be chained.
+// WithTexture the texture used to draw the sprite.
 func (x *SpriteNode) WithTexture(texture TextureProvider) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTexture:"), objref.IDOf(texture))
 	return x
 }
 
-// A texture that specifies the normal map for the sprite.
-//
-// WithNormalTexture sets normalTexture and returns the receiver so calls can be chained.
+// WithNormalTexture a texture that specifies the normal map for the sprite.
 func (x *SpriteNode) WithNormalTexture(normalTexture TextureProvider) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNormalTexture:"), objref.IDOf(normalTexture))
 	return x
 }
 
-// A mask that defines how this sprite is lit by light nodes in the scene.
-//
-// WithLightingBitMask sets lightingBitMask and returns the receiver so calls can be chained.
+// WithLightingBitMask a mask that defines how this sprite is lit by light nodes in the scene.
 func (x *SpriteNode) WithLightingBitMask(lightingBitMask uint32) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightingBitMask:"), lightingBitMask)
 	return x
 }
 
-// A mask that defines which lights are occluded by this sprite.
-//
-// WithShadowCastBitMask sets shadowCastBitMask and returns the receiver so calls can be chained.
+// WithShadowCastBitMask a mask that defines which lights are occluded by this sprite.
 func (x *SpriteNode) WithShadowCastBitMask(shadowCastBitMask uint32) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowCastBitMask:"), shadowCastBitMask)
 	return x
 }
 
-// A mask that defines which lights add shadows to the sprite.
-//
-// WithShadowedBitMask sets shadowedBitMask and returns the receiver so calls can be chained.
+// WithShadowedBitMask a mask that defines which lights add shadows to the sprite.
 func (x *SpriteNode) WithShadowedBitMask(shadowedBitMask uint32) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowedBitMask:"), shadowedBitMask)
 	return x
 }
 
-// A floating-point value that describes how the color is blended with the sprite’s texture.
-//
-// WithColorBlendFactor sets colorBlendFactor and returns the receiver so calls can be chained.
+// WithCenterRect enable nine-part stretching of the sprite’s texture.
+func (x *SpriteNode) WithCenterRect(centerRect corefoundation.CGRect) *SpriteNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCenterRect:"), centerRect)
+	return x
+}
+
+// WithColorBlendFactor a floating-point value that describes how the color is blended with the sprite’s texture.
 func (x *SpriteNode) WithColorBlendFactor(colorBlendFactor float64) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorBlendFactor:"), colorBlendFactor)
 	return x
 }
 
-// The sprite’s color.
-//
-// WithColor sets color and returns the receiver so calls can be chained.
+// WithColor the sprite’s color.
 func (x *SpriteNode) WithColor(color obj.Object) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 	return x
 }
 
-// The blend mode used to draw the sprite into the parent’s framebuffer.
-//
-// WithBlendMode sets blendMode and returns the receiver so calls can be chained.
+// WithBlendMode the blend mode used to draw the sprite into the parent’s framebuffer.
 func (x *SpriteNode) WithBlendMode(blendMode BlendMode) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendMode:"), blendMode)
 	return x
 }
 
-// A text file that defines code that does custom per-pixel drawing or colorization.
-//
-// WithShader sets shader and returns the receiver so calls can be chained.
+// WithAnchorPoint defines the point in the sprite that corresponds to the node’s position.
+func (x *SpriteNode) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *SpriteNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPoint:"), anchorPoint)
+	return x
+}
+
+// WithSize the dimensions of the sprite, in points.
+func (x *SpriteNode) WithSize(size corefoundation.CGSize) *SpriteNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
+	return x
+}
+
+// WithShader a text file that defines code that does custom per-pixel drawing or colorization.
 func (x *SpriteNode) WithShader(shader *Shader) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShader:"), objref.IDOf(shader))
 	return x
 }
 
-// The height of the node relative to its parent.
-//
-// WithZPosition sets zPosition and returns the receiver so calls can be chained.
+// WithPosition the position of the node in its parent’s coordinate system.
+func (x *SpriteNode) WithPosition(position corefoundation.CGPoint) *SpriteNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
+	return x
+}
+
+// WithZPosition the height of the node relative to its parent.
 func (x *SpriteNode) WithZPosition(zPosition float64) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
 	return x
 }
 
-// The Euler rotation about the z axis (in radians).
-//
-// WithZRotation sets zRotation and returns the receiver so calls can be chained.
+// WithZRotation the Euler rotation about the z axis (in radians).
 func (x *SpriteNode) WithZRotation(zRotation float64) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
 	return x
 }
 
-// A scaling factor that multiplies the width of a node and its children.
-//
-// WithXScale sets xScale and returns the receiver so calls can be chained.
+// WithXScale a scaling factor that multiplies the width of a node and its children.
 func (x *SpriteNode) WithXScale(xScale float64) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
 	return x
 }
 
-// A scaling factor that multiplies the height of a node and its children.
-//
-// WithYScale sets yScale and returns the receiver so calls can be chained.
+// WithYScale a scaling factor that multiplies the height of a node and its children.
 func (x *SpriteNode) WithYScale(yScale float64) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
 	return x
 }
 
-// A speed modifier applied to all actions executed by a node and its descendants.
-//
-// WithSpeed sets speed and returns the receiver so calls can be chained.
+// WithSpeed a speed modifier applied to all actions executed by a node and its descendants.
 func (x *SpriteNode) WithSpeed(speed float64) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
-// The transparency value applied to the node’s contents.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the transparency value applied to the node’s contents.
 func (x *SpriteNode) WithAlpha(alpha float64) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// A Boolean value that determines whether actions on the node and its descendants are processed.
-//
-// WithPaused sets paused and returns the receiver so calls can be chained.
+// WithPaused a Boolean value that determines whether actions on the node and its descendants are processed.
 func (x *SpriteNode) WithPaused(paused bool) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
-// A Boolean value that determines whether a node and its descendants are rendered.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden a Boolean value that determines whether a node and its descendants are rendered.
 func (x *SpriteNode) WithHidden(hidden bool) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// A Boolean value that indicates whether the node receives touch events.
-//
-// WithUserInteractionEnabled sets userInteractionEnabled and returns the receiver so calls can be chained.
+// WithUserInteractionEnabled a Boolean value that indicates whether the node receives touch events.
 func (x *SpriteNode) WithUserInteractionEnabled(userInteractionEnabled bool) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
 	return x
 }
 
-// The node’s assignable name.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the node’s assignable name.
 func (x *SpriteNode) WithName(name string) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The physics body associated with the node.
-//
-// WithPhysicsBody sets physicsBody and returns the receiver so calls can be chained.
+// WithPhysicsBody the physics body associated with the node.
 func (x *SpriteNode) WithPhysicsBody(physicsBody *PhysicsBody) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	return x
 }
 
-// A dictionary containing arbitrary data.
-//
-// WithUserData sets userData and returns the receiver so calls can be chained.
+// WithUserData a dictionary containing arbitrary data.
 func (x *SpriteNode) WithUserData(userData obj.Object) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	return x
 }
 
-// The reach constraints to apply to the node when executing a reach action.
-//
-// WithReachConstraints sets reachConstraints and returns the receiver so calls can be chained.
+// WithReachConstraints the reach constraints to apply to the node when executing a reach action.
 func (x *SpriteNode) WithReachConstraints(reachConstraints *ReachConstraints) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	return x
 }
 
-// A list of constraints to apply to the node.
-//
-// WithConstraints sets the collection and returns the receiver so calls can be chained.
+// WithConstraints a list of constraints to apply to the node.
 func (x *SpriteNode) WithConstraints(items ...*Constraint) *SpriteNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
-// The values of each attribute associated with the node’s attached shader.
-//
-// WithAttributeValues sets attributeValues and returns the receiver so calls can be chained.
+// WithAttributeValues the values of each attribute associated with the node’s attached shader.
 func (x *SpriteNode) WithAttributeValues(attributeValues obj.Object) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
-//
-// WithAccessibilityElement sets accessibilityElement and returns the receiver so calls can be chained.
+// WithAccessibilityElement a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (x *SpriteNode) WithAccessibilityElement(accessibilityElement bool) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
 	return x
 }
 
-// A string value describing the user interface element type; for example, a button.
-//
-// WithAccessibilityRole sets accessibilityRole and returns the receiver so calls can be chained.
+// WithAccessibilityRole a string value describing the user interface element type; for example, a button.
 func (x *SpriteNode) WithAccessibilityRole(accessibilityRole string) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
 	return x
 }
 
-// A string value describing the user interface element name and type; for example, the Buy button.
-//
-// WithAccessibilityRoleDescription sets accessibilityRoleDescription and returns the receiver so calls can be chained.
+// WithAccessibilityRoleDescription a string value describing the user interface element name and type; for example, the Buy button.
 func (x *SpriteNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
 	return x
 }
 
-// A string that defines this user interface element’s subrole; for example, a full-screen button.
-//
-// WithAccessibilitySubrole sets accessibilitySubrole and returns the receiver so calls can be chained.
+// WithAccessibilitySubrole a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (x *SpriteNode) WithAccessibilitySubrole(accessibilitySubrole string) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
 	return x
 }
 
-// The user interface element that contains this element.
-//
-// WithAccessibilityParent sets accessibilityParent and returns the receiver so calls can be chained.
+// WithAccessibilityFrame the size of this user interface element, in screen points.
+func (x *SpriteNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *SpriteNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	return x
+}
+
+// WithAccessibilityParent the user interface element that contains this element.
 func (x *SpriteNode) WithAccessibilityParent(accessibilityParent obj.Object) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	return x
 }
 
-// The help description of this user interface element; for example, the text shown in a tooltip.
-//
-// WithAccessibilityHelp sets accessibilityHelp and returns the receiver so calls can be chained.
+// WithAccessibilityHelp the help description of this user interface element; for example, the text shown in a tooltip.
 func (x *SpriteNode) WithAccessibilityHelp(accessibilityHelp string) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
 	return x
 }
 
-// A short description of this user interface element.
-//
-// WithAccessibilityLabel sets accessibilityLabel and returns the receiver so calls can be chained.
+// WithAccessibilityLabel a short description of this user interface element.
 func (x *SpriteNode) WithAccessibilityLabel(accessibilityLabel string) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
-//
-// WithAccessibilityEnabled sets accessibilityEnabled and returns the receiver so calls can be chained.
+// WithAccessibilityEnabled a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (x *SpriteNode) WithAccessibilityEnabled(accessibilityEnabled bool) *SpriteNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
 	return x
 }
 
-// Texture to be drawn (is stretched to fill the sprite)
+// ScaleToSize scales the sprite node to a specified size.
+func (x *SpriteNode) ScaleToSize(size corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scaleToSize:"), size)
+}
+
+// Texture texture to be drawn (is stretched to fill the sprite)
 func (x *SpriteNode) Texture() *Texture {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("texture"))
 	return TextureFromID(_r)
 }
 
+// SetTexture wraps the corresponding Objective-C method.
 func (x *SpriteNode) SetTexture(texture *Texture) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTexture:"), objref.IDOf(texture))
 }
 
-// Texture to use for generating normals that lights use to light this sprite. This will only be used if the sprite is lit by at least one light.
+// NormalTexture texture to use for generating normals that lights use to light this sprite. This will only be used if the sprite is lit by at least one light.
 func (x *SpriteNode) NormalTexture() *Texture {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("normalTexture"))
 	return TextureFromID(_r)
 }
 
+// SetNormalTexture wraps the corresponding Objective-C method.
 func (x *SpriteNode) SetNormalTexture(normalTexture *Texture) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNormalTexture:"), objref.IDOf(normalTexture))
 }
 
-// Bitmask to indicate being lit by a set of lights using overlapping lighting categories. A light whose category is set to a value that masks to non-zero using this mask will apply light to this sprite. When used together with a normal texture, complex lighting effects can be used.
+// LightingBitMask bitmask to indicate being lit by a set of lights using overlapping lighting categories. A light whose category is set to a value that masks to non-zero using this mask will apply light to this sprite. When used together with a normal texture, complex lighting effects can be used.
 func (x *SpriteNode) LightingBitMask() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("lightingBitMask"))
 	return _r
 }
 
+// SetLightingBitMask wraps the corresponding Objective-C method.
 func (x *SpriteNode) SetLightingBitMask(lightingBitMask uint32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightingBitMask:"), lightingBitMask)
 }
 
+// ShadowCastBitMask wraps the corresponding Objective-C method.
 func (x *SpriteNode) ShadowCastBitMask() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("shadowCastBitMask"))
 	return _r
 }
 
+// SetShadowCastBitMask wraps the corresponding Objective-C method.
 func (x *SpriteNode) SetShadowCastBitMask(shadowCastBitMask uint32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowCastBitMask:"), shadowCastBitMask)
 }
 
+// ShadowedBitMask wraps the corresponding Objective-C method.
 func (x *SpriteNode) ShadowedBitMask() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("shadowedBitMask"))
 	return _r
 }
 
+// SetShadowedBitMask wraps the corresponding Objective-C method.
 func (x *SpriteNode) SetShadowedBitMask(shadowedBitMask uint32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowedBitMask:"), shadowedBitMask)
 }
 
-// Controls the blending between the texture and the sprite's color. The valid interval of values is from 0.0 up to and including 1.0. A value above or below that interval is clamped to the minimum (0.0) if below or the maximum (1.0) if above.
+// CenterRect controls how the texture is stretched to fill the SKSpriteNode. Stretching is performed via a 9-part algorithm where the upper & lower middle parts are scaled horizontally, the left and right middle parts are scaled vertically, the center is scaled in both directions, and the corners are preserved. The centerRect defines the center region in a (0.0 - 1.0) coordinate space. Defaults to {(0,0) (1,1)} (the entire texture is stretched).
+func (x *SpriteNode) CenterRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("centerRect"))
+	return _r
+}
+
+// SetCenterRect wraps the corresponding Objective-C method.
+func (x *SpriteNode) SetCenterRect(centerRect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCenterRect:"), centerRect)
+}
+
+// ColorBlendFactor controls the blending between the texture and the sprite's color. The valid interval of values is from 0.0 up to and including 1.0. A value above or below that interval is clamped to the minimum (0.0) if below or the maximum (1.0) if above.
 func (x *SpriteNode) ColorBlendFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("colorBlendFactor"))
 	return _r
 }
 
+// SetColorBlendFactor wraps the corresponding Objective-C method.
 func (x *SpriteNode) SetColorBlendFactor(colorBlendFactor float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorBlendFactor:"), colorBlendFactor)
 }
 
-// Base color for the sprite (If no texture is present, the color still is drawn)
+// Color base color for the sprite (If no texture is present, the color still is drawn)
 func (x *SpriteNode) Color() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }
 
+// SetColor wraps the corresponding Objective-C method.
 func (x *SpriteNode) SetColor(color obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 }
 
-// Sets the blend mode to use when composing the sprite with the final framebuffer.
+// BlendMode sets the blend mode to use when composing the sprite with the final framebuffer.
 func (x *SpriteNode) BlendMode() BlendMode {
 	_r := objc.Send[BlendMode](objref.IDOf(x), objc.RegisterName("blendMode"))
 	return _r
 }
 
+// SetBlendMode wraps the corresponding Objective-C method.
 func (x *SpriteNode) SetBlendMode(blendMode BlendMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendMode:"), blendMode)
 }
 
+// AnchorPoint used to choose the location in the sprite that maps to its 'position' in the parent's coordinate space. The valid interval for each input is from 0.0 up to and including 1.0.
+func (x *SpriteNode) AnchorPoint() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("anchorPoint"))
+	return _r
+}
+
+// SetAnchorPoint wraps the corresponding Objective-C method.
+func (x *SpriteNode) SetAnchorPoint(anchorPoint corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPoint:"), anchorPoint)
+}
+
+// Size set the size of the sprite (in parent's coordinate space)
+func (x *SpriteNode) Size() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("size"))
+	return _r
+}
+
+// SetSize wraps the corresponding Objective-C method.
+func (x *SpriteNode) SetSize(size corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
+}
+
+// Shader wraps the corresponding Objective-C method.
 func (x *SpriteNode) Shader() *Shader {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shader"))
 	return ShaderFromID(_r)
 }
 
+// SetShader wraps the corresponding Objective-C method.
 func (x *SpriteNode) SetShader(shader *Shader) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShader:"), objref.IDOf(shader))
 }
@@ -437,10 +450,14 @@ type SpriteNodeable interface {
 	WithLightingBitMask(lightingBitMask uint32) *SpriteNode
 	WithShadowCastBitMask(shadowCastBitMask uint32) *SpriteNode
 	WithShadowedBitMask(shadowedBitMask uint32) *SpriteNode
+	WithCenterRect(centerRect corefoundation.CGRect) *SpriteNode
 	WithColorBlendFactor(colorBlendFactor float64) *SpriteNode
 	WithColor(color obj.Object) *SpriteNode
 	WithBlendMode(blendMode BlendMode) *SpriteNode
+	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *SpriteNode
+	WithSize(size corefoundation.CGSize) *SpriteNode
 	WithShader(shader *Shader) *SpriteNode
+	WithPosition(position corefoundation.CGPoint) *SpriteNode
 	WithZPosition(zPosition float64) *SpriteNode
 	WithZRotation(zRotation float64) *SpriteNode
 	WithXScale(xScale float64) *SpriteNode
@@ -460,10 +477,12 @@ type SpriteNodeable interface {
 	WithAccessibilityRole(accessibilityRole string) *SpriteNode
 	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *SpriteNode
 	WithAccessibilitySubrole(accessibilitySubrole string) *SpriteNode
+	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *SpriteNode
 	WithAccessibilityParent(accessibilityParent obj.Object) *SpriteNode
 	WithAccessibilityHelp(accessibilityHelp string) *SpriteNode
 	WithAccessibilityLabel(accessibilityLabel string) *SpriteNode
 	WithAccessibilityEnabled(accessibilityEnabled bool) *SpriteNode
+	ScaleToSize(size corefoundation.CGSize)
 	Texture() *Texture
 	SetTexture(texture *Texture)
 	NormalTexture() *Texture
@@ -474,14 +493,22 @@ type SpriteNodeable interface {
 	SetShadowCastBitMask(shadowCastBitMask uint32)
 	ShadowedBitMask() uint32
 	SetShadowedBitMask(shadowedBitMask uint32)
+	CenterRect() corefoundation.CGRect
+	SetCenterRect(centerRect corefoundation.CGRect)
 	ColorBlendFactor() float64
 	SetColorBlendFactor(colorBlendFactor float64)
 	Color() obj.Object
 	SetColor(color obj.Object)
 	BlendMode() BlendMode
 	SetBlendMode(blendMode BlendMode)
+	AnchorPoint() corefoundation.CGPoint
+	SetAnchorPoint(anchorPoint corefoundation.CGPoint)
+	Size() corefoundation.CGSize
+	SetSize(size corefoundation.CGSize)
 	Shader() *Shader
 	SetShader(shader *Shader)
 }
 
 var _ SpriteNodeable = (*SpriteNode)(nil)
+
+var _ NodeProvider = (*SpriteNode)(nil)

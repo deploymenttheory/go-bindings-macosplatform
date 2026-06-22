@@ -5,16 +5,24 @@
 package quicklookthumbnailing
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
+// SharedGenerator wraps the corresponding Objective-C method.
 func SharedGenerator() *ThumbnailGenerator {
 	_r := objc.Send[objc.ID](objc.ID(_class("QLThumbnailGenerator")), objc.RegisterName("sharedGenerator"))
 	return ThumbnailGeneratorFromID(_r)
 }
 
-// Creates a new thumbnail for a custom file type using a file at the given URL.
+// ReplyWithContextSizeCurrentContextDrawingBlock creates a new thumbnail for a custom file type in the current context.
+func ReplyWithContextSizeCurrentContextDrawingBlock(contextSize corefoundation.CGSize, drawingBlock func() bool) *ThumbnailReply {
+	_r := objc.Send[objc.ID](objc.ID(_class("QLThumbnailReply")), objc.RegisterName("replyWithContextSize:currentContextDrawingBlock:"), contextSize, objc.NewBlock(func(_ objc.Block) bool { return drawingBlock() }))
+	return ThumbnailReplyFromID(_r)
+}
+
+// ReplyWithImageFileURL creates a new thumbnail for a custom file type using a file at the given URL.
 func ReplyWithImageFileURL(fileURL string) *ThumbnailReply {
 	_r := objc.Send[objc.ID](objc.ID(_class("QLThumbnailReply")), objc.RegisterName("replyWithImageFileURL:"), rt.FileURL(fileURL))
 	return ThumbnailReplyFromID(_r)

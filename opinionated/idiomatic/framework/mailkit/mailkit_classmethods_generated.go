@@ -12,25 +12,25 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Indicates an address is invalid and may result in failure to deliver a message.
+// ErrorWithLocalizedDescription indicates an address is invalid and may result in failure to deliver a message.
 func ErrorWithLocalizedDescription(localizedDescription string) *AddressAnnotation {
 	_r := objc.Send[objc.ID](objc.ID(_class("MEAddressAnnotation")), objc.RegisterName("errorWithLocalizedDescription:"), purego.NSString(localizedDescription))
 	return AddressAnnotationFromID(_r)
 }
 
-// Indicates an address may be invalid or needs attention.
+// WarningWithLocalizedDescription indicates an address may be invalid or needs attention.
 func WarningWithLocalizedDescription(localizedDescription string) *AddressAnnotation {
 	_r := objc.Send[objc.ID](objc.ID(_class("MEAddressAnnotation")), objc.RegisterName("warningWithLocalizedDescription:"), purego.NSString(localizedDescription))
 	return AddressAnnotationFromID(_r)
 }
 
-// Indicates an address is valid and correct.
+// SuccessWithLocalizedDescription indicates an address is valid and correct.
 func SuccessWithLocalizedDescription(localizedDescription string) *AddressAnnotation {
 	_r := objc.Send[objc.ID](objc.ID(_class("MEAddressAnnotation")), objc.RegisterName("successWithLocalizedDescription:"), purego.NSString(localizedDescription))
 	return AddressAnnotationFromID(_r)
 }
 
-// This will call on Mail to reload the content rule list associated with the given identifier. Mail May throttle reloading the content blocker to once every few minutes.
+// ReloadContentBlockerWithIdentifier this will call on Mail to reload the content rule list associated with the given identifier. Mail May throttle reloading the content blocker to once every few minutes.
 //
 // ReloadContentBlockerWithIdentifier blocks until the operation completes or ctx is cancelled.
 func ReloadContentBlockerWithIdentifier(ctx context.Context, identifier string) error {
@@ -49,7 +49,7 @@ func ReloadContentBlockerWithIdentifier(ctx context.Context, identifier string) 
 	}
 }
 
-// This will call on Mail to reload the currently visible messages.  Mail may throttle reloading visible messages.
+// ReloadVisibleMessages this will call on Mail to reload the currently visible messages.  Mail may throttle reloading visible messages.
 //
 // ReloadVisibleMessages blocks until the operation completes or ctx is cancelled.
 func ReloadVisibleMessages(ctx context.Context) error {
@@ -68,59 +68,61 @@ func ReloadVisibleMessages(ctx context.Context) error {
 	}
 }
 
-// Marks the message as flagged with the provided color.
+// FlagActionWithFlag marks the message as flagged with the provided color.
 func FlagActionWithFlag(flag MessageActionFlag) *MessageAction {
 	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageAction")), objc.RegisterName("flagActionWithFlag:"), flag)
 	return MessageActionFromID(_r)
 }
 
-// Adds a color to the message when shown in the message list.
+// SetBackgroundColorActionWithColor adds a color to the message when shown in the message list.
 func SetBackgroundColorActionWithColor(color MessageActionMessageColor) *MessageAction {
 	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageAction")), objc.RegisterName("setBackgroundColorActionWithColor:"), color)
 	return MessageActionFromID(_r)
 }
 
-// Moves the mail message to the user's trash mailbox for the account.
+// MoveToTrashAction moves the mail message to the user's trash mailbox for the account.
 func MoveToTrashAction() *MessageAction {
 	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageAction")), objc.RegisterName("moveToTrashAction"))
 	return MessageActionFromID(_r)
 }
 
-// Moves the mail message to the user's archive mailbox for the account.
+// MoveToArchiveAction moves the mail message to the user's archive mailbox for the account.
 func MoveToArchiveAction() *MessageAction {
 	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageAction")), objc.RegisterName("moveToArchiveAction"))
 	return MessageActionFromID(_r)
 }
 
-// Moves the mail message to the user's junk mailbox for the account.
+// MoveToJunkAction moves the mail message to the user's junk mailbox for the account.
 func MoveToJunkAction() *MessageAction {
 	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageAction")), objc.RegisterName("moveToJunkAction"))
 	return MessageActionFromID(_r)
 }
 
-// Marks the mail message as read.
+// MarkAsReadAction marks the mail message as read.
 func MarkAsReadAction() *MessageAction {
 	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageAction")), objc.RegisterName("markAsReadAction"))
 	return MessageActionFromID(_r)
 }
 
-// Marks the mail  message as unread.
+// MarkAsUnreadAction marks the mail  message as unread.
 func MarkAsUnreadAction() *MessageAction {
 	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageAction")), objc.RegisterName("markAsUnreadAction"))
 	return MessageActionFromID(_r)
 }
 
+// DecisionApplyingAction wraps the corresponding Objective-C method.
 func DecisionApplyingAction(action *MessageAction) *MessageActionDecision {
 	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageActionDecision")), objc.RegisterName("decisionApplyingAction:"), objref.IDOf(action))
 	return MessageActionDecisionFromID(_r)
 }
 
-// Creates an
+// DecisionApplyingActions creates an
 func DecisionApplyingActions(actions []*MessageAction) *MessageActionDecision {
 	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageActionDecision")), objc.RegisterName("decisionApplyingActions:"), purego.SliceToNSArray(actions, func(_v *MessageAction) objc.ID { return objref.IDOf(_v) }))
 	return MessageActionDecisionFromID(_r)
 }
 
+// InvokeAgainWithBody wraps the corresponding Objective-C method.
 func InvokeAgainWithBody() *MessageActionDecision {
 	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageActionDecision")), objc.RegisterName("invokeAgainWithBody"))
 	return MessageActionDecisionFromID(_r)

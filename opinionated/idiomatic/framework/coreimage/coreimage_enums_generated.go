@@ -26,6 +26,8 @@ const (
 	DataMatrixCodeECCVersion200 DataMatrixCodeECCVersion = 200
 )
 
+// String returns the DataMatrixCodeECCVersion constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DataMatrixCodeECCVersion) String() string {
 	switch e {
 	case DataMatrixCodeECCVersion000:
@@ -59,6 +61,8 @@ const (
 	QRCodeErrorCorrectionLevelH QRCodeErrorCorrectionLevel = 72
 )
 
+// String returns the QRCodeErrorCorrectionLevel constant's name, or its numeric form when the
+// value is not a known constant.
 func (e QRCodeErrorCorrectionLevel) String() string {
 	switch e {
 	case QRCodeErrorCorrectionLevelL:
@@ -86,6 +90,8 @@ const (
 	RenderDestinationAlphaUnpremultiplied RenderDestinationAlphaMode = 2
 )
 
+// String returns the RenderDestinationAlphaMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RenderDestinationAlphaMode) String() string {
 	switch e {
 	case RenderDestinationAlphaNone:

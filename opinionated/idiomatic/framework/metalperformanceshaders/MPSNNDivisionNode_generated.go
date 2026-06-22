@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a division operator.
-//
 // NNDivisionNode is an idiomatic wrapper over the Objective-C class MPSNNDivisionNode.
+//
+// It embeds [NNBinaryArithmeticNode], promoting that type's methods.
+//
+// A representation of a division operator.
 type NNDivisionNode struct {
-	objref.Handle
+	NNBinaryArithmeticNode
 }
 
 // NNDivisionNodeFromID adopts an existing Objective-C object as a NNDivisionNode
@@ -25,7 +26,8 @@ func NNDivisionNodeFromID(id objc.ID) *NNDivisionNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNDivisionNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNDivisionNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func nNDivisionNodeAdopt(id objc.ID) *NNDivisionNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNDivisionNode{Handle: objref.Wrap(id)}
+	x := &NNDivisionNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NNDivisionNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNDivisionNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNDivisionNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNNDivisionNode creates a new NNDivisionNode.
@@ -64,75 +52,73 @@ func NewNNDivisionNode() *NNDivisionNode {
 	return nNDivisionNodeAdopt(_id)
 }
 
-// WithPrimaryScale sets primaryScale and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
 func (x *NNDivisionNode) WithPrimaryScale(primaryScale float32) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return x
 }
 
-// WithSecondaryScale sets secondaryScale and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
 func (x *NNDivisionNode) WithSecondaryScale(secondaryScale float32) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return x
 }
 
-// WithBias sets bias and returns the receiver so calls can be chained.
+// WithBias sets the property and returns the receiver so calls can be chained.
 func (x *NNDivisionNode) WithBias(bias float32) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 	return x
 }
 
-// WithPrimaryStrideInPixelsX sets primaryStrideInPixelsX and returns the receiver so calls can be chained.
+// WithPrimaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
 func (x *NNDivisionNode) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
 	return x
 }
 
-// WithPrimaryStrideInPixelsY sets primaryStrideInPixelsY and returns the receiver so calls can be chained.
+// WithPrimaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
 func (x *NNDivisionNode) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
 	return x
 }
 
-// WithPrimaryStrideInFeatureChannels sets primaryStrideInFeatureChannels and returns the receiver so calls can be chained.
+// WithPrimaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
 func (x *NNDivisionNode) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInFeatureChannels:"), primaryStrideInFeatureChannels)
 	return x
 }
 
-// WithSecondaryStrideInPixelsX sets secondaryStrideInPixelsX and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
 func (x *NNDivisionNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 	return x
 }
 
-// WithSecondaryStrideInPixelsY sets secondaryStrideInPixelsY and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
 func (x *NNDivisionNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 	return x
 }
 
-// WithSecondaryStrideInFeatureChannels sets secondaryStrideInFeatureChannels and returns the receiver so calls can be chained.
+// WithSecondaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
 func (x *NNDivisionNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
 	return x
 }
 
-// WithMinimumValue sets minimumValue and returns the receiver so calls can be chained.
+// WithMinimumValue sets the property and returns the receiver so calls can be chained.
 func (x *NNDivisionNode) WithMinimumValue(minimumValue float32) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
 	return x
 }
 
-// WithMaximumValue sets maximumValue and returns the receiver so calls can be chained.
+// WithMaximumValue sets the property and returns the receiver so calls can be chained.
 func (x *NNDivisionNode) WithMaximumValue(maximumValue float32) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *NNDivisionNode) WithLabel(label string) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -156,3 +142,7 @@ type NNDivisionNodeable interface {
 }
 
 var _ NNDivisionNodeable = (*NNDivisionNode)(nil)
+
+var _ NNBinaryArithmeticNodeProvider = (*NNDivisionNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNDivisionNode)(nil)

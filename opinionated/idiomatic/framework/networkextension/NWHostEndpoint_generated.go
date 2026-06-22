@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A network endpoint specified by DNS name (or IP address) and port.
-//
 // NWHostEndpoint is an idiomatic wrapper over the Objective-C class NWHostEndpoint.
+//
+// A network endpoint specified by DNS name (or IP address) and port.
 type NWHostEndpoint struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NWHostEndpointFromID(id objc.ID) *NWHostEndpoint {
 	if id == 0 {
 		return nil
 	}
-	x := &NWHostEndpoint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NWHostEndpoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nWHostEndpointAdopt(id objc.ID) *NWHostEndpoint {
 	if id == 0 {
 		return nil
 	}
-	x := &NWHostEndpoint{Handle: objref.Wrap(id)}
+	x := &NWHostEndpoint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *NWHostEndpoint) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NWHostEndpoint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNWHostEndpoint creates a new NWHostEndpoint.
 func NewNWHostEndpoint() *NWHostEndpoint {
 	_id := objc.Send[objc.ID](objc.ID(_class("NWHostEndpoint")), objc.RegisterName("new"))
 	return nWHostEndpointAdopt(_id)
 }
 
-// The endpoint's hostname.
+// Hostname the endpoint's hostname.
 func (x *NWHostEndpoint) Hostname() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hostname"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *NWHostEndpoint) Hostname() string {
 	return purego.GoString(_r)
 }
 
-// The endpoint's port.
+// Port the endpoint's port.
 func (x *NWHostEndpoint) Port() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("port"))
 	if _r == 0 {

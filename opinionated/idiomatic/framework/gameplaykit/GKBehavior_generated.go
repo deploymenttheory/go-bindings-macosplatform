@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of goals that together influence the movement of an agent.
-//
 // Behavior is an idiomatic wrapper over the Objective-C class GKBehavior.
+//
+// Behavior is an abstract base — you do not construct it directly. Construct one of [CompositeBehavior] and pass it where a Behavior is accepted.
+//
+// A set of goals that together influence the movement of an agent.
 type Behavior struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func BehaviorFromID(id objc.ID) *Behavior {
 	if id == 0 {
 		return nil
 	}
-	x := &Behavior{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Behavior{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func behaviorAdopt(id objc.ID) *Behavior {
 	if id == 0 {
 		return nil
 	}
-	x := &Behavior{Handle: objref.Wrap(id)}
+	x := &Behavior{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,50 +62,51 @@ func (x *Behavior) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewBehavior creates a new Behavior.
-func NewBehavior() *Behavior {
-	_id := objc.Send[objc.ID](objc.ID(_class("GKBehavior")), objc.RegisterName("new"))
-	return behaviorAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Behavior) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Sets the weight for the specified goal’s influence on agents, adding that goal to the behavior if not already present.
+// SetWeightForGoal sets the weight for the specified goal’s influence on agents, adding that goal to the behavior if not already present.
 func (x *Behavior) SetWeightForGoal(weight float32, goal *Goal) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeight:forGoal:"), weight, objref.IDOf(goal))
 }
 
-// Returns the weight for the specified goal’s influence on agents.
+// WeightForGoal returns the weight for the specified goal’s influence on agents.
 func (x *Behavior) WeightForGoal(goal *Goal) float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("weightForGoal:"), objref.IDOf(goal))
 	return _r
 }
 
-// Removes the specified goal from the behavior.
+// RemoveGoal removes the specified goal from the behavior.
 func (x *Behavior) RemoveGoal(goal *Goal) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeGoal:"), objref.IDOf(goal))
 }
 
-// Removes all goals from the behavior.
+// RemoveAllGoals removes all goals from the behavior.
 func (x *Behavior) RemoveAllGoals() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllGoals"))
 }
 
-// Returns the goal at the specified index in the behavior’s list of goals.
+// ObjectAtIndexedSubscript returns the goal at the specified index in the behavior’s list of goals.
 func (x *Behavior) ObjectAtIndexedSubscript(idx int) *Goal {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), idx)
 	return GoalFromID(_r)
 }
 
-// Sets the weight for the goal specified by subscript syntax.
+// SetObjectForKeyedSubscript sets the weight for the goal specified by subscript syntax.
 func (x *Behavior) SetObjectForKeyedSubscript(weight obj.Object, goal *Goal) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:forKeyedSubscript:"), objref.IDOf(weight), objref.IDOf(goal))
 }
 
-// Returns the weight associated with the goal specified by subscript syntax.
+// ObjectForKeyedSubscript returns the weight associated with the goal specified by subscript syntax.
 func (x *Behavior) ObjectForKeyedSubscript(goal *Goal) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(goal))
 	return obj.Wrap(_r)
 }
 
+// GoalCount wraps the corresponding Objective-C method.
 func (x *Behavior) GoalCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("goalCount"))
 	return _r
@@ -121,3 +126,10 @@ type Behaviorable interface {
 }
 
 var _ Behaviorable = (*Behavior)(nil)
+
+// isBehavior marks Behavior — and, by embedding promotion, its
+// subclasses — as a member of the Behavior hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Behavior) isBehavior() {}
+
+var _ BehaviorProvider = (*Behavior)(nil)

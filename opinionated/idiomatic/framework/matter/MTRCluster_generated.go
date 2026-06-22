@@ -13,6 +13,8 @@ import (
 )
 
 // MTRCluster is an idiomatic wrapper over the Objective-C class MTRCluster.
+//
+// MTRCluster is an abstract base — you do not construct it directly. Construct one of [MTRGenericBaseCluster], [MTRGenericCluster] and pass it where a MTRCluster is accepted.
 type MTRCluster struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRClusterFromID(id objc.ID) *MTRCluster {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRCluster{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRCluster{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRClusterAdopt(id objc.ID) *MTRCluster {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRCluster{Handle: objref.Wrap(id)}
+	x := &MTRCluster{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,12 +60,13 @@ func (x *MTRCluster) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRCluster creates a new MTRCluster.
-func NewMTRCluster() *MTRCluster {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRCluster")), objc.RegisterName("new"))
-	return mTRClusterAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRCluster) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// EndpointID wraps the corresponding Objective-C method.
 func (x *MTRCluster) EndpointID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpointID"))
 	return obj.Wrap(_r)
@@ -74,3 +79,10 @@ type MTRClusterable interface {
 }
 
 var _ MTRClusterable = (*MTRCluster)(nil)
+
+// isMTRCluster marks MTRCluster — and, by embedding promotion, its
+// subclasses — as a member of the MTRCluster hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRCluster) isMTRCluster() {}
+
+var _ MTRClusterProvider = (*MTRCluster)(nil)

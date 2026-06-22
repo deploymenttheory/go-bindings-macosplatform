@@ -59,6 +59,8 @@ const (
 	ActivationTypeCount ActivationType = 21
 )
 
+// String returns the ActivationType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ActivationType) String() string {
 	switch e {
 	case ActivationTypeNone:
@@ -178,6 +180,8 @@ const (
 	ArithmeticOperationCount ArithmeticOperation = 30
 )
 
+// String returns the ArithmeticOperation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ArithmeticOperation) String() string {
 	switch e {
 	case ArithmeticOperationAdd:
@@ -267,6 +271,8 @@ const (
 	ComparisonOperationCount ComparisonOperation = 12
 )
 
+// String returns the ComparisonOperation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ComparisonOperation) String() string {
 	switch e {
 	case ComparisonOperationEqual:
@@ -312,6 +318,8 @@ const (
 	ConvolutionTypeDepthwise ConvolutionType = 2
 )
 
+// String returns the ConvolutionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ConvolutionType) String() string {
 	switch e {
 	case ConvolutionTypeStandard:
@@ -347,6 +355,8 @@ const (
 	DataTypeCount DataType = 10
 )
 
+// String returns the DataType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DataType) String() string {
 	switch e {
 	case DataTypeInvalid:
@@ -388,6 +398,8 @@ const (
 	DeviceTypeCount DeviceType = 4
 )
 
+// String returns the DeviceType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DeviceType) String() string {
 	switch e {
 	case DeviceTypeCPU:
@@ -424,6 +436,8 @@ const (
 	ExecutionOptionsPerLayerProfiling ExecutionOptions = 16
 )
 
+// String returns the ExecutionOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ExecutionOptions) String() string {
 	var parts []string
 	if e&ExecutionOptionsSkipWritingInputDataToDevice != 0 {
@@ -459,6 +473,8 @@ const (
 	GradientClippingTypeByGlobalNorm GradientClippingType = 2
 )
 
+// String returns the GradientClippingType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GradientClippingType) String() string {
 	switch e {
 	case GradientClippingTypeByValue:
@@ -489,6 +505,8 @@ const (
 	GraphCompilationOptionsComputeAllGradients GraphCompilationOptions = 8
 )
 
+// String returns the GraphCompilationOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GraphCompilationOptions) String() string {
 	var parts []string
 	if e&GraphCompilationOptionsDebugLayers != 0 {
@@ -519,6 +537,8 @@ const (
 	LSTMResultModeOutputAndStates LSTMResultMode = 1
 )
 
+// String returns the LSTMResultMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LSTMResultMode) String() string {
 	switch e {
 	case LSTMResultModeOutput:
@@ -555,6 +575,8 @@ const (
 	LossTypeCount LossType = 9
 )
 
+// String returns the LossType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LossType) String() string {
 	switch e {
 	case LossTypeMeanAbsoluteError:
@@ -594,6 +616,8 @@ const (
 	PaddingPolicyUsePaddingSize PaddingPolicy = 2
 )
 
+// String returns the PaddingPolicy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PaddingPolicy) String() string {
 	switch e {
 	case PaddingPolicySame:
@@ -621,6 +645,8 @@ const (
 	PaddingTypeConstant PaddingType = 3
 )
 
+// String returns the PaddingType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PaddingType) String() string {
 	switch e {
 	case PaddingTypeZero:
@@ -649,6 +675,8 @@ const (
 	PoolingTypeCount  PoolingType = 4
 )
 
+// String returns the PoolingType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PoolingType) String() string {
 	switch e {
 	case PoolingTypeMax:
@@ -678,6 +706,8 @@ const (
 	RandomInitializerTypeCount  RandomInitializerType = 4
 )
 
+// String returns the RandomInitializerType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RandomInitializerType) String() string {
 	switch e {
 	case RandomInitializerTypeInvalid:
@@ -723,6 +753,8 @@ const (
 	ReductionTypeCount ReductionType = 10
 )
 
+// String returns the ReductionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ReductionType) String() string {
 	switch e {
 	case ReductionTypeNone:
@@ -764,6 +796,8 @@ const (
 	RegularizationTypeL2 RegularizationType = 2
 )
 
+// String returns the RegularizationType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RegularizationType) String() string {
 	switch e {
 	case RegularizationTypeNone:
@@ -787,6 +821,8 @@ const (
 	SampleModeLinear SampleMode = 1
 )
 
+// String returns the SampleMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SampleMode) String() string {
 	switch e {
 	case SampleModeNearest:
@@ -808,6 +844,8 @@ const (
 	SoftmaxOperationLogSoftmax SoftmaxOperation = 1
 )
 
+// String returns the SoftmaxOperation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SoftmaxOperation) String() string {
 	switch e {
 	case SoftmaxOperationSoftmax:

@@ -6,17 +6,19 @@ package vision
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An observation that provides the position and extent of an image feature that an image- analysis request detects.
-//
 // DetectedObjectObservation is an idiomatic wrapper over the Objective-C class VNDetectedObjectObservation.
+//
+// DetectedObjectObservation is an abstract base — you do not construct it directly. Construct one of [FaceObservation], [HumanObservation], [RecognizedObjectObservation], [RectangleObservation] and pass it where a DetectedObjectObservation is accepted.
+//
+// An observation that provides the position and extent of an image feature that an image- analysis request detects.
 type DetectedObjectObservation struct {
-	objref.Handle
+	Observation
 }
 
 // DetectedObjectObservationFromID adopts an existing Objective-C object as a DetectedObjectObservation
@@ -25,7 +27,8 @@ func DetectedObjectObservationFromID(id objc.ID) *DetectedObjectObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &DetectedObjectObservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DetectedObjectObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,33 +41,19 @@ func detectedObjectObservationAdopt(id objc.ID) *DetectedObjectObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &DetectedObjectObservation{Handle: objref.Wrap(id)}
+	x := &DetectedObjectObservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *DetectedObjectObservation) Description() string {
-	return rt.Description(objref.IDOf(x))
+// BoundingBox the bounding box of the detected object. The coordinates are normalized to the dimensions of the processed image, with the origin at the image's lower-left corner.
+func (x *DetectedObjectObservation) BoundingBox() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("boundingBox"))
+	return _r
 }
 
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DetectedObjectObservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DetectedObjectObservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewDetectedObjectObservation creates a new DetectedObjectObservation.
-func NewDetectedObjectObservation() *DetectedObjectObservation {
-	_id := objc.Send[objc.ID](objc.ID(_class("VNDetectedObjectObservation")), objc.RegisterName("new"))
-	return detectedObjectObservationAdopt(_id)
-}
-
-// The resulting CVPixelBuffer from requests that generate a segmentation mask for the entire image.
+// GlobalSegmentationMask the resulting CVPixelBuffer from requests that generate a segmentation mask for the entire image.
 func (x *DetectedObjectObservation) GlobalSegmentationMask() *PixelBufferObservation {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("globalSegmentationMask"))
 	return PixelBufferObservationFromID(_r)
@@ -73,7 +62,17 @@ func (x *DetectedObjectObservation) GlobalSegmentationMask() *PixelBufferObserva
 // DetectedObjectObservationable is the interface implemented by [DetectedObjectObservation], for mocking and DI.
 type DetectedObjectObservationable interface {
 	obj.Object
+	BoundingBox() corefoundation.CGRect
 	GlobalSegmentationMask() *PixelBufferObservation
 }
 
 var _ DetectedObjectObservationable = (*DetectedObjectObservation)(nil)
+
+// isDetectedObjectObservation marks DetectedObjectObservation — and, by embedding promotion, its
+// subclasses — as a member of the DetectedObjectObservation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DetectedObjectObservation) isDetectedObjectObservation() {}
+
+var _ DetectedObjectObservationProvider = (*DetectedObjectObservation)(nil)
+
+var _ ObservationProvider = (*DetectedObjectObservation)(nil)

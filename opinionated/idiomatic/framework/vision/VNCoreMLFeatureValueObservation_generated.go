@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a collection of key-value information that a Core ML image-analysis request produces.
-//
 // CoreMLFeatureValueObservation is an idiomatic wrapper over the Objective-C class VNCoreMLFeatureValueObservation.
+//
+// It embeds [Observation], promoting that type's methods.
+//
+// An object that represents a collection of key-value information that a Core ML image-analysis request produces.
 type CoreMLFeatureValueObservation struct {
-	objref.Handle
+	Observation
 }
 
 // CoreMLFeatureValueObservationFromID adopts an existing Objective-C object as a CoreMLFeatureValueObservation
@@ -25,7 +26,8 @@ func CoreMLFeatureValueObservationFromID(id objc.ID) *CoreMLFeatureValueObservat
 	if id == 0 {
 		return nil
 	}
-	x := &CoreMLFeatureValueObservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CoreMLFeatureValueObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func coreMLFeatureValueObservationAdopt(id objc.ID) *CoreMLFeatureValueObservati
 	if id == 0 {
 		return nil
 	}
-	x := &CoreMLFeatureValueObservation{Handle: objref.Wrap(id)}
+	x := &CoreMLFeatureValueObservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CoreMLFeatureValueObservation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CoreMLFeatureValueObservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CoreMLFeatureValueObservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCoreMLFeatureValueObservation creates a new CoreMLFeatureValueObservation.
@@ -64,13 +52,13 @@ func NewCoreMLFeatureValueObservation() *CoreMLFeatureValueObservation {
 	return coreMLFeatureValueObservationAdopt(_id)
 }
 
-// The result VNCoreMLRequest where the model produces an MLFeatureValue that is neither a classification or image. Refer to the Core ML documentation and the model itself for the handling of the content of the featureValue.
+// FeatureValue the result VNCoreMLRequest where the model produces an MLFeatureValue that is neither a classification or image. Refer to the Core ML documentation and the model itself for the handling of the content of the featureValue.
 func (x *CoreMLFeatureValueObservation) FeatureValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("featureValue"))
 	return obj.Wrap(_r)
 }
 
-// The name used in the model description of the CoreML model that produced this observation allowing to correlate the observation back to the output of the model.
+// FeatureName the name used in the model description of the CoreML model that produced this observation allowing to correlate the observation back to the output of the model.
 func (x *CoreMLFeatureValueObservation) FeatureName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("featureName"))
 	if _r == 0 {
@@ -87,3 +75,5 @@ type CoreMLFeatureValueObservationable interface {
 }
 
 var _ CoreMLFeatureValueObservationable = (*CoreMLFeatureValueObservation)(nil)
+
+var _ ObservationProvider = (*CoreMLFeatureValueObservation)(nil)

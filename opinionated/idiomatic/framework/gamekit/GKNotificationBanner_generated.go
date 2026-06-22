@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A Game Center-style banner that displays a message to the local player.
-//
 // NotificationBanner is an idiomatic wrapper over the Objective-C class GKNotificationBanner.
+//
+// A Game Center-style banner that displays a message to the local player.
 type NotificationBanner struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NotificationBannerFromID(id objc.ID) *NotificationBanner {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationBanner{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NotificationBanner{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func notificationBannerAdopt(id objc.ID) *NotificationBanner {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationBanner{Handle: objref.Wrap(id)}
+	x := &NotificationBanner{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *NotificationBanner) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *NotificationBanner) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationBanner) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewNotificationBanner creates a new NotificationBanner.

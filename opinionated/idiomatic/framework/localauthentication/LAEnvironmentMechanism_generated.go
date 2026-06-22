@@ -13,6 +13,8 @@ import (
 )
 
 // EnvironmentMechanism is an idiomatic wrapper over the Objective-C class LAEnvironmentMechanism.
+//
+// EnvironmentMechanism is an abstract base — you do not construct it directly. Construct one of [EnvironmentMechanismBiometry], [EnvironmentMechanismCompanion], [EnvironmentMechanismUserPassword] and pass it where a EnvironmentMechanism is accepted.
 type EnvironmentMechanism struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func EnvironmentMechanismFromID(id objc.ID) *EnvironmentMechanism {
 	if id == 0 {
 		return nil
 	}
-	x := &EnvironmentMechanism{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EnvironmentMechanism{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func environmentMechanismAdopt(id objc.ID) *EnvironmentMechanism {
 	if id == 0 {
 		return nil
 	}
-	x := &EnvironmentMechanism{Handle: objref.Wrap(id)}
+	x := &EnvironmentMechanism{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,19 +60,19 @@ func (x *EnvironmentMechanism) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewEnvironmentMechanism creates a new EnvironmentMechanism.
-func NewEnvironmentMechanism() *EnvironmentMechanism {
-	_id := objc.Send[objc.ID](objc.ID(_class("LAEnvironmentMechanism")), objc.RegisterName("new"))
-	return environmentMechanismAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *EnvironmentMechanism) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Whether the mechanism is available for use, i.e. whether the relevant preflight call of
+// IsUsable whether the mechanism is available for use, i.e. whether the relevant preflight call of
 func (x *EnvironmentMechanism) IsUsable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUsable"))
 	return _r
 }
 
-// The localized name of the authentication mechanism, e.g. "Touch ID", "Face ID" etc.
+// LocalizedName the localized name of the authentication mechanism, e.g. "Touch ID", "Face ID" etc.
 func (x *EnvironmentMechanism) LocalizedName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
 	if _r == 0 {
@@ -77,7 +81,7 @@ func (x *EnvironmentMechanism) LocalizedName() string {
 	return purego.GoString(_r)
 }
 
-// Name of the SF Symbol representing this authentication mechanism.
+// IconSystemName name of the SF Symbol representing this authentication mechanism.
 func (x *EnvironmentMechanism) IconSystemName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iconSystemName"))
 	if _r == 0 {
@@ -95,3 +99,10 @@ type EnvironmentMechanismable interface {
 }
 
 var _ EnvironmentMechanismable = (*EnvironmentMechanism)(nil)
+
+// isEnvironmentMechanism marks EnvironmentMechanism — and, by embedding promotion, its
+// subclasses — as a member of the EnvironmentMechanism hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *EnvironmentMechanism) isEnvironmentMechanism() {}
+
+var _ EnvironmentMechanismProvider = (*EnvironmentMechanism)(nil)

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a buffer of audio data with a format.
-//
 // AudioBuffer is an idiomatic wrapper over the Objective-C class AVAudioBuffer.
+//
+// AudioBuffer is an abstract base — you do not construct it directly. Construct one of [AudioCompressedBuffer], [AudioPCMBuffer] and pass it where a AudioBuffer is accepted.
+//
+// An object that represents a buffer of audio data with a format.
 type AudioBuffer struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func AudioBufferFromID(id objc.ID) *AudioBuffer {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioBuffer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioBuffer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func audioBufferAdopt(id objc.ID) *AudioBuffer {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioBuffer{Handle: objref.Wrap(id)}
+	x := &AudioBuffer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +62,13 @@ func (x *AudioBuffer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewAudioBuffer creates a new AudioBuffer.
-func NewAudioBuffer() *AudioBuffer {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioBuffer")), objc.RegisterName("new"))
-	return audioBufferAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioBuffer) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The format of the audio in the buffer.
+// Format the format of the audio in the buffer.
 func (x *AudioBuffer) Format() *AudioFormat {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("format"))
 	return AudioFormatFromID(_r)
@@ -77,3 +81,10 @@ type AudioBufferable interface {
 }
 
 var _ AudioBufferable = (*AudioBuffer)(nil)
+
+// isAudioBuffer marks AudioBuffer — and, by embedding promotion, its
+// subclasses — as a member of the AudioBuffer hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AudioBuffer) isAudioBuffer() {}
+
+var _ AudioBufferProvider = (*AudioBuffer)(nil)

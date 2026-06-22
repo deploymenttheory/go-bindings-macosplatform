@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for a platform configuration.
-//
 // PlatformConfiguration is an idiomatic wrapper over the Objective-C class VZPlatformConfiguration.
+//
+// PlatformConfiguration is an abstract base — you do not construct it directly. Construct one of [GenericPlatformConfiguration], [MacPlatformConfiguration] and pass it where a PlatformConfiguration is accepted.
+//
+// The base class for a platform configuration.
 type PlatformConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func PlatformConfigurationFromID(id objc.ID) *PlatformConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &PlatformConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlatformConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func platformConfigurationAdopt(id objc.ID) *PlatformConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &PlatformConfiguration{Handle: objref.Wrap(id)}
+	x := &PlatformConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *PlatformConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewPlatformConfiguration creates a new PlatformConfiguration.
-func NewPlatformConfiguration() *PlatformConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZPlatformConfiguration")), objc.RegisterName("new"))
-	return platformConfigurationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlatformConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // PlatformConfigurationable is the interface implemented by [PlatformConfiguration], for mocking and DI.
@@ -70,3 +74,10 @@ type PlatformConfigurationable interface {
 }
 
 var _ PlatformConfigurationable = (*PlatformConfiguration)(nil)
+
+// isPlatformConfiguration marks PlatformConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the PlatformConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *PlatformConfiguration) isPlatformConfiguration() {}
+
+var _ PlatformConfigurationProvider = (*PlatformConfiguration)(nil)

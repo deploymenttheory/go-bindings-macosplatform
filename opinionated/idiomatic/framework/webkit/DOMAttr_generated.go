@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMAttr is an idiomatic wrapper over the Objective-C class DOMAttr.
+//
+// It embeds [DOMNode], promoting that type's methods.
 type DOMAttr struct {
-	objref.Handle
+	DOMNode
 }
 
 // DOMAttrFromID adopts an existing Objective-C object as a DOMAttr
@@ -23,7 +24,8 @@ func DOMAttrFromID(id objc.ID) *DOMAttr {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMAttr{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMAttr{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMAttrAdopt(id objc.ID) *DOMAttr {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMAttr{Handle: objref.Wrap(id)}
+	x := &DOMAttr{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMAttr) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMAttr) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMAttr) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMAttr creates a new DOMAttr.
@@ -62,30 +50,31 @@ func NewDOMAttr() *DOMAttr {
 	return dOMAttrAdopt(_id)
 }
 
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMAttr) WithValue(value string) *DOMAttr {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 	return x
 }
 
-// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMAttr) WithNodeValue(nodeValue string) *DOMAttr {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets prefix and returns the receiver so calls can be chained.
+// WithPrefix sets the property and returns the receiver so calls can be chained.
 func (x *DOMAttr) WithPrefix(prefix string) *DOMAttr {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets textContent and returns the receiver so calls can be chained.
+// WithTextContent sets the property and returns the receiver so calls can be chained.
 func (x *DOMAttr) WithTextContent(textContent string) *DOMAttr {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *DOMAttr) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -94,11 +83,13 @@ func (x *DOMAttr) Name() string {
 	return purego.GoString(_r)
 }
 
+// Specified wraps the corresponding Objective-C method.
 func (x *DOMAttr) Specified() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("specified"))
 	return _r
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *DOMAttr) Value() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	if _r == 0 {
@@ -107,15 +98,18 @@ func (x *DOMAttr) Value() string {
 	return purego.GoString(_r)
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *DOMAttr) SetValue(value string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 }
 
+// OwnerElement wraps the corresponding Objective-C method.
 func (x *DOMAttr) OwnerElement() *DOMElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ownerElement"))
 	return DOMElementFromID(_r)
 }
 
+// Style wraps the corresponding Objective-C method.
 func (x *DOMAttr) Style() *DOMCSSStyleDeclaration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("style"))
 	return DOMCSSStyleDeclarationFromID(_r)
@@ -137,3 +131,9 @@ type DOMAttrable interface {
 }
 
 var _ DOMAttrable = (*DOMAttr)(nil)
+
+var _ DOMNodeProvider = (*DOMAttr)(nil)
+
+var _ DOMObjectProvider = (*DOMAttr)(nil)
+
+var _ WebScriptObjectProvider = (*DOMAttr)(nil)

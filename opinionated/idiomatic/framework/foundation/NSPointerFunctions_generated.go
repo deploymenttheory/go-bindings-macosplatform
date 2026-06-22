@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An instance of NSPointerFunctions defines callout functions appropriate for managing a pointer reference held somewhere else.
-//
 // PointerFunctions is an idiomatic wrapper over the Objective-C class NSPointerFunctions.
+//
+// An instance of NSPointerFunctions defines callout functions appropriate for managing a pointer reference held somewhere else.
 type PointerFunctions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PointerFunctionsFromID(id objc.ID) *PointerFunctions {
 	if id == 0 {
 		return nil
 	}
-	x := &PointerFunctions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PointerFunctions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func pointerFunctionsAdopt(id objc.ID) *PointerFunctions {
 	if id == 0 {
 		return nil
 	}
-	x := &PointerFunctions{Handle: objref.Wrap(id)}
+	x := &PointerFunctions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,51 +60,55 @@ func (x *PointerFunctions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns an NSPointerFunctions object initialized with the given options.
-//
-// NewPointerFunctionsWithOptions creates a new PointerFunctions.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PointerFunctions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPointerFunctionsWithOptions returns an NSPointerFunctions object initialized with the given options.
 func NewPointerFunctionsWithOptions(options PointerFunctionsOptions) *PointerFunctions {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPointerFunctions")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), options)
 	return pointerFunctionsAdopt(_id)
 }
 
-// Specifies whether, in a garbage collected environment, pointers should be assigned using a strong write barrier.
-//
-// WithUsesStrongWriteBarrier sets usesStrongWriteBarrier and returns the receiver so calls can be chained.
+// WithUsesStrongWriteBarrier specifies whether, in a garbage collected environment, pointers should be assigned using a strong write barrier.
 func (x *PointerFunctions) WithUsesStrongWriteBarrier(usesStrongWriteBarrier bool) *PointerFunctions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesStrongWriteBarrier:"), usesStrongWriteBarrier)
 	return x
 }
 
-// Specifies whether, in a garbage collected environment, pointers should use weak read and write barriers.
-//
-// WithUsesWeakReadAndWriteBarriers sets usesWeakReadAndWriteBarriers and returns the receiver so calls can be chained.
+// WithUsesWeakReadAndWriteBarriers specifies whether, in a garbage collected environment, pointers should use weak read and write barriers.
 func (x *PointerFunctions) WithUsesWeakReadAndWriteBarriers(usesWeakReadAndWriteBarriers bool) *PointerFunctions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesWeakReadAndWriteBarriers:"), usesWeakReadAndWriteBarriers)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *PointerFunctions) WithScriptingProperties(scriptingProperties obj.Object) *PointerFunctions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// UsesStrongWriteBarrier wraps the corresponding Objective-C method.
 func (x *PointerFunctions) UsesStrongWriteBarrier() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesStrongWriteBarrier"))
 	return _r
 }
 
+// SetUsesStrongWriteBarrier wraps the corresponding Objective-C method.
 func (x *PointerFunctions) SetUsesStrongWriteBarrier(usesStrongWriteBarrier bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesStrongWriteBarrier:"), usesStrongWriteBarrier)
 }
 
+// UsesWeakReadAndWriteBarriers wraps the corresponding Objective-C method.
 func (x *PointerFunctions) UsesWeakReadAndWriteBarriers() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesWeakReadAndWriteBarriers"))
 	return _r
 }
 
+// SetUsesWeakReadAndWriteBarriers wraps the corresponding Objective-C method.
 func (x *PointerFunctions) SetUsesWeakReadAndWriteBarriers(usesWeakReadAndWriteBarriers bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesWeakReadAndWriteBarriers:"), usesWeakReadAndWriteBarriers)
 }

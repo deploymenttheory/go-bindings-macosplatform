@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// For content that has been authored with the express intent of offering an alternative selection interface for AVMediaSelectionOptions, AVMediaPresentationSetting represents a selectable setting for controlling the presentation of the media.
-//
 // MediaPresentationSetting is an idiomatic wrapper over the Objective-C class AVMediaPresentationSetting.
+//
+// For content that has been authored with the express intent of offering an alternative selection interface for AVMediaSelectionOptions, AVMediaPresentationSetting represents a selectable setting for controlling the presentation of the media.
 type MediaPresentationSetting struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MediaPresentationSettingFromID(id objc.ID) *MediaPresentationSetting {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaPresentationSetting{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MediaPresentationSetting{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mediaPresentationSettingAdopt(id objc.ID) *MediaPresentationSetting {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaPresentationSetting{Handle: objref.Wrap(id)}
+	x := &MediaPresentationSetting{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *MediaPresentationSetting) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MediaPresentationSetting) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMediaPresentationSetting creates a new MediaPresentationSetting.
 func NewMediaPresentationSetting() *MediaPresentationSetting {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVMediaPresentationSetting")), objc.RegisterName("new"))
 	return mediaPresentationSettingAdopt(_id)
 }
 
-// Returns the display name for the selectable setting that best matches the specified locale identifier.
+// DisplayNameForLocaleIdentifier returns the display name for the selectable setting that best matches the specified locale identifier.
 func (x *MediaPresentationSetting) DisplayNameForLocaleIdentifier(localeIdentifier string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayNameForLocaleIdentifier:"), purego.NSString(localeIdentifier))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *MediaPresentationSetting) DisplayNameForLocaleIdentifier(localeIdentifi
 	return purego.GoString(_r)
 }
 
-// Provides the media characteristic that corresponds to the selectable setting.
+// MediaCharacteristic provides the media characteristic that corresponds to the selectable setting.
 func (x *MediaPresentationSetting) MediaCharacteristic() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaCharacteristic"))
 	return obj.Wrap(_r)

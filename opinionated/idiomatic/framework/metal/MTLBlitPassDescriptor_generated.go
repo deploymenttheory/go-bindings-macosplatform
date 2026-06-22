@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration you create to customize a blit command encoder, which affects the runtime behavior of the blit pass you encode with it.
-//
 // BlitPassDescriptor is an idiomatic wrapper over the Objective-C class MTLBlitPassDescriptor.
+//
+// A configuration you create to customize a blit command encoder, which affects the runtime behavior of the blit pass you encode with it.
 type BlitPassDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func BlitPassDescriptorFromID(id objc.ID) *BlitPassDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &BlitPassDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BlitPassDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func blitPassDescriptorAdopt(id objc.ID) *BlitPassDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &BlitPassDescriptor{Handle: objref.Wrap(id)}
+	x := &BlitPassDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *BlitPassDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BlitPassDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBlitPassDescriptor creates a new BlitPassDescriptor.
 func NewBlitPassDescriptor() *BlitPassDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLBlitPassDescriptor")), objc.RegisterName("new"))
 	return blitPassDescriptorAdopt(_id)
 }
 
+// SampleBufferAttachments wraps the corresponding Objective-C method.
 func (x *BlitPassDescriptor) SampleBufferAttachments() *BlitPassSampleBufferAttachmentDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleBufferAttachments"))
 	return BlitPassSampleBufferAttachmentDescriptorArrayFromID(_r)

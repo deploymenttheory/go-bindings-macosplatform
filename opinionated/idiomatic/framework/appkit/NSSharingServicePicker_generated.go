@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A list of sharing services that the user can choose from.
-//
 // SharingServicePicker is an idiomatic wrapper over the Objective-C class NSSharingServicePicker.
+//
+// A list of sharing services that the user can choose from.
 type SharingServicePicker struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SharingServicePickerFromID(id objc.ID) *SharingServicePicker {
 	if id == 0 {
 		return nil
 	}
-	x := &SharingServicePicker{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SharingServicePicker{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func sharingServicePickerAdopt(id objc.ID) *SharingServicePicker {
 	if id == 0 {
 		return nil
 	}
-	x := &SharingServicePicker{Handle: objref.Wrap(id)}
+	x := &SharingServicePicker{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +60,25 @@ func (x *SharingServicePicker) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new sharing service picker for the selected items.
-//
-// NewSharingServicePickerWithItems creates a new SharingServicePicker.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SharingServicePicker) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSharingServicePickerWithItems creates a new sharing service picker for the selected items.
 func NewSharingServicePickerWithItems(items obj.Object) *SharingServicePicker {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSharingServicePicker")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItems:"), objref.IDOf(items))
 	return sharingServicePickerAdopt(_id)
 }
 
-// Closes the picker interface.
+// Close closes the picker interface.
 func (x *SharingServicePicker) Close() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
 }
 
-// Returns a menu item suitable to display the picker for the given items.
+// StandardShareMenuItem returns a menu item suitable to display the picker for the given items.
 func (x *SharingServicePicker) StandardShareMenuItem() *MenuItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standardShareMenuItem"))
 	return MenuItemFromID(_r)

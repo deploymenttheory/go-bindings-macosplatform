@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The private portion of an asymmetric key pair.
-//
 // PrivateKey is an idiomatic wrapper over the Objective-C class LAPrivateKey.
+//
+// The private portion of an asymmetric key pair.
 type PrivateKey struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PrivateKeyFromID(id objc.ID) *PrivateKey {
 	if id == 0 {
 		return nil
 	}
-	x := &PrivateKey{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PrivateKey{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func privateKeyAdopt(id objc.ID) *PrivateKey {
 	if id == 0 {
 		return nil
 	}
-	x := &PrivateKey{Handle: objref.Wrap(id)}
+	x := &PrivateKey{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *PrivateKey) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PrivateKey) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPrivateKey creates a new PrivateKey.
 func NewPrivateKey() *PrivateKey {
 	_id := objc.Send[objc.ID](objc.ID(_class("LAPrivateKey")), objc.RegisterName("new"))
 	return privateKeyAdopt(_id)
 }
 
-// Offers the public key counterpart of a
+// PublicKey offers the public key counterpart of a
 func (x *PrivateKey) PublicKey() *PublicKey {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicKey"))
 	return PublicKeyFromID(_r)

@@ -23,7 +23,8 @@ func OptimizationHintsFromID(id objc.ID) *OptimizationHints {
 	if id == 0 {
 		return nil
 	}
-	x := &OptimizationHints{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OptimizationHints{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func optimizationHintsAdopt(id objc.ID) *OptimizationHints {
 	if id == 0 {
 		return nil
 	}
-	x := &OptimizationHints{Handle: objref.Wrap(id)}
+	x := &OptimizationHints{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,44 +58,48 @@ func (x *OptimizationHints) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OptimizationHints) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewOptimizationHints creates a new OptimizationHints.
 func NewOptimizationHints() *OptimizationHints {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLOptimizationHints")), objc.RegisterName("new"))
 	return optimizationHintsAdopt(_id)
 }
 
-// The anticipated reshape frequency CoreML framework needs to reshape the model with new shapes for models with flexible input. Specify the anticipated reshape frequency (frequent or infrequent), so that the framework can optimize for fast shape switching or fast prediction on seen shapes. The default value is frequent, which means CoreML tries to switch to new shapes as fast as possible
-//
-// WithReshapeFrequency sets reshapeFrequency and returns the receiver so calls can be chained.
+// WithReshapeFrequency the anticipated reshape frequency CoreML framework needs to reshape the model with new shapes for models with flexible input. Specify the anticipated reshape frequency (frequent or infrequent), so that the framework can optimize for fast shape switching or fast prediction on seen shapes. The default value is frequent, which means CoreML tries to switch to new shapes as fast as possible
 func (x *OptimizationHints) WithReshapeFrequency(reshapeFrequency ReshapeFrequencyHint) *OptimizationHints {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReshapeFrequency:"), reshapeFrequency)
 	return x
 }
 
-// Optimization strategy for the model specialization. Core ML segments the model's compute graph and optimizes each segment for the target compute device. This process can affect the model loading time and the prediction latency. Use this option to tailor the specialization strategy for your application.
-//
-// WithSpecializationStrategy sets specializationStrategy and returns the receiver so calls can be chained.
+// WithSpecializationStrategy optimization strategy for the model specialization. Core ML segments the model's compute graph and optimizes each segment for the target compute device. This process can affect the model loading time and the prediction latency. Use this option to tailor the specialization strategy for your application.
 func (x *OptimizationHints) WithSpecializationStrategy(specializationStrategy SpecializationStrategy) *OptimizationHints {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpecializationStrategy:"), specializationStrategy)
 	return x
 }
 
-// The anticipated reshape frequency CoreML framework needs to reshape the model with new shapes for models with flexible input. Specify the anticipated reshape frequency (frequent or infrequent), so that the framework can optimize for fast shape switching or fast prediction on seen shapes. The default value is frequent, which means CoreML tries to switch to new shapes as fast as possible
+// ReshapeFrequency the anticipated reshape frequency CoreML framework needs to reshape the model with new shapes for models with flexible input. Specify the anticipated reshape frequency (frequent or infrequent), so that the framework can optimize for fast shape switching or fast prediction on seen shapes. The default value is frequent, which means CoreML tries to switch to new shapes as fast as possible
 func (x *OptimizationHints) ReshapeFrequency() ReshapeFrequencyHint {
 	_r := objc.Send[ReshapeFrequencyHint](objref.IDOf(x), objc.RegisterName("reshapeFrequency"))
 	return _r
 }
 
+// SetReshapeFrequency wraps the corresponding Objective-C method.
 func (x *OptimizationHints) SetReshapeFrequency(reshapeFrequency ReshapeFrequencyHint) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReshapeFrequency:"), reshapeFrequency)
 }
 
-// Optimization strategy for the model specialization. Core ML segments the model's compute graph and optimizes each segment for the target compute device. This process can affect the model loading time and the prediction latency. Use this option to tailor the specialization strategy for your application.
+// SpecializationStrategy optimization strategy for the model specialization. Core ML segments the model's compute graph and optimizes each segment for the target compute device. This process can affect the model loading time and the prediction latency. Use this option to tailor the specialization strategy for your application.
 func (x *OptimizationHints) SpecializationStrategy() SpecializationStrategy {
 	_r := objc.Send[SpecializationStrategy](objref.IDOf(x), objc.RegisterName("specializationStrategy"))
 	return _r
 }
 
+// SetSpecializationStrategy wraps the corresponding Objective-C method.
 func (x *OptimizationHints) SetSpecializationStrategy(specializationStrategy SpecializationStrategy) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpecializationStrategy:"), specializationStrategy)
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A change representing the insertion, update, or deletion of a managed object in the persistent store.
-//
 // PersistentHistoryChange is an idiomatic wrapper over the Objective-C class NSPersistentHistoryChange.
+//
+// A change representing the insertion, update, or deletion of a managed object in the persistent store.
 type PersistentHistoryChange struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PersistentHistoryChangeFromID(id objc.ID) *PersistentHistoryChange {
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentHistoryChange{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PersistentHistoryChange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func persistentHistoryChangeAdopt(id objc.ID) *PersistentHistoryChange {
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentHistoryChange{Handle: objref.Wrap(id)}
+	x := &PersistentHistoryChange{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,49 @@ func (x *PersistentHistoryChange) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PersistentHistoryChange) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPersistentHistoryChange creates a new PersistentHistoryChange.
 func NewPersistentHistoryChange() *PersistentHistoryChange {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChange")), objc.RegisterName("new"))
 	return persistentHistoryChangeAdopt(_id)
 }
 
+// ChangeID wraps the corresponding Objective-C method.
 func (x *PersistentHistoryChange) ChangeID() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("changeID"))
 	return _r
 }
 
+// ChangedObjectID wraps the corresponding Objective-C method.
 func (x *PersistentHistoryChange) ChangedObjectID() *ManagedObjectID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changedObjectID"))
 	return ManagedObjectIDFromID(_r)
 }
 
+// ChangeType wraps the corresponding Objective-C method.
 func (x *PersistentHistoryChange) ChangeType() PersistentHistoryChangeType {
 	_r := objc.Send[PersistentHistoryChangeType](objref.IDOf(x), objc.RegisterName("changeType"))
 	return _r
 }
 
+// Tombstone wraps the corresponding Objective-C method.
 func (x *PersistentHistoryChange) Tombstone() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tombstone"))
 	return obj.Wrap(_r)
 }
 
+// Transaction wraps the corresponding Objective-C method.
 func (x *PersistentHistoryChange) Transaction() *PersistentHistoryTransaction {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transaction"))
 	return PersistentHistoryTransactionFromID(_r)
 }
 
+// UpdatedProperties wraps the corresponding Objective-C method.
 func (x *PersistentHistoryChange) UpdatedProperties() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updatedProperties"))
 	return obj.Wrap(_r)

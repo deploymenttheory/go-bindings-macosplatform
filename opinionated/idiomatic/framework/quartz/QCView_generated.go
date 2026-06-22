@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The QCView class is a custom NSView class that loads, plays, and controls Quartz Composer compositions. It is an autonomous view that is driven by an internal timer running on the main thread.
-//
 // QCView is an idiomatic wrapper over the Objective-C class QCView.
+//
+// The QCView class is a custom NSView class that loads, plays, and controls Quartz Composer compositions. It is an autonomous view that is driven by an internal timer running on the main thread.
 type QCView struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func QCViewFromID(id objc.ID) *QCView {
 	if id == 0 {
 		return nil
 	}
-	x := &QCView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QCView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func qCViewAdopt(id objc.ID) *QCView {
 	if id == 0 {
 		return nil
 	}
-	x := &QCView{Handle: objref.Wrap(id)}
+	x := &QCView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,142 +60,148 @@ func (x *QCView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *QCView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewQCView creates a new QCView.
 func NewQCView() *QCView {
 	_id := objc.Send[objc.ID](objc.ID(_class("QCView")), objc.RegisterName("new"))
 	return qCViewAdopt(_id)
 }
 
-// Loads the composition file located at the specified path.
+// LoadCompositionFromFile loads the composition file located at the specified path.
 func (x *QCView) LoadCompositionFromFile(path string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadCompositionFromFile:"), purego.NSString(path))
 	return _r
 }
 
-// Loads a QCComposition object into the view.
+// LoadComposition loads a QCComposition object into the view.
 func (x *QCView) LoadComposition(composition *QCComposition) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadComposition:"), objref.IDOf(composition))
 	return _r
 }
 
-// Returns the composition loaded in the view.
+// LoadedComposition returns the composition loaded in the view.
 func (x *QCView) LoadedComposition() *QCComposition {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadedComposition"))
 	return QCCompositionFromID(_r)
 }
 
-// Unloads the composition from the view.
+// UnloadComposition unloads the composition from the view.
 func (x *QCView) UnloadComposition() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unloadComposition"))
 }
 
-// Sets whether the composition that is in the view starts rendering automatically when the view is put on the screen.
+// SetAutostartsRendering sets whether the composition that is in the view starts rendering automatically when the view is put on the screen.
 func (x *QCView) SetAutostartsRendering(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutostartsRendering:"), flag)
 }
 
-// Checks whether the view is set to start rendering automatically.
+// AutostartsRendering checks whether the view is set to start rendering automatically.
 func (x *QCView) AutostartsRendering() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autostartsRendering"))
 	return _r
 }
 
-// Sets the color used to erase the view.
+// SetEraseColor sets the color used to erase the view.
 func (x *QCView) SetEraseColor(color obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEraseColor:"), objref.IDOf(color))
 }
 
-// Retrieves the current color used to erase the view.
+// EraseColor retrieves the current color used to erase the view.
 func (x *QCView) EraseColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eraseColor"))
 	return obj.Wrap(_r)
 }
 
-// Sets the mask used to filter which types of events are forwarded from the view to the composition during rendering.
+// SetEventForwardingMask sets the mask used to filter which types of events are forwarded from the view to the composition during rendering.
 func (x *QCView) SetEventForwardingMask(mask int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEventForwardingMask:"), mask)
 }
 
-// Retrieves the mask used to filter which types of events are forwarded from the view to the composition during rendering.
+// EventForwardingMask retrieves the mask used to filter which types of events are forwarded from the view to the composition during rendering.
 func (x *QCView) EventForwardingMask() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("eventForwardingMask"))
 	return _r
 }
 
-// Sets the maximum rendering frame rate.
+// SetMaxRenderingFrameRate sets the maximum rendering frame rate.
 func (x *QCView) SetMaxRenderingFrameRate(maxFPS float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxRenderingFrameRate:"), maxFPS)
 }
 
-// Returns the maximum frame rate for rendering.
+// MaxRenderingFrameRate returns the maximum frame rate for rendering.
 func (x *QCView) MaxRenderingFrameRate() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maxRenderingFrameRate"))
 	return _r
 }
 
-// Clears the view using the current erase color.
+// Erase clears the view using the current erase color.
 func (x *QCView) Erase() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("erase"))
 }
 
-// Starts rendering the composition that is in the view.
+// StartRendering starts rendering the composition that is in the view.
 func (x *QCView) StartRendering() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startRendering"))
 	return _r
 }
 
-// Overrides to perform your custom operations prior to or after rendering a frame of a composition.
+// RenderAtTimeArguments overrides to perform your custom operations prior to or after rendering a frame of a composition.
 func (x *QCView) RenderAtTimeArguments(time_ float64, arguments obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("renderAtTime:arguments:"), time_, objref.IDOf(arguments))
 	return _r
 }
 
-// Pauses rendering in the view.
+// PauseRendering pauses rendering in the view.
 func (x *QCView) PauseRendering() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseRendering"))
 }
 
-// Returns whether or not the rendering in the view is paused.
+// IsPausedRendering returns whether or not the rendering in the view is paused.
 func (x *QCView) IsPausedRendering() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPausedRendering"))
 	return _r
 }
 
-// Resumes rendering a paused composition.
+// ResumeRendering resumes rendering a paused composition.
 func (x *QCView) ResumeRendering() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeRendering"))
 }
 
-// Stops rendering the composition that is in the view.
+// StopRendering stops rendering the composition that is in the view.
 func (x *QCView) StopRendering() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopRendering"))
 }
 
-// Checks whether a composition is rendering in the view.
+// IsRendering checks whether a composition is rendering in the view.
 func (x *QCView) IsRendering() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRendering"))
 	return _r
 }
 
-// Returns an NSImage object of the current image in the view.
+// SnapshotImage returns an NSImage object of the current image in the view.
 func (x *QCView) SnapshotImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotImage"))
 	return obj.Wrap(_r)
 }
 
-// Returns the current image in the view as an image object of the provided image type.
+// CreateSnapshotImageOfType returns the current image in the view as an image object of the provided image type.
 func (x *QCView) CreateSnapshotImageOfType(type_ string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createSnapshotImageOfType:"), purego.NSString(type_))
 	return obj.Wrap(_r)
 }
 
-// Returns the OpenGL context used by the view.
+// OpenGLContext returns the OpenGL context used by the view.
 func (x *QCView) OpenGLContext() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLContext"))
 	return obj.Wrap(_r)
 }
 
-// Returns the OpenGL pixel format used by the view.
+// OpenGLPixelFormat returns the OpenGL pixel format used by the view.
 func (x *QCView) OpenGLPixelFormat() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLPixelFormat"))
 	return obj.Wrap(_r)

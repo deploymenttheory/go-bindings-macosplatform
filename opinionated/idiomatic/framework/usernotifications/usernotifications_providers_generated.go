@@ -11,19 +11,23 @@ import (
 // NotificationActionProvider is accepted wherever a UNNotificationAction (or one of its subclasses) is expected.
 type NotificationActionProvider interface {
 	objref.Object
+	isNotificationAction()
 }
 
 // NotificationContentProvider is accepted wherever a UNNotificationContent (or one of its subclasses) is expected.
 type NotificationContentProvider interface {
 	objref.Object
+	isNotificationContent()
 }
 
 // NotificationResponseProvider is accepted wherever a UNNotificationResponse (or one of its subclasses) is expected.
 type NotificationResponseProvider interface {
 	objref.Object
+	isNotificationResponse()
 }
 
 // NotificationTriggerProvider is accepted wherever a UNNotificationTrigger (or one of its subclasses) is expected.
 type NotificationTriggerProvider interface {
 	objref.Object
+	isNotificationTrigger()
 }

@@ -12,21 +12,22 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// Version component exposed by the system to denote a state that predates a version returned by the provider. In case an item was created by calling `createItemBasedOnTemplate` and the item returned by the provider in the completion handler of that call didn't match the item template passed by the system, the system will try to apply the changes asked by the provider to the disk. However, the system may detect conflicts when applying those content back to the disk, which will cause the system to send the new disk version to the extension, by calling `modifyItem` or `deleteItemWithIdentifier` with a `baseVersion` that represents the item as passed in the template of the `createItemBasedOnTemplate` call. This constant is used by the system to represent that specific version that was communicated by the system to the extension but does not have a corresponding version assigned by the extension.
+// BeforeFirstSyncComponent version component exposed by the system to denote a state that predates a version returned by the provider. In case an item was created by calling `createItemBasedOnTemplate` and the item returned by the provider in the completion handler of that call didn't match the item template passed by the system, the system will try to apply the changes asked by the provider to the disk. However, the system may detect conflicts when applying those content back to the disk, which will cause the system to send the new disk version to the extension, by calling `modifyItem` or `deleteItemWithIdentifier` with a `baseVersion` that represents the item as passed in the template of the `createItemBasedOnTemplate` call. This constant is used by the system to represent that specific version that was communicated by the system to the extension but does not have a corresponding version assigned by the extension.
 func BeforeFirstSyncComponent() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileProviderItemVersion")), objc.RegisterName("beforeFirstSyncComponent"))
 	return obj.Wrap(_r)
 }
 
-// Returns a newly created file provider manager for the specified domain.
+// ManagerForDomain returns a newly created file provider manager for the specified domain.
 func ManagerForDomain(domain *FileProviderDomain) *FileProviderManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileProviderManager")), objc.RegisterName("managerForDomain:"), objref.IDOf(domain))
 	return FileProviderManagerFromID(_r)
 }
 
-// Adds a domain to the File Provider extension.
+// AddDomain adds a domain to the File Provider extension.
 //
 // AddDomain blocks until the operation completes or ctx is cancelled.
 func AddDomain(ctx context.Context, domain *FileProviderDomain) error {
@@ -45,7 +46,7 @@ func AddDomain(ctx context.Context, domain *FileProviderDomain) error {
 	}
 }
 
-// Removes a domain from the File Provider extension.
+// RemoveDomain removes a domain from the File Provider extension.
 //
 // RemoveDomain blocks until the operation completes or ctx is cancelled.
 func RemoveDomain(ctx context.Context, domain *FileProviderDomain) error {
@@ -64,10 +65,10 @@ func RemoveDomain(ctx context.Context, domain *FileProviderDomain) error {
 	}
 }
 
-// Returns all of the File Provider extension’s domains.
+// GetDomains returns all of the File Provider extension’s domains.
 //
 // GetDomains blocks until the operation completes or ctx is cancelled.
-func GetDomains(ctx context.Context) (obj.Object, error) {
+func GetDomains(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -89,7 +90,7 @@ func GetDomains(ctx context.Context) (obj.Object, error) {
 	}
 }
 
-// Removes all domains from the File Provider extension.
+// RemoveAllDomains removes all domains from the File Provider extension.
 //
 // RemoveAllDomains blocks until the operation completes or ctx is cancelled.
 func RemoveAllDomains(ctx context.Context) error {
@@ -108,7 +109,7 @@ func RemoveAllDomains(ctx context.Context) error {
 	}
 }
 
-// Creates a new domain that takes ownership of on-disk data that your app previously managed without a file provider.
+// ImportDomainFromDirectoryAtURL creates a new domain that takes ownership of on-disk data that your app previously managed without a file provider.
 //
 // ImportDomainFromDirectoryAtURL blocks until the operation completes or ctx is cancelled.
 func ImportDomainFromDirectoryAtURL(ctx context.Context, domain *FileProviderDomain, url string) error {
@@ -125,4 +126,16 @@ func ImportDomainFromDirectoryAtURL(ctx context.Context, domain *FileProviderDom
 	case <-ctx.Done():
 		return ctx.Err()
 	}
+}
+
+// CheckDomainsCanBeStoredOnVolumeAtURLUnsupportedReason check if a URL is eligible for storing a domain.
+func CheckDomainsCanBeStoredOnVolumeAtURLUnsupportedReason(url string) (eligible bool, unsupportedReason FileProviderVolumeUnsupportedReason, err error) {
+	var _out0 bool
+	var _out1 FileProviderVolumeUnsupportedReason
+	var _nsErr uintptr
+	objc.Send[bool](objc.ID(_class("NSFileProviderManager")), objc.RegisterName("checkDomainsCanBeStored:onVolumeAtURL:unsupportedReason:error:"), unsafe.Pointer(&_out0), rt.FileURL(url), unsafe.Pointer(&_out1), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return false, 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _out0, _out1, nil
 }

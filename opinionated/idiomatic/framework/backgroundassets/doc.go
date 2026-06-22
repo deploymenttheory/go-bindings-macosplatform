@@ -3,4 +3,11 @@
 //go:build darwin
 
 // Package backgroundassets provides a fluent Go API over the macOS BackgroundAssets framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - Download: [URLDownload]
 package backgroundassets

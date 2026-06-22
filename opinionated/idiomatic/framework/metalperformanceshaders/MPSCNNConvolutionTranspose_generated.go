@@ -6,17 +6,20 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A transposed convolution kernel.
-//
 // CNNConvolutionTranspose is an idiomatic wrapper over the Objective-C class MPSCNNConvolutionTranspose.
+//
+// It embeds [CNNKernel], promoting that type's methods.
+//
+// A transposed convolution kernel.
 type CNNConvolutionTranspose struct {
-	objref.Handle
+	CNNKernel
 }
 
 // CNNConvolutionTransposeFromID adopts an existing Objective-C object as a CNNConvolutionTranspose
@@ -25,7 +28,8 @@ func CNNConvolutionTransposeFromID(id objc.ID) *CNNConvolutionTranspose {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNConvolutionTranspose{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNConvolutionTranspose{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func cNNConvolutionTransposeAdopt(id objc.ID) *CNNConvolutionTranspose {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNConvolutionTranspose{Handle: objref.Wrap(id)}
+	x := &CNNConvolutionTranspose{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNConvolutionTranspose) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNConvolutionTranspose) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNConvolutionTranspose) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNConvolutionTranspose creates a new CNNConvolutionTranspose.
@@ -64,98 +54,100 @@ func NewCNNConvolutionTranspose() *CNNConvolutionTranspose {
 	return cNNConvolutionTransposeAdopt(_id)
 }
 
-// Offset in X from which the kernel starts sliding
-//
-// WithKernelOffsetX sets kernelOffsetX and returns the receiver so calls can be chained.
+// WithKernelOffsetX offset in X from which the kernel starts sliding
 func (x *CNNConvolutionTranspose) WithKernelOffsetX(kernelOffsetX int) *CNNConvolutionTranspose {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelOffsetX:"), kernelOffsetX)
 	return x
 }
 
-// Offset in Y from which the kernel starts sliding
-//
-// WithKernelOffsetY sets kernelOffsetY and returns the receiver so calls can be chained.
+// WithKernelOffsetY offset in Y from which the kernel starts sliding
 func (x *CNNConvolutionTranspose) WithKernelOffsetY(kernelOffsetY int) *CNNConvolutionTranspose {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelOffsetY:"), kernelOffsetY)
 	return x
 }
 
-// The number of channels in the destination image to skip before writing output data.
-//
-// WithDestinationFeatureChannelOffset sets destinationFeatureChannelOffset and returns the receiver so calls can be chained.
+// WithOffset the position of the destination image’s clip rectangle origin, relative to the source image.
+func (x *CNNConvolutionTranspose) WithOffset(offset mpscore.MPSOffset) *CNNConvolutionTranspose {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
+func (x *CNNConvolutionTranspose) WithClipRect(clipRect metal.MTLRegion) *CNNConvolutionTranspose {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset the number of channels in the destination image to skip before writing output data.
 func (x *CNNConvolutionTranspose) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNConvolutionTranspose {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// The number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-//
-// WithSourceFeatureChannelOffset sets sourceFeatureChannelOffset and returns the receiver so calls can be chained.
+// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
 func (x *CNNConvolutionTranspose) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNConvolutionTranspose {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// The maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithSourceFeatureChannelMaxCount sets sourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 func (x *CNNConvolutionTranspose) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNConvolutionTranspose {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *CNNConvolutionTranspose) WithLabel(label string) *CNNConvolutionTranspose {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Allocate a MPCNNConvolutionTransposeGradientState to hold the results from a -encodeBatchToCommandBuffer... operation
+// ResultStateForSourceImageSourceStatesDestinationImage allocate a MPCNNConvolutionTransposeGradientState to hold the results from a -encodeBatchToCommandBuffer... operation
 func (x *CNNConvolutionTranspose) ResultStateForSourceImageSourceStatesDestinationImage(sourceImage obj.Object, sourceStates []obj.Object, destinationImage obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultStateForSourceImage:sourceStates:destinationImage:"), objref.IDOf(sourceImage), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationImage))
 	return obj.Wrap(_r)
 }
 
-// CPU side reload. Reload the updated weights and biases from data provider into internal weights and bias buffers. Weights and biases gradients needed for update are obtained from MPSCNNConvolutionTransposeGradientState object. Data provider passed in init call is used for this purpose.
+// ReloadWeightsAndBiasesFromDataSource CPU side reload. Reload the updated weights and biases from data provider into internal weights and bias buffers. Weights and biases gradients needed for update are obtained from MPSCNNConvolutionTransposeGradientState object. Data provider passed in init call is used for this purpose.
 func (x *CNNConvolutionTranspose) ReloadWeightsAndBiasesFromDataSource() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadWeightsAndBiasesFromDataSource"))
 }
 
-// The number of feature channels per pixel in the input image.
+// InputFeatureChannels the number of feature channels per pixel in the input image.
 func (x *CNNConvolutionTranspose) InputFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputFeatureChannels"))
 	return _r
 }
 
-// The number of feature channels per pixel in the output image.
+// OutputFeatureChannels the number of feature channels per pixel in the output image.
 func (x *CNNConvolutionTranspose) OutputFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputFeatureChannels"))
 	return _r
 }
 
-// Offset in X from which the kernel starts sliding
+// KernelOffsetX offset in X from which the kernel starts sliding
 func (x *CNNConvolutionTranspose) KernelOffsetX() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelOffsetX"))
 	return _r
 }
 
+// SetKernelOffsetX wraps the corresponding Objective-C method.
 func (x *CNNConvolutionTranspose) SetKernelOffsetX(kernelOffsetX int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelOffsetX:"), kernelOffsetX)
 }
 
-// Offset in Y from which the kernel starts sliding
+// KernelOffsetY offset in Y from which the kernel starts sliding
 func (x *CNNConvolutionTranspose) KernelOffsetY() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelOffsetY"))
 	return _r
 }
 
+// SetKernelOffsetY wraps the corresponding Objective-C method.
 func (x *CNNConvolutionTranspose) SetKernelOffsetY(kernelOffsetY int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelOffsetY:"), kernelOffsetY)
 }
 
-// Number of groups input and output channels are divided into.
+// Groups number of groups input and output channels are divided into.
 func (x *CNNConvolutionTranspose) Groups() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("groups"))
 	return _r
@@ -166,6 +158,8 @@ type CNNConvolutionTransposeable interface {
 	obj.Object
 	WithKernelOffsetX(kernelOffsetX int) *CNNConvolutionTranspose
 	WithKernelOffsetY(kernelOffsetY int) *CNNConvolutionTranspose
+	WithOffset(offset mpscore.MPSOffset) *CNNConvolutionTranspose
+	WithClipRect(clipRect metal.MTLRegion) *CNNConvolutionTranspose
 	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNConvolutionTranspose
 	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNConvolutionTranspose
 	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNConvolutionTranspose
@@ -182,3 +176,7 @@ type CNNConvolutionTransposeable interface {
 }
 
 var _ CNNConvolutionTransposeable = (*CNNConvolutionTranspose)(nil)
+
+var _ CNNKernelProvider = (*CNNConvolutionTranspose)(nil)
+
+var _ KernelProvider = (*CNNConvolutionTranspose)(nil)

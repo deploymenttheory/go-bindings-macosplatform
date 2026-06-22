@@ -20,6 +20,8 @@ const (
 	CinematicErrorCodeCancelled    CinematicErrorCode = 7
 )
 
+// String returns the CinematicErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CinematicErrorCode) String() string {
 	switch e {
 	case CinematicErrorCodeUnknown:
@@ -59,6 +61,8 @@ const (
 	DetectionTypeCustom     DetectionType = 102
 )
 
+// String returns the DetectionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DetectionType) String() string {
 	switch e {
 	case DetectionTypeUnknown:
@@ -100,6 +104,8 @@ const (
 	RenderingQualityExportHigh RenderingQuality = 3
 )
 
+// String returns the RenderingQuality constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RenderingQuality) String() string {
 	switch e {
 	case RenderingQualityThumbnail:
@@ -124,6 +130,8 @@ const (
 	SpatialAudioContentTypeSpatial SpatialAudioContentType = 1
 )
 
+// String returns the SpatialAudioContentType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SpatialAudioContentType) String() string {
 	switch e {
 	case SpatialAudioContentTypeStereo:
@@ -160,6 +168,8 @@ const (
 	SpatialAudioRenderingStyleInFrameBackgroundStem SpatialAudioRenderingStyle = 9
 )
 
+// String returns the SpatialAudioRenderingStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SpatialAudioRenderingStyle) String() string {
 	switch e {
 	case SpatialAudioRenderingStyleCinematic:

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract base class for machine learning tasks.
-//
 // Task is an idiomatic wrapper over the Objective-C class MLTask.
+//
+// Task is an abstract base — you do not construct it directly. Construct one of [UpdateTask] and pass it where a Task is accepted.
+//
+// An abstract base class for machine learning tasks.
 type Task struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func TaskFromID(id objc.ID) *Task {
 	if id == 0 {
 		return nil
 	}
-	x := &Task{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Task{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func taskAdopt(id objc.ID) *Task {
 	if id == 0 {
 		return nil
 	}
-	x := &Task{Handle: objref.Wrap(id)}
+	x := &Task{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +62,23 @@ func (x *Task) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewTask creates a new Task.
-func NewTask() *Task {
-	_id := objc.Send[objc.ID](objc.ID(_class("MLTask")), objc.RegisterName("new"))
-	return taskAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Task) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Begins or resumes a machine learning task.
+// Resume begins or resumes a machine learning task.
 func (x *Task) Resume() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resume"))
 }
 
-// Cancels a machine learning task before it completes.
+// Cancel cancels a machine learning task before it completes.
 func (x *Task) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
+// TaskIdentifier wraps the corresponding Objective-C method.
 func (x *Task) TaskIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("taskIdentifier"))
 	if _r == 0 {
@@ -82,6 +87,7 @@ func (x *Task) TaskIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// State wraps the corresponding Objective-C method.
 func (x *Task) State() TaskState {
 	_r := objc.Send[TaskState](objref.IDOf(x), objc.RegisterName("state"))
 	return _r
@@ -97,3 +103,10 @@ type Taskable interface {
 }
 
 var _ Taskable = (*Task)(nil)
+
+// isTask marks Task — and, by embedding promotion, its
+// subclasses — as a member of the Task hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Task) isTask() {}
+
+var _ TaskProvider = (*Task)(nil)

@@ -23,7 +23,8 @@ func CalNthWeekDayFromID(id objc.ID) *CalNthWeekDay {
 	if id == 0 {
 		return nil
 	}
-	x := &CalNthWeekDay{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CalNthWeekDay{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func calNthWeekDayAdopt(id objc.ID) *CalNthWeekDay {
 	if id == 0 {
 		return nil
 	}
-	x := &CalNthWeekDay{Handle: objref.Wrap(id)}
+	x := &CalNthWeekDay{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,17 +58,25 @@ func (x *CalNthWeekDay) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CalNthWeekDay) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCalNthWeekDay creates a new CalNthWeekDay.
 func NewCalNthWeekDay() *CalNthWeekDay {
 	_id := objc.Send[objc.ID](objc.ID(_class("CalNthWeekDay")), objc.RegisterName("new"))
 	return calNthWeekDayAdopt(_id)
 }
 
+// DayOfTheWeek wraps the corresponding Objective-C method.
 func (x *CalNthWeekDay) DayOfTheWeek() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dayOfTheWeek"))
 	return _r
 }
 
+// WeekNumber wraps the corresponding Objective-C method.
 func (x *CalNthWeekDay) WeekNumber() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("weekNumber"))
 	return _r

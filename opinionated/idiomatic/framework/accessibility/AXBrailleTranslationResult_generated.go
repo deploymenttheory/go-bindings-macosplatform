@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The result of translation or back-translation.
-//
 // BrailleTranslationResult is an idiomatic wrapper over the Objective-C class AXBrailleTranslationResult.
+//
+// The result of translation or back-translation.
 type BrailleTranslationResult struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func BrailleTranslationResultFromID(id objc.ID) *BrailleTranslationResult {
 	if id == 0 {
 		return nil
 	}
-	x := &BrailleTranslationResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BrailleTranslationResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func brailleTranslationResultAdopt(id objc.ID) *BrailleTranslationResult {
 	if id == 0 {
 		return nil
 	}
-	x := &BrailleTranslationResult{Handle: objref.Wrap(id)}
+	x := &BrailleTranslationResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *BrailleTranslationResult) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BrailleTranslationResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBrailleTranslationResult creates a new BrailleTranslationResult.
 func NewBrailleTranslationResult() *BrailleTranslationResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("AXBrailleTranslationResult")), objc.RegisterName("new"))
 	return brailleTranslationResultAdopt(_id)
 }
 
-// The resulting string after translation or back-translation.
+// ResultString the resulting string after translation or back-translation.
 func (x *BrailleTranslationResult) ResultString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultString"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *BrailleTranslationResult) ResultString() string {
 	return purego.GoString(_r)
 }
 
-// An array of integers that has the same length as the resultString. locationMap[i]-th character in the input string corresponds to resultString[i].
+// LocationMap an array of integers that has the same length as the resultString. locationMap[i]-th character in the input string corresponds to resultString[i].
 //
 // LocationMap returns the collection as a Go slice.
 func (x *BrailleTranslationResult) LocationMap() []obj.Object {

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A discovered MIDI-CI node that represents a MIDI source and destination that respond to capability inquiries.
-//
 // CIDiscoveredNode is an idiomatic wrapper over the Objective-C class MIDICIDiscoveredNode.
+//
+// A discovered MIDI-CI node that represents a MIDI source and destination that respond to capability inquiries.
 type CIDiscoveredNode struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CIDiscoveredNodeFromID(id objc.ID) *CIDiscoveredNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CIDiscoveredNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CIDiscoveredNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func cIDiscoveredNodeAdopt(id objc.ID) *CIDiscoveredNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CIDiscoveredNode{Handle: objref.Wrap(id)}
+	x := &CIDiscoveredNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,32 +60,43 @@ func (x *CIDiscoveredNode) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CIDiscoveredNode) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCIDiscoveredNode creates a new CIDiscoveredNode.
 func NewCIDiscoveredNode() *CIDiscoveredNode {
 	_id := objc.Send[objc.ID](objc.ID(_class("MIDICIDiscoveredNode")), objc.RegisterName("new"))
 	return cIDiscoveredNodeAdopt(_id)
 }
 
+// Destination wraps the corresponding Objective-C method.
 func (x *CIDiscoveredNode) Destination() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("destination"))
 	return _r
 }
 
+// DeviceInfo wraps the corresponding Objective-C method.
 func (x *CIDiscoveredNode) DeviceInfo() *CIDeviceInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceInfo"))
 	return CIDeviceInfoFromID(_r)
 }
 
+// SupportsProfiles wraps the corresponding Objective-C method.
 func (x *CIDiscoveredNode) SupportsProfiles() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsProfiles"))
 	return _r
 }
 
+// SupportsProperties wraps the corresponding Objective-C method.
 func (x *CIDiscoveredNode) SupportsProperties() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsProperties"))
 	return _r
 }
 
+// MaximumSysExSize wraps the corresponding Objective-C method.
 func (x *CIDiscoveredNode) MaximumSysExSize() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maximumSysExSize"))
 	return obj.Wrap(_r)

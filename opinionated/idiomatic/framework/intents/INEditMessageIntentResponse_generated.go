@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // EditMessageIntentResponse is an idiomatic wrapper over the Objective-C class INEditMessageIntentResponse.
+//
+// It embeds [IntentResponse], promoting that type's methods.
 type EditMessageIntentResponse struct {
-	objref.Handle
+	IntentResponse
 }
 
 // EditMessageIntentResponseFromID adopts an existing Objective-C object as a EditMessageIntentResponse
@@ -23,7 +24,8 @@ func EditMessageIntentResponseFromID(id objc.ID) *EditMessageIntentResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &EditMessageIntentResponse{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EditMessageIntentResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func editMessageIntentResponseAdopt(id objc.ID) *EditMessageIntentResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &EditMessageIntentResponse{Handle: objref.Wrap(id)}
+	x := &EditMessageIntentResponse{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *EditMessageIntentResponse) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EditMessageIntentResponse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EditMessageIntentResponse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewEditMessageIntentResponseWithCodeUserActivity creates a new EditMessageIntentResponse.
@@ -63,14 +51,13 @@ func NewEditMessageIntentResponseWithCodeUserActivity(code EditMessageIntentResp
 	return editMessageIntentResponseAdopt(_id)
 }
 
-// The user activity object to use when launching the app.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity the user activity object to use when launching the app.
 func (x *EditMessageIntentResponse) WithUserActivity(userActivity obj.Object) *EditMessageIntentResponse {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
+// Code wraps the corresponding Objective-C method.
 func (x *EditMessageIntentResponse) Code() EditMessageIntentResponseCode {
 	_r := objc.Send[EditMessageIntentResponseCode](objref.IDOf(x), objc.RegisterName("code"))
 	return _r
@@ -84,3 +71,5 @@ type EditMessageIntentResponseable interface {
 }
 
 var _ EditMessageIntentResponseable = (*EditMessageIntentResponse)(nil)
+
+var _ IntentResponseProvider = (*EditMessageIntentResponse)(nil)

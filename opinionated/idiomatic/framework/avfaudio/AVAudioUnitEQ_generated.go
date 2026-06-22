@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that implements a multiband equalizer.
-//
 // AudioUnitEQ is an idiomatic wrapper over the Objective-C class AVAudioUnitEQ.
+//
+// It embeds [AudioUnitEffect], promoting that type's methods.
+//
+// An object that implements a multiband equalizer.
 type AudioUnitEQ struct {
-	objref.Handle
+	AudioUnitEffect
 }
 
 // AudioUnitEQFromID adopts an existing Objective-C object as a AudioUnitEQ
@@ -25,7 +26,8 @@ func AudioUnitEQFromID(id objc.ID) *AudioUnitEQ {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitEQ{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioUnitEQ{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,52 +40,32 @@ func audioUnitEQAdopt(id objc.ID) *AudioUnitEQ {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitEQ{Handle: objref.Wrap(id)}
+	x := &AudioUnitEQ{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *AudioUnitEQ) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioUnitEQ) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioUnitEQ) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates an audio unit equalizer object with the specified number of bands.
-//
-// NewAudioUnitEQWithNumberOfBands creates a new AudioUnitEQ.
+// NewAudioUnitEQWithNumberOfBands creates an audio unit equalizer object with the specified number of bands.
 func NewAudioUnitEQWithNumberOfBands(numberOfBands int) *AudioUnitEQ {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioUnitEQ")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNumberOfBands:"), numberOfBands)
 	return audioUnitEQAdopt(_id)
 }
 
-// The overall gain adjustment that the audio unit applies to the signal, in decibels.
-//
-// WithGlobalGain sets globalGain and returns the receiver so calls can be chained.
+// WithGlobalGain the overall gain adjustment that the audio unit applies to the signal, in decibels.
 func (x *AudioUnitEQ) WithGlobalGain(globalGain float32) *AudioUnitEQ {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlobalGain:"), globalGain)
 	return x
 }
 
-// The bypass state of the audio unit.
-//
-// WithBypass sets bypass and returns the receiver so calls can be chained.
+// WithBypass the bypass state of the audio unit.
 func (x *AudioUnitEQ) WithBypass(bypass bool) *AudioUnitEQ {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
 	return x
 }
 
-// Array of AVAudioUnitEQFilterParameters objects. The number of elements in the array is equal to the number of bands.
+// Bands array of AVAudioUnitEQFilterParameters objects. The number of elements in the array is equal to the number of bands.
 //
 // Bands returns the collection as a Go slice.
 func (x *AudioUnitEQ) Bands() []*AudioUnitEQFilterParameters {
@@ -91,12 +73,13 @@ func (x *AudioUnitEQ) Bands() []*AudioUnitEQFilterParameters {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AudioUnitEQFilterParameters { return AudioUnitEQFilterParametersFromID(_id) })
 }
 
-// Overall gain adjustment applied to the signal. Range:     -96 -> 24 Default:   0 Unit:      dB
+// GlobalGain overall gain adjustment applied to the signal. Range:     -96 -> 24 Default:   0 Unit:      dB
 func (x *AudioUnitEQ) GlobalGain() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("globalGain"))
 	return _r
 }
 
+// SetGlobalGain wraps the corresponding Objective-C method.
 func (x *AudioUnitEQ) SetGlobalGain(globalGain float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlobalGain:"), globalGain)
 }
@@ -112,3 +95,9 @@ type AudioUnitEQable interface {
 }
 
 var _ AudioUnitEQable = (*AudioUnitEQ)(nil)
+
+var _ AudioUnitEffectProvider = (*AudioUnitEQ)(nil)
+
+var _ AudioUnitProvider = (*AudioUnitEQ)(nil)
+
+var _ AudioNodeProvider = (*AudioUnitEQ)(nil)

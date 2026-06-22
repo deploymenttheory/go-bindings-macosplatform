@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A query that returns changes to the HealthKit store, including a snapshot of new changes and continuous monitoring as a long-running query.
-//
 // AnchoredObjectQuery is an idiomatic wrapper over the Objective-C class HKAnchoredObjectQuery.
+//
+// It embeds [Query], promoting that type's methods.
+//
+// A query that returns changes to the HealthKit store, including a snapshot of new changes and continuous monitoring as a long-running query.
 type AnchoredObjectQuery struct {
-	objref.Handle
+	Query
 }
 
 // AnchoredObjectQueryFromID adopts an existing Objective-C object as a AnchoredObjectQuery
@@ -25,7 +26,8 @@ func AnchoredObjectQueryFromID(id objc.ID) *AnchoredObjectQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &AnchoredObjectQuery{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AnchoredObjectQuery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func anchoredObjectQueryAdopt(id objc.ID) *AnchoredObjectQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &AnchoredObjectQuery{Handle: objref.Wrap(id)}
+	x := &AnchoredObjectQuery{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AnchoredObjectQuery) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AnchoredObjectQuery) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AnchoredObjectQuery) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAnchoredObjectQuery creates a new AnchoredObjectQuery.
@@ -70,3 +58,5 @@ type AnchoredObjectQueryable interface {
 }
 
 var _ AnchoredObjectQueryable = (*AnchoredObjectQuery)(nil)
+
+var _ QueryProvider = (*AnchoredObjectQuery)(nil)

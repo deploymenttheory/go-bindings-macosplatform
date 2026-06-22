@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A session that an app uses to authenticate a user through a web service.
-//
 // WebAuthenticationSession is an idiomatic wrapper over the Objective-C class ASWebAuthenticationSession.
+//
+// A session that an app uses to authenticate a user through a web service.
 type WebAuthenticationSession struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WebAuthenticationSessionFromID(id objc.ID) *WebAuthenticationSession {
 	if id == 0 {
 		return nil
 	}
-	x := &WebAuthenticationSession{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WebAuthenticationSession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func webAuthenticationSessionAdopt(id objc.ID) *WebAuthenticationSession {
 	if id == 0 {
 		return nil
 	}
-	x := &WebAuthenticationSession{Handle: objref.Wrap(id)}
+	x := &WebAuthenticationSession{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,60 +60,64 @@ func (x *WebAuthenticationSession) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WebAuthenticationSession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWebAuthenticationSession creates a new WebAuthenticationSession.
 func NewWebAuthenticationSession() *WebAuthenticationSession {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASWebAuthenticationSession")), objc.RegisterName("new"))
 	return webAuthenticationSessionAdopt(_id)
 }
 
-// A Boolean value that indicates whether the session should ask the browser for a private authentication session.
-//
-// WithPrefersEphemeralWebBrowserSession sets prefersEphemeralWebBrowserSession and returns the receiver so calls can be chained.
+// WithPrefersEphemeralWebBrowserSession a Boolean value that indicates whether the session should ask the browser for a private authentication session.
 func (x *WebAuthenticationSession) WithPrefersEphemeralWebBrowserSession(prefersEphemeralWebBrowserSession bool) *WebAuthenticationSession {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersEphemeralWebBrowserSession:"), prefersEphemeralWebBrowserSession)
 	return x
 }
 
-// Any additional header fields to set when loading the initial URL.
-//
-// WithAdditionalHeaderFields sets additionalHeaderFields and returns the receiver so calls can be chained.
+// WithAdditionalHeaderFields any additional header fields to set when loading the initial URL.
 func (x *WebAuthenticationSession) WithAdditionalHeaderFields(additionalHeaderFields obj.Object) *WebAuthenticationSession {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalHeaderFields:"), objref.IDOf(additionalHeaderFields))
 	return x
 }
 
-// Starts a web authentication session.
+// Start starts a web authentication session.
 func (x *WebAuthenticationSession) Start() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("start"))
 	return _r
 }
 
-// Cancels a web authentication session.
+// Cancel cancels a web authentication session.
 func (x *WebAuthenticationSession) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// Indicates whether this session should ask the browser for an ephemeral session. Ephemeral web browser sessions do not not share cookies or other browsing data with a user's normal browser session. This value is NO by default. Setting this property after calling -[ASWebAuthenticationSession start] has no effect.
+// PrefersEphemeralWebBrowserSession indicates whether this session should ask the browser for an ephemeral session. Ephemeral web browser sessions do not not share cookies or other browsing data with a user's normal browser session. This value is NO by default. Setting this property after calling -[ASWebAuthenticationSession start] has no effect.
 func (x *WebAuthenticationSession) PrefersEphemeralWebBrowserSession() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("prefersEphemeralWebBrowserSession"))
 	return _r
 }
 
+// SetPrefersEphemeralWebBrowserSession wraps the corresponding Objective-C method.
 func (x *WebAuthenticationSession) SetPrefersEphemeralWebBrowserSession(prefersEphemeralWebBrowserSession bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersEphemeralWebBrowserSession:"), prefersEphemeralWebBrowserSession)
 }
 
-// Any additional header fields to be set when loading the initial URL. All header field names must start with the "X-" prefix.
+// AdditionalHeaderFields any additional header fields to be set when loading the initial URL. All header field names must start with the "X-" prefix.
 func (x *WebAuthenticationSession) AdditionalHeaderFields() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("additionalHeaderFields"))
 	return obj.Wrap(_r)
 }
 
+// SetAdditionalHeaderFields wraps the corresponding Objective-C method.
 func (x *WebAuthenticationSession) SetAdditionalHeaderFields(additionalHeaderFields obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalHeaderFields:"), objref.IDOf(additionalHeaderFields))
 }
 
-// Returns whether the session can be successfully started. This property returns the same value as calling -start, but without the side effect of actually starting the session.
+// CanStart returns whether the session can be successfully started. This property returns the same value as calling -start, but without the side effect of actually starting the session.
 func (x *WebAuthenticationSession) CanStart() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canStart"))
 	return _r

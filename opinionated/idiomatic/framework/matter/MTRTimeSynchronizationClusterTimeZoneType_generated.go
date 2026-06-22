@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRTimeSynchronizationClusterTimeZoneType is an idiomatic wrapper over the Objective-C class MTRTimeSynchronizationClusterTimeZoneType.
+//
+// It embeds [MTRTimeSynchronizationClusterTimeZoneStruct], promoting that type's methods.
 type MTRTimeSynchronizationClusterTimeZoneType struct {
-	objref.Handle
+	MTRTimeSynchronizationClusterTimeZoneStruct
 }
 
 // MTRTimeSynchronizationClusterTimeZoneTypeFromID adopts an existing Objective-C object as a MTRTimeSynchronizationClusterTimeZoneType
@@ -23,7 +24,8 @@ func MTRTimeSynchronizationClusterTimeZoneTypeFromID(id objc.ID) *MTRTimeSynchro
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTimeSynchronizationClusterTimeZoneType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRTimeSynchronizationClusterTimeZoneType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRTimeSynchronizationClusterTimeZoneTypeAdopt(id objc.ID) *MTRTimeSynchron
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTimeSynchronizationClusterTimeZoneType{Handle: objref.Wrap(id)}
+	x := &MTRTimeSynchronizationClusterTimeZoneType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRTimeSynchronizationClusterTimeZoneType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRTimeSynchronizationClusterTimeZoneType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRTimeSynchronizationClusterTimeZoneType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRTimeSynchronizationClusterTimeZoneType creates a new MTRTimeSynchronizationClusterTimeZoneType.
@@ -62,19 +50,19 @@ func NewMTRTimeSynchronizationClusterTimeZoneType() *MTRTimeSynchronizationClust
 	return mTRTimeSynchronizationClusterTimeZoneTypeAdopt(_id)
 }
 
-// WithOffset sets offset and returns the receiver so calls can be chained.
+// WithOffset sets the property and returns the receiver so calls can be chained.
 func (x *MTRTimeSynchronizationClusterTimeZoneType) WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterTimeZoneType {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), objref.IDOf(offset))
 	return x
 }
 
-// WithValidAt sets validAt and returns the receiver so calls can be chained.
+// WithValidAt sets the property and returns the receiver so calls can be chained.
 func (x *MTRTimeSynchronizationClusterTimeZoneType) WithValidAt(validAt obj.Object) *MTRTimeSynchronizationClusterTimeZoneType {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValidAt:"), objref.IDOf(validAt))
 	return x
 }
 
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *MTRTimeSynchronizationClusterTimeZoneType) WithName(name string) *MTRTimeSynchronizationClusterTimeZoneType {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
@@ -89,3 +77,5 @@ type MTRTimeSynchronizationClusterTimeZoneTypeable interface {
 }
 
 var _ MTRTimeSynchronizationClusterTimeZoneTypeable = (*MTRTimeSynchronizationClusterTimeZoneType)(nil)
+
+var _ MTRTimeSynchronizationClusterTimeZoneStructProvider = (*MTRTimeSynchronizationClusterTimeZoneType)(nil)

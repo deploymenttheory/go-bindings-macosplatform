@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// WebUndefined objects are simply used to represent the JavaScript “undefined” value in methods when bridging between JavaScript and Objective-C. For example, if you invoke a JavaScript function that returns the JavaScript “undefined” value, then a WebUndefined object is returned to the Objective-C calling context.
-//
 // WebUndefined is an idiomatic wrapper over the Objective-C class WebUndefined.
+//
+// WebUndefined objects are simply used to represent the JavaScript “undefined” value in methods when bridging between JavaScript and Objective-C. For example, if you invoke a JavaScript function that returns the JavaScript “undefined” value, then a WebUndefined object is returned to the Objective-C calling context.
 type WebUndefined struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WebUndefinedFromID(id objc.ID) *WebUndefined {
 	if id == 0 {
 		return nil
 	}
-	x := &WebUndefined{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WebUndefined{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func webUndefinedAdopt(id objc.ID) *WebUndefined {
 	if id == 0 {
 		return nil
 	}
-	x := &WebUndefined{Handle: objref.Wrap(id)}
+	x := &WebUndefined{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *WebUndefined) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *WebUndefined) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WebUndefined) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewWebUndefined creates a new WebUndefined.

@@ -8,37 +8,37 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns the authorization status for monitoring headphone activity.
+// CMHeadphoneActivityManagerAuthorizationStatus returns the authorization status for monitoring headphone activity.
 func CMHeadphoneActivityManagerAuthorizationStatus() AuthorizationStatus {
 	_r := objc.Send[AuthorizationStatus](objc.ID(_class("CMHeadphoneActivityManager")), objc.RegisterName("authorizationStatus"))
 	return _r
 }
 
-// Returns the authorization status for monitoring headphone motion.
+// CMHeadphoneMotionManagerAuthorizationStatus returns the authorization status for monitoring headphone motion.
 func CMHeadphoneMotionManagerAuthorizationStatus() AuthorizationStatus {
 	_r := objc.Send[AuthorizationStatus](objc.ID(_class("CMHeadphoneMotionManager")), objc.RegisterName("authorizationStatus"))
 	return _r
 }
 
-// Returns a Boolean value indicating whether step counting is available on the current device.
+// IsStepCountingAvailable returns a Boolean value indicating whether step counting is available on the current device.
 func IsStepCountingAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("CMPedometer")), objc.RegisterName("isStepCountingAvailable"))
 	return _r
 }
 
-// Returns a Boolean value indicating whether distance estimation is available on the current device.
+// IsDistanceAvailable returns a Boolean value indicating whether distance estimation is available on the current device.
 func IsDistanceAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("CMPedometer")), objc.RegisterName("isDistanceAvailable"))
 	return _r
 }
 
-// Returns a Boolean value indicating whether floor counting is available on the current device.
+// IsFloorCountingAvailable returns a Boolean value indicating whether floor counting is available on the current device.
 func IsFloorCountingAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("CMPedometer")), objc.RegisterName("isFloorCountingAvailable"))
 	return _r
 }
 
-// Returns a Boolean value indicating whether pace information is available on the current device.
+// IsPaceAvailable returns a Boolean value indicating whether pace information is available on the current device.
 func IsPaceAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("CMPedometer")), objc.RegisterName("isPaceAvailable"))
 	return _r

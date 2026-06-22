@@ -23,7 +23,8 @@ func MTRThreadNetworkDiagnosticsClusterSecurityPolicyFromID(id objc.ID) *MTRThre
 	if id == 0 {
 		return nil
 	}
-	x := &MTRThreadNetworkDiagnosticsClusterSecurityPolicy{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRThreadNetworkDiagnosticsClusterSecurityPolicy{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRThreadNetworkDiagnosticsClusterSecurityPolicyAdopt(id objc.ID) *MTRThrea
 	if id == 0 {
 		return nil
 	}
-	x := &MTRThreadNetworkDiagnosticsClusterSecurityPolicy{Handle: objref.Wrap(id)}
+	x := &MTRThreadNetworkDiagnosticsClusterSecurityPolicy{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,38 +58,48 @@ func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) IsKind(className stri
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRThreadNetworkDiagnosticsClusterSecurityPolicy creates a new MTRThreadNetworkDiagnosticsClusterSecurityPolicy.
 func NewMTRThreadNetworkDiagnosticsClusterSecurityPolicy() *MTRThreadNetworkDiagnosticsClusterSecurityPolicy {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRThreadNetworkDiagnosticsClusterSecurityPolicy")), objc.RegisterName("new"))
 	return mTRThreadNetworkDiagnosticsClusterSecurityPolicyAdopt(_id)
 }
 
-// WithRotationTime sets rotationTime and returns the receiver so calls can be chained.
+// WithRotationTime sets the property and returns the receiver so calls can be chained.
 func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) WithRotationTime(rotationTime obj.Object) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotationTime:"), objref.IDOf(rotationTime))
 	return x
 }
 
-// WithFlags sets flags and returns the receiver so calls can be chained.
+// WithFlags sets the property and returns the receiver so calls can be chained.
 func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) WithFlags(flags obj.Object) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlags:"), objref.IDOf(flags))
 	return x
 }
 
+// RotationTime wraps the corresponding Objective-C method.
 func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) RotationTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rotationTime"))
 	return obj.Wrap(_r)
 }
 
+// SetRotationTime wraps the corresponding Objective-C method.
 func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) SetRotationTime(rotationTime obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotationTime:"), objref.IDOf(rotationTime))
 }
 
+// Flags wraps the corresponding Objective-C method.
 func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) Flags() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flags"))
 	return obj.Wrap(_r)
 }
 
+// SetFlags wraps the corresponding Objective-C method.
 func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) SetFlags(flags obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlags:"), objref.IDOf(flags))
 }

@@ -23,7 +23,8 @@ func AnimationPlayerFromID(id objc.ID) *AnimationPlayer {
 	if id == 0 {
 		return nil
 	}
-	x := &AnimationPlayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AnimationPlayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func animationPlayerAdopt(id objc.ID) *AnimationPlayer {
 	if id == 0 {
 		return nil
 	}
-	x := &AnimationPlayer{Handle: objref.Wrap(id)}
+	x := &AnimationPlayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,83 +58,86 @@ func (x *AnimationPlayer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AnimationPlayer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAnimationPlayer creates a new AnimationPlayer.
 func NewAnimationPlayer() *AnimationPlayer {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCNAnimationPlayer")), objc.RegisterName("new"))
 	return animationPlayerAdopt(_id)
 }
 
-// The speed to play the animation at. Defaults to 1.0. Animatable
-//
-// WithSpeed sets speed and returns the receiver so calls can be chained.
+// WithSpeed the speed to play the animation at. Defaults to 1.0. Animatable
 func (x *AnimationPlayer) WithSpeed(speed float64) *AnimationPlayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
-// Controls the influence of the played animation. When set to 1 the animation is applied without any blending. When set to less than 1, the animation value is blent with the current presentation value of the animated property. Defaults to 1.0. Animatable.
-//
-// WithBlendFactor sets blendFactor and returns the receiver so calls can be chained.
+// WithBlendFactor controls the influence of the played animation. When set to 1 the animation is applied without any blending. When set to less than 1, the animation value is blent with the current presentation value of the animated property. Defaults to 1.0. Animatable.
 func (x *AnimationPlayer) WithBlendFactor(blendFactor float64) *AnimationPlayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendFactor:"), blendFactor)
 	return x
 }
 
-// Specifies if the animation is paused. Defaults to NO.
-//
-// WithPaused sets paused and returns the receiver so calls can be chained.
+// WithPaused specifies if the animation is paused. Defaults to NO.
 func (x *AnimationPlayer) WithPaused(paused bool) *AnimationPlayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
-// Set paused to NO and restart playing from the beginning of the animation.
+// Play set paused to NO and restart playing from the beginning of the animation.
 func (x *AnimationPlayer) Play() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("play"))
 }
 
-// Stop the animation.
+// Stop stop the animation.
 func (x *AnimationPlayer) Stop() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
-// Stop the animation and smoothly blend out the animation over the specified duration.
+// StopWithBlendOutDuration stop the animation and smoothly blend out the animation over the specified duration.
 func (x *AnimationPlayer) StopWithBlendOutDuration(duration float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopWithBlendOutDuration:"), duration)
 }
 
-// The played animation
+// Animation the played animation
 func (x *AnimationPlayer) Animation() *Animation {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animation"))
 	return AnimationFromID(_r)
 }
 
-// The speed to play the animation at. Defaults to 1.0. Animatable
+// Speed the speed to play the animation at. Defaults to 1.0. Animatable
 func (x *AnimationPlayer) Speed() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speed"))
 	return _r
 }
 
+// SetSpeed wraps the corresponding Objective-C method.
 func (x *AnimationPlayer) SetSpeed(speed float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 }
 
-// Controls the influence of the played animation. When set to 1 the animation is applied without any blending. When set to less than 1, the animation value is blent with the current presentation value of the animated property. Defaults to 1.0. Animatable.
+// BlendFactor controls the influence of the played animation. When set to 1 the animation is applied without any blending. When set to less than 1, the animation value is blent with the current presentation value of the animated property. Defaults to 1.0. Animatable.
 func (x *AnimationPlayer) BlendFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("blendFactor"))
 	return _r
 }
 
+// SetBlendFactor wraps the corresponding Objective-C method.
 func (x *AnimationPlayer) SetBlendFactor(blendFactor float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendFactor:"), blendFactor)
 }
 
-// Specifies if the animation is paused. Defaults to NO.
+// Paused specifies if the animation is paused. Defaults to NO.
 func (x *AnimationPlayer) Paused() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("paused"))
 	return _r
 }
 
+// SetPaused wraps the corresponding Objective-C method.
 func (x *AnimationPlayer) SetPaused(paused bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 }

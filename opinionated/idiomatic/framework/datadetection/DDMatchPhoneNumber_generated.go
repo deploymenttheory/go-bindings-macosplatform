@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains a phone number that the data detection system matches.
-//
 // MatchPhoneNumber is an idiomatic wrapper over the Objective-C class DDMatchPhoneNumber.
+//
+// It embeds [Match], promoting that type's methods.
+//
+// An object that contains a phone number that the data detection system matches.
 type MatchPhoneNumber struct {
-	objref.Handle
+	Match
 }
 
 // MatchPhoneNumberFromID adopts an existing Objective-C object as a MatchPhoneNumber
@@ -25,7 +26,8 @@ func MatchPhoneNumberFromID(id objc.ID) *MatchPhoneNumber {
 	if id == 0 {
 		return nil
 	}
-	x := &MatchPhoneNumber{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatchPhoneNumber{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func matchPhoneNumberAdopt(id objc.ID) *MatchPhoneNumber {
 	if id == 0 {
 		return nil
 	}
-	x := &MatchPhoneNumber{Handle: objref.Wrap(id)}
+	x := &MatchPhoneNumber{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MatchPhoneNumber) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatchPhoneNumber) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatchPhoneNumber) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMatchPhoneNumber creates a new MatchPhoneNumber.
@@ -64,7 +52,7 @@ func NewMatchPhoneNumber() *MatchPhoneNumber {
 	return matchPhoneNumberAdopt(_id)
 }
 
-// A string that represents a phone number.
+// PhoneNumber a string that represents a phone number.
 func (x *MatchPhoneNumber) PhoneNumber() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("phoneNumber"))
 	if _r == 0 {
@@ -73,7 +61,7 @@ func (x *MatchPhoneNumber) PhoneNumber() string {
 	return purego.GoString(_r)
 }
 
-// A string that categorizes a phone number, such as Home or Work.
+// Label a string that categorizes a phone number, such as Home or Work.
 func (x *MatchPhoneNumber) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -90,3 +78,5 @@ type MatchPhoneNumberable interface {
 }
 
 var _ MatchPhoneNumberable = (*MatchPhoneNumber)(nil)
+
+var _ MatchProvider = (*MatchPhoneNumber)(nil)

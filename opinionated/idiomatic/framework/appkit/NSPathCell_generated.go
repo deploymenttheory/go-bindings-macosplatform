@@ -6,17 +6,20 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The user interface of a path control object.
-//
 // PathCell is an idiomatic wrapper over the Objective-C class NSPathCell.
+//
+// It embeds [ActionCell], promoting that type's methods.
+//
+// The user interface of a path control object.
 type PathCell struct {
-	objref.Handle
+	ActionCell
 }
 
 // PathCellFromID adopts an existing Objective-C object as a PathCell
@@ -25,7 +28,8 @@ func PathCellFromID(id objc.ID) *PathCell {
 	if id == 0 {
 		return nil
 	}
-	x := &PathCell{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PathCell{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func pathCellAdopt(id objc.ID) *PathCell {
 	if id == 0 {
 		return nil
 	}
-	x := &PathCell{Handle: objref.Wrap(id)}
+	x := &PathCell{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PathCell) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PathCell) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PathCell) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPathCell creates a new PathCell.
@@ -64,468 +54,402 @@ func NewPathCell() *PathCell {
 	return pathCellAdopt(_id)
 }
 
-// Sets the receiver’s path style.
-//
-// WithPathStyle sets pathStyle and returns the receiver so calls can be chained.
+// WithPathStyle sets the receiver’s path style.
 func (x *PathCell) WithPathStyle(pathStyle PathStyle) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPathStyle:"), pathStyle)
 	return x
 }
 
-// Returns the path displayed by the receiver.
-//
-// WithURL sets uRL and returns the receiver so calls can be chained.
+// WithURL returns the path displayed by the receiver.
 func (x *PathCell) WithURL(uRL string) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 	return x
 }
 
-// Sets the component types allowed in the path when the cell is editable.
-//
-// WithAllowedTypes sets the collection and returns the receiver so calls can be chained.
+// WithAllowedTypes sets the component types allowed in the path when the cell is editable.
 func (x *PathCell) WithAllowedTypes(items ...obj.Object) *PathCell {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTypes:"), _arr)
 	return x
 }
 
-// Sets the array of NSPathComponentCell objects currently being displayed.
-//
-// WithPathComponentCells sets the collection and returns the receiver so calls can be chained.
+// WithPathComponentCells sets the array of NSPathComponentCell objects currently being displayed.
 func (x *PathCell) WithPathComponentCells(items ...*PathComponentCell) *PathCell {
 	_arr := purego.SliceToNSArray(items, func(_v *PathComponentCell) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPathComponentCells:"), _arr)
 	return x
 }
 
-// Returns the current background color of the receiver.
-//
-// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+// WithBackgroundColor returns the current background color of the receiver.
 func (x *PathCell) WithBackgroundColor(backgroundColor *Color) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// Returns the placeholder string.
-//
-// WithPlaceholderString sets placeholderString and returns the receiver so calls can be chained.
+// WithPlaceholderString returns the placeholder string.
 func (x *PathCell) WithPlaceholderString(placeholderString string) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
 	return x
 }
 
-// Sets the value of the placeholder attributed string.
-//
-// WithPlaceholderAttributedString sets placeholderAttributedString and returns the receiver so calls can be chained.
+// WithPlaceholderAttributedString sets the value of the placeholder attributed string.
 func (x *PathCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 	return x
 }
 
-// The view associated with the cell.
-//
-// WithControlView sets controlView and returns the receiver so calls can be chained.
+// WithControlView the view associated with the cell.
 func (x *PathCell) WithControlView(controlView ViewProvider) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	return x
 }
 
-// The type of the cell.
-//
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithType the type of the cell.
 func (x *PathCell) WithType(type_ CellType) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
-// The cell’s current state.
-//
-// WithState sets state and returns the receiver so calls can be chained.
+// WithState the cell’s current state.
 func (x *PathCell) WithState(state int) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 	return x
 }
 
-// The object that receives the cell’s action messages.
-//
-// WithTarget sets target and returns the receiver so calls can be chained.
+// WithTarget the object that receives the cell’s action messages.
 func (x *PathCell) WithTarget(target obj.Object) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// A tag for identifying the cell.
-//
-// WithTag sets tag and returns the receiver so calls can be chained.
+// WithTag a tag for identifying the cell.
 func (x *PathCell) WithTag(tag int) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// The cell’s title text.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the cell’s title text.
 func (x *PathCell) WithTitle(title string) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A Boolean value indicating whether the cell is currently enabled.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value indicating whether the cell is currently enabled.
 func (x *PathCell) WithEnabled(enabled bool) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
-//
-// WithContinuous sets continuous and returns the receiver so calls can be chained.
+// WithContinuous a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 func (x *PathCell) WithContinuous(continuous bool) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
-// A Boolean value indicating whether the cell is editable.
-//
-// WithEditable sets editable and returns the receiver so calls can be chained.
+// WithEditable a Boolean value indicating whether the cell is editable.
 func (x *PathCell) WithEditable(editable bool) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
-// A Boolean value indicating whether the cell’s text can be selected.
-//
-// WithSelectable sets selectable and returns the receiver so calls can be chained.
+// WithSelectable a Boolean value indicating whether the cell’s text can be selected.
 func (x *PathCell) WithSelectable(selectable bool) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 	return x
 }
 
-// A Boolean value indicating whether the cell draws itself outlined with a plain border.
-//
-// WithBordered sets bordered and returns the receiver so calls can be chained.
+// WithBordered a Boolean value indicating whether the cell draws itself outlined with a plain border.
 func (x *PathCell) WithBordered(bordered bool) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
-// A Boolean value indicating whether the cell has a bezeled border.
-//
-// WithBezeled sets bezeled and returns the receiver so calls can be chained.
+// WithBezeled a Boolean value indicating whether the cell has a bezeled border.
 func (x *PathCell) WithBezeled(bezeled bool) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 	return x
 }
 
-// A Boolean value indicating whether excess text scrolls past the cell’s bounds.
-//
-// WithScrollable sets scrollable and returns the receiver so calls can be chained.
+// WithScrollable a Boolean value indicating whether excess text scrolls past the cell’s bounds.
 func (x *PathCell) WithScrollable(scrollable bool) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
 	return x
 }
 
-// A Boolean value indicating whether the cell has a highlighted appearance.
-//
-// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
+// WithHighlighted a Boolean value indicating whether the cell has a highlighted appearance.
 func (x *PathCell) WithHighlighted(highlighted bool) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// The alignment of the cell’s text.
-//
-// WithAlignment sets alignment and returns the receiver so calls can be chained.
+// WithAlignment the alignment of the cell’s text.
 func (x *PathCell) WithAlignment(alignment TextAlignment) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
-// A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
-//
-// WithWraps sets wraps and returns the receiver so calls can be chained.
+// WithWraps a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 func (x *PathCell) WithWraps(wraps bool) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
 	return x
 }
 
-// The font that the cell uses to display text.
-//
-// WithFont sets font and returns the receiver so calls can be chained.
+// WithFont the font that the cell uses to display text.
 func (x *PathCell) WithFont(font *Font) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
-// The cell’s formatter object.
-//
-// WithFormatter sets formatter and returns the receiver so calls can be chained.
+// WithFormatter the cell’s formatter object.
 func (x *PathCell) WithFormatter(formatter obj.Object) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
-// The cell’s value as an Objective-C object.
-//
-// WithObjectValue sets objectValue and returns the receiver so calls can be chained.
+// WithObjectValue the cell’s value as an Objective-C object.
 func (x *PathCell) WithObjectValue(objectValue obj.Object) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
-// The cell’s value as a string.
-//
-// WithStringValue sets stringValue and returns the receiver so calls can be chained.
+// WithStringValue the cell’s value as a string.
 func (x *PathCell) WithStringValue(stringValue string) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
-// The cell’s value as an integer.
-//
-// WithIntValue sets intValue and returns the receiver so calls can be chained.
+// WithIntValue the cell’s value as an integer.
 func (x *PathCell) WithIntValue(intValue int) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
-// The cell’s value as a single-precision floating-point number.
-//
-// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
+// WithFloatValue the cell’s value as a single-precision floating-point number.
 func (x *PathCell) WithFloatValue(floatValue float32) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
-// The cell’s value as a double-precision floating-point number.
-//
-// WithDoubleValue sets doubleValue and returns the receiver so calls can be chained.
+// WithDoubleValue the cell’s value as a double-precision floating-point number.
 func (x *PathCell) WithDoubleValue(doubleValue float64) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
-// The cell’s value as an integer value.
-//
-// WithIntegerValue sets integerValue and returns the receiver so calls can be chained.
+// WithIntegerValue the cell’s value as an integer value.
 func (x *PathCell) WithIntegerValue(integerValue int) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
-// The image displayed by the cell, if any.
-//
-// WithImage sets image and returns the receiver so calls can be chained.
+// WithImage the image displayed by the cell, if any.
 func (x *PathCell) WithImage(image *Image) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
-// The size of the cell.
-//
-// WithControlSize sets controlSize and returns the receiver so calls can be chained.
+// WithControlSize the size of the cell.
 func (x *PathCell) WithControlSize(controlSize ControlSize) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
-// The object represented by the cell.
-//
-// WithRepresentedObject sets representedObject and returns the receiver so calls can be chained.
+// WithRepresentedObject the object represented by the cell.
 func (x *PathCell) WithRepresentedObject(representedObject obj.Object) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return x
 }
 
-// The cell’s contextual menu.
-//
-// WithMenu sets menu and returns the receiver so calls can be chained.
+// WithMenu the cell’s contextual menu.
 func (x *PathCell) WithMenu(menu *Menu) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
-//
-// WithSendsActionOnEndEditing sets sendsActionOnEndEditing and returns the receiver so calls can be chained.
+// WithSendsActionOnEndEditing a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 func (x *PathCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
 	return x
 }
 
-// The initial writing direction used to determine the actual writing direction for text.
-//
-// WithBaseWritingDirection sets baseWritingDirection and returns the receiver so calls can be chained.
+// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
 func (x *PathCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
-// The line break mode to use when drawing text in the cell.
-//
-// WithLineBreakMode sets lineBreakMode and returns the receiver so calls can be chained.
+// WithLineBreakMode the line break mode to use when drawing text in the cell.
 func (x *PathCell) WithLineBreakMode(lineBreakMode LineBreakMode) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
-// A Boolean value indicating whether the cell assumes responsibility for undo operations.
-//
-// WithAllowsUndo sets allowsUndo and returns the receiver so calls can be chained.
+// WithAllowsUndo a Boolean value indicating whether the cell assumes responsibility for undo operations.
 func (x *PathCell) WithAllowsUndo(allowsUndo bool) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
 	return x
 }
 
-// A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
-//
-// WithTruncatesLastVisibleLine sets truncatesLastVisibleLine and returns the receiver so calls can be chained.
+// WithTruncatesLastVisibleLine a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 func (x *PathCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
 	return x
 }
 
-// The layout direction of the user interface.
-//
-// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection the layout direction of the user interface.
 func (x *PathCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
-//
-// WithUsesSingleLineMode sets usesSingleLineMode and returns the receiver so calls can be chained.
+// WithUsesSingleLineMode a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 func (x *PathCell) WithUsesSingleLineMode(usesSingleLineMode bool) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
-// A Boolean value indicating whether the cell refuses the first responder status.
-//
-// WithRefusesFirstResponder sets refusesFirstResponder and returns the receiver so calls can be chained.
+// WithRefusesFirstResponder a Boolean value indicating whether the cell refuses the first responder status.
 func (x *PathCell) WithRefusesFirstResponder(refusesFirstResponder bool) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
-// A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
-//
-// WithShowsFirstResponder sets showsFirstResponder and returns the receiver so calls can be chained.
+// WithShowsFirstResponder a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 func (x *PathCell) WithShowsFirstResponder(showsFirstResponder bool) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
 	return x
 }
 
-// The type of focus ring to use with the associated view.
-//
-// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+// WithFocusRingType the type of focus ring to use with the associated view.
 func (x *PathCell) WithFocusRingType(focusRingType FocusRingType) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// The cell’s value as an attributed string.
-//
-// WithAttributedStringValue sets attributedStringValue and returns the receiver so calls can be chained.
+// WithAttributedStringValue the cell’s value as an attributed string.
 func (x *PathCell) WithAttributedStringValue(attributedStringValue obj.Object) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
-// A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
-//
-// WithAllowsEditingTextAttributes sets allowsEditingTextAttributes and returns the receiver so calls can be chained.
+// WithAllowsEditingTextAttributes a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 func (x *PathCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
 	return x
 }
 
-// A Boolean value indicating whether the cell supports the importation of images into its text.
-//
-// WithImportsGraphics sets importsGraphics and returns the receiver so calls can be chained.
+// WithImportsGraphics a Boolean value indicating whether the cell supports the importation of images into its text.
 func (x *PathCell) WithImportsGraphics(importsGraphics bool) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
 	return x
 }
 
-// A Boolean value indicating whether the cell supports three states instead of two.
-//
-// WithAllowsMixedState sets allowsMixedState and returns the receiver so calls can be chained.
+// WithAllowsMixedState a Boolean value indicating whether the cell supports three states instead of two.
 func (x *PathCell) WithAllowsMixedState(allowsMixedState bool) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
 	return x
 }
 
-// The cell’s background style.
-//
-// WithBackgroundStyle sets backgroundStyle and returns the receiver so calls can be chained.
+// WithBackgroundStyle the cell’s background style.
 func (x *PathCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
 	return x
 }
 
-// The cell’s control tint.
-//
-// WithControlTint sets controlTint and returns the receiver so calls can be chained.
+// WithControlTint the cell’s control tint.
 func (x *PathCell) WithControlTint(controlTint ControlTint) *PathCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
 	return x
 }
 
+// RectOfPathComponentCellWithFrameInView returns the current rectangle being displayed for a given path component cell, with respect to a given frame in a given view.
+func (x *PathCell) RectOfPathComponentCellWithFrameInView(cell *PathComponentCell, frame corefoundation.CGRect, view *View) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rectOfPathComponentCell:withFrame:inView:"), objref.IDOf(cell), frame, objref.IDOf(view))
+	return _r
+}
+
+// PathComponentCellAtPointWithFrameInView returns the cell located at the given point within the given frame of the given view.
+func (x *PathCell) PathComponentCellAtPointWithFrameInView(point corefoundation.CGPoint, frame corefoundation.CGRect, view *View) *PathComponentCell {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathComponentCellAtPoint:withFrame:inView:"), point, frame, objref.IDOf(view))
+	return PathComponentCellFromID(_r)
+}
+
+// MouseEnteredWithFrameInView displays the cell component over which the mouse is hovering.
+func (x *PathCell) MouseEnteredWithFrameInView(event *Event, frame corefoundation.CGRect, view *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseEntered:withFrame:inView:"), objref.IDOf(event), frame, objref.IDOf(view))
+}
+
+// MouseExitedWithFrameInView hides the cell component over which the mouse is hovering.
+func (x *PathCell) MouseExitedWithFrameInView(event *Event, frame corefoundation.CGRect, view *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseExited:withFrame:inView:"), objref.IDOf(event), frame, objref.IDOf(view))
+}
+
+// PathStyle wraps the corresponding Objective-C method.
 func (x *PathCell) PathStyle() PathStyle {
 	_r := objc.Send[PathStyle](objref.IDOf(x), objc.RegisterName("pathStyle"))
 	return _r
 }
 
+// SetPathStyle wraps the corresponding Objective-C method.
 func (x *PathCell) SetPathStyle(pathStyle PathStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPathStyle:"), pathStyle)
 }
 
+// URL wraps the corresponding Objective-C method.
 func (x *PathCell) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
+// SetURL wraps the corresponding Objective-C method.
 func (x *PathCell) SetURL(uRL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 }
 
+// AllowedTypes wraps the corresponding Objective-C method.
+//
 // AllowedTypes returns the collection as a Go slice.
 func (x *PathCell) AllowedTypes() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowedTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetAllowedTypes wraps the corresponding Objective-C method.
 func (x *PathCell) SetAllowedTypes(allowedTypes []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTypes:"), purego.SliceToNSArray(allowedTypes, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// PathComponentCells wraps the corresponding Objective-C method.
+//
 // PathComponentCells returns the collection as a Go slice.
 func (x *PathCell) PathComponentCells() []*PathComponentCell {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathComponentCells"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PathComponentCell { return PathComponentCellFromID(_id) })
 }
 
+// SetPathComponentCells wraps the corresponding Objective-C method.
 func (x *PathCell) SetPathComponentCells(pathComponentCells []*PathComponentCell) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPathComponentCells:"), purego.SliceToNSArray(pathComponentCells, func(_v *PathComponentCell) objc.ID { return objref.IDOf(_v) }))
 }
 
+// ClickedPathComponentCell wraps the corresponding Objective-C method.
 func (x *PathCell) ClickedPathComponentCell() *PathComponentCell {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clickedPathComponentCell"))
 	return PathComponentCellFromID(_r)
 }
 
+// BackgroundColor wraps the corresponding Objective-C method.
 func (x *PathCell) BackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
 }
 
+// SetBackgroundColor wraps the corresponding Objective-C method.
 func (x *PathCell) SetBackgroundColor(backgroundColor *Color) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
+// PlaceholderString wraps the corresponding Objective-C method.
 func (x *PathCell) PlaceholderString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderString"))
 	if _r == 0 {
@@ -534,15 +458,18 @@ func (x *PathCell) PlaceholderString() string {
 	return purego.GoString(_r)
 }
 
+// SetPlaceholderString wraps the corresponding Objective-C method.
 func (x *PathCell) SetPlaceholderString(placeholderString string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
 }
 
+// PlaceholderAttributedString wraps the corresponding Objective-C method.
 func (x *PathCell) PlaceholderAttributedString() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderAttributedString"))
 	return obj.Wrap(_r)
 }
 
+// SetPlaceholderAttributedString wraps the corresponding Objective-C method.
 func (x *PathCell) SetPlaceholderAttributedString(placeholderAttributedString obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 }
@@ -601,6 +528,10 @@ type PathCellable interface {
 	WithAllowsMixedState(allowsMixedState bool) *PathCell
 	WithBackgroundStyle(backgroundStyle BackgroundStyle) *PathCell
 	WithControlTint(controlTint ControlTint) *PathCell
+	RectOfPathComponentCellWithFrameInView(cell *PathComponentCell, frame corefoundation.CGRect, view *View) corefoundation.CGRect
+	PathComponentCellAtPointWithFrameInView(point corefoundation.CGPoint, frame corefoundation.CGRect, view *View) *PathComponentCell
+	MouseEnteredWithFrameInView(event *Event, frame corefoundation.CGRect, view *View)
+	MouseExitedWithFrameInView(event *Event, frame corefoundation.CGRect, view *View)
 	PathStyle() PathStyle
 	SetPathStyle(pathStyle PathStyle)
 	URL() obj.Object
@@ -619,3 +550,7 @@ type PathCellable interface {
 }
 
 var _ PathCellable = (*PathCell)(nil)
+
+var _ ActionCellProvider = (*PathCell)(nil)
+
+var _ CellProvider = (*PathCell)(nil)

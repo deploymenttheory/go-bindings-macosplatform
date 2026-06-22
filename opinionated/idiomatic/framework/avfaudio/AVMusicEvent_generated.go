@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class for the events you associate with a music track.
-//
 // MusicEvent is an idiomatic wrapper over the Objective-C class AVMusicEvent.
+//
+// MusicEvent is an abstract base — you do not construct it directly. Construct one of [AUPresetEvent], [ExtendedNoteOnEvent], [ExtendedTempoEvent], [MIDIChannelEvent], [MIDIMetaEvent], [MIDINoteEvent], [MIDISysexEvent], [MusicUserEvent], [ParameterEvent] and pass it where a MusicEvent is accepted.
+//
+// A base class for the events you associate with a music track.
 type MusicEvent struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func MusicEventFromID(id objc.ID) *MusicEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MusicEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MusicEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func musicEventAdopt(id objc.ID) *MusicEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MusicEvent{Handle: objref.Wrap(id)}
+	x := &MusicEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *MusicEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMusicEvent creates a new MusicEvent.
-func NewMusicEvent() *MusicEvent {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVMusicEvent")), objc.RegisterName("new"))
-	return musicEventAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MusicEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // MusicEventable is the interface implemented by [MusicEvent], for mocking and DI.
@@ -70,3 +74,10 @@ type MusicEventable interface {
 }
 
 var _ MusicEventable = (*MusicEvent)(nil)
+
+// isMusicEvent marks MusicEvent — and, by embedding promotion, its
+// subclasses — as a member of the MusicEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MusicEvent) isMusicEvent() {}
+
+var _ MusicEventProvider = (*MusicEvent)(nil)

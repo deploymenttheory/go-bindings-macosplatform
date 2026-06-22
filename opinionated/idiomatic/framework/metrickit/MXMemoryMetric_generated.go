@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing metrics about the app’s memory use.
-//
 // MemoryMetric is an idiomatic wrapper over the Objective-C class MXMemoryMetric.
+//
+// It embeds [Metric], promoting that type's methods.
+//
+// An object representing metrics about the app’s memory use.
 type MemoryMetric struct {
-	objref.Handle
+	Metric
 }
 
 // MemoryMetricFromID adopts an existing Objective-C object as a MemoryMetric
@@ -25,7 +26,8 @@ func MemoryMetricFromID(id objc.ID) *MemoryMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &MemoryMetric{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MemoryMetric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func memoryMetricAdopt(id objc.ID) *MemoryMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &MemoryMetric{Handle: objref.Wrap(id)}
+	x := &MemoryMetric{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MemoryMetric) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MemoryMetric) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MemoryMetric) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMemoryMetric creates a new MemoryMetric.
@@ -64,13 +52,13 @@ func NewMemoryMetric() *MemoryMetric {
 	return memoryMetricAdopt(_id)
 }
 
-// A single value representing the peak memory consumption of the application. Dimensioned as NSUnitInformationStorage.
+// PeakMemoryUsage a single value representing the peak memory consumption of the application. Dimensioned as NSUnitInformationStorage.
 func (x *MemoryMetric) PeakMemoryUsage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("peakMemoryUsage"))
 	return obj.Wrap(_r)
 }
 
-// Average memory of the application upon suspend. Dimensioned as NSUnitInformationStorage.
+// AverageSuspendedMemory average memory of the application upon suspend. Dimensioned as NSUnitInformationStorage.
 func (x *MemoryMetric) AverageSuspendedMemory() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("averageSuspendedMemory"))
 	return obj.Wrap(_r)
@@ -84,3 +72,5 @@ type MemoryMetricable interface {
 }
 
 var _ MemoryMetricable = (*MemoryMetric)(nil)
+
+var _ MetricProvider = (*MemoryMetric)(nil)

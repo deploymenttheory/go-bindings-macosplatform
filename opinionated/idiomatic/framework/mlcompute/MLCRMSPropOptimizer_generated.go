@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An optimizer that represents the root mean square propagation algorithm.
-//
 // RMSPropOptimizer is an idiomatic wrapper over the Objective-C class MLCRMSPropOptimizer.
+//
+// It embeds [Optimizer], promoting that type's methods.
+//
+// An optimizer that represents the root mean square propagation algorithm.
 type RMSPropOptimizer struct {
-	objref.Handle
+	Optimizer
 }
 
 // RMSPropOptimizerFromID adopts an existing Objective-C object as a RMSPropOptimizer
@@ -25,7 +26,8 @@ func RMSPropOptimizerFromID(id objc.ID) *RMSPropOptimizer {
 	if id == 0 {
 		return nil
 	}
-	x := &RMSPropOptimizer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RMSPropOptimizer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func rMSPropOptimizerAdopt(id objc.ID) *RMSPropOptimizer {
 	if id == 0 {
 		return nil
 	}
-	x := &RMSPropOptimizer{Handle: objref.Wrap(id)}
+	x := &RMSPropOptimizer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RMSPropOptimizer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RMSPropOptimizer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RMSPropOptimizer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRMSPropOptimizer creates a new RMSPropOptimizer.
@@ -64,41 +52,37 @@ func NewRMSPropOptimizer() *RMSPropOptimizer {
 	return rMSPropOptimizerAdopt(_id)
 }
 
-// The learning rate.
-//
-// WithLearningRate sets learningRate and returns the receiver so calls can be chained.
+// WithLearningRate the learning rate.
 func (x *RMSPropOptimizer) WithLearningRate(learningRate float32) *RMSPropOptimizer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
 	return x
 }
 
-// A Boolean value that indicates whether you apply gradient clipping.
-//
-// WithAppliesGradientClipping sets appliesGradientClipping and returns the receiver so calls can be chained.
+// WithAppliesGradientClipping a Boolean value that indicates whether you apply gradient clipping.
 func (x *RMSPropOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *RMSPropOptimizer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesGradientClipping:"), appliesGradientClipping)
 	return x
 }
 
-// The momentum factor.  A hyper-parameter. The default is 0.0.
+// MomentumScale the momentum factor.  A hyper-parameter. The default is 0.0.
 func (x *RMSPropOptimizer) MomentumScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("momentumScale"))
 	return _r
 }
 
-// The smoothing constant. The default is 0.99.
+// Alpha the smoothing constant. The default is 0.99.
 func (x *RMSPropOptimizer) Alpha() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
 	return _r
 }
 
-// A term added to improve numerical stability. The default is 1e-8.
+// Epsilon a term added to improve numerical stability. The default is 1e-8.
 func (x *RMSPropOptimizer) Epsilon() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
 	return _r
 }
 
-// If True, compute the centered RMSProp, the gradient is normalized by an estimation of its variance. The default is false.
+// IsCentered if True, compute the centered RMSProp, the gradient is normalized by an estimation of its variance. The default is false.
 func (x *RMSPropOptimizer) IsCentered() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCentered"))
 	return _r
@@ -116,3 +100,5 @@ type RMSPropOptimizerable interface {
 }
 
 var _ RMSPropOptimizerable = (*RMSPropOptimizer)(nil)
+
+var _ OptimizerProvider = (*RMSPropOptimizer)(nil)

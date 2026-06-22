@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Description of an Index Element
-//
 // FetchIndexElementDescription is an idiomatic wrapper over the Objective-C class NSFetchIndexElementDescription.
+//
+// Description of an Index Element
 type FetchIndexElementDescription struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FetchIndexElementDescriptionFromID(id objc.ID) *FetchIndexElementDescriptio
 	if id == 0 {
 		return nil
 	}
-	x := &FetchIndexElementDescription{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FetchIndexElementDescription{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func fetchIndexElementDescriptionAdopt(id objc.ID) *FetchIndexElementDescription
 	if id == 0 {
 		return nil
 	}
-	x := &FetchIndexElementDescription{Handle: objref.Wrap(id)}
+	x := &FetchIndexElementDescription{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,36 +60,38 @@ func (x *FetchIndexElementDescription) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an index element description using the specified property description and collation type.
-//
-// NewFetchIndexElementDescriptionWithPropertyCollationType creates a new FetchIndexElementDescription.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FetchIndexElementDescription) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFetchIndexElementDescriptionWithPropertyCollationType creates an index element description using the specified property description and collation type.
 func NewFetchIndexElementDescriptionWithPropertyCollationType(property *PropertyDescription, collationType FetchIndexElementType) *FetchIndexElementDescription {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFetchIndexElementDescription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProperty:collationType:"), objref.IDOf(property), collationType)
 	return fetchIndexElementDescriptionAdopt(_id)
 }
 
-// The type of collation that the index element uses, either binary or R-tree.
-//
-// WithCollationType sets collationType and returns the receiver so calls can be chained.
+// WithCollationType the type of collation that the index element uses, either binary or R-tree.
 func (x *FetchIndexElementDescription) WithCollationType(collationType FetchIndexElementType) *FetchIndexElementDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollationType:"), collationType)
 	return x
 }
 
-// A Boolean value that controls whether an index that supports direction is an ascending or descending index.
-//
-// WithAscending sets ascending and returns the receiver so calls can be chained.
+// WithAscending a Boolean value that controls whether an index that supports direction is an ascending or descending index.
 func (x *FetchIndexElementDescription) WithAscending(ascending bool) *FetchIndexElementDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAscending:"), ascending)
 	return x
 }
 
+// Property wraps the corresponding Objective-C method.
 func (x *FetchIndexElementDescription) Property() *PropertyDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("property"))
 	return PropertyDescriptionFromID(_r)
 }
 
+// PropertyName wraps the corresponding Objective-C method.
 func (x *FetchIndexElementDescription) PropertyName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyName"))
 	if _r == 0 {
@@ -96,24 +100,29 @@ func (x *FetchIndexElementDescription) PropertyName() string {
 	return purego.GoString(_r)
 }
 
+// CollationType wraps the corresponding Objective-C method.
 func (x *FetchIndexElementDescription) CollationType() FetchIndexElementType {
 	_r := objc.Send[FetchIndexElementType](objref.IDOf(x), objc.RegisterName("collationType"))
 	return _r
 }
 
+// SetCollationType wraps the corresponding Objective-C method.
 func (x *FetchIndexElementDescription) SetCollationType(collationType FetchIndexElementType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollationType:"), collationType)
 }
 
+// IsAscending wraps the corresponding Objective-C method.
 func (x *FetchIndexElementDescription) IsAscending() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAscending"))
 	return _r
 }
 
+// SetAscending wraps the corresponding Objective-C method.
 func (x *FetchIndexElementDescription) SetAscending(ascending bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAscending:"), ascending)
 }
 
+// IndexDescription wraps the corresponding Objective-C method.
 func (x *FetchIndexElementDescription) IndexDescription() *FetchIndexDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexDescription"))
 	return FetchIndexDescriptionFromID(_r)

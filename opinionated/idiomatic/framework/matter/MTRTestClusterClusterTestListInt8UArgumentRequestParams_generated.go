@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRTestClusterClusterTestListInt8UArgumentRequestParams is an idiomatic wrapper over the Objective-C class MTRTestClusterClusterTestListInt8UArgumentRequestParams.
+//
+// It embeds [MTRUnitTestingClusterTestListInt8UArgumentRequestParams], promoting that type's methods.
 type MTRTestClusterClusterTestListInt8UArgumentRequestParams struct {
-	objref.Handle
+	MTRUnitTestingClusterTestListInt8UArgumentRequestParams
 }
 
 // MTRTestClusterClusterTestListInt8UArgumentRequestParamsFromID adopts an existing Objective-C object as a MTRTestClusterClusterTestListInt8UArgumentRequestParams
@@ -23,7 +24,8 @@ func MTRTestClusterClusterTestListInt8UArgumentRequestParamsFromID(id objc.ID) *
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTestClusterClusterTestListInt8UArgumentRequestParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRTestClusterClusterTestListInt8UArgumentRequestParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRTestClusterClusterTestListInt8UArgumentRequestParamsAdopt(id objc.ID) *M
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTestClusterClusterTestListInt8UArgumentRequestParams{Handle: objref.Wrap(id)}
+	x := &MTRTestClusterClusterTestListInt8UArgumentRequestParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRTestClusterClusterTestListInt8UArgumentRequestParams) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRTestClusterClusterTestListInt8UArgumentRequestParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRTestClusterClusterTestListInt8UArgumentRequestParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRTestClusterClusterTestListInt8UArgumentRequestParams creates a new MTRTestClusterClusterTestListInt8UArgumentRequestParams.
@@ -62,17 +50,13 @@ func NewMTRTestClusterClusterTestListInt8UArgumentRequestParams() *MTRTestCluste
 	return mTRTestClusterClusterTestListInt8UArgumentRequestParamsAdopt(_id)
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRTestClusterClusterTestListInt8UArgumentRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestListInt8UArgumentRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRTestClusterClusterTestListInt8UArgumentRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestListInt8UArgumentRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
@@ -86,3 +70,5 @@ type MTRTestClusterClusterTestListInt8UArgumentRequestParamsable interface {
 }
 
 var _ MTRTestClusterClusterTestListInt8UArgumentRequestParamsable = (*MTRTestClusterClusterTestListInt8UArgumentRequestParams)(nil)
+
+var _ MTRUnitTestingClusterTestListInt8UArgumentRequestParamsProvider = (*MTRTestClusterClusterTestListInt8UArgumentRequestParams)(nil)

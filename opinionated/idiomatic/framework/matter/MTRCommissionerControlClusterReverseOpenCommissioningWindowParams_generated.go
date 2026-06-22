@@ -25,7 +25,8 @@ func MTRCommissionerControlClusterReverseOpenCommissioningWindowParamsFromID(id 
 	if id == 0 {
 		return nil
 	}
-	x := &MTRCommissionerControlClusterReverseOpenCommissioningWindowParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRCommissionerControlClusterReverseOpenCommissioningWindowParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsAdopt(id o
 	if id == 0 {
 		return nil
 	}
-	x := &MTRCommissionerControlClusterReverseOpenCommissioningWindowParams{Handle: objref.Wrap(id)}
+	x := &MTRCommissionerControlClusterReverseOpenCommissioningWindowParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) IsKi
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRCommissionerControlClusterReverseOpenCommissioningWindowParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-//
-// NewMTRCommissionerControlClusterReverseOpenCommissioningWindowParamsWithResponseValueError creates a new MTRCommissionerControlClusterReverseOpenCommissioningWindowParams.
-func NewMTRCommissionerControlClusterReverseOpenCommissioningWindowParamsWithResponseValueError(responseValue obj.Object) (*MTRCommissionerControlClusterReverseOpenCommissioningWindowParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRCommissionerControlClusterReverseOpenCommissioningWindowParamsWithResponseValueError initialize an MTRCommissionerControlClusterReverseOpenCommissioningWindowParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRCommissionerControlClusterReverseOpenCommissioningWindowParamsWithResponseValueError(responseValue obj.Object) (result *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRCommissionerControlClusterReverseOpenCommissioningWindowParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,77 +77,87 @@ func NewMTRCommissionerControlClusterReverseOpenCommissioningWindowParamsWithRes
 	return mTRCommissionerControlClusterReverseOpenCommissioningWindowParamsAdopt(_id), nil
 }
 
-// WithCommissioningTimeout sets commissioningTimeout and returns the receiver so calls can be chained.
+// WithCommissioningTimeout sets the property and returns the receiver so calls can be chained.
 func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) WithCommissioningTimeout(commissioningTimeout obj.Object) *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommissioningTimeout:"), objref.IDOf(commissioningTimeout))
 	return x
 }
 
-// WithPakePasscodeVerifier sets pakePasscodeVerifier and returns the receiver so calls can be chained.
+// WithPakePasscodeVerifier sets the property and returns the receiver so calls can be chained.
 func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) WithPakePasscodeVerifier(pakePasscodeVerifier obj.Object) *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPakePasscodeVerifier:"), objref.IDOf(pakePasscodeVerifier))
 	return x
 }
 
-// WithDiscriminator sets discriminator and returns the receiver so calls can be chained.
+// WithDiscriminator sets the property and returns the receiver so calls can be chained.
 func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) WithDiscriminator(discriminator obj.Object) *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiscriminator:"), objref.IDOf(discriminator))
 	return x
 }
 
-// WithIterations sets iterations and returns the receiver so calls can be chained.
+// WithIterations sets the property and returns the receiver so calls can be chained.
 func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) WithIterations(iterations obj.Object) *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIterations:"), objref.IDOf(iterations))
 	return x
 }
 
-// WithSalt sets salt and returns the receiver so calls can be chained.
+// WithSalt sets the property and returns the receiver so calls can be chained.
 func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) WithSalt(salt obj.Object) *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSalt:"), objref.IDOf(salt))
 	return x
 }
 
+// CommissioningTimeout wraps the corresponding Objective-C method.
 func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) CommissioningTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commissioningTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetCommissioningTimeout wraps the corresponding Objective-C method.
 func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) SetCommissioningTimeout(commissioningTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommissioningTimeout:"), objref.IDOf(commissioningTimeout))
 }
 
+// PakePasscodeVerifier wraps the corresponding Objective-C method.
 func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) PakePasscodeVerifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pakePasscodeVerifier"))
 	return obj.Wrap(_r)
 }
 
+// SetPakePasscodeVerifier wraps the corresponding Objective-C method.
 func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) SetPakePasscodeVerifier(pakePasscodeVerifier obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPakePasscodeVerifier:"), objref.IDOf(pakePasscodeVerifier))
 }
 
+// Discriminator wraps the corresponding Objective-C method.
 func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) Discriminator() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discriminator"))
 	return obj.Wrap(_r)
 }
 
+// SetDiscriminator wraps the corresponding Objective-C method.
 func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) SetDiscriminator(discriminator obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiscriminator:"), objref.IDOf(discriminator))
 }
 
+// Iterations wraps the corresponding Objective-C method.
 func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) Iterations() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iterations"))
 	return obj.Wrap(_r)
 }
 
+// SetIterations wraps the corresponding Objective-C method.
 func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) SetIterations(iterations obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIterations:"), objref.IDOf(iterations))
 }
 
+// Salt wraps the corresponding Objective-C method.
 func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) Salt() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("salt"))
 	return obj.Wrap(_r)
 }
 
+// SetSalt wraps the corresponding Objective-C method.
 func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) SetSalt(salt obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSalt:"), objref.IDOf(salt))
 }

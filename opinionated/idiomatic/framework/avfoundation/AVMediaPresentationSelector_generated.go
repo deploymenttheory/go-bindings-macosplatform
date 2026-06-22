@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// For content that has been authored with the express intent of offering an alternative selection interface for AVMediaSelectionOptions, AVMediaPresentationSelector represents a collection of mutually exclusive settings.
-//
 // MediaPresentationSelector is an idiomatic wrapper over the Objective-C class AVMediaPresentationSelector.
+//
+// For content that has been authored with the express intent of offering an alternative selection interface for AVMediaSelectionOptions, AVMediaPresentationSelector represents a collection of mutually exclusive settings.
 type MediaPresentationSelector struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MediaPresentationSelectorFromID(id objc.ID) *MediaPresentationSelector {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaPresentationSelector{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MediaPresentationSelector{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mediaPresentationSelectorAdopt(id objc.ID) *MediaPresentationSelector {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaPresentationSelector{Handle: objref.Wrap(id)}
+	x := &MediaPresentationSelector{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *MediaPresentationSelector) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MediaPresentationSelector) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMediaPresentationSelector creates a new MediaPresentationSelector.
 func NewMediaPresentationSelector() *MediaPresentationSelector {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVMediaPresentationSelector")), objc.RegisterName("new"))
 	return mediaPresentationSelectorAdopt(_id)
 }
 
-// Returns the display name for the selector that best matches the specified locale identifier.
+// DisplayNameForLocaleIdentifier returns the display name for the selector that best matches the specified locale identifier.
 func (x *MediaPresentationSelector) DisplayNameForLocaleIdentifier(localeIdentifier string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayNameForLocaleIdentifier:"), purego.NSString(localeIdentifier))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *MediaPresentationSelector) DisplayNameForLocaleIdentifier(localeIdentif
 	return purego.GoString(_r)
 }
 
-// Provides the authored identifier for the selector.
+// Identifier provides the authored identifier for the selector.
 func (x *MediaPresentationSelector) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -82,7 +90,7 @@ func (x *MediaPresentationSelector) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Provides selectable mutually exclusive settings for the selector.
+// Settings provides selectable mutually exclusive settings for the selector.
 //
 // Settings returns the collection as a Go slice.
 func (x *MediaPresentationSelector) Settings() []*MediaPresentationSetting {

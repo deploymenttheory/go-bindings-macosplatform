@@ -6,17 +6,19 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A user interface element that contains and displays text, scroll, and browser views, in addition to other view subclasses.
-//
 // Drawer is an idiomatic wrapper over the Objective-C class NSDrawer.
+//
+// It embeds [Responder], promoting that type's methods.
+//
+// A user interface element that contains and displays text, scroll, and browser views, in addition to other view subclasses.
 type Drawer struct {
-	objref.Handle
+	Responder
 }
 
 // DrawerFromID adopts an existing Objective-C object as a Drawer
@@ -25,7 +27,8 @@ func DrawerFromID(id objc.ID) *Drawer {
 	if id == 0 {
 		return nil
 	}
-	x := &Drawer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Drawer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func drawerAdopt(id objc.ID) *Drawer {
 	if id == 0 {
 		return nil
 	}
-	x := &Drawer{Handle: objref.Wrap(id)}
+	x := &Drawer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *Drawer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Drawer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Drawer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDrawer creates a new Drawer.
@@ -64,132 +53,176 @@ func NewDrawer() *Drawer {
 	return drawerAdopt(_id)
 }
 
-// The receiver’s parent window.
-//
-// WithParentWindow sets parentWindow and returns the receiver so calls can be chained.
+// WithParentWindow the receiver’s parent window.
 func (x *Drawer) WithParentWindow(parentWindow WindowProvider) *Drawer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
 	return x
 }
 
-// The receiver’s content view.
-//
-// WithContentView sets contentView and returns the receiver so calls can be chained.
+// WithContentView the receiver’s content view.
 func (x *Drawer) WithContentView(contentView ViewProvider) *Drawer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	return x
 }
 
-// The receiver’s leading offset.
-//
-// WithLeadingOffset sets leadingOffset and returns the receiver so calls can be chained.
+// WithContentSize the size of the receiver’s content area.
+func (x *Drawer) WithContentSize(contentSize corefoundation.CGSize) *Drawer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentSize:"), contentSize)
+	return x
+}
+
+// WithMinContentSize the minimum allowed size of the receiver’s content area.
+func (x *Drawer) WithMinContentSize(minContentSize corefoundation.CGSize) *Drawer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinContentSize:"), minContentSize)
+	return x
+}
+
+// WithMaxContentSize the maximum allowed size of the receiver’s content area.
+func (x *Drawer) WithMaxContentSize(maxContentSize corefoundation.CGSize) *Drawer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxContentSize:"), maxContentSize)
+	return x
+}
+
+// WithLeadingOffset the receiver’s leading offset.
 func (x *Drawer) WithLeadingOffset(leadingOffset float64) *Drawer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeadingOffset:"), leadingOffset)
 	return x
 }
 
-// The receiver’s trailing offset.
-//
-// WithTrailingOffset sets trailingOffset and returns the receiver so calls can be chained.
+// WithTrailingOffset the receiver’s trailing offset.
 func (x *Drawer) WithTrailingOffset(trailingOffset float64) *Drawer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrailingOffset:"), trailingOffset)
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *Drawer) WithNextResponder(nextResponder ResponderProvider) *Drawer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets menu and returns the receiver so calls can be chained.
+// WithMenu returns the responder’s menu.
 func (x *Drawer) WithMenu(menu *Menu) *Drawer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity an object encapsulating a user activity supported by this responder.
 func (x *Drawer) WithUserActivity(userActivity obj.Object) *Drawer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *Drawer) WithTouchBar(touchBar *TouchBar) *Drawer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// If the receiver is closed, this method opens it.
+// Open if the receiver is closed, this method opens it.
 func (x *Drawer) Open() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("open"))
 }
 
-// If the receiver is open, this method closes it.
+// Close if the receiver is open, this method closes it.
 func (x *Drawer) Close() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
 }
 
-// An action method to open the drawer.
+// Open2 an action method to open the drawer.
 func (x *Drawer) Open2(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("open:"), objref.IDOf(sender))
 }
 
-// An action method to close the receiver.
+// Close2 an action method to close the receiver.
 func (x *Drawer) Close2(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close:"), objref.IDOf(sender))
 }
 
-// Toggles the drawer open or closed.
+// Toggle toggles the drawer open or closed.
 func (x *Drawer) Toggle(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toggle:"), objref.IDOf(sender))
 }
 
+// ParentWindow wraps the corresponding Objective-C method.
 func (x *Drawer) ParentWindow() *Window {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentWindow"))
 	return WindowFromID(_r)
 }
 
+// SetParentWindow wraps the corresponding Objective-C method.
 func (x *Drawer) SetParentWindow(parentWindow *Window) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
 }
 
+// ContentView wraps the corresponding Objective-C method.
 func (x *Drawer) ContentView() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentView"))
 	return ViewFromID(_r)
 }
 
+// SetContentView wraps the corresponding Objective-C method.
 func (x *Drawer) SetContentView(contentView *View) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 }
 
+// State wraps the corresponding Objective-C method.
 func (x *Drawer) State() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("state"))
 	return _r
 }
 
+// ContentSize wraps the corresponding Objective-C method.
+func (x *Drawer) ContentSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("contentSize"))
+	return _r
+}
+
+// SetContentSize wraps the corresponding Objective-C method.
+func (x *Drawer) SetContentSize(contentSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentSize:"), contentSize)
+}
+
+// MinContentSize wraps the corresponding Objective-C method.
+func (x *Drawer) MinContentSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("minContentSize"))
+	return _r
+}
+
+// SetMinContentSize wraps the corresponding Objective-C method.
+func (x *Drawer) SetMinContentSize(minContentSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinContentSize:"), minContentSize)
+}
+
+// MaxContentSize wraps the corresponding Objective-C method.
+func (x *Drawer) MaxContentSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("maxContentSize"))
+	return _r
+}
+
+// SetMaxContentSize wraps the corresponding Objective-C method.
+func (x *Drawer) SetMaxContentSize(maxContentSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxContentSize:"), maxContentSize)
+}
+
+// LeadingOffset wraps the corresponding Objective-C method.
 func (x *Drawer) LeadingOffset() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("leadingOffset"))
 	return _r
 }
 
+// SetLeadingOffset wraps the corresponding Objective-C method.
 func (x *Drawer) SetLeadingOffset(leadingOffset float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeadingOffset:"), leadingOffset)
 }
 
+// TrailingOffset wraps the corresponding Objective-C method.
 func (x *Drawer) TrailingOffset() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("trailingOffset"))
 	return _r
 }
 
+// SetTrailingOffset wraps the corresponding Objective-C method.
 func (x *Drawer) SetTrailingOffset(trailingOffset float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrailingOffset:"), trailingOffset)
 }
@@ -199,6 +232,9 @@ type Drawerable interface {
 	obj.Object
 	WithParentWindow(parentWindow WindowProvider) *Drawer
 	WithContentView(contentView ViewProvider) *Drawer
+	WithContentSize(contentSize corefoundation.CGSize) *Drawer
+	WithMinContentSize(minContentSize corefoundation.CGSize) *Drawer
+	WithMaxContentSize(maxContentSize corefoundation.CGSize) *Drawer
 	WithLeadingOffset(leadingOffset float64) *Drawer
 	WithTrailingOffset(trailingOffset float64) *Drawer
 	WithNextResponder(nextResponder ResponderProvider) *Drawer
@@ -215,6 +251,12 @@ type Drawerable interface {
 	ContentView() *View
 	SetContentView(contentView *View)
 	State() int
+	ContentSize() corefoundation.CGSize
+	SetContentSize(contentSize corefoundation.CGSize)
+	MinContentSize() corefoundation.CGSize
+	SetMinContentSize(minContentSize corefoundation.CGSize)
+	MaxContentSize() corefoundation.CGSize
+	SetMaxContentSize(maxContentSize corefoundation.CGSize)
 	LeadingOffset() float64
 	SetLeadingOffset(leadingOffset float64)
 	TrailingOffset() float64
@@ -222,3 +264,5 @@ type Drawerable interface {
 }
 
 var _ Drawerable = (*Drawer)(nil)
+
+var _ ResponderProvider = (*Drawer)(nil)

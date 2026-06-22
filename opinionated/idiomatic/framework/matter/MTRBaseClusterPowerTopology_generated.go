@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Power Topology
-//
 // MTRBaseClusterPowerTopology is an idiomatic wrapper over the Objective-C class MTRBaseClusterPowerTopology.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
+//
+// Cluster Power Topology
 type MTRBaseClusterPowerTopology struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterPowerTopologyFromID adopts an existing Objective-C object as a MTRBaseClusterPowerTopology
@@ -27,7 +28,8 @@ func MTRBaseClusterPowerTopologyFromID(id objc.ID) *MTRBaseClusterPowerTopology 
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterPowerTopology{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterPowerTopology{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,37 +42,23 @@ func mTRBaseClusterPowerTopologyAdopt(id objc.ID) *MTRBaseClusterPowerTopology {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterPowerTopology{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterPowerTopology{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterPowerTopology) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterPowerTopology) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterPowerTopology) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterPowerTopologyWithDeviceEndpointIDQueue creates a new MTRBaseClusterPowerTopology.
+// NewMTRBaseClusterPowerTopologyWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterPowerTopologyWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterPowerTopology {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterPowerTopology")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterPowerTopologyAdopt(_id)
 }
 
+// ReadAttributeAvailableEndpointsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAvailableEndpointsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPowerTopology) ReadAttributeAvailableEndpointsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPowerTopology) ReadAttributeAvailableEndpointsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -92,8 +80,10 @@ func (x *MTRBaseClusterPowerTopology) ReadAttributeAvailableEndpointsWithComplet
 	}
 }
 
+// SubscribeAttributeAvailableEndpointsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAvailableEndpointsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPowerTopology) SubscribeAttributeAvailableEndpointsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterPowerTopology) SubscribeAttributeAvailableEndpointsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -115,8 +105,10 @@ func (x *MTRBaseClusterPowerTopology) SubscribeAttributeAvailableEndpointsWithPa
 	}
 }
 
+// ReadAttributeActiveEndpointsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeActiveEndpointsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPowerTopology) ReadAttributeActiveEndpointsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPowerTopology) ReadAttributeActiveEndpointsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -138,8 +130,10 @@ func (x *MTRBaseClusterPowerTopology) ReadAttributeActiveEndpointsWithCompletion
 	}
 }
 
+// SubscribeAttributeActiveEndpointsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActiveEndpointsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPowerTopology) SubscribeAttributeActiveEndpointsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterPowerTopology) SubscribeAttributeActiveEndpointsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -161,8 +155,10 @@ func (x *MTRBaseClusterPowerTopology) SubscribeAttributeActiveEndpointsWithParam
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPowerTopology) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPowerTopology) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -184,8 +180,10 @@ func (x *MTRBaseClusterPowerTopology) ReadAttributeGeneratedCommandListWithCompl
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPowerTopology) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterPowerTopology) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -207,8 +205,10 @@ func (x *MTRBaseClusterPowerTopology) SubscribeAttributeGeneratedCommandListWith
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPowerTopology) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPowerTopology) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -230,8 +230,10 @@ func (x *MTRBaseClusterPowerTopology) ReadAttributeAcceptedCommandListWithComple
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPowerTopology) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterPowerTopology) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -253,8 +255,10 @@ func (x *MTRBaseClusterPowerTopology) SubscribeAttributeAcceptedCommandListWithP
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPowerTopology) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPowerTopology) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -276,8 +280,10 @@ func (x *MTRBaseClusterPowerTopology) ReadAttributeAttributeListWithCompletion(c
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPowerTopology) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterPowerTopology) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -299,8 +305,10 @@ func (x *MTRBaseClusterPowerTopology) SubscribeAttributeAttributeListWithParamsS
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPowerTopology) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPowerTopology) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -322,8 +330,10 @@ func (x *MTRBaseClusterPowerTopology) ReadAttributeFeatureMapWithCompletion(ctx 
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPowerTopology) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterPowerTopology) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -345,8 +355,10 @@ func (x *MTRBaseClusterPowerTopology) SubscribeAttributeFeatureMapWithParamsSubs
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPowerTopology) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterPowerTopology) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -368,8 +380,10 @@ func (x *MTRBaseClusterPowerTopology) ReadAttributeClusterRevisionWithCompletion
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterPowerTopology) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterPowerTopology) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -411,3 +425,7 @@ type MTRBaseClusterPowerTopologyable interface {
 }
 
 var _ MTRBaseClusterPowerTopologyable = (*MTRBaseClusterPowerTopology)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterPowerTopology)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterPowerTopology)(nil)

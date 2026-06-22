@@ -6,17 +6,20 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that returns the maximum value for each column in an image.
-//
 // ImageReduceColumnMax is an idiomatic wrapper over the Objective-C class MPSImageReduceColumnMax.
+//
+// It embeds [ImageReduceUnary], promoting that type's methods.
+//
+// A filter that returns the maximum value for each column in an image.
 type ImageReduceColumnMax struct {
-	objref.Handle
+	ImageReduceUnary
 }
 
 // ImageReduceColumnMaxFromID adopts an existing Objective-C object as a ImageReduceColumnMax
@@ -25,7 +28,8 @@ func ImageReduceColumnMaxFromID(id objc.ID) *ImageReduceColumnMax {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageReduceColumnMax{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageReduceColumnMax{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func imageReduceColumnMaxAdopt(id objc.ID) *ImageReduceColumnMax {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageReduceColumnMax{Handle: objref.Wrap(id)}
+	x := &ImageReduceColumnMax{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ImageReduceColumnMax) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageReduceColumnMax) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageReduceColumnMax) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewImageReduceColumnMax creates a new ImageReduceColumnMax.
@@ -64,9 +54,25 @@ func NewImageReduceColumnMax() *ImageReduceColumnMax {
 	return imageReduceColumnMaxAdopt(_id)
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
+func (x *ImageReduceColumnMax) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceColumnMax {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return x
+}
+
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
+func (x *ImageReduceColumnMax) WithOffset(offset mpscore.MPSOffset) *ImageReduceColumnMax {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (x *ImageReduceColumnMax) WithClipRect(clipRect metal.MTLRegion) *ImageReduceColumnMax {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
+// WithLabel the string that identifies the kernel.
 func (x *ImageReduceColumnMax) WithLabel(label string) *ImageReduceColumnMax {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -75,7 +81,16 @@ func (x *ImageReduceColumnMax) WithLabel(label string) *ImageReduceColumnMax {
 // ImageReduceColumnMaxable is the interface implemented by [ImageReduceColumnMax], for mocking and DI.
 type ImageReduceColumnMaxable interface {
 	obj.Object
+	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceColumnMax
+	WithOffset(offset mpscore.MPSOffset) *ImageReduceColumnMax
+	WithClipRect(clipRect metal.MTLRegion) *ImageReduceColumnMax
 	WithLabel(label string) *ImageReduceColumnMax
 }
 
 var _ ImageReduceColumnMaxable = (*ImageReduceColumnMax)(nil)
+
+var _ ImageReduceUnaryProvider = (*ImageReduceColumnMax)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageReduceColumnMax)(nil)
+
+var _ KernelProvider = (*ImageReduceColumnMax)(nil)

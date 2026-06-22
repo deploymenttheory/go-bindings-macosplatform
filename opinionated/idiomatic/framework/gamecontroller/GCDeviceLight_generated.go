@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The colored light on a device.
-//
 // DeviceLight is an idiomatic wrapper over the Objective-C class GCDeviceLight.
+//
+// The colored light on a device.
 type DeviceLight struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DeviceLightFromID(id objc.ID) *DeviceLight {
 	if id == 0 {
 		return nil
 	}
-	x := &DeviceLight{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DeviceLight{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func deviceLightAdopt(id objc.ID) *DeviceLight {
 	if id == 0 {
 		return nil
 	}
-	x := &DeviceLight{Handle: objref.Wrap(id)}
+	x := &DeviceLight{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *DeviceLight) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DeviceLight) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDeviceLight creates a new DeviceLight.
 func NewDeviceLight() *DeviceLight {
 	_id := objc.Send[objc.ID](objc.ID(_class("GCDeviceLight")), objc.RegisterName("new"))
 	return deviceLightAdopt(_id)
 }
 
-// The color of a device’s light.
-//
-// WithColor sets color and returns the receiver so calls can be chained.
+// WithColor the color of a device’s light.
 func (x *DeviceLight) WithColor(color *Color) *DeviceLight {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 	return x
 }
 
+// Color wraps the corresponding Objective-C method.
 func (x *DeviceLight) Color() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
 	return ColorFromID(_r)
 }
 
+// SetColor wraps the corresponding Objective-C method.
 func (x *DeviceLight) SetColor(color *Color) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 }

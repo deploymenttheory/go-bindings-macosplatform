@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An element that represents text within project section content.
-//
 // ProjectTextElement is an idiomatic wrapper over the Objective-C class PHProjectTextElement.
+//
+// It embeds [ProjectElement], promoting that type's methods.
+//
+// An element that represents text within project section content.
 type ProjectTextElement struct {
-	objref.Handle
+	ProjectElement
 }
 
 // ProjectTextElementFromID adopts an existing Objective-C object as a ProjectTextElement
@@ -25,7 +26,8 @@ func ProjectTextElementFromID(id objc.ID) *ProjectTextElement {
 	if id == 0 {
 		return nil
 	}
-	x := &ProjectTextElement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ProjectTextElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func projectTextElementAdopt(id objc.ID) *ProjectTextElement {
 	if id == 0 {
 		return nil
 	}
-	x := &ProjectTextElement{Handle: objref.Wrap(id)}
+	x := &ProjectTextElement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ProjectTextElement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ProjectTextElement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ProjectTextElement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewProjectTextElement creates a new ProjectTextElement.
@@ -64,7 +52,7 @@ func NewProjectTextElement() *ProjectTextElement {
 	return projectTextElementAdopt(_id)
 }
 
-// Unformatted, raw string for the text element
+// Text unformatted, raw string for the text element
 func (x *ProjectTextElement) Text() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("text"))
 	if _r == 0 {
@@ -73,12 +61,13 @@ func (x *ProjectTextElement) Text() string {
 	return purego.GoString(_r)
 }
 
-// If the text was presented to the user in a stylized manner in Photos, attributedText will provide access to those same attributes.
+// AttributedText if the text was presented to the user in a stylized manner in Photos, attributedText will provide access to those same attributes.
 func (x *ProjectTextElement) AttributedText() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedText"))
 	return obj.Wrap(_r)
 }
 
+// TextElementType wraps the corresponding Objective-C method.
 func (x *ProjectTextElement) TextElementType() ProjectTextElementType {
 	_r := objc.Send[ProjectTextElementType](objref.IDOf(x), objc.RegisterName("textElementType"))
 	return _r
@@ -93,3 +82,5 @@ type ProjectTextElementable interface {
 }
 
 var _ ProjectTextElementable = (*ProjectTextElement)(nil)
+
+var _ ProjectElementProvider = (*ProjectTextElement)(nil)

@@ -23,7 +23,8 @@ func MTRColorControlClusterMoveToColorTemperatureParamsFromID(id objc.ID) *MTRCo
 	if id == 0 {
 		return nil
 	}
-	x := &MTRColorControlClusterMoveToColorTemperatureParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRColorControlClusterMoveToColorTemperatureParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRColorControlClusterMoveToColorTemperatureParamsAdopt(id objc.ID) *MTRCol
 	if id == 0 {
 		return nil
 	}
-	x := &MTRColorControlClusterMoveToColorTemperatureParams{Handle: objref.Wrap(id)}
+	x := &MTRColorControlClusterMoveToColorTemperatureParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,119 +58,133 @@ func (x *MTRColorControlClusterMoveToColorTemperatureParams) IsKind(className st
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRColorControlClusterMoveToColorTemperatureParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRColorControlClusterMoveToColorTemperatureParams creates a new MTRColorControlClusterMoveToColorTemperatureParams.
 func NewMTRColorControlClusterMoveToColorTemperatureParams() *MTRColorControlClusterMoveToColorTemperatureParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRColorControlClusterMoveToColorTemperatureParams")), objc.RegisterName("new"))
 	return mTRColorControlClusterMoveToColorTemperatureParamsAdopt(_id)
 }
 
-// WithColorTemperatureMireds sets colorTemperatureMireds and returns the receiver so calls can be chained.
+// WithColorTemperatureMireds sets the property and returns the receiver so calls can be chained.
 func (x *MTRColorControlClusterMoveToColorTemperatureParams) WithColorTemperatureMireds(colorTemperatureMireds obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorTemperatureMireds:"), objref.IDOf(colorTemperatureMireds))
 	return x
 }
 
-// WithTransitionTime sets transitionTime and returns the receiver so calls can be chained.
+// WithTransitionTime sets the property and returns the receiver so calls can be chained.
 func (x *MTRColorControlClusterMoveToColorTemperatureParams) WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return x
 }
 
-// WithOptionsMask sets optionsMask and returns the receiver so calls can be chained.
+// WithOptionsMask sets the property and returns the receiver so calls can be chained.
 func (x *MTRColorControlClusterMoveToColorTemperatureParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return x
 }
 
-// WithOptionsOverride sets optionsOverride and returns the receiver so calls can be chained.
+// WithOptionsOverride sets the property and returns the receiver so calls can be chained.
 func (x *MTRColorControlClusterMoveToColorTemperatureParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRColorControlClusterMoveToColorTemperatureParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRColorControlClusterMoveToColorTemperatureParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// WithColorTemperature sets colorTemperature and returns the receiver so calls can be chained.
+// WithColorTemperature sets the property and returns the receiver so calls can be chained.
 func (x *MTRColorControlClusterMoveToColorTemperatureParams) WithColorTemperature(colorTemperature obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorTemperature:"), objref.IDOf(colorTemperature))
 	return x
 }
 
+// ColorTemperatureMireds wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveToColorTemperatureParams) ColorTemperatureMireds() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorTemperatureMireds"))
 	return obj.Wrap(_r)
 }
 
+// SetColorTemperatureMireds wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveToColorTemperatureParams) SetColorTemperatureMireds(colorTemperatureMireds obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorTemperatureMireds:"), objref.IDOf(colorTemperatureMireds))
 }
 
+// TransitionTime wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveToColorTemperatureParams) TransitionTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitionTime"))
 	return obj.Wrap(_r)
 }
 
+// SetTransitionTime wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveToColorTemperatureParams) SetTransitionTime(transitionTime obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 }
 
+// OptionsMask wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveToColorTemperatureParams) OptionsMask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
 }
 
+// SetOptionsMask wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveToColorTemperatureParams) SetOptionsMask(optionsMask obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 }
 
+// OptionsOverride wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveToColorTemperatureParams) OptionsOverride() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)
 }
 
+// SetOptionsOverride wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveToColorTemperatureParams) SetOptionsOverride(optionsOverride obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRColorControlClusterMoveToColorTemperatureParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveToColorTemperatureParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRColorControlClusterMoveToColorTemperatureParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveToColorTemperatureParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
+// ColorTemperature wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveToColorTemperatureParams) ColorTemperature() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorTemperature"))
 	return obj.Wrap(_r)
 }
 
+// SetColorTemperature wraps the corresponding Objective-C method.
 func (x *MTRColorControlClusterMoveToColorTemperatureParams) SetColorTemperature(colorTemperature obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorTemperature:"), objref.IDOf(colorTemperature))
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unique identifier for a VM.
-//
 // MacMachineIdentifier is an idiomatic wrapper over the Objective-C class VZMacMachineIdentifier.
+//
+// A unique identifier for a VM.
 type MacMachineIdentifier struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MacMachineIdentifierFromID(id objc.ID) *MacMachineIdentifier {
 	if id == 0 {
 		return nil
 	}
-	x := &MacMachineIdentifier{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MacMachineIdentifier{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func macMachineIdentifierAdopt(id objc.ID) *MacMachineIdentifier {
 	if id == 0 {
 		return nil
 	}
-	x := &MacMachineIdentifier{Handle: objref.Wrap(id)}
+	x := &MacMachineIdentifier{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +60,26 @@ func (x *MacMachineIdentifier) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MacMachineIdentifier) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMacMachineIdentifier creates a new MacMachineIdentifier.
 func NewMacMachineIdentifier() *MacMachineIdentifier {
 	_id := objc.Send[objc.ID](objc.ID(_class("VZMacMachineIdentifier")), objc.RegisterName("new"))
 	return macMachineIdentifierAdopt(_id)
 }
 
-// Create a machine identifier described by the specified data representation.
-//
-// NewMacMachineIdentifierWithDataRepresentation creates a new MacMachineIdentifier.
+// NewMacMachineIdentifierWithDataRepresentation create a machine identifier described by the specified data representation.
 func NewMacMachineIdentifierWithDataRepresentation(dataRepresentation obj.Object) *MacMachineIdentifier {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMacMachineIdentifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:"), objref.IDOf(dataRepresentation))
 	return macMachineIdentifierAdopt(_id)
 }
 
+// DataRepresentation wraps the corresponding Objective-C method.
 func (x *MacMachineIdentifier) DataRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
 	return obj.Wrap(_r)

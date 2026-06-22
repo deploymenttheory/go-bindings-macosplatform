@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that manages device connections for a provider.
-//
 // ExtensionProvider is an idiomatic wrapper over the Objective-C class CMIOExtensionProvider.
+//
+// An object that manages device connections for a provider.
 type ExtensionProvider struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func ExtensionProviderFromID(id objc.ID) *ExtensionProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExtensionProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func extensionProviderAdopt(id objc.ID) *ExtensionProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionProvider{Handle: objref.Wrap(id)}
+	x := &ExtensionProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,13 +62,19 @@ func (x *ExtensionProvider) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExtensionProvider) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewExtensionProvider creates a new ExtensionProvider.
 func NewExtensionProvider() *ExtensionProvider {
 	_id := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionProvider")), objc.RegisterName("new"))
 	return extensionProviderAdopt(_id)
 }
 
-// Adds a device to a provider.
+// AddDevice adds a device to a provider.
 func (x *ExtensionProvider) AddDevice(device *ExtensionDevice) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addDevice:error:"), objref.IDOf(device), unsafe.Pointer(&_nsErr))
@@ -76,7 +84,7 @@ func (x *ExtensionProvider) AddDevice(device *ExtensionDevice) error {
 	return nil
 }
 
-// Removes a device from a provider.
+// RemoveDevice removes a device from a provider.
 func (x *ExtensionProvider) RemoveDevice(device *ExtensionDevice) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeDevice:error:"), objref.IDOf(device), unsafe.Pointer(&_nsErr))
@@ -86,18 +94,18 @@ func (x *ExtensionProvider) RemoveDevice(device *ExtensionDevice) error {
 	return nil
 }
 
-// Notifies connected clients of device property changes.
+// NotifyPropertiesChanged notifies connected clients of device property changes.
 func (x *ExtensionProvider) NotifyPropertiesChanged(propertyStates obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notifyPropertiesChanged:"), objref.IDOf(propertyStates))
 }
 
-// The dispatch queue on which source methods from the provider/device/stream will be called.
+// ClientQueue the dispatch queue on which source methods from the provider/device/stream will be called.
 func (x *ExtensionProvider) ClientQueue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientQueue"))
 	return obj.Wrap(_r)
 }
 
-// The array of connected clients. This property is key-value observable.
+// ConnectedClients the array of connected clients. This property is key-value observable.
 //
 // ConnectedClients returns the collection as a Go slice.
 func (x *ExtensionProvider) ConnectedClients() []*ExtensionClient {
@@ -105,7 +113,7 @@ func (x *ExtensionProvider) ConnectedClients() []*ExtensionClient {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ExtensionClient { return ExtensionClientFromID(_id) })
 }
 
-// The devices array of the provider. This property is not key-value observable.
+// Devices the devices array of the provider. This property is not key-value observable.
 //
 // Devices returns the collection as a Go slice.
 func (x *ExtensionProvider) Devices() []*ExtensionDevice {

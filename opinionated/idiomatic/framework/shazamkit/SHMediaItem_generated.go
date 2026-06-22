@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the metadata for a reference signature.
-//
 // MediaItem is an idiomatic wrapper over the Objective-C class SHMediaItem.
+//
+// MediaItem is an abstract base — you do not construct it directly. Construct one of [MatchedMediaItem] and pass it where a MediaItem is accepted.
+//
+// An object that represents the metadata for a reference signature.
 type MediaItem struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func MediaItemFromID(id objc.ID) *MediaItem {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MediaItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func mediaItemAdopt(id objc.ID) *MediaItem {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaItem{Handle: objref.Wrap(id)}
+	x := &MediaItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +62,25 @@ func (x *MediaItem) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMediaItem creates a new MediaItem.
-func NewMediaItem() *MediaItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("SHMediaItem")), objc.RegisterName("new"))
-	return mediaItemAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MediaItem) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Accesses the property for the specified key for reading.
+// ValueForProperty accesses the property for the specified key for reading.
 func (x *MediaItem) ValueForProperty(property obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForProperty:"), objref.IDOf(property))
 	return obj.Wrap(_r)
 }
 
-// Accesses the property for the specified key for reading.
+// ObjectForKeyedSubscript accesses the property for the specified key for reading.
 func (x *MediaItem) ObjectForKeyedSubscript(key obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(key))
 	return obj.Wrap(_r)
 }
 
-// The Shazam ID for the song.
+// ShazamID the Shazam ID for the song.
 func (x *MediaItem) ShazamID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shazamID"))
 	if _r == 0 {
@@ -85,7 +89,7 @@ func (x *MediaItem) ShazamID() string {
 	return purego.GoString(_r)
 }
 
-// A title for the media item.
+// Title a title for the media item.
 func (x *MediaItem) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -94,7 +98,7 @@ func (x *MediaItem) Title() string {
 	return purego.GoString(_r)
 }
 
-// A subtitle for the media item.
+// Subtitle a subtitle for the media item.
 func (x *MediaItem) Subtitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitle"))
 	if _r == 0 {
@@ -103,7 +107,7 @@ func (x *MediaItem) Subtitle() string {
 	return purego.GoString(_r)
 }
 
-// The name of the artist for the media item, such as the performer of a song.
+// Artist the name of the artist for the media item, such as the performer of a song.
 func (x *MediaItem) Artist() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("artist"))
 	if _r == 0 {
@@ -112,7 +116,7 @@ func (x *MediaItem) Artist() string {
 	return purego.GoString(_r)
 }
 
-// An array of genre names for the media item. The array is empty if there are no media items.
+// Genres an array of genre names for the media item. The array is empty if there are no media items.
 //
 // Genres returns the collection as a Go slice.
 func (x *MediaItem) Genres() []string {
@@ -120,7 +124,7 @@ func (x *MediaItem) Genres() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// The Apple Music ID for the song.
+// AppleMusicID the Apple Music ID for the song.
 func (x *MediaItem) AppleMusicID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appleMusicID"))
 	if _r == 0 {
@@ -129,37 +133,37 @@ func (x *MediaItem) AppleMusicID() string {
 	return purego.GoString(_r)
 }
 
-// A link to the Apple Music page that contains the full information for the song.
+// AppleMusicURL a link to the Apple Music page that contains the full information for the song.
 func (x *MediaItem) AppleMusicURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appleMusicURL"))
 	return obj.Wrap(_r)
 }
 
-// A link to the Shazam Music catalog page that contains the full information for the song. This link opens the Shazam app or App Clip if it's available on the device.
+// WebURL a link to the Shazam Music catalog page that contains the full information for the song. This link opens the Shazam app or App Clip if it's available on the device.
 func (x *MediaItem) WebURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webURL"))
 	return obj.Wrap(_r)
 }
 
-// The URL for artwork for the media item, such as an album cover.
+// ArtworkURL the URL for artwork for the media item, such as an album cover.
 func (x *MediaItem) ArtworkURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("artworkURL"))
 	return obj.Wrap(_r)
 }
 
-// The URL for a video for the media item, such as a music video.
+// VideoURL the URL for a video for the media item, such as a music video.
 func (x *MediaItem) VideoURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoURL"))
 	return obj.Wrap(_r)
 }
 
-// A Boolean value that indicates whether the media item contains explicit content.
+// ExplicitContent a Boolean value that indicates whether the media item contains explicit content.
 func (x *MediaItem) ExplicitContent() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("explicitContent"))
 	return _r
 }
 
-// The International Standard Recording Code (ISRC) for the media item.
+// Isrc the International Standard Recording Code (ISRC) for the media item.
 func (x *MediaItem) Isrc() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isrc"))
 	if _r == 0 {
@@ -168,7 +172,7 @@ func (x *MediaItem) Isrc() string {
 	return purego.GoString(_r)
 }
 
-// An array of ranges that indicate the offsets within the reference signature that this media item describes.
+// TimeRanges an array of ranges that indicate the offsets within the reference signature that this media item describes.
 //
 // TimeRanges returns the collection as a Go slice.
 func (x *MediaItem) TimeRanges() []*Range {
@@ -176,7 +180,7 @@ func (x *MediaItem) TimeRanges() []*Range {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Range { return RangeFromID(_id) })
 }
 
-// An array of ranges that indicate the frequency skews in the reference signature that this media item describes.
+// FrequencySkewRanges an array of ranges that indicate the frequency skews in the reference signature that this media item describes.
 //
 // FrequencySkewRanges returns the collection as a Go slice.
 func (x *MediaItem) FrequencySkewRanges() []*Range {
@@ -184,7 +188,7 @@ func (x *MediaItem) FrequencySkewRanges() []*Range {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Range { return RangeFromID(_id) })
 }
 
-// The date the media item was created.
+// CreationDate the date the media item was created.
 func (x *MediaItem) CreationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creationDate"))
 	return obj.Wrap(_r)
@@ -213,3 +217,10 @@ type MediaItemable interface {
 }
 
 var _ MediaItemable = (*MediaItem)(nil)
+
+// isMediaItem marks MediaItem — and, by embedding promotion, its
+// subclasses — as a member of the MediaItem hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MediaItem) isMediaItem() {}
+
+var _ MediaItemProvider = (*MediaItem)(nil)

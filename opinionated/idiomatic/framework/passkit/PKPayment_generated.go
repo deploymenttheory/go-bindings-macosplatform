@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Represents the result of authorizing a payment request and contains payment information, encrypted in the payment token.
-//
 // Payment is an idiomatic wrapper over the Objective-C class PKPayment.
+//
+// Represents the result of authorizing a payment request and contains payment information, encrypted in the payment token.
 type Payment struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PaymentFromID(id objc.ID) *Payment {
 	if id == 0 {
 		return nil
 	}
-	x := &Payment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Payment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func paymentAdopt(id objc.ID) *Payment {
 	if id == 0 {
 		return nil
 	}
-	x := &Payment{Handle: objref.Wrap(id)}
+	x := &Payment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,27 +60,37 @@ func (x *Payment) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Payment) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPayment creates a new Payment.
 func NewPayment() *Payment {
 	_id := objc.Send[objc.ID](objc.ID(_class("PKPayment")), objc.RegisterName("new"))
 	return paymentAdopt(_id)
 }
 
+// Token wraps the corresponding Objective-C method.
 func (x *Payment) Token() *PaymentToken {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("token"))
 	return PaymentTokenFromID(_r)
 }
 
+// BillingContact wraps the corresponding Objective-C method.
 func (x *Payment) BillingContact() *Contact {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("billingContact"))
 	return ContactFromID(_r)
 }
 
+// ShippingContact wraps the corresponding Objective-C method.
 func (x *Payment) ShippingContact() *Contact {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shippingContact"))
 	return ContactFromID(_r)
 }
 
+// ShippingMethod wraps the corresponding Objective-C method.
 func (x *Payment) ShippingMethod() *ShippingMethod {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shippingMethod"))
 	return ShippingMethodFromID(_r)

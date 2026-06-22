@@ -6,15 +6,16 @@ package screensaver
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that defines the interface for subclassers to interact with the screen saver infrastructure.
-//
 // ScreenSaverView is an idiomatic wrapper over the Objective-C class ScreenSaverView.
+//
+// An abstract class that defines the interface for subclassers to interact with the screen saver infrastructure.
 type ScreenSaverView struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func ScreenSaverViewFromID(id objc.ID) *ScreenSaverView {
 	if id == 0 {
 		return nil
 	}
-	x := &ScreenSaverView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScreenSaverView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func screenSaverViewAdopt(id objc.ID) *ScreenSaverView {
 	if id == 0 {
 		return nil
 	}
-	x := &ScreenSaverView{Handle: objref.Wrap(id)}
+	x := &ScreenSaverView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,65 +61,70 @@ func (x *ScreenSaverView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewScreenSaverView creates a new ScreenSaverView.
-func NewScreenSaverView() *ScreenSaverView {
-	_id := objc.Send[objc.ID](objc.ID(_class("ScreenSaverView")), objc.RegisterName("new"))
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScreenSaverView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewScreenSaverViewWithFrameIsPreview creates a newly allocated screen saver view with the specified frame rectangle and preview information.
+func NewScreenSaverViewWithFrameIsPreview(frame corefoundation.CGRect, isPreview bool) *ScreenSaverView {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ScreenSaverView")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:isPreview:"), frame, isPreview)
 	return screenSaverViewAdopt(_id)
 }
 
-// The time interval between animation frames.
-//
-// WithAnimationTimeInterval sets animationTimeInterval and returns the receiver so calls can be chained.
+// WithAnimationTimeInterval the time interval between animation frames.
 func (x *ScreenSaverView) WithAnimationTimeInterval(animationTimeInterval float64) *ScreenSaverView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationTimeInterval:"), animationTimeInterval)
 	return x
 }
 
-// Activates the periodic timer that animates the screen saver.
+// StartAnimation activates the periodic timer that animates the screen saver.
 func (x *ScreenSaverView) StartAnimation() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startAnimation"))
 }
 
-// Deactivates the timer that advances the animation.
+// StopAnimation deactivates the timer that advances the animation.
 func (x *ScreenSaverView) StopAnimation() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopAnimation"))
 }
 
-// Advances the screen saver’s animation by a single frame.
+// AnimateOneFrame advances the screen saver’s animation by a single frame.
 func (x *ScreenSaverView) AnimateOneFrame() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animateOneFrame"))
 }
 
-// The time interval between animation frames. If your screen saver has particular requirements for time between animation frames, call this method to set the animation rate to a reasonable value.
+// AnimationTimeInterval the time interval between animation frames. If your screen saver has particular requirements for time between animation frames, call this method to set the animation rate to a reasonable value.
 func (x *ScreenSaverView) AnimationTimeInterval() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("animationTimeInterval"))
 	return _r
 }
 
-// The time interval between animation frames. If your screen saver has particular requirements for time between animation frames, call this method to set the animation rate to a reasonable value.
+// SetAnimationTimeInterval the time interval between animation frames. If your screen saver has particular requirements for time between animation frames, call this method to set the animation rate to a reasonable value.
 func (x *ScreenSaverView) SetAnimationTimeInterval(animationTimeInterval float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationTimeInterval:"), animationTimeInterval)
 }
 
-// A Boolean value that indicates whether the screen saver is animating. ## Overview The value of this property is <doc://com.apple.documentation/documentation/objectivec/yes> when the screen saver is animating, and <doc://com.apple.documentation/documentation/objectivec/no> when it isn’t. ## See also - “ScreenSaver/ScreenSaverView/stopAnimation“ - “ScreenSaver/ScreenSaverView/startAnimation“
+// IsAnimating a Boolean value that indicates whether the screen saver is animating. ## Overview The value of this property is <doc://com.apple.documentation/documentation/objectivec/yes> when the screen saver is animating, and <doc://com.apple.documentation/documentation/objectivec/no> when it isn’t. ## See also - “ScreenSaver/ScreenSaverView/stopAnimation“ - “ScreenSaver/ScreenSaverView/startAnimation“
 func (x *ScreenSaverView) IsAnimating() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAnimating"))
 	return _r
 }
 
-// A Boolean value that indicates whether the screen saver has an associated configuration sheet. If you provide a configuration sheet in your bundle, override this method and return <doc://com.apple.documentation/documentation/objectivec/yes>. ## See also - “ScreenSaver/ScreenSaverView/configureSheet“
+// HasConfigureSheet a Boolean value that indicates whether the screen saver has an associated configuration sheet. If you provide a configuration sheet in your bundle, override this method and return <doc://com.apple.documentation/documentation/objectivec/yes>. ## See also - “ScreenSaver/ScreenSaverView/configureSheet“
 func (x *ScreenSaverView) HasConfigureSheet() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasConfigureSheet"))
 	return _r
 }
 
-// The window that contains the controls to configure the screen saver. The system runs this window as a sheet, so include buttons that allow the user to end the modal session in which the sheet runs. When the user dismisses the sheet, the controller in charge of the sheet must end the document modal session by calling the <doc://com.apple.documentation/documentation/appkit/nsapplication> method <doc://com.apple.documentation/documentation/appkit/nsapplication/1428503-endsheet> with the sheet’s window as the argument. ## See also - “ScreenSaver/ScreenSaverView/hasConfigureSheet“
+// ConfigureSheet the window that contains the controls to configure the screen saver. The system runs this window as a sheet, so include buttons that allow the user to end the modal session in which the sheet runs. When the user dismisses the sheet, the controller in charge of the sheet must end the document modal session by calling the <doc://com.apple.documentation/documentation/appkit/nsapplication> method <doc://com.apple.documentation/documentation/appkit/nsapplication/1428503-endsheet> with the sheet’s window as the argument. ## See also - “ScreenSaver/ScreenSaverView/hasConfigureSheet“
 func (x *ScreenSaverView) ConfigureSheet() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configureSheet"))
 	return obj.Wrap(_r)
 }
 
-// A Boolean value that indicates whether the screen saver view is set to a size suitable for previewing its content. ## Overview The system sets the value of this property to <doc://com.apple.documentation/documentation/objectivec/yes> when it creates a smaller preview of your screen saver. When the value is <doc://com.apple.documentation/documentation/objectivec/no>, your view matches the size of the screen. Use this property to adjust the content you present. For example, you might change the drawing parameters or data you display in your view.
+// IsPreview a Boolean value that indicates whether the screen saver view is set to a size suitable for previewing its content. ## Overview The system sets the value of this property to <doc://com.apple.documentation/documentation/objectivec/yes> when it creates a smaller preview of your screen saver. When the value is <doc://com.apple.documentation/documentation/objectivec/no>, your view matches the size of the screen. Use this property to adjust the content you present. For example, you might change the drawing parameters or data you display in your view.
 func (x *ScreenSaverView) IsPreview() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPreview"))
 	return _r

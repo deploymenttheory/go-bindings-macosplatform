@@ -12,11 +12,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A lightweight reference to a URL from which to load texture data.
-//
 // URLTexture is an idiomatic wrapper over the Objective-C class MDLURLTexture.
+//
+// It embeds [Texture], promoting that type's methods.
+//
+// A lightweight reference to a URL from which to load texture data.
 type URLTexture struct {
-	objref.Handle
+	Texture
 }
 
 // URLTextureFromID adopts an existing Objective-C object as a URLTexture
@@ -25,7 +27,8 @@ func URLTextureFromID(id objc.ID) *URLTexture {
 	if id == 0 {
 		return nil
 	}
-	x := &URLTexture{Handle: objref.Wrap(purego.Retain(id))}
+	x := &URLTexture{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,64 +41,44 @@ func uRLTextureAdopt(id objc.ID) *URLTexture {
 	if id == 0 {
 		return nil
 	}
-	x := &URLTexture{Handle: objref.Wrap(id)}
+	x := &URLTexture{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *URLTexture) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *URLTexture) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *URLTexture) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a texture that loads its texel data from a file at the specified URL.
-//
-// NewURLTextureWithURLName creates a new URLTexture.
+// NewURLTextureWithURLName initializes a texture that loads its texel data from a file at the specified URL.
 func NewURLTextureWithURLName(uRL string, name string) *URLTexture {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLURLTexture")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:name:"), rt.FileURL(uRL), purego.NSString(name))
 	return uRLTextureAdopt(_id)
 }
 
-// The URL from which to load texture data.
-//
-// WithURL sets uRL and returns the receiver so calls can be chained.
+// WithURL the URL from which to load texture data.
 func (x *URLTexture) WithURL(uRL string) *URLTexture {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 	return x
 }
 
-// A Boolean value that indicates whether the texture is a cube textures.
-//
-// WithIsCube sets isCube and returns the receiver so calls can be chained.
+// WithIsCube a Boolean value that indicates whether the texture is a cube textures.
 func (x *URLTexture) WithIsCube(isCube bool) *URLTexture {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsCube:"), isCube)
 	return x
 }
 
-// hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
-//
-// WithHasAlphaValues sets hasAlphaValues and returns the receiver so calls can be chained.
+// WithHasAlphaValues hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
 func (x *URLTexture) WithHasAlphaValues(hasAlphaValues bool) *URLTexture {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasAlphaValues:"), hasAlphaValues)
 	return x
 }
 
+// URL wraps the corresponding Objective-C method.
 func (x *URLTexture) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
+// SetURL wraps the corresponding Objective-C method.
 func (x *URLTexture) SetURL(uRL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 }
@@ -111,3 +94,5 @@ type URLTextureable interface {
 }
 
 var _ URLTextureable = (*URLTexture)(nil)
+
+var _ TextureProvider = (*URLTexture)(nil)

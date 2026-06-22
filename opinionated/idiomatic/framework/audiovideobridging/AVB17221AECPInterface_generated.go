@@ -9,14 +9,15 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // AVB17221AECPInterface is an idiomatic wrapper over the Objective-C class AVB17221AECPInterface.
+//
+// It embeds [AVB1722ControlInterface], promoting that type's methods.
 type AVB17221AECPInterface struct {
-	objref.Handle
+	AVB1722ControlInterface
 }
 
 // AVB17221AECPInterfaceFromID adopts an existing Objective-C object as a AVB17221AECPInterface
@@ -25,7 +26,8 @@ func AVB17221AECPInterfaceFromID(id objc.ID) *AVB17221AECPInterface {
 	if id == 0 {
 		return nil
 	}
-	x := &AVB17221AECPInterface{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AVB17221AECPInterface{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func aVB17221AECPInterfaceAdopt(id objc.ID) *AVB17221AECPInterface {
 	if id == 0 {
 		return nil
 	}
-	x := &AVB17221AECPInterface{Handle: objref.Wrap(id)}
+	x := &AVB17221AECPInterface{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AVB17221AECPInterface) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AVB17221AECPInterface) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AVB17221AECPInterface) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAVB17221AECPInterface creates a new AVB17221AECPInterface.
@@ -64,17 +52,17 @@ func NewAVB17221AECPInterface() *AVB17221AECPInterface {
 	return aVB17221AECPInterfaceAdopt(_id)
 }
 
-// Removed a handler for command messages to or from a specified EntityID.
+// RemoveCommandHandlerForEntityID removed a handler for command messages to or from a specified EntityID.
 func (x *AVB17221AECPInterface) RemoveCommandHandlerForEntityID(targetEntityID uint64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeCommandHandlerForEntityID:"), targetEntityID)
 }
 
-// Removed a handler for response messages to or from a specified EntityID.
+// RemoveResponseHandlerForControllerEntityID removed a handler for response messages to or from a specified EntityID.
 func (x *AVB17221AECPInterface) RemoveResponseHandlerForControllerEntityID(controllerEntityID uint64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeResponseHandlerForControllerEntityID:"), controllerEntityID)
 }
 
-// Send an AECP response. This method synchronizes access to the kernel service providing transport for the message. This method is safe to call from any thread.
+// SendResponseToMACAddress send an AECP response. This method synchronizes access to the kernel service providing transport for the message. This method is safe to call from any thread.
 func (x *AVB17221AECPInterface) SendResponseToMACAddress(message *AVB17221AECPMessage, destMAC *MACAddress) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendResponse:toMACAddress:error:"), objref.IDOf(message), objref.IDOf(destMAC), unsafe.Pointer(&_nsErr))
@@ -93,3 +81,5 @@ type AVB17221AECPInterfaceable interface {
 }
 
 var _ AVB17221AECPInterfaceable = (*AVB17221AECPInterface)(nil)
+
+var _ AVB1722ControlInterfaceProvider = (*AVB17221AECPInterface)(nil)

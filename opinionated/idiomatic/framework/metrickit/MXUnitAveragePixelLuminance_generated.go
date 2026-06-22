@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure of pixel luminosity on an OLED display.
-//
 // UnitAveragePixelLuminance is an idiomatic wrapper over the Objective-C class MXUnitAveragePixelLuminance.
+//
+// A unit of measure of pixel luminosity on an OLED display.
 type UnitAveragePixelLuminance struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func UnitAveragePixelLuminanceFromID(id objc.ID) *UnitAveragePixelLuminance {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitAveragePixelLuminance{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UnitAveragePixelLuminance{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func unitAveragePixelLuminanceAdopt(id objc.ID) *UnitAveragePixelLuminance {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitAveragePixelLuminance{Handle: objref.Wrap(id)}
+	x := &UnitAveragePixelLuminance{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *UnitAveragePixelLuminance) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *UnitAveragePixelLuminance) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UnitAveragePixelLuminance) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewUnitAveragePixelLuminance creates a new UnitAveragePixelLuminance.

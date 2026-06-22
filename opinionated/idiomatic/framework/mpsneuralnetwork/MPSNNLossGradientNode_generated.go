@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Node representing a
-//
 // NNLossGradientNode is an idiomatic wrapper over the Objective-C class MPSNNLossGradientNode.
+//
+// It embeds [NNGradientFilterNode], promoting that type's methods.
+//
+// Node representing a
 type NNLossGradientNode struct {
-	objref.Handle
+	NNGradientFilterNode
 }
 
 // NNLossGradientNodeFromID adopts an existing Objective-C object as a NNLossGradientNode
@@ -25,7 +26,8 @@ func NNLossGradientNodeFromID(id objc.ID) *NNLossGradientNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNLossGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNLossGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func nNLossGradientNodeAdopt(id objc.ID) *NNLossGradientNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNLossGradientNode{Handle: objref.Wrap(id)}
+	x := &NNLossGradientNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NNLossGradientNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNLossGradientNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNLossGradientNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNNLossGradientNodeWithSourceGradientSourceImageLabelsWeightsGradientStateLossDescriptorIsLabelsGradientFilter creates a new NNLossGradientNode.
@@ -79,54 +67,61 @@ func NewNNLossGradientNodeWithSourcesGradientStateLossDescriptorIsLabelsGradient
 	return nNLossGradientNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *NNLossGradientNode) WithLabel(label string) *NNLossGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// LossType wraps the corresponding Objective-C method.
 func (x *NNLossGradientNode) LossType() CNNLossType {
 	_r := objc.Send[CNNLossType](objref.IDOf(x), objc.RegisterName("lossType"))
 	return _r
 }
 
+// ReductionType wraps the corresponding Objective-C method.
 func (x *NNLossGradientNode) ReductionType() CNNReductionType {
 	_r := objc.Send[CNNReductionType](objref.IDOf(x), objc.RegisterName("reductionType"))
 	return _r
 }
 
+// NumberOfClasses wraps the corresponding Objective-C method.
 func (x *NNLossGradientNode) NumberOfClasses() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfClasses"))
 	return _r
 }
 
+// ReduceAcrossBatch wraps the corresponding Objective-C method.
 func (x *NNLossGradientNode) ReduceAcrossBatch() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reduceAcrossBatch"))
 	return _r
 }
 
+// Weight wraps the corresponding Objective-C method.
 func (x *NNLossGradientNode) Weight() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("weight"))
 	return _r
 }
 
+// LabelSmoothing wraps the corresponding Objective-C method.
 func (x *NNLossGradientNode) LabelSmoothing() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("labelSmoothing"))
 	return _r
 }
 
+// Epsilon wraps the corresponding Objective-C method.
 func (x *NNLossGradientNode) Epsilon() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
 	return _r
 }
 
+// Delta wraps the corresponding Objective-C method.
 func (x *NNLossGradientNode) Delta() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("delta"))
 	return _r
 }
 
+// IsLabelsGradientFilter wraps the corresponding Objective-C method.
 func (x *NNLossGradientNode) IsLabelsGradientFilter() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLabelsGradientFilter"))
 	return _r
@@ -148,3 +143,7 @@ type NNLossGradientNodeable interface {
 }
 
 var _ NNLossGradientNodeable = (*NNLossGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*NNLossGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNLossGradientNode)(nil)

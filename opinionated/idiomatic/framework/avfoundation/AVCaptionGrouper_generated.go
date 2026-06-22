@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that analyzes the temporal overlaps of caption objects to create caption groups for each span of concurrent captions.
-//
 // CaptionGrouper is an idiomatic wrapper over the Objective-C class AVCaptionGrouper.
+//
+// An object that analyzes the temporal overlaps of caption objects to create caption groups for each span of concurrent captions.
 type CaptionGrouper struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CaptionGrouperFromID(id objc.ID) *CaptionGrouper {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptionGrouper{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptionGrouper{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func captionGrouperAdopt(id objc.ID) *CaptionGrouper {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptionGrouper{Handle: objref.Wrap(id)}
+	x := &CaptionGrouper{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *CaptionGrouper) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptionGrouper) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCaptionGrouper creates a new CaptionGrouper.
 func NewCaptionGrouper() *CaptionGrouper {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptionGrouper")), objc.RegisterName("new"))
 	return captionGrouperAdopt(_id)
 }
 
-// Adds a caption to the pending group.
+// AddCaption adds a caption to the pending group.
 func (x *CaptionGrouper) AddCaption(input *Caption) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addCaption:"), objref.IDOf(input))
 }

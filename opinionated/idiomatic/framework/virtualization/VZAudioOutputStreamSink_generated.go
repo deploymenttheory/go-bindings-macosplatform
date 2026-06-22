@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for an audio output stream sink.
-//
 // AudioOutputStreamSink is an idiomatic wrapper over the Objective-C class VZAudioOutputStreamSink.
+//
+// AudioOutputStreamSink is an abstract base — you do not construct it directly. Construct one of [HostAudioOutputStreamSink] and pass it where a AudioOutputStreamSink is accepted.
+//
+// The base class for an audio output stream sink.
 type AudioOutputStreamSink struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func AudioOutputStreamSinkFromID(id objc.ID) *AudioOutputStreamSink {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioOutputStreamSink{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioOutputStreamSink{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func audioOutputStreamSinkAdopt(id objc.ID) *AudioOutputStreamSink {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioOutputStreamSink{Handle: objref.Wrap(id)}
+	x := &AudioOutputStreamSink{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *AudioOutputStreamSink) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewAudioOutputStreamSink creates a new AudioOutputStreamSink.
-func NewAudioOutputStreamSink() *AudioOutputStreamSink {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZAudioOutputStreamSink")), objc.RegisterName("new"))
-	return audioOutputStreamSinkAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioOutputStreamSink) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // AudioOutputStreamSinkable is the interface implemented by [AudioOutputStreamSink], for mocking and DI.
@@ -70,3 +74,10 @@ type AudioOutputStreamSinkable interface {
 }
 
 var _ AudioOutputStreamSinkable = (*AudioOutputStreamSink)(nil)
+
+// isAudioOutputStreamSink marks AudioOutputStreamSink — and, by embedding promotion, its
+// subclasses — as a member of the AudioOutputStreamSink hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AudioOutputStreamSink) isAudioOutputStreamSink() {}
+
+var _ AudioOutputStreamSinkProvider = (*AudioOutputStreamSink)(nil)

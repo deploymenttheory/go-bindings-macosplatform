@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The shape and data type constraints for a multidimensional array feature.
-//
 // MultiArrayConstraint is an idiomatic wrapper over the Objective-C class MLMultiArrayConstraint.
+//
+// The shape and data type constraints for a multidimensional array feature.
 type MultiArrayConstraint struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MultiArrayConstraintFromID(id objc.ID) *MultiArrayConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &MultiArrayConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MultiArrayConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func multiArrayConstraintAdopt(id objc.ID) *MultiArrayConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &MultiArrayConstraint{Handle: objref.Wrap(id)}
+	x := &MultiArrayConstraint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,23 +60,33 @@ func (x *MultiArrayConstraint) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MultiArrayConstraint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMultiArrayConstraint creates a new MultiArrayConstraint.
 func NewMultiArrayConstraint() *MultiArrayConstraint {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLMultiArrayConstraint")), objc.RegisterName("new"))
 	return multiArrayConstraintAdopt(_id)
 }
 
+// Shape wraps the corresponding Objective-C method.
+//
 // Shape returns the collection as a Go slice.
 func (x *MultiArrayConstraint) Shape() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shape"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// DataType wraps the corresponding Objective-C method.
 func (x *MultiArrayConstraint) DataType() MultiArrayDataType {
 	_r := objc.Send[MultiArrayDataType](objref.IDOf(x), objc.RegisterName("dataType"))
 	return _r
 }
 
+// ShapeConstraint wraps the corresponding Objective-C method.
 func (x *MultiArrayConstraint) ShapeConstraint() *MultiArrayShapeConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shapeConstraint"))
 	return MultiArrayShapeConstraintFromID(_r)

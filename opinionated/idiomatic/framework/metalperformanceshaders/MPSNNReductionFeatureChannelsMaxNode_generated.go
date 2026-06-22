@@ -6,15 +6,17 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NNReductionFeatureChannelsMaxNode is an idiomatic wrapper over the Objective-C class MPSNNReductionFeatureChannelsMaxNode.
+//
+// It embeds [NNUnaryReductionNode], promoting that type's methods.
 type NNReductionFeatureChannelsMaxNode struct {
-	objref.Handle
+	NNUnaryReductionNode
 }
 
 // NNReductionFeatureChannelsMaxNodeFromID adopts an existing Objective-C object as a NNReductionFeatureChannelsMaxNode
@@ -23,7 +25,8 @@ func NNReductionFeatureChannelsMaxNodeFromID(id objc.ID) *NNReductionFeatureChan
 	if id == 0 {
 		return nil
 	}
-	x := &NNReductionFeatureChannelsMaxNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNReductionFeatureChannelsMaxNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +39,10 @@ func nNReductionFeatureChannelsMaxNodeAdopt(id objc.ID) *NNReductionFeatureChann
 	if id == 0 {
 		return nil
 	}
-	x := &NNReductionFeatureChannelsMaxNode{Handle: objref.Wrap(id)}
+	x := &NNReductionFeatureChannelsMaxNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NNReductionFeatureChannelsMaxNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNReductionFeatureChannelsMaxNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNReductionFeatureChannelsMaxNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNNReductionFeatureChannelsMaxNode creates a new NNReductionFeatureChannelsMaxNode.
@@ -62,9 +51,13 @@ func NewNNReductionFeatureChannelsMaxNode() *NNReductionFeatureChannelsMaxNode {
 	return nNReductionFeatureChannelsMaxNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithClipRectSource the clip rectangle to apply to the source image.
+func (x *NNReductionFeatureChannelsMaxNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsMaxNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return x
+}
+
+// WithLabel a string to help identify this object.
 func (x *NNReductionFeatureChannelsMaxNode) WithLabel(label string) *NNReductionFeatureChannelsMaxNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -73,7 +66,12 @@ func (x *NNReductionFeatureChannelsMaxNode) WithLabel(label string) *NNReduction
 // NNReductionFeatureChannelsMaxNodeable is the interface implemented by [NNReductionFeatureChannelsMaxNode], for mocking and DI.
 type NNReductionFeatureChannelsMaxNodeable interface {
 	obj.Object
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsMaxNode
 	WithLabel(label string) *NNReductionFeatureChannelsMaxNode
 }
 
 var _ NNReductionFeatureChannelsMaxNodeable = (*NNReductionFeatureChannelsMaxNode)(nil)
+
+var _ NNUnaryReductionNodeProvider = (*NNReductionFeatureChannelsMaxNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNReductionFeatureChannelsMaxNode)(nil)

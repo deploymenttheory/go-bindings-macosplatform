@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A trigger condition that causes a notification the system delivers at a specific date and time.
-//
 // CalendarNotificationTrigger is an idiomatic wrapper over the Objective-C class UNCalendarNotificationTrigger.
+//
+// It embeds [NotificationTrigger], promoting that type's methods.
+//
+// A trigger condition that causes a notification the system delivers at a specific date and time.
 type CalendarNotificationTrigger struct {
-	objref.Handle
+	NotificationTrigger
 }
 
 // CalendarNotificationTriggerFromID adopts an existing Objective-C object as a CalendarNotificationTrigger
@@ -25,7 +26,8 @@ func CalendarNotificationTriggerFromID(id objc.ID) *CalendarNotificationTrigger 
 	if id == 0 {
 		return nil
 	}
-	x := &CalendarNotificationTrigger{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CalendarNotificationTrigger{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func calendarNotificationTriggerAdopt(id objc.ID) *CalendarNotificationTrigger {
 	if id == 0 {
 		return nil
 	}
-	x := &CalendarNotificationTrigger{Handle: objref.Wrap(id)}
+	x := &CalendarNotificationTrigger{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CalendarNotificationTrigger) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CalendarNotificationTrigger) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CalendarNotificationTrigger) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCalendarNotificationTrigger creates a new CalendarNotificationTrigger.
@@ -64,12 +52,13 @@ func NewCalendarNotificationTrigger() *CalendarNotificationTrigger {
 	return calendarNotificationTriggerAdopt(_id)
 }
 
-// The next date at which the trigger conditions are met.
+// NextTriggerDate the next date at which the trigger conditions are met.
 func (x *CalendarNotificationTrigger) NextTriggerDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextTriggerDate"))
 	return obj.Wrap(_r)
 }
 
+// DateComponents wraps the corresponding Objective-C method.
 func (x *CalendarNotificationTrigger) DateComponents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateComponents"))
 	return obj.Wrap(_r)
@@ -83,3 +72,5 @@ type CalendarNotificationTriggerable interface {
 }
 
 var _ CalendarNotificationTriggerable = (*CalendarNotificationTrigger)(nil)
+
+var _ NotificationTriggerProvider = (*CalendarNotificationTrigger)(nil)

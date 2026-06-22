@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class to extend when creating a custom user interface for an audio unit.
-//
 // AUViewController is an idiomatic wrapper over the Objective-C class AUViewController.
+//
+// The base class to extend when creating a custom user interface for an audio unit.
 type AUViewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AUViewControllerFromID(id objc.ID) *AUViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &AUViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AUViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func aUViewControllerAdopt(id objc.ID) *AUViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &AUViewController{Handle: objref.Wrap(id)}
+	x := &AUViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *AUViewController) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *AUViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AUViewController) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewAUViewController creates a new AUViewController.

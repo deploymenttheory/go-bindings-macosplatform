@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A command that indicates to start buffering data in preparation for playback.
-//
 // DelegatingPlaybackCoordinatorBufferingCommand is an idiomatic wrapper over the Objective-C class AVDelegatingPlaybackCoordinatorBufferingCommand.
+//
+// It embeds [DelegatingPlaybackCoordinatorPlaybackControlCommand], promoting that type's methods.
+//
+// A command that indicates to start buffering data in preparation for playback.
 type DelegatingPlaybackCoordinatorBufferingCommand struct {
-	objref.Handle
+	DelegatingPlaybackCoordinatorPlaybackControlCommand
 }
 
 // DelegatingPlaybackCoordinatorBufferingCommandFromID adopts an existing Objective-C object as a DelegatingPlaybackCoordinatorBufferingCommand
@@ -25,7 +26,8 @@ func DelegatingPlaybackCoordinatorBufferingCommandFromID(id objc.ID) *Delegating
 	if id == 0 {
 		return nil
 	}
-	x := &DelegatingPlaybackCoordinatorBufferingCommand{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DelegatingPlaybackCoordinatorBufferingCommand{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func delegatingPlaybackCoordinatorBufferingCommandAdopt(id objc.ID) *DelegatingP
 	if id == 0 {
 		return nil
 	}
-	x := &DelegatingPlaybackCoordinatorBufferingCommand{Handle: objref.Wrap(id)}
+	x := &DelegatingPlaybackCoordinatorBufferingCommand{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DelegatingPlaybackCoordinatorBufferingCommand) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DelegatingPlaybackCoordinatorBufferingCommand) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DelegatingPlaybackCoordinatorBufferingCommand) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDelegatingPlaybackCoordinatorBufferingCommand creates a new DelegatingPlaybackCoordinatorBufferingCommand.
@@ -64,13 +52,13 @@ func NewDelegatingPlaybackCoordinatorBufferingCommand() *DelegatingPlaybackCoord
 	return delegatingPlaybackCoordinatorBufferingCommandAdopt(_id)
 }
 
-// The rate to prepare playback for. The command should only be considered complete once the player is ready to receive an AVDelegatingPlaybackCoordinatorPlayCommand with the indicated rate.
+// AnticipatedPlaybackRate the rate to prepare playback for. The command should only be considered complete once the player is ready to receive an AVDelegatingPlaybackCoordinatorPlayCommand with the indicated rate.
 func (x *DelegatingPlaybackCoordinatorBufferingCommand) AnticipatedPlaybackRate() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("anticipatedPlaybackRate"))
 	return _r
 }
 
-// Communicates when the coordinator expects the command's completion handler at the latest. A receiver of a buffering command should fire the completion handler by this date at the latest. This is useful in buffering situations where the receiver has not yet buffered enough data to be considered ready to play by the due date. The receiver should then decide to either complete the command as is to try and keep up with the group, or alternatively begin a stall recovery suspension to communicate the situation to the other participants. Completing the command after this date means that the coordinator will likely send a play command for a later time than the receiver buffered for.
+// CompletionDueDate communicates when the coordinator expects the command's completion handler at the latest. A receiver of a buffering command should fire the completion handler by this date at the latest. This is useful in buffering situations where the receiver has not yet buffered enough data to be considered ready to play by the due date. The receiver should then decide to either complete the command as is to try and keep up with the group, or alternatively begin a stall recovery suspension to communicate the situation to the other participants. Completing the command after this date means that the coordinator will likely send a play command for a later time than the receiver buffered for.
 func (x *DelegatingPlaybackCoordinatorBufferingCommand) CompletionDueDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completionDueDate"))
 	return obj.Wrap(_r)
@@ -84,3 +72,5 @@ type DelegatingPlaybackCoordinatorBufferingCommandable interface {
 }
 
 var _ DelegatingPlaybackCoordinatorBufferingCommandable = (*DelegatingPlaybackCoordinatorBufferingCommand)(nil)
+
+var _ DelegatingPlaybackCoordinatorPlaybackControlCommandProvider = (*DelegatingPlaybackCoordinatorBufferingCommand)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The QCPlugInViewController class communicates (through Cocoa bindings) between a custom patch and the view used for the internal settings of the custom patch. Only custom patches that use internal settings exposed to the user need to use the QCPlugInViewController class.
-//
 // QCPlugInViewController is an idiomatic wrapper over the Objective-C class QCPlugInViewController.
+//
+// The QCPlugInViewController class communicates (through Cocoa bindings) between a custom patch and the view used for the internal settings of the custom patch. Only custom patches that use internal settings exposed to the user need to use the QCPlugInViewController class.
 type QCPlugInViewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func QCPlugInViewControllerFromID(id objc.ID) *QCPlugInViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &QCPlugInViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QCPlugInViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func qCPlugInViewControllerAdopt(id objc.ID) *QCPlugInViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &QCPlugInViewController{Handle: objref.Wrap(id)}
+	x := &QCPlugInViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,16 +60,20 @@ func (x *QCPlugInViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates and initializes a controller for the specified QCPlugIn object and nib file.
-//
-// NewQCPlugInViewControllerWithPlugInViewNibName creates a new QCPlugInViewController.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *QCPlugInViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewQCPlugInViewControllerWithPlugInViewNibName creates and initializes a controller for the specified QCPlugIn object and nib file.
 func NewQCPlugInViewControllerWithPlugInViewNibName(plugIn *QCPlugIn, name string) *QCPlugInViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("QCPlugInViewController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlugIn:viewNibName:"), objref.IDOf(plugIn), purego.NSString(name))
 	return qCPlugInViewControllerAdopt(_id)
 }
 
-// Returns the QCPlugIn object associated with the view controller for the custom patch.
+// PlugIn returns the QCPlugIn object associated with the view controller for the custom patch.
 func (x *QCPlugInViewController) PlugIn() *QCPlugIn {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("plugIn"))
 	return QCPlugInFromID(_r)

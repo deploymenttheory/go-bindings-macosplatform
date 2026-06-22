@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A wrapper object for a data buffer.
-//
 // MutableFileDataBuffer is an idiomatic wrapper over the Objective-C class FSMutableFileDataBuffer.
+//
+// A wrapper object for a data buffer.
 type MutableFileDataBuffer struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MutableFileDataBufferFromID(id objc.ID) *MutableFileDataBuffer {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableFileDataBuffer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableFileDataBuffer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mutableFileDataBufferAdopt(id objc.ID) *MutableFileDataBuffer {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableFileDataBuffer{Handle: objref.Wrap(id)}
+	x := &MutableFileDataBuffer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *MutableFileDataBuffer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MutableFileDataBuffer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMutableFileDataBuffer creates a new MutableFileDataBuffer.
 func NewMutableFileDataBuffer() *MutableFileDataBuffer {
 	_id := objc.Send[objc.ID](objc.ID(_class("FSMutableFileDataBuffer")), objc.RegisterName("new"))
 	return mutableFileDataBufferAdopt(_id)
 }
 
-// The data length of the buffer.
+// Length the data length of the buffer.
 func (x *MutableFileDataBuffer) Length() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
 	return _r

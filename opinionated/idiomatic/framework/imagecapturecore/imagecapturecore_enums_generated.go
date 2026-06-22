@@ -18,6 +18,8 @@ const (
 	DeviceTypeScanner DeviceType = 2
 )
 
+// String returns the DeviceType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DeviceType) String() string {
 	switch e {
 	case DeviceTypeCamera:
@@ -39,6 +41,8 @@ const (
 	DeviceTypeMaskScanner DeviceTypeMask = 2
 )
 
+// String returns the DeviceTypeMask constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DeviceTypeMask) String() string {
 	switch e {
 	case DeviceTypeMaskCamera:
@@ -72,6 +76,8 @@ const (
 	EXIFOrientation8 EXIFOrientationType = 8
 )
 
+// String returns the EXIFOrientationType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EXIFOrientationType) String() string {
 	switch e {
 	case EXIFOrientation1:
@@ -102,6 +108,8 @@ const (
 	MediaPresentationOriginalAssets  MediaPresentation = 2
 )
 
+// String returns the MediaPresentation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MediaPresentation) String() string {
 	switch e {
 	case MediaPresentationConvertedAssets:
@@ -126,6 +134,8 @@ const (
 	ReturnConnectionNotAuthorizedToOpenDevice ReturnConnectionErrorCode = -21343
 )
 
+// String returns the ReturnConnectionErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ReturnConnectionErrorCode) String() string {
 	switch e {
 	case ReturnConnectionDriverExited:
@@ -156,6 +166,8 @@ const (
 	ReturnDownloadFileWritable ReturnDownloadErrorCode = -21099
 )
 
+// String returns the ReturnDownloadErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ReturnDownloadErrorCode) String() string {
 	switch e {
 	case ReturnDownloadPathInvalid:
@@ -176,6 +188,8 @@ const (
 	ReturnMetadataInvalid         ReturnMetadataErrorCode = -20147
 )
 
+// String returns the ReturnMetadataErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ReturnMetadataErrorCode) String() string {
 	switch e {
 	case ReturnMetadataNotAvailable:
@@ -201,6 +215,8 @@ const (
 	ReturnCodeObjectDataRequestTooLarge ReturnObjectErrorCode = -21446
 )
 
+// String returns the ReturnObjectErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ReturnObjectErrorCode) String() string {
 	switch e {
 	case ReturnCodeObjectDoesNotExist:
@@ -225,6 +241,8 @@ const (
 	ReturnPTPNotAuthorizedToSendCommand ReturnPTPDeviceErrorCode = -21249
 )
 
+// String returns the ReturnPTPDeviceErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ReturnPTPDeviceErrorCode) String() string {
 	switch e {
 	case ReturnPTPFailedToSendCommand:
@@ -245,6 +263,8 @@ const (
 	ReturnThumbnailInvalid         ReturnThumbnailErrorCode = -20097
 )
 
+// String returns the ReturnThumbnailErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ReturnThumbnailErrorCode) String() string {
 	switch e {
 	case ReturnThumbnailNotAvailable:
@@ -269,6 +289,8 @@ const (
 	ScannerBitDepth16Bits ScannerBitDepth = 16
 )
 
+// String returns the ScannerBitDepth constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ScannerBitDepth) String() string {
 	switch e {
 	case ScannerBitDepth1Bit:
@@ -360,6 +382,8 @@ const (
 	ScannerDocumentTypeLF           ScannerDocumentType = 78
 )
 
+// String returns the ScannerDocumentType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ScannerDocumentType) String() string {
 	switch e {
 	case ScannerDocumentTypeDefault:
@@ -525,6 +549,8 @@ const (
 	ScannerFeatureTypeTemplate ScannerFeatureType = 3
 )
 
+// String returns the ScannerFeatureType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ScannerFeatureType) String() string {
 	switch e {
 	case ScannerFeatureTypeEnumeration:
@@ -552,6 +578,8 @@ const (
 	ScannerFunctionalUnitStateOverviewScanInProgress ScannerFunctionalUnitState = 4
 )
 
+// String returns the ScannerFunctionalUnitState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ScannerFunctionalUnitState) String() string {
 	switch e {
 	case ScannerFunctionalUnitStateReady:
@@ -579,6 +607,8 @@ const (
 	ScannerFunctionalUnitTypeDocumentFeeder ScannerFunctionalUnitType = 3
 )
 
+// String returns the ScannerFunctionalUnitType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ScannerFunctionalUnitType) String() string {
 	switch e {
 	case ScannerFunctionalUnitTypeFlatbed:
@@ -606,6 +636,8 @@ const (
 	ScannerMeasurementUnitPixels      ScannerMeasurementUnit = 5
 )
 
+// String returns the ScannerMeasurementUnit constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ScannerMeasurementUnit) String() string {
 	switch e {
 	case ScannerMeasurementUnitInches:
@@ -640,6 +672,8 @@ const (
 	ScannerPixelDataTypeCIEXYZ  ScannerPixelDataType = 8
 )
 
+// String returns the ScannerPixelDataType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ScannerPixelDataType) String() string {
 	switch e {
 	case ScannerPixelDataTypeBW:
@@ -675,6 +709,8 @@ const (
 	ScannerTransferModeMemoryBased ScannerTransferMode = 1
 )
 
+// String returns the ScannerTransferMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ScannerTransferMode) String() string {
 	switch e {
 	case ScannerTransferModeFileBased:

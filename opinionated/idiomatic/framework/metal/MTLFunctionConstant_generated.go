@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A constant that specializes the behavior of a shader.
-//
 // FunctionConstant is an idiomatic wrapper over the Objective-C class MTLFunctionConstant.
+//
+// A constant that specializes the behavior of a shader.
 type FunctionConstant struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FunctionConstantFromID(id objc.ID) *FunctionConstant {
 	if id == 0 {
 		return nil
 	}
-	x := &FunctionConstant{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FunctionConstant{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func functionConstantAdopt(id objc.ID) *FunctionConstant {
 	if id == 0 {
 		return nil
 	}
-	x := &FunctionConstant{Handle: objref.Wrap(id)}
+	x := &FunctionConstant{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *FunctionConstant) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FunctionConstant) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFunctionConstant creates a new FunctionConstant.
 func NewFunctionConstant() *FunctionConstant {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLFunctionConstant")), objc.RegisterName("new"))
 	return functionConstantAdopt(_id)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *FunctionConstant) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -72,16 +81,19 @@ func (x *FunctionConstant) Name() string {
 	return purego.GoString(_r)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *FunctionConstant) Type() DataType {
 	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
+// Index wraps the corresponding Objective-C method.
 func (x *FunctionConstant) Index() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("index"))
 	return _r
 }
 
+// Required wraps the corresponding Objective-C method.
 func (x *FunctionConstant) Required() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("required"))
 	return _r

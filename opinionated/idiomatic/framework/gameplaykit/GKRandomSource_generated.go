@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The superclass for all basic randomization classes in GameplayKit.
-//
 // RandomSource is an idiomatic wrapper over the Objective-C class GKRandomSource.
+//
+// RandomSource is an abstract base — you do not construct it directly. Construct one of [ARC4RandomSource], [LinearCongruentialRandomSource], [MersenneTwisterRandomSource] and pass it where a RandomSource is accepted.
+//
+// The superclass for all basic randomization classes in GameplayKit.
 type RandomSource struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func RandomSourceFromID(id objc.ID) *RandomSource {
 	if id == 0 {
 		return nil
 	}
-	x := &RandomSource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RandomSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func randomSourceAdopt(id objc.ID) *RandomSource {
 	if id == 0 {
 		return nil
 	}
-	x := &RandomSource{Handle: objref.Wrap(id)}
+	x := &RandomSource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +62,20 @@ func (x *RandomSource) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewRandomSource creates a new RandomSource.
-func NewRandomSource() *RandomSource {
-	_id := objc.Send[objc.ID](objc.ID(_class("GKRandomSource")), objc.RegisterName("new"))
-	return randomSourceAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RandomSource) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Deserializes a random source from an NSCoder. All random sources support coding for serializing and deserializing the state of the random source. Each subclass has its own contract for what parts of the state is preserved when serialized but the general contract is that a serialized source must generate the same sequence of values as the original source would from the instant it was serialized. Note that the sharedRandom instance is an exception as it is explicitly seedless and a shared singleton instance. When serialized and deserialized it will return the current sharedRandom instance instead.
-//
-// NewRandomSourceWithCoder creates a new RandomSource.
+// NewRandomSourceWithCoder deserializes a random source from an NSCoder. All random sources support coding for serializing and deserializing the state of the random source. Each subclass has its own contract for what parts of the state is preserved when serialized but the general contract is that a serialized source must generate the same sequence of values as the original source would from the instant it was serialized. Note that the sharedRandom instance is an exception as it is explicitly seedless and a shared singleton instance. When serialized and deserialized it will return the current sharedRandom instance instead.
 func NewRandomSourceWithCoder(aDecoder obj.Object) *RandomSource {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKRandomSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return randomSourceAdopt(_id)
 }
 
-// Returns an array whose contents are the same as those of the specified array, but in a random order determined by the random source.
+// ArrayByShufflingObjectsInArray returns an array whose contents are the same as those of the specified array, but in a random order determined by the random source.
 func (x *RandomSource) ArrayByShufflingObjectsInArray(array obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrayByShufflingObjectsInArray:"), objref.IDOf(array))
 	return obj.Wrap(_r)
@@ -86,3 +88,10 @@ type RandomSourceable interface {
 }
 
 var _ RandomSourceable = (*RandomSource)(nil)
+
+// isRandomSource marks RandomSource — and, by embedding promotion, its
+// subclasses — as a member of the RandomSource hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *RandomSource) isRandomSource() {}
+
+var _ RandomSourceProvider = (*RandomSource)(nil)

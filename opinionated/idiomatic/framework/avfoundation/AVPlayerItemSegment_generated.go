@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable object that represents a segment of time on the integrated timeline.
-//
 // PlayerItemSegment is an idiomatic wrapper over the Objective-C class AVPlayerItemSegment.
+//
+// An immutable object that represents a segment of time on the integrated timeline.
 type PlayerItemSegment struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PlayerItemSegmentFromID(id objc.ID) *PlayerItemSegment {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemSegment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlayerItemSegment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func playerItemSegmentAdopt(id objc.ID) *PlayerItemSegment {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemSegment{Handle: objref.Wrap(id)}
+	x := &PlayerItemSegment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *PlayerItemSegment) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerItemSegment) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPlayerItemSegment creates a new PlayerItemSegment.
 func NewPlayerItemSegment() *PlayerItemSegment {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemSegment")), objc.RegisterName("new"))
 	return playerItemSegmentAdopt(_id)
 }
 
-// The type of content this segment represents.
+// SegmentType the type of content this segment represents.
 func (x *PlayerItemSegment) SegmentType() PlayerItemSegmentType {
 	_r := objc.Send[PlayerItemSegmentType](objref.IDOf(x), objc.RegisterName("segmentType"))
 	return _r
 }
 
-// This property provides a collection of time ranges for the segment if media data is readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges. Loaded time ranges will be within the timeMapping's target timeRange. Loaded time ranges will be empty for interstitial events that occupy a single point in time.
+// LoadedTimeRanges this property provides a collection of time ranges for the segment if media data is readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges. Loaded time ranges will be within the timeMapping's target timeRange. Loaded time ranges will be empty for interstitial events that occupy a single point in time.
 //
 // LoadedTimeRanges returns the collection as a Go slice.
 func (x *PlayerItemSegment) LoadedTimeRanges() []obj.Object {
@@ -78,13 +86,13 @@ func (x *PlayerItemSegment) LoadedTimeRanges() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The date this segment starts at. The date this segment starts at. This value will be nil if the primary item does not contain dates.
+// StartDate the date this segment starts at. The date this segment starts at. This value will be nil if the primary item does not contain dates.
 func (x *PlayerItemSegment) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
-// The associated interstitial event for this segment. The associated interstitial event for this segment. This value will be nil for segments representing playback of the primary itme.
+// InterstitialEvent the associated interstitial event for this segment. The associated interstitial event for this segment. This value will be nil for segments representing playback of the primary itme.
 func (x *PlayerItemSegment) InterstitialEvent() *PlayerInterstitialEvent {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interstitialEvent"))
 	return PlayerInterstitialEventFromID(_r)

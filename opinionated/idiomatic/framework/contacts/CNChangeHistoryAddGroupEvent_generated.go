@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a user adding a group.
-//
 // ChangeHistoryAddGroupEvent is an idiomatic wrapper over the Objective-C class CNChangeHistoryAddGroupEvent.
+//
+// It embeds [ChangeHistoryEvent], promoting that type's methods.
+//
+// An object that represents a user adding a group.
 type ChangeHistoryAddGroupEvent struct {
-	objref.Handle
+	ChangeHistoryEvent
 }
 
 // ChangeHistoryAddGroupEventFromID adopts an existing Objective-C object as a ChangeHistoryAddGroupEvent
@@ -25,7 +26,8 @@ func ChangeHistoryAddGroupEventFromID(id objc.ID) *ChangeHistoryAddGroupEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &ChangeHistoryAddGroupEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ChangeHistoryAddGroupEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func changeHistoryAddGroupEventAdopt(id objc.ID) *ChangeHistoryAddGroupEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &ChangeHistoryAddGroupEvent{Handle: objref.Wrap(id)}
+	x := &ChangeHistoryAddGroupEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ChangeHistoryAddGroupEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ChangeHistoryAddGroupEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ChangeHistoryAddGroupEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewChangeHistoryAddGroupEvent creates a new ChangeHistoryAddGroupEvent.
@@ -64,11 +52,13 @@ func NewChangeHistoryAddGroupEvent() *ChangeHistoryAddGroupEvent {
 	return changeHistoryAddGroupEventAdopt(_id)
 }
 
+// Group wraps the corresponding Objective-C method.
 func (x *ChangeHistoryAddGroupEvent) Group() *Group {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("group"))
 	return GroupFromID(_r)
 }
 
+// ContainerIdentifier wraps the corresponding Objective-C method.
 func (x *ChangeHistoryAddGroupEvent) ContainerIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containerIdentifier"))
 	if _r == 0 {
@@ -85,3 +75,5 @@ type ChangeHistoryAddGroupEventable interface {
 }
 
 var _ ChangeHistoryAddGroupEventable = (*ChangeHistoryAddGroupEvent)(nil)
+
+var _ ChangeHistoryEventProvider = (*ChangeHistoryAddGroupEvent)(nil)

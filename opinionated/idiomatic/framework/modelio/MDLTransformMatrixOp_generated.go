@@ -23,7 +23,8 @@ func TransformMatrixOpFromID(id objc.ID) *TransformMatrixOp {
 	if id == 0 {
 		return nil
 	}
-	x := &TransformMatrixOp{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TransformMatrixOp{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func transformMatrixOpAdopt(id objc.ID) *TransformMatrixOp {
 	if id == 0 {
 		return nil
 	}
-	x := &TransformMatrixOp{Handle: objref.Wrap(id)}
+	x := &TransformMatrixOp{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,12 +58,19 @@ func (x *TransformMatrixOp) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TransformMatrixOp) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTransformMatrixOp creates a new TransformMatrixOp.
 func NewTransformMatrixOp() *TransformMatrixOp {
 	_id := objc.Send[objc.ID](objc.ID(_class("MDLTransformMatrixOp")), objc.RegisterName("new"))
 	return transformMatrixOpAdopt(_id)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *TransformMatrixOp) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -70,6 +79,7 @@ func (x *TransformMatrixOp) Name() string {
 	return purego.GoString(_r)
 }
 
+// AnimatedValue wraps the corresponding Objective-C method.
 func (x *TransformMatrixOp) AnimatedValue() *AnimatedMatrix4x4 {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animatedValue"))
 	return AnimatedMatrix4x4FromID(_r)

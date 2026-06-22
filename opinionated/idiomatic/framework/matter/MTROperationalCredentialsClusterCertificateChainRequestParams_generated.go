@@ -23,7 +23,8 @@ func MTROperationalCredentialsClusterCertificateChainRequestParamsFromID(id objc
 	if id == 0 {
 		return nil
 	}
-	x := &MTROperationalCredentialsClusterCertificateChainRequestParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTROperationalCredentialsClusterCertificateChainRequestParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTROperationalCredentialsClusterCertificateChainRequestParamsAdopt(id objc.
 	if id == 0 {
 		return nil
 	}
-	x := &MTROperationalCredentialsClusterCertificateChainRequestParams{Handle: objref.Wrap(id)}
+	x := &MTROperationalCredentialsClusterCertificateChainRequestParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,59 +58,65 @@ func (x *MTROperationalCredentialsClusterCertificateChainRequestParams) IsKind(c
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTROperationalCredentialsClusterCertificateChainRequestParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTROperationalCredentialsClusterCertificateChainRequestParams creates a new MTROperationalCredentialsClusterCertificateChainRequestParams.
 func NewMTROperationalCredentialsClusterCertificateChainRequestParams() *MTROperationalCredentialsClusterCertificateChainRequestParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTROperationalCredentialsClusterCertificateChainRequestParams")), objc.RegisterName("new"))
 	return mTROperationalCredentialsClusterCertificateChainRequestParamsAdopt(_id)
 }
 
-// WithCertificateType sets certificateType and returns the receiver so calls can be chained.
+// WithCertificateType sets the property and returns the receiver so calls can be chained.
 func (x *MTROperationalCredentialsClusterCertificateChainRequestParams) WithCertificateType(certificateType obj.Object) *MTROperationalCredentialsClusterCertificateChainRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCertificateType:"), objref.IDOf(certificateType))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTROperationalCredentialsClusterCertificateChainRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterCertificateChainRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTROperationalCredentialsClusterCertificateChainRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROperationalCredentialsClusterCertificateChainRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// CertificateType wraps the corresponding Objective-C method.
 func (x *MTROperationalCredentialsClusterCertificateChainRequestParams) CertificateType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificateType"))
 	return obj.Wrap(_r)
 }
 
+// SetCertificateType wraps the corresponding Objective-C method.
 func (x *MTROperationalCredentialsClusterCertificateChainRequestParams) SetCertificateType(certificateType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCertificateType:"), objref.IDOf(certificateType))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTROperationalCredentialsClusterCertificateChainRequestParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTROperationalCredentialsClusterCertificateChainRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTROperationalCredentialsClusterCertificateChainRequestParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTROperationalCredentialsClusterCertificateChainRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

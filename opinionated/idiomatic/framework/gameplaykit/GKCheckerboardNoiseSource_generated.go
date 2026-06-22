@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A procedural noise generator whose output is an alternating square pattern.
-//
 // CheckerboardNoiseSource is an idiomatic wrapper over the Objective-C class GKCheckerboardNoiseSource.
+//
+// It embeds [NoiseSource], promoting that type's methods.
+//
+// A procedural noise generator whose output is an alternating square pattern.
 type CheckerboardNoiseSource struct {
-	objref.Handle
+	NoiseSource
 }
 
 // CheckerboardNoiseSourceFromID adopts an existing Objective-C object as a CheckerboardNoiseSource
@@ -25,7 +26,8 @@ func CheckerboardNoiseSourceFromID(id objc.ID) *CheckerboardNoiseSource {
 	if id == 0 {
 		return nil
 	}
-	x := &CheckerboardNoiseSource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CheckerboardNoiseSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,48 +40,32 @@ func checkerboardNoiseSourceAdopt(id objc.ID) *CheckerboardNoiseSource {
 	if id == 0 {
 		return nil
 	}
-	x := &CheckerboardNoiseSource{Handle: objref.Wrap(id)}
+	x := &CheckerboardNoiseSource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CheckerboardNoiseSource) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CheckerboardNoiseSource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CheckerboardNoiseSource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a checkerboard noise source with the specified square size.
-//
-// NewCheckerboardNoiseSourceWithSquareSize creates a new CheckerboardNoiseSource.
+// NewCheckerboardNoiseSourceWithSquareSize initializes a checkerboard noise source with the specified square size.
 func NewCheckerboardNoiseSourceWithSquareSize(squareSize float64) *CheckerboardNoiseSource {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKCheckerboardNoiseSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSquareSize:"), squareSize)
 	return checkerboardNoiseSourceAdopt(_id)
 }
 
-// The size (both width and height) of squares in the generated checkerboard pattern.
-//
-// WithSquareSize sets squareSize and returns the receiver so calls can be chained.
+// WithSquareSize the size (both width and height) of squares in the generated checkerboard pattern.
 func (x *CheckerboardNoiseSource) WithSquareSize(squareSize float64) *CheckerboardNoiseSource {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSquareSize:"), squareSize)
 	return x
 }
 
+// SquareSize wraps the corresponding Objective-C method.
 func (x *CheckerboardNoiseSource) SquareSize() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("squareSize"))
 	return _r
 }
 
+// SetSquareSize wraps the corresponding Objective-C method.
 func (x *CheckerboardNoiseSource) SetSquareSize(squareSize float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSquareSize:"), squareSize)
 }
@@ -93,3 +79,5 @@ type CheckerboardNoiseSourceable interface {
 }
 
 var _ CheckerboardNoiseSourceable = (*CheckerboardNoiseSource)(nil)
+
+var _ NoiseSourceProvider = (*CheckerboardNoiseSource)(nil)

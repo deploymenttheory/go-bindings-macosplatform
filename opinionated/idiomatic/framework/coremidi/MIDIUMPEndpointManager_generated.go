@@ -23,7 +23,8 @@ func UMPEndpointManagerFromID(id objc.ID) *UMPEndpointManager {
 	if id == 0 {
 		return nil
 	}
-	x := &UMPEndpointManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UMPEndpointManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func uMPEndpointManagerAdopt(id objc.ID) *UMPEndpointManager {
 	if id == 0 {
 		return nil
 	}
-	x := &UMPEndpointManager{Handle: objref.Wrap(id)}
+	x := &UMPEndpointManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,13 +58,19 @@ func (x *UMPEndpointManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UMPEndpointManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewUMPEndpointManager creates a new UMPEndpointManager.
 func NewUMPEndpointManager() *UMPEndpointManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("MIDIUMPEndpointManager")), objc.RegisterName("new"))
 	return uMPEndpointManagerAdopt(_id)
 }
 
-// A  list of UMP endpoints discovered using UMP endpoint discovery.
+// UMPEndpoints a  list of UMP endpoints discovered using UMP endpoint discovery.
 //
 // UMPEndpoints returns the collection as a Go slice.
 func (x *UMPEndpointManager) UMPEndpoints() []*UMPEndpoint {

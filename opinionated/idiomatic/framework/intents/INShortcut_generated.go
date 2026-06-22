@@ -23,7 +23,8 @@ func ShortcutFromID(id objc.ID) *Shortcut {
 	if id == 0 {
 		return nil
 	}
-	x := &Shortcut{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Shortcut{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func shortcutAdopt(id objc.ID) *Shortcut {
 	if id == 0 {
 		return nil
 	}
-	x := &Shortcut{Handle: objref.Wrap(id)}
+	x := &Shortcut{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,31 +58,33 @@ func (x *Shortcut) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a shortcut with the given intent.
-//
-// NewShortcutWithIntent creates a new Shortcut.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Shortcut) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewShortcutWithIntent creates a shortcut with the given intent.
 func NewShortcutWithIntent(intent *Intent) *Shortcut {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INShortcut")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIntent:"), objref.IDOf(intent))
 	return shortcutAdopt(_id)
 }
 
-// Creates a shortcut with the given user activity.
-//
-// NewShortcutWithUserActivity creates a new Shortcut.
+// NewShortcutWithUserActivity creates a shortcut with the given user activity.
 func NewShortcutWithUserActivity(userActivity obj.Object) *Shortcut {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INShortcut")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUserActivity:"), objref.IDOf(userActivity))
 	return shortcutAdopt(_id)
 }
 
-// The intent that will be performed when this shortcut is invoked. Is
+// Intent the intent that will be performed when this shortcut is invoked. Is
 func (x *Shortcut) Intent() *Intent {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intent"))
 	return IntentFromID(_r)
 }
 
-// The user activity that will be performed when this shortcut is invoked. Is
+// UserActivity the user activity that will be performed when this shortcut is invoked. Is
 func (x *Shortcut) UserActivity() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userActivity"))
 	return obj.Wrap(_r)

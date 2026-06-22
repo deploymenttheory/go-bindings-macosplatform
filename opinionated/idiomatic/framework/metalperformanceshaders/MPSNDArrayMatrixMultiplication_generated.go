@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NDArrayMatrixMultiplication is an idiomatic wrapper over the Objective-C class MPSNDArrayMatrixMultiplication.
+//
+// NDArrayMatrixMultiplication is an abstract base — you do not construct it directly. Construct one of [NDArrayQuantizedMatrixMultiplication] and pass it where a NDArrayMatrixMultiplication is accepted.
 type NDArrayMatrixMultiplication struct {
-	objref.Handle
+	NDArrayMultiaryKernel
 }
 
 // NDArrayMatrixMultiplicationFromID adopts an existing Objective-C object as a NDArrayMatrixMultiplication
@@ -23,7 +24,8 @@ func NDArrayMatrixMultiplicationFromID(id objc.ID) *NDArrayMatrixMultiplication 
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayMatrixMultiplication{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NDArrayMatrixMultiplication{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,72 +38,48 @@ func nDArrayMatrixMultiplicationAdopt(id objc.ID) *NDArrayMatrixMultiplication {
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayMatrixMultiplication{Handle: objref.Wrap(id)}
+	x := &NDArrayMatrixMultiplication{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NDArrayMatrixMultiplication) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NDArrayMatrixMultiplication) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NDArrayMatrixMultiplication) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewNDArrayMatrixMultiplication creates a new NDArrayMatrixMultiplication.
-func NewNDArrayMatrixMultiplication() *NDArrayMatrixMultiplication {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayMatrixMultiplication")), objc.RegisterName("new"))
-	return nDArrayMatrixMultiplicationAdopt(_id)
-}
-
-// The scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (x *NDArrayMatrixMultiplication) WithAlpha(alpha float64) *NDArrayMatrixMultiplication {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// The scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-//
-// WithBeta sets beta and returns the receiver so calls can be chained.
+// WithBeta the scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (x *NDArrayMatrixMultiplication) WithBeta(beta float64) *NDArrayMatrixMultiplication {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayMatrixMultiplication) WithLabel(label string) *NDArrayMatrixMultiplication {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+// Alpha the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (x *NDArrayMatrixMultiplication) Alpha() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
 	return _r
 }
 
+// SetAlpha wraps the corresponding Objective-C method.
 func (x *NDArrayMatrixMultiplication) SetAlpha(alpha float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }
 
-// The scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+// Beta the scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (x *NDArrayMatrixMultiplication) Beta() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("beta"))
 	return _r
 }
 
+// SetBeta wraps the corresponding Objective-C method.
 func (x *NDArrayMatrixMultiplication) SetBeta(beta float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
 }
@@ -119,3 +97,16 @@ type NDArrayMatrixMultiplicationable interface {
 }
 
 var _ NDArrayMatrixMultiplicationable = (*NDArrayMatrixMultiplication)(nil)
+
+// isNDArrayMatrixMultiplication marks NDArrayMatrixMultiplication — and, by embedding promotion, its
+// subclasses — as a member of the NDArrayMatrixMultiplication hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NDArrayMatrixMultiplication) isNDArrayMatrixMultiplication() {}
+
+var _ NDArrayMatrixMultiplicationProvider = (*NDArrayMatrixMultiplication)(nil)
+
+var _ NDArrayMultiaryKernelProvider = (*NDArrayMatrixMultiplication)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayMatrixMultiplication)(nil)
+
+var _ KernelProvider = (*NDArrayMatrixMultiplication)(nil)

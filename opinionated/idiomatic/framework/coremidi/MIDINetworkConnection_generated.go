@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that connects a session to a host.
-//
 // NetworkConnection is an idiomatic wrapper over the Objective-C class MIDINetworkConnection.
+//
+// An object that connects a session to a host.
 type NetworkConnection struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NetworkConnectionFromID(id objc.ID) *NetworkConnection {
 	if id == 0 {
 		return nil
 	}
-	x := &NetworkConnection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NetworkConnection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func networkConnectionAdopt(id objc.ID) *NetworkConnection {
 	if id == 0 {
 		return nil
 	}
-	x := &NetworkConnection{Handle: objref.Wrap(id)}
+	x := &NetworkConnection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *NetworkConnection) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NetworkConnection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNetworkConnection creates a new NetworkConnection.
 func NewNetworkConnection() *NetworkConnection {
 	_id := objc.Send[objc.ID](objc.ID(_class("MIDINetworkConnection")), objc.RegisterName("new"))
 	return networkConnectionAdopt(_id)
 }
 
+// Host wraps the corresponding Objective-C method.
 func (x *NetworkConnection) Host() *NetworkHost {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("host"))
 	return NetworkHostFromID(_r)

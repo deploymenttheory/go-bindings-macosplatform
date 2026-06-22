@@ -11,9 +11,11 @@ import (
 // BaseEffectProvider is accepted wherever a GLKBaseEffect (or one of its subclasses) is expected.
 type BaseEffectProvider interface {
 	objref.Object
+	isBaseEffect()
 }
 
 // EffectPropertyProvider is accepted wherever a GLKEffectProperty (or one of its subclasses) is expected.
 type EffectPropertyProvider interface {
 	objref.Object
+	isEffectProperty()
 }

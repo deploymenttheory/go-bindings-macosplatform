@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Coordinate transform information for use in GLKit rendering effects.
-//
 // EffectPropertyTransform is an idiomatic wrapper over the Objective-C class GLKEffectPropertyTransform.
+//
+// It embeds [EffectProperty], promoting that type's methods.
+//
+// Coordinate transform information for use in GLKit rendering effects.
 type EffectPropertyTransform struct {
-	objref.Handle
+	EffectProperty
 }
 
 // EffectPropertyTransformFromID adopts an existing Objective-C object as a EffectPropertyTransform
@@ -25,7 +26,8 @@ func EffectPropertyTransformFromID(id objc.ID) *EffectPropertyTransform {
 	if id == 0 {
 		return nil
 	}
-	x := &EffectPropertyTransform{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EffectPropertyTransform{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func effectPropertyTransformAdopt(id objc.ID) *EffectPropertyTransform {
 	if id == 0 {
 		return nil
 	}
-	x := &EffectPropertyTransform{Handle: objref.Wrap(id)}
+	x := &EffectPropertyTransform{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *EffectPropertyTransform) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EffectPropertyTransform) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EffectPropertyTransform) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewEffectPropertyTransform creates a new EffectPropertyTransform.
@@ -70,3 +58,5 @@ type EffectPropertyTransformable interface {
 }
 
 var _ EffectPropertyTransformable = (*EffectPropertyTransform)(nil)
+
+var _ EffectPropertyProvider = (*EffectPropertyTransform)(nil)

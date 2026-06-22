@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object used to identify all the samples previously returned by an anchored object query.
-//
 // QueryAnchor is an idiomatic wrapper over the Objective-C class HKQueryAnchor.
+//
+// An object used to identify all the samples previously returned by an anchored object query.
 type QueryAnchor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func QueryAnchorFromID(id objc.ID) *QueryAnchor {
 	if id == 0 {
 		return nil
 	}
-	x := &QueryAnchor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QueryAnchor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func queryAnchorAdopt(id objc.ID) *QueryAnchor {
 	if id == 0 {
 		return nil
 	}
-	x := &QueryAnchor{Handle: objref.Wrap(id)}
+	x := &QueryAnchor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *QueryAnchor) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *QueryAnchor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *QueryAnchor) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewQueryAnchor creates a new QueryAnchor.

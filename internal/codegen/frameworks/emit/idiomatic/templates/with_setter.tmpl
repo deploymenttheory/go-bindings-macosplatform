@@ -4,9 +4,7 @@
     collection property, which takes a variable number of items and builds an
     Objective-C array from them, and a single-value property.
 */}}
-{{define "with_setter"}}{{if .DocComment}}{{.DocComment}}//
-{{end}}{{if .IsNSArray -}}
-// {{.GoName}} sets the collection and returns the receiver so calls can be chained.
+{{define "with_setter"}}{{.DocComment}}{{if .IsNSArray -}}
 func (x *{{.TypeName}}) {{.GoName}}(items ...{{.SliceElemType}}) *{{.TypeName}} {
 _arr := purego.SliceToNSArray(items, func(_v {{.SliceElemType}}) objc.ID { return objref.IDOf(_v) })
 objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName({{.SetterSelector | printf "%q"}}), _arr)
@@ -14,7 +12,6 @@ return x
 }
 
 {{else -}}
-// {{.GoName}} sets {{.ParamName}} and returns the receiver so calls can be chained.
 func (x *{{.TypeName}}) {{.GoName}}({{.ParamName}} {{.ParamType}}) *{{.TypeName}} {
 objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName({{.SetterSelector | printf "%q"}}), {{.ParamRawExpr}})
 return x

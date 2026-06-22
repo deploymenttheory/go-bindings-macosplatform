@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An occurrence of textual content found during the analysis of a block of text, such as when matching a regular expression.
-//
 // TextCheckingResult is an idiomatic wrapper over the Objective-C class NSTextCheckingResult.
+//
+// An occurrence of textual content found during the analysis of a block of text, such as when matching a regular expression.
 type TextCheckingResult struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TextCheckingResultFromID(id objc.ID) *TextCheckingResult {
 	if id == 0 {
 		return nil
 	}
-	x := &TextCheckingResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextCheckingResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func textCheckingResultAdopt(id objc.ID) *TextCheckingResult {
 	if id == 0 {
 		return nil
 	}
-	x := &TextCheckingResult{Handle: objref.Wrap(id)}
+	x := &TextCheckingResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,65 +60,81 @@ func (x *TextCheckingResult) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextCheckingResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTextCheckingResult creates a new TextCheckingResult.
 func NewTextCheckingResult() *TextCheckingResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSTextCheckingResult")), objc.RegisterName("new"))
 	return textCheckingResultAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *TextCheckingResult) WithScriptingProperties(scriptingProperties obj.Object) *TextCheckingResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// ResultType wraps the corresponding Objective-C method.
 func (x *TextCheckingResult) ResultType() TextCheckingType {
 	_r := objc.Send[TextCheckingType](objref.IDOf(x), objc.RegisterName("resultType"))
 	return _r
 }
 
-// Returns a new text checking result after adjusting the ranges as specified by the offset.
+// ResultByAdjustingRangesWithOffset returns a new text checking result after adjusting the ranges as specified by the offset.
 func (x *TextCheckingResult) ResultByAdjustingRangesWithOffset(offset int) *TextCheckingResult {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultByAdjustingRangesWithOffset:"), offset)
 	return TextCheckingResultFromID(_r)
 }
 
+// Orthography wraps the corresponding Objective-C method.
 func (x *TextCheckingResult) Orthography() *Orthography {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orthography"))
 	return OrthographyFromID(_r)
 }
 
+// GrammarDetails wraps the corresponding Objective-C method.
+//
 // GrammarDetails returns the collection as a Go slice.
 func (x *TextCheckingResult) GrammarDetails() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("grammarDetails"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// Date wraps the corresponding Objective-C method.
 func (x *TextCheckingResult) Date() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
 	return DateFromID(_r)
 }
 
+// TimeZone wraps the corresponding Objective-C method.
 func (x *TextCheckingResult) TimeZone() *TimeZone {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeZone"))
 	return TimeZoneFromID(_r)
 }
 
+// Duration wraps the corresponding Objective-C method.
 func (x *TextCheckingResult) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
 	return _r
 }
 
+// Components wraps the corresponding Objective-C method.
 func (x *TextCheckingResult) Components() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("components"))
 	return obj.Wrap(_r)
 }
 
+// URL wraps the corresponding Objective-C method.
 func (x *TextCheckingResult) URL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return URLFromID(_r)
 }
 
+// ReplacementString wraps the corresponding Objective-C method.
 func (x *TextCheckingResult) ReplacementString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replacementString"))
 	if _r == 0 {
@@ -125,17 +143,21 @@ func (x *TextCheckingResult) ReplacementString() string {
 	return purego.GoString(_r)
 }
 
+// AlternativeStrings wraps the corresponding Objective-C method.
+//
 // AlternativeStrings returns the collection as a Go slice.
 func (x *TextCheckingResult) AlternativeStrings() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternativeStrings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// RegularExpression wraps the corresponding Objective-C method.
 func (x *TextCheckingResult) RegularExpression() *RegularExpression {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regularExpression"))
 	return RegularExpressionFromID(_r)
 }
 
+// PhoneNumber wraps the corresponding Objective-C method.
 func (x *TextCheckingResult) PhoneNumber() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("phoneNumber"))
 	if _r == 0 {
@@ -144,11 +166,13 @@ func (x *TextCheckingResult) PhoneNumber() string {
 	return purego.GoString(_r)
 }
 
+// NumberOfRanges wraps the corresponding Objective-C method.
 func (x *TextCheckingResult) NumberOfRanges() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfRanges"))
 	return _r
 }
 
+// AddressComponents wraps the corresponding Objective-C method.
 func (x *TextCheckingResult) AddressComponents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addressComponents"))
 	return obj.Wrap(_r)

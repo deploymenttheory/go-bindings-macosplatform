@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A constraint that runs a specified closure, block in Objective-C, to compute a new transform (position, rotation, and scale) for each node that the constraint affects.
-//
 // TransformConstraint is an idiomatic wrapper over the Objective-C class SCNTransformConstraint.
+//
+// It embeds [Constraint], promoting that type's methods.
+//
+// A constraint that runs a specified closure, block in Objective-C, to compute a new transform (position, rotation, and scale) for each node that the constraint affects.
 type TransformConstraint struct {
-	objref.Handle
+	Constraint
 }
 
 // TransformConstraintFromID adopts an existing Objective-C object as a TransformConstraint
@@ -25,7 +26,8 @@ func TransformConstraintFromID(id objc.ID) *TransformConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &TransformConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TransformConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func transformConstraintAdopt(id objc.ID) *TransformConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &TransformConstraint{Handle: objref.Wrap(id)}
+	x := &TransformConstraint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *TransformConstraint) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TransformConstraint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TransformConstraint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewTransformConstraint creates a new TransformConstraint.
@@ -64,25 +52,19 @@ func NewTransformConstraint() *TransformConstraint {
 	return transformConstraintAdopt(_id)
 }
 
-// Determines whether the constraint is enabled or not. Defaults to YES.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled determines whether the constraint is enabled or not. Defaults to YES.
 func (x *TransformConstraint) WithEnabled(enabled bool) *TransformConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The influence of the constraint on the node’s transformation.
-//
-// WithInfluenceFactor sets influenceFactor and returns the receiver so calls can be chained.
+// WithInfluenceFactor the influence of the constraint on the node’s transformation.
 func (x *TransformConstraint) WithInfluenceFactor(influenceFactor float64) *TransformConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
 	return x
 }
 
-// Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
-//
-// WithIncremental sets incremental and returns the receiver so calls can be chained.
+// WithIncremental specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
 func (x *TransformConstraint) WithIncremental(incremental bool) *TransformConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
 	return x
@@ -97,3 +79,5 @@ type TransformConstraintable interface {
 }
 
 var _ TransformConstraintable = (*TransformConstraint)(nil)
+
+var _ ConstraintProvider = (*TransformConstraint)(nil)

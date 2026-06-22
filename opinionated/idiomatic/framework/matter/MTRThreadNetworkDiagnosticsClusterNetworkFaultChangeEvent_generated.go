@@ -23,7 +23,8 @@ func MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventFromID(id objc.ID)
 	if id == 0 {
 		return nil
 	}
-	x := &MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventAdopt(id objc.ID) 
 	if id == 0 {
 		return nil
 	}
-	x := &MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent{Handle: objref.Wrap(id)}
+	x := &MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,26 +58,36 @@ func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) IsKind(class
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent creates a new MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent.
 func NewMTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent() *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent")), objc.RegisterName("new"))
 	return mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventAdopt(_id)
 }
 
+// Current wraps the corresponding Objective-C method.
 func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Current() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("current"))
 	return obj.Wrap(_r)
 }
 
+// SetCurrent wraps the corresponding Objective-C method.
 func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) SetCurrent(current obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrent:"), objref.IDOf(current))
 }
 
+// Previous wraps the corresponding Objective-C method.
 func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Previous() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previous"))
 	return obj.Wrap(_r)
 }
 
+// SetPrevious wraps the corresponding Objective-C method.
 func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) SetPrevious(previous obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrevious:"), objref.IDOf(previous))
 }

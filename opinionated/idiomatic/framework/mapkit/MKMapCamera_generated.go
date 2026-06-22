@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A virtual camera for defining the appearance of the map.
-//
 // MapCamera is an idiomatic wrapper over the Objective-C class MKMapCamera.
+//
+// A virtual camera for defining the appearance of the map.
 type MapCamera struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MapCameraFromID(id objc.ID) *MapCamera {
 	if id == 0 {
 		return nil
 	}
-	x := &MapCamera{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MapCamera{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mapCameraAdopt(id objc.ID) *MapCamera {
 	if id == 0 {
 		return nil
 	}
-	x := &MapCamera{Handle: objref.Wrap(id)}
+	x := &MapCamera{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *MapCamera) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MapCamera) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMapCamera creates a new MapCamera.
 func NewMapCamera() *MapCamera {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKMapCamera")), objc.RegisterName("new"))
 	return mapCameraAdopt(_id)
 }
 
-// The viewing angle of the camera, in degrees.
-//
-// WithPitch sets pitch and returns the receiver so calls can be chained.
+// WithPitch the viewing angle of the camera, in degrees.
 func (x *MapCamera) WithPitch(pitch float64) *MapCamera {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPitch:"), pitch)
 	return x
 }
 
+// Pitch wraps the corresponding Objective-C method.
 func (x *MapCamera) Pitch() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("pitch"))
 	return _r
 }
 
+// SetPitch wraps the corresponding Objective-C method.
 func (x *MapCamera) SetPitch(pitch float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPitch:"), pitch)
 }

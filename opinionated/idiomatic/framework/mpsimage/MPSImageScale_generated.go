@@ -6,15 +6,18 @@ package mpsimage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ImageScale is an idiomatic wrapper over the Objective-C class MPSImageScale.
+//
+// ImageScale is an abstract base — you do not construct it directly. Construct one of [ImageBilinearScale], [ImageLanczosScale] and pass it where a ImageScale is accepted.
 type ImageScale struct {
-	objref.Handle
+	UnaryImageKernel
 }
 
 // ImageScaleFromID adopts an existing Objective-C object as a ImageScale
@@ -23,7 +26,8 @@ func ImageScaleFromID(id objc.ID) *ImageScale {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageScale{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageScale{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,35 +40,38 @@ func imageScaleAdopt(id objc.ID) *ImageScale {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageScale{Handle: objref.Wrap(id)}
+	x := &ImageScale{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ImageScale) Description() string {
-	return rt.Description(objref.IDOf(x))
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
+func (x *ImageScale) WithOffset(offset mpscore.MPSOffset) *ImageScale {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
 }
 
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageScale) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageScale) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewImageScale creates a new ImageScale.
-func NewImageScale() *ImageScale {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageScale")), objc.RegisterName("new"))
-	return imageScaleAdopt(_id)
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (x *ImageScale) WithClipRect(clipRect metal.MTLRegion) *ImageScale {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
 }
 
 // ImageScaleable is the interface implemented by [ImageScale], for mocking and DI.
 type ImageScaleable interface {
 	obj.Object
+	WithOffset(offset mpscore.MPSOffset) *ImageScale
+	WithClipRect(clipRect metal.MTLRegion) *ImageScale
 }
 
 var _ ImageScaleable = (*ImageScale)(nil)
+
+// isImageScale marks ImageScale — and, by embedding promotion, its
+// subclasses — as a member of the ImageScale hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ImageScale) isImageScale() {}
+
+var _ ImageScaleProvider = (*ImageScale)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageScale)(nil)

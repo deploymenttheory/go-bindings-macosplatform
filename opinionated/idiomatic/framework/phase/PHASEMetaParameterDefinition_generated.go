@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specification for a named parameter with a constant value.
-//
 // MetaParameterDefinition is an idiomatic wrapper over the Objective-C class PHASEMetaParameterDefinition.
+//
+// MetaParameterDefinition is an abstract base — you do not construct it directly. Construct one of [NumberMetaParameterDefinition], [StringMetaParameterDefinition] and pass it where a MetaParameterDefinition is accepted.
+//
+// A specification for a named parameter with a constant value.
 type MetaParameterDefinition struct {
-	objref.Handle
+	Definition
 }
 
 // MetaParameterDefinitionFromID adopts an existing Objective-C object as a MetaParameterDefinition
@@ -25,7 +26,8 @@ func MetaParameterDefinitionFromID(id objc.ID) *MetaParameterDefinition {
 	if id == 0 {
 		return nil
 	}
-	x := &MetaParameterDefinition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetaParameterDefinition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,32 +40,13 @@ func metaParameterDefinitionAdopt(id objc.ID) *MetaParameterDefinition {
 	if id == 0 {
 		return nil
 	}
-	x := &MetaParameterDefinition{Handle: objref.Wrap(id)}
+	x := &MetaParameterDefinition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MetaParameterDefinition) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetaParameterDefinition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetaParameterDefinition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewMetaParameterDefinition creates a new MetaParameterDefinition.
-func NewMetaParameterDefinition() *MetaParameterDefinition {
-	_id := objc.Send[objc.ID](objc.ID(_class("PHASEMetaParameterDefinition")), objc.RegisterName("new"))
-	return metaParameterDefinitionAdopt(_id)
-}
-
+// Value wraps the corresponding Objective-C method.
 func (x *MetaParameterDefinition) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	return obj.Wrap(_r)
@@ -76,3 +59,12 @@ type MetaParameterDefinitionable interface {
 }
 
 var _ MetaParameterDefinitionable = (*MetaParameterDefinition)(nil)
+
+// isMetaParameterDefinition marks MetaParameterDefinition — and, by embedding promotion, its
+// subclasses — as a member of the MetaParameterDefinition hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MetaParameterDefinition) isMetaParameterDefinition() {}
+
+var _ MetaParameterDefinitionProvider = (*MetaParameterDefinition)(nil)
+
+var _ DefinitionProvider = (*MetaParameterDefinition)(nil)

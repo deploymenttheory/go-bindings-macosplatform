@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request to create, delete, change metadata for, or edit the content of a Photos asset, for use in a photo library change block.
-//
 // AssetChangeRequest is an idiomatic wrapper over the Objective-C class PHAssetChangeRequest.
+//
+// AssetChangeRequest is an abstract base — you do not construct it directly. Construct one of [AssetCreationRequest] and pass it where a AssetChangeRequest is accepted.
+//
+// A request to create, delete, change metadata for, or edit the content of a Photos asset, for use in a photo library change block.
 type AssetChangeRequest struct {
-	objref.Handle
+	ChangeRequest
 }
 
 // AssetChangeRequestFromID adopts an existing Objective-C object as a AssetChangeRequest
@@ -25,7 +26,8 @@ func AssetChangeRequestFromID(id objc.ID) *AssetChangeRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetChangeRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetChangeRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,106 +40,87 @@ func assetChangeRequestAdopt(id objc.ID) *AssetChangeRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetChangeRequest{Handle: objref.Wrap(id)}
+	x := &AssetChangeRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *AssetChangeRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetChangeRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetChangeRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewAssetChangeRequest creates a new AssetChangeRequest.
-func NewAssetChangeRequest() *AssetChangeRequest {
-	_id := objc.Send[objc.ID](objc.ID(_class("PHAssetChangeRequest")), objc.RegisterName("new"))
-	return assetChangeRequestAdopt(_id)
-}
-
-// The date and time at which the asset claims to have been originally created.
-//
-// WithCreationDate sets creationDate and returns the receiver so calls can be chained.
+// WithCreationDate the date and time at which the asset claims to have been originally created.
 func (x *AssetChangeRequest) WithCreationDate(creationDate obj.Object) *AssetChangeRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCreationDate:"), objref.IDOf(creationDate))
 	return x
 }
 
-// A Boolean value that indicates whether the asset is marked as one of the user’s favorites.
-//
-// WithFavorite sets favorite and returns the receiver so calls can be chained.
+// WithFavorite a Boolean value that indicates whether the asset is marked as one of the user’s favorites.
 func (x *AssetChangeRequest) WithFavorite(favorite bool) *AssetChangeRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFavorite:"), favorite)
 	return x
 }
 
-// A Boolean value that indicates whether the asset is hidden in collections.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden a Boolean value that indicates whether the asset is hidden in collections.
 func (x *AssetChangeRequest) WithHidden(hidden bool) *AssetChangeRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// The output of an asset content editing session.
-//
-// WithContentEditingOutput sets contentEditingOutput and returns the receiver so calls can be chained.
+// WithContentEditingOutput the output of an asset content editing session.
 func (x *AssetChangeRequest) WithContentEditingOutput(contentEditingOutput *ContentEditingOutput) *AssetChangeRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditingOutput:"), objref.IDOf(contentEditingOutput))
 	return x
 }
 
-// Request to revert any edits made to the asset’s content.
+// RevertAssetContentToOriginal request to revert any edits made to the asset’s content.
 func (x *AssetChangeRequest) RevertAssetContentToOriginal() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("revertAssetContentToOriginal"))
 }
 
+// PlaceholderForCreatedAsset wraps the corresponding Objective-C method.
 func (x *AssetChangeRequest) PlaceholderForCreatedAsset() *ObjectPlaceholder {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderForCreatedAsset"))
 	return ObjectPlaceholderFromID(_r)
 }
 
+// CreationDate wraps the corresponding Objective-C method.
 func (x *AssetChangeRequest) CreationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creationDate"))
 	return obj.Wrap(_r)
 }
 
+// SetCreationDate wraps the corresponding Objective-C method.
 func (x *AssetChangeRequest) SetCreationDate(creationDate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCreationDate:"), objref.IDOf(creationDate))
 }
 
+// IsFavorite wraps the corresponding Objective-C method.
 func (x *AssetChangeRequest) IsFavorite() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFavorite"))
 	return _r
 }
 
+// SetFavorite wraps the corresponding Objective-C method.
 func (x *AssetChangeRequest) SetFavorite(favorite bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFavorite:"), favorite)
 }
 
+// IsHidden wraps the corresponding Objective-C method.
 func (x *AssetChangeRequest) IsHidden() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
 	return _r
 }
 
+// SetHidden wraps the corresponding Objective-C method.
 func (x *AssetChangeRequest) SetHidden(hidden bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 }
 
+// ContentEditingOutput wraps the corresponding Objective-C method.
 func (x *AssetChangeRequest) ContentEditingOutput() *ContentEditingOutput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentEditingOutput"))
 	return ContentEditingOutputFromID(_r)
 }
 
+// SetContentEditingOutput wraps the corresponding Objective-C method.
 func (x *AssetChangeRequest) SetContentEditingOutput(contentEditingOutput *ContentEditingOutput) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditingOutput:"), objref.IDOf(contentEditingOutput))
 }
@@ -162,3 +145,12 @@ type AssetChangeRequestable interface {
 }
 
 var _ AssetChangeRequestable = (*AssetChangeRequest)(nil)
+
+// isAssetChangeRequest marks AssetChangeRequest — and, by embedding promotion, its
+// subclasses — as a member of the AssetChangeRequest hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AssetChangeRequest) isAssetChangeRequest() {}
+
+var _ AssetChangeRequestProvider = (*AssetChangeRequest)(nil)
+
+var _ ChangeRequestProvider = (*AssetChangeRequest)(nil)

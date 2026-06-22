@@ -23,7 +23,8 @@ func CIDeviceManagerFromID(id objc.ID) *CIDeviceManager {
 	if id == 0 {
 		return nil
 	}
-	x := &CIDeviceManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CIDeviceManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func cIDeviceManagerAdopt(id objc.ID) *CIDeviceManager {
 	if id == 0 {
 		return nil
 	}
-	x := &CIDeviceManager{Handle: objref.Wrap(id)}
+	x := &CIDeviceManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,13 +58,19 @@ func (x *CIDeviceManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CIDeviceManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCIDeviceManager creates a new CIDeviceManager.
 func NewCIDeviceManager() *CIDeviceManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("MIDICIDeviceManager")), objc.RegisterName("new"))
 	return cIDeviceManagerAdopt(_id)
 }
 
-// A list of MIDICIDevices that responded to the last MIDI-CI discovery request.
+// DiscoveredCIDevices a list of MIDICIDevices that responded to the last MIDI-CI discovery request.
 //
 // DiscoveredCIDevices returns the collection as a Go slice.
 func (x *CIDeviceManager) DiscoveredCIDevices() []*CIDevice {

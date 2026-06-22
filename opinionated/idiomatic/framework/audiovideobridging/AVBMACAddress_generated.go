@@ -23,7 +23,8 @@ func MACAddressFromID(id objc.ID) *MACAddress {
 	if id == 0 {
 		return nil
 	}
-	x := &MACAddress{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MACAddress{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mACAddressAdopt(id objc.ID) *MACAddress {
 	if id == 0 {
 		return nil
 	}
-	x := &MACAddress{Handle: objref.Wrap(id)}
+	x := &MACAddress{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,47 +58,48 @@ func (x *MACAddress) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MACAddress) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMACAddress creates a new MACAddress.
 func NewMACAddress() *MACAddress {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVBMACAddress")), objc.RegisterName("new"))
 	return mACAddressAdopt(_id)
 }
 
-// An NSData object containing the bytes of the MAC address.
-//
-// WithDataRepresentation sets dataRepresentation and returns the receiver so calls can be chained.
+// WithDataRepresentation an NSData object containing the bytes of the MAC address.
 func (x *MACAddress) WithDataRepresentation(dataRepresentation obj.Object) *MACAddress {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataRepresentation:"), objref.IDOf(dataRepresentation))
 	return x
 }
 
-// The colon separated cannonical string representation of the MAC address e.g. 12:34:56:78:ab:cd
-//
-// WithStringRepresentation sets stringRepresentation and returns the receiver so calls can be chained.
+// WithStringRepresentation the colon separated cannonical string representation of the MAC address e.g. 12:34:56:78:ab:cd
 func (x *MACAddress) WithStringRepresentation(stringRepresentation string) *MACAddress {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringRepresentation:"), purego.NSString(stringRepresentation))
 	return x
 }
 
-// Returns if the multicast bit is set in the MAC address.
-//
-// WithMulticast sets multicast and returns the receiver so calls can be chained.
+// WithMulticast returns if the multicast bit is set in the MAC address.
 func (x *MACAddress) WithMulticast(multicast bool) *MACAddress {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMulticast:"), multicast)
 	return x
 }
 
-// An NSData object containing the bytes of the MAC address.
+// DataRepresentation an NSData object containing the bytes of the MAC address.
 func (x *MACAddress) DataRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
 	return obj.Wrap(_r)
 }
 
+// SetDataRepresentation wraps the corresponding Objective-C method.
 func (x *MACAddress) SetDataRepresentation(dataRepresentation obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataRepresentation:"), objref.IDOf(dataRepresentation))
 }
 
-// The colon separated cannonical string representation of the MAC address e.g. 12:34:56:78:ab:cd
+// StringRepresentation the colon separated cannonical string representation of the MAC address e.g. 12:34:56:78:ab:cd
 func (x *MACAddress) StringRepresentation() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringRepresentation"))
 	if _r == 0 {
@@ -105,16 +108,18 @@ func (x *MACAddress) StringRepresentation() string {
 	return purego.GoString(_r)
 }
 
+// SetStringRepresentation wraps the corresponding Objective-C method.
 func (x *MACAddress) SetStringRepresentation(stringRepresentation string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringRepresentation:"), purego.NSString(stringRepresentation))
 }
 
-// Returns if the multicast bit is set in the MAC address.
+// IsMulticast returns if the multicast bit is set in the MAC address.
 func (x *MACAddress) IsMulticast() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMulticast"))
 	return _r
 }
 
+// SetMulticast wraps the corresponding Objective-C method.
 func (x *MACAddress) SetMulticast(multicast bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMulticast:"), multicast)
 }

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A joint that simulates a spring connecting two physics bodies.
-//
 // PhysicsJointSpring is an idiomatic wrapper over the Objective-C class SKPhysicsJointSpring.
+//
+// It embeds [PhysicsJoint], promoting that type's methods.
+//
+// A joint that simulates a spring connecting two physics bodies.
 type PhysicsJointSpring struct {
-	objref.Handle
+	PhysicsJoint
 }
 
 // PhysicsJointSpringFromID adopts an existing Objective-C object as a PhysicsJointSpring
@@ -25,7 +26,8 @@ func PhysicsJointSpringFromID(id objc.ID) *PhysicsJointSpring {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsJointSpring{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PhysicsJointSpring{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func physicsJointSpringAdopt(id objc.ID) *PhysicsJointSpring {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsJointSpring{Handle: objref.Wrap(id)}
+	x := &PhysicsJointSpring{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PhysicsJointSpring) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PhysicsJointSpring) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PhysicsJointSpring) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPhysicsJointSpring creates a new PhysicsJointSpring.
@@ -64,52 +52,48 @@ func NewPhysicsJointSpring() *PhysicsJointSpring {
 	return physicsJointSpringAdopt(_id)
 }
 
-// Defines how the spring’s motion should be damped due to the forces of friction.
-//
-// WithDamping sets damping and returns the receiver so calls can be chained.
+// WithDamping defines how the spring’s motion should be damped due to the forces of friction.
 func (x *PhysicsJointSpring) WithDamping(damping float64) *PhysicsJointSpring {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDamping:"), damping)
 	return x
 }
 
-// Defines the frequency or stiffness characteristics of the spring.
-//
-// WithFrequency sets frequency and returns the receiver so calls can be chained.
+// WithFrequency defines the frequency or stiffness characteristics of the spring.
 func (x *PhysicsJointSpring) WithFrequency(frequency float64) *PhysicsJointSpring {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
 	return x
 }
 
-// The first body connected by the joint.
-//
-// WithBodyA sets bodyA and returns the receiver so calls can be chained.
+// WithBodyA the first body connected by the joint.
 func (x *PhysicsJointSpring) WithBodyA(bodyA *PhysicsBody) *PhysicsJointSpring {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
 	return x
 }
 
-// The second body connected by the joint.
-//
-// WithBodyB sets bodyB and returns the receiver so calls can be chained.
+// WithBodyB the second body connected by the joint.
 func (x *PhysicsJointSpring) WithBodyB(bodyB *PhysicsBody) *PhysicsJointSpring {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
 	return x
 }
 
+// Damping wraps the corresponding Objective-C method.
 func (x *PhysicsJointSpring) Damping() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("damping"))
 	return _r
 }
 
+// SetDamping wraps the corresponding Objective-C method.
 func (x *PhysicsJointSpring) SetDamping(damping float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDamping:"), damping)
 }
 
+// Frequency wraps the corresponding Objective-C method.
 func (x *PhysicsJointSpring) Frequency() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frequency"))
 	return _r
 }
 
+// SetFrequency wraps the corresponding Objective-C method.
 func (x *PhysicsJointSpring) SetFrequency(frequency float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
 }
@@ -128,3 +112,5 @@ type PhysicsJointSpringable interface {
 }
 
 var _ PhysicsJointSpringable = (*PhysicsJointSpring)(nil)
+
+var _ PhysicsJointProvider = (*PhysicsJointSpring)(nil)

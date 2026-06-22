@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The object you use to request, manage, and store the user’s account information.
-//
 // AccountStore is an idiomatic wrapper over the Objective-C class ACAccountStore.
+//
+// The object you use to request, manage, and store the user’s account information.
 type AccountStore struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AccountStoreFromID(id objc.ID) *AccountStore {
 	if id == 0 {
 		return nil
 	}
-	x := &AccountStore{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AccountStore{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func accountStoreAdopt(id objc.ID) *AccountStore {
 	if id == 0 {
 		return nil
 	}
-	x := &AccountStore{Handle: objref.Wrap(id)}
+	x := &AccountStore{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,30 +60,37 @@ func (x *AccountStore) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AccountStore) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAccountStore creates a new AccountStore.
 func NewAccountStore() *AccountStore {
 	_id := objc.Send[objc.ID](objc.ID(_class("ACAccountStore")), objc.RegisterName("new"))
 	return accountStoreAdopt(_id)
 }
 
-// Returns the account with the specified identifier.
+// AccountWithIdentifier returns the account with the specified identifier.
 func (x *AccountStore) AccountWithIdentifier(identifier string) *Account {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountWithIdentifier:"), purego.NSString(identifier))
 	return AccountFromID(_r)
 }
 
-// Returns an account type that matches the specified identifier.
+// AccountTypeWithAccountTypeIdentifier returns an account type that matches the specified identifier.
 func (x *AccountStore) AccountTypeWithAccountTypeIdentifier(typeIdentifier string) *AccountType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountTypeWithAccountTypeIdentifier:"), purego.NSString(typeIdentifier))
 	return AccountTypeFromID(_r)
 }
 
-// Returns all accounts of the specified type.
+// AccountsWithAccountType returns all accounts of the specified type.
 func (x *AccountStore) AccountsWithAccountType(accountType *AccountType) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountsWithAccountType:"), objref.IDOf(accountType))
 	return obj.Wrap(_r)
 }
 
+// Accounts wraps the corresponding Objective-C method.
 func (x *AccountStore) Accounts() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accounts"))
 	return obj.Wrap(_r)

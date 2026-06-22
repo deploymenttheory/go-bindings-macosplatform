@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event that represents when a playback seek occurs.
-//
 // MetricPlayerItemSeekEvent is an idiomatic wrapper over the Objective-C class AVMetricPlayerItemSeekEvent.
+//
+// It embeds [MetricPlayerItemRateChangeEvent], promoting that type's methods.
+//
+// An event that represents when a playback seek occurs.
 type MetricPlayerItemSeekEvent struct {
-	objref.Handle
+	MetricPlayerItemRateChangeEvent
 }
 
 // MetricPlayerItemSeekEventFromID adopts an existing Objective-C object as a MetricPlayerItemSeekEvent
@@ -25,7 +26,8 @@ func MetricPlayerItemSeekEventFromID(id objc.ID) *MetricPlayerItemSeekEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MetricPlayerItemSeekEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetricPlayerItemSeekEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func metricPlayerItemSeekEventAdopt(id objc.ID) *MetricPlayerItemSeekEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MetricPlayerItemSeekEvent{Handle: objref.Wrap(id)}
+	x := &MetricPlayerItemSeekEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MetricPlayerItemSeekEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetricPlayerItemSeekEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetricPlayerItemSeekEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMetricPlayerItemSeekEvent creates a new MetricPlayerItemSeekEvent.
@@ -70,3 +58,7 @@ type MetricPlayerItemSeekEventable interface {
 }
 
 var _ MetricPlayerItemSeekEventable = (*MetricPlayerItemSeekEvent)(nil)
+
+var _ MetricPlayerItemRateChangeEventProvider = (*MetricPlayerItemSeekEvent)(nil)
+
+var _ MetricEventProvider = (*MetricPlayerItemSeekEvent)(nil)

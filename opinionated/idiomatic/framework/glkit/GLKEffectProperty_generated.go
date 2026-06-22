@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for configuration information used in GLKit rendering effects.
-//
 // EffectProperty is an idiomatic wrapper over the Objective-C class GLKEffectProperty.
+//
+// EffectProperty is an abstract base — you do not construct it directly. Construct one of [EffectPropertyFog], [EffectPropertyLight], [EffectPropertyMaterial], [EffectPropertyTexture], [EffectPropertyTransform] and pass it where a EffectProperty is accepted.
+//
+// The abstract superclass for configuration information used in GLKit rendering effects.
 type EffectProperty struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func EffectPropertyFromID(id objc.ID) *EffectProperty {
 	if id == 0 {
 		return nil
 	}
-	x := &EffectProperty{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EffectProperty{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func effectPropertyAdopt(id objc.ID) *EffectProperty {
 	if id == 0 {
 		return nil
 	}
-	x := &EffectProperty{Handle: objref.Wrap(id)}
+	x := &EffectProperty{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *EffectProperty) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewEffectProperty creates a new EffectProperty.
-func NewEffectProperty() *EffectProperty {
-	_id := objc.Send[objc.ID](objc.ID(_class("GLKEffectProperty")), objc.RegisterName("new"))
-	return effectPropertyAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *EffectProperty) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // EffectPropertyable is the interface implemented by [EffectProperty], for mocking and DI.
@@ -70,3 +74,10 @@ type EffectPropertyable interface {
 }
 
 var _ EffectPropertyable = (*EffectProperty)(nil)
+
+// isEffectProperty marks EffectProperty — and, by embedding promotion, its
+// subclasses — as a member of the EffectProperty hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *EffectProperty) isEffectProperty() {}
+
+var _ EffectPropertyProvider = (*EffectProperty)(nil)

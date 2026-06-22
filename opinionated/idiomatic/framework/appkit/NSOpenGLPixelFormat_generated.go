@@ -10,11 +10,12 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An object that specifies the types of buffers and other attributes of the OpenGL context.
-//
 // OpenGLPixelFormat is an idiomatic wrapper over the Objective-C class NSOpenGLPixelFormat.
+//
+// An object that specifies the types of buffers and other attributes of the OpenGL context.
 type OpenGLPixelFormat struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func OpenGLPixelFormatFromID(id objc.ID) *OpenGLPixelFormat {
 	if id == 0 {
 		return nil
 	}
-	x := &OpenGLPixelFormat{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OpenGLPixelFormat{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func openGLPixelFormatAdopt(id objc.ID) *OpenGLPixelFormat {
 	if id == 0 {
 		return nil
 	}
-	x := &OpenGLPixelFormat{Handle: objref.Wrap(id)}
+	x := &OpenGLPixelFormat{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,40 +61,51 @@ func (x *OpenGLPixelFormat) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns an OpenGL pixel format object initialized with using an existing CGL pixel format object.
-//
-// NewOpenGLPixelFormatWithCGLPixelFormatObj creates a new OpenGLPixelFormat.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OpenGLPixelFormat) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewOpenGLPixelFormatWithCGLPixelFormatObj returns an OpenGL pixel format object initialized with using an existing CGL pixel format object.
 func NewOpenGLPixelFormatWithCGLPixelFormatObj(format obj.Object) *OpenGLPixelFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOpenGLPixelFormat")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGLPixelFormatObj:"), objref.IDOf(format))
 	return openGLPixelFormatAdopt(_id)
 }
 
-// Returns an OpenGL pixel format object initialized with specified pixel format attribute data.
-//
-// NewOpenGLPixelFormatWithData creates a new OpenGLPixelFormat.
+// NewOpenGLPixelFormatWithData returns an OpenGL pixel format object initialized with specified pixel format attribute data.
 func NewOpenGLPixelFormatWithData(attribs obj.Object) *OpenGLPixelFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOpenGLPixelFormat")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(attribs))
 	return openGLPixelFormatAdopt(_id)
 }
 
-// The attribute data for the pixel format object.
+// Attributes the attribute data for the pixel format object.
 func (x *OpenGLPixelFormat) Attributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
-// Sets the attribute data for the pixel format object.
+// SetAttributes sets the attribute data for the pixel format object.
 func (x *OpenGLPixelFormat) SetAttributes(attribs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributes:"), objref.IDOf(attribs))
 }
 
+// GetValuesForAttributeForVirtualScreen gets the value for the specified pixel format attribute.
+func (x *OpenGLPixelFormat) GetValuesForAttributeForVirtualScreen(attrib uint32, screen int32) (vals int32) {
+	var _out0 int32
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getValues:forAttribute:forVirtualScreen:"), unsafe.Pointer(&_out0), attrib, screen)
+	return _out0
+}
+
+// NumberOfVirtualScreens wraps the corresponding Objective-C method.
 func (x *OpenGLPixelFormat) NumberOfVirtualScreens() int32 {
 	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("numberOfVirtualScreens"))
 	return _r
 }
 
+// CGLPixelFormatObj wraps the corresponding Objective-C method.
 func (x *OpenGLPixelFormat) CGLPixelFormatObj() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CGLPixelFormatObj"))
 	return obj.Wrap(_r)
@@ -102,6 +116,7 @@ type OpenGLPixelFormatable interface {
 	obj.Object
 	Attributes() obj.Object
 	SetAttributes(attribs obj.Object)
+	GetValuesForAttributeForVirtualScreen(attrib uint32, screen int32) (vals int32)
 	NumberOfVirtualScreens() int32
 	CGLPixelFormatObj() obj.Object
 }

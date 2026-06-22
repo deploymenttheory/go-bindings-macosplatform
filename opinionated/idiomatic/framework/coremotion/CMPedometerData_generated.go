@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information about the distance traveled by a user on foot.
-//
 // PedometerData is an idiomatic wrapper over the Objective-C class CMPedometerData.
+//
+// Information about the distance traveled by a user on foot.
 type PedometerData struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PedometerDataFromID(id objc.ID) *PedometerData {
 	if id == 0 {
 		return nil
 	}
-	x := &PedometerData{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PedometerData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func pedometerDataAdopt(id objc.ID) *PedometerData {
 	if id == 0 {
 		return nil
 	}
-	x := &PedometerData{Handle: objref.Wrap(id)}
+	x := &PedometerData{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,49 @@ func (x *PedometerData) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PedometerData) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPedometerData creates a new PedometerData.
 func NewPedometerData() *PedometerData {
 	_id := objc.Send[objc.ID](objc.ID(_class("CMPedometerData")), objc.RegisterName("new"))
 	return pedometerDataAdopt(_id)
 }
 
+// StartDate wraps the corresponding Objective-C method.
 func (x *PedometerData) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
+// EndDate wraps the corresponding Objective-C method.
 func (x *PedometerData) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
+// NumberOfSteps wraps the corresponding Objective-C method.
 func (x *PedometerData) NumberOfSteps() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberOfSteps"))
 	return obj.Wrap(_r)
 }
 
+// Distance wraps the corresponding Objective-C method.
 func (x *PedometerData) Distance() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("distance"))
 	return obj.Wrap(_r)
 }
 
+// FloorsAscended wraps the corresponding Objective-C method.
 func (x *PedometerData) FloorsAscended() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("floorsAscended"))
 	return obj.Wrap(_r)
 }
 
+// FloorsDescended wraps the corresponding Objective-C method.
 func (x *PedometerData) FloorsDescended() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("floorsDescended"))
 	return obj.Wrap(_r)

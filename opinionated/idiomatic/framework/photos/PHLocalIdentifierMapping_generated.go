@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains the local identifier result from looking up a cloud identifier, or an error indicating why the lookup failed.
-//
 // LocalIdentifierMapping is an idiomatic wrapper over the Objective-C class PHLocalIdentifierMapping.
+//
+// An object that contains the local identifier result from looking up a cloud identifier, or an error indicating why the lookup failed.
 type LocalIdentifierMapping struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LocalIdentifierMappingFromID(id objc.ID) *LocalIdentifierMapping {
 	if id == 0 {
 		return nil
 	}
-	x := &LocalIdentifierMapping{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LocalIdentifierMapping{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func localIdentifierMappingAdopt(id objc.ID) *LocalIdentifierMapping {
 	if id == 0 {
 		return nil
 	}
-	x := &LocalIdentifierMapping{Handle: objref.Wrap(id)}
+	x := &LocalIdentifierMapping{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *LocalIdentifierMapping) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LocalIdentifierMapping) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLocalIdentifierMapping creates a new LocalIdentifierMapping.
 func NewLocalIdentifierMapping() *LocalIdentifierMapping {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHLocalIdentifierMapping")), objc.RegisterName("new"))
 	return localIdentifierMappingAdopt(_id)
 }
 
-// The \c NSString representing the local identifier of the resource found for this cloud identifier, or nil if the match was not found.
+// LocalIdentifier the \c NSString representing the local identifier of the resource found for this cloud identifier, or nil if the match was not found.
 func (x *LocalIdentifierMapping) LocalIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localIdentifier"))
 	if _r == 0 {

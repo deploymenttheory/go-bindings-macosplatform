@@ -23,7 +23,8 @@ func TransformRotateZOpFromID(id objc.ID) *TransformRotateZOp {
 	if id == 0 {
 		return nil
 	}
-	x := &TransformRotateZOp{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TransformRotateZOp{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func transformRotateZOpAdopt(id objc.ID) *TransformRotateZOp {
 	if id == 0 {
 		return nil
 	}
-	x := &TransformRotateZOp{Handle: objref.Wrap(id)}
+	x := &TransformRotateZOp{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,12 +58,19 @@ func (x *TransformRotateZOp) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TransformRotateZOp) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTransformRotateZOp creates a new TransformRotateZOp.
 func NewTransformRotateZOp() *TransformRotateZOp {
 	_id := objc.Send[objc.ID](objc.ID(_class("MDLTransformRotateZOp")), objc.RegisterName("new"))
 	return transformRotateZOpAdopt(_id)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *TransformRotateZOp) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -70,6 +79,7 @@ func (x *TransformRotateZOp) Name() string {
 	return purego.GoString(_r)
 }
 
+// AnimatedValue wraps the corresponding Objective-C method.
 func (x *TransformRotateZOp) AnimatedValue() *AnimatedScalar {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animatedValue"))
 	return AnimatedScalarFromID(_r)

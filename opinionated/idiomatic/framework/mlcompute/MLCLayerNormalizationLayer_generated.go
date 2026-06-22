@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that applies layer normalization over inputs.
-//
 // LayerNormalizationLayer is an idiomatic wrapper over the Objective-C class MLCLayerNormalizationLayer.
+//
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that applies layer normalization over inputs.
 type LayerNormalizationLayer struct {
-	objref.Handle
+	Layer
 }
 
 // LayerNormalizationLayerFromID adopts an existing Objective-C object as a LayerNormalizationLayer
@@ -25,7 +26,8 @@ func LayerNormalizationLayerFromID(id objc.ID) *LayerNormalizationLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &LayerNormalizationLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LayerNormalizationLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func layerNormalizationLayerAdopt(id objc.ID) *LayerNormalizationLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &LayerNormalizationLayer{Handle: objref.Wrap(id)}
+	x := &LayerNormalizationLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *LayerNormalizationLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LayerNormalizationLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LayerNormalizationLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewLayerNormalizationLayer creates a new LayerNormalizationLayer.
@@ -64,23 +52,19 @@ func NewLayerNormalizationLayer() *LayerNormalizationLayer {
 	return layerNormalizationLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string that helps identify this layer.
 func (x *LayerNormalizationLayer) WithLabel(label string) *LayerNormalizationLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *LayerNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *LayerNormalizationLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// The shape of the axes over which normalization occurs, (W), (H,W) or (C,H,W)
+// NormalizedShape the shape of the axes over which normalization occurs, (W), (H,W) or (C,H,W)
 //
 // NormalizedShape returns the collection as a Go slice.
 func (x *LayerNormalizationLayer) NormalizedShape() []obj.Object {
@@ -88,31 +72,31 @@ func (x *LayerNormalizationLayer) NormalizedShape() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The beta tensor
+// Beta the beta tensor
 func (x *LayerNormalizationLayer) Beta() *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beta"))
 	return TensorFromID(_r)
 }
 
-// The gamma tensor
+// Gamma the gamma tensor
 func (x *LayerNormalizationLayer) Gamma() *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gamma"))
 	return TensorFromID(_r)
 }
 
-// The beta tensor parameter used for optimizer update
+// BetaParameter the beta tensor parameter used for optimizer update
 func (x *LayerNormalizationLayer) BetaParameter() *TensorParameter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("betaParameter"))
 	return TensorParameterFromID(_r)
 }
 
-// The gamma tensor parameter used for optimizer update
+// GammaParameter the gamma tensor parameter used for optimizer update
 func (x *LayerNormalizationLayer) GammaParameter() *TensorParameter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gammaParameter"))
 	return TensorParameterFromID(_r)
 }
 
-// A value used for numerical stability
+// VarianceEpsilon a value used for numerical stability
 func (x *LayerNormalizationLayer) VarianceEpsilon() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("varianceEpsilon"))
 	return _r
@@ -132,3 +116,5 @@ type LayerNormalizationLayerable interface {
 }
 
 var _ LayerNormalizationLayerable = (*LayerNormalizationLayer)(nil)
+
+var _ LayerProvider = (*LayerNormalizationLayer)(nil)

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class that adds a name to framework assets.
-//
 // Asset is an idiomatic wrapper over the Objective-C class PHASEAsset.
+//
+// Asset is an abstract base — you do not construct it directly. Construct one of [GlobalMetaParameterAsset], [SoundAsset], [SoundEventNodeAsset] and pass it where a Asset is accepted.
+//
+// A base class that adds a name to framework assets.
 type Asset struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func AssetFromID(id objc.ID) *Asset {
 	if id == 0 {
 		return nil
 	}
-	x := &Asset{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Asset{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func assetAdopt(id objc.ID) *Asset {
 	if id == 0 {
 		return nil
 	}
-	x := &Asset{Handle: objref.Wrap(id)}
+	x := &Asset{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +62,13 @@ func (x *Asset) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewAsset creates a new Asset.
-func NewAsset() *Asset {
-	_id := objc.Send[objc.ID](objc.ID(_class("PHASEAsset")), objc.RegisterName("new"))
-	return assetAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Asset) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *Asset) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -79,3 +84,10 @@ type Assetable interface {
 }
 
 var _ Assetable = (*Asset)(nil)
+
+// isAsset marks Asset — and, by embedding promotion, its
+// subclasses — as a member of the Asset hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Asset) isAsset() {}
+
+var _ AssetProvider = (*Asset)(nil)

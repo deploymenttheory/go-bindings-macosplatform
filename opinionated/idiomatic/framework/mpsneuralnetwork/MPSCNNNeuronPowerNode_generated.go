@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A node representing a MPSCNNNeuronPower kernel For each pixel, applies the following function:
-//
 // CNNNeuronPowerNode is an idiomatic wrapper over the Objective-C class MPSCNNNeuronPowerNode.
+//
+// It embeds [CNNNeuronNode], promoting that type's methods.
+//
+// A node representing a MPSCNNNeuronPower kernel For each pixel, applies the following function:
 type CNNNeuronPowerNode struct {
-	objref.Handle
+	CNNNeuronNode
 }
 
 // CNNNeuronPowerNodeFromID adopts an existing Objective-C object as a CNNNeuronPowerNode
@@ -25,7 +26,8 @@ func CNNNeuronPowerNodeFromID(id objc.ID) *CNNNeuronPowerNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNeuronPowerNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNNeuronPowerNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,47 +40,27 @@ func cNNNeuronPowerNodeAdopt(id objc.ID) *CNNNeuronPowerNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNeuronPowerNode{Handle: objref.Wrap(id)}
+	x := &CNNNeuronPowerNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNNeuronPowerNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNNeuronPowerNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNNeuronPowerNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Init a node representing a MPSCNNNeuronPower kernel For each pixel, applies the following function:
-//
-// NewCNNNeuronPowerNodeWithSourceABC creates a new CNNNeuronPowerNode.
+// NewCNNNeuronPowerNodeWithSourceABC init a node representing a MPSCNNNeuronPower kernel For each pixel, applies the following function:
 func NewCNNNeuronPowerNodeWithSourceABC(sourceNode *NNImageNode, a float32, b float32, c float32) *CNNNeuronPowerNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronPowerNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:a:b:c:"), objref.IDOf(sourceNode), a, b, c)
 	return cNNNeuronPowerNodeAdopt(_id)
 }
 
-// Init a node with default values for parameters a, b, and c
-//
-// NewCNNNeuronPowerNodeWithSource creates a new CNNNeuronPowerNode.
+// NewCNNNeuronPowerNodeWithSource init a node with default values for parameters a, b, and c
 func NewCNNNeuronPowerNodeWithSource(sourceNode *NNImageNode) *CNNNeuronPowerNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronPowerNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return cNNNeuronPowerNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNNeuronPowerNode) WithLabel(label string) *CNNNeuronPowerNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -91,3 +73,7 @@ type CNNNeuronPowerNodeable interface {
 }
 
 var _ CNNNeuronPowerNodeable = (*CNNNeuronPowerNode)(nil)
+
+var _ CNNNeuronNodeProvider = (*CNNNeuronPowerNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNNeuronPowerNode)(nil)

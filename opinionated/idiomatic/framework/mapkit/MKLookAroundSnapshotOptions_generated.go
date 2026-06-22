@@ -6,15 +6,16 @@ package mapkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Values you use to customize LookAround snapshots.
-//
 // LookAroundSnapshotOptions is an idiomatic wrapper over the Objective-C class MKLookAroundSnapshotOptions.
+//
+// Values you use to customize LookAround snapshots.
 type LookAroundSnapshotOptions struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func LookAroundSnapshotOptionsFromID(id objc.ID) *LookAroundSnapshotOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &LookAroundSnapshotOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LookAroundSnapshotOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func lookAroundSnapshotOptionsAdopt(id objc.ID) *LookAroundSnapshotOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &LookAroundSnapshotOptions{Handle: objref.Wrap(id)}
+	x := &LookAroundSnapshotOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,33 +61,61 @@ func (x *LookAroundSnapshotOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LookAroundSnapshotOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLookAroundSnapshotOptions creates a new LookAroundSnapshotOptions.
 func NewLookAroundSnapshotOptions() *LookAroundSnapshotOptions {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKLookAroundSnapshotOptions")), objc.RegisterName("new"))
 	return lookAroundSnapshotOptionsAdopt(_id)
 }
 
-// WithPointOfInterestFilter sets pointOfInterestFilter and returns the receiver so calls can be chained.
+// WithPointOfInterestFilter sets the property and returns the receiver so calls can be chained.
 func (x *LookAroundSnapshotOptions) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LookAroundSnapshotOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 	return x
 }
 
+// WithSize sets the property and returns the receiver so calls can be chained.
+func (x *LookAroundSnapshotOptions) WithSize(size corefoundation.CGSize) *LookAroundSnapshotOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
+	return x
+}
+
+// PointOfInterestFilter wraps the corresponding Objective-C method.
 func (x *LookAroundSnapshotOptions) PointOfInterestFilter() *PointOfInterestFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }
 
+// SetPointOfInterestFilter wraps the corresponding Objective-C method.
 func (x *LookAroundSnapshotOptions) SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
+}
+
+// Size wraps the corresponding Objective-C method.
+func (x *LookAroundSnapshotOptions) Size() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("size"))
+	return _r
+}
+
+// SetSize wraps the corresponding Objective-C method.
+func (x *LookAroundSnapshotOptions) SetSize(size corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
 }
 
 // LookAroundSnapshotOptionsable is the interface implemented by [LookAroundSnapshotOptions], for mocking and DI.
 type LookAroundSnapshotOptionsable interface {
 	obj.Object
 	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LookAroundSnapshotOptions
+	WithSize(size corefoundation.CGSize) *LookAroundSnapshotOptions
 	PointOfInterestFilter() *PointOfInterestFilter
 	SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter)
+	Size() corefoundation.CGSize
+	SetSize(size corefoundation.CGSize)
 }
 
 var _ LookAroundSnapshotOptionsable = (*LookAroundSnapshotOptions)(nil)

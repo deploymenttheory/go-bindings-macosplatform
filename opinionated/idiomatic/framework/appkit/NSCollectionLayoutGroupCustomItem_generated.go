@@ -6,15 +6,16 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An item used in a group with a custom layout arrangement.
-//
 // CollectionLayoutGroupCustomItem is an idiomatic wrapper over the Objective-C class NSCollectionLayoutGroupCustomItem.
+//
+// An item used in a group with a custom layout arrangement.
 type CollectionLayoutGroupCustomItem struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func CollectionLayoutGroupCustomItemFromID(id objc.ID) *CollectionLayoutGroupCus
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionLayoutGroupCustomItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollectionLayoutGroupCustomItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func collectionLayoutGroupCustomItemAdopt(id objc.ID) *CollectionLayoutGroupCust
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionLayoutGroupCustomItem{Handle: objref.Wrap(id)}
+	x := &CollectionLayoutGroupCustomItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +61,25 @@ func (x *CollectionLayoutGroupCustomItem) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CollectionLayoutGroupCustomItem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCollectionLayoutGroupCustomItem creates a new CollectionLayoutGroupCustomItem.
 func NewCollectionLayoutGroupCustomItem() *CollectionLayoutGroupCustomItem {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutGroupCustomItem")), objc.RegisterName("new"))
 	return collectionLayoutGroupCustomItemAdopt(_id)
 }
 
+// Frame wraps the corresponding Objective-C method.
+func (x *CollectionLayoutGroupCustomItem) Frame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frame"))
+	return _r
+}
+
+// ZIndex wraps the corresponding Objective-C method.
 func (x *CollectionLayoutGroupCustomItem) ZIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("zIndex"))
 	return _r
@@ -72,6 +88,7 @@ func (x *CollectionLayoutGroupCustomItem) ZIndex() int {
 // CollectionLayoutGroupCustomItemable is the interface implemented by [CollectionLayoutGroupCustomItem], for mocking and DI.
 type CollectionLayoutGroupCustomItemable interface {
 	obj.Object
+	Frame() corefoundation.CGRect
 	ZIndex() int
 }
 

@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a collection of record zones and subscriptions.
-//
 // Database is an idiomatic wrapper over the Objective-C class CKDatabase.
+//
+// An object that represents a collection of record zones and subscriptions.
 type Database struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func DatabaseFromID(id objc.ID) *Database {
 	if id == 0 {
 		return nil
 	}
-	x := &Database{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Database{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func databaseAdopt(id objc.ID) *Database {
 	if id == 0 {
 		return nil
 	}
-	x := &Database{Handle: objref.Wrap(id)}
+	x := &Database{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,26 +62,33 @@ func (x *Database) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Database) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDatabase creates a new Database.
 func NewDatabase() *Database {
 	_id := objc.Send[objc.ID](objc.ID(_class("CKDatabase")), objc.RegisterName("new"))
 	return databaseAdopt(_id)
 }
 
-// Executes the specified operation in the current database.
+// AddOperation executes the specified operation in the current database.
 func (x *Database) AddOperation(operation *DatabaseOperation) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOperation:"), objref.IDOf(operation))
 }
 
+// DatabaseScope wraps the corresponding Objective-C method.
 func (x *Database) DatabaseScope() DatabaseScope {
 	_r := objc.Send[DatabaseScope](objref.IDOf(x), objc.RegisterName("databaseScope"))
 	return _r
 }
 
-// Fetches a specific record.
+// FetchRecordWithID fetches a specific record.
 //
 // FetchRecordWithID blocks until the operation completes or ctx is cancelled.
-func (x *Database) FetchRecordWithID(ctx context.Context, recordID *RecordID) (*Record, error) {
+func (x *Database) FetchRecordWithID(ctx context.Context, recordID *RecordID) (result *Record, err error) {
 	type _result struct {
 		val *Record
 		err error
@@ -101,10 +110,10 @@ func (x *Database) FetchRecordWithID(ctx context.Context, recordID *RecordID) (*
 	}
 }
 
-// Saves a specific record.
+// SaveRecord saves a specific record.
 //
 // SaveRecord blocks until the operation completes or ctx is cancelled.
-func (x *Database) SaveRecord(ctx context.Context, record *Record) (*Record, error) {
+func (x *Database) SaveRecord(ctx context.Context, record *Record) (result *Record, err error) {
 	type _result struct {
 		val *Record
 		err error
@@ -126,10 +135,10 @@ func (x *Database) SaveRecord(ctx context.Context, record *Record) (*Record, err
 	}
 }
 
-// Deletes a specific record.
+// DeleteRecordWithID deletes a specific record.
 //
 // DeleteRecordWithID blocks until the operation completes or ctx is cancelled.
-func (x *Database) DeleteRecordWithID(ctx context.Context, recordID *RecordID) (*RecordID, error) {
+func (x *Database) DeleteRecordWithID(ctx context.Context, recordID *RecordID) (result *RecordID, err error) {
 	type _result struct {
 		val *RecordID
 		err error
@@ -151,10 +160,10 @@ func (x *Database) DeleteRecordWithID(ctx context.Context, recordID *RecordID) (
 	}
 }
 
-// Searches for records matching a predicate in the specified record zone.
+// PerformQueryInZoneWithID searches for records matching a predicate in the specified record zone.
 //
 // PerformQueryInZoneWithID blocks until the operation completes or ctx is cancelled.
-func (x *Database) PerformQueryInZoneWithID(ctx context.Context, query *Query, zoneID *RecordZoneID) (obj.Object, error) {
+func (x *Database) PerformQueryInZoneWithID(ctx context.Context, query *Query, zoneID *RecordZoneID) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -176,10 +185,10 @@ func (x *Database) PerformQueryInZoneWithID(ctx context.Context, query *Query, z
 	}
 }
 
-// Fetches all record zones from the current database.
+// FetchAllRecordZones fetches all record zones from the current database.
 //
 // FetchAllRecordZones blocks until the operation completes or ctx is cancelled.
-func (x *Database) FetchAllRecordZones(ctx context.Context) (obj.Object, error) {
+func (x *Database) FetchAllRecordZones(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -201,10 +210,10 @@ func (x *Database) FetchAllRecordZones(ctx context.Context) (obj.Object, error) 
 	}
 }
 
-// Fetches a specific record zone.
+// FetchRecordZoneWithID fetches a specific record zone.
 //
 // FetchRecordZoneWithID blocks until the operation completes or ctx is cancelled.
-func (x *Database) FetchRecordZoneWithID(ctx context.Context, zoneID *RecordZoneID) (*RecordZone, error) {
+func (x *Database) FetchRecordZoneWithID(ctx context.Context, zoneID *RecordZoneID) (result *RecordZone, err error) {
 	type _result struct {
 		val *RecordZone
 		err error
@@ -226,10 +235,10 @@ func (x *Database) FetchRecordZoneWithID(ctx context.Context, zoneID *RecordZone
 	}
 }
 
-// Saves a specific record zone.
+// SaveRecordZone saves a specific record zone.
 //
 // SaveRecordZone blocks until the operation completes or ctx is cancelled.
-func (x *Database) SaveRecordZone(ctx context.Context, zone *RecordZone) (*RecordZone, error) {
+func (x *Database) SaveRecordZone(ctx context.Context, zone *RecordZone) (result *RecordZone, err error) {
 	type _result struct {
 		val *RecordZone
 		err error
@@ -251,10 +260,10 @@ func (x *Database) SaveRecordZone(ctx context.Context, zone *RecordZone) (*Recor
 	}
 }
 
-// Deletes a specific record zone.
+// DeleteRecordZoneWithID deletes a specific record zone.
 //
 // DeleteRecordZoneWithID blocks until the operation completes or ctx is cancelled.
-func (x *Database) DeleteRecordZoneWithID(ctx context.Context, zoneID *RecordZoneID) (*RecordZoneID, error) {
+func (x *Database) DeleteRecordZoneWithID(ctx context.Context, zoneID *RecordZoneID) (result *RecordZoneID, err error) {
 	type _result struct {
 		val *RecordZoneID
 		err error
@@ -276,10 +285,10 @@ func (x *Database) DeleteRecordZoneWithID(ctx context.Context, zoneID *RecordZon
 	}
 }
 
-// Fetches a specific subscription and delivers it to a completion handler.
+// FetchSubscriptionWithID fetches a specific subscription and delivers it to a completion handler.
 //
 // FetchSubscriptionWithID blocks until the operation completes or ctx is cancelled.
-func (x *Database) FetchSubscriptionWithID(ctx context.Context, subscriptionID obj.Object) (*Subscription, error) {
+func (x *Database) FetchSubscriptionWithID(ctx context.Context, subscriptionID obj.Object) (result *Subscription, err error) {
 	type _result struct {
 		val *Subscription
 		err error
@@ -301,10 +310,10 @@ func (x *Database) FetchSubscriptionWithID(ctx context.Context, subscriptionID o
 	}
 }
 
-// Fetches all subscriptions from the current database.
+// FetchAllSubscriptions fetches all subscriptions from the current database.
 //
 // FetchAllSubscriptions blocks until the operation completes or ctx is cancelled.
-func (x *Database) FetchAllSubscriptions(ctx context.Context) (obj.Object, error) {
+func (x *Database) FetchAllSubscriptions(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -326,10 +335,10 @@ func (x *Database) FetchAllSubscriptions(ctx context.Context) (obj.Object, error
 	}
 }
 
-// Saves a specific subscription.
+// SaveSubscription saves a specific subscription.
 //
 // SaveSubscription blocks until the operation completes or ctx is cancelled.
-func (x *Database) SaveSubscription(ctx context.Context, subscription *Subscription) (*Subscription, error) {
+func (x *Database) SaveSubscription(ctx context.Context, subscription *Subscription) (result *Subscription, err error) {
 	type _result struct {
 		val *Subscription
 		err error
@@ -351,10 +360,10 @@ func (x *Database) SaveSubscription(ctx context.Context, subscription *Subscript
 	}
 }
 
-// Deletes a specific subscription and delivers the deleted subscription’s identifier to a completion handler.
+// DeleteSubscriptionWithID deletes a specific subscription and delivers the deleted subscription’s identifier to a completion handler.
 //
 // DeleteSubscriptionWithID blocks until the operation completes or ctx is cancelled.
-func (x *Database) DeleteSubscriptionWithID(ctx context.Context, subscriptionID obj.Object) (string, error) {
+func (x *Database) DeleteSubscriptionWithID(ctx context.Context, subscriptionID obj.Object) (result string, err error) {
 	type _result struct {
 		val string
 		err error

@@ -23,7 +23,8 @@ func MTRControllerFactoryFromID(id objc.ID) *MTRControllerFactory {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRControllerFactory{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRControllerFactory{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRControllerFactoryAdopt(id objc.ID) *MTRControllerFactory {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRControllerFactory{Handle: objref.Wrap(id)}
+	x := &MTRControllerFactory{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,31 +58,42 @@ func (x *MTRControllerFactory) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRControllerFactory) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRControllerFactory creates a new MTRControllerFactory.
 func NewMTRControllerFactory() *MTRControllerFactory {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRControllerFactory")), objc.RegisterName("new"))
 	return mTRControllerFactoryAdopt(_id)
 }
 
+// Startup wraps the corresponding Objective-C method.
 func (x *MTRControllerFactory) Startup(startupParams *MTRControllerFactoryParams) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startup:"), objref.IDOf(startupParams))
 	return _r
 }
 
+// Shutdown wraps the corresponding Objective-C method.
 func (x *MTRControllerFactory) Shutdown() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shutdown"))
 }
 
+// StartControllerOnExistingFabric wraps the corresponding Objective-C method.
 func (x *MTRControllerFactory) StartControllerOnExistingFabric(startupParams *MTRDeviceControllerStartupParams) *MTRDeviceController {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startControllerOnExistingFabric:"), objref.IDOf(startupParams))
 	return MTRDeviceControllerFromID(_r)
 }
 
+// StartControllerOnNewFabric wraps the corresponding Objective-C method.
 func (x *MTRControllerFactory) StartControllerOnNewFabric(startupParams *MTRDeviceControllerStartupParams) *MTRDeviceController {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startControllerOnNewFabric:"), objref.IDOf(startupParams))
 	return MTRDeviceControllerFromID(_r)
 }
 
+// IsRunning wraps the corresponding Objective-C method.
 func (x *MTRControllerFactory) IsRunning() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRunning"))
 	return _r

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A compiled list of rules to apply to web content.
-//
 // WKContentRuleList is an idiomatic wrapper over the Objective-C class WKContentRuleList.
+//
+// A compiled list of rules to apply to web content.
 type WKContentRuleList struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKContentRuleListFromID(id objc.ID) *WKContentRuleList {
 	if id == 0 {
 		return nil
 	}
-	x := &WKContentRuleList{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKContentRuleList{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKContentRuleListAdopt(id objc.ID) *WKContentRuleList {
 	if id == 0 {
 		return nil
 	}
-	x := &WKContentRuleList{Handle: objref.Wrap(id)}
+	x := &WKContentRuleList{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *WKContentRuleList) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKContentRuleList) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKContentRuleList creates a new WKContentRuleList.
 func NewWKContentRuleList() *WKContentRuleList {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKContentRuleList")), objc.RegisterName("new"))
 	return wKContentRuleListAdopt(_id)
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *WKContentRuleList) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {

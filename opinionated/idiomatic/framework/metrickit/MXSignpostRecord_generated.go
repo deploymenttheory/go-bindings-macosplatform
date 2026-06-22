@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing the record for a signpost interval or event.
-//
 // SignpostRecord is an idiomatic wrapper over the Objective-C class MXSignpostRecord.
+//
+// An object representing the record for a signpost interval or event.
 type SignpostRecord struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SignpostRecordFromID(id objc.ID) *SignpostRecord {
 	if id == 0 {
 		return nil
 	}
-	x := &SignpostRecord{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SignpostRecord{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func signpostRecordAdopt(id objc.ID) *SignpostRecord {
 	if id == 0 {
 		return nil
 	}
-	x := &SignpostRecord{Handle: objref.Wrap(id)}
+	x := &SignpostRecord{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *SignpostRecord) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SignpostRecord) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSignpostRecord creates a new SignpostRecord.
 func NewSignpostRecord() *SignpostRecord {
 	_id := objc.Send[objc.ID](objc.ID(_class("MXSignpostRecord")), objc.RegisterName("new"))
 	return signpostRecordAdopt(_id)
 }
 
-// Convenience method to return a JSON representation of this SignpostRecord.
+// JSONRepresentation convenience method to return a JSON representation of this SignpostRecord.
 func (x *SignpostRecord) JSONRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSONRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// Convenience method to return a NSDictionary representation of this SignpostRecord.
+// DictionaryRepresentation convenience method to return a NSDictionary representation of this SignpostRecord.
 func (x *SignpostRecord) DictionaryRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// An NSString representation of the subsystem of the signpost instance.
+// Subsystem an NSString representation of the subsystem of the signpost instance.
 func (x *SignpostRecord) Subsystem() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subsystem"))
 	if _r == 0 {
@@ -85,6 +93,7 @@ func (x *SignpostRecord) Subsystem() string {
 	return purego.GoString(_r)
 }
 
+// Category wraps the corresponding Objective-C method.
 func (x *SignpostRecord) Category() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("category"))
 	if _r == 0 {
@@ -93,6 +102,7 @@ func (x *SignpostRecord) Category() string {
 	return purego.GoString(_r)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *SignpostRecord) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -101,21 +111,25 @@ func (x *SignpostRecord) Name() string {
 	return purego.GoString(_r)
 }
 
+// BeginTimeStamp wraps the corresponding Objective-C method.
 func (x *SignpostRecord) BeginTimeStamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginTimeStamp"))
 	return obj.Wrap(_r)
 }
 
+// EndTimeStamp wraps the corresponding Objective-C method.
 func (x *SignpostRecord) EndTimeStamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endTimeStamp"))
 	return obj.Wrap(_r)
 }
 
+// Duration wraps the corresponding Objective-C method.
 func (x *SignpostRecord) Duration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("duration"))
 	return obj.Wrap(_r)
 }
 
+// IsInterval wraps the corresponding Objective-C method.
 func (x *SignpostRecord) IsInterval() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInterval"))
 	return _r

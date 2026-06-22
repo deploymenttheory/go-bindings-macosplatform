@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The path made by a network connection, including information about its viability.
-//
 // NWPath is an idiomatic wrapper over the Objective-C class NWPath.
+//
+// The path made by a network connection, including information about its viability.
 type NWPath struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NWPathFromID(id objc.ID) *NWPath {
 	if id == 0 {
 		return nil
 	}
-	x := &NWPath{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NWPath{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nWPathAdopt(id objc.ID) *NWPath {
 	if id == 0 {
 		return nil
 	}
-	x := &NWPath{Handle: objref.Wrap(id)}
+	x := &NWPath{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,37 @@ func (x *NWPath) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NWPath) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNWPath creates a new NWPath.
 func NewNWPath() *NWPath {
 	_id := objc.Send[objc.ID](objc.ID(_class("NWPath")), objc.RegisterName("new"))
 	return nWPathAdopt(_id)
 }
 
-// Comparison method for NWPath objects.
+// IsEqualToPath comparison method for NWPath objects.
 func (x *NWPath) IsEqualToPath(path *NWPath) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToPath:"), objref.IDOf(path))
 	return _r
 }
 
-// The evaluated NWPathStatus of the NWPath.
+// Status the evaluated NWPathStatus of the NWPath.
 func (x *NWPath) Status() NWPathStatus {
 	_r := objc.Send[NWPathStatus](objref.IDOf(x), objc.RegisterName("status"))
 	return _r
 }
 
-// Returns YES if the path is considered expensive, as when using a cellular data plan.
+// IsExpensive returns YES if the path is considered expensive, as when using a cellular data plan.
 func (x *NWPath) IsExpensive() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isExpensive"))
 	return _r
 }
 
-// Returns YES if the path is considered constrained, as when it is in save data mode.
+// IsConstrained returns YES if the path is considered constrained, as when it is in save data mode.
 func (x *NWPath) IsConstrained() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConstrained"))
 	return _r

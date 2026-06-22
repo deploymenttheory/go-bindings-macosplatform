@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resolution result for the date information associated with an intent.
-//
 // DateComponentsResolutionResult is an idiomatic wrapper over the Objective-C class INDateComponentsResolutionResult.
+//
+// It embeds [IntentResolutionResult], promoting that type's methods.
+//
+// A resolution result for the date information associated with an intent.
 type DateComponentsResolutionResult struct {
-	objref.Handle
+	IntentResolutionResult
 }
 
 // DateComponentsResolutionResultFromID adopts an existing Objective-C object as a DateComponentsResolutionResult
@@ -25,7 +26,8 @@ func DateComponentsResolutionResultFromID(id objc.ID) *DateComponentsResolutionR
 	if id == 0 {
 		return nil
 	}
-	x := &DateComponentsResolutionResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DateComponentsResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func dateComponentsResolutionResultAdopt(id objc.ID) *DateComponentsResolutionRe
 	if id == 0 {
 		return nil
 	}
-	x := &DateComponentsResolutionResult{Handle: objref.Wrap(id)}
+	x := &DateComponentsResolutionResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DateComponentsResolutionResult) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DateComponentsResolutionResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DateComponentsResolutionResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDateComponentsResolutionResult creates a new DateComponentsResolutionResult.
@@ -70,3 +58,5 @@ type DateComponentsResolutionResultable interface {
 }
 
 var _ DateComponentsResolutionResultable = (*DateComponentsResolutionResult)(nil)
+
+var _ IntentResolutionResultProvider = (*DateComponentsResolutionResult)(nil)

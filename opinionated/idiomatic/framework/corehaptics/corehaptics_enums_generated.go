@@ -38,6 +38,8 @@ const (
 	HapticErrorCodeMemoryError              HapticErrorCode = -4899
 )
 
+// String returns the HapticErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HapticErrorCode) String() string {
 	switch e {
 	case HapticErrorCodeEngineNotRunning:

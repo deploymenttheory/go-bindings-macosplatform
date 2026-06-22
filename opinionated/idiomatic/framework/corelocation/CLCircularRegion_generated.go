@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A circular geographic region that a center point and radius deine.
-//
 // CircularRegion is an idiomatic wrapper over the Objective-C class CLCircularRegion.
+//
+// It embeds [Region], promoting that type's methods.
+//
+// A circular geographic region that a center point and radius deine.
 type CircularRegion struct {
-	objref.Handle
+	Region
 }
 
 // CircularRegionFromID adopts an existing Objective-C object as a CircularRegion
@@ -25,7 +26,8 @@ func CircularRegionFromID(id objc.ID) *CircularRegion {
 	if id == 0 {
 		return nil
 	}
-	x := &CircularRegion{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CircularRegion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func circularRegionAdopt(id objc.ID) *CircularRegion {
 	if id == 0 {
 		return nil
 	}
-	x := &CircularRegion{Handle: objref.Wrap(id)}
+	x := &CircularRegion{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CircularRegion) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CircularRegion) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CircularRegion) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCircularRegion creates a new CircularRegion.
@@ -64,17 +52,13 @@ func NewCircularRegion() *CircularRegion {
 	return circularRegionAdopt(_id)
 }
 
-// A Boolean indicating that notifications are generated upon entry into the region.
-//
-// WithNotifyOnEntry sets notifyOnEntry and returns the receiver so calls can be chained.
+// WithNotifyOnEntry a Boolean indicating that notifications are generated upon entry into the region.
 func (x *CircularRegion) WithNotifyOnEntry(notifyOnEntry bool) *CircularRegion {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyOnEntry:"), notifyOnEntry)
 	return x
 }
 
-// A Boolean indicating that notifications are generated upon exit from the region.
-//
-// WithNotifyOnExit sets notifyOnExit and returns the receiver so calls can be chained.
+// WithNotifyOnExit a Boolean indicating that notifications are generated upon exit from the region.
 func (x *CircularRegion) WithNotifyOnExit(notifyOnExit bool) *CircularRegion {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyOnExit:"), notifyOnExit)
 	return x
@@ -88,3 +72,5 @@ type CircularRegionable interface {
 }
 
 var _ CircularRegionable = (*CircularRegion)(nil)
+
+var _ RegionProvider = (*CircularRegion)(nil)

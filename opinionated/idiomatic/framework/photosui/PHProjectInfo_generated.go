@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information about the project extension.
-//
 // ProjectInfo is an idiomatic wrapper over the Objective-C class PHProjectInfo.
+//
+// Information about the project extension.
 type ProjectInfo struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ProjectInfoFromID(id objc.ID) *ProjectInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &ProjectInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ProjectInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func projectInfoAdopt(id objc.ID) *ProjectInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &ProjectInfo{Handle: objref.Wrap(id)}
+	x := &ProjectInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *ProjectInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ProjectInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewProjectInfo creates a new ProjectInfo.
 func NewProjectInfo() *ProjectInfo {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHProjectInfo")), objc.RegisterName("new"))
 	return projectInfoAdopt(_id)
 }
 
-// Source from which the project was created.
+// CreationSource source from which the project was created.
 func (x *ProjectInfo) CreationSource() ProjectCreationSource {
 	_r := objc.Send[ProjectCreationSource](objref.IDOf(x), objc.RegisterName("creationSource"))
 	return _r
 }
 
-// Selected projectType value from the extensions options as defined in -[PHProjectExtensionController supportedProjectTypes]. See PHProjectExtensionController.h for more information on configuring the options.
+// ProjectType selected projectType value from the extensions options as defined in -[PHProjectExtensionController supportedProjectTypes]. See PHProjectExtensionController.h for more information on configuring the options.
 func (x *ProjectInfo) ProjectType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("projectType"))
 	return obj.Wrap(_r)
 }
 
-// Array of project sections each containing one or more PHProjectSectionContent objects.
+// Sections array of project sections each containing one or more PHProjectSectionContent objects.
 //
 // Sections returns the collection as a Go slice.
 func (x *ProjectInfo) Sections() []*ProjectSection {
@@ -84,19 +92,19 @@ func (x *ProjectInfo) Sections() []*ProjectSection {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ProjectSection { return ProjectSectionFromID(_id) })
 }
 
-// The following properties are only used when the user creates a new project from an existing Apple Print Product. YES if the source project had branding enabled.
+// BrandingEnabled the following properties are only used when the user creates a new project from an existing Apple Print Product. YES if the source project had branding enabled.
 func (x *ProjectInfo) BrandingEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("brandingEnabled"))
 	return _r
 }
 
-// YES if the source project had page numbers enabled.
+// PageNumbersEnabled YES if the source project had page numbers enabled.
 func (x *ProjectInfo) PageNumbersEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("pageNumbersEnabled"))
 	return _r
 }
 
-// The product identifier of the originating Apple Print Product.
+// ProductIdentifier the product identifier of the originating Apple Print Product.
 func (x *ProjectInfo) ProductIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productIdentifier"))
 	if _r == 0 {
@@ -105,7 +113,7 @@ func (x *ProjectInfo) ProductIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// The product theme identifier of the originating Apple Print Product.
+// ThemeIdentifier the product theme identifier of the originating Apple Print Product.
 func (x *ProjectInfo) ThemeIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("themeIdentifier"))
 	if _r == 0 {

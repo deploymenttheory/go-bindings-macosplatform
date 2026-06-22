@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Defines the range within which an ear’s sensitivity point may have been clamped, if any.
-//
 // AudiogramSensitivityPointClampingRange is an idiomatic wrapper over the Objective-C class HKAudiogramSensitivityPointClampingRange.
+//
+// Defines the range within which an ear’s sensitivity point may have been clamped, if any.
 type AudiogramSensitivityPointClampingRange struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AudiogramSensitivityPointClampingRangeFromID(id objc.ID) *AudiogramSensitiv
 	if id == 0 {
 		return nil
 	}
-	x := &AudiogramSensitivityPointClampingRange{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudiogramSensitivityPointClampingRange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func audiogramSensitivityPointClampingRangeAdopt(id objc.ID) *AudiogramSensitivi
 	if id == 0 {
 		return nil
 	}
-	x := &AudiogramSensitivityPointClampingRange{Handle: objref.Wrap(id)}
+	x := &AudiogramSensitivityPointClampingRange{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *AudiogramSensitivityPointClampingRange) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudiogramSensitivityPointClampingRange) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAudiogramSensitivityPointClampingRange creates a new AudiogramSensitivityPointClampingRange.
 func NewAudiogramSensitivityPointClampingRange() *AudiogramSensitivityPointClampingRange {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKAudiogramSensitivityPointClampingRange")), objc.RegisterName("new"))
 	return audiogramSensitivityPointClampingRangeAdopt(_id)
 }
 
-// The lower bound of the clamping range, if any, in dBHL.
+// LowerBound the lower bound of the clamping range, if any, in dBHL.
 func (x *AudiogramSensitivityPointClampingRange) LowerBound() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lowerBound"))
 	return QuantityFromID(_r)
 }
 
-// The upper bound of the clamping range, if any, in dBHL.
+// UpperBound the upper bound of the clamping range, if any, in dBHL.
 func (x *AudiogramSensitivityPointClampingRange) UpperBound() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("upperBound"))
 	return QuantityFromID(_r)

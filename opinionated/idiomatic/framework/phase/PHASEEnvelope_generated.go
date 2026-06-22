@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of segments that connect to graph a complex curve over a linear input.
-//
 // Envelope is an idiomatic wrapper over the Objective-C class PHASEEnvelope.
+//
+// A collection of segments that connect to graph a complex curve over a linear input.
 type Envelope struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func EnvelopeFromID(id objc.ID) *Envelope {
 	if id == 0 {
 		return nil
 	}
-	x := &Envelope{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Envelope{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func envelopeAdopt(id objc.ID) *Envelope {
 	if id == 0 {
 		return nil
 	}
-	x := &Envelope{Handle: objref.Wrap(id)}
+	x := &Envelope{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *Envelope) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Envelope) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewEnvelope creates a new Envelope.
 func NewEnvelope() *Envelope {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHASEEnvelope")), objc.RegisterName("new"))
 	return envelopeAdopt(_id)
 }
 
-// Provides the height of the envelope for an input value.
+// EvaluateForValue provides the height of the envelope for an input value.
 func (x *Envelope) EvaluateForValue(x_ float64) float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("evaluateForValue:"), x_)
 	return _r
 }
 
-// The segments of the envelope.
+// Segments the segments of the envelope.
 //
 // Segments returns the collection as a Go slice.
 func (x *Envelope) Segments() []*EnvelopeSegment {
@@ -78,13 +86,13 @@ func (x *Envelope) Segments() []*EnvelopeSegment {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EnvelopeSegment { return EnvelopeSegmentFromID(_id) })
 }
 
-// The domain (along the x-axis). The first value in the pair is the minimum value of the domain. The second value in the pair is the maximum value of the domain.
+// Domain the domain (along the x-axis). The first value in the pair is the minimum value of the domain. The second value in the pair is the maximum value of the domain.
 func (x *Envelope) Domain() *NumericPair {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domain"))
 	return NumericPairFromID(_r)
 }
 
-// The range (along the y-axis). The first value in the pair is the minimum value of the range. The second value in the pair is the maximum value of the range.
+// Range the range (along the y-axis). The first value in the pair is the minimum value of the range. The second value in the pair is the maximum value of the range.
 func (x *Envelope) Range() *NumericPair {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("range"))
 	return NumericPairFromID(_r)

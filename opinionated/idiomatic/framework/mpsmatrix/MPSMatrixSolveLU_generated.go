@@ -6,15 +6,17 @@ package mpsmatrix
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MatrixSolveLU is an idiomatic wrapper over the Objective-C class MPSMatrixSolveLU.
+//
+// It embeds [MatrixBinaryKernel], promoting that type's methods.
 type MatrixSolveLU struct {
-	objref.Handle
+	MatrixBinaryKernel
 }
 
 // MatrixSolveLUFromID adopts an existing Objective-C object as a MatrixSolveLU
@@ -23,7 +25,8 @@ func MatrixSolveLUFromID(id objc.ID) *MatrixSolveLU {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixSolveLU{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatrixSolveLU{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +39,10 @@ func matrixSolveLUAdopt(id objc.ID) *MatrixSolveLU {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixSolveLU{Handle: objref.Wrap(id)}
+	x := &MatrixSolveLU{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MatrixSolveLU) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatrixSolveLU) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatrixSolveLU) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMatrixSolveLU creates a new MatrixSolveLU.
@@ -62,17 +51,31 @@ func NewMatrixSolveLU() *MatrixSolveLU {
 	return matrixSolveLUAdopt(_id)
 }
 
-// The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
-//
-// WithBatchStart sets batchStart and returns the receiver so calls can be chained.
+// WithPrimarySourceMatrixOrigin the origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixSolveLU) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveLU {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceMatrixOrigin:"), primarySourceMatrixOrigin)
+	return x
+}
+
+// WithSecondarySourceMatrixOrigin the origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixSolveLU) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveLU {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceMatrixOrigin:"), secondarySourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixSolveLU) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSolveLU {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
 func (x *MatrixSolveLU) WithBatchStart(batchStart int) *MatrixSolveLU {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 	return x
 }
 
-// The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
-//
-// WithBatchSize sets batchSize and returns the receiver so calls can be chained.
+// WithBatchSize the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
 func (x *MatrixSolveLU) WithBatchSize(batchSize int) *MatrixSolveLU {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 	return x
@@ -81,8 +84,13 @@ func (x *MatrixSolveLU) WithBatchSize(batchSize int) *MatrixSolveLU {
 // MatrixSolveLUable is the interface implemented by [MatrixSolveLU], for mocking and DI.
 type MatrixSolveLUable interface {
 	obj.Object
+	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveLU
+	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveLU
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSolveLU
 	WithBatchStart(batchStart int) *MatrixSolveLU
 	WithBatchSize(batchSize int) *MatrixSolveLU
 }
 
 var _ MatrixSolveLUable = (*MatrixSolveLU)(nil)
+
+var _ MatrixBinaryKernelProvider = (*MatrixSolveLU)(nil)

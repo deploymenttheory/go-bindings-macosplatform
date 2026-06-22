@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that programmatically presents Desk View.
-//
 // CaptureDeskViewApplication is an idiomatic wrapper over the Objective-C class AVCaptureDeskViewApplication.
+//
+// An object that programmatically presents Desk View.
 type CaptureDeskViewApplication struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func CaptureDeskViewApplicationFromID(id objc.ID) *CaptureDeskViewApplication {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureDeskViewApplication{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptureDeskViewApplication{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func captureDeskViewApplicationAdopt(id objc.ID) *CaptureDeskViewApplication {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureDeskViewApplication{Handle: objref.Wrap(id)}
+	x := &CaptureDeskViewApplication{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,13 +62,19 @@ func (x *CaptureDeskViewApplication) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptureDeskViewApplication) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCaptureDeskViewApplication creates a new CaptureDeskViewApplication.
 func NewCaptureDeskViewApplication() *CaptureDeskViewApplication {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureDeskViewApplication")), objc.RegisterName("new"))
 	return captureDeskViewApplicationAdopt(_id)
 }
 
-// Launches Desk View with no additional configuration and then performs a completion handler if you specify it.
+// Present launches Desk View with no additional configuration and then performs a completion handler if you specify it.
 //
 // Present blocks until the operation completes or ctx is cancelled.
 func (x *CaptureDeskViewApplication) Present(ctx context.Context) error {
@@ -85,7 +93,7 @@ func (x *CaptureDeskViewApplication) Present(ctx context.Context) error {
 	}
 }
 
-// Launches Desk View with the configuration and completion handler that you specify.
+// PresentWithLaunchConfiguration launches Desk View with the configuration and completion handler that you specify.
 //
 // PresentWithLaunchConfiguration blocks until the operation completes or ctx is cancelled.
 func (x *CaptureDeskViewApplication) PresentWithLaunchConfiguration(ctx context.Context, launchConfiguration *CaptureDeskViewApplicationLaunchConfiguration) error {

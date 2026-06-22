@@ -20,6 +20,8 @@ const (
 	SpatialScalerColorProcessingModeHDR SpatialScalerColorProcessingMode = 2
 )
 
+// String returns the SpatialScalerColorProcessingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SpatialScalerColorProcessingMode) String() string {
 	switch e {
 	case SpatialScalerColorProcessingModePerceptual:

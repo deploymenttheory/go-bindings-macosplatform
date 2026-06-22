@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains the glasses prescription data for one eye.
-//
 // GlassesLensSpecification is an idiomatic wrapper over the Objective-C class HKGlassesLensSpecification.
+//
+// It embeds [LensSpecification], promoting that type's methods.
+//
+// An object that contains the glasses prescription data for one eye.
 type GlassesLensSpecification struct {
-	objref.Handle
+	LensSpecification
 }
 
 // GlassesLensSpecificationFromID adopts an existing Objective-C object as a GlassesLensSpecification
@@ -25,7 +26,8 @@ func GlassesLensSpecificationFromID(id objc.ID) *GlassesLensSpecification {
 	if id == 0 {
 		return nil
 	}
-	x := &GlassesLensSpecification{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GlassesLensSpecification{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,54 +40,38 @@ func glassesLensSpecificationAdopt(id objc.ID) *GlassesLensSpecification {
 	if id == 0 {
 		return nil
 	}
-	x := &GlassesLensSpecification{Handle: objref.Wrap(id)}
+	x := &GlassesLensSpecification{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *GlassesLensSpecification) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GlassesLensSpecification) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GlassesLensSpecification) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a new glasses lens specification, containing the prescription data for one eye.
-//
-// NewGlassesLensSpecificationWithSphereCylinderAxisAddPowerVertexDistancePrismFarPupillaryDistanceNearPupillaryDistance creates a new GlassesLensSpecification.
+// NewGlassesLensSpecificationWithSphereCylinderAxisAddPowerVertexDistancePrismFarPupillaryDistanceNearPupillaryDistance creates a new glasses lens specification, containing the prescription data for one eye.
 func NewGlassesLensSpecificationWithSphereCylinderAxisAddPowerVertexDistancePrismFarPupillaryDistanceNearPupillaryDistance(sphere *Quantity, cylinder *Quantity, axis *Quantity, addPower *Quantity, vertexDistance *Quantity, prism *VisionPrism, farPupillaryDistance *Quantity, nearPupillaryDistance *Quantity) *GlassesLensSpecification {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKGlassesLensSpecification")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSphere:cylinder:axis:addPower:vertexDistance:prism:farPupillaryDistance:nearPupillaryDistance:"), objref.IDOf(sphere), objref.IDOf(cylinder), objref.IDOf(axis), objref.IDOf(addPower), objref.IDOf(vertexDistance), objref.IDOf(prism), objref.IDOf(farPupillaryDistance), objref.IDOf(nearPupillaryDistance))
 	return glassesLensSpecificationAdopt(_id)
 }
 
-// The distance between the back of the eyeglass lens and the eye (measured in mm)
+// VertexDistance the distance between the back of the eyeglass lens and the eye (measured in mm)
 func (x *GlassesLensSpecification) VertexDistance() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexDistance"))
 	return QuantityFromID(_r)
 }
 
-// The object encapsulating the prism fields
+// Prism the object encapsulating the prism fields
 func (x *GlassesLensSpecification) Prism() *VisionPrism {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prism"))
 	return VisionPrismFromID(_r)
 }
 
-// The distance from each pupil to the center of the nose (measured in mm) when looking at a far target. Can be described as combined or individual value. For distance prescriptions, the pupillary distance will be a far value.
+// FarPupillaryDistance the distance from each pupil to the center of the nose (measured in mm) when looking at a far target. Can be described as combined or individual value. For distance prescriptions, the pupillary distance will be a far value.
 func (x *GlassesLensSpecification) FarPupillaryDistance() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("farPupillaryDistance"))
 	return QuantityFromID(_r)
 }
 
-// The distance from each pupil to the center of the nose (measured in mm) when looking at a near target. Can be described as combined or individual value. For near prescriptions, the pupillary distance will be a near value.
+// NearPupillaryDistance the distance from each pupil to the center of the nose (measured in mm) when looking at a near target. Can be described as combined or individual value. For near prescriptions, the pupillary distance will be a near value.
 func (x *GlassesLensSpecification) NearPupillaryDistance() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nearPupillaryDistance"))
 	return QuantityFromID(_r)
@@ -101,3 +87,5 @@ type GlassesLensSpecificationable interface {
 }
 
 var _ GlassesLensSpecificationable = (*GlassesLensSpecification)(nil)
+
+var _ LensSpecificationProvider = (*GlassesLensSpecification)(nil)

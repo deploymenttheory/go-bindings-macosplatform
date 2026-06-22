@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Device Energy Management
-//
 // MTRBaseClusterDeviceEnergyManagement is an idiomatic wrapper over the Objective-C class MTRBaseClusterDeviceEnergyManagement.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
+//
+// Cluster Device Energy Management
 type MTRBaseClusterDeviceEnergyManagement struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterDeviceEnergyManagementFromID adopts an existing Objective-C object as a MTRBaseClusterDeviceEnergyManagement
@@ -27,7 +28,8 @@ func MTRBaseClusterDeviceEnergyManagementFromID(id objc.ID) *MTRBaseClusterDevic
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterDeviceEnergyManagement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterDeviceEnergyManagement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,37 +42,23 @@ func mTRBaseClusterDeviceEnergyManagementAdopt(id objc.ID) *MTRBaseClusterDevice
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterDeviceEnergyManagement{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterDeviceEnergyManagement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterDeviceEnergyManagement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterDeviceEnergyManagement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterDeviceEnergyManagement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterDeviceEnergyManagementWithDeviceEndpointIDQueue creates a new MTRBaseClusterDeviceEnergyManagement.
+// NewMTRBaseClusterDeviceEnergyManagementWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterDeviceEnergyManagementWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterDeviceEnergyManagement {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterDeviceEnergyManagement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterDeviceEnergyManagementAdopt(_id)
 }
 
+// ReadAttributeESATypeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeESATypeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeESATypeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeESATypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -92,8 +80,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeESATypeWithCompletio
 	}
 }
 
+// SubscribeAttributeESATypeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeESATypeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESATypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESATypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -115,8 +105,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESATypeWithPara
 	}
 }
 
+// ReadAttributeESACanGenerateWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeESACanGenerateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeESACanGenerateWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeESACanGenerateWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -138,8 +130,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeESACanGenerateWithCo
 	}
 }
 
+// SubscribeAttributeESACanGenerateWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeESACanGenerateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESACanGenerateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESACanGenerateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -161,8 +155,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESACanGenerateW
 	}
 }
 
+// ReadAttributeESAStateWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeESAStateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeESAStateWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeESAStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -184,8 +180,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeESAStateWithCompleti
 	}
 }
 
+// SubscribeAttributeESAStateWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeESAStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESAStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESAStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -207,8 +205,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESAStateWithPar
 	}
 }
 
+// ReadAttributeAbsMinPowerWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAbsMinPowerWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAbsMinPowerWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAbsMinPowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -230,8 +230,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAbsMinPowerWithCompl
 	}
 }
 
+// SubscribeAttributeAbsMinPowerWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAbsMinPowerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAbsMinPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAbsMinPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -253,8 +255,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAbsMinPowerWith
 	}
 }
 
+// ReadAttributeAbsMaxPowerWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAbsMaxPowerWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAbsMaxPowerWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAbsMaxPowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -276,8 +280,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAbsMaxPowerWithCompl
 	}
 }
 
+// SubscribeAttributeAbsMaxPowerWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAbsMaxPowerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAbsMaxPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAbsMaxPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -299,8 +305,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAbsMaxPowerWith
 	}
 }
 
+// ReadAttributePowerAdjustmentCapabilityWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePowerAdjustmentCapabilityWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributePowerAdjustmentCapabilityWithCompletion(ctx context.Context) (*MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributePowerAdjustmentCapabilityWithCompletion(ctx context.Context) (result *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct, err error) {
 	type _result struct {
 		val *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct
 		err error
@@ -322,8 +330,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributePowerAdjustmentCapab
 	}
 }
 
+// SubscribeAttributePowerAdjustmentCapabilityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePowerAdjustmentCapabilityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributePowerAdjustmentCapabilityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributePowerAdjustmentCapabilityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct, err error) {
 	type _result struct {
 		val *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct
 		err error
@@ -345,8 +355,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributePowerAdjustment
 	}
 }
 
+// ReadAttributeForecastWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeForecastWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeForecastWithCompletion(ctx context.Context) (*MTRDeviceEnergyManagementClusterForecastStruct, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeForecastWithCompletion(ctx context.Context) (result *MTRDeviceEnergyManagementClusterForecastStruct, err error) {
 	type _result struct {
 		val *MTRDeviceEnergyManagementClusterForecastStruct
 		err error
@@ -368,8 +380,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeForecastWithCompleti
 	}
 }
 
+// SubscribeAttributeForecastWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeForecastWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeForecastWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRDeviceEnergyManagementClusterForecastStruct, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeForecastWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRDeviceEnergyManagementClusterForecastStruct, err error) {
 	type _result struct {
 		val *MTRDeviceEnergyManagementClusterForecastStruct
 		err error
@@ -391,8 +405,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeForecastWithPar
 	}
 }
 
+// ReadAttributeOptOutStateWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeOptOutStateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeOptOutStateWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeOptOutStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -414,8 +430,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeOptOutStateWithCompl
 	}
 }
 
+// SubscribeAttributeOptOutStateWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOptOutStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeOptOutStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeOptOutStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -437,8 +455,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeOptOutStateWith
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -460,8 +480,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeGeneratedCommandList
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -483,8 +505,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeGeneratedComman
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -506,8 +530,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAcceptedCommandListW
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -529,8 +555,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAcceptedCommand
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -552,8 +580,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAttributeListWithCom
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -575,8 +605,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAttributeListWi
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -598,8 +630,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeFeatureMapWithComple
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -621,8 +655,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeFeatureMapWithP
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -644,8 +680,10 @@ func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeClusterRevisionWithC
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -699,3 +737,7 @@ type MTRBaseClusterDeviceEnergyManagementable interface {
 }
 
 var _ MTRBaseClusterDeviceEnergyManagementable = (*MTRBaseClusterDeviceEnergyManagement)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterDeviceEnergyManagement)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterDeviceEnergyManagement)(nil)

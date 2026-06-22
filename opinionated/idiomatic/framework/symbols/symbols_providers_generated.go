@@ -11,9 +11,11 @@ import (
 // SymbolContentTransitionProvider is accepted wherever a NSSymbolContentTransition (or one of its subclasses) is expected.
 type SymbolContentTransitionProvider interface {
 	objref.Object
+	isSymbolContentTransition()
 }
 
 // SymbolEffectProvider is accepted wherever a NSSymbolEffect (or one of its subclasses) is expected.
 type SymbolEffectProvider interface {
 	objref.Object
+	isSymbolEffect()
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that allows you to apply a custom fragment shader.
-//
 // Shader is an idiomatic wrapper over the Objective-C class SKShader.
+//
+// An object that allows you to apply a custom fragment shader.
 type Shader struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ShaderFromID(id objc.ID) *Shader {
 	if id == 0 {
 		return nil
 	}
-	x := &Shader{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Shader{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func shaderAdopt(id objc.ID) *Shader {
 	if id == 0 {
 		return nil
 	}
-	x := &Shader{Handle: objref.Wrap(id)}
+	x := &Shader{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,66 +60,63 @@ func (x *Shader) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a new shader object using the specified source code.
-//
-// NewShaderWithSource creates a new Shader.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Shader) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewShaderWithSource initializes a new shader object using the specified source code.
 func NewShaderWithSource(source string) *Shader {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKShader")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), purego.NSString(source))
 	return shaderAdopt(_id)
 }
 
-// Initializes a new shader object using the specified source and uniform data.
-//
-// NewShaderWithSourceUniforms creates a new Shader.
+// NewShaderWithSourceUniforms initializes a new shader object using the specified source and uniform data.
 func NewShaderWithSourceUniforms(source string, uniforms []*Uniform) *Shader {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKShader")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:uniforms:"), purego.NSString(source), purego.SliceToNSArray(uniforms, func(_v *Uniform) objc.ID { return objref.IDOf(_v) }))
 	return shaderAdopt(_id)
 }
 
-// The source code for the shader.
-//
-// WithSource sets source and returns the receiver so calls can be chained.
+// WithSource the source code for the shader.
 func (x *Shader) WithSource(source string) *Shader {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSource:"), purego.NSString(source))
 	return x
 }
 
-// The list of uniforms associated with the shader.
-//
-// WithUniforms sets the collection and returns the receiver so calls can be chained.
+// WithUniforms the list of uniforms associated with the shader.
 func (x *Shader) WithUniforms(items ...*Uniform) *Shader {
 	_arr := purego.SliceToNSArray(items, func(_v *Uniform) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniforms:"), _arr)
 	return x
 }
 
-// The list of attributes associated with the shader.
-//
-// WithAttributes sets the collection and returns the receiver so calls can be chained.
+// WithAttributes the list of attributes associated with the shader.
 func (x *Shader) WithAttributes(items ...*Attribute) *Shader {
 	_arr := purego.SliceToNSArray(items, func(_v *Attribute) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributes:"), _arr)
 	return x
 }
 
-// Adds a uniform to the shader.
+// AddUniform adds a uniform to the shader.
 func (x *Shader) AddUniform(uniform *Uniform) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addUniform:"), objref.IDOf(uniform))
 }
 
-// Returns the uniform object corresponding to a particular uniform variable.
+// UniformNamed returns the uniform object corresponding to a particular uniform variable.
 func (x *Shader) UniformNamed(name string) *Uniform {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniformNamed:"), purego.NSString(name))
 	return UniformFromID(_r)
 }
 
-// Removes a uniform from the shader.
+// RemoveUniformNamed removes a uniform from the shader.
 func (x *Shader) RemoveUniformNamed(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeUniformNamed:"), purego.NSString(name))
 }
 
+// Source wraps the corresponding Objective-C method.
 func (x *Shader) Source() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
 	if _r == 0 {
@@ -126,11 +125,12 @@ func (x *Shader) Source() string {
 	return purego.GoString(_r)
 }
 
+// SetSource wraps the corresponding Objective-C method.
 func (x *Shader) SetSource(source string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSource:"), purego.NSString(source))
 }
 
-// You may define additional uniforms to be used in your shader here. There is no need to declare them in you source, just use them by name. All uniforms declared must be used within the source.
+// Uniforms you may define additional uniforms to be used in your shader here. There is no need to declare them in you source, just use them by name. All uniforms declared must be used within the source.
 //
 // Uniforms returns the collection as a Go slice.
 func (x *Shader) Uniforms() []*Uniform {
@@ -138,16 +138,20 @@ func (x *Shader) Uniforms() []*Uniform {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Uniform { return UniformFromID(_id) })
 }
 
+// SetUniforms wraps the corresponding Objective-C method.
 func (x *Shader) SetUniforms(uniforms []*Uniform) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniforms:"), purego.SliceToNSArray(uniforms, func(_v *Uniform) objc.ID { return objref.IDOf(_v) }))
 }
 
+// Attributes wraps the corresponding Objective-C method.
+//
 // Attributes returns the collection as a Go slice.
 func (x *Shader) Attributes() []*Attribute {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Attribute { return AttributeFromID(_id) })
 }
 
+// SetAttributes wraps the corresponding Objective-C method.
 func (x *Shader) SetAttributes(attributes []*Attribute) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributes:"), purego.SliceToNSArray(attributes, func(_v *Attribute) objc.ID { return objref.IDOf(_v) }))
 }

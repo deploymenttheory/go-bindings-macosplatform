@@ -6,15 +6,17 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An object that can create paths using PostScript-style commands.
-//
 // BezierPath is an idiomatic wrapper over the Objective-C class NSBezierPath.
+//
+// An object that can create paths using PostScript-style commands.
 type BezierPath struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func BezierPathFromID(id objc.ID) *BezierPath {
 	if id == 0 {
 		return nil
 	}
-	x := &BezierPath{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BezierPath{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func bezierPathAdopt(id objc.ID) *BezierPath {
 	if id == 0 {
 		return nil
 	}
-	x := &BezierPath{Handle: objref.Wrap(id)}
+	x := &BezierPath{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,217 +62,353 @@ func (x *BezierPath) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BezierPath) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBezierPath creates a new BezierPath.
 func NewBezierPath() *BezierPath {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSBezierPath")), objc.RegisterName("new"))
 	return bezierPathAdopt(_id)
 }
 
-// WithCGPath sets cGPath and returns the receiver so calls can be chained.
+// WithCGPath sets the property and returns the receiver so calls can be chained.
 func (x *BezierPath) WithCGPath(cGPath obj.Object) *BezierPath {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCGPath:"), objref.IDOf(cGPath))
 	return x
 }
 
-// The width of stroked path lines.
-//
-// WithLineWidth sets lineWidth and returns the receiver so calls can be chained.
+// WithLineWidth the width of stroked path lines.
 func (x *BezierPath) WithLineWidth(lineWidth float64) *BezierPath {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
 	return x
 }
 
-// The line cap style for the path.
-//
-// WithLineCapStyle sets lineCapStyle and returns the receiver so calls can be chained.
+// WithLineCapStyle the line cap style for the path.
 func (x *BezierPath) WithLineCapStyle(lineCapStyle LineCapStyle) *BezierPath {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineCapStyle:"), lineCapStyle)
 	return x
 }
 
-// The line join style for the path.
-//
-// WithLineJoinStyle sets lineJoinStyle and returns the receiver so calls can be chained.
+// WithLineJoinStyle the line join style for the path.
 func (x *BezierPath) WithLineJoinStyle(lineJoinStyle LineJoinStyle) *BezierPath {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineJoinStyle:"), lineJoinStyle)
 	return x
 }
 
-// The winding rule used to fill the path.
-//
-// WithWindingRule sets windingRule and returns the receiver so calls can be chained.
+// WithWindingRule the winding rule used to fill the path.
 func (x *BezierPath) WithWindingRule(windingRule WindingRule) *BezierPath {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindingRule:"), windingRule)
 	return x
 }
 
-// The limit at which miter joins are converted to bevel joins.
-//
-// WithMiterLimit sets miterLimit and returns the receiver so calls can be chained.
+// WithMiterLimit the limit at which miter joins are converted to bevel joins.
 func (x *BezierPath) WithMiterLimit(miterLimit float64) *BezierPath {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
 	return x
 }
 
-// The accuracy with which curves are rendered.
-//
-// WithFlatness sets flatness and returns the receiver so calls can be chained.
+// WithFlatness the accuracy with which curves are rendered.
 func (x *BezierPath) WithFlatness(flatness float64) *BezierPath {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlatness:"), flatness)
 	return x
 }
 
-// Closes the most recently added subpath.
+// MoveToPoint moves the path’s current point to the specified location.
+func (x *BezierPath) MoveToPoint(point corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveToPoint:"), point)
+}
+
+// LineToPoint appends a straight line to the path.
+func (x *BezierPath) LineToPoint(point corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lineToPoint:"), point)
+}
+
+// CurveToPointControlPoint1ControlPoint2 adds a Bezier cubic curve to the path.
+func (x *BezierPath) CurveToPointControlPoint1ControlPoint2(endPoint corefoundation.CGPoint, controlPoint1 corefoundation.CGPoint, controlPoint2 corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("curveToPoint:controlPoint1:controlPoint2:"), endPoint, controlPoint1, controlPoint2)
+}
+
+// CurveToPointControlPoint wraps the corresponding Objective-C method.
+func (x *BezierPath) CurveToPointControlPoint(endPoint corefoundation.CGPoint, controlPoint corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("curveToPoint:controlPoint:"), endPoint, controlPoint)
+}
+
+// ClosePath closes the most recently added subpath.
 func (x *BezierPath) ClosePath() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("closePath"))
 }
 
-// Removes all path elements from the path, effectively clearing the path.
+// RemoveAllPoints removes all path elements from the path, effectively clearing the path.
 func (x *BezierPath) RemoveAllPoints() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllPoints"))
 }
 
-// Draws a line along the path using the current stroke color and drawing attributes.
+// RelativeMoveToPoint moves the path’s current point to a new point whose location is the specified distance from the current point.
+func (x *BezierPath) RelativeMoveToPoint(point corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relativeMoveToPoint:"), point)
+}
+
+// RelativeLineToPoint appends a straight line segment to the path starting at the current point and moving towards the specified point, relative to the current location.
+func (x *BezierPath) RelativeLineToPoint(point corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relativeLineToPoint:"), point)
+}
+
+// RelativeCurveToPointControlPoint1ControlPoint2 adds a Bezier cubic curve to the path from the current point to a new location, which is specified as a relative distance from the current point.
+func (x *BezierPath) RelativeCurveToPointControlPoint1ControlPoint2(endPoint corefoundation.CGPoint, controlPoint1 corefoundation.CGPoint, controlPoint2 corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relativeCurveToPoint:controlPoint1:controlPoint2:"), endPoint, controlPoint1, controlPoint2)
+}
+
+// RelativeCurveToPointControlPoint wraps the corresponding Objective-C method.
+func (x *BezierPath) RelativeCurveToPointControlPoint(endPoint corefoundation.CGPoint, controlPoint corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relativeCurveToPoint:controlPoint:"), endPoint, controlPoint)
+}
+
+// GetLineDashCountPhase returns the line-stroking pattern for the receiver.
+func (x *BezierPath) GetLineDashCountPhase() (pattern float64, count int64, phase float64) {
+	var _out0 float64
+	var _out1 int64
+	var _out2 float64
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getLineDash:count:phase:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	return _out0, _out1, _out2
+}
+
+// SetLineDashCountPhase sets the line-stroking pattern for the path.
+func (x *BezierPath) SetLineDashCountPhase(count int, phase float64) (pattern float64) {
+	var _out0 float64
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDash:count:phase:"), unsafe.Pointer(&_out0), count, phase)
+	return _out0
+}
+
+// Stroke draws a line along the path using the current stroke color and drawing attributes.
 func (x *BezierPath) Stroke() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stroke"))
 }
 
-// Paints the region enclosed by the path.
+// Fill paints the region enclosed by the path.
 func (x *BezierPath) Fill() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fill"))
 }
 
-// Intersects the area enclosed by the path with the clipping path of the current graphics context and makes the resulting shape the current clipping path.
+// AddClip intersects the area enclosed by the path with the clipping path of the current graphics context and makes the resulting shape the current clipping path.
 func (x *BezierPath) AddClip() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addClip"))
 }
 
-// Replaces the clipping path of the current graphics context with the area inside the path.
+// SetClip replaces the clipping path of the current graphics context with the area inside the path.
 func (x *BezierPath) SetClip() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClip"))
 }
 
-// Transforms all points in the path using the specified transform.
+// TransformUsingAffineTransform transforms all points in the path using the specified transform.
 func (x *BezierPath) TransformUsingAffineTransform(transform obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transformUsingAffineTransform:"), objref.IDOf(transform))
 }
 
-// Returns the type of path element at the specified index.
+// ElementAtIndex returns the type of path element at the specified index.
 func (x *BezierPath) ElementAtIndex(index int) BezierPathElement {
 	_r := objc.Send[BezierPathElement](objref.IDOf(x), objc.RegisterName("elementAtIndex:"), index)
 	return _r
 }
 
-// Appends the contents of the specified path object to the path.
+// AppendBezierPath appends the contents of the specified path object to the path.
 func (x *BezierPath) AppendBezierPath(path *BezierPath) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendBezierPath:"), objref.IDOf(path))
 }
 
-// Appends an outline of the specified glyph to the path.
+// AppendBezierPathWithRect appends a rectangular path to the path.
+func (x *BezierPath) AppendBezierPathWithRect(rect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendBezierPathWithRect:"), rect)
+}
+
+// AppendBezierPathWithOvalInRect appends an oval path to the path, inscribing the oval in the specified rectangle.
+func (x *BezierPath) AppendBezierPathWithOvalInRect(rect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendBezierPathWithOvalInRect:"), rect)
+}
+
+// AppendBezierPathWithArcWithCenterRadiusStartAngleEndAngleClockwise appends an arc of a circle to the path.
+func (x *BezierPath) AppendBezierPathWithArcWithCenterRadiusStartAngleEndAngleClockwise(center corefoundation.CGPoint, radius float64, startAngle float64, endAngle float64, clockwise bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendBezierPathWithArcWithCenter:radius:startAngle:endAngle:clockwise:"), center, radius, startAngle, endAngle, clockwise)
+}
+
+// AppendBezierPathWithArcWithCenterRadiusStartAngleEndAngle appends an arc of a circle to the path.
+func (x *BezierPath) AppendBezierPathWithArcWithCenterRadiusStartAngleEndAngle(center corefoundation.CGPoint, radius float64, startAngle float64, endAngle float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendBezierPathWithArcWithCenter:radius:startAngle:endAngle:"), center, radius, startAngle, endAngle)
+}
+
+// AppendBezierPathWithArcFromPointToPointRadius appends an arc to the path.
+func (x *BezierPath) AppendBezierPathWithArcFromPointToPointRadius(point1 corefoundation.CGPoint, point2 corefoundation.CGPoint, radius float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendBezierPathWithArcFromPoint:toPoint:radius:"), point1, point2, radius)
+}
+
+// AppendBezierPathWithCGGlyphInFont appends an outline of the specified glyph to the path.
 func (x *BezierPath) AppendBezierPathWithCGGlyphInFont(glyph uint16, font *Font) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendBezierPathWithCGGlyph:inFont:"), glyph, objref.IDOf(font))
 }
 
+// AppendBezierPathWithCGGlyphsCountInFont appends the outlines of the specified glyphs to the path.
+func (x *BezierPath) AppendBezierPathWithCGGlyphsCountInFont(count int, font *Font) (glyphs uint16) {
+	var _out0 uint16
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendBezierPathWithCGGlyphs:count:inFont:"), unsafe.Pointer(&_out0), count, objref.IDOf(font))
+	return _out0
+}
+
+// AppendBezierPathWithRoundedRectXRadiusYRadius appends a rounded rectangular path to the path.
+func (x *BezierPath) AppendBezierPathWithRoundedRectXRadiusYRadius(rect corefoundation.CGRect, xRadius float64, yRadius float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendBezierPathWithRoundedRect:xRadius:yRadius:"), rect, xRadius, yRadius)
+}
+
+// ContainsPoint returns a Boolean value that indicates whether the path contains the specified point.
+func (x *BezierPath) ContainsPoint(point corefoundation.CGPoint) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsPoint:"), point)
+	return _r
+}
+
+// CGPath wraps the corresponding Objective-C method.
 func (x *BezierPath) CGPath() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CGPath"))
 	return obj.Wrap(_r)
 }
 
+// SetCGPath wraps the corresponding Objective-C method.
 func (x *BezierPath) SetCGPath(cGPath obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCGPath:"), objref.IDOf(cGPath))
 }
 
+// LineWidth wraps the corresponding Objective-C method.
 func (x *BezierPath) LineWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lineWidth"))
 	return _r
 }
 
+// SetLineWidth wraps the corresponding Objective-C method.
 func (x *BezierPath) SetLineWidth(lineWidth float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
 }
 
+// LineCapStyle wraps the corresponding Objective-C method.
 func (x *BezierPath) LineCapStyle() LineCapStyle {
 	_r := objc.Send[LineCapStyle](objref.IDOf(x), objc.RegisterName("lineCapStyle"))
 	return _r
 }
 
+// SetLineCapStyle wraps the corresponding Objective-C method.
 func (x *BezierPath) SetLineCapStyle(lineCapStyle LineCapStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineCapStyle:"), lineCapStyle)
 }
 
+// LineJoinStyle wraps the corresponding Objective-C method.
 func (x *BezierPath) LineJoinStyle() LineJoinStyle {
 	_r := objc.Send[LineJoinStyle](objref.IDOf(x), objc.RegisterName("lineJoinStyle"))
 	return _r
 }
 
+// SetLineJoinStyle wraps the corresponding Objective-C method.
 func (x *BezierPath) SetLineJoinStyle(lineJoinStyle LineJoinStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineJoinStyle:"), lineJoinStyle)
 }
 
+// WindingRule wraps the corresponding Objective-C method.
 func (x *BezierPath) WindingRule() WindingRule {
 	_r := objc.Send[WindingRule](objref.IDOf(x), objc.RegisterName("windingRule"))
 	return _r
 }
 
+// SetWindingRule wraps the corresponding Objective-C method.
 func (x *BezierPath) SetWindingRule(windingRule WindingRule) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindingRule:"), windingRule)
 }
 
+// MiterLimit wraps the corresponding Objective-C method.
 func (x *BezierPath) MiterLimit() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("miterLimit"))
 	return _r
 }
 
+// SetMiterLimit wraps the corresponding Objective-C method.
 func (x *BezierPath) SetMiterLimit(miterLimit float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
 }
 
+// Flatness wraps the corresponding Objective-C method.
 func (x *BezierPath) Flatness() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("flatness"))
 	return _r
 }
 
+// SetFlatness wraps the corresponding Objective-C method.
 func (x *BezierPath) SetFlatness(flatness float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlatness:"), flatness)
 }
 
+// BezierPathByFlatteningPath wraps the corresponding Objective-C method.
 func (x *BezierPath) BezierPathByFlatteningPath() *BezierPath {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bezierPathByFlatteningPath"))
 	return BezierPathFromID(_r)
 }
 
+// BezierPathByReversingPath wraps the corresponding Objective-C method.
 func (x *BezierPath) BezierPathByReversingPath() *BezierPath {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bezierPathByReversingPath"))
 	return BezierPathFromID(_r)
 }
 
+// IsEmpty wraps the corresponding Objective-C method.
 func (x *BezierPath) IsEmpty() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEmpty"))
 	return _r
 }
 
+// CurrentPoint wraps the corresponding Objective-C method.
+func (x *BezierPath) CurrentPoint() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("currentPoint"))
+	return _r
+}
+
+// ControlPointBounds wraps the corresponding Objective-C method.
+func (x *BezierPath) ControlPointBounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("controlPointBounds"))
+	return _r
+}
+
+// Bounds wraps the corresponding Objective-C method.
+func (x *BezierPath) Bounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("bounds"))
+	return _r
+}
+
+// ElementCount wraps the corresponding Objective-C method.
 func (x *BezierPath) ElementCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("elementCount"))
 	return _r
 }
 
-// Returns a Boolean value that indicates whether this object maintains a cached image of its path.
+// CachesBezierPath returns a Boolean value that indicates whether this object maintains a cached image of its path.
 func (x *BezierPath) CachesBezierPath() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("cachesBezierPath"))
 	return _r
 }
 
-// Sets whether the path should cache its path information.
+// SetCachesBezierPath sets whether the path should cache its path information.
 func (x *BezierPath) SetCachesBezierPath(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCachesBezierPath:"), flag)
 }
 
-// Appends an outline of the specified glyph to the path.
+// AppendBezierPathWithGlyphInFont appends an outline of the specified glyph to the path.
 func (x *BezierPath) AppendBezierPathWithGlyphInFont(glyph int, font *Font) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendBezierPathWithGlyph:inFont:"), glyph, objref.IDOf(font))
 }
 
-// Appends an array of packed glyphs to the path.
+// AppendBezierPathWithGlyphsCountInFont appends the outlines of the specified glyphs to the path.
+func (x *BezierPath) AppendBezierPathWithGlyphsCountInFont(count int, font *Font) (glyphs int) {
+	var _out0 int
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendBezierPathWithGlyphs:count:inFont:"), unsafe.Pointer(&_out0), count, objref.IDOf(font))
+	return _out0
+}
+
+// AppendBezierPathWithPackedGlyphs appends an array of packed glyphs to the path.
 func (x *BezierPath) AppendBezierPathWithPackedGlyphs(packedGlyphs string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendBezierPathWithPackedGlyphs:"), packedGlyphs)
 }
@@ -283,8 +423,18 @@ type BezierPathable interface {
 	WithWindingRule(windingRule WindingRule) *BezierPath
 	WithMiterLimit(miterLimit float64) *BezierPath
 	WithFlatness(flatness float64) *BezierPath
+	MoveToPoint(point corefoundation.CGPoint)
+	LineToPoint(point corefoundation.CGPoint)
+	CurveToPointControlPoint1ControlPoint2(endPoint corefoundation.CGPoint, controlPoint1 corefoundation.CGPoint, controlPoint2 corefoundation.CGPoint)
+	CurveToPointControlPoint(endPoint corefoundation.CGPoint, controlPoint corefoundation.CGPoint)
 	ClosePath()
 	RemoveAllPoints()
+	RelativeMoveToPoint(point corefoundation.CGPoint)
+	RelativeLineToPoint(point corefoundation.CGPoint)
+	RelativeCurveToPointControlPoint1ControlPoint2(endPoint corefoundation.CGPoint, controlPoint1 corefoundation.CGPoint, controlPoint2 corefoundation.CGPoint)
+	RelativeCurveToPointControlPoint(endPoint corefoundation.CGPoint, controlPoint corefoundation.CGPoint)
+	GetLineDashCountPhase() (pattern float64, count int64, phase float64)
+	SetLineDashCountPhase(count int, phase float64) (pattern float64)
 	Stroke()
 	Fill()
 	AddClip()
@@ -292,7 +442,15 @@ type BezierPathable interface {
 	TransformUsingAffineTransform(transform obj.Object)
 	ElementAtIndex(index int) BezierPathElement
 	AppendBezierPath(path *BezierPath)
+	AppendBezierPathWithRect(rect corefoundation.CGRect)
+	AppendBezierPathWithOvalInRect(rect corefoundation.CGRect)
+	AppendBezierPathWithArcWithCenterRadiusStartAngleEndAngleClockwise(center corefoundation.CGPoint, radius float64, startAngle float64, endAngle float64, clockwise bool)
+	AppendBezierPathWithArcWithCenterRadiusStartAngleEndAngle(center corefoundation.CGPoint, radius float64, startAngle float64, endAngle float64)
+	AppendBezierPathWithArcFromPointToPointRadius(point1 corefoundation.CGPoint, point2 corefoundation.CGPoint, radius float64)
 	AppendBezierPathWithCGGlyphInFont(glyph uint16, font *Font)
+	AppendBezierPathWithCGGlyphsCountInFont(count int, font *Font) (glyphs uint16)
+	AppendBezierPathWithRoundedRectXRadiusYRadius(rect corefoundation.CGRect, xRadius float64, yRadius float64)
+	ContainsPoint(point corefoundation.CGPoint) bool
 	CGPath() obj.Object
 	SetCGPath(cGPath obj.Object)
 	LineWidth() float64
@@ -310,10 +468,14 @@ type BezierPathable interface {
 	BezierPathByFlatteningPath() *BezierPath
 	BezierPathByReversingPath() *BezierPath
 	IsEmpty() bool
+	CurrentPoint() corefoundation.CGPoint
+	ControlPointBounds() corefoundation.CGRect
+	Bounds() corefoundation.CGRect
 	ElementCount() int
 	CachesBezierPath() bool
 	SetCachesBezierPath(flag bool)
 	AppendBezierPathWithGlyphInFont(glyph int, font *Font)
+	AppendBezierPathWithGlyphsCountInFont(count int, font *Font) (glyphs int)
 	AppendBezierPathWithPackedGlyphs(packedGlyphs string)
 }
 

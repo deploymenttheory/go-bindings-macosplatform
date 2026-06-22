@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mutable, unordered collection of distinct objects that may appear more than once in the collection.
-//
 // CountedSet is an idiomatic wrapper over the Objective-C class NSCountedSet.
+//
+// It embeds [MutableSet], promoting that type's methods.
+//
+// A mutable, unordered collection of distinct objects that may appear more than once in the collection.
 type CountedSet struct {
-	objref.Handle
+	MutableSet
 }
 
 // CountedSetFromID adopts an existing Objective-C object as a CountedSet
@@ -25,7 +26,8 @@ func CountedSetFromID(id objc.ID) *CountedSet {
 	if id == 0 {
 		return nil
 	}
-	x := &CountedSet{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CountedSet{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,60 +40,40 @@ func countedSetAdopt(id objc.ID) *CountedSet {
 	if id == 0 {
 		return nil
 	}
-	x := &CountedSet{Handle: objref.Wrap(id)}
+	x := &CountedSet{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CountedSet) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CountedSet) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CountedSet) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Returns a counted set object initialized with enough memory to hold a given number of objects.
-//
-// NewCountedSetWithCapacity creates a new CountedSet.
+// NewCountedSetWithCapacity returns a counted set object initialized with enough memory to hold a given number of objects.
 func NewCountedSetWithCapacity(numItems int) *CountedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCountedSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCapacity:"), numItems)
 	return countedSetAdopt(_id)
 }
 
-// Returns a counted set object initialized with the contents of a given array.
-//
-// NewCountedSetWithArray creates a new CountedSet.
+// NewCountedSetWithArray returns a counted set object initialized with the contents of a given array.
 func NewCountedSetWithArray(array []obj.Object) *CountedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCountedSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithArray:"), purego.SliceToNSArray(array, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return countedSetAdopt(_id)
 }
 
-// Returns a counted set object initialized with the contents of a given set.
-//
-// NewCountedSetWithSet creates a new CountedSet.
+// NewCountedSetWithSet returns a counted set object initialized with the contents of a given set.
 func NewCountedSetWithSet(set obj.Object) *CountedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCountedSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSet:"), objref.IDOf(set))
 	return countedSetAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *CountedSet) WithScriptingProperties(scriptingProperties obj.Object) *CountedSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Returns the count associated with a given object in the set.
+// CountForObject returns the count associated with a given object in the set.
 func (x *CountedSet) CountForObject(object obj.Object) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("countForObject:"), objref.IDOf(object))
 	return _r
@@ -105,3 +87,7 @@ type CountedSetable interface {
 }
 
 var _ CountedSetable = (*CountedSet)(nil)
+
+var _ MutableSetProvider = (*CountedSet)(nil)
+
+var _ SetProvider = (*CountedSet)(nil)

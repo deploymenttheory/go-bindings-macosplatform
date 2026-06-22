@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents a Virtio console device in a virtual machine.
-//
 // VirtioConsoleDevice is an idiomatic wrapper over the Objective-C class VZVirtioConsoleDevice.
+//
+// It embeds [ConsoleDevice], promoting that type's methods.
+//
+// A class that represents a Virtio console device in a virtual machine.
 type VirtioConsoleDevice struct {
-	objref.Handle
+	ConsoleDevice
 }
 
 // VirtioConsoleDeviceFromID adopts an existing Objective-C object as a VirtioConsoleDevice
@@ -25,7 +26,8 @@ func VirtioConsoleDeviceFromID(id objc.ID) *VirtioConsoleDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioConsoleDevice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VirtioConsoleDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func virtioConsoleDeviceAdopt(id objc.ID) *VirtioConsoleDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioConsoleDevice{Handle: objref.Wrap(id)}
+	x := &VirtioConsoleDevice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *VirtioConsoleDevice) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VirtioConsoleDevice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VirtioConsoleDevice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewVirtioConsoleDevice creates a new VirtioConsoleDevice.
@@ -64,7 +52,7 @@ func NewVirtioConsoleDevice() *VirtioConsoleDevice {
 	return virtioConsoleDeviceAdopt(_id)
 }
 
-// The console ports currently being used by this console device.
+// Ports the console ports currently being used by this console device.
 func (x *VirtioConsoleDevice) Ports() *VirtioConsolePortArray {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ports"))
 	return VirtioConsolePortArrayFromID(_r)
@@ -77,3 +65,5 @@ type VirtioConsoleDeviceable interface {
 }
 
 var _ VirtioConsoleDeviceable = (*VirtioConsoleDevice)(nil)
+
+var _ ConsoleDeviceProvider = (*VirtioConsoleDevice)(nil)

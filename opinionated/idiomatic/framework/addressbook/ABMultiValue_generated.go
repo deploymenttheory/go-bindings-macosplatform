@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable representation of a property that might have multiple values.
-//
 // MultiValue is an idiomatic wrapper over the Objective-C class ABMultiValue.
+//
+// MultiValue is an abstract base — you do not construct it directly. Construct one of [MutableMultiValue] and pass it where a MultiValue is accepted.
+//
+// An immutable representation of a property that might have multiple values.
 type MultiValue struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func MultiValueFromID(id objc.ID) *MultiValue {
 	if id == 0 {
 		return nil
 	}
-	x := &MultiValue{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MultiValue{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func multiValueAdopt(id objc.ID) *MultiValue {
 	if id == 0 {
 		return nil
 	}
-	x := &MultiValue{Handle: objref.Wrap(id)}
+	x := &MultiValue{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +62,25 @@ func (x *MultiValue) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMultiValue creates a new MultiValue.
-func NewMultiValue() *MultiValue {
-	_id := objc.Send[objc.ID](objc.ID(_class("ABMultiValue")), objc.RegisterName("new"))
-	return multiValueAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MultiValue) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns the number of entries in a multivalue list.
+// Count returns the number of entries in a multivalue list.
 func (x *MultiValue) Count() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
 	return _r
 }
 
-// Returns the value for the given index.
+// ValueAtIndex returns the value for the given index.
 func (x *MultiValue) ValueAtIndex(index int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueAtIndex:"), index)
 	return obj.Wrap(_r)
 }
 
-// Returns the label for the given index.
+// LabelAtIndex returns the label for the given index.
 func (x *MultiValue) LabelAtIndex(index int) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labelAtIndex:"), index)
 	if _r == 0 {
@@ -85,7 +89,7 @@ func (x *MultiValue) LabelAtIndex(index int) string {
 	return purego.GoString(_r)
 }
 
-// Returns the identifier for the given index.
+// IdentifierAtIndex returns the identifier for the given index.
 func (x *MultiValue) IdentifierAtIndex(index int) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifierAtIndex:"), index)
 	if _r == 0 {
@@ -94,13 +98,13 @@ func (x *MultiValue) IdentifierAtIndex(index int) string {
 	return purego.GoString(_r)
 }
 
-// Returns the index for the given identifier.
+// IndexForIdentifier returns the index for the given identifier.
 func (x *MultiValue) IndexForIdentifier(identifier string) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexForIdentifier:"), purego.NSString(identifier))
 	return _r
 }
 
-// Returns the identifier for the primary value.
+// PrimaryIdentifier returns the identifier for the primary value.
 func (x *MultiValue) PrimaryIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryIdentifier"))
 	if _r == 0 {
@@ -109,19 +113,19 @@ func (x *MultiValue) PrimaryIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Returns the type for the values in a multivalue list.
+// PropertyType returns the type for the values in a multivalue list.
 func (x *MultiValue) PropertyType() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("propertyType"))
 	return _r
 }
 
-// Returns the value for the given identifier.
+// ValueForIdentifier returns the value for the given identifier.
 func (x *MultiValue) ValueForIdentifier(identifier string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForIdentifier:"), purego.NSString(identifier))
 	return obj.Wrap(_r)
 }
 
-// Returns the label for the given identifier.
+// LabelForIdentifier returns the label for the given identifier.
 func (x *MultiValue) LabelForIdentifier(identifier string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labelForIdentifier:"), purego.NSString(identifier))
 	return obj.Wrap(_r)
@@ -142,3 +146,10 @@ type MultiValueable interface {
 }
 
 var _ MultiValueable = (*MultiValue)(nil)
+
+// isMultiValue marks MultiValue — and, by embedding promotion, its
+// subclasses — as a member of the MultiValue hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MultiValue) isMultiValue() {}
+
+var _ MultiValueProvider = (*MultiValue)(nil)

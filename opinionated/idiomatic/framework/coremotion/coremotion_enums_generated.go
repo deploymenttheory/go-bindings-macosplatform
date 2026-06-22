@@ -22,6 +22,8 @@ const (
 	AuthorizationStatusAuthorized AuthorizationStatus = 3
 )
 
+// String returns the AuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationStatus) String() string {
 	switch e {
 	case AuthorizationStatusNotDetermined:
@@ -46,6 +48,8 @@ const (
 	DeviceMotionSensorLocationHeadphoneRight DeviceMotionSensorLocation = 2
 )
 
+// String returns the DeviceMotionSensorLocation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DeviceMotionSensorLocation) String() string {
 	switch e {
 	case DeviceMotionSensorLocationDefault:
@@ -71,6 +75,8 @@ const (
 	MotionActivityConfidenceHigh MotionActivityConfidence = 2
 )
 
+// String returns the MotionActivityConfidence constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MotionActivityConfidence) String() string {
 	switch e {
 	case MotionActivityConfidenceLow:
@@ -96,6 +102,8 @@ const (
 	OdometerOriginDeviceRemote OdometerOriginDevice = 2
 )
 
+// String returns the OdometerOriginDevice constant's name, or its numeric form when the
+// value is not a known constant.
 func (e OdometerOriginDevice) String() string {
 	switch e {
 	case OdometerOriginDeviceUnknown:
@@ -119,6 +127,8 @@ const (
 	PedometerEventTypeResume PedometerEventType = 1
 )
 
+// String returns the PedometerEventType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PedometerEventType) String() string {
 	switch e {
 	case PedometerEventTypePause:

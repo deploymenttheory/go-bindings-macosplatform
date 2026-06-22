@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A URL session task that returns downloaded data directly to the app in memory.
-//
 // URLSessionDataTask is an idiomatic wrapper over the Objective-C class NSURLSessionDataTask.
+//
+// URLSessionDataTask is an abstract base — you do not construct it directly. Construct one of [URLSessionUploadTask] and pass it where a URLSessionDataTask is accepted.
+//
+// A URL session task that returns downloaded data directly to the app in memory.
 type URLSessionDataTask struct {
-	objref.Handle
+	URLSessionTask
 }
 
 // URLSessionDataTaskFromID adopts an existing Objective-C object as a URLSessionDataTask
@@ -25,7 +26,8 @@ func URLSessionDataTaskFromID(id objc.ID) *URLSessionDataTask {
 	if id == 0 {
 		return nil
 	}
-	x := &URLSessionDataTask{Handle: objref.Wrap(purego.Retain(id))}
+	x := &URLSessionDataTask{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,69 +40,49 @@ func uRLSessionDataTaskAdopt(id objc.ID) *URLSessionDataTask {
 	if id == 0 {
 		return nil
 	}
-	x := &URLSessionDataTask{Handle: objref.Wrap(id)}
+	x := &URLSessionDataTask{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *URLSessionDataTask) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *URLSessionDataTask) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *URLSessionDataTask) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewURLSessionDataTask creates a new URLSessionDataTask.
-func NewURLSessionDataTask() *URLSessionDataTask {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSURLSessionDataTask")), objc.RegisterName("new"))
-	return uRLSessionDataTaskAdopt(_id)
-}
-
-// WithEarliestBeginDate sets earliestBeginDate and returns the receiver so calls can be chained.
+// WithEarliestBeginDate sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionDataTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionDataTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
 	return x
 }
 
-// WithCountOfBytesClientExpectsToSend sets countOfBytesClientExpectsToSend and returns the receiver so calls can be chained.
+// WithCountOfBytesClientExpectsToSend sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionDataTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionDataTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
 	return x
 }
 
-// WithCountOfBytesClientExpectsToReceive sets countOfBytesClientExpectsToReceive and returns the receiver so calls can be chained.
+// WithCountOfBytesClientExpectsToReceive sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionDataTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionDataTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
 	return x
 }
 
-// WithTaskDescription sets taskDescription and returns the receiver so calls can be chained.
+// WithTaskDescription sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionDataTask) WithTaskDescription(taskDescription StringProvider) *URLSessionDataTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
 	return x
 }
 
-// WithPriority sets priority and returns the receiver so calls can be chained.
+// WithPriority sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionDataTask) WithPriority(priority float32) *URLSessionDataTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
 	return x
 }
 
-// WithPrefersIncrementalDelivery sets prefersIncrementalDelivery and returns the receiver so calls can be chained.
+// WithPrefersIncrementalDelivery sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionDataTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionDataTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionDataTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionDataTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
@@ -119,3 +101,12 @@ type URLSessionDataTaskable interface {
 }
 
 var _ URLSessionDataTaskable = (*URLSessionDataTask)(nil)
+
+// isURLSessionDataTask marks URLSessionDataTask — and, by embedding promotion, its
+// subclasses — as a member of the URLSessionDataTask hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *URLSessionDataTask) isURLSessionDataTask() {}
+
+var _ URLSessionDataTaskProvider = (*URLSessionDataTask)(nil)
+
+var _ URLSessionTaskProvider = (*URLSessionDataTask)(nil)

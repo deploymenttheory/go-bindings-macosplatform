@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides a device or communicates its change in status.
-//
 // DDDeviceEvent is an idiomatic wrapper over the Objective-C class DDDeviceEvent.
+//
+// An object that provides a device or communicates its change in status.
 type DDDeviceEvent struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DDDeviceEventFromID(id objc.ID) *DDDeviceEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &DDDeviceEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DDDeviceEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func dDDeviceEventAdopt(id objc.ID) *DDDeviceEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &DDDeviceEvent{Handle: objref.Wrap(id)}
+	x := &DDDeviceEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,26 @@ func (x *DDDeviceEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an event object that conveys status for a discovered device of interest.
-//
-// NewDDDeviceEventWithEventTypeDevice creates a new DDDeviceEvent.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DDDeviceEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDDDeviceEventWithEventTypeDevice creates an event object that conveys status for a discovered device of interest.
 func NewDDDeviceEventWithEventTypeDevice(type_ DDEventType, device *DDDevice) *DDDeviceEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DDDeviceEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEventType:device:"), type_, objref.IDOf(device))
 	return dDDeviceEventAdopt(_id)
 }
 
-// Device found or lost.
+// Device device found or lost.
 func (x *DDDeviceEvent) Device() *DDDevice {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
 	return DDDeviceFromID(_r)
 }
 
-// Type of event.
+// EventType type of event.
 func (x *DDDeviceEvent) EventType() DDEventType {
 	_r := objc.Send[DDEventType](objref.IDOf(x), objc.RegisterName("eventType"))
 	return _r

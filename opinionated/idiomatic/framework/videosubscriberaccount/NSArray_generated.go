@@ -23,7 +23,8 @@ func NSArrayFromID(id objc.ID) *NSArray {
 	if id == 0 {
 		return nil
 	}
-	x := &NSArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NSArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func nSArrayAdopt(id objc.ID) *NSArray {
 	if id == 0 {
 		return nil
 	}
-	x := &NSArray{Handle: objref.Wrap(id)}
+	x := &NSArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *NSArray) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *NSArray) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NSArray) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewNSArray creates a new NSArray.

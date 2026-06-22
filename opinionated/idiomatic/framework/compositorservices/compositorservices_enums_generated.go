@@ -19,6 +19,8 @@ const (
 	Cp_axis_direction_convention_right_down_forward Cp_axis_direction_convention = 3
 )
 
+// String returns the Cp_axis_direction_convention constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Cp_axis_direction_convention) String() string {
 	switch e {
 	case Cp_axis_direction_convention_right_up_back:
@@ -46,6 +48,8 @@ const (
 	Cp_drawable_state_presenting Cp_drawable_state = 2
 )
 
+// String returns the Cp_drawable_state constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Cp_drawable_state) String() string {
 	switch e {
 	case Cp_drawable_state_available:
@@ -68,6 +72,8 @@ const (
 	Cp_drawable_target_capture Cp_drawable_target = 1
 )
 
+// String returns the Cp_drawable_target constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Cp_drawable_target) String() string {
 	switch e {
 	case Cp_drawable_target_built_in:
@@ -91,6 +97,8 @@ const (
 	Cp_layer_renderer_layout_layered Cp_layer_renderer_layout = 2
 )
 
+// String returns the Cp_layer_renderer_layout constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Cp_layer_renderer_layout) String() string {
 	switch e {
 	case Cp_layer_renderer_layout_dedicated:
@@ -116,6 +124,8 @@ const (
 	Cp_layer_renderer_state_invalidated Cp_layer_renderer_state = 3
 )
 
+// String returns the Cp_layer_renderer_state constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Cp_layer_renderer_state) String() string {
 	switch e {
 	case Cp_layer_renderer_state_paused:
@@ -138,6 +148,8 @@ const (
 	Cp_supported_color_formats_options_progressive_immersion_enabled Cp_supported_color_formats_options = 1
 )
 
+// String returns the Cp_supported_color_formats_options constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Cp_supported_color_formats_options) String() string {
 	var parts []string
 	if e&Cp_supported_color_formats_options_progressive_immersion_enabled != 0 {
@@ -159,6 +171,8 @@ const (
 	Cp_supported_layouts_options_progressive_immersion_enabled Cp_supported_layouts_options = 2
 )
 
+// String returns the Cp_supported_layouts_options constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Cp_supported_layouts_options) String() string {
 	var parts []string
 	if e&Cp_supported_layouts_options_foveation_enabled != 0 {

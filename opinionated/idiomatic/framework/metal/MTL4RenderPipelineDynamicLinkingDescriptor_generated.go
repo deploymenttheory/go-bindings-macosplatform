@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Groups together properties that provide linking properties for render pipelines.
-//
 // MTL4RenderPipelineDynamicLinkingDescriptor is an idiomatic wrapper over the Objective-C class MTL4RenderPipelineDynamicLinkingDescriptor.
+//
+// Groups together properties that provide linking properties for render pipelines.
 type MTL4RenderPipelineDynamicLinkingDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MTL4RenderPipelineDynamicLinkingDescriptorFromID(id objc.ID) *MTL4RenderPip
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4RenderPipelineDynamicLinkingDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTL4RenderPipelineDynamicLinkingDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTL4RenderPipelineDynamicLinkingDescriptorAdopt(id objc.ID) *MTL4RenderPipe
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4RenderPipelineDynamicLinkingDescriptor{Handle: objref.Wrap(id)}
+	x := &MTL4RenderPipelineDynamicLinkingDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,43 @@ func (x *MTL4RenderPipelineDynamicLinkingDescriptor) IsKind(className string) bo
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTL4RenderPipelineDynamicLinkingDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTL4RenderPipelineDynamicLinkingDescriptor creates a new MTL4RenderPipelineDynamicLinkingDescriptor.
 func NewMTL4RenderPipelineDynamicLinkingDescriptor() *MTL4RenderPipelineDynamicLinkingDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTL4RenderPipelineDynamicLinkingDescriptor")), objc.RegisterName("new"))
 	return mTL4RenderPipelineDynamicLinkingDescriptorAdopt(_id)
 }
 
-// Controls properties for linking the vertex stage of the render pipeline.
+// VertexLinkingDescriptor controls properties for linking the vertex stage of the render pipeline.
 func (x *MTL4RenderPipelineDynamicLinkingDescriptor) VertexLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexLinkingDescriptor"))
 	return MTL4PipelineStageDynamicLinkingDescriptorFromID(_r)
 }
 
-// Controls properties for linking the fragment stage of the render pipeline.
+// FragmentLinkingDescriptor controls properties for linking the fragment stage of the render pipeline.
 func (x *MTL4RenderPipelineDynamicLinkingDescriptor) FragmentLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fragmentLinkingDescriptor"))
 	return MTL4PipelineStageDynamicLinkingDescriptorFromID(_r)
 }
 
-// Controls properties for linking the tile stage of the render pipeline.
+// TileLinkingDescriptor controls properties for linking the tile stage of the render pipeline.
 func (x *MTL4RenderPipelineDynamicLinkingDescriptor) TileLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tileLinkingDescriptor"))
 	return MTL4PipelineStageDynamicLinkingDescriptorFromID(_r)
 }
 
-// Controls properties for link the object stage of the render pipeline.
+// ObjectLinkingDescriptor controls properties for link the object stage of the render pipeline.
 func (x *MTL4RenderPipelineDynamicLinkingDescriptor) ObjectLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectLinkingDescriptor"))
 	return MTL4PipelineStageDynamicLinkingDescriptorFromID(_r)
 }
 
-// Controls properties for linking the mesh stage of the render pipeline.
+// MeshLinkingDescriptor controls properties for linking the mesh stage of the render pipeline.
 func (x *MTL4RenderPipelineDynamicLinkingDescriptor) MeshLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("meshLinkingDescriptor"))
 	return MTL4PipelineStageDynamicLinkingDescriptorFromID(_r)

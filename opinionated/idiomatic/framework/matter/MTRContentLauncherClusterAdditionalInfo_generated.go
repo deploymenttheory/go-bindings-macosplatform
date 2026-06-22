@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRContentLauncherClusterAdditionalInfo is an idiomatic wrapper over the Objective-C class MTRContentLauncherClusterAdditionalInfo.
+//
+// It embeds [MTRContentLauncherClusterAdditionalInfoStruct], promoting that type's methods.
 type MTRContentLauncherClusterAdditionalInfo struct {
-	objref.Handle
+	MTRContentLauncherClusterAdditionalInfoStruct
 }
 
 // MTRContentLauncherClusterAdditionalInfoFromID adopts an existing Objective-C object as a MTRContentLauncherClusterAdditionalInfo
@@ -23,7 +24,8 @@ func MTRContentLauncherClusterAdditionalInfoFromID(id objc.ID) *MTRContentLaunch
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterAdditionalInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRContentLauncherClusterAdditionalInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRContentLauncherClusterAdditionalInfoAdopt(id objc.ID) *MTRContentLaunche
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterAdditionalInfo{Handle: objref.Wrap(id)}
+	x := &MTRContentLauncherClusterAdditionalInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRContentLauncherClusterAdditionalInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRContentLauncherClusterAdditionalInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRContentLauncherClusterAdditionalInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRContentLauncherClusterAdditionalInfo creates a new MTRContentLauncherClusterAdditionalInfo.
@@ -62,13 +50,13 @@ func NewMTRContentLauncherClusterAdditionalInfo() *MTRContentLauncherClusterAddi
 	return mTRContentLauncherClusterAdditionalInfoAdopt(_id)
 }
 
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterAdditionalInfo) WithName(name string) *MTRContentLauncherClusterAdditionalInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterAdditionalInfo) WithValue(value string) *MTRContentLauncherClusterAdditionalInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 	return x
@@ -82,3 +70,5 @@ type MTRContentLauncherClusterAdditionalInfoable interface {
 }
 
 var _ MTRContentLauncherClusterAdditionalInfoable = (*MTRContentLauncherClusterAdditionalInfo)(nil)
+
+var _ MTRContentLauncherClusterAdditionalInfoStructProvider = (*MTRContentLauncherClusterAdditionalInfo)(nil)

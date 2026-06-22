@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that scales the layers in a symbol-based image separately or as a whole.
-//
 // SymbolScaleEffect is an idiomatic wrapper over the Objective-C class NSSymbolScaleEffect.
+//
+// It embeds [SymbolEffect], promoting that type's methods.
+//
+// A type that scales the layers in a symbol-based image separately or as a whole.
 type SymbolScaleEffect struct {
-	objref.Handle
+	SymbolEffect
 }
 
 // SymbolScaleEffectFromID adopts an existing Objective-C object as a SymbolScaleEffect
@@ -25,7 +26,8 @@ func SymbolScaleEffectFromID(id objc.ID) *SymbolScaleEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolScaleEffect{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SymbolScaleEffect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func symbolScaleEffectAdopt(id objc.ID) *SymbolScaleEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolScaleEffect{Handle: objref.Wrap(id)}
+	x := &SymbolScaleEffect{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SymbolScaleEffect) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SymbolScaleEffect) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SymbolScaleEffect) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSymbolScaleEffect creates a new SymbolScaleEffect.
@@ -64,13 +52,13 @@ func NewSymbolScaleEffect() *SymbolScaleEffect {
 	return symbolScaleEffectAdopt(_id)
 }
 
-// An effect that scales each layer separately.
+// EffectWithByLayer an effect that scales each layer separately.
 func (x *SymbolScaleEffect) EffectWithByLayer() *SymbolScaleEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
 	return SymbolScaleEffectFromID(_r)
 }
 
-// An effect that scales all layers simultaneously.
+// EffectWithWholeSymbol an effect that scales all layers simultaneously.
 func (x *SymbolScaleEffect) EffectWithWholeSymbol() *SymbolScaleEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolScaleEffectFromID(_r)
@@ -84,3 +72,5 @@ type SymbolScaleEffectable interface {
 }
 
 var _ SymbolScaleEffectable = (*SymbolScaleEffect)(nil)
+
+var _ SymbolEffectProvider = (*SymbolScaleEffect)(nil)

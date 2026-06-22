@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object containing the subscription period duration information.
-//
 // ProductSubscriptionPeriod is an idiomatic wrapper over the Objective-C class SKProductSubscriptionPeriod.
+//
+// An object containing the subscription period duration information.
 type ProductSubscriptionPeriod struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ProductSubscriptionPeriodFromID(id objc.ID) *ProductSubscriptionPeriod {
 	if id == 0 {
 		return nil
 	}
-	x := &ProductSubscriptionPeriod{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ProductSubscriptionPeriod{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func productSubscriptionPeriodAdopt(id objc.ID) *ProductSubscriptionPeriod {
 	if id == 0 {
 		return nil
 	}
-	x := &ProductSubscriptionPeriod{Handle: objref.Wrap(id)}
+	x := &ProductSubscriptionPeriod{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,25 @@ func (x *ProductSubscriptionPeriod) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ProductSubscriptionPeriod) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewProductSubscriptionPeriod creates a new ProductSubscriptionPeriod.
 func NewProductSubscriptionPeriod() *ProductSubscriptionPeriod {
 	_id := objc.Send[objc.ID](objc.ID(_class("SKProductSubscriptionPeriod")), objc.RegisterName("new"))
 	return productSubscriptionPeriodAdopt(_id)
 }
 
+// NumberOfUnits wraps the corresponding Objective-C method.
 func (x *ProductSubscriptionPeriod) NumberOfUnits() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfUnits"))
 	return _r
 }
 
+// Unit wraps the corresponding Objective-C method.
 func (x *ProductSubscriptionPeriod) Unit() ProductPeriodUnit {
 	_r := objc.Send[ProductPeriodUnit](objref.IDOf(x), objc.RegisterName("unit"))
 	return _r

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents a hot-pluggable USB mass storage device.
-//
 // USBMassStorageDevice is an idiomatic wrapper over the Objective-C class VZUSBMassStorageDevice.
+//
+// It embeds [StorageDevice], promoting that type's methods.
+//
+// A class that represents a hot-pluggable USB mass storage device.
 type USBMassStorageDevice struct {
-	objref.Handle
+	StorageDevice
 }
 
 // USBMassStorageDeviceFromID adopts an existing Objective-C object as a USBMassStorageDevice
@@ -25,7 +26,8 @@ func USBMassStorageDeviceFromID(id objc.ID) *USBMassStorageDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &USBMassStorageDevice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &USBMassStorageDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func uSBMassStorageDeviceAdopt(id objc.ID) *USBMassStorageDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &USBMassStorageDevice{Handle: objref.Wrap(id)}
+	x := &USBMassStorageDevice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *USBMassStorageDevice) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *USBMassStorageDevice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *USBMassStorageDevice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a USB mass storage device with the provided configuration.
-//
-// NewUSBMassStorageDeviceWithConfiguration creates a new USBMassStorageDevice.
+// NewUSBMassStorageDeviceWithConfiguration creates a USB mass storage device with the provided configuration.
 func NewUSBMassStorageDeviceWithConfiguration(configuration *USBMassStorageDeviceConfiguration) *USBMassStorageDevice {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZUSBMassStorageDevice")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), objref.IDOf(configuration))
@@ -73,3 +59,5 @@ type USBMassStorageDeviceable interface {
 }
 
 var _ USBMassStorageDeviceable = (*USBMassStorageDevice)(nil)
+
+var _ StorageDeviceProvider = (*USBMassStorageDevice)(nil)

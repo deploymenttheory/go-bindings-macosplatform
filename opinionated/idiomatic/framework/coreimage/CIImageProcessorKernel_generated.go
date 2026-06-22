@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract class you extend to create custom image processors that can integrate with Core Image workflows.
-//
 // ImageProcessorKernel is an idiomatic wrapper over the Objective-C class CIImageProcessorKernel.
+//
+// The abstract class you extend to create custom image processors that can integrate with Core Image workflows.
 type ImageProcessorKernel struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ImageProcessorKernelFromID(id objc.ID) *ImageProcessorKernel {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageProcessorKernel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageProcessorKernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func imageProcessorKernelAdopt(id objc.ID) *ImageProcessorKernel {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageProcessorKernel{Handle: objref.Wrap(id)}
+	x := &ImageProcessorKernel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *ImageProcessorKernel) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *ImageProcessorKernel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ImageProcessorKernel) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewImageProcessorKernel creates a new ImageProcessorKernel.

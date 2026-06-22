@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains information about a received PushKit notification.
-//
 // PushPayload is an idiomatic wrapper over the Objective-C class PKPushPayload.
+//
+// An object that contains information about a received PushKit notification.
 type PushPayload struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PushPayloadFromID(id objc.ID) *PushPayload {
 	if id == 0 {
 		return nil
 	}
-	x := &PushPayload{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PushPayload{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func pushPayloadAdopt(id objc.ID) *PushPayload {
 	if id == 0 {
 		return nil
 	}
-	x := &PushPayload{Handle: objref.Wrap(id)}
+	x := &PushPayload{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *PushPayload) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PushPayload) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPushPayload creates a new PushPayload.
 func NewPushPayload() *PushPayload {
 	_id := objc.Send[objc.ID](objc.ID(_class("PKPushPayload")), objc.RegisterName("new"))
 	return pushPayloadAdopt(_id)
 }
 
-// The type value indicating how to interpret the payload. For possible values, see “PushKit/PKPushType“.
+// Type the type value indicating how to interpret the payload. For possible values, see “PushKit/PKPushType“.
 func (x *PushPayload) Type() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
 	return obj.Wrap(_r)
 }
 
-// The contents of the received payload. For VoIP pushes, the sender is free to specify any fields for the contained data as long as it is provided in a text-encodable JSON format.
+// DictionaryPayload the contents of the received payload. For VoIP pushes, the sender is free to specify any fields for the contained data as long as it is provided in a text-encodable JSON format.
 func (x *PushPayload) DictionaryPayload() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryPayload"))
 	return obj.Wrap(_r)

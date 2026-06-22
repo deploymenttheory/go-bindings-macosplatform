@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The message arguments for a particular entry.
-//
 // LogMessageComponent is an idiomatic wrapper over the Objective-C class OSLogMessageComponent.
+//
+// The message arguments for a particular entry.
 type LogMessageComponent struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LogMessageComponentFromID(id objc.ID) *LogMessageComponent {
 	if id == 0 {
 		return nil
 	}
-	x := &LogMessageComponent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LogMessageComponent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func logMessageComponentAdopt(id objc.ID) *LogMessageComponent {
 	if id == 0 {
 		return nil
 	}
-	x := &LogMessageComponent{Handle: objref.Wrap(id)}
+	x := &LogMessageComponent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *LogMessageComponent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LogMessageComponent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLogMessageComponent creates a new LogMessageComponent.
 func NewLogMessageComponent() *LogMessageComponent {
 	_id := objc.Send[objc.ID](objc.ID(_class("OSLogMessageComponent")), objc.RegisterName("new"))
 	return logMessageComponentAdopt(_id)
 }
 
-// The text immediately preceding a placeholder. This can be an empty string if there is nothing between two placeholders, or between the placeholder and the bounds of the string.
+// FormatSubstring the text immediately preceding a placeholder. This can be an empty string if there is nothing between two placeholders, or between the placeholder and the bounds of the string.
 func (x *LogMessageComponent) FormatSubstring() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formatSubstring"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *LogMessageComponent) FormatSubstring() string {
 	return purego.GoString(_r)
 }
 
-// The placeholder text. Is empty for is the last component.
+// Placeholder the placeholder text. Is empty for is the last component.
 func (x *LogMessageComponent) Placeholder() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholder"))
 	if _r == 0 {
@@ -82,37 +90,37 @@ func (x *LogMessageComponent) Placeholder() string {
 	return purego.GoString(_r)
 }
 
-// The type of argument corresponding to the placeholder; see OSLogMessageComponentArgumentCategory.
+// ArgumentCategory the type of argument corresponding to the placeholder; see OSLogMessageComponentArgumentCategory.
 func (x *LogMessageComponent) ArgumentCategory() LogMessageComponentArgumentCategory {
 	_r := objc.Send[LogMessageComponentArgumentCategory](objref.IDOf(x), objc.RegisterName("argumentCategory"))
 	return _r
 }
 
-// The argument as a sequence of bytes. Can be nil if the argument cannot be decoded (for example, it could be redacted), or if this is the last component.
+// ArgumentDataValue the argument as a sequence of bytes. Can be nil if the argument cannot be decoded (for example, it could be redacted), or if this is the last component.
 func (x *LogMessageComponent) ArgumentDataValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("argumentDataValue"))
 	return obj.Wrap(_r)
 }
 
-// The argument as a double-precision floating point number; the value is undefined if the argument cannot be decoded or if this is the last component.
+// ArgumentDoubleValue the argument as a double-precision floating point number; the value is undefined if the argument cannot be decoded or if this is the last component.
 func (x *LogMessageComponent) ArgumentDoubleValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("argumentDoubleValue"))
 	return _r
 }
 
-// The argument as a 64-bit signed integer; the value is undefined if it cannot be decoded or if this is the last component.
+// ArgumentInt64Value the argument as a 64-bit signed integer; the value is undefined if it cannot be decoded or if this is the last component.
 func (x *LogMessageComponent) ArgumentInt64Value() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("argumentInt64Value"))
 	return _r
 }
 
-// The argument as a number. Can be nil if the argument cannot be decoded (for example, it could be redacted), or if this is the last component.
+// ArgumentNumberValue the argument as a number. Can be nil if the argument cannot be decoded (for example, it could be redacted), or if this is the last component.
 func (x *LogMessageComponent) ArgumentNumberValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("argumentNumberValue"))
 	return obj.Wrap(_r)
 }
 
-// The argument as a string. Can be nil if the argument cannot be decoded (for example, it could be redacted), or if this is the last component.
+// ArgumentStringValue the argument as a string. Can be nil if the argument cannot be decoded (for example, it could be redacted), or if this is the last component.
 func (x *LogMessageComponent) ArgumentStringValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("argumentStringValue"))
 	if _r == 0 {
@@ -121,7 +129,7 @@ func (x *LogMessageComponent) ArgumentStringValue() string {
 	return purego.GoString(_r)
 }
 
-// The argument as a 64-bit unsigned integer; the value is undefined if the argument cannot be decoded or if this is the last component.
+// ArgumentUInt64Value the argument as a 64-bit unsigned integer; the value is undefined if the argument cannot be decoded or if this is the last component.
 func (x *LogMessageComponent) ArgumentUInt64Value() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("argumentUInt64Value"))
 	return _r

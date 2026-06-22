@@ -23,7 +23,8 @@ func AssetSpatialAudioInfoFromID(id objc.ID) *AssetSpatialAudioInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetSpatialAudioInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetSpatialAudioInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func assetSpatialAudioInfoAdopt(id objc.ID) *AssetSpatialAudioInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetSpatialAudioInfo{Handle: objref.Wrap(id)}
+	x := &AssetSpatialAudioInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,49 +58,55 @@ func (x *AssetSpatialAudioInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetSpatialAudioInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetSpatialAudioInfo creates a new AssetSpatialAudioInfo.
 func NewAssetSpatialAudioInfo() *AssetSpatialAudioInfo {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNAssetSpatialAudioInfo")), objc.RegisterName("new"))
 	return assetSpatialAudioInfoAdopt(_id)
 }
 
-// default `AVAssetTrack` containing Spatial Audio
+// DefaultSpatialAudioTrack default `AVAssetTrack` containing Spatial Audio
 func (x *AssetSpatialAudioInfo) DefaultSpatialAudioTrack() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultSpatialAudioTrack"))
 	return obj.Wrap(_r)
 }
 
-// default effect intensity value as provided by the system. Supported range is [0.0-1.0]
+// DefaultEffectIntensity default effect intensity value as provided by the system. Supported range is [0.0-1.0]
 func (x *AssetSpatialAudioInfo) DefaultEffectIntensity() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("defaultEffectIntensity"))
 	return _r
 }
 
-// default rendering style as provided by the system
+// DefaultRenderingStyle default rendering style as provided by the system
 func (x *AssetSpatialAudioInfo) DefaultRenderingStyle() SpatialAudioRenderingStyle {
 	_r := objc.Send[SpatialAudioRenderingStyle](objref.IDOf(x), objc.RegisterName("defaultRenderingStyle"))
 	return _r
 }
 
-// The result of audio analysis during recording which contains metadata necessary to properly configure the Audio Mix feature during playback or editing.. Can be used with `AUAudioUnit` instances that support AudioUnitPropertyID `kProperty_SpatialAudioMixMetadata`
+// SpatialAudioMixMetadata the result of audio analysis during recording which contains metadata necessary to properly configure the Audio Mix feature during playback or editing.. Can be used with `AUAudioUnit` instances that support AudioUnitPropertyID `kProperty_SpatialAudioMixMetadata`
 func (x *AssetSpatialAudioInfo) SpatialAudioMixMetadata() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("spatialAudioMixMetadata"))
 	return obj.Wrap(_r)
 }
 
-// returns an instance of `AVAudioMix` encapsulating all spatial audio related data with specified effect intensity and rendering style. Returns an `AVAudioMix` containing all the necessary state to operate on the asset with Spatial Audio effects enabled
+// AudioMixWithEffectIntensityRenderingStyle returns an instance of `AVAudioMix` encapsulating all spatial audio related data with specified effect intensity and rendering style. Returns an `AVAudioMix` containing all the necessary state to operate on the asset with Spatial Audio effects enabled
 func (x *AssetSpatialAudioInfo) AudioMixWithEffectIntensityRenderingStyle(effectIntensity float32, renderingStyle SpatialAudioRenderingStyle) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioMixWithEffectIntensity:renderingStyle:"), effectIntensity, renderingStyle)
 	return obj.Wrap(_r)
 }
 
-// Returns a dictionary of settings and the source track that should be used to fetch LPCM samples from this track with the effect applied Use the returned NSDictionary with the `defaulSpatialAudioTrack` to initialize an instance of `AVAssetReaderAudioMixOutput`
+// AssetReaderOutputSettingsForContentType returns a dictionary of settings and the source track that should be used to fetch LPCM samples from this track with the effect applied Use the returned NSDictionary with the `defaulSpatialAudioTrack` to initialize an instance of `AVAssetReaderAudioMixOutput`
 func (x *AssetSpatialAudioInfo) AssetReaderOutputSettingsForContentType(contentType SpatialAudioContentType) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetReaderOutputSettingsForContentType:"), contentType)
 	return obj.Wrap(_r)
 }
 
-// Returns a dictionary of settings that should be used to encode LPCM samples using `AVAssetWriterInput`
+// AssetWriterInputSettingsForContentType returns a dictionary of settings that should be used to encode LPCM samples using `AVAssetWriterInput`
 func (x *AssetSpatialAudioInfo) AssetWriterInputSettingsForContentType(contentType SpatialAudioContentType) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetWriterInputSettingsForContentType:"), contentType)
 	return obj.Wrap(_r)

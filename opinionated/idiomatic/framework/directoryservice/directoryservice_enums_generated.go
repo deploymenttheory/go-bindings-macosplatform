@@ -255,6 +255,8 @@ const (
 	EDSLastValue                       TDirStatus = -14999
 )
 
+// String returns the TDirStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TDirStatus) String() string {
 	switch e {
 	case EDSNoErr:

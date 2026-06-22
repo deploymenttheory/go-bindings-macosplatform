@@ -6,17 +6,19 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A toolbar item that contains a search field optimized for performing text-based searches.
-//
 // SearchToolbarItem is an idiomatic wrapper over the Objective-C class NSSearchToolbarItem.
+//
+// It embeds [ToolbarItem], promoting that type's methods.
+//
+// A toolbar item that contains a search field optimized for performing text-based searches.
 type SearchToolbarItem struct {
-	objref.Handle
+	ToolbarItem
 }
 
 // SearchToolbarItemFromID adopts an existing Objective-C object as a SearchToolbarItem
@@ -25,7 +27,8 @@ func SearchToolbarItemFromID(id objc.ID) *SearchToolbarItem {
 	if id == 0 {
 		return nil
 	}
-	x := &SearchToolbarItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SearchToolbarItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func searchToolbarItemAdopt(id objc.ID) *SearchToolbarItem {
 	if id == 0 {
 		return nil
 	}
-	x := &SearchToolbarItem{Handle: objref.Wrap(id)}
+	x := &SearchToolbarItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SearchToolbarItem) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SearchToolbarItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SearchToolbarItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSearchToolbarItem creates a new SearchToolbarItem.
@@ -64,219 +53,189 @@ func NewSearchToolbarItem() *SearchToolbarItem {
 	return searchToolbarItemAdopt(_id)
 }
 
-// The search field inside the toolbar item.
-//
-// WithSearchField sets searchField and returns the receiver so calls can be chained.
+// WithSearchField the search field inside the toolbar item.
 func (x *SearchToolbarItem) WithSearchField(searchField *SearchField) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchField:"), objref.IDOf(searchField))
 	return x
 }
 
-// A Boolean value that enables the cancel button in the search field to resign the first responder in addition to clearing the contents.
-//
-// WithResignsFirstResponderWithCancel sets resignsFirstResponderWithCancel and returns the receiver so calls can be chained.
+// WithResignsFirstResponderWithCancel a Boolean value that enables the cancel button in the search field to resign the first responder in addition to clearing the contents.
 func (x *SearchToolbarItem) WithResignsFirstResponderWithCancel(resignsFirstResponderWithCancel bool) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResignsFirstResponderWithCancel:"), resignsFirstResponderWithCancel)
 	return x
 }
 
-// The preferred width for the toolbar item when it has keyboard focus.
-//
-// WithPreferredWidthForSearchField sets preferredWidthForSearchField and returns the receiver so calls can be chained.
+// WithPreferredWidthForSearchField the preferred width for the toolbar item when it has keyboard focus.
 func (x *SearchToolbarItem) WithPreferredWidthForSearchField(preferredWidthForSearchField float64) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredWidthForSearchField:"), preferredWidthForSearchField)
 	return x
 }
 
-// The label that appears for this item in the toolbar.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the label that appears for this item in the toolbar.
 func (x *SearchToolbarItem) WithLabel(label string) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The label that appears when the toolbar item is in the customization palette.
-//
-// WithPaletteLabel sets paletteLabel and returns the receiver so calls can be chained.
+// WithPaletteLabel the label that appears when the toolbar item is in the customization palette.
 func (x *SearchToolbarItem) WithPaletteLabel(paletteLabel string) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaletteLabel:"), purego.NSString(paletteLabel))
 	return x
 }
 
-// The set of labels that the item might display.
-//
-// WithPossibleLabels sets possibleLabels and returns the receiver so calls can be chained.
+// WithPossibleLabels the set of labels that the item might display.
 func (x *SearchToolbarItem) WithPossibleLabels(possibleLabels obj.Object) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
 	return x
 }
 
-// The tooltip to display when someone hovers over the item in the toolbar.
-//
-// WithToolTip sets toolTip and returns the receiver so calls can be chained.
+// WithToolTip the tooltip to display when someone hovers over the item in the toolbar.
 func (x *SearchToolbarItem) WithToolTip(toolTip string) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// The menu item to use when the toolbar item is in the overflow menu.
-//
-// WithMenuFormRepresentation sets menuFormRepresentation and returns the receiver so calls can be chained.
+// WithMenuFormRepresentation the menu item to use when the toolbar item is in the overflow menu.
 func (x *SearchToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
 	return x
 }
 
-// An integer tag you can use to identify the toolbar item.
-//
-// WithTag sets tag and returns the receiver so calls can be chained.
+// WithTag an integer tag you can use to identify the toolbar item.
 func (x *SearchToolbarItem) WithTag(tag int) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// The object that defines the action method the toolbar item calls when clicked.
-//
-// WithTarget sets target and returns the receiver so calls can be chained.
+// WithTarget the object that defines the action method the toolbar item calls when clicked.
 func (x *SearchToolbarItem) WithTarget(target obj.Object) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// A Boolean value that indicates whether the item is enabled.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether the item is enabled.
 func (x *SearchToolbarItem) WithEnabled(enabled bool) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The image to display for the toolbar item.
-//
-// WithImage sets image and returns the receiver so calls can be chained.
+// WithImage the image to display for the toolbar item.
 func (x *SearchToolbarItem) WithImage(image *Image) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
-// The title of the toolbar item.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the title of the toolbar item.
 func (x *SearchToolbarItem) WithTitle(title string) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A Boolean value that indicates whether the toolbar item has a bordered style.
-//
-// WithBordered sets bordered and returns the receiver so calls can be chained.
+// WithBordered a Boolean value that indicates whether the toolbar item has a bordered style.
 func (x *SearchToolbarItem) WithBordered(bordered bool) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
-// WithBackgroundTintColor sets backgroundTintColor and returns the receiver so calls can be chained.
+// WithBackgroundTintColor sets the property and returns the receiver so calls can be chained.
 func (x *SearchToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
 	return x
 }
 
-// Defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items’ background.
-//
-// WithStyle sets style and returns the receiver so calls can be chained.
+// WithStyle defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items’ background.
 func (x *SearchToolbarItem) WithStyle(style ToolbarItemStyle) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 	return x
 }
 
-// A Boolean value that indicates whether the item behaves as a navigation item in the toolbar.
-//
-// WithNavigational sets navigational and returns the receiver so calls can be chained.
+// WithNavigational a Boolean value that indicates whether the item behaves as a navigation item in the toolbar.
 func (x *SearchToolbarItem) WithNavigational(navigational bool) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNavigational:"), navigational)
 	return x
 }
 
-// The custom view you use to draw the toolbar item.
-//
-// WithView sets view and returns the receiver so calls can be chained.
+// WithView the custom view you use to draw the toolbar item.
 func (x *SearchToolbarItem) WithView(view ViewProvider) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 	return x
 }
 
-// Determines whether an item is visible in the toolbar.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden determines whether an item is visible in the toolbar.
 func (x *SearchToolbarItem) WithHidden(hidden bool) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// The display priority associated with the toolbar item.
-//
-// WithVisibilityPriority sets visibilityPriority and returns the receiver so calls can be chained.
+// WithMinSize the toolbar item’s minimum size.
+func (x *SearchToolbarItem) WithMinSize(minSize corefoundation.CGSize) *SearchToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinSize:"), minSize)
+	return x
+}
+
+// WithMaxSize the toolbar item’s maximum size.
+func (x *SearchToolbarItem) WithMaxSize(maxSize corefoundation.CGSize) *SearchToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSize:"), maxSize)
+	return x
+}
+
+// WithVisibilityPriority the display priority associated with the toolbar item.
 func (x *SearchToolbarItem) WithVisibilityPriority(visibilityPriority int) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
 	return x
 }
 
-// A badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
-//
-// WithBadge sets badge and returns the receiver so calls can be chained.
+// WithBadge a badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
 func (x *SearchToolbarItem) WithBadge(badge *ItemBadge) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadge:"), objref.IDOf(badge))
 	return x
 }
 
-// A Boolean value that indicates whether the toolbar automatically validates the item.
-//
-// WithAutovalidates sets autovalidates and returns the receiver so calls can be chained.
+// WithAutovalidates a Boolean value that indicates whether the toolbar automatically validates the item.
 func (x *SearchToolbarItem) WithAutovalidates(autovalidates bool) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutovalidates:"), autovalidates)
 	return x
 }
 
-// Starts a search interaction and moves the keyboard focus to the search field.
+// BeginSearchInteraction starts a search interaction and moves the keyboard focus to the search field.
 func (x *SearchToolbarItem) BeginSearchInteraction() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginSearchInteraction"))
 }
 
-// Ends a search interaction by giving up the first responder and adjusting the size of the search field to the available width for the toolbar item if necessary.
+// EndSearchInteraction ends a search interaction by giving up the first responder and adjusting the size of the search field to the available width for the toolbar item if necessary.
 func (x *SearchToolbarItem) EndSearchInteraction() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endSearchInteraction"))
 }
 
-// An `NSSearchField` displayed in the toolbar item. While inside the toolbar item, the field properties and layout constraints are managed by the item. The field should be configured before assigned. The width constraint for the field could be updated after assigned. When set to nil, will reset to a search field with the default configuration.
+// SearchField an `NSSearchField` displayed in the toolbar item. While inside the toolbar item, the field properties and layout constraints are managed by the item. The field should be configured before assigned. The width constraint for the field could be updated after assigned. When set to nil, will reset to a search field with the default configuration.
 func (x *SearchToolbarItem) SearchField() *SearchField {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("searchField"))
 	return SearchFieldFromID(_r)
 }
 
-// An `NSSearchField` displayed in the toolbar item. While inside the toolbar item, the field properties and layout constraints are managed by the item. The field should be configured before assigned. The width constraint for the field could be updated after assigned. When set to nil, will reset to a search field with the default configuration.
+// SetSearchField an `NSSearchField` displayed in the toolbar item. While inside the toolbar item, the field properties and layout constraints are managed by the item. The field should be configured before assigned. The width constraint for the field could be updated after assigned. When set to nil, will reset to a search field with the default configuration.
 func (x *SearchToolbarItem) SetSearchField(searchField *SearchField) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchField:"), objref.IDOf(searchField))
 }
 
-// When YES, the cancel button in the field resigns the first responder status of the search field as clearing the contents. The default is YES.
+// ResignsFirstResponderWithCancel when YES, the cancel button in the field resigns the first responder status of the search field as clearing the contents. The default is YES.
 func (x *SearchToolbarItem) ResignsFirstResponderWithCancel() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("resignsFirstResponderWithCancel"))
 	return _r
 }
 
-// When YES, the cancel button in the field resigns the first responder status of the search field as clearing the contents. The default is YES.
+// SetResignsFirstResponderWithCancel when YES, the cancel button in the field resigns the first responder status of the search field as clearing the contents. The default is YES.
 func (x *SearchToolbarItem) SetResignsFirstResponderWithCancel(resignsFirstResponderWithCancel bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResignsFirstResponderWithCancel:"), resignsFirstResponderWithCancel)
 }
 
-// The preferred width for the search field. This value is used to configure the search field width whenever it gets the keyboard focus. If specifying custom width constraints to the search field, they should not conflict with this value.
+// PreferredWidthForSearchField the preferred width for the search field. This value is used to configure the search field width whenever it gets the keyboard focus. If specifying custom width constraints to the search field, they should not conflict with this value.
 func (x *SearchToolbarItem) PreferredWidthForSearchField() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("preferredWidthForSearchField"))
 	return _r
 }
 
-// The preferred width for the search field. This value is used to configure the search field width whenever it gets the keyboard focus. If specifying custom width constraints to the search field, they should not conflict with this value.
+// SetPreferredWidthForSearchField the preferred width for the search field. This value is used to configure the search field width whenever it gets the keyboard focus. If specifying custom width constraints to the search field, they should not conflict with this value.
 func (x *SearchToolbarItem) SetPreferredWidthForSearchField(preferredWidthForSearchField float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredWidthForSearchField:"), preferredWidthForSearchField)
 }
@@ -303,6 +262,8 @@ type SearchToolbarItemable interface {
 	WithNavigational(navigational bool) *SearchToolbarItem
 	WithView(view ViewProvider) *SearchToolbarItem
 	WithHidden(hidden bool) *SearchToolbarItem
+	WithMinSize(minSize corefoundation.CGSize) *SearchToolbarItem
+	WithMaxSize(maxSize corefoundation.CGSize) *SearchToolbarItem
 	WithVisibilityPriority(visibilityPriority int) *SearchToolbarItem
 	WithBadge(badge *ItemBadge) *SearchToolbarItem
 	WithAutovalidates(autovalidates bool) *SearchToolbarItem
@@ -317,3 +278,5 @@ type SearchToolbarItemable interface {
 }
 
 var _ SearchToolbarItemable = (*SearchToolbarItem)(nil)
+
+var _ ToolbarItemProvider = (*SearchToolbarItem)(nil)

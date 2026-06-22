@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a convolution kernel.
-//
 // CNNConvolutionNode is an idiomatic wrapper over the Objective-C class MPSCNNConvolutionNode.
+//
+// CNNConvolutionNode is an abstract base — you do not construct it directly. Construct one of [CNNBinaryConvolutionNode], [CNNConvolutionTransposeNode], [CNNFullyConnectedNode] and pass it where a CNNConvolutionNode is accepted.
+//
+// A representation of a convolution kernel.
 type CNNConvolutionNode struct {
-	objref.Handle
+	NNFilterNode
 }
 
 // CNNConvolutionNodeFromID adopts an existing Objective-C object as a CNNConvolutionNode
@@ -25,7 +26,8 @@ func CNNConvolutionNodeFromID(id objc.ID) *CNNConvolutionNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNConvolutionNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNConvolutionNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,41 +40,19 @@ func cNNConvolutionNodeAdopt(id objc.ID) *CNNConvolutionNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNConvolutionNode{Handle: objref.Wrap(id)}
+	x := &CNNConvolutionNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNConvolutionNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNConvolutionNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNConvolutionNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewCNNConvolutionNode creates a new CNNConvolutionNode.
-func NewCNNConvolutionNode() *CNNConvolutionNode {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNConvolutionNode")), objc.RegisterName("new"))
-	return cNNConvolutionNodeAdopt(_id)
-}
-
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNConvolutionNode) WithLabel(label string) *CNNConvolutionNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A node to represent a MPSCNNConvolutionGradientState object Use this if the convolution is mirrored by a convolution transpose node later on in the graph to make sure that the size of the image returned from the convolution transpose matches the size of the image passed in to this node.
+// ConvolutionGradientState a node to represent a MPSCNNConvolutionGradientState object Use this if the convolution is mirrored by a convolution transpose node later on in the graph to make sure that the size of the image returned from the convolution transpose matches the size of the image passed in to this node.
 func (x *CNNConvolutionNode) ConvolutionGradientState() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolutionGradientState"))
 	return obj.Wrap(_r)
@@ -86,3 +66,12 @@ type CNNConvolutionNodeable interface {
 }
 
 var _ CNNConvolutionNodeable = (*CNNConvolutionNode)(nil)
+
+// isCNNConvolutionNode marks CNNConvolutionNode — and, by embedding promotion, its
+// subclasses — as a member of the CNNConvolutionNode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CNNConvolutionNode) isCNNConvolutionNode() {}
+
+var _ CNNConvolutionNodeProvider = (*CNNConvolutionNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNConvolutionNode)(nil)

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object-oriented interface to the port registration service used by the distributed objects system.
-//
 // PortNameServer is an idiomatic wrapper over the Objective-C class NSPortNameServer.
+//
+// PortNameServer is an abstract base — you do not construct it directly. Construct one of [MachBootstrapServer], [MessagePortNameServer], [SocketPortNameServer] and pass it where a PortNameServer is accepted.
+//
+// An object-oriented interface to the port registration service used by the distributed objects system.
 type PortNameServer struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func PortNameServerFromID(id objc.ID) *PortNameServer {
 	if id == 0 {
 		return nil
 	}
-	x := &PortNameServer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PortNameServer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func portNameServerAdopt(id objc.ID) *PortNameServer {
 	if id == 0 {
 		return nil
 	}
-	x := &PortNameServer{Handle: objref.Wrap(id)}
+	x := &PortNameServer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +62,37 @@ func (x *PortNameServer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewPortNameServer creates a new PortNameServer.
-func NewPortNameServer() *PortNameServer {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSPortNameServer")), objc.RegisterName("new"))
-	return portNameServerAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PortNameServer) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *PortNameServer) WithScriptingProperties(scriptingProperties obj.Object) *PortNameServer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Looks up and returns the port registered under the specified name on the local host.
+// PortForName looks up and returns the port registered under the specified name on the local host.
 func (x *PortNameServer) PortForName(name string) *Port {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("portForName:"), purego.NSString(name))
 	return PortFromID(_r)
 }
 
-// Looks up and returns the port registered under the specified name on a specified host.
+// PortForNameHost looks up and returns the port registered under the specified name on a specified host.
 func (x *PortNameServer) PortForNameHost(name string, host string) *Port {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("portForName:host:"), purego.NSString(name), purego.NSString(host))
 	return PortFromID(_r)
 }
 
-// Makes a given port available on the network under a specified name.
+// RegisterPortName makes a given port available on the network under a specified name.
 func (x *PortNameServer) RegisterPortName(port *Port, name string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("registerPort:name:"), objref.IDOf(port), purego.NSString(name))
 	return _r
 }
 
-// Unregisters the port for a given name on the local host.
+// RemovePortForName unregisters the port for a given name on the local host.
 func (x *PortNameServer) RemovePortForName(name string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removePortForName:"), purego.NSString(name))
 	return _r
@@ -105,3 +109,10 @@ type PortNameServerable interface {
 }
 
 var _ PortNameServerable = (*PortNameServer)(nil)
+
+// isPortNameServer marks PortNameServer — and, by embedding promotion, its
+// subclasses — as a member of the PortNameServer hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *PortNameServer) isPortNameServer() {}
+
+var _ PortNameServerProvider = (*PortNameServer)(nil)

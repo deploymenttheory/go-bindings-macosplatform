@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information about an observed iBeacon device and its relative distance to a person’s device.
-//
 // Beacon is an idiomatic wrapper over the Objective-C class CLBeacon.
+//
+// Information about an observed iBeacon device and its relative distance to a person’s device.
 type Beacon struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func BeaconFromID(id objc.ID) *Beacon {
 	if id == 0 {
 		return nil
 	}
-	x := &Beacon{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Beacon{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func beaconAdopt(id objc.ID) *Beacon {
 	if id == 0 {
 		return nil
 	}
-	x := &Beacon{Handle: objref.Wrap(id)}
+	x := &Beacon{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,42 +60,55 @@ func (x *Beacon) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Beacon) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBeacon creates a new Beacon.
 func NewBeacon() *Beacon {
 	_id := objc.Send[objc.ID](objc.ID(_class("CLBeacon")), objc.RegisterName("new"))
 	return beaconAdopt(_id)
 }
 
+// Timestamp wraps the corresponding Objective-C method.
 func (x *Beacon) Timestamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timestamp"))
 	return obj.Wrap(_r)
 }
 
+// UUID wraps the corresponding Objective-C method.
 func (x *Beacon) UUID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
 	return obj.Wrap(_r)
 }
 
+// ProximityUUID wraps the corresponding Objective-C method.
 func (x *Beacon) ProximityUUID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("proximityUUID"))
 	return obj.Wrap(_r)
 }
 
+// Major wraps the corresponding Objective-C method.
 func (x *Beacon) Major() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("major"))
 	return obj.Wrap(_r)
 }
 
+// Minor wraps the corresponding Objective-C method.
 func (x *Beacon) Minor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minor"))
 	return obj.Wrap(_r)
 }
 
+// Proximity wraps the corresponding Objective-C method.
 func (x *Beacon) Proximity() Proximity {
 	_r := objc.Send[Proximity](objref.IDOf(x), objc.RegisterName("proximity"))
 	return _r
 }
 
+// Rssi wraps the corresponding Objective-C method.
 func (x *Beacon) Rssi() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rssi"))
 	return _r

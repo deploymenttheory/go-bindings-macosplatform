@@ -23,7 +23,8 @@ func RecordingOutputConfigurationFromID(id objc.ID) *RecordingOutputConfiguratio
 	if id == 0 {
 		return nil
 	}
-	x := &RecordingOutputConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RecordingOutputConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func recordingOutputConfigurationAdopt(id objc.ID) *RecordingOutputConfiguration
 	if id == 0 {
 		return nil
 	}
-	x := &RecordingOutputConfiguration{Handle: objref.Wrap(id)}
+	x := &RecordingOutputConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,67 +58,70 @@ func (x *RecordingOutputConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RecordingOutputConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRecordingOutputConfiguration creates a new RecordingOutputConfiguration.
 func NewRecordingOutputConfiguration() *RecordingOutputConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCRecordingOutputConfiguration")), objc.RegisterName("new"))
 	return recordingOutputConfigurationAdopt(_id)
 }
 
-// Specifies output URL to save the recording.
-//
-// WithOutputURL sets outputURL and returns the receiver so calls can be chained.
+// WithOutputURL specifies output URL to save the recording.
 func (x *RecordingOutputConfiguration) WithOutputURL(outputURL string) *RecordingOutputConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputURL:"), rt.FileURL(outputURL))
 	return x
 }
 
-// Specifies video codec for the recording output, default is AVVideoCodecTypeH264, supported values can be obtained using availableVideoCodecTypes
-//
-// WithVideoCodecType sets videoCodecType and returns the receiver so calls can be chained.
+// WithVideoCodecType specifies video codec for the recording output, default is AVVideoCodecTypeH264, supported values can be obtained using availableVideoCodecTypes
 func (x *RecordingOutputConfiguration) WithVideoCodecType(videoCodecType obj.Object) *RecordingOutputConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoCodecType:"), objref.IDOf(videoCodecType))
 	return x
 }
 
-// Specifies file type for the recording output, default is AVFileTypeMPEG4, supported values can be obtained using availableOutputFileTypes
-//
-// WithOutputFileType sets outputFileType and returns the receiver so calls can be chained.
+// WithOutputFileType specifies file type for the recording output, default is AVFileTypeMPEG4, supported values can be obtained using availableOutputFileTypes
 func (x *RecordingOutputConfiguration) WithOutputFileType(outputFileType obj.Object) *RecordingOutputConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFileType:"), objref.IDOf(outputFileType))
 	return x
 }
 
-// Specifies output URL to save the recording.
+// OutputURL specifies output URL to save the recording.
 func (x *RecordingOutputConfiguration) OutputURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputURL"))
 	return obj.Wrap(_r)
 }
 
+// SetOutputURL wraps the corresponding Objective-C method.
 func (x *RecordingOutputConfiguration) SetOutputURL(outputURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputURL:"), rt.FileURL(outputURL))
 }
 
-// Specifies video codec for the recording output, default is AVVideoCodecTypeH264, supported values can be obtained using availableVideoCodecTypes
+// VideoCodecType specifies video codec for the recording output, default is AVVideoCodecTypeH264, supported values can be obtained using availableVideoCodecTypes
 func (x *RecordingOutputConfiguration) VideoCodecType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoCodecType"))
 	return obj.Wrap(_r)
 }
 
+// SetVideoCodecType wraps the corresponding Objective-C method.
 func (x *RecordingOutputConfiguration) SetVideoCodecType(videoCodecType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoCodecType:"), objref.IDOf(videoCodecType))
 }
 
-// Specifies file type for the recording output, default is AVFileTypeMPEG4, supported values can be obtained using availableOutputFileTypes
+// OutputFileType specifies file type for the recording output, default is AVFileTypeMPEG4, supported values can be obtained using availableOutputFileTypes
 func (x *RecordingOutputConfiguration) OutputFileType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputFileType"))
 	return obj.Wrap(_r)
 }
 
+// SetOutputFileType wraps the corresponding Objective-C method.
 func (x *RecordingOutputConfiguration) SetOutputFileType(outputFileType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFileType:"), objref.IDOf(outputFileType))
 }
 
-// Returns an array of supported video codec formats that can be specified in SCRecordingOutputConfiguration for videoCodecType
+// AvailableVideoCodecTypes returns an array of supported video codec formats that can be specified in SCRecordingOutputConfiguration for videoCodecType
 //
 // AvailableVideoCodecTypes returns the collection as a Go slice.
 func (x *RecordingOutputConfiguration) AvailableVideoCodecTypes() []obj.Object {
@@ -124,7 +129,7 @@ func (x *RecordingOutputConfiguration) AvailableVideoCodecTypes() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Returns an array of supported file types that can be specified in SCRecordingOutputConfiguration for outputFileType Provides the file types AVCaptureAudioFileOutput can write.
+// AvailableOutputFileTypes returns an array of supported file types that can be specified in SCRecordingOutputConfiguration for outputFileType Provides the file types AVCaptureAudioFileOutput can write.
 //
 // AvailableOutputFileTypes returns the collection as a Go slice.
 func (x *RecordingOutputConfiguration) AvailableOutputFileTypes() []obj.Object {

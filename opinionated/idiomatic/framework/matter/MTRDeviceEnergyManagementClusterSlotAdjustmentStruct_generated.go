@@ -23,7 +23,8 @@ func MTRDeviceEnergyManagementClusterSlotAdjustmentStructFromID(id objc.ID) *MTR
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceEnergyManagementClusterSlotAdjustmentStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDeviceEnergyManagementClusterSlotAdjustmentStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDeviceEnergyManagementClusterSlotAdjustmentStructAdopt(id objc.ID) *MTRD
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceEnergyManagementClusterSlotAdjustmentStruct{Handle: objref.Wrap(id)}
+	x := &MTRDeviceEnergyManagementClusterSlotAdjustmentStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,53 +58,65 @@ func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) IsKind(className 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDeviceEnergyManagementClusterSlotAdjustmentStruct creates a new MTRDeviceEnergyManagementClusterSlotAdjustmentStruct.
 func NewMTRDeviceEnergyManagementClusterSlotAdjustmentStruct() *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceEnergyManagementClusterSlotAdjustmentStruct")), objc.RegisterName("new"))
 	return mTRDeviceEnergyManagementClusterSlotAdjustmentStructAdopt(_id)
 }
 
-// WithSlotIndex sets slotIndex and returns the receiver so calls can be chained.
+// WithSlotIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) WithSlotIndex(slotIndex obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSlotIndex:"), objref.IDOf(slotIndex))
 	return x
 }
 
-// WithNominalPower sets nominalPower and returns the receiver so calls can be chained.
+// WithNominalPower sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) WithNominalPower(nominalPower obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNominalPower:"), objref.IDOf(nominalPower))
 	return x
 }
 
-// WithDuration sets duration and returns the receiver so calls can be chained.
+// WithDuration sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return x
 }
 
+// SlotIndex wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SlotIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("slotIndex"))
 	return obj.Wrap(_r)
 }
 
+// SetSlotIndex wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SetSlotIndex(slotIndex obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSlotIndex:"), objref.IDOf(slotIndex))
 }
 
+// NominalPower wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) NominalPower() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nominalPower"))
 	return obj.Wrap(_r)
 }
 
+// SetNominalPower wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SetNominalPower(nominalPower obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNominalPower:"), objref.IDOf(nominalPower))
 }
 
+// Duration wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) Duration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("duration"))
 	return obj.Wrap(_r)
 }
 
+// SetDuration wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SetDuration(duration obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 }

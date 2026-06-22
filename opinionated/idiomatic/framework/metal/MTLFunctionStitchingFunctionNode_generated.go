@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A call graph node that describes a function call and its inputs.
-//
 // FunctionStitchingFunctionNode is an idiomatic wrapper over the Objective-C class MTLFunctionStitchingFunctionNode.
+//
+// A call graph node that describes a function call and its inputs.
 type FunctionStitchingFunctionNode struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FunctionStitchingFunctionNodeFromID(id objc.ID) *FunctionStitchingFunctionN
 	if id == 0 {
 		return nil
 	}
-	x := &FunctionStitchingFunctionNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FunctionStitchingFunctionNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func functionStitchingFunctionNodeAdopt(id objc.ID) *FunctionStitchingFunctionNo
 	if id == 0 {
 		return nil
 	}
-	x := &FunctionStitchingFunctionNode{Handle: objref.Wrap(id)}
+	x := &FunctionStitchingFunctionNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,32 +60,33 @@ func (x *FunctionStitchingFunctionNode) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new function node.
-//
-// NewFunctionStitchingFunctionNodeWithNameArgumentsControlDependencies creates a new FunctionStitchingFunctionNode.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FunctionStitchingFunctionNode) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFunctionStitchingFunctionNodeWithNameArgumentsControlDependencies creates a new function node.
 func NewFunctionStitchingFunctionNodeWithNameArgumentsControlDependencies(name string, arguments []obj.Object, controlDependencies []*FunctionStitchingFunctionNode) *FunctionStitchingFunctionNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTLFunctionStitchingFunctionNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:arguments:controlDependencies:"), purego.NSString(name), purego.SliceToNSArray(arguments, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(controlDependencies, func(_v *FunctionStitchingFunctionNode) objc.ID { return objref.IDOf(_v) }))
 	return functionStitchingFunctionNodeAdopt(_id)
 }
 
-// The name of the function to call.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the name of the function to call.
 func (x *FunctionStitchingFunctionNode) WithName(name string) *FunctionStitchingFunctionNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The list of nodes that need to execute before executing the node.
-//
-// WithControlDependencies sets the collection and returns the receiver so calls can be chained.
+// WithControlDependencies the list of nodes that need to execute before executing the node.
 func (x *FunctionStitchingFunctionNode) WithControlDependencies(items ...*FunctionStitchingFunctionNode) *FunctionStitchingFunctionNode {
 	_arr := purego.SliceToNSArray(items, func(_v *FunctionStitchingFunctionNode) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlDependencies:"), _arr)
 	return x
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *FunctionStitchingFunctionNode) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -92,25 +95,31 @@ func (x *FunctionStitchingFunctionNode) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *FunctionStitchingFunctionNode) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
+// Arguments wraps the corresponding Objective-C method.
 func (x *FunctionStitchingFunctionNode) Arguments() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arguments"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetArguments wraps the corresponding Objective-C method.
 func (x *FunctionStitchingFunctionNode) SetArguments(arguments []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArguments:"), purego.SliceToNSArray(arguments, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// ControlDependencies wraps the corresponding Objective-C method.
+//
 // ControlDependencies returns the collection as a Go slice.
 func (x *FunctionStitchingFunctionNode) ControlDependencies() []*FunctionStitchingFunctionNode {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controlDependencies"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FunctionStitchingFunctionNode { return FunctionStitchingFunctionNodeFromID(_id) })
 }
 
+// SetControlDependencies wraps the corresponding Objective-C method.
 func (x *FunctionStitchingFunctionNode) SetControlDependencies(controlDependencies []*FunctionStitchingFunctionNode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlDependencies:"), purego.SliceToNSArray(controlDependencies, func(_v *FunctionStitchingFunctionNode) objc.ID { return objref.IDOf(_v) }))
 }

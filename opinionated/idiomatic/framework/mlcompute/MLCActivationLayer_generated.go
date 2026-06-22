@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that applies an activation function to the source tensor and produces an output.
-//
 // ActivationLayer is an idiomatic wrapper over the Objective-C class MLCActivationLayer.
+//
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that applies an activation function to the source tensor and produces an output.
 type ActivationLayer struct {
-	objref.Handle
+	Layer
 }
 
 // ActivationLayerFromID adopts an existing Objective-C object as a ActivationLayer
@@ -25,7 +26,8 @@ func ActivationLayerFromID(id objc.ID) *ActivationLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &ActivationLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ActivationLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func activationLayerAdopt(id objc.ID) *ActivationLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &ActivationLayer{Handle: objref.Wrap(id)}
+	x := &ActivationLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ActivationLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ActivationLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ActivationLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewActivationLayer creates a new ActivationLayer.
@@ -64,23 +52,19 @@ func NewActivationLayer() *ActivationLayer {
 	return activationLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string that helps identify this layer.
 func (x *ActivationLayer) WithLabel(label string) *ActivationLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *ActivationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ActivationLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// The activation descriptor
+// Descriptor the activation descriptor
 func (x *ActivationLayer) Descriptor() *ActivationDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
 	return ActivationDescriptorFromID(_r)
@@ -95,3 +79,5 @@ type ActivationLayerable interface {
 }
 
 var _ ActivationLayerable = (*ActivationLayer)(nil)
+
+var _ LayerProvider = (*ActivationLayer)(nil)

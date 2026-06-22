@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes an unsuccessful attempt to modify a single record zone.
-//
 // SyncEngineFailedZoneSave is an idiomatic wrapper over the Objective-C class CKSyncEngineFailedZoneSave.
+//
+// An object that describes an unsuccessful attempt to modify a single record zone.
 type SyncEngineFailedZoneSave struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SyncEngineFailedZoneSaveFromID(id objc.ID) *SyncEngineFailedZoneSave {
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineFailedZoneSave{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SyncEngineFailedZoneSave{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func syncEngineFailedZoneSaveAdopt(id objc.ID) *SyncEngineFailedZoneSave {
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineFailedZoneSave{Handle: objref.Wrap(id)}
+	x := &SyncEngineFailedZoneSave{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *SyncEngineFailedZoneSave) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncEngineFailedZoneSave) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSyncEngineFailedZoneSave creates a new SyncEngineFailedZoneSave.
 func NewSyncEngineFailedZoneSave() *SyncEngineFailedZoneSave {
 	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineFailedZoneSave")), objc.RegisterName("new"))
 	return syncEngineFailedZoneSaveAdopt(_id)
 }
 
-// The record zone that CloudKit is unable to modify.
+// RecordZone the record zone that CloudKit is unable to modify.
 func (x *SyncEngineFailedZoneSave) RecordZone() *RecordZone {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordZone"))
 	return RecordZoneFromID(_r)

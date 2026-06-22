@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// String identifier used to initialize a UTType to represent the type of the array of SWCollaborationOptionsGroups when registering to and reading from the NSItemProvider
 // UTCollaborationOptionsTypeIdentifier returns the string constant UTCollaborationOptionsTypeIdentifier, for use as a dictionary key or argument.
 func UTCollaborationOptionsTypeIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("UTCollaborationOptionsTypeIdentifier")))

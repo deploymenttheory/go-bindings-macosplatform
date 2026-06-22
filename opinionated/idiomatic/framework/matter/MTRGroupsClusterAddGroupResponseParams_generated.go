@@ -25,7 +25,8 @@ func MTRGroupsClusterAddGroupResponseParamsFromID(id objc.ID) *MTRGroupsClusterA
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGroupsClusterAddGroupResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRGroupsClusterAddGroupResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRGroupsClusterAddGroupResponseParamsAdopt(id objc.ID) *MTRGroupsClusterAd
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGroupsClusterAddGroupResponseParams{Handle: objref.Wrap(id)}
+	x := &MTRGroupsClusterAddGroupResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTRGroupsClusterAddGroupResponseParams) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRGroupsClusterAddGroupResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTRGroupsClusterAddGroupResponseParamsWithResponseValueError creates a new MTRGroupsClusterAddGroupResponseParams.
-func NewMTRGroupsClusterAddGroupResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRGroupsClusterAddGroupResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRGroupsClusterAddGroupResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRGroupsClusterAddGroupResponseParamsWithResponseValueError initialize an MTRGroupsClusterAddGroupResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRGroupsClusterAddGroupResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRGroupsClusterAddGroupResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRGroupsClusterAddGroupResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,65 +77,70 @@ func NewMTRGroupsClusterAddGroupResponseParamsWithResponseValueError(responseVal
 	return mTRGroupsClusterAddGroupResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets status and returns the receiver so calls can be chained.
+// WithStatus sets the property and returns the receiver so calls can be chained.
 func (x *MTRGroupsClusterAddGroupResponseParams) WithStatus(status obj.Object) *MTRGroupsClusterAddGroupResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return x
 }
 
-// WithGroupID sets groupID and returns the receiver so calls can be chained.
+// WithGroupID sets the property and returns the receiver so calls can be chained.
 func (x *MTRGroupsClusterAddGroupResponseParams) WithGroupID(groupID obj.Object) *MTRGroupsClusterAddGroupResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupID:"), objref.IDOf(groupID))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRGroupsClusterAddGroupResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGroupsClusterAddGroupResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// WithGroupId sets groupId and returns the receiver so calls can be chained.
+// WithGroupId sets the property and returns the receiver so calls can be chained.
 func (x *MTRGroupsClusterAddGroupResponseParams) WithGroupId(groupId obj.Object) *MTRGroupsClusterAddGroupResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupId:"), objref.IDOf(groupId))
 	return x
 }
 
+// Status wraps the corresponding Objective-C method.
 func (x *MTRGroupsClusterAddGroupResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
+// SetStatus wraps the corresponding Objective-C method.
 func (x *MTRGroupsClusterAddGroupResponseParams) SetStatus(status obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 }
 
+// GroupID wraps the corresponding Objective-C method.
 func (x *MTRGroupsClusterAddGroupResponseParams) GroupID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupID"))
 	return obj.Wrap(_r)
 }
 
+// SetGroupID wraps the corresponding Objective-C method.
 func (x *MTRGroupsClusterAddGroupResponseParams) SetGroupID(groupID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupID:"), objref.IDOf(groupID))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRGroupsClusterAddGroupResponseParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRGroupsClusterAddGroupResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
+// GroupId wraps the corresponding Objective-C method.
 func (x *MTRGroupsClusterAddGroupResponseParams) GroupId() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupId"))
 	return obj.Wrap(_r)
 }
 
+// SetGroupId wraps the corresponding Objective-C method.
 func (x *MTRGroupsClusterAddGroupResponseParams) SetGroupId(groupId obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupId:"), objref.IDOf(groupId))
 }

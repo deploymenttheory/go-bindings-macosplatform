@@ -3,4 +3,18 @@
 //go:build darwin
 
 // Package cryptotokenkit provides a fluent Go API over the macOS CryptoTokenKit framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - SmartCardUserInteraction: [SmartCardUserInteractionForPINOperation]
+//   - SmartCardUserInteractionForPINOperation: [SmartCardUserInteractionForSecurePINChange], [SmartCardUserInteractionForSecurePINVerification]
+//   - TLVRecord: [BERTLVRecord], [CompactTLVRecord], [SimpleTLVRecord]
+//   - Token: [SmartCardToken]
+//   - TokenAuthOperation: [TokenPasswordAuthOperation], [TokenSmartCardPINAuthOperation]
+//   - TokenDriver: [SmartCardTokenDriver]
+//   - TokenKeychainItem: [TokenKeychainCertificate], [TokenKeychainKey]
+//   - TokenSession: [SmartCardTokenSession]
 package cryptotokenkit

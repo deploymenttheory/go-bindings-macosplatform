@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The formatting properties for a PIN, such as character encoding and length constraints.
-//
 // SmartCardPINFormat is an idiomatic wrapper over the Objective-C class TKSmartCardPINFormat.
+//
+// The formatting properties for a PIN, such as character encoding and length constraints.
 type SmartCardPINFormat struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SmartCardPINFormatFromID(id objc.ID) *SmartCardPINFormat {
 	if id == 0 {
 		return nil
 	}
-	x := &SmartCardPINFormat{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SmartCardPINFormat{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func smartCardPINFormatAdopt(id objc.ID) *SmartCardPINFormat {
 	if id == 0 {
 		return nil
 	}
-	x := &SmartCardPINFormat{Handle: objref.Wrap(id)}
+	x := &SmartCardPINFormat{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,170 +60,167 @@ func (x *SmartCardPINFormat) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SmartCardPINFormat) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSmartCardPINFormat creates a new SmartCardPINFormat.
 func NewSmartCardPINFormat() *SmartCardPINFormat {
 	_id := objc.Send[objc.ID](objc.ID(_class("TKSmartCardPINFormat")), objc.RegisterName("new"))
 	return smartCardPINFormatAdopt(_id)
 }
 
-// The format of PIN characters. TKSmartCardPINCharsetNumeric by default.
-//
-// WithCharset sets charset and returns the receiver so calls can be chained.
+// WithCharset the format of PIN characters. TKSmartCardPINCharsetNumeric by default.
 func (x *SmartCardPINFormat) WithCharset(charset SmartCardPINCharset) *SmartCardPINFormat {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharset:"), charset)
 	return x
 }
 
-// The encoding of PIN characters. TKSmartCardPINEncodingASCII by default.
-//
-// WithEncoding sets encoding and returns the receiver so calls can be chained.
+// WithEncoding the encoding of PIN characters. TKSmartCardPINEncodingASCII by default.
 func (x *SmartCardPINFormat) WithEncoding(encoding SmartCardPINEncoding) *SmartCardPINFormat {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncoding:"), encoding)
 	return x
 }
 
-// The minimum number of characters to form a valid PIN. 4 by default.
-//
-// WithMinPINLength sets minPINLength and returns the receiver so calls can be chained.
+// WithMinPINLength the minimum number of characters to form a valid PIN. 4 by default.
 func (x *SmartCardPINFormat) WithMinPINLength(minPINLength int) *SmartCardPINFormat {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinPINLength:"), minPINLength)
 	return x
 }
 
-// The maximum number of characters to form a valid PIN. 8 by default.
-//
-// WithMaxPINLength sets maxPINLength and returns the receiver so calls can be chained.
+// WithMaxPINLength the maximum number of characters to form a valid PIN. 8 by default.
 func (x *SmartCardPINFormat) WithMaxPINLength(maxPINLength int) *SmartCardPINFormat {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPINLength:"), maxPINLength)
 	return x
 }
 
-// The total length of the PIN block in bytes. 8 by default.
-//
-// WithPINBlockByteLength sets pINBlockByteLength and returns the receiver so calls can be chained.
+// WithPINBlockByteLength the total length of the PIN block in bytes. 8 by default.
 func (x *SmartCardPINFormat) WithPINBlockByteLength(pINBlockByteLength int) *SmartCardPINFormat {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINBlockByteLength:"), pINBlockByteLength)
 	return x
 }
 
-// The justification within the PIN block. TKSmartCardPINJustificationLeft by default.
-//
-// WithPINJustification sets pINJustification and returns the receiver so calls can be chained.
+// WithPINJustification the justification within the PIN block. TKSmartCardPINJustificationLeft by default.
 func (x *SmartCardPINFormat) WithPINJustification(pINJustification SmartCardPINJustification) *SmartCardPINFormat {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINJustification:"), pINJustification)
 	return x
 }
 
-// The offset, in bits, within the PIN block to mark a location for filling in the formatted PIN, which is justified with respect to the PINJustification property value. 0 by default.
-//
-// WithPINBitOffset sets pINBitOffset and returns the receiver so calls can be chained.
+// WithPINBitOffset the offset, in bits, within the PIN block to mark a location for filling in the formatted PIN, which is justified with respect to the PINJustification property value. 0 by default.
 func (x *SmartCardPINFormat) WithPINBitOffset(pINBitOffset int) *SmartCardPINFormat {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINBitOffset:"), pINBitOffset)
 	return x
 }
 
-// The offset, in bits, within the PIN block to mark a location for filling in the PIN length, which is always left justified. 0 by default.
-//
-// WithPINLengthBitOffset sets pINLengthBitOffset and returns the receiver so calls can be chained.
+// WithPINLengthBitOffset the offset, in bits, within the PIN block to mark a location for filling in the PIN length, which is always left justified. 0 by default.
 func (x *SmartCardPINFormat) WithPINLengthBitOffset(pINLengthBitOffset int) *SmartCardPINFormat {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINLengthBitOffset:"), pINLengthBitOffset)
 	return x
 }
 
-// The size, in bits, of the PIN length field. If set to 0, PIN length is not written. 0 by default.
-//
-// WithPINLengthBitSize sets pINLengthBitSize and returns the receiver so calls can be chained.
+// WithPINLengthBitSize the size, in bits, of the PIN length field. If set to 0, PIN length is not written. 0 by default.
 func (x *SmartCardPINFormat) WithPINLengthBitSize(pINLengthBitSize int) *SmartCardPINFormat {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINLengthBitSize:"), pINLengthBitSize)
 	return x
 }
 
-// Format of PIN characters.
+// Charset format of PIN characters.
 func (x *SmartCardPINFormat) Charset() SmartCardPINCharset {
 	_r := objc.Send[SmartCardPINCharset](objref.IDOf(x), objc.RegisterName("charset"))
 	return _r
 }
 
+// SetCharset wraps the corresponding Objective-C method.
 func (x *SmartCardPINFormat) SetCharset(charset SmartCardPINCharset) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharset:"), charset)
 }
 
-// Encoding of PIN characters.
+// Encoding encoding of PIN characters.
 func (x *SmartCardPINFormat) Encoding() SmartCardPINEncoding {
 	_r := objc.Send[SmartCardPINEncoding](objref.IDOf(x), objc.RegisterName("encoding"))
 	return _r
 }
 
+// SetEncoding wraps the corresponding Objective-C method.
 func (x *SmartCardPINFormat) SetEncoding(encoding SmartCardPINEncoding) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncoding:"), encoding)
 }
 
-// Minimum number of characters to form a valid PIN.
+// MinPINLength minimum number of characters to form a valid PIN.
 func (x *SmartCardPINFormat) MinPINLength() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minPINLength"))
 	return _r
 }
 
+// SetMinPINLength wraps the corresponding Objective-C method.
 func (x *SmartCardPINFormat) SetMinPINLength(minPINLength int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinPINLength:"), minPINLength)
 }
 
-// Maximum number of characters to form a valid PIN.
+// MaxPINLength maximum number of characters to form a valid PIN.
 func (x *SmartCardPINFormat) MaxPINLength() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxPINLength"))
 	return _r
 }
 
+// SetMaxPINLength wraps the corresponding Objective-C method.
 func (x *SmartCardPINFormat) SetMaxPINLength(maxPINLength int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPINLength:"), maxPINLength)
 }
 
-// Total length of the PIN block in bytes.
+// PINBlockByteLength total length of the PIN block in bytes.
 func (x *SmartCardPINFormat) PINBlockByteLength() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("PINBlockByteLength"))
 	return _r
 }
 
+// SetPINBlockByteLength wraps the corresponding Objective-C method.
 func (x *SmartCardPINFormat) SetPINBlockByteLength(pINBlockByteLength int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINBlockByteLength:"), pINBlockByteLength)
 }
 
-// PIN justification within the PIN block.
+// PINJustification PIN justification within the PIN block.
 func (x *SmartCardPINFormat) PINJustification() SmartCardPINJustification {
 	_r := objc.Send[SmartCardPINJustification](objref.IDOf(x), objc.RegisterName("PINJustification"))
 	return _r
 }
 
+// SetPINJustification wraps the corresponding Objective-C method.
 func (x *SmartCardPINFormat) SetPINJustification(pINJustification SmartCardPINJustification) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINJustification:"), pINJustification)
 }
 
-// Offset in bits within the PIN block to mark a location for filling in the formatted PIN (justified with respect to PINJustification). The offset, in bits, within the PIN block to mark a location for filling in the formatted PIN, which is justified with respect to the PINJustification property value.
+// PINBitOffset offset in bits within the PIN block to mark a location for filling in the formatted PIN (justified with respect to PINJustification). The offset, in bits, within the PIN block to mark a location for filling in the formatted PIN, which is justified with respect to the PINJustification property value.
 func (x *SmartCardPINFormat) PINBitOffset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("PINBitOffset"))
 	return _r
 }
 
+// SetPINBitOffset wraps the corresponding Objective-C method.
 func (x *SmartCardPINFormat) SetPINBitOffset(pINBitOffset int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINBitOffset:"), pINBitOffset)
 }
 
-// Offset in bits within the PIN block to mark a location for filling in the PIN length (always left justified). The offset, in bits, within the PIN block to mark a location for filling in the PIN length, which is always left justified.
+// PINLengthBitOffset offset in bits within the PIN block to mark a location for filling in the PIN length (always left justified). The offset, in bits, within the PIN block to mark a location for filling in the PIN length, which is always left justified.
 func (x *SmartCardPINFormat) PINLengthBitOffset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("PINLengthBitOffset"))
 	return _r
 }
 
+// SetPINLengthBitOffset wraps the corresponding Objective-C method.
 func (x *SmartCardPINFormat) SetPINLengthBitOffset(pINLengthBitOffset int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINLengthBitOffset:"), pINLengthBitOffset)
 }
 
-// Size in bits of the PIN length field. If set to 0, PIN length is not written.
+// PINLengthBitSize size in bits of the PIN length field. If set to 0, PIN length is not written.
 func (x *SmartCardPINFormat) PINLengthBitSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("PINLengthBitSize"))
 	return _r
 }
 
+// SetPINLengthBitSize wraps the corresponding Objective-C method.
 func (x *SmartCardPINFormat) SetPINLengthBitSize(pINLengthBitSize int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINLengthBitSize:"), pINLengthBitSize)
 }

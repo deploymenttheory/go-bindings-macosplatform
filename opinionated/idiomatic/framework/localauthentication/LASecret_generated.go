@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Data that’s protected by a persisted right.
-//
 // Secret is an idiomatic wrapper over the Objective-C class LASecret.
+//
+// Data that’s protected by a persisted right.
 type Secret struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func SecretFromID(id objc.ID) *Secret {
 	if id == 0 {
 		return nil
 	}
-	x := &Secret{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Secret{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func secretAdopt(id objc.ID) *Secret {
 	if id == 0 {
 		return nil
 	}
-	x := &Secret{Handle: objref.Wrap(id)}
+	x := &Secret{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,22 @@ func (x *Secret) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Secret) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSecret creates a new Secret.
 func NewSecret() *Secret {
 	_id := objc.Send[objc.ID](objc.ID(_class("LASecret")), objc.RegisterName("new"))
 	return secretAdopt(_id)
 }
 
-// Retrieves data stored in a secret.
+// LoadDataWithCompletion retrieves data stored in a secret.
 //
 // LoadDataWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *Secret) LoadDataWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *Secret) LoadDataWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error

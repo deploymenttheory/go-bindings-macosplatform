@@ -6,17 +6,20 @@ package vision
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for image analysis requests that operate on both the processed image and a secondary image.
-//
 // TargetedImageRequest is an idiomatic wrapper over the Objective-C class VNTargetedImageRequest.
+//
+// TargetedImageRequest is an abstract base — you do not construct it directly. Construct one of [GenerateOpticalFlowRequest], [ImageRegistrationRequest] and pass it where a TargetedImageRequest is accepted.
+//
+// The abstract superclass for image analysis requests that operate on both the processed image and a secondary image.
 type TargetedImageRequest struct {
-	objref.Handle
+	ImageBasedRequest
 }
 
 // TargetedImageRequestFromID adopts an existing Objective-C object as a TargetedImageRequest
@@ -25,7 +28,8 @@ func TargetedImageRequestFromID(id objc.ID) *TargetedImageRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &TargetedImageRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TargetedImageRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,90 +42,66 @@ func targetedImageRequestAdopt(id objc.ID) *TargetedImageRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &TargetedImageRequest{Handle: objref.Wrap(id)}
+	x := &TargetedImageRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *TargetedImageRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TargetedImageRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TargetedImageRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a new request targeting a Core Graphics image.
-//
-// NewTargetedImageRequestWithTargetedCGImageOptions creates a new TargetedImageRequest.
+// NewTargetedImageRequestWithTargetedCGImageOptions creates a new request targeting a Core Graphics image.
 func NewTargetedImageRequestWithTargetedCGImageOptions(cgImage obj.Object, options obj.Object) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCGImage:options:"), objref.IDOf(cgImage), objref.IDOf(options))
 	return targetedImageRequestAdopt(_id)
 }
 
-// Creates a new request targeting a Core Image image.
-//
-// NewTargetedImageRequestWithTargetedCIImageOptions creates a new TargetedImageRequest.
+// NewTargetedImageRequestWithTargetedCIImageOptions creates a new request targeting a Core Image image.
 func NewTargetedImageRequestWithTargetedCIImageOptions(ciImage obj.Object, options obj.Object) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCIImage:options:"), objref.IDOf(ciImage), objref.IDOf(options))
 	return targetedImageRequestAdopt(_id)
 }
 
-// Creates a new request targeting an image at the specified URL.
-//
-// NewTargetedImageRequestWithTargetedImageURLOptions creates a new TargetedImageRequest.
+// NewTargetedImageRequestWithTargetedImageURLOptions creates a new request targeting an image at the specified URL.
 func NewTargetedImageRequestWithTargetedImageURLOptions(imageURL string, options obj.Object) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageURL:options:"), rt.FileURL(imageURL), objref.IDOf(options))
 	return targetedImageRequestAdopt(_id)
 }
 
-// Creates a new request targeting an image as raw data.
-//
-// NewTargetedImageRequestWithTargetedImageDataOptions creates a new TargetedImageRequest.
+// NewTargetedImageRequestWithTargetedImageDataOptions creates a new request targeting an image as raw data.
 func NewTargetedImageRequestWithTargetedImageDataOptions(imageData obj.Object, options obj.Object) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageData:options:"), objref.IDOf(imageData), objref.IDOf(options))
 	return targetedImageRequestAdopt(_id)
 }
 
-// Creates a new request that targets an image in a sample buffer.
-//
-// NewTargetedImageRequestWithTargetedCMSampleBufferOptions creates a new TargetedImageRequest.
+// NewTargetedImageRequestWithTargetedCMSampleBufferOptions creates a new request that targets an image in a sample buffer.
 func NewTargetedImageRequestWithTargetedCMSampleBufferOptions(sampleBuffer obj.Object, options obj.Object) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCMSampleBuffer:options:"), objref.IDOf(sampleBuffer), objref.IDOf(options))
 	return targetedImageRequestAdopt(_id)
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets preferBackgroundProcessing and returns the receiver so calls can be chained.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
+func (x *TargetedImageRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TargetedImageRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *TargetedImageRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TargetedImageRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets usesCPUOnly and returns the receiver so calls can be chained.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *TargetedImageRequest) WithUsesCPUOnly(usesCPUOnly bool) *TargetedImageRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets revision and returns the receiver so calls can be chained.
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
 func (x *TargetedImageRequest) WithRevision(revision int) *TargetedImageRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
@@ -130,9 +110,21 @@ func (x *TargetedImageRequest) WithRevision(revision int) *TargetedImageRequest 
 // TargetedImageRequestable is the interface implemented by [TargetedImageRequest], for mocking and DI.
 type TargetedImageRequestable interface {
 	obj.Object
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TargetedImageRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TargetedImageRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *TargetedImageRequest
 	WithRevision(revision int) *TargetedImageRequest
 }
 
 var _ TargetedImageRequestable = (*TargetedImageRequest)(nil)
+
+// isTargetedImageRequest marks TargetedImageRequest — and, by embedding promotion, its
+// subclasses — as a member of the TargetedImageRequest hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *TargetedImageRequest) isTargetedImageRequest() {}
+
+var _ TargetedImageRequestProvider = (*TargetedImageRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*TargetedImageRequest)(nil)
+
+var _ RequestProvider = (*TargetedImageRequest)(nil)

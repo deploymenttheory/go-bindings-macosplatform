@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A point of view for rendering a 3D scene, along with a set of parameters describing an intended appearance for rendering.
-//
 // Camera is an idiomatic wrapper over the Objective-C class MDLCamera.
+//
+// Camera is an abstract base — you do not construct it directly. Construct one of [StereoscopicCamera] and pass it where a Camera is accepted.
+//
+// A point of view for rendering a 3D scene, along with a set of parameters describing an intended appearance for rendering.
 type Camera struct {
-	objref.Handle
+	Object
 }
 
 // CameraFromID adopts an existing Objective-C object as a Camera
@@ -25,7 +26,8 @@ func CameraFromID(id objc.ID) *Camera {
 	if id == 0 {
 		return nil
 	}
-	x := &Camera{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Camera{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,356 +40,315 @@ func cameraAdopt(id objc.ID) *Camera {
 	if id == 0 {
 		return nil
 	}
-	x := &Camera{Handle: objref.Wrap(id)}
+	x := &Camera{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *Camera) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Camera) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Camera) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewCamera creates a new Camera.
-func NewCamera() *Camera {
-	_id := objc.Send[objc.ID](objc.ID(_class("MDLCamera")), objc.RegisterName("new"))
-	return cameraAdopt(_id)
-}
-
-// The style of projection transform used by the camera.
-//
-// WithProjection sets projection and returns the receiver so calls can be chained.
+// WithProjection the style of projection transform used by the camera.
 func (x *Camera) WithProjection(projection CameraProjection) *Camera {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProjection:"), projection)
 	return x
 }
 
-// The camera’s near depth limit.
-//
-// WithNearVisibilityDistance sets nearVisibilityDistance and returns the receiver so calls can be chained.
+// WithNearVisibilityDistance the camera’s near depth limit.
 func (x *Camera) WithNearVisibilityDistance(nearVisibilityDistance float32) *Camera {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNearVisibilityDistance:"), nearVisibilityDistance)
 	return x
 }
 
-// The camera’s far depth limit.
-//
-// WithFarVisibilityDistance sets farVisibilityDistance and returns the receiver so calls can be chained.
+// WithFarVisibilityDistance the camera’s far depth limit.
 func (x *Camera) WithFarVisibilityDistance(farVisibilityDistance float32) *Camera {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFarVisibilityDistance:"), farVisibilityDistance)
 	return x
 }
 
-// The scale factor to meters from the world coordinate system containing the camera.
-//
-// WithWorldToMetersConversionScale sets worldToMetersConversionScale and returns the receiver so calls can be chained.
+// WithWorldToMetersConversionScale the scale factor to meters from the world coordinate system containing the camera.
 func (x *Camera) WithWorldToMetersConversionScale(worldToMetersConversionScale float32) *Camera {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorldToMetersConversionScale:"), worldToMetersConversionScale)
 	return x
 }
 
-// The first coefficient for determining the radial distortion applied to pixels rendered using the camera.
-//
-// WithBarrelDistortion sets barrelDistortion and returns the receiver so calls can be chained.
+// WithBarrelDistortion the first coefficient for determining the radial distortion applied to pixels rendered using the camera.
 func (x *Camera) WithBarrelDistortion(barrelDistortion float32) *Camera {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBarrelDistortion:"), barrelDistortion)
 	return x
 }
 
-// The second coefficient for determining the radial distortion applied to pixels rendered using the camera.
-//
-// WithFisheyeDistortion sets fisheyeDistortion and returns the receiver so calls can be chained.
+// WithFisheyeDistortion the second coefficient for determining the radial distortion applied to pixels rendered using the camera.
 func (x *Camera) WithFisheyeDistortion(fisheyeDistortion float32) *Camera {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFisheyeDistortion:"), fisheyeDistortion)
 	return x
 }
 
-// The amount of radial light attenuation around the edges of an image rendered using the camera.
-//
-// WithOpticalVignetting sets opticalVignetting and returns the receiver so calls can be chained.
+// WithOpticalVignetting the amount of radial light attenuation around the edges of an image rendered using the camera.
 func (x *Camera) WithOpticalVignetting(opticalVignetting float32) *Camera {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpticalVignetting:"), opticalVignetting)
 	return x
 }
 
-// The amount of radial color shift around the edges of an image rendered using the camera.
-//
-// WithChromaticAberration sets chromaticAberration and returns the receiver so calls can be chained.
+// WithChromaticAberration the amount of radial color shift around the edges of an image rendered using the camera.
 func (x *Camera) WithChromaticAberration(chromaticAberration float32) *Camera {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChromaticAberration:"), chromaticAberration)
 	return x
 }
 
-// The focal length, in millimeters, of the camera’s simulated lens.
-//
-// WithFocalLength sets focalLength and returns the receiver so calls can be chained.
+// WithFocalLength the focal length, in millimeters, of the camera’s simulated lens.
 func (x *Camera) WithFocalLength(focalLength float32) *Camera {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocalLength:"), focalLength)
 	return x
 }
 
-// The distance, in meters, at which the lens is focused.
-//
-// WithFocusDistance sets focusDistance and returns the receiver so calls can be chained.
+// WithFocusDistance the distance, in meters, at which the lens is focused.
 func (x *Camera) WithFocusDistance(focusDistance float32) *Camera {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusDistance:"), focusDistance)
 	return x
 }
 
-// The camera’s field of view, in degrees.
-//
-// WithFieldOfView sets fieldOfView and returns the receiver so calls can be chained.
+// WithFieldOfView the camera’s field of view, in degrees.
 func (x *Camera) WithFieldOfView(fieldOfView float32) *Camera {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFieldOfView:"), fieldOfView)
 	return x
 }
 
-// The relative aperture ratio of the camera’s simulated lens.
-//
-// WithFStop sets fStop and returns the receiver so calls can be chained.
+// WithFStop the relative aperture ratio of the camera’s simulated lens.
 func (x *Camera) WithFStop(fStop float32) *Camera {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFStop:"), fStop)
 	return x
 }
 
-// The number of blades in the camera’s simulated aperture.
-//
-// WithApertureBladeCount sets apertureBladeCount and returns the receiver so calls can be chained.
+// WithApertureBladeCount the number of blades in the camera’s simulated aperture.
 func (x *Camera) WithApertureBladeCount(apertureBladeCount int) *Camera {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApertureBladeCount:"), apertureBladeCount)
 	return x
 }
 
-// The maximum diameter, in millimeters on the imaging plane, at which light from a point source should appear in an image rendered using the camera.
-//
-// WithMaximumCircleOfConfusion sets maximumCircleOfConfusion and returns the receiver so calls can be chained.
+// WithMaximumCircleOfConfusion the maximum diameter, in millimeters on the imaging plane, at which light from a point source should appear in an image rendered using the camera.
 func (x *Camera) WithMaximumCircleOfConfusion(maximumCircleOfConfusion float32) *Camera {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumCircleOfConfusion:"), maximumCircleOfConfusion)
 	return x
 }
 
-// The duration, in seconds, for which the camera’s simulated shutter is open during each frame.
-//
-// WithShutterOpenInterval sets shutterOpenInterval and returns the receiver so calls can be chained.
+// WithShutterOpenInterval the duration, in seconds, for which the camera’s simulated shutter is open during each frame.
 func (x *Camera) WithShutterOpenInterval(shutterOpenInterval float64) *Camera {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShutterOpenInterval:"), shutterOpenInterval)
 	return x
 }
 
-// The height, in millimeters, of the camera’s simulated imaging surface.
-//
-// WithSensorVerticalAperture sets sensorVerticalAperture and returns the receiver so calls can be chained.
+// WithSensorVerticalAperture the height, in millimeters, of the camera’s simulated imaging surface.
 func (x *Camera) WithSensorVerticalAperture(sensorVerticalAperture float32) *Camera {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSensorVerticalAperture:"), sensorVerticalAperture)
 	return x
 }
 
-// The ratio of width to height for the camera’s simulated imaging surface.
-//
-// WithSensorAspect sets sensorAspect and returns the receiver so calls can be chained.
+// WithSensorAspect the ratio of width to height for the camera’s simulated imaging surface.
 func (x *Camera) WithSensorAspect(sensorAspect float32) *Camera {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSensorAspect:"), sensorAspect)
 	return x
 }
 
-// The parent object that contains this object.
-//
-// WithParent sets parent and returns the receiver so calls can be chained.
+// WithParent the parent object that contains this object.
 func (x *Camera) WithParent(parent ObjectProvider) *Camera {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return x
 }
 
-// The primary object, if applicable, of which this object is an instance.
-//
-// WithInstance sets instance and returns the receiver so calls can be chained.
+// WithInstance the primary object, if applicable, of which this object is an instance.
 func (x *Camera) WithInstance(instance ObjectProvider) *Camera {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return x
 }
 
-// A Boolean value indicating whether this object should be used in rendering.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden a Boolean value indicating whether this object should be used in rendering.
 func (x *Camera) WithHidden(hidden bool) *Camera {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
+// Projection wraps the corresponding Objective-C method.
 func (x *Camera) Projection() CameraProjection {
 	_r := objc.Send[CameraProjection](objref.IDOf(x), objc.RegisterName("projection"))
 	return _r
 }
 
+// SetProjection wraps the corresponding Objective-C method.
 func (x *Camera) SetProjection(projection CameraProjection) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProjection:"), projection)
 }
 
-// Bounding distance for visible objects
+// NearVisibilityDistance bounding distance for visible objects
 func (x *Camera) NearVisibilityDistance() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("nearVisibilityDistance"))
 	return _r
 }
 
+// SetNearVisibilityDistance wraps the corresponding Objective-C method.
 func (x *Camera) SetNearVisibilityDistance(nearVisibilityDistance float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNearVisibilityDistance:"), nearVisibilityDistance)
 }
 
+// FarVisibilityDistance wraps the corresponding Objective-C method.
 func (x *Camera) FarVisibilityDistance() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("farVisibilityDistance"))
 	return _r
 }
 
+// SetFarVisibilityDistance wraps the corresponding Objective-C method.
 func (x *Camera) SetFarVisibilityDistance(farVisibilityDistance float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFarVisibilityDistance:"), farVisibilityDistance)
 }
 
-// World to meters conversion scale. Required for certain calculations.
+// WorldToMetersConversionScale world to meters conversion scale. Required for certain calculations.
 func (x *Camera) WorldToMetersConversionScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("worldToMetersConversionScale"))
 	return _r
 }
 
+// SetWorldToMetersConversionScale wraps the corresponding Objective-C method.
 func (x *Camera) SetWorldToMetersConversionScale(worldToMetersConversionScale float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorldToMetersConversionScale:"), worldToMetersConversionScale)
 }
 
-// Radial distortion of the lens, second order term
+// BarrelDistortion radial distortion of the lens, second order term
 func (x *Camera) BarrelDistortion() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("barrelDistortion"))
 	return _r
 }
 
+// SetBarrelDistortion wraps the corresponding Objective-C method.
 func (x *Camera) SetBarrelDistortion(barrelDistortion float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBarrelDistortion:"), barrelDistortion)
 }
 
-// Radial distortion of the lens, fourth order term
+// FisheyeDistortion radial distortion of the lens, fourth order term
 func (x *Camera) FisheyeDistortion() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("fisheyeDistortion"))
 	return _r
 }
 
+// SetFisheyeDistortion wraps the corresponding Objective-C method.
 func (x *Camera) SetFisheyeDistortion(fisheyeDistortion float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFisheyeDistortion:"), fisheyeDistortion)
 }
 
-// Amount of optical vignetting, rom zero to one.
+// OpticalVignetting amount of optical vignetting, rom zero to one.
 func (x *Camera) OpticalVignetting() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("opticalVignetting"))
 	return _r
 }
 
+// SetOpticalVignetting wraps the corresponding Objective-C method.
 func (x *Camera) SetOpticalVignetting(opticalVignetting float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpticalVignetting:"), opticalVignetting)
 }
 
-// Amount of chromatic abberation, from zero to one.
+// ChromaticAberration amount of chromatic abberation, from zero to one.
 func (x *Camera) ChromaticAberration() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("chromaticAberration"))
 	return _r
 }
 
+// SetChromaticAberration wraps the corresponding Objective-C method.
 func (x *Camera) SetChromaticAberration(chromaticAberration float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChromaticAberration:"), chromaticAberration)
 }
 
-// Lens focal length in mm.
+// FocalLength lens focal length in mm.
 func (x *Camera) FocalLength() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("focalLength"))
 	return _r
 }
 
+// SetFocalLength wraps the corresponding Objective-C method.
 func (x *Camera) SetFocalLength(focalLength float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocalLength:"), focalLength)
 }
 
-// Focus distance
+// FocusDistance focus distance
 func (x *Camera) FocusDistance() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("focusDistance"))
 	return _r
 }
 
+// SetFocusDistance wraps the corresponding Objective-C method.
 func (x *Camera) SetFocusDistance(focusDistance float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusDistance:"), focusDistance)
 }
 
-// The field of view, in degrees.
+// FieldOfView the field of view, in degrees.
 func (x *Camera) FieldOfView() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("fieldOfView"))
 	return _r
 }
 
+// SetFieldOfView wraps the corresponding Objective-C method.
 func (x *Camera) SetFieldOfView(fieldOfView float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFieldOfView:"), fieldOfView)
 }
 
-// f-stop, default is 5.6
+// FStop f-stop, default is 5.6
 func (x *Camera) FStop() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("fStop"))
 	return _r
 }
 
+// SetFStop wraps the corresponding Objective-C method.
 func (x *Camera) SetFStop(fStop float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFStop:"), fStop)
 }
 
-// Aperture blade count, where zero indicates a circle.
+// ApertureBladeCount aperture blade count, where zero indicates a circle.
 func (x *Camera) ApertureBladeCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("apertureBladeCount"))
 	return _r
 }
 
+// SetApertureBladeCount wraps the corresponding Objective-C method.
 func (x *Camera) SetApertureBladeCount(apertureBladeCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApertureBladeCount:"), apertureBladeCount)
 }
 
-// Maximum circle of confusion size in mm on the image plane
+// MaximumCircleOfConfusion maximum circle of confusion size in mm on the image plane
 func (x *Camera) MaximumCircleOfConfusion() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumCircleOfConfusion"))
 	return _r
 }
 
+// SetMaximumCircleOfConfusion wraps the corresponding Objective-C method.
 func (x *Camera) SetMaximumCircleOfConfusion(maximumCircleOfConfusion float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumCircleOfConfusion:"), maximumCircleOfConfusion)
 }
 
-// Shutter open interval, in seconds
+// ShutterOpenInterval shutter open interval, in seconds
 func (x *Camera) ShutterOpenInterval() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("shutterOpenInterval"))
 	return _r
 }
 
+// SetShutterOpenInterval wraps the corresponding Objective-C method.
 func (x *Camera) SetShutterOpenInterval(shutterOpenInterval float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShutterOpenInterval:"), shutterOpenInterval)
 }
 
-// vertical aperture of the sensor or film gate, default is 24mm
+// SensorVerticalAperture vertical aperture of the sensor or film gate, default is 24mm
 func (x *Camera) SensorVerticalAperture() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("sensorVerticalAperture"))
 	return _r
 }
 
+// SetSensorVerticalAperture wraps the corresponding Objective-C method.
 func (x *Camera) SetSensorVerticalAperture(sensorVerticalAperture float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSensorVerticalAperture:"), sensorVerticalAperture)
 }
 
-// Sensor or film gate aperture aspect ratio, default is 1.5
+// SensorAspect sensor or film gate aperture aspect ratio, default is 1.5
 func (x *Camera) SensorAspect() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("sensorAspect"))
 	return _r
 }
 
+// SetSensorAspect wraps the corresponding Objective-C method.
 func (x *Camera) SetSensorAspect(sensorAspect float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSensorAspect:"), sensorAspect)
 }
@@ -452,3 +413,12 @@ type Cameraable interface {
 }
 
 var _ Cameraable = (*Camera)(nil)
+
+// isCamera marks Camera — and, by embedding promotion, its
+// subclasses — as a member of the Camera hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Camera) isCamera() {}
+
+var _ CameraProvider = (*Camera)(nil)
+
+var _ ObjectProvider = (*Camera)(nil)

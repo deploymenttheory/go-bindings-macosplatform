@@ -14,7 +14,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Tells Safari to reload the specified extension’s content-blocking rules.
+// ReloadContentBlockerWithIdentifier tells Safari to reload the specified extension’s content-blocking rules.
 //
 // ReloadContentBlockerWithIdentifier blocks until the operation completes or ctx is cancelled.
 func ReloadContentBlockerWithIdentifier(ctx context.Context, identifier string) error {
@@ -33,10 +33,10 @@ func ReloadContentBlockerWithIdentifier(ctx context.Context, identifier string) 
 	}
 }
 
-// Determines the state of your content blocker.
+// GetStateOfContentBlockerWithIdentifier determines the state of your content blocker.
 //
 // GetStateOfContentBlockerWithIdentifier blocks until the operation completes or ctx is cancelled.
-func GetStateOfContentBlockerWithIdentifier(ctx context.Context, identifier string) (*ContentBlockerState, error) {
+func GetStateOfContentBlockerWithIdentifier(ctx context.Context, identifier string) (result *ContentBlockerState, err error) {
 	type _result struct {
 		val *ContentBlockerState
 		err error
@@ -58,10 +58,10 @@ func GetStateOfContentBlockerWithIdentifier(ctx context.Context, identifier stri
 	}
 }
 
-// Calls the completion handler with the active browser window.
+// GetActiveWindow calls the completion handler with the active browser window.
 //
 // GetActiveWindow blocks until the operation completes or ctx is cancelled.
-func GetActiveWindow(ctx context.Context) (*SafariWindow, error) {
+func GetActiveWindow(ctx context.Context) (result *SafariWindow, err error) {
 	type _result struct {
 		val *SafariWindow
 		err error
@@ -82,10 +82,10 @@ func GetActiveWindow(ctx context.Context) (*SafariWindow, error) {
 	}
 }
 
-// Calls the completion handler with all currently open windows ordered front to back.
+// GetAllWindows calls the completion handler with all currently open windows ordered front to back.
 //
 // GetAllWindows blocks until the operation completes or ctx is cancelled.
-func GetAllWindows(ctx context.Context) (obj.Object, error) {
+func GetAllWindows(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -106,10 +106,10 @@ func GetAllWindows(ctx context.Context) (obj.Object, error) {
 	}
 }
 
-// Opens a new window with the desired webpage.
+// OpenWindowWithURL opens a new window with the desired webpage.
 //
 // OpenWindowWithURL blocks until the operation completes or ctx is cancelled.
-func OpenWindowWithURL(ctx context.Context, url string) (*SafariWindow, error) {
+func OpenWindowWithURL(ctx context.Context, url string) (result *SafariWindow, err error) {
 	type _result struct {
 		val *SafariWindow
 		err error
@@ -130,15 +130,15 @@ func OpenWindowWithURL(ctx context.Context, url string) (*SafariWindow, error) {
 	}
 }
 
-// Updates the enabled states and badges of toolbar items.
+// SetToolbarItemsNeedUpdate updates the enabled states and badges of toolbar items.
 func SetToolbarItemsNeedUpdate() {
 	objc.Send[objc.ID](objc.ID(_class("SFSafariApplication")), objc.RegisterName("setToolbarItemsNeedUpdate"))
 }
 
-// Gets an NSRunningApplication instance with information about the app that this extension is connected to.
+// GetHostApplication gets an NSRunningApplication instance with information about the app that this extension is connected to.
 //
 // GetHostApplication blocks until the operation completes or ctx is cancelled.
-func GetHostApplication(ctx context.Context) (obj.Object, error) {
+func GetHostApplication(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -159,7 +159,7 @@ func GetHostApplication(ctx context.Context) (obj.Object, error) {
 	}
 }
 
-// Launches Safari and opens the preferences panel for a Safari app extension.
+// ShowPreferencesForExtensionWithIdentifier launches Safari and opens the preferences panel for a Safari app extension.
 //
 // ShowPreferencesForExtensionWithIdentifier blocks until the operation completes or ctx is cancelled.
 func ShowPreferencesForExtensionWithIdentifier(ctx context.Context, identifier string) error {
@@ -178,7 +178,7 @@ func ShowPreferencesForExtensionWithIdentifier(ctx context.Context, identifier s
 	}
 }
 
-// Sends a message to a Safari app extension, launching Safari if necessary.
+// DispatchMessageWithNameToExtensionWithIdentifierUserInfo sends a message to a Safari app extension, launching Safari if necessary.
 //
 // DispatchMessageWithNameToExtensionWithIdentifierUserInfo blocks until the operation completes or ctx is cancelled.
 func DispatchMessageWithNameToExtensionWithIdentifierUserInfo(ctx context.Context, messageName string, identifier string, userInfo obj.Object) error {
@@ -197,10 +197,10 @@ func DispatchMessageWithNameToExtensionWithIdentifierUserInfo(ctx context.Contex
 	}
 }
 
-// Calls the completion handler with the base URI of the extension.
+// GetBaseURI calls the completion handler with the base URI of the extension.
 //
 // GetBaseURI blocks until the operation completes or ctx is cancelled.
-func GetBaseURI(ctx context.Context) (obj.Object, error) {
+func GetBaseURI(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -221,10 +221,10 @@ func GetBaseURI(ctx context.Context) (obj.Object, error) {
 	}
 }
 
-// Returns the current state of a Safari extension.
+// GetStateOfSafariExtensionWithIdentifier returns the current state of a Safari extension.
 //
 // GetStateOfSafariExtensionWithIdentifier blocks until the operation completes or ctx is cancelled.
-func GetStateOfSafariExtensionWithIdentifier(ctx context.Context, identifier string) (*SafariExtensionState, error) {
+func GetStateOfSafariExtensionWithIdentifier(ctx context.Context, identifier string) (result *SafariExtensionState, err error) {
 	type _result struct {
 		val *SafariExtensionState
 		err error

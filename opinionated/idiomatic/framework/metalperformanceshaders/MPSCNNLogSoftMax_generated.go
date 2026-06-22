@@ -6,17 +6,20 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A neural transfer function that is useful for constructing a loss function to be minimized when training neural networks.
-//
 // CNNLogSoftMax is an idiomatic wrapper over the Objective-C class MPSCNNLogSoftMax.
+//
+// It embeds [CNNKernel], promoting that type's methods.
+//
+// A neural transfer function that is useful for constructing a loss function to be minimized when training neural networks.
 type CNNLogSoftMax struct {
-	objref.Handle
+	CNNKernel
 }
 
 // CNNLogSoftMaxFromID adopts an existing Objective-C object as a CNNLogSoftMax
@@ -25,7 +28,8 @@ func CNNLogSoftMaxFromID(id objc.ID) *CNNLogSoftMax {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNLogSoftMax{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNLogSoftMax{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func cNNLogSoftMaxAdopt(id objc.ID) *CNNLogSoftMax {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNLogSoftMax{Handle: objref.Wrap(id)}
+	x := &CNNLogSoftMax{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNLogSoftMax) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNLogSoftMax) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNLogSoftMax) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNLogSoftMax creates a new CNNLogSoftMax.
@@ -64,33 +54,37 @@ func NewCNNLogSoftMax() *CNNLogSoftMax {
 	return cNNLogSoftMaxAdopt(_id)
 }
 
-// The number of channels in the destination image to skip before writing output data.
-//
-// WithDestinationFeatureChannelOffset sets destinationFeatureChannelOffset and returns the receiver so calls can be chained.
+// WithOffset the position of the destination image’s clip rectangle origin, relative to the source image.
+func (x *CNNLogSoftMax) WithOffset(offset mpscore.MPSOffset) *CNNLogSoftMax {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
+func (x *CNNLogSoftMax) WithClipRect(clipRect metal.MTLRegion) *CNNLogSoftMax {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset the number of channels in the destination image to skip before writing output data.
 func (x *CNNLogSoftMax) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNLogSoftMax {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// The number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-//
-// WithSourceFeatureChannelOffset sets sourceFeatureChannelOffset and returns the receiver so calls can be chained.
+// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
 func (x *CNNLogSoftMax) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNLogSoftMax {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// The maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithSourceFeatureChannelMaxCount sets sourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 func (x *CNNLogSoftMax) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNLogSoftMax {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *CNNLogSoftMax) WithLabel(label string) *CNNLogSoftMax {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -99,6 +93,8 @@ func (x *CNNLogSoftMax) WithLabel(label string) *CNNLogSoftMax {
 // CNNLogSoftMaxable is the interface implemented by [CNNLogSoftMax], for mocking and DI.
 type CNNLogSoftMaxable interface {
 	obj.Object
+	WithOffset(offset mpscore.MPSOffset) *CNNLogSoftMax
+	WithClipRect(clipRect metal.MTLRegion) *CNNLogSoftMax
 	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNLogSoftMax
 	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNLogSoftMax
 	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNLogSoftMax
@@ -106,3 +102,7 @@ type CNNLogSoftMaxable interface {
 }
 
 var _ CNNLogSoftMaxable = (*CNNLogSoftMax)(nil)
+
+var _ CNNKernelProvider = (*CNNLogSoftMax)(nil)
+
+var _ KernelProvider = (*CNNLogSoftMax)(nil)

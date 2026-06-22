@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Groups together properties to create a pipeline data set serializer.
-//
 // MTL4PipelineDataSetSerializerDescriptor is an idiomatic wrapper over the Objective-C class MTL4PipelineDataSetSerializerDescriptor.
+//
+// Groups together properties to create a pipeline data set serializer.
 type MTL4PipelineDataSetSerializerDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MTL4PipelineDataSetSerializerDescriptorFromID(id objc.ID) *MTL4PipelineData
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4PipelineDataSetSerializerDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTL4PipelineDataSetSerializerDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTL4PipelineDataSetSerializerDescriptorAdopt(id objc.ID) *MTL4PipelineDataS
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4PipelineDataSetSerializerDescriptor{Handle: objref.Wrap(id)}
+	x := &MTL4PipelineDataSetSerializerDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *MTL4PipelineDataSetSerializerDescriptor) IsKind(className string) bool 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTL4PipelineDataSetSerializerDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTL4PipelineDataSetSerializerDescriptor creates a new MTL4PipelineDataSetSerializerDescriptor.
 func NewMTL4PipelineDataSetSerializerDescriptor() *MTL4PipelineDataSetSerializerDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTL4PipelineDataSetSerializerDescriptor")), objc.RegisterName("new"))
 	return mTL4PipelineDataSetSerializerDescriptorAdopt(_id)
 }
 
-// Specifies the configuration of the serialization process.
-//
-// WithConfiguration sets configuration and returns the receiver so calls can be chained.
+// WithConfiguration specifies the configuration of the serialization process.
 func (x *MTL4PipelineDataSetSerializerDescriptor) WithConfiguration(configuration MTL4PipelineDataSetSerializerConfiguration) *MTL4PipelineDataSetSerializerDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), configuration)
 	return x
 }
 
+// Configuration wraps the corresponding Objective-C method.
 func (x *MTL4PipelineDataSetSerializerDescriptor) Configuration() MTL4PipelineDataSetSerializerConfiguration {
 	_r := objc.Send[MTL4PipelineDataSetSerializerConfiguration](objref.IDOf(x), objc.RegisterName("configuration"))
 	return _r
 }
 
+// SetConfiguration wraps the corresponding Objective-C method.
 func (x *MTL4PipelineDataSetSerializerDescriptor) SetConfiguration(configuration MTL4PipelineDataSetSerializerConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), configuration)
 }

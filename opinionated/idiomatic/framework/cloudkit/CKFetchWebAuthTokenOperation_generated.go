@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An operation that creates an authentication token for use with CloudKit web services.
-//
 // FetchWebAuthTokenOperation is an idiomatic wrapper over the Objective-C class CKFetchWebAuthTokenOperation.
+//
+// It embeds [DatabaseOperation], promoting that type's methods.
+//
+// An operation that creates an authentication token for use with CloudKit web services.
 type FetchWebAuthTokenOperation struct {
-	objref.Handle
+	DatabaseOperation
 }
 
 // FetchWebAuthTokenOperationFromID adopts an existing Objective-C object as a FetchWebAuthTokenOperation
@@ -27,7 +28,8 @@ func FetchWebAuthTokenOperationFromID(id objc.ID) *FetchWebAuthTokenOperation {
 	if id == 0 {
 		return nil
 	}
-	x := &FetchWebAuthTokenOperation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FetchWebAuthTokenOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,24 +42,10 @@ func fetchWebAuthTokenOperationAdopt(id objc.ID) *FetchWebAuthTokenOperation {
 	if id == 0 {
 		return nil
 	}
-	x := &FetchWebAuthTokenOperation{Handle: objref.Wrap(id)}
+	x := &FetchWebAuthTokenOperation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *FetchWebAuthTokenOperation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FetchWebAuthTokenOperation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FetchWebAuthTokenOperation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewFetchWebAuthTokenOperation creates a new FetchWebAuthTokenOperation.
@@ -66,96 +54,74 @@ func NewFetchWebAuthTokenOperation() *FetchWebAuthTokenOperation {
 	return fetchWebAuthTokenOperationAdopt(_id)
 }
 
-// Creates a fetch operation for the specified API token.
-//
-// NewFetchWebAuthTokenOperationWithAPIToken creates a new FetchWebAuthTokenOperation.
+// NewFetchWebAuthTokenOperationWithAPIToken creates a fetch operation for the specified API token.
 func NewFetchWebAuthTokenOperationWithAPIToken(aPIToken string) *FetchWebAuthTokenOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKFetchWebAuthTokenOperation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAPIToken:"), purego.NSString(aPIToken))
 	return fetchWebAuthTokenOperationAdopt(_id)
 }
 
-// The API token that allows access to an app’s container.
-//
-// WithAPIToken sets aPIToken and returns the receiver so calls can be chained.
+// WithAPIToken the API token that allows access to an app’s container.
 func (x *FetchWebAuthTokenOperation) WithAPIToken(aPIToken string) *FetchWebAuthTokenOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAPIToken:"), purego.NSString(aPIToken))
 	return x
 }
 
-// The database that the operation uses.
-//
-// WithDatabase sets database and returns the receiver so calls can be chained.
+// WithDatabase the database that the operation uses.
 func (x *FetchWebAuthTokenOperation) WithDatabase(database *Database) *FetchWebAuthTokenOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return x
 }
 
-// The operation’s configuration.
-//
-// WithConfiguration sets configuration and returns the receiver so calls can be chained.
+// WithConfiguration the operation’s configuration.
 func (x *FetchWebAuthTokenOperation) WithConfiguration(configuration *OperationConfiguration) *FetchWebAuthTokenOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
-// The operation’s group.
-//
-// WithGroup sets group and returns the receiver so calls can be chained.
+// WithGroup the operation’s group.
 func (x *FetchWebAuthTokenOperation) WithGroup(group *OperationGroup) *FetchWebAuthTokenOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation.
-//
-// WithLongLivedOperationWasPersistedBlock sets longLivedOperationWasPersistedBlock and returns the receiver so calls can be chained.
+// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
 func (x *FetchWebAuthTokenOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchWebAuthTokenOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
 	return x
 }
 
-// The operation's container.
-//
-// WithContainer sets container and returns the receiver so calls can be chained.
+// WithContainer the operation's container.
 func (x *FetchWebAuthTokenOperation) WithContainer(container *Container) *FetchWebAuthTokenOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network.
-//
-// WithAllowsCellularAccess sets allowsCellularAccess and returns the receiver so calls can be chained.
+// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
 func (x *FetchWebAuthTokenOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchWebAuthTokenOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived.
-//
-// WithLongLived sets longLived and returns the receiver so calls can be chained.
+// WithLongLived a Boolean value that indicates whether the operation is long-lived.
 func (x *FetchWebAuthTokenOperation) WithLongLived(longLived bool) *FetchWebAuthTokenOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The timeout interval when waiting for additional data.
-//
-// WithTimeoutIntervalForRequest sets timeoutIntervalForRequest and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
 func (x *FetchWebAuthTokenOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchWebAuthTokenOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can use.
-//
-// WithTimeoutIntervalForResource sets timeoutIntervalForResource and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
 func (x *FetchWebAuthTokenOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchWebAuthTokenOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
-// The API token that allows access to an app's container.
+// APIToken the API token that allows access to an app's container.
 func (x *FetchWebAuthTokenOperation) APIToken() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("APIToken"))
 	if _r == 0 {
@@ -164,12 +130,15 @@ func (x *FetchWebAuthTokenOperation) APIToken() string {
 	return purego.GoString(_r)
 }
 
+// SetAPIToken wraps the corresponding Objective-C method.
 func (x *FetchWebAuthTokenOperation) SetAPIToken(aPIToken string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAPIToken:"), purego.NSString(aPIToken))
 }
 
+// SetFetchWebAuthTokenCompletionBlock wraps the corresponding Objective-C method.
+//
 // SetFetchWebAuthTokenCompletionBlock blocks until the operation completes or ctx is cancelled.
-func (x *FetchWebAuthTokenOperation) SetFetchWebAuthTokenCompletionBlock(ctx context.Context) (string, error) {
+func (x *FetchWebAuthTokenOperation) SetFetchWebAuthTokenCompletionBlock(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -210,3 +179,7 @@ type FetchWebAuthTokenOperationable interface {
 }
 
 var _ FetchWebAuthTokenOperationable = (*FetchWebAuthTokenOperation)(nil)
+
+var _ DatabaseOperationProvider = (*FetchWebAuthTokenOperation)(nil)
+
+var _ OperationProvider = (*FetchWebAuthTokenOperation)(nil)

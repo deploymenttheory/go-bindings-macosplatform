@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A challenge from a server requiring authentication from the client.
-//
 // URLAuthenticationChallenge is an idiomatic wrapper over the Objective-C class NSURLAuthenticationChallenge.
+//
+// A challenge from a server requiring authentication from the client.
 type URLAuthenticationChallenge struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func URLAuthenticationChallengeFromID(id objc.ID) *URLAuthenticationChallenge {
 	if id == 0 {
 		return nil
 	}
-	x := &URLAuthenticationChallenge{Handle: objref.Wrap(purego.Retain(id))}
+	x := &URLAuthenticationChallenge{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func uRLAuthenticationChallengeAdopt(id objc.ID) *URLAuthenticationChallenge {
 	if id == 0 {
 		return nil
 	}
-	x := &URLAuthenticationChallenge{Handle: objref.Wrap(id)}
+	x := &URLAuthenticationChallenge{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,43 @@ func (x *URLAuthenticationChallenge) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *URLAuthenticationChallenge) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewURLAuthenticationChallenge creates a new URLAuthenticationChallenge.
 func NewURLAuthenticationChallenge() *URLAuthenticationChallenge {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSURLAuthenticationChallenge")), objc.RegisterName("new"))
 	return uRLAuthenticationChallengeAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *URLAuthenticationChallenge) WithScriptingProperties(scriptingProperties obj.Object) *URLAuthenticationChallenge {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Get a description of the protection space that requires authentication
+// ProtectionSpace get a description of the protection space that requires authentication
 func (x *URLAuthenticationChallenge) ProtectionSpace() *URLProtectionSpace {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protectionSpace"))
 	return URLProtectionSpaceFromID(_r)
 }
 
-// Get the proposed credential for this challenge proposedCredential may be nil, if there is no default credential to use for this challenge (either stored or in the URL). If the credential is not nil and returns YES for hasPassword, this means the NSURLConnection thinks the credential is ready to use as-is. If it returns NO for hasPassword, then the credential is not ready to use as-is, but provides a default username the client could use when prompting.
+// ProposedCredential get the proposed credential for this challenge proposedCredential may be nil, if there is no default credential to use for this challenge (either stored or in the URL). If the credential is not nil and returns YES for hasPassword, this means the NSURLConnection thinks the credential is ready to use as-is. If it returns NO for hasPassword, then the credential is not ready to use as-is, but provides a default username the client could use when prompting.
 func (x *URLAuthenticationChallenge) ProposedCredential() *URLCredential {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("proposedCredential"))
 	return URLCredentialFromID(_r)
 }
 
-// Get count of previous failed authentication attempts
+// PreviousFailureCount get count of previous failed authentication attempts
 func (x *URLAuthenticationChallenge) PreviousFailureCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("previousFailureCount"))
 	return _r
 }
 
-// Get the response representing authentication failure. If there was a previous authentication failure, and this protocol uses responses to indicate authentication failure, then this method will return the response. Otherwise it will return nil.
+// FailureResponse get the response representing authentication failure. If there was a previous authentication failure, and this protocol uses responses to indicate authentication failure, then this method will return the response. Otherwise it will return nil.
 func (x *URLAuthenticationChallenge) FailureResponse() *URLResponse {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("failureResponse"))
 	return URLResponseFromID(_r)

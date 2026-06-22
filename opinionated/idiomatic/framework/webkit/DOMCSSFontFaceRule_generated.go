@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMCSSFontFaceRule is an idiomatic wrapper over the Objective-C class DOMCSSFontFaceRule.
+//
+// It embeds [DOMCSSRule], promoting that type's methods.
 type DOMCSSFontFaceRule struct {
-	objref.Handle
+	DOMCSSRule
 }
 
 // DOMCSSFontFaceRuleFromID adopts an existing Objective-C object as a DOMCSSFontFaceRule
@@ -23,7 +24,8 @@ func DOMCSSFontFaceRuleFromID(id objc.ID) *DOMCSSFontFaceRule {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMCSSFontFaceRule{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMCSSFontFaceRule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMCSSFontFaceRuleAdopt(id objc.ID) *DOMCSSFontFaceRule {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMCSSFontFaceRule{Handle: objref.Wrap(id)}
+	x := &DOMCSSFontFaceRule{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMCSSFontFaceRule) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMCSSFontFaceRule) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMCSSFontFaceRule) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMCSSFontFaceRule creates a new DOMCSSFontFaceRule.
@@ -62,12 +50,13 @@ func NewDOMCSSFontFaceRule() *DOMCSSFontFaceRule {
 	return dOMCSSFontFaceRuleAdopt(_id)
 }
 
-// WithCssText sets cssText and returns the receiver so calls can be chained.
+// WithCssText sets the property and returns the receiver so calls can be chained.
 func (x *DOMCSSFontFaceRule) WithCssText(cssText string) *DOMCSSFontFaceRule {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
 	return x
 }
 
+// Style wraps the corresponding Objective-C method.
 func (x *DOMCSSFontFaceRule) Style() *DOMCSSStyleDeclaration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("style"))
 	return DOMCSSStyleDeclarationFromID(_r)
@@ -81,3 +70,9 @@ type DOMCSSFontFaceRuleable interface {
 }
 
 var _ DOMCSSFontFaceRuleable = (*DOMCSSFontFaceRule)(nil)
+
+var _ DOMCSSRuleProvider = (*DOMCSSFontFaceRule)(nil)
+
+var _ DOMObjectProvider = (*DOMCSSFontFaceRule)(nil)
+
+var _ WebScriptObjectProvider = (*DOMCSSFontFaceRule)(nil)

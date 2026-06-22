@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of properties that you use to initialize a web view.
-//
 // WKWebViewConfiguration is an idiomatic wrapper over the Objective-C class WKWebViewConfiguration.
+//
+// A collection of properties that you use to initialize a web view.
 type WKWebViewConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKWebViewConfigurationFromID(id objc.ID) *WKWebViewConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &WKWebViewConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKWebViewConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKWebViewConfigurationAdopt(id objc.ID) *WKWebViewConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &WKWebViewConfiguration{Handle: objref.Wrap(id)}
+	x := &WKWebViewConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,201 +60,181 @@ func (x *WKWebViewConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKWebViewConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKWebViewConfiguration creates a new WKWebViewConfiguration.
 func NewWKWebViewConfiguration() *WKWebViewConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKWebViewConfiguration")), objc.RegisterName("new"))
 	return wKWebViewConfigurationAdopt(_id)
 }
 
-// The object that coordinates the processes the web view uses to render its web content and execute scripts.
-//
-// WithProcessPool sets processPool and returns the receiver so calls can be chained.
+// WithProcessPool the object that coordinates the processes the web view uses to render its web content and execute scripts.
 func (x *WKWebViewConfiguration) WithProcessPool(processPool *WKProcessPool) *WKWebViewConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProcessPool:"), objref.IDOf(processPool))
 	return x
 }
 
-// The object that manages the preference-related settings for the web view.
-//
-// WithPreferences sets preferences and returns the receiver so calls can be chained.
+// WithPreferences the object that manages the preference-related settings for the web view.
 func (x *WKWebViewConfiguration) WithPreferences(preferences *WKPreferences) *WKWebViewConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferences:"), objref.IDOf(preferences))
 	return x
 }
 
-// The object that coordinates interactions between your app’s native code and the webpage’s scripts and other content.
-//
-// WithUserContentController sets userContentController and returns the receiver so calls can be chained.
+// WithUserContentController the object that coordinates interactions between your app’s native code and the webpage’s scripts and other content.
 func (x *WKWebViewConfiguration) WithUserContentController(userContentController *WKUserContentController) *WKWebViewConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserContentController:"), objref.IDOf(userContentController))
 	return x
 }
 
-// The web extension controller to associate with the web view.
-//
-// WithWebExtensionController sets webExtensionController and returns the receiver so calls can be chained.
+// WithWebExtensionController the web extension controller to associate with the web view.
 func (x *WKWebViewConfiguration) WithWebExtensionController(webExtensionController *WKWebExtensionController) *WKWebViewConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWebExtensionController:"), objref.IDOf(webExtensionController))
 	return x
 }
 
-// The object you use to get and set the site’s cookies and to track the cached data objects.
-//
-// WithWebsiteDataStore sets websiteDataStore and returns the receiver so calls can be chained.
+// WithWebsiteDataStore the object you use to get and set the site’s cookies and to track the cached data objects.
 func (x *WKWebViewConfiguration) WithWebsiteDataStore(websiteDataStore *WKWebsiteDataStore) *WKWebViewConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWebsiteDataStore:"), objref.IDOf(websiteDataStore))
 	return x
 }
 
-// A Boolean value that indicates whether the web view suppresses content rendering until the content is fully loaded into memory.
-//
-// WithSuppressesIncrementalRendering sets suppressesIncrementalRendering and returns the receiver so calls can be chained.
+// WithSuppressesIncrementalRendering a Boolean value that indicates whether the web view suppresses content rendering until the content is fully loaded into memory.
 func (x *WKWebViewConfiguration) WithSuppressesIncrementalRendering(suppressesIncrementalRendering bool) *WKWebViewConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressesIncrementalRendering:"), suppressesIncrementalRendering)
 	return x
 }
 
-// The app name that appears in the user agent string.
-//
-// WithApplicationNameForUserAgent sets applicationNameForUserAgent and returns the receiver so calls can be chained.
+// WithApplicationNameForUserAgent the app name that appears in the user agent string.
 func (x *WKWebViewConfiguration) WithApplicationNameForUserAgent(applicationNameForUserAgent string) *WKWebViewConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationNameForUserAgent:"), purego.NSString(applicationNameForUserAgent))
 	return x
 }
 
-// A Boolean value that indicates whether the web view allows media playback over AirPlay.
-//
-// WithAllowsAirPlayForMediaPlayback sets allowsAirPlayForMediaPlayback and returns the receiver so calls can be chained.
+// WithAllowsAirPlayForMediaPlayback a Boolean value that indicates whether the web view allows media playback over AirPlay.
 func (x *WKWebViewConfiguration) WithAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool) *WKWebViewConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAirPlayForMediaPlayback:"), allowsAirPlayForMediaPlayback)
 	return x
 }
 
-// A Boolean value indicating whether the System Screen Time blocking view should be shown. The default value is YES.
-//
-// WithShowsSystemScreenTimeBlockingView sets showsSystemScreenTimeBlockingView and returns the receiver so calls can be chained.
+// WithShowsSystemScreenTimeBlockingView a Boolean value indicating whether the System Screen Time blocking view should be shown. The default value is YES.
 func (x *WKWebViewConfiguration) WithShowsSystemScreenTimeBlockingView(showsSystemScreenTimeBlockingView bool) *WKWebViewConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsSystemScreenTimeBlockingView:"), showsSystemScreenTimeBlockingView)
 	return x
 }
 
-// A Boolean value that indicates whether the web view should automatically upgrade supported HTTP requests to HTTPS.
-//
-// WithUpgradeKnownHostsToHTTPS sets upgradeKnownHostsToHTTPS and returns the receiver so calls can be chained.
+// WithUpgradeKnownHostsToHTTPS a Boolean value that indicates whether the web view should automatically upgrade supported HTTP requests to HTTPS.
 func (x *WKWebViewConfiguration) WithUpgradeKnownHostsToHTTPS(upgradeKnownHostsToHTTPS bool) *WKWebViewConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpgradeKnownHostsToHTTPS:"), upgradeKnownHostsToHTTPS)
 	return x
 }
 
-// The media types that require a user gesture to begin playing.
-//
-// WithMediaTypesRequiringUserActionForPlayback sets mediaTypesRequiringUserActionForPlayback and returns the receiver so calls can be chained.
+// WithMediaTypesRequiringUserActionForPlayback the media types that require a user gesture to begin playing.
 func (x *WKWebViewConfiguration) WithMediaTypesRequiringUserActionForPlayback(mediaTypesRequiringUserActionForPlayback WKAudiovisualMediaTypes) *WKWebViewConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaTypesRequiringUserActionForPlayback:"), mediaTypesRequiringUserActionForPlayback)
 	return x
 }
 
-// The default preferences to use when loading and rendering content.
-//
-// WithDefaultWebpagePreferences sets defaultWebpagePreferences and returns the receiver so calls can be chained.
+// WithDefaultWebpagePreferences the default preferences to use when loading and rendering content.
 func (x *WKWebViewConfiguration) WithDefaultWebpagePreferences(defaultWebpagePreferences *WKWebpagePreferences) *WKWebViewConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultWebpagePreferences:"), objref.IDOf(defaultWebpagePreferences))
 	return x
 }
 
-// A Boolean value that indicates whether the web view limits navigation to pages within the app’s domain.
-//
-// WithLimitsNavigationsToAppBoundDomains sets limitsNavigationsToAppBoundDomains and returns the receiver so calls can be chained.
+// WithLimitsNavigationsToAppBoundDomains a Boolean value that indicates whether the web view limits navigation to pages within the app’s domain.
 func (x *WKWebViewConfiguration) WithLimitsNavigationsToAppBoundDomains(limitsNavigationsToAppBoundDomains bool) *WKWebViewConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLimitsNavigationsToAppBoundDomains:"), limitsNavigationsToAppBoundDomains)
 	return x
 }
 
-// A Boolean value indicating whether inline predictions are allowed. The default value is `NO`. If false, inline predictions are disabled regardless of the system setting. If true, they are enabled based on the system setting.
-//
-// WithAllowsInlinePredictions sets allowsInlinePredictions and returns the receiver so calls can be chained.
+// WithAllowsInlinePredictions a Boolean value indicating whether inline predictions are allowed. The default value is `NO`. If false, inline predictions are disabled regardless of the system setting. If true, they are enabled based on the system setting.
 func (x *WKWebViewConfiguration) WithAllowsInlinePredictions(allowsInlinePredictions bool) *WKWebViewConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsInlinePredictions:"), allowsInlinePredictions)
 	return x
 }
 
-// The directionality of user interface elements.
-//
-// WithUserInterfaceDirectionPolicy sets userInterfaceDirectionPolicy and returns the receiver so calls can be chained.
+// WithUserInterfaceDirectionPolicy the directionality of user interface elements.
 func (x *WKWebViewConfiguration) WithUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy WKUserInterfaceDirectionPolicy) *WKWebViewConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceDirectionPolicy:"), userInterfaceDirectionPolicy)
 	return x
 }
 
-// A Boolean value indicating whether insertion of adaptive image glyphs is allowed. The default value is `NO`. If `NO`, adaptive image glyphs are inserted as regular images. If `YES`, they are inserted with the full adaptive sizing behavior.
-//
-// WithSupportsAdaptiveImageGlyph sets supportsAdaptiveImageGlyph and returns the receiver so calls can be chained.
+// WithSupportsAdaptiveImageGlyph a Boolean value indicating whether insertion of adaptive image glyphs is allowed. The default value is `NO`. If `NO`, adaptive image glyphs are inserted as regular images. If `YES`, they are inserted with the full adaptive sizing behavior.
 func (x *WKWebViewConfiguration) WithSupportsAdaptiveImageGlyph(supportsAdaptiveImageGlyph bool) *WKWebViewConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsAdaptiveImageGlyph:"), supportsAdaptiveImageGlyph)
 	return x
 }
 
-// The process pool from which to obtain the view's web content process. When a web view is initialized, a new web content process will be created for it from the specified pool, or an existing process in that pool will be used.
+// ProcessPool the process pool from which to obtain the view's web content process. When a web view is initialized, a new web content process will be created for it from the specified pool, or an existing process in that pool will be used.
 func (x *WKWebViewConfiguration) ProcessPool() *WKProcessPool {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processPool"))
 	return WKProcessPoolFromID(_r)
 }
 
+// SetProcessPool wraps the corresponding Objective-C method.
 func (x *WKWebViewConfiguration) SetProcessPool(processPool *WKProcessPool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProcessPool:"), objref.IDOf(processPool))
 }
 
-// The preference settings to be used by the web view.
+// Preferences the preference settings to be used by the web view.
 func (x *WKWebViewConfiguration) Preferences() *WKPreferences {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferences"))
 	return WKPreferencesFromID(_r)
 }
 
+// SetPreferences wraps the corresponding Objective-C method.
 func (x *WKWebViewConfiguration) SetPreferences(preferences *WKPreferences) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferences:"), objref.IDOf(preferences))
 }
 
-// The user content controller to associate with the web view.
+// UserContentController the user content controller to associate with the web view.
 func (x *WKWebViewConfiguration) UserContentController() *WKUserContentController {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userContentController"))
 	return WKUserContentControllerFromID(_r)
 }
 
+// SetUserContentController wraps the corresponding Objective-C method.
 func (x *WKWebViewConfiguration) SetUserContentController(userContentController *WKUserContentController) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserContentController:"), objref.IDOf(userContentController))
 }
 
-// The web extension controller to associate with the web view.
+// WebExtensionController the web extension controller to associate with the web view.
 func (x *WKWebViewConfiguration) WebExtensionController() *WKWebExtensionController {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webExtensionController"))
 	return WKWebExtensionControllerFromID(_r)
 }
 
+// SetWebExtensionController wraps the corresponding Objective-C method.
 func (x *WKWebViewConfiguration) SetWebExtensionController(webExtensionController *WKWebExtensionController) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWebExtensionController:"), objref.IDOf(webExtensionController))
 }
 
-// The website data store to be used by the web view.
+// WebsiteDataStore the website data store to be used by the web view.
 func (x *WKWebViewConfiguration) WebsiteDataStore() *WKWebsiteDataStore {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("websiteDataStore"))
 	return WKWebsiteDataStoreFromID(_r)
 }
 
+// SetWebsiteDataStore wraps the corresponding Objective-C method.
 func (x *WKWebViewConfiguration) SetWebsiteDataStore(websiteDataStore *WKWebsiteDataStore) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWebsiteDataStore:"), objref.IDOf(websiteDataStore))
 }
 
-// A Boolean value indicating whether the web view suppresses content rendering until it is fully loaded into memory. The default value is NO.
+// SuppressesIncrementalRendering a Boolean value indicating whether the web view suppresses content rendering until it is fully loaded into memory. The default value is NO.
 func (x *WKWebViewConfiguration) SuppressesIncrementalRendering() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("suppressesIncrementalRendering"))
 	return _r
 }
 
+// SetSuppressesIncrementalRendering wraps the corresponding Objective-C method.
 func (x *WKWebViewConfiguration) SetSuppressesIncrementalRendering(suppressesIncrementalRendering bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressesIncrementalRendering:"), suppressesIncrementalRendering)
 }
 
-// The name of the application as used in the user agent string.
+// ApplicationNameForUserAgent the name of the application as used in the user agent string.
 func (x *WKWebViewConfiguration) ApplicationNameForUserAgent() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationNameForUserAgent"))
 	if _r == 0 {
@@ -261,94 +243,106 @@ func (x *WKWebViewConfiguration) ApplicationNameForUserAgent() string {
 	return purego.GoString(_r)
 }
 
+// SetApplicationNameForUserAgent wraps the corresponding Objective-C method.
 func (x *WKWebViewConfiguration) SetApplicationNameForUserAgent(applicationNameForUserAgent string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationNameForUserAgent:"), purego.NSString(applicationNameForUserAgent))
 }
 
-// A Boolean value indicating whether AirPlay is allowed. The default value is YES.
+// AllowsAirPlayForMediaPlayback a Boolean value indicating whether AirPlay is allowed. The default value is YES.
 func (x *WKWebViewConfiguration) AllowsAirPlayForMediaPlayback() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsAirPlayForMediaPlayback"))
 	return _r
 }
 
+// SetAllowsAirPlayForMediaPlayback wraps the corresponding Objective-C method.
 func (x *WKWebViewConfiguration) SetAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAirPlayForMediaPlayback:"), allowsAirPlayForMediaPlayback)
 }
 
-// A Boolean value indicating whether the System Screen Time blocking view should be shown. The default value is YES.
+// ShowsSystemScreenTimeBlockingView a Boolean value indicating whether the System Screen Time blocking view should be shown. The default value is YES.
 func (x *WKWebViewConfiguration) ShowsSystemScreenTimeBlockingView() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsSystemScreenTimeBlockingView"))
 	return _r
 }
 
+// SetShowsSystemScreenTimeBlockingView wraps the corresponding Objective-C method.
 func (x *WKWebViewConfiguration) SetShowsSystemScreenTimeBlockingView(showsSystemScreenTimeBlockingView bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsSystemScreenTimeBlockingView:"), showsSystemScreenTimeBlockingView)
 }
 
-// A Boolean value indicating whether HTTP requests to servers known to support HTTPS should be automatically upgraded to HTTPS requests. The default value is YES.
+// UpgradeKnownHostsToHTTPS a Boolean value indicating whether HTTP requests to servers known to support HTTPS should be automatically upgraded to HTTPS requests. The default value is YES.
 func (x *WKWebViewConfiguration) UpgradeKnownHostsToHTTPS() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("upgradeKnownHostsToHTTPS"))
 	return _r
 }
 
+// SetUpgradeKnownHostsToHTTPS wraps the corresponding Objective-C method.
 func (x *WKWebViewConfiguration) SetUpgradeKnownHostsToHTTPS(upgradeKnownHostsToHTTPS bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpgradeKnownHostsToHTTPS:"), upgradeKnownHostsToHTTPS)
 }
 
+// MediaTypesRequiringUserActionForPlayback wraps the corresponding Objective-C method.
 func (x *WKWebViewConfiguration) MediaTypesRequiringUserActionForPlayback() WKAudiovisualMediaTypes {
 	_r := objc.Send[WKAudiovisualMediaTypes](objref.IDOf(x), objc.RegisterName("mediaTypesRequiringUserActionForPlayback"))
 	return _r
 }
 
+// SetMediaTypesRequiringUserActionForPlayback wraps the corresponding Objective-C method.
 func (x *WKWebViewConfiguration) SetMediaTypesRequiringUserActionForPlayback(mediaTypesRequiringUserActionForPlayback WKAudiovisualMediaTypes) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaTypesRequiringUserActionForPlayback:"), mediaTypesRequiringUserActionForPlayback)
 }
 
-// The set of default webpage preferences to use when loading and rendering content. These default webpage preferences are additionally passed to the navigation delegate in -webView:decidePolicyForNavigationAction:preferences:decisionHandler:.
+// DefaultWebpagePreferences the set of default webpage preferences to use when loading and rendering content. These default webpage preferences are additionally passed to the navigation delegate in -webView:decidePolicyForNavigationAction:preferences:decisionHandler:.
 func (x *WKWebViewConfiguration) DefaultWebpagePreferences() *WKWebpagePreferences {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultWebpagePreferences"))
 	return WKWebpagePreferencesFromID(_r)
 }
 
+// SetDefaultWebpagePreferences wraps the corresponding Objective-C method.
 func (x *WKWebViewConfiguration) SetDefaultWebpagePreferences(defaultWebpagePreferences *WKWebpagePreferences) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultWebpagePreferences:"), objref.IDOf(defaultWebpagePreferences))
 }
 
+// LimitsNavigationsToAppBoundDomains wraps the corresponding Objective-C method.
 func (x *WKWebViewConfiguration) LimitsNavigationsToAppBoundDomains() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("limitsNavigationsToAppBoundDomains"))
 	return _r
 }
 
+// SetLimitsNavigationsToAppBoundDomains wraps the corresponding Objective-C method.
 func (x *WKWebViewConfiguration) SetLimitsNavigationsToAppBoundDomains(limitsNavigationsToAppBoundDomains bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLimitsNavigationsToAppBoundDomains:"), limitsNavigationsToAppBoundDomains)
 }
 
-// A Boolean value indicating whether inline predictions are allowed. The default value is `NO`. If false, inline predictions are disabled regardless of the system setting. If true, they are enabled based on the system setting.
+// AllowsInlinePredictions a Boolean value indicating whether inline predictions are allowed. The default value is `NO`. If false, inline predictions are disabled regardless of the system setting. If true, they are enabled based on the system setting.
 func (x *WKWebViewConfiguration) AllowsInlinePredictions() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsInlinePredictions"))
 	return _r
 }
 
+// SetAllowsInlinePredictions wraps the corresponding Objective-C method.
 func (x *WKWebViewConfiguration) SetAllowsInlinePredictions(allowsInlinePredictions bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsInlinePredictions:"), allowsInlinePredictions)
 }
 
-// The directionality of user interface elements. Possible values are described in WKUserInterfaceDirectionPolicy. The default value is WKUserInterfaceDirectionPolicyContent.
+// UserInterfaceDirectionPolicy the directionality of user interface elements. Possible values are described in WKUserInterfaceDirectionPolicy. The default value is WKUserInterfaceDirectionPolicyContent.
 func (x *WKWebViewConfiguration) UserInterfaceDirectionPolicy() WKUserInterfaceDirectionPolicy {
 	_r := objc.Send[WKUserInterfaceDirectionPolicy](objref.IDOf(x), objc.RegisterName("userInterfaceDirectionPolicy"))
 	return _r
 }
 
+// SetUserInterfaceDirectionPolicy wraps the corresponding Objective-C method.
 func (x *WKWebViewConfiguration) SetUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy WKUserInterfaceDirectionPolicy) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceDirectionPolicy:"), userInterfaceDirectionPolicy)
 }
 
-// A Boolean value indicating whether insertion of adaptive image glyphs is allowed. The default value is `NO`. If `NO`, adaptive image glyphs are inserted as regular images. If `YES`, they are inserted with the full adaptive sizing behavior.
+// SupportsAdaptiveImageGlyph a Boolean value indicating whether insertion of adaptive image glyphs is allowed. The default value is `NO`. If `NO`, adaptive image glyphs are inserted as regular images. If `YES`, they are inserted with the full adaptive sizing behavior.
 func (x *WKWebViewConfiguration) SupportsAdaptiveImageGlyph() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsAdaptiveImageGlyph"))
 	return _r
 }
 
+// SetSupportsAdaptiveImageGlyph wraps the corresponding Objective-C method.
 func (x *WKWebViewConfiguration) SetSupportsAdaptiveImageGlyph(supportsAdaptiveImageGlyph bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsAdaptiveImageGlyph:"), supportsAdaptiveImageGlyph)
 }

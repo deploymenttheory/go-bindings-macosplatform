@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container for vertex data forming part of the definition for a three-dimensional object, or geometry.
-//
 // GeometrySource is an idiomatic wrapper over the Objective-C class SCNGeometrySource.
+//
+// A container for vertex data forming part of the definition for a three-dimensional object, or geometry.
 type GeometrySource struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func GeometrySourceFromID(id objc.ID) *GeometrySource {
 	if id == 0 {
 		return nil
 	}
-	x := &GeometrySource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GeometrySource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func geometrySourceAdopt(id objc.ID) *GeometrySource {
 	if id == 0 {
 		return nil
 	}
-	x := &GeometrySource{Handle: objref.Wrap(id)}
+	x := &GeometrySource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,55 +60,61 @@ func (x *GeometrySource) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GeometrySource) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewGeometrySource creates a new GeometrySource.
 func NewGeometrySource() *GeometrySource {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCNGeometrySource")), objc.RegisterName("new"))
 	return geometrySourceAdopt(_id)
 }
 
-// The data for the geometry source
+// Data the data for the geometry source
 func (x *GeometrySource) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// The semantic of the geometry source
+// Semantic the semantic of the geometry source
 func (x *GeometrySource) Semantic() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("semantic"))
 	return obj.Wrap(_r)
 }
 
-// The number of vectors in the data.
+// VectorCount the number of vectors in the data.
 func (x *GeometrySource) VectorCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vectorCount"))
 	return _r
 }
 
-// A flag that indicates if vector components are floating point values.
+// FloatComponents a flag that indicates if vector components are floating point values.
 func (x *GeometrySource) FloatComponents() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("floatComponents"))
 	return _r
 }
 
-// The number of scalar components in each vector.
+// ComponentsPerVector the number of scalar components in each vector.
 func (x *GeometrySource) ComponentsPerVector() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("componentsPerVector"))
 	return _r
 }
 
-// The size of a vector component in bytes.
+// BytesPerComponent the size of a vector component in bytes.
 func (x *GeometrySource) BytesPerComponent() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bytesPerComponent"))
 	return _r
 }
 
-// The offset from the beginning of the data. In bytes.
+// DataOffset the offset from the beginning of the data. In bytes.
 func (x *GeometrySource) DataOffset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataOffset"))
 	return _r
 }
 
-// The number of bytes from a vector to the next one in the data.
+// DataStride the number of bytes from a vector to the next one in the data.
 func (x *GeometrySource) DataStride() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataStride"))
 	return _r

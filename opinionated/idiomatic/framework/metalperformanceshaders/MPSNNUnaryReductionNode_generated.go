@@ -6,17 +6,19 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A node for a unary MPSNNReduce node. This is an abstract base class that does not correspond with any particular MPSCNNKernel. Please make one of the MPSNNReduction subclasses instead.
-//
 // NNUnaryReductionNode is an idiomatic wrapper over the Objective-C class MPSNNUnaryReductionNode.
+//
+// NNUnaryReductionNode is an abstract base — you do not construct it directly. Construct one of [NNReductionColumnMaxNode], [NNReductionColumnMeanNode], [NNReductionColumnMinNode], [NNReductionColumnSumNode], [NNReductionFeatureChannelsArgumentMaxNode], [NNReductionFeatureChannelsArgumentMinNode], [NNReductionFeatureChannelsMaxNode], [NNReductionFeatureChannelsMeanNode], [NNReductionFeatureChannelsMinNode], [NNReductionFeatureChannelsSumNode], [NNReductionRowMaxNode], [NNReductionRowMeanNode], [NNReductionRowMinNode], [NNReductionRowSumNode], [NNReductionSpatialMeanNode] and pass it where a NNUnaryReductionNode is accepted.
+//
+// A node for a unary MPSNNReduce node. This is an abstract base class that does not correspond with any particular MPSCNNKernel. Please make one of the MPSNNReduction subclasses instead.
 type NNUnaryReductionNode struct {
-	objref.Handle
+	NNFilterNode
 }
 
 // NNUnaryReductionNodeFromID adopts an existing Objective-C object as a NNUnaryReductionNode
@@ -25,7 +27,8 @@ func NNUnaryReductionNodeFromID(id objc.ID) *NNUnaryReductionNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNUnaryReductionNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNUnaryReductionNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,47 +41,58 @@ func nNUnaryReductionNodeAdopt(id objc.ID) *NNUnaryReductionNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNUnaryReductionNode{Handle: objref.Wrap(id)}
+	x := &NNUnaryReductionNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NNUnaryReductionNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNUnaryReductionNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNUnaryReductionNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Init a node representing an MPS reduction kernel.
-//
-// NewNNUnaryReductionNodeWithSource creates a new NNUnaryReductionNode.
+// NewNNUnaryReductionNodeWithSource init a node representing an MPS reduction kernel.
 func NewNNUnaryReductionNodeWithSource(sourceNode obj.Object) *NNUnaryReductionNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNUnaryReductionNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return nNUnaryReductionNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithClipRectSource the clip rectangle to apply to the source image.
+func (x *NNUnaryReductionNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNUnaryReductionNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return x
+}
+
+// WithLabel a string to help identify this object.
 func (x *NNUnaryReductionNode) WithLabel(label string) *NNUnaryReductionNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// ClipRectSource the clip rectangle to apply to the source image.
+func (x *NNUnaryReductionNode) ClipRectSource() metal.MTLRegion {
+	_r := objc.Send[metal.MTLRegion](objref.IDOf(x), objc.RegisterName("clipRectSource"))
+	return _r
+}
+
+// SetClipRectSource wraps the corresponding Objective-C method.
+func (x *NNUnaryReductionNode) SetClipRectSource(clipRectSource metal.MTLRegion) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
+}
+
 // NNUnaryReductionNodeable is the interface implemented by [NNUnaryReductionNode], for mocking and DI.
 type NNUnaryReductionNodeable interface {
 	obj.Object
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNUnaryReductionNode
 	WithLabel(label string) *NNUnaryReductionNode
+	ClipRectSource() metal.MTLRegion
+	SetClipRectSource(clipRectSource metal.MTLRegion)
 }
 
 var _ NNUnaryReductionNodeable = (*NNUnaryReductionNode)(nil)
+
+// isNNUnaryReductionNode marks NNUnaryReductionNode — and, by embedding promotion, its
+// subclasses — as a member of the NNUnaryReductionNode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NNUnaryReductionNode) isNNUnaryReductionNode() {}
+
+var _ NNUnaryReductionNodeProvider = (*NNUnaryReductionNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNUnaryReductionNode)(nil)

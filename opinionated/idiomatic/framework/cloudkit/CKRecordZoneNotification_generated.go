@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A notification that triggers when the contents of a record zone change.
-//
 // RecordZoneNotification is an idiomatic wrapper over the Objective-C class CKRecordZoneNotification.
+//
+// It embeds [Notification], promoting that type's methods.
+//
+// A notification that triggers when the contents of a record zone change.
 type RecordZoneNotification struct {
-	objref.Handle
+	Notification
 }
 
 // RecordZoneNotificationFromID adopts an existing Objective-C object as a RecordZoneNotification
@@ -25,7 +26,8 @@ func RecordZoneNotificationFromID(id objc.ID) *RecordZoneNotification {
 	if id == 0 {
 		return nil
 	}
-	x := &RecordZoneNotification{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RecordZoneNotification{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func recordZoneNotificationAdopt(id objc.ID) *RecordZoneNotification {
 	if id == 0 {
 		return nil
 	}
-	x := &RecordZoneNotification{Handle: objref.Wrap(id)}
+	x := &RecordZoneNotification{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RecordZoneNotification) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RecordZoneNotification) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RecordZoneNotification) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRecordZoneNotification creates a new RecordZoneNotification.
@@ -64,13 +52,13 @@ func NewRecordZoneNotification() *RecordZoneNotification {
 	return recordZoneNotificationAdopt(_id)
 }
 
-// The ID of the record zone that has changes.
+// RecordZoneID the ID of the record zone that has changes.
 func (x *RecordZoneNotification) RecordZoneID() *RecordZoneID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordZoneID"))
 	return RecordZoneIDFromID(_r)
 }
 
-// The type of database for the record zone. This property's value is one of the constants that “CKDatabase/Scope“ defines.
+// DatabaseScope the type of database for the record zone. This property's value is one of the constants that “CKDatabase/Scope“ defines.
 func (x *RecordZoneNotification) DatabaseScope() DatabaseScope {
 	_r := objc.Send[DatabaseScope](objref.IDOf(x), objc.RegisterName("databaseScope"))
 	return _r
@@ -84,3 +72,5 @@ type RecordZoneNotificationable interface {
 }
 
 var _ RecordZoneNotificationable = (*RecordZoneNotification)(nil)
+
+var _ NotificationProvider = (*RecordZoneNotification)(nil)

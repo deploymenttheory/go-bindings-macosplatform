@@ -23,7 +23,8 @@ func DecodedMessageBannerFromID(id objc.ID) *DecodedMessageBanner {
 	if id == 0 {
 		return nil
 	}
-	x := &DecodedMessageBanner{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DecodedMessageBanner{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func decodedMessageBannerAdopt(id objc.ID) *DecodedMessageBanner {
 	if id == 0 {
 		return nil
 	}
-	x := &DecodedMessageBanner{Handle: objref.Wrap(id)}
+	x := &DecodedMessageBanner{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *DecodedMessageBanner) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DecodedMessageBanner) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDecodedMessageBannerWithTitlePrimaryActionTitleDismissable creates a new DecodedMessageBanner.
 func NewDecodedMessageBannerWithTitlePrimaryActionTitleDismissable(title string, primaryActionTitle string, dismissable bool) *DecodedMessageBanner {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MEDecodedMessageBanner")), objc.RegisterName("alloc"))
@@ -63,6 +71,7 @@ func NewDecodedMessageBannerWithTitlePrimaryActionTitleDismissable(title string,
 	return decodedMessageBannerAdopt(_id)
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *DecodedMessageBanner) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -71,6 +80,7 @@ func (x *DecodedMessageBanner) Title() string {
 	return purego.GoString(_r)
 }
 
+// PrimaryActionTitle wraps the corresponding Objective-C method.
 func (x *DecodedMessageBanner) PrimaryActionTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryActionTitle"))
 	if _r == 0 {
@@ -79,6 +89,7 @@ func (x *DecodedMessageBanner) PrimaryActionTitle() string {
 	return purego.GoString(_r)
 }
 
+// IsDismissable wraps the corresponding Objective-C method.
 func (x *DecodedMessageBanner) IsDismissable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDismissable"))
 	return _r

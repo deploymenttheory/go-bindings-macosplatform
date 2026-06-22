@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that supports Cocoa’s reference-counted memory management system.
-//
 // AutoreleasePool is an idiomatic wrapper over the Objective-C class NSAutoreleasePool.
+//
+// An object that supports Cocoa’s reference-counted memory management system.
 type AutoreleasePool struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AutoreleasePoolFromID(id objc.ID) *AutoreleasePool {
 	if id == 0 {
 		return nil
 	}
-	x := &AutoreleasePool{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AutoreleasePool{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func autoreleasePoolAdopt(id objc.ID) *AutoreleasePool {
 	if id == 0 {
 		return nil
 	}
-	x := &AutoreleasePool{Handle: objref.Wrap(id)}
+	x := &AutoreleasePool{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +60,30 @@ func (x *AutoreleasePool) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AutoreleasePool) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAutoreleasePool creates a new AutoreleasePool.
 func NewAutoreleasePool() *AutoreleasePool {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSAutoreleasePool")), objc.RegisterName("new"))
 	return autoreleasePoolAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *AutoreleasePool) WithScriptingProperties(scriptingProperties obj.Object) *AutoreleasePool {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Adds a given object to the receiver
+// AddObject adds a given object to the receiver
 func (x *AutoreleasePool) AddObject(anObject obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObject:"), objref.IDOf(anObject))
 }
 
-// In a reference-counted environment, releases and pops the receiver; in a garbage-collected environment, triggers garbage collection if the memory allocated since the last collection is greater than the current threshold.
+// Drain in a reference-counted environment, releases and pops the receiver; in a garbage-collected environment, triggers garbage collection if the memory allocated since the last collection is greater than the current threshold.
 func (x *AutoreleasePool) Drain() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drain"))
 }

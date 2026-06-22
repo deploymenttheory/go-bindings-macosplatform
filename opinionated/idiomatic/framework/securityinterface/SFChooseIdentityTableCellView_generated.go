@@ -23,7 +23,8 @@ func ChooseIdentityTableCellViewFromID(id objc.ID) *ChooseIdentityTableCellView 
 	if id == 0 {
 		return nil
 	}
-	x := &ChooseIdentityTableCellView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ChooseIdentityTableCellView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func chooseIdentityTableCellViewAdopt(id objc.ID) *ChooseIdentityTableCellView {
 	if id == 0 {
 		return nil
 	}
-	x := &ChooseIdentityTableCellView{Handle: objref.Wrap(id)}
+	x := &ChooseIdentityTableCellView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *ChooseIdentityTableCellView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ChooseIdentityTableCellView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewChooseIdentityTableCellView creates a new ChooseIdentityTableCellView.
 func NewChooseIdentityTableCellView() *ChooseIdentityTableCellView {
 	_id := objc.Send[objc.ID](objc.ID(_class("SFChooseIdentityTableCellView")), objc.RegisterName("new"))
 	return chooseIdentityTableCellViewAdopt(_id)
 }
 
-// WithIssuerTextField sets issuerTextField and returns the receiver so calls can be chained.
+// WithIssuerTextField sets the property and returns the receiver so calls can be chained.
 func (x *ChooseIdentityTableCellView) WithIssuerTextField(issuerTextField obj.Object) *ChooseIdentityTableCellView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIssuerTextField:"), objref.IDOf(issuerTextField))
 	return x
 }
 
+// IssuerTextField wraps the corresponding Objective-C method.
 func (x *ChooseIdentityTableCellView) IssuerTextField() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issuerTextField"))
 	return obj.Wrap(_r)
 }
 
+// SetIssuerTextField wraps the corresponding Objective-C method.
 func (x *ChooseIdentityTableCellView) SetIssuerTextField(issuerTextField obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIssuerTextField:"), objref.IDOf(issuerTextField))
 }

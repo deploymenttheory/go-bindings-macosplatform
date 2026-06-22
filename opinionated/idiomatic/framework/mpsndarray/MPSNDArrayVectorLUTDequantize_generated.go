@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ArrayVectorLUTDequantize is an idiomatic wrapper over the Objective-C class MPSNDArrayVectorLUTDequantize.
+//
+// It embeds [ArrayMultiaryKernel], promoting that type's methods.
 type ArrayVectorLUTDequantize struct {
-	objref.Handle
+	ArrayMultiaryKernel
 }
 
 // ArrayVectorLUTDequantizeFromID adopts an existing Objective-C object as a ArrayVectorLUTDequantize
@@ -23,7 +24,8 @@ func ArrayVectorLUTDequantizeFromID(id objc.ID) *ArrayVectorLUTDequantize {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayVectorLUTDequantize{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ArrayVectorLUTDequantize{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func arrayVectorLUTDequantizeAdopt(id objc.ID) *ArrayVectorLUTDequantize {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayVectorLUTDequantize{Handle: objref.Wrap(id)}
+	x := &ArrayVectorLUTDequantize{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ArrayVectorLUTDequantize) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ArrayVectorLUTDequantize) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ArrayVectorLUTDequantize) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewArrayVectorLUTDequantize creates a new ArrayVectorLUTDequantize.
@@ -62,20 +50,19 @@ func NewArrayVectorLUTDequantize() *ArrayVectorLUTDequantize {
 	return arrayVectorLUTDequantizeAdopt(_id)
 }
 
-// Which axis in the destination will receive the vector component, must be less than 4.
-//
-// WithVectorAxis sets vectorAxis and returns the receiver so calls can be chained.
+// WithVectorAxis which axis in the destination will receive the vector component, must be less than 4.
 func (x *ArrayVectorLUTDequantize) WithVectorAxis(vectorAxis int) *ArrayVectorLUTDequantize {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVectorAxis:"), vectorAxis)
 	return x
 }
 
-// Which axis in the destination will receive the vector component, must be less than 4.
+// VectorAxis which axis in the destination will receive the vector component, must be less than 4.
 func (x *ArrayVectorLUTDequantize) VectorAxis() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vectorAxis"))
 	return _r
 }
 
+// SetVectorAxis wraps the corresponding Objective-C method.
 func (x *ArrayVectorLUTDequantize) SetVectorAxis(vectorAxis int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVectorAxis:"), vectorAxis)
 }
@@ -89,3 +76,7 @@ type ArrayVectorLUTDequantizeable interface {
 }
 
 var _ ArrayVectorLUTDequantizeable = (*ArrayVectorLUTDequantize)(nil)
+
+var _ ArrayMultiaryKernelProvider = (*ArrayVectorLUTDequantize)(nil)
+
+var _ ArrayMultiaryBaseProvider = (*ArrayVectorLUTDequantize)(nil)

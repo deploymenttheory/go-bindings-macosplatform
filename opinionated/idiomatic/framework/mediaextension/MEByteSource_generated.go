@@ -15,9 +15,9 @@ import (
 	"unsafe"
 )
 
-// Provides read access to the data in a media asset file.
-//
 // ByteSource is an idiomatic wrapper over the Objective-C class MEByteSource.
+//
+// Provides read access to the data in a media asset file.
 type ByteSource struct {
 	objref.Handle
 }
@@ -28,7 +28,8 @@ func ByteSourceFromID(id objc.ID) *ByteSource {
 	if id == 0 {
 		return nil
 	}
-	x := &ByteSource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ByteSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -41,7 +42,8 @@ func byteSourceAdopt(id objc.ID) *ByteSource {
 	if id == 0 {
 		return nil
 	}
-	x := &ByteSource{Handle: objref.Wrap(id)}
+	x := &ByteSource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -61,16 +63,22 @@ func (x *ByteSource) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ByteSource) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewByteSource creates a new ByteSource.
 func NewByteSource() *ByteSource {
 	_id := objc.Send[objc.ID](objc.ID(_class("MEByteSource")), objc.RegisterName("new"))
 	return byteSourceAdopt(_id)
 }
 
-// Reads bytes from a byte source into a data object.
+// ReadDataOfLengthFromOffset reads bytes from a byte source into a data object.
 //
 // ReadDataOfLengthFromOffset blocks until the operation completes or ctx is cancelled.
-func (x *ByteSource) ReadDataOfLengthFromOffset(ctx context.Context, length int, offset int64) (obj.Object, error) {
+func (x *ByteSource) ReadDataOfLengthFromOffset(ctx context.Context, length int, offset int64) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -92,14 +100,14 @@ func (x *ByteSource) ReadDataOfLengthFromOffset(ctx context.Context, length int,
 	}
 }
 
-// Gets the number of available bytes from the offset within the byte source.
+// AvailableLengthAtOffset gets the number of available bytes from the offset within the byte source.
 func (x *ByteSource) AvailableLengthAtOffset(offset int64) int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("availableLengthAtOffset:"), offset)
 	return _r
 }
 
-// Creates a new byte source for a related file.
-func (x *ByteSource) ByteSourceForRelatedFileNameError(fileName string) (*ByteSource, error) {
+// ByteSourceForRelatedFileNameError creates a new byte source for a related file.
+func (x *ByteSource) ByteSourceForRelatedFileNameError(fileName string) (result *ByteSource, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("byteSourceForRelatedFileName:error:"), purego.NSString(fileName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -108,7 +116,7 @@ func (x *ByteSource) ByteSourceForRelatedFileNameError(fileName string) (*ByteSo
 	return ByteSourceFromID(_r), nil
 }
 
-// The name of a MEByteSource's file. The name of the source file for the MEByteSource.
+// FileName the name of a MEByteSource's file. The name of the source file for the MEByteSource.
 func (x *ByteSource) FileName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileName"))
 	if _r == 0 {
@@ -117,19 +125,19 @@ func (x *ByteSource) FileName() string {
 	return purego.GoString(_r)
 }
 
-// A UTType indicating the format of the MEByteSource's file. A UTType indicating the format of the source file for the MEByteSource.
+// ContentType a UTType indicating the format of the MEByteSource's file. A UTType indicating the format of the source file for the MEByteSource.
 func (x *ByteSource) ContentType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
 	return obj.Wrap(_r)
 }
 
-// The length of the MEByteSource's file. The length in bytes of the source file for the MEByteSource, or 0 if that information is not available.
+// FileLength the length of the MEByteSource's file. The length in bytes of the source file for the MEByteSource, or 0 if that information is not available.
 func (x *ByteSource) FileLength() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("fileLength"))
 	return _r
 }
 
-// The array of related file names in the MEByteSource's parent directory. The array of related files within the MEByteSource's parent directory that are accessible to the MEByteSource. Only the relative file names are returned, not the paths. If no related files are available, returns an empty array.
+// RelatedFileNamesInSameDirectory the array of related file names in the MEByteSource's parent directory. The array of related files within the MEByteSource's parent directory that are accessible to the MEByteSource. Only the relative file names are returned, not the paths. If no related files are available, returns an empty array.
 //
 // RelatedFileNamesInSameDirectory returns the collection as a Go slice.
 func (x *ByteSource) RelatedFileNamesInSameDirectory() []string {
@@ -142,7 +150,7 @@ type ByteSourceable interface {
 	obj.Object
 	ReadDataOfLengthFromOffset(ctx context.Context, length int, offset int64) (obj.Object, error)
 	AvailableLengthAtOffset(offset int64) int64
-	ByteSourceForRelatedFileNameError(fileName string) (*ByteSource, error)
+	ByteSourceForRelatedFileNameError(fileName string) (result *ByteSource, err error)
 	FileName() string
 	ContentType() obj.Object
 	FileLength() int64

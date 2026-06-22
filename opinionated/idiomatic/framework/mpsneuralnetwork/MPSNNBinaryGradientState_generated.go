@@ -13,6 +13,8 @@ import (
 )
 
 // NNBinaryGradientState is an idiomatic wrapper over the Objective-C class MPSNNBinaryGradientState.
+//
+// NNBinaryGradientState is an abstract base — you do not construct it directly. Construct one of [CNNArithmeticGradientState] and pass it where a NNBinaryGradientState is accepted.
 type NNBinaryGradientState struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func NNBinaryGradientStateFromID(id objc.ID) *NNBinaryGradientState {
 	if id == 0 {
 		return nil
 	}
-	x := &NNBinaryGradientState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNBinaryGradientState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func nNBinaryGradientStateAdopt(id objc.ID) *NNBinaryGradientState {
 	if id == 0 {
 		return nil
 	}
-	x := &NNBinaryGradientState{Handle: objref.Wrap(id)}
+	x := &NNBinaryGradientState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,10 +60,10 @@ func (x *NNBinaryGradientState) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewNNBinaryGradientState creates a new NNBinaryGradientState.
-func NewNNBinaryGradientState() *NNBinaryGradientState {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNBinaryGradientState")), objc.RegisterName("new"))
-	return nNBinaryGradientStateAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NNBinaryGradientState) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NNBinaryGradientStateable is the interface implemented by [NNBinaryGradientState], for mocking and DI.
@@ -68,3 +72,10 @@ type NNBinaryGradientStateable interface {
 }
 
 var _ NNBinaryGradientStateable = (*NNBinaryGradientState)(nil)
+
+// isNNBinaryGradientState marks NNBinaryGradientState — and, by embedding promotion, its
+// subclasses — as a member of the NNBinaryGradientState hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NNBinaryGradientState) isNNBinaryGradientState() {}
+
+var _ NNBinaryGradientStateProvider = (*NNBinaryGradientState)(nil)

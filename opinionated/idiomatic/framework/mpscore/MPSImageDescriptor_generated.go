@@ -23,7 +23,8 @@ func ImageDescriptorFromID(id objc.ID) *ImageDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func imageDescriptorAdopt(id objc.ID) *ImageDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageDescriptor{Handle: objref.Wrap(id)}
+	x := &ImageDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,98 +58,99 @@ func (x *ImageDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ImageDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewImageDescriptor creates a new ImageDescriptor.
 func NewImageDescriptor() *ImageDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageDescriptor")), objc.RegisterName("new"))
 	return imageDescriptorAdopt(_id)
 }
 
-// The width of the CNN image. The formal width of the CNN image in pixels.  Default = 1.
-//
-// WithWidth sets width and returns the receiver so calls can be chained.
+// WithWidth the width of the CNN image. The formal width of the CNN image in pixels.  Default = 1.
 func (x *ImageDescriptor) WithWidth(width int) *ImageDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
 	return x
 }
 
-// The height of the CNN image. The formal height of the CNN image in pixels. Default = 1.
-//
-// WithHeight sets height and returns the receiver so calls can be chained.
+// WithHeight the height of the CNN image. The formal height of the CNN image in pixels. Default = 1.
 func (x *ImageDescriptor) WithHeight(height int) *ImageDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 	return x
 }
 
-// The number of feature channels per pixel.  Default = 1.
-//
-// WithFeatureChannels sets featureChannels and returns the receiver so calls can be chained.
+// WithFeatureChannels the number of feature channels per pixel.  Default = 1.
 func (x *ImageDescriptor) WithFeatureChannels(featureChannels int) *ImageDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFeatureChannels:"), featureChannels)
 	return x
 }
 
-// The number of images for batch processing.   Default = 1.
-//
-// WithNumberOfImages sets numberOfImages and returns the receiver so calls can be chained.
+// WithNumberOfImages the number of images for batch processing.   Default = 1.
 func (x *ImageDescriptor) WithNumberOfImages(numberOfImages int) *ImageDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfImages:"), numberOfImages)
 	return x
 }
 
-// The storage format to use for each channel in the image.
-//
-// WithChannelFormat sets channelFormat and returns the receiver so calls can be chained.
+// WithChannelFormat the storage format to use for each channel in the image.
 func (x *ImageDescriptor) WithChannelFormat(channelFormat ImageFeatureChannelFormat) *ImageDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannelFormat:"), channelFormat)
 	return x
 }
 
-// The width of the CNN image. The formal width of the CNN image in pixels.  Default = 1.
+// Width the width of the CNN image. The formal width of the CNN image in pixels.  Default = 1.
 func (x *ImageDescriptor) Width() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("width"))
 	return _r
 }
 
+// SetWidth wraps the corresponding Objective-C method.
 func (x *ImageDescriptor) SetWidth(width int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
 }
 
-// The height of the CNN image. The formal height of the CNN image in pixels. Default = 1.
+// Height the height of the CNN image. The formal height of the CNN image in pixels. Default = 1.
 func (x *ImageDescriptor) Height() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("height"))
 	return _r
 }
 
+// SetHeight wraps the corresponding Objective-C method.
 func (x *ImageDescriptor) SetHeight(height int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 }
 
-// The number of feature channels per pixel.  Default = 1.
+// FeatureChannels the number of feature channels per pixel.  Default = 1.
 func (x *ImageDescriptor) FeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("featureChannels"))
 	return _r
 }
 
+// SetFeatureChannels wraps the corresponding Objective-C method.
 func (x *ImageDescriptor) SetFeatureChannels(featureChannels int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFeatureChannels:"), featureChannels)
 }
 
-// The number of images for batch processing.   Default = 1.
+// NumberOfImages the number of images for batch processing.   Default = 1.
 func (x *ImageDescriptor) NumberOfImages() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfImages"))
 	return _r
 }
 
+// SetNumberOfImages wraps the corresponding Objective-C method.
 func (x *ImageDescriptor) SetNumberOfImages(numberOfImages int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfImages:"), numberOfImages)
 }
 
-// The storage format to use for each channel in the image.
+// ChannelFormat the storage format to use for each channel in the image.
 func (x *ImageDescriptor) ChannelFormat() ImageFeatureChannelFormat {
 	_r := objc.Send[ImageFeatureChannelFormat](objref.IDOf(x), objc.RegisterName("channelFormat"))
 	return _r
 }
 
+// SetChannelFormat wraps the corresponding Objective-C method.
 func (x *ImageDescriptor) SetChannelFormat(channelFormat ImageFeatureChannelFormat) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannelFormat:"), channelFormat)
 }

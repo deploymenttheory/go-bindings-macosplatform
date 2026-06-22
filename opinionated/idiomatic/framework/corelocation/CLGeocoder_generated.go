@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An interface for converting between geographic coordinates and place names.
-//
 // Geocoder is an idiomatic wrapper over the Objective-C class CLGeocoder.
+//
+// An interface for converting between geographic coordinates and place names.
 type Geocoder struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func GeocoderFromID(id objc.ID) *Geocoder {
 	if id == 0 {
 		return nil
 	}
-	x := &Geocoder{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Geocoder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func geocoderAdopt(id objc.ID) *Geocoder {
 	if id == 0 {
 		return nil
 	}
-	x := &Geocoder{Handle: objref.Wrap(id)}
+	x := &Geocoder{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,24 @@ func (x *Geocoder) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Geocoder) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewGeocoder creates a new Geocoder.
 func NewGeocoder() *Geocoder {
 	_id := objc.Send[objc.ID](objc.ID(_class("CLGeocoder")), objc.RegisterName("new"))
 	return geocoderAdopt(_id)
 }
 
-// Cancels a pending geocoding request.
+// CancelGeocode cancels a pending geocoding request.
 func (x *Geocoder) CancelGeocode() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelGeocode"))
 }
 
+// IsGeocoding wraps the corresponding Objective-C method.
 func (x *Geocoder) IsGeocoding() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isGeocoding"))
 	return _r

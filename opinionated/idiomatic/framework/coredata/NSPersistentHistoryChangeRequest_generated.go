@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request to fetch or purge persistent history.
-//
 // PersistentHistoryChangeRequest is an idiomatic wrapper over the Objective-C class NSPersistentHistoryChangeRequest.
+//
+// It embeds [PersistentStoreRequest], promoting that type's methods.
+//
+// A request to fetch or purge persistent history.
 type PersistentHistoryChangeRequest struct {
-	objref.Handle
+	PersistentStoreRequest
 }
 
 // PersistentHistoryChangeRequestFromID adopts an existing Objective-C object as a PersistentHistoryChangeRequest
@@ -25,7 +26,8 @@ func PersistentHistoryChangeRequestFromID(id objc.ID) *PersistentHistoryChangeRe
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentHistoryChangeRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PersistentHistoryChangeRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func persistentHistoryChangeRequestAdopt(id objc.ID) *PersistentHistoryChangeReq
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentHistoryChangeRequest{Handle: objref.Wrap(id)}
+	x := &PersistentHistoryChangeRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PersistentHistoryChangeRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PersistentHistoryChangeRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PersistentHistoryChangeRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPersistentHistoryChangeRequest creates a new PersistentHistoryChangeRequest.
@@ -64,50 +52,49 @@ func NewPersistentHistoryChangeRequest() *PersistentHistoryChangeRequest {
 	return persistentHistoryChangeRequestAdopt(_id)
 }
 
-// The type of result that this request returns.
-//
-// WithResultType sets resultType and returns the receiver so calls can be chained.
+// WithResultType the type of result that this request returns.
 func (x *PersistentHistoryChangeRequest) WithResultType(resultType PersistentHistoryResultType) *PersistentHistoryChangeRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
 	return x
 }
 
-// The specified fetch request, when retrieving history.
-//
-// WithFetchRequest sets fetchRequest and returns the receiver so calls can be chained.
+// WithFetchRequest the specified fetch request, when retrieving history.
 func (x *PersistentHistoryChangeRequest) WithFetchRequest(fetchRequest obj.Object) *PersistentHistoryChangeRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchRequest:"), objref.IDOf(fetchRequest))
 	return x
 }
 
-// The stores the request should be sent to.
-//
-// WithAffectedStores sets the collection and returns the receiver so calls can be chained.
+// WithAffectedStores the stores the request should be sent to.
 func (x *PersistentHistoryChangeRequest) WithAffectedStores(items ...PersistentStoreProvider) *PersistentHistoryChangeRequest {
 	_arr := purego.SliceToNSArray(items, func(_v PersistentStoreProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), _arr)
 	return x
 }
 
+// ResultType wraps the corresponding Objective-C method.
 func (x *PersistentHistoryChangeRequest) ResultType() PersistentHistoryResultType {
 	_r := objc.Send[PersistentHistoryResultType](objref.IDOf(x), objc.RegisterName("resultType"))
 	return _r
 }
 
+// SetResultType wraps the corresponding Objective-C method.
 func (x *PersistentHistoryChangeRequest) SetResultType(resultType PersistentHistoryResultType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
 }
 
+// Token wraps the corresponding Objective-C method.
 func (x *PersistentHistoryChangeRequest) Token() *PersistentHistoryToken {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("token"))
 	return PersistentHistoryTokenFromID(_r)
 }
 
+// FetchRequest wraps the corresponding Objective-C method.
 func (x *PersistentHistoryChangeRequest) FetchRequest() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)
 }
 
+// SetFetchRequest wraps the corresponding Objective-C method.
 func (x *PersistentHistoryChangeRequest) SetFetchRequest(fetchRequest obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchRequest:"), objref.IDOf(fetchRequest))
 }
@@ -126,3 +113,5 @@ type PersistentHistoryChangeRequestable interface {
 }
 
 var _ PersistentHistoryChangeRequestable = (*PersistentHistoryChangeRequest)(nil)
+
+var _ PersistentStoreRequestProvider = (*PersistentHistoryChangeRequest)(nil)

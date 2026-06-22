@@ -6,17 +6,20 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that convolves an image with a Gaussian blur of a given sigma in both the x and y directions.
-//
 // ImageGaussianBlur is an idiomatic wrapper over the Objective-C class MPSImageGaussianBlur.
+//
+// It embeds [UnaryImageKernel], promoting that type's methods.
+//
+// A filter that convolves an image with a Gaussian blur of a given sigma in both the x and y directions.
 type ImageGaussianBlur struct {
-	objref.Handle
+	UnaryImageKernel
 }
 
 // ImageGaussianBlurFromID adopts an existing Objective-C object as a ImageGaussianBlur
@@ -25,7 +28,8 @@ func ImageGaussianBlurFromID(id objc.ID) *ImageGaussianBlur {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageGaussianBlur{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageGaussianBlur{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func imageGaussianBlurAdopt(id objc.ID) *ImageGaussianBlur {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageGaussianBlur{Handle: objref.Wrap(id)}
+	x := &ImageGaussianBlur{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ImageGaussianBlur) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageGaussianBlur) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageGaussianBlur) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewImageGaussianBlur creates a new ImageGaussianBlur.
@@ -64,15 +54,25 @@ func NewImageGaussianBlur() *ImageGaussianBlur {
 	return imageGaussianBlurAdopt(_id)
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
+func (x *ImageGaussianBlur) WithOffset(offset mpscore.MPSOffset) *ImageGaussianBlur {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (x *ImageGaussianBlur) WithClipRect(clipRect metal.MTLRegion) *ImageGaussianBlur {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
+// WithLabel the string that identifies the kernel.
 func (x *ImageGaussianBlur) WithLabel(label string) *ImageGaussianBlur {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Read-only sigma value with which filter was created
+// Sigma read-only sigma value with which filter was created
 func (x *ImageGaussianBlur) Sigma() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("sigma"))
 	return _r
@@ -81,8 +81,14 @@ func (x *ImageGaussianBlur) Sigma() float32 {
 // ImageGaussianBlurable is the interface implemented by [ImageGaussianBlur], for mocking and DI.
 type ImageGaussianBlurable interface {
 	obj.Object
+	WithOffset(offset mpscore.MPSOffset) *ImageGaussianBlur
+	WithClipRect(clipRect metal.MTLRegion) *ImageGaussianBlur
 	WithLabel(label string) *ImageGaussianBlur
 	Sigma() float32
 }
 
 var _ ImageGaussianBlurable = (*ImageGaussianBlur)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageGaussianBlur)(nil)
+
+var _ KernelProvider = (*ImageGaussianBlur)(nil)

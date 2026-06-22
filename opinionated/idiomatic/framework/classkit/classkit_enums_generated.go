@@ -22,6 +22,8 @@ const (
 	BinaryValueTypeCorrectIncorrect BinaryValueType = 3
 )
 
+// String returns the BinaryValueType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BinaryValueType) String() string {
 	switch e {
 	case BinaryValueTypeTrueFalse:
@@ -79,6 +81,8 @@ const (
 	ContextTypeCustom ContextType = 17
 )
 
+// String returns the ContextType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ContextType) String() string {
 	switch e {
 	case ContextTypeNone:
@@ -139,6 +143,8 @@ const (
 	ErrorCodeInvalidAccountCredentials ErrorCode = 10
 )
 
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ErrorCode) String() string {
 	switch e {
 	case ErrorCodeNone:
@@ -179,6 +185,8 @@ const (
 	ProgressReportingCapabilityKindScore    ProgressReportingCapabilityKind = 4
 )
 
+// String returns the ProgressReportingCapabilityKind constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ProgressReportingCapabilityKind) String() string {
 	switch e {
 	case ProgressReportingCapabilityKindDuration:

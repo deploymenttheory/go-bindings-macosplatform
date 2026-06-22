@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a special condition that interrupts the normal flow of program execution.
-//
 // Exception is an idiomatic wrapper over the Objective-C class NSException.
+//
+// An object that represents a special condition that interrupts the normal flow of program execution.
 type Exception struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ExceptionFromID(id objc.ID) *Exception {
 	if id == 0 {
 		return nil
 	}
-	x := &Exception{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Exception{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func exceptionAdopt(id objc.ID) *Exception {
 	if id == 0 {
 		return nil
 	}
-	x := &Exception{Handle: objref.Wrap(id)}
+	x := &Exception{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,37 @@ func (x *Exception) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes and returns a newly allocated exception object.
-//
-// NewExceptionWithNameReasonUserInfo creates a new Exception.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Exception) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewExceptionWithNameReasonUserInfo initializes and returns a newly allocated exception object.
 func NewExceptionWithNameReasonUserInfo(aName *String, aReason string, aUserInfo obj.Object) *Exception {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSException")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:reason:userInfo:"), objref.IDOf(aName), purego.NSString(aReason), objref.IDOf(aUserInfo))
 	return exceptionAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Exception) WithScriptingProperties(scriptingProperties obj.Object) *Exception {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Raises the receiver, causing program flow to jump to the local exception handler.
+// Raise raises the receiver, causing program flow to jump to the local exception handler.
 func (x *Exception) Raise() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("raise"))
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *Exception) Name() *String {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	return StringFromID(_r)
 }
 
+// Reason wraps the corresponding Objective-C method.
 func (x *Exception) Reason() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reason"))
 	if _r == 0 {
@@ -91,17 +99,22 @@ func (x *Exception) Reason() string {
 	return purego.GoString(_r)
 }
 
+// UserInfo wraps the corresponding Objective-C method.
 func (x *Exception) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
+// CallStackReturnAddresses wraps the corresponding Objective-C method.
+//
 // CallStackReturnAddresses returns the collection as a Go slice.
 func (x *Exception) CallStackReturnAddresses() []*Number {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callStackReturnAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Number { return NumberFromID(_id) })
 }
 
+// CallStackSymbols wraps the corresponding Objective-C method.
+//
 // CallStackSymbols returns the collection as a Go slice.
 func (x *Exception) CallStackSymbols() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callStackSymbols"))

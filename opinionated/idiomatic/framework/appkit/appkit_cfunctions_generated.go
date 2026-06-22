@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -25,6 +26,28 @@ func NSAccessibilityActionDescription(action obj.Object) string {
 		return ""
 	}
 	return purego.GoString(_ret)
+}
+
+var _fnNSAccessibilityFrameInView func(objc.ID, corefoundation.CGRect) corefoundation.CGRect
+
+// NSAccessibilityFrameInView calls the AppKit framework function NSAccessibilityFrameInView.
+func NSAccessibilityFrameInView(parentView *View, frame corefoundation.CGRect) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSAccessibilityFrameInView == nil {
+		ebipurego.RegisterLibFunc(&_fnNSAccessibilityFrameInView, _lib, "NSAccessibilityFrameInView")
+	}
+	return _fnNSAccessibilityFrameInView(objref.IDOf(parentView), frame)
+}
+
+var _fnNSAccessibilityPointInView func(objc.ID, corefoundation.CGPoint) corefoundation.CGPoint
+
+// NSAccessibilityPointInView calls the AppKit framework function NSAccessibilityPointInView.
+func NSAccessibilityPointInView(parentView *View, point corefoundation.CGPoint) corefoundation.CGPoint {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSAccessibilityPointInView == nil {
+		ebipurego.RegisterLibFunc(&_fnNSAccessibilityPointInView, _lib, "NSAccessibilityPointInView")
+	}
+	return _fnNSAccessibilityPointInView(objref.IDOf(parentView), point)
 }
 
 var _fnNSAccessibilityPostNotification func(objc.ID, objc.ID)
@@ -216,6 +239,17 @@ func NSColorSpaceFromDepth(depth WindowDepth) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnNSCopyBits func(int, corefoundation.CGRect, corefoundation.CGPoint)
+
+// NSCopyBits calls the AppKit framework function NSCopyBits.
+func NSCopyBits(srcGState int, srcRect corefoundation.CGRect, destPoint corefoundation.CGPoint) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSCopyBits == nil {
+		ebipurego.RegisterLibFunc(&_fnNSCopyBits, _lib, "NSCopyBits")
+	}
+	_fnNSCopyBits(srcGState, srcRect, destPoint)
+}
+
 var _fnNSCreateFileContentsPboardType func(objc.ID) objc.ID
 
 // NSCreateFileContentsPboardType calls the AppKit framework function NSCreateFileContentsPboardType.
@@ -251,6 +285,116 @@ func NSDisableScreenUpdates() {
 	_fnNSDisableScreenUpdates()
 }
 
+var _fnNSDottedFrameRect func(corefoundation.CGRect)
+
+// NSDottedFrameRect calls the AppKit framework function NSDottedFrameRect.
+func NSDottedFrameRect(rect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDottedFrameRect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDottedFrameRect, _lib, "NSDottedFrameRect")
+	}
+	_fnNSDottedFrameRect(rect)
+}
+
+var _fnNSDrawButton func(corefoundation.CGRect, corefoundation.CGRect)
+
+// NSDrawButton calls the AppKit framework function NSDrawButton.
+func NSDrawButton(rect corefoundation.CGRect, clipRect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDrawButton == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDrawButton, _lib, "NSDrawButton")
+	}
+	_fnNSDrawButton(rect, clipRect)
+}
+
+var _fnNSDrawDarkBezel func(corefoundation.CGRect, corefoundation.CGRect)
+
+// NSDrawDarkBezel calls the AppKit framework function NSDrawDarkBezel.
+func NSDrawDarkBezel(rect corefoundation.CGRect, clipRect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDrawDarkBezel == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDrawDarkBezel, _lib, "NSDrawDarkBezel")
+	}
+	_fnNSDrawDarkBezel(rect, clipRect)
+}
+
+var _fnNSDrawGrayBezel func(corefoundation.CGRect, corefoundation.CGRect)
+
+// NSDrawGrayBezel calls the AppKit framework function NSDrawGrayBezel.
+func NSDrawGrayBezel(rect corefoundation.CGRect, clipRect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDrawGrayBezel == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDrawGrayBezel, _lib, "NSDrawGrayBezel")
+	}
+	_fnNSDrawGrayBezel(rect, clipRect)
+}
+
+var _fnNSDrawGroove func(corefoundation.CGRect, corefoundation.CGRect)
+
+// NSDrawGroove calls the AppKit framework function NSDrawGroove.
+func NSDrawGroove(rect corefoundation.CGRect, clipRect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDrawGroove == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDrawGroove, _lib, "NSDrawGroove")
+	}
+	_fnNSDrawGroove(rect, clipRect)
+}
+
+var _fnNSDrawLightBezel func(corefoundation.CGRect, corefoundation.CGRect)
+
+// NSDrawLightBezel calls the AppKit framework function NSDrawLightBezel.
+func NSDrawLightBezel(rect corefoundation.CGRect, clipRect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDrawLightBezel == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDrawLightBezel, _lib, "NSDrawLightBezel")
+	}
+	_fnNSDrawLightBezel(rect, clipRect)
+}
+
+var _fnNSDrawNinePartImage func(corefoundation.CGRect, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, CompositingOperation, float64, bool)
+
+// NSDrawNinePartImage calls the AppKit framework function NSDrawNinePartImage.
+func NSDrawNinePartImage(frame corefoundation.CGRect, topLeftCorner *Image, topEdgeFill *Image, topRightCorner *Image, leftEdgeFill *Image, centerFill *Image, rightEdgeFill *Image, bottomLeftCorner *Image, bottomEdgeFill *Image, bottomRightCorner *Image, op CompositingOperation, alphaFraction float64, flipped bool) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDrawNinePartImage == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDrawNinePartImage, _lib, "NSDrawNinePartImage")
+	}
+	_fnNSDrawNinePartImage(frame, objref.IDOf(topLeftCorner), objref.IDOf(topEdgeFill), objref.IDOf(topRightCorner), objref.IDOf(leftEdgeFill), objref.IDOf(centerFill), objref.IDOf(rightEdgeFill), objref.IDOf(bottomLeftCorner), objref.IDOf(bottomEdgeFill), objref.IDOf(bottomRightCorner), op, alphaFraction, flipped)
+}
+
+var _fnNSDrawThreePartImage func(corefoundation.CGRect, objc.ID, objc.ID, objc.ID, bool, CompositingOperation, float64, bool)
+
+// NSDrawThreePartImage calls the AppKit framework function NSDrawThreePartImage.
+func NSDrawThreePartImage(frame corefoundation.CGRect, startCap *Image, centerFill *Image, endCap *Image, vertical bool, op CompositingOperation, alphaFraction float64, flipped bool) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDrawThreePartImage == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDrawThreePartImage, _lib, "NSDrawThreePartImage")
+	}
+	_fnNSDrawThreePartImage(frame, objref.IDOf(startCap), objref.IDOf(centerFill), objref.IDOf(endCap), vertical, op, alphaFraction, flipped)
+}
+
+var _fnNSDrawWhiteBezel func(corefoundation.CGRect, corefoundation.CGRect)
+
+// NSDrawWhiteBezel calls the AppKit framework function NSDrawWhiteBezel.
+func NSDrawWhiteBezel(rect corefoundation.CGRect, clipRect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDrawWhiteBezel == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDrawWhiteBezel, _lib, "NSDrawWhiteBezel")
+	}
+	_fnNSDrawWhiteBezel(rect, clipRect)
+}
+
+var _fnNSDrawWindowBackground func(corefoundation.CGRect)
+
+// NSDrawWindowBackground calls the AppKit framework function NSDrawWindowBackground.
+func NSDrawWindowBackground(rect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDrawWindowBackground == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDrawWindowBackground, _lib, "NSDrawWindowBackground")
+	}
+	_fnNSDrawWindowBackground(rect)
+}
+
 var _fnNSEnableScreenUpdates func()
 
 // NSEnableScreenUpdates calls the AppKit framework function NSEnableScreenUpdates.
@@ -262,6 +406,17 @@ func NSEnableScreenUpdates() {
 	_fnNSEnableScreenUpdates()
 }
 
+var _fnNSEraseRect func(corefoundation.CGRect)
+
+// NSEraseRect calls the AppKit framework function NSEraseRect.
+func NSEraseRect(rect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSEraseRect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSEraseRect, _lib, "NSEraseRect")
+	}
+	_fnNSEraseRect(rect)
+}
+
 var _fnNSEventMaskFromType func(EventType) EventMask
 
 // NSEventMaskFromType calls the AppKit framework function NSEventMaskFromType.
@@ -271,6 +426,39 @@ func NSEventMaskFromType(type_ EventType) EventMask {
 		ebipurego.RegisterLibFunc(&_fnNSEventMaskFromType, _lib, "NSEventMaskFromType")
 	}
 	return _fnNSEventMaskFromType(type_)
+}
+
+var _fnNSFrameRect func(corefoundation.CGRect)
+
+// NSFrameRect calls the AppKit framework function NSFrameRect.
+func NSFrameRect(rect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSFrameRect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSFrameRect, _lib, "NSFrameRect")
+	}
+	_fnNSFrameRect(rect)
+}
+
+var _fnNSFrameRectWithWidth func(corefoundation.CGRect, float64)
+
+// NSFrameRectWithWidth calls the AppKit framework function NSFrameRectWithWidth.
+func NSFrameRectWithWidth(rect corefoundation.CGRect, frameWidth float64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSFrameRectWithWidth == nil {
+		ebipurego.RegisterLibFunc(&_fnNSFrameRectWithWidth, _lib, "NSFrameRectWithWidth")
+	}
+	_fnNSFrameRectWithWidth(rect, frameWidth)
+}
+
+var _fnNSFrameRectWithWidthUsingOperation func(corefoundation.CGRect, float64, CompositingOperation)
+
+// NSFrameRectWithWidthUsingOperation calls the AppKit framework function NSFrameRectWithWidthUsingOperation.
+func NSFrameRectWithWidthUsingOperation(rect corefoundation.CGRect, frameWidth float64, op CompositingOperation) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSFrameRectWithWidthUsingOperation == nil {
+		ebipurego.RegisterLibFunc(&_fnNSFrameRectWithWidthUsingOperation, _lib, "NSFrameRectWithWidthUsingOperation")
+	}
+	_fnNSFrameRectWithWidthUsingOperation(rect, frameWidth, op)
 }
 
 var _fnNSGetFileType func(objc.ID) objc.ID
@@ -310,6 +498,17 @@ func NSGetInformationalAlertPanel(title string, msgFormat string, defaultButton 
 	}
 	_ret := _fnNSGetInformationalAlertPanel(purego.NSString(title), purego.NSString(msgFormat), purego.NSString(defaultButton), purego.NSString(alternateButton), purego.NSString(otherButton))
 	return obj.Wrap(_ret)
+}
+
+var _fnNSHighlightRect func(corefoundation.CGRect)
+
+// NSHighlightRect calls the AppKit framework function NSHighlightRect.
+func NSHighlightRect(rect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSHighlightRect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSHighlightRect, _lib, "NSHighlightRect")
+	}
+	_fnNSHighlightRect(rect)
 }
 
 var _fnNSInterfaceStyleForKey func(objc.ID, objc.ID) int
@@ -376,6 +575,51 @@ func NSPlanarFromDepth(depth WindowDepth) bool {
 		ebipurego.RegisterLibFunc(&_fnNSPlanarFromDepth, _lib, "NSPlanarFromDepth")
 	}
 	return _fnNSPlanarFromDepth(depth)
+}
+
+var _fnNSReadPixel func(corefoundation.CGPoint) objc.ID
+
+// NSReadPixel calls the AppKit framework function NSReadPixel.
+func NSReadPixel(passedPoint corefoundation.CGPoint) *Color {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSReadPixel == nil {
+		ebipurego.RegisterLibFunc(&_fnNSReadPixel, _lib, "NSReadPixel")
+	}
+	_ret := _fnNSReadPixel(passedPoint)
+	return ColorFromID(_ret)
+}
+
+var _fnNSRectClip func(corefoundation.CGRect)
+
+// NSRectClip calls the AppKit framework function NSRectClip.
+func NSRectClip(rect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRectClip == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRectClip, _lib, "NSRectClip")
+	}
+	_fnNSRectClip(rect)
+}
+
+var _fnNSRectFill func(corefoundation.CGRect)
+
+// NSRectFill calls the AppKit framework function NSRectFill.
+func NSRectFill(rect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRectFill == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRectFill, _lib, "NSRectFill")
+	}
+	_fnNSRectFill(rect)
+}
+
+var _fnNSRectFillUsingOperation func(corefoundation.CGRect, CompositingOperation)
+
+// NSRectFillUsingOperation calls the AppKit framework function NSRectFillUsingOperation.
+func NSRectFillUsingOperation(rect corefoundation.CGRect, op CompositingOperation) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRectFillUsingOperation == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRectFillUsingOperation, _lib, "NSRectFillUsingOperation")
+	}
+	_fnNSRectFillUsingOperation(rect, op)
 }
 
 var _fnNSRegisterServicesProvider func(objc.ID, objc.ID)

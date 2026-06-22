@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that stores the per-element weight buffer used by loss and gradient loss kernels.
-//
 // CNNLossLabels is an idiomatic wrapper over the Objective-C class MPSCNNLossLabels.
+//
+// It embeds [State], promoting that type's methods.
+//
+// A class that stores the per-element weight buffer used by loss and gradient loss kernels.
 type CNNLossLabels struct {
-	objref.Handle
+	State
 }
 
 // CNNLossLabelsFromID adopts an existing Objective-C object as a CNNLossLabels
@@ -25,7 +26,8 @@ func CNNLossLabelsFromID(id objc.ID) *CNNLossLabels {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNLossLabels{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNLossLabels{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func cNNLossLabelsAdopt(id objc.ID) *CNNLossLabels {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNLossLabels{Handle: objref.Wrap(id)}
+	x := &CNNLossLabels{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNLossLabels) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNLossLabels) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNLossLabels) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNLossLabels creates a new CNNLossLabels.
@@ -64,33 +52,31 @@ func NewCNNLossLabels() *CNNLossLabels {
 	return cNNLossLabelsAdopt(_id)
 }
 
-// WithReadCount sets readCount and returns the receiver so calls can be chained.
+// WithReadCount sets the property and returns the receiver so calls can be chained.
 func (x *CNNLossLabels) WithReadCount(readCount int) *CNNLossLabels {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNLossLabels) WithLabel(label string) *CNNLossLabels {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Loss image accessor method.
+// LossImage loss image accessor method.
 func (x *CNNLossLabels) LossImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lossImage"))
 	return obj.Wrap(_r)
 }
 
-// Labels image accessor method.
+// LabelsImage labels image accessor method.
 func (x *CNNLossLabels) LabelsImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labelsImage"))
 	return obj.Wrap(_r)
 }
 
-// Weights image accessor method.
+// WeightsImage weights image accessor method.
 func (x *CNNLossLabels) WeightsImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weightsImage"))
 	return obj.Wrap(_r)
@@ -107,3 +93,5 @@ type CNNLossLabelsable interface {
 }
 
 var _ CNNLossLabelsable = (*CNNLossLabels)(nil)
+
+var _ StateProvider = (*CNNLossLabels)(nil)

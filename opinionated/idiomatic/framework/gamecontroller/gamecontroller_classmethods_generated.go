@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns the connected controllers for the device.
+// Controllers returns the connected controllers for the device.
 //
 // Controllers returns the collection as a Go slice.
 func Controllers() []*Controller {
@@ -19,35 +19,36 @@ func Controllers() []*Controller {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Controller { return ControllerFromID(_id) })
 }
 
-// The most recently used game controller. If a user actuates a game controller input, that controller will become the current one.
+// Current the most recently used game controller. If a user actuates a game controller input, that controller will become the current one.
 func Current() *Controller {
 	_r := objc.Send[objc.ID](objc.ID(_class("GCController")), objc.RegisterName("current"))
 	return ControllerFromID(_r)
 }
 
-// Whether the current application should monitor and respond to game controller events when it is not the frontmost application.
+// ShouldMonitorBackgroundEvents whether the current application should monitor and respond to game controller events when it is not the frontmost application.
 func ShouldMonitorBackgroundEvents() bool {
 	_r := objc.Send[bool](objc.ID(_class("GCController")), objc.RegisterName("shouldMonitorBackgroundEvents"))
 	return _r
 }
 
+// SetShouldMonitorBackgroundEvents wraps the corresponding Objective-C method.
 func SetShouldMonitorBackgroundEvents(shouldMonitorBackgroundEvents bool) {
 	objc.Send[objc.ID](objc.ID(_class("GCController")), objc.RegisterName("setShouldMonitorBackgroundEvents:"), shouldMonitorBackgroundEvents)
 }
 
-// Returns a snapshot of a newly created controller with a micro gamepad profile.
+// ControllerWithMicroGamepad returns a snapshot of a newly created controller with a micro gamepad profile.
 func ControllerWithMicroGamepad() *Controller {
 	_r := objc.Send[objc.ID](objc.ID(_class("GCController")), objc.RegisterName("controllerWithMicroGamepad"))
 	return ControllerFromID(_r)
 }
 
-// Returns a snapshot of a newly created controller with an extended gamepad profile.
+// ControllerWithExtendedGamepad returns a snapshot of a newly created controller with an extended gamepad profile.
 func ControllerWithExtendedGamepad() *Controller {
 	_r := objc.Send[objc.ID](objc.ID(_class("GCController")), objc.RegisterName("controllerWithExtendedGamepad"))
 	return ControllerFromID(_r)
 }
 
-// Starts searching for nearby wireless controllers.
+// StartWirelessControllerDiscovery starts searching for nearby wireless controllers.
 //
 // StartWirelessControllerDiscovery blocks until the operation completes or ctx is cancelled.
 func StartWirelessControllerDiscovery(ctx context.Context) error {
@@ -64,18 +65,18 @@ func StartWirelessControllerDiscovery(ctx context.Context) error {
 	}
 }
 
-// Stops searching for nearby wireless controllers.
+// StopWirelessControllerDiscovery stops searching for nearby wireless controllers.
 func StopWirelessControllerDiscovery() {
 	objc.Send[objc.ID](objc.ID(_class("GCController")), objc.RegisterName("stopWirelessControllerDiscovery"))
 }
 
-// Keyboard object that represents all keyboards connected to the device Should be used to query key states every time input needs to be handled
+// CoalescedKeyboard keyboard object that represents all keyboards connected to the device Should be used to query key states every time input needs to be handled
 func CoalescedKeyboard() *Keyboard {
 	_r := objc.Send[objc.ID](objc.ID(_class("GCKeyboard")), objc.RegisterName("coalescedKeyboard"))
 	return KeyboardFromID(_r)
 }
 
-// Returns any mice that the user connects to the device.
+// Mice returns any mice that the user connects to the device.
 //
 // Mice returns the collection as a Go slice.
 func Mice() []*Mouse {
@@ -83,13 +84,13 @@ func Mice() []*Mouse {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Mouse { return MouseFromID(_id) })
 }
 
-// The most recently used mouse device. If a user actuates a mouse input, that mouse will become the current one.
+// GCMouseCurrent the most recently used mouse device. If a user actuates a mouse input, that mouse will become the current one.
 func GCMouseCurrent() *Mouse {
 	_r := objc.Send[objc.ID](objc.ID(_class("GCMouse")), objc.RegisterName("current"))
 	return MouseFromID(_r)
 }
 
-// Get the collection of racing wheels currently attached to the system.
+// ConnectedRacingWheels get the collection of racing wheels currently attached to the system.
 func ConnectedRacingWheels() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("GCRacingWheel")), objc.RegisterName("connectedRacingWheels"))
 	return obj.Wrap(_r)

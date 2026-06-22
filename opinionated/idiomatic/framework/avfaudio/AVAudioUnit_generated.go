@@ -14,11 +14,13 @@ import (
 	"unsafe"
 )
 
-// A subclass of the audio node class that, processes audio either in real time or nonreal time, depending on the type of the audio unit.
-//
 // AudioUnit is an idiomatic wrapper over the Objective-C class AVAudioUnit.
+//
+// AudioUnit is an abstract base — you do not construct it directly. Construct one of [AudioUnitEffect], [AudioUnitGenerator], [AudioUnitMIDIInstrument], [AudioUnitTimeEffect] and pass it where a AudioUnit is accepted.
+//
+// A subclass of the audio node class that, processes audio either in real time or nonreal time, depending on the type of the audio unit.
 type AudioUnit struct {
-	objref.Handle
+	AudioNode
 }
 
 // AudioUnitFromID adopts an existing Objective-C object as a AudioUnit
@@ -27,7 +29,8 @@ func AudioUnitFromID(id objc.ID) *AudioUnit {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnit{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioUnit{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,33 +43,13 @@ func audioUnitAdopt(id objc.ID) *AudioUnit {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnit{Handle: objref.Wrap(id)}
+	x := &AudioUnit{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *AudioUnit) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioUnit) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioUnit) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewAudioUnit creates a new AudioUnit.
-func NewAudioUnit() *AudioUnit {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioUnit")), objc.RegisterName("new"))
-	return audioUnitAdopt(_id)
-}
-
-// Loads an audio unit using a specified preset.
+// LoadAudioUnitPresetAtURL loads an audio unit using a specified preset.
 func (x *AudioUnit) LoadAudioUnitPresetAtURL(url string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadAudioUnitPresetAtURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
@@ -76,13 +59,13 @@ func (x *AudioUnit) LoadAudioUnitPresetAtURL(url string) error {
 	return nil
 }
 
-// AudioComponentDescription of the underlying audio unit.
+// AudioComponentDescription audioComponentDescription of the underlying audio unit.
 func (x *AudioUnit) AudioComponentDescription() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioComponentDescription"))
 	return obj.Wrap(_r)
 }
 
-// Name of the audio unit.
+// Name name of the audio unit.
 func (x *AudioUnit) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -91,7 +74,7 @@ func (x *AudioUnit) Name() string {
 	return purego.GoString(_r)
 }
 
-// Manufacturer name of the audio unit.
+// ManufacturerName manufacturer name of the audio unit.
 func (x *AudioUnit) ManufacturerName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manufacturerName"))
 	if _r == 0 {
@@ -110,3 +93,12 @@ type AudioUnitable interface {
 }
 
 var _ AudioUnitable = (*AudioUnit)(nil)
+
+// isAudioUnit marks AudioUnit — and, by embedding promotion, its
+// subclasses — as a member of the AudioUnit hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AudioUnit) isAudioUnit() {}
+
+var _ AudioUnitProvider = (*AudioUnit)(nil)
+
+var _ AudioNodeProvider = (*AudioUnit)(nil)

@@ -20,6 +20,8 @@ const (
 	UnselectLater PreferencePaneUnselectReply = 2
 )
 
+// String returns the PreferencePaneUnselectReply constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PreferencePaneUnselectReply) String() string {
 	switch e {
 	case UnselectCancel:

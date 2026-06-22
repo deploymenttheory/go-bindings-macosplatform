@@ -6,6 +6,7 @@ package metal
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -23,7 +24,8 @@ func TextureViewDescriptorFromID(id objc.ID) *TextureViewDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &TextureViewDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextureViewDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +38,8 @@ func textureViewDescriptorAdopt(id objc.ID) *TextureViewDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &TextureViewDescriptor{Handle: objref.Wrap(id)}
+	x := &TextureViewDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,46 +59,84 @@ func (x *TextureViewDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextureViewDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTextureViewDescriptor creates a new TextureViewDescriptor.
 func NewTextureViewDescriptor() *TextureViewDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLTextureViewDescriptor")), objc.RegisterName("new"))
 	return textureViewDescriptorAdopt(_id)
 }
 
-// A desired pixel format of a texture view.
-//
-// WithPixelFormat sets pixelFormat and returns the receiver so calls can be chained.
+// WithPixelFormat a desired pixel format of a texture view.
 func (x *TextureViewDescriptor) WithPixelFormat(pixelFormat PixelFormat) *TextureViewDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelFormat:"), pixelFormat)
 	return x
 }
 
-// A desired texture view of a texture view.
-//
-// WithTextureType sets textureType and returns the receiver so calls can be chained.
+// WithTextureType a desired texture view of a texture view.
 func (x *TextureViewDescriptor) WithTextureType(textureType TextureType) *TextureViewDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureType:"), textureType)
 	return x
 }
 
-// A desired pixel format of a texture view.
+// WithLevelRange a desired range of mip levels of a texture view.
+func (x *TextureViewDescriptor) WithLevelRange(levelRange foundation.NSRange) *TextureViewDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelRange:"), levelRange)
+	return x
+}
+
+// WithSliceRange a desired range of slices of a texture view.
+func (x *TextureViewDescriptor) WithSliceRange(sliceRange foundation.NSRange) *TextureViewDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSliceRange:"), sliceRange)
+	return x
+}
+
+// PixelFormat a desired pixel format of a texture view.
 func (x *TextureViewDescriptor) PixelFormat() PixelFormat {
 	_r := objc.Send[PixelFormat](objref.IDOf(x), objc.RegisterName("pixelFormat"))
 	return _r
 }
 
+// SetPixelFormat wraps the corresponding Objective-C method.
 func (x *TextureViewDescriptor) SetPixelFormat(pixelFormat PixelFormat) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelFormat:"), pixelFormat)
 }
 
-// A desired texture view of a texture view.
+// TextureType a desired texture view of a texture view.
 func (x *TextureViewDescriptor) TextureType() TextureType {
 	_r := objc.Send[TextureType](objref.IDOf(x), objc.RegisterName("textureType"))
 	return _r
 }
 
+// SetTextureType wraps the corresponding Objective-C method.
 func (x *TextureViewDescriptor) SetTextureType(textureType TextureType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureType:"), textureType)
+}
+
+// LevelRange a desired range of mip levels of a texture view.
+func (x *TextureViewDescriptor) LevelRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("levelRange"))
+	return _r
+}
+
+// SetLevelRange wraps the corresponding Objective-C method.
+func (x *TextureViewDescriptor) SetLevelRange(levelRange foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelRange:"), levelRange)
+}
+
+// SliceRange a desired range of slices of a texture view.
+func (x *TextureViewDescriptor) SliceRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("sliceRange"))
+	return _r
+}
+
+// SetSliceRange wraps the corresponding Objective-C method.
+func (x *TextureViewDescriptor) SetSliceRange(sliceRange foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSliceRange:"), sliceRange)
 }
 
 // TextureViewDescriptorable is the interface implemented by [TextureViewDescriptor], for mocking and DI.
@@ -103,10 +144,16 @@ type TextureViewDescriptorable interface {
 	obj.Object
 	WithPixelFormat(pixelFormat PixelFormat) *TextureViewDescriptor
 	WithTextureType(textureType TextureType) *TextureViewDescriptor
+	WithLevelRange(levelRange foundation.NSRange) *TextureViewDescriptor
+	WithSliceRange(sliceRange foundation.NSRange) *TextureViewDescriptor
 	PixelFormat() PixelFormat
 	SetPixelFormat(pixelFormat PixelFormat)
 	TextureType() TextureType
 	SetTextureType(textureType TextureType)
+	LevelRange() foundation.NSRange
+	SetLevelRange(levelRange foundation.NSRange)
+	SliceRange() foundation.NSRange
+	SetSliceRange(sliceRange foundation.NSRange)
 }
 
 var _ TextureViewDescriptorable = (*TextureViewDescriptor)(nil)

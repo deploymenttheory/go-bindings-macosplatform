@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class for objects that direct sound.
-//
 // DirectivityModelParameters is an idiomatic wrapper over the Objective-C class PHASEDirectivityModelParameters.
+//
+// DirectivityModelParameters is an abstract base — you do not construct it directly. Construct one of [CardioidDirectivityModelParameters], [ConeDirectivityModelParameters] and pass it where a DirectivityModelParameters is accepted.
+//
+// A base class for objects that direct sound.
 type DirectivityModelParameters struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func DirectivityModelParametersFromID(id objc.ID) *DirectivityModelParameters {
 	if id == 0 {
 		return nil
 	}
-	x := &DirectivityModelParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DirectivityModelParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func directivityModelParametersAdopt(id objc.ID) *DirectivityModelParameters {
 	if id == 0 {
 		return nil
 	}
-	x := &DirectivityModelParameters{Handle: objref.Wrap(id)}
+	x := &DirectivityModelParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *DirectivityModelParameters) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewDirectivityModelParameters creates a new DirectivityModelParameters.
-func NewDirectivityModelParameters() *DirectivityModelParameters {
-	_id := objc.Send[objc.ID](objc.ID(_class("PHASEDirectivityModelParameters")), objc.RegisterName("new"))
-	return directivityModelParametersAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DirectivityModelParameters) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // DirectivityModelParametersable is the interface implemented by [DirectivityModelParameters], for mocking and DI.
@@ -70,3 +74,10 @@ type DirectivityModelParametersable interface {
 }
 
 var _ DirectivityModelParametersable = (*DirectivityModelParameters)(nil)
+
+// isDirectivityModelParameters marks DirectivityModelParameters — and, by embedding promotion, its
+// subclasses — as a member of the DirectivityModelParameters hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DirectivityModelParameters) isDirectivityModelParameters() {}
+
+var _ DirectivityModelParametersProvider = (*DirectivityModelParameters)(nil)

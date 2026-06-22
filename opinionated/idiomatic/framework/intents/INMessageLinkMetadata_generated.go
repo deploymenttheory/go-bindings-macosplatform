@@ -23,7 +23,8 @@ func MessageLinkMetadataFromID(id objc.ID) *MessageLinkMetadata {
 	if id == 0 {
 		return nil
 	}
-	x := &MessageLinkMetadata{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MessageLinkMetadata{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func messageLinkMetadataAdopt(id objc.ID) *MessageLinkMetadata {
 	if id == 0 {
 		return nil
 	}
-	x := &MessageLinkMetadata{Handle: objref.Wrap(id)}
+	x := &MessageLinkMetadata{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *MessageLinkMetadata) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MessageLinkMetadata) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMessageLinkMetadataWithSiteNameSummaryTitleOpenGraphTypeLinkURL creates a new MessageLinkMetadata.
 func NewMessageLinkMetadataWithSiteNameSummaryTitleOpenGraphTypeLinkURL(siteName string, summary string, title string, openGraphType string, linkURL string) *MessageLinkMetadata {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INMessageLinkMetadata")), objc.RegisterName("alloc"))
@@ -63,36 +71,37 @@ func NewMessageLinkMetadataWithSiteNameSummaryTitleOpenGraphTypeLinkURL(siteName
 	return messageLinkMetadataAdopt(_id)
 }
 
-// WithSiteName sets siteName and returns the receiver so calls can be chained.
+// WithSiteName sets the property and returns the receiver so calls can be chained.
 func (x *MessageLinkMetadata) WithSiteName(siteName string) *MessageLinkMetadata {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSiteName:"), purego.NSString(siteName))
 	return x
 }
 
-// WithSummary sets summary and returns the receiver so calls can be chained.
+// WithSummary sets the property and returns the receiver so calls can be chained.
 func (x *MessageLinkMetadata) WithSummary(summary string) *MessageLinkMetadata {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSummary:"), purego.NSString(summary))
 	return x
 }
 
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle sets the property and returns the receiver so calls can be chained.
 func (x *MessageLinkMetadata) WithTitle(title string) *MessageLinkMetadata {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// WithOpenGraphType sets openGraphType and returns the receiver so calls can be chained.
+// WithOpenGraphType sets the property and returns the receiver so calls can be chained.
 func (x *MessageLinkMetadata) WithOpenGraphType(openGraphType string) *MessageLinkMetadata {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpenGraphType:"), purego.NSString(openGraphType))
 	return x
 }
 
-// WithLinkURL sets linkURL and returns the receiver so calls can be chained.
+// WithLinkURL sets the property and returns the receiver so calls can be chained.
 func (x *MessageLinkMetadata) WithLinkURL(linkURL string) *MessageLinkMetadata {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinkURL:"), rt.FileURL(linkURL))
 	return x
 }
 
+// SiteName wraps the corresponding Objective-C method.
 func (x *MessageLinkMetadata) SiteName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("siteName"))
 	if _r == 0 {
@@ -101,10 +110,12 @@ func (x *MessageLinkMetadata) SiteName() string {
 	return purego.GoString(_r)
 }
 
+// SetSiteName wraps the corresponding Objective-C method.
 func (x *MessageLinkMetadata) SetSiteName(siteName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSiteName:"), purego.NSString(siteName))
 }
 
+// Summary wraps the corresponding Objective-C method.
 func (x *MessageLinkMetadata) Summary() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("summary"))
 	if _r == 0 {
@@ -113,10 +124,12 @@ func (x *MessageLinkMetadata) Summary() string {
 	return purego.GoString(_r)
 }
 
+// SetSummary wraps the corresponding Objective-C method.
 func (x *MessageLinkMetadata) SetSummary(summary string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSummary:"), purego.NSString(summary))
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *MessageLinkMetadata) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -125,10 +138,12 @@ func (x *MessageLinkMetadata) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *MessageLinkMetadata) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
+// OpenGraphType wraps the corresponding Objective-C method.
 func (x *MessageLinkMetadata) OpenGraphType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGraphType"))
 	if _r == 0 {
@@ -137,15 +152,18 @@ func (x *MessageLinkMetadata) OpenGraphType() string {
 	return purego.GoString(_r)
 }
 
+// SetOpenGraphType wraps the corresponding Objective-C method.
 func (x *MessageLinkMetadata) SetOpenGraphType(openGraphType string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpenGraphType:"), purego.NSString(openGraphType))
 }
 
+// LinkURL wraps the corresponding Objective-C method.
 func (x *MessageLinkMetadata) LinkURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("linkURL"))
 	return obj.Wrap(_r)
 }
 
+// SetLinkURL wraps the corresponding Objective-C method.
 func (x *MessageLinkMetadata) SetLinkURL(linkURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinkURL:"), rt.FileURL(linkURL))
 }

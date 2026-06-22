@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object containing Fast Healthcare Interoperability Resources (FHIR) data.
-//
 // FHIRResource is an idiomatic wrapper over the Objective-C class HKFHIRResource.
+//
+// An object containing Fast Healthcare Interoperability Resources (FHIR) data.
 type FHIRResource struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FHIRResourceFromID(id objc.ID) *FHIRResource {
 	if id == 0 {
 		return nil
 	}
-	x := &FHIRResource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FHIRResource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func fHIRResourceAdopt(id objc.ID) *FHIRResource {
 	if id == 0 {
 		return nil
 	}
-	x := &FHIRResource{Handle: objref.Wrap(id)}
+	x := &FHIRResource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *FHIRResource) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FHIRResource) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFHIRResource creates a new FHIRResource.
 func NewFHIRResource() *FHIRResource {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKFHIRResource")), objc.RegisterName("new"))
 	return fHIRResourceAdopt(_id)
 }
 
-// The FHIR version of the resource data.
+// FHIRVersion the FHIR version of the resource data.
 func (x *FHIRResource) FHIRVersion() *FHIRVersion {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("FHIRVersion"))
 	return FHIRVersionFromID(_r)
 }
 
-// The resource type, corresponding to the 'resourceType' field in the resource's JSON representation. May be one of 8 FHIR resource types supported within HealthKit: AllergyIntolerance, Condition, Immunization, MedicationDispense, MedicationOrder, MedicationStatement, Observation, and Procedure.
+// ResourceType the resource type, corresponding to the 'resourceType' field in the resource's JSON representation. May be one of 8 FHIR resource types supported within HealthKit: AllergyIntolerance, Condition, Immunization, MedicationDispense, MedicationOrder, MedicationStatement, Observation, and Procedure.
 func (x *FHIRResource) ResourceType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resourceType"))
 	return obj.Wrap(_r)
 }
 
-// The identifier of the resource, corresponding to the 'id' field in the resource's JSON representation. Unique within a given resource type and FHIR end-point, as represented by an HKSource.
+// Identifier the identifier of the resource, corresponding to the 'id' field in the resource's JSON representation. Unique within a given resource type and FHIR end-point, as represented by an HKSource.
 func (x *FHIRResource) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -85,13 +93,13 @@ func (x *FHIRResource) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// The JSON representation of the FHIR resource. Conforms to the HL7 Argonaut Project resource type definitions.
+// Data the JSON representation of the FHIR resource. Conforms to the HL7 Argonaut Project resource type definitions.
 func (x *FHIRResource) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// The fully specified source URL of the FHIR resource. This URL can be used to help determine the provenance of the resource. Direct access is protected by OAuth: querying without suitable authorization will result in an authorization error.
+// SourceURL the fully specified source URL of the FHIR resource. This URL can be used to help determine the provenance of the resource. Direct access is protected by OAuth: querying without suitable authorization will result in an authorization error.
 func (x *FHIRResource) SourceURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceURL"))
 	return obj.Wrap(_r)

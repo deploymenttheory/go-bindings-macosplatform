@@ -23,7 +23,8 @@ func SaveOptionsFromID(id objc.ID) *SaveOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &SaveOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SaveOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func saveOptionsAdopt(id objc.ID) *SaveOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &SaveOptions{Handle: objref.Wrap(id)}
+	x := &SaveOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,58 +58,59 @@ func (x *SaveOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes IKSaveOptions with metadata and UTType.
-//
-// NewSaveOptionsWithImagePropertiesImageUTType creates a new SaveOptions.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SaveOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSaveOptionsWithImagePropertiesImageUTType initializes IKSaveOptions with metadata and UTType.
 func NewSaveOptionsWithImagePropertiesImageUTType(imageProperties obj.Object, imageUTType string) *SaveOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IKSaveOptions")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImageProperties:imageUTType:"), objref.IDOf(imageProperties), purego.NSString(imageUTType))
 	return saveOptionsAdopt(_id)
 }
 
-// Delegate of the IKSaveOptions.
-//
-// WithDelegate sets delegate and returns the receiver so calls can be chained.
+// WithDelegate delegate of the IKSaveOptions.
 func (x *SaveOptions) WithDelegate(delegate obj.Object) *SaveOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return x
 }
 
-// If set, the last used UI choices are preserved for the next time IKSaveOptions is used. [default is YES]
-//
-// WithRememberLastSetting sets rememberLastSetting and returns the receiver so calls can be chained.
+// WithRememberLastSetting if set, the last used UI choices are preserved for the next time IKSaveOptions is used. [default is YES]
 func (x *SaveOptions) WithRememberLastSetting(rememberLastSetting bool) *SaveOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRememberLastSetting:"), rememberLastSetting)
 	return x
 }
 
-// Adds IKSaveOptions UI to a NSSavePanel.
+// AddSaveOptionsAccessoryViewToSavePanel adds IKSaveOptions UI to a NSSavePanel.
 func (x *SaveOptions) AddSaveOptionsAccessoryViewToSavePanel(savePanel obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSaveOptionsAccessoryViewToSavePanel:"), objref.IDOf(savePanel))
 }
 
-// Adds IKSaveOptions UI to a NSView.
+// AddSaveOptionsToView adds IKSaveOptions UI to a NSView.
 func (x *SaveOptions) AddSaveOptionsToView(view obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSaveOptionsToView:"), objref.IDOf(view))
 }
 
-// Delegate of the IKSaveOptions.
+// Delegate delegate of the IKSaveOptions.
 func (x *SaveOptions) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
+// SetDelegate wraps the corresponding Objective-C method.
 func (x *SaveOptions) SetDelegate(delegate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
-// current imageProperties (respecting user UI selection).
+// ImageProperties current imageProperties (respecting user UI selection).
 func (x *SaveOptions) ImageProperties() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageProperties"))
 	return obj.Wrap(_r)
 }
 
-// current imageUTType (respecting user UI selection).
+// ImageUTType current imageUTType (respecting user UI selection).
 func (x *SaveOptions) ImageUTType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageUTType"))
 	if _r == 0 {
@@ -116,18 +119,19 @@ func (x *SaveOptions) ImageUTType() string {
 	return purego.GoString(_r)
 }
 
-// information about the UI settings.
+// UserSelection information about the UI settings.
 func (x *SaveOptions) UserSelection() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userSelection"))
 	return obj.Wrap(_r)
 }
 
-// If set, the last used UI choices are preserved for the next time IKSaveOptions is used. [default is YES]
+// RememberLastSetting if set, the last used UI choices are preserved for the next time IKSaveOptions is used. [default is YES]
 func (x *SaveOptions) RememberLastSetting() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("rememberLastSetting"))
 	return _r
 }
 
+// SetRememberLastSetting wraps the corresponding Objective-C method.
 func (x *SaveOptions) SetRememberLastSetting(rememberLastSetting bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRememberLastSetting:"), rememberLastSetting)
 }

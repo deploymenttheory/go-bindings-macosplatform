@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents mention activity for a highlight.
-//
 // HighlightMentionEvent is an idiomatic wrapper over the Objective-C class SWHighlightMentionEvent.
+//
+// An object that represents mention activity for a highlight.
 type HighlightMentionEvent struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func HighlightMentionEventFromID(id objc.ID) *HighlightMentionEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &HighlightMentionEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HighlightMentionEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func highlightMentionEventAdopt(id objc.ID) *HighlightMentionEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &HighlightMentionEvent{Handle: objref.Wrap(id)}
+	x := &HighlightMentionEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,27 @@ func (x *HighlightMentionEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates and initializes a mention event.
-//
-// NewHighlightMentionEventWithHighlightMentionedPersonCloudKitShareHandle creates a new HighlightMentionEvent.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HighlightMentionEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewHighlightMentionEventWithHighlightMentionedPersonCloudKitShareHandle creates and initializes a mention event.
 func NewHighlightMentionEventWithHighlightMentionedPersonCloudKitShareHandle(highlight *Highlight, handle string) *HighlightMentionEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWHighlightMentionEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:mentionedPersonCloudKitShareHandle:"), objref.IDOf(highlight), purego.NSString(handle))
 	return highlightMentionEventAdopt(_id)
 }
 
-// Creates and initializes a mention event.
-//
-// NewHighlightMentionEventWithHighlightMentionedPersonIdentity creates a new HighlightMentionEvent.
+// NewHighlightMentionEventWithHighlightMentionedPersonIdentity creates and initializes a mention event.
 func NewHighlightMentionEventWithHighlightMentionedPersonIdentity(highlight *Highlight, identity obj.Object) *HighlightMentionEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWHighlightMentionEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:mentionedPersonIdentity:"), objref.IDOf(highlight), objref.IDOf(identity))
 	return highlightMentionEventAdopt(_id)
 }
 
-// The person being mentioned by the sender.
+// MentionedPersonHandle the person being mentioned by the sender.
 func (x *HighlightMentionEvent) MentionedPersonHandle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mentionedPersonHandle"))
 	if _r == 0 {

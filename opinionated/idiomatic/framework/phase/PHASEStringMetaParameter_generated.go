@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A metaparameter with a text definition that can change over time.
-//
 // StringMetaParameter is an idiomatic wrapper over the Objective-C class PHASEStringMetaParameter.
+//
+// It embeds [MetaParameter], promoting that type's methods.
+//
+// A metaparameter with a text definition that can change over time.
 type StringMetaParameter struct {
-	objref.Handle
+	MetaParameter
 }
 
 // StringMetaParameterFromID adopts an existing Objective-C object as a StringMetaParameter
@@ -25,7 +26,8 @@ func StringMetaParameterFromID(id objc.ID) *StringMetaParameter {
 	if id == 0 {
 		return nil
 	}
-	x := &StringMetaParameter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StringMetaParameter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func stringMetaParameterAdopt(id objc.ID) *StringMetaParameter {
 	if id == 0 {
 		return nil
 	}
-	x := &StringMetaParameter{Handle: objref.Wrap(id)}
+	x := &StringMetaParameter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *StringMetaParameter) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StringMetaParameter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StringMetaParameter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewStringMetaParameter creates a new StringMetaParameter.
@@ -64,9 +52,7 @@ func NewStringMetaParameter() *StringMetaParameter {
 	return stringMetaParameterAdopt(_id)
 }
 
-// A value for the metaparameter.
-//
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue a value for the metaparameter.
 func (x *StringMetaParameter) WithValue(value obj.Object) *StringMetaParameter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return x
@@ -79,3 +65,5 @@ type StringMetaParameterable interface {
 }
 
 var _ StringMetaParameterable = (*StringMetaParameter)(nil)
+
+var _ MetaParameterProvider = (*StringMetaParameter)(nil)

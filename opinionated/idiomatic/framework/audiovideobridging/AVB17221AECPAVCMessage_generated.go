@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // AVB17221AECPAVCMessage is an idiomatic wrapper over the Objective-C class AVB17221AECPAVCMessage.
+//
+// It embeds [AVB17221AECPMessage], promoting that type's methods.
 type AVB17221AECPAVCMessage struct {
-	objref.Handle
+	AVB17221AECPMessage
 }
 
 // AVB17221AECPAVCMessageFromID adopts an existing Objective-C object as a AVB17221AECPAVCMessage
@@ -23,7 +24,8 @@ func AVB17221AECPAVCMessageFromID(id objc.ID) *AVB17221AECPAVCMessage {
 	if id == 0 {
 		return nil
 	}
-	x := &AVB17221AECPAVCMessage{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AVB17221AECPAVCMessage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func aVB17221AECPAVCMessageAdopt(id objc.ID) *AVB17221AECPAVCMessage {
 	if id == 0 {
 		return nil
 	}
-	x := &AVB17221AECPAVCMessage{Handle: objref.Wrap(id)}
+	x := &AVB17221AECPAVCMessage{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AVB17221AECPAVCMessage) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AVB17221AECPAVCMessage) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AVB17221AECPAVCMessage) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAVB17221AECPAVCMessage creates a new AVB17221AECPAVCMessage.
@@ -62,67 +50,55 @@ func NewAVB17221AECPAVCMessage() *AVB17221AECPAVCMessage {
 	return aVB17221AECPAVCMessageAdopt(_id)
 }
 
-// The avc_command_response field of the AECP AEM message.
-//
-// WithCommandResponse sets commandResponse and returns the receiver so calls can be chained.
+// WithCommandResponse the avc_command_response field of the AECP AEM message.
 func (x *AVB17221AECPAVCMessage) WithCommandResponse(commandResponse obj.Object) *AVB17221AECPAVCMessage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandResponse:"), objref.IDOf(commandResponse))
 	return x
 }
 
-// The message_type field of the AECP message.
-//
-// WithMessageType sets messageType and returns the receiver so calls can be chained.
+// WithMessageType the message_type field of the AECP message.
 func (x *AVB17221AECPAVCMessage) WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPAVCMessage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageType:"), messageType)
 	return x
 }
 
-// The status field of the AECP message.
-//
-// WithStatus sets status and returns the receiver so calls can be chained.
+// WithStatus the status field of the AECP message.
 func (x *AVB17221AECPAVCMessage) WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPAVCMessage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
 	return x
 }
 
-// The target_entity_id field of the AECP message.
-//
-// WithTargetEntityID sets targetEntityID and returns the receiver so calls can be chained.
+// WithTargetEntityID the target_entity_id field of the AECP message.
 func (x *AVB17221AECPAVCMessage) WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAVCMessage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetEntityID:"), targetEntityID)
 	return x
 }
 
-// The controller_entity_id field of the AECP message.
-//
-// WithControllerEntityID sets controllerEntityID and returns the receiver so calls can be chained.
+// WithControllerEntityID the controller_entity_id field of the AECP message.
 func (x *AVB17221AECPAVCMessage) WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPAVCMessage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControllerEntityID:"), controllerEntityID)
 	return x
 }
 
-// The sequence_id field of the AECP message.
-//
-// WithSequenceID sets sequenceID and returns the receiver so calls can be chained.
+// WithSequenceID the sequence_id field of the AECP message.
 func (x *AVB17221AECPAVCMessage) WithSequenceID(sequenceID uint16) *AVB17221AECPAVCMessage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSequenceID:"), sequenceID)
 	return x
 }
 
-// The source_mac field of the AECP message.
-//
-// WithSourceMAC sets sourceMAC and returns the receiver so calls can be chained.
+// WithSourceMAC the source_mac field of the AECP message.
 func (x *AVB17221AECPAVCMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAVCMessage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMAC:"), objref.IDOf(sourceMAC))
 	return x
 }
 
+// CommandResponse wraps the corresponding Objective-C method.
 func (x *AVB17221AECPAVCMessage) CommandResponse() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commandResponse"))
 	return obj.Wrap(_r)
 }
 
+// SetCommandResponse wraps the corresponding Objective-C method.
 func (x *AVB17221AECPAVCMessage) SetCommandResponse(commandResponse obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandResponse:"), objref.IDOf(commandResponse))
 }
@@ -142,3 +118,5 @@ type AVB17221AECPAVCMessageable interface {
 }
 
 var _ AVB17221AECPAVCMessageable = (*AVB17221AECPAVCMessage)(nil)
+
+var _ AVB17221AECPMessageProvider = (*AVB17221AECPAVCMessage)(nil)

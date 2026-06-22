@@ -23,7 +23,8 @@ func WKWebExtensionControllerConfigurationFromID(id objc.ID) *WKWebExtensionCont
 	if id == 0 {
 		return nil
 	}
-	x := &WKWebExtensionControllerConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKWebExtensionControllerConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func wKWebExtensionControllerConfigurationAdopt(id objc.ID) *WKWebExtensionContr
 	if id == 0 {
 		return nil
 	}
-	x := &WKWebExtensionControllerConfiguration{Handle: objref.Wrap(id)}
+	x := &WKWebExtensionControllerConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,56 +58,60 @@ func (x *WKWebExtensionControllerConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKWebExtensionControllerConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKWebExtensionControllerConfiguration creates a new WKWebExtensionControllerConfiguration.
 func NewWKWebExtensionControllerConfiguration() *WKWebExtensionControllerConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionControllerConfiguration")), objc.RegisterName("new"))
 	return wKWebExtensionControllerConfigurationAdopt(_id)
 }
 
-// The web view configuration to be used as a basis for configuring web views in extension contexts.
-//
-// WithWebViewConfiguration sets webViewConfiguration and returns the receiver so calls can be chained.
+// WithWebViewConfiguration the web view configuration to be used as a basis for configuring web views in extension contexts.
 func (x *WKWebExtensionControllerConfiguration) WithWebViewConfiguration(webViewConfiguration *WKWebViewConfiguration) *WKWebExtensionControllerConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWebViewConfiguration:"), objref.IDOf(webViewConfiguration))
 	return x
 }
 
-// The default data store for website data and cookie access in extension contexts. This property sets the primary data store for managing website data, including cookies, which extensions can access, subject to the granted permissions within the extension contexts. Defaults to “WKWebsiteDataStore.defaultDataStore“.
-//
-// WithDefaultWebsiteDataStore sets defaultWebsiteDataStore and returns the receiver so calls can be chained.
+// WithDefaultWebsiteDataStore the default data store for website data and cookie access in extension contexts. This property sets the primary data store for managing website data, including cookies, which extensions can access, subject to the granted permissions within the extension contexts. Defaults to “WKWebsiteDataStore.defaultDataStore“.
 func (x *WKWebExtensionControllerConfiguration) WithDefaultWebsiteDataStore(defaultWebsiteDataStore *WKWebsiteDataStore) *WKWebExtensionControllerConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultWebsiteDataStore:"), objref.IDOf(defaultWebsiteDataStore))
 	return x
 }
 
-// A Boolean value indicating if this context will write data to the the file system.
+// IsPersistent a Boolean value indicating if this context will write data to the the file system.
 func (x *WKWebExtensionControllerConfiguration) IsPersistent() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPersistent"))
 	return _r
 }
 
-// The unique identifier used for persistent configuration storage, or `nil` when it is the default or not persistent.
+// Identifier the unique identifier used for persistent configuration storage, or `nil` when it is the default or not persistent.
 func (x *WKWebExtensionControllerConfiguration) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
-// The web view configuration to be used as a basis for configuring web views in extension contexts.
+// WebViewConfiguration the web view configuration to be used as a basis for configuring web views in extension contexts.
 func (x *WKWebExtensionControllerConfiguration) WebViewConfiguration() *WKWebViewConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webViewConfiguration"))
 	return WKWebViewConfigurationFromID(_r)
 }
 
+// SetWebViewConfiguration wraps the corresponding Objective-C method.
 func (x *WKWebExtensionControllerConfiguration) SetWebViewConfiguration(webViewConfiguration *WKWebViewConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWebViewConfiguration:"), objref.IDOf(webViewConfiguration))
 }
 
-// The default data store for website data and cookie access in extension contexts. This property sets the primary data store for managing website data, including cookies, which extensions can access, subject to the granted permissions within the extension contexts. Defaults to “WKWebsiteDataStore.defaultDataStore“.
+// DefaultWebsiteDataStore the default data store for website data and cookie access in extension contexts. This property sets the primary data store for managing website data, including cookies, which extensions can access, subject to the granted permissions within the extension contexts. Defaults to “WKWebsiteDataStore.defaultDataStore“.
 func (x *WKWebExtensionControllerConfiguration) DefaultWebsiteDataStore() *WKWebsiteDataStore {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultWebsiteDataStore"))
 	return WKWebsiteDataStoreFromID(_r)
 }
 
+// SetDefaultWebsiteDataStore wraps the corresponding Objective-C method.
 func (x *WKWebExtensionControllerConfiguration) SetDefaultWebsiteDataStore(defaultWebsiteDataStore *WKWebsiteDataStore) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultWebsiteDataStore:"), objref.IDOf(defaultWebsiteDataStore))
 }

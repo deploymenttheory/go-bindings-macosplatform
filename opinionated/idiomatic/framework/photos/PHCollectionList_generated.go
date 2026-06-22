@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A group containing Photos asset collections, such as Moments, Years, or folders of user-created albums.
-//
 // CollectionList is an idiomatic wrapper over the Objective-C class PHCollectionList.
+//
+// It embeds [Collection], promoting that type's methods.
+//
+// A group containing Photos asset collections, such as Moments, Years, or folders of user-created albums.
 type CollectionList struct {
-	objref.Handle
+	Collection
 }
 
 // CollectionListFromID adopts an existing Objective-C object as a CollectionList
@@ -25,7 +26,8 @@ func CollectionListFromID(id objc.ID) *CollectionList {
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionList{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollectionList{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func collectionListAdopt(id objc.ID) *CollectionList {
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionList{Handle: objref.Wrap(id)}
+	x := &CollectionList{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CollectionList) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CollectionList) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CollectionList) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCollectionList creates a new CollectionList.
@@ -64,21 +52,26 @@ func NewCollectionList() *CollectionList {
 	return collectionListAdopt(_id)
 }
 
+// CollectionListSubtype wraps the corresponding Objective-C method.
 func (x *CollectionList) CollectionListSubtype() CollectionListSubtype {
 	_r := objc.Send[CollectionListSubtype](objref.IDOf(x), objc.RegisterName("collectionListSubtype"))
 	return _r
 }
 
+// StartDate wraps the corresponding Objective-C method.
 func (x *CollectionList) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
+// EndDate wraps the corresponding Objective-C method.
 func (x *CollectionList) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
+// LocalizedLocationNames wraps the corresponding Objective-C method.
+//
 // LocalizedLocationNames returns the collection as a Go slice.
 func (x *CollectionList) LocalizedLocationNames() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedLocationNames"))
@@ -95,3 +88,7 @@ type CollectionListable interface {
 }
 
 var _ CollectionListable = (*CollectionList)(nil)
+
+var _ CollectionProvider = (*CollectionList)(nil)
+
+var _ ObjectProvider = (*CollectionList)(nil)

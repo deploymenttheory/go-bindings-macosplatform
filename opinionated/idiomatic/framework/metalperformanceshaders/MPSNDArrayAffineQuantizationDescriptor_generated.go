@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NDArrayAffineQuantizationDescriptor is an idiomatic wrapper over the Objective-C class MPSNDArrayAffineQuantizationDescriptor.
+//
+// It embeds [NDArrayQuantizationDescriptor], promoting that type's methods.
 type NDArrayAffineQuantizationDescriptor struct {
-	objref.Handle
+	NDArrayQuantizationDescriptor
 }
 
 // NDArrayAffineQuantizationDescriptorFromID adopts an existing Objective-C object as a NDArrayAffineQuantizationDescriptor
@@ -23,7 +24,8 @@ func NDArrayAffineQuantizationDescriptorFromID(id objc.ID) *NDArrayAffineQuantiz
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayAffineQuantizationDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NDArrayAffineQuantizationDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func nDArrayAffineQuantizationDescriptorAdopt(id objc.ID) *NDArrayAffineQuantiza
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayAffineQuantizationDescriptor{Handle: objref.Wrap(id)}
+	x := &NDArrayAffineQuantizationDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NDArrayAffineQuantizationDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NDArrayAffineQuantizationDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NDArrayAffineQuantizationDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNDArrayAffineQuantizationDescriptor creates a new NDArrayAffineQuantizationDescriptor.
@@ -62,56 +50,53 @@ func NewNDArrayAffineQuantizationDescriptor() *NDArrayAffineQuantizationDescript
 	return nDArrayAffineQuantizationDescriptorAdopt(_id)
 }
 
-// If yes then asymmetric quantization is used. See MPSNDArrayQuantizationScheme.
-//
-// WithHasZeroPoint sets hasZeroPoint and returns the receiver so calls can be chained.
+// WithHasZeroPoint if yes then asymmetric quantization is used. See MPSNDArrayQuantizationScheme.
 func (x *NDArrayAffineQuantizationDescriptor) WithHasZeroPoint(hasZeroPoint bool) *NDArrayAffineQuantizationDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasZeroPoint:"), hasZeroPoint)
 	return x
 }
 
-// If yes then offset is used. See MPSNDArrayQuantizationScheme.
-//
-// WithHasMinValue sets hasMinValue and returns the receiver so calls can be chained.
+// WithHasMinValue if yes then offset is used. See MPSNDArrayQuantizationScheme.
 func (x *NDArrayAffineQuantizationDescriptor) WithHasMinValue(hasMinValue bool) *NDArrayAffineQuantizationDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasMinValue:"), hasMinValue)
 	return x
 }
 
-// If true and quantized values are signed, these are assumed to be stored with an implicit offset or zero-point of 2^(quantizationBitWidth-1) added to bring signed values into unsigned range. e.g. Int4 values are in range [-8,7]. If we add 8 to it values are in range [0,15] and can be encoded/stored as UInt4. Default is false. Its only currently applicable to Int4. Implementation will generate error for any other data type;
-//
-// WithImplicitZeroPoint sets implicitZeroPoint and returns the receiver so calls can be chained.
+// WithImplicitZeroPoint if true and quantized values are signed, these are assumed to be stored with an implicit offset or zero-point of 2^(quantizationBitWidth-1) added to bring signed values into unsigned range. e.g. Int4 values are in range [-8,7]. If we add 8 to it values are in range [0,15] and can be encoded/stored as UInt4. Default is false. Its only currently applicable to Int4. Implementation will generate error for any other data type;
 func (x *NDArrayAffineQuantizationDescriptor) WithImplicitZeroPoint(implicitZeroPoint bool) *NDArrayAffineQuantizationDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImplicitZeroPoint:"), implicitZeroPoint)
 	return x
 }
 
-// If yes then asymmetric quantization is used. See MPSNDArrayQuantizationScheme.
+// HasZeroPoint if yes then asymmetric quantization is used. See MPSNDArrayQuantizationScheme.
 func (x *NDArrayAffineQuantizationDescriptor) HasZeroPoint() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasZeroPoint"))
 	return _r
 }
 
+// SetHasZeroPoint wraps the corresponding Objective-C method.
 func (x *NDArrayAffineQuantizationDescriptor) SetHasZeroPoint(hasZeroPoint bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasZeroPoint:"), hasZeroPoint)
 }
 
-// If yes then offset is used. See MPSNDArrayQuantizationScheme.
+// HasMinValue if yes then offset is used. See MPSNDArrayQuantizationScheme.
 func (x *NDArrayAffineQuantizationDescriptor) HasMinValue() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasMinValue"))
 	return _r
 }
 
+// SetHasMinValue wraps the corresponding Objective-C method.
 func (x *NDArrayAffineQuantizationDescriptor) SetHasMinValue(hasMinValue bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasMinValue:"), hasMinValue)
 }
 
-// If true and quantized values are signed, these are assumed to be stored with an implicit offset or zero-point of 2^(quantizationBitWidth-1) added to bring signed values into unsigned range. e.g. Int4 values are in range [-8,7]. If we add 8 to it values are in range [0,15] and can be encoded/stored as UInt4. Default is false. Its only currently applicable to Int4. Implementation will generate error for any other data type;
+// ImplicitZeroPoint if true and quantized values are signed, these are assumed to be stored with an implicit offset or zero-point of 2^(quantizationBitWidth-1) added to bring signed values into unsigned range. e.g. Int4 values are in range [-8,7]. If we add 8 to it values are in range [0,15] and can be encoded/stored as UInt4. Default is false. Its only currently applicable to Int4. Implementation will generate error for any other data type;
 func (x *NDArrayAffineQuantizationDescriptor) ImplicitZeroPoint() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("implicitZeroPoint"))
 	return _r
 }
 
+// SetImplicitZeroPoint wraps the corresponding Objective-C method.
 func (x *NDArrayAffineQuantizationDescriptor) SetImplicitZeroPoint(implicitZeroPoint bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImplicitZeroPoint:"), implicitZeroPoint)
 }
@@ -131,3 +116,5 @@ type NDArrayAffineQuantizationDescriptorable interface {
 }
 
 var _ NDArrayAffineQuantizationDescriptorable = (*NDArrayAffineQuantizationDescriptor)(nil)
+
+var _ NDArrayQuantizationDescriptorProvider = (*NDArrayAffineQuantizationDescriptor)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// One portion of an overall route.
-//
 // RouteStep is an idiomatic wrapper over the Objective-C class MKRouteStep.
+//
+// One portion of an overall route.
 type RouteStep struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RouteStepFromID(id objc.ID) *RouteStep {
 	if id == 0 {
 		return nil
 	}
-	x := &RouteStep{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RouteStep{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func routeStepAdopt(id objc.ID) *RouteStep {
 	if id == 0 {
 		return nil
 	}
-	x := &RouteStep{Handle: objref.Wrap(id)}
+	x := &RouteStep{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *RouteStep) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RouteStep) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRouteStep creates a new RouteStep.
 func NewRouteStep() *RouteStep {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKRouteStep")), objc.RegisterName("new"))
 	return routeStepAdopt(_id)
 }
 
+// Instructions wraps the corresponding Objective-C method.
 func (x *RouteStep) Instructions() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instructions"))
 	if _r == 0 {
@@ -72,6 +81,7 @@ func (x *RouteStep) Instructions() string {
 	return purego.GoString(_r)
 }
 
+// Notice wraps the corresponding Objective-C method.
 func (x *RouteStep) Notice() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notice"))
 	if _r == 0 {
@@ -80,11 +90,13 @@ func (x *RouteStep) Notice() string {
 	return purego.GoString(_r)
 }
 
+// Polyline wraps the corresponding Objective-C method.
 func (x *RouteStep) Polyline() *Polyline {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("polyline"))
 	return PolylineFromID(_r)
 }
 
+// TransportType wraps the corresponding Objective-C method.
 func (x *RouteStep) TransportType() DirectionsTransportType {
 	_r := objc.Send[DirectionsTransportType](objref.IDOf(x), objc.RegisterName("transportType"))
 	return _r

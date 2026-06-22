@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Configuration information for an app that’s available during an assessment.
-//
 // AssessmentParticipantConfiguration is an idiomatic wrapper over the Objective-C class AEAssessmentParticipantConfiguration.
+//
+// Configuration information for an app that’s available during an assessment.
 type AssessmentParticipantConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssessmentParticipantConfigurationFromID(id objc.ID) *AssessmentParticipant
 	if id == 0 {
 		return nil
 	}
-	x := &AssessmentParticipantConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssessmentParticipantConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assessmentParticipantConfigurationAdopt(id objc.ID) *AssessmentParticipantC
 	if id == 0 {
 		return nil
 	}
-	x := &AssessmentParticipantConfiguration{Handle: objref.Wrap(id)}
+	x := &AssessmentParticipantConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,55 +60,65 @@ func (x *AssessmentParticipantConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssessmentParticipantConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssessmentParticipantConfiguration creates a new AssessmentParticipantConfiguration.
 func NewAssessmentParticipantConfiguration() *AssessmentParticipantConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("AEAssessmentParticipantConfiguration")), objc.RegisterName("new"))
 	return assessmentParticipantConfigurationAdopt(_id)
 }
 
-// A Boolean that indicates whether an app can access network resources during an assessment.
-//
-// WithAllowsNetworkAccess sets allowsNetworkAccess and returns the receiver so calls can be chained.
+// WithAllowsNetworkAccess a Boolean that indicates whether an app can access network resources during an assessment.
 func (x *AssessmentParticipantConfiguration) WithAllowsNetworkAccess(allowsNetworkAccess bool) *AssessmentParticipantConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsNetworkAccess:"), allowsNetworkAccess)
 	return x
 }
 
-// WithRequired sets required and returns the receiver so calls can be chained.
+// WithRequired sets the property and returns the receiver so calls can be chained.
 func (x *AssessmentParticipantConfiguration) WithRequired(required bool) *AssessmentParticipantConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequired:"), required)
 	return x
 }
 
-// WithConfigurationInfo sets configurationInfo and returns the receiver so calls can be chained.
+// WithConfigurationInfo sets the property and returns the receiver so calls can be chained.
 func (x *AssessmentParticipantConfiguration) WithConfigurationInfo(configurationInfo obj.Object) *AssessmentParticipantConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfigurationInfo:"), objref.IDOf(configurationInfo))
 	return x
 }
 
+// AllowsNetworkAccess wraps the corresponding Objective-C method.
 func (x *AssessmentParticipantConfiguration) AllowsNetworkAccess() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsNetworkAccess"))
 	return _r
 }
 
+// SetAllowsNetworkAccess wraps the corresponding Objective-C method.
 func (x *AssessmentParticipantConfiguration) SetAllowsNetworkAccess(allowsNetworkAccess bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsNetworkAccess:"), allowsNetworkAccess)
 }
 
+// IsRequired wraps the corresponding Objective-C method.
 func (x *AssessmentParticipantConfiguration) IsRequired() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRequired"))
 	return _r
 }
 
+// SetRequired wraps the corresponding Objective-C method.
 func (x *AssessmentParticipantConfiguration) SetRequired(required bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequired:"), required)
 }
 
+// ConfigurationInfo wraps the corresponding Objective-C method.
 func (x *AssessmentParticipantConfiguration) ConfigurationInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configurationInfo"))
 	return obj.Wrap(_r)
 }
 
+// SetConfigurationInfo wraps the corresponding Objective-C method.
 func (x *AssessmentParticipantConfiguration) SetConfigurationInfo(configurationInfo obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfigurationInfo:"), objref.IDOf(configurationInfo))
 }

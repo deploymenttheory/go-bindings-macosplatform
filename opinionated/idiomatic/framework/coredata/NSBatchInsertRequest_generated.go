@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request to insert a batch of data in a persistent store.
-//
 // BatchInsertRequest is an idiomatic wrapper over the Objective-C class NSBatchInsertRequest.
+//
+// It embeds [PersistentStoreRequest], promoting that type's methods.
+//
+// A request to insert a batch of data in a persistent store.
 type BatchInsertRequest struct {
-	objref.Handle
+	PersistentStoreRequest
 }
 
 // BatchInsertRequestFromID adopts an existing Objective-C object as a BatchInsertRequest
@@ -25,7 +26,8 @@ func BatchInsertRequestFromID(id objc.ID) *BatchInsertRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &BatchInsertRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BatchInsertRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func batchInsertRequestAdopt(id objc.ID) *BatchInsertRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &BatchInsertRequest{Handle: objref.Wrap(id)}
+	x := &BatchInsertRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *BatchInsertRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BatchInsertRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BatchInsertRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewBatchInsertRequest creates a new BatchInsertRequest.
@@ -64,36 +52,28 @@ func NewBatchInsertRequest() *BatchInsertRequest {
 	return batchInsertRequestAdopt(_id)
 }
 
-// Creates a batch-insertion request for a named managed entity, and provides an array of data dictionaries for insertion.
-//
-// NewBatchInsertRequestWithEntityNameObjects creates a new BatchInsertRequest.
+// NewBatchInsertRequestWithEntityNameObjects creates a batch-insertion request for a named managed entity, and provides an array of data dictionaries for insertion.
 func NewBatchInsertRequestWithEntityNameObjects(entityName string, dictionaries []obj.Object) *BatchInsertRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBatchInsertRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntityName:objects:"), purego.NSString(entityName), purego.SliceToNSArray(dictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return batchInsertRequestAdopt(_id)
 }
 
-// Creates a batch-insertion request for a managed entity, and provides an array of data dictionaries for insertion.
-//
-// NewBatchInsertRequestWithEntityObjects creates a new BatchInsertRequest.
+// NewBatchInsertRequestWithEntityObjects creates a batch-insertion request for a managed entity, and provides an array of data dictionaries for insertion.
 func NewBatchInsertRequestWithEntityObjects(entity *EntityDescription, dictionaries []obj.Object) *BatchInsertRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBatchInsertRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntity:objects:"), objref.IDOf(entity), purego.SliceToNSArray(dictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return batchInsertRequestAdopt(_id)
 }
 
-// Creates a batch-insertion request for a managed entity, and specifies a closure that provides data dictionaries for insertion.
-//
-// NewBatchInsertRequestWithEntityDictionaryHandler creates a new BatchInsertRequest.
+// NewBatchInsertRequestWithEntityDictionaryHandler creates a batch-insertion request for a managed entity, and specifies a closure that provides data dictionaries for insertion.
 func NewBatchInsertRequestWithEntityDictionaryHandler(entity *EntityDescription, handler func(obj.Object) bool) *BatchInsertRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBatchInsertRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntity:dictionaryHandler:"), objref.IDOf(entity), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) bool { return handler(obj.Wrap(_b0)) }))
 	return batchInsertRequestAdopt(_id)
 }
 
-// Creates a batch-insertion request for a managed entity, and specifies a closure that inserts data into the entity.
-//
-// NewBatchInsertRequestWithEntityManagedObjectHandler creates a new BatchInsertRequest.
+// NewBatchInsertRequestWithEntityManagedObjectHandler creates a batch-insertion request for a managed entity, and specifies a closure that inserts data into the entity.
 func NewBatchInsertRequestWithEntityManagedObjectHandler(entity *EntityDescription, handler func(obj.Object) bool) *BatchInsertRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBatchInsertRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntity:managedObjectHandler:"), objref.IDOf(entity), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) bool { return handler(obj.Wrap(_b0)) }))
@@ -114,48 +94,39 @@ func NewBatchInsertRequestWithEntityNameManagedObjectHandler(entityName string, 
 	return batchInsertRequestAdopt(_id)
 }
 
-// An array of dictionaries that represents the objects to insert with the keys as attribute names and their assigned values.
-//
-// WithObjectsToInsert sets the collection and returns the receiver so calls can be chained.
+// WithObjectsToInsert an array of dictionaries that represents the objects to insert with the keys as attribute names and their assigned values.
 func (x *BatchInsertRequest) WithObjectsToInsert(items ...obj.Object) *BatchInsertRequest {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectsToInsert:"), _arr)
 	return x
 }
 
-// A closure that provides a dictionary for your app to insert data into.
-//
-// WithDictionaryHandler sets dictionaryHandler and returns the receiver so calls can be chained.
+// WithDictionaryHandler a closure that provides a dictionary for your app to insert data into.
 func (x *BatchInsertRequest) WithDictionaryHandler(dictionaryHandler func(obj.Object) bool) *BatchInsertRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDictionaryHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) bool { return dictionaryHandler(obj.Wrap(_b0)) }))
 	return x
 }
 
-// A closure that provides a managed object for your app to insert data into.
-//
-// WithManagedObjectHandler sets managedObjectHandler and returns the receiver so calls can be chained.
+// WithManagedObjectHandler a closure that provides a managed object for your app to insert data into.
 func (x *BatchInsertRequest) WithManagedObjectHandler(managedObjectHandler func(obj.Object) bool) *BatchInsertRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManagedObjectHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) bool { return managedObjectHandler(obj.Wrap(_b0)) }))
 	return x
 }
 
-// The type of result that Core Data returns from this request.
-//
-// WithResultType sets resultType and returns the receiver so calls can be chained.
+// WithResultType the type of result that Core Data returns from this request.
 func (x *BatchInsertRequest) WithResultType(resultType BatchInsertRequestResultType) *BatchInsertRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
 	return x
 }
 
-// The stores the request should be sent to.
-//
-// WithAffectedStores sets the collection and returns the receiver so calls can be chained.
+// WithAffectedStores the stores the request should be sent to.
 func (x *BatchInsertRequest) WithAffectedStores(items ...PersistentStoreProvider) *BatchInsertRequest {
 	_arr := purego.SliceToNSArray(items, func(_v PersistentStoreProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), _arr)
 	return x
 }
 
+// EntityName wraps the corresponding Objective-C method.
 func (x *BatchInsertRequest) EntityName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entityName"))
 	if _r == 0 {
@@ -164,34 +135,42 @@ func (x *BatchInsertRequest) EntityName() string {
 	return purego.GoString(_r)
 }
 
+// Entity wraps the corresponding Objective-C method.
 func (x *BatchInsertRequest) Entity() *EntityDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entity"))
 	return EntityDescriptionFromID(_r)
 }
 
+// ObjectsToInsert wraps the corresponding Objective-C method.
+//
 // ObjectsToInsert returns the collection as a Go slice.
 func (x *BatchInsertRequest) ObjectsToInsert() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectsToInsert"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetObjectsToInsert wraps the corresponding Objective-C method.
 func (x *BatchInsertRequest) SetObjectsToInsert(objectsToInsert []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectsToInsert:"), purego.SliceToNSArray(objectsToInsert, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SetDictionaryHandler wraps the corresponding Objective-C method.
 func (x *BatchInsertRequest) SetDictionaryHandler(dictionaryHandler func(obj.Object) bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDictionaryHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) bool { return dictionaryHandler(obj.Wrap(_b0)) }))
 }
 
+// SetManagedObjectHandler wraps the corresponding Objective-C method.
 func (x *BatchInsertRequest) SetManagedObjectHandler(managedObjectHandler func(obj.Object) bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManagedObjectHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) bool { return managedObjectHandler(obj.Wrap(_b0)) }))
 }
 
+// ResultType wraps the corresponding Objective-C method.
 func (x *BatchInsertRequest) ResultType() BatchInsertRequestResultType {
 	_r := objc.Send[BatchInsertRequestResultType](objref.IDOf(x), objc.RegisterName("resultType"))
 	return _r
 }
 
+// SetResultType wraps the corresponding Objective-C method.
 func (x *BatchInsertRequest) SetResultType(resultType BatchInsertRequestResultType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
 }
@@ -215,3 +194,5 @@ type BatchInsertRequestable interface {
 }
 
 var _ BatchInsertRequestable = (*BatchInsertRequest)(nil)
+
+var _ PersistentStoreRequestProvider = (*BatchInsertRequest)(nil)

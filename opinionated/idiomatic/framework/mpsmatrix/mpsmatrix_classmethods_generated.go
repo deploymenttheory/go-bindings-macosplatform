@@ -8,25 +8,25 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Make a descriptor for a uniform distribution of floating point values in the range [minimum, maximum).
+// UniformDistributionDescriptorWithMinimumMaximum make a descriptor for a uniform distribution of floating point values in the range [minimum, maximum).
 func UniformDistributionDescriptorWithMinimumMaximum(minimum float32, maximum float32) *MatrixRandomDistributionDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSMatrixRandomDistributionDescriptor")), objc.RegisterName("uniformDistributionDescriptorWithMinimum:maximum:"), minimum, maximum)
 	return MatrixRandomDistributionDescriptorFromID(_r)
 }
 
-// Make a descriptor for a normal distribution of floating point values.
+// NormalDistributionDescriptorWithMeanStandardDeviation make a descriptor for a normal distribution of floating point values.
 func NormalDistributionDescriptorWithMeanStandardDeviation(mean float32, standardDeviation float32) *MatrixRandomDistributionDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSMatrixRandomDistributionDescriptor")), objc.RegisterName("normalDistributionDescriptorWithMean:standardDeviation:"), mean, standardDeviation)
 	return MatrixRandomDistributionDescriptorFromID(_r)
 }
 
-// Make a descriptor for a truncated normal distribution of floating point values.
+// NormalDistributionDescriptorWithMeanStandardDeviationMinimumMaximum make a descriptor for a truncated normal distribution of floating point values.
 func NormalDistributionDescriptorWithMeanStandardDeviationMinimumMaximum(mean float32, standardDeviation float32, minimum float32, maximum float32) *MatrixRandomDistributionDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSMatrixRandomDistributionDescriptor")), objc.RegisterName("normalDistributionDescriptorWithMean:standardDeviation:minimum:maximum:"), mean, standardDeviation, minimum, maximum)
 	return MatrixRandomDistributionDescriptorFromID(_r)
 }
 
-// Make a descriptor for a default distribution.
+// DefaultDistributionDescriptor make a descriptor for a default distribution.
 func DefaultDistributionDescriptor() *MatrixRandomDistributionDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSMatrixRandomDistributionDescriptor")), objc.RegisterName("defaultDistributionDescriptor"))
 	return MatrixRandomDistributionDescriptorFromID(_r)

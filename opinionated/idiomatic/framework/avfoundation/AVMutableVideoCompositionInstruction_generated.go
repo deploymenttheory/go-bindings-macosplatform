@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mutable video composition instruction subclass.
-//
 // MutableVideoCompositionInstruction is an idiomatic wrapper over the Objective-C class AVMutableVideoCompositionInstruction.
+//
+// It embeds [VideoCompositionInstruction], promoting that type's methods.
+//
+// A mutable video composition instruction subclass.
 type MutableVideoCompositionInstruction struct {
-	objref.Handle
+	VideoCompositionInstruction
 }
 
 // MutableVideoCompositionInstructionFromID adopts an existing Objective-C object as a MutableVideoCompositionInstruction
@@ -25,7 +26,8 @@ func MutableVideoCompositionInstructionFromID(id objc.ID) *MutableVideoCompositi
 	if id == 0 {
 		return nil
 	}
-	x := &MutableVideoCompositionInstruction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableVideoCompositionInstruction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func mutableVideoCompositionInstructionAdopt(id objc.ID) *MutableVideoCompositio
 	if id == 0 {
 		return nil
 	}
-	x := &MutableVideoCompositionInstruction{Handle: objref.Wrap(id)}
+	x := &MutableVideoCompositionInstruction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MutableVideoCompositionInstruction) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableVideoCompositionInstruction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableVideoCompositionInstruction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMutableVideoCompositionInstruction creates a new MutableVideoCompositionInstruction.
@@ -64,52 +52,48 @@ func NewMutableVideoCompositionInstruction() *MutableVideoCompositionInstruction
 	return mutableVideoCompositionInstructionAdopt(_id)
 }
 
-// The background color of the composition.
-//
-// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+// WithBackgroundColor the background color of the composition.
 func (x *MutableVideoCompositionInstruction) WithBackgroundColor(backgroundColor obj.Object) *MutableVideoCompositionInstruction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// Instructions that specify how to layer and compose video frames from source tracks.
-//
-// WithLayerInstructions sets the collection and returns the receiver so calls can be chained.
+// WithLayerInstructions instructions that specify how to layer and compose video frames from source tracks.
 func (x *MutableVideoCompositionInstruction) WithLayerInstructions(items ...VideoCompositionLayerInstructionProvider) *MutableVideoCompositionInstruction {
 	_arr := purego.SliceToNSArray(items, func(_v VideoCompositionLayerInstructionProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerInstructions:"), _arr)
 	return x
 }
 
-// A Boolean value that indicates whether the instruction requires post processing.
-//
-// WithEnablePostProcessing sets enablePostProcessing and returns the receiver so calls can be chained.
+// WithEnablePostProcessing a Boolean value that indicates whether the instruction requires post processing.
 func (x *MutableVideoCompositionInstruction) WithEnablePostProcessing(enablePostProcessing bool) *MutableVideoCompositionInstruction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnablePostProcessing:"), enablePostProcessing)
 	return x
 }
 
-// The track identifiers of source sample data that the compositor requires to compose frames for the instruction.
-//
-// WithRequiredSourceSampleDataTrackIDs sets the collection and returns the receiver so calls can be chained.
+// WithRequiredSourceSampleDataTrackIDs the track identifiers of source sample data that the compositor requires to compose frames for the instruction.
 func (x *MutableVideoCompositionInstruction) WithRequiredSourceSampleDataTrackIDs(items ...obj.Object) *MutableVideoCompositionInstruction {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredSourceSampleDataTrackIDs:"), _arr)
 	return x
 }
 
+// SetBackgroundColor wraps the corresponding Objective-C method.
 func (x *MutableVideoCompositionInstruction) SetBackgroundColor(backgroundColor obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
+// SetLayerInstructions wraps the corresponding Objective-C method.
 func (x *MutableVideoCompositionInstruction) SetLayerInstructions(layerInstructions []*VideoCompositionLayerInstruction) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerInstructions:"), purego.SliceToNSArray(layerInstructions, func(_v *VideoCompositionLayerInstruction) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SetEnablePostProcessing wraps the corresponding Objective-C method.
 func (x *MutableVideoCompositionInstruction) SetEnablePostProcessing(enablePostProcessing bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnablePostProcessing:"), enablePostProcessing)
 }
 
+// SetRequiredSourceSampleDataTrackIDs wraps the corresponding Objective-C method.
 func (x *MutableVideoCompositionInstruction) SetRequiredSourceSampleDataTrackIDs(requiredSourceSampleDataTrackIDs []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredSourceSampleDataTrackIDs:"), purego.SliceToNSArray(requiredSourceSampleDataTrackIDs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
@@ -128,3 +112,5 @@ type MutableVideoCompositionInstructionable interface {
 }
 
 var _ MutableVideoCompositionInstructionable = (*MutableVideoCompositionInstruction)(nil)
+
+var _ VideoCompositionInstructionProvider = (*MutableVideoCompositionInstruction)(nil)

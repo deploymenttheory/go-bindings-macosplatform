@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents text to present over a time range.
-//
 // Caption is an idiomatic wrapper over the Objective-C class AVCaption.
+//
+// Caption is an abstract base — you do not construct it directly. Construct one of [MutableCaption] and pass it where a Caption is accepted.
+//
+// An object that represents text to present over a time range.
 type Caption struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func CaptionFromID(id objc.ID) *Caption {
 	if id == 0 {
 		return nil
 	}
-	x := &Caption{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Caption{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func captionAdopt(id objc.ID) *Caption {
 	if id == 0 {
 		return nil
 	}
-	x := &Caption{Handle: objref.Wrap(id)}
+	x := &Caption{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +62,13 @@ func (x *Caption) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewCaption creates a new Caption.
-func NewCaption() *Caption {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVCaption")), objc.RegisterName("new"))
-	return captionAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Caption) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The text content of the caption. The text may contain any of the line breaking character sequences (LF, CR, or CF+LF) and separating the lines in the presentation. The Apple iTT format supports all Unicode code points allowed in a XML document. Any XML special characters such as '&' are converted to a corresponding character reference syntax when written to the destination file. CEA608 closed captions support the following Unicode characters. Range: U+0020 - U+005F Range: U+0061 - U+007E Range: U+00A1 - U+00A5 Characters: U+00A9, U+00AB, U+00AE, U+00B0, U+00BB, U+00BD, U+00BF Range: U+00C0-U+00C5 Range: U+00C7-U+00CF Range: U+00D1-U+00D6 Range: U+00D8-U+00DC Range: U+00DF-U+00E5 Range: U+00E7-U+00EF Range: U+00F1-U+00FC Range: U+2018-U+2019 Range: U+2018-U+201D Character: U+2022 Range: U+2120-U+2122 Characters: U+2501, U+2503, U+250F, U+2513, U+2517, U+251B, U+2588, U+266A CEA608 closed captions don't support the line breaking character sequences (LF, CR, or CF+LF).
+// Text the text content of the caption. The text may contain any of the line breaking character sequences (LF, CR, or CF+LF) and separating the lines in the presentation. The Apple iTT format supports all Unicode code points allowed in a XML document. Any XML special characters such as '&' are converted to a corresponding character reference syntax when written to the destination file. CEA608 closed captions support the following Unicode characters. Range: U+0020 - U+005F Range: U+0061 - U+007E Range: U+00A1 - U+00A5 Characters: U+00A9, U+00AB, U+00AE, U+00B0, U+00BB, U+00BD, U+00BF Range: U+00C0-U+00C5 Range: U+00C7-U+00CF Range: U+00D1-U+00D6 Range: U+00D8-U+00DC Range: U+00DF-U+00E5 Range: U+00E7-U+00EF Range: U+00F1-U+00FC Range: U+2018-U+2019 Range: U+2018-U+201D Character: U+2022 Range: U+2120-U+2122 Characters: U+2501, U+2503, U+250F, U+2513, U+2517, U+251B, U+2588, U+266A CEA608 closed captions don't support the line breaking character sequences (LF, CR, or CF+LF).
 func (x *Caption) Text() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("text"))
 	if _r == 0 {
@@ -73,18 +77,19 @@ func (x *Caption) Text() string {
 	return purego.GoString(_r)
 }
 
-// The region where the caption is placed. It can be nil when the underlying caption format doesn't support or use regions.
+// Region the region where the caption is placed. It can be nil when the underlying caption format doesn't support or use regions.
 func (x *Caption) Region() *CaptionRegion {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("region"))
 	return CaptionRegionFromID(_r)
 }
 
-// The text alignment within the containing region. This property throws an exception if a value is set which is not a valid AVCaptionTextAlignment.
+// TextAlignment the text alignment within the containing region. This property throws an exception if a value is set which is not a valid AVCaptionTextAlignment.
 func (x *Caption) TextAlignment() CaptionTextAlignment {
 	_r := objc.Send[CaptionTextAlignment](objref.IDOf(x), objc.RegisterName("textAlignment"))
 	return _r
 }
 
+// Animation wraps the corresponding Objective-C method.
 func (x *Caption) Animation() CaptionAnimation {
 	_r := objc.Send[CaptionAnimation](objref.IDOf(x), objc.RegisterName("animation"))
 	return _r
@@ -100,3 +105,10 @@ type Captionable interface {
 }
 
 var _ Captionable = (*Caption)(nil)
+
+// isCaption marks Caption — and, by embedding promotion, its
+// subclasses — as a member of the Caption hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Caption) isCaption() {}
+
+var _ CaptionProvider = (*Caption)(nil)

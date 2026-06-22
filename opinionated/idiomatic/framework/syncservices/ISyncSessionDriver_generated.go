@@ -25,7 +25,8 @@ func ISyncSessionDriverFromID(id objc.ID) *ISyncSessionDriver {
 	if id == 0 {
 		return nil
 	}
-	x := &ISyncSessionDriver{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ISyncSessionDriver{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func iSyncSessionDriverAdopt(id objc.ID) *ISyncSessionDriver {
 	if id == 0 {
 		return nil
 	}
-	x := &ISyncSessionDriver{Handle: objref.Wrap(id)}
+	x := &ISyncSessionDriver{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,26 @@ func (x *ISyncSessionDriver) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ISyncSessionDriver) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewISyncSessionDriver creates a new ISyncSessionDriver.
 func NewISyncSessionDriver() *ISyncSessionDriver {
 	_id := objc.Send[objc.ID](objc.ID(_class("ISyncSessionDriver")), objc.RegisterName("new"))
 	return iSyncSessionDriverAdopt(_id)
 }
 
+// Sync wraps the corresponding Objective-C method.
 func (x *ISyncSessionDriver) Sync() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sync"))
 	return _r
 }
 
+// StartAsynchronousSync wraps the corresponding Objective-C method.
+//
 // StartAsynchronousSync returns an error if the operation did not succeed.
 func (x *ISyncSessionDriver) StartAsynchronousSync() error {
 	var _nsErr uintptr
@@ -79,34 +90,41 @@ func (x *ISyncSessionDriver) StartAsynchronousSync() error {
 	return nil
 }
 
+// SetDelegate wraps the corresponding Objective-C method.
 func (x *ISyncSessionDriver) SetDelegate(delegate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
+// Delegate wraps the corresponding Objective-C method.
 func (x *ISyncSessionDriver) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
+// SetHandlesSyncAlerts wraps the corresponding Objective-C method.
 func (x *ISyncSessionDriver) SetHandlesSyncAlerts(yesOrNo bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHandlesSyncAlerts:"), yesOrNo)
 }
 
+// HandlesSyncAlerts wraps the corresponding Objective-C method.
 func (x *ISyncSessionDriver) HandlesSyncAlerts() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("handlesSyncAlerts"))
 	return _r
 }
 
+// Client wraps the corresponding Objective-C method.
 func (x *ISyncSessionDriver) Client() *ISyncClient {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("client"))
 	return ISyncClientFromID(_r)
 }
 
+// Session wraps the corresponding Objective-C method.
 func (x *ISyncSessionDriver) Session() *ISyncSession {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("session"))
 	return ISyncSessionFromID(_r)
 }
 
+// FinishSyncing wraps the corresponding Objective-C method.
 func (x *ISyncSessionDriver) FinishSyncing() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishSyncing"))
 }

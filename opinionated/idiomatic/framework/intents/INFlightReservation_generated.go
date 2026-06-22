@@ -12,11 +12,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The information that describes a flight reservation.
-//
 // FlightReservation is an idiomatic wrapper over the Objective-C class INFlightReservation.
+//
+// It embeds [Reservation], promoting that type's methods.
+//
+// The information that describes a flight reservation.
 type FlightReservation struct {
-	objref.Handle
+	Reservation
 }
 
 // FlightReservationFromID adopts an existing Objective-C object as a FlightReservation
@@ -25,7 +27,8 @@ func FlightReservationFromID(id objc.ID) *FlightReservation {
 	if id == 0 {
 		return nil
 	}
-	x := &FlightReservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FlightReservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,49 +41,33 @@ func flightReservationAdopt(id objc.ID) *FlightReservation {
 	if id == 0 {
 		return nil
 	}
-	x := &FlightReservation{Handle: objref.Wrap(id)}
+	x := &FlightReservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *FlightReservation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FlightReservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FlightReservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a flight reservation with the specified contents and attributes.
-//
-// NewFlightReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatFlight creates a new FlightReservation.
+// NewFlightReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatFlight creates a flight reservation with the specified contents and attributes.
 func NewFlightReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatFlight(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, uRL string, reservedSeat *Seat, flight *Flight) *FlightReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INFlightReservation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:flight:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(uRL), objref.IDOf(reservedSeat), objref.IDOf(flight))
 	return flightReservationAdopt(_id)
 }
 
-// Creates a new flight reservation with the specified contents and attributes.
-//
-// NewFlightReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatFlight creates a new FlightReservation.
+// NewFlightReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatFlight creates a new flight reservation with the specified contents and attributes.
 func NewFlightReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatFlight(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, reservedSeat *Seat, flight *Flight) *FlightReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INFlightReservation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:reservedSeat:flight:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), objref.IDOf(reservedSeat), objref.IDOf(flight))
 	return flightReservationAdopt(_id)
 }
 
+// ReservedSeat wraps the corresponding Objective-C method.
 func (x *FlightReservation) ReservedSeat() *Seat {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservedSeat"))
 	return SeatFromID(_r)
 }
 
+// Flight wraps the corresponding Objective-C method.
 func (x *FlightReservation) Flight() *Flight {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flight"))
 	return FlightFromID(_r)
@@ -94,3 +81,5 @@ type FlightReservationable interface {
 }
 
 var _ FlightReservationable = (*FlightReservation)(nil)
+
+var _ ReservationProvider = (*FlightReservation)(nil)

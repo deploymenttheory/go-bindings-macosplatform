@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The metadata associated with the response to a URL load request, independent of protocol and URL scheme.
-//
 // URLResponse is an idiomatic wrapper over the Objective-C class NSURLResponse.
+//
+// URLResponse is an abstract base — you do not construct it directly. Construct one of [HTTPURLResponse] and pass it where a URLResponse is accepted.
+//
+// The metadata associated with the response to a URL load request, independent of protocol and URL scheme.
 type URLResponse struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func URLResponseFromID(id objc.ID) *URLResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &URLResponse{Handle: objref.Wrap(purego.Retain(id))}
+	x := &URLResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func uRLResponseAdopt(id objc.ID) *URLResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &URLResponse{Handle: objref.Wrap(id)}
+	x := &URLResponse{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +62,32 @@ func (x *URLResponse) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an NSURLResponse with the provided values. This is the designated initializer for NSURLResponse.
-//
-// NewURLResponseWithURLMIMETypeExpectedContentLengthTextEncodingName creates a new URLResponse.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *URLResponse) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewURLResponseWithURLMIMETypeExpectedContentLengthTextEncodingName initialize an NSURLResponse with the provided values. This is the designated initializer for NSURLResponse.
 func NewURLResponseWithURLMIMETypeExpectedContentLengthTextEncodingName(uRL string, mIMEType string, length int, name string) *URLResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLResponse")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:MIMEType:expectedContentLength:textEncodingName:"), rt.FileURL(uRL), purego.NSString(mIMEType), length, purego.NSString(name))
 	return uRLResponseAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *URLResponse) WithScriptingProperties(scriptingProperties obj.Object) *URLResponse {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Returns the URL of the receiver.
+// URL returns the URL of the receiver.
 func (x *URLResponse) URL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return URLFromID(_r)
 }
 
-// Returns the MIME type of the receiver. The MIME type is based on the information provided from an origin source. However, that value may be changed or corrected by a protocol implementation if it can be determined that the origin server or source reported the information incorrectly or imprecisely. An attempt to guess the MIME type may be made if the origin source did not report any such information.
+// MIMEType returns the MIME type of the receiver. The MIME type is based on the information provided from an origin source. However, that value may be changed or corrected by a protocol implementation if it can be determined that the origin server or source reported the information incorrectly or imprecisely. An attempt to guess the MIME type may be made if the origin source did not report any such information.
 func (x *URLResponse) MIMEType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("MIMEType"))
 	if _r == 0 {
@@ -88,13 +96,13 @@ func (x *URLResponse) MIMEType() string {
 	return purego.GoString(_r)
 }
 
-// Returns the expected content length of the receiver. Some protocol implementations report a content length as part of delivering load metadata, but not all protocols guarantee the amount of data that will be delivered in actuality. Hence, this method returns an expected amount. Clients should use this value as an advisory, and should be prepared to deal with either more or less data.
+// ExpectedContentLength returns the expected content length of the receiver. Some protocol implementations report a content length as part of delivering load metadata, but not all protocols guarantee the amount of data that will be delivered in actuality. Hence, this method returns an expected amount. Clients should use this value as an advisory, and should be prepared to deal with either more or less data.
 func (x *URLResponse) ExpectedContentLength() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("expectedContentLength"))
 	return _r
 }
 
-// Returns the name of the text encoding of the receiver. This name will be the actual string reported by the origin source during the course of performing a protocol-specific URL load. Clients can inspect this string and convert it to an NSStringEncoding or CFStringEncoding using the methods and functions made available in the appropriate framework.
+// TextEncodingName returns the name of the text encoding of the receiver. This name will be the actual string reported by the origin source during the course of performing a protocol-specific URL load. Clients can inspect this string and convert it to an NSStringEncoding or CFStringEncoding using the methods and functions made available in the appropriate framework.
 func (x *URLResponse) TextEncodingName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textEncodingName"))
 	if _r == 0 {
@@ -103,7 +111,7 @@ func (x *URLResponse) TextEncodingName() string {
 	return purego.GoString(_r)
 }
 
-// Returns a suggested filename if the resource were saved to disk. The method first checks if the server has specified a filename using the content disposition header. If no valid filename is specified using that mechanism, this method checks the last path component of the URL. If no valid filename can be obtained using the last path component, this method uses the URL's host as the filename. If the URL's host can't be converted to a valid filename, the filename "unknown" is used. In most cases, this method appends the proper file extension based on the MIME type. This method always returns a valid filename.
+// SuggestedFilename returns a suggested filename if the resource were saved to disk. The method first checks if the server has specified a filename using the content disposition header. If no valid filename is specified using that mechanism, this method checks the last path component of the URL. If no valid filename can be obtained using the last path component, this method uses the URL's host as the filename. If the URL's host can't be converted to a valid filename, the filename "unknown" is used. In most cases, this method appends the proper file extension based on the MIME type. This method always returns a valid filename.
 func (x *URLResponse) SuggestedFilename() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suggestedFilename"))
 	if _r == 0 {
@@ -124,3 +132,10 @@ type URLResponseable interface {
 }
 
 var _ URLResponseable = (*URLResponse)(nil)
+
+// isURLResponse marks URLResponse — and, by embedding promotion, its
+// subclasses — as a member of the URLResponse hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *URLResponse) isURLResponse() {}
+
+var _ URLResponseProvider = (*URLResponse)(nil)

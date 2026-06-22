@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A Core Animation layer that renders a SceneKit scene as its content.
-//
 // Layer is an idiomatic wrapper over the Objective-C class SCNLayer.
+//
+// A Core Animation layer that renders a SceneKit scene as its content.
 type Layer struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LayerFromID(id objc.ID) *Layer {
 	if id == 0 {
 		return nil
 	}
-	x := &Layer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Layer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func layerAdopt(id objc.ID) *Layer {
 	if id == 0 {
 		return nil
 	}
-	x := &Layer{Handle: objref.Wrap(id)}
+	x := &Layer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *Layer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Layer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLayer creates a new Layer.
 func NewLayer() *Layer {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCNLayer")), objc.RegisterName("new"))
 	return layerAdopt(_id)
 }
 
-// The scene to be displayed in the layer.
-//
-// WithScene sets scene and returns the receiver so calls can be chained.
+// WithScene the scene to be displayed in the layer.
 func (x *Layer) WithScene(scene *Scene) *Layer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScene:"), objref.IDOf(scene))
 	return x
 }
 
+// Scene wraps the corresponding Objective-C method.
 func (x *Layer) Scene() *Scene {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scene"))
 	return SceneFromID(_r)
 }
 
+// SetScene wraps the corresponding Objective-C method.
 func (x *Layer) SetScene(scene *Scene) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScene:"), objref.IDOf(scene))
 }

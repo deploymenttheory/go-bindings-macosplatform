@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A query that returns the heartbeat data contained in a heartbeat series sample.
-//
 // HeartbeatSeriesQuery is an idiomatic wrapper over the Objective-C class HKHeartbeatSeriesQuery.
+//
+// It embeds [Query], promoting that type's methods.
+//
+// A query that returns the heartbeat data contained in a heartbeat series sample.
 type HeartbeatSeriesQuery struct {
-	objref.Handle
+	Query
 }
 
 // HeartbeatSeriesQueryFromID adopts an existing Objective-C object as a HeartbeatSeriesQuery
@@ -25,7 +26,8 @@ func HeartbeatSeriesQueryFromID(id objc.ID) *HeartbeatSeriesQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &HeartbeatSeriesQuery{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HeartbeatSeriesQuery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func heartbeatSeriesQueryAdopt(id objc.ID) *HeartbeatSeriesQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &HeartbeatSeriesQuery{Handle: objref.Wrap(id)}
+	x := &HeartbeatSeriesQuery{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *HeartbeatSeriesQuery) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HeartbeatSeriesQuery) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HeartbeatSeriesQuery) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewHeartbeatSeriesQuery creates a new HeartbeatSeriesQuery.
@@ -70,3 +58,5 @@ type HeartbeatSeriesQueryable interface {
 }
 
 var _ HeartbeatSeriesQueryable = (*HeartbeatSeriesQuery)(nil)
+
+var _ QueryProvider = (*HeartbeatSeriesQuery)(nil)

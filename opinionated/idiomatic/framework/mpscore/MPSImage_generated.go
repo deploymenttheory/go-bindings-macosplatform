@@ -6,6 +6,7 @@ package mpscore
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -13,6 +14,8 @@ import (
 )
 
 // Image is an idiomatic wrapper over the Objective-C class MPSImage.
+//
+// Image is an abstract base — you do not construct it directly. Construct one of [TemporaryImage] and pass it where a Image is accepted.
 type Image struct {
 	objref.Handle
 }
@@ -23,7 +26,8 @@ func ImageFromID(id objc.ID) *Image {
 	if id == 0 {
 		return nil
 	}
-	x := &Image{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Image{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +40,8 @@ func imageAdopt(id objc.ID) *Image {
 	if id == 0 {
 		return nil
 	}
-	x := &Image{Handle: objref.Wrap(id)}
+	x := &Image{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,75 +61,86 @@ func (x *Image) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewImage creates a new Image.
-func NewImage() *Image {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSImage")), objc.RegisterName("new"))
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Image) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewImageWithParentImageSliceRangeFeatureChannels use -batchRepresentation or -subImageWithFeatureChannelRange instead Generally, you should call -batchRepresentation or -subImageWithFeatureChannelRange instead because they are safer. This is provided so that these interfaces will work with your MPSImage subclass.
+func NewImageWithParentImageSliceRangeFeatureChannels(parent *Image, sliceRange foundation.NSRange, featureChannels int) *Image {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSImage")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParentImage:sliceRange:featureChannels:"), objref.IDOf(parent), sliceRange, featureChannels)
 	return imageAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *Image) WithLabel(label string) *Image {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Get the number of bytes used to allocate underyling MTLResources This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSImage instantiation and MTLTexture is not included. It only measures the size of the allocation used to hold the texels in the image. This value is subject to change between different devices and operating systems. Except when -initWithTexture:featureChannels: is used, most MPSImages (including MPSTemporaryImages) are allocated without a backing store. The backing store is allocated lazily when it is needed, typically when the .texture property is called. Consequently, in most cases, it should be inexpensive to make a MPSImage to see how much memory it will need, and release it if it is too large. This method may fail in certain circumstances, such as when the MPSImage is created with -initWithTexture:featureChannels:, in which case 0 will be returned. 0 will also be returned if it is a sub-image or sub-batch (.parent is not nil).
+// SubImageWithFeatureChannelRange wraps the corresponding Objective-C method.
+func (x *Image) SubImageWithFeatureChannelRange(range_ foundation.NSRange) *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subImageWithFeatureChannelRange:"), range_)
+	return ImageFromID(_r)
+}
+
+// ResourceSize get the number of bytes used to allocate underyling MTLResources This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSImage instantiation and MTLTexture is not included. It only measures the size of the allocation used to hold the texels in the image. This value is subject to change between different devices and operating systems. Except when -initWithTexture:featureChannels: is used, most MPSImages (including MPSTemporaryImages) are allocated without a backing store. The backing store is allocated lazily when it is needed, typically when the .texture property is called. Consequently, in most cases, it should be inexpensive to make a MPSImage to see how much memory it will need, and release it if it is too large. This method may fail in certain circumstances, such as when the MPSImage is created with -initWithTexture:featureChannels:, in which case 0 will be returned. 0 will also be returned if it is a sub-image or sub-batch (.parent is not nil).
 func (x *Image) ResourceSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resourceSize"))
 	return _r
 }
 
-// Set (or query) the purgeability state of a MPSImage Usage is per [MTLResource setPurgeableState:], except that the MTLTexture might be MPSPurgeableStateAllocationDeferred, which means there is no texture to mark volatile / nonvolatile. Attempts to set purgeability on MTLTextures that have not been allocated will be ignored.
+// SetPurgeableState set (or query) the purgeability state of a MPSImage Usage is per [MTLResource setPurgeableState:], except that the MTLTexture might be MPSPurgeableStateAllocationDeferred, which means there is no texture to mark volatile / nonvolatile. Attempts to set purgeability on MTLTextures that have not been allocated will be ignored.
 func (x *Image) SetPurgeableState(state PurgeableState) PurgeableState {
 	_r := objc.Send[PurgeableState](objref.IDOf(x), objc.RegisterName("setPurgeableState:"), state)
 	return _r
 }
 
-// The formal width of the image in pixels.
+// Width the formal width of the image in pixels.
 func (x *Image) Width() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("width"))
 	return _r
 }
 
-// The formal height of the image in pixels.
+// Height the formal height of the image in pixels.
 func (x *Image) Height() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("height"))
 	return _r
 }
 
-// The number of feature channels per pixel.
+// FeatureChannels the number of feature channels per pixel.
 func (x *Image) FeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("featureChannels"))
 	return _r
 }
 
-// numberOfImages for batch processing
+// NumberOfImages numberOfImages for batch processing
 func (x *Image) NumberOfImages() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfImages"))
 	return _r
 }
 
-// The number of bits of numeric precision available for each feature channel. This is precision, not size.  That is, float is 24 bits, not 32. half precision floating-point is 11 bits, not 16. SNorm formats have one less bit of precision for the sign bit, etc. For formats like MTLPixelFormatB5G6R5Unorm it is the precision of the most precise channel, in this case 6.  When this information is unavailable, typically compressed formats, 0 will be returned.
+// Precision the number of bits of numeric precision available for each feature channel. This is precision, not size.  That is, float is 24 bits, not 32. half precision floating-point is 11 bits, not 16. SNorm formats have one less bit of precision for the sign bit, etc. For formats like MTLPixelFormatB5G6R5Unorm it is the precision of the most precise channel, in this case 6.  When this information is unavailable, typically compressed formats, 0 will be returned.
 func (x *Image) Precision() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("precision"))
 	return _r
 }
 
-// The true encoding of the feature channels
+// FeatureChannelFormat the true encoding of the feature channels
 func (x *Image) FeatureChannelFormat() ImageFeatureChannelFormat {
 	_r := objc.Send[ImageFeatureChannelFormat](objref.IDOf(x), objc.RegisterName("featureChannelFormat"))
 	return _r
 }
 
-// Number of bytes from the first byte of one pixel to the first byte of the next pixel in storage order.  (Includes padding.)
+// PixelSize number of bytes from the first byte of one pixel to the first byte of the next pixel in storage order.  (Includes padding.)
 func (x *Image) PixelSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelSize"))
 	return _r
 }
 
-// A string to help identify this object.
+// Label a string to help identify this object.
 func (x *Image) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -133,11 +149,12 @@ func (x *Image) Label() string {
 	return purego.GoString(_r)
 }
 
+// SetLabel wraps the corresponding Objective-C method.
 func (x *Image) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// The MPSImage from which this MPSImage was derived. Otherwise nil. This will point to the original image if this image was created using -batchRepresentation, -batchRepresentationWithRange: or -subImageWithFeatureChannelRange:.
+// Parent the MPSImage from which this MPSImage was derived. Otherwise nil. This will point to the original image if this image was created using -batchRepresentation, -batchRepresentationWithRange: or -subImageWithFeatureChannelRange:.
 func (x *Image) Parent() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parent"))
 	return ImageFromID(_r)
@@ -147,6 +164,7 @@ func (x *Image) Parent() *Image {
 type Imageable interface {
 	obj.Object
 	WithLabel(label string) *Image
+	SubImageWithFeatureChannelRange(range_ foundation.NSRange) *Image
 	ResourceSize() int
 	SetPurgeableState(state PurgeableState) PurgeableState
 	Width() int
@@ -162,3 +180,10 @@ type Imageable interface {
 }
 
 var _ Imageable = (*Image)(nil)
+
+// isImage marks Image — and, by embedding promotion, its
+// subclasses — as a member of the Image hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Image) isImage() {}
+
+var _ ImageProvider = (*Image)(nil)

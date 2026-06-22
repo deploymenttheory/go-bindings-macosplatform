@@ -15,9 +15,11 @@ import (
 	"unsafe"
 )
 
-// An object to start and stop a Personal VPN connection and get its status.
-//
 // NEVPNConnection is an idiomatic wrapper over the Objective-C class NEVPNConnection.
+//
+// NEVPNConnection is an abstract base — you do not construct it directly. Construct one of [NETunnelProviderSession] and pass it where a NEVPNConnection is accepted.
+//
+// An object to start and stop a Personal VPN connection and get its status.
 type NEVPNConnection struct {
 	objref.Handle
 }
@@ -28,7 +30,8 @@ func NEVPNConnectionFromID(id objc.ID) *NEVPNConnection {
 	if id == 0 {
 		return nil
 	}
-	x := &NEVPNConnection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEVPNConnection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -41,7 +44,8 @@ func nEVPNConnectionAdopt(id objc.ID) *NEVPNConnection {
 	if id == 0 {
 		return nil
 	}
-	x := &NEVPNConnection{Handle: objref.Wrap(id)}
+	x := &NEVPNConnection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -61,13 +65,13 @@ func (x *NEVPNConnection) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewNEVPNConnection creates a new NEVPNConnection.
-func NewNEVPNConnection() *NEVPNConnection {
-	_id := objc.Send[objc.ID](objc.ID(_class("NEVPNConnection")), objc.RegisterName("new"))
-	return nEVPNConnectionAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEVPNConnection) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Start the process of connecting the VPN.
+// StartVPNTunnelAndReturnError start the process of connecting the VPN.
 //
 // StartVPNTunnelAndReturnError returns an error if the operation did not succeed.
 func (x *NEVPNConnection) StartVPNTunnelAndReturnError() error {
@@ -79,7 +83,7 @@ func (x *NEVPNConnection) StartVPNTunnelAndReturnError() error {
 	return nil
 }
 
-// Start the process of connecting the VPN.
+// StartVPNTunnelWithOptionsAndReturnError start the process of connecting the VPN.
 func (x *NEVPNConnection) StartVPNTunnelWithOptionsAndReturnError(options obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("startVPNTunnelWithOptions:andReturnError:"), objref.IDOf(options), unsafe.Pointer(&_nsErr))
@@ -89,12 +93,12 @@ func (x *NEVPNConnection) StartVPNTunnelWithOptionsAndReturnError(options obj.Ob
 	return nil
 }
 
-// Start the process of disconnecting the VPN.
+// StopVPNTunnel start the process of disconnecting the VPN.
 func (x *NEVPNConnection) StopVPNTunnel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopVPNTunnel"))
 }
 
-// Retrives the most recent error that caused the VPN to disconnect.
+// FetchLastDisconnectError retrives the most recent error that caused the VPN to disconnect.
 //
 // FetchLastDisconnectError blocks until the operation completes or ctx is cancelled.
 func (x *NEVPNConnection) FetchLastDisconnectError(ctx context.Context) error {
@@ -113,19 +117,19 @@ func (x *NEVPNConnection) FetchLastDisconnectError(ctx context.Context) error {
 	}
 }
 
-// The current status of the VPN.
+// Status the current status of the VPN.
 func (x *NEVPNConnection) Status() NEVPNStatus {
 	_r := objc.Send[NEVPNStatus](objref.IDOf(x), objc.RegisterName("status"))
 	return _r
 }
 
-// The date and time when the connection status changed to NEVPNStatusConnected. This property is nil if the connection is not fully established.
+// ConnectedDate the date and time when the connection status changed to NEVPNStatusConnected. This property is nil if the connection is not fully established.
 func (x *NEVPNConnection) ConnectedDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectedDate"))
 	return obj.Wrap(_r)
 }
 
-// The NEVPNManager associated with this NEVPNConnection.
+// Manager the NEVPNManager associated with this NEVPNConnection.
 func (x *NEVPNConnection) Manager() *NEVPNManager {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manager"))
 	return NEVPNManagerFromID(_r)
@@ -144,3 +148,10 @@ type NEVPNConnectionable interface {
 }
 
 var _ NEVPNConnectionable = (*NEVPNConnection)(nil)
+
+// isNEVPNConnection marks NEVPNConnection — and, by embedding promotion, its
+// subclasses — as a member of the NEVPNConnection hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NEVPNConnection) isNEVPNConnection() {}
+
+var _ NEVPNConnectionProvider = (*NEVPNConnection)(nil)

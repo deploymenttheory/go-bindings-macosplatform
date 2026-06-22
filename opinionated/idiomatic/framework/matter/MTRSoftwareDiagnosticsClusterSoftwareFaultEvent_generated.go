@@ -23,7 +23,8 @@ func MTRSoftwareDiagnosticsClusterSoftwareFaultEventFromID(id objc.ID) *MTRSoftw
 	if id == 0 {
 		return nil
 	}
-	x := &MTRSoftwareDiagnosticsClusterSoftwareFaultEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRSoftwareDiagnosticsClusterSoftwareFaultEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRSoftwareDiagnosticsClusterSoftwareFaultEventAdopt(id objc.ID) *MTRSoftwa
 	if id == 0 {
 		return nil
 	}
-	x := &MTRSoftwareDiagnosticsClusterSoftwareFaultEvent{Handle: objref.Wrap(id)}
+	x := &MTRSoftwareDiagnosticsClusterSoftwareFaultEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,39 +58,48 @@ func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) IsKind(className strin
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRSoftwareDiagnosticsClusterSoftwareFaultEvent creates a new MTRSoftwareDiagnosticsClusterSoftwareFaultEvent.
 func NewMTRSoftwareDiagnosticsClusterSoftwareFaultEvent() *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRSoftwareDiagnosticsClusterSoftwareFaultEvent")), objc.RegisterName("new"))
 	return mTRSoftwareDiagnosticsClusterSoftwareFaultEventAdopt(_id)
 }
 
-// WithId sets id_ and returns the receiver so calls can be chained.
+// WithId sets the property and returns the receiver so calls can be chained.
 func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) WithId(id_ obj.Object) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setId:"), objref.IDOf(id_))
 	return x
 }
 
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) WithName(name string) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// WithFaultRecording sets faultRecording and returns the receiver so calls can be chained.
+// WithFaultRecording sets the property and returns the receiver so calls can be chained.
 func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) WithFaultRecording(faultRecording obj.Object) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFaultRecording:"), objref.IDOf(faultRecording))
 	return x
 }
 
+// Id wraps the corresponding Objective-C method.
 func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) Id() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("id"))
 	return obj.Wrap(_r)
 }
 
+// SetId wraps the corresponding Objective-C method.
 func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) SetId(id_ obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setId:"), objref.IDOf(id_))
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -97,15 +108,18 @@ func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
+// FaultRecording wraps the corresponding Objective-C method.
 func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) FaultRecording() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("faultRecording"))
 	return obj.Wrap(_r)
 }
 
+// SetFaultRecording wraps the corresponding Objective-C method.
 func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) SetFaultRecording(faultRecording obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFaultRecording:"), objref.IDOf(faultRecording))
 }

@@ -47,6 +47,8 @@ const (
 	CompositeAttributeType AttributeType = 2100
 )
 
+// String returns the AttributeType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AttributeType) String() string {
 	switch e {
 	case UndefinedAttributeType:
@@ -98,6 +100,8 @@ const (
 	BatchDeleteResultTypeCount BatchDeleteRequestResultType = 2
 )
 
+// String returns the BatchDeleteRequestResultType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BatchDeleteRequestResultType) String() string {
 	switch e {
 	case BatchDeleteResultTypeStatusOnly:
@@ -123,6 +127,8 @@ const (
 	BatchInsertRequestResultTypeCount BatchInsertRequestResultType = 2
 )
 
+// String returns the BatchInsertRequestResultType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BatchInsertRequestResultType) String() string {
 	switch e {
 	case BatchInsertRequestResultTypeStatusOnly:
@@ -148,6 +154,8 @@ const (
 	UpdatedObjectsCountResultType BatchUpdateRequestResultType = 2
 )
 
+// String returns the BatchUpdateRequestResultType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BatchUpdateRequestResultType) String() string {
 	switch e {
 	case StatusOnlyResultType:
@@ -175,6 +183,8 @@ const (
 	DenyDeleteRule DeleteRule = 3
 )
 
+// String returns the DeleteRule constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DeleteRule) String() string {
 	switch e {
 	case NoActionDeleteRule:
@@ -208,6 +218,8 @@ const (
 	TransformEntityMappingType EntityMappingType = 5
 )
 
+// String returns the EntityMappingType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EntityMappingType) String() string {
 	switch e {
 	case UndefinedEntityMappingType:
@@ -237,6 +249,8 @@ const (
 	FetchIndexElementTypeRTree FetchIndexElementType = 1
 )
 
+// String returns the FetchIndexElementType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FetchIndexElementType) String() string {
 	switch e {
 	case FetchIndexElementTypeBinary:
@@ -263,6 +277,8 @@ const (
 	CountResultType FetchRequestResultType = 4
 )
 
+// String returns the FetchRequestResultType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FetchRequestResultType) String() string {
 	var parts []string
 	if e&ManagedObjectIDResultType != 0 {
@@ -298,6 +314,8 @@ const (
 	MainQueueConcurrencyType ManagedObjectContextConcurrencyType = 2
 )
 
+// String returns the ManagedObjectContextConcurrencyType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ManagedObjectContextConcurrencyType) String() string {
 	switch e {
 	case ConfinementConcurrencyType:
@@ -327,6 +345,8 @@ const (
 	RollbackMergePolicyType MergePolicyType = 4
 )
 
+// String returns the MergePolicyType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MergePolicyType) String() string {
 	switch e {
 	case ErrorMergePolicyType:
@@ -352,6 +372,8 @@ const (
 	PersistentCloudKitContainerEventResultTypeCountEvents PersistentCloudKitContainerEventResultType = 1
 )
 
+// String returns the PersistentCloudKitContainerEventResultType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PersistentCloudKitContainerEventResultType) String() string {
 	switch e {
 	case PersistentCloudKitContainerEventResultTypeEvents:
@@ -372,6 +394,8 @@ const (
 	PersistentCloudKitContainerEventTypeExport PersistentCloudKitContainerEventType = 2
 )
 
+// String returns the PersistentCloudKitContainerEventType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PersistentCloudKitContainerEventType) String() string {
 	switch e {
 	case PersistentCloudKitContainerEventTypeSetup:
@@ -398,6 +422,8 @@ const (
 	PersistentCloudKitContainerSchemaInitializationOptionsPrintSchema PersistentCloudKitContainerSchemaInitializationOptions = 4
 )
 
+// String returns the PersistentCloudKitContainerSchemaInitializationOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PersistentCloudKitContainerSchemaInitializationOptions) String() string {
 	var parts []string
 	if e&PersistentCloudKitContainerSchemaInitializationOptionsDryRun != 0 {
@@ -424,6 +450,8 @@ const (
 	PersistentHistoryChangeTypeDelete PersistentHistoryChangeType = 2
 )
 
+// String returns the PersistentHistoryChangeType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PersistentHistoryChangeType) String() string {
 	switch e {
 	case PersistentHistoryChangeTypeInsert:
@@ -455,6 +483,8 @@ const (
 	PersistentHistoryResultTypeTransactionsAndChanges PersistentHistoryResultType = 5
 )
 
+// String returns the PersistentHistoryResultType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PersistentHistoryResultType) String() string {
 	switch e {
 	case PersistentHistoryResultTypeStatusOnly:
@@ -490,6 +520,8 @@ const (
 	BatchDeleteRequestType PersistentStoreRequestType = 7
 )
 
+// String returns the PersistentStoreRequestType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PersistentStoreRequestType) String() string {
 	switch e {
 	case FetchRequestType:
@@ -526,6 +558,8 @@ const (
 	SnapshotEventMergePolicy SnapshotEventType = 64
 )
 
+// String returns the SnapshotEventType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SnapshotEventType) String() string {
 	var parts []string
 	if e&SnapshotEventUndoInsertion != 0 {

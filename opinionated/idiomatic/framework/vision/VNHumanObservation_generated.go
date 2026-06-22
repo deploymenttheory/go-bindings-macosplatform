@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a person that the request detects.
-//
 // HumanObservation is an idiomatic wrapper over the Objective-C class VNHumanObservation.
+//
+// It embeds [DetectedObjectObservation], promoting that type's methods.
+//
+// An object that represents a person that the request detects.
 type HumanObservation struct {
-	objref.Handle
+	DetectedObjectObservation
 }
 
 // HumanObservationFromID adopts an existing Objective-C object as a HumanObservation
@@ -25,7 +26,8 @@ func HumanObservationFromID(id objc.ID) *HumanObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &HumanObservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HumanObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func humanObservationAdopt(id objc.ID) *HumanObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &HumanObservation{Handle: objref.Wrap(id)}
+	x := &HumanObservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *HumanObservation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HumanObservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HumanObservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewHumanObservation creates a new HumanObservation.
@@ -64,6 +52,7 @@ func NewHumanObservation() *HumanObservation {
 	return humanObservationAdopt(_id)
 }
 
+// UpperBodyOnly wraps the corresponding Objective-C method.
 func (x *HumanObservation) UpperBodyOnly() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("upperBodyOnly"))
 	return _r
@@ -76,3 +65,7 @@ type HumanObservationable interface {
 }
 
 var _ HumanObservationable = (*HumanObservation)(nil)
+
+var _ DetectedObjectObservationProvider = (*HumanObservation)(nil)
+
+var _ ObservationProvider = (*HumanObservation)(nil)

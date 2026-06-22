@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRControllerFactoryParams is an idiomatic wrapper over the Objective-C class MTRControllerFactoryParams.
+//
+// It embeds [MTRDeviceControllerFactoryParams], promoting that type's methods.
 type MTRControllerFactoryParams struct {
-	objref.Handle
+	MTRDeviceControllerFactoryParams
 }
 
 // MTRControllerFactoryParamsFromID adopts an existing Objective-C object as a MTRControllerFactoryParams
@@ -23,7 +24,8 @@ func MTRControllerFactoryParamsFromID(id objc.ID) *MTRControllerFactoryParams {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRControllerFactoryParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRControllerFactoryParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRControllerFactoryParamsAdopt(id objc.ID) *MTRControllerFactoryParams {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRControllerFactoryParams{Handle: objref.Wrap(id)}
+	x := &MTRControllerFactoryParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRControllerFactoryParams) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRControllerFactoryParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRControllerFactoryParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRControllerFactoryParams creates a new MTRControllerFactoryParams.
@@ -62,77 +50,85 @@ func NewMTRControllerFactoryParams() *MTRControllerFactoryParams {
 	return mTRControllerFactoryParamsAdopt(_id)
 }
 
-// WithStartServer sets startServer and returns the receiver so calls can be chained.
+// WithStartServer sets the property and returns the receiver so calls can be chained.
 func (x *MTRControllerFactoryParams) WithStartServer(startServer bool) *MTRControllerFactoryParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartServer:"), startServer)
 	return x
 }
 
-// WithPaaCerts sets the collection and returns the receiver so calls can be chained.
+// WithPaaCerts sets the property and returns the receiver so calls can be chained.
 func (x *MTRControllerFactoryParams) WithPaaCerts(items ...obj.Object) *MTRControllerFactoryParams {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaaCerts:"), _arr)
 	return x
 }
 
-// WithCdCerts sets the collection and returns the receiver so calls can be chained.
+// WithCdCerts sets the property and returns the receiver so calls can be chained.
 func (x *MTRControllerFactoryParams) WithCdCerts(items ...obj.Object) *MTRControllerFactoryParams {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCdCerts:"), _arr)
 	return x
 }
 
-// WithProductAttestationAuthorityCertificates sets the collection and returns the receiver so calls can be chained.
+// WithProductAttestationAuthorityCertificates sets the property and returns the receiver so calls can be chained.
 func (x *MTRControllerFactoryParams) WithProductAttestationAuthorityCertificates(items ...obj.Object) *MTRControllerFactoryParams {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductAttestationAuthorityCertificates:"), _arr)
 	return x
 }
 
-// WithCertificationDeclarationCertificates sets the collection and returns the receiver so calls can be chained.
+// WithCertificationDeclarationCertificates sets the property and returns the receiver so calls can be chained.
 func (x *MTRControllerFactoryParams) WithCertificationDeclarationCertificates(items ...obj.Object) *MTRControllerFactoryParams {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCertificationDeclarationCertificates:"), _arr)
 	return x
 }
 
-// WithPort sets port and returns the receiver so calls can be chained.
+// WithPort sets the property and returns the receiver so calls can be chained.
 func (x *MTRControllerFactoryParams) WithPort(port obj.Object) *MTRControllerFactoryParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPort:"), objref.IDOf(port))
 	return x
 }
 
-// WithShouldStartServer sets shouldStartServer and returns the receiver so calls can be chained.
+// WithShouldStartServer sets the property and returns the receiver so calls can be chained.
 func (x *MTRControllerFactoryParams) WithShouldStartServer(shouldStartServer bool) *MTRControllerFactoryParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldStartServer:"), shouldStartServer)
 	return x
 }
 
+// StartServer wraps the corresponding Objective-C method.
 func (x *MTRControllerFactoryParams) StartServer() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startServer"))
 	return _r
 }
 
+// SetStartServer wraps the corresponding Objective-C method.
 func (x *MTRControllerFactoryParams) SetStartServer(startServer bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartServer:"), startServer)
 }
 
+// PaaCerts wraps the corresponding Objective-C method.
+//
 // PaaCerts returns the collection as a Go slice.
 func (x *MTRControllerFactoryParams) PaaCerts() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paaCerts"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetPaaCerts wraps the corresponding Objective-C method.
 func (x *MTRControllerFactoryParams) SetPaaCerts(paaCerts []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaaCerts:"), purego.SliceToNSArray(paaCerts, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// CdCerts wraps the corresponding Objective-C method.
+//
 // CdCerts returns the collection as a Go slice.
 func (x *MTRControllerFactoryParams) CdCerts() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cdCerts"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetCdCerts wraps the corresponding Objective-C method.
 func (x *MTRControllerFactoryParams) SetCdCerts(cdCerts []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCdCerts:"), purego.SliceToNSArray(cdCerts, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
@@ -156,3 +152,5 @@ type MTRControllerFactoryParamsable interface {
 }
 
 var _ MTRControllerFactoryParamsable = (*MTRControllerFactoryParams)(nil)
+
+var _ MTRDeviceControllerFactoryParamsProvider = (*MTRControllerFactoryParams)(nil)

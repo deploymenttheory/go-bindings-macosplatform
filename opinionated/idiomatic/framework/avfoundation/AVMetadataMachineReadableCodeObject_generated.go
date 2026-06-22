@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Barcode information detected by a metadata capture output.
-//
 // MetadataMachineReadableCodeObject is an idiomatic wrapper over the Objective-C class AVMetadataMachineReadableCodeObject.
+//
+// It embeds [MetadataObject], promoting that type's methods.
+//
+// Barcode information detected by a metadata capture output.
 type MetadataMachineReadableCodeObject struct {
-	objref.Handle
+	MetadataObject
 }
 
 // MetadataMachineReadableCodeObjectFromID adopts an existing Objective-C object as a MetadataMachineReadableCodeObject
@@ -25,7 +26,8 @@ func MetadataMachineReadableCodeObjectFromID(id objc.ID) *MetadataMachineReadabl
 	if id == 0 {
 		return nil
 	}
-	x := &MetadataMachineReadableCodeObject{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetadataMachineReadableCodeObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func metadataMachineReadableCodeObjectAdopt(id objc.ID) *MetadataMachineReadable
 	if id == 0 {
 		return nil
 	}
-	x := &MetadataMachineReadableCodeObject{Handle: objref.Wrap(id)}
+	x := &MetadataMachineReadableCodeObject{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MetadataMachineReadableCodeObject) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetadataMachineReadableCodeObject) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetadataMachineReadableCodeObject) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMetadataMachineReadableCodeObject creates a new MetadataMachineReadableCodeObject.
@@ -64,7 +52,7 @@ func NewMetadataMachineReadableCodeObject() *MetadataMachineReadableCodeObject {
 	return metadataMachineReadableCodeObjectAdopt(_id)
 }
 
-// The points defining the (X,Y) locations of the corners of the machine-readable code. The value of this property is an NSArray of NSDictionaries, each of which has been created from a CGPoint using CGPointCreateDictionaryRepresentation(), representing the coordinates of the corners of the object with respect to the image in which it resides. If the metadata originates from video, the points may be expressed as scalar values from 0. - 1. The points in the corners differ from the bounds rectangle in that bounds is axis-aligned to orientation of the captured image, and the values of the corners reside within the bounds rectangle. The points are arranged in counter-clockwise order (clockwise if the code or image is mirrored), starting with the top-left of the code in its canonical orientation.
+// Corners the points defining the (X,Y) locations of the corners of the machine-readable code. The value of this property is an NSArray of NSDictionaries, each of which has been created from a CGPoint using CGPointCreateDictionaryRepresentation(), representing the coordinates of the corners of the object with respect to the image in which it resides. If the metadata originates from video, the points may be expressed as scalar values from 0. - 1. The points in the corners differ from the bounds rectangle in that bounds is axis-aligned to orientation of the captured image, and the values of the corners reside within the bounds rectangle. The points are arranged in counter-clockwise order (clockwise if the code or image is mirrored), starting with the top-left of the code in its canonical orientation.
 //
 // Corners returns the collection as a Go slice.
 func (x *MetadataMachineReadableCodeObject) Corners() []obj.Object {
@@ -72,7 +60,7 @@ func (x *MetadataMachineReadableCodeObject) Corners() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Returns the receiver's errorCorrectedData decoded into a human-readable string. The value of this property is an NSString created by decoding the binary payload according to the format of the machine readable code. Returns nil if a string representation cannot be created from the payload.
+// StringValue returns the receiver's errorCorrectedData decoded into a human-readable string. The value of this property is an NSString created by decoding the binary payload according to the format of the machine readable code. Returns nil if a string representation cannot be created from the payload.
 func (x *MetadataMachineReadableCodeObject) StringValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
 	if _r == 0 {
@@ -81,6 +69,7 @@ func (x *MetadataMachineReadableCodeObject) StringValue() string {
 	return purego.GoString(_r)
 }
 
+// Descriptor wraps the corresponding Objective-C method.
 func (x *MetadataMachineReadableCodeObject) Descriptor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
 	return obj.Wrap(_r)
@@ -95,3 +84,5 @@ type MetadataMachineReadableCodeObjectable interface {
 }
 
 var _ MetadataMachineReadableCodeObjectable = (*MetadataMachineReadableCodeObject)(nil)
+
+var _ MetadataObjectProvider = (*MetadataMachineReadableCodeObject)(nil)

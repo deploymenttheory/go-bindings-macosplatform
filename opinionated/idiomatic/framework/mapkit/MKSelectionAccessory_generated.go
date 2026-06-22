@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The type of accessory to display for a selected annotation.
-//
 // SelectionAccessory is an idiomatic wrapper over the Objective-C class MKSelectionAccessory.
+//
+// The type of accessory to display for a selected annotation.
 type SelectionAccessory struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SelectionAccessoryFromID(id objc.ID) *SelectionAccessory {
 	if id == 0 {
 		return nil
 	}
-	x := &SelectionAccessory{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SelectionAccessory{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func selectionAccessoryAdopt(id objc.ID) *SelectionAccessory {
 	if id == 0 {
 		return nil
 	}
-	x := &SelectionAccessory{Handle: objref.Wrap(id)}
+	x := &SelectionAccessory{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *SelectionAccessory) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *SelectionAccessory) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SelectionAccessory) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewSelectionAccessory creates a new SelectionAccessory.

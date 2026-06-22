@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An ODRecord object serves as a Cocoa wrapper for an Open Directory record.
-//
 // Record is an idiomatic wrapper over the Objective-C class ODRecord.
+//
+// An ODRecord object serves as a Cocoa wrapper for an Open Directory record.
 type Record struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func RecordFromID(id objc.ID) *Record {
 	if id == 0 {
 		return nil
 	}
-	x := &Record{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Record{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func recordAdopt(id objc.ID) *Record {
 	if id == 0 {
 		return nil
 	}
-	x := &Record{Handle: objref.Wrap(id)}
+	x := &Record{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,13 +62,19 @@ func (x *Record) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Record) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRecord creates a new Record.
 func NewRecord() *Record {
 	_id := objc.Send[objc.ID](objc.ID(_class("ODRecord")), objc.RegisterName("new"))
 	return recordAdopt(_id)
 }
 
-// Sets credentials for the record’s node.
+// SetNodeCredentialsPassword sets credentials for the record’s node.
 func (x *Record) SetNodeCredentialsPassword(inUsername string, inPassword string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setNodeCredentials:password:error:"), purego.NSString(inUsername), purego.NSString(inPassword), unsafe.Pointer(&_nsErr))
@@ -76,7 +84,7 @@ func (x *Record) SetNodeCredentialsPassword(inUsername string, inPassword string
 	return nil
 }
 
-// Sets the credentials for interaction with the record’s node using a Kerberos cache.
+// SetNodeCredentialsUsingKerberosCache sets the credentials for interaction with the record’s node using a Kerberos cache.
 func (x *Record) SetNodeCredentialsUsingKerberosCache(inCacheName string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setNodeCredentialsUsingKerberosCache:error:"), purego.NSString(inCacheName), unsafe.Pointer(&_nsErr))
@@ -86,8 +94,8 @@ func (x *Record) SetNodeCredentialsUsingKerberosCache(inCacheName string) error 
 	return nil
 }
 
-// Returns a dictionary containing the password policy for the record.
-func (x *Record) PasswordPolicyAndReturnError() (obj.Object, error) {
+// PasswordPolicyAndReturnError returns a dictionary containing the password policy for the record.
+func (x *Record) PasswordPolicyAndReturnError() (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("passwordPolicyAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -96,7 +104,7 @@ func (x *Record) PasswordPolicyAndReturnError() (obj.Object, error) {
 	return obj.Wrap(_r), nil
 }
 
-// Verifies the password for interaction with the record.
+// VerifyPassword verifies the password for interaction with the record.
 func (x *Record) VerifyPassword(inPassword string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("verifyPassword:error:"), purego.NSString(inPassword), unsafe.Pointer(&_nsErr))
@@ -106,7 +114,7 @@ func (x *Record) VerifyPassword(inPassword string) error {
 	return nil
 }
 
-// Changes the record’s password.
+// ChangePasswordToPassword changes the record’s password.
 func (x *Record) ChangePasswordToPassword(oldPassword string, newPassword string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("changePassword:toPassword:error:"), purego.NSString(oldPassword), purego.NSString(newPassword), unsafe.Pointer(&_nsErr))
@@ -116,7 +124,7 @@ func (x *Record) ChangePasswordToPassword(oldPassword string, newPassword string
 	return nil
 }
 
-// Synchronizes the record from the directory to get current data and commit changes.
+// SynchronizeAndReturnError synchronizes the record from the directory to get current data and commit changes.
 //
 // SynchronizeAndReturnError returns an error if the operation did not succeed.
 func (x *Record) SynchronizeAndReturnError() error {
@@ -128,8 +136,8 @@ func (x *Record) SynchronizeAndReturnError() error {
 	return nil
 }
 
-// Returns a dictionary of attributes with their respective values.
-func (x *Record) RecordDetailsForAttributesError(inAttributes obj.Object) (obj.Object, error) {
+// RecordDetailsForAttributesError returns a dictionary of attributes with their respective values.
+func (x *Record) RecordDetailsForAttributesError(inAttributes obj.Object) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordDetailsForAttributes:error:"), objref.IDOf(inAttributes), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -138,8 +146,8 @@ func (x *Record) RecordDetailsForAttributesError(inAttributes obj.Object) (obj.O
 	return obj.Wrap(_r), nil
 }
 
-// Returns the values of an attribute of the record.
-func (x *Record) ValuesForAttributeError(inAttribute obj.Object) (obj.Object, error) {
+// ValuesForAttributeError returns the values of an attribute of the record.
+func (x *Record) ValuesForAttributeError(inAttribute obj.Object) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valuesForAttribute:error:"), objref.IDOf(inAttribute), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -148,7 +156,7 @@ func (x *Record) ValuesForAttributeError(inAttribute obj.Object) (obj.Object, er
 	return obj.Wrap(_r), nil
 }
 
-// Sets the values of an attribute of the record.
+// SetValueForAttribute sets the values of an attribute of the record.
 func (x *Record) SetValueForAttribute(inValueOrValues obj.Object, inAttribute obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setValue:forAttribute:error:"), objref.IDOf(inValueOrValues), objref.IDOf(inAttribute), unsafe.Pointer(&_nsErr))
@@ -158,7 +166,7 @@ func (x *Record) SetValueForAttribute(inValueOrValues obj.Object, inAttribute ob
 	return nil
 }
 
-// Removes all values from an attribute of the record.
+// RemoveValuesForAttribute removes all values from an attribute of the record.
 func (x *Record) RemoveValuesForAttribute(inAttribute obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeValuesForAttribute:error:"), objref.IDOf(inAttribute), unsafe.Pointer(&_nsErr))
@@ -168,7 +176,7 @@ func (x *Record) RemoveValuesForAttribute(inAttribute obj.Object) error {
 	return nil
 }
 
-// Adds a value to an attribute of the record.
+// AddValueToAttribute adds a value to an attribute of the record.
 func (x *Record) AddValueToAttribute(inValue obj.Object, inAttribute obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addValue:toAttribute:error:"), objref.IDOf(inValue), objref.IDOf(inAttribute), unsafe.Pointer(&_nsErr))
@@ -178,7 +186,7 @@ func (x *Record) AddValueToAttribute(inValue obj.Object, inAttribute obj.Object)
 	return nil
 }
 
-// Removes a value from an attribute of the record.
+// RemoveValueFromAttribute removes a value from an attribute of the record.
 func (x *Record) RemoveValueFromAttribute(inValue obj.Object, inAttribute obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeValue:fromAttribute:error:"), objref.IDOf(inValue), objref.IDOf(inAttribute), unsafe.Pointer(&_nsErr))
@@ -188,7 +196,7 @@ func (x *Record) RemoveValueFromAttribute(inValue obj.Object, inAttribute obj.Ob
 	return nil
 }
 
-// Deletes the record from its node and invalidates it.
+// DeleteRecordAndReturnError deletes the record from its node and invalidates it.
 //
 // DeleteRecordAndReturnError returns an error if the operation did not succeed.
 func (x *Record) DeleteRecordAndReturnError() error {
@@ -200,8 +208,8 @@ func (x *Record) DeleteRecordAndReturnError() error {
 	return nil
 }
 
-// This will copy any policies configured for the record. This will copy any policies configured for the record.
-func (x *Record) PoliciesAndReturnError() (obj.Object, error) {
+// PoliciesAndReturnError this will copy any policies configured for the record. This will copy any policies configured for the record.
+func (x *Record) PoliciesAndReturnError() (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("policiesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -210,8 +218,8 @@ func (x *Record) PoliciesAndReturnError() (obj.Object, error) {
 	return obj.Wrap(_r), nil
 }
 
-// This will copy any policies configured for the record. This will copy any policies configured for the record.
-func (x *Record) EffectivePoliciesAndReturnError() (obj.Object, error) {
+// EffectivePoliciesAndReturnError this will copy any policies configured for the record. This will copy any policies configured for the record.
+func (x *Record) EffectivePoliciesAndReturnError() (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectivePoliciesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -220,8 +228,8 @@ func (x *Record) EffectivePoliciesAndReturnError() (obj.Object, error) {
 	return obj.Wrap(_r), nil
 }
 
-// This will return a dictionary of supported policies. This will return a dictionary of supported policies, if appropriate, the value will be the maximum value allowed for the policy in question.  For example, if password history is available, it will state how much history is supported.
-func (x *Record) SupportedPoliciesAndReturnError() (obj.Object, error) {
+// SupportedPoliciesAndReturnError this will return a dictionary of supported policies. This will return a dictionary of supported policies, if appropriate, the value will be the maximum value allowed for the policy in question.  For example, if password history is available, it will state how much history is supported.
+func (x *Record) SupportedPoliciesAndReturnError() (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedPoliciesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -230,7 +238,7 @@ func (x *Record) SupportedPoliciesAndReturnError() (obj.Object, error) {
 	return obj.Wrap(_r), nil
 }
 
-// This will set the policy for the record. This will set the policy for the record.  Policies are evaluated in combination with node-level policies.
+// SetPolicies this will set the policy for the record. This will set the policy for the record.  Policies are evaluated in combination with node-level policies.
 func (x *Record) SetPolicies(policies obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setPolicies:error:"), objref.IDOf(policies), unsafe.Pointer(&_nsErr))
@@ -240,7 +248,7 @@ func (x *Record) SetPolicies(policies obj.Object) error {
 	return nil
 }
 
-// This will set a specific policy setting for the record. This will set a specific policy setting for the record.
+// SetPolicyValue this will set a specific policy setting for the record. This will set a specific policy setting for the record.
 func (x *Record) SetPolicyValue(policy obj.Object, value obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setPolicy:value:error:"), objref.IDOf(policy), objref.IDOf(value), unsafe.Pointer(&_nsErr))
@@ -250,7 +258,7 @@ func (x *Record) SetPolicyValue(policy obj.Object, value obj.Object) error {
 	return nil
 }
 
-// This will remove a specific policy setting from the record. This will remove a specific policy setting from the record.
+// RemovePolicy this will remove a specific policy setting from the record. This will remove a specific policy setting from the record.
 func (x *Record) RemovePolicy(policy obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removePolicy:error:"), objref.IDOf(policy), unsafe.Pointer(&_nsErr))
@@ -260,7 +268,7 @@ func (x *Record) RemovePolicy(policy obj.Object) error {
 	return nil
 }
 
-// This will add a specific policy to the specific category for the record. This will add a specific policy to the specific category for the record. The specified policy will be applied, in combination with any node policies, to the specified record when policies are evaluated.
+// AddAccountPolicyToCategory this will add a specific policy to the specific category for the record. This will add a specific policy to the specific category for the record. The specified policy will be applied, in combination with any node policies, to the specified record when policies are evaluated.
 func (x *Record) AddAccountPolicyToCategory(policy obj.Object, category obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addAccountPolicy:toCategory:error:"), objref.IDOf(policy), objref.IDOf(category), unsafe.Pointer(&_nsErr))
@@ -270,7 +278,7 @@ func (x *Record) AddAccountPolicyToCategory(policy obj.Object, category obj.Obje
 	return nil
 }
 
-// This will remove a specific policy from the specific category for the record. This will remove a specific policy from the specific category for the record.
+// RemoveAccountPolicyFromCategory this will remove a specific policy from the specific category for the record. This will remove a specific policy from the specific category for the record.
 func (x *Record) RemoveAccountPolicyFromCategory(policy obj.Object, category obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeAccountPolicy:fromCategory:error:"), objref.IDOf(policy), objref.IDOf(category), unsafe.Pointer(&_nsErr))
@@ -280,7 +288,7 @@ func (x *Record) RemoveAccountPolicyFromCategory(policy obj.Object, category obj
 	return nil
 }
 
-// This will set the policies for the record. This will set the policies for the record, replacing any existing policies.  All of the policies in the set will be applied to the record when policies are evaluated.
+// SetAccountPolicies this will set the policies for the record. This will set the policies for the record, replacing any existing policies.  All of the policies in the set will be applied to the record when policies are evaluated.
 func (x *Record) SetAccountPolicies(policies obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setAccountPolicies:error:"), objref.IDOf(policies), unsafe.Pointer(&_nsErr))
@@ -290,8 +298,8 @@ func (x *Record) SetAccountPolicies(policies obj.Object) error {
 	return nil
 }
 
-// Returns a dictionary containing any policies configured for the record. Returns a dictionary containing any policies configured for the record. Does not include any policies set for the node. Returns a dictionary containing any policies configured for the record.
-func (x *Record) AccountPoliciesAndReturnError() (obj.Object, error) {
+// AccountPoliciesAndReturnError returns a dictionary containing any policies configured for the record. Returns a dictionary containing any policies configured for the record. Does not include any policies set for the node. Returns a dictionary containing any policies configured for the record.
+func (x *Record) AccountPoliciesAndReturnError() (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountPoliciesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -300,7 +308,7 @@ func (x *Record) AccountPoliciesAndReturnError() (obj.Object, error) {
 	return obj.Wrap(_r), nil
 }
 
-// Determines if policies allow the account to authenticate. Determines if policies allow the account to authenticate. Authentication and password change policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.  The failure of any single policy will deny the authentication. This check is only definitive at the time it was requested. The policy or the environment could change before the authentication is actually requested.  Errors from the authentication request should be consulted. It is not necessary to call this function when calling verifyPassword or verifyPasswordExtended since those methods perform the same policy evaluation.
+// AuthenticationAllowedAndReturnError determines if policies allow the account to authenticate. Determines if policies allow the account to authenticate. Authentication and password change policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.  The failure of any single policy will deny the authentication. This check is only definitive at the time it was requested. The policy or the environment could change before the authentication is actually requested.  Errors from the authentication request should be consulted. It is not necessary to call this function when calling verifyPassword or verifyPasswordExtended since those methods perform the same policy evaluation.
 //
 // AuthenticationAllowedAndReturnError returns an error if the operation did not succeed.
 func (x *Record) AuthenticationAllowedAndReturnError() error {
@@ -312,7 +320,7 @@ func (x *Record) AuthenticationAllowedAndReturnError() error {
 	return nil
 }
 
-// Determines if policies allow the password change. Determines if policies allow the password change.  Password content policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.  The failure of any single policy will deny the password change. This check is only definitive at the time it was requested. The policy or the environment could change before the password change is actually requested.  Errors from the password change request should be consulted.
+// PasswordChangeAllowed determines if policies allow the password change. Determines if policies allow the password change.  Password content policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.  The failure of any single policy will deny the password change. This check is only definitive at the time it was requested. The policy or the environment could change before the password change is actually requested.  Errors from the password change request should be consulted.
 func (x *Record) PasswordChangeAllowed(newPassword string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("passwordChangeAllowed:error:"), purego.NSString(newPassword), unsafe.Pointer(&_nsErr))
@@ -322,19 +330,19 @@ func (x *Record) PasswordChangeAllowed(newPassword string) error {
 	return nil
 }
 
-// Determines if the password will expire within the specified time. Determines if the password will expire (i.e. need to be changed) between now and the specified number of seconds in the future. Password change policies are evaluated.  Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.
+// WillPasswordExpire determines if the password will expire within the specified time. Determines if the password will expire (i.e. need to be changed) between now and the specified number of seconds in the future. Password change policies are evaluated.  Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.
 func (x *Record) WillPasswordExpire(willExpireIn uint64) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("willPasswordExpire:"), willExpireIn)
 	return _r
 }
 
-// Determines if authentications will expire within the specified time. Determines if authentications will expire (i.e. session and/or account expires) between now and the specified number of seconds in the future.  Authentication policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.
+// WillAuthenticationsExpire determines if authentications will expire within the specified time. Determines if authentications will expire (i.e. session and/or account expires) between now and the specified number of seconds in the future.  Authentication policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.
 func (x *Record) WillAuthenticationsExpire(willExpireIn uint64) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("willAuthenticationsExpire:"), willExpireIn)
 	return _r
 }
 
-// Type of the record. The record type.
+// RecordType type of the record. The record type.
 func (x *Record) RecordType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordType"))
 	if _r == 0 {
@@ -343,7 +351,7 @@ func (x *Record) RecordType() string {
 	return purego.GoString(_r)
 }
 
-// Name of the record. This is the official record name.
+// RecordName name of the record. This is the official record name.
 func (x *Record) RecordName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordName"))
 	if _r == 0 {
@@ -352,19 +360,19 @@ func (x *Record) RecordName() string {
 	return purego.GoString(_r)
 }
 
-// Determines how many seconds until the password expires. Determines how many seconds until the password expires (i.e. needs changing).  Password change policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.
+// SecondsUntilPasswordExpires determines how many seconds until the password expires. Determines how many seconds until the password expires (i.e. needs changing).  Password change policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.
 func (x *Record) SecondsUntilPasswordExpires() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("secondsUntilPasswordExpires"))
 	return _r
 }
 
-// Determines how many seconds until authentications expire. Determines how many seconds until authentications expire (i.e. session and/or account expires). Authentication policies are evaluated.   Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.
+// SecondsUntilAuthenticationsExpire determines how many seconds until authentications expire. Determines how many seconds until authentications expire (i.e. session and/or account expires). Authentication policies are evaluated.   Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.
 func (x *Record) SecondsUntilAuthenticationsExpire() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("secondsUntilAuthenticationsExpire"))
 	return _r
 }
 
-// Adds a member record to this group record.
+// AddMemberRecord adds a member record to this group record.
 func (x *Record) AddMemberRecord(inRecord *Record) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addMemberRecord:error:"), objref.IDOf(inRecord), unsafe.Pointer(&_nsErr))
@@ -374,7 +382,7 @@ func (x *Record) AddMemberRecord(inRecord *Record) error {
 	return nil
 }
 
-// Removes a record as a member of this group record.
+// RemoveMemberRecord removes a record as a member of this group record.
 func (x *Record) RemoveMemberRecord(inRecord *Record) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeMemberRecord:error:"), objref.IDOf(inRecord), unsafe.Pointer(&_nsErr))
@@ -384,7 +392,7 @@ func (x *Record) RemoveMemberRecord(inRecord *Record) error {
 	return nil
 }
 
-// Determines whether a given record is a member of this group record.
+// IsMemberRecord determines whether a given record is a member of this group record.
 func (x *Record) IsMemberRecord(inRecord *Record) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMemberRecord:error:"), objref.IDOf(inRecord), unsafe.Pointer(&_nsErr))
@@ -399,27 +407,27 @@ type Recordable interface {
 	obj.Object
 	SetNodeCredentialsPassword(inUsername string, inPassword string) error
 	SetNodeCredentialsUsingKerberosCache(inCacheName string) error
-	PasswordPolicyAndReturnError() (obj.Object, error)
+	PasswordPolicyAndReturnError() (result obj.Object, err error)
 	VerifyPassword(inPassword string) error
 	ChangePasswordToPassword(oldPassword string, newPassword string) error
 	SynchronizeAndReturnError() error
-	RecordDetailsForAttributesError(inAttributes obj.Object) (obj.Object, error)
-	ValuesForAttributeError(inAttribute obj.Object) (obj.Object, error)
+	RecordDetailsForAttributesError(inAttributes obj.Object) (result obj.Object, err error)
+	ValuesForAttributeError(inAttribute obj.Object) (result obj.Object, err error)
 	SetValueForAttribute(inValueOrValues obj.Object, inAttribute obj.Object) error
 	RemoveValuesForAttribute(inAttribute obj.Object) error
 	AddValueToAttribute(inValue obj.Object, inAttribute obj.Object) error
 	RemoveValueFromAttribute(inValue obj.Object, inAttribute obj.Object) error
 	DeleteRecordAndReturnError() error
-	PoliciesAndReturnError() (obj.Object, error)
-	EffectivePoliciesAndReturnError() (obj.Object, error)
-	SupportedPoliciesAndReturnError() (obj.Object, error)
+	PoliciesAndReturnError() (result obj.Object, err error)
+	EffectivePoliciesAndReturnError() (result obj.Object, err error)
+	SupportedPoliciesAndReturnError() (result obj.Object, err error)
 	SetPolicies(policies obj.Object) error
 	SetPolicyValue(policy obj.Object, value obj.Object) error
 	RemovePolicy(policy obj.Object) error
 	AddAccountPolicyToCategory(policy obj.Object, category obj.Object) error
 	RemoveAccountPolicyFromCategory(policy obj.Object, category obj.Object) error
 	SetAccountPolicies(policies obj.Object) error
-	AccountPoliciesAndReturnError() (obj.Object, error)
+	AccountPoliciesAndReturnError() (result obj.Object, err error)
 	AuthenticationAllowedAndReturnError() error
 	PasswordChangeAllowed(newPassword string) error
 	WillPasswordExpire(willExpireIn uint64) bool

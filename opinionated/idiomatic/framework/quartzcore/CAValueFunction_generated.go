@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides a flexible method of defining animated transformations.
-//
 // ValueFunction is an idiomatic wrapper over the Objective-C class CAValueFunction.
+//
+// An object that provides a flexible method of defining animated transformations.
 type ValueFunction struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ValueFunctionFromID(id objc.ID) *ValueFunction {
 	if id == 0 {
 		return nil
 	}
-	x := &ValueFunction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ValueFunction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func valueFunctionAdopt(id objc.ID) *ValueFunction {
 	if id == 0 {
 		return nil
 	}
-	x := &ValueFunction{Handle: objref.Wrap(id)}
+	x := &ValueFunction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *ValueFunction) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ValueFunction) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewValueFunction creates a new ValueFunction.
 func NewValueFunction() *ValueFunction {
 	_id := objc.Send[objc.ID](objc.ID(_class("CAValueFunction")), objc.RegisterName("new"))
 	return valueFunctionAdopt(_id)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *ValueFunction) Name() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	return obj.Wrap(_r)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A trigger condition that causes the system to deliver a notification after the amount of time you specify elapses.
-//
 // TimeIntervalNotificationTrigger is an idiomatic wrapper over the Objective-C class UNTimeIntervalNotificationTrigger.
+//
+// It embeds [NotificationTrigger], promoting that type's methods.
+//
+// A trigger condition that causes the system to deliver a notification after the amount of time you specify elapses.
 type TimeIntervalNotificationTrigger struct {
-	objref.Handle
+	NotificationTrigger
 }
 
 // TimeIntervalNotificationTriggerFromID adopts an existing Objective-C object as a TimeIntervalNotificationTrigger
@@ -25,7 +26,8 @@ func TimeIntervalNotificationTriggerFromID(id objc.ID) *TimeIntervalNotification
 	if id == 0 {
 		return nil
 	}
-	x := &TimeIntervalNotificationTrigger{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TimeIntervalNotificationTrigger{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func timeIntervalNotificationTriggerAdopt(id objc.ID) *TimeIntervalNotificationT
 	if id == 0 {
 		return nil
 	}
-	x := &TimeIntervalNotificationTrigger{Handle: objref.Wrap(id)}
+	x := &TimeIntervalNotificationTrigger{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *TimeIntervalNotificationTrigger) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TimeIntervalNotificationTrigger) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TimeIntervalNotificationTrigger) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewTimeIntervalNotificationTrigger creates a new TimeIntervalNotificationTrigger.
@@ -64,12 +52,13 @@ func NewTimeIntervalNotificationTrigger() *TimeIntervalNotificationTrigger {
 	return timeIntervalNotificationTriggerAdopt(_id)
 }
 
-// The next date at which the trigger conditions are met.
+// NextTriggerDate the next date at which the trigger conditions are met.
 func (x *TimeIntervalNotificationTrigger) NextTriggerDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextTriggerDate"))
 	return obj.Wrap(_r)
 }
 
+// TimeInterval wraps the corresponding Objective-C method.
 func (x *TimeIntervalNotificationTrigger) TimeInterval() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeInterval"))
 	return _r
@@ -83,3 +72,5 @@ type TimeIntervalNotificationTriggerable interface {
 }
 
 var _ TimeIntervalNotificationTriggerable = (*TimeIntervalNotificationTrigger)(nil)
+
+var _ NotificationTriggerProvider = (*TimeIntervalNotificationTrigger)(nil)

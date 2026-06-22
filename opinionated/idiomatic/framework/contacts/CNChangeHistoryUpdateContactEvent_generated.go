@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a user updating a contact.
-//
 // ChangeHistoryUpdateContactEvent is an idiomatic wrapper over the Objective-C class CNChangeHistoryUpdateContactEvent.
+//
+// It embeds [ChangeHistoryEvent], promoting that type's methods.
+//
+// An object that represents a user updating a contact.
 type ChangeHistoryUpdateContactEvent struct {
-	objref.Handle
+	ChangeHistoryEvent
 }
 
 // ChangeHistoryUpdateContactEventFromID adopts an existing Objective-C object as a ChangeHistoryUpdateContactEvent
@@ -25,7 +26,8 @@ func ChangeHistoryUpdateContactEventFromID(id objc.ID) *ChangeHistoryUpdateConta
 	if id == 0 {
 		return nil
 	}
-	x := &ChangeHistoryUpdateContactEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ChangeHistoryUpdateContactEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func changeHistoryUpdateContactEventAdopt(id objc.ID) *ChangeHistoryUpdateContac
 	if id == 0 {
 		return nil
 	}
-	x := &ChangeHistoryUpdateContactEvent{Handle: objref.Wrap(id)}
+	x := &ChangeHistoryUpdateContactEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ChangeHistoryUpdateContactEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ChangeHistoryUpdateContactEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ChangeHistoryUpdateContactEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewChangeHistoryUpdateContactEvent creates a new ChangeHistoryUpdateContactEvent.
@@ -64,6 +52,7 @@ func NewChangeHistoryUpdateContactEvent() *ChangeHistoryUpdateContactEvent {
 	return changeHistoryUpdateContactEventAdopt(_id)
 }
 
+// Contact wraps the corresponding Objective-C method.
 func (x *ChangeHistoryUpdateContactEvent) Contact() *Contact {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contact"))
 	return ContactFromID(_r)
@@ -76,3 +65,5 @@ type ChangeHistoryUpdateContactEventable interface {
 }
 
 var _ ChangeHistoryUpdateContactEventable = (*ChangeHistoryUpdateContactEvent)(nil)
+
+var _ ChangeHistoryEventProvider = (*ChangeHistoryUpdateContactEvent)(nil)

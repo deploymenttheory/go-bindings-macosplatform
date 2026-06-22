@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A log entry.
-//
 // LogEntryLog is an idiomatic wrapper over the Objective-C class OSLogEntryLog.
+//
+// It embeds [LogEntry], promoting that type's methods.
+//
+// A log entry.
 type LogEntryLog struct {
-	objref.Handle
+	LogEntry
 }
 
 // LogEntryLogFromID adopts an existing Objective-C object as a LogEntryLog
@@ -25,7 +26,8 @@ func LogEntryLogFromID(id objc.ID) *LogEntryLog {
 	if id == 0 {
 		return nil
 	}
-	x := &LogEntryLog{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LogEntryLog{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func logEntryLogAdopt(id objc.ID) *LogEntryLog {
 	if id == 0 {
 		return nil
 	}
-	x := &LogEntryLog{Handle: objref.Wrap(id)}
+	x := &LogEntryLog{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *LogEntryLog) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LogEntryLog) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LogEntryLog) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewLogEntryLog creates a new LogEntryLog.
@@ -64,7 +52,7 @@ func NewLogEntryLog() *LogEntryLog {
 	return logEntryLogAdopt(_id)
 }
 
-// The level of the entry, e.g., info, debug.
+// Level the level of the entry, e.g., info, debug.
 func (x *LogEntryLog) Level() LogEntryLogLevel {
 	_r := objc.Send[LogEntryLogLevel](objref.IDOf(x), objc.RegisterName("level"))
 	return _r
@@ -77,3 +65,5 @@ type LogEntryLogable interface {
 }
 
 var _ LogEntryLogable = (*LogEntryLog)(nil)
+
+var _ LogEntryProvider = (*LogEntryLog)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Detailed information about a contact between two physics bodies in a scene’s physics simulation.
-//
 // PhysicsContact is an idiomatic wrapper over the Objective-C class SCNPhysicsContact.
+//
+// Detailed information about a contact between two physics bodies in a scene’s physics simulation.
 type PhysicsContact struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PhysicsContactFromID(id objc.ID) *PhysicsContact {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsContact{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PhysicsContact{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func physicsContactAdopt(id objc.ID) *PhysicsContact {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsContact{Handle: objref.Wrap(id)}
+	x := &PhysicsContact{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,32 +60,43 @@ func (x *PhysicsContact) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PhysicsContact) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPhysicsContact creates a new PhysicsContact.
 func NewPhysicsContact() *PhysicsContact {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsContact")), objc.RegisterName("new"))
 	return physicsContactAdopt(_id)
 }
 
+// NodeA wraps the corresponding Objective-C method.
 func (x *PhysicsContact) NodeA() *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeA"))
 	return NodeFromID(_r)
 }
 
+// NodeB wraps the corresponding Objective-C method.
 func (x *PhysicsContact) NodeB() *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeB"))
 	return NodeFromID(_r)
 }
 
+// CollisionImpulse wraps the corresponding Objective-C method.
 func (x *PhysicsContact) CollisionImpulse() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("collisionImpulse"))
 	return _r
 }
 
+// PenetrationDistance wraps the corresponding Objective-C method.
 func (x *PhysicsContact) PenetrationDistance() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("penetrationDistance"))
 	return _r
 }
 
+// SweepTestFraction wraps the corresponding Objective-C method.
 func (x *PhysicsContact) SweepTestFraction() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("sweepTestFraction"))
 	return _r

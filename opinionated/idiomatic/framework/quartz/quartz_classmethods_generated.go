@@ -6,139 +6,151 @@ package quartz
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Creates a shared instance of the IKFilterBrowserPanel class.
+// FilterBrowserPanelWithStyleMask creates a shared instance of the IKFilterBrowserPanel class.
 func FilterBrowserPanelWithStyleMask(styleMask int) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("IKFilterBrowserPanel")), objc.RegisterName("filterBrowserPanelWithStyleMask:"), styleMask)
 	return obj.Wrap(_r)
 }
 
-// Creates a shared instance of an image editing panel.
+// ViewWithFrameFilter creates a view that contains controls for the input parameters of a filter.
+func ViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("IKFilterUIView")), objc.RegisterName("viewWithFrame:filter:"), frameRect, objref.IDOf(inFilter))
+	return obj.Wrap(_r)
+}
+
+// SharedImageEditPanel creates a shared instance of an image editing panel.
 func SharedImageEditPanel() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("IKImageEditPanel")), objc.RegisterName("sharedImageEditPanel"))
 	return obj.Wrap(_r)
 }
 
-// Returns a shared IKPictureTaker instance, creating it if necessary.
+// PictureTaker returns a shared IKPictureTaker instance, creating it if necessary.
 func PictureTaker() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("IKPictureTaker")), objc.RegisterName("pictureTaker"))
 	return obj.Wrap(_r)
 }
 
-// Returns a shared instance of a slideshow.
+// SharedSlideshow returns a shared instance of a slideshow.
 func SharedSlideshow() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("IKSlideshow")), objc.RegisterName("sharedSlideshow"))
 	return obj.Wrap(_r)
 }
 
-// Finds out whether the slideshow can export its contents to an application.
+// CanExportToApplication finds out whether the slideshow can export its contents to an application.
 func CanExportToApplication(applicationBundleIdentifier string) bool {
 	_r := objc.Send[bool](objc.ID(_class("IKSlideshow")), objc.RegisterName("canExportToApplication:"), purego.NSString(applicationBundleIdentifier))
 	return _r
 }
 
-// Exports a slideshow item to the application that has the provided bundle identifier.
+// ExportSlideshowItemToApplication exports a slideshow item to the application that has the provided bundle identifier.
 func ExportSlideshowItemToApplication(item obj.Object, applicationBundleIdentifier string) {
 	objc.Send[objc.ID](objc.ID(_class("IKSlideshow")), objc.RegisterName("exportSlideshowItem:toApplication:"), objref.IDOf(item), purego.NSString(applicationBundleIdentifier))
 }
 
-// Returns a composition object initialized with a Quartz Composer composition file.
+// CompositionWithFile returns a composition object initialized with a Quartz Composer composition file.
 func CompositionWithFile(path string) *QCComposition {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCComposition")), objc.RegisterName("compositionWithFile:"), purego.NSString(path))
 	return QCCompositionFromID(_r)
 }
 
-// Returns a composition object initialized with the contents of a Quartz Composer composition file.
+// CompositionWithData returns a composition object initialized with the contents of a Quartz Composer composition file.
 func CompositionWithData(data obj.Object) *QCComposition {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCComposition")), objc.RegisterName("compositionWithData:"), objref.IDOf(data))
 	return QCCompositionFromID(_r)
 }
 
-// Creates and returns an instance of a composition layer using the Quartz Composer composition in the specified file.
+// CompositionLayerWithFile creates and returns an instance of a composition layer using the Quartz Composer composition in the specified file.
 func CompositionLayerWithFile(path string) *QCCompositionLayer {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCCompositionLayer")), objc.RegisterName("compositionLayerWithFile:"), purego.NSString(path))
 	return QCCompositionLayerFromID(_r)
 }
 
-// Creates and returns an instance of a composition layer using the provided Quartz Composer composition.
+// CompositionLayerWithComposition creates and returns an instance of a composition layer using the provided Quartz Composer composition.
 func CompositionLayerWithComposition(composition *QCComposition) *QCCompositionLayer {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCCompositionLayer")), objc.RegisterName("compositionLayerWithComposition:"), objref.IDOf(composition))
 	return QCCompositionLayerFromID(_r)
 }
 
-// Returns the shared instance of the composition picker panel.
+// SharedCompositionPickerPanel returns the shared instance of the composition picker panel.
 func SharedCompositionPickerPanel() *QCCompositionPickerPanel {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCCompositionPickerPanel")), objc.RegisterName("sharedCompositionPickerPanel"))
 	return QCCompositionPickerPanelFromID(_r)
 }
 
-// Returns the shared instance of the composition repository.
+// SharedCompositionRepository returns the shared instance of the composition repository.
 func SharedCompositionRepository() *QCCompositionRepository {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCCompositionRepository")), objc.RegisterName("sharedCompositionRepository"))
 	return QCCompositionRepositoryFromID(_r)
 }
 
-// Returns a dictionary that contains strings for the user interface that describe the custom patch.
+// Attributes returns a dictionary that contains strings for the user interface that describe the custom patch.
 func Attributes() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCPlugIn")), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
-// Returns a dictionary that contains strings for the user interface that describe the optional attributes for ports created from properties.
+// AttributesForPropertyPortWithKey returns a dictionary that contains strings for the user interface that describe the optional attributes for ports created from properties.
 func AttributesForPropertyPortWithKey(key string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCPlugIn")), objc.RegisterName("attributesForPropertyPortWithKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
-// Returns and array of property port keys in the order you want them to appear in the user interface.
+// SortedPropertyPortKeys returns and array of property port keys in the order you want them to appear in the user interface.
 func SortedPropertyPortKeys() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCPlugIn")), objc.RegisterName("sortedPropertyPortKeys"))
 	return obj.Wrap(_r)
 }
 
-// Returns the execution mode of the custom patch.
+// ExecutionModeClass returns the execution mode of the custom patch.
 func ExecutionModeClass() QCPlugInExecutionMode {
 	_r := objc.Send[QCPlugInExecutionMode](objc.ID(_class("QCPlugIn")), objc.RegisterName("executionMode"))
 	return _r
 }
 
-// Returns the time mode for the custom patch.
+// TimeModeClass returns the time mode for the custom patch.
 func TimeModeClass() QCPlugInTimeMode {
 	_r := objc.Send[QCPlugInTimeMode](objc.ID(_class("QCPlugIn")), objc.RegisterName("timeMode"))
 	return _r
 }
 
-// Returns the keys for the internal settings of a custom patch.
+// PlugInKeys returns the keys for the internal settings of a custom patch.
 func PlugInKeys() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCPlugIn")), objc.RegisterName("plugInKeys"))
 	return obj.Wrap(_r)
 }
 
+// QuartzFilterWithURL wraps the corresponding Objective-C method.
 func QuartzFilterWithURL(aURL string) *QuartzFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilter")), objc.RegisterName("quartzFilterWithURL:"), rt.FileURL(aURL))
 	return QuartzFilterFromID(_r)
 }
 
+// QuartzFilterWithProperties wraps the corresponding Objective-C method.
 func QuartzFilterWithProperties(properties obj.Object) *QuartzFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilter")), objc.RegisterName("quartzFilterWithProperties:"), objref.IDOf(properties))
 	return QuartzFilterFromID(_r)
 }
 
+// QuartzFilterWithOutputIntents wraps the corresponding Objective-C method.
 func QuartzFilterWithOutputIntents(outputIntents obj.Object) *QuartzFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilter")), objc.RegisterName("quartzFilterWithOutputIntents:"), objref.IDOf(outputIntents))
 	return QuartzFilterFromID(_r)
 }
 
+// FilterManager wraps the corresponding Objective-C method.
 func FilterManager() *QuartzFilterManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilterManager")), objc.RegisterName("filterManager"))
 	return QuartzFilterManagerFromID(_r)
 }
 
+// FiltersInDomains wraps the corresponding Objective-C method.
 func FiltersInDomains(domains obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilterManager")), objc.RegisterName("filtersInDomains:"), objref.IDOf(domains))
 	return obj.Wrap(_r)

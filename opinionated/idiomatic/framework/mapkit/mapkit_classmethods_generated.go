@@ -6,124 +6,139 @@ package mapkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
+// FilterIncludingAll wraps the corresponding Objective-C method.
 func FilterIncludingAll() *AddressFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKAddressFilter")), objc.RegisterName("filterIncludingAll"))
 	return AddressFilterFromID(_r)
 }
 
+// FilterExcludingAll wraps the corresponding Objective-C method.
 func FilterExcludingAll() *AddressFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKAddressFilter")), objc.RegisterName("filterExcludingAll"))
 	return AddressFilterFromID(_r)
 }
 
-// Creates a compass button and associates it with the specified map view.
+// CompassButtonWithMapView creates a compass button and associates it with the specified map view.
 func CompassButtonWithMapView(mapView *MapView) *CompassButton {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKCompassButton")), objc.RegisterName("compassButtonWithMapView:"), objref.IDOf(mapView))
 	return CompassButtonFromID(_r)
 }
 
+// IsDirectionsRequestURL wraps the corresponding Objective-C method.
 func IsDirectionsRequestURL(url string) bool {
 	_r := objc.Send[bool](objc.ID(_class("MKDirectionsRequest")), objc.RegisterName("isDirectionsRequestURL:"), rt.FileURL(url))
 	return _r
 }
 
-// Returns a new camera object for you to configure.
+// Camera returns a new camera object for you to configure.
 func Camera() *MapCamera {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKMapCamera")), objc.RegisterName("camera"))
 	return MapCameraFromID(_r)
 }
 
-// Creates and returns a singleton map item object representing the user’s location.
+// CameraLookingAtMapItemForViewSizeAllowPitch returns a new camera object using the specified map item, view size, and pitch.
+func CameraLookingAtMapItemForViewSizeAllowPitch(mapItem *MapItem, viewSize corefoundation.CGSize, allowPitch bool) *MapCamera {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKMapCamera")), objc.RegisterName("cameraLookingAtMapItem:forViewSize:allowPitch:"), objref.IDOf(mapItem), viewSize, allowPitch)
+	return MapCameraFromID(_r)
+}
+
+// MapItemForCurrentLocation creates and returns a singleton map item object representing the user’s location.
 func MapItemForCurrentLocation() *MapItem {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKMapItem")), objc.RegisterName("mapItemForCurrentLocation"))
 	return MapItemFromID(_r)
 }
 
-// Opens the Maps app and displays the specified map items.
+// OpenMapsWithItemsLaunchOptions opens the Maps app and displays the specified map items.
 func OpenMapsWithItemsLaunchOptions(mapItems []*MapItem, launchOptions obj.Object) bool {
 	_r := objc.Send[bool](objc.ID(_class("MKMapItem")), objc.RegisterName("openMapsWithItems:launchOptions:"), purego.SliceToNSArray(mapItems, func(_v *MapItem) objc.ID { return objref.IDOf(_v) }), objref.IDOf(launchOptions))
 	return _r
 }
 
-// Opens the Maps app using the specified map items and options.
+// OpenMapsWithItemsLaunchOptionsCompletionHandler opens the Maps app using the specified map items and options.
 func OpenMapsWithItemsLaunchOptionsCompletionHandler(mapItems []*MapItem, launchOptions obj.Object, completion func(bool)) {
 	objc.Send[objc.ID](objc.ID(_class("MKMapItem")), objc.RegisterName("openMapsWithItems:launchOptions:completionHandler:"), purego.SliceToNSArray(mapItems, func(_v *MapItem) objc.ID { return objref.IDOf(_v) }), objref.IDOf(launchOptions), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
 }
 
-// An appropriate presentation style will be chosen automatically.
+// AutomaticWithPresentationViewController an appropriate presentation style will be chosen automatically.
 func AutomaticWithPresentationViewController(presentationViewController obj.Object) *MapItemDetailSelectionAccessoryPresentationStyle {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailSelectionAccessoryPresentationStyle")), objc.RegisterName("automaticWithPresentationViewController:"), objref.IDOf(presentationViewController))
 	return MapItemDetailSelectionAccessoryPresentationStyleFromID(_r)
 }
 
-// Show map item detail as an annotation callout on the map
+// CalloutWithCalloutStyle show map item detail as an annotation callout on the map
 func CalloutWithCalloutStyle(style MapItemDetailSelectionAccessoryCalloutStyle) *MapItemDetailSelectionAccessoryPresentationStyle {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailSelectionAccessoryPresentationStyle")), objc.RegisterName("calloutWithCalloutStyle:"), style)
 	return MapItemDetailSelectionAccessoryPresentationStyleFromID(_r)
 }
 
+// SheetPresentedFromViewController wraps the corresponding Objective-C method.
 func SheetPresentedFromViewController(viewController obj.Object) *MapItemDetailSelectionAccessoryPresentationStyle {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailSelectionAccessoryPresentationStyle")), objc.RegisterName("sheetPresentedFromViewController:"), objref.IDOf(viewController))
 	return MapItemDetailSelectionAccessoryPresentationStyleFromID(_r)
 }
 
+// Callout wraps the corresponding Objective-C method.
 func Callout() *MapItemDetailSelectionAccessoryPresentationStyle {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailSelectionAccessoryPresentationStyle")), objc.RegisterName("callout"))
 	return MapItemDetailSelectionAccessoryPresentationStyleFromID(_r)
 }
 
+// OpenInMaps wraps the corresponding Objective-C method.
 func OpenInMaps() *MapItemDetailSelectionAccessoryPresentationStyle {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailSelectionAccessoryPresentationStyle")), objc.RegisterName("openInMaps"))
 	return MapItemDetailSelectionAccessoryPresentationStyleFromID(_r)
 }
 
-// Returns the standard color for red pins.
+// RedPinColor returns the standard color for red pins.
 func RedPinColor() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKPinAnnotationView")), objc.RegisterName("redPinColor"))
 	return obj.Wrap(_r)
 }
 
-// Returns the standard color for green pins.
+// GreenPinColor returns the standard color for green pins.
 func GreenPinColor() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKPinAnnotationView")), objc.RegisterName("greenPinColor"))
 	return obj.Wrap(_r)
 }
 
-// Returns the standard color for purple pins.
+// PurplePinColor returns the standard color for purple pins.
 func PurplePinColor() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKPinAnnotationView")), objc.RegisterName("purplePinColor"))
 	return obj.Wrap(_r)
 }
 
-// Creates a pitch control and associates it with the specified map view.
+// PitchControlWithMapView creates a pitch control and associates it with the specified map view.
 func PitchControlWithMapView(mapView *MapView) *PitchControl {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKPitchControl")), objc.RegisterName("pitchControlWithMapView:"), objref.IDOf(mapView))
 	return PitchControlFromID(_r)
 }
 
+// FilterIncludingAllCategories wraps the corresponding Objective-C method.
 func FilterIncludingAllCategories() *PointOfInterestFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKPointOfInterestFilter")), objc.RegisterName("filterIncludingAllCategories"))
 	return PointOfInterestFilterFromID(_r)
 }
 
+// FilterExcludingAllCategories wraps the corresponding Objective-C method.
 func FilterExcludingAllCategories() *PointOfInterestFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKPointOfInterestFilter")), objc.RegisterName("filterExcludingAllCategories"))
 	return PointOfInterestFilterFromID(_r)
 }
 
-// Detailed information about a place
+// MapItemDetailWithPresentationStyle detailed information about a place
 func MapItemDetailWithPresentationStyle(presentationStyle *MapItemDetailSelectionAccessoryPresentationStyle) *SelectionAccessory {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKSelectionAccessory")), objc.RegisterName("mapItemDetailWithPresentationStyle:"), objref.IDOf(presentationStyle))
 	return SelectionAccessoryFromID(_r)
 }
 
-// Creates a zoom control and associates it with the specified map view.
+// ZoomControlWithMapView creates a zoom control and associates it with the specified map view.
 func ZoomControlWithMapView(mapView *MapView) *ZoomControl {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKZoomControl")), objc.RegisterName("zoomControlWithMapView:"), objref.IDOf(mapView))
 	return ZoomControlFromID(_r)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for power.
-//
 // UnitPower is an idiomatic wrapper over the Objective-C class NSUnitPower.
+//
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for power.
 type UnitPower struct {
-	objref.Handle
+	Dimension
 }
 
 // UnitPowerFromID adopts an existing Objective-C object as a UnitPower
@@ -25,7 +26,8 @@ func UnitPowerFromID(id objc.ID) *UnitPower {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitPower{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UnitPower{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func unitPowerAdopt(id objc.ID) *UnitPower {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitPower{Handle: objref.Wrap(id)}
+	x := &UnitPower{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UnitPower) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UnitPower) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UnitPower) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUnitPower creates a new UnitPower.
@@ -64,7 +52,7 @@ func NewUnitPower() *UnitPower {
 	return unitPowerAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UnitPower) WithScriptingProperties(scriptingProperties obj.Object) *UnitPower {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
@@ -77,3 +65,7 @@ type UnitPowerable interface {
 }
 
 var _ UnitPowerable = (*UnitPower)(nil)
+
+var _ DimensionProvider = (*UnitPower)(nil)
+
+var _ UnitProvider = (*UnitPower)(nil)

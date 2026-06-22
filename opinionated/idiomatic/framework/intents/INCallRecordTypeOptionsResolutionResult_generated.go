@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resolution result for the call types to include in a search.
-//
 // CallRecordTypeOptionsResolutionResult is an idiomatic wrapper over the Objective-C class INCallRecordTypeOptionsResolutionResult.
+//
+// It embeds [IntentResolutionResult], promoting that type's methods.
+//
+// A resolution result for the call types to include in a search.
 type CallRecordTypeOptionsResolutionResult struct {
-	objref.Handle
+	IntentResolutionResult
 }
 
 // CallRecordTypeOptionsResolutionResultFromID adopts an existing Objective-C object as a CallRecordTypeOptionsResolutionResult
@@ -25,7 +26,8 @@ func CallRecordTypeOptionsResolutionResultFromID(id objc.ID) *CallRecordTypeOpti
 	if id == 0 {
 		return nil
 	}
-	x := &CallRecordTypeOptionsResolutionResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CallRecordTypeOptionsResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func callRecordTypeOptionsResolutionResultAdopt(id objc.ID) *CallRecordTypeOptio
 	if id == 0 {
 		return nil
 	}
-	x := &CallRecordTypeOptionsResolutionResult{Handle: objref.Wrap(id)}
+	x := &CallRecordTypeOptionsResolutionResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CallRecordTypeOptionsResolutionResult) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CallRecordTypeOptionsResolutionResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CallRecordTypeOptionsResolutionResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCallRecordTypeOptionsResolutionResult creates a new CallRecordTypeOptionsResolutionResult.
@@ -70,3 +58,5 @@ type CallRecordTypeOptionsResolutionResultable interface {
 }
 
 var _ CallRecordTypeOptionsResolutionResultable = (*CallRecordTypeOptionsResolutionResult)(nil)
+
+var _ IntentResolutionResultProvider = (*CallRecordTypeOptionsResolutionResult)(nil)

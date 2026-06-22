@@ -16,6 +16,8 @@ const (
 	TCL_PATH_VOLUME_RELATIVE Tcl_PathType = 2
 )
 
+// String returns the Tcl_PathType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Tcl_PathType) String() string {
 	switch e {
 	case TCL_PATH_ABSOLUTE:

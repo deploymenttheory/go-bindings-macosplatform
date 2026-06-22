@@ -13,6 +13,8 @@ import (
 )
 
 // MTRApplicationLauncherClusterApplicationEPStruct is an idiomatic wrapper over the Objective-C class MTRApplicationLauncherClusterApplicationEPStruct.
+//
+// MTRApplicationLauncherClusterApplicationEPStruct is an abstract base — you do not construct it directly. Construct one of [MTRApplicationLauncherClusterApplicationEP] and pass it where a MTRApplicationLauncherClusterApplicationEPStruct is accepted.
 type MTRApplicationLauncherClusterApplicationEPStruct struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRApplicationLauncherClusterApplicationEPStructFromID(id objc.ID) *MTRAppl
 	if id == 0 {
 		return nil
 	}
-	x := &MTRApplicationLauncherClusterApplicationEPStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRApplicationLauncherClusterApplicationEPStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRApplicationLauncherClusterApplicationEPStructAdopt(id objc.ID) *MTRAppli
 	if id == 0 {
 		return nil
 	}
-	x := &MTRApplicationLauncherClusterApplicationEPStruct{Handle: objref.Wrap(id)}
+	x := &MTRApplicationLauncherClusterApplicationEPStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,38 +60,42 @@ func (x *MTRApplicationLauncherClusterApplicationEPStruct) IsKind(className stri
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRApplicationLauncherClusterApplicationEPStruct creates a new MTRApplicationLauncherClusterApplicationEPStruct.
-func NewMTRApplicationLauncherClusterApplicationEPStruct() *MTRApplicationLauncherClusterApplicationEPStruct {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRApplicationLauncherClusterApplicationEPStruct")), objc.RegisterName("new"))
-	return mTRApplicationLauncherClusterApplicationEPStructAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRApplicationLauncherClusterApplicationEPStruct) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithApplication sets application and returns the receiver so calls can be chained.
+// WithApplication sets the property and returns the receiver so calls can be chained.
 func (x *MTRApplicationLauncherClusterApplicationEPStruct) WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterApplicationEPStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplication:"), objref.IDOf(application))
 	return x
 }
 
-// WithEndpoint sets endpoint and returns the receiver so calls can be chained.
+// WithEndpoint sets the property and returns the receiver so calls can be chained.
 func (x *MTRApplicationLauncherClusterApplicationEPStruct) WithEndpoint(endpoint obj.Object) *MTRApplicationLauncherClusterApplicationEPStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return x
 }
 
+// Application wraps the corresponding Objective-C method.
 func (x *MTRApplicationLauncherClusterApplicationEPStruct) Application() *MTRApplicationLauncherClusterApplicationStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("application"))
 	return MTRApplicationLauncherClusterApplicationStructFromID(_r)
 }
 
+// SetApplication wraps the corresponding Objective-C method.
 func (x *MTRApplicationLauncherClusterApplicationEPStruct) SetApplication(application *MTRApplicationLauncherClusterApplicationStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplication:"), objref.IDOf(application))
 }
 
+// Endpoint wraps the corresponding Objective-C method.
 func (x *MTRApplicationLauncherClusterApplicationEPStruct) Endpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)
 }
 
+// SetEndpoint wraps the corresponding Objective-C method.
 func (x *MTRApplicationLauncherClusterApplicationEPStruct) SetEndpoint(endpoint obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 }
@@ -104,3 +112,11 @@ type MTRApplicationLauncherClusterApplicationEPStructable interface {
 }
 
 var _ MTRApplicationLauncherClusterApplicationEPStructable = (*MTRApplicationLauncherClusterApplicationEPStruct)(nil)
+
+// isMTRApplicationLauncherClusterApplicationEPStruct marks MTRApplicationLauncherClusterApplicationEPStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRApplicationLauncherClusterApplicationEPStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRApplicationLauncherClusterApplicationEPStruct) isMTRApplicationLauncherClusterApplicationEPStruct() {
+}
+
+var _ MTRApplicationLauncherClusterApplicationEPStructProvider = (*MTRApplicationLauncherClusterApplicationEPStruct)(nil)

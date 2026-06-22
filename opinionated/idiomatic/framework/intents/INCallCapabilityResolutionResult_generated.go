@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resolution result for the call capability for the call.
-//
 // CallCapabilityResolutionResult is an idiomatic wrapper over the Objective-C class INCallCapabilityResolutionResult.
+//
+// It embeds [IntentResolutionResult], promoting that type's methods.
+//
+// A resolution result for the call capability for the call.
 type CallCapabilityResolutionResult struct {
-	objref.Handle
+	IntentResolutionResult
 }
 
 // CallCapabilityResolutionResultFromID adopts an existing Objective-C object as a CallCapabilityResolutionResult
@@ -25,7 +26,8 @@ func CallCapabilityResolutionResultFromID(id objc.ID) *CallCapabilityResolutionR
 	if id == 0 {
 		return nil
 	}
-	x := &CallCapabilityResolutionResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CallCapabilityResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func callCapabilityResolutionResultAdopt(id objc.ID) *CallCapabilityResolutionRe
 	if id == 0 {
 		return nil
 	}
-	x := &CallCapabilityResolutionResult{Handle: objref.Wrap(id)}
+	x := &CallCapabilityResolutionResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CallCapabilityResolutionResult) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CallCapabilityResolutionResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CallCapabilityResolutionResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCallCapabilityResolutionResult creates a new CallCapabilityResolutionResult.
@@ -70,3 +58,5 @@ type CallCapabilityResolutionResultable interface {
 }
 
 var _ CallCapabilityResolutionResultable = (*CallCapabilityResolutionResult)(nil)
+
+var _ IntentResolutionResultProvider = (*CallCapabilityResolutionResult)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of key-value observations which may be registered with multiple observable objects
-//
 // KeyValueSharedObservers is an idiomatic wrapper over the Objective-C class NSKeyValueSharedObservers.
+//
+// A collection of key-value observations which may be registered with multiple observable objects
 type KeyValueSharedObservers struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func KeyValueSharedObserversFromID(id objc.ID) *KeyValueSharedObservers {
 	if id == 0 {
 		return nil
 	}
-	x := &KeyValueSharedObservers{Handle: objref.Wrap(purego.Retain(id))}
+	x := &KeyValueSharedObservers{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func keyValueSharedObserversAdopt(id objc.ID) *KeyValueSharedObservers {
 	if id == 0 {
 		return nil
 	}
-	x := &KeyValueSharedObservers{Handle: objref.Wrap(id)}
+	x := &KeyValueSharedObservers{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *KeyValueSharedObservers) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *KeyValueSharedObservers) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewKeyValueSharedObservers creates a new KeyValueSharedObservers.
 func NewKeyValueSharedObservers() *KeyValueSharedObservers {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSKeyValueSharedObservers")), objc.RegisterName("new"))
 	return keyValueSharedObserversAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *KeyValueSharedObservers) WithScriptingProperties(scriptingProperties obj.Object) *KeyValueSharedObservers {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// A momentary snapshot of all observers added to the collection thus far, that can be assigned to an observable using -[NSObject setSharedObservers:]
+// Snapshot a momentary snapshot of all observers added to the collection thus far, that can be assigned to an observable using -[NSObject setSharedObservers:]
 func (x *KeyValueSharedObservers) Snapshot() *KeyValueSharedObserversSnapshot {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshot"))
 	return KeyValueSharedObserversSnapshotFromID(_r)

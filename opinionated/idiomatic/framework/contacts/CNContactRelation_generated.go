@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable object that represents the relationship between one contact to another.
-//
 // ContactRelation is an idiomatic wrapper over the Objective-C class CNContactRelation.
+//
+// An immutable object that represents the relationship between one contact to another.
 type ContactRelation struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ContactRelationFromID(id objc.ID) *ContactRelation {
 	if id == 0 {
 		return nil
 	}
-	x := &ContactRelation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContactRelation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func contactRelationAdopt(id objc.ID) *ContactRelation {
 	if id == 0 {
 		return nil
 	}
-	x := &ContactRelation{Handle: objref.Wrap(id)}
+	x := &ContactRelation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *ContactRelation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an object with the name of the related contact.
-//
-// NewContactRelationWithName creates a new ContactRelation.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContactRelation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewContactRelationWithName creates an object with the name of the related contact.
 func NewContactRelationWithName(name string) *ContactRelation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CNContactRelation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:"), purego.NSString(name))
 	return contactRelationAdopt(_id)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *ContactRelation) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {

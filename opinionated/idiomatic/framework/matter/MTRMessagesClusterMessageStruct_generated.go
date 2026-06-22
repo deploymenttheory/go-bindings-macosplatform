@@ -23,7 +23,8 @@ func MTRMessagesClusterMessageStructFromID(id objc.ID) *MTRMessagesClusterMessag
 	if id == 0 {
 		return nil
 	}
-	x := &MTRMessagesClusterMessageStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRMessagesClusterMessageStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRMessagesClusterMessageStructAdopt(id objc.ID) *MTRMessagesClusterMessage
 	if id == 0 {
 		return nil
 	}
-	x := &MTRMessagesClusterMessageStruct{Handle: objref.Wrap(id)}
+	x := &MTRMessagesClusterMessageStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,93 +58,110 @@ func (x *MTRMessagesClusterMessageStruct) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRMessagesClusterMessageStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRMessagesClusterMessageStruct creates a new MTRMessagesClusterMessageStruct.
 func NewMTRMessagesClusterMessageStruct() *MTRMessagesClusterMessageStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRMessagesClusterMessageStruct")), objc.RegisterName("new"))
 	return mTRMessagesClusterMessageStructAdopt(_id)
 }
 
-// WithMessageID sets messageID and returns the receiver so calls can be chained.
+// WithMessageID sets the property and returns the receiver so calls can be chained.
 func (x *MTRMessagesClusterMessageStruct) WithMessageID(messageID obj.Object) *MTRMessagesClusterMessageStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
 	return x
 }
 
-// WithPriority sets priority and returns the receiver so calls can be chained.
+// WithPriority sets the property and returns the receiver so calls can be chained.
 func (x *MTRMessagesClusterMessageStruct) WithPriority(priority obj.Object) *MTRMessagesClusterMessageStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), objref.IDOf(priority))
 	return x
 }
 
-// WithMessageControl sets messageControl and returns the receiver so calls can be chained.
+// WithMessageControl sets the property and returns the receiver so calls can be chained.
 func (x *MTRMessagesClusterMessageStruct) WithMessageControl(messageControl obj.Object) *MTRMessagesClusterMessageStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageControl:"), objref.IDOf(messageControl))
 	return x
 }
 
-// WithStartTime sets startTime and returns the receiver so calls can be chained.
+// WithStartTime sets the property and returns the receiver so calls can be chained.
 func (x *MTRMessagesClusterMessageStruct) WithStartTime(startTime obj.Object) *MTRMessagesClusterMessageStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 	return x
 }
 
-// WithDuration sets duration and returns the receiver so calls can be chained.
+// WithDuration sets the property and returns the receiver so calls can be chained.
 func (x *MTRMessagesClusterMessageStruct) WithDuration(duration obj.Object) *MTRMessagesClusterMessageStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return x
 }
 
-// WithMessageText sets messageText and returns the receiver so calls can be chained.
+// WithMessageText sets the property and returns the receiver so calls can be chained.
 func (x *MTRMessagesClusterMessageStruct) WithMessageText(messageText string) *MTRMessagesClusterMessageStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageText:"), purego.NSString(messageText))
 	return x
 }
 
+// MessageID wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageStruct) MessageID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageID"))
 	return obj.Wrap(_r)
 }
 
+// SetMessageID wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageStruct) SetMessageID(messageID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
 }
 
+// Priority wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageStruct) Priority() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("priority"))
 	return obj.Wrap(_r)
 }
 
+// SetPriority wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageStruct) SetPriority(priority obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), objref.IDOf(priority))
 }
 
+// MessageControl wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageStruct) MessageControl() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageControl"))
 	return obj.Wrap(_r)
 }
 
+// SetMessageControl wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageStruct) SetMessageControl(messageControl obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageControl:"), objref.IDOf(messageControl))
 }
 
+// StartTime wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageStruct) StartTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startTime"))
 	return obj.Wrap(_r)
 }
 
+// SetStartTime wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageStruct) SetStartTime(startTime obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 }
 
+// Duration wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageStruct) Duration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("duration"))
 	return obj.Wrap(_r)
 }
 
+// SetDuration wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageStruct) SetDuration(duration obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 }
 
+// MessageText wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageStruct) MessageText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageText"))
 	if _r == 0 {
@@ -151,15 +170,18 @@ func (x *MTRMessagesClusterMessageStruct) MessageText() string {
 	return purego.GoString(_r)
 }
 
+// SetMessageText wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageStruct) SetMessageText(messageText string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageText:"), purego.NSString(messageText))
 }
 
+// Responses wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageStruct) Responses() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("responses"))
 	return obj.Wrap(_r)
 }
 
+// SetResponses wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageStruct) SetResponses(responses obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResponses:"), objref.IDOf(responses))
 }

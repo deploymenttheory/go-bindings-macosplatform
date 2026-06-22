@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that describes the pattern for a recurring event.
-//
 // RecurrenceRule is an idiomatic wrapper over the Objective-C class EKRecurrenceRule.
+//
+// It embeds [Object], promoting that type's methods.
+//
+// A class that describes the pattern for a recurring event.
 type RecurrenceRule struct {
-	objref.Handle
+	Object
 }
 
 // RecurrenceRuleFromID adopts an existing Objective-C object as a RecurrenceRule
@@ -25,7 +26,8 @@ func RecurrenceRuleFromID(id objc.ID) *RecurrenceRule {
 	if id == 0 {
 		return nil
 	}
-	x := &RecurrenceRule{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RecurrenceRule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,53 +40,33 @@ func recurrenceRuleAdopt(id objc.ID) *RecurrenceRule {
 	if id == 0 {
 		return nil
 	}
-	x := &RecurrenceRule{Handle: objref.Wrap(id)}
+	x := &RecurrenceRule{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *RecurrenceRule) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RecurrenceRule) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RecurrenceRule) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes and returns a simple recurrence rule with a given frequency, interval, and end.
-//
-// NewRecurrenceRuleRecurrenceWithFrequencyIntervalEnd creates a new RecurrenceRule.
+// NewRecurrenceRuleRecurrenceWithFrequencyIntervalEnd initializes and returns a simple recurrence rule with a given frequency, interval, and end.
 func NewRecurrenceRuleRecurrenceWithFrequencyIntervalEnd(type_ RecurrenceFrequency, interval int, end *RecurrenceEnd) *RecurrenceRule {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("EKRecurrenceRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initRecurrenceWithFrequency:interval:end:"), type_, interval, objref.IDOf(end))
 	return recurrenceRuleAdopt(_id)
 }
 
-// Initializes and returns a recurrence rule with a given frequency and additional scheduling information.
-//
-// NewRecurrenceRuleRecurrenceWithFrequencyIntervalDaysOfTheWeekDaysOfTheMonthMonthsOfTheYearWeeksOfTheYearDaysOfTheYearSetPositionsEnd creates a new RecurrenceRule.
+// NewRecurrenceRuleRecurrenceWithFrequencyIntervalDaysOfTheWeekDaysOfTheMonthMonthsOfTheYearWeeksOfTheYearDaysOfTheYearSetPositionsEnd initializes and returns a recurrence rule with a given frequency and additional scheduling information.
 func NewRecurrenceRuleRecurrenceWithFrequencyIntervalDaysOfTheWeekDaysOfTheMonthMonthsOfTheYearWeeksOfTheYearDaysOfTheYearSetPositionsEnd(type_ RecurrenceFrequency, interval int, days []*RecurrenceDayOfWeek, monthDays []obj.Object, months []obj.Object, weeksOfTheYear []obj.Object, daysOfTheYear []obj.Object, setPositions []obj.Object, end *RecurrenceEnd) *RecurrenceRule {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("EKRecurrenceRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initRecurrenceWithFrequency:interval:daysOfTheWeek:daysOfTheMonth:monthsOfTheYear:weeksOfTheYear:daysOfTheYear:setPositions:end:"), type_, interval, purego.SliceToNSArray(days, func(_v *RecurrenceDayOfWeek) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(monthDays, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(months, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(weeksOfTheYear, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(daysOfTheYear, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(setPositions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(end))
 	return recurrenceRuleAdopt(_id)
 }
 
-// Indicates when the recurrence rule ends.
-//
-// WithRecurrenceEnd sets recurrenceEnd and returns the receiver so calls can be chained.
+// WithRecurrenceEnd indicates when the recurrence rule ends.
 func (x *RecurrenceRule) WithRecurrenceEnd(recurrenceEnd *RecurrenceEnd) *RecurrenceRule {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrenceEnd:"), objref.IDOf(recurrenceEnd))
 	return x
 }
 
-// Calendar used by this recurrence rule.
+// CalendarIdentifier calendar used by this recurrence rule.
 func (x *RecurrenceRule) CalendarIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendarIdentifier"))
 	if _r == 0 {
@@ -93,35 +75,36 @@ func (x *RecurrenceRule) CalendarIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// This property defines when the the repeating event is scheduled to end. The end date can be specified by a number of occurrences, or with an end date.
+// RecurrenceEnd this property defines when the the repeating event is scheduled to end. The end date can be specified by a number of occurrences, or with an end date.
 func (x *RecurrenceRule) RecurrenceEnd() *RecurrenceEnd {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recurrenceEnd"))
 	return RecurrenceEndFromID(_r)
 }
 
+// SetRecurrenceEnd wraps the corresponding Objective-C method.
 func (x *RecurrenceRule) SetRecurrenceEnd(recurrenceEnd *RecurrenceEnd) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrenceEnd:"), objref.IDOf(recurrenceEnd))
 }
 
-// This property designates the unit of time used to describe the recurrence pattern.
+// Frequency this property designates the unit of time used to describe the recurrence pattern.
 func (x *RecurrenceRule) Frequency() RecurrenceFrequency {
 	_r := objc.Send[RecurrenceFrequency](objref.IDOf(x), objc.RegisterName("frequency"))
 	return _r
 }
 
-// The interval of a EKRecurrenceRule is an integer value which specifies how often the recurrence rule repeats over the unit of time described by the EKRecurrenceFrequency. For example, if the EKRecurrenceFrequency is EKRecurrenceWeekly, then an interval of 1 means the pattern is repeated every week. A value of 2 indicates it is repeated every other week, 3 means every third week, and so on. The value must be a positive integer; 0 is not a valid value, and nil will be returned if the client attempts to initialize a rule with a negative or zero interval.
+// Interval the interval of a EKRecurrenceRule is an integer value which specifies how often the recurrence rule repeats over the unit of time described by the EKRecurrenceFrequency. For example, if the EKRecurrenceFrequency is EKRecurrenceWeekly, then an interval of 1 means the pattern is repeated every week. A value of 2 indicates it is repeated every other week, 3 means every third week, and so on. The value must be a positive integer; 0 is not a valid value, and nil will be returned if the client attempts to initialize a rule with a negative or zero interval.
 func (x *RecurrenceRule) Interval() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("interval"))
 	return _r
 }
 
-// Recurrence patterns can specify which day of the week should be treated as the first day. Possible values for this property are integers 0 and 1-7, which correspond to days of the week with Sunday = 1. Zero indicates that the property is not set for this recurrence. The first day of the week only affects the way the recurrence is expanded for weekly recurrence patterns with an interval greater than 1. For those types of recurrence patterns, the Calendar framework will set firstDayOfTheWeek to be 2 (Monday). In all other cases, this property will be set to zero. The iCalendar spec stipulates that the default value is Monday if this property is not set.
+// FirstDayOfTheWeek recurrence patterns can specify which day of the week should be treated as the first day. Possible values for this property are integers 0 and 1-7, which correspond to days of the week with Sunday = 1. Zero indicates that the property is not set for this recurrence. The first day of the week only affects the way the recurrence is expanded for weekly recurrence patterns with an interval greater than 1. For those types of recurrence patterns, the Calendar framework will set firstDayOfTheWeek to be 2 (Monday). In all other cases, this property will be set to zero. The iCalendar spec stipulates that the default value is Monday if this property is not set.
 func (x *RecurrenceRule) FirstDayOfTheWeek() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("firstDayOfTheWeek"))
 	return _r
 }
 
-// This property is valid for rules whose EKRecurrenceFrequency is EKRecurrenceFrequencyWeekly, EKRecurrenceFrequencyMonthly, or EKRecurrenceFrequencyYearly. This property can be accessed as an array containing one or more EKRecurrenceDayOfWeek objects corresponding to the days of the week the event recurs. For all other EKRecurrenceRules, this property is nil. This property corresponds to BYDAY in the iCalendar specification.
+// DaysOfTheWeek this property is valid for rules whose EKRecurrenceFrequency is EKRecurrenceFrequencyWeekly, EKRecurrenceFrequencyMonthly, or EKRecurrenceFrequencyYearly. This property can be accessed as an array containing one or more EKRecurrenceDayOfWeek objects corresponding to the days of the week the event recurs. For all other EKRecurrenceRules, this property is nil. This property corresponds to BYDAY in the iCalendar specification.
 //
 // DaysOfTheWeek returns the collection as a Go slice.
 func (x *RecurrenceRule) DaysOfTheWeek() []*RecurrenceDayOfWeek {
@@ -129,7 +112,7 @@ func (x *RecurrenceRule) DaysOfTheWeek() []*RecurrenceDayOfWeek {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecurrenceDayOfWeek { return RecurrenceDayOfWeekFromID(_id) })
 }
 
-// This property is valid for rules whose EKRecurrenceFrequency is EKRecurrenceFrequencyMonthly, and that were initialized with one or more specific days of the month (not with a day of the week and week of the month). This property can be accessed as an array containing one or more NSNumbers corresponding to the days of the month the event recurs. For all other EKRecurrenceRules, this property is nil. This property corresponds to BYMONTHDAY in the iCalendar specification.
+// DaysOfTheMonth this property is valid for rules whose EKRecurrenceFrequency is EKRecurrenceFrequencyMonthly, and that were initialized with one or more specific days of the month (not with a day of the week and week of the month). This property can be accessed as an array containing one or more NSNumbers corresponding to the days of the month the event recurs. For all other EKRecurrenceRules, this property is nil. This property corresponds to BYMONTHDAY in the iCalendar specification.
 //
 // DaysOfTheMonth returns the collection as a Go slice.
 func (x *RecurrenceRule) DaysOfTheMonth() []obj.Object {
@@ -137,7 +120,7 @@ func (x *RecurrenceRule) DaysOfTheMonth() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// This property is valid for rules whose EKRecurrenceFrequency is EKRecurrenceFrequencyYearly. This property can be accessed as an array containing one or more NSNumbers corresponding to the days of the year the event recurs. For all other EKRecurrenceRules, this property is nil. This property corresponds to BYYEARDAY in the iCalendar specification. It should contain values between 1 to 366 or -366 to -1.
+// DaysOfTheYear this property is valid for rules whose EKRecurrenceFrequency is EKRecurrenceFrequencyYearly. This property can be accessed as an array containing one or more NSNumbers corresponding to the days of the year the event recurs. For all other EKRecurrenceRules, this property is nil. This property corresponds to BYYEARDAY in the iCalendar specification. It should contain values between 1 to 366 or -366 to -1.
 //
 // DaysOfTheYear returns the collection as a Go slice.
 func (x *RecurrenceRule) DaysOfTheYear() []obj.Object {
@@ -145,7 +128,7 @@ func (x *RecurrenceRule) DaysOfTheYear() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// This property is valid for rules whose EKRecurrenceFrequency is EKRecurrenceFrequencyYearly. This property can be accessed as an array containing one or more NSNumbers corresponding to the weeks of the year the event recurs. For all other EKRecurrenceRules, this property is nil. This property corresponds to BYWEEK in the iCalendar specification. It should contain integers from 1 to 53 or -1 to -53.
+// WeeksOfTheYear this property is valid for rules whose EKRecurrenceFrequency is EKRecurrenceFrequencyYearly. This property can be accessed as an array containing one or more NSNumbers corresponding to the weeks of the year the event recurs. For all other EKRecurrenceRules, this property is nil. This property corresponds to BYWEEK in the iCalendar specification. It should contain integers from 1 to 53 or -1 to -53.
 //
 // WeeksOfTheYear returns the collection as a Go slice.
 func (x *RecurrenceRule) WeeksOfTheYear() []obj.Object {
@@ -153,7 +136,7 @@ func (x *RecurrenceRule) WeeksOfTheYear() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// This property is valid for rules whose EKRecurrenceFrequency is EKRecurrenceFrequencyYearly. This property can be accessed as an array containing one or more NSNumbers corresponding to the months of the year the event recurs. For all other EKRecurrenceRules, this property is nil. This property corresponds to BYMONTH in the iCalendar specification.
+// MonthsOfTheYear this property is valid for rules whose EKRecurrenceFrequency is EKRecurrenceFrequencyYearly. This property can be accessed as an array containing one or more NSNumbers corresponding to the months of the year the event recurs. For all other EKRecurrenceRules, this property is nil. This property corresponds to BYMONTH in the iCalendar specification.
 //
 // MonthsOfTheYear returns the collection as a Go slice.
 func (x *RecurrenceRule) MonthsOfTheYear() []obj.Object {
@@ -161,7 +144,7 @@ func (x *RecurrenceRule) MonthsOfTheYear() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// This property is valid for rules which have a valid daysOfTheWeek, daysOfTheMonth, weeksOfTheYear, or monthsOfTheYear property. It allows you to specify a set of ordinal numbers to help choose which objects out of the set of selected events should be included. For example, setting the daysOfTheWeek to Monday-Friday and including a value of -1 in the array would indicate the last weekday in the recurrence range (month, year, etc). This value corresponds to the iCalendar BYSETPOS property.
+// SetPositions this property is valid for rules which have a valid daysOfTheWeek, daysOfTheMonth, weeksOfTheYear, or monthsOfTheYear property. It allows you to specify a set of ordinal numbers to help choose which objects out of the set of selected events should be included. For example, setting the daysOfTheWeek to Monday-Friday and including a value of -1 in the array would indicate the last weekday in the recurrence range (month, year, etc). This value corresponds to the iCalendar BYSETPOS property.
 //
 // SetPositions returns the collection as a Go slice.
 func (x *RecurrenceRule) SetPositions() []obj.Object {
@@ -188,3 +171,5 @@ type RecurrenceRuleable interface {
 }
 
 var _ RecurrenceRuleable = (*RecurrenceRule)(nil)
+
+var _ ObjectProvider = (*RecurrenceRule)(nil)

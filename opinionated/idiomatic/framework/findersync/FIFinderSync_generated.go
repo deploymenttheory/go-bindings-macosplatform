@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type to subclass to add badges, custom shortcut menus, and toolbar buttons to the Finder.
-//
 // FinderSync is an idiomatic wrapper over the Objective-C class FIFinderSync.
+//
+// A type to subclass to add badges, custom shortcut menus, and toolbar buttons to the Finder.
 type FinderSync struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FinderSyncFromID(id objc.ID) *FinderSync {
 	if id == 0 {
 		return nil
 	}
-	x := &FinderSync{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FinderSync{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func finderSyncAdopt(id objc.ID) *FinderSync {
 	if id == 0 {
 		return nil
 	}
-	x := &FinderSync{Handle: objref.Wrap(id)}
+	x := &FinderSync{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *FinderSync) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *FinderSync) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FinderSync) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewFinderSync creates a new FinderSync.

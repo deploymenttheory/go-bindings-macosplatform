@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object used to provide items during a directory enumeration.
-//
 // DirectoryEntryPacker is an idiomatic wrapper over the Objective-C class FSDirectoryEntryPacker.
+//
+// An object used to provide items during a directory enumeration.
 type DirectoryEntryPacker struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DirectoryEntryPackerFromID(id objc.ID) *DirectoryEntryPacker {
 	if id == 0 {
 		return nil
 	}
-	x := &DirectoryEntryPacker{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DirectoryEntryPacker{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func directoryEntryPackerAdopt(id objc.ID) *DirectoryEntryPacker {
 	if id == 0 {
 		return nil
 	}
-	x := &DirectoryEntryPacker{Handle: objref.Wrap(id)}
+	x := &DirectoryEntryPacker{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *DirectoryEntryPacker) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DirectoryEntryPacker) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDirectoryEntryPacker creates a new DirectoryEntryPacker.
 func NewDirectoryEntryPacker() *DirectoryEntryPacker {
 	_id := objc.Send[objc.ID](objc.ID(_class("FSDirectoryEntryPacker")), objc.RegisterName("new"))
 	return directoryEntryPackerAdopt(_id)
 }
 
-// Provides a directory entry during enumeration.
+// PackEntryWithNameItemTypeItemIDNextCookieAttributes provides a directory entry during enumeration.
 func (x *DirectoryEntryPacker) PackEntryWithNameItemTypeItemIDNextCookieAttributes(name *FileName, itemType ItemType, itemID ItemID, nextCookie uint64, attributes *ItemAttributes) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("packEntryWithName:itemType:itemID:nextCookie:attributes:"), objref.IDOf(name), itemType, itemID, nextCookie, objref.IDOf(attributes))
 	return _r

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a bilinear spatial upsampling filter.
-//
 // CNNUpsamplingBilinearNode is an idiomatic wrapper over the Objective-C class MPSCNNUpsamplingBilinearNode.
+//
+// It embeds [NNFilterNode], promoting that type's methods.
+//
+// A representation of a bilinear spatial upsampling filter.
 type CNNUpsamplingBilinearNode struct {
-	objref.Handle
+	NNFilterNode
 }
 
 // CNNUpsamplingBilinearNodeFromID adopts an existing Objective-C object as a CNNUpsamplingBilinearNode
@@ -25,7 +26,8 @@ func CNNUpsamplingBilinearNodeFromID(id objc.ID) *CNNUpsamplingBilinearNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNUpsamplingBilinearNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNUpsamplingBilinearNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,62 +40,45 @@ func cNNUpsamplingBilinearNodeAdopt(id objc.ID) *CNNUpsamplingBilinearNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNUpsamplingBilinearNode{Handle: objref.Wrap(id)}
+	x := &CNNUpsamplingBilinearNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNUpsamplingBilinearNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNUpsamplingBilinearNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNUpsamplingBilinearNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Init a node representing a MPSCNNUpsamplingBilinear kernel
-//
-// NewCNNUpsamplingBilinearNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY creates a new CNNUpsamplingBilinearNode.
+// NewCNNUpsamplingBilinearNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY init a node representing a MPSCNNUpsamplingBilinear kernel
 func NewCNNUpsamplingBilinearNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY(sourceNode obj.Object, integerScaleFactorX int, integerScaleFactorY int) *CNNUpsamplingBilinearNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNUpsamplingBilinearNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:integerScaleFactorX:integerScaleFactorY:"), objref.IDOf(sourceNode), integerScaleFactorX, integerScaleFactorY)
 	return cNNUpsamplingBilinearNodeAdopt(_id)
 }
 
-// Init a node representing a MPSCNNUpsamplingBilinear kernel
-//
-// NewCNNUpsamplingBilinearNodeWithSourceIntegerScaleFactorXIntegerScaleFactorYAlignCorners creates a new CNNUpsamplingBilinearNode.
+// NewCNNUpsamplingBilinearNodeWithSourceIntegerScaleFactorXIntegerScaleFactorYAlignCorners init a node representing a MPSCNNUpsamplingBilinear kernel
 func NewCNNUpsamplingBilinearNodeWithSourceIntegerScaleFactorXIntegerScaleFactorYAlignCorners(sourceNode obj.Object, integerScaleFactorX int, integerScaleFactorY int, alignCorners bool) *CNNUpsamplingBilinearNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNUpsamplingBilinearNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:integerScaleFactorX:integerScaleFactorY:alignCorners:"), objref.IDOf(sourceNode), integerScaleFactorX, integerScaleFactorY, alignCorners)
 	return cNNUpsamplingBilinearNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNUpsamplingBilinearNode) WithLabel(label string) *CNNUpsamplingBilinearNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// ScaleFactorX wraps the corresponding Objective-C method.
 func (x *CNNUpsamplingBilinearNode) ScaleFactorX() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactorX"))
 	return _r
 }
 
+// ScaleFactorY wraps the corresponding Objective-C method.
 func (x *CNNUpsamplingBilinearNode) ScaleFactorY() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactorY"))
 	return _r
 }
 
+// AlignCorners wraps the corresponding Objective-C method.
 func (x *CNNUpsamplingBilinearNode) AlignCorners() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("alignCorners"))
 	return _r
@@ -109,3 +94,5 @@ type CNNUpsamplingBilinearNodeable interface {
 }
 
 var _ CNNUpsamplingBilinearNodeable = (*CNNUpsamplingBilinearNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNUpsamplingBilinearNode)(nil)

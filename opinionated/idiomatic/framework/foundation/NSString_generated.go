@@ -14,9 +14,11 @@ import (
 	"unsafe"
 )
 
-// A static, plain-text Unicode string object.
-//
 // String is an idiomatic wrapper over the Objective-C class NSString.
+//
+// String is an abstract base — you do not construct it directly. Construct one of [MutableString], [SimpleCString] and pass it where a String is accepted.
+//
+// A static, plain-text Unicode string object.
 type String struct {
 	objref.Handle
 }
@@ -27,7 +29,8 @@ func StringFromID(id objc.ID) *String {
 	if id == 0 {
 		return nil
 	}
-	x := &String{Handle: objref.Wrap(purego.Retain(id))}
+	x := &String{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +43,8 @@ func stringAdopt(id objc.ID) *String {
 	if id == 0 {
 		return nil
 	}
-	x := &String{Handle: objref.Wrap(id)}
+	x := &String{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,10 +64,10 @@ func (x *String) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewString creates a new String.
-func NewString() *String {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("new"))
-	return stringAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *String) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewStringWithCoder creates a new String.
@@ -73,54 +77,42 @@ func NewStringWithCoder(coder *Coder) *String {
 	return stringAdopt(_id)
 }
 
-// Returns an
-//
-// NewStringWithUTF8String creates a new String.
+// NewStringWithUTF8String returns an
 func NewStringWithUTF8String(nullTerminatedCString string) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUTF8String:"), nullTerminatedCString)
 	return stringAdopt(_id)
 }
 
-// Returns an NSString object initialized by copying the characters from another given string.
-//
-// NewStringWithString creates a new String.
+// NewStringWithString returns an NSString object initialized by copying the characters from another given string.
 func NewStringWithString(aString string) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(aString))
 	return stringAdopt(_id)
 }
 
-// Returns an NSString object initialized by using a given format string as a template into which the remaining argument values are substituted.
-//
-// NewStringWithFormat creates a new String.
+// NewStringWithFormat returns an NSString object initialized by using a given format string as a template into which the remaining argument values are substituted.
 func NewStringWithFormat(format string) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:"), purego.NSString(format))
 	return stringAdopt(_id)
 }
 
-// Returns an NSString object initialized by using a given format string as a template into which the remaining argument values are substituted without any localization.
-//
-// NewStringWithFormatArguments creates a new String.
+// NewStringWithFormatArguments returns an NSString object initialized by using a given format string as a template into which the remaining argument values are substituted without any localization.
 func NewStringWithFormatArguments(format string, argList string) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:arguments:"), purego.NSString(format), argList)
 	return stringAdopt(_id)
 }
 
-// Returns an NSString object initialized by using a given format string as a template into which the remaining argument values are substituted according to given locale.
-//
-// NewStringWithFormatLocale creates a new String.
+// NewStringWithFormatLocale returns an NSString object initialized by using a given format string as a template into which the remaining argument values are substituted according to given locale.
 func NewStringWithFormatLocale(format string, locale obj.Object) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:locale:"), purego.NSString(format), objref.IDOf(locale))
 	return stringAdopt(_id)
 }
 
-// Returns an NSString object initialized by using a given format string as a template into which the remaining argument values are substituted according to given locale information. This method is meant to be called from within a variadic function, where the argument list will be available.
-//
-// NewStringWithFormatLocaleArguments creates a new String.
+// NewStringWithFormatLocaleArguments returns an NSString object initialized by using a given format string as a template into which the remaining argument values are substituted according to given locale information. This method is meant to be called from within a variadic function, where the argument list will be available.
 func NewStringWithFormatLocaleArguments(format string, locale obj.Object, argList string) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:locale:arguments:"), purego.NSString(format), objref.IDOf(locale), argList)
@@ -128,7 +120,7 @@ func NewStringWithFormatLocaleArguments(format string, locale obj.Object, argLis
 }
 
 // NewStringWithValidatedFormatValidFormatSpecifiersError creates a new String.
-func NewStringWithValidatedFormatValidFormatSpecifiersError(format string, validFormatSpecifiers string) (*String, error) {
+func NewStringWithValidatedFormatValidFormatSpecifiersError(format string, validFormatSpecifiers string) (result *String, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValidatedFormat:validFormatSpecifiers:error:"), purego.NSString(format), purego.NSString(validFormatSpecifiers), unsafe.Pointer(&_nsErr))
@@ -139,7 +131,7 @@ func NewStringWithValidatedFormatValidFormatSpecifiersError(format string, valid
 }
 
 // NewStringWithValidatedFormatValidFormatSpecifiersLocaleError creates a new String.
-func NewStringWithValidatedFormatValidFormatSpecifiersLocaleError(format string, validFormatSpecifiers string, locale obj.Object) (*String, error) {
+func NewStringWithValidatedFormatValidFormatSpecifiersLocaleError(format string, validFormatSpecifiers string, locale obj.Object) (result *String, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValidatedFormat:validFormatSpecifiers:locale:error:"), purego.NSString(format), purego.NSString(validFormatSpecifiers), objref.IDOf(locale), unsafe.Pointer(&_nsErr))
@@ -150,7 +142,7 @@ func NewStringWithValidatedFormatValidFormatSpecifiersLocaleError(format string,
 }
 
 // NewStringWithValidatedFormatValidFormatSpecifiersArgumentsError creates a new String.
-func NewStringWithValidatedFormatValidFormatSpecifiersArgumentsError(format string, validFormatSpecifiers string, argList string) (*String, error) {
+func NewStringWithValidatedFormatValidFormatSpecifiersArgumentsError(format string, validFormatSpecifiers string, argList string) (result *String, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValidatedFormat:validFormatSpecifiers:arguments:error:"), purego.NSString(format), purego.NSString(validFormatSpecifiers), argList, unsafe.Pointer(&_nsErr))
@@ -161,7 +153,7 @@ func NewStringWithValidatedFormatValidFormatSpecifiersArgumentsError(format stri
 }
 
 // NewStringWithValidatedFormatValidFormatSpecifiersLocaleArgumentsError creates a new String.
-func NewStringWithValidatedFormatValidFormatSpecifiersLocaleArgumentsError(format string, validFormatSpecifiers string, locale obj.Object, argList string) (*String, error) {
+func NewStringWithValidatedFormatValidFormatSpecifiersLocaleArgumentsError(format string, validFormatSpecifiers string, locale obj.Object, argList string) (result *String, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValidatedFormat:validFormatSpecifiers:locale:arguments:error:"), purego.NSString(format), purego.NSString(validFormatSpecifiers), objref.IDOf(locale), argList, unsafe.Pointer(&_nsErr))
@@ -171,28 +163,22 @@ func NewStringWithValidatedFormatValidFormatSpecifiersLocaleArgumentsError(forma
 	return stringAdopt(_id), nil
 }
 
-// Returns an NSString object initialized by converting given data into UTF-16 code units using a given encoding.
-//
-// NewStringWithDataEncoding creates a new String.
+// NewStringWithDataEncoding returns an NSString object initialized by converting given data into UTF-16 code units using a given encoding.
 func NewStringWithDataEncoding(data *Data, encoding int) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:encoding:"), objref.IDOf(data), encoding)
 	return stringAdopt(_id)
 }
 
-// Returns an
-//
-// NewStringWithCStringEncoding creates a new String.
+// NewStringWithCStringEncoding returns an
 func NewStringWithCStringEncoding(nullTerminatedCString string, encoding int) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCString:encoding:"), nullTerminatedCString, encoding)
 	return stringAdopt(_id)
 }
 
-// Returns an
-//
-// NewStringWithContentsOfURLEncodingError creates a new String.
-func NewStringWithContentsOfURLEncodingError(url string, enc int) (*String, error) {
+// NewStringWithContentsOfURLEncodingError returns an
+func NewStringWithContentsOfURLEncodingError(url string, enc int) (result *String, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:encoding:error:"), rt.FileURL(url), enc, unsafe.Pointer(&_nsErr))
@@ -202,10 +188,8 @@ func NewStringWithContentsOfURLEncodingError(url string, enc int) (*String, erro
 	return stringAdopt(_id), nil
 }
 
-// Returns an NSString object initialized by reading data from the file at a given path using a given encoding.
-//
-// NewStringWithContentsOfFileEncodingError creates a new String.
-func NewStringWithContentsOfFileEncodingError(path string, enc int) (*String, error) {
+// NewStringWithContentsOfFileEncodingError returns an NSString object initialized by reading data from the file at a given path using a given encoding.
+func NewStringWithContentsOfFileEncodingError(path string, enc int) (result *String, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfFile:encoding:error:"), purego.NSString(path), enc, unsafe.Pointer(&_nsErr))
@@ -215,18 +199,14 @@ func NewStringWithContentsOfFileEncodingError(path string, enc int) (*String, er
 	return stringAdopt(_id), nil
 }
 
-// Initializes the receiver, a newly allocated NSString object, by reading data from the file named by path.
-//
-// NewStringWithContentsOfFile creates a new String.
+// NewStringWithContentsOfFile initializes the receiver, a newly allocated NSString object, by reading data from the file named by path.
 func NewStringWithContentsOfFile(path string) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfFile:"), purego.NSString(path))
 	return stringAdopt(_id)
 }
 
-// Returns an
-//
-// NewStringWithContentsOfURL creates a new String.
+// NewStringWithContentsOfURL returns an
 func NewStringWithContentsOfURL(url string) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), rt.FileURL(url))
@@ -254,25 +234,26 @@ func NewStringWithCString(bytes_ string) *String {
 	return stringAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *String) WithScriptingProperties(scriptingProperties obj.Object) *String {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Returns the character at a given UTF-16 code unit index.
+// CharacterAtIndex returns the character at a given UTF-16 code unit index.
 func (x *String) CharacterAtIndex(index int) uint16 {
 	errkit.CheckIndex(index, x.Length())
 	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("characterAtIndex:"), index)
 	return _r
 }
 
+// Length wraps the corresponding Objective-C method.
 func (x *String) Length() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
 	return _r
 }
 
-// Returns a new string containing the characters of the receiver from the one at a given index to the end.
+// SubstringFromIndex returns a new string containing the characters of the receiver from the one at a given index to the end.
 func (x *String) SubstringFromIndex(from int) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("substringFromIndex:"), from)
 	if _r == 0 {
@@ -281,7 +262,7 @@ func (x *String) SubstringFromIndex(from int) string {
 	return purego.GoString(_r)
 }
 
-// Returns a new string containing the characters of the receiver up to, but not including, the one at a given index.
+// SubstringToIndex returns a new string containing the characters of the receiver up to, but not including, the one at a given index.
 func (x *String) SubstringToIndex(to int) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("substringToIndex:"), to)
 	if _r == 0 {
@@ -290,61 +271,61 @@ func (x *String) SubstringToIndex(to int) string {
 	return purego.GoString(_r)
 }
 
-// Returns the result of invoking compare:options:range: with no options and the receiver’s full extent as the range.
+// Compare returns the result of invoking compare:options:range: with no options and the receiver’s full extent as the range.
 func (x *String) Compare(string_ string) ComparisonResult {
 	_r := objc.Send[ComparisonResult](objref.IDOf(x), objc.RegisterName("compare:"), purego.NSString(string_))
 	return _r
 }
 
-// Compares the string with the specified string using the given options.
+// CompareOptions compares the string with the specified string using the given options.
 func (x *String) CompareOptions(string_ string, mask StringCompareOptions) ComparisonResult {
 	_r := objc.Send[ComparisonResult](objref.IDOf(x), objc.RegisterName("compare:options:"), purego.NSString(string_), mask)
 	return _r
 }
 
-// Returns the result of invoking compare:options: with NSCaseInsensitiveSearch as the only option.
+// CaseInsensitiveCompare returns the result of invoking compare:options: with NSCaseInsensitiveSearch as the only option.
 func (x *String) CaseInsensitiveCompare(string_ string) ComparisonResult {
 	_r := objc.Send[ComparisonResult](objref.IDOf(x), objc.RegisterName("caseInsensitiveCompare:"), purego.NSString(string_))
 	return _r
 }
 
-// Compares the string and a given string using a localized comparison.
+// LocalizedCompare compares the string and a given string using a localized comparison.
 func (x *String) LocalizedCompare(string_ string) ComparisonResult {
 	_r := objc.Send[ComparisonResult](objref.IDOf(x), objc.RegisterName("localizedCompare:"), purego.NSString(string_))
 	return _r
 }
 
-// Compares the string with a given string using a case-insensitive, localized, comparison.
+// LocalizedCaseInsensitiveCompare compares the string with a given string using a case-insensitive, localized, comparison.
 func (x *String) LocalizedCaseInsensitiveCompare(string_ string) ComparisonResult {
 	_r := objc.Send[ComparisonResult](objref.IDOf(x), objc.RegisterName("localizedCaseInsensitiveCompare:"), purego.NSString(string_))
 	return _r
 }
 
-// Compares strings as sorted by the Finder.
+// LocalizedStandardCompare compares strings as sorted by the Finder.
 func (x *String) LocalizedStandardCompare(string_ string) ComparisonResult {
 	_r := objc.Send[ComparisonResult](objref.IDOf(x), objc.RegisterName("localizedStandardCompare:"), purego.NSString(string_))
 	return _r
 }
 
-// Returns a Boolean value that indicates whether a given string is equal to the receiver using a literal Unicode-based comparison.
+// IsEqualToString returns a Boolean value that indicates whether a given string is equal to the receiver using a literal Unicode-based comparison.
 func (x *String) IsEqualToString(aString string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToString:"), purego.NSString(aString))
 	return _r
 }
 
-// Returns a Boolean value that indicates whether a given string matches the beginning characters of the receiver.
+// HasPrefix returns a Boolean value that indicates whether a given string matches the beginning characters of the receiver.
 func (x *String) HasPrefix(str string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasPrefix:"), purego.NSString(str))
 	return _r
 }
 
-// Returns a Boolean value that indicates whether a given string matches the ending characters of the receiver.
+// HasSuffix returns a Boolean value that indicates whether a given string matches the ending characters of the receiver.
 func (x *String) HasSuffix(str string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasSuffix:"), purego.NSString(str))
 	return _r
 }
 
-// Returns a string containing characters the receiver and a given string have in common, starting from the beginning of each up to the first characters that aren’t equivalent.
+// CommonPrefixWithStringOptions returns a string containing characters the receiver and a given string have in common, starting from the beginning of each up to the first characters that aren’t equivalent.
 func (x *String) CommonPrefixWithStringOptions(str string, mask StringCompareOptions) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commonPrefixWithString:options:"), purego.NSString(str), mask)
 	if _r == 0 {
@@ -353,25 +334,25 @@ func (x *String) CommonPrefixWithStringOptions(str string, mask StringCompareOpt
 	return purego.GoString(_r)
 }
 
-// Returns a Boolean value indicating whether the string contains a given string by performing a case-sensitive, locale-unaware search.
+// ContainsString returns a Boolean value indicating whether the string contains a given string by performing a case-sensitive, locale-unaware search.
 func (x *String) ContainsString(str string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsString:"), purego.NSString(str))
 	return _r
 }
 
-// Returns a Boolean value indicating whether the string contains a given string by performing a case-insensitive, locale-aware search.
+// LocalizedCaseInsensitiveContainsString returns a Boolean value indicating whether the string contains a given string by performing a case-insensitive, locale-aware search.
 func (x *String) LocalizedCaseInsensitiveContainsString(str string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("localizedCaseInsensitiveContainsString:"), purego.NSString(str))
 	return _r
 }
 
-// Returns a Boolean value indicating whether the string contains a given string by performing a case and diacritic insensitive, locale-aware search.
+// LocalizedStandardContainsString returns a Boolean value indicating whether the string contains a given string by performing a case and diacritic insensitive, locale-aware search.
 func (x *String) LocalizedStandardContainsString(str string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("localizedStandardContainsString:"), purego.NSString(str))
 	return _r
 }
 
-// Returns a new string made by appending a given string to the receiver.
+// StringByAppendingString returns a new string made by appending a given string to the receiver.
 func (x *String) StringByAppendingString(aString string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringByAppendingString:"), purego.NSString(aString))
 	if _r == 0 {
@@ -380,7 +361,7 @@ func (x *String) StringByAppendingString(aString string) string {
 	return purego.GoString(_r)
 }
 
-// Returns a string made by appending to the receiver a string constructed from a given format string and the following arguments.
+// StringByAppendingFormat returns a string made by appending to the receiver a string constructed from a given format string and the following arguments.
 func (x *String) StringByAppendingFormat(format string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringByAppendingFormat:"), purego.NSString(format))
 	if _r == 0 {
@@ -389,7 +370,7 @@ func (x *String) StringByAppendingFormat(format string) string {
 	return purego.GoString(_r)
 }
 
-// Returns a version of the string with all letters converted to uppercase, taking into account the specified locale.
+// UppercaseStringWithLocale returns a version of the string with all letters converted to uppercase, taking into account the specified locale.
 func (x *String) UppercaseStringWithLocale(locale *Locale) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uppercaseStringWithLocale:"), objref.IDOf(locale))
 	if _r == 0 {
@@ -398,7 +379,7 @@ func (x *String) UppercaseStringWithLocale(locale *Locale) string {
 	return purego.GoString(_r)
 }
 
-// Returns a version of the string with all letters converted to lowercase, taking into account the specified locale.
+// LowercaseStringWithLocale returns a version of the string with all letters converted to lowercase, taking into account the specified locale.
 func (x *String) LowercaseStringWithLocale(locale *Locale) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lowercaseStringWithLocale:"), objref.IDOf(locale))
 	if _r == 0 {
@@ -407,7 +388,7 @@ func (x *String) LowercaseStringWithLocale(locale *Locale) string {
 	return purego.GoString(_r)
 }
 
-// Returns a capitalized representation of the receiver using the specified locale.
+// CapitalizedStringWithLocale returns a capitalized representation of the receiver using the specified locale.
 func (x *String) CapitalizedStringWithLocale(locale *Locale) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("capitalizedStringWithLocale:"), objref.IDOf(locale))
 	if _r == 0 {
@@ -416,66 +397,66 @@ func (x *String) CapitalizedStringWithLocale(locale *Locale) string {
 	return purego.GoString(_r)
 }
 
-// Enumerates all the lines in the string.
+// EnumerateLinesUsing enumerates all the lines in the string.
 func (x *String) EnumerateLinesUsing(block func(obj.Object, *bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateLinesUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
-// Returns an NSData object containing a representation of the receiver encoded using a given encoding.
+// DataUsingEncodingAllowLossyConversion returns an NSData object containing a representation of the receiver encoded using a given encoding.
 func (x *String) DataUsingEncodingAllowLossyConversion(encoding int, lossy bool) *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataUsingEncoding:allowLossyConversion:"), encoding, lossy)
 	return DataFromID(_r)
 }
 
-// Returns an NSData object containing a representation of the receiver encoded using a given encoding.
+// DataUsingEncoding returns an NSData object containing a representation of the receiver encoded using a given encoding.
 func (x *String) DataUsingEncoding(encoding int) *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataUsingEncoding:"), encoding)
 	return DataFromID(_r)
 }
 
-// Returns a Boolean value that indicates whether the receiver can be converted to a given encoding without loss of information.
+// CanBeConvertedToEncoding returns a Boolean value that indicates whether the receiver can be converted to a given encoding without loss of information.
 func (x *String) CanBeConvertedToEncoding(encoding int) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canBeConvertedToEncoding:"), encoding)
 	return _r
 }
 
-// Returns a representation of the string as a C string using a given encoding.
+// CStringUsingEncoding returns a representation of the string as a C string using a given encoding.
 func (x *String) CStringUsingEncoding(encoding int) string {
 	_r := objc.Send[string](objref.IDOf(x), objc.RegisterName("cStringUsingEncoding:"), encoding)
 	return _r
 }
 
-// Converts the string to a given encoding and stores it in a buffer.
+// GetCStringMaxLengthEncoding converts the string to a given encoding and stores it in a buffer.
 func (x *String) GetCStringMaxLengthEncoding(buffer string, maxBufferCount int, encoding int) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("getCString:maxLength:encoding:"), buffer, maxBufferCount, encoding)
 	return _r
 }
 
-// Returns the maximum number of bytes needed to store the receiver in a given encoding.
+// MaximumLengthOfBytesUsingEncoding returns the maximum number of bytes needed to store the receiver in a given encoding.
 func (x *String) MaximumLengthOfBytesUsingEncoding(enc int) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumLengthOfBytesUsingEncoding:"), enc)
 	return _r
 }
 
-// Returns the number of bytes required to store the receiver in a given encoding.
+// LengthOfBytesUsingEncoding returns the number of bytes required to store the receiver in a given encoding.
 func (x *String) LengthOfBytesUsingEncoding(enc int) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("lengthOfBytesUsingEncoding:"), enc)
 	return _r
 }
 
-// Returns an array containing substrings from the receiver that have been divided by a given separator.
+// ComponentsSeparatedByString returns an array containing substrings from the receiver that have been divided by a given separator.
 func (x *String) ComponentsSeparatedByString(separator string) []string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("componentsSeparatedByString:"), purego.NSString(separator))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Returns an array containing substrings from the receiver that have been divided by characters in a given set.
+// ComponentsSeparatedByCharactersInSet returns an array containing substrings from the receiver that have been divided by characters in a given set.
 func (x *String) ComponentsSeparatedByCharactersInSet(separator *CharacterSet) []string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("componentsSeparatedByCharactersInSet:"), objref.IDOf(separator))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Returns a new string made by removing from both ends of the receiver characters contained in a given character set.
+// StringByTrimmingCharactersInSet returns a new string made by removing from both ends of the receiver characters contained in a given character set.
 func (x *String) StringByTrimmingCharactersInSet(set *CharacterSet) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringByTrimmingCharactersInSet:"), objref.IDOf(set))
 	if _r == 0 {
@@ -484,7 +465,7 @@ func (x *String) StringByTrimmingCharactersInSet(set *CharacterSet) string {
 	return purego.GoString(_r)
 }
 
-// Returns a new string formed from the receiver by either removing characters from the end, or by appending as many occurrences as necessary of a given pad string.
+// StringByPaddingToLengthWithStringStartingAtIndex returns a new string formed from the receiver by either removing characters from the end, or by appending as many occurrences as necessary of a given pad string.
 func (x *String) StringByPaddingToLengthWithStringStartingAtIndex(newLength int, padString string, padIndex int) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringByPaddingToLength:withString:startingAtIndex:"), newLength, purego.NSString(padString), padIndex)
 	if _r == 0 {
@@ -493,7 +474,7 @@ func (x *String) StringByPaddingToLengthWithStringStartingAtIndex(newLength int,
 	return purego.GoString(_r)
 }
 
-// Creates a string suitable for comparison by removing the specified character distinctions from a string.
+// StringByFoldingWithOptionsLocale creates a string suitable for comparison by removing the specified character distinctions from a string.
 func (x *String) StringByFoldingWithOptionsLocale(options StringCompareOptions, locale *Locale) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringByFoldingWithOptions:locale:"), options, objref.IDOf(locale))
 	if _r == 0 {
@@ -502,7 +483,7 @@ func (x *String) StringByFoldingWithOptionsLocale(options StringCompareOptions, 
 	return purego.GoString(_r)
 }
 
-// Returns a new string in which all occurrences of a target string in the receiver are replaced by another given string.
+// StringByReplacingOccurrencesOfStringWithString returns a new string in which all occurrences of a target string in the receiver are replaced by another given string.
 func (x *String) StringByReplacingOccurrencesOfStringWithString(target string, replacement string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringByReplacingOccurrencesOfString:withString:"), purego.NSString(target), purego.NSString(replacement))
 	if _r == 0 {
@@ -511,7 +492,7 @@ func (x *String) StringByReplacingOccurrencesOfStringWithString(target string, r
 	return purego.GoString(_r)
 }
 
-// Returns a new string by applying a specified transform to the string.
+// StringByApplyingTransformReverse returns a new string by applying a specified transform to the string.
 func (x *String) StringByApplyingTransformReverse(transform *String, reverse bool) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringByApplyingTransform:reverse:"), objref.IDOf(transform), reverse)
 	if _r == 0 {
@@ -520,7 +501,7 @@ func (x *String) StringByApplyingTransformReverse(transform *String, reverse boo
 	return purego.GoString(_r)
 }
 
-// Writes the contents of the receiver to the URL specified by url using the specified encoding.
+// WriteToURLAtomicallyEncoding writes the contents of the receiver to the URL specified by url using the specified encoding.
 func (x *String) WriteToURLAtomicallyEncoding(url string, useAuxiliaryFile bool, enc int) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:atomically:encoding:error:"), rt.FileURL(url), useAuxiliaryFile, enc, unsafe.Pointer(&_nsErr))
@@ -530,7 +511,7 @@ func (x *String) WriteToURLAtomicallyEncoding(url string, useAuxiliaryFile bool,
 	return nil
 }
 
-// Writes the contents of the receiver to a file at a given path using a given encoding.
+// WriteToFileAtomicallyEncoding writes the contents of the receiver to a file at a given path using a given encoding.
 func (x *String) WriteToFileAtomicallyEncoding(path string, useAuxiliaryFile bool, enc int) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToFile:atomically:encoding:error:"), purego.NSString(path), useAuxiliaryFile, enc, unsafe.Pointer(&_nsErr))
@@ -540,36 +521,43 @@ func (x *String) WriteToFileAtomicallyEncoding(path string, useAuxiliaryFile boo
 	return nil
 }
 
+// DoubleValue wraps the corresponding Objective-C method.
 func (x *String) DoubleValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("doubleValue"))
 	return _r
 }
 
+// FloatValue wraps the corresponding Objective-C method.
 func (x *String) FloatValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("floatValue"))
 	return _r
 }
 
+// IntValue wraps the corresponding Objective-C method.
 func (x *String) IntValue() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("intValue"))
 	return _r
 }
 
+// IntegerValue wraps the corresponding Objective-C method.
 func (x *String) IntegerValue() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("integerValue"))
 	return _r
 }
 
+// LongLongValue wraps the corresponding Objective-C method.
 func (x *String) LongLongValue() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("longLongValue"))
 	return _r
 }
 
+// BoolValue wraps the corresponding Objective-C method.
 func (x *String) BoolValue() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("boolValue"))
 	return _r
 }
 
+// UppercaseString wraps the corresponding Objective-C method.
 func (x *String) UppercaseString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uppercaseString"))
 	if _r == 0 {
@@ -578,6 +566,7 @@ func (x *String) UppercaseString() string {
 	return purego.GoString(_r)
 }
 
+// LowercaseString wraps the corresponding Objective-C method.
 func (x *String) LowercaseString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lowercaseString"))
 	if _r == 0 {
@@ -586,6 +575,7 @@ func (x *String) LowercaseString() string {
 	return purego.GoString(_r)
 }
 
+// CapitalizedString wraps the corresponding Objective-C method.
 func (x *String) CapitalizedString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("capitalizedString"))
 	if _r == 0 {
@@ -594,6 +584,7 @@ func (x *String) CapitalizedString() string {
 	return purego.GoString(_r)
 }
 
+// LocalizedUppercaseString wraps the corresponding Objective-C method.
 func (x *String) LocalizedUppercaseString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedUppercaseString"))
 	if _r == 0 {
@@ -602,6 +593,7 @@ func (x *String) LocalizedUppercaseString() string {
 	return purego.GoString(_r)
 }
 
+// LocalizedLowercaseString wraps the corresponding Objective-C method.
 func (x *String) LocalizedLowercaseString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedLowercaseString"))
 	if _r == 0 {
@@ -610,6 +602,7 @@ func (x *String) LocalizedLowercaseString() string {
 	return purego.GoString(_r)
 }
 
+// LocalizedCapitalizedString wraps the corresponding Objective-C method.
 func (x *String) LocalizedCapitalizedString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedCapitalizedString"))
 	if _r == 0 {
@@ -618,16 +611,19 @@ func (x *String) LocalizedCapitalizedString() string {
 	return purego.GoString(_r)
 }
 
+// FastestEncoding wraps the corresponding Objective-C method.
 func (x *String) FastestEncoding() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fastestEncoding"))
 	return _r
 }
 
+// SmallestEncoding wraps the corresponding Objective-C method.
 func (x *String) SmallestEncoding() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("smallestEncoding"))
 	return _r
 }
 
+// DecomposedStringWithCanonicalMapping wraps the corresponding Objective-C method.
 func (x *String) DecomposedStringWithCanonicalMapping() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decomposedStringWithCanonicalMapping"))
 	if _r == 0 {
@@ -636,6 +632,7 @@ func (x *String) DecomposedStringWithCanonicalMapping() string {
 	return purego.GoString(_r)
 }
 
+// PrecomposedStringWithCanonicalMapping wraps the corresponding Objective-C method.
 func (x *String) PrecomposedStringWithCanonicalMapping() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("precomposedStringWithCanonicalMapping"))
 	if _r == 0 {
@@ -644,6 +641,7 @@ func (x *String) PrecomposedStringWithCanonicalMapping() string {
 	return purego.GoString(_r)
 }
 
+// DecomposedStringWithCompatibilityMapping wraps the corresponding Objective-C method.
 func (x *String) DecomposedStringWithCompatibilityMapping() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decomposedStringWithCompatibilityMapping"))
 	if _r == 0 {
@@ -652,6 +650,7 @@ func (x *String) DecomposedStringWithCompatibilityMapping() string {
 	return purego.GoString(_r)
 }
 
+// PrecomposedStringWithCompatibilityMapping wraps the corresponding Objective-C method.
 func (x *String) PrecomposedStringWithCompatibilityMapping() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("precomposedStringWithCompatibilityMapping"))
 	if _r == 0 {
@@ -660,59 +659,66 @@ func (x *String) PrecomposedStringWithCompatibilityMapping() string {
 	return purego.GoString(_r)
 }
 
-// Parses the receiver as a text representation of a property list, returning an NSString, NSData, NSArray, or NSDictionary object, according to the topmost element.
+// PropertyList parses the receiver as a text representation of a property list, returning an NSString, NSData, NSArray, or NSDictionary object, according to the topmost element.
 func (x *String) PropertyList() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyList"))
 	return obj.Wrap(_r)
 }
 
-// Returns a dictionary object initialized with the keys and values found in the receiver.
+// PropertyListFromStringsFileFormat returns a dictionary object initialized with the keys and values found in the receiver.
 func (x *String) PropertyListFromStringsFileFormat() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyListFromStringsFileFormat"))
 	return obj.Wrap(_r)
 }
 
-// Returns a representation of the receiver as a C string in the default C-string encoding.
+// CString returns a representation of the receiver as a C string in the default C-string encoding.
 func (x *String) CString() string {
 	_r := objc.Send[string](objref.IDOf(x), objc.RegisterName("cString"))
 	return _r
 }
 
-// Returns a representation of the receiver as a C string in the default C-string encoding, possibly losing information in converting to that encoding.
+// LossyCString returns a representation of the receiver as a C string in the default C-string encoding, possibly losing information in converting to that encoding.
 func (x *String) LossyCString() string {
 	_r := objc.Send[string](objref.IDOf(x), objc.RegisterName("lossyCString"))
 	return _r
 }
 
-// Returns the length in char-sized units of the receiver’s C-string representation in the default C-string encoding.
+// CStringLength returns the length in char-sized units of the receiver’s C-string representation in the default C-string encoding.
 func (x *String) CStringLength() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cStringLength"))
 	return _r
 }
 
-// Invokes getCString:maxLength:range:remainingRange: with NSMaximumStringLength as the maximum length, the receiver’s entire extent as the range, and NULL for the remaining range.
+// GetCString invokes getCString:maxLength:range:remainingRange: with NSMaximumStringLength as the maximum length, the receiver’s entire extent as the range, and NULL for the remaining range.
 func (x *String) GetCString(bytes_ string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getCString:"), bytes_)
 }
 
-// Invokes getCString:maxLength:range:remainingRange: with maxLength as the maximum length in char-sized units, the receiver’s entire extent as the range, and NULL for the remaining range.
+// GetCStringMaxLength invokes getCString:maxLength:range:remainingRange: with maxLength as the maximum length in char-sized units, the receiver’s entire extent as the range, and NULL for the remaining range.
 func (x *String) GetCStringMaxLength(bytes_ string, maxLength int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getCString:maxLength:"), bytes_, maxLength)
 }
 
-// Writes the contents of the receiver to the file specified by a given path.
+// WriteToFileAtomically writes the contents of the receiver to the file specified by a given path.
 func (x *String) WriteToFileAtomically(path string, useAuxiliaryFile bool) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToFile:atomically:"), purego.NSString(path), useAuxiliaryFile)
 	return _r
 }
 
-// Writes the contents of the receiver to the location specified by a given URL.
+// WriteToURLAtomically writes the contents of the receiver to the location specified by a given URL.
 func (x *String) WriteToURLAtomically(url string, atomically bool) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:atomically:"), rt.FileURL(url), atomically)
 	return _r
 }
 
-// Returns a string variation suitable for the specified presentation width.
+// GetCharacters copies all characters from the receiver into a given buffer.
+func (x *String) GetCharacters() (buffer uint16) {
+	var _out0 uint16
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getCharacters:"), unsafe.Pointer(&_out0))
+	return _out0
+}
+
+// VariantFittingPresentationWidth returns a string variation suitable for the specified presentation width.
 func (x *String) VariantFittingPresentationWidth(width int) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variantFittingPresentationWidth:"), width)
 	if _r == 0 {
@@ -721,7 +727,7 @@ func (x *String) VariantFittingPresentationWidth(width int) string {
 	return purego.GoString(_r)
 }
 
-// Returns a new string made by appending to the receiver a given string.
+// StringByAppendingPathComponent returns a new string made by appending to the receiver a given string.
 func (x *String) StringByAppendingPathComponent(str string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringByAppendingPathComponent:"), purego.NSString(str))
 	if _r == 0 {
@@ -730,7 +736,7 @@ func (x *String) StringByAppendingPathComponent(str string) string {
 	return purego.GoString(_r)
 }
 
-// Returns a new string made by appending to the receiver an extension separator followed by a given extension.
+// StringByAppendingPathExtension returns a new string made by appending to the receiver an extension separator followed by a given extension.
 func (x *String) StringByAppendingPathExtension(str string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringByAppendingPathExtension:"), purego.NSString(str))
 	if _r == 0 {
@@ -739,35 +745,39 @@ func (x *String) StringByAppendingPathExtension(str string) string {
 	return purego.GoString(_r)
 }
 
-// Returns an array of strings made by separately appending to the receiver each string in a given array.
+// StringsByAppendingPaths returns an array of strings made by separately appending to the receiver each string in a given array.
 func (x *String) StringsByAppendingPaths(paths []string) []string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringsByAppendingPaths:"), purego.SliceToNSArray(paths, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Interprets the receiver as a path in the file system and attempts to perform filename completion, returning a numeric value that indicates whether a match was possible, and by reference the longest path that matches the receiver.
+// CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes interprets the receiver as a path in the file system and attempts to perform filename completion, returning a numeric value that indicates whether a match was possible, and by reference the longest path that matches the receiver.
 func (x *String) CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes(outputName string, flag bool, outputArray []string, filterTypes []string) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("completePathIntoString:caseSensitive:matchesIntoArray:filterTypes:"), purego.NSString(outputName), flag, purego.SliceToNSArray(outputArray, func(_v string) objc.ID { return purego.NSString(_v) }), purego.SliceToNSArray(filterTypes, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return _r
 }
 
-// Interprets the receiver as a system-independent path and fills a buffer with a C-string in a format and encoding suitable for use with file-system calls.
+// GetFileSystemRepresentationMaxLength interprets the receiver as a system-independent path and fills a buffer with a C-string in a format and encoding suitable for use with file-system calls.
 func (x *String) GetFileSystemRepresentationMaxLength(cname string, max int) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("getFileSystemRepresentation:maxLength:"), cname, max)
 	return _r
 }
 
+// PathComponents wraps the corresponding Objective-C method.
+//
 // PathComponents returns the collection as a Go slice.
 func (x *String) PathComponents() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathComponents"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// IsAbsolutePath wraps the corresponding Objective-C method.
 func (x *String) IsAbsolutePath() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAbsolutePath"))
 	return _r
 }
 
+// LastPathComponent wraps the corresponding Objective-C method.
 func (x *String) LastPathComponent() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastPathComponent"))
 	if _r == 0 {
@@ -776,6 +786,7 @@ func (x *String) LastPathComponent() string {
 	return purego.GoString(_r)
 }
 
+// StringByDeletingLastPathComponent wraps the corresponding Objective-C method.
 func (x *String) StringByDeletingLastPathComponent() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringByDeletingLastPathComponent"))
 	if _r == 0 {
@@ -784,6 +795,7 @@ func (x *String) StringByDeletingLastPathComponent() string {
 	return purego.GoString(_r)
 }
 
+// PathExtension wraps the corresponding Objective-C method.
 func (x *String) PathExtension() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathExtension"))
 	if _r == 0 {
@@ -792,6 +804,7 @@ func (x *String) PathExtension() string {
 	return purego.GoString(_r)
 }
 
+// StringByDeletingPathExtension wraps the corresponding Objective-C method.
 func (x *String) StringByDeletingPathExtension() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringByDeletingPathExtension"))
 	if _r == 0 {
@@ -800,6 +813,7 @@ func (x *String) StringByDeletingPathExtension() string {
 	return purego.GoString(_r)
 }
 
+// StringByAbbreviatingWithTildeInPath wraps the corresponding Objective-C method.
 func (x *String) StringByAbbreviatingWithTildeInPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringByAbbreviatingWithTildeInPath"))
 	if _r == 0 {
@@ -808,6 +822,7 @@ func (x *String) StringByAbbreviatingWithTildeInPath() string {
 	return purego.GoString(_r)
 }
 
+// StringByExpandingTildeInPath wraps the corresponding Objective-C method.
 func (x *String) StringByExpandingTildeInPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringByExpandingTildeInPath"))
 	if _r == 0 {
@@ -816,6 +831,7 @@ func (x *String) StringByExpandingTildeInPath() string {
 	return purego.GoString(_r)
 }
 
+// StringByStandardizingPath wraps the corresponding Objective-C method.
 func (x *String) StringByStandardizingPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringByStandardizingPath"))
 	if _r == 0 {
@@ -824,6 +840,7 @@ func (x *String) StringByStandardizingPath() string {
 	return purego.GoString(_r)
 }
 
+// StringByResolvingSymlinksInPath wraps the corresponding Objective-C method.
 func (x *String) StringByResolvingSymlinksInPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringByResolvingSymlinksInPath"))
 	if _r == 0 {
@@ -832,7 +849,7 @@ func (x *String) StringByResolvingSymlinksInPath() string {
 	return purego.GoString(_r)
 }
 
-// Returns a new string made from the receiver by replacing all characters not in the specified set with percent-encoded characters.
+// StringByAddingPercentEncodingWithAllowedCharacters returns a new string made from the receiver by replacing all characters not in the specified set with percent-encoded characters.
 func (x *String) StringByAddingPercentEncodingWithAllowedCharacters(allowedCharacters *CharacterSet) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringByAddingPercentEncodingWithAllowedCharacters:"), objref.IDOf(allowedCharacters))
 	if _r == 0 {
@@ -841,7 +858,7 @@ func (x *String) StringByAddingPercentEncodingWithAllowedCharacters(allowedChara
 	return purego.GoString(_r)
 }
 
-// Returns a representation of the receiver using a given encoding to determine the percent escapes necessary to convert the receiver into a legal URL string.
+// StringByAddingPercentEscapesUsingEncoding returns a representation of the receiver using a given encoding to determine the percent escapes necessary to convert the receiver into a legal URL string.
 func (x *String) StringByAddingPercentEscapesUsingEncoding(enc int) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringByAddingPercentEscapesUsingEncoding:"), enc)
 	if _r == 0 {
@@ -850,7 +867,7 @@ func (x *String) StringByAddingPercentEscapesUsingEncoding(enc int) string {
 	return purego.GoString(_r)
 }
 
-// Returns a new string made by replacing in the receiver all percent escapes with the matching characters as determined by a given encoding.
+// StringByReplacingPercentEscapesUsingEncoding returns a new string made by replacing in the receiver all percent escapes with the matching characters as determined by a given encoding.
 func (x *String) StringByReplacingPercentEscapesUsingEncoding(enc int) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringByReplacingPercentEscapesUsingEncoding:"), enc)
 	if _r == 0 {
@@ -859,6 +876,7 @@ func (x *String) StringByReplacingPercentEscapesUsingEncoding(enc int) string {
 	return purego.GoString(_r)
 }
 
+// StringByRemovingPercentEncoding wraps the corresponding Objective-C method.
 func (x *String) StringByRemovingPercentEncoding() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringByRemovingPercentEncoding"))
 	if _r == 0 {
@@ -937,6 +955,7 @@ type Stringable interface {
 	GetCStringMaxLength(bytes_ string, maxLength int)
 	WriteToFileAtomically(path string, useAuxiliaryFile bool) bool
 	WriteToURLAtomically(url string, atomically bool) bool
+	GetCharacters() (buffer uint16)
 	VariantFittingPresentationWidth(width int) string
 	StringByAppendingPathComponent(str string) string
 	StringByAppendingPathExtension(str string) string
@@ -960,3 +979,10 @@ type Stringable interface {
 }
 
 var _ Stringable = (*String)(nil)
+
+// isString marks String — and, by embedding promotion, its
+// subclasses — as a member of the String hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *String) isString() {}
+
+var _ StringProvider = (*String)(nil)

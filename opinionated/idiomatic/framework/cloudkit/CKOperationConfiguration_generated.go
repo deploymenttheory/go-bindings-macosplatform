@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes how a CloudKit operation behaves.
-//
 // OperationConfiguration is an idiomatic wrapper over the Objective-C class CKOperationConfiguration.
+//
+// An object that describes how a CloudKit operation behaves.
 type OperationConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func OperationConfigurationFromID(id objc.ID) *OperationConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &OperationConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OperationConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func operationConfigurationAdopt(id objc.ID) *OperationConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &OperationConfiguration{Handle: objref.Wrap(id)}
+	x := &OperationConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,98 +60,99 @@ func (x *OperationConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OperationConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewOperationConfiguration creates a new OperationConfiguration.
 func NewOperationConfiguration() *OperationConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("CKOperationConfiguration")), objc.RegisterName("new"))
 	return operationConfigurationAdopt(_id)
 }
 
-// The configuration's container. If you don't provide a container, CloudKit uses the default container that “CKContainer“ provides.
-//
-// WithContainer sets container and returns the receiver so calls can be chained.
+// WithContainer the configuration's container. If you don't provide a container, CloudKit uses the default container that “CKContainer“ provides.
 func (x *OperationConfiguration) WithContainer(container *Container) *OperationConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether operations that use this configuration can send data over the cellular network.
-//
-// WithAllowsCellularAccess sets allowsCellularAccess and returns the receiver so calls can be chained.
+// WithAllowsCellularAccess a Boolean value that indicates whether operations that use this configuration can send data over the cellular network.
 func (x *OperationConfiguration) WithAllowsCellularAccess(allowsCellularAccess bool) *OperationConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
-// A Boolean value that indicates whether the operations that use this configuration are long-lived.
-//
-// WithLongLived sets longLived and returns the receiver so calls can be chained.
+// WithLongLived a Boolean value that indicates whether the operations that use this configuration are long-lived.
 func (x *OperationConfiguration) WithLongLived(longLived bool) *OperationConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The maximum amount of time that a request can take. - SeeAlso: `NSURLSessionConfiguration.timeoutIntervalForRequest`
-//
-// WithTimeoutIntervalForRequest sets timeoutIntervalForRequest and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForRequest the maximum amount of time that a request can take. - SeeAlso: `NSURLSessionConfiguration.timeoutIntervalForRequest`
 func (x *OperationConfiguration) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *OperationConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can take. - SeeAlso: `NSURLSessionConfiguration.timeoutIntervalForResource`
-//
-// WithTimeoutIntervalForResource sets timeoutIntervalForResource and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForResource the maximum amount of time that a resource request can take. - SeeAlso: `NSURLSessionConfiguration.timeoutIntervalForResource`
 func (x *OperationConfiguration) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *OperationConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
-// The configuration's container. If you don't provide a container, CloudKit uses the default container that “CKContainer“ provides.
+// Container the configuration's container. If you don't provide a container, CloudKit uses the default container that “CKContainer“ provides.
 func (x *OperationConfiguration) Container() *Container {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("container"))
 	return ContainerFromID(_r)
 }
 
+// SetContainer wraps the corresponding Objective-C method.
 func (x *OperationConfiguration) SetContainer(container *Container) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 }
 
-// A Boolean value that indicates whether operations that use this configuration can send data over the cellular network.
+// AllowsCellularAccess a Boolean value that indicates whether operations that use this configuration can send data over the cellular network.
 func (x *OperationConfiguration) AllowsCellularAccess() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCellularAccess"))
 	return _r
 }
 
+// SetAllowsCellularAccess wraps the corresponding Objective-C method.
 func (x *OperationConfiguration) SetAllowsCellularAccess(allowsCellularAccess bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 }
 
-// A Boolean value that indicates whether the operations that use this configuration are long-lived.
+// IsLongLived a Boolean value that indicates whether the operations that use this configuration are long-lived.
 func (x *OperationConfiguration) IsLongLived() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLongLived"))
 	return _r
 }
 
+// SetLongLived wraps the corresponding Objective-C method.
 func (x *OperationConfiguration) SetLongLived(longLived bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 }
 
-// The maximum amount of time that a request can take. - SeeAlso: `NSURLSessionConfiguration.timeoutIntervalForRequest`
+// TimeoutIntervalForRequest the maximum amount of time that a request can take. - SeeAlso: `NSURLSessionConfiguration.timeoutIntervalForRequest`
 func (x *OperationConfiguration) TimeoutIntervalForRequest() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeoutIntervalForRequest"))
 	return _r
 }
 
+// SetTimeoutIntervalForRequest wraps the corresponding Objective-C method.
 func (x *OperationConfiguration) SetTimeoutIntervalForRequest(timeoutIntervalForRequest float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 }
 
-// The maximum amount of time that a resource request can take. - SeeAlso: `NSURLSessionConfiguration.timeoutIntervalForResource`
+// TimeoutIntervalForResource the maximum amount of time that a resource request can take. - SeeAlso: `NSURLSessionConfiguration.timeoutIntervalForResource`
 func (x *OperationConfiguration) TimeoutIntervalForResource() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeoutIntervalForResource"))
 	return _r
 }
 
+// SetTimeoutIntervalForResource wraps the corresponding Objective-C method.
 func (x *OperationConfiguration) SetTimeoutIntervalForResource(timeoutIntervalForResource float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A single smart card reader slot in the system.
-//
 // SmartCardSlot is an idiomatic wrapper over the Objective-C class TKSmartCardSlot.
+//
+// A single smart card reader slot in the system.
 type SmartCardSlot struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SmartCardSlotFromID(id objc.ID) *SmartCardSlot {
 	if id == 0 {
 		return nil
 	}
-	x := &SmartCardSlot{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SmartCardSlot{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func smartCardSlotAdopt(id objc.ID) *SmartCardSlot {
 	if id == 0 {
 		return nil
 	}
-	x := &SmartCardSlot{Handle: objref.Wrap(id)}
+	x := &SmartCardSlot{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,37 @@ func (x *SmartCardSlot) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SmartCardSlot) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSmartCardSlot creates a new SmartCardSlot.
 func NewSmartCardSlot() *SmartCardSlot {
 	_id := objc.Send[objc.ID](objc.ID(_class("TKSmartCardSlot")), objc.RegisterName("new"))
 	return smartCardSlotAdopt(_id)
 }
 
-// Creates a new TKSmartCard object representing the currently inserted Smart Card.
+// MakeSmartCard creates a new TKSmartCard object representing the currently inserted Smart Card.
 func (x *SmartCardSlot) MakeSmartCard() *SmartCard {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeSmartCard"))
 	return SmartCardFromID(_r)
 }
 
-// Current state of the slot.  Use KVO to be notified about state changes.
+// State current state of the slot.  Use KVO to be notified about state changes.
 func (x *SmartCardSlot) State() SmartCardSlotState {
 	_r := objc.Send[SmartCardSlotState](objref.IDOf(x), objc.RegisterName("state"))
 	return _r
 }
 
-// ATR of the inserted SmartCard, or nil if no or mute SmartCard is inserted.
+// ATR ATR of the inserted SmartCard, or nil if no or mute SmartCard is inserted.
 func (x *SmartCardSlot) ATR() *SmartCardATR {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ATR"))
 	return SmartCardATRFromID(_r)
 }
 
-// Name of the SmartCard reader slot.
+// Name name of the SmartCard reader slot.
 func (x *SmartCardSlot) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -91,13 +99,13 @@ func (x *SmartCardSlot) Name() string {
 	return purego.GoString(_r)
 }
 
-// Maximal length of input APDU that the slot is able to transfer to the card.
+// MaxInputLength maximal length of input APDU that the slot is able to transfer to the card.
 func (x *SmartCardSlot) MaxInputLength() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxInputLength"))
 	return _r
 }
 
-// Maximal length of output APDU that the slot is able to transfer from the card.
+// MaxOutputLength maximal length of output APDU that the slot is able to transfer from the card.
 func (x *SmartCardSlot) MaxOutputLength() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxOutputLength"))
 	return _r

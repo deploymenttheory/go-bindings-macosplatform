@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that detects available media playback routes.
-//
 // RouteDetector is an idiomatic wrapper over the Objective-C class AVRouteDetector.
+//
+// An object that detects available media playback routes.
 type RouteDetector struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RouteDetectorFromID(id objc.ID) *RouteDetector {
 	if id == 0 {
 		return nil
 	}
-	x := &RouteDetector{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RouteDetector{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func routeDetectorAdopt(id objc.ID) *RouteDetector {
 	if id == 0 {
 		return nil
 	}
-	x := &RouteDetector{Handle: objref.Wrap(id)}
+	x := &RouteDetector{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,36 @@ func (x *RouteDetector) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RouteDetector) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRouteDetector creates a new RouteDetector.
 func NewRouteDetector() *RouteDetector {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVRouteDetector")), objc.RegisterName("new"))
 	return routeDetectorAdopt(_id)
 }
 
-// A Boolean value that indicates whether route detection is in an enabled state.
-//
-// WithRouteDetectionEnabled sets routeDetectionEnabled and returns the receiver so calls can be chained.
+// WithRouteDetectionEnabled a Boolean value that indicates whether route detection is in an enabled state.
 func (x *RouteDetector) WithRouteDetectionEnabled(routeDetectionEnabled bool) *RouteDetector {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRouteDetectionEnabled:"), routeDetectionEnabled)
 	return x
 }
 
-// Whether or not route detection is enabled. The default value is NO. Route detection significantly increases power consumption and must be turned off when it's no longer needed.
+// IsRouteDetectionEnabled whether or not route detection is enabled. The default value is NO. Route detection significantly increases power consumption and must be turned off when it's no longer needed.
 func (x *RouteDetector) IsRouteDetectionEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRouteDetectionEnabled"))
 	return _r
 }
 
+// SetRouteDetectionEnabled wraps the corresponding Objective-C method.
 func (x *RouteDetector) SetRouteDetectionEnabled(routeDetectionEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRouteDetectionEnabled:"), routeDetectionEnabled)
 }
 
-// This property is YES if, in addition to the local playback route, at least one more playback route has been detected. If multiple route have been detected, AVKit's AVRoutePickerView can be used to allow users to pick from the set of available routes. When the values of this property changes AVRouteDetectorMultipleRoutesDetectedDidChangeNotification is posted.
+// MultipleRoutesDetected this property is YES if, in addition to the local playback route, at least one more playback route has been detected. If multiple route have been detected, AVKit's AVRoutePickerView can be used to allow users to pick from the set of available routes. When the values of this property changes AVRouteDetectorMultipleRoutesDetectedDidChangeNotification is posted.
 func (x *RouteDetector) MultipleRoutesDetected() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("multipleRoutesDetected"))
 	return _r

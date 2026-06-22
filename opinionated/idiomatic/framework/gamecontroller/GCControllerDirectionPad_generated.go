@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A control element associated with a directional pad or a thumbstick.
-//
 // ControllerDirectionPad is an idiomatic wrapper over the Objective-C class GCControllerDirectionPad.
+//
+// ControllerDirectionPad is an abstract base — you do not construct it directly. Construct one of [DeviceCursor] and pass it where a ControllerDirectionPad is accepted.
+//
+// A control element associated with a directional pad or a thumbstick.
 type ControllerDirectionPad struct {
-	objref.Handle
+	ControllerElement
 }
 
 // ControllerDirectionPadFromID adopts an existing Objective-C object as a ControllerDirectionPad
@@ -25,7 +26,8 @@ func ControllerDirectionPadFromID(id objc.ID) *ControllerDirectionPad {
 	if id == 0 {
 		return nil
 	}
-	x := &ControllerDirectionPad{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ControllerDirectionPad{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,102 +40,78 @@ func controllerDirectionPadAdopt(id objc.ID) *ControllerDirectionPad {
 	if id == 0 {
 		return nil
 	}
-	x := &ControllerDirectionPad{Handle: objref.Wrap(id)}
+	x := &ControllerDirectionPad{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ControllerDirectionPad) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ControllerDirectionPad) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ControllerDirectionPad) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewControllerDirectionPad creates a new ControllerDirectionPad.
-func NewControllerDirectionPad() *ControllerDirectionPad {
-	_id := objc.Send[objc.ID](objc.ID(_class("GCControllerDirectionPad")), objc.RegisterName("new"))
-	return controllerDirectionPadAdopt(_id)
-}
-
-// The preferred state for handling input when the user binds the element to a system gesture.
-//
-// WithPreferredSystemGestureState sets preferredSystemGestureState and returns the receiver so calls can be chained.
+// WithPreferredSystemGestureState the preferred state for handling input when the user binds the element to a system gesture.
 func (x *ControllerDirectionPad) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerDirectionPad {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
 	return x
 }
 
-// A system symbol for the element or the remapped element.
-//
-// WithSfSymbolsName sets sfSymbolsName and returns the receiver so calls can be chained.
+// WithSfSymbolsName a system symbol for the element or the remapped element.
 func (x *ControllerDirectionPad) WithSfSymbolsName(sfSymbolsName string) *ControllerDirectionPad {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
 	return x
 }
 
-// The localized name for the element or the remapped element.
-//
-// WithLocalizedName sets localizedName and returns the receiver so calls can be chained.
+// WithLocalizedName the localized name for the element or the remapped element.
 func (x *ControllerDirectionPad) WithLocalizedName(localizedName string) *ControllerDirectionPad {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedName:"), purego.NSString(localizedName))
 	return x
 }
 
-// The element’s system symbol, not the remapped symbol.
-//
-// WithUnmappedSfSymbolsName sets unmappedSfSymbolsName and returns the receiver so calls can be chained.
+// WithUnmappedSfSymbolsName the element’s system symbol, not the remapped symbol.
 func (x *ControllerDirectionPad) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerDirectionPad {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedSfSymbolsName:"), purego.NSString(unmappedSfSymbolsName))
 	return x
 }
 
-// The element’s localized name, not the remapped name.
-//
-// WithUnmappedLocalizedName sets unmappedLocalizedName and returns the receiver so calls can be chained.
+// WithUnmappedLocalizedName the element’s localized name, not the remapped name.
 func (x *ControllerDirectionPad) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerDirectionPad {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
 	return x
 }
 
-// Sets the input values of a snapshot of a directional pad.
+// SetValueForXAxisYAxis sets the input values of a snapshot of a directional pad.
 func (x *ControllerDirectionPad) SetValueForXAxisYAxis(xAxis float32, yAxis float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueForXAxis:yAxis:"), xAxis, yAxis)
 }
 
+// XAxis wraps the corresponding Objective-C method.
 func (x *ControllerDirectionPad) XAxis() *ControllerAxisInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("xAxis"))
 	return ControllerAxisInputFromID(_r)
 }
 
+// YAxis wraps the corresponding Objective-C method.
 func (x *ControllerDirectionPad) YAxis() *ControllerAxisInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("yAxis"))
 	return ControllerAxisInputFromID(_r)
 }
 
+// Up wraps the corresponding Objective-C method.
 func (x *ControllerDirectionPad) Up() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("up"))
 	return ControllerButtonInputFromID(_r)
 }
 
+// Down wraps the corresponding Objective-C method.
 func (x *ControllerDirectionPad) Down() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("down"))
 	return ControllerButtonInputFromID(_r)
 }
 
+// Left wraps the corresponding Objective-C method.
 func (x *ControllerDirectionPad) Left() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("left"))
 	return ControllerButtonInputFromID(_r)
 }
 
+// Right wraps the corresponding Objective-C method.
 func (x *ControllerDirectionPad) Right() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("right"))
 	return ControllerButtonInputFromID(_r)
@@ -157,3 +135,12 @@ type ControllerDirectionPadable interface {
 }
 
 var _ ControllerDirectionPadable = (*ControllerDirectionPad)(nil)
+
+// isControllerDirectionPad marks ControllerDirectionPad — and, by embedding promotion, its
+// subclasses — as a member of the ControllerDirectionPad hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ControllerDirectionPad) isControllerDirectionPad() {}
+
+var _ ControllerDirectionPadProvider = (*ControllerDirectionPad)(nil)
+
+var _ ControllerElementProvider = (*ControllerDirectionPad)(nil)

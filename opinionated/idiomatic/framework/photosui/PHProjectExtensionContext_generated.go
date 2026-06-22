@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides Photos project extensions with access to the underlying project, as well as to the user’s photo library for editing.
-//
 // ProjectExtensionContext is an idiomatic wrapper over the Objective-C class PHProjectExtensionContext.
+//
+// An object that provides Photos project extensions with access to the underlying project, as well as to the user’s photo library for editing.
 type ProjectExtensionContext struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ProjectExtensionContextFromID(id objc.ID) *ProjectExtensionContext {
 	if id == 0 {
 		return nil
 	}
-	x := &ProjectExtensionContext{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ProjectExtensionContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func projectExtensionContextAdopt(id objc.ID) *ProjectExtensionContext {
 	if id == 0 {
 		return nil
 	}
-	x := &ProjectExtensionContext{Handle: objref.Wrap(id)}
+	x := &ProjectExtensionContext{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,36 @@ func (x *ProjectExtensionContext) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ProjectExtensionContext) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewProjectExtensionContext creates a new ProjectExtensionContext.
 func NewProjectExtensionContext() *ProjectExtensionContext {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHProjectExtensionContext")), objc.RegisterName("new"))
 	return projectExtensionContextAdopt(_id)
 }
 
-// Invokes the built-in photo editor for the given asset.
+// ShowEditorForAsset invokes the built-in photo editor for the given asset.
 func (x *ProjectExtensionContext) ShowEditorForAsset(asset obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showEditorForAsset:"), objref.IDOf(asset))
 }
 
-// Creates an updated PHProjectInfo instance from existing project information and current assets.
+// UpdatedProjectInfoFromProjectInfoCompletion creates an updated PHProjectInfo instance from existing project information and current assets.
 func (x *ProjectExtensionContext) UpdatedProjectInfoFromProjectInfoCompletion(existingProjectInfo *ProjectInfo, completion func(obj.Object)) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updatedProjectInfoFromProjectInfo:completion:"), objref.IDOf(existingProjectInfo), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completion(obj.Wrap(_b0)) }))
 	return obj.Wrap(_r)
 }
 
+// PhotoLibrary wraps the corresponding Objective-C method.
 func (x *ProjectExtensionContext) PhotoLibrary() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("photoLibrary"))
 	return obj.Wrap(_r)
 }
 
+// Project wraps the corresponding Objective-C method.
 func (x *ProjectExtensionContext) Project() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("project"))
 	return obj.Wrap(_r)

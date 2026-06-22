@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A grouped set of language options where only a single language option can be active at a time.
-//
 // NowPlayingInfoLanguageOptionGroup is an idiomatic wrapper over the Objective-C class MPNowPlayingInfoLanguageOptionGroup.
+//
+// A grouped set of language options where only a single language option can be active at a time.
 type NowPlayingInfoLanguageOptionGroup struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NowPlayingInfoLanguageOptionGroupFromID(id objc.ID) *NowPlayingInfoLanguage
 	if id == 0 {
 		return nil
 	}
-	x := &NowPlayingInfoLanguageOptionGroup{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NowPlayingInfoLanguageOptionGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nowPlayingInfoLanguageOptionGroupAdopt(id objc.ID) *NowPlayingInfoLanguageO
 	if id == 0 {
 		return nil
 	}
-	x := &NowPlayingInfoLanguageOptionGroup{Handle: objref.Wrap(id)}
+	x := &NowPlayingInfoLanguageOptionGroup{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,16 +60,20 @@ func (x *NowPlayingInfoLanguageOptionGroup) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new language option group with the supplied language options.
-//
-// NewNowPlayingInfoLanguageOptionGroupWithLanguageOptionsDefaultLanguageOptionAllowEmptySelection creates a new NowPlayingInfoLanguageOptionGroup.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NowPlayingInfoLanguageOptionGroup) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNowPlayingInfoLanguageOptionGroupWithLanguageOptionsDefaultLanguageOptionAllowEmptySelection creates a new language option group with the supplied language options.
 func NewNowPlayingInfoLanguageOptionGroupWithLanguageOptionsDefaultLanguageOptionAllowEmptySelection(languageOptions []*NowPlayingInfoLanguageOption, defaultLanguageOption *NowPlayingInfoLanguageOption, allowEmptySelection bool) *NowPlayingInfoLanguageOptionGroup {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPNowPlayingInfoLanguageOptionGroup")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLanguageOptions:defaultLanguageOption:allowEmptySelection:"), purego.SliceToNSArray(languageOptions, func(_v *NowPlayingInfoLanguageOption) objc.ID { return objref.IDOf(_v) }), objref.IDOf(defaultLanguageOption), allowEmptySelection)
 	return nowPlayingInfoLanguageOptionGroupAdopt(_id)
 }
 
-// The available language options within this group.
+// LanguageOptions the available language options within this group.
 //
 // LanguageOptions returns the collection as a Go slice.
 func (x *NowPlayingInfoLanguageOptionGroup) LanguageOptions() []*NowPlayingInfoLanguageOption {
@@ -75,13 +81,13 @@ func (x *NowPlayingInfoLanguageOptionGroup) LanguageOptions() []*NowPlayingInfoL
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NowPlayingInfoLanguageOption { return NowPlayingInfoLanguageOptionFromID(_id) })
 }
 
-// The default language option, if any, within this group.
+// DefaultLanguageOption the default language option, if any, within this group.
 func (x *NowPlayingInfoLanguageOptionGroup) DefaultLanguageOption() *NowPlayingInfoLanguageOption {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultLanguageOption"))
 	return NowPlayingInfoLanguageOptionFromID(_r)
 }
 
-// Indicates whether a selection in this group is required at all times.
+// AllowEmptySelection indicates whether a selection in this group is required at all times.
 func (x *NowPlayingInfoLanguageOptionGroup) AllowEmptySelection() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowEmptySelection"))
 	return _r

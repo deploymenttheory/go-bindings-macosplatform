@@ -19,6 +19,8 @@ const (
 	NEDNSProtocolHTTPS NEDNSProtocol = 3
 )
 
+// String returns the NEDNSProtocol constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NEDNSProtocol) String() string {
 	switch e {
 	case NEDNSProtocolCleartext:
@@ -41,6 +43,8 @@ const (
 	NEEvaluateConnectionRuleActionNeverConnect NEEvaluateConnectionRuleAction = 2
 )
 
+// String returns the NEEvaluateConnectionRuleAction constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NEEvaluateConnectionRuleAction) String() string {
 	switch e {
 	case NEEvaluateConnectionRuleActionConnectIfNeeded:
@@ -68,6 +72,8 @@ const (
 	NEFilterActionFilterData NEFilterAction = 4
 )
 
+// String returns the NEFilterAction constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NEFilterAction) String() string {
 	switch e {
 	case NEFilterActionInvalid:
@@ -93,6 +99,8 @@ const (
 	NEFilterManagerGradeInspector NEFilterManagerGrade = 2
 )
 
+// String returns the NEFilterManagerGrade constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NEFilterManagerGrade) String() string {
 	switch e {
 	case NEFilterManagerGradeFirewall:
@@ -114,6 +122,8 @@ const (
 	NEFilterReportEventStatistics   NEFilterReportEvent = 4
 )
 
+// String returns the NEFilterReportEvent constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NEFilterReportEvent) String() string {
 	switch e {
 	case NEFilterReportEventNewFlow:
@@ -139,6 +149,8 @@ const (
 	NEFilterReportFrequencyHigh   NEFilterReportFrequency = 3
 )
 
+// String returns the NEFilterReportFrequency constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NEFilterReportFrequency) String() string {
 	switch e {
 	case NEFilterReportFrequencyNone:
@@ -163,6 +175,8 @@ const (
 	NENetworkRuleProtocolUDP NENetworkRuleProtocol = 2
 )
 
+// String returns the NENetworkRuleProtocol constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NENetworkRuleProtocol) String() string {
 	switch e {
 	case NENetworkRuleProtocolAny:
@@ -189,6 +203,8 @@ const (
 	NEOnDemandRuleActionIgnore NEOnDemandRuleAction = 4
 )
 
+// String returns the NEOnDemandRuleAction constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NEOnDemandRuleAction) String() string {
 	switch e {
 	case NEOnDemandRuleActionConnect:
@@ -215,6 +231,8 @@ const (
 	NEOnDemandRuleInterfaceTypeWiFi NEOnDemandRuleInterfaceType = 2
 )
 
+// String returns the NEOnDemandRuleInterfaceType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NEOnDemandRuleInterfaceType) String() string {
 	switch e {
 	case NEOnDemandRuleInterfaceTypeAny:
@@ -269,6 +287,8 @@ const (
 	NEProviderStopReasonInternalError NEProviderStopReason = 17
 )
 
+// String returns the NEProviderStopReason constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NEProviderStopReason) String() string {
 	switch e {
 	case NEProviderStopReasonNone:
@@ -324,6 +344,8 @@ const (
 	NETrafficDirectionOutbound NETrafficDirection = 2
 )
 
+// String returns the NETrafficDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NETrafficDirection) String() string {
 	switch e {
 	case NETrafficDirectionAny:
@@ -348,6 +370,8 @@ const (
 	NETunnelProviderRoutingMethodNetworkRule NETunnelProviderRoutingMethod = 3
 )
 
+// String returns the NETunnelProviderRoutingMethod constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NETunnelProviderRoutingMethod) String() string {
 	switch e {
 	case NETunnelProviderRoutingMethodDestinationIP:
@@ -373,6 +397,8 @@ const (
 	NEVPNIKEAuthenticationMethodSharedSecret NEVPNIKEAuthenticationMethod = 2
 )
 
+// String returns the NEVPNIKEAuthenticationMethod constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NEVPNIKEAuthenticationMethod) String() string {
 	switch e {
 	case NEVPNIKEAuthenticationMethodNone:
@@ -404,6 +430,8 @@ const (
 	NEVPNIKEv2CertificateTypeRSAPSS NEVPNIKEv2CertificateType = 6
 )
 
+// String returns the NEVPNIKEv2CertificateType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NEVPNIKEv2CertificateType) String() string {
 	switch e {
 	case NEVPNIKEv2CertificateTypeRSA:
@@ -437,6 +465,8 @@ const (
 	NEVPNIKEv2DeadPeerDetectionRateHigh NEVPNIKEv2DeadPeerDetectionRate = 3
 )
 
+// String returns the NEVPNIKEv2DeadPeerDetectionRate constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NEVPNIKEv2DeadPeerDetectionRate) String() string {
 	switch e {
 	case NEVPNIKEv2DeadPeerDetectionRateNone:
@@ -483,6 +513,8 @@ const (
 	NEVPNIKEv2DiffieHellmanGroup32 NEVPNIKEv2DiffieHellmanGroup = 32
 )
 
+// String returns the NEVPNIKEv2DiffieHellmanGroup constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NEVPNIKEv2DiffieHellmanGroup) String() string {
 	switch e {
 	case NEVPNIKEv2DiffieHellmanGroupInvalid:
@@ -542,6 +574,8 @@ const (
 	NEVPNIKEv2EncryptionAlgorithmChaCha20Poly1305 NEVPNIKEv2EncryptionAlgorithm = 7
 )
 
+// String returns the NEVPNIKEv2EncryptionAlgorithm constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NEVPNIKEv2EncryptionAlgorithm) String() string {
 	switch e {
 	case NEVPNIKEv2EncryptionAlgorithmDES:
@@ -576,6 +610,8 @@ const (
 	NEVPNIKEv2IntegrityAlgorithmSHA512 NEVPNIKEv2IntegrityAlgorithm = 5
 )
 
+// String returns the NEVPNIKEv2IntegrityAlgorithm constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NEVPNIKEv2IntegrityAlgorithm) String() string {
 	switch e {
 	case NEVPNIKEv2IntegrityAlgorithmSHA96:
@@ -607,6 +643,8 @@ const (
 	NEVPNIKEv2TLSVersion1_2 NEVPNIKEv2TLSVersion = 3
 )
 
+// String returns the NEVPNIKEv2TLSVersion constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NEVPNIKEv2TLSVersion) String() string {
 	switch e {
 	case NEVPNIKEv2TLSVersionDefault:
@@ -640,6 +678,8 @@ const (
 	NEVPNStatusDisconnecting NEVPNStatus = 5
 )
 
+// String returns the NEVPNStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NEVPNStatus) String() string {
 	switch e {
 	case NEVPNStatusInvalid:
@@ -673,6 +713,8 @@ const (
 	NWPathStatusSatisfiable NWPathStatus = 3
 )
 
+// String returns the NWPathStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NWPathStatus) String() string {
 	switch e {
 	case NWPathStatusInvalid:
@@ -708,6 +750,8 @@ const (
 	NWTCPConnectionStateCancelled NWTCPConnectionState = 5
 )
 
+// String returns the NWTCPConnectionState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NWTCPConnectionState) String() string {
 	switch e {
 	case NWTCPConnectionStateInvalid:
@@ -745,6 +789,8 @@ const (
 	NWUDPSessionStateCancelled NWUDPSessionState = 5
 )
 
+// String returns the NWUDPSessionState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NWUDPSessionState) String() string {
 	switch e {
 	case NWUDPSessionStateInvalid:

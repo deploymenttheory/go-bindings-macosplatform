@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides the ability to present the dashboard in macOS games.
-//
 // DialogController is an idiomatic wrapper over the Objective-C class GKDialogController.
+//
+// An object that provides the ability to present the dashboard in macOS games.
 type DialogController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DialogControllerFromID(id objc.ID) *DialogController {
 	if id == 0 {
 		return nil
 	}
-	x := &DialogController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DialogController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func dialogControllerAdopt(id objc.ID) *DialogController {
 	if id == 0 {
 		return nil
 	}
-	x := &DialogController{Handle: objref.Wrap(id)}
+	x := &DialogController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,36 +60,42 @@ func (x *DialogController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DialogController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDialogController creates a new DialogController.
 func NewDialogController() *DialogController {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKDialogController")), objc.RegisterName("new"))
 	return dialogControllerAdopt(_id)
 }
 
-// The window that displays the dashboard.
-//
-// WithParentWindow sets parentWindow and returns the receiver so calls can be chained.
+// WithParentWindow the window that displays the dashboard.
 func (x *DialogController) WithParentWindow(parentWindow obj.Object) *DialogController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
 	return x
 }
 
-// Presents the dashboard in the window.
+// PresentViewController presents the dashboard in the window.
 func (x *DialogController) PresentViewController(viewController obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("presentViewController:"), objref.IDOf(viewController))
 	return _r
 }
 
-// Dismisses the dashboard.
+// Dismiss dismisses the dashboard.
 func (x *DialogController) Dismiss(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dismiss:"), objref.IDOf(sender))
 }
 
+// ParentWindow wraps the corresponding Objective-C method.
 func (x *DialogController) ParentWindow() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentWindow"))
 	return obj.Wrap(_r)
 }
 
+// SetParentWindow wraps the corresponding Objective-C method.
 func (x *DialogController) SetParentWindow(parentWindow obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
 }

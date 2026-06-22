@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ArrayMultiaryKernel is an idiomatic wrapper over the Objective-C class MPSNDArrayMultiaryKernel.
+//
+// ArrayMultiaryKernel is an abstract base — you do not construct it directly. Construct one of [ArrayAffineInt4Dequantize], [ArrayBinaryKernel], [ArrayLUTDequantize], [ArrayMatrixMultiplication], [ArrayUnaryKernel], [ArrayVectorLUTDequantize] and pass it where a ArrayMultiaryKernel is accepted.
 type ArrayMultiaryKernel struct {
-	objref.Handle
+	ArrayMultiaryBase
 }
 
 // ArrayMultiaryKernelFromID adopts an existing Objective-C object as a ArrayMultiaryKernel
@@ -23,7 +24,8 @@ func ArrayMultiaryKernelFromID(id objc.ID) *ArrayMultiaryKernel {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayMultiaryKernel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ArrayMultiaryKernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,30 +38,10 @@ func arrayMultiaryKernelAdopt(id objc.ID) *ArrayMultiaryKernel {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayMultiaryKernel{Handle: objref.Wrap(id)}
+	x := &ArrayMultiaryKernel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ArrayMultiaryKernel) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ArrayMultiaryKernel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ArrayMultiaryKernel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewArrayMultiaryKernel creates a new ArrayMultiaryKernel.
-func NewArrayMultiaryKernel() *ArrayMultiaryKernel {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayMultiaryKernel")), objc.RegisterName("new"))
-	return arrayMultiaryKernelAdopt(_id)
 }
 
 // ArrayMultiaryKernelable is the interface implemented by [ArrayMultiaryKernel], for mocking and DI.
@@ -68,3 +50,12 @@ type ArrayMultiaryKernelable interface {
 }
 
 var _ ArrayMultiaryKernelable = (*ArrayMultiaryKernel)(nil)
+
+// isArrayMultiaryKernel marks ArrayMultiaryKernel — and, by embedding promotion, its
+// subclasses — as a member of the ArrayMultiaryKernel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ArrayMultiaryKernel) isArrayMultiaryKernel() {}
+
+var _ ArrayMultiaryKernelProvider = (*ArrayMultiaryKernel)(nil)
+
+var _ ArrayMultiaryBaseProvider = (*ArrayMultiaryKernel)(nil)

@@ -23,7 +23,8 @@ func MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStructFromID(id o
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStructAdopt(id ob
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct{Handle: objref.Wrap(id)}
+	x := &MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,38 +58,48 @@ func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) IsKin
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct creates a new MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct.
 func NewMTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct() *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct")), objc.RegisterName("new"))
 	return mTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStructAdopt(_id)
 }
 
-// WithNodeID sets nodeID and returns the receiver so calls can be chained.
+// WithNodeID sets the property and returns the receiver so calls can be chained.
 func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) WithNodeID(nodeID obj.Object) *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeID:"), objref.IDOf(nodeID))
 	return x
 }
 
-// WithEndpoint sets endpoint and returns the receiver so calls can be chained.
+// WithEndpoint sets the property and returns the receiver so calls can be chained.
 func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) WithEndpoint(endpoint obj.Object) *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return x
 }
 
+// NodeID wraps the corresponding Objective-C method.
 func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) NodeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeID"))
 	return obj.Wrap(_r)
 }
 
+// SetNodeID wraps the corresponding Objective-C method.
 func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) SetNodeID(nodeID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeID:"), objref.IDOf(nodeID))
 }
 
+// Endpoint wraps the corresponding Objective-C method.
 func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) Endpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)
 }
 
+// SetEndpoint wraps the corresponding Objective-C method.
 func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) SetEndpoint(endpoint obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 }

@@ -23,7 +23,8 @@ func RecordMapFromID(id objc.ID) *RecordMap {
 	if id == 0 {
 		return nil
 	}
-	x := &RecordMap{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RecordMap{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func recordMapAdopt(id objc.ID) *RecordMap {
 	if id == 0 {
 		return nil
 	}
-	x := &RecordMap{Handle: objref.Wrap(id)}
+	x := &RecordMap{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,35 +58,42 @@ func (x *RecordMap) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RecordMap) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRecordMap creates a new RecordMap.
 func NewRecordMap() *RecordMap {
 	_id := objc.Send[objc.ID](objc.ID(_class("ODRecordMap")), objc.RegisterName("new"))
 	return recordMapAdopt(_id)
 }
 
-// WithNative sets native and returns the receiver so calls can be chained.
+// WithNative sets the property and returns the receiver so calls can be chained.
 func (x *RecordMap) WithNative(native string) *RecordMap {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNative:"), purego.NSString(native))
 	return x
 }
 
-// WithOdPredicate sets odPredicate and returns the receiver so calls can be chained.
+// WithOdPredicate sets the property and returns the receiver so calls can be chained.
 func (x *RecordMap) WithOdPredicate(odPredicate obj.Object) *RecordMap {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOdPredicate:"), objref.IDOf(odPredicate))
 	return x
 }
 
-// Returns an ODAttributeMap object for the given OD standard attribute. Returns an ODAttributeMap object for the given OD standard attribute.
+// AttributeMapForStandardAttribute returns an ODAttributeMap object for the given OD standard attribute. Returns an ODAttributeMap object for the given OD standard attribute.
 func (x *RecordMap) AttributeMapForStandardAttribute(standardAttribute string) *AttributeMap {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeMapForStandardAttribute:"), purego.NSString(standardAttribute))
 	return AttributeMapFromID(_r)
 }
 
-// Sets an ODAttributeMap object for a given OD standard attribute. Sets an ODAttributeMap object for a given OD standard attribute.
+// SetAttributeMapForStandardAttribute sets an ODAttributeMap object for a given OD standard attribute. Sets an ODAttributeMap object for a given OD standard attribute.
 func (x *RecordMap) SetAttributeMapForStandardAttribute(attributeMap *AttributeMap, standardAttribute string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeMap:forStandardAttribute:"), objref.IDOf(attributeMap), purego.NSString(standardAttribute))
 }
 
+// Native wraps the corresponding Objective-C method.
 func (x *RecordMap) Native() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("native"))
 	if _r == 0 {
@@ -93,24 +102,29 @@ func (x *RecordMap) Native() string {
 	return purego.GoString(_r)
 }
 
+// SetNative wraps the corresponding Objective-C method.
 func (x *RecordMap) SetNative(native string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNative:"), purego.NSString(native))
 }
 
+// OdPredicate wraps the corresponding Objective-C method.
 func (x *RecordMap) OdPredicate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("odPredicate"))
 	return obj.Wrap(_r)
 }
 
+// SetOdPredicate wraps the corresponding Objective-C method.
 func (x *RecordMap) SetOdPredicate(odPredicate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOdPredicate:"), objref.IDOf(odPredicate))
 }
 
+// Attributes wraps the corresponding Objective-C method.
 func (x *RecordMap) Attributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
+// StandardAttributeTypes wraps the corresponding Objective-C method.
 func (x *RecordMap) StandardAttributeTypes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standardAttributeTypes"))
 	return obj.Wrap(_r)

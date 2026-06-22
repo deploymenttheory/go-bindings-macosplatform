@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for illuminance.
-//
 // UnitIlluminance is an idiomatic wrapper over the Objective-C class NSUnitIlluminance.
+//
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for illuminance.
 type UnitIlluminance struct {
-	objref.Handle
+	Dimension
 }
 
 // UnitIlluminanceFromID adopts an existing Objective-C object as a UnitIlluminance
@@ -25,7 +26,8 @@ func UnitIlluminanceFromID(id objc.ID) *UnitIlluminance {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitIlluminance{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UnitIlluminance{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func unitIlluminanceAdopt(id objc.ID) *UnitIlluminance {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitIlluminance{Handle: objref.Wrap(id)}
+	x := &UnitIlluminance{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UnitIlluminance) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UnitIlluminance) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UnitIlluminance) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUnitIlluminance creates a new UnitIlluminance.
@@ -64,7 +52,7 @@ func NewUnitIlluminance() *UnitIlluminance {
 	return unitIlluminanceAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UnitIlluminance) WithScriptingProperties(scriptingProperties obj.Object) *UnitIlluminance {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
@@ -77,3 +65,7 @@ type UnitIlluminanceable interface {
 }
 
 var _ UnitIlluminanceable = (*UnitIlluminance)(nil)
+
+var _ DimensionProvider = (*UnitIlluminance)(nil)
+
+var _ UnitProvider = (*UnitIlluminance)(nil)

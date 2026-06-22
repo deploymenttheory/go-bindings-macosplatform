@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines a policy to automatically manage the storage of downloaded assets.
-//
 // AssetDownloadStorageManagementPolicy is an idiomatic wrapper over the Objective-C class AVAssetDownloadStorageManagementPolicy.
+//
+// AssetDownloadStorageManagementPolicy is an abstract base — you do not construct it directly. Construct one of [MutableAssetDownloadStorageManagementPolicy] and pass it where a AssetDownloadStorageManagementPolicy is accepted.
+//
+// An object that defines a policy to automatically manage the storage of downloaded assets.
 type AssetDownloadStorageManagementPolicy struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func AssetDownloadStorageManagementPolicyFromID(id objc.ID) *AssetDownloadStorag
 	if id == 0 {
 		return nil
 	}
-	x := &AssetDownloadStorageManagementPolicy{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetDownloadStorageManagementPolicy{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func assetDownloadStorageManagementPolicyAdopt(id objc.ID) *AssetDownloadStorage
 	if id == 0 {
 		return nil
 	}
-	x := &AssetDownloadStorageManagementPolicy{Handle: objref.Wrap(id)}
+	x := &AssetDownloadStorageManagementPolicy{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +62,19 @@ func (x *AssetDownloadStorageManagementPolicy) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewAssetDownloadStorageManagementPolicy creates a new AssetDownloadStorageManagementPolicy.
-func NewAssetDownloadStorageManagementPolicy() *AssetDownloadStorageManagementPolicy {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetDownloadStorageManagementPolicy")), objc.RegisterName("new"))
-	return assetDownloadStorageManagementPolicyAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetDownloadStorageManagementPolicy) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Indicates the eviction priority of downloaded asset. Assets with default priority will be purged first before assets with higher priorities. In case this is not set, default priority is used.
+// Priority indicates the eviction priority of downloaded asset. Assets with default priority will be purged first before assets with higher priorities. In case this is not set, default priority is used.
 func (x *AssetDownloadStorageManagementPolicy) Priority() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("priority"))
 	return obj.Wrap(_r)
 }
 
-// Returns the expiration date of asset.
+// ExpirationDate returns the expiration date of asset.
 func (x *AssetDownloadStorageManagementPolicy) ExpirationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expirationDate"))
 	return obj.Wrap(_r)
@@ -84,3 +88,10 @@ type AssetDownloadStorageManagementPolicyable interface {
 }
 
 var _ AssetDownloadStorageManagementPolicyable = (*AssetDownloadStorageManagementPolicy)(nil)
+
+// isAssetDownloadStorageManagementPolicy marks AssetDownloadStorageManagementPolicy — and, by embedding promotion, its
+// subclasses — as a member of the AssetDownloadStorageManagementPolicy hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AssetDownloadStorageManagementPolicy) isAssetDownloadStorageManagementPolicy() {}
+
+var _ AssetDownloadStorageManagementPolicyProvider = (*AssetDownloadStorageManagementPolicy)(nil)

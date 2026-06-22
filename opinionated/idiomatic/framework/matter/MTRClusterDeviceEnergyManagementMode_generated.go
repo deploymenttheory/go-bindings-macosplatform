@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Device Energy Management Mode Attributes and commands for selecting a mode from a list of supported options.
-//
 // MTRClusterDeviceEnergyManagementMode is an idiomatic wrapper over the Objective-C class MTRClusterDeviceEnergyManagementMode.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
+//
+// Cluster Device Energy Management Mode Attributes and commands for selecting a mode from a list of supported options.
 type MTRClusterDeviceEnergyManagementMode struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterDeviceEnergyManagementModeFromID adopts an existing Objective-C object as a MTRClusterDeviceEnergyManagementMode
@@ -27,7 +28,8 @@ func MTRClusterDeviceEnergyManagementModeFromID(id objc.ID) *MTRClusterDeviceEne
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterDeviceEnergyManagementMode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterDeviceEnergyManagementMode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,37 +42,23 @@ func mTRClusterDeviceEnergyManagementModeAdopt(id objc.ID) *MTRClusterDeviceEner
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterDeviceEnergyManagementMode{Handle: objref.Wrap(id)}
+	x := &MTRClusterDeviceEnergyManagementMode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterDeviceEnergyManagementMode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterDeviceEnergyManagementMode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterDeviceEnergyManagementMode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterDeviceEnergyManagementModeWithDeviceEndpointIDQueue creates a new MTRClusterDeviceEnergyManagementMode.
+// NewMTRClusterDeviceEnergyManagementModeWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterDeviceEnergyManagementModeWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterDeviceEnergyManagementMode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterDeviceEnergyManagementMode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterDeviceEnergyManagementModeAdopt(_id)
 }
 
+// ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterDeviceEnergyManagementMode) ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDeviceEnergyManagementModeClusterChangeToModeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams, error) {
+func (x *MTRClusterDeviceEnergyManagementMode) ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDeviceEnergyManagementModeClusterChangeToModeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams, err error) {
 	type _result struct {
 		val *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams
 		err error
@@ -92,36 +80,43 @@ func (x *MTRClusterDeviceEnergyManagementMode) ChangeToModeWithParamsExpectedVal
 	}
 }
 
+// ReadAttributeSupportedModesWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDeviceEnergyManagementMode) ReadAttributeSupportedModesWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedModesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeCurrentModeWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDeviceEnergyManagementMode) ReadAttributeCurrentModeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDeviceEnergyManagementMode) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDeviceEnergyManagementMode) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDeviceEnergyManagementMode) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDeviceEnergyManagementMode) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDeviceEnergyManagementMode) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -141,3 +136,7 @@ type MTRClusterDeviceEnergyManagementModeable interface {
 }
 
 var _ MTRClusterDeviceEnergyManagementModeable = (*MTRClusterDeviceEnergyManagementMode)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterDeviceEnergyManagementMode)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterDeviceEnergyManagementMode)(nil)

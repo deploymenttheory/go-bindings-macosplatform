@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Contain information about an email address. This can include both valid and invalid email addresses.
-//
 // EmailAddress is an idiomatic wrapper over the Objective-C class MEEmailAddress.
+//
+// Contain information about an email address. This can include both valid and invalid email addresses.
 type EmailAddress struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func EmailAddressFromID(id objc.ID) *EmailAddress {
 	if id == 0 {
 		return nil
 	}
-	x := &EmailAddress{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EmailAddress{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func emailAddressAdopt(id objc.ID) *EmailAddress {
 	if id == 0 {
 		return nil
 	}
-	x := &EmailAddress{Handle: objref.Wrap(id)}
+	x := &EmailAddress{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +60,12 @@ func (x *EmailAddress) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *EmailAddress) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewEmailAddressWithRawString creates a new EmailAddress.
 func NewEmailAddressWithRawString(rawString string) *EmailAddress {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MEEmailAddress")), objc.RegisterName("alloc"))
@@ -65,7 +73,7 @@ func NewEmailAddressWithRawString(rawString string) *EmailAddress {
 	return emailAddressAdopt(_id)
 }
 
-// The raw string for the email address.
+// RawString the raw string for the email address.
 func (x *EmailAddress) RawString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rawString"))
 	if _r == 0 {
@@ -74,7 +82,7 @@ func (x *EmailAddress) RawString() string {
 	return purego.GoString(_r)
 }
 
-// The simple address string portion of the raw string if it is valid. For example, the
+// AddressString the simple address string portion of the raw string if it is valid. For example, the
 func (x *EmailAddress) AddressString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addressString"))
 	if _r == 0 {

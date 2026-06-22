@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A distinct voice for use in speech synthesis.
-//
 // SpeechSynthesisVoice is an idiomatic wrapper over the Objective-C class AVSpeechSynthesisVoice.
+//
+// A distinct voice for use in speech synthesis.
 type SpeechSynthesisVoice struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SpeechSynthesisVoiceFromID(id objc.ID) *SpeechSynthesisVoice {
 	if id == 0 {
 		return nil
 	}
-	x := &SpeechSynthesisVoice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SpeechSynthesisVoice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func speechSynthesisVoiceAdopt(id objc.ID) *SpeechSynthesisVoice {
 	if id == 0 {
 		return nil
 	}
-	x := &SpeechSynthesisVoice{Handle: objref.Wrap(id)}
+	x := &SpeechSynthesisVoice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *SpeechSynthesisVoice) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpeechSynthesisVoice) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSpeechSynthesisVoice creates a new SpeechSynthesisVoice.
 func NewSpeechSynthesisVoice() *SpeechSynthesisVoice {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVSpeechSynthesisVoice")), objc.RegisterName("new"))
 	return speechSynthesisVoiceAdopt(_id)
 }
 
+// Language wraps the corresponding Objective-C method.
 func (x *SpeechSynthesisVoice) Language() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
 	if _r == 0 {
@@ -72,6 +81,7 @@ func (x *SpeechSynthesisVoice) Language() string {
 	return purego.GoString(_r)
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *SpeechSynthesisVoice) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -80,6 +90,7 @@ func (x *SpeechSynthesisVoice) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *SpeechSynthesisVoice) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -88,21 +99,25 @@ func (x *SpeechSynthesisVoice) Name() string {
 	return purego.GoString(_r)
 }
 
+// Quality wraps the corresponding Objective-C method.
 func (x *SpeechSynthesisVoice) Quality() SpeechSynthesisVoiceQuality {
 	_r := objc.Send[SpeechSynthesisVoiceQuality](objref.IDOf(x), objc.RegisterName("quality"))
 	return _r
 }
 
+// Gender wraps the corresponding Objective-C method.
 func (x *SpeechSynthesisVoice) Gender() SpeechSynthesisVoiceGender {
 	_r := objc.Send[SpeechSynthesisVoiceGender](objref.IDOf(x), objc.RegisterName("gender"))
 	return _r
 }
 
+// AudioFileSettings wraps the corresponding Objective-C method.
 func (x *SpeechSynthesisVoice) AudioFileSettings() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioFileSettings"))
 	return obj.Wrap(_r)
 }
 
+// VoiceTraits wraps the corresponding Objective-C method.
 func (x *SpeechSynthesisVoice) VoiceTraits() SpeechSynthesisVoiceTraits {
 	_r := objc.Send[SpeechSynthesisVoiceTraits](objref.IDOf(x), objc.RegisterName("voiceTraits"))
 	return _r

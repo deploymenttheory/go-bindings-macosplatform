@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterPowerSourceConfiguration is an idiomatic wrapper over the Objective-C class MTRClusterPowerSourceConfiguration.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterPowerSourceConfiguration struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterPowerSourceConfigurationFromID adopts an existing Objective-C object as a MTRClusterPowerSourceConfiguration
@@ -23,7 +24,8 @@ func MTRClusterPowerSourceConfigurationFromID(id objc.ID) *MTRClusterPowerSource
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterPowerSourceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterPowerSourceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,29 +38,13 @@ func mTRClusterPowerSourceConfigurationAdopt(id objc.ID) *MTRClusterPowerSourceC
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterPowerSourceConfiguration{Handle: objref.Wrap(id)}
+	x := &MTRClusterPowerSourceConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterPowerSourceConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterPowerSourceConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterPowerSourceConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
-//
-// NewMTRClusterPowerSourceConfigurationWithDeviceEndpointIDQueue creates a new MTRClusterPowerSourceConfiguration.
+// NewMTRClusterPowerSourceConfigurationWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func NewMTRClusterPowerSourceConfigurationWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterPowerSourceConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterPowerSourceConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -72,31 +58,37 @@ func NewMTRClusterPowerSourceConfigurationWithDeviceEndpointQueue(device *MTRDev
 	return mTRClusterPowerSourceConfigurationAdopt(_id)
 }
 
+// ReadAttributeSourcesWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterPowerSourceConfiguration) ReadAttributeSourcesWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSourcesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterPowerSourceConfiguration) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterPowerSourceConfiguration) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterPowerSourceConfiguration) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterPowerSourceConfiguration) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterPowerSourceConfiguration) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -114,3 +106,7 @@ type MTRClusterPowerSourceConfigurationable interface {
 }
 
 var _ MTRClusterPowerSourceConfigurationable = (*MTRClusterPowerSourceConfiguration)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterPowerSourceConfiguration)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterPowerSourceConfiguration)(nil)

@@ -18,6 +18,8 @@ const (
 	BluetoothAccessoryPickerResultFailed     BluetoothAccessoryPickerErrorCode = 3
 )
 
+// String returns the BluetoothAccessoryPickerErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BluetoothAccessoryPickerErrorCode) String() string {
 	switch e {
 	case BluetoothAccessoryPickerAlreadyConnected:

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class representing a named value type in a Program.
-//
 // ModelStructureProgramNamedValueType is an idiomatic wrapper over the Objective-C class MLModelStructureProgramNamedValueType.
+//
+// A class representing a named value type in a Program.
 type ModelStructureProgramNamedValueType struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ModelStructureProgramNamedValueTypeFromID(id objc.ID) *ModelStructureProgra
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructureProgramNamedValueType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ModelStructureProgramNamedValueType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func modelStructureProgramNamedValueTypeAdopt(id objc.ID) *ModelStructureProgram
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructureProgramNamedValueType{Handle: objref.Wrap(id)}
+	x := &ModelStructureProgramNamedValueType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *ModelStructureProgramNamedValueType) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ModelStructureProgramNamedValueType) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewModelStructureProgramNamedValueType creates a new ModelStructureProgramNamedValueType.
 func NewModelStructureProgramNamedValueType() *ModelStructureProgramNamedValueType {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLModelStructureProgramNamedValueType")), objc.RegisterName("new"))
 	return modelStructureProgramNamedValueTypeAdopt(_id)
 }
 
-// The name of the parameter.
+// Name the name of the parameter.
 func (x *ModelStructureProgramNamedValueType) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *ModelStructureProgramNamedValueType) Name() string {
 	return purego.GoString(_r)
 }
 
-// The type of the parameter.
+// Type the type of the parameter.
 func (x *ModelStructureProgramNamedValueType) Type() *ModelStructureProgramValueType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
 	return ModelStructureProgramValueTypeFromID(_r)

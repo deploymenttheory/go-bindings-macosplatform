@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Water Heater Management
-//
 // MTRBaseClusterWaterHeaterManagement is an idiomatic wrapper over the Objective-C class MTRBaseClusterWaterHeaterManagement.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
+//
+// Cluster Water Heater Management
 type MTRBaseClusterWaterHeaterManagement struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterWaterHeaterManagementFromID adopts an existing Objective-C object as a MTRBaseClusterWaterHeaterManagement
@@ -27,7 +28,8 @@ func MTRBaseClusterWaterHeaterManagementFromID(id objc.ID) *MTRBaseClusterWaterH
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterWaterHeaterManagement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterWaterHeaterManagement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,37 +42,23 @@ func mTRBaseClusterWaterHeaterManagementAdopt(id objc.ID) *MTRBaseClusterWaterHe
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterWaterHeaterManagement{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterWaterHeaterManagement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterWaterHeaterManagement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterWaterHeaterManagement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterWaterHeaterManagement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterWaterHeaterManagementWithDeviceEndpointIDQueue creates a new MTRBaseClusterWaterHeaterManagement.
+// NewMTRBaseClusterWaterHeaterManagementWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterWaterHeaterManagementWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterWaterHeaterManagement {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterWaterHeaterManagement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterWaterHeaterManagementAdopt(_id)
 }
 
+// ReadAttributeHeaterTypesWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeHeaterTypesWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeHeaterTypesWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeHeaterTypesWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -92,8 +80,10 @@ func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeHeaterTypesWithComple
 	}
 }
 
+// SubscribeAttributeHeaterTypesWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeHeaterTypesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeHeaterTypesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeHeaterTypesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -115,8 +105,10 @@ func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeHeaterTypesWithP
 	}
 }
 
+// ReadAttributeHeatDemandWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeHeatDemandWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeHeatDemandWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeHeatDemandWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -138,8 +130,10 @@ func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeHeatDemandWithComplet
 	}
 }
 
+// SubscribeAttributeHeatDemandWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeHeatDemandWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeHeatDemandWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeHeatDemandWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -161,8 +155,10 @@ func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeHeatDemandWithPa
 	}
 }
 
+// ReadAttributeTankVolumeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeTankVolumeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeTankVolumeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeTankVolumeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -184,8 +180,10 @@ func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeTankVolumeWithComplet
 	}
 }
 
+// SubscribeAttributeTankVolumeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTankVolumeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeTankVolumeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeTankVolumeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -207,8 +205,10 @@ func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeTankVolumeWithPa
 	}
 }
 
+// ReadAttributeEstimatedHeatRequiredWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeEstimatedHeatRequiredWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeEstimatedHeatRequiredWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeEstimatedHeatRequiredWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -230,8 +230,10 @@ func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeEstimatedHeatRequired
 	}
 }
 
+// SubscribeAttributeEstimatedHeatRequiredWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeEstimatedHeatRequiredWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeEstimatedHeatRequiredWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeEstimatedHeatRequiredWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -253,8 +255,10 @@ func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeEstimatedHeatReq
 	}
 }
 
+// ReadAttributeTankPercentageWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeTankPercentageWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeTankPercentageWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeTankPercentageWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -276,8 +280,10 @@ func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeTankPercentageWithCom
 	}
 }
 
+// SubscribeAttributeTankPercentageWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTankPercentageWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeTankPercentageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeTankPercentageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -299,8 +305,10 @@ func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeTankPercentageWi
 	}
 }
 
+// ReadAttributeBoostStateWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeBoostStateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeBoostStateWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeBoostStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -322,8 +330,10 @@ func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeBoostStateWithComplet
 	}
 }
 
+// SubscribeAttributeBoostStateWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeBoostStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeBoostStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeBoostStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -345,8 +355,10 @@ func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeBoostStateWithPa
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -368,8 +380,10 @@ func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeGeneratedCommandListW
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -391,8 +405,10 @@ func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeGeneratedCommand
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -414,8 +430,10 @@ func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeAcceptedCommandListWi
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -437,8 +455,10 @@ func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeAcceptedCommandL
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -460,8 +480,10 @@ func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeAttributeListWithComp
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -483,8 +505,10 @@ func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeAttributeListWit
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -506,8 +530,10 @@ func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeFeatureMapWithComplet
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -529,8 +555,10 @@ func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeFeatureMapWithPa
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -552,8 +580,10 @@ func (x *MTRBaseClusterWaterHeaterManagement) ReadAttributeClusterRevisionWithCo
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -603,3 +633,7 @@ type MTRBaseClusterWaterHeaterManagementable interface {
 }
 
 var _ MTRBaseClusterWaterHeaterManagementable = (*MTRBaseClusterWaterHeaterManagement)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterWaterHeaterManagement)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterWaterHeaterManagement)(nil)

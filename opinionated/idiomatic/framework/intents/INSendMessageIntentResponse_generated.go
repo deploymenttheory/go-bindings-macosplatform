@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Your app’s response to a send message intent.
-//
 // SendMessageIntentResponse is an idiomatic wrapper over the Objective-C class INSendMessageIntentResponse.
+//
+// It embeds [IntentResponse], promoting that type's methods.
+//
+// Your app’s response to a send message intent.
 type SendMessageIntentResponse struct {
-	objref.Handle
+	IntentResponse
 }
 
 // SendMessageIntentResponseFromID adopts an existing Objective-C object as a SendMessageIntentResponse
@@ -25,7 +26,8 @@ func SendMessageIntentResponseFromID(id objc.ID) *SendMessageIntentResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &SendMessageIntentResponse{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SendMessageIntentResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,53 +40,38 @@ func sendMessageIntentResponseAdopt(id objc.ID) *SendMessageIntentResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &SendMessageIntentResponse{Handle: objref.Wrap(id)}
+	x := &SendMessageIntentResponse{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *SendMessageIntentResponse) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SendMessageIntentResponse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SendMessageIntentResponse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes the response object with the specified code and user activity object.
-//
-// NewSendMessageIntentResponseWithCodeUserActivity creates a new SendMessageIntentResponse.
+// NewSendMessageIntentResponseWithCodeUserActivity initializes the response object with the specified code and user activity object.
 func NewSendMessageIntentResponseWithCodeUserActivity(code SendMessageIntentResponseCode, userActivity obj.Object) *SendMessageIntentResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INSendMessageIntentResponse")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, objref.IDOf(userActivity))
 	return sendMessageIntentResponseAdopt(_id)
 }
 
-// The user activity object to use when launching the app.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity the user activity object to use when launching the app.
 func (x *SendMessageIntentResponse) WithUserActivity(userActivity obj.Object) *SendMessageIntentResponse {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
+// Code wraps the corresponding Objective-C method.
 func (x *SendMessageIntentResponse) Code() SendMessageIntentResponseCode {
 	_r := objc.Send[SendMessageIntentResponseCode](objref.IDOf(x), objc.RegisterName("code"))
 	return _r
 }
 
+// SentMessages wraps the corresponding Objective-C method.
 func (x *SendMessageIntentResponse) SentMessages() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sentMessages"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetSentMessages wraps the corresponding Objective-C method.
 func (x *SendMessageIntentResponse) SetSentMessages(sentMessages []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSentMessages:"), purego.SliceToNSArray(sentMessages, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
@@ -99,3 +86,5 @@ type SendMessageIntentResponseable interface {
 }
 
 var _ SendMessageIntentResponseable = (*SendMessageIntentResponse)(nil)
+
+var _ IntentResponseProvider = (*SendMessageIntentResponse)(nil)

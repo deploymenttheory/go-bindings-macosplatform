@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that monitors changes to a photo output’s capture readiness.
-//
 // CapturePhotoOutputReadinessCoordinator is an idiomatic wrapper over the Objective-C class AVCapturePhotoOutputReadinessCoordinator.
+//
+// An object that monitors changes to a photo output’s capture readiness.
 type CapturePhotoOutputReadinessCoordinator struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CapturePhotoOutputReadinessCoordinatorFromID(id objc.ID) *CapturePhotoOutpu
 	if id == 0 {
 		return nil
 	}
-	x := &CapturePhotoOutputReadinessCoordinator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CapturePhotoOutputReadinessCoordinator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func capturePhotoOutputReadinessCoordinatorAdopt(id objc.ID) *CapturePhotoOutput
 	if id == 0 {
 		return nil
 	}
-	x := &CapturePhotoOutputReadinessCoordinator{Handle: objref.Wrap(id)}
+	x := &CapturePhotoOutputReadinessCoordinator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,26 +60,30 @@ func (x *CapturePhotoOutputReadinessCoordinator) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an object that helps coordinate user interface changes with a photo output that runs on a background queue.
-//
-// NewCapturePhotoOutputReadinessCoordinatorWithPhotoOutput creates a new CapturePhotoOutputReadinessCoordinator.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CapturePhotoOutputReadinessCoordinator) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCapturePhotoOutputReadinessCoordinatorWithPhotoOutput creates an object that helps coordinate user interface changes with a photo output that runs on a background queue.
 func NewCapturePhotoOutputReadinessCoordinatorWithPhotoOutput(photoOutput *CapturePhotoOutput) *CapturePhotoOutputReadinessCoordinator {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCapturePhotoOutputReadinessCoordinator")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPhotoOutput:"), objref.IDOf(photoOutput))
 	return capturePhotoOutputReadinessCoordinatorAdopt(_id)
 }
 
-// Tracks a capture request that uses the specified photo settings.
+// StartTrackingCaptureRequestUsingPhotoSettings tracks a capture request that uses the specified photo settings.
 func (x *CapturePhotoOutputReadinessCoordinator) StartTrackingCaptureRequestUsingPhotoSettings(settings *CapturePhotoSettings) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startTrackingCaptureRequestUsingPhotoSettings:"), objref.IDOf(settings))
 }
 
-// Stop tracking the capture request represented by the specified photo setting’s unique identifier.
+// StopTrackingCaptureRequestUsingPhotoSettingsUniqueID stop tracking the capture request represented by the specified photo setting’s unique identifier.
 func (x *CapturePhotoOutputReadinessCoordinator) StopTrackingCaptureRequestUsingPhotoSettingsUniqueID(settingsUniqueID int64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopTrackingCaptureRequestUsingPhotoSettingsUniqueID:"), settingsUniqueID)
 }
 
-// A value specifying whether the coordinator's photo output is ready to respond to new capture requests in a timely manner. The value incorporates the photo output's captureReadiness and any requests registered using -startTrackingCaptureRequestUsingPhotoSettings:. The value is updated before calling the -readinessCoordinator:captureReadinessDidChange: callback. See AVCapturePhotoOutput's captureReadiness documentation for a discussion of how to update shutter availability and appearance based on the captureReadiness value. This property is key-value observable and all change notifications are delivered on the main queue, allowing UI updates to be done directly in the callback.
+// CaptureReadiness a value specifying whether the coordinator's photo output is ready to respond to new capture requests in a timely manner. The value incorporates the photo output's captureReadiness and any requests registered using -startTrackingCaptureRequestUsingPhotoSettings:. The value is updated before calling the -readinessCoordinator:captureReadinessDidChange: callback. See AVCapturePhotoOutput's captureReadiness documentation for a discussion of how to update shutter availability and appearance based on the captureReadiness value. This property is key-value observable and all change notifications are delivered on the main queue, allowing UI updates to be done directly in the callback.
 func (x *CapturePhotoOutputReadinessCoordinator) CaptureReadiness() CapturePhotoOutputCaptureReadiness {
 	_r := objc.Send[CapturePhotoOutputCaptureReadiness](objref.IDOf(x), objc.RegisterName("captureReadiness"))
 	return _r

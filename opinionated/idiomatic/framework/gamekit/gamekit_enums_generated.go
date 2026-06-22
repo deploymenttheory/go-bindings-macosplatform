@@ -19,6 +19,8 @@ const (
 	AccessPointLocationBottomTrailing AccessPointLocation = 3
 )
 
+// String returns the AccessPointLocation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AccessPointLocation) String() string {
 	switch e {
 	case AccessPointLocationTopLeading:
@@ -50,6 +52,8 @@ const (
 	ChallengeStateDeclined ChallengeState = 3
 )
 
+// String returns the ChallengeState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ChallengeState) String() string {
 	switch e {
 	case ChallengeStateInvalid:
@@ -75,6 +79,8 @@ const (
 	ConnectionStateConnected ConnectionState = 1
 )
 
+// String returns the ConnectionState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ConnectionState) String() string {
 	switch e {
 	case ConnectionStateNotConnected:
@@ -135,6 +141,8 @@ const (
 	ErrorFriendRequestNotAvailable    ErrorCode = 103
 )
 
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ErrorCode) String() string {
 	switch e {
 	case ErrorUnknown:
@@ -235,6 +243,8 @@ const (
 	GameActivityPlayStyleAsynchronous GameActivityPlayStyle = 2
 )
 
+// String returns the GameActivityPlayStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GameActivityPlayStyle) String() string {
 	switch e {
 	case GameActivityPlayStyleUnspecified:
@@ -261,6 +271,8 @@ const (
 	GameActivityStateEnded GameActivityState = 4
 )
 
+// String returns the GameActivityState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GameActivityState) String() string {
 	switch e {
 	case GameActivityStateInitialized:
@@ -300,6 +312,8 @@ const (
 	GameCenterViewControllerStateLocalPlayerFriendsList GameCenterViewControllerState = 5
 )
 
+// String returns the GameCenterViewControllerState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GameCenterViewControllerState) String() string {
 	switch e {
 	case GameCenterViewControllerStateDefault:
@@ -347,6 +361,8 @@ const (
 	GameSessionErrorInvalidSession                GameSessionErrorCode = 16
 )
 
+// String returns the GameSessionErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GameSessionErrorCode) String() string {
 	switch e {
 	case GameSessionErrorUnknown:
@@ -394,6 +410,8 @@ const (
 	LeaderboardPlayerScopeFriendsOnly LeaderboardPlayerScope = 1
 )
 
+// String returns the LeaderboardPlayerScope constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LeaderboardPlayerScope) String() string {
 	switch e {
 	case LeaderboardPlayerScopeGlobal:
@@ -414,6 +432,8 @@ const (
 	LeaderboardTimeScopeAllTime LeaderboardTimeScope = 2
 )
 
+// String returns the LeaderboardTimeScope constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LeaderboardTimeScope) String() string {
 	switch e {
 	case LeaderboardTimeScopeToday:
@@ -435,6 +455,8 @@ const (
 	LeaderboardTypeRecurring LeaderboardType = 1
 )
 
+// String returns the LeaderboardType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LeaderboardType) String() string {
 	switch e {
 	case LeaderboardTypeClassic:
@@ -454,6 +476,8 @@ const (
 	MatchSendDataUnreliable MatchSendDataMode = 1
 )
 
+// String returns the MatchSendDataMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MatchSendDataMode) String() string {
 	switch e {
 	case MatchSendDataReliable:
@@ -481,6 +505,8 @@ const (
 	MatchTypeTurnBased MatchType = 2
 )
 
+// String returns the MatchType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MatchType) String() string {
 	switch e {
 	case MatchTypePeerToPeer:
@@ -508,6 +534,8 @@ const (
 	MatchmakingModeInviteOnly MatchmakingMode = 3
 )
 
+// String returns the MatchmakingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MatchmakingMode) String() string {
 	switch e {
 	case MatchmakingModeDefault:
@@ -542,6 +570,8 @@ const (
 	PeerStateConnectedRelay PeerConnectionState = 5
 )
 
+// String returns the PeerConnectionState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PeerConnectionState) String() string {
 	switch e {
 	case PeerStateAvailable:
@@ -569,6 +599,8 @@ const (
 	PhotoSizeNormal PhotoSize = 1
 )
 
+// String returns the PhotoSize constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PhotoSize) String() string {
 	switch e {
 	case PhotoSizeSmall:
@@ -593,6 +625,8 @@ const (
 	ReleaseStatePrereleased ReleaseState = 2
 )
 
+// String returns the ReleaseState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ReleaseState) String() string {
 	var parts []string
 	if e&ReleaseStateReleased != 0 {
@@ -619,6 +653,8 @@ const (
 	SendDataUnreliable SendDataMode = 1
 )
 
+// String returns the SendDataMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SendDataMode) String() string {
 	switch e {
 	case SendDataReliable:
@@ -644,6 +680,8 @@ const (
 	SessionModePeer SessionMode = 2
 )
 
+// String returns the SessionMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SessionMode) String() string {
 	switch e {
 	case SessionModeServer:
@@ -667,6 +705,8 @@ const (
 	TransportTypeReliable TransportType = 1
 )
 
+// String returns the TransportType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TransportType) String() string {
 	switch e {
 	case TransportTypeUnreliable:
@@ -694,6 +734,8 @@ const (
 	TurnBasedExchangeStatusCanceled TurnBasedExchangeStatus = 4
 )
 
+// String returns the TurnBasedExchangeStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TurnBasedExchangeStatus) String() string {
 	switch e {
 	case TurnBasedExchangeStatusUnknown:
@@ -728,6 +770,8 @@ const (
 	TurnBasedMatchOutcomeCustomRange TurnBasedMatchOutcome = 16711680
 )
 
+// String returns the TurnBasedMatchOutcome constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TurnBasedMatchOutcome) String() string {
 	switch e {
 	case TurnBasedMatchOutcomeNone:
@@ -767,6 +811,8 @@ const (
 	TurnBasedMatchStatusMatching TurnBasedMatchStatus = 3
 )
 
+// String returns the TurnBasedMatchStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TurnBasedMatchStatus) String() string {
 	switch e {
 	case TurnBasedMatchStatusUnknown:
@@ -794,6 +840,8 @@ const (
 	TurnBasedParticipantStatusDone     TurnBasedParticipantStatus = 5
 )
 
+// String returns the TurnBasedParticipantStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TurnBasedParticipantStatus) String() string {
 	switch e {
 	case TurnBasedParticipantStatusUnknown:

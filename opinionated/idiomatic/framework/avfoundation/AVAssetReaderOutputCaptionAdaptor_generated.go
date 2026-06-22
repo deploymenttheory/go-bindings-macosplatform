@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that reads caption group objects from an asset track that contains timed text.
-//
 // AssetReaderOutputCaptionAdaptor is an idiomatic wrapper over the Objective-C class AVAssetReaderOutputCaptionAdaptor.
+//
+// An object that reads caption group objects from an asset track that contains timed text.
 type AssetReaderOutputCaptionAdaptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetReaderOutputCaptionAdaptorFromID(id objc.ID) *AssetReaderOutputCaption
 	if id == 0 {
 		return nil
 	}
-	x := &AssetReaderOutputCaptionAdaptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetReaderOutputCaptionAdaptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetReaderOutputCaptionAdaptorAdopt(id objc.ID) *AssetReaderOutputCaptionA
 	if id == 0 {
 		return nil
 	}
-	x := &AssetReaderOutputCaptionAdaptor{Handle: objref.Wrap(id)}
+	x := &AssetReaderOutputCaptionAdaptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,32 @@ func (x *AssetReaderOutputCaptionAdaptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a caption adaptor that reads from a track output.
-//
-// NewAssetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput creates a new AssetReaderOutputCaptionAdaptor.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetReaderOutputCaptionAdaptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput creates a caption adaptor that reads from a track output.
 func NewAssetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput(trackOutput *AssetReaderTrackOutput) *AssetReaderOutputCaptionAdaptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetReaderOutputCaptionAdaptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetReaderTrackOutput:"), objref.IDOf(trackOutput))
 	return assetReaderOutputCaptionAdaptorAdopt(_id)
 }
 
-// Returns the next caption group.
+// NextCaptionGroup returns the next caption group.
 func (x *AssetReaderOutputCaptionAdaptor) NextCaptionGroup() *CaptionGroup {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextCaptionGroup"))
 	return CaptionGroupFromID(_r)
 }
 
-// Returns the set of captions in the caption group that weren’t vended by the adaptor.
+// CaptionsNotPresentInPreviousGroupsInCaptionGroup returns the set of captions in the caption group that weren’t vended by the adaptor.
 func (x *AssetReaderOutputCaptionAdaptor) CaptionsNotPresentInPreviousGroupsInCaptionGroup(captionGroup *CaptionGroup) []*Caption {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("captionsNotPresentInPreviousGroupsInCaptionGroup:"), objref.IDOf(captionGroup))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Caption { return CaptionFromID(_id) })
 }
 
-// The track output used to create the receiver.
+// AssetReaderTrackOutput the track output used to create the receiver.
 func (x *AssetReaderOutputCaptionAdaptor) AssetReaderTrackOutput() *AssetReaderTrackOutput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetReaderTrackOutput"))
 	return AssetReaderTrackOutputFromID(_r)

@@ -25,7 +25,8 @@ func MTRICDManagementClusterStayActiveResponseParamsFromID(id objc.ID) *MTRICDMa
 	if id == 0 {
 		return nil
 	}
-	x := &MTRICDManagementClusterStayActiveResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRICDManagementClusterStayActiveResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRICDManagementClusterStayActiveResponseParamsAdopt(id objc.ID) *MTRICDMan
 	if id == 0 {
 		return nil
 	}
-	x := &MTRICDManagementClusterStayActiveResponseParams{Handle: objref.Wrap(id)}
+	x := &MTRICDManagementClusterStayActiveResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTRICDManagementClusterStayActiveResponseParams) IsKind(className strin
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRICDManagementClusterStayActiveResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-//
-// NewMTRICDManagementClusterStayActiveResponseParamsWithResponseValueError creates a new MTRICDManagementClusterStayActiveResponseParams.
-func NewMTRICDManagementClusterStayActiveResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRICDManagementClusterStayActiveResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRICDManagementClusterStayActiveResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRICDManagementClusterStayActiveResponseParamsWithResponseValueError initialize an MTRICDManagementClusterStayActiveResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRICDManagementClusterStayActiveResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRICDManagementClusterStayActiveResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRICDManagementClusterStayActiveResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,17 +77,19 @@ func NewMTRICDManagementClusterStayActiveResponseParamsWithResponseValueError(re
 	return mTRICDManagementClusterStayActiveResponseParamsAdopt(_id), nil
 }
 
-// WithPromisedActiveDuration sets promisedActiveDuration and returns the receiver so calls can be chained.
+// WithPromisedActiveDuration sets the property and returns the receiver so calls can be chained.
 func (x *MTRICDManagementClusterStayActiveResponseParams) WithPromisedActiveDuration(promisedActiveDuration obj.Object) *MTRICDManagementClusterStayActiveResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPromisedActiveDuration:"), objref.IDOf(promisedActiveDuration))
 	return x
 }
 
+// PromisedActiveDuration wraps the corresponding Objective-C method.
 func (x *MTRICDManagementClusterStayActiveResponseParams) PromisedActiveDuration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("promisedActiveDuration"))
 	return obj.Wrap(_r)
 }
 
+// SetPromisedActiveDuration wraps the corresponding Objective-C method.
 func (x *MTRICDManagementClusterStayActiveResponseParams) SetPromisedActiveDuration(promisedActiveDuration obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPromisedActiveDuration:"), objref.IDOf(promisedActiveDuration))
 }

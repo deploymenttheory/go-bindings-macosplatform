@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a MIDI poly or key pressure event.
-//
 // MIDIPolyPressureEvent is an idiomatic wrapper over the Objective-C class AVMIDIPolyPressureEvent.
+//
+// It embeds [MIDIChannelEvent], promoting that type's methods.
+//
+// An object that represents a MIDI poly or key pressure event.
 type MIDIPolyPressureEvent struct {
-	objref.Handle
+	MIDIChannelEvent
 }
 
 // MIDIPolyPressureEventFromID adopts an existing Objective-C object as a MIDIPolyPressureEvent
@@ -25,7 +26,8 @@ func MIDIPolyPressureEventFromID(id objc.ID) *MIDIPolyPressureEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MIDIPolyPressureEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MIDIPolyPressureEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,73 +40,55 @@ func mIDIPolyPressureEventAdopt(id objc.ID) *MIDIPolyPressureEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MIDIPolyPressureEvent{Handle: objref.Wrap(id)}
+	x := &MIDIPolyPressureEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MIDIPolyPressureEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MIDIPolyPressureEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MIDIPolyPressureEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates an event with a channel, MIDI key number, and a key pressure value.
-//
-// NewMIDIPolyPressureEventWithChannelKeyPressure creates a new MIDIPolyPressureEvent.
+// NewMIDIPolyPressureEventWithChannelKeyPressure creates an event with a channel, MIDI key number, and a key pressure value.
 func NewMIDIPolyPressureEventWithChannelKeyPressure(channel int, key int, pressure int) *MIDIPolyPressureEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMIDIPolyPressureEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannel:key:pressure:"), channel, key, pressure)
 	return mIDIPolyPressureEventAdopt(_id)
 }
 
-// The MIDI key number.
-//
-// WithKey sets key and returns the receiver so calls can be chained.
+// WithKey the MIDI key number.
 func (x *MIDIPolyPressureEvent) WithKey(key int) *MIDIPolyPressureEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), key)
 	return x
 }
 
-// The poly pressure value for the requested key.
-//
-// WithPressure sets pressure and returns the receiver so calls can be chained.
+// WithPressure the poly pressure value for the requested key.
 func (x *MIDIPolyPressureEvent) WithPressure(pressure int) *MIDIPolyPressureEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressure:"), pressure)
 	return x
 }
 
-// The MIDI channel.
-//
-// WithChannel sets channel and returns the receiver so calls can be chained.
+// WithChannel the MIDI channel.
 func (x *MIDIPolyPressureEvent) WithChannel(channel int) *MIDIPolyPressureEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
 	return x
 }
 
+// Key wraps the corresponding Objective-C method.
 func (x *MIDIPolyPressureEvent) Key() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("key"))
 	return _r
 }
 
+// SetKey wraps the corresponding Objective-C method.
 func (x *MIDIPolyPressureEvent) SetKey(key int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), key)
 }
 
+// Pressure wraps the corresponding Objective-C method.
 func (x *MIDIPolyPressureEvent) Pressure() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pressure"))
 	return _r
 }
 
+// SetPressure wraps the corresponding Objective-C method.
 func (x *MIDIPolyPressureEvent) SetPressure(pressure int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressure:"), pressure)
 }
@@ -122,3 +106,7 @@ type MIDIPolyPressureEventable interface {
 }
 
 var _ MIDIPolyPressureEventable = (*MIDIPolyPressureEvent)(nil)
+
+var _ MIDIChannelEventProvider = (*MIDIPolyPressureEvent)(nil)
+
+var _ MusicEventProvider = (*MIDIPolyPressureEvent)(nil)

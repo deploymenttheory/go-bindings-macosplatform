@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that appends captions to an asset writer input.
-//
 // AssetWriterInputCaptionAdaptor is an idiomatic wrapper over the Objective-C class AVAssetWriterInputCaptionAdaptor.
+//
+// An object that appends captions to an asset writer input.
 type AssetWriterInputCaptionAdaptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetWriterInputCaptionAdaptorFromID(id objc.ID) *AssetWriterInputCaptionAd
 	if id == 0 {
 		return nil
 	}
-	x := &AssetWriterInputCaptionAdaptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetWriterInputCaptionAdaptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetWriterInputCaptionAdaptorAdopt(id objc.ID) *AssetWriterInputCaptionAda
 	if id == 0 {
 		return nil
 	}
-	x := &AssetWriterInputCaptionAdaptor{Handle: objref.Wrap(id)}
+	x := &AssetWriterInputCaptionAdaptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,32 @@ func (x *AssetWriterInputCaptionAdaptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new caption adaptor that writes to the specified asset writer input.
-//
-// NewAssetWriterInputCaptionAdaptorWithAssetWriterInput creates a new AssetWriterInputCaptionAdaptor.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetWriterInputCaptionAdaptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetWriterInputCaptionAdaptorWithAssetWriterInput creates a new caption adaptor that writes to the specified asset writer input.
 func NewAssetWriterInputCaptionAdaptorWithAssetWriterInput(input *AssetWriterInput) *AssetWriterInputCaptionAdaptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInputCaptionAdaptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetWriterInput:"), objref.IDOf(input))
 	return assetWriterInputCaptionAdaptorAdopt(_id)
 }
 
-// Appends a caption to the writer input.
+// AppendCaption appends a caption to the writer input.
 func (x *AssetWriterInputCaptionAdaptor) AppendCaption(caption *Caption) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appendCaption:"), objref.IDOf(caption))
 	return _r
 }
 
-// Appends a caption group that the system writes to the output.
+// AppendCaptionGroup appends a caption group that the system writes to the output.
 func (x *AssetWriterInputCaptionAdaptor) AppendCaptionGroup(captionGroup *CaptionGroup) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appendCaptionGroup:"), objref.IDOf(captionGroup))
 	return _r
 }
 
-// The asset writer input that was used to initialize the receiver.
+// AssetWriterInput the asset writer input that was used to initialize the receiver.
 func (x *AssetWriterInputCaptionAdaptor) AssetWriterInput() *AssetWriterInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetWriterInput"))
 	return AssetWriterInputFromID(_r)

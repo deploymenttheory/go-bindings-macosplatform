@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The custom user interface used to perform a selected action.
-//
 // ActionExtensionViewController is an idiomatic wrapper over the Objective-C class FPUIActionExtensionViewController.
+//
+// The custom user interface used to perform a selected action.
 type ActionExtensionViewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ActionExtensionViewControllerFromID(id objc.ID) *ActionExtensionViewControl
 	if id == 0 {
 		return nil
 	}
-	x := &ActionExtensionViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ActionExtensionViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func actionExtensionViewControllerAdopt(id objc.ID) *ActionExtensionViewControll
 	if id == 0 {
 		return nil
 	}
-	x := &ActionExtensionViewController{Handle: objref.Wrap(id)}
+	x := &ActionExtensionViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *ActionExtensionViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ActionExtensionViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewActionExtensionViewController creates a new ActionExtensionViewController.
 func NewActionExtensionViewController() *ActionExtensionViewController {
 	_id := objc.Send[objc.ID](objc.ID(_class("FPUIActionExtensionViewController")), objc.RegisterName("new"))
 	return actionExtensionViewControllerAdopt(_id)
 }
 
-// Performs any necessary setup or configuration for the specified action.
+// PrepareForActionWithIdentifierItemIdentifiers performs any necessary setup or configuration for the specified action.
 func (x *ActionExtensionViewController) PrepareForActionWithIdentifierItemIdentifiers(actionIdentifier string, itemIdentifiers []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareForActionWithIdentifier:itemIdentifiers:"), purego.NSString(actionIdentifier), purego.SliceToNSArray(itemIdentifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }

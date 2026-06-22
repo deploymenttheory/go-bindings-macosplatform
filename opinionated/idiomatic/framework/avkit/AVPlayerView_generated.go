@@ -6,15 +6,16 @@ package avkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view that displays content from a player and presents a native user interface to control playback.
-//
 // PlayerView is an idiomatic wrapper over the Objective-C class AVPlayerView.
+//
+// A view that displays content from a player and presents a native user interface to control playback.
 type PlayerView struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func PlayerViewFromID(id objc.ID) *PlayerView {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlayerView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func playerViewAdopt(id objc.ID) *PlayerView {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerView{Handle: objref.Wrap(id)}
+	x := &PlayerView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,199 +61,188 @@ func (x *PlayerView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPlayerView creates a new PlayerView.
 func NewPlayerView() *PlayerView {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerView")), objc.RegisterName("new"))
 	return playerViewAdopt(_id)
 }
 
-// The player instance that provides the media content for the view.
-//
-// WithPlayer sets player and returns the receiver so calls can be chained.
+// WithPlayer the player instance that provides the media content for the view.
 func (x *PlayerView) WithPlayer(player obj.Object) *PlayerView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayer:"), objref.IDOf(player))
 	return x
 }
 
-// The player view’s controls style.
-//
-// WithControlsStyle sets controlsStyle and returns the receiver so calls can be chained.
+// WithControlsStyle the player view’s controls style.
 func (x *PlayerView) WithControlsStyle(controlsStyle PlayerViewControlsStyle) *PlayerView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlsStyle:"), controlsStyle)
 	return x
 }
 
-// A value that determines how the player view displays video content within its bounds.
-//
-// WithVideoGravity sets videoGravity and returns the receiver so calls can be chained.
+// WithVideoGravity a value that determines how the player view displays video content within its bounds.
 func (x *PlayerView) WithVideoGravity(videoGravity obj.Object) *PlayerView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
 	return x
 }
 
-// A Boolean value that indicates whether the player view controller updates the Now Playing info center.
-//
-// WithUpdatesNowPlayingInfoCenter sets updatesNowPlayingInfoCenter and returns the receiver so calls can be chained.
+// WithUpdatesNowPlayingInfoCenter a Boolean value that indicates whether the player view controller updates the Now Playing info center.
 func (x *PlayerView) WithUpdatesNowPlayingInfoCenter(updatesNowPlayingInfoCenter bool) *PlayerView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpdatesNowPlayingInfoCenter:"), updatesNowPlayingInfoCenter)
 	return x
 }
 
-// A list of user-selectable playback speeds to show in the playback speed control.
-//
-// WithSpeeds sets the collection and returns the receiver so calls can be chained.
+// WithSpeeds a list of user-selectable playback speeds to show in the playback speed control.
 func (x *PlayerView) WithSpeeds(items ...*PlaybackSpeed) *PlayerView {
 	_arr := purego.SliceToNSArray(items, func(_v *PlaybackSpeed) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeeds:"), _arr)
 	return x
 }
 
-// A Boolean value that indicates whether to perform video frame analysis.
-//
-// WithAllowsVideoFrameAnalysis sets allowsVideoFrameAnalysis and returns the receiver so calls can be chained.
+// WithAllowsVideoFrameAnalysis a Boolean value that indicates whether to perform video frame analysis.
 func (x *PlayerView) WithAllowsVideoFrameAnalysis(allowsVideoFrameAnalysis bool) *PlayerView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsVideoFrameAnalysis:"), allowsVideoFrameAnalysis)
 	return x
 }
 
-// The types of items AVPlayerView looks for in a paused video frame.
-//
-// WithVideoFrameAnalysisTypes sets videoFrameAnalysisTypes and returns the receiver so calls can be chained.
+// WithVideoFrameAnalysisTypes the types of items AVPlayerView looks for in a paused video frame.
 func (x *PlayerView) WithVideoFrameAnalysisTypes(videoFrameAnalysisTypes VideoFrameAnalysisType) *PlayerView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoFrameAnalysisTypes:"), videoFrameAnalysisTypes)
 	return x
 }
 
-// A Boolean value that indicates whether the magnify gesture changes the video’s view magnification.
-//
-// WithAllowsMagnification sets allowsMagnification and returns the receiver so calls can be chained.
+// WithAllowsMagnification a Boolean value that indicates whether the magnify gesture changes the video’s view magnification.
 func (x *PlayerView) WithAllowsMagnification(allowsMagnification bool) *PlayerView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMagnification:"), allowsMagnification)
 	return x
 }
 
-// The factor by which the video’s view is currently scaled.
-//
-// WithMagnification sets magnification and returns the receiver so calls can be chained.
+// WithMagnification the factor by which the video’s view is currently scaled.
 func (x *PlayerView) WithMagnification(magnification float64) *PlayerView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnification:"), magnification)
 	return x
 }
 
-// Describes how High Dynamic Range (HDR) video content renders.
-//
-// WithPreferredDisplayDynamicRange sets preferredDisplayDynamicRange and returns the receiver so calls can be chained.
+// WithPreferredDisplayDynamicRange describes how High Dynamic Range (HDR) video content renders.
 func (x *PlayerView) WithPreferredDisplayDynamicRange(preferredDisplayDynamicRange DisplayDynamicRange) *PlayerView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredDisplayDynamicRange:"), preferredDisplayDynamicRange)
 	return x
 }
 
-// A Boolean value that determines whether the player view displays frame stepping buttons.
-//
-// WithShowsFrameSteppingButtons sets showsFrameSteppingButtons and returns the receiver so calls can be chained.
+// WithShowsFrameSteppingButtons a Boolean value that determines whether the player view displays frame stepping buttons.
 func (x *PlayerView) WithShowsFrameSteppingButtons(showsFrameSteppingButtons bool) *PlayerView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFrameSteppingButtons:"), showsFrameSteppingButtons)
 	return x
 }
 
-// A Boolean value that determines whether the player view displays a sharing service button.
-//
-// WithShowsSharingServiceButton sets showsSharingServiceButton and returns the receiver so calls can be chained.
+// WithShowsSharingServiceButton a Boolean value that determines whether the player view displays a sharing service button.
 func (x *PlayerView) WithShowsSharingServiceButton(showsSharingServiceButton bool) *PlayerView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsSharingServiceButton:"), showsSharingServiceButton)
 	return x
 }
 
-// An action pop-up button menu that the player view displays.
-//
-// WithActionPopUpButtonMenu sets actionPopUpButtonMenu and returns the receiver so calls can be chained.
+// WithActionPopUpButtonMenu an action pop-up button menu that the player view displays.
 func (x *PlayerView) WithActionPopUpButtonMenu(actionPopUpButtonMenu obj.Object) *PlayerView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionPopUpButtonMenu:"), objref.IDOf(actionPopUpButtonMenu))
 	return x
 }
 
-// A Boolean value that determines whether the player view displays a full-screen toggle button.
-//
-// WithShowsFullScreenToggleButton sets showsFullScreenToggleButton and returns the receiver so calls can be chained.
+// WithShowsFullScreenToggleButton a Boolean value that determines whether the player view displays a full-screen toggle button.
 func (x *PlayerView) WithShowsFullScreenToggleButton(showsFullScreenToggleButton bool) *PlayerView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFullScreenToggleButton:"), showsFullScreenToggleButton)
 	return x
 }
 
-// A Boolean value that determines whether the player view displays timecodes, if available.
-//
-// WithShowsTimecodes sets showsTimecodes and returns the receiver so calls can be chained.
+// WithShowsTimecodes a Boolean value that determines whether the player view displays timecodes, if available.
 func (x *PlayerView) WithShowsTimecodes(showsTimecodes bool) *PlayerView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsTimecodes:"), showsTimecodes)
 	return x
 }
 
-// A Boolean value that determines whether the player view allows Picture in Picture playback.
-//
-// WithAllowsPictureInPicturePlayback sets allowsPictureInPicturePlayback and returns the receiver so calls can be chained.
+// WithAllowsPictureInPicturePlayback a Boolean value that determines whether the player view allows Picture in Picture playback.
 func (x *PlayerView) WithAllowsPictureInPicturePlayback(allowsPictureInPicturePlayback bool) *PlayerView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsPictureInPicturePlayback:"), allowsPictureInPicturePlayback)
 	return x
 }
 
-// Selects a specified playback speed.
+// SelectSpeed selects a specified playback speed.
 func (x *PlayerView) SelectSpeed(speed *PlaybackSpeed) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectSpeed:"), objref.IDOf(speed))
 }
 
-// The player from which to source the media content for the view.
+// SetMagnificationCenteredAtPoint scales the video’s view by a specified factor, and centers the result on a specified point.
+func (x *PlayerView) SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnification:centeredAtPoint:"), magnification, point)
+}
+
+// Player the player from which to source the media content for the view.
 func (x *PlayerView) Player() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("player"))
 	return obj.Wrap(_r)
 }
 
+// SetPlayer wraps the corresponding Objective-C method.
 func (x *PlayerView) SetPlayer(player obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayer:"), objref.IDOf(player))
 }
 
-// The style of the playback controls pane currently associated with the view. After macOS 11, the floating style controls will always be used when presenting in fullscreen and AVPlayerViewControlsStyleNone is not specified.
+// ControlsStyle the style of the playback controls pane currently associated with the view. After macOS 11, the floating style controls will always be used when presenting in fullscreen and AVPlayerViewControlsStyleNone is not specified.
 func (x *PlayerView) ControlsStyle() PlayerViewControlsStyle {
 	_r := objc.Send[PlayerViewControlsStyle](objref.IDOf(x), objc.RegisterName("controlsStyle"))
 	return _r
 }
 
+// SetControlsStyle wraps the corresponding Objective-C method.
 func (x *PlayerView) SetControlsStyle(controlsStyle PlayerViewControlsStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlsStyle:"), controlsStyle)
 }
 
-// A string defining how the video is displayed within an AVPlayerLayer bounds rect. Options are AVLayerVideoGravityResizeAspect, AVLayerVideoGravityResizeAspectFill and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default.
+// VideoGravity a string defining how the video is displayed within an AVPlayerLayer bounds rect. Options are AVLayerVideoGravityResizeAspect, AVLayerVideoGravityResizeAspectFill and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default.
 func (x *PlayerView) VideoGravity() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoGravity"))
 	return obj.Wrap(_r)
 }
 
+// SetVideoGravity wraps the corresponding Objective-C method.
 func (x *PlayerView) SetVideoGravity(videoGravity obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
 }
 
-// Boolean indicating that the first video frame has been made ready for display for the current item of the associated AVPlayer.
+// IsReadyForDisplay boolean indicating that the first video frame has been made ready for display for the current item of the associated AVPlayer.
 func (x *PlayerView) IsReadyForDisplay() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadyForDisplay"))
 	return _r
 }
 
-// Use the content overlay view to add additional custom views between the video content and the controls.
+// VideoBounds the current size and position of the video image as displayed within the receiver's view's bounds.
+func (x *PlayerView) VideoBounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("videoBounds"))
+	return _r
+}
+
+// ContentOverlayView use the content overlay view to add additional custom views between the video content and the controls.
 func (x *PlayerView) ContentOverlayView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentOverlayView"))
 	return obj.Wrap(_r)
 }
 
-// Whether or not the now playing info center should be updated. Default is YES.
+// UpdatesNowPlayingInfoCenter whether or not the now playing info center should be updated. Default is YES.
 func (x *PlayerView) UpdatesNowPlayingInfoCenter() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("updatesNowPlayingInfoCenter"))
 	return _r
 }
 
+// SetUpdatesNowPlayingInfoCenter wraps the corresponding Objective-C method.
 func (x *PlayerView) SetUpdatesNowPlayingInfoCenter(updatesNowPlayingInfoCenter bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpdatesNowPlayingInfoCenter:"), updatesNowPlayingInfoCenter)
 }
 
-// A list of user selectable playback speeds to be shown in the playback speed control. By default this property will be set to the systemDefaultSpeeds class property. Setting this property to nil will hide the playback speed selection UI. To set the currently selected playback speed programmatically, either set the defaultRate on the AVPlayer associated with this view controller or use the selectSpeed method on AVPlayerView.
+// Speeds a list of user selectable playback speeds to be shown in the playback speed control. By default this property will be set to the systemDefaultSpeeds class property. Setting this property to nil will hide the playback speed selection UI. To set the currently selected playback speed programmatically, either set the defaultRate on the AVPlayer associated with this view controller or use the selectSpeed method on AVPlayerView.
 //
 // Speeds returns the collection as a Go slice.
 func (x *PlayerView) Speeds() []*PlaybackSpeed {
@@ -258,133 +250,145 @@ func (x *PlayerView) Speeds() []*PlaybackSpeed {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlaybackSpeed { return PlaybackSpeedFromID(_id) })
 }
 
+// SetSpeeds wraps the corresponding Objective-C method.
 func (x *PlayerView) SetSpeeds(speeds []*PlaybackSpeed) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeeds:"), purego.SliceToNSArray(speeds, func(_v *PlaybackSpeed) objc.ID { return objref.IDOf(_v) }))
 }
 
-// The currently selected playback speed. Changes to the associated AVPlayer's defaultRate will be reflected in this property and vice versa. If the associated AVPlayer's defaultRate is set to a value that does not match a speed in the speeds list property, the selected speed will be nil.
+// SelectedSpeed the currently selected playback speed. Changes to the associated AVPlayer's defaultRate will be reflected in this property and vice versa. If the associated AVPlayer's defaultRate is set to a value that does not match a speed in the speeds list property, the selected speed will be nil.
 func (x *PlayerView) SelectedSpeed() *PlaybackSpeed {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedSpeed"))
 	return PlaybackSpeedFromID(_r)
 }
 
-// When set to YES, the AVPlayerView will try to find objects, text and people while the media is paused. When an object is found, the user will be able to interact with it selecting and right clicking to present a context menu. Default is YES.
+// AllowsVideoFrameAnalysis when set to YES, the AVPlayerView will try to find objects, text and people while the media is paused. When an object is found, the user will be able to interact with it selecting and right clicking to present a context menu. Default is YES.
 func (x *PlayerView) AllowsVideoFrameAnalysis() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsVideoFrameAnalysis"))
 	return _r
 }
 
+// SetAllowsVideoFrameAnalysis wraps the corresponding Objective-C method.
 func (x *PlayerView) SetAllowsVideoFrameAnalysis(allowsVideoFrameAnalysis bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsVideoFrameAnalysis:"), allowsVideoFrameAnalysis)
 }
 
-// The types of items AVPlayerView looks for in a paused video frame.
+// VideoFrameAnalysisTypes the types of items AVPlayerView looks for in a paused video frame.
 func (x *PlayerView) VideoFrameAnalysisTypes() VideoFrameAnalysisType {
 	_r := objc.Send[VideoFrameAnalysisType](objref.IDOf(x), objc.RegisterName("videoFrameAnalysisTypes"))
 	return _r
 }
 
+// SetVideoFrameAnalysisTypes wraps the corresponding Objective-C method.
 func (x *PlayerView) SetVideoFrameAnalysisTypes(videoFrameAnalysisTypes VideoFrameAnalysisType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoFrameAnalysisTypes:"), videoFrameAnalysisTypes)
 }
 
-// Whether the magnify gesture will change the video's view magnification. The default value is NO. This property only effects whether the magnify gesture triggers magnification. A client can still programmatically change magnification even when the value of this is NO. This behavior matches the behavior of NSScrollView.
+// AllowsMagnification whether the magnify gesture will change the video's view magnification. The default value is NO. This property only effects whether the magnify gesture triggers magnification. A client can still programmatically change magnification even when the value of this is NO. This behavior matches the behavior of NSScrollView.
 func (x *PlayerView) AllowsMagnification() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsMagnification"))
 	return _r
 }
 
+// SetAllowsMagnification wraps the corresponding Objective-C method.
 func (x *PlayerView) SetAllowsMagnification(allowsMagnification bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMagnification:"), allowsMagnification)
 }
 
-// The factor by which the video's view is currently scaled. The default value is 1.0. The value cannot be smaller than 1.0 or larger 64.0. Nearest neighbor interpolation will be used once the content has been zoomed past a certain factor.
+// Magnification the factor by which the video's view is currently scaled. The default value is 1.0. The value cannot be smaller than 1.0 or larger 64.0. Nearest neighbor interpolation will be used once the content has been zoomed past a certain factor.
 func (x *PlayerView) Magnification() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("magnification"))
 	return _r
 }
 
+// SetMagnification wraps the corresponding Objective-C method.
 func (x *PlayerView) SetMagnification(magnification float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnification:"), magnification)
 }
 
-// Describes how High Dynamic Range (HDR) video content renders. Defaults to “AVDisplayDynamicRangeAutomatic“. - Note: This property will only have effect if the video content supports HDR.
+// PreferredDisplayDynamicRange describes how High Dynamic Range (HDR) video content renders. Defaults to “AVDisplayDynamicRangeAutomatic“. - Note: This property will only have effect if the video content supports HDR.
 func (x *PlayerView) PreferredDisplayDynamicRange() DisplayDynamicRange {
 	_r := objc.Send[DisplayDynamicRange](objref.IDOf(x), objc.RegisterName("preferredDisplayDynamicRange"))
 	return _r
 }
 
+// SetPreferredDisplayDynamicRange wraps the corresponding Objective-C method.
 func (x *PlayerView) SetPreferredDisplayDynamicRange(preferredDisplayDynamicRange DisplayDynamicRange) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredDisplayDynamicRange:"), preferredDisplayDynamicRange)
 }
 
-// Replace scanning controls in the playback UI with frame stepping buttons. Default is NO.
+// ShowsFrameSteppingButtons replace scanning controls in the playback UI with frame stepping buttons. Default is NO.
 func (x *PlayerView) ShowsFrameSteppingButtons() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsFrameSteppingButtons"))
 	return _r
 }
 
+// SetShowsFrameSteppingButtons wraps the corresponding Objective-C method.
 func (x *PlayerView) SetShowsFrameSteppingButtons(showsFrameSteppingButtons bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFrameSteppingButtons:"), showsFrameSteppingButtons)
 }
 
-// Whether or not the controls pane will show a sharing service button when the current player item can be shared. Default is NO.
+// ShowsSharingServiceButton whether or not the controls pane will show a sharing service button when the current player item can be shared. Default is NO.
 func (x *PlayerView) ShowsSharingServiceButton() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsSharingServiceButton"))
 	return _r
 }
 
+// SetShowsSharingServiceButton wraps the corresponding Objective-C method.
 func (x *PlayerView) SetShowsSharingServiceButton(showsSharingServiceButton bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsSharingServiceButton:"), showsSharingServiceButton)
 }
 
-// Clients can set this property in order to show an action pop up button. Default is nil.
+// ActionPopUpButtonMenu clients can set this property in order to show an action pop up button. Default is nil.
 func (x *PlayerView) ActionPopUpButtonMenu() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actionPopUpButtonMenu"))
 	return obj.Wrap(_r)
 }
 
+// SetActionPopUpButtonMenu wraps the corresponding Objective-C method.
 func (x *PlayerView) SetActionPopUpButtonMenu(actionPopUpButtonMenu obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionPopUpButtonMenu:"), objref.IDOf(actionPopUpButtonMenu))
 }
 
-// Whether or not the controls pane will show a full screen toggle button. Default is NO.
+// ShowsFullScreenToggleButton whether or not the controls pane will show a full screen toggle button. Default is NO.
 func (x *PlayerView) ShowsFullScreenToggleButton() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsFullScreenToggleButton"))
 	return _r
 }
 
+// SetShowsFullScreenToggleButton wraps the corresponding Objective-C method.
 func (x *PlayerView) SetShowsFullScreenToggleButton(showsFullScreenToggleButton bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFullScreenToggleButton:"), showsFullScreenToggleButton)
 }
 
-// If timecodes are available, allow the AVPlayerView controls to enter timecode mode. Default is NO.
+// ShowsTimecodes if timecodes are available, allow the AVPlayerView controls to enter timecode mode. Default is NO.
 func (x *PlayerView) ShowsTimecodes() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsTimecodes"))
 	return _r
 }
 
+// SetShowsTimecodes wraps the corresponding Objective-C method.
 func (x *PlayerView) SetShowsTimecodes(showsTimecodes bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsTimecodes:"), showsTimecodes)
 }
 
-// Whether or not the current media can be trimmed.
+// CanBeginTrimming whether or not the current media can be trimmed.
 func (x *PlayerView) CanBeginTrimming() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canBeginTrimming"))
 	return _r
 }
 
-// Displays the chapter number and title in the player view for a brief moment.
+// FlashChapterNumberChapterTitle displays the chapter number and title in the player view for a brief moment.
 func (x *PlayerView) FlashChapterNumberChapterTitle(chapterNumber int, chapterTitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flashChapterNumber:chapterTitle:"), chapterNumber, purego.NSString(chapterTitle))
 }
 
-// Whether or not the receiver allows Picture in Picture playback. Default is NO.
+// AllowsPictureInPicturePlayback whether or not the receiver allows Picture in Picture playback. Default is NO.
 func (x *PlayerView) AllowsPictureInPicturePlayback() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsPictureInPicturePlayback"))
 	return _r
 }
 
+// SetAllowsPictureInPicturePlayback wraps the corresponding Objective-C method.
 func (x *PlayerView) SetAllowsPictureInPicturePlayback(allowsPictureInPicturePlayback bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsPictureInPicturePlayback:"), allowsPictureInPicturePlayback)
 }
@@ -409,6 +413,7 @@ type PlayerViewable interface {
 	WithShowsTimecodes(showsTimecodes bool) *PlayerView
 	WithAllowsPictureInPicturePlayback(allowsPictureInPicturePlayback bool) *PlayerView
 	SelectSpeed(speed *PlaybackSpeed)
+	SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint)
 	Player() obj.Object
 	SetPlayer(player obj.Object)
 	ControlsStyle() PlayerViewControlsStyle
@@ -416,6 +421,7 @@ type PlayerViewable interface {
 	VideoGravity() obj.Object
 	SetVideoGravity(videoGravity obj.Object)
 	IsReadyForDisplay() bool
+	VideoBounds() corefoundation.CGRect
 	ContentOverlayView() obj.Object
 	UpdatesNowPlayingInfoCenter() bool
 	SetUpdatesNowPlayingInfoCenter(updatesNowPlayingInfoCenter bool)

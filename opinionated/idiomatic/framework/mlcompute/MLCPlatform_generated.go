@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A utility class for setting global properties in the framework.
-//
 // Platform is an idiomatic wrapper over the Objective-C class MLCPlatform.
+//
+// A utility class for setting global properties in the framework.
 type Platform struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PlatformFromID(id objc.ID) *Platform {
 	if id == 0 {
 		return nil
 	}
-	x := &Platform{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Platform{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func platformAdopt(id objc.ID) *Platform {
 	if id == 0 {
 		return nil
 	}
-	x := &Platform{Handle: objref.Wrap(id)}
+	x := &Platform{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *Platform) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *Platform) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Platform) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewPlatform creates a new Platform.

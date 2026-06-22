@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The context of an attempt to send changes to the server.
-//
 // SyncEngineSendChangesContext is an idiomatic wrapper over the Objective-C class CKSyncEngineSendChangesContext.
+//
+// The context of an attempt to send changes to the server.
 type SyncEngineSendChangesContext struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SyncEngineSendChangesContextFromID(id objc.ID) *SyncEngineSendChangesContex
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineSendChangesContext{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SyncEngineSendChangesContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func syncEngineSendChangesContextAdopt(id objc.ID) *SyncEngineSendChangesContext
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineSendChangesContext{Handle: objref.Wrap(id)}
+	x := &SyncEngineSendChangesContext{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *SyncEngineSendChangesContext) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncEngineSendChangesContext) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSyncEngineSendChangesContext creates a new SyncEngineSendChangesContext.
 func NewSyncEngineSendChangesContext() *SyncEngineSendChangesContext {
 	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineSendChangesContext")), objc.RegisterName("new"))
 	return syncEngineSendChangesContextAdopt(_id)
 }
 
-// The reason for the send operation.
+// Reason the reason for the send operation.
 func (x *SyncEngineSendChangesContext) Reason() SyncEngineSyncReason {
 	_r := objc.Send[SyncEngineSyncReason](objref.IDOf(x), objc.RegisterName("reason"))
 	return _r
 }
 
-// The additional options for the send operation.
+// Options the additional options for the send operation.
 func (x *SyncEngineSendChangesContext) Options() *SyncEngineSendChangesOptions {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
 	return SyncEngineSendChangesOptionsFromID(_r)

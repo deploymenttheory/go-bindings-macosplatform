@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A training graph that you create from one or more graph objects plus additional layers you add directly to the training graph.
-//
 // TrainingGraph is an idiomatic wrapper over the Objective-C class MLCTrainingGraph.
+//
+// It embeds [Graph], promoting that type's methods.
+//
+// A training graph that you create from one or more graph objects plus additional layers you add directly to the training graph.
 type TrainingGraph struct {
-	objref.Handle
+	Graph
 }
 
 // TrainingGraphFromID adopts an existing Objective-C object as a TrainingGraph
@@ -25,7 +26,8 @@ func TrainingGraphFromID(id objc.ID) *TrainingGraph {
 	if id == 0 {
 		return nil
 	}
-	x := &TrainingGraph{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TrainingGraph{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func trainingGraphAdopt(id objc.ID) *TrainingGraph {
 	if id == 0 {
 		return nil
 	}
-	x := &TrainingGraph{Handle: objref.Wrap(id)}
+	x := &TrainingGraph{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *TrainingGraph) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TrainingGraph) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TrainingGraph) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewTrainingGraph creates a new TrainingGraph.
@@ -64,108 +52,108 @@ func NewTrainingGraph() *TrainingGraph {
 	return trainingGraphAdopt(_id)
 }
 
-// Adds the inputs and loss label inputs that you specify to the training graph.
+// AddInputsLossLabels adds the inputs and loss label inputs that you specify to the training graph.
 func (x *TrainingGraph) AddInputsLossLabels(inputs obj.Object, lossLabels obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addInputs:lossLabels:"), objref.IDOf(inputs), objref.IDOf(lossLabels))
 	return _r
 }
 
-// Adds the inputs, loss labels, and loss label weights that you specify to the training graph.
+// AddInputsLossLabelsLossLabelWeights adds the inputs, loss labels, and loss label weights that you specify to the training graph.
 func (x *TrainingGraph) AddInputsLossLabelsLossLabelWeights(inputs obj.Object, lossLabels obj.Object, lossLabelWeights obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addInputs:lossLabels:lossLabelWeights:"), objref.IDOf(inputs), objref.IDOf(lossLabels), objref.IDOf(lossLabelWeights))
 	return _r
 }
 
-// Adds the outputs to the training graph you specify.
+// AddOutputs adds the outputs to the training graph you specify.
 func (x *TrainingGraph) AddOutputs(outputs obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addOutputs:"), objref.IDOf(outputs))
 	return _r
 }
 
-// Adds the tensors that you specify, to indicate which contributions the graph excludes when computing gradients during gradient pass.
+// StopGradientForTensors adds the tensors that you specify, to indicate which contributions the graph excludes when computing gradients during gradient pass.
 func (x *TrainingGraph) StopGradientForTensors(tensors []*Tensor) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("stopGradientForTensors:"), purego.SliceToNSArray(tensors, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
-// Compiles the training graph for the options and device you specify.
+// CompileWithOptionsDevice compiles the training graph for the options and device you specify.
 func (x *TrainingGraph) CompileWithOptionsDevice(options GraphCompilationOptions, device *Device) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("compileWithOptions:device:"), options, objref.IDOf(device))
 	return _r
 }
 
-// Compiles the training graph for the options, device, and input tensors you specify.
+// CompileWithOptionsDeviceInputTensorsInputTensorsData compiles the training graph for the options, device, and input tensors you specify.
 func (x *TrainingGraph) CompileWithOptionsDeviceInputTensorsInputTensorsData(options GraphCompilationOptions, device *Device, inputTensors obj.Object, inputTensorsData obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("compileWithOptions:device:inputTensors:inputTensorsData:"), options, objref.IDOf(device), objref.IDOf(inputTensors), objref.IDOf(inputTensorsData))
 	return _r
 }
 
-// Compiles the optimizer to use with a training graph you specify.
+// CompileOptimizer compiles the optimizer to use with a training graph you specify.
 func (x *TrainingGraph) CompileOptimizer(optimizer *Optimizer) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("compileOptimizer:"), objref.IDOf(optimizer))
 	return _r
 }
 
-// Links the training graphs you specify.
+// LinkWithGraphs links the training graphs you specify.
 func (x *TrainingGraph) LinkWithGraphs(graphs []*TrainingGraph) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("linkWithGraphs:"), purego.SliceToNSArray(graphs, func(_v *TrainingGraph) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
-// Gets the gradient tensor for the input tensor you specify.
+// GradientTensorForInput gets the gradient tensor for the input tensor you specify.
 func (x *TrainingGraph) GradientTensorForInput(input *Tensor) *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientTensorForInput:"), objref.IDOf(input))
 	return TensorFromID(_r)
 }
 
-// Gets the source gradient tensors for the layer in the training graph you specify.
+// SourceGradientTensorsForLayer gets the source gradient tensors for the layer in the training graph you specify.
 func (x *TrainingGraph) SourceGradientTensorsForLayer(layer *Layer) []*Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceGradientTensorsForLayer:"), objref.IDOf(layer))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
-// Gets the result gradient tensors for the layer in the training graph you specify.
+// ResultGradientTensorsForLayer gets the result gradient tensors for the layer in the training graph you specify.
 func (x *TrainingGraph) ResultGradientTensorsForLayer(layer *Layer) []*Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultGradientTensorsForLayer:"), objref.IDOf(layer))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
-// Gets the gradient data for the trainable parameter and associated layer you specify.
+// GradientDataForParameterLayer gets the gradient data for the trainable parameter and associated layer you specify.
 func (x *TrainingGraph) GradientDataForParameterLayer(parameter *Tensor, layer *Layer) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientDataForParameter:layer:"), objref.IDOf(parameter), objref.IDOf(layer))
 	return obj.Wrap(_r)
 }
 
-// Allocates an entry for a gradient for the result tensor you specify.
+// AllocateUserGradientForTensor allocates an entry for a gradient for the result tensor you specify.
 func (x *TrainingGraph) AllocateUserGradientForTensor(tensor *Tensor) *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allocateUserGradientForTensor:"), objref.IDOf(tensor))
 	return TensorFromID(_r)
 }
 
-// Synchronizes updates from device memory.
+// SynchronizeUpdates synchronizes updates from device memory.
 func (x *TrainingGraph) SynchronizeUpdates() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("synchronizeUpdates"))
 }
 
-// Sets the input tensor parameters, which the optimizer then updates.
+// SetTrainingTensorParameters sets the input tensor parameters, which the optimizer then updates.
 func (x *TrainingGraph) SetTrainingTensorParameters(parameters []*TensorParameter) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setTrainingTensorParameters:"), purego.SliceToNSArray(parameters, func(_v *TensorParameter) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
-// Associates the optimizer and device data you specify along with the tensor.
+// BindOptimizerDataDeviceDataWithTensor associates the optimizer and device data you specify along with the tensor.
 func (x *TrainingGraph) BindOptimizerDataDeviceDataWithTensor(data []*TensorData, deviceData []*TensorOptimizerDeviceData, tensor *Tensor) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bindOptimizerData:deviceData:withTensor:"), purego.SliceToNSArray(data, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(deviceData, func(_v *TensorOptimizerDeviceData) objc.ID { return objref.IDOf(_v) }), objref.IDOf(tensor))
 	return _r
 }
 
-// The optimizer to be used with the training graph
+// Optimizer the optimizer to be used with the training graph
 func (x *TrainingGraph) Optimizer() *Optimizer {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optimizer"))
 	return OptimizerFromID(_r)
 }
 
-// Returns the total size in bytes of device memory used for all intermediate tensors for forward, gradient passes and optimizer update for all layers in the training graph. We recommend executing an iteration before checking the device memory size as the buffers needed get allocated when the corresponding pass such as gradient, optimizer update is executed.
+// DeviceMemorySize returns the total size in bytes of device memory used for all intermediate tensors for forward, gradient passes and optimizer update for all layers in the training graph. We recommend executing an iteration before checking the device memory size as the buffers needed get allocated when the corresponding pass such as gradient, optimizer update is executed.
 func (x *TrainingGraph) DeviceMemorySize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("deviceMemorySize"))
 	return _r
@@ -195,3 +183,5 @@ type TrainingGraphable interface {
 }
 
 var _ TrainingGraphable = (*TrainingGraph)(nil)
+
+var _ GraphProvider = (*TrainingGraph)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An action that accepts user-typed text.
-//
 // TextInputNotificationAction is an idiomatic wrapper over the Objective-C class UNTextInputNotificationAction.
+//
+// It embeds [NotificationAction], promoting that type's methods.
+//
+// An action that accepts user-typed text.
 type TextInputNotificationAction struct {
-	objref.Handle
+	NotificationAction
 }
 
 // TextInputNotificationActionFromID adopts an existing Objective-C object as a TextInputNotificationAction
@@ -25,7 +26,8 @@ func TextInputNotificationActionFromID(id objc.ID) *TextInputNotificationAction 
 	if id == 0 {
 		return nil
 	}
-	x := &TextInputNotificationAction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextInputNotificationAction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func textInputNotificationActionAdopt(id objc.ID) *TextInputNotificationAction {
 	if id == 0 {
 		return nil
 	}
-	x := &TextInputNotificationAction{Handle: objref.Wrap(id)}
+	x := &TextInputNotificationAction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *TextInputNotificationAction) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextInputNotificationAction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextInputNotificationAction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewTextInputNotificationAction creates a new TextInputNotificationAction.
@@ -64,6 +52,7 @@ func NewTextInputNotificationAction() *TextInputNotificationAction {
 	return textInputNotificationActionAdopt(_id)
 }
 
+// TextInputButtonTitle wraps the corresponding Objective-C method.
 func (x *TextInputNotificationAction) TextInputButtonTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textInputButtonTitle"))
 	if _r == 0 {
@@ -72,6 +61,7 @@ func (x *TextInputNotificationAction) TextInputButtonTitle() string {
 	return purego.GoString(_r)
 }
 
+// TextInputPlaceholder wraps the corresponding Objective-C method.
 func (x *TextInputNotificationAction) TextInputPlaceholder() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textInputPlaceholder"))
 	if _r == 0 {
@@ -88,3 +78,5 @@ type TextInputNotificationActionable interface {
 }
 
 var _ TextInputNotificationActionable = (*TextInputNotificationAction)(nil)
+
+var _ NotificationActionProvider = (*TextInputNotificationAction)(nil)

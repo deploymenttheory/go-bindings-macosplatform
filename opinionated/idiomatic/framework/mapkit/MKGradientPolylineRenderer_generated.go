@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A visual representation of any polyline overlay object with a gradient.
-//
 // GradientPolylineRenderer is an idiomatic wrapper over the Objective-C class MKGradientPolylineRenderer.
+//
+// It embeds [PolylineRenderer], promoting that type's methods.
+//
+// A visual representation of any polyline overlay object with a gradient.
 type GradientPolylineRenderer struct {
-	objref.Handle
+	PolylineRenderer
 }
 
 // GradientPolylineRendererFromID adopts an existing Objective-C object as a GradientPolylineRenderer
@@ -25,7 +26,8 @@ func GradientPolylineRendererFromID(id objc.ID) *GradientPolylineRenderer {
 	if id == 0 {
 		return nil
 	}
-	x := &GradientPolylineRenderer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GradientPolylineRenderer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func gradientPolylineRendererAdopt(id objc.ID) *GradientPolylineRenderer {
 	if id == 0 {
 		return nil
 	}
-	x := &GradientPolylineRenderer{Handle: objref.Wrap(id)}
+	x := &GradientPolylineRenderer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GradientPolylineRenderer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GradientPolylineRenderer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GradientPolylineRenderer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGradientPolylineRenderer creates a new GradientPolylineRenderer.
@@ -64,106 +52,88 @@ func NewGradientPolylineRenderer() *GradientPolylineRenderer {
 	return gradientPolylineRendererAdopt(_id)
 }
 
-// The unit distance along the line where the stroke starts.
-//
-// WithStrokeStart sets strokeStart and returns the receiver so calls can be chained.
+// WithStrokeStart the unit distance along the line where the stroke starts.
 func (x *GradientPolylineRenderer) WithStrokeStart(strokeStart float64) *GradientPolylineRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeStart:"), strokeStart)
 	return x
 }
 
-// The unit distance along the line where the stroke ends.
-//
-// WithStrokeEnd sets strokeEnd and returns the receiver so calls can be chained.
+// WithStrokeEnd the unit distance along the line where the stroke ends.
 func (x *GradientPolylineRenderer) WithStrokeEnd(strokeEnd float64) *GradientPolylineRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeEnd:"), strokeEnd)
 	return x
 }
 
-// The fill color to use for the path.
-//
-// WithFillColor sets fillColor and returns the receiver so calls can be chained.
+// WithFillColor the fill color to use for the path.
 func (x *GradientPolylineRenderer) WithFillColor(fillColor obj.Object) *GradientPolylineRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 	return x
 }
 
-// The stroke color to use for the path.
-//
-// WithStrokeColor sets strokeColor and returns the receiver so calls can be chained.
+// WithStrokeColor the stroke color to use for the path.
 func (x *GradientPolylineRenderer) WithStrokeColor(strokeColor obj.Object) *GradientPolylineRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
 	return x
 }
 
-// The stroke width to use for the path.
-//
-// WithLineWidth sets lineWidth and returns the receiver so calls can be chained.
+// WithLineWidth the stroke width to use for the path.
 func (x *GradientPolylineRenderer) WithLineWidth(lineWidth float64) *GradientPolylineRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
 	return x
 }
 
-// The limiting value that helps avoid spikes at junctions between connected line segments.
-//
-// WithMiterLimit sets miterLimit and returns the receiver so calls can be chained.
+// WithMiterLimit the limiting value that helps avoid spikes at junctions between connected line segments.
 func (x *GradientPolylineRenderer) WithMiterLimit(miterLimit float64) *GradientPolylineRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
 	return x
 }
 
-// The offset (in points) at which to start drawing the dash pattern.
-//
-// WithLineDashPhase sets lineDashPhase and returns the receiver so calls can be chained.
+// WithLineDashPhase the offset (in points) at which to start drawing the dash pattern.
 func (x *GradientPolylineRenderer) WithLineDashPhase(lineDashPhase float64) *GradientPolylineRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
 	return x
 }
 
-// An array of numbers specifying the dash pattern to use for the path.
-//
-// WithLineDashPattern sets the collection and returns the receiver so calls can be chained.
+// WithLineDashPattern an array of numbers specifying the dash pattern to use for the path.
 func (x *GradientPolylineRenderer) WithLineDashPattern(items ...obj.Object) *GradientPolylineRenderer {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPattern:"), _arr)
 	return x
 }
 
-// A Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
-//
-// WithShouldRasterize sets shouldRasterize and returns the receiver so calls can be chained.
+// WithShouldRasterize a Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
 func (x *GradientPolylineRenderer) WithShouldRasterize(shouldRasterize bool) *GradientPolylineRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
 	return x
 }
 
-// The path representing the overlay’s shape.
-//
-// WithPath sets path and returns the receiver so calls can be chained.
+// WithPath the path representing the overlay’s shape.
 func (x *GradientPolylineRenderer) WithPath(path obj.Object) *GradientPolylineRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
 	return x
 }
 
-// The amount of transparency to apply to the overlay.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the amount of transparency to apply to the overlay.
 func (x *GradientPolylineRenderer) WithAlpha(alpha float64) *GradientPolylineRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// Sets the colors and corresponding unit distance values to create gradients.
+// SetColorsAtLocations sets the colors and corresponding unit distance values to create gradients.
 func (x *GradientPolylineRenderer) SetColorsAtLocations(colors []obj.Object, locations []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColors:atLocations:"), purego.SliceToNSArray(colors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(locations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// Locations wraps the corresponding Objective-C method.
+//
 // Locations returns the collection as a Go slice.
 func (x *GradientPolylineRenderer) Locations() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// Colors wraps the corresponding Objective-C method.
+//
 // Colors returns the collection as a Go slice.
 func (x *GradientPolylineRenderer) Colors() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colors"))
@@ -190,3 +160,9 @@ type GradientPolylineRendererable interface {
 }
 
 var _ GradientPolylineRendererable = (*GradientPolylineRenderer)(nil)
+
+var _ PolylineRendererProvider = (*GradientPolylineRenderer)(nil)
+
+var _ OverlayPathRendererProvider = (*GradientPolylineRenderer)(nil)
+
+var _ OverlayRendererProvider = (*GradientPolylineRenderer)(nil)

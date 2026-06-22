@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An interface for apps and daemons to interact with FSKit.
-//
 // Client is an idiomatic wrapper over the Objective-C class FSClient.
+//
+// An interface for apps and daemons to interact with FSKit.
 type Client struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func ClientFromID(id objc.ID) *Client {
 	if id == 0 {
 		return nil
 	}
-	x := &Client{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Client{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func clientAdopt(id objc.ID) *Client {
 	if id == 0 {
 		return nil
 	}
-	x := &Client{Handle: objref.Wrap(id)}
+	x := &Client{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,22 @@ func (x *Client) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Client) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewClient creates a new Client.
 func NewClient() *Client {
 	_id := objc.Send[objc.ID](objc.ID(_class("FSClient")), objc.RegisterName("new"))
 	return clientAdopt(_id)
 }
 
-// Asynchronously retrieves an list of installed file system modules.
+// FetchInstalledExtensions asynchronously retrieves an list of installed file system modules.
 //
 // FetchInstalledExtensions blocks until the operation completes or ctx is cancelled.
-func (x *Client) FetchInstalledExtensions(ctx context.Context) (obj.Object, error) {
+func (x *Client) FetchInstalledExtensions(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error

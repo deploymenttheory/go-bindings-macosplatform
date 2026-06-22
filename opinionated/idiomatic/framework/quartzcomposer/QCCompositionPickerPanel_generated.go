@@ -23,7 +23,8 @@ func CompositionPickerPanelFromID(id objc.ID) *CompositionPickerPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &CompositionPickerPanel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CompositionPickerPanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func compositionPickerPanelAdopt(id objc.ID) *CompositionPickerPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &CompositionPickerPanel{Handle: objref.Wrap(id)}
+	x := &CompositionPickerPanel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,12 +58,19 @@ func (x *CompositionPickerPanel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CompositionPickerPanel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCompositionPickerPanel creates a new CompositionPickerPanel.
 func NewCompositionPickerPanel() *CompositionPickerPanel {
 	_id := objc.Send[objc.ID](objc.ID(_class("QCCompositionPickerPanel")), objc.RegisterName("new"))
 	return compositionPickerPanelAdopt(_id)
 }
 
+// CompositionPickerView wraps the corresponding Objective-C method.
 func (x *CompositionPickerPanel) CompositionPickerView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositionPickerView"))
 	return obj.Wrap(_r)

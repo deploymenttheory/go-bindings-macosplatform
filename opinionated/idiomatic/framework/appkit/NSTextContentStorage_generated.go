@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A concrete object for managing your view’s text content and generating the text elements necessary for layout.
-//
 // TextContentStorage is an idiomatic wrapper over the Objective-C class NSTextContentStorage.
+//
+// It embeds [TextContentManager], promoting that type's methods.
+//
+// A concrete object for managing your view’s text content and generating the text elements necessary for layout.
 type TextContentStorage struct {
-	objref.Handle
+	TextContentManager
 }
 
 // TextContentStorageFromID adopts an existing Objective-C object as a TextContentStorage
@@ -25,7 +26,8 @@ func TextContentStorageFromID(id objc.ID) *TextContentStorage {
 	if id == 0 {
 		return nil
 	}
-	x := &TextContentStorage{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextContentStorage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func textContentStorageAdopt(id objc.ID) *TextContentStorage {
 	if id == 0 {
 		return nil
 	}
-	x := &TextContentStorage{Handle: objref.Wrap(id)}
+	x := &TextContentStorage{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *TextContentStorage) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextContentStorage) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextContentStorage) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewTextContentStorage creates a new TextContentStorage.
@@ -64,76 +52,72 @@ func NewTextContentStorage() *TextContentStorage {
 	return textContentStorageAdopt(_id)
 }
 
-// WithIncludesTextListMarkers sets includesTextListMarkers and returns the receiver so calls can be chained.
+// WithIncludesTextListMarkers sets the property and returns the receiver so calls can be chained.
 func (x *TextContentStorage) WithIncludesTextListMarkers(includesTextListMarkers bool) *TextContentStorage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesTextListMarkers:"), includesTextListMarkers)
 	return x
 }
 
-// An attributed string that contains the contents of the document.
-//
-// WithAttributedString sets attributedString and returns the receiver so calls can be chained.
+// WithAttributedString an attributed string that contains the contents of the document.
 func (x *TextContentStorage) WithAttributedString(attributedString obj.Object) *TextContentStorage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedString:"), objref.IDOf(attributedString))
 	return x
 }
 
-// The primary text layout manager for this content.
-//
-// WithPrimaryTextLayoutManager sets primaryTextLayoutManager and returns the receiver so calls can be chained.
+// WithPrimaryTextLayoutManager the primary text layout manager for this content.
 func (x *TextContentStorage) WithPrimaryTextLayoutManager(primaryTextLayoutManager *TextLayoutManager) *TextContentStorage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryTextLayoutManager:"), objref.IDOf(primaryTextLayoutManager))
 	return x
 }
 
-// Determines if the framework should automatically synchronize all text layout managers when exiting an editing transaction.
-//
-// WithAutomaticallySynchronizesTextLayoutManagers sets automaticallySynchronizesTextLayoutManagers and returns the receiver so calls can be chained.
+// WithAutomaticallySynchronizesTextLayoutManagers determines if the framework should automatically synchronize all text layout managers when exiting an editing transaction.
 func (x *TextContentStorage) WithAutomaticallySynchronizesTextLayoutManagers(automaticallySynchronizesTextLayoutManagers bool) *TextContentStorage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallySynchronizesTextLayoutManagers:"), automaticallySynchronizesTextLayoutManagers)
 	return x
 }
 
-// Determines whether to automatically synchronize with the backing store when an editing transaction finishes.
-//
-// WithAutomaticallySynchronizesToBackingStore sets automaticallySynchronizesToBackingStore and returns the receiver so calls can be chained.
+// WithAutomaticallySynchronizesToBackingStore determines whether to automatically synchronize with the backing store when an editing transaction finishes.
 func (x *TextContentStorage) WithAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore bool) *TextContentStorage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallySynchronizesToBackingStore:"), automaticallySynchronizesToBackingStore)
 	return x
 }
 
-// Returns a new attributed string for the text element.
+// AttributedStringForTextElement returns a new attributed string for the text element.
 func (x *TextContentStorage) AttributedStringForTextElement(textElement *TextElement) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedStringForTextElement:"), objref.IDOf(textElement))
 	return obj.Wrap(_r)
 }
 
-// Returns the text element corresponding to object’s attributed string.
+// TextElementForAttributedString returns the text element corresponding to object’s attributed string.
 func (x *TextContentStorage) TextElementForAttributedString(attributedString obj.Object) *TextElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textElementForAttributedString:"), objref.IDOf(attributedString))
 	return TextElementFromID(_r)
 }
 
-// Returns the text range, if any, in the backing store that required manual adjustment after editing.
+// AdjustedRangeFromRangeForEditingTextSelection returns the text range, if any, in the backing store that required manual adjustment after editing.
 func (x *TextContentStorage) AdjustedRangeFromRangeForEditingTextSelection(textRange *TextRange, forEditingTextSelection bool) *TextRange {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adjustedRangeFromRange:forEditingTextSelection:"), objref.IDOf(textRange), forEditingTextSelection)
 	return TextRangeFromID(_r)
 }
 
+// IncludesTextListMarkers wraps the corresponding Objective-C method.
 func (x *TextContentStorage) IncludesTextListMarkers() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesTextListMarkers"))
 	return _r
 }
 
+// SetIncludesTextListMarkers wraps the corresponding Objective-C method.
 func (x *TextContentStorage) SetIncludesTextListMarkers(includesTextListMarkers bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesTextListMarkers:"), includesTextListMarkers)
 }
 
+// AttributedString wraps the corresponding Objective-C method.
 func (x *TextContentStorage) AttributedString() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedString"))
 	return obj.Wrap(_r)
 }
 
+// SetAttributedString wraps the corresponding Objective-C method.
 func (x *TextContentStorage) SetAttributedString(attributedString obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedString:"), objref.IDOf(attributedString))
 }
@@ -156,3 +140,5 @@ type TextContentStorageable interface {
 }
 
 var _ TextContentStorageable = (*TextContentStorage)(nil)
+
+var _ TextContentManagerProvider = (*TextContentStorage)(nil)

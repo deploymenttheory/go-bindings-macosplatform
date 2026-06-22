@@ -6,15 +6,18 @@ package photosui
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The superclass for all element objects.
-//
 // ProjectElement is an idiomatic wrapper over the Objective-C class PHProjectElement.
+//
+// ProjectElement is an abstract base — you do not construct it directly. Construct one of [ProjectAssetElement], [ProjectJournalEntryElement], [ProjectMapElement], [ProjectTextElement] and pass it where a ProjectElement is accepted.
+//
+// The superclass for all element objects.
 type ProjectElement struct {
 	objref.Handle
 }
@@ -25,7 +28,8 @@ func ProjectElementFromID(id objc.ID) *ProjectElement {
 	if id == 0 {
 		return nil
 	}
-	x := &ProjectElement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ProjectElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +42,8 @@ func projectElementAdopt(id objc.ID) *ProjectElement {
 	if id == 0 {
 		return nil
 	}
-	x := &ProjectElement{Handle: objref.Wrap(id)}
+	x := &ProjectElement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +63,21 @@ func (x *ProjectElement) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewProjectElement creates a new ProjectElement.
-func NewProjectElement() *ProjectElement {
-	_id := objc.Send[objc.ID](objc.ID(_class("PHProjectElement")), objc.RegisterName("new"))
-	return projectElementAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ProjectElement) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Relative significance of any element in the section content is defined by it's weight. Values range from 0.0 to 1.0 where the higher numbers represent higher overall significance. Projects that allow a user to reduce the number of elements in any section content can use this hint to determine which elements are most important to keep in order to preserve context. Default is 0.5.
+// Weight relative significance of any element in the section content is defined by it's weight. Values range from 0.0 to 1.0 where the higher numbers represent higher overall significance. Projects that allow a user to reduce the number of elements in any section content can use this hint to determine which elements are most important to keep in order to preserve context. Default is 0.5.
 func (x *ProjectElement) Weight() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("weight"))
+	return _r
+}
+
+// Placement placement of elements in the suggested layout is provided in grid space coordinates. For example, a rect of (0,0,3,4) represents a placement in the upper-left of the layout grid that is 3 grid units wide by 4 grid units high. For layout grids with more than one column, the values in the rect will always be integral. For fixed layouts, rect values will be in fractional unit values. If suggested placement could not be determined at time of project creation, placement will contain CGRectNull.
+func (x *ProjectElement) Placement() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("placement"))
 	return _r
 }
 
@@ -74,6 +85,14 @@ func (x *ProjectElement) Weight() float64 {
 type ProjectElementable interface {
 	obj.Object
 	Weight() float64
+	Placement() corefoundation.CGRect
 }
 
 var _ ProjectElementable = (*ProjectElement)(nil)
+
+// isProjectElement marks ProjectElement — and, by embedding promotion, its
+// subclasses — as a member of the ProjectElement hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ProjectElement) isProjectElement() {}
+
+var _ ProjectElementProvider = (*ProjectElement)(nil)

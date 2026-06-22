@@ -23,7 +23,8 @@ func MTRSwitchClusterShortReleaseEventFromID(id objc.ID) *MTRSwitchClusterShortR
 	if id == 0 {
 		return nil
 	}
-	x := &MTRSwitchClusterShortReleaseEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRSwitchClusterShortReleaseEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRSwitchClusterShortReleaseEventAdopt(id objc.ID) *MTRSwitchClusterShortRe
 	if id == 0 {
 		return nil
 	}
-	x := &MTRSwitchClusterShortReleaseEvent{Handle: objref.Wrap(id)}
+	x := &MTRSwitchClusterShortReleaseEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTRSwitchClusterShortReleaseEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRSwitchClusterShortReleaseEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRSwitchClusterShortReleaseEvent creates a new MTRSwitchClusterShortReleaseEvent.
 func NewMTRSwitchClusterShortReleaseEvent() *MTRSwitchClusterShortReleaseEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRSwitchClusterShortReleaseEvent")), objc.RegisterName("new"))
 	return mTRSwitchClusterShortReleaseEventAdopt(_id)
 }
 
-// WithPreviousPosition sets previousPosition and returns the receiver so calls can be chained.
+// WithPreviousPosition sets the property and returns the receiver so calls can be chained.
 func (x *MTRSwitchClusterShortReleaseEvent) WithPreviousPosition(previousPosition obj.Object) *MTRSwitchClusterShortReleaseEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousPosition:"), objref.IDOf(previousPosition))
 	return x
 }
 
+// PreviousPosition wraps the corresponding Objective-C method.
 func (x *MTRSwitchClusterShortReleaseEvent) PreviousPosition() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousPosition"))
 	return obj.Wrap(_r)
 }
 
+// SetPreviousPosition wraps the corresponding Objective-C method.
 func (x *MTRSwitchClusterShortReleaseEvent) SetPreviousPosition(previousPosition obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousPosition:"), objref.IDOf(previousPosition))
 }

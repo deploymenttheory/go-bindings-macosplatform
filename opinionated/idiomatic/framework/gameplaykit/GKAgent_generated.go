@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A component that moves a game entity according to a set of goals and realistic constraints.
-//
 // Agent is an idiomatic wrapper over the Objective-C class GKAgent.
+//
+// Agent is an abstract base — you do not construct it directly. Construct one of [Agent2D], [Agent3D] and pass it where a Agent is accepted.
+//
+// A component that moves a game entity according to a set of goals and realistic constraints.
 type Agent struct {
-	objref.Handle
+	Component
 }
 
 // AgentFromID adopts an existing Objective-C object as a Agent
@@ -25,7 +26,8 @@ func AgentFromID(id objc.ID) *Agent {
 	if id == 0 {
 		return nil
 	}
-	x := &Agent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Agent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,136 +40,110 @@ func agentAdopt(id objc.ID) *Agent {
 	if id == 0 {
 		return nil
 	}
-	x := &Agent{Handle: objref.Wrap(id)}
+	x := &Agent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *Agent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Agent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Agent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewAgent creates a new Agent.
-func NewAgent() *Agent {
-	_id := objc.Send[objc.ID](objc.ID(_class("GKAgent")), objc.RegisterName("new"))
-	return agentAdopt(_id)
-}
-
-// A weighted collection of goals that influence the agent’s movement.
-//
-// WithBehavior sets behavior and returns the receiver so calls can be chained.
+// WithBehavior a weighted collection of goals that influence the agent’s movement.
 func (x *Agent) WithBehavior(behavior BehaviorProvider) *Agent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBehavior:"), objref.IDOf(behavior))
 	return x
 }
 
-// The resistance of the agent to changes in speed or direction.
-//
-// WithMass sets mass and returns the receiver so calls can be chained.
+// WithMass the resistance of the agent to changes in speed or direction.
 func (x *Agent) WithMass(mass float32) *Agent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMass:"), mass)
 	return x
 }
 
-// The agent’s radius.
-//
-// WithRadius sets radius and returns the receiver so calls can be chained.
+// WithRadius the agent’s radius.
 func (x *Agent) WithRadius(radius float32) *Agent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 	return x
 }
 
-// The agent’s current forward speed, in units per second.
-//
-// WithSpeed sets speed and returns the receiver so calls can be chained.
+// WithSpeed the agent’s current forward speed, in units per second.
 func (x *Agent) WithSpeed(speed float32) *Agent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
-// The upper limit to changes in the agent’s speed or direction.
-//
-// WithMaxAcceleration sets maxAcceleration and returns the receiver so calls can be chained.
+// WithMaxAcceleration the upper limit to changes in the agent’s speed or direction.
 func (x *Agent) WithMaxAcceleration(maxAcceleration float32) *Agent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxAcceleration:"), maxAcceleration)
 	return x
 }
 
-// The agent’s maximum forward speed, in units per second.
-//
-// WithMaxSpeed sets maxSpeed and returns the receiver so calls can be chained.
+// WithMaxSpeed the agent’s maximum forward speed, in units per second.
 func (x *Agent) WithMaxSpeed(maxSpeed float32) *Agent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSpeed:"), maxSpeed)
 	return x
 }
 
-// The behavior to apply when updateWithDeltaTime is called. All forces from the goals in the behavior are summed and then applied.
+// Behavior the behavior to apply when updateWithDeltaTime is called. All forces from the goals in the behavior are summed and then applied.
 func (x *Agent) Behavior() *Behavior {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("behavior"))
 	return BehaviorFromID(_r)
 }
 
+// SetBehavior wraps the corresponding Objective-C method.
 func (x *Agent) SetBehavior(behavior *Behavior) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBehavior:"), objref.IDOf(behavior))
 }
 
-// Agent's mass. Used for agent impulse application purposes. Defaults to 1.0
+// Mass agent's mass. Used for agent impulse application purposes. Defaults to 1.0
 func (x *Agent) Mass() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("mass"))
 	return _r
 }
 
+// SetMass wraps the corresponding Objective-C method.
 func (x *Agent) SetMass(mass float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMass:"), mass)
 }
 
-// Radius of the agent's bounding circle.  Used by the agent avoid steering functions. Defaults to 0.5 for a canonical diameter of 1.0
+// Radius radius of the agent's bounding circle.  Used by the agent avoid steering functions. Defaults to 0.5 for a canonical diameter of 1.0
 func (x *Agent) Radius() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("radius"))
 	return _r
 }
 
+// SetRadius wraps the corresponding Objective-C method.
 func (x *Agent) SetRadius(radius float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 }
 
-// Current speed of the agent along its foward direction. Defaults to 0.0
+// Speed current speed of the agent along its foward direction. Defaults to 0.0
 func (x *Agent) Speed() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("speed"))
 	return _r
 }
 
+// SetSpeed wraps the corresponding Objective-C method.
 func (x *Agent) SetSpeed(speed float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 }
 
-// Maximum amount of acceleration that can be applied to this agent.  All applied impulses are clipped to this amount. Defaults to 1.0
+// MaxAcceleration maximum amount of acceleration that can be applied to this agent.  All applied impulses are clipped to this amount. Defaults to 1.0
 func (x *Agent) MaxAcceleration() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maxAcceleration"))
 	return _r
 }
 
+// SetMaxAcceleration wraps the corresponding Objective-C method.
 func (x *Agent) SetMaxAcceleration(maxAcceleration float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxAcceleration:"), maxAcceleration)
 }
 
-// Maximum speed of this agent. Impulses cannot cause the agents speed to ever be greater than this value. Defaults to 1.0
+// MaxSpeed maximum speed of this agent. Impulses cannot cause the agents speed to ever be greater than this value. Defaults to 1.0
 func (x *Agent) MaxSpeed() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maxSpeed"))
 	return _r
 }
 
+// SetMaxSpeed wraps the corresponding Objective-C method.
 func (x *Agent) SetMaxSpeed(maxSpeed float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSpeed:"), maxSpeed)
 }
@@ -196,3 +172,12 @@ type Agentable interface {
 }
 
 var _ Agentable = (*Agent)(nil)
+
+// isAgent marks Agent — and, by embedding promotion, its
+// subclasses — as a member of the Agent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Agent) isAgent() {}
+
+var _ AgentProvider = (*Agent)(nil)
+
+var _ ComponentProvider = (*Agent)(nil)

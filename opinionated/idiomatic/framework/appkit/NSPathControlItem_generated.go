@@ -23,7 +23,8 @@ func PathControlItemFromID(id objc.ID) *PathControlItem {
 	if id == 0 {
 		return nil
 	}
-	x := &PathControlItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PathControlItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func pathControlItemAdopt(id objc.ID) *PathControlItem {
 	if id == 0 {
 		return nil
 	}
-	x := &PathControlItem{Handle: objref.Wrap(id)}
+	x := &PathControlItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,30 +58,37 @@ func (x *PathControlItem) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PathControlItem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPathControlItem creates a new PathControlItem.
 func NewPathControlItem() *PathControlItem {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSPathControlItem")), objc.RegisterName("new"))
 	return pathControlItemAdopt(_id)
 }
 
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle sets the property and returns the receiver so calls can be chained.
 func (x *PathControlItem) WithTitle(title string) *PathControlItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// WithAttributedTitle sets attributedTitle and returns the receiver so calls can be chained.
+// WithAttributedTitle sets the property and returns the receiver so calls can be chained.
 func (x *PathControlItem) WithAttributedTitle(attributedTitle obj.Object) *PathControlItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	return x
 }
 
-// WithImage sets image and returns the receiver so calls can be chained.
+// WithImage sets the property and returns the receiver so calls can be chained.
 func (x *PathControlItem) WithImage(image *Image) *PathControlItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *PathControlItem) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -88,28 +97,34 @@ func (x *PathControlItem) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *PathControlItem) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
+// AttributedTitle wraps the corresponding Objective-C method.
 func (x *PathControlItem) AttributedTitle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedTitle"))
 	return obj.Wrap(_r)
 }
 
+// SetAttributedTitle wraps the corresponding Objective-C method.
 func (x *PathControlItem) SetAttributedTitle(attributedTitle obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 }
 
+// Image wraps the corresponding Objective-C method.
 func (x *PathControlItem) Image() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
+// SetImage wraps the corresponding Objective-C method.
 func (x *PathControlItem) SetImage(image *Image) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 }
 
+// URL wraps the corresponding Objective-C method.
 func (x *PathControlItem) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An Objective-C message rendered as an object.
-//
 // Invocation is an idiomatic wrapper over the Objective-C class NSInvocation.
+//
+// An Objective-C message rendered as an object.
 type Invocation struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func InvocationFromID(id objc.ID) *Invocation {
 	if id == 0 {
 		return nil
 	}
-	x := &Invocation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Invocation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func invocationAdopt(id objc.ID) *Invocation {
 	if id == 0 {
 		return nil
 	}
-	x := &Invocation{Handle: objref.Wrap(id)}
+	x := &Invocation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,56 +60,64 @@ func (x *Invocation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Invocation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewInvocation creates a new Invocation.
 func NewInvocation() *Invocation {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSInvocation")), objc.RegisterName("new"))
 	return invocationAdopt(_id)
 }
 
-// The receiver’s target, or nil if the receiver has no target.
-//
-// WithTarget sets target and returns the receiver so calls can be chained.
+// WithTarget the receiver’s target, or nil if the receiver has no target.
 func (x *Invocation) WithTarget(target obj.Object) *Invocation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Invocation) WithScriptingProperties(scriptingProperties obj.Object) *Invocation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// If the receiver hasn’t already done so, retains the target and all object arguments of the receiver and copies all of its C-string arguments and blocks. If a returnvalue has been set, this is also retained or copied.
+// RetainArguments if the receiver hasn’t already done so, retains the target and all object arguments of the receiver and copies all of its C-string arguments and blocks. If a returnvalue has been set, this is also retained or copied.
 func (x *Invocation) RetainArguments() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("retainArguments"))
 }
 
-// Sends the receiver’s message (with arguments) to its target and sets the return value.
+// Invoke sends the receiver’s message (with arguments) to its target and sets the return value.
 func (x *Invocation) Invoke() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invoke"))
 }
 
-// Sets the receiver’s target, sends the receiver’s message (with arguments) to that target, and sets the return value.
+// InvokeWithTarget sets the receiver’s target, sends the receiver’s message (with arguments) to that target, and sets the return value.
 func (x *Invocation) InvokeWithTarget(target obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invokeWithTarget:"), objref.IDOf(target))
 }
 
+// MethodSignature wraps the corresponding Objective-C method.
 func (x *Invocation) MethodSignature() *MethodSignature {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("methodSignature"))
 	return MethodSignatureFromID(_r)
 }
 
+// ArgumentsRetained wraps the corresponding Objective-C method.
 func (x *Invocation) ArgumentsRetained() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("argumentsRetained"))
 	return _r
 }
 
+// Target wraps the corresponding Objective-C method.
 func (x *Invocation) Target() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
 	return obj.Wrap(_r)
 }
 
+// SetTarget wraps the corresponding Objective-C method.
 func (x *Invocation) SetTarget(target obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 }

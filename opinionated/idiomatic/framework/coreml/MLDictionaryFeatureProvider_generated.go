@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// A convenience wrapper for the given dictionary of data.
-//
 // DictionaryFeatureProvider is an idiomatic wrapper over the Objective-C class MLDictionaryFeatureProvider.
+//
+// A convenience wrapper for the given dictionary of data.
 type DictionaryFeatureProvider struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func DictionaryFeatureProviderFromID(id objc.ID) *DictionaryFeatureProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &DictionaryFeatureProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DictionaryFeatureProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func dictionaryFeatureProviderAdopt(id objc.ID) *DictionaryFeatureProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &DictionaryFeatureProvider{Handle: objref.Wrap(id)}
+	x := &DictionaryFeatureProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,10 +62,14 @@ func (x *DictionaryFeatureProvider) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates the feature provider based on a dictionary.
-//
-// NewDictionaryFeatureProviderWithDictionaryError creates a new DictionaryFeatureProvider.
-func NewDictionaryFeatureProviderWithDictionaryError(dictionary obj.Object) (*DictionaryFeatureProvider, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DictionaryFeatureProvider) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDictionaryFeatureProviderWithDictionaryError creates the feature provider based on a dictionary.
+func NewDictionaryFeatureProviderWithDictionaryError(dictionary obj.Object) (result *DictionaryFeatureProvider, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MLDictionaryFeatureProvider")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:error:"), objref.IDOf(dictionary), unsafe.Pointer(&_nsErr))
@@ -73,13 +79,13 @@ func NewDictionaryFeatureProviderWithDictionaryError(dictionary obj.Object) (*Di
 	return dictionaryFeatureProviderAdopt(_id), nil
 }
 
-// Subscript interface for the feature provider to pass through to the dictionary.
+// ObjectForKeyedSubscript subscript interface for the feature provider to pass through to the dictionary.
 func (x *DictionaryFeatureProvider) ObjectForKeyedSubscript(featureName string) *FeatureValue {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKeyedSubscript:"), purego.NSString(featureName))
 	return FeatureValueFromID(_r)
 }
 
-// Dictionary holding the feature values
+// Dictionary dictionary holding the feature values
 func (x *DictionaryFeatureProvider) Dictionary() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionary"))
 	return obj.Wrap(_r)

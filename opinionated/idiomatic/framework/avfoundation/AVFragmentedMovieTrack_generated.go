@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a track in a fragmented movie.
-//
 // FragmentedMovieTrack is an idiomatic wrapper over the Objective-C class AVFragmentedMovieTrack.
+//
+// It embeds [MovieTrack], promoting that type's methods.
+//
+// An object that represents a track in a fragmented movie.
 type FragmentedMovieTrack struct {
-	objref.Handle
+	MovieTrack
 }
 
 // FragmentedMovieTrackFromID adopts an existing Objective-C object as a FragmentedMovieTrack
@@ -25,7 +26,8 @@ func FragmentedMovieTrackFromID(id objc.ID) *FragmentedMovieTrack {
 	if id == 0 {
 		return nil
 	}
-	x := &FragmentedMovieTrack{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FragmentedMovieTrack{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func fragmentedMovieTrackAdopt(id objc.ID) *FragmentedMovieTrack {
 	if id == 0 {
 		return nil
 	}
-	x := &FragmentedMovieTrack{Handle: objref.Wrap(id)}
+	x := &FragmentedMovieTrack{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *FragmentedMovieTrack) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FragmentedMovieTrack) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FragmentedMovieTrack) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewFragmentedMovieTrack creates a new FragmentedMovieTrack.
@@ -70,3 +58,7 @@ type FragmentedMovieTrackable interface {
 }
 
 var _ FragmentedMovieTrackable = (*FragmentedMovieTrack)(nil)
+
+var _ MovieTrackProvider = (*FragmentedMovieTrack)(nil)
+
+var _ AssetTrackProvider = (*FragmentedMovieTrack)(nil)

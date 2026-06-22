@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that directs the kernel to map space on disk to a specific file managed by this file system.
-//
 // ExtentPacker is an idiomatic wrapper over the Objective-C class FSExtentPacker.
+//
+// A type that directs the kernel to map space on disk to a specific file managed by this file system.
 type ExtentPacker struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ExtentPackerFromID(id objc.ID) *ExtentPacker {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtentPacker{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExtentPacker{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func extentPackerAdopt(id objc.ID) *ExtentPacker {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtentPacker{Handle: objref.Wrap(id)}
+	x := &ExtentPacker{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *ExtentPacker) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExtentPacker) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewExtentPacker creates a new ExtentPacker.
 func NewExtentPacker() *ExtentPacker {
 	_id := objc.Send[objc.ID](objc.ID(_class("FSExtentPacker")), objc.RegisterName("new"))
 	return extentPackerAdopt(_id)
 }
 
-// Packs a single extent to send to the kernel.
+// PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength packs a single extent to send to the kernel.
 func (x *ExtentPacker) PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength(resource *BlockDeviceResource, type_ ExtentType, logicalOffset int64, physicalOffset int64, length int) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("packExtentWithResource:type:logicalOffset:physicalOffset:length:"), objref.IDOf(resource), type_, logicalOffset, physicalOffset, length)
 	return _r

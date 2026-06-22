@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The state of a content blocker extension.
-//
 // ContentBlockerState is an idiomatic wrapper over the Objective-C class SFContentBlockerState.
+//
+// The state of a content blocker extension.
 type ContentBlockerState struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ContentBlockerStateFromID(id objc.ID) *ContentBlockerState {
 	if id == 0 {
 		return nil
 	}
-	x := &ContentBlockerState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContentBlockerState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func contentBlockerStateAdopt(id objc.ID) *ContentBlockerState {
 	if id == 0 {
 		return nil
 	}
-	x := &ContentBlockerState{Handle: objref.Wrap(id)}
+	x := &ContentBlockerState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *ContentBlockerState) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContentBlockerState) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewContentBlockerState creates a new ContentBlockerState.
 func NewContentBlockerState() *ContentBlockerState {
 	_id := objc.Send[objc.ID](objc.ID(_class("SFContentBlockerState")), objc.RegisterName("new"))
 	return contentBlockerStateAdopt(_id)
 }
 
+// IsEnabled wraps the corresponding Objective-C method.
 func (x *ContentBlockerState) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r

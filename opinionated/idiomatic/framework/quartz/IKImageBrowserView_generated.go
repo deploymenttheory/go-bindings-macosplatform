@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view for displaying and browsing a large collection of images and movies.
-//
 // IKImageBrowserView is an idiomatic wrapper over the Objective-C class IKImageBrowserView.
+//
+// A view for displaying and browsing a large collection of images and movies.
 type IKImageBrowserView struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func IKImageBrowserViewFromID(id objc.ID) *IKImageBrowserView {
 	if id == 0 {
 		return nil
 	}
-	x := &IKImageBrowserView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IKImageBrowserView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func iKImageBrowserViewAdopt(id objc.ID) *IKImageBrowserView {
 	if id == 0 {
 		return nil
 	}
-	x := &IKImageBrowserView{Handle: objref.Wrap(id)}
+	x := &IKImageBrowserView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *IKImageBrowserView) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *IKImageBrowserView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IKImageBrowserView) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewIKImageBrowserView creates a new IKImageBrowserView.

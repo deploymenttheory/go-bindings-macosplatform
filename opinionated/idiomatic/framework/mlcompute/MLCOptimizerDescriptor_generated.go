@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration object you use to create an optimizer.
-//
 // OptimizerDescriptor is an idiomatic wrapper over the Objective-C class MLCOptimizerDescriptor.
+//
+// A configuration object you use to create an optimizer.
 type OptimizerDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func OptimizerDescriptorFromID(id objc.ID) *OptimizerDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &OptimizerDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OptimizerDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func optimizerDescriptorAdopt(id objc.ID) *OptimizerDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &OptimizerDescriptor{Handle: objref.Wrap(id)}
+	x := &OptimizerDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,67 +60,73 @@ func (x *OptimizerDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OptimizerDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewOptimizerDescriptor creates a new OptimizerDescriptor.
 func NewOptimizerDescriptor() *OptimizerDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLCOptimizerDescriptor")), objc.RegisterName("new"))
 	return optimizerDescriptorAdopt(_id)
 }
 
-// The learning rate
+// LearningRate the learning rate
 func (x *OptimizerDescriptor) LearningRate() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("learningRate"))
 	return _r
 }
 
-// The rescale value applied to gradients during optimizer update
+// GradientRescale the rescale value applied to gradients during optimizer update
 func (x *OptimizerDescriptor) GradientRescale() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gradientRescale"))
 	return _r
 }
 
-// Whether gradient clipping should be applied or not. The default is false
+// AppliesGradientClipping whether gradient clipping should be applied or not. The default is false
 func (x *OptimizerDescriptor) AppliesGradientClipping() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appliesGradientClipping"))
 	return _r
 }
 
-// The maximum gradient value if gradient clipping is enabled before gradient is rescaled.
+// GradientClipMax the maximum gradient value if gradient clipping is enabled before gradient is rescaled.
 func (x *OptimizerDescriptor) GradientClipMax() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gradientClipMax"))
 	return _r
 }
 
-// The minimum gradient value if gradient clipping is enabled before gradient is rescaled.
+// GradientClipMin the minimum gradient value if gradient clipping is enabled before gradient is rescaled.
 func (x *OptimizerDescriptor) GradientClipMin() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gradientClipMin"))
 	return _r
 }
 
-// The regularization scale.
+// RegularizationScale the regularization scale.
 func (x *OptimizerDescriptor) RegularizationScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("regularizationScale"))
 	return _r
 }
 
-// The regularization type.
+// RegularizationType the regularization type.
 func (x *OptimizerDescriptor) RegularizationType() RegularizationType {
 	_r := objc.Send[RegularizationType](objref.IDOf(x), objc.RegisterName("regularizationType"))
 	return _r
 }
 
-// The type of clipping applied to gradient
+// GradientClippingType the type of clipping applied to gradient
 func (x *OptimizerDescriptor) GradientClippingType() GradientClippingType {
 	_r := objc.Send[GradientClippingType](objref.IDOf(x), objc.RegisterName("gradientClippingType"))
 	return _r
 }
 
-// The maximum clipping value
+// MaximumClippingNorm the maximum clipping value
 func (x *OptimizerDescriptor) MaximumClippingNorm() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumClippingNorm"))
 	return _r
 }
 
-// Used only with MLCGradientClippingTypeByGlobalNorm. If non zero, this norm will be used in place of global norm.
+// CustomGlobalNorm used only with MLCGradientClippingTypeByGlobalNorm. If non zero, this norm will be used in place of global norm.
 func (x *OptimizerDescriptor) CustomGlobalNorm() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("customGlobalNorm"))
 	return _r

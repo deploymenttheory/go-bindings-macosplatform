@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mutable string with associated attributes (such as visual style, hyperlinks, or accessibility data) for portions of its text.
-//
 // MutableAttributedString is an idiomatic wrapper over the Objective-C class NSMutableAttributedString.
+//
+// It embeds [AttributedString], promoting that type's methods.
+//
+// A mutable string with associated attributes (such as visual style, hyperlinks, or accessibility data) for portions of its text.
 type MutableAttributedString struct {
-	objref.Handle
+	AttributedString
 }
 
 // MutableAttributedStringFromID adopts an existing Objective-C object as a MutableAttributedString
@@ -25,7 +26,8 @@ func MutableAttributedStringFromID(id objc.ID) *MutableAttributedString {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableAttributedString{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableAttributedString{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func mutableAttributedStringAdopt(id objc.ID) *MutableAttributedString {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableAttributedString{Handle: objref.Wrap(id)}
+	x := &MutableAttributedString{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MutableAttributedString) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableAttributedString) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableAttributedString) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMutableAttributedString creates a new MutableAttributedString.
@@ -64,43 +52,44 @@ func NewMutableAttributedString() *MutableAttributedString {
 	return mutableAttributedStringAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *MutableAttributedString) WithScriptingProperties(scriptingProperties obj.Object) *MutableAttributedString {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Inserts the characters and attributes of the given attributed string into the receiver at the given index.
+// InsertAttributedStringAtIndex inserts the characters and attributes of the given attributed string into the receiver at the given index.
 func (x *MutableAttributedString) InsertAttributedStringAtIndex(attrString *AttributedString, loc int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertAttributedString:atIndex:"), objref.IDOf(attrString), loc)
 }
 
-// Adds the characters and attributes of a given attributed string to the end of the receiver.
+// AppendAttributedString adds the characters and attributes of a given attributed string to the end of the receiver.
 func (x *MutableAttributedString) AppendAttributedString(attrString *AttributedString) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendAttributedString:"), objref.IDOf(attrString))
 }
 
-// Replaces the receiver’s entire contents with the characters and attributes of the given attributed string.
+// SetAttributedString replaces the receiver’s entire contents with the characters and attributes of the given attributed string.
 func (x *MutableAttributedString) SetAttributedString(attrString *AttributedString) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedString:"), objref.IDOf(attrString))
 }
 
-// Begins the buffering of changes to the string’s characters and attributes.
+// BeginEditing begins the buffering of changes to the string’s characters and attributes.
 func (x *MutableAttributedString) BeginEditing() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginEditing"))
 }
 
-// Ends the buffering of changes to the string’s characters and attributes.
+// EndEditing ends the buffering of changes to the string’s characters and attributes.
 func (x *MutableAttributedString) EndEditing() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endEditing"))
 }
 
+// MutableString wraps the corresponding Objective-C method.
 func (x *MutableAttributedString) MutableString() *MutableString {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mutableString"))
 	return MutableStringFromID(_r)
 }
 
-// Formats the specified string and arguments with the current locale, then appends the result to the receiver.
+// AppendLocalizedFormat formats the specified string and arguments with the current locale, then appends the result to the receiver.
 func (x *MutableAttributedString) AppendLocalizedFormat(format *AttributedString) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendLocalizedFormat:"), objref.IDOf(format))
 }
@@ -119,3 +108,5 @@ type MutableAttributedStringable interface {
 }
 
 var _ MutableAttributedStringable = (*MutableAttributedString)(nil)
+
+var _ AttributedStringProvider = (*MutableAttributedString)(nil)

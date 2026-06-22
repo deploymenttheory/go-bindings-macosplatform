@@ -6,15 +6,18 @@ package mpsimage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ImageLanczosScale is an idiomatic wrapper over the Objective-C class MPSImageLanczosScale.
+//
+// It embeds [ImageScale], promoting that type's methods.
 type ImageLanczosScale struct {
-	objref.Handle
+	ImageScale
 }
 
 // ImageLanczosScaleFromID adopts an existing Objective-C object as a ImageLanczosScale
@@ -23,7 +26,8 @@ func ImageLanczosScaleFromID(id objc.ID) *ImageLanczosScale {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageLanczosScale{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageLanczosScale{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +40,10 @@ func imageLanczosScaleAdopt(id objc.ID) *ImageLanczosScale {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageLanczosScale{Handle: objref.Wrap(id)}
+	x := &ImageLanczosScale{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ImageLanczosScale) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageLanczosScale) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageLanczosScale) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewImageLanczosScale creates a new ImageLanczosScale.
@@ -62,9 +52,27 @@ func NewImageLanczosScale() *ImageLanczosScale {
 	return imageLanczosScaleAdopt(_id)
 }
 
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
+func (x *ImageLanczosScale) WithOffset(offset mpscore.MPSOffset) *ImageLanczosScale {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (x *ImageLanczosScale) WithClipRect(clipRect metal.MTLRegion) *ImageLanczosScale {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
 // ImageLanczosScaleable is the interface implemented by [ImageLanczosScale], for mocking and DI.
 type ImageLanczosScaleable interface {
 	obj.Object
+	WithOffset(offset mpscore.MPSOffset) *ImageLanczosScale
+	WithClipRect(clipRect metal.MTLRegion) *ImageLanczosScale
 }
 
 var _ ImageLanczosScaleable = (*ImageLanczosScale)(nil)
+
+var _ ImageScaleProvider = (*ImageLanczosScale)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageLanczosScale)(nil)

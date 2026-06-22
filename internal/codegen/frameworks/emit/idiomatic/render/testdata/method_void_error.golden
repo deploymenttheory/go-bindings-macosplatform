@@ -1,0 +1,9 @@
+func (x *Data) WriteToURL(url string) error {
+var _nsErr uintptr
+_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+if _nsErr != 0 {
+return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+}
+return nil
+}
+

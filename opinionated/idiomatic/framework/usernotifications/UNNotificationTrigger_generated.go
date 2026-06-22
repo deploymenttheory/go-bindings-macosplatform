@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The common behavior for subclasses that trigger the delivery of a local or remote notification.
-//
 // NotificationTrigger is an idiomatic wrapper over the Objective-C class UNNotificationTrigger.
+//
+// NotificationTrigger is an abstract base — you do not construct it directly. Construct one of [CalendarNotificationTrigger], [PushNotificationTrigger], [TimeIntervalNotificationTrigger] and pass it where a NotificationTrigger is accepted.
+//
+// The common behavior for subclasses that trigger the delivery of a local or remote notification.
 type NotificationTrigger struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func NotificationTriggerFromID(id objc.ID) *NotificationTrigger {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationTrigger{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NotificationTrigger{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func notificationTriggerAdopt(id objc.ID) *NotificationTrigger {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationTrigger{Handle: objref.Wrap(id)}
+	x := &NotificationTrigger{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +62,13 @@ func (x *NotificationTrigger) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewNotificationTrigger creates a new NotificationTrigger.
-func NewNotificationTrigger() *NotificationTrigger {
-	_id := objc.Send[objc.ID](objc.ID(_class("UNNotificationTrigger")), objc.RegisterName("new"))
-	return notificationTriggerAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationTrigger) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// Repeats wraps the corresponding Objective-C method.
 func (x *NotificationTrigger) Repeats() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("repeats"))
 	return _r
@@ -76,3 +81,10 @@ type NotificationTriggerable interface {
 }
 
 var _ NotificationTriggerable = (*NotificationTrigger)(nil)
+
+// isNotificationTrigger marks NotificationTrigger — and, by embedding promotion, its
+// subclasses — as a member of the NotificationTrigger hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NotificationTrigger) isNotificationTrigger() {}
+
+var _ NotificationTriggerProvider = (*NotificationTrigger)(nil)

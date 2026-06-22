@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object containing system-level information about the device.
-//
 // MetaData is an idiomatic wrapper over the Objective-C class MXMetaData.
+//
+// An object containing system-level information about the device.
 type MetaData struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MetaDataFromID(id objc.ID) *MetaData {
 	if id == 0 {
 		return nil
 	}
-	x := &MetaData{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetaData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func metaDataAdopt(id objc.ID) *MetaData {
 	if id == 0 {
 		return nil
 	}
-	x := &MetaData{Handle: objref.Wrap(id)}
+	x := &MetaData{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *MetaData) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetaData) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMetaData creates a new MetaData.
 func NewMetaData() *MetaData {
 	_id := objc.Send[objc.ID](objc.ID(_class("MXMetaData")), objc.RegisterName("new"))
 	return metaDataAdopt(_id)
 }
 
-// Returns the contents of the metadata in JSON format.
+// JSONRepresentation returns the contents of the metadata in JSON format.
 func (x *MetaData) JSONRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSONRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// Returns the contents of the metadata as a dictionary.
+// DictionaryRepresentation returns the contents of the metadata as a dictionary.
 func (x *MetaData) DictionaryRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// An NSString designating the region format associated with the application.
+// RegionFormat an NSString designating the region format associated with the application.
 func (x *MetaData) RegionFormat() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regionFormat"))
 	if _r == 0 {
@@ -85,7 +93,7 @@ func (x *MetaData) RegionFormat() string {
 	return purego.GoString(_r)
 }
 
-// An NSString designating the OS version associated with the device.
+// OsVersion an NSString designating the OS version associated with the device.
 func (x *MetaData) OsVersion() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("osVersion"))
 	if _r == 0 {
@@ -94,7 +102,7 @@ func (x *MetaData) OsVersion() string {
 	return purego.GoString(_r)
 }
 
-// An NSString designating the device type associated with this device.
+// DeviceType an NSString designating the device type associated with this device.
 func (x *MetaData) DeviceType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceType"))
 	if _r == 0 {
@@ -103,7 +111,7 @@ func (x *MetaData) DeviceType() string {
 	return purego.GoString(_r)
 }
 
-// An NSString designating the app build version.
+// ApplicationBuildVersion an NSString designating the app build version.
 func (x *MetaData) ApplicationBuildVersion() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationBuildVersion"))
 	if _r == 0 {
@@ -112,7 +120,7 @@ func (x *MetaData) ApplicationBuildVersion() string {
 	return purego.GoString(_r)
 }
 
-// An NSString designating the current architecture.
+// PlatformArchitecture an NSString designating the current architecture.
 func (x *MetaData) PlatformArchitecture() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("platformArchitecture"))
 	if _r == 0 {
@@ -121,21 +129,25 @@ func (x *MetaData) PlatformArchitecture() string {
 	return purego.GoString(_r)
 }
 
+// LowPowerModeEnabled wraps the corresponding Objective-C method.
 func (x *MetaData) LowPowerModeEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("lowPowerModeEnabled"))
 	return _r
 }
 
+// IsTestFlightApp wraps the corresponding Objective-C method.
 func (x *MetaData) IsTestFlightApp() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTestFlightApp"))
 	return _r
 }
 
+// Pid wraps the corresponding Objective-C method.
 func (x *MetaData) Pid() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pid"))
 	return _r
 }
 
+// BundleIdentifier wraps the corresponding Objective-C method.
 func (x *MetaData) BundleIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {

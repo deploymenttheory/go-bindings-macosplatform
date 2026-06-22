@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that specifies a geofence to activate the alarm of a calendar item.
-//
 // StructuredLocation is an idiomatic wrapper over the Objective-C class EKStructuredLocation.
+//
+// It embeds [Object], promoting that type's methods.
+//
+// A class that specifies a geofence to activate the alarm of a calendar item.
 type StructuredLocation struct {
-	objref.Handle
+	Object
 }
 
 // StructuredLocationFromID adopts an existing Objective-C object as a StructuredLocation
@@ -25,7 +26,8 @@ func StructuredLocationFromID(id objc.ID) *StructuredLocation {
 	if id == 0 {
 		return nil
 	}
-	x := &StructuredLocation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StructuredLocation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func structuredLocationAdopt(id objc.ID) *StructuredLocation {
 	if id == 0 {
 		return nil
 	}
-	x := &StructuredLocation{Handle: objref.Wrap(id)}
+	x := &StructuredLocation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *StructuredLocation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StructuredLocation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StructuredLocation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewStructuredLocation creates a new StructuredLocation.
@@ -64,22 +52,19 @@ func NewStructuredLocation() *StructuredLocation {
 	return structuredLocationAdopt(_id)
 }
 
-// The title of the location.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the title of the location.
 func (x *StructuredLocation) WithTitle(title string) *StructuredLocation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A minimum distance from the core location that would trigger the alarm or reminder.
-//
-// WithRadius sets radius and returns the receiver so calls can be chained.
+// WithRadius a minimum distance from the core location that would trigger the alarm or reminder.
 func (x *StructuredLocation) WithRadius(radius float64) *StructuredLocation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 	return x
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *StructuredLocation) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -88,15 +73,18 @@ func (x *StructuredLocation) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *StructuredLocation) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
+// Radius wraps the corresponding Objective-C method.
 func (x *StructuredLocation) Radius() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("radius"))
 	return _r
 }
 
+// SetRadius wraps the corresponding Objective-C method.
 func (x *StructuredLocation) SetRadius(radius float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 }
@@ -113,3 +101,5 @@ type StructuredLocationable interface {
 }
 
 var _ StructuredLocationable = (*StructuredLocation)(nil)
+
+var _ ObjectProvider = (*StructuredLocation)(nil)

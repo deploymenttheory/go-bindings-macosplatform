@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of an app that users can access during an assessment.
-//
 // AssessmentApplication is an idiomatic wrapper over the Objective-C class AEAssessmentApplication.
+//
+// A representation of an app that users can access during an assessment.
 type AssessmentApplication struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssessmentApplicationFromID(id objc.ID) *AssessmentApplication {
 	if id == 0 {
 		return nil
 	}
-	x := &AssessmentApplication{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssessmentApplication{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assessmentApplicationAdopt(id objc.ID) *AssessmentApplication {
 	if id == 0 {
 		return nil
 	}
-	x := &AssessmentApplication{Handle: objref.Wrap(id)}
+	x := &AssessmentApplication{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,32 +60,33 @@ func (x *AssessmentApplication) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a representation of an app using its bundle identifier.
-//
-// NewAssessmentApplicationWithBundleIdentifier creates a new AssessmentApplication.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssessmentApplication) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssessmentApplicationWithBundleIdentifier creates a representation of an app using its bundle identifier.
 func NewAssessmentApplicationWithBundleIdentifier(bundleIdentifier string) *AssessmentApplication {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AEAssessmentApplication")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBundleIdentifier:"), purego.NSString(bundleIdentifier))
 	return assessmentApplicationAdopt(_id)
 }
 
-// Creates a representation of an app using its bundle and team identifiers.
-//
-// NewAssessmentApplicationWithBundleIdentifierTeamIdentifier creates a new AssessmentApplication.
+// NewAssessmentApplicationWithBundleIdentifierTeamIdentifier creates a representation of an app using its bundle and team identifiers.
 func NewAssessmentApplicationWithBundleIdentifierTeamIdentifier(bundleIdentifier string, teamIdentifier string) *AssessmentApplication {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AEAssessmentApplication")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBundleIdentifier:teamIdentifier:"), purego.NSString(bundleIdentifier), purego.NSString(teamIdentifier))
 	return assessmentApplicationAdopt(_id)
 }
 
-// A Boolean that indicates whether the session requires the app to have a valid code signature to run.
-//
-// WithRequiresSignatureValidation sets requiresSignatureValidation and returns the receiver so calls can be chained.
+// WithRequiresSignatureValidation a Boolean that indicates whether the session requires the app to have a valid code signature to run.
 func (x *AssessmentApplication) WithRequiresSignatureValidation(requiresSignatureValidation bool) *AssessmentApplication {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresSignatureValidation:"), requiresSignatureValidation)
 	return x
 }
 
+// BundleIdentifier wraps the corresponding Objective-C method.
 func (x *AssessmentApplication) BundleIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {
@@ -92,6 +95,7 @@ func (x *AssessmentApplication) BundleIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// TeamIdentifier wraps the corresponding Objective-C method.
 func (x *AssessmentApplication) TeamIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("teamIdentifier"))
 	if _r == 0 {
@@ -100,11 +104,13 @@ func (x *AssessmentApplication) TeamIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// RequiresSignatureValidation wraps the corresponding Objective-C method.
 func (x *AssessmentApplication) RequiresSignatureValidation() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresSignatureValidation"))
 	return _r
 }
 
+// SetRequiresSignatureValidation wraps the corresponding Objective-C method.
 func (x *AssessmentApplication) SetRequiresSignatureValidation(requiresSignatureValidation bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresSignatureValidation:"), requiresSignatureValidation)
 }

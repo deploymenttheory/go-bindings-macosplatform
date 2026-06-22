@@ -6,15 +6,16 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object you use to specify attributes to create and style a drop shadow during drawing operations.
-//
 // Shadow is an idiomatic wrapper over the Objective-C class NSShadow.
+//
+// An object you use to specify attributes to create and style a drop shadow during drawing operations.
 type Shadow struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func ShadowFromID(id objc.ID) *Shadow {
 	if id == 0 {
 		return nil
 	}
-	x := &Shadow{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Shadow{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func shadowAdopt(id objc.ID) *Shadow {
 	if id == 0 {
 		return nil
 	}
-	x := &Shadow{Handle: objref.Wrap(id)}
+	x := &Shadow{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,47 +61,70 @@ func (x *Shadow) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Shadow) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewShadow creates a new Shadow.
 func NewShadow() *Shadow {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSShadow")), objc.RegisterName("new"))
 	return shadowAdopt(_id)
 }
 
-// The blur radius of the shadow.
-//
-// WithShadowBlurRadius sets shadowBlurRadius and returns the receiver so calls can be chained.
+// WithShadowOffset the shadow’s relative position, which you specify with horizontal and vertical offset values.
+func (x *Shadow) WithShadowOffset(shadowOffset corefoundation.CGSize) *Shadow {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOffset:"), shadowOffset)
+	return x
+}
+
+// WithShadowBlurRadius the blur radius of the shadow.
 func (x *Shadow) WithShadowBlurRadius(shadowBlurRadius float64) *Shadow {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowBlurRadius:"), shadowBlurRadius)
 	return x
 }
 
-// The color of the shadow.
-//
-// WithShadowColor sets shadowColor and returns the receiver so calls can be chained.
+// WithShadowColor the color of the shadow.
 func (x *Shadow) WithShadowColor(shadowColor *Color) *Shadow {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
 	return x
 }
 
-// Sets the shadow of subsequent drawing operations to the current shadow.
+// Set sets the shadow of subsequent drawing operations to the current shadow.
 func (x *Shadow) Set() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("set"))
 }
 
+// ShadowOffset wraps the corresponding Objective-C method.
+func (x *Shadow) ShadowOffset() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("shadowOffset"))
+	return _r
+}
+
+// SetShadowOffset wraps the corresponding Objective-C method.
+func (x *Shadow) SetShadowOffset(shadowOffset corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOffset:"), shadowOffset)
+}
+
+// ShadowBlurRadius wraps the corresponding Objective-C method.
 func (x *Shadow) ShadowBlurRadius() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("shadowBlurRadius"))
 	return _r
 }
 
+// SetShadowBlurRadius wraps the corresponding Objective-C method.
 func (x *Shadow) SetShadowBlurRadius(shadowBlurRadius float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowBlurRadius:"), shadowBlurRadius)
 }
 
+// ShadowColor wraps the corresponding Objective-C method.
 func (x *Shadow) ShadowColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shadowColor"))
 	return ColorFromID(_r)
 }
 
+// SetShadowColor wraps the corresponding Objective-C method.
 func (x *Shadow) SetShadowColor(shadowColor *Color) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
 }
@@ -106,9 +132,12 @@ func (x *Shadow) SetShadowColor(shadowColor *Color) {
 // Shadowable is the interface implemented by [Shadow], for mocking and DI.
 type Shadowable interface {
 	obj.Object
+	WithShadowOffset(shadowOffset corefoundation.CGSize) *Shadow
 	WithShadowBlurRadius(shadowBlurRadius float64) *Shadow
 	WithShadowColor(shadowColor *Color) *Shadow
 	Set()
+	ShadowOffset() corefoundation.CGSize
+	SetShadowOffset(shadowOffset corefoundation.CGSize)
 	ShadowBlurRadius() float64
 	SetShadowBlurRadius(shadowBlurRadius float64)
 	ShadowColor() *Color

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An ordered pair that defines a bounding box for an envelope.
-//
 // NumericPair is an idiomatic wrapper over the Objective-C class PHASENumericPair.
+//
+// An ordered pair that defines a bounding box for an envelope.
 type NumericPair struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NumericPairFromID(id objc.ID) *NumericPair {
 	if id == 0 {
 		return nil
 	}
-	x := &NumericPair{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NumericPair{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func numericPairAdopt(id objc.ID) *NumericPair {
 	if id == 0 {
 		return nil
 	}
-	x := &NumericPair{Handle: objref.Wrap(id)}
+	x := &NumericPair{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,47 +60,49 @@ func (x *NumericPair) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a pair of numbers with the given values.
-//
-// NewNumericPairWithFirstValueSecondValue creates a new NumericPair.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NumericPair) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNumericPairWithFirstValueSecondValue creates a pair of numbers with the given values.
 func NewNumericPairWithFirstValueSecondValue(first float64, second float64) *NumericPair {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASENumericPair")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFirstValue:secondValue:"), first, second)
 	return numericPairAdopt(_id)
 }
 
-// The first value in the pair.
-//
-// WithFirst sets first and returns the receiver so calls can be chained.
+// WithFirst the first value in the pair.
 func (x *NumericPair) WithFirst(first float64) *NumericPair {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirst:"), first)
 	return x
 }
 
-// The second value in the pair.
-//
-// WithSecond sets second and returns the receiver so calls can be chained.
+// WithSecond the second value in the pair.
 func (x *NumericPair) WithSecond(second float64) *NumericPair {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecond:"), second)
 	return x
 }
 
-// The first value in the numeric pair. The default value is 0.0.
+// First the first value in the numeric pair. The default value is 0.0.
 func (x *NumericPair) First() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("first"))
 	return _r
 }
 
+// SetFirst wraps the corresponding Objective-C method.
 func (x *NumericPair) SetFirst(first float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirst:"), first)
 }
 
-// The second value in the numeric pair. The default value is 0.0.
+// Second the second value in the numeric pair. The default value is 0.0.
 func (x *NumericPair) Second() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("second"))
 	return _r
 }
 
+// SetSecond wraps the corresponding Objective-C method.
 func (x *NumericPair) SetSecond(second float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecond:"), second)
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class representing an Operation in a Program.
-//
 // ModelStructureProgramOperation is an idiomatic wrapper over the Objective-C class MLModelStructureProgramOperation.
+//
+// A class representing an Operation in a Program.
 type ModelStructureProgramOperation struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ModelStructureProgramOperationFromID(id objc.ID) *ModelStructureProgramOper
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructureProgramOperation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ModelStructureProgramOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func modelStructureProgramOperationAdopt(id objc.ID) *ModelStructureProgramOpera
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructureProgramOperation{Handle: objref.Wrap(id)}
+	x := &ModelStructureProgramOperation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *ModelStructureProgramOperation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ModelStructureProgramOperation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewModelStructureProgramOperation creates a new ModelStructureProgramOperation.
 func NewModelStructureProgramOperation() *ModelStructureProgramOperation {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLModelStructureProgramOperation")), objc.RegisterName("new"))
 	return modelStructureProgramOperationAdopt(_id)
 }
 
-// The name of the operator, e.g., "conv", "pool", "softmax", etc.
+// OperatorName the name of the operator, e.g., "conv", "pool", "softmax", etc.
 func (x *ModelStructureProgramOperation) OperatorName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operatorName"))
 	if _r == 0 {
@@ -73,13 +81,13 @@ func (x *ModelStructureProgramOperation) OperatorName() string {
 	return purego.GoString(_r)
 }
 
-// The arguments to the Operation.
+// Inputs the arguments to the Operation.
 func (x *ModelStructureProgramOperation) Inputs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputs"))
 	return obj.Wrap(_r)
 }
 
-// The outputs of the Operation.
+// Outputs the outputs of the Operation.
 //
 // Outputs returns the collection as a Go slice.
 func (x *ModelStructureProgramOperation) Outputs() []*ModelStructureProgramNamedValueType {
@@ -89,7 +97,7 @@ func (x *ModelStructureProgramOperation) Outputs() []*ModelStructureProgramNamed
 	})
 }
 
-// Nested blocks for loops and conditionals, e.g., a conditional block will have two entries here.
+// Blocks nested blocks for loops and conditionals, e.g., a conditional block will have two entries here.
 //
 // Blocks returns the collection as a Go slice.
 func (x *ModelStructureProgramOperation) Blocks() []*ModelStructureProgramBlock {

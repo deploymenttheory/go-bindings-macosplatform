@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A light source described in terms of the variations in color and intensity of its illumination in all directions.
-//
 // LightProbe is an idiomatic wrapper over the Objective-C class MDLLightProbe.
+//
+// It embeds [Light], promoting that type's methods.
+//
+// A light source described in terms of the variations in color and intensity of its illumination in all directions.
 type LightProbe struct {
-	objref.Handle
+	Light
 }
 
 // LightProbeFromID adopts an existing Objective-C object as a LightProbe
@@ -25,7 +26,8 @@ func LightProbeFromID(id objc.ID) *LightProbe {
 	if id == 0 {
 		return nil
 	}
-	x := &LightProbe{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LightProbe{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,95 +40,73 @@ func lightProbeAdopt(id objc.ID) *LightProbe {
 	if id == 0 {
 		return nil
 	}
-	x := &LightProbe{Handle: objref.Wrap(id)}
+	x := &LightProbe{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *LightProbe) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LightProbe) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LightProbe) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a light probe with the specified cube map textures.
-//
-// NewLightProbeWithReflectiveTextureIrradianceTexture creates a new LightProbe.
+// NewLightProbeWithReflectiveTextureIrradianceTexture initializes a light probe with the specified cube map textures.
 func NewLightProbeWithReflectiveTextureIrradianceTexture(reflectiveTexture *Texture, irradianceTexture *Texture) *LightProbe {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLLightProbe")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReflectiveTexture:irradianceTexture:"), objref.IDOf(reflectiveTexture), objref.IDOf(irradianceTexture))
 	return lightProbeAdopt(_id)
 }
 
-// The type of the light.
-//
-// WithLightType sets lightType and returns the receiver so calls can be chained.
+// WithLightType the type of the light.
 func (x *LightProbe) WithLightType(lightType LightType) *LightProbe {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightType:"), lightType)
 	return x
 }
 
-// The name of the Core Graphics color space to be used for interpreting the light’s color information.
-//
-// WithColorSpace sets colorSpace and returns the receiver so calls can be chained.
+// WithColorSpace the name of the Core Graphics color space to be used for interpreting the light’s color information.
 func (x *LightProbe) WithColorSpace(colorSpace string) *LightProbe {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), purego.NSString(colorSpace))
 	return x
 }
 
-// The parent object that contains this object.
-//
-// WithParent sets parent and returns the receiver so calls can be chained.
+// WithParent the parent object that contains this object.
 func (x *LightProbe) WithParent(parent ObjectProvider) *LightProbe {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return x
 }
 
-// The primary object, if applicable, of which this object is an instance.
-//
-// WithInstance sets instance and returns the receiver so calls can be chained.
+// WithInstance the primary object, if applicable, of which this object is an instance.
 func (x *LightProbe) WithInstance(instance ObjectProvider) *LightProbe {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return x
 }
 
-// A Boolean value indicating whether this object should be used in rendering.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden a Boolean value indicating whether this object should be used in rendering.
 func (x *LightProbe) WithHidden(hidden bool) *LightProbe {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// Generates spherical harmonics information based on the light probe’s irradiance texture.
+// GenerateSphericalHarmonicsFromIrradiance generates spherical harmonics information based on the light probe’s irradiance texture.
 func (x *LightProbe) GenerateSphericalHarmonicsFromIrradiance(sphericalHarmonicsLevel int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("generateSphericalHarmonicsFromIrradiance:"), sphericalHarmonicsLevel)
 }
 
+// ReflectiveTexture wraps the corresponding Objective-C method.
 func (x *LightProbe) ReflectiveTexture() *Texture {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reflectiveTexture"))
 	return TextureFromID(_r)
 }
 
+// IrradianceTexture wraps the corresponding Objective-C method.
 func (x *LightProbe) IrradianceTexture() *Texture {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("irradianceTexture"))
 	return TextureFromID(_r)
 }
 
+// SphericalHarmonicsLevel wraps the corresponding Objective-C method.
 func (x *LightProbe) SphericalHarmonicsLevel() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sphericalHarmonicsLevel"))
 	return _r
 }
 
+// SphericalHarmonicsCoefficients wraps the corresponding Objective-C method.
 func (x *LightProbe) SphericalHarmonicsCoefficients() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sphericalHarmonicsCoefficients"))
 	return obj.Wrap(_r)
@@ -148,3 +128,7 @@ type LightProbeable interface {
 }
 
 var _ LightProbeable = (*LightProbe)(nil)
+
+var _ LightProvider = (*LightProbe)(nil)
+
+var _ ObjectProvider = (*LightProbe)(nil)

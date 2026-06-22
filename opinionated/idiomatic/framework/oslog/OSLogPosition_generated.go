@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a point in a sequence of entries in the unified logging system.
-//
 // LogPosition is an idiomatic wrapper over the Objective-C class OSLogPosition.
+//
+// A representation of a point in a sequence of entries in the unified logging system.
 type LogPosition struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LogPositionFromID(id objc.ID) *LogPosition {
 	if id == 0 {
 		return nil
 	}
-	x := &LogPosition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LogPosition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func logPositionAdopt(id objc.ID) *LogPosition {
 	if id == 0 {
 		return nil
 	}
-	x := &LogPosition{Handle: objref.Wrap(id)}
+	x := &LogPosition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *LogPosition) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *LogPosition) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LogPosition) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewLogPosition creates a new LogPosition.

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Texture drawing parameters for use in GLKit rendering effects.
-//
 // EffectPropertyTexture is an idiomatic wrapper over the Objective-C class GLKEffectPropertyTexture.
+//
+// It embeds [EffectProperty], promoting that type's methods.
+//
+// Texture drawing parameters for use in GLKit rendering effects.
 type EffectPropertyTexture struct {
-	objref.Handle
+	EffectProperty
 }
 
 // EffectPropertyTextureFromID adopts an existing Objective-C object as a EffectPropertyTexture
@@ -25,7 +26,8 @@ func EffectPropertyTextureFromID(id objc.ID) *EffectPropertyTexture {
 	if id == 0 {
 		return nil
 	}
-	x := &EffectPropertyTexture{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EffectPropertyTexture{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func effectPropertyTextureAdopt(id objc.ID) *EffectPropertyTexture {
 	if id == 0 {
 		return nil
 	}
-	x := &EffectPropertyTexture{Handle: objref.Wrap(id)}
+	x := &EffectPropertyTexture{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *EffectPropertyTexture) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EffectPropertyTexture) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EffectPropertyTexture) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewEffectPropertyTexture creates a new EffectPropertyTexture.
@@ -64,70 +52,70 @@ func NewEffectPropertyTexture() *EffectPropertyTexture {
 	return effectPropertyTextureAdopt(_id)
 }
 
-// A Boolean value that indicates whether this texture is used to texture drawn primitives.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether this texture is used to texture drawn primitives.
 func (x *EffectPropertyTexture) WithEnabled(enabled uint8) *EffectPropertyTexture {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The OpenGL name for the texture being sampled by this texture stage.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the OpenGL name for the texture being sampled by this texture stage.
 func (x *EffectPropertyTexture) WithName(name uint32) *EffectPropertyTexture {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), name)
 	return x
 }
 
-// The kind of texture pointed to by the texture stage. See GLKTextureTarget.
-//
-// WithTarget sets target and returns the receiver so calls can be chained.
+// WithTarget the kind of texture pointed to by the texture stage. See GLKTextureTarget.
 func (x *EffectPropertyTexture) WithTarget(target TextureTarget) *EffectPropertyTexture {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), target)
 	return x
 }
 
-// The mode the texture uses to compute its output fragment color. See GLKTextureEnvMode.
-//
-// WithEnvMode sets envMode and returns the receiver so calls can be chained.
+// WithEnvMode the mode the texture uses to compute its output fragment color. See GLKTextureEnvMode.
 func (x *EffectPropertyTexture) WithEnvMode(envMode TextureEnvMode) *EffectPropertyTexture {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnvMode:"), envMode)
 	return x
 }
 
+// Enabled wraps the corresponding Objective-C method.
 func (x *EffectPropertyTexture) Enabled() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("enabled"))
 	return _r
 }
 
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *EffectPropertyTexture) SetEnabled(enabled uint8) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *EffectPropertyTexture) Name() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("name"))
 	return _r
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *EffectPropertyTexture) SetName(name uint32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), name)
 }
 
+// Target wraps the corresponding Objective-C method.
 func (x *EffectPropertyTexture) Target() TextureTarget {
 	_r := objc.Send[TextureTarget](objref.IDOf(x), objc.RegisterName("target"))
 	return _r
 }
 
+// SetTarget wraps the corresponding Objective-C method.
 func (x *EffectPropertyTexture) SetTarget(target TextureTarget) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), target)
 }
 
+// EnvMode wraps the corresponding Objective-C method.
 func (x *EffectPropertyTexture) EnvMode() TextureEnvMode {
 	_r := objc.Send[TextureEnvMode](objref.IDOf(x), objc.RegisterName("envMode"))
 	return _r
 }
 
+// SetEnvMode wraps the corresponding Objective-C method.
 func (x *EffectPropertyTexture) SetEnvMode(envMode TextureEnvMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnvMode:"), envMode)
 }
@@ -150,3 +138,5 @@ type EffectPropertyTextureable interface {
 }
 
 var _ EffectPropertyTextureable = (*EffectPropertyTexture)(nil)
+
+var _ EffectPropertyProvider = (*EffectPropertyTexture)(nil)

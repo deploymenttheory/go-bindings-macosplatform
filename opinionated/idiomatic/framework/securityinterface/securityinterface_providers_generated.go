@@ -11,4 +11,5 @@ import (
 // CertificatePanelProvider is accepted wherever a SFCertificatePanel (or one of its subclasses) is expected.
 type CertificatePanelProvider interface {
 	objref.Object
+	isCertificatePanel()
 }

@@ -13,6 +13,8 @@ import (
 )
 
 // MTRTargetNavigatorClusterTargetInfoStruct is an idiomatic wrapper over the Objective-C class MTRTargetNavigatorClusterTargetInfoStruct.
+//
+// MTRTargetNavigatorClusterTargetInfoStruct is an abstract base — you do not construct it directly. Construct one of [MTRTargetNavigatorClusterTargetInfo] and pass it where a MTRTargetNavigatorClusterTargetInfoStruct is accepted.
 type MTRTargetNavigatorClusterTargetInfoStruct struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRTargetNavigatorClusterTargetInfoStructFromID(id objc.ID) *MTRTargetNavig
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTargetNavigatorClusterTargetInfoStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRTargetNavigatorClusterTargetInfoStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRTargetNavigatorClusterTargetInfoStructAdopt(id objc.ID) *MTRTargetNaviga
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTargetNavigatorClusterTargetInfoStruct{Handle: objref.Wrap(id)}
+	x := &MTRTargetNavigatorClusterTargetInfoStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,33 +60,36 @@ func (x *MTRTargetNavigatorClusterTargetInfoStruct) IsKind(className string) boo
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRTargetNavigatorClusterTargetInfoStruct creates a new MTRTargetNavigatorClusterTargetInfoStruct.
-func NewMTRTargetNavigatorClusterTargetInfoStruct() *MTRTargetNavigatorClusterTargetInfoStruct {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRTargetNavigatorClusterTargetInfoStruct")), objc.RegisterName("new"))
-	return mTRTargetNavigatorClusterTargetInfoStructAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRTargetNavigatorClusterTargetInfoStruct) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithIdentifier sets identifier and returns the receiver so calls can be chained.
+// WithIdentifier sets the property and returns the receiver so calls can be chained.
 func (x *MTRTargetNavigatorClusterTargetInfoStruct) WithIdentifier(identifier obj.Object) *MTRTargetNavigatorClusterTargetInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
 	return x
 }
 
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *MTRTargetNavigatorClusterTargetInfoStruct) WithName(name string) *MTRTargetNavigatorClusterTargetInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *MTRTargetNavigatorClusterTargetInfoStruct) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
+// SetIdentifier wraps the corresponding Objective-C method.
 func (x *MTRTargetNavigatorClusterTargetInfoStruct) SetIdentifier(identifier obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *MTRTargetNavigatorClusterTargetInfoStruct) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -91,6 +98,7 @@ func (x *MTRTargetNavigatorClusterTargetInfoStruct) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *MTRTargetNavigatorClusterTargetInfoStruct) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
@@ -107,3 +115,10 @@ type MTRTargetNavigatorClusterTargetInfoStructable interface {
 }
 
 var _ MTRTargetNavigatorClusterTargetInfoStructable = (*MTRTargetNavigatorClusterTargetInfoStruct)(nil)
+
+// isMTRTargetNavigatorClusterTargetInfoStruct marks MTRTargetNavigatorClusterTargetInfoStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRTargetNavigatorClusterTargetInfoStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRTargetNavigatorClusterTargetInfoStruct) isMTRTargetNavigatorClusterTargetInfoStruct() {}
+
+var _ MTRTargetNavigatorClusterTargetInfoStructProvider = (*MTRTargetNavigatorClusterTargetInfoStruct)(nil)

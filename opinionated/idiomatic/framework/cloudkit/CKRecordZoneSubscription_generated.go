@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A subscription that generates push notifications when CloudKit modifies records in a specific record zone.
-//
 // RecordZoneSubscription is an idiomatic wrapper over the Objective-C class CKRecordZoneSubscription.
+//
+// It embeds [Subscription], promoting that type's methods.
+//
+// A subscription that generates push notifications when CloudKit modifies records in a specific record zone.
 type RecordZoneSubscription struct {
-	objref.Handle
+	Subscription
 }
 
 // RecordZoneSubscriptionFromID adopts an existing Objective-C object as a RecordZoneSubscription
@@ -25,7 +26,8 @@ func RecordZoneSubscriptionFromID(id objc.ID) *RecordZoneSubscription {
 	if id == 0 {
 		return nil
 	}
-	x := &RecordZoneSubscription{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RecordZoneSubscription{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,81 +40,58 @@ func recordZoneSubscriptionAdopt(id objc.ID) *RecordZoneSubscription {
 	if id == 0 {
 		return nil
 	}
-	x := &RecordZoneSubscription{Handle: objref.Wrap(id)}
+	x := &RecordZoneSubscription{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *RecordZoneSubscription) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RecordZoneSubscription) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RecordZoneSubscription) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a subscription for all records in the specified record zone.
-//
-// NewRecordZoneSubscriptionWithZoneID creates a new RecordZoneSubscription.
+// NewRecordZoneSubscriptionWithZoneID creates a subscription for all records in the specified record zone.
 func NewRecordZoneSubscriptionWithZoneID(zoneID *RecordZoneID) *RecordZoneSubscription {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKRecordZoneSubscription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZoneID:"), objref.IDOf(zoneID))
 	return recordZoneSubscriptionAdopt(_id)
 }
 
-// Creates a named subscription for all records in the specified record zone.
-//
-// NewRecordZoneSubscriptionWithZoneIDSubscriptionID creates a new RecordZoneSubscription.
+// NewRecordZoneSubscriptionWithZoneIDSubscriptionID creates a named subscription for all records in the specified record zone.
 func NewRecordZoneSubscriptionWithZoneIDSubscriptionID(zoneID *RecordZoneID, subscriptionID obj.Object) *RecordZoneSubscription {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKRecordZoneSubscription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZoneID:subscriptionID:"), objref.IDOf(zoneID), objref.IDOf(subscriptionID))
 	return recordZoneSubscriptionAdopt(_id)
 }
 
-// Creates a zone-based subscription from a serialized instance.
-//
-// NewRecordZoneSubscriptionWithCoder creates a new RecordZoneSubscription.
+// NewRecordZoneSubscriptionWithCoder creates a zone-based subscription from a serialized instance.
 func NewRecordZoneSubscriptionWithCoder(aDecoder obj.Object) *RecordZoneSubscription {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKRecordZoneSubscription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return recordZoneSubscriptionAdopt(_id)
 }
 
-// The type of record that the subscription queries.
-//
-// WithRecordType sets recordType and returns the receiver so calls can be chained.
+// WithRecordType the type of record that the subscription queries.
 func (x *RecordZoneSubscription) WithRecordType(recordType obj.Object) *RecordZoneSubscription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordType:"), objref.IDOf(recordType))
 	return x
 }
 
-// The configuration for a subscription’s push notifications.
-//
-// WithNotificationInfo sets notificationInfo and returns the receiver so calls can be chained.
+// WithNotificationInfo the configuration for a subscription’s push notifications.
 func (x *RecordZoneSubscription) WithNotificationInfo(notificationInfo *NotificationInfo) *RecordZoneSubscription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotificationInfo:"), objref.IDOf(notificationInfo))
 	return x
 }
 
-// The ID of the record zone that the subscription queries. This property applies to query-based subscriptions and zone-based subscriptions. Specifying a record zone ID limits the scope of the query to only the records in that zone. For zone-based subscriptions, the query includes all records in the specified record zone. For a query-based subscription, the query includes only records of a specific type in the specified record zone. For zone-based subscriptions, CloudKit sets this property's value automatically. For all other subscription types, the default value is `nil`. If you want to scope your query-based subscription to a specific record zone, you must assign a value explicitly.
+// ZoneID the ID of the record zone that the subscription queries. This property applies to query-based subscriptions and zone-based subscriptions. Specifying a record zone ID limits the scope of the query to only the records in that zone. For zone-based subscriptions, the query includes all records in the specified record zone. For a query-based subscription, the query includes only records of a specific type in the specified record zone. For zone-based subscriptions, CloudKit sets this property's value automatically. For all other subscription types, the default value is `nil`. If you want to scope your query-based subscription to a specific record zone, you must assign a value explicitly.
 func (x *RecordZoneSubscription) ZoneID() *RecordZoneID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneID"))
 	return RecordZoneIDFromID(_r)
 }
 
-// The type of record that the subscription queries.
+// RecordType the type of record that the subscription queries.
 func (x *RecordZoneSubscription) RecordType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordType"))
 	return obj.Wrap(_r)
 }
 
+// SetRecordType wraps the corresponding Objective-C method.
 func (x *RecordZoneSubscription) SetRecordType(recordType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordType:"), objref.IDOf(recordType))
 }
@@ -128,3 +107,5 @@ type RecordZoneSubscriptionable interface {
 }
 
 var _ RecordZoneSubscriptionable = (*RecordZoneSubscription)(nil)
+
+var _ SubscriptionProvider = (*RecordZoneSubscription)(nil)

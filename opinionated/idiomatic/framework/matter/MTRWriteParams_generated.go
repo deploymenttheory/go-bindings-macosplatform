@@ -23,7 +23,8 @@ func MTRWriteParamsFromID(id objc.ID) *MTRWriteParams {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRWriteParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRWriteParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRWriteParamsAdopt(id objc.ID) *MTRWriteParams {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRWriteParams{Handle: objref.Wrap(id)}
+	x := &MTRWriteParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,44 +58,48 @@ func (x *MTRWriteParams) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRWriteParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRWriteParams creates a new MTRWriteParams.
 func NewMTRWriteParams() *MTRWriteParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRWriteParams")), objc.RegisterName("new"))
 	return mTRWriteParamsAdopt(_id)
 }
 
-// Controls whether the write is a timed write. If nil (the default value), a regular write is done for attributes that do not require a timed write and a timed write with some default timed request timeout is done for attributes that require a timed write. If not nil, a timed write is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual write request) within the timeout window. This value is specified in milliseconds.
-//
-// WithTimedWriteTimeout sets timedWriteTimeout and returns the receiver so calls can be chained.
+// WithTimedWriteTimeout controls whether the write is a timed write. If nil (the default value), a regular write is done for attributes that do not require a timed write and a timed write with some default timed request timeout is done for attributes that require a timed write. If not nil, a timed write is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual write request) within the timeout window. This value is specified in milliseconds.
 func (x *MTRWriteParams) WithTimedWriteTimeout(timedWriteTimeout obj.Object) *MTRWriteParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedWriteTimeout:"), objref.IDOf(timedWriteTimeout))
 	return x
 }
 
-// Sets the data version for the Write Request for the interaction. If not nil, the write will only succeed if the current data version of the cluster matches the provided data version.
-//
-// WithDataVersion sets dataVersion and returns the receiver so calls can be chained.
+// WithDataVersion sets the data version for the Write Request for the interaction. If not nil, the write will only succeed if the current data version of the cluster matches the provided data version.
 func (x *MTRWriteParams) WithDataVersion(dataVersion obj.Object) *MTRWriteParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataVersion:"), objref.IDOf(dataVersion))
 	return x
 }
 
-// Controls whether the write is a timed write. If nil (the default value), a regular write is done for attributes that do not require a timed write and a timed write with some default timed request timeout is done for attributes that require a timed write. If not nil, a timed write is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual write request) within the timeout window. This value is specified in milliseconds.
+// TimedWriteTimeout controls whether the write is a timed write. If nil (the default value), a regular write is done for attributes that do not require a timed write and a timed write with some default timed request timeout is done for attributes that require a timed write. If not nil, a timed write is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual write request) within the timeout window. This value is specified in milliseconds.
 func (x *MTRWriteParams) TimedWriteTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedWriteTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedWriteTimeout wraps the corresponding Objective-C method.
 func (x *MTRWriteParams) SetTimedWriteTimeout(timedWriteTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedWriteTimeout:"), objref.IDOf(timedWriteTimeout))
 }
 
-// Sets the data version for the Write Request for the interaction. If not nil, the write will only succeed if the current data version of the cluster matches the provided data version.
+// DataVersion sets the data version for the Write Request for the interaction. If not nil, the write will only succeed if the current data version of the cluster matches the provided data version.
 func (x *MTRWriteParams) DataVersion() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataVersion"))
 	return obj.Wrap(_r)
 }
 
+// SetDataVersion wraps the corresponding Objective-C method.
 func (x *MTRWriteParams) SetDataVersion(dataVersion obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataVersion:"), objref.IDOf(dataVersion))
 }

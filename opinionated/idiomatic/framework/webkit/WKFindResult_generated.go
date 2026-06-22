@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains the results of searching the web view’s contents.
-//
 // WKFindResult is an idiomatic wrapper over the Objective-C class WKFindResult.
+//
+// An object that contains the results of searching the web view’s contents.
 type WKFindResult struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKFindResultFromID(id objc.ID) *WKFindResult {
 	if id == 0 {
 		return nil
 	}
-	x := &WKFindResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKFindResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKFindResultAdopt(id objc.ID) *WKFindResult {
 	if id == 0 {
 		return nil
 	}
-	x := &WKFindResult{Handle: objref.Wrap(id)}
+	x := &WKFindResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *WKFindResult) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKFindResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKFindResult creates a new WKFindResult.
 func NewWKFindResult() *WKFindResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKFindResult")), objc.RegisterName("new"))
 	return wKFindResultAdopt(_id)
 }
 
+// MatchFound wraps the corresponding Objective-C method.
 func (x *WKFindResult) MatchFound() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("matchFound"))
 	return _r

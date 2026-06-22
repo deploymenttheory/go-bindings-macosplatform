@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A timer that fires after a certain time interval has elapsed, sending a specified message to a target object.
-//
 // Timer is an idiomatic wrapper over the Objective-C class NSTimer.
+//
+// A timer that fires after a certain time interval has elapsed, sending a specified message to a target object.
 type Timer struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TimerFromID(id objc.ID) *Timer {
 	if id == 0 {
 		return nil
 	}
-	x := &Timer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Timer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func timerAdopt(id objc.ID) *Timer {
 	if id == 0 {
 		return nil
 	}
-	x := &Timer{Handle: objref.Wrap(id)}
+	x := &Timer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,69 +60,82 @@ func (x *Timer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a new NSTimer object using the block as the main body of execution for the timer. This timer needs to be scheduled on a run loop (via -[NSRunLoop addTimer:]) before it will fire. - parameter:  fireDate   The time at which the timer should first fire. - parameter:  interval  The number of seconds between firings of the timer. If seconds is less than or equal to 0.0, this method chooses the nonnegative value of 0.1 milliseconds instead - parameter:  repeats  If YES, the timer will repeatedly reschedule itself until invalidated. If NO, the timer will be invalidated after it fires. - parameter:  block  The execution body of the timer; the timer itself is passed as the parameter to this block when executed to aid in avoiding cyclical references
-//
-// NewTimerWithFireDateIntervalRepeatsBlock creates a new Timer.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Timer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTimerWithFireDateIntervalRepeatsBlock initializes a new NSTimer object using the block as the main body of execution for the timer. This timer needs to be scheduled on a run loop (via -[NSRunLoop addTimer:]) before it will fire. - parameter:  fireDate   The time at which the timer should first fire. - parameter:  interval  The number of seconds between firings of the timer. If seconds is less than or equal to 0.0, this method chooses the nonnegative value of 0.1 milliseconds instead - parameter:  repeats  If YES, the timer will repeatedly reschedule itself until invalidated. If NO, the timer will be invalidated after it fires. - parameter:  block  The execution body of the timer; the timer itself is passed as the parameter to this block when executed to aid in avoiding cyclical references
 func NewTimerWithFireDateIntervalRepeatsBlock(date *Date, interval float64, repeats bool, block func(obj.Object)) *Timer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTimer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFireDate:interval:repeats:block:"), objref.IDOf(date), interval, repeats, objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { block(obj.Wrap(_b0)) }))
 	return timerAdopt(_id)
 }
 
-// WithFireDate sets fireDate and returns the receiver so calls can be chained.
+// WithFireDate sets the property and returns the receiver so calls can be chained.
 func (x *Timer) WithFireDate(fireDate DateProvider) *Timer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFireDate:"), objref.IDOf(fireDate))
 	return x
 }
 
-// WithTolerance sets tolerance and returns the receiver so calls can be chained.
+// WithTolerance sets the property and returns the receiver so calls can be chained.
 func (x *Timer) WithTolerance(tolerance float64) *Timer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTolerance:"), tolerance)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Timer) WithScriptingProperties(scriptingProperties obj.Object) *Timer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Fire wraps the corresponding Objective-C method.
 func (x *Timer) Fire() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fire"))
 }
 
+// Invalidate wraps the corresponding Objective-C method.
 func (x *Timer) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
+// FireDate wraps the corresponding Objective-C method.
 func (x *Timer) FireDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fireDate"))
 	return DateFromID(_r)
 }
 
+// SetFireDate wraps the corresponding Objective-C method.
 func (x *Timer) SetFireDate(fireDate *Date) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFireDate:"), objref.IDOf(fireDate))
 }
 
+// TimeInterval wraps the corresponding Objective-C method.
 func (x *Timer) TimeInterval() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeInterval"))
 	return _r
 }
 
+// Tolerance wraps the corresponding Objective-C method.
 func (x *Timer) Tolerance() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("tolerance"))
 	return _r
 }
 
+// SetTolerance wraps the corresponding Objective-C method.
 func (x *Timer) SetTolerance(tolerance float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTolerance:"), tolerance)
 }
 
+// IsValid wraps the corresponding Objective-C method.
 func (x *Timer) IsValid() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isValid"))
 	return _r
 }
 
+// UserInfo wraps the corresponding Objective-C method.
 func (x *Timer) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)

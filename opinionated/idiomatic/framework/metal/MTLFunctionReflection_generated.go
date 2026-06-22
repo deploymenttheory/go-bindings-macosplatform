@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Represents a reflection object containing information about a function in a Metal library.
-//
 // FunctionReflection is an idiomatic wrapper over the Objective-C class MTLFunctionReflection.
+//
+// Represents a reflection object containing information about a function in a Metal library.
 type FunctionReflection struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FunctionReflectionFromID(id objc.ID) *FunctionReflection {
 	if id == 0 {
 		return nil
 	}
-	x := &FunctionReflection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FunctionReflection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func functionReflectionAdopt(id objc.ID) *FunctionReflection {
 	if id == 0 {
 		return nil
 	}
-	x := &FunctionReflection{Handle: objref.Wrap(id)}
+	x := &FunctionReflection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *FunctionReflection) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FunctionReflection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFunctionReflection creates a new FunctionReflection.
 func NewFunctionReflection() *FunctionReflection {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLFunctionReflection")), objc.RegisterName("new"))
 	return functionReflectionAdopt(_id)
 }
 
-// Provides a list of inputs and outputs of the function.
+// Bindings provides a list of inputs and outputs of the function.
 func (x *FunctionReflection) Bindings() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The string passed to the user annotation attribute for this function. Null if no user annotation is present for this function.
+// UserAnnotation the string passed to the user annotation attribute for this function. Null if no user annotation is present for this function.
 func (x *FunctionReflection) UserAnnotation() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userAnnotation"))
 	if _r == 0 {

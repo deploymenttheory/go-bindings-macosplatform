@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that executes Automator workflows.
-//
 // UserAutomatorTask is an idiomatic wrapper over the Objective-C class NSUserAutomatorTask.
+//
+// It embeds [UserScriptTask], promoting that type's methods.
+//
+// An object that executes Automator workflows.
 type UserAutomatorTask struct {
-	objref.Handle
+	UserScriptTask
 }
 
 // UserAutomatorTaskFromID adopts an existing Objective-C object as a UserAutomatorTask
@@ -25,7 +26,8 @@ func UserAutomatorTaskFromID(id objc.ID) *UserAutomatorTask {
 	if id == 0 {
 		return nil
 	}
-	x := &UserAutomatorTask{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UserAutomatorTask{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func userAutomatorTaskAdopt(id objc.ID) *UserAutomatorTask {
 	if id == 0 {
 		return nil
 	}
-	x := &UserAutomatorTask{Handle: objref.Wrap(id)}
+	x := &UserAutomatorTask{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UserAutomatorTask) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UserAutomatorTask) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UserAutomatorTask) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUserAutomatorTask creates a new UserAutomatorTask.
@@ -64,25 +52,25 @@ func NewUserAutomatorTask() *UserAutomatorTask {
 	return userAutomatorTaskAdopt(_id)
 }
 
-// The variables required by the Automator workflow.
-//
-// WithVariables sets variables and returns the receiver so calls can be chained.
+// WithVariables the variables required by the Automator workflow.
 func (x *UserAutomatorTask) WithVariables(variables obj.Object) *UserAutomatorTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariables:"), objref.IDOf(variables))
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UserAutomatorTask) WithScriptingProperties(scriptingProperties obj.Object) *UserAutomatorTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Variables wraps the corresponding Objective-C method.
 func (x *UserAutomatorTask) Variables() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variables"))
 	return obj.Wrap(_r)
 }
 
+// SetVariables wraps the corresponding Objective-C method.
 func (x *UserAutomatorTask) SetVariables(variables obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariables:"), objref.IDOf(variables))
 }
@@ -97,3 +85,5 @@ type UserAutomatorTaskable interface {
 }
 
 var _ UserAutomatorTaskable = (*UserAutomatorTask)(nil)
+
+var _ UserScriptTaskProvider = (*UserAutomatorTask)(nil)

@@ -23,7 +23,8 @@ func MeshBufferFromID(id objc.ID) *MeshBuffer {
 	if id == 0 {
 		return nil
 	}
-	x := &MeshBuffer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MeshBuffer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func meshBufferAdopt(id objc.ID) *MeshBuffer {
 	if id == 0 {
 		return nil
 	}
-	x := &MeshBuffer{Handle: objref.Wrap(id)}
+	x := &MeshBuffer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,31 +58,37 @@ func (x *MeshBuffer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MeshBuffer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMeshBuffer creates a new MeshBuffer.
 func NewMeshBuffer() *MeshBuffer {
 	_id := objc.Send[objc.ID](objc.ID(_class("GLKMeshBuffer")), objc.RegisterName("new"))
 	return meshBufferAdopt(_id)
 }
 
-// Size in bytes of the buffer allocation
+// Length size in bytes of the buffer allocation
 func (x *MeshBuffer) Length() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
 	return _r
 }
 
-// Allocator object used to create this buffer. This allcoator used for copy and relayout operations (such as when a new vertex descriptor is applied to a vertex buffer)
+// Allocator allocator object used to create this buffer. This allcoator used for copy and relayout operations (such as when a new vertex descriptor is applied to a vertex buffer)
 func (x *MeshBuffer) Allocator() *MeshBufferAllocator {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allocator"))
 	return MeshBufferAllocatorFromID(_r)
 }
 
-// glBufferName for buffer object backing vertex/index data Many GLKMeshBuffers may reference the same OpenGL buffer object, but each with its own offset.  (i.e. Many GLKMeshBuffers may be suballocated from a single OpenGL buffer object)
+// GlBufferName glBufferName for buffer object backing vertex/index data Many GLKMeshBuffers may reference the same OpenGL buffer object, but each with its own offset.  (i.e. Many GLKMeshBuffers may be suballocated from a single OpenGL buffer object)
 func (x *MeshBuffer) GlBufferName() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("glBufferName"))
 	return _r
 }
 
-// Byte offset of the data within the OpenGL buffer
+// Offset byte offset of the data within the OpenGL buffer
 func (x *MeshBuffer) Offset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
 	return _r

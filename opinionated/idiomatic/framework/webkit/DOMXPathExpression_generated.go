@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMXPathExpression is an idiomatic wrapper over the Objective-C class DOMXPathExpression.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMXPathExpression struct {
-	objref.Handle
+	DOMObject
 }
 
 // DOMXPathExpressionFromID adopts an existing Objective-C object as a DOMXPathExpression
@@ -23,7 +24,8 @@ func DOMXPathExpressionFromID(id objc.ID) *DOMXPathExpression {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMXPathExpression{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMXPathExpression{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMXPathExpressionAdopt(id objc.ID) *DOMXPathExpression {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMXPathExpression{Handle: objref.Wrap(id)}
+	x := &DOMXPathExpression{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMXPathExpression) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMXPathExpression) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMXPathExpression) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMXPathExpression creates a new DOMXPathExpression.
@@ -62,11 +50,13 @@ func NewDOMXPathExpression() *DOMXPathExpression {
 	return dOMXPathExpressionAdopt(_id)
 }
 
+// EvaluateTypeInResult wraps the corresponding Objective-C method.
 func (x *DOMXPathExpression) EvaluateTypeInResult(contextNode *DOMNode, type_ uint16, inResult *DOMXPathResult) *DOMXPathResult {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("evaluate:type:inResult:"), objref.IDOf(contextNode), type_, objref.IDOf(inResult))
 	return DOMXPathResultFromID(_r)
 }
 
+// Evaluate wraps the corresponding Objective-C method.
 func (x *DOMXPathExpression) Evaluate(contextNode *DOMNode, type_ uint16, inResult *DOMXPathResult) *DOMXPathResult {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("evaluate:::"), objref.IDOf(contextNode), type_, objref.IDOf(inResult))
 	return DOMXPathResultFromID(_r)
@@ -80,3 +70,7 @@ type DOMXPathExpressionable interface {
 }
 
 var _ DOMXPathExpressionable = (*DOMXPathExpression)(nil)
+
+var _ DOMObjectProvider = (*DOMXPathExpression)(nil)
+
+var _ WebScriptObjectProvider = (*DOMXPathExpression)(nil)

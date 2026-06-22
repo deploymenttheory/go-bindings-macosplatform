@@ -13,6 +13,8 @@ import (
 )
 
 // MTRUnitTestingClusterTestFabricScoped is an idiomatic wrapper over the Objective-C class MTRUnitTestingClusterTestFabricScoped.
+//
+// MTRUnitTestingClusterTestFabricScoped is an abstract base — you do not construct it directly. Construct one of [MTRTestClusterClusterTestFabricScoped] and pass it where a MTRUnitTestingClusterTestFabricScoped is accepted.
 type MTRUnitTestingClusterTestFabricScoped struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRUnitTestingClusterTestFabricScopedFromID(id objc.ID) *MTRUnitTestingClus
 	if id == 0 {
 		return nil
 	}
-	x := &MTRUnitTestingClusterTestFabricScoped{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRUnitTestingClusterTestFabricScoped{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRUnitTestingClusterTestFabricScopedAdopt(id objc.ID) *MTRUnitTestingClust
 	if id == 0 {
 		return nil
 	}
-	x := &MTRUnitTestingClusterTestFabricScoped{Handle: objref.Wrap(id)}
+	x := &MTRUnitTestingClusterTestFabricScoped{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,90 +60,99 @@ func (x *MTRUnitTestingClusterTestFabricScoped) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRUnitTestingClusterTestFabricScoped creates a new MTRUnitTestingClusterTestFabricScoped.
-func NewMTRUnitTestingClusterTestFabricScoped() *MTRUnitTestingClusterTestFabricScoped {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRUnitTestingClusterTestFabricScoped")), objc.RegisterName("new"))
-	return mTRUnitTestingClusterTestFabricScopedAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRUnitTestingClusterTestFabricScoped) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithFabricSensitiveInt8u sets fabricSensitiveInt8u and returns the receiver so calls can be chained.
+// WithFabricSensitiveInt8u sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterTestFabricScoped) WithFabricSensitiveInt8u(fabricSensitiveInt8u obj.Object) *MTRUnitTestingClusterTestFabricScoped {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricSensitiveInt8u:"), objref.IDOf(fabricSensitiveInt8u))
 	return x
 }
 
-// WithOptionalFabricSensitiveInt8u sets optionalFabricSensitiveInt8u and returns the receiver so calls can be chained.
+// WithOptionalFabricSensitiveInt8u sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterTestFabricScoped) WithOptionalFabricSensitiveInt8u(optionalFabricSensitiveInt8u obj.Object) *MTRUnitTestingClusterTestFabricScoped {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalFabricSensitiveInt8u:"), objref.IDOf(optionalFabricSensitiveInt8u))
 	return x
 }
 
-// WithNullableFabricSensitiveInt8u sets nullableFabricSensitiveInt8u and returns the receiver so calls can be chained.
+// WithNullableFabricSensitiveInt8u sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterTestFabricScoped) WithNullableFabricSensitiveInt8u(nullableFabricSensitiveInt8u obj.Object) *MTRUnitTestingClusterTestFabricScoped {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableFabricSensitiveInt8u:"), objref.IDOf(nullableFabricSensitiveInt8u))
 	return x
 }
 
-// WithNullableOptionalFabricSensitiveInt8u sets nullableOptionalFabricSensitiveInt8u and returns the receiver so calls can be chained.
+// WithNullableOptionalFabricSensitiveInt8u sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterTestFabricScoped) WithNullableOptionalFabricSensitiveInt8u(nullableOptionalFabricSensitiveInt8u obj.Object) *MTRUnitTestingClusterTestFabricScoped {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalFabricSensitiveInt8u:"), objref.IDOf(nullableOptionalFabricSensitiveInt8u))
 	return x
 }
 
-// WithFabricSensitiveCharString sets fabricSensitiveCharString and returns the receiver so calls can be chained.
+// WithFabricSensitiveCharString sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterTestFabricScoped) WithFabricSensitiveCharString(fabricSensitiveCharString string) *MTRUnitTestingClusterTestFabricScoped {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricSensitiveCharString:"), purego.NSString(fabricSensitiveCharString))
 	return x
 }
 
-// WithFabricSensitiveStruct sets fabricSensitiveStruct and returns the receiver so calls can be chained.
+// WithFabricSensitiveStruct sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterTestFabricScoped) WithFabricSensitiveStruct(fabricSensitiveStruct MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestFabricScoped {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricSensitiveStruct:"), objref.IDOf(fabricSensitiveStruct))
 	return x
 }
 
-// WithFabricIndex sets fabricIndex and returns the receiver so calls can be chained.
+// WithFabricIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterTestFabricScoped) WithFabricIndex(fabricIndex obj.Object) *MTRUnitTestingClusterTestFabricScoped {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return x
 }
 
+// FabricSensitiveInt8u wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveInt8u() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricSensitiveInt8u"))
 	return obj.Wrap(_r)
 }
 
+// SetFabricSensitiveInt8u wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestFabricScoped) SetFabricSensitiveInt8u(fabricSensitiveInt8u obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricSensitiveInt8u:"), objref.IDOf(fabricSensitiveInt8u))
 }
 
+// OptionalFabricSensitiveInt8u wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestFabricScoped) OptionalFabricSensitiveInt8u() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionalFabricSensitiveInt8u"))
 	return obj.Wrap(_r)
 }
 
+// SetOptionalFabricSensitiveInt8u wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestFabricScoped) SetOptionalFabricSensitiveInt8u(optionalFabricSensitiveInt8u obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalFabricSensitiveInt8u:"), objref.IDOf(optionalFabricSensitiveInt8u))
 }
 
+// NullableFabricSensitiveInt8u wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestFabricScoped) NullableFabricSensitiveInt8u() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableFabricSensitiveInt8u"))
 	return obj.Wrap(_r)
 }
 
+// SetNullableFabricSensitiveInt8u wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestFabricScoped) SetNullableFabricSensitiveInt8u(nullableFabricSensitiveInt8u obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableFabricSensitiveInt8u:"), objref.IDOf(nullableFabricSensitiveInt8u))
 }
 
+// NullableOptionalFabricSensitiveInt8u wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestFabricScoped) NullableOptionalFabricSensitiveInt8u() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableOptionalFabricSensitiveInt8u"))
 	return obj.Wrap(_r)
 }
 
+// SetNullableOptionalFabricSensitiveInt8u wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestFabricScoped) SetNullableOptionalFabricSensitiveInt8u(nullableOptionalFabricSensitiveInt8u obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalFabricSensitiveInt8u:"), objref.IDOf(nullableOptionalFabricSensitiveInt8u))
 }
 
+// FabricSensitiveCharString wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveCharString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricSensitiveCharString"))
 	if _r == 0 {
@@ -148,33 +161,40 @@ func (x *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveCharString() stri
 	return purego.GoString(_r)
 }
 
+// SetFabricSensitiveCharString wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestFabricScoped) SetFabricSensitiveCharString(fabricSensitiveCharString string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricSensitiveCharString:"), purego.NSString(fabricSensitiveCharString))
 }
 
+// FabricSensitiveStruct wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveStruct() *MTRUnitTestingClusterSimpleStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricSensitiveStruct"))
 	return MTRUnitTestingClusterSimpleStructFromID(_r)
 }
 
+// SetFabricSensitiveStruct wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestFabricScoped) SetFabricSensitiveStruct(fabricSensitiveStruct *MTRUnitTestingClusterSimpleStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricSensitiveStruct:"), objref.IDOf(fabricSensitiveStruct))
 }
 
+// FabricSensitiveInt8uList wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveInt8uList() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricSensitiveInt8uList"))
 	return obj.Wrap(_r)
 }
 
+// SetFabricSensitiveInt8uList wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestFabricScoped) SetFabricSensitiveInt8uList(fabricSensitiveInt8uList obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricSensitiveInt8uList:"), objref.IDOf(fabricSensitiveInt8uList))
 }
 
+// FabricIndex wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestFabricScoped) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)
 }
 
+// SetFabricIndex wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestFabricScoped) SetFabricIndex(fabricIndex obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 }
@@ -208,3 +228,10 @@ type MTRUnitTestingClusterTestFabricScopedable interface {
 }
 
 var _ MTRUnitTestingClusterTestFabricScopedable = (*MTRUnitTestingClusterTestFabricScoped)(nil)
+
+// isMTRUnitTestingClusterTestFabricScoped marks MTRUnitTestingClusterTestFabricScoped — and, by embedding promotion, its
+// subclasses — as a member of the MTRUnitTestingClusterTestFabricScoped hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRUnitTestingClusterTestFabricScoped) isMTRUnitTestingClusterTestFabricScoped() {}
+
+var _ MTRUnitTestingClusterTestFabricScopedProvider = (*MTRUnitTestingClusterTestFabricScoped)(nil)

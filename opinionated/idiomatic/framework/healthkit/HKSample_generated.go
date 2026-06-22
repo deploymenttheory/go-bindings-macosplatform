@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A HealthKit sample represents a piece of data associated with a start and end time.
-//
 // Sample is an idiomatic wrapper over the Objective-C class HKSample.
+//
+// Sample is an abstract base — you do not construct it directly. Construct one of [AudiogramSample], [CategorySample], [ClinicalRecord], [Correlation], [DocumentSample], [Electrocardiogram], [MedicationDoseEvent], [QuantitySample], [ScoredAssessment], [SeriesSample], [StateOfMind], [VerifiableClinicalRecord], [VisionPrescription], [Workout] and pass it where a Sample is accepted.
+//
+// A HealthKit sample represents a piece of data associated with a start and end time.
 type Sample struct {
-	objref.Handle
+	Object
 }
 
 // SampleFromID adopts an existing Objective-C object as a Sample
@@ -25,7 +26,8 @@ func SampleFromID(id objc.ID) *Sample {
 	if id == 0 {
 		return nil
 	}
-	x := &Sample{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Sample{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,48 +40,31 @@ func sampleAdopt(id objc.ID) *Sample {
 	if id == 0 {
 		return nil
 	}
-	x := &Sample{Handle: objref.Wrap(id)}
+	x := &Sample{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *Sample) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Sample) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Sample) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewSample creates a new Sample.
-func NewSample() *Sample {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKSample")), objc.RegisterName("new"))
-	return sampleAdopt(_id)
-}
-
+// SampleType wraps the corresponding Objective-C method.
 func (x *Sample) SampleType() *SampleType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleType"))
 	return SampleTypeFromID(_r)
 }
 
+// StartDate wraps the corresponding Objective-C method.
 func (x *Sample) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
+// EndDate wraps the corresponding Objective-C method.
 func (x *Sample) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
-// Indicates whether a sample has an undetermined duration. Computed based on the endDate of a sample.
+// HasUndeterminedDuration indicates whether a sample has an undetermined duration. Computed based on the endDate of a sample.
 func (x *Sample) HasUndeterminedDuration() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasUndeterminedDuration"))
 	return _r
@@ -95,3 +80,12 @@ type Sampleable interface {
 }
 
 var _ Sampleable = (*Sample)(nil)
+
+// isSample marks Sample — and, by embedding promotion, its
+// subclasses — as a member of the Sample hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Sample) isSample() {}
+
+var _ SampleProvider = (*Sample)(nil)
+
+var _ ObjectProvider = (*Sample)(nil)

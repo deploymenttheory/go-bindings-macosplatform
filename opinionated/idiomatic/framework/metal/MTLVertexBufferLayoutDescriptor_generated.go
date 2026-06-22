@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that configures how a render pipeline fetches data to send to the vertex function.
-//
 // VertexBufferLayoutDescriptor is an idiomatic wrapper over the Objective-C class MTLVertexBufferLayoutDescriptor.
+//
+// An object that configures how a render pipeline fetches data to send to the vertex function.
 type VertexBufferLayoutDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VertexBufferLayoutDescriptorFromID(id objc.ID) *VertexBufferLayoutDescripto
 	if id == 0 {
 		return nil
 	}
-	x := &VertexBufferLayoutDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VertexBufferLayoutDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func vertexBufferLayoutDescriptorAdopt(id objc.ID) *VertexBufferLayoutDescriptor
 	if id == 0 {
 		return nil
 	}
-	x := &VertexBufferLayoutDescriptor{Handle: objref.Wrap(id)}
+	x := &VertexBufferLayoutDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,59 +60,65 @@ func (x *VertexBufferLayoutDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VertexBufferLayoutDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVertexBufferLayoutDescriptor creates a new VertexBufferLayoutDescriptor.
 func NewVertexBufferLayoutDescriptor() *VertexBufferLayoutDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLVertexBufferLayoutDescriptor")), objc.RegisterName("new"))
 	return vertexBufferLayoutDescriptorAdopt(_id)
 }
 
-// The number of bytes between the first byte of two consecutive vertices in a buffer.
-//
-// WithStride sets stride and returns the receiver so calls can be chained.
+// WithStride the number of bytes between the first byte of two consecutive vertices in a buffer.
 func (x *VertexBufferLayoutDescriptor) WithStride(stride int) *VertexBufferLayoutDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStride:"), stride)
 	return x
 }
 
-// The circumstances under which the vertex and its attributes are presented to the vertex function.
-//
-// WithStepFunction sets stepFunction and returns the receiver so calls can be chained.
+// WithStepFunction the circumstances under which the vertex and its attributes are presented to the vertex function.
 func (x *VertexBufferLayoutDescriptor) WithStepFunction(stepFunction VertexStepFunction) *VertexBufferLayoutDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepFunction:"), stepFunction)
 	return x
 }
 
-// The interval at which the vertex and its attributes are presented to the vertex function.
-//
-// WithStepRate sets stepRate and returns the receiver so calls can be chained.
+// WithStepRate the interval at which the vertex and its attributes are presented to the vertex function.
 func (x *VertexBufferLayoutDescriptor) WithStepRate(stepRate int) *VertexBufferLayoutDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepRate:"), stepRate)
 	return x
 }
 
+// Stride wraps the corresponding Objective-C method.
 func (x *VertexBufferLayoutDescriptor) Stride() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stride"))
 	return _r
 }
 
+// SetStride wraps the corresponding Objective-C method.
 func (x *VertexBufferLayoutDescriptor) SetStride(stride int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStride:"), stride)
 }
 
+// StepFunction wraps the corresponding Objective-C method.
 func (x *VertexBufferLayoutDescriptor) StepFunction() VertexStepFunction {
 	_r := objc.Send[VertexStepFunction](objref.IDOf(x), objc.RegisterName("stepFunction"))
 	return _r
 }
 
+// SetStepFunction wraps the corresponding Objective-C method.
 func (x *VertexBufferLayoutDescriptor) SetStepFunction(stepFunction VertexStepFunction) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepFunction:"), stepFunction)
 }
 
+// StepRate wraps the corresponding Objective-C method.
 func (x *VertexBufferLayoutDescriptor) StepRate() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stepRate"))
 	return _r
 }
 
+// SetStepRate wraps the corresponding Objective-C method.
 func (x *VertexBufferLayoutDescriptor) SetStepRate(stepRate int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepRate:"), stepRate)
 }

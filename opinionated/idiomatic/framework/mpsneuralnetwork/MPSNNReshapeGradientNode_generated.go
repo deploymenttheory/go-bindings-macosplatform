@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NNReshapeGradientNode is an idiomatic wrapper over the Objective-C class MPSNNReshapeGradientNode.
+//
+// It embeds [NNGradientFilterNode], promoting that type's methods.
 type NNReshapeGradientNode struct {
-	objref.Handle
+	NNGradientFilterNode
 }
 
 // NNReshapeGradientNodeFromID adopts an existing Objective-C object as a NNReshapeGradientNode
@@ -23,7 +24,8 @@ func NNReshapeGradientNodeFromID(id objc.ID) *NNReshapeGradientNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNReshapeGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNReshapeGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,38 +38,20 @@ func nNReshapeGradientNodeAdopt(id objc.ID) *NNReshapeGradientNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNReshapeGradientNode{Handle: objref.Wrap(id)}
+	x := &NNReshapeGradientNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NNReshapeGradientNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNReshapeGradientNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNReshapeGradientNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// A node to represent the gradient of a reshape node.
-//
-// NewNNReshapeGradientNodeWithSourceGradientSourceImageGradientState creates a new NNReshapeGradientNode.
+// NewNNReshapeGradientNodeWithSourceGradientSourceImageGradientState a node to represent the gradient of a reshape node.
 func NewNNReshapeGradientNodeWithSourceGradientSourceImageGradientState(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode) *NNReshapeGradientNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNReshapeGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
 	return nNReshapeGradientNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *NNReshapeGradientNode) WithLabel(label string) *NNReshapeGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -80,3 +64,7 @@ type NNReshapeGradientNodeable interface {
 }
 
 var _ NNReshapeGradientNodeable = (*NNReshapeGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*NNReshapeGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNReshapeGradientNode)(nil)

@@ -23,7 +23,8 @@ func MTREnergyEVSEClusterRFIDEventFromID(id objc.ID) *MTREnergyEVSEClusterRFIDEv
 	if id == 0 {
 		return nil
 	}
-	x := &MTREnergyEVSEClusterRFIDEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTREnergyEVSEClusterRFIDEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTREnergyEVSEClusterRFIDEventAdopt(id objc.ID) *MTREnergyEVSEClusterRFIDEve
 	if id == 0 {
 		return nil
 	}
-	x := &MTREnergyEVSEClusterRFIDEvent{Handle: objref.Wrap(id)}
+	x := &MTREnergyEVSEClusterRFIDEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTREnergyEVSEClusterRFIDEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTREnergyEVSEClusterRFIDEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTREnergyEVSEClusterRFIDEvent creates a new MTREnergyEVSEClusterRFIDEvent.
 func NewMTREnergyEVSEClusterRFIDEvent() *MTREnergyEVSEClusterRFIDEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTREnergyEVSEClusterRFIDEvent")), objc.RegisterName("new"))
 	return mTREnergyEVSEClusterRFIDEventAdopt(_id)
 }
 
-// WithUid sets uid and returns the receiver so calls can be chained.
+// WithUid sets the property and returns the receiver so calls can be chained.
 func (x *MTREnergyEVSEClusterRFIDEvent) WithUid(uid obj.Object) *MTREnergyEVSEClusterRFIDEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUid:"), objref.IDOf(uid))
 	return x
 }
 
+// Uid wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterRFIDEvent) Uid() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uid"))
 	return obj.Wrap(_r)
 }
 
+// SetUid wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterRFIDEvent) SetUid(uid obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUid:"), objref.IDOf(uid))
 }

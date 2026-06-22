@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterBridgedDeviceBasicInformation is an idiomatic wrapper over the Objective-C class MTRClusterBridgedDeviceBasicInformation.
+//
+// MTRClusterBridgedDeviceBasicInformation is an abstract base — you do not construct it directly. Construct one of [MTRClusterBridgedDeviceBasic] and pass it where a MTRClusterBridgedDeviceBasicInformation is accepted.
 type MTRClusterBridgedDeviceBasicInformation struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterBridgedDeviceBasicInformationFromID adopts an existing Objective-C object as a MTRClusterBridgedDeviceBasicInformation
@@ -23,7 +24,8 @@ func MTRClusterBridgedDeviceBasicInformationFromID(id objc.ID) *MTRClusterBridge
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterBridgedDeviceBasicInformation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterBridgedDeviceBasicInformation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,148 +38,156 @@ func mTRClusterBridgedDeviceBasicInformationAdopt(id objc.ID) *MTRClusterBridged
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterBridgedDeviceBasicInformation{Handle: objref.Wrap(id)}
+	x := &MTRClusterBridgedDeviceBasicInformation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterBridgedDeviceBasicInformation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterBridgedDeviceBasicInformation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterBridgedDeviceBasicInformation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue creates a new MTRClusterBridgedDeviceBasicInformation.
+// NewMTRClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterBridgedDeviceBasicInformation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBridgedDeviceBasicInformation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterBridgedDeviceBasicInformationAdopt(_id)
 }
 
+// ReadAttributeVendorNameWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeVendorNameWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeVendorNameWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeVendorIDWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeVendorIDWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeVendorIDWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeProductNameWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductNameWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeProductNameWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeProductIDWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductIDWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeProductIDWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeNodeLabelWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeNodeLabelWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNodeLabelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeNodeLabelWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) WriteAttributeNodeLabelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNodeLabelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeNodeLabelWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) WriteAttributeNodeLabelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNodeLabelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeHardwareVersionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeHardwareVersionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeHardwareVersionStringWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersionStringWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeHardwareVersionStringWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeSoftwareVersionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSoftwareVersionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeSoftwareVersionStringWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersionStringWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSoftwareVersionStringWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeManufacturingDateWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeManufacturingDateWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeManufacturingDateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributePartNumberWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributePartNumberWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePartNumberWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeProductURLWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductURLWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeProductURLWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeProductLabelWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductLabelWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeProductLabelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeSerialNumberWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeSerialNumberWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSerialNumberWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeReachableWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeReachableWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeReachableWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeUniqueIDWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeUniqueIDWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUniqueIDWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeProductAppearanceWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductAppearanceWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeProductAppearanceWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -213,3 +223,14 @@ type MTRClusterBridgedDeviceBasicInformationable interface {
 }
 
 var _ MTRClusterBridgedDeviceBasicInformationable = (*MTRClusterBridgedDeviceBasicInformation)(nil)
+
+// isMTRClusterBridgedDeviceBasicInformation marks MTRClusterBridgedDeviceBasicInformation — and, by embedding promotion, its
+// subclasses — as a member of the MTRClusterBridgedDeviceBasicInformation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRClusterBridgedDeviceBasicInformation) isMTRClusterBridgedDeviceBasicInformation() {}
+
+var _ MTRClusterBridgedDeviceBasicInformationProvider = (*MTRClusterBridgedDeviceBasicInformation)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterBridgedDeviceBasicInformation)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterBridgedDeviceBasicInformation)(nil)

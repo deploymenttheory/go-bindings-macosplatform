@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // CNNGroupNormalizationNode is an idiomatic wrapper over the Objective-C class MPSCNNGroupNormalizationNode.
+//
+// It embeds [NNFilterNode], promoting that type's methods.
 type CNNGroupNormalizationNode struct {
-	objref.Handle
+	NNFilterNode
 }
 
 // CNNGroupNormalizationNodeFromID adopts an existing Objective-C object as a CNNGroupNormalizationNode
@@ -23,7 +24,8 @@ func CNNGroupNormalizationNodeFromID(id objc.ID) *CNNGroupNormalizationNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNGroupNormalizationNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNGroupNormalizationNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func cNNGroupNormalizationNodeAdopt(id objc.ID) *CNNGroupNormalizationNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNGroupNormalizationNode{Handle: objref.Wrap(id)}
+	x := &CNNGroupNormalizationNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNGroupNormalizationNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNGroupNormalizationNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNGroupNormalizationNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNGroupNormalizationNode creates a new CNNGroupNormalizationNode.
@@ -62,9 +50,7 @@ func NewCNNGroupNormalizationNode() *CNNGroupNormalizationNode {
 	return cNNGroupNormalizationNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNGroupNormalizationNode) WithLabel(label string) *CNNGroupNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -77,3 +63,5 @@ type CNNGroupNormalizationNodeable interface {
 }
 
 var _ CNNGroupNormalizationNodeable = (*CNNGroupNormalizationNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNGroupNormalizationNode)(nil)

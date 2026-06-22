@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Your game uses the GKFriendRequestComposeViewController class to present a screen that allows the local player to send friend requests to other players.
-//
 // FriendRequestComposeViewController is an idiomatic wrapper over the Objective-C class GKFriendRequestComposeViewController.
+//
+// Your game uses the GKFriendRequestComposeViewController class to present a screen that allows the local player to send friend requests to other players.
 type FriendRequestComposeViewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FriendRequestComposeViewControllerFromID(id objc.ID) *FriendRequestComposeV
 	if id == 0 {
 		return nil
 	}
-	x := &FriendRequestComposeViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FriendRequestComposeViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func friendRequestComposeViewControllerAdopt(id objc.ID) *FriendRequestComposeVi
 	if id == 0 {
 		return nil
 	}
-	x := &FriendRequestComposeViewController{Handle: objref.Wrap(id)}
+	x := &FriendRequestComposeViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,34 @@ func (x *FriendRequestComposeViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FriendRequestComposeViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFriendRequestComposeViewController creates a new FriendRequestComposeViewController.
 func NewFriendRequestComposeViewController() *FriendRequestComposeViewController {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKFriendRequestComposeViewController")), objc.RegisterName("new"))
 	return friendRequestComposeViewControllerAdopt(_id)
 }
 
-// Sets the text message included in the friend invitation.
+// SetMessage sets the text message included in the friend invitation.
 func (x *FriendRequestComposeViewController) SetMessage(message string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessage:"), purego.NSString(message))
 }
 
-// Adds recipients based on their Game Center player identifiers.
+// AddRecipientPlayers adds recipients based on their Game Center player identifiers.
 func (x *FriendRequestComposeViewController) AddRecipientPlayers(players []*Player) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRecipientPlayers:"), purego.SliceToNSArray(players, func(_v *Player) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Adds recipients based on their Game Center player identifiers.
+// AddRecipientsWithPlayerIDs adds recipients based on their Game Center player identifiers.
 func (x *FriendRequestComposeViewController) AddRecipientsWithPlayerIDs(playerIDs []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRecipientsWithPlayerIDs:"), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// Adds recipients based on their email addresses.
+// AddRecipientsWithEmailAddresses adds recipients based on their email addresses.
 func (x *FriendRequestComposeViewController) AddRecipientsWithEmailAddresses(emailAddresses []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRecipientsWithEmailAddresses:"), purego.SliceToNSArray(emailAddresses, func(_v string) objc.ID { return purego.NSString(_v) }))
 }

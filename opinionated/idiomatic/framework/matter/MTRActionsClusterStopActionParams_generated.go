@@ -23,7 +23,8 @@ func MTRActionsClusterStopActionParamsFromID(id objc.ID) *MTRActionsClusterStopA
 	if id == 0 {
 		return nil
 	}
-	x := &MTRActionsClusterStopActionParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRActionsClusterStopActionParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRActionsClusterStopActionParamsAdopt(id objc.ID) *MTRActionsClusterStopAc
 	if id == 0 {
 		return nil
 	}
-	x := &MTRActionsClusterStopActionParams{Handle: objref.Wrap(id)}
+	x := &MTRActionsClusterStopActionParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,74 +58,82 @@ func (x *MTRActionsClusterStopActionParams) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRActionsClusterStopActionParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRActionsClusterStopActionParams creates a new MTRActionsClusterStopActionParams.
 func NewMTRActionsClusterStopActionParams() *MTRActionsClusterStopActionParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRActionsClusterStopActionParams")), objc.RegisterName("new"))
 	return mTRActionsClusterStopActionParamsAdopt(_id)
 }
 
-// WithActionID sets actionID and returns the receiver so calls can be chained.
+// WithActionID sets the property and returns the receiver so calls can be chained.
 func (x *MTRActionsClusterStopActionParams) WithActionID(actionID obj.Object) *MTRActionsClusterStopActionParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 	return x
 }
 
-// WithInvokeID sets invokeID and returns the receiver so calls can be chained.
+// WithInvokeID sets the property and returns the receiver so calls can be chained.
 func (x *MTRActionsClusterStopActionParams) WithInvokeID(invokeID obj.Object) *MTRActionsClusterStopActionParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRActionsClusterStopActionParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRActionsClusterStopActionParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRActionsClusterStopActionParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRActionsClusterStopActionParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// ActionID wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterStopActionParams) ActionID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actionID"))
 	return obj.Wrap(_r)
 }
 
+// SetActionID wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterStopActionParams) SetActionID(actionID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 }
 
+// InvokeID wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterStopActionParams) InvokeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invokeID"))
 	return obj.Wrap(_r)
 }
 
+// SetInvokeID wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterStopActionParams) SetInvokeID(invokeID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRActionsClusterStopActionParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterStopActionParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRActionsClusterStopActionParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterStopActionParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

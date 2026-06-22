@@ -16,6 +16,8 @@ const (
 	BLAS_THREADING_MAX_OPTIONS     BLAS_THREADING = 2
 )
 
+// String returns the BLAS_THREADING constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BLAS_THREADING) String() string {
 	switch e {
 	case BLAS_THREADING_MULTI_THREADED:
@@ -36,6 +38,8 @@ const (
 	CblasColMajor CBLAS_ORDER = 102
 )
 
+// String returns the CBLAS_ORDER constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CBLAS_ORDER) String() string {
 	switch e {
 	case CblasRowMajor:
@@ -56,6 +60,8 @@ const (
 	AtlasConj      CBLAS_TRANSPOSE = 114
 )
 
+// String returns the CBLAS_TRANSPOSE constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CBLAS_TRANSPOSE) String() string {
 	switch e {
 	case CblasNoTrans:
@@ -79,6 +85,8 @@ const (
 	VDSP_DCT_IV  VDSP_DCT_Type = 4
 )
 
+// String returns the VDSP_DCT_Type constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VDSP_DCT_Type) String() string {
 	switch e {
 	case VDSP_DCT_II:
@@ -99,6 +107,8 @@ const (
 	VDSP_DFT_INVERSE VDSP_DFT_Direction = -1
 )
 
+// String returns the VDSP_DFT_Direction constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VDSP_DFT_Direction) String() string {
 	switch e {
 	case VDSP_DFT_FORWARD:
@@ -117,6 +127,8 @@ const (
 	VDSP_DFT_Interleaved_RealtoComplex    VDSP_DFT_RealtoComplex = 1
 )
 
+// String returns the VDSP_DFT_RealtoComplex constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VDSP_DFT_RealtoComplex) String() string {
 	switch e {
 	case VDSP_DFT_Interleaved_ComplextoComplex:

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of points that connect to form a 3D volume.
-//
 // Shape is an idiomatic wrapper over the Objective-C class PHASEShape.
+//
+// A collection of points that connect to form a 3D volume.
 type Shape struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ShapeFromID(id objc.ID) *Shape {
 	if id == 0 {
 		return nil
 	}
-	x := &Shape{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Shape{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func shapeAdopt(id objc.ID) *Shape {
 	if id == 0 {
 		return nil
 	}
-	x := &Shape{Handle: objref.Wrap(id)}
+	x := &Shape{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +60,28 @@ func (x *Shape) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an object that the given geometric data shapes.
-//
-// NewShapeWithEngineMesh creates a new Shape.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Shape) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewShapeWithEngineMesh creates an object that the given geometric data shapes.
 func NewShapeWithEngineMesh(engine *Engine, mesh obj.Object) *Shape {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEShape")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:mesh:"), objref.IDOf(engine), objref.IDOf(mesh))
 	return shapeAdopt(_id)
 }
 
-// Creates an object of a specific material that the given geometric data shapes.
-//
-// NewShapeWithEngineMeshMaterials creates a new Shape.
+// NewShapeWithEngineMeshMaterials creates an object of a specific material that the given geometric data shapes.
 func NewShapeWithEngineMeshMaterials(engine *Engine, mesh obj.Object, materials []*Material) *Shape {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEShape")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:mesh:materials:"), objref.IDOf(engine), objref.IDOf(mesh), purego.SliceToNSArray(materials, func(_v *Material) objc.ID { return objref.IDOf(_v) }))
 	return shapeAdopt(_id)
 }
 
+// Elements wraps the corresponding Objective-C method.
+//
 // Elements returns the collection as a Go slice.
 func (x *Shape) Elements() []*ShapeElement {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elements"))

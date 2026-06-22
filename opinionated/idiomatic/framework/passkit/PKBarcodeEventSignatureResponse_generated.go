@@ -23,7 +23,8 @@ func BarcodeEventSignatureResponseFromID(id objc.ID) *BarcodeEventSignatureRespo
 	if id == 0 {
 		return nil
 	}
-	x := &BarcodeEventSignatureResponse{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BarcodeEventSignatureResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func barcodeEventSignatureResponseAdopt(id objc.ID) *BarcodeEventSignatureRespon
 	if id == 0 {
 		return nil
 	}
-	x := &BarcodeEventSignatureResponse{Handle: objref.Wrap(id)}
+	x := &BarcodeEventSignatureResponse{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *BarcodeEventSignatureResponse) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BarcodeEventSignatureResponse) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBarcodeEventSignatureResponseWithSignedData creates a new BarcodeEventSignatureResponse.
 func NewBarcodeEventSignatureResponseWithSignedData(signedData obj.Object) *BarcodeEventSignatureResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKBarcodeEventSignatureResponse")), objc.RegisterName("alloc"))
@@ -63,17 +71,19 @@ func NewBarcodeEventSignatureResponseWithSignedData(signedData obj.Object) *Barc
 	return barcodeEventSignatureResponseAdopt(_id)
 }
 
-// WithSignedData sets signedData and returns the receiver so calls can be chained.
+// WithSignedData sets the property and returns the receiver so calls can be chained.
 func (x *BarcodeEventSignatureResponse) WithSignedData(signedData obj.Object) *BarcodeEventSignatureResponse {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSignedData:"), objref.IDOf(signedData))
 	return x
 }
 
+// SignedData wraps the corresponding Objective-C method.
 func (x *BarcodeEventSignatureResponse) SignedData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signedData"))
 	return obj.Wrap(_r)
 }
 
+// SetSignedData wraps the corresponding Objective-C method.
 func (x *BarcodeEventSignatureResponse) SetSignedData(signedData obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSignedData:"), objref.IDOf(signedData))
 }

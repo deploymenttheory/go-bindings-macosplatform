@@ -2537,73 +2537,61 @@ func NSPasteboardNameDrag() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardNameDrag")))
 }
 
-// A pattern that indicates the pasteboard detects a string that consists of a web URL.
 // NSPasteboardDetectionPatternProbableWebURL returns the string constant NSPasteboardDetectionPatternProbableWebURL, for use as a dictionary key or argument.
 func NSPasteboardDetectionPatternProbableWebURL() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardDetectionPatternProbableWebURL")))
 }
 
-// A pattern that indicates the pasteboard detects a string suitable for use as a web search term.
 // NSPasteboardDetectionPatternProbableWebSearch returns the string constant NSPasteboardDetectionPatternProbableWebSearch, for use as a dictionary key or argument.
 func NSPasteboardDetectionPatternProbableWebSearch() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardDetectionPatternProbableWebSearch")))
 }
 
-// A pattern that indicates the pasteboard detects a string that consists of a numeric value.
 // NSPasteboardDetectionPatternNumber returns the string constant NSPasteboardDetectionPatternNumber, for use as a dictionary key or argument.
 func NSPasteboardDetectionPatternNumber() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardDetectionPatternNumber")))
 }
 
-// A pattern that indicates the pasteboard detects a string that contains a URL.
 // NSPasteboardDetectionPatternLink returns the string constant NSPasteboardDetectionPatternLink, for use as a dictionary key or argument.
 func NSPasteboardDetectionPatternLink() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardDetectionPatternLink")))
 }
 
-// A pattern that indicates the pasteboard detects a string that contains a phone number.
 // NSPasteboardDetectionPatternPhoneNumber returns the string constant NSPasteboardDetectionPatternPhoneNumber, for use as a dictionary key or argument.
 func NSPasteboardDetectionPatternPhoneNumber() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardDetectionPatternPhoneNumber")))
 }
 
-// A pattern that indicates the pasteboard detects a string that contains an email address.
 // NSPasteboardDetectionPatternEmailAddress returns the string constant NSPasteboardDetectionPatternEmailAddress, for use as a dictionary key or argument.
 func NSPasteboardDetectionPatternEmailAddress() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardDetectionPatternEmailAddress")))
 }
 
-// A pattern that indicates the pasteboard detects a string that contains a postal address.
 // NSPasteboardDetectionPatternPostalAddress returns the string constant NSPasteboardDetectionPatternPostalAddress, for use as a dictionary key or argument.
 func NSPasteboardDetectionPatternPostalAddress() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardDetectionPatternPostalAddress")))
 }
 
-// A pattern that indicates the pasteboard detects a string that contains a calendar event.
 // NSPasteboardDetectionPatternCalendarEvent returns the string constant NSPasteboardDetectionPatternCalendarEvent, for use as a dictionary key or argument.
 func NSPasteboardDetectionPatternCalendarEvent() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardDetectionPatternCalendarEvent")))
 }
 
-// A pattern that indicates the pasteboard detects a string that contains a parcel tracking number and carrier.
 // NSPasteboardDetectionPatternShipmentTrackingNumber returns the string constant NSPasteboardDetectionPatternShipmentTrackingNumber, for use as a dictionary key or argument.
 func NSPasteboardDetectionPatternShipmentTrackingNumber() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardDetectionPatternShipmentTrackingNumber")))
 }
 
-// A pattern that indicates the pasteboard detects a string that contains a flight number.
 // NSPasteboardDetectionPatternFlightNumber returns the string constant NSPasteboardDetectionPatternFlightNumber, for use as a dictionary key or argument.
 func NSPasteboardDetectionPatternFlightNumber() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardDetectionPatternFlightNumber")))
 }
 
-// A pattern that indicates the pasteboard detects a string that contains an amount of money.
 // NSPasteboardDetectionPatternMoneyAmount returns the string constant NSPasteboardDetectionPatternMoneyAmount, for use as a dictionary key or argument.
 func NSPasteboardDetectionPatternMoneyAmount() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardDetectionPatternMoneyAmount")))
 }
 
-// A metadata type that returns the content type if the pasteboard detects a reference to a file.
 // NSPasteboardMetadataTypeContentType returns the string constant NSPasteboardMetadataTypeContentType, for use as a dictionary key or argument.
 func NSPasteboardMetadataTypeContentType() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardMetadataTypeContentType")))
@@ -3590,31 +3578,26 @@ func NSEventTrackingRunLoopMode() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSEventTrackingRunLoopMode")))
 }
 
-// NSAttributedString displayed in the info area of the panel. If not specified, contents obtained from "Credits.rtf" (.rtfd, .html) in [NSBundle mainBundle]; if not available, blank. Note that  in applications built against the 10.14 SDK or earlier, the credits are shown in light appearance even when the application is running in dark appearance, except when the credits are specified as an attributed string, or come from a file are the text is just pure black. In applications built against the 10.15 SDK or newer, credits will be shown in dark appearance, using the "adaptive color mapping" setting in NSTextView.
 // NSAboutPanelOptionCredits returns the string constant NSAboutPanelOptionCredits, for use as a dictionary key or argument.
 func NSAboutPanelOptionCredits() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSAboutPanelOptionCredits")))
 }
 
-// NSString displayed in place of the default app name. If not specified, uses the value of CFBundleName (localizable). Fallback is [[NSProcessInfo processInfo] processName].
 // NSAboutPanelOptionApplicationName returns the string constant NSAboutPanelOptionApplicationName, for use as a dictionary key or argument.
 func NSAboutPanelOptionApplicationName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSAboutPanelOptionApplicationName")))
 }
 
-// NSImage displayed in place of NSApplicationIcon. If not specified, use [NSImage imageNamed:
 // NSAboutPanelOptionApplicationIcon returns the string constant NSAboutPanelOptionApplicationIcon, for use as a dictionary key or argument.
 func NSAboutPanelOptionApplicationIcon() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSAboutPanelOptionApplicationIcon")))
 }
 
-// NSString containing the build version number of the application ("58.4", "1.2d3"); displayed as "Version 58.4" or "Version 1.0 (58.4) depending on the presence of ApplicationVersion. If not specified, obtain from the CFBundleVersion key in infoDictionary; if not specified or empty string, leave blank.
 // NSAboutPanelOptionVersion returns the string constant NSAboutPanelOptionVersion, for use as a dictionary key or argument.
 func NSAboutPanelOptionVersion() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSAboutPanelOptionVersion")))
 }
 
-// NSString displayed as the marketing version  ("1.0", "Mac OS X", "3", "WebObjects 3.5", ...), before the build version. If not specified, obtain from CFBundleShortVersionString key in infoDictionary. Prefixed with word "Version" if it looks like a number.
 // NSAboutPanelOptionApplicationVersion returns the string constant NSAboutPanelOptionApplicationVersion, for use as a dictionary key or argument.
 func NSAboutPanelOptionApplicationVersion() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSAboutPanelOptionApplicationVersion")))
@@ -3690,19 +3673,16 @@ func NSApplicationDidChangeScreenParametersNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationDidChangeScreenParametersNotification")))
 }
 
-// The following key is present in the userInfo of NSApplicationDidFinishLaunchingNotification.  Its value is an NSNumber containing a bool.  It will be NO if the app was launched to open or print a file, to perform a Service, if the app had saved state that will be restored, or if the app launch was in some other sense not a "default" launch.  Otherwise its value will be YES.
 // NSApplicationLaunchIsDefaultLaunchKey returns the string constant NSApplicationLaunchIsDefaultLaunchKey, for use as a dictionary key or argument.
 func NSApplicationLaunchIsDefaultLaunchKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationLaunchIsDefaultLaunchKey")))
 }
 
-// The following key is present in the userInfo of NSApplicationDidFinishLaunchingNotification. It will be present if your application was launched because a user activated a notification in the Notification Center. Its value is an NSUserNotification object.
 // NSApplicationLaunchUserNotificationKey returns the string constant NSApplicationLaunchUserNotificationKey, for use as a dictionary key or argument.
 func NSApplicationLaunchUserNotificationKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationLaunchUserNotificationKey")))
 }
 
-// NSApplicationLaunchRemoteNotificationKey is unimplemented.  Please use NSApplicationLaunchUserNotificationKey to get the NSUserNotification object.  The NSUserNotification object has an isRemote property to indicate whether this application was launched as a result of a remote notification
 // NSApplicationLaunchRemoteNotificationKey returns the string constant NSApplicationLaunchRemoteNotificationKey, for use as a dictionary key or argument.
 func NSApplicationLaunchRemoteNotificationKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationLaunchRemoteNotificationKey")))
@@ -4157,7 +4137,6 @@ func NSBackingPropertyOldColorSpaceKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSBackingPropertyOldColorSpaceKey")))
 }
 
-// \c NSWindowDidChangeScreenProfileNotification is posted when a window's display's color profile changes, or when the window moves to a display that has a different color profile.  When running on 10.7.3 or later, this notification is still posted for compatibility, but modern applications should instead watch for \c NSWindowDidChangeBackingPropertiesNotification, which is posted for both color space and resolution changes, and facilitates handling both in a single update and redisplay pass.
 // NSWindowDidChangeScreenProfileNotification returns the string constant NSWindowDidChangeScreenProfileNotification, for use as a dictionary key or argument.
 func NSWindowDidChangeScreenProfileNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidChangeScreenProfileNotification")))
@@ -5046,7 +5025,6 @@ func NSSharingServiceNamePostVideoOnTudou() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSSharingServiceNamePostVideoOnTudou")))
 }
 
-// This service differs from other NSSharingServices in that it allows the user to establish a persistent sharing session for the specified items with potentially many participants, instead of sending a copy of the items. You can invoke this service with an NSItemProvider that has registered a CKShare & CKContainer via either -registerCloudKitShare:container: or -registerCloudKitShareWithPreparationHandler:. (Registering other types on the same provider to enable other sharing services is allowed.) When performed, this service gives the user the opportunity to invite participants and start sharing. If the content is already shared, the service instead allows the user to view or modify participation or stop sharing. To detect changes the service makes to the CKShare, implement -sharingService:didSaveShare: and -sharingService:didStopSharing:.
 // NSSharingServiceNameCloudSharing returns the string constant NSSharingServiceNameCloudSharing, for use as a dictionary key or argument.
 func NSSharingServiceNameCloudSharing() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSSharingServiceNameCloudSharing")))
@@ -6184,73 +6162,61 @@ func NSToolbarNewIndexKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarNewIndexKey")))
 }
 
-// A space item of a standard fixed size.
 // NSToolbarSpaceItemIdentifier returns the string constant NSToolbarSpaceItemIdentifier, for use as a dictionary key or argument.
 func NSToolbarSpaceItemIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarSpaceItemIdentifier")))
 }
 
-// A space item of flexible width.
 // NSToolbarFlexibleSpaceItemIdentifier returns the string constant NSToolbarFlexibleSpaceItemIdentifier, for use as a dictionary key or argument.
 func NSToolbarFlexibleSpaceItemIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarFlexibleSpaceItemIdentifier")))
 }
 
-// A standard item that is configured to show the color panel when invoked.
 // NSToolbarShowColorsItemIdentifier returns the string constant NSToolbarShowColorsItemIdentifier, for use as a dictionary key or argument.
 func NSToolbarShowColorsItemIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarShowColorsItemIdentifier")))
 }
 
-// A standard item that is configured to show the font panel when invoked.
 // NSToolbarShowFontsItemIdentifier returns the string constant NSToolbarShowFontsItemIdentifier, for use as a dictionary key or argument.
 func NSToolbarShowFontsItemIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarShowFontsItemIdentifier")))
 }
 
-// A standard item that is configured to send -printDocument: to the firstResponder when invoked
 // NSToolbarPrintItemIdentifier returns the string constant NSToolbarPrintItemIdentifier, for use as a dictionary key or argument.
 func NSToolbarPrintItemIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarPrintItemIdentifier")))
 }
 
-// A standard item that is configured to send -toggleSidebar: to the firstResponder when invoked.
 // NSToolbarToggleSidebarItemIdentifier returns the string constant NSToolbarToggleSidebarItemIdentifier, for use as a dictionary key or argument.
 func NSToolbarToggleSidebarItemIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarToggleSidebarItemIdentifier")))
 }
 
-// A standard item that is configured to send -toggleInspector: to the firstResponder when invoked.
 // NSToolbarToggleInspectorItemIdentifier returns the string constant NSToolbarToggleInspectorItemIdentifier, for use as a dictionary key or argument.
 func NSToolbarToggleInspectorItemIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarToggleInspectorItemIdentifier")))
 }
 
-// A standard item for cloud sharing via NSSharingServiceNameCloudSharing. It validates itself and modifies its appearance by using the NSCloudSharingValidation protocol. It sends -performCloudSharing: to the firstResponder.
 // NSToolbarCloudSharingItemIdentifier returns the string constant NSToolbarCloudSharingItemIdentifier, for use as a dictionary key or argument.
 func NSToolbarCloudSharingItemIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarCloudSharingItemIdentifier")))
 }
 
-// A standard item that is configured to send -showWritingTools: to the firstResponder when invoked.
 // NSToolbarWritingToolsItemIdentifier returns the string constant NSToolbarWritingToolsItemIdentifier, for use as a dictionary key or argument.
 func NSToolbarWritingToolsItemIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarWritingToolsItemIdentifier")))
 }
 
-// Creates a new `NSTrackingSeparatorToolbarItem` and automatically configures it to track the divider of the sidebar if one is discovered. Only applies to windows with `NSWindowStyleMaskFullSizeContentView` applied.
 // NSToolbarSidebarTrackingSeparatorItemIdentifier returns the string constant NSToolbarSidebarTrackingSeparatorItemIdentifier, for use as a dictionary key or argument.
 func NSToolbarSidebarTrackingSeparatorItemIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarSidebarTrackingSeparatorItemIdentifier")))
 }
 
-// Creates a new `NSTrackingSeparatorToolbarItem` and automatically configures it to track the divider of the inspector if one is discovered. Only applies to windows with `NSWindowStyleMaskFullSizeContentView` applied.
 // NSToolbarInspectorTrackingSeparatorItemIdentifier returns the string constant NSToolbarInspectorTrackingSeparatorItemIdentifier, for use as a dictionary key or argument.
 func NSToolbarInspectorTrackingSeparatorItemIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarInspectorTrackingSeparatorItemIdentifier")))
 }
 
-// Deprecated Item Identifiers
 // NSToolbarSeparatorItemIdentifier returns the string constant NSToolbarSeparatorItemIdentifier, for use as a dictionary key or argument.
 func NSToolbarSeparatorItemIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarSeparatorItemIdentifier")))

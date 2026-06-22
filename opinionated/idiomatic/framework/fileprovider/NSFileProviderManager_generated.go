@@ -8,6 +8,7 @@ import (
 	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -15,9 +16,9 @@ import (
 	"unsafe"
 )
 
-// A manager object that you use to communicate with the file provider from either your app or your File Provider extension.
-//
 // FileProviderManager is an idiomatic wrapper over the Objective-C class NSFileProviderManager.
+//
+// A manager object that you use to communicate with the file provider from either your app or your File Provider extension.
 type FileProviderManager struct {
 	objref.Handle
 }
@@ -28,7 +29,8 @@ func FileProviderManagerFromID(id objc.ID) *FileProviderManager {
 	if id == 0 {
 		return nil
 	}
-	x := &FileProviderManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FileProviderManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -41,7 +43,8 @@ func fileProviderManagerAdopt(id objc.ID) *FileProviderManager {
 	if id == 0 {
 		return nil
 	}
-	x := &FileProviderManager{Handle: objref.Wrap(id)}
+	x := &FileProviderManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -61,13 +64,19 @@ func (x *FileProviderManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FileProviderManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFileProviderManager creates a new FileProviderManager.
 func NewFileProviderManager() *FileProviderManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSFileProviderManager")), objc.RegisterName("new"))
 	return fileProviderManagerAdopt(_id)
 }
 
-// Alerts the system to changes in the specified folder’s content.
+// SignalEnumeratorForContainerItemIdentifier alerts the system to changes in the specified folder’s content.
 //
 // SignalEnumeratorForContainerItemIdentifier blocks until the operation completes or ctx is cancelled.
 func (x *FileProviderManager) SignalEnumeratorForContainerItemIdentifier(ctx context.Context, containerItemIdentifier obj.Object) error {
@@ -86,10 +95,10 @@ func (x *FileProviderManager) SignalEnumeratorForContainerItemIdentifier(ctx con
 	}
 }
 
-// Returns the user-visible URL for an item.
+// GetUserVisibleURLForItemIdentifier returns the user-visible URL for an item.
 //
 // GetUserVisibleURLForItemIdentifier blocks until the operation completes or ctx is cancelled.
-func (x *FileProviderManager) GetUserVisibleURLForItemIdentifier(ctx context.Context, itemIdentifier obj.Object) (obj.Object, error) {
+func (x *FileProviderManager) GetUserVisibleURLForItemIdentifier(ctx context.Context, itemIdentifier obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -111,7 +120,7 @@ func (x *FileProviderManager) GetUserVisibleURLForItemIdentifier(ctx context.Con
 	}
 }
 
-// Registers the URL session task responsible for the specified item.
+// RegisterURLSessionTaskForItemWithIdentifier registers the URL session task responsible for the specified item.
 //
 // RegisterURLSessionTaskForItemWithIdentifier blocks until the operation completes or ctx is cancelled.
 func (x *FileProviderManager) RegisterURLSessionTaskForItemWithIdentifier(ctx context.Context, task obj.Object, identifier obj.Object) error {
@@ -130,8 +139,8 @@ func (x *FileProviderManager) RegisterURLSessionTaskForItemWithIdentifier(ctx co
 	}
 }
 
-// Returns the URL of a directory that the File Provider extension can use to temporarily store files before passing them to the system.
-func (x *FileProviderManager) TemporaryDirectoryURLWithError() (obj.Object, error) {
+// TemporaryDirectoryURLWithError returns the URL of a directory that the File Provider extension can use to temporarily store files before passing them to the system.
+func (x *FileProviderManager) TemporaryDirectoryURLWithError() (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("temporaryDirectoryURLWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -140,13 +149,13 @@ func (x *FileProviderManager) TemporaryDirectoryURLWithError() (obj.Object, erro
 	return obj.Wrap(_r), nil
 }
 
-// Returns a progress object that tracks either the uploading or downloading of items from the File Provider extension’s remote storage.
+// GlobalProgressForKind returns a progress object that tracks either the uploading or downloading of items from the File Provider extension’s remote storage.
 func (x *FileProviderManager) GlobalProgressForKind(kind obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("globalProgressForKind:"), objref.IDOf(kind))
 	return obj.Wrap(_r)
 }
 
-// Tells the system to reimport the item and its content recursively.
+// ReimportItemsBelowItemWithIdentifier tells the system to reimport the item and its content recursively.
 //
 // ReimportItemsBelowItemWithIdentifier blocks until the operation completes or ctx is cancelled.
 func (x *FileProviderManager) ReimportItemsBelowItemWithIdentifier(ctx context.Context, itemIdentifier obj.Object) error {
@@ -165,7 +174,7 @@ func (x *FileProviderManager) ReimportItemsBelowItemWithIdentifier(ctx context.C
 	}
 }
 
-// Asks the system to remove an item from its cache.
+// EvictItemWithIdentifier asks the system to remove an item from its cache.
 //
 // EvictItemWithIdentifier blocks until the operation completes or ctx is cancelled.
 func (x *FileProviderManager) EvictItemWithIdentifier(ctx context.Context, itemIdentifier obj.Object) error {
@@ -184,7 +193,7 @@ func (x *FileProviderManager) EvictItemWithIdentifier(ctx context.Context, itemI
 	}
 }
 
-// Requests a notification after the system completes all the specified changes.
+// WaitForChangesOnItemsBelowItemWithIdentifier requests a notification after the system completes all the specified changes.
 //
 // WaitForChangesOnItemsBelowItemWithIdentifier blocks until the operation completes or ctx is cancelled.
 func (x *FileProviderManager) WaitForChangesOnItemsBelowItemWithIdentifier(ctx context.Context, itemIdentifier obj.Object) error {
@@ -203,7 +212,7 @@ func (x *FileProviderManager) WaitForChangesOnItemsBelowItemWithIdentifier(ctx c
 	}
 }
 
-// Requests a notification after the domain stabilizes.
+// WaitForStabilization requests a notification after the domain stabilizes.
 //
 // WaitForStabilization blocks until the operation completes or ctx is cancelled.
 func (x *FileProviderManager) WaitForStabilization(ctx context.Context) error {
@@ -222,7 +231,7 @@ func (x *FileProviderManager) WaitForStabilization(ctx context.Context) error {
 	}
 }
 
-// Disconnects the domain from the extension.
+// DisconnectWithReasonOptions disconnects the domain from the extension.
 //
 // DisconnectWithReasonOptions blocks until the operation completes or ctx is cancelled.
 func (x *FileProviderManager) DisconnectWithReasonOptions(ctx context.Context, localizedReason string, options FileProviderManagerDisconnectionOptions) error {
@@ -241,7 +250,7 @@ func (x *FileProviderManager) DisconnectWithReasonOptions(ctx context.Context, l
 	}
 }
 
-// Reconnects the domain with the extension.
+// Reconnect reconnects the domain with the extension.
 //
 // Reconnect blocks until the operation completes or ctx is cancelled.
 func (x *FileProviderManager) Reconnect(ctx context.Context) error {
@@ -260,8 +269,27 @@ func (x *FileProviderManager) Reconnect(ctx context.Context) error {
 	}
 }
 
-// Returns a URL for a directory for storing state information for the domain.
-func (x *FileProviderManager) StateDirectoryURLWithError() (obj.Object, error) {
+// RequestDownloadForItemWithIdentifierRequestedRange request that the system schedule a download for an item. The completion handler is called when the system acknowledges the download request, or with an error indicating why it didn't (e.g NSFileProviderErrorNoSuchItem.) The system will then call -fetchContentsForItemWithIdentifier at the earliest convenient time. Set rangeToMaterialize to NSMakeRange(offset, nbytes) to request a partial download. The system will then invoke -fetchPartialContentsForItemWithIdentifier instead of fetchContentsForItemWithIdentifier. For a full download, set rangeToMaterialize to NSMakeRange(NSNotFound, 0). -[NSFileProviderManager evictItemWithIdentifier:completionHandler:] must be called on a partially materialized file before requesting an extent to be downloaded from a later version of the file. This method cannot be used to download directories recursively. When invoked on a dataless directory, it will trigger an enumeration of the directory, causing a materialization of the directory one level down only. All the children of the directory will remain dataless after the enumeration.
+//
+// RequestDownloadForItemWithIdentifierRequestedRange blocks until the operation completes or ctx is cancelled.
+func (x *FileProviderManager) RequestDownloadForItemWithIdentifierRequestedRange(ctx context.Context, itemIdentifier obj.Object, rangeToMaterialize foundation.NSRange) error {
+	_ch := make(chan error, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
+		var _err error
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
+		_ch <- _err
+	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestDownloadForItemWithIdentifier:requestedRange:completionHandler:"), objref.IDOf(itemIdentifier), rangeToMaterialize, _block)
+	select {
+	case err := <-_ch:
+		return err
+	case <-ctx.Done():
+		return ctx.Err()
+	}
+}
+
+// StateDirectoryURLWithError returns a URL for a directory for storing state information for the domain.
+func (x *FileProviderManager) StateDirectoryURLWithError() (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateDirectoryURLWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -270,8 +298,8 @@ func (x *FileProviderManager) StateDirectoryURLWithError() (obj.Object, error) {
 	return obj.Wrap(_r), nil
 }
 
-// Lists all the operations that are ready for scheduling.
-func (x *FileProviderManager) ListAvailableTestingOperationsWithError() ([]obj.Object, error) {
+// ListAvailableTestingOperationsWithError lists all the operations that are ready for scheduling.
+func (x *FileProviderManager) ListAvailableTestingOperationsWithError() (result []obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("listAvailableTestingOperationsWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -280,8 +308,8 @@ func (x *FileProviderManager) ListAvailableTestingOperationsWithError() ([]obj.O
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// Asks the system to schedule and execute the specified operations.
-func (x *FileProviderManager) RunTestingOperationsError(operations []obj.Object) (obj.Object, error) {
+// RunTestingOperationsError asks the system to schedule and execute the specified operations.
+func (x *FileProviderManager) RunTestingOperationsError(operations []obj.Object) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runTestingOperations:error:"), purego.SliceToNSArray(operations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -290,7 +318,7 @@ func (x *FileProviderManager) RunTestingOperationsError(operations []obj.Object)
 	return obj.Wrap(_r), nil
 }
 
-// Asks the domain to sync the specified known folders.
+// ClaimKnownFoldersLocalizedReason asks the domain to sync the specified known folders.
 //
 // ClaimKnownFoldersLocalizedReason blocks until the operation completes or ctx is cancelled.
 func (x *FileProviderManager) ClaimKnownFoldersLocalizedReason(ctx context.Context, knownFolders *FileProviderKnownFolderLocations, localizedReason string) error {
@@ -309,7 +337,7 @@ func (x *FileProviderManager) ClaimKnownFoldersLocalizedReason(ctx context.Conte
 	}
 }
 
-// Asks the system to stop replicating the specified known folders in the domain.
+// ReleaseKnownFoldersLocalizedReason asks the system to stop replicating the specified known folders in the domain.
 //
 // ReleaseKnownFoldersLocalizedReason blocks until the operation completes or ctx is cancelled.
 func (x *FileProviderManager) ReleaseKnownFoldersLocalizedReason(ctx context.Context, knownFolders FileProviderKnownFolders, localizedReason string) error {
@@ -334,7 +362,7 @@ type FileProviderManagerable interface {
 	SignalEnumeratorForContainerItemIdentifier(ctx context.Context, containerItemIdentifier obj.Object) error
 	GetUserVisibleURLForItemIdentifier(ctx context.Context, itemIdentifier obj.Object) (obj.Object, error)
 	RegisterURLSessionTaskForItemWithIdentifier(ctx context.Context, task obj.Object, identifier obj.Object) error
-	TemporaryDirectoryURLWithError() (obj.Object, error)
+	TemporaryDirectoryURLWithError() (result obj.Object, err error)
 	GlobalProgressForKind(kind obj.Object) obj.Object
 	ReimportItemsBelowItemWithIdentifier(ctx context.Context, itemIdentifier obj.Object) error
 	EvictItemWithIdentifier(ctx context.Context, itemIdentifier obj.Object) error
@@ -342,9 +370,10 @@ type FileProviderManagerable interface {
 	WaitForStabilization(ctx context.Context) error
 	DisconnectWithReasonOptions(ctx context.Context, localizedReason string, options FileProviderManagerDisconnectionOptions) error
 	Reconnect(ctx context.Context) error
-	StateDirectoryURLWithError() (obj.Object, error)
-	ListAvailableTestingOperationsWithError() ([]obj.Object, error)
-	RunTestingOperationsError(operations []obj.Object) (obj.Object, error)
+	RequestDownloadForItemWithIdentifierRequestedRange(ctx context.Context, itemIdentifier obj.Object, rangeToMaterialize foundation.NSRange) error
+	StateDirectoryURLWithError() (result obj.Object, err error)
+	ListAvailableTestingOperationsWithError() (result []obj.Object, err error)
+	RunTestingOperationsError(operations []obj.Object) (result obj.Object, err error)
 	ClaimKnownFoldersLocalizedReason(ctx context.Context, knownFolders *FileProviderKnownFolderLocations, localizedReason string) error
 	ReleaseKnownFoldersLocalizedReason(ctx context.Context, knownFolders FileProviderKnownFolders, localizedReason string) error
 }

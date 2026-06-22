@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Details about a recipient’s response to an exchange request.
-//
 // TurnBasedExchangeReply is an idiomatic wrapper over the Objective-C class GKTurnBasedExchangeReply.
+//
+// Details about a recipient’s response to an exchange request.
 type TurnBasedExchangeReply struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TurnBasedExchangeReplyFromID(id objc.ID) *TurnBasedExchangeReply {
 	if id == 0 {
 		return nil
 	}
-	x := &TurnBasedExchangeReply{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TurnBasedExchangeReply{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func turnBasedExchangeReplyAdopt(id objc.ID) *TurnBasedExchangeReply {
 	if id == 0 {
 		return nil
 	}
-	x := &TurnBasedExchangeReply{Handle: objref.Wrap(id)}
+	x := &TurnBasedExchangeReply{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,25 @@ func (x *TurnBasedExchangeReply) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TurnBasedExchangeReply) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTurnBasedExchangeReply creates a new TurnBasedExchangeReply.
 func NewTurnBasedExchangeReply() *TurnBasedExchangeReply {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKTurnBasedExchangeReply")), objc.RegisterName("new"))
 	return turnBasedExchangeReplyAdopt(_id)
 }
 
+// Recipient wraps the corresponding Objective-C method.
 func (x *TurnBasedExchangeReply) Recipient() *TurnBasedParticipant {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recipient"))
 	return TurnBasedParticipantFromID(_r)
 }
 
+// Message wraps the corresponding Objective-C method.
 func (x *TurnBasedExchangeReply) Message() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("message"))
 	if _r == 0 {
@@ -77,11 +87,13 @@ func (x *TurnBasedExchangeReply) Message() string {
 	return purego.GoString(_r)
 }
 
+// Data wraps the corresponding Objective-C method.
 func (x *TurnBasedExchangeReply) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
+// ReplyDate wraps the corresponding Objective-C method.
 func (x *TurnBasedExchangeReply) ReplyDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replyDate"))
 	return obj.Wrap(_r)

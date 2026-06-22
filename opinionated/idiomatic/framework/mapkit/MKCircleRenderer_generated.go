@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The visual representation of a circular overlay.
-//
 // CircleRenderer is an idiomatic wrapper over the Objective-C class MKCircleRenderer.
+//
+// It embeds [OverlayPathRenderer], promoting that type's methods.
+//
+// The visual representation of a circular overlay.
 type CircleRenderer struct {
-	objref.Handle
+	OverlayPathRenderer
 }
 
 // CircleRendererFromID adopts an existing Objective-C object as a CircleRenderer
@@ -25,7 +26,8 @@ func CircleRendererFromID(id objc.ID) *CircleRenderer {
 	if id == 0 {
 		return nil
 	}
-	x := &CircleRenderer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CircleRenderer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,143 +40,110 @@ func circleRendererAdopt(id objc.ID) *CircleRenderer {
 	if id == 0 {
 		return nil
 	}
-	x := &CircleRenderer{Handle: objref.Wrap(id)}
+	x := &CircleRenderer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CircleRenderer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CircleRenderer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CircleRenderer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a new overlay view using the specified circle overlay object.
-//
-// NewCircleRendererWithCircle creates a new CircleRenderer.
+// NewCircleRendererWithCircle creates a new overlay view using the specified circle overlay object.
 func NewCircleRendererWithCircle(circle *Circle) *CircleRenderer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKCircleRenderer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCircle:"), objref.IDOf(circle))
 	return circleRendererAdopt(_id)
 }
 
-// The unit distance along the circle where the stroke starts.
-//
-// WithStrokeStart sets strokeStart and returns the receiver so calls can be chained.
+// WithStrokeStart the unit distance along the circle where the stroke starts.
 func (x *CircleRenderer) WithStrokeStart(strokeStart float64) *CircleRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeStart:"), strokeStart)
 	return x
 }
 
-// The unit distance along the circle where the stroke ends.
-//
-// WithStrokeEnd sets strokeEnd and returns the receiver so calls can be chained.
+// WithStrokeEnd the unit distance along the circle where the stroke ends.
 func (x *CircleRenderer) WithStrokeEnd(strokeEnd float64) *CircleRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeEnd:"), strokeEnd)
 	return x
 }
 
-// The fill color to use for the path.
-//
-// WithFillColor sets fillColor and returns the receiver so calls can be chained.
+// WithFillColor the fill color to use for the path.
 func (x *CircleRenderer) WithFillColor(fillColor obj.Object) *CircleRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 	return x
 }
 
-// The stroke color to use for the path.
-//
-// WithStrokeColor sets strokeColor and returns the receiver so calls can be chained.
+// WithStrokeColor the stroke color to use for the path.
 func (x *CircleRenderer) WithStrokeColor(strokeColor obj.Object) *CircleRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
 	return x
 }
 
-// The stroke width to use for the path.
-//
-// WithLineWidth sets lineWidth and returns the receiver so calls can be chained.
+// WithLineWidth the stroke width to use for the path.
 func (x *CircleRenderer) WithLineWidth(lineWidth float64) *CircleRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
 	return x
 }
 
-// The limiting value that helps avoid spikes at junctions between connected line segments.
-//
-// WithMiterLimit sets miterLimit and returns the receiver so calls can be chained.
+// WithMiterLimit the limiting value that helps avoid spikes at junctions between connected line segments.
 func (x *CircleRenderer) WithMiterLimit(miterLimit float64) *CircleRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
 	return x
 }
 
-// The offset (in points) at which to start drawing the dash pattern.
-//
-// WithLineDashPhase sets lineDashPhase and returns the receiver so calls can be chained.
+// WithLineDashPhase the offset (in points) at which to start drawing the dash pattern.
 func (x *CircleRenderer) WithLineDashPhase(lineDashPhase float64) *CircleRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
 	return x
 }
 
-// An array of numbers specifying the dash pattern to use for the path.
-//
-// WithLineDashPattern sets the collection and returns the receiver so calls can be chained.
+// WithLineDashPattern an array of numbers specifying the dash pattern to use for the path.
 func (x *CircleRenderer) WithLineDashPattern(items ...obj.Object) *CircleRenderer {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPattern:"), _arr)
 	return x
 }
 
-// A Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
-//
-// WithShouldRasterize sets shouldRasterize and returns the receiver so calls can be chained.
+// WithShouldRasterize a Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
 func (x *CircleRenderer) WithShouldRasterize(shouldRasterize bool) *CircleRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
 	return x
 }
 
-// The path representing the overlay’s shape.
-//
-// WithPath sets path and returns the receiver so calls can be chained.
+// WithPath the path representing the overlay’s shape.
 func (x *CircleRenderer) WithPath(path obj.Object) *CircleRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
 	return x
 }
 
-// The amount of transparency to apply to the overlay.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the amount of transparency to apply to the overlay.
 func (x *CircleRenderer) WithAlpha(alpha float64) *CircleRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
+// Circle wraps the corresponding Objective-C method.
 func (x *CircleRenderer) Circle() *Circle {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("circle"))
 	return CircleFromID(_r)
 }
 
+// StrokeStart wraps the corresponding Objective-C method.
 func (x *CircleRenderer) StrokeStart() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("strokeStart"))
 	return _r
 }
 
+// SetStrokeStart wraps the corresponding Objective-C method.
 func (x *CircleRenderer) SetStrokeStart(strokeStart float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeStart:"), strokeStart)
 }
 
+// StrokeEnd wraps the corresponding Objective-C method.
 func (x *CircleRenderer) StrokeEnd() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("strokeEnd"))
 	return _r
 }
 
+// SetStrokeEnd wraps the corresponding Objective-C method.
 func (x *CircleRenderer) SetStrokeEnd(strokeEnd float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeEnd:"), strokeEnd)
 }
@@ -201,3 +170,7 @@ type CircleRendererable interface {
 }
 
 var _ CircleRendererable = (*CircleRenderer)(nil)
+
+var _ OverlayPathRendererProvider = (*CircleRenderer)(nil)
+
+var _ OverlayRendererProvider = (*CircleRenderer)(nil)

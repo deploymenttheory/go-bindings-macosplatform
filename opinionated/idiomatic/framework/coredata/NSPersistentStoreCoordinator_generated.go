@@ -15,9 +15,9 @@ import (
 	"unsafe"
 )
 
-// An object that enables an app’s contexts and the underlying persistent stores to work together.
-//
 // PersistentStoreCoordinator is an idiomatic wrapper over the Objective-C class NSPersistentStoreCoordinator.
+//
+// An object that enables an app’s contexts and the underlying persistent stores to work together.
 type PersistentStoreCoordinator struct {
 	objref.Handle
 }
@@ -28,7 +28,8 @@ func PersistentStoreCoordinatorFromID(id objc.ID) *PersistentStoreCoordinator {
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentStoreCoordinator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PersistentStoreCoordinator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -41,7 +42,8 @@ func persistentStoreCoordinatorAdopt(id objc.ID) *PersistentStoreCoordinator {
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentStoreCoordinator{Handle: objref.Wrap(id)}
+	x := &PersistentStoreCoordinator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -61,43 +63,45 @@ func (x *PersistentStoreCoordinator) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a persistent store coordinator with the specified managed object model.
-//
-// NewPersistentStoreCoordinatorWithManagedObjectModel creates a new PersistentStoreCoordinator.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PersistentStoreCoordinator) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPersistentStoreCoordinatorWithManagedObjectModel creates a persistent store coordinator with the specified managed object model.
 func NewPersistentStoreCoordinatorWithManagedObjectModel(model *ManagedObjectModel) *PersistentStoreCoordinator {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPersistentStoreCoordinator")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithManagedObjectModel:"), objref.IDOf(model))
 	return persistentStoreCoordinatorAdopt(_id)
 }
 
-// The coordinator’s name.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the coordinator’s name.
 func (x *PersistentStoreCoordinator) WithName(name string) *PersistentStoreCoordinator {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// Returns the persistent store for the specified file URL.
+// PersistentStoreForURL returns the persistent store for the specified file URL.
 func (x *PersistentStoreCoordinator) PersistentStoreForURL(uRL string) *PersistentStore {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentStoreForURL:"), rt.FileURL(uRL))
 	return PersistentStoreFromID(_r)
 }
 
-// Returns the location of the provided persistent store.
+// URLForPersistentStore returns the location of the provided persistent store.
 func (x *PersistentStoreCoordinator) URLForPersistentStore(store *PersistentStore) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLForPersistentStore:"), objref.IDOf(store))
 	return obj.Wrap(_r)
 }
 
-// Changes the location of the specified persistent store.
+// SetURLForPersistentStore changes the location of the specified persistent store.
 func (x *PersistentStoreCoordinator) SetURLForPersistentStore(url string, store *PersistentStore) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setURL:forPersistentStore:"), rt.FileURL(url), objref.IDOf(store))
 	return _r
 }
 
-// Adds a specific type of persistent store at the provided location.
-func (x *PersistentStoreCoordinator) AddPersistentStoreWithTypeConfigurationURLOptionsError(storeType string, configuration string, storeURL string, options obj.Object) (*PersistentStore, error) {
+// AddPersistentStoreWithTypeConfigurationURLOptionsError adds a specific type of persistent store at the provided location.
+func (x *PersistentStoreCoordinator) AddPersistentStoreWithTypeConfigurationURLOptionsError(storeType string, configuration string, storeURL string, options obj.Object) (result *PersistentStore, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addPersistentStoreWithType:configuration:URL:options:error:"), purego.NSString(storeType), purego.NSString(configuration), rt.FileURL(storeURL), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -106,10 +110,10 @@ func (x *PersistentStoreCoordinator) AddPersistentStoreWithTypeConfigurationURLO
 	return PersistentStoreFromID(_r), nil
 }
 
-// Adds a persistent store using the provided description.
+// AddPersistentStoreWithDescription adds a persistent store using the provided description.
 //
 // AddPersistentStoreWithDescription blocks until the operation completes or ctx is cancelled.
-func (x *PersistentStoreCoordinator) AddPersistentStoreWithDescription(ctx context.Context, storeDescription *PersistentStoreDescription) (*PersistentStoreDescription, error) {
+func (x *PersistentStoreCoordinator) AddPersistentStoreWithDescription(ctx context.Context, storeDescription *PersistentStoreDescription) (result *PersistentStoreDescription, err error) {
 	type _result struct {
 		val *PersistentStoreDescription
 		err error
@@ -131,7 +135,7 @@ func (x *PersistentStoreCoordinator) AddPersistentStoreWithDescription(ctx conte
 	}
 }
 
-// Removes the specified persistent store from the coordinator.
+// RemovePersistentStore removes the specified persistent store from the coordinator.
 func (x *PersistentStoreCoordinator) RemovePersistentStore(store *PersistentStore) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removePersistentStore:error:"), objref.IDOf(store), unsafe.Pointer(&_nsErr))
@@ -141,25 +145,25 @@ func (x *PersistentStoreCoordinator) RemovePersistentStore(store *PersistentStor
 	return nil
 }
 
-// Updates the metadata for the specified persistent store.
+// SetMetadataForPersistentStore updates the metadata for the specified persistent store.
 func (x *PersistentStoreCoordinator) SetMetadataForPersistentStore(metadata obj.Object, store *PersistentStore) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:forPersistentStore:"), objref.IDOf(metadata), objref.IDOf(store))
 }
 
-// Returns the metadata of the specified persistent store.
+// MetadataForPersistentStore returns the metadata of the specified persistent store.
 func (x *PersistentStoreCoordinator) MetadataForPersistentStore(store *PersistentStore) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadataForPersistentStore:"), objref.IDOf(store))
 	return obj.Wrap(_r)
 }
 
-// Returns the object identifier for the specified URI representation.
+// ManagedObjectIDForURIRepresentation returns the object identifier for the specified URI representation.
 func (x *PersistentStoreCoordinator) ManagedObjectIDForURIRepresentation(url string) *ManagedObjectID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("managedObjectIDForURIRepresentation:"), rt.FileURL(url))
 	return ManagedObjectIDFromID(_r)
 }
 
-// Executes the specified request on each of the coordinator’s persistent stores.
-func (x *PersistentStoreCoordinator) ExecuteRequestWithContextError(request *PersistentStoreRequest, context_ *ManagedObjectContext) (obj.Object, error) {
+// ExecuteRequestWithContextError executes the specified request on each of the coordinator’s persistent stores.
+func (x *PersistentStoreCoordinator) ExecuteRequestWithContextError(request *PersistentStoreRequest, context_ *ManagedObjectContext) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executeRequest:withContext:error:"), objref.IDOf(request), objref.IDOf(context_), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -168,7 +172,8 @@ func (x *PersistentStoreCoordinator) ExecuteRequestWithContextError(request *Per
 	return obj.Wrap(_r), nil
 }
 
-func (x *PersistentStoreCoordinator) ImportStoreWithIdentifierFromExternalRecordsDirectoryToURLOptionsWithTypeError(storeIdentifier string, externalRecordsURL string, destinationURL string, options obj.Object, storeType string) (*PersistentStore, error) {
+// ImportStoreWithIdentifierFromExternalRecordsDirectoryToURLOptionsWithTypeError wraps the corresponding Objective-C method.
+func (x *PersistentStoreCoordinator) ImportStoreWithIdentifierFromExternalRecordsDirectoryToURLOptionsWithTypeError(storeIdentifier string, externalRecordsURL string, destinationURL string, options obj.Object, storeType string) (result *PersistentStore, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("importStoreWithIdentifier:fromExternalRecordsDirectory:toURL:options:withType:error:"), purego.NSString(storeIdentifier), rt.FileURL(externalRecordsURL), rt.FileURL(destinationURL), objref.IDOf(options), purego.NSString(storeType), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -177,8 +182,8 @@ func (x *PersistentStoreCoordinator) ImportStoreWithIdentifierFromExternalRecord
 	return PersistentStoreFromID(_r), nil
 }
 
-// Changes the location and, if necessary, the store type of the specified persistent store.
-func (x *PersistentStoreCoordinator) MigratePersistentStoreToURLOptionsWithTypeError(store *PersistentStore, uRL string, options obj.Object, storeType string) (*PersistentStore, error) {
+// MigratePersistentStoreToURLOptionsWithTypeError changes the location and, if necessary, the store type of the specified persistent store.
+func (x *PersistentStoreCoordinator) MigratePersistentStoreToURLOptionsWithTypeError(store *PersistentStore, uRL string, options obj.Object, storeType string) (result *PersistentStore, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("migratePersistentStore:toURL:options:withType:error:"), objref.IDOf(store), rt.FileURL(uRL), objref.IDOf(options), purego.NSString(storeType), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -187,7 +192,7 @@ func (x *PersistentStoreCoordinator) MigratePersistentStoreToURLOptionsWithTypeE
 	return PersistentStoreFromID(_r), nil
 }
 
-// Deletes a specific type of persistent store at the provided location.
+// DestroyPersistentStoreAtURLWithTypeOptions deletes a specific type of persistent store at the provided location.
 func (x *PersistentStoreCoordinator) DestroyPersistentStoreAtURLWithTypeOptions(url string, storeType string, options obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("destroyPersistentStoreAtURL:withType:options:error:"), rt.FileURL(url), purego.NSString(storeType), objref.IDOf(options), unsafe.Pointer(&_nsErr))
@@ -197,7 +202,7 @@ func (x *PersistentStoreCoordinator) DestroyPersistentStoreAtURLWithTypeOptions(
 	return nil
 }
 
-// Replaces one persistent store with another.
+// ReplacePersistentStoreAtURLDestinationOptionsWithPersistentStoreFromURLSourceOptionsStoreType replaces one persistent store with another.
 func (x *PersistentStoreCoordinator) ReplacePersistentStoreAtURLDestinationOptionsWithPersistentStoreFromURLSourceOptionsStoreType(destinationURL string, destinationOptions obj.Object, sourceURL string, sourceOptions obj.Object, storeType string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("replacePersistentStoreAtURL:destinationOptions:withPersistentStoreFromURL:sourceOptions:storeType:error:"), rt.FileURL(destinationURL), objref.IDOf(destinationOptions), rt.FileURL(sourceURL), objref.IDOf(sourceOptions), purego.NSString(storeType), unsafe.Pointer(&_nsErr))
@@ -207,7 +212,7 @@ func (x *PersistentStoreCoordinator) ReplacePersistentStoreAtURLDestinationOptio
 	return nil
 }
 
-// Executes the provided closure asynchronously on the coordinator’s queue.
+// PerformBlock executes the provided closure asynchronously on the coordinator’s queue.
 //
 // PerformBlock blocks until the operation completes or ctx is cancelled.
 func (x *PersistentStoreCoordinator) PerformBlock(ctx context.Context) error {
@@ -224,7 +229,7 @@ func (x *PersistentStoreCoordinator) PerformBlock(ctx context.Context) error {
 	}
 }
 
-// Executes the provided closure on the coordinator’s queue and waits for it to finish.
+// PerformBlockAndWait executes the provided closure on the coordinator’s queue and waits for it to finish.
 //
 // PerformBlockAndWait blocks until the operation completes or ctx is cancelled.
 func (x *PersistentStoreCoordinator) PerformBlockAndWait(ctx context.Context) error {
@@ -241,13 +246,13 @@ func (x *PersistentStoreCoordinator) PerformBlockAndWait(ctx context.Context) er
 	}
 }
 
-// Returns a single persistent history token representing all of the specified stores.
+// CurrentPersistentHistoryTokenFromStores returns a single persistent history token representing all of the specified stores.
 func (x *PersistentStoreCoordinator) CurrentPersistentHistoryTokenFromStores(stores obj.Object) *PersistentHistoryToken {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentPersistentHistoryTokenFromStores:"), objref.IDOf(stores))
 	return PersistentHistoryTokenFromID(_r)
 }
 
-// Executes all remaining tasks of a deferred lightweight migration.
+// FinishDeferredLightweightMigration executes all remaining tasks of a deferred lightweight migration.
 //
 // FinishDeferredLightweightMigration returns an error if the operation did not succeed.
 func (x *PersistentStoreCoordinator) FinishDeferredLightweightMigration() error {
@@ -259,7 +264,7 @@ func (x *PersistentStoreCoordinator) FinishDeferredLightweightMigration() error 
 	return nil
 }
 
-// Executes a single pending task of a deferred lightweight migration.
+// FinishDeferredLightweightMigrationTask executes a single pending task of a deferred lightweight migration.
 //
 // FinishDeferredLightweightMigrationTask returns an error if the operation did not succeed.
 func (x *PersistentStoreCoordinator) FinishDeferredLightweightMigrationTask() error {
@@ -271,35 +276,43 @@ func (x *PersistentStoreCoordinator) FinishDeferredLightweightMigrationTask() er
 	return nil
 }
 
+// ManagedObjectIDFromUTF8StringLength wraps the corresponding Objective-C method.
 func (x *PersistentStoreCoordinator) ManagedObjectIDFromUTF8StringLength(utf8string string, len_ int) *ManagedObjectID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("managedObjectIDFromUTF8String:length:"), utf8string, len_)
 	return ManagedObjectIDFromID(_r)
 }
 
+// Lock wraps the corresponding Objective-C method.
 func (x *PersistentStoreCoordinator) Lock() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lock"))
 }
 
+// Unlock wraps the corresponding Objective-C method.
 func (x *PersistentStoreCoordinator) Unlock() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unlock"))
 }
 
+// TryLock wraps the corresponding Objective-C method.
 func (x *PersistentStoreCoordinator) TryLock() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("tryLock"))
 	return _r
 }
 
+// ManagedObjectModel wraps the corresponding Objective-C method.
 func (x *PersistentStoreCoordinator) ManagedObjectModel() *ManagedObjectModel {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("managedObjectModel"))
 	return ManagedObjectModelFromID(_r)
 }
 
+// PersistentStores wraps the corresponding Objective-C method.
+//
 // PersistentStores returns the collection as a Go slice.
 func (x *PersistentStoreCoordinator) PersistentStores() []*PersistentStore {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentStores"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersistentStore { return PersistentStoreFromID(_id) })
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *PersistentStoreCoordinator) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -308,6 +321,7 @@ func (x *PersistentStoreCoordinator) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *PersistentStoreCoordinator) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
@@ -319,15 +333,15 @@ type PersistentStoreCoordinatorable interface {
 	PersistentStoreForURL(uRL string) *PersistentStore
 	URLForPersistentStore(store *PersistentStore) obj.Object
 	SetURLForPersistentStore(url string, store *PersistentStore) bool
-	AddPersistentStoreWithTypeConfigurationURLOptionsError(storeType string, configuration string, storeURL string, options obj.Object) (*PersistentStore, error)
+	AddPersistentStoreWithTypeConfigurationURLOptionsError(storeType string, configuration string, storeURL string, options obj.Object) (result *PersistentStore, err error)
 	AddPersistentStoreWithDescription(ctx context.Context, storeDescription *PersistentStoreDescription) (*PersistentStoreDescription, error)
 	RemovePersistentStore(store *PersistentStore) error
 	SetMetadataForPersistentStore(metadata obj.Object, store *PersistentStore)
 	MetadataForPersistentStore(store *PersistentStore) obj.Object
 	ManagedObjectIDForURIRepresentation(url string) *ManagedObjectID
-	ExecuteRequestWithContextError(request *PersistentStoreRequest, context_ *ManagedObjectContext) (obj.Object, error)
-	ImportStoreWithIdentifierFromExternalRecordsDirectoryToURLOptionsWithTypeError(storeIdentifier string, externalRecordsURL string, destinationURL string, options obj.Object, storeType string) (*PersistentStore, error)
-	MigratePersistentStoreToURLOptionsWithTypeError(store *PersistentStore, uRL string, options obj.Object, storeType string) (*PersistentStore, error)
+	ExecuteRequestWithContextError(request *PersistentStoreRequest, context_ *ManagedObjectContext) (result obj.Object, err error)
+	ImportStoreWithIdentifierFromExternalRecordsDirectoryToURLOptionsWithTypeError(storeIdentifier string, externalRecordsURL string, destinationURL string, options obj.Object, storeType string) (result *PersistentStore, err error)
+	MigratePersistentStoreToURLOptionsWithTypeError(store *PersistentStore, uRL string, options obj.Object, storeType string) (result *PersistentStore, err error)
 	DestroyPersistentStoreAtURLWithTypeOptions(url string, storeType string, options obj.Object) error
 	ReplacePersistentStoreAtURLDestinationOptionsWithPersistentStoreFromURLSourceOptionsStoreType(destinationURL string, destinationOptions obj.Object, sourceURL string, sourceOptions obj.Object, storeType string) error
 	PerformBlock(ctx context.Context) error

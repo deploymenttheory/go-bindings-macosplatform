@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents what to focus on, and where to focus, in a given movie frame.
-//
 // ScriptFrame is an idiomatic wrapper over the Objective-C class CNScriptFrame.
+//
+// An object that represents what to focus on, and where to focus, in a given movie frame.
 type ScriptFrame struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ScriptFrameFromID(id objc.ID) *ScriptFrame {
 	if id == 0 {
 		return nil
 	}
-	x := &ScriptFrame{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScriptFrame{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func scriptFrameAdopt(id objc.ID) *ScriptFrame {
 	if id == 0 {
 		return nil
 	}
-	x := &ScriptFrame{Handle: objref.Wrap(id)}
+	x := &ScriptFrame{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *ScriptFrame) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScriptFrame) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewScriptFrame creates a new ScriptFrame.
 func NewScriptFrame() *ScriptFrame {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNScriptFrame")), objc.RegisterName("new"))
 	return scriptFrameAdopt(_id)
 }
 
-// The disparity value representing the focus plane at which the script is focused in this frame. A larger disparity results in the focus plane being closer to the camera. The scale and offset of disparity is not defined. Pass this to the rendering session when rendering the corresponding frame of the movie to focus at the recommended depth.
+// FocusDisparity the disparity value representing the focus plane at which the script is focused in this frame. A larger disparity results in the focus plane being closer to the camera. The scale and offset of disparity is not defined. Pass this to the rendering session when rendering the corresponding frame of the movie to focus at the recommended depth.
 func (x *ScriptFrame) FocusDisparity() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("focusDisparity"))
 	return _r
 }
 
-// The detection on which the script is focused in this frame. The focusDisparity of the focusDetection can be different from that of the frame such as when a rack focus is in progress.
+// FocusDetection the detection on which the script is focused in this frame. The focusDisparity of the focusDetection can be different from that of the frame such as when a rack focus is in progress.
 func (x *ScriptFrame) FocusDetection() *Detection {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("focusDetection"))
 	return DetectionFromID(_r)
 }
 
-// All detected objects in this frame.
+// AllDetections all detected objects in this frame.
 //
 // AllDetections returns the collection as a Go slice.
 func (x *ScriptFrame) AllDetections() []*Detection {
@@ -84,13 +92,13 @@ func (x *ScriptFrame) AllDetections() []*Detection {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Detection { return DetectionFromID(_id) })
 }
 
-// The detection in the frame with the given detection ID, if any.
+// DetectionForID the detection in the frame with the given detection ID, if any.
 func (x *ScriptFrame) DetectionForID(detectionID int64) *Detection {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("detectionForID:"), detectionID)
 	return DetectionFromID(_r)
 }
 
-// The best detection to focus on in a frame among those within the given detection group.
+// BestDetectionForGroupID the best detection to focus on in a frame among those within the given detection group.
 func (x *ScriptFrame) BestDetectionForGroupID(detectionGroupID int64) *Detection {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bestDetectionForGroupID:"), detectionGroupID)
 	return DetectionFromID(_r)

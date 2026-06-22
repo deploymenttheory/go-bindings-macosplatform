@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class for sound event nodes that connect to form a node hierarchy.
-//
 // SoundEventNodeDefinition is an idiomatic wrapper over the Objective-C class PHASESoundEventNodeDefinition.
+//
+// SoundEventNodeDefinition is an abstract base — you do not construct it directly. Construct one of [BlendNodeDefinition], [ContainerNodeDefinition], [GeneratorNodeDefinition], [RandomNodeDefinition], [SwitchNodeDefinition] and pass it where a SoundEventNodeDefinition is accepted.
+//
+// A base class for sound event nodes that connect to form a node hierarchy.
 type SoundEventNodeDefinition struct {
-	objref.Handle
+	Definition
 }
 
 // SoundEventNodeDefinitionFromID adopts an existing Objective-C object as a SoundEventNodeDefinition
@@ -25,7 +26,8 @@ func SoundEventNodeDefinitionFromID(id objc.ID) *SoundEventNodeDefinition {
 	if id == 0 {
 		return nil
 	}
-	x := &SoundEventNodeDefinition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SoundEventNodeDefinition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,32 +40,14 @@ func soundEventNodeDefinitionAdopt(id objc.ID) *SoundEventNodeDefinition {
 	if id == 0 {
 		return nil
 	}
-	x := &SoundEventNodeDefinition{Handle: objref.Wrap(id)}
+	x := &SoundEventNodeDefinition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *SoundEventNodeDefinition) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SoundEventNodeDefinition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SoundEventNodeDefinition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewSoundEventNodeDefinition creates a new SoundEventNodeDefinition.
-func NewSoundEventNodeDefinition() *SoundEventNodeDefinition {
-	_id := objc.Send[objc.ID](objc.ID(_class("PHASESoundEventNodeDefinition")), objc.RegisterName("new"))
-	return soundEventNodeDefinitionAdopt(_id)
-}
-
+// Children wraps the corresponding Objective-C method.
+//
 // Children returns the collection as a Go slice.
 func (x *SoundEventNodeDefinition) Children() []*SoundEventNodeDefinition {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("children"))
@@ -77,3 +61,12 @@ type SoundEventNodeDefinitionable interface {
 }
 
 var _ SoundEventNodeDefinitionable = (*SoundEventNodeDefinition)(nil)
+
+// isSoundEventNodeDefinition marks SoundEventNodeDefinition — and, by embedding promotion, its
+// subclasses — as a member of the SoundEventNodeDefinition hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SoundEventNodeDefinition) isSoundEventNodeDefinition() {}
+
+var _ SoundEventNodeDefinitionProvider = (*SoundEventNodeDefinition)(nil)
+
+var _ DefinitionProvider = (*SoundEventNodeDefinition)(nil)

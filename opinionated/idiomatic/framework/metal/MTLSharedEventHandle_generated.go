@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An instance you use to recreate a shareable event.
-//
 // SharedEventHandle is an idiomatic wrapper over the Objective-C class MTLSharedEventHandle.
+//
+// An instance you use to recreate a shareable event.
 type SharedEventHandle struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SharedEventHandleFromID(id objc.ID) *SharedEventHandle {
 	if id == 0 {
 		return nil
 	}
-	x := &SharedEventHandle{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SharedEventHandle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func sharedEventHandleAdopt(id objc.ID) *SharedEventHandle {
 	if id == 0 {
 		return nil
 	}
-	x := &SharedEventHandle{Handle: objref.Wrap(id)}
+	x := &SharedEventHandle{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *SharedEventHandle) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SharedEventHandle) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSharedEventHandle creates a new SharedEventHandle.
 func NewSharedEventHandle() *SharedEventHandle {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLSharedEventHandle")), objc.RegisterName("new"))
 	return sharedEventHandleAdopt(_id)
 }
 
+// Label wraps the corresponding Objective-C method.
 func (x *SharedEventHandle) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {

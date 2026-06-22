@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for a directory share.
-//
 // DirectoryShare is an idiomatic wrapper over the Objective-C class VZDirectoryShare.
+//
+// DirectoryShare is an abstract base — you do not construct it directly. Construct one of [LinuxRosettaDirectoryShare], [MultipleDirectoryShare], [SingleDirectoryShare] and pass it where a DirectoryShare is accepted.
+//
+// The base class for a directory share.
 type DirectoryShare struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func DirectoryShareFromID(id objc.ID) *DirectoryShare {
 	if id == 0 {
 		return nil
 	}
-	x := &DirectoryShare{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DirectoryShare{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func directoryShareAdopt(id objc.ID) *DirectoryShare {
 	if id == 0 {
 		return nil
 	}
-	x := &DirectoryShare{Handle: objref.Wrap(id)}
+	x := &DirectoryShare{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *DirectoryShare) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewDirectoryShare creates a new DirectoryShare.
-func NewDirectoryShare() *DirectoryShare {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZDirectoryShare")), objc.RegisterName("new"))
-	return directoryShareAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DirectoryShare) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // DirectoryShareable is the interface implemented by [DirectoryShare], for mocking and DI.
@@ -70,3 +74,10 @@ type DirectoryShareable interface {
 }
 
 var _ DirectoryShareable = (*DirectoryShare)(nil)
+
+// isDirectoryShare marks DirectoryShare — and, by embedding promotion, its
+// subclasses — as a member of the DirectoryShare hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DirectoryShare) isDirectoryShare() {}
+
+var _ DirectoryShareProvider = (*DirectoryShare)(nil)

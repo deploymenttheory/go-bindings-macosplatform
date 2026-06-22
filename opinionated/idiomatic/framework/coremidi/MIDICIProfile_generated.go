@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mapping of MIDI messages to specific sounds and synthesis behaviors, such as General MIDI, a drawbar organ, and so on.
-//
 // CIProfile is an idiomatic wrapper over the Objective-C class MIDICIProfile.
+//
+// A mapping of MIDI messages to specific sounds and synthesis behaviors, such as General MIDI, a drawbar organ, and so on.
 type CIProfile struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CIProfileFromID(id objc.ID) *CIProfile {
 	if id == 0 {
 		return nil
 	}
-	x := &CIProfile{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CIProfile{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func cIProfileAdopt(id objc.ID) *CIProfile {
 	if id == 0 {
 		return nil
 	}
-	x := &CIProfile{Handle: objref.Wrap(id)}
+	x := &CIProfile{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,27 @@ func (x *CIProfile) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a MIDI profile for the specified data.
-//
-// NewCIProfileWithData creates a new CIProfile.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CIProfile) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCIProfileWithData creates a MIDI profile for the specified data.
 func NewCIProfileWithData(data obj.Object) *CIProfile {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MIDICIProfile")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
 	return cIProfileAdopt(_id)
 }
 
-// Creates a named MIDI profile for the specified data.
-//
-// NewCIProfileWithDataName creates a new CIProfile.
+// NewCIProfileWithDataName creates a named MIDI profile for the specified data.
 func NewCIProfileWithDataName(data obj.Object, inName string) *CIProfile {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MIDICIProfile")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:name:"), objref.IDOf(data), purego.NSString(inName))
 	return cIProfileAdopt(_id)
 }
 
-// An NSString describing the profile.
+// Name an NSString describing the profile.
 func (x *CIProfile) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -85,7 +89,7 @@ func (x *CIProfile) Name() string {
 	return purego.GoString(_r)
 }
 
-// The unique 5-byte profile identifier representing the profile.
+// ProfileID the unique 5-byte profile identifier representing the profile.
 func (x *CIProfile) ProfileID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("profileID"))
 	return obj.Wrap(_r)

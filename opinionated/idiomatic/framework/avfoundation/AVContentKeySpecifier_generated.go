@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that uniquely identifies a content key.
-//
 // ContentKeySpecifier is an idiomatic wrapper over the Objective-C class AVContentKeySpecifier.
+//
+// An object that uniquely identifies a content key.
 type ContentKeySpecifier struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ContentKeySpecifierFromID(id objc.ID) *ContentKeySpecifier {
 	if id == 0 {
 		return nil
 	}
-	x := &ContentKeySpecifier{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContentKeySpecifier{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func contentKeySpecifierAdopt(id objc.ID) *ContentKeySpecifier {
 	if id == 0 {
 		return nil
 	}
-	x := &ContentKeySpecifier{Handle: objref.Wrap(id)}
+	x := &ContentKeySpecifier{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,32 @@ func (x *ContentKeySpecifier) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a content key specifier.
-//
-// NewContentKeySpecifierForKeySystemIdentifierOptions creates a new ContentKeySpecifier.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContentKeySpecifier) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewContentKeySpecifierForKeySystemIdentifierOptions creates a content key specifier.
 func NewContentKeySpecifierForKeySystemIdentifierOptions(keySystem obj.Object, contentKeyIdentifier obj.Object, options obj.Object) *ContentKeySpecifier {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVContentKeySpecifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForKeySystem:identifier:options:"), objref.IDOf(keySystem), objref.IDOf(contentKeyIdentifier), objref.IDOf(options))
 	return contentKeySpecifierAdopt(_id)
 }
 
-// A valid key system for content keys.
+// KeySystem a valid key system for content keys.
 func (x *ContentKeySpecifier) KeySystem() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keySystem"))
 	return obj.Wrap(_r)
 }
 
-// Container and protocol-specific key identifier.
+// Identifier container and protocol-specific key identifier.
 func (x *ContentKeySpecifier) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
-// Additional information necessary to obtain the key, can be empty if none needed.
+// Options additional information necessary to obtain the key, can be empty if none needed.
 func (x *ContentKeySpecifier) Options() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
 	return obj.Wrap(_r)

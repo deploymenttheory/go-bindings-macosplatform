@@ -6,15 +6,16 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The values for the attachment characteristics of attributed strings and related objects.
-//
 // TextAttachment is an idiomatic wrapper over the Objective-C class NSTextAttachment.
+//
+// The values for the attachment characteristics of attributed strings and related objects.
 type TextAttachment struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func TextAttachmentFromID(id objc.ID) *TextAttachment {
 	if id == 0 {
 		return nil
 	}
-	x := &TextAttachment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func textAttachmentAdopt(id objc.ID) *TextAttachment {
 	if id == 0 {
 		return nil
 	}
-	x := &TextAttachment{Handle: objref.Wrap(id)}
+	x := &TextAttachment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,81 +61,80 @@ func (x *TextAttachment) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a text attachment object with the specified data.
-//
-// NewTextAttachmentWithDataOfType creates a new TextAttachment.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextAttachment) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTextAttachmentWithDataOfType creates a text attachment object with the specified data.
 func NewTextAttachmentWithDataOfType(contentData obj.Object, uti string) *TextAttachment {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextAttachment")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:ofType:"), objref.IDOf(contentData), purego.NSString(uti))
 	return textAttachmentAdopt(_id)
 }
 
-// Creates a text attachment object to contain the specified file wrapper.
-//
-// NewTextAttachmentWithFileWrapper creates a new TextAttachment.
+// NewTextAttachmentWithFileWrapper creates a text attachment object to contain the specified file wrapper.
 func NewTextAttachmentWithFileWrapper(fileWrapper obj.Object) *TextAttachment {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextAttachment")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileWrapper:"), objref.IDOf(fileWrapper))
 	return textAttachmentAdopt(_id)
 }
 
-// The contents for the text attachment.
-//
-// WithContents sets contents and returns the receiver so calls can be chained.
+// WithContents the contents for the text attachment.
 func (x *TextAttachment) WithContents(contents obj.Object) *TextAttachment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), objref.IDOf(contents))
 	return x
 }
 
-// The file type of the contents for the text attachment.
-//
-// WithFileType sets fileType and returns the receiver so calls can be chained.
+// WithFileType the file type of the contents for the text attachment.
 func (x *TextAttachment) WithFileType(fileType string) *TextAttachment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileType:"), purego.NSString(fileType))
 	return x
 }
 
-// An instance of the relevant image class that represents the contents of the text attachment object.
-//
-// WithImage sets image and returns the receiver so calls can be chained.
+// WithImage an instance of the relevant image class that represents the contents of the text attachment object.
 func (x *TextAttachment) WithImage(image *Image) *TextAttachment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
-// The text attachment’s file wrapper.
-//
-// WithFileWrapper sets fileWrapper and returns the receiver so calls can be chained.
+// WithBounds the layout bounds of the text attachment’s graphical representation in the text coordinate system.
+func (x *TextAttachment) WithBounds(bounds corefoundation.CGRect) *TextAttachment {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
+	return x
+}
+
+// WithFileWrapper the text attachment’s file wrapper.
 func (x *TextAttachment) WithFileWrapper(fileWrapper obj.Object) *TextAttachment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileWrapper:"), objref.IDOf(fileWrapper))
 	return x
 }
 
-// The layout padding before and after the text attachment bounds.
-//
-// WithLineLayoutPadding sets lineLayoutPadding and returns the receiver so calls can be chained.
+// WithLineLayoutPadding the layout padding before and after the text attachment bounds.
 func (x *TextAttachment) WithLineLayoutPadding(lineLayoutPadding float64) *TextAttachment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineLayoutPadding:"), lineLayoutPadding)
 	return x
 }
 
-// A Boolean value that determines whether the text attachment uses text attachment views.
-//
-// WithAllowsTextAttachmentView sets allowsTextAttachmentView and returns the receiver so calls can be chained.
+// WithAllowsTextAttachmentView a Boolean value that determines whether the text attachment uses text attachment views.
 func (x *TextAttachment) WithAllowsTextAttachmentView(allowsTextAttachmentView bool) *TextAttachment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsTextAttachmentView:"), allowsTextAttachmentView)
 	return x
 }
 
+// Contents wraps the corresponding Objective-C method.
 func (x *TextAttachment) Contents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contents"))
 	return obj.Wrap(_r)
 }
 
+// SetContents wraps the corresponding Objective-C method.
 func (x *TextAttachment) SetContents(contents obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), objref.IDOf(contents))
 }
 
+// FileType wraps the corresponding Objective-C method.
 func (x *TextAttachment) FileType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileType"))
 	if _r == 0 {
@@ -141,46 +143,67 @@ func (x *TextAttachment) FileType() string {
 	return purego.GoString(_r)
 }
 
+// SetFileType wraps the corresponding Objective-C method.
 func (x *TextAttachment) SetFileType(fileType string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileType:"), purego.NSString(fileType))
 }
 
+// Image wraps the corresponding Objective-C method.
 func (x *TextAttachment) Image() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
+// SetImage wraps the corresponding Objective-C method.
 func (x *TextAttachment) SetImage(image *Image) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 }
 
+// Bounds wraps the corresponding Objective-C method.
+func (x *TextAttachment) Bounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("bounds"))
+	return _r
+}
+
+// SetBounds wraps the corresponding Objective-C method.
+func (x *TextAttachment) SetBounds(bounds corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
+}
+
+// FileWrapper wraps the corresponding Objective-C method.
 func (x *TextAttachment) FileWrapper() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileWrapper"))
 	return obj.Wrap(_r)
 }
 
+// SetFileWrapper wraps the corresponding Objective-C method.
 func (x *TextAttachment) SetFileWrapper(fileWrapper obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileWrapper:"), objref.IDOf(fileWrapper))
 }
 
+// LineLayoutPadding wraps the corresponding Objective-C method.
 func (x *TextAttachment) LineLayoutPadding() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lineLayoutPadding"))
 	return _r
 }
 
+// SetLineLayoutPadding wraps the corresponding Objective-C method.
 func (x *TextAttachment) SetLineLayoutPadding(lineLayoutPadding float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineLayoutPadding:"), lineLayoutPadding)
 }
 
+// AllowsTextAttachmentView wraps the corresponding Objective-C method.
 func (x *TextAttachment) AllowsTextAttachmentView() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsTextAttachmentView"))
 	return _r
 }
 
+// SetAllowsTextAttachmentView wraps the corresponding Objective-C method.
 func (x *TextAttachment) SetAllowsTextAttachmentView(allowsTextAttachmentView bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsTextAttachmentView:"), allowsTextAttachmentView)
 }
 
+// UsesTextAttachmentView wraps the corresponding Objective-C method.
 func (x *TextAttachment) UsesTextAttachmentView() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesTextAttachmentView"))
 	return _r
@@ -192,6 +215,7 @@ type TextAttachmentable interface {
 	WithContents(contents obj.Object) *TextAttachment
 	WithFileType(fileType string) *TextAttachment
 	WithImage(image *Image) *TextAttachment
+	WithBounds(bounds corefoundation.CGRect) *TextAttachment
 	WithFileWrapper(fileWrapper obj.Object) *TextAttachment
 	WithLineLayoutPadding(lineLayoutPadding float64) *TextAttachment
 	WithAllowsTextAttachmentView(allowsTextAttachmentView bool) *TextAttachment
@@ -201,6 +225,8 @@ type TextAttachmentable interface {
 	SetFileType(fileType string)
 	Image() *Image
 	SetImage(image *Image)
+	Bounds() corefoundation.CGRect
+	SetBounds(bounds corefoundation.CGRect)
 	FileWrapper() obj.Object
 	SetFileWrapper(fileWrapper obj.Object)
 	LineLayoutPadding() float64

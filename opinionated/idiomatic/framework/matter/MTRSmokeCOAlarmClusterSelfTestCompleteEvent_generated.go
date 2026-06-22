@@ -23,7 +23,8 @@ func MTRSmokeCOAlarmClusterSelfTestCompleteEventFromID(id objc.ID) *MTRSmokeCOAl
 	if id == 0 {
 		return nil
 	}
-	x := &MTRSmokeCOAlarmClusterSelfTestCompleteEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRSmokeCOAlarmClusterSelfTestCompleteEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRSmokeCOAlarmClusterSelfTestCompleteEventAdopt(id objc.ID) *MTRSmokeCOAla
 	if id == 0 {
 		return nil
 	}
-	x := &MTRSmokeCOAlarmClusterSelfTestCompleteEvent{Handle: objref.Wrap(id)}
+	x := &MTRSmokeCOAlarmClusterSelfTestCompleteEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *MTRSmokeCOAlarmClusterSelfTestCompleteEvent) IsEqual(other obj.Object) 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MTRSmokeCOAlarmClusterSelfTestCompleteEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRSmokeCOAlarmClusterSelfTestCompleteEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMTRSmokeCOAlarmClusterSelfTestCompleteEvent creates a new MTRSmokeCOAlarmClusterSelfTestCompleteEvent.

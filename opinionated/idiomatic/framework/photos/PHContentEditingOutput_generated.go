@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// A container to which you provide the results of editing the photo, video, or Live Photo content of a Photos asset.
-//
 // ContentEditingOutput is an idiomatic wrapper over the Objective-C class PHContentEditingOutput.
+//
+// A container to which you provide the results of editing the photo, video, or Live Photo content of a Photos asset.
 type ContentEditingOutput struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func ContentEditingOutputFromID(id objc.ID) *ContentEditingOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &ContentEditingOutput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContentEditingOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func contentEditingOutputAdopt(id objc.ID) *ContentEditingOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &ContentEditingOutput{Handle: objref.Wrap(id)}
+	x := &ContentEditingOutput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,34 +62,34 @@ func (x *ContentEditingOutput) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an editing output from the specified editing input.
-//
-// NewContentEditingOutputWithContentEditingInput creates a new ContentEditingOutput.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContentEditingOutput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewContentEditingOutputWithContentEditingInput creates an editing output from the specified editing input.
 func NewContentEditingOutputWithContentEditingInput(contentEditingInput *ContentEditingInput) *ContentEditingOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHContentEditingOutput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentEditingInput:"), objref.IDOf(contentEditingInput))
 	return contentEditingOutputAdopt(_id)
 }
 
-// Creates an editing output for use in adding a new asset to the photo library.
-//
-// NewContentEditingOutputWithPlaceholderForCreatedAsset creates a new ContentEditingOutput.
+// NewContentEditingOutputWithPlaceholderForCreatedAsset creates an editing output for use in adding a new asset to the photo library.
 func NewContentEditingOutputWithPlaceholderForCreatedAsset(placeholderForCreatedAsset *ObjectPlaceholder) *ContentEditingOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHContentEditingOutput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlaceholderForCreatedAsset:"), objref.IDOf(placeholderForCreatedAsset))
 	return contentEditingOutputAdopt(_id)
 }
 
-// An object describing the changes made to the asset.
-//
-// WithAdjustmentData sets adjustmentData and returns the receiver so calls can be chained.
+// WithAdjustmentData an object describing the changes made to the asset.
 func (x *ContentEditingOutput) WithAdjustmentData(adjustmentData *AdjustmentData) *ContentEditingOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdjustmentData:"), objref.IDOf(adjustmentData))
 	return x
 }
 
-// Returns a file URL where the rendered output in the specified format, with adjustments baked-in, needs to be written to. Returns nil and provides an error identifying the reason if the format is unsupported or the requested content URL cannot be provided
-func (x *ContentEditingOutput) RenderedContentURLForTypeError(type_ obj.Object) (obj.Object, error) {
+// RenderedContentURLForTypeError returns a file URL where the rendered output in the specified format, with adjustments baked-in, needs to be written to. Returns nil and provides an error identifying the reason if the format is unsupported or the requested content URL cannot be provided
+func (x *ContentEditingOutput) RenderedContentURLForTypeError(type_ obj.Object) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("renderedContentURLForType:error:"), objref.IDOf(type_), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -96,28 +98,30 @@ func (x *ContentEditingOutput) RenderedContentURLForTypeError(type_ obj.Object) 
 	return obj.Wrap(_r), nil
 }
 
+// AdjustmentData wraps the corresponding Objective-C method.
 func (x *ContentEditingOutput) AdjustmentData() *AdjustmentData {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adjustmentData"))
 	return AdjustmentDataFromID(_r)
 }
 
+// SetAdjustmentData wraps the corresponding Objective-C method.
 func (x *ContentEditingOutput) SetAdjustmentData(adjustmentData *AdjustmentData) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdjustmentData:"), objref.IDOf(adjustmentData))
 }
 
-// File URL where the rendered output in the default format, with adjustments baked-in, needs to be written to.
+// RenderedContentURL file URL where the rendered output in the default format, with adjustments baked-in, needs to be written to.
 func (x *ContentEditingOutput) RenderedContentURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("renderedContentURL"))
 	return obj.Wrap(_r)
 }
 
-// Returns the default type for the rendered content output
+// DefaultRenderedContentType returns the default type for the rendered content output
 func (x *ContentEditingOutput) DefaultRenderedContentType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultRenderedContentType"))
 	return obj.Wrap(_r)
 }
 
-// Returns the supported types for the rendered content output
+// SupportedRenderedContentTypes returns the supported types for the rendered content output
 //
 // SupportedRenderedContentTypes returns the collection as a Go slice.
 func (x *ContentEditingOutput) SupportedRenderedContentTypes() []obj.Object {
@@ -129,7 +133,7 @@ func (x *ContentEditingOutput) SupportedRenderedContentTypes() []obj.Object {
 type ContentEditingOutputable interface {
 	obj.Object
 	WithAdjustmentData(adjustmentData *AdjustmentData) *ContentEditingOutput
-	RenderedContentURLForTypeError(type_ obj.Object) (obj.Object, error)
+	RenderedContentURLForTypeError(type_ obj.Object) (result obj.Object, err error)
 	AdjustmentData() *AdjustmentData
 	SetAdjustmentData(adjustmentData *AdjustmentData)
 	RenderedContentURL() obj.Object

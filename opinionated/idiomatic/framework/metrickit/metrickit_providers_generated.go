@@ -11,9 +11,11 @@ import (
 // DiagnosticProvider is accepted wherever a MXDiagnostic (or one of its subclasses) is expected.
 type DiagnosticProvider interface {
 	objref.Object
+	isDiagnostic()
 }
 
 // MetricProvider is accepted wherever a MXMetric (or one of its subclasses) is expected.
 type MetricProvider interface {
 	objref.Object
+	isMetric()
 }

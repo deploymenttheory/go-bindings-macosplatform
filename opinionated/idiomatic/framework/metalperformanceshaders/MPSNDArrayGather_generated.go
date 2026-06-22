@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NDArrayGather is an idiomatic wrapper over the Objective-C class MPSNDArrayGather.
+//
+// It embeds [NDArrayBinaryKernel], promoting that type's methods.
 type NDArrayGather struct {
-	objref.Handle
+	NDArrayBinaryKernel
 }
 
 // NDArrayGatherFromID adopts an existing Objective-C object as a NDArrayGather
@@ -23,7 +24,8 @@ func NDArrayGatherFromID(id objc.ID) *NDArrayGather {
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayGather{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NDArrayGather{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func nDArrayGatherAdopt(id objc.ID) *NDArrayGather {
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayGather{Handle: objref.Wrap(id)}
+	x := &NDArrayGather{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NDArrayGather) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NDArrayGather) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NDArrayGather) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNDArrayGather creates a new NDArrayGather.
@@ -62,28 +50,25 @@ func NewNDArrayGather() *NDArrayGather {
 	return nDArrayGatherAdopt(_id)
 }
 
-// The axis along which to apply the gather operation. Defaults to zero.
-//
-// WithAxis sets axis and returns the receiver so calls can be chained.
+// WithAxis the axis along which to apply the gather operation. Defaults to zero.
 func (x *NDArrayGather) WithAxis(axis int) *NDArrayGather {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAxis:"), axis)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayGather) WithLabel(label string) *NDArrayGather {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The axis along which to apply the gather operation. Defaults to zero.
+// Axis the axis along which to apply the gather operation. Defaults to zero.
 func (x *NDArrayGather) Axis() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("axis"))
 	return _r
 }
 
+// SetAxis wraps the corresponding Objective-C method.
 func (x *NDArrayGather) SetAxis(axis int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAxis:"), axis)
 }
@@ -98,3 +83,11 @@ type NDArrayGatherable interface {
 }
 
 var _ NDArrayGatherable = (*NDArrayGather)(nil)
+
+var _ NDArrayBinaryKernelProvider = (*NDArrayGather)(nil)
+
+var _ NDArrayMultiaryKernelProvider = (*NDArrayGather)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayGather)(nil)
+
+var _ KernelProvider = (*NDArrayGather)(nil)

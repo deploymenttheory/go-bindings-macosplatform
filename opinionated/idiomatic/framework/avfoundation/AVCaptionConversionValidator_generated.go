@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that validates captions for a conversion operation.
-//
 // CaptionConversionValidator is an idiomatic wrapper over the Objective-C class AVCaptionConversionValidator.
+//
+// An object that validates captions for a conversion operation.
 type CaptionConversionValidator struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func CaptionConversionValidatorFromID(id objc.ID) *CaptionConversionValidator {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptionConversionValidator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptionConversionValidator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func captionConversionValidatorAdopt(id objc.ID) *CaptionConversionValidator {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptionConversionValidator{Handle: objref.Wrap(id)}
+	x := &CaptionConversionValidator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,16 +61,22 @@ func (x *CaptionConversionValidator) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptionConversionValidator) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCaptionConversionValidator creates a new CaptionConversionValidator.
 func NewCaptionConversionValidator() *CaptionConversionValidator {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptionConversionValidator")), objc.RegisterName("new"))
 	return captionConversionValidatorAdopt(_id)
 }
 
-// Validates the object’s captions.
+// ValidateCaptionConversionWithWarningHandler validates the object’s captions.
 //
 // ValidateCaptionConversionWithWarningHandler blocks until the operation completes or ctx is cancelled.
-func (x *CaptionConversionValidator) ValidateCaptionConversionWithWarningHandler(ctx context.Context) (*CaptionConversionWarning, error) {
+func (x *CaptionConversionValidator) ValidateCaptionConversionWithWarningHandler(ctx context.Context) (result *CaptionConversionWarning, err error) {
 	type _result struct {
 		val *CaptionConversionWarning
 		err error
@@ -89,18 +97,18 @@ func (x *CaptionConversionValidator) ValidateCaptionConversionWithWarningHandler
 	}
 }
 
-// Stops the active validation operation.
+// StopValidating stops the active validation operation.
 func (x *CaptionConversionValidator) StopValidating() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopValidating"))
 }
 
-// Indicates the status of the validation.
+// Status indicates the status of the validation.
 func (x *CaptionConversionValidator) Status() CaptionConversionValidatorStatus {
 	_r := objc.Send[CaptionConversionValidatorStatus](objref.IDOf(x), objc.RegisterName("status"))
 	return _r
 }
 
-// The array of captions to be validated for the specified conversion operation.
+// Captions the array of captions to be validated for the specified conversion operation.
 //
 // Captions returns the collection as a Go slice.
 func (x *CaptionConversionValidator) Captions() []*Caption {
@@ -108,7 +116,7 @@ func (x *CaptionConversionValidator) Captions() []*Caption {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Caption { return CaptionFromID(_id) })
 }
 
-// Provides the collection of warnings for problems that have been encountered. While the value of status is AVCaptionConversionValidatorStatusValidating, the count of warnings may increase.
+// Warnings provides the collection of warnings for problems that have been encountered. While the value of status is AVCaptionConversionValidatorStatusValidating, the count of warnings may increase.
 //
 // Warnings returns the collection as a Go slice.
 func (x *CaptionConversionValidator) Warnings() []*CaptionConversionWarning {

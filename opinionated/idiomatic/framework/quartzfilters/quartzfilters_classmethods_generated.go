@@ -11,26 +11,31 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// QuartzFilterWithURL wraps the corresponding Objective-C method.
 func QuartzFilterWithURL(aURL string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilter")), objc.RegisterName("quartzFilterWithURL:"), rt.FileURL(aURL))
 	return obj.Wrap(_r)
 }
 
+// QuartzFilterWithProperties wraps the corresponding Objective-C method.
 func QuartzFilterWithProperties(properties obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilter")), objc.RegisterName("quartzFilterWithProperties:"), objref.IDOf(properties))
 	return obj.Wrap(_r)
 }
 
+// QuartzFilterWithOutputIntents wraps the corresponding Objective-C method.
 func QuartzFilterWithOutputIntents(outputIntents obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilter")), objc.RegisterName("quartzFilterWithOutputIntents:"), objref.IDOf(outputIntents))
 	return obj.Wrap(_r)
 }
 
+// FilterManager wraps the corresponding Objective-C method.
 func FilterManager() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilterManager")), objc.RegisterName("filterManager"))
 	return obj.Wrap(_r)
 }
 
+// FiltersInDomains wraps the corresponding Objective-C method.
 func FiltersInDomains(domains obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilterManager")), objc.RegisterName("filtersInDomains:"), objref.IDOf(domains))
 	return obj.Wrap(_r)

@@ -11,4 +11,5 @@ import (
 // MatchProvider is accepted wherever a DDMatch (or one of its subclasses) is expected.
 type MatchProvider interface {
 	objref.Object
+	isMatch()
 }

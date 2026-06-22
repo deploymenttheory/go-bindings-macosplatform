@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A dictionary of attributes that describe a font.
-//
 // FontDescriptor is an idiomatic wrapper over the Objective-C class NSFontDescriptor.
+//
+// A dictionary of attributes that describe a font.
 type FontDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FontDescriptorFromID(id objc.ID) *FontDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &FontDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FontDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func fontDescriptorAdopt(id objc.ID) *FontDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &FontDescriptor{Handle: objref.Wrap(id)}
+	x := &FontDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,75 +60,80 @@ func (x *FontDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes and returns a new font descriptor with the specified attributes.
-//
-// NewFontDescriptorWithFontAttributes creates a new FontDescriptor.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FontDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFontDescriptorWithFontAttributes initializes and returns a new font descriptor with the specified attributes.
 func NewFontDescriptorWithFontAttributes(attributes obj.Object) *FontDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFontDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFontAttributes:"), objref.IDOf(attributes))
 	return fontDescriptorAdopt(_id)
 }
 
-// Returns the font attribute specified by the given key.
+// ObjectForKey returns the font attribute specified by the given key.
 func (x *FontDescriptor) ObjectForKey(attribute obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKey:"), objref.IDOf(attribute))
 	return obj.Wrap(_r)
 }
 
-// Returns all the fonts available on the system whose specified attributes match those of the receiver.
+// MatchingFontDescriptorsWithMandatoryKeys returns all the fonts available on the system whose specified attributes match those of the receiver.
 func (x *FontDescriptor) MatchingFontDescriptorsWithMandatoryKeys(mandatoryKeys obj.Object) []*FontDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchingFontDescriptorsWithMandatoryKeys:"), objref.IDOf(mandatoryKeys))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *FontDescriptor { return FontDescriptorFromID(_id) })
 }
 
-// Returns a normalized font descriptor whose specified attributes match those of the receiver.
+// MatchingFontDescriptorWithMandatoryKeys returns a normalized font descriptor whose specified attributes match those of the receiver.
 func (x *FontDescriptor) MatchingFontDescriptorWithMandatoryKeys(mandatoryKeys obj.Object) *FontDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchingFontDescriptorWithMandatoryKeys:"), objref.IDOf(mandatoryKeys))
 	return FontDescriptorFromID(_r)
 }
 
-// Returns a new font descriptor based on the current object, but with the specified attributes taking precedence over the existing ones.
+// FontDescriptorByAddingAttributes returns a new font descriptor based on the current object, but with the specified attributes taking precedence over the existing ones.
 func (x *FontDescriptor) FontDescriptorByAddingAttributes(attributes obj.Object) *FontDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontDescriptorByAddingAttributes:"), objref.IDOf(attributes))
 	return FontDescriptorFromID(_r)
 }
 
-// Returns a new font descriptor based on the current object, but with the specified symbolic traits taking precedence over the existing ones.
+// FontDescriptorWithSymbolicTraits returns a new font descriptor based on the current object, but with the specified symbolic traits taking precedence over the existing ones.
 func (x *FontDescriptor) FontDescriptorWithSymbolicTraits(symbolicTraits FontDescriptorSymbolicTraits) *FontDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontDescriptorWithSymbolicTraits:"), symbolicTraits)
 	return FontDescriptorFromID(_r)
 }
 
-// Returns a new font descriptor based on the current object, but with the specified point size.
+// FontDescriptorWithSize returns a new font descriptor based on the current object, but with the specified point size.
 func (x *FontDescriptor) FontDescriptorWithSize(newPointSize float64) *FontDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontDescriptorWithSize:"), newPointSize)
 	return FontDescriptorFromID(_r)
 }
 
-// Returns a new font descriptor based on the current object, but with the specified font matrix.
+// FontDescriptorWithMatrix returns a new font descriptor based on the current object, but with the specified font matrix.
 func (x *FontDescriptor) FontDescriptorWithMatrix(matrix obj.Object) *FontDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontDescriptorWithMatrix:"), objref.IDOf(matrix))
 	return FontDescriptorFromID(_r)
 }
 
-// Returns a new font descriptor based on the current object, but with the specified face.
+// FontDescriptorWithFace returns a new font descriptor based on the current object, but with the specified face.
 func (x *FontDescriptor) FontDescriptorWithFace(newFace string) *FontDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontDescriptorWithFace:"), purego.NSString(newFace))
 	return FontDescriptorFromID(_r)
 }
 
-// Returns a new font descriptor based on the current object, but with the specified font family.
+// FontDescriptorWithFamily returns a new font descriptor based on the current object, but with the specified font family.
 func (x *FontDescriptor) FontDescriptorWithFamily(newFamily string) *FontDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontDescriptorWithFamily:"), purego.NSString(newFamily))
 	return FontDescriptorFromID(_r)
 }
 
-// Returns a new font descriptor based on the current object, but with the specified design style.
+// FontDescriptorWithDesign returns a new font descriptor based on the current object, but with the specified design style.
 func (x *FontDescriptor) FontDescriptorWithDesign(design obj.Object) *FontDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontDescriptorWithDesign:"), objref.IDOf(design))
 	return FontDescriptorFromID(_r)
 }
 
+// PostscriptName wraps the corresponding Objective-C method.
 func (x *FontDescriptor) PostscriptName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postscriptName"))
 	if _r == 0 {
@@ -135,26 +142,31 @@ func (x *FontDescriptor) PostscriptName() string {
 	return purego.GoString(_r)
 }
 
+// PointSize wraps the corresponding Objective-C method.
 func (x *FontDescriptor) PointSize() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("pointSize"))
 	return _r
 }
 
+// Matrix wraps the corresponding Objective-C method.
 func (x *FontDescriptor) Matrix() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matrix"))
 	return obj.Wrap(_r)
 }
 
+// SymbolicTraits wraps the corresponding Objective-C method.
 func (x *FontDescriptor) SymbolicTraits() FontDescriptorSymbolicTraits {
 	_r := objc.Send[FontDescriptorSymbolicTraits](objref.IDOf(x), objc.RegisterName("symbolicTraits"))
 	return _r
 }
 
+// RequiresFontAssetRequest wraps the corresponding Objective-C method.
 func (x *FontDescriptor) RequiresFontAssetRequest() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresFontAssetRequest"))
 	return _r
 }
 
+// FontAttributes wraps the corresponding Objective-C method.
 func (x *FontDescriptor) FontAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontAttributes"))
 	return obj.Wrap(_r)

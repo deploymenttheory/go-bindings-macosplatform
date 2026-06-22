@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A query for reading activity summary objects from the HealthKit store.
-//
 // ActivitySummaryQuery is an idiomatic wrapper over the Objective-C class HKActivitySummaryQuery.
+//
+// It embeds [Query], promoting that type's methods.
+//
+// A query for reading activity summary objects from the HealthKit store.
 type ActivitySummaryQuery struct {
-	objref.Handle
+	Query
 }
 
 // ActivitySummaryQueryFromID adopts an existing Objective-C object as a ActivitySummaryQuery
@@ -25,7 +26,8 @@ func ActivitySummaryQueryFromID(id objc.ID) *ActivitySummaryQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &ActivitySummaryQuery{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ActivitySummaryQuery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func activitySummaryQueryAdopt(id objc.ID) *ActivitySummaryQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &ActivitySummaryQuery{Handle: objref.Wrap(id)}
+	x := &ActivitySummaryQuery{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ActivitySummaryQuery) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ActivitySummaryQuery) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ActivitySummaryQuery) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewActivitySummaryQuery creates a new ActivitySummaryQuery.
@@ -70,3 +58,5 @@ type ActivitySummaryQueryable interface {
 }
 
 var _ ActivitySummaryQueryable = (*ActivitySummaryQuery)(nil)
+
+var _ QueryProvider = (*ActivitySummaryQuery)(nil)

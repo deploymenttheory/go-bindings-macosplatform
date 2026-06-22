@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object used to specify whether a Today widget has content to display.
-//
 // WidgetController is an idiomatic wrapper over the Objective-C class NCWidgetController.
+//
+// An object used to specify whether a Today widget has content to display.
 type WidgetController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WidgetControllerFromID(id objc.ID) *WidgetController {
 	if id == 0 {
 		return nil
 	}
-	x := &WidgetController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WidgetController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func widgetControllerAdopt(id objc.ID) *WidgetController {
 	if id == 0 {
 		return nil
 	}
-	x := &WidgetController{Handle: objref.Wrap(id)}
+	x := &WidgetController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *WidgetController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WidgetController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWidgetController creates a new WidgetController.
 func NewWidgetController() *WidgetController {
 	_id := objc.Send[objc.ID](objc.ID(_class("NCWidgetController")), objc.RegisterName("new"))
 	return widgetControllerAdopt(_id)
 }
 
-// Sets whether the specified widget has content to display.
+// SetHasContentForWidgetWithBundleIdentifier sets whether the specified widget has content to display.
 func (x *WidgetController) SetHasContentForWidgetWithBundleIdentifier(flag bool, bundleID string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasContent:forWidgetWithBundleIdentifier:"), flag, purego.NSString(bundleID))
 }

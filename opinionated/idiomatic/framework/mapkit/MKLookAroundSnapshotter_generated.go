@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A utility class that you use to create a static image from a LookAround scene.
-//
 // LookAroundSnapshotter is an idiomatic wrapper over the Objective-C class MKLookAroundSnapshotter.
+//
+// A utility class that you use to create a static image from a LookAround scene.
 type LookAroundSnapshotter struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func LookAroundSnapshotterFromID(id objc.ID) *LookAroundSnapshotter {
 	if id == 0 {
 		return nil
 	}
-	x := &LookAroundSnapshotter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LookAroundSnapshotter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func lookAroundSnapshotterAdopt(id objc.ID) *LookAroundSnapshotter {
 	if id == 0 {
 		return nil
 	}
-	x := &LookAroundSnapshotter{Handle: objref.Wrap(id)}
+	x := &LookAroundSnapshotter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,19 +62,23 @@ func (x *LookAroundSnapshotter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Create a new snapshotter object with the scene and options you specify.
-//
-// NewLookAroundSnapshotterWithSceneOptions creates a new LookAroundSnapshotter.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LookAroundSnapshotter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLookAroundSnapshotterWithSceneOptions create a new snapshotter object with the scene and options you specify.
 func NewLookAroundSnapshotterWithSceneOptions(scene *LookAroundScene, options *LookAroundSnapshotOptions) *LookAroundSnapshotter {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKLookAroundSnapshotter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScene:options:"), objref.IDOf(scene), objref.IDOf(options))
 	return lookAroundSnapshotterAdopt(_id)
 }
 
-// Requests a new snapshot and calls the completion handler you provide.
+// GetSnapshot requests a new snapshot and calls the completion handler you provide.
 //
 // GetSnapshot blocks until the operation completes or ctx is cancelled.
-func (x *LookAroundSnapshotter) GetSnapshot(ctx context.Context) (*LookAroundSnapshot, error) {
+func (x *LookAroundSnapshotter) GetSnapshot(ctx context.Context) (result *LookAroundSnapshot, err error) {
 	type _result struct {
 		val *LookAroundSnapshot
 		err error
@@ -94,11 +100,12 @@ func (x *LookAroundSnapshotter) GetSnapshot(ctx context.Context) (*LookAroundSna
 	}
 }
 
-// Cancels an in-progress snapshot request.
+// Cancel cancels an in-progress snapshot request.
 func (x *LookAroundSnapshotter) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
+// IsLoading wraps the corresponding Objective-C method.
 func (x *LookAroundSnapshotter) IsLoading() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLoading"))
 	return _r

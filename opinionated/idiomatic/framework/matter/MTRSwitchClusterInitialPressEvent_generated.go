@@ -23,7 +23,8 @@ func MTRSwitchClusterInitialPressEventFromID(id objc.ID) *MTRSwitchClusterInitia
 	if id == 0 {
 		return nil
 	}
-	x := &MTRSwitchClusterInitialPressEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRSwitchClusterInitialPressEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRSwitchClusterInitialPressEventAdopt(id objc.ID) *MTRSwitchClusterInitial
 	if id == 0 {
 		return nil
 	}
-	x := &MTRSwitchClusterInitialPressEvent{Handle: objref.Wrap(id)}
+	x := &MTRSwitchClusterInitialPressEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTRSwitchClusterInitialPressEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRSwitchClusterInitialPressEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRSwitchClusterInitialPressEvent creates a new MTRSwitchClusterInitialPressEvent.
 func NewMTRSwitchClusterInitialPressEvent() *MTRSwitchClusterInitialPressEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRSwitchClusterInitialPressEvent")), objc.RegisterName("new"))
 	return mTRSwitchClusterInitialPressEventAdopt(_id)
 }
 
-// WithNewPosition sets newPosition and returns the receiver so calls can be chained.
+// WithNewPosition sets the property and returns the receiver so calls can be chained.
 func (x *MTRSwitchClusterInitialPressEvent) WithNewPosition(newPosition obj.Object) *MTRSwitchClusterInitialPressEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
 	return x
 }
 
+// GetNewPosition wraps the corresponding Objective-C method.
 func (x *MTRSwitchClusterInitialPressEvent) GetNewPosition() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewPosition"))
 	return obj.Wrap(_r)
 }
 
+// SetNewPosition wraps the corresponding Objective-C method.
 func (x *MTRSwitchClusterInitialPressEvent) SetNewPosition(newPosition obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
 }

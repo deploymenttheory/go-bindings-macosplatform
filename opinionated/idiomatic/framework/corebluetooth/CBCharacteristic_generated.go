@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A characteristic of a remote peripheral’s service.
-//
 // Characteristic is an idiomatic wrapper over the Objective-C class CBCharacteristic.
+//
+// Characteristic is an abstract base — you do not construct it directly. Construct one of [MutableCharacteristic] and pass it where a Characteristic is accepted.
+//
+// A characteristic of a remote peripheral’s service.
 type Characteristic struct {
-	objref.Handle
+	Attribute
 }
 
 // CharacteristicFromID adopts an existing Objective-C object as a Characteristic
@@ -25,7 +26,8 @@ func CharacteristicFromID(id objc.ID) *Characteristic {
 	if id == 0 {
 		return nil
 	}
-	x := &Characteristic{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Characteristic{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,51 +40,31 @@ func characteristicAdopt(id objc.ID) *Characteristic {
 	if id == 0 {
 		return nil
 	}
-	x := &Characteristic{Handle: objref.Wrap(id)}
+	x := &Characteristic{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *Characteristic) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Characteristic) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Characteristic) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewCharacteristic creates a new Characteristic.
-func NewCharacteristic() *Characteristic {
-	_id := objc.Send[objc.ID](objc.ID(_class("CBCharacteristic")), objc.RegisterName("new"))
-	return characteristicAdopt(_id)
-}
-
-// A back-pointer to the service this characteristic belongs to.
+// Service a back-pointer to the service this characteristic belongs to.
 func (x *Characteristic) Service() *Service {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("service"))
 	return ServiceFromID(_r)
 }
 
-// The properties of the characteristic.
+// Properties the properties of the characteristic.
 func (x *Characteristic) Properties() CharacteristicProperties {
 	_r := objc.Send[CharacteristicProperties](objref.IDOf(x), objc.RegisterName("properties"))
 	return _r
 }
 
-// The value of the characteristic.
+// Value the value of the characteristic.
 func (x *Characteristic) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
-// A list of the CBDescriptors that have so far been discovered in this characteristic.
+// Descriptors a list of the CBDescriptors that have so far been discovered in this characteristic.
 //
 // Descriptors returns the collection as a Go slice.
 func (x *Characteristic) Descriptors() []*Descriptor {
@@ -90,13 +72,13 @@ func (x *Characteristic) Descriptors() []*Descriptor {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Descriptor { return DescriptorFromID(_id) })
 }
 
-// Whether the characteristic is currently broadcasted or not.
+// IsBroadcasted whether the characteristic is currently broadcasted or not.
 func (x *Characteristic) IsBroadcasted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBroadcasted"))
 	return _r
 }
 
-// Whether the characteristic is currently notifying or not.
+// IsNotifying whether the characteristic is currently notifying or not.
 func (x *Characteristic) IsNotifying() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNotifying"))
 	return _r
@@ -114,3 +96,12 @@ type Characteristicable interface {
 }
 
 var _ Characteristicable = (*Characteristic)(nil)
+
+// isCharacteristic marks Characteristic — and, by embedding promotion, its
+// subclasses — as a member of the Characteristic hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Characteristic) isCharacteristic() {}
+
+var _ CharacteristicProvider = (*Characteristic)(nil)
+
+var _ AttributeProvider = (*Characteristic)(nil)

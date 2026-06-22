@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Groups together properties to drive the dynamic linking process of a pipeline stage.
-//
 // MTL4PipelineStageDynamicLinkingDescriptor is an idiomatic wrapper over the Objective-C class MTL4PipelineStageDynamicLinkingDescriptor.
+//
+// Groups together properties to drive the dynamic linking process of a pipeline stage.
 type MTL4PipelineStageDynamicLinkingDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MTL4PipelineStageDynamicLinkingDescriptorFromID(id objc.ID) *MTL4PipelineSt
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4PipelineStageDynamicLinkingDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTL4PipelineStageDynamicLinkingDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTL4PipelineStageDynamicLinkingDescriptorAdopt(id objc.ID) *MTL4PipelineSta
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4PipelineStageDynamicLinkingDescriptor{Handle: objref.Wrap(id)}
+	x := &MTL4PipelineStageDynamicLinkingDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,46 +60,53 @@ func (x *MTL4PipelineStageDynamicLinkingDescriptor) IsKind(className string) boo
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTL4PipelineStageDynamicLinkingDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTL4PipelineStageDynamicLinkingDescriptor creates a new MTL4PipelineStageDynamicLinkingDescriptor.
 func NewMTL4PipelineStageDynamicLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTL4PipelineStageDynamicLinkingDescriptor")), objc.RegisterName("new"))
 	return mTL4PipelineStageDynamicLinkingDescriptorAdopt(_id)
 }
 
-// Limits the maximum depth of the call stack for indirect function calls in the pipeline stage function.
-//
-// WithMaxCallStackDepth sets maxCallStackDepth and returns the receiver so calls can be chained.
+// WithMaxCallStackDepth limits the maximum depth of the call stack for indirect function calls in the pipeline stage function.
 func (x *MTL4PipelineStageDynamicLinkingDescriptor) WithMaxCallStackDepth(maxCallStackDepth int) *MTL4PipelineStageDynamicLinkingDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCallStackDepth:"), maxCallStackDepth)
 	return x
 }
 
-// Limits the maximum depth of the call stack for indirect function calls in the pipeline stage function.
+// MaxCallStackDepth limits the maximum depth of the call stack for indirect function calls in the pipeline stage function.
 func (x *MTL4PipelineStageDynamicLinkingDescriptor) MaxCallStackDepth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxCallStackDepth"))
 	return _r
 }
 
+// SetMaxCallStackDepth wraps the corresponding Objective-C method.
 func (x *MTL4PipelineStageDynamicLinkingDescriptor) SetMaxCallStackDepth(maxCallStackDepth int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCallStackDepth:"), maxCallStackDepth)
 }
 
-// Provides the array of binary functions to link. Binary functions are shader functions that you compile from Metal IR to machine code ahead of time using instances of “MTL4Compiler“.
+// BinaryLinkedFunctions provides the array of binary functions to link. Binary functions are shader functions that you compile from Metal IR to machine code ahead of time using instances of “MTL4Compiler“.
 func (x *MTL4PipelineStageDynamicLinkingDescriptor) BinaryLinkedFunctions() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("binaryLinkedFunctions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetBinaryLinkedFunctions wraps the corresponding Objective-C method.
 func (x *MTL4PipelineStageDynamicLinkingDescriptor) SetBinaryLinkedFunctions(binaryLinkedFunctions []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBinaryLinkedFunctions:"), purego.SliceToNSArray(binaryLinkedFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Provides an array of dynamic libraries the compiler loads when it builds the pipeline.
+// PreloadedLibraries provides an array of dynamic libraries the compiler loads when it builds the pipeline.
 func (x *MTL4PipelineStageDynamicLinkingDescriptor) PreloadedLibraries() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preloadedLibraries"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetPreloadedLibraries wraps the corresponding Objective-C method.
 func (x *MTL4PipelineStageDynamicLinkingDescriptor) SetPreloadedLibraries(preloadedLibraries []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreloadedLibraries:"), purego.SliceToNSArray(preloadedLibraries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }

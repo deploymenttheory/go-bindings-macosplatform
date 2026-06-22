@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents a text list node.
-//
 // TextListElement is an idiomatic wrapper over the Objective-C class NSTextListElement.
+//
+// It embeds [TextParagraph], promoting that type's methods.
+//
+// A class that represents a text list node.
 type TextListElement struct {
-	objref.Handle
+	TextParagraph
 }
 
 // TextListElementFromID adopts an existing Objective-C object as a TextListElement
@@ -25,7 +26,8 @@ func TextListElementFromID(id objc.ID) *TextListElement {
 	if id == 0 {
 		return nil
 	}
-	x := &TextListElement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextListElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,61 +40,44 @@ func textListElementAdopt(id objc.ID) *TextListElement {
 	if id == 0 {
 		return nil
 	}
-	x := &TextListElement{Handle: objref.Wrap(id)}
+	x := &TextListElement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *TextListElement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextListElement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextListElement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a text list element with the parent, list elements, nesting level, and marker attributes you provide.
-//
-// NewTextListElementWithParentElementTextListContentsMarkerAttributesChildElements creates a new TextListElement.
+// NewTextListElementWithParentElementTextListContentsMarkerAttributesChildElements creates a text list element with the parent, list elements, nesting level, and marker attributes you provide.
 func NewTextListElementWithParentElementTextListContentsMarkerAttributesChildElements(parent *TextListElement, textList *TextList, contents obj.Object, markerAttributes obj.Object, children []*TextListElement) *TextListElement {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextListElement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParentElement:textList:contents:markerAttributes:childElements:"), objref.IDOf(parent), objref.IDOf(textList), objref.IDOf(contents), objref.IDOf(markerAttributes), purego.SliceToNSArray(children, func(_v *TextListElement) objc.ID { return objref.IDOf(_v) }))
 	return textListElementAdopt(_id)
 }
 
-// The value that represents the current content manager.
-//
-// WithTextContentManager sets textContentManager and returns the receiver so calls can be chained.
+// WithTextContentManager the value that represents the current content manager.
 func (x *TextListElement) WithTextContentManager(textContentManager TextContentManagerProvider) *TextListElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContentManager:"), objref.IDOf(textContentManager))
 	return x
 }
 
-// A range value that represents the range of the element inside the document.
-//
-// WithElementRange sets elementRange and returns the receiver so calls can be chained.
+// WithElementRange a range value that represents the range of the element inside the document.
 func (x *TextListElement) WithElementRange(elementRange *TextRange) *TextListElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElementRange:"), objref.IDOf(elementRange))
 	return x
 }
 
+// TextList wraps the corresponding Objective-C method.
 func (x *TextListElement) TextList() *TextList {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textList"))
 	return TextListFromID(_r)
 }
 
+// Contents wraps the corresponding Objective-C method.
 func (x *TextListElement) Contents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contents"))
 	return obj.Wrap(_r)
 }
 
+// MarkerAttributes wraps the corresponding Objective-C method.
 func (x *TextListElement) MarkerAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markerAttributes"))
 	return obj.Wrap(_r)
@@ -109,3 +94,7 @@ type TextListElementable interface {
 }
 
 var _ TextListElementable = (*TextListElement)(nil)
+
+var _ TextParagraphProvider = (*TextListElement)(nil)
+
+var _ TextElementProvider = (*TextListElement)(nil)

@@ -6,15 +6,16 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that renders captions for display at a particular time.
-//
 // CaptionRenderer is an idiomatic wrapper over the Objective-C class AVCaptionRenderer.
+//
+// An object that renders captions for display at a particular time.
 type CaptionRenderer struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func CaptionRendererFromID(id objc.ID) *CaptionRenderer {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptionRenderer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptionRenderer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func captionRendererAdopt(id objc.ID) *CaptionRenderer {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptionRenderer{Handle: objref.Wrap(id)}
+	x := &CaptionRenderer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +61,32 @@ func (x *CaptionRenderer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptionRenderer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCaptionRenderer creates a new CaptionRenderer.
 func NewCaptionRenderer() *CaptionRenderer {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptionRenderer")), objc.RegisterName("new"))
 	return captionRendererAdopt(_id)
 }
 
-// The captions to render.
-//
-// WithCaptions sets the collection and returns the receiver so calls can be chained.
+// WithCaptions the captions to render.
 func (x *CaptionRenderer) WithCaptions(items ...CaptionProvider) *CaptionRenderer {
 	_arr := purego.SliceToNSArray(items, func(_v CaptionProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptions:"), _arr)
 	return x
 }
 
-// A NSArray holding captions to consider for rendering. This is the array of AVCaptions to consider when drawing. The array can contain no captions.
+// WithBounds the drawing bounds of caption scenes.
+func (x *CaptionRenderer) WithBounds(bounds corefoundation.CGRect) *CaptionRenderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
+	return x
+}
+
+// Captions a NSArray holding captions to consider for rendering. This is the array of AVCaptions to consider when drawing. The array can contain no captions.
 //
 // Captions returns the collection as a Go slice.
 func (x *CaptionRenderer) Captions() []*Caption {
@@ -81,16 +94,31 @@ func (x *CaptionRenderer) Captions() []*Caption {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Caption { return CaptionFromID(_id) })
 }
 
+// SetCaptions wraps the corresponding Objective-C method.
 func (x *CaptionRenderer) SetCaptions(captions []*Caption) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptions:"), purego.SliceToNSArray(captions, func(_v *Caption) objc.ID { return objref.IDOf(_v) }))
+}
+
+// Bounds a CGRect holding bounds for the drawing of caption scene(s). This is a CGRect indicating where captions are drawn using renderInContext:atTime: Once established, this CGRect is used in each call to renderInContext:atTime: until it is changed to another value. This should be set up earlier than drawing.
+func (x *CaptionRenderer) Bounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("bounds"))
+	return _r
+}
+
+// SetBounds wraps the corresponding Objective-C method.
+func (x *CaptionRenderer) SetBounds(bounds corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
 }
 
 // CaptionRendererable is the interface implemented by [CaptionRenderer], for mocking and DI.
 type CaptionRendererable interface {
 	obj.Object
 	WithCaptions(items ...CaptionProvider) *CaptionRenderer
+	WithBounds(bounds corefoundation.CGRect) *CaptionRenderer
 	Captions() []*Caption
 	SetCaptions(captions []*Caption)
+	Bounds() corefoundation.CGRect
+	SetBounds(bounds corefoundation.CGRect)
 }
 
 var _ CaptionRendererable = (*CaptionRenderer)(nil)

@@ -6,17 +6,20 @@ package scenekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A scene graph node that serves as a placeholder for content to be loaded from a separate scene file.
-//
 // ReferenceNode is an idiomatic wrapper over the Objective-C class SCNReferenceNode.
+//
+// It embeds [Node], promoting that type's methods.
+//
+// A scene graph node that serves as a placeholder for content to be loaded from a separate scene file.
 type ReferenceNode struct {
-	objref.Handle
+	Node
 }
 
 // ReferenceNodeFromID adopts an existing Objective-C object as a ReferenceNode
@@ -25,7 +28,8 @@ func ReferenceNodeFromID(id objc.ID) *ReferenceNode {
 	if id == 0 {
 		return nil
 	}
-	x := &ReferenceNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ReferenceNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,237 +42,199 @@ func referenceNodeAdopt(id objc.ID) *ReferenceNode {
 	if id == 0 {
 		return nil
 	}
-	x := &ReferenceNode{Handle: objref.Wrap(id)}
+	x := &ReferenceNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ReferenceNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ReferenceNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ReferenceNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a node whose content is to be loaded from the referenced URL.
-//
-// NewReferenceNodeWithURL creates a new ReferenceNode.
+// NewReferenceNodeWithURL initializes a node whose content is to be loaded from the referenced URL.
 func NewReferenceNodeWithURL(referenceURL string) *ReferenceNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCNReferenceNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(referenceURL))
 	return referenceNodeAdopt(_id)
 }
 
-// Support coding and decoding via NSKeyedArchiver.
-//
-// NewReferenceNodeWithCoder creates a new ReferenceNode.
+// NewReferenceNodeWithCoder support coding and decoding via NSKeyedArchiver.
 func NewReferenceNodeWithCoder(aDecoder obj.Object) *ReferenceNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCNReferenceNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return referenceNodeAdopt(_id)
 }
 
-// The URL to a scene file from which to load content for the reference node.
-//
-// WithReferenceURL sets referenceURL and returns the receiver so calls can be chained.
+// WithReferenceURL the URL to a scene file from which to load content for the reference node.
 func (x *ReferenceNode) WithReferenceURL(referenceURL string) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReferenceURL:"), rt.FileURL(referenceURL))
 	return x
 }
 
-// An option for whether to load the node’s content automatically.
-//
-// WithLoadingPolicy sets loadingPolicy and returns the receiver so calls can be chained.
+// WithLoadingPolicy an option for whether to load the node’s content automatically.
 func (x *ReferenceNode) WithLoadingPolicy(loadingPolicy ReferenceLoadingPolicy) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoadingPolicy:"), loadingPolicy)
 	return x
 }
 
-// A name associated with the node.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName a name associated with the node.
 func (x *ReferenceNode) WithName(name string) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The light attached to the node.
-//
-// WithLight sets light and returns the receiver so calls can be chained.
+// WithLight the light attached to the node.
 func (x *ReferenceNode) WithLight(light *Light) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLight:"), objref.IDOf(light))
 	return x
 }
 
-// The camera attached to the node.
-//
-// WithCamera sets camera and returns the receiver so calls can be chained.
+// WithCamera the camera attached to the node.
 func (x *ReferenceNode) WithCamera(camera *Camera) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCamera:"), objref.IDOf(camera))
 	return x
 }
 
-// The geometry attached to the node.
-//
-// WithGeometry sets geometry and returns the receiver so calls can be chained.
+// WithGeometry the geometry attached to the node.
 func (x *ReferenceNode) WithGeometry(geometry GeometryProvider) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeometry:"), objref.IDOf(geometry))
 	return x
 }
 
-// The skinner object responsible for skeletal animations of node’s contents.
-//
-// WithSkinner sets skinner and returns the receiver so calls can be chained.
+// WithSkinner the skinner object responsible for skeletal animations of node’s contents.
 func (x *ReferenceNode) WithSkinner(skinner *Skinner) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSkinner:"), objref.IDOf(skinner))
 	return x
 }
 
-// The morpher object responsible for blending the node’s geometry.
-//
-// WithMorpher sets morpher and returns the receiver so calls can be chained.
+// WithMorpher the morpher object responsible for blending the node’s geometry.
 func (x *ReferenceNode) WithMorpher(morpher *Morpher) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMorpher:"), objref.IDOf(morpher))
 	return x
 }
 
-// A Boolean value that determines the visibility of the node’s contents. Animatable.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithTransform the transform applied to the node relative to its parent. Animatable.
+func (x *ReferenceNode) WithTransform(transform quartzcore.CATransform3D) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransform:"), transform)
+	return x
+}
+
+// WithWorldTransform the world transform applied to the node.
+func (x *ReferenceNode) WithWorldTransform(worldTransform quartzcore.CATransform3D) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorldTransform:"), worldTransform)
+	return x
+}
+
+// WithPivot the pivot point for the node’s position, rotation, and scale. Animatable.
+func (x *ReferenceNode) WithPivot(pivot quartzcore.CATransform3D) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPivot:"), pivot)
+	return x
+}
+
+// WithHidden a Boolean value that determines the visibility of the node’s contents. Animatable.
 func (x *ReferenceNode) WithHidden(hidden bool) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// The opacity value of the node. Animatable.
-//
-// WithOpacity sets opacity and returns the receiver so calls can be chained.
+// WithOpacity the opacity value of the node. Animatable.
 func (x *ReferenceNode) WithOpacity(opacity float64) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpacity:"), opacity)
 	return x
 }
 
-// The order the node’s content is drawn in relative to that of other nodes.
-//
-// WithRenderingOrder sets renderingOrder and returns the receiver so calls can be chained.
+// WithRenderingOrder the order the node’s content is drawn in relative to that of other nodes.
 func (x *ReferenceNode) WithRenderingOrder(renderingOrder int) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderingOrder:"), renderingOrder)
 	return x
 }
 
-// A Boolean value that determines whether SceneKit renders the node’s contents into shadow maps.
-//
-// WithCastsShadow sets castsShadow and returns the receiver so calls can be chained.
+// WithCastsShadow a Boolean value that determines whether SceneKit renders the node’s contents into shadow maps.
 func (x *ReferenceNode) WithCastsShadow(castsShadow bool) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCastsShadow:"), castsShadow)
 	return x
 }
 
-// A value that indicates how SceneKit should handle the node when rendering movement-related effects.
-//
-// WithMovabilityHint sets movabilityHint and returns the receiver so calls can be chained.
+// WithMovabilityHint a value that indicates how SceneKit should handle the node when rendering movement-related effects.
 func (x *ReferenceNode) WithMovabilityHint(movabilityHint MovabilityHint) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMovabilityHint:"), movabilityHint)
 	return x
 }
 
-// The physics body associated with the node.
-//
-// WithPhysicsBody sets physicsBody and returns the receiver so calls can be chained.
+// WithPhysicsBody the physics body associated with the node.
 func (x *ReferenceNode) WithPhysicsBody(physicsBody *PhysicsBody) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	return x
 }
 
-// The physics field associated with the node.
-//
-// WithPhysicsField sets physicsField and returns the receiver so calls can be chained.
+// WithPhysicsField the physics field associated with the node.
 func (x *ReferenceNode) WithPhysicsField(physicsField *PhysicsField) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsField:"), objref.IDOf(physicsField))
 	return x
 }
 
-// A list of constraints affecting the node’s transformation.
-//
-// WithConstraints sets the collection and returns the receiver so calls can be chained.
+// WithConstraints a list of constraints affecting the node’s transformation.
 func (x *ReferenceNode) WithConstraints(items ...ConstraintProvider) *ReferenceNode {
 	_arr := purego.SliceToNSArray(items, func(_v ConstraintProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
-// An array of Core Image filters to be applied to the rendered contents of the node.
-//
-// WithFilters sets the collection and returns the receiver so calls can be chained.
+// WithFilters an array of Core Image filters to be applied to the rendered contents of the node.
 func (x *ReferenceNode) WithFilters(items ...obj.Object) *ReferenceNode {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilters:"), _arr)
 	return x
 }
 
-// A Boolean value that determines whether to run actions and animations attached to the node and its child nodes.
-//
-// WithPaused sets paused and returns the receiver so calls can be chained.
+// WithPaused a Boolean value that determines whether to run actions and animations attached to the node and its child nodes.
 func (x *ReferenceNode) WithPaused(paused bool) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
-// A mask that defines which categories the node belongs to.
-//
-// WithCategoryBitMask sets categoryBitMask and returns the receiver so calls can be chained.
+// WithCategoryBitMask a mask that defines which categories the node belongs to.
 func (x *ReferenceNode) WithCategoryBitMask(categoryBitMask int) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
 	return x
 }
 
-// The focus behavior for a node.
-//
-// WithFocusBehavior sets focusBehavior and returns the receiver so calls can be chained.
+// WithFocusBehavior the focus behavior for a node.
 func (x *ReferenceNode) WithFocusBehavior(focusBehavior NodeFocusBehavior) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusBehavior:"), focusBehavior)
 	return x
 }
 
-// Loads content into the node from its referenced external scene file.
+// Load loads content into the node from its referenced external scene file.
 func (x *ReferenceNode) Load() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("load"))
 }
 
-// Removes the node’s children and marks the node as not loaded.
+// Unload removes the node’s children and marks the node as not loaded.
 func (x *ReferenceNode) Unload() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unload"))
 }
 
-// Specifies the url to resolve.
+// ReferenceURL specifies the url to resolve.
 func (x *ReferenceNode) ReferenceURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("referenceURL"))
 	return obj.Wrap(_r)
 }
 
+// SetReferenceURL wraps the corresponding Objective-C method.
 func (x *ReferenceNode) SetReferenceURL(referenceURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReferenceURL:"), rt.FileURL(referenceURL))
 }
 
-// Specifies when to load the reference. see SCNReferenceLoadingPolicy above. Defaults to SCNReferenceLoadingPolicyImmediately.
+// LoadingPolicy specifies when to load the reference. see SCNReferenceLoadingPolicy above. Defaults to SCNReferenceLoadingPolicyImmediately.
 func (x *ReferenceNode) LoadingPolicy() ReferenceLoadingPolicy {
 	_r := objc.Send[ReferenceLoadingPolicy](objref.IDOf(x), objc.RegisterName("loadingPolicy"))
 	return _r
 }
 
+// SetLoadingPolicy wraps the corresponding Objective-C method.
 func (x *ReferenceNode) SetLoadingPolicy(loadingPolicy ReferenceLoadingPolicy) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoadingPolicy:"), loadingPolicy)
 }
 
-// Indicates whether the referenced URL has been loaded.
+// IsLoaded indicates whether the referenced URL has been loaded.
 func (x *ReferenceNode) IsLoaded() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLoaded"))
 	return _r
@@ -285,6 +251,9 @@ type ReferenceNodeable interface {
 	WithGeometry(geometry GeometryProvider) *ReferenceNode
 	WithSkinner(skinner *Skinner) *ReferenceNode
 	WithMorpher(morpher *Morpher) *ReferenceNode
+	WithTransform(transform quartzcore.CATransform3D) *ReferenceNode
+	WithWorldTransform(worldTransform quartzcore.CATransform3D) *ReferenceNode
+	WithPivot(pivot quartzcore.CATransform3D) *ReferenceNode
 	WithHidden(hidden bool) *ReferenceNode
 	WithOpacity(opacity float64) *ReferenceNode
 	WithRenderingOrder(renderingOrder int) *ReferenceNode
@@ -307,3 +276,5 @@ type ReferenceNodeable interface {
 }
 
 var _ ReferenceNodeable = (*ReferenceNode)(nil)
+
+var _ NodeProvider = (*ReferenceNode)(nil)

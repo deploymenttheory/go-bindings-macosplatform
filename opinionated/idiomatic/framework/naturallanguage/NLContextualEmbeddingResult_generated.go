@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the embedding vector result from applying a contextual embedding to a string.
-//
 // ContextualEmbeddingResult is an idiomatic wrapper over the Objective-C class NLContextualEmbeddingResult.
+//
+// An object that represents the embedding vector result from applying a contextual embedding to a string.
 type ContextualEmbeddingResult struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ContextualEmbeddingResultFromID(id objc.ID) *ContextualEmbeddingResult {
 	if id == 0 {
 		return nil
 	}
-	x := &ContextualEmbeddingResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContextualEmbeddingResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func contextualEmbeddingResultAdopt(id objc.ID) *ContextualEmbeddingResult {
 	if id == 0 {
 		return nil
 	}
-	x := &ContextualEmbeddingResult{Handle: objref.Wrap(id)}
+	x := &ContextualEmbeddingResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,25 @@ func (x *ContextualEmbeddingResult) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContextualEmbeddingResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewContextualEmbeddingResult creates a new ContextualEmbeddingResult.
 func NewContextualEmbeddingResult() *ContextualEmbeddingResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("NLContextualEmbeddingResult")), objc.RegisterName("new"))
 	return contextualEmbeddingResultAdopt(_id)
 }
 
-// A copy of the input string used to generate the embedding vectors.
-func (x *ContextualEmbeddingResult) String() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("string"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
-}
-
-// The language that the framework identified or used when processing the input string.
+// Language the language that the framework identified or used when processing the input string.
 func (x *ContextualEmbeddingResult) Language() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
 	return obj.Wrap(_r)
 }
 
-// The number of embedding vectors the request generates.
+// SequenceLength the number of embedding vectors the request generates.
 func (x *ContextualEmbeddingResult) SequenceLength() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sequenceLength"))
 	return _r
@@ -88,7 +87,6 @@ func (x *ContextualEmbeddingResult) SequenceLength() int {
 // ContextualEmbeddingResultable is the interface implemented by [ContextualEmbeddingResult], for mocking and DI.
 type ContextualEmbeddingResultable interface {
 	obj.Object
-	String() string
 	Language() obj.Object
 	SequenceLength() int
 }

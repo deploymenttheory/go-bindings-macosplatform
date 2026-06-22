@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a complete rendition of media selection options on an asset.
-//
 // MediaSelection is an idiomatic wrapper over the Objective-C class AVMediaSelection.
+//
+// MediaSelection is an abstract base — you do not construct it directly. Construct one of [MutableMediaSelection] and pass it where a MediaSelection is accepted.
+//
+// An object that represents a complete rendition of media selection options on an asset.
 type MediaSelection struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func MediaSelectionFromID(id objc.ID) *MediaSelection {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaSelection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MediaSelection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func mediaSelectionAdopt(id objc.ID) *MediaSelection {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaSelection{Handle: objref.Wrap(id)}
+	x := &MediaSelection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +62,25 @@ func (x *MediaSelection) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMediaSelection creates a new MediaSelection.
-func NewMediaSelection() *MediaSelection {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVMediaSelection")), objc.RegisterName("new"))
-	return mediaSelectionAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MediaSelection) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns the media selection option that’s currently selected in the specified group.
+// SelectedMediaOptionInMediaSelectionGroup returns the media selection option that’s currently selected in the specified group.
 func (x *MediaSelection) SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) *MediaSelectionOption {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedMediaOptionInMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
 	return MediaSelectionOptionFromID(_r)
 }
 
-// Indicates whether the specified media selection group is subject to automatic media selection.
+// MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup indicates whether the specified media selection group is subject to automatic media selection.
 func (x *MediaSelection) MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
 	return _r
 }
 
+// Asset wraps the corresponding Objective-C method.
 func (x *MediaSelection) Asset() *Asset {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("asset"))
 	return AssetFromID(_r)
@@ -90,3 +95,10 @@ type MediaSelectionable interface {
 }
 
 var _ MediaSelectionable = (*MediaSelection)(nil)
+
+// isMediaSelection marks MediaSelection — and, by embedding promotion, its
+// subclasses — as a member of the MediaSelection hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MediaSelection) isMediaSelection() {}
+
+var _ MediaSelectionProvider = (*MediaSelection)(nil)

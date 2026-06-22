@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specification of how to create an intersection function table.
-//
 // IntersectionFunctionTableDescriptor is an idiomatic wrapper over the Objective-C class MTLIntersectionFunctionTableDescriptor.
+//
+// A specification of how to create an intersection function table.
 type IntersectionFunctionTableDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func IntersectionFunctionTableDescriptorFromID(id objc.ID) *IntersectionFunction
 	if id == 0 {
 		return nil
 	}
-	x := &IntersectionFunctionTableDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IntersectionFunctionTableDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func intersectionFunctionTableDescriptorAdopt(id objc.ID) *IntersectionFunctionT
 	if id == 0 {
 		return nil
 	}
-	x := &IntersectionFunctionTableDescriptor{Handle: objref.Wrap(id)}
+	x := &IntersectionFunctionTableDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *IntersectionFunctionTableDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IntersectionFunctionTableDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewIntersectionFunctionTableDescriptor creates a new IntersectionFunctionTableDescriptor.
 func NewIntersectionFunctionTableDescriptor() *IntersectionFunctionTableDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLIntersectionFunctionTableDescriptor")), objc.RegisterName("new"))
 	return intersectionFunctionTableDescriptorAdopt(_id)
 }
 
-// The number of entries in the intersection function table.
-//
-// WithFunctionCount sets functionCount and returns the receiver so calls can be chained.
+// WithFunctionCount the number of entries in the intersection function table.
 func (x *IntersectionFunctionTableDescriptor) WithFunctionCount(functionCount int) *IntersectionFunctionTableDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionCount:"), functionCount)
 	return x
 }
 
+// FunctionCount wraps the corresponding Objective-C method.
 func (x *IntersectionFunctionTableDescriptor) FunctionCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("functionCount"))
 	return _r
 }
 
+// SetFunctionCount wraps the corresponding Objective-C method.
 func (x *IntersectionFunctionTableDescriptor) SetFunctionCount(functionCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionCount:"), functionCount)
 }

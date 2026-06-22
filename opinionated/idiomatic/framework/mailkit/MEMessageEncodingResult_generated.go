@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains a signed or encrypted message, or errors that indicate failure to encode the message.
-//
 // MessageEncodingResult is an idiomatic wrapper over the Objective-C class MEMessageEncodingResult.
+//
+// An object that contains a signed or encrypted message, or errors that indicate failure to encode the message.
 type MessageEncodingResult struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MessageEncodingResultFromID(id objc.ID) *MessageEncodingResult {
 	if id == 0 {
 		return nil
 	}
-	x := &MessageEncodingResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MessageEncodingResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func messageEncodingResultAdopt(id objc.ID) *MessageEncodingResult {
 	if id == 0 {
 		return nil
 	}
-	x := &MessageEncodingResult{Handle: objref.Wrap(id)}
+	x := &MessageEncodingResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *MessageEncodingResult) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MessageEncodingResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMessageEncodingResult creates a new MessageEncodingResult.
 func NewMessageEncodingResult() *MessageEncodingResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("MEMessageEncodingResult")), objc.RegisterName("new"))
 	return messageEncodingResultAdopt(_id)
 }
 
-// The encoded message. Nil if no need to encode or an error occured while encoding
+// EncodedMessage the encoded message. Nil if no need to encode or an error occured while encoding
 func (x *MessageEncodingResult) EncodedMessage() *EncodedOutgoingMessage {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodedMessage"))
 	return EncodedOutgoingMessageFromID(_r)

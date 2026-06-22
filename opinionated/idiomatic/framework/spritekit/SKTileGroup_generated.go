@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of tiles that collectively define one type of terrain.
-//
 // TileGroup is an idiomatic wrapper over the Objective-C class SKTileGroup.
+//
+// A set of tiles that collectively define one type of terrain.
 type TileGroup struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TileGroupFromID(id objc.ID) *TileGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &TileGroup{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TileGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func tileGroupAdopt(id objc.ID) *TileGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &TileGroup{Handle: objref.Wrap(id)}
+	x := &TileGroup{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,42 +60,40 @@ func (x *TileGroup) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates and initializes a simple tile group with a single tile definition.
-//
-// NewTileGroupWithTileDefinition creates a new TileGroup.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TileGroup) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTileGroupWithTileDefinition creates and initializes a simple tile group with a single tile definition.
 func NewTileGroupWithTileDefinition(tileDefinition *TileDefinition) *TileGroup {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKTileGroup")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTileDefinition:"), objref.IDOf(tileDefinition))
 	return tileGroupAdopt(_id)
 }
 
-// Creates and initializes a tile group with the specified tile group rules.
-//
-// NewTileGroupWithRules creates a new TileGroup.
+// NewTileGroupWithRules creates and initializes a tile group with the specified tile group rules.
 func NewTileGroupWithRules(rules []*TileGroupRule) *TileGroup {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKTileGroup")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRules:"), purego.SliceToNSArray(rules, func(_v *TileGroupRule) objc.ID { return objref.IDOf(_v) }))
 	return tileGroupAdopt(_id)
 }
 
-// An array of SKTileGroupRule objects that the tile group uses to determine tile placement.
-//
-// WithRules sets the collection and returns the receiver so calls can be chained.
+// WithRules an array of SKTileGroupRule objects that the tile group uses to determine tile placement.
 func (x *TileGroup) WithRules(items ...*TileGroupRule) *TileGroup {
 	_arr := purego.SliceToNSArray(items, func(_v *TileGroupRule) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRules:"), _arr)
 	return x
 }
 
-// The receiver’s name.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the receiver’s name.
 func (x *TileGroup) WithName(name string) *TileGroup {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The rules that govern which tiles are placed when this group is used, and where in the map they'll be placed.
+// Rules the rules that govern which tiles are placed when this group is used, and where in the map they'll be placed.
 //
 // Rules returns the collection as a Go slice.
 func (x *TileGroup) Rules() []*TileGroupRule {
@@ -101,11 +101,12 @@ func (x *TileGroup) Rules() []*TileGroupRule {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TileGroupRule { return TileGroupRuleFromID(_id) })
 }
 
+// SetRules wraps the corresponding Objective-C method.
 func (x *TileGroup) SetRules(rules []*TileGroupRule) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRules:"), purego.SliceToNSArray(rules, func(_v *TileGroupRule) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Client-assignable name for the tile group. Defaults to nil.
+// Name client-assignable name for the tile group. Defaults to nil.
 func (x *TileGroup) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -114,6 +115,7 @@ func (x *TileGroup) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *TileGroup) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }

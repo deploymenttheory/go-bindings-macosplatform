@@ -6,15 +6,16 @@ package spritekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The definition of an arbitrary area.
-//
 // Region is an idiomatic wrapper over the Objective-C class SKRegion.
+//
+// The definition of an arbitrary area.
 type Region struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func RegionFromID(id objc.ID) *Region {
 	if id == 0 {
 		return nil
 	}
-	x := &Region{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Region{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func regionAdopt(id objc.ID) *Region {
 	if id == 0 {
 		return nil
 	}
-	x := &Region{Handle: objref.Wrap(id)}
+	x := &Region{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,48 +61,64 @@ func (x *Region) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a new region with a circular area.
-//
-// NewRegionWithRadius creates a new Region.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Region) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRegionWithRadius initializes a new region with a circular area.
 func NewRegionWithRadius(radius float32) *Region {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKRegion")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRadius:"), radius)
 	return regionAdopt(_id)
 }
 
-// Initializes a new region using a Core Graphics path.
-//
-// NewRegionWithPath creates a new Region.
+// NewRegionWithSize initializes a new region with a rectangular area.
+func NewRegionWithSize(size corefoundation.CGSize) *Region {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKRegion")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSize:"), size)
+	return regionAdopt(_id)
+}
+
+// NewRegionWithPath initializes a new region using a Core Graphics path.
 func NewRegionWithPath(path obj.Object) *Region {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKRegion")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:"), objref.IDOf(path))
 	return regionAdopt(_id)
 }
 
-// Returns a new region that is the mathematical inverse of an existing region.
+// InverseRegion returns a new region that is the mathematical inverse of an existing region.
 func (x *Region) InverseRegion() *Region {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inverseRegion"))
 	return RegionFromID(_r)
 }
 
-// Returns a new region created by combining the contents of this region with another region.
+// RegionByUnionWithRegion returns a new region created by combining the contents of this region with another region.
 func (x *Region) RegionByUnionWithRegion(region *Region) *Region {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regionByUnionWithRegion:"), objref.IDOf(region))
 	return RegionFromID(_r)
 }
 
-// Returns a new region created by subtracting the contents of another region from this region.
+// RegionByDifferenceFromRegion returns a new region created by subtracting the contents of another region from this region.
 func (x *Region) RegionByDifferenceFromRegion(region *Region) *Region {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regionByDifferenceFromRegion:"), objref.IDOf(region))
 	return RegionFromID(_r)
 }
 
-// Returns a new region created by intersecting the contents of this region with another region.
+// RegionByIntersectionWithRegion returns a new region created by intersecting the contents of this region with another region.
 func (x *Region) RegionByIntersectionWithRegion(region *Region) *Region {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regionByIntersectionWithRegion:"), objref.IDOf(region))
 	return RegionFromID(_r)
 }
 
+// ContainsPoint returns a Boolean value that indicates whether a particular point is contained in the region.
+func (x *Region) ContainsPoint(point corefoundation.CGPoint) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsPoint:"), point)
+	return _r
+}
+
+// Path wraps the corresponding Objective-C method.
 func (x *Region) Path() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
 	return obj.Wrap(_r)
@@ -112,6 +131,7 @@ type Regionable interface {
 	RegionByUnionWithRegion(region *Region) *Region
 	RegionByDifferenceFromRegion(region *Region) *Region
 	RegionByIntersectionWithRegion(region *Region) *Region
+	ContainsPoint(point corefoundation.CGPoint) bool
 	Path() obj.Object
 }
 

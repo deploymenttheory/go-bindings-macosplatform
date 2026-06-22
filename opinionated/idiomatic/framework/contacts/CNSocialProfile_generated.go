@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable object that represents one of the user’s social profiles.
-//
 // SocialProfile is an idiomatic wrapper over the Objective-C class CNSocialProfile.
+//
+// An immutable object that represents one of the user’s social profiles.
 type SocialProfile struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SocialProfileFromID(id objc.ID) *SocialProfile {
 	if id == 0 {
 		return nil
 	}
-	x := &SocialProfile{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SocialProfile{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func socialProfileAdopt(id objc.ID) *SocialProfile {
 	if id == 0 {
 		return nil
 	}
-	x := &SocialProfile{Handle: objref.Wrap(id)}
+	x := &SocialProfile{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *SocialProfile) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a new social profile object with the specified URL.
-//
-// NewSocialProfileWithUrlStringUsernameUserIdentifierService creates a new SocialProfile.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SocialProfile) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSocialProfileWithUrlStringUsernameUserIdentifierService initializes a new social profile object with the specified URL.
 func NewSocialProfileWithUrlStringUsernameUserIdentifierService(urlString string, username string, userIdentifier string, service string) *SocialProfile {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CNSocialProfile")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUrlString:username:userIdentifier:service:"), purego.NSString(urlString), purego.NSString(username), purego.NSString(userIdentifier), purego.NSString(service))
 	return socialProfileAdopt(_id)
 }
 
+// UrlString wraps the corresponding Objective-C method.
 func (x *SocialProfile) UrlString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("urlString"))
 	if _r == 0 {
@@ -75,6 +82,7 @@ func (x *SocialProfile) UrlString() string {
 	return purego.GoString(_r)
 }
 
+// Username wraps the corresponding Objective-C method.
 func (x *SocialProfile) Username() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("username"))
 	if _r == 0 {
@@ -83,6 +91,7 @@ func (x *SocialProfile) Username() string {
 	return purego.GoString(_r)
 }
 
+// UserIdentifier wraps the corresponding Objective-C method.
 func (x *SocialProfile) UserIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userIdentifier"))
 	if _r == 0 {
@@ -91,6 +100,7 @@ func (x *SocialProfile) UserIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// Service wraps the corresponding Objective-C method.
 func (x *SocialProfile) Service() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("service"))
 	if _r == 0 {

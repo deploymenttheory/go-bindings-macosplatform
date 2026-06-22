@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A condition that describes the identity characteristics of a beacon.
-//
 // BeaconIdentityCondition is an idiomatic wrapper over the Objective-C class CLBeaconIdentityCondition.
+//
+// BeaconIdentityCondition is an abstract base — you do not construct it directly. Construct one of [BeaconIdentityConstraint] and pass it where a BeaconIdentityCondition is accepted.
+//
+// A condition that describes the identity characteristics of a beacon.
 type BeaconIdentityCondition struct {
-	objref.Handle
+	Condition
 }
 
 // BeaconIdentityConditionFromID adopts an existing Objective-C object as a BeaconIdentityCondition
@@ -25,7 +26,8 @@ func BeaconIdentityConditionFromID(id objc.ID) *BeaconIdentityCondition {
 	if id == 0 {
 		return nil
 	}
-	x := &BeaconIdentityCondition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BeaconIdentityCondition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,63 +40,46 @@ func beaconIdentityConditionAdopt(id objc.ID) *BeaconIdentityCondition {
 	if id == 0 {
 		return nil
 	}
-	x := &BeaconIdentityCondition{Handle: objref.Wrap(id)}
+	x := &BeaconIdentityCondition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *BeaconIdentityCondition) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BeaconIdentityCondition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BeaconIdentityCondition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a new beacon identity condition with the identifier you specify.
-//
-// NewBeaconIdentityConditionWithUUID creates a new BeaconIdentityCondition.
+// NewBeaconIdentityConditionWithUUID creates a new beacon identity condition with the identifier you specify.
 func NewBeaconIdentityConditionWithUUID(uuid obj.Object) *BeaconIdentityCondition {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CLBeaconIdentityCondition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:"), objref.IDOf(uuid))
 	return beaconIdentityConditionAdopt(_id)
 }
 
-// Creates a new beacon identity condition with the identifier and major value you specify.
-//
-// NewBeaconIdentityConditionWithUUIDMajor creates a new BeaconIdentityCondition.
+// NewBeaconIdentityConditionWithUUIDMajor creates a new beacon identity condition with the identifier and major value you specify.
 func NewBeaconIdentityConditionWithUUIDMajor(uuid obj.Object, major uint16) *BeaconIdentityCondition {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CLBeaconIdentityCondition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:major:"), objref.IDOf(uuid), major)
 	return beaconIdentityConditionAdopt(_id)
 }
 
-// Creates a new beacon identity condition with the identifier, and major and minor values you specify.
-//
-// NewBeaconIdentityConditionWithUUIDMajorMinor creates a new BeaconIdentityCondition.
+// NewBeaconIdentityConditionWithUUIDMajorMinor creates a new beacon identity condition with the identifier, and major and minor values you specify.
 func NewBeaconIdentityConditionWithUUIDMajorMinor(uuid obj.Object, major uint16, minor uint16) *BeaconIdentityCondition {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CLBeaconIdentityCondition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:major:minor:"), objref.IDOf(uuid), major, minor)
 	return beaconIdentityConditionAdopt(_id)
 }
 
+// UUID wraps the corresponding Objective-C method.
 func (x *BeaconIdentityCondition) UUID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
 	return obj.Wrap(_r)
 }
 
+// Major wraps the corresponding Objective-C method.
 func (x *BeaconIdentityCondition) Major() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("major"))
 	return obj.Wrap(_r)
 }
 
+// Minor wraps the corresponding Objective-C method.
 func (x *BeaconIdentityCondition) Minor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minor"))
 	return obj.Wrap(_r)
@@ -109,3 +94,12 @@ type BeaconIdentityConditionable interface {
 }
 
 var _ BeaconIdentityConditionable = (*BeaconIdentityCondition)(nil)
+
+// isBeaconIdentityCondition marks BeaconIdentityCondition — and, by embedding promotion, its
+// subclasses — as a member of the BeaconIdentityCondition hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *BeaconIdentityCondition) isBeaconIdentityCondition() {}
+
+var _ BeaconIdentityConditionProvider = (*BeaconIdentityCondition)(nil)
+
+var _ ConditionProvider = (*BeaconIdentityCondition)(nil)

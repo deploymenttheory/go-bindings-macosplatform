@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines a scope of execution for JavaScript code, and which you use to prevent conflicts between different scripts.
-//
 // WKContentWorld is an idiomatic wrapper over the Objective-C class WKContentWorld.
+//
+// An object that defines a scope of execution for JavaScript code, and which you use to prevent conflicts between different scripts.
 type WKContentWorld struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKContentWorldFromID(id objc.ID) *WKContentWorld {
 	if id == 0 {
 		return nil
 	}
-	x := &WKContentWorld{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKContentWorld{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKContentWorldAdopt(id objc.ID) *WKContentWorld {
 	if id == 0 {
 		return nil
 	}
-	x := &WKContentWorld{Handle: objref.Wrap(id)}
+	x := &WKContentWorld{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *WKContentWorld) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKContentWorld) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKContentWorld creates a new WKContentWorld.
 func NewWKContentWorld() *WKContentWorld {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKContentWorld")), objc.RegisterName("new"))
 	return wKContentWorldAdopt(_id)
 }
 
-// The name of the WKContentWorld The pageWorld and defaultClientWorld instances will have a nil name. All other instances will have the non-nil name they were accessed by.
+// Name the name of the WKContentWorld The pageWorld and defaultClientWorld instances will have a nil name. All other instances will have the non-nil name they were accessed by.
 func (x *WKContentWorld) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {

@@ -9,6 +9,5 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// The domain for Link Presentation errors.
 // LPErrorDomain returns the string constant LPErrorDomain, for use as a dictionary key or argument.
 func LPErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("LPErrorDomain"))) }

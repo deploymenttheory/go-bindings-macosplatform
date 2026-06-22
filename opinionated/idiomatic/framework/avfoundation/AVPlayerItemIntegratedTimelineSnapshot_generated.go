@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable representation of inspectable details of an integrated timeline object.
-//
 // PlayerItemIntegratedTimelineSnapshot is an idiomatic wrapper over the Objective-C class AVPlayerItemIntegratedTimelineSnapshot.
+//
+// An immutable representation of inspectable details of an integrated timeline object.
 type PlayerItemIntegratedTimelineSnapshot struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PlayerItemIntegratedTimelineSnapshotFromID(id objc.ID) *PlayerItemIntegrate
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemIntegratedTimelineSnapshot{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlayerItemIntegratedTimelineSnapshot{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func playerItemIntegratedTimelineSnapshotAdopt(id objc.ID) *PlayerItemIntegrated
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemIntegratedTimelineSnapshot{Handle: objref.Wrap(id)}
+	x := &PlayerItemIntegratedTimelineSnapshot{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *PlayerItemIntegratedTimelineSnapshot) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerItemIntegratedTimelineSnapshot) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPlayerItemIntegratedTimelineSnapshot creates a new PlayerItemIntegratedTimelineSnapshot.
 func NewPlayerItemIntegratedTimelineSnapshot() *PlayerItemIntegratedTimelineSnapshot {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemIntegratedTimelineSnapshot")), objc.RegisterName("new"))
 	return playerItemIntegratedTimelineSnapshotAdopt(_id)
 }
 
-// Returns the current AVPlayerItemSegment playback is traversing.
+// CurrentSegment returns the current AVPlayerItemSegment playback is traversing.
 func (x *PlayerItemIntegratedTimelineSnapshot) CurrentSegment() *PlayerItemSegment {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentSegment"))
 	return PlayerItemSegmentFromID(_r)
 }
 
-// Returns an array of AVPlayerItemSegment for the snapshot. Returns an array of AVPlayerItemSegment. The segments are presented in chronological order, contiguous from the previous element, and non-overlapping.
+// Segments returns an array of AVPlayerItemSegment for the snapshot. Returns an array of AVPlayerItemSegment. The segments are presented in chronological order, contiguous from the previous element, and non-overlapping.
 //
 // Segments returns the collection as a Go slice.
 func (x *PlayerItemIntegratedTimelineSnapshot) Segments() []*PlayerItemSegment {
@@ -78,7 +86,7 @@ func (x *PlayerItemIntegratedTimelineSnapshot) Segments() []*PlayerItemSegment {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerItemSegment { return PlayerItemSegmentFromID(_id) })
 }
 
-// Returns the  current date when the snapshot was taken, or nil if playback is not mapped to any date.
+// CurrentDate returns the  current date when the snapshot was taken, or nil if playback is not mapped to any date.
 func (x *PlayerItemIntegratedTimelineSnapshot) CurrentDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentDate"))
 	return obj.Wrap(_r)

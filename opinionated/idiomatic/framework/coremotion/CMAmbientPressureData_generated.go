@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A measurement of the ambient pressure and temperature.
-//
 // AmbientPressureData is an idiomatic wrapper over the Objective-C class CMAmbientPressureData.
+//
+// It embeds [LogItem], promoting that type's methods.
+//
+// A measurement of the ambient pressure and temperature.
 type AmbientPressureData struct {
-	objref.Handle
+	LogItem
 }
 
 // AmbientPressureDataFromID adopts an existing Objective-C object as a AmbientPressureData
@@ -25,7 +26,8 @@ func AmbientPressureDataFromID(id objc.ID) *AmbientPressureData {
 	if id == 0 {
 		return nil
 	}
-	x := &AmbientPressureData{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AmbientPressureData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func ambientPressureDataAdopt(id objc.ID) *AmbientPressureData {
 	if id == 0 {
 		return nil
 	}
-	x := &AmbientPressureData{Handle: objref.Wrap(id)}
+	x := &AmbientPressureData{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AmbientPressureData) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AmbientPressureData) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AmbientPressureData) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAmbientPressureData creates a new AmbientPressureData.
@@ -64,13 +52,13 @@ func NewAmbientPressureData() *AmbientPressureData {
 	return ambientPressureDataAdopt(_id)
 }
 
-// Discussion: The pressure as measured by the pressure sensor. Pressure is in kPa (kilopascals).
+// Pressure discussion: The pressure as measured by the pressure sensor. Pressure is in kPa (kilopascals).
 func (x *AmbientPressureData) Pressure() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pressure"))
 	return obj.Wrap(_r)
 }
 
-// Discussion: The temperature as measured by the pressure sensor. Temperature is in C (degrees centrigrade).
+// Temperature discussion: The temperature as measured by the pressure sensor. Temperature is in C (degrees centrigrade).
 func (x *AmbientPressureData) Temperature() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("temperature"))
 	return obj.Wrap(_r)
@@ -84,3 +72,5 @@ type AmbientPressureDataable interface {
 }
 
 var _ AmbientPressureDataable = (*AmbientPressureData)(nil)
+
+var _ LogItemProvider = (*AmbientPressureData)(nil)

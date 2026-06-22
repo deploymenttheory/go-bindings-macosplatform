@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class for building token drivers.
-//
 // TokenDriver is an idiomatic wrapper over the Objective-C class TKTokenDriver.
+//
+// TokenDriver is an abstract base — you do not construct it directly. Construct one of [SmartCardTokenDriver] and pass it where a TokenDriver is accepted.
+//
+// A base class for building token drivers.
 type TokenDriver struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func TokenDriverFromID(id objc.ID) *TokenDriver {
 	if id == 0 {
 		return nil
 	}
-	x := &TokenDriver{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TokenDriver{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func tokenDriverAdopt(id objc.ID) *TokenDriver {
 	if id == 0 {
 		return nil
 	}
-	x := &TokenDriver{Handle: objref.Wrap(id)}
+	x := &TokenDriver{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *TokenDriver) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewTokenDriver creates a new TokenDriver.
-func NewTokenDriver() *TokenDriver {
-	_id := objc.Send[objc.ID](objc.ID(_class("TKTokenDriver")), objc.RegisterName("new"))
-	return tokenDriverAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TokenDriver) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // TokenDriverable is the interface implemented by [TokenDriver], for mocking and DI.
@@ -70,3 +74,10 @@ type TokenDriverable interface {
 }
 
 var _ TokenDriverable = (*TokenDriver)(nil)
+
+// isTokenDriver marks TokenDriver — and, by embedding promotion, its
+// subclasses — as a member of the TokenDriver hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *TokenDriver) isTokenDriver() {}
+
+var _ TokenDriverProvider = (*TokenDriver)(nil)

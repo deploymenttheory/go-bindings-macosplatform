@@ -1,0 +1,3 @@
+// ErrInternalError matches the Virtualization error VZErrorInternalError.
+var ErrInternalError = errkit.New("VZErrorDomain", 2)
+

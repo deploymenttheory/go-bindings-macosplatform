@@ -25,7 +25,8 @@ func MTRBaseDeviceFromID(id objc.ID) *MTRBaseDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseDevice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRBaseDeviceAdopt(id objc.ID) *MTRBaseDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseDevice{Handle: objref.Wrap(id)}
+	x := &MTRBaseDevice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +60,27 @@ func (x *MTRBaseDevice) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRBaseDevice) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRBaseDevice creates a new MTRBaseDevice.
 func NewMTRBaseDevice() *MTRBaseDevice {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRBaseDevice")), objc.RegisterName("new"))
 	return mTRBaseDeviceAdopt(_id)
 }
 
-// Deregister all local report handlers for a remote device This method is applicable only for a remote device. For a local device, the stack has to be shutdown to stop report handlers. There could be multiple clients accessing a node through a remote controller object and hence it is not appropriate for one of those clients to shut down the entire stack to stop receiving reports.
+// DeregisterReportHandlersWithQueueCompletion deregister all local report handlers for a remote device This method is applicable only for a remote device. For a local device, the stack has to be shutdown to stop report handlers. There could be multiple clients accessing a node through a remote controller object and hence it is not appropriate for one of those clients to shut down the entire stack to stop receiving reports.
 func (x *MTRBaseDevice) DeregisterReportHandlersWithQueueCompletion(queue obj.Object, completion func()) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deregisterReportHandlersWithQueue:completion:"), objref.IDOf(queue), completion)
 }
 
-// Download log of the desired type from the device. Note: The consumer of this API should move the file that the url points to or open it for reading before the completion handler returns. Otherwise, the file will be deleted, and the data will be lost.
+// DownloadLogOfTypeTimeoutQueueCompletion download log of the desired type from the device. Note: The consumer of this API should move the file that the url points to or open it for reading before the completion handler returns. Otherwise, the file will be deleted, and the data will be lost.
 //
 // DownloadLogOfTypeTimeoutQueueCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ MTRDiagnosticLogType, timeout float64, queue obj.Object) (obj.Object, error) {
+func (x *MTRBaseDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ MTRDiagnosticLogType, timeout float64, queue obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -94,12 +102,13 @@ func (x *MTRBaseDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Cont
 	}
 }
 
-// The transport used by the current session with this device, or `MTRTransportTypeUndefined` if no session is currently active.
+// SessionTransportType the transport used by the current session with this device, or `MTRTransportTypeUndefined` if no session is currently active.
 func (x *MTRBaseDevice) SessionTransportType() MTRTransportType {
 	_r := objc.Send[MTRTransportType](objref.IDOf(x), objc.RegisterName("sessionTransportType"))
 	return _r
 }
 
+// DeregisterReportHandlersWithClientQueueCompletion wraps the corresponding Objective-C method.
 func (x *MTRBaseDevice) DeregisterReportHandlersWithClientQueueCompletion(queue obj.Object, completion func()) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deregisterReportHandlersWithClientQueue:completion:"), objref.IDOf(queue), completion)
 }

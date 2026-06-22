@@ -9,16 +9,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// A storage device attachment that uses a disk to store data.
-//
 // DiskBlockDeviceStorageDeviceAttachment is an idiomatic wrapper over the Objective-C class VZDiskBlockDeviceStorageDeviceAttachment.
+//
+// It embeds [StorageDeviceAttachment], promoting that type's methods.
+//
+// A storage device attachment that uses a disk to store data.
 type DiskBlockDeviceStorageDeviceAttachment struct {
-	objref.Handle
+	StorageDeviceAttachment
 }
 
 // DiskBlockDeviceStorageDeviceAttachmentFromID adopts an existing Objective-C object as a DiskBlockDeviceStorageDeviceAttachment
@@ -27,7 +28,8 @@ func DiskBlockDeviceStorageDeviceAttachmentFromID(id objc.ID) *DiskBlockDeviceSt
 	if id == 0 {
 		return nil
 	}
-	x := &DiskBlockDeviceStorageDeviceAttachment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DiskBlockDeviceStorageDeviceAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,30 +42,14 @@ func diskBlockDeviceStorageDeviceAttachmentAdopt(id objc.ID) *DiskBlockDeviceSto
 	if id == 0 {
 		return nil
 	}
-	x := &DiskBlockDeviceStorageDeviceAttachment{Handle: objref.Wrap(id)}
+	x := &DiskBlockDeviceStorageDeviceAttachment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *DiskBlockDeviceStorageDeviceAttachment) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DiskBlockDeviceStorageDeviceAttachment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DiskBlockDeviceStorageDeviceAttachment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a new block storage device attachment from a file handle and with the specified access mode, synchronization mode, and error object that you provide.
-//
-// NewDiskBlockDeviceStorageDeviceAttachmentWithFileHandleReadOnlySynchronizationModeError creates a new DiskBlockDeviceStorageDeviceAttachment.
-func NewDiskBlockDeviceStorageDeviceAttachmentWithFileHandleReadOnlySynchronizationModeError(fileHandle obj.Object, readOnly bool, synchronizationMode DiskSynchronizationMode) (*DiskBlockDeviceStorageDeviceAttachment, error) {
+// NewDiskBlockDeviceStorageDeviceAttachmentWithFileHandleReadOnlySynchronizationModeError creates a new block storage device attachment from a file handle and with the specified access mode, synchronization mode, and error object that you provide.
+func NewDiskBlockDeviceStorageDeviceAttachmentWithFileHandleReadOnlySynchronizationModeError(fileHandle obj.Object, readOnly bool, synchronizationMode DiskSynchronizationMode) (result *DiskBlockDeviceStorageDeviceAttachment, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZDiskBlockDeviceStorageDeviceAttachment")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileHandle:readOnly:synchronizationMode:error:"), objref.IDOf(fileHandle), readOnly, synchronizationMode, unsafe.Pointer(&_nsErr))
@@ -73,19 +59,19 @@ func NewDiskBlockDeviceStorageDeviceAttachmentWithFileHandleReadOnlySynchronizat
 	return diskBlockDeviceStorageDeviceAttachmentAdopt(_id), nil
 }
 
-// File handle to the underlying disk used for storage by the attachment.
+// FileHandle file handle to the underlying disk used for storage by the attachment.
 func (x *DiskBlockDeviceStorageDeviceAttachment) FileHandle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileHandle"))
 	return obj.Wrap(_r)
 }
 
-// Whether the underlying disk attachment is read-only.
+// IsReadOnly whether the underlying disk attachment is read-only.
 func (x *DiskBlockDeviceStorageDeviceAttachment) IsReadOnly() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadOnly"))
 	return _r
 }
 
-// The mode in which the disk image synchronizes data with the underlying storage device.
+// SynchronizationMode the mode in which the disk image synchronizes data with the underlying storage device.
 func (x *DiskBlockDeviceStorageDeviceAttachment) SynchronizationMode() DiskSynchronizationMode {
 	_r := objc.Send[DiskSynchronizationMode](objref.IDOf(x), objc.RegisterName("synchronizationMode"))
 	return _r
@@ -100,3 +86,5 @@ type DiskBlockDeviceStorageDeviceAttachmentable interface {
 }
 
 var _ DiskBlockDeviceStorageDeviceAttachmentable = (*DiskBlockDeviceStorageDeviceAttachment)(nil)
+
+var _ StorageDeviceAttachmentProvider = (*DiskBlockDeviceStorageDeviceAttachment)(nil)

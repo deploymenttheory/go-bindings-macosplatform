@@ -3,4 +3,12 @@
 //go:build darwin
 
 // Package pdfkit provides a fluent Go API over the macOS PDFKit framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - Action: [ActionGoTo], [ActionNamed], [ActionRemoteGoTo], [ActionResetForm], [ActionURL]
+//   - Annotation: [AnnotationButtonWidget], [AnnotationChoiceWidget], [AnnotationCircle], [AnnotationFreeText], [AnnotationInk], [AnnotationLine], [AnnotationLink], [AnnotationMarkup], [AnnotationPopup], [AnnotationSquare], [AnnotationStamp], [AnnotationText], [AnnotationTextWidget]
 package pdfkit

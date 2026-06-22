@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents the estimated cost of executing a layer or operation.
-//
 // ComputePlanCost is an idiomatic wrapper over the Objective-C class MLComputePlanCost.
+//
+// A class that represents the estimated cost of executing a layer or operation.
 type ComputePlanCost struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ComputePlanCostFromID(id objc.ID) *ComputePlanCost {
 	if id == 0 {
 		return nil
 	}
-	x := &ComputePlanCost{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ComputePlanCost{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func computePlanCostAdopt(id objc.ID) *ComputePlanCost {
 	if id == 0 {
 		return nil
 	}
-	x := &ComputePlanCost{Handle: objref.Wrap(id)}
+	x := &ComputePlanCost{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *ComputePlanCost) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ComputePlanCost) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewComputePlanCost creates a new ComputePlanCost.
 func NewComputePlanCost() *ComputePlanCost {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLComputePlanCost")), objc.RegisterName("new"))
 	return computePlanCostAdopt(_id)
 }
 
+// Weight wraps the corresponding Objective-C method.
 func (x *ComputePlanCost) Weight() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("weight"))
 	return _r

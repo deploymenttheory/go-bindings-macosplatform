@@ -6,17 +6,20 @@ package spritekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A graphical element that plays video content.
-//
 // VideoNode is an idiomatic wrapper over the Objective-C class SKVideoNode.
+//
+// It embeds [Node], promoting that type's methods.
+//
+// A graphical element that plays video content.
 type VideoNode struct {
-	objref.Handle
+	Node
 }
 
 // VideoNodeFromID adopts an existing Objective-C object as a VideoNode
@@ -25,7 +28,8 @@ func VideoNodeFromID(id objc.ID) *VideoNode {
 	if id == 0 {
 		return nil
 	}
-	x := &VideoNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VideoNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,278 +42,255 @@ func videoNodeAdopt(id objc.ID) *VideoNode {
 	if id == 0 {
 		return nil
 	}
-	x := &VideoNode{Handle: objref.Wrap(id)}
+	x := &VideoNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *VideoNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VideoNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VideoNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a video node using an existing AVPlayer object.
-//
-// NewVideoNodeWithAVPlayer creates a new VideoNode.
+// NewVideoNodeWithAVPlayer initializes a video node using an existing AVPlayer object.
 func NewVideoNodeWithAVPlayer(player obj.Object) *VideoNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAVPlayer:"), objref.IDOf(player))
 	return videoNodeAdopt(_id)
 }
 
-// Initializes a video node using a video file stored in the app bundle.
-//
-// NewVideoNodeWithVideoFileNamed creates a new VideoNode.
+// NewVideoNodeWithVideoFileNamed initializes a video node using a video file stored in the app bundle.
 func NewVideoNodeWithVideoFileNamed(videoFile string) *VideoNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVideoFileNamed:"), purego.NSString(videoFile))
 	return videoNodeAdopt(_id)
 }
 
-// Initializes a video node using a video file stored in the app bundle.
-//
-// NewVideoNodeWithFileNamed creates a new VideoNode.
+// NewVideoNodeWithFileNamed initializes a video node using a video file stored in the app bundle.
 func NewVideoNodeWithFileNamed(videoFile string) *VideoNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileNamed:"), purego.NSString(videoFile))
 	return videoNodeAdopt(_id)
 }
 
-// Initializes a video node using a URL that points to a video file.
-//
-// NewVideoNodeWithVideoURL creates a new VideoNode.
+// NewVideoNodeWithVideoURL initializes a video node using a URL that points to a video file.
 func NewVideoNodeWithVideoURL(url string) *VideoNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVideoURL:"), rt.FileURL(url))
 	return videoNodeAdopt(_id)
 }
 
-// Initializes a video node using a URL.
-//
-// NewVideoNodeWithURL creates a new VideoNode.
+// NewVideoNodeWithURL initializes a video node using a URL.
 func NewVideoNodeWithURL(url string) *VideoNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
 	return videoNodeAdopt(_id)
 }
 
-// Tells you when to initialize a video node that was created from an archive.
-//
-// NewVideoNodeWithCoder creates a new VideoNode.
+// NewVideoNodeWithCoder tells you when to initialize a video node that was created from an archive.
 func NewVideoNodeWithCoder(aDecoder obj.Object) *VideoNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return videoNodeAdopt(_id)
 }
 
-// The height of the node relative to its parent.
-//
-// WithZPosition sets zPosition and returns the receiver so calls can be chained.
+// WithSize the dimensions of the video node, in points.
+func (x *VideoNode) WithSize(size corefoundation.CGSize) *VideoNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
+	return x
+}
+
+// WithAnchorPoint the point in the sprite that corresponds to the node’s position.
+func (x *VideoNode) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *VideoNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPoint:"), anchorPoint)
+	return x
+}
+
+// WithPosition the position of the node in its parent’s coordinate system.
+func (x *VideoNode) WithPosition(position corefoundation.CGPoint) *VideoNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
+	return x
+}
+
+// WithZPosition the height of the node relative to its parent.
 func (x *VideoNode) WithZPosition(zPosition float64) *VideoNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
 	return x
 }
 
-// The Euler rotation about the z axis (in radians).
-//
-// WithZRotation sets zRotation and returns the receiver so calls can be chained.
+// WithZRotation the Euler rotation about the z axis (in radians).
 func (x *VideoNode) WithZRotation(zRotation float64) *VideoNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
 	return x
 }
 
-// A scaling factor that multiplies the width of a node and its children.
-//
-// WithXScale sets xScale and returns the receiver so calls can be chained.
+// WithXScale a scaling factor that multiplies the width of a node and its children.
 func (x *VideoNode) WithXScale(xScale float64) *VideoNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
 	return x
 }
 
-// A scaling factor that multiplies the height of a node and its children.
-//
-// WithYScale sets yScale and returns the receiver so calls can be chained.
+// WithYScale a scaling factor that multiplies the height of a node and its children.
 func (x *VideoNode) WithYScale(yScale float64) *VideoNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
 	return x
 }
 
-// A speed modifier applied to all actions executed by a node and its descendants.
-//
-// WithSpeed sets speed and returns the receiver so calls can be chained.
+// WithSpeed a speed modifier applied to all actions executed by a node and its descendants.
 func (x *VideoNode) WithSpeed(speed float64) *VideoNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
-// The transparency value applied to the node’s contents.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the transparency value applied to the node’s contents.
 func (x *VideoNode) WithAlpha(alpha float64) *VideoNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// A Boolean value that determines whether actions on the node and its descendants are processed.
-//
-// WithPaused sets paused and returns the receiver so calls can be chained.
+// WithPaused a Boolean value that determines whether actions on the node and its descendants are processed.
 func (x *VideoNode) WithPaused(paused bool) *VideoNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
-// A Boolean value that determines whether a node and its descendants are rendered.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden a Boolean value that determines whether a node and its descendants are rendered.
 func (x *VideoNode) WithHidden(hidden bool) *VideoNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// A Boolean value that indicates whether the node receives touch events.
-//
-// WithUserInteractionEnabled sets userInteractionEnabled and returns the receiver so calls can be chained.
+// WithUserInteractionEnabled a Boolean value that indicates whether the node receives touch events.
 func (x *VideoNode) WithUserInteractionEnabled(userInteractionEnabled bool) *VideoNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
 	return x
 }
 
-// The node’s assignable name.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the node’s assignable name.
 func (x *VideoNode) WithName(name string) *VideoNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The physics body associated with the node.
-//
-// WithPhysicsBody sets physicsBody and returns the receiver so calls can be chained.
+// WithPhysicsBody the physics body associated with the node.
 func (x *VideoNode) WithPhysicsBody(physicsBody *PhysicsBody) *VideoNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	return x
 }
 
-// A dictionary containing arbitrary data.
-//
-// WithUserData sets userData and returns the receiver so calls can be chained.
+// WithUserData a dictionary containing arbitrary data.
 func (x *VideoNode) WithUserData(userData obj.Object) *VideoNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	return x
 }
 
-// The reach constraints to apply to the node when executing a reach action.
-//
-// WithReachConstraints sets reachConstraints and returns the receiver so calls can be chained.
+// WithReachConstraints the reach constraints to apply to the node when executing a reach action.
 func (x *VideoNode) WithReachConstraints(reachConstraints *ReachConstraints) *VideoNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	return x
 }
 
-// A list of constraints to apply to the node.
-//
-// WithConstraints sets the collection and returns the receiver so calls can be chained.
+// WithConstraints a list of constraints to apply to the node.
 func (x *VideoNode) WithConstraints(items ...*Constraint) *VideoNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
-// The values of each attribute associated with the node’s attached shader.
-//
-// WithAttributeValues sets attributeValues and returns the receiver so calls can be chained.
+// WithAttributeValues the values of each attribute associated with the node’s attached shader.
 func (x *VideoNode) WithAttributeValues(attributeValues obj.Object) *VideoNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
-//
-// WithAccessibilityElement sets accessibilityElement and returns the receiver so calls can be chained.
+// WithAccessibilityElement a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (x *VideoNode) WithAccessibilityElement(accessibilityElement bool) *VideoNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
 	return x
 }
 
-// A string value describing the user interface element type; for example, a button.
-//
-// WithAccessibilityRole sets accessibilityRole and returns the receiver so calls can be chained.
+// WithAccessibilityRole a string value describing the user interface element type; for example, a button.
 func (x *VideoNode) WithAccessibilityRole(accessibilityRole string) *VideoNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
 	return x
 }
 
-// A string value describing the user interface element name and type; for example, the Buy button.
-//
-// WithAccessibilityRoleDescription sets accessibilityRoleDescription and returns the receiver so calls can be chained.
+// WithAccessibilityRoleDescription a string value describing the user interface element name and type; for example, the Buy button.
 func (x *VideoNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *VideoNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
 	return x
 }
 
-// A string that defines this user interface element’s subrole; for example, a full-screen button.
-//
-// WithAccessibilitySubrole sets accessibilitySubrole and returns the receiver so calls can be chained.
+// WithAccessibilitySubrole a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (x *VideoNode) WithAccessibilitySubrole(accessibilitySubrole string) *VideoNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
 	return x
 }
 
-// The user interface element that contains this element.
-//
-// WithAccessibilityParent sets accessibilityParent and returns the receiver so calls can be chained.
+// WithAccessibilityFrame the size of this user interface element, in screen points.
+func (x *VideoNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *VideoNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	return x
+}
+
+// WithAccessibilityParent the user interface element that contains this element.
 func (x *VideoNode) WithAccessibilityParent(accessibilityParent obj.Object) *VideoNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	return x
 }
 
-// The help description of this user interface element; for example, the text shown in a tooltip.
-//
-// WithAccessibilityHelp sets accessibilityHelp and returns the receiver so calls can be chained.
+// WithAccessibilityHelp the help description of this user interface element; for example, the text shown in a tooltip.
 func (x *VideoNode) WithAccessibilityHelp(accessibilityHelp string) *VideoNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
 	return x
 }
 
-// A short description of this user interface element.
-//
-// WithAccessibilityLabel sets accessibilityLabel and returns the receiver so calls can be chained.
+// WithAccessibilityLabel a short description of this user interface element.
 func (x *VideoNode) WithAccessibilityLabel(accessibilityLabel string) *VideoNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
-//
-// WithAccessibilityEnabled sets accessibilityEnabled and returns the receiver so calls can be chained.
+// WithAccessibilityEnabled a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (x *VideoNode) WithAccessibilityEnabled(accessibilityEnabled bool) *VideoNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
 	return x
 }
 
-// Starts video playback.
+// Play starts video playback.
 func (x *VideoNode) Play() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("play"))
 }
 
-// Pauses video playback.
+// Pause pauses video playback.
 func (x *VideoNode) Pause() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pause"))
+}
+
+// Size the display size of the video (in parent's coordinate space)
+func (x *VideoNode) Size() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("size"))
+	return _r
+}
+
+// SetSize wraps the corresponding Objective-C method.
+func (x *VideoNode) SetSize(size corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
+}
+
+// AnchorPoint the location in the video that maps to its 'position' in the parent's coordinate space. (0.0-1.0)
+func (x *VideoNode) AnchorPoint() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("anchorPoint"))
+	return _r
+}
+
+// SetAnchorPoint wraps the corresponding Objective-C method.
+func (x *VideoNode) SetAnchorPoint(anchorPoint corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPoint:"), anchorPoint)
 }
 
 // VideoNodeable is the interface implemented by [VideoNode], for mocking and DI.
 type VideoNodeable interface {
 	obj.Object
+	WithSize(size corefoundation.CGSize) *VideoNode
+	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *VideoNode
+	WithPosition(position corefoundation.CGPoint) *VideoNode
 	WithZPosition(zPosition float64) *VideoNode
 	WithZRotation(zRotation float64) *VideoNode
 	WithXScale(xScale float64) *VideoNode
@@ -329,12 +310,19 @@ type VideoNodeable interface {
 	WithAccessibilityRole(accessibilityRole string) *VideoNode
 	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *VideoNode
 	WithAccessibilitySubrole(accessibilitySubrole string) *VideoNode
+	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *VideoNode
 	WithAccessibilityParent(accessibilityParent obj.Object) *VideoNode
 	WithAccessibilityHelp(accessibilityHelp string) *VideoNode
 	WithAccessibilityLabel(accessibilityLabel string) *VideoNode
 	WithAccessibilityEnabled(accessibilityEnabled bool) *VideoNode
 	Play()
 	Pause()
+	Size() corefoundation.CGSize
+	SetSize(size corefoundation.CGSize)
+	AnchorPoint() corefoundation.CGPoint
+	SetAnchorPoint(anchorPoint corefoundation.CGPoint)
 }
 
 var _ VideoNodeable = (*VideoNode)(nil)
+
+var _ NodeProvider = (*VideoNode)(nil)

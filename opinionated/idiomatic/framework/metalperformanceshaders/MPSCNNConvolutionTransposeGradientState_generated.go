@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // CNNConvolutionTransposeGradientState is an idiomatic wrapper over the Objective-C class MPSCNNConvolutionTransposeGradientState.
+//
+// It embeds [CNNConvolutionGradientState], promoting that type's methods.
 type CNNConvolutionTransposeGradientState struct {
-	objref.Handle
+	CNNConvolutionGradientState
 }
 
 // CNNConvolutionTransposeGradientStateFromID adopts an existing Objective-C object as a CNNConvolutionTransposeGradientState
@@ -23,7 +24,8 @@ func CNNConvolutionTransposeGradientStateFromID(id objc.ID) *CNNConvolutionTrans
 	if id == 0 {
 		return nil
 	}
-	x := &CNNConvolutionTransposeGradientState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNConvolutionTransposeGradientState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func cNNConvolutionTransposeGradientStateAdopt(id objc.ID) *CNNConvolutionTransp
 	if id == 0 {
 		return nil
 	}
-	x := &CNNConvolutionTransposeGradientState{Handle: objref.Wrap(id)}
+	x := &CNNConvolutionTransposeGradientState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNConvolutionTransposeGradientState) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNConvolutionTransposeGradientState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNConvolutionTransposeGradientState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNConvolutionTransposeGradientState creates a new CNNConvolutionTransposeGradientState.
@@ -62,21 +50,19 @@ func NewCNNConvolutionTransposeGradientState() *CNNConvolutionTransposeGradientS
 	return cNNConvolutionTransposeGradientStateAdopt(_id)
 }
 
-// WithReadCount sets readCount and returns the receiver so calls can be chained.
+// WithReadCount sets the property and returns the receiver so calls can be chained.
 func (x *CNNConvolutionTransposeGradientState) WithReadCount(readCount int) *CNNConvolutionTransposeGradientState {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNConvolutionTransposeGradientState) WithLabel(label string) *CNNConvolutionTransposeGradientState {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The convolutionTranspose filter that produced the state.
+// ConvolutionTranspose the convolutionTranspose filter that produced the state.
 func (x *CNNConvolutionTransposeGradientState) ConvolutionTranspose() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolutionTranspose"))
 	return obj.Wrap(_r)
@@ -91,3 +77,9 @@ type CNNConvolutionTransposeGradientStateable interface {
 }
 
 var _ CNNConvolutionTransposeGradientStateable = (*CNNConvolutionTransposeGradientState)(nil)
+
+var _ CNNConvolutionGradientStateProvider = (*CNNConvolutionTransposeGradientState)(nil)
+
+var _ NNGradientStateProvider = (*CNNConvolutionTransposeGradientState)(nil)
+
+var _ StateProvider = (*CNNConvolutionTransposeGradientState)(nil)

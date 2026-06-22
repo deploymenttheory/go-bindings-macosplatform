@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NNBilinearScaleNode is an idiomatic wrapper over the Objective-C class MPSNNBilinearScaleNode.
+//
+// It embeds [NNScaleNode], promoting that type's methods.
 type NNBilinearScaleNode struct {
-	objref.Handle
+	NNScaleNode
 }
 
 // NNBilinearScaleNodeFromID adopts an existing Objective-C object as a NNBilinearScaleNode
@@ -23,7 +24,8 @@ func NNBilinearScaleNodeFromID(id objc.ID) *NNBilinearScaleNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNBilinearScaleNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNBilinearScaleNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func nNBilinearScaleNodeAdopt(id objc.ID) *NNBilinearScaleNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNBilinearScaleNode{Handle: objref.Wrap(id)}
+	x := &NNBilinearScaleNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NNBilinearScaleNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNBilinearScaleNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNBilinearScaleNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNNBilinearScaleNode creates a new NNBilinearScaleNode.
@@ -62,9 +50,7 @@ func NewNNBilinearScaleNode() *NNBilinearScaleNode {
 	return nNBilinearScaleNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *NNBilinearScaleNode) WithLabel(label string) *NNBilinearScaleNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -77,3 +63,7 @@ type NNBilinearScaleNodeable interface {
 }
 
 var _ NNBilinearScaleNodeable = (*NNBilinearScaleNode)(nil)
+
+var _ NNScaleNodeProvider = (*NNBilinearScaleNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNBilinearScaleNode)(nil)

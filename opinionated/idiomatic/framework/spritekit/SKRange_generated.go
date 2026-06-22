@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A definition of a range of floating-point values.
-//
 // Range is an idiomatic wrapper over the Objective-C class SKRange.
+//
+// A definition of a range of floating-point values.
 type Range struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RangeFromID(id objc.ID) *Range {
 	if id == 0 {
 		return nil
 	}
-	x := &Range{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Range{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func rangeAdopt(id objc.ID) *Range {
 	if id == 0 {
 		return nil
 	}
-	x := &Range{Handle: objref.Wrap(id)}
+	x := &Range{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,45 +60,49 @@ func (x *Range) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a new range object.
-//
-// NewRangeWithLowerLimitUpperLimit creates a new Range.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Range) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRangeWithLowerLimitUpperLimit initializes a new range object.
 func NewRangeWithLowerLimitUpperLimit(lower float64, upper float64) *Range {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKRange")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLowerLimit:upperLimit:"), lower, upper)
 	return rangeAdopt(_id)
 }
 
-// The minimum possible value.
-//
-// WithLowerLimit sets lowerLimit and returns the receiver so calls can be chained.
+// WithLowerLimit the minimum possible value.
 func (x *Range) WithLowerLimit(lowerLimit float64) *Range {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowerLimit:"), lowerLimit)
 	return x
 }
 
-// The maximum possible value.
-//
-// WithUpperLimit sets upperLimit and returns the receiver so calls can be chained.
+// WithUpperLimit the maximum possible value.
 func (x *Range) WithUpperLimit(upperLimit float64) *Range {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperLimit:"), upperLimit)
 	return x
 }
 
+// LowerLimit wraps the corresponding Objective-C method.
 func (x *Range) LowerLimit() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lowerLimit"))
 	return _r
 }
 
+// SetLowerLimit wraps the corresponding Objective-C method.
 func (x *Range) SetLowerLimit(lowerLimit float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowerLimit:"), lowerLimit)
 }
 
+// UpperLimit wraps the corresponding Objective-C method.
 func (x *Range) UpperLimit() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("upperLimit"))
 	return _r
 }
 
+// SetUpperLimit wraps the corresponding Objective-C method.
 func (x *Range) SetUpperLimit(upperLimit float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperLimit:"), upperLimit)
 }

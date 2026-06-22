@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Provides registration and management of Crash Detection events.
-//
 // CrashDetectionManager is an idiomatic wrapper over the Objective-C class SACrashDetectionManager.
+//
+// Provides registration and management of Crash Detection events.
 type CrashDetectionManager struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CrashDetectionManagerFromID(id objc.ID) *CrashDetectionManager {
 	if id == 0 {
 		return nil
 	}
-	x := &CrashDetectionManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CrashDetectionManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func crashDetectionManagerAdopt(id objc.ID) *CrashDetectionManager {
 	if id == 0 {
 		return nil
 	}
-	x := &CrashDetectionManager{Handle: objref.Wrap(id)}
+	x := &CrashDetectionManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *CrashDetectionManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CrashDetectionManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCrashDetectionManager creates a new CrashDetectionManager.
 func NewCrashDetectionManager() *CrashDetectionManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("SACrashDetectionManager")), objc.RegisterName("new"))
 	return crashDetectionManagerAdopt(_id)
 }
 
-// authorizationStatus Returns a value indicating whether the user has authorized the app to receive Crash Detection updates
+// AuthorizationStatus authorizationStatus Returns a value indicating whether the user has authorized the app to receive Crash Detection updates
 func (x *CrashDetectionManager) AuthorizationStatus() AuthorizationStatus {
 	_r := objc.Send[AuthorizationStatus](objref.IDOf(x), objc.RegisterName("authorizationStatus"))
 	return _r

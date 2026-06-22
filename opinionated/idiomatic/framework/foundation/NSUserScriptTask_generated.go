@@ -14,9 +14,11 @@ import (
 	"unsafe"
 )
 
-// An object that executes scripts.
-//
 // UserScriptTask is an idiomatic wrapper over the Objective-C class NSUserScriptTask.
+//
+// UserScriptTask is an abstract base — you do not construct it directly. Construct one of [UserAppleScriptTask], [UserAutomatorTask], [UserUnixTask] and pass it where a UserScriptTask is accepted.
+//
+// An object that executes scripts.
 type UserScriptTask struct {
 	objref.Handle
 }
@@ -27,7 +29,8 @@ func UserScriptTaskFromID(id objc.ID) *UserScriptTask {
 	if id == 0 {
 		return nil
 	}
-	x := &UserScriptTask{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UserScriptTask{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +43,8 @@ func userScriptTaskAdopt(id objc.ID) *UserScriptTask {
 	if id == 0 {
 		return nil
 	}
-	x := &UserScriptTask{Handle: objref.Wrap(id)}
+	x := &UserScriptTask{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,10 +64,14 @@ func (x *UserScriptTask) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Return a user script task instance given a URL for a script file.
-//
-// NewUserScriptTaskWithURLError creates a new UserScriptTask.
-func NewUserScriptTaskWithURLError(url string) (*UserScriptTask, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UserScriptTask) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewUserScriptTaskWithURLError return a user script task instance given a URL for a script file.
+func NewUserScriptTaskWithURLError(url string) (result *UserScriptTask, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUserScriptTask")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
@@ -73,12 +81,13 @@ func NewUserScriptTaskWithURLError(url string) (*UserScriptTask, error) {
 	return userScriptTaskAdopt(_id), nil
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UserScriptTask) WithScriptingProperties(scriptingProperties obj.Object) *UserScriptTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// ScriptURL wraps the corresponding Objective-C method.
 func (x *UserScriptTask) ScriptURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scriptURL"))
 	return URLFromID(_r)
@@ -92,3 +101,10 @@ type UserScriptTaskable interface {
 }
 
 var _ UserScriptTaskable = (*UserScriptTask)(nil)
+
+// isUserScriptTask marks UserScriptTask — and, by embedding promotion, its
+// subclasses — as a member of the UserScriptTask hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *UserScriptTask) isUserScriptTask() {}
+
+var _ UserScriptTaskProvider = (*UserScriptTask)(nil)

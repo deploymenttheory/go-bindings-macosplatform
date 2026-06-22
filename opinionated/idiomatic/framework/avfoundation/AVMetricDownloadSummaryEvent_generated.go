@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Represents a summary metric event with aggregated metrics for the entire download task.
-//
 // MetricDownloadSummaryEvent is an idiomatic wrapper over the Objective-C class AVMetricDownloadSummaryEvent.
+//
+// It embeds [MetricEvent], promoting that type's methods.
+//
+// Represents a summary metric event with aggregated metrics for the entire download task.
 type MetricDownloadSummaryEvent struct {
-	objref.Handle
+	MetricEvent
 }
 
 // MetricDownloadSummaryEventFromID adopts an existing Objective-C object as a MetricDownloadSummaryEvent
@@ -25,7 +26,8 @@ func MetricDownloadSummaryEventFromID(id objc.ID) *MetricDownloadSummaryEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MetricDownloadSummaryEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetricDownloadSummaryEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func metricDownloadSummaryEventAdopt(id objc.ID) *MetricDownloadSummaryEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MetricDownloadSummaryEvent{Handle: objref.Wrap(id)}
+	x := &MetricDownloadSummaryEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MetricDownloadSummaryEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetricDownloadSummaryEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetricDownloadSummaryEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMetricDownloadSummaryEvent creates a new MetricDownloadSummaryEvent.
@@ -64,37 +52,37 @@ func NewMetricDownloadSummaryEvent() *MetricDownloadSummaryEvent {
 	return metricDownloadSummaryEventAdopt(_id)
 }
 
-// Returns the error event if any. If no value is available, returns nil.
+// ErrorEvent returns the error event if any. If no value is available, returns nil.
 func (x *MetricDownloadSummaryEvent) ErrorEvent() *MetricErrorEvent {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorEvent"))
 	return MetricErrorEventFromID(_r)
 }
 
-// Returns the total count of recoverable errors encountered during the download. If no errors were encountered, returns 0. Error counts may not be consistent across OS versions. Comparisons should be made within a given OS version, as error reporting is subject to change with OS updates.
+// RecoverableErrorCount returns the total count of recoverable errors encountered during the download. If no errors were encountered, returns 0. Error counts may not be consistent across OS versions. Comparisons should be made within a given OS version, as error reporting is subject to change with OS updates.
 func (x *MetricDownloadSummaryEvent) RecoverableErrorCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("recoverableErrorCount"))
 	return _r
 }
 
-// Returns the total number of media requests performed by the download task. This includes playlist requests, media segment requests, and content key requests.
+// MediaResourceRequestCount returns the total number of media requests performed by the download task. This includes playlist requests, media segment requests, and content key requests.
 func (x *MetricDownloadSummaryEvent) MediaResourceRequestCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("mediaResourceRequestCount"))
 	return _r
 }
 
-// Returns the total number of bytes downloaded by the download task.
+// BytesDownloadedCount returns the total number of bytes downloaded by the download task.
 func (x *MetricDownloadSummaryEvent) BytesDownloadedCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bytesDownloadedCount"))
 	return _r
 }
 
-// Returns the total duration of the download in seconds.
+// DownloadDuration returns the total duration of the download in seconds.
 func (x *MetricDownloadSummaryEvent) DownloadDuration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("downloadDuration"))
 	return _r
 }
 
-// Returns the variants that were downloaded.
+// Variants returns the variants that were downloaded.
 //
 // Variants returns the collection as a Go slice.
 func (x *MetricDownloadSummaryEvent) Variants() []*AssetVariant {
@@ -114,3 +102,5 @@ type MetricDownloadSummaryEventable interface {
 }
 
 var _ MetricDownloadSummaryEventable = (*MetricDownloadSummaryEvent)(nil)
+
+var _ MetricEventProvider = (*MetricDownloadSummaryEvent)(nil)

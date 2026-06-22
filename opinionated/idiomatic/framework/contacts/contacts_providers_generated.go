@@ -11,24 +11,29 @@ import (
 // ChangeHistoryEventProvider is accepted wherever a CNChangeHistoryEvent (or one of its subclasses) is expected.
 type ChangeHistoryEventProvider interface {
 	objref.Object
+	isChangeHistoryEvent()
 }
 
 // ContactProvider is accepted wherever a CNContact (or one of its subclasses) is expected.
 type ContactProvider interface {
 	objref.Object
+	isContact()
 }
 
 // FetchRequestProvider is accepted wherever a CNFetchRequest (or one of its subclasses) is expected.
 type FetchRequestProvider interface {
 	objref.Object
+	isFetchRequest()
 }
 
 // GroupProvider is accepted wherever a CNGroup (or one of its subclasses) is expected.
 type GroupProvider interface {
 	objref.Object
+	isGroup()
 }
 
 // PostalAddressProvider is accepted wherever a CNPostalAddress (or one of its subclasses) is expected.
 type PostalAddressProvider interface {
 	objref.Object
+	isPostalAddress()
 }

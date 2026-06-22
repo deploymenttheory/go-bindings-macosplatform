@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The orientation of the user’s device, relative to true or magnetic north.
-//
 // Heading is an idiomatic wrapper over the Objective-C class CLHeading.
+//
+// The orientation of the user’s device, relative to true or magnetic north.
 type Heading struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func HeadingFromID(id objc.ID) *Heading {
 	if id == 0 {
 		return nil
 	}
-	x := &Heading{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Heading{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func headingAdopt(id objc.ID) *Heading {
 	if id == 0 {
 		return nil
 	}
-	x := &Heading{Handle: objref.Wrap(id)}
+	x := &Heading{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,27 +60,37 @@ func (x *Heading) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Heading) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewHeading creates a new Heading.
 func NewHeading() *Heading {
 	_id := objc.Send[objc.ID](objc.ID(_class("CLHeading")), objc.RegisterName("new"))
 	return headingAdopt(_id)
 }
 
+// X wraps the corresponding Objective-C method.
 func (x *Heading) X() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("x"))
 	return _r
 }
 
+// Y wraps the corresponding Objective-C method.
 func (x *Heading) Y() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("y"))
 	return _r
 }
 
+// Z wraps the corresponding Objective-C method.
 func (x *Heading) Z() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("z"))
 	return _r
 }
 
+// Timestamp wraps the corresponding Objective-C method.
 func (x *Heading) Timestamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timestamp"))
 	return obj.Wrap(_r)

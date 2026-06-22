@@ -23,7 +23,8 @@ func _cp_layer_renderer_configurationFromID(id objc.ID) *_cp_layer_renderer_conf
 	if id == 0 {
 		return nil
 	}
-	x := &_cp_layer_renderer_configuration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &_cp_layer_renderer_configuration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func _cp_layer_renderer_configurationAdopt(id objc.ID) *_cp_layer_renderer_confi
 	if id == 0 {
 		return nil
 	}
-	x := &_cp_layer_renderer_configuration{Handle: objref.Wrap(id)}
+	x := &_cp_layer_renderer_configuration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *_cp_layer_renderer_configuration) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *_cp_layer_renderer_configuration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *_cp_layer_renderer_configuration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // New_cp_layer_renderer_configuration creates a new _cp_layer_renderer_configuration.

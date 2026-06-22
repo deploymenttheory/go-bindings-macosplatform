@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resolution result for the recipient of a message.
-//
 // SendMessageRecipientResolutionResult is an idiomatic wrapper over the Objective-C class INSendMessageRecipientResolutionResult.
+//
+// It embeds [PersonResolutionResult], promoting that type's methods.
+//
+// A resolution result for the recipient of a message.
 type SendMessageRecipientResolutionResult struct {
-	objref.Handle
+	PersonResolutionResult
 }
 
 // SendMessageRecipientResolutionResultFromID adopts an existing Objective-C object as a SendMessageRecipientResolutionResult
@@ -25,7 +26,8 @@ func SendMessageRecipientResolutionResultFromID(id objc.ID) *SendMessageRecipien
 	if id == 0 {
 		return nil
 	}
-	x := &SendMessageRecipientResolutionResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SendMessageRecipientResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func sendMessageRecipientResolutionResultAdopt(id objc.ID) *SendMessageRecipient
 	if id == 0 {
 		return nil
 	}
-	x := &SendMessageRecipientResolutionResult{Handle: objref.Wrap(id)}
+	x := &SendMessageRecipientResolutionResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *SendMessageRecipientResolutionResult) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SendMessageRecipientResolutionResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SendMessageRecipientResolutionResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a resolution result object with the specified person resolution result object.
-//
-// NewSendMessageRecipientResolutionResultWithPersonResolutionResult creates a new SendMessageRecipientResolutionResult.
+// NewSendMessageRecipientResolutionResultWithPersonResolutionResult creates a resolution result object with the specified person resolution result object.
 func NewSendMessageRecipientResolutionResultWithPersonResolutionResult(personResolutionResult *PersonResolutionResult) *SendMessageRecipientResolutionResult {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INSendMessageRecipientResolutionResult")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersonResolutionResult:"), objref.IDOf(personResolutionResult))
@@ -73,3 +59,7 @@ type SendMessageRecipientResolutionResultable interface {
 }
 
 var _ SendMessageRecipientResolutionResultable = (*SendMessageRecipientResolutionResult)(nil)
+
+var _ PersonResolutionResultProvider = (*SendMessageRecipientResolutionResult)(nil)
+
+var _ IntentResolutionResultProvider = (*SendMessageRecipientResolutionResult)(nil)

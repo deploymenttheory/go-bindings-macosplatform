@@ -23,7 +23,8 @@ func CNNNormalizationMeanAndVarianceStateFromID(id objc.ID) *CNNNormalizationMea
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNormalizationMeanAndVarianceState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNNormalizationMeanAndVarianceState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func cNNNormalizationMeanAndVarianceStateAdopt(id objc.ID) *CNNNormalizationMean
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNormalizationMeanAndVarianceState{Handle: objref.Wrap(id)}
+	x := &CNNNormalizationMeanAndVarianceState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *CNNNormalizationMeanAndVarianceState) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *CNNNormalizationMeanAndVarianceState) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CNNNormalizationMeanAndVarianceState) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewCNNNormalizationMeanAndVarianceState creates a new CNNNormalizationMeanAndVarianceState.

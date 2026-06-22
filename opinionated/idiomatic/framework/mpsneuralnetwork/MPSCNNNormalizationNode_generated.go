@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// virtual base class for CNN normalization nodes
-//
 // CNNNormalizationNode is an idiomatic wrapper over the Objective-C class MPSCNNNormalizationNode.
+//
+// CNNNormalizationNode is an abstract base — you do not construct it directly. Construct one of [CNNCrossChannelNormalizationNode], [CNNLocalContrastNormalizationNode], [CNNSpatialNormalizationNode] and pass it where a CNNNormalizationNode is accepted.
+//
+// virtual base class for CNN normalization nodes
 type CNNNormalizationNode struct {
-	objref.Handle
+	NNFilterNode
 }
 
 // CNNNormalizationNodeFromID adopts an existing Objective-C object as a CNNNormalizationNode
@@ -25,7 +26,8 @@ func CNNNormalizationNodeFromID(id objc.ID) *CNNNormalizationNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNormalizationNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNNormalizationNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func cNNNormalizationNodeAdopt(id objc.ID) *CNNNormalizationNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNormalizationNode{Handle: objref.Wrap(id)}
+	x := &CNNNormalizationNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNNormalizationNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNNormalizationNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNNormalizationNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNNormalizationNodeWithSource creates a new CNNNormalizationNode.
@@ -65,64 +53,59 @@ func NewCNNNormalizationNodeWithSource(sourceNode *NNImageNode) *CNNNormalizatio
 	return cNNNormalizationNodeAdopt(_id)
 }
 
-// The value of alpha.  Default is 1.0. Must be non-negative.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the value of alpha.  Default is 1.0. Must be non-negative.
 func (x *CNNNormalizationNode) WithAlpha(alpha float32) *CNNNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// The value of beta.  Default is 5.0
-//
-// WithBeta sets beta and returns the receiver so calls can be chained.
+// WithBeta the value of beta.  Default is 5.0
 func (x *CNNNormalizationNode) WithBeta(beta float32) *CNNNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
 	return x
 }
 
-// The value of delta.  Default is 1.0
-//
-// WithDelta sets delta and returns the receiver so calls can be chained.
+// WithDelta the value of delta.  Default is 1.0
 func (x *CNNNormalizationNode) WithDelta(delta float32) *CNNNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNNormalizationNode) WithLabel(label string) *CNNNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The value of alpha.  Default is 1.0. Must be non-negative.
+// Alpha the value of alpha.  Default is 1.0. Must be non-negative.
 func (x *CNNNormalizationNode) Alpha() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
 	return _r
 }
 
+// SetAlpha wraps the corresponding Objective-C method.
 func (x *CNNNormalizationNode) SetAlpha(alpha float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }
 
-// The value of beta.  Default is 5.0
+// Beta the value of beta.  Default is 5.0
 func (x *CNNNormalizationNode) Beta() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("beta"))
 	return _r
 }
 
+// SetBeta wraps the corresponding Objective-C method.
 func (x *CNNNormalizationNode) SetBeta(beta float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
 }
 
-// The value of delta.  Default is 1.0
+// Delta the value of delta.  Default is 1.0
 func (x *CNNNormalizationNode) Delta() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("delta"))
 	return _r
 }
 
+// SetDelta wraps the corresponding Objective-C method.
 func (x *CNNNormalizationNode) SetDelta(delta float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
 }
@@ -143,3 +126,12 @@ type CNNNormalizationNodeable interface {
 }
 
 var _ CNNNormalizationNodeable = (*CNNNormalizationNode)(nil)
+
+// isCNNNormalizationNode marks CNNNormalizationNode — and, by embedding promotion, its
+// subclasses — as a member of the CNNNormalizationNode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CNNNormalizationNode) isCNNNormalizationNode() {}
+
+var _ CNNNormalizationNodeProvider = (*CNNNormalizationNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNNormalizationNode)(nil)

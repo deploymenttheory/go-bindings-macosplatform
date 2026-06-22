@@ -23,7 +23,8 @@ func MTRDishwasherModeClusterChangeToModeParamsFromID(id objc.ID) *MTRDishwasher
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDishwasherModeClusterChangeToModeParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDishwasherModeClusterChangeToModeParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDishwasherModeClusterChangeToModeParamsAdopt(id objc.ID) *MTRDishwasherM
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDishwasherModeClusterChangeToModeParams{Handle: objref.Wrap(id)}
+	x := &MTRDishwasherModeClusterChangeToModeParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,59 +58,65 @@ func (x *MTRDishwasherModeClusterChangeToModeParams) IsKind(className string) bo
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDishwasherModeClusterChangeToModeParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDishwasherModeClusterChangeToModeParams creates a new MTRDishwasherModeClusterChangeToModeParams.
 func NewMTRDishwasherModeClusterChangeToModeParams() *MTRDishwasherModeClusterChangeToModeParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDishwasherModeClusterChangeToModeParams")), objc.RegisterName("new"))
 	return mTRDishwasherModeClusterChangeToModeParamsAdopt(_id)
 }
 
-// WithNewMode sets newMode and returns the receiver so calls can be chained.
+// WithNewMode sets the property and returns the receiver so calls can be chained.
 func (x *MTRDishwasherModeClusterChangeToModeParams) WithNewMode(newMode obj.Object) *MTRDishwasherModeClusterChangeToModeParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke).
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
 func (x *MTRDishwasherModeClusterChangeToModeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDishwasherModeClusterChangeToModeParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
 func (x *MTRDishwasherModeClusterChangeToModeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDishwasherModeClusterChangeToModeParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// GetNewMode wraps the corresponding Objective-C method.
 func (x *MTRDishwasherModeClusterChangeToModeParams) GetNewMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewMode"))
 	return obj.Wrap(_r)
 }
 
+// SetNewMode wraps the corresponding Objective-C method.
 func (x *MTRDishwasherModeClusterChangeToModeParams) SetNewMode(newMode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRDishwasherModeClusterChangeToModeParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRDishwasherModeClusterChangeToModeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRDishwasherModeClusterChangeToModeParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRDishwasherModeClusterChangeToModeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

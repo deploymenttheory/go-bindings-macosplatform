@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A text suggestion to insert into a document.
-//
 // TextSuggestion is an idiomatic wrapper over the Objective-C class BETextSuggestion.
+//
+// A text suggestion to insert into a document.
 type TextSuggestion struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TextSuggestionFromID(id objc.ID) *TextSuggestion {
 	if id == 0 {
 		return nil
 	}
-	x := &TextSuggestion{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextSuggestion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func textSuggestionAdopt(id objc.ID) *TextSuggestion {
 	if id == 0 {
 		return nil
 	}
-	x := &TextSuggestion{Handle: objref.Wrap(id)}
+	x := &TextSuggestion{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,16 +60,20 @@ func (x *TextSuggestion) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a new text suggestion with the given input text.
-//
-// NewTextSuggestionWithInputText creates a new TextSuggestion.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextSuggestion) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTextSuggestionWithInputText initializes a new text suggestion with the given input text.
 func NewTextSuggestionWithInputText(inputText string) *TextSuggestion {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("BETextSuggestion")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputText:"), purego.NSString(inputText))
 	return textSuggestionAdopt(_id)
 }
 
-// Text that will be inserted into the document when the user chooses the suggestion.
+// InputText text that will be inserted into the document when the user chooses the suggestion.
 func (x *TextSuggestion) InputText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputText"))
 	if _r == 0 {

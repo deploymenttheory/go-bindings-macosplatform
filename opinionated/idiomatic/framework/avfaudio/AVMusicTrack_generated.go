@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of music events that you can offset, set to a muted state, modify independently from other track events, and send to a specified destination.
-//
 // MusicTrack is an idiomatic wrapper over the Objective-C class AVMusicTrack.
+//
+// A collection of music events that you can offset, set to a muted state, modify independently from other track events, and send to a specified destination.
 type MusicTrack struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MusicTrackFromID(id objc.ID) *MusicTrack {
 	if id == 0 {
 		return nil
 	}
-	x := &MusicTrack{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MusicTrack{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func musicTrackAdopt(id objc.ID) *MusicTrack {
 	if id == 0 {
 		return nil
 	}
-	x := &MusicTrack{Handle: objref.Wrap(id)}
+	x := &MusicTrack{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,198 +60,195 @@ func (x *MusicTrack) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MusicTrack) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMusicTrack creates a new MusicTrack.
 func NewMusicTrack() *MusicTrack {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVMusicTrack")), objc.RegisterName("new"))
 	return musicTrackAdopt(_id)
 }
 
-// The audio unit that receives the track’s events.
-//
-// WithDestinationAudioUnit sets destinationAudioUnit and returns the receiver so calls can be chained.
+// WithDestinationAudioUnit the audio unit that receives the track’s events.
 func (x *MusicTrack) WithDestinationAudioUnit(destinationAudioUnit AudioUnitProvider) *MusicTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationAudioUnit:"), objref.IDOf(destinationAudioUnit))
 	return x
 }
 
-// The MIDI endpoint you specify as the track’s target.
-//
-// WithDestinationMIDIEndpoint sets destinationMIDIEndpoint and returns the receiver so calls can be chained.
+// WithDestinationMIDIEndpoint the MIDI endpoint you specify as the track’s target.
 func (x *MusicTrack) WithDestinationMIDIEndpoint(destinationMIDIEndpoint int) *MusicTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationMIDIEndpoint:"), destinationMIDIEndpoint)
 	return x
 }
 
-// A Boolean value that indicates whether the track is in a looping state.
-//
-// WithLoopingEnabled sets loopingEnabled and returns the receiver so calls can be chained.
+// WithLoopingEnabled a Boolean value that indicates whether the track is in a looping state.
 func (x *MusicTrack) WithLoopingEnabled(loopingEnabled bool) *MusicTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoopingEnabled:"), loopingEnabled)
 	return x
 }
 
-// The number of times the track’s loop repeats.
-//
-// WithNumberOfLoops sets numberOfLoops and returns the receiver so calls can be chained.
+// WithNumberOfLoops the number of times the track’s loop repeats.
 func (x *MusicTrack) WithNumberOfLoops(numberOfLoops int) *MusicTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfLoops:"), numberOfLoops)
 	return x
 }
 
-// The offset of the track’s start time, in beats.
-//
-// WithOffsetTime sets offsetTime and returns the receiver so calls can be chained.
+// WithOffsetTime the offset of the track’s start time, in beats.
 func (x *MusicTrack) WithOffsetTime(offsetTime float64) *MusicTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffsetTime:"), offsetTime)
 	return x
 }
 
-// A Boolean value that indicates whether the track is in a muted state.
-//
-// WithMuted sets muted and returns the receiver so calls can be chained.
+// WithMuted a Boolean value that indicates whether the track is in a muted state.
 func (x *MusicTrack) WithMuted(muted bool) *MusicTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMuted:"), muted)
 	return x
 }
 
-// A Boolean value that indicates whether the track is in a soloed state.
-//
-// WithSoloed sets soloed and returns the receiver so calls can be chained.
+// WithSoloed a Boolean value that indicates whether the track is in a soloed state.
 func (x *MusicTrack) WithSoloed(soloed bool) *MusicTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoloed:"), soloed)
 	return x
 }
 
-// The total duration of the track, in beats.
-//
-// WithLengthInBeats sets lengthInBeats and returns the receiver so calls can be chained.
+// WithLengthInBeats the total duration of the track, in beats.
 func (x *MusicTrack) WithLengthInBeats(lengthInBeats float64) *MusicTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLengthInBeats:"), lengthInBeats)
 	return x
 }
 
-// The total duration of the track, in seconds.
-//
-// WithLengthInSeconds sets lengthInSeconds and returns the receiver so calls can be chained.
+// WithLengthInSeconds the total duration of the track, in seconds.
 func (x *MusicTrack) WithLengthInSeconds(lengthInSeconds float64) *MusicTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLengthInSeconds:"), lengthInSeconds)
 	return x
 }
 
-// A Boolean value that indicates whether the track is an automation track.
-//
-// WithUsesAutomatedParameters sets usesAutomatedParameters and returns the receiver so calls can be chained.
+// WithUsesAutomatedParameters a Boolean value that indicates whether the track is an automation track.
 func (x *MusicTrack) WithUsesAutomatedParameters(usesAutomatedParameters bool) *MusicTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesAutomatedParameters:"), usesAutomatedParameters)
 	return x
 }
 
-// The AVAudioUnit which will receive the track's events This is mutually exclusive with setting a destination MIDIEndpoint.  The AU must already be attached to an audio engine, and the track must be part of the AVAudioSequencer associated with that engine. When playing, the track will send its events to that AVAudioUnit. The destination AU cannot be changed while the track's sequence is playing.
+// DestinationAudioUnit the AVAudioUnit which will receive the track's events This is mutually exclusive with setting a destination MIDIEndpoint.  The AU must already be attached to an audio engine, and the track must be part of the AVAudioSequencer associated with that engine. When playing, the track will send its events to that AVAudioUnit. The destination AU cannot be changed while the track's sequence is playing.
 func (x *MusicTrack) DestinationAudioUnit() *AudioUnit {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationAudioUnit"))
 	return AudioUnitFromID(_r)
 }
 
+// SetDestinationAudioUnit wraps the corresponding Objective-C method.
 func (x *MusicTrack) SetDestinationAudioUnit(destinationAudioUnit *AudioUnit) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationAudioUnit:"), objref.IDOf(destinationAudioUnit))
 }
 
+// DestinationMIDIEndpoint wraps the corresponding Objective-C method.
 func (x *MusicTrack) DestinationMIDIEndpoint() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("destinationMIDIEndpoint"))
 	return _r
 }
 
+// SetDestinationMIDIEndpoint wraps the corresponding Objective-C method.
 func (x *MusicTrack) SetDestinationMIDIEndpoint(destinationMIDIEndpoint int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationMIDIEndpoint:"), destinationMIDIEndpoint)
 }
 
-// Determines whether or not the track is looped. If loopRange has not been set, the full track will be looped.
+// IsLoopingEnabled determines whether or not the track is looped. If loopRange has not been set, the full track will be looped.
 func (x *MusicTrack) IsLoopingEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLoopingEnabled"))
 	return _r
 }
 
+// SetLoopingEnabled wraps the corresponding Objective-C method.
 func (x *MusicTrack) SetLoopingEnabled(loopingEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoopingEnabled:"), loopingEnabled)
 }
 
-// The number of times that the track's loop will repeat If set to AVMusicTrackLoopCountForever, the track will loop forever. Otherwise, legal values start with 1.
+// NumberOfLoops the number of times that the track's loop will repeat If set to AVMusicTrackLoopCountForever, the track will loop forever. Otherwise, legal values start with 1.
 func (x *MusicTrack) NumberOfLoops() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfLoops"))
 	return _r
 }
 
+// SetNumberOfLoops wraps the corresponding Objective-C method.
 func (x *MusicTrack) SetNumberOfLoops(numberOfLoops int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfLoops:"), numberOfLoops)
 }
 
-// Offset the track's start time to the specified time in beats By default this value is zero.
+// OffsetTime offset the track's start time to the specified time in beats By default this value is zero.
 func (x *MusicTrack) OffsetTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("offsetTime"))
 	return _r
 }
 
+// SetOffsetTime wraps the corresponding Objective-C method.
 func (x *MusicTrack) SetOffsetTime(offsetTime float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffsetTime:"), offsetTime)
 }
 
-// Whether the track is muted
+// IsMuted whether the track is muted
 func (x *MusicTrack) IsMuted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMuted"))
 	return _r
 }
 
+// SetMuted wraps the corresponding Objective-C method.
 func (x *MusicTrack) SetMuted(muted bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMuted:"), muted)
 }
 
-// Whether the track is soloed
+// IsSoloed whether the track is soloed
 func (x *MusicTrack) IsSoloed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSoloed"))
 	return _r
 }
 
+// SetSoloed wraps the corresponding Objective-C method.
 func (x *MusicTrack) SetSoloed(soloed bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoloed:"), soloed)
 }
 
-// The total duration of the track in beats This will return the beat of the last event in the track plus any additional time that may be needed for fading out of ending notes or round a loop point to musical bar, etc.  If this has not been set by the user, the track length will always be adjusted to the end of the last active event in a track and is adjusted dynamically as events are added or removed. The property will return the maximum of the user-set track length, or the calculated length.
+// LengthInBeats the total duration of the track in beats This will return the beat of the last event in the track plus any additional time that may be needed for fading out of ending notes or round a loop point to musical bar, etc.  If this has not been set by the user, the track length will always be adjusted to the end of the last active event in a track and is adjusted dynamically as events are added or removed. The property will return the maximum of the user-set track length, or the calculated length.
 func (x *MusicTrack) LengthInBeats() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lengthInBeats"))
 	return _r
 }
 
+// SetLengthInBeats wraps the corresponding Objective-C method.
 func (x *MusicTrack) SetLengthInBeats(lengthInBeats float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLengthInBeats:"), lengthInBeats)
 }
 
-// The total duration of the track in seconds This will return time of the last event in the track plus any additional time that may be needed for fading out of ending notes or round a loop point to musical bar, etc.  If this has not been set by the user, the track length will always be adjusted to the end of the last active event in a track and is adjusted dynamically as events are added or removed. The property will return the maximum of the user-set track length, or the calculated length.
+// LengthInSeconds the total duration of the track in seconds This will return time of the last event in the track plus any additional time that may be needed for fading out of ending notes or round a loop point to musical bar, etc.  If this has not been set by the user, the track length will always be adjusted to the end of the last active event in a track and is adjusted dynamically as events are added or removed. The property will return the maximum of the user-set track length, or the calculated length.
 func (x *MusicTrack) LengthInSeconds() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lengthInSeconds"))
 	return _r
 }
 
+// SetLengthInSeconds wraps the corresponding Objective-C method.
 func (x *MusicTrack) SetLengthInSeconds(lengthInSeconds float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLengthInSeconds:"), lengthInSeconds)
 }
 
-// The time resolution value for the sequence, in ticks (pulses) per quarter note (PPQN) If a MIDI file was used to construct the containing sequence, the resolution will be what was in the file. If you want to keep a time resolution when writing a new file, you can retrieve this value and then specify it when calling -[AVAudioSequencer writeToFile:flags:withResolution]. It has no direct bearing on the rendering or notion of time of the sequence itself, just its representation in MIDI files. By default this is set to either 480 if the sequence was created manually, or a value based on what was in a MIDI file if the sequence was created from a MIDI file. This can only be retrieved from the tempo track.
+// TimeResolution the time resolution value for the sequence, in ticks (pulses) per quarter note (PPQN) If a MIDI file was used to construct the containing sequence, the resolution will be what was in the file. If you want to keep a time resolution when writing a new file, you can retrieve this value and then specify it when calling -[AVAudioSequencer writeToFile:flags:withResolution]. It has no direct bearing on the rendering or notion of time of the sequence itself, just its representation in MIDI files. By default this is set to either 480 if the sequence was created manually, or a value based on what was in a MIDI file if the sequence was created from a MIDI file. This can only be retrieved from the tempo track.
 func (x *MusicTrack) TimeResolution() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("timeResolution"))
 	return _r
 }
 
-// Adds a music event to a track at the time you specify.
+// AddEventAtBeat adds a music event to a track at the time you specify.
 func (x *MusicTrack) AddEventAtBeat(event *MusicEvent, beat float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addEvent:atBeat:"), objref.IDOf(event), beat)
 }
 
-// Indicates whether the track is an automation track. If set to YES, this can be used to contain, parameter automation events, exclusively. Adding any other event types will generate exceptions. If a track already contains non-parameter events, setting this to YES will generate an exception.
+// UsesAutomatedParameters indicates whether the track is an automation track. If set to YES, this can be used to contain, parameter automation events, exclusively. Adding any other event types will generate exceptions. If a track already contains non-parameter events, setting this to YES will generate an exception.
 func (x *MusicTrack) UsesAutomatedParameters() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesAutomatedParameters"))
 	return _r
 }
 
+// SetUsesAutomatedParameters wraps the corresponding Objective-C method.
 func (x *MusicTrack) SetUsesAutomatedParameters(usesAutomatedParameters bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesAutomatedParameters:"), usesAutomatedParameters)
 }

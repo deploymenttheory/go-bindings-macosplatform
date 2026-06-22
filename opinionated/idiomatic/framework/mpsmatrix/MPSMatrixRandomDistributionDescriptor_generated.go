@@ -23,7 +23,8 @@ func MatrixRandomDistributionDescriptorFromID(id objc.ID) *MatrixRandomDistribut
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixRandomDistributionDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatrixRandomDistributionDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func matrixRandomDistributionDescriptorAdopt(id objc.ID) *MatrixRandomDistributi
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixRandomDistributionDescriptor{Handle: objref.Wrap(id)}
+	x := &MatrixRandomDistributionDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,98 +58,99 @@ func (x *MatrixRandomDistributionDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MatrixRandomDistributionDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMatrixRandomDistributionDescriptor creates a new MatrixRandomDistributionDescriptor.
 func NewMatrixRandomDistributionDescriptor() *MatrixRandomDistributionDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixRandomDistributionDescriptor")), objc.RegisterName("new"))
 	return matrixRandomDistributionDescriptorAdopt(_id)
 }
 
-// The type of distribution.
-//
-// WithDistributionType sets distributionType and returns the receiver so calls can be chained.
+// WithDistributionType the type of distribution.
 func (x *MatrixRandomDistributionDescriptor) WithDistributionType(distributionType MatrixRandomDistribution) *MatrixRandomDistributionDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDistributionType:"), distributionType)
 	return x
 }
 
-// For distributions of values bounded below, this value describes the minimum.
-//
-// WithMinimum sets minimum and returns the receiver so calls can be chained.
+// WithMinimum for distributions of values bounded below, this value describes the minimum.
 func (x *MatrixRandomDistributionDescriptor) WithMinimum(minimum float32) *MatrixRandomDistributionDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimum:"), minimum)
 	return x
 }
 
-// For distributions of values bounded above, this value describes the maximum.
-//
-// WithMaximum sets maximum and returns the receiver so calls can be chained.
+// WithMaximum for distributions of values bounded above, this value describes the maximum.
 func (x *MatrixRandomDistributionDescriptor) WithMaximum(maximum float32) *MatrixRandomDistributionDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximum:"), maximum)
 	return x
 }
 
-// The value to use for distributions described by their mean.
-//
-// WithMean sets mean and returns the receiver so calls can be chained.
+// WithMean the value to use for distributions described by their mean.
 func (x *MatrixRandomDistributionDescriptor) WithMean(mean float32) *MatrixRandomDistributionDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMean:"), mean)
 	return x
 }
 
-// The value to use for distributions described by their standardDeviation.
-//
-// WithStandardDeviation sets standardDeviation and returns the receiver so calls can be chained.
+// WithStandardDeviation the value to use for distributions described by their standardDeviation.
 func (x *MatrixRandomDistributionDescriptor) WithStandardDeviation(standardDeviation float32) *MatrixRandomDistributionDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardDeviation:"), standardDeviation)
 	return x
 }
 
-// The type of distribution.
+// DistributionType the type of distribution.
 func (x *MatrixRandomDistributionDescriptor) DistributionType() MatrixRandomDistribution {
 	_r := objc.Send[MatrixRandomDistribution](objref.IDOf(x), objc.RegisterName("distributionType"))
 	return _r
 }
 
+// SetDistributionType wraps the corresponding Objective-C method.
 func (x *MatrixRandomDistributionDescriptor) SetDistributionType(distributionType MatrixRandomDistribution) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDistributionType:"), distributionType)
 }
 
-// For distributions of values bounded below, this value describes the minimum.
+// Minimum for distributions of values bounded below, this value describes the minimum.
 func (x *MatrixRandomDistributionDescriptor) Minimum() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minimum"))
 	return _r
 }
 
+// SetMinimum wraps the corresponding Objective-C method.
 func (x *MatrixRandomDistributionDescriptor) SetMinimum(minimum float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimum:"), minimum)
 }
 
-// For distributions of values bounded above, this value describes the maximum.
+// Maximum for distributions of values bounded above, this value describes the maximum.
 func (x *MatrixRandomDistributionDescriptor) Maximum() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximum"))
 	return _r
 }
 
+// SetMaximum wraps the corresponding Objective-C method.
 func (x *MatrixRandomDistributionDescriptor) SetMaximum(maximum float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximum:"), maximum)
 }
 
-// The value to use for distributions described by their mean.
+// Mean the value to use for distributions described by their mean.
 func (x *MatrixRandomDistributionDescriptor) Mean() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("mean"))
 	return _r
 }
 
+// SetMean wraps the corresponding Objective-C method.
 func (x *MatrixRandomDistributionDescriptor) SetMean(mean float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMean:"), mean)
 }
 
-// The value to use for distributions described by their standardDeviation.
+// StandardDeviation the value to use for distributions described by their standardDeviation.
 func (x *MatrixRandomDistributionDescriptor) StandardDeviation() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("standardDeviation"))
 	return _r
 }
 
+// SetStandardDeviation wraps the corresponding Objective-C method.
 func (x *MatrixRandomDistributionDescriptor) SetStandardDeviation(standardDeviation float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardDeviation:"), standardDeviation)
 }

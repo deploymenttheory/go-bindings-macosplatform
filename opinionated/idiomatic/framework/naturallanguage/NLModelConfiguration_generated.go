@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The configuration parameters of a natural language model.
-//
 // ModelConfiguration is an idiomatic wrapper over the Objective-C class NLModelConfiguration.
+//
+// The configuration parameters of a natural language model.
 type ModelConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ModelConfigurationFromID(id objc.ID) *ModelConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &ModelConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ModelConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func modelConfigurationAdopt(id objc.ID) *ModelConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &ModelConfiguration{Handle: objref.Wrap(id)}
+	x := &ModelConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,31 @@ func (x *ModelConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ModelConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewModelConfiguration creates a new ModelConfiguration.
 func NewModelConfiguration() *ModelConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("NLModelConfiguration")), objc.RegisterName("new"))
 	return modelConfigurationAdopt(_id)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *ModelConfiguration) Type() ModelType {
 	_r := objc.Send[ModelType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
+// Language wraps the corresponding Objective-C method.
 func (x *ModelConfiguration) Language() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
 	return obj.Wrap(_r)
 }
 
+// Revision wraps the corresponding Objective-C method.
 func (x *ModelConfiguration) Revision() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("revision"))
 	return _r

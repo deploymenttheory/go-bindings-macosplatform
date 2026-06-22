@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBaseClusterOperationalCredentials is an idiomatic wrapper over the Objective-C class MTRBaseClusterOperationalCredentials.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
 type MTRBaseClusterOperationalCredentials struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterOperationalCredentialsFromID adopts an existing Objective-C object as a MTRBaseClusterOperationalCredentials
@@ -25,7 +26,8 @@ func MTRBaseClusterOperationalCredentialsFromID(id objc.ID) *MTRBaseClusterOpera
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterOperationalCredentials{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterOperationalCredentials{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func mTRBaseClusterOperationalCredentialsAdopt(id objc.ID) *MTRBaseClusterOperat
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterOperationalCredentials{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterOperationalCredentials{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterOperationalCredentials) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterOperationalCredentials) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterOperationalCredentials) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterOperationalCredentialsWithDeviceEndpointIDQueue creates a new MTRBaseClusterOperationalCredentials.
+// NewMTRBaseClusterOperationalCredentialsWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterOperationalCredentialsWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterOperationalCredentials {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterOperationalCredentials")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -74,10 +60,10 @@ func NewMTRBaseClusterOperationalCredentialsWithDeviceEndpointQueue(device *MTRB
 	return mTRBaseClusterOperationalCredentialsAdopt(_id)
 }
 
-// Command AttestationRequest Sender is requesting attestation information from the receiver.
+// AttestationRequestWithParamsCompletion command AttestationRequest Sender is requesting attestation information from the receiver.
 //
 // AttestationRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) AttestationRequestWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterAttestationRequestParams) (*MTROperationalCredentialsClusterAttestationResponseParams, error) {
+func (x *MTRBaseClusterOperationalCredentials) AttestationRequestWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterAttestationRequestParams) (result *MTROperationalCredentialsClusterAttestationResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterAttestationResponseParams
 		err error
@@ -99,10 +85,10 @@ func (x *MTRBaseClusterOperationalCredentials) AttestationRequestWithParamsCompl
 	}
 }
 
-// Command CertificateChainRequest Sender is requesting a device attestation certificate from the receiver.
+// CertificateChainRequestWithParamsCompletion command CertificateChainRequest Sender is requesting a device attestation certificate from the receiver.
 //
 // CertificateChainRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) CertificateChainRequestWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterCertificateChainRequestParams) (*MTROperationalCredentialsClusterCertificateChainResponseParams, error) {
+func (x *MTRBaseClusterOperationalCredentials) CertificateChainRequestWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterCertificateChainRequestParams) (result *MTROperationalCredentialsClusterCertificateChainResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterCertificateChainResponseParams
 		err error
@@ -124,10 +110,10 @@ func (x *MTRBaseClusterOperationalCredentials) CertificateChainRequestWithParams
 	}
 }
 
-// Command CSRRequest Sender is requesting a certificate signing request (CSR) from the receiver.
+// CSRRequestWithParamsCompletion command CSRRequest Sender is requesting a certificate signing request (CSR) from the receiver.
 //
 // CSRRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) CSRRequestWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterCSRRequestParams) (*MTROperationalCredentialsClusterCSRResponseParams, error) {
+func (x *MTRBaseClusterOperationalCredentials) CSRRequestWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterCSRRequestParams) (result *MTROperationalCredentialsClusterCSRResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterCSRResponseParams
 		err error
@@ -149,10 +135,10 @@ func (x *MTRBaseClusterOperationalCredentials) CSRRequestWithParamsCompletion(ct
 	}
 }
 
-// Command AddNOC Sender is requesting to add the new node operational certificates.
+// AddNOCWithParamsCompletion command AddNOC Sender is requesting to add the new node operational certificates.
 //
 // AddNOCWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) AddNOCWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams) (*MTROperationalCredentialsClusterNOCResponseParams, error) {
+func (x *MTRBaseClusterOperationalCredentials) AddNOCWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -174,10 +160,10 @@ func (x *MTRBaseClusterOperationalCredentials) AddNOCWithParamsCompletion(ctx co
 	}
 }
 
-// Command UpdateNOC This command SHALL replace the NOC and optional associated ICAC (if present) scoped under the accessing fabric upon successful validation of all arguments and preconditions.
+// UpdateNOCWithParamsCompletion command UpdateNOC This command SHALL replace the NOC and optional associated ICAC (if present) scoped under the accessing fabric upon successful validation of all arguments and preconditions.
 //
 // UpdateNOCWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) UpdateNOCWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams) (*MTROperationalCredentialsClusterNOCResponseParams, error) {
+func (x *MTRBaseClusterOperationalCredentials) UpdateNOCWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -199,10 +185,10 @@ func (x *MTRBaseClusterOperationalCredentials) UpdateNOCWithParamsCompletion(ctx
 	}
 }
 
-// Command UpdateFabricLabel This command SHALL be used by an Administrative Node to set the user-visible Label field for a given Fabric, as reflected by entries in the Fabrics attribute.
+// UpdateFabricLabelWithParamsCompletion command UpdateFabricLabel This command SHALL be used by an Administrative Node to set the user-visible Label field for a given Fabric, as reflected by entries in the Fabrics attribute.
 //
 // UpdateFabricLabelWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) UpdateFabricLabelWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams) (*MTROperationalCredentialsClusterNOCResponseParams, error) {
+func (x *MTRBaseClusterOperationalCredentials) UpdateFabricLabelWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -224,10 +210,10 @@ func (x *MTRBaseClusterOperationalCredentials) UpdateFabricLabelWithParamsComple
 	}
 }
 
-// Command RemoveFabric This command is used by Administrative Nodes to remove a given fabric index and delete all associated fabric-scoped data.
+// RemoveFabricWithParamsCompletion command RemoveFabric This command is used by Administrative Nodes to remove a given fabric index and delete all associated fabric-scoped data.
 //
 // RemoveFabricWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) RemoveFabricWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams) (*MTROperationalCredentialsClusterNOCResponseParams, error) {
+func (x *MTRBaseClusterOperationalCredentials) RemoveFabricWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -249,8 +235,10 @@ func (x *MTRBaseClusterOperationalCredentials) RemoveFabricWithParamsCompletion(
 	}
 }
 
+// ReadAttributeNOCsWithParamsCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeNOCsWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeNOCsWithParamsCompletion(ctx context.Context, params *MTRReadParams) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) ReadAttributeNOCsWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -272,8 +260,10 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeNOCsWithParamsComple
 	}
 }
 
+// SubscribeAttributeNOCsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNOCsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeNOCsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeNOCsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -295,8 +285,10 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeNOCsWithParamsS
 	}
 }
 
+// ReadAttributeFabricsWithParamsCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFabricsWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFabricsWithParamsCompletion(ctx context.Context, params *MTRReadParams) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFabricsWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -318,8 +310,10 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFabricsWithParamsCom
 	}
 }
 
+// SubscribeAttributeFabricsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFabricsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFabricsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFabricsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -341,8 +335,10 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFabricsWithPara
 	}
 }
 
+// ReadAttributeSupportedFabricsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSupportedFabricsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeSupportedFabricsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) ReadAttributeSupportedFabricsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -364,8 +360,10 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeSupportedFabricsWith
 	}
 }
 
+// SubscribeAttributeSupportedFabricsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSupportedFabricsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeSupportedFabricsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeSupportedFabricsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -387,8 +385,10 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeSupportedFabric
 	}
 }
 
+// ReadAttributeCommissionedFabricsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCommissionedFabricsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCommissionedFabricsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCommissionedFabricsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -410,8 +410,10 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCommissionedFabricsW
 	}
 }
 
+// SubscribeAttributeCommissionedFabricsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCommissionedFabricsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCommissionedFabricsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCommissionedFabricsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -433,8 +435,10 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCommissionedFab
 	}
 }
 
+// ReadAttributeTrustedRootCertificatesWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeTrustedRootCertificatesWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeTrustedRootCertificatesWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) ReadAttributeTrustedRootCertificatesWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -456,8 +460,10 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeTrustedRootCertifica
 	}
 }
 
+// SubscribeAttributeTrustedRootCertificatesWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTrustedRootCertificatesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeTrustedRootCertificatesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeTrustedRootCertificatesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -479,8 +485,10 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeTrustedRootCert
 	}
 }
 
+// ReadAttributeCurrentFabricIndexWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentFabricIndexWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCurrentFabricIndexWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCurrentFabricIndexWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -502,8 +510,10 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCurrentFabricIndexWi
 	}
 }
 
+// SubscribeAttributeCurrentFabricIndexWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentFabricIndexWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCurrentFabricIndexWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCurrentFabricIndexWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -525,8 +535,10 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCurrentFabricIn
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -548,8 +560,10 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeGeneratedCommandList
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -571,8 +585,10 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeGeneratedComman
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -594,8 +610,10 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAcceptedCommandListW
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -617,8 +635,10 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAcceptedCommand
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -640,8 +660,10 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAttributeListWithCom
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -663,8 +685,10 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAttributeListWi
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -686,8 +710,10 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFeatureMapWithComple
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -709,8 +735,10 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFeatureMapWithP
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -732,8 +760,10 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeClusterRevisionWithC
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -755,8 +785,10 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeClusterRevision
 	}
 }
 
+// AttestationRequestWithParams wraps the corresponding Objective-C method.
+//
 // AttestationRequestWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) AttestationRequestWithParams(ctx context.Context, params *MTROperationalCredentialsClusterAttestationRequestParams) (*MTROperationalCredentialsClusterAttestationResponseParams, error) {
+func (x *MTRBaseClusterOperationalCredentials) AttestationRequestWithParams(ctx context.Context, params *MTROperationalCredentialsClusterAttestationRequestParams) (result *MTROperationalCredentialsClusterAttestationResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterAttestationResponseParams
 		err error
@@ -778,8 +810,10 @@ func (x *MTRBaseClusterOperationalCredentials) AttestationRequestWithParams(ctx 
 	}
 }
 
+// CertificateChainRequestWithParams wraps the corresponding Objective-C method.
+//
 // CertificateChainRequestWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) CertificateChainRequestWithParams(ctx context.Context, params *MTROperationalCredentialsClusterCertificateChainRequestParams) (*MTROperationalCredentialsClusterCertificateChainResponseParams, error) {
+func (x *MTRBaseClusterOperationalCredentials) CertificateChainRequestWithParams(ctx context.Context, params *MTROperationalCredentialsClusterCertificateChainRequestParams) (result *MTROperationalCredentialsClusterCertificateChainResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterCertificateChainResponseParams
 		err error
@@ -801,8 +835,10 @@ func (x *MTRBaseClusterOperationalCredentials) CertificateChainRequestWithParams
 	}
 }
 
+// CSRRequestWithParams wraps the corresponding Objective-C method.
+//
 // CSRRequestWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) CSRRequestWithParams(ctx context.Context, params *MTROperationalCredentialsClusterCSRRequestParams) (*MTROperationalCredentialsClusterCSRResponseParams, error) {
+func (x *MTRBaseClusterOperationalCredentials) CSRRequestWithParams(ctx context.Context, params *MTROperationalCredentialsClusterCSRRequestParams) (result *MTROperationalCredentialsClusterCSRResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterCSRResponseParams
 		err error
@@ -824,8 +860,10 @@ func (x *MTRBaseClusterOperationalCredentials) CSRRequestWithParams(ctx context.
 	}
 }
 
+// AddNOCWithParams wraps the corresponding Objective-C method.
+//
 // AddNOCWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) AddNOCWithParams(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams) (*MTROperationalCredentialsClusterNOCResponseParams, error) {
+func (x *MTRBaseClusterOperationalCredentials) AddNOCWithParams(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -847,8 +885,10 @@ func (x *MTRBaseClusterOperationalCredentials) AddNOCWithParams(ctx context.Cont
 	}
 }
 
+// UpdateNOCWithParams wraps the corresponding Objective-C method.
+//
 // UpdateNOCWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) UpdateNOCWithParams(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams) (*MTROperationalCredentialsClusterNOCResponseParams, error) {
+func (x *MTRBaseClusterOperationalCredentials) UpdateNOCWithParams(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -870,8 +910,10 @@ func (x *MTRBaseClusterOperationalCredentials) UpdateNOCWithParams(ctx context.C
 	}
 }
 
+// UpdateFabricLabelWithParams wraps the corresponding Objective-C method.
+//
 // UpdateFabricLabelWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) UpdateFabricLabelWithParams(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams) (*MTROperationalCredentialsClusterNOCResponseParams, error) {
+func (x *MTRBaseClusterOperationalCredentials) UpdateFabricLabelWithParams(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -893,8 +935,10 @@ func (x *MTRBaseClusterOperationalCredentials) UpdateFabricLabelWithParams(ctx c
 	}
 }
 
+// RemoveFabricWithParams wraps the corresponding Objective-C method.
+//
 // RemoveFabricWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) RemoveFabricWithParams(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams) (*MTROperationalCredentialsClusterNOCResponseParams, error) {
+func (x *MTRBaseClusterOperationalCredentials) RemoveFabricWithParams(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -916,8 +960,10 @@ func (x *MTRBaseClusterOperationalCredentials) RemoveFabricWithParams(ctx contex
 	}
 }
 
+// ReadAttributeNOCsWithParams wraps the corresponding Objective-C method.
+//
 // ReadAttributeNOCsWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeNOCsWithParams(ctx context.Context, params *MTRReadParams) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) ReadAttributeNOCsWithParams(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -939,8 +985,10 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeNOCsWithParams(ctx c
 	}
 }
 
+// SubscribeAttributeNOCsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNOCsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeNOCsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeNOCsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -962,8 +1010,10 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeNOCsWithMinInte
 	}
 }
 
+// ReadAttributeFabricsWithParams wraps the corresponding Objective-C method.
+//
 // ReadAttributeFabricsWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFabricsWithParams(ctx context.Context, params *MTRReadParams) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFabricsWithParams(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -985,8 +1035,10 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFabricsWithParams(ct
 	}
 }
 
+// SubscribeAttributeFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1008,8 +1060,10 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFabricsWithMinI
 	}
 }
 
+// ReadAttributeSupportedFabrics wraps the corresponding Objective-C method.
+//
 // ReadAttributeSupportedFabrics blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeSupportedFabrics(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) ReadAttributeSupportedFabrics(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1031,8 +1085,10 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeSupportedFabrics(ctx
 	}
 }
 
+// SubscribeAttributeSupportedFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSupportedFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeSupportedFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeSupportedFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1054,8 +1110,10 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeSupportedFabric
 	}
 }
 
+// ReadAttributeCommissionedFabrics wraps the corresponding Objective-C method.
+//
 // ReadAttributeCommissionedFabrics blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCommissionedFabrics(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCommissionedFabrics(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1077,8 +1135,10 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCommissionedFabrics(
 	}
 }
 
+// SubscribeAttributeCommissionedFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCommissionedFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCommissionedFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCommissionedFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1100,8 +1160,10 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCommissionedFab
 	}
 }
 
+// ReadAttributeTrustedRootCertificates wraps the corresponding Objective-C method.
+//
 // ReadAttributeTrustedRootCertificates blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeTrustedRootCertificates(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) ReadAttributeTrustedRootCertificates(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1123,8 +1185,10 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeTrustedRootCertifica
 	}
 }
 
+// SubscribeAttributeTrustedRootCertificatesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTrustedRootCertificatesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeTrustedRootCertificatesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeTrustedRootCertificatesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1146,8 +1210,10 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeTrustedRootCert
 	}
 }
 
+// ReadAttributeCurrentFabricIndex wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentFabricIndex blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCurrentFabricIndex(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCurrentFabricIndex(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1169,8 +1235,10 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCurrentFabricIndex(c
 	}
 }
 
+// SubscribeAttributeCurrentFabricIndexWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentFabricIndexWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCurrentFabricIndexWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCurrentFabricIndexWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1192,8 +1260,10 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCurrentFabricIn
 	}
 }
 
+// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1215,8 +1285,10 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeGeneratedCommandList
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1238,8 +1310,10 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeGeneratedComman
 	}
 }
 
+// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1261,8 +1335,10 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAcceptedCommandList(
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1284,8 +1360,10 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAcceptedCommand
 	}
 }
 
+// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAttributeList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1307,8 +1385,10 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAttributeList(ctx co
 	}
 }
 
+// SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1330,8 +1410,10 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAttributeListWi
 	}
 }
 
+// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1353,8 +1435,10 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFeatureMap(ctx conte
 	}
 }
 
+// SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1376,8 +1460,10 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFeatureMapWithM
 	}
 }
 
+// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1399,8 +1485,10 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeClusterRevision(ctx 
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1486,3 +1574,7 @@ type MTRBaseClusterOperationalCredentialsable interface {
 }
 
 var _ MTRBaseClusterOperationalCredentialsable = (*MTRBaseClusterOperationalCredentials)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterOperationalCredentials)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterOperationalCredentials)(nil)

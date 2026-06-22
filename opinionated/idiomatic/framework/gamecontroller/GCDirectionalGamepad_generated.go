@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A profile that supports only the directional pad, without motion or rotation.
-//
 // DirectionalGamepad is an idiomatic wrapper over the Objective-C class GCDirectionalGamepad.
+//
+// It embeds [MicroGamepad], promoting that type's methods.
+//
+// A profile that supports only the directional pad, without motion or rotation.
 type DirectionalGamepad struct {
-	objref.Handle
+	MicroGamepad
 }
 
 // DirectionalGamepadFromID adopts an existing Objective-C object as a DirectionalGamepad
@@ -25,7 +26,8 @@ func DirectionalGamepadFromID(id objc.ID) *DirectionalGamepad {
 	if id == 0 {
 		return nil
 	}
-	x := &DirectionalGamepad{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DirectionalGamepad{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func directionalGamepadAdopt(id objc.ID) *DirectionalGamepad {
 	if id == 0 {
 		return nil
 	}
-	x := &DirectionalGamepad{Handle: objref.Wrap(id)}
+	x := &DirectionalGamepad{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DirectionalGamepad) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DirectionalGamepad) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DirectionalGamepad) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDirectionalGamepad creates a new DirectionalGamepad.
@@ -64,25 +52,19 @@ func NewDirectionalGamepad() *DirectionalGamepad {
 	return directionalGamepadAdopt(_id)
 }
 
-// A Boolean value that indicates whether the directional pad reports absolute or relative values.
-//
-// WithReportsAbsoluteDpadValues sets reportsAbsoluteDpadValues and returns the receiver so calls can be chained.
+// WithReportsAbsoluteDpadValues a Boolean value that indicates whether the directional pad reports absolute or relative values.
 func (x *DirectionalGamepad) WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *DirectionalGamepad {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReportsAbsoluteDpadValues:"), reportsAbsoluteDpadValues)
 	return x
 }
 
-// A Boolean value that indicates whether the profile reports the directional pad values relative to its current orientation.
-//
-// WithAllowsRotation sets allowsRotation and returns the receiver so calls can be chained.
+// WithAllowsRotation a Boolean value that indicates whether the profile reports the directional pad values relative to its current orientation.
 func (x *DirectionalGamepad) WithAllowsRotation(allowsRotation bool) *DirectionalGamepad {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsRotation:"), allowsRotation)
 	return x
 }
 
-// The block that the profile calls when an element’s value changes.
-//
-// WithValueDidChangeHandler sets valueDidChangeHandler and returns the receiver so calls can be chained.
+// WithValueDidChangeHandler the block that the profile calls when an element’s value changes.
 func (x *DirectionalGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *DirectionalGamepad {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return x
@@ -97,3 +79,7 @@ type DirectionalGamepadable interface {
 }
 
 var _ DirectionalGamepadable = (*DirectionalGamepad)(nil)
+
+var _ MicroGamepadProvider = (*DirectionalGamepad)(nil)
+
+var _ PhysicalInputProfileProvider = (*DirectionalGamepad)(nil)

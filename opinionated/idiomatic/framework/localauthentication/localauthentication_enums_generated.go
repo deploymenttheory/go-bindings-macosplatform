@@ -26,6 +26,8 @@ const (
 	AccessControlOperationUseKeyKeyExchange AccessControlOperation = 5
 )
 
+// String returns the AccessControlOperation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AccessControlOperation) String() string {
 	switch e {
 	case AccessControlOperationCreateItem:
@@ -65,6 +67,8 @@ const (
 	BiometryTypeOpticID BiometryType = 4
 )
 
+// String returns the BiometryType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BiometryType) String() string {
 	switch e {
 	case BiometryTypeNone:
@@ -87,6 +91,8 @@ const (
 	CompanionTypeWatch CompanionType = 1
 )
 
+// String returns the CompanionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CompanionType) String() string {
 	switch e {
 	case CompanionTypeWatch:
@@ -106,6 +112,8 @@ const (
 	CredentialTypeSmartCardPIN CredentialType = -3
 )
 
+// String returns the CredentialType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CredentialType) String() string {
 	switch e {
 	case CredentialTypeApplicationPassword:
@@ -139,6 +147,8 @@ const (
 	PolicyDeviceOwnerAuthenticationWithBiometricsOrWatch Policy = 4
 )
 
+// String returns the Policy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Policy) String() string {
 	switch e {
 	case PolicyDeviceOwnerAuthenticationWithBiometrics:
@@ -167,6 +177,8 @@ const (
 	RightStateNotAuthorized RightState = 3
 )
 
+// String returns the RightState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RightState) String() string {
 	switch e {
 	case RightStateUnknown:

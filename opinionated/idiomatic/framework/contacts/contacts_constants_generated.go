@@ -1470,7 +1470,6 @@ func CNContactInstantMessageAddressesKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CNContactInstantMessageAddressesKey")))
 }
 
-// Notification posted when changes occur in another CNContactStore.
 // CNContactStoreDidChangeNotification returns the string constant CNContactStoreDidChangeNotification, for use as a dictionary key or argument.
 func CNContactStoreDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CNContactStoreDidChangeNotification")))
@@ -1517,25 +1516,21 @@ func CNPostalAddressLocalizedPropertyNameAttribute() obj.Object {
 // CNErrorDomain returns the string constant CNErrorDomain, for use as a dictionary key or argument.
 func CNErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CNErrorDomain"))) }
 
-// When available an array of one or more CNContact, CNGroup, CNContainer, CNSaveRequest, or CNFetchRequest objects for which the error code applies.
 // CNErrorUserInfoAffectedRecordsKey returns the string constant CNErrorUserInfoAffectedRecordsKey, for use as a dictionary key or argument.
 func CNErrorUserInfoAffectedRecordsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CNErrorUserInfoAffectedRecordsKey")))
 }
 
-// When available an array of one or more NSString objects for which the error code applies.
 // CNErrorUserInfoAffectedRecordIdentifiersKey returns the string constant CNErrorUserInfoAffectedRecordIdentifiersKey, for use as a dictionary key or argument.
 func CNErrorUserInfoAffectedRecordIdentifiersKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CNErrorUserInfoAffectedRecordIdentifiersKey")))
 }
 
-// An array of NSErrors for CNErrorCodeValidationMultipleErrors.
 // CNErrorUserInfoValidationErrorsKey returns the string constant CNErrorUserInfoValidationErrorsKey, for use as a dictionary key or argument.
 func CNErrorUserInfoValidationErrorsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CNErrorUserInfoValidationErrorsKey")))
 }
 
-// An array of key paths associated with a given error. For validation errors this will contain key paths to specific object properties.
 // CNErrorUserInfoKeyPathsKey returns the string constant CNErrorUserInfoKeyPathsKey, for use as a dictionary key or argument.
 func CNErrorUserInfoKeyPathsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CNErrorUserInfoKeyPathsKey")))

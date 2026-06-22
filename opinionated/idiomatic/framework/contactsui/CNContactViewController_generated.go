@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view controller that displays a new, unknown, or existing contact.
-//
 // ContactViewController is an idiomatic wrapper over the Objective-C class CNContactViewController.
+//
+// A view controller that displays a new, unknown, or existing contact.
 type ContactViewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ContactViewControllerFromID(id objc.ID) *ContactViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &ContactViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContactViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func contactViewControllerAdopt(id objc.ID) *ContactViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &ContactViewController{Handle: objref.Wrap(id)}
+	x := &ContactViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *ContactViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContactViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewContactViewController creates a new ContactViewController.
 func NewContactViewController() *ContactViewController {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNContactViewController")), objc.RegisterName("new"))
 	return contactViewControllerAdopt(_id)
 }
 
-// The contact being displayed.
-//
-// WithContact sets contact and returns the receiver so calls can be chained.
+// WithContact the contact being displayed.
 func (x *ContactViewController) WithContact(contact obj.Object) *ContactViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContact:"), objref.IDOf(contact))
 	return x
 }
 
+// Contact wraps the corresponding Objective-C method.
 func (x *ContactViewController) Contact() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contact"))
 	return obj.Wrap(_r)
 }
 
+// SetContact wraps the corresponding Objective-C method.
 func (x *ContactViewController) SetContact(contact obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContact:"), objref.IDOf(contact))
 }

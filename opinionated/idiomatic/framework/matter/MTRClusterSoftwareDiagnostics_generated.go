@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterSoftwareDiagnostics is an idiomatic wrapper over the Objective-C class MTRClusterSoftwareDiagnostics.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterSoftwareDiagnostics struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterSoftwareDiagnosticsFromID adopts an existing Objective-C object as a MTRClusterSoftwareDiagnostics
@@ -23,7 +24,8 @@ func MTRClusterSoftwareDiagnosticsFromID(id objc.ID) *MTRClusterSoftwareDiagnost
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterSoftwareDiagnostics{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterSoftwareDiagnostics{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,29 +38,13 @@ func mTRClusterSoftwareDiagnosticsAdopt(id objc.ID) *MTRClusterSoftwareDiagnosti
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterSoftwareDiagnostics{Handle: objref.Wrap(id)}
+	x := &MTRClusterSoftwareDiagnostics{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterSoftwareDiagnostics) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterSoftwareDiagnostics) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterSoftwareDiagnostics) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointIDQueue creates a new MTRClusterSoftwareDiagnostics.
+// NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterSoftwareDiagnostics {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterSoftwareDiagnostics")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -72,46 +58,55 @@ func NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointQueue(device *MTRDevice, 
 	return mTRClusterSoftwareDiagnosticsAdopt(_id)
 }
 
+// ReadAttributeThreadMetricsWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterSoftwareDiagnostics) ReadAttributeThreadMetricsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeThreadMetricsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeCurrentHeapFreeWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterSoftwareDiagnostics) ReadAttributeCurrentHeapFreeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentHeapFreeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeCurrentHeapUsedWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterSoftwareDiagnostics) ReadAttributeCurrentHeapUsedWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentHeapUsedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeCurrentHeapHighWatermarkWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterSoftwareDiagnostics) ReadAttributeCurrentHeapHighWatermarkWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentHeapHighWatermarkWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterSoftwareDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterSoftwareDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterSoftwareDiagnostics) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterSoftwareDiagnostics) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterSoftwareDiagnostics) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -132,3 +127,7 @@ type MTRClusterSoftwareDiagnosticsable interface {
 }
 
 var _ MTRClusterSoftwareDiagnosticsable = (*MTRClusterSoftwareDiagnostics)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterSoftwareDiagnostics)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterSoftwareDiagnostics)(nil)

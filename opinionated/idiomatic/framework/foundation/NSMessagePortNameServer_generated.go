@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A server takes and returns message ports.
-//
 // MessagePortNameServer is an idiomatic wrapper over the Objective-C class NSMessagePortNameServer.
+//
+// It embeds [PortNameServer], promoting that type's methods.
+//
+// A server takes and returns message ports.
 type MessagePortNameServer struct {
-	objref.Handle
+	PortNameServer
 }
 
 // MessagePortNameServerFromID adopts an existing Objective-C object as a MessagePortNameServer
@@ -25,7 +26,8 @@ func MessagePortNameServerFromID(id objc.ID) *MessagePortNameServer {
 	if id == 0 {
 		return nil
 	}
-	x := &MessagePortNameServer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MessagePortNameServer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func messagePortNameServerAdopt(id objc.ID) *MessagePortNameServer {
 	if id == 0 {
 		return nil
 	}
-	x := &MessagePortNameServer{Handle: objref.Wrap(id)}
+	x := &MessagePortNameServer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MessagePortNameServer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MessagePortNameServer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MessagePortNameServer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMessagePortNameServer creates a new MessagePortNameServer.
@@ -64,7 +52,7 @@ func NewMessagePortNameServer() *MessagePortNameServer {
 	return messagePortNameServerAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *MessagePortNameServer) WithScriptingProperties(scriptingProperties obj.Object) *MessagePortNameServer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
@@ -77,3 +65,5 @@ type MessagePortNameServerable interface {
 }
 
 var _ MessagePortNameServerable = (*MessagePortNameServer)(nil)
+
+var _ PortNameServerProvider = (*MessagePortNameServer)(nil)

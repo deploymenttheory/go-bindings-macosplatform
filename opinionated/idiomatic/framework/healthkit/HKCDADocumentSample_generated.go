@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A Clinical Document Architecture (CDA) sample that stores a single document.
-//
 // CDADocumentSample is an idiomatic wrapper over the Objective-C class HKCDADocumentSample.
+//
+// It embeds [DocumentSample], promoting that type's methods.
+//
+// A Clinical Document Architecture (CDA) sample that stores a single document.
 type CDADocumentSample struct {
-	objref.Handle
+	DocumentSample
 }
 
 // CDADocumentSampleFromID adopts an existing Objective-C object as a CDADocumentSample
@@ -25,7 +26,8 @@ func CDADocumentSampleFromID(id objc.ID) *CDADocumentSample {
 	if id == 0 {
 		return nil
 	}
-	x := &CDADocumentSample{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CDADocumentSample{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func cDADocumentSampleAdopt(id objc.ID) *CDADocumentSample {
 	if id == 0 {
 		return nil
 	}
-	x := &CDADocumentSample{Handle: objref.Wrap(id)}
+	x := &CDADocumentSample{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CDADocumentSample) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CDADocumentSample) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CDADocumentSample) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCDADocumentSample creates a new CDADocumentSample.
@@ -64,7 +52,7 @@ func NewCDADocumentSample() *CDADocumentSample {
 	return cDADocumentSampleAdopt(_id)
 }
 
-// The contents of the document. Access to each CDA instance must be authorized by the user in order for the document data to be accessible to an app.  The authorization request occurs the first time a document matches the predicate of an executed HKDocumentQuery.  This property will always be nil if the sample is returned by an HKSampleQuery or an HKAnchoredObjectQuery.
+// Document the contents of the document. Access to each CDA instance must be authorized by the user in order for the document data to be accessible to an app.  The authorization request occurs the first time a document matches the predicate of an executed HKDocumentQuery.  This property will always be nil if the sample is returned by an HKSampleQuery or an HKAnchoredObjectQuery.
 func (x *CDADocumentSample) Document() *CDADocument {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("document"))
 	return CDADocumentFromID(_r)
@@ -77,3 +65,9 @@ type CDADocumentSampleable interface {
 }
 
 var _ CDADocumentSampleable = (*CDADocumentSample)(nil)
+
+var _ DocumentSampleProvider = (*CDADocumentSample)(nil)
+
+var _ SampleProvider = (*CDADocumentSample)(nil)
+
+var _ ObjectProvider = (*CDADocumentSample)(nil)

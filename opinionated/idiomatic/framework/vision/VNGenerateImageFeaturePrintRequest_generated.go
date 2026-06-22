@@ -6,17 +6,19 @@ package vision
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An image-based request to generate feature prints from an image.
-//
 // GenerateImageFeaturePrintRequest is an idiomatic wrapper over the Objective-C class VNGenerateImageFeaturePrintRequest.
+//
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// An image-based request to generate feature prints from an image.
 type GenerateImageFeaturePrintRequest struct {
-	objref.Handle
+	ImageBasedRequest
 }
 
 // GenerateImageFeaturePrintRequestFromID adopts an existing Objective-C object as a GenerateImageFeaturePrintRequest
@@ -25,7 +27,8 @@ func GenerateImageFeaturePrintRequestFromID(id objc.ID) *GenerateImageFeaturePri
 	if id == 0 {
 		return nil
 	}
-	x := &GenerateImageFeaturePrintRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GenerateImageFeaturePrintRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func generateImageFeaturePrintRequestAdopt(id objc.ID) *GenerateImageFeaturePrin
 	if id == 0 {
 		return nil
 	}
-	x := &GenerateImageFeaturePrintRequest{Handle: objref.Wrap(id)}
+	x := &GenerateImageFeaturePrintRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GenerateImageFeaturePrintRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GenerateImageFeaturePrintRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GenerateImageFeaturePrintRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGenerateImageFeaturePrintRequest creates a new GenerateImageFeaturePrintRequest.
@@ -64,44 +53,43 @@ func NewGenerateImageFeaturePrintRequest() *GenerateImageFeaturePrintRequest {
 	return generateImageFeaturePrintRequestAdopt(_id)
 }
 
-// An optional setting that tells the algorithm how to scale an input image before generating the feature print.
-//
-// WithImageCropAndScaleOption sets imageCropAndScaleOption and returns the receiver so calls can be chained.
+// WithImageCropAndScaleOption an optional setting that tells the algorithm how to scale an input image before generating the feature print.
 func (x *GenerateImageFeaturePrintRequest) WithImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption) *GenerateImageFeaturePrintRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageCropAndScaleOption:"), imageCropAndScaleOption)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets preferBackgroundProcessing and returns the receiver so calls can be chained.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
+func (x *GenerateImageFeaturePrintRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateImageFeaturePrintRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *GenerateImageFeaturePrintRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateImageFeaturePrintRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets usesCPUOnly and returns the receiver so calls can be chained.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *GenerateImageFeaturePrintRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateImageFeaturePrintRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets revision and returns the receiver so calls can be chained.
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
 func (x *GenerateImageFeaturePrintRequest) WithRevision(revision int) *GenerateImageFeaturePrintRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
 }
 
-// Determine what type of croping and scaling action should be applied to the image before generating the feature print. The default value for this property is `VNImageCropAndScaleOptionScaleFill`.
+// ImageCropAndScaleOption determine what type of croping and scaling action should be applied to the image before generating the feature print. The default value for this property is `VNImageCropAndScaleOptionScaleFill`.
 func (x *GenerateImageFeaturePrintRequest) ImageCropAndScaleOption() ImageCropAndScaleOption {
 	_r := objc.Send[ImageCropAndScaleOption](objref.IDOf(x), objc.RegisterName("imageCropAndScaleOption"))
 	return _r
 }
 
+// SetImageCropAndScaleOption wraps the corresponding Objective-C method.
 func (x *GenerateImageFeaturePrintRequest) SetImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageCropAndScaleOption:"), imageCropAndScaleOption)
 }
@@ -110,6 +98,7 @@ func (x *GenerateImageFeaturePrintRequest) SetImageCropAndScaleOption(imageCropA
 type GenerateImageFeaturePrintRequestable interface {
 	obj.Object
 	WithImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption) *GenerateImageFeaturePrintRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateImageFeaturePrintRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateImageFeaturePrintRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *GenerateImageFeaturePrintRequest
 	WithRevision(revision int) *GenerateImageFeaturePrintRequest
@@ -118,3 +107,7 @@ type GenerateImageFeaturePrintRequestable interface {
 }
 
 var _ GenerateImageFeaturePrintRequestable = (*GenerateImageFeaturePrintRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*GenerateImageFeaturePrintRequest)(nil)
+
+var _ RequestProvider = (*GenerateImageFeaturePrintRequest)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An interface to the user’s defaults database, which stores system-wide and app-specific settings.
-//
 // UserDefaults is an idiomatic wrapper over the Objective-C class NSUserDefaults.
+//
+// An interface to the user’s defaults database, which stores system-wide and app-specific settings.
 type UserDefaults struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func UserDefaultsFromID(id objc.ID) *UserDefaults {
 	if id == 0 {
 		return nil
 	}
-	x := &UserDefaults{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UserDefaults{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func userDefaultsAdopt(id objc.ID) *UserDefaults {
 	if id == 0 {
 		return nil
 	}
-	x := &UserDefaults{Handle: objref.Wrap(id)}
+	x := &UserDefaults{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,53 +60,55 @@ func (x *UserDefaults) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UserDefaults) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewUserDefaults creates a new UserDefaults.
 func NewUserDefaults() *UserDefaults {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSUserDefaults")), objc.RegisterName("new"))
 	return userDefaultsAdopt(_id)
 }
 
-// -initWithSuiteName: initializes an instance of NSUserDefaults that searches the shared preferences search list for the domain 'suitename'. For example, using the identifier of an application group will cause the receiver to search the preferences for that group. Passing the current application's bundle identifier, NSGlobalDomain, or the corresponding CFPreferences constants is an error. Passing nil will search the default search list.
-//
-// NewUserDefaultsWithSuiteName creates a new UserDefaults.
+// NewUserDefaultsWithSuiteName -initWithSuiteName: initializes an instance of NSUserDefaults that searches the shared preferences search list for the domain 'suitename'. For example, using the identifier of an application group will cause the receiver to search the preferences for that group. Passing the current application's bundle identifier, NSGlobalDomain, or the corresponding CFPreferences constants is an error. Passing nil will search the default search list.
 func NewUserDefaultsWithSuiteName(suitename string) *UserDefaults {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUserDefaults")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSuiteName:"), purego.NSString(suitename))
 	return userDefaultsAdopt(_id)
 }
 
-// -initWithUser: is equivalent to -init
-//
-// NewUserDefaultsWithUser creates a new UserDefaults.
+// NewUserDefaultsWithUser -initWithUser: is equivalent to -init
 func NewUserDefaultsWithUser(username string) *UserDefaults {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUserDefaults")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUser:"), purego.NSString(username))
 	return userDefaultsAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UserDefaults) WithScriptingProperties(scriptingProperties obj.Object) *UserDefaults {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// -objectForKey: will search the receiver's search list for a default with the key 'defaultName' and return it. If another process has changed defaults in the search list, NSUserDefaults will automatically update to the latest values. If the key in question has been marked as ubiquitous via a Defaults Configuration File, the latest value may not be immediately available, and the registered value will be returned instead.
+// ObjectForKey -objectForKey: will search the receiver's search list for a default with the key 'defaultName' and return it. If another process has changed defaults in the search list, NSUserDefaults will automatically update to the latest values. If the key in question has been marked as ubiquitous via a Defaults Configuration File, the latest value may not be immediately available, and the registered value will be returned instead.
 func (x *UserDefaults) ObjectForKey(defaultName string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKey:"), purego.NSString(defaultName))
 	return obj.Wrap(_r)
 }
 
-// -setObject:forKey: immediately stores a value (or removes the value if nil is passed as the value) for the provided key in the search list entry for the receiver's suite name in the current user and any host, then asynchronously stores the value persistently, where it is made available to other processes.
+// SetObjectForKey -setObject:forKey: immediately stores a value (or removes the value if nil is passed as the value) for the provided key in the search list entry for the receiver's suite name in the current user and any host, then asynchronously stores the value persistently, where it is made available to other processes.
 func (x *UserDefaults) SetObjectForKey(value obj.Object, defaultName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:forKey:"), objref.IDOf(value), purego.NSString(defaultName))
 }
 
-// -removeObjectForKey: is equivalent to -[... setObject:nil forKey:defaultName]
+// RemoveObjectForKey -removeObjectForKey: is equivalent to -[... setObject:nil forKey:defaultName]
 func (x *UserDefaults) RemoveObjectForKey(defaultName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectForKey:"), purego.NSString(defaultName))
 }
 
-// -stringForKey: is equivalent to -objectForKey:, except that it will convert NSNumber values to their NSString representation. If a non-string non-number value is found, nil will be returned.
+// StringForKey -stringForKey: is equivalent to -objectForKey:, except that it will convert NSNumber values to their NSString representation. If a non-string non-number value is found, nil will be returned.
 func (x *UserDefaults) StringForKey(defaultName string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringForKey:"), purego.NSString(defaultName))
 	if _r == 0 {
@@ -113,157 +117,164 @@ func (x *UserDefaults) StringForKey(defaultName string) string {
 	return purego.GoString(_r)
 }
 
-// -arrayForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSArray.
+// ArrayForKey -arrayForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSArray.
 func (x *UserDefaults) ArrayForKey(defaultName string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrayForKey:"), purego.NSString(defaultName))
 	return obj.Wrap(_r)
 }
 
-// -dictionaryForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSDictionary.
+// DictionaryForKey -dictionaryForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSDictionary.
 func (x *UserDefaults) DictionaryForKey(defaultName string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryForKey:"), purego.NSString(defaultName))
 	return obj.Wrap(_r)
 }
 
-// -dataForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSData.
+// DataForKey -dataForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSData.
 func (x *UserDefaults) DataForKey(defaultName string) *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataForKey:"), purego.NSString(defaultName))
 	return DataFromID(_r)
 }
 
-// -stringForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSArray<NSString *>. Note that unlike -stringForKey:, NSNumbers are not converted to NSStrings.
+// StringArrayForKey -stringForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSArray<NSString *>. Note that unlike -stringForKey:, NSNumbers are not converted to NSStrings.
 func (x *UserDefaults) StringArrayForKey(defaultName string) []string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringArrayForKey:"), purego.NSString(defaultName))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// -integerForKey: is equivalent to -objectForKey:, except that it converts the returned value to an NSInteger. If the value is an NSNumber, the result of -integerValue will be returned. If the value is an NSString, it will be converted to NSInteger if possible. If the value is a boolean, it will be converted to either 1 for YES or 0 for NO. If the value is absent or can't be converted to an integer, 0 will be returned.
+// IntegerForKey -integerForKey: is equivalent to -objectForKey:, except that it converts the returned value to an NSInteger. If the value is an NSNumber, the result of -integerValue will be returned. If the value is an NSString, it will be converted to NSInteger if possible. If the value is a boolean, it will be converted to either 1 for YES or 0 for NO. If the value is absent or can't be converted to an integer, 0 will be returned.
 func (x *UserDefaults) IntegerForKey(defaultName string) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("integerForKey:"), purego.NSString(defaultName))
 	return _r
 }
 
-// -floatForKey: is similar to -integerForKey:, except that it returns a float, and boolean values will not be converted.
+// FloatForKey -floatForKey: is similar to -integerForKey:, except that it returns a float, and boolean values will not be converted.
 func (x *UserDefaults) FloatForKey(defaultName string) float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("floatForKey:"), purego.NSString(defaultName))
 	return _r
 }
 
-// -doubleForKey: is similar to -integerForKey:, except that it returns a double, and boolean values will not be converted.
+// DoubleForKey -doubleForKey: is similar to -integerForKey:, except that it returns a double, and boolean values will not be converted.
 func (x *UserDefaults) DoubleForKey(defaultName string) float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("doubleForKey:"), purego.NSString(defaultName))
 	return _r
 }
 
-// -boolForKey: is equivalent to -objectForKey:, except that it converts the returned value to a BOOL. If the value is an NSNumber, NO will be returned if the value is 0, YES otherwise. If the value is an NSString, values of "YES" or "1" will return YES, and values of "NO", "0", or any other string will return NO. If the value is absent or can't be converted to a BOOL, NO will be returned.
+// BoolForKey -boolForKey: is equivalent to -objectForKey:, except that it converts the returned value to a BOOL. If the value is an NSNumber, NO will be returned if the value is 0, YES otherwise. If the value is an NSString, values of "YES" or "1" will return YES, and values of "NO", "0", or any other string will return NO. If the value is absent or can't be converted to a BOOL, NO will be returned.
 func (x *UserDefaults) BoolForKey(defaultName string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("boolForKey:"), purego.NSString(defaultName))
 	return _r
 }
 
-// -URLForKey: is equivalent to -objectForKey: except that it converts the returned value to an NSURL. If the value is an NSString path, then it will construct a file URL to that path. If the value is an archived URL from -setURL:forKey: it will be unarchived. If the value is absent or can't be converted to an NSURL, nil will be returned.
+// URLForKey -URLForKey: is equivalent to -objectForKey: except that it converts the returned value to an NSURL. If the value is an NSString path, then it will construct a file URL to that path. If the value is an archived URL from -setURL:forKey: it will be unarchived. If the value is absent or can't be converted to an NSURL, nil will be returned.
 func (x *UserDefaults) URLForKey(defaultName string) *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLForKey:"), purego.NSString(defaultName))
 	return URLFromID(_r)
 }
 
-// -setInteger:forKey: is equivalent to -setObject:forKey: except that the value is converted from an NSInteger to an NSNumber.
+// SetIntegerForKey -setInteger:forKey: is equivalent to -setObject:forKey: except that the value is converted from an NSInteger to an NSNumber.
 func (x *UserDefaults) SetIntegerForKey(value int, defaultName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteger:forKey:"), value, purego.NSString(defaultName))
 }
 
-// -setFloat:forKey: is equivalent to -setObject:forKey: except that the value is converted from a float to an NSNumber.
+// SetFloatForKey -setFloat:forKey: is equivalent to -setObject:forKey: except that the value is converted from a float to an NSNumber.
 func (x *UserDefaults) SetFloatForKey(value float32, defaultName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloat:forKey:"), value, purego.NSString(defaultName))
 }
 
-// -setDouble:forKey: is equivalent to -setObject:forKey: except that the value is converted from a double to an NSNumber.
+// SetDoubleForKey -setDouble:forKey: is equivalent to -setObject:forKey: except that the value is converted from a double to an NSNumber.
 func (x *UserDefaults) SetDoubleForKey(value float64, defaultName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDouble:forKey:"), value, purego.NSString(defaultName))
 }
 
-// -setBool:forKey: is equivalent to -setObject:forKey: except that the value is converted from a BOOL to an NSNumber.
+// SetBoolForKey -setBool:forKey: is equivalent to -setObject:forKey: except that the value is converted from a BOOL to an NSNumber.
 func (x *UserDefaults) SetBoolForKey(value bool, defaultName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBool:forKey:"), value, purego.NSString(defaultName))
 }
 
-// -setURL:forKey is equivalent to -setObject:forKey: except that the value is archived to an NSData. Use -URLForKey: to retrieve values set this way.
+// SetURLForKey -setURL:forKey is equivalent to -setObject:forKey: except that the value is archived to an NSData. Use -URLForKey: to retrieve values set this way.
 func (x *UserDefaults) SetURLForKey(url string, defaultName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:forKey:"), rt.FileURL(url), purego.NSString(defaultName))
 }
 
-// -registerDefaults: adds the registrationDictionary to the last item in every search list. This means that after NSUserDefaults has looked for a value in every other valid location, it will look in registered defaults, making them useful as a "fallback" value. Registered defaults are never stored between runs of an application, and are visible only to the application that registers them. Default values from Defaults Configuration Files will automatically be registered.
+// RegisterDefaults -registerDefaults: adds the registrationDictionary to the last item in every search list. This means that after NSUserDefaults has looked for a value in every other valid location, it will look in registered defaults, making them useful as a "fallback" value. Registered defaults are never stored between runs of an application, and are visible only to the application that registers them. Default values from Defaults Configuration Files will automatically be registered.
 func (x *UserDefaults) RegisterDefaults(registrationDictionary obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerDefaults:"), objref.IDOf(registrationDictionary))
 }
 
-// -addSuiteNamed: adds the full search list for 'suiteName' as a sub-search-list of the receiver's. The additional search lists are searched after the current domain, but before global defaults. Passing NSGlobalDomain or the current application's bundle identifier is unsupported.
+// AddSuiteNamed -addSuiteNamed: adds the full search list for 'suiteName' as a sub-search-list of the receiver's. The additional search lists are searched after the current domain, but before global defaults. Passing NSGlobalDomain or the current application's bundle identifier is unsupported.
 func (x *UserDefaults) AddSuiteNamed(suiteName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSuiteNamed:"), purego.NSString(suiteName))
 }
 
-// -removeSuiteNamed: removes a sub-searchlist added via -addSuiteNamed:.
+// RemoveSuiteNamed -removeSuiteNamed: removes a sub-searchlist added via -addSuiteNamed:.
 func (x *UserDefaults) RemoveSuiteNamed(suiteName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeSuiteNamed:"), purego.NSString(suiteName))
 }
 
-// -dictionaryRepresentation returns a composite snapshot of the values in the receiver's search list, such that [[receiver dictionaryRepresentation] objectForKey:x] will return the same thing as [receiver objectForKey:x].
+// DictionaryRepresentation -dictionaryRepresentation returns a composite snapshot of the values in the receiver's search list, such that [[receiver dictionaryRepresentation] objectForKey:x] will return the same thing as [receiver objectForKey:x].
 func (x *UserDefaults) DictionaryRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)
 }
 
+// VolatileDomainForName wraps the corresponding Objective-C method.
 func (x *UserDefaults) VolatileDomainForName(domainName string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("volatileDomainForName:"), purego.NSString(domainName))
 	return obj.Wrap(_r)
 }
 
+// SetVolatileDomainForName wraps the corresponding Objective-C method.
 func (x *UserDefaults) SetVolatileDomainForName(domain obj.Object, domainName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolatileDomain:forName:"), objref.IDOf(domain), purego.NSString(domainName))
 }
 
+// RemoveVolatileDomainForName wraps the corresponding Objective-C method.
 func (x *UserDefaults) RemoveVolatileDomainForName(domainName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeVolatileDomainForName:"), purego.NSString(domainName))
 }
 
-// -persistentDomainNames returns an incomplete list of domains that have preferences stored in them.
+// PersistentDomainNames -persistentDomainNames returns an incomplete list of domains that have preferences stored in them.
 func (x *UserDefaults) PersistentDomainNames() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentDomainNames"))
 	return obj.Wrap(_r)
 }
 
-// -persistentDomainForName: returns a dictionary representation of the search list entry specified by 'domainName', the current user, and any host.
+// PersistentDomainForName -persistentDomainForName: returns a dictionary representation of the search list entry specified by 'domainName', the current user, and any host.
 func (x *UserDefaults) PersistentDomainForName(domainName string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentDomainForName:"), purego.NSString(domainName))
 	return obj.Wrap(_r)
 }
 
-// -setPersistentDomain:forName: replaces all values in the search list entry specified by 'domainName', the current user, and any host, with the values in 'domain'. The change will be persisted.
+// SetPersistentDomainForName -setPersistentDomain:forName: replaces all values in the search list entry specified by 'domainName', the current user, and any host, with the values in 'domain'. The change will be persisted.
 func (x *UserDefaults) SetPersistentDomainForName(domain obj.Object, domainName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPersistentDomain:forName:"), objref.IDOf(domain), purego.NSString(domainName))
 }
 
-// -removePersistentDomainForName: removes all values from the search list entry specified by 'domainName', the current user, and any host. The change is persistent.
+// RemovePersistentDomainForName -removePersistentDomainForName: removes all values from the search list entry specified by 'domainName', the current user, and any host. The change is persistent.
 func (x *UserDefaults) RemovePersistentDomainForName(domainName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removePersistentDomainForName:"), purego.NSString(domainName))
 }
 
-// -synchronize is deprecated and will be marked with the API_DEPRECATED macro in a future release. -synchronize blocks the calling thread until all in-progress set operations have completed. This is no longer necessary. Replacements for previous uses of -synchronize depend on what the intent of calling synchronize was. If you synchronized... - ...before reading in order to fetch updated values: remove the synchronize call - ...after writing in order to notify another program to read: the other program can use KVO to observe the default without needing to notify - ...before exiting in a non-app (command line tool, agent, or daemon) process: call CFPreferencesAppSynchronize(kCFPreferencesCurrentApplication) - ...for any other reason: remove the synchronize call
+// Synchronize -synchronize is deprecated and will be marked with the API_DEPRECATED macro in a future release. -synchronize blocks the calling thread until all in-progress set operations have completed. This is no longer necessary. Replacements for previous uses of -synchronize depend on what the intent of calling synchronize was. If you synchronized... - ...before reading in order to fetch updated values: remove the synchronize call - ...after writing in order to notify another program to read: the other program can use KVO to observe the default without needing to notify - ...before exiting in a non-app (command line tool, agent, or daemon) process: call CFPreferencesAppSynchronize(kCFPreferencesCurrentApplication) - ...for any other reason: remove the synchronize call
 func (x *UserDefaults) Synchronize() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("synchronize"))
 	return _r
 }
 
+// ObjectIsForcedForKey wraps the corresponding Objective-C method.
 func (x *UserDefaults) ObjectIsForcedForKey(key string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("objectIsForcedForKey:"), purego.NSString(key))
 	return _r
 }
 
+// ObjectIsForcedForKeyInDomain wraps the corresponding Objective-C method.
 func (x *UserDefaults) ObjectIsForcedForKeyInDomain(key string, domain string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("objectIsForcedForKey:inDomain:"), purego.NSString(key), purego.NSString(domain))
 	return _r
 }
 
+// VolatileDomainNames wraps the corresponding Objective-C method.
+//
 // VolatileDomainNames returns the collection as a Go slice.
 func (x *UserDefaults) VolatileDomainNames() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("volatileDomainNames"))

@@ -11,9 +11,11 @@ import (
 // ActionProvider is accepted wherever a PDFAction (or one of its subclasses) is expected.
 type ActionProvider interface {
 	objref.Object
+	isAction()
 }
 
 // AnnotationProvider is accepted wherever a PDFAnnotation (or one of its subclasses) is expected.
 type AnnotationProvider interface {
 	objref.Object
+	isAnnotation()
 }

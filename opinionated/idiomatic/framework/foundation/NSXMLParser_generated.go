@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event driven parser of XML documents (including DTD declarations).
-//
 // XMLParser is an idiomatic wrapper over the Objective-C class NSXMLParser.
+//
+// An event driven parser of XML documents (including DTD declarations).
 type XMLParser struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func XMLParserFromID(id objc.ID) *XMLParser {
 	if id == 0 {
 		return nil
 	}
-	x := &XMLParser{Handle: objref.Wrap(purego.Retain(id))}
+	x := &XMLParser{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func xMLParserAdopt(id objc.ID) *XMLParser {
 	if id == 0 {
 		return nil
 	}
-	x := &XMLParser{Handle: objref.Wrap(id)}
+	x := &XMLParser{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *XMLParser) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *XMLParser) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *XMLParser) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewXMLParserWithContentsOfURL creates a new XMLParser.
@@ -79,96 +87,109 @@ func NewXMLParserWithStream(stream *InputStream) *XMLParser {
 	return xMLParserAdopt(_id)
 }
 
-// WithShouldProcessNamespaces sets shouldProcessNamespaces and returns the receiver so calls can be chained.
+// WithShouldProcessNamespaces sets the property and returns the receiver so calls can be chained.
 func (x *XMLParser) WithShouldProcessNamespaces(shouldProcessNamespaces bool) *XMLParser {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldProcessNamespaces:"), shouldProcessNamespaces)
 	return x
 }
 
-// WithShouldReportNamespacePrefixes sets shouldReportNamespacePrefixes and returns the receiver so calls can be chained.
+// WithShouldReportNamespacePrefixes sets the property and returns the receiver so calls can be chained.
 func (x *XMLParser) WithShouldReportNamespacePrefixes(shouldReportNamespacePrefixes bool) *XMLParser {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldReportNamespacePrefixes:"), shouldReportNamespacePrefixes)
 	return x
 }
 
-// WithExternalEntityResolvingPolicy sets externalEntityResolvingPolicy and returns the receiver so calls can be chained.
+// WithExternalEntityResolvingPolicy sets the property and returns the receiver so calls can be chained.
 func (x *XMLParser) WithExternalEntityResolvingPolicy(externalEntityResolvingPolicy XMLParserExternalEntityResolvingPolicy) *XMLParser {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExternalEntityResolvingPolicy:"), externalEntityResolvingPolicy)
 	return x
 }
 
-// WithAllowedExternalEntityURLs sets allowedExternalEntityURLs and returns the receiver so calls can be chained.
+// WithAllowedExternalEntityURLs sets the property and returns the receiver so calls can be chained.
 func (x *XMLParser) WithAllowedExternalEntityURLs(allowedExternalEntityURLs obj.Object) *XMLParser {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedExternalEntityURLs:"), objref.IDOf(allowedExternalEntityURLs))
 	return x
 }
 
-// WithShouldResolveExternalEntities sets shouldResolveExternalEntities and returns the receiver so calls can be chained.
+// WithShouldResolveExternalEntities sets the property and returns the receiver so calls can be chained.
 func (x *XMLParser) WithShouldResolveExternalEntities(shouldResolveExternalEntities bool) *XMLParser {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldResolveExternalEntities:"), shouldResolveExternalEntities)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *XMLParser) WithScriptingProperties(scriptingProperties obj.Object) *XMLParser {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Parse wraps the corresponding Objective-C method.
 func (x *XMLParser) Parse() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("parse"))
 	return _r
 }
 
+// AbortParsing wraps the corresponding Objective-C method.
 func (x *XMLParser) AbortParsing() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("abortParsing"))
 }
 
+// ShouldProcessNamespaces wraps the corresponding Objective-C method.
 func (x *XMLParser) ShouldProcessNamespaces() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldProcessNamespaces"))
 	return _r
 }
 
+// SetShouldProcessNamespaces wraps the corresponding Objective-C method.
 func (x *XMLParser) SetShouldProcessNamespaces(shouldProcessNamespaces bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldProcessNamespaces:"), shouldProcessNamespaces)
 }
 
+// ShouldReportNamespacePrefixes wraps the corresponding Objective-C method.
 func (x *XMLParser) ShouldReportNamespacePrefixes() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldReportNamespacePrefixes"))
 	return _r
 }
 
+// SetShouldReportNamespacePrefixes wraps the corresponding Objective-C method.
 func (x *XMLParser) SetShouldReportNamespacePrefixes(shouldReportNamespacePrefixes bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldReportNamespacePrefixes:"), shouldReportNamespacePrefixes)
 }
 
+// ExternalEntityResolvingPolicy wraps the corresponding Objective-C method.
 func (x *XMLParser) ExternalEntityResolvingPolicy() XMLParserExternalEntityResolvingPolicy {
 	_r := objc.Send[XMLParserExternalEntityResolvingPolicy](objref.IDOf(x), objc.RegisterName("externalEntityResolvingPolicy"))
 	return _r
 }
 
+// SetExternalEntityResolvingPolicy wraps the corresponding Objective-C method.
 func (x *XMLParser) SetExternalEntityResolvingPolicy(externalEntityResolvingPolicy XMLParserExternalEntityResolvingPolicy) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExternalEntityResolvingPolicy:"), externalEntityResolvingPolicy)
 }
 
+// AllowedExternalEntityURLs wraps the corresponding Objective-C method.
 func (x *XMLParser) AllowedExternalEntityURLs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowedExternalEntityURLs"))
 	return obj.Wrap(_r)
 }
 
+// SetAllowedExternalEntityURLs wraps the corresponding Objective-C method.
 func (x *XMLParser) SetAllowedExternalEntityURLs(allowedExternalEntityURLs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedExternalEntityURLs:"), objref.IDOf(allowedExternalEntityURLs))
 }
 
+// ShouldResolveExternalEntities wraps the corresponding Objective-C method.
 func (x *XMLParser) ShouldResolveExternalEntities() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldResolveExternalEntities"))
 	return _r
 }
 
+// SetShouldResolveExternalEntities wraps the corresponding Objective-C method.
 func (x *XMLParser) SetShouldResolveExternalEntities(shouldResolveExternalEntities bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldResolveExternalEntities:"), shouldResolveExternalEntities)
 }
 
+// PublicID wraps the corresponding Objective-C method.
 func (x *XMLParser) PublicID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicID"))
 	if _r == 0 {
@@ -177,6 +198,7 @@ func (x *XMLParser) PublicID() string {
 	return purego.GoString(_r)
 }
 
+// SystemID wraps the corresponding Objective-C method.
 func (x *XMLParser) SystemID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("systemID"))
 	if _r == 0 {
@@ -185,11 +207,13 @@ func (x *XMLParser) SystemID() string {
 	return purego.GoString(_r)
 }
 
+// LineNumber wraps the corresponding Objective-C method.
 func (x *XMLParser) LineNumber() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("lineNumber"))
 	return _r
 }
 
+// ColumnNumber wraps the corresponding Objective-C method.
 func (x *XMLParser) ColumnNumber() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columnNumber"))
 	return _r

@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMBlob is an idiomatic wrapper over the Objective-C class DOMBlob.
+//
+// DOMBlob is an abstract base — you do not construct it directly. Construct one of [DOMFile] and pass it where a DOMBlob is accepted.
 type DOMBlob struct {
-	objref.Handle
+	DOMObject
 }
 
 // DOMBlobFromID adopts an existing Objective-C object as a DOMBlob
@@ -23,7 +24,8 @@ func DOMBlobFromID(id objc.ID) *DOMBlob {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMBlob{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMBlob{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,32 +38,13 @@ func dOMBlobAdopt(id objc.ID) *DOMBlob {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMBlob{Handle: objref.Wrap(id)}
+	x := &DOMBlob{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *DOMBlob) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMBlob) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMBlob) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewDOMBlob creates a new DOMBlob.
-func NewDOMBlob() *DOMBlob {
-	_id := objc.Send[objc.ID](objc.ID(_class("DOMBlob")), objc.RegisterName("new"))
-	return dOMBlobAdopt(_id)
-}
-
+// Size wraps the corresponding Objective-C method.
 func (x *DOMBlob) Size() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("size"))
 	return _r
@@ -74,3 +57,14 @@ type DOMBlobable interface {
 }
 
 var _ DOMBlobable = (*DOMBlob)(nil)
+
+// isDOMBlob marks DOMBlob — and, by embedding promotion, its
+// subclasses — as a member of the DOMBlob hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DOMBlob) isDOMBlob() {}
+
+var _ DOMBlobProvider = (*DOMBlob)(nil)
+
+var _ DOMObjectProvider = (*DOMBlob)(nil)
+
+var _ WebScriptObjectProvider = (*DOMBlob)(nil)

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// This class is the base class for setup panels in the DiscRecordingUI framework. It provides a base framework for handling device selection, media ejection and confirming or cancelling the panel.
-//
 // SetupPanel is an idiomatic wrapper over the Objective-C class DRSetupPanel.
+//
+// SetupPanel is an abstract base — you do not construct it directly. Construct one of [BurnSetupPanel], [EraseSetupPanel] and pass it where a SetupPanel is accepted.
+//
+// This class is the base class for setup panels in the DiscRecordingUI framework. It provides a base framework for handling device selection, media ejection and confirming or cancelling the panel.
 type SetupPanel struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func SetupPanelFromID(id objc.ID) *SetupPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &SetupPanel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SetupPanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func setupPanelAdopt(id objc.ID) *SetupPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &SetupPanel{Handle: objref.Wrap(id)}
+	x := &SetupPanel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,58 +62,62 @@ func (x *SetupPanel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes the receiver to use the panel from the nibName nib file.
-//
-// NewSetupPanelWithNibName creates a new SetupPanel.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SetupPanel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSetupPanelWithNibName initializes the receiver to use the panel from the nibName nib file.
 func NewSetupPanelWithNibName(nibName string) *SetupPanel {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DRSetupPanel")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNibName:"), purego.NSString(nibName))
 	return setupPanelAdopt(_id)
 }
 
-// Displays the receiver and begins its event loop. Invokes NSApplication's
+// RunSetupPanel displays the receiver and begins its event loop. Invokes NSApplication's
 func (x *SetupPanel) RunSetupPanel() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runSetupPanel"))
 	return _r
 }
 
-// Invoked when the user clicks the panel's default button.
+// Ok invoked when the user clicks the panel's default button.
 func (x *SetupPanel) Ok(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ok:"), objref.IDOf(sender))
 }
 
-// Invoked when the user clicks the panel's cancel button.
+// Cancel invoked when the user clicks the panel's cancel button.
 func (x *SetupPanel) Cancel(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel:"), objref.IDOf(sender))
 }
 
-// Invoked when the user clicks the panel's eject button.
+// Eject invoked when the user clicks the panel's eject button.
 func (x *SetupPanel) Eject(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eject:"), objref.IDOf(sender))
 }
 
-// Invoked when the user clicks the panel's open button.
+// Open invoked when the user clicks the panel's open button.
 func (x *SetupPanel) Open(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("open:"), objref.IDOf(sender))
 }
 
-// Invoked when the user clicks the panel's close button.
+// Close invoked when the user clicks the panel's close button.
 func (x *SetupPanel) Close(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close:"), objref.IDOf(sender))
 }
 
-// Invoked when the user changes the device selected in the device popup. If the device currently selected is disconnected from the machine, the device popup will remove the device from itself and select a new device. This will act as if the user changed the device selected. Because of this, device may be nil if no eligible devices are currently connected to the machine.
+// DeviceSelectionChanged invoked when the user changes the device selected in the device popup. If the device currently selected is disconnected from the machine, the device popup will remove the device from itself and select a new device. This will act as if the user changed the device selected. Because of this, device may be nil if no eligible devices are currently connected to the machine.
 func (x *SetupPanel) DeviceSelectionChanged(device obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceSelectionChanged:"), objref.IDOf(device))
 }
 
-// Invoked when the media state of the currently selected device changes. This can include media being ejected, inserted, being used by another application, etc.
+// MediaStateChanged invoked when the media state of the currently selected device changes. This can include media being ejected, inserted, being used by another application, etc.
 func (x *SetupPanel) MediaStateChanged(status obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mediaStateChanged:"), objref.IDOf(status))
 	return _r
 }
 
-// This method is called immediately before panel is displayed on the screen. Any setup to be done in preparation for display should be done here.
+// SetupForDisplay this method is called immediately before panel is displayed on the screen. Any setup to be done in preparation for display should be done here.
 func (x *SetupPanel) SetupForDisplay() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setupForDisplay"))
 }
@@ -129,3 +137,10 @@ type SetupPanelable interface {
 }
 
 var _ SetupPanelable = (*SetupPanel)(nil)
+
+// isSetupPanel marks SetupPanel — and, by embedding promotion, its
+// subclasses — as a member of the SetupPanel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SetupPanel) isSetupPanel() {}
+
+var _ SetupPanelProvider = (*SetupPanel)(nil)

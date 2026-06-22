@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains the rules for how to load and filter content in the web view.
-//
 // WKContentRuleListStore is an idiomatic wrapper over the Objective-C class WKContentRuleListStore.
+//
+// An object that contains the rules for how to load and filter content in the web view.
 type WKContentRuleListStore struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func WKContentRuleListStoreFromID(id objc.ID) *WKContentRuleListStore {
 	if id == 0 {
 		return nil
 	}
-	x := &WKContentRuleListStore{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKContentRuleListStore{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func wKContentRuleListStoreAdopt(id objc.ID) *WKContentRuleListStore {
 	if id == 0 {
 		return nil
 	}
-	x := &WKContentRuleListStore{Handle: objref.Wrap(id)}
+	x := &WKContentRuleListStore{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,22 @@ func (x *WKContentRuleListStore) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKContentRuleListStore) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKContentRuleListStore creates a new WKContentRuleListStore.
 func NewWKContentRuleListStore() *WKContentRuleListStore {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKContentRuleListStore")), objc.RegisterName("new"))
 	return wKContentRuleListStoreAdopt(_id)
 }
 
-// Compiles the specified JSON content into a new rule list and adds it to the current data store.
+// CompileContentRuleListForIdentifierEncodedContentRuleList compiles the specified JSON content into a new rule list and adds it to the current data store.
 //
 // CompileContentRuleListForIdentifierEncodedContentRuleList blocks until the operation completes or ctx is cancelled.
-func (x *WKContentRuleListStore) CompileContentRuleListForIdentifierEncodedContentRuleList(ctx context.Context, identifier string, encodedContentRuleList string) (*WKContentRuleList, error) {
+func (x *WKContentRuleListStore) CompileContentRuleListForIdentifierEncodedContentRuleList(ctx context.Context, identifier string, encodedContentRuleList string) (result *WKContentRuleList, err error) {
 	type _result struct {
 		val *WKContentRuleList
 		err error
@@ -91,10 +99,10 @@ func (x *WKContentRuleListStore) CompileContentRuleListForIdentifierEncodedConte
 	}
 }
 
-// Searches asynchronously for a specific rule list in the data store.
+// LookUpContentRuleListForIdentifier searches asynchronously for a specific rule list in the data store.
 //
 // LookUpContentRuleListForIdentifier blocks until the operation completes or ctx is cancelled.
-func (x *WKContentRuleListStore) LookUpContentRuleListForIdentifier(ctx context.Context, identifier string) (*WKContentRuleList, error) {
+func (x *WKContentRuleListStore) LookUpContentRuleListForIdentifier(ctx context.Context, identifier string) (result *WKContentRuleList, err error) {
 	type _result struct {
 		val *WKContentRuleList
 		err error
@@ -116,7 +124,7 @@ func (x *WKContentRuleListStore) LookUpContentRuleListForIdentifier(ctx context.
 	}
 }
 
-// Removes a rule list from the current data store asynchronously.
+// RemoveContentRuleListForIdentifier removes a rule list from the current data store asynchronously.
 //
 // RemoveContentRuleListForIdentifier blocks until the operation completes or ctx is cancelled.
 func (x *WKContentRuleListStore) RemoveContentRuleListForIdentifier(ctx context.Context, identifier string) error {
@@ -135,10 +143,10 @@ func (x *WKContentRuleListStore) RemoveContentRuleListForIdentifier(ctx context.
 	}
 }
 
-// Fetches the identifiers for all rule lists in the store asynchronously.
+// GetAvailableContentRuleListIdentifiers fetches the identifiers for all rule lists in the store asynchronously.
 //
 // GetAvailableContentRuleListIdentifiers blocks until the operation completes or ctx is cancelled.
-func (x *WKContentRuleListStore) GetAvailableContentRuleListIdentifiers(ctx context.Context) (obj.Object, error) {
+func (x *WKContentRuleListStore) GetAvailableContentRuleListIdentifiers(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error

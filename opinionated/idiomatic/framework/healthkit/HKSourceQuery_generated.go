@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A query that returns a list of sources, such as apps and devices, that have saved matching queries to the HealthKit store.
-//
 // SourceQuery is an idiomatic wrapper over the Objective-C class HKSourceQuery.
+//
+// It embeds [Query], promoting that type's methods.
+//
+// A query that returns a list of sources, such as apps and devices, that have saved matching queries to the HealthKit store.
 type SourceQuery struct {
-	objref.Handle
+	Query
 }
 
 // SourceQueryFromID adopts an existing Objective-C object as a SourceQuery
@@ -25,7 +26,8 @@ func SourceQueryFromID(id objc.ID) *SourceQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &SourceQuery{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SourceQuery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func sourceQueryAdopt(id objc.ID) *SourceQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &SourceQuery{Handle: objref.Wrap(id)}
+	x := &SourceQuery{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SourceQuery) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SourceQuery) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SourceQuery) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSourceQuery creates a new SourceQuery.
@@ -70,3 +58,5 @@ type SourceQueryable interface {
 }
 
 var _ SourceQueryable = (*SourceQuery)(nil)
+
+var _ QueryProvider = (*SourceQuery)(nil)

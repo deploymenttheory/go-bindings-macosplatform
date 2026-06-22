@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Object representing an OBEX connection to a remote target.
-//
 // OBEXSession is an idiomatic wrapper over the Objective-C class OBEXSession.
+//
+// OBEXSession is an abstract base — you do not construct it directly. Construct one of [IOBluetoothOBEXSession] and pass it where a OBEXSession is accepted.
+//
+// Object representing an OBEX connection to a remote target.
 type OBEXSession struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func OBEXSessionFromID(id objc.ID) *OBEXSession {
 	if id == 0 {
 		return nil
 	}
-	x := &OBEXSession{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OBEXSession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func oBEXSessionAdopt(id objc.ID) *OBEXSession {
 	if id == 0 {
 		return nil
 	}
-	x := &OBEXSession{Handle: objref.Wrap(id)}
+	x := &OBEXSession{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,43 +62,43 @@ func (x *OBEXSession) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewOBEXSession creates a new OBEXSession.
-func NewOBEXSession() *OBEXSession {
-	_id := objc.Send[objc.ID](objc.ID(_class("OBEXSession")), objc.RegisterName("new"))
-	return oBEXSessionAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OBEXSession) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Determine the maximum amount of data you can send in a particular command as an OBEX client session.
+// GetAvailableCommandPayloadLength determine the maximum amount of data you can send in a particular command as an OBEX client session.
 func (x *OBEXSession) GetAvailableCommandPayloadLength(inOpCode uint8) uint16 {
 	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getAvailableCommandPayloadLength:"), inOpCode)
 	return _r
 }
 
-// Determine the maximum amount of data you can send in a particular command response as an OBEX server session.
+// GetAvailableCommandResponsePayloadLength determine the maximum amount of data you can send in a particular command response as an OBEX server session.
 func (x *OBEXSession) GetAvailableCommandResponsePayloadLength(inOpCode uint8) uint16 {
 	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getAvailableCommandResponsePayloadLength:"), inOpCode)
 	return _r
 }
 
-// Gets current max packet length.
+// GetMaxPacketLength gets current max packet length.
 func (x *OBEXSession) GetMaxPacketLength() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getMaxPacketLength"))
 	return _r
 }
 
-// Has a successful connect packet been sent and received? This API tells you so.
+// HasOpenOBEXConnection has a successful connect packet been sent and received? This API tells you so.
 func (x *OBEXSession) HasOpenOBEXConnection() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasOpenOBEXConnection"))
 	return _r
 }
 
-// You must override this - it will be called periodically to determine if a transport connection is open or not.
+// HasOpenTransportConnection you must override this - it will be called periodically to determine if a transport connection is open or not.
 func (x *OBEXSession) HasOpenTransportConnection() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("hasOpenTransportConnection"))
 	return _r
 }
 
-// You must override this - it will be called when the transport connection should be shutdown.
+// CloseTransportConnection you must override this - it will be called when the transport connection should be shutdown.
 func (x *OBEXSession) CloseTransportConnection() int32 {
 	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("closeTransportConnection"))
 	return _r
@@ -112,3 +116,10 @@ type OBEXSessionable interface {
 }
 
 var _ OBEXSessionable = (*OBEXSession)(nil)
+
+// isOBEXSession marks OBEXSession — and, by embedding promotion, its
+// subclasses — as a member of the OBEXSession hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *OBEXSession) isOBEXSession() {}
+
+var _ OBEXSessionProvider = (*OBEXSession)(nil)

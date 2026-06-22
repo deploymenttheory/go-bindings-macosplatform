@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration object to initiate a frame processor and use temporal noise-filter processor.
-//
 // TemporalNoiseFilterConfiguration is an idiomatic wrapper over the Objective-C class VTTemporalNoiseFilterConfiguration.
+//
+// A configuration object to initiate a frame processor and use temporal noise-filter processor.
 type TemporalNoiseFilterConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TemporalNoiseFilterConfigurationFromID(id objc.ID) *TemporalNoiseFilterConf
 	if id == 0 {
 		return nil
 	}
-	x := &TemporalNoiseFilterConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TemporalNoiseFilterConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func temporalNoiseFilterConfigurationAdopt(id objc.ID) *TemporalNoiseFilterConfi
 	if id == 0 {
 		return nil
 	}
-	x := &TemporalNoiseFilterConfiguration{Handle: objref.Wrap(id)}
+	x := &TemporalNoiseFilterConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,32 @@ func (x *TemporalNoiseFilterConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new temporal noise-processor configuration.
-//
-// NewTemporalNoiseFilterConfigurationWithFrameWidthFrameHeightSourcePixelFormat creates a new TemporalNoiseFilterConfiguration.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TemporalNoiseFilterConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTemporalNoiseFilterConfigurationWithFrameWidthFrameHeightSourcePixelFormat creates a new temporal noise-processor configuration.
 func NewTemporalNoiseFilterConfigurationWithFrameWidthFrameHeightSourcePixelFormat(frameWidth int, frameHeight int, sourcePixelFormat int) *TemporalNoiseFilterConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VTTemporalNoiseFilterConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameWidth:frameHeight:sourcePixelFormat:"), frameWidth, frameHeight, sourcePixelFormat)
 	return temporalNoiseFilterConfigurationAdopt(_id)
 }
 
-// Width of source frame in pixels.
+// FrameWidth width of source frame in pixels.
 func (x *TemporalNoiseFilterConfiguration) FrameWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameWidth"))
 	return _r
 }
 
-// Height of source frame in pixels.
+// FrameHeight height of source frame in pixels.
 func (x *TemporalNoiseFilterConfiguration) FrameHeight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameHeight"))
 	return _r
 }
 
-// Supported pixel formats for source frames for current configuration.
+// FrameSupportedPixelFormats supported pixel formats for source frames for current configuration.
 //
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (x *TemporalNoiseFilterConfiguration) FrameSupportedPixelFormats() []obj.Object {
@@ -87,25 +93,25 @@ func (x *TemporalNoiseFilterConfiguration) FrameSupportedPixelFormats() []obj.Ob
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+// SourcePixelBufferAttributes pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (x *TemporalNoiseFilterConfiguration) SourcePixelBufferAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourcePixelBufferAttributes"))
 	return obj.Wrap(_r)
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+// DestinationPixelBufferAttributes pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (x *TemporalNoiseFilterConfiguration) DestinationPixelBufferAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationPixelBufferAttributes"))
 	return obj.Wrap(_r)
 }
 
-// Maximum number of future reference frames that the processor can use to process a source frame.
+// NextFrameCount maximum number of future reference frames that the processor can use to process a source frame.
 func (x *TemporalNoiseFilterConfiguration) NextFrameCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("nextFrameCount"))
 	return _r
 }
 
-// Maximum number of past reference frames that the processor can use to process a source frame.
+// PreviousFrameCount maximum number of past reference frames that the processor can use to process a source frame.
 func (x *TemporalNoiseFilterConfiguration) PreviousFrameCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("previousFrameCount"))
 	return _r

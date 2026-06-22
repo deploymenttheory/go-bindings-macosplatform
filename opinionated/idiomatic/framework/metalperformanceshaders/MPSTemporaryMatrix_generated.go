@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A matrix allocated on GPU private memory.
-//
 // TemporaryMatrix is an idiomatic wrapper over the Objective-C class MPSTemporaryMatrix.
+//
+// It embeds [Matrix], promoting that type's methods.
+//
+// A matrix allocated on GPU private memory.
 type TemporaryMatrix struct {
-	objref.Handle
+	Matrix
 }
 
 // TemporaryMatrixFromID adopts an existing Objective-C object as a TemporaryMatrix
@@ -25,7 +26,8 @@ func TemporaryMatrixFromID(id objc.ID) *TemporaryMatrix {
 	if id == 0 {
 		return nil
 	}
-	x := &TemporaryMatrix{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TemporaryMatrix{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func temporaryMatrixAdopt(id objc.ID) *TemporaryMatrix {
 	if id == 0 {
 		return nil
 	}
-	x := &TemporaryMatrix{Handle: objref.Wrap(id)}
+	x := &TemporaryMatrix{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *TemporaryMatrix) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TemporaryMatrix) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TemporaryMatrix) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewTemporaryMatrix creates a new TemporaryMatrix.
@@ -64,20 +52,19 @@ func NewTemporaryMatrix() *TemporaryMatrix {
 	return temporaryMatrixAdopt(_id)
 }
 
-// The number of times a temporary matrix may be read by a MPSMatrix... kernel before its contents become undefined. MPSTemporaryMatrices must release their underlying buffers for reuse immediately after last use. So as to facilitate *prompt* convenient memory recycling, each time a MPSTemporaryMatrix is read by a MPSMatrix... -encode... method, its readCount is automatically decremented. When the readCount reaches 0, the underlying buffer is automatically made available for reuse to MPS for its own needs and for other MPSTemporaryMatrices prior to return from the -encode.. function. The contents of the buffer become undefined at this time. By default, the readCount is initialized to 1, indicating a matrix that may be overwritten any number of times, but read only once. You may change the readCount as desired to allow MPSMatrixKernels to read the MPSTemporaryMatrix additional times. However, it is an error to change the readCount once it is zero. It is an error to read or write to a MPSTemporaryMatrix with a zero readCount. You may set the readCount to 0 yourself to cause the underlying buffer to be returned to MPS. Writing to a MPSTemporaryMatrix does not adjust the readCount. The Metal API Validation layer will assert if a MPSTemporaryMatrix is deallocated with non-zero readCount to help identify cases when resources are not returned promptly.
-//
-// WithReadCount sets readCount and returns the receiver so calls can be chained.
+// WithReadCount the number of times a temporary matrix may be read by a MPSMatrix... kernel before its contents become undefined. MPSTemporaryMatrices must release their underlying buffers for reuse immediately after last use. So as to facilitate *prompt* convenient memory recycling, each time a MPSTemporaryMatrix is read by a MPSMatrix... -encode... method, its readCount is automatically decremented. When the readCount reaches 0, the underlying buffer is automatically made available for reuse to MPS for its own needs and for other MPSTemporaryMatrices prior to return from the -encode.. function. The contents of the buffer become undefined at this time. By default, the readCount is initialized to 1, indicating a matrix that may be overwritten any number of times, but read only once. You may change the readCount as desired to allow MPSMatrixKernels to read the MPSTemporaryMatrix additional times. However, it is an error to change the readCount once it is zero. It is an error to read or write to a MPSTemporaryMatrix with a zero readCount. You may set the readCount to 0 yourself to cause the underlying buffer to be returned to MPS. Writing to a MPSTemporaryMatrix does not adjust the readCount. The Metal API Validation layer will assert if a MPSTemporaryMatrix is deallocated with non-zero readCount to help identify cases when resources are not returned promptly.
 func (x *TemporaryMatrix) WithReadCount(readCount int) *TemporaryMatrix {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 	return x
 }
 
-// The number of times a temporary matrix may be read by a MPSMatrix... kernel before its contents become undefined. MPSTemporaryMatrices must release their underlying buffers for reuse immediately after last use. So as to facilitate *prompt* convenient memory recycling, each time a MPSTemporaryMatrix is read by a MPSMatrix... -encode... method, its readCount is automatically decremented. When the readCount reaches 0, the underlying buffer is automatically made available for reuse to MPS for its own needs and for other MPSTemporaryMatrices prior to return from the -encode.. function. The contents of the buffer become undefined at this time. By default, the readCount is initialized to 1, indicating a matrix that may be overwritten any number of times, but read only once. You may change the readCount as desired to allow MPSMatrixKernels to read the MPSTemporaryMatrix additional times. However, it is an error to change the readCount once it is zero. It is an error to read or write to a MPSTemporaryMatrix with a zero readCount. You may set the readCount to 0 yourself to cause the underlying buffer to be returned to MPS. Writing to a MPSTemporaryMatrix does not adjust the readCount. The Metal API Validation layer will assert if a MPSTemporaryMatrix is deallocated with non-zero readCount to help identify cases when resources are not returned promptly.
+// ReadCount the number of times a temporary matrix may be read by a MPSMatrix... kernel before its contents become undefined. MPSTemporaryMatrices must release their underlying buffers for reuse immediately after last use. So as to facilitate *prompt* convenient memory recycling, each time a MPSTemporaryMatrix is read by a MPSMatrix... -encode... method, its readCount is automatically decremented. When the readCount reaches 0, the underlying buffer is automatically made available for reuse to MPS for its own needs and for other MPSTemporaryMatrices prior to return from the -encode.. function. The contents of the buffer become undefined at this time. By default, the readCount is initialized to 1, indicating a matrix that may be overwritten any number of times, but read only once. You may change the readCount as desired to allow MPSMatrixKernels to read the MPSTemporaryMatrix additional times. However, it is an error to change the readCount once it is zero. It is an error to read or write to a MPSTemporaryMatrix with a zero readCount. You may set the readCount to 0 yourself to cause the underlying buffer to be returned to MPS. Writing to a MPSTemporaryMatrix does not adjust the readCount. The Metal API Validation layer will assert if a MPSTemporaryMatrix is deallocated with non-zero readCount to help identify cases when resources are not returned promptly.
 func (x *TemporaryMatrix) ReadCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("readCount"))
 	return _r
 }
 
+// SetReadCount wraps the corresponding Objective-C method.
 func (x *TemporaryMatrix) SetReadCount(readCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 }
@@ -91,3 +78,5 @@ type TemporaryMatrixable interface {
 }
 
 var _ TemporaryMatrixable = (*TemporaryMatrix)(nil)
+
+var _ MatrixProvider = (*TemporaryMatrix)(nil)

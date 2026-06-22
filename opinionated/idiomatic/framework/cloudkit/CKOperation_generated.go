@@ -13,9 +13,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract base class for all operations that execute in a database.
-//
 // Operation is an idiomatic wrapper over the Objective-C class CKOperation.
+//
+// Operation is an abstract base — you do not construct it directly. Construct one of [AcceptSharesOperation], [DatabaseOperation], [DiscoverAllUserIdentitiesOperation], [DiscoverUserIdentitiesOperation], [FetchShareMetadataOperation], [FetchShareParticipantsOperation], [ShareRequestAccessOperation] and pass it where a Operation is accepted.
+//
+// The abstract base class for all operations that execute in a database.
 type Operation struct {
 	objref.Handle
 }
@@ -26,7 +28,8 @@ func OperationFromID(id objc.ID) *Operation {
 	if id == 0 {
 		return nil
 	}
-	x := &Operation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Operation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +42,8 @@ func operationAdopt(id objc.ID) *Operation {
 	if id == 0 {
 		return nil
 	}
-	x := &Operation{Handle: objref.Wrap(id)}
+	x := &Operation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,102 +63,90 @@ func (x *Operation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewOperation creates a new Operation.
-func NewOperation() *Operation {
-	_id := objc.Send[objc.ID](objc.ID(_class("CKOperation")), objc.RegisterName("new"))
-	return operationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Operation) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The operation’s configuration.
-//
-// WithConfiguration sets configuration and returns the receiver so calls can be chained.
+// WithConfiguration the operation’s configuration.
 func (x *Operation) WithConfiguration(configuration *OperationConfiguration) *Operation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
-// The operation’s group.
-//
-// WithGroup sets group and returns the receiver so calls can be chained.
+// WithGroup the operation’s group.
 func (x *Operation) WithGroup(group *OperationGroup) *Operation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation.
-//
-// WithLongLivedOperationWasPersistedBlock sets longLivedOperationWasPersistedBlock and returns the receiver so calls can be chained.
+// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
 func (x *Operation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *Operation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
 	return x
 }
 
-// The operation's container.
-//
-// WithContainer sets container and returns the receiver so calls can be chained.
+// WithContainer the operation's container.
 func (x *Operation) WithContainer(container *Container) *Operation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network.
-//
-// WithAllowsCellularAccess sets allowsCellularAccess and returns the receiver so calls can be chained.
+// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
 func (x *Operation) WithAllowsCellularAccess(allowsCellularAccess bool) *Operation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived.
-//
-// WithLongLived sets longLived and returns the receiver so calls can be chained.
+// WithLongLived a Boolean value that indicates whether the operation is long-lived.
 func (x *Operation) WithLongLived(longLived bool) *Operation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The timeout interval when waiting for additional data.
-//
-// WithTimeoutIntervalForRequest sets timeoutIntervalForRequest and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
 func (x *Operation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *Operation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can use.
-//
-// WithTimeoutIntervalForResource sets timeoutIntervalForResource and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
 func (x *Operation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *Operation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
-// The operation's configuration.
+// Configuration the operation's configuration.
 func (x *Operation) Configuration() *OperationConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
 	return OperationConfigurationFromID(_r)
 }
 
+// SetConfiguration wraps the corresponding Objective-C method.
 func (x *Operation) SetConfiguration(configuration *OperationConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 }
 
-// The operation's group.
+// Group the operation's group.
 func (x *Operation) Group() *OperationGroup {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("group"))
 	return OperationGroupFromID(_r)
 }
 
+// SetGroup wraps the corresponding Objective-C method.
 func (x *Operation) SetGroup(group *OperationGroup) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 }
 
-// A unique identifier for a long-lived operation. Pass this property's value to the “CKContainer/longLivedOperation(for:)“ method to fetch the corresponding long-lived operation. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// OperationID a unique identifier for a long-lived operation. Pass this property's value to the “CKContainer/longLivedOperation(for:)“ method to fetch the corresponding long-lived operation. For more information, see <doc:CKOperation#Long-Lived-Operations>.
 func (x *Operation) OperationID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationID"))
 	return obj.Wrap(_r)
 }
 
+// SetLongLivedOperationWasPersistedBlock wraps the corresponding Objective-C method.
+//
 // SetLongLivedOperationWasPersistedBlock blocks until the operation completes or ctx is cancelled.
 func (x *Operation) SetLongLivedOperationWasPersistedBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -170,52 +162,57 @@ func (x *Operation) SetLongLivedOperationWasPersistedBlock(ctx context.Context) 
 	}
 }
 
-// The operation's container.
+// Container the operation's container.
 func (x *Operation) Container() *Container {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("container"))
 	return ContainerFromID(_r)
 }
 
+// SetContainer wraps the corresponding Objective-C method.
 func (x *Operation) SetContainer(container *Container) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network.
+// AllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
 func (x *Operation) AllowsCellularAccess() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCellularAccess"))
 	return _r
 }
 
+// SetAllowsCellularAccess wraps the corresponding Objective-C method.
 func (x *Operation) SetAllowsCellularAccess(allowsCellularAccess bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 }
 
-// A Boolean value that indicates whether the operation is long-lived.
+// IsLongLived a Boolean value that indicates whether the operation is long-lived.
 func (x *Operation) IsLongLived() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLongLived"))
 	return _r
 }
 
+// SetLongLived wraps the corresponding Objective-C method.
 func (x *Operation) SetLongLived(longLived bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 }
 
-// The timeout interval when waiting for additional data.
+// TimeoutIntervalForRequest the timeout interval when waiting for additional data.
 func (x *Operation) TimeoutIntervalForRequest() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeoutIntervalForRequest"))
 	return _r
 }
 
+// SetTimeoutIntervalForRequest wraps the corresponding Objective-C method.
 func (x *Operation) SetTimeoutIntervalForRequest(timeoutIntervalForRequest float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 }
 
-// The maximum amount of time that a resource request can use.
+// TimeoutIntervalForResource the maximum amount of time that a resource request can use.
 func (x *Operation) TimeoutIntervalForResource() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeoutIntervalForResource"))
 	return _r
 }
 
+// SetTimeoutIntervalForResource wraps the corresponding Objective-C method.
 func (x *Operation) SetTimeoutIntervalForResource(timeoutIntervalForResource float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 }
@@ -250,3 +247,10 @@ type Operationable interface {
 }
 
 var _ Operationable = (*Operation)(nil)
+
+// isOperation marks Operation — and, by embedding promotion, its
+// subclasses — as a member of the Operation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Operation) isOperation() {}
+
+var _ OperationProvider = (*Operation)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type of challenge where a player must beat the leaderboard score of another player.
-//
 // ScoreChallenge is an idiomatic wrapper over the Objective-C class GKScoreChallenge.
+//
+// It embeds [Challenge], promoting that type's methods.
+//
+// A type of challenge where a player must beat the leaderboard score of another player.
 type ScoreChallenge struct {
-	objref.Handle
+	Challenge
 }
 
 // ScoreChallengeFromID adopts an existing Objective-C object as a ScoreChallenge
@@ -25,7 +26,8 @@ func ScoreChallengeFromID(id objc.ID) *ScoreChallenge {
 	if id == 0 {
 		return nil
 	}
-	x := &ScoreChallenge{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScoreChallenge{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func scoreChallengeAdopt(id objc.ID) *ScoreChallenge {
 	if id == 0 {
 		return nil
 	}
-	x := &ScoreChallenge{Handle: objref.Wrap(id)}
+	x := &ScoreChallenge{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ScoreChallenge) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ScoreChallenge) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ScoreChallenge) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewScoreChallenge creates a new ScoreChallenge.
@@ -64,13 +52,13 @@ func NewScoreChallenge() *ScoreChallenge {
 	return scoreChallengeAdopt(_id)
 }
 
-// The score to meet to satisfy this challenge
+// Score the score to meet to satisfy this challenge
 func (x *ScoreChallenge) Score() *Score {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("score"))
 	return ScoreFromID(_r)
 }
 
-// The leaderboard entry to meet to satisfy this challenge
+// LeaderboardEntry the leaderboard entry to meet to satisfy this challenge
 func (x *ScoreChallenge) LeaderboardEntry() *LeaderboardEntry {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leaderboardEntry"))
 	return LeaderboardEntryFromID(_r)
@@ -84,3 +72,5 @@ type ScoreChallengeable interface {
 }
 
 var _ ScoreChallengeable = (*ScoreChallenge)(nil)
+
+var _ ChallengeProvider = (*ScoreChallenge)(nil)

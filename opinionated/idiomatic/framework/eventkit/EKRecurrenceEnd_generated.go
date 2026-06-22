@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that defines the end of a recurrence rule.
-//
 // RecurrenceEnd is an idiomatic wrapper over the Objective-C class EKRecurrenceEnd.
+//
+// A class that defines the end of a recurrence rule.
 type RecurrenceEnd struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RecurrenceEndFromID(id objc.ID) *RecurrenceEnd {
 	if id == 0 {
 		return nil
 	}
-	x := &RecurrenceEnd{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RecurrenceEnd{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func recurrenceEndAdopt(id objc.ID) *RecurrenceEnd {
 	if id == 0 {
 		return nil
 	}
-	x := &RecurrenceEnd{Handle: objref.Wrap(id)}
+	x := &RecurrenceEnd{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *RecurrenceEnd) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RecurrenceEnd) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRecurrenceEnd creates a new RecurrenceEnd.
 func NewRecurrenceEnd() *RecurrenceEnd {
 	_id := objc.Send[objc.ID](objc.ID(_class("EKRecurrenceEnd")), objc.RegisterName("new"))
 	return recurrenceEndAdopt(_id)
 }
 
-// The end date of this recurrence, or nil if it's count-based.
+// EndDate the end date of this recurrence, or nil if it's count-based.
 func (x *RecurrenceEnd) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
-// The maximum occurrence count, or 0 if it's date-based.
+// OccurrenceCount the maximum occurrence count, or 0 if it's date-based.
 func (x *RecurrenceEnd) OccurrenceCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("occurrenceCount"))
 	return _r

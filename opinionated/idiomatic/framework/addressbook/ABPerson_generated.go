@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that encapsulates all information about a person in the Address Book database.
-//
 // Person is an idiomatic wrapper over the Objective-C class ABPerson.
+//
+// It embeds [Record], promoting that type's methods.
+//
+// An object that encapsulates all information about a person in the Address Book database.
 type Person struct {
-	objref.Handle
+	Record
 }
 
 // PersonFromID adopts an existing Objective-C object as a Person
@@ -25,7 +26,8 @@ func PersonFromID(id objc.ID) *Person {
 	if id == 0 {
 		return nil
 	}
-	x := &Person{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Person{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func personAdopt(id objc.ID) *Person {
 	if id == 0 {
 		return nil
 	}
-	x := &Person{Handle: objref.Wrap(id)}
+	x := &Person{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *Person) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Person) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Person) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPersonWithVCardRepresentation creates a new Person.
@@ -65,31 +53,31 @@ func NewPersonWithVCardRepresentation(vCardData obj.Object) *Person {
 	return personAdopt(_id)
 }
 
-// Returns an array of the address book groups that this person belongs to.
+// ParentGroups returns an array of the address book groups that this person belongs to.
 func (x *Person) ParentGroups() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentGroups"))
 	return obj.Wrap(_r)
 }
 
-// Returns the array of all person records that are linked to the person this record represents.
+// LinkedPeople returns the array of all person records that are linked to the person this record represents.
 func (x *Person) LinkedPeople() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("linkedPeople"))
 	return obj.Wrap(_r)
 }
 
-// Returns the vCard representation of the person record as a data object in vCard format.
+// VCardRepresentation returns the vCard representation of the person record as a data object in vCard format.
 func (x *Person) VCardRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vCardRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// Sets the image for this person to the given data.
+// SetImageData sets the image for this person to the given data.
 func (x *Person) SetImageData(data obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setImageData:"), objref.IDOf(data))
 	return _r
 }
 
-// Returns data that contains a picture of this person.
+// ImageData returns data that contains a picture of this person.
 func (x *Person) ImageData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageData"))
 	return obj.Wrap(_r)
@@ -106,3 +94,5 @@ type Personable interface {
 }
 
 var _ Personable = (*Person)(nil)
+
+var _ RecordProvider = (*Person)(nil)

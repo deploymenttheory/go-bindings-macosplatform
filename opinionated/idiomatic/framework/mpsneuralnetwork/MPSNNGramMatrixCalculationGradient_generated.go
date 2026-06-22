@@ -6,15 +6,18 @@ package mpsneuralnetwork
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NNGramMatrixCalculationGradient is an idiomatic wrapper over the Objective-C class MPSNNGramMatrixCalculationGradient.
+//
+// It embeds [CNNGradientKernel], promoting that type's methods.
 type NNGramMatrixCalculationGradient struct {
-	objref.Handle
+	CNNGradientKernel
 }
 
 // NNGramMatrixCalculationGradientFromID adopts an existing Objective-C object as a NNGramMatrixCalculationGradient
@@ -23,7 +26,8 @@ func NNGramMatrixCalculationGradientFromID(id objc.ID) *NNGramMatrixCalculationG
 	if id == 0 {
 		return nil
 	}
-	x := &NNGramMatrixCalculationGradient{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNGramMatrixCalculationGradient{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +40,10 @@ func nNGramMatrixCalculationGradientAdopt(id objc.ID) *NNGramMatrixCalculationGr
 	if id == 0 {
 		return nil
 	}
-	x := &NNGramMatrixCalculationGradient{Handle: objref.Wrap(id)}
+	x := &NNGramMatrixCalculationGradient{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NNGramMatrixCalculationGradient) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNGramMatrixCalculationGradient) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNGramMatrixCalculationGradient) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNNGramMatrixCalculationGradient creates a new NNGramMatrixCalculationGradient.
@@ -62,108 +52,103 @@ func NewNNGramMatrixCalculationGradient() *NNGramMatrixCalculationGradient {
 	return nNGramMatrixCalculationGradientAdopt(_id)
 }
 
-// Scaling factor for the output. Default: 1.0f. NOTE: the value for alpha is automatically adjusted by the
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha scaling factor for the output. Default: 1.0f. NOTE: the value for alpha is automatically adjusted by the
 func (x *NNGramMatrixCalculationGradient) WithAlpha(alpha float32) *NNGramMatrixCalculationGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// Offset in the kernel reference frame to position the kernel in the X dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
-//
-// WithKernelOffsetX sets kernelOffsetX and returns the receiver so calls can be chained.
+// WithKernelOffsetX offset in the kernel reference frame to position the kernel in the X dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
 func (x *NNGramMatrixCalculationGradient) WithKernelOffsetX(kernelOffsetX int) *NNGramMatrixCalculationGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelOffsetX:"), kernelOffsetX)
 	return x
 }
 
-// Offset in the kernel reference frame to position the kernel in the Y dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
-//
-// WithKernelOffsetY sets kernelOffsetY and returns the receiver so calls can be chained.
+// WithKernelOffsetY offset in the kernel reference frame to position the kernel in the Y dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
 func (x *NNGramMatrixCalculationGradient) WithKernelOffsetY(kernelOffsetY int) *NNGramMatrixCalculationGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelOffsetY:"), kernelOffsetY)
 	return x
 }
 
-// The number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
-//
-// WithDestinationFeatureChannelOffset sets destinationFeatureChannelOffset and returns the receiver so calls can be chained.
+// WithPrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
+func (x *NNGramMatrixCalculationGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNGramMatrixCalculationGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
+func (x *NNGramMatrixCalculationGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNGramMatrixCalculationGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
+func (x *NNGramMatrixCalculationGradient) WithClipRect(clipRect metal.MTLRegion) *NNGramMatrixCalculationGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
 func (x *NNGramMatrixCalculationGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNGramMatrixCalculationGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// The number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-//
-// WithPrimarySourceFeatureChannelOffset sets primarySourceFeatureChannelOffset and returns the receiver so calls can be chained.
+// WithPrimarySourceFeatureChannelOffset the number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
 func (x *NNGramMatrixCalculationGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *NNGramMatrixCalculationGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelOffset:"), primarySourceFeatureChannelOffset)
 	return x
 }
 
-// The number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-//
-// WithSecondarySourceFeatureChannelOffset sets secondarySourceFeatureChannelOffset and returns the receiver so calls can be chained.
+// WithSecondarySourceFeatureChannelOffset the number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
 func (x *NNGramMatrixCalculationGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *NNGramMatrixCalculationGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelOffset:"), secondarySourceFeatureChannelOffset)
 	return x
 }
 
-// The maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithPrimarySourceFeatureChannelMaxCount sets primarySourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+// WithPrimarySourceFeatureChannelMaxCount the maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 func (x *NNGramMatrixCalculationGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *NNGramMatrixCalculationGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelMaxCount:"), primarySourceFeatureChannelMaxCount)
 	return x
 }
 
-// The maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithSecondarySourceFeatureChannelMaxCount sets secondarySourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+// WithSecondarySourceFeatureChannelMaxCount the maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 func (x *NNGramMatrixCalculationGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *NNGramMatrixCalculationGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelMaxCount:"), secondarySourceFeatureChannelMaxCount)
 	return x
 }
 
-// The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
-//
-// WithPrimaryStrideInPixelsX sets primaryStrideInPixelsX and returns the receiver so calls can be chained.
+// WithPrimaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
 func (x *NNGramMatrixCalculationGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNGramMatrixCalculationGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
 	return x
 }
 
-// The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
-//
-// WithPrimaryStrideInPixelsY sets primaryStrideInPixelsY and returns the receiver so calls can be chained.
+// WithPrimaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
 func (x *NNGramMatrixCalculationGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNGramMatrixCalculationGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
 	return x
 }
 
-// The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
-//
-// WithSecondaryStrideInPixelsX sets secondaryStrideInPixelsX and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
 func (x *NNGramMatrixCalculationGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNGramMatrixCalculationGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 	return x
 }
 
-// The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
-//
-// WithSecondaryStrideInPixelsY sets secondaryStrideInPixelsY and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
 func (x *NNGramMatrixCalculationGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNGramMatrixCalculationGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 	return x
 }
 
-// Scaling factor for the output. Default: 1.0f. NOTE: the value for alpha is automatically adjusted by the
+// Alpha scaling factor for the output. Default: 1.0f. NOTE: the value for alpha is automatically adjusted by the
 func (x *NNGramMatrixCalculationGradient) Alpha() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
 	return _r
 }
 
+// SetAlpha wraps the corresponding Objective-C method.
 func (x *NNGramMatrixCalculationGradient) SetAlpha(alpha float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }
@@ -174,6 +159,9 @@ type NNGramMatrixCalculationGradientable interface {
 	WithAlpha(alpha float32) *NNGramMatrixCalculationGradient
 	WithKernelOffsetX(kernelOffsetX int) *NNGramMatrixCalculationGradient
 	WithKernelOffsetY(kernelOffsetY int) *NNGramMatrixCalculationGradient
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNGramMatrixCalculationGradient
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNGramMatrixCalculationGradient
+	WithClipRect(clipRect metal.MTLRegion) *NNGramMatrixCalculationGradient
 	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNGramMatrixCalculationGradient
 	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *NNGramMatrixCalculationGradient
 	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *NNGramMatrixCalculationGradient
@@ -188,3 +176,7 @@ type NNGramMatrixCalculationGradientable interface {
 }
 
 var _ NNGramMatrixCalculationGradientable = (*NNGramMatrixCalculationGradient)(nil)
+
+var _ CNNGradientKernelProvider = (*NNGramMatrixCalculationGradient)(nil)
+
+var _ CNNBinaryKernelProvider = (*NNGramMatrixCalculationGradient)(nil)

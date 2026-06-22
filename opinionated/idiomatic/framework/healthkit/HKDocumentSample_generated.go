@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that represents a health document in the HealthKit store.
-//
 // DocumentSample is an idiomatic wrapper over the Objective-C class HKDocumentSample.
+//
+// DocumentSample is an abstract base — you do not construct it directly. Construct one of [CDADocumentSample] and pass it where a DocumentSample is accepted.
+//
+// An abstract class that represents a health document in the HealthKit store.
 type DocumentSample struct {
-	objref.Handle
+	Sample
 }
 
 // DocumentSampleFromID adopts an existing Objective-C object as a DocumentSample
@@ -25,7 +26,8 @@ func DocumentSampleFromID(id objc.ID) *DocumentSample {
 	if id == 0 {
 		return nil
 	}
-	x := &DocumentSample{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DocumentSample{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,32 +40,13 @@ func documentSampleAdopt(id objc.ID) *DocumentSample {
 	if id == 0 {
 		return nil
 	}
-	x := &DocumentSample{Handle: objref.Wrap(id)}
+	x := &DocumentSample{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *DocumentSample) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DocumentSample) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DocumentSample) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewDocumentSample creates a new DocumentSample.
-func NewDocumentSample() *DocumentSample {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKDocumentSample")), objc.RegisterName("new"))
-	return documentSampleAdopt(_id)
-}
-
+// DocumentType wraps the corresponding Objective-C method.
 func (x *DocumentSample) DocumentType() *DocumentType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentType"))
 	return DocumentTypeFromID(_r)
@@ -76,3 +59,14 @@ type DocumentSampleable interface {
 }
 
 var _ DocumentSampleable = (*DocumentSample)(nil)
+
+// isDocumentSample marks DocumentSample — and, by embedding promotion, its
+// subclasses — as a member of the DocumentSample hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DocumentSample) isDocumentSample() {}
+
+var _ DocumentSampleProvider = (*DocumentSample)(nil)
+
+var _ SampleProvider = (*DocumentSample)(nil)
+
+var _ ObjectProvider = (*DocumentSample)(nil)

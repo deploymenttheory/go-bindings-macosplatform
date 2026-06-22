@@ -23,7 +23,8 @@ func StateResourceListFromID(id objc.ID) *StateResourceList {
 	if id == 0 {
 		return nil
 	}
-	x := &StateResourceList{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StateResourceList{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func stateResourceListAdopt(id objc.ID) *StateResourceList {
 	if id == 0 {
 		return nil
 	}
-	x := &StateResourceList{Handle: objref.Wrap(id)}
+	x := &StateResourceList{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,18 +58,24 @@ func (x *StateResourceList) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StateResourceList) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewStateResourceList creates a new StateResourceList.
 func NewStateResourceList() *StateResourceList {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSStateResourceList")), objc.RegisterName("new"))
 	return stateResourceListAdopt(_id)
 }
 
-// append a texture to the resource list
+// AppendTexture append a texture to the resource list
 func (x *StateResourceList) AppendTexture(descriptor obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendTexture:"), objref.IDOf(descriptor))
 }
 
-// append a buffer to the resource list
+// AppendBuffer append a buffer to the resource list
 func (x *StateResourceList) AppendBuffer(size int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendBuffer:"), size)
 }

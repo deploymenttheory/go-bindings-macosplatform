@@ -6,6 +6,7 @@ package mpsneuralnetwork
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -23,7 +24,8 @@ func MatrixSumFromID(id objc.ID) *MatrixSum {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixSum{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatrixSum{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +38,8 @@ func matrixSumAdopt(id objc.ID) *MatrixSum {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixSum{Handle: objref.Wrap(id)}
+	x := &MatrixSum{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,60 +59,83 @@ func (x *MatrixSum) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MatrixSum) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMatrixSum creates a new MatrixSum.
 func NewMatrixSum() *MatrixSum {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixSum")), objc.RegisterName("new"))
 	return matrixSumAdopt(_id)
 }
 
-// Specifies a neuron activation function to be used. This method can be used to add a neuron activation funtion of given type with associated scalar parameters A, B, and C that are shared across all output values. Note that this method can only be used to specify neurons which are specified by three (or fewer) parameters shared across all output values (or channels, in CNN nomenclature). It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. An MPSMatrixSum kernel is initialized with a default neuron function of MPSCNNNeuronTypeNone.
+// WithResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.
+func (x *MatrixSum) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSum {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
+	return x
+}
+
+// SetNeuronTypeParameterAParameterBParameterC specifies a neuron activation function to be used. This method can be used to add a neuron activation funtion of given type with associated scalar parameters A, B, and C that are shared across all output values. Note that this method can only be used to specify neurons which are specified by three (or fewer) parameters shared across all output values (or channels, in CNN nomenclature). It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. An MPSMatrixSum kernel is initialized with a default neuron function of MPSCNNNeuronTypeNone.
 func (x *MatrixSum) SetNeuronTypeParameterAParameterBParameterC(neuronType CNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:"), neuronType, parameterA, parameterB, parameterC)
 }
 
-// Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+// NeuronType getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (x *MatrixSum) NeuronType() CNNNeuronType {
 	_r := objc.Send[CNNNeuronType](objref.IDOf(x), objc.RegisterName("neuronType"))
 	return _r
 }
 
-// The number of rows to sum.
+// Rows the number of rows to sum.
 func (x *MatrixSum) Rows() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rows"))
 	return _r
 }
 
-// The number of columns to sum.
+// Columns the number of columns to sum.
 func (x *MatrixSum) Columns() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columns"))
 	return _r
 }
 
-// The number of matrices to sum.
+// Count the number of matrices to sum.
 func (x *MatrixSum) Count() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
 	return _r
 }
 
-// The transposition used to initialize the kernel.
+// Transpose the transposition used to initialize the kernel.
 func (x *MatrixSum) Transpose() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("transpose"))
 	return _r
 }
 
-// Neuron parameter A.
+// ResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.
+func (x *MatrixSum) ResultMatrixOrigin() metal.MTLOrigin {
+	_r := objc.Send[metal.MTLOrigin](objref.IDOf(x), objc.RegisterName("resultMatrixOrigin"))
+	return _r
+}
+
+// SetResultMatrixOrigin wraps the corresponding Objective-C method.
+func (x *MatrixSum) SetResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
+}
+
+// NeuronParameterA neuron parameter A.
 func (x *MatrixSum) NeuronParameterA() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterA"))
 	return _r
 }
 
-// Neuron parameter B.
+// NeuronParameterB neuron parameter B.
 func (x *MatrixSum) NeuronParameterB() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterB"))
 	return _r
 }
 
-// Neuron parameter C.
+// NeuronParameterC neuron parameter C.
 func (x *MatrixSum) NeuronParameterC() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterC"))
 	return _r
@@ -118,12 +144,15 @@ func (x *MatrixSum) NeuronParameterC() float32 {
 // MatrixSumable is the interface implemented by [MatrixSum], for mocking and DI.
 type MatrixSumable interface {
 	obj.Object
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSum
 	SetNeuronTypeParameterAParameterBParameterC(neuronType CNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
 	NeuronType() CNNNeuronType
 	Rows() int
 	Columns() int
 	Count() int
 	Transpose() bool
+	ResultMatrixOrigin() metal.MTLOrigin
+	SetResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin)
 	NeuronParameterA() float32
 	NeuronParameterB() float32
 	NeuronParameterC() float32

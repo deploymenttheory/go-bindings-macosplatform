@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a single mail compose window.
-//
 // ComposeSession is an idiomatic wrapper over the Objective-C class MEComposeSession.
+//
+// An object that represents a single mail compose window.
 type ComposeSession struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ComposeSessionFromID(id objc.ID) *ComposeSession {
 	if id == 0 {
 		return nil
 	}
-	x := &ComposeSession{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ComposeSession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func composeSessionAdopt(id objc.ID) *ComposeSession {
 	if id == 0 {
 		return nil
 	}
-	x := &ComposeSession{Handle: objref.Wrap(id)}
+	x := &ComposeSession{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,30 +60,36 @@ func (x *ComposeSession) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ComposeSession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewComposeSession creates a new ComposeSession.
 func NewComposeSession() *ComposeSession {
 	_id := objc.Send[objc.ID](objc.ID(_class("MEComposeSession")), objc.RegisterName("new"))
 	return composeSessionAdopt(_id)
 }
 
-// Refreshes the compose session with the extension’s new information.
+// ReloadSession refreshes the compose session with the extension’s new information.
 func (x *ComposeSession) ReloadSession() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadSession"))
 }
 
-// A unique identifier for the session.
+// SessionID a unique identifier for the session.
 func (x *ComposeSession) SessionID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sessionID"))
 	return obj.Wrap(_r)
 }
 
-// An instance of
+// MailMessage an instance of
 func (x *ComposeSession) MailMessage() *Message {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mailMessage"))
 	return MessageFromID(_r)
 }
 
-// An instance of
+// ComposeContext an instance of
 func (x *ComposeSession) ComposeContext() *ComposeContext {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("composeContext"))
 	return ComposeContextFromID(_r)

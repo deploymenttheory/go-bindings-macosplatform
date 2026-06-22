@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Retrieve the user’s shortcuts and make shortcut suggestions.
-//
 // VoiceShortcutCenter is an idiomatic wrapper over the Objective-C class INVoiceShortcutCenter.
+//
+// Retrieve the user’s shortcuts and make shortcut suggestions.
 type VoiceShortcutCenter struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func VoiceShortcutCenterFromID(id objc.ID) *VoiceShortcutCenter {
 	if id == 0 {
 		return nil
 	}
-	x := &VoiceShortcutCenter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VoiceShortcutCenter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func voiceShortcutCenterAdopt(id objc.ID) *VoiceShortcutCenter {
 	if id == 0 {
 		return nil
 	}
-	x := &VoiceShortcutCenter{Handle: objref.Wrap(id)}
+	x := &VoiceShortcutCenter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,22 @@ func (x *VoiceShortcutCenter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VoiceShortcutCenter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVoiceShortcutCenter creates a new VoiceShortcutCenter.
 func NewVoiceShortcutCenter() *VoiceShortcutCenter {
 	_id := objc.Send[objc.ID](objc.ID(_class("INVoiceShortcutCenter")), objc.RegisterName("new"))
 	return voiceShortcutCenterAdopt(_id)
 }
 
-// Retrieves all shortcuts added to Siri for your app.
+// GetAllVoiceShortcutsWithCompletion retrieves all shortcuts added to Siri for your app.
 //
 // GetAllVoiceShortcutsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *VoiceShortcutCenter) GetAllVoiceShortcutsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *VoiceShortcutCenter) GetAllVoiceShortcutsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -91,10 +99,10 @@ func (x *VoiceShortcutCenter) GetAllVoiceShortcutsWithCompletion(ctx context.Con
 	}
 }
 
-// Retrieves a shortcut the user added to Siri.
+// GetVoiceShortcutWithIdentifierCompletion retrieves a shortcut the user added to Siri.
 //
 // GetVoiceShortcutWithIdentifierCompletion blocks until the operation completes or ctx is cancelled.
-func (x *VoiceShortcutCenter) GetVoiceShortcutWithIdentifierCompletion(ctx context.Context, identifier obj.Object) (*VoiceShortcut, error) {
+func (x *VoiceShortcutCenter) GetVoiceShortcutWithIdentifierCompletion(ctx context.Context, identifier obj.Object) (result *VoiceShortcut, err error) {
 	type _result struct {
 		val *VoiceShortcut
 		err error
@@ -116,7 +124,7 @@ func (x *VoiceShortcutCenter) GetVoiceShortcutWithIdentifierCompletion(ctx conte
 	}
 }
 
-// Suggests shortcuts the user may want to add to Siri.
+// SetShortcutSuggestions suggests shortcuts the user may want to add to Siri.
 func (x *VoiceShortcutCenter) SetShortcutSuggestions(suggestions []*Shortcut) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortcutSuggestions:"), purego.SliceToNSArray(suggestions, func(_v *Shortcut) objc.ID { return objref.IDOf(_v) }))
 }

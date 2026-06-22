@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A query that performs statistical calculations over a set of matching quantity samples, and returns the results.
-//
 // StatisticsQuery is an idiomatic wrapper over the Objective-C class HKStatisticsQuery.
+//
+// It embeds [Query], promoting that type's methods.
+//
+// A query that performs statistical calculations over a set of matching quantity samples, and returns the results.
 type StatisticsQuery struct {
-	objref.Handle
+	Query
 }
 
 // StatisticsQueryFromID adopts an existing Objective-C object as a StatisticsQuery
@@ -25,7 +26,8 @@ func StatisticsQueryFromID(id objc.ID) *StatisticsQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &StatisticsQuery{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StatisticsQuery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func statisticsQueryAdopt(id objc.ID) *StatisticsQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &StatisticsQuery{Handle: objref.Wrap(id)}
+	x := &StatisticsQuery{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *StatisticsQuery) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StatisticsQuery) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StatisticsQuery) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewStatisticsQuery creates a new StatisticsQuery.
@@ -70,3 +58,5 @@ type StatisticsQueryable interface {
 }
 
 var _ StatisticsQueryable = (*StatisticsQuery)(nil)
+
+var _ QueryProvider = (*StatisticsQuery)(nil)

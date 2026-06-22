@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A service that you use to validate the instance of your app running on a device.
-//
 // AppAttestService is an idiomatic wrapper over the Objective-C class DCAppAttestService.
+//
+// A service that you use to validate the instance of your app running on a device.
 type AppAttestService struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func AppAttestServiceFromID(id objc.ID) *AppAttestService {
 	if id == 0 {
 		return nil
 	}
-	x := &AppAttestService{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AppAttestService{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func appAttestServiceAdopt(id objc.ID) *AppAttestService {
 	if id == 0 {
 		return nil
 	}
-	x := &AppAttestService{Handle: objref.Wrap(id)}
+	x := &AppAttestService{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,22 @@ func (x *AppAttestService) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AppAttestService) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAppAttestService creates a new AppAttestService.
 func NewAppAttestService() *AppAttestService {
 	_id := objc.Send[objc.ID](objc.ID(_class("DCAppAttestService")), objc.RegisterName("new"))
 	return appAttestServiceAdopt(_id)
 }
 
-// Creates a new cryptographic key for use with the App Attest service.
+// GenerateKey creates a new cryptographic key for use with the App Attest service.
 //
 // GenerateKey blocks until the operation completes or ctx is cancelled.
-func (x *AppAttestService) GenerateKey(ctx context.Context) (string, error) {
+func (x *AppAttestService) GenerateKey(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -91,10 +99,10 @@ func (x *AppAttestService) GenerateKey(ctx context.Context) (string, error) {
 	}
 }
 
-// Asks Apple to attest to the validity of a generated cryptographic key.
+// AttestKeyClientDataHash asks Apple to attest to the validity of a generated cryptographic key.
 //
 // AttestKeyClientDataHash blocks until the operation completes or ctx is cancelled.
-func (x *AppAttestService) AttestKeyClientDataHash(ctx context.Context, keyId string, clientDataHash obj.Object) (obj.Object, error) {
+func (x *AppAttestService) AttestKeyClientDataHash(ctx context.Context, keyId string, clientDataHash obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -116,10 +124,10 @@ func (x *AppAttestService) AttestKeyClientDataHash(ctx context.Context, keyId st
 	}
 }
 
-// Creates a block of data that demonstrates the legitimacy of an instance of your app running on a device.
+// GenerateAssertionClientDataHash creates a block of data that demonstrates the legitimacy of an instance of your app running on a device.
 //
 // GenerateAssertionClientDataHash blocks until the operation completes or ctx is cancelled.
-func (x *AppAttestService) GenerateAssertionClientDataHash(ctx context.Context, keyId string, clientDataHash obj.Object) (obj.Object, error) {
+func (x *AppAttestService) GenerateAssertionClientDataHash(ctx context.Context, keyId string, clientDataHash obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -141,7 +149,7 @@ func (x *AppAttestService) GenerateAssertionClientDataHash(ctx context.Context, 
 	}
 }
 
-// A Boolean value that indicates whether a particular device provides the App Attest service. > Important: Not all device types support the App Attest service, so check > for support before using the service. > > If you read “DeviceCheck/DCAppAttestService/supported“ from an app running > on a Mac device, the value is > <doc://com.apple.documentation/documentation/swift/false>. This includes > Mac Catalyst apps, and iOS or iPadOS apps running on Apple silicon. If you read “DeviceCheck/DCAppAttestService/supported“ from within an app extension, the value might be <doc://com.apple.documentation/documentation/swift/true> or <doc://com.apple.documentation/documentation/swift/false>, depending on the extension type. However, most extensions don’t support App Attest. The “DeviceCheck/DCAppAttestService/generateKeyWithCompletionHandler:“ method fails when you call it from an app extension, regardless of the value of “DeviceCheck/DCAppAttestService/supported“. The only app extensions that support App Attest are watchOS extensions in watchOS 9 or later. For these extensions, you can use the results from “DeviceCheck/DCAppAttestService/supported“ to indicate whether your WatchKit extension bypasses attestation.
+// IsSupported a Boolean value that indicates whether a particular device provides the App Attest service. > Important: Not all device types support the App Attest service, so check > for support before using the service. > > If you read “DeviceCheck/DCAppAttestService/supported“ from an app running > on a Mac device, the value is > <doc://com.apple.documentation/documentation/swift/false>. This includes > Mac Catalyst apps, and iOS or iPadOS apps running on Apple silicon. If you read “DeviceCheck/DCAppAttestService/supported“ from within an app extension, the value might be <doc://com.apple.documentation/documentation/swift/true> or <doc://com.apple.documentation/documentation/swift/false>, depending on the extension type. However, most extensions don’t support App Attest. The “DeviceCheck/DCAppAttestService/generateKeyWithCompletionHandler:“ method fails when you call it from an app extension, regardless of the value of “DeviceCheck/DCAppAttestService/supported“. The only app extensions that support App Attest are watchOS extensions in watchOS 9 or later. For these extensions, you can use the results from “DeviceCheck/DCAppAttestService/supported“ to indicate whether your WatchKit extension bypasses attestation.
 func (x *AppAttestService) IsSupported() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSupported"))
 	return _r

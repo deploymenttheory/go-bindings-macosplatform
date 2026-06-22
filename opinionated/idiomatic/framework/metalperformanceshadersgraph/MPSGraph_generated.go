@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The optimized representation of a compute graph of operations and tensors.
-//
 // Graph is an idiomatic wrapper over the Objective-C class MPSGraph.
+//
+// It embeds [GraphObject], promoting that type's methods.
+//
+// The optimized representation of a compute graph of operations and tensors.
 type Graph struct {
-	objref.Handle
+	GraphObject
 }
 
 // GraphFromID adopts an existing Objective-C object as a Graph
@@ -25,7 +26,8 @@ func GraphFromID(id objc.ID) *Graph {
 	if id == 0 {
 		return nil
 	}
-	x := &Graph{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Graph{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func graphAdopt(id objc.ID) *Graph {
 	if id == 0 {
 		return nil
 	}
-	x := &Graph{Handle: objref.Wrap(id)}
+	x := &Graph{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *Graph) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Graph) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Graph) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGraph creates a new Graph.
@@ -64,25 +52,24 @@ func NewGraph() *Graph {
 	return graphAdopt(_id)
 }
 
-// Options for the graph.
-//
-// WithOptions sets options and returns the receiver so calls can be chained.
+// WithOptions options for the graph.
 func (x *Graph) WithOptions(options GraphOptions) *Graph {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
 	return x
 }
 
-// Options for the graph. The default value is `MPSGraphOptionsDefault`.
+// Options options for the graph. The default value is `MPSGraphOptionsDefault`.
 func (x *Graph) Options() GraphOptions {
 	_r := objc.Send[GraphOptions](objref.IDOf(x), objc.RegisterName("options"))
 	return _r
 }
 
+// SetOptions wraps the corresponding Objective-C method.
 func (x *Graph) SetOptions(options GraphOptions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
 }
 
-// Array of all the placeholder tensors.
+// PlaceholderTensors array of all the placeholder tensors.
 //
 // PlaceholderTensors returns the collection as a Go slice.
 func (x *Graph) PlaceholderTensors() []*GraphTensor {
@@ -90,1885 +77,1885 @@ func (x *Graph) PlaceholderTensors() []*GraphTensor {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Calculates a partial derivative of primaryTensor with respect to the tensors.
+// GradientForPrimaryTensorWithTensorsName calculates a partial derivative of primaryTensor with respect to the tensors.
 func (x *Graph) GradientForPrimaryTensorWithTensorsName(primaryTensor *GraphTensor, tensors []*GraphTensor, name string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientForPrimaryTensor:withTensors:name:"), objref.IDOf(primaryTensor), purego.SliceToNSArray(tensors, func(_v *GraphTensor) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
 	return obj.Wrap(_r)
 }
 
-// Computes the ReLU (rectified linear activation unit) function with the input tensor.
+// ReLUWithTensorName computes the ReLU (rectified linear activation unit) function with the input tensor.
 func (x *Graph) ReLUWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reLUWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the gradient of the ReLU (rectified linear activation unit) function using the incoming gradient.
+// ReLUGradientWithIncomingGradientSourceTensorName computes the gradient of the ReLU (rectified linear activation unit) function using the incoming gradient.
 func (x *Graph) ReLUGradientWithIncomingGradientSourceTensorName(gradient *GraphTensor, source *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reLUGradientWithIncomingGradient:sourceTensor:name:"), objref.IDOf(gradient), objref.IDOf(source), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the sigmoid operation on an input tensor.
+// SigmoidWithTensorName computes the sigmoid operation on an input tensor.
 func (x *Graph) SigmoidWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sigmoidWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the gradient of the sigmoid function using the incoming gradient tensor.
+// SigmoidGradientWithIncomingGradientSourceTensorName computes the gradient of the sigmoid function using the incoming gradient tensor.
 func (x *Graph) SigmoidGradientWithIncomingGradientSourceTensorName(gradient *GraphTensor, source *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sigmoidGradientWithIncomingGradient:sourceTensor:name:"), objref.IDOf(gradient), objref.IDOf(source), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the softmax function on the input tensor along the specified axis.
+// SoftMaxWithTensorAxisName computes the softmax function on the input tensor along the specified axis.
 func (x *Graph) SoftMaxWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("softMaxWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the gradient of the softmax function along the specified axis using the incoming gradient tensor.
+// SoftMaxGradientWithIncomingGradientSourceTensorAxisName computes the gradient of the softmax function along the specified axis using the incoming gradient tensor.
 func (x *Graph) SoftMaxGradientWithIncomingGradientSourceTensorAxisName(gradient *GraphTensor, source *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("softMaxGradientWithIncomingGradient:sourceTensor:axis:name:"), objref.IDOf(gradient), objref.IDOf(source), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the leaky rectified linear unit (ReLU) activation function on the input tensor.
+// LeakyReLUWithTensorAlphaName computes the leaky rectified linear unit (ReLU) activation function on the input tensor.
 func (x *Graph) LeakyReLUWithTensorAlphaName(tensor *GraphTensor, alpha float64, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leakyReLUWithTensor:alpha:name:"), objref.IDOf(tensor), alpha, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the leaky rectified linear unit (ReLU) activation function on the input tensor.
+// LeakyReLUWithTensorAlphaTensorName computes the leaky rectified linear unit (ReLU) activation function on the input tensor.
 func (x *Graph) LeakyReLUWithTensorAlphaTensorName(tensor *GraphTensor, alphaTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leakyReLUWithTensor:alphaTensor:name:"), objref.IDOf(tensor), objref.IDOf(alphaTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the gradient of the leaky rectified linear unit (ReLU) activation.
+// LeakyReLUGradientWithIncomingGradientSourceTensorAlphaTensorName computes the gradient of the leaky rectified linear unit (ReLU) activation.
 func (x *Graph) LeakyReLUGradientWithIncomingGradientSourceTensorAlphaTensorName(gradient *GraphTensor, source *GraphTensor, alphaTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leakyReLUGradientWithIncomingGradient:sourceTensor:alphaTensor:name:"), objref.IDOf(gradient), objref.IDOf(source), objref.IDOf(alphaTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Copies the input tensor values into the output, behaving as an identity operation.
+// IdentityWithTensorName copies the input tensor values into the output, behaving as an identity operation.
 func (x *Graph) IdentityWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identityWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the natural exponent to the input tensor elements.
+// ExponentWithTensorName applies the natural exponent to the input tensor elements.
 func (x *Graph) ExponentWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exponentWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies an exponent with base 2 to the input tensor elements.
+// ExponentBase2WithTensorName applies an exponent with base 2 to the input tensor elements.
 func (x *Graph) ExponentBase2WithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exponentBase2WithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies an exponent with base 10 to the input tensor elements.
+// ExponentBase10WithTensorName applies an exponent with base 10 to the input tensor elements.
 func (x *Graph) ExponentBase10WithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exponentBase10WithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the natural logarithm to the input tensor elements.
+// LogarithmWithTensorName computes the natural logarithm to the input tensor elements.
 func (x *Graph) LogarithmWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logarithmWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the logarithm with base 2 to the input tensor elements.
+// LogarithmBase2WithTensorName computes the logarithm with base 2 to the input tensor elements.
 func (x *Graph) LogarithmBase2WithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logarithmBase2WithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the logarithm with base 10 to the input tensor elements.
+// LogarithmBase10WithTensorName computes the logarithm with base 10 to the input tensor elements.
 func (x *Graph) LogarithmBase10WithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logarithmBase10WithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the square operation to the input tensor elements.
+// SquareWithTensorName applies the square operation to the input tensor elements.
 func (x *Graph) SquareWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("squareWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the square root operation to the input tensor elements.
+// SquareRootWithTensorName applies the square root operation to the input tensor elements.
 func (x *Graph) SquareRootWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("squareRootWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the reciprocal square root operation to the input tensor elements.
+// ReciprocalSquareRootWithTensorName applies the reciprocal square root operation to the input tensor elements.
 func (x *Graph) ReciprocalSquareRootWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reciprocalSquareRootWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the reverse square root operation to the input tensor elements.
+// ReverseSquareRootWithTensorName applies the reverse square root operation to the input tensor elements.
 func (x *Graph) ReverseSquareRootWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reverseSquareRootWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the reciprocal operation to the input tensor elements.
+// ReciprocalWithTensorName applies the reciprocal operation to the input tensor elements.
 func (x *Graph) ReciprocalWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reciprocalWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the absolute values of the input tensor elements.
+// AbsoluteWithTensorName returns the absolute values of the input tensor elements.
 func (x *Graph) AbsoluteWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("absoluteWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the absolute square of the input tensor elements.
+// AbsoluteSquareWithTensorName returns the absolute square of the input tensor elements.
 func (x *Graph) AbsoluteSquareWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("absoluteSquareWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies negative to the input tensor elements.
+// NegativeWithTensorName applies negative to the input tensor elements.
 func (x *Graph) NegativeWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("negativeWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the sign of the input tensor elements.
+// SignWithTensorName returns the sign of the input tensor elements.
 func (x *Graph) SignWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the sign bit of the input tensor elements.
+// SignbitWithTensorName returns the sign bit of the input tensor elements.
 func (x *Graph) SignbitWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signbitWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the ceiling operation to the input tensor elements.
+// CeilWithTensorName applies the ceiling operation to the input tensor elements.
 func (x *Graph) CeilWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ceilWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the floor operation to the input tensor elements.
+// FloorWithTensorName applies the floor operation to the input tensor elements.
 func (x *Graph) FloorWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("floorWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Rounds the input tensor elements.
+// RoundWithTensorName rounds the input tensor elements.
 func (x *Graph) RoundWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("roundWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Rounds the input tensor elements by rounding to nearest even.
+// RintWithTensorName rounds the input tensor elements by rounding to nearest even.
 func (x *Graph) RintWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rintWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the sine operation to the input tensor elements.
+// SinWithTensorName applies the sine operation to the input tensor elements.
 func (x *Graph) SinWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sinWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the cosine operation to the input tensor elements.
+// CosWithTensorName applies the cosine operation to the input tensor elements.
 func (x *Graph) CosWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cosWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the tangent operation to the input tensor elements.
+// TanWithTensorName applies the tangent operation to the input tensor elements.
 func (x *Graph) TanWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tanWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the hyperbolic sine operation to the input tensor elements.
+// SinhWithTensorName applies the hyperbolic sine operation to the input tensor elements.
 func (x *Graph) SinhWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sinhWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the hyperbolic cosine operation to the input tensor elements.
+// CoshWithTensorName applies the hyperbolic cosine operation to the input tensor elements.
 func (x *Graph) CoshWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coshWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the hyperbolic tangent operation to the input tensor elements.
+// TanhWithTensorName applies the hyperbolic tangent operation to the input tensor elements.
 func (x *Graph) TanhWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tanhWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the inverse sine operation to the input tensor elements.
+// AsinWithTensorName applies the inverse sine operation to the input tensor elements.
 func (x *Graph) AsinWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("asinWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the inverse cosine operation to the input tensor elements.
+// AcosWithTensorName applies the inverse cosine operation to the input tensor elements.
 func (x *Graph) AcosWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("acosWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the inverse tangent operation to the input tensor elements.
+// AtanWithTensorName applies the inverse tangent operation to the input tensor elements.
 func (x *Graph) AtanWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("atanWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the inverse hyperbolic sine operation to the input tensor elements.
+// AsinhWithTensorName applies the inverse hyperbolic sine operation to the input tensor elements.
 func (x *Graph) AsinhWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("asinhWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the inverse hyperbolic cosine operation to the input tensor elements.
+// AcoshWithTensorName applies the inverse hyperbolic cosine operation to the input tensor elements.
 func (x *Graph) AcoshWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("acoshWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the inverse hyperbolic tangent operation to the input tensor elements.
+// AtanhWithTensorName applies the inverse hyperbolic tangent operation to the input tensor elements.
 func (x *Graph) AtanhWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("atanhWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the logical NOT operation to the input tensor elements.
+// NotWithTensorName applies the logical NOT operation to the input tensor elements.
 func (x *Graph) NotWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Checks if the input tensor elements are infinite or not.
+// IsInfiniteWithTensorName checks if the input tensor elements are infinite or not.
 func (x *Graph) IsInfiniteWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isInfiniteWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Checks if the input tensor elements are finite or not.
+// IsFiniteWithTensorName checks if the input tensor elements are finite or not.
 func (x *Graph) IsFiniteWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isFiniteWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Checks if the input tensor elements are NaN or not.
+// IsNaNWithTensorName checks if the input tensor elements are NaN or not.
 func (x *Graph) IsNaNWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isNaNWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the error function to the input tensor elements.
+// ErfWithTensorName applies the error function to the input tensor elements.
 func (x *Graph) ErfWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("erfWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the truncate operation to the input tensor elements.
+// TruncateWithTensorName applies the truncate operation to the input tensor elements.
 func (x *Graph) TruncateWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("truncateWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Applies the bitwise NOT operation to the input tensor element.
+// BitwiseNOTWithTensorName applies the bitwise NOT operation to the input tensor element.
 func (x *Graph) BitwiseNOTWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bitwiseNOTWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the population count of the input tensor elements.
+// BitwisePopulationCountWithTensorName returns the population count of the input tensor elements.
 func (x *Graph) BitwisePopulationCountWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bitwisePopulationCountWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the complex conjugate of the input tensor elements.
+// ConjugateWithTensorName returns the complex conjugate of the input tensor elements.
 func (x *Graph) ConjugateWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("conjugateWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Adds two input tensors.
+// AdditionWithPrimaryTensorSecondaryTensorName adds two input tensors.
 func (x *Graph) AdditionWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("additionWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Subtracts the second input tensor from the first.
+// SubtractionWithPrimaryTensorSecondaryTensorName subtracts the second input tensor from the first.
 func (x *Graph) SubtractionWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtractionWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Multiplies two input tensors.
+// MultiplicationWithPrimaryTensorSecondaryTensorName multiplies two input tensors.
 func (x *Graph) MultiplicationWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("multiplicationWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Divides the first input tensor by the second.
+// DivisionWithPrimaryTensorSecondaryTensorName divides the first input tensor by the second.
 func (x *Graph) DivisionWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("divisionWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the remainder obtained by dividing the first input tensor by the second.
+// ModuloWithPrimaryTensorSecondaryTensorName returns the remainder obtained by dividing the first input tensor by the second.
 func (x *Graph) ModuloWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moduloWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the elementwise result of raising the first tensor to the power of the second tensor.
+// PowerWithPrimaryTensorSecondaryTensorName returns the elementwise result of raising the first tensor to the power of the second tensor.
 func (x *Graph) PowerWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("powerWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the elementwise minimum of the input tensors.
+// MinimumWithPrimaryTensorSecondaryTensorName returns the elementwise minimum of the input tensors.
 func (x *Graph) MinimumWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minimumWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the elementwise maximum of the input tensors.
+// MaximumWithPrimaryTensorSecondaryTensorName returns the elementwise maximum of the input tensors.
 func (x *Graph) MaximumWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maximumWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the elementwise minimum of the input tensors, while propagating NaN values.
+// MinimumWithNaNPropagationWithPrimaryTensorSecondaryTensorName returns the elementwise minimum of the input tensors, while propagating NaN values.
 func (x *Graph) MinimumWithNaNPropagationWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minimumWithNaNPropagationWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the elementwise maximum of the input tensors, while propagating NaN values.
+// MaximumWithNaNPropagationWithPrimaryTensorSecondaryTensorName returns the elementwise maximum of the input tensors, while propagating NaN values.
 func (x *Graph) MaximumWithNaNPropagationWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maximumWithNaNPropagationWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the elementwise equality check of the input tensors.
+// EqualWithPrimaryTensorSecondaryTensorName returns the elementwise equality check of the input tensors.
 func (x *Graph) EqualWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("equalWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the elementwise inequality check of the input tensors.
+// NotEqualWithPrimaryTensorSecondaryTensorName returns the elementwise inequality check of the input tensors.
 func (x *Graph) NotEqualWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notEqualWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Checks in an elementwise manner if the first input tensor is less than the second.
+// LessThanWithPrimaryTensorSecondaryTensorName checks in an elementwise manner if the first input tensor is less than the second.
 func (x *Graph) LessThanWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lessThanWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Checks in an elementwise manner if the first input tensor is less than or equal to the second.
+// LessThanOrEqualToWithPrimaryTensorSecondaryTensorName checks in an elementwise manner if the first input tensor is less than or equal to the second.
 func (x *Graph) LessThanOrEqualToWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lessThanOrEqualToWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Checks in an elementwise manner if the first input tensor is greater than the second.
+// GreaterThanWithPrimaryTensorSecondaryTensorName checks in an elementwise manner if the first input tensor is greater than the second.
 func (x *Graph) GreaterThanWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("greaterThanWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Checks in an elementwise manner if the first input tensor is greater than or equal to the second.
+// GreaterThanOrEqualToWithPrimaryTensorSecondaryTensorName checks in an elementwise manner if the first input tensor is greater than or equal to the second.
 func (x *Graph) GreaterThanOrEqualToWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("greaterThanOrEqualToWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the elementwise logical AND of the input tensors.
+// LogicalANDWithPrimaryTensorSecondaryTensorName returns the elementwise logical AND of the input tensors.
 func (x *Graph) LogicalANDWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logicalANDWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the elementwise logical OR of the input tensors.
+// LogicalORWithPrimaryTensorSecondaryTensorName returns the elementwise logical OR of the input tensors.
 func (x *Graph) LogicalORWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logicalORWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the elementwise logical NAND of the input tensors.
+// LogicalNANDWithPrimaryTensorSecondaryTensorName returns the elementwise logical NAND of the input tensors.
 func (x *Graph) LogicalNANDWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logicalNANDWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the elementwise logical NOR of the input tensors.
+// LogicalNORWithPrimaryTensorSecondaryTensorName returns the elementwise logical NOR of the input tensors.
 func (x *Graph) LogicalNORWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logicalNORWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the elementwise logical XOR of the input tensors.
+// LogicalXORWithPrimaryTensorSecondaryTensorName returns the elementwise logical XOR of the input tensors.
 func (x *Graph) LogicalXORWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logicalXORWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the elementwise logical XNOR of the input tensors.
+// LogicalXNORWithPrimaryTensorSecondaryTensorName returns the elementwise logical XNOR of the input tensors.
 func (x *Graph) LogicalXNORWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logicalXNORWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the elementwise two-argument arctangent of the input tensors.
+// Atan2WithPrimaryTensorSecondaryTensorName returns the elementwise two-argument arctangent of the input tensors.
 func (x *Graph) Atan2WithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("atan2WithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the elementwise bitwise AND of binary representations of two integer tensors.
+// BitwiseANDWithPrimaryTensorSecondaryTensorName returns the elementwise bitwise AND of binary representations of two integer tensors.
 func (x *Graph) BitwiseANDWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bitwiseANDWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the elementwise bitwise OR of binary representations of two integer tensors.
+// BitwiseORWithPrimaryTensorSecondaryTensorName returns the elementwise bitwise OR of binary representations of two integer tensors.
 func (x *Graph) BitwiseORWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bitwiseORWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the elementwise bitwise XOR of binary representations of two integer tensors.
+// BitwiseXORWithPrimaryTensorSecondaryTensorName returns the elementwise bitwise XOR of binary representations of two integer tensors.
 func (x *Graph) BitwiseXORWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bitwiseXORWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the elementwise left-shifted binary representations of the primary integer by the secondary tensor amount.
+// BitwiseLeftShiftWithPrimaryTensorSecondaryTensorName returns the elementwise left-shifted binary representations of the primary integer by the secondary tensor amount.
 func (x *Graph) BitwiseLeftShiftWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bitwiseLeftShiftWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the elementwise right-shifted binary representations of the primary integer by the secondary tensor amount.
+// BitwiseRightShiftWithPrimaryTensorSecondaryTensorName returns the elementwise right-shifted binary representations of the primary integer by the secondary tensor amount.
 func (x *Graph) BitwiseRightShiftWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bitwiseRightShiftWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Selects values from either the true or false predicate tensor, depending on the values in the first input.
+// SelectWithPredicateTensorTruePredicateTensorFalsePredicateTensorName selects values from either the true or false predicate tensor, depending on the values in the first input.
 func (x *Graph) SelectWithPredicateTensorTruePredicateTensorFalsePredicateTensorName(predicateTensor *GraphTensor, truePredicateTensor *GraphTensor, falseSelectTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectWithPredicateTensor:truePredicateTensor:falsePredicateTensor:name:"), objref.IDOf(predicateTensor), objref.IDOf(truePredicateTensor), objref.IDOf(falseSelectTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Clamps the values in the first tensor between the corresponding values in the minimum and maximum value tensor.
+// ClampWithTensorMinValueTensorMaxValueTensorName clamps the values in the first tensor between the corresponding values in the minimum and maximum value tensor.
 func (x *Graph) ClampWithTensorMinValueTensorMaxValueTensorName(tensor *GraphTensor, minValueTensor *GraphTensor, maxValueTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clampWithTensor:minValueTensor:maxValueTensor:name:"), objref.IDOf(tensor), objref.IDOf(minValueTensor), objref.IDOf(maxValueTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Divides the first input tensor by the second, with the result being 0 if the denominator is 0.
+// DivisionNoNaNWithPrimaryTensorSecondaryTensorName divides the first input tensor by the second, with the result being 0 if the denominator is 0.
 func (x *Graph) DivisionNoNaNWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("divisionNoNaNWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the remainder of floor divison between the primary and secondary tensor.
+// FloorModuloWithPrimaryTensorSecondaryTensorName returns the remainder of floor divison between the primary and secondary tensor.
 func (x *Graph) FloorModuloWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("floorModuloWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the real part of a tensor.
+// RealPartOfTensorName returns the real part of a tensor.
 func (x *Graph) RealPartOfTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("realPartOfTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the imaginary part of a tensor.
+// ImaginaryPartOfTensorName returns the imaginary part of a tensor.
 func (x *Graph) ImaginaryPartOfTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imaginaryPartOfTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns a complex tensor from the two input tensors.
+// ComplexTensorWithRealTensorImaginaryTensorName returns a complex tensor from the two input tensors.
 func (x *Graph) ComplexTensorWithRealTensorImaginaryTensorName(realTensor *GraphTensor, imaginaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("complexTensorWithRealTensor:imaginaryTensor:name:"), objref.IDOf(realTensor), objref.IDOf(imaginaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns a real-valued tensor from a complex-valued tensor with real and imaginary planes separated.
+// PlanarTensorWithComplexTensorName returns a real-valued tensor from a complex-valued tensor with real and imaginary planes separated.
 func (x *Graph) PlanarTensorWithComplexTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("planarTensorWithComplexTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates an operation which invokes another executable.
+// CallSymbolNameInputTensorsOutputTypesName creates an operation which invokes another executable.
 func (x *Graph) CallSymbolNameInputTensorsOutputTypesName(symbolName string, inputTensors []*GraphTensor, outputTypes []*GraphType, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callSymbolName:inputTensors:outputTypes:name:"), purego.NSString(symbolName), purego.SliceToNSArray(inputTensors, func(_v *GraphTensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(outputTypes, func(_v *GraphType) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a 2D (forward) convolution operation and returns the result tensor.
+// Convolution2DWithSourceTensorWeightsTensorDescriptorName creates a 2D (forward) convolution operation and returns the result tensor.
 func (x *Graph) Convolution2DWithSourceTensorWeightsTensorDescriptorName(source *GraphTensor, weights *GraphTensor, descriptor *GraphConvolution2DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolution2DWithSourceTensor:weightsTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(weights), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a 2D convolution gradient operation with respect to the source tensor of the forward convolution.
+// Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName creates a 2D convolution gradient operation with respect to the source tensor of the forward convolution.
 func (x *Graph) Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *GraphTensor, weights *GraphTensor, outputShapeTensor *GraphTensor, forwardConvolutionDescriptor *GraphConvolution2DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolution2DDataGradientWithIncomingGradientTensor:weightsTensor:outputShapeTensor:forwardConvolutionDescriptor:name:"), objref.IDOf(gradient), objref.IDOf(weights), objref.IDOf(outputShapeTensor), objref.IDOf(forwardConvolutionDescriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a 2D convolution gradient operation with respect to weights tensor of forward convolution.
+// Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName creates a 2D convolution gradient operation with respect to weights tensor of forward convolution.
 func (x *Graph) Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *GraphTensor, source *GraphTensor, outputShapeTensor *GraphTensor, forwardConvolutionDescriptor *GraphConvolution2DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolution2DWeightsGradientWithIncomingGradientTensor:sourceTensor:outputShapeTensor:forwardConvolutionDescriptor:name:"), objref.IDOf(gradient), objref.IDOf(source), objref.IDOf(outputShapeTensor), objref.IDOf(forwardConvolutionDescriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a 3D forward convolution operation and returns the result tensor.
+// Convolution3DWithSourceTensorWeightsTensorDescriptorName creates a 3D forward convolution operation and returns the result tensor.
 func (x *Graph) Convolution3DWithSourceTensorWeightsTensorDescriptorName(source *GraphTensor, weights *GraphTensor, descriptor *GraphConvolution3DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolution3DWithSourceTensor:weightsTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(weights), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a 3D convolution gradient operation with respect to the source tensor of the forward convolution.
+// Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName creates a 3D convolution gradient operation with respect to the source tensor of the forward convolution.
 func (x *Graph) Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *GraphTensor, weights *GraphTensor, outputShapeTensor *GraphTensor, forwardConvolutionDescriptor *GraphConvolution3DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolution3DDataGradientWithIncomingGradientTensor:weightsTensor:outputShapeTensor:forwardConvolutionDescriptor:name:"), objref.IDOf(gradient), objref.IDOf(weights), objref.IDOf(outputShapeTensor), objref.IDOf(forwardConvolutionDescriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a 3D convolution gradient operation with respect to the weights tensor of the forward convolution.
+// Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName creates a 3D convolution gradient operation with respect to the weights tensor of the forward convolution.
 func (x *Graph) Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *GraphTensor, source *GraphTensor, outputShapeTensor *GraphTensor, forwardConvolutionDescriptor *GraphConvolution3DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolution3DWeightsGradientWithIncomingGradientTensor:sourceTensor:outputShapeTensor:forwardConvolutionDescriptor:name:"), objref.IDOf(gradient), objref.IDOf(source), objref.IDOf(outputShapeTensor), objref.IDOf(forwardConvolutionDescriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a convolution transpose operation and returns the result tensor.
+// ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeTensorDescriptorName creates a convolution transpose operation and returns the result tensor.
 func (x *Graph) ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeTensorDescriptorName(source *GraphTensor, weights *GraphTensor, outputShape *GraphTensor, descriptor *GraphConvolution2DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolutionTranspose2DWithSourceTensor:weightsTensor:outputShapeTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(weights), objref.IDOf(outputShape), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a convolution transpose gradient operation with respect to the source tensor of convolution transpose operation and returns the result tensor.
+// ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName creates a convolution transpose gradient operation with respect to the source tensor of convolution transpose operation and returns the result tensor.
 func (x *Graph) ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(incomingGradient *GraphTensor, weights *GraphTensor, outputShape *GraphTensor, forwardConvolutionDescriptor *GraphConvolution2DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolutionTranspose2DDataGradientWithIncomingGradientTensor:weightsTensor:outputShapeTensor:forwardConvolutionDescriptor:name:"), objref.IDOf(incomingGradient), objref.IDOf(weights), objref.IDOf(outputShape), objref.IDOf(forwardConvolutionDescriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a convolution transpose gradient operation with respect to the weights tensor of the convolution transpose operation and returns the result tensor.
+// ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName creates a convolution transpose gradient operation with respect to the weights tensor of the convolution transpose operation and returns the result tensor.
 func (x *Graph) ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(incomingGradientTensor *GraphTensor, source *GraphTensor, outputShape *GraphTensor, forwardConvolutionDescriptor *GraphConvolution2DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolutionTranspose2DWeightsGradientWithIncomingGradientTensor:sourceTensor:outputShapeTensor:forwardConvolutionDescriptor:name:"), objref.IDOf(incomingGradientTensor), objref.IDOf(source), objref.IDOf(outputShape), objref.IDOf(forwardConvolutionDescriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the cumulative sum of the input tensor along the specified axis.
+// CumulativeSumWithTensorAxisExclusiveReverseName computes the cumulative sum of the input tensor along the specified axis.
 func (x *Graph) CumulativeSumWithTensorAxisExclusiveReverseName(tensor *GraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeSumWithTensor:axis:exclusive:reverse:name:"), objref.IDOf(tensor), axis, exclusive, reverse, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the cumulative sum of the input tensor along the specified axis.
+// CumulativeSumWithTensorAxisTensorExclusiveReverseName computes the cumulative sum of the input tensor along the specified axis.
 func (x *Graph) CumulativeSumWithTensorAxisTensorExclusiveReverseName(tensor *GraphTensor, axisTensor *GraphTensor, exclusive bool, reverse bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeSumWithTensor:axisTensor:exclusive:reverse:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), exclusive, reverse, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the cumulative sum of the input tensor along the specified axis.
+// CumulativeSumWithTensorAxisName computes the cumulative sum of the input tensor along the specified axis.
 func (x *Graph) CumulativeSumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeSumWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the cumulative sum of the input tensor along the specified axis.
+// CumulativeSumWithTensorAxisTensorName computes the cumulative sum of the input tensor along the specified axis.
 func (x *Graph) CumulativeSumWithTensorAxisTensorName(tensor *GraphTensor, axisTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeSumWithTensor:axisTensor:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the cumulative product of the input tensor along the specified axis.
+// CumulativeProductWithTensorAxisExclusiveReverseName computes the cumulative product of the input tensor along the specified axis.
 func (x *Graph) CumulativeProductWithTensorAxisExclusiveReverseName(tensor *GraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeProductWithTensor:axis:exclusive:reverse:name:"), objref.IDOf(tensor), axis, exclusive, reverse, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the cumulative product of the input tensor along the specified axis.
+// CumulativeProductWithTensorAxisTensorExclusiveReverseName computes the cumulative product of the input tensor along the specified axis.
 func (x *Graph) CumulativeProductWithTensorAxisTensorExclusiveReverseName(tensor *GraphTensor, axisTensor *GraphTensor, exclusive bool, reverse bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeProductWithTensor:axisTensor:exclusive:reverse:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), exclusive, reverse, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the cumulative product of the input tensor along the specified axis.
+// CumulativeProductWithTensorAxisName computes the cumulative product of the input tensor along the specified axis.
 func (x *Graph) CumulativeProductWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeProductWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the cumulative product of the input tensor along the specified axis.
+// CumulativeProductWithTensorAxisTensorName computes the cumulative product of the input tensor along the specified axis.
 func (x *Graph) CumulativeProductWithTensorAxisTensorName(tensor *GraphTensor, axisTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeProductWithTensor:axisTensor:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the cumulative minimum of the input tensor along the specified axis.
+// CumulativeMinimumWithTensorAxisExclusiveReverseName computes the cumulative minimum of the input tensor along the specified axis.
 func (x *Graph) CumulativeMinimumWithTensorAxisExclusiveReverseName(tensor *GraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeMinimumWithTensor:axis:exclusive:reverse:name:"), objref.IDOf(tensor), axis, exclusive, reverse, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the cumulative minimum of the input tensor along the specified axis.
+// CumulativeMinimumWithTensorAxisTensorExclusiveReverseName computes the cumulative minimum of the input tensor along the specified axis.
 func (x *Graph) CumulativeMinimumWithTensorAxisTensorExclusiveReverseName(tensor *GraphTensor, axisTensor *GraphTensor, exclusive bool, reverse bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeMinimumWithTensor:axisTensor:exclusive:reverse:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), exclusive, reverse, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the cumulative minimum of the input tensor along the specified axis.
+// CumulativeMinimumWithTensorAxisName computes the cumulative minimum of the input tensor along the specified axis.
 func (x *Graph) CumulativeMinimumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeMinimumWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the cumulative minimum of the input tensor along the specified axis.
+// CumulativeMinimumWithTensorAxisTensorName computes the cumulative minimum of the input tensor along the specified axis.
 func (x *Graph) CumulativeMinimumWithTensorAxisTensorName(tensor *GraphTensor, axisTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeMinimumWithTensor:axisTensor:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the cumulative maximum of the input tensor along the specified axis.
+// CumulativeMaximumWithTensorAxisExclusiveReverseName computes the cumulative maximum of the input tensor along the specified axis.
 func (x *Graph) CumulativeMaximumWithTensorAxisExclusiveReverseName(tensor *GraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeMaximumWithTensor:axis:exclusive:reverse:name:"), objref.IDOf(tensor), axis, exclusive, reverse, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the cumulative maximum of the input tensor along the specified axis.
+// CumulativeMaximumWithTensorAxisTensorExclusiveReverseName computes the cumulative maximum of the input tensor along the specified axis.
 func (x *Graph) CumulativeMaximumWithTensorAxisTensorExclusiveReverseName(tensor *GraphTensor, axisTensor *GraphTensor, exclusive bool, reverse bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeMaximumWithTensor:axisTensor:exclusive:reverse:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), exclusive, reverse, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the cumulative maximum of the input tensor along the specified axis.
+// CumulativeMaximumWithTensorAxisName computes the cumulative maximum of the input tensor along the specified axis.
 func (x *Graph) CumulativeMaximumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeMaximumWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the cumulative maximum of the input tensor along the specified axis.
+// CumulativeMaximumWithTensorAxisTensorName computes the cumulative maximum of the input tensor along the specified axis.
 func (x *Graph) CumulativeMaximumWithTensorAxisTensorName(tensor *GraphTensor, axisTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeMaximumWithTensor:axisTensor:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a 2D-depthwise convolution operation and returns the result tensor.
+// DepthwiseConvolution2DWithSourceTensorWeightsTensorDescriptorName creates a 2D-depthwise convolution operation and returns the result tensor.
 func (x *Graph) DepthwiseConvolution2DWithSourceTensorWeightsTensorDescriptorName(source *GraphTensor, weights *GraphTensor, descriptor *GraphDepthwiseConvolution2DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("depthwiseConvolution2DWithSourceTensor:weightsTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(weights), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a 3D depthwise convolution operation and returns the result tensor.
+// DepthwiseConvolution3DWithSourceTensorWeightsTensorDescriptorName creates a 3D depthwise convolution operation and returns the result tensor.
 func (x *Graph) DepthwiseConvolution3DWithSourceTensorWeightsTensorDescriptorName(source *GraphTensor, weights *GraphTensor, descriptor *GraphDepthwiseConvolution3DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("depthwiseConvolution3DWithSourceTensor:weightsTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(weights), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a fast Fourier transform operation and returns the result tensor.
+// FastFourierTransformWithTensorAxesDescriptorName creates a fast Fourier transform operation and returns the result tensor.
 func (x *Graph) FastFourierTransformWithTensorAxesDescriptorName(tensor *GraphTensor, axes []obj.Object, descriptor *GraphFFTDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fastFourierTransformWithTensor:axes:descriptor:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a fast Fourier transform operation and returns the result tensor.
+// FastFourierTransformWithTensorAxesTensorDescriptorName creates a fast Fourier transform operation and returns the result tensor.
 func (x *Graph) FastFourierTransformWithTensorAxesTensorDescriptorName(tensor *GraphTensor, axesTensor *GraphTensor, descriptor *GraphFFTDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fastFourierTransformWithTensor:axesTensor:descriptor:name:"), objref.IDOf(tensor), objref.IDOf(axesTensor), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Real-to-Hermitean fast Fourier transform operation and returns the result tensor.
+// RealToHermiteanFFTWithTensorAxesDescriptorName creates a Real-to-Hermitean fast Fourier transform operation and returns the result tensor.
 func (x *Graph) RealToHermiteanFFTWithTensorAxesDescriptorName(tensor *GraphTensor, axes []obj.Object, descriptor *GraphFFTDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("realToHermiteanFFTWithTensor:axes:descriptor:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Real-to-Hermitean fast Fourier transform operation and returns the result tensor.
+// RealToHermiteanFFTWithTensorAxesTensorDescriptorName creates a Real-to-Hermitean fast Fourier transform operation and returns the result tensor.
 func (x *Graph) RealToHermiteanFFTWithTensorAxesTensorDescriptorName(tensor *GraphTensor, axesTensor *GraphTensor, descriptor *GraphFFTDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("realToHermiteanFFTWithTensor:axesTensor:descriptor:name:"), objref.IDOf(tensor), objref.IDOf(axesTensor), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Hermitean-to-real fast Fourier transform operation and returns the result tensor.
+// HermiteanToRealFFTWithTensorAxesDescriptorName creates a Hermitean-to-real fast Fourier transform operation and returns the result tensor.
 func (x *Graph) HermiteanToRealFFTWithTensorAxesDescriptorName(tensor *GraphTensor, axes []obj.Object, descriptor *GraphFFTDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("HermiteanToRealFFTWithTensor:axes:descriptor:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Hermitean-to-real fast Fourier transform operation and returns the result tensor.
+// HermiteanToRealFFTWithTensorAxesTensorDescriptorName creates a Hermitean-to-real fast Fourier transform operation and returns the result tensor.
 func (x *Graph) HermiteanToRealFFTWithTensorAxesTensorDescriptorName(tensor *GraphTensor, axesTensor *GraphTensor, descriptor *GraphFFTDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("HermiteanToRealFFTWithTensor:axesTensor:descriptor:name:"), objref.IDOf(tensor), objref.IDOf(axesTensor), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a GatherND operation and returns the result tensor.
+// GatherNDWithUpdatesTensorIndicesTensorBatchDimensionsName creates a GatherND operation and returns the result tensor.
 func (x *Graph) GatherNDWithUpdatesTensorIndicesTensorBatchDimensionsName(updatesTensor *GraphTensor, indicesTensor *GraphTensor, batchDimensions int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gatherNDWithUpdatesTensor:indicesTensor:batchDimensions:name:"), objref.IDOf(updatesTensor), objref.IDOf(indicesTensor), batchDimensions, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Gather operation and returns the result tensor.
+// GatherWithUpdatesTensorIndicesTensorAxisBatchDimensionsName creates a Gather operation and returns the result tensor.
 func (x *Graph) GatherWithUpdatesTensorIndicesTensorAxisBatchDimensionsName(updatesTensor *GraphTensor, indicesTensor *GraphTensor, axis int, batchDimensions int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gatherWithUpdatesTensor:indicesTensor:axis:batchDimensions:name:"), objref.IDOf(updatesTensor), objref.IDOf(indicesTensor), axis, batchDimensions, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a GatherAlongAxis operation and returns the result tensor.
+// GatherAlongAxisWithUpdatesTensorIndicesTensorName creates a GatherAlongAxis operation and returns the result tensor.
 func (x *Graph) GatherAlongAxisWithUpdatesTensorIndicesTensorName(axis int, updatesTensor *GraphTensor, indicesTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gatherAlongAxis:withUpdatesTensor:indicesTensor:name:"), axis, objref.IDOf(updatesTensor), objref.IDOf(indicesTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a GatherAlongAxis operation and returns the result tensor.
+// GatherAlongAxisTensorWithUpdatesTensorIndicesTensorName creates a GatherAlongAxis operation and returns the result tensor.
 func (x *Graph) GatherAlongAxisTensorWithUpdatesTensorIndicesTensorName(axisTensor *GraphTensor, updatesTensor *GraphTensor, indicesTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gatherAlongAxisTensor:withUpdatesTensor:indicesTensor:name:"), objref.IDOf(axisTensor), objref.IDOf(updatesTensor), objref.IDOf(indicesTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates an imToCol operation and returns the result tensor.
+// ImToColWithSourceTensorDescriptorName creates an imToCol operation and returns the result tensor.
 func (x *Graph) ImToColWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphImToColOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imToColWithSourceTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the band part of an input tensor.
+// BandPartWithTensorNumLowerNumUpperName computes the band part of an input tensor.
 func (x *Graph) BandPartWithTensorNumLowerNumUpperName(inputTensor *GraphTensor, numLower int, numUpper int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bandPartWithTensor:numLower:numUpper:name:"), objref.IDOf(inputTensor), numLower, numUpper, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates the band part operation and returns the result.
+// BandPartWithTensorNumLowerTensorNumUpperTensorName creates the band part operation and returns the result.
 func (x *Graph) BandPartWithTensorNumLowerTensorNumUpperTensorName(inputTensor *GraphTensor, numLowerTensor *GraphTensor, numUpperTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bandPartWithTensor:numLowerTensor:numUpperTensor:name:"), objref.IDOf(inputTensor), objref.IDOf(numLowerTensor), objref.IDOf(numUpperTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a softmax cross-entropy loss operation and returns the result tensor.
+// SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionTypeName creates a softmax cross-entropy loss operation and returns the result tensor.
 func (x *Graph) SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionTypeName(sourceTensor *GraphTensor, labelsTensor *GraphTensor, axis int, reductionType GraphLossReductionType, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("softMaxCrossEntropyWithSourceTensor:labelsTensor:axis:reductionType:name:"), objref.IDOf(sourceTensor), objref.IDOf(labelsTensor), axis, reductionType, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates the gradient of a softmax cross-entropy loss operation and returns the result tensor.
+// SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTensorLabelsTensorAxisReductionTypeName creates the gradient of a softmax cross-entropy loss operation and returns the result tensor.
 func (x *Graph) SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTensorLabelsTensorAxisReductionTypeName(gradientTensor *GraphTensor, sourceTensor *GraphTensor, labelsTensor *GraphTensor, axis int, reductionType GraphLossReductionType, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("softMaxCrossEntropyGradientWithIncomingGradientTensor:sourceTensor:labelsTensor:axis:reductionType:name:"), objref.IDOf(gradientTensor), objref.IDOf(sourceTensor), objref.IDOf(labelsTensor), axis, reductionType, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the inverse of an input tensor.
+// InverseOfTensorName computes the inverse of an input tensor.
 func (x *Graph) InverseOfTensorName(inputTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inverseOfTensor:name:"), objref.IDOf(inputTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the matrix multiplication of 2 input tensors with support for broadcasting.
+// MatrixMultiplicationWithPrimaryTensorSecondaryTensorName computes the matrix multiplication of 2 input tensors with support for broadcasting.
 func (x *Graph) MatrixMultiplicationWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matrixMultiplicationWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a scaled dot product attention (SDPA) operation and returns the result tensor.
+// ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorMaskTensorScaleName creates a scaled dot product attention (SDPA) operation and returns the result tensor.
 func (x *Graph) ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorMaskTensorScaleName(queryTensor *GraphTensor, keyTensor *GraphTensor, valueTensor *GraphTensor, maskTensor *GraphTensor, scale float32, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scaledDotProductAttentionWithQueryTensor:keyTensor:valueTensor:maskTensor:scale:name:"), objref.IDOf(queryTensor), objref.IDOf(keyTensor), objref.IDOf(valueTensor), objref.IDOf(maskTensor), scale, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a scaled dot product attention (SDPA) operation (without a mask) and returns the result tensor.
+// ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorScaleName creates a scaled dot product attention (SDPA) operation (without a mask) and returns the result tensor.
 func (x *Graph) ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorScaleName(queryTensor *GraphTensor, keyTensor *GraphTensor, valueTensor *GraphTensor, scale float32, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scaledDotProductAttentionWithQueryTensor:keyTensor:valueTensor:scale:name:"), objref.IDOf(queryTensor), objref.IDOf(keyTensor), objref.IDOf(valueTensor), scale, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a complex constant op with the MPSDataTypeComplexFloat32 data type and returns the result tensor.
+// ConstantWithRealPartImaginaryPart creates a complex constant op with the MPSDataTypeComplexFloat32 data type and returns the result tensor.
 func (x *Graph) ConstantWithRealPartImaginaryPart(realPart float64, imaginaryPart float64) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constantWithRealPart:imaginaryPart:"), realPart, imaginaryPart)
 	return GraphTensorFromID(_r)
 }
 
-// Creates a variable from an input tensor.
+// VariableFromTensorWithTensorName creates a variable from an input tensor.
 func (x *Graph) VariableFromTensorWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variableFromTensorWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a read op which reads at this point of execution of the graph and returns the result tensor.
+// ReadVariableName creates a read op which reads at this point of execution of the graph and returns the result tensor.
 func (x *Graph) ReadVariableName(variable *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readVariable:name:"), objref.IDOf(variable), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates an assign operation which writes at this point of execution of the graph.
+// AssignVariableWithValueOfTensorName creates an assign operation which writes at this point of execution of the graph.
 func (x *Graph) AssignVariableWithValueOfTensorName(variable *GraphTensor, tensor *GraphTensor, name string) *GraphOperation {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assignVariable:withValueOfTensor:name:"), objref.IDOf(variable), objref.IDOf(tensor), purego.NSString(name))
 	return GraphOperationFromID(_r)
 }
 
-// Creates a nonMaximumumSuppression operation and returns the result tensor.
+// NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName creates a nonMaximumumSuppression operation and returns the result tensor.
 func (x *Graph) NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *GraphTensor, scoresTensor *GraphTensor, iOUThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode GraphNonMaximumSuppressionCoordinateMode, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nonMaximumSuppressionWithBoxesTensor:scoresTensor:IOUThreshold:scoreThreshold:perClassSuppression:coordinateMode:name:"), objref.IDOf(boxesTensor), objref.IDOf(scoresTensor), iOUThreshold, scoreThreshold, perClassSuppression, coordinateMode, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a nonMaximumumSuppression operation and returns the result tensor.
+// NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName creates a nonMaximumumSuppression operation and returns the result tensor.
 func (x *Graph) NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *GraphTensor, scoresTensor *GraphTensor, classIndicesTensor *GraphTensor, iOUThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode GraphNonMaximumSuppressionCoordinateMode, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nonMaximumSuppressionWithBoxesTensor:scoresTensor:classIndicesTensor:IOUThreshold:scoreThreshold:perClassSuppression:coordinateMode:name:"), objref.IDOf(boxesTensor), objref.IDOf(scoresTensor), objref.IDOf(classIndicesTensor), iOUThreshold, scoreThreshold, perClassSuppression, coordinateMode, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the indices of the non-zero elements of the input tensor.
+// NonZeroIndicesOfTensorName computes the indices of the non-zero elements of the input tensor.
 func (x *Graph) NonZeroIndicesOfTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nonZeroIndicesOfTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the mean of the first input along the specified axes.
+// MeanOfTensorAxesName returns the mean of the first input along the specified axes.
 func (x *Graph) MeanOfTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("meanOfTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the variance of the first input along the specified axes when the mean has been precomputed.
+// VarianceOfTensorMeanTensorAxesName returns the variance of the first input along the specified axes when the mean has been precomputed.
 func (x *Graph) VarianceOfTensorMeanTensorAxesName(tensor *GraphTensor, meanTensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("varianceOfTensor:meanTensor:axes:name:"), objref.IDOf(tensor), objref.IDOf(meanTensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Returns the variance of the first input along the specified axes.
+// VarianceOfTensorAxesName returns the variance of the first input along the specified axes.
 func (x *Graph) VarianceOfTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("varianceOfTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a batch normalization operation and returns the result tensor.
+// NormalizationWithTensorMeanTensorVarianceTensorGammaTensorBetaTensorEpsilonName creates a batch normalization operation and returns the result tensor.
 func (x *Graph) NormalizationWithTensorMeanTensorVarianceTensorGammaTensorBetaTensorEpsilonName(tensor *GraphTensor, mean *GraphTensor, variance *GraphTensor, gamma *GraphTensor, beta *GraphTensor, epsilon float32, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("normalizationWithTensor:meanTensor:varianceTensor:gammaTensor:betaTensor:epsilon:name:"), objref.IDOf(tensor), objref.IDOf(mean), objref.IDOf(variance), objref.IDOf(gamma), objref.IDOf(beta), epsilon, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a normalization gamma-gradient operation and returns the result tensor.
+// NormalizationGammaGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorReductionAxesEpsilonName creates a normalization gamma-gradient operation and returns the result tensor.
 func (x *Graph) NormalizationGammaGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorReductionAxesEpsilonName(incomingGradientTensor *GraphTensor, sourceTensor *GraphTensor, meanTensor *GraphTensor, varianceTensor *GraphTensor, axes []obj.Object, epsilon float32, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("normalizationGammaGradientWithIncomingGradientTensor:sourceTensor:meanTensor:varianceTensor:reductionAxes:epsilon:name:"), objref.IDOf(incomingGradientTensor), objref.IDOf(sourceTensor), objref.IDOf(meanTensor), objref.IDOf(varianceTensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), epsilon, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a normalization beta-gradient operation and returns the result tensor.
+// NormalizationBetaGradientWithIncomingGradientTensorSourceTensorReductionAxesName creates a normalization beta-gradient operation and returns the result tensor.
 func (x *Graph) NormalizationBetaGradientWithIncomingGradientTensorSourceTensorReductionAxesName(incomingGradientTensor *GraphTensor, sourceTensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("normalizationBetaGradientWithIncomingGradientTensor:sourceTensor:reductionAxes:name:"), objref.IDOf(incomingGradientTensor), objref.IDOf(sourceTensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a normalization input gradient operation and returns the result tensor.
+// NormalizationGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorGammaTensorGammaGradientTensorBetaGradientTensorReductionAxesEpsilonName creates a normalization input gradient operation and returns the result tensor.
 func (x *Graph) NormalizationGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorGammaTensorGammaGradientTensorBetaGradientTensorReductionAxesEpsilonName(incomingGradientTensor *GraphTensor, sourceTensor *GraphTensor, meanTensor *GraphTensor, varianceTensor *GraphTensor, gamma *GraphTensor, gammaGradient *GraphTensor, betaGradient *GraphTensor, axes []obj.Object, epsilon float32, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("normalizationGradientWithIncomingGradientTensor:sourceTensor:meanTensor:varianceTensor:gammaTensor:gammaGradientTensor:betaGradientTensor:reductionAxes:epsilon:name:"), objref.IDOf(incomingGradientTensor), objref.IDOf(sourceTensor), objref.IDOf(meanTensor), objref.IDOf(varianceTensor), objref.IDOf(gamma), objref.IDOf(gammaGradient), objref.IDOf(betaGradient), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), epsilon, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a oneHot operation and returns the result tensor.
+// OneHotWithIndicesTensorDepthAxisName creates a oneHot operation and returns the result tensor.
 func (x *Graph) OneHotWithIndicesTensorDepthAxisName(indicesTensor *GraphTensor, depth int, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("oneHotWithIndicesTensor:depth:axis:name:"), objref.IDOf(indicesTensor), depth, axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a oneHot operation and returns the result tensor.
+// OneHotWithIndicesTensorDepthName creates a oneHot operation and returns the result tensor.
 func (x *Graph) OneHotWithIndicesTensorDepthName(indicesTensor *GraphTensor, depth int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("oneHotWithIndicesTensor:depth:name:"), objref.IDOf(indicesTensor), depth, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// The Stochastic gradient descent performs a gradient descent.
+// StochasticGradientDescentWithLearningRateTensorValuesTensorGradientTensorName the Stochastic gradient descent performs a gradient descent.
 func (x *Graph) StochasticGradientDescentWithLearningRateTensorValuesTensorGradientTensorName(learningRateTensor *GraphTensor, valuesTensor *GraphTensor, gradientTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stochasticGradientDescentWithLearningRateTensor:valuesTensor:gradientTensor:name:"), objref.IDOf(learningRateTensor), objref.IDOf(valuesTensor), objref.IDOf(gradientTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// The Stochastic gradient descent performs a gradient descent variable = variable - (learningRate * g) where, g is gradient of error wrt variable this op directly writes to the variable
+// ApplyStochasticGradientDescentWithLearningRateTensorVariableGradientTensorName the Stochastic gradient descent performs a gradient descent variable = variable - (learningRate * g) where, g is gradient of error wrt variable this op directly writes to the variable
 func (x *Graph) ApplyStochasticGradientDescentWithLearningRateTensorVariableGradientTensorName(learningRateTensor *GraphTensor, variable *GraphVariableOp, gradientTensor *GraphTensor, name string) *GraphOperation {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyStochasticGradientDescentWithLearningRateTensor:variable:gradientTensor:name:"), objref.IDOf(learningRateTensor), objref.IDOf(variable), objref.IDOf(gradientTensor), purego.NSString(name))
 	return GraphOperationFromID(_r)
 }
 
-// Creates operations to apply Adam optimization.
+// AdamWithLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorBeta1PowerTensorBeta2PowerTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName creates operations to apply Adam optimization.
 func (x *Graph) AdamWithLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorBeta1PowerTensorBeta2PowerTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName(learningRateTensor *GraphTensor, beta1Tensor *GraphTensor, beta2Tensor *GraphTensor, epsilonTensor *GraphTensor, beta1PowerTensor *GraphTensor, beta2PowerTensor *GraphTensor, valuesTensor *GraphTensor, momentumTensor *GraphTensor, velocityTensor *GraphTensor, maximumVelocityTensor *GraphTensor, gradientTensor *GraphTensor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adamWithLearningRateTensor:beta1Tensor:beta2Tensor:epsilonTensor:beta1PowerTensor:beta2PowerTensor:valuesTensor:momentumTensor:velocityTensor:maximumVelocityTensor:gradientTensor:name:"), objref.IDOf(learningRateTensor), objref.IDOf(beta1Tensor), objref.IDOf(beta2Tensor), objref.IDOf(epsilonTensor), objref.IDOf(beta1PowerTensor), objref.IDOf(beta2PowerTensor), objref.IDOf(valuesTensor), objref.IDOf(momentumTensor), objref.IDOf(velocityTensor), objref.IDOf(maximumVelocityTensor), objref.IDOf(gradientTensor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates operations to apply Adam optimization.
+// AdamWithCurrentLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName creates operations to apply Adam optimization.
 func (x *Graph) AdamWithCurrentLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName(currentLearningRateTensor *GraphTensor, beta1Tensor *GraphTensor, beta2Tensor *GraphTensor, epsilonTensor *GraphTensor, valuesTensor *GraphTensor, momentumTensor *GraphTensor, velocityTensor *GraphTensor, maximumVelocityTensor *GraphTensor, gradientTensor *GraphTensor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adamWithCurrentLearningRateTensor:beta1Tensor:beta2Tensor:epsilonTensor:valuesTensor:momentumTensor:velocityTensor:maximumVelocityTensor:gradientTensor:name:"), objref.IDOf(currentLearningRateTensor), objref.IDOf(beta1Tensor), objref.IDOf(beta2Tensor), objref.IDOf(epsilonTensor), objref.IDOf(valuesTensor), objref.IDOf(momentumTensor), objref.IDOf(velocityTensor), objref.IDOf(maximumVelocityTensor), objref.IDOf(gradientTensor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a 2D max-pooling operation and returns the result tensor.
+// MaxPooling2DWithSourceTensorDescriptorName creates a 2D max-pooling operation and returns the result tensor.
 func (x *Graph) MaxPooling2DWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphPooling2DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPooling2DWithSourceTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a 2D max-pooling operation and returns the result tensor and the corresponding indices tensor.
+// MaxPooling2DReturnIndicesWithSourceTensorDescriptorName creates a 2D max-pooling operation and returns the result tensor and the corresponding indices tensor.
 func (x *Graph) MaxPooling2DReturnIndicesWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphPooling2DOpDescriptor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a max-pooling gradient operation and returns the result tensor.
+// MaxPooling2DGradientWithGradientTensorSourceTensorDescriptorName creates a max-pooling gradient operation and returns the result tensor.
 func (x *Graph) MaxPooling2DGradientWithGradientTensorSourceTensorDescriptorName(gradient *GraphTensor, source *GraphTensor, descriptor *GraphPooling2DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPooling2DGradientWithGradientTensor:sourceTensor:descriptor:name:"), objref.IDOf(gradient), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a max-pooling gradient operation and returns the result tensor.
+// MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName creates a max-pooling gradient operation and returns the result tensor.
 func (x *Graph) MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName(gradient *GraphTensor, indices *GraphTensor, outputShape *GraphTensor, descriptor *GraphPooling2DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPooling2DGradientWithGradientTensor:indicesTensor:outputShapeTensor:descriptor:name:"), objref.IDOf(gradient), objref.IDOf(indices), objref.IDOf(outputShape), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a 2D average-pooling operation and returns the result tensor.
+// AvgPooling2DWithSourceTensorDescriptorName creates a 2D average-pooling operation and returns the result tensor.
 func (x *Graph) AvgPooling2DWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphPooling2DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("avgPooling2DWithSourceTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a 2D average pooling gradient operation and returns the result tensor.
+// AvgPooling2DGradientWithGradientTensorSourceTensorDescriptorName creates a 2D average pooling gradient operation and returns the result tensor.
 func (x *Graph) AvgPooling2DGradientWithGradientTensorSourceTensorDescriptorName(gradient *GraphTensor, source *GraphTensor, descriptor *GraphPooling2DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("avgPooling2DGradientWithGradientTensor:sourceTensor:descriptor:name:"), objref.IDOf(gradient), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a 4D max-pooling operation and returns the result tensor.
+// MaxPooling4DWithSourceTensorDescriptorName creates a 4D max-pooling operation and returns the result tensor.
 func (x *Graph) MaxPooling4DWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPooling4DWithSourceTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a 4D max-pooling operation and returns the result tensor and the corresponding indices tensor.
+// MaxPooling4DReturnIndicesWithSourceTensorDescriptorName creates a 4D max-pooling operation and returns the result tensor and the corresponding indices tensor.
 func (x *Graph) MaxPooling4DReturnIndicesWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a max-pooling gradient operation and returns the result tensor.
+// MaxPooling4DGradientWithGradientTensorSourceTensorDescriptorName creates a max-pooling gradient operation and returns the result tensor.
 func (x *Graph) MaxPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient *GraphTensor, source *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPooling4DGradientWithGradientTensor:sourceTensor:descriptor:name:"), objref.IDOf(gradient), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a max-pooling gradient operation and returns the result tensor.
+// MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName creates a max-pooling gradient operation and returns the result tensor.
 func (x *Graph) MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName(gradient *GraphTensor, indices *GraphTensor, outputShape *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPooling4DGradientWithGradientTensor:indicesTensor:outputShapeTensor:descriptor:name:"), objref.IDOf(gradient), objref.IDOf(indices), objref.IDOf(outputShape), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a 4D average pooling operation and returns the result tensor.
+// AvgPooling4DWithSourceTensorDescriptorName creates a 4D average pooling operation and returns the result tensor.
 func (x *Graph) AvgPooling4DWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("avgPooling4DWithSourceTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates an average pooling gradient operation and returns the result tensor.
+// AvgPooling4DGradientWithGradientTensorSourceTensorDescriptorName creates an average pooling gradient operation and returns the result tensor.
 func (x *Graph) AvgPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient *GraphTensor, source *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("avgPooling4DGradientWithGradientTensor:sourceTensor:descriptor:name:"), objref.IDOf(gradient), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a 4D L2-norm pooling operation and returns the result tensor.
+// L2NormPooling4DWithSourceTensorDescriptorName creates a 4D L2-norm pooling operation and returns the result tensor.
 func (x *Graph) L2NormPooling4DWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("L2NormPooling4DWithSourceTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a L2-Norm pooling gradient operation and returns the result tensor.
+// L2NormPooling4DGradientWithGradientTensorSourceTensorDescriptorName creates a L2-Norm pooling gradient operation and returns the result tensor.
 func (x *Graph) L2NormPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient *GraphTensor, source *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("L2NormPooling4DGradientWithGradientTensor:sourceTensor:descriptor:name:"), objref.IDOf(gradient), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a lookup-table based quantization operation and returns the result tensor.
+// DequantizeTensorLUTTensorName creates a lookup-table based quantization operation and returns the result tensor.
 func (x *Graph) DequantizeTensorLUTTensorName(tensor *GraphTensor, lUTTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dequantizeTensor:LUTTensor:name:"), objref.IDOf(tensor), objref.IDOf(lUTTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a vector lookup-table based quantization operation and returns the result tensor.
+// DequantizeTensorLUTTensorAxisName creates a vector lookup-table based quantization operation and returns the result tensor.
 func (x *Graph) DequantizeTensorLUTTensorAxisName(tensor *GraphTensor, lUTTensor *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dequantizeTensor:LUTTensor:axis:name:"), objref.IDOf(tensor), objref.IDOf(lUTTensor), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a tensor representing state using the Philox algorithm with given counter and key values.
+// RandomPhiloxStateTensorWithSeedName creates a tensor representing state using the Philox algorithm with given counter and key values.
 func (x *Graph) RandomPhiloxStateTensorWithSeedName(seed int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("randomPhiloxStateTensorWithSeed:name:"), seed, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a tensor representing state using the Philox algorithm with given counter and key values.
+// RandomPhiloxStateTensorWithCounterLowCounterHighKeyName creates a tensor representing state using the Philox algorithm with given counter and key values.
 func (x *Graph) RandomPhiloxStateTensorWithCounterLowCounterHighKeyName(counterLow int, counterHigh int, key int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("randomPhiloxStateTensorWithCounterLow:counterHigh:key:name:"), counterLow, counterHigh, key, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Random op of type matching distribution in descriptor and returns random values.
+// RandomTensorWithShapeTensorDescriptorName creates a Random op of type matching distribution in descriptor and returns random values.
 func (x *Graph) RandomTensorWithShapeTensorDescriptorName(shapeTensor *GraphTensor, descriptor *GraphRandomOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("randomTensorWithShapeTensor:descriptor:name:"), objref.IDOf(shapeTensor), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Random op of type matching distribution in descriptor and returns random values.
+// RandomTensorWithShapeTensorDescriptorSeedName creates a Random op of type matching distribution in descriptor and returns random values.
 func (x *Graph) RandomTensorWithShapeTensorDescriptorSeedName(shapeTensor *GraphTensor, descriptor *GraphRandomOpDescriptor, seed int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("randomTensorWithShapeTensor:descriptor:seed:name:"), objref.IDOf(shapeTensor), objref.IDOf(descriptor), seed, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Random op of type matching distribution in descriptor, and returns random values and updated state.
+// RandomTensorWithShapeTensorDescriptorStateTensorName creates a Random op of type matching distribution in descriptor, and returns random values and updated state.
 func (x *Graph) RandomTensorWithShapeTensorDescriptorStateTensorName(shapeTensor *GraphTensor, descriptor *GraphRandomOpDescriptor, state *GraphTensor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("randomTensorWithShapeTensor:descriptor:stateTensor:name:"), objref.IDOf(shapeTensor), objref.IDOf(descriptor), objref.IDOf(state), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a RandomUniform operation and returns random uniform values
+// RandomUniformTensorWithShapeTensorName creates a RandomUniform operation and returns random uniform values
 func (x *Graph) RandomUniformTensorWithShapeTensorName(shapeTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("randomUniformTensorWithShapeTensor:name:"), objref.IDOf(shapeTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a RandomUniform operation and returns random uniform values
+// RandomUniformTensorWithShapeTensorSeedName creates a RandomUniform operation and returns random uniform values
 func (x *Graph) RandomUniformTensorWithShapeTensorSeedName(shapeTensor *GraphTensor, seed int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("randomUniformTensorWithShapeTensor:seed:name:"), objref.IDOf(shapeTensor), seed, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a RandomUniform operation and returns random uniform values and updated state
+// RandomUniformTensorWithShapeTensorStateTensorName creates a RandomUniform operation and returns random uniform values and updated state
 func (x *Graph) RandomUniformTensorWithShapeTensorStateTensorName(shapeTensor *GraphTensor, state *GraphTensor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("randomUniformTensorWithShapeTensor:stateTensor:name:"), objref.IDOf(shapeTensor), objref.IDOf(state), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a dropout operation and returns the result
+// DropoutTensorRateName creates a dropout operation and returns the result
 func (x *Graph) DropoutTensorRateName(tensor *GraphTensor, rate float64, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dropoutTensor:rate:name:"), objref.IDOf(tensor), rate, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a dropout operation and returns the result
+// DropoutTensorRateTensorName creates a dropout operation and returns the result
 func (x *Graph) DropoutTensorRateTensorName(tensor *GraphTensor, rate *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dropoutTensor:rateTensor:name:"), objref.IDOf(tensor), objref.IDOf(rate), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a reduction sum operation and returns the result tensor.
+// ReductionSumWithTensorAxisName creates a reduction sum operation and returns the result tensor.
 func (x *Graph) ReductionSumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionSumWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a reduction sum operation and returns the result tensor.
+// ReductionSumWithTensorAxesName creates a reduction sum operation and returns the result tensor.
 func (x *Graph) ReductionSumWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionSumWithTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a reduction max operation and returns the result tensor.
+// ReductionMaximumWithTensorAxisName creates a reduction max operation and returns the result tensor.
 func (x *Graph) ReductionMaximumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionMaximumWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a reduction max operation and returns the result tensor.
+// ReductionMaximumWithTensorAxesName creates a reduction max operation and returns the result tensor.
 func (x *Graph) ReductionMaximumWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionMaximumWithTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a reduction minimum operation and returns the result tensor.
+// ReductionMinimumWithTensorAxisName creates a reduction minimum operation and returns the result tensor.
 func (x *Graph) ReductionMinimumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionMinimumWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a reduction min operation and returns the result tensor.
+// ReductionMinimumWithTensorAxesName creates a reduction min operation and returns the result tensor.
 func (x *Graph) ReductionMinimumWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionMinimumWithTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a reduction max propagate NaN operation and returns the result tensor.
+// ReductionMaximumPropagateNaNWithTensorAxisName creates a reduction max propagate NaN operation and returns the result tensor.
 func (x *Graph) ReductionMaximumPropagateNaNWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionMaximumPropagateNaNWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a reduction max propagate NaN operation and returns the result tensor.
+// ReductionMaximumPropagateNaNWithTensorAxesName creates a reduction max propagate NaN operation and returns the result tensor.
 func (x *Graph) ReductionMaximumPropagateNaNWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionMaximumPropagateNaNWithTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a reduction min propagate NaN operation and returns the result tensor.
+// ReductionMinimumPropagateNaNWithTensorAxisName creates a reduction min propagate NaN operation and returns the result tensor.
 func (x *Graph) ReductionMinimumPropagateNaNWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionMinimumPropagateNaNWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a reduction min propagate NaN operation and returns the result tensor.
+// ReductionMinimumPropagateNaNWithTensorAxesName creates a reduction min propagate NaN operation and returns the result tensor.
 func (x *Graph) ReductionMinimumPropagateNaNWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionMinimumPropagateNaNWithTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a reduction product operation and returns the result tensor.
+// ReductionProductWithTensorAxisName creates a reduction product operation and returns the result tensor.
 func (x *Graph) ReductionProductWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionProductWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a reduction product operation and returns the result tensor.
+// ReductionProductWithTensorAxesName creates a reduction product operation and returns the result tensor.
 func (x *Graph) ReductionProductWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionProductWithTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a reduction argMax operation and returns the result tensor.
+// ReductionArgMaximumWithTensorAxisName creates a reduction argMax operation and returns the result tensor.
 func (x *Graph) ReductionArgMaximumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionArgMaximumWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a reduction argMin operation and returns the result tensor.
+// ReductionArgMinimumWithTensorAxisName creates a reduction argMin operation and returns the result tensor.
 func (x *Graph) ReductionArgMinimumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionArgMinimumWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a reduction and operation and returns the result tensor.
+// ReductionAndWithTensorAxisName creates a reduction and operation and returns the result tensor.
 func (x *Graph) ReductionAndWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionAndWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a reduction and operation and returns the result tensor.
+// ReductionAndWithTensorAxesName creates a reduction and operation and returns the result tensor.
 func (x *Graph) ReductionAndWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionAndWithTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a reduction or operation and returns the result tensor.
+// ReductionOrWithTensorAxisName creates a reduction or operation and returns the result tensor.
 func (x *Graph) ReductionOrWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionOrWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a reduction or operation and returns the result tensor.
+// ReductionOrWithTensorAxesName creates a reduction or operation and returns the result tensor.
 func (x *Graph) ReductionOrWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionOrWithTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Resize operation and returns the result tensor.
+// ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName creates a Resize operation and returns the result tensor.
 func (x *Graph) ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName(imagesTensor *GraphTensor, size *GraphTensor, mode GraphResizeMode, centerResult bool, alignCorners bool, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeTensor:sizeTensor:mode:centerResult:alignCorners:layout:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), mode, centerResult, alignCorners, layout, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Resize operation and returns the result tensor.
+// ResizeTensorSizeTensorModeCenterResultAlignCornersName creates a Resize operation and returns the result tensor.
 func (x *Graph) ResizeTensorSizeTensorModeCenterResultAlignCornersName(imagesTensor *GraphTensor, size *GraphTensor, mode GraphResizeMode, centerResult bool, alignCorners bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeTensor:sizeTensor:mode:centerResult:alignCorners:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), mode, centerResult, alignCorners, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Resamples input images to given size using nearest neighbor sampling.
+// ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersLayoutName resamples input images to given size using nearest neighbor sampling.
 func (x *Graph) ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersLayoutName(imagesTensor *GraphTensor, size *GraphTensor, nearestRoundingMode GraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeNearestWithTensor:sizeTensor:nearestRoundingMode:centerResult:alignCorners:layout:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), nearestRoundingMode, centerResult, alignCorners, layout, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Resize operation and returns the result tensor.
+// ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersName creates a Resize operation and returns the result tensor.
 func (x *Graph) ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersName(imagesTensor *GraphTensor, size *GraphTensor, nearestRoundingMode GraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeNearestWithTensor:sizeTensor:nearestRoundingMode:centerResult:alignCorners:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), nearestRoundingMode, centerResult, alignCorners, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Resamples input images to given size using bilinear sampling.
+// ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayoutName resamples input images to given size using bilinear sampling.
 func (x *Graph) ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayoutName(imagesTensor *GraphTensor, size *GraphTensor, centerResult bool, alignCorners bool, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeBilinearWithTensor:sizeTensor:centerResult:alignCorners:layout:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), centerResult, alignCorners, layout, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Resize operation and returns the result tensor.
+// ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersName creates a Resize operation and returns the result tensor.
 func (x *Graph) ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersName(imagesTensor *GraphTensor, size *GraphTensor, centerResult bool, alignCorners bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeBilinearWithTensor:sizeTensor:centerResult:alignCorners:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), centerResult, alignCorners, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Resamples input images to given size using the provided scale and offset. Destination indices are computed using
+// ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName resamples input images to given size using the provided scale and offset. Destination indices are computed using
 func (x *Graph) ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName(imagesTensor *GraphTensor, size *GraphTensor, scaleOffset *GraphTensor, mode GraphResizeMode, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeTensor:sizeTensor:scaleOffsetTensor:mode:layout:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), objref.IDOf(scaleOffset), mode, layout, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Resize operation and returns the result tensor.
+// ResizeTensorSizeTensorScaleTensorOffsetTensorModeName creates a Resize operation and returns the result tensor.
 func (x *Graph) ResizeTensorSizeTensorScaleTensorOffsetTensorModeName(imagesTensor *GraphTensor, size *GraphTensor, scale *GraphTensor, offset *GraphTensor, mode GraphResizeMode, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeTensor:sizeTensor:scaleTensor:offsetTensor:mode:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), objref.IDOf(scale), objref.IDOf(offset), mode, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Resamples input images to given size using the provided scale and offset and nearest neighbor sampling See above discussion for more details.
+// ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundingModeLayoutName resamples input images to given size using the provided scale and offset and nearest neighbor sampling See above discussion for more details.
 func (x *Graph) ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundingModeLayoutName(imagesTensor *GraphTensor, size *GraphTensor, scaleOffset *GraphTensor, nearestRoundingMode GraphResizeNearestRoundingMode, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeNearestWithTensor:sizeTensor:scaleOffsetTensor:nearestRoundingMode:layout:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), objref.IDOf(scaleOffset), nearestRoundingMode, layout, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Resize operation and returns the result tensor.
+// ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestRoundingModeName creates a Resize operation and returns the result tensor.
 func (x *Graph) ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestRoundingModeName(imagesTensor *GraphTensor, size *GraphTensor, scale *GraphTensor, offset *GraphTensor, nearestRoundingMode GraphResizeNearestRoundingMode, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeNearestWithTensor:sizeTensor:scaleTensor:offsetTensor:nearestRoundingMode:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), objref.IDOf(scale), objref.IDOf(offset), nearestRoundingMode, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Resamples input images to given size using the provided scale and offset and bilinear sampling See above discussion for more details.
+// ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName resamples input images to given size using the provided scale and offset and bilinear sampling See above discussion for more details.
 func (x *Graph) ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName(imagesTensor *GraphTensor, size *GraphTensor, scaleOffset *GraphTensor, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeBilinearWithTensor:sizeTensor:scaleOffsetTensor:layout:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), objref.IDOf(scaleOffset), layout, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Resize operation and returns the result tensor.
+// ResizeBilinearWithTensorSizeTensorScaleTensorOffsetTensorName creates a Resize operation and returns the result tensor.
 func (x *Graph) ResizeBilinearWithTensorSizeTensorScaleTensorOffsetTensorName(imagesTensor *GraphTensor, size *GraphTensor, scale *GraphTensor, offset *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeBilinearWithTensor:sizeTensor:scaleTensor:offsetTensor:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), objref.IDOf(scale), objref.IDOf(offset), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Resize gradient operation and returns the result tensor.
+// ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutName creates a Resize gradient operation and returns the result tensor.
 func (x *Graph) ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutName(gradient *GraphTensor, input *GraphTensor, mode GraphResizeMode, centerResult bool, alignCorners bool, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeWithGradientTensor:input:mode:centerResult:alignCorners:layout:name:"), objref.IDOf(gradient), objref.IDOf(input), mode, centerResult, alignCorners, layout, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Resize gradient operation and returns the result tensor.
+// ResizeNearestWithGradientTensorInputNearestRoundingModeCenterResultAlignCornersLayoutName creates a Resize gradient operation and returns the result tensor.
 func (x *Graph) ResizeNearestWithGradientTensorInputNearestRoundingModeCenterResultAlignCornersLayoutName(gradient *GraphTensor, input *GraphTensor, nearestRoundingMode GraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeNearestWithGradientTensor:input:nearestRoundingMode:centerResult:alignCorners:layout:name:"), objref.IDOf(gradient), objref.IDOf(input), nearestRoundingMode, centerResult, alignCorners, layout, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Resize gradient operation and returns the result tensor.
+// ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLayoutName creates a Resize gradient operation and returns the result tensor.
 func (x *Graph) ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLayoutName(gradient *GraphTensor, input *GraphTensor, centerResult bool, alignCorners bool, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeBilinearWithGradientTensor:input:centerResult:alignCorners:layout:name:"), objref.IDOf(gradient), objref.IDOf(input), centerResult, alignCorners, layout, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Resize gradient operation and returns the result tensor.
+// ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName creates a Resize gradient operation and returns the result tensor.
 func (x *Graph) ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName(gradient *GraphTensor, input *GraphTensor, scaleOffset *GraphTensor, mode GraphResizeMode, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeWithGradientTensor:input:scaleOffsetTensor:mode:layout:name:"), objref.IDOf(gradient), objref.IDOf(input), objref.IDOf(scaleOffset), mode, layout, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Resize gradient operation and returns the result tensor.
+// ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName creates a Resize gradient operation and returns the result tensor.
 func (x *Graph) ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName(gradient *GraphTensor, input *GraphTensor, scale *GraphTensor, offset *GraphTensor, mode GraphResizeMode, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeWithGradientTensor:input:scaleTensor:offsetTensor:mode:name:"), objref.IDOf(gradient), objref.IDOf(input), objref.IDOf(scale), objref.IDOf(offset), mode, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Resize gradient operation and returns the result tensor.
+// ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoundingModeLayoutName creates a Resize gradient operation and returns the result tensor.
 func (x *Graph) ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoundingModeLayoutName(gradient *GraphTensor, input *GraphTensor, scaleOffset *GraphTensor, nearestRoundingMode GraphResizeNearestRoundingMode, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeNearestWithGradientTensor:input:scaleOffsetTensor:nearestRoundingMode:layout:name:"), objref.IDOf(gradient), objref.IDOf(input), objref.IDOf(scaleOffset), nearestRoundingMode, layout, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Resize gradient operation and returns the result tensor.
+// ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNearestRoundingModeName creates a Resize gradient operation and returns the result tensor.
 func (x *Graph) ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNearestRoundingModeName(gradient *GraphTensor, input *GraphTensor, scale *GraphTensor, offset *GraphTensor, nearestRoundingMode GraphResizeNearestRoundingMode, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeNearestWithGradientTensor:input:scaleTensor:offsetTensor:nearestRoundingMode:name:"), objref.IDOf(gradient), objref.IDOf(input), objref.IDOf(scale), objref.IDOf(offset), nearestRoundingMode, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Resize gradient operation and returns the result tensor.
+// ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName creates a Resize gradient operation and returns the result tensor.
 func (x *Graph) ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName(gradient *GraphTensor, input *GraphTensor, scaleOffset *GraphTensor, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeBilinearWithGradientTensor:input:scaleOffsetTensor:layout:name:"), objref.IDOf(gradient), objref.IDOf(input), objref.IDOf(scaleOffset), layout, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Resize gradient operation and returns the result tensor.
+// ResizeBilinearWithGradientTensorInputScaleTensorOffsetTensorName creates a Resize gradient operation and returns the result tensor.
 func (x *Graph) ResizeBilinearWithGradientTensorInputScaleTensorOffsetTensorName(gradient *GraphTensor, input *GraphTensor, scale *GraphTensor, offset *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeBilinearWithGradientTensor:input:scaleTensor:offsetTensor:name:"), objref.IDOf(gradient), objref.IDOf(input), objref.IDOf(scale), objref.IDOf(offset), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a single-gate RNN operation and returns the value and optionally the training state tensor.
+// SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskDescriptorName creates a single-gate RNN operation and returns the value and optionally the training state tensor.
 func (x *Graph) SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, mask *GraphTensor, descriptor *GraphSingleGateRNNDescriptor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("singleGateRNNWithSourceTensor:recurrentWeight:inputWeight:bias:initState:mask:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(mask), objref.IDOf(descriptor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a single-gate RNN operation and returns the value and optionally the training state tensor.
+// SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName creates a single-gate RNN operation and returns the value and optionally the training state tensor.
 func (x *Graph) SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, descriptor *GraphSingleGateRNNDescriptor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("singleGateRNNWithSourceTensor:recurrentWeight:inputWeight:bias:initState:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(descriptor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a single-gate RNN operation and returns the value and optionally the training state tensor.
+// SingleGateRNNWithSourceTensorRecurrentWeightInitStateDescriptorName creates a single-gate RNN operation and returns the value and optionally the training state tensor.
 func (x *Graph) SingleGateRNNWithSourceTensorRecurrentWeightInitStateDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, initState *GraphTensor, descriptor *GraphSingleGateRNNDescriptor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("singleGateRNNWithSourceTensor:recurrentWeight:initState:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(initState), objref.IDOf(descriptor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a single-gate RNN gradient operation and returns the gradient tensor values.
+// SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateStateGradientInputWeightBiasInitStateMaskDescriptorName creates a single-gate RNN gradient operation and returns the gradient tensor values.
 func (x *Graph) SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateStateGradientInputWeightBiasInitStateMaskDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, stateGradient *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, mask *GraphTensor, descriptor *GraphSingleGateRNNDescriptor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("singleGateRNNGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:stateGradient:inputWeight:bias:initState:mask:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(sourceGradient), objref.IDOf(zState), objref.IDOf(stateGradient), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(mask), objref.IDOf(descriptor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a single-gate RNN gradient operation and returns the gradient tensor values.
+// SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateMaskDescriptorName creates a single-gate RNN gradient operation and returns the gradient tensor values.
 func (x *Graph) SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateMaskDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, mask *GraphTensor, descriptor *GraphSingleGateRNNDescriptor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("singleGateRNNGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:inputWeight:bias:initState:mask:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(sourceGradient), objref.IDOf(zState), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(mask), objref.IDOf(descriptor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a single-gate RNN gradient operation and returns the gradient tensor values.
+// SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateDescriptorName creates a single-gate RNN gradient operation and returns the gradient tensor values.
 func (x *Graph) SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, descriptor *GraphSingleGateRNNDescriptor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("singleGateRNNGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:inputWeight:bias:initState:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(sourceGradient), objref.IDOf(zState), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(descriptor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a single-gate RNN gradient operation and returns the gradient tensor values.
+// SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInitStateDescriptorName creates a single-gate RNN gradient operation and returns the gradient tensor values.
 func (x *Graph) SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInitStateDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, initState *GraphTensor, descriptor *GraphSingleGateRNNDescriptor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("singleGateRNNGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:initState:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(sourceGradient), objref.IDOf(zState), objref.IDOf(initState), objref.IDOf(descriptor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates an LSTM operation and returns the value tensor and optionally the cell state tensor and the training state tensor.
+// LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName creates an LSTM operation and returns the value tensor and optionally the cell state tensor and the training state tensor.
 func (x *Graph) LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, initCell *GraphTensor, mask *GraphTensor, peephole *GraphTensor, descriptor *GraphLSTMDescriptor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("LSTMWithSourceTensor:recurrentWeight:inputWeight:bias:initState:initCell:mask:peephole:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(initCell), objref.IDOf(mask), objref.IDOf(peephole), objref.IDOf(descriptor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates an LSTM operation and returns the value tensor and optionally the cell state tensor and the training state tensor.
+// LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellDescriptorName creates an LSTM operation and returns the value tensor and optionally the cell state tensor and the training state tensor.
 func (x *Graph) LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, initCell *GraphTensor, descriptor *GraphLSTMDescriptor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("LSTMWithSourceTensor:recurrentWeight:inputWeight:bias:initState:initCell:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(initCell), objref.IDOf(descriptor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates an LSTM operation and returns the value tensor and optionally the cell state tensor and the training state tensor.
+// LSTMWithSourceTensorRecurrentWeightInitStateInitCellDescriptorName creates an LSTM operation and returns the value tensor and optionally the cell state tensor and the training state tensor.
 func (x *Graph) LSTMWithSourceTensorRecurrentWeightInitStateInitCellDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, initState *GraphTensor, initCell *GraphTensor, descriptor *GraphLSTMDescriptor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("LSTMWithSourceTensor:recurrentWeight:initState:initCell:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(initState), objref.IDOf(initCell), objref.IDOf(descriptor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates an LSTM gradient operation and returns the gradient tensor values.
+// LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdStateGradientCellGradientInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName creates an LSTM gradient operation and returns the gradient tensor values.
 func (x *Graph) LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdStateGradientCellGradientInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, cellOutputFwd *GraphTensor, stateGradient *GraphTensor, cellGradient *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, initCell *GraphTensor, mask *GraphTensor, peephole *GraphTensor, descriptor *GraphLSTMDescriptor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("LSTMGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:cellOutputFwd:stateGradient:cellGradient:inputWeight:bias:initState:initCell:mask:peephole:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(sourceGradient), objref.IDOf(zState), objref.IDOf(cellOutputFwd), objref.IDOf(stateGradient), objref.IDOf(cellGradient), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(initCell), objref.IDOf(mask), objref.IDOf(peephole), objref.IDOf(descriptor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates an LSTM gradient operation and returns the gradient tensor values.
+// LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellMaskDescriptorName creates an LSTM gradient operation and returns the gradient tensor values.
 func (x *Graph) LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellMaskDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, cellOutputFwd *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, initCell *GraphTensor, mask *GraphTensor, descriptor *GraphLSTMDescriptor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("LSTMGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:cellOutputFwd:inputWeight:bias:initState:initCell:mask:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(sourceGradient), objref.IDOf(zState), objref.IDOf(cellOutputFwd), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(initCell), objref.IDOf(mask), objref.IDOf(descriptor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates an LSTM gradient operation and returns the gradient tensor values.
+// LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellDescriptorName creates an LSTM gradient operation and returns the gradient tensor values.
 func (x *Graph) LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, cellOutputFwd *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, initCell *GraphTensor, descriptor *GraphLSTMDescriptor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("LSTMGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:cellOutputFwd:inputWeight:bias:initState:initCell:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(sourceGradient), objref.IDOf(zState), objref.IDOf(cellOutputFwd), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(initCell), objref.IDOf(descriptor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates an LSTM gradient operation and returns the gradient tensor values.
+// LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdDescriptorName creates an LSTM gradient operation and returns the gradient tensor values.
 func (x *Graph) LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, cellOutputFwd *GraphTensor, descriptor *GraphLSTMDescriptor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("LSTMGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:cellOutputFwd:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(sourceGradient), objref.IDOf(zState), objref.IDOf(cellOutputFwd), objref.IDOf(descriptor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a GRU operation and returns the value and optionally the training state tensor.
+// GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskSecondaryBiasDescriptorName creates a GRU operation and returns the value and optionally the training state tensor.
 func (x *Graph) GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskSecondaryBiasDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, mask *GraphTensor, secondaryBias *GraphTensor, descriptor *GraphGRUDescriptor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GRUWithSourceTensor:recurrentWeight:inputWeight:bias:initState:mask:secondaryBias:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(mask), objref.IDOf(secondaryBias), objref.IDOf(descriptor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a GRU operation and returns the value and optionally the training state tensor.
+// GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName creates a GRU operation and returns the value and optionally the training state tensor.
 func (x *Graph) GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, descriptor *GraphGRUDescriptor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GRUWithSourceTensor:recurrentWeight:inputWeight:bias:initState:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(descriptor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a GRU operation and returns the value and optionally the training state tensor.
+// GRUWithSourceTensorRecurrentWeightInputWeightBiasDescriptorName creates a GRU operation and returns the value and optionally the training state tensor.
 func (x *Graph) GRUWithSourceTensorRecurrentWeightInputWeightBiasDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, descriptor *GraphGRUDescriptor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GRUWithSourceTensor:recurrentWeight:inputWeight:bias:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(descriptor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a GRU gradient operation and returns the gradient tensor values.
+// GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdStateGradientInputWeightBiasInitStateMaskSecondaryBiasDescriptorName creates a GRU gradient operation and returns the gradient tensor values.
 func (x *Graph) GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdStateGradientInputWeightBiasInitStateMaskSecondaryBiasDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, outputFwd *GraphTensor, stateGradient *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, mask *GraphTensor, secondaryBias *GraphTensor, descriptor *GraphGRUDescriptor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GRUGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:outputFwd:stateGradient:inputWeight:bias:initState:mask:secondaryBias:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(sourceGradient), objref.IDOf(zState), objref.IDOf(outputFwd), objref.IDOf(stateGradient), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(mask), objref.IDOf(secondaryBias), objref.IDOf(descriptor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a GRU gradient operation and returns the gradient tensor values.
+// GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasInitStateDescriptorName creates a GRU gradient operation and returns the gradient tensor values.
 func (x *Graph) GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasInitStateDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, outputFwd *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, descriptor *GraphGRUDescriptor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GRUGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:outputFwd:inputWeight:bias:initState:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(sourceGradient), objref.IDOf(zState), objref.IDOf(outputFwd), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(descriptor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a GRU gradient operation and returns the gradient tensor values.
+// GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasDescriptorName creates a GRU gradient operation and returns the gradient tensor values.
 func (x *Graph) GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, outputFwd *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, descriptor *GraphGRUDescriptor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GRUGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:outputFwd:inputWeight:bias:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(sourceGradient), objref.IDOf(zState), objref.IDOf(outputFwd), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(descriptor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Samples a tensor using the coordinates provided.
+// SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeSamplingModeConstantValueName samples a tensor using the coordinates provided.
 func (x *Graph) SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeSamplingModeConstantValueName(source *GraphTensor, coordinates *GraphTensor, layout GraphTensorNamedDataLayout, normalizeCoordinates bool, relativeCoordinates bool, alignCorners bool, paddingMode GraphPaddingMode, samplingMode GraphResizeMode, constantValue float64, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleGridWithSourceTensor:coordinateTensor:layout:normalizeCoordinates:relativeCoordinates:alignCorners:paddingMode:samplingMode:constantValue:name:"), objref.IDOf(source), objref.IDOf(coordinates), layout, normalizeCoordinates, relativeCoordinates, alignCorners, paddingMode, samplingMode, constantValue, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Samples a tensor using the coordinates provided, using nearest neighbor sampling with specified rounding mode.
+// SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeNearestRoundingModeConstantValueName samples a tensor using the coordinates provided, using nearest neighbor sampling with specified rounding mode.
 func (x *Graph) SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeNearestRoundingModeConstantValueName(source *GraphTensor, coordinates *GraphTensor, layout GraphTensorNamedDataLayout, normalizeCoordinates bool, relativeCoordinates bool, alignCorners bool, paddingMode GraphPaddingMode, nearestRoundingMode GraphResizeNearestRoundingMode, constantValue float64, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleGridWithSourceTensor:coordinateTensor:layout:normalizeCoordinates:relativeCoordinates:alignCorners:paddingMode:nearestRoundingMode:constantValue:name:"), objref.IDOf(source), objref.IDOf(coordinates), layout, normalizeCoordinates, relativeCoordinates, alignCorners, paddingMode, nearestRoundingMode, constantValue, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a ScatterND operation and returns the result tensor.
+// ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensionsModeName creates a ScatterND operation and returns the result tensor.
 func (x *Graph) ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensionsModeName(dataTensor *GraphTensor, updatesTensor *GraphTensor, indicesTensor *GraphTensor, batchDimensions int, mode GraphScatterMode, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scatterNDWithDataTensor:updatesTensor:indicesTensor:batchDimensions:mode:name:"), objref.IDOf(dataTensor), objref.IDOf(updatesTensor), objref.IDOf(indicesTensor), batchDimensions, mode, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a Scatter operation and returns the result tensor.
+// ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName creates a Scatter operation and returns the result tensor.
 func (x *Graph) ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName(dataTensor *GraphTensor, updatesTensor *GraphTensor, indicesTensor *GraphTensor, axis int, mode GraphScatterMode, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scatterWithDataTensor:updatesTensor:indicesTensor:axis:mode:name:"), objref.IDOf(dataTensor), objref.IDOf(updatesTensor), objref.IDOf(indicesTensor), axis, mode, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a ScatterAlongAxis operation and returns the result tensor.
+// ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName creates a ScatterAlongAxis operation and returns the result tensor.
 func (x *Graph) ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName(axis int, dataTensor *GraphTensor, updatesTensor *GraphTensor, indicesTensor *GraphTensor, mode GraphScatterMode, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scatterAlongAxis:withDataTensor:updatesTensor:indicesTensor:mode:name:"), axis, objref.IDOf(dataTensor), objref.IDOf(updatesTensor), objref.IDOf(indicesTensor), mode, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a ScatterAlongAxis operation and returns the result tensor.
+// ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorModeName creates a ScatterAlongAxis operation and returns the result tensor.
 func (x *Graph) ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorModeName(axisTensor *GraphTensor, dataTensor *GraphTensor, updatesTensor *GraphTensor, indicesTensor *GraphTensor, mode GraphScatterMode, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scatterAlongAxisTensor:withDataTensor:updatesTensor:indicesTensor:mode:name:"), objref.IDOf(axisTensor), objref.IDOf(dataTensor), objref.IDOf(updatesTensor), objref.IDOf(indicesTensor), mode, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Sorts the elements of the input tensor along the specified axis.
+// SortWithTensorAxisDescendingName sorts the elements of the input tensor along the specified axis.
 func (x *Graph) SortWithTensorAxisDescendingName(tensor *GraphTensor, axis int, descending bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortWithTensor:axis:descending:name:"), objref.IDOf(tensor), axis, descending, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Sorts the elements of the input tensor along the specified axis.
+// SortWithTensorAxisTensorDescendingName sorts the elements of the input tensor along the specified axis.
 func (x *Graph) SortWithTensorAxisTensorDescendingName(tensor *GraphTensor, axisTensor *GraphTensor, descending bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortWithTensor:axisTensor:descending:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), descending, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Sorts the elements of the input tensor along the specified axis.
+// SortWithTensorAxisName sorts the elements of the input tensor along the specified axis.
 func (x *Graph) SortWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Sorts the elements of the input tensor along the specified axis.
+// SortWithTensorAxisTensorName sorts the elements of the input tensor along the specified axis.
 func (x *Graph) SortWithTensorAxisTensorName(tensor *GraphTensor, axisTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortWithTensor:axisTensor:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the indices that sort the elements of the input tensor along the specified axis.
+// ArgSortWithTensorAxisDescendingName computes the indices that sort the elements of the input tensor along the specified axis.
 func (x *Graph) ArgSortWithTensorAxisDescendingName(tensor *GraphTensor, axis int, descending bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("argSortWithTensor:axis:descending:name:"), objref.IDOf(tensor), axis, descending, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the indices that sort the elements of the input tensor along the specified axis.
+// ArgSortWithTensorAxisTensorDescendingName computes the indices that sort the elements of the input tensor along the specified axis.
 func (x *Graph) ArgSortWithTensorAxisTensorDescendingName(tensor *GraphTensor, axisTensor *GraphTensor, descending bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("argSortWithTensor:axisTensor:descending:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), descending, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the indices that sort the elements of the input tensor along the specified axis.
+// ArgSortWithTensorAxisName computes the indices that sort the elements of the input tensor along the specified axis.
 func (x *Graph) ArgSortWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("argSortWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Computes the indices that sort the elements of the input tensor along the specified axis.
+// ArgSortWithTensorAxisTensorName computes the indices that sort the elements of the input tensor along the specified axis.
 func (x *Graph) ArgSortWithTensorAxisTensorName(tensor *GraphTensor, axisTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("argSortWithTensor:axisTensor:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a stencil operation and returns the result tensor.
+// StencilWithSourceTensorWeightsTensorDescriptorName creates a stencil operation and returns the result tensor.
 func (x *Graph) StencilWithSourceTensorWeightsTensorDescriptorName(source *GraphTensor, weights *GraphTensor, descriptor *GraphStencilOpDescriptor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stencilWithSourceTensor:weightsTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(weights), objref.IDOf(descriptor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a reshape operation and returns the result tensor.
+// ReshapeTensorWithShapeTensorName creates a reshape operation and returns the result tensor.
 func (x *Graph) ReshapeTensorWithShapeTensorName(tensor *GraphTensor, shapeTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reshapeTensor:withShapeTensor:name:"), objref.IDOf(tensor), objref.IDOf(shapeTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a transpose operation and returns the result tensor.
+// TransposeTensorDimensionWithDimensionName creates a transpose operation and returns the result tensor.
 func (x *Graph) TransposeTensorDimensionWithDimensionName(tensor *GraphTensor, dimensionIndex int, dimensionIndex2 int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transposeTensor:dimension:withDimension:name:"), objref.IDOf(tensor), dimensionIndex, dimensionIndex2, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a permutation operation and returns the result tensor.
+// TransposeTensorPermutationName creates a permutation operation and returns the result tensor.
 func (x *Graph) TransposeTensorPermutationName(tensor *GraphTensor, permutation []obj.Object, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transposeTensor:permutation:name:"), objref.IDOf(tensor), purego.SliceToNSArray(permutation, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a slice operation and returns the result tensor.
+// SliceTensorDimensionStartLengthName creates a slice operation and returns the result tensor.
 func (x *Graph) SliceTensorDimensionStartLengthName(tensor *GraphTensor, dimensionIndex int, start int, length int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceTensor:dimension:start:length:name:"), objref.IDOf(tensor), dimensionIndex, start, length, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a strided-slice operation and returns the result tensor.
+// SliceTensorStartsEndsStridesName creates a strided-slice operation and returns the result tensor.
 func (x *Graph) SliceTensorStartsEndsStridesName(tensor *GraphTensor, starts []obj.Object, ends []obj.Object, strides []obj.Object, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceTensor:starts:ends:strides:name:"), objref.IDOf(tensor), purego.SliceToNSArray(starts, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(ends, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a strided-slice operation and returns the result tensor.
+// SliceTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName creates a strided-slice operation and returns the result tensor.
 func (x *Graph) SliceTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(tensor *GraphTensor, starts []obj.Object, ends []obj.Object, strides []obj.Object, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceTensor:starts:ends:strides:startMask:endMask:squeezeMask:name:"), objref.IDOf(tensor), purego.SliceToNSArray(starts, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(ends, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), startMask, endMask, squeezeMask, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a strided-slice operation and returns the result tensor.
+// SliceTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName creates a strided-slice operation and returns the result tensor.
 func (x *Graph) SliceTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName(tensor *GraphTensor, startTensor *GraphTensor, endTensor *GraphTensor, strideTensor *GraphTensor, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceTensor:startTensor:endTensor:strideTensor:startMask:endMask:squeezeMask:name:"), objref.IDOf(tensor), objref.IDOf(startTensor), objref.IDOf(endTensor), objref.IDOf(strideTensor), startMask, endMask, squeezeMask, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a slice operation and returns the result tensor.
+// SliceTensorStartTensorSizeTensorSqueezeMaskName creates a slice operation and returns the result tensor.
 func (x *Graph) SliceTensorStartTensorSizeTensorSqueezeMaskName(tensor *GraphTensor, startTensor *GraphTensor, sizeTensor *GraphTensor, squeezeMask uint32, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceTensor:startTensor:sizeTensor:squeezeMask:name:"), objref.IDOf(tensor), objref.IDOf(startTensor), objref.IDOf(sizeTensor), squeezeMask, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a strided-slice gradient operation and returns the result tensor.
+// SliceGradientTensorFwdInShapeTensorStartsEndsStridesName creates a strided-slice gradient operation and returns the result tensor.
 func (x *Graph) SliceGradientTensorFwdInShapeTensorStartsEndsStridesName(inputGradientTensor *GraphTensor, fwdInShapeTensor *GraphTensor, starts []obj.Object, ends []obj.Object, strides []obj.Object, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceGradientTensor:fwdInShapeTensor:starts:ends:strides:name:"), objref.IDOf(inputGradientTensor), objref.IDOf(fwdInShapeTensor), purego.SliceToNSArray(starts, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(ends, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a strided-slice gradient operation and returns the result tensor.
+// SliceGradientTensorFwdInShapeTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName creates a strided-slice gradient operation and returns the result tensor.
 func (x *Graph) SliceGradientTensorFwdInShapeTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName(inputGradientTensor *GraphTensor, fwdInShapeTensor *GraphTensor, startTensor *GraphTensor, endTensor *GraphTensor, strideTensor *GraphTensor, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceGradientTensor:fwdInShapeTensor:startTensor:endTensor:strideTensor:startMask:endMask:squeezeMask:name:"), objref.IDOf(inputGradientTensor), objref.IDOf(fwdInShapeTensor), objref.IDOf(startTensor), objref.IDOf(endTensor), objref.IDOf(strideTensor), startMask, endMask, squeezeMask, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a slice gradient operation and returns the result tensor.
+// SliceGradientTensorFwdInShapeTensorStartTensorSizeTensorSqueezeMaskName creates a slice gradient operation and returns the result tensor.
 func (x *Graph) SliceGradientTensorFwdInShapeTensorStartTensorSizeTensorSqueezeMaskName(inputGradientTensor *GraphTensor, fwdInShapeTensor *GraphTensor, startTensor *GraphTensor, sizeTensor *GraphTensor, squeezeMask uint32, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceGradientTensor:fwdInShapeTensor:startTensor:sizeTensor:squeezeMask:name:"), objref.IDOf(inputGradientTensor), objref.IDOf(fwdInShapeTensor), objref.IDOf(startTensor), objref.IDOf(sizeTensor), squeezeMask, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a strided-slice gradient operation and returns the result tensor.
+// SliceGradientTensorFwdInShapeTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName creates a strided-slice gradient operation and returns the result tensor.
 func (x *Graph) SliceGradientTensorFwdInShapeTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(inputGradientTensor *GraphTensor, fwdInShapeTensor *GraphTensor, starts []obj.Object, ends []obj.Object, strides []obj.Object, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceGradientTensor:fwdInShapeTensor:starts:ends:strides:startMask:endMask:squeezeMask:name:"), objref.IDOf(inputGradientTensor), objref.IDOf(fwdInShapeTensor), purego.SliceToNSArray(starts, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(ends, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), startMask, endMask, squeezeMask, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a strided-slice update operation and returns the result tensor.
+// SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorStartMaskEndMaskSqueezeMaskName creates a strided-slice update operation and returns the result tensor.
 func (x *Graph) SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorStartMaskEndMaskSqueezeMaskName(dataTensor *GraphTensor, updateTensor *GraphTensor, startsTensor *GraphTensor, endsTensor *GraphTensor, stridesTensor *GraphTensor, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceUpdateDataTensor:updateTensor:startsTensor:endsTensor:stridesTensor:startMask:endMask:squeezeMask:name:"), objref.IDOf(dataTensor), objref.IDOf(updateTensor), objref.IDOf(startsTensor), objref.IDOf(endsTensor), objref.IDOf(stridesTensor), startMask, endMask, squeezeMask, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a strided-slice update operation and returns the result tensor.
+// SliceUpdateDataTensorUpdateTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName creates a strided-slice update operation and returns the result tensor.
 func (x *Graph) SliceUpdateDataTensorUpdateTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(dataTensor *GraphTensor, updateTensor *GraphTensor, starts []obj.Object, ends []obj.Object, strides []obj.Object, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceUpdateDataTensor:updateTensor:starts:ends:strides:startMask:endMask:squeezeMask:name:"), objref.IDOf(dataTensor), objref.IDOf(updateTensor), purego.SliceToNSArray(starts, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(ends, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), startMask, endMask, squeezeMask, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a strided-slice update operation with zero masks and returns the result tensor.
+// SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorName creates a strided-slice update operation with zero masks and returns the result tensor.
 func (x *Graph) SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorName(dataTensor *GraphTensor, updateTensor *GraphTensor, startsTensor *GraphTensor, endsTensor *GraphTensor, stridesTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceUpdateDataTensor:updateTensor:startsTensor:endsTensor:stridesTensor:name:"), objref.IDOf(dataTensor), objref.IDOf(updateTensor), objref.IDOf(startsTensor), objref.IDOf(endsTensor), objref.IDOf(stridesTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a strided-slice update operation with zero masks and returns the result tensor.
+// SliceUpdateDataTensorUpdateTensorStartsEndsStridesName creates a strided-slice update operation with zero masks and returns the result tensor.
 func (x *Graph) SliceUpdateDataTensorUpdateTensorStartsEndsStridesName(dataTensor *GraphTensor, updateTensor *GraphTensor, starts []obj.Object, ends []obj.Object, strides []obj.Object, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceUpdateDataTensor:updateTensor:starts:ends:strides:name:"), objref.IDOf(dataTensor), objref.IDOf(updateTensor), purego.SliceToNSArray(starts, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(ends, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a concatenation operation and returns the result tensor.
+// ConcatTensorWithTensorDimensionName creates a concatenation operation and returns the result tensor.
 func (x *Graph) ConcatTensorWithTensorDimensionName(tensor *GraphTensor, tensor2 *GraphTensor, dimensionIndex int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("concatTensor:withTensor:dimension:name:"), objref.IDOf(tensor), objref.IDOf(tensor2), dimensionIndex, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a concatenation operation and returns the result tensor.
+// ConcatTensorsDimensionName creates a concatenation operation and returns the result tensor.
 func (x *Graph) ConcatTensorsDimensionName(tensors []*GraphTensor, dimensionIndex int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("concatTensors:dimension:name:"), purego.SliceToNSArray(tensors, func(_v *GraphTensor) objc.ID { return objref.IDOf(_v) }), dimensionIndex, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a concatenation operation and returns the result tensor.
+// ConcatTensorsDimensionInterleaveName creates a concatenation operation and returns the result tensor.
 func (x *Graph) ConcatTensorsDimensionInterleaveName(tensors []*GraphTensor, dimensionIndex int, interleave bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("concatTensors:dimension:interleave:name:"), purego.SliceToNSArray(tensors, func(_v *GraphTensor) objc.ID { return objref.IDOf(_v) }), dimensionIndex, interleave, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a space-to-depth2D operation and returns the result tensor.
+// SpaceToDepth2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName creates a space-to-depth2D operation and returns the result tensor.
 func (x *Graph) SpaceToDepth2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName(tensor *GraphTensor, widthAxis int, heightAxis int, depthAxis int, blockSize int, usePixelShuffleOrder bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("spaceToDepth2DTensor:widthAxis:heightAxis:depthAxis:blockSize:usePixelShuffleOrder:name:"), objref.IDOf(tensor), widthAxis, heightAxis, depthAxis, blockSize, usePixelShuffleOrder, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a space-to-depth2D operation and returns the result tensor.
+// SpaceToDepth2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName creates a space-to-depth2D operation and returns the result tensor.
 func (x *Graph) SpaceToDepth2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName(tensor *GraphTensor, widthAxisTensor *GraphTensor, heightAxisTensor *GraphTensor, depthAxisTensor *GraphTensor, blockSize int, usePixelShuffleOrder bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("spaceToDepth2DTensor:widthAxisTensor:heightAxisTensor:depthAxisTensor:blockSize:usePixelShuffleOrder:name:"), objref.IDOf(tensor), objref.IDOf(widthAxisTensor), objref.IDOf(heightAxisTensor), objref.IDOf(depthAxisTensor), blockSize, usePixelShuffleOrder, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a depth-to-space2D operation and returns the result tensor.
+// DepthToSpace2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName creates a depth-to-space2D operation and returns the result tensor.
 func (x *Graph) DepthToSpace2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName(tensor *GraphTensor, widthAxis int, heightAxis int, depthAxis int, blockSize int, usePixelShuffleOrder bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("depthToSpace2DTensor:widthAxis:heightAxis:depthAxis:blockSize:usePixelShuffleOrder:name:"), objref.IDOf(tensor), widthAxis, heightAxis, depthAxis, blockSize, usePixelShuffleOrder, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a depth-to-space2D operation and returns the result tensor.
+// DepthToSpace2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName creates a depth-to-space2D operation and returns the result tensor.
 func (x *Graph) DepthToSpace2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName(tensor *GraphTensor, widthAxisTensor *GraphTensor, heightAxisTensor *GraphTensor, depthAxisTensor *GraphTensor, blockSize int, usePixelShuffleOrder bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("depthToSpace2DTensor:widthAxisTensor:heightAxisTensor:depthAxisTensor:blockSize:usePixelShuffleOrder:name:"), objref.IDOf(tensor), objref.IDOf(widthAxisTensor), objref.IDOf(heightAxisTensor), objref.IDOf(depthAxisTensor), blockSize, usePixelShuffleOrder, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a space-to-batch operation and returns the result tensor.
+// SpaceToBatchTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName creates a space-to-batch operation and returns the result tensor.
 func (x *Graph) SpaceToBatchTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName(tensor *GraphTensor, spatialAxes []obj.Object, batchAxis int, blockDimensions []obj.Object, usePixelShuffleOrder bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("spaceToBatchTensor:spatialAxes:batchAxis:blockDimensions:usePixelShuffleOrder:name:"), objref.IDOf(tensor), purego.SliceToNSArray(spatialAxes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), batchAxis, purego.SliceToNSArray(blockDimensions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), usePixelShuffleOrder, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a space-to-batch operation and returns the result tensor.
+// SpaceToBatchTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName creates a space-to-batch operation and returns the result tensor.
 func (x *Graph) SpaceToBatchTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName(tensor *GraphTensor, spatialAxesTensor *GraphTensor, batchAxisTensor *GraphTensor, blockDimensionsTensor *GraphTensor, usePixelShuffleOrder bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("spaceToBatchTensor:spatialAxesTensor:batchAxisTensor:blockDimensionsTensor:usePixelShuffleOrder:name:"), objref.IDOf(tensor), objref.IDOf(spatialAxesTensor), objref.IDOf(batchAxisTensor), objref.IDOf(blockDimensionsTensor), usePixelShuffleOrder, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a batch-to-space operation and returns the result tensor.
+// BatchToSpaceTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName creates a batch-to-space operation and returns the result tensor.
 func (x *Graph) BatchToSpaceTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName(tensor *GraphTensor, spatialAxes []obj.Object, batchAxis int, blockDimensions []obj.Object, usePixelShuffleOrder bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("batchToSpaceTensor:spatialAxes:batchAxis:blockDimensions:usePixelShuffleOrder:name:"), objref.IDOf(tensor), purego.SliceToNSArray(spatialAxes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), batchAxis, purego.SliceToNSArray(blockDimensions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), usePixelShuffleOrder, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a batch-to-space operation and returns the result tensor.
+// BatchToSpaceTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName creates a batch-to-space operation and returns the result tensor.
 func (x *Graph) BatchToSpaceTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName(tensor *GraphTensor, spatialAxesTensor *GraphTensor, batchAxisTensor *GraphTensor, blockDimensionsTensor *GraphTensor, usePixelShuffleOrder bool, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("batchToSpaceTensor:spatialAxesTensor:batchAxisTensor:blockDimensionsTensor:usePixelShuffleOrder:name:"), objref.IDOf(tensor), objref.IDOf(spatialAxesTensor), objref.IDOf(batchAxisTensor), objref.IDOf(blockDimensionsTensor), usePixelShuffleOrder, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a reverse operation and returns the result tensor.
+// ReverseTensorAxesTensorName creates a reverse operation and returns the result tensor.
 func (x *Graph) ReverseTensorAxesTensorName(tensor *GraphTensor, axesTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reverseTensor:axesTensor:name:"), objref.IDOf(tensor), objref.IDOf(axesTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a reverse operation and returns the result tensor.
+// ReverseTensorAxesName creates a reverse operation and returns the result tensor.
 func (x *Graph) ReverseTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reverseTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a reverse operation and returns the result tensor.
+// ReverseTensorName creates a reverse operation and returns the result tensor.
 func (x *Graph) ReverseTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reverseTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a flatten2D operation and returns the result tensor.
+// Flatten2DTensorAxisName creates a flatten2D operation and returns the result tensor.
 func (x *Graph) Flatten2DTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flatten2DTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a flatten2D operation and returns the result tensor.
+// Flatten2DTensorAxisTensorName creates a flatten2D operation and returns the result tensor.
 func (x *Graph) Flatten2DTensorAxisTensorName(tensor *GraphTensor, axisTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flatten2DTensor:axisTensor:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a broadcast operation and returns the result tensor.
+// BroadcastTensorToShapeTensorName creates a broadcast operation and returns the result tensor.
 func (x *Graph) BroadcastTensorToShapeTensorName(tensor *GraphTensor, shapeTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("broadcastTensor:toShapeTensor:name:"), objref.IDOf(tensor), objref.IDOf(shapeTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a shape-of operation and returns the result tensor.
+// ShapeOfTensorName creates a shape-of operation and returns the result tensor.
 func (x *Graph) ShapeOfTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shapeOfTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a stack operation and returns the result tensor.
+// StackTensorsAxisName creates a stack operation and returns the result tensor.
 func (x *Graph) StackTensorsAxisName(inputTensors []*GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stackTensors:axis:name:"), purego.SliceToNSArray(inputTensors, func(_v *GraphTensor) objc.ID { return objref.IDOf(_v) }), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a split operation and returns the result tensor.
+// SplitTensorSplitSizesAxisName creates a split operation and returns the result tensor.
 func (x *Graph) SplitTensorSplitSizesAxisName(tensor *GraphTensor, splitSizes []obj.Object, axis int, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("splitTensor:splitSizes:axis:name:"), objref.IDOf(tensor), purego.SliceToNSArray(splitSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), axis, purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a split operation and returns the result tensor.
+// SplitTensorSplitSizesTensorAxisName creates a split operation and returns the result tensor.
 func (x *Graph) SplitTensorSplitSizesTensorAxisName(tensor *GraphTensor, splitSizesTensor *GraphTensor, axis int, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("splitTensor:splitSizesTensor:axis:name:"), objref.IDOf(tensor), objref.IDOf(splitSizesTensor), axis, purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a split operation and returns the result tensor.
+// SplitTensorNumSplitsAxisName creates a split operation and returns the result tensor.
 func (x *Graph) SplitTensorNumSplitsAxisName(tensor *GraphTensor, numSplits int, axis int, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("splitTensor:numSplits:axis:name:"), objref.IDOf(tensor), numSplits, axis, purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a squeeze operation and returns the result tensor.
+// SqueezeTensorName creates a squeeze operation and returns the result tensor.
 func (x *Graph) SqueezeTensorName(tensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("squeezeTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a squeeze operation and returns the result tensor.
+// SqueezeTensorAxisName creates a squeeze operation and returns the result tensor.
 func (x *Graph) SqueezeTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("squeezeTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a squeeze operation and returns the result tensor.
+// SqueezeTensorAxesName creates a squeeze operation and returns the result tensor.
 func (x *Graph) SqueezeTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("squeezeTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a squeeze operation and returns the result tensor.
+// SqueezeTensorAxesTensorName creates a squeeze operation and returns the result tensor.
 func (x *Graph) SqueezeTensorAxesTensorName(tensor *GraphTensor, axesTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("squeezeTensor:axesTensor:name:"), objref.IDOf(tensor), objref.IDOf(axesTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates an expand-dimensions operation and returns the result tensor.
+// ExpandDimsOfTensorAxisName creates an expand-dimensions operation and returns the result tensor.
 func (x *Graph) ExpandDimsOfTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expandDimsOfTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates an expand-dimensions operation and returns the result tensor.
+// ExpandDimsOfTensorAxesName creates an expand-dimensions operation and returns the result tensor.
 func (x *Graph) ExpandDimsOfTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expandDimsOfTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates an expand-dimensions operation and returns the result tensor.
+// ExpandDimsOfTensorAxesTensorName creates an expand-dimensions operation and returns the result tensor.
 func (x *Graph) ExpandDimsOfTensorAxesTensorName(tensor *GraphTensor, axesTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expandDimsOfTensor:axesTensor:name:"), objref.IDOf(tensor), objref.IDOf(axesTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a get-coordindate operation and returns the result tensor.
+// CoordinateAlongAxisWithShapeTensorName creates a get-coordindate operation and returns the result tensor.
 func (x *Graph) CoordinateAlongAxisWithShapeTensorName(axis int, shapeTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coordinateAlongAxis:withShapeTensor:name:"), axis, objref.IDOf(shapeTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a get-coordindate operation and returns the result tensor.
+// CoordinateAlongAxisTensorWithShapeTensorName creates a get-coordindate operation and returns the result tensor.
 func (x *Graph) CoordinateAlongAxisTensorWithShapeTensorName(axisTensor *GraphTensor, shapeTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coordinateAlongAxisTensor:withShapeTensor:name:"), objref.IDOf(axisTensor), objref.IDOf(shapeTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a TopK operation and returns the value and indices tensors
+// TopKWithSourceTensorKName creates a TopK operation and returns the value and indices tensors
 func (x *Graph) TopKWithSourceTensorKName(source *GraphTensor, k int, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topKWithSourceTensor:k:name:"), objref.IDOf(source), k, purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a TopK operation and returns the result tensor.
+// TopKWithSourceTensorKTensorName creates a TopK operation and returns the result tensor.
 func (x *Graph) TopKWithSourceTensorKTensorName(source *GraphTensor, kTensor *GraphTensor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topKWithSourceTensor:kTensor:name:"), objref.IDOf(source), objref.IDOf(kTensor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a TopK operation and returns the value and indices tensors.
+// TopKWithSourceTensorAxisKName creates a TopK operation and returns the value and indices tensors.
 func (x *Graph) TopKWithSourceTensorAxisKName(source *GraphTensor, axis int, k int, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topKWithSourceTensor:axis:k:name:"), objref.IDOf(source), axis, k, purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a BottomK operation and returns the value and indices tensors.
+// BottomKWithSourceTensorAxisKName creates a BottomK operation and returns the value and indices tensors.
 func (x *Graph) BottomKWithSourceTensorAxisKName(source *GraphTensor, axis int, k int, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bottomKWithSourceTensor:axis:k:name:"), objref.IDOf(source), axis, k, purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a TopK operation and returns the result tensor.
+// TopKWithSourceTensorAxisTensorKTensorName creates a TopK operation and returns the result tensor.
 func (x *Graph) TopKWithSourceTensorAxisTensorKTensorName(source *GraphTensor, axisTensor *GraphTensor, kTensor *GraphTensor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topKWithSourceTensor:axisTensor:kTensor:name:"), objref.IDOf(source), objref.IDOf(axisTensor), objref.IDOf(kTensor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a BottomK operation and returns the result tensor.
+// BottomKWithSourceTensorAxisTensorKTensorName creates a BottomK operation and returns the result tensor.
 func (x *Graph) BottomKWithSourceTensorAxisTensorKTensorName(source *GraphTensor, axisTensor *GraphTensor, kTensor *GraphTensor, name string) []*GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bottomKWithSourceTensor:axisTensor:kTensor:name:"), objref.IDOf(source), objref.IDOf(axisTensor), objref.IDOf(kTensor), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// Creates a TopKGradient operation and returns the result tensor.
+// TopKWithGradientTensorSourceKName creates a TopKGradient operation and returns the result tensor.
 func (x *Graph) TopKWithGradientTensorSourceKName(gradient *GraphTensor, source *GraphTensor, k int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topKWithGradientTensor:source:k:name:"), objref.IDOf(gradient), objref.IDOf(source), k, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a TopKGradient operation and returns the result tensor.
+// TopKWithGradientTensorSourceAxisKName creates a TopKGradient operation and returns the result tensor.
 func (x *Graph) TopKWithGradientTensorSourceAxisKName(gradient *GraphTensor, source *GraphTensor, axis int, k int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topKWithGradientTensor:source:axis:k:name:"), objref.IDOf(gradient), objref.IDOf(source), axis, k, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a BottomKGradient operation and returns the result tensor.
+// BottomKWithGradientTensorSourceAxisKName creates a BottomKGradient operation and returns the result tensor.
 func (x *Graph) BottomKWithGradientTensorSourceAxisKName(gradient *GraphTensor, source *GraphTensor, axis int, k int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bottomKWithGradientTensor:source:axis:k:name:"), objref.IDOf(gradient), objref.IDOf(source), axis, k, purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a TopKGradient operation and returns the result tensor.
+// TopKWithGradientTensorSourceKTensorName creates a TopKGradient operation and returns the result tensor.
 func (x *Graph) TopKWithGradientTensorSourceKTensorName(gradient *GraphTensor, source *GraphTensor, kTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topKWithGradientTensor:source:kTensor:name:"), objref.IDOf(gradient), objref.IDOf(source), objref.IDOf(kTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a TopKGradient operation and returns the result tensor.
+// TopKWithGradientTensorSourceAxisTensorKTensorName creates a TopKGradient operation and returns the result tensor.
 func (x *Graph) TopKWithGradientTensorSourceAxisTensorKTensorName(gradient *GraphTensor, source *GraphTensor, axisTensor *GraphTensor, kTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topKWithGradientTensor:source:axisTensor:kTensor:name:"), objref.IDOf(gradient), objref.IDOf(source), objref.IDOf(axisTensor), objref.IDOf(kTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// Creates a BottomKGradient operation and returns the result tensor.
+// BottomKWithGradientTensorSourceAxisTensorKTensorName creates a BottomKGradient operation and returns the result tensor.
 func (x *Graph) BottomKWithGradientTensorSourceAxisTensorKTensorName(gradient *GraphTensor, source *GraphTensor, axisTensor *GraphTensor, kTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bottomKWithGradientTensor:source:axisTensor:kTensor:name:"), objref.IDOf(gradient), objref.IDOf(source), objref.IDOf(axisTensor), objref.IDOf(kTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
@@ -2298,3 +2285,5 @@ type Graphable interface {
 }
 
 var _ Graphable = (*Graph)(nil)
+
+var _ GraphObjectProvider = (*Graph)(nil)

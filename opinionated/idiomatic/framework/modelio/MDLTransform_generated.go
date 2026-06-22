@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of the local coordinate space transformations for a 3D object.
-//
 // Transform is an idiomatic wrapper over the Objective-C class MDLTransform.
+//
+// A description of the local coordinate space transformations for a 3D object.
 type Transform struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TransformFromID(id objc.ID) *Transform {
 	if id == 0 {
 		return nil
 	}
-	x := &Transform{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Transform{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func transformAdopt(id objc.ID) *Transform {
 	if id == 0 {
 		return nil
 	}
-	x := &Transform{Handle: objref.Wrap(id)}
+	x := &Transform{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *Transform) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Transform) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTransform creates a new Transform.
 func NewTransform() *Transform {
 	_id := objc.Send[objc.ID](objc.ID(_class("MDLTransform")), objc.RegisterName("new"))
 	return transformAdopt(_id)
 }
 
-// Sets all factors of the transform to those of the identity transformation.
+// SetIdentity sets all factors of the transform to those of the identity transformation.
 func (x *Transform) SetIdentity() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentity"))
 }

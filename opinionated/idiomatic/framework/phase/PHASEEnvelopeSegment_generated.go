@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A curved portion of an envelope.
-//
 // EnvelopeSegment is an idiomatic wrapper over the Objective-C class PHASEEnvelopeSegment.
+//
+// A curved portion of an envelope.
 type EnvelopeSegment struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func EnvelopeSegmentFromID(id objc.ID) *EnvelopeSegment {
 	if id == 0 {
 		return nil
 	}
-	x := &EnvelopeSegment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EnvelopeSegment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func envelopeSegmentAdopt(id objc.ID) *EnvelopeSegment {
 	if id == 0 {
 		return nil
 	}
-	x := &EnvelopeSegment{Handle: objref.Wrap(id)}
+	x := &EnvelopeSegment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,26 +60,31 @@ func (x *EnvelopeSegment) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *EnvelopeSegment) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewEnvelopeSegment creates a new EnvelopeSegment.
 func NewEnvelopeSegment() *EnvelopeSegment {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHASEEnvelopeSegment")), objc.RegisterName("new"))
 	return envelopeSegmentAdopt(_id)
 }
 
-// A curve along the envelope that shapes the segment.
-//
-// WithCurveType sets curveType and returns the receiver so calls can be chained.
+// WithCurveType a curve along the envelope that shapes the segment.
 func (x *EnvelopeSegment) WithCurveType(curveType CurveType) *EnvelopeSegment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurveType:"), curveType)
 	return x
 }
 
-// The curve type of the envelope segment. The default value is PHASECurveTypeLinear.
+// CurveType the curve type of the envelope segment. The default value is PHASECurveTypeLinear.
 func (x *EnvelopeSegment) CurveType() CurveType {
 	_r := objc.Send[CurveType](objref.IDOf(x), objc.RegisterName("curveType"))
 	return _r
 }
 
+// SetCurveType wraps the corresponding Objective-C method.
 func (x *EnvelopeSegment) SetCurveType(curveType CurveType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurveType:"), curveType)
 }

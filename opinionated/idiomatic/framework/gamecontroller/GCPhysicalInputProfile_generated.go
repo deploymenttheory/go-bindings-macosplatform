@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for controller profiles that support physical buttons, thumbsticks, and directional pads.
-//
 // PhysicalInputProfile is an idiomatic wrapper over the Objective-C class GCPhysicalInputProfile.
+//
+// PhysicalInputProfile is an abstract base — you do not construct it directly. Construct one of [ExtendedGamepad], [Gamepad], [KeyboardInput], [MicroGamepad], [MouseInput] and pass it where a PhysicalInputProfile is accepted.
+//
+// The base class for controller profiles that support physical buttons, thumbsticks, and directional pads.
 type PhysicalInputProfile struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func PhysicalInputProfileFromID(id objc.ID) *PhysicalInputProfile {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicalInputProfile{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PhysicalInputProfile{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func physicalInputProfileAdopt(id objc.ID) *PhysicalInputProfile {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicalInputProfile{Handle: objref.Wrap(id)}
+	x := &PhysicalInputProfile{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,38 +62,36 @@ func (x *PhysicalInputProfile) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewPhysicalInputProfile creates a new PhysicalInputProfile.
-func NewPhysicalInputProfile() *PhysicalInputProfile {
-	_id := objc.Send[objc.ID](objc.ID(_class("GCPhysicalInputProfile")), objc.RegisterName("new"))
-	return physicalInputProfileAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PhysicalInputProfile) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The block that the profile calls when an element’s value changes.
-//
-// WithValueDidChangeHandler sets valueDidChangeHandler and returns the receiver so calls can be chained.
+// WithValueDidChangeHandler the block that the profile calls when an element’s value changes.
 func (x *PhysicalInputProfile) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *PhysicalInputProfile {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return x
 }
 
-// Returns the element that the key specifies.
+// ObjectForKeyedSubscript returns the element that the key specifies.
 func (x *PhysicalInputProfile) ObjectForKeyedSubscript(key string) *ControllerElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKeyedSubscript:"), purego.NSString(key))
 	return ControllerElementFromID(_r)
 }
 
-// Returns a snapshot of the profile with its current element values.
+// Capture returns a snapshot of the profile with its current element values.
 func (x *PhysicalInputProfile) Capture() *PhysicalInputProfile {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("capture"))
 	return PhysicalInputProfileFromID(_r)
 }
 
-// Copies the input values from a specified physical input profile to a snapshot of the profile.
+// SetStateFromPhysicalInput copies the input values from a specified physical input profile to a snapshot of the profile.
 func (x *PhysicalInputProfile) SetStateFromPhysicalInput(physicalInput *PhysicalInputProfile) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStateFromPhysicalInput:"), objref.IDOf(physicalInput))
 }
 
-// Returns the name of the input element to which the user remaps the given physical element.
+// MappedElementAliasForPhysicalInputName returns the name of the input element to which the user remaps the given physical element.
 func (x *PhysicalInputProfile) MappedElementAliasForPhysicalInputName(inputName string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mappedElementAliasForPhysicalInputName:"), purego.NSString(inputName))
 	if _r == 0 {
@@ -98,75 +100,84 @@ func (x *PhysicalInputProfile) MappedElementAliasForPhysicalInputName(inputName 
 	return purego.GoString(_r)
 }
 
-// Returns the physical input elements to which the user remaps the given input element.
+// MappedPhysicalInputNamesForElementAlias returns the physical input elements to which the user remaps the given input element.
 func (x *PhysicalInputProfile) MappedPhysicalInputNamesForElementAlias(elementAlias string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mappedPhysicalInputNamesForElementAlias:"), purego.NSString(elementAlias))
 	return obj.Wrap(_r)
 }
 
-// The last time elements of this profile were updated.
+// LastEventTimestamp the last time elements of this profile were updated.
 func (x *PhysicalInputProfile) LastEventTimestamp() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lastEventTimestamp"))
 	return _r
 }
 
-// Whether the user has remapped their physical input controls for this profile at the system level. On iOS and tvOS, users can remap their game controller inputs in Settings.
+// HasRemappedElements whether the user has remapped their physical input controls for this profile at the system level. On iOS and tvOS, users can remap their game controller inputs in Settings.
 func (x *PhysicalInputProfile) HasRemappedElements() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasRemappedElements"))
 	return _r
 }
 
+// SetValueDidChangeHandler wraps the corresponding Objective-C method.
 func (x *PhysicalInputProfile) SetValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 }
 
-// The following properties allow for runtime lookup of any input element on a profile, when provided with a valid alias.
+// Elements the following properties allow for runtime lookup of any input element on a profile, when provided with a valid alias.
 func (x *PhysicalInputProfile) Elements() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elements"))
 	return obj.Wrap(_r)
 }
 
+// Buttons wraps the corresponding Objective-C method.
 func (x *PhysicalInputProfile) Buttons() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttons"))
 	return obj.Wrap(_r)
 }
 
+// Axes wraps the corresponding Objective-C method.
 func (x *PhysicalInputProfile) Axes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("axes"))
 	return obj.Wrap(_r)
 }
 
+// Dpads wraps the corresponding Objective-C method.
 func (x *PhysicalInputProfile) Dpads() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dpads"))
 	return obj.Wrap(_r)
 }
 
+// Touchpads wraps the corresponding Objective-C method.
 func (x *PhysicalInputProfile) Touchpads() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchpads"))
 	return obj.Wrap(_r)
 }
 
-// The following properties allow for dynamic querying of the input elements available on a profile.
+// AllElements the following properties allow for dynamic querying of the input elements available on a profile.
 func (x *PhysicalInputProfile) AllElements() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allElements"))
 	return obj.Wrap(_r)
 }
 
+// AllButtons wraps the corresponding Objective-C method.
 func (x *PhysicalInputProfile) AllButtons() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allButtons"))
 	return obj.Wrap(_r)
 }
 
+// AllAxes wraps the corresponding Objective-C method.
 func (x *PhysicalInputProfile) AllAxes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allAxes"))
 	return obj.Wrap(_r)
 }
 
+// AllDpads wraps the corresponding Objective-C method.
 func (x *PhysicalInputProfile) AllDpads() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allDpads"))
 	return obj.Wrap(_r)
 }
 
+// AllTouchpads wraps the corresponding Objective-C method.
 func (x *PhysicalInputProfile) AllTouchpads() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allTouchpads"))
 	return obj.Wrap(_r)
@@ -197,3 +208,10 @@ type PhysicalInputProfileable interface {
 }
 
 var _ PhysicalInputProfileable = (*PhysicalInputProfile)(nil)
+
+// isPhysicalInputProfile marks PhysicalInputProfile — and, by embedding promotion, its
+// subclasses — as a member of the PhysicalInputProfile hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *PhysicalInputProfile) isPhysicalInputProfile() {}
+
+var _ PhysicalInputProfileProvider = (*PhysicalInputProfile)(nil)

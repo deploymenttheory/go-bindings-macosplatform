@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A popover-based interface for selecting a contact.
-//
 // ContactPicker is an idiomatic wrapper over the Objective-C class CNContactPicker.
+//
+// A popover-based interface for selecting a contact.
 type ContactPicker struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ContactPickerFromID(id objc.ID) *ContactPicker {
 	if id == 0 {
 		return nil
 	}
-	x := &ContactPicker{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContactPicker{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func contactPickerAdopt(id objc.ID) *ContactPicker {
 	if id == 0 {
 		return nil
 	}
-	x := &ContactPicker{Handle: objref.Wrap(id)}
+	x := &ContactPicker{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,27 +60,31 @@ func (x *ContactPicker) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContactPicker) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewContactPicker creates a new ContactPicker.
 func NewContactPicker() *ContactPicker {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNContactPicker")), objc.RegisterName("new"))
 	return contactPickerAdopt(_id)
 }
 
-// The keys to be displayed when a contact is expanded.
-//
-// WithDisplayedKeys sets the collection and returns the receiver so calls can be chained.
+// WithDisplayedKeys the keys to be displayed when a contact is expanded.
 func (x *ContactPicker) WithDisplayedKeys(items ...obj.Object) *ContactPicker {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayedKeys:"), _arr)
 	return x
 }
 
-// Closes the popover.
+// Close closes the popover.
 func (x *ContactPicker) Close() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
 }
 
-// The CNContact keys to display when a contact is expanded. If no keys are provided, the picker will select contacts instead of values.
+// DisplayedKeys the CNContact keys to display when a contact is expanded. If no keys are provided, the picker will select contacts instead of values.
 //
 // DisplayedKeys returns the collection as a Go slice.
 func (x *ContactPicker) DisplayedKeys() []string {
@@ -86,6 +92,7 @@ func (x *ContactPicker) DisplayedKeys() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetDisplayedKeys wraps the corresponding Objective-C method.
 func (x *ContactPicker) SetDisplayedKeys(displayedKeys []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayedKeys:"), purego.SliceToNSArray(displayedKeys, func(_v string) objc.ID { return purego.NSString(_v) }))
 }

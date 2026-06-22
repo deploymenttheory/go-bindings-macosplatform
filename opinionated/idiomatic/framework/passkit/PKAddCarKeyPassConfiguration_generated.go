@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specialized configuration object that PassKit uses when it creates a digital car key.
-//
 // AddCarKeyPassConfiguration is an idiomatic wrapper over the Objective-C class PKAddCarKeyPassConfiguration.
+//
+// It embeds [AddSecureElementPassConfiguration], promoting that type's methods.
+//
+// A specialized configuration object that PassKit uses when it creates a digital car key.
 type AddCarKeyPassConfiguration struct {
-	objref.Handle
+	AddSecureElementPassConfiguration
 }
 
 // AddCarKeyPassConfigurationFromID adopts an existing Objective-C object as a AddCarKeyPassConfiguration
@@ -25,7 +26,8 @@ func AddCarKeyPassConfigurationFromID(id objc.ID) *AddCarKeyPassConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &AddCarKeyPassConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AddCarKeyPassConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func addCarKeyPassConfigurationAdopt(id objc.ID) *AddCarKeyPassConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &AddCarKeyPassConfiguration{Handle: objref.Wrap(id)}
+	x := &AddCarKeyPassConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AddCarKeyPassConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AddCarKeyPassConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AddCarKeyPassConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAddCarKeyPassConfiguration creates a new AddCarKeyPassConfiguration.
@@ -64,58 +52,49 @@ func NewAddCarKeyPassConfiguration() *AddCarKeyPassConfiguration {
 	return addCarKeyPassConfigurationAdopt(_id)
 }
 
-// A one-time password that the vehicle manufacturer provides.
-//
-// WithPassword sets password and returns the receiver so calls can be chained.
+// WithPassword a one-time password that the vehicle manufacturer provides.
 func (x *AddCarKeyPassConfiguration) WithPassword(password string) *AddCarKeyPassConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassword:"), purego.NSString(password))
 	return x
 }
 
-// The wireless radio technology that the key uses.
-//
-// WithSupportedRadioTechnologies sets supportedRadioTechnologies and returns the receiver so calls can be chained.
+// WithSupportedRadioTechnologies the wireless radio technology that the key uses.
 func (x *AddCarKeyPassConfiguration) WithSupportedRadioTechnologies(supportedRadioTechnologies RadioTechnology) *AddCarKeyPassConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedRadioTechnologies:"), supportedRadioTechnologies)
 	return x
 }
 
-// WithManufacturerIdentifier sets manufacturerIdentifier and returns the receiver so calls can be chained.
+// WithManufacturerIdentifier sets the property and returns the receiver so calls can be chained.
 func (x *AddCarKeyPassConfiguration) WithManufacturerIdentifier(manufacturerIdentifier string) *AddCarKeyPassConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManufacturerIdentifier:"), purego.NSString(manufacturerIdentifier))
 	return x
 }
 
-// WithProvisioningTemplateIdentifier sets provisioningTemplateIdentifier and returns the receiver so calls can be chained.
+// WithProvisioningTemplateIdentifier sets the property and returns the receiver so calls can be chained.
 func (x *AddCarKeyPassConfiguration) WithProvisioningTemplateIdentifier(provisioningTemplateIdentifier string) *AddCarKeyPassConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProvisioningTemplateIdentifier:"), purego.NSString(provisioningTemplateIdentifier))
 	return x
 }
 
-// The product plan identifier (PPID) supplied by the vehicle’s original equipment manufacturer (OEM).
-//
-// WithProductPlanIdentifier sets productPlanIdentifier and returns the receiver so calls can be chained.
+// WithProductPlanIdentifier the product plan identifier (PPID) supplied by the vehicle’s original equipment manufacturer (OEM).
 func (x *AddCarKeyPassConfiguration) WithProductPlanIdentifier(productPlanIdentifier string) *AddCarKeyPassConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductPlanIdentifier:"), purego.NSString(productPlanIdentifier))
 	return x
 }
 
-// An opaque value for the configuration.
-//
-// WithIssuerIdentifier sets issuerIdentifier and returns the receiver so calls can be chained.
+// WithIssuerIdentifier an opaque value for the configuration.
 func (x *AddCarKeyPassConfiguration) WithIssuerIdentifier(issuerIdentifier string) *AddCarKeyPassConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIssuerIdentifier:"), purego.NSString(issuerIdentifier))
 	return x
 }
 
-// The configuration’s localized description.
-//
-// WithLocalizedDescription sets localizedDescription and returns the receiver so calls can be chained.
+// WithLocalizedDescription the configuration’s localized description.
 func (x *AddCarKeyPassConfiguration) WithLocalizedDescription(localizedDescription string) *AddCarKeyPassConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
 	return x
 }
 
+// Password wraps the corresponding Objective-C method.
 func (x *AddCarKeyPassConfiguration) Password() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("password"))
 	if _r == 0 {
@@ -124,19 +103,23 @@ func (x *AddCarKeyPassConfiguration) Password() string {
 	return purego.GoString(_r)
 }
 
+// SetPassword wraps the corresponding Objective-C method.
 func (x *AddCarKeyPassConfiguration) SetPassword(password string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassword:"), purego.NSString(password))
 }
 
+// SupportedRadioTechnologies wraps the corresponding Objective-C method.
 func (x *AddCarKeyPassConfiguration) SupportedRadioTechnologies() RadioTechnology {
 	_r := objc.Send[RadioTechnology](objref.IDOf(x), objc.RegisterName("supportedRadioTechnologies"))
 	return _r
 }
 
+// SetSupportedRadioTechnologies wraps the corresponding Objective-C method.
 func (x *AddCarKeyPassConfiguration) SetSupportedRadioTechnologies(supportedRadioTechnologies RadioTechnology) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedRadioTechnologies:"), supportedRadioTechnologies)
 }
 
+// ManufacturerIdentifier wraps the corresponding Objective-C method.
 func (x *AddCarKeyPassConfiguration) ManufacturerIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manufacturerIdentifier"))
 	if _r == 0 {
@@ -145,10 +128,12 @@ func (x *AddCarKeyPassConfiguration) ManufacturerIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// SetManufacturerIdentifier wraps the corresponding Objective-C method.
 func (x *AddCarKeyPassConfiguration) SetManufacturerIdentifier(manufacturerIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManufacturerIdentifier:"), purego.NSString(manufacturerIdentifier))
 }
 
+// ProvisioningTemplateIdentifier wraps the corresponding Objective-C method.
 func (x *AddCarKeyPassConfiguration) ProvisioningTemplateIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("provisioningTemplateIdentifier"))
 	if _r == 0 {
@@ -157,10 +142,12 @@ func (x *AddCarKeyPassConfiguration) ProvisioningTemplateIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// SetProvisioningTemplateIdentifier wraps the corresponding Objective-C method.
 func (x *AddCarKeyPassConfiguration) SetProvisioningTemplateIdentifier(provisioningTemplateIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProvisioningTemplateIdentifier:"), purego.NSString(provisioningTemplateIdentifier))
 }
 
+// ProductPlanIdentifier wraps the corresponding Objective-C method.
 func (x *AddCarKeyPassConfiguration) ProductPlanIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productPlanIdentifier"))
 	if _r == 0 {
@@ -169,6 +156,7 @@ func (x *AddCarKeyPassConfiguration) ProductPlanIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// SetProductPlanIdentifier wraps the corresponding Objective-C method.
 func (x *AddCarKeyPassConfiguration) SetProductPlanIdentifier(productPlanIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductPlanIdentifier:"), purego.NSString(productPlanIdentifier))
 }
@@ -196,3 +184,5 @@ type AddCarKeyPassConfigurationable interface {
 }
 
 var _ AddCarKeyPassConfigurationable = (*AddCarKeyPassConfiguration)(nil)
+
+var _ AddSecureElementPassConfigurationProvider = (*AddCarKeyPassConfiguration)(nil)

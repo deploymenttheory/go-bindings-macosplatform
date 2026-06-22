@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes an unsent record zone deletion.
-//
 // SyncEnginePendingZoneDelete is an idiomatic wrapper over the Objective-C class CKSyncEnginePendingZoneDelete.
+//
+// It embeds [SyncEnginePendingDatabaseChange], promoting that type's methods.
+//
+// An object that describes an unsent record zone deletion.
 type SyncEnginePendingZoneDelete struct {
-	objref.Handle
+	SyncEnginePendingDatabaseChange
 }
 
 // SyncEnginePendingZoneDeleteFromID adopts an existing Objective-C object as a SyncEnginePendingZoneDelete
@@ -25,7 +26,8 @@ func SyncEnginePendingZoneDeleteFromID(id objc.ID) *SyncEnginePendingZoneDelete 
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEnginePendingZoneDelete{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SyncEnginePendingZoneDelete{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func syncEnginePendingZoneDeleteAdopt(id objc.ID) *SyncEnginePendingZoneDelete {
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEnginePendingZoneDelete{Handle: objref.Wrap(id)}
+	x := &SyncEnginePendingZoneDelete{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *SyncEnginePendingZoneDelete) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SyncEnginePendingZoneDelete) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SyncEnginePendingZoneDelete) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a pending zone delete for the specified record zone identifier.
-//
-// NewSyncEnginePendingZoneDeleteWithZoneID creates a new SyncEnginePendingZoneDelete.
+// NewSyncEnginePendingZoneDeleteWithZoneID creates a pending zone delete for the specified record zone identifier.
 func NewSyncEnginePendingZoneDeleteWithZoneID(zoneID *RecordZoneID) *SyncEnginePendingZoneDelete {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEnginePendingZoneDelete")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZoneID:"), objref.IDOf(zoneID))
@@ -73,3 +59,5 @@ type SyncEnginePendingZoneDeleteable interface {
 }
 
 var _ SyncEnginePendingZoneDeleteable = (*SyncEnginePendingZoneDelete)(nil)
+
+var _ SyncEnginePendingDatabaseChangeProvider = (*SyncEnginePendingZoneDelete)(nil)

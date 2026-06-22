@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MatrixRandom is an idiomatic wrapper over the Objective-C class MPSMatrixRandom.
+//
+// MatrixRandom is an abstract base — you do not construct it directly. Construct one of [MatrixRandomMTGP32], [MatrixRandomPhilox] and pass it where a MatrixRandom is accepted.
 type MatrixRandom struct {
-	objref.Handle
+	Kernel
 }
 
 // MatrixRandomFromID adopts an existing Objective-C object as a MatrixRandom
@@ -23,7 +24,8 @@ func MatrixRandomFromID(id objc.ID) *MatrixRandom {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixRandom{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatrixRandom{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,72 +38,48 @@ func matrixRandomAdopt(id objc.ID) *MatrixRandom {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixRandom{Handle: objref.Wrap(id)}
+	x := &MatrixRandom{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MatrixRandom) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatrixRandom) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatrixRandom) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewMatrixRandom creates a new MatrixRandom.
-func NewMatrixRandom() *MatrixRandom {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixRandom")), objc.RegisterName("new"))
-	return matrixRandomAdopt(_id)
-}
-
-// The starting index in the destination batch.
-//
-// WithBatchStart sets batchStart and returns the receiver so calls can be chained.
+// WithBatchStart the starting index in the destination batch.
 func (x *MatrixRandom) WithBatchStart(batchStart int) *MatrixRandom {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 	return x
 }
 
-// The size of the batch to process.
-//
-// WithBatchSize sets batchSize and returns the receiver so calls can be chained.
+// WithBatchSize the size of the batch to process.
 func (x *MatrixRandom) WithBatchSize(batchSize int) *MatrixRandom {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *MatrixRandom) WithLabel(label string) *MatrixRandom {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The starting index in the destination batch.
+// BatchStart the starting index in the destination batch.
 func (x *MatrixRandom) BatchStart() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("batchStart"))
 	return _r
 }
 
+// SetBatchStart wraps the corresponding Objective-C method.
 func (x *MatrixRandom) SetBatchStart(batchStart int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 }
 
-// The size of the batch to process.
+// BatchSize the size of the batch to process.
 func (x *MatrixRandom) BatchSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("batchSize"))
 	return _r
 }
 
+// SetBatchSize wraps the corresponding Objective-C method.
 func (x *MatrixRandom) SetBatchSize(batchSize int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 }
@@ -119,3 +97,12 @@ type MatrixRandomable interface {
 }
 
 var _ MatrixRandomable = (*MatrixRandom)(nil)
+
+// isMatrixRandom marks MatrixRandom — and, by embedding promotion, its
+// subclasses — as a member of the MatrixRandom hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MatrixRandom) isMatrixRandom() {}
+
+var _ MatrixRandomProvider = (*MatrixRandom)(nil)
+
+var _ KernelProvider = (*MatrixRandom)(nil)

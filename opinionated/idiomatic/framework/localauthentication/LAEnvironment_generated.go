@@ -23,7 +23,8 @@ func EnvironmentFromID(id objc.ID) *Environment {
 	if id == 0 {
 		return nil
 	}
-	x := &Environment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Environment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func environmentAdopt(id objc.ID) *Environment {
 	if id == 0 {
 		return nil
 	}
-	x := &Environment{Handle: objref.Wrap(id)}
+	x := &Environment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,13 +58,19 @@ func (x *Environment) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Environment) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewEnvironment creates a new Environment.
 func NewEnvironment() *Environment {
 	_id := objc.Send[objc.ID](objc.ID(_class("LAEnvironment")), objc.RegisterName("new"))
 	return environmentAdopt(_id)
 }
 
-// The environment state information.
+// State the environment state information.
 func (x *Environment) State() *EnvironmentState {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
 	return EnvironmentStateFromID(_r)

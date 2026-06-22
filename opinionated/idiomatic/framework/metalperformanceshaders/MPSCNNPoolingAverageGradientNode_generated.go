@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a gradient average pooling filter.
-//
 // CNNPoolingAverageGradientNode is an idiomatic wrapper over the Objective-C class MPSCNNPoolingAverageGradientNode.
+//
+// It embeds [CNNPoolingGradientNode], promoting that type's methods.
+//
+// A representation of a gradient average pooling filter.
 type CNNPoolingAverageGradientNode struct {
-	objref.Handle
+	CNNPoolingGradientNode
 }
 
 // CNNPoolingAverageGradientNodeFromID adopts an existing Objective-C object as a CNNPoolingAverageGradientNode
@@ -25,7 +26,8 @@ func CNNPoolingAverageGradientNodeFromID(id objc.ID) *CNNPoolingAverageGradientN
 	if id == 0 {
 		return nil
 	}
-	x := &CNNPoolingAverageGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNPoolingAverageGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func cNNPoolingAverageGradientNodeAdopt(id objc.ID) *CNNPoolingAverageGradientNo
 	if id == 0 {
 		return nil
 	}
-	x := &CNNPoolingAverageGradientNode{Handle: objref.Wrap(id)}
+	x := &CNNPoolingAverageGradientNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNPoolingAverageGradientNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNPoolingAverageGradientNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNPoolingAverageGradientNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNPoolingAverageGradientNode creates a new CNNPoolingAverageGradientNode.
@@ -64,9 +52,7 @@ func NewCNNPoolingAverageGradientNode() *CNNPoolingAverageGradientNode {
 	return cNNPoolingAverageGradientNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNPoolingAverageGradientNode) WithLabel(label string) *CNNPoolingAverageGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -79,3 +65,9 @@ type CNNPoolingAverageGradientNodeable interface {
 }
 
 var _ CNNPoolingAverageGradientNodeable = (*CNNPoolingAverageGradientNode)(nil)
+
+var _ CNNPoolingGradientNodeProvider = (*CNNPoolingAverageGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*CNNPoolingAverageGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNPoolingAverageGradientNode)(nil)

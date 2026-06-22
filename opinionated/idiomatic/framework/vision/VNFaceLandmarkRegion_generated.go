@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for information about a specific face landmark.
-//
 // FaceLandmarkRegion is an idiomatic wrapper over the Objective-C class VNFaceLandmarkRegion.
+//
+// FaceLandmarkRegion is an abstract base — you do not construct it directly. Construct one of [FaceLandmarkRegion2D] and pass it where a FaceLandmarkRegion is accepted.
+//
+// The abstract superclass for information about a specific face landmark.
 type FaceLandmarkRegion struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func FaceLandmarkRegionFromID(id objc.ID) *FaceLandmarkRegion {
 	if id == 0 {
 		return nil
 	}
-	x := &FaceLandmarkRegion{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FaceLandmarkRegion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func faceLandmarkRegionAdopt(id objc.ID) *FaceLandmarkRegion {
 	if id == 0 {
 		return nil
 	}
-	x := &FaceLandmarkRegion{Handle: objref.Wrap(id)}
+	x := &FaceLandmarkRegion{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +62,13 @@ func (x *FaceLandmarkRegion) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewFaceLandmarkRegion creates a new FaceLandmarkRegion.
-func NewFaceLandmarkRegion() *FaceLandmarkRegion {
-	_id := objc.Send[objc.ID](objc.ID(_class("VNFaceLandmarkRegion")), objc.RegisterName("new"))
-	return faceLandmarkRegionAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FaceLandmarkRegion) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// PointCount wraps the corresponding Objective-C method.
 func (x *FaceLandmarkRegion) PointCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pointCount"))
 	return _r
@@ -76,3 +81,10 @@ type FaceLandmarkRegionable interface {
 }
 
 var _ FaceLandmarkRegionable = (*FaceLandmarkRegion)(nil)
+
+// isFaceLandmarkRegion marks FaceLandmarkRegion — and, by embedding promotion, its
+// subclasses — as a member of the FaceLandmarkRegion hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *FaceLandmarkRegion) isFaceLandmarkRegion() {}
+
+var _ FaceLandmarkRegionProvider = (*FaceLandmarkRegion)(nil)

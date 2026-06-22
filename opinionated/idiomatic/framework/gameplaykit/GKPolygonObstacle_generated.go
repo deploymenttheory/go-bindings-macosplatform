@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A polygon-shaped impassable area in a 2D game world.
-//
 // PolygonObstacle is an idiomatic wrapper over the Objective-C class GKPolygonObstacle.
+//
+// It embeds [Obstacle], promoting that type's methods.
+//
+// A polygon-shaped impassable area in a 2D game world.
 type PolygonObstacle struct {
-	objref.Handle
+	Obstacle
 }
 
 // PolygonObstacleFromID adopts an existing Objective-C object as a PolygonObstacle
@@ -25,7 +26,8 @@ func PolygonObstacleFromID(id objc.ID) *PolygonObstacle {
 	if id == 0 {
 		return nil
 	}
-	x := &PolygonObstacle{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PolygonObstacle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func polygonObstacleAdopt(id objc.ID) *PolygonObstacle {
 	if id == 0 {
 		return nil
 	}
-	x := &PolygonObstacle{Handle: objref.Wrap(id)}
+	x := &PolygonObstacle{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PolygonObstacle) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PolygonObstacle) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PolygonObstacle) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPolygonObstacle creates a new PolygonObstacle.
@@ -64,7 +52,7 @@ func NewPolygonObstacle() *PolygonObstacle {
 	return polygonObstacleAdopt(_id)
 }
 
-// Number of vertices on this polygon
+// VertexCount number of vertices on this polygon
 func (x *PolygonObstacle) VertexCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vertexCount"))
 	return _r
@@ -77,3 +65,5 @@ type PolygonObstacleable interface {
 }
 
 var _ PolygonObstacleable = (*PolygonObstacle)(nil)
+
+var _ ObstacleProvider = (*PolygonObstacle)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A live L2CAP connection to a remote device.
-//
 // L2CAPChannel is an idiomatic wrapper over the Objective-C class CBL2CAPChannel.
+//
+// A live L2CAP connection to a remote device.
 type L2CAPChannel struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func L2CAPChannelFromID(id objc.ID) *L2CAPChannel {
 	if id == 0 {
 		return nil
 	}
-	x := &L2CAPChannel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &L2CAPChannel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func l2CAPChannelAdopt(id objc.ID) *L2CAPChannel {
 	if id == 0 {
 		return nil
 	}
-	x := &L2CAPChannel{Handle: objref.Wrap(id)}
+	x := &L2CAPChannel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,37 @@ func (x *L2CAPChannel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *L2CAPChannel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewL2CAPChannel creates a new L2CAPChannel.
 func NewL2CAPChannel() *L2CAPChannel {
 	_id := objc.Send[objc.ID](objc.ID(_class("CBL2CAPChannel")), objc.RegisterName("new"))
 	return l2CAPChannelAdopt(_id)
 }
 
-// The peer connected to the channel
+// Peer the peer connected to the channel
 func (x *L2CAPChannel) Peer() *Peer {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("peer"))
 	return PeerFromID(_r)
 }
 
-// An NSStream used for reading data from the remote peer
+// InputStream an NSStream used for reading data from the remote peer
 func (x *L2CAPChannel) InputStream() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputStream"))
 	return obj.Wrap(_r)
 }
 
-// An NSStream used for writing data to the peer
+// OutputStream an NSStream used for writing data to the peer
 func (x *L2CAPChannel) OutputStream() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputStream"))
 	return obj.Wrap(_r)
 }
 
-// The PSM (Protocol/Service Multiplexer) of the channel
+// PSM the PSM (Protocol/Service Multiplexer) of the channel
 func (x *L2CAPChannel) PSM() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("PSM"))
 	return _r

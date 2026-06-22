@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Image data inside an Intents extension or Intents UI extension.
-//
 // Image is an idiomatic wrapper over the Objective-C class INImage.
+//
+// Image data inside an Intents extension or Intents UI extension.
 type Image struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ImageFromID(id objc.ID) *Image {
 	if id == 0 {
 		return nil
 	}
-	x := &Image{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Image{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func imageAdopt(id objc.ID) *Image {
 	if id == 0 {
 		return nil
 	}
-	x := &Image{Handle: objref.Wrap(id)}
+	x := &Image{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *Image) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *Image) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Image) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewImage creates a new Image.

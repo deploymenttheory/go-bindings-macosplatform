@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class for all the query classes in HealthKit.
-//
 // Query is an idiomatic wrapper over the Objective-C class HKQuery.
+//
+// Query is an abstract base — you do not construct it directly. Construct one of [ActivitySummaryQuery], [AnchoredObjectQuery], [CorrelationQuery], [DocumentQuery], [ElectrocardiogramQuery], [HeartbeatSeriesQuery], [ObserverQuery], [QuantitySeriesSampleQuery], [SampleQuery], [SourceQuery], [StatisticsCollectionQuery], [StatisticsQuery], [UserAnnotatedMedicationQuery], [VerifiableClinicalRecordQuery], [WorkoutEffortRelationshipQuery], [WorkoutRouteQuery] and pass it where a Query is accepted.
+//
+// An abstract class for all the query classes in HealthKit.
 type Query struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func QueryFromID(id objc.ID) *Query {
 	if id == 0 {
 		return nil
 	}
-	x := &Query{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Query{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func queryAdopt(id objc.ID) *Query {
 	if id == 0 {
 		return nil
 	}
-	x := &Query{Handle: objref.Wrap(id)}
+	x := &Query{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +62,25 @@ func (x *Query) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewQuery creates a new Query.
-func NewQuery() *Query {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("new"))
-	return queryAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Query) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// ObjectType wraps the corresponding Objective-C method.
 func (x *Query) ObjectType() *ObjectType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectType"))
 	return ObjectTypeFromID(_r)
 }
 
+// SampleType wraps the corresponding Objective-C method.
 func (x *Query) SampleType() *SampleType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleType"))
 	return SampleTypeFromID(_r)
 }
 
+// Predicate wraps the corresponding Objective-C method.
 func (x *Query) Predicate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
 	return obj.Wrap(_r)
@@ -88,3 +95,10 @@ type Queryable interface {
 }
 
 var _ Queryable = (*Query)(nil)
+
+// isQuery marks Query — and, by embedding promotion, its
+// subclasses — as a member of the Query hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Query) isQuery() {}
+
+var _ QueryProvider = (*Query)(nil)

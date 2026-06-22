@@ -23,7 +23,8 @@ func MTRGeneralDiagnosticsClusterPayloadTestRequestParamsFromID(id objc.ID) *MTR
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGeneralDiagnosticsClusterPayloadTestRequestParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRGeneralDiagnosticsClusterPayloadTestRequestParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRGeneralDiagnosticsClusterPayloadTestRequestParamsAdopt(id objc.ID) *MTRG
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGeneralDiagnosticsClusterPayloadTestRequestParams{Handle: objref.Wrap(id)}
+	x := &MTRGeneralDiagnosticsClusterPayloadTestRequestParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,89 +58,99 @@ func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) IsKind(className 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRGeneralDiagnosticsClusterPayloadTestRequestParams creates a new MTRGeneralDiagnosticsClusterPayloadTestRequestParams.
 func NewMTRGeneralDiagnosticsClusterPayloadTestRequestParams() *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRGeneralDiagnosticsClusterPayloadTestRequestParams")), objc.RegisterName("new"))
 	return mTRGeneralDiagnosticsClusterPayloadTestRequestParamsAdopt(_id)
 }
 
-// WithEnableKey sets enableKey and returns the receiver so calls can be chained.
+// WithEnableKey sets the property and returns the receiver so calls can be chained.
 func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithEnableKey(enableKey obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableKey:"), objref.IDOf(enableKey))
 	return x
 }
 
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue sets the property and returns the receiver so calls can be chained.
 func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithValue(value obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return x
 }
 
-// WithCount sets count and returns the receiver so calls can be chained.
+// WithCount sets the property and returns the receiver so calls can be chained.
 func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithCount(count obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCount:"), objref.IDOf(count))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke).
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
 func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
 func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// EnableKey wraps the corresponding Objective-C method.
 func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) EnableKey() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enableKey"))
 	return obj.Wrap(_r)
 }
 
+// SetEnableKey wraps the corresponding Objective-C method.
 func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) SetEnableKey(enableKey obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableKey:"), objref.IDOf(enableKey))
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) SetValue(value obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 }
 
+// GetCount wraps the corresponding Objective-C method.
 func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) GetCount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getCount"))
 	return obj.Wrap(_r)
 }
 
+// SetCount wraps the corresponding Objective-C method.
 func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) SetCount(count obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCount:"), objref.IDOf(count))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that holds the credential.
-//
 // AuthorizationPlatformPublicKeyCredentialDescriptor is an idiomatic wrapper over the Objective-C class ASAuthorizationPlatformPublicKeyCredentialDescriptor.
+//
+// An object that holds the credential.
 type AuthorizationPlatformPublicKeyCredentialDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationPlatformPublicKeyCredentialDescriptorFromID(id objc.ID) *Autho
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPlatformPublicKeyCredentialDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationPlatformPublicKeyCredentialDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationPlatformPublicKeyCredentialDescriptorAdopt(id objc.ID) *Author
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPlatformPublicKeyCredentialDescriptor{Handle: objref.Wrap(id)}
+	x := &AuthorizationPlatformPublicKeyCredentialDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,9 +60,13 @@ func (x *AuthorizationPlatformPublicKeyCredentialDescriptor) IsKind(className st
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates the descriptor with a credential.
-//
-// NewAuthorizationPlatformPublicKeyCredentialDescriptorWithCredentialID creates a new AuthorizationPlatformPublicKeyCredentialDescriptor.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationPlatformPublicKeyCredentialDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAuthorizationPlatformPublicKeyCredentialDescriptorWithCredentialID creates the descriptor with a credential.
 func NewAuthorizationPlatformPublicKeyCredentialDescriptorWithCredentialID(credentialID obj.Object) *AuthorizationPlatformPublicKeyCredentialDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPlatformPublicKeyCredentialDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialID:"), objref.IDOf(credentialID))

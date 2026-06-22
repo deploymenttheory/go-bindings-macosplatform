@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides basic information about a MIDI-CI device.
-//
 // CIDeviceInfo is an idiomatic wrapper over the Objective-C class MIDICIDeviceInfo.
+//
+// An object that provides basic information about a MIDI-CI device.
 type CIDeviceInfo struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CIDeviceInfoFromID(id objc.ID) *CIDeviceInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &CIDeviceInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CIDeviceInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func cIDeviceInfoAdopt(id objc.ID) *CIDeviceInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &CIDeviceInfo{Handle: objref.Wrap(id)}
+	x := &CIDeviceInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,35 +60,44 @@ func (x *CIDeviceInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new device information instance.
-//
-// NewCIDeviceInfoWithDestinationManufacturerFamilyModelRevision creates a new CIDeviceInfo.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CIDeviceInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCIDeviceInfoWithDestinationManufacturerFamilyModelRevision creates a new device information instance.
 func NewCIDeviceInfoWithDestinationManufacturerFamilyModelRevision(midiDestination int, manufacturer obj.Object, family obj.Object, modelNumber obj.Object, revisionLevel obj.Object) *CIDeviceInfo {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MIDICIDeviceInfo")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestination:manufacturer:family:model:revision:"), midiDestination, objref.IDOf(manufacturer), objref.IDOf(family), objref.IDOf(modelNumber), objref.IDOf(revisionLevel))
 	return cIDeviceInfoAdopt(_id)
 }
 
+// ManufacturerID wraps the corresponding Objective-C method.
 func (x *CIDeviceInfo) ManufacturerID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manufacturerID"))
 	return obj.Wrap(_r)
 }
 
+// Family wraps the corresponding Objective-C method.
 func (x *CIDeviceInfo) Family() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("family"))
 	return obj.Wrap(_r)
 }
 
+// ModelNumber wraps the corresponding Objective-C method.
 func (x *CIDeviceInfo) ModelNumber() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modelNumber"))
 	return obj.Wrap(_r)
 }
 
+// RevisionLevel wraps the corresponding Objective-C method.
 func (x *CIDeviceInfo) RevisionLevel() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("revisionLevel"))
 	return obj.Wrap(_r)
 }
 
+// MidiDestination wraps the corresponding Objective-C method.
 func (x *CIDeviceInfo) MidiDestination() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("midiDestination"))
 	return _r

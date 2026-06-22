@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A stub class that encapsulates security information about a file.
-//
 // FileSecurity is an idiomatic wrapper over the Objective-C class NSFileSecurity.
+//
+// A stub class that encapsulates security information about a file.
 type FileSecurity struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FileSecurityFromID(id objc.ID) *FileSecurity {
 	if id == 0 {
 		return nil
 	}
-	x := &FileSecurity{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FileSecurity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func fileSecurityAdopt(id objc.ID) *FileSecurity {
 	if id == 0 {
 		return nil
 	}
-	x := &FileSecurity{Handle: objref.Wrap(id)}
+	x := &FileSecurity{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +60,12 @@ func (x *FileSecurity) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FileSecurity) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFileSecurityWithCoder creates a new FileSecurity.
 func NewFileSecurityWithCoder(coder *Coder) *FileSecurity {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileSecurity")), objc.RegisterName("alloc"))
@@ -65,7 +73,7 @@ func NewFileSecurityWithCoder(coder *Coder) *FileSecurity {
 	return fileSecurityAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *FileSecurity) WithScriptingProperties(scriptingProperties obj.Object) *FileSecurity {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x

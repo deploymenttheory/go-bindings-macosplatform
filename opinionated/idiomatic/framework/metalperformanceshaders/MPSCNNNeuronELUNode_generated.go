@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a parametric ELU neuron filter.
-//
 // CNNNeuronELUNode is an idiomatic wrapper over the Objective-C class MPSCNNNeuronELUNode.
+//
+// It embeds [CNNNeuronNode], promoting that type's methods.
+//
+// A representation of a parametric ELU neuron filter.
 type CNNNeuronELUNode struct {
-	objref.Handle
+	CNNNeuronNode
 }
 
 // CNNNeuronELUNodeFromID adopts an existing Objective-C object as a CNNNeuronELUNode
@@ -25,7 +26,8 @@ func CNNNeuronELUNodeFromID(id objc.ID) *CNNNeuronELUNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNeuronELUNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNNeuronELUNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func cNNNeuronELUNodeAdopt(id objc.ID) *CNNNeuronELUNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNeuronELUNode{Handle: objref.Wrap(id)}
+	x := &CNNNeuronELUNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNNeuronELUNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNNeuronELUNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNNeuronELUNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Init a node with default values for parameters a & b
-//
-// NewCNNNeuronELUNodeWithSource creates a new CNNNeuronELUNode.
+// NewCNNNeuronELUNodeWithSource init a node with default values for parameters a & b
 func NewCNNNeuronELUNodeWithSource(sourceNode obj.Object) *CNNNeuronELUNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronELUNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
@@ -74,9 +60,7 @@ func NewCNNNeuronELUNodeWithSourceA(sourceNode obj.Object, a float32) *CNNNeuron
 	return cNNNeuronELUNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNNeuronELUNode) WithLabel(label string) *CNNNeuronELUNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -89,3 +73,7 @@ type CNNNeuronELUNodeable interface {
 }
 
 var _ CNNNeuronELUNodeable = (*CNNNeuronELUNode)(nil)
+
+var _ CNNNeuronNodeProvider = (*CNNNeuronELUNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNNeuronELUNode)(nil)

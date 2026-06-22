@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing a diagnostic report for an app crash.
-//
 // CrashDiagnostic is an idiomatic wrapper over the Objective-C class MXCrashDiagnostic.
+//
+// It embeds [Diagnostic], promoting that type's methods.
+//
+// An object representing a diagnostic report for an app crash.
 type CrashDiagnostic struct {
-	objref.Handle
+	Diagnostic
 }
 
 // CrashDiagnosticFromID adopts an existing Objective-C object as a CrashDiagnostic
@@ -25,7 +26,8 @@ func CrashDiagnosticFromID(id objc.ID) *CrashDiagnostic {
 	if id == 0 {
 		return nil
 	}
-	x := &CrashDiagnostic{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CrashDiagnostic{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func crashDiagnosticAdopt(id objc.ID) *CrashDiagnostic {
 	if id == 0 {
 		return nil
 	}
-	x := &CrashDiagnostic{Handle: objref.Wrap(id)}
+	x := &CrashDiagnostic{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CrashDiagnostic) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CrashDiagnostic) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CrashDiagnostic) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCrashDiagnostic creates a new CrashDiagnostic.
@@ -64,13 +52,13 @@ func NewCrashDiagnostic() *CrashDiagnostic {
 	return crashDiagnosticAdopt(_id)
 }
 
-// The application call stack tree associated with this crash. This call stack tree includes those stack frames present at the time of the crash.
+// CallStackTree the application call stack tree associated with this crash. This call stack tree includes those stack frames present at the time of the crash.
 func (x *CrashDiagnostic) CallStackTree() *CallStackTree {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callStackTree"))
 	return CallStackTreeFromID(_r)
 }
 
-// The termination reason associated with this crash. Exit reason information specified when a process is terminated. Key system components, both inside and outside of a process, will terminate the process upon encountering a fatal error (e.g. a bad code signature, a missing dependent library, or accessing privacy sensitive information without the proper entitlement).
+// TerminationReason the termination reason associated with this crash. Exit reason information specified when a process is terminated. Key system components, both inside and outside of a process, will terminate the process upon encountering a fatal error (e.g. a bad code signature, a missing dependent library, or accessing privacy sensitive information without the proper entitlement).
 func (x *CrashDiagnostic) TerminationReason() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("terminationReason"))
 	if _r == 0 {
@@ -79,7 +67,7 @@ func (x *CrashDiagnostic) TerminationReason() string {
 	return purego.GoString(_r)
 }
 
-// Details about memory that the app incorrectly accessed in relation to other sections of the app’s virtual memory address space. This property is set when a bad memory access crash occurs.
+// VirtualMemoryRegionInfo details about memory that the app incorrectly accessed in relation to other sections of the app’s virtual memory address space. This property is set when a bad memory access crash occurs.
 func (x *CrashDiagnostic) VirtualMemoryRegionInfo() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("virtualMemoryRegionInfo"))
 	if _r == 0 {
@@ -88,25 +76,25 @@ func (x *CrashDiagnostic) VirtualMemoryRegionInfo() string {
 	return purego.GoString(_r)
 }
 
-// The name of the Mach exception that terminated the app.
+// ExceptionType the name of the Mach exception that terminated the app.
 func (x *CrashDiagnostic) ExceptionType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exceptionType"))
 	return obj.Wrap(_r)
 }
 
-// Processor specific information about the exception encoded into one or more 64-bit hexadecimal numbers
+// ExceptionCode processor specific information about the exception encoded into one or more 64-bit hexadecimal numbers
 func (x *CrashDiagnostic) ExceptionCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exceptionCode"))
 	return obj.Wrap(_r)
 }
 
-// The signal associated with this crash.
+// Signal the signal associated with this crash.
 func (x *CrashDiagnostic) Signal() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signal"))
 	return obj.Wrap(_r)
 }
 
-// The MXCrashDiagnosticObjectiveCExceptionReason object associated with this crash.
+// ExceptionReason the MXCrashDiagnosticObjectiveCExceptionReason object associated with this crash.
 func (x *CrashDiagnostic) ExceptionReason() *CrashDiagnosticObjectiveCExceptionReason {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exceptionReason"))
 	return CrashDiagnosticObjectiveCExceptionReasonFromID(_r)
@@ -125,3 +113,5 @@ type CrashDiagnosticable interface {
 }
 
 var _ CrashDiagnosticable = (*CrashDiagnostic)(nil)
+
+var _ DiagnosticProvider = (*CrashDiagnostic)(nil)

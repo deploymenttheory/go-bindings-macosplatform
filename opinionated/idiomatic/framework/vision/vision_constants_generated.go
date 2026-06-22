@@ -9,13 +9,11 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// The stage of a request where the main functionality is being performed. All requests will have this compute stage.
 // VNComputeStageMain returns the string constant VNComputeStageMain, for use as a dictionary key or argument.
 func VNComputeStageMain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("VNComputeStageMain")))
 }
 
-// A compute stage for additional analysis and/or conversion of the data produced by the `VNComputeStageMain`. This is an optional compute stage that some requests may expose.
 // VNComputeStagePostProcessing returns the string constant VNComputeStagePostProcessing, for use as a dictionary key or argument.
 func VNComputeStagePostProcessing() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("VNComputeStagePostProcessing")))
@@ -444,7 +442,6 @@ func VNImageOptionProperties() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("VNImageOptionProperties")))
 }
 
-// VNImageOptionCameraIntrinsics  Specifies the camera intrinsics as an NSData or CFData representing a matrix_float3x3. See kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix for details Camera intrinsic matrix is a CFData containing a matrix_float3x3, which is column-major. It has the following contents: fx	0	ox 0	fy	oy 0	0	1 fx and fy are the focal length in pixels. For square pixels, they will have the same value. ox and oy are the coordinates of the principal point. The origin is the upper left of the frame.
 // VNImageOptionCameraIntrinsics returns the string constant VNImageOptionCameraIntrinsics, for use as a dictionary key or argument.
 func VNImageOptionCameraIntrinsics() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("VNImageOptionCameraIntrinsics")))

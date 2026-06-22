@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A proxy for a Safari window.
-//
 // SafariWindow is an idiomatic wrapper over the Objective-C class SFSafariWindow.
+//
+// A proxy for a Safari window.
 type SafariWindow struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func SafariWindowFromID(id objc.ID) *SafariWindow {
 	if id == 0 {
 		return nil
 	}
-	x := &SafariWindow{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SafariWindow{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func safariWindowAdopt(id objc.ID) *SafariWindow {
 	if id == 0 {
 		return nil
 	}
-	x := &SafariWindow{Handle: objref.Wrap(id)}
+	x := &SafariWindow{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,16 +61,22 @@ func (x *SafariWindow) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SafariWindow) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSafariWindow creates a new SafariWindow.
 func NewSafariWindow() *SafariWindow {
 	_id := objc.Send[objc.ID](objc.ID(_class("SFSafariWindow")), objc.RegisterName("new"))
 	return safariWindowAdopt(_id)
 }
 
-// Calls the completion handler with the active tab in the target window.
+// GetActiveTab calls the completion handler with the active tab in the target window.
 //
 // GetActiveTab blocks until the operation completes or ctx is cancelled.
-func (x *SafariWindow) GetActiveTab(ctx context.Context) (*SafariTab, error) {
+func (x *SafariWindow) GetActiveTab(ctx context.Context) (result *SafariTab, err error) {
 	type _result struct {
 		val *SafariTab
 		err error
@@ -89,10 +97,10 @@ func (x *SafariWindow) GetActiveTab(ctx context.Context) (*SafariTab, error) {
 	}
 }
 
-// Calls the completion handler with all of the tabs in this window ordered left to right.
+// GetAllTabs calls the completion handler with all of the tabs in this window ordered left to right.
 //
 // GetAllTabs blocks until the operation completes or ctx is cancelled.
-func (x *SafariWindow) GetAllTabs(ctx context.Context) (obj.Object, error) {
+func (x *SafariWindow) GetAllTabs(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -113,10 +121,10 @@ func (x *SafariWindow) GetAllTabs(ctx context.Context) (obj.Object, error) {
 	}
 }
 
-// Opens a tab at the end of the tab bar.
+// OpenTabWithURLMakeActiveIfPossible opens a tab at the end of the tab bar.
 //
 // OpenTabWithURLMakeActiveIfPossible blocks until the operation completes or ctx is cancelled.
-func (x *SafariWindow) OpenTabWithURLMakeActiveIfPossible(ctx context.Context, url string, activateTab bool) (*SafariTab, error) {
+func (x *SafariWindow) OpenTabWithURLMakeActiveIfPossible(ctx context.Context, url string, activateTab bool) (result *SafariTab, err error) {
 	type _result struct {
 		val *SafariTab
 		err error
@@ -137,10 +145,10 @@ func (x *SafariWindow) OpenTabWithURLMakeActiveIfPossible(ctx context.Context, u
 	}
 }
 
-// Gets the extension’s toolbar item from the target window.
+// GetToolbarItem gets the extension’s toolbar item from the target window.
 //
 // GetToolbarItem blocks until the operation completes or ctx is cancelled.
-func (x *SafariWindow) GetToolbarItem(ctx context.Context) (*SafariToolbarItem, error) {
+func (x *SafariWindow) GetToolbarItem(ctx context.Context) (result *SafariToolbarItem, err error) {
 	type _result struct {
 		val *SafariToolbarItem
 		err error
@@ -161,7 +169,7 @@ func (x *SafariWindow) GetToolbarItem(ctx context.Context) (*SafariToolbarItem, 
 	}
 }
 
-// Closes this window.
+// Close closes this window.
 func (x *SafariWindow) Close() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
 }

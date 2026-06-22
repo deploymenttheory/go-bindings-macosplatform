@@ -23,7 +23,8 @@ func MTRMessagesClusterMessageQueuedEventFromID(id objc.ID) *MTRMessagesClusterM
 	if id == 0 {
 		return nil
 	}
-	x := &MTRMessagesClusterMessageQueuedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRMessagesClusterMessageQueuedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRMessagesClusterMessageQueuedEventAdopt(id objc.ID) *MTRMessagesClusterMe
 	if id == 0 {
 		return nil
 	}
-	x := &MTRMessagesClusterMessageQueuedEvent{Handle: objref.Wrap(id)}
+	x := &MTRMessagesClusterMessageQueuedEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTRMessagesClusterMessageQueuedEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRMessagesClusterMessageQueuedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRMessagesClusterMessageQueuedEvent creates a new MTRMessagesClusterMessageQueuedEvent.
 func NewMTRMessagesClusterMessageQueuedEvent() *MTRMessagesClusterMessageQueuedEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRMessagesClusterMessageQueuedEvent")), objc.RegisterName("new"))
 	return mTRMessagesClusterMessageQueuedEventAdopt(_id)
 }
 
-// WithMessageID sets messageID and returns the receiver so calls can be chained.
+// WithMessageID sets the property and returns the receiver so calls can be chained.
 func (x *MTRMessagesClusterMessageQueuedEvent) WithMessageID(messageID obj.Object) *MTRMessagesClusterMessageQueuedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
 	return x
 }
 
+// MessageID wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageQueuedEvent) MessageID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageID"))
 	return obj.Wrap(_r)
 }
 
+// SetMessageID wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageQueuedEvent) SetMessageID(messageID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
 }

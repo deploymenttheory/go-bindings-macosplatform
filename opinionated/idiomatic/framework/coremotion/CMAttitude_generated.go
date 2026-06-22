@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The device’s orientation relative to a known frame of reference at a point in time.
-//
 // Attitude is an idiomatic wrapper over the Objective-C class CMAttitude.
+//
+// The device’s orientation relative to a known frame of reference at a point in time.
 type Attitude struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AttitudeFromID(id objc.ID) *Attitude {
 	if id == 0 {
 		return nil
 	}
-	x := &Attitude{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Attitude{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func attitudeAdopt(id objc.ID) *Attitude {
 	if id == 0 {
 		return nil
 	}
-	x := &Attitude{Handle: objref.Wrap(id)}
+	x := &Attitude{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,27 +60,36 @@ func (x *Attitude) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Attitude) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAttitude creates a new Attitude.
 func NewAttitude() *Attitude {
 	_id := objc.Send[objc.ID](objc.ID(_class("CMAttitude")), objc.RegisterName("new"))
 	return attitudeAdopt(_id)
 }
 
-// Yields the change in attitude given a specific attitude.
+// MultiplyByInverseOfAttitude yields the change in attitude given a specific attitude.
 func (x *Attitude) MultiplyByInverseOfAttitude(attitude *Attitude) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("multiplyByInverseOfAttitude:"), objref.IDOf(attitude))
 }
 
+// Roll wraps the corresponding Objective-C method.
 func (x *Attitude) Roll() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("roll"))
 	return _r
 }
 
+// Pitch wraps the corresponding Objective-C method.
 func (x *Attitude) Pitch() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("pitch"))
 	return _r
 }
 
+// Yaw wraps the corresponding Objective-C method.
 func (x *Attitude) Yaw() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("yaw"))
 	return _r

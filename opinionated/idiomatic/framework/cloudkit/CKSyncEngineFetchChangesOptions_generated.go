@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of options to use with a fetch operation.
-//
 // SyncEngineFetchChangesOptions is an idiomatic wrapper over the Objective-C class CKSyncEngineFetchChangesOptions.
+//
+// A set of options to use with a fetch operation.
 type SyncEngineFetchChangesOptions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SyncEngineFetchChangesOptionsFromID(id objc.ID) *SyncEngineFetchChangesOpti
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineFetchChangesOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SyncEngineFetchChangesOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func syncEngineFetchChangesOptionsAdopt(id objc.ID) *SyncEngineFetchChangesOptio
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineFetchChangesOptions{Handle: objref.Wrap(id)}
+	x := &SyncEngineFetchChangesOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,61 +60,61 @@ func (x *SyncEngineFetchChangesOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a set of options with the specific scope.
-//
-// NewSyncEngineFetchChangesOptionsWithScope creates a new SyncEngineFetchChangesOptions.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncEngineFetchChangesOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSyncEngineFetchChangesOptionsWithScope initializes a set of options with the specific scope.
 func NewSyncEngineFetchChangesOptionsWithScope(scope *SyncEngineFetchChangesScope) *SyncEngineFetchChangesOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineFetchChangesOptions")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScope:"), objref.IDOf(scope))
 	return syncEngineFetchChangesOptionsAdopt(_id)
 }
 
-// The scope in which to fetch changes from the server.
-//
-// WithScope sets scope and returns the receiver so calls can be chained.
+// WithScope the scope in which to fetch changes from the server.
 func (x *SyncEngineFetchChangesOptions) WithScope(scope *SyncEngineFetchChangesScope) *SyncEngineFetchChangesOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScope:"), objref.IDOf(scope))
 	return x
 }
 
-// The operation group to use for the underlying CloudKit operations.
-//
-// WithOperationGroup sets operationGroup and returns the receiver so calls can be chained.
+// WithOperationGroup the operation group to use for the underlying CloudKit operations.
 func (x *SyncEngineFetchChangesOptions) WithOperationGroup(operationGroup *OperationGroup) *SyncEngineFetchChangesOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationGroup:"), objref.IDOf(operationGroup))
 	return x
 }
 
-// A list of zones that are prioritized over others while fetching changes.
-//
-// WithPrioritizedZoneIDs sets the collection and returns the receiver so calls can be chained.
+// WithPrioritizedZoneIDs a list of zones that are prioritized over others while fetching changes.
 func (x *SyncEngineFetchChangesOptions) WithPrioritizedZoneIDs(items ...*RecordZoneID) *SyncEngineFetchChangesOptions {
 	_arr := purego.SliceToNSArray(items, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrioritizedZoneIDs:"), _arr)
 	return x
 }
 
-// The scope in which to fetch changes from the server.
+// Scope the scope in which to fetch changes from the server.
 func (x *SyncEngineFetchChangesOptions) Scope() *SyncEngineFetchChangesScope {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scope"))
 	return SyncEngineFetchChangesScopeFromID(_r)
 }
 
+// SetScope wraps the corresponding Objective-C method.
 func (x *SyncEngineFetchChangesOptions) SetScope(scope *SyncEngineFetchChangesScope) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScope:"), objref.IDOf(scope))
 }
 
-// The operation group to use for the underlying CloudKit operations. - Tip: Providing a specific operation group helps you to identify and analyze the telemetry of fetch operations in CloudKit Console. The default value is `nil`.
+// OperationGroup the operation group to use for the underlying CloudKit operations. - Tip: Providing a specific operation group helps you to identify and analyze the telemetry of fetch operations in CloudKit Console. The default value is `nil`.
 func (x *SyncEngineFetchChangesOptions) OperationGroup() *OperationGroup {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationGroup"))
 	return OperationGroupFromID(_r)
 }
 
+// SetOperationGroup wraps the corresponding Objective-C method.
 func (x *SyncEngineFetchChangesOptions) SetOperationGroup(operationGroup *OperationGroup) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationGroup:"), objref.IDOf(operationGroup))
 }
 
-// A list of zones that are prioritized over others while fetching changes. `CKSyncEngine` fetches changes for the zones in this list first. You might use this to prioritize a specific set of zones for initial sync. You could also prioritize the object currently showing in the UI by putting it first in this list. Any zones not included in this list are prioritized in a default manner. If a zone in this list has no changes to fetch, then that zone is ignored.
+// PrioritizedZoneIDs a list of zones that are prioritized over others while fetching changes. `CKSyncEngine` fetches changes for the zones in this list first. You might use this to prioritize a specific set of zones for initial sync. You could also prioritize the object currently showing in the UI by putting it first in this list. Any zones not included in this list are prioritized in a default manner. If a zone in this list has no changes to fetch, then that zone is ignored.
 //
 // PrioritizedZoneIDs returns the collection as a Go slice.
 func (x *SyncEngineFetchChangesOptions) PrioritizedZoneIDs() []*RecordZoneID {
@@ -120,6 +122,7 @@ func (x *SyncEngineFetchChangesOptions) PrioritizedZoneIDs() []*RecordZoneID {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZoneID { return RecordZoneIDFromID(_id) })
 }
 
+// SetPrioritizedZoneIDs wraps the corresponding Objective-C method.
 func (x *SyncEngineFetchChangesOptions) SetPrioritizedZoneIDs(prioritizedZoneIDs []*RecordZoneID) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrioritizedZoneIDs:"), purego.SliceToNSArray(prioritizedZoneIDs, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) }))
 }

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A URL load request that is independent of protocol or URL scheme.
-//
 // URLRequest is an idiomatic wrapper over the Objective-C class NSURLRequest.
+//
+// URLRequest is an abstract base — you do not construct it directly. Construct one of [MutableURLRequest] and pass it where a URLRequest is accepted.
+//
+// A URL load request that is independent of protocol or URL scheme.
 type URLRequest struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func URLRequestFromID(id objc.ID) *URLRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &URLRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &URLRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func uRLRequestAdopt(id objc.ID) *URLRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &URLRequest{Handle: objref.Wrap(id)}
+	x := &URLRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,108 +62,111 @@ func (x *URLRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a URL request for a specified URL.
-//
-// NewURLRequestWithURL creates a new URLRequest.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *URLRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewURLRequestWithURL creates a URL request for a specified URL.
 func NewURLRequestWithURL(uRL string) *URLRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(uRL))
 	return uRLRequestAdopt(_id)
 }
 
-// Creates a URL request with the specified URL, cache policy, and timeout values.
-//
-// NewURLRequestWithURLCachePolicyTimeoutInterval creates a new URLRequest.
+// NewURLRequestWithURLCachePolicyTimeoutInterval creates a URL request with the specified URL, cache policy, and timeout values.
 func NewURLRequestWithURLCachePolicyTimeoutInterval(uRL string, cachePolicy URLRequestCachePolicy, timeoutInterval float64) *URLRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:cachePolicy:timeoutInterval:"), rt.FileURL(uRL), cachePolicy, timeoutInterval)
 	return uRLRequestAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *URLRequest) WithScriptingProperties(scriptingProperties obj.Object) *URLRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Returns the URL of the receiver.
+// URL returns the URL of the receiver.
 func (x *URLRequest) URL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return URLFromID(_r)
 }
 
-// Returns the cache policy of the receiver.
+// CachePolicy returns the cache policy of the receiver.
 func (x *URLRequest) CachePolicy() URLRequestCachePolicy {
 	_r := objc.Send[URLRequestCachePolicy](objref.IDOf(x), objc.RegisterName("cachePolicy"))
 	return _r
 }
 
-// Returns the timeout interval of the receiver. The timeout interval specifies the limit on the idle interval allotted to a request in the process of loading. The "idle interval" is defined as the period of time that has passed since the last instance of load activity occurred for a request that is in the process of loading. Hence, when an instance of load activity occurs (e.g. bytes are received from the network for a request), the idle interval for a request is reset to 0. If the idle interval ever becomes greater than or equal to the timeout interval, the request is considered to have timed out. This timeout interval is measured in seconds.
+// TimeoutInterval returns the timeout interval of the receiver. The timeout interval specifies the limit on the idle interval allotted to a request in the process of loading. The "idle interval" is defined as the period of time that has passed since the last instance of load activity occurred for a request that is in the process of loading. Hence, when an instance of load activity occurs (e.g. bytes are received from the network for a request), the idle interval for a request is reset to 0. If the idle interval ever becomes greater than or equal to the timeout interval, the request is considered to have timed out. This timeout interval is measured in seconds.
 func (x *URLRequest) TimeoutInterval() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeoutInterval"))
 	return _r
 }
 
-// The main document URL associated with this load. This URL is used for the cookie "same domain as main document" policy, and attributing the request as a sub-resource of a user-specified URL. There may also be other future uses. See setMainDocumentURL:
+// MainDocumentURL the main document URL associated with this load. This URL is used for the cookie "same domain as main document" policy, and attributing the request as a sub-resource of a user-specified URL. There may also be other future uses. See setMainDocumentURL:
 func (x *URLRequest) MainDocumentURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainDocumentURL"))
 	return URLFromID(_r)
 }
 
-// Returns the NSURLRequestNetworkServiceType associated with this request. This will return NSURLNetworkServiceTypeDefault for requests that have not explicitly set a networkServiceType (using the setNetworkServiceType method).
+// NetworkServiceType returns the NSURLRequestNetworkServiceType associated with this request. This will return NSURLNetworkServiceTypeDefault for requests that have not explicitly set a networkServiceType (using the setNetworkServiceType method).
 func (x *URLRequest) NetworkServiceType() URLRequestNetworkServiceType {
 	_r := objc.Send[URLRequestNetworkServiceType](objref.IDOf(x), objc.RegisterName("networkServiceType"))
 	return _r
 }
 
-// returns whether a connection created with this request is allowed to use the built in cellular radios (if present).
+// AllowsCellularAccess returns whether a connection created with this request is allowed to use the built in cellular radios (if present).
 func (x *URLRequest) AllowsCellularAccess() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCellularAccess"))
 	return _r
 }
 
-// returns whether a connection created with this request is allowed to use network interfaces which have been marked as expensive.
+// AllowsExpensiveNetworkAccess returns whether a connection created with this request is allowed to use network interfaces which have been marked as expensive.
 func (x *URLRequest) AllowsExpensiveNetworkAccess() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsExpensiveNetworkAccess"))
 	return _r
 }
 
-// returns whether a connection created with this request is allowed to use network interfaces which have been marked as constrained.
+// AllowsConstrainedNetworkAccess returns whether a connection created with this request is allowed to use network interfaces which have been marked as constrained.
 func (x *URLRequest) AllowsConstrainedNetworkAccess() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsConstrainedNetworkAccess"))
 	return _r
 }
 
-// returns whether a connection created with this request is allowed to use network interfaces which have been marked as ultra constrained.
+// AllowsUltraConstrainedNetworkAccess returns whether a connection created with this request is allowed to use network interfaces which have been marked as ultra constrained.
 func (x *URLRequest) AllowsUltraConstrainedNetworkAccess() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsUltraConstrainedNetworkAccess"))
 	return _r
 }
 
-// returns whether we assume that server supports HTTP/3. Enables QUIC racing without HTTP/3 service discovery.
+// AssumesHTTP3Capable returns whether we assume that server supports HTTP/3. Enables QUIC racing without HTTP/3 service discovery.
 func (x *URLRequest) AssumesHTTP3Capable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("assumesHTTP3Capable"))
 	return _r
 }
 
-// Returns the NSURLRequestAttribution associated with this request. This will return NSURLRequestAttributionDeveloper for requests that have not explicitly set an attribution.
+// Attribution returns the NSURLRequestAttribution associated with this request. This will return NSURLRequestAttributionDeveloper for requests that have not explicitly set an attribution.
 func (x *URLRequest) Attribution() URLRequestAttribution {
 	_r := objc.Send[URLRequestAttribution](objref.IDOf(x), objc.RegisterName("attribution"))
 	return _r
 }
 
-// sets whether a request is required to do DNSSEC validation during DNS lookup. YES, if the DNS lookup for this request should require DNSSEC validation, No otherwise. Defaults to NO.
+// RequiresDNSSECValidation sets whether a request is required to do DNSSEC validation during DNS lookup. YES, if the DNS lookup for this request should require DNSSEC validation, No otherwise. Defaults to NO.
 func (x *URLRequest) RequiresDNSSECValidation() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresDNSSECValidation"))
 	return _r
 }
 
-// Allows storing and usage of DNS answers, potentially beyond TTL expiry, in a persistent per-process cache. This should only be set for hostnames whose resolutions are not expected to change across networks. YES, if the DNS lookup for this request is allowed to use a persistent per-process cache, NO otherwise. Defaults to NO.
+// AllowsPersistentDNS allows storing and usage of DNS answers, potentially beyond TTL expiry, in a persistent per-process cache. This should only be set for hostnames whose resolutions are not expected to change across networks. YES, if the DNS lookup for this request is allowed to use a persistent per-process cache, NO otherwise. Defaults to NO.
 func (x *URLRequest) AllowsPersistentDNS() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsPersistentDNS"))
 	return _r
 }
 
+// CookiePartitionIdentifier wraps the corresponding Objective-C method.
 func (x *URLRequest) CookiePartitionIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cookiePartitionIdentifier"))
 	if _r == 0 {
@@ -168,7 +175,7 @@ func (x *URLRequest) CookiePartitionIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Returns the value of the specified HTTP header field.
+// ValueForHTTPHeaderField returns the value of the specified HTTP header field.
 func (x *URLRequest) ValueForHTTPHeaderField(field string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForHTTPHeaderField:"), purego.NSString(field))
 	if _r == 0 {
@@ -177,7 +184,7 @@ func (x *URLRequest) ValueForHTTPHeaderField(field string) string {
 	return purego.GoString(_r)
 }
 
-// Returns the HTTP request method of the receiver.
+// HTTPMethod returns the HTTP request method of the receiver.
 func (x *URLRequest) HTTPMethod() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("HTTPMethod"))
 	if _r == 0 {
@@ -186,31 +193,31 @@ func (x *URLRequest) HTTPMethod() string {
 	return purego.GoString(_r)
 }
 
-// Returns a dictionary containing all the HTTP header fields of the receiver.
+// AllHTTPHeaderFields returns a dictionary containing all the HTTP header fields of the receiver.
 func (x *URLRequest) AllHTTPHeaderFields() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allHTTPHeaderFields"))
 	return obj.Wrap(_r)
 }
 
-// Returns the request body data of the receiver. This data is sent as the message body of the request, as in done in an HTTP POST request.
+// HTTPBody returns the request body data of the receiver. This data is sent as the message body of the request, as in done in an HTTP POST request.
 func (x *URLRequest) HTTPBody() *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("HTTPBody"))
 	return DataFromID(_r)
 }
 
-// Returns the request body stream of the receiver if any has been set The stream is returned for examination only; it is not safe for the caller to manipulate the stream in any way.  Also note that the HTTPBodyStream and HTTPBody are mutually exclusive - only one can be set on a given request.  Also note that the body stream is preserved across copies, but is LOST when the request is coded via the NSCoding protocol
+// HTTPBodyStream returns the request body stream of the receiver if any has been set The stream is returned for examination only; it is not safe for the caller to manipulate the stream in any way.  Also note that the HTTPBodyStream and HTTPBody are mutually exclusive - only one can be set on a given request.  Also note that the body stream is preserved across copies, but is LOST when the request is coded via the NSCoding protocol
 func (x *URLRequest) HTTPBodyStream() *InputStream {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("HTTPBodyStream"))
 	return InputStreamFromID(_r)
 }
 
-// Determine whether default cookie handling will happen for this request. NOTE: This value is not used prior to 10.3
+// HTTPShouldHandleCookies determine whether default cookie handling will happen for this request. NOTE: This value is not used prior to 10.3
 func (x *URLRequest) HTTPShouldHandleCookies() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("HTTPShouldHandleCookies"))
 	return _r
 }
 
-// Reports whether the receiver is not expected to wait for the previous response before transmitting.
+// HTTPShouldUsePipelining reports whether the receiver is not expected to wait for the previous response before transmitting.
 func (x *URLRequest) HTTPShouldUsePipelining() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("HTTPShouldUsePipelining"))
 	return _r
@@ -244,3 +251,10 @@ type URLRequestable interface {
 }
 
 var _ URLRequestable = (*URLRequest)(nil)
+
+// isURLRequest marks URLRequest — and, by embedding promotion, its
+// subclasses — as a member of the URLRequest hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *URLRequest) isURLRequest() {}
+
+var _ URLRequestProvider = (*URLRequest)(nil)

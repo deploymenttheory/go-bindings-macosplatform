@@ -6,6 +6,7 @@ package imagekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -23,7 +24,8 @@ func ImageBrowserViewFromID(id objc.ID) *ImageBrowserView {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageBrowserView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageBrowserView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +38,8 @@ func imageBrowserViewAdopt(id objc.ID) *ImageBrowserView {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageBrowserView{Handle: objref.Wrap(id)}
+	x := &ImageBrowserView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,258 +59,322 @@ func (x *ImageBrowserView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewImageBrowserView creates a new ImageBrowserView.
-func NewImageBrowserView() *ImageBrowserView {
-	_id := objc.Send[objc.ID](objc.ID(_class("IKImageBrowserView")), objc.RegisterName("new"))
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ImageBrowserView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewImageBrowserViewWithFrame initializes and returns a newly allocated IKImageBrowserView object with a specified frame rectangle.
+func NewImageBrowserViewWithFrame(frame corefoundation.CGRect) *ImageBrowserView {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("IKImageBrowserView")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:"), frame)
 	return imageBrowserViewAdopt(_id)
 }
 
-// The receiver's data source. the data source is not retained by the receiver.
-//
-// WithDataSource sets dataSource and returns the receiver so calls can be chained.
+// WithDataSource the receiver's data source. the data source is not retained by the receiver.
 func (x *ImageBrowserView) WithDataSource(dataSource obj.Object) *ImageBrowserView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataSource:"), objref.IDOf(dataSource))
 	return x
 }
 
-// The receiver's delegate. aDelegate is expected to implement the IKImageBrowserDelegate informal protocol.
-//
-// WithDelegate sets delegate and returns the receiver so calls can be chained.
+// WithDelegate the receiver's delegate. aDelegate is expected to implement the IKImageBrowserDelegate informal protocol.
 func (x *ImageBrowserView) WithDelegate(delegate obj.Object) *ImageBrowserView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return x
 }
 
-// Marks the receiver as needing redisplay, so it will reload the data and draw the new values.
+// ReloadData marks the receiver as needing redisplay, so it will reload the data and draw the new values.
 func (x *ImageBrowserView) ReloadData() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadData"))
 }
 
-// The receiver's data source. the data source is not retained by the receiver.
+// DataSource the receiver's data source. the data source is not retained by the receiver.
 func (x *ImageBrowserView) DataSource() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataSource"))
 	return obj.Wrap(_r)
 }
 
+// SetDataSource wraps the corresponding Objective-C method.
 func (x *ImageBrowserView) SetDataSource(dataSource obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataSource:"), objref.IDOf(dataSource))
 }
 
-// The receiver's delegate. aDelegate is expected to implement the IKImageBrowserDelegate informal protocol.
+// Delegate the receiver's delegate. aDelegate is expected to implement the IKImageBrowserDelegate informal protocol.
 func (x *ImageBrowserView) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
+// SetDelegate wraps the corresponding Objective-C method.
 func (x *ImageBrowserView) SetDelegate(delegate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
-// Defines the cells appearance style. mask can be specified by combining any of the options below using the C bitwise OR operator
+// SetCellsStyleMask defines the cells appearance style. mask can be specified by combining any of the options below using the C bitwise OR operator
 func (x *ImageBrowserView) SetCellsStyleMask(mask int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCellsStyleMask:"), mask)
 }
 
-// Return the cells appearance style mask.
+// CellsStyleMask return the cells appearance style mask.
 func (x *ImageBrowserView) CellsStyleMask() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cellsStyleMask"))
 	return _r
 }
 
-// Sets whether the receiver constraints the cells's image to their original size. Default is NO.
+// SetConstrainsToOriginalSize sets whether the receiver constraints the cells's image to their original size. Default is NO.
 func (x *ImageBrowserView) SetConstrainsToOriginalSize(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstrainsToOriginalSize:"), flag)
 }
 
-// Returns whether the receiver constraints the cells's image to their original size.
+// ConstrainsToOriginalSize returns whether the receiver constraints the cells's image to their original size.
 func (x *ImageBrowserView) ConstrainsToOriginalSize() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("constrainsToOriginalSize"))
 	return _r
 }
 
-// Specifies the receiver�s background layer.
+// SetBackgroundLayer specifies the receiver�s background layer.
 func (x *ImageBrowserView) SetBackgroundLayer(aLayer obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundLayer:"), objref.IDOf(aLayer))
 }
 
-// Provides the receiver�s background layer.
+// BackgroundLayer provides the receiver�s background layer.
 func (x *ImageBrowserView) BackgroundLayer() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundLayer"))
 	return obj.Wrap(_r)
 }
 
-// Specifies the receiver�s foreground layer.
+// SetForegroundLayer specifies the receiver�s foreground layer.
 func (x *ImageBrowserView) SetForegroundLayer(aLayer obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForegroundLayer:"), objref.IDOf(aLayer))
 }
 
-// Provides the receiver�s foreground layer.
+// ForegroundLayer provides the receiver�s foreground layer.
 func (x *ImageBrowserView) ForegroundLayer() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("foregroundLayer"))
 	return obj.Wrap(_r)
 }
 
-// Returns the cell to use for the specified item. The returned cell should not be autoreleased. Subclasses can override this method to customize the appearance of the cell that will represent "anItem".
+// NewCellForRepresentedItem returns the cell to use for the specified item. The returned cell should not be autoreleased. Subclasses can override this method to customize the appearance of the cell that will represent "anItem".
 func (x *ImageBrowserView) NewCellForRepresentedItem(anItem obj.Object) *ImageBrowserCell {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("newCellForRepresentedItem:"), objref.IDOf(anItem))
 	return ImageBrowserCellFromID(_r)
 }
 
-// Returns the cell at the specified index. Subclasses must not override this method.
+// CellForItemAtIndex returns the cell at the specified index. Subclasses must not override this method.
 func (x *ImageBrowserView) CellForItemAtIndex(index int) *ImageBrowserCell {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cellForItemAtIndex:"), index)
 	return ImageBrowserCellFromID(_r)
 }
 
-// Sets the zoom value to <i>aValue</i>. This value should be greater or equal to zero and less or equal than one. A zoom value of zero corresponds to the minimum size (40x40 pixels), A zoom value of one means images fit the browser bounds. Other values are interpolated.
+// SetZoomValue sets the zoom value to <i>aValue</i>. This value should be greater or equal to zero and less or equal than one. A zoom value of zero corresponds to the minimum size (40x40 pixels), A zoom value of one means images fit the browser bounds. Other values are interpolated.
 func (x *ImageBrowserView) SetZoomValue(aValue float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZoomValue:"), aValue)
 }
 
-// Returns the current zoom value.
+// ZoomValue returns the current zoom value.
 func (x *ImageBrowserView) ZoomValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("zoomValue"))
 	return _r
 }
 
-// mask can be specified by combining any of the following options using the C bitwise OR operator:NSViewWidthSizable NSViewHeightSizable, other values are ignored.
+// SetContentResizingMask mask can be specified by combining any of the following options using the C bitwise OR operator:NSViewWidthSizable NSViewHeightSizable, other values are ignored.
 func (x *ImageBrowserView) SetContentResizingMask(mask int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentResizingMask:"), mask)
 }
 
+// ContentResizingMask wraps the corresponding Objective-C method.
 func (x *ImageBrowserView) ContentResizingMask() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("contentResizingMask"))
 	return _r
 }
 
-// Scrolls the receiver so the item at the specified index is visible.
+// ScrollIndexToVisible scrolls the receiver so the item at the specified index is visible.
 func (x *ImageBrowserView) ScrollIndexToVisible(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollIndexToVisible:"), index)
 }
 
-// Returns indexes of the receiver�s currently visible items.
+// SetCellSize sets the size of the cells to size
+func (x *ImageBrowserView) SetCellSize(size corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCellSize:"), size)
+}
+
+// CellSize returns the size of the cells
+func (x *ImageBrowserView) CellSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("cellSize"))
+	return _r
+}
+
+// IntercellSpacing returns the spacing between cells in the image browser.
+func (x *ImageBrowserView) IntercellSpacing() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("intercellSpacing"))
+	return _r
+}
+
+// SetIntercellSpacing sets the spacing between cells in the matrix.
+func (x *ImageBrowserView) SetIntercellSpacing(aSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntercellSpacing:"), aSize)
+}
+
+// IndexOfItemAtPoint returns the item at the specified location or NSNotFound if no item at this location.
+func (x *ImageBrowserView) IndexOfItemAtPoint(point corefoundation.CGPoint) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfItemAtPoint:"), point)
+	return _r
+}
+
+// ItemFrameAtIndex returns the frame rectangle of the item that would be drawn at the specified location.
+func (x *ImageBrowserView) ItemFrameAtIndex(index int) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("itemFrameAtIndex:"), index)
+	return _r
+}
+
+// VisibleItemIndexes returns indexes of the receiver�s currently visible items.
 func (x *ImageBrowserView) VisibleItemIndexes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("visibleItemIndexes"))
 	return obj.Wrap(_r)
 }
 
-// Returns the number of rows in the receiver.
+// RowIndexesInRect returns the indexes of the receiver�s rows that intersect the specified rectangle.
+func (x *ImageBrowserView) RowIndexesInRect(rect corefoundation.CGRect) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rowIndexesInRect:"), rect)
+	return obj.Wrap(_r)
+}
+
+// ColumnIndexesInRect returns the indexes of the receiver�s columns that intersect the specified rectangle.
+func (x *ImageBrowserView) ColumnIndexesInRect(rect corefoundation.CGRect) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("columnIndexesInRect:"), rect)
+	return obj.Wrap(_r)
+}
+
+// RectOfColumn returns the rectangle containing the column at a given index.
+func (x *ImageBrowserView) RectOfColumn(columnIndex int) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rectOfColumn:"), columnIndex)
+	return _r
+}
+
+// RectOfRow returns the rectangle containing the row at a given index.
+func (x *ImageBrowserView) RectOfRow(rowIndex int) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rectOfRow:"), rowIndex)
+	return _r
+}
+
+// NumberOfRows returns the number of rows in the receiver.
 func (x *ImageBrowserView) NumberOfRows() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfRows"))
 	return _r
 }
 
-// Returns the number of columns in the receiver.
+// NumberOfColumns returns the number of columns in the receiver.
 func (x *ImageBrowserView) NumberOfColumns() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfColumns"))
 	return _r
 }
 
-// Sets whether the receiver can automatically take control of the Quick Look panel. default value is NO. IKImageBrowserView's datasource items should provide file paths or URLs as their representation (see IKImageBrowserItem protocol).
+// SetCanControlQuickLookPanel sets whether the receiver can automatically take control of the Quick Look panel. default value is NO. IKImageBrowserView's datasource items should provide file paths or URLs as their representation (see IKImageBrowserItem protocol).
 func (x *ImageBrowserView) SetCanControlQuickLookPanel(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanControlQuickLookPanel:"), flag)
 }
 
-// Returns a Boolean value that indicates whether the receiver can automatically take control of the Quick Look panel.
+// CanControlQuickLookPanel returns a Boolean value that indicates whether the receiver can automatically take control of the Quick Look panel.
 func (x *ImageBrowserView) CanControlQuickLookPanel() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canControlQuickLookPanel"))
 	return _r
 }
 
-// Returns the indexes of the selected cells
+// SelectionIndexes returns the indexes of the selected cells
 func (x *ImageBrowserView) SelectionIndexes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionIndexes"))
 	return obj.Wrap(_r)
 }
 
-// Selects cells at indexes <i>indexes</i>. If <i>extendSelection</i> is YES it extends the current selection, otherwise it replaces the current selection.
+// SetSelectionIndexesByExtendingSelection selects cells at indexes <i>indexes</i>. If <i>extendSelection</i> is YES it extends the current selection, otherwise it replaces the current selection.
 func (x *ImageBrowserView) SetSelectionIndexesByExtendingSelection(indexes obj.Object, extendSelection bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionIndexes:byExtendingSelection:"), objref.IDOf(indexes), extendSelection)
 }
 
-// Controls whether the user can select more than one cell at a time.
+// SetAllowsMultipleSelection controls whether the user can select more than one cell at a time.
 func (x *ImageBrowserView) SetAllowsMultipleSelection(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMultipleSelection:"), flag)
 }
 
-// Returns YES if the receiver allows the user to select more than one cell at a time, NO otherwise.
+// AllowsMultipleSelection returns YES if the receiver allows the user to select more than one cell at a time, NO otherwise.
 func (x *ImageBrowserView) AllowsMultipleSelection() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsMultipleSelection"))
 	return _r
 }
 
-// Controls whether the receiver allows zero cell to be selected.
+// SetAllowsEmptySelection controls whether the receiver allows zero cell to be selected.
 func (x *ImageBrowserView) SetAllowsEmptySelection(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEmptySelection:"), flag)
 }
 
-// Returns YES if the receiver allows the user to select zero cell, NO otherwise.
+// AllowsEmptySelection returns YES if the receiver allows the user to select zero cell, NO otherwise.
 func (x *ImageBrowserView) AllowsEmptySelection() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsEmptySelection"))
 	return _r
 }
 
-// Controls whether the user can reorder items.
+// SetAllowsReordering controls whether the user can reorder items.
 func (x *ImageBrowserView) SetAllowsReordering(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsReordering:"), flag)
 }
 
-// Returns YES if the receiver allows the user to reorder items, NO otherwise.
+// AllowsReordering returns YES if the receiver allows the user to reorder items, NO otherwise.
 func (x *ImageBrowserView) AllowsReordering() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsReordering"))
 	return _r
 }
 
-// Controls whether the receiver animate reordering and changes of the data source.
+// SetAnimates controls whether the receiver animate reordering and changes of the data source.
 func (x *ImageBrowserView) SetAnimates(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimates:"), flag)
 }
 
-// Returns YES if the receiver animate changes of the data source, NO otherwise.
+// Animates returns YES if the receiver animate changes of the data source, NO otherwise.
 func (x *ImageBrowserView) Animates() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("animates"))
 	return _r
 }
 
-// Expands group at index 'index' if it is not already expanded; otherwise, does nothing.
+// ExpandGroupAtIndex expands group at index 'index' if it is not already expanded; otherwise, does nothing.
 func (x *ImageBrowserView) ExpandGroupAtIndex(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expandGroupAtIndex:"), index)
 }
 
-// Collapse group at index 'index' if it is expanded; otherwise, does nothing.
+// CollapseGroupAtIndex collapse group at index 'index' if it is expanded; otherwise, does nothing.
 func (x *ImageBrowserView) CollapseGroupAtIndex(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collapseGroupAtIndex:"), index)
 }
 
-// Returns YES if the group at index 'index' is expanded.
+// IsGroupExpandedAtIndex returns YES if the group at index 'index' is expanded.
 func (x *ImageBrowserView) IsGroupExpandedAtIndex(index int) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isGroupExpandedAtIndex:"), index)
 	return _r
 }
 
-// Sets the receiver's dragging destination delegate to <i>delegate</i>.
+// SetDraggingDestinationDelegate sets the receiver's dragging destination delegate to <i>delegate</i>.
 func (x *ImageBrowserView) SetDraggingDestinationDelegate(delegate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDraggingDestinationDelegate:"), objref.IDOf(delegate))
 }
 
-// Returns the receiver's dragging destination delegate.
+// DraggingDestinationDelegate returns the receiver's dragging destination delegate.
 func (x *ImageBrowserView) DraggingDestinationDelegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("draggingDestinationDelegate"))
 	return obj.Wrap(_r)
 }
 
-// Returns the index of the cell where the drop operation occured. This index is valid when a drop occurred and until next drop.
+// IndexAtLocationOfDroppedItem returns the index of the cell where the drop operation occured. This index is valid when a drop occurred and until next drop.
 func (x *ImageBrowserView) IndexAtLocationOfDroppedItem() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexAtLocationOfDroppedItem"))
 	return _r
 }
 
-// Controls whether the user can drop on items. Default is NO.
+// SetAllowsDroppingOnItems controls whether the user can drop on items. Default is NO.
 func (x *ImageBrowserView) SetAllowsDroppingOnItems(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsDroppingOnItems:"), flag)
 }
 
-// Returns YES if the receiver allows the user to drop on items, NO otherwise.
+// AllowsDroppingOnItems returns YES if the receiver allows the user to drop on items, NO otherwise.
 func (x *ImageBrowserView) AllowsDroppingOnItems() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsDroppingOnItems"))
 	return _r
@@ -338,7 +405,17 @@ type ImageBrowserViewable interface {
 	SetContentResizingMask(mask int)
 	ContentResizingMask() int
 	ScrollIndexToVisible(index int)
+	SetCellSize(size corefoundation.CGSize)
+	CellSize() corefoundation.CGSize
+	IntercellSpacing() corefoundation.CGSize
+	SetIntercellSpacing(aSize corefoundation.CGSize)
+	IndexOfItemAtPoint(point corefoundation.CGPoint) int
+	ItemFrameAtIndex(index int) corefoundation.CGRect
 	VisibleItemIndexes() obj.Object
+	RowIndexesInRect(rect corefoundation.CGRect) obj.Object
+	ColumnIndexesInRect(rect corefoundation.CGRect) obj.Object
+	RectOfColumn(columnIndex int) corefoundation.CGRect
+	RectOfRow(rowIndex int) corefoundation.CGRect
 	NumberOfRows() int
 	NumberOfColumns() int
 	SetCanControlQuickLookPanel(flag bool)

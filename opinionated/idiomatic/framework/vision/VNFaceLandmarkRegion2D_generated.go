@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// 2D geometry information for a specific facial feature.
-//
 // FaceLandmarkRegion2D is an idiomatic wrapper over the Objective-C class VNFaceLandmarkRegion2D.
+//
+// It embeds [FaceLandmarkRegion], promoting that type's methods.
+//
+// 2D geometry information for a specific facial feature.
 type FaceLandmarkRegion2D struct {
-	objref.Handle
+	FaceLandmarkRegion
 }
 
 // FaceLandmarkRegion2DFromID adopts an existing Objective-C object as a FaceLandmarkRegion2D
@@ -25,7 +26,8 @@ func FaceLandmarkRegion2DFromID(id objc.ID) *FaceLandmarkRegion2D {
 	if id == 0 {
 		return nil
 	}
-	x := &FaceLandmarkRegion2D{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FaceLandmarkRegion2D{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func faceLandmarkRegion2DAdopt(id objc.ID) *FaceLandmarkRegion2D {
 	if id == 0 {
 		return nil
 	}
-	x := &FaceLandmarkRegion2D{Handle: objref.Wrap(id)}
+	x := &FaceLandmarkRegion2D{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *FaceLandmarkRegion2D) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FaceLandmarkRegion2D) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FaceLandmarkRegion2D) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewFaceLandmarkRegion2D creates a new FaceLandmarkRegion2D.
@@ -64,7 +52,7 @@ func NewFaceLandmarkRegion2D() *FaceLandmarkRegion2D {
 	return faceLandmarkRegion2DAdopt(_id)
 }
 
-// Obtains the array of accuracy placement estimates per landmark point. Provides the NSArray object containing landmarks accuracy placement estimates per landmark point. This property is only populated when VNDetectFaceLandmarksRequest object is configured with VNRequestFaceLandmarksConstellation76Points. It is set to nil for other constellations
+// PrecisionEstimatesPerPoint obtains the array of accuracy placement estimates per landmark point. Provides the NSArray object containing landmarks accuracy placement estimates per landmark point. This property is only populated when VNDetectFaceLandmarksRequest object is configured with VNRequestFaceLandmarksConstellation76Points. It is set to nil for other constellations
 //
 // PrecisionEstimatesPerPoint returns the collection as a Go slice.
 func (x *FaceLandmarkRegion2D) PrecisionEstimatesPerPoint() []obj.Object {
@@ -72,7 +60,7 @@ func (x *FaceLandmarkRegion2D) PrecisionEstimatesPerPoint() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Describes how to interpret the points provided by the region.
+// PointsClassification describes how to interpret the points provided by the region.
 func (x *FaceLandmarkRegion2D) PointsClassification() PointsClassification {
 	_r := objc.Send[PointsClassification](objref.IDOf(x), objc.RegisterName("pointsClassification"))
 	return _r
@@ -86,3 +74,5 @@ type FaceLandmarkRegion2Dable interface {
 }
 
 var _ FaceLandmarkRegion2Dable = (*FaceLandmarkRegion2D)(nil)
+
+var _ FaceLandmarkRegionProvider = (*FaceLandmarkRegion2D)(nil)

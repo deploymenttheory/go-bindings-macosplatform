@@ -25,7 +25,8 @@ func MTRManualSetupPayloadParserFromID(id objc.ID) *MTRManualSetupPayloadParser 
 	if id == 0 {
 		return nil
 	}
-	x := &MTRManualSetupPayloadParser{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRManualSetupPayloadParser{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRManualSetupPayloadParserAdopt(id objc.ID) *MTRManualSetupPayloadParser {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRManualSetupPayloadParser{Handle: objref.Wrap(id)}
+	x := &MTRManualSetupPayloadParser{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +60,12 @@ func (x *MTRManualSetupPayloadParser) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRManualSetupPayloadParser) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRManualSetupPayloadParserWithDecimalStringRepresentation creates a new MTRManualSetupPayloadParser.
 func NewMTRManualSetupPayloadParserWithDecimalStringRepresentation(decimalStringRepresentation string) *MTRManualSetupPayloadParser {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRManualSetupPayloadParser")), objc.RegisterName("alloc"))
@@ -65,7 +73,8 @@ func NewMTRManualSetupPayloadParserWithDecimalStringRepresentation(decimalString
 	return mTRManualSetupPayloadParserAdopt(_id)
 }
 
-func (x *MTRManualSetupPayloadParser) PopulatePayload() (*MTRSetupPayload, error) {
+// PopulatePayload wraps the corresponding Objective-C method.
+func (x *MTRManualSetupPayloadParser) PopulatePayload() (result *MTRSetupPayload, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("populatePayload:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -77,7 +86,7 @@ func (x *MTRManualSetupPayloadParser) PopulatePayload() (*MTRSetupPayload, error
 // MTRManualSetupPayloadParserable is the interface implemented by [MTRManualSetupPayloadParser], for mocking and DI.
 type MTRManualSetupPayloadParserable interface {
 	obj.Object
-	PopulatePayload() (*MTRSetupPayload, error)
+	PopulatePayload() (result *MTRSetupPayload, err error)
 }
 
 var _ MTRManualSetupPayloadParserable = (*MTRManualSetupPayloadParser)(nil)

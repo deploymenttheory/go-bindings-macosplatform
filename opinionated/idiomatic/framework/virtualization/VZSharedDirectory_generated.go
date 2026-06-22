@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A directory on the host that you can expose to a guest.
-//
 // SharedDirectory is an idiomatic wrapper over the Objective-C class VZSharedDirectory.
+//
+// A directory on the host that you can expose to a guest.
 type SharedDirectory struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SharedDirectoryFromID(id objc.ID) *SharedDirectory {
 	if id == 0 {
 		return nil
 	}
-	x := &SharedDirectory{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SharedDirectory{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func sharedDirectoryAdopt(id objc.ID) *SharedDirectory {
 	if id == 0 {
 		return nil
 	}
-	x := &SharedDirectory{Handle: objref.Wrap(id)}
+	x := &SharedDirectory{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,26 @@ func (x *SharedDirectory) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize with a host directory.
-//
-// NewSharedDirectoryWithURLReadOnly creates a new SharedDirectory.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SharedDirectory) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSharedDirectoryWithURLReadOnly initialize with a host directory.
 func NewSharedDirectoryWithURLReadOnly(url string, readOnly bool) *SharedDirectory {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZSharedDirectory")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:readOnly:"), rt.FileURL(url), readOnly)
 	return sharedDirectoryAdopt(_id)
 }
 
-// File URL to a directory on the host to expose to the guest. The URL must point to an existing directory path in the host file system.
+// URL file URL to a directory on the host to expose to the guest. The URL must point to an existing directory path in the host file system.
 func (x *SharedDirectory) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// Whether or not the directory will be exposed as read-only to the guest.
+// IsReadOnly whether or not the directory will be exposed as read-only to the guest.
 func (x *SharedDirectory) IsReadOnly() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadOnly"))
 	return _r

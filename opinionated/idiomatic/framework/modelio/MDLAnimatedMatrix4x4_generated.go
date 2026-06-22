@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // AnimatedMatrix4x4 is an idiomatic wrapper over the Objective-C class MDLAnimatedMatrix4x4.
+//
+// It embeds [AnimatedValue], promoting that type's methods.
 type AnimatedMatrix4x4 struct {
-	objref.Handle
+	AnimatedValue
 }
 
 // AnimatedMatrix4x4FromID adopts an existing Objective-C object as a AnimatedMatrix4x4
@@ -23,7 +24,8 @@ func AnimatedMatrix4x4FromID(id objc.ID) *AnimatedMatrix4x4 {
 	if id == 0 {
 		return nil
 	}
-	x := &AnimatedMatrix4x4{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AnimatedMatrix4x4{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func animatedMatrix4x4Adopt(id objc.ID) *AnimatedMatrix4x4 {
 	if id == 0 {
 		return nil
 	}
-	x := &AnimatedMatrix4x4{Handle: objref.Wrap(id)}
+	x := &AnimatedMatrix4x4{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AnimatedMatrix4x4) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AnimatedMatrix4x4) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AnimatedMatrix4x4) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAnimatedMatrix4x4 creates a new AnimatedMatrix4x4.
@@ -62,7 +50,7 @@ func NewAnimatedMatrix4x4() *AnimatedMatrix4x4 {
 	return animatedMatrix4x4Adopt(_id)
 }
 
-// WithInterpolation sets interpolation and returns the receiver so calls can be chained.
+// WithInterpolation sets the property and returns the receiver so calls can be chained.
 func (x *AnimatedMatrix4x4) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedMatrix4x4 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
 	return x
@@ -75,3 +63,5 @@ type AnimatedMatrix4x4able interface {
 }
 
 var _ AnimatedMatrix4x4able = (*AnimatedMatrix4x4)(nil)
+
+var _ AnimatedValueProvider = (*AnimatedMatrix4x4)(nil)

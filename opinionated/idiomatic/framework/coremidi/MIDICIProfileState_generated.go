@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides the enabled and disabled profiles for a MIDI channel or port on a device.
-//
 // CIProfileState is an idiomatic wrapper over the Objective-C class MIDICIProfileState.
+//
+// An object that provides the enabled and disabled profiles for a MIDI channel or port on a device.
 type CIProfileState struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CIProfileStateFromID(id objc.ID) *CIProfileState {
 	if id == 0 {
 		return nil
 	}
-	x := &CIProfileState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CIProfileState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func cIProfileStateAdopt(id objc.ID) *CIProfileState {
 	if id == 0 {
 		return nil
 	}
-	x := &CIProfileState{Handle: objref.Wrap(id)}
+	x := &CIProfileState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,35 +60,42 @@ func (x *CIProfileState) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new profile state object for the specified MIDI channel and profiles.
-//
-// NewCIProfileStateWithChannelEnabledProfilesDisabledProfiles creates a new CIProfileState.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CIProfileState) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCIProfileStateWithChannelEnabledProfilesDisabledProfiles creates a new profile state object for the specified MIDI channel and profiles.
 func NewCIProfileStateWithChannelEnabledProfilesDisabledProfiles(midiChannelNum uint8, enabled []*CIProfile, disabled []*CIProfile) *CIProfileState {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MIDICIProfileState")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannel:enabledProfiles:disabledProfiles:"), midiChannelNum, purego.SliceToNSArray(enabled, func(_v *CIProfile) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(disabled, func(_v *CIProfile) objc.ID { return objref.IDOf(_v) }))
 	return cIProfileStateAdopt(_id)
 }
 
-// Creates a new profile state object for the specified profiles.
-//
-// NewCIProfileStateWithEnabledProfilesDisabledProfiles creates a new CIProfileState.
+// NewCIProfileStateWithEnabledProfilesDisabledProfiles creates a new profile state object for the specified profiles.
 func NewCIProfileStateWithEnabledProfilesDisabledProfiles(enabled []*CIProfile, disabled []*CIProfile) *CIProfileState {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MIDICIProfileState")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEnabledProfiles:disabledProfiles:"), purego.SliceToNSArray(enabled, func(_v *CIProfile) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(disabled, func(_v *CIProfile) objc.ID { return objref.IDOf(_v) }))
 	return cIProfileStateAdopt(_id)
 }
 
+// MidiChannel wraps the corresponding Objective-C method.
 func (x *CIProfileState) MidiChannel() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("midiChannel"))
 	return _r
 }
 
+// EnabledProfiles wraps the corresponding Objective-C method.
+//
 // EnabledProfiles returns the collection as a Go slice.
 func (x *CIProfileState) EnabledProfiles() []*CIProfile {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enabledProfiles"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CIProfile { return CIProfileFromID(_id) })
 }
 
+// DisabledProfiles wraps the corresponding Objective-C method.
+//
 // DisabledProfiles returns the collection as a Go slice.
 func (x *CIProfileState) DisabledProfiles() []*CIProfile {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disabledProfiles"))

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that guides the video decoder operation on a per-frame basis.
-//
 // DecodeFrameOptions is an idiomatic wrapper over the Objective-C class MEDecodeFrameOptions.
+//
+// An object that guides the video decoder operation on a per-frame basis.
 type DecodeFrameOptions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DecodeFrameOptionsFromID(id objc.ID) *DecodeFrameOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &DecodeFrameOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DecodeFrameOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func decodeFrameOptionsAdopt(id objc.ID) *DecodeFrameOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &DecodeFrameOptions{Handle: objref.Wrap(id)}
+	x := &DecodeFrameOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,44 +60,48 @@ func (x *DecodeFrameOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DecodeFrameOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDecodeFrameOptions creates a new DecodeFrameOptions.
 func NewDecodeFrameOptions() *DecodeFrameOptions {
 	_id := objc.Send[objc.ID](objc.ID(_class("MEDecodeFrameOptions")), objc.RegisterName("new"))
 	return decodeFrameOptionsAdopt(_id)
 }
 
-// A Boolean value that hints to the decoder whether or not it should emit an image buffer for the frame.
-//
-// WithDoNotOutputFrame sets doNotOutputFrame and returns the receiver so calls can be chained.
+// WithDoNotOutputFrame a Boolean value that hints to the decoder whether or not it should emit an image buffer for the frame.
 func (x *DecodeFrameOptions) WithDoNotOutputFrame(doNotOutputFrame bool) *DecodeFrameOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoNotOutputFrame:"), doNotOutputFrame)
 	return x
 }
 
-// A Boolean value that hints to the decoder to use a low-power mode that can’t decode faster than 1x real-time.
-//
-// WithRealTimePlayback sets realTimePlayback and returns the receiver so calls can be chained.
+// WithRealTimePlayback a Boolean value that hints to the decoder to use a low-power mode that can’t decode faster than 1x real-time.
 func (x *DecodeFrameOptions) WithRealTimePlayback(realTimePlayback bool) *DecodeFrameOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRealTimePlayback:"), realTimePlayback)
 	return x
 }
 
-// A hint to the video decoder that a CVImageBuffer should not be emitted for this frame.  NULL will be returned instead.
+// DoNotOutputFrame a hint to the video decoder that a CVImageBuffer should not be emitted for this frame.  NULL will be returned instead.
 func (x *DecodeFrameOptions) DoNotOutputFrame() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("doNotOutputFrame"))
 	return _r
 }
 
+// SetDoNotOutputFrame wraps the corresponding Objective-C method.
 func (x *DecodeFrameOptions) SetDoNotOutputFrame(doNotOutputFrame bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoNotOutputFrame:"), doNotOutputFrame)
 }
 
-// A hint to the video decoder that it would be OK to use a low-power mode that can not decode faster than 1x realtime. Note that this hint only takes the current decode session into account.  For example, if multiple instances of a decoder are operating at once, it may not actually be OK to use such a low-power mode if real-time playback might not be sustained across all the streams. This hint will be set to false during all uses other than 1x forward real-time playback, including seeking, playback at other rates, and export.
+// RealTimePlayback a hint to the video decoder that it would be OK to use a low-power mode that can not decode faster than 1x realtime. Note that this hint only takes the current decode session into account.  For example, if multiple instances of a decoder are operating at once, it may not actually be OK to use such a low-power mode if real-time playback might not be sustained across all the streams. This hint will be set to false during all uses other than 1x forward real-time playback, including seeking, playback at other rates, and export.
 func (x *DecodeFrameOptions) RealTimePlayback() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("realTimePlayback"))
 	return _r
 }
 
+// SetRealTimePlayback wraps the corresponding Objective-C method.
 func (x *DecodeFrameOptions) SetRealTimePlayback(realTimePlayback bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRealTimePlayback:"), realTimePlayback)
 }

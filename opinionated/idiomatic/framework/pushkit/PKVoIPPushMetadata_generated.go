@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains metadata about a received PushKit VoIP notification.
-//
 // VoIPPushMetadata is an idiomatic wrapper over the Objective-C class PKVoIPPushMetadata.
+//
+// An object that contains metadata about a received PushKit VoIP notification.
 type VoIPPushMetadata struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VoIPPushMetadataFromID(id objc.ID) *VoIPPushMetadata {
 	if id == 0 {
 		return nil
 	}
-	x := &VoIPPushMetadata{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VoIPPushMetadata{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func voIPPushMetadataAdopt(id objc.ID) *VoIPPushMetadata {
 	if id == 0 {
 		return nil
 	}
-	x := &VoIPPushMetadata{Handle: objref.Wrap(id)}
+	x := &VoIPPushMetadata{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *VoIPPushMetadata) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VoIPPushMetadata) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVoIPPushMetadata creates a new VoIPPushMetadata.
 func NewVoIPPushMetadata() *VoIPPushMetadata {
 	_id := objc.Send[objc.ID](objc.ID(_class("PKVoIPPushMetadata")), objc.RegisterName("new"))
 	return voIPPushMetadataAdopt(_id)
 }
 
+// MustReport wraps the corresponding Objective-C method.
 func (x *VoIPPushMetadata) MustReport() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mustReport"))
 	return _r

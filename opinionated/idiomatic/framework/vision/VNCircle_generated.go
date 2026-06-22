@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable 2D circle represented by its center point and radius.
-//
 // Circle is an idiomatic wrapper over the Objective-C class VNCircle.
+//
+// An immutable 2D circle represented by its center point and radius.
 type Circle struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CircleFromID(id objc.ID) *Circle {
 	if id == 0 {
 		return nil
 	}
-	x := &Circle{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Circle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func circleAdopt(id objc.ID) *Circle {
 	if id == 0 {
 		return nil
 	}
-	x := &Circle{Handle: objref.Wrap(id)}
+	x := &Circle{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,49 +60,51 @@ func (x *Circle) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a circle with the specified center and radius.
-//
-// NewCircleWithCenterRadius creates a new Circle.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Circle) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCircleWithCenterRadius creates a circle with the specified center and radius.
 func NewCircleWithCenterRadius(center *Point, radius float64) *Circle {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNCircle")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCenter:radius:"), objref.IDOf(center), radius)
 	return circleAdopt(_id)
 }
 
-// Creates a circle with the specified center and diameter.
-//
-// NewCircleWithCenterDiameter creates a new Circle.
+// NewCircleWithCenterDiameter creates a circle with the specified center and diameter.
 func NewCircleWithCenterDiameter(center *Point, diameter float64) *Circle {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNCircle")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCenter:diameter:"), objref.IDOf(center), diameter)
 	return circleAdopt(_id)
 }
 
-// Determines if this circle, including its boundary, contains the specified point.
+// ContainsPoint determines if this circle, including its boundary, contains the specified point.
 func (x *Circle) ContainsPoint(point *Point) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsPoint:"), objref.IDOf(point))
 	return _r
 }
 
-// Determines if a ring around this circle’s circumference contains the specified point.
+// ContainsPointInCircumferentialRingOfWidth determines if a ring around this circle’s circumference contains the specified point.
 func (x *Circle) ContainsPointInCircumferentialRingOfWidth(point *Point, ringWidth float64) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsPoint:inCircumferentialRingOfWidth:"), objref.IDOf(point), ringWidth)
 	return _r
 }
 
-// Returns circle center.
+// Center returns circle center.
 func (x *Circle) Center() *Point {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("center"))
 	return PointFromID(_r)
 }
 
-// Returns circle radius.
+// Radius returns circle radius.
 func (x *Circle) Radius() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("radius"))
 	return _r
 }
 
-// Returns circle diameter.
+// Diameter returns circle diameter.
 func (x *Circle) Diameter() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("diameter"))
 	return _r

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes the configuration of a subscription’s push notifications.
-//
 // NotificationInfo is an idiomatic wrapper over the Objective-C class CKNotificationInfo.
+//
+// An object that describes the configuration of a subscription’s push notifications.
 type NotificationInfo struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NotificationInfoFromID(id objc.ID) *NotificationInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NotificationInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func notificationInfoAdopt(id objc.ID) *NotificationInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationInfo{Handle: objref.Wrap(id)}
+	x := &NotificationInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,54 +60,50 @@ func (x *NotificationInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNotificationInfo creates a new NotificationInfo.
 func NewNotificationInfo() *NotificationInfo {
 	_id := objc.Send[objc.ID](objc.ID(_class("CKNotificationInfo")), objc.RegisterName("new"))
 	return notificationInfoAdopt(_id)
 }
 
-// The names of fields to include in the push notification’s payload.
-//
-// WithDesiredKeys sets the collection and returns the receiver so calls can be chained.
+// WithDesiredKeys the names of fields to include in the push notification’s payload.
 func (x *NotificationInfo) WithDesiredKeys(items ...obj.Object) *NotificationInfo {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredKeys:"), _arr)
 	return x
 }
 
-// A Boolean value that determines whether an app's icon badge increments its value. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>. Set it to <doc://com.apple.documentation/documentation/swift/true> to cause the system to increment the badge value whenever it receives the corresponding push notification.
-//
-// WithShouldBadge sets shouldBadge and returns the receiver so calls can be chained.
+// WithShouldBadge a Boolean value that determines whether an app's icon badge increments its value. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>. Set it to <doc://com.apple.documentation/documentation/swift/true> to cause the system to increment the badge value whenever it receives the corresponding push notification.
 func (x *NotificationInfo) WithShouldBadge(shouldBadge bool) *NotificationInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldBadge:"), shouldBadge)
 	return x
 }
 
-// A Boolean value that indicates whether the push notification includes the content available flag. When this property is <doc://com.apple.documentation/documentation/swift/true>, the server includes the `content-available` flag in the push notification's payload. That flag causes the system to wake or launch an app that isn't currently running. The app then receives background execution time to download any data for the push notification, such as the set of changed records. If the app is already running in the foreground, the inclusion of this flag has no additional effect and the system delivers the notification to the app delegate for processing as usual. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
-//
-// WithShouldSendContentAvailable sets shouldSendContentAvailable and returns the receiver so calls can be chained.
+// WithShouldSendContentAvailable a Boolean value that indicates whether the push notification includes the content available flag. When this property is <doc://com.apple.documentation/documentation/swift/true>, the server includes the `content-available` flag in the push notification's payload. That flag causes the system to wake or launch an app that isn't currently running. The app then receives background execution time to download any data for the push notification, such as the set of changed records. If the app is already running in the foreground, the inclusion of this flag has no additional effect and the system delivers the notification to the app delegate for processing as usual. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
 func (x *NotificationInfo) WithShouldSendContentAvailable(shouldSendContentAvailable bool) *NotificationInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldSendContentAvailable:"), shouldSendContentAvailable)
 	return x
 }
 
-// A Boolean value that indicates whether the push notification sets the mutable content flag. When this property is <doc://com.apple.documentation/documentation/swift/true>, the server includes the `mutable-content` flag with a value of `1` in the push notification's payload. When the value is `1`, the system passes the notification to your app extension for modification before delivery. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more information about the `mutable-content` flag, and <doc://com.apple.documentation/documentation/usernotifications/modifying-content-in-newly-delivered-notifications> for information about how to modify push notifiction content in your app extension prior to delivery. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
-//
-// WithShouldSendMutableContent sets shouldSendMutableContent and returns the receiver so calls can be chained.
+// WithShouldSendMutableContent a Boolean value that indicates whether the push notification sets the mutable content flag. When this property is <doc://com.apple.documentation/documentation/swift/true>, the server includes the `mutable-content` flag with a value of `1` in the push notification's payload. When the value is `1`, the system passes the notification to your app extension for modification before delivery. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more information about the `mutable-content` flag, and <doc://com.apple.documentation/documentation/usernotifications/modifying-content-in-newly-delivered-notifications> for information about how to modify push notifiction content in your app extension prior to delivery. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
 func (x *NotificationInfo) WithShouldSendMutableContent(shouldSendMutableContent bool) *NotificationInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldSendMutableContent:"), shouldSendMutableContent)
 	return x
 }
 
-// A value that the system uses to coalesce unseen push notifications. When CloudKit generates a push notification, it sets the notification's `apns-collapse-id` header to this property's value. The system uses this header to coalesce unseen notifications. See <doc://com.apple.documentation/documentation/usernotifications/sending-notification-requests-to-apns> for more information about sending notifications using the Apple Push Notification service.
-//
-// WithCollapseIDKey sets collapseIDKey and returns the receiver so calls can be chained.
+// WithCollapseIDKey a value that the system uses to coalesce unseen push notifications. When CloudKit generates a push notification, it sets the notification's `apns-collapse-id` header to this property's value. The system uses this header to coalesce unseen notifications. See <doc://com.apple.documentation/documentation/usernotifications/sending-notification-requests-to-apns> for more information about sending notifications using the Apple Push Notification service.
 func (x *NotificationInfo) WithCollapseIDKey(collapseIDKey string) *NotificationInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapseIDKey:"), purego.NSString(collapseIDKey))
 	return x
 }
 
-// The names of fields to include in the push notification's payload. This property contains an array of strings, each of which corresponds to the name of a field in the record that triggers the notification. When the system receives a notification, it includes the keys, and their corresponding values. You can request a maximum of three keys. For the keys you specify, the allowable types are <doc://com.apple.documentation/documentation/foundation/nsstring>, <doc://com.apple.documentation/documentation/foundation/nsnumber>, <doc://com.apple.documentation/documentation/corelocation/cllocation>, <doc://com.apple.documentation/documentation/foundation/nsdate>, and “CKRecord/Reference“. You can't specify keys with values that contain other data types. CloudKit may truncate strings that are more than 100 characters when it adds them to the notification's payload.
+// DesiredKeys the names of fields to include in the push notification's payload. This property contains an array of strings, each of which corresponds to the name of a field in the record that triggers the notification. When the system receives a notification, it includes the keys, and their corresponding values. You can request a maximum of three keys. For the keys you specify, the allowable types are <doc://com.apple.documentation/documentation/foundation/nsstring>, <doc://com.apple.documentation/documentation/foundation/nsnumber>, <doc://com.apple.documentation/documentation/corelocation/cllocation>, <doc://com.apple.documentation/documentation/foundation/nsdate>, and “CKRecord/Reference“. You can't specify keys with values that contain other data types. CloudKit may truncate strings that are more than 100 characters when it adds them to the notification's payload.
 //
 // DesiredKeys returns the collection as a Go slice.
 func (x *NotificationInfo) DesiredKeys() []obj.Object {
@@ -113,41 +111,45 @@ func (x *NotificationInfo) DesiredKeys() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetDesiredKeys wraps the corresponding Objective-C method.
 func (x *NotificationInfo) SetDesiredKeys(desiredKeys []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredKeys:"), purego.SliceToNSArray(desiredKeys, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// A Boolean value that determines whether an app's icon badge increments its value. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>. Set it to <doc://com.apple.documentation/documentation/swift/true> to cause the system to increment the badge value whenever it receives the corresponding push notification.
+// ShouldBadge a Boolean value that determines whether an app's icon badge increments its value. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>. Set it to <doc://com.apple.documentation/documentation/swift/true> to cause the system to increment the badge value whenever it receives the corresponding push notification.
 func (x *NotificationInfo) ShouldBadge() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldBadge"))
 	return _r
 }
 
+// SetShouldBadge wraps the corresponding Objective-C method.
 func (x *NotificationInfo) SetShouldBadge(shouldBadge bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldBadge:"), shouldBadge)
 }
 
-// A Boolean value that indicates whether the push notification includes the content available flag. When this property is <doc://com.apple.documentation/documentation/swift/true>, the server includes the `content-available` flag in the push notification's payload. That flag causes the system to wake or launch an app that isn't currently running. The app then receives background execution time to download any data for the push notification, such as the set of changed records. If the app is already running in the foreground, the inclusion of this flag has no additional effect and the system delivers the notification to the app delegate for processing as usual. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
+// ShouldSendContentAvailable a Boolean value that indicates whether the push notification includes the content available flag. When this property is <doc://com.apple.documentation/documentation/swift/true>, the server includes the `content-available` flag in the push notification's payload. That flag causes the system to wake or launch an app that isn't currently running. The app then receives background execution time to download any data for the push notification, such as the set of changed records. If the app is already running in the foreground, the inclusion of this flag has no additional effect and the system delivers the notification to the app delegate for processing as usual. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
 func (x *NotificationInfo) ShouldSendContentAvailable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldSendContentAvailable"))
 	return _r
 }
 
+// SetShouldSendContentAvailable wraps the corresponding Objective-C method.
 func (x *NotificationInfo) SetShouldSendContentAvailable(shouldSendContentAvailable bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldSendContentAvailable:"), shouldSendContentAvailable)
 }
 
-// A Boolean value that indicates whether the push notification sets the mutable content flag. When this property is <doc://com.apple.documentation/documentation/swift/true>, the server includes the `mutable-content` flag with a value of `1` in the push notification's payload. When the value is `1`, the system passes the notification to your app extension for modification before delivery. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more information about the `mutable-content` flag, and <doc://com.apple.documentation/documentation/usernotifications/modifying-content-in-newly-delivered-notifications> for information about how to modify push notifiction content in your app extension prior to delivery. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
+// ShouldSendMutableContent a Boolean value that indicates whether the push notification sets the mutable content flag. When this property is <doc://com.apple.documentation/documentation/swift/true>, the server includes the `mutable-content` flag with a value of `1` in the push notification's payload. When the value is `1`, the system passes the notification to your app extension for modification before delivery. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more information about the `mutable-content` flag, and <doc://com.apple.documentation/documentation/usernotifications/modifying-content-in-newly-delivered-notifications> for information about how to modify push notifiction content in your app extension prior to delivery. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
 func (x *NotificationInfo) ShouldSendMutableContent() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldSendMutableContent"))
 	return _r
 }
 
+// SetShouldSendMutableContent wraps the corresponding Objective-C method.
 func (x *NotificationInfo) SetShouldSendMutableContent(shouldSendMutableContent bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldSendMutableContent:"), shouldSendMutableContent)
 }
 
-// A value that the system uses to coalesce unseen push notifications. When CloudKit generates a push notification, it sets the notification's `apns-collapse-id` header to this property's value. The system uses this header to coalesce unseen notifications. See <doc://com.apple.documentation/documentation/usernotifications/sending-notification-requests-to-apns> for more information about sending notifications using the Apple Push Notification service.
+// CollapseIDKey a value that the system uses to coalesce unseen push notifications. When CloudKit generates a push notification, it sets the notification's `apns-collapse-id` header to this property's value. The system uses this header to coalesce unseen notifications. See <doc://com.apple.documentation/documentation/usernotifications/sending-notification-requests-to-apns> for more information about sending notifications using the Apple Push Notification service.
 func (x *NotificationInfo) CollapseIDKey() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collapseIDKey"))
 	if _r == 0 {
@@ -156,6 +158,7 @@ func (x *NotificationInfo) CollapseIDKey() string {
 	return purego.GoString(_r)
 }
 
+// SetCollapseIDKey wraps the corresponding Objective-C method.
 func (x *NotificationInfo) SetCollapseIDKey(collapseIDKey string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapseIDKey:"), purego.NSString(collapseIDKey))
 }

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that consists of all the levers to synchronize and schedule executable execution.
-//
 // GraphExecutableExecutionDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphExecutableExecutionDescriptor.
+//
+// It embeds [GraphObject], promoting that type's methods.
+//
+// A class that consists of all the levers to synchronize and schedule executable execution.
 type GraphExecutableExecutionDescriptor struct {
-	objref.Handle
+	GraphObject
 }
 
 // GraphExecutableExecutionDescriptorFromID adopts an existing Objective-C object as a GraphExecutableExecutionDescriptor
@@ -25,7 +26,8 @@ func GraphExecutableExecutionDescriptorFromID(id objc.ID) *GraphExecutableExecut
 	if id == 0 {
 		return nil
 	}
-	x := &GraphExecutableExecutionDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphExecutableExecutionDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func graphExecutableExecutionDescriptorAdopt(id objc.ID) *GraphExecutableExecuti
 	if id == 0 {
 		return nil
 	}
-	x := &GraphExecutableExecutionDescriptor{Handle: objref.Wrap(id)}
+	x := &GraphExecutableExecutionDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GraphExecutableExecutionDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphExecutableExecutionDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphExecutableExecutionDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGraphExecutableExecutionDescriptor creates a new GraphExecutableExecutionDescriptor.
@@ -64,20 +52,19 @@ func NewGraphExecutableExecutionDescriptor() *GraphExecutableExecutionDescriptor
 	return graphExecutableExecutionDescriptorAdopt(_id)
 }
 
-// Flag for the graph executable to wait till the execution has completed.
-//
-// WithWaitUntilCompleted sets waitUntilCompleted and returns the receiver so calls can be chained.
+// WithWaitUntilCompleted flag for the graph executable to wait till the execution has completed.
 func (x *GraphExecutableExecutionDescriptor) WithWaitUntilCompleted(waitUntilCompleted bool) *GraphExecutableExecutionDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWaitUntilCompleted:"), waitUntilCompleted)
 	return x
 }
 
-// Flag for the graph executable to wait till the execution has completed. Default value is false.
+// WaitUntilCompleted flag for the graph executable to wait till the execution has completed. Default value is false.
 func (x *GraphExecutableExecutionDescriptor) WaitUntilCompleted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("waitUntilCompleted"))
 	return _r
 }
 
+// SetWaitUntilCompleted wraps the corresponding Objective-C method.
 func (x *GraphExecutableExecutionDescriptor) SetWaitUntilCompleted(waitUntilCompleted bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWaitUntilCompleted:"), waitUntilCompleted)
 }
@@ -91,3 +78,5 @@ type GraphExecutableExecutionDescriptorable interface {
 }
 
 var _ GraphExecutableExecutionDescriptorable = (*GraphExecutableExecutionDescriptor)(nil)
+
+var _ GraphObjectProvider = (*GraphExecutableExecutionDescriptor)(nil)

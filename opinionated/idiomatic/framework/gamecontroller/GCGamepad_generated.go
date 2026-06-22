@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The standard set of gamepad controls.
-//
 // Gamepad is an idiomatic wrapper over the Objective-C class GCGamepad.
+//
+// Gamepad is an abstract base — you do not construct it directly. Construct one of [GamepadSnapshot] and pass it where a Gamepad is accepted.
+//
+// The standard set of gamepad controls.
 type Gamepad struct {
-	objref.Handle
+	PhysicalInputProfile
 }
 
 // GamepadFromID adopts an existing Objective-C object as a Gamepad
@@ -25,7 +26,8 @@ func GamepadFromID(id objc.ID) *Gamepad {
 	if id == 0 {
 		return nil
 	}
-	x := &Gamepad{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Gamepad{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,86 +40,67 @@ func gamepadAdopt(id objc.ID) *Gamepad {
 	if id == 0 {
 		return nil
 	}
-	x := &Gamepad{Handle: objref.Wrap(id)}
+	x := &Gamepad{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *Gamepad) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Gamepad) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Gamepad) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewGamepad creates a new Gamepad.
-func NewGamepad() *Gamepad {
-	_id := objc.Send[objc.ID](objc.ID(_class("GCGamepad")), objc.RegisterName("new"))
-	return gamepadAdopt(_id)
-}
-
-// The block that the profile calls when an element’s value changes.
-//
-// WithValueDidChangeHandler sets valueDidChangeHandler and returns the receiver so calls can be chained.
+// WithValueDidChangeHandler the block that the profile calls when an element’s value changes.
 func (x *Gamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *Gamepad {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return x
 }
 
-// Saves a snapshot of all of the profile’s elements.
+// SaveSnapshot saves a snapshot of all of the profile’s elements.
 func (x *Gamepad) SaveSnapshot() *GamepadSnapshot {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveSnapshot"))
 	return GamepadSnapshotFromID(_r)
 }
 
-// A profile keeps a reference to the controller that this profile is mapping input from.
+// Controller a profile keeps a reference to the controller that this profile is mapping input from.
 func (x *Gamepad) Controller() *Controller {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controller"))
 	return ControllerFromID(_r)
 }
 
-// Required to be analog in the Standard profile. All the elements of this directional input are thus analog.
+// Dpad required to be analog in the Standard profile. All the elements of this directional input are thus analog.
 func (x *Gamepad) Dpad() *ControllerDirectionPad {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dpad"))
 	return ControllerDirectionPadFromID(_r)
 }
 
-// All face buttons are required to be analog in the Standard profile. These must be arranged in the diamond pattern given below: Y / \ X   B \ / A
+// ButtonA all face buttons are required to be analog in the Standard profile. These must be arranged in the diamond pattern given below: Y / \ X   B \ / A
 func (x *Gamepad) ButtonA() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonA"))
 	return ControllerButtonInputFromID(_r)
 }
 
+// ButtonB wraps the corresponding Objective-C method.
 func (x *Gamepad) ButtonB() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonB"))
 	return ControllerButtonInputFromID(_r)
 }
 
+// ButtonX wraps the corresponding Objective-C method.
 func (x *Gamepad) ButtonX() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonX"))
 	return ControllerButtonInputFromID(_r)
 }
 
+// ButtonY wraps the corresponding Objective-C method.
 func (x *Gamepad) ButtonY() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonY"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// Shoulder buttons are required to be analog inputs.
+// LeftShoulder shoulder buttons are required to be analog inputs.
 func (x *Gamepad) LeftShoulder() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftShoulder"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// Shoulder buttons are required to be analog inputs.
+// RightShoulder shoulder buttons are required to be analog inputs.
 func (x *Gamepad) RightShoulder() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightShoulder"))
 	return ControllerButtonInputFromID(_r)
@@ -139,3 +122,12 @@ type Gamepadable interface {
 }
 
 var _ Gamepadable = (*Gamepad)(nil)
+
+// isGamepad marks Gamepad — and, by embedding promotion, its
+// subclasses — as a member of the Gamepad hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Gamepad) isGamepad() {}
+
+var _ GamepadProvider = (*Gamepad)(nil)
+
+var _ PhysicalInputProfileProvider = (*Gamepad)(nil)

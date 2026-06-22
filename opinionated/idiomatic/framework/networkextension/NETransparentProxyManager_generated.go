@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that configures and controls transparent proxies.
-//
 // NETransparentProxyManager is an idiomatic wrapper over the Objective-C class NETransparentProxyManager.
+//
+// It embeds [NEVPNManager], promoting that type's methods.
+//
+// An object that configures and controls transparent proxies.
 type NETransparentProxyManager struct {
-	objref.Handle
+	NEVPNManager
 }
 
 // NETransparentProxyManagerFromID adopts an existing Objective-C object as a NETransparentProxyManager
@@ -25,7 +26,8 @@ func NETransparentProxyManagerFromID(id objc.ID) *NETransparentProxyManager {
 	if id == 0 {
 		return nil
 	}
-	x := &NETransparentProxyManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NETransparentProxyManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func nETransparentProxyManagerAdopt(id objc.ID) *NETransparentProxyManager {
 	if id == 0 {
 		return nil
 	}
-	x := &NETransparentProxyManager{Handle: objref.Wrap(id)}
+	x := &NETransparentProxyManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NETransparentProxyManager) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NETransparentProxyManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NETransparentProxyManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNETransparentProxyManager creates a new NETransparentProxyManager.
@@ -64,50 +52,38 @@ func NewNETransparentProxyManager() *NETransparentProxyManager {
 	return nETransparentProxyManagerAdopt(_id)
 }
 
-// An ordered list of Connect On Demand rules.
-//
-// WithOnDemandRules sets the collection and returns the receiver so calls can be chained.
+// WithOnDemandRules an ordered list of Connect On Demand rules.
 func (x *NETransparentProxyManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NETransparentProxyManager {
 	_arr := purego.SliceToNSArray(items, func(_v NEOnDemandRuleProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnDemandRules:"), _arr)
 	return x
 }
 
-// A Boolean used to toggle the Connect On Demand capability.
-//
-// WithOnDemandEnabled sets onDemandEnabled and returns the receiver so calls can be chained.
+// WithOnDemandEnabled a Boolean used to toggle the Connect On Demand capability.
 func (x *NETransparentProxyManager) WithOnDemandEnabled(onDemandEnabled bool) *NETransparentProxyManager {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnDemandEnabled:"), onDemandEnabled)
 	return x
 }
 
-// A string containing the display name of the VPN configuration.
-//
-// WithLocalizedDescription sets localizedDescription and returns the receiver so calls can be chained.
+// WithLocalizedDescription a string containing the display name of the VPN configuration.
 func (x *NETransparentProxyManager) WithLocalizedDescription(localizedDescription string) *NETransparentProxyManager {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
 	return x
 }
 
-// An NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
-//
-// WithProtocol sets protocol and returns the receiver so calls can be chained.
+// WithProtocol an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
 func (x *NETransparentProxyManager) WithProtocol(protocol NEVPNProtocolProvider) *NETransparentProxyManager {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocol:"), objref.IDOf(protocol))
 	return x
 }
 
-// An NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
-//
-// WithProtocolConfiguration sets protocolConfiguration and returns the receiver so calls can be chained.
+// WithProtocolConfiguration an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
 func (x *NETransparentProxyManager) WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NETransparentProxyManager {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocolConfiguration:"), objref.IDOf(protocolConfiguration))
 	return x
 }
 
-// A Boolean used to toggle the enabled state of the VPN configuration.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean used to toggle the enabled state of the VPN configuration.
 func (x *NETransparentProxyManager) WithEnabled(enabled bool) *NETransparentProxyManager {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
@@ -125,3 +101,5 @@ type NETransparentProxyManagerable interface {
 }
 
 var _ NETransparentProxyManagerable = (*NETransparentProxyManager)(nil)
+
+var _ NEVPNManagerProvider = (*NETransparentProxyManager)(nil)

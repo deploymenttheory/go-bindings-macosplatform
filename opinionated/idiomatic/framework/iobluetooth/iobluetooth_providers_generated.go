@@ -11,14 +11,17 @@ import (
 // IOBluetoothHandsFreeProvider is accepted wherever a IOBluetoothHandsFree (or one of its subclasses) is expected.
 type IOBluetoothHandsFreeProvider interface {
 	objref.Object
+	isIOBluetoothHandsFree()
 }
 
 // IOBluetoothObjectProvider is accepted wherever a IOBluetoothObject (or one of its subclasses) is expected.
 type IOBluetoothObjectProvider interface {
 	objref.Object
+	isIOBluetoothObject()
 }
 
 // OBEXSessionProvider is accepted wherever a OBEXSession (or one of its subclasses) is expected.
 type OBEXSessionProvider interface {
 	objref.Object
+	isOBEXSession()
 }

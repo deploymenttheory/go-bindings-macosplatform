@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that responds to MIDI-CI inquiries from an initiator on behalf of a MIDI client, and handles profile and property exchange operations.
-//
 // CIResponder is an idiomatic wrapper over the Objective-C class MIDICIResponder.
+//
+// An object that responds to MIDI-CI inquiries from an initiator on behalf of a MIDI client, and handles profile and property exchange operations.
 type CIResponder struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CIResponderFromID(id objc.ID) *CIResponder {
 	if id == 0 {
 		return nil
 	}
-	x := &CIResponder{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CIResponder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func cIResponderAdopt(id objc.ID) *CIResponder {
 	if id == 0 {
 		return nil
 	}
-	x := &CIResponder{Handle: objref.Wrap(id)}
+	x := &CIResponder{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,35 +60,42 @@ func (x *CIResponder) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CIResponder) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCIResponder creates a new CIResponder.
 func NewCIResponder() *CIResponder {
 	_id := objc.Send[objc.ID](objc.ID(_class("MIDICIResponder")), objc.RegisterName("new"))
 	return cIResponderAdopt(_id)
 }
 
-// Enables or disables a profile and notifies all connected initiators.
+// NotifyProfileOnChannelIsEnabled enables or disables a profile and notifies all connected initiators.
 func (x *CIResponder) NotifyProfileOnChannelIsEnabled(aProfile *CIProfile, channel uint8, enabledState bool) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("notifyProfile:onChannel:isEnabled:"), objref.IDOf(aProfile), channel, enabledState)
 	return _r
 }
 
-// Sends profile-specific data to all connected initiators.
+// SendProfileOnChannelProfileData sends profile-specific data to all connected initiators.
 func (x *CIResponder) SendProfileOnChannelProfileData(aProfile *CIProfile, channel uint8, profileSpecificData obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendProfile:onChannel:profileData:"), objref.IDOf(aProfile), channel, objref.IDOf(profileSpecificData))
 	return _r
 }
 
-// Starts receiving initiator requests.
+// Start starts receiving initiator requests.
 func (x *CIResponder) Start() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("start"))
 	return _r
 }
 
-// Stops receiving initiator requests and disconnects all connected initiators.
+// Stop stops receiving initiator requests and disconnects all connected initiators.
 func (x *CIResponder) Stop() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
+// DeviceInfo wraps the corresponding Objective-C method.
 func (x *CIResponder) DeviceInfo() *CIDeviceInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceInfo"))
 	return CIDeviceInfoFromID(_r)

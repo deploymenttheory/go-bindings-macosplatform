@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents the day of the week.
-//
 // RecurrenceDayOfWeek is an idiomatic wrapper over the Objective-C class EKRecurrenceDayOfWeek.
+//
+// A class that represents the day of the week.
 type RecurrenceDayOfWeek struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RecurrenceDayOfWeekFromID(id objc.ID) *RecurrenceDayOfWeek {
 	if id == 0 {
 		return nil
 	}
-	x := &RecurrenceDayOfWeek{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RecurrenceDayOfWeek{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func recurrenceDayOfWeekAdopt(id objc.ID) *RecurrenceDayOfWeek {
 	if id == 0 {
 		return nil
 	}
-	x := &RecurrenceDayOfWeek{Handle: objref.Wrap(id)}
+	x := &RecurrenceDayOfWeek{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,26 @@ func (x *RecurrenceDayOfWeek) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes and returns a day of the week with a given day and week number.
-//
-// NewRecurrenceDayOfWeekWithDayOfTheWeekWeekNumber creates a new RecurrenceDayOfWeek.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RecurrenceDayOfWeek) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRecurrenceDayOfWeekWithDayOfTheWeekWeekNumber initializes and returns a day of the week with a given day and week number.
 func NewRecurrenceDayOfWeekWithDayOfTheWeekWeekNumber(dayOfTheWeek Weekday, weekNumber int) *RecurrenceDayOfWeek {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("EKRecurrenceDayOfWeek")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDayOfTheWeek:weekNumber:"), dayOfTheWeek, weekNumber)
 	return recurrenceDayOfWeekAdopt(_id)
 }
 
-// The day of the week.
+// DayOfTheWeek the day of the week.
 func (x *RecurrenceDayOfWeek) DayOfTheWeek() Weekday {
 	_r := objc.Send[Weekday](objref.IDOf(x), objc.RegisterName("dayOfTheWeek"))
 	return _r
 }
 
-// The week number.
+// WeekNumber the week number.
 func (x *RecurrenceDayOfWeek) WeekNumber() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("weekNumber"))
 	return _r

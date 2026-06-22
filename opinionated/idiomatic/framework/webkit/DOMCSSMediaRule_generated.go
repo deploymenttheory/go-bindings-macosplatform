@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMCSSMediaRule is an idiomatic wrapper over the Objective-C class DOMCSSMediaRule.
+//
+// It embeds [DOMCSSRule], promoting that type's methods.
 type DOMCSSMediaRule struct {
-	objref.Handle
+	DOMCSSRule
 }
 
 // DOMCSSMediaRuleFromID adopts an existing Objective-C object as a DOMCSSMediaRule
@@ -23,7 +24,8 @@ func DOMCSSMediaRuleFromID(id objc.ID) *DOMCSSMediaRule {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMCSSMediaRule{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMCSSMediaRule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMCSSMediaRuleAdopt(id objc.ID) *DOMCSSMediaRule {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMCSSMediaRule{Handle: objref.Wrap(id)}
+	x := &DOMCSSMediaRule{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMCSSMediaRule) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMCSSMediaRule) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMCSSMediaRule) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMCSSMediaRule creates a new DOMCSSMediaRule.
@@ -62,31 +50,36 @@ func NewDOMCSSMediaRule() *DOMCSSMediaRule {
 	return dOMCSSMediaRuleAdopt(_id)
 }
 
-// WithCssText sets cssText and returns the receiver so calls can be chained.
+// WithCssText sets the property and returns the receiver so calls can be chained.
 func (x *DOMCSSMediaRule) WithCssText(cssText string) *DOMCSSMediaRule {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
 	return x
 }
 
+// InsertRuleIndex wraps the corresponding Objective-C method.
 func (x *DOMCSSMediaRule) InsertRuleIndex(rule string, index int) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("insertRule:index:"), purego.NSString(rule), index)
 	return _r
 }
 
+// DeleteRule wraps the corresponding Objective-C method.
 func (x *DOMCSSMediaRule) DeleteRule(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteRule:"), index)
 }
 
+// Media wraps the corresponding Objective-C method.
 func (x *DOMCSSMediaRule) Media() *DOMMediaList {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("media"))
 	return DOMMediaListFromID(_r)
 }
 
+// CssRules wraps the corresponding Objective-C method.
 func (x *DOMCSSMediaRule) CssRules() *DOMCSSRuleList {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cssRules"))
 	return DOMCSSRuleListFromID(_r)
 }
 
+// InsertRule wraps the corresponding Objective-C method.
 func (x *DOMCSSMediaRule) InsertRule(rule string, index int) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("insertRule::"), purego.NSString(rule), index)
 	return _r
@@ -104,3 +97,9 @@ type DOMCSSMediaRuleable interface {
 }
 
 var _ DOMCSSMediaRuleable = (*DOMCSSMediaRule)(nil)
+
+var _ DOMCSSRuleProvider = (*DOMCSSMediaRule)(nil)
+
+var _ DOMObjectProvider = (*DOMCSSMediaRule)(nil)
+
+var _ WebScriptObjectProvider = (*DOMCSSMediaRule)(nil)

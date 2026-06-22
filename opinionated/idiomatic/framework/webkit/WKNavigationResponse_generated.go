@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains the response to a navigation request, and which you use to make navigation-related policy decisions.
-//
 // WKNavigationResponse is an idiomatic wrapper over the Objective-C class WKNavigationResponse.
+//
+// An object that contains the response to a navigation request, and which you use to make navigation-related policy decisions.
 type WKNavigationResponse struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKNavigationResponseFromID(id objc.ID) *WKNavigationResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &WKNavigationResponse{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKNavigationResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKNavigationResponseAdopt(id objc.ID) *WKNavigationResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &WKNavigationResponse{Handle: objref.Wrap(id)}
+	x := &WKNavigationResponse{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *WKNavigationResponse) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKNavigationResponse) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKNavigationResponse creates a new WKNavigationResponse.
 func NewWKNavigationResponse() *WKNavigationResponse {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKNavigationResponse")), objc.RegisterName("new"))
 	return wKNavigationResponseAdopt(_id)
 }
 
-// A Boolean value indicating whether the frame being navigated is the main frame.
+// IsForMainFrame a Boolean value indicating whether the frame being navigated is the main frame.
 func (x *WKNavigationResponse) IsForMainFrame() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isForMainFrame"))
 	return _r
 }
 
-// The frame's response.
+// Response the frame's response.
 func (x *WKNavigationResponse) Response() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("response"))
 	return obj.Wrap(_r)
 }
 
-// A Boolean value indicating whether WebKit can display the response's MIME type natively. Allowing a navigation response with a MIME type that can't be shown will cause the navigation to fail.
+// CanShowMIMEType a Boolean value indicating whether WebKit can display the response's MIME type natively. Allowing a navigation response with a MIME type that can't be shown will cause the navigation to fail.
 func (x *WKNavigationResponse) CanShowMIMEType() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canShowMIMEType"))
 	return _r

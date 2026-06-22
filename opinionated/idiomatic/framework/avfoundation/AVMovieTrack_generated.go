@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A track in a movie that conforms to the QuickTime or ISO base media file format.
-//
 // MovieTrack is an idiomatic wrapper over the Objective-C class AVMovieTrack.
+//
+// MovieTrack is an abstract base — you do not construct it directly. Construct one of [FragmentedMovieTrack], [MutableMovieTrack] and pass it where a MovieTrack is accepted.
+//
+// A track in a movie that conforms to the QuickTime or ISO base media file format.
 type MovieTrack struct {
-	objref.Handle
+	AssetTrack
 }
 
 // MovieTrackFromID adopts an existing Objective-C object as a MovieTrack
@@ -25,7 +26,8 @@ func MovieTrackFromID(id objc.ID) *MovieTrack {
 	if id == 0 {
 		return nil
 	}
-	x := &MovieTrack{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MovieTrack{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,37 +40,19 @@ func movieTrackAdopt(id objc.ID) *MovieTrack {
 	if id == 0 {
 		return nil
 	}
-	x := &MovieTrack{Handle: objref.Wrap(id)}
+	x := &MovieTrack{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MovieTrack) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MovieTrack) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MovieTrack) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewMovieTrack creates a new MovieTrack.
-func NewMovieTrack() *MovieTrack {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVMovieTrack")), objc.RegisterName("new"))
-	return movieTrackAdopt(_id)
-}
-
+// AlternateGroupID wraps the corresponding Objective-C method.
 func (x *MovieTrack) AlternateGroupID() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("alternateGroupID"))
 	return _r
 }
 
+// MediaDataStorage wraps the corresponding Objective-C method.
 func (x *MovieTrack) MediaDataStorage() *MediaDataStorage {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaDataStorage"))
 	return MediaDataStorageFromID(_r)
@@ -82,3 +66,12 @@ type MovieTrackable interface {
 }
 
 var _ MovieTrackable = (*MovieTrack)(nil)
+
+// isMovieTrack marks MovieTrack — and, by embedding promotion, its
+// subclasses — as a member of the MovieTrack hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MovieTrack) isMovieTrack() {}
+
+var _ MovieTrackProvider = (*MovieTrack)(nil)
+
+var _ AssetTrackProvider = (*MovieTrack)(nil)

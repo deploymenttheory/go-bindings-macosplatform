@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MatrixRandomMTGP32 is an idiomatic wrapper over the Objective-C class MPSMatrixRandomMTGP32.
+//
+// It embeds [MatrixRandom], promoting that type's methods.
 type MatrixRandomMTGP32 struct {
-	objref.Handle
+	MatrixRandom
 }
 
 // MatrixRandomMTGP32FromID adopts an existing Objective-C object as a MatrixRandomMTGP32
@@ -23,7 +24,8 @@ func MatrixRandomMTGP32FromID(id objc.ID) *MatrixRandomMTGP32 {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixRandomMTGP32{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatrixRandomMTGP32{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func matrixRandomMTGP32Adopt(id objc.ID) *MatrixRandomMTGP32 {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixRandomMTGP32{Handle: objref.Wrap(id)}
+	x := &MatrixRandomMTGP32{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MatrixRandomMTGP32) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatrixRandomMTGP32) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatrixRandomMTGP32) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMatrixRandomMTGP32 creates a new MatrixRandomMTGP32.
@@ -62,17 +50,13 @@ func NewMatrixRandomMTGP32() *MatrixRandomMTGP32 {
 	return matrixRandomMTGP32Adopt(_id)
 }
 
-// The starting index in the destination batch.
-//
-// WithBatchStart sets batchStart and returns the receiver so calls can be chained.
+// WithBatchStart the starting index in the destination batch.
 func (x *MatrixRandomMTGP32) WithBatchStart(batchStart int) *MatrixRandomMTGP32 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 	return x
 }
 
-// The size of the batch to process.
-//
-// WithBatchSize sets batchSize and returns the receiver so calls can be chained.
+// WithBatchSize the size of the batch to process.
 func (x *MatrixRandomMTGP32) WithBatchSize(batchSize int) *MatrixRandomMTGP32 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 	return x
@@ -86,3 +70,5 @@ type MatrixRandomMTGP32able interface {
 }
 
 var _ MatrixRandomMTGP32able = (*MatrixRandomMTGP32)(nil)
+
+var _ MatrixRandomProvider = (*MatrixRandomMTGP32)(nil)

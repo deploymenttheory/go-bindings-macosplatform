@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of a structure.
-//
 // StructType is an idiomatic wrapper over the Objective-C class MTLStructType.
+//
+// It embeds [Type], promoting that type's methods.
+//
+// A description of a structure.
 type StructType struct {
-	objref.Handle
+	Type
 }
 
 // StructTypeFromID adopts an existing Objective-C object as a StructType
@@ -25,7 +26,8 @@ func StructTypeFromID(id objc.ID) *StructType {
 	if id == 0 {
 		return nil
 	}
-	x := &StructType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StructType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func structTypeAdopt(id objc.ID) *StructType {
 	if id == 0 {
 		return nil
 	}
-	x := &StructType{Handle: objref.Wrap(id)}
+	x := &StructType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *StructType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StructType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StructType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewStructType creates a new StructType.
@@ -64,12 +52,14 @@ func NewStructType() *StructType {
 	return structTypeAdopt(_id)
 }
 
-// Provides a representation of a struct member.
+// MemberByName provides a representation of a struct member.
 func (x *StructType) MemberByName(name string) *StructMember {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("memberByName:"), purego.NSString(name))
 	return StructMemberFromID(_r)
 }
 
+// Members wraps the corresponding Objective-C method.
+//
 // Members returns the collection as a Go slice.
 func (x *StructType) Members() []*StructMember {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("members"))
@@ -84,3 +74,5 @@ type StructTypeable interface {
 }
 
 var _ StructTypeable = (*StructType)(nil)
+
+var _ TypeProvider = (*StructType)(nil)

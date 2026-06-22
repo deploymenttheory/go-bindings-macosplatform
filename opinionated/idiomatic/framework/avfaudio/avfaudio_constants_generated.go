@@ -140,13 +140,11 @@ func AVSampleRateConverterAlgorithm_MinimumPhase() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVSampleRateConverterAlgorithm_MinimumPhase")))
 }
 
-// A notification generated on engine configuration changes when rendering to/from an audio device. Register for this notification on your engine instances, as follows: ``` [[NSNotificationCenter defaultCenter] addObserver: myObject selector:
 // AVAudioEngineConfigurationChangeNotification returns the string constant AVAudioEngineConfigurationChangeNotification, for use as a dictionary key or argument.
 func AVAudioEngineConfigurationChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAudioEngineConfigurationChangeNotification")))
 }
 
-// Only present in begin interruption events, where the interruption is a direct result of the application being suspended by the operating sytem. Value is a boolean NSNumber, where a true value indicates that the interruption is the result of the application being suspended, rather than being interrupted by another audio session. Starting in iOS 10, the system will deactivate the audio session of most apps in response to the app process being suspended. When the app starts running again, it will receive the notification that its session has been deactivated by the system. Note that the notification is necessarily delayed in time, due to the fact that the application was suspended at the time the session was deactivated by the system and the notification can only be delivered once the app is running again.
 // AVAudioSessionInterruptionWasSuspendedKey returns the string constant AVAudioSessionInterruptionWasSuspendedKey, for use as a dictionary key or argument.
 func AVAudioSessionInterruptionWasSuspendedKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSessionInterruptionWasSuspendedKey")))
@@ -392,7 +390,6 @@ func AVSpeechSynthesisAvailableVoicesDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVSpeechSynthesisAvailableVoicesDidChangeNotification")))
 }
 
-// Keys for AVAudioApplicationInputMuteStateChangeNotification Value is NSNumber type with boolean value 0 for unmuted or value 1 for muted (samples zeroed out)
 // AVAudioApplicationMuteStateKey returns the string constant AVAudioApplicationMuteStateKey, for use as a dictionary key or argument.
 func AVAudioApplicationMuteStateKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAudioApplicationMuteStateKey")))

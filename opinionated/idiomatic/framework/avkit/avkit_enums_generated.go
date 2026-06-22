@@ -23,6 +23,8 @@ const (
 	CaptureViewControlsStyleDefault CaptureViewControlsStyle = 0
 )
 
+// String returns the CaptureViewControlsStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptureViewControlsStyle) String() string {
 	switch e {
 	case CaptureViewControlsStyleInline:
@@ -50,6 +52,8 @@ const (
 	DisplayDynamicRangeHigh DisplayDynamicRange = 3
 )
 
+// String returns the DisplayDynamicRange constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DisplayDynamicRange) String() string {
 	switch e {
 	case DisplayDynamicRangeAutomatic:
@@ -74,6 +78,8 @@ const (
 	LegibleMediaOptionsMenuContentsAll               LegibleMediaOptionsMenuContents = 3
 )
 
+// String returns the LegibleMediaOptionsMenuContents constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LegibleMediaOptionsMenuContents) String() string {
 	var parts []string
 	if e&LegibleMediaOptionsMenuContentsLegible != 0 {
@@ -107,6 +113,8 @@ const (
 	PlayerViewControlsStyleDefault PlayerViewControlsStyle = 1
 )
 
+// String returns the PlayerViewControlsStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PlayerViewControlsStyle) String() string {
 	switch e {
 	case PlayerViewControlsStyleNone:
@@ -132,6 +140,8 @@ const (
 	RoutePickerViewButtonStateActiveHighlighted RoutePickerViewButtonState = 3
 )
 
+// String returns the RoutePickerViewButtonState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RoutePickerViewButtonState) String() string {
 	switch e {
 	case RoutePickerViewButtonStateNormal:
@@ -164,6 +174,8 @@ const (
 	VideoFrameAnalysisTypeVisualSearch VideoFrameAnalysisType = 8
 )
 
+// String returns the VideoFrameAnalysisType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VideoFrameAnalysisType) String() string {
 	var parts []string
 	if e&VideoFrameAnalysisTypeDefault != 0 {

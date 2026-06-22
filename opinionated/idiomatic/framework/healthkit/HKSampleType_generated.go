@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract superclass for all classes that identify a specific type of sample when working with the HealthKit store.
-//
 // SampleType is an idiomatic wrapper over the Objective-C class HKSampleType.
+//
+// SampleType is an abstract base — you do not construct it directly. Construct one of [AudiogramSampleType], [CategoryType], [ClinicalType], [CorrelationType], [DocumentType], [ElectrocardiogramType], [MedicationDoseEventType], [PrescriptionType], [QuantityType], [ScoredAssessmentType], [SeriesType], [StateOfMindType], [WorkoutType] and pass it where a SampleType is accepted.
+//
+// An abstract superclass for all classes that identify a specific type of sample when working with the HealthKit store.
 type SampleType struct {
-	objref.Handle
+	ObjectType
 }
 
 // SampleTypeFromID adopts an existing Objective-C object as a SampleType
@@ -25,7 +26,8 @@ func SampleTypeFromID(id objc.ID) *SampleType {
 	if id == 0 {
 		return nil
 	}
-	x := &SampleType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SampleType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,57 +40,37 @@ func sampleTypeAdopt(id objc.ID) *SampleType {
 	if id == 0 {
 		return nil
 	}
-	x := &SampleType{Handle: objref.Wrap(id)}
+	x := &SampleType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *SampleType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SampleType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SampleType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewSampleType creates a new SampleType.
-func NewSampleType() *SampleType {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKSampleType")), objc.RegisterName("new"))
-	return sampleTypeAdopt(_id)
-}
-
-// Returns YES if the start and end date for samples of this type are restricted by a maximum duration.
+// IsMaximumDurationRestricted returns YES if the start and end date for samples of this type are restricted by a maximum duration.
 func (x *SampleType) IsMaximumDurationRestricted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMaximumDurationRestricted"))
 	return _r
 }
 
-// When the duration is restricted for samples of this type, returns the maximum duration allowed, calculated as the difference between end and start dates. Throws an exception if there is no maximum restriction on duration for samples of this type.
+// MaximumAllowedDuration when the duration is restricted for samples of this type, returns the maximum duration allowed, calculated as the difference between end and start dates. Throws an exception if there is no maximum restriction on duration for samples of this type.
 func (x *SampleType) MaximumAllowedDuration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumAllowedDuration"))
 	return _r
 }
 
-// Returns YES if the start and end date for samples of this type are restricted by a minimum duration.
+// IsMinimumDurationRestricted returns YES if the start and end date for samples of this type are restricted by a minimum duration.
 func (x *SampleType) IsMinimumDurationRestricted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMinimumDurationRestricted"))
 	return _r
 }
 
-// When the duration is restricted for samples of this type, returns the minimum duration allowed, calculated as the difference between end and start dates. Throws an exception if there is no minimum restriction on duration for samples of this type.
+// MinimumAllowedDuration when the duration is restricted for samples of this type, returns the minimum duration allowed, calculated as the difference between end and start dates. Throws an exception if there is no minimum restriction on duration for samples of this type.
 func (x *SampleType) MinimumAllowedDuration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumAllowedDuration"))
 	return _r
 }
 
-// Returns YES if first-party samples of this type are produced using a prediction algorithm, and that algorithm supports recalibration. To recalibrate the estimates for a sample type, see -[HKHealthStore recalibrateEstimatesForSampleType:atDate:completion:]
+// AllowsRecalibrationForEstimates returns YES if first-party samples of this type are produced using a prediction algorithm, and that algorithm supports recalibration. To recalibrate the estimates for a sample type, see -[HKHealthStore recalibrateEstimatesForSampleType:atDate:completion:]
 func (x *SampleType) AllowsRecalibrationForEstimates() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsRecalibrationForEstimates"))
 	return _r
@@ -105,3 +87,12 @@ type SampleTypeable interface {
 }
 
 var _ SampleTypeable = (*SampleType)(nil)
+
+// isSampleType marks SampleType — and, by embedding promotion, its
+// subclasses — as a member of the SampleType hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SampleType) isSampleType() {}
+
+var _ SampleTypeProvider = (*SampleType)(nil)
+
+var _ ObjectTypeProvider = (*SampleType)(nil)

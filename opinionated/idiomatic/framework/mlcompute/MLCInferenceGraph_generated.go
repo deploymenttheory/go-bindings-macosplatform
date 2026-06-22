@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An inference graph created from one or more MLCGraph instances plus additional layers added directly to the inference graph.
-//
 // InferenceGraph is an idiomatic wrapper over the Objective-C class MLCInferenceGraph.
+//
+// It embeds [Graph], promoting that type's methods.
+//
+// An inference graph created from one or more MLCGraph instances plus additional layers added directly to the inference graph.
 type InferenceGraph struct {
-	objref.Handle
+	Graph
 }
 
 // InferenceGraphFromID adopts an existing Objective-C object as a InferenceGraph
@@ -25,7 +26,8 @@ func InferenceGraphFromID(id objc.ID) *InferenceGraph {
 	if id == 0 {
 		return nil
 	}
-	x := &InferenceGraph{Handle: objref.Wrap(purego.Retain(id))}
+	x := &InferenceGraph{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func inferenceGraphAdopt(id objc.ID) *InferenceGraph {
 	if id == 0 {
 		return nil
 	}
-	x := &InferenceGraph{Handle: objref.Wrap(id)}
+	x := &InferenceGraph{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *InferenceGraph) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *InferenceGraph) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *InferenceGraph) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewInferenceGraph creates a new InferenceGraph.
@@ -64,43 +52,43 @@ func NewInferenceGraph() *InferenceGraph {
 	return inferenceGraphAdopt(_id)
 }
 
-// Adds the inputs you specify to the inference graph.
+// AddInputs adds the inputs you specify to the inference graph.
 func (x *InferenceGraph) AddInputs(inputs obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addInputs:"), objref.IDOf(inputs))
 	return _r
 }
 
-// Adds the inputs, loss labels, and loss label weights that you specify to the inference graph.
+// AddInputsLossLabelsLossLabelWeights adds the inputs, loss labels, and loss label weights that you specify to the inference graph.
 func (x *InferenceGraph) AddInputsLossLabelsLossLabelWeights(inputs obj.Object, lossLabels obj.Object, lossLabelWeights obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addInputs:lossLabels:lossLabelWeights:"), objref.IDOf(inputs), objref.IDOf(lossLabels), objref.IDOf(lossLabelWeights))
 	return _r
 }
 
-// Adds the outputs you specify to the inference graph.
+// AddOutputs adds the outputs you specify to the inference graph.
 func (x *InferenceGraph) AddOutputs(outputs obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addOutputs:"), objref.IDOf(outputs))
 	return _r
 }
 
-// Compiles the inference graph for the options and device you specify.
+// CompileWithOptionsDevice compiles the inference graph for the options and device you specify.
 func (x *InferenceGraph) CompileWithOptionsDevice(options GraphCompilationOptions, device *Device) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("compileWithOptions:device:"), options, objref.IDOf(device))
 	return _r
 }
 
-// Compiles the inference graph for the options, device, and input tensors you specify.
+// CompileWithOptionsDeviceInputTensorsInputTensorsData compiles the inference graph for the options, device, and input tensors you specify.
 func (x *InferenceGraph) CompileWithOptionsDeviceInputTensorsInputTensorsData(options GraphCompilationOptions, device *Device, inputTensors obj.Object, inputTensorsData obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("compileWithOptions:device:inputTensors:inputTensorsData:"), options, objref.IDOf(device), objref.IDOf(inputTensors), objref.IDOf(inputTensorsData))
 	return _r
 }
 
-// Links the inference graphs you specify.
+// LinkWithGraphs links the inference graphs you specify.
 func (x *InferenceGraph) LinkWithGraphs(graphs []*InferenceGraph) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("linkWithGraphs:"), purego.SliceToNSArray(graphs, func(_v *InferenceGraph) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
-// Returns the total size in bytes of device memory used by all intermediate tensors in the inference graph
+// DeviceMemorySize returns the total size in bytes of device memory used by all intermediate tensors in the inference graph
 func (x *InferenceGraph) DeviceMemorySize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("deviceMemorySize"))
 	return _r
@@ -119,3 +107,5 @@ type InferenceGraphable interface {
 }
 
 var _ InferenceGraphable = (*InferenceGraph)(nil)
+
+var _ GraphProvider = (*InferenceGraph)(nil)

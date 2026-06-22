@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object used to modify the transform, cropping, and opacity ramps applied to a given track in a composition.
-//
 // VideoCompositionLayerInstruction is an idiomatic wrapper over the Objective-C class AVVideoCompositionLayerInstruction.
+//
+// VideoCompositionLayerInstruction is an abstract base — you do not construct it directly. Construct one of [MutableVideoCompositionLayerInstruction] and pass it where a VideoCompositionLayerInstruction is accepted.
+//
+// An object used to modify the transform, cropping, and opacity ramps applied to a given track in a composition.
 type VideoCompositionLayerInstruction struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func VideoCompositionLayerInstructionFromID(id objc.ID) *VideoCompositionLayerIn
 	if id == 0 {
 		return nil
 	}
-	x := &VideoCompositionLayerInstruction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VideoCompositionLayerInstruction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func videoCompositionLayerInstructionAdopt(id objc.ID) *VideoCompositionLayerIns
 	if id == 0 {
 		return nil
 	}
-	x := &VideoCompositionLayerInstruction{Handle: objref.Wrap(id)}
+	x := &VideoCompositionLayerInstruction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *VideoCompositionLayerInstruction) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewVideoCompositionLayerInstruction creates a new VideoCompositionLayerInstruction.
-func NewVideoCompositionLayerInstruction() *VideoCompositionLayerInstruction {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVVideoCompositionLayerInstruction")), objc.RegisterName("new"))
-	return videoCompositionLayerInstructionAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VideoCompositionLayerInstruction) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // VideoCompositionLayerInstructionable is the interface implemented by [VideoCompositionLayerInstruction], for mocking and DI.
@@ -70,3 +74,10 @@ type VideoCompositionLayerInstructionable interface {
 }
 
 var _ VideoCompositionLayerInstructionable = (*VideoCompositionLayerInstruction)(nil)
+
+// isVideoCompositionLayerInstruction marks VideoCompositionLayerInstruction — and, by embedding promotion, its
+// subclasses — as a member of the VideoCompositionLayerInstruction hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *VideoCompositionLayerInstruction) isVideoCompositionLayerInstruction() {}
+
+var _ VideoCompositionLayerInstructionProvider = (*VideoCompositionLayerInstruction)(nil)

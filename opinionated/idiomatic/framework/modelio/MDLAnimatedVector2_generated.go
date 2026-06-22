@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // AnimatedVector2 is an idiomatic wrapper over the Objective-C class MDLAnimatedVector2.
+//
+// It embeds [AnimatedValue], promoting that type's methods.
 type AnimatedVector2 struct {
-	objref.Handle
+	AnimatedValue
 }
 
 // AnimatedVector2FromID adopts an existing Objective-C object as a AnimatedVector2
@@ -23,7 +24,8 @@ func AnimatedVector2FromID(id objc.ID) *AnimatedVector2 {
 	if id == 0 {
 		return nil
 	}
-	x := &AnimatedVector2{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AnimatedVector2{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func animatedVector2Adopt(id objc.ID) *AnimatedVector2 {
 	if id == 0 {
 		return nil
 	}
-	x := &AnimatedVector2{Handle: objref.Wrap(id)}
+	x := &AnimatedVector2{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AnimatedVector2) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AnimatedVector2) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AnimatedVector2) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAnimatedVector2 creates a new AnimatedVector2.
@@ -62,7 +50,7 @@ func NewAnimatedVector2() *AnimatedVector2 {
 	return animatedVector2Adopt(_id)
 }
 
-// WithInterpolation sets interpolation and returns the receiver so calls can be chained.
+// WithInterpolation sets the property and returns the receiver so calls can be chained.
 func (x *AnimatedVector2) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedVector2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
 	return x
@@ -75,3 +63,5 @@ type AnimatedVector2able interface {
 }
 
 var _ AnimatedVector2able = (*AnimatedVector2)(nil)
+
+var _ AnimatedValueProvider = (*AnimatedVector2)(nil)

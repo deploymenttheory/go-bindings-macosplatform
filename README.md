@@ -6,7 +6,7 @@ This project provides three things:
 
 - A **code generator** that introspects macOS SDK headers via Clang and produces idiomatic Go packages — ObjC frameworks are bound through [purego](https://github.com/ebitengine/purego) (no CGo, no Xcode needed to build your app), and Apple C libraries are bound through CGo bridges.
 - The **generated bindings** themselves — ready-to-import Go packages covering 250 ObjC frameworks (`bindings/frameworks/`) and 11 Apple C libraries (`bindings/libraries/`) discovered in the macOS SDK.
-- An **opinionated idiomatic layer** (`opinionated/idiomatic/`) built on top of the raw bindings — fluent, Go-shaped wrappers where constructors bundle `alloc`+`init`, properties become chainable `With*` setters, async completion handlers become `func(ctx) error`, `NSArray` getters become typed Go slices, and C functions get prefix-stripped Go names.
+- An **opinionated idiomatic layer** (`opinionated/idiomatic/`) built on top of the raw bindings — fluent, Go-shaped wrappers where constructors bundle `alloc`+`init`, properties become chainable `With*` setters, async completion handlers become `func(ctx) error`, `NSArray` getters become typed Go slices, and C functions get prefix-stripped Go names. Subclasses **embed their base** (inheriting its methods through Go promotion); an abstract base's setters accept a **sealed provider interface** so only real members of the hierarchy type-check; abstract bases emit no meaningless constructor; multi-value methods use **named returns**; and each package's `doc.go` carries a type index so `go doc` reads like a manual. The layer is **hermetic** — it never imports the raw bindings, dispatching straight through the runtime.
 
 > **Platform:** macOS only (`darwin`). All generated code carries a `//go:build darwin` constraint.
 
@@ -54,18 +54,20 @@ func main() {
 }
 ```
 
-The idiomatic layer trades raw fidelity for fluency:
+The idiomatic layer trades raw fidelity for fluency. Each `With*` setter returns the
+receiver, so configuration reads as a single expression, and setters accept *sealed*
+provider interfaces so only a real member of a class hierarchy type-checks:
 
 ```go
-import fluent "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/foundation"
+import vz "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/virtualization"
 
-queue := fluent.NewOperationQueue().
-    WithName("worker").
-    WithMaxConcurrentOperationCount(2)
+config := vz.NewVirtualMachineConfiguration().
+    WithBootLoader(vz.NewLinuxBootLoaderWithKernelURL("/var/vm/vmlinuz")).
+    WithCPUCount(2).
+    WithMemorySize(2 << 30)
 
-queue.Unwrap().AddOperationWith(func() {
-    fmt.Println("ran on an NSOperationQueue")
-})
+// WithBootLoader accepts vz.BootLoaderProvider — only VZBootLoader subclasses
+// satisfy it, so passing a non-boot-loader is a compile error, not a runtime panic.
 ```
 
 ---
@@ -165,11 +167,12 @@ import (
 )
 ```
 
-The idiomatic layer mirrors the same package names under `opinionated/idiomatic/`:
+The idiomatic layer mirrors the same package names under `opinionated/idiomatic/framework/`
+(C-library wrappers live under `opinionated/idiomatic/libraries/`):
 
 ```go
 import (
-    fluent "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/foundation"
+    fluent "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 )
 ```
 
@@ -231,7 +234,7 @@ The idiomatic layer additionally strips the framework prefix (types stay in the 
 ```go
 import (
     "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vmnet"
-    idvmnet "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/vmnet"
+    idvmnet "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/vmnet"
 )
 
 var status vmnet.Vmnet_return_t
@@ -426,7 +429,7 @@ flowchart TD
 
 **Phase 3 — Emit raw bindings:** ObjC frameworks are emitted as purego packages in topological dependency order; mutual-import cycles are detected via DFS and broken by degrading the cross-framework reference to `objc.ID`. C libraries are emitted as CGo packages with generated bridge files. Every type degradation is collected and checked against `metadata/diagnostics-baseline.json` — new degradations fail CI until deliberately accepted.
 
-**Phase 4 — Emit idiomatic:** The `idiomatic` subcommand regenerates `opinionated/idiomatic/` — per-class fluent wrappers, provider interfaces for abstract base classes, CFError-converting function wrappers, and generic C-function wrappers. Hand-crafted packages under `opinionated/library/` and `opinionated/custom/` are never touched by the generator.
+**Phase 4 — Emit idiomatic:** The `idiomatic` subcommand regenerates `opinionated/idiomatic/` — per-class fluent wrappers (subclasses embedding their base), sealed provider interfaces for abstract base classes, CFError-converting function wrappers, generic C-function wrappers, and a `doc.go` type index per package. The emitter is a compiler-style pipeline: a resolution pass turns scanned metadata into a pure-data intermediate representation (the `view` package), and a render pass turns that into Go source through `text/template` files only — no Go syntax is assembled by string concatenation, and imports are computed from the resolved types rather than scanned from the output. Hand-crafted packages under `opinionated/library/` and `opinionated/custom/`, and any hand-authored `example_test.go`, are never touched by the generator.
 
 ---
 
@@ -453,11 +456,13 @@ go-bindings-macosplatform/
 │   └── runtime/           # Public runtime — imported by generated code AND by consumers
 │       ├── purego/        # purego runtime: Track/Retain/Release, GoString, NSErrorToError + ObjC dispatch re-exports (+ objcerrors/)
 │       ├── cgo/           # CGo runtime: retain/release, RunOnMainThread, exceptions
-│       ├── tel/           # OTel tracing wrapper for CGo library calls
 │       ├── blocks/        # CGo block trampoline runtime
 │       └── callbacks/     # CGo method/callback trampoline runtime
 ├── opinionated/
-│   ├── idiomatic/         # Fully generated fluent layer (one package per framework)
+│   ├── idiomatic/         # Fully generated fluent layer
+│   │   ├── framework/     #   one package per ObjC framework
+│   │   ├── libraries/     #   one package per Apple C library
+│   │   └── obj/ rt/ errkit/ internal/objref/   # generated runtime support packages
 │   ├── library/           # Hand-crafted quality-of-life helpers (never regenerated)
 │   └── custom/            # Custom hand-crafted packages
 ├── internal/

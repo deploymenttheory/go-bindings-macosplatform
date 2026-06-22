@@ -11,19 +11,23 @@ import (
 // BasePlayerProvider is accepted wherever a GKBasePlayer (or one of its subclasses) is expected.
 type BasePlayerProvider interface {
 	objref.Object
+	isBasePlayer()
 }
 
 // ChallengeProvider is accepted wherever a GKChallenge (or one of its subclasses) is expected.
 type ChallengeProvider interface {
 	objref.Object
+	isChallenge()
 }
 
 // GameCenterViewControllerProvider is accepted wherever a GKGameCenterViewController (or one of its subclasses) is expected.
 type GameCenterViewControllerProvider interface {
 	objref.Object
+	isGameCenterViewController()
 }
 
 // PlayerProvider is accepted wherever a GKPlayer (or one of its subclasses) is expected.
 type PlayerProvider interface {
 	objref.Object
+	isPlayer()
 }

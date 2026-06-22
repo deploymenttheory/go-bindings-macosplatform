@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBaseClusterDoorLock is an idiomatic wrapper over the Objective-C class MTRBaseClusterDoorLock.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
 type MTRBaseClusterDoorLock struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterDoorLockFromID adopts an existing Objective-C object as a MTRBaseClusterDoorLock
@@ -25,7 +26,8 @@ func MTRBaseClusterDoorLockFromID(id objc.ID) *MTRBaseClusterDoorLock {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterDoorLock{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterDoorLock{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func mTRBaseClusterDoorLockAdopt(id objc.ID) *MTRBaseClusterDoorLock {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterDoorLock{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterDoorLock{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterDoorLock) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterDoorLock) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterDoorLock) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterDoorLockWithDeviceEndpointIDQueue creates a new MTRBaseClusterDoorLock.
+// NewMTRBaseClusterDoorLockWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterDoorLockWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterDoorLock {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterDoorLock")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -74,10 +60,10 @@ func NewMTRBaseClusterDoorLockWithDeviceEndpointQueue(device *MTRBaseDevice, end
 	return mTRBaseClusterDoorLockAdopt(_id)
 }
 
-// Command GetWeekDaySchedule Retrieve the specific weekly schedule for the specific user.
+// GetWeekDayScheduleWithParamsCompletion command GetWeekDaySchedule Retrieve the specific weekly schedule for the specific user.
 //
 // GetWeekDayScheduleWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) GetWeekDayScheduleWithParamsCompletion(ctx context.Context, params *MTRDoorLockClusterGetWeekDayScheduleParams) (*MTRDoorLockClusterGetWeekDayScheduleResponseParams, error) {
+func (x *MTRBaseClusterDoorLock) GetWeekDayScheduleWithParamsCompletion(ctx context.Context, params *MTRDoorLockClusterGetWeekDayScheduleParams) (result *MTRDoorLockClusterGetWeekDayScheduleResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterGetWeekDayScheduleResponseParams
 		err error
@@ -99,10 +85,10 @@ func (x *MTRBaseClusterDoorLock) GetWeekDayScheduleWithParamsCompletion(ctx cont
 	}
 }
 
-// Command GetYearDaySchedule Returns the year day schedule data for the specified schedule and user indexes.
+// GetYearDayScheduleWithParamsCompletion command GetYearDaySchedule Returns the year day schedule data for the specified schedule and user indexes.
 //
 // GetYearDayScheduleWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) GetYearDayScheduleWithParamsCompletion(ctx context.Context, params *MTRDoorLockClusterGetYearDayScheduleParams) (*MTRDoorLockClusterGetYearDayScheduleResponseParams, error) {
+func (x *MTRBaseClusterDoorLock) GetYearDayScheduleWithParamsCompletion(ctx context.Context, params *MTRDoorLockClusterGetYearDayScheduleParams) (result *MTRDoorLockClusterGetYearDayScheduleResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterGetYearDayScheduleResponseParams
 		err error
@@ -124,10 +110,10 @@ func (x *MTRBaseClusterDoorLock) GetYearDayScheduleWithParamsCompletion(ctx cont
 	}
 }
 
-// Command GetHolidaySchedule Get the holiday schedule for the specified index.
+// GetHolidayScheduleWithParamsCompletion command GetHolidaySchedule Get the holiday schedule for the specified index.
 //
 // GetHolidayScheduleWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) GetHolidayScheduleWithParamsCompletion(ctx context.Context, params *MTRDoorLockClusterGetHolidayScheduleParams) (*MTRDoorLockClusterGetHolidayScheduleResponseParams, error) {
+func (x *MTRBaseClusterDoorLock) GetHolidayScheduleWithParamsCompletion(ctx context.Context, params *MTRDoorLockClusterGetHolidayScheduleParams) (result *MTRDoorLockClusterGetHolidayScheduleResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterGetHolidayScheduleResponseParams
 		err error
@@ -149,10 +135,10 @@ func (x *MTRBaseClusterDoorLock) GetHolidayScheduleWithParamsCompletion(ctx cont
 	}
 }
 
-// Command GetUser Retrieve User.
+// GetUserWithParamsCompletion command GetUser Retrieve User.
 //
 // GetUserWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) GetUserWithParamsCompletion(ctx context.Context, params *MTRDoorLockClusterGetUserParams) (*MTRDoorLockClusterGetUserResponseParams, error) {
+func (x *MTRBaseClusterDoorLock) GetUserWithParamsCompletion(ctx context.Context, params *MTRDoorLockClusterGetUserParams) (result *MTRDoorLockClusterGetUserResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterGetUserResponseParams
 		err error
@@ -174,10 +160,10 @@ func (x *MTRBaseClusterDoorLock) GetUserWithParamsCompletion(ctx context.Context
 	}
 }
 
-// Command SetCredential Set a credential (e.g. PIN, RFID, Fingerprint, etc.) into the lock for a new user, existing user, or ProgrammingUser.
+// SetCredentialWithParamsCompletion command SetCredential Set a credential (e.g. PIN, RFID, Fingerprint, etc.) into the lock for a new user, existing user, or ProgrammingUser.
 //
 // SetCredentialWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SetCredentialWithParamsCompletion(ctx context.Context, params *MTRDoorLockClusterSetCredentialParams) (*MTRDoorLockClusterSetCredentialResponseParams, error) {
+func (x *MTRBaseClusterDoorLock) SetCredentialWithParamsCompletion(ctx context.Context, params *MTRDoorLockClusterSetCredentialParams) (result *MTRDoorLockClusterSetCredentialResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterSetCredentialResponseParams
 		err error
@@ -199,10 +185,10 @@ func (x *MTRBaseClusterDoorLock) SetCredentialWithParamsCompletion(ctx context.C
 	}
 }
 
-// Command GetCredentialStatus Retrieve the status of a particular credential (e.g. PIN, RFID, Fingerprint, etc.) by index.
+// GetCredentialStatusWithParamsCompletion command GetCredentialStatus Retrieve the status of a particular credential (e.g. PIN, RFID, Fingerprint, etc.) by index.
 //
 // GetCredentialStatusWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) GetCredentialStatusWithParamsCompletion(ctx context.Context, params *MTRDoorLockClusterGetCredentialStatusParams) (*MTRDoorLockClusterGetCredentialStatusResponseParams, error) {
+func (x *MTRBaseClusterDoorLock) GetCredentialStatusWithParamsCompletion(ctx context.Context, params *MTRDoorLockClusterGetCredentialStatusParams) (result *MTRDoorLockClusterGetCredentialStatusResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterGetCredentialStatusResponseParams
 		err error
@@ -224,8 +210,10 @@ func (x *MTRBaseClusterDoorLock) GetCredentialStatusWithParamsCompletion(ctx con
 	}
 }
 
+// ReadAttributeLockStateWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeLockStateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeLockStateWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeLockStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -247,8 +235,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeLockStateWithCompletion(ctx contex
 	}
 }
 
+// SubscribeAttributeLockStateWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLockStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeLockStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeLockStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -270,8 +260,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeLockStateWithParamsSubscripti
 	}
 }
 
+// ReadAttributeLockTypeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeLockTypeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeLockTypeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeLockTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -293,8 +285,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeLockTypeWithCompletion(ctx context
 	}
 }
 
+// SubscribeAttributeLockTypeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLockTypeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeLockTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeLockTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -316,8 +310,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeLockTypeWithParamsSubscriptio
 	}
 }
 
+// ReadAttributeActuatorEnabledWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeActuatorEnabledWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeActuatorEnabledWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeActuatorEnabledWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -339,8 +335,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeActuatorEnabledWithCompletion(ctx 
 	}
 }
 
+// SubscribeAttributeActuatorEnabledWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActuatorEnabledWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeActuatorEnabledWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeActuatorEnabledWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -362,8 +360,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeActuatorEnabledWithParamsSubs
 	}
 }
 
+// ReadAttributeDoorStateWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDoorStateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeDoorStateWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeDoorStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -385,8 +385,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeDoorStateWithCompletion(ctx contex
 	}
 }
 
+// SubscribeAttributeDoorStateWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDoorStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeDoorStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeDoorStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -408,8 +410,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeDoorStateWithParamsSubscripti
 	}
 }
 
+// ReadAttributeDoorOpenEventsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDoorOpenEventsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeDoorOpenEventsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeDoorOpenEventsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -431,8 +435,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeDoorOpenEventsWithCompletion(ctx c
 	}
 }
 
+// SubscribeAttributeDoorOpenEventsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDoorOpenEventsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeDoorOpenEventsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeDoorOpenEventsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -454,8 +460,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeDoorOpenEventsWithParamsSubsc
 	}
 }
 
+// ReadAttributeDoorClosedEventsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDoorClosedEventsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeDoorClosedEventsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeDoorClosedEventsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -477,8 +485,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeDoorClosedEventsWithCompletion(ctx
 	}
 }
 
+// SubscribeAttributeDoorClosedEventsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDoorClosedEventsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeDoorClosedEventsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeDoorClosedEventsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -500,8 +510,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeDoorClosedEventsWithParamsSub
 	}
 }
 
+// ReadAttributeOpenPeriodWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeOpenPeriodWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeOpenPeriodWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeOpenPeriodWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -523,8 +535,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeOpenPeriodWithCompletion(ctx conte
 	}
 }
 
+// SubscribeAttributeOpenPeriodWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOpenPeriodWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeOpenPeriodWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeOpenPeriodWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -546,8 +560,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeOpenPeriodWithParamsSubscript
 	}
 }
 
+// ReadAttributeNumberOfTotalUsersSupportedWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfTotalUsersSupportedWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfTotalUsersSupportedWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfTotalUsersSupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -569,8 +585,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfTotalUsersSupportedWithCom
 	}
 }
 
+// SubscribeAttributeNumberOfTotalUsersSupportedWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfTotalUsersSupportedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfTotalUsersSupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfTotalUsersSupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -592,8 +610,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfTotalUsersSupportedWi
 	}
 }
 
+// ReadAttributeNumberOfPINUsersSupportedWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfPINUsersSupportedWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfPINUsersSupportedWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfPINUsersSupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -615,8 +635,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfPINUsersSupportedWithCompl
 	}
 }
 
+// SubscribeAttributeNumberOfPINUsersSupportedWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfPINUsersSupportedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfPINUsersSupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfPINUsersSupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -638,8 +660,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfPINUsersSupportedWith
 	}
 }
 
+// ReadAttributeNumberOfRFIDUsersSupportedWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfRFIDUsersSupportedWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfRFIDUsersSupportedWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfRFIDUsersSupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -661,8 +685,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfRFIDUsersSupportedWithComp
 	}
 }
 
+// SubscribeAttributeNumberOfRFIDUsersSupportedWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfRFIDUsersSupportedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfRFIDUsersSupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfRFIDUsersSupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -684,8 +710,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfRFIDUsersSupportedWit
 	}
 }
 
+// ReadAttributeNumberOfWeekDaySchedulesSupportedPerUserWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfWeekDaySchedulesSupportedPerUserWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfWeekDaySchedulesSupportedPerUserWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfWeekDaySchedulesSupportedPerUserWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -707,8 +735,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfWeekDaySchedulesSupportedP
 	}
 }
 
+// SubscribeAttributeNumberOfWeekDaySchedulesSupportedPerUserWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfWeekDaySchedulesSupportedPerUserWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfWeekDaySchedulesSupportedPerUserWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfWeekDaySchedulesSupportedPerUserWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -730,8 +760,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfWeekDaySchedulesSuppo
 	}
 }
 
+// ReadAttributeNumberOfYearDaySchedulesSupportedPerUserWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfYearDaySchedulesSupportedPerUserWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfYearDaySchedulesSupportedPerUserWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfYearDaySchedulesSupportedPerUserWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -753,8 +785,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfYearDaySchedulesSupportedP
 	}
 }
 
+// SubscribeAttributeNumberOfYearDaySchedulesSupportedPerUserWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfYearDaySchedulesSupportedPerUserWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfYearDaySchedulesSupportedPerUserWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfYearDaySchedulesSupportedPerUserWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -776,8 +810,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfYearDaySchedulesSuppo
 	}
 }
 
+// ReadAttributeNumberOfHolidaySchedulesSupportedWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfHolidaySchedulesSupportedWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfHolidaySchedulesSupportedWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfHolidaySchedulesSupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -799,8 +835,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfHolidaySchedulesSupportedW
 	}
 }
 
+// SubscribeAttributeNumberOfHolidaySchedulesSupportedWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfHolidaySchedulesSupportedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfHolidaySchedulesSupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfHolidaySchedulesSupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -822,8 +860,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfHolidaySchedulesSuppo
 	}
 }
 
+// ReadAttributeMaxPINCodeLengthWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMaxPINCodeLengthWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeMaxPINCodeLengthWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeMaxPINCodeLengthWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -845,8 +885,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeMaxPINCodeLengthWithCompletion(ctx
 	}
 }
 
+// SubscribeAttributeMaxPINCodeLengthWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMaxPINCodeLengthWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeMaxPINCodeLengthWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeMaxPINCodeLengthWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -868,8 +910,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeMaxPINCodeLengthWithParamsSub
 	}
 }
 
+// ReadAttributeMinPINCodeLengthWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMinPINCodeLengthWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeMinPINCodeLengthWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeMinPINCodeLengthWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -891,8 +935,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeMinPINCodeLengthWithCompletion(ctx
 	}
 }
 
+// SubscribeAttributeMinPINCodeLengthWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMinPINCodeLengthWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeMinPINCodeLengthWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeMinPINCodeLengthWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -914,8 +960,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeMinPINCodeLengthWithParamsSub
 	}
 }
 
+// ReadAttributeMaxRFIDCodeLengthWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMaxRFIDCodeLengthWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeMaxRFIDCodeLengthWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeMaxRFIDCodeLengthWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -937,8 +985,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeMaxRFIDCodeLengthWithCompletion(ct
 	}
 }
 
+// SubscribeAttributeMaxRFIDCodeLengthWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMaxRFIDCodeLengthWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeMaxRFIDCodeLengthWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeMaxRFIDCodeLengthWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -960,8 +1010,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeMaxRFIDCodeLengthWithParamsSu
 	}
 }
 
+// ReadAttributeMinRFIDCodeLengthWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMinRFIDCodeLengthWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeMinRFIDCodeLengthWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeMinRFIDCodeLengthWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -983,8 +1035,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeMinRFIDCodeLengthWithCompletion(ct
 	}
 }
 
+// SubscribeAttributeMinRFIDCodeLengthWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMinRFIDCodeLengthWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeMinRFIDCodeLengthWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeMinRFIDCodeLengthWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1006,8 +1060,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeMinRFIDCodeLengthWithParamsSu
 	}
 }
 
+// ReadAttributeCredentialRulesSupportWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCredentialRulesSupportWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeCredentialRulesSupportWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeCredentialRulesSupportWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1029,8 +1085,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeCredentialRulesSupportWithCompleti
 	}
 }
 
+// SubscribeAttributeCredentialRulesSupportWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCredentialRulesSupportWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeCredentialRulesSupportWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeCredentialRulesSupportWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1052,8 +1110,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeCredentialRulesSupportWithPar
 	}
 }
 
+// ReadAttributeNumberOfCredentialsSupportedPerUserWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfCredentialsSupportedPerUserWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfCredentialsSupportedPerUserWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfCredentialsSupportedPerUserWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1075,8 +1135,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfCredentialsSupportedPerUse
 	}
 }
 
+// SubscribeAttributeNumberOfCredentialsSupportedPerUserWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfCredentialsSupportedPerUserWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfCredentialsSupportedPerUserWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfCredentialsSupportedPerUserWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1098,8 +1160,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfCredentialsSupportedP
 	}
 }
 
+// ReadAttributeLanguageWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeLanguageWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeLanguageWithCompletion(ctx context.Context) (string, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeLanguageWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -1121,8 +1185,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeLanguageWithCompletion(ctx context
 	}
 }
 
+// SubscribeAttributeLanguageWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLanguageWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeLanguageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeLanguageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -1144,8 +1210,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeLanguageWithParamsSubscriptio
 	}
 }
 
+// ReadAttributeLEDSettingsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeLEDSettingsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeLEDSettingsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeLEDSettingsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1167,8 +1235,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeLEDSettingsWithCompletion(ctx cont
 	}
 }
 
+// SubscribeAttributeLEDSettingsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLEDSettingsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeLEDSettingsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeLEDSettingsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1190,8 +1260,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeLEDSettingsWithParamsSubscrip
 	}
 }
 
+// ReadAttributeAutoRelockTimeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAutoRelockTimeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeAutoRelockTimeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeAutoRelockTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1213,8 +1285,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeAutoRelockTimeWithCompletion(ctx c
 	}
 }
 
+// SubscribeAttributeAutoRelockTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAutoRelockTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeAutoRelockTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeAutoRelockTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1236,8 +1310,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeAutoRelockTimeWithParamsSubsc
 	}
 }
 
+// ReadAttributeSoundVolumeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSoundVolumeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeSoundVolumeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeSoundVolumeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1259,8 +1335,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeSoundVolumeWithCompletion(ctx cont
 	}
 }
 
+// SubscribeAttributeSoundVolumeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSoundVolumeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeSoundVolumeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeSoundVolumeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1282,8 +1360,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeSoundVolumeWithParamsSubscrip
 	}
 }
 
+// ReadAttributeOperatingModeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeOperatingModeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeOperatingModeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeOperatingModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1305,8 +1385,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeOperatingModeWithCompletion(ctx co
 	}
 }
 
+// SubscribeAttributeOperatingModeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOperatingModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeOperatingModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeOperatingModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1328,8 +1410,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeOperatingModeWithParamsSubscr
 	}
 }
 
+// ReadAttributeSupportedOperatingModesWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSupportedOperatingModesWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeSupportedOperatingModesWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeSupportedOperatingModesWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1351,8 +1435,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeSupportedOperatingModesWithComplet
 	}
 }
 
+// SubscribeAttributeSupportedOperatingModesWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSupportedOperatingModesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeSupportedOperatingModesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeSupportedOperatingModesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1374,8 +1460,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeSupportedOperatingModesWithPa
 	}
 }
 
+// ReadAttributeDefaultConfigurationRegisterWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDefaultConfigurationRegisterWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeDefaultConfigurationRegisterWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeDefaultConfigurationRegisterWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1397,8 +1485,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeDefaultConfigurationRegisterWithCo
 	}
 }
 
+// SubscribeAttributeDefaultConfigurationRegisterWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDefaultConfigurationRegisterWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeDefaultConfigurationRegisterWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeDefaultConfigurationRegisterWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1420,8 +1510,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeDefaultConfigurationRegisterW
 	}
 }
 
+// ReadAttributeEnableLocalProgrammingWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeEnableLocalProgrammingWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeEnableLocalProgrammingWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeEnableLocalProgrammingWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1443,8 +1535,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeEnableLocalProgrammingWithCompleti
 	}
 }
 
+// SubscribeAttributeEnableLocalProgrammingWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeEnableLocalProgrammingWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnableLocalProgrammingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnableLocalProgrammingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1466,8 +1560,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnableLocalProgrammingWithPar
 	}
 }
 
+// ReadAttributeEnableOneTouchLockingWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeEnableOneTouchLockingWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeEnableOneTouchLockingWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeEnableOneTouchLockingWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1489,8 +1585,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeEnableOneTouchLockingWithCompletio
 	}
 }
 
+// SubscribeAttributeEnableOneTouchLockingWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeEnableOneTouchLockingWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnableOneTouchLockingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnableOneTouchLockingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1512,8 +1610,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnableOneTouchLockingWithPara
 	}
 }
 
+// ReadAttributeEnableInsideStatusLEDWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeEnableInsideStatusLEDWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeEnableInsideStatusLEDWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeEnableInsideStatusLEDWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1535,8 +1635,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeEnableInsideStatusLEDWithCompletio
 	}
 }
 
+// SubscribeAttributeEnableInsideStatusLEDWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeEnableInsideStatusLEDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnableInsideStatusLEDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnableInsideStatusLEDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1558,8 +1660,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnableInsideStatusLEDWithPara
 	}
 }
 
+// ReadAttributeEnablePrivacyModeButtonWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeEnablePrivacyModeButtonWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeEnablePrivacyModeButtonWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeEnablePrivacyModeButtonWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1581,8 +1685,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeEnablePrivacyModeButtonWithComplet
 	}
 }
 
+// SubscribeAttributeEnablePrivacyModeButtonWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeEnablePrivacyModeButtonWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnablePrivacyModeButtonWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnablePrivacyModeButtonWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1604,8 +1710,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnablePrivacyModeButtonWithPa
 	}
 }
 
+// ReadAttributeLocalProgrammingFeaturesWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeLocalProgrammingFeaturesWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeLocalProgrammingFeaturesWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeLocalProgrammingFeaturesWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1627,8 +1735,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeLocalProgrammingFeaturesWithComple
 	}
 }
 
+// SubscribeAttributeLocalProgrammingFeaturesWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLocalProgrammingFeaturesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeLocalProgrammingFeaturesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeLocalProgrammingFeaturesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1650,8 +1760,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeLocalProgrammingFeaturesWithP
 	}
 }
 
+// ReadAttributeWrongCodeEntryLimitWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeWrongCodeEntryLimitWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeWrongCodeEntryLimitWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeWrongCodeEntryLimitWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1673,8 +1785,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeWrongCodeEntryLimitWithCompletion(
 	}
 }
 
+// SubscribeAttributeWrongCodeEntryLimitWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeWrongCodeEntryLimitWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeWrongCodeEntryLimitWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeWrongCodeEntryLimitWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1696,8 +1810,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeWrongCodeEntryLimitWithParams
 	}
 }
 
+// ReadAttributeUserCodeTemporaryDisableTimeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeUserCodeTemporaryDisableTimeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeUserCodeTemporaryDisableTimeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeUserCodeTemporaryDisableTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1719,8 +1835,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeUserCodeTemporaryDisableTimeWithCo
 	}
 }
 
+// SubscribeAttributeUserCodeTemporaryDisableTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeUserCodeTemporaryDisableTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeUserCodeTemporaryDisableTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeUserCodeTemporaryDisableTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1742,8 +1860,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeUserCodeTemporaryDisableTimeW
 	}
 }
 
+// ReadAttributeSendPINOverTheAirWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSendPINOverTheAirWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeSendPINOverTheAirWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeSendPINOverTheAirWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1765,8 +1885,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeSendPINOverTheAirWithCompletion(ct
 	}
 }
 
+// SubscribeAttributeSendPINOverTheAirWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSendPINOverTheAirWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeSendPINOverTheAirWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeSendPINOverTheAirWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1788,8 +1910,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeSendPINOverTheAirWithParamsSu
 	}
 }
 
+// ReadAttributeRequirePINforRemoteOperationWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRequirePINforRemoteOperationWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeRequirePINforRemoteOperationWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeRequirePINforRemoteOperationWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1811,8 +1935,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeRequirePINforRemoteOperationWithCo
 	}
 }
 
+// SubscribeAttributeRequirePINforRemoteOperationWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRequirePINforRemoteOperationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeRequirePINforRemoteOperationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeRequirePINforRemoteOperationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1834,8 +1960,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeRequirePINforRemoteOperationW
 	}
 }
 
+// ReadAttributeExpiringUserTimeoutWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeExpiringUserTimeoutWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeExpiringUserTimeoutWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeExpiringUserTimeoutWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1857,8 +1985,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeExpiringUserTimeoutWithCompletion(
 	}
 }
 
+// SubscribeAttributeExpiringUserTimeoutWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeExpiringUserTimeoutWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeExpiringUserTimeoutWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeExpiringUserTimeoutWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1880,8 +2010,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeExpiringUserTimeoutWithParams
 	}
 }
 
+// ReadAttributeAliroReaderVerificationKeyWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAliroReaderVerificationKeyWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeAliroReaderVerificationKeyWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeAliroReaderVerificationKeyWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1903,8 +2035,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeAliroReaderVerificationKeyWithComp
 	}
 }
 
+// SubscribeAttributeAliroReaderVerificationKeyWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAliroReaderVerificationKeyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeAliroReaderVerificationKeyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeAliroReaderVerificationKeyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1926,8 +2060,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeAliroReaderVerificationKeyWit
 	}
 }
 
+// ReadAttributeAliroReaderGroupIdentifierWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAliroReaderGroupIdentifierWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeAliroReaderGroupIdentifierWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeAliroReaderGroupIdentifierWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1949,8 +2085,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeAliroReaderGroupIdentifierWithComp
 	}
 }
 
+// SubscribeAttributeAliroReaderGroupIdentifierWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAliroReaderGroupIdentifierWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeAliroReaderGroupIdentifierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeAliroReaderGroupIdentifierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1972,8 +2110,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeAliroReaderGroupIdentifierWit
 	}
 }
 
+// ReadAttributeAliroReaderGroupSubIdentifierWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAliroReaderGroupSubIdentifierWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeAliroReaderGroupSubIdentifierWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeAliroReaderGroupSubIdentifierWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1995,8 +2135,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeAliroReaderGroupSubIdentifierWithC
 	}
 }
 
+// SubscribeAttributeAliroReaderGroupSubIdentifierWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAliroReaderGroupSubIdentifierWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeAliroReaderGroupSubIdentifierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeAliroReaderGroupSubIdentifierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2018,8 +2160,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeAliroReaderGroupSubIdentifier
 	}
 }
 
+// ReadAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2041,8 +2185,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeAliroExpeditedTransactionSupported
 	}
 }
 
+// SubscribeAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2064,8 +2210,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeAliroExpeditedTransactionSupp
 	}
 }
 
+// ReadAttributeAliroGroupResolvingKeyWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAliroGroupResolvingKeyWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeAliroGroupResolvingKeyWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeAliroGroupResolvingKeyWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2087,8 +2235,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeAliroGroupResolvingKeyWithCompleti
 	}
 }
 
+// SubscribeAttributeAliroGroupResolvingKeyWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAliroGroupResolvingKeyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeAliroGroupResolvingKeyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeAliroGroupResolvingKeyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2110,8 +2260,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeAliroGroupResolvingKeyWithPar
 	}
 }
 
+// ReadAttributeAliroSupportedBLEUWBProtocolVersionsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAliroSupportedBLEUWBProtocolVersionsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeAliroSupportedBLEUWBProtocolVersionsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeAliroSupportedBLEUWBProtocolVersionsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2133,8 +2285,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeAliroSupportedBLEUWBProtocolVersio
 	}
 }
 
+// SubscribeAttributeAliroSupportedBLEUWBProtocolVersionsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAliroSupportedBLEUWBProtocolVersionsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeAliroSupportedBLEUWBProtocolVersionsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeAliroSupportedBLEUWBProtocolVersionsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2156,8 +2310,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeAliroSupportedBLEUWBProtocolV
 	}
 }
 
+// ReadAttributeAliroBLEAdvertisingVersionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAliroBLEAdvertisingVersionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeAliroBLEAdvertisingVersionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeAliroBLEAdvertisingVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2179,8 +2335,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeAliroBLEAdvertisingVersionWithComp
 	}
 }
 
+// SubscribeAttributeAliroBLEAdvertisingVersionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAliroBLEAdvertisingVersionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeAliroBLEAdvertisingVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeAliroBLEAdvertisingVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2202,8 +2360,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeAliroBLEAdvertisingVersionWit
 	}
 }
 
+// ReadAttributeNumberOfAliroCredentialIssuerKeysSupportedWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfAliroCredentialIssuerKeysSupportedWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfAliroCredentialIssuerKeysSupportedWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfAliroCredentialIssuerKeysSupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2225,8 +2385,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfAliroCredentialIssuerKeysS
 	}
 }
 
+// SubscribeAttributeNumberOfAliroCredentialIssuerKeysSupportedWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfAliroCredentialIssuerKeysSupportedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfAliroCredentialIssuerKeysSupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfAliroCredentialIssuerKeysSupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2248,8 +2410,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfAliroCredentialIssuer
 	}
 }
 
+// ReadAttributeNumberOfAliroEndpointKeysSupportedWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfAliroEndpointKeysSupportedWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfAliroEndpointKeysSupportedWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfAliroEndpointKeysSupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2271,8 +2435,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfAliroEndpointKeysSupported
 	}
 }
 
+// SubscribeAttributeNumberOfAliroEndpointKeysSupportedWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfAliroEndpointKeysSupportedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfAliroEndpointKeysSupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfAliroEndpointKeysSupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2294,8 +2460,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfAliroEndpointKeysSupp
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2317,8 +2485,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeGeneratedCommandListWithCompletion
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2340,8 +2510,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeGeneratedCommandListWithParam
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2363,8 +2535,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeAcceptedCommandListWithCompletion(
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2386,8 +2560,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeAcceptedCommandListWithParams
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2409,8 +2585,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeAttributeListWithCompletion(ctx co
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2432,8 +2610,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeAttributeListWithParamsSubscr
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2455,8 +2635,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeFeatureMapWithCompletion(ctx conte
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2478,8 +2660,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeFeatureMapWithParamsSubscript
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2501,8 +2685,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeClusterRevisionWithCompletion(ctx 
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2524,8 +2710,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeClusterRevisionWithParamsSubs
 	}
 }
 
+// GetWeekDayScheduleWithParams wraps the corresponding Objective-C method.
+//
 // GetWeekDayScheduleWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) GetWeekDayScheduleWithParams(ctx context.Context, params *MTRDoorLockClusterGetWeekDayScheduleParams) (*MTRDoorLockClusterGetWeekDayScheduleResponseParams, error) {
+func (x *MTRBaseClusterDoorLock) GetWeekDayScheduleWithParams(ctx context.Context, params *MTRDoorLockClusterGetWeekDayScheduleParams) (result *MTRDoorLockClusterGetWeekDayScheduleResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterGetWeekDayScheduleResponseParams
 		err error
@@ -2547,8 +2735,10 @@ func (x *MTRBaseClusterDoorLock) GetWeekDayScheduleWithParams(ctx context.Contex
 	}
 }
 
+// GetYearDayScheduleWithParams wraps the corresponding Objective-C method.
+//
 // GetYearDayScheduleWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) GetYearDayScheduleWithParams(ctx context.Context, params *MTRDoorLockClusterGetYearDayScheduleParams) (*MTRDoorLockClusterGetYearDayScheduleResponseParams, error) {
+func (x *MTRBaseClusterDoorLock) GetYearDayScheduleWithParams(ctx context.Context, params *MTRDoorLockClusterGetYearDayScheduleParams) (result *MTRDoorLockClusterGetYearDayScheduleResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterGetYearDayScheduleResponseParams
 		err error
@@ -2570,8 +2760,10 @@ func (x *MTRBaseClusterDoorLock) GetYearDayScheduleWithParams(ctx context.Contex
 	}
 }
 
+// GetHolidayScheduleWithParams wraps the corresponding Objective-C method.
+//
 // GetHolidayScheduleWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) GetHolidayScheduleWithParams(ctx context.Context, params *MTRDoorLockClusterGetHolidayScheduleParams) (*MTRDoorLockClusterGetHolidayScheduleResponseParams, error) {
+func (x *MTRBaseClusterDoorLock) GetHolidayScheduleWithParams(ctx context.Context, params *MTRDoorLockClusterGetHolidayScheduleParams) (result *MTRDoorLockClusterGetHolidayScheduleResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterGetHolidayScheduleResponseParams
 		err error
@@ -2593,8 +2785,10 @@ func (x *MTRBaseClusterDoorLock) GetHolidayScheduleWithParams(ctx context.Contex
 	}
 }
 
+// GetUserWithParams wraps the corresponding Objective-C method.
+//
 // GetUserWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) GetUserWithParams(ctx context.Context, params *MTRDoorLockClusterGetUserParams) (*MTRDoorLockClusterGetUserResponseParams, error) {
+func (x *MTRBaseClusterDoorLock) GetUserWithParams(ctx context.Context, params *MTRDoorLockClusterGetUserParams) (result *MTRDoorLockClusterGetUserResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterGetUserResponseParams
 		err error
@@ -2616,8 +2810,10 @@ func (x *MTRBaseClusterDoorLock) GetUserWithParams(ctx context.Context, params *
 	}
 }
 
+// SetCredentialWithParams wraps the corresponding Objective-C method.
+//
 // SetCredentialWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SetCredentialWithParams(ctx context.Context, params *MTRDoorLockClusterSetCredentialParams) (*MTRDoorLockClusterSetCredentialResponseParams, error) {
+func (x *MTRBaseClusterDoorLock) SetCredentialWithParams(ctx context.Context, params *MTRDoorLockClusterSetCredentialParams) (result *MTRDoorLockClusterSetCredentialResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterSetCredentialResponseParams
 		err error
@@ -2639,8 +2835,10 @@ func (x *MTRBaseClusterDoorLock) SetCredentialWithParams(ctx context.Context, pa
 	}
 }
 
+// GetCredentialStatusWithParams wraps the corresponding Objective-C method.
+//
 // GetCredentialStatusWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) GetCredentialStatusWithParams(ctx context.Context, params *MTRDoorLockClusterGetCredentialStatusParams) (*MTRDoorLockClusterGetCredentialStatusResponseParams, error) {
+func (x *MTRBaseClusterDoorLock) GetCredentialStatusWithParams(ctx context.Context, params *MTRDoorLockClusterGetCredentialStatusParams) (result *MTRDoorLockClusterGetCredentialStatusResponseParams, err error) {
 	type _result struct {
 		val *MTRDoorLockClusterGetCredentialStatusResponseParams
 		err error
@@ -2662,8 +2860,10 @@ func (x *MTRBaseClusterDoorLock) GetCredentialStatusWithParams(ctx context.Conte
 	}
 }
 
+// ReadAttributeLockState wraps the corresponding Objective-C method.
+//
 // ReadAttributeLockState blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeLockState(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeLockState(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2685,8 +2885,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeLockState(ctx context.Context) (ob
 	}
 }
 
+// SubscribeAttributeLockStateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLockStateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeLockStateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeLockStateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2708,8 +2910,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeLockStateWithMinIntervalMaxIn
 	}
 }
 
+// ReadAttributeLockType wraps the corresponding Objective-C method.
+//
 // ReadAttributeLockType blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeLockType(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeLockType(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2731,8 +2935,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeLockType(ctx context.Context) (obj
 	}
 }
 
+// SubscribeAttributeLockTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLockTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeLockTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeLockTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2754,8 +2960,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeLockTypeWithMinIntervalMaxInt
 	}
 }
 
+// ReadAttributeActuatorEnabled wraps the corresponding Objective-C method.
+//
 // ReadAttributeActuatorEnabled blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeActuatorEnabled(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeActuatorEnabled(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2777,8 +2985,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeActuatorEnabled(ctx context.Contex
 	}
 }
 
+// SubscribeAttributeActuatorEnabledWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActuatorEnabledWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeActuatorEnabledWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeActuatorEnabledWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2800,8 +3010,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeActuatorEnabledWithMinInterva
 	}
 }
 
+// ReadAttributeDoorState wraps the corresponding Objective-C method.
+//
 // ReadAttributeDoorState blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeDoorState(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeDoorState(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2823,8 +3035,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeDoorState(ctx context.Context) (ob
 	}
 }
 
+// SubscribeAttributeDoorStateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDoorStateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeDoorStateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeDoorStateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2846,8 +3060,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeDoorStateWithMinIntervalMaxIn
 	}
 }
 
+// ReadAttributeDoorOpenEvents wraps the corresponding Objective-C method.
+//
 // ReadAttributeDoorOpenEvents blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeDoorOpenEvents(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeDoorOpenEvents(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2869,8 +3085,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeDoorOpenEvents(ctx context.Context
 	}
 }
 
+// SubscribeAttributeDoorOpenEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDoorOpenEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeDoorOpenEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeDoorOpenEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2892,8 +3110,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeDoorOpenEventsWithMinInterval
 	}
 }
 
+// ReadAttributeDoorClosedEvents wraps the corresponding Objective-C method.
+//
 // ReadAttributeDoorClosedEvents blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeDoorClosedEvents(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeDoorClosedEvents(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2915,8 +3135,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeDoorClosedEvents(ctx context.Conte
 	}
 }
 
+// SubscribeAttributeDoorClosedEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDoorClosedEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeDoorClosedEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeDoorClosedEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2938,8 +3160,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeDoorClosedEventsWithMinInterv
 	}
 }
 
+// ReadAttributeOpenPeriod wraps the corresponding Objective-C method.
+//
 // ReadAttributeOpenPeriod blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeOpenPeriod(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeOpenPeriod(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2961,8 +3185,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeOpenPeriod(ctx context.Context) (o
 	}
 }
 
+// SubscribeAttributeOpenPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOpenPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeOpenPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeOpenPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2984,8 +3210,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeOpenPeriodWithMinIntervalMaxI
 	}
 }
 
+// ReadAttributeNumberOfTotalUsersSupported wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfTotalUsersSupported blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfTotalUsersSupported(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfTotalUsersSupported(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3007,8 +3235,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfTotalUsersSupported(ctx co
 	}
 }
 
+// SubscribeAttributeNumberOfTotalUsersSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfTotalUsersSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfTotalUsersSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfTotalUsersSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3030,8 +3260,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfTotalUsersSupportedWi
 	}
 }
 
+// ReadAttributeNumberOfPINUsersSupported wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfPINUsersSupported blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfPINUsersSupported(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfPINUsersSupported(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3053,8 +3285,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfPINUsersSupported(ctx cont
 	}
 }
 
+// SubscribeAttributeNumberOfPINUsersSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfPINUsersSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfPINUsersSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfPINUsersSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3076,8 +3310,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfPINUsersSupportedWith
 	}
 }
 
+// ReadAttributeNumberOfRFIDUsersSupported wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfRFIDUsersSupported blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfRFIDUsersSupported(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfRFIDUsersSupported(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3099,8 +3335,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfRFIDUsersSupported(ctx con
 	}
 }
 
+// SubscribeAttributeNumberOfRFIDUsersSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfRFIDUsersSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfRFIDUsersSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfRFIDUsersSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3122,8 +3360,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfRFIDUsersSupportedWit
 	}
 }
 
+// ReadAttributeNumberOfWeekDaySchedulesSupportedPerUser wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfWeekDaySchedulesSupportedPerUser blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfWeekDaySchedulesSupportedPerUser(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfWeekDaySchedulesSupportedPerUser(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3145,8 +3385,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfWeekDaySchedulesSupportedP
 	}
 }
 
+// SubscribeAttributeNumberOfWeekDaySchedulesSupportedPerUserWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfWeekDaySchedulesSupportedPerUserWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfWeekDaySchedulesSupportedPerUserWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfWeekDaySchedulesSupportedPerUserWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3168,8 +3410,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfWeekDaySchedulesSuppo
 	}
 }
 
+// ReadAttributeNumberOfYearDaySchedulesSupportedPerUser wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfYearDaySchedulesSupportedPerUser blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfYearDaySchedulesSupportedPerUser(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfYearDaySchedulesSupportedPerUser(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3191,8 +3435,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfYearDaySchedulesSupportedP
 	}
 }
 
+// SubscribeAttributeNumberOfYearDaySchedulesSupportedPerUserWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfYearDaySchedulesSupportedPerUserWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfYearDaySchedulesSupportedPerUserWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfYearDaySchedulesSupportedPerUserWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3214,8 +3460,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfYearDaySchedulesSuppo
 	}
 }
 
+// ReadAttributeNumberOfHolidaySchedulesSupported wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfHolidaySchedulesSupported blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfHolidaySchedulesSupported(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfHolidaySchedulesSupported(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3237,8 +3485,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfHolidaySchedulesSupported(
 	}
 }
 
+// SubscribeAttributeNumberOfHolidaySchedulesSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfHolidaySchedulesSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfHolidaySchedulesSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfHolidaySchedulesSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3260,8 +3510,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfHolidaySchedulesSuppo
 	}
 }
 
+// ReadAttributeMaxPINCodeLength wraps the corresponding Objective-C method.
+//
 // ReadAttributeMaxPINCodeLength blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeMaxPINCodeLength(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeMaxPINCodeLength(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3283,8 +3535,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeMaxPINCodeLength(ctx context.Conte
 	}
 }
 
+// SubscribeAttributeMaxPINCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMaxPINCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeMaxPINCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeMaxPINCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3306,8 +3560,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeMaxPINCodeLengthWithMinInterv
 	}
 }
 
+// ReadAttributeMinPINCodeLength wraps the corresponding Objective-C method.
+//
 // ReadAttributeMinPINCodeLength blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeMinPINCodeLength(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeMinPINCodeLength(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3329,8 +3585,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeMinPINCodeLength(ctx context.Conte
 	}
 }
 
+// SubscribeAttributeMinPINCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMinPINCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeMinPINCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeMinPINCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3352,8 +3610,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeMinPINCodeLengthWithMinInterv
 	}
 }
 
+// ReadAttributeMaxRFIDCodeLength wraps the corresponding Objective-C method.
+//
 // ReadAttributeMaxRFIDCodeLength blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeMaxRFIDCodeLength(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeMaxRFIDCodeLength(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3375,8 +3635,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeMaxRFIDCodeLength(ctx context.Cont
 	}
 }
 
+// SubscribeAttributeMaxRFIDCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMaxRFIDCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeMaxRFIDCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeMaxRFIDCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3398,8 +3660,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeMaxRFIDCodeLengthWithMinInter
 	}
 }
 
+// ReadAttributeMinRFIDCodeLength wraps the corresponding Objective-C method.
+//
 // ReadAttributeMinRFIDCodeLength blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeMinRFIDCodeLength(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeMinRFIDCodeLength(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3421,8 +3685,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeMinRFIDCodeLength(ctx context.Cont
 	}
 }
 
+// SubscribeAttributeMinRFIDCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMinRFIDCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeMinRFIDCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeMinRFIDCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3444,8 +3710,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeMinRFIDCodeLengthWithMinInter
 	}
 }
 
+// ReadAttributeCredentialRulesSupport wraps the corresponding Objective-C method.
+//
 // ReadAttributeCredentialRulesSupport blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeCredentialRulesSupport(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeCredentialRulesSupport(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3467,8 +3735,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeCredentialRulesSupport(ctx context
 	}
 }
 
+// SubscribeAttributeCredentialRulesSupportWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCredentialRulesSupportWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeCredentialRulesSupportWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeCredentialRulesSupportWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3490,8 +3760,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeCredentialRulesSupportWithMin
 	}
 }
 
+// ReadAttributeNumberOfCredentialsSupportedPerUser wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfCredentialsSupportedPerUser blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfCredentialsSupportedPerUser(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfCredentialsSupportedPerUser(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3513,8 +3785,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeNumberOfCredentialsSupportedPerUse
 	}
 }
 
+// SubscribeAttributeNumberOfCredentialsSupportedPerUserWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfCredentialsSupportedPerUserWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfCredentialsSupportedPerUserWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfCredentialsSupportedPerUserWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3536,8 +3810,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfCredentialsSupportedP
 	}
 }
 
+// ReadAttributeLanguage wraps the corresponding Objective-C method.
+//
 // ReadAttributeLanguage blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeLanguage(ctx context.Context) (string, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeLanguage(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -3559,8 +3835,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeLanguage(ctx context.Context) (str
 	}
 }
 
+// SubscribeAttributeLanguageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLanguageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeLanguageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (string, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeLanguageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -3582,8 +3860,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeLanguageWithMinIntervalMaxInt
 	}
 }
 
+// ReadAttributeLEDSettings wraps the corresponding Objective-C method.
+//
 // ReadAttributeLEDSettings blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeLEDSettings(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeLEDSettings(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3605,8 +3885,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeLEDSettings(ctx context.Context) (
 	}
 }
 
+// SubscribeAttributeLEDSettingsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLEDSettingsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeLEDSettingsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeLEDSettingsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3628,8 +3910,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeLEDSettingsWithMinIntervalMax
 	}
 }
 
+// ReadAttributeAutoRelockTime wraps the corresponding Objective-C method.
+//
 // ReadAttributeAutoRelockTime blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeAutoRelockTime(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeAutoRelockTime(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3651,8 +3935,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeAutoRelockTime(ctx context.Context
 	}
 }
 
+// SubscribeAttributeAutoRelockTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAutoRelockTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeAutoRelockTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeAutoRelockTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3674,8 +3960,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeAutoRelockTimeWithMinInterval
 	}
 }
 
+// ReadAttributeSoundVolume wraps the corresponding Objective-C method.
+//
 // ReadAttributeSoundVolume blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeSoundVolume(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeSoundVolume(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3697,8 +3985,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeSoundVolume(ctx context.Context) (
 	}
 }
 
+// SubscribeAttributeSoundVolumeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSoundVolumeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeSoundVolumeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeSoundVolumeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3720,8 +4010,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeSoundVolumeWithMinIntervalMax
 	}
 }
 
+// ReadAttributeOperatingMode wraps the corresponding Objective-C method.
+//
 // ReadAttributeOperatingMode blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeOperatingMode(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeOperatingMode(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3743,8 +4035,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeOperatingMode(ctx context.Context)
 	}
 }
 
+// SubscribeAttributeOperatingModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOperatingModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeOperatingModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeOperatingModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3766,8 +4060,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeOperatingModeWithMinIntervalM
 	}
 }
 
+// ReadAttributeSupportedOperatingModes wraps the corresponding Objective-C method.
+//
 // ReadAttributeSupportedOperatingModes blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeSupportedOperatingModes(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeSupportedOperatingModes(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3789,8 +4085,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeSupportedOperatingModes(ctx contex
 	}
 }
 
+// SubscribeAttributeSupportedOperatingModesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSupportedOperatingModesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeSupportedOperatingModesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeSupportedOperatingModesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3812,8 +4110,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeSupportedOperatingModesWithMi
 	}
 }
 
+// ReadAttributeDefaultConfigurationRegister wraps the corresponding Objective-C method.
+//
 // ReadAttributeDefaultConfigurationRegister blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeDefaultConfigurationRegister(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeDefaultConfigurationRegister(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3835,8 +4135,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeDefaultConfigurationRegister(ctx c
 	}
 }
 
+// SubscribeAttributeDefaultConfigurationRegisterWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDefaultConfigurationRegisterWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeDefaultConfigurationRegisterWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeDefaultConfigurationRegisterWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3858,8 +4160,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeDefaultConfigurationRegisterW
 	}
 }
 
+// ReadAttributeEnableLocalProgramming wraps the corresponding Objective-C method.
+//
 // ReadAttributeEnableLocalProgramming blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeEnableLocalProgramming(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeEnableLocalProgramming(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3881,8 +4185,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeEnableLocalProgramming(ctx context
 	}
 }
 
+// SubscribeAttributeEnableLocalProgrammingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeEnableLocalProgrammingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnableLocalProgrammingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnableLocalProgrammingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3904,8 +4210,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnableLocalProgrammingWithMin
 	}
 }
 
+// ReadAttributeEnableOneTouchLocking wraps the corresponding Objective-C method.
+//
 // ReadAttributeEnableOneTouchLocking blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeEnableOneTouchLocking(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeEnableOneTouchLocking(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3927,8 +4235,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeEnableOneTouchLocking(ctx context.
 	}
 }
 
+// SubscribeAttributeEnableOneTouchLockingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeEnableOneTouchLockingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnableOneTouchLockingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnableOneTouchLockingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3950,8 +4260,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnableOneTouchLockingWithMinI
 	}
 }
 
+// ReadAttributeEnableInsideStatusLED wraps the corresponding Objective-C method.
+//
 // ReadAttributeEnableInsideStatusLED blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeEnableInsideStatusLED(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeEnableInsideStatusLED(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3973,8 +4285,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeEnableInsideStatusLED(ctx context.
 	}
 }
 
+// SubscribeAttributeEnableInsideStatusLEDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeEnableInsideStatusLEDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnableInsideStatusLEDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnableInsideStatusLEDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3996,8 +4310,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnableInsideStatusLEDWithMinI
 	}
 }
 
+// ReadAttributeEnablePrivacyModeButton wraps the corresponding Objective-C method.
+//
 // ReadAttributeEnablePrivacyModeButton blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeEnablePrivacyModeButton(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeEnablePrivacyModeButton(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4019,8 +4335,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeEnablePrivacyModeButton(ctx contex
 	}
 }
 
+// SubscribeAttributeEnablePrivacyModeButtonWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeEnablePrivacyModeButtonWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnablePrivacyModeButtonWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnablePrivacyModeButtonWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4042,8 +4360,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeEnablePrivacyModeButtonWithMi
 	}
 }
 
+// ReadAttributeLocalProgrammingFeatures wraps the corresponding Objective-C method.
+//
 // ReadAttributeLocalProgrammingFeatures blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeLocalProgrammingFeatures(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeLocalProgrammingFeatures(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4065,8 +4385,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeLocalProgrammingFeatures(ctx conte
 	}
 }
 
+// SubscribeAttributeLocalProgrammingFeaturesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLocalProgrammingFeaturesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeLocalProgrammingFeaturesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeLocalProgrammingFeaturesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4088,8 +4410,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeLocalProgrammingFeaturesWithM
 	}
 }
 
+// ReadAttributeWrongCodeEntryLimit wraps the corresponding Objective-C method.
+//
 // ReadAttributeWrongCodeEntryLimit blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeWrongCodeEntryLimit(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeWrongCodeEntryLimit(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4111,8 +4435,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeWrongCodeEntryLimit(ctx context.Co
 	}
 }
 
+// SubscribeAttributeWrongCodeEntryLimitWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeWrongCodeEntryLimitWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeWrongCodeEntryLimitWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeWrongCodeEntryLimitWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4134,8 +4460,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeWrongCodeEntryLimitWithMinInt
 	}
 }
 
+// ReadAttributeUserCodeTemporaryDisableTime wraps the corresponding Objective-C method.
+//
 // ReadAttributeUserCodeTemporaryDisableTime blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeUserCodeTemporaryDisableTime(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeUserCodeTemporaryDisableTime(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4157,8 +4485,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeUserCodeTemporaryDisableTime(ctx c
 	}
 }
 
+// SubscribeAttributeUserCodeTemporaryDisableTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeUserCodeTemporaryDisableTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeUserCodeTemporaryDisableTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeUserCodeTemporaryDisableTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4180,8 +4510,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeUserCodeTemporaryDisableTimeW
 	}
 }
 
+// ReadAttributeSendPINOverTheAir wraps the corresponding Objective-C method.
+//
 // ReadAttributeSendPINOverTheAir blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeSendPINOverTheAir(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeSendPINOverTheAir(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4203,8 +4535,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeSendPINOverTheAir(ctx context.Cont
 	}
 }
 
+// SubscribeAttributeSendPINOverTheAirWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSendPINOverTheAirWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeSendPINOverTheAirWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeSendPINOverTheAirWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4226,8 +4560,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeSendPINOverTheAirWithMinInter
 	}
 }
 
+// ReadAttributeRequirePINforRemoteOperation wraps the corresponding Objective-C method.
+//
 // ReadAttributeRequirePINforRemoteOperation blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeRequirePINforRemoteOperation(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeRequirePINforRemoteOperation(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4249,8 +4585,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeRequirePINforRemoteOperation(ctx c
 	}
 }
 
+// SubscribeAttributeRequirePINforRemoteOperationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRequirePINforRemoteOperationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeRequirePINforRemoteOperationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeRequirePINforRemoteOperationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4272,8 +4610,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeRequirePINforRemoteOperationW
 	}
 }
 
+// ReadAttributeExpiringUserTimeout wraps the corresponding Objective-C method.
+//
 // ReadAttributeExpiringUserTimeout blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeExpiringUserTimeout(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeExpiringUserTimeout(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4295,8 +4635,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeExpiringUserTimeout(ctx context.Co
 	}
 }
 
+// SubscribeAttributeExpiringUserTimeoutWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeExpiringUserTimeoutWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeExpiringUserTimeoutWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeExpiringUserTimeoutWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4318,8 +4660,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeExpiringUserTimeoutWithMinInt
 	}
 }
 
+// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4341,8 +4685,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeGeneratedCommandList(ctx context.C
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4364,8 +4710,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeGeneratedCommandListWithMinIn
 	}
 }
 
+// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4387,8 +4735,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeAcceptedCommandList(ctx context.Co
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4410,8 +4760,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeAcceptedCommandListWithMinInt
 	}
 }
 
+// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeAttributeList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4433,8 +4785,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeAttributeList(ctx context.Context)
 	}
 }
 
+// SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4456,8 +4810,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeAttributeListWithMinIntervalM
 	}
 }
 
+// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4479,8 +4835,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeFeatureMap(ctx context.Context) (o
 	}
 }
 
+// SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4502,8 +4860,10 @@ func (x *MTRBaseClusterDoorLock) SubscribeAttributeFeatureMapWithMinIntervalMaxI
 	}
 }
 
+// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4525,8 +4885,10 @@ func (x *MTRBaseClusterDoorLock) ReadAttributeClusterRevision(ctx context.Contex
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterDoorLock) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterDoorLock) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4748,3 +5110,7 @@ type MTRBaseClusterDoorLockable interface {
 }
 
 var _ MTRBaseClusterDoorLockable = (*MTRBaseClusterDoorLock)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterDoorLock)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterDoorLock)(nil)

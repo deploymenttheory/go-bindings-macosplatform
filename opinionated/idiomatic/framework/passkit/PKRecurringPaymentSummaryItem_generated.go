@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines a summary item for a payment that occurs repeatedly at a specified interval, such as a subscription.
-//
 // RecurringPaymentSummaryItem is an idiomatic wrapper over the Objective-C class PKRecurringPaymentSummaryItem.
+//
+// It embeds [PaymentSummaryItem], promoting that type's methods.
+//
+// An object that defines a summary item for a payment that occurs repeatedly at a specified interval, such as a subscription.
 type RecurringPaymentSummaryItem struct {
-	objref.Handle
+	PaymentSummaryItem
 }
 
 // RecurringPaymentSummaryItemFromID adopts an existing Objective-C object as a RecurringPaymentSummaryItem
@@ -25,7 +26,8 @@ func RecurringPaymentSummaryItemFromID(id objc.ID) *RecurringPaymentSummaryItem 
 	if id == 0 {
 		return nil
 	}
-	x := &RecurringPaymentSummaryItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RecurringPaymentSummaryItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func recurringPaymentSummaryItemAdopt(id objc.ID) *RecurringPaymentSummaryItem {
 	if id == 0 {
 		return nil
 	}
-	x := &RecurringPaymentSummaryItem{Handle: objref.Wrap(id)}
+	x := &RecurringPaymentSummaryItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RecurringPaymentSummaryItem) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RecurringPaymentSummaryItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RecurringPaymentSummaryItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRecurringPaymentSummaryItem creates a new RecurringPaymentSummaryItem.
@@ -64,77 +52,71 @@ func NewRecurringPaymentSummaryItem() *RecurringPaymentSummaryItem {
 	return recurringPaymentSummaryItemAdopt(_id)
 }
 
-// The date of the first payment.
-//
-// WithStartDate sets startDate and returns the receiver so calls can be chained.
+// WithStartDate the date of the first payment.
 func (x *RecurringPaymentSummaryItem) WithStartDate(startDate obj.Object) *RecurringPaymentSummaryItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
 	return x
 }
 
-// The number of interval units that make up the total payment interval.
-//
-// WithIntervalCount sets intervalCount and returns the receiver so calls can be chained.
+// WithIntervalCount the number of interval units that make up the total payment interval.
 func (x *RecurringPaymentSummaryItem) WithIntervalCount(intervalCount int) *RecurringPaymentSummaryItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntervalCount:"), intervalCount)
 	return x
 }
 
-// The date of the final payment.
-//
-// WithEndDate sets endDate and returns the receiver so calls can be chained.
+// WithEndDate the date of the final payment.
 func (x *RecurringPaymentSummaryItem) WithEndDate(endDate obj.Object) *RecurringPaymentSummaryItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndDate:"), objref.IDOf(endDate))
 	return x
 }
 
-// A short, localized description of the item.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a short, localized description of the item.
 func (x *RecurringPaymentSummaryItem) WithLabel(label string) *RecurringPaymentSummaryItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The summary item’s amount.
-//
-// WithAmount sets amount and returns the receiver so calls can be chained.
+// WithAmount the summary item’s amount.
 func (x *RecurringPaymentSummaryItem) WithAmount(amount obj.Object) *RecurringPaymentSummaryItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 	return x
 }
 
-// The summary item’s type that indicates whether the amount is final.
-//
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithType the summary item’s type that indicates whether the amount is final.
 func (x *RecurringPaymentSummaryItem) WithType(type_ PaymentSummaryItemType) *RecurringPaymentSummaryItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
+// StartDate wraps the corresponding Objective-C method.
 func (x *RecurringPaymentSummaryItem) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
+// SetStartDate wraps the corresponding Objective-C method.
 func (x *RecurringPaymentSummaryItem) SetStartDate(startDate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
 }
 
+// IntervalCount wraps the corresponding Objective-C method.
 func (x *RecurringPaymentSummaryItem) IntervalCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("intervalCount"))
 	return _r
 }
 
+// SetIntervalCount wraps the corresponding Objective-C method.
 func (x *RecurringPaymentSummaryItem) SetIntervalCount(intervalCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntervalCount:"), intervalCount)
 }
 
+// EndDate wraps the corresponding Objective-C method.
 func (x *RecurringPaymentSummaryItem) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
+// SetEndDate wraps the corresponding Objective-C method.
 func (x *RecurringPaymentSummaryItem) SetEndDate(endDate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndDate:"), objref.IDOf(endDate))
 }
@@ -157,3 +139,5 @@ type RecurringPaymentSummaryItemable interface {
 }
 
 var _ RecurringPaymentSummaryItemable = (*RecurringPaymentSummaryItem)(nil)
+
+var _ PaymentSummaryItemProvider = (*RecurringPaymentSummaryItem)(nil)

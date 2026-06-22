@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Meta-data about a device type defined in the Matter specification.
-//
 // MTRDeviceType is an idiomatic wrapper over the Objective-C class MTRDeviceType.
+//
+// Meta-data about a device type defined in the Matter specification.
 type MTRDeviceType struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MTRDeviceTypeFromID(id objc.ID) *MTRDeviceType {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDeviceType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRDeviceTypeAdopt(id objc.ID) *MTRDeviceType {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceType{Handle: objref.Wrap(id)}
+	x := &MTRDeviceType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *MTRDeviceType) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceType) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDeviceType creates a new MTRDeviceType.
 func NewMTRDeviceType() *MTRDeviceType {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceType")), objc.RegisterName("new"))
 	return mTRDeviceTypeAdopt(_id)
 }
 
-// The identifier of the device type (32-bit unsigned integer).
+// Id the identifier of the device type (32-bit unsigned integer).
 func (x *MTRDeviceType) Id() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("id"))
 	return obj.Wrap(_r)
 }
 
-// Returns the name of the device type.
+// Name returns the name of the device type.
 func (x *MTRDeviceType) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -79,7 +87,7 @@ func (x *MTRDeviceType) Name() string {
 	return purego.GoString(_r)
 }
 
-// Returns whether this is a utility device type.
+// IsUtility returns whether this is a utility device type.
 func (x *MTRDeviceType) IsUtility() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUtility"))
 	return _r

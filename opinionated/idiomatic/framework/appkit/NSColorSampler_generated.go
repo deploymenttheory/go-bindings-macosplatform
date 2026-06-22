@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that displays the system’s color-sampling interface and returns the selected color to your app.
-//
 // ColorSampler is an idiomatic wrapper over the Objective-C class NSColorSampler.
+//
+// An object that displays the system’s color-sampling interface and returns the selected color to your app.
 type ColorSampler struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func ColorSamplerFromID(id objc.ID) *ColorSampler {
 	if id == 0 {
 		return nil
 	}
-	x := &ColorSampler{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ColorSampler{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func colorSamplerAdopt(id objc.ID) *ColorSampler {
 	if id == 0 {
 		return nil
 	}
-	x := &ColorSampler{Handle: objref.Wrap(id)}
+	x := &ColorSampler{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,16 +61,22 @@ func (x *ColorSampler) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ColorSampler) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewColorSampler creates a new ColorSampler.
 func NewColorSampler() *ColorSampler {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSColorSampler")), objc.RegisterName("new"))
 	return colorSamplerAdopt(_id)
 }
 
-// Displays the system color-sampling interface asynchronously and reports the selected color back to your app.
+// ShowSamplerWithSelectionHandler displays the system color-sampling interface asynchronously and reports the selected color back to your app.
 //
 // ShowSamplerWithSelectionHandler blocks until the operation completes or ctx is cancelled.
-func (x *ColorSampler) ShowSamplerWithSelectionHandler(ctx context.Context) (*Color, error) {
+func (x *ColorSampler) ShowSamplerWithSelectionHandler(ctx context.Context) (result *Color, err error) {
 	type _result struct {
 		val *Color
 		err error

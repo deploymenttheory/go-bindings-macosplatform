@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A passkey registration credential.
-//
 // PasskeyRegistrationCredential is an idiomatic wrapper over the Objective-C class ASPasskeyRegistrationCredential.
+//
+// A passkey registration credential.
 type PasskeyRegistrationCredential struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PasskeyRegistrationCredentialFromID(id objc.ID) *PasskeyRegistrationCredent
 	if id == 0 {
 		return nil
 	}
-	x := &PasskeyRegistrationCredential{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PasskeyRegistrationCredential{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func passkeyRegistrationCredentialAdopt(id objc.ID) *PasskeyRegistrationCredenti
 	if id == 0 {
 		return nil
 	}
-	x := &PasskeyRegistrationCredential{Handle: objref.Wrap(id)}
+	x := &PasskeyRegistrationCredential{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,33 +60,33 @@ func (x *PasskeyRegistrationCredential) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a passkey registration credential object.
-//
-// NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject creates a new PasskeyRegistrationCredential.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PasskeyRegistrationCredential) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject initializes a passkey registration credential object.
 func NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject(relyingParty string, clientDataHash obj.Object, credentialID obj.Object, attestationObject obj.Object) *PasskeyRegistrationCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasskeyRegistrationCredential")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRelyingParty:clientDataHash:credentialID:attestationObject:"), purego.NSString(relyingParty), objref.IDOf(clientDataHash), objref.IDOf(credentialID), objref.IDOf(attestationObject))
 	return passkeyRegistrationCredentialAdopt(_id)
 }
 
-// Initializes a passkey registration credential object.
-//
-// NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObjectExtensionOutput creates a new PasskeyRegistrationCredential.
+// NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObjectExtensionOutput initializes a passkey registration credential object.
 func NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObjectExtensionOutput(relyingParty string, clientDataHash obj.Object, credentialID obj.Object, attestationObject obj.Object, extensionOutput *PasskeyRegistrationCredentialExtensionOutput) *PasskeyRegistrationCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasskeyRegistrationCredential")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRelyingParty:clientDataHash:credentialID:attestationObject:extensionOutput:"), purego.NSString(relyingParty), objref.IDOf(clientDataHash), objref.IDOf(credentialID), objref.IDOf(attestationObject), objref.IDOf(extensionOutput))
 	return passkeyRegistrationCredentialAdopt(_id)
 }
 
-// An output from WebAuthn extensions.
-//
-// WithExtensionOutput sets extensionOutput and returns the receiver so calls can be chained.
+// WithExtensionOutput an output from WebAuthn extensions.
 func (x *PasskeyRegistrationCredential) WithExtensionOutput(extensionOutput *PasskeyRegistrationCredentialExtensionOutput) *PasskeyRegistrationCredential {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtensionOutput:"), objref.IDOf(extensionOutput))
 	return x
 }
 
-// The relying party identifier associated with this passkey.
+// RelyingParty the relying party identifier associated with this passkey.
 func (x *PasskeyRegistrationCredential) RelyingParty() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relyingParty"))
 	if _r == 0 {
@@ -93,30 +95,31 @@ func (x *PasskeyRegistrationCredential) RelyingParty() string {
 	return purego.GoString(_r)
 }
 
-// The hash of the client data for this registration result.
+// ClientDataHash the hash of the client data for this registration result.
 func (x *PasskeyRegistrationCredential) ClientDataHash() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientDataHash"))
 	return obj.Wrap(_r)
 }
 
-// The raw credential identifier of this passkey.
+// CredentialID the raw credential identifier of this passkey.
 func (x *PasskeyRegistrationCredential) CredentialID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentialID"))
 	return obj.Wrap(_r)
 }
 
-// The attestation object for this passkey registration result.
+// AttestationObject the attestation object for this passkey registration result.
 func (x *PasskeyRegistrationCredential) AttestationObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attestationObject"))
 	return obj.Wrap(_r)
 }
 
-// The outputs for WebAuthn extensions processed by the credential provider.
+// ExtensionOutput the outputs for WebAuthn extensions processed by the credential provider.
 func (x *PasskeyRegistrationCredential) ExtensionOutput() *PasskeyRegistrationCredentialExtensionOutput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionOutput"))
 	return PasskeyRegistrationCredentialExtensionOutputFromID(_r)
 }
 
+// SetExtensionOutput wraps the corresponding Objective-C method.
 func (x *PasskeyRegistrationCredential) SetExtensionOutput(extensionOutput *PasskeyRegistrationCredentialExtensionOutput) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtensionOutput:"), objref.IDOf(extensionOutput))
 }

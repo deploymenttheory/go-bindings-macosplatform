@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for objects that describe light sources in a scene.
-//
 // Light is an idiomatic wrapper over the Objective-C class MDLLight.
+//
+// Light is an abstract base — you do not construct it directly. Construct one of [LightProbe], [PhysicallyPlausibleLight] and pass it where a Light is accepted.
+//
+// The abstract superclass for objects that describe light sources in a scene.
 type Light struct {
-	objref.Handle
+	Object
 }
 
 // LightFromID adopts an existing Objective-C object as a Light
@@ -25,7 +26,8 @@ func LightFromID(id objc.ID) *Light {
 	if id == 0 {
 		return nil
 	}
-	x := &Light{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Light{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,81 +40,54 @@ func lightAdopt(id objc.ID) *Light {
 	if id == 0 {
 		return nil
 	}
-	x := &Light{Handle: objref.Wrap(id)}
+	x := &Light{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *Light) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Light) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Light) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewLight creates a new Light.
-func NewLight() *Light {
-	_id := objc.Send[objc.ID](objc.ID(_class("MDLLight")), objc.RegisterName("new"))
-	return lightAdopt(_id)
-}
-
-// The type of the light.
-//
-// WithLightType sets lightType and returns the receiver so calls can be chained.
+// WithLightType the type of the light.
 func (x *Light) WithLightType(lightType LightType) *Light {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightType:"), lightType)
 	return x
 }
 
-// The name of the Core Graphics color space to be used for interpreting the light’s color information.
-//
-// WithColorSpace sets colorSpace and returns the receiver so calls can be chained.
+// WithColorSpace the name of the Core Graphics color space to be used for interpreting the light’s color information.
 func (x *Light) WithColorSpace(colorSpace string) *Light {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), purego.NSString(colorSpace))
 	return x
 }
 
-// The parent object that contains this object.
-//
-// WithParent sets parent and returns the receiver so calls can be chained.
+// WithParent the parent object that contains this object.
 func (x *Light) WithParent(parent ObjectProvider) *Light {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return x
 }
 
-// The primary object, if applicable, of which this object is an instance.
-//
-// WithInstance sets instance and returns the receiver so calls can be chained.
+// WithInstance the primary object, if applicable, of which this object is an instance.
 func (x *Light) WithInstance(instance ObjectProvider) *Light {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return x
 }
 
-// A Boolean value indicating whether this object should be used in rendering.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden a Boolean value indicating whether this object should be used in rendering.
 func (x *Light) WithHidden(hidden bool) *Light {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
+// LightType wraps the corresponding Objective-C method.
 func (x *Light) LightType() LightType {
 	_r := objc.Send[LightType](objref.IDOf(x), objc.RegisterName("lightType"))
 	return _r
 }
 
+// SetLightType wraps the corresponding Objective-C method.
 func (x *Light) SetLightType(lightType LightType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightType:"), lightType)
 }
 
+// ColorSpace wraps the corresponding Objective-C method.
 func (x *Light) ColorSpace() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorSpace"))
 	if _r == 0 {
@@ -121,6 +96,7 @@ func (x *Light) ColorSpace() string {
 	return purego.GoString(_r)
 }
 
+// SetColorSpace wraps the corresponding Objective-C method.
 func (x *Light) SetColorSpace(colorSpace string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), purego.NSString(colorSpace))
 }
@@ -140,3 +116,12 @@ type Lightable interface {
 }
 
 var _ Lightable = (*Light)(nil)
+
+// isLight marks Light — and, by embedding promotion, its
+// subclasses — as a member of the Light hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Light) isLight() {}
+
+var _ LightProvider = (*Light)(nil)
+
+var _ ObjectProvider = (*Light)(nil)

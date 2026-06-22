@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a client of the extension.
-//
 // ExtensionClient is an idiomatic wrapper over the Objective-C class CMIOExtensionClient.
+//
+// An object that represents a client of the extension.
 type ExtensionClient struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ExtensionClientFromID(id objc.ID) *ExtensionClient {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionClient{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExtensionClient{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func extensionClientAdopt(id objc.ID) *ExtensionClient {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionClient{Handle: objref.Wrap(id)}
+	x := &ExtensionClient{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *ExtensionClient) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExtensionClient) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewExtensionClient creates a new ExtensionClient.
 func NewExtensionClient() *ExtensionClient {
 	_id := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionClient")), objc.RegisterName("new"))
 	return extensionClientAdopt(_id)
 }
 
-// The client unique identifier.
+// ClientID the client unique identifier.
 func (x *ExtensionClient) ClientID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientID"))
 	return obj.Wrap(_r)
 }
 
-// The client's signing identifier.
+// SigningID the client's signing identifier.
 func (x *ExtensionClient) SigningID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signingID"))
 	if _r == 0 {
@@ -79,7 +87,7 @@ func (x *ExtensionClient) SigningID() string {
 	return purego.GoString(_r)
 }
 
-// The pid of the client application.
+// Pid the pid of the client application.
 func (x *ExtensionClient) Pid() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pid"))
 	return _r

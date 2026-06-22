@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract superclass for playback commands.
-//
 // DelegatingPlaybackCoordinatorPlaybackControlCommand is an idiomatic wrapper over the Objective-C class AVDelegatingPlaybackCoordinatorPlaybackControlCommand.
+//
+// DelegatingPlaybackCoordinatorPlaybackControlCommand is an abstract base — you do not construct it directly. Construct one of [DelegatingPlaybackCoordinatorBufferingCommand], [DelegatingPlaybackCoordinatorPauseCommand], [DelegatingPlaybackCoordinatorPlayCommand], [DelegatingPlaybackCoordinatorSeekCommand] and pass it where a DelegatingPlaybackCoordinatorPlaybackControlCommand is accepted.
+//
+// An abstract superclass for playback commands.
 type DelegatingPlaybackCoordinatorPlaybackControlCommand struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func DelegatingPlaybackCoordinatorPlaybackControlCommandFromID(id objc.ID) *Dele
 	if id == 0 {
 		return nil
 	}
-	x := &DelegatingPlaybackCoordinatorPlaybackControlCommand{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DelegatingPlaybackCoordinatorPlaybackControlCommand{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func delegatingPlaybackCoordinatorPlaybackControlCommandAdopt(id objc.ID) *Deleg
 	if id == 0 {
 		return nil
 	}
-	x := &DelegatingPlaybackCoordinatorPlaybackControlCommand{Handle: objref.Wrap(id)}
+	x := &DelegatingPlaybackCoordinatorPlaybackControlCommand{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +62,19 @@ func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) IsKind(className s
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewDelegatingPlaybackCoordinatorPlaybackControlCommand creates a new DelegatingPlaybackCoordinatorPlaybackControlCommand.
-func NewDelegatingPlaybackCoordinatorPlaybackControlCommand() *DelegatingPlaybackCoordinatorPlaybackControlCommand {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVDelegatingPlaybackCoordinatorPlaybackControlCommand")), objc.RegisterName("new"))
-	return delegatingPlaybackCoordinatorPlaybackControlCommandAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The participant causing this command to be issued. Only commands issued on behalf of another participant will contain an originator. Commands caused by local requests, e.g., requests to coordinate a rate change, will not contain an originator. Similarly, re-application of older commands, e.g., in response to a call to [AVDelegatingPlaybackCoordinator reapplyCurrentItemStateToPlaybackControlDelegate], will not contain an originator. If the originator is non-nil, it may be appropriate to show UI indicating someone else's action.
+// Originator the participant causing this command to be issued. Only commands issued on behalf of another participant will contain an originator. Commands caused by local requests, e.g., requests to coordinate a rate change, will not contain an originator. Similarly, re-application of older commands, e.g., in response to a call to [AVDelegatingPlaybackCoordinator reapplyCurrentItemStateToPlaybackControlDelegate], will not contain an originator. If the originator is non-nil, it may be appropriate to show UI indicating someone else's action.
 func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) Originator() *CoordinatedPlaybackParticipant {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originator"))
 	return CoordinatedPlaybackParticipantFromID(_r)
 }
 
-// Indicates the item this command was issued for. Commands are always meant for the current item. A command handler should verify that the identifier of its current item matches this identifier. If it doesn't this command is obsolete and should be ignored. Note that any completion handler of the delegate method issuing the command must still be invoked.
+// ExpectedCurrentItemIdentifier indicates the item this command was issued for. Commands are always meant for the current item. A command handler should verify that the identifier of its current item matches this identifier. If it doesn't this command is obsolete and should be ignored. Note that any completion handler of the delegate method issuing the command must still be invoked.
 func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) ExpectedCurrentItemIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expectedCurrentItemIdentifier"))
 	if _r == 0 {
@@ -87,3 +91,11 @@ type DelegatingPlaybackCoordinatorPlaybackControlCommandable interface {
 }
 
 var _ DelegatingPlaybackCoordinatorPlaybackControlCommandable = (*DelegatingPlaybackCoordinatorPlaybackControlCommand)(nil)
+
+// isDelegatingPlaybackCoordinatorPlaybackControlCommand marks DelegatingPlaybackCoordinatorPlaybackControlCommand — and, by embedding promotion, its
+// subclasses — as a member of the DelegatingPlaybackCoordinatorPlaybackControlCommand hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) isDelegatingPlaybackCoordinatorPlaybackControlCommand() {
+}
+
+var _ DelegatingPlaybackCoordinatorPlaybackControlCommandProvider = (*DelegatingPlaybackCoordinatorPlaybackControlCommand)(nil)

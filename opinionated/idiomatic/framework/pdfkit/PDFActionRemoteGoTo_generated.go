@@ -6,17 +6,20 @@ package pdfkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// PDFActionRemoteGoTo, a subclass of PDFAction, defines methods for getting and setting the destination of a go-to action that targets another document.
-//
 // ActionRemoteGoTo is an idiomatic wrapper over the Objective-C class PDFActionRemoteGoTo.
+//
+// It embeds [Action], promoting that type's methods.
+//
+// PDFActionRemoteGoTo, a subclass of PDFAction, defines methods for getting and setting the destination of a go-to action that targets another document.
 type ActionRemoteGoTo struct {
-	objref.Handle
+	Action
 }
 
 // ActionRemoteGoToFromID adopts an existing Objective-C object as a ActionRemoteGoTo
@@ -25,7 +28,8 @@ func ActionRemoteGoToFromID(id objc.ID) *ActionRemoteGoTo {
 	if id == 0 {
 		return nil
 	}
-	x := &ActionRemoteGoTo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ActionRemoteGoTo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,62 +42,66 @@ func actionRemoteGoToAdopt(id objc.ID) *ActionRemoteGoTo {
 	if id == 0 {
 		return nil
 	}
-	x := &ActionRemoteGoTo{Handle: objref.Wrap(id)}
+	x := &ActionRemoteGoTo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ActionRemoteGoTo) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ActionRemoteGoTo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ActionRemoteGoTo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewActionRemoteGoTo creates a new ActionRemoteGoTo.
-func NewActionRemoteGoTo() *ActionRemoteGoTo {
-	_id := objc.Send[objc.ID](objc.ID(_class("PDFActionRemoteGoTo")), objc.RegisterName("new"))
+// NewActionRemoteGoToWithPageIndexAtPointFileURL initializes the remote go-to action with the specified page index, point, and document URL.
+func NewActionRemoteGoToWithPageIndexAtPointFileURL(pageIndex int, point corefoundation.CGPoint, url string) *ActionRemoteGoTo {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFActionRemoteGoTo")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPageIndex:atPoint:fileURL:"), pageIndex, point, rt.FileURL(url))
 	return actionRemoteGoToAdopt(_id)
 }
 
-// Returns the zero-based page index referenced by the remote go-to action.
-//
-// WithPageIndex sets pageIndex and returns the receiver so calls can be chained.
+// WithPageIndex returns the zero-based page index referenced by the remote go-to action.
 func (x *ActionRemoteGoTo) WithPageIndex(pageIndex int) *ActionRemoteGoTo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageIndex:"), pageIndex)
 	return x
 }
 
-// Returns the URL of the document referenced by the remote go-to action.
-//
-// WithURL sets uRL and returns the receiver so calls can be chained.
+// WithPoint sets the point, in page space, on the page referenced by the remote go-to action.
+func (x *ActionRemoteGoTo) WithPoint(point corefoundation.CGPoint) *ActionRemoteGoTo {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPoint:"), point)
+	return x
+}
+
+// WithURL returns the URL of the document referenced by the remote go-to action.
 func (x *ActionRemoteGoTo) WithURL(uRL string) *ActionRemoteGoTo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 	return x
 }
 
+// PageIndex wraps the corresponding Objective-C method.
 func (x *ActionRemoteGoTo) PageIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pageIndex"))
 	return _r
 }
 
+// SetPageIndex wraps the corresponding Objective-C method.
 func (x *ActionRemoteGoTo) SetPageIndex(pageIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageIndex:"), pageIndex)
 }
 
+// Point wraps the corresponding Objective-C method.
+func (x *ActionRemoteGoTo) Point() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("point"))
+	return _r
+}
+
+// SetPoint wraps the corresponding Objective-C method.
+func (x *ActionRemoteGoTo) SetPoint(point corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPoint:"), point)
+}
+
+// URL wraps the corresponding Objective-C method.
 func (x *ActionRemoteGoTo) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
+// SetURL wraps the corresponding Objective-C method.
 func (x *ActionRemoteGoTo) SetURL(uRL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 }
@@ -102,11 +110,16 @@ func (x *ActionRemoteGoTo) SetURL(uRL string) {
 type ActionRemoteGoToable interface {
 	obj.Object
 	WithPageIndex(pageIndex int) *ActionRemoteGoTo
+	WithPoint(point corefoundation.CGPoint) *ActionRemoteGoTo
 	WithURL(uRL string) *ActionRemoteGoTo
 	PageIndex() int
 	SetPageIndex(pageIndex int)
+	Point() corefoundation.CGPoint
+	SetPoint(point corefoundation.CGPoint)
 	URL() obj.Object
 	SetURL(uRL string)
 }
 
 var _ ActionRemoteGoToable = (*ActionRemoteGoTo)(nil)
+
+var _ ActionProvider = (*ActionRemoteGoTo)(nil)

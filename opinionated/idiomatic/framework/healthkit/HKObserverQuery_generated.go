@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A long-running query that monitors the HealthKit store and updates your app when the HealthKit store saves or deletes a matching sample.
-//
 // ObserverQuery is an idiomatic wrapper over the Objective-C class HKObserverQuery.
+//
+// It embeds [Query], promoting that type's methods.
+//
+// A long-running query that monitors the HealthKit store and updates your app when the HealthKit store saves or deletes a matching sample.
 type ObserverQuery struct {
-	objref.Handle
+	Query
 }
 
 // ObserverQueryFromID adopts an existing Objective-C object as a ObserverQuery
@@ -25,7 +26,8 @@ func ObserverQueryFromID(id objc.ID) *ObserverQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &ObserverQuery{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ObserverQuery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func observerQueryAdopt(id objc.ID) *ObserverQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &ObserverQuery{Handle: objref.Wrap(id)}
+	x := &ObserverQuery{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ObserverQuery) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ObserverQuery) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ObserverQuery) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewObserverQuery creates a new ObserverQuery.
@@ -70,3 +58,5 @@ type ObserverQueryable interface {
 }
 
 var _ ObserverQueryable = (*ObserverQuery)(nil)
+
+var _ QueryProvider = (*ObserverQuery)(nil)

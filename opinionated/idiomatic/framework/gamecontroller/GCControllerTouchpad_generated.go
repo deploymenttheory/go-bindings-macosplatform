@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A control element that represents a touch event on a touchpad.
-//
 // ControllerTouchpad is an idiomatic wrapper over the Objective-C class GCControllerTouchpad.
+//
+// It embeds [ControllerElement], promoting that type's methods.
+//
+// A control element that represents a touch event on a touchpad.
 type ControllerTouchpad struct {
-	objref.Handle
+	ControllerElement
 }
 
 // ControllerTouchpadFromID adopts an existing Objective-C object as a ControllerTouchpad
@@ -25,7 +26,8 @@ func ControllerTouchpadFromID(id objc.ID) *ControllerTouchpad {
 	if id == 0 {
 		return nil
 	}
-	x := &ControllerTouchpad{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ControllerTouchpad{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func controllerTouchpadAdopt(id objc.ID) *ControllerTouchpad {
 	if id == 0 {
 		return nil
 	}
-	x := &ControllerTouchpad{Handle: objref.Wrap(id)}
+	x := &ControllerTouchpad{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ControllerTouchpad) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ControllerTouchpad) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ControllerTouchpad) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewControllerTouchpad creates a new ControllerTouchpad.
@@ -64,83 +52,72 @@ func NewControllerTouchpad() *ControllerTouchpad {
 	return controllerTouchpadAdopt(_id)
 }
 
-// A Boolean value that determines whether the touch values are absolute or relative.
-//
-// WithReportsAbsoluteTouchSurfaceValues sets reportsAbsoluteTouchSurfaceValues and returns the receiver so calls can be chained.
+// WithReportsAbsoluteTouchSurfaceValues a Boolean value that determines whether the touch values are absolute or relative.
 func (x *ControllerTouchpad) WithReportsAbsoluteTouchSurfaceValues(reportsAbsoluteTouchSurfaceValues bool) *ControllerTouchpad {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReportsAbsoluteTouchSurfaceValues:"), reportsAbsoluteTouchSurfaceValues)
 	return x
 }
 
-// The preferred state for handling input when the user binds the element to a system gesture.
-//
-// WithPreferredSystemGestureState sets preferredSystemGestureState and returns the receiver so calls can be chained.
+// WithPreferredSystemGestureState the preferred state for handling input when the user binds the element to a system gesture.
 func (x *ControllerTouchpad) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerTouchpad {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
 	return x
 }
 
-// A system symbol for the element or the remapped element.
-//
-// WithSfSymbolsName sets sfSymbolsName and returns the receiver so calls can be chained.
+// WithSfSymbolsName a system symbol for the element or the remapped element.
 func (x *ControllerTouchpad) WithSfSymbolsName(sfSymbolsName string) *ControllerTouchpad {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
 	return x
 }
 
-// The localized name for the element or the remapped element.
-//
-// WithLocalizedName sets localizedName and returns the receiver so calls can be chained.
+// WithLocalizedName the localized name for the element or the remapped element.
 func (x *ControllerTouchpad) WithLocalizedName(localizedName string) *ControllerTouchpad {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedName:"), purego.NSString(localizedName))
 	return x
 }
 
-// The element’s system symbol, not the remapped symbol.
-//
-// WithUnmappedSfSymbolsName sets unmappedSfSymbolsName and returns the receiver so calls can be chained.
+// WithUnmappedSfSymbolsName the element’s system symbol, not the remapped symbol.
 func (x *ControllerTouchpad) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerTouchpad {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedSfSymbolsName:"), purego.NSString(unmappedSfSymbolsName))
 	return x
 }
 
-// The element’s localized name, not the remapped name.
-//
-// WithUnmappedLocalizedName sets unmappedLocalizedName and returns the receiver so calls can be chained.
+// WithUnmappedLocalizedName the element’s localized name, not the remapped name.
 func (x *ControllerTouchpad) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerTouchpad {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
 	return x
 }
 
-// Sets the input values of a snapshot of a touchpad.
+// SetValueForXAxisYAxisTouchDownButtonValue sets the input values of a snapshot of a touchpad.
 func (x *ControllerTouchpad) SetValueForXAxisYAxisTouchDownButtonValue(xAxis float32, yAxis float32, touchDown bool, buttonValue float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueForXAxis:yAxis:touchDown:buttonValue:"), xAxis, yAxis, touchDown, buttonValue)
 }
 
-// Button is the button built into the touch surface.
+// Button button is the button built into the touch surface.
 func (x *ControllerTouchpad) Button() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("button"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// The touch surface is a 2-axis control that represents the position of a touch event on the touchpad. The axes will indicate the most recent touch position - a non-zero value does not indicate that the surface is being touched, and a value of (0, 0) does not indicate the surface is not being touched.
+// TouchSurface the touch surface is a 2-axis control that represents the position of a touch event on the touchpad. The axes will indicate the most recent touch position - a non-zero value does not indicate that the surface is being touched, and a value of (0, 0) does not indicate the surface is not being touched.
 func (x *ControllerTouchpad) TouchSurface() *ControllerDirectionPad {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchSurface"))
 	return ControllerDirectionPadFromID(_r)
 }
 
-// Indicates the current state of the touch event on the touchpad.
+// TouchState indicates the current state of the touch event on the touchpad.
 func (x *ControllerTouchpad) TouchState() TouchState {
 	_r := objc.Send[TouchState](objref.IDOf(x), objc.RegisterName("touchState"))
 	return _r
 }
 
-// The touchpad can use the raw position values of its surface as D-pad values, or it can create a virtual dpad centered around the first contact point with the surface. If NO; a smaller sliding window is created around the initial touch point and subsequent movement is relative to that center. Movement outside the window will slide the window with it to re-center it. This is great for surfaces where there is no clear sense of a middle and drift over time is an issue. If YES; the absolute values are used and any drift will have to managed manually either through user traning or by a developer using the dpad. The default value for this property is YES, meaning the touch surface's raw positional values are reported.
+// ReportsAbsoluteTouchSurfaceValues the touchpad can use the raw position values of its surface as D-pad values, or it can create a virtual dpad centered around the first contact point with the surface. If NO; a smaller sliding window is created around the initial touch point and subsequent movement is relative to that center. Movement outside the window will slide the window with it to re-center it. This is great for surfaces where there is no clear sense of a middle and drift over time is an issue. If YES; the absolute values are used and any drift will have to managed manually either through user traning or by a developer using the dpad. The default value for this property is YES, meaning the touch surface's raw positional values are reported.
 func (x *ControllerTouchpad) ReportsAbsoluteTouchSurfaceValues() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reportsAbsoluteTouchSurfaceValues"))
 	return _r
 }
 
+// SetReportsAbsoluteTouchSurfaceValues wraps the corresponding Objective-C method.
 func (x *ControllerTouchpad) SetReportsAbsoluteTouchSurfaceValues(reportsAbsoluteTouchSurfaceValues bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReportsAbsoluteTouchSurfaceValues:"), reportsAbsoluteTouchSurfaceValues)
 }
@@ -163,3 +140,5 @@ type ControllerTouchpadable interface {
 }
 
 var _ ControllerTouchpadable = (*ControllerTouchpad)(nil)
+
+var _ ControllerElementProvider = (*ControllerTouchpad)(nil)

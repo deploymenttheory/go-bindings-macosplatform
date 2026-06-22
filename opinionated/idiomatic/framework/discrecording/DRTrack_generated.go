@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The DRTrack class represents a track on the burned disc. <h3>About tracks</h3> A DRTrack provides data to the for the burn and contains a description of the track on disc (length, block type, data format, etc). Data is provided for the burn in a real-time thread. It is up to the track to provide this data in a timely manner, otherwise a burn underrun can occur and ruin a disc. <h3>Data Production</h3> DRTracks do not typically store or cache the data to be written to disk, instead the data is streamed to the disc from some data producer as it's needed. This is accomplished through an object associated with the track when the track is created called the <i>track producer</i>. A track producer is a class you create that implements the
-//
 // Track is an idiomatic wrapper over the Objective-C class DRTrack.
+//
+// The DRTrack class represents a track on the burned disc. <h3>About tracks</h3> A DRTrack provides data to the for the burn and contains a description of the track on disc (length, block type, data format, etc). Data is provided for the burn in a real-time thread. It is up to the track to provide this data in a timely manner, otherwise a burn underrun can occur and ruin a disc. <h3>Data Production</h3> DRTracks do not typically store or cache the data to be written to disk, instead the data is streamed to the disc from some data producer as it's needed. This is accomplished through an object associated with the track when the track is created called the <i>track producer</i>. A track producer is a class you create that implements the
 type Track struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TrackFromID(id objc.ID) *Track {
 	if id == 0 {
 		return nil
 	}
-	x := &Track{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Track{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func trackAdopt(id objc.ID) *Track {
 	if id == 0 {
 		return nil
 	}
-	x := &Track{Handle: objref.Wrap(id)}
+	x := &Track{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,57 +60,61 @@ func (x *Track) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a DRTrack with the producer
-//
-// NewTrackWithProducer creates a new Track.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Track) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTrackWithProducer initializes a DRTrack with the producer
 func NewTrackWithProducer(producer obj.Object) *Track {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DRTrack")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProducer:"), objref.IDOf(producer))
 	return trackAdopt(_id)
 }
 
-// Returns the properties dictionary of the track.
+// Properties returns the properties dictionary of the track.
 func (x *Track) Properties() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("properties"))
 	return obj.Wrap(_r)
 }
 
-// Sets the properties dictionary of the track
+// SetProperties sets the properties dictionary of the track
 func (x *Track) SetProperties(properties obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperties:"), objref.IDOf(properties))
 }
 
-// Tests the production speed for a specified interval. Runs a fake "production" cycle, repeatedly asking the receiver for data by calling it's producer's
+// TestProductionSpeedForInterval tests the production speed for a specified interval. Runs a fake "production" cycle, repeatedly asking the receiver for data by calling it's producer's
 func (x *Track) TestProductionSpeedForInterval(interval float64) float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("testProductionSpeedForInterval:"), interval)
 	return _r
 }
 
-// Tests the production speed for a specified byte count. Runs a fake "production" cycle, repeatedly asking the receiver for data by calling it's producer's
+// TestProductionSpeedForLength tests the production speed for a specified byte count. Runs a fake "production" cycle, repeatedly asking the receiver for data by calling it's producer's
 func (x *Track) TestProductionSpeedForLength(length uint32) float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("testProductionSpeedForLength:"), length)
 	return _r
 }
 
-// Asks the track producer for a size estimate. This method calls the track producer to ask it to estimate the size needed for its data. For some types of track, this call may be very expensive. For example, a DRFilesystemTrack may need to iterate folders on disk to provide an accurate estimate, which (if a large number of files and folders are involved) can cause this call to take 30 seconds or more. Since your main thread should not be allowed to block for this long, you may wish to call this function on a separate thread.
+// EstimateLength asks the track producer for a size estimate. This method calls the track producer to ask it to estimate the size needed for its data. For some types of track, this call may be very expensive. For example, a DRFilesystemTrack may need to iterate folders on disk to provide an accurate estimate, which (if a large number of files and folders are involved) can cause this call to take 30 seconds or more. Since your main thread should not be allowed to block for this long, you may wish to call this function on a separate thread.
 func (x *Track) EstimateLength() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("estimateLength"))
 	return _r
 }
 
-// Returns the length of the track data. The length returned does not include the length of the pregap. Only the length of the track data itself is returned.
+// Length returns the length of the track data. The length returned does not include the length of the pregap. Only the length of the track data itself is returned.
 func (x *Track) Length() *MSF {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("length"))
 	return MSFFromID(_r)
 }
 
-// Returns the length of the pre gap. This is a simple wrapper to obtain the
+// PreGap returns the length of the pre gap. This is a simple wrapper to obtain the
 func (x *Track) PreGap() *MSF {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preGap"))
 	return MSFFromID(_r)
 }
 
-// Sets the length of the pre gap. This is a simple wrapper to set the
+// SetPreGap sets the length of the pre gap. This is a simple wrapper to set the
 func (x *Track) SetPreGap(preGap *MSF) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreGap:"), objref.IDOf(preGap))
 }

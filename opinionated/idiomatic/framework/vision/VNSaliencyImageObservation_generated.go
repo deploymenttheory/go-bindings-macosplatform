@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An observation that contains a grayscale heat map of important areas across an image.
-//
 // SaliencyImageObservation is an idiomatic wrapper over the Objective-C class VNSaliencyImageObservation.
+//
+// It embeds [PixelBufferObservation], promoting that type's methods.
+//
+// An observation that contains a grayscale heat map of important areas across an image.
 type SaliencyImageObservation struct {
-	objref.Handle
+	PixelBufferObservation
 }
 
 // SaliencyImageObservationFromID adopts an existing Objective-C object as a SaliencyImageObservation
@@ -25,7 +26,8 @@ func SaliencyImageObservationFromID(id objc.ID) *SaliencyImageObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &SaliencyImageObservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SaliencyImageObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func saliencyImageObservationAdopt(id objc.ID) *SaliencyImageObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &SaliencyImageObservation{Handle: objref.Wrap(id)}
+	x := &SaliencyImageObservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SaliencyImageObservation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SaliencyImageObservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SaliencyImageObservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSaliencyImageObservation creates a new SaliencyImageObservation.
@@ -64,6 +52,8 @@ func NewSaliencyImageObservation() *SaliencyImageObservation {
 	return saliencyImageObservationAdopt(_id)
 }
 
+// SalientObjects wraps the corresponding Objective-C method.
+//
 // SalientObjects returns the collection as a Go slice.
 func (x *SaliencyImageObservation) SalientObjects() []*RectangleObservation {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("salientObjects"))
@@ -77,3 +67,7 @@ type SaliencyImageObservationable interface {
 }
 
 var _ SaliencyImageObservationable = (*SaliencyImageObservation)(nil)
+
+var _ PixelBufferObservationProvider = (*SaliencyImageObservation)(nil)
+
+var _ ObservationProvider = (*SaliencyImageObservation)(nil)

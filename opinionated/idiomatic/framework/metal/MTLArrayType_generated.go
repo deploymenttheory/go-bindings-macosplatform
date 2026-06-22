@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of an array.
-//
 // ArrayType is an idiomatic wrapper over the Objective-C class MTLArrayType.
+//
+// It embeds [Type], promoting that type's methods.
+//
+// A description of an array.
 type ArrayType struct {
-	objref.Handle
+	Type
 }
 
 // ArrayTypeFromID adopts an existing Objective-C object as a ArrayType
@@ -25,7 +26,8 @@ func ArrayTypeFromID(id objc.ID) *ArrayType {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ArrayType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func arrayTypeAdopt(id objc.ID) *ArrayType {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayType{Handle: objref.Wrap(id)}
+	x := &ArrayType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ArrayType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ArrayType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ArrayType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewArrayType creates a new ArrayType.
@@ -64,51 +52,55 @@ func NewArrayType() *ArrayType {
 	return arrayTypeAdopt(_id)
 }
 
-// Provides a description of the underlying struct type when an array holds structs as its elements.
+// ElementStructType provides a description of the underlying struct type when an array holds structs as its elements.
 func (x *ArrayType) ElementStructType() *StructType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementStructType"))
 	return StructTypeFromID(_r)
 }
 
-// Provides a description of the underlying type when an array holds other arrays as its elements.
+// ElementArrayType provides a description of the underlying type when an array holds other arrays as its elements.
 func (x *ArrayType) ElementArrayType() *ArrayType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementArrayType"))
 	return ArrayTypeFromID(_r)
 }
 
-// Provides a description of the underlying texture type when an array holds textures as its elements.
+// ElementTextureReferenceType provides a description of the underlying texture type when an array holds textures as its elements.
 func (x *ArrayType) ElementTextureReferenceType() *TextureReferenceType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementTextureReferenceType"))
 	return TextureReferenceTypeFromID(_r)
 }
 
-// Provides a description of the underlying pointer type when an array holds pointers as its elements.
+// ElementPointerType provides a description of the underlying pointer type when an array holds pointers as its elements.
 func (x *ArrayType) ElementPointerType() *PointerType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementPointerType"))
 	return PointerTypeFromID(_r)
 }
 
-// Provides a description of the underlying tensor type when this array holds tensors as its elements.
+// ElementTensorReferenceType provides a description of the underlying tensor type when this array holds tensors as its elements.
 func (x *ArrayType) ElementTensorReferenceType() *TensorReferenceType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementTensorReferenceType"))
 	return TensorReferenceTypeFromID(_r)
 }
 
+// ElementType wraps the corresponding Objective-C method.
 func (x *ArrayType) ElementType() DataType {
 	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("elementType"))
 	return _r
 }
 
+// ArrayLength wraps the corresponding Objective-C method.
 func (x *ArrayType) ArrayLength() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("arrayLength"))
 	return _r
 }
 
+// Stride wraps the corresponding Objective-C method.
 func (x *ArrayType) Stride() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stride"))
 	return _r
 }
 
+// ArgumentIndexStride wraps the corresponding Objective-C method.
 func (x *ArrayType) ArgumentIndexStride() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("argumentIndexStride"))
 	return _r
@@ -129,3 +121,5 @@ type ArrayTypeable interface {
 }
 
 var _ ArrayTypeable = (*ArrayType)(nil)
+
+var _ TypeProvider = (*ArrayType)(nil)

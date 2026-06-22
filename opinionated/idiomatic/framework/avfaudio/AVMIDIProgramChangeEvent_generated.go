@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a MIDI program or patch change message.
-//
 // MIDIProgramChangeEvent is an idiomatic wrapper over the Objective-C class AVMIDIProgramChangeEvent.
+//
+// It embeds [MIDIChannelEvent], promoting that type's methods.
+//
+// An object that represents a MIDI program or patch change message.
 type MIDIProgramChangeEvent struct {
-	objref.Handle
+	MIDIChannelEvent
 }
 
 // MIDIProgramChangeEventFromID adopts an existing Objective-C object as a MIDIProgramChangeEvent
@@ -25,7 +26,8 @@ func MIDIProgramChangeEventFromID(id objc.ID) *MIDIProgramChangeEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MIDIProgramChangeEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MIDIProgramChangeEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,56 +40,38 @@ func mIDIProgramChangeEventAdopt(id objc.ID) *MIDIProgramChangeEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MIDIProgramChangeEvent{Handle: objref.Wrap(id)}
+	x := &MIDIProgramChangeEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MIDIProgramChangeEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MIDIProgramChangeEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MIDIProgramChangeEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a program change event with a channel and program number.
-//
-// NewMIDIProgramChangeEventWithChannelProgramNumber creates a new MIDIProgramChangeEvent.
+// NewMIDIProgramChangeEventWithChannelProgramNumber creates a program change event with a channel and program number.
 func NewMIDIProgramChangeEventWithChannelProgramNumber(channel int, programNumber int) *MIDIProgramChangeEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMIDIProgramChangeEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannel:programNumber:"), channel, programNumber)
 	return mIDIProgramChangeEventAdopt(_id)
 }
 
-// The MIDI program number.
-//
-// WithProgramNumber sets programNumber and returns the receiver so calls can be chained.
+// WithProgramNumber the MIDI program number.
 func (x *MIDIProgramChangeEvent) WithProgramNumber(programNumber int) *MIDIProgramChangeEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgramNumber:"), programNumber)
 	return x
 }
 
-// The MIDI channel.
-//
-// WithChannel sets channel and returns the receiver so calls can be chained.
+// WithChannel the MIDI channel.
 func (x *MIDIProgramChangeEvent) WithChannel(channel int) *MIDIProgramChangeEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
 	return x
 }
 
+// ProgramNumber wraps the corresponding Objective-C method.
 func (x *MIDIProgramChangeEvent) ProgramNumber() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("programNumber"))
 	return _r
 }
 
+// SetProgramNumber wraps the corresponding Objective-C method.
 func (x *MIDIProgramChangeEvent) SetProgramNumber(programNumber int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgramNumber:"), programNumber)
 }
@@ -102,3 +86,7 @@ type MIDIProgramChangeEventable interface {
 }
 
 var _ MIDIProgramChangeEventable = (*MIDIProgramChangeEvent)(nil)
+
+var _ MIDIChannelEventProvider = (*MIDIProgramChangeEvent)(nil)
+
+var _ MusicEventProvider = (*MIDIProgramChangeEvent)(nil)

@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MathExpressionSubSuperscript is an idiomatic wrapper over the Objective-C class AXMathExpressionSubSuperscript.
+//
+// It embeds [MathExpression], promoting that type's methods.
 type MathExpressionSubSuperscript struct {
-	objref.Handle
+	MathExpression
 }
 
 // MathExpressionSubSuperscriptFromID adopts an existing Objective-C object as a MathExpressionSubSuperscript
@@ -23,7 +24,8 @@ func MathExpressionSubSuperscriptFromID(id objc.ID) *MathExpressionSubSuperscrip
 	if id == 0 {
 		return nil
 	}
-	x := &MathExpressionSubSuperscript{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MathExpressionSubSuperscript{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mathExpressionSubSuperscriptAdopt(id objc.ID) *MathExpressionSubSuperscript
 	if id == 0 {
 		return nil
 	}
-	x := &MathExpressionSubSuperscript{Handle: objref.Wrap(id)}
+	x := &MathExpressionSubSuperscript{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MathExpressionSubSuperscript) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MathExpressionSubSuperscript) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MathExpressionSubSuperscript) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMathExpressionSubSuperscriptWithBaseExpressionSubscriptExpressionsSuperscriptExpressions creates a new MathExpressionSubSuperscript.
@@ -63,17 +51,22 @@ func NewMathExpressionSubSuperscriptWithBaseExpressionSubscriptExpressionsSupers
 	return mathExpressionSubSuperscriptAdopt(_id)
 }
 
+// BaseExpression wraps the corresponding Objective-C method.
 func (x *MathExpressionSubSuperscript) BaseExpression() *MathExpression {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseExpression"))
 	return MathExpressionFromID(_r)
 }
 
+// SubscriptExpressions wraps the corresponding Objective-C method.
+//
 // SubscriptExpressions returns the collection as a Go slice.
 func (x *MathExpressionSubSuperscript) SubscriptExpressions() []*MathExpression {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptExpressions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpression { return MathExpressionFromID(_id) })
 }
 
+// SuperscriptExpressions wraps the corresponding Objective-C method.
+//
 // SuperscriptExpressions returns the collection as a Go slice.
 func (x *MathExpressionSubSuperscript) SuperscriptExpressions() []*MathExpression {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("superscriptExpressions"))
@@ -89,3 +82,5 @@ type MathExpressionSubSuperscriptable interface {
 }
 
 var _ MathExpressionSubSuperscriptable = (*MathExpressionSubSuperscript)(nil)
+
+var _ MathExpressionProvider = (*MathExpressionSubSuperscript)(nil)

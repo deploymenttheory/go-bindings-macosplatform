@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// This class represents an artist, such as the performer of a song.
-//
 // LibArtist is an idiomatic wrapper over the Objective-C class ITLibArtist.
+//
+// This class represents an artist, such as the performer of a song.
 type LibArtist struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LibArtistFromID(id objc.ID) *LibArtist {
 	if id == 0 {
 		return nil
 	}
-	x := &LibArtist{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LibArtist{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func libArtistAdopt(id objc.ID) *LibArtist {
 	if id == 0 {
 		return nil
 	}
-	x := &LibArtist{Handle: objref.Wrap(id)}
+	x := &LibArtist{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *LibArtist) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LibArtist) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLibArtist creates a new LibArtist.
 func NewLibArtist() *LibArtist {
 	_id := objc.Send[objc.ID](objc.ID(_class("ITLibArtist")), objc.RegisterName("new"))
 	return libArtistAdopt(_id)
 }
 
-// The name of this artist.
+// Name the name of this artist.
 func (x *LibArtist) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *LibArtist) Name() string {
 	return purego.GoString(_r)
 }
 
-// The name of this artist that should be used for sorting purposes.
+// SortName the name of this artist that should be used for sorting purposes.
 func (x *LibArtist) SortName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortName"))
 	if _r == 0 {
@@ -82,7 +90,7 @@ func (x *LibArtist) SortName() string {
 	return purego.GoString(_r)
 }
 
-// The unique identifier of this artist.
+// PersistentID the unique identifier of this artist.
 func (x *LibArtist) PersistentID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentID"))
 	return obj.Wrap(_r)

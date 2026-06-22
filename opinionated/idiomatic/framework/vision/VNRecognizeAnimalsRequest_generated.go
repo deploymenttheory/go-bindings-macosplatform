@@ -7,18 +7,20 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// A request that recognizes animals in an image.
-//
 // RecognizeAnimalsRequest is an idiomatic wrapper over the Objective-C class VNRecognizeAnimalsRequest.
+//
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// A request that recognizes animals in an image.
 type RecognizeAnimalsRequest struct {
-	objref.Handle
+	ImageBasedRequest
 }
 
 // RecognizeAnimalsRequestFromID adopts an existing Objective-C object as a RecognizeAnimalsRequest
@@ -27,7 +29,8 @@ func RecognizeAnimalsRequestFromID(id objc.ID) *RecognizeAnimalsRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &RecognizeAnimalsRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RecognizeAnimalsRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,24 +43,10 @@ func recognizeAnimalsRequestAdopt(id objc.ID) *RecognizeAnimalsRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &RecognizeAnimalsRequest{Handle: objref.Wrap(id)}
+	x := &RecognizeAnimalsRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RecognizeAnimalsRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RecognizeAnimalsRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RecognizeAnimalsRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRecognizeAnimalsRequest creates a new RecognizeAnimalsRequest.
@@ -66,34 +55,34 @@ func NewRecognizeAnimalsRequest() *RecognizeAnimalsRequest {
 	return recognizeAnimalsRequestAdopt(_id)
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets preferBackgroundProcessing and returns the receiver so calls can be chained.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
+func (x *RecognizeAnimalsRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *RecognizeAnimalsRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *RecognizeAnimalsRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *RecognizeAnimalsRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets usesCPUOnly and returns the receiver so calls can be chained.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *RecognizeAnimalsRequest) WithUsesCPUOnly(usesCPUOnly bool) *RecognizeAnimalsRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets revision and returns the receiver so calls can be chained.
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
 func (x *RecognizeAnimalsRequest) WithRevision(revision int) *RecognizeAnimalsRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
 }
 
-// Returns the identifiers of the animals that the request detects.
+// SupportedIdentifiers returns the identifiers of the animals that the request detects.
 //
 // SupportedIdentifiers returns the collection as a Go slice.
-func (x *RecognizeAnimalsRequest) SupportedIdentifiers() ([]obj.Object, error) {
+func (x *RecognizeAnimalsRequest) SupportedIdentifiers() (result []obj.Object, err error) {
 	var _nsErr uintptr
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedIdentifiersAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -105,6 +94,7 @@ func (x *RecognizeAnimalsRequest) SupportedIdentifiers() ([]obj.Object, error) {
 // RecognizeAnimalsRequestable is the interface implemented by [RecognizeAnimalsRequest], for mocking and DI.
 type RecognizeAnimalsRequestable interface {
 	obj.Object
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *RecognizeAnimalsRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *RecognizeAnimalsRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *RecognizeAnimalsRequest
 	WithRevision(revision int) *RecognizeAnimalsRequest
@@ -112,3 +102,7 @@ type RecognizeAnimalsRequestable interface {
 }
 
 var _ RecognizeAnimalsRequestable = (*RecognizeAnimalsRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*RecognizeAnimalsRequest)(nil)
+
+var _ RequestProvider = (*RecognizeAnimalsRequest)(nil)

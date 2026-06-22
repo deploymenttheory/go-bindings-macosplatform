@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The QCCompositionPickerPanel class represents a utility window that allows users to browse compositions that are in the Quartz Composer composition repository and, if supported, preview the composition. The QCCompositionPickerPanel class cannot be subclassed.
-//
 // QCCompositionPickerPanel is an idiomatic wrapper over the Objective-C class QCCompositionPickerPanel.
+//
+// The QCCompositionPickerPanel class represents a utility window that allows users to browse compositions that are in the Quartz Composer composition repository and, if supported, preview the composition. The QCCompositionPickerPanel class cannot be subclassed.
 type QCCompositionPickerPanel struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func QCCompositionPickerPanelFromID(id objc.ID) *QCCompositionPickerPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &QCCompositionPickerPanel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QCCompositionPickerPanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func qCCompositionPickerPanelAdopt(id objc.ID) *QCCompositionPickerPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &QCCompositionPickerPanel{Handle: objref.Wrap(id)}
+	x := &QCCompositionPickerPanel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *QCCompositionPickerPanel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *QCCompositionPickerPanel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewQCCompositionPickerPanel creates a new QCCompositionPickerPanel.
 func NewQCCompositionPickerPanel() *QCCompositionPickerPanel {
 	_id := objc.Send[objc.ID](objc.ID(_class("QCCompositionPickerPanel")), objc.RegisterName("new"))
 	return qCCompositionPickerPanelAdopt(_id)
 }
 
-// Returns the composition picker view used by the panel so that it can be configured.
+// CompositionPickerView returns the composition picker view used by the panel so that it can be configured.
 func (x *QCCompositionPickerPanel) CompositionPickerView() *QCCompositionPickerView {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositionPickerView"))
 	return QCCompositionPickerViewFromID(_r)

@@ -3,4 +3,19 @@
 //go:build darwin
 
 // Package metal provides a fluent Go API over the macOS Metal framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - AccelerationStructureDescriptor: [IndirectInstanceAccelerationStructureDescriptor], [InstanceAccelerationStructureDescriptor], [MTL4AccelerationStructureDescriptor], [PrimitiveAccelerationStructureDescriptor]
+//   - AccelerationStructureGeometryDescriptor: [AccelerationStructureBoundingBoxGeometryDescriptor], [AccelerationStructureCurveGeometryDescriptor], [AccelerationStructureMotionBoundingBoxGeometryDescriptor], [AccelerationStructureMotionCurveGeometryDescriptor], [AccelerationStructureMotionTriangleGeometryDescriptor], [AccelerationStructureTriangleGeometryDescriptor]
+//   - FunctionDescriptor: [IntersectionFunctionDescriptor]
+//   - MTL4AccelerationStructureDescriptor: [MTL4IndirectInstanceAccelerationStructureDescriptor], [MTL4InstanceAccelerationStructureDescriptor], [MTL4PrimitiveAccelerationStructureDescriptor]
+//   - MTL4AccelerationStructureGeometryDescriptor: [MTL4AccelerationStructureBoundingBoxGeometryDescriptor], [MTL4AccelerationStructureCurveGeometryDescriptor], [MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor], [MTL4AccelerationStructureMotionCurveGeometryDescriptor], [MTL4AccelerationStructureMotionTriangleGeometryDescriptor], [MTL4AccelerationStructureTriangleGeometryDescriptor]
+//   - MTL4FunctionDescriptor: [MTL4LibraryFunctionDescriptor], [MTL4SpecializedFunctionDescriptor], [MTL4StitchedFunctionDescriptor]
+//   - MTL4PipelineDescriptor: [MTL4ComputePipelineDescriptor], [MTL4MachineLearningPipelineDescriptor], [MTL4MeshRenderPipelineDescriptor], [MTL4RenderPipelineDescriptor], [MTL4TileRenderPipelineDescriptor]
+//   - RenderPassAttachmentDescriptor: [RenderPassColorAttachmentDescriptor], [RenderPassDepthAttachmentDescriptor], [RenderPassStencilAttachmentDescriptor]
+//   - Type: [ArrayType], [PointerType], [StructType], [TensorReferenceType], [TextureReferenceType]
 package metal

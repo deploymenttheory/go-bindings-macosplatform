@@ -3,4 +3,12 @@
 //go:build darwin
 
 // Package mediaplayer provides a fluent Go API over the macOS MediaPlayer framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - RemoteCommand: [ChangePlaybackPositionCommand], [ChangePlaybackRateCommand], [ChangeRepeatModeCommand], [ChangeShuffleModeCommand], [FeedbackCommand], [RatingCommand], [SkipIntervalCommand]
+//   - RemoteCommandEvent: [ChangeLanguageOptionCommandEvent], [ChangePlaybackPositionCommandEvent], [ChangePlaybackRateCommandEvent], [ChangeRepeatModeCommandEvent], [ChangeShuffleModeCommandEvent], [FeedbackCommandEvent], [RatingCommandEvent], [SeekCommandEvent], [SkipIntervalCommandEvent]
 package mediaplayer

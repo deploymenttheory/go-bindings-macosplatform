@@ -6,17 +6,19 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpsimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A kernel that is used to find a list of keypoints.
-//
 // ImageFindKeypoints is an idiomatic wrapper over the Objective-C class MPSImageFindKeypoints.
+//
+// It embeds [Kernel], promoting that type's methods.
+//
+// A kernel that is used to find a list of keypoints.
 type ImageFindKeypoints struct {
-	objref.Handle
+	Kernel
 }
 
 // ImageFindKeypointsFromID adopts an existing Objective-C object as a ImageFindKeypoints
@@ -25,7 +27,8 @@ func ImageFindKeypointsFromID(id objc.ID) *ImageFindKeypoints {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageFindKeypoints{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageFindKeypoints{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func imageFindKeypointsAdopt(id objc.ID) *ImageFindKeypoints {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageFindKeypoints{Handle: objref.Wrap(id)}
+	x := &ImageFindKeypoints{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ImageFindKeypoints) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageFindKeypoints) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageFindKeypoints) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewImageFindKeypoints creates a new ImageFindKeypoints.
@@ -64,18 +53,25 @@ func NewImageFindKeypoints() *ImageFindKeypoints {
 	return imageFindKeypointsAdopt(_id)
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *ImageFindKeypoints) WithLabel(label string) *ImageFindKeypoints {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
+}
+
+// KeypointRangeInfo return a structure describing the keypoint range info Returns a MPSImageKeypointRangeInfo structure
+func (x *ImageFindKeypoints) KeypointRangeInfo() mpsimage.MPSImageKeypointRangeInfo {
+	_r := objc.Send[mpsimage.MPSImageKeypointRangeInfo](objref.IDOf(x), objc.RegisterName("keypointRangeInfo"))
+	return _r
 }
 
 // ImageFindKeypointsable is the interface implemented by [ImageFindKeypoints], for mocking and DI.
 type ImageFindKeypointsable interface {
 	obj.Object
 	WithLabel(label string) *ImageFindKeypoints
+	KeypointRangeInfo() mpsimage.MPSImageKeypointRangeInfo
 }
 
 var _ ImageFindKeypointsable = (*ImageFindKeypoints)(nil)
+
+var _ KernelProvider = (*ImageFindKeypoints)(nil)

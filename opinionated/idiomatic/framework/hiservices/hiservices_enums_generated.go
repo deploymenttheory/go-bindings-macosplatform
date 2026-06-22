@@ -17,6 +17,8 @@ const (
 	KAXCopyMultipleAttributeOptionStopOnError AXCopyMultipleAttributeOptions = 1
 )
 
+// String returns the AXCopyMultipleAttributeOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AXCopyMultipleAttributeOptions) String() string {
 	var parts []string
 	if e&KAXCopyMultipleAttributeOptionStopOnError != 0 {
@@ -65,6 +67,8 @@ const (
 	KAXErrorNotEnoughPrecision AXError = -25214
 )
 
+// String returns the AXError constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AXError) String() string {
 	switch e {
 	case KAXErrorSuccess:
@@ -116,6 +120,8 @@ const (
 	KAXValueTypeIllegal AXValueType = 0
 )
 
+// String returns the AXValueType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AXValueType) String() string {
 	switch e {
 	case KAXValueTypeCGPoint:
@@ -143,6 +149,8 @@ const (
 	KPasteboardClientIsOwner PasteboardSyncFlags = 2
 )
 
+// String returns the PasteboardSyncFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PasteboardSyncFlags) String() string {
 	var parts []string
 	if e&KPasteboardModified != 0 {

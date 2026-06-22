@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines a video processor’s configuration options.
-//
 // VideoProcessorRequestProcessingOptions is an idiomatic wrapper over the Objective-C class VNVideoProcessorRequestProcessingOptions.
+//
+// An object that defines a video processor’s configuration options.
 type VideoProcessorRequestProcessingOptions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VideoProcessorRequestProcessingOptionsFromID(id objc.ID) *VideoProcessorReq
 	if id == 0 {
 		return nil
 	}
-	x := &VideoProcessorRequestProcessingOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VideoProcessorRequestProcessingOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func videoProcessorRequestProcessingOptionsAdopt(id objc.ID) *VideoProcessorRequ
 	if id == 0 {
 		return nil
 	}
-	x := &VideoProcessorRequestProcessingOptions{Handle: objref.Wrap(id)}
+	x := &VideoProcessorRequestProcessingOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *VideoProcessorRequestProcessingOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VideoProcessorRequestProcessingOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVideoProcessorRequestProcessingOptions creates a new VideoProcessorRequestProcessingOptions.
 func NewVideoProcessorRequestProcessingOptions() *VideoProcessorRequestProcessingOptions {
 	_id := objc.Send[objc.ID](objc.ID(_class("VNVideoProcessorRequestProcessingOptions")), objc.RegisterName("new"))
 	return videoProcessorRequestProcessingOptionsAdopt(_id)
 }
 
-// The cadence at which the request should be performed. If this property is not defined, then every frame will be processed.
-//
-// WithCadence sets cadence and returns the receiver so calls can be chained.
+// WithCadence the cadence at which the request should be performed. If this property is not defined, then every frame will be processed.
 func (x *VideoProcessorRequestProcessingOptions) WithCadence(cadence VideoProcessorCadenceProvider) *VideoProcessorRequestProcessingOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCadence:"), objref.IDOf(cadence))
 	return x
 }
 
+// Cadence wraps the corresponding Objective-C method.
 func (x *VideoProcessorRequestProcessingOptions) Cadence() *VideoProcessorCadence {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cadence"))
 	return VideoProcessorCadenceFromID(_r)
 }
 
+// SetCadence wraps the corresponding Objective-C method.
 func (x *VideoProcessorRequestProcessingOptions) SetCadence(cadence *VideoProcessorCadence) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCadence:"), objref.IDOf(cadence))
 }

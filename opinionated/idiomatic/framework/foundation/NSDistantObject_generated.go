@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A proxy for objects in other applications or threads.
-//
 // DistantObject is an idiomatic wrapper over the Objective-C class NSDistantObject.
+//
+// A proxy for objects in other applications or threads.
 type DistantObject struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DistantObjectFromID(id objc.ID) *DistantObject {
 	if id == 0 {
 		return nil
 	}
-	x := &DistantObject{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DistantObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func distantObjectAdopt(id objc.ID) *DistantObject {
 	if id == 0 {
 		return nil
 	}
-	x := &DistantObject{Handle: objref.Wrap(id)}
+	x := &DistantObject{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +60,20 @@ func (x *DistantObject) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a newly allocated NSDistantObject as a remote proxy for target, which is an id in another thread or another application’s address space.
-//
-// NewDistantObjectWithTargetConnection creates a new DistantObject.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DistantObject) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDistantObjectWithTargetConnection initializes a newly allocated NSDistantObject as a remote proxy for target, which is an id in another thread or another application’s address space.
 func NewDistantObjectWithTargetConnection(target obj.Object, connection *Connection) *DistantObject {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDistantObject")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTarget:connection:"), objref.IDOf(target), objref.IDOf(connection))
 	return distantObjectAdopt(_id)
 }
 
-// Initializes an NSDistantObject object as a local proxy for a given object.
-//
-// NewDistantObjectWithLocalConnection creates a new DistantObject.
+// NewDistantObjectWithLocalConnection initializes an NSDistantObject object as a local proxy for a given object.
 func NewDistantObjectWithLocalConnection(target obj.Object, connection *Connection) *DistantObject {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDistantObject")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocal:connection:"), objref.IDOf(target), objref.IDOf(connection))
@@ -83,6 +87,7 @@ func NewDistantObjectWithCoder(inCoder *Coder) *DistantObject {
 	return distantObjectAdopt(_id)
 }
 
+// ConnectionForProxy wraps the corresponding Objective-C method.
 func (x *DistantObject) ConnectionForProxy() *Connection {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectionForProxy"))
 	return ConnectionFromID(_r)

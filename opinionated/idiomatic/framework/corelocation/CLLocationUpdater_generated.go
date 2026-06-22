@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides device location updates.
-//
 // LocationUpdater is an idiomatic wrapper over the Objective-C class CLLocationUpdater.
+//
+// An object that provides device location updates.
 type LocationUpdater struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LocationUpdaterFromID(id objc.ID) *LocationUpdater {
 	if id == 0 {
 		return nil
 	}
-	x := &LocationUpdater{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LocationUpdater{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func locationUpdaterAdopt(id objc.ID) *LocationUpdater {
 	if id == 0 {
 		return nil
 	}
-	x := &LocationUpdater{Handle: objref.Wrap(id)}
+	x := &LocationUpdater{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,23 +60,29 @@ func (x *LocationUpdater) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LocationUpdater) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLocationUpdater creates a new LocationUpdater.
 func NewLocationUpdater() *LocationUpdater {
 	_id := objc.Send[objc.ID](objc.ID(_class("CLLocationUpdater")), objc.RegisterName("new"))
 	return locationUpdaterAdopt(_id)
 }
 
-// Resumes the updater.
+// Resume resumes the updater.
 func (x *LocationUpdater) Resume() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resume"))
 }
 
-// Pauses the updater.
+// Pause pauses the updater.
 func (x *LocationUpdater) Pause() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pause"))
 }
 
-// Invalidates the updater.
+// Invalidate invalidates the updater.
 func (x *LocationUpdater) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }

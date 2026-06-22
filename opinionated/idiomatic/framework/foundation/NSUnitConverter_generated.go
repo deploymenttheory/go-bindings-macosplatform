@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that provides a description of how to convert a unit to and from the base unit of its dimension.
-//
 // UnitConverter is an idiomatic wrapper over the Objective-C class NSUnitConverter.
+//
+// UnitConverter is an abstract base — you do not construct it directly. Construct one of [UnitConverterLinear] and pass it where a UnitConverter is accepted.
+//
+// An abstract class that provides a description of how to convert a unit to and from the base unit of its dimension.
 type UnitConverter struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func UnitConverterFromID(id objc.ID) *UnitConverter {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitConverter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UnitConverter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func unitConverterAdopt(id objc.ID) *UnitConverter {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitConverter{Handle: objref.Wrap(id)}
+	x := &UnitConverter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,23 +62,25 @@ func (x *UnitConverter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewUnitConverter creates a new UnitConverter.
-func NewUnitConverter() *UnitConverter {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitConverter")), objc.RegisterName("new"))
-	return unitConverterAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UnitConverter) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UnitConverter) WithScriptingProperties(scriptingProperties obj.Object) *UnitConverter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// BaseUnitValueFromValue wraps the corresponding Objective-C method.
 func (x *UnitConverter) BaseUnitValueFromValue(value float64) float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("baseUnitValueFromValue:"), value)
 	return _r
 }
 
+// ValueFromBaseUnitValue wraps the corresponding Objective-C method.
 func (x *UnitConverter) ValueFromBaseUnitValue(baseUnitValue float64) float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("valueFromBaseUnitValue:"), baseUnitValue)
 	return _r
@@ -89,3 +95,10 @@ type UnitConverterable interface {
 }
 
 var _ UnitConverterable = (*UnitConverter)(nil)
+
+// isUnitConverter marks UnitConverter — and, by embedding promotion, its
+// subclasses — as a member of the UnitConverter hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *UnitConverter) isUnitConverter() {}
+
+var _ UnitConverterProvider = (*UnitConverter)(nil)

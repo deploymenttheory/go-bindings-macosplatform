@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// This class provides information about an album in the iTunes library.
-//
 // LibAlbum is an idiomatic wrapper over the Objective-C class ITLibAlbum.
+//
+// This class provides information about an album in the iTunes library.
 type LibAlbum struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LibAlbumFromID(id objc.ID) *LibAlbum {
 	if id == 0 {
 		return nil
 	}
-	x := &LibAlbum{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LibAlbum{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func libAlbumAdopt(id objc.ID) *LibAlbum {
 	if id == 0 {
 		return nil
 	}
-	x := &LibAlbum{Handle: objref.Wrap(id)}
+	x := &LibAlbum{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *LibAlbum) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LibAlbum) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLibAlbum creates a new LibAlbum.
 func NewLibAlbum() *LibAlbum {
 	_id := objc.Send[objc.ID](objc.ID(_class("ITLibAlbum")), objc.RegisterName("new"))
 	return libAlbumAdopt(_id)
 }
 
-// The name of this album.
+// Title the name of this album.
 func (x *LibAlbum) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *LibAlbum) Title() string {
 	return purego.GoString(_r)
 }
 
-// The name of this that should be used for sorting purposes.
+// SortTitle the name of this that should be used for sorting purposes.
 func (x *LibAlbum) SortTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortTitle"))
 	if _r == 0 {
@@ -82,49 +90,49 @@ func (x *LibAlbum) SortTitle() string {
 	return purego.GoString(_r)
 }
 
-// Whether this album is a compilation.
+// IsCompilation whether this album is a compilation.
 func (x *LibAlbum) IsCompilation() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompilation"))
 	return _r
 }
 
-// The number of discs in this album.
+// DiscCount the number of discs in this album.
 func (x *LibAlbum) DiscCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("discCount"))
 	return _r
 }
 
-// The index (i.e. 1, 2, 3, etc.) of the disc this album refers to within a compilation.
+// DiscNumber the index (i.e. 1, 2, 3, etc.) of the disc this album refers to within a compilation.
 func (x *LibAlbum) DiscNumber() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("discNumber"))
 	return _r
 }
 
-// The rating of this track's album.
+// Rating the rating of this track's album.
 func (x *LibAlbum) Rating() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rating"))
 	return _r
 }
 
-// The rating of this track's album.
+// IsRatingComputed the rating of this track's album.
 func (x *LibAlbum) IsRatingComputed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRatingComputed"))
 	return _r
 }
 
-// Whether this track's album is gapless.
+// IsGapless whether this track's album is gapless.
 func (x *LibAlbum) IsGapless() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isGapless"))
 	return _r
 }
 
-// Number of tracks in this album.
+// TrackCount number of tracks in this album.
 func (x *LibAlbum) TrackCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("trackCount"))
 	return _r
 }
 
-// The artist associated with this album.
+// AlbumArtist the artist associated with this album.
 func (x *LibAlbum) AlbumArtist() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("albumArtist"))
 	if _r == 0 {
@@ -133,7 +141,7 @@ func (x *LibAlbum) AlbumArtist() string {
 	return purego.GoString(_r)
 }
 
-// The artist associated with this album. This field should be used when sorting.
+// SortAlbumArtist the artist associated with this album. This field should be used when sorting.
 func (x *LibAlbum) SortAlbumArtist() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortAlbumArtist"))
 	if _r == 0 {
@@ -142,7 +150,7 @@ func (x *LibAlbum) SortAlbumArtist() string {
 	return purego.GoString(_r)
 }
 
-// The unique identifier of this album.
+// PersistentID the unique identifier of this album.
 func (x *LibAlbum) PersistentID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentID"))
 	return obj.Wrap(_r)

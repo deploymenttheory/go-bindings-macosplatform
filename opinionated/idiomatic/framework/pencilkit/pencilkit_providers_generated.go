@@ -11,9 +11,11 @@ import (
 // ToolProvider is accepted wherever a PKTool (or one of its subclasses) is expected.
 type ToolProvider interface {
 	objref.Object
+	isTool()
 }
 
 // ToolPickerItemProvider is accepted wherever a PKToolPickerItem (or one of its subclasses) is expected.
 type ToolPickerItemProvider interface {
 	objref.Object
+	isToolPickerItem()
 }

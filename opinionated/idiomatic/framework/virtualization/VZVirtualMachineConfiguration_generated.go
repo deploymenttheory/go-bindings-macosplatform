@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// The environment attributes and list of devices to use during the configuration of macOS or Linux VMs.
-//
 // VirtualMachineConfiguration is an idiomatic wrapper over the Objective-C class VZVirtualMachineConfiguration.
+//
+// The environment attributes and list of devices to use during the configuration of macOS or Linux VMs.
 type VirtualMachineConfiguration struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func VirtualMachineConfigurationFromID(id objc.ID) *VirtualMachineConfiguration 
 	if id == 0 {
 		return nil
 	}
-	x := &VirtualMachineConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VirtualMachineConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func virtualMachineConfigurationAdopt(id objc.ID) *VirtualMachineConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtualMachineConfiguration{Handle: objref.Wrap(id)}
+	x := &VirtualMachineConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,202 +62,178 @@ func (x *VirtualMachineConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VirtualMachineConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVirtualMachineConfiguration creates a new VirtualMachineConfiguration.
 func NewVirtualMachineConfiguration() *VirtualMachineConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtualMachineConfiguration")), objc.RegisterName("new"))
 	return virtualMachineConfigurationAdopt(_id)
 }
 
-// The guest system to boot when the VM starts.
-//
-// WithBootLoader sets bootLoader and returns the receiver so calls can be chained.
+// WithBootLoader the guest system to boot when the VM starts.
 func (x *VirtualMachineConfiguration) WithBootLoader(bootLoader BootLoaderProvider) *VirtualMachineConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBootLoader:"), objref.IDOf(bootLoader))
 	return x
 }
 
-// The amount of physical memory the guest operating system recognizes.
-//
-// WithMemorySize sets memorySize and returns the receiver so calls can be chained.
+// WithMemorySize the amount of physical memory the guest operating system recognizes.
 func (x *VirtualMachineConfiguration) WithMemorySize(memorySize uint64) *VirtualMachineConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMemorySize:"), memorySize)
 	return x
 }
 
-// The number of CPUs you make available to the guest operating system.
-//
-// WithCPUCount sets cPUCount and returns the receiver so calls can be chained.
+// WithCPUCount the number of CPUs you make available to the guest operating system.
 func (x *VirtualMachineConfiguration) WithCPUCount(cPUCount int) *VirtualMachineConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCPUCount:"), cPUCount)
 	return x
 }
 
-// The hardware platform to use.
-//
-// WithPlatform sets platform and returns the receiver so calls can be chained.
+// WithPlatform the hardware platform to use.
 func (x *VirtualMachineConfiguration) WithPlatform(platform PlatformConfigurationProvider) *VirtualMachineConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlatform:"), objref.IDOf(platform))
 	return x
 }
 
-// The list of audio devices.
-//
-// WithAudioDevices sets the collection and returns the receiver so calls can be chained.
+// WithAudioDevices the list of audio devices.
 func (x *VirtualMachineConfiguration) WithAudioDevices(items ...AudioDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v AudioDeviceConfigurationProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioDevices:"), _arr)
 	return x
 }
 
-// The array of console devices that you expose to the guest operating system.
-//
-// WithConsoleDevices sets the collection and returns the receiver so calls can be chained.
+// WithConsoleDevices the array of console devices that you expose to the guest operating system.
 func (x *VirtualMachineConfiguration) WithConsoleDevices(items ...ConsoleDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v ConsoleDeviceConfigurationProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConsoleDevices:"), _arr)
 	return x
 }
 
-// The list of directory sharing devices.
-//
-// WithDirectorySharingDevices sets the collection and returns the receiver so calls can be chained.
+// WithDirectorySharingDevices the list of directory sharing devices.
 func (x *VirtualMachineConfiguration) WithDirectorySharingDevices(items ...DirectorySharingDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v DirectorySharingDeviceConfigurationProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirectorySharingDevices:"), _arr)
 	return x
 }
 
-// The array of randomization devices that you expose to the guest operating system.
-//
-// WithEntropyDevices sets the collection and returns the receiver so calls can be chained.
+// WithEntropyDevices the array of randomization devices that you expose to the guest operating system.
 func (x *VirtualMachineConfiguration) WithEntropyDevices(items ...EntropyDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v EntropyDeviceConfigurationProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntropyDevices:"), _arr)
 	return x
 }
 
-// An array that you configure with a memory balloon device, used to update the memory in the VM.
-//
-// WithMemoryBalloonDevices sets the collection and returns the receiver so calls can be chained.
+// WithMemoryBalloonDevices an array that you configure with a memory balloon device, used to update the memory in the VM.
 func (x *VirtualMachineConfiguration) WithMemoryBalloonDevices(items ...MemoryBalloonDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v MemoryBalloonDeviceConfigurationProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMemoryBalloonDevices:"), _arr)
 	return x
 }
 
-// The array of network devices that you expose to the guest operating system.
-//
-// WithNetworkDevices sets the collection and returns the receiver so calls can be chained.
+// WithNetworkDevices the array of network devices that you expose to the guest operating system.
 func (x *VirtualMachineConfiguration) WithNetworkDevices(items ...NetworkDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v NetworkDeviceConfigurationProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkDevices:"), _arr)
 	return x
 }
 
-// The array of serial ports that you expose to the guest operating system.
-//
-// WithSerialPorts sets the collection and returns the receiver so calls can be chained.
+// WithSerialPorts the array of serial ports that you expose to the guest operating system.
 func (x *VirtualMachineConfiguration) WithSerialPorts(items ...SerialPortConfigurationProvider) *VirtualMachineConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v SerialPortConfigurationProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSerialPorts:"), _arr)
 	return x
 }
 
-// The socket device that you use to implement port-based communication with the guest operating system.
-//
-// WithSocketDevices sets the collection and returns the receiver so calls can be chained.
+// WithSocketDevices the socket device that you use to implement port-based communication with the guest operating system.
 func (x *VirtualMachineConfiguration) WithSocketDevices(items ...SocketDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v SocketDeviceConfigurationProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSocketDevices:"), _arr)
 	return x
 }
 
-// The array of storage devices that you expose to the guest operating system.
-//
-// WithStorageDevices sets the collection and returns the receiver so calls can be chained.
+// WithStorageDevices the array of storage devices that you expose to the guest operating system.
 func (x *VirtualMachineConfiguration) WithStorageDevices(items ...StorageDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v StorageDeviceConfigurationProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStorageDevices:"), _arr)
 	return x
 }
 
-// The list of keyboards.
-//
-// WithKeyboards sets the collection and returns the receiver so calls can be chained.
+// WithKeyboards the list of keyboards.
 func (x *VirtualMachineConfiguration) WithKeyboards(items ...KeyboardConfigurationProvider) *VirtualMachineConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v KeyboardConfigurationProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyboards:"), _arr)
 	return x
 }
 
-// The list of pointing devices.
-//
-// WithPointingDevices sets the collection and returns the receiver so calls can be chained.
+// WithPointingDevices the list of pointing devices.
 func (x *VirtualMachineConfiguration) WithPointingDevices(items ...PointingDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v PointingDeviceConfigurationProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointingDevices:"), _arr)
 	return x
 }
 
-// The list of graphics devices.
-//
-// WithGraphicsDevices sets the collection and returns the receiver so calls can be chained.
+// WithGraphicsDevices the list of graphics devices.
 func (x *VirtualMachineConfiguration) WithGraphicsDevices(items ...GraphicsDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v GraphicsDeviceConfigurationProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGraphicsDevices:"), _arr)
 	return x
 }
 
-// The list of configured USB controllers for the VM.
-//
-// WithUsbControllers sets the collection and returns the receiver so calls can be chained.
+// WithUsbControllers the list of configured USB controllers for the VM.
 func (x *VirtualMachineConfiguration) WithUsbControllers(items ...USBControllerConfigurationProvider) *VirtualMachineConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v USBControllerConfigurationProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsbControllers:"), _arr)
 	return x
 }
 
-// Boot loader used when the virtual machine starts.
+// BootLoader boot loader used when the virtual machine starts.
 func (x *VirtualMachineConfiguration) BootLoader() *BootLoader {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bootLoader"))
 	return BootLoaderFromID(_r)
 }
 
+// SetBootLoader wraps the corresponding Objective-C method.
 func (x *VirtualMachineConfiguration) SetBootLoader(bootLoader *BootLoader) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBootLoader:"), objref.IDOf(bootLoader))
 }
 
-// Virtual machine memory size in bytes. The memory size must be a multiple of a 1 megabyte (1024 * 1024 bytes) between VZVirtualMachineConfiguration.minimumAllowedMemorySize and VZVirtualMachineConfiguration.maximumAllowedMemorySize. The memorySize represents the total physical memory seen by a guest OS running in the virtual machine. Not all memory is allocated on start, the virtual machine allocates memory on demand.
+// MemorySize virtual machine memory size in bytes. The memory size must be a multiple of a 1 megabyte (1024 * 1024 bytes) between VZVirtualMachineConfiguration.minimumAllowedMemorySize and VZVirtualMachineConfiguration.maximumAllowedMemorySize. The memorySize represents the total physical memory seen by a guest OS running in the virtual machine. Not all memory is allocated on start, the virtual machine allocates memory on demand.
 func (x *VirtualMachineConfiguration) MemorySize() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("memorySize"))
 	return _r
 }
 
+// SetMemorySize wraps the corresponding Objective-C method.
 func (x *VirtualMachineConfiguration) SetMemorySize(memorySize uint64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMemorySize:"), memorySize)
 }
 
-// Number of CPUs. The number of CPUs must be a value between VZVirtualMachineConfiguration.minimumAllowedCPUCount and VZVirtualMachineConfiguration.maximumAllowedCPUCount.
+// CPUCount number of CPUs. The number of CPUs must be a value between VZVirtualMachineConfiguration.minimumAllowedCPUCount and VZVirtualMachineConfiguration.maximumAllowedCPUCount.
 func (x *VirtualMachineConfiguration) CPUCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("CPUCount"))
 	return _r
 }
 
+// SetCPUCount wraps the corresponding Objective-C method.
 func (x *VirtualMachineConfiguration) SetCPUCount(cPUCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCPUCount:"), cPUCount)
 }
 
-// The hardware platform to use. Can be an instance of a VZGenericPlatformConfiguration or VZMacPlatformConfiguration. Defaults to VZGenericPlatformConfiguration. When restoring from saved state you must ensure your configuration matches that of the saved virtual machine.
+// Platform the hardware platform to use. Can be an instance of a VZGenericPlatformConfiguration or VZMacPlatformConfiguration. Defaults to VZGenericPlatformConfiguration. When restoring from saved state you must ensure your configuration matches that of the saved virtual machine.
 func (x *VirtualMachineConfiguration) Platform() *PlatformConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("platform"))
 	return PlatformConfigurationFromID(_r)
 }
 
+// SetPlatform wraps the corresponding Objective-C method.
 func (x *VirtualMachineConfiguration) SetPlatform(platform *PlatformConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlatform:"), objref.IDOf(platform))
 }
 
-// List of audio devices. Empty by default.
+// AudioDevices list of audio devices. Empty by default.
 //
 // AudioDevices returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) AudioDevices() []*AudioDeviceConfiguration {
@@ -263,11 +241,12 @@ func (x *VirtualMachineConfiguration) AudioDevices() []*AudioDeviceConfiguration
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AudioDeviceConfiguration { return AudioDeviceConfigurationFromID(_id) })
 }
 
+// SetAudioDevices wraps the corresponding Objective-C method.
 func (x *VirtualMachineConfiguration) SetAudioDevices(audioDevices []*AudioDeviceConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioDevices:"), purego.SliceToNSArray(audioDevices, func(_v *AudioDeviceConfiguration) objc.ID { return objref.IDOf(_v) }))
 }
 
-// List of console devices. Empty by default.
+// ConsoleDevices list of console devices. Empty by default.
 //
 // ConsoleDevices returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) ConsoleDevices() []*ConsoleDeviceConfiguration {
@@ -275,11 +254,12 @@ func (x *VirtualMachineConfiguration) ConsoleDevices() []*ConsoleDeviceConfigura
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ConsoleDeviceConfiguration { return ConsoleDeviceConfigurationFromID(_id) })
 }
 
+// SetConsoleDevices wraps the corresponding Objective-C method.
 func (x *VirtualMachineConfiguration) SetConsoleDevices(consoleDevices []*ConsoleDeviceConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConsoleDevices:"), purego.SliceToNSArray(consoleDevices, func(_v *ConsoleDeviceConfiguration) objc.ID { return objref.IDOf(_v) }))
 }
 
-// List of directory sharing devices. Empty by default.
+// DirectorySharingDevices list of directory sharing devices. Empty by default.
 //
 // DirectorySharingDevices returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) DirectorySharingDevices() []*DirectorySharingDeviceConfiguration {
@@ -289,11 +269,12 @@ func (x *VirtualMachineConfiguration) DirectorySharingDevices() []*DirectoryShar
 	})
 }
 
+// SetDirectorySharingDevices wraps the corresponding Objective-C method.
 func (x *VirtualMachineConfiguration) SetDirectorySharingDevices(directorySharingDevices []*DirectorySharingDeviceConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirectorySharingDevices:"), purego.SliceToNSArray(directorySharingDevices, func(_v *DirectorySharingDeviceConfiguration) objc.ID { return objref.IDOf(_v) }))
 }
 
-// List of entropy devices. Empty by default.
+// EntropyDevices list of entropy devices. Empty by default.
 //
 // EntropyDevices returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) EntropyDevices() []*EntropyDeviceConfiguration {
@@ -301,11 +282,12 @@ func (x *VirtualMachineConfiguration) EntropyDevices() []*EntropyDeviceConfigura
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EntropyDeviceConfiguration { return EntropyDeviceConfigurationFromID(_id) })
 }
 
+// SetEntropyDevices wraps the corresponding Objective-C method.
 func (x *VirtualMachineConfiguration) SetEntropyDevices(entropyDevices []*EntropyDeviceConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntropyDevices:"), purego.SliceToNSArray(entropyDevices, func(_v *EntropyDeviceConfiguration) objc.ID { return objref.IDOf(_v) }))
 }
 
-// List of memory balloon devices. Empty by default.
+// MemoryBalloonDevices list of memory balloon devices. Empty by default.
 //
 // MemoryBalloonDevices returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) MemoryBalloonDevices() []*MemoryBalloonDeviceConfiguration {
@@ -315,11 +297,12 @@ func (x *VirtualMachineConfiguration) MemoryBalloonDevices() []*MemoryBalloonDev
 	})
 }
 
+// SetMemoryBalloonDevices wraps the corresponding Objective-C method.
 func (x *VirtualMachineConfiguration) SetMemoryBalloonDevices(memoryBalloonDevices []*MemoryBalloonDeviceConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMemoryBalloonDevices:"), purego.SliceToNSArray(memoryBalloonDevices, func(_v *MemoryBalloonDeviceConfiguration) objc.ID { return objref.IDOf(_v) }))
 }
 
-// List of network adapters. Empty by default.
+// NetworkDevices list of network adapters. Empty by default.
 //
 // NetworkDevices returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) NetworkDevices() []*NetworkDeviceConfiguration {
@@ -327,11 +310,12 @@ func (x *VirtualMachineConfiguration) NetworkDevices() []*NetworkDeviceConfigura
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NetworkDeviceConfiguration { return NetworkDeviceConfigurationFromID(_id) })
 }
 
+// SetNetworkDevices wraps the corresponding Objective-C method.
 func (x *VirtualMachineConfiguration) SetNetworkDevices(networkDevices []*NetworkDeviceConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkDevices:"), purego.SliceToNSArray(networkDevices, func(_v *NetworkDeviceConfiguration) objc.ID { return objref.IDOf(_v) }))
 }
 
-// List of serial ports. Empty by default.
+// SerialPorts list of serial ports. Empty by default.
 //
 // SerialPorts returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) SerialPorts() []*SerialPortConfiguration {
@@ -339,11 +323,12 @@ func (x *VirtualMachineConfiguration) SerialPorts() []*SerialPortConfiguration {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SerialPortConfiguration { return SerialPortConfigurationFromID(_id) })
 }
 
+// SetSerialPorts wraps the corresponding Objective-C method.
 func (x *VirtualMachineConfiguration) SetSerialPorts(serialPorts []*SerialPortConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSerialPorts:"), purego.SliceToNSArray(serialPorts, func(_v *SerialPortConfiguration) objc.ID { return objref.IDOf(_v) }))
 }
 
-// List of socket devices. Empty by default.
+// SocketDevices list of socket devices. Empty by default.
 //
 // SocketDevices returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) SocketDevices() []*SocketDeviceConfiguration {
@@ -351,11 +336,12 @@ func (x *VirtualMachineConfiguration) SocketDevices() []*SocketDeviceConfigurati
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SocketDeviceConfiguration { return SocketDeviceConfigurationFromID(_id) })
 }
 
+// SetSocketDevices wraps the corresponding Objective-C method.
 func (x *VirtualMachineConfiguration) SetSocketDevices(socketDevices []*SocketDeviceConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSocketDevices:"), purego.SliceToNSArray(socketDevices, func(_v *SocketDeviceConfiguration) objc.ID { return objref.IDOf(_v) }))
 }
 
-// List of disk devices. Empty by default.
+// StorageDevices list of disk devices. Empty by default.
 //
 // StorageDevices returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) StorageDevices() []*StorageDeviceConfiguration {
@@ -363,11 +349,12 @@ func (x *VirtualMachineConfiguration) StorageDevices() []*StorageDeviceConfigura
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *StorageDeviceConfiguration { return StorageDeviceConfigurationFromID(_id) })
 }
 
+// SetStorageDevices wraps the corresponding Objective-C method.
 func (x *VirtualMachineConfiguration) SetStorageDevices(storageDevices []*StorageDeviceConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStorageDevices:"), purego.SliceToNSArray(storageDevices, func(_v *StorageDeviceConfiguration) objc.ID { return objref.IDOf(_v) }))
 }
 
-// List of keyboards. Empty by default.
+// Keyboards list of keyboards. Empty by default.
 //
 // Keyboards returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) Keyboards() []*KeyboardConfiguration {
@@ -375,11 +362,12 @@ func (x *VirtualMachineConfiguration) Keyboards() []*KeyboardConfiguration {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *KeyboardConfiguration { return KeyboardConfigurationFromID(_id) })
 }
 
+// SetKeyboards wraps the corresponding Objective-C method.
 func (x *VirtualMachineConfiguration) SetKeyboards(keyboards []*KeyboardConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyboards:"), purego.SliceToNSArray(keyboards, func(_v *KeyboardConfiguration) objc.ID { return objref.IDOf(_v) }))
 }
 
-// List of pointing devices. Empty by default.
+// PointingDevices list of pointing devices. Empty by default.
 //
 // PointingDevices returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) PointingDevices() []*PointingDeviceConfiguration {
@@ -387,11 +375,12 @@ func (x *VirtualMachineConfiguration) PointingDevices() []*PointingDeviceConfigu
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PointingDeviceConfiguration { return PointingDeviceConfigurationFromID(_id) })
 }
 
+// SetPointingDevices wraps the corresponding Objective-C method.
 func (x *VirtualMachineConfiguration) SetPointingDevices(pointingDevices []*PointingDeviceConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointingDevices:"), purego.SliceToNSArray(pointingDevices, func(_v *PointingDeviceConfiguration) objc.ID { return objref.IDOf(_v) }))
 }
 
-// List of graphics devices. Empty by default.
+// GraphicsDevices list of graphics devices. Empty by default.
 //
 // GraphicsDevices returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) GraphicsDevices() []*GraphicsDeviceConfiguration {
@@ -399,11 +388,12 @@ func (x *VirtualMachineConfiguration) GraphicsDevices() []*GraphicsDeviceConfigu
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphicsDeviceConfiguration { return GraphicsDeviceConfigurationFromID(_id) })
 }
 
+// SetGraphicsDevices wraps the corresponding Objective-C method.
 func (x *VirtualMachineConfiguration) SetGraphicsDevices(graphicsDevices []*GraphicsDeviceConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGraphicsDevices:"), purego.SliceToNSArray(graphicsDevices, func(_v *GraphicsDeviceConfiguration) objc.ID { return objref.IDOf(_v) }))
 }
 
-// List of USB Controllers. Empty by default. This list represents a set of USB controllers that the virtual machine will start with. For each entry in this list, there will be a corresponding runtime object created in VZVirtualMachine.usbControllers property.
+// UsbControllers list of USB Controllers. Empty by default. This list represents a set of USB controllers that the virtual machine will start with. For each entry in this list, there will be a corresponding runtime object created in VZVirtualMachine.usbControllers property.
 //
 // UsbControllers returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) UsbControllers() []*USBControllerConfiguration {
@@ -411,11 +401,12 @@ func (x *VirtualMachineConfiguration) UsbControllers() []*USBControllerConfigura
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *USBControllerConfiguration { return USBControllerConfigurationFromID(_id) })
 }
 
+// SetUsbControllers wraps the corresponding Objective-C method.
 func (x *VirtualMachineConfiguration) SetUsbControllers(usbControllers []*USBControllerConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsbControllers:"), purego.SliceToNSArray(usbControllers, func(_v *USBControllerConfiguration) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Validates the current configuration settings and reports any issues that might prevent the successful initialization of the VM.
+// Validate validates the current configuration settings and reports any issues that might prevent the successful initialization of the VM.
 //
 // Validate returns an error if the operation did not succeed.
 func (x *VirtualMachineConfiguration) Validate() error {
@@ -427,7 +418,7 @@ func (x *VirtualMachineConfiguration) Validate() error {
 	return nil
 }
 
-// Determines whether the framework can save or restore the VM’s current configuration.
+// ValidateSaveRestoreSupport determines whether the framework can save or restore the VM’s current configuration.
 //
 // ValidateSaveRestoreSupport returns an error if the operation did not succeed.
 func (x *VirtualMachineConfiguration) ValidateSaveRestoreSupport() error {

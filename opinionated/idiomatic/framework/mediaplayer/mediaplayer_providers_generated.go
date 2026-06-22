@@ -11,9 +11,11 @@ import (
 // RemoteCommandProvider is accepted wherever a MPRemoteCommand (or one of its subclasses) is expected.
 type RemoteCommandProvider interface {
 	objref.Object
+	isRemoteCommand()
 }
 
 // RemoteCommandEventProvider is accepted wherever a MPRemoteCommandEvent (or one of its subclasses) is expected.
 type RemoteCommandEventProvider interface {
 	objref.Object
+	isRemoteCommandEvent()
 }

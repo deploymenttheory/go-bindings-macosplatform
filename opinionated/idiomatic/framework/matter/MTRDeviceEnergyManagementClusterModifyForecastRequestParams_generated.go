@@ -23,7 +23,8 @@ func MTRDeviceEnergyManagementClusterModifyForecastRequestParamsFromID(id objc.I
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceEnergyManagementClusterModifyForecastRequestParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDeviceEnergyManagementClusterModifyForecastRequestParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDeviceEnergyManagementClusterModifyForecastRequestParamsAdopt(id objc.ID
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceEnergyManagementClusterModifyForecastRequestParams{Handle: objref.Wrap(id)}
+	x := &MTRDeviceEnergyManagementClusterModifyForecastRequestParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,83 +58,93 @@ func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) IsKind(cla
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDeviceEnergyManagementClusterModifyForecastRequestParams creates a new MTRDeviceEnergyManagementClusterModifyForecastRequestParams.
 func NewMTRDeviceEnergyManagementClusterModifyForecastRequestParams() *MTRDeviceEnergyManagementClusterModifyForecastRequestParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceEnergyManagementClusterModifyForecastRequestParams")), objc.RegisterName("new"))
 	return mTRDeviceEnergyManagementClusterModifyForecastRequestParamsAdopt(_id)
 }
 
-// WithForecastID sets forecastID and returns the receiver so calls can be chained.
+// WithForecastID sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) WithForecastID(forecastID obj.Object) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForecastID:"), objref.IDOf(forecastID))
 	return x
 }
 
-// WithCause sets cause and returns the receiver so calls can be chained.
+// WithCause sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke).
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
 func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
 func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// ForecastID wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) ForecastID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("forecastID"))
 	return obj.Wrap(_r)
 }
 
+// SetForecastID wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SetForecastID(forecastID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForecastID:"), objref.IDOf(forecastID))
 }
 
+// SlotAdjustments wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SlotAdjustments() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("slotAdjustments"))
 	return obj.Wrap(_r)
 }
 
+// SetSlotAdjustments wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SetSlotAdjustments(slotAdjustments obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSlotAdjustments:"), objref.IDOf(slotAdjustments))
 }
 
+// Cause wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) Cause() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cause"))
 	return obj.Wrap(_r)
 }
 
+// SetCause wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SetCause(cause obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

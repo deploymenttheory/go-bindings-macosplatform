@@ -11,14 +11,17 @@ import (
 // BeaconIdentityConditionProvider is accepted wherever a CLBeaconIdentityCondition (or one of its subclasses) is expected.
 type BeaconIdentityConditionProvider interface {
 	objref.Object
+	isBeaconIdentityCondition()
 }
 
 // ConditionProvider is accepted wherever a CLCondition (or one of its subclasses) is expected.
 type ConditionProvider interface {
 	objref.Object
+	isCondition()
 }
 
 // RegionProvider is accepted wherever a CLRegion (or one of its subclasses) is expected.
 type RegionProvider interface {
 	objref.Object
+	isRegion()
 }

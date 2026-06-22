@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages policies to automatically purge downloaded assets.
-//
 // AssetDownloadStorageManager is an idiomatic wrapper over the Objective-C class AVAssetDownloadStorageManager.
+//
+// An object that manages policies to automatically purge downloaded assets.
 type AssetDownloadStorageManager struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetDownloadStorageManagerFromID(id objc.ID) *AssetDownloadStorageManager 
 	if id == 0 {
 		return nil
 	}
-	x := &AssetDownloadStorageManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetDownloadStorageManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetDownloadStorageManagerAdopt(id objc.ID) *AssetDownloadStorageManager {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetDownloadStorageManager{Handle: objref.Wrap(id)}
+	x := &AssetDownloadStorageManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +60,24 @@ func (x *AssetDownloadStorageManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetDownloadStorageManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetDownloadStorageManager creates a new AssetDownloadStorageManager.
 func NewAssetDownloadStorageManager() *AssetDownloadStorageManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetDownloadStorageManager")), objc.RegisterName("new"))
 	return assetDownloadStorageManagerAdopt(_id)
 }
 
-// Sets a storage policy for the downloaded asset.
+// SetStorageManagementPolicyForURL sets a storage policy for the downloaded asset.
 func (x *AssetDownloadStorageManager) SetStorageManagementPolicyForURL(storageManagementPolicy *AssetDownloadStorageManagementPolicy, downloadStorageURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStorageManagementPolicy:forURL:"), objref.IDOf(storageManagementPolicy), rt.FileURL(downloadStorageURL))
 }
 
-// Returns the storage management policy for a downloaded asset.
+// StorageManagementPolicyForURL returns the storage management policy for a downloaded asset.
 func (x *AssetDownloadStorageManager) StorageManagementPolicyForURL(downloadStorageURL string) *AssetDownloadStorageManagementPolicy {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("storageManagementPolicyForURL:"), rt.FileURL(downloadStorageURL))
 	return AssetDownloadStorageManagementPolicyFromID(_r)

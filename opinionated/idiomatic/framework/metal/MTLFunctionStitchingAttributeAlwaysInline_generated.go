@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An attribute to specify that Metal needs to inline all of the function calls when generating the stitched function.
-//
 // FunctionStitchingAttributeAlwaysInline is an idiomatic wrapper over the Objective-C class MTLFunctionStitchingAttributeAlwaysInline.
+//
+// An attribute to specify that Metal needs to inline all of the function calls when generating the stitched function.
 type FunctionStitchingAttributeAlwaysInline struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FunctionStitchingAttributeAlwaysInlineFromID(id objc.ID) *FunctionStitching
 	if id == 0 {
 		return nil
 	}
-	x := &FunctionStitchingAttributeAlwaysInline{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FunctionStitchingAttributeAlwaysInline{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func functionStitchingAttributeAlwaysInlineAdopt(id objc.ID) *FunctionStitchingA
 	if id == 0 {
 		return nil
 	}
-	x := &FunctionStitchingAttributeAlwaysInline{Handle: objref.Wrap(id)}
+	x := &FunctionStitchingAttributeAlwaysInline{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *FunctionStitchingAttributeAlwaysInline) IsEqual(other obj.Object) bool 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *FunctionStitchingAttributeAlwaysInline) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FunctionStitchingAttributeAlwaysInline) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewFunctionStitchingAttributeAlwaysInline creates a new FunctionStitchingAttributeAlwaysInline.

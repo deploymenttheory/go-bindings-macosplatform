@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The type of map item detail accessory presentation to use.
-//
 // MapItemDetailSelectionAccessoryPresentationStyle is an idiomatic wrapper over the Objective-C class MKMapItemDetailSelectionAccessoryPresentationStyle.
+//
+// The type of map item detail accessory presentation to use.
 type MapItemDetailSelectionAccessoryPresentationStyle struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MapItemDetailSelectionAccessoryPresentationStyleFromID(id objc.ID) *MapItem
 	if id == 0 {
 		return nil
 	}
-	x := &MapItemDetailSelectionAccessoryPresentationStyle{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MapItemDetailSelectionAccessoryPresentationStyle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mapItemDetailSelectionAccessoryPresentationStyleAdopt(id objc.ID) *MapItemD
 	if id == 0 {
 		return nil
 	}
-	x := &MapItemDetailSelectionAccessoryPresentationStyle{Handle: objref.Wrap(id)}
+	x := &MapItemDetailSelectionAccessoryPresentationStyle{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *MapItemDetailSelectionAccessoryPresentationStyle) IsEqual(other obj.Obj
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MapItemDetailSelectionAccessoryPresentationStyle) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MapItemDetailSelectionAccessoryPresentationStyle) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMapItemDetailSelectionAccessoryPresentationStyle creates a new MapItemDetailSelectionAccessoryPresentationStyle.

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The common configuration traits for entropy devices.
-//
 // EntropyDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZEntropyDeviceConfiguration.
+//
+// EntropyDeviceConfiguration is an abstract base — you do not construct it directly. Construct one of [VirtioEntropyDeviceConfiguration] and pass it where a EntropyDeviceConfiguration is accepted.
+//
+// The common configuration traits for entropy devices.
 type EntropyDeviceConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func EntropyDeviceConfigurationFromID(id objc.ID) *EntropyDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &EntropyDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EntropyDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func entropyDeviceConfigurationAdopt(id objc.ID) *EntropyDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &EntropyDeviceConfiguration{Handle: objref.Wrap(id)}
+	x := &EntropyDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *EntropyDeviceConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewEntropyDeviceConfiguration creates a new EntropyDeviceConfiguration.
-func NewEntropyDeviceConfiguration() *EntropyDeviceConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZEntropyDeviceConfiguration")), objc.RegisterName("new"))
-	return entropyDeviceConfigurationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *EntropyDeviceConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // EntropyDeviceConfigurationable is the interface implemented by [EntropyDeviceConfiguration], for mocking and DI.
@@ -70,3 +74,10 @@ type EntropyDeviceConfigurationable interface {
 }
 
 var _ EntropyDeviceConfigurationable = (*EntropyDeviceConfiguration)(nil)
+
+// isEntropyDeviceConfiguration marks EntropyDeviceConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the EntropyDeviceConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *EntropyDeviceConfiguration) isEntropyDeviceConfiguration() {}
+
+var _ EntropyDeviceConfigurationProvider = (*EntropyDeviceConfiguration)(nil)

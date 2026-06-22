@@ -11,9 +11,11 @@ import (
 // AssetInfoProvider is accepted wherever a CNAssetInfo (or one of its subclasses) is expected.
 type AssetInfoProvider interface {
 	objref.Object
+	isAssetInfo()
 }
 
 // DetectionTrackProvider is accepted wherever a CNDetectionTrack (or one of its subclasses) is expected.
 type DetectionTrackProvider interface {
 	objref.Object
+	isDetectionTrack()
 }

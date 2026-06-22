@@ -11,4 +11,5 @@ import (
 // SetupPanelProvider is accepted wherever a DRSetupPanel (or one of its subclasses) is expected.
 type SetupPanelProvider interface {
 	objref.Object
+	isSetupPanel()
 }

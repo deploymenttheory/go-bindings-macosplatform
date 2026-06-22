@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An encapsulation of the design-time view controller and window controller graph represented in an Interface Builder storyboard resource file.
-//
 // Storyboard is an idiomatic wrapper over the Objective-C class NSStoryboard.
+//
+// An encapsulation of the design-time view controller and window controller graph represented in an Interface Builder storyboard resource file.
 type Storyboard struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func StoryboardFromID(id objc.ID) *Storyboard {
 	if id == 0 {
 		return nil
 	}
-	x := &Storyboard{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Storyboard{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func storyboardAdopt(id objc.ID) *Storyboard {
 	if id == 0 {
 		return nil
 	}
-	x := &Storyboard{Handle: objref.Wrap(id)}
+	x := &Storyboard{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *Storyboard) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Storyboard) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewStoryboard creates a new Storyboard.
 func NewStoryboard() *Storyboard {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSStoryboard")), objc.RegisterName("new"))
 	return storyboardAdopt(_id)
 }
 
-// Creates the initial view controller or window controller from a storyboard.
+// InstantiateInitialController creates the initial view controller or window controller from a storyboard.
 func (x *Storyboard) InstantiateInitialController() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instantiateInitialController"))
 	return obj.Wrap(_r)
 }
 
-// Instantiates a specified view controller or window controller from a storyboard.
+// InstantiateControllerWithIdentifier instantiates a specified view controller or window controller from a storyboard.
 func (x *Storyboard) InstantiateControllerWithIdentifier(identifier obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instantiateControllerWithIdentifier:"), objref.IDOf(identifier))
 	return obj.Wrap(_r)

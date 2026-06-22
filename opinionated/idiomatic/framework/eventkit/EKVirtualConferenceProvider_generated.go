@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that associates virtual conferencing details with an event object in a user’s calendar.
-//
 // VirtualConferenceProvider is an idiomatic wrapper over the Objective-C class EKVirtualConferenceProvider.
+//
+// An object that associates virtual conferencing details with an event object in a user’s calendar.
 type VirtualConferenceProvider struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func VirtualConferenceProviderFromID(id objc.ID) *VirtualConferenceProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtualConferenceProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VirtualConferenceProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func virtualConferenceProviderAdopt(id objc.ID) *VirtualConferenceProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtualConferenceProvider{Handle: objref.Wrap(id)}
+	x := &VirtualConferenceProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,22 @@ func (x *VirtualConferenceProvider) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VirtualConferenceProvider) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVirtualConferenceProvider creates a new VirtualConferenceProvider.
 func NewVirtualConferenceProvider() *VirtualConferenceProvider {
 	_id := objc.Send[objc.ID](objc.ID(_class("EKVirtualConferenceProvider")), objc.RegisterName("new"))
 	return virtualConferenceProviderAdopt(_id)
 }
 
-// Provides an array of room types where events take place.
+// FetchAvailableRoomTypes provides an array of room types where events take place.
 //
 // FetchAvailableRoomTypes blocks until the operation completes or ctx is cancelled.
-func (x *VirtualConferenceProvider) FetchAvailableRoomTypes(ctx context.Context) (obj.Object, error) {
+func (x *VirtualConferenceProvider) FetchAvailableRoomTypes(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -91,10 +99,10 @@ func (x *VirtualConferenceProvider) FetchAvailableRoomTypes(ctx context.Context)
 	}
 }
 
-// Provides details about a virtual conference that takes place in a room the user selects.
+// FetchVirtualConferenceForIdentifier provides details about a virtual conference that takes place in a room the user selects.
 //
 // FetchVirtualConferenceForIdentifier blocks until the operation completes or ctx is cancelled.
-func (x *VirtualConferenceProvider) FetchVirtualConferenceForIdentifier(ctx context.Context, identifier obj.Object) (*VirtualConferenceDescriptor, error) {
+func (x *VirtualConferenceProvider) FetchVirtualConferenceForIdentifier(ctx context.Context, identifier obj.Object) (result *VirtualConferenceDescriptor, err error) {
 	type _result struct {
 		val *VirtualConferenceDescriptor
 		err error

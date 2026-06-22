@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The sound played upon delivery of a notification.
-//
 // NotificationSound is an idiomatic wrapper over the Objective-C class UNNotificationSound.
+//
+// The sound played upon delivery of a notification.
 type NotificationSound struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NotificationSoundFromID(id objc.ID) *NotificationSound {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationSound{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NotificationSound{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func notificationSoundAdopt(id objc.ID) *NotificationSound {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationSound{Handle: objref.Wrap(id)}
+	x := &NotificationSound{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *NotificationSound) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *NotificationSound) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationSound) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewNotificationSound creates a new NotificationSound.

@@ -25,6 +25,8 @@ const (
 	PGResumeErrorCodeInvalidDisplayPortCount PGResumeErrorCode = 5
 )
 
+// String returns the PGResumeErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PGResumeErrorCode) String() string {
 	switch e {
 	case PGResumeErrorCodeInternalFault:

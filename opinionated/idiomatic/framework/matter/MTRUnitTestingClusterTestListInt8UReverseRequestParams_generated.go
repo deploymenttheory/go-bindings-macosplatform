@@ -13,6 +13,8 @@ import (
 )
 
 // MTRUnitTestingClusterTestListInt8UReverseRequestParams is an idiomatic wrapper over the Objective-C class MTRUnitTestingClusterTestListInt8UReverseRequestParams.
+//
+// MTRUnitTestingClusterTestListInt8UReverseRequestParams is an abstract base — you do not construct it directly. Construct one of [MTRTestClusterClusterTestListInt8UReverseRequestParams] and pass it where a MTRUnitTestingClusterTestListInt8UReverseRequestParams is accepted.
 type MTRUnitTestingClusterTestListInt8UReverseRequestParams struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRUnitTestingClusterTestListInt8UReverseRequestParamsFromID(id objc.ID) *M
 	if id == 0 {
 		return nil
 	}
-	x := &MTRUnitTestingClusterTestListInt8UReverseRequestParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRUnitTestingClusterTestListInt8UReverseRequestParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRUnitTestingClusterTestListInt8UReverseRequestParamsAdopt(id objc.ID) *MT
 	if id == 0 {
 		return nil
 	}
-	x := &MTRUnitTestingClusterTestListInt8UReverseRequestParams{Handle: objref.Wrap(id)}
+	x := &MTRUnitTestingClusterTestListInt8UReverseRequestParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,53 +60,53 @@ func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) IsKind(classNam
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRUnitTestingClusterTestListInt8UReverseRequestParams creates a new MTRUnitTestingClusterTestListInt8UReverseRequestParams.
-func NewMTRUnitTestingClusterTestListInt8UReverseRequestParams() *MTRUnitTestingClusterTestListInt8UReverseRequestParams {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRUnitTestingClusterTestListInt8UReverseRequestParams")), objc.RegisterName("new"))
-	return mTRUnitTestingClusterTestListInt8UReverseRequestParamsAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestListInt8UReverseRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterTestListInt8UReverseRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// Arg1 wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) Arg1() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arg1"))
 	return obj.Wrap(_r)
 }
 
+// SetArg1 wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) SetArg1(arg1 obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
@@ -121,3 +125,11 @@ type MTRUnitTestingClusterTestListInt8UReverseRequestParamsable interface {
 }
 
 var _ MTRUnitTestingClusterTestListInt8UReverseRequestParamsable = (*MTRUnitTestingClusterTestListInt8UReverseRequestParams)(nil)
+
+// isMTRUnitTestingClusterTestListInt8UReverseRequestParams marks MTRUnitTestingClusterTestListInt8UReverseRequestParams — and, by embedding promotion, its
+// subclasses — as a member of the MTRUnitTestingClusterTestListInt8UReverseRequestParams hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) isMTRUnitTestingClusterTestListInt8UReverseRequestParams() {
+}
+
+var _ MTRUnitTestingClusterTestListInt8UReverseRequestParamsProvider = (*MTRUnitTestingClusterTestListInt8UReverseRequestParams)(nil)

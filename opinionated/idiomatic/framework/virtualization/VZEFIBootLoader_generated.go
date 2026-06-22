@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The boot loader configuration the system uses to boot guest-operating systems that expect an Extensible Firmware Interface (EFI) ROM.
-//
 // EFIBootLoader is an idiomatic wrapper over the Objective-C class VZEFIBootLoader.
+//
+// It embeds [BootLoader], promoting that type's methods.
+//
+// The boot loader configuration the system uses to boot guest-operating systems that expect an Extensible Firmware Interface (EFI) ROM.
 type EFIBootLoader struct {
-	objref.Handle
+	BootLoader
 }
 
 // EFIBootLoaderFromID adopts an existing Objective-C object as a EFIBootLoader
@@ -25,7 +26,8 @@ func EFIBootLoaderFromID(id objc.ID) *EFIBootLoader {
 	if id == 0 {
 		return nil
 	}
-	x := &EFIBootLoader{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EFIBootLoader{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func eFIBootLoaderAdopt(id objc.ID) *EFIBootLoader {
 	if id == 0 {
 		return nil
 	}
-	x := &EFIBootLoader{Handle: objref.Wrap(id)}
+	x := &EFIBootLoader{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *EFIBootLoader) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EFIBootLoader) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EFIBootLoader) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewEFIBootLoader creates a new EFIBootLoader.
@@ -64,19 +52,19 @@ func NewEFIBootLoader() *EFIBootLoader {
 	return eFIBootLoaderAdopt(_id)
 }
 
-// The boot loader’s EFI variable store.
-//
-// WithVariableStore sets variableStore and returns the receiver so calls can be chained.
+// WithVariableStore the boot loader’s EFI variable store.
 func (x *EFIBootLoader) WithVariableStore(variableStore *EFIVariableStore) *EFIBootLoader {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariableStore:"), objref.IDOf(variableStore))
 	return x
 }
 
+// VariableStore wraps the corresponding Objective-C method.
 func (x *EFIBootLoader) VariableStore() *EFIVariableStore {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variableStore"))
 	return EFIVariableStoreFromID(_r)
 }
 
+// SetVariableStore wraps the corresponding Objective-C method.
 func (x *EFIBootLoader) SetVariableStore(variableStore *EFIVariableStore) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariableStore:"), objref.IDOf(variableStore))
 }
@@ -90,3 +78,5 @@ type EFIBootLoaderable interface {
 }
 
 var _ EFIBootLoaderable = (*EFIBootLoader)(nil)
+
+var _ BootLoaderProvider = (*EFIBootLoader)(nil)

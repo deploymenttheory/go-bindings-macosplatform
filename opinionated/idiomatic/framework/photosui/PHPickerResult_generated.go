@@ -23,7 +23,8 @@ func PickerResultFromID(id objc.ID) *PickerResult {
 	if id == 0 {
 		return nil
 	}
-	x := &PickerResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PickerResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func pickerResultAdopt(id objc.ID) *PickerResult {
 	if id == 0 {
 		return nil
 	}
-	x := &PickerResult{Handle: objref.Wrap(id)}
+	x := &PickerResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,19 +58,25 @@ func (x *PickerResult) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PickerResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPickerResult creates a new PickerResult.
 func NewPickerResult() *PickerResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHPickerResult")), objc.RegisterName("new"))
 	return pickerResultAdopt(_id)
 }
 
-// Representations of the selected asset.
+// ItemProvider representations of the selected asset.
 func (x *PickerResult) ItemProvider() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemProvider"))
 	return obj.Wrap(_r)
 }
 
-// The local identifier of the selected asset.
+// AssetIdentifier the local identifier of the selected asset.
 func (x *PickerResult) AssetIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetIdentifier"))
 	if _r == 0 {

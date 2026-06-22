@@ -23,7 +23,8 @@ func MTRWaterHeaterManagementClusterBoostEndedEventFromID(id objc.ID) *MTRWaterH
 	if id == 0 {
 		return nil
 	}
-	x := &MTRWaterHeaterManagementClusterBoostEndedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRWaterHeaterManagementClusterBoostEndedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRWaterHeaterManagementClusterBoostEndedEventAdopt(id objc.ID) *MTRWaterHe
 	if id == 0 {
 		return nil
 	}
-	x := &MTRWaterHeaterManagementClusterBoostEndedEvent{Handle: objref.Wrap(id)}
+	x := &MTRWaterHeaterManagementClusterBoostEndedEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *MTRWaterHeaterManagementClusterBoostEndedEvent) IsEqual(other obj.Objec
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MTRWaterHeaterManagementClusterBoostEndedEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRWaterHeaterManagementClusterBoostEndedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMTRWaterHeaterManagementClusterBoostEndedEvent creates a new MTRWaterHeaterManagementClusterBoostEndedEvent.

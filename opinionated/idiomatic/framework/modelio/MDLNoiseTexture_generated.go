@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A generator of texel data that creates a field of random noise.
-//
 // NoiseTexture is an idiomatic wrapper over the Objective-C class MDLNoiseTexture.
+//
+// It embeds [Texture], promoting that type's methods.
+//
+// A generator of texel data that creates a field of random noise.
 type NoiseTexture struct {
-	objref.Handle
+	Texture
 }
 
 // NoiseTextureFromID adopts an existing Objective-C object as a NoiseTexture
@@ -25,7 +26,8 @@ func NoiseTextureFromID(id objc.ID) *NoiseTexture {
 	if id == 0 {
 		return nil
 	}
-	x := &NoiseTexture{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NoiseTexture{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func noiseTextureAdopt(id objc.ID) *NoiseTexture {
 	if id == 0 {
 		return nil
 	}
-	x := &NoiseTexture{Handle: objref.Wrap(id)}
+	x := &NoiseTexture{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NoiseTexture) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NoiseTexture) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NoiseTexture) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNoiseTexture creates a new NoiseTexture.
@@ -64,17 +52,13 @@ func NewNoiseTexture() *NoiseTexture {
 	return noiseTextureAdopt(_id)
 }
 
-// A Boolean value that indicates whether the texture is a cube textures.
-//
-// WithIsCube sets isCube and returns the receiver so calls can be chained.
+// WithIsCube a Boolean value that indicates whether the texture is a cube textures.
 func (x *NoiseTexture) WithIsCube(isCube bool) *NoiseTexture {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsCube:"), isCube)
 	return x
 }
 
-// hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
-//
-// WithHasAlphaValues sets hasAlphaValues and returns the receiver so calls can be chained.
+// WithHasAlphaValues hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
 func (x *NoiseTexture) WithHasAlphaValues(hasAlphaValues bool) *NoiseTexture {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasAlphaValues:"), hasAlphaValues)
 	return x
@@ -88,3 +72,5 @@ type NoiseTextureable interface {
 }
 
 var _ NoiseTextureable = (*NoiseTexture)(nil)
+
+var _ TextureProvider = (*NoiseTexture)(nil)

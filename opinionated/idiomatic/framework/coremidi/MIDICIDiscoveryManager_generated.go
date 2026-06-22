@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A singleton object that performs systemwide MIDI-CI discovery.
-//
 // CIDiscoveryManager is an idiomatic wrapper over the Objective-C class MIDICIDiscoveryManager.
+//
+// A singleton object that performs systemwide MIDI-CI discovery.
 type CIDiscoveryManager struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CIDiscoveryManagerFromID(id objc.ID) *CIDiscoveryManager {
 	if id == 0 {
 		return nil
 	}
-	x := &CIDiscoveryManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CIDiscoveryManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func cIDiscoveryManagerAdopt(id objc.ID) *CIDiscoveryManager {
 	if id == 0 {
 		return nil
 	}
-	x := &CIDiscoveryManager{Handle: objref.Wrap(id)}
+	x := &CIDiscoveryManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *CIDiscoveryManager) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *CIDiscoveryManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CIDiscoveryManager) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewCIDiscoveryManager creates a new CIDiscoveryManager.

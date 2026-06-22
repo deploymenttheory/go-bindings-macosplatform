@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A Core Animation layer that derives its timing from a player item so that you can synchronize layer animations with media playback.
-//
 // SynchronizedLayer is an idiomatic wrapper over the Objective-C class AVSynchronizedLayer.
+//
+// A Core Animation layer that derives its timing from a player item so that you can synchronize layer animations with media playback.
 type SynchronizedLayer struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SynchronizedLayerFromID(id objc.ID) *SynchronizedLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &SynchronizedLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SynchronizedLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func synchronizedLayerAdopt(id objc.ID) *SynchronizedLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &SynchronizedLayer{Handle: objref.Wrap(id)}
+	x := &SynchronizedLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *SynchronizedLayer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SynchronizedLayer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSynchronizedLayer creates a new SynchronizedLayer.
 func NewSynchronizedLayer() *SynchronizedLayer {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVSynchronizedLayer")), objc.RegisterName("new"))
 	return synchronizedLayerAdopt(_id)
 }
 
-// The player item to which the timing of the layer is synchronized.
-//
-// WithPlayerItem sets playerItem and returns the receiver so calls can be chained.
+// WithPlayerItem the player item to which the timing of the layer is synchronized.
 func (x *SynchronizedLayer) WithPlayerItem(playerItem *PlayerItem) *SynchronizedLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayerItem:"), objref.IDOf(playerItem))
 	return x
 }
 
+// PlayerItem wraps the corresponding Objective-C method.
 func (x *SynchronizedLayer) PlayerItem() *PlayerItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerItem"))
 	return PlayerItemFromID(_r)
 }
 
+// SetPlayerItem wraps the corresponding Objective-C method.
 func (x *SynchronizedLayer) SetPlayerItem(playerItem *PlayerItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayerItem:"), objref.IDOf(playerItem))
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The GKTurnBasedEventHandler class is used to respond to important messages related to turn-based matches. To use it, call the sharedTurnBasedEventHandler class method to get the singleton instance and assign an object that implements the GKTurnBasedEventHandlerDelegate protocol to its delegate property. All methods are called on the main thread.
-//
 // TurnBasedEventHandler is an idiomatic wrapper over the Objective-C class GKTurnBasedEventHandler.
+//
+// The GKTurnBasedEventHandler class is used to respond to important messages related to turn-based matches. To use it, call the sharedTurnBasedEventHandler class method to get the singleton instance and assign an object that implements the GKTurnBasedEventHandlerDelegate protocol to its delegate property. All methods are called on the main thread.
 type TurnBasedEventHandler struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TurnBasedEventHandlerFromID(id objc.ID) *TurnBasedEventHandler {
 	if id == 0 {
 		return nil
 	}
-	x := &TurnBasedEventHandler{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TurnBasedEventHandler{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func turnBasedEventHandlerAdopt(id objc.ID) *TurnBasedEventHandler {
 	if id == 0 {
 		return nil
 	}
-	x := &TurnBasedEventHandler{Handle: objref.Wrap(id)}
+	x := &TurnBasedEventHandler{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *TurnBasedEventHandler) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TurnBasedEventHandler) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTurnBasedEventHandler creates a new TurnBasedEventHandler.
 func NewTurnBasedEventHandler() *TurnBasedEventHandler {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKTurnBasedEventHandler")), objc.RegisterName("new"))
 	return turnBasedEventHandlerAdopt(_id)
 }
 
-// The delegate for the event handler.
-//
-// WithDelegate sets delegate and returns the receiver so calls can be chained.
+// WithDelegate the delegate for the event handler.
 func (x *TurnBasedEventHandler) WithDelegate(delegate obj.Object) *TurnBasedEventHandler {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return x
 }
 
+// Delegate wraps the corresponding Objective-C method.
 func (x *TurnBasedEventHandler) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
+// SetDelegate wraps the corresponding Objective-C method.
 func (x *TurnBasedEventHandler) SetDelegate(delegate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }

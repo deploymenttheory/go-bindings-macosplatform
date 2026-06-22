@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents MIDI meta event messages.
-//
 // MIDIMetaEvent is an idiomatic wrapper over the Objective-C class AVMIDIMetaEvent.
+//
+// It embeds [MusicEvent], promoting that type's methods.
+//
+// An object that represents MIDI meta event messages.
 type MIDIMetaEvent struct {
-	objref.Handle
+	MusicEvent
 }
 
 // MIDIMetaEventFromID adopts an existing Objective-C object as a MIDIMetaEvent
@@ -25,7 +26,8 @@ func MIDIMetaEventFromID(id objc.ID) *MIDIMetaEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MIDIMetaEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MIDIMetaEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,35 +40,20 @@ func mIDIMetaEventAdopt(id objc.ID) *MIDIMetaEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MIDIMetaEvent{Handle: objref.Wrap(id)}
+	x := &MIDIMetaEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MIDIMetaEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MIDIMetaEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MIDIMetaEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates an event with a MIDI meta event type and data.
-//
-// NewMIDIMetaEventWithTypeData creates a new MIDIMetaEvent.
+// NewMIDIMetaEventWithTypeData creates an event with a MIDI meta event type and data.
 func NewMIDIMetaEventWithTypeData(type_ MIDIMetaEventType, data obj.Object) *MIDIMetaEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMIDIMetaEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:data:"), type_, objref.IDOf(data))
 	return mIDIMetaEventAdopt(_id)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *MIDIMetaEvent) Type() MIDIMetaEventType {
 	_r := objc.Send[MIDIMetaEventType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
@@ -79,3 +66,5 @@ type MIDIMetaEventable interface {
 }
 
 var _ MIDIMetaEventable = (*MIDIMetaEvent)(nil)
+
+var _ MusicEventProvider = (*MIDIMetaEvent)(nil)

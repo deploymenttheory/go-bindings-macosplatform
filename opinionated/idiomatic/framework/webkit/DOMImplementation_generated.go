@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMImplementation is an idiomatic wrapper over the Objective-C class DOMImplementation.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMImplementation struct {
-	objref.Handle
+	DOMObject
 }
 
 // DOMImplementationFromID adopts an existing Objective-C object as a DOMImplementation
@@ -23,7 +24,8 @@ func DOMImplementationFromID(id objc.ID) *DOMImplementation {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMImplementation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMImplementation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMImplementationAdopt(id objc.ID) *DOMImplementation {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMImplementation{Handle: objref.Wrap(id)}
+	x := &DOMImplementation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMImplementation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMImplementation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMImplementation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMImplementation creates a new DOMImplementation.
@@ -62,46 +50,55 @@ func NewDOMImplementation() *DOMImplementation {
 	return dOMImplementationAdopt(_id)
 }
 
+// HasFeatureVersion wraps the corresponding Objective-C method.
 func (x *DOMImplementation) HasFeatureVersion(feature string, version string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasFeature:version:"), purego.NSString(feature), purego.NSString(version))
 	return _r
 }
 
+// CreateDocumentTypePublicIdSystemId wraps the corresponding Objective-C method.
 func (x *DOMImplementation) CreateDocumentTypePublicIdSystemId(qualifiedName string, publicId string, systemId string) *DOMDocumentType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createDocumentType:publicId:systemId:"), purego.NSString(qualifiedName), purego.NSString(publicId), purego.NSString(systemId))
 	return DOMDocumentTypeFromID(_r)
 }
 
+// CreateDocumentQualifiedNameDoctype wraps the corresponding Objective-C method.
 func (x *DOMImplementation) CreateDocumentQualifiedNameDoctype(namespaceURI string, qualifiedName string, doctype *DOMDocumentType) *DOMDocument {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createDocument:qualifiedName:doctype:"), purego.NSString(namespaceURI), purego.NSString(qualifiedName), objref.IDOf(doctype))
 	return DOMDocumentFromID(_r)
 }
 
+// CreateCSSStyleSheetMedia wraps the corresponding Objective-C method.
 func (x *DOMImplementation) CreateCSSStyleSheetMedia(title string, media string) *DOMCSSStyleSheet {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createCSSStyleSheet:media:"), purego.NSString(title), purego.NSString(media))
 	return DOMCSSStyleSheetFromID(_r)
 }
 
+// CreateHTMLDocument wraps the corresponding Objective-C method.
 func (x *DOMImplementation) CreateHTMLDocument(title string) *DOMHTMLDocument {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createHTMLDocument:"), purego.NSString(title))
 	return DOMHTMLDocumentFromID(_r)
 }
 
+// HasFeature wraps the corresponding Objective-C method.
 func (x *DOMImplementation) HasFeature(feature string, version string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasFeature::"), purego.NSString(feature), purego.NSString(version))
 	return _r
 }
 
+// CreateDocumentType wraps the corresponding Objective-C method.
 func (x *DOMImplementation) CreateDocumentType(qualifiedName string, publicId string, systemId string) *DOMDocumentType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createDocumentType:::"), purego.NSString(qualifiedName), purego.NSString(publicId), purego.NSString(systemId))
 	return DOMDocumentTypeFromID(_r)
 }
 
+// CreateDocument wraps the corresponding Objective-C method.
 func (x *DOMImplementation) CreateDocument(namespaceURI string, qualifiedName string, doctype *DOMDocumentType) *DOMDocument {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createDocument:::"), purego.NSString(namespaceURI), purego.NSString(qualifiedName), objref.IDOf(doctype))
 	return DOMDocumentFromID(_r)
 }
 
+// CreateCSSStyleSheet wraps the corresponding Objective-C method.
 func (x *DOMImplementation) CreateCSSStyleSheet(title string, media string) *DOMCSSStyleSheet {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createCSSStyleSheet::"), purego.NSString(title), purego.NSString(media))
 	return DOMCSSStyleSheetFromID(_r)
@@ -122,3 +119,7 @@ type DOMImplementationable interface {
 }
 
 var _ DOMImplementationable = (*DOMImplementation)(nil)
+
+var _ DOMObjectProvider = (*DOMImplementation)(nil)
+
+var _ WebScriptObjectProvider = (*DOMImplementation)(nil)

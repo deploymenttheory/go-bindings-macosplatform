@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An item that represents an inking tool in the tool picker.
-//
 // ToolPickerInkingItem is an idiomatic wrapper over the Objective-C class PKToolPickerInkingItem.
+//
+// It embeds [ToolPickerItem], promoting that type's methods.
+//
+// An item that represents an inking tool in the tool picker.
 type ToolPickerInkingItem struct {
-	objref.Handle
+	ToolPickerItem
 }
 
 // ToolPickerInkingItemFromID adopts an existing Objective-C object as a ToolPickerInkingItem
@@ -25,7 +26,8 @@ func ToolPickerInkingItemFromID(id objc.ID) *ToolPickerInkingItem {
 	if id == 0 {
 		return nil
 	}
-	x := &ToolPickerInkingItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ToolPickerInkingItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func toolPickerInkingItemAdopt(id objc.ID) *ToolPickerInkingItem {
 	if id == 0 {
 		return nil
 	}
-	x := &ToolPickerInkingItem{Handle: objref.Wrap(id)}
+	x := &ToolPickerInkingItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ToolPickerInkingItem) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ToolPickerInkingItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ToolPickerInkingItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Create a new tool picker item with a PKInkType.
-//
-// NewToolPickerInkingItemWithInkType creates a new ToolPickerInkingItem.
+// NewToolPickerInkingItemWithInkType create a new tool picker item with a PKInkType.
 func NewToolPickerInkingItemWithInkType(inkType obj.Object) *ToolPickerInkingItem {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKToolPickerInkingItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:"), objref.IDOf(inkType))
@@ -74,27 +60,21 @@ func NewToolPickerInkingItemWithInkTypeColor(inkType obj.Object, color obj.Objec
 	return toolPickerInkingItemAdopt(_id)
 }
 
-// Create a new tool picker item with a PKInkType.
-//
-// NewToolPickerInkingItemWithInkTypeWidth creates a new ToolPickerInkingItem.
+// NewToolPickerInkingItemWithInkTypeWidth create a new tool picker item with a PKInkType.
 func NewToolPickerInkingItemWithInkTypeWidth(inkType obj.Object, width float64) *ToolPickerInkingItem {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKToolPickerInkingItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:width:"), objref.IDOf(inkType), width)
 	return toolPickerInkingItemAdopt(_id)
 }
 
-// Creates a new inking item with the specified ink type, color, and width.
-//
-// NewToolPickerInkingItemWithInkTypeColorWidth creates a new ToolPickerInkingItem.
+// NewToolPickerInkingItemWithInkTypeColorWidth creates a new inking item with the specified ink type, color, and width.
 func NewToolPickerInkingItemWithInkTypeColorWidth(inkType obj.Object, color obj.Object, width float64) *ToolPickerInkingItem {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKToolPickerInkingItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:color:width:"), objref.IDOf(inkType), objref.IDOf(color), width)
 	return toolPickerInkingItemAdopt(_id)
 }
 
-// Creates a new inking item with the specified ink type, color, width, and identifier.
-//
-// NewToolPickerInkingItemWithInkTypeColorWidthIdentifier creates a new ToolPickerInkingItem.
+// NewToolPickerInkingItemWithInkTypeColorWidthIdentifier creates a new inking item with the specified ink type, color, width, and identifier.
 func NewToolPickerInkingItemWithInkTypeColorWidthIdentifier(inkType obj.Object, color obj.Object, width float64, identifier string) *ToolPickerInkingItem {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKToolPickerInkingItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:color:width:identifier:"), objref.IDOf(inkType), objref.IDOf(color), width, purego.NSString(identifier))
@@ -108,26 +88,25 @@ func NewToolPickerInkingItemWithInkTypeColorWidthAzimuthIdentifier(inkType obj.O
 	return toolPickerInkingItemAdopt(_id)
 }
 
-// Present color selection UI to the user. Default value is YES.
-//
-// WithAllowsColorSelection sets allowsColorSelection and returns the receiver so calls can be chained.
+// WithAllowsColorSelection present color selection UI to the user. Default value is YES.
 func (x *ToolPickerInkingItem) WithAllowsColorSelection(allowsColorSelection bool) *ToolPickerInkingItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsColorSelection:"), allowsColorSelection)
 	return x
 }
 
-// A tool for drawing on a `PKCanvasView`.
+// InkingTool a tool for drawing on a `PKCanvasView`.
 func (x *ToolPickerInkingItem) InkingTool() *InkingTool {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inkingTool"))
 	return InkingToolFromID(_r)
 }
 
-// Present color selection UI to the user. Default value is YES.
+// AllowsColorSelection present color selection UI to the user. Default value is YES.
 func (x *ToolPickerInkingItem) AllowsColorSelection() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsColorSelection"))
 	return _r
 }
 
+// SetAllowsColorSelection wraps the corresponding Objective-C method.
 func (x *ToolPickerInkingItem) SetAllowsColorSelection(allowsColorSelection bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsColorSelection:"), allowsColorSelection)
 }
@@ -142,3 +121,5 @@ type ToolPickerInkingItemable interface {
 }
 
 var _ ToolPickerInkingItemable = (*ToolPickerInkingItem)(nil)
+
+var _ ToolPickerItemProvider = (*ToolPickerInkingItem)(nil)

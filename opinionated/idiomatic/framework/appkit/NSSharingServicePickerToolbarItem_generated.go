@@ -6,17 +6,19 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A toolbar item that displays the macOS share sheet.
-//
 // SharingServicePickerToolbarItem is an idiomatic wrapper over the Objective-C class NSSharingServicePickerToolbarItem.
+//
+// It embeds [ToolbarItem], promoting that type's methods.
+//
+// A toolbar item that displays the macOS share sheet.
 type SharingServicePickerToolbarItem struct {
-	objref.Handle
+	ToolbarItem
 }
 
 // SharingServicePickerToolbarItemFromID adopts an existing Objective-C object as a SharingServicePickerToolbarItem
@@ -25,7 +27,8 @@ func SharingServicePickerToolbarItemFromID(id objc.ID) *SharingServicePickerTool
 	if id == 0 {
 		return nil
 	}
-	x := &SharingServicePickerToolbarItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SharingServicePickerToolbarItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func sharingServicePickerToolbarItemAdopt(id objc.ID) *SharingServicePickerToolb
 	if id == 0 {
 		return nil
 	}
-	x := &SharingServicePickerToolbarItem{Handle: objref.Wrap(id)}
+	x := &SharingServicePickerToolbarItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SharingServicePickerToolbarItem) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SharingServicePickerToolbarItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SharingServicePickerToolbarItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSharingServicePickerToolbarItem creates a new SharingServicePickerToolbarItem.
@@ -64,151 +53,127 @@ func NewSharingServicePickerToolbarItem() *SharingServicePickerToolbarItem {
 	return sharingServicePickerToolbarItemAdopt(_id)
 }
 
-// The label that appears for this item in the toolbar.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the label that appears for this item in the toolbar.
 func (x *SharingServicePickerToolbarItem) WithLabel(label string) *SharingServicePickerToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The label that appears when the toolbar item is in the customization palette.
-//
-// WithPaletteLabel sets paletteLabel and returns the receiver so calls can be chained.
+// WithPaletteLabel the label that appears when the toolbar item is in the customization palette.
 func (x *SharingServicePickerToolbarItem) WithPaletteLabel(paletteLabel string) *SharingServicePickerToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaletteLabel:"), purego.NSString(paletteLabel))
 	return x
 }
 
-// The set of labels that the item might display.
-//
-// WithPossibleLabels sets possibleLabels and returns the receiver so calls can be chained.
+// WithPossibleLabels the set of labels that the item might display.
 func (x *SharingServicePickerToolbarItem) WithPossibleLabels(possibleLabels obj.Object) *SharingServicePickerToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
 	return x
 }
 
-// The tooltip to display when someone hovers over the item in the toolbar.
-//
-// WithToolTip sets toolTip and returns the receiver so calls can be chained.
+// WithToolTip the tooltip to display when someone hovers over the item in the toolbar.
 func (x *SharingServicePickerToolbarItem) WithToolTip(toolTip string) *SharingServicePickerToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// The menu item to use when the toolbar item is in the overflow menu.
-//
-// WithMenuFormRepresentation sets menuFormRepresentation and returns the receiver so calls can be chained.
+// WithMenuFormRepresentation the menu item to use when the toolbar item is in the overflow menu.
 func (x *SharingServicePickerToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *SharingServicePickerToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
 	return x
 }
 
-// An integer tag you can use to identify the toolbar item.
-//
-// WithTag sets tag and returns the receiver so calls can be chained.
+// WithTag an integer tag you can use to identify the toolbar item.
 func (x *SharingServicePickerToolbarItem) WithTag(tag int) *SharingServicePickerToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// The object that defines the action method the toolbar item calls when clicked.
-//
-// WithTarget sets target and returns the receiver so calls can be chained.
+// WithTarget the object that defines the action method the toolbar item calls when clicked.
 func (x *SharingServicePickerToolbarItem) WithTarget(target obj.Object) *SharingServicePickerToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// A Boolean value that indicates whether the item is enabled.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether the item is enabled.
 func (x *SharingServicePickerToolbarItem) WithEnabled(enabled bool) *SharingServicePickerToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The image to display for the toolbar item.
-//
-// WithImage sets image and returns the receiver so calls can be chained.
+// WithImage the image to display for the toolbar item.
 func (x *SharingServicePickerToolbarItem) WithImage(image *Image) *SharingServicePickerToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
-// The title of the toolbar item.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the title of the toolbar item.
 func (x *SharingServicePickerToolbarItem) WithTitle(title string) *SharingServicePickerToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A Boolean value that indicates whether the toolbar item has a bordered style.
-//
-// WithBordered sets bordered and returns the receiver so calls can be chained.
+// WithBordered a Boolean value that indicates whether the toolbar item has a bordered style.
 func (x *SharingServicePickerToolbarItem) WithBordered(bordered bool) *SharingServicePickerToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
-// WithBackgroundTintColor sets backgroundTintColor and returns the receiver so calls can be chained.
+// WithBackgroundTintColor sets the property and returns the receiver so calls can be chained.
 func (x *SharingServicePickerToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *SharingServicePickerToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
 	return x
 }
 
-// Defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items’ background.
-//
-// WithStyle sets style and returns the receiver so calls can be chained.
+// WithStyle defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items’ background.
 func (x *SharingServicePickerToolbarItem) WithStyle(style ToolbarItemStyle) *SharingServicePickerToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 	return x
 }
 
-// A Boolean value that indicates whether the item behaves as a navigation item in the toolbar.
-//
-// WithNavigational sets navigational and returns the receiver so calls can be chained.
+// WithNavigational a Boolean value that indicates whether the item behaves as a navigation item in the toolbar.
 func (x *SharingServicePickerToolbarItem) WithNavigational(navigational bool) *SharingServicePickerToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNavigational:"), navigational)
 	return x
 }
 
-// The custom view you use to draw the toolbar item.
-//
-// WithView sets view and returns the receiver so calls can be chained.
+// WithView the custom view you use to draw the toolbar item.
 func (x *SharingServicePickerToolbarItem) WithView(view ViewProvider) *SharingServicePickerToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 	return x
 }
 
-// Determines whether an item is visible in the toolbar.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden determines whether an item is visible in the toolbar.
 func (x *SharingServicePickerToolbarItem) WithHidden(hidden bool) *SharingServicePickerToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// The display priority associated with the toolbar item.
-//
-// WithVisibilityPriority sets visibilityPriority and returns the receiver so calls can be chained.
+// WithMinSize the toolbar item’s minimum size.
+func (x *SharingServicePickerToolbarItem) WithMinSize(minSize corefoundation.CGSize) *SharingServicePickerToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinSize:"), minSize)
+	return x
+}
+
+// WithMaxSize the toolbar item’s maximum size.
+func (x *SharingServicePickerToolbarItem) WithMaxSize(maxSize corefoundation.CGSize) *SharingServicePickerToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSize:"), maxSize)
+	return x
+}
+
+// WithVisibilityPriority the display priority associated with the toolbar item.
 func (x *SharingServicePickerToolbarItem) WithVisibilityPriority(visibilityPriority int) *SharingServicePickerToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
 	return x
 }
 
-// A badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
-//
-// WithBadge sets badge and returns the receiver so calls can be chained.
+// WithBadge a badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
 func (x *SharingServicePickerToolbarItem) WithBadge(badge *ItemBadge) *SharingServicePickerToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadge:"), objref.IDOf(badge))
 	return x
 }
 
-// A Boolean value that indicates whether the toolbar automatically validates the item.
-//
-// WithAutovalidates sets autovalidates and returns the receiver so calls can be chained.
+// WithAutovalidates a Boolean value that indicates whether the toolbar automatically validates the item.
 func (x *SharingServicePickerToolbarItem) WithAutovalidates(autovalidates bool) *SharingServicePickerToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutovalidates:"), autovalidates)
 	return x
@@ -233,9 +198,13 @@ type SharingServicePickerToolbarItemable interface {
 	WithNavigational(navigational bool) *SharingServicePickerToolbarItem
 	WithView(view ViewProvider) *SharingServicePickerToolbarItem
 	WithHidden(hidden bool) *SharingServicePickerToolbarItem
+	WithMinSize(minSize corefoundation.CGSize) *SharingServicePickerToolbarItem
+	WithMaxSize(maxSize corefoundation.CGSize) *SharingServicePickerToolbarItem
 	WithVisibilityPriority(visibilityPriority int) *SharingServicePickerToolbarItem
 	WithBadge(badge *ItemBadge) *SharingServicePickerToolbarItem
 	WithAutovalidates(autovalidates bool) *SharingServicePickerToolbarItem
 }
 
 var _ SharingServicePickerToolbarItemable = (*SharingServicePickerToolbarItem)(nil)
+
+var _ ToolbarItemProvider = (*SharingServicePickerToolbarItem)(nil)

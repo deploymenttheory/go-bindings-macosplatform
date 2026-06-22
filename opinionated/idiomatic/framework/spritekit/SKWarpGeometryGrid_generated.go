@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A definition for a grid-based deformation of nodes that conform to SKWarpable.
-//
 // WarpGeometryGrid is an idiomatic wrapper over the Objective-C class SKWarpGeometryGrid.
+//
+// It embeds [WarpGeometry], promoting that type's methods.
+//
+// A definition for a grid-based deformation of nodes that conform to SKWarpable.
 type WarpGeometryGrid struct {
-	objref.Handle
+	WarpGeometry
 }
 
 // WarpGeometryGridFromID adopts an existing Objective-C object as a WarpGeometryGrid
@@ -25,7 +26,8 @@ func WarpGeometryGridFromID(id objc.ID) *WarpGeometryGrid {
 	if id == 0 {
 		return nil
 	}
-	x := &WarpGeometryGrid{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WarpGeometryGrid{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,45 +40,32 @@ func warpGeometryGridAdopt(id objc.ID) *WarpGeometryGrid {
 	if id == 0 {
 		return nil
 	}
-	x := &WarpGeometryGrid{Handle: objref.Wrap(id)}
+	x := &WarpGeometryGrid{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *WarpGeometryGrid) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WarpGeometryGrid) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WarpGeometryGrid) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Tells you when to intialize a grid that was loaded from an archive.
-//
-// NewWarpGeometryGridWithCoder creates a new WarpGeometryGrid.
+// NewWarpGeometryGridWithCoder tells you when to intialize a grid that was loaded from an archive.
 func NewWarpGeometryGridWithCoder(aDecoder obj.Object) *WarpGeometryGrid {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKWarpGeometryGrid")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return warpGeometryGridAdopt(_id)
 }
 
+// NumberOfColumns wraps the corresponding Objective-C method.
 func (x *WarpGeometryGrid) NumberOfColumns() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfColumns"))
 	return _r
 }
 
+// NumberOfRows wraps the corresponding Objective-C method.
 func (x *WarpGeometryGrid) NumberOfRows() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfRows"))
 	return _r
 }
 
+// VertexCount wraps the corresponding Objective-C method.
 func (x *WarpGeometryGrid) VertexCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vertexCount"))
 	return _r
@@ -91,3 +80,5 @@ type WarpGeometryGridable interface {
 }
 
 var _ WarpGeometryGridable = (*WarpGeometryGrid)(nil)
+
+var _ WarpGeometryProvider = (*WarpGeometryGrid)(nil)

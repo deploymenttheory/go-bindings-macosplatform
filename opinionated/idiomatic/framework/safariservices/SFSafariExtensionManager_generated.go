@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that your app uses to find out the current state of a Safari extension.
-//
 // SafariExtensionManager is an idiomatic wrapper over the Objective-C class SFSafariExtensionManager.
+//
+// A class that your app uses to find out the current state of a Safari extension.
 type SafariExtensionManager struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SafariExtensionManagerFromID(id objc.ID) *SafariExtensionManager {
 	if id == 0 {
 		return nil
 	}
-	x := &SafariExtensionManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SafariExtensionManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func safariExtensionManagerAdopt(id objc.ID) *SafariExtensionManager {
 	if id == 0 {
 		return nil
 	}
-	x := &SafariExtensionManager{Handle: objref.Wrap(id)}
+	x := &SafariExtensionManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *SafariExtensionManager) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *SafariExtensionManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SafariExtensionManager) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewSafariExtensionManager creates a new SafariExtensionManager.

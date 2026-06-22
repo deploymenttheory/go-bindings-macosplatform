@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Meta-data about an endpoint of a Matter node.
-//
 // MTREndpointInfo is an idiomatic wrapper over the Objective-C class MTREndpointInfo.
+//
+// Meta-data about an endpoint of a Matter node.
 type MTREndpointInfo struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MTREndpointInfoFromID(id objc.ID) *MTREndpointInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &MTREndpointInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTREndpointInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTREndpointInfoAdopt(id objc.ID) *MTREndpointInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &MTREndpointInfo{Handle: objref.Wrap(id)}
+	x := &MTREndpointInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,30 +60,41 @@ func (x *MTREndpointInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTREndpointInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTREndpointInfo creates a new MTREndpointInfo.
 func NewMTREndpointInfo() *MTREndpointInfo {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTREndpointInfo")), objc.RegisterName("new"))
 	return mTREndpointInfoAdopt(_id)
 }
 
+// EndpointID wraps the corresponding Objective-C method.
 func (x *MTREndpointInfo) EndpointID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpointID"))
 	return obj.Wrap(_r)
 }
 
+// DeviceTypes wraps the corresponding Objective-C method.
+//
 // DeviceTypes returns the collection as a Go slice.
 func (x *MTREndpointInfo) DeviceTypes() []*MTRDeviceTypeRevision {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTRDeviceTypeRevision { return MTRDeviceTypeRevisionFromID(_id) })
 }
 
+// PartsList wraps the corresponding Objective-C method.
+//
 // PartsList returns the collection as a Go slice.
 func (x *MTREndpointInfo) PartsList() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("partsList"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The direct children of this endpoint. This excludes indirect descendants even if they are listed in the PartsList attribute of this endpoint due to the Full-Family Pattern being used. Refer to Endpoint Composition Patterns in the Matter specification for details.
+// Children the direct children of this endpoint. This excludes indirect descendants even if they are listed in the PartsList attribute of this endpoint due to the Full-Family Pattern being used. Refer to Endpoint Composition Patterns in the Matter specification for details.
 //
 // Children returns the collection as a Go slice.
 func (x *MTREndpointInfo) Children() []*MTREndpointInfo {

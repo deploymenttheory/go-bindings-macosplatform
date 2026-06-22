@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The context an update task provides to your app’s completion and update progress handlers.
-//
 // UpdateContext is an idiomatic wrapper over the Objective-C class MLUpdateContext.
+//
+// The context an update task provides to your app’s completion and update progress handlers.
 type UpdateContext struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func UpdateContextFromID(id objc.ID) *UpdateContext {
 	if id == 0 {
 		return nil
 	}
-	x := &UpdateContext{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UpdateContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func updateContextAdopt(id objc.ID) *UpdateContext {
 	if id == 0 {
 		return nil
 	}
-	x := &UpdateContext{Handle: objref.Wrap(id)}
+	x := &UpdateContext{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,32 +60,43 @@ func (x *UpdateContext) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UpdateContext) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewUpdateContext creates a new UpdateContext.
 func NewUpdateContext() *UpdateContext {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLUpdateContext")), objc.RegisterName("new"))
 	return updateContextAdopt(_id)
 }
 
+// Task wraps the corresponding Objective-C method.
 func (x *UpdateContext) Task() *UpdateTask {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("task"))
 	return UpdateTaskFromID(_r)
 }
 
+// Model wraps the corresponding Objective-C method.
 func (x *UpdateContext) Model() *Model {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("model"))
 	return ModelFromID(_r)
 }
 
+// Event wraps the corresponding Objective-C method.
 func (x *UpdateContext) Event() UpdateProgressEvent {
 	_r := objc.Send[UpdateProgressEvent](objref.IDOf(x), objc.RegisterName("event"))
 	return _r
 }
 
+// Metrics wraps the corresponding Objective-C method.
 func (x *UpdateContext) Metrics() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metrics"))
 	return obj.Wrap(_r)
 }
 
+// Parameters wraps the corresponding Objective-C method.
 func (x *UpdateContext) Parameters() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameters"))
 	return obj.Wrap(_r)

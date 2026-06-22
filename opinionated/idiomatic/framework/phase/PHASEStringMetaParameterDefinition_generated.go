@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specification for a metaparameter defined by text.
-//
 // StringMetaParameterDefinition is an idiomatic wrapper over the Objective-C class PHASEStringMetaParameterDefinition.
+//
+// It embeds [MetaParameterDefinition], promoting that type's methods.
+//
+// A specification for a metaparameter defined by text.
 type StringMetaParameterDefinition struct {
-	objref.Handle
+	MetaParameterDefinition
 }
 
 // StringMetaParameterDefinitionFromID adopts an existing Objective-C object as a StringMetaParameterDefinition
@@ -25,7 +26,8 @@ func StringMetaParameterDefinitionFromID(id objc.ID) *StringMetaParameterDefinit
 	if id == 0 {
 		return nil
 	}
-	x := &StringMetaParameterDefinition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StringMetaParameterDefinition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,38 +40,20 @@ func stringMetaParameterDefinitionAdopt(id objc.ID) *StringMetaParameterDefiniti
 	if id == 0 {
 		return nil
 	}
-	x := &StringMetaParameterDefinition{Handle: objref.Wrap(id)}
+	x := &StringMetaParameterDefinition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *StringMetaParameterDefinition) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StringMetaParameterDefinition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StringMetaParameterDefinition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a specification for a named textual metaparameter with the given value.
-//
-// NewStringMetaParameterDefinitionWithValueIdentifier creates a new StringMetaParameterDefinition.
+// NewStringMetaParameterDefinitionWithValueIdentifier creates a specification for a named textual metaparameter with the given value.
 func NewStringMetaParameterDefinitionWithValueIdentifier(value string, identifier string) *StringMetaParameterDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEStringMetaParameterDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:identifier:"), purego.NSString(value), purego.NSString(identifier))
 	return stringMetaParameterDefinitionAdopt(_id)
 }
 
-// Creates a specification for a textual metaparameter with the given value.
-//
-// NewStringMetaParameterDefinitionWithValue creates a new StringMetaParameterDefinition.
+// NewStringMetaParameterDefinitionWithValue creates a specification for a textual metaparameter with the given value.
 func NewStringMetaParameterDefinitionWithValue(value string) *StringMetaParameterDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEStringMetaParameterDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:"), purego.NSString(value))
@@ -82,3 +66,7 @@ type StringMetaParameterDefinitionable interface {
 }
 
 var _ StringMetaParameterDefinitionable = (*StringMetaParameterDefinition)(nil)
+
+var _ MetaParameterDefinitionProvider = (*StringMetaParameterDefinition)(nil)
+
+var _ DefinitionProvider = (*StringMetaParameterDefinition)(nil)

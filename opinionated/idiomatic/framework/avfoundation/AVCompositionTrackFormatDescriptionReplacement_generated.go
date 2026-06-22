@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a format description and its replacement.
-//
 // CompositionTrackFormatDescriptionReplacement is an idiomatic wrapper over the Objective-C class AVCompositionTrackFormatDescriptionReplacement.
+//
+// An object that represents a format description and its replacement.
 type CompositionTrackFormatDescriptionReplacement struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CompositionTrackFormatDescriptionReplacementFromID(id objc.ID) *Composition
 	if id == 0 {
 		return nil
 	}
-	x := &CompositionTrackFormatDescriptionReplacement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CompositionTrackFormatDescriptionReplacement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func compositionTrackFormatDescriptionReplacementAdopt(id objc.ID) *CompositionT
 	if id == 0 {
 		return nil
 	}
-	x := &CompositionTrackFormatDescriptionReplacement{Handle: objref.Wrap(id)}
+	x := &CompositionTrackFormatDescriptionReplacement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *CompositionTrackFormatDescriptionReplacement) IsKind(className string) 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CompositionTrackFormatDescriptionReplacement) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCompositionTrackFormatDescriptionReplacement creates a new CompositionTrackFormatDescriptionReplacement.
 func NewCompositionTrackFormatDescriptionReplacement() *CompositionTrackFormatDescriptionReplacement {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVCompositionTrackFormatDescriptionReplacement")), objc.RegisterName("new"))
 	return compositionTrackFormatDescriptionReplacementAdopt(_id)
 }
 
-// The original format description.
+// OriginalFormatDescription the original format description.
 func (x *CompositionTrackFormatDescriptionReplacement) OriginalFormatDescription() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalFormatDescription"))
 	return obj.Wrap(_r)
 }
 
-// The replacement format description.
+// ReplacementFormatDescription the replacement format description.
 func (x *CompositionTrackFormatDescriptionReplacement) ReplacementFormatDescription() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replacementFormatDescription"))
 	return obj.Wrap(_r)

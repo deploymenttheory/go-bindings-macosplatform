@@ -3,4 +3,20 @@
 //go:build darwin
 
 // Package mpsimage provides a fluent Go API over the macOS MPSImage framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - BinaryImageKernel: [ImageArithmetic]
+//   - ImageAreaMax: [ImageAreaMin]
+//   - ImageArithmetic: [ImageAdd], [ImageDivide], [ImageMultiply], [ImageSubtract]
+//   - ImageBox: [ImageTent]
+//   - ImageDilate: [ImageErode]
+//   - ImageLaplacianPyramid: [ImageLaplacianPyramidAdd], [ImageLaplacianPyramidSubtract]
+//   - ImagePyramid: [ImageGaussianPyramid], [ImageLaplacianPyramid]
+//   - ImageReduceUnary: [ImageReduceColumnMax], [ImageReduceColumnMean], [ImageReduceColumnMin], [ImageReduceColumnSum], [ImageReduceRowMax], [ImageReduceRowMean], [ImageReduceRowMin], [ImageReduceRowSum]
+//   - ImageScale: [ImageBilinearScale], [ImageLanczosScale]
+//   - UnaryImageKernel: [ImageAreaMax], [ImageBox], [ImageCanny], [ImageConversion], [ImageConvolution], [ImageDilate], [ImageEuclideanDistanceTransform], [ImageGaussianBlur], [ImageHistogramEqualization], [ImageHistogramSpecification], [ImageIntegral], [ImageIntegralOfSquares], [ImageLaplacian], [ImageMedian], [ImagePyramid], [ImageReduceUnary], [ImageScale], [ImageSobel], [ImageStatisticsMean], [ImageStatisticsMeanAndVariance], [ImageStatisticsMinAndMax], [ImageThresholdBinary], [ImageThresholdBinaryInverse], [ImageThresholdToZero], [ImageThresholdToZeroInverse], [ImageThresholdTruncate], [ImageTranspose]
 package mpsimage

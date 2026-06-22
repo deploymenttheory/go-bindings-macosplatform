@@ -23,7 +23,8 @@ func MTRThreadOperationalDatasetFromID(id objc.ID) *MTRThreadOperationalDataset 
 	if id == 0 {
 		return nil
 	}
-	x := &MTRThreadOperationalDataset{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRThreadOperationalDataset{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRThreadOperationalDatasetAdopt(id objc.ID) *MTRThreadOperationalDataset {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRThreadOperationalDataset{Handle: objref.Wrap(id)}
+	x := &MTRThreadOperationalDataset{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,18 +58,20 @@ func (x *MTRThreadOperationalDataset) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Create a Thread Operational Dataset object with the individual network fields.
-//
-// NewMTRThreadOperationalDatasetWithNetworkNameExtendedPANIDMasterKeyPSKcChannelNumberPanID creates a new MTRThreadOperationalDataset.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRThreadOperationalDataset) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRThreadOperationalDatasetWithNetworkNameExtendedPANIDMasterKeyPSKcChannelNumberPanID create a Thread Operational Dataset object with the individual network fields.
 func NewMTRThreadOperationalDatasetWithNetworkNameExtendedPANIDMasterKeyPSKcChannelNumberPanID(networkName string, extendedPANID obj.Object, masterKey obj.Object, pSKc obj.Object, channelNumber obj.Object, panID obj.Object) *MTRThreadOperationalDataset {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRThreadOperationalDataset")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNetworkName:extendedPANID:masterKey:PSKc:channelNumber:panID:"), purego.NSString(networkName), objref.IDOf(extendedPANID), objref.IDOf(masterKey), objref.IDOf(pSKc), objref.IDOf(channelNumber), objref.IDOf(panID))
 	return mTRThreadOperationalDatasetAdopt(_id)
 }
 
-// Create a Thread Operational Dataset object with a RCP formatted active operational dataset. This initializer will return nil if the input data cannot be parsed correctly
-//
-// NewMTRThreadOperationalDatasetWithData creates a new MTRThreadOperationalDataset.
+// NewMTRThreadOperationalDatasetWithData create a Thread Operational Dataset object with a RCP formatted active operational dataset. This initializer will return nil if the input data cannot be parsed correctly
 func NewMTRThreadOperationalDatasetWithData(data obj.Object) *MTRThreadOperationalDataset {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRThreadOperationalDataset")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
@@ -81,19 +85,19 @@ func NewMTRThreadOperationalDatasetWithNetworkNameExtendedPANIDMasterKeyPSKcChan
 	return mTRThreadOperationalDatasetAdopt(_id)
 }
 
-// WithChannel sets channel and returns the receiver so calls can be chained.
+// WithChannel sets the property and returns the receiver so calls can be chained.
 func (x *MTRThreadOperationalDataset) WithChannel(channel uint16) *MTRThreadOperationalDataset {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
 	return x
 }
 
-// Get the underlying data that represents the Thread Active Operational Dataset This can be used for the threadOperationalDataset of MTRCommissioningParameters.
+// Data get the underlying data that represents the Thread Active Operational Dataset This can be used for the threadOperationalDataset of MTRCommissioningParameters.
 func (x *MTRThreadOperationalDataset) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// The Thread Network name
+// NetworkName the Thread Network name
 func (x *MTRThreadOperationalDataset) NetworkName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkName"))
 	if _r == 0 {
@@ -102,41 +106,43 @@ func (x *MTRThreadOperationalDataset) NetworkName() string {
 	return purego.GoString(_r)
 }
 
-// The Thread Network extendended PAN ID
+// ExtendedPANID the Thread Network extendended PAN ID
 func (x *MTRThreadOperationalDataset) ExtendedPANID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendedPANID"))
 	return obj.Wrap(_r)
 }
 
-// The 16 byte Master Key
+// MasterKey the 16 byte Master Key
 func (x *MTRThreadOperationalDataset) MasterKey() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("masterKey"))
 	return obj.Wrap(_r)
 }
 
-// The Thread PSKc
+// PSKc the Thread PSKc
 func (x *MTRThreadOperationalDataset) PSKc() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("PSKc"))
 	return obj.Wrap(_r)
 }
 
-// The Thread network channel.  Always an unsigned 16-bit integer.
+// ChannelNumber the Thread network channel.  Always an unsigned 16-bit integer.
 func (x *MTRThreadOperationalDataset) ChannelNumber() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("channelNumber"))
 	return obj.Wrap(_r)
 }
 
-// A uint16_t stored as 2-bytes in host order representing the Thread PAN ID
+// PanID a uint16_t stored as 2-bytes in host order representing the Thread PAN ID
 func (x *MTRThreadOperationalDataset) PanID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("panID"))
 	return obj.Wrap(_r)
 }
 
+// Channel wraps the corresponding Objective-C method.
 func (x *MTRThreadOperationalDataset) Channel() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("channel"))
 	return _r
 }
 
+// SetChannel wraps the corresponding Objective-C method.
 func (x *MTRThreadOperationalDataset) SetChannel(channel uint16) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
 }

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A generator for random numbers that fall within a specific range and that exhibit a specific distribution over multiple samplings.
-//
 // RandomDistribution is an idiomatic wrapper over the Objective-C class GKRandomDistribution.
+//
+// RandomDistribution is an abstract base — you do not construct it directly. Construct one of [GaussianDistribution], [ShuffledDistribution] and pass it where a RandomDistribution is accepted.
+//
+// A generator for random numbers that fall within a specific range and that exhibit a specific distribution over multiple samplings.
 type RandomDistribution struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func RandomDistributionFromID(id objc.ID) *RandomDistribution {
 	if id == 0 {
 		return nil
 	}
-	x := &RandomDistribution{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RandomDistribution{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func randomDistributionAdopt(id objc.ID) *RandomDistribution {
 	if id == 0 {
 		return nil
 	}
-	x := &RandomDistribution{Handle: objref.Wrap(id)}
+	x := &RandomDistribution{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,49 +62,49 @@ func (x *RandomDistribution) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewRandomDistribution creates a new RandomDistribution.
-func NewRandomDistribution() *RandomDistribution {
-	_id := objc.Send[objc.ID](objc.ID(_class("GKRandomDistribution")), objc.RegisterName("new"))
-	return randomDistributionAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RandomDistribution) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Generates and returns a new random integer within the bounds of the distribution.
+// NextInt generates and returns a new random integer within the bounds of the distribution.
 func (x *RandomDistribution) NextInt() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("nextInt"))
 	return _r
 }
 
-// Generates and returns a new random integer within the bounds of the distribution and less than the specified limit.
+// NextIntWithUpperBound generates and returns a new random integer within the bounds of the distribution and less than the specified limit.
 func (x *RandomDistribution) NextIntWithUpperBound(upperBound int) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("nextIntWithUpperBound:"), upperBound)
 	return _r
 }
 
-// Generates and returns a new random floating-point value within the characteristics of the distribution.
+// NextUniform generates and returns a new random floating-point value within the characteristics of the distribution.
 func (x *RandomDistribution) NextUniform() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("nextUniform"))
 	return _r
 }
 
-// Generates and returns a new random Boolean value within the characteristics of the distribution.
+// NextBool generates and returns a new random Boolean value within the characteristics of the distribution.
 func (x *RandomDistribution) NextBool() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("nextBool"))
 	return _r
 }
 
-// The lowest value the distribution will output.
+// LowestValue the lowest value the distribution will output.
 func (x *RandomDistribution) LowestValue() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("lowestValue"))
 	return _r
 }
 
-// The highest value the distribution will output.
+// HighestValue the highest value the distribution will output.
 func (x *RandomDistribution) HighestValue() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("highestValue"))
 	return _r
 }
 
-// The number of unique possible outcomes, depending on the distribution type this is not always highest - lowest + 1.
+// NumberOfPossibleOutcomes the number of unique possible outcomes, depending on the distribution type this is not always highest - lowest + 1.
 func (x *RandomDistribution) NumberOfPossibleOutcomes() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfPossibleOutcomes"))
 	return _r
@@ -119,3 +123,10 @@ type RandomDistributionable interface {
 }
 
 var _ RandomDistributionable = (*RandomDistribution)(nil)
+
+// isRandomDistribution marks RandomDistribution — and, by embedding promotion, its
+// subclasses — as a member of the RandomDistribution hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *RandomDistribution) isRandomDistribution() {}
+
+var _ RandomDistributionProvider = (*RandomDistribution)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A physics behavior that connects two physics bodies and allows them to pivot around each other in any direction.
-//
 // PhysicsBallSocketJoint is an idiomatic wrapper over the Objective-C class SCNPhysicsBallSocketJoint.
+//
+// It embeds [PhysicsBehavior], promoting that type's methods.
+//
+// A physics behavior that connects two physics bodies and allows them to pivot around each other in any direction.
 type PhysicsBallSocketJoint struct {
-	objref.Handle
+	PhysicsBehavior
 }
 
 // PhysicsBallSocketJointFromID adopts an existing Objective-C object as a PhysicsBallSocketJoint
@@ -25,7 +26,8 @@ func PhysicsBallSocketJointFromID(id objc.ID) *PhysicsBallSocketJoint {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsBallSocketJoint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PhysicsBallSocketJoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func physicsBallSocketJointAdopt(id objc.ID) *PhysicsBallSocketJoint {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsBallSocketJoint{Handle: objref.Wrap(id)}
+	x := &PhysicsBallSocketJoint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PhysicsBallSocketJoint) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PhysicsBallSocketJoint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PhysicsBallSocketJoint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPhysicsBallSocketJoint creates a new PhysicsBallSocketJoint.
@@ -64,11 +52,13 @@ func NewPhysicsBallSocketJoint() *PhysicsBallSocketJoint {
 	return physicsBallSocketJointAdopt(_id)
 }
 
+// BodyA wraps the corresponding Objective-C method.
 func (x *PhysicsBallSocketJoint) BodyA() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyA"))
 	return PhysicsBodyFromID(_r)
 }
 
+// BodyB wraps the corresponding Objective-C method.
 func (x *PhysicsBallSocketJoint) BodyB() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyB"))
 	return PhysicsBodyFromID(_r)
@@ -82,3 +72,5 @@ type PhysicsBallSocketJointable interface {
 }
 
 var _ PhysicsBallSocketJointable = (*PhysicsBallSocketJoint)(nil)
+
+var _ PhysicsBehaviorProvider = (*PhysicsBallSocketJoint)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A point of interest on the map.
-//
 // MapItem is an idiomatic wrapper over the Objective-C class MKMapItem.
+//
+// A point of interest on the map.
 type MapItem struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MapItemFromID(id objc.ID) *MapItem {
 	if id == 0 {
 		return nil
 	}
-	x := &MapItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MapItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mapItemAdopt(id objc.ID) *MapItem {
 	if id == 0 {
 		return nil
 	}
-	x := &MapItem{Handle: objref.Wrap(id)}
+	x := &MapItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,96 +60,97 @@ func (x *MapItem) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates and returns a map item object using the specified placemark object.
-//
-// NewMapItemWithPlacemark creates a new MapItem.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MapItem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMapItemWithPlacemark creates and returns a map item object using the specified placemark object.
 func NewMapItemWithPlacemark(placemark *Placemark) *MapItem {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlacemark:"), objref.IDOf(placemark))
 	return mapItemAdopt(_id)
 }
 
-// The descriptive name associated with the map item.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the descriptive name associated with the map item.
 func (x *MapItem) WithName(name string) *MapItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The phone number associated with a business at the specified location.
-//
-// WithPhoneNumber sets phoneNumber and returns the receiver so calls can be chained.
+// WithPhoneNumber the phone number associated with a business at the specified location.
 func (x *MapItem) WithPhoneNumber(phoneNumber string) *MapItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneNumber:"), purego.NSString(phoneNumber))
 	return x
 }
 
-// The URL associated with the specified location.
-//
-// WithUrl sets url and returns the receiver so calls can be chained.
+// WithUrl the URL associated with the specified location.
 func (x *MapItem) WithUrl(url string) *MapItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
 	return x
 }
 
-// The time zone of the specified location.
-//
-// WithTimeZone sets timeZone and returns the receiver so calls can be chained.
+// WithTimeZone the time zone of the specified location.
 func (x *MapItem) WithTimeZone(timeZone obj.Object) *MapItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	return x
 }
 
-// The point-of-interest category for the map item.
-//
-// WithPointOfInterestCategory sets pointOfInterestCategory and returns the receiver so calls can be chained.
+// WithPointOfInterestCategory the point-of-interest category for the map item.
 func (x *MapItem) WithPointOfInterestCategory(pointOfInterestCategory obj.Object) *MapItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestCategory:"), objref.IDOf(pointOfInterestCategory))
 	return x
 }
 
-// Opens the Maps app and displays the map item.
+// OpenInMapsWithLaunchOptions opens the Maps app and displays the map item.
 func (x *MapItem) OpenInMapsWithLaunchOptions(launchOptions obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("openInMapsWithLaunchOptions:"), objref.IDOf(launchOptions))
 	return _r
 }
 
-// Opens the Maps app and displays the map item.
+// OpenInMapsWithLaunchOptionsCompletionHandler opens the Maps app and displays the map item.
 func (x *MapItem) OpenInMapsWithLaunchOptionsCompletionHandler(launchOptions obj.Object, completion func(bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openInMapsWithLaunchOptions:completionHandler:"), objref.IDOf(launchOptions), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *MapItem) Identifier() *MapItemIdentifier {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	return MapItemIdentifierFromID(_r)
 }
 
+// AlternateIdentifiers wraps the corresponding Objective-C method.
 func (x *MapItem) AlternateIdentifiers() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternateIdentifiers"))
 	return obj.Wrap(_r)
 }
 
+// Placemark wraps the corresponding Objective-C method.
 func (x *MapItem) Placemark() *Placemark {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placemark"))
 	return PlacemarkFromID(_r)
 }
 
+// IsCurrentLocation wraps the corresponding Objective-C method.
 func (x *MapItem) IsCurrentLocation() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCurrentLocation"))
 	return _r
 }
 
+// Address wraps the corresponding Objective-C method.
 func (x *MapItem) Address() *Address {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("address"))
 	return AddressFromID(_r)
 }
 
+// AddressRepresentations wraps the corresponding Objective-C method.
 func (x *MapItem) AddressRepresentations() *AddressRepresentations {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addressRepresentations"))
 	return AddressRepresentationsFromID(_r)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *MapItem) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -156,10 +159,12 @@ func (x *MapItem) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *MapItem) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
+// PhoneNumber wraps the corresponding Objective-C method.
 func (x *MapItem) PhoneNumber() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("phoneNumber"))
 	if _r == 0 {
@@ -168,33 +173,40 @@ func (x *MapItem) PhoneNumber() string {
 	return purego.GoString(_r)
 }
 
+// SetPhoneNumber wraps the corresponding Objective-C method.
 func (x *MapItem) SetPhoneNumber(phoneNumber string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneNumber:"), purego.NSString(phoneNumber))
 }
 
+// Url wraps the corresponding Objective-C method.
 func (x *MapItem) Url() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
+// SetUrl wraps the corresponding Objective-C method.
 func (x *MapItem) SetUrl(url string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
 }
 
+// TimeZone wraps the corresponding Objective-C method.
 func (x *MapItem) TimeZone() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeZone"))
 	return obj.Wrap(_r)
 }
 
+// SetTimeZone wraps the corresponding Objective-C method.
 func (x *MapItem) SetTimeZone(timeZone obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 }
 
+// PointOfInterestCategory wraps the corresponding Objective-C method.
 func (x *MapItem) PointOfInterestCategory() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointOfInterestCategory"))
 	return obj.Wrap(_r)
 }
 
+// SetPointOfInterestCategory wraps the corresponding Objective-C method.
 func (x *MapItem) SetPointOfInterestCategory(pointOfInterestCategory obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestCategory:"), objref.IDOf(pointOfInterestCategory))
 }

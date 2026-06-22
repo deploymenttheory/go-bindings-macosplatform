@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mechanism for grouping multiple layer-tree operations into atomic updates to the render tree.
-//
 // Transaction is an idiomatic wrapper over the Objective-C class CATransaction.
+//
+// A mechanism for grouping multiple layer-tree operations into atomic updates to the render tree.
 type Transaction struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TransactionFromID(id objc.ID) *Transaction {
 	if id == 0 {
 		return nil
 	}
-	x := &Transaction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Transaction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func transactionAdopt(id objc.ID) *Transaction {
 	if id == 0 {
 		return nil
 	}
-	x := &Transaction{Handle: objref.Wrap(id)}
+	x := &Transaction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *Transaction) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *Transaction) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Transaction) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewTransaction creates a new Transaction.

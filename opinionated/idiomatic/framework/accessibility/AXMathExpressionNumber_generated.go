@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MathExpressionNumber is an idiomatic wrapper over the Objective-C class AXMathExpressionNumber.
+//
+// It embeds [MathExpression], promoting that type's methods.
 type MathExpressionNumber struct {
-	objref.Handle
+	MathExpression
 }
 
 // MathExpressionNumberFromID adopts an existing Objective-C object as a MathExpressionNumber
@@ -23,7 +24,8 @@ func MathExpressionNumberFromID(id objc.ID) *MathExpressionNumber {
 	if id == 0 {
 		return nil
 	}
-	x := &MathExpressionNumber{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MathExpressionNumber{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mathExpressionNumberAdopt(id objc.ID) *MathExpressionNumber {
 	if id == 0 {
 		return nil
 	}
-	x := &MathExpressionNumber{Handle: objref.Wrap(id)}
+	x := &MathExpressionNumber{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MathExpressionNumber) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MathExpressionNumber) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MathExpressionNumber) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMathExpressionNumberWithContent creates a new MathExpressionNumber.
@@ -63,6 +51,7 @@ func NewMathExpressionNumberWithContent(content string) *MathExpressionNumber {
 	return mathExpressionNumberAdopt(_id)
 }
 
+// Content wraps the corresponding Objective-C method.
 func (x *MathExpressionNumber) Content() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("content"))
 	if _r == 0 {
@@ -78,3 +67,5 @@ type MathExpressionNumberable interface {
 }
 
 var _ MathExpressionNumberable = (*MathExpressionNumber)(nil)
+
+var _ MathExpressionProvider = (*MathExpressionNumber)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes a Media Extension.
-//
 // MediaExtensionProperties is an idiomatic wrapper over the Objective-C class AVMediaExtensionProperties.
+//
+// An object that describes a Media Extension.
 type MediaExtensionProperties struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MediaExtensionPropertiesFromID(id objc.ID) *MediaExtensionProperties {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaExtensionProperties{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MediaExtensionProperties{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mediaExtensionPropertiesAdopt(id objc.ID) *MediaExtensionProperties {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaExtensionProperties{Handle: objref.Wrap(id)}
+	x := &MediaExtensionProperties{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *MediaExtensionProperties) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MediaExtensionProperties) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMediaExtensionProperties creates a new MediaExtensionProperties.
 func NewMediaExtensionProperties() *MediaExtensionProperties {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVMediaExtensionProperties")), objc.RegisterName("new"))
 	return mediaExtensionPropertiesAdopt(_id)
 }
 
-// The identifier of the Media Extension. The extension identifier string, corresponding to the ClassImplementationID value from the EXAppExtensionAttributes dictionary in the Info.plist file.
+// ExtensionIdentifier the identifier of the Media Extension. The extension identifier string, corresponding to the ClassImplementationID value from the EXAppExtensionAttributes dictionary in the Info.plist file.
 func (x *MediaExtensionProperties) ExtensionIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionIdentifier"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *MediaExtensionProperties) ExtensionIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// The name of the MediaExtension. The localized name of the MediaExtension format reader or video decoder, corresponding to the CFBundleDisplayName.
+// ExtensionName the name of the MediaExtension. The localized name of the MediaExtension format reader or video decoder, corresponding to the CFBundleDisplayName.
 func (x *MediaExtensionProperties) ExtensionName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionName"))
 	if _r == 0 {
@@ -82,7 +90,7 @@ func (x *MediaExtensionProperties) ExtensionName() string {
 	return purego.GoString(_r)
 }
 
-// The name of the containing application bundle. The localized name of the application that hosts the MediaExtension.
+// ContainingBundleName the name of the containing application bundle. The localized name of the application that hosts the MediaExtension.
 func (x *MediaExtensionProperties) ContainingBundleName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containingBundleName"))
 	if _r == 0 {
@@ -91,13 +99,13 @@ func (x *MediaExtensionProperties) ContainingBundleName() string {
 	return purego.GoString(_r)
 }
 
-// The file URL of the MediaExtension bundle.
+// ExtensionURL the file URL of the MediaExtension bundle.
 func (x *MediaExtensionProperties) ExtensionURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionURL"))
 	return obj.Wrap(_r)
 }
 
-// The file URL of the host application for the MediaExtension.
+// ContainingBundleURL the file URL of the host application for the MediaExtension.
 func (x *MediaExtensionProperties) ContainingBundleURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containingBundleURL"))
 	return obj.Wrap(_r)

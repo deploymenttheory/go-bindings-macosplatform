@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A Smart Card PIN authentication operation.
-//
 // TokenSmartCardPINAuthOperation is an idiomatic wrapper over the Objective-C class TKTokenSmartCardPINAuthOperation.
+//
+// It embeds [TokenAuthOperation], promoting that type's methods.
+//
+// A Smart Card PIN authentication operation.
 type TokenSmartCardPINAuthOperation struct {
-	objref.Handle
+	TokenAuthOperation
 }
 
 // TokenSmartCardPINAuthOperationFromID adopts an existing Objective-C object as a TokenSmartCardPINAuthOperation
@@ -25,7 +26,8 @@ func TokenSmartCardPINAuthOperationFromID(id objc.ID) *TokenSmartCardPINAuthOper
 	if id == 0 {
 		return nil
 	}
-	x := &TokenSmartCardPINAuthOperation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TokenSmartCardPINAuthOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func tokenSmartCardPINAuthOperationAdopt(id objc.ID) *TokenSmartCardPINAuthOpera
 	if id == 0 {
 		return nil
 	}
-	x := &TokenSmartCardPINAuthOperation{Handle: objref.Wrap(id)}
+	x := &TokenSmartCardPINAuthOperation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *TokenSmartCardPINAuthOperation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TokenSmartCardPINAuthOperation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TokenSmartCardPINAuthOperation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewTokenSmartCardPINAuthOperation creates a new TokenSmartCardPINAuthOperation.
@@ -64,87 +52,81 @@ func NewTokenSmartCardPINAuthOperation() *TokenSmartCardPINAuthOperation {
 	return tokenSmartCardPINAuthOperationAdopt(_id)
 }
 
-// The PIN format.
-//
-// WithPINFormat sets pINFormat and returns the receiver so calls can be chained.
+// WithPINFormat the PIN format.
 func (x *TokenSmartCardPINAuthOperation) WithPINFormat(pINFormat *SmartCardPINFormat) *TokenSmartCardPINAuthOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINFormat:"), objref.IDOf(pINFormat))
 	return x
 }
 
-// The template into which the PIN is filled in. nil by default.
-//
-// WithAPDUTemplate sets aPDUTemplate and returns the receiver so calls can be chained.
+// WithAPDUTemplate the template into which the PIN is filled in. nil by default.
 func (x *TokenSmartCardPINAuthOperation) WithAPDUTemplate(aPDUTemplate obj.Object) *TokenSmartCardPINAuthOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAPDUTemplate:"), objref.IDOf(aPDUTemplate))
 	return x
 }
 
-// The offset, in bytes, within the APDU template to mark the location for filling in the PIN.
-//
-// WithPINByteOffset sets pINByteOffset and returns the receiver so calls can be chained.
+// WithPINByteOffset the offset, in bytes, within the APDU template to mark the location for filling in the PIN.
 func (x *TokenSmartCardPINAuthOperation) WithPINByteOffset(pINByteOffset int) *TokenSmartCardPINAuthOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINByteOffset:"), pINByteOffset)
 	return x
 }
 
-// A Smart Card to which the formatted APDU is sent in order to authenticate.
-//
-// WithSmartCard sets smartCard and returns the receiver so calls can be chained.
+// WithSmartCard a Smart Card to which the formatted APDU is sent in order to authenticate.
 func (x *TokenSmartCardPINAuthOperation) WithSmartCard(smartCard *SmartCard) *TokenSmartCardPINAuthOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSmartCard:"), objref.IDOf(smartCard))
 	return x
 }
 
-// The PIN value resulting from performing the operation.
-//
-// WithPIN sets pIN and returns the receiver so calls can be chained.
+// WithPIN the PIN value resulting from performing the operation.
 func (x *TokenSmartCardPINAuthOperation) WithPIN(pIN string) *TokenSmartCardPINAuthOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPIN:"), purego.NSString(pIN))
 	return x
 }
 
-// PIN formatting properties.
+// PINFormat PIN formatting properties.
 func (x *TokenSmartCardPINAuthOperation) PINFormat() *SmartCardPINFormat {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("PINFormat"))
 	return SmartCardPINFormatFromID(_r)
 }
 
+// SetPINFormat wraps the corresponding Objective-C method.
 func (x *TokenSmartCardPINAuthOperation) SetPINFormat(pINFormat *SmartCardPINFormat) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINFormat:"), objref.IDOf(pINFormat))
 }
 
-// APDU template into which PIN gets filled in. If set to nil, the system will not attempt to authenticate by sending the formatted APDU to the SmartCard, but rather the token itself is expected to perform the authentication.  It is preferred to provide APDUTemplate if possible, because it allows using hardware PINPad for secure PIN entry (provided that the reader has one).
+// APDUTemplate APDU template into which PIN gets filled in. If set to nil, the system will not attempt to authenticate by sending the formatted APDU to the SmartCard, but rather the token itself is expected to perform the authentication.  It is preferred to provide APDUTemplate if possible, because it allows using hardware PINPad for secure PIN entry (provided that the reader has one).
 func (x *TokenSmartCardPINAuthOperation) APDUTemplate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("APDUTemplate"))
 	return obj.Wrap(_r)
 }
 
+// SetAPDUTemplate wraps the corresponding Objective-C method.
 func (x *TokenSmartCardPINAuthOperation) SetAPDUTemplate(aPDUTemplate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAPDUTemplate:"), objref.IDOf(aPDUTemplate))
 }
 
-// Offset in bytes within APDU template to mark the location for filling in the PIN.
+// PINByteOffset offset in bytes within APDU template to mark the location for filling in the PIN.
 func (x *TokenSmartCardPINAuthOperation) PINByteOffset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("PINByteOffset"))
 	return _r
 }
 
+// SetPINByteOffset wraps the corresponding Objective-C method.
 func (x *TokenSmartCardPINAuthOperation) SetPINByteOffset(pINByteOffset int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINByteOffset:"), pINByteOffset)
 }
 
-// TKSmartCard to which the formatted APDU gets sent in order to authenticate (used only if 'APDUTemplate' is set).
+// SmartCard TKSmartCard to which the formatted APDU gets sent in order to authenticate (used only if 'APDUTemplate' is set).
 func (x *TokenSmartCardPINAuthOperation) SmartCard() *SmartCard {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("smartCard"))
 	return SmartCardFromID(_r)
 }
 
+// SetSmartCard wraps the corresponding Objective-C method.
 func (x *TokenSmartCardPINAuthOperation) SetSmartCard(smartCard *SmartCard) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSmartCard:"), objref.IDOf(smartCard))
 }
 
-// PIN value which will be set when 'finishWithError:' gets triggered.  Note that the PIN is not set in case that APDUTemplate was set.  In this case, PIN was already sent to the card using specified template.
+// PIN PIN value which will be set when 'finishWithError:' gets triggered.  Note that the PIN is not set in case that APDUTemplate was set.  In this case, PIN was already sent to the card using specified template.
 func (x *TokenSmartCardPINAuthOperation) PIN() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("PIN"))
 	if _r == 0 {
@@ -153,6 +135,7 @@ func (x *TokenSmartCardPINAuthOperation) PIN() string {
 	return purego.GoString(_r)
 }
 
+// SetPIN wraps the corresponding Objective-C method.
 func (x *TokenSmartCardPINAuthOperation) SetPIN(pIN string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPIN:"), purego.NSString(pIN))
 }
@@ -178,3 +161,5 @@ type TokenSmartCardPINAuthOperationable interface {
 }
 
 var _ TokenSmartCardPINAuthOperationable = (*TokenSmartCardPINAuthOperation)(nil)
+
+var _ TokenAuthOperationProvider = (*TokenSmartCardPINAuthOperation)(nil)

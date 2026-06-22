@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An inflection rule that uses a morphology instance to determine how to inflect attribued strings.
-//
 // InflectionRuleExplicit is an idiomatic wrapper over the Objective-C class NSInflectionRuleExplicit.
+//
+// It embeds [InflectionRule], promoting that type's methods.
+//
+// An inflection rule that uses a morphology instance to determine how to inflect attribued strings.
 type InflectionRuleExplicit struct {
-	objref.Handle
+	InflectionRule
 }
 
 // InflectionRuleExplicitFromID adopts an existing Objective-C object as a InflectionRuleExplicit
@@ -25,7 +26,8 @@ func InflectionRuleExplicitFromID(id objc.ID) *InflectionRuleExplicit {
 	if id == 0 {
 		return nil
 	}
-	x := &InflectionRuleExplicit{Handle: objref.Wrap(purego.Retain(id))}
+	x := &InflectionRuleExplicit{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,41 +40,26 @@ func inflectionRuleExplicitAdopt(id objc.ID) *InflectionRuleExplicit {
 	if id == 0 {
 		return nil
 	}
-	x := &InflectionRuleExplicit{Handle: objref.Wrap(id)}
+	x := &InflectionRuleExplicit{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *InflectionRuleExplicit) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *InflectionRuleExplicit) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *InflectionRuleExplicit) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates an inflection rule with the given morphology.
-//
-// NewInflectionRuleExplicitWithMorphology creates a new InflectionRuleExplicit.
+// NewInflectionRuleExplicitWithMorphology creates an inflection rule with the given morphology.
 func NewInflectionRuleExplicitWithMorphology(morphology *Morphology) *InflectionRuleExplicit {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSInflectionRuleExplicit")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMorphology:"), objref.IDOf(morphology))
 	return inflectionRuleExplicitAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *InflectionRuleExplicit) WithScriptingProperties(scriptingProperties obj.Object) *InflectionRuleExplicit {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Morphology wraps the corresponding Objective-C method.
 func (x *InflectionRuleExplicit) Morphology() *Morphology {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("morphology"))
 	return MorphologyFromID(_r)
@@ -86,3 +73,5 @@ type InflectionRuleExplicitable interface {
 }
 
 var _ InflectionRuleExplicitable = (*InflectionRuleExplicit)(nil)
+
+var _ InflectionRuleProvider = (*InflectionRuleExplicit)(nil)

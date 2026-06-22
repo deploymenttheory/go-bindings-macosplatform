@@ -23,7 +23,8 @@ func PickerFilterFromID(id objc.ID) *PickerFilter {
 	if id == 0 {
 		return nil
 	}
-	x := &PickerFilter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PickerFilter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func pickerFilterAdopt(id objc.ID) *PickerFilter {
 	if id == 0 {
 		return nil
 	}
-	x := &PickerFilter{Handle: objref.Wrap(id)}
+	x := &PickerFilter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *PickerFilter) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *PickerFilter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PickerFilter) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewPickerFilter creates a new PickerFilter.

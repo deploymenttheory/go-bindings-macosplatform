@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request to send a message to the designated recipients.
-//
 // SendMessageIntent is an idiomatic wrapper over the Objective-C class INSendMessageIntent.
+//
+// It embeds [Intent], promoting that type's methods.
+//
+// A request to send a message to the designated recipients.
 type SendMessageIntent struct {
-	objref.Handle
+	Intent
 }
 
 // SendMessageIntentFromID adopts an existing Objective-C object as a SendMessageIntent
@@ -25,7 +26,8 @@ func SendMessageIntentFromID(id objc.ID) *SendMessageIntent {
 	if id == 0 {
 		return nil
 	}
-	x := &SendMessageIntent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SendMessageIntent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,87 +40,67 @@ func sendMessageIntentAdopt(id objc.ID) *SendMessageIntent {
 	if id == 0 {
 		return nil
 	}
-	x := &SendMessageIntent{Handle: objref.Wrap(id)}
+	x := &SendMessageIntent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *SendMessageIntent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SendMessageIntent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SendMessageIntent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a send message intent object with the specified content and recipients.
-//
-// NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSenderAttachments creates a new SendMessageIntent.
+// NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSenderAttachments creates a send message intent object with the specified content and recipients.
 func NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSenderAttachments(recipients []*Person, outgoingMessageType OutgoingMessageType, content string, speakableGroupName *SpeakableString, conversationIdentifier string, serviceName string, sender *Person, attachments []*SendMessageAttachment) *SendMessageIntent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INSendMessageIntent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecipients:outgoingMessageType:content:speakableGroupName:conversationIdentifier:serviceName:sender:attachments:"), purego.SliceToNSArray(recipients, func(_v *Person) objc.ID { return objref.IDOf(_v) }), outgoingMessageType, purego.NSString(content), objref.IDOf(speakableGroupName), purego.NSString(conversationIdentifier), purego.NSString(serviceName), objref.IDOf(sender), purego.SliceToNSArray(attachments, func(_v *SendMessageAttachment) objc.ID { return objref.IDOf(_v) }))
 	return sendMessageIntentAdopt(_id)
 }
 
-// Initializes a send message intent object with the specified content and recipients.
-//
-// NewSendMessageIntentWithRecipientsContentGroupNameServiceNameSender creates a new SendMessageIntent.
+// NewSendMessageIntentWithRecipientsContentGroupNameServiceNameSender initializes a send message intent object with the specified content and recipients.
 func NewSendMessageIntentWithRecipientsContentGroupNameServiceNameSender(recipients []*Person, content string, groupName string, serviceName string, sender *Person) *SendMessageIntent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INSendMessageIntent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecipients:content:groupName:serviceName:sender:"), purego.SliceToNSArray(recipients, func(_v *Person) objc.ID { return objref.IDOf(_v) }), purego.NSString(content), purego.NSString(groupName), purego.NSString(serviceName), objref.IDOf(sender))
 	return sendMessageIntentAdopt(_id)
 }
 
-// Initializes a send message intent object with the specified content and recipients.
-//
-// NewSendMessageIntentWithRecipientsContentSpeakableGroupNameConversationIdentifierServiceNameSender creates a new SendMessageIntent.
+// NewSendMessageIntentWithRecipientsContentSpeakableGroupNameConversationIdentifierServiceNameSender initializes a send message intent object with the specified content and recipients.
 func NewSendMessageIntentWithRecipientsContentSpeakableGroupNameConversationIdentifierServiceNameSender(recipients []*Person, content string, speakableGroupName *SpeakableString, conversationIdentifier string, serviceName string, sender *Person) *SendMessageIntent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INSendMessageIntent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecipients:content:speakableGroupName:conversationIdentifier:serviceName:sender:"), purego.SliceToNSArray(recipients, func(_v *Person) objc.ID { return objref.IDOf(_v) }), purego.NSString(content), objref.IDOf(speakableGroupName), purego.NSString(conversationIdentifier), purego.NSString(serviceName), objref.IDOf(sender))
 	return sendMessageIntentAdopt(_id)
 }
 
-// Initializes a send message intent object with the specified content and recipients.
-//
-// NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSender creates a new SendMessageIntent.
+// NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSender initializes a send message intent object with the specified content and recipients.
 func NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSender(recipients []*Person, outgoingMessageType OutgoingMessageType, content string, speakableGroupName *SpeakableString, conversationIdentifier string, serviceName string, sender *Person) *SendMessageIntent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INSendMessageIntent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecipients:outgoingMessageType:content:speakableGroupName:conversationIdentifier:serviceName:sender:"), purego.SliceToNSArray(recipients, func(_v *Person) objc.ID { return objref.IDOf(_v) }), outgoingMessageType, purego.NSString(content), objref.IDOf(speakableGroupName), purego.NSString(conversationIdentifier), purego.NSString(serviceName), objref.IDOf(sender))
 	return sendMessageIntentAdopt(_id)
 }
 
-// The intent’s display name.
-//
-// WithSuggestedInvocationPhrase sets suggestedInvocationPhrase and returns the receiver so calls can be chained.
+// WithSuggestedInvocationPhrase the intent’s display name.
 func (x *SendMessageIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *SendMessageIntent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
 	return x
 }
 
-// WithDonationMetadata sets donationMetadata and returns the receiver so calls can be chained.
+// WithDonationMetadata sets the property and returns the receiver so calls can be chained.
 func (x *SendMessageIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *SendMessageIntent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return x
 }
 
+// Recipients wraps the corresponding Objective-C method.
+//
 // Recipients returns the collection as a Go slice.
 func (x *SendMessageIntent) Recipients() []*Person {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recipients"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
+// OutgoingMessageType wraps the corresponding Objective-C method.
 func (x *SendMessageIntent) OutgoingMessageType() OutgoingMessageType {
 	_r := objc.Send[OutgoingMessageType](objref.IDOf(x), objc.RegisterName("outgoingMessageType"))
 	return _r
 }
 
+// Content wraps the corresponding Objective-C method.
 func (x *SendMessageIntent) Content() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("content"))
 	if _r == 0 {
@@ -127,11 +109,13 @@ func (x *SendMessageIntent) Content() string {
 	return purego.GoString(_r)
 }
 
+// SpeakableGroupName wraps the corresponding Objective-C method.
 func (x *SendMessageIntent) SpeakableGroupName() *SpeakableString {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("speakableGroupName"))
 	return SpeakableStringFromID(_r)
 }
 
+// ConversationIdentifier wraps the corresponding Objective-C method.
 func (x *SendMessageIntent) ConversationIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("conversationIdentifier"))
 	if _r == 0 {
@@ -140,6 +124,7 @@ func (x *SendMessageIntent) ConversationIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// ServiceName wraps the corresponding Objective-C method.
 func (x *SendMessageIntent) ServiceName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceName"))
 	if _r == 0 {
@@ -148,17 +133,21 @@ func (x *SendMessageIntent) ServiceName() string {
 	return purego.GoString(_r)
 }
 
+// Sender wraps the corresponding Objective-C method.
 func (x *SendMessageIntent) Sender() *Person {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sender"))
 	return PersonFromID(_r)
 }
 
+// Attachments wraps the corresponding Objective-C method.
+//
 // Attachments returns the collection as a Go slice.
 func (x *SendMessageIntent) Attachments() []*SendMessageAttachment {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SendMessageAttachment { return SendMessageAttachmentFromID(_id) })
 }
 
+// GroupName wraps the corresponding Objective-C method.
 func (x *SendMessageIntent) GroupName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupName"))
 	if _r == 0 {
@@ -184,3 +173,5 @@ type SendMessageIntentable interface {
 }
 
 var _ SendMessageIntentable = (*SendMessageIntent)(nil)
+
+var _ IntentProvider = (*SendMessageIntent)(nil)

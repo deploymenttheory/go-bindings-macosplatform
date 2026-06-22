@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRAccessControlClusterTarget is an idiomatic wrapper over the Objective-C class MTRAccessControlClusterTarget.
+//
+// It embeds [MTRAccessControlClusterAccessControlTargetStruct], promoting that type's methods.
 type MTRAccessControlClusterTarget struct {
-	objref.Handle
+	MTRAccessControlClusterAccessControlTargetStruct
 }
 
 // MTRAccessControlClusterTargetFromID adopts an existing Objective-C object as a MTRAccessControlClusterTarget
@@ -23,7 +24,8 @@ func MTRAccessControlClusterTargetFromID(id objc.ID) *MTRAccessControlClusterTar
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAccessControlClusterTarget{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRAccessControlClusterTarget{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRAccessControlClusterTargetAdopt(id objc.ID) *MTRAccessControlClusterTarg
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAccessControlClusterTarget{Handle: objref.Wrap(id)}
+	x := &MTRAccessControlClusterTarget{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRAccessControlClusterTarget) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRAccessControlClusterTarget) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRAccessControlClusterTarget) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRAccessControlClusterTarget creates a new MTRAccessControlClusterTarget.
@@ -62,19 +50,19 @@ func NewMTRAccessControlClusterTarget() *MTRAccessControlClusterTarget {
 	return mTRAccessControlClusterTargetAdopt(_id)
 }
 
-// WithCluster sets cluster and returns the receiver so calls can be chained.
+// WithCluster sets the property and returns the receiver so calls can be chained.
 func (x *MTRAccessControlClusterTarget) WithCluster(cluster obj.Object) *MTRAccessControlClusterTarget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
 	return x
 }
 
-// WithEndpoint sets endpoint and returns the receiver so calls can be chained.
+// WithEndpoint sets the property and returns the receiver so calls can be chained.
 func (x *MTRAccessControlClusterTarget) WithEndpoint(endpoint obj.Object) *MTRAccessControlClusterTarget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return x
 }
 
-// WithDeviceType sets deviceType and returns the receiver so calls can be chained.
+// WithDeviceType sets the property and returns the receiver so calls can be chained.
 func (x *MTRAccessControlClusterTarget) WithDeviceType(deviceType obj.Object) *MTRAccessControlClusterTarget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeviceType:"), objref.IDOf(deviceType))
 	return x
@@ -89,3 +77,5 @@ type MTRAccessControlClusterTargetable interface {
 }
 
 var _ MTRAccessControlClusterTargetable = (*MTRAccessControlClusterTarget)(nil)
+
+var _ MTRAccessControlClusterAccessControlTargetStructProvider = (*MTRAccessControlClusterTarget)(nil)

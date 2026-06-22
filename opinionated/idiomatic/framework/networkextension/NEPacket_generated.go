@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A network packet and its associated properties.
-//
 // NEPacket is an idiomatic wrapper over the Objective-C class NEPacket.
+//
+// A network packet and its associated properties.
 type NEPacket struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NEPacketFromID(id objc.ID) *NEPacket {
 	if id == 0 {
 		return nil
 	}
-	x := &NEPacket{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEPacket{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nEPacketAdopt(id objc.ID) *NEPacket {
 	if id == 0 {
 		return nil
 	}
-	x := &NEPacket{Handle: objref.Wrap(id)}
+	x := &NEPacket{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,34 +60,38 @@ func (x *NEPacket) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a new NEPacket object with data and protocol family.
-//
-// NewNEPacketWithDataProtocolFamily creates a new NEPacket.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEPacket) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNEPacketWithDataProtocolFamily initializes a new NEPacket object with data and protocol family.
 func NewNEPacketWithDataProtocolFamily(data obj.Object, protocolFamily uint8) *NEPacket {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NEPacket")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:protocolFamily:"), objref.IDOf(data), protocolFamily)
 	return nEPacketAdopt(_id)
 }
 
-// The data content of the packet.
+// Data the data content of the packet.
 func (x *NEPacket) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// The protocol family of the packet (such as AF_INET or AF_INET6).
+// ProtocolFamily the protocol family of the packet (such as AF_INET or AF_INET6).
 func (x *NEPacket) ProtocolFamily() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("protocolFamily"))
 	return _r
 }
 
-// The direction of the packet.
+// Direction the direction of the packet.
 func (x *NEPacket) Direction() NETrafficDirection {
 	_r := objc.Send[NETrafficDirection](objref.IDOf(x), objc.RegisterName("direction"))
 	return _r
 }
 
-// Metadata about the source application and flow for this packet. This property will only be non-nil when the routing method for the NEPacketTunnelProvider is NETunnelProviderRoutingMethodSourceApplication.
+// Metadata metadata about the source application and flow for this packet. This property will only be non-nil when the routing method for the NEPacketTunnelProvider is NETunnelProviderRoutingMethodSourceApplication.
 func (x *NEPacket) Metadata() *NEFlowMetaData {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
 	return NEFlowMetaDataFromID(_r)

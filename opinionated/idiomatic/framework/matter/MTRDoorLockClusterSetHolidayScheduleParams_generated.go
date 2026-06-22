@@ -23,7 +23,8 @@ func MTRDoorLockClusterSetHolidayScheduleParamsFromID(id objc.ID) *MTRDoorLockCl
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDoorLockClusterSetHolidayScheduleParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDoorLockClusterSetHolidayScheduleParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDoorLockClusterSetHolidayScheduleParamsAdopt(id objc.ID) *MTRDoorLockClu
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDoorLockClusterSetHolidayScheduleParams{Handle: objref.Wrap(id)}
+	x := &MTRDoorLockClusterSetHolidayScheduleParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,104 +58,116 @@ func (x *MTRDoorLockClusterSetHolidayScheduleParams) IsKind(className string) bo
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDoorLockClusterSetHolidayScheduleParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDoorLockClusterSetHolidayScheduleParams creates a new MTRDoorLockClusterSetHolidayScheduleParams.
 func NewMTRDoorLockClusterSetHolidayScheduleParams() *MTRDoorLockClusterSetHolidayScheduleParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDoorLockClusterSetHolidayScheduleParams")), objc.RegisterName("new"))
 	return mTRDoorLockClusterSetHolidayScheduleParamsAdopt(_id)
 }
 
-// WithHolidayIndex sets holidayIndex and returns the receiver so calls can be chained.
+// WithHolidayIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterSetHolidayScheduleParams) WithHolidayIndex(holidayIndex obj.Object) *MTRDoorLockClusterSetHolidayScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHolidayIndex:"), objref.IDOf(holidayIndex))
 	return x
 }
 
-// WithLocalStartTime sets localStartTime and returns the receiver so calls can be chained.
+// WithLocalStartTime sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterSetHolidayScheduleParams) WithLocalStartTime(localStartTime obj.Object) *MTRDoorLockClusterSetHolidayScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalStartTime:"), objref.IDOf(localStartTime))
 	return x
 }
 
-// WithLocalEndTime sets localEndTime and returns the receiver so calls can be chained.
+// WithLocalEndTime sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterSetHolidayScheduleParams) WithLocalEndTime(localEndTime obj.Object) *MTRDoorLockClusterSetHolidayScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalEndTime:"), objref.IDOf(localEndTime))
 	return x
 }
 
-// WithOperatingMode sets operatingMode and returns the receiver so calls can be chained.
+// WithOperatingMode sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterSetHolidayScheduleParams) WithOperatingMode(operatingMode obj.Object) *MTRDoorLockClusterSetHolidayScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperatingMode:"), objref.IDOf(operatingMode))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRDoorLockClusterSetHolidayScheduleParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterSetHolidayScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRDoorLockClusterSetHolidayScheduleParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterSetHolidayScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// HolidayIndex wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetHolidayScheduleParams) HolidayIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("holidayIndex"))
 	return obj.Wrap(_r)
 }
 
+// SetHolidayIndex wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetHolidayScheduleParams) SetHolidayIndex(holidayIndex obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHolidayIndex:"), objref.IDOf(holidayIndex))
 }
 
+// LocalStartTime wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetHolidayScheduleParams) LocalStartTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localStartTime"))
 	return obj.Wrap(_r)
 }
 
+// SetLocalStartTime wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetHolidayScheduleParams) SetLocalStartTime(localStartTime obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalStartTime:"), objref.IDOf(localStartTime))
 }
 
+// LocalEndTime wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetHolidayScheduleParams) LocalEndTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localEndTime"))
 	return obj.Wrap(_r)
 }
 
+// SetLocalEndTime wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetHolidayScheduleParams) SetLocalEndTime(localEndTime obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalEndTime:"), objref.IDOf(localEndTime))
 }
 
+// OperatingMode wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetHolidayScheduleParams) OperatingMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operatingMode"))
 	return obj.Wrap(_r)
 }
 
+// SetOperatingMode wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetHolidayScheduleParams) SetOperatingMode(operatingMode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperatingMode:"), objref.IDOf(operatingMode))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRDoorLockClusterSetHolidayScheduleParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetHolidayScheduleParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRDoorLockClusterSetHolidayScheduleParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterSetHolidayScheduleParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

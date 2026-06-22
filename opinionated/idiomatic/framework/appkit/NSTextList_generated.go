@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A section of text that forms a single list.
-//
 // TextList is an idiomatic wrapper over the Objective-C class NSTextList.
+//
+// A section of text that forms a single list.
 type TextList struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TextListFromID(id objc.ID) *TextList {
 	if id == 0 {
 		return nil
 	}
-	x := &TextList{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextList{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func textListAdopt(id objc.ID) *TextList {
 	if id == 0 {
 		return nil
 	}
-	x := &TextList{Handle: objref.Wrap(id)}
+	x := &TextList{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,42 +60,40 @@ func (x *TextList) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns a new text list with the format, options, and starting item number you provide.
-//
-// NewTextListWithMarkerFormatOptionsStartingItemNumber creates a new TextList.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextList) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTextListWithMarkerFormatOptionsStartingItemNumber returns a new text list with the format, options, and starting item number you provide.
 func NewTextListWithMarkerFormatOptionsStartingItemNumber(markerFormat obj.Object, options TextListOptions, startingItemNumber int) *TextList {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextList")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMarkerFormat:options:startingItemNumber:"), objref.IDOf(markerFormat), options, startingItemNumber)
 	return textListAdopt(_id)
 }
 
-// Returns an initialized text list.
-//
-// NewTextListWithMarkerFormatOptions creates a new TextList.
+// NewTextListWithMarkerFormatOptions returns an initialized text list.
 func NewTextListWithMarkerFormatOptions(markerFormat obj.Object, options int) *TextList {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextList")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMarkerFormat:options:"), objref.IDOf(markerFormat), options)
 	return textListAdopt(_id)
 }
 
-// Initializes and returns a newly allocated text list item.
-//
-// NewTextListWithCoder creates a new TextList.
+// NewTextListWithCoder initializes and returns a newly allocated text list item.
 func NewTextListWithCoder(coder obj.Object) *TextList {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextList")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return textListAdopt(_id)
 }
 
-// Sets the starting item number for the text list.
-//
-// WithStartingItemNumber sets startingItemNumber and returns the receiver so calls can be chained.
+// WithStartingItemNumber sets the starting item number for the text list.
 func (x *TextList) WithStartingItemNumber(startingItemNumber int) *TextList {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartingItemNumber:"), startingItemNumber)
 	return x
 }
 
-// Returns the computed value for a specific ordinal position in the list.
+// MarkerForItemNumber returns the computed value for a specific ordinal position in the list.
 func (x *TextList) MarkerForItemNumber(itemNumber int) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markerForItemNumber:"), itemNumber)
 	if _r == 0 {
@@ -102,25 +102,30 @@ func (x *TextList) MarkerForItemNumber(itemNumber int) string {
 	return purego.GoString(_r)
 }
 
+// MarkerFormat wraps the corresponding Objective-C method.
 func (x *TextList) MarkerFormat() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markerFormat"))
 	return obj.Wrap(_r)
 }
 
+// ListOptions wraps the corresponding Objective-C method.
 func (x *TextList) ListOptions() TextListOptions {
 	_r := objc.Send[TextListOptions](objref.IDOf(x), objc.RegisterName("listOptions"))
 	return _r
 }
 
+// StartingItemNumber wraps the corresponding Objective-C method.
 func (x *TextList) StartingItemNumber() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("startingItemNumber"))
 	return _r
 }
 
+// SetStartingItemNumber wraps the corresponding Objective-C method.
 func (x *TextList) SetStartingItemNumber(startingItemNumber int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartingItemNumber:"), startingItemNumber)
 }
 
+// IsOrdered wraps the corresponding Objective-C method.
 func (x *TextList) IsOrdered() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOrdered"))
 	return _r

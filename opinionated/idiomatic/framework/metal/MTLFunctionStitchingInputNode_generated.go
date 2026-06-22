@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A call graph node that describes an input to the call graph.
-//
 // FunctionStitchingInputNode is an idiomatic wrapper over the Objective-C class MTLFunctionStitchingInputNode.
+//
+// A call graph node that describes an input to the call graph.
 type FunctionStitchingInputNode struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FunctionStitchingInputNodeFromID(id objc.ID) *FunctionStitchingInputNode {
 	if id == 0 {
 		return nil
 	}
-	x := &FunctionStitchingInputNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FunctionStitchingInputNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func functionStitchingInputNodeAdopt(id objc.ID) *FunctionStitchingInputNode {
 	if id == 0 {
 		return nil
 	}
-	x := &FunctionStitchingInputNode{Handle: objref.Wrap(id)}
+	x := &FunctionStitchingInputNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,32 @@ func (x *FunctionStitchingInputNode) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new input node.
-//
-// NewFunctionStitchingInputNodeWithArgumentIndex creates a new FunctionStitchingInputNode.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FunctionStitchingInputNode) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFunctionStitchingInputNodeWithArgumentIndex creates a new input node.
 func NewFunctionStitchingInputNodeWithArgumentIndex(argument int) *FunctionStitchingInputNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTLFunctionStitchingInputNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithArgumentIndex:"), argument)
 	return functionStitchingInputNodeAdopt(_id)
 }
 
-// The index in the command’s buffer argument table that declares which data to read for this input node.
-//
-// WithArgumentIndex sets argumentIndex and returns the receiver so calls can be chained.
+// WithArgumentIndex the index in the command’s buffer argument table that declares which data to read for this input node.
 func (x *FunctionStitchingInputNode) WithArgumentIndex(argumentIndex int) *FunctionStitchingInputNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArgumentIndex:"), argumentIndex)
 	return x
 }
 
+// ArgumentIndex wraps the corresponding Objective-C method.
 func (x *FunctionStitchingInputNode) ArgumentIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("argumentIndex"))
 	return _r
 }
 
+// SetArgumentIndex wraps the corresponding Objective-C method.
 func (x *FunctionStitchingInputNode) SetArgumentIndex(argumentIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArgumentIndex:"), argumentIndex)
 }

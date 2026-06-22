@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides a good-quality playback rate and pitch shifting independently of each other.
-//
 // AudioUnitTimePitch is an idiomatic wrapper over the Objective-C class AVAudioUnitTimePitch.
+//
+// It embeds [AudioUnitTimeEffect], promoting that type's methods.
+//
+// An object that provides a good-quality playback rate and pitch shifting independently of each other.
 type AudioUnitTimePitch struct {
-	objref.Handle
+	AudioUnitTimeEffect
 }
 
 // AudioUnitTimePitchFromID adopts an existing Objective-C object as a AudioUnitTimePitch
@@ -25,7 +26,8 @@ func AudioUnitTimePitchFromID(id objc.ID) *AudioUnitTimePitch {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitTimePitch{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioUnitTimePitch{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func audioUnitTimePitchAdopt(id objc.ID) *AudioUnitTimePitch {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitTimePitch{Handle: objref.Wrap(id)}
+	x := &AudioUnitTimePitch{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AudioUnitTimePitch) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioUnitTimePitch) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioUnitTimePitch) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAudioUnitTimePitch creates a new AudioUnitTimePitch.
@@ -64,64 +52,59 @@ func NewAudioUnitTimePitch() *AudioUnitTimePitch {
 	return audioUnitTimePitchAdopt(_id)
 }
 
-// The playback rate of the input signal.
-//
-// WithRate sets rate and returns the receiver so calls can be chained.
+// WithRate the playback rate of the input signal.
 func (x *AudioUnitTimePitch) WithRate(rate float32) *AudioUnitTimePitch {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 	return x
 }
 
-// The amount to use to pitch shift the input signal.
-//
-// WithPitch sets pitch and returns the receiver so calls can be chained.
+// WithPitch the amount to use to pitch shift the input signal.
 func (x *AudioUnitTimePitch) WithPitch(pitch float32) *AudioUnitTimePitch {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPitch:"), pitch)
 	return x
 }
 
-// The amount of overlap between segments of the input audio signal.
-//
-// WithOverlap sets overlap and returns the receiver so calls can be chained.
+// WithOverlap the amount of overlap between segments of the input audio signal.
 func (x *AudioUnitTimePitch) WithOverlap(overlap float32) *AudioUnitTimePitch {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverlap:"), overlap)
 	return x
 }
 
-// The bypass state of the audio unit.
-//
-// WithBypass sets bypass and returns the receiver so calls can be chained.
+// WithBypass the bypass state of the audio unit.
 func (x *AudioUnitTimePitch) WithBypass(bypass bool) *AudioUnitTimePitch {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
 	return x
 }
 
-// playback rate of the input signal Range:      1/32 -> 32.0 Default:    1.0 Unit:       Generic
+// Rate playback rate of the input signal Range:      1/32 -> 32.0 Default:    1.0 Unit:       Generic
 func (x *AudioUnitTimePitch) Rate() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rate"))
 	return _r
 }
 
+// SetRate wraps the corresponding Objective-C method.
 func (x *AudioUnitTimePitch) SetRate(rate float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 }
 
-// amount by which the input signal is pitch shifted 1 octave  = 1200 cents 1 musical semitone  = 100 cents Range:      -2400 -> 2400 Default:    0.0 Unit:       Cents
+// Pitch amount by which the input signal is pitch shifted 1 octave  = 1200 cents 1 musical semitone  = 100 cents Range:      -2400 -> 2400 Default:    0.0 Unit:       Cents
 func (x *AudioUnitTimePitch) Pitch() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("pitch"))
 	return _r
 }
 
+// SetPitch wraps the corresponding Objective-C method.
 func (x *AudioUnitTimePitch) SetPitch(pitch float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPitch:"), pitch)
 }
 
-// amount of overlap between segments of the input audio signal A higher value results in fewer artifacts in the output signal. This parameter also impacts the amount of CPU used. Range:      3.0 -> 32.0 Default:    8.0 Unit:       Generic
+// Overlap amount of overlap between segments of the input audio signal A higher value results in fewer artifacts in the output signal. This parameter also impacts the amount of CPU used. Range:      3.0 -> 32.0 Default:    8.0 Unit:       Generic
 func (x *AudioUnitTimePitch) Overlap() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("overlap"))
 	return _r
 }
 
+// SetOverlap wraps the corresponding Objective-C method.
 func (x *AudioUnitTimePitch) SetOverlap(overlap float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverlap:"), overlap)
 }
@@ -142,3 +125,9 @@ type AudioUnitTimePitchable interface {
 }
 
 var _ AudioUnitTimePitchable = (*AudioUnitTimePitch)(nil)
+
+var _ AudioUnitTimeEffectProvider = (*AudioUnitTimePitch)(nil)
+
+var _ AudioUnitProvider = (*AudioUnitTimePitch)(nil)
+
+var _ AudioNodeProvider = (*AudioUnitTimePitch)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mutable collection of font descriptors taken together as a single object.
-//
 // MutableFontCollection is an idiomatic wrapper over the Objective-C class NSMutableFontCollection.
+//
+// It embeds [FontCollection], promoting that type's methods.
+//
+// A mutable collection of font descriptors taken together as a single object.
 type MutableFontCollection struct {
-	objref.Handle
+	FontCollection
 }
 
 // MutableFontCollectionFromID adopts an existing Objective-C object as a MutableFontCollection
@@ -25,7 +26,8 @@ func MutableFontCollectionFromID(id objc.ID) *MutableFontCollection {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableFontCollection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableFontCollection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func mutableFontCollectionAdopt(id objc.ID) *MutableFontCollection {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableFontCollection{Handle: objref.Wrap(id)}
+	x := &MutableFontCollection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MutableFontCollection) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableFontCollection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableFontCollection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMutableFontCollection creates a new MutableFontCollection.
@@ -64,38 +52,36 @@ func NewMutableFontCollection() *MutableFontCollection {
 	return mutableFontCollectionAdopt(_id)
 }
 
-// The font descriptors to include in query results.
-//
-// WithQueryDescriptors sets the collection and returns the receiver so calls can be chained.
+// WithQueryDescriptors the font descriptors to include in query results.
 func (x *MutableFontCollection) WithQueryDescriptors(items ...*FontDescriptor) *MutableFontCollection {
 	_arr := purego.SliceToNSArray(items, func(_v *FontDescriptor) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueryDescriptors:"), _arr)
 	return x
 }
 
-// The font descriptors to exclude from query results.
-//
-// WithExclusionDescriptors sets the collection and returns the receiver so calls can be chained.
+// WithExclusionDescriptors the font descriptors to exclude from query results.
 func (x *MutableFontCollection) WithExclusionDescriptors(items ...*FontDescriptor) *MutableFontCollection {
 	_arr := purego.SliceToNSArray(items, func(_v *FontDescriptor) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExclusionDescriptors:"), _arr)
 	return x
 }
 
-// Edits the query and exclusion arrays by adding the specified font descriptors.
+// AddQueryForDescriptors edits the query and exclusion arrays by adding the specified font descriptors.
 func (x *MutableFontCollection) AddQueryForDescriptors(descriptors []*FontDescriptor) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addQueryForDescriptors:"), purego.SliceToNSArray(descriptors, func(_v *FontDescriptor) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Edits the query and exclusion arrays by removing the specified font descriptors.
+// RemoveQueryForDescriptors edits the query and exclusion arrays by removing the specified font descriptors.
 func (x *MutableFontCollection) RemoveQueryForDescriptors(descriptors []*FontDescriptor) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeQueryForDescriptors:"), purego.SliceToNSArray(descriptors, func(_v *FontDescriptor) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SetQueryDescriptors wraps the corresponding Objective-C method.
 func (x *MutableFontCollection) SetQueryDescriptors(queryDescriptors []*FontDescriptor) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueryDescriptors:"), purego.SliceToNSArray(queryDescriptors, func(_v *FontDescriptor) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SetExclusionDescriptors wraps the corresponding Objective-C method.
 func (x *MutableFontCollection) SetExclusionDescriptors(exclusionDescriptors []*FontDescriptor) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExclusionDescriptors:"), purego.SliceToNSArray(exclusionDescriptors, func(_v *FontDescriptor) objc.ID { return objref.IDOf(_v) }))
 }
@@ -112,3 +98,5 @@ type MutableFontCollectionable interface {
 }
 
 var _ MutableFontCollectionable = (*MutableFontCollection)(nil)
+
+var _ FontCollectionProvider = (*MutableFontCollection)(nil)

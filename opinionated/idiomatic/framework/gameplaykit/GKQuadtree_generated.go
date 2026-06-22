@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A data structure for organizing objects based on their locations in a two-dimensional space.
-//
 // Quadtree is an idiomatic wrapper over the Objective-C class GKQuadtree.
+//
+// A data structure for organizing objects based on their locations in a two-dimensional space.
 type Quadtree struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func QuadtreeFromID(id objc.ID) *Quadtree {
 	if id == 0 {
 		return nil
 	}
-	x := &Quadtree{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Quadtree{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func quadtreeAdopt(id objc.ID) *Quadtree {
 	if id == 0 {
 		return nil
 	}
-	x := &Quadtree{Handle: objref.Wrap(id)}
+	x := &Quadtree{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *Quadtree) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Quadtree) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewQuadtree creates a new Quadtree.
 func NewQuadtree() *Quadtree {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKQuadtree")), objc.RegisterName("new"))
 	return quadtreeAdopt(_id)
 }
 
-// Searches for the specified object and removes it from the tree.
+// RemoveElement searches for the specified object and removes it from the tree.
 func (x *Quadtree) RemoveElement(element obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeElement:"), objref.IDOf(element))
 	return _r
 }
 
-// Removes the specified object from the tree, using a reference to its containing node.
+// RemoveElementWithNode removes the specified object from the tree, using a reference to its containing node.
 func (x *Quadtree) RemoveElementWithNode(data obj.Object, node *QuadtreeNode) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeElement:withNode:"), objref.IDOf(data), objref.IDOf(node))
 	return _r

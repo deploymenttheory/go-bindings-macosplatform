@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that plays audio from a 3D location and orientation in a scene.
-//
 // Source is an idiomatic wrapper over the Objective-C class PHASESource.
+//
+// It embeds [Object], promoting that type's methods.
+//
+// An object that plays audio from a 3D location and orientation in a scene.
 type Source struct {
-	objref.Handle
+	Object
 }
 
 // SourceFromID adopts an existing Objective-C object as a Source
@@ -25,7 +26,8 @@ func SourceFromID(id objc.ID) *Source {
 	if id == 0 {
 		return nil
 	}
-	x := &Source{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Source{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,63 +40,44 @@ func sourceAdopt(id objc.ID) *Source {
 	if id == 0 {
 		return nil
 	}
-	x := &Source{Handle: objref.Wrap(id)}
+	x := &Source{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *Source) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Source) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Source) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a single point in the environment from which sound emanates.
-//
-// NewSourceWithEngine creates a new Source.
+// NewSourceWithEngine creates a single point in the environment from which sound emanates.
 func NewSourceWithEngine(engine *Engine) *Source {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:"), objref.IDOf(engine))
 	return sourceAdopt(_id)
 }
 
-// Creates a voluminous area in the environment from which sound emanates.
-//
-// NewSourceWithEngineShapes creates a new Source.
+// NewSourceWithEngineShapes creates a voluminous area in the environment from which sound emanates.
 func NewSourceWithEngineShapes(engine *Engine, shapes []*Shape) *Source {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:shapes:"), objref.IDOf(engine), purego.SliceToNSArray(shapes, func(_v *Shape) objc.ID { return objref.IDOf(_v) }))
 	return sourceAdopt(_id)
 }
 
-// The amount of sound the source emanates.
-//
-// WithGain sets gain and returns the receiver so calls can be chained.
+// WithGain the amount of sound the source emanates.
 func (x *Source) WithGain(gain float64) *Source {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
 	return x
 }
 
-// Linear gain scalar.
+// Gain linear gain scalar.
 func (x *Source) Gain() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("gain"))
 	return _r
 }
 
+// SetGain wraps the corresponding Objective-C method.
 func (x *Source) SetGain(gain float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
 }
 
-// Array of shapes associated with this source.
+// Shapes array of shapes associated with this source.
 //
 // Shapes returns the collection as a Go slice.
 func (x *Source) Shapes() []*Shape {
@@ -112,3 +95,5 @@ type Sourceable interface {
 }
 
 var _ Sourceable = (*Source)(nil)
+
+var _ ObjectProvider = (*Source)(nil)

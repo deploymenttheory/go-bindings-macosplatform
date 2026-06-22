@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// IOBluetoothSDPServiceAttribute represents a single SDP service attribute.
-//
 // IOBluetoothSDPServiceAttribute is an idiomatic wrapper over the Objective-C class IOBluetoothSDPServiceAttribute.
+//
+// IOBluetoothSDPServiceAttribute represents a single SDP service attribute.
 type IOBluetoothSDPServiceAttribute struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func IOBluetoothSDPServiceAttributeFromID(id objc.ID) *IOBluetoothSDPServiceAttr
 	if id == 0 {
 		return nil
 	}
-	x := &IOBluetoothSDPServiceAttribute{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IOBluetoothSDPServiceAttribute{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func iOBluetoothSDPServiceAttributeAdopt(id objc.ID) *IOBluetoothSDPServiceAttri
 	if id == 0 {
 		return nil
 	}
-	x := &IOBluetoothSDPServiceAttribute{Handle: objref.Wrap(id)}
+	x := &IOBluetoothSDPServiceAttribute{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,39 @@ func (x *IOBluetoothSDPServiceAttribute) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a new service attribute with the given ID and element value.
-//
-// NewIOBluetoothSDPServiceAttributeWithIDAttributeElementValue creates a new IOBluetoothSDPServiceAttribute.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IOBluetoothSDPServiceAttribute) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewIOBluetoothSDPServiceAttributeWithIDAttributeElementValue initializes a new service attribute with the given ID and element value.
 func NewIOBluetoothSDPServiceAttributeWithIDAttributeElementValue(newAttributeID uint16, attributeElementValue obj.Object) *IOBluetoothSDPServiceAttribute {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPServiceAttribute")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithID:attributeElementValue:"), newAttributeID, objref.IDOf(attributeElementValue))
 	return iOBluetoothSDPServiceAttributeAdopt(_id)
 }
 
-// Initializes a new service attribute with the given ID and data element.
-//
-// NewIOBluetoothSDPServiceAttributeWithIDAttributeElement creates a new IOBluetoothSDPServiceAttribute.
+// NewIOBluetoothSDPServiceAttributeWithIDAttributeElement initializes a new service attribute with the given ID and data element.
 func NewIOBluetoothSDPServiceAttributeWithIDAttributeElement(newAttributeID uint16, attributeElement *IOBluetoothSDPDataElement) *IOBluetoothSDPServiceAttribute {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPServiceAttribute")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithID:attributeElement:"), newAttributeID, objref.IDOf(attributeElement))
 	return iOBluetoothSDPServiceAttributeAdopt(_id)
 }
 
-// Returns the attribute ID for the target service attribute.
+// GetAttributeID returns the attribute ID for the target service attribute.
 func (x *IOBluetoothSDPServiceAttribute) GetAttributeID() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getAttributeID"))
 	return _r
 }
 
-// Returns the data element for the target service attribute.
+// GetDataElement returns the data element for the target service attribute.
 func (x *IOBluetoothSDPServiceAttribute) GetDataElement() *IOBluetoothSDPDataElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getDataElement"))
 	return IOBluetoothSDPDataElementFromID(_r)
 }
 
-// Returns the data element representing the attribute ID for the target service attribute.
+// GetIDDataElement returns the data element representing the attribute ID for the target service attribute.
 func (x *IOBluetoothSDPServiceAttribute) GetIDDataElement() *IOBluetoothSDPDataElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getIDDataElement"))
 	return IOBluetoothSDPDataElementFromID(_r)

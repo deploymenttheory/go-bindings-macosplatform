@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract base class for operations that act upon databases in CloudKit.
-//
 // DatabaseOperation is an idiomatic wrapper over the Objective-C class CKDatabaseOperation.
+//
+// DatabaseOperation is an abstract base — you do not construct it directly. Construct one of [FetchDatabaseChangesOperation], [FetchRecordChangesOperation], [FetchRecordZoneChangesOperation], [FetchRecordZonesOperation], [FetchRecordsOperation], [FetchSubscriptionsOperation], [FetchWebAuthTokenOperation], [ModifyRecordZonesOperation], [ModifyRecordsOperation], [ModifySubscriptionsOperation], [QueryOperation] and pass it where a DatabaseOperation is accepted.
+//
+// The abstract base class for operations that act upon databases in CloudKit.
 type DatabaseOperation struct {
-	objref.Handle
+	Operation
 }
 
 // DatabaseOperationFromID adopts an existing Objective-C object as a DatabaseOperation
@@ -25,7 +26,8 @@ func DatabaseOperationFromID(id objc.ID) *DatabaseOperation {
 	if id == 0 {
 		return nil
 	}
-	x := &DatabaseOperation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DatabaseOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,109 +40,73 @@ func databaseOperationAdopt(id objc.ID) *DatabaseOperation {
 	if id == 0 {
 		return nil
 	}
-	x := &DatabaseOperation{Handle: objref.Wrap(id)}
+	x := &DatabaseOperation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *DatabaseOperation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DatabaseOperation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DatabaseOperation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewDatabaseOperation creates a new DatabaseOperation.
-func NewDatabaseOperation() *DatabaseOperation {
-	_id := objc.Send[objc.ID](objc.ID(_class("CKDatabaseOperation")), objc.RegisterName("new"))
-	return databaseOperationAdopt(_id)
-}
-
-// The database that the operation uses.
-//
-// WithDatabase sets database and returns the receiver so calls can be chained.
+// WithDatabase the database that the operation uses.
 func (x *DatabaseOperation) WithDatabase(database *Database) *DatabaseOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return x
 }
 
-// The operation’s configuration.
-//
-// WithConfiguration sets configuration and returns the receiver so calls can be chained.
+// WithConfiguration the operation’s configuration.
 func (x *DatabaseOperation) WithConfiguration(configuration *OperationConfiguration) *DatabaseOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
-// The operation’s group.
-//
-// WithGroup sets group and returns the receiver so calls can be chained.
+// WithGroup the operation’s group.
 func (x *DatabaseOperation) WithGroup(group *OperationGroup) *DatabaseOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation.
-//
-// WithLongLivedOperationWasPersistedBlock sets longLivedOperationWasPersistedBlock and returns the receiver so calls can be chained.
+// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
 func (x *DatabaseOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DatabaseOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
 	return x
 }
 
-// The operation's container.
-//
-// WithContainer sets container and returns the receiver so calls can be chained.
+// WithContainer the operation's container.
 func (x *DatabaseOperation) WithContainer(container *Container) *DatabaseOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network.
-//
-// WithAllowsCellularAccess sets allowsCellularAccess and returns the receiver so calls can be chained.
+// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
 func (x *DatabaseOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *DatabaseOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived.
-//
-// WithLongLived sets longLived and returns the receiver so calls can be chained.
+// WithLongLived a Boolean value that indicates whether the operation is long-lived.
 func (x *DatabaseOperation) WithLongLived(longLived bool) *DatabaseOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The timeout interval when waiting for additional data.
-//
-// WithTimeoutIntervalForRequest sets timeoutIntervalForRequest and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
 func (x *DatabaseOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DatabaseOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can use.
-//
-// WithTimeoutIntervalForResource sets timeoutIntervalForResource and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
 func (x *DatabaseOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DatabaseOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
+// Database wraps the corresponding Objective-C method.
 func (x *DatabaseOperation) Database() *Database {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("database"))
 	return DatabaseFromID(_r)
 }
 
+// SetDatabase wraps the corresponding Objective-C method.
 func (x *DatabaseOperation) SetDatabase(database *Database) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 }
@@ -162,3 +128,12 @@ type DatabaseOperationable interface {
 }
 
 var _ DatabaseOperationable = (*DatabaseOperation)(nil)
+
+// isDatabaseOperation marks DatabaseOperation — and, by embedding promotion, its
+// subclasses — as a member of the DatabaseOperation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DatabaseOperation) isDatabaseOperation() {}
+
+var _ DatabaseOperationProvider = (*DatabaseOperation)(nil)
+
+var _ OperationProvider = (*DatabaseOperation)(nil)

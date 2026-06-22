@@ -14,22 +14,22 @@ import (
 	"unsafe"
 )
 
-// Creates a new custom catalog object for storing reference audio signatures and their associated metadata.
+// New creates a new custom catalog object for storing reference audio signatures and their associated metadata.
 func New() *CustomCatalog {
 	_r := objc.Send[objc.ID](objc.ID(_class("SHCustomCatalog")), objc.RegisterName("new"))
 	return CustomCatalogFromID(_r)
 }
 
-// Creates a media item object with a dictionary of properties and their associated values.
+// MediaItemWithProperties creates a media item object with a dictionary of properties and their associated values.
 func MediaItemWithProperties(properties obj.Object) *MediaItem {
 	_r := objc.Send[objc.ID](objc.ID(_class("SHMediaItem")), objc.RegisterName("mediaItemWithProperties:"), objref.IDOf(properties))
 	return MediaItemFromID(_r)
 }
 
-// Requests the media item for the song with the specified Shazam ID.
+// FetchMediaItemWithShazamID requests the media item for the song with the specified Shazam ID.
 //
 // FetchMediaItemWithShazamID blocks until the operation completes or ctx is cancelled.
-func FetchMediaItemWithShazamID(ctx context.Context, shazamID string) (*MediaItem, error) {
+func FetchMediaItemWithShazamID(ctx context.Context, shazamID string) (result *MediaItem, err error) {
 	type _result struct {
 		val *MediaItem
 		err error
@@ -51,20 +51,20 @@ func FetchMediaItemWithShazamID(ctx context.Context, shazamID string) (*MediaIte
 	}
 }
 
-// An instance of the user's default Shazam library.
+// DefaultLibrary an instance of the user's default Shazam library.
 func DefaultLibrary() *MediaLibrary {
 	_r := objc.Send[objc.ID](objc.ID(_class("SHMediaLibrary")), objc.RegisterName("defaultLibrary"))
 	return MediaLibraryFromID(_r)
 }
 
-// Creates a range with the bounds you specify.
+// RangeWithLowerBoundUpperBound creates a range with the bounds you specify.
 func RangeWithLowerBoundUpperBound(lowerBound float64, upperBound float64) *Range {
 	_r := objc.Send[objc.ID](objc.ID(_class("SHRange")), objc.RegisterName("rangeWithLowerBound:upperBound:"), lowerBound, upperBound)
 	return RangeFromID(_r)
 }
 
-// Creates a signature object from raw data.
-func SignatureWithDataRepresentationError(dataRepresentation obj.Object) (*Signature, error) {
+// SignatureWithDataRepresentationError creates a signature object from raw data.
+func SignatureWithDataRepresentationError(dataRepresentation obj.Object) (result *Signature, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("SHSignature")), objc.RegisterName("signatureWithDataRepresentation:error:"), objref.IDOf(dataRepresentation), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -73,10 +73,10 @@ func SignatureWithDataRepresentationError(dataRepresentation obj.Object) (*Signa
 	return SignatureFromID(_r), nil
 }
 
-// Creates a signature with the asset you specify.
+// GenerateSignatureFromAsset creates a signature with the asset you specify.
 //
 // GenerateSignatureFromAsset blocks until the operation completes or ctx is cancelled.
-func GenerateSignatureFromAsset(ctx context.Context, asset obj.Object) (*Signature, error) {
+func GenerateSignatureFromAsset(ctx context.Context, asset obj.Object) (result *Signature, err error) {
 	type _result struct {
 		val *Signature
 		err error

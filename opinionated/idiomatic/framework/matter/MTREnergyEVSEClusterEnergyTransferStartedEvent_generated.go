@@ -23,7 +23,8 @@ func MTREnergyEVSEClusterEnergyTransferStartedEventFromID(id objc.ID) *MTREnergy
 	if id == 0 {
 		return nil
 	}
-	x := &MTREnergyEVSEClusterEnergyTransferStartedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTREnergyEVSEClusterEnergyTransferStartedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTREnergyEVSEClusterEnergyTransferStartedEventAdopt(id objc.ID) *MTREnergyE
 	if id == 0 {
 		return nil
 	}
-	x := &MTREnergyEVSEClusterEnergyTransferStartedEvent{Handle: objref.Wrap(id)}
+	x := &MTREnergyEVSEClusterEnergyTransferStartedEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,53 +58,65 @@ func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) IsKind(className string
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTREnergyEVSEClusterEnergyTransferStartedEvent creates a new MTREnergyEVSEClusterEnergyTransferStartedEvent.
 func NewMTREnergyEVSEClusterEnergyTransferStartedEvent() *MTREnergyEVSEClusterEnergyTransferStartedEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTREnergyEVSEClusterEnergyTransferStartedEvent")), objc.RegisterName("new"))
 	return mTREnergyEVSEClusterEnergyTransferStartedEventAdopt(_id)
 }
 
-// WithSessionID sets sessionID and returns the receiver so calls can be chained.
+// WithSessionID sets the property and returns the receiver so calls can be chained.
 func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) WithSessionID(sessionID obj.Object) *MTREnergyEVSEClusterEnergyTransferStartedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
 	return x
 }
 
-// WithState sets state and returns the receiver so calls can be chained.
+// WithState sets the property and returns the receiver so calls can be chained.
 func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) WithState(state obj.Object) *MTREnergyEVSEClusterEnergyTransferStartedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), objref.IDOf(state))
 	return x
 }
 
-// WithMaximumCurrent sets maximumCurrent and returns the receiver so calls can be chained.
+// WithMaximumCurrent sets the property and returns the receiver so calls can be chained.
 func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) WithMaximumCurrent(maximumCurrent obj.Object) *MTREnergyEVSEClusterEnergyTransferStartedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumCurrent:"), objref.IDOf(maximumCurrent))
 	return x
 }
 
+// SessionID wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) SessionID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sessionID"))
 	return obj.Wrap(_r)
 }
 
+// SetSessionID wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) SetSessionID(sessionID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
 }
 
+// State wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) State() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
 	return obj.Wrap(_r)
 }
 
+// SetState wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) SetState(state obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), objref.IDOf(state))
 }
 
+// MaximumCurrent wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) MaximumCurrent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maximumCurrent"))
 	return obj.Wrap(_r)
 }
 
+// SetMaximumCurrent wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) SetMaximumCurrent(maximumCurrent obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumCurrent:"), objref.IDOf(maximumCurrent))
 }

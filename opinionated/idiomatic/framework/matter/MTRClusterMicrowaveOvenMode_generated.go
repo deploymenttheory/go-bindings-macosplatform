@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Microwave Oven Mode Attributes and commands for selecting a mode from a list of supported options.
-//
 // MTRClusterMicrowaveOvenMode is an idiomatic wrapper over the Objective-C class MTRClusterMicrowaveOvenMode.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
+//
+// Cluster Microwave Oven Mode Attributes and commands for selecting a mode from a list of supported options.
 type MTRClusterMicrowaveOvenMode struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterMicrowaveOvenModeFromID adopts an existing Objective-C object as a MTRClusterMicrowaveOvenMode
@@ -25,7 +26,8 @@ func MTRClusterMicrowaveOvenModeFromID(id objc.ID) *MTRClusterMicrowaveOvenMode 
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterMicrowaveOvenMode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterMicrowaveOvenMode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,65 +40,56 @@ func mTRClusterMicrowaveOvenModeAdopt(id objc.ID) *MTRClusterMicrowaveOvenMode {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterMicrowaveOvenMode{Handle: objref.Wrap(id)}
+	x := &MTRClusterMicrowaveOvenMode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterMicrowaveOvenMode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterMicrowaveOvenMode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterMicrowaveOvenMode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
-//
-// NewMTRClusterMicrowaveOvenModeWithDeviceEndpointIDQueue creates a new MTRClusterMicrowaveOvenMode.
+// NewMTRClusterMicrowaveOvenModeWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func NewMTRClusterMicrowaveOvenModeWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterMicrowaveOvenMode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterMicrowaveOvenMode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterMicrowaveOvenModeAdopt(_id)
 }
 
+// ReadAttributeSupportedModesWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterMicrowaveOvenMode) ReadAttributeSupportedModesWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedModesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeCurrentModeWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterMicrowaveOvenMode) ReadAttributeCurrentModeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterMicrowaveOvenMode) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterMicrowaveOvenMode) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterMicrowaveOvenMode) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterMicrowaveOvenMode) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterMicrowaveOvenMode) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -115,3 +108,7 @@ type MTRClusterMicrowaveOvenModeable interface {
 }
 
 var _ MTRClusterMicrowaveOvenModeable = (*MTRClusterMicrowaveOvenMode)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterMicrowaveOvenMode)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterMicrowaveOvenMode)(nil)

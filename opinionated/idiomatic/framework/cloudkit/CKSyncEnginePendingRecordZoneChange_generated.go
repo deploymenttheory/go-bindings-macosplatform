@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes an unsent record modification.
-//
 // SyncEnginePendingRecordZoneChange is an idiomatic wrapper over the Objective-C class CKSyncEnginePendingRecordZoneChange.
+//
+// An object that describes an unsent record modification.
 type SyncEnginePendingRecordZoneChange struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SyncEnginePendingRecordZoneChangeFromID(id objc.ID) *SyncEnginePendingRecor
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEnginePendingRecordZoneChange{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SyncEnginePendingRecordZoneChange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func syncEnginePendingRecordZoneChangeAdopt(id objc.ID) *SyncEnginePendingRecord
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEnginePendingRecordZoneChange{Handle: objref.Wrap(id)}
+	x := &SyncEnginePendingRecordZoneChange{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,26 @@ func (x *SyncEnginePendingRecordZoneChange) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a record zone change of the specified type for the given record.
-//
-// NewSyncEnginePendingRecordZoneChangeWithRecordIDType creates a new SyncEnginePendingRecordZoneChange.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncEnginePendingRecordZoneChange) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSyncEnginePendingRecordZoneChangeWithRecordIDType creates a record zone change of the specified type for the given record.
 func NewSyncEnginePendingRecordZoneChangeWithRecordIDType(recordID *RecordID, type_ SyncEnginePendingRecordZoneChangeType) *SyncEnginePendingRecordZoneChange {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEnginePendingRecordZoneChange")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordID:type:"), objref.IDOf(recordID), type_)
 	return syncEnginePendingRecordZoneChangeAdopt(_id)
 }
 
-// The identifier of the modified record.
+// RecordID the identifier of the modified record.
 func (x *SyncEnginePendingRecordZoneChange) RecordID() *RecordID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordID"))
 	return RecordIDFromID(_r)
 }
 
-// The type of change to make.
+// Type the type of change to make.
 func (x *SyncEnginePendingRecordZoneChange) Type() SyncEnginePendingRecordZoneChangeType {
 	_r := objc.Send[SyncEnginePendingRecordZoneChangeType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r

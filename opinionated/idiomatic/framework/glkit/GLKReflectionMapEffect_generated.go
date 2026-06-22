@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A lighting and shading system that supports reflection mapping for use in shader-based OpenGL rendering.
-//
 // ReflectionMapEffect is an idiomatic wrapper over the Objective-C class GLKReflectionMapEffect.
+//
+// It embeds [BaseEffect], promoting that type's methods.
+//
+// A lighting and shading system that supports reflection mapping for use in shader-based OpenGL rendering.
 type ReflectionMapEffect struct {
-	objref.Handle
+	BaseEffect
 }
 
 // ReflectionMapEffectFromID adopts an existing Objective-C object as a ReflectionMapEffect
@@ -25,7 +26,8 @@ func ReflectionMapEffectFromID(id objc.ID) *ReflectionMapEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &ReflectionMapEffect{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ReflectionMapEffect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func reflectionMapEffectAdopt(id objc.ID) *ReflectionMapEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &ReflectionMapEffect{Handle: objref.Wrap(id)}
+	x := &ReflectionMapEffect{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ReflectionMapEffect) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ReflectionMapEffect) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ReflectionMapEffect) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewReflectionMapEffect creates a new ReflectionMapEffect.
@@ -64,55 +52,44 @@ func NewReflectionMapEffect() *ReflectionMapEffect {
 	return reflectionMapEffectAdopt(_id)
 }
 
-// A Boolean value that indicates whether or not to use the color vertex attribute when calculating the light’s interaction with the material.
-//
-// WithColorMaterialEnabled sets colorMaterialEnabled and returns the receiver so calls can be chained.
+// WithColorMaterialEnabled a Boolean value that indicates whether or not to use the color vertex attribute when calculating the light’s interaction with the material.
 func (x *ReflectionMapEffect) WithColorMaterialEnabled(colorMaterialEnabled uint8) *ReflectionMapEffect {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorMaterialEnabled:"), colorMaterialEnabled)
 	return x
 }
 
-// A Boolean value that indicates whether lighting is calculated for both sides of a primitive.
-//
-// WithLightModelTwoSided sets lightModelTwoSided and returns the receiver so calls can be chained.
+// WithLightModelTwoSided a Boolean value that indicates whether lighting is calculated for both sides of a primitive.
 func (x *ReflectionMapEffect) WithLightModelTwoSided(lightModelTwoSided uint8) *ReflectionMapEffect {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightModelTwoSided:"), lightModelTwoSided)
 	return x
 }
 
-// A Boolean value that indicates whether or not to use the constant color.
-//
-// WithUseConstantColor sets useConstantColor and returns the receiver so calls can be chained.
+// WithUseConstantColor a Boolean value that indicates whether or not to use the constant color.
 func (x *ReflectionMapEffect) WithUseConstantColor(useConstantColor uint8) *ReflectionMapEffect {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseConstantColor:"), useConstantColor)
 	return x
 }
 
-// The strategy the effect uses to calculate light values at each fragment. See GLKLightingType.
-//
-// WithLightingType sets lightingType and returns the receiver so calls can be chained.
+// WithLightingType the strategy the effect uses to calculate light values at each fragment. See GLKLightingType.
 func (x *ReflectionMapEffect) WithLightingType(lightingType LightingType) *ReflectionMapEffect {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightingType:"), lightingType)
 	return x
 }
 
-// The order in which textures are applied to rendered primitives.
-//
-// WithTextureOrder sets the collection and returns the receiver so calls can be chained.
+// WithTextureOrder the order in which textures are applied to rendered primitives.
 func (x *ReflectionMapEffect) WithTextureOrder(items ...*EffectPropertyTexture) *ReflectionMapEffect {
 	_arr := purego.SliceToNSArray(items, func(_v *EffectPropertyTexture) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureOrder:"), _arr)
 	return x
 }
 
-// A string used to name your effect.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string used to name your effect.
 func (x *ReflectionMapEffect) WithLabel(label string) *ReflectionMapEffect {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// TextureCubeMap wraps the corresponding Objective-C method.
 func (x *ReflectionMapEffect) TextureCubeMap() *EffectPropertyTexture {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textureCubeMap"))
 	return EffectPropertyTextureFromID(_r)
@@ -131,3 +108,5 @@ type ReflectionMapEffectable interface {
 }
 
 var _ ReflectionMapEffectable = (*ReflectionMapEffect)(nil)
+
+var _ BaseEffectProvider = (*ReflectionMapEffect)(nil)

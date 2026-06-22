@@ -6,15 +6,16 @@ package spritekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of the contact between two physics bodies.
-//
 // PhysicsContact is an idiomatic wrapper over the Objective-C class SKPhysicsContact.
+//
+// A description of the contact between two physics bodies.
 type PhysicsContact struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func PhysicsContactFromID(id objc.ID) *PhysicsContact {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsContact{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PhysicsContact{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func physicsContactAdopt(id objc.ID) *PhysicsContact {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsContact{Handle: objref.Wrap(id)}
+	x := &PhysicsContact{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +61,43 @@ func (x *PhysicsContact) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PhysicsContact) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPhysicsContact creates a new PhysicsContact.
 func NewPhysicsContact() *PhysicsContact {
 	_id := objc.Send[objc.ID](objc.ID(_class("SKPhysicsContact")), objc.RegisterName("new"))
 	return physicsContactAdopt(_id)
 }
 
+// BodyA wraps the corresponding Objective-C method.
 func (x *PhysicsContact) BodyA() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyA"))
 	return PhysicsBodyFromID(_r)
 }
 
+// BodyB wraps the corresponding Objective-C method.
 func (x *PhysicsContact) BodyB() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyB"))
 	return PhysicsBodyFromID(_r)
 }
 
+// ContactPoint wraps the corresponding Objective-C method.
+func (x *PhysicsContact) ContactPoint() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("contactPoint"))
+	return _r
+}
+
+// ContactNormal wraps the corresponding Objective-C method.
+func (x *PhysicsContact) ContactNormal() corefoundation.CGVector {
+	_r := objc.Send[corefoundation.CGVector](objref.IDOf(x), objc.RegisterName("contactNormal"))
+	return _r
+}
+
+// CollisionImpulse wraps the corresponding Objective-C method.
 func (x *PhysicsContact) CollisionImpulse() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("collisionImpulse"))
 	return _r
@@ -84,6 +108,8 @@ type PhysicsContactable interface {
 	obj.Object
 	BodyA() *PhysicsBody
 	BodyB() *PhysicsBody
+	ContactPoint() corefoundation.CGPoint
+	ContactNormal() corefoundation.CGVector
 	CollisionImpulse() float64
 }
 

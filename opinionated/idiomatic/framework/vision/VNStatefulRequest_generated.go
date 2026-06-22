@@ -6,17 +6,19 @@ package vision
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract request type that builds evidence of a condition over time.
-//
 // StatefulRequest is an idiomatic wrapper over the Objective-C class VNStatefulRequest.
+//
+// StatefulRequest is an abstract base — you do not construct it directly. Construct one of [DetectHumanBodyPose3DRequest], [DetectTrajectoriesRequest], [GeneratePersonSegmentationRequest], [TrackHomographicImageRegistrationRequest], [TrackOpticalFlowRequest], [TrackTranslationalImageRegistrationRequest] and pass it where a StatefulRequest is accepted.
+//
+// An abstract request type that builds evidence of a condition over time.
 type StatefulRequest struct {
-	objref.Handle
+	ImageBasedRequest
 }
 
 // StatefulRequestFromID adopts an existing Objective-C object as a StatefulRequest
@@ -25,7 +27,8 @@ func StatefulRequestFromID(id objc.ID) *StatefulRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &StatefulRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StatefulRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,57 +41,37 @@ func statefulRequestAdopt(id objc.ID) *StatefulRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &StatefulRequest{Handle: objref.Wrap(id)}
+	x := &StatefulRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *StatefulRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
+func (x *StatefulRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *StatefulRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return x
 }
 
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StatefulRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StatefulRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewStatefulRequest creates a new StatefulRequest.
-func NewStatefulRequest() *StatefulRequest {
-	_id := objc.Send[objc.ID](objc.ID(_class("VNStatefulRequest")), objc.RegisterName("new"))
-	return statefulRequestAdopt(_id)
-}
-
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets preferBackgroundProcessing and returns the receiver so calls can be chained.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *StatefulRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *StatefulRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets usesCPUOnly and returns the receiver so calls can be chained.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *StatefulRequest) WithUsesCPUOnly(usesCPUOnly bool) *StatefulRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets revision and returns the receiver so calls can be chained.
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
 func (x *StatefulRequest) WithRevision(revision int) *StatefulRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
 }
 
-// The minimum number of frames that the request has to process on before reporting back any observation. This information is provided by the request once initialized with its required paramters. Video based request often need a minimum number of frames before they can report back any observation. An example would be that a movement detection requires at least 5 frames to be detected. The minimumLatencyFrameCount for that request would report 5 and only after 5 frames have been processed an observation would be returned in the results. This latency is indicative of how responsive a request is in respect to the incoming data.
+// MinimumLatencyFrameCount the minimum number of frames that the request has to process on before reporting back any observation. This information is provided by the request once initialized with its required paramters. Video based request often need a minimum number of frames before they can report back any observation. An example would be that a movement detection requires at least 5 frames to be detected. The minimumLatencyFrameCount for that request would report 5 and only after 5 frames have been processed an observation would be returned in the results. This latency is indicative of how responsive a request is in respect to the incoming data.
 func (x *StatefulRequest) MinimumLatencyFrameCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumLatencyFrameCount"))
 	return _r
@@ -97,6 +80,7 @@ func (x *StatefulRequest) MinimumLatencyFrameCount() int {
 // StatefulRequestable is the interface implemented by [StatefulRequest], for mocking and DI.
 type StatefulRequestable interface {
 	obj.Object
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *StatefulRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *StatefulRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *StatefulRequest
 	WithRevision(revision int) *StatefulRequest
@@ -104,3 +88,14 @@ type StatefulRequestable interface {
 }
 
 var _ StatefulRequestable = (*StatefulRequest)(nil)
+
+// isStatefulRequest marks StatefulRequest — and, by embedding promotion, its
+// subclasses — as a member of the StatefulRequest hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *StatefulRequest) isStatefulRequest() {}
+
+var _ StatefulRequestProvider = (*StatefulRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*StatefulRequest)(nil)
+
+var _ RequestProvider = (*StatefulRequest)(nil)

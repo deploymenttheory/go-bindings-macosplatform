@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of the format of per-vertex data for a single vertex attribute in a mesh object.
-//
 // VertexAttribute is an idiomatic wrapper over the Objective-C class MDLVertexAttribute.
+//
+// A description of the format of per-vertex data for a single vertex attribute in a mesh object.
 type VertexAttribute struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VertexAttributeFromID(id objc.ID) *VertexAttribute {
 	if id == 0 {
 		return nil
 	}
-	x := &VertexAttribute{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VertexAttribute{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func vertexAttributeAdopt(id objc.ID) *VertexAttribute {
 	if id == 0 {
 		return nil
 	}
-	x := &VertexAttribute{Handle: objref.Wrap(id)}
+	x := &VertexAttribute{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,62 +60,56 @@ func (x *VertexAttribute) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VertexAttribute) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVertexAttribute creates a new VertexAttribute.
 func NewVertexAttribute() *VertexAttribute {
 	_id := objc.Send[objc.ID](objc.ID(_class("MDLVertexAttribute")), objc.RegisterName("new"))
 	return vertexAttributeAdopt(_id)
 }
 
-// Initializes a vertex attribute object with the specified property values.
-//
-// NewVertexAttributeWithNameFormatOffsetBufferIndex creates a new VertexAttribute.
+// NewVertexAttributeWithNameFormatOffsetBufferIndex initializes a vertex attribute object with the specified property values.
 func NewVertexAttributeWithNameFormatOffsetBufferIndex(name string, format VertexFormat, offset int, bufferIndex int) *VertexAttribute {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLVertexAttribute")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:format:offset:bufferIndex:"), purego.NSString(name), format, offset, bufferIndex)
 	return vertexAttributeAdopt(_id)
 }
 
-// An identifier for the semantic use of the vertex attribute.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName an identifier for the semantic use of the vertex attribute.
 func (x *VertexAttribute) WithName(name string) *VertexAttribute {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The format of per-vertex data for the attribute.
-//
-// WithFormat sets format and returns the receiver so calls can be chained.
+// WithFormat the format of per-vertex data for the attribute.
 func (x *VertexAttribute) WithFormat(format VertexFormat) *VertexAttribute {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormat:"), format)
 	return x
 }
 
-// The offset, in bytes, of vertex data for the attribute in a vertex buffer, relative to the start of data for each vertex.
-//
-// WithOffset sets offset and returns the receiver so calls can be chained.
+// WithOffset the offset, in bytes, of vertex data for the attribute in a vertex buffer, relative to the start of data for each vertex.
 func (x *VertexAttribute) WithOffset(offset int) *VertexAttribute {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// The index of the vertex buffer containing data for this attribute in a mesh’s vertexBuffers array.
-//
-// WithBufferIndex sets bufferIndex and returns the receiver so calls can be chained.
+// WithBufferIndex the index of the vertex buffer containing data for this attribute in a mesh’s vertexBuffers array.
 func (x *VertexAttribute) WithBufferIndex(bufferIndex int) *VertexAttribute {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferIndex:"), bufferIndex)
 	return x
 }
 
-// the time the attribute is intended for. morph targets would store their times here
-//
-// WithTime sets time_ and returns the receiver so calls can be chained.
+// WithTime the time the attribute is intended for. morph targets would store their times here
 func (x *VertexAttribute) WithTime(time_ float64) *VertexAttribute {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTime:"), time_)
 	return x
 }
 
-// Identifying name of the attribute derived from model file, or one of the predefined MDLVertexAttribute strings
+// Name identifying name of the attribute derived from model file, or one of the predefined MDLVertexAttribute strings
 func (x *VertexAttribute) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -122,46 +118,51 @@ func (x *VertexAttribute) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *VertexAttribute) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// Format (including number of components) of the attribute If the value is MDLVertexFormatInvalid.   Other values of this object will be ignored when setting the MDLVertexDescriptor object in a Mesh. The initial value is MDLVertexFormatInvalid.
+// Format format (including number of components) of the attribute If the value is MDLVertexFormatInvalid.   Other values of this object will be ignored when setting the MDLVertexDescriptor object in a Mesh. The initial value is MDLVertexFormatInvalid.
 func (x *VertexAttribute) Format() VertexFormat {
 	_r := objc.Send[VertexFormat](objref.IDOf(x), objc.RegisterName("format"))
 	return _r
 }
 
+// SetFormat wraps the corresponding Objective-C method.
 func (x *VertexAttribute) SetFormat(format VertexFormat) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormat:"), format)
 }
 
-// offset in bytes of the attrbute in each element of the vertex buffer
+// Offset offset in bytes of the attrbute in each element of the vertex buffer
 func (x *VertexAttribute) Offset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
 	return _r
 }
 
+// SetOffset wraps the corresponding Objective-C method.
 func (x *VertexAttribute) SetOffset(offset int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 }
 
-// index of the buffer in mesh's vertexBuffer array in which this attribute resides
+// BufferIndex index of the buffer in mesh's vertexBuffer array in which this attribute resides
 func (x *VertexAttribute) BufferIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bufferIndex"))
 	return _r
 }
 
+// SetBufferIndex wraps the corresponding Objective-C method.
 func (x *VertexAttribute) SetBufferIndex(bufferIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferIndex:"), bufferIndex)
 }
 
-// the time the attribute is intended for. morph targets would store their times here
+// Time the time the attribute is intended for. morph targets would store their times here
 func (x *VertexAttribute) Time() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("time"))
 	return _r
 }
 
+// SetTime wraps the corresponding Objective-C method.
 func (x *VertexAttribute) SetTime(time_ float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTime:"), time_)
 }

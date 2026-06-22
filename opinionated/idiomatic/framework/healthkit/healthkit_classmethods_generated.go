@@ -13,20 +13,20 @@ import (
 	"unsafe"
 )
 
-// Creates a new audiogram sample.
+// AudiogramSampleWithSensitivityPointsStartDateEndDateMetadata creates a new audiogram sample.
 func AudiogramSampleWithSensitivityPointsStartDateEndDateMetadata(sensitivityPoints []*AudiogramSensitivityPoint, startDate obj.Object, endDate obj.Object, metadata obj.Object) *AudiogramSample {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKAudiogramSample")), objc.RegisterName("audiogramSampleWithSensitivityPoints:startDate:endDate:metadata:"), purego.SliceToNSArray(sensitivityPoints, func(_v *AudiogramSensitivityPoint) objc.ID { return objref.IDOf(_v) }), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(metadata))
 	return AudiogramSampleFromID(_r)
 }
 
-// Creates a new audiogram sample with the specified attributes.
+// AudiogramSampleWithSensitivityPointsStartDateEndDateDeviceMetadata creates a new audiogram sample with the specified attributes.
 func AudiogramSampleWithSensitivityPointsStartDateEndDateDeviceMetadata(sensitivityPoints []*AudiogramSensitivityPoint, startDate obj.Object, endDate obj.Object, device *Device, metadata obj.Object) *AudiogramSample {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKAudiogramSample")), objc.RegisterName("audiogramSampleWithSensitivityPoints:startDate:endDate:device:metadata:"), purego.SliceToNSArray(sensitivityPoints, func(_v *AudiogramSensitivityPoint) objc.ID { return objref.IDOf(_v) }), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(device), objref.IDOf(metadata))
 	return AudiogramSampleFromID(_r)
 }
 
-// Creates a new sensitivity point.
-func SensitivityPointWithFrequencyLeftEarSensitivityRightEarSensitivityError(frequency *Quantity, leftEarSensitivity *Quantity, rightEarSensitivity *Quantity) (*AudiogramSensitivityPoint, error) {
+// SensitivityPointWithFrequencyLeftEarSensitivityRightEarSensitivityError creates a new sensitivity point.
+func SensitivityPointWithFrequencyLeftEarSensitivityRightEarSensitivityError(frequency *Quantity, leftEarSensitivity *Quantity, rightEarSensitivity *Quantity) (result *AudiogramSensitivityPoint, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("HKAudiogramSensitivityPoint")), objc.RegisterName("sensitivityPointWithFrequency:leftEarSensitivity:rightEarSensitivity:error:"), objref.IDOf(frequency), objref.IDOf(leftEarSensitivity), objref.IDOf(rightEarSensitivity), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -35,8 +35,8 @@ func SensitivityPointWithFrequencyLeftEarSensitivityRightEarSensitivityError(fre
 	return AudiogramSensitivityPointFromID(_r), nil
 }
 
-// Creates a point that can be included in a audiogram.
-func SensitivityPointWithFrequencyTestsError(frequency *Quantity, tests []*AudiogramSensitivityTest) (*AudiogramSensitivityPoint, error) {
+// SensitivityPointWithFrequencyTestsError creates a point that can be included in a audiogram.
+func SensitivityPointWithFrequencyTestsError(frequency *Quantity, tests []*AudiogramSensitivityTest) (result *AudiogramSensitivityPoint, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("HKAudiogramSensitivityPoint")), objc.RegisterName("sensitivityPointWithFrequency:tests:error:"), objref.IDOf(frequency), purego.SliceToNSArray(tests, func(_v *AudiogramSensitivityTest) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -45,8 +45,8 @@ func SensitivityPointWithFrequencyTestsError(frequency *Quantity, tests []*Audio
 	return AudiogramSensitivityPointFromID(_r), nil
 }
 
-// Creates a clamping range from a given lower and upper bound. At least one bound must be specified. If both bounds are provided, the lower bound must be less than the upper bound.
-func ClampingRangeWithLowerBoundUpperBoundError(lowerBound obj.Object, upperBound obj.Object) (*AudiogramSensitivityPointClampingRange, error) {
+// ClampingRangeWithLowerBoundUpperBoundError creates a clamping range from a given lower and upper bound. At least one bound must be specified. If both bounds are provided, the lower bound must be less than the upper bound.
+func ClampingRangeWithLowerBoundUpperBoundError(lowerBound obj.Object, upperBound obj.Object) (result *AudiogramSensitivityPointClampingRange, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("HKAudiogramSensitivityPointClampingRange")), objc.RegisterName("clampingRangeWithLowerBound:upperBound:error:"), objref.IDOf(lowerBound), objref.IDOf(upperBound), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -55,8 +55,8 @@ func ClampingRangeWithLowerBoundUpperBoundError(lowerBound obj.Object, upperBoun
 	return AudiogramSensitivityPointClampingRangeFromID(_r), nil
 }
 
-// Returns a CDA document sample containing the provided XML document and metadata.
-func CDADocumentSampleWithDataStartDateEndDateMetadataValidationError(documentData obj.Object, startDate obj.Object, endDate obj.Object, metadata obj.Object) (*CDADocumentSample, error) {
+// CDADocumentSampleWithDataStartDateEndDateMetadataValidationError returns a CDA document sample containing the provided XML document and metadata.
+func CDADocumentSampleWithDataStartDateEndDateMetadataValidationError(documentData obj.Object, startDate obj.Object, endDate obj.Object, metadata obj.Object) (result *CDADocumentSample, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("HKCDADocumentSample")), objc.RegisterName("CDADocumentSampleWithData:startDate:endDate:metadata:validationError:"), objref.IDOf(documentData), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(metadata), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -65,56 +65,56 @@ func CDADocumentSampleWithDataStartDateEndDateMetadataValidationError(documentDa
 	return CDADocumentSampleFromID(_r), nil
 }
 
-// Creates a newly instantiated category sample with the provided metadata.
+// CategorySampleWithTypeValueStartDateEndDateMetadata creates a newly instantiated category sample with the provided metadata.
 func CategorySampleWithTypeValueStartDateEndDateMetadata(type_ *CategoryType, value int, startDate obj.Object, endDate obj.Object, metadata obj.Object) *CategorySample {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKCategorySample")), objc.RegisterName("categorySampleWithType:value:startDate:endDate:metadata:"), objref.IDOf(type_), value, objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(metadata))
 	return CategorySampleFromID(_r)
 }
 
-// Creates a newly instantiated category sample.
+// CategorySampleWithTypeValueStartDateEndDate creates a newly instantiated category sample.
 func CategorySampleWithTypeValueStartDateEndDate(type_ *CategoryType, value int, startDate obj.Object, endDate obj.Object) *CategorySample {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKCategorySample")), objc.RegisterName("categorySampleWithType:value:startDate:endDate:"), objref.IDOf(type_), value, objref.IDOf(startDate), objref.IDOf(endDate))
 	return CategorySampleFromID(_r)
 }
 
-// Creates a newly instantiated category sample including the provided device and metadata.
+// CategorySampleWithTypeValueStartDateEndDateDeviceMetadata creates a newly instantiated category sample including the provided device and metadata.
 func CategorySampleWithTypeValueStartDateEndDateDeviceMetadata(type_ *CategoryType, value int, startDate obj.Object, endDate obj.Object, device *Device, metadata obj.Object) *CategorySample {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKCategorySample")), objc.RegisterName("categorySampleWithType:value:startDate:endDate:device:metadata:"), objref.IDOf(type_), value, objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(device), objref.IDOf(metadata))
 	return CategorySampleFromID(_r)
 }
 
-// Creates a new glasses prescription sample.
+// PrescriptionWithRightEyeSpecificationLeftEyeSpecificationBrandDateIssuedExpirationDateDeviceMetadata creates a new glasses prescription sample.
 func PrescriptionWithRightEyeSpecificationLeftEyeSpecificationBrandDateIssuedExpirationDateDeviceMetadata(rightEyeSpecification *ContactsLensSpecification, leftEyeSpecification *ContactsLensSpecification, brand string, dateIssued obj.Object, expirationDate obj.Object, device *Device, metadata obj.Object) *ContactsPrescription {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKContactsPrescription")), objc.RegisterName("prescriptionWithRightEyeSpecification:leftEyeSpecification:brand:dateIssued:expirationDate:device:metadata:"), objref.IDOf(rightEyeSpecification), objref.IDOf(leftEyeSpecification), purego.NSString(brand), objref.IDOf(dateIssued), objref.IDOf(expirationDate), objref.IDOf(device), objref.IDOf(metadata))
 	return ContactsPrescriptionFromID(_r)
 }
 
-// Instantiates and returns a new correlation instance.
+// CorrelationWithTypeStartDateEndDateObjects instantiates and returns a new correlation instance.
 func CorrelationWithTypeStartDateEndDateObjects(correlationType *CorrelationType, startDate obj.Object, endDate obj.Object, objects obj.Object) *Correlation {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKCorrelation")), objc.RegisterName("correlationWithType:startDate:endDate:objects:"), objref.IDOf(correlationType), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(objects))
 	return CorrelationFromID(_r)
 }
 
-// Instantiates and returns a new correlation instance with the provided metadata.
+// CorrelationWithTypeStartDateEndDateObjectsMetadata instantiates and returns a new correlation instance with the provided metadata.
 func CorrelationWithTypeStartDateEndDateObjectsMetadata(correlationType *CorrelationType, startDate obj.Object, endDate obj.Object, objects obj.Object, metadata obj.Object) *Correlation {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKCorrelation")), objc.RegisterName("correlationWithType:startDate:endDate:objects:metadata:"), objref.IDOf(correlationType), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(objects), objref.IDOf(metadata))
 	return CorrelationFromID(_r)
 }
 
-// Instantiates and returns a new correlation instance with the provided device and metadata.
+// CorrelationWithTypeStartDateEndDateObjectsDeviceMetadata instantiates and returns a new correlation instance with the provided device and metadata.
 func CorrelationWithTypeStartDateEndDateObjectsDeviceMetadata(correlationType *CorrelationType, startDate obj.Object, endDate obj.Object, objects obj.Object, device *Device, metadata obj.Object) *Correlation {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKCorrelation")), objc.RegisterName("correlationWithType:startDate:endDate:objects:device:metadata:"), objref.IDOf(correlationType), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(objects), objref.IDOf(device), objref.IDOf(metadata))
 	return CorrelationFromID(_r)
 }
 
-// returns a device object that represents the current device.
+// LocalDevice returns a device object that represents the current device.
 func LocalDevice() *Device {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKDevice")), objc.RegisterName("localDevice"))
 	return DeviceFromID(_r)
 }
 
-// Creates an FHIR version object from a string representation of the version.
-func VersionFromVersionStringError(versionString string) (*FHIRVersion, error) {
+// VersionFromVersionStringError creates an FHIR version object from a string representation of the version.
+func VersionFromVersionStringError(versionString string) (result *FHIRVersion, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("HKFHIRVersion")), objc.RegisterName("versionFromVersionString:error:"), purego.NSString(versionString), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -123,878 +123,883 @@ func VersionFromVersionStringError(versionString string) (*FHIRVersion, error) {
 	return FHIRVersionFromID(_r), nil
 }
 
-// Returns the primary Second Draft Standard for Trial Use (DSTU2) version.
+// PrimaryDSTU2Version returns the primary Second Draft Standard for Trial Use (DSTU2) version.
 func PrimaryDSTU2Version() *FHIRVersion {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKFHIRVersion")), objc.RegisterName("primaryDSTU2Version"))
 	return FHIRVersionFromID(_r)
 }
 
-// Returns the primary Release 4 (R4) version.
+// PrimaryR4Version returns the primary Release 4 (R4) version.
 func PrimaryR4Version() *FHIRVersion {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKFHIRVersion")), objc.RegisterName("primaryR4Version"))
 	return FHIRVersionFromID(_r)
 }
 
-// Creates a new GAD-7 sample. There must be exactly 7 elements in answers, each answer must be of type `HKGAD7AssessmentAnswer`.
+// AssessmentWithDateAnswers creates a new GAD-7 sample. There must be exactly 7 elements in answers, each answer must be of type `HKGAD7AssessmentAnswer`.
 func AssessmentWithDateAnswers(date obj.Object, answers []obj.Object) *GAD7Assessment {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKGAD7Assessment")), objc.RegisterName("assessmentWithDate:answers:"), objref.IDOf(date), purego.SliceToNSArray(answers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return GAD7AssessmentFromID(_r)
 }
 
-// Creates a new GAD-7 sample. There must be exactly 7 elements in answers, each answer must be of type `HKGAD7AssessmentAnswer`.
+// AssessmentWithDateAnswersMetadata creates a new GAD-7 sample. There must be exactly 7 elements in answers, each answer must be of type `HKGAD7AssessmentAnswer`.
 func AssessmentWithDateAnswersMetadata(date obj.Object, answers []obj.Object, metadata obj.Object) *GAD7Assessment {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKGAD7Assessment")), objc.RegisterName("assessmentWithDate:answers:metadata:"), objref.IDOf(date), purego.SliceToNSArray(answers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(metadata))
 	return GAD7AssessmentFromID(_r)
 }
 
-// Creates a new glasses prescription sample.
+// PrescriptionWithRightEyeSpecificationLeftEyeSpecificationDateIssuedExpirationDateDeviceMetadata creates a new glasses prescription sample.
 func PrescriptionWithRightEyeSpecificationLeftEyeSpecificationDateIssuedExpirationDateDeviceMetadata(rightEyeSpecification *GlassesLensSpecification, leftEyeSpecification *GlassesLensSpecification, dateIssued obj.Object, expirationDate obj.Object, device *Device, metadata obj.Object) *GlassesPrescription {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKGlassesPrescription")), objc.RegisterName("prescriptionWithRightEyeSpecification:leftEyeSpecification:dateIssued:expirationDate:device:metadata:"), objref.IDOf(rightEyeSpecification), objref.IDOf(leftEyeSpecification), objref.IDOf(dateIssued), objref.IDOf(expirationDate), objref.IDOf(device), objref.IDOf(metadata))
 	return GlassesPrescriptionFromID(_r)
 }
 
-// Returns a Boolean value that indicates whether HealthKit is available on this device.
+// IsHealthDataAvailable returns a Boolean value that indicates whether HealthKit is available on this device.
 func IsHealthDataAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("HKHealthStore")), objc.RegisterName("isHealthDataAvailable"))
 	return _r
 }
 
-// The maximum number of heartbeats that can be added to an HKHeartbeatSeriesBuilder. Any calls to addHeartbeatWithTimeIntervalSinceSeriesStartDate:precededByGap:completion: once maximumCount has been reached will fail and an error will be returned in the completion handler.
+// MaximumCount the maximum number of heartbeats that can be added to an HKHeartbeatSeriesBuilder. Any calls to addHeartbeatWithTimeIntervalSinceSeriesStartDate:precededByGap:completion: once maximumCount has been reached will fail and an error will be returned in the completion handler.
 func MaximumCount() int {
 	_r := objc.Send[int](objc.ID(_class("HKHeartbeatSeriesBuilder")), objc.RegisterName("maximumCount"))
 	return _r
 }
 
-// Returns the shared quantity type for the provided identifier.
+// QuantityTypeForIdentifier returns the shared quantity type for the provided identifier.
 func QuantityTypeForIdentifier(identifier obj.Object) *QuantityType {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("quantityTypeForIdentifier:"), objref.IDOf(identifier))
 	return QuantityTypeFromID(_r)
 }
 
-// Returns the shared category type for the provided identifier.
+// CategoryTypeForIdentifier returns the shared category type for the provided identifier.
 func CategoryTypeForIdentifier(identifier obj.Object) *CategoryType {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("categoryTypeForIdentifier:"), objref.IDOf(identifier))
 	return CategoryTypeFromID(_r)
 }
 
-// Returns the shared characteristic type for the provided identifier.
+// CharacteristicTypeForIdentifier returns the shared characteristic type for the provided identifier.
 func CharacteristicTypeForIdentifier(identifier obj.Object) *CharacteristicType {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("characteristicTypeForIdentifier:"), objref.IDOf(identifier))
 	return CharacteristicTypeFromID(_r)
 }
 
-// Returns the shared correlation type for the provided identifier.
+// CorrelationTypeForIdentifier returns the shared correlation type for the provided identifier.
 func CorrelationTypeForIdentifier(identifier obj.Object) *CorrelationType {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("correlationTypeForIdentifier:"), objref.IDOf(identifier))
 	return CorrelationTypeFromID(_r)
 }
 
-// Returns the shared document type for the provided identifier.
+// DocumentTypeForIdentifier returns the shared document type for the provided identifier.
 func DocumentTypeForIdentifier(identifier obj.Object) *DocumentType {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("documentTypeForIdentifier:"), objref.IDOf(identifier))
 	return DocumentTypeFromID(_r)
 }
 
+// ScoredAssessmentTypeForIdentifier wraps the corresponding Objective-C method.
 func ScoredAssessmentTypeForIdentifier(identifier obj.Object) *ScoredAssessmentType {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("scoredAssessmentTypeForIdentifier:"), objref.IDOf(identifier))
 	return ScoredAssessmentTypeFromID(_r)
 }
 
-// Returns the shared series type for the provided identifier.
+// SeriesTypeForIdentifier returns the shared series type for the provided identifier.
 func SeriesTypeForIdentifier(identifier string) *SeriesType {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("seriesTypeForIdentifier:"), purego.NSString(identifier))
 	return SeriesTypeFromID(_r)
 }
 
-// Returns the shared HKWorkoutType object.
+// HKObjectTypeWorkoutType returns the shared HKWorkoutType object.
 func HKObjectTypeWorkoutType() *WorkoutType {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("workoutType"))
 	return WorkoutTypeFromID(_r)
 }
 
-// Returns the shared activity summary type.
+// HKObjectTypeActivitySummaryType returns the shared activity summary type.
 func HKObjectTypeActivitySummaryType() *ActivitySummaryType {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("activitySummaryType"))
 	return ActivitySummaryTypeFromID(_r)
 }
 
-// Returns an audiogram sample type.
+// HKObjectTypeAudiogramSampleType returns an audiogram sample type.
 func HKObjectTypeAudiogramSampleType() *AudiogramSampleType {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("audiogramSampleType"))
 	return AudiogramSampleTypeFromID(_r)
 }
 
-// Returns the shared electrocardiogram type.
+// HKObjectTypeElectrocardiogramType returns the shared electrocardiogram type.
 func HKObjectTypeElectrocardiogramType() *ElectrocardiogramType {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("electrocardiogramType"))
 	return ElectrocardiogramTypeFromID(_r)
 }
 
+// HKObjectTypeMedicationDoseEventType wraps the corresponding Objective-C method.
 func HKObjectTypeMedicationDoseEventType() *MedicationDoseEventType {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("medicationDoseEventType"))
 	return MedicationDoseEventTypeFromID(_r)
 }
 
-// Returns a shared vision prescription type object.
+// HKObjectTypeVisionPrescriptionType returns a shared vision prescription type object.
 func HKObjectTypeVisionPrescriptionType() *PrescriptionType {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("visionPrescriptionType"))
 	return PrescriptionTypeFromID(_r)
 }
 
+// HKObjectTypeStateOfMindType wraps the corresponding Objective-C method.
 func HKObjectTypeStateOfMindType() *StateOfMindType {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("stateOfMindType"))
 	return StateOfMindTypeFromID(_r)
 }
 
+// HKObjectTypeUserAnnotatedMedicationType wraps the corresponding Objective-C method.
 func HKObjectTypeUserAnnotatedMedicationType() *UserAnnotatedMedicationType {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("userAnnotatedMedicationType"))
 	return UserAnnotatedMedicationTypeFromID(_r)
 }
 
-// Returns the shared clinical type for the provided identifier.
+// ClinicalTypeForIdentifier returns the shared clinical type for the provided identifier.
 func ClinicalTypeForIdentifier(identifier obj.Object) *ClinicalType {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("clinicalTypeForIdentifier:"), objref.IDOf(identifier))
 	return ClinicalTypeFromID(_r)
 }
 
-// Creates a new PHQ-9 sample. There must be exactly 9 elements in answers, each answer must be of type `HKPHQ9AssessmentAnswer`. Question #9 is considered optional. If the user does not answer #9, use `HKPHQ9AssessmentAnswerPreferNotToAnswer`
+// HKPHQ9AssessmentAssessmentWithDateAnswers creates a new PHQ-9 sample. There must be exactly 9 elements in answers, each answer must be of type `HKPHQ9AssessmentAnswer`. Question #9 is considered optional. If the user does not answer #9, use `HKPHQ9AssessmentAnswerPreferNotToAnswer`
 func HKPHQ9AssessmentAssessmentWithDateAnswers(date obj.Object, answers []obj.Object) *PHQ9Assessment {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKPHQ9Assessment")), objc.RegisterName("assessmentWithDate:answers:"), objref.IDOf(date), purego.SliceToNSArray(answers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return PHQ9AssessmentFromID(_r)
 }
 
-// Creates a new PHQ-9 sample. There must be exactly 9 elements in answers, each answer must be of type `HKPHQ9AssessmentAnswer`. Question #9 is considered optional. If the user does not answer #9, use `HKPHQ9AssessmentAnswerPreferNotToAnswer`
+// HKPHQ9AssessmentAssessmentWithDateAnswersMetadata creates a new PHQ-9 sample. There must be exactly 9 elements in answers, each answer must be of type `HKPHQ9AssessmentAnswer`. Question #9 is considered optional. If the user does not answer #9, use `HKPHQ9AssessmentAnswerPreferNotToAnswer`
 func HKPHQ9AssessmentAssessmentWithDateAnswersMetadata(date obj.Object, answers []obj.Object, metadata obj.Object) *PHQ9Assessment {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKPHQ9Assessment")), objc.RegisterName("assessmentWithDate:answers:metadata:"), objref.IDOf(date), purego.SliceToNSArray(answers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(metadata))
 	return PHQ9AssessmentFromID(_r)
 }
 
-// Instantiates and returns a new quantity object.
+// QuantityWithUnitDoubleValue instantiates and returns a new quantity object.
 func QuantityWithUnitDoubleValue(unit *Unit, value float64) *Quantity {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuantity")), objc.RegisterName("quantityWithUnit:doubleValue:"), objref.IDOf(unit), value)
 	return QuantityFromID(_r)
 }
 
-// Returns a sample containing a numeric measurement.
+// QuantitySampleWithTypeQuantityStartDateEndDate returns a sample containing a numeric measurement.
 func QuantitySampleWithTypeQuantityStartDateEndDate(quantityType *QuantityType, quantity *Quantity, startDate obj.Object, endDate obj.Object) *QuantitySample {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuantitySample")), objc.RegisterName("quantitySampleWithType:quantity:startDate:endDate:"), objref.IDOf(quantityType), objref.IDOf(quantity), objref.IDOf(startDate), objref.IDOf(endDate))
 	return QuantitySampleFromID(_r)
 }
 
-// Returns a sample containing a numeric measurement with the provided metadata.
+// QuantitySampleWithTypeQuantityStartDateEndDateMetadata returns a sample containing a numeric measurement with the provided metadata.
 func QuantitySampleWithTypeQuantityStartDateEndDateMetadata(quantityType *QuantityType, quantity *Quantity, startDate obj.Object, endDate obj.Object, metadata obj.Object) *QuantitySample {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuantitySample")), objc.RegisterName("quantitySampleWithType:quantity:startDate:endDate:metadata:"), objref.IDOf(quantityType), objref.IDOf(quantity), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(metadata))
 	return QuantitySampleFromID(_r)
 }
 
-// Returns a sample containing a numeric measurement with the provided device and metadata.
+// QuantitySampleWithTypeQuantityStartDateEndDateDeviceMetadata returns a sample containing a numeric measurement with the provided device and metadata.
 func QuantitySampleWithTypeQuantityStartDateEndDateDeviceMetadata(quantityType *QuantityType, quantity *Quantity, startDate obj.Object, endDate obj.Object, device *Device, metadata obj.Object) *QuantitySample {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuantitySample")), objc.RegisterName("quantitySampleWithType:quantity:startDate:endDate:device:metadata:"), objref.IDOf(quantityType), objref.IDOf(quantity), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(device), objref.IDOf(metadata))
 	return QuantitySampleFromID(_r)
 }
 
-// Returns a predicate that matches any object whose metadata contains the provided key.
+// PredicateForObjectsWithMetadataKey returns a predicate that matches any object whose metadata contains the provided key.
 func PredicateForObjectsWithMetadataKey(key string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsWithMetadataKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate that matches objects based on the provided metadata key and an array of target values.
+// PredicateForObjectsWithMetadataKeyAllowedValues returns a predicate that matches objects based on the provided metadata key and an array of target values.
 func PredicateForObjectsWithMetadataKeyAllowedValues(key string, allowedValues obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsWithMetadataKey:allowedValues:"), purego.NSString(key), objref.IDOf(allowedValues))
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate that matches all the objects that were created by the provided source.
+// PredicateForObjectsFromSource returns a predicate that matches all the objects that were created by the provided source.
 func PredicateForObjectsFromSource(source *Source) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsFromSource:"), objref.IDOf(source))
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate that matches all the objects that were created by any of the provided sources.
+// PredicateForObjectsFromSources returns a predicate that matches all the objects that were created by any of the provided sources.
 func PredicateForObjectsFromSources(sources obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsFromSources:"), objref.IDOf(sources))
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate that matches all the objects that were created by any of the provided source revisions.
+// PredicateForObjectsFromSourceRevisions returns a predicate that matches all the objects that were created by any of the provided source revisions.
 func PredicateForObjectsFromSourceRevisions(sourceRevisions obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsFromSourceRevisions:"), objref.IDOf(sourceRevisions))
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate that matches all the objects that were created by any of the provided devices.
+// PredicateForObjectsFromDevices returns a predicate that matches all the objects that were created by any of the provided devices.
 func PredicateForObjectsFromDevices(devices obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsFromDevices:"), objref.IDOf(devices))
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate that matches all objects created by devices with the specified properties.
+// PredicateForObjectsWithDevicePropertyAllowedValues returns a predicate that matches all objects created by devices with the specified properties.
 func PredicateForObjectsWithDevicePropertyAllowedValues(key string, allowedValues obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsWithDeviceProperty:allowedValues:"), purego.NSString(key), objref.IDOf(allowedValues))
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate that matches an object with the specified universally unique identifier (UUID).
+// PredicateForObjectWithUUID returns a predicate that matches an object with the specified universally unique identifier (UUID).
 func PredicateForObjectWithUUID(uUID obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectWithUUID:"), objref.IDOf(uUID))
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate that matches the objects with the specified universally unique identifiers (UUIDs).
+// PredicateForObjectsWithUUIDs returns a predicate that matches the objects with the specified universally unique identifiers (UUIDs).
 func PredicateForObjectsWithUUIDs(uUIDs obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsWithUUIDs:"), objref.IDOf(uUIDs))
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate that matches all objects that are not associated with a HealthKit correlation.
+// PredicateForObjectsWithNoCorrelation returns a predicate that matches all objects that are not associated with a HealthKit correlation.
 func PredicateForObjectsWithNoCorrelation() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsWithNoCorrelation"))
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate that matches any objects that have been associated with the provided workout.
+// PredicateForObjectsFromWorkout returns a predicate that matches any objects that have been associated with the provided workout.
 func PredicateForObjectsFromWorkout(workout *Workout) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsFromWorkout:"), objref.IDOf(workout))
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate that matches symptom samples associated with the specified electrocardiogram.
+// PredicateForObjectsAssociatedWithElectrocardiogram returns a predicate that matches symptom samples associated with the specified electrocardiogram.
 func PredicateForObjectsAssociatedWithElectrocardiogram(electrocardiogram *Electrocardiogram) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsAssociatedWithElectrocardiogram:"), objref.IDOf(electrocardiogram))
 	return obj.Wrap(_r)
 }
 
-// Creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches Workout Effort samples that have been related to the given workout
+// PredicateForWorkoutEffortSamplesRelatedToWorkoutActivity creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches Workout Effort samples that have been related to the given workout
 func PredicateForWorkoutEffortSamplesRelatedToWorkoutActivity(workout *Workout, activity *WorkoutActivity) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForWorkoutEffortSamplesRelatedToWorkout:activity:"), objref.IDOf(workout), objref.IDOf(activity))
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate for samples whose start and end dates fall within the specified time interval.
+// PredicateForSamplesWithStartDateEndDateOptions returns a predicate for samples whose start and end dates fall within the specified time interval.
 func PredicateForSamplesWithStartDateEndDateOptions(startDate obj.Object, endDate obj.Object, options QueryOptions) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForSamplesWithStartDate:endDate:options:"), objref.IDOf(startDate), objref.IDOf(endDate), options)
 	return obj.Wrap(_r)
 }
 
-// A predicate that returns category samples with a matching value.
+// PredicateForCategorySamplesEqualToValues a predicate that returns category samples with a matching value.
 func PredicateForCategorySamplesEqualToValues(values obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForCategorySamplesEqualToValues:"), objref.IDOf(values))
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate for matching workouts based on the type of activity.
+// PredicateForWorkoutsWithWorkoutActivityType returns a predicate for matching workouts based on the type of activity.
 func PredicateForWorkoutsWithWorkoutActivityType(workoutActivityType WorkoutActivityType) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForWorkoutsWithWorkoutActivityType:"), workoutActivityType)
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate for workout activities based on the type of activity performed.
+// PredicateForWorkoutActivitiesWithWorkoutActivityType returns a predicate for workout activities based on the type of activity performed.
 func PredicateForWorkoutActivitiesWithWorkoutActivityType(workoutActivityType WorkoutActivityType) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForWorkoutActivitiesWithWorkoutActivityType:"), workoutActivityType)
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate for workout activities that occur between the start and end date.
+// PredicateForWorkoutActivitiesWithStartDateEndDateOptions returns a predicate for workout activities that occur between the start and end date.
 func PredicateForWorkoutActivitiesWithStartDateEndDateOptions(startDate obj.Object, endDate obj.Object, options QueryOptions) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForWorkoutActivitiesWithStartDate:endDate:options:"), objref.IDOf(startDate), objref.IDOf(endDate), options)
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate for matching workouts based on the associated workout activities.
+// PredicateForWorkoutsWithActivityPredicate returns a predicate for matching workouts based on the associated workout activities.
 func PredicateForWorkoutsWithActivityPredicate(activityPredicate obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForWorkoutsWithActivityPredicate:"), objref.IDOf(activityPredicate))
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate that matches the activity summary for the specified day.
+// PredicateForActivitySummaryWithDateComponents returns a predicate that matches the activity summary for the specified day.
 func PredicateForActivitySummaryWithDateComponents(dateComponents obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForActivitySummaryWithDateComponents:"), objref.IDOf(dateComponents))
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate for matching all the activity summaries that fall between the days identified by the start and end date components.
+// PredicateForActivitySummariesBetweenStartDateComponentsEndDateComponents returns a predicate for matching all the activity summaries that fall between the days identified by the start and end date components.
 func PredicateForActivitySummariesBetweenStartDateComponentsEndDateComponents(startDateComponents obj.Object, endDateComponents obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForActivitySummariesBetweenStartDateComponents:endDateComponents:"), objref.IDOf(startDateComponents), objref.IDOf(endDateComponents))
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate for a specific FHIR type.
+// PredicateForClinicalRecordsWithFHIRResourceType returns a predicate for a specific FHIR type.
 func PredicateForClinicalRecordsWithFHIRResourceType(resourceType obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForClinicalRecordsWithFHIRResourceType:"), objref.IDOf(resourceType))
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate for a specific FHIR resource.
+// PredicateForClinicalRecordsFromSourceFHIRResourceTypeIdentifier returns a predicate for a specific FHIR resource.
 func PredicateForClinicalRecordsFromSourceFHIRResourceTypeIdentifier(source *Source, resourceType obj.Object, identifier string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForClinicalRecordsFromSource:FHIRResourceType:identifier:"), objref.IDOf(source), objref.IDOf(resourceType), purego.NSString(identifier))
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate that matches electrocardiogram samples with the specified classification.
+// PredicateForElectrocardiogramsWithClassification returns a predicate that matches electrocardiogram samples with the specified classification.
 func PredicateForElectrocardiogramsWithClassification(classification ElectrocardiogramClassification) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForElectrocardiogramsWithClassification:"), classification)
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate that matches electrocardiogram samples with the specified symptom status.
+// PredicateForElectrocardiogramsWithSymptomsStatus returns a predicate that matches electrocardiogram samples with the specified symptom status.
 func PredicateForElectrocardiogramsWithSymptomsStatus(symptomsStatus ElectrocardiogramSymptomsStatus) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForElectrocardiogramsWithSymptomsStatus:"), symptomsStatus)
 	return obj.Wrap(_r)
 }
 
-// Returns a predicate that finds verifiable health records with a relevant date within the specified range.
+// PredicateForVerifiableClinicalRecordsWithRelevantDateWithinDateInterval returns a predicate that finds verifiable health records with a relevant date within the specified range.
 func PredicateForVerifiableClinicalRecordsWithRelevantDateWithinDateInterval(dateInterval obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForVerifiableClinicalRecordsWithRelevantDateWithinDateInterval:"), objref.IDOf(dateInterval))
 	return obj.Wrap(_r)
 }
 
-// Creates a predicate for use with HKStateOfMind Creates a query predicate that matches HKStateOfMind samples that have the specified kind of feeling type.
+// PredicateForStatesOfMindWithKind creates a predicate for use with HKStateOfMind Creates a query predicate that matches HKStateOfMind samples that have the specified kind of feeling type.
 func PredicateForStatesOfMindWithKind(kind StateOfMindKind) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForStatesOfMindWithKind:"), kind)
 	return obj.Wrap(_r)
 }
 
-// Creates a predicate for use with HKStateOfMind Creates a query predicate that matches HKStateOfMind samples that have the specified label.
+// PredicateForStatesOfMindWithLabel creates a predicate for use with HKStateOfMind Creates a query predicate that matches HKStateOfMind samples that have the specified label.
 func PredicateForStatesOfMindWithLabel(label StateOfMindLabel) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForStatesOfMindWithLabel:"), label)
 	return obj.Wrap(_r)
 }
 
-// Creates a predicate for use with HKStateOfMind Creates a query predicate that matches HKStateOfMind samples that have the specified association.
+// PredicateForStatesOfMindWithAssociation creates a predicate for use with HKStateOfMind Creates a query predicate that matches HKStateOfMind samples that have the specified association.
 func PredicateForStatesOfMindWithAssociation(association StateOfMindAssociation) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForStatesOfMindWithAssociation:"), association)
 	return obj.Wrap(_r)
 }
 
-// Creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that have the status specified.
+// PredicateForMedicationDoseEventWithStatus creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that have the status specified.
 func PredicateForMedicationDoseEventWithStatus(status MedicationDoseEventLogStatus) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithStatus:"), status)
 	return obj.Wrap(_r)
 }
 
-// Creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that have any of the statuses specified.
+// PredicateForMedicationDoseEventWithStatuses creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that have any of the statuses specified.
 func PredicateForMedicationDoseEventWithStatuses(statuses obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithStatuses:"), objref.IDOf(statuses))
 	return obj.Wrap(_r)
 }
 
-// Creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that have the exact scheduled date specified.
+// PredicateForMedicationDoseEventWithScheduledDate creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that have the exact scheduled date specified.
 func PredicateForMedicationDoseEventWithScheduledDate(scheduledDate obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithScheduledDate:"), objref.IDOf(scheduledDate))
 	return obj.Wrap(_r)
 }
 
-// Creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that have any of the exact scheduled dates specified.
+// PredicateForMedicationDoseEventWithScheduledDates creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that have any of the exact scheduled dates specified.
 func PredicateForMedicationDoseEventWithScheduledDates(scheduledDates obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithScheduledDates:"), objref.IDOf(scheduledDates))
 	return obj.Wrap(_r)
 }
 
-// Creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that have a scheduled date within a window of scheduled times. If nil is provided to either parameter, the respective side of the window is unbound.
+// PredicateForMedicationDoseEventWithScheduledStartDateEndDate creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that have a scheduled date within a window of scheduled times. If nil is provided to either parameter, the respective side of the window is unbound.
 func PredicateForMedicationDoseEventWithScheduledStartDateEndDate(startDate obj.Object, endDate obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithScheduledStartDate:endDate:"), objref.IDOf(startDate), objref.IDOf(endDate))
 	return obj.Wrap(_r)
 }
 
-// Creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that match a medication's concept identifier.
+// PredicateForMedicationDoseEventWithMedicationConceptIdentifier creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that match a medication's concept identifier.
 func PredicateForMedicationDoseEventWithMedicationConceptIdentifier(medicationConceptIdentifier *HealthConceptIdentifier) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithMedicationConceptIdentifier:"), objref.IDOf(medicationConceptIdentifier))
 	return obj.Wrap(_r)
 }
 
-// Creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples generated by any medication in a set of medication concept identifiers.
+// PredicateForMedicationDoseEventWithMedicationConceptIdentifiers creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples generated by any medication in a set of medication concept identifiers.
 func PredicateForMedicationDoseEventWithMedicationConceptIdentifiers(medicationConceptIdentifiers obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithMedicationConceptIdentifiers:"), objref.IDOf(medicationConceptIdentifiers))
 	return obj.Wrap(_r)
 }
 
-// Creates a predicate for use with HKUserAnnotatedMedicationQuery. Creates a query predicate that matches HKUserAnnotatedMedication objects that have the archived status specified.
+// PredicateForUserAnnotatedMedicationsWithIsArchived creates a predicate for use with HKUserAnnotatedMedicationQuery. Creates a query predicate that matches HKUserAnnotatedMedication objects that have the archived status specified.
 func PredicateForUserAnnotatedMedicationsWithIsArchived(isArchived bool) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForUserAnnotatedMedicationsWithIsArchived:"), isArchived)
 	return obj.Wrap(_r)
 }
 
-// Creates a predicate for use with HKUserAnnotatedMedicationQuery. Creates a query predicate that matches HKUserAnnotatedMedication objects that match the schedule status specified.
+// PredicateForUserAnnotatedMedicationsWithHasSchedule creates a predicate for use with HKUserAnnotatedMedicationQuery. Creates a query predicate that matches HKUserAnnotatedMedication objects that match the schedule status specified.
 func PredicateForUserAnnotatedMedicationsWithHasSchedule(hasSchedule bool) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForUserAnnotatedMedicationsWithHasSchedule:"), hasSchedule)
 	return obj.Wrap(_r)
 }
 
-// Returns an anchor object from the provided anchor value.
+// AnchorFromValue returns an anchor object from the provided anchor value.
 func AnchorFromValue(value int) *QueryAnchor {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQueryAnchor")), objc.RegisterName("anchorFromValue:"), value)
 	return QueryAnchorFromID(_r)
 }
 
-// Returns a series type object for workout routes.
+// WorkoutRouteType returns a series type object for workout routes.
 func WorkoutRouteType() *SeriesType {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKSeriesType")), objc.RegisterName("workoutRouteType"))
 	return SeriesTypeFromID(_r)
 }
 
-// Returns a series type object for heartbeat data.
+// HeartbeatSeriesType returns a series type object for heartbeat data.
 func HeartbeatSeriesType() *SeriesType {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKSeriesType")), objc.RegisterName("heartbeatSeriesType"))
 	return SeriesTypeFromID(_r)
 }
 
-// Returns a source object for the current app.
+// DefaultSource returns a source object for the current app.
 func DefaultSource() *Source {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKSource")), objc.RegisterName("defaultSource"))
 	return SourceFromID(_r)
 }
 
-// Creates a new log describing an experienced emotion at a moment in time.
+// StateOfMindWithDateKindValenceLabelsAssociations creates a new log describing an experienced emotion at a moment in time.
 func StateOfMindWithDateKindValenceLabelsAssociations(date obj.Object, kind StateOfMindKind, valence float64, labels []obj.Object, associations []obj.Object) *StateOfMind {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKStateOfMind")), objc.RegisterName("stateOfMindWithDate:kind:valence:labels:associations:"), objref.IDOf(date), kind, valence, purego.SliceToNSArray(labels, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(associations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return StateOfMindFromID(_r)
 }
 
-// Creates a new log describing an experienced emotion at a moment in time.
+// StateOfMindWithDateKindValenceLabelsAssociationsMetadata creates a new log describing an experienced emotion at a moment in time.
 func StateOfMindWithDateKindValenceLabelsAssociationsMetadata(date obj.Object, kind StateOfMindKind, valence float64, labels []obj.Object, associations []obj.Object, metadata obj.Object) *StateOfMind {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKStateOfMind")), objc.RegisterName("stateOfMindWithDate:kind:valence:labels:associations:metadata:"), objref.IDOf(date), kind, valence, purego.SliceToNSArray(labels, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(associations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(metadata))
 	return StateOfMindFromID(_r)
 }
 
-// Returns the unit instance described by the provided string.
+// UnitFromString returns the unit instance described by the provided string.
 func UnitFromString(string_ string) *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("unitFromString:"), purego.NSString(string_))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring mass, using gram units with the provided prefix.
+// GramUnitWithMetricPrefix returns a HealthKit unit for measuring mass, using gram units with the provided prefix.
 func GramUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("gramUnitWithMetricPrefix:"), prefix)
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring mass in grams.
+// GramUnit returns a HealthKit unit for measuring mass in grams.
 func GramUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("gramUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring mass in ounces.
+// OunceUnit returns a HealthKit unit for measuring mass in ounces.
 func OunceUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("ounceUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring mass in pounds.
+// PoundUnit returns a HealthKit unit for measuring mass in pounds.
 func PoundUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("poundUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring mass in stones.
+// StoneUnit returns a HealthKit unit for measuring mass in stones.
 func StoneUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("stoneUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring mass in moles, with the given prefix and molar mass.
+// MoleUnitWithMetricPrefixMolarMass returns a HealthKit unit for measuring mass in moles, with the given prefix and molar mass.
 func MoleUnitWithMetricPrefixMolarMass(prefix MetricPrefix, gramsPerMole float64) *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("moleUnitWithMetricPrefix:molarMass:"), prefix, gramsPerMole)
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring mass in moles for a given molar mass.
+// MoleUnitWithMolarMass returns a HealthKit unit for measuring mass in moles for a given molar mass.
 func MoleUnitWithMolarMass(gramsPerMole float64) *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("moleUnitWithMolarMass:"), gramsPerMole)
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring length, using meter units with the provided prefix.
+// MeterUnitWithMetricPrefix returns a HealthKit unit for measuring length, using meter units with the provided prefix.
 func MeterUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("meterUnitWithMetricPrefix:"), prefix)
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring length in meters.
+// MeterUnit returns a HealthKit unit for measuring length in meters.
 func MeterUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("meterUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring length in inches.
+// InchUnit returns a HealthKit unit for measuring length in inches.
 func InchUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("inchUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring length in feet.
+// FootUnit returns a HealthKit unit for measuring length in feet.
 func FootUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("footUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring length in yards.
+// YardUnit returns a HealthKit unit for measuring length in yards.
 func YardUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("yardUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring length in miles.
+// MileUnit returns a HealthKit unit for measuring length in miles.
 func MileUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("mileUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring volume, using liter units with the provided prefix.
+// LiterUnitWithMetricPrefix returns a HealthKit unit for measuring volume, using liter units with the provided prefix.
 func LiterUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("literUnitWithMetricPrefix:"), prefix)
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring volume in liters.
+// LiterUnit returns a HealthKit unit for measuring volume in liters.
 func LiterUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("literUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring volume in US fluid ounces.
+// FluidOunceUSUnit returns a HealthKit unit for measuring volume in US fluid ounces.
 func FluidOunceUSUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("fluidOunceUSUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring volume in imperial fluid ounces.
+// FluidOunceImperialUnit returns a HealthKit unit for measuring volume in imperial fluid ounces.
 func FluidOunceImperialUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("fluidOunceImperialUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring volume in US pints.
+// PintUSUnit returns a HealthKit unit for measuring volume in US pints.
 func PintUSUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("pintUSUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring volume in imperial pints.
+// PintImperialUnit returns a HealthKit unit for measuring volume in imperial pints.
 func PintImperialUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("pintImperialUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring volume in US cups.
+// CupUSUnit returns a HealthKit unit for measuring volume in US cups.
 func CupUSUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("cupUSUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring volume in imperial cups.
+// CupImperialUnit returns a HealthKit unit for measuring volume in imperial cups.
 func CupImperialUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("cupImperialUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring pressure, using pascal units with the provided prefix.
+// PascalUnitWithMetricPrefix returns a HealthKit unit for measuring pressure, using pascal units with the provided prefix.
 func PascalUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("pascalUnitWithMetricPrefix:"), prefix)
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring pressure in pascals.
+// PascalUnit returns a HealthKit unit for measuring pressure in pascals.
 func PascalUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("pascalUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring pressure in millimeters of mercury.
+// MillimeterOfMercuryUnit returns a HealthKit unit for measuring pressure in millimeters of mercury.
 func MillimeterOfMercuryUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("millimeterOfMercuryUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring pressure in centimeters of water.
+// CentimeterOfWaterUnit returns a HealthKit unit for measuring pressure in centimeters of water.
 func CentimeterOfWaterUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("centimeterOfWaterUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring pressure in atmospheres.
+// AtmosphereUnit returns a HealthKit unit for measuring pressure in atmospheres.
 func AtmosphereUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("atmosphereUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring the difference between the local pressure and the ambient atmospheric pressure caused by sound.
+// DecibelAWeightedSoundPressureLevelUnit returns a HealthKit unit for measuring the difference between the local pressure and the ambient atmospheric pressure caused by sound.
 func DecibelAWeightedSoundPressureLevelUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("decibelAWeightedSoundPressureLevelUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring pressure in inches of mercury.
+// InchesOfMercuryUnit returns a HealthKit unit for measuring pressure in inches of mercury.
 func InchesOfMercuryUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("inchesOfMercuryUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring time, using second units with the provided prefix.
+// SecondUnitWithMetricPrefix returns a HealthKit unit for measuring time, using second units with the provided prefix.
 func SecondUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("secondUnitWithMetricPrefix:"), prefix)
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring time in seconds.
+// SecondUnit returns a HealthKit unit for measuring time in seconds.
 func SecondUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("secondUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring time in minutes.
+// MinuteUnit returns a HealthKit unit for measuring time in minutes.
 func MinuteUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("minuteUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring time in hours.
+// HourUnit returns a HealthKit unit for measuring time in hours.
 func HourUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("hourUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring time in days.
+// DayUnit returns a HealthKit unit for measuring time in days.
 func DayUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("dayUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring energy, using joule units with the provided prefix.
+// JouleUnitWithMetricPrefix returns a HealthKit unit for measuring energy, using joule units with the provided prefix.
 func JouleUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("jouleUnitWithMetricPrefix:"), prefix)
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring energy in joules.
+// JouleUnit returns a HealthKit unit for measuring energy in joules.
 func JouleUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("jouleUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring energy in kilocalories.
+// KilocalorieUnit returns a HealthKit unit for measuring energy in kilocalories.
 func KilocalorieUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("kilocalorieUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring energy in small calories (cal).
+// SmallCalorieUnit returns a HealthKit unit for measuring energy in small calories (cal).
 func SmallCalorieUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("smallCalorieUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring energy in large calories (Cal).
+// LargeCalorieUnit returns a HealthKit unit for measuring energy in large calories (Cal).
 func LargeCalorieUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("largeCalorieUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring energy in calories.
+// CalorieUnit returns a HealthKit unit for measuring energy in calories.
 func CalorieUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("calorieUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring temperature in degrees Celsius.
+// DegreeCelsiusUnit returns a HealthKit unit for measuring temperature in degrees Celsius.
 func DegreeCelsiusUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("degreeCelsiusUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring temperature in degrees Fahrenheit.
+// DegreeFahrenheitUnit returns a HealthKit unit for measuring temperature in degrees Fahrenheit.
 func DegreeFahrenheitUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("degreeFahrenheitUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring temperature in kelvins.
+// KelvinUnit returns a HealthKit unit for measuring temperature in kelvins.
 func KelvinUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("kelvinUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring electrical conductance, using siemen units with the provided prefix.
+// SiemenUnitWithMetricPrefix returns a HealthKit unit for measuring electrical conductance, using siemen units with the provided prefix.
 func SiemenUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("siemenUnitWithMetricPrefix:"), prefix)
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring electrical conductance in siemens.
+// SiemenUnit returns a HealthKit unit for measuring electrical conductance in siemens.
 func SiemenUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("siemenUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit that measures the amount of a biologically active substance in international units (IU).
+// InternationalUnit returns a HealthKit unit that measures the amount of a biologically active substance in international units (IU).
 func InternationalUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("internationalUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring counts.
+// CountUnit returns a HealthKit unit for measuring counts.
 func CountUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("countUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring percentages.
+// PercentUnit returns a HealthKit unit for measuring percentages.
 func PercentUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("percentUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring the intensity of a sound.
+// DecibelHearingLevelUnit returns a HealthKit unit for measuring the intensity of a sound.
 func DecibelHearingLevelUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("decibelHearingLevelUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring frequency in hertz with the provided prefix.
+// HertzUnitWithMetricPrefix returns a HealthKit unit for measuring frequency in hertz with the provided prefix.
 func HertzUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("hertzUnitWithMetricPrefix:"), prefix)
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring frequency in hertz.
+// HertzUnit returns a HealthKit unit for measuring frequency in hertz.
 func HertzUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("hertzUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring the electrical potential difference in volts with the provided prefix.
+// VoltUnitWithMetricPrefix returns a HealthKit unit for measuring the electrical potential difference in volts with the provided prefix.
 func VoltUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("voltUnitWithMetricPrefix:"), prefix)
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring the difference in electrical potential using volts.
+// VoltUnit returns a HealthKit unit for measuring the difference in electrical potential using volts.
 func VoltUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("voltUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring power, using watt units with the provided prefix.
+// WattUnitWithMetricPrefix returns a HealthKit unit for measuring power, using watt units with the provided prefix.
 func WattUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("wattUnitWithMetricPrefix:"), prefix)
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring power in watts.
+// WattUnit returns a HealthKit unit for measuring power in watts.
 func WattUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("wattUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring the optical power of a lens using diopter units.
+// DiopterUnit returns a HealthKit unit for measuring the optical power of a lens using diopter units.
 func DiopterUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("diopterUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring the prismatic deviation of a lens using prism diopter units.
+// PrismDiopterUnit returns a HealthKit unit for measuring the prismatic deviation of a lens using prism diopter units.
 func PrismDiopterUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("prismDiopterUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring angles, using radian units with the provided prefix.
+// RadianAngleUnitWithMetricPrefix returns a HealthKit unit for measuring angles, using radian units with the provided prefix.
 func RadianAngleUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("radianAngleUnitWithMetricPrefix:"), prefix)
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring angles using radians.
+// RadianAngleUnit returns a HealthKit unit for measuring angles using radians.
 func RadianAngleUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("radianAngleUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring angles using degrees.
+// DegreeAngleUnit returns a HealthKit unit for measuring angles using degrees.
 func DegreeAngleUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("degreeAngleUnit"))
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring illuminance, using lux units with the provided prefix.
+// LuxUnitWithMetricPrefix returns a HealthKit unit for measuring illuminance, using lux units with the provided prefix.
 func LuxUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("luxUnitWithMetricPrefix:"), prefix)
 	return UnitFromID(_r)
 }
 
-// Returns a HealthKit unit for measuring illuminance in lux.
+// LuxUnit returns a HealthKit unit for measuring illuminance in lux.
 func LuxUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("luxUnit"))
 	return UnitFromID(_r)
 }
 
+// AppleEffortScoreUnit wraps the corresponding Objective-C method.
 func AppleEffortScoreUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("appleEffortScoreUnit"))
 	return UnitFromID(_r)
 }
 
-// Creates a new vision prescription sample.
+// PrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata creates a new vision prescription sample.
 func PrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata(type_ VisionPrescriptionType, dateIssued obj.Object, expirationDate obj.Object, device *Device, metadata obj.Object) *VisionPrescription {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKVisionPrescription")), objc.RegisterName("prescriptionWithType:dateIssued:expirationDate:device:metadata:"), type_, objref.IDOf(dateIssued), objref.IDOf(expirationDate), objref.IDOf(device), objref.IDOf(metadata))
 	return VisionPrescriptionFromID(_r)
 }
 
-// Instantiates a new workout.
+// WorkoutWithActivityTypeStartDateEndDate instantiates a new workout.
 func WorkoutWithActivityTypeStartDateEndDate(workoutActivityType WorkoutActivityType, startDate obj.Object, endDate obj.Object) *Workout {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:"), workoutActivityType, objref.IDOf(startDate), objref.IDOf(endDate))
 	return WorkoutFromID(_r)
 }
 
-// Instantiates a new workout whose duration is calculated based on the start and end dates and the provided workout events.
+// WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceMetadata instantiates a new workout whose duration is calculated based on the start and end dates and the provided workout events.
 func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceMetadata(workoutActivityType WorkoutActivityType, startDate obj.Object, endDate obj.Object, workoutEvents []*WorkoutEvent, totalEnergyBurned *Quantity, totalDistance *Quantity, metadata obj.Object) *Workout {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:metadata:"), workoutActivityType, objref.IDOf(startDate), objref.IDOf(endDate), purego.SliceToNSArray(workoutEvents, func(_v *WorkoutEvent) objc.ID { return objref.IDOf(_v) }), objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), objref.IDOf(metadata))
 	return WorkoutFromID(_r)
 }
 
-// Instantiates a workout that includes both workout events and the device that produced the sample data.
+// WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceDeviceMetadata instantiates a workout that includes both workout events and the device that produced the sample data.
 func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceDeviceMetadata(workoutActivityType WorkoutActivityType, startDate obj.Object, endDate obj.Object, workoutEvents []*WorkoutEvent, totalEnergyBurned *Quantity, totalDistance *Quantity, device *Device, metadata obj.Object) *Workout {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:device:metadata:"), workoutActivityType, objref.IDOf(startDate), objref.IDOf(endDate), purego.SliceToNSArray(workoutEvents, func(_v *WorkoutEvent) objc.ID { return objref.IDOf(_v) }), objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), objref.IDOf(device), objref.IDOf(metadata))
 	return WorkoutFromID(_r)
 }
 
-// Instantiates a new workout that includes the energy burned, distance, and metadata for the workout.
+// WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceMetadata instantiates a new workout that includes the energy burned, distance, and metadata for the workout.
 func WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceMetadata(workoutActivityType WorkoutActivityType, startDate obj.Object, endDate obj.Object, duration float64, totalEnergyBurned *Quantity, totalDistance *Quantity, metadata obj.Object) *Workout {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:duration:totalEnergyBurned:totalDistance:metadata:"), workoutActivityType, objref.IDOf(startDate), objref.IDOf(endDate), duration, objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), objref.IDOf(metadata))
 	return WorkoutFromID(_r)
 }
 
-// Instantiates a new workout activity that includes the device that produced the sample data.
+// WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceDeviceMetadata instantiates a new workout activity that includes the device that produced the sample data.
 func WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceDeviceMetadata(workoutActivityType WorkoutActivityType, startDate obj.Object, endDate obj.Object, duration float64, totalEnergyBurned *Quantity, totalDistance *Quantity, device *Device, metadata obj.Object) *Workout {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:duration:totalEnergyBurned:totalDistance:device:metadata:"), workoutActivityType, objref.IDOf(startDate), objref.IDOf(endDate), duration, objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), objref.IDOf(device), objref.IDOf(metadata))
 	return WorkoutFromID(_r)
 }
 
-// Instantiates a workout using a variety of data, including the number of strokes while swimming.
+// WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalSwimmingStrokeCountDeviceMetadata instantiates a workout using a variety of data, including the number of strokes while swimming.
 func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalSwimmingStrokeCountDeviceMetadata(workoutActivityType WorkoutActivityType, startDate obj.Object, endDate obj.Object, workoutEvents []*WorkoutEvent, totalEnergyBurned *Quantity, totalDistance *Quantity, totalSwimmingStrokeCount *Quantity, device *Device, metadata obj.Object) *Workout {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:totalSwimmingStrokeCount:device:metadata:"), workoutActivityType, objref.IDOf(startDate), objref.IDOf(endDate), purego.SliceToNSArray(workoutEvents, func(_v *WorkoutEvent) objc.ID { return objref.IDOf(_v) }), objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), objref.IDOf(totalSwimmingStrokeCount), objref.IDOf(device), objref.IDOf(metadata))
 	return WorkoutFromID(_r)
 }
 
-// Instantiates a workout using a variety of data, including the number of flights of stairs climbed.
+// WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalFlightsClimbedDeviceMetadata instantiates a workout using a variety of data, including the number of flights of stairs climbed.
 func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalFlightsClimbedDeviceMetadata(workoutActivityType WorkoutActivityType, startDate obj.Object, endDate obj.Object, workoutEvents []*WorkoutEvent, totalEnergyBurned *Quantity, totalDistance *Quantity, totalFlightsClimbed *Quantity, device *Device, metadata obj.Object) *Workout {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:totalFlightsClimbed:device:metadata:"), workoutActivityType, objref.IDOf(startDate), objref.IDOf(endDate), purego.SliceToNSArray(workoutEvents, func(_v *WorkoutEvent) objc.ID { return objref.IDOf(_v) }), objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), objref.IDOf(totalFlightsClimbed), objref.IDOf(device), objref.IDOf(metadata))
 	return WorkoutFromID(_r)
 }
 
-// Instantiates and returns a new workout event with the specified type and date.
+// WorkoutEventWithTypeDate instantiates and returns a new workout event with the specified type and date.
 func WorkoutEventWithTypeDate(type_ WorkoutEventType, date obj.Object) *WorkoutEvent {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkoutEvent")), objc.RegisterName("workoutEventWithType:date:"), type_, objref.IDOf(date))
 	return WorkoutEventFromID(_r)
 }
 
-// Instantiates and returns a new workout event with the specified type, date, and metadata.
+// WorkoutEventWithTypeDateMetadata instantiates and returns a new workout event with the specified type, date, and metadata.
 func WorkoutEventWithTypeDateMetadata(type_ WorkoutEventType, date obj.Object, metadata obj.Object) *WorkoutEvent {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkoutEvent")), objc.RegisterName("workoutEventWithType:date:metadata:"), type_, objref.IDOf(date), objref.IDOf(metadata))
 	return WorkoutEventFromID(_r)
 }
 
-// Instantiates and returns a new workout event with the specified type, date interval, and metadata.
+// WorkoutEventWithTypeDateIntervalMetadata instantiates and returns a new workout event with the specified type, date interval, and metadata.
 func WorkoutEventWithTypeDateIntervalMetadata(type_ WorkoutEventType, dateInterval obj.Object, metadata obj.Object) *WorkoutEvent {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkoutEvent")), objc.RegisterName("workoutEventWithType:dateInterval:metadata:"), type_, objref.IDOf(dateInterval), objref.IDOf(metadata))
 	return WorkoutEventFromID(_r)

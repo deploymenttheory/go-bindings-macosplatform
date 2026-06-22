@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An image that a snapshotter object generates.
-//
 // MapSnapshot is an idiomatic wrapper over the Objective-C class MKMapSnapshot.
+//
+// An image that a snapshotter object generates.
 type MapSnapshot struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MapSnapshotFromID(id objc.ID) *MapSnapshot {
 	if id == 0 {
 		return nil
 	}
-	x := &MapSnapshot{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MapSnapshot{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mapSnapshotAdopt(id objc.ID) *MapSnapshot {
 	if id == 0 {
 		return nil
 	}
-	x := &MapSnapshot{Handle: objref.Wrap(id)}
+	x := &MapSnapshot{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *MapSnapshot) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MapSnapshot) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMapSnapshot creates a new MapSnapshot.
 func NewMapSnapshot() *MapSnapshot {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKMapSnapshot")), objc.RegisterName("new"))
 	return mapSnapshotAdopt(_id)
 }
 
+// Appearance wraps the corresponding Objective-C method.
 func (x *MapSnapshot) Appearance() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appearance"))
 	return obj.Wrap(_r)

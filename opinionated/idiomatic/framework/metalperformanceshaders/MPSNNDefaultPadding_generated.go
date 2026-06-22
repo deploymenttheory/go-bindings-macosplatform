@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that provides predefined padding policies for common tasks.
-//
 // NNDefaultPadding is an idiomatic wrapper over the Objective-C class MPSNNDefaultPadding.
+//
+// A class that provides predefined padding policies for common tasks.
 type NNDefaultPadding struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NNDefaultPaddingFromID(id objc.ID) *NNDefaultPadding {
 	if id == 0 {
 		return nil
 	}
-	x := &NNDefaultPadding{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNDefaultPadding{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nNDefaultPaddingAdopt(id objc.ID) *NNDefaultPadding {
 	if id == 0 {
 		return nil
 	}
-	x := &NNDefaultPadding{Handle: objref.Wrap(id)}
+	x := &NNDefaultPadding{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *NNDefaultPadding) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NNDefaultPadding) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNNDefaultPadding creates a new NNDefaultPadding.
 func NewNNDefaultPadding() *NNDefaultPadding {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNDefaultPadding")), objc.RegisterName("new"))
 	return nNDefaultPaddingAdopt(_id)
 }
 
-// Human readable description of what the padding policy does
+// Label human readable description of what the padding policy does
 func (x *NNDefaultPadding) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {

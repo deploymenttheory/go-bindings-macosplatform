@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class representing a function in the Program.
-//
 // ModelStructureProgramFunction is an idiomatic wrapper over the Objective-C class MLModelStructureProgramFunction.
+//
+// A class representing a function in the Program.
 type ModelStructureProgramFunction struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ModelStructureProgramFunctionFromID(id objc.ID) *ModelStructureProgramFunct
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructureProgramFunction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ModelStructureProgramFunction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func modelStructureProgramFunctionAdopt(id objc.ID) *ModelStructureProgramFuncti
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructureProgramFunction{Handle: objref.Wrap(id)}
+	x := &ModelStructureProgramFunction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *ModelStructureProgramFunction) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ModelStructureProgramFunction) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewModelStructureProgramFunction creates a new ModelStructureProgramFunction.
 func NewModelStructureProgramFunction() *ModelStructureProgramFunction {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLModelStructureProgramFunction")), objc.RegisterName("new"))
 	return modelStructureProgramFunctionAdopt(_id)
 }
 
-// The named inputs to the function.
+// Inputs the named inputs to the function.
 //
 // Inputs returns the collection as a Go slice.
 func (x *ModelStructureProgramFunction) Inputs() []*ModelStructureProgramNamedValueType {
@@ -74,7 +82,7 @@ func (x *ModelStructureProgramFunction) Inputs() []*ModelStructureProgramNamedVa
 	})
 }
 
-// The active block in the function.
+// Block the active block in the function.
 func (x *ModelStructureProgramFunction) Block() *ModelStructureProgramBlock {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("block"))
 	return ModelStructureProgramBlockFromID(_r)

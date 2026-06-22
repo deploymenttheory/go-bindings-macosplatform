@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages and advertises peripheral services exposed by this app.
-//
 // PeripheralManager is an idiomatic wrapper over the Objective-C class CBPeripheralManager.
+//
+// It embeds [Manager], promoting that type's methods.
+//
+// An object that manages and advertises peripheral services exposed by this app.
 type PeripheralManager struct {
-	objref.Handle
+	Manager
 }
 
 // PeripheralManagerFromID adopts an existing Objective-C object as a PeripheralManager
@@ -25,7 +26,8 @@ func PeripheralManagerFromID(id objc.ID) *PeripheralManager {
 	if id == 0 {
 		return nil
 	}
-	x := &PeripheralManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PeripheralManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func peripheralManagerAdopt(id objc.ID) *PeripheralManager {
 	if id == 0 {
 		return nil
 	}
-	x := &PeripheralManager{Handle: objref.Wrap(id)}
+	x := &PeripheralManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PeripheralManager) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PeripheralManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PeripheralManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPeripheralManager creates a new PeripheralManager.
@@ -64,58 +52,58 @@ func NewPeripheralManager() *PeripheralManager {
 	return peripheralManagerAdopt(_id)
 }
 
-// Advertises peripheral manager data.
+// StartAdvertising advertises peripheral manager data.
 func (x *PeripheralManager) StartAdvertising(advertisementData obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startAdvertising:"), objref.IDOf(advertisementData))
 }
 
-// Stops advertising peripheral manager data.
+// StopAdvertising stops advertising peripheral manager data.
 func (x *PeripheralManager) StopAdvertising() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopAdvertising"))
 }
 
-// Sets the desired connection latency for an existing connection to a central device.
+// SetDesiredConnectionLatencyForCentral sets the desired connection latency for an existing connection to a central device.
 func (x *PeripheralManager) SetDesiredConnectionLatencyForCentral(latency PeripheralManagerConnectionLatency, central *Central) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredConnectionLatency:forCentral:"), latency, objref.IDOf(central))
 }
 
-// Publishes a service and any of its associated characteristics and characteristic descriptors to the local GATT database.
+// AddService publishes a service and any of its associated characteristics and characteristic descriptors to the local GATT database.
 func (x *PeripheralManager) AddService(service *MutableService) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addService:"), objref.IDOf(service))
 }
 
-// Removes a specified published service from the local GATT database.
+// RemoveService removes a specified published service from the local GATT database.
 func (x *PeripheralManager) RemoveService(service *MutableService) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeService:"), objref.IDOf(service))
 }
 
-// Removes all published services from the local GATT database.
+// RemoveAllServices removes all published services from the local GATT database.
 func (x *PeripheralManager) RemoveAllServices() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllServices"))
 }
 
-// Responds to a read or write request from a connected central.
+// RespondToRequestWithResult responds to a read or write request from a connected central.
 func (x *PeripheralManager) RespondToRequestWithResult(request *ATTRequest, result ATTError) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("respondToRequest:withResult:"), objref.IDOf(request), result)
 }
 
-// Send an updated characteristic value to one or more subscribed centrals, using a notification or indication.
+// UpdateValueForCharacteristicOnSubscribedCentrals send an updated characteristic value to one or more subscribed centrals, using a notification or indication.
 func (x *PeripheralManager) UpdateValueForCharacteristicOnSubscribedCentrals(value obj.Object, characteristic *MutableCharacteristic, centrals []*Central) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("updateValue:forCharacteristic:onSubscribedCentrals:"), objref.IDOf(value), objref.IDOf(characteristic), purego.SliceToNSArray(centrals, func(_v *Central) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
-// Creates a listener for incoming L2CAP channel connections.
+// PublishL2CAPChannelWithEncryption creates a listener for incoming L2CAP channel connections.
 func (x *PeripheralManager) PublishL2CAPChannelWithEncryption(encryptionRequired bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publishL2CAPChannelWithEncryption:"), encryptionRequired)
 }
 
-// Removes a published service from the local system.
+// UnpublishL2CAPChannel removes a published service from the local system.
 func (x *PeripheralManager) UnpublishL2CAPChannel(pSM uint16) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unpublishL2CAPChannel:"), pSM)
 }
 
-// Whether or not the peripheral is currently advertising data.
+// IsAdvertising whether or not the peripheral is currently advertising data.
 func (x *PeripheralManager) IsAdvertising() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAdvertising"))
 	return _r
@@ -138,3 +126,5 @@ type PeripheralManagerable interface {
 }
 
 var _ PeripheralManagerable = (*PeripheralManager)(nil)
+
+var _ ManagerProvider = (*PeripheralManager)(nil)

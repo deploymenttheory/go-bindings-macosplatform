@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract base class for subscriptions.
-//
 // Subscription is an idiomatic wrapper over the Objective-C class CKSubscription.
+//
+// Subscription is an abstract base — you do not construct it directly. Construct one of [DatabaseSubscription], [QuerySubscription], [RecordZoneSubscription] and pass it where a Subscription is accepted.
+//
+// An abstract base class for subscriptions.
 type Subscription struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func SubscriptionFromID(id objc.ID) *Subscription {
 	if id == 0 {
 		return nil
 	}
-	x := &Subscription{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Subscription{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func subscriptionAdopt(id objc.ID) *Subscription {
 	if id == 0 {
 		return nil
 	}
-	x := &Subscription{Handle: objref.Wrap(id)}
+	x := &Subscription{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,38 +62,37 @@ func (x *Subscription) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewSubscription creates a new Subscription.
-func NewSubscription() *Subscription {
-	_id := objc.Send[objc.ID](objc.ID(_class("CKSubscription")), objc.RegisterName("new"))
-	return subscriptionAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Subscription) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The configuration for a subscription’s push notifications.
-//
-// WithNotificationInfo sets notificationInfo and returns the receiver so calls can be chained.
+// WithNotificationInfo the configuration for a subscription’s push notifications.
 func (x *Subscription) WithNotificationInfo(notificationInfo *NotificationInfo) *Subscription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotificationInfo:"), objref.IDOf(notificationInfo))
 	return x
 }
 
-// The subscription's unique identifier. This property's value is the subscription ID that you provide to the `initWithRecordType:predicate:subscriptionID:options:` or `initWithZoneID:subscriptionID:options:` methods when you create the subscription. If you use a different method to create the subscription, CloudKit automatically assigns a UUID as the subscription ID.
+// SubscriptionID the subscription's unique identifier. This property's value is the subscription ID that you provide to the `initWithRecordType:predicate:subscriptionID:options:` or `initWithZoneID:subscriptionID:options:` methods when you create the subscription. If you use a different method to create the subscription, CloudKit automatically assigns a UUID as the subscription ID.
 func (x *Subscription) SubscriptionID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptionID"))
 	return obj.Wrap(_r)
 }
 
-// The behavior that a subscription provides.
+// SubscriptionType the behavior that a subscription provides.
 func (x *Subscription) SubscriptionType() SubscriptionType {
 	_r := objc.Send[SubscriptionType](objref.IDOf(x), objc.RegisterName("subscriptionType"))
 	return _r
 }
 
-// The configuration for a subscription's push notifications. If you want the system to display your subscription's push notifications, assign a value to this property. The server uses the configuration you provide to determine the delivery options for notifications. For example, you can specify the text to display to the user, and the sound to play. You can also specify which fields of the record to include in the notification's payload. If you don't assign a value to this property, CloudKit still sends push notifications, but the system doesn't display them to the user. The default value of this property is `nil`.
+// NotificationInfo the configuration for a subscription's push notifications. If you want the system to display your subscription's push notifications, assign a value to this property. The server uses the configuration you provide to determine the delivery options for notifications. For example, you can specify the text to display to the user, and the sound to play. You can also specify which fields of the record to include in the notification's payload. If you don't assign a value to this property, CloudKit still sends push notifications, but the system doesn't display them to the user. The default value of this property is `nil`.
 func (x *Subscription) NotificationInfo() *NotificationInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notificationInfo"))
 	return NotificationInfoFromID(_r)
 }
 
+// SetNotificationInfo wraps the corresponding Objective-C method.
 func (x *Subscription) SetNotificationInfo(notificationInfo *NotificationInfo) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotificationInfo:"), objref.IDOf(notificationInfo))
 }
@@ -105,3 +108,10 @@ type Subscriptionable interface {
 }
 
 var _ Subscriptionable = (*Subscription)(nil)
+
+// isSubscription marks Subscription — and, by embedding promotion, its
+// subclasses — as a member of the Subscription hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Subscription) isSubscription() {}
+
+var _ SubscriptionProvider = (*Subscription)(nil)

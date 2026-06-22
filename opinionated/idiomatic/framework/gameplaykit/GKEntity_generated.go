@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object relevant to gameplay, with functionality entirely provided by a collection of component objects.
-//
 // Entity is an idiomatic wrapper over the Objective-C class GKEntity.
+//
+// An object relevant to gameplay, with functionality entirely provided by a collection of component objects.
 type Entity struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func EntityFromID(id objc.ID) *Entity {
 	if id == 0 {
 		return nil
 	}
-	x := &Entity{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Entity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func entityAdopt(id objc.ID) *Entity {
 	if id == 0 {
 		return nil
 	}
-	x := &Entity{Handle: objref.Wrap(id)}
+	x := &Entity{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,23 +60,29 @@ func (x *Entity) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Entity) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewEntity creates a new Entity.
 func NewEntity() *Entity {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKEntity")), objc.RegisterName("new"))
 	return entityAdopt(_id)
 }
 
-// Performs periodic updates for each of the entity’s components.
+// UpdateWithDeltaTime performs periodic updates for each of the entity’s components.
 func (x *Entity) UpdateWithDeltaTime(seconds float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithDeltaTime:"), seconds)
 }
 
-// Adds a component to the entity.
+// AddComponent adds a component to the entity.
 func (x *Entity) AddComponent(component *Component) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addComponent:"), objref.IDOf(component))
 }
 
-// Access the current set of components as an array. Note: this is not the internal array of components, but rather a newly created array of the current component mapping.
+// Components access the current set of components as an array. Note: this is not the internal array of components, but rather a newly created array of the current component mapping.
 //
 // Components returns the collection as a Go slice.
 func (x *Entity) Components() []*Component {

@@ -13,6 +13,8 @@ import (
 )
 
 // MTRBasicInformationClusterStartUpEvent is an idiomatic wrapper over the Objective-C class MTRBasicInformationClusterStartUpEvent.
+//
+// MTRBasicInformationClusterStartUpEvent is an abstract base — you do not construct it directly. Construct one of [MTRBasicClusterStartUpEvent] and pass it where a MTRBasicInformationClusterStartUpEvent is accepted.
 type MTRBasicInformationClusterStartUpEvent struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRBasicInformationClusterStartUpEventFromID(id objc.ID) *MTRBasicInformati
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBasicInformationClusterStartUpEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBasicInformationClusterStartUpEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRBasicInformationClusterStartUpEventAdopt(id objc.ID) *MTRBasicInformatio
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBasicInformationClusterStartUpEvent{Handle: objref.Wrap(id)}
+	x := &MTRBasicInformationClusterStartUpEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +60,25 @@ func (x *MTRBasicInformationClusterStartUpEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRBasicInformationClusterStartUpEvent creates a new MTRBasicInformationClusterStartUpEvent.
-func NewMTRBasicInformationClusterStartUpEvent() *MTRBasicInformationClusterStartUpEvent {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRBasicInformationClusterStartUpEvent")), objc.RegisterName("new"))
-	return mTRBasicInformationClusterStartUpEventAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRBasicInformationClusterStartUpEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithSoftwareVersion sets softwareVersion and returns the receiver so calls can be chained.
+// WithSoftwareVersion sets the property and returns the receiver so calls can be chained.
 func (x *MTRBasicInformationClusterStartUpEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTRBasicInformationClusterStartUpEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return x
 }
 
+// SoftwareVersion wraps the corresponding Objective-C method.
 func (x *MTRBasicInformationClusterStartUpEvent) SoftwareVersion() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("softwareVersion"))
 	return obj.Wrap(_r)
 }
 
+// SetSoftwareVersion wraps the corresponding Objective-C method.
 func (x *MTRBasicInformationClusterStartUpEvent) SetSoftwareVersion(softwareVersion obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 }
@@ -86,3 +92,10 @@ type MTRBasicInformationClusterStartUpEventable interface {
 }
 
 var _ MTRBasicInformationClusterStartUpEventable = (*MTRBasicInformationClusterStartUpEvent)(nil)
+
+// isMTRBasicInformationClusterStartUpEvent marks MTRBasicInformationClusterStartUpEvent — and, by embedding promotion, its
+// subclasses — as a member of the MTRBasicInformationClusterStartUpEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRBasicInformationClusterStartUpEvent) isMTRBasicInformationClusterStartUpEvent() {}
+
+var _ MTRBasicInformationClusterStartUpEventProvider = (*MTRBasicInformationClusterStartUpEvent)(nil)

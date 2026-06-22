@@ -6,17 +6,20 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Base class for basic arithmetic nodes
-//
 // ImageArithmetic is an idiomatic wrapper over the Objective-C class MPSImageArithmetic.
+//
+// ImageArithmetic is an abstract base — you do not construct it directly. Construct one of [ImageAdd], [ImageDivide], [ImageMultiply], [ImageSubtract] and pass it where a ImageArithmetic is accepted.
+//
+// Base class for basic arithmetic nodes
 type ImageArithmetic struct {
-	objref.Handle
+	BinaryImageKernel
 }
 
 // ImageArithmeticFromID adopts an existing Objective-C object as a ImageArithmetic
@@ -25,7 +28,8 @@ func ImageArithmeticFromID(id objc.ID) *ImageArithmetic {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageArithmetic{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageArithmetic{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,117 +42,151 @@ func imageArithmeticAdopt(id objc.ID) *ImageArithmetic {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageArithmetic{Handle: objref.Wrap(id)}
+	x := &ImageArithmetic{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ImageArithmetic) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageArithmetic) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageArithmetic) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewImageArithmetic creates a new ImageArithmetic.
-func NewImageArithmetic() *ImageArithmetic {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageArithmetic")), objc.RegisterName("new"))
-	return imageArithmeticAdopt(_id)
-}
-
-// WithPrimaryScale sets primaryScale and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
 func (x *ImageArithmetic) WithPrimaryScale(primaryScale float32) *ImageArithmetic {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return x
 }
 
-// WithSecondaryScale sets secondaryScale and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
 func (x *ImageArithmetic) WithSecondaryScale(secondaryScale float32) *ImageArithmetic {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return x
 }
 
-// WithBias sets bias and returns the receiver so calls can be chained.
+// WithBias sets the property and returns the receiver so calls can be chained.
 func (x *ImageArithmetic) WithBias(bias float32) *ImageArithmetic {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 	return x
 }
 
-// minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
-//
-// WithMinimumValue sets minimumValue and returns the receiver so calls can be chained.
+// WithPrimaryStrideInPixels the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (x *ImageArithmetic) WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageArithmetic {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixels:"), primaryStrideInPixels)
+	return x
+}
+
+// WithSecondaryStrideInPixels the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (x *ImageArithmetic) WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageArithmetic {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixels:"), secondaryStrideInPixels)
+	return x
+}
+
+// WithMinimumValue minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
 func (x *ImageArithmetic) WithMinimumValue(minimumValue float32) *ImageArithmetic {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
 	return x
 }
 
-// maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
-//
-// WithMaximumValue sets maximumValue and returns the receiver so calls can be chained.
+// WithMaximumValue maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
 func (x *ImageArithmetic) WithMaximumValue(maximumValue float32) *ImageArithmetic {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithPrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer.
+func (x *ImageArithmetic) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageArithmetic {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer.
+func (x *ImageArithmetic) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageArithmetic {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (x *ImageArithmetic) WithClipRect(clipRect metal.MTLRegion) *ImageArithmetic {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
+// WithLabel the string that identifies the kernel.
 func (x *ImageArithmetic) WithLabel(label string) *ImageArithmetic {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// PrimaryScale wraps the corresponding Objective-C method.
 func (x *ImageArithmetic) PrimaryScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("primaryScale"))
 	return _r
 }
 
+// SetPrimaryScale wraps the corresponding Objective-C method.
 func (x *ImageArithmetic) SetPrimaryScale(primaryScale float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
 }
 
+// SecondaryScale wraps the corresponding Objective-C method.
 func (x *ImageArithmetic) SecondaryScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("secondaryScale"))
 	return _r
 }
 
+// SetSecondaryScale wraps the corresponding Objective-C method.
 func (x *ImageArithmetic) SetSecondaryScale(secondaryScale float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 }
 
+// Bias wraps the corresponding Objective-C method.
 func (x *ImageArithmetic) Bias() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("bias"))
 	return _r
 }
 
+// SetBias wraps the corresponding Objective-C method.
 func (x *ImageArithmetic) SetBias(bias float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 }
 
-// minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
+// PrimaryStrideInPixels the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (x *ImageArithmetic) PrimaryStrideInPixels() metal.MTLSize {
+	_r := objc.Send[metal.MTLSize](objref.IDOf(x), objc.RegisterName("primaryStrideInPixels"))
+	return _r
+}
+
+// SetPrimaryStrideInPixels wraps the corresponding Objective-C method.
+func (x *ImageArithmetic) SetPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixels:"), primaryStrideInPixels)
+}
+
+// SecondaryStrideInPixels the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (x *ImageArithmetic) SecondaryStrideInPixels() metal.MTLSize {
+	_r := objc.Send[metal.MTLSize](objref.IDOf(x), objc.RegisterName("secondaryStrideInPixels"))
+	return _r
+}
+
+// SetSecondaryStrideInPixels wraps the corresponding Objective-C method.
+func (x *ImageArithmetic) SetSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixels:"), secondaryStrideInPixels)
+}
+
+// MinimumValue minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
 func (x *ImageArithmetic) MinimumValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minimumValue"))
 	return _r
 }
 
+// SetMinimumValue wraps the corresponding Objective-C method.
 func (x *ImageArithmetic) SetMinimumValue(minimumValue float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
 }
 
-// maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
+// MaximumValue maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
 func (x *ImageArithmetic) MaximumValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumValue"))
 	return _r
 }
 
+// SetMaximumValue wraps the corresponding Objective-C method.
 func (x *ImageArithmetic) SetMaximumValue(maximumValue float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
 }
@@ -159,8 +197,13 @@ type ImageArithmeticable interface {
 	WithPrimaryScale(primaryScale float32) *ImageArithmetic
 	WithSecondaryScale(secondaryScale float32) *ImageArithmetic
 	WithBias(bias float32) *ImageArithmetic
+	WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageArithmetic
+	WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageArithmetic
 	WithMinimumValue(minimumValue float32) *ImageArithmetic
 	WithMaximumValue(maximumValue float32) *ImageArithmetic
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageArithmetic
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageArithmetic
+	WithClipRect(clipRect metal.MTLRegion) *ImageArithmetic
 	WithLabel(label string) *ImageArithmetic
 	PrimaryScale() float32
 	SetPrimaryScale(primaryScale float32)
@@ -168,6 +211,10 @@ type ImageArithmeticable interface {
 	SetSecondaryScale(secondaryScale float32)
 	Bias() float32
 	SetBias(bias float32)
+	PrimaryStrideInPixels() metal.MTLSize
+	SetPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize)
+	SecondaryStrideInPixels() metal.MTLSize
+	SetSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize)
 	MinimumValue() float32
 	SetMinimumValue(minimumValue float32)
 	MaximumValue() float32
@@ -175,3 +222,14 @@ type ImageArithmeticable interface {
 }
 
 var _ ImageArithmeticable = (*ImageArithmetic)(nil)
+
+// isImageArithmetic marks ImageArithmetic — and, by embedding promotion, its
+// subclasses — as a member of the ImageArithmetic hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ImageArithmetic) isImageArithmetic() {}
+
+var _ ImageArithmeticProvider = (*ImageArithmetic)(nil)
+
+var _ BinaryImageKernelProvider = (*ImageArithmetic)(nil)
+
+var _ KernelProvider = (*ImageArithmetic)(nil)

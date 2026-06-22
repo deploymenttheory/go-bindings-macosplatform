@@ -23,7 +23,8 @@ func RequestFromID(id objc.ID) *Request {
 	if id == 0 {
 		return nil
 	}
-	x := &Request{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Request{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func requestAdopt(id objc.ID) *Request {
 	if id == 0 {
 		return nil
 	}
-	x := &Request{Handle: objref.Wrap(id)}
+	x := &Request{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,12 +58,19 @@ func (x *Request) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Request) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRequest creates a new Request.
 func NewRequest() *Request {
 	_id := objc.Send[objc.ID](objc.ID(_class("AXRequest")), objc.RegisterName("new"))
 	return requestAdopt(_id)
 }
 
+// Technology wraps the corresponding Objective-C method.
 func (x *Request) Technology() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("technology"))
 	if _r == 0 {

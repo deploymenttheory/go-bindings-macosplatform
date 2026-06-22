@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The logical combination of one or more specifier tests.
-//
 // LogicalTest is an idiomatic wrapper over the Objective-C class NSLogicalTest.
+//
+// It embeds [ScriptWhoseTest], promoting that type's methods.
+//
+// The logical combination of one or more specifier tests.
 type LogicalTest struct {
-	objref.Handle
+	ScriptWhoseTest
 }
 
 // LogicalTestFromID adopts an existing Objective-C object as a LogicalTest
@@ -25,7 +26,8 @@ func LogicalTestFromID(id objc.ID) *LogicalTest {
 	if id == 0 {
 		return nil
 	}
-	x := &LogicalTest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LogicalTest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,54 +40,34 @@ func logicalTestAdopt(id objc.ID) *LogicalTest {
 	if id == 0 {
 		return nil
 	}
-	x := &LogicalTest{Handle: objref.Wrap(id)}
+	x := &LogicalTest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *LogicalTest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LogicalTest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LogicalTest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Returns an NSLogicalTest object initialized to perform an AND operation with the NSSpecifierTest objects in a given array.
-//
-// NewLogicalTestAndTestWithTests creates a new LogicalTest.
+// NewLogicalTestAndTestWithTests returns an NSLogicalTest object initialized to perform an AND operation with the NSSpecifierTest objects in a given array.
 func NewLogicalTestAndTestWithTests(subTests []*SpecifierTest) *LogicalTest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSLogicalTest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initAndTestWithTests:"), purego.SliceToNSArray(subTests, func(_v *SpecifierTest) objc.ID { return objref.IDOf(_v) }))
 	return logicalTestAdopt(_id)
 }
 
-// Returns an NSLogicalTest object initialized to perform an OR operation with the NSSpecifierTest objects in a given array.
-//
-// NewLogicalTestOrTestWithTests creates a new LogicalTest.
+// NewLogicalTestOrTestWithTests returns an NSLogicalTest object initialized to perform an OR operation with the NSSpecifierTest objects in a given array.
 func NewLogicalTestOrTestWithTests(subTests []*SpecifierTest) *LogicalTest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSLogicalTest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initOrTestWithTests:"), purego.SliceToNSArray(subTests, func(_v *SpecifierTest) objc.ID { return objref.IDOf(_v) }))
 	return logicalTestAdopt(_id)
 }
 
-// Returns an NSLogicalTest object initialized to perform a NOT operation on the given NSScriptWhoseTest object.
-//
-// NewLogicalTestNotTestWithTest creates a new LogicalTest.
+// NewLogicalTestNotTestWithTest returns an NSLogicalTest object initialized to perform a NOT operation on the given NSScriptWhoseTest object.
 func NewLogicalTestNotTestWithTest(subTest *ScriptWhoseTest) *LogicalTest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSLogicalTest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initNotTestWithTest:"), objref.IDOf(subTest))
 	return logicalTestAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *LogicalTest) WithScriptingProperties(scriptingProperties obj.Object) *LogicalTest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
@@ -98,3 +80,5 @@ type LogicalTestable interface {
 }
 
 var _ LogicalTestable = (*LogicalTest)(nil)
+
+var _ ScriptWhoseTestProvider = (*LogicalTest)(nil)

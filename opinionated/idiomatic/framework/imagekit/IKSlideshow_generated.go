@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// IKSlideshow handles a slideshow with images, PDFs & more.
-//
 // Slideshow is an idiomatic wrapper over the Objective-C class IKSlideshow.
+//
+// IKSlideshow handles a slideshow with images, PDFs & more.
 type Slideshow struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SlideshowFromID(id objc.ID) *Slideshow {
 	if id == 0 {
 		return nil
 	}
-	x := &Slideshow{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Slideshow{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func slideshowAdopt(id objc.ID) *Slideshow {
 	if id == 0 {
 		return nil
 	}
-	x := &Slideshow{Handle: objref.Wrap(id)}
+	x := &Slideshow{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,47 +60,52 @@ func (x *Slideshow) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Slideshow) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSlideshow creates a new Slideshow.
 func NewSlideshow() *Slideshow {
 	_id := objc.Send[objc.ID](objc.ID(_class("IKSlideshow")), objc.RegisterName("new"))
 	return slideshowAdopt(_id)
 }
 
-// Array of filters reflecting the current user adjustments in the adjust or effects tab.
-//
-// WithAutoPlayDelay sets autoPlayDelay and returns the receiver so calls can be chained.
+// WithAutoPlayDelay array of filters reflecting the current user adjustments in the adjust or effects tab.
 func (x *Slideshow) WithAutoPlayDelay(autoPlayDelay float64) *Slideshow {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoPlayDelay:"), autoPlayDelay)
 	return x
 }
 
-// stop the slideshow.
+// StopSlideshow stop the slideshow.
 func (x *Slideshow) StopSlideshow(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopSlideshow:"), objref.IDOf(sender))
 }
 
-// reloadData.
+// ReloadData reloadData.
 func (x *Slideshow) ReloadData() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadData"))
 }
 
-// reloadSlideshowItemAtIndex.
+// ReloadSlideshowItemAtIndex reloadSlideshowItemAtIndex.
 func (x *Slideshow) ReloadSlideshowItemAtIndex(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadSlideshowItemAtIndex:"), index)
 }
 
-// Returns index of current slideshow item.
+// IndexOfCurrentSlideshowItem returns index of current slideshow item.
 func (x *Slideshow) IndexOfCurrentSlideshowItem() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfCurrentSlideshowItem"))
 	return _r
 }
 
-// Array of filters reflecting the current user adjustments in the adjust or effects tab.
+// AutoPlayDelay array of filters reflecting the current user adjustments in the adjust or effects tab.
 func (x *Slideshow) AutoPlayDelay() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("autoPlayDelay"))
 	return _r
 }
 
+// SetAutoPlayDelay wraps the corresponding Objective-C method.
 func (x *Slideshow) SetAutoPlayDelay(autoPlayDelay float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoPlayDelay:"), autoPlayDelay)
 }

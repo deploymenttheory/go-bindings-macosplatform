@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration object you use to create a loss layer.
-//
 // LossDescriptor is an idiomatic wrapper over the Objective-C class MLCLossDescriptor.
+//
+// A configuration object you use to create a loss layer.
 type LossDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LossDescriptorFromID(id objc.ID) *LossDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &LossDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LossDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func lossDescriptorAdopt(id objc.ID) *LossDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &LossDescriptor{Handle: objref.Wrap(id)}
+	x := &LossDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,49 +60,55 @@ func (x *LossDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LossDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLossDescriptor creates a new LossDescriptor.
 func NewLossDescriptor() *LossDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLCLossDescriptor")), objc.RegisterName("new"))
 	return lossDescriptorAdopt(_id)
 }
 
-// Specifies the loss function.
+// LossType specifies the loss function.
 func (x *LossDescriptor) LossType() LossType {
 	_r := objc.Send[LossType](objref.IDOf(x), objc.RegisterName("lossType"))
 	return _r
 }
 
-// The reduction operation performed by the loss function.
+// ReductionType the reduction operation performed by the loss function.
 func (x *LossDescriptor) ReductionType() ReductionType {
 	_r := objc.Send[ReductionType](objref.IDOf(x), objc.RegisterName("reductionType"))
 	return _r
 }
 
-// The scale factor to apply to each element of a result.  The default value is 1.0.
+// Weight the scale factor to apply to each element of a result.  The default value is 1.0.
 func (x *LossDescriptor) Weight() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("weight"))
 	return _r
 }
 
-// The label smoothing parameter. The default value is 0.0. This parameter is valid only for the loss functions of the following type(s): MLCLossTypeSoftmaxCrossEntropy and MLCLossTypeSigmoidCrossEntropy.
+// LabelSmoothing the label smoothing parameter. The default value is 0.0. This parameter is valid only for the loss functions of the following type(s): MLCLossTypeSoftmaxCrossEntropy and MLCLossTypeSigmoidCrossEntropy.
 func (x *LossDescriptor) LabelSmoothing() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("labelSmoothing"))
 	return _r
 }
 
-// The number of classes parameter. The default value is 1. This parameter is valid only for the loss function MLCLossTypeSoftmaxCrossEntropy.
+// ClassCount the number of classes parameter. The default value is 1. This parameter is valid only for the loss function MLCLossTypeSoftmaxCrossEntropy.
 func (x *LossDescriptor) ClassCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("classCount"))
 	return _r
 }
 
-// The epsilon parameter. The default value is 1e-7. This parameter is valid only for the loss function MLCLossTypeLog.
+// Epsilon the epsilon parameter. The default value is 1e-7. This parameter is valid only for the loss function MLCLossTypeLog.
 func (x *LossDescriptor) Epsilon() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
 	return _r
 }
 
-// The delta parameter. The default value is 1.0f. This parameter is valid only for the loss function MLCLossTypeHuber.
+// Delta the delta parameter. The default value is 1.0f. This parameter is valid only for the loss function MLCLossTypeHuber.
 func (x *LossDescriptor) Delta() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("delta"))
 	return _r

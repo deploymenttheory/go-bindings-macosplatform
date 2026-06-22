@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A rich visual representation of a link.
-//
 // LinkView is an idiomatic wrapper over the Objective-C class LPLinkView.
+//
+// A rich visual representation of a link.
 type LinkView struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LinkViewFromID(id objc.ID) *LinkView {
 	if id == 0 {
 		return nil
 	}
-	x := &LinkView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LinkView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func linkViewAdopt(id objc.ID) *LinkView {
 	if id == 0 {
 		return nil
 	}
-	x := &LinkView{Handle: objref.Wrap(id)}
+	x := &LinkView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,39 @@ func (x *LinkView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a placeholder link view without metadata for a given URL.
-//
-// NewLinkViewWithURL creates a new LinkView.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LinkView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLinkViewWithURL initializes a placeholder link view without metadata for a given URL.
 func NewLinkViewWithURL(uRL string) *LinkView {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("LPLinkView")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(uRL))
 	return linkViewAdopt(_id)
 }
 
-// Initializes a link view with specified metadata.
-//
-// NewLinkViewWithMetadata creates a new LinkView.
+// NewLinkViewWithMetadata initializes a link view with specified metadata.
 func NewLinkViewWithMetadata(metadata *LinkMetadata) *LinkView {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("LPLinkView")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMetadata:"), objref.IDOf(metadata))
 	return linkViewAdopt(_id)
 }
 
-// The metadata from which to generate a rich presentation.
-//
-// WithMetadata sets metadata and returns the receiver so calls can be chained.
+// WithMetadata the metadata from which to generate a rich presentation.
 func (x *LinkView) WithMetadata(metadata *LinkMetadata) *LinkView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), objref.IDOf(metadata))
 	return x
 }
 
+// Metadata wraps the corresponding Objective-C method.
 func (x *LinkView) Metadata() *LinkMetadata {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
 	return LinkMetadataFromID(_r)
 }
 
+// SetMetadata wraps the corresponding Objective-C method.
 func (x *LinkView) SetMetadata(metadata *LinkMetadata) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), objref.IDOf(metadata))
 }

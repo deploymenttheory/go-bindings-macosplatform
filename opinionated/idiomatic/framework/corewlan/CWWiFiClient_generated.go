@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// A wrapper around the entire Wi-Fi subsystem that you use to access interfaces and set up event notifications.
-//
 // WiFiClient is an idiomatic wrapper over the Objective-C class CWWiFiClient.
+//
+// A wrapper around the entire Wi-Fi subsystem that you use to access interfaces and set up event notifications.
 type WiFiClient struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func WiFiClientFromID(id objc.ID) *WiFiClient {
 	if id == 0 {
 		return nil
 	}
-	x := &WiFiClient{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WiFiClient{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func wiFiClientAdopt(id objc.ID) *WiFiClient {
 	if id == 0 {
 		return nil
 	}
-	x := &WiFiClient{Handle: objref.Wrap(id)}
+	x := &WiFiClient{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,27 +62,31 @@ func (x *WiFiClient) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WiFiClient) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWiFiClient creates a new WiFiClient.
 func NewWiFiClient() *WiFiClient {
 	_id := objc.Send[objc.ID](objc.ID(_class("CWWiFiClient")), objc.RegisterName("new"))
 	return wiFiClientAdopt(_id)
 }
 
-// An object that provides Wi-Fi event handling.
-//
-// WithDelegate sets delegate and returns the receiver so calls can be chained.
+// WithDelegate an object that provides Wi-Fi event handling.
 func (x *WiFiClient) WithDelegate(delegate obj.Object) *WiFiClient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return x
 }
 
-// Returns the default Wi-Fi interface.
+// Interface returns the default Wi-Fi interface.
 func (x *WiFiClient) Interface() *Interface {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interface"))
 	return InterfaceFromID(_r)
 }
 
-// Returns the list of available Wi-Fi interface names (e.g. "en0"). If no Wi-Fi interfaces are available, this method will return an empty array. Returns nil if an error occurs.
+// InterfaceNames returns the list of available Wi-Fi interface names (e.g. "en0"). If no Wi-Fi interfaces are available, this method will return an empty array. Returns nil if an error occurs.
 //
 // InterfaceNames returns the collection as a Go slice.
 func (x *WiFiClient) InterfaceNames() []string {
@@ -88,13 +94,13 @@ func (x *WiFiClient) InterfaceNames() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Returns the Wi-Fi interface with the given name.
+// InterfaceWithName returns the Wi-Fi interface with the given name.
 func (x *WiFiClient) InterfaceWithName(interfaceName string) *Interface {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interfaceWithName:"), purego.NSString(interfaceName))
 	return InterfaceFromID(_r)
 }
 
-// Returns all available Wi-Fi interfaces.
+// Interfaces returns all available Wi-Fi interfaces.
 //
 // Interfaces returns the collection as a Go slice.
 func (x *WiFiClient) Interfaces() []*Interface {
@@ -102,7 +108,7 @@ func (x *WiFiClient) Interfaces() []*Interface {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Interface { return InterfaceFromID(_id) })
 }
 
-// Register for specific Wi-Fi event notifications.
+// StartMonitoringEventWithType register for specific Wi-Fi event notifications.
 func (x *WiFiClient) StartMonitoringEventWithType(type_ EventType) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("startMonitoringEventWithType:error:"), type_, unsafe.Pointer(&_nsErr))
@@ -112,7 +118,7 @@ func (x *WiFiClient) StartMonitoringEventWithType(type_ EventType) error {
 	return nil
 }
 
-// Unregister for specific Wi-Fi event notifications.
+// StopMonitoringEventWithType unregister for specific Wi-Fi event notifications.
 func (x *WiFiClient) StopMonitoringEventWithType(type_ EventType) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("stopMonitoringEventWithType:error:"), type_, unsafe.Pointer(&_nsErr))
@@ -122,7 +128,7 @@ func (x *WiFiClient) StopMonitoringEventWithType(type_ EventType) error {
 	return nil
 }
 
-// Unregister for all Wi-Fi event notifications.
+// StopMonitoringAllEventsAndReturnError unregister for all Wi-Fi event notifications.
 //
 // StopMonitoringAllEventsAndReturnError returns an error if the operation did not succeed.
 func (x *WiFiClient) StopMonitoringAllEventsAndReturnError() error {
@@ -134,12 +140,13 @@ func (x *WiFiClient) StopMonitoringAllEventsAndReturnError() error {
 	return nil
 }
 
-// Sets the delegate to the specified object, which may implement CWWiFiEventDelegate protocol for Wi-Fi event handling. Clients may register for specific Wi-Fi events using -[CWWiFiClient startMonitoringEventWithType:error:].
+// Delegate sets the delegate to the specified object, which may implement CWWiFiEventDelegate protocol for Wi-Fi event handling. Clients may register for specific Wi-Fi events using -[CWWiFiClient startMonitoringEventWithType:error:].
 func (x *WiFiClient) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
+// SetDelegate wraps the corresponding Objective-C method.
 func (x *WiFiClient) SetDelegate(delegate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }

@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object the system uses to monitor changes in sharing.
-//
 // SystemSharingUIObserver is an idiomatic wrapper over the Objective-C class CKSystemSharingUIObserver.
+//
+// An object the system uses to monitor changes in sharing.
 type SystemSharingUIObserver struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func SystemSharingUIObserverFromID(id objc.ID) *SystemSharingUIObserver {
 	if id == 0 {
 		return nil
 	}
-	x := &SystemSharingUIObserver{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SystemSharingUIObserver{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func systemSharingUIObserverAdopt(id objc.ID) *SystemSharingUIObserver {
 	if id == 0 {
 		return nil
 	}
-	x := &SystemSharingUIObserver{Handle: objref.Wrap(id)}
+	x := &SystemSharingUIObserver{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,17 +62,23 @@ func (x *SystemSharingUIObserver) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates and initializes an observer using the provided container.
-//
-// NewSystemSharingUIObserverWithContainer creates a new SystemSharingUIObserver.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SystemSharingUIObserver) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSystemSharingUIObserverWithContainer creates and initializes an observer using the provided container.
 func NewSystemSharingUIObserverWithContainer(container *Container) *SystemSharingUIObserver {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSystemSharingUIObserver")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainer:"), objref.IDOf(container))
 	return systemSharingUIObserverAdopt(_id)
 }
 
+// SetSystemSharingUIDidStopSharingBlock wraps the corresponding Objective-C method.
+//
 // SetSystemSharingUIDidStopSharingBlock blocks until the operation completes or ctx is cancelled.
-func (x *SystemSharingUIObserver) SetSystemSharingUIDidStopSharingBlock(ctx context.Context) (*RecordID, error) {
+func (x *SystemSharingUIObserver) SetSystemSharingUIDidStopSharingBlock(ctx context.Context) (result *RecordID, err error) {
 	type _result struct {
 		val *RecordID
 		err error

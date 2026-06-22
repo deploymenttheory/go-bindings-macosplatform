@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A generator of texel data that creates a gradient between two specified colors.
-//
 // ColorSwatchTexture is an idiomatic wrapper over the Objective-C class MDLColorSwatchTexture.
+//
+// It embeds [Texture], promoting that type's methods.
+//
+// A generator of texel data that creates a gradient between two specified colors.
 type ColorSwatchTexture struct {
-	objref.Handle
+	Texture
 }
 
 // ColorSwatchTextureFromID adopts an existing Objective-C object as a ColorSwatchTexture
@@ -25,7 +26,8 @@ func ColorSwatchTextureFromID(id objc.ID) *ColorSwatchTexture {
 	if id == 0 {
 		return nil
 	}
-	x := &ColorSwatchTexture{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ColorSwatchTexture{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func colorSwatchTextureAdopt(id objc.ID) *ColorSwatchTexture {
 	if id == 0 {
 		return nil
 	}
-	x := &ColorSwatchTexture{Handle: objref.Wrap(id)}
+	x := &ColorSwatchTexture{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ColorSwatchTexture) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ColorSwatchTexture) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ColorSwatchTexture) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewColorSwatchTexture creates a new ColorSwatchTexture.
@@ -64,17 +52,13 @@ func NewColorSwatchTexture() *ColorSwatchTexture {
 	return colorSwatchTextureAdopt(_id)
 }
 
-// A Boolean value that indicates whether the texture is a cube textures.
-//
-// WithIsCube sets isCube and returns the receiver so calls can be chained.
+// WithIsCube a Boolean value that indicates whether the texture is a cube textures.
 func (x *ColorSwatchTexture) WithIsCube(isCube bool) *ColorSwatchTexture {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsCube:"), isCube)
 	return x
 }
 
-// hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
-//
-// WithHasAlphaValues sets hasAlphaValues and returns the receiver so calls can be chained.
+// WithHasAlphaValues hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
 func (x *ColorSwatchTexture) WithHasAlphaValues(hasAlphaValues bool) *ColorSwatchTexture {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasAlphaValues:"), hasAlphaValues)
 	return x
@@ -88,3 +72,5 @@ type ColorSwatchTextureable interface {
 }
 
 var _ ColorSwatchTextureable = (*ColorSwatchTexture)(nil)
+
+var _ TextureProvider = (*ColorSwatchTexture)(nil)

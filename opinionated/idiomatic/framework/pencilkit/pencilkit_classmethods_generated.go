@@ -10,43 +10,43 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The default width for an eraser type.
+// DefaultWidthForEraserType the default width for an eraser type.
 func DefaultWidthForEraserType(eraserType EraserType) float64 {
 	_r := objc.Send[float64](objc.ID(_class("PKEraserTool")), objc.RegisterName("defaultWidthForEraserType:"), eraserType)
 	return _r
 }
 
-// The minimum width for an eraser type.
+// MinimumWidthForEraserType the minimum width for an eraser type.
 func MinimumWidthForEraserType(eraserType EraserType) float64 {
 	_r := objc.Send[float64](objc.ID(_class("PKEraserTool")), objc.RegisterName("minimumWidthForEraserType:"), eraserType)
 	return _r
 }
 
-// The maximum width for an eraser type.
+// MaximumWidthForEraserType the maximum width for an eraser type.
 func MaximumWidthForEraserType(eraserType EraserType) float64 {
 	_r := objc.Send[float64](objc.ID(_class("PKEraserTool")), objc.RegisterName("maximumWidthForEraserType:"), eraserType)
 	return _r
 }
 
-// The default width for an ink of a type.
+// DefaultWidthForInkType the default width for an ink of a type.
 func DefaultWidthForInkType(inkType obj.Object) float64 {
 	_r := objc.Send[float64](objc.ID(_class("PKInkingTool")), objc.RegisterName("defaultWidthForInkType:"), objref.IDOf(inkType))
 	return _r
 }
 
-// The minimum width for an ink of a type.
+// MinimumWidthForInkType the minimum width for an ink of a type.
 func MinimumWidthForInkType(inkType obj.Object) float64 {
 	_r := objc.Send[float64](objc.ID(_class("PKInkingTool")), objc.RegisterName("minimumWidthForInkType:"), objref.IDOf(inkType))
 	return _r
 }
 
-// The maximum width for an ink of a type.
+// MaximumWidthForInkType the maximum width for an ink of a type.
 func MaximumWidthForInkType(inkType obj.Object) float64 {
 	_r := objc.Send[float64](objc.ID(_class("PKInkingTool")), objc.RegisterName("maximumWidthForInkType:"), objref.IDOf(inkType))
 	return _r
 }
 
-// Converts a color from light to dark appearance or vice versa.
+// InvertColor converts a color from light to dark appearance or vice versa.
 func InvertColor(color obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("PKInkingTool")), objc.RegisterName("invertColor:"), objref.IDOf(color))
 	return obj.Wrap(_r)

@@ -6,15 +6,16 @@ package quartz
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class used to display a cell.
-//
 // IKImageBrowserCell is an idiomatic wrapper over the Objective-C class IKImageBrowserCell.
+//
+// A class used to display a cell.
 type IKImageBrowserCell struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func IKImageBrowserCellFromID(id objc.ID) *IKImageBrowserCell {
 	if id == 0 {
 		return nil
 	}
-	x := &IKImageBrowserCell{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IKImageBrowserCell{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func iKImageBrowserCellAdopt(id objc.ID) *IKImageBrowserCell {
 	if id == 0 {
 		return nil
 	}
-	x := &IKImageBrowserCell{Handle: objref.Wrap(id)}
+	x := &IKImageBrowserCell{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,49 +61,91 @@ func (x *IKImageBrowserCell) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IKImageBrowserCell) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewIKImageBrowserCell creates a new IKImageBrowserCell.
 func NewIKImageBrowserCell() *IKImageBrowserCell {
 	_id := objc.Send[objc.ID](objc.ID(_class("IKImageBrowserCell")), objc.RegisterName("new"))
 	return iKImageBrowserCellAdopt(_id)
 }
 
-// Returns the view the receiver uses to display the cell.
+// ImageBrowserView returns the view the receiver uses to display the cell.
 func (x *IKImageBrowserCell) ImageBrowserView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageBrowserView"))
 	return obj.Wrap(_r)
 }
 
-// Returns the receiver’s represented object.
+// RepresentedItem returns the receiver’s represented object.
 func (x *IKImageBrowserCell) RepresentedItem() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("representedItem"))
 	return obj.Wrap(_r)
 }
 
-// Returns the index of the receiver’s represented object in the datasource.
+// IndexOfRepresentedItem returns the index of the receiver’s represented object in the datasource.
 func (x *IKImageBrowserCell) IndexOfRepresentedItem() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfRepresentedItem"))
 	return _r
 }
 
-// Returns whether the cell is selected.
+// Frame returns the receiver’s frame rectangle, which defines its position in its IKImageBrowserView.
+func (x *IKImageBrowserCell) Frame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frame"))
+	return _r
+}
+
+// ImageContainerFrame returns the receiver’s image container frame rectangle, which defines the position of the container of the thumbnail.
+func (x *IKImageBrowserCell) ImageContainerFrame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("imageContainerFrame"))
+	return _r
+}
+
+// ImageFrame returns the receiver’s image frame rectangle, which defines the position of the thumbnail in its IKImageBrowserView.
+func (x *IKImageBrowserCell) ImageFrame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("imageFrame"))
+	return _r
+}
+
+// SelectionFrame returns the receiver’s selection frame rectangle, which defines the position of the selection rectangle in its IKImageBrowserView.
+func (x *IKImageBrowserCell) SelectionFrame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("selectionFrame"))
+	return _r
+}
+
+// TitleFrame returns the receiver’s title frame rectangle.
+func (x *IKImageBrowserCell) TitleFrame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("titleFrame"))
+	return _r
+}
+
+// SubtitleFrame returns the receiver’s subtitle frame rectangle.
+func (x *IKImageBrowserCell) SubtitleFrame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("subtitleFrame"))
+	return _r
+}
+
+// IsSelected returns whether the cell is selected.
 func (x *IKImageBrowserCell) IsSelected() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSelected"))
 	return _r
 }
 
-// Returns the current cell state of the receiver.
+// CellState returns the current cell state of the receiver.
 func (x *IKImageBrowserCell) CellState() IKImageBrowserCellState {
 	_r := objc.Send[IKImageBrowserCellState](objref.IDOf(x), objc.RegisterName("cellState"))
 	return _r
 }
 
-// Returns the opacity of the receiver.
+// Opacity returns the opacity of the receiver.
 func (x *IKImageBrowserCell) Opacity() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("opacity"))
 	return _r
 }
 
-// Returns a layer for the specified position.
+// LayerForType returns a layer for the specified position.
 func (x *IKImageBrowserCell) LayerForType(type_ string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layerForType:"), purego.NSString(type_))
 	return obj.Wrap(_r)
@@ -112,6 +157,12 @@ type IKImageBrowserCellable interface {
 	ImageBrowserView() obj.Object
 	RepresentedItem() obj.Object
 	IndexOfRepresentedItem() int
+	Frame() corefoundation.CGRect
+	ImageContainerFrame() corefoundation.CGRect
+	ImageFrame() corefoundation.CGRect
+	SelectionFrame() corefoundation.CGRect
+	TitleFrame() corefoundation.CGRect
+	SubtitleFrame() corefoundation.CGRect
 	IsSelected() bool
 	CellState() IKImageBrowserCellState
 	Opacity() float64

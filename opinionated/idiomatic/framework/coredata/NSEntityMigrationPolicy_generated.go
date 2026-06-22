@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// A policy instance that customizes the migration process for an entity mapping.
-//
 // EntityMigrationPolicy is an idiomatic wrapper over the Objective-C class NSEntityMigrationPolicy.
+//
+// A policy instance that customizes the migration process for an entity mapping.
 type EntityMigrationPolicy struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func EntityMigrationPolicyFromID(id objc.ID) *EntityMigrationPolicy {
 	if id == 0 {
 		return nil
 	}
-	x := &EntityMigrationPolicy{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EntityMigrationPolicy{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func entityMigrationPolicyAdopt(id objc.ID) *EntityMigrationPolicy {
 	if id == 0 {
 		return nil
 	}
-	x := &EntityMigrationPolicy{Handle: objref.Wrap(id)}
+	x := &EntityMigrationPolicy{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,13 +62,19 @@ func (x *EntityMigrationPolicy) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *EntityMigrationPolicy) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewEntityMigrationPolicy creates a new EntityMigrationPolicy.
 func NewEntityMigrationPolicy() *EntityMigrationPolicy {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSEntityMigrationPolicy")), objc.RegisterName("new"))
 	return entityMigrationPolicyAdopt(_id)
 }
 
-// Sets up state information before the start of a given entity mapping.
+// BeginEntityMappingManager sets up state information before the start of a given entity mapping.
 func (x *EntityMigrationPolicy) BeginEntityMappingManager(mapping *EntityMapping, manager *MigrationManager) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("beginEntityMapping:manager:error:"), objref.IDOf(mapping), objref.IDOf(manager), unsafe.Pointer(&_nsErr))
@@ -76,7 +84,7 @@ func (x *EntityMigrationPolicy) BeginEntityMappingManager(mapping *EntityMapping
 	return nil
 }
 
-// Creates the destination instance(s) for a given source instance.
+// CreateDestinationInstancesForSourceInstanceEntityMappingManager creates the destination instance(s) for a given source instance.
 func (x *EntityMigrationPolicy) CreateDestinationInstancesForSourceInstanceEntityMappingManager(sInstance *ManagedObject, mapping *EntityMapping, manager *MigrationManager) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("createDestinationInstancesForSourceInstance:entityMapping:manager:error:"), objref.IDOf(sInstance), objref.IDOf(mapping), objref.IDOf(manager), unsafe.Pointer(&_nsErr))
@@ -86,7 +94,7 @@ func (x *EntityMigrationPolicy) CreateDestinationInstancesForSourceInstanceEntit
 	return nil
 }
 
-// Indicates the end of the instance creation stage for the specified entity mapping, and the precursor to the next migration stage.
+// EndInstanceCreationForEntityMappingManager indicates the end of the instance creation stage for the specified entity mapping, and the precursor to the next migration stage.
 func (x *EntityMigrationPolicy) EndInstanceCreationForEntityMappingManager(mapping *EntityMapping, manager *MigrationManager) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("endInstanceCreationForEntityMapping:manager:error:"), objref.IDOf(mapping), objref.IDOf(manager), unsafe.Pointer(&_nsErr))
@@ -96,7 +104,7 @@ func (x *EntityMigrationPolicy) EndInstanceCreationForEntityMappingManager(mappi
 	return nil
 }
 
-// Constructs the relationships between the newly-created destination instances.
+// CreateRelationshipsForDestinationInstanceEntityMappingManager constructs the relationships between the newly-created destination instances.
 func (x *EntityMigrationPolicy) CreateRelationshipsForDestinationInstanceEntityMappingManager(dInstance *ManagedObject, mapping *EntityMapping, manager *MigrationManager) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("createRelationshipsForDestinationInstance:entityMapping:manager:error:"), objref.IDOf(dInstance), objref.IDOf(mapping), objref.IDOf(manager), unsafe.Pointer(&_nsErr))
@@ -106,7 +114,7 @@ func (x *EntityMigrationPolicy) CreateRelationshipsForDestinationInstanceEntityM
 	return nil
 }
 
-// Indicates the end of the relationship creation stage for the specified entity mapping.
+// EndRelationshipCreationForEntityMappingManager indicates the end of the relationship creation stage for the specified entity mapping.
 func (x *EntityMigrationPolicy) EndRelationshipCreationForEntityMappingManager(mapping *EntityMapping, manager *MigrationManager) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("endRelationshipCreationForEntityMapping:manager:error:"), objref.IDOf(mapping), objref.IDOf(manager), unsafe.Pointer(&_nsErr))
@@ -116,7 +124,7 @@ func (x *EntityMigrationPolicy) EndRelationshipCreationForEntityMappingManager(m
 	return nil
 }
 
-// Provides the option to perform custom validation on migrated objects during the validation stage of the entity migration policy.
+// PerformCustomValidationForEntityMappingManager provides the option to perform custom validation on migrated objects during the validation stage of the entity migration policy.
 func (x *EntityMigrationPolicy) PerformCustomValidationForEntityMappingManager(mapping *EntityMapping, manager *MigrationManager) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("performCustomValidationForEntityMapping:manager:error:"), objref.IDOf(mapping), objref.IDOf(manager), unsafe.Pointer(&_nsErr))
@@ -126,7 +134,7 @@ func (x *EntityMigrationPolicy) PerformCustomValidationForEntityMappingManager(m
 	return nil
 }
 
-// Performs cleanup at the end of the migration, from any phase of the mapping.
+// EndEntityMappingManager performs cleanup at the end of the migration, from any phase of the mapping.
 func (x *EntityMigrationPolicy) EndEntityMappingManager(mapping *EntityMapping, manager *MigrationManager) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("endEntityMapping:manager:error:"), objref.IDOf(mapping), objref.IDOf(manager), unsafe.Pointer(&_nsErr))

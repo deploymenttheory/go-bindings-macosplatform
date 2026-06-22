@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that requests the delivery and handles the receipt of PushKit notifications.
-//
 // PushRegistry is an idiomatic wrapper over the Objective-C class PKPushRegistry.
+//
+// An object that requests the delivery and handles the receipt of PushKit notifications.
 type PushRegistry struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PushRegistryFromID(id objc.ID) *PushRegistry {
 	if id == 0 {
 		return nil
 	}
-	x := &PushRegistry{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PushRegistry{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func pushRegistryAdopt(id objc.ID) *PushRegistry {
 	if id == 0 {
 		return nil
 	}
-	x := &PushRegistry{Handle: objref.Wrap(id)}
+	x := &PushRegistry{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,35 +60,38 @@ func (x *PushRegistry) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a push registry with the specified dispatch queue.
-//
-// NewPushRegistryWithQueue creates a new PushRegistry.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PushRegistry) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPushRegistryWithQueue creates a push registry with the specified dispatch queue.
 func NewPushRegistryWithQueue(queue obj.Object) *PushRegistry {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPushRegistry")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQueue:"), objref.IDOf(queue))
 	return pushRegistryAdopt(_id)
 }
 
-// Registers the push types for this push registry object.
-//
-// WithDesiredPushTypes sets desiredPushTypes and returns the receiver so calls can be chained.
+// WithDesiredPushTypes registers the push types for this push registry object.
 func (x *PushRegistry) WithDesiredPushTypes(desiredPushTypes obj.Object) *PushRegistry {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredPushTypes:"), objref.IDOf(desiredPushTypes))
 	return x
 }
 
-// Retrieves the locally cached push token for the specified push type.
+// PushTokenForType retrieves the locally cached push token for the specified push type.
 func (x *PushRegistry) PushTokenForType(type_ obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pushTokenForType:"), objref.IDOf(type_))
 	return obj.Wrap(_r)
 }
 
-// Registers the push types for this push registry object. When you assign a value to this property, the push registry object makes a registration request with the PushKit server. This request is asynchronous, and the success or failure of the request is reported to your registery's delegate object. For a successful registration, PushKit delivers a push token to the delegate. Use that token to generate push requests from your server. For a list of push types that you may include in the set, see “PushKit/PKPushType“.
+// DesiredPushTypes registers the push types for this push registry object. When you assign a value to this property, the push registry object makes a registration request with the PushKit server. This request is asynchronous, and the success or failure of the request is reported to your registery's delegate object. For a successful registration, PushKit delivers a push token to the delegate. Use that token to generate push requests from your server. For a list of push types that you may include in the set, see “PushKit/PKPushType“.
 func (x *PushRegistry) DesiredPushTypes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("desiredPushTypes"))
 	return obj.Wrap(_r)
 }
 
+// SetDesiredPushTypes wraps the corresponding Objective-C method.
 func (x *PushRegistry) SetDesiredPushTypes(desiredPushTypes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredPushTypes:"), objref.IDOf(desiredPushTypes))
 }

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of an image, video, or Live Photo in the Photos library.
-//
 // Asset is an idiomatic wrapper over the Objective-C class PHAsset.
+//
+// It embeds [Object], promoting that type's methods.
+//
+// A representation of an image, video, or Live Photo in the Photos library.
 type Asset struct {
-	objref.Handle
+	Object
 }
 
 // AssetFromID adopts an existing Objective-C object as a Asset
@@ -25,7 +26,8 @@ func AssetFromID(id objc.ID) *Asset {
 	if id == 0 {
 		return nil
 	}
-	x := &Asset{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Asset{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func assetAdopt(id objc.ID) *Asset {
 	if id == 0 {
 		return nil
 	}
-	x := &Asset{Handle: objref.Wrap(id)}
+	x := &Asset{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *Asset) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Asset) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Asset) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAsset creates a new Asset.
@@ -64,81 +52,91 @@ func NewAsset() *Asset {
 	return assetAdopt(_id)
 }
 
-// Returns whether the asset supports the specified editing operation.
+// CanPerformEditOperation returns whether the asset supports the specified editing operation.
 func (x *Asset) CanPerformEditOperation(editOperation AssetEditOperation) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPerformEditOperation:"), editOperation)
 	return _r
 }
 
+// PlaybackStyle wraps the corresponding Objective-C method.
 func (x *Asset) PlaybackStyle() AssetPlaybackStyle {
 	_r := objc.Send[AssetPlaybackStyle](objref.IDOf(x), objc.RegisterName("playbackStyle"))
 	return _r
 }
 
+// MediaType wraps the corresponding Objective-C method.
 func (x *Asset) MediaType() AssetMediaType {
 	_r := objc.Send[AssetMediaType](objref.IDOf(x), objc.RegisterName("mediaType"))
 	return _r
 }
 
+// MediaSubtypes wraps the corresponding Objective-C method.
 func (x *Asset) MediaSubtypes() AssetMediaSubtype {
 	_r := objc.Send[AssetMediaSubtype](objref.IDOf(x), objc.RegisterName("mediaSubtypes"))
 	return _r
 }
 
-// The type of image or video data that is presented for the asset
+// ContentType the type of image or video data that is presented for the asset
 func (x *Asset) ContentType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
 	return obj.Wrap(_r)
 }
 
+// PixelWidth wraps the corresponding Objective-C method.
 func (x *Asset) PixelWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelWidth"))
 	return _r
 }
 
+// PixelHeight wraps the corresponding Objective-C method.
 func (x *Asset) PixelHeight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelHeight"))
 	return _r
 }
 
-// The date and time of this asset's creation (can be updated by the user)
+// CreationDate the date and time of this asset's creation (can be updated by the user)
 func (x *Asset) CreationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creationDate"))
 	return obj.Wrap(_r)
 }
 
-// The date and time of the last modification to this asset or one of its properties
+// ModificationDate the date and time of the last modification to this asset or one of its properties
 func (x *Asset) ModificationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modificationDate"))
 	return obj.Wrap(_r)
 }
 
-// The date and time this asset was added to the photo library (from the device that was used to add this asset)
+// AddedDate the date and time this asset was added to the photo library (from the device that was used to add this asset)
 func (x *Asset) AddedDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addedDate"))
 	return obj.Wrap(_r)
 }
 
+// Duration wraps the corresponding Objective-C method.
 func (x *Asset) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
 	return _r
 }
 
+// IsHidden wraps the corresponding Objective-C method.
 func (x *Asset) IsHidden() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
 	return _r
 }
 
+// IsFavorite wraps the corresponding Objective-C method.
 func (x *Asset) IsFavorite() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFavorite"))
 	return _r
 }
 
+// IsSyncFailureHidden wraps the corresponding Objective-C method.
 func (x *Asset) IsSyncFailureHidden() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSyncFailureHidden"))
 	return _r
 }
 
+// BurstIdentifier wraps the corresponding Objective-C method.
 func (x *Asset) BurstIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("burstIdentifier"))
 	if _r == 0 {
@@ -147,26 +145,31 @@ func (x *Asset) BurstIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// BurstSelectionTypes wraps the corresponding Objective-C method.
 func (x *Asset) BurstSelectionTypes() AssetBurstSelectionType {
 	_r := objc.Send[AssetBurstSelectionType](objref.IDOf(x), objc.RegisterName("burstSelectionTypes"))
 	return _r
 }
 
+// RepresentsBurst wraps the corresponding Objective-C method.
 func (x *Asset) RepresentsBurst() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("representsBurst"))
 	return _r
 }
 
+// SourceType wraps the corresponding Objective-C method.
 func (x *Asset) SourceType() AssetSourceType {
 	_r := objc.Send[AssetSourceType](objref.IDOf(x), objc.RegisterName("sourceType"))
 	return _r
 }
 
+// HasAdjustments wraps the corresponding Objective-C method.
 func (x *Asset) HasAdjustments() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasAdjustments"))
 	return _r
 }
 
+// AdjustmentFormatIdentifier wraps the corresponding Objective-C method.
 func (x *Asset) AdjustmentFormatIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adjustmentFormatIdentifier"))
 	if _r == 0 {
@@ -175,13 +178,13 @@ func (x *Asset) AdjustmentFormatIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Requests asset information for beginning a content editing session.
+// RequestContentEditingInputWithOptionsCompletionHandler requests asset information for beginning a content editing session.
 func (x *Asset) RequestContentEditingInputWithOptionsCompletionHandler(options *ContentEditingInputRequestOptions, completionHandler func(obj.Object, obj.Object)) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("requestContentEditingInputWithOptions:completionHandler:"), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { completionHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return _r
 }
 
-// Cancels a request for editing the asset’s content.
+// CancelContentEditingInputRequest cancels a request for editing the asset’s content.
 func (x *Asset) CancelContentEditingInputRequest(requestID int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelContentEditingInputRequest:"), requestID)
 }
@@ -214,3 +217,5 @@ type Assetable interface {
 }
 
 var _ Assetable = (*Asset)(nil)
+
+var _ ObjectProvider = (*Asset)(nil)

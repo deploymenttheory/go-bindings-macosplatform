@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A node that plays all its children at the same time.
-//
 // ContainerNodeDefinition is an idiomatic wrapper over the Objective-C class PHASEContainerNodeDefinition.
+//
+// It embeds [SoundEventNodeDefinition], promoting that type's methods.
+//
+// A node that plays all its children at the same time.
 type ContainerNodeDefinition struct {
-	objref.Handle
+	SoundEventNodeDefinition
 }
 
 // ContainerNodeDefinitionFromID adopts an existing Objective-C object as a ContainerNodeDefinition
@@ -25,7 +26,8 @@ func ContainerNodeDefinitionFromID(id objc.ID) *ContainerNodeDefinition {
 	if id == 0 {
 		return nil
 	}
-	x := &ContainerNodeDefinition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContainerNodeDefinition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func containerNodeDefinitionAdopt(id objc.ID) *ContainerNodeDefinition {
 	if id == 0 {
 		return nil
 	}
-	x := &ContainerNodeDefinition{Handle: objref.Wrap(id)}
+	x := &ContainerNodeDefinition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ContainerNodeDefinition) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContainerNodeDefinition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContainerNodeDefinition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewContainerNodeDefinition creates a new ContainerNodeDefinition.
@@ -64,16 +52,14 @@ func NewContainerNodeDefinition() *ContainerNodeDefinition {
 	return containerNodeDefinitionAdopt(_id)
 }
 
-// Creates a container node with the given name.
-//
-// NewContainerNodeDefinitionWithIdentifier creates a new ContainerNodeDefinition.
+// NewContainerNodeDefinitionWithIdentifier creates a container node with the given name.
 func NewContainerNodeDefinitionWithIdentifier(identifier string) *ContainerNodeDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEContainerNodeDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), purego.NSString(identifier))
 	return containerNodeDefinitionAdopt(_id)
 }
 
-// Adds a sound event node as a child.
+// AddSubtree adds a sound event node as a child.
 func (x *ContainerNodeDefinition) AddSubtree(subtree *SoundEventNodeDefinition) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSubtree:"), objref.IDOf(subtree))
 }
@@ -85,3 +71,7 @@ type ContainerNodeDefinitionable interface {
 }
 
 var _ ContainerNodeDefinitionable = (*ContainerNodeDefinition)(nil)
+
+var _ SoundEventNodeDefinitionProvider = (*ContainerNodeDefinition)(nil)
+
+var _ DefinitionProvider = (*ContainerNodeDefinition)(nil)

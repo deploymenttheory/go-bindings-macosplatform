@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that directs sound in a cone-shaped curve that extends from a sound source.
-//
 // ConeDirectivityModelParameters is an idiomatic wrapper over the Objective-C class PHASEConeDirectivityModelParameters.
+//
+// It embeds [DirectivityModelParameters], promoting that type's methods.
+//
+// An object that directs sound in a cone-shaped curve that extends from a sound source.
 type ConeDirectivityModelParameters struct {
-	objref.Handle
+	DirectivityModelParameters
 }
 
 // ConeDirectivityModelParametersFromID adopts an existing Objective-C object as a ConeDirectivityModelParameters
@@ -25,7 +26,8 @@ func ConeDirectivityModelParametersFromID(id objc.ID) *ConeDirectivityModelParam
 	if id == 0 {
 		return nil
 	}
-	x := &ConeDirectivityModelParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ConeDirectivityModelParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,35 +40,21 @@ func coneDirectivityModelParametersAdopt(id objc.ID) *ConeDirectivityModelParame
 	if id == 0 {
 		return nil
 	}
-	x := &ConeDirectivityModelParameters{Handle: objref.Wrap(id)}
+	x := &ConeDirectivityModelParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ConeDirectivityModelParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ConeDirectivityModelParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ConeDirectivityModelParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates an object that directs sound in a cone-shaped curve that extends from a sound source.
-//
-// NewConeDirectivityModelParametersWithSubbandParameters creates a new ConeDirectivityModelParameters.
+// NewConeDirectivityModelParametersWithSubbandParameters creates an object that directs sound in a cone-shaped curve that extends from a sound source.
 func NewConeDirectivityModelParametersWithSubbandParameters(subbandParameters []*ConeDirectivityModelSubbandParameters) *ConeDirectivityModelParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEConeDirectivityModelParameters")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSubbandParameters:"), purego.SliceToNSArray(subbandParameters, func(_v *ConeDirectivityModelSubbandParameters) objc.ID { return objref.IDOf(_v) }))
 	return coneDirectivityModelParametersAdopt(_id)
 }
 
+// SubbandParameters wraps the corresponding Objective-C method.
+//
 // SubbandParameters returns the collection as a Go slice.
 func (x *ConeDirectivityModelParameters) SubbandParameters() []*ConeDirectivityModelSubbandParameters {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subbandParameters"))
@@ -82,3 +70,5 @@ type ConeDirectivityModelParametersable interface {
 }
 
 var _ ConeDirectivityModelParametersable = (*ConeDirectivityModelParameters)(nil)
+
+var _ DirectivityModelParametersProvider = (*ConeDirectivityModelParameters)(nil)

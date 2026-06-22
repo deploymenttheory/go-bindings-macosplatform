@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event requesting a change in the repeat mode.
-//
 // ChangeRepeatModeCommandEvent is an idiomatic wrapper over the Objective-C class MPChangeRepeatModeCommandEvent.
+//
+// It embeds [RemoteCommandEvent], promoting that type's methods.
+//
+// An event requesting a change in the repeat mode.
 type ChangeRepeatModeCommandEvent struct {
-	objref.Handle
+	RemoteCommandEvent
 }
 
 // ChangeRepeatModeCommandEventFromID adopts an existing Objective-C object as a ChangeRepeatModeCommandEvent
@@ -25,7 +26,8 @@ func ChangeRepeatModeCommandEventFromID(id objc.ID) *ChangeRepeatModeCommandEven
 	if id == 0 {
 		return nil
 	}
-	x := &ChangeRepeatModeCommandEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ChangeRepeatModeCommandEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func changeRepeatModeCommandEventAdopt(id objc.ID) *ChangeRepeatModeCommandEvent
 	if id == 0 {
 		return nil
 	}
-	x := &ChangeRepeatModeCommandEvent{Handle: objref.Wrap(id)}
+	x := &ChangeRepeatModeCommandEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ChangeRepeatModeCommandEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ChangeRepeatModeCommandEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ChangeRepeatModeCommandEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewChangeRepeatModeCommandEvent creates a new ChangeRepeatModeCommandEvent.
@@ -64,13 +52,13 @@ func NewChangeRepeatModeCommandEvent() *ChangeRepeatModeCommandEvent {
 	return changeRepeatModeCommandEventAdopt(_id)
 }
 
-// The desired repeat type to use when fulfilling the request.
+// RepeatType the desired repeat type to use when fulfilling the request.
 func (x *ChangeRepeatModeCommandEvent) RepeatType() RepeatType {
 	_r := objc.Send[RepeatType](objref.IDOf(x), objc.RegisterName("repeatType"))
 	return _r
 }
 
-// Whether or not the selection should be preserved between playback sessions
+// PreservesRepeatMode whether or not the selection should be preserved between playback sessions
 func (x *ChangeRepeatModeCommandEvent) PreservesRepeatMode() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preservesRepeatMode"))
 	return _r
@@ -84,3 +72,5 @@ type ChangeRepeatModeCommandEventable interface {
 }
 
 var _ ChangeRepeatModeCommandEventable = (*ChangeRepeatModeCommandEvent)(nil)
+
+var _ RemoteCommandEventProvider = (*ChangeRepeatModeCommandEvent)(nil)

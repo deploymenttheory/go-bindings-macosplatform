@@ -10,91 +10,91 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns a new filter formed by OR-ing the filters in a given array.
+// AnyFilterMatchingSubfilters returns a new filter formed by OR-ing the filters in a given array.
 func AnyFilterMatchingSubfilters(subfilters []*PickerFilter) *PickerFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("anyFilterMatchingSubfilters:"), purego.SliceToNSArray(subfilters, func(_v *PickerFilter) objc.ID { return objref.IDOf(_v) }))
 	return PickerFilterFromID(_r)
 }
 
-// Returns a new filter formed by AND-ing the filters in a given array.
+// AllFilterMatchingSubfilters returns a new filter formed by AND-ing the filters in a given array.
 func AllFilterMatchingSubfilters(subfilters []*PickerFilter) *PickerFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("allFilterMatchingSubfilters:"), purego.SliceToNSArray(subfilters, func(_v *PickerFilter) objc.ID { return objref.IDOf(_v) }))
 	return PickerFilterFromID(_r)
 }
 
-// Returns a new filter formed by negating the given filter.
+// NotFilterOfSubfilter returns a new filter formed by negating the given filter.
 func NotFilterOfSubfilter(subfilter *PickerFilter) *PickerFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("notFilterOfSubfilter:"), objref.IDOf(subfilter))
 	return PickerFilterFromID(_r)
 }
 
-// The filter for images.
+// ImagesFilter the filter for images.
 func ImagesFilter() *PickerFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("imagesFilter"))
 	return PickerFilterFromID(_r)
 }
 
-// The filter for videos.
+// VideosFilter the filter for videos.
 func VideosFilter() *PickerFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("videosFilter"))
 	return PickerFilterFromID(_r)
 }
 
-// The filter for live photos.
+// LivePhotosFilter the filter for live photos.
 func LivePhotosFilter() *PickerFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("livePhotosFilter"))
 	return PickerFilterFromID(_r)
 }
 
-// The filter for Depth Effect photos.
+// DepthEffectPhotosFilter the filter for Depth Effect photos.
 func DepthEffectPhotosFilter() *PickerFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("depthEffectPhotosFilter"))
 	return PickerFilterFromID(_r)
 }
 
-// The filter for bursts.
+// BurstsFilter the filter for bursts.
 func BurstsFilter() *PickerFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("burstsFilter"))
 	return PickerFilterFromID(_r)
 }
 
-// The filter for panorama photos.
+// PanoramasFilter the filter for panorama photos.
 func PanoramasFilter() *PickerFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("panoramasFilter"))
 	return PickerFilterFromID(_r)
 }
 
-// The filter for screenshots.
+// ScreenshotsFilter the filter for screenshots.
 func ScreenshotsFilter() *PickerFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("screenshotsFilter"))
 	return PickerFilterFromID(_r)
 }
 
-// The filter for screen recordings.
+// ScreenRecordingsFilter the filter for screen recordings.
 func ScreenRecordingsFilter() *PickerFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("screenRecordingsFilter"))
 	return PickerFilterFromID(_r)
 }
 
-// The filter for Cinematic videos.
+// CinematicVideosFilter the filter for Cinematic videos.
 func CinematicVideosFilter() *PickerFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("cinematicVideosFilter"))
 	return PickerFilterFromID(_r)
 }
 
-// The filter for Slow-Mo videos.
+// SlomoVideosFilter the filter for Slow-Mo videos.
 func SlomoVideosFilter() *PickerFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("slomoVideosFilter"))
 	return PickerFilterFromID(_r)
 }
 
-// The filter for time-lapse videos.
+// TimelapseVideosFilter the filter for time-lapse videos.
 func TimelapseVideosFilter() *PickerFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("timelapseVideosFilter"))
 	return PickerFilterFromID(_r)
 }
 
-// The filter for spatial media.
+// SpatialMediaFilter the filter for spatial media.
 func SpatialMediaFilter() *PickerFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("spatialMediaFilter"))
 	return PickerFilterFromID(_r)

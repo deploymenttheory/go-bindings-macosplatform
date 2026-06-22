@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that responds to requests to change the current shuffle mode used during playback.
-//
 // ChangeShuffleModeCommand is an idiomatic wrapper over the Objective-C class MPChangeShuffleModeCommand.
+//
+// It embeds [RemoteCommand], promoting that type's methods.
+//
+// An object that responds to requests to change the current shuffle mode used during playback.
 type ChangeShuffleModeCommand struct {
-	objref.Handle
+	RemoteCommand
 }
 
 // ChangeShuffleModeCommandFromID adopts an existing Objective-C object as a ChangeShuffleModeCommand
@@ -25,7 +26,8 @@ func ChangeShuffleModeCommandFromID(id objc.ID) *ChangeShuffleModeCommand {
 	if id == 0 {
 		return nil
 	}
-	x := &ChangeShuffleModeCommand{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ChangeShuffleModeCommand{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func changeShuffleModeCommandAdopt(id objc.ID) *ChangeShuffleModeCommand {
 	if id == 0 {
 		return nil
 	}
-	x := &ChangeShuffleModeCommand{Handle: objref.Wrap(id)}
+	x := &ChangeShuffleModeCommand{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ChangeShuffleModeCommand) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ChangeShuffleModeCommand) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ChangeShuffleModeCommand) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewChangeShuffleModeCommand creates a new ChangeShuffleModeCommand.
@@ -64,27 +52,25 @@ func NewChangeShuffleModeCommand() *ChangeShuffleModeCommand {
 	return changeShuffleModeCommandAdopt(_id)
 }
 
-// The current shuffle mode for a media item.
-//
-// WithCurrentShuffleType sets currentShuffleType and returns the receiver so calls can be chained.
+// WithCurrentShuffleType the current shuffle mode for a media item.
 func (x *ChangeShuffleModeCommand) WithCurrentShuffleType(currentShuffleType ShuffleType) *ChangeShuffleModeCommand {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentShuffleType:"), currentShuffleType)
 	return x
 }
 
-// A Boolean value that indicates whether a user can interact with the displayed element.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether a user can interact with the displayed element.
 func (x *ChangeShuffleModeCommand) WithEnabled(enabled bool) *ChangeShuffleModeCommand {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
+// CurrentShuffleType wraps the corresponding Objective-C method.
 func (x *ChangeShuffleModeCommand) CurrentShuffleType() ShuffleType {
 	_r := objc.Send[ShuffleType](objref.IDOf(x), objc.RegisterName("currentShuffleType"))
 	return _r
 }
 
+// SetCurrentShuffleType wraps the corresponding Objective-C method.
 func (x *ChangeShuffleModeCommand) SetCurrentShuffleType(currentShuffleType ShuffleType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentShuffleType:"), currentShuffleType)
 }
@@ -99,3 +85,5 @@ type ChangeShuffleModeCommandable interface {
 }
 
 var _ ChangeShuffleModeCommandable = (*ChangeShuffleModeCommand)(nil)
+
+var _ RemoteCommandProvider = (*ChangeShuffleModeCommand)(nil)

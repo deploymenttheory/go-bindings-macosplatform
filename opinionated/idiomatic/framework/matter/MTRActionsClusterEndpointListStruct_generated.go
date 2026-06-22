@@ -23,7 +23,8 @@ func MTRActionsClusterEndpointListStructFromID(id objc.ID) *MTRActionsClusterEnd
 	if id == 0 {
 		return nil
 	}
-	x := &MTRActionsClusterEndpointListStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRActionsClusterEndpointListStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRActionsClusterEndpointListStructAdopt(id objc.ID) *MTRActionsClusterEndp
 	if id == 0 {
 		return nil
 	}
-	x := &MTRActionsClusterEndpointListStruct{Handle: objref.Wrap(id)}
+	x := &MTRActionsClusterEndpointListStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,39 +58,48 @@ func (x *MTRActionsClusterEndpointListStruct) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRActionsClusterEndpointListStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRActionsClusterEndpointListStruct creates a new MTRActionsClusterEndpointListStruct.
 func NewMTRActionsClusterEndpointListStruct() *MTRActionsClusterEndpointListStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRActionsClusterEndpointListStruct")), objc.RegisterName("new"))
 	return mTRActionsClusterEndpointListStructAdopt(_id)
 }
 
-// WithEndpointListID sets endpointListID and returns the receiver so calls can be chained.
+// WithEndpointListID sets the property and returns the receiver so calls can be chained.
 func (x *MTRActionsClusterEndpointListStruct) WithEndpointListID(endpointListID obj.Object) *MTRActionsClusterEndpointListStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpointListID:"), objref.IDOf(endpointListID))
 	return x
 }
 
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *MTRActionsClusterEndpointListStruct) WithName(name string) *MTRActionsClusterEndpointListStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithType sets the property and returns the receiver so calls can be chained.
 func (x *MTRActionsClusterEndpointListStruct) WithType(type_ obj.Object) *MTRActionsClusterEndpointListStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return x
 }
 
+// EndpointListID wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterEndpointListStruct) EndpointListID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpointListID"))
 	return obj.Wrap(_r)
 }
 
+// SetEndpointListID wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterEndpointListStruct) SetEndpointListID(endpointListID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpointListID:"), objref.IDOf(endpointListID))
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterEndpointListStruct) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -97,24 +108,29 @@ func (x *MTRActionsClusterEndpointListStruct) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterEndpointListStruct) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterEndpointListStruct) Type() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
 	return obj.Wrap(_r)
 }
 
+// SetType wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterEndpointListStruct) SetType(type_ obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
 }
 
+// Endpoints wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterEndpointListStruct) Endpoints() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoints"))
 	return obj.Wrap(_r)
 }
 
+// SetEndpoints wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterEndpointListStruct) SetEndpoints(endpoints obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoints:"), objref.IDOf(endpoints))
 }

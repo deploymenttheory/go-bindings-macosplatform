@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An encapsulation of all the details of your machine learning model.
-//
 // Model is an idiomatic wrapper over the Objective-C class MLModel.
+//
+// An encapsulation of all the details of your machine learning model.
 type Model struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func ModelFromID(id objc.ID) *Model {
 	if id == 0 {
 		return nil
 	}
-	x := &Model{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Model{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func modelAdopt(id objc.ID) *Model {
 	if id == 0 {
 		return nil
 	}
-	x := &Model{Handle: objref.Wrap(id)}
+	x := &Model{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,14 +62,20 @@ func (x *Model) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Model) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewModel creates a new Model.
 func NewModel() *Model {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLModel")), objc.RegisterName("new"))
 	return modelAdopt(_id)
 }
 
-// Returns a model parameter value for a key.
-func (x *Model) ParameterValueForKeyError(key *ParameterKey) (obj.Object, error) {
+// ParameterValueForKeyError returns a model parameter value for a key.
+func (x *Model) ParameterValueForKeyError(key *ParameterKey) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameterValueForKey:error:"), objref.IDOf(key), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -76,19 +84,19 @@ func (x *Model) ParameterValueForKeyError(key *ParameterKey) (obj.Object, error)
 	return obj.Wrap(_r), nil
 }
 
-// A model holds a description of its required inputs and expected outputs.
+// ModelDescription a model holds a description of its required inputs and expected outputs.
 func (x *Model) ModelDescription() *ModelDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modelDescription"))
 	return ModelDescriptionFromID(_r)
 }
 
-// The load-time parameters used to instantiate this MLModel object.
+// Configuration the load-time parameters used to instantiate this MLModel object.
 func (x *Model) Configuration() *ModelConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
 	return ModelConfigurationFromID(_r)
 }
 
-// Creates a new state object.
+// NewState creates a new state object.
 func (x *Model) NewState() *State {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("newState"))
 	return StateFromID(_r)
@@ -97,7 +105,7 @@ func (x *Model) NewState() *State {
 // Modelable is the interface implemented by [Model], for mocking and DI.
 type Modelable interface {
 	obj.Object
-	ParameterValueForKeyError(key *ParameterKey) (obj.Object, error)
+	ParameterValueForKeyError(key *ParameterKey) (result obj.Object, err error)
 	ModelDescription() *ModelDescription
 	Configuration() *ModelConfiguration
 	NewState() *State

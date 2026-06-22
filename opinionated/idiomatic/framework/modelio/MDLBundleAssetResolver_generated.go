@@ -23,7 +23,8 @@ func BundleAssetResolverFromID(id objc.ID) *BundleAssetResolver {
 	if id == 0 {
 		return nil
 	}
-	x := &BundleAssetResolver{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BundleAssetResolver{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func bundleAssetResolverAdopt(id objc.ID) *BundleAssetResolver {
 	if id == 0 {
 		return nil
 	}
-	x := &BundleAssetResolver{Handle: objref.Wrap(id)}
+	x := &BundleAssetResolver{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *BundleAssetResolver) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BundleAssetResolver) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBundleAssetResolverWithBundle creates a new BundleAssetResolver.
 func NewBundleAssetResolverWithBundle(path string) *BundleAssetResolver {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLBundleAssetResolver")), objc.RegisterName("alloc"))
@@ -63,12 +71,13 @@ func NewBundleAssetResolverWithBundle(path string) *BundleAssetResolver {
 	return bundleAssetResolverAdopt(_id)
 }
 
-// WithPath sets path and returns the receiver so calls can be chained.
+// WithPath sets the property and returns the receiver so calls can be chained.
 func (x *BundleAssetResolver) WithPath(path string) *BundleAssetResolver {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), purego.NSString(path))
 	return x
 }
 
+// Path wraps the corresponding Objective-C method.
 func (x *BundleAssetResolver) Path() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
 	if _r == 0 {
@@ -77,6 +86,7 @@ func (x *BundleAssetResolver) Path() string {
 	return purego.GoString(_r)
 }
 
+// SetPath wraps the corresponding Objective-C method.
 func (x *BundleAssetResolver) SetPath(path string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), purego.NSString(path))
 }

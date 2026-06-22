@@ -6,17 +6,20 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that draws headers over a table view’s columns and handles mouse events in those headers.
-//
 // TableHeaderView is an idiomatic wrapper over the Objective-C class NSTableHeaderView.
+//
+// It embeds [View], promoting that type's methods.
+//
+// An object that draws headers over a table view’s columns and handles mouse events in those headers.
 type TableHeaderView struct {
-	objref.Handle
+	View
 }
 
 // TableHeaderViewFromID adopts an existing Objective-C object as a TableHeaderView
@@ -25,7 +28,8 @@ func TableHeaderViewFromID(id objc.ID) *TableHeaderView {
 	if id == 0 {
 		return nil
 	}
-	x := &TableHeaderView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TableHeaderView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func tableHeaderViewAdopt(id objc.ID) *TableHeaderView {
 	if id == 0 {
 		return nil
 	}
-	x := &TableHeaderView{Handle: objref.Wrap(id)}
+	x := &TableHeaderView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *TableHeaderView) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TableHeaderView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TableHeaderView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewTableHeaderView creates a new TableHeaderView.
@@ -64,319 +54,346 @@ func NewTableHeaderView() *TableHeaderView {
 	return tableHeaderViewAdopt(_id)
 }
 
-// The NSTableView instance that this table header view belongs to.
-//
-// WithTableView sets tableView and returns the receiver so calls can be chained.
+// WithTableView the NSTableView instance that this table header view belongs to.
 func (x *TableHeaderView) WithTableView(tableView TableViewProvider) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTableView:"), objref.IDOf(tableView))
 	return x
 }
 
-// WithSubviews sets the collection and returns the receiver so calls can be chained.
+// WithSubviews sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithSubviews(items ...ViewProvider) *TableHeaderView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
 	return x
 }
 
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithHidden(hidden bool) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithPostsFrameChangedNotifications sets postsFrameChangedNotifications and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return x
 }
 
-// WithAutoresizesSubviews sets autoresizesSubviews and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithAutoresizesSubviews(autoresizesSubviews bool) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return x
 }
 
-// WithAutoresizingMask sets autoresizingMask and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// WithFrameRotation sets frameRotation and returns the receiver so calls can be chained.
+// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (x *TableHeaderView) WithFrame(frame corefoundation.CGRect) *TableHeaderView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
+	return x
+}
+
+// WithFrameRotation sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithFrameRotation(frameRotation float64) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return x
 }
 
-// WithFrameCenterRotation sets frameCenterRotation and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithFrameCenterRotation(frameCenterRotation float64) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return x
 }
 
-// WithBoundsRotation sets boundsRotation and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithBoundsRotation(boundsRotation float64) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return x
 }
 
-// WithCanDrawConcurrently sets canDrawConcurrently and returns the receiver so calls can be chained.
+// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (x *TableHeaderView) WithBounds(bounds corefoundation.CGRect) *TableHeaderView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithCanDrawConcurrently(canDrawConcurrently bool) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return x
 }
 
-// A Boolean value that determines whether the view needs to be redrawn before being displayed.
-//
-// WithNeedsDisplay sets needsDisplay and returns the receiver so calls can be chained.
+// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (x *TableHeaderView) WithNeedsDisplay(needsDisplay bool) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// WithAcceptsTouchEvents sets acceptsTouchEvents and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return x
 }
 
-// WithWantsRestingTouches sets wantsRestingTouches and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithWantsRestingTouches(wantsRestingTouches bool) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return x
 }
 
-// WithLayerContentsRedrawPolicy sets layerContentsRedrawPolicy and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return x
 }
 
-// WithLayerContentsPlacement sets layerContentsPlacement and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return x
 }
 
-// WithWantsLayer sets wantsLayer and returns the receiver so calls can be chained.
+// WithWantsLayer sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithWantsLayer(wantsLayer bool) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return x
 }
 
-// WithLayer sets layer and returns the receiver so calls can be chained.
+// WithLayer sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithLayer(layer obj.Object) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// WithCanDrawSubviewsIntoLayer sets canDrawSubviewsIntoLayer and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return x
 }
 
-// WithNeedsLayout sets needsLayout and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithNeedsLayout(needsLayout bool) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return x
 }
 
-// WithAlphaValue sets alphaValue and returns the receiver so calls can be chained.
+// WithAlphaValue sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithAlphaValue(alphaValue float64) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// WithLayerUsesCoreImageFilters sets layerUsesCoreImageFilters and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return x
 }
 
-// WithBackgroundFilters sets the collection and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithBackgroundFilters(items ...obj.Object) *TableHeaderView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return x
 }
 
-// WithCompositingFilter sets compositingFilter and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithCompositingFilter(compositingFilter obj.Object) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// WithContentFilters sets the collection and returns the receiver so calls can be chained.
+// WithContentFilters sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithContentFilters(items ...obj.Object) *TableHeaderView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
 	return x
 }
 
-// WithShadow sets shadow and returns the receiver so calls can be chained.
+// WithShadow sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithShadow(shadow *Shadow) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return x
 }
 
-// WithClipsToBounds sets clipsToBounds and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithClipsToBounds(clipsToBounds bool) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return x
 }
 
-// WithPostsBoundsChangedNotifications sets postsBoundsChangedNotifications and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return x
 }
 
-// WithToolTip sets toolTip and returns the receiver so calls can be chained.
+// WithToolTip sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithToolTip(toolTip string) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// WithNextKeyView sets nextKeyView and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+func (x *TableHeaderView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TableHeaderView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithNextKeyView(nextKeyView ViewProvider) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return x
 }
 
-// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+// WithFocusRingType sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithFocusRingType(focusRingType FocusRingType) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// WithGestureRecognizers sets the collection and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithGestureRecognizers(items ...GestureRecognizerProvider) *TableHeaderView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return x
 }
 
-// WithAllowedTouchTypes sets allowedTouchTypes and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return x
 }
 
-// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-//
-// WithPrefersCompactControlSizeMetrics sets prefersCompactControlSizeMetrics and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+func (x *TableHeaderView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TableHeaderView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (x *TableHeaderView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
 	return x
 }
 
-// WithWritingToolsCoordinator sets writingToolsCoordinator and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return x
 }
 
-// WithNeedsUpdateConstraints sets needsUpdateConstraints and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return x
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets translatesAutoresizingMaskIntoConstraints and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return x
 }
 
-// WithHorizontalContentSizeConstraintActive sets horizontalContentSizeConstraintActive and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return x
 }
 
-// WithVerticalContentSizeConstraintActive sets verticalContentSizeConstraintActive and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return x
 }
 
-// WithWantsBestResolutionOpenGLSurface sets wantsBestResolutionOpenGLSurface and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return x
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets wantsExtendedDynamicRangeOpenGLSurface and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return x
 }
 
-// WithPressureConfiguration sets pressureConfiguration and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
 func (x *TableHeaderView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *TableHeaderView) WithNextResponder(nextResponder ResponderProvider) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets menu and returns the receiver so calls can be chained.
+// WithMenu returns the responder’s menu.
 func (x *TableHeaderView) WithMenu(menu *Menu) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity an object encapsulating a user activity supported by this responder.
 func (x *TableHeaderView) WithUserActivity(userActivity obj.Object) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *TableHeaderView) WithTouchBar(touchBar *TouchBar) *TableHeaderView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
+// HeaderRectOfColumn returns the rectangle containing the header tile for the column at columnIndex.
+func (x *TableHeaderView) HeaderRectOfColumn(column int) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("headerRectOfColumn:"), column)
+	return _r
+}
+
+// ColumnAtPoint returns the index of the column whose header lies under aPoint in the receiver, or –1 if no such column is found.
+func (x *TableHeaderView) ColumnAtPoint(point corefoundation.CGPoint) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columnAtPoint:"), point)
+	return _r
+}
+
+// TableView wraps the corresponding Objective-C method.
 func (x *TableHeaderView) TableView() *TableView {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tableView"))
 	return TableViewFromID(_r)
 }
 
+// SetTableView wraps the corresponding Objective-C method.
 func (x *TableHeaderView) SetTableView(tableView *TableView) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTableView:"), objref.IDOf(tableView))
 }
 
+// DraggedColumn wraps the corresponding Objective-C method.
 func (x *TableHeaderView) DraggedColumn() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("draggedColumn"))
 	return _r
 }
 
+// DraggedDistance wraps the corresponding Objective-C method.
 func (x *TableHeaderView) DraggedDistance() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("draggedDistance"))
 	return _r
 }
 
+// ResizedColumn wraps the corresponding Objective-C method.
 func (x *TableHeaderView) ResizedColumn() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resizedColumn"))
 	return _r
@@ -391,9 +408,11 @@ type TableHeaderViewable interface {
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TableHeaderView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *TableHeaderView
 	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *TableHeaderView
+	WithFrame(frame corefoundation.CGRect) *TableHeaderView
 	WithFrameRotation(frameRotation float64) *TableHeaderView
 	WithFrameCenterRotation(frameCenterRotation float64) *TableHeaderView
 	WithBoundsRotation(boundsRotation float64) *TableHeaderView
+	WithBounds(bounds corefoundation.CGRect) *TableHeaderView
 	WithCanDrawConcurrently(canDrawConcurrently bool) *TableHeaderView
 	WithNeedsDisplay(needsDisplay bool) *TableHeaderView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *TableHeaderView
@@ -414,10 +433,12 @@ type TableHeaderViewable interface {
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TableHeaderView
 	WithToolTip(toolTip string) *TableHeaderView
 	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TableHeaderView
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TableHeaderView
 	WithNextKeyView(nextKeyView ViewProvider) *TableHeaderView
 	WithFocusRingType(focusRingType FocusRingType) *TableHeaderView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *TableHeaderView
 	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TableHeaderView
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TableHeaderView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableHeaderView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableHeaderView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TableHeaderView
@@ -431,6 +452,8 @@ type TableHeaderViewable interface {
 	WithMenu(menu *Menu) *TableHeaderView
 	WithUserActivity(userActivity obj.Object) *TableHeaderView
 	WithTouchBar(touchBar *TouchBar) *TableHeaderView
+	HeaderRectOfColumn(column int) corefoundation.CGRect
+	ColumnAtPoint(point corefoundation.CGPoint) int
 	TableView() *TableView
 	SetTableView(tableView *TableView)
 	DraggedColumn() int
@@ -439,3 +462,7 @@ type TableHeaderViewable interface {
 }
 
 var _ TableHeaderViewable = (*TableHeaderView)(nil)
+
+var _ ViewProvider = (*TableHeaderView)(nil)
+
+var _ ResponderProvider = (*TableHeaderView)(nil)

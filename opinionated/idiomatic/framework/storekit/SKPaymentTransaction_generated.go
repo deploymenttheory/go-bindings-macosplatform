@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object in the payment queue.
-//
 // PaymentTransaction is an idiomatic wrapper over the Objective-C class SKPaymentTransaction.
+//
+// An object in the payment queue.
 type PaymentTransaction struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PaymentTransactionFromID(id objc.ID) *PaymentTransaction {
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentTransaction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PaymentTransaction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func paymentTransactionAdopt(id objc.ID) *PaymentTransaction {
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentTransaction{Handle: objref.Wrap(id)}
+	x := &PaymentTransaction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,33 +60,45 @@ func (x *PaymentTransaction) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PaymentTransaction) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPaymentTransaction creates a new PaymentTransaction.
 func NewPaymentTransaction() *PaymentTransaction {
 	_id := objc.Send[objc.ID](objc.ID(_class("SKPaymentTransaction")), objc.RegisterName("new"))
 	return paymentTransactionAdopt(_id)
 }
 
+// OriginalTransaction wraps the corresponding Objective-C method.
 func (x *PaymentTransaction) OriginalTransaction() *PaymentTransaction {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalTransaction"))
 	return PaymentTransactionFromID(_r)
 }
 
+// Payment wraps the corresponding Objective-C method.
 func (x *PaymentTransaction) Payment() *Payment {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("payment"))
 	return PaymentFromID(_r)
 }
 
+// Downloads wraps the corresponding Objective-C method.
+//
 // Downloads returns the collection as a Go slice.
 func (x *PaymentTransaction) Downloads() []*Download {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloads"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Download { return DownloadFromID(_id) })
 }
 
+// TransactionDate wraps the corresponding Objective-C method.
 func (x *PaymentTransaction) TransactionDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactionDate"))
 	return obj.Wrap(_r)
 }
 
+// TransactionIdentifier wraps the corresponding Objective-C method.
 func (x *PaymentTransaction) TransactionIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactionIdentifier"))
 	if _r == 0 {

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The common behavior for memory devices.
-//
 // MemoryBalloonDevice is an idiomatic wrapper over the Objective-C class VZMemoryBalloonDevice.
+//
+// MemoryBalloonDevice is an abstract base — you do not construct it directly. Construct one of [VirtioTraditionalMemoryBalloonDevice] and pass it where a MemoryBalloonDevice is accepted.
+//
+// The common behavior for memory devices.
 type MemoryBalloonDevice struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func MemoryBalloonDeviceFromID(id objc.ID) *MemoryBalloonDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &MemoryBalloonDevice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MemoryBalloonDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func memoryBalloonDeviceAdopt(id objc.ID) *MemoryBalloonDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &MemoryBalloonDevice{Handle: objref.Wrap(id)}
+	x := &MemoryBalloonDevice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *MemoryBalloonDevice) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMemoryBalloonDevice creates a new MemoryBalloonDevice.
-func NewMemoryBalloonDevice() *MemoryBalloonDevice {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZMemoryBalloonDevice")), objc.RegisterName("new"))
-	return memoryBalloonDeviceAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MemoryBalloonDevice) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // MemoryBalloonDeviceable is the interface implemented by [MemoryBalloonDevice], for mocking and DI.
@@ -70,3 +74,10 @@ type MemoryBalloonDeviceable interface {
 }
 
 var _ MemoryBalloonDeviceable = (*MemoryBalloonDevice)(nil)
+
+// isMemoryBalloonDevice marks MemoryBalloonDevice — and, by embedding promotion, its
+// subclasses — as a member of the MemoryBalloonDevice hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MemoryBalloonDevice) isMemoryBalloonDevice() {}
+
+var _ MemoryBalloonDeviceProvider = (*MemoryBalloonDevice)(nil)

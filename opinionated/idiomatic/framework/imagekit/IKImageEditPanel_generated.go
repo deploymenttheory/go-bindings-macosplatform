@@ -23,7 +23,8 @@ func ImageEditPanelFromID(id objc.ID) *ImageEditPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageEditPanel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageEditPanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func imageEditPanelAdopt(id objc.ID) *ImageEditPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageEditPanel{Handle: objref.Wrap(id)}
+	x := &ImageEditPanel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,18 +58,24 @@ func (x *ImageEditPanel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ImageEditPanel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewImageEditPanel creates a new ImageEditPanel.
 func NewImageEditPanel() *ImageEditPanel {
 	_id := objc.Send[objc.ID](objc.ID(_class("IKImageEditPanel")), objc.RegisterName("new"))
 	return imageEditPanelAdopt(_id)
 }
 
-// Reloads the data from the data associated with an image editing panel.
+// ReloadData reloads the data from the data associated with an image editing panel.
 func (x *ImageEditPanel) ReloadData() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadData"))
 }
 
-// Array of filters reflecting the current user adjustments in the adjust or effects tab.
+// FilterArray array of filters reflecting the current user adjustments in the adjust or effects tab.
 func (x *ImageEditPanel) FilterArray() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterArray"))
 	return obj.Wrap(_r)

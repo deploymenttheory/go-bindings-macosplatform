@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that holds public key credential transport information.
-//
 // AuthorizationSecurityKeyPublicKeyCredentialDescriptor is an idiomatic wrapper over the Objective-C class ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor.
+//
+// An object that holds public key credential transport information.
 type AuthorizationSecurityKeyPublicKeyCredentialDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID(id objc.ID) *Au
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationSecurityKeyPublicKeyCredentialDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationSecurityKeyPublicKeyCredentialDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationSecurityKeyPublicKeyCredentialDescriptorAdopt(id objc.ID) *Aut
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationSecurityKeyPublicKeyCredentialDescriptor{Handle: objref.Wrap(id)}
+	x := &AuthorizationSecurityKeyPublicKeyCredentialDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,27 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) IsKind(className
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates the object with the credential ID and the array of transports.
-//
-// NewAuthorizationSecurityKeyPublicKeyCredentialDescriptorWithCredentialIDTransports creates a new AuthorizationSecurityKeyPublicKeyCredentialDescriptor.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAuthorizationSecurityKeyPublicKeyCredentialDescriptorWithCredentialIDTransports creates the object with the credential ID and the array of transports.
 func NewAuthorizationSecurityKeyPublicKeyCredentialDescriptorWithCredentialIDTransports(credentialID obj.Object, allowedTransports []obj.Object) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialID:transports:"), objref.IDOf(credentialID), purego.SliceToNSArray(allowedTransports, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return authorizationSecurityKeyPublicKeyCredentialDescriptorAdopt(_id)
 }
 
-// The array of transport types.
-//
-// WithTransports sets the collection and returns the receiver so calls can be chained.
+// WithTransports the array of transport types.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) WithTransports(items ...obj.Object) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransports:"), _arr)
 	return x
 }
 
-// An array indicating transports for the credential indicated by credentialID.
+// Transports an array indicating transports for the credential indicated by credentialID.
 //
 // Transports returns the collection as a Go slice.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) Transports() []obj.Object {
@@ -84,6 +88,7 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) Transports() []o
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetTransports wraps the corresponding Objective-C method.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) SetTransports(transports []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransports:"), purego.SliceToNSArray(transports, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }

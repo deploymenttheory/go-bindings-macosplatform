@@ -14,117 +14,120 @@ import (
 	"unsafe"
 )
 
-// Creates a batch-insertion request for a named managed entity, and provides an array of data dictionaries for insertion.
+// BatchInsertRequestWithEntityNameObjects creates a batch-insertion request for a named managed entity, and provides an array of data dictionaries for insertion.
 func BatchInsertRequestWithEntityNameObjects(entityName string, dictionaries []obj.Object) *BatchInsertRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBatchInsertRequest")), objc.RegisterName("batchInsertRequestWithEntityName:objects:"), purego.NSString(entityName), purego.SliceToNSArray(dictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return BatchInsertRequestFromID(_r)
 }
 
-// Creates a batch-insertion request for a named managed entity, and specifies a closure that provides data dictionaries for insertion.
+// BatchInsertRequestWithEntityNameDictionaryHandler creates a batch-insertion request for a named managed entity, and specifies a closure that provides data dictionaries for insertion.
 func BatchInsertRequestWithEntityNameDictionaryHandler(entityName string, handler func(obj.Object) bool) *BatchInsertRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBatchInsertRequest")), objc.RegisterName("batchInsertRequestWithEntityName:dictionaryHandler:"), purego.NSString(entityName), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) bool { return handler(obj.Wrap(_b0)) }))
 	return BatchInsertRequestFromID(_r)
 }
 
-// Creates a batch-insertion request for a named managed entity, and specifies a closure that inserts data into the entity.
+// BatchInsertRequestWithEntityNameManagedObjectHandler creates a batch-insertion request for a named managed entity, and specifies a closure that inserts data into the entity.
 func BatchInsertRequestWithEntityNameManagedObjectHandler(entityName string, handler func(obj.Object) bool) *BatchInsertRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBatchInsertRequest")), objc.RegisterName("batchInsertRequestWithEntityName:managedObjectHandler:"), purego.NSString(entityName), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) bool { return handler(obj.Wrap(_b0)) }))
 	return BatchInsertRequestFromID(_r)
 }
 
-// Creates a batch-update request for a named managed entity.
+// BatchUpdateRequestWithEntityName creates a batch-update request for a named managed entity.
 func BatchUpdateRequestWithEntityName(entityName string) *BatchUpdateRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBatchUpdateRequest")), objc.RegisterName("batchUpdateRequestWithEntityName:"), purego.NSString(entityName))
 	return BatchUpdateRequestFromID(_r)
 }
 
-// Returns the entity with the specified name from the managed object model associated with the specified managed object context’s persistent store coordinator.
+// EntityForNameInManagedObjectContext returns the entity with the specified name from the managed object model associated with the specified managed object context’s persistent store coordinator.
 func EntityForNameInManagedObjectContext(entityName string, context_ *ManagedObjectContext) *EntityDescription {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSEntityDescription")), objc.RegisterName("entityForName:inManagedObjectContext:"), purego.NSString(entityName), objref.IDOf(context_))
 	return EntityDescriptionFromID(_r)
 }
 
-// Creates, configures, and returns an instance of the class for the entity with a given name.
+// InsertNewObjectForEntityForNameInManagedObjectContext creates, configures, and returns an instance of the class for the entity with a given name.
 func InsertNewObjectForEntityForNameInManagedObjectContext(entityName string, context_ *ManagedObjectContext) *ManagedObject {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSEntityDescription")), objc.RegisterName("insertNewObjectForEntityForName:inManagedObjectContext:"), purego.NSString(entityName), objref.IDOf(context_))
 	return ManagedObjectFromID(_r)
 }
 
-// Returns a fetch request configured with a given entity name.
+// FetchRequestWithEntityName returns a fetch request configured with a given entity name.
 func FetchRequestWithEntityName(entityName string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFetchRequest")), objc.RegisterName("fetchRequestWithEntityName:"), purego.NSString(entityName))
 	return obj.Wrap(_r)
 }
 
-// Returns an expression which will evaluate to the result of executing a fetch request on a context.
+// ExpressionForFetchContextCountOnly returns an expression which will evaluate to the result of executing a fetch request on a context.
 func ExpressionForFetchContextCountOnly(fetch obj.Object, context_ obj.Object, countFlag bool) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFetchRequestExpression")), objc.RegisterName("expressionForFetch:context:countOnly:"), objref.IDOf(fetch), objref.IDOf(context_), countFlag)
 	return obj.Wrap(_r)
 }
 
-// Deletes the cached section information with the given name.
+// DeleteCacheWithName deletes the cached section information with the given name.
 func DeleteCacheWithName(name string) {
 	objc.Send[objc.ID](objc.ID(_class("NSFetchedResultsController")), objc.RegisterName("deleteCacheWithName:"), purego.NSString(name))
 }
 
-// Returns the identifier for the store at a given URL.
+// IdentifierForNewStoreAtURL returns the identifier for the store at a given URL.
 func IdentifierForNewStoreAtURL(storeURL string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSIncrementalStore")), objc.RegisterName("identifierForNewStoreAtURL:"), rt.FileURL(storeURL))
 	return obj.Wrap(_r)
 }
 
-// Returns the entity description that is associated with this subclass.
+// Entity returns the entity description that is associated with this subclass.
 func Entity() *EntityDescription {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSManagedObject")), objc.RegisterName("entity"))
 	return EntityDescriptionFromID(_r)
 }
 
-// Returns an initialized fetch request with the entity this subclass represents.
+// NSManagedObjectFetchRequest returns an initialized fetch request with the entity this subclass represents.
 func NSManagedObjectFetchRequest() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSManagedObject")), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)
 }
 
+// ContextShouldIgnoreUnmodeledPropertyChanges wraps the corresponding Objective-C method.
 func ContextShouldIgnoreUnmodeledPropertyChanges() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSManagedObject")), objc.RegisterName("contextShouldIgnoreUnmodeledPropertyChanges"))
 	return _r
 }
 
+// New wraps the corresponding Objective-C method.
 func New() *ManagedObjectContext {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectContext")), objc.RegisterName("new"))
 	return ManagedObjectContextFromID(_r)
 }
 
-// Handles changes from other processes or from a serialized state.
+// MergeChangesFromRemoteContextSaveIntoContexts handles changes from other processes or from a serialized state.
 func MergeChangesFromRemoteContextSaveIntoContexts(changeNotificationData obj.Object, contexts []*ManagedObjectContext) {
 	objc.Send[objc.ID](objc.ID(_class("NSManagedObjectContext")), objc.RegisterName("mergeChangesFromRemoteContextSave:intoContexts:"), objref.IDOf(changeNotificationData), purego.SliceToNSArray(contexts, func(_v *ManagedObjectContext) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Returns a model created by merging all the models found in given bundles.
+// MergedModelFromBundles returns a model created by merging all the models found in given bundles.
 func MergedModelFromBundles(bundles []obj.Object) *ManagedObjectModel {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectModel")), objc.RegisterName("mergedModelFromBundles:"), purego.SliceToNSArray(bundles, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ManagedObjectModelFromID(_r)
 }
 
-// Creates a single model from an array of existing models.
+// ModelByMergingModels creates a single model from an array of existing models.
 func ModelByMergingModels(models []*ManagedObjectModel) *ManagedObjectModel {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectModel")), objc.RegisterName("modelByMergingModels:"), purego.SliceToNSArray(models, func(_v *ManagedObjectModel) objc.ID { return objref.IDOf(_v) }))
 	return ManagedObjectModelFromID(_r)
 }
 
-// Returns a merged model from a specified array for the version information in provided metadata.
+// MergedModelFromBundlesForStoreMetadata returns a merged model from a specified array for the version information in provided metadata.
 func MergedModelFromBundlesForStoreMetadata(bundles []obj.Object, metadata obj.Object) *ManagedObjectModel {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectModel")), objc.RegisterName("mergedModelFromBundles:forStoreMetadata:"), purego.SliceToNSArray(bundles, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(metadata))
 	return ManagedObjectModelFromID(_r)
 }
 
-// Returns, for the version information in given metadata, a model merged from a given array of models.
+// ModelByMergingModelsForStoreMetadata returns, for the version information in given metadata, a model merged from a given array of models.
 func ModelByMergingModelsForStoreMetadata(models []*ManagedObjectModel, metadata obj.Object) *ManagedObjectModel {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectModel")), objc.RegisterName("modelByMergingModels:forStoreMetadata:"), purego.SliceToNSArray(models, func(_v *ManagedObjectModel) objc.ID { return objref.IDOf(_v) }), objref.IDOf(metadata))
 	return ManagedObjectModelFromID(_r)
 }
 
-func ChecksumsForVersionedModelAtURLError(modelURL string) (obj.Object, error) {
+// ChecksumsForVersionedModelAtURLError wraps the corresponding Objective-C method.
+func ChecksumsForVersionedModelAtURLError(modelURL string) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectModel")), objc.RegisterName("checksumsForVersionedModelAtURL:error:"), rt.FileURL(modelURL), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -133,14 +136,14 @@ func ChecksumsForVersionedModelAtURLError(modelURL string) (obj.Object, error) {
 	return obj.Wrap(_r), nil
 }
 
-// Returns the mapping model that will translate data from the source to the destination model.
+// MappingModelFromBundlesForSourceModelDestinationModel returns the mapping model that will translate data from the source to the destination model.
 func MappingModelFromBundlesForSourceModelDestinationModel(bundles []obj.Object, sourceModel *ManagedObjectModel, destinationModel *ManagedObjectModel) *MappingModel {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMappingModel")), objc.RegisterName("mappingModelFromBundles:forSourceModel:destinationModel:"), purego.SliceToNSArray(bundles, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(sourceModel), objref.IDOf(destinationModel))
 	return MappingModelFromID(_r)
 }
 
-// Returns a newly created mapping model that will migrate data from the source to the destination model.
-func InferredMappingModelForSourceModelDestinationModelError(sourceModel *ManagedObjectModel, destinationModel *ManagedObjectModel) (*MappingModel, error) {
+// InferredMappingModelForSourceModelDestinationModelError returns a newly created mapping model that will migrate data from the source to the destination model.
+func InferredMappingModelForSourceModelDestinationModelError(sourceModel *ManagedObjectModel, destinationModel *ManagedObjectModel) (result *MappingModel, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMappingModel")), objc.RegisterName("inferredMappingModelForSourceModel:destinationModel:error:"), objref.IDOf(sourceModel), objref.IDOf(destinationModel), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -149,149 +152,158 @@ func InferredMappingModelForSourceModelDestinationModelError(sourceModel *Manage
 	return MappingModelFromID(_r), nil
 }
 
+// ErrorMergePolicy wraps the corresponding Objective-C method.
 func ErrorMergePolicy() *MergePolicy {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMergePolicy")), objc.RegisterName("errorMergePolicy"))
 	return MergePolicyFromID(_r)
 }
 
+// RollbackMergePolicy wraps the corresponding Objective-C method.
 func RollbackMergePolicy() *MergePolicy {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMergePolicy")), objc.RegisterName("rollbackMergePolicy"))
 	return MergePolicyFromID(_r)
 }
 
+// OverwriteMergePolicy wraps the corresponding Objective-C method.
 func OverwriteMergePolicy() *MergePolicy {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMergePolicy")), objc.RegisterName("overwriteMergePolicy"))
 	return MergePolicyFromID(_r)
 }
 
+// MergeByPropertyObjectTrumpMergePolicy wraps the corresponding Objective-C method.
 func MergeByPropertyObjectTrumpMergePolicy() *MergePolicy {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMergePolicy")), objc.RegisterName("mergeByPropertyObjectTrumpMergePolicy"))
 	return MergePolicyFromID(_r)
 }
 
+// MergeByPropertyStoreTrumpMergePolicy wraps the corresponding Objective-C method.
 func MergeByPropertyStoreTrumpMergePolicy() *MergePolicy {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMergePolicy")), objc.RegisterName("mergeByPropertyStoreTrumpMergePolicy"))
 	return MergePolicyFromID(_r)
 }
 
-// Creates a fetch request for events after a specified date from a persistent CloudKit container.
+// FetchEventsAfterDate creates a fetch request for events after a specified date from a persistent CloudKit container.
 func FetchEventsAfterDate(date obj.Object) *PersistentCloudKitContainerEventRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentCloudKitContainerEventRequest")), objc.RegisterName("fetchEventsAfterDate:"), objref.IDOf(date))
 	return PersistentCloudKitContainerEventRequestFromID(_r)
 }
 
-// Creates a fetch request for events that occur after a specified event from a persistent CloudKit container.
+// FetchEventsAfterEvent creates a fetch request for events that occur after a specified event from a persistent CloudKit container.
 func FetchEventsAfterEvent(event *PersistentCloudKitContainerEvent) *PersistentCloudKitContainerEventRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentCloudKitContainerEventRequest")), objc.RegisterName("fetchEventsAfterEvent:"), objref.IDOf(event))
 	return PersistentCloudKitContainerEventRequestFromID(_r)
 }
 
-// Creates a fetch request for events that match a specified fetch request from a persistent CloudKit container.
+// FetchEventsMatchingFetchRequest creates a fetch request for events that match a specified fetch request from a persistent CloudKit container.
 func FetchEventsMatchingFetchRequest(fetchRequest obj.Object) *PersistentCloudKitContainerEventRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentCloudKitContainerEventRequest")), objc.RegisterName("fetchEventsMatchingFetchRequest:"), objref.IDOf(fetchRequest))
 	return PersistentCloudKitContainerEventRequestFromID(_r)
 }
 
-// Creates a fetch request for all events in a persistent CloudKit container.
+// FetchRequestForEvents creates a fetch request for all events in a persistent CloudKit container.
 func FetchRequestForEvents() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentCloudKitContainerEventRequest")), objc.RegisterName("fetchRequestForEvents"))
 	return obj.Wrap(_r)
 }
 
-// Initializes a new persistent container using the provided name for the container.
+// PersistentContainerWithName initializes a new persistent container using the provided name for the container.
 func PersistentContainerWithName(name string) *PersistentContainer {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentContainer")), objc.RegisterName("persistentContainerWithName:"), purego.NSString(name))
 	return PersistentContainerFromID(_r)
 }
 
-// Initializes a new persistent container using the provided name and managed object model.
+// PersistentContainerWithNameManagedObjectModel initializes a new persistent container using the provided name and managed object model.
 func PersistentContainerWithNameManagedObjectModel(name string, model *ManagedObjectModel) *PersistentContainer {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentContainer")), objc.RegisterName("persistentContainerWithName:managedObjectModel:"), purego.NSString(name), objref.IDOf(model))
 	return PersistentContainerFromID(_r)
 }
 
-// Returns the location of the directory that contains the persistent stores.
+// DefaultDirectoryURL returns the location of the directory that contains the persistent stores.
 func DefaultDirectoryURL() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentContainer")), objc.RegisterName("defaultDirectoryURL"))
 	return obj.Wrap(_r)
 }
 
-// Requests an entity description for the managed object type affected by the change using the provided context.
+// EntityDescriptionWithContext requests an entity description for the managed object type affected by the change using the provided context.
 func EntityDescriptionWithContext(context_ *ManagedObjectContext) *EntityDescription {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChange")), objc.RegisterName("entityDescriptionWithContext:"), objref.IDOf(context_))
 	return EntityDescriptionFromID(_r)
 }
 
+// NSPersistentHistoryChangeEntityDescription wraps the corresponding Objective-C method.
 func NSPersistentHistoryChangeEntityDescription() *EntityDescription {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChange")), objc.RegisterName("entityDescription"))
 	return EntityDescriptionFromID(_r)
 }
 
+// NSPersistentHistoryChangeFetchRequest wraps the corresponding Objective-C method.
 func NSPersistentHistoryChangeFetchRequest() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChange")), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)
 }
 
-// Retrieves history since a given date.
+// FetchHistoryAfterDate retrieves history since a given date.
 func FetchHistoryAfterDate(date obj.Object) *PersistentHistoryChangeRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChangeRequest")), objc.RegisterName("fetchHistoryAfterDate:"), objref.IDOf(date))
 	return PersistentHistoryChangeRequestFromID(_r)
 }
 
-// Retrieves the request history after a given token.
+// FetchHistoryAfterToken retrieves the request history after a given token.
 func FetchHistoryAfterToken(token *PersistentHistoryToken) *PersistentHistoryChangeRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChangeRequest")), objc.RegisterName("fetchHistoryAfterToken:"), objref.IDOf(token))
 	return PersistentHistoryChangeRequestFromID(_r)
 }
 
-// Retrieves history since a given transaction.
+// FetchHistoryAfterTransaction retrieves history since a given transaction.
 func FetchHistoryAfterTransaction(transaction *PersistentHistoryTransaction) *PersistentHistoryChangeRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChangeRequest")), objc.RegisterName("fetchHistoryAfterTransaction:"), objref.IDOf(transaction))
 	return PersistentHistoryChangeRequestFromID(_r)
 }
 
-// Retrieves history based on a fetch request.
+// FetchHistoryWithFetchRequest retrieves history based on a fetch request.
 func FetchHistoryWithFetchRequest(fetchRequest obj.Object) *PersistentHistoryChangeRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChangeRequest")), objc.RegisterName("fetchHistoryWithFetchRequest:"), objref.IDOf(fetchRequest))
 	return PersistentHistoryChangeRequestFromID(_r)
 }
 
-// Purges history older than a given date.
+// DeleteHistoryBeforeDate purges history older than a given date.
 func DeleteHistoryBeforeDate(date obj.Object) *PersistentHistoryChangeRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChangeRequest")), objc.RegisterName("deleteHistoryBeforeDate:"), objref.IDOf(date))
 	return PersistentHistoryChangeRequestFromID(_r)
 }
 
-// Purges history older than that defined by a given token.
+// DeleteHistoryBeforeToken purges history older than that defined by a given token.
 func DeleteHistoryBeforeToken(token *PersistentHistoryToken) *PersistentHistoryChangeRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChangeRequest")), objc.RegisterName("deleteHistoryBeforeToken:"), objref.IDOf(token))
 	return PersistentHistoryChangeRequestFromID(_r)
 }
 
-// Purges history older than a given transaction.
+// DeleteHistoryBeforeTransaction purges history older than a given transaction.
 func DeleteHistoryBeforeTransaction(transaction *PersistentHistoryTransaction) *PersistentHistoryChangeRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChangeRequest")), objc.RegisterName("deleteHistoryBeforeTransaction:"), objref.IDOf(transaction))
 	return PersistentHistoryChangeRequestFromID(_r)
 }
 
-// Requests an entity description using the provided context for the managed object type affected by the transaction.
+// NSPersistentHistoryTransactionEntityDescriptionWithContext requests an entity description using the provided context for the managed object type affected by the transaction.
 func NSPersistentHistoryTransactionEntityDescriptionWithContext(context_ *ManagedObjectContext) *EntityDescription {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryTransaction")), objc.RegisterName("entityDescriptionWithContext:"), objref.IDOf(context_))
 	return EntityDescriptionFromID(_r)
 }
 
+// NSPersistentHistoryTransactionEntityDescription wraps the corresponding Objective-C method.
 func NSPersistentHistoryTransactionEntityDescription() *EntityDescription {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryTransaction")), objc.RegisterName("entityDescription"))
 	return EntityDescriptionFromID(_r)
 }
 
+// NSPersistentHistoryTransactionFetchRequest wraps the corresponding Objective-C method.
 func NSPersistentHistoryTransactionFetchRequest() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryTransaction")), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)
 }
 
-// Returns the metadata from the persistent store at the given URL.
-func MetadataForPersistentStoreWithURLError(url string) (obj.Object, error) {
+// MetadataForPersistentStoreWithURLError returns the metadata from the persistent store at the given URL.
+func MetadataForPersistentStoreWithURLError(url string) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentStore")), objc.RegisterName("metadataForPersistentStoreWithURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -300,7 +312,7 @@ func MetadataForPersistentStoreWithURLError(url string) (obj.Object, error) {
 	return obj.Wrap(_r), nil
 }
 
-// Sets the metadata for the store at a given URL.
+// SetMetadataForPersistentStoreWithURL sets the metadata for the store at a given URL.
 func SetMetadataForPersistentStoreWithURL(metadata obj.Object, url string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objc.ID(_class("NSPersistentStore")), objc.RegisterName("setMetadata:forPersistentStoreWithURL:error:"), objref.IDOf(metadata), rt.FileURL(url), unsafe.Pointer(&_nsErr))
@@ -310,8 +322,8 @@ func SetMetadataForPersistentStoreWithURL(metadata obj.Object, url string) error
 	return nil
 }
 
-// Returns the metadata of a specific type of persistent store at the provided location.
-func MetadataForPersistentStoreOfTypeURLOptionsError(storeType string, url string, options obj.Object) (obj.Object, error) {
+// MetadataForPersistentStoreOfTypeURLOptionsError returns the metadata of a specific type of persistent store at the provided location.
+func MetadataForPersistentStoreOfTypeURLOptionsError(storeType string, url string, options obj.Object) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentStoreCoordinator")), objc.RegisterName("metadataForPersistentStoreOfType:URL:options:error:"), purego.NSString(storeType), rt.FileURL(url), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -320,7 +332,7 @@ func MetadataForPersistentStoreOfTypeURLOptionsError(storeType string, url strin
 	return obj.Wrap(_r), nil
 }
 
-// Updates the metadata of a specific type of persistent store at the provided location.
+// SetMetadataForPersistentStoreOfTypeURLOptions updates the metadata of a specific type of persistent store at the provided location.
 func SetMetadataForPersistentStoreOfTypeURLOptions(metadata obj.Object, storeType string, url string, options obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objc.ID(_class("NSPersistentStoreCoordinator")), objc.RegisterName("setMetadata:forPersistentStoreOfType:URL:options:error:"), objref.IDOf(metadata), purego.NSString(storeType), rt.FileURL(url), objref.IDOf(options), unsafe.Pointer(&_nsErr))
@@ -330,7 +342,8 @@ func SetMetadataForPersistentStoreOfTypeURLOptions(metadata obj.Object, storeTyp
 	return nil
 }
 
-func CachedModelForPersistentStoreAtURLOptionsError(url string, options obj.Object) (*ManagedObjectModel, error) {
+// CachedModelForPersistentStoreAtURLOptionsError wraps the corresponding Objective-C method.
+func CachedModelForPersistentStoreAtURLOptionsError(url string, options obj.Object) (result *ManagedObjectModel, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentStoreCoordinator")), objc.RegisterName("cachedModelForPersistentStoreAtURL:options:error:"), rt.FileURL(url), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -339,12 +352,14 @@ func CachedModelForPersistentStoreAtURLOptionsError(url string, options obj.Obje
 	return ManagedObjectModelFromID(_r), nil
 }
 
+// ElementsDerivedFromExternalRecordURL wraps the corresponding Objective-C method.
 func ElementsDerivedFromExternalRecordURL(fileURL string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentStoreCoordinator")), objc.RegisterName("elementsDerivedFromExternalRecordURL:"), rt.FileURL(fileURL))
 	return obj.Wrap(_r)
 }
 
-func NSPersistentStoreCoordinatorMetadataForPersistentStoreWithURLError(url string) (obj.Object, error) {
+// NSPersistentStoreCoordinatorMetadataForPersistentStoreWithURLError wraps the corresponding Objective-C method.
+func NSPersistentStoreCoordinatorMetadataForPersistentStoreWithURLError(url string) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentStoreCoordinator")), objc.RegisterName("metadataForPersistentStoreWithURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -353,7 +368,8 @@ func NSPersistentStoreCoordinatorMetadataForPersistentStoreWithURLError(url stri
 	return obj.Wrap(_r), nil
 }
 
-func MetadataForPersistentStoreOfTypeURLError(storeType string, url string) (obj.Object, error) {
+// MetadataForPersistentStoreOfTypeURLError wraps the corresponding Objective-C method.
+func MetadataForPersistentStoreOfTypeURLError(storeType string, url string) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentStoreCoordinator")), objc.RegisterName("metadataForPersistentStoreOfType:URL:error:"), purego.NSString(storeType), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -362,6 +378,7 @@ func MetadataForPersistentStoreOfTypeURLError(storeType string, url string) (obj
 	return obj.Wrap(_r), nil
 }
 
+// SetMetadataForPersistentStoreOfTypeURL wraps the corresponding Objective-C method.
 func SetMetadataForPersistentStoreOfTypeURL(metadata obj.Object, storeType string, url string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objc.ID(_class("NSPersistentStoreCoordinator")), objc.RegisterName("setMetadata:forPersistentStoreOfType:URL:error:"), objref.IDOf(metadata), purego.NSString(storeType), rt.FileURL(url), unsafe.Pointer(&_nsErr))
@@ -371,6 +388,7 @@ func SetMetadataForPersistentStoreOfTypeURL(metadata obj.Object, storeType strin
 	return nil
 }
 
+// RemoveUbiquitousContentAndPersistentStoreAtURLOptions wraps the corresponding Objective-C method.
 func RemoveUbiquitousContentAndPersistentStoreAtURLOptions(storeURL string, options obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objc.ID(_class("NSPersistentStoreCoordinator")), objc.RegisterName("removeUbiquitousContentAndPersistentStoreAtURL:options:error:"), rt.FileURL(storeURL), objref.IDOf(options), unsafe.Pointer(&_nsErr))
@@ -380,17 +398,19 @@ func RemoveUbiquitousContentAndPersistentStoreAtURLOptions(storeURL string, opti
 	return nil
 }
 
+// RegisteredStoreTypes wraps the corresponding Objective-C method.
 func RegisteredStoreTypes() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentStoreCoordinator")), objc.RegisterName("registeredStoreTypes"))
 	return obj.Wrap(_r)
 }
 
-// Initializes and returns a persistent store description with the given URL.
+// PersistentStoreDescriptionWithURL initializes and returns a persistent store description with the given URL.
 func PersistentStoreDescriptionWithURL(uRL string) *PersistentStoreDescription {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentStoreDescription")), objc.RegisterName("persistentStoreDescriptionWithURL:"), rt.FileURL(uRL))
 	return PersistentStoreDescriptionFromID(_r)
 }
 
+// CurrentQueryGenerationToken wraps the corresponding Objective-C method.
 func CurrentQueryGenerationToken() *QueryGenerationToken {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSQueryGenerationToken")), objc.RegisterName("currentQueryGenerationToken"))
 	return QueryGenerationTokenFromID(_r)

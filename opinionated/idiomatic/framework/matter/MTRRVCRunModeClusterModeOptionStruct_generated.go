@@ -23,7 +23,8 @@ func MTRRVCRunModeClusterModeOptionStructFromID(id objc.ID) *MTRRVCRunModeCluste
 	if id == 0 {
 		return nil
 	}
-	x := &MTRRVCRunModeClusterModeOptionStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRRVCRunModeClusterModeOptionStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRRVCRunModeClusterModeOptionStructAdopt(id objc.ID) *MTRRVCRunModeCluster
 	if id == 0 {
 		return nil
 	}
-	x := &MTRRVCRunModeClusterModeOptionStruct{Handle: objref.Wrap(id)}
+	x := &MTRRVCRunModeClusterModeOptionStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,24 +58,31 @@ func (x *MTRRVCRunModeClusterModeOptionStruct) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRRVCRunModeClusterModeOptionStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRRVCRunModeClusterModeOptionStruct creates a new MTRRVCRunModeClusterModeOptionStruct.
 func NewMTRRVCRunModeClusterModeOptionStruct() *MTRRVCRunModeClusterModeOptionStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRRVCRunModeClusterModeOptionStruct")), objc.RegisterName("new"))
 	return mTRRVCRunModeClusterModeOptionStructAdopt(_id)
 }
 
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel sets the property and returns the receiver so calls can be chained.
 func (x *MTRRVCRunModeClusterModeOptionStruct) WithLabel(label string) *MTRRVCRunModeClusterModeOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// WithMode sets mode and returns the receiver so calls can be chained.
+// WithMode sets the property and returns the receiver so calls can be chained.
 func (x *MTRRVCRunModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTRRVCRunModeClusterModeOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	return x
 }
 
+// Label wraps the corresponding Objective-C method.
 func (x *MTRRVCRunModeClusterModeOptionStruct) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -82,24 +91,29 @@ func (x *MTRRVCRunModeClusterModeOptionStruct) Label() string {
 	return purego.GoString(_r)
 }
 
+// SetLabel wraps the corresponding Objective-C method.
 func (x *MTRRVCRunModeClusterModeOptionStruct) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
+// Mode wraps the corresponding Objective-C method.
 func (x *MTRRVCRunModeClusterModeOptionStruct) Mode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mode"))
 	return obj.Wrap(_r)
 }
 
+// SetMode wraps the corresponding Objective-C method.
 func (x *MTRRVCRunModeClusterModeOptionStruct) SetMode(mode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
 }
 
+// ModeTags wraps the corresponding Objective-C method.
 func (x *MTRRVCRunModeClusterModeOptionStruct) ModeTags() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modeTags"))
 	return obj.Wrap(_r)
 }
 
+// SetModeTags wraps the corresponding Objective-C method.
 func (x *MTRRVCRunModeClusterModeOptionStruct) SetModeTags(modeTags obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeTags:"), objref.IDOf(modeTags))
 }

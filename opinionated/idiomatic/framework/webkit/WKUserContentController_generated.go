@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object for managing interactions between JavaScript code and your web view, and for filtering content in your web view.
-//
 // WKUserContentController is an idiomatic wrapper over the Objective-C class WKUserContentController.
+//
+// An object for managing interactions between JavaScript code and your web view, and for filtering content in your web view.
 type WKUserContentController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKUserContentControllerFromID(id objc.ID) *WKUserContentController {
 	if id == 0 {
 		return nil
 	}
-	x := &WKUserContentController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKUserContentController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKUserContentControllerAdopt(id objc.ID) *WKUserContentController {
 	if id == 0 {
 		return nil
 	}
-	x := &WKUserContentController{Handle: objref.Wrap(id)}
+	x := &WKUserContentController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,58 +60,64 @@ func (x *WKUserContentController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKUserContentController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKUserContentController creates a new WKUserContentController.
 func NewWKUserContentController() *WKUserContentController {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKUserContentController")), objc.RegisterName("new"))
 	return wKUserContentControllerAdopt(_id)
 }
 
-// Injects the specified script into the webpage’s content.
+// AddUserScript injects the specified script into the webpage’s content.
 func (x *WKUserContentController) AddUserScript(userScript *WKUserScript) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addUserScript:"), objref.IDOf(userScript))
 }
 
-// Removes all user scripts from the web view.
+// RemoveAllUserScripts removes all user scripts from the web view.
 func (x *WKUserContentController) RemoveAllUserScripts() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllUserScripts"))
 }
 
-// Uninstalls a custom message handler from the specified content world in your JavaScript code.
+// RemoveScriptMessageHandlerForNameContentWorld uninstalls a custom message handler from the specified content world in your JavaScript code.
 func (x *WKUserContentController) RemoveScriptMessageHandlerForNameContentWorld(name string, contentWorld *WKContentWorld) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeScriptMessageHandlerForName:contentWorld:"), purego.NSString(name), objref.IDOf(contentWorld))
 }
 
-// Uninstalls the custom message handler with the specified name from your JavaScript code.
+// RemoveScriptMessageHandlerForName uninstalls the custom message handler with the specified name from your JavaScript code.
 func (x *WKUserContentController) RemoveScriptMessageHandlerForName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeScriptMessageHandlerForName:"), purego.NSString(name))
 }
 
-// Uninstalls all custom message handlers from the specified content world in your JavaScript code.
+// RemoveAllScriptMessageHandlersFromContentWorld uninstalls all custom message handlers from the specified content world in your JavaScript code.
 func (x *WKUserContentController) RemoveAllScriptMessageHandlersFromContentWorld(contentWorld *WKContentWorld) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllScriptMessageHandlersFromContentWorld:"), objref.IDOf(contentWorld))
 }
 
-// Uninstalls all custom message handlers associated with the user content controller.
+// RemoveAllScriptMessageHandlers uninstalls all custom message handlers associated with the user content controller.
 func (x *WKUserContentController) RemoveAllScriptMessageHandlers() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllScriptMessageHandlers"))
 }
 
-// Adds the specified content rule list to the content controller object.
+// AddContentRuleList adds the specified content rule list to the content controller object.
 func (x *WKUserContentController) AddContentRuleList(contentRuleList *WKContentRuleList) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addContentRuleList:"), objref.IDOf(contentRuleList))
 }
 
-// Removes the specified rule list from the content controller object.
+// RemoveContentRuleList removes the specified rule list from the content controller object.
 func (x *WKUserContentController) RemoveContentRuleList(contentRuleList *WKContentRuleList) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeContentRuleList:"), objref.IDOf(contentRuleList))
 }
 
-// Removes all rules lists from the content controller.
+// RemoveAllContentRuleLists removes all rules lists from the content controller.
 func (x *WKUserContentController) RemoveAllContentRuleLists() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllContentRuleLists"))
 }
 
-// The user scripts associated with this user content controller.
+// UserScripts the user scripts associated with this user content controller.
 //
 // UserScripts returns the collection as a Go slice.
 func (x *WKUserContentController) UserScripts() []*WKUserScript {

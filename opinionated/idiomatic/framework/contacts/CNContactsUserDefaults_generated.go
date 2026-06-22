@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the default options to use when displaying contacts.
-//
 // ContactsUserDefaults is an idiomatic wrapper over the Objective-C class CNContactsUserDefaults.
+//
+// An object that defines the default options to use when displaying contacts.
 type ContactsUserDefaults struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ContactsUserDefaultsFromID(id objc.ID) *ContactsUserDefaults {
 	if id == 0 {
 		return nil
 	}
-	x := &ContactsUserDefaults{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContactsUserDefaults{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func contactsUserDefaultsAdopt(id objc.ID) *ContactsUserDefaults {
 	if id == 0 {
 		return nil
 	}
-	x := &ContactsUserDefaults{Handle: objref.Wrap(id)}
+	x := &ContactsUserDefaults{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,25 @@ func (x *ContactsUserDefaults) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContactsUserDefaults) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewContactsUserDefaults creates a new ContactsUserDefaults.
 func NewContactsUserDefaults() *ContactsUserDefaults {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNContactsUserDefaults")), objc.RegisterName("new"))
 	return contactsUserDefaultsAdopt(_id)
 }
 
+// SortOrder wraps the corresponding Objective-C method.
 func (x *ContactsUserDefaults) SortOrder() ContactSortOrder {
 	_r := objc.Send[ContactSortOrder](objref.IDOf(x), objc.RegisterName("sortOrder"))
 	return _r
 }
 
+// CountryCode wraps the corresponding Objective-C method.
 func (x *ContactsUserDefaults) CountryCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("countryCode"))
 	if _r == 0 {

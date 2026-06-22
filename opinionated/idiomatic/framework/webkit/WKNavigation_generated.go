@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that tracks the loading progress of a webpage.
-//
 // WKNavigation is an idiomatic wrapper over the Objective-C class WKNavigation.
+//
+// An object that tracks the loading progress of a webpage.
 type WKNavigation struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKNavigationFromID(id objc.ID) *WKNavigation {
 	if id == 0 {
 		return nil
 	}
-	x := &WKNavigation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKNavigation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKNavigationAdopt(id objc.ID) *WKNavigation {
 	if id == 0 {
 		return nil
 	}
-	x := &WKNavigation{Handle: objref.Wrap(id)}
+	x := &WKNavigation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *WKNavigation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKNavigation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKNavigation creates a new WKNavigation.
 func NewWKNavigation() *WKNavigation {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKNavigation")), objc.RegisterName("new"))
 	return wKNavigationAdopt(_id)
 }
 
+// EffectiveContentMode wraps the corresponding Objective-C method.
 func (x *WKNavigation) EffectiveContentMode() WKContentMode {
 	_r := objc.Send[WKContentMode](objref.IDOf(x), objc.RegisterName("effectiveContentMode"))
 	return _r

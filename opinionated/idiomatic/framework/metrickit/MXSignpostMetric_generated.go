@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing a custom metric.
-//
 // SignpostMetric is an idiomatic wrapper over the Objective-C class MXSignpostMetric.
+//
+// It embeds [Metric], promoting that type's methods.
+//
+// An object representing a custom metric.
 type SignpostMetric struct {
-	objref.Handle
+	Metric
 }
 
 // SignpostMetricFromID adopts an existing Objective-C object as a SignpostMetric
@@ -25,7 +26,8 @@ func SignpostMetricFromID(id objc.ID) *SignpostMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &SignpostMetric{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SignpostMetric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func signpostMetricAdopt(id objc.ID) *SignpostMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &SignpostMetric{Handle: objref.Wrap(id)}
+	x := &SignpostMetric{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SignpostMetric) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SignpostMetric) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SignpostMetric) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSignpostMetric creates a new SignpostMetric.
@@ -64,7 +52,7 @@ func NewSignpostMetric() *SignpostMetric {
 	return signpostMetricAdopt(_id)
 }
 
-// The name associated with this aggregated signpost.
+// SignpostName the name associated with this aggregated signpost.
 func (x *SignpostMetric) SignpostName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signpostName"))
 	if _r == 0 {
@@ -73,7 +61,7 @@ func (x *SignpostMetric) SignpostName() string {
 	return purego.GoString(_r)
 }
 
-// The category associated with this aggregated signpost.
+// SignpostCategory the category associated with this aggregated signpost.
 func (x *SignpostMetric) SignpostCategory() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signpostCategory"))
 	if _r == 0 {
@@ -82,13 +70,13 @@ func (x *SignpostMetric) SignpostCategory() string {
 	return purego.GoString(_r)
 }
 
-// A class that encapsulates metrics associated with app specific signpost intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no intervals.
+// SignpostIntervalData a class that encapsulates metrics associated with app specific signpost intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no intervals.
 func (x *SignpostMetric) SignpostIntervalData() *SignpostIntervalData {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signpostIntervalData"))
 	return SignpostIntervalDataFromID(_r)
 }
 
-// The total number of signposts emit with the given signpostName in the aggregation period of the parent payload.
+// TotalCount the total number of signposts emit with the given signpostName in the aggregation period of the parent payload.
 func (x *SignpostMetric) TotalCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("totalCount"))
 	return _r
@@ -104,3 +92,5 @@ type SignpostMetricable interface {
 }
 
 var _ SignpostMetricable = (*SignpostMetric)(nil)
+
+var _ MetricProvider = (*SignpostMetric)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing a diagnostic report for an app that is too busy to handle user input responsively.
-//
 // HangDiagnostic is an idiomatic wrapper over the Objective-C class MXHangDiagnostic.
+//
+// It embeds [Diagnostic], promoting that type's methods.
+//
+// An object representing a diagnostic report for an app that is too busy to handle user input responsively.
 type HangDiagnostic struct {
-	objref.Handle
+	Diagnostic
 }
 
 // HangDiagnosticFromID adopts an existing Objective-C object as a HangDiagnostic
@@ -25,7 +26,8 @@ func HangDiagnosticFromID(id objc.ID) *HangDiagnostic {
 	if id == 0 {
 		return nil
 	}
-	x := &HangDiagnostic{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HangDiagnostic{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func hangDiagnosticAdopt(id objc.ID) *HangDiagnostic {
 	if id == 0 {
 		return nil
 	}
-	x := &HangDiagnostic{Handle: objref.Wrap(id)}
+	x := &HangDiagnostic{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *HangDiagnostic) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HangDiagnostic) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HangDiagnostic) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewHangDiagnostic creates a new HangDiagnostic.
@@ -64,13 +52,13 @@ func NewHangDiagnostic() *HangDiagnostic {
 	return hangDiagnosticAdopt(_id)
 }
 
-// The application call stack tree associated with the hang.
+// CallStackTree the application call stack tree associated with the hang.
 func (x *HangDiagnostic) CallStackTree() *CallStackTree {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callStackTree"))
 	return CallStackTreeFromID(_r)
 }
 
-// Total hang duration for this diagnostic. Dimensioned as NSUnitDuration.
+// HangDuration total hang duration for this diagnostic. Dimensioned as NSUnitDuration.
 func (x *HangDiagnostic) HangDuration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hangDuration"))
 	return obj.Wrap(_r)
@@ -84,3 +72,5 @@ type HangDiagnosticable interface {
 }
 
 var _ HangDiagnosticable = (*HangDiagnostic)(nil)
+
+var _ DiagnosticProvider = (*HangDiagnostic)(nil)

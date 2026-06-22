@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that facilitates the sharing of content with social media services, or with apps like Mail or Safari.
-//
 // SharingService is an idiomatic wrapper over the Objective-C class NSSharingService.
+//
+// An object that facilitates the sharing of content with social media services, or with apps like Mail or Safari.
 type SharingService struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SharingServiceFromID(id objc.ID) *SharingService {
 	if id == 0 {
 		return nil
 	}
-	x := &SharingService{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SharingService{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func sharingServiceAdopt(id objc.ID) *SharingService {
 	if id == 0 {
 		return nil
 	}
-	x := &SharingService{Handle: objref.Wrap(id)}
+	x := &SharingService{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,51 +60,50 @@ func (x *SharingService) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a custom sharing service object.
-//
-// NewSharingServiceWithTitleImageAlternateImageHandler creates a new SharingService.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SharingService) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSharingServiceWithTitleImageAlternateImageHandler creates a custom sharing service object.
 func NewSharingServiceWithTitleImageAlternateImageHandler(title string, image *Image, alternateImage *Image, block func()) *SharingService {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSharingService")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:image:alternateImage:handler:"), purego.NSString(title), objref.IDOf(image), objref.IDOf(alternateImage), objc.NewBlock(func(_ objc.Block) { block() }))
 	return sharingServiceAdopt(_id)
 }
 
-// The title of the service in the Share menu.
-//
-// WithMenuItemTitle sets menuItemTitle and returns the receiver so calls can be chained.
+// WithMenuItemTitle the title of the service in the Share menu.
 func (x *SharingService) WithMenuItemTitle(menuItemTitle string) *SharingService {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenuItemTitle:"), purego.NSString(menuItemTitle))
 	return x
 }
 
-// An array containing the user handles of the desired recipients.
-//
-// WithRecipients sets the collection and returns the receiver so calls can be chained.
+// WithRecipients an array containing the user handles of the desired recipients.
 func (x *SharingService) WithRecipients(items ...obj.Object) *SharingService {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecipients:"), _arr)
 	return x
 }
 
-// The subject of the post.
-//
-// WithSubject sets subject and returns the receiver so calls can be chained.
+// WithSubject the subject of the post.
 func (x *SharingService) WithSubject(subject string) *SharingService {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubject:"), purego.NSString(subject))
 	return x
 }
 
-// Returns whether the service can share all the specified items.
+// CanPerformWithItems returns whether the service can share all the specified items.
 func (x *SharingService) CanPerformWithItems(items obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPerformWithItems:"), objref.IDOf(items))
 	return _r
 }
 
-// Manually performs the service on the provided items.
+// PerformWithItems manually performs the service on the provided items.
 func (x *SharingService) PerformWithItems(items obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performWithItems:"), objref.IDOf(items))
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *SharingService) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -111,17 +112,19 @@ func (x *SharingService) Title() string {
 	return purego.GoString(_r)
 }
 
+// Image wraps the corresponding Objective-C method.
 func (x *SharingService) Image() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
+// AlternateImage wraps the corresponding Objective-C method.
 func (x *SharingService) AlternateImage() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternateImage"))
 	return ImageFromID(_r)
 }
 
-// Title of the service in the Share menu. Can be modified.
+// MenuItemTitle title of the service in the Share menu. Can be modified.
 func (x *SharingService) MenuItemTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuItemTitle"))
 	if _r == 0 {
@@ -130,12 +133,12 @@ func (x *SharingService) MenuItemTitle() string {
 	return purego.GoString(_r)
 }
 
-// Title of the service in the Share menu. Can be modified.
+// SetMenuItemTitle title of the service in the Share menu. Can be modified.
 func (x *SharingService) SetMenuItemTitle(menuItemTitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenuItemTitle:"), purego.NSString(menuItemTitle))
 }
 
-// NSArray of NSString objects representing handles (example: email adresses)
+// Recipients NSArray of NSString objects representing handles (example: email adresses)
 //
 // Recipients returns the collection as a Go slice.
 func (x *SharingService) Recipients() []string {
@@ -143,11 +146,12 @@ func (x *SharingService) Recipients() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// NSArray of NSString objects representing handles (example: email adresses)
+// SetRecipients NSArray of NSString objects representing handles (example: email adresses)
 func (x *SharingService) SetRecipients(recipients []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecipients:"), purego.SliceToNSArray(recipients, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// Subject wraps the corresponding Objective-C method.
 func (x *SharingService) Subject() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subject"))
 	if _r == 0 {
@@ -156,11 +160,12 @@ func (x *SharingService) Subject() string {
 	return purego.GoString(_r)
 }
 
+// SetSubject wraps the corresponding Objective-C method.
 func (x *SharingService) SetSubject(subject string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubject:"), purego.NSString(subject))
 }
 
-// Message body as string
+// MessageBody message body as string
 func (x *SharingService) MessageBody() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageBody"))
 	if _r == 0 {
@@ -169,13 +174,13 @@ func (x *SharingService) MessageBody() string {
 	return purego.GoString(_r)
 }
 
-// URL to access the post on Facebook, Twitter, Sina Weibo, etc. (also known as permalink)
+// PermanentLink URL to access the post on Facebook, Twitter, Sina Weibo, etc. (also known as permalink)
 func (x *SharingService) PermanentLink() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("permanentLink"))
 	return obj.Wrap(_r)
 }
 
-// Account name used for sending on Twitter or Sina Weibo
+// AccountName account name used for sending on Twitter or Sina Weibo
 func (x *SharingService) AccountName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountName"))
 	if _r == 0 {
@@ -184,7 +189,7 @@ func (x *SharingService) AccountName() string {
 	return purego.GoString(_r)
 }
 
-// NSArray of NSURL objects representing the files that were shared
+// AttachmentFileURLs NSArray of NSURL objects representing the files that were shared
 //
 // AttachmentFileURLs returns the collection as a Go slice.
 func (x *SharingService) AttachmentFileURLs() []obj.Object {

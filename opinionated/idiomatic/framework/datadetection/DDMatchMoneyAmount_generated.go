@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains an amount of money that the data detection system matches.
-//
 // MatchMoneyAmount is an idiomatic wrapper over the Objective-C class DDMatchMoneyAmount.
+//
+// It embeds [Match], promoting that type's methods.
+//
+// An object that contains an amount of money that the data detection system matches.
 type MatchMoneyAmount struct {
-	objref.Handle
+	Match
 }
 
 // MatchMoneyAmountFromID adopts an existing Objective-C object as a MatchMoneyAmount
@@ -25,7 +26,8 @@ func MatchMoneyAmountFromID(id objc.ID) *MatchMoneyAmount {
 	if id == 0 {
 		return nil
 	}
-	x := &MatchMoneyAmount{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatchMoneyAmount{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func matchMoneyAmountAdopt(id objc.ID) *MatchMoneyAmount {
 	if id == 0 {
 		return nil
 	}
-	x := &MatchMoneyAmount{Handle: objref.Wrap(id)}
+	x := &MatchMoneyAmount{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MatchMoneyAmount) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatchMoneyAmount) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatchMoneyAmount) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMatchMoneyAmount creates a new MatchMoneyAmount.
@@ -64,7 +52,7 @@ func NewMatchMoneyAmount() *MatchMoneyAmount {
 	return matchMoneyAmountAdopt(_id)
 }
 
-// A string that contains an ISO currency code, which the data detection system identifies from the matched string and user preferences.
+// Currency a string that contains an ISO currency code, which the data detection system identifies from the matched string and user preferences.
 func (x *MatchMoneyAmount) Currency() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currency"))
 	if _r == 0 {
@@ -73,7 +61,7 @@ func (x *MatchMoneyAmount) Currency() string {
 	return purego.GoString(_r)
 }
 
-// A number that represents an amount of money.
+// Amount a number that represents an amount of money.
 func (x *MatchMoneyAmount) Amount() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("amount"))
 	return _r
@@ -87,3 +75,5 @@ type MatchMoneyAmountable interface {
 }
 
 var _ MatchMoneyAmountable = (*MatchMoneyAmount)(nil)
+
+var _ MatchProvider = (*MatchMoneyAmount)(nil)

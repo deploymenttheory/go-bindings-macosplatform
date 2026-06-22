@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a decision to focus on a particular detection, or group of detections, at a particular time.
-//
 // Decision is an idiomatic wrapper over the Objective-C class CNDecision.
+//
+// An object that represents a decision to focus on a particular detection, or group of detections, at a particular time.
 type Decision struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DecisionFromID(id objc.ID) *Decision {
 	if id == 0 {
 		return nil
 	}
-	x := &Decision{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Decision{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func decisionAdopt(id objc.ID) *Decision {
 	if id == 0 {
 		return nil
 	}
-	x := &Decision{Handle: objref.Wrap(id)}
+	x := &Decision{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,43 @@ func (x *Decision) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Decision) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDecision creates a new Decision.
 func NewDecision() *Decision {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNDecision")), objc.RegisterName("new"))
 	return decisionAdopt(_id)
 }
 
-// The detectionID of the detection to focus on if this is not a group decision.
+// DetectionID the detectionID of the detection to focus on if this is not a group decision.
 func (x *Decision) DetectionID() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("detectionID"))
 	return _r
 }
 
-// The detectionGroupID of the detection to focus on if this is a group decision.
+// DetectionGroupID the detectionGroupID of the detection to focus on if this is a group decision.
 func (x *Decision) DetectionGroupID() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("detectionGroupID"))
 	return _r
 }
 
-// Whether this is a user-created decision, or a base decision.
+// IsUserDecision whether this is a user-created decision, or a base decision.
 func (x *Decision) IsUserDecision() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUserDecision"))
 	return _r
 }
 
-// Whether this is a group decision or not.
+// IsGroupDecision whether this is a group decision or not.
 func (x *Decision) IsGroupDecision() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isGroupDecision"))
 	return _r
 }
 
-// Whether this is a strong decision or not. A strong decision keeps focus for as long as possible.
+// IsStrongDecision whether this is a strong decision or not. A strong decision keeps focus for as long as possible.
 func (x *Decision) IsStrongDecision() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStrongDecision"))
 	return _r

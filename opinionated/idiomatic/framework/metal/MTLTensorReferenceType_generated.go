@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a tensor in the shading language in a struct or array.
-//
 // TensorReferenceType is an idiomatic wrapper over the Objective-C class MTLTensorReferenceType.
+//
+// It embeds [Type], promoting that type's methods.
+//
+// An object that represents a tensor in the shading language in a struct or array.
 type TensorReferenceType struct {
-	objref.Handle
+	Type
 }
 
 // TensorReferenceTypeFromID adopts an existing Objective-C object as a TensorReferenceType
@@ -25,7 +26,8 @@ func TensorReferenceTypeFromID(id objc.ID) *TensorReferenceType {
 	if id == 0 {
 		return nil
 	}
-	x := &TensorReferenceType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TensorReferenceType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func tensorReferenceTypeAdopt(id objc.ID) *TensorReferenceType {
 	if id == 0 {
 		return nil
 	}
-	x := &TensorReferenceType{Handle: objref.Wrap(id)}
+	x := &TensorReferenceType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *TensorReferenceType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TensorReferenceType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TensorReferenceType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewTensorReferenceType creates a new TensorReferenceType.
@@ -64,25 +52,25 @@ func NewTensorReferenceType() *TensorReferenceType {
 	return tensorReferenceTypeAdopt(_id)
 }
 
-// The underlying data format of the tensor.
+// TensorDataType the underlying data format of the tensor.
 func (x *TensorReferenceType) TensorDataType() TensorDataType {
 	_r := objc.Send[TensorDataType](objref.IDOf(x), objc.RegisterName("tensorDataType"))
 	return _r
 }
 
-// The data format you use for indexing into the tensor.
+// IndexType the data format you use for indexing into the tensor.
 func (x *TensorReferenceType) IndexType() DataType {
 	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("indexType"))
 	return _r
 }
 
-// The array of sizes, in elements, one for each dimension of this tensor. Because shader-bound tensors have dynamic extents, the “MTLTensorExtents/rank“ of `dimensions` corresponds to the rank the shader function specifies, and “MTLTensorExtents/extentsAtDimensionIndex:“ always returns a value of -1.
+// Dimensions the array of sizes, in elements, one for each dimension of this tensor. Because shader-bound tensors have dynamic extents, the “MTLTensorExtents/rank“ of `dimensions` corresponds to the rank the shader function specifies, and “MTLTensorExtents/extentsAtDimensionIndex:“ always returns a value of -1.
 func (x *TensorReferenceType) Dimensions() *TensorExtents {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dimensions"))
 	return TensorExtentsFromID(_r)
 }
 
-// A value that represents the read/write permissions of the tensor.
+// Access a value that represents the read/write permissions of the tensor.
 func (x *TensorReferenceType) Access() BindingAccess {
 	_r := objc.Send[BindingAccess](objref.IDOf(x), objc.RegisterName("access"))
 	return _r
@@ -98,3 +86,5 @@ type TensorReferenceTypeable interface {
 }
 
 var _ TensorReferenceTypeable = (*TensorReferenceType)(nil)
+
+var _ TypeProvider = (*TensorReferenceType)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a L2-norm pooling filter.
-//
 // CNNPoolingL2NormNode is an idiomatic wrapper over the Objective-C class MPSCNNPoolingL2NormNode.
+//
+// It embeds [CNNPoolingNode], promoting that type's methods.
+//
+// A representation of a L2-norm pooling filter.
 type CNNPoolingL2NormNode struct {
-	objref.Handle
+	CNNPoolingNode
 }
 
 // CNNPoolingL2NormNodeFromID adopts an existing Objective-C object as a CNNPoolingL2NormNode
@@ -25,7 +26,8 @@ func CNNPoolingL2NormNodeFromID(id objc.ID) *CNNPoolingL2NormNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNPoolingL2NormNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNPoolingL2NormNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func cNNPoolingL2NormNodeAdopt(id objc.ID) *CNNPoolingL2NormNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNPoolingL2NormNode{Handle: objref.Wrap(id)}
+	x := &CNNPoolingL2NormNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNPoolingL2NormNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNPoolingL2NormNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNPoolingL2NormNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNPoolingL2NormNode creates a new CNNPoolingL2NormNode.
@@ -64,9 +52,7 @@ func NewCNNPoolingL2NormNode() *CNNPoolingL2NormNode {
 	return cNNPoolingL2NormNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNPoolingL2NormNode) WithLabel(label string) *CNNPoolingL2NormNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -79,3 +65,7 @@ type CNNPoolingL2NormNodeable interface {
 }
 
 var _ CNNPoolingL2NormNodeable = (*CNNPoolingL2NormNode)(nil)
+
+var _ CNNPoolingNodeProvider = (*CNNPoolingL2NormNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNPoolingL2NormNode)(nil)

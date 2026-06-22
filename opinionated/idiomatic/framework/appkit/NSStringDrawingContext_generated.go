@@ -6,15 +6,16 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages metrics for drawing attributed strings.
-//
 // StringDrawingContext is an idiomatic wrapper over the Objective-C class NSStringDrawingContext.
+//
+// An object that manages metrics for drawing attributed strings.
 type StringDrawingContext struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func StringDrawingContextFromID(id objc.ID) *StringDrawingContext {
 	if id == 0 {
 		return nil
 	}
-	x := &StringDrawingContext{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StringDrawingContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func stringDrawingContextAdopt(id objc.ID) *StringDrawingContext {
 	if id == 0 {
 		return nil
 	}
-	x := &StringDrawingContext{Handle: objref.Wrap(id)}
+	x := &StringDrawingContext{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +61,44 @@ func (x *StringDrawingContext) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StringDrawingContext) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewStringDrawingContext creates a new StringDrawingContext.
 func NewStringDrawingContext() *StringDrawingContext {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSStringDrawingContext")), objc.RegisterName("new"))
 	return stringDrawingContextAdopt(_id)
 }
 
-// The scale factor that determines the smallest font size to use during drawing.
-//
-// WithMinimumScaleFactor sets minimumScaleFactor and returns the receiver so calls can be chained.
+// WithMinimumScaleFactor the scale factor that determines the smallest font size to use during drawing.
 func (x *StringDrawingContext) WithMinimumScaleFactor(minimumScaleFactor float64) *StringDrawingContext {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumScaleFactor:"), minimumScaleFactor)
 	return x
 }
 
+// MinimumScaleFactor wraps the corresponding Objective-C method.
 func (x *StringDrawingContext) MinimumScaleFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumScaleFactor"))
 	return _r
 }
 
+// SetMinimumScaleFactor wraps the corresponding Objective-C method.
 func (x *StringDrawingContext) SetMinimumScaleFactor(minimumScaleFactor float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumScaleFactor:"), minimumScaleFactor)
 }
 
+// ActualScaleFactor wraps the corresponding Objective-C method.
 func (x *StringDrawingContext) ActualScaleFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("actualScaleFactor"))
+	return _r
+}
+
+// TotalBounds wraps the corresponding Objective-C method.
+func (x *StringDrawingContext) TotalBounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("totalBounds"))
 	return _r
 }
 
@@ -93,6 +109,7 @@ type StringDrawingContextable interface {
 	MinimumScaleFactor() float64
 	SetMinimumScaleFactor(minimumScaleFactor float64)
 	ActualScaleFactor() float64
+	TotalBounds() corefoundation.CGRect
 }
 
 var _ StringDrawingContextable = (*StringDrawingContext)(nil)

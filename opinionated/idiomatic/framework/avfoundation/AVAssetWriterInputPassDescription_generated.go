@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the interface to query for the requirements of the current pass.
-//
 // AssetWriterInputPassDescription is an idiomatic wrapper over the Objective-C class AVAssetWriterInputPassDescription.
+//
+// An object that defines the interface to query for the requirements of the current pass.
 type AssetWriterInputPassDescription struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetWriterInputPassDescriptionFromID(id objc.ID) *AssetWriterInputPassDesc
 	if id == 0 {
 		return nil
 	}
-	x := &AssetWriterInputPassDescription{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetWriterInputPassDescription{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetWriterInputPassDescriptionAdopt(id objc.ID) *AssetWriterInputPassDescr
 	if id == 0 {
 		return nil
 	}
-	x := &AssetWriterInputPassDescription{Handle: objref.Wrap(id)}
+	x := &AssetWriterInputPassDescription{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,20 @@ func (x *AssetWriterInputPassDescription) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetWriterInputPassDescription) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetWriterInputPassDescription creates a new AssetWriterInputPassDescription.
 func NewAssetWriterInputPassDescription() *AssetWriterInputPassDescription {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInputPassDescription")), objc.RegisterName("new"))
 	return assetWriterInputPassDescriptionAdopt(_id)
 }
 
+// SourceTimeRanges wraps the corresponding Objective-C method.
+//
 // SourceTimeRanges returns the collection as a Go slice.
 func (x *AssetWriterInputPassDescription) SourceTimeRanges() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceTimeRanges"))

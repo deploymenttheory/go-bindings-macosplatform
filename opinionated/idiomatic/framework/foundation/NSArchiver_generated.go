@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A coder that stores an object’s data to an archive.
-//
 // Archiver is an idiomatic wrapper over the Objective-C class NSArchiver.
+//
+// It embeds [Coder], promoting that type's methods.
+//
+// A coder that stores an object’s data to an archive.
 type Archiver struct {
-	objref.Handle
+	Coder
 }
 
 // ArchiverFromID adopts an existing Objective-C object as a Archiver
@@ -25,7 +26,8 @@ func ArchiverFromID(id objc.ID) *Archiver {
 	if id == 0 {
 		return nil
 	}
-	x := &Archiver{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Archiver{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,47 +40,31 @@ func archiverAdopt(id objc.ID) *Archiver {
 	if id == 0 {
 		return nil
 	}
-	x := &Archiver{Handle: objref.Wrap(id)}
+	x := &Archiver{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *Archiver) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Archiver) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Archiver) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Returns an archiver, initialized to encode stream and version information into a given mutable data object.
-//
-// NewArchiverForWritingWithMutableData creates a new Archiver.
+// NewArchiverForWritingWithMutableData returns an archiver, initialized to encode stream and version information into a given mutable data object.
 func NewArchiverForWritingWithMutableData(mdata *MutableData) *Archiver {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSArchiver")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForWritingWithMutableData:"), objref.IDOf(mdata))
 	return archiverAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Archiver) WithScriptingProperties(scriptingProperties obj.Object) *Archiver {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Encodes a substitute name for the class with a given true name.
+// EncodeClassNameIntoClassName encodes a substitute name for the class with a given true name.
 func (x *Archiver) EncodeClassNameIntoClassName(trueName string, inArchiveName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeClassName:intoClassName:"), purego.NSString(trueName), purego.NSString(inArchiveName))
 }
 
-// Returns the name of the class used to archive instances of the class with a given true name.
+// ClassNameEncodedForTrueClassName returns the name of the class used to archive instances of the class with a given true name.
 func (x *Archiver) ClassNameEncodedForTrueClassName(trueName string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("classNameEncodedForTrueClassName:"), purego.NSString(trueName))
 	if _r == 0 {
@@ -87,11 +73,12 @@ func (x *Archiver) ClassNameEncodedForTrueClassName(trueName string) string {
 	return purego.GoString(_r)
 }
 
-// Causes the receiver to treat subsequent requests to encode a given object as though they were requests to encode another given object.
+// ReplaceObjectWithObject causes the receiver to treat subsequent requests to encode a given object as though they were requests to encode another given object.
 func (x *Archiver) ReplaceObjectWithObject(object obj.Object, newObject obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceObject:withObject:"), objref.IDOf(object), objref.IDOf(newObject))
 }
 
+// ArchiverData wraps the corresponding Objective-C method.
 func (x *Archiver) ArchiverData() *MutableData {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("archiverData"))
 	return MutableDataFromID(_r)
@@ -108,3 +95,5 @@ type Archiverable interface {
 }
 
 var _ Archiverable = (*Archiver)(nil)
+
+var _ CoderProvider = (*Archiver)(nil)

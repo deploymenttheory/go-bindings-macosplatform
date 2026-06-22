@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event requesting a change in the playback position.
-//
 // ChangePlaybackPositionCommandEvent is an idiomatic wrapper over the Objective-C class MPChangePlaybackPositionCommandEvent.
+//
+// It embeds [RemoteCommandEvent], promoting that type's methods.
+//
+// An event requesting a change in the playback position.
 type ChangePlaybackPositionCommandEvent struct {
-	objref.Handle
+	RemoteCommandEvent
 }
 
 // ChangePlaybackPositionCommandEventFromID adopts an existing Objective-C object as a ChangePlaybackPositionCommandEvent
@@ -25,7 +26,8 @@ func ChangePlaybackPositionCommandEventFromID(id objc.ID) *ChangePlaybackPositio
 	if id == 0 {
 		return nil
 	}
-	x := &ChangePlaybackPositionCommandEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ChangePlaybackPositionCommandEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func changePlaybackPositionCommandEventAdopt(id objc.ID) *ChangePlaybackPosition
 	if id == 0 {
 		return nil
 	}
-	x := &ChangePlaybackPositionCommandEvent{Handle: objref.Wrap(id)}
+	x := &ChangePlaybackPositionCommandEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ChangePlaybackPositionCommandEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ChangePlaybackPositionCommandEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ChangePlaybackPositionCommandEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewChangePlaybackPositionCommandEvent creates a new ChangePlaybackPositionCommandEvent.
@@ -64,6 +52,7 @@ func NewChangePlaybackPositionCommandEvent() *ChangePlaybackPositionCommandEvent
 	return changePlaybackPositionCommandEventAdopt(_id)
 }
 
+// PositionTime wraps the corresponding Objective-C method.
 func (x *ChangePlaybackPositionCommandEvent) PositionTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("positionTime"))
 	return _r
@@ -76,3 +65,5 @@ type ChangePlaybackPositionCommandEventable interface {
 }
 
 var _ ChangePlaybackPositionCommandEventable = (*ChangePlaybackPositionCommandEvent)(nil)
+
+var _ RemoteCommandEventProvider = (*ChangePlaybackPositionCommandEvent)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The host audio input stream source that provides audio from the host system’s default input device.
-//
 // HostAudioInputStreamSource is an idiomatic wrapper over the Objective-C class VZHostAudioInputStreamSource.
+//
+// It embeds [AudioInputStreamSource], promoting that type's methods.
+//
+// The host audio input stream source that provides audio from the host system’s default input device.
 type HostAudioInputStreamSource struct {
-	objref.Handle
+	AudioInputStreamSource
 }
 
 // HostAudioInputStreamSourceFromID adopts an existing Objective-C object as a HostAudioInputStreamSource
@@ -25,7 +26,8 @@ func HostAudioInputStreamSourceFromID(id objc.ID) *HostAudioInputStreamSource {
 	if id == 0 {
 		return nil
 	}
-	x := &HostAudioInputStreamSource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HostAudioInputStreamSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func hostAudioInputStreamSourceAdopt(id objc.ID) *HostAudioInputStreamSource {
 	if id == 0 {
 		return nil
 	}
-	x := &HostAudioInputStreamSource{Handle: objref.Wrap(id)}
+	x := &HostAudioInputStreamSource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *HostAudioInputStreamSource) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HostAudioInputStreamSource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HostAudioInputStreamSource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewHostAudioInputStreamSource creates a new HostAudioInputStreamSource.
@@ -70,3 +58,5 @@ type HostAudioInputStreamSourceable interface {
 }
 
 var _ HostAudioInputStreamSourceable = (*HostAudioInputStreamSource)(nil)
+
+var _ AudioInputStreamSourceProvider = (*HostAudioInputStreamSource)(nil)

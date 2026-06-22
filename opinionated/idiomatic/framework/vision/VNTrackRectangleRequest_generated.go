@@ -6,17 +6,19 @@ package vision
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An image-analysis request that tracks movement of a previously identified rectangular object across multiple images or video frames.
-//
 // TrackRectangleRequest is an idiomatic wrapper over the Objective-C class VNTrackRectangleRequest.
+//
+// It embeds [TrackingRequest], promoting that type's methods.
+//
+// An image-analysis request that tracks movement of a previously identified rectangular object across multiple images or video frames.
 type TrackRectangleRequest struct {
-	objref.Handle
+	TrackingRequest
 }
 
 // TrackRectangleRequestFromID adopts an existing Objective-C object as a TrackRectangleRequest
@@ -25,7 +27,8 @@ func TrackRectangleRequestFromID(id objc.ID) *TrackRectangleRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &TrackRectangleRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TrackRectangleRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,78 +41,56 @@ func trackRectangleRequestAdopt(id objc.ID) *TrackRectangleRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &TrackRectangleRequest{Handle: objref.Wrap(id)}
+	x := &TrackRectangleRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *TrackRectangleRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TrackRectangleRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TrackRectangleRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a new rectangle tracking request with a rectangle observation.
-//
-// NewTrackRectangleRequestWithRectangleObservation creates a new TrackRectangleRequest.
+// NewTrackRectangleRequestWithRectangleObservation creates a new rectangle tracking request with a rectangle observation.
 func NewTrackRectangleRequestWithRectangleObservation(observation *RectangleObservation) *TrackRectangleRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTrackRectangleRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRectangleObservation:"), objref.IDOf(observation))
 	return trackRectangleRequestAdopt(_id)
 }
 
-// The observation object defining a region to track.
-//
-// WithInputObservation sets inputObservation and returns the receiver so calls can be chained.
+// WithInputObservation the observation object defining a region to track.
 func (x *TrackRectangleRequest) WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackRectangleRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputObservation:"), objref.IDOf(inputObservation))
 	return x
 }
 
-// A value for specifying whether to prioritize speed or location accuracy.
-//
-// WithTrackingLevel sets trackingLevel and returns the receiver so calls can be chained.
+// WithTrackingLevel a value for specifying whether to prioritize speed or location accuracy.
 func (x *TrackRectangleRequest) WithTrackingLevel(trackingLevel RequestTrackingLevel) *TrackRectangleRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackingLevel:"), trackingLevel)
 	return x
 }
 
-// A Boolean that indicates the last frame in a tracking sequence.
-//
-// WithLastFrame sets lastFrame and returns the receiver so calls can be chained.
+// WithLastFrame a Boolean that indicates the last frame in a tracking sequence.
 func (x *TrackRectangleRequest) WithLastFrame(lastFrame bool) *TrackRectangleRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLastFrame:"), lastFrame)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets preferBackgroundProcessing and returns the receiver so calls can be chained.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
+func (x *TrackRectangleRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackRectangleRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *TrackRectangleRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackRectangleRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets usesCPUOnly and returns the receiver so calls can be chained.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *TrackRectangleRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackRectangleRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets revision and returns the receiver so calls can be chained.
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
 func (x *TrackRectangleRequest) WithRevision(revision int) *TrackRectangleRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
@@ -121,9 +102,16 @@ type TrackRectangleRequestable interface {
 	WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackRectangleRequest
 	WithTrackingLevel(trackingLevel RequestTrackingLevel) *TrackRectangleRequest
 	WithLastFrame(lastFrame bool) *TrackRectangleRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackRectangleRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackRectangleRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *TrackRectangleRequest
 	WithRevision(revision int) *TrackRectangleRequest
 }
 
 var _ TrackRectangleRequestable = (*TrackRectangleRequest)(nil)
+
+var _ TrackingRequestProvider = (*TrackRectangleRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*TrackRectangleRequest)(nil)
+
+var _ RequestProvider = (*TrackRectangleRequest)(nil)

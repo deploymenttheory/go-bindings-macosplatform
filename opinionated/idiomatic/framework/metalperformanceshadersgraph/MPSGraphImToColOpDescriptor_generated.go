@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The class that defines the parameters for an image to column or column to image operation.
-//
 // GraphImToColOpDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphImToColOpDescriptor.
+//
+// It embeds [GraphObject], promoting that type's methods.
+//
+// The class that defines the parameters for an image to column or column to image operation.
 type GraphImToColOpDescriptor struct {
-	objref.Handle
+	GraphObject
 }
 
 // GraphImToColOpDescriptorFromID adopts an existing Objective-C object as a GraphImToColOpDescriptor
@@ -25,7 +26,8 @@ func GraphImToColOpDescriptorFromID(id objc.ID) *GraphImToColOpDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphImToColOpDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphImToColOpDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func graphImToColOpDescriptorAdopt(id objc.ID) *GraphImToColOpDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphImToColOpDescriptor{Handle: objref.Wrap(id)}
+	x := &GraphImToColOpDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GraphImToColOpDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphImToColOpDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphImToColOpDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGraphImToColOpDescriptor creates a new GraphImToColOpDescriptor.
@@ -64,205 +52,194 @@ func NewGraphImToColOpDescriptor() *GraphImToColOpDescriptor {
 	return graphImToColOpDescriptorAdopt(_id)
 }
 
-// The property that defines the kernel size in width dimension.
-//
-// WithKernelWidth sets kernelWidth and returns the receiver so calls can be chained.
+// WithKernelWidth the property that defines the kernel size in width dimension.
 func (x *GraphImToColOpDescriptor) WithKernelWidth(kernelWidth int) *GraphImToColOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelWidth:"), kernelWidth)
 	return x
 }
 
-// The property that defines the kernel size in height dimension.
-//
-// WithKernelHeight sets kernelHeight and returns the receiver so calls can be chained.
+// WithKernelHeight the property that defines the kernel size in height dimension.
 func (x *GraphImToColOpDescriptor) WithKernelHeight(kernelHeight int) *GraphImToColOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelHeight:"), kernelHeight)
 	return x
 }
 
-// The property that defines the stride in width dimension.
-//
-// WithStrideInX sets strideInX and returns the receiver so calls can be chained.
+// WithStrideInX the property that defines the stride in width dimension.
 func (x *GraphImToColOpDescriptor) WithStrideInX(strideInX int) *GraphImToColOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInX:"), strideInX)
 	return x
 }
 
-// The property that defines the stride in height dimension.
-//
-// WithStrideInY sets strideInY and returns the receiver so calls can be chained.
+// WithStrideInY the property that defines the stride in height dimension.
 func (x *GraphImToColOpDescriptor) WithStrideInY(strideInY int) *GraphImToColOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInY:"), strideInY)
 	return x
 }
 
-// The property that defines the dilation in width dimension.
-//
-// WithDilationRateInX sets dilationRateInX and returns the receiver so calls can be chained.
+// WithDilationRateInX the property that defines the dilation in width dimension.
 func (x *GraphImToColOpDescriptor) WithDilationRateInX(dilationRateInX int) *GraphImToColOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateInX:"), dilationRateInX)
 	return x
 }
 
-// The property that defines the dilation in height dimension.
-//
-// WithDilationRateInY sets dilationRateInY and returns the receiver so calls can be chained.
+// WithDilationRateInY the property that defines the dilation in height dimension.
 func (x *GraphImToColOpDescriptor) WithDilationRateInY(dilationRateInY int) *GraphImToColOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateInY:"), dilationRateInY)
 	return x
 }
 
-// The property that defines the padding in width dimension on the left side.
-//
-// WithPaddingLeft sets paddingLeft and returns the receiver so calls can be chained.
+// WithPaddingLeft the property that defines the padding in width dimension on the left side.
 func (x *GraphImToColOpDescriptor) WithPaddingLeft(paddingLeft int) *GraphImToColOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingLeft:"), paddingLeft)
 	return x
 }
 
-// The property that defines the padding in width dimension on the right side.
-//
-// WithPaddingRight sets paddingRight and returns the receiver so calls can be chained.
+// WithPaddingRight the property that defines the padding in width dimension on the right side.
 func (x *GraphImToColOpDescriptor) WithPaddingRight(paddingRight int) *GraphImToColOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingRight:"), paddingRight)
 	return x
 }
 
-// The property that defines the padding in height dimension at the top.
-//
-// WithPaddingTop sets paddingTop and returns the receiver so calls can be chained.
+// WithPaddingTop the property that defines the padding in height dimension at the top.
 func (x *GraphImToColOpDescriptor) WithPaddingTop(paddingTop int) *GraphImToColOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingTop:"), paddingTop)
 	return x
 }
 
-// The property that defines the padding in height dimension at the bottom.
-//
-// WithPaddingBottom sets paddingBottom and returns the receiver so calls can be chained.
+// WithPaddingBottom the property that defines the padding in height dimension at the bottom.
 func (x *GraphImToColOpDescriptor) WithPaddingBottom(paddingBottom int) *GraphImToColOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingBottom:"), paddingBottom)
 	return x
 }
 
-// The property that defines the layout of source or output tensor. e.g. batch x channels x width x height for NCHW layout
-//
-// WithDataLayout sets dataLayout and returns the receiver so calls can be chained.
+// WithDataLayout the property that defines the layout of source or output tensor. e.g. batch x channels x width x height for NCHW layout
 func (x *GraphImToColOpDescriptor) WithDataLayout(dataLayout GraphTensorNamedDataLayout) *GraphImToColOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataLayout:"), dataLayout)
 	return x
 }
 
-// Sets the descriptor’s padding to the given values.
+// SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom sets the descriptor’s padding to the given values.
 func (x *GraphImToColOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft int, paddingRight int, paddingTop int, paddingBottom int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExplicitPaddingWithPaddingLeft:paddingRight:paddingTop:paddingBottom:"), paddingLeft, paddingRight, paddingTop, paddingBottom)
 }
 
-// The property that defines the kernel size in width dimension.
+// KernelWidth the property that defines the kernel size in width dimension.
 func (x *GraphImToColOpDescriptor) KernelWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
+// SetKernelWidth wraps the corresponding Objective-C method.
 func (x *GraphImToColOpDescriptor) SetKernelWidth(kernelWidth int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelWidth:"), kernelWidth)
 }
 
-// The property that defines the kernel size  in height dimension.
+// KernelHeight the property that defines the kernel size  in height dimension.
 func (x *GraphImToColOpDescriptor) KernelHeight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
+// SetKernelHeight wraps the corresponding Objective-C method.
 func (x *GraphImToColOpDescriptor) SetKernelHeight(kernelHeight int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelHeight:"), kernelHeight)
 }
 
-// The property that defines the stride in width dimension.
+// StrideInX the property that defines the stride in width dimension.
 func (x *GraphImToColOpDescriptor) StrideInX() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInX"))
 	return _r
 }
 
+// SetStrideInX wraps the corresponding Objective-C method.
 func (x *GraphImToColOpDescriptor) SetStrideInX(strideInX int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInX:"), strideInX)
 }
 
-// The property that defines the stride in height dimension.
+// StrideInY the property that defines the stride in height dimension.
 func (x *GraphImToColOpDescriptor) StrideInY() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInY"))
 	return _r
 }
 
+// SetStrideInY wraps the corresponding Objective-C method.
 func (x *GraphImToColOpDescriptor) SetStrideInY(strideInY int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInY:"), strideInY)
 }
 
-// The property that defines the dilation in width dimension.
+// DilationRateInX the property that defines the dilation in width dimension.
 func (x *GraphImToColOpDescriptor) DilationRateInX() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateInX"))
 	return _r
 }
 
+// SetDilationRateInX wraps the corresponding Objective-C method.
 func (x *GraphImToColOpDescriptor) SetDilationRateInX(dilationRateInX int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateInX:"), dilationRateInX)
 }
 
-// The property that defines the dilation in height dimension.
+// DilationRateInY the property that defines the dilation in height dimension.
 func (x *GraphImToColOpDescriptor) DilationRateInY() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateInY"))
 	return _r
 }
 
+// SetDilationRateInY wraps the corresponding Objective-C method.
 func (x *GraphImToColOpDescriptor) SetDilationRateInY(dilationRateInY int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateInY:"), dilationRateInY)
 }
 
-// The property that defines the padding in width dimension on the left side.
+// PaddingLeft the property that defines the padding in width dimension on the left side.
 func (x *GraphImToColOpDescriptor) PaddingLeft() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingLeft"))
 	return _r
 }
 
+// SetPaddingLeft wraps the corresponding Objective-C method.
 func (x *GraphImToColOpDescriptor) SetPaddingLeft(paddingLeft int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingLeft:"), paddingLeft)
 }
 
-// The property that defines the padding in width dimension on the right side.
+// PaddingRight the property that defines the padding in width dimension on the right side.
 func (x *GraphImToColOpDescriptor) PaddingRight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingRight"))
 	return _r
 }
 
+// SetPaddingRight wraps the corresponding Objective-C method.
 func (x *GraphImToColOpDescriptor) SetPaddingRight(paddingRight int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingRight:"), paddingRight)
 }
 
-// The property that defines the padding in height dimension at the top.
+// PaddingTop the property that defines the padding in height dimension at the top.
 func (x *GraphImToColOpDescriptor) PaddingTop() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingTop"))
 	return _r
 }
 
+// SetPaddingTop wraps the corresponding Objective-C method.
 func (x *GraphImToColOpDescriptor) SetPaddingTop(paddingTop int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingTop:"), paddingTop)
 }
 
-// The property that defines the padding in height dimension at the bottom.
+// PaddingBottom the property that defines the padding in height dimension at the bottom.
 func (x *GraphImToColOpDescriptor) PaddingBottom() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingBottom"))
 	return _r
 }
 
+// SetPaddingBottom wraps the corresponding Objective-C method.
 func (x *GraphImToColOpDescriptor) SetPaddingBottom(paddingBottom int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingBottom:"), paddingBottom)
 }
 
-// The property that defines the layout of source or output  tensor. e.g. `batch x channels x width x height` for `NCHW` layout
+// DataLayout the property that defines the layout of source or output  tensor. e.g. `batch x channels x width x height` for `NCHW` layout
 func (x *GraphImToColOpDescriptor) DataLayout() GraphTensorNamedDataLayout {
 	_r := objc.Send[GraphTensorNamedDataLayout](objref.IDOf(x), objc.RegisterName("dataLayout"))
 	return _r
 }
 
+// SetDataLayout wraps the corresponding Objective-C method.
 func (x *GraphImToColOpDescriptor) SetDataLayout(dataLayout GraphTensorNamedDataLayout) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataLayout:"), dataLayout)
 }
@@ -307,3 +284,5 @@ type GraphImToColOpDescriptorable interface {
 }
 
 var _ GraphImToColOpDescriptorable = (*GraphImToColOpDescriptor)(nil)
+
+var _ GraphObjectProvider = (*GraphImToColOpDescriptor)(nil)

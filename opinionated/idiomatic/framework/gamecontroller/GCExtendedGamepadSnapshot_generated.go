@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A recording of all of the values provided by a GCExtendedGamepad object.
-//
 // ExtendedGamepadSnapshot is an idiomatic wrapper over the Objective-C class GCExtendedGamepadSnapshot.
+//
+// It embeds [ExtendedGamepad], promoting that type's methods.
+//
+// A recording of all of the values provided by a GCExtendedGamepad object.
 type ExtendedGamepadSnapshot struct {
-	objref.Handle
+	ExtendedGamepad
 }
 
 // ExtendedGamepadSnapshotFromID adopts an existing Objective-C object as a ExtendedGamepadSnapshot
@@ -25,7 +26,8 @@ func ExtendedGamepadSnapshotFromID(id objc.ID) *ExtendedGamepadSnapshot {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtendedGamepadSnapshot{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExtendedGamepadSnapshot{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,65 +40,45 @@ func extendedGamepadSnapshotAdopt(id objc.ID) *ExtendedGamepadSnapshot {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtendedGamepadSnapshot{Handle: objref.Wrap(id)}
+	x := &ExtendedGamepadSnapshot{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ExtendedGamepadSnapshot) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExtendedGamepadSnapshot) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExtendedGamepadSnapshot) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a snapshot object with the flattened data representation obtained from another snapshot.
-//
-// NewExtendedGamepadSnapshotWithSnapshotData creates a new ExtendedGamepadSnapshot.
+// NewExtendedGamepadSnapshotWithSnapshotData initializes a snapshot object with the flattened data representation obtained from another snapshot.
 func NewExtendedGamepadSnapshotWithSnapshotData(data obj.Object) *ExtendedGamepadSnapshot {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GCExtendedGamepadSnapshot")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotData:"), objref.IDOf(data))
 	return extendedGamepadSnapshotAdopt(_id)
 }
 
-// Initializes a snapshot object associated with a specific controller using a flattened data representation obtained from another snapshot.
-//
-// NewExtendedGamepadSnapshotWithControllerSnapshotData creates a new ExtendedGamepadSnapshot.
+// NewExtendedGamepadSnapshotWithControllerSnapshotData initializes a snapshot object associated with a specific controller using a flattened data representation obtained from another snapshot.
 func NewExtendedGamepadSnapshotWithControllerSnapshotData(controller *Controller, data obj.Object) *ExtendedGamepadSnapshot {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GCExtendedGamepadSnapshot")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithController:snapshotData:"), objref.IDOf(controller), objref.IDOf(data))
 	return extendedGamepadSnapshotAdopt(_id)
 }
 
-// Flattens a snapshot into an archivable memory representation.
-//
-// WithSnapshotData sets snapshotData and returns the receiver so calls can be chained.
+// WithSnapshotData flattens a snapshot into an archivable memory representation.
 func (x *ExtendedGamepadSnapshot) WithSnapshotData(snapshotData obj.Object) *ExtendedGamepadSnapshot {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSnapshotData:"), objref.IDOf(snapshotData))
 	return x
 }
 
-// The block that the profile calls when an element’s value changes.
-//
-// WithValueDidChangeHandler sets valueDidChangeHandler and returns the receiver so calls can be chained.
+// WithValueDidChangeHandler the block that the profile calls when an element’s value changes.
 func (x *ExtendedGamepadSnapshot) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *ExtendedGamepadSnapshot {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return x
 }
 
+// SnapshotData wraps the corresponding Objective-C method.
 func (x *ExtendedGamepadSnapshot) SnapshotData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotData"))
 	return obj.Wrap(_r)
 }
 
+// SetSnapshotData wraps the corresponding Objective-C method.
 func (x *ExtendedGamepadSnapshot) SetSnapshotData(snapshotData obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSnapshotData:"), objref.IDOf(snapshotData))
 }
@@ -111,3 +93,7 @@ type ExtendedGamepadSnapshotable interface {
 }
 
 var _ ExtendedGamepadSnapshotable = (*ExtendedGamepadSnapshot)(nil)
+
+var _ ExtendedGamepadProvider = (*ExtendedGamepadSnapshot)(nil)
+
+var _ PhysicalInputProfileProvider = (*ExtendedGamepadSnapshot)(nil)

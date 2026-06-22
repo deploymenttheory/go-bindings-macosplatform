@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A data set that projects sound of a certain frequency outward in the shape of a heart.
-//
 // CardioidDirectivityModelSubbandParameters is an idiomatic wrapper over the Objective-C class PHASECardioidDirectivityModelSubbandParameters.
+//
+// A data set that projects sound of a certain frequency outward in the shape of a heart.
 type CardioidDirectivityModelSubbandParameters struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CardioidDirectivityModelSubbandParametersFromID(id objc.ID) *CardioidDirect
 	if id == 0 {
 		return nil
 	}
-	x := &CardioidDirectivityModelSubbandParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CardioidDirectivityModelSubbandParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func cardioidDirectivityModelSubbandParametersAdopt(id objc.ID) *CardioidDirecti
 	if id == 0 {
 		return nil
 	}
-	x := &CardioidDirectivityModelSubbandParameters{Handle: objref.Wrap(id)}
+	x := &CardioidDirectivityModelSubbandParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,62 +60,65 @@ func (x *CardioidDirectivityModelSubbandParameters) IsKind(className string) boo
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CardioidDirectivityModelSubbandParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCardioidDirectivityModelSubbandParameters creates a new CardioidDirectivityModelSubbandParameters.
 func NewCardioidDirectivityModelSubbandParameters() *CardioidDirectivityModelSubbandParameters {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHASECardioidDirectivityModelSubbandParameters")), objc.RegisterName("new"))
 	return cardioidDirectivityModelSubbandParametersAdopt(_id)
 }
 
-// A frequency in the audio spectrum where the pattern and sharpness resonate most.
-//
-// WithFrequency sets frequency and returns the receiver so calls can be chained.
+// WithFrequency a frequency in the audio spectrum where the pattern and sharpness resonate most.
 func (x *CardioidDirectivityModelSubbandParameters) WithFrequency(frequency float64) *CardioidDirectivityModelSubbandParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
 	return x
 }
 
-// A shape that determines the direction of sound.
-//
-// WithPattern sets pattern and returns the receiver so calls can be chained.
+// WithPattern a shape that determines the direction of sound.
 func (x *CardioidDirectivityModelSubbandParameters) WithPattern(pattern float64) *CardioidDirectivityModelSubbandParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPattern:"), pattern)
 	return x
 }
 
-// The amount that the shape overlaps with bordering subbands.
-//
-// WithSharpness sets sharpness and returns the receiver so calls can be chained.
+// WithSharpness the amount that the shape overlaps with bordering subbands.
 func (x *CardioidDirectivityModelSubbandParameters) WithSharpness(sharpness float64) *CardioidDirectivityModelSubbandParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharpness:"), sharpness)
 	return x
 }
 
-// The frequency of the subband, in hertz.
+// Frequency the frequency of the subband, in hertz.
 func (x *CardioidDirectivityModelSubbandParameters) Frequency() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frequency"))
 	return _r
 }
 
+// SetFrequency wraps the corresponding Objective-C method.
 func (x *CardioidDirectivityModelSubbandParameters) SetFrequency(frequency float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
 }
 
-// The directivity pattern.
+// Pattern the directivity pattern.
 func (x *CardioidDirectivityModelSubbandParameters) Pattern() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("pattern"))
 	return _r
 }
 
+// SetPattern wraps the corresponding Objective-C method.
 func (x *CardioidDirectivityModelSubbandParameters) SetPattern(pattern float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPattern:"), pattern)
 }
 
-// The sharpness of the directivity pattern.
+// Sharpness the sharpness of the directivity pattern.
 func (x *CardioidDirectivityModelSubbandParameters) Sharpness() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("sharpness"))
 	return _r
 }
 
+// SetSharpness wraps the corresponding Objective-C method.
 func (x *CardioidDirectivityModelSubbandParameters) SetSharpness(sharpness float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharpness:"), sharpness)
 }

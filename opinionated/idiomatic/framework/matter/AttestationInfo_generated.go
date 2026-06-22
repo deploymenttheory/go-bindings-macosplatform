@@ -23,7 +23,8 @@ func AttestationInfoFromID(id objc.ID) *AttestationInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &AttestationInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AttestationInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func attestationInfoAdopt(id objc.ID) *AttestationInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &AttestationInfo{Handle: objref.Wrap(id)}
+	x := &AttestationInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *AttestationInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AttestationInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAttestationInfoWithChallengeNonceElementsElementsSignatureDacPaiCertificationDeclarationFirmwareInfo creates a new AttestationInfo.
 func NewAttestationInfoWithChallengeNonceElementsElementsSignatureDacPaiCertificationDeclarationFirmwareInfo(challenge obj.Object, nonce obj.Object, elements obj.Object, elementsSignature obj.Object, dac obj.Object, pai obj.Object, certificationDeclaration obj.Object, firmwareInfo obj.Object) *AttestationInfo {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AttestationInfo")), objc.RegisterName("alloc"))
@@ -63,122 +71,138 @@ func NewAttestationInfoWithChallengeNonceElementsElementsSignatureDacPaiCertific
 	return attestationInfoAdopt(_id)
 }
 
-// WithChallenge sets challenge and returns the receiver so calls can be chained.
+// WithChallenge sets the property and returns the receiver so calls can be chained.
 func (x *AttestationInfo) WithChallenge(challenge obj.Object) *AttestationInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChallenge:"), objref.IDOf(challenge))
 	return x
 }
 
-// WithNonce sets nonce and returns the receiver so calls can be chained.
+// WithNonce sets the property and returns the receiver so calls can be chained.
 func (x *AttestationInfo) WithNonce(nonce obj.Object) *AttestationInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNonce:"), objref.IDOf(nonce))
 	return x
 }
 
-// WithElements sets elements and returns the receiver so calls can be chained.
+// WithElements sets the property and returns the receiver so calls can be chained.
 func (x *AttestationInfo) WithElements(elements obj.Object) *AttestationInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElements:"), objref.IDOf(elements))
 	return x
 }
 
-// WithElementsSignature sets elementsSignature and returns the receiver so calls can be chained.
+// WithElementsSignature sets the property and returns the receiver so calls can be chained.
 func (x *AttestationInfo) WithElementsSignature(elementsSignature obj.Object) *AttestationInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElementsSignature:"), objref.IDOf(elementsSignature))
 	return x
 }
 
-// WithDac sets dac and returns the receiver so calls can be chained.
+// WithDac sets the property and returns the receiver so calls can be chained.
 func (x *AttestationInfo) WithDac(dac obj.Object) *AttestationInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDac:"), objref.IDOf(dac))
 	return x
 }
 
-// WithPai sets pai and returns the receiver so calls can be chained.
+// WithPai sets the property and returns the receiver so calls can be chained.
 func (x *AttestationInfo) WithPai(pai obj.Object) *AttestationInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPai:"), objref.IDOf(pai))
 	return x
 }
 
-// WithCertificationDeclaration sets certificationDeclaration and returns the receiver so calls can be chained.
+// WithCertificationDeclaration sets the property and returns the receiver so calls can be chained.
 func (x *AttestationInfo) WithCertificationDeclaration(certificationDeclaration obj.Object) *AttestationInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCertificationDeclaration:"), objref.IDOf(certificationDeclaration))
 	return x
 }
 
-// WithFirmwareInfo sets firmwareInfo and returns the receiver so calls can be chained.
+// WithFirmwareInfo sets the property and returns the receiver so calls can be chained.
 func (x *AttestationInfo) WithFirmwareInfo(firmwareInfo obj.Object) *AttestationInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirmwareInfo:"), objref.IDOf(firmwareInfo))
 	return x
 }
 
+// Challenge wraps the corresponding Objective-C method.
 func (x *AttestationInfo) Challenge() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("challenge"))
 	return obj.Wrap(_r)
 }
 
+// SetChallenge wraps the corresponding Objective-C method.
 func (x *AttestationInfo) SetChallenge(challenge obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChallenge:"), objref.IDOf(challenge))
 }
 
+// Nonce wraps the corresponding Objective-C method.
 func (x *AttestationInfo) Nonce() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nonce"))
 	return obj.Wrap(_r)
 }
 
+// SetNonce wraps the corresponding Objective-C method.
 func (x *AttestationInfo) SetNonce(nonce obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNonce:"), objref.IDOf(nonce))
 }
 
+// Elements wraps the corresponding Objective-C method.
 func (x *AttestationInfo) Elements() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elements"))
 	return obj.Wrap(_r)
 }
 
+// SetElements wraps the corresponding Objective-C method.
 func (x *AttestationInfo) SetElements(elements obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElements:"), objref.IDOf(elements))
 }
 
+// ElementsSignature wraps the corresponding Objective-C method.
 func (x *AttestationInfo) ElementsSignature() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementsSignature"))
 	return obj.Wrap(_r)
 }
 
+// SetElementsSignature wraps the corresponding Objective-C method.
 func (x *AttestationInfo) SetElementsSignature(elementsSignature obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElementsSignature:"), objref.IDOf(elementsSignature))
 }
 
+// Dac wraps the corresponding Objective-C method.
 func (x *AttestationInfo) Dac() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dac"))
 	return obj.Wrap(_r)
 }
 
+// SetDac wraps the corresponding Objective-C method.
 func (x *AttestationInfo) SetDac(dac obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDac:"), objref.IDOf(dac))
 }
 
+// Pai wraps the corresponding Objective-C method.
 func (x *AttestationInfo) Pai() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pai"))
 	return obj.Wrap(_r)
 }
 
+// SetPai wraps the corresponding Objective-C method.
 func (x *AttestationInfo) SetPai(pai obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPai:"), objref.IDOf(pai))
 }
 
+// CertificationDeclaration wraps the corresponding Objective-C method.
 func (x *AttestationInfo) CertificationDeclaration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificationDeclaration"))
 	return obj.Wrap(_r)
 }
 
+// SetCertificationDeclaration wraps the corresponding Objective-C method.
 func (x *AttestationInfo) SetCertificationDeclaration(certificationDeclaration obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCertificationDeclaration:"), objref.IDOf(certificationDeclaration))
 }
 
+// FirmwareInfo wraps the corresponding Objective-C method.
 func (x *AttestationInfo) FirmwareInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firmwareInfo"))
 	return obj.Wrap(_r)
 }
 
+// SetFirmwareInfo wraps the corresponding Objective-C method.
 func (x *AttestationInfo) SetFirmwareInfo(firmwareInfo obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirmwareInfo:"), objref.IDOf(firmwareInfo))
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the media sample data storage file.
-//
 // MediaDataStorage is an idiomatic wrapper over the Objective-C class AVMediaDataStorage.
+//
+// An object that represents the media sample data storage file.
 type MediaDataStorage struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MediaDataStorageFromID(id objc.ID) *MediaDataStorage {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaDataStorage{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MediaDataStorage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mediaDataStorageAdopt(id objc.ID) *MediaDataStorage {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaDataStorage{Handle: objref.Wrap(id)}
+	x := &MediaDataStorage{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,16 +60,20 @@ func (x *MediaDataStorage) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a media data storage object associated with a file URL.
-//
-// NewMediaDataStorageWithURLOptions creates a new MediaDataStorage.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MediaDataStorage) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMediaDataStorageWithURLOptions creates a media data storage object associated with a file URL.
 func NewMediaDataStorageWithURLOptions(uRL string, options obj.Object) *MediaDataStorage {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMediaDataStorage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), rt.FileURL(uRL), objref.IDOf(options))
 	return mediaDataStorageAdopt(_id)
 }
 
-// Returns the URL used to initialize the receiver.
+// URL returns the URL used to initialize the receiver.
 func (x *MediaDataStorage) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)

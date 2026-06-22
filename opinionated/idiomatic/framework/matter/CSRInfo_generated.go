@@ -23,7 +23,8 @@ func CSRInfoFromID(id objc.ID) *CSRInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &CSRInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CSRInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func cSRInfoAdopt(id objc.ID) *CSRInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &CSRInfo{Handle: objref.Wrap(id)}
+	x := &CSRInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *CSRInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CSRInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCSRInfoWithNonceElementsElementsSignatureCsr creates a new CSRInfo.
 func NewCSRInfoWithNonceElementsElementsSignatureCsr(nonce obj.Object, elements obj.Object, elementsSignature obj.Object, csr obj.Object) *CSRInfo {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CSRInfo")), objc.RegisterName("alloc"))
@@ -63,62 +71,70 @@ func NewCSRInfoWithNonceElementsElementsSignatureCsr(nonce obj.Object, elements 
 	return cSRInfoAdopt(_id)
 }
 
-// WithNonce sets nonce and returns the receiver so calls can be chained.
+// WithNonce sets the property and returns the receiver so calls can be chained.
 func (x *CSRInfo) WithNonce(nonce obj.Object) *CSRInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNonce:"), objref.IDOf(nonce))
 	return x
 }
 
-// WithElements sets elements and returns the receiver so calls can be chained.
+// WithElements sets the property and returns the receiver so calls can be chained.
 func (x *CSRInfo) WithElements(elements obj.Object) *CSRInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElements:"), objref.IDOf(elements))
 	return x
 }
 
-// WithElementsSignature sets elementsSignature and returns the receiver so calls can be chained.
+// WithElementsSignature sets the property and returns the receiver so calls can be chained.
 func (x *CSRInfo) WithElementsSignature(elementsSignature obj.Object) *CSRInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElementsSignature:"), objref.IDOf(elementsSignature))
 	return x
 }
 
-// WithCsr sets csr and returns the receiver so calls can be chained.
+// WithCsr sets the property and returns the receiver so calls can be chained.
 func (x *CSRInfo) WithCsr(csr obj.Object) *CSRInfo {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCsr:"), objref.IDOf(csr))
 	return x
 }
 
+// Nonce wraps the corresponding Objective-C method.
 func (x *CSRInfo) Nonce() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nonce"))
 	return obj.Wrap(_r)
 }
 
+// SetNonce wraps the corresponding Objective-C method.
 func (x *CSRInfo) SetNonce(nonce obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNonce:"), objref.IDOf(nonce))
 }
 
+// Elements wraps the corresponding Objective-C method.
 func (x *CSRInfo) Elements() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elements"))
 	return obj.Wrap(_r)
 }
 
+// SetElements wraps the corresponding Objective-C method.
 func (x *CSRInfo) SetElements(elements obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElements:"), objref.IDOf(elements))
 }
 
+// ElementsSignature wraps the corresponding Objective-C method.
 func (x *CSRInfo) ElementsSignature() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementsSignature"))
 	return obj.Wrap(_r)
 }
 
+// SetElementsSignature wraps the corresponding Objective-C method.
 func (x *CSRInfo) SetElementsSignature(elementsSignature obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElementsSignature:"), objref.IDOf(elementsSignature))
 }
 
+// Csr wraps the corresponding Objective-C method.
 func (x *CSRInfo) Csr() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("csr"))
 	return obj.Wrap(_r)
 }
 
+// SetCsr wraps the corresponding Objective-C method.
 func (x *CSRInfo) SetCsr(csr obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCsr:"), objref.IDOf(csr))
 }

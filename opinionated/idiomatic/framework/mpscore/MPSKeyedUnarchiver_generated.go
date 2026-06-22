@@ -23,7 +23,8 @@ func KeyedUnarchiverFromID(id objc.ID) *KeyedUnarchiver {
 	if id == 0 {
 		return nil
 	}
-	x := &KeyedUnarchiver{Handle: objref.Wrap(purego.Retain(id))}
+	x := &KeyedUnarchiver{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func keyedUnarchiverAdopt(id objc.ID) *KeyedUnarchiver {
 	if id == 0 {
 		return nil
 	}
-	x := &KeyedUnarchiver{Handle: objref.Wrap(id)}
+	x := &KeyedUnarchiver{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *KeyedUnarchiver) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *KeyedUnarchiver) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *KeyedUnarchiver) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewKeyedUnarchiver creates a new KeyedUnarchiver.

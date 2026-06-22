@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a unique identifier for a virtual machine.
-//
 // GenericMachineIdentifier is an idiomatic wrapper over the Objective-C class VZGenericMachineIdentifier.
+//
+// An object that represents a unique identifier for a virtual machine.
 type GenericMachineIdentifier struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func GenericMachineIdentifierFromID(id objc.ID) *GenericMachineIdentifier {
 	if id == 0 {
 		return nil
 	}
-	x := &GenericMachineIdentifier{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GenericMachineIdentifier{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func genericMachineIdentifierAdopt(id objc.ID) *GenericMachineIdentifier {
 	if id == 0 {
 		return nil
 	}
-	x := &GenericMachineIdentifier{Handle: objref.Wrap(id)}
+	x := &GenericMachineIdentifier{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +60,26 @@ func (x *GenericMachineIdentifier) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GenericMachineIdentifier) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewGenericMachineIdentifier creates a new GenericMachineIdentifier.
 func NewGenericMachineIdentifier() *GenericMachineIdentifier {
 	_id := objc.Send[objc.ID](objc.ID(_class("VZGenericMachineIdentifier")), objc.RegisterName("new"))
 	return genericMachineIdentifierAdopt(_id)
 }
 
-// Creates a new unique identifier for a VM with the provided data.
-//
-// NewGenericMachineIdentifierWithDataRepresentation creates a new GenericMachineIdentifier.
+// NewGenericMachineIdentifierWithDataRepresentation creates a new unique identifier for a VM with the provided data.
 func NewGenericMachineIdentifierWithDataRepresentation(dataRepresentation obj.Object) *GenericMachineIdentifier {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZGenericMachineIdentifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:"), objref.IDOf(dataRepresentation))
 	return genericMachineIdentifierAdopt(_id)
 }
 
+// DataRepresentation wraps the corresponding Objective-C method.
 func (x *GenericMachineIdentifier) DataRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
 	return obj.Wrap(_r)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides browsers with the ability to discover associations between an app and a website.
-//
 // UniversalLink is an idiomatic wrapper over the Objective-C class SFUniversalLink.
+//
+// An object that provides browsers with the ability to discover associations between an app and a website.
 type UniversalLink struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func UniversalLinkFromID(id objc.ID) *UniversalLink {
 	if id == 0 {
 		return nil
 	}
-	x := &UniversalLink{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UniversalLink{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func universalLinkAdopt(id objc.ID) *UniversalLink {
 	if id == 0 {
 		return nil
 	}
-	x := &UniversalLink{Handle: objref.Wrap(id)}
+	x := &UniversalLink{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,41 +60,44 @@ func (x *UniversalLink) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a universal link object with the URL.
-//
-// NewUniversalLinkWithWebpageURL creates a new UniversalLink.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UniversalLink) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewUniversalLinkWithWebpageURL creates a universal link object with the URL.
 func NewUniversalLinkWithWebpageURL(url string) *UniversalLink {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SFUniversalLink")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWebpageURL:"), rt.FileURL(url))
 	return universalLinkAdopt(_id)
 }
 
-// A flag that indicates whether the universal link is enabled.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a flag that indicates whether the universal link is enabled.
 func (x *UniversalLink) WithEnabled(enabled bool) *UniversalLink {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The URL passed when initializing the receiver.
+// WebpageURL the URL passed when initializing the receiver.
 func (x *UniversalLink) WebpageURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webpageURL"))
 	return obj.Wrap(_r)
 }
 
-// The file URL to the application that can handle this universal link.
+// ApplicationURL the file URL to the application that can handle this universal link.
 func (x *UniversalLink) ApplicationURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationURL"))
 	return obj.Wrap(_r)
 }
 
-// Whether or not this universal link is enabled. If it is enabled, the URL will open in the application instead of the browser. Set this property when the user indicates they wish to enable or disable this universal link.
+// IsEnabled whether or not this universal link is enabled. If it is enabled, the URL will open in the application instead of the browser. Set this property when the user indicates they wish to enable or disable this universal link.
 func (x *UniversalLink) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r
 }
 
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *UniversalLink) SetEnabled(enabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }

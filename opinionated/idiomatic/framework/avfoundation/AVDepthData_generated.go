@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container for per-pixel distance or disparity information captured by compatible camera devices.
-//
 // DepthData is an idiomatic wrapper over the Objective-C class AVDepthData.
+//
+// A container for per-pixel distance or disparity information captured by compatible camera devices.
 type DepthData struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DepthDataFromID(id objc.ID) *DepthData {
 	if id == 0 {
 		return nil
 	}
-	x := &DepthData{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DepthData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func depthDataAdopt(id objc.ID) *DepthData {
 	if id == 0 {
 		return nil
 	}
-	x := &DepthData{Handle: objref.Wrap(id)}
+	x := &DepthData{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *DepthData) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DepthData) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDepthData creates a new DepthData.
 func NewDepthData() *DepthData {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVDepthData")), objc.RegisterName("new"))
 	return depthDataAdopt(_id)
 }
 
-// Returns a derivative depth data object by converting the depth data map to the specified data type.
+// DepthDataByConvertingToDepthDataType returns a derivative depth data object by converting the depth data map to the specified data type.
 func (x *DepthData) DepthDataByConvertingToDepthDataType(depthDataType int) *DepthData {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("depthDataByConvertingToDepthDataType:"), depthDataType)
 	return DepthDataFromID(_r)
 }
 
-// Returns a dictionary representation of the depth data suitable for writing into an image file.
+// DictionaryRepresentationForAuxiliaryDataType returns a dictionary representation of the depth data suitable for writing into an image file.
 func (x *DepthData) DictionaryRepresentationForAuxiliaryDataType(outAuxDataType string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentationForAuxiliaryDataType:"), purego.NSString(outAuxDataType))
 	return obj.Wrap(_r)
 }
 
-// Specifies which depth data pixel formats may be used with depthDataByConvertingToDepthDataType:. This property presents the available pixel format types as an array of NSNumbers, each wrapping an OSType (CV pixel format type).
+// AvailableDepthDataTypes specifies which depth data pixel formats may be used with depthDataByConvertingToDepthDataType:. This property presents the available pixel format types as an array of NSNumbers, each wrapping an OSType (CV pixel format type).
 //
 // AvailableDepthDataTypes returns the collection as a Go slice.
 func (x *DepthData) AvailableDepthDataTypes() []obj.Object {
@@ -84,31 +92,31 @@ func (x *DepthData) AvailableDepthDataTypes() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Specifies the pixel format type of this depth data object's internal map. One of kCVPixelFormatType_DisparityFloat16, kCVPixelFormatType_DisparityFloat32, kCVPixelFormatType_DepthFloat16, or kCVPixelFormatType_DepthFloat32.
+// DepthDataType specifies the pixel format type of this depth data object's internal map. One of kCVPixelFormatType_DisparityFloat16, kCVPixelFormatType_DisparityFloat32, kCVPixelFormatType_DepthFloat16, or kCVPixelFormatType_DepthFloat32.
 func (x *DepthData) DepthDataType() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("depthDataType"))
 	return _r
 }
 
-// Specifies the overall quality of the depth data map's values. See AVDepthDataQuality documentation for more information.
+// DepthDataQuality specifies the overall quality of the depth data map's values. See AVDepthDataQuality documentation for more information.
 func (x *DepthData) DepthDataQuality() DepthDataQuality {
 	_r := objc.Send[DepthDataQuality](objref.IDOf(x), objc.RegisterName("depthDataQuality"))
 	return _r
 }
 
-// Specifies whether the depth data pixel buffer map contains filtered (hole-filled) data. By setting either AVCaptureDepthDataOutput's filteringEnabled property or AVCapturePhotoSettings' depthDataFiltered property to YES, the resulting depth data are filtered to remove invalid pixel values that may be present due to a variety of factors including low light and lens occlusion. If you've requested depth data filtering, all depth data holes are filled. Note that filtering the depth data makes it more usable for applying effects, but alters the data such that it may no longer be suitable for computer vision tasks. Unfiltered depth maps present missing data as NaN.
+// IsDepthDataFiltered specifies whether the depth data pixel buffer map contains filtered (hole-filled) data. By setting either AVCaptureDepthDataOutput's filteringEnabled property or AVCapturePhotoSettings' depthDataFiltered property to YES, the resulting depth data are filtered to remove invalid pixel values that may be present due to a variety of factors including low light and lens occlusion. If you've requested depth data filtering, all depth data holes are filled. Note that filtering the depth data makes it more usable for applying effects, but alters the data such that it may no longer be suitable for computer vision tasks. Unfiltered depth maps present missing data as NaN.
 func (x *DepthData) IsDepthDataFiltered() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDepthDataFiltered"))
 	return _r
 }
 
-// Specifies the accuracy of the units in the depth data map's values. See AVDepthDataAccuracy documentation for more information.
+// DepthDataAccuracy specifies the accuracy of the units in the depth data map's values. See AVDepthDataAccuracy documentation for more information.
 func (x *DepthData) DepthDataAccuracy() DepthDataAccuracy {
 	_r := objc.Send[DepthDataAccuracy](objref.IDOf(x), objc.RegisterName("depthDataAccuracy"))
 	return _r
 }
 
-// The calibration data of the camera with which AVDepthData map's values are aligned. See AVCameraCalibrationData for more information. This property may return nil if no camera calibration data is available for the depth data.
+// CameraCalibrationData the calibration data of the camera with which AVDepthData map's values are aligned. See AVCameraCalibrationData for more information. This property may return nil if no camera calibration data is available for the depth data.
 func (x *DepthData) CameraCalibrationData() *CameraCalibrationData {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cameraCalibrationData"))
 	return CameraCalibrationDataFromID(_r)

@@ -12,91 +12,151 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams is an idiomatic wrapper over the Objective-C class MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams.
-type MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams struct {
+// MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams is an idiomatic wrapper over the Objective-C class MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams.
+//
+// MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams is an abstract base — you do not construct it directly. Construct one of [MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams] and pass it where a MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams is accepted.
+type MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams struct {
 	objref.Handle
 }
 
-// MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsFromID adopts an existing Objective-C object as a MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams
+// MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsFromID adopts an existing Objective-C object as a MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams
 // (nil for 0), retaining it and registering a release finalizer.
-func MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsFromID(id objc.ID) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
+func MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsFromID(id objc.ID) *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams {
 	if id == 0 {
 		return nil
 	}
-	x := &MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
 
-// mTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsAdopt wraps an Objective-C object that this code just created as a
-// MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams (nil for 0). The caller already owns the object's reference,
+// mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsAdopt wraps an Objective-C object that this code just created as a
+// MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams (nil for 0). The caller already owns the object's reference,
 // so this does not add another; it only arranges for the object to be released
 // once Go stops using it. Constructors use it.
-func mTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsAdopt(id objc.ID) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
+func mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsAdopt(id objc.ID) *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams {
 	if id == 0 {
 		return nil
 	}
-	x := &MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams{Handle: objref.Wrap(id)}
+	x := &MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
 // Description returns the object's -description text.
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) Description() string {
+func (x *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) Description() string {
 	return rt.Description(objref.IDOf(x))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) IsEqual(other obj.Object) bool {
+func (x *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) IsEqual(other obj.Object) bool {
 	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) IsKind(className string) bool {
+func (x *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams creates a new MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams.
-func NewMTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams() *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams")), objc.RegisterName("new"))
-	return mTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithUpdateToken sets updateToken and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithUpdateToken(updateToken obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
+// WithUpdateToken sets the property and returns the receiver so calls can be chained.
+func (x *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) WithUpdateToken(updateToken obj.Object) *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpdateToken:"), objref.IDOf(updateToken))
 	return x
 }
 
-// WithNewVersion sets newVersion and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithNewVersion(newVersion obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
+// WithNewVersion sets the property and returns the receiver so calls can be chained.
+func (x *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) WithNewVersion(newVersion obj.Object) *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewVersion:"), objref.IDOf(newVersion))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsable is the interface implemented by [MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams], for mocking and DI.
-type MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsable interface {
-	obj.Object
-	WithUpdateToken(updateToken obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams
-	WithNewVersion(newVersion obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams
+// UpdateToken wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) UpdateToken() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateToken"))
+	return obj.Wrap(_r)
 }
 
-var _ MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsable = (*MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams)(nil)
+// SetUpdateToken wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) SetUpdateToken(updateToken obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpdateToken:"), objref.IDOf(updateToken))
+}
+
+// GetNewVersion wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) GetNewVersion() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewVersion"))
+	return obj.Wrap(_r)
+}
+
+// SetNewVersion wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) SetNewVersion(newVersion obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewVersion:"), objref.IDOf(newVersion))
+}
+
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
+}
+
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+}
+
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
+}
+
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+}
+
+// MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsable is the interface implemented by [MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams], for mocking and DI.
+type MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsable interface {
+	obj.Object
+	WithUpdateToken(updateToken obj.Object) *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams
+	WithNewVersion(newVersion obj.Object) *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams
+	UpdateToken() obj.Object
+	SetUpdateToken(updateToken obj.Object)
+	GetNewVersion() obj.Object
+	SetNewVersion(newVersion obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
+}
+
+var _ MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsable = (*MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams)(nil)
+
+// isMTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams marks MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams — and, by embedding promotion, its
+// subclasses — as a member of the MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) isMTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams() {
+}
+
+var _ MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsProvider = (*MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams)(nil)

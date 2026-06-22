@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMHTMLTableCellElement is an idiomatic wrapper over the Objective-C class DOMHTMLTableCellElement.
+//
+// It embeds [DOMHTMLElement], promoting that type's methods.
 type DOMHTMLTableCellElement struct {
-	objref.Handle
+	DOMHTMLElement
 }
 
 // DOMHTMLTableCellElementFromID adopts an existing Objective-C object as a DOMHTMLTableCellElement
@@ -23,7 +24,8 @@ func DOMHTMLTableCellElementFromID(id objc.ID) *DOMHTMLTableCellElement {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMHTMLTableCellElement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMHTMLTableCellElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMHTMLTableCellElementAdopt(id objc.ID) *DOMHTMLTableCellElement {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMHTMLTableCellElement{Handle: objref.Wrap(id)}
+	x := &DOMHTMLTableCellElement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMHTMLTableCellElement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMHTMLTableCellElement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMHTMLTableCellElement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMHTMLTableCellElement creates a new DOMHTMLTableCellElement.
@@ -62,197 +50,199 @@ func NewDOMHTMLTableCellElement() *DOMHTMLTableCellElement {
 	return dOMHTMLTableCellElementAdopt(_id)
 }
 
-// WithAlign sets align and returns the receiver so calls can be chained.
+// WithAlign sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithAlign(align string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlign:"), purego.NSString(align))
 	return x
 }
 
-// WithAxis sets axis and returns the receiver so calls can be chained.
+// WithAxis sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithAxis(axis string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAxis:"), purego.NSString(axis))
 	return x
 }
 
-// WithBgColor sets bgColor and returns the receiver so calls can be chained.
+// WithBgColor sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithBgColor(bgColor string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBgColor:"), purego.NSString(bgColor))
 	return x
 }
 
-// WithCh sets ch and returns the receiver so calls can be chained.
+// WithCh sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithCh(ch string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCh:"), purego.NSString(ch))
 	return x
 }
 
-// WithChOff sets chOff and returns the receiver so calls can be chained.
+// WithChOff sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithChOff(chOff string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChOff:"), purego.NSString(chOff))
 	return x
 }
 
-// WithColSpan sets colSpan and returns the receiver so calls can be chained.
+// WithColSpan sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithColSpan(colSpan int) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColSpan:"), colSpan)
 	return x
 }
 
-// WithRowSpan sets rowSpan and returns the receiver so calls can be chained.
+// WithRowSpan sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithRowSpan(rowSpan int) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowSpan:"), rowSpan)
 	return x
 }
 
-// WithHeaders sets headers and returns the receiver so calls can be chained.
+// WithHeaders sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithHeaders(headers string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaders:"), purego.NSString(headers))
 	return x
 }
 
-// WithHeight sets height and returns the receiver so calls can be chained.
+// WithHeight sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithHeight(height string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), purego.NSString(height))
 	return x
 }
 
-// WithNoWrap sets noWrap and returns the receiver so calls can be chained.
+// WithNoWrap sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithNoWrap(noWrap bool) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNoWrap:"), noWrap)
 	return x
 }
 
-// WithVAlign sets vAlign and returns the receiver so calls can be chained.
+// WithVAlign sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithVAlign(vAlign string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVAlign:"), purego.NSString(vAlign))
 	return x
 }
 
-// WithWidth sets width and returns the receiver so calls can be chained.
+// WithWidth sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithWidth(width string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), purego.NSString(width))
 	return x
 }
 
-// WithAbbr sets abbr and returns the receiver so calls can be chained.
+// WithAbbr sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithAbbr(abbr string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAbbr:"), purego.NSString(abbr))
 	return x
 }
 
-// WithScope sets scope and returns the receiver so calls can be chained.
+// WithScope sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithScope(scope string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScope:"), purego.NSString(scope))
 	return x
 }
 
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithTitle(title string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// WithLang sets lang and returns the receiver so calls can be chained.
+// WithLang sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithLang(lang string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return x
 }
 
-// WithDir sets dir and returns the receiver so calls can be chained.
+// WithDir sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithDir(dir string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return x
 }
 
-// WithTabIndex sets tabIndex and returns the receiver so calls can be chained.
+// WithTabIndex sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithTabIndex(tabIndex int) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
 	return x
 }
 
-// WithAccessKey sets accessKey and returns the receiver so calls can be chained.
+// WithAccessKey sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithAccessKey(accessKey string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return x
 }
 
-// WithInnerText sets innerText and returns the receiver so calls can be chained.
+// WithInnerText sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithInnerText(innerText string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return x
 }
 
-// WithOuterText sets outerText and returns the receiver so calls can be chained.
+// WithOuterText sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithOuterText(outerText string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return x
 }
 
-// WithContentEditable sets contentEditable and returns the receiver so calls can be chained.
+// WithContentEditable sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithContentEditable(contentEditable string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return x
 }
 
-// WithIdName sets idName and returns the receiver so calls can be chained.
+// WithIdName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithIdName(idName string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return x
 }
 
-// WithScrollLeft sets scrollLeft and returns the receiver so calls can be chained.
+// WithScrollLeft sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithScrollLeft(scrollLeft int) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return x
 }
 
-// WithScrollTop sets scrollTop and returns the receiver so calls can be chained.
+// WithScrollTop sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithScrollTop(scrollTop int) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
 	return x
 }
 
-// WithInnerHTML sets innerHTML and returns the receiver so calls can be chained.
+// WithInnerHTML sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithInnerHTML(innerHTML string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return x
 }
 
-// WithOuterHTML sets outerHTML and returns the receiver so calls can be chained.
+// WithOuterHTML sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithOuterHTML(outerHTML string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return x
 }
 
-// WithClassName sets className and returns the receiver so calls can be chained.
+// WithClassName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithClassName(className string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return x
 }
 
-// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithNodeValue(nodeValue string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets prefix and returns the receiver so calls can be chained.
+// WithPrefix sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithPrefix(prefix string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets textContent and returns the receiver so calls can be chained.
+// WithTextContent sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLTableCellElement) WithTextContent(textContent string) *DOMHTMLTableCellElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
+// CellIndex wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) CellIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cellIndex"))
 	return _r
 }
 
+// Align wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) Align() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("align"))
 	if _r == 0 {
@@ -261,10 +251,12 @@ func (x *DOMHTMLTableCellElement) Align() string {
 	return purego.GoString(_r)
 }
 
+// SetAlign wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) SetAlign(align string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlign:"), purego.NSString(align))
 }
 
+// Axis wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) Axis() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("axis"))
 	if _r == 0 {
@@ -273,10 +265,12 @@ func (x *DOMHTMLTableCellElement) Axis() string {
 	return purego.GoString(_r)
 }
 
+// SetAxis wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) SetAxis(axis string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAxis:"), purego.NSString(axis))
 }
 
+// BgColor wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) BgColor() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bgColor"))
 	if _r == 0 {
@@ -285,10 +279,12 @@ func (x *DOMHTMLTableCellElement) BgColor() string {
 	return purego.GoString(_r)
 }
 
+// SetBgColor wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) SetBgColor(bgColor string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBgColor:"), purego.NSString(bgColor))
 }
 
+// Ch wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) Ch() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ch"))
 	if _r == 0 {
@@ -297,10 +293,12 @@ func (x *DOMHTMLTableCellElement) Ch() string {
 	return purego.GoString(_r)
 }
 
+// SetCh wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) SetCh(ch string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCh:"), purego.NSString(ch))
 }
 
+// ChOff wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) ChOff() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("chOff"))
 	if _r == 0 {
@@ -309,28 +307,34 @@ func (x *DOMHTMLTableCellElement) ChOff() string {
 	return purego.GoString(_r)
 }
 
+// SetChOff wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) SetChOff(chOff string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChOff:"), purego.NSString(chOff))
 }
 
+// ColSpan wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) ColSpan() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("colSpan"))
 	return _r
 }
 
+// SetColSpan wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) SetColSpan(colSpan int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColSpan:"), colSpan)
 }
 
+// RowSpan wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) RowSpan() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowSpan"))
 	return _r
 }
 
+// SetRowSpan wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) SetRowSpan(rowSpan int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowSpan:"), rowSpan)
 }
 
+// Headers wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) Headers() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("headers"))
 	if _r == 0 {
@@ -339,10 +343,12 @@ func (x *DOMHTMLTableCellElement) Headers() string {
 	return purego.GoString(_r)
 }
 
+// SetHeaders wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) SetHeaders(headers string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaders:"), purego.NSString(headers))
 }
 
+// Height wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) Height() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("height"))
 	if _r == 0 {
@@ -351,19 +357,23 @@ func (x *DOMHTMLTableCellElement) Height() string {
 	return purego.GoString(_r)
 }
 
+// SetHeight wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) SetHeight(height string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), purego.NSString(height))
 }
 
+// NoWrap wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) NoWrap() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("noWrap"))
 	return _r
 }
 
+// SetNoWrap wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) SetNoWrap(noWrap bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNoWrap:"), noWrap)
 }
 
+// VAlign wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) VAlign() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vAlign"))
 	if _r == 0 {
@@ -372,10 +382,12 @@ func (x *DOMHTMLTableCellElement) VAlign() string {
 	return purego.GoString(_r)
 }
 
+// SetVAlign wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) SetVAlign(vAlign string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVAlign:"), purego.NSString(vAlign))
 }
 
+// Width wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) Width() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("width"))
 	if _r == 0 {
@@ -384,10 +396,12 @@ func (x *DOMHTMLTableCellElement) Width() string {
 	return purego.GoString(_r)
 }
 
+// SetWidth wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) SetWidth(width string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), purego.NSString(width))
 }
 
+// Abbr wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) Abbr() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("abbr"))
 	if _r == 0 {
@@ -396,10 +410,12 @@ func (x *DOMHTMLTableCellElement) Abbr() string {
 	return purego.GoString(_r)
 }
 
+// SetAbbr wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) SetAbbr(abbr string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAbbr:"), purego.NSString(abbr))
 }
 
+// Scope wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) Scope() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scope"))
 	if _r == 0 {
@@ -408,6 +424,7 @@ func (x *DOMHTMLTableCellElement) Scope() string {
 	return purego.GoString(_r)
 }
 
+// SetScope wraps the corresponding Objective-C method.
 func (x *DOMHTMLTableCellElement) SetScope(scope string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScope:"), purego.NSString(scope))
 }
@@ -478,3 +495,13 @@ type DOMHTMLTableCellElementable interface {
 }
 
 var _ DOMHTMLTableCellElementable = (*DOMHTMLTableCellElement)(nil)
+
+var _ DOMHTMLElementProvider = (*DOMHTMLTableCellElement)(nil)
+
+var _ DOMElementProvider = (*DOMHTMLTableCellElement)(nil)
+
+var _ DOMNodeProvider = (*DOMHTMLTableCellElement)(nil)
+
+var _ DOMObjectProvider = (*DOMHTMLTableCellElement)(nil)
+
+var _ WebScriptObjectProvider = (*DOMHTMLTableCellElement)(nil)

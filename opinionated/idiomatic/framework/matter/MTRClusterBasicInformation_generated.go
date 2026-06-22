@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterBasicInformation is an idiomatic wrapper over the Objective-C class MTRClusterBasicInformation.
+//
+// MTRClusterBasicInformation is an abstract base — you do not construct it directly. Construct one of [MTRClusterBasic] and pass it where a MTRClusterBasicInformation is accepted.
 type MTRClusterBasicInformation struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterBasicInformationFromID adopts an existing Objective-C object as a MTRClusterBasicInformation
@@ -23,7 +24,8 @@ func MTRClusterBasicInformationFromID(id objc.ID) *MTRClusterBasicInformation {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterBasicInformation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterBasicInformation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,194 +38,212 @@ func mTRClusterBasicInformationAdopt(id objc.ID) *MTRClusterBasicInformation {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterBasicInformation{Handle: objref.Wrap(id)}
+	x := &MTRClusterBasicInformation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterBasicInformation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterBasicInformation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterBasicInformation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterBasicInformationWithDeviceEndpointIDQueue creates a new MTRClusterBasicInformation.
+// NewMTRClusterBasicInformationWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterBasicInformationWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterBasicInformation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBasicInformation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterBasicInformationAdopt(_id)
 }
 
+// ReadAttributeDataModelRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeDataModelRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDataModelRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeVendorNameWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeVendorNameWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeVendorNameWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeVendorIDWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeVendorIDWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeVendorIDWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeProductNameWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeProductNameWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeProductNameWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeProductIDWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeProductIDWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeProductIDWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeNodeLabelWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeNodeLabelWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNodeLabelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeNodeLabelWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) WriteAttributeNodeLabelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNodeLabelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeNodeLabelWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) WriteAttributeNodeLabelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNodeLabelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeLocationWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeLocationWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLocationWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeLocationWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) WriteAttributeLocationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLocationWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeLocationWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) WriteAttributeLocationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLocationWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeHardwareVersionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeHardwareVersionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeHardwareVersionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeHardwareVersionStringWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeHardwareVersionStringWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeHardwareVersionStringWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeSoftwareVersionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeSoftwareVersionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSoftwareVersionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeSoftwareVersionStringWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeSoftwareVersionStringWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSoftwareVersionStringWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeManufacturingDateWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeManufacturingDateWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeManufacturingDateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributePartNumberWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributePartNumberWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePartNumberWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeProductURLWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeProductURLWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeProductURLWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeProductLabelWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeProductLabelWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeProductLabelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeSerialNumberWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeSerialNumberWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSerialNumberWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeLocalConfigDisabledWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeLocalConfigDisabledWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLocalConfigDisabledWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeLocalConfigDisabledWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) WriteAttributeLocalConfigDisabledWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLocalConfigDisabledWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeLocalConfigDisabledWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) WriteAttributeLocalConfigDisabledWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLocalConfigDisabledWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeReachableWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeReachableWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeReachableWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeUniqueIDWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeUniqueIDWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUniqueIDWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeCapabilityMinimaWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeCapabilityMinimaWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCapabilityMinimaWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeProductAppearanceWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeProductAppearanceWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeProductAppearanceWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeSpecificationVersionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeSpecificationVersionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSpecificationVersionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMaxPathsPerInvokeWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeMaxPathsPerInvokeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxPathsPerInvokeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterBasicInformation) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -269,3 +289,14 @@ type MTRClusterBasicInformationable interface {
 }
 
 var _ MTRClusterBasicInformationable = (*MTRClusterBasicInformation)(nil)
+
+// isMTRClusterBasicInformation marks MTRClusterBasicInformation — and, by embedding promotion, its
+// subclasses — as a member of the MTRClusterBasicInformation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRClusterBasicInformation) isMTRClusterBasicInformation() {}
+
+var _ MTRClusterBasicInformationProvider = (*MTRClusterBasicInformation)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterBasicInformation)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterBasicInformation)(nil)

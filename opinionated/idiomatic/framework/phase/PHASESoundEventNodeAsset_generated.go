@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A template object for sounds that can play in reaction to environmental state.
-//
 // SoundEventNodeAsset is an idiomatic wrapper over the Objective-C class PHASESoundEventNodeAsset.
+//
+// It embeds [Asset], promoting that type's methods.
+//
+// A template object for sounds that can play in reaction to environmental state.
 type SoundEventNodeAsset struct {
-	objref.Handle
+	Asset
 }
 
 // SoundEventNodeAssetFromID adopts an existing Objective-C object as a SoundEventNodeAsset
@@ -25,7 +26,8 @@ func SoundEventNodeAssetFromID(id objc.ID) *SoundEventNodeAsset {
 	if id == 0 {
 		return nil
 	}
-	x := &SoundEventNodeAsset{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SoundEventNodeAsset{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func soundEventNodeAssetAdopt(id objc.ID) *SoundEventNodeAsset {
 	if id == 0 {
 		return nil
 	}
-	x := &SoundEventNodeAsset{Handle: objref.Wrap(id)}
+	x := &SoundEventNodeAsset{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SoundEventNodeAsset) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SoundEventNodeAsset) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SoundEventNodeAsset) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSoundEventNodeAsset creates a new SoundEventNodeAsset.
@@ -70,3 +58,5 @@ type SoundEventNodeAssetable interface {
 }
 
 var _ SoundEventNodeAssetable = (*SoundEventNodeAsset)(nil)
+
+var _ AssetProvider = (*SoundEventNodeAsset)(nil)

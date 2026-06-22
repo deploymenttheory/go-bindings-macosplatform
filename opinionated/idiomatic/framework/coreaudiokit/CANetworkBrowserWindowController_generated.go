@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A window controller that displays available network audio devices.
-//
 // CANetworkBrowserWindowController is an idiomatic wrapper over the Objective-C class CANetworkBrowserWindowController.
+//
+// A window controller that displays available network audio devices.
 type CANetworkBrowserWindowController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CANetworkBrowserWindowControllerFromID(id objc.ID) *CANetworkBrowserWindowC
 	if id == 0 {
 		return nil
 	}
-	x := &CANetworkBrowserWindowController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CANetworkBrowserWindowController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func cANetworkBrowserWindowControllerAdopt(id objc.ID) *CANetworkBrowserWindowCo
 	if id == 0 {
 		return nil
 	}
-	x := &CANetworkBrowserWindowController{Handle: objref.Wrap(id)}
+	x := &CANetworkBrowserWindowController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *CANetworkBrowserWindowController) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *CANetworkBrowserWindowController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CANetworkBrowserWindowController) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewCANetworkBrowserWindowController creates a new CANetworkBrowserWindowController.

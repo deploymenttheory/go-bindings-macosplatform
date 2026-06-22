@@ -13,6 +13,8 @@ import (
 )
 
 // MTRNetworkCommissioningClusterNetworkInfoStruct is an idiomatic wrapper over the Objective-C class MTRNetworkCommissioningClusterNetworkInfoStruct.
+//
+// MTRNetworkCommissioningClusterNetworkInfoStruct is an abstract base — you do not construct it directly. Construct one of [MTRNetworkCommissioningClusterNetworkInfo] and pass it where a MTRNetworkCommissioningClusterNetworkInfoStruct is accepted.
 type MTRNetworkCommissioningClusterNetworkInfoStruct struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRNetworkCommissioningClusterNetworkInfoStructFromID(id objc.ID) *MTRNetwo
 	if id == 0 {
 		return nil
 	}
-	x := &MTRNetworkCommissioningClusterNetworkInfoStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRNetworkCommissioningClusterNetworkInfoStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRNetworkCommissioningClusterNetworkInfoStructAdopt(id objc.ID) *MTRNetwor
 	if id == 0 {
 		return nil
 	}
-	x := &MTRNetworkCommissioningClusterNetworkInfoStruct{Handle: objref.Wrap(id)}
+	x := &MTRNetworkCommissioningClusterNetworkInfoStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,38 +60,42 @@ func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) IsKind(className strin
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRNetworkCommissioningClusterNetworkInfoStruct creates a new MTRNetworkCommissioningClusterNetworkInfoStruct.
-func NewMTRNetworkCommissioningClusterNetworkInfoStruct() *MTRNetworkCommissioningClusterNetworkInfoStruct {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRNetworkCommissioningClusterNetworkInfoStruct")), objc.RegisterName("new"))
-	return mTRNetworkCommissioningClusterNetworkInfoStructAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithNetworkID sets networkID and returns the receiver so calls can be chained.
+// WithNetworkID sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) WithNetworkID(networkID obj.Object) *MTRNetworkCommissioningClusterNetworkInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkID:"), objref.IDOf(networkID))
 	return x
 }
 
-// WithConnected sets connected and returns the receiver so calls can be chained.
+// WithConnected sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) WithConnected(connected obj.Object) *MTRNetworkCommissioningClusterNetworkInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnected:"), objref.IDOf(connected))
 	return x
 }
 
+// NetworkID wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) NetworkID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkID"))
 	return obj.Wrap(_r)
 }
 
+// SetNetworkID wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) SetNetworkID(networkID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkID:"), objref.IDOf(networkID))
 }
 
+// Connected wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) Connected() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connected"))
 	return obj.Wrap(_r)
 }
 
+// SetConnected wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) SetConnected(connected obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnected:"), objref.IDOf(connected))
 }
@@ -104,3 +112,11 @@ type MTRNetworkCommissioningClusterNetworkInfoStructable interface {
 }
 
 var _ MTRNetworkCommissioningClusterNetworkInfoStructable = (*MTRNetworkCommissioningClusterNetworkInfoStruct)(nil)
+
+// isMTRNetworkCommissioningClusterNetworkInfoStruct marks MTRNetworkCommissioningClusterNetworkInfoStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRNetworkCommissioningClusterNetworkInfoStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) isMTRNetworkCommissioningClusterNetworkInfoStruct() {
+}
+
+var _ MTRNetworkCommissioningClusterNetworkInfoStructProvider = (*MTRNetworkCommissioningClusterNetworkInfoStruct)(nil)

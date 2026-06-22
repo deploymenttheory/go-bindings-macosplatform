@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The result of an authorization request.
-//
 // AuthorizationProviderExtensionAuthorizationResult is an idiomatic wrapper over the Objective-C class ASAuthorizationProviderExtensionAuthorizationResult.
+//
+// The result of an authorization request.
 type AuthorizationProviderExtensionAuthorizationResult struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationProviderExtensionAuthorizationResultFromID(id objc.ID) *Author
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationProviderExtensionAuthorizationResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationProviderExtensionAuthorizationResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationProviderExtensionAuthorizationResultAdopt(id objc.ID) *Authori
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationProviderExtensionAuthorizationResult{Handle: objref.Wrap(id)}
+	x := &AuthorizationProviderExtensionAuthorizationResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,84 +60,84 @@ func (x *AuthorizationProviderExtensionAuthorizationResult) IsKind(className str
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes an authorization with tokens stored in HTTP headers.
-//
-// NewAuthorizationProviderExtensionAuthorizationResultWithHTTPAuthorizationHeaders creates a new AuthorizationProviderExtensionAuthorizationResult.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationProviderExtensionAuthorizationResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAuthorizationProviderExtensionAuthorizationResultWithHTTPAuthorizationHeaders initializes an authorization with tokens stored in HTTP headers.
 func NewAuthorizationProviderExtensionAuthorizationResultWithHTTPAuthorizationHeaders(httpAuthorizationHeaders obj.Object) *AuthorizationProviderExtensionAuthorizationResult {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationProviderExtensionAuthorizationResult")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHTTPAuthorizationHeaders:"), objref.IDOf(httpAuthorizationHeaders))
 	return authorizationProviderExtensionAuthorizationResultAdopt(_id)
 }
 
-// Initializes an authorization with a HTTP response and body.
-//
-// NewAuthorizationProviderExtensionAuthorizationResultWithHTTPResponseHttpBody creates a new AuthorizationProviderExtensionAuthorizationResult.
+// NewAuthorizationProviderExtensionAuthorizationResultWithHTTPResponseHttpBody initializes an authorization with a HTTP response and body.
 func NewAuthorizationProviderExtensionAuthorizationResultWithHTTPResponseHttpBody(httpResponse obj.Object, httpBody obj.Object) *AuthorizationProviderExtensionAuthorizationResult {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationProviderExtensionAuthorizationResult")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHTTPResponse:httpBody:"), objref.IDOf(httpResponse), objref.IDOf(httpBody))
 	return authorizationProviderExtensionAuthorizationResultAdopt(_id)
 }
 
-// A dictionary of authorization HTTP headers.
-//
-// WithHttpAuthorizationHeaders sets httpAuthorizationHeaders and returns the receiver so calls can be chained.
+// WithHttpAuthorizationHeaders a dictionary of authorization HTTP headers.
 func (x *AuthorizationProviderExtensionAuthorizationResult) WithHttpAuthorizationHeaders(httpAuthorizationHeaders obj.Object) *AuthorizationProviderExtensionAuthorizationResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHttpAuthorizationHeaders:"), objref.IDOf(httpAuthorizationHeaders))
 	return x
 }
 
-// The HTTP response for authentications.
-//
-// WithHttpResponse sets httpResponse and returns the receiver so calls can be chained.
+// WithHttpResponse the HTTP response for authentications.
 func (x *AuthorizationProviderExtensionAuthorizationResult) WithHttpResponse(httpResponse obj.Object) *AuthorizationProviderExtensionAuthorizationResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHttpResponse:"), objref.IDOf(httpResponse))
 	return x
 }
 
-// The HTTP response body.
-//
-// WithHttpBody sets httpBody and returns the receiver so calls can be chained.
+// WithHttpBody the HTTP response body.
 func (x *AuthorizationProviderExtensionAuthorizationResult) WithHttpBody(httpBody obj.Object) *AuthorizationProviderExtensionAuthorizationResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHttpBody:"), objref.IDOf(httpBody))
 	return x
 }
 
-// HTTP extra headers for addition with credentials.
+// HttpAuthorizationHeaders HTTP extra headers for addition with credentials.
 func (x *AuthorizationProviderExtensionAuthorizationResult) HttpAuthorizationHeaders() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("httpAuthorizationHeaders"))
 	return obj.Wrap(_r)
 }
 
+// SetHttpAuthorizationHeaders wraps the corresponding Objective-C method.
 func (x *AuthorizationProviderExtensionAuthorizationResult) SetHttpAuthorizationHeaders(httpAuthorizationHeaders obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHttpAuthorizationHeaders:"), objref.IDOf(httpAuthorizationHeaders))
 }
 
-// HTTP response for OAUth and SAML based authentications.
+// HttpResponse HTTP response for OAUth and SAML based authentications.
 func (x *AuthorizationProviderExtensionAuthorizationResult) HttpResponse() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("httpResponse"))
 	return obj.Wrap(_r)
 }
 
+// SetHttpResponse wraps the corresponding Objective-C method.
 func (x *AuthorizationProviderExtensionAuthorizationResult) SetHttpResponse(httpResponse obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHttpResponse:"), objref.IDOf(httpResponse))
 }
 
-// HTTP response body for OAUth and SAML based authentications.
+// HttpBody HTTP response body for OAUth and SAML based authentications.
 func (x *AuthorizationProviderExtensionAuthorizationResult) HttpBody() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("httpBody"))
 	return obj.Wrap(_r)
 }
 
+// SetHttpBody wraps the corresponding Objective-C method.
 func (x *AuthorizationProviderExtensionAuthorizationResult) SetHttpBody(httpBody obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHttpBody:"), objref.IDOf(httpBody))
 }
 
-// Private SecKeys.
+// PrivateKeys private SecKeys.
 func (x *AuthorizationProviderExtensionAuthorizationResult) PrivateKeys() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("privateKeys"))
 	return obj.Wrap(_r)
 }
 
+// SetPrivateKeys wraps the corresponding Objective-C method.
 func (x *AuthorizationProviderExtensionAuthorizationResult) SetPrivateKeys(privateKeys obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrivateKeys:"), objref.IDOf(privateKeys))
 }

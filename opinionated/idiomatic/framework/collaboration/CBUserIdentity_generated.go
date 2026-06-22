@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object of the CBUserIdentity class represents a user identity and is used for accessing the attributes of a user identity from an identity authority. The principal attributes of CBUserIdentity are a POSIX user identifier (UID), password, and certificate.
-//
 // UserIdentity is an idiomatic wrapper over the Objective-C class CBUserIdentity.
+//
+// It embeds [Identity], promoting that type's methods.
+//
+// An object of the CBUserIdentity class represents a user identity and is used for accessing the attributes of a user identity from an identity authority. The principal attributes of CBUserIdentity are a POSIX user identifier (UID), password, and certificate.
 type UserIdentity struct {
-	objref.Handle
+	Identity
 }
 
 // UserIdentityFromID adopts an existing Objective-C object as a UserIdentity
@@ -25,7 +26,8 @@ func UserIdentityFromID(id objc.ID) *UserIdentity {
 	if id == 0 {
 		return nil
 	}
-	x := &UserIdentity{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UserIdentity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func userIdentityAdopt(id objc.ID) *UserIdentity {
 	if id == 0 {
 		return nil
 	}
-	x := &UserIdentity{Handle: objref.Wrap(id)}
+	x := &UserIdentity{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UserIdentity) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UserIdentity) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UserIdentity) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUserIdentity creates a new UserIdentity.
@@ -64,25 +52,25 @@ func NewUserIdentity() *UserIdentity {
 	return userIdentityAdopt(_id)
 }
 
-// Returns a Boolean value indicating whether the given password is correct for the identity.
+// AuthenticateWithPassword returns a Boolean value indicating whether the given password is correct for the identity.
 func (x *UserIdentity) AuthenticateWithPassword(password string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authenticateWithPassword:"), purego.NSString(password))
 	return _r
 }
 
-// Returns the POSIX UID of the identity. The POSIX UID is a integer that can identify a user within an identity authority. UIDs are not guaranteed to be unique within an identity authority. - Returns: The POSIX UID of the identity.
+// PosixUID returns the POSIX UID of the identity. The POSIX UID is a integer that can identify a user within an identity authority. UIDs are not guaranteed to be unique within an identity authority. - Returns: The POSIX UID of the identity.
 func (x *UserIdentity) PosixUID() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("posixUID"))
 	return _r
 }
 
-// Returns the public authentication certificate associated with a user identity. The Collaboration framework supports certificate-based authentication in addition to passwords. If a certificate is stored for a user identity, it will be the default method of authentication. When a .Mac account is associated with a user identity, the authentication certificate is automatically downloaded from the .Mac servers. - Returns: The public authentication certificate, or `nil` if none exists.
+// Certificate returns the public authentication certificate associated with a user identity. The Collaboration framework supports certificate-based authentication in addition to passwords. If a certificate is stored for a user identity, it will be the default method of authentication. When a .Mac account is associated with a user identity, the authentication certificate is automatically downloaded from the .Mac servers. - Returns: The public authentication certificate, or `nil` if none exists.
 func (x *UserIdentity) Certificate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificate"))
 	return obj.Wrap(_r)
 }
 
-// Returns a Boolean value indicating whether the identity is allowed to authenticate. If the identity does not have authentication credentials (a password or certificate), it is not able to log in. However, an identity with authentication credentials does not ensure that it is enabled. Any identity can be disabled. - Returns: `TRUE` if the identity can authenticate; otherwise, `FALSE`.
+// IsEnabled returns a Boolean value indicating whether the identity is allowed to authenticate. If the identity does not have authentication credentials (a password or certificate), it is not able to log in. However, an identity with authentication credentials does not ensure that it is enabled. Any identity can be disabled. - Returns: `TRUE` if the identity can authenticate; otherwise, `FALSE`.
 func (x *UserIdentity) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r
@@ -98,3 +86,5 @@ type UserIdentityable interface {
 }
 
 var _ UserIdentityable = (*UserIdentity)(nil)
+
+var _ IdentityProvider = (*UserIdentity)(nil)

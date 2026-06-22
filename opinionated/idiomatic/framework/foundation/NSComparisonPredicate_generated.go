@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specialized predicate for comparing expressions.
-//
 // ComparisonPredicate is an idiomatic wrapper over the Objective-C class NSComparisonPredicate.
+//
+// It embeds [Predicate], promoting that type's methods.
+//
+// A specialized predicate for comparing expressions.
 type ComparisonPredicate struct {
-	objref.Handle
+	Predicate
 }
 
 // ComparisonPredicateFromID adopts an existing Objective-C object as a ComparisonPredicate
@@ -25,7 +26,8 @@ func ComparisonPredicateFromID(id objc.ID) *ComparisonPredicate {
 	if id == 0 {
 		return nil
 	}
-	x := &ComparisonPredicate{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ComparisonPredicate{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,70 +40,57 @@ func comparisonPredicateAdopt(id objc.ID) *ComparisonPredicate {
 	if id == 0 {
 		return nil
 	}
-	x := &ComparisonPredicate{Handle: objref.Wrap(id)}
+	x := &ComparisonPredicate{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ComparisonPredicate) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ComparisonPredicate) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ComparisonPredicate) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a predicate to a specified type that you form by combining specified left and right expressions using a specified modifier and options.
-//
-// NewComparisonPredicateWithLeftExpressionRightExpressionModifierTypeOptions creates a new ComparisonPredicate.
+// NewComparisonPredicateWithLeftExpressionRightExpressionModifierTypeOptions creates a predicate to a specified type that you form by combining specified left and right expressions using a specified modifier and options.
 func NewComparisonPredicateWithLeftExpressionRightExpressionModifierTypeOptions(lhs *Expression, rhs *Expression, modifier ComparisonPredicateModifier, type_ PredicateOperatorType, options ComparisonPredicateOptions) *ComparisonPredicate {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSComparisonPredicate")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeftExpression:rightExpression:modifier:type:options:"), objref.IDOf(lhs), objref.IDOf(rhs), modifier, type_, options)
 	return comparisonPredicateAdopt(_id)
 }
 
-// Creates a predicate by decoding from the coder you specify.
-//
-// NewComparisonPredicateWithCoder creates a new ComparisonPredicate.
+// NewComparisonPredicateWithCoder creates a predicate by decoding from the coder you specify.
 func NewComparisonPredicateWithCoder(coder *Coder) *ComparisonPredicate {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSComparisonPredicate")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return comparisonPredicateAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *ComparisonPredicate) WithScriptingProperties(scriptingProperties obj.Object) *ComparisonPredicate {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// PredicateOperatorType wraps the corresponding Objective-C method.
 func (x *ComparisonPredicate) PredicateOperatorType() PredicateOperatorType {
 	_r := objc.Send[PredicateOperatorType](objref.IDOf(x), objc.RegisterName("predicateOperatorType"))
 	return _r
 }
 
+// ComparisonPredicateModifier wraps the corresponding Objective-C method.
 func (x *ComparisonPredicate) ComparisonPredicateModifier() ComparisonPredicateModifier {
 	_r := objc.Send[ComparisonPredicateModifier](objref.IDOf(x), objc.RegisterName("comparisonPredicateModifier"))
 	return _r
 }
 
+// LeftExpression wraps the corresponding Objective-C method.
 func (x *ComparisonPredicate) LeftExpression() *Expression {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftExpression"))
 	return ExpressionFromID(_r)
 }
 
+// RightExpression wraps the corresponding Objective-C method.
 func (x *ComparisonPredicate) RightExpression() *Expression {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightExpression"))
 	return ExpressionFromID(_r)
 }
 
+// Options wraps the corresponding Objective-C method.
 func (x *ComparisonPredicate) Options() ComparisonPredicateOptions {
 	_r := objc.Send[ComparisonPredicateOptions](objref.IDOf(x), objc.RegisterName("options"))
 	return _r
@@ -119,3 +108,5 @@ type ComparisonPredicateable interface {
 }
 
 var _ ComparisonPredicateable = (*ComparisonPredicate)(nil)
+
+var _ PredicateProvider = (*ComparisonPredicate)(nil)

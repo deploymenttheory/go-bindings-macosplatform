@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Laundry Washer Controls
-//
 // MTRBaseClusterLaundryWasherControls is an idiomatic wrapper over the Objective-C class MTRBaseClusterLaundryWasherControls.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
+//
+// Cluster Laundry Washer Controls
 type MTRBaseClusterLaundryWasherControls struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterLaundryWasherControlsFromID adopts an existing Objective-C object as a MTRBaseClusterLaundryWasherControls
@@ -27,7 +28,8 @@ func MTRBaseClusterLaundryWasherControlsFromID(id objc.ID) *MTRBaseClusterLaundr
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterLaundryWasherControls{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterLaundryWasherControls{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,37 +42,23 @@ func mTRBaseClusterLaundryWasherControlsAdopt(id objc.ID) *MTRBaseClusterLaundry
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterLaundryWasherControls{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterLaundryWasherControls{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterLaundryWasherControls) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterLaundryWasherControls) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterLaundryWasherControls) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterLaundryWasherControlsWithDeviceEndpointIDQueue creates a new MTRBaseClusterLaundryWasherControls.
+// NewMTRBaseClusterLaundryWasherControlsWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterLaundryWasherControlsWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterLaundryWasherControls {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterLaundryWasherControls")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterLaundryWasherControlsAdopt(_id)
 }
 
+// ReadAttributeSpinSpeedsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSpinSpeedsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeSpinSpeedsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeSpinSpeedsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -92,8 +80,10 @@ func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeSpinSpeedsWithComplet
 	}
 }
 
+// SubscribeAttributeSpinSpeedsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSpinSpeedsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeSpinSpeedsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeSpinSpeedsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -115,8 +105,10 @@ func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeSpinSpeedsWithPa
 	}
 }
 
+// ReadAttributeSpinSpeedCurrentWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSpinSpeedCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeSpinSpeedCurrentWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeSpinSpeedCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -138,8 +130,10 @@ func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeSpinSpeedCurrentWithC
 	}
 }
 
+// SubscribeAttributeSpinSpeedCurrentWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSpinSpeedCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeSpinSpeedCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeSpinSpeedCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -161,8 +155,10 @@ func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeSpinSpeedCurrent
 	}
 }
 
+// ReadAttributeNumberOfRinsesWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfRinsesWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeNumberOfRinsesWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeNumberOfRinsesWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -184,8 +180,10 @@ func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeNumberOfRinsesWithCom
 	}
 }
 
+// SubscribeAttributeNumberOfRinsesWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfRinsesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeNumberOfRinsesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeNumberOfRinsesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -207,8 +205,10 @@ func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeNumberOfRinsesWi
 	}
 }
 
+// ReadAttributeSupportedRinsesWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSupportedRinsesWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeSupportedRinsesWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeSupportedRinsesWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -230,8 +230,10 @@ func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeSupportedRinsesWithCo
 	}
 }
 
+// SubscribeAttributeSupportedRinsesWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSupportedRinsesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeSupportedRinsesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeSupportedRinsesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -253,8 +255,10 @@ func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeSupportedRinsesW
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -276,8 +280,10 @@ func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeGeneratedCommandListW
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -299,8 +305,10 @@ func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeGeneratedCommand
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -322,8 +330,10 @@ func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeAcceptedCommandListWi
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -345,8 +355,10 @@ func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeAcceptedCommandL
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -368,8 +380,10 @@ func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeAttributeListWithComp
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -391,8 +405,10 @@ func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeAttributeListWit
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -414,8 +430,10 @@ func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeFeatureMapWithComplet
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -437,8 +455,10 @@ func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeFeatureMapWithPa
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -460,8 +480,10 @@ func (x *MTRBaseClusterLaundryWasherControls) ReadAttributeClusterRevisionWithCo
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -507,3 +529,7 @@ type MTRBaseClusterLaundryWasherControlsable interface {
 }
 
 var _ MTRBaseClusterLaundryWasherControlsable = (*MTRBaseClusterLaundryWasherControls)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterLaundryWasherControls)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterLaundryWasherControls)(nil)

@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBaseClusterHEPAFilterMonitoring is an idiomatic wrapper over the Objective-C class MTRBaseClusterHEPAFilterMonitoring.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
 type MTRBaseClusterHEPAFilterMonitoring struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterHEPAFilterMonitoringFromID adopts an existing Objective-C object as a MTRBaseClusterHEPAFilterMonitoring
@@ -25,7 +26,8 @@ func MTRBaseClusterHEPAFilterMonitoringFromID(id objc.ID) *MTRBaseClusterHEPAFil
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterHEPAFilterMonitoring{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterHEPAFilterMonitoring{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,37 +40,23 @@ func mTRBaseClusterHEPAFilterMonitoringAdopt(id objc.ID) *MTRBaseClusterHEPAFilt
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterHEPAFilterMonitoring{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterHEPAFilterMonitoring{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterHEPAFilterMonitoring) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterHEPAFilterMonitoring) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterHEPAFilterMonitoring) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterHEPAFilterMonitoringWithDeviceEndpointIDQueue creates a new MTRBaseClusterHEPAFilterMonitoring.
+// NewMTRBaseClusterHEPAFilterMonitoringWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterHEPAFilterMonitoringWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterHEPAFilterMonitoring {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterHEPAFilterMonitoring")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterHEPAFilterMonitoringAdopt(_id)
 }
 
+// ReadAttributeConditionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeConditionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeConditionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeConditionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -90,8 +78,10 @@ func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeConditionWithCompletio
 	}
 }
 
+// SubscribeAttributeConditionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeConditionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeConditionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeConditionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -113,8 +103,10 @@ func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeConditionWithPara
 	}
 }
 
+// ReadAttributeDegradationDirectionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDegradationDirectionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeDegradationDirectionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeDegradationDirectionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -136,8 +128,10 @@ func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeDegradationDirectionWi
 	}
 }
 
+// SubscribeAttributeDegradationDirectionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDegradationDirectionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeDegradationDirectionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeDegradationDirectionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -159,8 +153,10 @@ func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeDegradationDirect
 	}
 }
 
+// ReadAttributeChangeIndicationWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeChangeIndicationWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeChangeIndicationWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeChangeIndicationWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -182,8 +178,10 @@ func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeChangeIndicationWithCo
 	}
 }
 
+// SubscribeAttributeChangeIndicationWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeChangeIndicationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeChangeIndicationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeChangeIndicationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -205,8 +203,10 @@ func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeChangeIndicationW
 	}
 }
 
+// ReadAttributeInPlaceIndicatorWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeInPlaceIndicatorWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeInPlaceIndicatorWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeInPlaceIndicatorWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -228,8 +228,10 @@ func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeInPlaceIndicatorWithCo
 	}
 }
 
+// SubscribeAttributeInPlaceIndicatorWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeInPlaceIndicatorWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeInPlaceIndicatorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeInPlaceIndicatorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -251,8 +253,10 @@ func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeInPlaceIndicatorW
 	}
 }
 
+// ReadAttributeLastChangedTimeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeLastChangedTimeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeLastChangedTimeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeLastChangedTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -274,8 +278,10 @@ func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeLastChangedTimeWithCom
 	}
 }
 
+// SubscribeAttributeLastChangedTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLastChangedTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeLastChangedTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeLastChangedTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -297,8 +303,10 @@ func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeLastChangedTimeWi
 	}
 }
 
+// ReadAttributeReplacementProductListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeReplacementProductListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeReplacementProductListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeReplacementProductListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -320,8 +328,10 @@ func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeReplacementProductList
 	}
 }
 
+// SubscribeAttributeReplacementProductListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeReplacementProductListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeReplacementProductListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeReplacementProductListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -343,8 +353,10 @@ func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeReplacementProduc
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -366,8 +378,10 @@ func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeGeneratedCommandListWi
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -389,8 +403,10 @@ func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeGeneratedCommandL
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -412,8 +428,10 @@ func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeAcceptedCommandListWit
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -435,8 +453,10 @@ func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeAcceptedCommandLi
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -458,8 +478,10 @@ func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeAttributeListWithCompl
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -481,8 +503,10 @@ func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeAttributeListWith
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -504,8 +528,10 @@ func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeFeatureMapWithCompleti
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -527,8 +553,10 @@ func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeFeatureMapWithPar
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -550,8 +578,10 @@ func (x *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeClusterRevisionWithCom
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -601,3 +631,7 @@ type MTRBaseClusterHEPAFilterMonitoringable interface {
 }
 
 var _ MTRBaseClusterHEPAFilterMonitoringable = (*MTRBaseClusterHEPAFilterMonitoring)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterHEPAFilterMonitoring)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterHEPAFilterMonitoring)(nil)

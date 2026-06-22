@@ -6,17 +6,19 @@ package vision
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that produces a mask of individual people it finds in the input image.
-//
 // GeneratePersonInstanceMaskRequest is an idiomatic wrapper over the Objective-C class VNGeneratePersonInstanceMaskRequest.
+//
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// An object that produces a mask of individual people it finds in the input image.
 type GeneratePersonInstanceMaskRequest struct {
-	objref.Handle
+	ImageBasedRequest
 }
 
 // GeneratePersonInstanceMaskRequestFromID adopts an existing Objective-C object as a GeneratePersonInstanceMaskRequest
@@ -25,7 +27,8 @@ func GeneratePersonInstanceMaskRequestFromID(id objc.ID) *GeneratePersonInstance
 	if id == 0 {
 		return nil
 	}
-	x := &GeneratePersonInstanceMaskRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GeneratePersonInstanceMaskRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func generatePersonInstanceMaskRequestAdopt(id objc.ID) *GeneratePersonInstanceM
 	if id == 0 {
 		return nil
 	}
-	x := &GeneratePersonInstanceMaskRequest{Handle: objref.Wrap(id)}
+	x := &GeneratePersonInstanceMaskRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GeneratePersonInstanceMaskRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GeneratePersonInstanceMaskRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GeneratePersonInstanceMaskRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGeneratePersonInstanceMaskRequest creates a new GeneratePersonInstanceMaskRequest.
@@ -64,25 +53,25 @@ func NewGeneratePersonInstanceMaskRequest() *GeneratePersonInstanceMaskRequest {
 	return generatePersonInstanceMaskRequestAdopt(_id)
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets preferBackgroundProcessing and returns the receiver so calls can be chained.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
+func (x *GeneratePersonInstanceMaskRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GeneratePersonInstanceMaskRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *GeneratePersonInstanceMaskRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GeneratePersonInstanceMaskRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets usesCPUOnly and returns the receiver so calls can be chained.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *GeneratePersonInstanceMaskRequest) WithUsesCPUOnly(usesCPUOnly bool) *GeneratePersonInstanceMaskRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets revision and returns the receiver so calls can be chained.
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
 func (x *GeneratePersonInstanceMaskRequest) WithRevision(revision int) *GeneratePersonInstanceMaskRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
@@ -91,9 +80,14 @@ func (x *GeneratePersonInstanceMaskRequest) WithRevision(revision int) *Generate
 // GeneratePersonInstanceMaskRequestable is the interface implemented by [GeneratePersonInstanceMaskRequest], for mocking and DI.
 type GeneratePersonInstanceMaskRequestable interface {
 	obj.Object
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GeneratePersonInstanceMaskRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GeneratePersonInstanceMaskRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *GeneratePersonInstanceMaskRequest
 	WithRevision(revision int) *GeneratePersonInstanceMaskRequest
 }
 
 var _ GeneratePersonInstanceMaskRequestable = (*GeneratePersonInstanceMaskRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*GeneratePersonInstanceMaskRequest)(nil)
+
+var _ RequestProvider = (*GeneratePersonInstanceMaskRequest)(nil)

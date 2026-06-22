@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes the attributes of a property.
-//
 // ExtensionPropertyAttributes is an idiomatic wrapper over the Objective-C class CMIOExtensionPropertyAttributes.
+//
+// An object that describes the attributes of a property.
 type ExtensionPropertyAttributes struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ExtensionPropertyAttributesFromID(id objc.ID) *ExtensionPropertyAttributes 
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionPropertyAttributes{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExtensionPropertyAttributes{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func extensionPropertyAttributesAdopt(id objc.ID) *ExtensionPropertyAttributes {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionPropertyAttributes{Handle: objref.Wrap(id)}
+	x := &ExtensionPropertyAttributes{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,34 +60,38 @@ func (x *ExtensionPropertyAttributes) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a property attributes object with the specified configuration.
-//
-// NewExtensionPropertyAttributesWithMinValueMaxValueValidValuesReadOnly creates a new ExtensionPropertyAttributes.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExtensionPropertyAttributes) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewExtensionPropertyAttributesWithMinValueMaxValueValidValuesReadOnly creates a property attributes object with the specified configuration.
 func NewExtensionPropertyAttributesWithMinValueMaxValueValidValuesReadOnly(minValue obj.Object, maxValue obj.Object, validValues []obj.Object, readOnly bool) *ExtensionPropertyAttributes {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionPropertyAttributes")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMinValue:maxValue:validValues:readOnly:"), objref.IDOf(minValue), objref.IDOf(maxValue), purego.SliceToNSArray(validValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), readOnly)
 	return extensionPropertyAttributesAdopt(_id)
 }
 
-// The minimum value of a property.
+// MinValue the minimum value of a property.
 func (x *ExtensionPropertyAttributes) MinValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minValue"))
 	return obj.Wrap(_r)
 }
 
-// The maximum value of a property.
+// MaxValue the maximum value of a property.
 func (x *ExtensionPropertyAttributes) MaxValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxValue"))
 	return obj.Wrap(_r)
 }
 
-// An array of valid values.
+// ValidValues an array of valid values.
 func (x *ExtensionPropertyAttributes) ValidValues() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validValues"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The readOnly flag attribute.
+// IsReadOnly the readOnly flag attribute.
 func (x *ExtensionPropertyAttributes) IsReadOnly() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadOnly"))
 	return _r

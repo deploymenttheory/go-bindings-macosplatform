@@ -23,7 +23,8 @@ func RecordingOutputFromID(id objc.ID) *RecordingOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &RecordingOutput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RecordingOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func recordingOutputAdopt(id objc.ID) *RecordingOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &RecordingOutput{Handle: objref.Wrap(id)}
+	x := &RecordingOutput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,13 +58,19 @@ func (x *RecordingOutput) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RecordingOutput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRecordingOutput creates a new RecordingOutput.
 func NewRecordingOutput() *RecordingOutput {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCRecordingOutput")), objc.RegisterName("new"))
 	return recordingOutputAdopt(_id)
 }
 
-// Indicates current size, in bytes, of the data recorded to the output file.
+// RecordedFileSize indicates current size, in bytes, of the data recorded to the output file.
 func (x *RecordingOutput) RecordedFileSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("recordedFileSize"))
 	return _r

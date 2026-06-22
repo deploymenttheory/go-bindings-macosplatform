@@ -9,15 +9,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An operation that manages the concurrent execution of one or more blocks.
-//
 // BlockOperation is an idiomatic wrapper over the Objective-C class NSBlockOperation.
+//
+// It embeds [Operation], promoting that type's methods.
+//
+// An operation that manages the concurrent execution of one or more blocks.
 type BlockOperation struct {
-	objref.Handle
+	Operation
 }
 
 // BlockOperationFromID adopts an existing Objective-C object as a BlockOperation
@@ -26,7 +27,8 @@ func BlockOperationFromID(id objc.ID) *BlockOperation {
 	if id == 0 {
 		return nil
 	}
-	x := &BlockOperation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BlockOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,24 +41,10 @@ func blockOperationAdopt(id objc.ID) *BlockOperation {
 	if id == 0 {
 		return nil
 	}
-	x := &BlockOperation{Handle: objref.Wrap(id)}
+	x := &BlockOperation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *BlockOperation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BlockOperation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BlockOperation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewBlockOperation creates a new BlockOperation.
@@ -65,42 +53,44 @@ func NewBlockOperation() *BlockOperation {
 	return blockOperationAdopt(_id)
 }
 
-// WithQueuePriority sets queuePriority and returns the receiver so calls can be chained.
+// WithQueuePriority sets the property and returns the receiver so calls can be chained.
 func (x *BlockOperation) WithQueuePriority(queuePriority OperationQueuePriority) *BlockOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueuePriority:"), queuePriority)
 	return x
 }
 
-// WithCompletionBlock sets completionBlock and returns the receiver so calls can be chained.
+// WithCompletionBlock sets the property and returns the receiver so calls can be chained.
 func (x *BlockOperation) WithCompletionBlock(completionBlock func()) *BlockOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionBlock:"), objc.NewBlock(func(_ objc.Block) { completionBlock() }))
 	return x
 }
 
-// WithThreadPriority sets threadPriority and returns the receiver so calls can be chained.
+// WithThreadPriority sets the property and returns the receiver so calls can be chained.
 func (x *BlockOperation) WithThreadPriority(threadPriority float64) *BlockOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadPriority:"), threadPriority)
 	return x
 }
 
-// WithQualityOfService sets qualityOfService and returns the receiver so calls can be chained.
+// WithQualityOfService sets the property and returns the receiver so calls can be chained.
 func (x *BlockOperation) WithQualityOfService(qualityOfService QualityOfService) *BlockOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityOfService:"), qualityOfService)
 	return x
 }
 
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *BlockOperation) WithName(name StringProvider) *BlockOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *BlockOperation) WithScriptingProperties(scriptingProperties obj.Object) *BlockOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// AddExecutionBlock wraps the corresponding Objective-C method.
+//
 // AddExecutionBlock blocks until the operation completes or ctx is cancelled.
 func (x *BlockOperation) AddExecutionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -129,3 +119,5 @@ type BlockOperationable interface {
 }
 
 var _ BlockOperationable = (*BlockOperation)(nil)
+
+var _ OperationProvider = (*BlockOperation)(nil)

@@ -10,13 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// A stream that provides write-only stream functionality.
-//
 // OutputStream is an idiomatic wrapper over the Objective-C class NSOutputStream.
+//
+// It embeds [Stream], promoting that type's methods.
+//
+// A stream that provides write-only stream functionality.
 type OutputStream struct {
-	objref.Handle
+	Stream
 }
 
 // OutputStreamFromID adopts an existing Objective-C object as a OutputStream
@@ -25,7 +28,8 @@ func OutputStreamFromID(id objc.ID) *OutputStream {
 	if id == 0 {
 		return nil
 	}
-	x := &OutputStream{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OutputStream{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func outputStreamAdopt(id objc.ID) *OutputStream {
 	if id == 0 {
 		return nil
 	}
-	x := &OutputStream{Handle: objref.Wrap(id)}
+	x := &OutputStream{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *OutputStream) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *OutputStream) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *OutputStream) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewOutputStream creates a new OutputStream.
@@ -78,12 +68,20 @@ func NewOutputStreamToFileAtPathAppend(path string, shouldAppend bool) *OutputSt
 	return outputStreamAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *OutputStream) WithScriptingProperties(scriptingProperties obj.Object) *OutputStream {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// WriteMaxLength wraps the corresponding Objective-C method.
+func (x *OutputStream) WriteMaxLength(len_ int) (result int, buffer uint8) {
+	var _out0 uint8
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("write:maxLength:"), unsafe.Pointer(&_out0), len_)
+	return _r, _out0
+}
+
+// HasSpaceAvailable wraps the corresponding Objective-C method.
 func (x *OutputStream) HasSpaceAvailable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasSpaceAvailable"))
 	return _r
@@ -93,7 +91,10 @@ func (x *OutputStream) HasSpaceAvailable() bool {
 type OutputStreamable interface {
 	obj.Object
 	WithScriptingProperties(scriptingProperties obj.Object) *OutputStream
+	WriteMaxLength(len_ int) (result int, buffer uint8)
 	HasSpaceAvailable() bool
 }
 
 var _ OutputStreamable = (*OutputStream)(nil)
+
+var _ StreamProvider = (*OutputStream)(nil)

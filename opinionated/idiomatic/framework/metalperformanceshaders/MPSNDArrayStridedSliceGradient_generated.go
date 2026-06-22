@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NDArrayStridedSliceGradient is an idiomatic wrapper over the Objective-C class MPSNDArrayStridedSliceGradient.
+//
+// It embeds [NDArrayUnaryGradientKernel], promoting that type's methods.
 type NDArrayStridedSliceGradient struct {
-	objref.Handle
+	NDArrayUnaryGradientKernel
 }
 
 // NDArrayStridedSliceGradientFromID adopts an existing Objective-C object as a NDArrayStridedSliceGradient
@@ -23,7 +24,8 @@ func NDArrayStridedSliceGradientFromID(id objc.ID) *NDArrayStridedSliceGradient 
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayStridedSliceGradient{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NDArrayStridedSliceGradient{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func nDArrayStridedSliceGradientAdopt(id objc.ID) *NDArrayStridedSliceGradient {
 	if id == 0 {
 		return nil
 	}
-	x := &NDArrayStridedSliceGradient{Handle: objref.Wrap(id)}
+	x := &NDArrayStridedSliceGradient{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NDArrayStridedSliceGradient) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NDArrayStridedSliceGradient) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NDArrayStridedSliceGradient) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNDArrayStridedSliceGradient creates a new NDArrayStridedSliceGradient.
@@ -62,9 +50,7 @@ func NewNDArrayStridedSliceGradient() *NDArrayStridedSliceGradient {
 	return nDArrayStridedSliceGradientAdopt(_id)
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayStridedSliceGradient) WithLabel(label string) *NDArrayStridedSliceGradient {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -77,3 +63,11 @@ type NDArrayStridedSliceGradientable interface {
 }
 
 var _ NDArrayStridedSliceGradientable = (*NDArrayStridedSliceGradient)(nil)
+
+var _ NDArrayUnaryGradientKernelProvider = (*NDArrayStridedSliceGradient)(nil)
+
+var _ NDArrayMultiaryGradientKernelProvider = (*NDArrayStridedSliceGradient)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayStridedSliceGradient)(nil)
+
+var _ KernelProvider = (*NDArrayStridedSliceGradient)(nil)

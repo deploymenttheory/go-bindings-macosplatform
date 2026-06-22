@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resolution result for an energy parameter associated with an intent.
-//
 // EnergyResolutionResult is an idiomatic wrapper over the Objective-C class INEnergyResolutionResult.
+//
+// It embeds [IntentResolutionResult], promoting that type's methods.
+//
+// A resolution result for an energy parameter associated with an intent.
 type EnergyResolutionResult struct {
-	objref.Handle
+	IntentResolutionResult
 }
 
 // EnergyResolutionResultFromID adopts an existing Objective-C object as a EnergyResolutionResult
@@ -25,7 +26,8 @@ func EnergyResolutionResultFromID(id objc.ID) *EnergyResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	x := &EnergyResolutionResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EnergyResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func energyResolutionResultAdopt(id objc.ID) *EnergyResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	x := &EnergyResolutionResult{Handle: objref.Wrap(id)}
+	x := &EnergyResolutionResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *EnergyResolutionResult) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EnergyResolutionResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EnergyResolutionResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewEnergyResolutionResult creates a new EnergyResolutionResult.
@@ -70,3 +58,5 @@ type EnergyResolutionResultable interface {
 }
 
 var _ EnergyResolutionResultable = (*EnergyResolutionResult)(nil)
+
+var _ IntentResolutionResultProvider = (*EnergyResolutionResult)(nil)

@@ -11,4 +11,5 @@ import (
 // CalCalendarItemProvider is accepted wherever a CalCalendarItem (or one of its subclasses) is expected.
 type CalCalendarItemProvider interface {
 	objref.Object
+	isCalCalendarItem()
 }

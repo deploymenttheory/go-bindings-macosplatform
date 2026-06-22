@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A control that adjusts the exposure bias of a capture device within the system-recommended range.
-//
 // CaptureSystemExposureBiasSlider is an idiomatic wrapper over the Objective-C class AVCaptureSystemExposureBiasSlider.
+//
+// It embeds [CaptureControl], promoting that type's methods.
+//
+// A control that adjusts the exposure bias of a capture device within the system-recommended range.
 type CaptureSystemExposureBiasSlider struct {
-	objref.Handle
+	CaptureControl
 }
 
 // CaptureSystemExposureBiasSliderFromID adopts an existing Objective-C object as a CaptureSystemExposureBiasSlider
@@ -25,7 +26,8 @@ func CaptureSystemExposureBiasSliderFromID(id objc.ID) *CaptureSystemExposureBia
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureSystemExposureBiasSlider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptureSystemExposureBiasSlider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,47 +40,27 @@ func captureSystemExposureBiasSliderAdopt(id objc.ID) *CaptureSystemExposureBias
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureSystemExposureBiasSlider{Handle: objref.Wrap(id)}
+	x := &CaptureSystemExposureBiasSlider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CaptureSystemExposureBiasSlider) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptureSystemExposureBiasSlider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptureSystemExposureBiasSlider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a slider to control the exposure bias of the specified capture device.
-//
-// NewCaptureSystemExposureBiasSliderWithDevice creates a new CaptureSystemExposureBiasSlider.
+// NewCaptureSystemExposureBiasSliderWithDevice creates a slider to control the exposure bias of the specified capture device.
 func NewCaptureSystemExposureBiasSliderWithDevice(device *CaptureDevice) *CaptureSystemExposureBiasSlider {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptureSystemExposureBiasSlider")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), objref.IDOf(device))
 	return captureSystemExposureBiasSliderAdopt(_id)
 }
 
-// Creates a slider to control the exposure bias of the specified capture device with an action to respond to exposure bias changes.
-//
-// NewCaptureSystemExposureBiasSliderWithDeviceAction creates a new CaptureSystemExposureBiasSlider.
+// NewCaptureSystemExposureBiasSliderWithDeviceAction creates a slider to control the exposure bias of the specified capture device with an action to respond to exposure bias changes.
 func NewCaptureSystemExposureBiasSliderWithDeviceAction(device *CaptureDevice, action func(float32)) *CaptureSystemExposureBiasSlider {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptureSystemExposureBiasSlider")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:action:"), objref.IDOf(device), objc.NewBlock(func(_ objc.Block, _b0 float32) { action(_b0) }))
 	return captureSystemExposureBiasSliderAdopt(_id)
 }
 
-// A Boolean value that indicates whether this control supports user interaction.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether this control supports user interaction.
 func (x *CaptureSystemExposureBiasSlider) WithEnabled(enabled bool) *CaptureSystemExposureBiasSlider {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
@@ -91,3 +73,5 @@ type CaptureSystemExposureBiasSliderable interface {
 }
 
 var _ CaptureSystemExposureBiasSliderable = (*CaptureSystemExposureBiasSlider)(nil)
+
+var _ CaptureControlProvider = (*CaptureSystemExposureBiasSlider)(nil)

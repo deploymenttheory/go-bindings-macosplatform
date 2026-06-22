@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that represents an audio file that the system can open for reading or writing.
-//
 // AudioFile is an idiomatic wrapper over the Objective-C class AVAudioFile.
+//
+// An object that represents an audio file that the system can open for reading or writing.
 type AudioFile struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func AudioFileFromID(id objc.ID) *AudioFile {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioFile{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioFile{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func audioFileAdopt(id objc.ID) *AudioFile {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioFile{Handle: objref.Wrap(id)}
+	x := &AudioFile{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,20 @@ func (x *AudioFile) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioFile) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAudioFile creates a new AudioFile.
 func NewAudioFile() *AudioFile {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioFile")), objc.RegisterName("new"))
 	return audioFileAdopt(_id)
 }
 
-// Opens a file for reading using the standard, deinterleaved floating point format.
-//
-// NewAudioFileForReadingError creates a new AudioFile.
-func NewAudioFileForReadingError(fileURL string) (*AudioFile, error) {
+// NewAudioFileForReadingError opens a file for reading using the standard, deinterleaved floating point format.
+func NewAudioFileForReadingError(fileURL string) (result *AudioFile, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFile")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReading:error:"), rt.FileURL(fileURL), unsafe.Pointer(&_nsErr))
@@ -79,10 +85,8 @@ func NewAudioFileForReadingError(fileURL string) (*AudioFile, error) {
 	return audioFileAdopt(_id), nil
 }
 
-// Opens a file for reading using the specified processing format.
-//
-// NewAudioFileForReadingCommonFormatInterleavedError creates a new AudioFile.
-func NewAudioFileForReadingCommonFormatInterleavedError(fileURL string, format AudioCommonFormat, interleaved bool) (*AudioFile, error) {
+// NewAudioFileForReadingCommonFormatInterleavedError opens a file for reading using the specified processing format.
+func NewAudioFileForReadingCommonFormatInterleavedError(fileURL string, format AudioCommonFormat, interleaved bool) (result *AudioFile, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFile")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReading:commonFormat:interleaved:error:"), rt.FileURL(fileURL), format, interleaved, unsafe.Pointer(&_nsErr))
@@ -92,10 +96,8 @@ func NewAudioFileForReadingCommonFormatInterleavedError(fileURL string, format A
 	return audioFileAdopt(_id), nil
 }
 
-// Opens a file for writing using the specified settings.
-//
-// NewAudioFileForWritingSettingsError creates a new AudioFile.
-func NewAudioFileForWritingSettingsError(fileURL string, settings obj.Object) (*AudioFile, error) {
+// NewAudioFileForWritingSettingsError opens a file for writing using the specified settings.
+func NewAudioFileForWritingSettingsError(fileURL string, settings obj.Object) (result *AudioFile, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFile")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForWriting:settings:error:"), rt.FileURL(fileURL), objref.IDOf(settings), unsafe.Pointer(&_nsErr))
@@ -105,10 +107,8 @@ func NewAudioFileForWritingSettingsError(fileURL string, settings obj.Object) (*
 	return audioFileAdopt(_id), nil
 }
 
-// Opens a file for writing using a specified processing format and settings.
-//
-// NewAudioFileForWritingSettingsCommonFormatInterleavedError creates a new AudioFile.
-func NewAudioFileForWritingSettingsCommonFormatInterleavedError(fileURL string, settings obj.Object, format AudioCommonFormat, interleaved bool) (*AudioFile, error) {
+// NewAudioFileForWritingSettingsCommonFormatInterleavedError opens a file for writing using a specified processing format and settings.
+func NewAudioFileForWritingSettingsCommonFormatInterleavedError(fileURL string, settings obj.Object, format AudioCommonFormat, interleaved bool) (result *AudioFile, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFile")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForWriting:settings:commonFormat:interleaved:error:"), rt.FileURL(fileURL), objref.IDOf(settings), format, interleaved, unsafe.Pointer(&_nsErr))
@@ -118,20 +118,18 @@ func NewAudioFileForWritingSettingsCommonFormatInterleavedError(fileURL string, 
 	return audioFileAdopt(_id), nil
 }
 
-// The position in the file where the next read or write operation occurs.
-//
-// WithFramePosition sets framePosition and returns the receiver so calls can be chained.
+// WithFramePosition the position in the file where the next read or write operation occurs.
 func (x *AudioFile) WithFramePosition(framePosition int64) *AudioFile {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFramePosition:"), framePosition)
 	return x
 }
 
-// Closes the audio file.
+// Close closes the audio file.
 func (x *AudioFile) Close() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
 }
 
-// Reads an entire audio buffer.
+// ReadIntoBuffer reads an entire audio buffer.
 func (x *AudioFile) ReadIntoBuffer(buffer *AudioPCMBuffer) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("readIntoBuffer:error:"), objref.IDOf(buffer), unsafe.Pointer(&_nsErr))
@@ -141,7 +139,7 @@ func (x *AudioFile) ReadIntoBuffer(buffer *AudioPCMBuffer) error {
 	return nil
 }
 
-// Reads a portion of an audio buffer using the number of frames you specify.
+// ReadIntoBufferFrameCount reads a portion of an audio buffer using the number of frames you specify.
 func (x *AudioFile) ReadIntoBufferFrameCount(buffer *AudioPCMBuffer, frames uint32) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("readIntoBuffer:frameCount:error:"), objref.IDOf(buffer), frames, unsafe.Pointer(&_nsErr))
@@ -151,7 +149,7 @@ func (x *AudioFile) ReadIntoBufferFrameCount(buffer *AudioPCMBuffer, frames uint
 	return nil
 }
 
-// Write a buffer. Writes sequentially. The buffer's frameLength signifies how much of the buffer is to be written.
+// WriteFromBuffer write a buffer. Writes sequentially. The buffer's frameLength signifies how much of the buffer is to be written.
 func (x *AudioFile) WriteFromBuffer(buffer *AudioPCMBuffer) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeFromBuffer:error:"), objref.IDOf(buffer), unsafe.Pointer(&_nsErr))
@@ -161,42 +159,43 @@ func (x *AudioFile) WriteFromBuffer(buffer *AudioPCMBuffer) error {
 	return nil
 }
 
-// Whether the file is open or not.
+// IsOpen whether the file is open or not.
 func (x *AudioFile) IsOpen() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOpen"))
 	return _r
 }
 
-// The URL the file is reading or writing.
+// Url the URL the file is reading or writing.
 func (x *AudioFile) Url() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
-// The on-disk format of the file.
+// FileFormat the on-disk format of the file.
 func (x *AudioFile) FileFormat() *AudioFormat {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileFormat"))
 	return AudioFormatFromID(_r)
 }
 
-// The processing format of the file.
+// ProcessingFormat the processing format of the file.
 func (x *AudioFile) ProcessingFormat() *AudioFormat {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processingFormat"))
 	return AudioFormatFromID(_r)
 }
 
-// The number of sample frames in the file. Note: this can be expensive to compute for the first time.
+// Length the number of sample frames in the file. Note: this can be expensive to compute for the first time.
 func (x *AudioFile) Length() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("length"))
 	return _r
 }
 
-// The position in the file at which the next read or write will occur. Set framePosition to perform a seek before a read or write. A read or write operation advances the frame position by the number of frames read or written.
+// FramePosition the position in the file at which the next read or write will occur. Set framePosition to perform a seek before a read or write. A read or write operation advances the frame position by the number of frames read or written.
 func (x *AudioFile) FramePosition() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("framePosition"))
 	return _r
 }
 
+// SetFramePosition wraps the corresponding Objective-C method.
 func (x *AudioFile) SetFramePosition(framePosition int64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFramePosition:"), framePosition)
 }

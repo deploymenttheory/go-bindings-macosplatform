@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A single interface-bytes group for a Smart Card ATR (Answer to Reset).
-//
 // SmartCardATRInterfaceGroup is an idiomatic wrapper over the Objective-C class TKSmartCardATRInterfaceGroup.
+//
+// A single interface-bytes group for a Smart Card ATR (Answer to Reset).
 type SmartCardATRInterfaceGroup struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SmartCardATRInterfaceGroupFromID(id objc.ID) *SmartCardATRInterfaceGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &SmartCardATRInterfaceGroup{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SmartCardATRInterfaceGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func smartCardATRInterfaceGroupAdopt(id objc.ID) *SmartCardATRInterfaceGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &SmartCardATRInterfaceGroup{Handle: objref.Wrap(id)}
+	x := &SmartCardATRInterfaceGroup{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,37 @@ func (x *SmartCardATRInterfaceGroup) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SmartCardATRInterfaceGroup) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSmartCardATRInterfaceGroup creates a new SmartCardATRInterfaceGroup.
 func NewSmartCardATRInterfaceGroup() *SmartCardATRInterfaceGroup {
 	_id := objc.Send[objc.ID](objc.ID(_class("TKSmartCardATRInterfaceGroup")), objc.RegisterName("new"))
 	return smartCardATRInterfaceGroupAdopt(_id)
 }
 
-// TA interface byte of ATR group, or nil if TA is not present.
+// TA TA interface byte of ATR group, or nil if TA is not present.
 func (x *SmartCardATRInterfaceGroup) TA() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("TA"))
 	return obj.Wrap(_r)
 }
 
-// TB interface byte of ATR group, or nil if TB is not present.
+// TB TB interface byte of ATR group, or nil if TB is not present.
 func (x *SmartCardATRInterfaceGroup) TB() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("TB"))
 	return obj.Wrap(_r)
 }
 
-// TC interface byte of ATR group, or nil if TC is not present.
+// TC TC interface byte of ATR group, or nil if TC is not present.
 func (x *SmartCardATRInterfaceGroup) TC() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("TC"))
 	return obj.Wrap(_r)
 }
 
-// Protocol number for this group.  First group (global) has protocol unassigned, contains nil.
+// Protocol protocol number for this group.  First group (global) has protocol unassigned, contains nil.
 func (x *SmartCardATRInterfaceGroup) Protocol() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocol"))
 	return obj.Wrap(_r)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides required parameters for the credential during registration.
-//
 // AuthorizationPublicKeyCredentialParameters is an idiomatic wrapper over the Objective-C class ASAuthorizationPublicKeyCredentialParameters.
+//
+// An object that provides required parameters for the credential during registration.
 type AuthorizationPublicKeyCredentialParameters struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationPublicKeyCredentialParametersFromID(id objc.ID) *Authorization
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPublicKeyCredentialParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationPublicKeyCredentialParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationPublicKeyCredentialParametersAdopt(id objc.ID) *AuthorizationP
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPublicKeyCredentialParameters{Handle: objref.Wrap(id)}
+	x := &AuthorizationPublicKeyCredentialParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,16 +60,20 @@ func (x *AuthorizationPublicKeyCredentialParameters) IsKind(className string) bo
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates the object with an algorithm.
-//
-// NewAuthorizationPublicKeyCredentialParametersWithAlgorithm creates a new AuthorizationPublicKeyCredentialParameters.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationPublicKeyCredentialParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAuthorizationPublicKeyCredentialParametersWithAlgorithm creates the object with an algorithm.
 func NewAuthorizationPublicKeyCredentialParametersWithAlgorithm(algorithm int) *AuthorizationPublicKeyCredentialParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPublicKeyCredentialParameters")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAlgorithm:"), algorithm)
 	return authorizationPublicKeyCredentialParametersAdopt(_id)
 }
 
-// A COSE algorithm indentifier.
+// Algorithm a COSE algorithm indentifier.
 func (x *AuthorizationPublicKeyCredentialParameters) Algorithm() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("algorithm"))
 	return _r

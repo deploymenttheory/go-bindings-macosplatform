@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An identifier representing a particular service for which the user needs a credential, like a web site.
-//
 // CredentialServiceIdentifier is an idiomatic wrapper over the Objective-C class ASCredentialServiceIdentifier.
+//
+// An identifier representing a particular service for which the user needs a credential, like a web site.
 type CredentialServiceIdentifier struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CredentialServiceIdentifierFromID(id objc.ID) *CredentialServiceIdentifier 
 	if id == 0 {
 		return nil
 	}
-	x := &CredentialServiceIdentifier{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CredentialServiceIdentifier{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func credentialServiceIdentifierAdopt(id objc.ID) *CredentialServiceIdentifier {
 	if id == 0 {
 		return nil
 	}
-	x := &CredentialServiceIdentifier{Handle: objref.Wrap(id)}
+	x := &CredentialServiceIdentifier{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,27 @@ func (x *CredentialServiceIdentifier) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a credential service identifier instance.
-//
-// NewCredentialServiceIdentifierWithIdentifierType creates a new CredentialServiceIdentifier.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CredentialServiceIdentifier) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCredentialServiceIdentifierWithIdentifierType initializes a credential service identifier instance.
 func NewCredentialServiceIdentifierWithIdentifierType(identifier string, type_ CredentialServiceIdentifierType) *CredentialServiceIdentifier {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASCredentialServiceIdentifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:type:"), purego.NSString(identifier), type_)
 	return credentialServiceIdentifierAdopt(_id)
 }
 
-// Initializes an ASCredentialServiceIdentifier object.
-//
-// NewCredentialServiceIdentifierWithIdentifierTypeDisplayName creates a new CredentialServiceIdentifier.
+// NewCredentialServiceIdentifierWithIdentifierTypeDisplayName initializes an ASCredentialServiceIdentifier object.
 func NewCredentialServiceIdentifierWithIdentifierTypeDisplayName(identifier string, type_ CredentialServiceIdentifierType, displayName string) *CredentialServiceIdentifier {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASCredentialServiceIdentifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:type:displayName:"), purego.NSString(identifier), type_, purego.NSString(displayName))
 	return credentialServiceIdentifierAdopt(_id)
 }
 
-// A user visible name for the identifier. For `app` types it will contain the localized name of the app. For `URL` types it will contain the host name of the URL if it contains a valid host. For `URL` type identifiers that do not contain a valid host and for `domain` type identifiers, this will be equal to `identifier`. This property is meant only as a best effort suggestion for display purposes. It is not used by the system to identify the service or suggest a credential for AutoFill.
+// DisplayName a user visible name for the identifier. For `app` types it will contain the localized name of the app. For `URL` types it will contain the host name of the URL if it contains a valid host. For `URL` type identifiers that do not contain a valid host and for `domain` type identifiers, this will be equal to `identifier`. This property is meant only as a best effort suggestion for display purposes. It is not used by the system to identify the service or suggest a credential for AutoFill.
 func (x *CredentialServiceIdentifier) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
 	if _r == 0 {
@@ -85,7 +89,7 @@ func (x *CredentialServiceIdentifier) DisplayName() string {
 	return purego.GoString(_r)
 }
 
-// Get the identifier.
+// Identifier get the identifier.
 func (x *CredentialServiceIdentifier) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -94,7 +98,7 @@ func (x *CredentialServiceIdentifier) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Get the service identifier type.
+// Type get the service identifier type.
 func (x *CredentialServiceIdentifier) Type() CredentialServiceIdentifierType {
 	_r := objc.Send[CredentialServiceIdentifierType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r

@@ -11,19 +11,23 @@ import (
 // AnimationProvider is accepted wherever a CAAnimation (or one of its subclasses) is expected.
 type AnimationProvider interface {
 	objref.Object
+	isAnimation()
 }
 
 // BasicAnimationProvider is accepted wherever a CABasicAnimation (or one of its subclasses) is expected.
 type BasicAnimationProvider interface {
 	objref.Object
+	isBasicAnimation()
 }
 
 // LayerProvider is accepted wherever a CALayer (or one of its subclasses) is expected.
 type LayerProvider interface {
 	objref.Object
+	isLayer()
 }
 
 // PropertyAnimationProvider is accepted wherever a CAPropertyAnimation (or one of its subclasses) is expected.
 type PropertyAnimationProvider interface {
 	objref.Object
+	isPropertyAnimation()
 }

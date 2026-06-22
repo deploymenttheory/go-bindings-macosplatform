@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that encapsulates a diagnostic report.
-//
 // DiagnosticPayload is an idiomatic wrapper over the Objective-C class MXDiagnosticPayload.
+//
+// An object that encapsulates a diagnostic report.
 type DiagnosticPayload struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DiagnosticPayloadFromID(id objc.ID) *DiagnosticPayload {
 	if id == 0 {
 		return nil
 	}
-	x := &DiagnosticPayload{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DiagnosticPayload{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func diagnosticPayloadAdopt(id objc.ID) *DiagnosticPayload {
 	if id == 0 {
 		return nil
 	}
-	x := &DiagnosticPayload{Handle: objref.Wrap(id)}
+	x := &DiagnosticPayload{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *DiagnosticPayload) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DiagnosticPayload) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDiagnosticPayload creates a new DiagnosticPayload.
 func NewDiagnosticPayload() *DiagnosticPayload {
 	_id := objc.Send[objc.ID](objc.ID(_class("MXDiagnosticPayload")), objc.RegisterName("new"))
 	return diagnosticPayloadAdopt(_id)
 }
 
-// Returns the contents of the payload in JSON format.
+// JSONRepresentation returns the contents of the payload in JSON format.
 func (x *DiagnosticPayload) JSONRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSONRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// Returns the results of the payload as a dictionary.
+// DictionaryRepresentation returns the results of the payload as a dictionary.
 func (x *DiagnosticPayload) DictionaryRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// An array containing CPU exception diagnostics for this application.
+// CpuExceptionDiagnostics an array containing CPU exception diagnostics for this application.
 //
 // CpuExceptionDiagnostics returns the collection as a Go slice.
 func (x *DiagnosticPayload) CpuExceptionDiagnostics() []*CPUExceptionDiagnostic {
@@ -84,7 +92,7 @@ func (x *DiagnosticPayload) CpuExceptionDiagnostics() []*CPUExceptionDiagnostic 
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CPUExceptionDiagnostic { return CPUExceptionDiagnosticFromID(_id) })
 }
 
-// An array containing disk write exception diagnostics for this application.
+// DiskWriteExceptionDiagnostics an array containing disk write exception diagnostics for this application.
 //
 // DiskWriteExceptionDiagnostics returns the collection as a Go slice.
 func (x *DiagnosticPayload) DiskWriteExceptionDiagnostics() []*DiskWriteExceptionDiagnostic {
@@ -92,7 +100,7 @@ func (x *DiagnosticPayload) DiskWriteExceptionDiagnostics() []*DiskWriteExceptio
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DiskWriteExceptionDiagnostic { return DiskWriteExceptionDiagnosticFromID(_id) })
 }
 
-// An array containing hang diagnostics for this application.
+// HangDiagnostics an array containing hang diagnostics for this application.
 //
 // HangDiagnostics returns the collection as a Go slice.
 func (x *DiagnosticPayload) HangDiagnostics() []*HangDiagnostic {
@@ -100,7 +108,7 @@ func (x *DiagnosticPayload) HangDiagnostics() []*HangDiagnostic {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *HangDiagnostic { return HangDiagnosticFromID(_id) })
 }
 
-// An array containing crash diagnostics for this application.
+// CrashDiagnostics an array containing crash diagnostics for this application.
 //
 // CrashDiagnostics returns the collection as a Go slice.
 func (x *DiagnosticPayload) CrashDiagnostics() []*CrashDiagnostic {
@@ -108,13 +116,13 @@ func (x *DiagnosticPayload) CrashDiagnostics() []*CrashDiagnostic {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CrashDiagnostic { return CrashDiagnosticFromID(_id) })
 }
 
-// An NSDate object that indicates the start time for which the payload was generated.
+// TimeStampBegin an NSDate object that indicates the start time for which the payload was generated.
 func (x *DiagnosticPayload) TimeStampBegin() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeStampBegin"))
 	return obj.Wrap(_r)
 }
 
-// An NSDate object that indicates the end time for which the payload was generated.
+// TimeStampEnd an NSDate object that indicates the end time for which the payload was generated.
 func (x *DiagnosticPayload) TimeStampEnd() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeStampEnd"))
 	return obj.Wrap(_r)

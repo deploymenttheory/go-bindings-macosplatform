@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A URL session that creates and executes asset download tasks.
-//
 // AssetDownloadURLSession is an idiomatic wrapper over the Objective-C class AVAssetDownloadURLSession.
+//
+// A URL session that creates and executes asset download tasks.
 type AssetDownloadURLSession struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetDownloadURLSessionFromID(id objc.ID) *AssetDownloadURLSession {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetDownloadURLSession{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetDownloadURLSession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetDownloadURLSessionAdopt(id objc.ID) *AssetDownloadURLSession {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetDownloadURLSession{Handle: objref.Wrap(id)}
+	x := &AssetDownloadURLSession{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *AssetDownloadURLSession) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetDownloadURLSession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetDownloadURLSession creates a new AssetDownloadURLSession.
 func NewAssetDownloadURLSession() *AssetDownloadURLSession {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetDownloadURLSession")), objc.RegisterName("new"))
 	return assetDownloadURLSessionAdopt(_id)
 }
 
-// Creates a download task to download the asset.
+// AssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions creates a download task to download the asset.
 func (x *AssetDownloadURLSession) AssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions(uRLAsset *URLAsset, title string, artworkData obj.Object, options obj.Object) *AssetDownloadTask {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetDownloadTaskWithURLAsset:assetTitle:assetArtworkData:options:"), objref.IDOf(uRLAsset), purego.NSString(title), objref.IDOf(artworkData), objref.IDOf(options))
 	return AssetDownloadTaskFromID(_r)
 }
 
-// Creates a download task to download the asset and media selections.
+// AggregateAssetDownloadTaskWithURLAssetMediaSelectionsAssetTitleAssetArtworkDataOptions creates a download task to download the asset and media selections.
 func (x *AssetDownloadURLSession) AggregateAssetDownloadTaskWithURLAssetMediaSelectionsAssetTitleAssetArtworkDataOptions(uRLAsset *URLAsset, mediaSelections []*MediaSelection, title string, artworkData obj.Object, options obj.Object) *AggregateAssetDownloadTask {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("aggregateAssetDownloadTaskWithURLAsset:mediaSelections:assetTitle:assetArtworkData:options:"), objref.IDOf(uRLAsset), purego.SliceToNSArray(mediaSelections, func(_v *MediaSelection) objc.ID { return objref.IDOf(_v) }), purego.NSString(title), objref.IDOf(artworkData), objref.IDOf(options))
 	return AggregateAssetDownloadTaskFromID(_r)
 }
 
-// Creates a download task that uses the specified configuration.
+// AssetDownloadTaskWithConfiguration creates a download task that uses the specified configuration.
 func (x *AssetDownloadURLSession) AssetDownloadTaskWithConfiguration(downloadConfiguration *AssetDownloadConfiguration) *AssetDownloadTask {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetDownloadTaskWithConfiguration:"), objref.IDOf(downloadConfiguration))
 	return AssetDownloadTaskFromID(_r)

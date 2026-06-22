@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of how a compute function fetches input data for an attribute.
-//
 // BufferLayoutDescriptor is an idiomatic wrapper over the Objective-C class MTLBufferLayoutDescriptor.
+//
+// A description of how a compute function fetches input data for an attribute.
 type BufferLayoutDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func BufferLayoutDescriptorFromID(id objc.ID) *BufferLayoutDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &BufferLayoutDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BufferLayoutDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func bufferLayoutDescriptorAdopt(id objc.ID) *BufferLayoutDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &BufferLayoutDescriptor{Handle: objref.Wrap(id)}
+	x := &BufferLayoutDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,59 +60,65 @@ func (x *BufferLayoutDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BufferLayoutDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBufferLayoutDescriptor creates a new BufferLayoutDescriptor.
 func NewBufferLayoutDescriptor() *BufferLayoutDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLBufferLayoutDescriptor")), objc.RegisterName("new"))
 	return bufferLayoutDescriptorAdopt(_id)
 }
 
-// The number of bytes from one buffer entry to the next.
-//
-// WithStride sets stride and returns the receiver so calls can be chained.
+// WithStride the number of bytes from one buffer entry to the next.
 func (x *BufferLayoutDescriptor) WithStride(stride int) *BufferLayoutDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStride:"), stride)
 	return x
 }
 
-// Determines how and when compute functions fetch data.
-//
-// WithStepFunction sets stepFunction and returns the receiver so calls can be chained.
+// WithStepFunction determines how and when compute functions fetch data.
 func (x *BufferLayoutDescriptor) WithStepFunction(stepFunction StepFunction) *BufferLayoutDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepFunction:"), stepFunction)
 	return x
 }
 
-// How frequently the step function should load data.
-//
-// WithStepRate sets stepRate and returns the receiver so calls can be chained.
+// WithStepRate how frequently the step function should load data.
 func (x *BufferLayoutDescriptor) WithStepRate(stepRate int) *BufferLayoutDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepRate:"), stepRate)
 	return x
 }
 
+// Stride wraps the corresponding Objective-C method.
 func (x *BufferLayoutDescriptor) Stride() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stride"))
 	return _r
 }
 
+// SetStride wraps the corresponding Objective-C method.
 func (x *BufferLayoutDescriptor) SetStride(stride int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStride:"), stride)
 }
 
+// StepFunction wraps the corresponding Objective-C method.
 func (x *BufferLayoutDescriptor) StepFunction() StepFunction {
 	_r := objc.Send[StepFunction](objref.IDOf(x), objc.RegisterName("stepFunction"))
 	return _r
 }
 
+// SetStepFunction wraps the corresponding Objective-C method.
 func (x *BufferLayoutDescriptor) SetStepFunction(stepFunction StepFunction) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepFunction:"), stepFunction)
 }
 
+// StepRate wraps the corresponding Objective-C method.
 func (x *BufferLayoutDescriptor) StepRate() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stepRate"))
 	return _r
 }
 
+// SetStepRate wraps the corresponding Objective-C method.
 func (x *BufferLayoutDescriptor) SetStepRate(stepRate int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepRate:"), stepRate)
 }

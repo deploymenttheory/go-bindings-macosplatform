@@ -7,20 +7,21 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// Returns a VNCircle object with center at the Origin [0.0; 0.0] and zero radius.
+// ZeroCircle returns a VNCircle object with center at the Origin [0.0; 0.0] and zero radius.
 func ZeroCircle() *Circle {
 	_r := objc.Send[objc.ID](objc.ID(_class("VNCircle")), objc.RegisterName("zeroCircle"))
 	return CircleFromID(_r)
 }
 
-// Requests the collection of classifications that the Vision framework recognizes.
-func KnownClassificationsForRevisionError(requestRevision int) ([]*ClassificationObservation, error) {
+// KnownClassificationsForRevisionError requests the collection of classifications that the Vision framework recognizes.
+func KnownClassificationsForRevisionError(requestRevision int) (result []*ClassificationObservation, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("VNClassifyImageRequest")), objc.RegisterName("knownClassificationsForRevision:error:"), requestRevision, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -29,8 +30,8 @@ func KnownClassificationsForRevisionError(requestRevision int) ([]*Classificatio
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *ClassificationObservation { return ClassificationObservationFromID(_id) }), nil
 }
 
-// Creates a model container to use with a Core ML request.
-func ModelForMLModelError(model obj.Object) (*CoreMLModel, error) {
+// ModelForMLModelError creates a model container to use with a Core ML request.
+func ModelForMLModelError(model obj.Object) (result *CoreMLModel, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("VNCoreMLModel")), objc.RegisterName("modelForMLModel:error:"), objref.IDOf(model), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -39,7 +40,7 @@ func ModelForMLModelError(model obj.Object) (*CoreMLModel, error) {
 	return CoreMLModelFromID(_r), nil
 }
 
-// Obtain the collection of barcode symbologies currently recognized by the Vision framework. Calling this method could be a potentially expensive operation.
+// SupportedSymbologies obtain the collection of barcode symbologies currently recognized by the Vision framework. Calling this method could be a potentially expensive operation.
 //
 // SupportedSymbologies returns the collection as a Go slice.
 func SupportedSymbologies() []obj.Object {
@@ -47,14 +48,14 @@ func SupportedSymbologies() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Returns a Boolean value that indicates whether a revision supports a constellation.
+// RevisionSupportsConstellation returns a Boolean value that indicates whether a revision supports a constellation.
 func RevisionSupportsConstellation(requestRevision int, constellation RequestFaceLandmarksConstellation) bool {
 	_r := objc.Send[bool](objc.ID(_class("VNDetectFaceLandmarksRequest")), objc.RegisterName("revision:supportsConstellation:"), requestRevision, constellation)
 	return _r
 }
 
-// Retrieves the supported joint names for a revision.
-func SupportedJointNamesForRevisionError(revision int) ([]obj.Object, error) {
+// SupportedJointNamesForRevisionError retrieves the supported joint names for a revision.
+func SupportedJointNamesForRevisionError(revision int) (result []obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("VNDetectHumanBodyPoseRequest")), objc.RegisterName("supportedJointNamesForRevision:error:"), revision, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -63,8 +64,8 @@ func SupportedJointNamesForRevisionError(revision int) ([]obj.Object, error) {
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// Retrieves the supported joint group names for a revision.
-func SupportedJointsGroupNamesForRevisionError(revision int) ([]obj.Object, error) {
+// SupportedJointsGroupNamesForRevisionError retrieves the supported joint group names for a revision.
+func SupportedJointsGroupNamesForRevisionError(revision int) (result []obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("VNDetectHumanBodyPoseRequest")), objc.RegisterName("supportedJointsGroupNamesForRevision:error:"), revision, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -73,8 +74,8 @@ func SupportedJointsGroupNamesForRevisionError(revision int) ([]obj.Object, erro
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// Retrieves the supported joint names for a revision.
-func VNDetectHumanHandPoseRequestSupportedJointNamesForRevisionError(revision int) ([]obj.Object, error) {
+// VNDetectHumanHandPoseRequestSupportedJointNamesForRevisionError retrieves the supported joint names for a revision.
+func VNDetectHumanHandPoseRequestSupportedJointNamesForRevisionError(revision int) (result []obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("VNDetectHumanHandPoseRequest")), objc.RegisterName("supportedJointNamesForRevision:error:"), revision, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -83,8 +84,8 @@ func VNDetectHumanHandPoseRequestSupportedJointNamesForRevisionError(revision in
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// Retrieves the supported joint group names for a revision.
-func VNDetectHumanHandPoseRequestSupportedJointsGroupNamesForRevisionError(revision int) ([]obj.Object, error) {
+// VNDetectHumanHandPoseRequestSupportedJointsGroupNamesForRevisionError retrieves the supported joint group names for a revision.
+func VNDetectHumanHandPoseRequestSupportedJointsGroupNamesForRevisionError(revision int) (result []obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("VNDetectHumanHandPoseRequest")), objc.RegisterName("supportedJointsGroupNamesForRevision:error:"), revision, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -93,14 +94,38 @@ func VNDetectHumanHandPoseRequestSupportedJointsGroupNamesForRevisionError(revis
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// Returns a new generate person segmentation request.
+// ObservationWithBoundingBox creates an observation with a bounding box.
+func ObservationWithBoundingBox(boundingBox corefoundation.CGRect) *DetectedObjectObservation {
+	_r := objc.Send[objc.ID](objc.ID(_class("VNDetectedObjectObservation")), objc.RegisterName("observationWithBoundingBox:"), boundingBox)
+	return DetectedObjectObservationFromID(_r)
+}
+
+// ObservationWithRequestRevisionBoundingBox creates an observation with a revision number and bounding box.
+func ObservationWithRequestRevisionBoundingBox(requestRevision int, boundingBox corefoundation.CGRect) *DetectedObjectObservation {
+	_r := objc.Send[objc.ID](objc.ID(_class("VNDetectedObjectObservation")), objc.RegisterName("observationWithRequestRevision:boundingBox:"), requestRevision, boundingBox)
+	return DetectedObjectObservationFromID(_r)
+}
+
+// FaceObservationWithRequestRevisionBoundingBoxRollYaw creates an observation that contains the roll and yaw of the face.
+func FaceObservationWithRequestRevisionBoundingBoxRollYaw(requestRevision int, boundingBox corefoundation.CGRect, roll obj.Object, yaw obj.Object) *FaceObservation {
+	_r := objc.Send[objc.ID](objc.ID(_class("VNFaceObservation")), objc.RegisterName("faceObservationWithRequestRevision:boundingBox:roll:yaw:"), requestRevision, boundingBox, objref.IDOf(roll), objref.IDOf(yaw))
+	return FaceObservationFromID(_r)
+}
+
+// FaceObservationWithRequestRevisionBoundingBoxRollYawPitch creates an observation that contains the roll, yaw, and pitch of the face.
+func FaceObservationWithRequestRevisionBoundingBoxRollYawPitch(requestRevision int, boundingBox corefoundation.CGRect, roll obj.Object, yaw obj.Object, pitch obj.Object) *FaceObservation {
+	_r := objc.Send[objc.ID](objc.ID(_class("VNFaceObservation")), objc.RegisterName("faceObservationWithRequestRevision:boundingBox:roll:yaw:pitch:"), requestRevision, boundingBox, objref.IDOf(roll), objref.IDOf(yaw), objref.IDOf(pitch))
+	return FaceObservationFromID(_r)
+}
+
+// New returns a new generate person segmentation request.
 func New() *GeneratePersonSegmentationRequest {
 	_r := objc.Send[objc.ID](objc.ID(_class("VNGeneratePersonSegmentationRequest")), objc.RegisterName("new"))
 	return GeneratePersonSegmentationRequestFromID(_r)
 }
 
-// Calculates a bounding circle for the specified contour object.
-func BoundingCircleForContourError(contour *Contour) (*Circle, error) {
+// BoundingCircleForContourError calculates a bounding circle for the specified contour object.
+func BoundingCircleForContourError(contour *Contour) (result *Circle, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("VNGeometryUtils")), objc.RegisterName("boundingCircleForContour:error:"), objref.IDOf(contour), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -109,8 +134,8 @@ func BoundingCircleForContourError(contour *Contour) (*Circle, error) {
 	return CircleFromID(_r), nil
 }
 
-// Calculates a bounding circle for the specified array of points.
-func BoundingCircleForPointsError(points []*Point) (*Circle, error) {
+// BoundingCircleForPointsError calculates a bounding circle for the specified array of points.
+func BoundingCircleForPointsError(points []*Point) (result *Circle, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("VNGeometryUtils")), objc.RegisterName("boundingCircleForPoints:error:"), purego.SliceToNSArray(points, func(_v *Point) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -119,26 +144,48 @@ func BoundingCircleForPointsError(points []*Point) (*Circle, error) {
 	return CircleFromID(_r), nil
 }
 
-// Creates a point object that’s shifted by the X and Y offsets of the specified vector.
+// CalculateAreaForContourOrientedArea calculates the area for the specified contour.
+func CalculateAreaForContourOrientedArea(contour *Contour, orientedArea bool) (area float64, err error) {
+	var _out0 float64
+	var _nsErr uintptr
+	objc.Send[bool](objc.ID(_class("VNGeometryUtils")), objc.RegisterName("calculateArea:forContour:orientedArea:error:"), unsafe.Pointer(&_out0), objref.IDOf(contour), orientedArea, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _out0, nil
+}
+
+// CalculatePerimeterForContour calculates the perimeter of a closed contour.
+func CalculatePerimeterForContour(contour *Contour) (perimeter float64, err error) {
+	var _out0 float64
+	var _nsErr uintptr
+	objc.Send[bool](objc.ID(_class("VNGeometryUtils")), objc.RegisterName("calculatePerimeter:forContour:error:"), unsafe.Pointer(&_out0), objref.IDOf(contour), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _out0, nil
+}
+
+// PointByApplyingVectorToPoint creates a point object that’s shifted by the X and Y offsets of the specified vector.
 func PointByApplyingVectorToPoint(vector *Vector, point *Point) *Point {
 	_r := objc.Send[objc.ID](objc.ID(_class("VNPoint")), objc.RegisterName("pointByApplyingVector:toPoint:"), objref.IDOf(vector), objref.IDOf(point))
 	return PointFromID(_r)
 }
 
-// Calculates the distance between two points.
+// DistanceBetweenPointPoint calculates the distance between two points.
 func DistanceBetweenPointPoint(point1 *Point, point2 *Point) float64 {
 	_r := objc.Send[float64](objc.ID(_class("VNPoint")), objc.RegisterName("distanceBetweenPoint:point:"), objref.IDOf(point1), objref.IDOf(point2))
 	return _r
 }
 
-// Returns a VNPoint object that represents the location of (0.0, 0.0).
+// ZeroPoint returns a VNPoint object that represents the location of (0.0, 0.0).
 func ZeroPoint() *Point {
 	_r := objc.Send[objc.ID](objc.ID(_class("VNPoint")), objc.RegisterName("zeroPoint"))
 	return PointFromID(_r)
 }
 
-// Returns a list of animal identifiers the recognition algorithm supports for the specified revision.
-func KnownAnimalIdentifiersForRevisionError(requestRevision int) ([]obj.Object, error) {
+// KnownAnimalIdentifiersForRevisionError returns a list of animal identifiers the recognition algorithm supports for the specified revision.
+func KnownAnimalIdentifiersForRevisionError(requestRevision int) (result []obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("VNRecognizeAnimalsRequest")), objc.RegisterName("knownAnimalIdentifiersForRevision:error:"), requestRevision, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -147,8 +194,8 @@ func KnownAnimalIdentifiersForRevisionError(requestRevision int) ([]obj.Object, 
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// Requests a list of languages that the specified revision recognizes.
-func SupportedRecognitionLanguagesForTextRecognitionLevelRevisionError(recognitionLevel RequestTextRecognitionLevel, requestRevision int) ([]string, error) {
+// SupportedRecognitionLanguagesForTextRecognitionLevelRevisionError requests a list of languages that the specified revision recognizes.
+func SupportedRecognitionLanguagesForTextRecognitionLevelRevisionError(recognitionLevel RequestTextRecognitionLevel, requestRevision int) (result []string, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("VNRecognizeTextRequest")), objc.RegisterName("supportedRecognitionLanguagesForTextRecognitionLevel:revision:error:"), recognitionLevel, requestRevision, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -157,55 +204,67 @@ func SupportedRecognitionLanguagesForTextRecognitionLevelRevisionError(recogniti
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) }), nil
 }
 
-// Provides the collection of currently-supported algorithm or implementation versions for the class of request. This method allows clients to introspect at runtime what capabilities are available for each class of VNRequest in the Vision framework.
+// RectangleObservationWithRequestRevisionTopLeftBottomLeftBottomRightTopRight creates a rectangle observation from its corner points.
+func RectangleObservationWithRequestRevisionTopLeftBottomLeftBottomRightTopRight(requestRevision int, topLeft corefoundation.CGPoint, bottomLeft corefoundation.CGPoint, bottomRight corefoundation.CGPoint, topRight corefoundation.CGPoint) *RectangleObservation {
+	_r := objc.Send[objc.ID](objc.ID(_class("VNRectangleObservation")), objc.RegisterName("rectangleObservationWithRequestRevision:topLeft:bottomLeft:bottomRight:topRight:"), requestRevision, topLeft, bottomLeft, bottomRight, topRight)
+	return RectangleObservationFromID(_r)
+}
+
+// RectangleObservationWithRequestRevisionTopLeftTopRightBottomRightBottomLeft creates a rectangle observation from its corner points.
+func RectangleObservationWithRequestRevisionTopLeftTopRightBottomRightBottomLeft(requestRevision int, topLeft corefoundation.CGPoint, topRight corefoundation.CGPoint, bottomRight corefoundation.CGPoint, bottomLeft corefoundation.CGPoint) *RectangleObservation {
+	_r := objc.Send[objc.ID](objc.ID(_class("VNRectangleObservation")), objc.RegisterName("rectangleObservationWithRequestRevision:topLeft:topRight:bottomRight:bottomLeft:"), requestRevision, topLeft, topRight, bottomRight, bottomLeft)
+	return RectangleObservationFromID(_r)
+}
+
+// SupportedRevisions provides the collection of currently-supported algorithm or implementation versions for the class of request. This method allows clients to introspect at runtime what capabilities are available for each class of VNRequest in the Vision framework.
 func SupportedRevisions() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("VNRequest")), objc.RegisterName("supportedRevisions"))
 	return obj.Wrap(_r)
 }
 
-// Provides the revision of the request that was latest for the particular SDK that was linked with the client application.
+// DefaultRevision provides the revision of the request that was latest for the particular SDK that was linked with the client application.
 func DefaultRevision() int {
 	_r := objc.Send[int](objc.ID(_class("VNRequest")), objc.RegisterName("defaultRevision"))
 	return _r
 }
 
-// Provides the current revision supported by the request.
+// CurrentRevision provides the current revision supported by the request.
 func CurrentRevision() int {
 	_r := objc.Send[int](objc.ID(_class("VNRequest")), objc.RegisterName("currentRevision"))
 	return _r
 }
 
-// Calculates a vector that’s normalized by preserving its direction, so that the vector length equals 1.0.
+// UnitVectorForVector calculates a vector that’s normalized by preserving its direction, so that the vector length equals 1.0.
 func UnitVectorForVector(vector *Vector) *Vector {
 	_r := objc.Send[objc.ID](objc.ID(_class("VNVector")), objc.RegisterName("unitVectorForVector:"), objref.IDOf(vector))
 	return VectorFromID(_r)
 }
 
-// Creates a new vector by multiplying the specified vector’s x-axis and y-axis projections by the scalar value.
+// VectorByMultiplyingVectorByScalar creates a new vector by multiplying the specified vector’s x-axis and y-axis projections by the scalar value.
 func VectorByMultiplyingVectorByScalar(vector *Vector, scalar float64) *Vector {
 	_r := objc.Send[objc.ID](objc.ID(_class("VNVector")), objc.RegisterName("vectorByMultiplyingVector:byScalar:"), objref.IDOf(vector), scalar)
 	return VectorFromID(_r)
 }
 
-// Creates a new vector by adding the specified vectors.
+// VectorByAddingVectorToVector creates a new vector by adding the specified vectors.
 func VectorByAddingVectorToVector(v1 *Vector, v2 *Vector) *Vector {
 	_r := objc.Send[objc.ID](objc.ID(_class("VNVector")), objc.RegisterName("vectorByAddingVector:toVector:"), objref.IDOf(v1), objref.IDOf(v2))
 	return VectorFromID(_r)
 }
 
-// Creates a new vector by subtracting the first vector from the second vector.
+// VectorBySubtractingVectorFromVector creates a new vector by subtracting the first vector from the second vector.
 func VectorBySubtractingVectorFromVector(v1 *Vector, v2 *Vector) *Vector {
 	_r := objc.Send[objc.ID](objc.ID(_class("VNVector")), objc.RegisterName("vectorBySubtractingVector:fromVector:"), objref.IDOf(v1), objref.IDOf(v2))
 	return VectorFromID(_r)
 }
 
-// Caclulates the dot product of two vectors.
+// DotProductOfVectorVector caclulates the dot product of two vectors.
 func DotProductOfVectorVector(v1 *Vector, v2 *Vector) float64 {
 	_r := objc.Send[float64](objc.ID(_class("VNVector")), objc.RegisterName("dotProductOfVector:vector:"), objref.IDOf(v1), objref.IDOf(v2))
 	return _r
 }
 
-// Returns a VNVector object with zero length. The theta for zeroVector is not defined (NaN).
+// ZeroVector returns a VNVector object with zero length. The theta for zeroVector is not defined (NaN).
 func ZeroVector() *Vector {
 	_r := objc.Send[objc.ID](objc.ID(_class("VNVector")), objc.RegisterName("zeroVector"))
 	return VectorFromID(_r)

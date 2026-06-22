@@ -23,7 +23,8 @@ func MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStructFr
 	if id == 0 {
 		return nil
 	}
-	x := &MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStructAd
 	if id == 0 {
 		return nil
 	}
-	x := &MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct{Handle: objref.Wrap(id)}
+	x := &MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,24 +58,31 @@ func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStru
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct creates a new MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct.
 func NewMTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct() *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct")), objc.RegisterName("new"))
 	return mTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStructAdopt(_id)
 }
 
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel sets the property and returns the receiver so calls can be chained.
 func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) WithLabel(label string) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// WithMode sets mode and returns the receiver so calls can be chained.
+// WithMode sets the property and returns the receiver so calls can be chained.
 func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	return x
 }
 
+// Label wraps the corresponding Objective-C method.
 func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -82,24 +91,29 @@ func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStru
 	return purego.GoString(_r)
 }
 
+// SetLabel wraps the corresponding Objective-C method.
 func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
+// Mode wraps the corresponding Objective-C method.
 func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) Mode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mode"))
 	return obj.Wrap(_r)
 }
 
+// SetMode wraps the corresponding Objective-C method.
 func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) SetMode(mode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
 }
 
+// ModeTags wraps the corresponding Objective-C method.
 func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) ModeTags() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modeTags"))
 	return obj.Wrap(_r)
 }
 
+// SetModeTags wraps the corresponding Objective-C method.
 func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) SetModeTags(modeTags obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeTags:"), objref.IDOf(modeTags))
 }

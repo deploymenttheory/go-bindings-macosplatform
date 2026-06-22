@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ArrayBinaryKernel is an idiomatic wrapper over the Objective-C class MPSNDArrayBinaryKernel.
+//
+// ArrayBinaryKernel is an abstract base — you do not construct it directly. Construct one of [ArrayGather] and pass it where a ArrayBinaryKernel is accepted.
 type ArrayBinaryKernel struct {
-	objref.Handle
+	ArrayMultiaryKernel
 }
 
 // ArrayBinaryKernelFromID adopts an existing Objective-C object as a ArrayBinaryKernel
@@ -23,7 +24,8 @@ func ArrayBinaryKernelFromID(id objc.ID) *ArrayBinaryKernel {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayBinaryKernel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ArrayBinaryKernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,30 +38,10 @@ func arrayBinaryKernelAdopt(id objc.ID) *ArrayBinaryKernel {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayBinaryKernel{Handle: objref.Wrap(id)}
+	x := &ArrayBinaryKernel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ArrayBinaryKernel) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ArrayBinaryKernel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ArrayBinaryKernel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewArrayBinaryKernel creates a new ArrayBinaryKernel.
-func NewArrayBinaryKernel() *ArrayBinaryKernel {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayBinaryKernel")), objc.RegisterName("new"))
-	return arrayBinaryKernelAdopt(_id)
 }
 
 // ArrayBinaryKernelable is the interface implemented by [ArrayBinaryKernel], for mocking and DI.
@@ -68,3 +50,14 @@ type ArrayBinaryKernelable interface {
 }
 
 var _ ArrayBinaryKernelable = (*ArrayBinaryKernel)(nil)
+
+// isArrayBinaryKernel marks ArrayBinaryKernel — and, by embedding promotion, its
+// subclasses — as a member of the ArrayBinaryKernel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ArrayBinaryKernel) isArrayBinaryKernel() {}
+
+var _ ArrayBinaryKernelProvider = (*ArrayBinaryKernel)(nil)
+
+var _ ArrayMultiaryKernelProvider = (*ArrayBinaryKernel)(nil)
+
+var _ ArrayMultiaryBaseProvider = (*ArrayBinaryKernel)(nil)

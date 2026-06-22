@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The shared recorder object that provides the ability to record audio and video of your app.
-//
 // ScreenRecorder is an idiomatic wrapper over the Objective-C class RPScreenRecorder.
+//
+// The shared recorder object that provides the ability to record audio and video of your app.
 type ScreenRecorder struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func ScreenRecorderFromID(id objc.ID) *ScreenRecorder {
 	if id == 0 {
 		return nil
 	}
-	x := &ScreenRecorder{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScreenRecorder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func screenRecorderAdopt(id objc.ID) *ScreenRecorder {
 	if id == 0 {
 		return nil
 	}
-	x := &ScreenRecorder{Handle: objref.Wrap(id)}
+	x := &ScreenRecorder{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,37 +62,37 @@ func (x *ScreenRecorder) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScreenRecorder) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewScreenRecorder creates a new ScreenRecorder.
 func NewScreenRecorder() *ScreenRecorder {
 	_id := objc.Send[objc.ID](objc.ID(_class("RPScreenRecorder")), objc.RegisterName("new"))
 	return screenRecorderAdopt(_id)
 }
 
-// A Boolean value that indicates whether the microphone is currently enabled.
-//
-// WithMicrophoneEnabled sets microphoneEnabled and returns the receiver so calls can be chained.
+// WithMicrophoneEnabled a Boolean value that indicates whether the microphone is currently enabled.
 func (x *ScreenRecorder) WithMicrophoneEnabled(microphoneEnabled bool) *ScreenRecorder {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMicrophoneEnabled:"), microphoneEnabled)
 	return x
 }
 
-// A Boolean value that indicates whether the camera is currently enabled.
-//
-// WithCameraEnabled sets cameraEnabled and returns the receiver so calls can be chained.
+// WithCameraEnabled a Boolean value that indicates whether the camera is currently enabled.
 func (x *ScreenRecorder) WithCameraEnabled(cameraEnabled bool) *ScreenRecorder {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCameraEnabled:"), cameraEnabled)
 	return x
 }
 
-// The camera position to use.
-//
-// WithCameraPosition sets cameraPosition and returns the receiver so calls can be chained.
+// WithCameraPosition the camera position to use.
 func (x *ScreenRecorder) WithCameraPosition(cameraPosition CameraPosition) *ScreenRecorder {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCameraPosition:"), cameraPosition)
 	return x
 }
 
-// Starts recording the app display.
+// StartRecordingWithHandler starts recording the app display.
 //
 // StartRecordingWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StartRecordingWithHandler(ctx context.Context) error {
@@ -109,10 +111,10 @@ func (x *ScreenRecorder) StartRecordingWithHandler(ctx context.Context) error {
 	}
 }
 
-// Stops the current recording.
+// StopRecordingWithHandler stops the current recording.
 //
 // StopRecordingWithHandler blocks until the operation completes or ctx is cancelled.
-func (x *ScreenRecorder) StopRecordingWithHandler(ctx context.Context) (*PreviewViewController, error) {
+func (x *ScreenRecorder) StopRecordingWithHandler(ctx context.Context) (result *PreviewViewController, err error) {
 	type _result struct {
 		val *PreviewViewController
 		err error
@@ -134,7 +136,7 @@ func (x *ScreenRecorder) StopRecordingWithHandler(ctx context.Context) (*Preview
 	}
 }
 
-// Stops the current recording and writes the movie to the specified output URL.
+// StopRecordingWithOutputURL stops the current recording and writes the movie to the specified output URL.
 //
 // StopRecordingWithOutputURL blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StopRecordingWithOutputURL(ctx context.Context, url string) error {
@@ -153,7 +155,7 @@ func (x *ScreenRecorder) StopRecordingWithOutputURL(ctx context.Context, url str
 	}
 }
 
-// Discards the current recording.
+// DiscardRecordingWithHandler discards the current recording.
 //
 // DiscardRecordingWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) DiscardRecordingWithHandler(ctx context.Context) error {
@@ -170,7 +172,7 @@ func (x *ScreenRecorder) DiscardRecordingWithHandler(ctx context.Context) error 
 	}
 }
 
-// Stops screen capture
+// StopCaptureWithHandler stops screen capture
 //
 // StopCaptureWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StopCaptureWithHandler(ctx context.Context) error {
@@ -189,7 +191,7 @@ func (x *ScreenRecorder) StopCaptureWithHandler(ctx context.Context) error {
 	}
 }
 
-// Starts buffering a clip recording.
+// StartClipBuffering starts buffering a clip recording.
 //
 // StartClipBuffering blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StartClipBuffering(ctx context.Context) error {
@@ -208,7 +210,7 @@ func (x *ScreenRecorder) StartClipBuffering(ctx context.Context) error {
 	}
 }
 
-// Stops buffering a clip recording.
+// StopClipBuffering stops buffering a clip recording.
 //
 // StopClipBuffering blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StopClipBuffering(ctx context.Context) error {
@@ -227,7 +229,7 @@ func (x *ScreenRecorder) StopClipBuffering(ctx context.Context) error {
 	}
 }
 
-// Exports a clip recording to a file.
+// ExportClipToURLDuration exports a clip recording to a file.
 //
 // ExportClipToURLDuration blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) ExportClipToURLDuration(ctx context.Context, url string, duration float64) error {
@@ -246,43 +248,52 @@ func (x *ScreenRecorder) ExportClipToURLDuration(ctx context.Context, url string
 	}
 }
 
+// IsAvailable wraps the corresponding Objective-C method.
 func (x *ScreenRecorder) IsAvailable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAvailable"))
 	return _r
 }
 
+// IsRecording wraps the corresponding Objective-C method.
 func (x *ScreenRecorder) IsRecording() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRecording"))
 	return _r
 }
 
+// IsMicrophoneEnabled wraps the corresponding Objective-C method.
 func (x *ScreenRecorder) IsMicrophoneEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMicrophoneEnabled"))
 	return _r
 }
 
+// SetMicrophoneEnabled wraps the corresponding Objective-C method.
 func (x *ScreenRecorder) SetMicrophoneEnabled(microphoneEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMicrophoneEnabled:"), microphoneEnabled)
 }
 
+// IsCameraEnabled wraps the corresponding Objective-C method.
 func (x *ScreenRecorder) IsCameraEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCameraEnabled"))
 	return _r
 }
 
+// SetCameraEnabled wraps the corresponding Objective-C method.
 func (x *ScreenRecorder) SetCameraEnabled(cameraEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCameraEnabled:"), cameraEnabled)
 }
 
+// CameraPosition wraps the corresponding Objective-C method.
 func (x *ScreenRecorder) CameraPosition() CameraPosition {
 	_r := objc.Send[CameraPosition](objref.IDOf(x), objc.RegisterName("cameraPosition"))
 	return _r
 }
 
+// SetCameraPosition wraps the corresponding Objective-C method.
 func (x *ScreenRecorder) SetCameraPosition(cameraPosition CameraPosition) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCameraPosition:"), cameraPosition)
 }
 
+// CameraPreviewView wraps the corresponding Objective-C method.
 func (x *ScreenRecorder) CameraPreviewView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cameraPreviewView"))
 	return obj.Wrap(_r)

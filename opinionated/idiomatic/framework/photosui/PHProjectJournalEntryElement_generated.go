@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An element that represents a journal entry within project section content.
-//
 // ProjectJournalEntryElement is an idiomatic wrapper over the Objective-C class PHProjectJournalEntryElement.
+//
+// It embeds [ProjectElement], promoting that type's methods.
+//
+// An element that represents a journal entry within project section content.
 type ProjectJournalEntryElement struct {
-	objref.Handle
+	ProjectElement
 }
 
 // ProjectJournalEntryElementFromID adopts an existing Objective-C object as a ProjectJournalEntryElement
@@ -25,7 +26,8 @@ func ProjectJournalEntryElementFromID(id objc.ID) *ProjectJournalEntryElement {
 	if id == 0 {
 		return nil
 	}
-	x := &ProjectJournalEntryElement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ProjectJournalEntryElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func projectJournalEntryElementAdopt(id objc.ID) *ProjectJournalEntryElement {
 	if id == 0 {
 		return nil
 	}
-	x := &ProjectJournalEntryElement{Handle: objref.Wrap(id)}
+	x := &ProjectJournalEntryElement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ProjectJournalEntryElement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ProjectJournalEntryElement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ProjectJournalEntryElement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewProjectJournalEntryElement creates a new ProjectJournalEntryElement.
@@ -64,19 +52,19 @@ func NewProjectJournalEntryElement() *ProjectJournalEntryElement {
 	return projectJournalEntryElementAdopt(_id)
 }
 
-// Date to which the provided asset and/or text pertain
+// Date date to which the provided asset and/or text pertain
 func (x *ProjectJournalEntryElement) Date() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
 
-// Representative asset, if any, for that date.
+// AssetElement representative asset, if any, for that date.
 func (x *ProjectJournalEntryElement) AssetElement() *ProjectAssetElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetElement"))
 	return ProjectAssetElementFromID(_r)
 }
 
-// Descriptive text (e.g., "Mom's Birthday") for that date.
+// TextElement descriptive text (e.g., "Mom's Birthday") for that date.
 func (x *ProjectJournalEntryElement) TextElement() *ProjectTextElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textElement"))
 	return ProjectTextElementFromID(_r)
@@ -91,3 +79,5 @@ type ProjectJournalEntryElementable interface {
 }
 
 var _ ProjectJournalEntryElementable = (*ProjectJournalEntryElement)(nil)
+
+var _ ProjectElementProvider = (*ProjectJournalEntryElement)(nil)

@@ -13,6 +13,8 @@ import (
 )
 
 // MTRBasicInformationClusterReachableChangedEvent is an idiomatic wrapper over the Objective-C class MTRBasicInformationClusterReachableChangedEvent.
+//
+// MTRBasicInformationClusterReachableChangedEvent is an abstract base — you do not construct it directly. Construct one of [MTRBasicClusterReachableChangedEvent] and pass it where a MTRBasicInformationClusterReachableChangedEvent is accepted.
 type MTRBasicInformationClusterReachableChangedEvent struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRBasicInformationClusterReachableChangedEventFromID(id objc.ID) *MTRBasic
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBasicInformationClusterReachableChangedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBasicInformationClusterReachableChangedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRBasicInformationClusterReachableChangedEventAdopt(id objc.ID) *MTRBasicI
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBasicInformationClusterReachableChangedEvent{Handle: objref.Wrap(id)}
+	x := &MTRBasicInformationClusterReachableChangedEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +60,25 @@ func (x *MTRBasicInformationClusterReachableChangedEvent) IsKind(className strin
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRBasicInformationClusterReachableChangedEvent creates a new MTRBasicInformationClusterReachableChangedEvent.
-func NewMTRBasicInformationClusterReachableChangedEvent() *MTRBasicInformationClusterReachableChangedEvent {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRBasicInformationClusterReachableChangedEvent")), objc.RegisterName("new"))
-	return mTRBasicInformationClusterReachableChangedEventAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRBasicInformationClusterReachableChangedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithReachableNewValue sets reachableNewValue and returns the receiver so calls can be chained.
+// WithReachableNewValue sets the property and returns the receiver so calls can be chained.
 func (x *MTRBasicInformationClusterReachableChangedEvent) WithReachableNewValue(reachableNewValue obj.Object) *MTRBasicInformationClusterReachableChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachableNewValue:"), objref.IDOf(reachableNewValue))
 	return x
 }
 
+// ReachableNewValue wraps the corresponding Objective-C method.
 func (x *MTRBasicInformationClusterReachableChangedEvent) ReachableNewValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reachableNewValue"))
 	return obj.Wrap(_r)
 }
 
+// SetReachableNewValue wraps the corresponding Objective-C method.
 func (x *MTRBasicInformationClusterReachableChangedEvent) SetReachableNewValue(reachableNewValue obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachableNewValue:"), objref.IDOf(reachableNewValue))
 }
@@ -86,3 +92,11 @@ type MTRBasicInformationClusterReachableChangedEventable interface {
 }
 
 var _ MTRBasicInformationClusterReachableChangedEventable = (*MTRBasicInformationClusterReachableChangedEvent)(nil)
+
+// isMTRBasicInformationClusterReachableChangedEvent marks MTRBasicInformationClusterReachableChangedEvent — and, by embedding promotion, its
+// subclasses — as a member of the MTRBasicInformationClusterReachableChangedEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRBasicInformationClusterReachableChangedEvent) isMTRBasicInformationClusterReachableChangedEvent() {
+}
+
+var _ MTRBasicInformationClusterReachableChangedEventProvider = (*MTRBasicInformationClusterReachableChangedEvent)(nil)

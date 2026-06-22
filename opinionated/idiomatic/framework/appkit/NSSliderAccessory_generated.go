@@ -23,7 +23,8 @@ func SliderAccessoryFromID(id objc.ID) *SliderAccessory {
 	if id == 0 {
 		return nil
 	}
-	x := &SliderAccessory{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SliderAccessory{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func sliderAccessoryAdopt(id objc.ID) *SliderAccessory {
 	if id == 0 {
 		return nil
 	}
-	x := &SliderAccessory{Handle: objref.Wrap(id)}
+	x := &SliderAccessory{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,44 +58,48 @@ func (x *SliderAccessory) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SliderAccessory) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSliderAccessory creates a new SliderAccessory.
 func NewSliderAccessory() *SliderAccessory {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSSliderAccessory")), objc.RegisterName("new"))
 	return sliderAccessoryAdopt(_id)
 }
 
-// The effect on interaction with the accessory.
-//
-// WithBehavior sets behavior and returns the receiver so calls can be chained.
+// WithBehavior the effect on interaction with the accessory.
 func (x *SliderAccessory) WithBehavior(behavior *SliderAccessoryBehavior) *SliderAccessory {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBehavior:"), objref.IDOf(behavior))
 	return x
 }
 
-// Determines whether or not the accessory is interactive and draws with an enabled appearance. Defaults to true.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled determines whether or not the accessory is interactive and draws with an enabled appearance. Defaults to true.
 func (x *SliderAccessory) WithEnabled(enabled bool) *SliderAccessory {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The effect on interaction with the accessory. The default value is `automaticBehavior`.
+// Behavior the effect on interaction with the accessory. The default value is `automaticBehavior`.
 func (x *SliderAccessory) Behavior() *SliderAccessoryBehavior {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("behavior"))
 	return SliderAccessoryBehaviorFromID(_r)
 }
 
+// SetBehavior wraps the corresponding Objective-C method.
 func (x *SliderAccessory) SetBehavior(behavior *SliderAccessoryBehavior) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBehavior:"), objref.IDOf(behavior))
 }
 
-// Determines whether or not the accessory is interactive and draws with an enabled appearance. Defaults to `true`.
+// IsEnabled determines whether or not the accessory is interactive and draws with an enabled appearance. Defaults to `true`.
 func (x *SliderAccessory) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r
 }
 
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *SliderAccessory) SetEnabled(enabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }

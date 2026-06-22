@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Criteria used to retrieve data from or save data to a persistent store.
-//
 // PersistentStoreRequest is an idiomatic wrapper over the Objective-C class NSPersistentStoreRequest.
+//
+// PersistentStoreRequest is an abstract base — you do not construct it directly. Construct one of [AsynchronousFetchRequest], [BatchDeleteRequest], [BatchInsertRequest], [BatchUpdateRequest], [FetchRequest], [PersistentCloudKitContainerEventRequest], [PersistentHistoryChangeRequest], [SaveChangesRequest] and pass it where a PersistentStoreRequest is accepted.
+//
+// Criteria used to retrieve data from or save data to a persistent store.
 type PersistentStoreRequest struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func PersistentStoreRequestFromID(id objc.ID) *PersistentStoreRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentStoreRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PersistentStoreRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func persistentStoreRequestAdopt(id objc.ID) *PersistentStoreRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentStoreRequest{Handle: objref.Wrap(id)}
+	x := &PersistentStoreRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +62,33 @@ func (x *PersistentStoreRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewPersistentStoreRequest creates a new PersistentStoreRequest.
-func NewPersistentStoreRequest() *PersistentStoreRequest {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSPersistentStoreRequest")), objc.RegisterName("new"))
-	return persistentStoreRequestAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PersistentStoreRequest) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The stores the request should be sent to.
-//
-// WithAffectedStores sets the collection and returns the receiver so calls can be chained.
+// WithAffectedStores the stores the request should be sent to.
 func (x *PersistentStoreRequest) WithAffectedStores(items ...PersistentStoreProvider) *PersistentStoreRequest {
 	_arr := purego.SliceToNSArray(items, func(_v PersistentStoreProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), _arr)
 	return x
 }
 
+// AffectedStores wraps the corresponding Objective-C method.
+//
 // AffectedStores returns the collection as a Go slice.
 func (x *PersistentStoreRequest) AffectedStores() []*PersistentStore {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("affectedStores"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersistentStore { return PersistentStoreFromID(_id) })
 }
 
+// SetAffectedStores wraps the corresponding Objective-C method.
 func (x *PersistentStoreRequest) SetAffectedStores(affectedStores []*PersistentStore) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), purego.SliceToNSArray(affectedStores, func(_v *PersistentStore) objc.ID { return objref.IDOf(_v) }))
 }
 
+// RequestType wraps the corresponding Objective-C method.
 func (x *PersistentStoreRequest) RequestType() PersistentStoreRequestType {
 	_r := objc.Send[PersistentStoreRequestType](objref.IDOf(x), objc.RegisterName("requestType"))
 	return _r
@@ -98,3 +104,10 @@ type PersistentStoreRequestable interface {
 }
 
 var _ PersistentStoreRequestable = (*PersistentStoreRequest)(nil)
+
+// isPersistentStoreRequest marks PersistentStoreRequest — and, by embedding promotion, its
+// subclasses — as a member of the PersistentStoreRequest hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *PersistentStoreRequest) isPersistentStoreRequest() {}
+
+var _ PersistentStoreRequestProvider = (*PersistentStoreRequest)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class for managing the units of measure within HealthKit.
-//
 // Unit is an idiomatic wrapper over the Objective-C class HKUnit.
+//
+// A class for managing the units of measure within HealthKit.
 type Unit struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func UnitFromID(id objc.ID) *Unit {
 	if id == 0 {
 		return nil
 	}
-	x := &Unit{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Unit{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func unitAdopt(id objc.ID) *Unit {
 	if id == 0 {
 		return nil
 	}
-	x := &Unit{Handle: objref.Wrap(id)}
+	x := &Unit{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *Unit) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Unit) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewUnit creates a new Unit.
 func NewUnit() *Unit {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("new"))
 	return unitAdopt(_id)
 }
 
-// Returns a Boolean value indicating whether the unit is null.
+// IsNull returns a Boolean value indicating whether the unit is null.
 func (x *Unit) IsNull() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNull"))
 	return _r
 }
 
-// Returns a unique string representation for the unit that could be used with +unitFromString:
+// UnitString returns a unique string representation for the unit that could be used with +unitFromString:
 func (x *Unit) UnitString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unitString"))
 	if _r == 0 {
@@ -79,25 +87,25 @@ func (x *Unit) UnitString() string {
 	return purego.GoString(_r)
 }
 
-// Creates a complex unit by multiplying the receiving unit with another unit.
+// UnitMultipliedByUnit creates a complex unit by multiplying the receiving unit with another unit.
 func (x *Unit) UnitMultipliedByUnit(unit *Unit) *Unit {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unitMultipliedByUnit:"), objref.IDOf(unit))
 	return UnitFromID(_r)
 }
 
-// Creates a complex unit by dividing the receiving unit by another unit.
+// UnitDividedByUnit creates a complex unit by dividing the receiving unit by another unit.
 func (x *Unit) UnitDividedByUnit(unit *Unit) *Unit {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unitDividedByUnit:"), objref.IDOf(unit))
 	return UnitFromID(_r)
 }
 
-// Creates a complex unit by raising the unit to the given power.
+// UnitRaisedToPower creates a complex unit by raising the unit to the given power.
 func (x *Unit) UnitRaisedToPower(power int) *Unit {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unitRaisedToPower:"), power)
 	return UnitFromID(_r)
 }
 
-// Returns a complex unit representing the unit’s reciprocal.
+// ReciprocalUnit returns a complex unit representing the unit’s reciprocal.
 func (x *Unit) ReciprocalUnit() *Unit {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reciprocalUnit"))
 	return UnitFromID(_r)

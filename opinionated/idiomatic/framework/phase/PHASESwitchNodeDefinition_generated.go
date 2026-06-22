@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A node that passes invocation to only one of its child nodes.
-//
 // SwitchNodeDefinition is an idiomatic wrapper over the Objective-C class PHASESwitchNodeDefinition.
+//
+// It embeds [SoundEventNodeDefinition], promoting that type's methods.
+//
+// A node that passes invocation to only one of its child nodes.
 type SwitchNodeDefinition struct {
-	objref.Handle
+	SoundEventNodeDefinition
 }
 
 // SwitchNodeDefinitionFromID adopts an existing Objective-C object as a SwitchNodeDefinition
@@ -25,7 +26,8 @@ func SwitchNodeDefinitionFromID(id objc.ID) *SwitchNodeDefinition {
 	if id == 0 {
 		return nil
 	}
-	x := &SwitchNodeDefinition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SwitchNodeDefinition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,49 +40,32 @@ func switchNodeDefinitionAdopt(id objc.ID) *SwitchNodeDefinition {
 	if id == 0 {
 		return nil
 	}
-	x := &SwitchNodeDefinition{Handle: objref.Wrap(id)}
+	x := &SwitchNodeDefinition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *SwitchNodeDefinition) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SwitchNodeDefinition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SwitchNodeDefinition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a named node that invokes a child node based on the value of the given parameter.
-//
-// NewSwitchNodeDefinitionWithSwitchMetaParameterDefinitionIdentifier creates a new SwitchNodeDefinition.
+// NewSwitchNodeDefinitionWithSwitchMetaParameterDefinitionIdentifier creates a named node that invokes a child node based on the value of the given parameter.
 func NewSwitchNodeDefinitionWithSwitchMetaParameterDefinitionIdentifier(switchMetaParameterDefinition *StringMetaParameterDefinition, identifier string) *SwitchNodeDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESwitchNodeDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSwitchMetaParameterDefinition:identifier:"), objref.IDOf(switchMetaParameterDefinition), purego.NSString(identifier))
 	return switchNodeDefinitionAdopt(_id)
 }
 
-// Creates a node that invokes a child node based on the value of the given parameter.
-//
-// NewSwitchNodeDefinitionWithSwitchMetaParameterDefinition creates a new SwitchNodeDefinition.
+// NewSwitchNodeDefinitionWithSwitchMetaParameterDefinition creates a node that invokes a child node based on the value of the given parameter.
 func NewSwitchNodeDefinitionWithSwitchMetaParameterDefinition(switchMetaParameterDefinition *StringMetaParameterDefinition) *SwitchNodeDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESwitchNodeDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSwitchMetaParameterDefinition:"), objref.IDOf(switchMetaParameterDefinition))
 	return switchNodeDefinitionAdopt(_id)
 }
 
-// Adds a child node with the given switch value.
+// AddSubtreeSwitchValue adds a child node with the given switch value.
 func (x *SwitchNodeDefinition) AddSubtreeSwitchValue(subtree *SoundEventNodeDefinition, switchValue string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSubtree:switchValue:"), objref.IDOf(subtree), purego.NSString(switchValue))
 }
 
+// SwitchMetaParameterDefinition wraps the corresponding Objective-C method.
 func (x *SwitchNodeDefinition) SwitchMetaParameterDefinition() *StringMetaParameterDefinition {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("switchMetaParameterDefinition"))
 	return StringMetaParameterDefinitionFromID(_r)
@@ -94,3 +79,7 @@ type SwitchNodeDefinitionable interface {
 }
 
 var _ SwitchNodeDefinitionable = (*SwitchNodeDefinition)(nil)
+
+var _ SoundEventNodeDefinitionProvider = (*SwitchNodeDefinition)(nil)
+
+var _ DefinitionProvider = (*SwitchNodeDefinition)(nil)

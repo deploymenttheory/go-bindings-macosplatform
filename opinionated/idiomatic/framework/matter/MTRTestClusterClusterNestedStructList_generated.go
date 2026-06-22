@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRTestClusterClusterNestedStructList is an idiomatic wrapper over the Objective-C class MTRTestClusterClusterNestedStructList.
+//
+// It embeds [MTRUnitTestingClusterNestedStructList], promoting that type's methods.
 type MTRTestClusterClusterNestedStructList struct {
-	objref.Handle
+	MTRUnitTestingClusterNestedStructList
 }
 
 // MTRTestClusterClusterNestedStructListFromID adopts an existing Objective-C object as a MTRTestClusterClusterNestedStructList
@@ -23,7 +24,8 @@ func MTRTestClusterClusterNestedStructListFromID(id objc.ID) *MTRTestClusterClus
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTestClusterClusterNestedStructList{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRTestClusterClusterNestedStructList{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRTestClusterClusterNestedStructListAdopt(id objc.ID) *MTRTestClusterClust
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTestClusterClusterNestedStructList{Handle: objref.Wrap(id)}
+	x := &MTRTestClusterClusterNestedStructList{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRTestClusterClusterNestedStructList) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRTestClusterClusterNestedStructList) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRTestClusterClusterNestedStructList) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRTestClusterClusterNestedStructList creates a new MTRTestClusterClusterNestedStructList.
@@ -62,19 +50,19 @@ func NewMTRTestClusterClusterNestedStructList() *MTRTestClusterClusterNestedStru
 	return mTRTestClusterClusterNestedStructListAdopt(_id)
 }
 
-// WithA sets a and returns the receiver so calls can be chained.
+// WithA sets the property and returns the receiver so calls can be chained.
 func (x *MTRTestClusterClusterNestedStructList) WithA(a obj.Object) *MTRTestClusterClusterNestedStructList {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setA:"), objref.IDOf(a))
 	return x
 }
 
-// WithB sets b and returns the receiver so calls can be chained.
+// WithB sets the property and returns the receiver so calls can be chained.
 func (x *MTRTestClusterClusterNestedStructList) WithB(b obj.Object) *MTRTestClusterClusterNestedStructList {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setB:"), objref.IDOf(b))
 	return x
 }
 
-// WithC sets c and returns the receiver so calls can be chained.
+// WithC sets the property and returns the receiver so calls can be chained.
 func (x *MTRTestClusterClusterNestedStructList) WithC(c MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterNestedStructList {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setC:"), objref.IDOf(c))
 	return x
@@ -89,3 +77,5 @@ type MTRTestClusterClusterNestedStructListable interface {
 }
 
 var _ MTRTestClusterClusterNestedStructListable = (*MTRTestClusterClusterNestedStructList)(nil)
+
+var _ MTRUnitTestingClusterNestedStructListProvider = (*MTRTestClusterClusterNestedStructList)(nil)

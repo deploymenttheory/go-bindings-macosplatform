@@ -24,6 +24,8 @@ const (
 	AddVoiceShortcutButtonStyleAutomaticOutline AddVoiceShortcutButtonStyle = 5
 )
 
+// String returns the AddVoiceShortcutButtonStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AddVoiceShortcutButtonStyle) String() string {
 	switch e {
 	case AddVoiceShortcutButtonStyleWhite:

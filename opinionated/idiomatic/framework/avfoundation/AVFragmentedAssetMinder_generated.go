@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that periodically checks whether the system adds new fragments to a fragmented asset.
-//
 // FragmentedAssetMinder is an idiomatic wrapper over the Objective-C class AVFragmentedAssetMinder.
+//
+// FragmentedAssetMinder is an abstract base — you do not construct it directly. Construct one of [FragmentedMovieMinder] and pass it where a FragmentedAssetMinder is accepted.
+//
+// An object that periodically checks whether the system adds new fragments to a fragmented asset.
 type FragmentedAssetMinder struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func FragmentedAssetMinderFromID(id objc.ID) *FragmentedAssetMinder {
 	if id == 0 {
 		return nil
 	}
-	x := &FragmentedAssetMinder{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FragmentedAssetMinder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func fragmentedAssetMinderAdopt(id objc.ID) *FragmentedAssetMinder {
 	if id == 0 {
 		return nil
 	}
-	x := &FragmentedAssetMinder{Handle: objref.Wrap(id)}
+	x := &FragmentedAssetMinder{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,44 +62,47 @@ func (x *FragmentedAssetMinder) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a fragmented asset minder that monitors the specified asset at the indicated minding interval.
-//
-// NewFragmentedAssetMinderWithAssetMindingInterval creates a new FragmentedAssetMinder.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FragmentedAssetMinder) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFragmentedAssetMinderWithAssetMindingInterval creates a fragmented asset minder that monitors the specified asset at the indicated minding interval.
 func NewFragmentedAssetMinderWithAssetMindingInterval(asset *Asset, mindingInterval float64) *FragmentedAssetMinder {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVFragmentedAssetMinder")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:mindingInterval:"), objref.IDOf(asset), mindingInterval)
 	return fragmentedAssetMinderAdopt(_id)
 }
 
-// An interval that specifies when to perform a check for additional fragments.
-//
-// WithMindingInterval sets mindingInterval and returns the receiver so calls can be chained.
+// WithMindingInterval an interval that specifies when to perform a check for additional fragments.
 func (x *FragmentedAssetMinder) WithMindingInterval(mindingInterval float64) *FragmentedAssetMinder {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMindingInterval:"), mindingInterval)
 	return x
 }
 
-// Adds a fragmented asset to the array of minded assets.
+// AddFragmentedAsset adds a fragmented asset to the array of minded assets.
 func (x *FragmentedAssetMinder) AddFragmentedAsset(asset *Asset) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addFragmentedAsset:"), objref.IDOf(asset))
 }
 
-// Removes a fragmented asset from the array of minded assets.
+// RemoveFragmentedAsset removes a fragmented asset from the array of minded assets.
 func (x *FragmentedAssetMinder) RemoveFragmentedAsset(asset *Asset) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFragmentedAsset:"), objref.IDOf(asset))
 }
 
-// An NSTimeInterval indicating how often a check for additional fragments should be performed. The default interval is 10.0. This property throws an excepion if a value is set less than one millisecond (0.001) in duration.
+// MindingInterval an NSTimeInterval indicating how often a check for additional fragments should be performed. The default interval is 10.0. This property throws an excepion if a value is set less than one millisecond (0.001) in duration.
 func (x *FragmentedAssetMinder) MindingInterval() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("mindingInterval"))
 	return _r
 }
 
+// SetMindingInterval wraps the corresponding Objective-C method.
 func (x *FragmentedAssetMinder) SetMindingInterval(mindingInterval float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMindingInterval:"), mindingInterval)
 }
 
-// An NSArray of the AVFragmentedAsset objects being minded.
+// Assets an NSArray of the AVFragmentedAsset objects being minded.
 //
 // Assets returns the collection as a Go slice.
 func (x *FragmentedAssetMinder) Assets() []*Asset {
@@ -115,3 +122,10 @@ type FragmentedAssetMinderable interface {
 }
 
 var _ FragmentedAssetMinderable = (*FragmentedAssetMinder)(nil)
+
+// isFragmentedAssetMinder marks FragmentedAssetMinder — and, by embedding promotion, its
+// subclasses — as a member of the FragmentedAssetMinder hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *FragmentedAssetMinder) isFragmentedAssetMinder() {}
+
+var _ FragmentedAssetMinderProvider = (*FragmentedAssetMinder)(nil)

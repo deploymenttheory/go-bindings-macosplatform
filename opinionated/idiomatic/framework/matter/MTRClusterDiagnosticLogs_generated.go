@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterDiagnosticLogs is an idiomatic wrapper over the Objective-C class MTRClusterDiagnosticLogs.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterDiagnosticLogs struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterDiagnosticLogsFromID adopts an existing Objective-C object as a MTRClusterDiagnosticLogs
@@ -25,7 +26,8 @@ func MTRClusterDiagnosticLogsFromID(id objc.ID) *MTRClusterDiagnosticLogs {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterDiagnosticLogs{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterDiagnosticLogs{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func mTRClusterDiagnosticLogsAdopt(id objc.ID) *MTRClusterDiagnosticLogs {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterDiagnosticLogs{Handle: objref.Wrap(id)}
+	x := &MTRClusterDiagnosticLogs{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterDiagnosticLogs) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterDiagnosticLogs) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterDiagnosticLogs) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterDiagnosticLogsWithDeviceEndpointIDQueue creates a new MTRClusterDiagnosticLogs.
+// NewMTRClusterDiagnosticLogsWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterDiagnosticLogsWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterDiagnosticLogs {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterDiagnosticLogs")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -74,8 +60,10 @@ func NewMTRClusterDiagnosticLogsWithDeviceEndpointQueue(device *MTRDevice, endpo
 	return mTRClusterDiagnosticLogsAdopt(_id)
 }
 
+// RetrieveLogsRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // RetrieveLogsRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterDiagnosticLogs) RetrieveLogsRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDiagnosticLogsClusterRetrieveLogsRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRDiagnosticLogsClusterRetrieveLogsResponseParams, error) {
+func (x *MTRClusterDiagnosticLogs) RetrieveLogsRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDiagnosticLogsClusterRetrieveLogsRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDiagnosticLogsClusterRetrieveLogsResponseParams, err error) {
 	type _result struct {
 		val *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
 		err error
@@ -97,33 +85,40 @@ func (x *MTRClusterDiagnosticLogs) RetrieveLogsRequestWithParamsExpectedValuesEx
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDiagnosticLogs) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDiagnosticLogs) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDiagnosticLogs) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDiagnosticLogs) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterDiagnosticLogs) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// RetrieveLogsRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // RetrieveLogsRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterDiagnosticLogs) RetrieveLogsRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDiagnosticLogsClusterRetrieveLogsRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRDiagnosticLogsClusterRetrieveLogsResponseParams, error) {
+func (x *MTRClusterDiagnosticLogs) RetrieveLogsRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDiagnosticLogsClusterRetrieveLogsRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDiagnosticLogsClusterRetrieveLogsResponseParams, err error) {
 	type _result struct {
 		val *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
 		err error
@@ -158,3 +153,7 @@ type MTRClusterDiagnosticLogsable interface {
 }
 
 var _ MTRClusterDiagnosticLogsable = (*MTRClusterDiagnosticLogs)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterDiagnosticLogs)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterDiagnosticLogs)(nil)

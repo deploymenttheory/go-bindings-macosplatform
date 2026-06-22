@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A network service that broadcasts its availability using multicast DNS.
-//
 // NetService is an idiomatic wrapper over the Objective-C class NSNetService.
+//
+// A network service that broadcasts its availability using multicast DNS.
 type NetService struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NetServiceFromID(id objc.ID) *NetService {
 	if id == 0 {
 		return nil
 	}
-	x := &NetService{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NetService{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func netServiceAdopt(id objc.ID) *NetService {
 	if id == 0 {
 		return nil
 	}
-	x := &NetService{Handle: objref.Wrap(id)}
+	x := &NetService{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +60,12 @@ func (x *NetService) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NetService) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNetServiceWithDomainTypeNamePort creates a new NetService.
 func NewNetServiceWithDomainTypeNamePort(domain string, type_ string, name string, port int) *NetService {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNetService")), objc.RegisterName("alloc"))
@@ -72,78 +80,93 @@ func NewNetServiceWithDomainTypeName(domain string, type_ string, name string) *
 	return netServiceAdopt(_id)
 }
 
-// WithIncludesPeerToPeer sets includesPeerToPeer and returns the receiver so calls can be chained.
+// WithIncludesPeerToPeer sets the property and returns the receiver so calls can be chained.
 func (x *NetService) WithIncludesPeerToPeer(includesPeerToPeer bool) *NetService {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesPeerToPeer:"), includesPeerToPeer)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *NetService) WithScriptingProperties(scriptingProperties obj.Object) *NetService {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// ScheduleInRunLoopForMode wraps the corresponding Objective-C method.
 func (x *NetService) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
+// RemoveFromRunLoopForMode wraps the corresponding Objective-C method.
 func (x *NetService) RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
+// Publish wraps the corresponding Objective-C method.
 func (x *NetService) Publish() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publish"))
 }
 
+// PublishWithOptions wraps the corresponding Objective-C method.
 func (x *NetService) PublishWithOptions(options NetServiceOptions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publishWithOptions:"), options)
 }
 
+// Resolve wraps the corresponding Objective-C method.
 func (x *NetService) Resolve() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resolve"))
 }
 
+// Stop wraps the corresponding Objective-C method.
 func (x *NetService) Stop() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
+// ResolveWithTimeout wraps the corresponding Objective-C method.
 func (x *NetService) ResolveWithTimeout(timeout float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resolveWithTimeout:"), timeout)
 }
 
+// GetInputStreamOutputStream wraps the corresponding Objective-C method.
 func (x *NetService) GetInputStreamOutputStream(inputStream *InputStream, outputStream *OutputStream) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("getInputStream:outputStream:"), objref.IDOf(inputStream), objref.IDOf(outputStream))
 	return _r
 }
 
+// SetTXTRecordData wraps the corresponding Objective-C method.
 func (x *NetService) SetTXTRecordData(recordData *Data) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setTXTRecordData:"), objref.IDOf(recordData))
 	return _r
 }
 
+// TXTRecordData wraps the corresponding Objective-C method.
 func (x *NetService) TXTRecordData() *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("TXTRecordData"))
 	return DataFromID(_r)
 }
 
+// StartMonitoring wraps the corresponding Objective-C method.
 func (x *NetService) StartMonitoring() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startMonitoring"))
 }
 
+// StopMonitoring wraps the corresponding Objective-C method.
 func (x *NetService) StopMonitoring() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopMonitoring"))
 }
 
+// IncludesPeerToPeer wraps the corresponding Objective-C method.
 func (x *NetService) IncludesPeerToPeer() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesPeerToPeer"))
 	return _r
 }
 
+// SetIncludesPeerToPeer wraps the corresponding Objective-C method.
 func (x *NetService) SetIncludesPeerToPeer(includesPeerToPeer bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesPeerToPeer:"), includesPeerToPeer)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *NetService) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -152,6 +175,7 @@ func (x *NetService) Name() string {
 	return purego.GoString(_r)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *NetService) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
 	if _r == 0 {
@@ -160,6 +184,7 @@ func (x *NetService) Type() string {
 	return purego.GoString(_r)
 }
 
+// Domain wraps the corresponding Objective-C method.
 func (x *NetService) Domain() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domain"))
 	if _r == 0 {
@@ -168,6 +193,7 @@ func (x *NetService) Domain() string {
 	return purego.GoString(_r)
 }
 
+// HostName wraps the corresponding Objective-C method.
 func (x *NetService) HostName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hostName"))
 	if _r == 0 {
@@ -176,12 +202,15 @@ func (x *NetService) HostName() string {
 	return purego.GoString(_r)
 }
 
+// Addresses wraps the corresponding Objective-C method.
+//
 // Addresses returns the collection as a Go slice.
 func (x *NetService) Addresses() []*Data {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Data { return DataFromID(_id) })
 }
 
+// Port wraps the corresponding Objective-C method.
 func (x *NetService) Port() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("port"))
 	return _r

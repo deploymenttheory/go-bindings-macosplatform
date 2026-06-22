@@ -6,17 +6,20 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An optimized Laplacian filter, provided for ease of use.
-//
 // ImageLaplacian is an idiomatic wrapper over the Objective-C class MPSImageLaplacian.
+//
+// It embeds [UnaryImageKernel], promoting that type's methods.
+//
+// An optimized Laplacian filter, provided for ease of use.
 type ImageLaplacian struct {
-	objref.Handle
+	UnaryImageKernel
 }
 
 // ImageLaplacianFromID adopts an existing Objective-C object as a ImageLaplacian
@@ -25,7 +28,8 @@ func ImageLaplacianFromID(id objc.ID) *ImageLaplacian {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageLaplacian{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageLaplacian{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func imageLaplacianAdopt(id objc.ID) *ImageLaplacian {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageLaplacian{Handle: objref.Wrap(id)}
+	x := &ImageLaplacian{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ImageLaplacian) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageLaplacian) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageLaplacian) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewImageLaplacian creates a new ImageLaplacian.
@@ -64,28 +54,37 @@ func NewImageLaplacian() *ImageLaplacian {
 	return imageLaplacianAdopt(_id)
 }
 
-// The value added to a convolved pixel before it is converted back to its intended storage format.
-//
-// WithBias sets bias and returns the receiver so calls can be chained.
+// WithBias the value added to a convolved pixel before it is converted back to its intended storage format.
 func (x *ImageLaplacian) WithBias(bias float32) *ImageLaplacian {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
+func (x *ImageLaplacian) WithOffset(offset mpscore.MPSOffset) *ImageLaplacian {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (x *ImageLaplacian) WithClipRect(clipRect metal.MTLRegion) *ImageLaplacian {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
+// WithLabel the string that identifies the kernel.
 func (x *ImageLaplacian) WithLabel(label string) *ImageLaplacian {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The bias is a value to be added to convolved pixel before it is converted back to the storage format. It can be used to convert negative values into a representable range for a unsigned MTLPixelFormat. For example, many edge detection filters produce results in the range [-k,k]. By scaling the filter weights by 0.5/k and adding 0.5, the results will be in range [0,1] suitable for use with unorm formats. It can be used in combination with renormalization of the filter weights to do video ranging as part of the convolution effect. It can also just be used to increase the brightness of the image. Default value is 0.0f.
+// Bias the bias is a value to be added to convolved pixel before it is converted back to the storage format. It can be used to convert negative values into a representable range for a unsigned MTLPixelFormat. For example, many edge detection filters produce results in the range [-k,k]. By scaling the filter weights by 0.5/k and adding 0.5, the results will be in range [0,1] suitable for use with unorm formats. It can be used in combination with renormalization of the filter weights to do video ranging as part of the convolution effect. It can also just be used to increase the brightness of the image. Default value is 0.0f.
 func (x *ImageLaplacian) Bias() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("bias"))
 	return _r
 }
 
+// SetBias wraps the corresponding Objective-C method.
 func (x *ImageLaplacian) SetBias(bias float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 }
@@ -94,9 +93,15 @@ func (x *ImageLaplacian) SetBias(bias float32) {
 type ImageLaplacianable interface {
 	obj.Object
 	WithBias(bias float32) *ImageLaplacian
+	WithOffset(offset mpscore.MPSOffset) *ImageLaplacian
+	WithClipRect(clipRect metal.MTLRegion) *ImageLaplacian
 	WithLabel(label string) *ImageLaplacian
 	Bias() float32
 	SetBias(bias float32)
 }
 
 var _ ImageLaplacianable = (*ImageLaplacian)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageLaplacian)(nil)
+
+var _ KernelProvider = (*ImageLaplacian)(nil)

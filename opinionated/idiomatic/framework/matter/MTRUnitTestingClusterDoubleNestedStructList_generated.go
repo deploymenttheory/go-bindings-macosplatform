@@ -13,6 +13,8 @@ import (
 )
 
 // MTRUnitTestingClusterDoubleNestedStructList is an idiomatic wrapper over the Objective-C class MTRUnitTestingClusterDoubleNestedStructList.
+//
+// MTRUnitTestingClusterDoubleNestedStructList is an abstract base — you do not construct it directly. Construct one of [MTRTestClusterClusterDoubleNestedStructList] and pass it where a MTRUnitTestingClusterDoubleNestedStructList is accepted.
 type MTRUnitTestingClusterDoubleNestedStructList struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRUnitTestingClusterDoubleNestedStructListFromID(id objc.ID) *MTRUnitTesti
 	if id == 0 {
 		return nil
 	}
-	x := &MTRUnitTestingClusterDoubleNestedStructList{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRUnitTestingClusterDoubleNestedStructList{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRUnitTestingClusterDoubleNestedStructListAdopt(id objc.ID) *MTRUnitTestin
 	if id == 0 {
 		return nil
 	}
-	x := &MTRUnitTestingClusterDoubleNestedStructList{Handle: objref.Wrap(id)}
+	x := &MTRUnitTestingClusterDoubleNestedStructList{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,17 +60,19 @@ func (x *MTRUnitTestingClusterDoubleNestedStructList) IsKind(className string) b
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRUnitTestingClusterDoubleNestedStructList creates a new MTRUnitTestingClusterDoubleNestedStructList.
-func NewMTRUnitTestingClusterDoubleNestedStructList() *MTRUnitTestingClusterDoubleNestedStructList {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRUnitTestingClusterDoubleNestedStructList")), objc.RegisterName("new"))
-	return mTRUnitTestingClusterDoubleNestedStructListAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRUnitTestingClusterDoubleNestedStructList) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// A wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterDoubleNestedStructList) A() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("a"))
 	return obj.Wrap(_r)
 }
 
+// SetA wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterDoubleNestedStructList) SetA(a obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setA:"), objref.IDOf(a))
 }
@@ -79,3 +85,11 @@ type MTRUnitTestingClusterDoubleNestedStructListable interface {
 }
 
 var _ MTRUnitTestingClusterDoubleNestedStructListable = (*MTRUnitTestingClusterDoubleNestedStructList)(nil)
+
+// isMTRUnitTestingClusterDoubleNestedStructList marks MTRUnitTestingClusterDoubleNestedStructList — and, by embedding promotion, its
+// subclasses — as a member of the MTRUnitTestingClusterDoubleNestedStructList hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRUnitTestingClusterDoubleNestedStructList) isMTRUnitTestingClusterDoubleNestedStructList() {
+}
+
+var _ MTRUnitTestingClusterDoubleNestedStructListProvider = (*MTRUnitTestingClusterDoubleNestedStructList)(nil)

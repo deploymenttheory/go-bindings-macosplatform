@@ -6,15 +6,16 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that configures and displays a Media Library Browser panel.
-//
 // MediaLibraryBrowserController is an idiomatic wrapper over the Objective-C class NSMediaLibraryBrowserController.
+//
+// An object that configures and displays a Media Library Browser panel.
 type MediaLibraryBrowserController struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func MediaLibraryBrowserControllerFromID(id objc.ID) *MediaLibraryBrowserControl
 	if id == 0 {
 		return nil
 	}
-	x := &MediaLibraryBrowserController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MediaLibraryBrowserController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func mediaLibraryBrowserControllerAdopt(id objc.ID) *MediaLibraryBrowserControll
 	if id == 0 {
 		return nil
 	}
-	x := &MediaLibraryBrowserController{Handle: objref.Wrap(id)}
+	x := &MediaLibraryBrowserController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,47 +61,70 @@ func (x *MediaLibraryBrowserController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MediaLibraryBrowserController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMediaLibraryBrowserController creates a new MediaLibraryBrowserController.
 func NewMediaLibraryBrowserController() *MediaLibraryBrowserController {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSMediaLibraryBrowserController")), objc.RegisterName("new"))
 	return mediaLibraryBrowserControllerAdopt(_id)
 }
 
-// A Boolean value that determines whether the Media Library Browser panel is visible.
-//
-// WithVisible sets visible and returns the receiver so calls can be chained.
+// WithVisible a Boolean value that determines whether the Media Library Browser panel is visible.
 func (x *MediaLibraryBrowserController) WithVisible(visible bool) *MediaLibraryBrowserController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisible:"), visible)
 	return x
 }
 
-// The media library that is in use.
-//
-// WithMediaLibraries sets mediaLibraries and returns the receiver so calls can be chained.
+// WithFrame the frame, in global coordinates, used to display the Media Library Browser panel.
+func (x *MediaLibraryBrowserController) WithFrame(frame corefoundation.CGRect) *MediaLibraryBrowserController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
+	return x
+}
+
+// WithMediaLibraries the media library that is in use.
 func (x *MediaLibraryBrowserController) WithMediaLibraries(mediaLibraries MediaLibrary) *MediaLibraryBrowserController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaLibraries:"), mediaLibraries)
 	return x
 }
 
-// Toggles the visibility of the Media Library Browser.
+// TogglePanel toggles the visibility of the Media Library Browser.
 func (x *MediaLibraryBrowserController) TogglePanel(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("togglePanel:"), objref.IDOf(sender))
 }
 
+// IsVisible wraps the corresponding Objective-C method.
 func (x *MediaLibraryBrowserController) IsVisible() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVisible"))
 	return _r
 }
 
+// SetVisible wraps the corresponding Objective-C method.
 func (x *MediaLibraryBrowserController) SetVisible(visible bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisible:"), visible)
 }
 
+// Frame wraps the corresponding Objective-C method.
+func (x *MediaLibraryBrowserController) Frame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frame"))
+	return _r
+}
+
+// SetFrame wraps the corresponding Objective-C method.
+func (x *MediaLibraryBrowserController) SetFrame(frame corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
+}
+
+// MediaLibraries wraps the corresponding Objective-C method.
 func (x *MediaLibraryBrowserController) MediaLibraries() MediaLibrary {
 	_r := objc.Send[MediaLibrary](objref.IDOf(x), objc.RegisterName("mediaLibraries"))
 	return _r
 }
 
+// SetMediaLibraries wraps the corresponding Objective-C method.
 func (x *MediaLibraryBrowserController) SetMediaLibraries(mediaLibraries MediaLibrary) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaLibraries:"), mediaLibraries)
 }
@@ -107,10 +133,13 @@ func (x *MediaLibraryBrowserController) SetMediaLibraries(mediaLibraries MediaLi
 type MediaLibraryBrowserControllerable interface {
 	obj.Object
 	WithVisible(visible bool) *MediaLibraryBrowserController
+	WithFrame(frame corefoundation.CGRect) *MediaLibraryBrowserController
 	WithMediaLibraries(mediaLibraries MediaLibrary) *MediaLibraryBrowserController
 	TogglePanel(sender obj.Object)
 	IsVisible() bool
 	SetVisible(visible bool)
+	Frame() corefoundation.CGRect
+	SetFrame(frame corefoundation.CGRect)
 	MediaLibraries() MediaLibrary
 	SetMediaLibraries(mediaLibraries MediaLibrary)
 }

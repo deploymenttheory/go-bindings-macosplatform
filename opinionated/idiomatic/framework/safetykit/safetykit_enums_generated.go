@@ -20,6 +20,8 @@ const (
 	AuthorizationStatusAuthorized AuthorizationStatus = 2
 )
 
+// String returns the AuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationStatus) String() string {
 	switch e {
 	case AuthorizationStatusNotDetermined:
@@ -41,6 +43,8 @@ const (
 	CrashDetectionEventResponseDisabled  CrashDetectionEventResponse = 1
 )
 
+// String returns the CrashDetectionEventResponse constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CrashDetectionEventResponse) String() string {
 	switch e {
 	case CrashDetectionEventResponseAttempted:
@@ -62,6 +66,8 @@ const (
 	ErrorOperationFailed ErrorCode = 4
 )
 
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ErrorCode) String() string {
 	switch e {
 	case ErrorNotAuthorized:

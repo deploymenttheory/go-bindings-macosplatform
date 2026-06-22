@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The minimum rasterization rates to apply to sections of a layer in the render target.
-//
 // RasterizationRateLayerDescriptor is an idiomatic wrapper over the Objective-C class MTLRasterizationRateLayerDescriptor.
+//
+// The minimum rasterization rates to apply to sections of a layer in the render target.
 type RasterizationRateLayerDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RasterizationRateLayerDescriptorFromID(id objc.ID) *RasterizationRateLayerD
 	if id == 0 {
 		return nil
 	}
-	x := &RasterizationRateLayerDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RasterizationRateLayerDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func rasterizationRateLayerDescriptorAdopt(id objc.ID) *RasterizationRateLayerDe
 	if id == 0 {
 		return nil
 	}
-	x := &RasterizationRateLayerDescriptor{Handle: objref.Wrap(id)}
+	x := &RasterizationRateLayerDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *RasterizationRateLayerDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RasterizationRateLayerDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRasterizationRateLayerDescriptor creates a new RasterizationRateLayerDescriptor.
 func NewRasterizationRateLayerDescriptor() *RasterizationRateLayerDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLRasterizationRateLayerDescriptor")), objc.RegisterName("new"))
 	return rasterizationRateLayerDescriptorAdopt(_id)
 }
 
-// Provide convenient bounds-checked access to the quality samples stored in the descriptor.
+// Horizontal provide convenient bounds-checked access to the quality samples stored in the descriptor.
 func (x *RasterizationRateLayerDescriptor) Horizontal() *RasterizationRateSampleArray {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("horizontal"))
 	return RasterizationRateSampleArrayFromID(_r)
 }
 
-// Provide convenient bounds-checked access to the quality samples stored in the descriptor.
+// Vertical provide convenient bounds-checked access to the quality samples stored in the descriptor.
 func (x *RasterizationRateLayerDescriptor) Vertical() *RasterizationRateSampleArray {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertical"))
 	return RasterizationRateSampleArrayFromID(_r)

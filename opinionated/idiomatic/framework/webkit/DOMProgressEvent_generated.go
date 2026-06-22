@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMProgressEvent is an idiomatic wrapper over the Objective-C class DOMProgressEvent.
+//
+// It embeds [DOMEvent], promoting that type's methods.
 type DOMProgressEvent struct {
-	objref.Handle
+	DOMEvent
 }
 
 // DOMProgressEventFromID adopts an existing Objective-C object as a DOMProgressEvent
@@ -23,7 +24,8 @@ func DOMProgressEventFromID(id objc.ID) *DOMProgressEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMProgressEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMProgressEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMProgressEventAdopt(id objc.ID) *DOMProgressEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMProgressEvent{Handle: objref.Wrap(id)}
+	x := &DOMProgressEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMProgressEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMProgressEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMProgressEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMProgressEvent creates a new DOMProgressEvent.
@@ -62,28 +50,31 @@ func NewDOMProgressEvent() *DOMProgressEvent {
 	return dOMProgressEventAdopt(_id)
 }
 
-// WithReturnValue sets returnValue and returns the receiver so calls can be chained.
+// WithReturnValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMProgressEvent) WithReturnValue(returnValue bool) *DOMProgressEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnValue:"), returnValue)
 	return x
 }
 
-// WithCancelBubble sets cancelBubble and returns the receiver so calls can be chained.
+// WithCancelBubble sets the property and returns the receiver so calls can be chained.
 func (x *DOMProgressEvent) WithCancelBubble(cancelBubble bool) *DOMProgressEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelBubble:"), cancelBubble)
 	return x
 }
 
+// LengthComputable wraps the corresponding Objective-C method.
 func (x *DOMProgressEvent) LengthComputable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("lengthComputable"))
 	return _r
 }
 
+// Loaded wraps the corresponding Objective-C method.
 func (x *DOMProgressEvent) Loaded() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("loaded"))
 	return _r
 }
 
+// Total wraps the corresponding Objective-C method.
 func (x *DOMProgressEvent) Total() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("total"))
 	return _r
@@ -100,3 +91,9 @@ type DOMProgressEventable interface {
 }
 
 var _ DOMProgressEventable = (*DOMProgressEvent)(nil)
+
+var _ DOMEventProvider = (*DOMProgressEvent)(nil)
+
+var _ DOMObjectProvider = (*DOMProgressEvent)(nil)
+
+var _ WebScriptObjectProvider = (*DOMProgressEvent)(nil)

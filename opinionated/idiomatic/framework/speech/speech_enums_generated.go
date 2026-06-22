@@ -26,6 +26,8 @@ const (
 	SpeechErrorCodeMissingParameter SpeechErrorCode = 13
 )
 
+// String returns the SpeechErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SpeechErrorCode) String() string {
 	switch e {
 	case SpeechErrorCodeInternalServiceError:
@@ -59,6 +61,8 @@ const (
 	SpeechRecognitionTaskHintConfirmation SpeechRecognitionTaskHint = 3
 )
 
+// String returns the SpeechRecognitionTaskHint constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SpeechRecognitionTaskHint) String() string {
 	switch e {
 	case SpeechRecognitionTaskHintUnspecified:
@@ -90,6 +94,8 @@ const (
 	SpeechRecognitionTaskStateCompleted SpeechRecognitionTaskState = 4
 )
 
+// String returns the SpeechRecognitionTaskState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SpeechRecognitionTaskState) String() string {
 	switch e {
 	case SpeechRecognitionTaskStateStarting:
@@ -121,6 +127,8 @@ const (
 	SpeechRecognizerAuthorizationStatusAuthorized SpeechRecognizerAuthorizationStatus = 3
 )
 
+// String returns the SpeechRecognizerAuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SpeechRecognizerAuthorizationStatus) String() string {
 	switch e {
 	case SpeechRecognizerAuthorizationStatusNotDetermined:

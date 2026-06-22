@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that reads media data from an asset.
-//
 // AssetReader is an idiomatic wrapper over the Objective-C class AVAssetReader.
+//
+// An object that reads media data from an asset.
 type AssetReader struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func AssetReaderFromID(id objc.ID) *AssetReader {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetReader{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetReader{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func assetReaderAdopt(id objc.ID) *AssetReader {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetReader{Handle: objref.Wrap(id)}
+	x := &AssetReader{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,10 +62,14 @@ func (x *AssetReader) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an object to read media data from an asset.
-//
-// NewAssetReaderWithAssetError creates a new AssetReader.
-func NewAssetReaderWithAssetError(asset *Asset) (*AssetReader, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetReader) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetReaderWithAssetError creates an object to read media data from an asset.
+func NewAssetReaderWithAssetError(asset *Asset) (result *AssetReader, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetReader")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:error:"), objref.IDOf(asset), unsafe.Pointer(&_nsErr))
@@ -73,41 +79,41 @@ func NewAssetReaderWithAssetError(asset *Asset) (*AssetReader, error) {
 	return assetReaderAdopt(_id), nil
 }
 
-// Determines whether you can add the output to the asset reader.
+// CanAddOutput determines whether you can add the output to the asset reader.
 func (x *AssetReader) CanAddOutput(output *AssetReaderOutput) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canAddOutput:"), objref.IDOf(output))
 	return _r
 }
 
-// Adds an output to the reader.
+// AddOutput adds an output to the reader.
 func (x *AssetReader) AddOutput(output *AssetReaderOutput) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOutput:"), objref.IDOf(output))
 }
 
-// Prepares the asset reader to start reading sample buffers from the asset.
+// StartReading prepares the asset reader to start reading sample buffers from the asset.
 func (x *AssetReader) StartReading() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startReading"))
 	return _r
 }
 
-// Cancels any background work and stops the reader’s outputs from reading more samples.
+// CancelReading cancels any background work and stops the reader’s outputs from reading more samples.
 func (x *AssetReader) CancelReading() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelReading"))
 }
 
-// The asset from which the receiver's outputs read sample buffers. The value of this property is an AVAsset. Concrete instances of AVAssetReader that are created with specific AVAssetTrack instances must obtain those tracks from the asset returned by this property.
+// Asset the asset from which the receiver's outputs read sample buffers. The value of this property is an AVAsset. Concrete instances of AVAssetReader that are created with specific AVAssetTrack instances must obtain those tracks from the asset returned by this property.
 func (x *AssetReader) Asset() *Asset {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("asset"))
 	return AssetFromID(_r)
 }
 
-// The status of reading sample buffers from the receiver's asset. The value of this property is an AVAssetReaderStatus that indicates whether reading is in progress, has completed successfully, has been canceled, or has failed. Clients of AVAssetReaderOutput objects should check the value of this property after -[AVAssetReaderOutput copyNextSampleBuffer] returns NULL to determine why no more samples could be read. This property is thread safe.
+// Status the status of reading sample buffers from the receiver's asset. The value of this property is an AVAssetReaderStatus that indicates whether reading is in progress, has completed successfully, has been canceled, or has failed. Clients of AVAssetReaderOutput objects should check the value of this property after -[AVAssetReaderOutput copyNextSampleBuffer] returns NULL to determine why no more samples could be read. This property is thread safe.
 func (x *AssetReader) Status() AssetReaderStatus {
 	_r := objc.Send[AssetReaderStatus](objref.IDOf(x), objc.RegisterName("status"))
 	return _r
 }
 
-// The outputs from which clients of receiver can read media data. The value of this property is an NSArray containing concrete instances of AVAssetReaderOutput. Outputs can be added to the receiver using the addOutput: method.
+// Outputs the outputs from which clients of receiver can read media data. The value of this property is an NSArray containing concrete instances of AVAssetReaderOutput. Outputs can be added to the receiver using the addOutput: method.
 //
 // Outputs returns the collection as a Go slice.
 func (x *AssetReader) Outputs() []*AssetReaderOutput {

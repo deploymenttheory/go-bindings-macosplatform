@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that manages audio assets, controls playback, and configures environmental effects.
-//
 // Engine is an idiomatic wrapper over the Objective-C class PHASEEngine.
+//
+// An object that manages audio assets, controls playback, and configures environmental effects.
 type Engine struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func EngineFromID(id objc.ID) *Engine {
 	if id == 0 {
 		return nil
 	}
-	x := &Engine{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Engine{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func engineAdopt(id objc.ID) *Engine {
 	if id == 0 {
 		return nil
 	}
-	x := &Engine{Handle: objref.Wrap(id)}
+	x := &Engine{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,56 +62,50 @@ func (x *Engine) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an engine updated by the app or framework.
-//
-// NewEngineWithUpdateMode creates a new Engine.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Engine) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewEngineWithUpdateMode creates an engine updated by the app or framework.
 func NewEngineWithUpdateMode(updateMode UpdateMode) *Engine {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEEngine")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUpdateMode:"), updateMode)
 	return engineAdopt(_id)
 }
 
-// The mode the engine implements to create a 3D sound experience.
-//
-// WithOutputSpatializationMode sets outputSpatializationMode and returns the receiver so calls can be chained.
+// WithOutputSpatializationMode the mode the engine implements to create a 3D sound experience.
 func (x *Engine) WithOutputSpatializationMode(outputSpatializationMode SpatializationMode) *Engine {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputSpatializationMode:"), outputSpatializationMode)
 	return x
 }
 
-// The physical matter through which sound travels.
-//
-// WithDefaultMedium sets defaultMedium and returns the receiver so calls can be chained.
+// WithDefaultMedium the physical matter through which sound travels.
 func (x *Engine) WithDefaultMedium(defaultMedium *Medium) *Engine {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultMedium:"), objref.IDOf(defaultMedium))
 	return x
 }
 
-// The environmental surroundings that determine how sound resonates.
-//
-// WithDefaultReverbPreset sets defaultReverbPreset and returns the receiver so calls can be chained.
+// WithDefaultReverbPreset the environmental surroundings that determine how sound resonates.
 func (x *Engine) WithDefaultReverbPreset(defaultReverbPreset ReverbPreset) *Engine {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultReverbPreset:"), defaultReverbPreset)
 	return x
 }
 
-// A conversion factor from seconds to your app’s preferred unit of time.
-//
-// WithUnitsPerSecond sets unitsPerSecond and returns the receiver so calls can be chained.
+// WithUnitsPerSecond a conversion factor from seconds to your app’s preferred unit of time.
 func (x *Engine) WithUnitsPerSecond(unitsPerSecond float64) *Engine {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitsPerSecond:"), unitsPerSecond)
 	return x
 }
 
-// A conversion factor from meters to your app’s preferred unit of measurement.
-//
-// WithUnitsPerMeter sets unitsPerMeter and returns the receiver so calls can be chained.
+// WithUnitsPerMeter a conversion factor from meters to your app’s preferred unit of measurement.
 func (x *Engine) WithUnitsPerMeter(unitsPerMeter float64) *Engine {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitsPerMeter:"), unitsPerMeter)
 	return x
 }
 
-// Starts or resumes all audio playback.
+// StartAndReturnError starts or resumes all audio playback.
 //
 // StartAndReturnError returns an error if the operation did not succeed.
 func (x *Engine) StartAndReturnError() error {
@@ -121,90 +117,95 @@ func (x *Engine) StartAndReturnError() error {
 	return nil
 }
 
-// Pauses all audio playback.
+// Pause pauses all audio playback.
 func (x *Engine) Pause() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pause"))
 }
 
-// Stops all audio playback.
+// Stop stops all audio playback.
 func (x *Engine) Stop() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
-// Processes app commands and increments framework processing.
+// Update processes app commands and increments framework processing.
 func (x *Engine) Update() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("update"))
 }
 
-// When set to a value other than PHASESpatializationModeAutomatic, overrides the default output spatializer and uses the specified one instead.
+// OutputSpatializationMode when set to a value other than PHASESpatializationModeAutomatic, overrides the default output spatializer and uses the specified one instead.
 func (x *Engine) OutputSpatializationMode() SpatializationMode {
 	_r := objc.Send[SpatializationMode](objref.IDOf(x), objc.RegisterName("outputSpatializationMode"))
 	return _r
 }
 
+// SetOutputSpatializationMode wraps the corresponding Objective-C method.
 func (x *Engine) SetOutputSpatializationMode(outputSpatializationMode SpatializationMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputSpatializationMode:"), outputSpatializationMode)
 }
 
-// The engine's current rendering state.
+// RenderingState the engine's current rendering state.
 func (x *Engine) RenderingState() RenderingState {
 	_r := objc.Send[RenderingState](objref.IDOf(x), objc.RegisterName("renderingState"))
 	return _r
 }
 
-// The root object of the engine's scene graph. Attach objects to the engine's rootObject or one of its children to make them active within the engine's scene graph. This will ensure they take part in the simulation.
+// RootObject the root object of the engine's scene graph. Attach objects to the engine's rootObject or one of its children to make them active within the engine's scene graph. This will ensure they take part in the simulation.
 func (x *Engine) RootObject() *Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootObject"))
 	return ObjectFromID(_r)
 }
 
-// The default medium in the engine. The default value is PHASEMediumPresetAir.
+// DefaultMedium the default medium in the engine. The default value is PHASEMediumPresetAir.
 func (x *Engine) DefaultMedium() *Medium {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultMedium"))
 	return MediumFromID(_r)
 }
 
+// SetDefaultMedium wraps the corresponding Objective-C method.
 func (x *Engine) SetDefaultMedium(defaultMedium *Medium) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultMedium:"), objref.IDOf(defaultMedium))
 }
 
-// The default reverb preset in the engine. The default value is PHASEReverbPresetNone.
+// DefaultReverbPreset the default reverb preset in the engine. The default value is PHASEReverbPresetNone.
 func (x *Engine) DefaultReverbPreset() ReverbPreset {
 	_r := objc.Send[ReverbPreset](objref.IDOf(x), objc.RegisterName("defaultReverbPreset"))
 	return _r
 }
 
+// SetDefaultReverbPreset wraps the corresponding Objective-C method.
 func (x *Engine) SetDefaultReverbPreset(defaultReverbPreset ReverbPreset) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultReverbPreset:"), defaultReverbPreset)
 }
 
-// The number of units in a second. The unitsPerSecond is used internally to scale time/duration values passed to the API. This allows clients to pass time/duration values in their own native time scale.
+// UnitsPerSecond the number of units in a second. The unitsPerSecond is used internally to scale time/duration values passed to the API. This allows clients to pass time/duration values in their own native time scale.
 func (x *Engine) UnitsPerSecond() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("unitsPerSecond"))
 	return _r
 }
 
+// SetUnitsPerSecond wraps the corresponding Objective-C method.
 func (x *Engine) SetUnitsPerSecond(unitsPerSecond float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitsPerSecond:"), unitsPerSecond)
 }
 
-// The number of units in a meter. The unitsPerMeter is used internally to scale metric values passed to the API. This allows clients to pass metric values in their own native spatial scale.
+// UnitsPerMeter the number of units in a meter. The unitsPerMeter is used internally to scale metric values passed to the API. This allows clients to pass metric values in their own native spatial scale.
 func (x *Engine) UnitsPerMeter() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("unitsPerMeter"))
 	return _r
 }
 
+// SetUnitsPerMeter wraps the corresponding Objective-C method.
 func (x *Engine) SetUnitsPerMeter(unitsPerMeter float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitsPerMeter:"), unitsPerMeter)
 }
 
-// A registry for assets available to the engine
+// AssetRegistry a registry for assets available to the engine
 func (x *Engine) AssetRegistry() *AssetRegistry {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetRegistry"))
 	return AssetRegistryFromID(_r)
 }
 
-// An array of the active sound event objects in the system Returns a dictionary of the sound events at the time it is retrieved. This includes all sound events that are registered with the engine, including those that are preparing, playing, paused or stopping.
+// SoundEvents an array of the active sound event objects in the system Returns a dictionary of the sound events at the time it is retrieved. This includes all sound events that are registered with the engine, including those that are preparing, playing, paused or stopping.
 //
 // SoundEvents returns the collection as a Go slice.
 func (x *Engine) SoundEvents() []*SoundEvent {
@@ -212,13 +213,13 @@ func (x *Engine) SoundEvents() []*SoundEvent {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SoundEvent { return SoundEventFromID(_id) })
 }
 
-// A dictionary of the groups in the system Returns a dictionary of the groups at the time it is retrieved.
+// Groups a dictionary of the groups in the system Returns a dictionary of the groups at the time it is retrieved.
 func (x *Engine) Groups() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groups"))
 	return obj.Wrap(_r)
 }
 
-// An array of the ducker objects in the system Returns a dictionary of the ducker objects at the time it is retrieved.
+// Duckers an array of the ducker objects in the system Returns a dictionary of the ducker objects at the time it is retrieved.
 //
 // Duckers returns the collection as a Go slice.
 func (x *Engine) Duckers() []*Ducker {
@@ -226,13 +227,13 @@ func (x *Engine) Duckers() []*Ducker {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Ducker { return DuckerFromID(_id) })
 }
 
-// The active group mixer preset in the system Returns nil if there are no active group presets in the engine. Activate or Deactivate the preset via [PHASEGroupPreset activate] and [PHASEGroupPreset deactivate]
+// ActiveGroupPreset the active group mixer preset in the system Returns nil if there are no active group presets in the engine. Activate or Deactivate the preset via [PHASEGroupPreset activate] and [PHASEGroupPreset deactivate]
 func (x *Engine) ActiveGroupPreset() *GroupPreset {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activeGroupPreset"))
 	return GroupPresetFromID(_r)
 }
 
-// Obtain the time for which the engine most recently rendered. Will return nil if the engine is not running
+// LastRenderTime obtain the time for which the engine most recently rendered. Will return nil if the engine is not running
 func (x *Engine) LastRenderTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastRenderTime"))
 	return obj.Wrap(_r)

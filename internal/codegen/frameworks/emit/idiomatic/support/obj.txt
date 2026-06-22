@@ -86,3 +86,18 @@ func Bytes(o Object) []byte {
 	}
 	return rt.NSDataToBytes(objref.IDOf(o))
 }
+
+// ID returns the underlying Objective-C object pointer of o (0 when o is nil).
+//
+// This is the deliberate escape hatch for advanced interoperation the generated
+// API cannot express — sending a selector by hand, installing a custom delegate
+// implemented as a runtime class, or any other direct Objective-C dispatch. It
+// does NOT expose the raw bindings, so a package using it stays free of the
+// bindings/frameworks dependency; prefer the generated methods wherever they
+// suffice and reach for ID only for genuine custom Objective-C work.
+func ID(o Object) objc.ID {
+	if o == nil {
+		return 0
+	}
+	return objref.IDOf(o)
+}

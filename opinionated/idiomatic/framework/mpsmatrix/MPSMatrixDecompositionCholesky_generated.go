@@ -6,15 +6,17 @@ package mpsmatrix
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MatrixDecompositionCholesky is an idiomatic wrapper over the Objective-C class MPSMatrixDecompositionCholesky.
+//
+// It embeds [MatrixUnaryKernel], promoting that type's methods.
 type MatrixDecompositionCholesky struct {
-	objref.Handle
+	MatrixUnaryKernel
 }
 
 // MatrixDecompositionCholeskyFromID adopts an existing Objective-C object as a MatrixDecompositionCholesky
@@ -23,7 +25,8 @@ func MatrixDecompositionCholeskyFromID(id objc.ID) *MatrixDecompositionCholesky 
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixDecompositionCholesky{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatrixDecompositionCholesky{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +39,10 @@ func matrixDecompositionCholeskyAdopt(id objc.ID) *MatrixDecompositionCholesky {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixDecompositionCholesky{Handle: objref.Wrap(id)}
+	x := &MatrixDecompositionCholesky{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MatrixDecompositionCholesky) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatrixDecompositionCholesky) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatrixDecompositionCholesky) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMatrixDecompositionCholesky creates a new MatrixDecompositionCholesky.
@@ -62,17 +51,25 @@ func NewMatrixDecompositionCholesky() *MatrixDecompositionCholesky {
 	return matrixDecompositionCholeskyAdopt(_id)
 }
 
-// The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
-//
-// WithBatchStart sets batchStart and returns the receiver so calls can be chained.
+// WithSourceMatrixOrigin the origin, relative to [0, 0] in the source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixDecompositionCholesky) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixDecompositionCholesky {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMatrixOrigin:"), sourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (x *MatrixDecompositionCholesky) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixDecompositionCholesky {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
 func (x *MatrixDecompositionCholesky) WithBatchStart(batchStart int) *MatrixDecompositionCholesky {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 	return x
 }
 
-// The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
-//
-// WithBatchSize sets batchSize and returns the receiver so calls can be chained.
+// WithBatchSize the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
 func (x *MatrixDecompositionCholesky) WithBatchSize(batchSize int) *MatrixDecompositionCholesky {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 	return x
@@ -81,8 +78,12 @@ func (x *MatrixDecompositionCholesky) WithBatchSize(batchSize int) *MatrixDecomp
 // MatrixDecompositionCholeskyable is the interface implemented by [MatrixDecompositionCholesky], for mocking and DI.
 type MatrixDecompositionCholeskyable interface {
 	obj.Object
+	WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixDecompositionCholesky
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixDecompositionCholesky
 	WithBatchStart(batchStart int) *MatrixDecompositionCholesky
 	WithBatchSize(batchSize int) *MatrixDecompositionCholesky
 }
 
 var _ MatrixDecompositionCholeskyable = (*MatrixDecompositionCholesky)(nil)
+
+var _ MatrixUnaryKernelProvider = (*MatrixDecompositionCholesky)(nil)

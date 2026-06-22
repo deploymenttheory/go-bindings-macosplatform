@@ -6,17 +6,20 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Text the user can select or edit to send an action message to a target when the user presses the Return key.
-//
 // TextField is an idiomatic wrapper over the Objective-C class NSTextField.
+//
+// TextField is an abstract base — you do not construct it directly. Construct one of [ComboBox], [SearchField], [SecureTextField], [TokenField] and pass it where a TextField is accepted.
+//
+// Text the user can select or edit to send an action message to a target when the user presses the Return key.
 type TextField struct {
-	objref.Handle
+	Control
 }
 
 // TextFieldFromID adopts an existing Objective-C object as a TextField
@@ -25,7 +28,8 @@ func TextFieldFromID(id objc.ID) *TextField {
 	if id == 0 {
 		return nil
 	}
-	x := &TextField{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextField{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,710 +42,621 @@ func textFieldAdopt(id objc.ID) *TextField {
 	if id == 0 {
 		return nil
 	}
-	x := &TextField{Handle: objref.Wrap(id)}
+	x := &TextField{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *TextField) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextField) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextField) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewTextField creates a new TextField.
-func NewTextField() *TextField {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSTextField")), objc.RegisterName("new"))
-	return textFieldAdopt(_id)
-}
-
-// The string the text field displays when empty to help the user understand the text field’s purpose.
-//
-// WithPlaceholderString sets placeholderString and returns the receiver so calls can be chained.
+// WithPlaceholderString the string the text field displays when empty to help the user understand the text field’s purpose.
 func (x *TextField) WithPlaceholderString(placeholderString string) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
 	return x
 }
 
-// The attributed string the text field displays when empty to help the user understand the text field’s purpose.
-//
-// WithPlaceholderAttributedString sets placeholderAttributedString and returns the receiver so calls can be chained.
+// WithPlaceholderAttributedString the attributed string the text field displays when empty to help the user understand the text field’s purpose.
 func (x *TextField) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 	return x
 }
 
-// The color of the background the text field’s cell draws behind the text.
-//
-// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+// WithBackgroundColor the color of the background the text field’s cell draws behind the text.
 func (x *TextField) WithBackgroundColor(backgroundColor *Color) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// A Boolean value that controls whether the text field’s cell draws a background color behind the text.
-//
-// WithDrawsBackground sets drawsBackground and returns the receiver so calls can be chained.
+// WithDrawsBackground a Boolean value that controls whether the text field’s cell draws a background color behind the text.
 func (x *TextField) WithDrawsBackground(drawsBackground bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
 	return x
 }
 
-// The color of the text field’s content.
-//
-// WithTextColor sets textColor and returns the receiver so calls can be chained.
+// WithTextColor the color of the text field’s content.
 func (x *TextField) WithTextColor(textColor *Color) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 	return x
 }
 
-// A Boolean value that controls whether the text field draws a solid black border around its contents.
-//
-// WithBordered sets bordered and returns the receiver so calls can be chained.
+// WithBordered a Boolean value that controls whether the text field draws a solid black border around its contents.
 func (x *TextField) WithBordered(bordered bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
-// A Boolean value that controls whether the text field draws a bezeled background around its contents.
-//
-// WithBezeled sets bezeled and returns the receiver so calls can be chained.
+// WithBezeled a Boolean value that controls whether the text field draws a bezeled background around its contents.
 func (x *TextField) WithBezeled(bezeled bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 	return x
 }
 
-// A Boolean value that controls whether the user can edit the value in the text field.
-//
-// WithEditable sets editable and returns the receiver so calls can be chained.
+// WithEditable a Boolean value that controls whether the user can edit the value in the text field.
 func (x *TextField) WithEditable(editable bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
-// A Boolean value that determines whether the user can select the content of the text field.
-//
-// WithSelectable sets selectable and returns the receiver so calls can be chained.
+// WithSelectable a Boolean value that determines whether the user can select the content of the text field.
 func (x *TextField) WithSelectable(selectable bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 	return x
 }
 
-// The text field’s bezel style, square or rounded.
-//
-// WithBezelStyle sets bezelStyle and returns the receiver so calls can be chained.
+// WithBezelStyle the text field’s bezel style, square or rounded.
 func (x *TextField) WithBezelStyle(bezelStyle TextFieldBezelStyle) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelStyle:"), bezelStyle)
 	return x
 }
 
-// The maximum width of the text field’s intrinsic content size.
-//
-// WithPreferredMaxLayoutWidth sets preferredMaxLayoutWidth and returns the receiver so calls can be chained.
+// WithPreferredMaxLayoutWidth the maximum width of the text field’s intrinsic content size.
 func (x *TextField) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
 	return x
 }
 
-// The maximum number of lines a wrapping text field displays before clipping or truncating the text.
-//
-// WithMaximumNumberOfLines sets maximumNumberOfLines and returns the receiver so calls can be chained.
+// WithMaximumNumberOfLines the maximum number of lines a wrapping text field displays before clipping or truncating the text.
 func (x *TextField) WithMaximumNumberOfLines(maximumNumberOfLines int) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumNumberOfLines:"), maximumNumberOfLines)
 	return x
 }
 
-// A Boolean value that controls whether single-line text fields tighten intercharacter spacing before truncating the text.
-//
-// WithAllowsDefaultTighteningForTruncation sets allowsDefaultTighteningForTruncation and returns the receiver so calls can be chained.
+// WithAllowsDefaultTighteningForTruncation a Boolean value that controls whether single-line text fields tighten intercharacter spacing before truncating the text.
 func (x *TextField) WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsDefaultTighteningForTruncation:"), allowsDefaultTighteningForTruncation)
 	return x
 }
 
-// The strategy that the system uses to break lines when laying out multiple lines of text.
-//
-// WithLineBreakStrategy sets lineBreakStrategy and returns the receiver so calls can be chained.
+// WithLineBreakStrategy the strategy that the system uses to break lines when laying out multiple lines of text.
 func (x *TextField) WithLineBreakStrategy(lineBreakStrategy LineBreakStrategy) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakStrategy:"), lineBreakStrategy)
 	return x
 }
 
-// WithAllowsWritingTools sets allowsWritingTools and returns the receiver so calls can be chained.
+// WithAllowsWritingTools sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithAllowsWritingTools(allowsWritingTools bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsWritingTools:"), allowsWritingTools)
 	return x
 }
 
-// WithAllowsWritingToolsAffordance sets allowsWritingToolsAffordance and returns the receiver so calls can be chained.
+// WithAllowsWritingToolsAffordance sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsWritingToolsAffordance:"), allowsWritingToolsAffordance)
 	return x
 }
 
-// WithPlaceholderStrings sets the collection and returns the receiver so calls can be chained.
+// WithPlaceholderStrings sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithPlaceholderStrings(items ...obj.Object) *TextField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderStrings:"), _arr)
 	return x
 }
 
-// WithPlaceholderAttributedStrings sets the collection and returns the receiver so calls can be chained.
+// WithPlaceholderAttributedStrings sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithPlaceholderAttributedStrings(items ...obj.Object) *TextField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedStrings:"), _arr)
 	return x
 }
 
-// Specifies the behavior for resolving NSTextAlignmentNatural to the visual alignment.
-//
-// WithResolvesNaturalAlignmentWithBaseWritingDirection sets resolvesNaturalAlignmentWithBaseWritingDirection and returns the receiver so calls can be chained.
+// WithResolvesNaturalAlignmentWithBaseWritingDirection specifies the behavior for resolving NSTextAlignmentNatural to the visual alignment.
 func (x *TextField) WithResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolvesNaturalAlignmentWithBaseWritingDirection:"), resolvesNaturalAlignmentWithBaseWritingDirection)
 	return x
 }
 
-// A Boolean value that indicates whether the text field automatically completes text as the user types.
-//
-// WithAutomaticTextCompletionEnabled sets automaticTextCompletionEnabled and returns the receiver so calls can be chained.
+// WithAutomaticTextCompletionEnabled a Boolean value that indicates whether the text field automatically completes text as the user types.
 func (x *TextField) WithAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticTextCompletionEnabled:"), automaticTextCompletionEnabled)
 	return x
 }
 
-// A Boolean value that controls whether the Touch Bar displays the character picker item for rich text fields.
-//
-// WithAllowsCharacterPickerTouchBarItem sets allowsCharacterPickerTouchBarItem and returns the receiver so calls can be chained.
+// WithAllowsCharacterPickerTouchBarItem a Boolean value that controls whether the Touch Bar displays the character picker item for rich text fields.
 func (x *TextField) WithAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCharacterPickerTouchBarItem:"), allowsCharacterPickerTouchBarItem)
 	return x
 }
 
-// A Boolean value that controls whether the user can change font attributes of the text field’s string.
-//
-// WithAllowsEditingTextAttributes sets allowsEditingTextAttributes and returns the receiver so calls can be chained.
+// WithAllowsEditingTextAttributes a Boolean value that controls whether the user can change font attributes of the text field’s string.
 func (x *TextField) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
 	return x
 }
 
-// A Boolean value that controls whether the user can drag image files into the text field.
-//
-// WithImportsGraphics sets importsGraphics and returns the receiver so calls can be chained.
+// WithImportsGraphics a Boolean value that controls whether the user can drag image files into the text field.
 func (x *TextField) WithImportsGraphics(importsGraphics bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
 	return x
 }
 
-// The target object that receives action messages from the cell.
-//
-// WithTarget sets target and returns the receiver so calls can be chained.
+// WithTarget the target object that receives action messages from the cell.
 func (x *TextField) WithTarget(target obj.Object) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// The tag identifying the receiver (not the tag of the receiver’s cell).
-//
-// WithTag sets tag and returns the receiver so calls can be chained.
+// WithTag the tag identifying the receiver (not the tag of the receiver’s cell).
 func (x *TextField) WithTag(tag int) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
-//
-// WithIgnoresMultiClick sets ignoresMultiClick and returns the receiver so calls can be chained.
+// WithIgnoresMultiClick a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (x *TextField) WithIgnoresMultiClick(ignoresMultiClick bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
 	return x
 }
 
-// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
-//
-// WithContinuous sets continuous and returns the receiver so calls can be chained.
+// WithContinuous a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (x *TextField) WithContinuous(continuous bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver reacts to mouse events.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether the receiver reacts to mouse events.
 func (x *TextField) WithEnabled(enabled bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A Boolean value indicating whether the receiver refuses the first responder role.
-//
-// WithRefusesFirstResponder sets refusesFirstResponder and returns the receiver so calls can be chained.
+// WithRefusesFirstResponder a Boolean value indicating whether the receiver refuses the first responder role.
 func (x *TextField) WithRefusesFirstResponder(refusesFirstResponder bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
-// A Boolean value that indicates whether the cell is highlighted.
-//
-// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
+// WithHighlighted a Boolean value that indicates whether the cell is highlighted.
 func (x *TextField) WithHighlighted(highlighted bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// The size of the control.
-//
-// WithControlSize sets controlSize and returns the receiver so calls can be chained.
+// WithControlSize the size of the control.
 func (x *TextField) WithControlSize(controlSize ControlSize) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
-// The receiver’s formatter.
-//
-// WithFormatter sets formatter and returns the receiver so calls can be chained.
+// WithFormatter the receiver’s formatter.
 func (x *TextField) WithFormatter(formatter obj.Object) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
-// The value of the receiver’s cell as an Objective-C object.
-//
-// WithObjectValue sets objectValue and returns the receiver so calls can be chained.
+// WithObjectValue the value of the receiver’s cell as an Objective-C object.
 func (x *TextField) WithObjectValue(objectValue obj.Object) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
-// The value of the receiver’s cell as an NSString object.
-//
-// WithStringValue sets stringValue and returns the receiver so calls can be chained.
+// WithStringValue the value of the receiver’s cell as an NSString object.
 func (x *TextField) WithStringValue(stringValue string) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
-// The value of the receiver’s cell as an attributed string.
-//
-// WithAttributedStringValue sets attributedStringValue and returns the receiver so calls can be chained.
+// WithAttributedStringValue the value of the receiver’s cell as an attributed string.
 func (x *TextField) WithAttributedStringValue(attributedStringValue obj.Object) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
-// The value of the receiver’s cell as an integer.
-//
-// WithIntValue sets intValue and returns the receiver so calls can be chained.
+// WithIntValue the value of the receiver’s cell as an integer.
 func (x *TextField) WithIntValue(intValue int) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
-// The value of the receiver’s cell as an integer value.
-//
-// WithIntegerValue sets integerValue and returns the receiver so calls can be chained.
+// WithIntegerValue the value of the receiver’s cell as an integer value.
 func (x *TextField) WithIntegerValue(integerValue int) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
-// The value of the receiver’s cell as a single-precision floating-point number.
-//
-// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
+// WithFloatValue the value of the receiver’s cell as a single-precision floating-point number.
 func (x *TextField) WithFloatValue(floatValue float32) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
-// The value of the receiver’s cell as a double-precision floating-point number.
-//
-// WithDoubleValue sets doubleValue and returns the receiver so calls can be chained.
+// WithDoubleValue the value of the receiver’s cell as a double-precision floating-point number.
 func (x *TextField) WithDoubleValue(doubleValue float64) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
-// The font used to draw text in the receiver’s cell.
-//
-// WithFont sets font and returns the receiver so calls can be chained.
+// WithFont the font used to draw text in the receiver’s cell.
 func (x *TextField) WithFont(font *Font) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
-// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
-//
-// WithUsesSingleLineMode sets usesSingleLineMode and returns the receiver so calls can be chained.
+// WithUsesSingleLineMode a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (x *TextField) WithUsesSingleLineMode(usesSingleLineMode bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
-// The line break mode to use for text in the control’s cell.
-//
-// WithLineBreakMode sets lineBreakMode and returns the receiver so calls can be chained.
+// WithLineBreakMode the line break mode to use for text in the control’s cell.
 func (x *TextField) WithLineBreakMode(lineBreakMode LineBreakMode) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
-// The alignment mode of the text in the receiver’s cell.
-//
-// WithAlignment sets alignment and returns the receiver so calls can be chained.
+// WithAlignment the alignment mode of the text in the receiver’s cell.
 func (x *TextField) WithAlignment(alignment TextAlignment) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
-// The initial writing direction used to determine the actual writing direction for text.
-//
-// WithBaseWritingDirection sets baseWritingDirection and returns the receiver so calls can be chained.
+// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
 func (x *TextField) WithBaseWritingDirection(baseWritingDirection WritingDirection) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
-// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
-//
-// WithAllowsExpansionToolTips sets allowsExpansionToolTips and returns the receiver so calls can be chained.
+// WithAllowsExpansionToolTips a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (x *TextField) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
 	return x
 }
 
-// WithCell sets cell and returns the receiver so calls can be chained.
+// WithCell sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithCell(cell CellProvider) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return x
 }
 
-// WithSubviews sets the collection and returns the receiver so calls can be chained.
+// WithSubviews sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithSubviews(items ...ViewProvider) *TextField {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
 	return x
 }
 
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithHidden(hidden bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithPostsFrameChangedNotifications sets postsFrameChangedNotifications and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return x
 }
 
-// WithAutoresizesSubviews sets autoresizesSubviews and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithAutoresizesSubviews(autoresizesSubviews bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return x
 }
 
-// WithAutoresizingMask sets autoresizingMask and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// WithFrameRotation sets frameRotation and returns the receiver so calls can be chained.
+// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (x *TextField) WithFrame(frame corefoundation.CGRect) *TextField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
+	return x
+}
+
+// WithFrameRotation sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithFrameRotation(frameRotation float64) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return x
 }
 
-// WithFrameCenterRotation sets frameCenterRotation and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithFrameCenterRotation(frameCenterRotation float64) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return x
 }
 
-// WithBoundsRotation sets boundsRotation and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithBoundsRotation(boundsRotation float64) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return x
 }
 
-// WithCanDrawConcurrently sets canDrawConcurrently and returns the receiver so calls can be chained.
+// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (x *TextField) WithBounds(bounds corefoundation.CGRect) *TextField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithCanDrawConcurrently(canDrawConcurrently bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return x
 }
 
-// A Boolean value that determines whether the view needs to be redrawn before being displayed.
-//
-// WithNeedsDisplay sets needsDisplay and returns the receiver so calls can be chained.
+// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (x *TextField) WithNeedsDisplay(needsDisplay bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// WithAcceptsTouchEvents sets acceptsTouchEvents and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithAcceptsTouchEvents(acceptsTouchEvents bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return x
 }
 
-// WithWantsRestingTouches sets wantsRestingTouches and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithWantsRestingTouches(wantsRestingTouches bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return x
 }
 
-// WithLayerContentsRedrawPolicy sets layerContentsRedrawPolicy and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return x
 }
 
-// WithLayerContentsPlacement sets layerContentsPlacement and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return x
 }
 
-// WithWantsLayer sets wantsLayer and returns the receiver so calls can be chained.
+// WithWantsLayer sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithWantsLayer(wantsLayer bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return x
 }
 
-// WithLayer sets layer and returns the receiver so calls can be chained.
+// WithLayer sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithLayer(layer obj.Object) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// WithCanDrawSubviewsIntoLayer sets canDrawSubviewsIntoLayer and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return x
 }
 
-// WithNeedsLayout sets needsLayout and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithNeedsLayout(needsLayout bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return x
 }
 
-// WithAlphaValue sets alphaValue and returns the receiver so calls can be chained.
+// WithAlphaValue sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithAlphaValue(alphaValue float64) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// WithLayerUsesCoreImageFilters sets layerUsesCoreImageFilters and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return x
 }
 
-// WithBackgroundFilters sets the collection and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithBackgroundFilters(items ...obj.Object) *TextField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return x
 }
 
-// WithCompositingFilter sets compositingFilter and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithCompositingFilter(compositingFilter obj.Object) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// WithContentFilters sets the collection and returns the receiver so calls can be chained.
+// WithContentFilters sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithContentFilters(items ...obj.Object) *TextField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
 	return x
 }
 
-// WithShadow sets shadow and returns the receiver so calls can be chained.
+// WithShadow sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithShadow(shadow *Shadow) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return x
 }
 
-// WithClipsToBounds sets clipsToBounds and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithClipsToBounds(clipsToBounds bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return x
 }
 
-// WithPostsBoundsChangedNotifications sets postsBoundsChangedNotifications and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return x
 }
 
-// WithToolTip sets toolTip and returns the receiver so calls can be chained.
+// WithToolTip sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithToolTip(toolTip string) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// WithNextKeyView sets nextKeyView and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+func (x *TextField) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TextField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithNextKeyView(nextKeyView ViewProvider) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return x
 }
 
-// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+// WithFocusRingType sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithFocusRingType(focusRingType FocusRingType) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// WithGestureRecognizers sets the collection and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithGestureRecognizers(items ...GestureRecognizerProvider) *TextField {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return x
 }
 
-// WithAllowedTouchTypes sets allowedTouchTypes and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return x
 }
 
-// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-//
-// WithPrefersCompactControlSizeMetrics sets prefersCompactControlSizeMetrics and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+func (x *TextField) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TextField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (x *TextField) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
 	return x
 }
 
-// WithWritingToolsCoordinator sets writingToolsCoordinator and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return x
 }
 
-// WithNeedsUpdateConstraints sets needsUpdateConstraints and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return x
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets translatesAutoresizingMaskIntoConstraints and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return x
 }
 
-// WithHorizontalContentSizeConstraintActive sets horizontalContentSizeConstraintActive and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return x
 }
 
-// WithVerticalContentSizeConstraintActive sets verticalContentSizeConstraintActive and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return x
 }
 
-// WithWantsBestResolutionOpenGLSurface sets wantsBestResolutionOpenGLSurface and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return x
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets wantsExtendedDynamicRangeOpenGLSurface and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return x
 }
 
-// WithPressureConfiguration sets pressureConfiguration and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
 func (x *TextField) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *TextField) WithNextResponder(nextResponder ResponderProvider) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets menu and returns the receiver so calls can be chained.
+// WithMenu returns the responder’s menu.
 func (x *TextField) WithMenu(menu *Menu) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity an object encapsulating a user activity supported by this responder.
 func (x *TextField) WithUserActivity(userActivity obj.Object) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *TextField) WithTouchBar(touchBar *TouchBar) *TextField {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// Ends editing in the text field and, if it’s selectable, selects the entire text content.
+// SelectText ends editing in the text field and, if it’s selectable, selects the entire text content.
 func (x *TextField) SelectText(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectText:"), objref.IDOf(sender))
 }
 
-// Requests permission to begin editing a text object.
+// TextShouldBeginEditing requests permission to begin editing a text object.
 func (x *TextField) TextShouldBeginEditing(textObject *Text) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("textShouldBeginEditing:"), objref.IDOf(textObject))
 	return _r
 }
 
-// Performs validation on the text field’s new value.
+// TextShouldEndEditing performs validation on the text field’s new value.
 func (x *TextField) TextShouldEndEditing(textObject *Text) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("textShouldEndEditing:"), objref.IDOf(textObject))
 	return _r
 }
 
-// Posts a notification to the default notification center that the text is about to go into edit mode.
+// TextDidBeginEditing posts a notification to the default notification center that the text is about to go into edit mode.
 func (x *TextField) TextDidBeginEditing(notification obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textDidBeginEditing:"), objref.IDOf(notification))
 }
 
-// Posts a notification when the text is no longer in edit mode.
+// TextDidEndEditing posts a notification when the text is no longer in edit mode.
 func (x *TextField) TextDidEndEditing(notification obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textDidEndEditing:"), objref.IDOf(notification))
 }
 
-// Posts a notification when the text changes, and forwards the message to the text field’s cell if it responds.
+// TextDidChange posts a notification when the text changes, and forwards the message to the text field’s cell if it responds.
 func (x *TextField) TextDidChange(notification obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textDidChange:"), objref.IDOf(notification))
 }
 
+// PlaceholderString wraps the corresponding Objective-C method.
 func (x *TextField) PlaceholderString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderString"))
 	if _r == 0 {
@@ -750,213 +665,258 @@ func (x *TextField) PlaceholderString() string {
 	return purego.GoString(_r)
 }
 
+// SetPlaceholderString wraps the corresponding Objective-C method.
 func (x *TextField) SetPlaceholderString(placeholderString string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
 }
 
+// PlaceholderAttributedString wraps the corresponding Objective-C method.
 func (x *TextField) PlaceholderAttributedString() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderAttributedString"))
 	return obj.Wrap(_r)
 }
 
+// SetPlaceholderAttributedString wraps the corresponding Objective-C method.
 func (x *TextField) SetPlaceholderAttributedString(placeholderAttributedString obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 }
 
+// BackgroundColor wraps the corresponding Objective-C method.
 func (x *TextField) BackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
 }
 
+// SetBackgroundColor wraps the corresponding Objective-C method.
 func (x *TextField) SetBackgroundColor(backgroundColor *Color) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
+// DrawsBackground wraps the corresponding Objective-C method.
 func (x *TextField) DrawsBackground() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawsBackground"))
 	return _r
 }
 
+// SetDrawsBackground wraps the corresponding Objective-C method.
 func (x *TextField) SetDrawsBackground(drawsBackground bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
 }
 
+// TextColor wraps the corresponding Objective-C method.
 func (x *TextField) TextColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textColor"))
 	return ColorFromID(_r)
 }
 
+// SetTextColor wraps the corresponding Objective-C method.
 func (x *TextField) SetTextColor(textColor *Color) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 }
 
+// IsBordered wraps the corresponding Objective-C method.
 func (x *TextField) IsBordered() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBordered"))
 	return _r
 }
 
+// SetBordered wraps the corresponding Objective-C method.
 func (x *TextField) SetBordered(bordered bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 }
 
+// IsBezeled wraps the corresponding Objective-C method.
 func (x *TextField) IsBezeled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBezeled"))
 	return _r
 }
 
+// SetBezeled wraps the corresponding Objective-C method.
 func (x *TextField) SetBezeled(bezeled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 }
 
+// IsEditable wraps the corresponding Objective-C method.
 func (x *TextField) IsEditable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEditable"))
 	return _r
 }
 
+// SetEditable wraps the corresponding Objective-C method.
 func (x *TextField) SetEditable(editable bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 }
 
+// IsSelectable wraps the corresponding Objective-C method.
 func (x *TextField) IsSelectable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSelectable"))
 	return _r
 }
 
+// SetSelectable wraps the corresponding Objective-C method.
 func (x *TextField) SetSelectable(selectable bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 }
 
+// BezelStyle wraps the corresponding Objective-C method.
 func (x *TextField) BezelStyle() TextFieldBezelStyle {
 	_r := objc.Send[TextFieldBezelStyle](objref.IDOf(x), objc.RegisterName("bezelStyle"))
 	return _r
 }
 
+// SetBezelStyle wraps the corresponding Objective-C method.
 func (x *TextField) SetBezelStyle(bezelStyle TextFieldBezelStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelStyle:"), bezelStyle)
 }
 
+// PreferredMaxLayoutWidth wraps the corresponding Objective-C method.
 func (x *TextField) PreferredMaxLayoutWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("preferredMaxLayoutWidth"))
 	return _r
 }
 
+// SetPreferredMaxLayoutWidth wraps the corresponding Objective-C method.
 func (x *TextField) SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
 }
 
+// MaximumNumberOfLines wraps the corresponding Objective-C method.
 func (x *TextField) MaximumNumberOfLines() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumNumberOfLines"))
 	return _r
 }
 
+// SetMaximumNumberOfLines wraps the corresponding Objective-C method.
 func (x *TextField) SetMaximumNumberOfLines(maximumNumberOfLines int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumNumberOfLines:"), maximumNumberOfLines)
 }
 
+// AllowsDefaultTighteningForTruncation wraps the corresponding Objective-C method.
 func (x *TextField) AllowsDefaultTighteningForTruncation() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsDefaultTighteningForTruncation"))
 	return _r
 }
 
+// SetAllowsDefaultTighteningForTruncation wraps the corresponding Objective-C method.
 func (x *TextField) SetAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsDefaultTighteningForTruncation:"), allowsDefaultTighteningForTruncation)
 }
 
+// LineBreakStrategy wraps the corresponding Objective-C method.
 func (x *TextField) LineBreakStrategy() LineBreakStrategy {
 	_r := objc.Send[LineBreakStrategy](objref.IDOf(x), objc.RegisterName("lineBreakStrategy"))
 	return _r
 }
 
+// SetLineBreakStrategy wraps the corresponding Objective-C method.
 func (x *TextField) SetLineBreakStrategy(lineBreakStrategy LineBreakStrategy) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakStrategy:"), lineBreakStrategy)
 }
 
+// AllowsWritingTools wraps the corresponding Objective-C method.
 func (x *TextField) AllowsWritingTools() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsWritingTools"))
 	return _r
 }
 
+// SetAllowsWritingTools wraps the corresponding Objective-C method.
 func (x *TextField) SetAllowsWritingTools(allowsWritingTools bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsWritingTools:"), allowsWritingTools)
 }
 
+// AllowsWritingToolsAffordance wraps the corresponding Objective-C method.
 func (x *TextField) AllowsWritingToolsAffordance() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsWritingToolsAffordance"))
 	return _r
 }
 
+// SetAllowsWritingToolsAffordance wraps the corresponding Objective-C method.
 func (x *TextField) SetAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsWritingToolsAffordance:"), allowsWritingToolsAffordance)
 }
 
+// PlaceholderStrings wraps the corresponding Objective-C method.
+//
 // PlaceholderStrings returns the collection as a Go slice.
 func (x *TextField) PlaceholderStrings() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderStrings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetPlaceholderStrings wraps the corresponding Objective-C method.
 func (x *TextField) SetPlaceholderStrings(placeholderStrings []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderStrings:"), purego.SliceToNSArray(placeholderStrings, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// PlaceholderAttributedStrings wraps the corresponding Objective-C method.
+//
 // PlaceholderAttributedStrings returns the collection as a Go slice.
 func (x *TextField) PlaceholderAttributedStrings() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderAttributedStrings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetPlaceholderAttributedStrings wraps the corresponding Objective-C method.
 func (x *TextField) SetPlaceholderAttributedStrings(placeholderAttributedStrings []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedStrings:"), purego.SliceToNSArray(placeholderAttributedStrings, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Specifies the behavior for resolving “NSTextAlignment/natural“ to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `false`.
+// ResolvesNaturalAlignmentWithBaseWritingDirection specifies the behavior for resolving “NSTextAlignment/natural“ to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `false`.
 func (x *TextField) ResolvesNaturalAlignmentWithBaseWritingDirection() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("resolvesNaturalAlignmentWithBaseWritingDirection"))
 	return _r
 }
 
-// Specifies the behavior for resolving “NSTextAlignment/natural“ to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `false`.
+// SetResolvesNaturalAlignmentWithBaseWritingDirection specifies the behavior for resolving “NSTextAlignment/natural“ to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `false`.
 func (x *TextField) SetResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolvesNaturalAlignmentWithBaseWritingDirection:"), resolvesNaturalAlignmentWithBaseWritingDirection)
 }
 
+// IsAutomaticTextCompletionEnabled wraps the corresponding Objective-C method.
 func (x *TextField) IsAutomaticTextCompletionEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAutomaticTextCompletionEnabled"))
 	return _r
 }
 
+// SetAutomaticTextCompletionEnabled wraps the corresponding Objective-C method.
 func (x *TextField) SetAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticTextCompletionEnabled:"), automaticTextCompletionEnabled)
 }
 
+// AllowsCharacterPickerTouchBarItem wraps the corresponding Objective-C method.
 func (x *TextField) AllowsCharacterPickerTouchBarItem() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCharacterPickerTouchBarItem"))
 	return _r
 }
 
+// SetAllowsCharacterPickerTouchBarItem wraps the corresponding Objective-C method.
 func (x *TextField) SetAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCharacterPickerTouchBarItem:"), allowsCharacterPickerTouchBarItem)
 }
 
+// AllowsEditingTextAttributes wraps the corresponding Objective-C method.
 func (x *TextField) AllowsEditingTextAttributes() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsEditingTextAttributes"))
 	return _r
 }
 
+// SetAllowsEditingTextAttributes wraps the corresponding Objective-C method.
 func (x *TextField) SetAllowsEditingTextAttributes(allowsEditingTextAttributes bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
 }
 
+// ImportsGraphics wraps the corresponding Objective-C method.
 func (x *TextField) ImportsGraphics() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("importsGraphics"))
 	return _r
 }
 
+// SetImportsGraphics wraps the corresponding Objective-C method.
 func (x *TextField) SetImportsGraphics(importsGraphics bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
 }
 
-// Sets the text field’s string value using the embedded character as the keyboard mnemonic.
+// SetTitleWithMnemonic sets the text field’s string value using the embedded character as the keyboard mnemonic.
 func (x *TextField) SetTitleWithMnemonic(stringWithAmpersand string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleWithMnemonic:"), purego.NSString(stringWithAmpersand))
 }
@@ -1015,9 +975,11 @@ type TextFieldable interface {
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TextField
 	WithAutoresizesSubviews(autoresizesSubviews bool) *TextField
 	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *TextField
+	WithFrame(frame corefoundation.CGRect) *TextField
 	WithFrameRotation(frameRotation float64) *TextField
 	WithFrameCenterRotation(frameCenterRotation float64) *TextField
 	WithBoundsRotation(boundsRotation float64) *TextField
+	WithBounds(bounds corefoundation.CGRect) *TextField
 	WithCanDrawConcurrently(canDrawConcurrently bool) *TextField
 	WithNeedsDisplay(needsDisplay bool) *TextField
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *TextField
@@ -1038,10 +1000,12 @@ type TextFieldable interface {
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TextField
 	WithToolTip(toolTip string) *TextField
 	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TextField
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TextField
 	WithNextKeyView(nextKeyView ViewProvider) *TextField
 	WithFocusRingType(focusRingType FocusRingType) *TextField
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *TextField
 	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TextField
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TextField
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextField
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TextField
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TextField
@@ -1111,3 +1075,16 @@ type TextFieldable interface {
 }
 
 var _ TextFieldable = (*TextField)(nil)
+
+// isTextField marks TextField — and, by embedding promotion, its
+// subclasses — as a member of the TextField hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *TextField) isTextField() {}
+
+var _ TextFieldProvider = (*TextField)(nil)
+
+var _ ControlProvider = (*TextField)(nil)
+
+var _ ViewProvider = (*TextField)(nil)
+
+var _ ResponderProvider = (*TextField)(nil)

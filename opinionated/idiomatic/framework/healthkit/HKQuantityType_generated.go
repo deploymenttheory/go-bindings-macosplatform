@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that identifies samples that store numerical values.
-//
 // QuantityType is an idiomatic wrapper over the Objective-C class HKQuantityType.
+//
+// It embeds [SampleType], promoting that type's methods.
+//
+// A type that identifies samples that store numerical values.
 type QuantityType struct {
-	objref.Handle
+	SampleType
 }
 
 // QuantityTypeFromID adopts an existing Objective-C object as a QuantityType
@@ -25,7 +26,8 @@ func QuantityTypeFromID(id objc.ID) *QuantityType {
 	if id == 0 {
 		return nil
 	}
-	x := &QuantityType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QuantityType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func quantityTypeAdopt(id objc.ID) *QuantityType {
 	if id == 0 {
 		return nil
 	}
-	x := &QuantityType{Handle: objref.Wrap(id)}
+	x := &QuantityType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *QuantityType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *QuantityType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *QuantityType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewQuantityType creates a new QuantityType.
@@ -64,12 +52,13 @@ func NewQuantityType() *QuantityType {
 	return quantityTypeAdopt(_id)
 }
 
-// Returns a Boolean value that indicates whether the quantity type is compatible with the given unit.
+// IsCompatibleWithUnit returns a Boolean value that indicates whether the quantity type is compatible with the given unit.
 func (x *QuantityType) IsCompatibleWithUnit(unit *Unit) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompatibleWithUnit:"), objref.IDOf(unit))
 	return _r
 }
 
+// AggregationStyle wraps the corresponding Objective-C method.
 func (x *QuantityType) AggregationStyle() QuantityAggregationStyle {
 	_r := objc.Send[QuantityAggregationStyle](objref.IDOf(x), objc.RegisterName("aggregationStyle"))
 	return _r
@@ -83,3 +72,7 @@ type QuantityTypeable interface {
 }
 
 var _ QuantityTypeable = (*QuantityType)(nil)
+
+var _ SampleTypeProvider = (*QuantityType)(nil)
+
+var _ ObjectTypeProvider = (*QuantityType)(nil)

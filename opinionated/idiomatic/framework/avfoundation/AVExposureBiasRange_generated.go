@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that expresses an inclusive range of supported exposure bias values, in EV units.
-//
 // ExposureBiasRange is an idiomatic wrapper over the Objective-C class AVExposureBiasRange.
+//
+// An object that expresses an inclusive range of supported exposure bias values, in EV units.
 type ExposureBiasRange struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ExposureBiasRangeFromID(id objc.ID) *ExposureBiasRange {
 	if id == 0 {
 		return nil
 	}
-	x := &ExposureBiasRange{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExposureBiasRange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func exposureBiasRangeAdopt(id objc.ID) *ExposureBiasRange {
 	if id == 0 {
 		return nil
 	}
-	x := &ExposureBiasRange{Handle: objref.Wrap(id)}
+	x := &ExposureBiasRange{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *ExposureBiasRange) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExposureBiasRange) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewExposureBiasRange creates a new ExposureBiasRange.
 func NewExposureBiasRange() *ExposureBiasRange {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVExposureBiasRange")), objc.RegisterName("new"))
 	return exposureBiasRangeAdopt(_id)
 }
 
-// Determines whether the range contains the specified exposure bias.
+// ContainsExposureBias determines whether the range contains the specified exposure bias.
 func (x *ExposureBiasRange) ContainsExposureBias(exposureBias float32) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsExposureBias:"), exposureBias)
 	return _r
 }
 
-// A float indicating the minimum exposure bias in EV units supported by this range.
+// MinExposureBias a float indicating the minimum exposure bias in EV units supported by this range.
 func (x *ExposureBiasRange) MinExposureBias() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minExposureBias"))
 	return _r
 }
 
-// A float indicating the maximum exposure bias in EV units supported by this range.
+// MaxExposureBias a float indicating the maximum exposure bias in EV units supported by this range.
 func (x *ExposureBiasRange) MaxExposureBias() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maxExposureBias"))
 	return _r

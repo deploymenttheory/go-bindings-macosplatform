@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The visual representation of multiple polygon overlays.
-//
 // MultiPolygonRenderer is an idiomatic wrapper over the Objective-C class MKMultiPolygonRenderer.
+//
+// It embeds [OverlayPathRenderer], promoting that type's methods.
+//
+// The visual representation of multiple polygon overlays.
 type MultiPolygonRenderer struct {
-	objref.Handle
+	OverlayPathRenderer
 }
 
 // MultiPolygonRendererFromID adopts an existing Objective-C object as a MultiPolygonRenderer
@@ -25,7 +26,8 @@ func MultiPolygonRendererFromID(id objc.ID) *MultiPolygonRenderer {
 	if id == 0 {
 		return nil
 	}
-	x := &MultiPolygonRenderer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MultiPolygonRenderer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,108 +40,75 @@ func multiPolygonRendererAdopt(id objc.ID) *MultiPolygonRenderer {
 	if id == 0 {
 		return nil
 	}
-	x := &MultiPolygonRenderer{Handle: objref.Wrap(id)}
+	x := &MultiPolygonRenderer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MultiPolygonRenderer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MultiPolygonRenderer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MultiPolygonRenderer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates and returns a renderer that handles drawing for the specified multipolygon overlay object.
-//
-// NewMultiPolygonRendererWithMultiPolygon creates a new MultiPolygonRenderer.
+// NewMultiPolygonRendererWithMultiPolygon creates and returns a renderer that handles drawing for the specified multipolygon overlay object.
 func NewMultiPolygonRendererWithMultiPolygon(multiPolygon *MultiPolygon) *MultiPolygonRenderer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMultiPolygonRenderer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMultiPolygon:"), objref.IDOf(multiPolygon))
 	return multiPolygonRendererAdopt(_id)
 }
 
-// The fill color to use for the path.
-//
-// WithFillColor sets fillColor and returns the receiver so calls can be chained.
+// WithFillColor the fill color to use for the path.
 func (x *MultiPolygonRenderer) WithFillColor(fillColor obj.Object) *MultiPolygonRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 	return x
 }
 
-// The stroke color to use for the path.
-//
-// WithStrokeColor sets strokeColor and returns the receiver so calls can be chained.
+// WithStrokeColor the stroke color to use for the path.
 func (x *MultiPolygonRenderer) WithStrokeColor(strokeColor obj.Object) *MultiPolygonRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
 	return x
 }
 
-// The stroke width to use for the path.
-//
-// WithLineWidth sets lineWidth and returns the receiver so calls can be chained.
+// WithLineWidth the stroke width to use for the path.
 func (x *MultiPolygonRenderer) WithLineWidth(lineWidth float64) *MultiPolygonRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
 	return x
 }
 
-// The limiting value that helps avoid spikes at junctions between connected line segments.
-//
-// WithMiterLimit sets miterLimit and returns the receiver so calls can be chained.
+// WithMiterLimit the limiting value that helps avoid spikes at junctions between connected line segments.
 func (x *MultiPolygonRenderer) WithMiterLimit(miterLimit float64) *MultiPolygonRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
 	return x
 }
 
-// The offset (in points) at which to start drawing the dash pattern.
-//
-// WithLineDashPhase sets lineDashPhase and returns the receiver so calls can be chained.
+// WithLineDashPhase the offset (in points) at which to start drawing the dash pattern.
 func (x *MultiPolygonRenderer) WithLineDashPhase(lineDashPhase float64) *MultiPolygonRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
 	return x
 }
 
-// An array of numbers specifying the dash pattern to use for the path.
-//
-// WithLineDashPattern sets the collection and returns the receiver so calls can be chained.
+// WithLineDashPattern an array of numbers specifying the dash pattern to use for the path.
 func (x *MultiPolygonRenderer) WithLineDashPattern(items ...obj.Object) *MultiPolygonRenderer {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPattern:"), _arr)
 	return x
 }
 
-// A Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
-//
-// WithShouldRasterize sets shouldRasterize and returns the receiver so calls can be chained.
+// WithShouldRasterize a Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
 func (x *MultiPolygonRenderer) WithShouldRasterize(shouldRasterize bool) *MultiPolygonRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
 	return x
 }
 
-// The path representing the overlay’s shape.
-//
-// WithPath sets path and returns the receiver so calls can be chained.
+// WithPath the path representing the overlay’s shape.
 func (x *MultiPolygonRenderer) WithPath(path obj.Object) *MultiPolygonRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
 	return x
 }
 
-// The amount of transparency to apply to the overlay.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the amount of transparency to apply to the overlay.
 func (x *MultiPolygonRenderer) WithAlpha(alpha float64) *MultiPolygonRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
+// MultiPolygon wraps the corresponding Objective-C method.
 func (x *MultiPolygonRenderer) MultiPolygon() *MultiPolygon {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("multiPolygon"))
 	return MultiPolygonFromID(_r)
@@ -161,3 +130,7 @@ type MultiPolygonRendererable interface {
 }
 
 var _ MultiPolygonRendererable = (*MultiPolygonRenderer)(nil)
+
+var _ OverlayPathRendererProvider = (*MultiPolygonRenderer)(nil)
+
+var _ OverlayRendererProvider = (*MultiPolygonRenderer)(nil)

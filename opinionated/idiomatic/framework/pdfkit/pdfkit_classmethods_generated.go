@@ -9,13 +9,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns a line style that corresponds to the specified name.
+// LineStyleFromName returns a line style that corresponds to the specified name.
 func LineStyleFromName(name string) LineStyle {
 	_r := objc.Send[LineStyle](objc.ID(_class("PDFAnnotation")), objc.RegisterName("lineStyleFromName:"), purego.NSString(name))
 	return _r
 }
 
-// Returns the name of the line style, which matches the definition in the Adobe PDF Specification.
+// NameForLineStyle returns the name of the line style, which matches the definition in the Adobe PDF Specification.
 func NameForLineStyle(style LineStyle) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("PDFAnnotation")), objc.RegisterName("nameForLineStyle:"), style)
 	if _r == 0 {

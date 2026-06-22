@@ -6,17 +6,20 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that returns the sum of all values for a row in an image.
-//
 // ImageReduceRowSum is an idiomatic wrapper over the Objective-C class MPSImageReduceRowSum.
+//
+// It embeds [ImageReduceUnary], promoting that type's methods.
+//
+// A filter that returns the sum of all values for a row in an image.
 type ImageReduceRowSum struct {
-	objref.Handle
+	ImageReduceUnary
 }
 
 // ImageReduceRowSumFromID adopts an existing Objective-C object as a ImageReduceRowSum
@@ -25,7 +28,8 @@ func ImageReduceRowSumFromID(id objc.ID) *ImageReduceRowSum {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageReduceRowSum{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageReduceRowSum{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func imageReduceRowSumAdopt(id objc.ID) *ImageReduceRowSum {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageReduceRowSum{Handle: objref.Wrap(id)}
+	x := &ImageReduceRowSum{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ImageReduceRowSum) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageReduceRowSum) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageReduceRowSum) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewImageReduceRowSum creates a new ImageReduceRowSum.
@@ -64,9 +54,25 @@ func NewImageReduceRowSum() *ImageReduceRowSum {
 	return imageReduceRowSumAdopt(_id)
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
+func (x *ImageReduceRowSum) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowSum {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return x
+}
+
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
+func (x *ImageReduceRowSum) WithOffset(offset mpscore.MPSOffset) *ImageReduceRowSum {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (x *ImageReduceRowSum) WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowSum {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
+// WithLabel the string that identifies the kernel.
 func (x *ImageReduceRowSum) WithLabel(label string) *ImageReduceRowSum {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -75,7 +81,16 @@ func (x *ImageReduceRowSum) WithLabel(label string) *ImageReduceRowSum {
 // ImageReduceRowSumable is the interface implemented by [ImageReduceRowSum], for mocking and DI.
 type ImageReduceRowSumable interface {
 	obj.Object
+	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowSum
+	WithOffset(offset mpscore.MPSOffset) *ImageReduceRowSum
+	WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowSum
 	WithLabel(label string) *ImageReduceRowSum
 }
 
 var _ ImageReduceRowSumable = (*ImageReduceRowSum)(nil)
+
+var _ ImageReduceUnaryProvider = (*ImageReduceRowSum)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageReduceRowSum)(nil)
+
+var _ KernelProvider = (*ImageReduceRowSum)(nil)

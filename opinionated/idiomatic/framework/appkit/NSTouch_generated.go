@@ -6,15 +6,16 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A snapshot of a particular touch at an instant in time.
-//
 // Touch is an idiomatic wrapper over the Objective-C class NSTouch.
+//
+// A snapshot of a particular touch at an instant in time.
 type Touch struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func TouchFromID(id objc.ID) *Touch {
 	if id == 0 {
 		return nil
 	}
-	x := &Touch{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Touch{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func touchAdopt(id objc.ID) *Touch {
 	if id == 0 {
 		return nil
 	}
-	x := &Touch{Handle: objref.Wrap(id)}
+	x := &Touch{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,32 +61,67 @@ func (x *Touch) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Touch) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTouch creates a new Touch.
 func NewTouch() *Touch {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSTouch")), objc.RegisterName("new"))
 	return touchAdopt(_id)
 }
 
+// Identity wraps the corresponding Objective-C method.
 func (x *Touch) Identity() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identity"))
 	return obj.Wrap(_r)
 }
 
+// Phase wraps the corresponding Objective-C method.
 func (x *Touch) Phase() TouchPhase {
 	_r := objc.Send[TouchPhase](objref.IDOf(x), objc.RegisterName("phase"))
 	return _r
 }
 
+// NormalizedPosition wraps the corresponding Objective-C method.
+func (x *Touch) NormalizedPosition() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("normalizedPosition"))
+	return _r
+}
+
+// IsResting wraps the corresponding Objective-C method.
 func (x *Touch) IsResting() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isResting"))
 	return _r
 }
 
+// Device wraps the corresponding Objective-C method.
 func (x *Touch) Device() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
 	return obj.Wrap(_r)
 }
 
+// DeviceSize wraps the corresponding Objective-C method.
+func (x *Touch) DeviceSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("deviceSize"))
+	return _r
+}
+
+// LocationInView indicates the location of the touch in the view’s coordinates.
+func (x *Touch) LocationInView(view *View) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("locationInView:"), objref.IDOf(view))
+	return _r
+}
+
+// PreviousLocationInView indicates the previous location of the touch in the view’s coordinates.
+func (x *Touch) PreviousLocationInView(view *View) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("previousLocationInView:"), objref.IDOf(view))
+	return _r
+}
+
+// Type wraps the corresponding Objective-C method.
 func (x *Touch) Type() TouchType {
 	_r := objc.Send[TouchType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
@@ -94,8 +132,12 @@ type Touchable interface {
 	obj.Object
 	Identity() obj.Object
 	Phase() TouchPhase
+	NormalizedPosition() corefoundation.CGPoint
 	IsResting() bool
 	Device() obj.Object
+	DeviceSize() corefoundation.CGSize
+	LocationInView(view *View) corefoundation.CGPoint
+	PreviousLocationInView(view *View) corefoundation.CGPoint
 	Type() TouchType
 }
 

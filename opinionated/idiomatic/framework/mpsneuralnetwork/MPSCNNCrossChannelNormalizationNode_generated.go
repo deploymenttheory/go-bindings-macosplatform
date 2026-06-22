@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // CNNCrossChannelNormalizationNode is an idiomatic wrapper over the Objective-C class MPSCNNCrossChannelNormalizationNode.
+//
+// It embeds [CNNNormalizationNode], promoting that type's methods.
 type CNNCrossChannelNormalizationNode struct {
-	objref.Handle
+	CNNNormalizationNode
 }
 
 // CNNCrossChannelNormalizationNodeFromID adopts an existing Objective-C object as a CNNCrossChannelNormalizationNode
@@ -23,7 +24,8 @@ func CNNCrossChannelNormalizationNodeFromID(id objc.ID) *CNNCrossChannelNormaliz
 	if id == 0 {
 		return nil
 	}
-	x := &CNNCrossChannelNormalizationNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNCrossChannelNormalizationNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func cNNCrossChannelNormalizationNodeAdopt(id objc.ID) *CNNCrossChannelNormaliza
 	if id == 0 {
 		return nil
 	}
-	x := &CNNCrossChannelNormalizationNode{Handle: objref.Wrap(id)}
+	x := &CNNCrossChannelNormalizationNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNCrossChannelNormalizationNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNCrossChannelNormalizationNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNCrossChannelNormalizationNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNCrossChannelNormalizationNodeWithSourceKernelSize creates a new CNNCrossChannelNormalizationNode.
@@ -70,49 +58,43 @@ func NewCNNCrossChannelNormalizationNodeWithSource(sourceNode *NNImageNode) *CNN
 	return cNNCrossChannelNormalizationNodeAdopt(_id)
 }
 
-// WithKernelSizeInFeatureChannels sets kernelSizeInFeatureChannels and returns the receiver so calls can be chained.
+// WithKernelSizeInFeatureChannels sets the property and returns the receiver so calls can be chained.
 func (x *CNNCrossChannelNormalizationNode) WithKernelSizeInFeatureChannels(kernelSizeInFeatureChannels int) *CNNCrossChannelNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelSizeInFeatureChannels:"), kernelSizeInFeatureChannels)
 	return x
 }
 
-// The value of alpha.  Default is 1.0. Must be non-negative.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the value of alpha.  Default is 1.0. Must be non-negative.
 func (x *CNNCrossChannelNormalizationNode) WithAlpha(alpha float32) *CNNCrossChannelNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// The value of beta.  Default is 5.0
-//
-// WithBeta sets beta and returns the receiver so calls can be chained.
+// WithBeta the value of beta.  Default is 5.0
 func (x *CNNCrossChannelNormalizationNode) WithBeta(beta float32) *CNNCrossChannelNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
 	return x
 }
 
-// The value of delta.  Default is 1.0
-//
-// WithDelta sets delta and returns the receiver so calls can be chained.
+// WithDelta the value of delta.  Default is 1.0
 func (x *CNNCrossChannelNormalizationNode) WithDelta(delta float32) *CNNCrossChannelNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNCrossChannelNormalizationNode) WithLabel(label string) *CNNCrossChannelNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// KernelSizeInFeatureChannels wraps the corresponding Objective-C method.
 func (x *CNNCrossChannelNormalizationNode) KernelSizeInFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelSizeInFeatureChannels"))
 	return _r
 }
 
+// SetKernelSizeInFeatureChannels wraps the corresponding Objective-C method.
 func (x *CNNCrossChannelNormalizationNode) SetKernelSizeInFeatureChannels(kernelSizeInFeatureChannels int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelSizeInFeatureChannels:"), kernelSizeInFeatureChannels)
 }
@@ -130,3 +112,7 @@ type CNNCrossChannelNormalizationNodeable interface {
 }
 
 var _ CNNCrossChannelNormalizationNodeable = (*CNNCrossChannelNormalizationNode)(nil)
+
+var _ CNNNormalizationNodeProvider = (*CNNCrossChannelNormalizationNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNCrossChannelNormalizationNode)(nil)

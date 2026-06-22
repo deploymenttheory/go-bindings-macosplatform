@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A proxy for the Safari app.
-//
 // SafariApplication is an idiomatic wrapper over the Objective-C class SFSafariApplication.
+//
+// A proxy for the Safari app.
 type SafariApplication struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SafariApplicationFromID(id objc.ID) *SafariApplication {
 	if id == 0 {
 		return nil
 	}
-	x := &SafariApplication{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SafariApplication{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func safariApplicationAdopt(id objc.ID) *SafariApplication {
 	if id == 0 {
 		return nil
 	}
-	x := &SafariApplication{Handle: objref.Wrap(id)}
+	x := &SafariApplication{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *SafariApplication) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *SafariApplication) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SafariApplication) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewSafariApplication creates a new SafariApplication.

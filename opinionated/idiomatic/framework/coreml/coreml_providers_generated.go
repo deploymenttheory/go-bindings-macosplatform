@@ -11,9 +11,11 @@ import (
 // KeyProvider is accepted wherever a MLKey (or one of its subclasses) is expected.
 type KeyProvider interface {
 	objref.Object
+	isKey()
 }
 
 // TaskProvider is accepted wherever a MLTask (or one of its subclasses) is expected.
 type TaskProvider interface {
 	objref.Object
+	isTask()
 }

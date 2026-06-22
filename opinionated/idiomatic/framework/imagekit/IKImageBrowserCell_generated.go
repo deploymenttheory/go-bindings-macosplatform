@@ -6,6 +6,7 @@ package imagekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -23,7 +24,8 @@ func ImageBrowserCellFromID(id objc.ID) *ImageBrowserCell {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageBrowserCell{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageBrowserCell{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +38,8 @@ func imageBrowserCellAdopt(id objc.ID) *ImageBrowserCell {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageBrowserCell{Handle: objref.Wrap(id)}
+	x := &ImageBrowserCell{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,43 +59,85 @@ func (x *ImageBrowserCell) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ImageBrowserCell) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewImageBrowserCell creates a new ImageBrowserCell.
 func NewImageBrowserCell() *ImageBrowserCell {
 	_id := objc.Send[objc.ID](objc.ID(_class("IKImageBrowserCell")), objc.RegisterName("new"))
 	return imageBrowserCellAdopt(_id)
 }
 
-// Returns the view the receiver uses to display its represented object. Subclasses should not override this method.
+// ImageBrowserView returns the view the receiver uses to display its represented object. Subclasses should not override this method.
 func (x *ImageBrowserCell) ImageBrowserView() *ImageBrowserView {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageBrowserView"))
 	return ImageBrowserViewFromID(_r)
 }
 
-// Returns the receiver�s represented object. Subclasses should not override this method.
+// RepresentedItem returns the receiver�s represented object. Subclasses should not override this method.
 func (x *ImageBrowserCell) RepresentedItem() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("representedItem"))
 	return obj.Wrap(_r)
 }
 
-// Returns the index of the receiver�s represented object in the datasource. Subclasses should not override this method.
+// IndexOfRepresentedItem returns the index of the receiver�s represented object in the datasource. Subclasses should not override this method.
 func (x *ImageBrowserCell) IndexOfRepresentedItem() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfRepresentedItem"))
 	return _r
 }
 
-// Returns the selection state of the receiver. Returns YES if the receiver is selected, otherwise NO. Subclasses should not override this method.
+// Frame returns the receiver�s frame rectangle, which defines its position in its IKImageBrowserView. The coordinates of this frame are in view's coordinate space. Subclasses should not override this method.
+func (x *ImageBrowserCell) Frame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frame"))
+	return _r
+}
+
+// ImageContainerFrame returns the receiver�s image container frame rectangle, which defines the position of the container of the thumbnail in its IKImageBrowserView. The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the thumbnail container. The image frame is computed automatically from the image container frame by taking in account the image alignment and the image aspect ratio.
+func (x *ImageBrowserCell) ImageContainerFrame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("imageContainerFrame"))
+	return _r
+}
+
+// ImageFrame returns the receiver�s image frame rectangle, which defines the position of the thumbnail in its IKImageBrowserView. The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the thumbnail.
+func (x *ImageBrowserCell) ImageFrame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("imageFrame"))
+	return _r
+}
+
+// SelectionFrame returns the receiver�s selection frame rectangle, which defines the position of the selection rectangle in its IKImageBrowserView. The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the selection frame.
+func (x *ImageBrowserCell) SelectionFrame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("selectionFrame"))
+	return _r
+}
+
+// TitleFrame returns the receiver�s title frame rectangle, which defines the position of the title in its IKImageBrowserView. The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the title.
+func (x *ImageBrowserCell) TitleFrame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("titleFrame"))
+	return _r
+}
+
+// SubtitleFrame returns the receiver�s subtitle frame rectangle, which defines the position of the subtitle in its IKImageBrowserView. The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the subtitle.
+func (x *ImageBrowserCell) SubtitleFrame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("subtitleFrame"))
+	return _r
+}
+
+// IsSelected returns the selection state of the receiver. Returns YES if the receiver is selected, otherwise NO. Subclasses should not override this method.
 func (x *ImageBrowserCell) IsSelected() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSelected"))
 	return _r
 }
 
-// Determines the opacity of the receiver. Possible values are between 0.0 (transparent) and 1.0 (opaque). Subclasses can override this method to customize the opacity of the cell.
+// Opacity determines the opacity of the receiver. Possible values are between 0.0 (transparent) and 1.0 (opaque). Subclasses can override this method to customize the opacity of the cell.
 func (x *ImageBrowserCell) Opacity() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("opacity"))
 	return _r
 }
 
-// Provides the receiver�s layer for the given type. The default is nil. Subclasses can override this method to add a layer in the background, foreground... of the cell (see possible types above).
+// LayerForType provides the receiver�s layer for the given type. The default is nil. Subclasses can override this method to add a layer in the background, foreground... of the cell (see possible types above).
 func (x *ImageBrowserCell) LayerForType(type_ string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layerForType:"), purego.NSString(type_))
 	return obj.Wrap(_r)
@@ -104,6 +149,12 @@ type ImageBrowserCellable interface {
 	ImageBrowserView() *ImageBrowserView
 	RepresentedItem() obj.Object
 	IndexOfRepresentedItem() int
+	Frame() corefoundation.CGRect
+	ImageContainerFrame() corefoundation.CGRect
+	ImageFrame() corefoundation.CGRect
+	SelectionFrame() corefoundation.CGRect
+	TitleFrame() corefoundation.CGRect
+	SubtitleFrame() corefoundation.CGRect
 	IsSelected() bool
 	Opacity() float64
 	LayerForType(type_ string) obj.Object

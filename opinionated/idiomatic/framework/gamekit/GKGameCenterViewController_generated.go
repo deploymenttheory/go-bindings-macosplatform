@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The dashboard that allows players to access their Game Center data in your game.
-//
 // GameCenterViewController is an idiomatic wrapper over the Objective-C class GKGameCenterViewController.
+//
+// GameCenterViewController is an abstract base — you do not construct it directly. Construct one of [AchievementViewController], [LeaderboardViewController] and pass it where a GameCenterViewController is accepted.
+//
+// The dashboard that allows players to access their Game Center data in your game.
 type GameCenterViewController struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func GameCenterViewControllerFromID(id objc.ID) *GameCenterViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &GameCenterViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GameCenterViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func gameCenterViewControllerAdopt(id objc.ID) *GameCenterViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &GameCenterViewController{Handle: objref.Wrap(id)}
+	x := &GameCenterViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,102 +62,101 @@ func (x *GameCenterViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a view controller that presents the specified Game Center content.
-//
-// NewGameCenterViewControllerWithState creates a new GameCenterViewController.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GameCenterViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewGameCenterViewControllerWithState creates a view controller that presents the specified Game Center content.
 func NewGameCenterViewControllerWithState(state GameCenterViewControllerState) *GameCenterViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKGameCenterViewController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithState:"), state)
 	return gameCenterViewControllerAdopt(_id)
 }
 
-// Creates a view controller that presents a leaderboard with data from the specified players and time period.
-//
-// NewGameCenterViewControllerWithLeaderboardIDPlayerScopeTimeScope creates a new GameCenterViewController.
+// NewGameCenterViewControllerWithLeaderboardIDPlayerScopeTimeScope creates a view controller that presents a leaderboard with data from the specified players and time period.
 func NewGameCenterViewControllerWithLeaderboardIDPlayerScopeTimeScope(leaderboardID string, playerScope LeaderboardPlayerScope, timeScope LeaderboardTimeScope) *GameCenterViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKGameCenterViewController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeaderboardID:playerScope:timeScope:"), purego.NSString(leaderboardID), playerScope, timeScope)
 	return gameCenterViewControllerAdopt(_id)
 }
 
-// Creates a view controller that presents a leaderboard with data for the specified players.
-//
-// NewGameCenterViewControllerWithLeaderboardPlayerScope creates a new GameCenterViewController.
+// NewGameCenterViewControllerWithLeaderboardPlayerScope creates a view controller that presents a leaderboard with data for the specified players.
 func NewGameCenterViewControllerWithLeaderboardPlayerScope(leaderboard *Leaderboard, playerScope LeaderboardPlayerScope) *GameCenterViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKGameCenterViewController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeaderboard:playerScope:"), objref.IDOf(leaderboard), playerScope)
 	return gameCenterViewControllerAdopt(_id)
 }
 
-// Creates a view controller that presents a leaderboard set.
-//
-// NewGameCenterViewControllerWithLeaderboardSetID creates a new GameCenterViewController.
+// NewGameCenterViewControllerWithLeaderboardSetID creates a view controller that presents a leaderboard set.
 func NewGameCenterViewControllerWithLeaderboardSetID(leaderboardSetID string) *GameCenterViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKGameCenterViewController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeaderboardSetID:"), purego.NSString(leaderboardSetID))
 	return gameCenterViewControllerAdopt(_id)
 }
 
-// Creates a view controller that presents an achievement.
-//
-// NewGameCenterViewControllerWithAchievementID creates a new GameCenterViewController.
+// NewGameCenterViewControllerWithAchievementID creates a view controller that presents an achievement.
 func NewGameCenterViewControllerWithAchievementID(achievementID string) *GameCenterViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKGameCenterViewController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAchievementID:"), purego.NSString(achievementID))
 	return gameCenterViewControllerAdopt(_id)
 }
 
-// Creates a view controller that presents a player’s Game Center profile.
-//
-// NewGameCenterViewControllerWithPlayer creates a new GameCenterViewController.
+// NewGameCenterViewControllerWithPlayer creates a view controller that presents a player’s Game Center profile.
 func NewGameCenterViewControllerWithPlayer(player *Player) *GameCenterViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKGameCenterViewController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayer:"), objref.IDOf(player))
 	return gameCenterViewControllerAdopt(_id)
 }
 
-// WithViewState sets viewState and returns the receiver so calls can be chained.
+// WithViewState sets the property and returns the receiver so calls can be chained.
 func (x *GameCenterViewController) WithViewState(viewState GameCenterViewControllerState) *GameCenterViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewState:"), viewState)
 	return x
 }
 
-// WithLeaderboardTimeScope sets leaderboardTimeScope and returns the receiver so calls can be chained.
+// WithLeaderboardTimeScope sets the property and returns the receiver so calls can be chained.
 func (x *GameCenterViewController) WithLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope) *GameCenterViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardTimeScope:"), leaderboardTimeScope)
 	return x
 }
 
-// WithLeaderboardIdentifier sets leaderboardIdentifier and returns the receiver so calls can be chained.
+// WithLeaderboardIdentifier sets the property and returns the receiver so calls can be chained.
 func (x *GameCenterViewController) WithLeaderboardIdentifier(leaderboardIdentifier string) *GameCenterViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
 	return x
 }
 
-// WithLeaderboardCategory sets leaderboardCategory and returns the receiver so calls can be chained.
+// WithLeaderboardCategory sets the property and returns the receiver so calls can be chained.
 func (x *GameCenterViewController) WithLeaderboardCategory(leaderboardCategory string) *GameCenterViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardCategory:"), purego.NSString(leaderboardCategory))
 	return x
 }
 
+// ViewState wraps the corresponding Objective-C method.
 func (x *GameCenterViewController) ViewState() GameCenterViewControllerState {
 	_r := objc.Send[GameCenterViewControllerState](objref.IDOf(x), objc.RegisterName("viewState"))
 	return _r
 }
 
+// SetViewState wraps the corresponding Objective-C method.
 func (x *GameCenterViewController) SetViewState(viewState GameCenterViewControllerState) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewState:"), viewState)
 }
 
+// LeaderboardTimeScope wraps the corresponding Objective-C method.
 func (x *GameCenterViewController) LeaderboardTimeScope() LeaderboardTimeScope {
 	_r := objc.Send[LeaderboardTimeScope](objref.IDOf(x), objc.RegisterName("leaderboardTimeScope"))
 	return _r
 }
 
+// SetLeaderboardTimeScope wraps the corresponding Objective-C method.
 func (x *GameCenterViewController) SetLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardTimeScope:"), leaderboardTimeScope)
 }
 
+// LeaderboardIdentifier wraps the corresponding Objective-C method.
 func (x *GameCenterViewController) LeaderboardIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leaderboardIdentifier"))
 	if _r == 0 {
@@ -162,10 +165,12 @@ func (x *GameCenterViewController) LeaderboardIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// SetLeaderboardIdentifier wraps the corresponding Objective-C method.
 func (x *GameCenterViewController) SetLeaderboardIdentifier(leaderboardIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
 }
 
+// LeaderboardCategory wraps the corresponding Objective-C method.
 func (x *GameCenterViewController) LeaderboardCategory() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leaderboardCategory"))
 	if _r == 0 {
@@ -174,6 +179,7 @@ func (x *GameCenterViewController) LeaderboardCategory() string {
 	return purego.GoString(_r)
 }
 
+// SetLeaderboardCategory wraps the corresponding Objective-C method.
 func (x *GameCenterViewController) SetLeaderboardCategory(leaderboardCategory string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardCategory:"), purego.NSString(leaderboardCategory))
 }
@@ -196,3 +202,10 @@ type GameCenterViewControllerable interface {
 }
 
 var _ GameCenterViewControllerable = (*GameCenterViewController)(nil)
+
+// isGameCenterViewController marks GameCenterViewController — and, by embedding promotion, its
+// subclasses — as a member of the GameCenterViewController hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *GameCenterViewController) isGameCenterViewController() {}
+
+var _ GameCenterViewControllerProvider = (*GameCenterViewController)(nil)

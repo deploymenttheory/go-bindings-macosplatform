@@ -23,7 +23,8 @@ func MTRContentLauncherClusterLaunchURLParamsFromID(id objc.ID) *MTRContentLaunc
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterLaunchURLParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRContentLauncherClusterLaunchURLParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRContentLauncherClusterLaunchURLParamsAdopt(id objc.ID) *MTRContentLaunch
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterLaunchURLParams{Handle: objref.Wrap(id)}
+	x := &MTRContentLauncherClusterLaunchURLParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,46 +58,49 @@ func (x *MTRContentLauncherClusterLaunchURLParams) IsKind(className string) bool
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRContentLauncherClusterLaunchURLParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRContentLauncherClusterLaunchURLParams creates a new MTRContentLauncherClusterLaunchURLParams.
 func NewMTRContentLauncherClusterLaunchURLParams() *MTRContentLauncherClusterLaunchURLParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRContentLauncherClusterLaunchURLParams")), objc.RegisterName("new"))
 	return mTRContentLauncherClusterLaunchURLParamsAdopt(_id)
 }
 
-// WithContentURL sets contentURL and returns the receiver so calls can be chained.
+// WithContentURL sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterLaunchURLParams) WithContentURL(contentURL string) *MTRContentLauncherClusterLaunchURLParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentURL:"), purego.NSString(contentURL))
 	return x
 }
 
-// WithDisplayString sets displayString and returns the receiver so calls can be chained.
+// WithDisplayString sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterLaunchURLParams) WithDisplayString(displayString string) *MTRContentLauncherClusterLaunchURLParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayString:"), purego.NSString(displayString))
 	return x
 }
 
-// WithBrandingInformation sets brandingInformation and returns the receiver so calls can be chained.
+// WithBrandingInformation sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterLaunchURLParams) WithBrandingInformation(brandingInformation MTRContentLauncherClusterBrandingInformationStructProvider) *MTRContentLauncherClusterLaunchURLParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBrandingInformation:"), objref.IDOf(brandingInformation))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRContentLauncherClusterLaunchURLParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRContentLauncherClusterLaunchURLParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRContentLauncherClusterLaunchURLParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRContentLauncherClusterLaunchURLParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// ContentURL wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterLaunchURLParams) ContentURL() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentURL"))
 	if _r == 0 {
@@ -104,10 +109,12 @@ func (x *MTRContentLauncherClusterLaunchURLParams) ContentURL() string {
 	return purego.GoString(_r)
 }
 
+// SetContentURL wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterLaunchURLParams) SetContentURL(contentURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentURL:"), purego.NSString(contentURL))
 }
 
+// DisplayString wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterLaunchURLParams) DisplayString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayString"))
 	if _r == 0 {
@@ -116,35 +123,40 @@ func (x *MTRContentLauncherClusterLaunchURLParams) DisplayString() string {
 	return purego.GoString(_r)
 }
 
+// SetDisplayString wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterLaunchURLParams) SetDisplayString(displayString string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayString:"), purego.NSString(displayString))
 }
 
+// BrandingInformation wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterLaunchURLParams) BrandingInformation() *MTRContentLauncherClusterBrandingInformationStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("brandingInformation"))
 	return MTRContentLauncherClusterBrandingInformationStructFromID(_r)
 }
 
+// SetBrandingInformation wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterLaunchURLParams) SetBrandingInformation(brandingInformation *MTRContentLauncherClusterBrandingInformationStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBrandingInformation:"), objref.IDOf(brandingInformation))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRContentLauncherClusterLaunchURLParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterLaunchURLParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRContentLauncherClusterLaunchURLParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterLaunchURLParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

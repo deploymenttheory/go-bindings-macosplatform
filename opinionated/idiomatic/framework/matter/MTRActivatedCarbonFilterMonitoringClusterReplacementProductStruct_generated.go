@@ -23,7 +23,8 @@ func MTRActivatedCarbonFilterMonitoringClusterReplacementProductStructFromID(id 
 	if id == 0 {
 		return nil
 	}
-	x := &MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRActivatedCarbonFilterMonitoringClusterReplacementProductStructAdopt(id o
 	if id == 0 {
 		return nil
 	}
-	x := &MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct{Handle: objref.Wrap(id)}
+	x := &MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,33 +58,42 @@ func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) IsKi
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct creates a new MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct.
 func NewMTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct() *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct")), objc.RegisterName("new"))
 	return mTRActivatedCarbonFilterMonitoringClusterReplacementProductStructAdopt(_id)
 }
 
-// WithProductIdentifierType sets productIdentifierType and returns the receiver so calls can be chained.
+// WithProductIdentifierType sets the property and returns the receiver so calls can be chained.
 func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) WithProductIdentifierType(productIdentifierType obj.Object) *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductIdentifierType:"), objref.IDOf(productIdentifierType))
 	return x
 }
 
-// WithProductIdentifierValue sets productIdentifierValue and returns the receiver so calls can be chained.
+// WithProductIdentifierValue sets the property and returns the receiver so calls can be chained.
 func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) WithProductIdentifierValue(productIdentifierValue string) *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductIdentifierValue:"), purego.NSString(productIdentifierValue))
 	return x
 }
 
+// ProductIdentifierType wraps the corresponding Objective-C method.
 func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) ProductIdentifierType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productIdentifierType"))
 	return obj.Wrap(_r)
 }
 
+// SetProductIdentifierType wraps the corresponding Objective-C method.
 func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) SetProductIdentifierType(productIdentifierType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductIdentifierType:"), objref.IDOf(productIdentifierType))
 }
 
+// ProductIdentifierValue wraps the corresponding Objective-C method.
 func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) ProductIdentifierValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productIdentifierValue"))
 	if _r == 0 {
@@ -91,6 +102,7 @@ func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) Prod
 	return purego.GoString(_r)
 }
 
+// SetProductIdentifierValue wraps the corresponding Objective-C method.
 func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) SetProductIdentifierValue(productIdentifierValue string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductIdentifierValue:"), purego.NSString(productIdentifierValue))
 }

@@ -23,7 +23,8 @@ func StateFromID(id objc.ID) *State {
 	if id == 0 {
 		return nil
 	}
-	x := &State{Handle: objref.Wrap(purego.Retain(id))}
+	x := &State{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func stateAdopt(id objc.ID) *State {
 	if id == 0 {
 		return nil
 	}
-	x := &State{Handle: objref.Wrap(id)}
+	x := &State{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,74 +58,79 @@ func (x *State) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Create a state object with a list of MTLResources Because MPS prefers deferred allocation of resources your application should use -initWithTextures:bufferSizes:bufferCount: whenever possible. This method is useful for cases when the MTLResources must be initialized by the CPU.
-//
-// NewStateWithResources creates a new State.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *State) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewStateWithResources create a state object with a list of MTLResources Because MPS prefers deferred allocation of resources your application should use -initWithTextures:bufferSizes:bufferCount: whenever possible. This method is useful for cases when the MTLResources must be initialized by the CPU.
 func NewStateWithResources(resources []obj.Object) *State {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSState")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResources:"), purego.SliceToNSArray(resources, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return stateAdopt(_id)
 }
 
-// WithReadCount sets readCount and returns the receiver so calls can be chained.
+// WithReadCount sets the property and returns the receiver so calls can be chained.
 func (x *State) WithReadCount(readCount int) *State {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *State) WithLabel(label string) *State {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Return the buffer size of the MTLBuffer at index or 0 if it is not a MTLBuffer Does not force allocation of the MTLResource
+// BufferSizeAtIndex return the buffer size of the MTLBuffer at index or 0 if it is not a MTLBuffer Does not force allocation of the MTLResource
 func (x *State) BufferSizeAtIndex(index int) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bufferSizeAtIndex:"), index)
 	return _r
 }
 
-// Return YES if the resource at index is a buffer Does not force allocation of the MTLResource
+// ResourceTypeAtIndex return YES if the resource at index is a buffer Does not force allocation of the MTLResource
 func (x *State) ResourceTypeAtIndex(index int) StateResourceType {
 	_r := objc.Send[StateResourceType](objref.IDOf(x), objc.RegisterName("resourceTypeAtIndex:"), index)
 	return _r
 }
 
-// Get the number of bytes used to allocate underyling MTLResources This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSState instantiation and MTLTexture or MTLBuffer is not included. It only measures the size of the allocation used to hold the texels in the texture or bytes in the buffer. This value is subject to change between different devices and operating systems. Except when -initWithResource: is used, most MPSStates are allocated without a backing store. The backing store is allocated lazily when it is needed, typically when the .texture property is called. Consequently, in most cases, it should be inexpensive to make a MPSImage to see how much memory it will need, and release it if it is too large. This method may fail in certain circumstances, such as when the MPSImage is created with -initWithTexture:featureChannels:, in which case 0 will be returned.
+// ResourceSize get the number of bytes used to allocate underyling MTLResources This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSState instantiation and MTLTexture or MTLBuffer is not included. It only measures the size of the allocation used to hold the texels in the texture or bytes in the buffer. This value is subject to change between different devices and operating systems. Except when -initWithResource: is used, most MPSStates are allocated without a backing store. The backing store is allocated lazily when it is needed, typically when the .texture property is called. Consequently, in most cases, it should be inexpensive to make a MPSImage to see how much memory it will need, and release it if it is too large. This method may fail in certain circumstances, such as when the MPSImage is created with -initWithTexture:featureChannels:, in which case 0 will be returned.
 func (x *State) ResourceSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resourceSize"))
 	return _r
 }
 
-// Determine padding and sizing of result images A MPSState has the opportunity to reconfigure the MPSImageDescriptor used to create the filter result state and set the MPSKernel.offset to the correct value.  By default, the MPSState does not modify the descriptor. There is a order of operations defined for who may update the descriptor: 1) Default padding code runs based on the MPSNNPaddingMethod in the MPSCNNKernel.padding. This creates the descriptor and picks a starting value for the MPSCNNKernel.offset. 2) MPSStates are called in order to apply this function and update the offset. 3) The MPSNNPadding custom padding method of the same name is called. 4) Some code that may prove helpful:
+// DestinationImageDescriptorForSourceImagesSourceStatesForKernelSuggestedDescriptor determine padding and sizing of result images A MPSState has the opportunity to reconfigure the MPSImageDescriptor used to create the filter result state and set the MPSKernel.offset to the correct value.  By default, the MPSState does not modify the descriptor. There is a order of operations defined for who may update the descriptor: 1) Default padding code runs based on the MPSNNPaddingMethod in the MPSCNNKernel.padding. This creates the descriptor and picks a starting value for the MPSCNNKernel.offset. 2) MPSStates are called in order to apply this function and update the offset. 3) The MPSNNPadding custom padding method of the same name is called. 4) Some code that may prove helpful:
 func (x *State) DestinationImageDescriptorForSourceImagesSourceStatesForKernelSuggestedDescriptor(sourceImages []*Image, sourceStates []*State, kernel *Kernel, inDescriptor *ImageDescriptor) *ImageDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationImageDescriptorForSourceImages:sourceStates:forKernel:suggestedDescriptor:"), purego.SliceToNSArray(sourceImages, func(_v *Image) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(sourceStates, func(_v *State) objc.ID { return objref.IDOf(_v) }), objref.IDOf(kernel), objref.IDOf(inDescriptor))
 	return ImageDescriptorFromID(_r)
 }
 
-// Return the number of MTLResource objects held by the state
+// ResourceCount return the number of MTLResource objects held by the state
 func (x *State) ResourceCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resourceCount"))
 	return _r
 }
 
+// ReadCount wraps the corresponding Objective-C method.
 func (x *State) ReadCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("readCount"))
 	return _r
 }
 
+// SetReadCount wraps the corresponding Objective-C method.
 func (x *State) SetReadCount(readCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 }
 
+// IsTemporary wraps the corresponding Objective-C method.
 func (x *State) IsTemporary() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTemporary"))
 	return _r
 }
 
-// A string to help identify this object.
+// Label a string to help identify this object.
 func (x *State) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -132,6 +139,7 @@ func (x *State) Label() string {
 	return purego.GoString(_r)
 }
 
+// SetLabel wraps the corresponding Objective-C method.
 func (x *State) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }

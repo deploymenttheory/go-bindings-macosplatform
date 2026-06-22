@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a device that provides a unique, authenticated token.
-//
 // Device is an idiomatic wrapper over the Objective-C class DCDevice.
+//
+// A representation of a device that provides a unique, authenticated token.
 type Device struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func DeviceFromID(id objc.ID) *Device {
 	if id == 0 {
 		return nil
 	}
-	x := &Device{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Device{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func deviceAdopt(id objc.ID) *Device {
 	if id == 0 {
 		return nil
 	}
-	x := &Device{Handle: objref.Wrap(id)}
+	x := &Device{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,22 @@ func (x *Device) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Device) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDevice creates a new Device.
 func NewDevice() *Device {
 	_id := objc.Send[objc.ID](objc.ID(_class("DCDevice")), objc.RegisterName("new"))
 	return deviceAdopt(_id)
 }
 
-// Generates a token that identifies the current device.
+// GenerateToken generates a token that identifies the current device.
 //
 // GenerateToken blocks until the operation completes or ctx is cancelled.
-func (x *Device) GenerateToken(ctx context.Context) (obj.Object, error) {
+func (x *Device) GenerateToken(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -91,7 +99,7 @@ func (x *Device) GenerateToken(ctx context.Context) (obj.Object, error) {
 	}
 }
 
-// A Boolean value that indicates whether the device supports the DeviceCheck API.
+// IsSupported a Boolean value that indicates whether the device supports the DeviceCheck API.
 func (x *Device) IsSupported() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSupported"))
 	return _r

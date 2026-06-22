@@ -21,6 +21,8 @@ const (
 	LogEntryLogLevelFault     LogEntryLogLevel = 5
 )
 
+// String returns the LogEntryLogLevel constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LogEntryLogLevel) String() string {
 	switch e {
 	case LogEntryLogLevelUndefined:
@@ -50,6 +52,8 @@ const (
 	LogEntrySignpostTypeEvent         LogEntrySignpostType = 3
 )
 
+// String returns the LogEntrySignpostType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LogEntrySignpostType) String() string {
 	switch e {
 	case LogEntrySignpostTypeUndefined:
@@ -80,6 +84,8 @@ const (
 	LogEntryStoreCategoryLongTerm30   LogEntryStoreCategory = 8
 )
 
+// String returns the LogEntryStoreCategory constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LogEntryStoreCategory) String() string {
 	switch e {
 	case LogEntryStoreCategoryUndefined:
@@ -113,6 +119,8 @@ const (
 	LogEnumeratorReverse LogEnumeratorOptions = 1
 )
 
+// String returns the LogEnumeratorOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LogEnumeratorOptions) String() string {
 	var parts []string
 	if e&LogEnumeratorReverse != 0 {
@@ -136,6 +144,8 @@ const (
 	LogMessageComponentArgumentCategoryUInt64    LogMessageComponentArgumentCategory = 5
 )
 
+// String returns the LogMessageComponentArgumentCategory constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LogMessageComponentArgumentCategory) String() string {
 	switch e {
 	case LogMessageComponentArgumentCategoryUndefined:
@@ -162,6 +172,8 @@ const (
 	LogStoreCurrentProcessIdentifier LogStoreScope = 1
 )
 
+// String returns the LogStoreScope constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LogStoreScope) String() string {
 	switch e {
 	case LogStoreSystem:

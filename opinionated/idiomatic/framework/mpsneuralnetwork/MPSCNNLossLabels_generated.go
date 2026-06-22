@@ -23,7 +23,8 @@ func CNNLossLabelsFromID(id objc.ID) *CNNLossLabels {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNLossLabels{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNLossLabels{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func cNNLossLabelsAdopt(id objc.ID) *CNNLossLabels {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNLossLabels{Handle: objref.Wrap(id)}
+	x := &CNNLossLabels{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,25 +58,31 @@ func (x *CNNLossLabels) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CNNLossLabels) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCNNLossLabels creates a new CNNLossLabels.
 func NewCNNLossLabels() *CNNLossLabels {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNLossLabels")), objc.RegisterName("new"))
 	return cNNLossLabelsAdopt(_id)
 }
 
-// Loss image accessor method.
+// LossImage loss image accessor method.
 func (x *CNNLossLabels) LossImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lossImage"))
 	return obj.Wrap(_r)
 }
 
-// Labels image accessor method.
+// LabelsImage labels image accessor method.
 func (x *CNNLossLabels) LabelsImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labelsImage"))
 	return obj.Wrap(_r)
 }
 
-// Weights image accessor method.
+// WeightsImage weights image accessor method.
 func (x *CNNLossLabels) WeightsImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weightsImage"))
 	return obj.Wrap(_r)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A list of alternative strings for a piece of text.
-//
 // TextAlternatives is an idiomatic wrapper over the Objective-C class NSTextAlternatives.
+//
+// A list of alternative strings for a piece of text.
 type TextAlternatives struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TextAlternativesFromID(id objc.ID) *TextAlternatives {
 	if id == 0 {
 		return nil
 	}
-	x := &TextAlternatives{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextAlternatives{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func textAlternativesAdopt(id objc.ID) *TextAlternatives {
 	if id == 0 {
 		return nil
 	}
-	x := &TextAlternatives{Handle: objref.Wrap(id)}
+	x := &TextAlternatives{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,20 +60,25 @@ func (x *TextAlternatives) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes an NSTextAlternatives instance.
-//
-// NewTextAlternativesWithPrimaryStringAlternativeStrings creates a new TextAlternatives.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextAlternatives) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTextAlternativesWithPrimaryStringAlternativeStrings initializes an NSTextAlternatives instance.
 func NewTextAlternativesWithPrimaryStringAlternativeStrings(primaryString string, alternativeStrings []string) *TextAlternatives {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextAlternatives")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPrimaryString:alternativeStrings:"), purego.NSString(primaryString), purego.SliceToNSArray(alternativeStrings, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return textAlternativesAdopt(_id)
 }
 
-// Sent to the NSTextAlternatives object by the text view when the user chooses one of the alternative strings.
+// NoteSelectedAlternativeString sent to the NSTextAlternatives object by the text view when the user chooses one of the alternative strings.
 func (x *TextAlternatives) NoteSelectedAlternativeString(alternativeString string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("noteSelectedAlternativeString:"), purego.NSString(alternativeString))
 }
 
+// PrimaryString wraps the corresponding Objective-C method.
 func (x *TextAlternatives) PrimaryString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryString"))
 	if _r == 0 {
@@ -80,6 +87,8 @@ func (x *TextAlternatives) PrimaryString() string {
 	return purego.GoString(_r)
 }
 
+// AlternativeStrings wraps the corresponding Objective-C method.
+//
 // AlternativeStrings returns the collection as a Go slice.
 func (x *TextAlternatives) AlternativeStrings() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternativeStrings"))

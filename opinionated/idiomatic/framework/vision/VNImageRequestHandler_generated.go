@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that processes one or more image-analysis request pertaining to a single image.
-//
 // ImageRequestHandler is an idiomatic wrapper over the Objective-C class VNImageRequestHandler.
+//
+// An object that processes one or more image-analysis request pertaining to a single image.
 type ImageRequestHandler struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func ImageRequestHandlerFromID(id objc.ID) *ImageRequestHandler {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageRequestHandler{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageRequestHandler{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func imageRequestHandlerAdopt(id objc.ID) *ImageRequestHandler {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageRequestHandler{Handle: objref.Wrap(id)}
+	x := &ImageRequestHandler{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,52 +62,48 @@ func (x *ImageRequestHandler) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a handler to be used for performing requests on Core Graphics images.
-//
-// NewImageRequestHandlerWithCGImageOptions creates a new ImageRequestHandler.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ImageRequestHandler) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewImageRequestHandlerWithCGImageOptions creates a handler to be used for performing requests on Core Graphics images.
 func NewImageRequestHandlerWithCGImageOptions(image obj.Object, options obj.Object) *ImageRequestHandler {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNImageRequestHandler")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImage:options:"), objref.IDOf(image), objref.IDOf(options))
 	return imageRequestHandlerAdopt(_id)
 }
 
-// Creates a handler to use for performing requests on Core Image image data.
-//
-// NewImageRequestHandlerWithCIImageOptions creates a new ImageRequestHandler.
+// NewImageRequestHandlerWithCIImageOptions creates a handler to use for performing requests on Core Image image data.
 func NewImageRequestHandlerWithCIImageOptions(image obj.Object, options obj.Object) *ImageRequestHandler {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNImageRequestHandler")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCIImage:options:"), objref.IDOf(image), objref.IDOf(options))
 	return imageRequestHandlerAdopt(_id)
 }
 
-// Creates a handler to be used for performing requests on an image at the specified URL.
-//
-// NewImageRequestHandlerWithURLOptions creates a new ImageRequestHandler.
+// NewImageRequestHandlerWithURLOptions creates a handler to be used for performing requests on an image at the specified URL.
 func NewImageRequestHandlerWithURLOptions(imageURL string, options obj.Object) *ImageRequestHandler {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNImageRequestHandler")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), rt.FileURL(imageURL), objref.IDOf(options))
 	return imageRequestHandlerAdopt(_id)
 }
 
-// Creates a handler to use for performing requests on an image in a data object.
-//
-// NewImageRequestHandlerWithDataOptions creates a new ImageRequestHandler.
+// NewImageRequestHandlerWithDataOptions creates a handler to use for performing requests on an image in a data object.
 func NewImageRequestHandlerWithDataOptions(imageData obj.Object, options obj.Object) *ImageRequestHandler {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNImageRequestHandler")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:"), objref.IDOf(imageData), objref.IDOf(options))
 	return imageRequestHandlerAdopt(_id)
 }
 
-// Creates a request handler that performs requests on an image contained within a sample buffer.
-//
-// NewImageRequestHandlerWithCMSampleBufferOptions creates a new ImageRequestHandler.
+// NewImageRequestHandlerWithCMSampleBufferOptions creates a request handler that performs requests on an image contained within a sample buffer.
 func NewImageRequestHandlerWithCMSampleBufferOptions(sampleBuffer obj.Object, options obj.Object) *ImageRequestHandler {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNImageRequestHandler")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCMSampleBuffer:options:"), objref.IDOf(sampleBuffer), objref.IDOf(options))
 	return imageRequestHandlerAdopt(_id)
 }
 
-// Schedules Vision requests to perform.
+// PerformRequests schedules Vision requests to perform.
 func (x *ImageRequestHandler) PerformRequests(requests []*Request) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("performRequests:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))

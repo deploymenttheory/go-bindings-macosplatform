@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBridgedDeviceBasicClusterShutDownEvent is an idiomatic wrapper over the Objective-C class MTRBridgedDeviceBasicClusterShutDownEvent.
+//
+// It embeds [MTRBridgedDeviceBasicInformationClusterShutDownEvent], promoting that type's methods.
 type MTRBridgedDeviceBasicClusterShutDownEvent struct {
-	objref.Handle
+	MTRBridgedDeviceBasicInformationClusterShutDownEvent
 }
 
 // MTRBridgedDeviceBasicClusterShutDownEventFromID adopts an existing Objective-C object as a MTRBridgedDeviceBasicClusterShutDownEvent
@@ -23,7 +24,8 @@ func MTRBridgedDeviceBasicClusterShutDownEventFromID(id objc.ID) *MTRBridgedDevi
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBridgedDeviceBasicClusterShutDownEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBridgedDeviceBasicClusterShutDownEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRBridgedDeviceBasicClusterShutDownEventAdopt(id objc.ID) *MTRBridgedDevic
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBridgedDeviceBasicClusterShutDownEvent{Handle: objref.Wrap(id)}
+	x := &MTRBridgedDeviceBasicClusterShutDownEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRBridgedDeviceBasicClusterShutDownEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBridgedDeviceBasicClusterShutDownEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBridgedDeviceBasicClusterShutDownEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRBridgedDeviceBasicClusterShutDownEvent creates a new MTRBridgedDeviceBasicClusterShutDownEvent.
@@ -68,3 +56,5 @@ type MTRBridgedDeviceBasicClusterShutDownEventable interface {
 }
 
 var _ MTRBridgedDeviceBasicClusterShutDownEventable = (*MTRBridgedDeviceBasicClusterShutDownEvent)(nil)
+
+var _ MTRBridgedDeviceBasicInformationClusterShutDownEventProvider = (*MTRBridgedDeviceBasicClusterShutDownEvent)(nil)

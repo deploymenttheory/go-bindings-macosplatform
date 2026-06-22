@@ -6,15 +6,16 @@ package spritekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A single tile that can be repeated in a tile map.
-//
 // TileDefinition is an idiomatic wrapper over the Objective-C class SKTileDefinition.
+//
+// A single tile that can be repeated in a tile map.
 type TileDefinition struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func TileDefinitionFromID(id objc.ID) *TileDefinition {
 	if id == 0 {
 		return nil
 	}
-	x := &TileDefinition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TileDefinition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func tileDefinitionAdopt(id objc.ID) *TileDefinition {
 	if id == 0 {
 		return nil
 	}
-	x := &TileDefinition{Handle: objref.Wrap(id)}
+	x := &TileDefinition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,90 +61,110 @@ func (x *TileDefinition) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a new tile definition with a single texture.
-//
-// NewTileDefinitionWithTexture creates a new TileDefinition.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TileDefinition) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTileDefinitionWithTexture initializes a new tile definition with a single texture.
 func NewTileDefinitionWithTexture(texture *Texture) *TileDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKTileDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTexture:"), objref.IDOf(texture))
 	return tileDefinitionAdopt(_id)
 }
 
-// An array of SKTexture objects that defines the tile definition object’s content.
-//
-// WithTextures sets the collection and returns the receiver so calls can be chained.
+// NewTileDefinitionWithTextureSize initializes a new tile definition of a specified size with a single texture.
+func NewTileDefinitionWithTextureSize(texture *Texture, size corefoundation.CGSize) *TileDefinition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKTileDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTexture:size:"), objref.IDOf(texture), size)
+	return tileDefinitionAdopt(_id)
+}
+
+// NewTileDefinitionWithTextureNormalTextureSize initializes a new tile definition with a single texture and separate normal texture for simulating 3D lighting.
+func NewTileDefinitionWithTextureNormalTextureSize(texture *Texture, normalTexture *Texture, size corefoundation.CGSize) *TileDefinition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKTileDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTexture:normalTexture:size:"), objref.IDOf(texture), objref.IDOf(normalTexture), size)
+	return tileDefinitionAdopt(_id)
+}
+
+// NewTileDefinitionWithTexturesSizeTimePerFrame initializes a new tile definition with an array of textures for animation.
+func NewTileDefinitionWithTexturesSizeTimePerFrame(textures []*Texture, size corefoundation.CGSize, timePerFrame float64) *TileDefinition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKTileDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextures:size:timePerFrame:"), purego.SliceToNSArray(textures, func(_v *Texture) objc.ID { return objref.IDOf(_v) }), size, timePerFrame)
+	return tileDefinitionAdopt(_id)
+}
+
+// NewTileDefinitionWithTexturesNormalTexturesSizeTimePerFrame initializes a new tile definition with arrays of textures and normal textures for animation.
+func NewTileDefinitionWithTexturesNormalTexturesSizeTimePerFrame(textures []*Texture, normalTextures []*Texture, size corefoundation.CGSize, timePerFrame float64) *TileDefinition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKTileDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextures:normalTextures:size:timePerFrame:"), purego.SliceToNSArray(textures, func(_v *Texture) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(normalTextures, func(_v *Texture) objc.ID { return objref.IDOf(_v) }), size, timePerFrame)
+	return tileDefinitionAdopt(_id)
+}
+
+// WithTextures an array of SKTexture objects that defines the tile definition object’s content.
 func (x *TileDefinition) WithTextures(items ...TextureProvider) *TileDefinition {
 	_arr := purego.SliceToNSArray(items, func(_v TextureProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextures:"), _arr)
 	return x
 }
 
-// An array of SKTexture objects used to generate the normals for the tile to simulate 3D lighting.
-//
-// WithNormalTextures sets the collection and returns the receiver so calls can be chained.
+// WithNormalTextures an array of SKTexture objects used to generate the normals for the tile to simulate 3D lighting.
 func (x *TileDefinition) WithNormalTextures(items ...TextureProvider) *TileDefinition {
 	_arr := purego.SliceToNSArray(items, func(_v TextureProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNormalTextures:"), _arr)
 	return x
 }
 
-// A dictionary containing arbitrary data.
-//
-// WithUserData sets userData and returns the receiver so calls can be chained.
+// WithUserData a dictionary containing arbitrary data.
 func (x *TileDefinition) WithUserData(userData obj.Object) *TileDefinition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	return x
 }
 
-// A name associated with the tile definition.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName a name associated with the tile definition.
 func (x *TileDefinition) WithName(name string) *TileDefinition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The duration, in seconds, that each texture in the textures array is displayed before switching to the next texture in the sequence.
-//
-// WithTimePerFrame sets timePerFrame and returns the receiver so calls can be chained.
+// WithSize the size of the tile definition in points.
+func (x *TileDefinition) WithSize(size corefoundation.CGSize) *TileDefinition {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
+	return x
+}
+
+// WithTimePerFrame the duration, in seconds, that each texture in the textures array is displayed before switching to the next texture in the sequence.
 func (x *TileDefinition) WithTimePerFrame(timePerFrame float64) *TileDefinition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimePerFrame:"), timePerFrame)
 	return x
 }
 
-// The placement weight of the tile definition.
-//
-// WithPlacementWeight sets placementWeight and returns the receiver so calls can be chained.
+// WithPlacementWeight the placement weight of the tile definition.
 func (x *TileDefinition) WithPlacementWeight(placementWeight int) *TileDefinition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlacementWeight:"), placementWeight)
 	return x
 }
 
-// The rotation of the tile definition in 90˚ increments.
-//
-// WithRotation sets rotation and returns the receiver so calls can be chained.
+// WithRotation the rotation of the tile definition in 90˚ increments.
 func (x *TileDefinition) WithRotation(rotation TileDefinitionRotation) *TileDefinition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotation:"), rotation)
 	return x
 }
 
-// A Boolean that flips the definition’s image horizontally.
-//
-// WithFlipVertically sets flipVertically and returns the receiver so calls can be chained.
+// WithFlipVertically a Boolean that flips the definition’s image horizontally.
 func (x *TileDefinition) WithFlipVertically(flipVertically bool) *TileDefinition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlipVertically:"), flipVertically)
 	return x
 }
 
-// A Boolean that flips the definition’s image vertically.
-//
-// WithFlipHorizontally sets flipHorizontally and returns the receiver so calls can be chained.
+// WithFlipHorizontally a Boolean that flips the definition’s image vertically.
 func (x *TileDefinition) WithFlipHorizontally(flipHorizontally bool) *TileDefinition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlipHorizontally:"), flipHorizontally)
 	return x
 }
 
-// The textures used to draw the tile. Non-animated tiles use only one texture. When more than one texture is present, the tile will swap through them in sequence, showing each for the duration specified in the timePerFrame property. After displaying the last texture in the array, the sequence is repeated from the first texture.
+// Textures the textures used to draw the tile. Non-animated tiles use only one texture. When more than one texture is present, the tile will swap through them in sequence, showing each for the duration specified in the timePerFrame property. After displaying the last texture in the array, the sequence is repeated from the first texture.
 //
 // Textures returns the collection as a Go slice.
 func (x *TileDefinition) Textures() []*Texture {
@@ -149,11 +172,12 @@ func (x *TileDefinition) Textures() []*Texture {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Texture { return TextureFromID(_id) })
 }
 
+// SetTextures wraps the corresponding Objective-C method.
 func (x *TileDefinition) SetTextures(textures []*Texture) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextures:"), purego.SliceToNSArray(textures, func(_v *Texture) objc.ID { return objref.IDOf(_v) }))
 }
 
-// The textures to use for generating normals that lights use to light this tile. These will only be used if the tile is lit by at least one light. Each normal texture corresponds to a texture in the textures property.
+// NormalTextures the textures to use for generating normals that lights use to light this tile. These will only be used if the tile is lit by at least one light. Each normal texture corresponds to a texture in the textures property.
 //
 // NormalTextures returns the collection as a Go slice.
 func (x *TileDefinition) NormalTextures() []*Texture {
@@ -161,21 +185,23 @@ func (x *TileDefinition) NormalTextures() []*Texture {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Texture { return TextureFromID(_id) })
 }
 
+// SetNormalTextures wraps the corresponding Objective-C method.
 func (x *TileDefinition) SetNormalTextures(normalTextures []*Texture) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNormalTextures:"), purego.SliceToNSArray(normalTextures, func(_v *Texture) objc.ID { return objref.IDOf(_v) }))
 }
 
-// An optional dictionary that can be used to store your own data for each tile definition. Defaults to nil.
+// UserData an optional dictionary that can be used to store your own data for each tile definition. Defaults to nil.
 func (x *TileDefinition) UserData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userData"))
 	return obj.Wrap(_r)
 }
 
+// SetUserData wraps the corresponding Objective-C method.
 func (x *TileDefinition) SetUserData(userData obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 }
 
-// Client-assignable name for the tile definition. Defaults to nil.
+// Name client-assignable name for the tile definition. Defaults to nil.
 func (x *TileDefinition) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -184,56 +210,73 @@ func (x *TileDefinition) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *TileDefinition) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// The duration, in seconds, that each texture in the textures array is displayed before switching to the next texture in the sequence. Only used when there is more than one texture available.
+// Size the size of the tile in points.
+func (x *TileDefinition) Size() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("size"))
+	return _r
+}
+
+// SetSize wraps the corresponding Objective-C method.
+func (x *TileDefinition) SetSize(size corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
+}
+
+// TimePerFrame the duration, in seconds, that each texture in the textures array is displayed before switching to the next texture in the sequence. Only used when there is more than one texture available.
 func (x *TileDefinition) TimePerFrame() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timePerFrame"))
 	return _r
 }
 
+// SetTimePerFrame wraps the corresponding Objective-C method.
 func (x *TileDefinition) SetTimePerFrame(timePerFrame float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimePerFrame:"), timePerFrame)
 }
 
-// This value is used to determine how likely this tile definition is to be chosen for placement when a SKTileGroupRule has mulitple tile definitions assigned to it. A higher value relative to the other definitions assigned to the rule make it more likely for this definition to be selected; lower values make it less likely. Defaults to 1. When set to 0, the definition will never be chosen as long as there is at least one other definition with a placementWeight above 0.
+// PlacementWeight this value is used to determine how likely this tile definition is to be chosen for placement when a SKTileGroupRule has mulitple tile definitions assigned to it. A higher value relative to the other definitions assigned to the rule make it more likely for this definition to be selected; lower values make it less likely. Defaults to 1. When set to 0, the definition will never be chosen as long as there is at least one other definition with a placementWeight above 0.
 func (x *TileDefinition) PlacementWeight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("placementWeight"))
 	return _r
 }
 
+// SetPlacementWeight wraps the corresponding Objective-C method.
 func (x *TileDefinition) SetPlacementWeight(placementWeight int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlacementWeight:"), placementWeight)
 }
 
-// The rotation of the tile definition's images can be set in 90 degree increments. Defaults to SKTileDefinitionRotation0.
+// Rotation the rotation of the tile definition's images can be set in 90 degree increments. Defaults to SKTileDefinitionRotation0.
 func (x *TileDefinition) Rotation() TileDefinitionRotation {
 	_r := objc.Send[TileDefinitionRotation](objref.IDOf(x), objc.RegisterName("rotation"))
 	return _r
 }
 
+// SetRotation wraps the corresponding Objective-C method.
 func (x *TileDefinition) SetRotation(rotation TileDefinitionRotation) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotation:"), rotation)
 }
 
-// When set to YES, the tile definition's images will be flipped vertically (i.e., the top of the image becomes the bottom). Defaults to NO.
+// FlipVertically when set to YES, the tile definition's images will be flipped vertically (i.e., the top of the image becomes the bottom). Defaults to NO.
 func (x *TileDefinition) FlipVertically() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("flipVertically"))
 	return _r
 }
 
+// SetFlipVertically wraps the corresponding Objective-C method.
 func (x *TileDefinition) SetFlipVertically(flipVertically bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlipVertically:"), flipVertically)
 }
 
-// When set to YES, the tile definition's images will be flipped horizontally (i.e., the left of the image becomes the right). Defaults to NO.
+// FlipHorizontally when set to YES, the tile definition's images will be flipped horizontally (i.e., the left of the image becomes the right). Defaults to NO.
 func (x *TileDefinition) FlipHorizontally() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("flipHorizontally"))
 	return _r
 }
 
+// SetFlipHorizontally wraps the corresponding Objective-C method.
 func (x *TileDefinition) SetFlipHorizontally(flipHorizontally bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlipHorizontally:"), flipHorizontally)
 }
@@ -245,6 +288,7 @@ type TileDefinitionable interface {
 	WithNormalTextures(items ...TextureProvider) *TileDefinition
 	WithUserData(userData obj.Object) *TileDefinition
 	WithName(name string) *TileDefinition
+	WithSize(size corefoundation.CGSize) *TileDefinition
 	WithTimePerFrame(timePerFrame float64) *TileDefinition
 	WithPlacementWeight(placementWeight int) *TileDefinition
 	WithRotation(rotation TileDefinitionRotation) *TileDefinition
@@ -258,6 +302,8 @@ type TileDefinitionable interface {
 	SetUserData(userData obj.Object)
 	Name() string
 	SetName(name string)
+	Size() corefoundation.CGSize
+	SetSize(size corefoundation.CGSize)
 	TimePerFrame() float64
 	SetTimePerFrame(timePerFrame float64)
 	PlacementWeight() int

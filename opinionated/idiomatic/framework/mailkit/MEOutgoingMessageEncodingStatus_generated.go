@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains information about security measures the user can apply when composing a message.
-//
 // OutgoingMessageEncodingStatus is an idiomatic wrapper over the Objective-C class MEOutgoingMessageEncodingStatus.
+//
+// An object that contains information about security measures the user can apply when composing a message.
 type OutgoingMessageEncodingStatus struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func OutgoingMessageEncodingStatusFromID(id objc.ID) *OutgoingMessageEncodingSta
 	if id == 0 {
 		return nil
 	}
-	x := &OutgoingMessageEncodingStatus{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OutgoingMessageEncodingStatus{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func outgoingMessageEncodingStatusAdopt(id objc.ID) *OutgoingMessageEncodingStat
 	if id == 0 {
 		return nil
 	}
-	x := &OutgoingMessageEncodingStatus{Handle: objref.Wrap(id)}
+	x := &OutgoingMessageEncodingStatus{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *OutgoingMessageEncodingStatus) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OutgoingMessageEncodingStatus) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewOutgoingMessageEncodingStatus creates a new OutgoingMessageEncodingStatus.
 func NewOutgoingMessageEncodingStatus() *OutgoingMessageEncodingStatus {
 	_id := objc.Send[objc.ID](objc.ID(_class("MEOutgoingMessageEncodingStatus")), objc.RegisterName("new"))
 	return outgoingMessageEncodingStatusAdopt(_id)
 }
 
-// Whether or not the message can be signed.
+// CanSign whether or not the message can be signed.
 func (x *OutgoingMessageEncodingStatus) CanSign() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canSign"))
 	return _r
 }
 
-// Whether or not the message can be encrypted.
+// CanEncrypt whether or not the message can be encrypted.
 func (x *OutgoingMessageEncodingStatus) CanEncrypt() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canEncrypt"))
 	return _r
 }
 
-// A list of any recipients for which the message should be encrypted but an error occurred. This could include missing the public key for the recipient.
+// AddressesFailingEncryption a list of any recipients for which the message should be encrypted but an error occurred. This could include missing the public key for the recipient.
 //
 // AddressesFailingEncryption returns the collection as a Go slice.
 func (x *OutgoingMessageEncodingStatus) AddressesFailingEncryption() []*EmailAddress {

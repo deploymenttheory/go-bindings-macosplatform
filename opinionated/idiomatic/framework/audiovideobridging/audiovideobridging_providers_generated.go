@@ -11,14 +11,17 @@ import (
 // AVB17221AECPMessageProvider is accepted wherever a AVB17221AECPMessage (or one of its subclasses) is expected.
 type AVB17221AECPMessageProvider interface {
 	objref.Object
+	isAVB17221AECPMessage()
 }
 
 // AVB1722ControlInterfaceProvider is accepted wherever a AVB1722ControlInterface (or one of its subclasses) is expected.
 type AVB1722ControlInterfaceProvider interface {
 	objref.Object
+	isAVB1722ControlInterface()
 }
 
 // InterfaceProvider is accepted wherever a AVBInterface (or one of its subclasses) is expected.
 type InterfaceProvider interface {
 	objref.Object
+	isInterface()
 }

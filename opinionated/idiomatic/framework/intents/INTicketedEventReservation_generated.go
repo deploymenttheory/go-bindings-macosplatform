@@ -12,11 +12,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The information that describes a ticketed event reservation.
-//
 // TicketedEventReservation is an idiomatic wrapper over the Objective-C class INTicketedEventReservation.
+//
+// It embeds [Reservation], promoting that type's methods.
+//
+// The information that describes a ticketed event reservation.
 type TicketedEventReservation struct {
-	objref.Handle
+	Reservation
 }
 
 // TicketedEventReservationFromID adopts an existing Objective-C object as a TicketedEventReservation
@@ -25,7 +27,8 @@ func TicketedEventReservationFromID(id objc.ID) *TicketedEventReservation {
 	if id == 0 {
 		return nil
 	}
-	x := &TicketedEventReservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TicketedEventReservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,49 +41,33 @@ func ticketedEventReservationAdopt(id objc.ID) *TicketedEventReservation {
 	if id == 0 {
 		return nil
 	}
-	x := &TicketedEventReservation{Handle: objref.Wrap(id)}
+	x := &TicketedEventReservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *TicketedEventReservation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TicketedEventReservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TicketedEventReservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a ticketed event reservation with the specified contents and attributes.
-//
-// NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatEvent creates a new TicketedEventReservation.
+// NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatEvent creates a ticketed event reservation with the specified contents and attributes.
 func NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatEvent(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, uRL string, reservedSeat *Seat, event *TicketedEvent) *TicketedEventReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INTicketedEventReservation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:event:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(uRL), objref.IDOf(reservedSeat), objref.IDOf(event))
 	return ticketedEventReservationAdopt(_id)
 }
 
-// Creates a new ticketed event reservation with the specified contents and attributes.
-//
-// NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatEvent creates a new TicketedEventReservation.
+// NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatEvent creates a new ticketed event reservation with the specified contents and attributes.
 func NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatEvent(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, reservedSeat *Seat, event *TicketedEvent) *TicketedEventReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INTicketedEventReservation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:reservedSeat:event:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), objref.IDOf(reservedSeat), objref.IDOf(event))
 	return ticketedEventReservationAdopt(_id)
 }
 
+// Event wraps the corresponding Objective-C method.
 func (x *TicketedEventReservation) Event() *TicketedEvent {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("event"))
 	return TicketedEventFromID(_r)
 }
 
+// ReservedSeat wraps the corresponding Objective-C method.
 func (x *TicketedEventReservation) ReservedSeat() *Seat {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservedSeat"))
 	return SeatFromID(_r)
@@ -94,3 +81,5 @@ type TicketedEventReservationable interface {
 }
 
 var _ TicketedEventReservationable = (*TicketedEventReservation)(nil)
+
+var _ ReservationProvider = (*TicketedEventReservation)(nil)

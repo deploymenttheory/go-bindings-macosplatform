@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An observation that contains an instance mask that labels instances in the mask.
-//
 // InstanceMaskObservation is an idiomatic wrapper over the Objective-C class VNInstanceMaskObservation.
+//
+// It embeds [Observation], promoting that type's methods.
+//
+// An observation that contains an instance mask that labels instances in the mask.
 type InstanceMaskObservation struct {
-	objref.Handle
+	Observation
 }
 
 // InstanceMaskObservationFromID adopts an existing Objective-C object as a InstanceMaskObservation
@@ -25,7 +26,8 @@ func InstanceMaskObservationFromID(id objc.ID) *InstanceMaskObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &InstanceMaskObservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &InstanceMaskObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func instanceMaskObservationAdopt(id objc.ID) *InstanceMaskObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &InstanceMaskObservation{Handle: objref.Wrap(id)}
+	x := &InstanceMaskObservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *InstanceMaskObservation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *InstanceMaskObservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *InstanceMaskObservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewInstanceMaskObservation creates a new InstanceMaskObservation.
@@ -64,7 +52,7 @@ func NewInstanceMaskObservation() *InstanceMaskObservation {
 	return instanceMaskObservationAdopt(_id)
 }
 
-// *The IndexSet that encompases all instances except the background
+// AllInstances *The IndexSet that encompases all instances except the background
 func (x *InstanceMaskObservation) AllInstances() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allInstances"))
 	return obj.Wrap(_r)
@@ -77,3 +65,5 @@ type InstanceMaskObservationable interface {
 }
 
 var _ InstanceMaskObservationable = (*InstanceMaskObservation)(nil)
+
+var _ ObservationProvider = (*InstanceMaskObservation)(nil)

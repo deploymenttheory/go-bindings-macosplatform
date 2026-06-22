@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The behavior configuration to use for a search query.
-//
 // SearchQueryContext is an idiomatic wrapper over the Objective-C class CSSearchQueryContext.
+//
+// SearchQueryContext is an abstract base — you do not construct it directly. Construct one of [UserQueryContext] and pass it where a SearchQueryContext is accepted.
+//
+// The behavior configuration to use for a search query.
 type SearchQueryContext struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func SearchQueryContextFromID(id objc.ID) *SearchQueryContext {
 	if id == 0 {
 		return nil
 	}
-	x := &SearchQueryContext{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SearchQueryContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func searchQueryContextAdopt(id objc.ID) *SearchQueryContext {
 	if id == 0 {
 		return nil
 	}
-	x := &SearchQueryContext{Handle: objref.Wrap(id)}
+	x := &SearchQueryContext{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,66 +62,65 @@ func (x *SearchQueryContext) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewSearchQueryContext creates a new SearchQueryContext.
-func NewSearchQueryContext() *SearchQueryContext {
-	_id := objc.Send[objc.ID](objc.ID(_class("CSSearchQueryContext")), objc.RegisterName("new"))
-	return searchQueryContextAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SearchQueryContext) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The attributes the system fetches for the searchable items.
-//
-// WithFetchAttributes sets the collection and returns the receiver so calls can be chained.
+// WithFetchAttributes the attributes the system fetches for the searchable items.
 func (x *SearchQueryContext) WithFetchAttributes(items ...obj.Object) *SearchQueryContext {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchAttributes:"), _arr)
 	return x
 }
 
-// The query string used to filter the results.
-//
-// WithFilterQueries sets the collection and returns the receiver so calls can be chained.
+// WithFilterQueries the query string used to filter the results.
 func (x *SearchQueryContext) WithFilterQueries(items ...obj.Object) *SearchQueryContext {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterQueries:"), _arr)
 	return x
 }
 
-// The language used for the query.
-//
-// WithKeyboardLanguage sets keyboardLanguage and returns the receiver so calls can be chained.
+// WithKeyboardLanguage the language used for the query.
 func (x *SearchQueryContext) WithKeyboardLanguage(keyboardLanguage string) *SearchQueryContext {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyboardLanguage:"), purego.NSString(keyboardLanguage))
 	return x
 }
 
-// The query source options to allow or deny Mail messages in the search.
-//
-// WithSourceOptions sets sourceOptions and returns the receiver so calls can be chained.
+// WithSourceOptions the query source options to allow or deny Mail messages in the search.
 func (x *SearchQueryContext) WithSourceOptions(sourceOptions SearchQuerySourceOptions) *SearchQueryContext {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceOptions:"), sourceOptions)
 	return x
 }
 
+// FetchAttributes wraps the corresponding Objective-C method.
+//
 // FetchAttributes returns the collection as a Go slice.
 func (x *SearchQueryContext) FetchAttributes() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchAttributes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetFetchAttributes wraps the corresponding Objective-C method.
 func (x *SearchQueryContext) SetFetchAttributes(fetchAttributes []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchAttributes:"), purego.SliceToNSArray(fetchAttributes, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// FilterQueries wraps the corresponding Objective-C method.
+//
 // FilterQueries returns the collection as a Go slice.
 func (x *SearchQueryContext) FilterQueries() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterQueries"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetFilterQueries wraps the corresponding Objective-C method.
 func (x *SearchQueryContext) SetFilterQueries(filterQueries []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterQueries:"), purego.SliceToNSArray(filterQueries, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// KeyboardLanguage wraps the corresponding Objective-C method.
 func (x *SearchQueryContext) KeyboardLanguage() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyboardLanguage"))
 	if _r == 0 {
@@ -126,15 +129,18 @@ func (x *SearchQueryContext) KeyboardLanguage() string {
 	return purego.GoString(_r)
 }
 
+// SetKeyboardLanguage wraps the corresponding Objective-C method.
 func (x *SearchQueryContext) SetKeyboardLanguage(keyboardLanguage string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyboardLanguage:"), purego.NSString(keyboardLanguage))
 }
 
+// SourceOptions wraps the corresponding Objective-C method.
 func (x *SearchQueryContext) SourceOptions() SearchQuerySourceOptions {
 	_r := objc.Send[SearchQuerySourceOptions](objref.IDOf(x), objc.RegisterName("sourceOptions"))
 	return _r
 }
 
+// SetSourceOptions wraps the corresponding Objective-C method.
 func (x *SearchQueryContext) SetSourceOptions(sourceOptions SearchQuerySourceOptions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceOptions:"), sourceOptions)
 }
@@ -157,3 +163,10 @@ type SearchQueryContextable interface {
 }
 
 var _ SearchQueryContextable = (*SearchQueryContext)(nil)
+
+// isSearchQueryContext marks SearchQueryContext — and, by embedding promotion, its
+// subclasses — as a member of the SearchQueryContext hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SearchQueryContext) isSearchQueryContext() {}
+
+var _ SearchQueryContextProvider = (*SearchQueryContext)(nil)

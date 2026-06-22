@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing metrics about disk usage.
-//
 // DiskIOMetric is an idiomatic wrapper over the Objective-C class MXDiskIOMetric.
+//
+// It embeds [Metric], promoting that type's methods.
+//
+// An object representing metrics about disk usage.
 type DiskIOMetric struct {
-	objref.Handle
+	Metric
 }
 
 // DiskIOMetricFromID adopts an existing Objective-C object as a DiskIOMetric
@@ -25,7 +26,8 @@ func DiskIOMetricFromID(id objc.ID) *DiskIOMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &DiskIOMetric{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DiskIOMetric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func diskIOMetricAdopt(id objc.ID) *DiskIOMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &DiskIOMetric{Handle: objref.Wrap(id)}
+	x := &DiskIOMetric{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DiskIOMetric) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DiskIOMetric) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DiskIOMetric) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDiskIOMetric creates a new DiskIOMetric.
@@ -64,6 +52,7 @@ func NewDiskIOMetric() *DiskIOMetric {
 	return diskIOMetricAdopt(_id)
 }
 
+// CumulativeLogicalWrites wraps the corresponding Objective-C method.
 func (x *DiskIOMetric) CumulativeLogicalWrites() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeLogicalWrites"))
 	return obj.Wrap(_r)
@@ -76,3 +65,5 @@ type DiskIOMetricable interface {
 }
 
 var _ DiskIOMetricable = (*DiskIOMetric)(nil)
+
+var _ MetricProvider = (*DiskIOMetric)(nil)

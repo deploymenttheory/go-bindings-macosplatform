@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object for fetching the system-generated live walking data.
-//
 // Pedometer is an idiomatic wrapper over the Objective-C class CMPedometer.
+//
+// An object for fetching the system-generated live walking data.
 type Pedometer struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PedometerFromID(id objc.ID) *Pedometer {
 	if id == 0 {
 		return nil
 	}
-	x := &Pedometer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Pedometer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func pedometerAdopt(id objc.ID) *Pedometer {
 	if id == 0 {
 		return nil
 	}
-	x := &Pedometer{Handle: objref.Wrap(id)}
+	x := &Pedometer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *Pedometer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Pedometer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPedometer creates a new Pedometer.
 func NewPedometer() *Pedometer {
 	_id := objc.Send[objc.ID](objc.ID(_class("CMPedometer")), objc.RegisterName("new"))
 	return pedometerAdopt(_id)
 }
 
-// Stops the delivery of recent pedestrian data updates to your app.
+// StopPedometerUpdates stops the delivery of recent pedestrian data updates to your app.
 func (x *Pedometer) StopPedometerUpdates() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopPedometerUpdates"))
 }

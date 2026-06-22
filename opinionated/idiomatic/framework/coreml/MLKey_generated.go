@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract base class for machine learning key types.
-//
 // Key is an idiomatic wrapper over the Objective-C class MLKey.
+//
+// Key is an abstract base — you do not construct it directly. Construct one of [MetricKey], [ParameterKey] and pass it where a Key is accepted.
+//
+// An abstract base class for machine learning key types.
 type Key struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func KeyFromID(id objc.ID) *Key {
 	if id == 0 {
 		return nil
 	}
-	x := &Key{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Key{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func keyAdopt(id objc.ID) *Key {
 	if id == 0 {
 		return nil
 	}
-	x := &Key{Handle: objref.Wrap(id)}
+	x := &Key{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +62,13 @@ func (x *Key) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewKey creates a new Key.
-func NewKey() *Key {
-	_id := objc.Send[objc.ID](objc.ID(_class("MLKey")), objc.RegisterName("new"))
-	return keyAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Key) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *Key) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -72,6 +77,7 @@ func (x *Key) Name() string {
 	return purego.GoString(_r)
 }
 
+// Scope wraps the corresponding Objective-C method.
 func (x *Key) Scope() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scope"))
 	if _r == 0 {
@@ -88,3 +94,10 @@ type Keyable interface {
 }
 
 var _ Keyable = (*Key)(nil)
+
+// isKey marks Key — and, by embedding promotion, its
+// subclasses — as a member of the Key hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Key) isKey() {}
+
+var _ KeyProvider = (*Key)(nil)

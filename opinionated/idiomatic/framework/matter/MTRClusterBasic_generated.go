@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterBasic is an idiomatic wrapper over the Objective-C class MTRClusterBasic.
+//
+// It embeds [MTRClusterBasicInformation], promoting that type's methods.
 type MTRClusterBasic struct {
-	objref.Handle
+	MTRClusterBasicInformation
 }
 
 // MTRClusterBasicFromID adopts an existing Objective-C object as a MTRClusterBasic
@@ -23,7 +24,8 @@ func MTRClusterBasicFromID(id objc.ID) *MTRClusterBasic {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterBasic{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterBasic{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRClusterBasicAdopt(id objc.ID) *MTRClusterBasic {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterBasic{Handle: objref.Wrap(id)}
+	x := &MTRClusterBasic{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRClusterBasic) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterBasic) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterBasic) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRClusterBasicWithDeviceEndpointQueue creates a new MTRClusterBasic.
@@ -69,3 +57,9 @@ type MTRClusterBasicable interface {
 }
 
 var _ MTRClusterBasicable = (*MTRClusterBasic)(nil)
+
+var _ MTRClusterBasicInformationProvider = (*MTRClusterBasic)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterBasic)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterBasic)(nil)

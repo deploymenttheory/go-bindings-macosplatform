@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a payment card available to add as a payment pass.
-//
 // IssuerProvisioningExtensionPaymentPassEntry is an idiomatic wrapper over the Objective-C class PKIssuerProvisioningExtensionPaymentPassEntry.
+//
+// It embeds [IssuerProvisioningExtensionPassEntry], promoting that type's methods.
+//
+// An object that represents a payment card available to add as a payment pass.
 type IssuerProvisioningExtensionPaymentPassEntry struct {
-	objref.Handle
+	IssuerProvisioningExtensionPassEntry
 }
 
 // IssuerProvisioningExtensionPaymentPassEntryFromID adopts an existing Objective-C object as a IssuerProvisioningExtensionPaymentPassEntry
@@ -25,7 +26,8 @@ func IssuerProvisioningExtensionPaymentPassEntryFromID(id objc.ID) *IssuerProvis
 	if id == 0 {
 		return nil
 	}
-	x := &IssuerProvisioningExtensionPaymentPassEntry{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IssuerProvisioningExtensionPaymentPassEntry{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,35 +40,20 @@ func issuerProvisioningExtensionPaymentPassEntryAdopt(id objc.ID) *IssuerProvisi
 	if id == 0 {
 		return nil
 	}
-	x := &IssuerProvisioningExtensionPaymentPassEntry{Handle: objref.Wrap(id)}
+	x := &IssuerProvisioningExtensionPaymentPassEntry{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *IssuerProvisioningExtensionPaymentPassEntry) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IssuerProvisioningExtensionPaymentPassEntry) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IssuerProvisioningExtensionPaymentPassEntry) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a new entry for a payment pass that a user adds to Wallet.
-//
-// NewIssuerProvisioningExtensionPaymentPassEntryWithIdentifierTitleArtAddRequestConfiguration creates a new IssuerProvisioningExtensionPaymentPassEntry.
+// NewIssuerProvisioningExtensionPaymentPassEntryWithIdentifierTitleArtAddRequestConfiguration creates a new entry for a payment pass that a user adds to Wallet.
 func NewIssuerProvisioningExtensionPaymentPassEntryWithIdentifierTitleArtAddRequestConfiguration(identifier string, title string, art obj.Object, configuration *AddPaymentPassRequestConfiguration) *IssuerProvisioningExtensionPaymentPassEntry {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKIssuerProvisioningExtensionPaymentPassEntry")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:title:art:addRequestConfiguration:"), purego.NSString(identifier), purego.NSString(title), objref.IDOf(art), objref.IDOf(configuration))
 	return issuerProvisioningExtensionPaymentPassEntryAdopt(_id)
 }
 
+// AddRequestConfiguration wraps the corresponding Objective-C method.
 func (x *IssuerProvisioningExtensionPaymentPassEntry) AddRequestConfiguration() *AddPaymentPassRequestConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRequestConfiguration"))
 	return AddPaymentPassRequestConfigurationFromID(_r)
@@ -79,3 +66,5 @@ type IssuerProvisioningExtensionPaymentPassEntryable interface {
 }
 
 var _ IssuerProvisioningExtensionPaymentPassEntryable = (*IssuerProvisioningExtensionPaymentPassEntry)(nil)
+
+var _ IssuerProvisioningExtensionPassEntryProvider = (*IssuerProvisioningExtensionPaymentPassEntry)(nil)

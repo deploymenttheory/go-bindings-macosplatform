@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An interface adopted by drawing and writing tools used by a canvas view.
-//
 // Tool is an idiomatic wrapper over the Objective-C class PKTool.
+//
+// Tool is an abstract base — you do not construct it directly. Construct one of [EraserTool], [InkingTool], [LassoTool] and pass it where a Tool is accepted.
+//
+// An interface adopted by drawing and writing tools used by a canvas view.
 type Tool struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ToolFromID(id objc.ID) *Tool {
 	if id == 0 {
 		return nil
 	}
-	x := &Tool{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Tool{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func toolAdopt(id objc.ID) *Tool {
 	if id == 0 {
 		return nil
 	}
-	x := &Tool{Handle: objref.Wrap(id)}
+	x := &Tool{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *Tool) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewTool creates a new Tool.
-func NewTool() *Tool {
-	_id := objc.Send[objc.ID](objc.ID(_class("PKTool")), objc.RegisterName("new"))
-	return toolAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Tool) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // Toolable is the interface implemented by [Tool], for mocking and DI.
@@ -70,3 +74,10 @@ type Toolable interface {
 }
 
 var _ Toolable = (*Tool)(nil)
+
+// isTool marks Tool — and, by embedding promotion, its
+// subclasses — as a member of the Tool hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Tool) isTool() {}
+
+var _ ToolProvider = (*Tool)(nil)

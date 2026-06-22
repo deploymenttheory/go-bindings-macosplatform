@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container for image data from a photo capture output.
-//
 // CapturePhoto is an idiomatic wrapper over the Objective-C class AVCapturePhoto.
+//
+// A container for image data from a photo capture output.
 type CapturePhoto struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CapturePhotoFromID(id objc.ID) *CapturePhoto {
 	if id == 0 {
 		return nil
 	}
-	x := &CapturePhoto{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CapturePhoto{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func capturePhotoAdopt(id objc.ID) *CapturePhoto {
 	if id == 0 {
 		return nil
 	}
-	x := &CapturePhoto{Handle: objref.Wrap(id)}
+	x := &CapturePhoto{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,43 +60,49 @@ func (x *CapturePhoto) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CapturePhoto) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCapturePhoto creates a new CapturePhoto.
 func NewCapturePhoto() *CapturePhoto {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVCapturePhoto")), objc.RegisterName("new"))
 	return capturePhotoAdopt(_id)
 }
 
-// The AVCaptureResolvedPhotoSettings associated with all photo results for a given -[AVCapturePhotoOutput capturePhotoWithSettings:delegate:] request. Even in the event of an error, the resolved settings are always non nil.
+// ResolvedSettings the AVCaptureResolvedPhotoSettings associated with all photo results for a given -[AVCapturePhotoOutput capturePhotoWithSettings:delegate:] request. Even in the event of an error, the resolved settings are always non nil.
 func (x *CapturePhoto) ResolvedSettings() *CaptureResolvedPhotoSettings {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resolvedSettings"))
 	return CaptureResolvedPhotoSettingsFromID(_r)
 }
 
-// This photo's index (1-based) in the total expected photo count. The resolvedSettings.expectedPhotoCount property indicates the total number of images that will be returned for a given capture request. This property indicates this photo's index (1-based). When you receive a -captureOutput:didFinishProcessingPhoto:error: callback with a photo whose photoCount matches resolvedSettings.expectedPhotoCount, you know you've received the last one for the given capture request.
+// PhotoCount this photo's index (1-based) in the total expected photo count. The resolvedSettings.expectedPhotoCount property indicates the total number of images that will be returned for a given capture request. This property indicates this photo's index (1-based). When you receive a -captureOutput:didFinishProcessingPhoto:error: callback with a photo whose photoCount matches resolvedSettings.expectedPhotoCount, you know you've received the last one for the given capture request.
 func (x *CapturePhoto) PhotoCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("photoCount"))
 	return _r
 }
 
-// Returns a score summarizing the overall confidence level of a constant color photo -- 1.0 means full confidence, 0.0 means zero confidence. Default is 0.0. In most use cases (document scanning for example), the central region of the photo is considered more important than the peripherals, therefore the confidence level of the central pixels are weighted more heavily than pixels on the edges of the photo. Use constantColorConfidenceMap for more use case specific analyses of the confidence level.
+// ConstantColorCenterWeightedMeanConfidenceLevel returns a score summarizing the overall confidence level of a constant color photo -- 1.0 means full confidence, 0.0 means zero confidence. Default is 0.0. In most use cases (document scanning for example), the central region of the photo is considered more important than the peripherals, therefore the confidence level of the central pixels are weighted more heavily than pixels on the edges of the photo. Use constantColorConfidenceMap for more use case specific analyses of the confidence level.
 func (x *CapturePhoto) ConstantColorCenterWeightedMeanConfidenceLevel() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("constantColorCenterWeightedMeanConfidenceLevel"))
 	return _r
 }
 
-// Indicates whether this photo is a fallback photo for a constant color capture.
+// IsConstantColorFallbackPhoto indicates whether this photo is a fallback photo for a constant color capture.
 func (x *CapturePhoto) IsConstantColorFallbackPhoto() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConstantColorFallbackPhoto"))
 	return _r
 }
 
-// Generates and returns a flat data representation of the photo and its attachments.
+// FileDataRepresentation generates and returns a flat data representation of the photo and its attachments.
 func (x *CapturePhoto) FileDataRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileDataRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// Extracts and returns the captured photo’s primary image as a Core Graphics image object.
+// CGImageRepresentation extracts and returns the captured photo’s primary image as a Core Graphics image object.
 func (x *CapturePhoto) CGImageRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CGImageRepresentation"))
 	return obj.Wrap(_r)

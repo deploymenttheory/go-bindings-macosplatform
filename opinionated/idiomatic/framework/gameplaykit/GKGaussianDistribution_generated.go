@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A generator for random numbers that follow a Gaussian distribution (also known as a normal distribution) across multiple samplings.
-//
 // GaussianDistribution is an idiomatic wrapper over the Objective-C class GKGaussianDistribution.
+//
+// It embeds [RandomDistribution], promoting that type's methods.
+//
+// A generator for random numbers that follow a Gaussian distribution (also known as a normal distribution) across multiple samplings.
 type GaussianDistribution struct {
-	objref.Handle
+	RandomDistribution
 }
 
 // GaussianDistributionFromID adopts an existing Objective-C object as a GaussianDistribution
@@ -25,7 +26,8 @@ func GaussianDistributionFromID(id objc.ID) *GaussianDistribution {
 	if id == 0 {
 		return nil
 	}
-	x := &GaussianDistribution{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GaussianDistribution{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func gaussianDistributionAdopt(id objc.ID) *GaussianDistribution {
 	if id == 0 {
 		return nil
 	}
-	x := &GaussianDistribution{Handle: objref.Wrap(id)}
+	x := &GaussianDistribution{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GaussianDistribution) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GaussianDistribution) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GaussianDistribution) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGaussianDistribution creates a new GaussianDistribution.
@@ -64,13 +52,13 @@ func NewGaussianDistribution() *GaussianDistribution {
 	return gaussianDistributionAdopt(_id)
 }
 
-// The mean, or expected, value of the distribution. Values are more probable the closer to the mean they are.
+// Mean the mean, or expected, value of the distribution. Values are more probable the closer to the mean they are.
 func (x *GaussianDistribution) Mean() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("mean"))
 	return _r
 }
 
-// The deviation, often called 'sigma', is the deviation from the mean that would include roughly 68% of the distribution. The range of the distribution is [mean - 3 * deviation, mean + 3 * deviation]. Values beyond 3 deviations are considered so improbable that they are removed from the output set.
+// Deviation the deviation, often called 'sigma', is the deviation from the mean that would include roughly 68% of the distribution. The range of the distribution is [mean - 3 * deviation, mean + 3 * deviation]. Values beyond 3 deviations are considered so improbable that they are removed from the output set.
 func (x *GaussianDistribution) Deviation() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("deviation"))
 	return _r
@@ -84,3 +72,5 @@ type GaussianDistributionable interface {
 }
 
 var _ GaussianDistributionable = (*GaussianDistribution)(nil)
+
+var _ RandomDistributionProvider = (*GaussianDistribution)(nil)

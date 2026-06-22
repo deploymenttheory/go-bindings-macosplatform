@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a single data point in a chart.
-//
 // DataPoint is an idiomatic wrapper over the Objective-C class AXDataPoint.
+//
+// An object that represents a single data point in a chart.
 type DataPoint struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DataPointFromID(id objc.ID) *DataPoint {
 	if id == 0 {
 		return nil
 	}
-	x := &DataPoint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DataPoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func dataPointAdopt(id objc.ID) *DataPoint {
 	if id == 0 {
 		return nil
 	}
-	x := &DataPoint{Handle: objref.Wrap(id)}
+	x := &DataPoint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,95 +60,87 @@ func (x *DataPoint) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a data point with the specified x- and y-values.
-//
-// NewDataPointWithXY creates a new DataPoint.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DataPoint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDataPointWithXY creates a data point with the specified x- and y-values.
 func NewDataPointWithXY(xValue *DataPointValue, yValue *DataPointValue) *DataPoint {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AXDataPoint")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithX:y:"), objref.IDOf(xValue), objref.IDOf(yValue))
 	return dataPointAdopt(_id)
 }
 
-// Creates a data point with the specified x-value, y-value, and additional values.
-//
-// NewDataPointWithXYAdditionalValues creates a new DataPoint.
+// NewDataPointWithXYAdditionalValues creates a data point with the specified x-value, y-value, and additional values.
 func NewDataPointWithXYAdditionalValues(xValue *DataPointValue, yValue *DataPointValue, additionalValues []*DataPointValue) *DataPoint {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AXDataPoint")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithX:y:additionalValues:"), objref.IDOf(xValue), objref.IDOf(yValue), purego.SliceToNSArray(additionalValues, func(_v *DataPointValue) objc.ID { return objref.IDOf(_v) }))
 	return dataPointAdopt(_id)
 }
 
-// Creates a data point with the specified x-value, y-value, additional values, and label.
-//
-// NewDataPointWithXYAdditionalValuesLabel creates a new DataPoint.
+// NewDataPointWithXYAdditionalValuesLabel creates a data point with the specified x-value, y-value, additional values, and label.
 func NewDataPointWithXYAdditionalValuesLabel(xValue *DataPointValue, yValue *DataPointValue, additionalValues []*DataPointValue, label string) *DataPoint {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AXDataPoint")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithX:y:additionalValues:label:"), objref.IDOf(xValue), objref.IDOf(yValue), purego.SliceToNSArray(additionalValues, func(_v *DataPointValue) objc.ID { return objref.IDOf(_v) }), purego.NSString(label))
 	return dataPointAdopt(_id)
 }
 
-// The value of the x-axis for the data point.
-//
-// WithXValue sets xValue and returns the receiver so calls can be chained.
+// WithXValue the value of the x-axis for the data point.
 func (x *DataPoint) WithXValue(xValue *DataPointValue) *DataPoint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXValue:"), objref.IDOf(xValue))
 	return x
 }
 
-// The value of the y-axis for the data point.
-//
-// WithYValue sets yValue and returns the receiver so calls can be chained.
+// WithYValue the value of the y-axis for the data point.
 func (x *DataPoint) WithYValue(yValue *DataPointValue) *DataPoint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYValue:"), objref.IDOf(yValue))
 	return x
 }
 
-// An array of values for additional axes for the data point.
-//
-// WithAdditionalValues sets the collection and returns the receiver so calls can be chained.
+// WithAdditionalValues an array of values for additional axes for the data point.
 func (x *DataPoint) WithAdditionalValues(items ...*DataPointValue) *DataPoint {
 	_arr := purego.SliceToNSArray(items, func(_v *DataPointValue) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalValues:"), _arr)
 	return x
 }
 
-// The label for the data point.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the label for the data point.
 func (x *DataPoint) WithLabel(label string) *DataPoint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// An attributed version of the label for the data point.
-//
-// WithAttributedLabel sets attributedLabel and returns the receiver so calls can be chained.
+// WithAttributedLabel an attributed version of the label for the data point.
 func (x *DataPoint) WithAttributedLabel(attributedLabel obj.Object) *DataPoint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedLabel:"), objref.IDOf(attributedLabel))
 	return x
 }
 
-// The x-axis value for this data point. Should be a Double for a numeric x-axis or a String for a categorical x-axis.
+// XValue the x-axis value for this data point. Should be a Double for a numeric x-axis or a String for a categorical x-axis.
 func (x *DataPoint) XValue() *DataPointValue {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("xValue"))
 	return DataPointValueFromID(_r)
 }
 
+// SetXValue wraps the corresponding Objective-C method.
 func (x *DataPoint) SetXValue(xValue *DataPointValue) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXValue:"), objref.IDOf(xValue))
 }
 
-// The y-axis value for this data point.
+// YValue the y-axis value for this data point.
 func (x *DataPoint) YValue() *DataPointValue {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("yValue"))
 	return DataPointValueFromID(_r)
 }
 
+// SetYValue wraps the corresponding Objective-C method.
 func (x *DataPoint) SetYValue(yValue *DataPointValue) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYValue:"), objref.IDOf(yValue))
 }
 
-// Any additional values for additional axes for this data point. These should be provided in the same order as their corresponding `AXDataAxisDescriptor` objects in `AXChartDescriptor.additionalAxes`.
+// AdditionalValues any additional values for additional axes for this data point. These should be provided in the same order as their corresponding `AXDataAxisDescriptor` objects in `AXChartDescriptor.additionalAxes`.
 //
 // AdditionalValues returns the collection as a Go slice.
 func (x *DataPoint) AdditionalValues() []*DataPointValue {
@@ -154,11 +148,12 @@ func (x *DataPoint) AdditionalValues() []*DataPointValue {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DataPointValue { return DataPointValueFromID(_id) })
 }
 
+// SetAdditionalValues wraps the corresponding Objective-C method.
 func (x *DataPoint) SetAdditionalValues(additionalValues []*DataPointValue) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalValues:"), purego.SliceToNSArray(additionalValues, func(_v *DataPointValue) objc.ID { return objref.IDOf(_v) }))
 }
 
-// A name or label for this data point.
+// Label a name or label for this data point.
 func (x *DataPoint) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -167,16 +162,18 @@ func (x *DataPoint) Label() string {
 	return purego.GoString(_r)
 }
 
+// SetLabel wraps the corresponding Objective-C method.
 func (x *DataPoint) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// An attributed version of the name or label for this data point.
+// AttributedLabel an attributed version of the name or label for this data point.
 func (x *DataPoint) AttributedLabel() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedLabel"))
 	return obj.Wrap(_r)
 }
 
+// SetAttributedLabel wraps the corresponding Objective-C method.
 func (x *DataPoint) SetAttributedLabel(attributedLabel obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedLabel:"), objref.IDOf(attributedLabel))
 }

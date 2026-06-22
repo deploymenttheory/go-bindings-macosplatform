@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that specifies properties used by a neuron kernel.
-//
 // NNNeuronDescriptor is an idiomatic wrapper over the Objective-C class MPSNNNeuronDescriptor.
+//
+// An object that specifies properties used by a neuron kernel.
 type NNNeuronDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NNNeuronDescriptorFromID(id objc.ID) *NNNeuronDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &NNNeuronDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNNeuronDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nNNeuronDescriptorAdopt(id objc.ID) *NNNeuronDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &NNNeuronDescriptor{Handle: objref.Wrap(id)}
+	x := &NNNeuronDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,68 +60,82 @@ func (x *NNNeuronDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NNNeuronDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNNNeuronDescriptor creates a new NNNeuronDescriptor.
 func NewNNNeuronDescriptor() *NNNeuronDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNNeuronDescriptor")), objc.RegisterName("new"))
 	return nNNeuronDescriptorAdopt(_id)
 }
 
-// WithA sets a and returns the receiver so calls can be chained.
+// WithA sets the property and returns the receiver so calls can be chained.
 func (x *NNNeuronDescriptor) WithA(a float32) *NNNeuronDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setA:"), a)
 	return x
 }
 
-// WithB sets b and returns the receiver so calls can be chained.
+// WithB sets the property and returns the receiver so calls can be chained.
 func (x *NNNeuronDescriptor) WithB(b float32) *NNNeuronDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setB:"), b)
 	return x
 }
 
-// WithC sets c and returns the receiver so calls can be chained.
+// WithC sets the property and returns the receiver so calls can be chained.
 func (x *NNNeuronDescriptor) WithC(c float32) *NNNeuronDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setC:"), c)
 	return x
 }
 
-// WithData sets data and returns the receiver so calls can be chained.
+// WithData sets the property and returns the receiver so calls can be chained.
 func (x *NNNeuronDescriptor) WithData(data obj.Object) *NNNeuronDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
 	return x
 }
 
+// A wraps the corresponding Objective-C method.
 func (x *NNNeuronDescriptor) A() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("a"))
 	return _r
 }
 
+// SetA wraps the corresponding Objective-C method.
 func (x *NNNeuronDescriptor) SetA(a float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setA:"), a)
 }
 
+// B wraps the corresponding Objective-C method.
 func (x *NNNeuronDescriptor) B() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("b"))
 	return _r
 }
 
+// SetB wraps the corresponding Objective-C method.
 func (x *NNNeuronDescriptor) SetB(b float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setB:"), b)
 }
 
+// C wraps the corresponding Objective-C method.
 func (x *NNNeuronDescriptor) C() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("c"))
 	return _r
 }
 
+// SetC wraps the corresponding Objective-C method.
 func (x *NNNeuronDescriptor) SetC(c float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setC:"), c)
 }
 
+// Data wraps the corresponding Objective-C method.
 func (x *NNNeuronDescriptor) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
+// SetData wraps the corresponding Objective-C method.
 func (x *NNNeuronDescriptor) SetData(data obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
 }

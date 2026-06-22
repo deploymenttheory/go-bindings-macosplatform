@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A basic random number generator implementing the Mersenne Twister algorithm, which is more random, but slower than the default random source.
-//
 // MersenneTwisterRandomSource is an idiomatic wrapper over the Objective-C class GKMersenneTwisterRandomSource.
+//
+// It embeds [RandomSource], promoting that type's methods.
+//
+// A basic random number generator implementing the Mersenne Twister algorithm, which is more random, but slower than the default random source.
 type MersenneTwisterRandomSource struct {
-	objref.Handle
+	RandomSource
 }
 
 // MersenneTwisterRandomSourceFromID adopts an existing Objective-C object as a MersenneTwisterRandomSource
@@ -25,7 +26,8 @@ func MersenneTwisterRandomSourceFromID(id objc.ID) *MersenneTwisterRandomSource 
 	if id == 0 {
 		return nil
 	}
-	x := &MersenneTwisterRandomSource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MersenneTwisterRandomSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func mersenneTwisterRandomSourceAdopt(id objc.ID) *MersenneTwisterRandomSource {
 	if id == 0 {
 		return nil
 	}
-	x := &MersenneTwisterRandomSource{Handle: objref.Wrap(id)}
+	x := &MersenneTwisterRandomSource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MersenneTwisterRandomSource) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MersenneTwisterRandomSource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MersenneTwisterRandomSource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMersenneTwisterRandomSource creates a new MersenneTwisterRandomSource.
@@ -64,29 +52,26 @@ func NewMersenneTwisterRandomSource() *MersenneTwisterRandomSource {
 	return mersenneTwisterRandomSourceAdopt(_id)
 }
 
-// Initializes a random source with the specified seed value.
-//
-// NewMersenneTwisterRandomSourceWithSeed creates a new MersenneTwisterRandomSource.
+// NewMersenneTwisterRandomSourceWithSeed initializes a random source with the specified seed value.
 func NewMersenneTwisterRandomSourceWithSeed(seed uint64) *MersenneTwisterRandomSource {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKMersenneTwisterRandomSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSeed:"), seed)
 	return mersenneTwisterRandomSourceAdopt(_id)
 }
 
-// The seed value that determines the random source’s behavior.
-//
-// WithSeed sets seed and returns the receiver so calls can be chained.
+// WithSeed the seed value that determines the random source’s behavior.
 func (x *MersenneTwisterRandomSource) WithSeed(seed uint64) *MersenneTwisterRandomSource {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
 	return x
 }
 
-// The seed used to stir the mersenne twister random source. The seed is not encoded through archiving, but the equivalent state buffers are encoded.
+// Seed the seed used to stir the mersenne twister random source. The seed is not encoded through archiving, but the equivalent state buffers are encoded.
 func (x *MersenneTwisterRandomSource) Seed() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("seed"))
 	return _r
 }
 
+// SetSeed wraps the corresponding Objective-C method.
 func (x *MersenneTwisterRandomSource) SetSeed(seed uint64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
 }
@@ -100,3 +85,5 @@ type MersenneTwisterRandomSourceable interface {
 }
 
 var _ MersenneTwisterRandomSourceable = (*MersenneTwisterRandomSource)(nil)
+
+var _ RandomSourceProvider = (*MersenneTwisterRandomSource)(nil)

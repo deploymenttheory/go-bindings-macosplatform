@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of a binary shader archive that you want to create.
-//
 // BinaryArchiveDescriptor is an idiomatic wrapper over the Objective-C class MTLBinaryArchiveDescriptor.
+//
+// A description of a binary shader archive that you want to create.
 type BinaryArchiveDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func BinaryArchiveDescriptorFromID(id objc.ID) *BinaryArchiveDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &BinaryArchiveDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BinaryArchiveDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func binaryArchiveDescriptorAdopt(id objc.ID) *BinaryArchiveDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &BinaryArchiveDescriptor{Handle: objref.Wrap(id)}
+	x := &BinaryArchiveDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *BinaryArchiveDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BinaryArchiveDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBinaryArchiveDescriptor creates a new BinaryArchiveDescriptor.
 func NewBinaryArchiveDescriptor() *BinaryArchiveDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLBinaryArchiveDescriptor")), objc.RegisterName("new"))
 	return binaryArchiveDescriptorAdopt(_id)
 }
 
-// A URL to a Metal binary archive file.
-//
-// WithUrl sets url and returns the receiver so calls can be chained.
+// WithUrl a URL to a Metal binary archive file.
 func (x *BinaryArchiveDescriptor) WithUrl(url string) *BinaryArchiveDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
 	return x
 }
 
+// Url wraps the corresponding Objective-C method.
 func (x *BinaryArchiveDescriptor) Url() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
+// SetUrl wraps the corresponding Objective-C method.
 func (x *BinaryArchiveDescriptor) SetUrl(url string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
 }

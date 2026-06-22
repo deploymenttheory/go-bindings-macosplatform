@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that provides common data and methods for the different player objects.
-//
 // BasePlayer is an idiomatic wrapper over the Objective-C class GKBasePlayer.
+//
+// BasePlayer is an abstract base — you do not construct it directly. Construct one of [CloudPlayer], [Player] and pass it where a BasePlayer is accepted.
+//
+// A class that provides common data and methods for the different player objects.
 type BasePlayer struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func BasePlayerFromID(id objc.ID) *BasePlayer {
 	if id == 0 {
 		return nil
 	}
-	x := &BasePlayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BasePlayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func basePlayerAdopt(id objc.ID) *BasePlayer {
 	if id == 0 {
 		return nil
 	}
-	x := &BasePlayer{Handle: objref.Wrap(id)}
+	x := &BasePlayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +62,13 @@ func (x *BasePlayer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewBasePlayer creates a new BasePlayer.
-func NewBasePlayer() *BasePlayer {
-	_id := objc.Send[objc.ID](objc.ID(_class("GKBasePlayer")), objc.RegisterName("new"))
-	return basePlayerAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BasePlayer) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// PlayerID wraps the corresponding Objective-C method.
 func (x *BasePlayer) PlayerID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerID"))
 	if _r == 0 {
@@ -72,7 +77,7 @@ func (x *BasePlayer) PlayerID() string {
 	return purego.GoString(_r)
 }
 
-// This player's name representation as displayed in the Game Center in-game UI. Use this when you need to display the player's name. The display name may be very long, so be sure to use appropriate string truncation API when drawing.
+// DisplayName this player's name representation as displayed in the Game Center in-game UI. Use this when you need to display the player's name. The display name may be very long, so be sure to use appropriate string truncation API when drawing.
 func (x *BasePlayer) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
 	if _r == 0 {
@@ -89,3 +94,10 @@ type BasePlayerable interface {
 }
 
 var _ BasePlayerable = (*BasePlayer)(nil)
+
+// isBasePlayer marks BasePlayer — and, by embedding promotion, its
+// subclasses — as a member of the BasePlayer hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *BasePlayer) isBasePlayer() {}
+
+var _ BasePlayerProvider = (*BasePlayer)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of a texture.
-//
 // TextureReferenceType is an idiomatic wrapper over the Objective-C class MTLTextureReferenceType.
+//
+// It embeds [Type], promoting that type's methods.
+//
+// A description of a texture.
 type TextureReferenceType struct {
-	objref.Handle
+	Type
 }
 
 // TextureReferenceTypeFromID adopts an existing Objective-C object as a TextureReferenceType
@@ -25,7 +26,8 @@ func TextureReferenceTypeFromID(id objc.ID) *TextureReferenceType {
 	if id == 0 {
 		return nil
 	}
-	x := &TextureReferenceType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextureReferenceType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func textureReferenceTypeAdopt(id objc.ID) *TextureReferenceType {
 	if id == 0 {
 		return nil
 	}
-	x := &TextureReferenceType{Handle: objref.Wrap(id)}
+	x := &TextureReferenceType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *TextureReferenceType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextureReferenceType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextureReferenceType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewTextureReferenceType creates a new TextureReferenceType.
@@ -64,21 +52,25 @@ func NewTextureReferenceType() *TextureReferenceType {
 	return textureReferenceTypeAdopt(_id)
 }
 
+// TextureDataType wraps the corresponding Objective-C method.
 func (x *TextureReferenceType) TextureDataType() DataType {
 	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("textureDataType"))
 	return _r
 }
 
+// TextureType wraps the corresponding Objective-C method.
 func (x *TextureReferenceType) TextureType() TextureType {
 	_r := objc.Send[TextureType](objref.IDOf(x), objc.RegisterName("textureType"))
 	return _r
 }
 
+// Access wraps the corresponding Objective-C method.
 func (x *TextureReferenceType) Access() BindingAccess {
 	_r := objc.Send[BindingAccess](objref.IDOf(x), objc.RegisterName("access"))
 	return _r
 }
 
+// IsDepthTexture wraps the corresponding Objective-C method.
 func (x *TextureReferenceType) IsDepthTexture() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDepthTexture"))
 	return _r
@@ -94,3 +86,5 @@ type TextureReferenceTypeable interface {
 }
 
 var _ TextureReferenceTypeable = (*TextureReferenceType)(nil)
+
+var _ TypeProvider = (*TextureReferenceType)(nil)

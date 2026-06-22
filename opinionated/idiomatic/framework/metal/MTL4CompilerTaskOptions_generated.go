@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The configuration options that control the behavior of a compilation task for a Metal 4 compiler instance.
-//
 // MTL4CompilerTaskOptions is an idiomatic wrapper over the Objective-C class MTL4CompilerTaskOptions.
+//
+// The configuration options that control the behavior of a compilation task for a Metal 4 compiler instance.
 type MTL4CompilerTaskOptions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MTL4CompilerTaskOptionsFromID(id objc.ID) *MTL4CompilerTaskOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4CompilerTaskOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTL4CompilerTaskOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTL4CompilerTaskOptionsAdopt(id objc.ID) *MTL4CompilerTaskOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4CompilerTaskOptions{Handle: objref.Wrap(id)}
+	x := &MTL4CompilerTaskOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,25 @@ func (x *MTL4CompilerTaskOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTL4CompilerTaskOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTL4CompilerTaskOptions creates a new MTL4CompilerTaskOptions.
 func NewMTL4CompilerTaskOptions() *MTL4CompilerTaskOptions {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTL4CompilerTaskOptions")), objc.RegisterName("new"))
 	return mTL4CompilerTaskOptionsAdopt(_id)
 }
 
+// LookupArchives wraps the corresponding Objective-C method.
 func (x *MTL4CompilerTaskOptions) LookupArchives() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lookupArchives"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetLookupArchives wraps the corresponding Objective-C method.
 func (x *MTL4CompilerTaskOptions) SetLookupArchives(lookupArchives []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLookupArchives:"), purego.SliceToNSArray(lookupArchives, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }

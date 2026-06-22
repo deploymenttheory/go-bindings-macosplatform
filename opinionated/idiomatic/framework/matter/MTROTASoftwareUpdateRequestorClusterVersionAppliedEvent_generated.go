@@ -12,73 +12,111 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent is an idiomatic wrapper over the Objective-C class MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent.
-type MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent struct {
+// MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent is an idiomatic wrapper over the Objective-C class MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent.
+//
+// MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent is an abstract base — you do not construct it directly. Construct one of [MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent] and pass it where a MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent is accepted.
+type MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent struct {
 	objref.Handle
 }
 
-// MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventFromID adopts an existing Objective-C object as a MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent
+// MTROTASoftwareUpdateRequestorClusterVersionAppliedEventFromID adopts an existing Objective-C object as a MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent
 // (nil for 0), retaining it and registering a release finalizer.
-func MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventFromID(id objc.ID) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
+func MTROTASoftwareUpdateRequestorClusterVersionAppliedEventFromID(id objc.ID) *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
 
-// mTROtaSoftwareUpdateRequestorClusterVersionAppliedEventAdopt wraps an Objective-C object that this code just created as a
-// MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent (nil for 0). The caller already owns the object's reference,
+// mTROTASoftwareUpdateRequestorClusterVersionAppliedEventAdopt wraps an Objective-C object that this code just created as a
+// MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent (nil for 0). The caller already owns the object's reference,
 // so this does not add another; it only arranges for the object to be released
 // once Go stops using it. Constructors use it.
-func mTROtaSoftwareUpdateRequestorClusterVersionAppliedEventAdopt(id objc.ID) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
+func mTROTASoftwareUpdateRequestorClusterVersionAppliedEventAdopt(id objc.ID) *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent{Handle: objref.Wrap(id)}
+	x := &MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
 // Description returns the object's -description text.
-func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) Description() string {
+func (x *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) Description() string {
 	return rt.Description(objref.IDOf(x))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) IsEqual(other obj.Object) bool {
+func (x *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) IsEqual(other obj.Object) bool {
 	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) IsKind(className string) bool {
+func (x *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent creates a new MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent.
-func NewMTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent() *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent")), objc.RegisterName("new"))
-	return mTROtaSoftwareUpdateRequestorClusterVersionAppliedEventAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithSoftwareVersion sets softwareVersion and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
+// WithSoftwareVersion sets the property and returns the receiver so calls can be chained.
+func (x *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return x
 }
 
-// WithProductID sets productID and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) WithProductID(productID obj.Object) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
+// WithProductID sets the property and returns the receiver so calls can be chained.
+func (x *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) WithProductID(productID obj.Object) *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductID:"), objref.IDOf(productID))
 	return x
 }
 
-// MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent], for mocking and DI.
-type MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventable interface {
-	obj.Object
-	WithSoftwareVersion(softwareVersion obj.Object) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent
-	WithProductID(productID obj.Object) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent
+// SoftwareVersion wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) SoftwareVersion() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("softwareVersion"))
+	return obj.Wrap(_r)
 }
 
-var _ MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventable = (*MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent)(nil)
+// SetSoftwareVersion wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) SetSoftwareVersion(softwareVersion obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
+}
+
+// ProductID wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) ProductID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productID"))
+	return obj.Wrap(_r)
+}
+
+// SetProductID wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) SetProductID(productID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductID:"), objref.IDOf(productID))
+}
+
+// MTROTASoftwareUpdateRequestorClusterVersionAppliedEventable is the interface implemented by [MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent], for mocking and DI.
+type MTROTASoftwareUpdateRequestorClusterVersionAppliedEventable interface {
+	obj.Object
+	WithSoftwareVersion(softwareVersion obj.Object) *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent
+	WithProductID(productID obj.Object) *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent
+	SoftwareVersion() obj.Object
+	SetSoftwareVersion(softwareVersion obj.Object)
+	ProductID() obj.Object
+	SetProductID(productID obj.Object)
+}
+
+var _ MTROTASoftwareUpdateRequestorClusterVersionAppliedEventable = (*MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent)(nil)
+
+// isMTROTASoftwareUpdateRequestorClusterVersionAppliedEvent marks MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent — and, by embedding promotion, its
+// subclasses — as a member of the MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) isMTROTASoftwareUpdateRequestorClusterVersionAppliedEvent() {
+}
+
+var _ MTROTASoftwareUpdateRequestorClusterVersionAppliedEventProvider = (*MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent)(nil)

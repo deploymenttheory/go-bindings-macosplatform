@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that fetches data at the locations you specify.
-//
 // GatherLayer is an idiomatic wrapper over the Objective-C class MLCGatherLayer.
+//
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that fetches data at the locations you specify.
 type GatherLayer struct {
-	objref.Handle
+	Layer
 }
 
 // GatherLayerFromID adopts an existing Objective-C object as a GatherLayer
@@ -25,7 +26,8 @@ func GatherLayerFromID(id objc.ID) *GatherLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &GatherLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GatherLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func gatherLayerAdopt(id objc.ID) *GatherLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &GatherLayer{Handle: objref.Wrap(id)}
+	x := &GatherLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GatherLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GatherLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GatherLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGatherLayer creates a new GatherLayer.
@@ -64,23 +52,19 @@ func NewGatherLayer() *GatherLayer {
 	return gatherLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string that helps identify this layer.
 func (x *GatherLayer) WithLabel(label string) *GatherLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *GatherLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *GatherLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// The dimension along which to index
+// Dimension the dimension along which to index
 func (x *GatherLayer) Dimension() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dimension"))
 	return _r
@@ -95,3 +79,5 @@ type GatherLayerable interface {
 }
 
 var _ GatherLayerable = (*GatherLayer)(nil)
+
+var _ LayerProvider = (*GatherLayer)(nil)

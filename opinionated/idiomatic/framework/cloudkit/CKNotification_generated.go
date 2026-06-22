@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract base class for CloudKit notifications.
-//
 // Notification is an idiomatic wrapper over the Objective-C class CKNotification.
+//
+// Notification is an abstract base — you do not construct it directly. Construct one of [DatabaseNotification], [QueryNotification], [RecordZoneNotification] and pass it where a Notification is accepted.
+//
+// The abstract base class for CloudKit notifications.
 type Notification struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func NotificationFromID(id objc.ID) *Notification {
 	if id == 0 {
 		return nil
 	}
-	x := &Notification{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Notification{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func notificationAdopt(id objc.ID) *Notification {
 	if id == 0 {
 		return nil
 	}
-	x := &Notification{Handle: objref.Wrap(id)}
+	x := &Notification{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +62,25 @@ func (x *Notification) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewNotification creates a new Notification.
-func NewNotification() *Notification {
-	_id := objc.Send[objc.ID](objc.ID(_class("CKNotification")), objc.RegisterName("new"))
-	return notificationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Notification) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The type of event that generates the notification. Different notification types correspond to different subclasses of “CKNotification“, so you can use the value in this property to determine how to handle the notification data.
+// NotificationType the type of event that generates the notification. Different notification types correspond to different subclasses of “CKNotification“, so you can use the value in this property to determine how to handle the notification data.
 func (x *Notification) NotificationType() NotificationType {
 	_r := objc.Send[NotificationType](objref.IDOf(x), objc.RegisterName("notificationType"))
 	return _r
 }
 
-// The notification's ID. Use this property to differentiate notifications.
+// NotificationID the notification's ID. Use this property to differentiate notifications.
 func (x *Notification) NotificationID() *NotificationID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notificationID"))
 	return NotificationIDFromID(_r)
 }
 
-// The ID of the container with the content that triggers the notification. Use this property to determine the location of the changed content.
+// ContainerIdentifier the ID of the container with the content that triggers the notification. Use this property to determine the location of the changed content.
 func (x *Notification) ContainerIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containerIdentifier"))
 	if _r == 0 {
@@ -85,25 +89,25 @@ func (x *Notification) ContainerIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// The ID of the user record that creates the subscription that generates the push notification. On a system that supports multiple users, such as tvOS, use this identifier to check whether the pending content is for the current user. If your app always fetches data from CloudKit on launch, you may improve efficiency by disregarding notifications for other users. For more information about supporting a multiuser environment, see <doc://com.apple.documentation/documentation/tvservices/personalizing-your-app-for-each-user-on-apple-tv>.
+// SubscriptionOwnerUserRecordID the ID of the user record that creates the subscription that generates the push notification. On a system that supports multiple users, such as tvOS, use this identifier to check whether the pending content is for the current user. If your app always fetches data from CloudKit on launch, you may improve efficiency by disregarding notifications for other users. For more information about supporting a multiuser environment, see <doc://com.apple.documentation/documentation/tvservices/personalizing-your-app-for-each-user-on-apple-tv>.
 func (x *Notification) SubscriptionOwnerUserRecordID() *RecordID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptionOwnerUserRecordID"))
 	return RecordIDFromID(_r)
 }
 
-// A Boolean value that indicates whether the system removes some push notification content before delivery. The server may truncate the payload data of a push notification if the size of that data exceeds the allowed maximum. For notifications you create using a payload dictionary, the value of this property is <doc://com.apple.documentation/documentation/swift/true> if the payload data doesn't contain all information regarding the change. The value is <doc://com.apple.documentation/documentation/swift/false> if the payload data is complete. For notifications you fetch from the database using a `CKFetchNotificationChangesOperation` operation, this property's value is always <doc://com.apple.documentation/documentation/swift/true>. When CloudKit must remove payload data, it removes it in a specific order. This class's properties are among the last that CloudKit removes because they define information about how to deliver the push notification. The following list shows the properties that CloudKit removes, and the order for removing them: 1. “CKNotification/containerIdentifier“ 2. Keys that subclasses of `CKNotification` define. 3. “CKNotification/soundName“ 4. “CKNotification/alertLaunchImage“ 5. “CKNotification/alertActionLocalizationKey“ 6. “CKNotification/alertBody“ 7. “CKNotification/alertLocalizationArgs“ 8. “CKNotification/alertLocalizationKey“ 9. “CKNotification/badge“ 10. “CKNotification/notificationID“
+// IsPruned a Boolean value that indicates whether the system removes some push notification content before delivery. The server may truncate the payload data of a push notification if the size of that data exceeds the allowed maximum. For notifications you create using a payload dictionary, the value of this property is <doc://com.apple.documentation/documentation/swift/true> if the payload data doesn't contain all information regarding the change. The value is <doc://com.apple.documentation/documentation/swift/false> if the payload data is complete. For notifications you fetch from the database using a `CKFetchNotificationChangesOperation` operation, this property's value is always <doc://com.apple.documentation/documentation/swift/true>. When CloudKit must remove payload data, it removes it in a specific order. This class's properties are among the last that CloudKit removes because they define information about how to deliver the push notification. The following list shows the properties that CloudKit removes, and the order for removing them: 1. “CKNotification/containerIdentifier“ 2. Keys that subclasses of `CKNotification` define. 3. “CKNotification/soundName“ 4. “CKNotification/alertLaunchImage“ 5. “CKNotification/alertActionLocalizationKey“ 6. “CKNotification/alertBody“ 7. “CKNotification/alertLocalizationArgs“ 8. “CKNotification/alertLocalizationKey“ 9. “CKNotification/badge“ 10. “CKNotification/notificationID“
 func (x *Notification) IsPruned() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPruned"))
 	return _r
 }
 
-// The ID of the subscription that triggers the notification.
+// SubscriptionID the ID of the subscription that triggers the notification.
 func (x *Notification) SubscriptionID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptionID"))
 	return obj.Wrap(_r)
 }
 
-// The value that the app icon's badge displays.
+// Badge the value that the app icon's badge displays.
 func (x *Notification) Badge() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("badge"))
 	return obj.Wrap(_r)
@@ -122,3 +126,10 @@ type Notificationable interface {
 }
 
 var _ Notificationable = (*Notification)(nil)
+
+// isNotification marks Notification — and, by embedding promotion, its
+// subclasses — as a member of the Notification hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Notification) isNotification() {}
+
+var _ NotificationProvider = (*Notification)(nil)

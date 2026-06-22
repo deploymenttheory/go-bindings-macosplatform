@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A notification dispatch mechanism that enables the broadcast of notifications across task boundaries.
-//
 // DistributedNotificationCenter is an idiomatic wrapper over the Objective-C class NSDistributedNotificationCenter.
+//
+// It embeds [NotificationCenter], promoting that type's methods.
+//
+// A notification dispatch mechanism that enables the broadcast of notifications across task boundaries.
 type DistributedNotificationCenter struct {
-	objref.Handle
+	NotificationCenter
 }
 
 // DistributedNotificationCenterFromID adopts an existing Objective-C object as a DistributedNotificationCenter
@@ -25,7 +26,8 @@ func DistributedNotificationCenterFromID(id objc.ID) *DistributedNotificationCen
 	if id == 0 {
 		return nil
 	}
-	x := &DistributedNotificationCenter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DistributedNotificationCenter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func distributedNotificationCenterAdopt(id objc.ID) *DistributedNotificationCent
 	if id == 0 {
 		return nil
 	}
-	x := &DistributedNotificationCenter{Handle: objref.Wrap(id)}
+	x := &DistributedNotificationCenter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DistributedNotificationCenter) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DistributedNotificationCenter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DistributedNotificationCenter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDistributedNotificationCenter creates a new DistributedNotificationCenter.
@@ -64,31 +52,35 @@ func NewDistributedNotificationCenter() *DistributedNotificationCenter {
 	return distributedNotificationCenterAdopt(_id)
 }
 
-// WithSuspended sets suspended and returns the receiver so calls can be chained.
+// WithSuspended sets the property and returns the receiver so calls can be chained.
 func (x *DistributedNotificationCenter) WithSuspended(suspended bool) *DistributedNotificationCenter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspended:"), suspended)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *DistributedNotificationCenter) WithScriptingProperties(scriptingProperties obj.Object) *DistributedNotificationCenter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// PostNotificationNameObjectUserInfoDeliverImmediately wraps the corresponding Objective-C method.
 func (x *DistributedNotificationCenter) PostNotificationNameObjectUserInfoDeliverImmediately(name *String, object string, userInfo obj.Object, deliverImmediately bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postNotificationName:object:userInfo:deliverImmediately:"), objref.IDOf(name), purego.NSString(object), objref.IDOf(userInfo), deliverImmediately)
 }
 
+// PostNotificationNameObjectUserInfoOptions wraps the corresponding Objective-C method.
 func (x *DistributedNotificationCenter) PostNotificationNameObjectUserInfoOptions(name *String, object string, userInfo obj.Object, options DistributedNotificationOptions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postNotificationName:object:userInfo:options:"), objref.IDOf(name), purego.NSString(object), objref.IDOf(userInfo), options)
 }
 
+// Suspended wraps the corresponding Objective-C method.
 func (x *DistributedNotificationCenter) Suspended() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("suspended"))
 	return _r
 }
 
+// SetSuspended wraps the corresponding Objective-C method.
 func (x *DistributedNotificationCenter) SetSuspended(suspended bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspended:"), suspended)
 }
@@ -105,3 +97,5 @@ type DistributedNotificationCenterable interface {
 }
 
 var _ DistributedNotificationCenterable = (*DistributedNotificationCenter)(nil)
+
+var _ NotificationCenterProvider = (*DistributedNotificationCenter)(nil)

@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container that your extension fills to provide credentials through the QuickType bar.
-//
 // CredentialIdentityStore is an idiomatic wrapper over the Objective-C class ASCredentialIdentityStore.
+//
+// A container that your extension fills to provide credentials through the QuickType bar.
 type CredentialIdentityStore struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func CredentialIdentityStoreFromID(id objc.ID) *CredentialIdentityStore {
 	if id == 0 {
 		return nil
 	}
-	x := &CredentialIdentityStore{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CredentialIdentityStore{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func credentialIdentityStoreAdopt(id objc.ID) *CredentialIdentityStore {
 	if id == 0 {
 		return nil
 	}
-	x := &CredentialIdentityStore{Handle: objref.Wrap(id)}
+	x := &CredentialIdentityStore{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,16 +61,22 @@ func (x *CredentialIdentityStore) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CredentialIdentityStore) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCredentialIdentityStore creates a new CredentialIdentityStore.
 func NewCredentialIdentityStore() *CredentialIdentityStore {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASCredentialIdentityStore")), objc.RegisterName("new"))
 	return credentialIdentityStoreAdopt(_id)
 }
 
-// Gets the state of the credential identity store.
+// GetCredentialIdentityStoreStateWithCompletion gets the state of the credential identity store.
 //
 // GetCredentialIdentityStoreStateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *CredentialIdentityStore) GetCredentialIdentityStoreStateWithCompletion(ctx context.Context) (*CredentialIdentityStoreState, error) {
+func (x *CredentialIdentityStore) GetCredentialIdentityStoreStateWithCompletion(ctx context.Context) (result *CredentialIdentityStoreState, err error) {
 	type _result struct {
 		val *CredentialIdentityStoreState
 		err error
@@ -89,10 +97,10 @@ func (x *CredentialIdentityStore) GetCredentialIdentityStoreStateWithCompletion(
 	}
 }
 
-// Retrieves an array of all previously saved credential identities in the store for your extension.
+// GetCredentialIdentitiesForServiceCredentialIdentityTypes retrieves an array of all previously saved credential identities in the store for your extension.
 //
 // GetCredentialIdentitiesForServiceCredentialIdentityTypes blocks until the operation completes or ctx is cancelled.
-func (x *CredentialIdentityStore) GetCredentialIdentitiesForServiceCredentialIdentityTypes(ctx context.Context, serviceIdentifier *CredentialServiceIdentifier, credentialIdentityTypes CredentialIdentityTypes) (obj.Object, error) {
+func (x *CredentialIdentityStore) GetCredentialIdentitiesForServiceCredentialIdentityTypes(ctx context.Context, serviceIdentifier *CredentialServiceIdentifier, credentialIdentityTypes CredentialIdentityTypes) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error

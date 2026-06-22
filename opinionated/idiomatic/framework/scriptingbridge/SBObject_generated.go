@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The SBObject class declares methods that can be invoked on any object in a scriptable application. It defines methods for getting elements and properties of an object, as well as setting a given object to a new value.
-//
 // Object is an idiomatic wrapper over the Objective-C class SBObject.
+//
+// Object is an abstract base — you do not construct it directly. Construct one of [Application] and pass it where a Object is accepted.
+//
+// The SBObject class declares methods that can be invoked on any object in a scriptable application. It defines methods for getting elements and properties of an object, as well as setting a given object to a new value.
 type Object struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ObjectFromID(id objc.ID) *Object {
 	if id == 0 {
 		return nil
 	}
-	x := &Object{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Object{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func objectAdopt(id objc.ID) *Object {
 	if id == 0 {
 		return nil
 	}
-	x := &Object{Handle: objref.Wrap(id)}
+	x := &Object{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,58 +62,52 @@ func (x *Object) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewObject creates a new Object.
-func NewObject() *Object {
-	_id := objc.Send[objc.ID](objc.ID(_class("SBObject")), objc.RegisterName("new"))
-	return objectAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Object) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns an instance of an SBObject subclass initialized with the specified properties.
-//
-// NewObjectWithProperties creates a new Object.
+// NewObjectWithProperties returns an instance of an SBObject subclass initialized with the specified properties.
 func NewObjectWithProperties(properties obj.Object) *Object {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SBObject")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProperties:"), objref.IDOf(properties))
 	return objectAdopt(_id)
 }
 
-// Returns an instance of an SBObject subclass initialized with the given data.
-//
-// NewObjectWithData creates a new Object.
+// NewObjectWithData returns an instance of an SBObject subclass initialized with the given data.
 func NewObjectWithData(data obj.Object) *Object {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SBObject")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
 	return objectAdopt(_id)
 }
 
-// Returns an instance of an SBObject subclass initialized with the specified properties and data and added to the designated element array.
-//
-// NewObjectWithElementCodePropertiesData creates a new Object.
+// NewObjectWithElementCodePropertiesData returns an instance of an SBObject subclass initialized with the specified properties and data and added to the designated element array.
 func NewObjectWithElementCodePropertiesData(code int, properties obj.Object, data obj.Object) *Object {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SBObject")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElementCode:properties:data:"), code, objref.IDOf(properties), objref.IDOf(data))
 	return objectAdopt(_id)
 }
 
-// Forces evaluation of the receiver, causing the real object to be returned immediately.
+// Get forces evaluation of the receiver, causing the real object to be returned immediately.
 func (x *Object) Get() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("get"))
 	return obj.Wrap(_r)
 }
 
-// Returns an object representing the specified property of the receiver.
+// PropertyWithCode returns an object representing the specified property of the receiver.
 func (x *Object) PropertyWithCode(code int) *Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyWithCode:"), code)
 	return ObjectFromID(_r)
 }
 
-// Returns an array containing every child of the receiver with the given class-type code.
+// ElementArrayWithCode returns an array containing every child of the receiver with the given class-type code.
 func (x *Object) ElementArrayWithCode(code int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementArrayWithCode:"), code)
 	return obj.Wrap(_r)
 }
 
-// Sets the receiver to a specified value.
+// SetTo sets the receiver to a specified value.
 func (x *Object) SetTo(value obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTo:"), objref.IDOf(value))
 }
@@ -124,3 +122,10 @@ type Objectable interface {
 }
 
 var _ Objectable = (*Object)(nil)
+
+// isObject marks Object — and, by embedding promotion, its
+// subclasses — as a member of the Object hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Object) isObject() {}
+
+var _ ObjectProvider = (*Object)(nil)

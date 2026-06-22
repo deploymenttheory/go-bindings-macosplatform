@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A data object for an emoji-like image that can appear in attributed text.
-//
 // AdaptiveImageGlyph is an idiomatic wrapper over the Objective-C class NSAdaptiveImageGlyph.
+//
+// A data object for an emoji-like image that can appear in attributed text.
 type AdaptiveImageGlyph struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AdaptiveImageGlyphFromID(id objc.ID) *AdaptiveImageGlyph {
 	if id == 0 {
 		return nil
 	}
-	x := &AdaptiveImageGlyph{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AdaptiveImageGlyph{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func adaptiveImageGlyphAdopt(id objc.ID) *AdaptiveImageGlyph {
 	if id == 0 {
 		return nil
 	}
-	x := &AdaptiveImageGlyph{Handle: objref.Wrap(id)}
+	x := &AdaptiveImageGlyph{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,9 +60,13 @@ func (x *AdaptiveImageGlyph) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Create an adaptive image glyph from the previously saved data.
-//
-// NewAdaptiveImageGlyphWithImageContent creates a new AdaptiveImageGlyph.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AdaptiveImageGlyph) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAdaptiveImageGlyphWithImageContent create an adaptive image glyph from the previously saved data.
 func NewAdaptiveImageGlyphWithImageContent(imageContent obj.Object) *AdaptiveImageGlyph {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAdaptiveImageGlyph")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImageContent:"), objref.IDOf(imageContent))
@@ -74,11 +80,13 @@ func NewAdaptiveImageGlyphWithCoder(coder obj.Object) *AdaptiveImageGlyph {
 	return adaptiveImageGlyphAdopt(_id)
 }
 
+// ImageContent wraps the corresponding Objective-C method.
 func (x *AdaptiveImageGlyph) ImageContent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageContent"))
 	return obj.Wrap(_r)
 }
 
+// ContentIdentifier wraps the corresponding Objective-C method.
 func (x *AdaptiveImageGlyph) ContentIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentIdentifier"))
 	if _r == 0 {
@@ -87,6 +95,7 @@ func (x *AdaptiveImageGlyph) ContentIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// ContentDescription wraps the corresponding Objective-C method.
 func (x *AdaptiveImageGlyph) ContentDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentDescription"))
 	if _r == 0 {

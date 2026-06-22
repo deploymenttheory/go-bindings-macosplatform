@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An GKAchievementViewController object provides a standard user interface to display achievement progress for the local player. If the GKGameCenterViewController class is available, you should use it instead.
-//
 // AchievementViewController is an idiomatic wrapper over the Objective-C class GKAchievementViewController.
+//
+// It embeds [GameCenterViewController], promoting that type's methods.
+//
+// An GKAchievementViewController object provides a standard user interface to display achievement progress for the local player. If the GKGameCenterViewController class is available, you should use it instead.
 type AchievementViewController struct {
-	objref.Handle
+	GameCenterViewController
 }
 
 // AchievementViewControllerFromID adopts an existing Objective-C object as a AchievementViewController
@@ -25,7 +26,8 @@ func AchievementViewControllerFromID(id objc.ID) *AchievementViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &AchievementViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AchievementViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func achievementViewControllerAdopt(id objc.ID) *AchievementViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &AchievementViewController{Handle: objref.Wrap(id)}
+	x := &AchievementViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AchievementViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AchievementViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AchievementViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAchievementViewController creates a new AchievementViewController.
@@ -64,25 +52,25 @@ func NewAchievementViewController() *AchievementViewController {
 	return achievementViewControllerAdopt(_id)
 }
 
-// WithViewState sets viewState and returns the receiver so calls can be chained.
+// WithViewState sets the property and returns the receiver so calls can be chained.
 func (x *AchievementViewController) WithViewState(viewState GameCenterViewControllerState) *AchievementViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewState:"), viewState)
 	return x
 }
 
-// WithLeaderboardTimeScope sets leaderboardTimeScope and returns the receiver so calls can be chained.
+// WithLeaderboardTimeScope sets the property and returns the receiver so calls can be chained.
 func (x *AchievementViewController) WithLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope) *AchievementViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardTimeScope:"), leaderboardTimeScope)
 	return x
 }
 
-// WithLeaderboardIdentifier sets leaderboardIdentifier and returns the receiver so calls can be chained.
+// WithLeaderboardIdentifier sets the property and returns the receiver so calls can be chained.
 func (x *AchievementViewController) WithLeaderboardIdentifier(leaderboardIdentifier string) *AchievementViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
 	return x
 }
 
-// WithLeaderboardCategory sets leaderboardCategory and returns the receiver so calls can be chained.
+// WithLeaderboardCategory sets the property and returns the receiver so calls can be chained.
 func (x *AchievementViewController) WithLeaderboardCategory(leaderboardCategory string) *AchievementViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardCategory:"), purego.NSString(leaderboardCategory))
 	return x
@@ -98,3 +86,5 @@ type AchievementViewControllerable interface {
 }
 
 var _ AchievementViewControllerable = (*AchievementViewController)(nil)
+
+var _ GameCenterViewControllerProvider = (*AchievementViewController)(nil)

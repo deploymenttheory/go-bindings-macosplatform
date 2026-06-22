@@ -11,29 +11,35 @@ import (
 // AttributeProvider is accepted wherever a CBAttribute (or one of its subclasses) is expected.
 type AttributeProvider interface {
 	objref.Object
+	isAttribute()
 }
 
 // CharacteristicProvider is accepted wherever a CBCharacteristic (or one of its subclasses) is expected.
 type CharacteristicProvider interface {
 	objref.Object
+	isCharacteristic()
 }
 
 // DescriptorProvider is accepted wherever a CBDescriptor (or one of its subclasses) is expected.
 type DescriptorProvider interface {
 	objref.Object
+	isDescriptor()
 }
 
 // ManagerProvider is accepted wherever a CBManager (or one of its subclasses) is expected.
 type ManagerProvider interface {
 	objref.Object
+	isManager()
 }
 
 // PeerProvider is accepted wherever a CBPeer (or one of its subclasses) is expected.
 type PeerProvider interface {
 	objref.Object
+	isPeer()
 }
 
 // ServiceProvider is accepted wherever a CBService (or one of its subclasses) is expected.
 type ServiceProvider interface {
 	objref.Object
+	isService()
 }

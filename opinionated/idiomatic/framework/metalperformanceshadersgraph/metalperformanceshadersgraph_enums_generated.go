@@ -23,6 +23,8 @@ const (
 	GraphDeploymentPlatformVisionOS GraphDeploymentPlatform = 3
 )
 
+// String returns the GraphDeploymentPlatform constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GraphDeploymentPlatform) String() string {
 	switch e {
 	case GraphDeploymentPlatformMacOS:
@@ -46,6 +48,8 @@ const (
 	GraphDeviceTypeMetal GraphDeviceType = 0
 )
 
+// String returns the GraphDeviceType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GraphDeviceType) String() string {
 	switch e {
 	case GraphDeviceTypeMetal:
@@ -67,6 +71,8 @@ const (
 	GraphFFTScalingModeUnitary GraphFFTScalingMode = 2
 )
 
+// String returns the GraphFFTScalingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GraphFFTScalingMode) String() string {
 	switch e {
 	case GraphFFTScalingModeNone:
@@ -94,6 +100,8 @@ const (
 	GraphLossReductionTypeMean GraphLossReductionType = 2
 )
 
+// String returns the GraphLossReductionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GraphLossReductionType) String() string {
 	switch e {
 	case GraphLossReductionTypeNone:
@@ -117,6 +125,8 @@ const (
 	GraphNonMaximumSuppressionCoordinateModeCentersWidthFirst  GraphNonMaximumSuppressionCoordinateMode = 3
 )
 
+// String returns the GraphNonMaximumSuppressionCoordinateMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GraphNonMaximumSuppressionCoordinateMode) String() string {
 	switch e {
 	case GraphNonMaximumSuppressionCoordinateModeCornersHeightFirst:
@@ -142,6 +152,8 @@ const (
 	GraphOptimizationLevel1 GraphOptimization = 1
 )
 
+// String returns the GraphOptimization constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GraphOptimization) String() string {
 	switch e {
 	case GraphOptimizationLevel0:
@@ -163,6 +175,8 @@ const (
 	GraphOptimizationProfilePowerEfficiency GraphOptimizationProfile = 1
 )
 
+// String returns the GraphOptimizationProfile constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GraphOptimizationProfile) String() string {
 	switch e {
 	case GraphOptimizationProfilePerformance:
@@ -188,6 +202,8 @@ const (
 	GraphOptionsDefault GraphOptions = 1
 )
 
+// String returns the GraphOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GraphOptions) String() string {
 	switch e {
 	case GraphOptionsNone:
@@ -221,6 +237,8 @@ const (
 	GraphPaddingModeAntiPeriodic GraphPaddingMode = 6
 )
 
+// String returns the GraphPaddingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GraphPaddingMode) String() string {
 	switch e {
 	case GraphPaddingModeConstant:
@@ -258,6 +276,8 @@ const (
 	GraphPaddingStyleONNX_SAME_LOWER GraphPaddingStyle = 4
 )
 
+// String returns the GraphPaddingStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GraphPaddingStyle) String() string {
 	switch e {
 	case GraphPaddingStyleExplicit:
@@ -299,6 +319,8 @@ const (
 	GraphPoolingReturnIndicesLocalFlatten4D GraphPoolingReturnIndicesMode = 8
 )
 
+// String returns the GraphPoolingReturnIndicesMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GraphPoolingReturnIndicesMode) String() string {
 	switch e {
 	case GraphPoolingReturnIndicesNone:
@@ -340,6 +362,8 @@ const (
 	GraphRNNActivationHardSigmoid GraphRNNActivation = 4
 )
 
+// String returns the GraphRNNActivation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GraphRNNActivation) String() string {
 	switch e {
 	case GraphRNNActivationNone:
@@ -369,6 +393,8 @@ const (
 	GraphRandomDistributionTruncatedNormal GraphRandomDistribution = 2
 )
 
+// String returns the GraphRandomDistribution constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GraphRandomDistribution) String() string {
 	switch e {
 	case GraphRandomDistributionUniform:
@@ -392,6 +418,8 @@ const (
 	GraphRandomNormalSamplingBoxMuller GraphRandomNormalSamplingMethod = 1
 )
 
+// String returns the GraphRandomNormalSamplingMethod constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GraphRandomNormalSamplingMethod) String() string {
 	switch e {
 	case GraphRandomNormalSamplingInvCDF:
@@ -420,6 +448,8 @@ const (
 	GraphReducedPrecisionFastMathDefault GraphReducedPrecisionFastMath = 0
 )
 
+// String returns the GraphReducedPrecisionFastMath constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GraphReducedPrecisionFastMath) String() string {
 	var parts []string
 	if e&GraphReducedPrecisionFastMathAllowFP16Conv2DWinogradTransformIntermediate != 0 {
@@ -455,6 +485,8 @@ const (
 	GraphReductionModeArgumentMax GraphReductionMode = 5
 )
 
+// String returns the GraphReductionMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GraphReductionMode) String() string {
 	switch e {
 	case GraphReductionModeMin:
@@ -484,6 +516,8 @@ const (
 	GraphResizeBilinear GraphResizeMode = 1
 )
 
+// String returns the GraphResizeMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GraphResizeMode) String() string {
 	switch e {
 	case GraphResizeNearest:
@@ -513,6 +547,8 @@ const (
 	GraphResizeNearestRoundingModeRoundToOdd GraphResizeNearestRoundingMode = 5
 )
 
+// String returns the GraphResizeNearestRoundingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GraphResizeNearestRoundingMode) String() string {
 	switch e {
 	case GraphResizeNearestRoundingModeRoundPreferCeil:
@@ -552,6 +588,8 @@ const (
 	GraphScatterModeSet GraphScatterMode = 6
 )
 
+// String returns the GraphScatterMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GraphScatterMode) String() string {
 	switch e {
 	case GraphScatterModeAdd:
@@ -585,6 +623,8 @@ const (
 	GraphSparseStorageCSR GraphSparseStorageType = 2
 )
 
+// String returns the GraphSparseStorageType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GraphSparseStorageType) String() string {
 	switch e {
 	case GraphSparseStorageCOO:
@@ -626,6 +666,8 @@ const (
 	GraphTensorNamedDataLayoutDHWIO GraphTensorNamedDataLayout = 10
 )
 
+// String returns the GraphTensorNamedDataLayout constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GraphTensorNamedDataLayout) String() string {
 	switch e {
 	case GraphTensorNamedDataLayoutNCHW:

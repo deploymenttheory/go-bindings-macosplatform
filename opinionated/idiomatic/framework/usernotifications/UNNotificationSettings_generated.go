@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The object for managing notification-related settings and the authorization status of your app.
-//
 // NotificationSettings is an idiomatic wrapper over the Objective-C class UNNotificationSettings.
+//
+// The object for managing notification-related settings and the authorization status of your app.
 type NotificationSettings struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NotificationSettingsFromID(id objc.ID) *NotificationSettings {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationSettings{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NotificationSettings{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func notificationSettingsAdopt(id objc.ID) *NotificationSettings {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationSettings{Handle: objref.Wrap(id)}
+	x := &NotificationSettings{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,67 +60,85 @@ func (x *NotificationSettings) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationSettings) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNotificationSettings creates a new NotificationSettings.
 func NewNotificationSettings() *NotificationSettings {
 	_id := objc.Send[objc.ID](objc.ID(_class("UNNotificationSettings")), objc.RegisterName("new"))
 	return notificationSettingsAdopt(_id)
 }
 
+// AuthorizationStatus wraps the corresponding Objective-C method.
 func (x *NotificationSettings) AuthorizationStatus() AuthorizationStatus {
 	_r := objc.Send[AuthorizationStatus](objref.IDOf(x), objc.RegisterName("authorizationStatus"))
 	return _r
 }
 
+// SoundSetting wraps the corresponding Objective-C method.
 func (x *NotificationSettings) SoundSetting() NotificationSetting {
 	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("soundSetting"))
 	return _r
 }
 
+// BadgeSetting wraps the corresponding Objective-C method.
 func (x *NotificationSettings) BadgeSetting() NotificationSetting {
 	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("badgeSetting"))
 	return _r
 }
 
+// AlertSetting wraps the corresponding Objective-C method.
 func (x *NotificationSettings) AlertSetting() NotificationSetting {
 	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("alertSetting"))
 	return _r
 }
 
+// NotificationCenterSetting wraps the corresponding Objective-C method.
 func (x *NotificationSettings) NotificationCenterSetting() NotificationSetting {
 	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("notificationCenterSetting"))
 	return _r
 }
 
+// LockScreenSetting wraps the corresponding Objective-C method.
 func (x *NotificationSettings) LockScreenSetting() NotificationSetting {
 	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("lockScreenSetting"))
 	return _r
 }
 
+// ShowPreviewsSetting wraps the corresponding Objective-C method.
 func (x *NotificationSettings) ShowPreviewsSetting() ShowPreviewsSetting {
 	_r := objc.Send[ShowPreviewsSetting](objref.IDOf(x), objc.RegisterName("showPreviewsSetting"))
 	return _r
 }
 
+// CriticalAlertSetting wraps the corresponding Objective-C method.
 func (x *NotificationSettings) CriticalAlertSetting() NotificationSetting {
 	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("criticalAlertSetting"))
 	return _r
 }
 
+// ProvidesAppNotificationSettings wraps the corresponding Objective-C method.
 func (x *NotificationSettings) ProvidesAppNotificationSettings() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("providesAppNotificationSettings"))
 	return _r
 }
 
+// TimeSensitiveSetting wraps the corresponding Objective-C method.
 func (x *NotificationSettings) TimeSensitiveSetting() NotificationSetting {
 	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("timeSensitiveSetting"))
 	return _r
 }
 
+// ScheduledDeliverySetting wraps the corresponding Objective-C method.
 func (x *NotificationSettings) ScheduledDeliverySetting() NotificationSetting {
 	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("scheduledDeliverySetting"))
 	return _r
 }
 
+// DirectMessagesSetting wraps the corresponding Objective-C method.
 func (x *NotificationSettings) DirectMessagesSetting() NotificationSetting {
 	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("directMessagesSetting"))
 	return _r

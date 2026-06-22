@@ -9,17 +9,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// The NSErrorDomain for general PHASE errors
 // PHASEErrorDomain returns the string constant PHASEErrorDomain, for use as a dictionary key or argument.
 func PHASEErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("PHASEErrorDomain"))) }
 
-// The NSErrorDomain for PHASE sound event errors.
 // PHASESoundEventErrorDomain returns the string constant PHASESoundEventErrorDomain, for use as a dictionary key or argument.
 func PHASESoundEventErrorDomain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("PHASESoundEventErrorDomain")))
 }
 
-// The NSErrorDomain for PHASE Asset errors
 // PHASEAssetErrorDomain returns the string constant PHASEAssetErrorDomain, for use as a dictionary key or argument.
 func PHASEAssetErrorDomain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("PHASEAssetErrorDomain")))

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object containing seat information associated with a reservation.
-//
 // Seat is an idiomatic wrapper over the Objective-C class INSeat.
+//
+// An object containing seat information associated with a reservation.
 type Seat struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SeatFromID(id objc.ID) *Seat {
 	if id == 0 {
 		return nil
 	}
-	x := &Seat{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Seat{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func seatAdopt(id objc.ID) *Seat {
 	if id == 0 {
 		return nil
 	}
-	x := &Seat{Handle: objref.Wrap(id)}
+	x := &Seat{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *Seat) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new seat object containing the required seat information.
-//
-// NewSeatWithSeatSectionSeatRowSeatNumberSeatingType creates a new Seat.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Seat) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSeatWithSeatSectionSeatRowSeatNumberSeatingType creates a new seat object containing the required seat information.
 func NewSeatWithSeatSectionSeatRowSeatNumberSeatingType(seatSection string, seatRow string, seatNumber string, seatingType string) *Seat {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INSeat")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSeatSection:seatRow:seatNumber:seatingType:"), purego.NSString(seatSection), purego.NSString(seatRow), purego.NSString(seatNumber), purego.NSString(seatingType))
 	return seatAdopt(_id)
 }
 
+// SeatSection wraps the corresponding Objective-C method.
 func (x *Seat) SeatSection() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seatSection"))
 	if _r == 0 {
@@ -75,6 +82,7 @@ func (x *Seat) SeatSection() string {
 	return purego.GoString(_r)
 }
 
+// SeatRow wraps the corresponding Objective-C method.
 func (x *Seat) SeatRow() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seatRow"))
 	if _r == 0 {
@@ -83,6 +91,7 @@ func (x *Seat) SeatRow() string {
 	return purego.GoString(_r)
 }
 
+// SeatNumber wraps the corresponding Objective-C method.
 func (x *Seat) SeatNumber() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seatNumber"))
 	if _r == 0 {
@@ -91,6 +100,7 @@ func (x *Seat) SeatNumber() string {
 	return purego.GoString(_r)
 }
 
+// SeatingType wraps the corresponding Objective-C method.
 func (x *Seat) SeatingType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seatingType"))
 	if _r == 0 {

@@ -23,7 +23,8 @@ func MTRAsyncCallbackWorkQueueFromID(id objc.ID) *MTRAsyncCallbackWorkQueue {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAsyncCallbackWorkQueue{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRAsyncCallbackWorkQueue{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRAsyncCallbackWorkQueueAdopt(id objc.ID) *MTRAsyncCallbackWorkQueue {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAsyncCallbackWorkQueue{Handle: objref.Wrap(id)}
+	x := &MTRAsyncCallbackWorkQueue{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *MTRAsyncCallbackWorkQueue) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRAsyncCallbackWorkQueue) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRAsyncCallbackWorkQueueWithContextQueue creates a new MTRAsyncCallbackWorkQueue.
 func NewMTRAsyncCallbackWorkQueueWithContextQueue(context_ obj.Object, queue obj.Object) *MTRAsyncCallbackWorkQueue {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRAsyncCallbackWorkQueue")), objc.RegisterName("alloc"))
@@ -63,10 +71,12 @@ func NewMTRAsyncCallbackWorkQueueWithContextQueue(context_ obj.Object, queue obj
 	return mTRAsyncCallbackWorkQueueAdopt(_id)
 }
 
+// Invalidate wraps the corresponding Objective-C method.
 func (x *MTRAsyncCallbackWorkQueue) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
+// EnqueueWorkItem wraps the corresponding Objective-C method.
 func (x *MTRAsyncCallbackWorkQueue) EnqueueWorkItem(item *MTRAsyncCallbackQueueWorkItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enqueueWorkItem:"), objref.IDOf(item))
 }

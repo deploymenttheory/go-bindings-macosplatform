@@ -23,7 +23,8 @@ func SVGFDefaultTextureAllocatorFromID(id objc.ID) *SVGFDefaultTextureAllocator 
 	if id == 0 {
 		return nil
 	}
-	x := &SVGFDefaultTextureAllocator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SVGFDefaultTextureAllocator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func sVGFDefaultTextureAllocatorAdopt(id objc.ID) *SVGFDefaultTextureAllocator {
 	if id == 0 {
 		return nil
 	}
-	x := &SVGFDefaultTextureAllocator{Handle: objref.Wrap(id)}
+	x := &SVGFDefaultTextureAllocator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,18 +58,24 @@ func (x *SVGFDefaultTextureAllocator) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SVGFDefaultTextureAllocator) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSVGFDefaultTextureAllocator creates a new SVGFDefaultTextureAllocator.
 func NewSVGFDefaultTextureAllocator() *SVGFDefaultTextureAllocator {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSSVGFDefaultTextureAllocator")), objc.RegisterName("new"))
 	return sVGFDefaultTextureAllocatorAdopt(_id)
 }
 
-// Remove all textures from the cache
+// Reset remove all textures from the cache
 func (x *SVGFDefaultTextureAllocator) Reset() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
-// The number of textures which have been allocated from this allocator
+// AllocatedTextureCount the number of textures which have been allocated from this allocator
 func (x *SVGFDefaultTextureAllocator) AllocatedTextureCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("allocatedTextureCount"))
 	return _r

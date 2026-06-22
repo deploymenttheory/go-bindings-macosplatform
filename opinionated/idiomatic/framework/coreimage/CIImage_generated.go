@@ -6,15 +6,16 @@ package coreimage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of an image to be processed or produced by Core Image filters.
-//
 // Image is an idiomatic wrapper over the Objective-C class CIImage.
+//
+// A representation of an image to be processed or produced by Core Image filters.
 type Image struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func ImageFromID(id objc.ID) *Image {
 	if id == 0 {
 		return nil
 	}
-	x := &Image{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Image{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func imageAdopt(id objc.ID) *Image {
 	if id == 0 {
 		return nil
 	}
-	x := &Image{Handle: objref.Wrap(id)}
+	x := &Image{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +61,20 @@ func (x *Image) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes an image object with a Quartz 2D image.
-//
-// NewImageWithCGImage creates a new Image.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Image) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewImageWithCGImage initializes an image object with a Quartz 2D image.
 func NewImageWithCGImage(image obj.Object) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImage:"), objref.IDOf(image))
 	return imageAdopt(_id)
 }
 
-// Initializes an image object with a Quartz 2D image, using the specified options.
-//
-// NewImageWithCGImageOptions creates a new Image.
+// NewImageWithCGImageOptions initializes an image object with a Quartz 2D image, using the specified options.
 func NewImageWithCGImageOptions(image obj.Object, options obj.Object) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImage:options:"), objref.IDOf(image), objref.IDOf(options))
@@ -83,90 +88,91 @@ func NewImageWithCGImageSourceIndexOptions(source obj.Object, index int, dict ob
 	return imageAdopt(_id)
 }
 
-// Initializes an image object from the contents supplied by a CGLayer object.
-//
-// NewImageWithCGLayer creates a new Image.
+// NewImageWithCGLayer initializes an image object from the contents supplied by a CGLayer object.
 func NewImageWithCGLayer(layer obj.Object) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGLayer:"), objref.IDOf(layer))
 	return imageAdopt(_id)
 }
 
-// Initializes an image object from the contents supplied by a CGLayer object, using the specified options.
-//
-// NewImageWithCGLayerOptions creates a new Image.
+// NewImageWithCGLayerOptions initializes an image object from the contents supplied by a CGLayer object, using the specified options.
 func NewImageWithCGLayerOptions(layer obj.Object, options obj.Object) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGLayer:options:"), objref.IDOf(layer), objref.IDOf(options))
 	return imageAdopt(_id)
 }
 
-// Initializes an image object with the supplied image data.
-//
-// NewImageWithData creates a new Image.
+// NewImageWithData initializes an image object with the supplied image data.
 func NewImageWithData(data obj.Object) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
 	return imageAdopt(_id)
 }
 
-// Initializes an image object with the supplied image data, using the specified options.
-//
-// NewImageWithDataOptions creates a new Image.
+// NewImageWithDataOptions initializes an image object with the supplied image data, using the specified options.
 func NewImageWithDataOptions(data obj.Object, options obj.Object) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:"), objref.IDOf(data), objref.IDOf(options))
 	return imageAdopt(_id)
 }
 
-// Initializes an image object by reading an image from a URL.
-//
-// NewImageWithContentsOfURL creates a new Image.
+// NewImageWithBitmapDataBytesPerRowSizeFormatColorSpace initializes an image object with bitmap data.
+func NewImageWithBitmapDataBytesPerRowSizeFormatColorSpace(data obj.Object, bytesPerRow int, size corefoundation.CGSize, format int, colorSpace obj.Object) *Image {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBitmapData:bytesPerRow:size:format:colorSpace:"), objref.IDOf(data), bytesPerRow, size, format, objref.IDOf(colorSpace))
+	return imageAdopt(_id)
+}
+
+// NewImageWithTextureSizeFlippedColorSpace initializes an image object with data supplied by an OpenGL texture.
+func NewImageWithTextureSizeFlippedColorSpace(name int, size corefoundation.CGSize, flipped bool, colorSpace obj.Object) *Image {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTexture:size:flipped:colorSpace:"), name, size, flipped, objref.IDOf(colorSpace))
+	return imageAdopt(_id)
+}
+
+// NewImageWithTextureSizeFlippedOptions initializes an image object with data supplied by an OpenGL texture.
+func NewImageWithTextureSizeFlippedOptions(name int, size corefoundation.CGSize, flipped bool, options obj.Object) *Image {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTexture:size:flipped:options:"), name, size, flipped, objref.IDOf(options))
+	return imageAdopt(_id)
+}
+
+// NewImageWithContentsOfURL initializes an image object by reading an image from a URL.
 func NewImageWithContentsOfURL(url string) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), rt.FileURL(url))
 	return imageAdopt(_id)
 }
 
-// Initializes an image object by reading an image from a URL, using the specified options.
-//
-// NewImageWithContentsOfURLOptions creates a new Image.
+// NewImageWithContentsOfURLOptions initializes an image object by reading an image from a URL, using the specified options.
 func NewImageWithContentsOfURLOptions(url string, options obj.Object) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:options:"), rt.FileURL(url), objref.IDOf(options))
 	return imageAdopt(_id)
 }
 
-// Initializes an image with the contents of an IOSurface.
-//
-// NewImageWithIOSurface creates a new Image.
+// NewImageWithIOSurface initializes an image with the contents of an IOSurface.
 func NewImageWithIOSurface(surface obj.Object) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOSurface:"), objref.IDOf(surface))
 	return imageAdopt(_id)
 }
 
-// Initializes, using the specified options, an image with the contents of an IOSurface.
-//
-// NewImageWithIOSurfaceOptions creates a new Image.
+// NewImageWithIOSurfaceOptions initializes, using the specified options, an image with the contents of an IOSurface.
 func NewImageWithIOSurfaceOptions(surface obj.Object, options obj.Object) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOSurface:options:"), objref.IDOf(surface), objref.IDOf(options))
 	return imageAdopt(_id)
 }
 
-// Initializes, using the specified format and options, an image with the contents of a specific data plane in an IOSurface.
-//
-// NewImageWithIOSurfacePlaneFormatOptions creates a new Image.
+// NewImageWithIOSurfacePlaneFormatOptions initializes, using the specified format and options, an image with the contents of a specific data plane in an IOSurface.
 func NewImageWithIOSurfacePlaneFormatOptions(surface obj.Object, plane int, format int, options obj.Object) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOSurface:plane:format:options:"), objref.IDOf(surface), plane, format, objref.IDOf(options))
 	return imageAdopt(_id)
 }
 
-// Initializes an image of infinite extent whose entire content is the specified color.
-//
-// NewImageWithColor creates a new Image.
+// NewImageWithColor initializes an image of infinite extent whose entire content is the specified color.
 func NewImageWithColor(color *Color) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithColor:"), objref.IDOf(color))
@@ -215,180 +221,230 @@ func NewImageWithSemanticSegmentationMatte(matte obj.Object) *Image {
 	return imageAdopt(_id)
 }
 
-// Initializes an image object based on pixels from an image provider object.
-//
-// NewImageWithImageProviderSizeFormatColorSpaceOptions creates a new Image.
+// NewImageWithImageProviderSizeFormatColorSpaceOptions initializes an image object based on pixels from an image provider object.
 func NewImageWithImageProviderSizeFormatColorSpaceOptions(provider obj.Object, width int, height int, format int, colorSpace obj.Object, options obj.Object) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImageProvider:size::format:colorSpace:options:"), objref.IDOf(provider), width, height, format, objref.IDOf(colorSpace), objref.IDOf(options))
 	return imageAdopt(_id)
 }
 
-// Returns a new image created by transforming the original image to the specified EXIF orientation.
+// ImageByApplyingTransform returns a new image that represents the original image after applying an affine transform.
+func (x *Image) ImageByApplyingTransform(matrix corefoundation.CGAffineTransform) *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageByApplyingTransform:"), matrix)
+	return ImageFromID(_r)
+}
+
+// ImageByApplyingTransformHighQualityDownsample wraps the corresponding Objective-C method.
+func (x *Image) ImageByApplyingTransformHighQualityDownsample(matrix corefoundation.CGAffineTransform, highQualityDownsample bool) *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageByApplyingTransform:highQualityDownsample:"), matrix, highQualityDownsample)
+	return ImageFromID(_r)
+}
+
+// ImageByApplyingOrientation returns a new image created by transforming the original image to the specified EXIF orientation.
 func (x *Image) ImageByApplyingOrientation(orientation int) *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageByApplyingOrientation:"), orientation)
 	return ImageFromID(_r)
 }
 
-// Returns a new image created by compositing the original image over the specified destination image.
+// ImageTransformForOrientation returns the transformation needed to reorient the image to the specified orientation.
+func (x *Image) ImageTransformForOrientation(orientation int) corefoundation.CGAffineTransform {
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("imageTransformForOrientation:"), orientation)
+	return _r
+}
+
+// ImageByCompositingOverImage returns a new image created by compositing the original image over the specified destination image.
 func (x *Image) ImageByCompositingOverImage(dest *Image) *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageByCompositingOverImage:"), objref.IDOf(dest))
 	return ImageFromID(_r)
 }
 
-// Returns a new image created by making the pixel colors along its edges extend infinitely in all directions.
+// ImageByCroppingToRect returns a new image with a cropped portion of the original image.
+func (x *Image) ImageByCroppingToRect(rect corefoundation.CGRect) *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageByCroppingToRect:"), rect)
+	return ImageFromID(_r)
+}
+
+// ImageByClampingToExtent returns a new image created by making the pixel colors along its edges extend infinitely in all directions.
 func (x *Image) ImageByClampingToExtent() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageByClampingToExtent"))
 	return ImageFromID(_r)
 }
 
-// Returns a new image created by applying a filter to the original image with the specified name and parameters.
+// ImageByClampingToRect returns a new image created by cropping to a specified area, then making the pixel colors along the edges of the cropped image extend infinitely in all directions.
+func (x *Image) ImageByClampingToRect(rect corefoundation.CGRect) *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageByClampingToRect:"), rect)
+	return ImageFromID(_r)
+}
+
+// ImageByApplyingFilterWithInputParameters returns a new image created by applying a filter to the original image with the specified name and parameters.
 func (x *Image) ImageByApplyingFilterWithInputParameters(filterName string, params obj.Object) *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageByApplyingFilter:withInputParameters:"), purego.NSString(filterName), objref.IDOf(params))
 	return ImageFromID(_r)
 }
 
-// Applies the filter to an image and returns the output.
+// ImageByApplyingFilter applies the filter to an image and returns the output.
 func (x *Image) ImageByApplyingFilter(filterName string) *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageByApplyingFilter:"), purego.NSString(filterName))
 	return ImageFromID(_r)
 }
 
-// Returns a new image created by color matching from the specified color space to the context’s working color space.
+// ImageByColorMatchingColorSpaceToWorkingSpace returns a new image created by color matching from the specified color space to the context’s working color space.
 func (x *Image) ImageByColorMatchingColorSpaceToWorkingSpace(colorSpace obj.Object) *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageByColorMatchingColorSpaceToWorkingSpace:"), objref.IDOf(colorSpace))
 	return ImageFromID(_r)
 }
 
-// Returns a new image created by color matching from the context’s working color space to the specified color space.
+// ImageByColorMatchingWorkingSpaceToColorSpace returns a new image created by color matching from the context’s working color space to the specified color space.
 func (x *Image) ImageByColorMatchingWorkingSpaceToColorSpace(colorSpace obj.Object) *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageByColorMatchingWorkingSpaceToColorSpace:"), objref.IDOf(colorSpace))
 	return ImageFromID(_r)
 }
 
-// Returns a new image created by multiplying the image’s RGB values by its alpha values.
+// ImageByPremultiplyingAlpha returns a new image created by multiplying the image’s RGB values by its alpha values.
 func (x *Image) ImageByPremultiplyingAlpha() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageByPremultiplyingAlpha"))
 	return ImageFromID(_r)
 }
 
-// Returns a new image created by dividing the image’s RGB values by its alpha values.
+// ImageByUnpremultiplyingAlpha returns a new image created by dividing the image’s RGB values by its alpha values.
 func (x *Image) ImageByUnpremultiplyingAlpha() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageByUnpremultiplyingAlpha"))
 	return ImageFromID(_r)
 }
 
-// Create an image by applying a gaussian blur to the receiver.
+// ImageBySettingAlphaOneInExtent returns a new image created by setting all alpha values to 1.0 within the specified rectangle and to 0.0 outside of that area.
+func (x *Image) ImageBySettingAlphaOneInExtent(extent corefoundation.CGRect) *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageBySettingAlphaOneInExtent:"), extent)
+	return ImageFromID(_r)
+}
+
+// ImageByApplyingGaussianBlurWithSigma create an image by applying a gaussian blur to the receiver.
 func (x *Image) ImageByApplyingGaussianBlurWithSigma(sigma float64) *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageByApplyingGaussianBlurWithSigma:"), sigma)
 	return ImageFromID(_r)
 }
 
-// Return a new image by changing the receiver’s metadata properties.
+// ImageBySettingProperties return a new image by changing the receiver’s metadata properties.
 func (x *Image) ImageBySettingProperties(properties obj.Object) *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageBySettingProperties:"), objref.IDOf(properties))
 	return ImageFromID(_r)
 }
 
-// Create an image by changing the receiver’s sample mode to bilinear interpolation.
+// ImageBySamplingLinear create an image by changing the receiver’s sample mode to bilinear interpolation.
 func (x *Image) ImageBySamplingLinear() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageBySamplingLinear"))
 	return ImageFromID(_r)
 }
 
-// Create an image by changing the receiver’s sample mode to nearest neighbor.
+// ImageBySamplingNearest create an image by changing the receiver’s sample mode to nearest neighbor.
 func (x *Image) ImageBySamplingNearest() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageBySamplingNearest"))
 	return ImageFromID(_r)
 }
 
-// Create an image that inserts a intermediate that is cacheable
+// ImageByInsertingIntermediate create an image that inserts a intermediate that is cacheable
 func (x *Image) ImageByInsertingIntermediate() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageByInsertingIntermediate"))
 	return ImageFromID(_r)
 }
 
-// Create an image that inserts a intermediate that is cacheable.
+// ImageByInsertingIntermediate2 create an image that inserts a intermediate that is cacheable.
 func (x *Image) ImageByInsertingIntermediate2(cache bool) *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageByInsertingIntermediate:"), cache)
 	return ImageFromID(_r)
 }
 
-// Create an image that inserts a intermediate that is cached in tiles
+// ImageByInsertingTiledIntermediate create an image that inserts a intermediate that is cached in tiles
 func (x *Image) ImageByInsertingTiledIntermediate() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageByInsertingTiledIntermediate"))
 	return ImageFromID(_r)
 }
 
-// Create an image that applies a gain map Core Image image to the received Core Image image.
+// ImageByApplyingGainMap create an image that applies a gain map Core Image image to the received Core Image image.
 func (x *Image) ImageByApplyingGainMap(gainmap *Image) *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageByApplyingGainMap:"), objref.IDOf(gainmap))
 	return ImageFromID(_r)
 }
 
-// Create an image that applies a gain map Core Image image with a specified headroom to the received Core Image image.
+// ImageByApplyingGainMapHeadroom create an image that applies a gain map Core Image image with a specified headroom to the received Core Image image.
 func (x *Image) ImageByApplyingGainMapHeadroom(gainmap *Image, headroom float32) *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageByApplyingGainMap:headroom:"), objref.IDOf(gainmap), headroom)
 	return ImageFromID(_r)
 }
 
-// Create an image by changing the receiver’s contentHeadroom property.
+// ImageBySettingContentHeadroom create an image by changing the receiver’s contentHeadroom property.
 func (x *Image) ImageBySettingContentHeadroom(headroom float32) *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageBySettingContentHeadroom:"), headroom)
 	return ImageFromID(_r)
 }
 
-// Create an image by changing the receiver’s contentAverageLightLevel property.
+// ImageBySettingContentAverageLightLevel create an image by changing the receiver’s contentAverageLightLevel property.
 func (x *Image) ImageBySettingContentAverageLightLevel(average float32) *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageBySettingContentAverageLightLevel:"), average)
 	return ImageFromID(_r)
 }
 
-// Returns YES if the image is known to have and alpha value of `1.0` over the entire image extent.
+// RegionOfInterestForImageInRect returns the region of interest for the filter chain that generates the image.
+func (x *Image) RegionOfInterestForImageInRect(image *Image, rect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("regionOfInterestForImage:inRect:"), objref.IDOf(image), rect)
+	return _r
+}
+
+// Extent returns a rectangle the defines the bounds of non-(0,0,0,0) pixels in the image. > Note: the “extent“ of `CIImage“ may be infinite or have a non-zero origin.
+func (x *Image) Extent() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("extent"))
+	return _r
+}
+
+// IsOpaque returns YES if the image is known to have and alpha value of `1.0` over the entire image extent.
 func (x *Image) IsOpaque() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOpaque"))
 	return _r
 }
 
-// Returns the metadata properties dictionary of the image. If the “CIImage“ was created from `NSURL` or `NSData` then this dictionary is determined by calling `CGImageSourceCopyPropertiesAtIndex()`. If the “CIImage“ was created with the “kCIImageProperties“ option, then that dictionary is returned. If the “CIImage“ was created by applying “CIFilter-class“ or “CIKernel“ then the properties of the root inputImage will be returned.
+// Properties returns the metadata properties dictionary of the image. If the “CIImage“ was created from `NSURL` or `NSData` then this dictionary is determined by calling `CGImageSourceCopyPropertiesAtIndex()`. If the “CIImage“ was created with the “kCIImageProperties“ option, then that dictionary is returned. If the “CIImage“ was created by applying “CIFilter-class“ or “CIKernel“ then the properties of the root inputImage will be returned.
 func (x *Image) Properties() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("properties"))
 	return obj.Wrap(_r)
 }
 
+// Definition wraps the corresponding Objective-C method.
 func (x *Image) Definition() *FilterShape {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("definition"))
 	return FilterShapeFromID(_r)
 }
 
+// Url wraps the corresponding Objective-C method.
 func (x *Image) Url() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
+// ColorSpace wraps the corresponding Objective-C method.
 func (x *Image) ColorSpace() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorSpace"))
 	return obj.Wrap(_r)
 }
 
-// Returns the content headroom of the image. If the image headroom is unknown, then the value 0.0 will be returned. If the image headroom is known, then a value greater than or equal to 1.0 will be returned. A value of 1.0 will be returned if the image is SDR. A value greater than 1.0 will be returned if the image is HDR. The image headroom may known when a CIImage is first initialized. If the a CIImage is initialized using: * `NSURL` or `NSData` : the headroom may be determined by associated metadata or deduced from pixel format or colorSpace information. * `CGImage` : headroom may be determined by `CGImageGetHeadroomInfo()` or deduced from pixel format or colorSpace information. * `IOSurface` : then the headroom will be determined by `kIOSurfaceContentHeadroom`. or deduced from pixel format or colorSpace information. * `CVPixelBuffer` : then the headroom will be determined by `kCVImageBufferContentLightLevelInfoKey`. or deduced from pixel format or colorSpace information. * `BitmapData` : headroom may be deduced from pixel format or colorSpace information. If the image is the result of applying a “CIFilter-class“ or “CIKernel“, this method will return `0.0`. There are exceptions to this.  Applying a `CIWarpKernel“ or certain “CIFilter-class“ (e.g. `CIGaussianBlur`, `CILanczosScaleTransform`, `CIAreaAverage` and some others) to an image will result in a “CIImage“ instance with the same `contentHeadroom` property value.
+// ContentHeadroom returns the content headroom of the image. If the image headroom is unknown, then the value 0.0 will be returned. If the image headroom is known, then a value greater than or equal to 1.0 will be returned. A value of 1.0 will be returned if the image is SDR. A value greater than 1.0 will be returned if the image is HDR. The image headroom may known when a CIImage is first initialized. If the a CIImage is initialized using: * `NSURL` or `NSData` : the headroom may be determined by associated metadata or deduced from pixel format or colorSpace information. * `CGImage` : headroom may be determined by `CGImageGetHeadroomInfo()` or deduced from pixel format or colorSpace information. * `IOSurface` : then the headroom will be determined by `kIOSurfaceContentHeadroom`. or deduced from pixel format or colorSpace information. * `CVPixelBuffer` : then the headroom will be determined by `kCVImageBufferContentLightLevelInfoKey`. or deduced from pixel format or colorSpace information. * `BitmapData` : headroom may be deduced from pixel format or colorSpace information. If the image is the result of applying a “CIFilter-class“ or “CIKernel“, this method will return `0.0`. There are exceptions to this.  Applying a `CIWarpKernel“ or certain “CIFilter-class“ (e.g. `CIGaussianBlur`, `CILanczosScaleTransform`, `CIAreaAverage` and some others) to an image will result in a “CIImage“ instance with the same `contentHeadroom` property value.
 func (x *Image) ContentHeadroom() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("contentHeadroom"))
 	return _r
 }
 
-// Returns the content average light level of the image. If the image average light level is unknown, then the value 0.0 will be returned. If the image headroom is known, then a value greater than or equal to 0.0 will be returned. The image average light level may known when a CIImage is first initialized. If the a CIImage is initialized with a: * `CGImage` : then the headroom will be determined by `CGImageGetContentAverageLightLevel()`. * `CVPixelBuffer` : then the headroom will be determined by `kCVImageBufferContentLightLevelInfoKey`. If the image is the result of applying a “CIFilter-class“ or “CIKernel“, this property will return `0.0`. There are exceptions to this.  Applying a “CIWarpKernel“ or certain “CIFilter-class“ (e.g. `CIGaussianBlur`, `CILanczosScaleTransform`, `CIAreaAverage` and some others) to an image will result in a “CIImage“ instance with the same `contentAverageLightLevel` property value.
+// ContentAverageLightLevel returns the content average light level of the image. If the image average light level is unknown, then the value 0.0 will be returned. If the image headroom is known, then a value greater than or equal to 0.0 will be returned. The image average light level may known when a CIImage is first initialized. If the a CIImage is initialized with a: * `CGImage` : then the headroom will be determined by `CGImageGetContentAverageLightLevel()`. * `CVPixelBuffer` : then the headroom will be determined by `kCVImageBufferContentLightLevelInfoKey`. If the image is the result of applying a “CIFilter-class“ or “CIKernel“, this property will return `0.0`. There are exceptions to this.  Applying a “CIWarpKernel“ or certain “CIFilter-class“ (e.g. `CIGaussianBlur`, `CILanczosScaleTransform`, `CIAreaAverage` and some others) to an image will result in a “CIImage“ instance with the same `contentAverageLightLevel` property value.
 func (x *Image) ContentAverageLightLevel() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("contentAverageLightLevel"))
 	return _r
 }
 
+// CGImage wraps the corresponding Objective-C method.
 func (x *Image) CGImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CGImage"))
 	return obj.Wrap(_r)
 }
 
-// Returns all possible automatically selected and configured filters for adjusting the image.
+// AutoAdjustmentFilters returns all possible automatically selected and configured filters for adjusting the image.
 //
 // AutoAdjustmentFilters returns the collection as a Go slice.
 func (x *Image) AutoAdjustmentFilters() []*Filter {
@@ -396,32 +452,37 @@ func (x *Image) AutoAdjustmentFilters() []*Filter {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Filter { return FilterFromID(_id) })
 }
 
-// Returns a subset of automatically selected and configured filters for adjusting the image.
+// AutoAdjustmentFiltersWithOptions returns a subset of automatically selected and configured filters for adjusting the image.
 func (x *Image) AutoAdjustmentFiltersWithOptions(options obj.Object) []*Filter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("autoAdjustmentFiltersWithOptions:"), objref.IDOf(options))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Filter { return FilterFromID(_id) })
 }
 
+// ImageByConvertingWorkingSpaceToLab wraps the corresponding Objective-C method.
 func (x *Image) ImageByConvertingWorkingSpaceToLab() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageByConvertingWorkingSpaceToLab"))
 	return ImageFromID(_r)
 }
 
+// ImageByConvertingLabToWorkingSpace wraps the corresponding Objective-C method.
 func (x *Image) ImageByConvertingLabToWorkingSpace() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageByConvertingLabToWorkingSpace"))
 	return ImageFromID(_r)
 }
 
+// DepthData wraps the corresponding Objective-C method.
 func (x *Image) DepthData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("depthData"))
 	return obj.Wrap(_r)
 }
 
+// PortraitEffectsMatte wraps the corresponding Objective-C method.
 func (x *Image) PortraitEffectsMatte() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("portraitEffectsMatte"))
 	return obj.Wrap(_r)
 }
 
+// SemanticSegmentationMatte wraps the corresponding Objective-C method.
 func (x *Image) SemanticSegmentationMatte() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("semanticSegmentationMatte"))
 	return obj.Wrap(_r)
@@ -430,15 +491,21 @@ func (x *Image) SemanticSegmentationMatte() obj.Object {
 // Imageable is the interface implemented by [Image], for mocking and DI.
 type Imageable interface {
 	obj.Object
+	ImageByApplyingTransform(matrix corefoundation.CGAffineTransform) *Image
+	ImageByApplyingTransformHighQualityDownsample(matrix corefoundation.CGAffineTransform, highQualityDownsample bool) *Image
 	ImageByApplyingOrientation(orientation int) *Image
+	ImageTransformForOrientation(orientation int) corefoundation.CGAffineTransform
 	ImageByCompositingOverImage(dest *Image) *Image
+	ImageByCroppingToRect(rect corefoundation.CGRect) *Image
 	ImageByClampingToExtent() *Image
+	ImageByClampingToRect(rect corefoundation.CGRect) *Image
 	ImageByApplyingFilterWithInputParameters(filterName string, params obj.Object) *Image
 	ImageByApplyingFilter(filterName string) *Image
 	ImageByColorMatchingColorSpaceToWorkingSpace(colorSpace obj.Object) *Image
 	ImageByColorMatchingWorkingSpaceToColorSpace(colorSpace obj.Object) *Image
 	ImageByPremultiplyingAlpha() *Image
 	ImageByUnpremultiplyingAlpha() *Image
+	ImageBySettingAlphaOneInExtent(extent corefoundation.CGRect) *Image
 	ImageByApplyingGaussianBlurWithSigma(sigma float64) *Image
 	ImageBySettingProperties(properties obj.Object) *Image
 	ImageBySamplingLinear() *Image
@@ -450,6 +517,8 @@ type Imageable interface {
 	ImageByApplyingGainMapHeadroom(gainmap *Image, headroom float32) *Image
 	ImageBySettingContentHeadroom(headroom float32) *Image
 	ImageBySettingContentAverageLightLevel(average float32) *Image
+	RegionOfInterestForImageInRect(image *Image, rect corefoundation.CGRect) corefoundation.CGRect
+	Extent() corefoundation.CGRect
 	IsOpaque() bool
 	Properties() obj.Object
 	Definition() *FilterShape

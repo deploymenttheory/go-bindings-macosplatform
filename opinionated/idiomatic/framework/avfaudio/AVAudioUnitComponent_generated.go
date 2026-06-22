@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides details about an audio unit.
-//
 // AudioUnitComponent is an idiomatic wrapper over the Objective-C class AVAudioUnitComponent.
+//
+// An object that provides details about an audio unit.
 type AudioUnitComponent struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AudioUnitComponentFromID(id objc.ID) *AudioUnitComponent {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitComponent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioUnitComponent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func audioUnitComponentAdopt(id objc.ID) *AudioUnitComponent {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitComponent{Handle: objref.Wrap(id)}
+	x := &AudioUnitComponent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,32 @@ func (x *AudioUnitComponent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioUnitComponent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAudioUnitComponent creates a new AudioUnitComponent.
 func NewAudioUnitComponent() *AudioUnitComponent {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioUnitComponent")), objc.RegisterName("new"))
 	return audioUnitComponentAdopt(_id)
 }
 
-// An array of tags the user creates.
-//
-// WithUserTagNames sets the collection and returns the receiver so calls can be chained.
+// WithUserTagNames an array of tags the user creates.
 func (x *AudioUnitComponent) WithUserTagNames(items ...obj.Object) *AudioUnitComponent {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserTagNames:"), _arr)
 	return x
 }
 
-// Gets a Boolean value that indicates whether the audio unit component supports the specified number of input and output channels.
+// SupportsNumberInputChannelsOutputChannels gets a Boolean value that indicates whether the audio unit component supports the specified number of input and output channels.
 func (x *AudioUnitComponent) SupportsNumberInputChannelsOutputChannels(numInputChannels int, numOutputChannels int) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsNumberInputChannels:outputChannels:"), numInputChannels, numOutputChannels)
 	return _r
 }
 
-// the name of an audio component
+// Name the name of an audio component
 func (x *AudioUnitComponent) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -88,7 +94,7 @@ func (x *AudioUnitComponent) Name() string {
 	return purego.GoString(_r)
 }
 
-// standard audio component types returned as strings
+// TypeName standard audio component types returned as strings
 func (x *AudioUnitComponent) TypeName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typeName"))
 	if _r == 0 {
@@ -97,7 +103,7 @@ func (x *AudioUnitComponent) TypeName() string {
 	return purego.GoString(_r)
 }
 
-// localized string of typeName for display
+// LocalizedTypeName localized string of typeName for display
 func (x *AudioUnitComponent) LocalizedTypeName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedTypeName"))
 	if _r == 0 {
@@ -106,7 +112,7 @@ func (x *AudioUnitComponent) LocalizedTypeName() string {
 	return purego.GoString(_r)
 }
 
-// the manufacturer name, extracted from the manufacturer key defined in Info.plist dictionary
+// ManufacturerName the manufacturer name, extracted from the manufacturer key defined in Info.plist dictionary
 func (x *AudioUnitComponent) ManufacturerName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manufacturerName"))
 	if _r == 0 {
@@ -115,7 +121,7 @@ func (x *AudioUnitComponent) ManufacturerName() string {
 	return purego.GoString(_r)
 }
 
-// version number as string
+// VersionString version number as string
 func (x *AudioUnitComponent) VersionString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("versionString"))
 	if _r == 0 {
@@ -124,13 +130,13 @@ func (x *AudioUnitComponent) VersionString() string {
 	return purego.GoString(_r)
 }
 
-// URL representing location of component
+// ComponentURL URL representing location of component
 func (x *AudioUnitComponent) ComponentURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("componentURL"))
 	return obj.Wrap(_r)
 }
 
-// NSArray of NSNumbers each of which corresponds to one of the constants in Mach-O Architecture in NSBundle Class Reference
+// AvailableArchitectures NSArray of NSNumbers each of which corresponds to one of the constants in Mach-O Architecture in NSBundle Class Reference
 //
 // AvailableArchitectures returns the collection as a Go slice.
 func (x *AudioUnitComponent) AvailableArchitectures() []obj.Object {
@@ -138,31 +144,31 @@ func (x *AudioUnitComponent) AvailableArchitectures() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// On OSX, YES if the AudioComponent can be loaded into a sandboxed process otherwise NO. On iOS, this is always YES.
+// IsSandboxSafe on OSX, YES if the AudioComponent can be loaded into a sandboxed process otherwise NO. On iOS, this is always YES.
 func (x *AudioUnitComponent) IsSandboxSafe() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSandboxSafe"))
 	return _r
 }
 
-// YES if AudioComponent has midi input, otherwise NO
+// HasMIDIInput YES if AudioComponent has midi input, otherwise NO
 func (x *AudioUnitComponent) HasMIDIInput() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasMIDIInput"))
 	return _r
 }
 
-// YES if AudioComponent has midi output, otherwise NO
+// HasMIDIOutput YES if AudioComponent has midi output, otherwise NO
 func (x *AudioUnitComponent) HasMIDIOutput() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasMIDIOutput"))
 	return _r
 }
 
-// the audioComponent that can be used in AudioComponent APIs.
+// AudioComponent the audioComponent that can be used in AudioComponent APIs.
 func (x *AudioUnitComponent) AudioComponent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioComponent"))
 	return obj.Wrap(_r)
 }
 
-// User tags represent the tags from the current user.
+// UserTagNames user tags represent the tags from the current user.
 //
 // UserTagNames returns the collection as a Go slice.
 func (x *AudioUnitComponent) UserTagNames() []string {
@@ -170,11 +176,12 @@ func (x *AudioUnitComponent) UserTagNames() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetUserTagNames wraps the corresponding Objective-C method.
 func (x *AudioUnitComponent) SetUserTagNames(userTagNames []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserTagNames:"), purego.SliceToNSArray(userTagNames, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// represent the tags from the current user and the system tags defined by AudioComponent.
+// AllTagNames represent the tags from the current user and the system tags defined by AudioComponent.
 //
 // AllTagNames returns the collection as a Go slice.
 func (x *AudioUnitComponent) AllTagNames() []string {
@@ -182,36 +189,37 @@ func (x *AudioUnitComponent) AllTagNames() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// description of the audio component that can be used in AudioComponent APIs.
+// AudioComponentDescription description of the audio component that can be used in AudioComponent APIs.
 func (x *AudioUnitComponent) AudioComponentDescription() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioComponentDescription"))
 	return obj.Wrap(_r)
 }
 
-// A URL that will specify the location of an icon file that can be used when presenting UI for this audio component.
+// IconURL a URL that will specify the location of an icon file that can be used when presenting UI for this audio component.
 func (x *AudioUnitComponent) IconURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iconURL"))
 	return obj.Wrap(_r)
 }
 
+// Icon wraps the corresponding Objective-C method.
 func (x *AudioUnitComponent) Icon() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("icon"))
 	return obj.Wrap(_r)
 }
 
-// YES if the AudioComponent has passed the AU validation tests, otherwise NO
+// PassesAUVal YES if the AudioComponent has passed the AU validation tests, otherwise NO
 func (x *AudioUnitComponent) PassesAUVal() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("passesAUVal"))
 	return _r
 }
 
-// YES if the AudioComponent provides custom view, otherwise NO
+// HasCustomView YES if the AudioComponent provides custom view, otherwise NO
 func (x *AudioUnitComponent) HasCustomView() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasCustomView"))
 	return _r
 }
 
-// A NSDictionary that contains information describing the capabilities of the AudioComponent. The specific information depends on the type and the keys are defined in AudioUnitProperties.h
+// ConfigurationDictionary a NSDictionary that contains information describing the capabilities of the AudioComponent. The specific information depends on the type and the keys are defined in AudioUnitProperties.h
 func (x *AudioUnitComponent) ConfigurationDictionary() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configurationDictionary"))
 	return obj.Wrap(_r)

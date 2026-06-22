@@ -23,7 +23,8 @@ func ExtensionManagerFromID(id objc.ID) *ExtensionManager {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExtensionManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func extensionManagerAdopt(id objc.ID) *ExtensionManager {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionManager{Handle: objref.Wrap(id)}
+	x := &ExtensionManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *ExtensionManager) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *ExtensionManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExtensionManager) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewExtensionManager creates a new ExtensionManager.

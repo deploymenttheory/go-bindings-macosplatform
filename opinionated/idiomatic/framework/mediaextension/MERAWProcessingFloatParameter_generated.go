@@ -8,13 +8,15 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // RAWProcessingFloatParameter is an idiomatic wrapper over the Objective-C class MERAWProcessingFloatParameter.
+//
+// It embeds [RAWProcessingParameter], promoting that type's methods.
 type RAWProcessingFloatParameter struct {
-	objref.Handle
+	RAWProcessingParameter
 }
 
 // RAWProcessingFloatParameterFromID adopts an existing Objective-C object as a RAWProcessingFloatParameter
@@ -23,7 +25,8 @@ func RAWProcessingFloatParameterFromID(id objc.ID) *RAWProcessingFloatParameter 
 	if id == 0 {
 		return nil
 	}
-	x := &RAWProcessingFloatParameter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RAWProcessingFloatParameter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +39,10 @@ func rAWProcessingFloatParameterAdopt(id objc.ID) *RAWProcessingFloatParameter {
 	if id == 0 {
 		return nil
 	}
-	x := &RAWProcessingFloatParameter{Handle: objref.Wrap(id)}
+	x := &RAWProcessingFloatParameter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RAWProcessingFloatParameter) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RAWProcessingFloatParameter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RAWProcessingFloatParameter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRAWProcessingFloatParameter creates a new RAWProcessingFloatParameter.
@@ -90,40 +79,51 @@ func NewRAWProcessingFloatParameterWithNameKeyDescriptionInitialValueMaximumMini
 	return rAWProcessingFloatParameterAdopt(_id)
 }
 
-// Get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
-//
-// WithCurrentValue sets currentValue and returns the receiver so calls can be chained.
+// WithCurrentValue get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
 func (x *RAWProcessingFloatParameter) WithCurrentValue(currentValue float32) *RAWProcessingFloatParameter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), currentValue)
 	return x
 }
 
-// A Boolean value that indicates whether the extension enables the parameter.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether the extension enables the parameter.
 func (x *RAWProcessingFloatParameter) WithEnabled(enabled bool) *RAWProcessingFloatParameter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The maximum value for this parameter.
+// HasNeutralValue return value indicates whether the MERAWProcessingFloatParameter has an optional declared Neutral value. If the return value is YES and outNeutralValue is not nil, the value held by outNeutralValue will be set to the neutral value. If the return value is NO and outNeutralValue is not nil, the value held by outNeutralValue will be set to 0.
+func (x *RAWProcessingFloatParameter) HasNeutralValue() (ok bool, outNeutralValue float32) {
+	var _out0 float32
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasNeutralValue:"), unsafe.Pointer(&_out0))
+	return _r, _out0
+}
+
+// HasCameraValue return value indicates whether the MERAWProcessingFloatParameter has an optional declared Camera value. If the return value is YES and outCameraValue is not nil, the value held by outCameraValue will be set to the camera value. If the return value is NO and outCameraValue is not nil, the value held by outCameraValue will be set to 0.
+func (x *RAWProcessingFloatParameter) HasCameraValue() (ok bool, outCameraValue float32) {
+	var _out0 float32
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasCameraValue:"), unsafe.Pointer(&_out0))
+	return _r, _out0
+}
+
+// MaximumValue the maximum value for this parameter.
 func (x *RAWProcessingFloatParameter) MaximumValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumValue"))
 	return _r
 }
 
-// The minimum value for this parameter.
+// MinimumValue the minimum value for this parameter.
 func (x *RAWProcessingFloatParameter) MinimumValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minimumValue"))
 	return _r
 }
 
-// Get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
+// CurrentValue get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
 func (x *RAWProcessingFloatParameter) CurrentValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("currentValue"))
 	return _r
 }
 
+// SetCurrentValue wraps the corresponding Objective-C method.
 func (x *RAWProcessingFloatParameter) SetCurrentValue(currentValue float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), currentValue)
 }
@@ -133,6 +133,8 @@ type RAWProcessingFloatParameterable interface {
 	obj.Object
 	WithCurrentValue(currentValue float32) *RAWProcessingFloatParameter
 	WithEnabled(enabled bool) *RAWProcessingFloatParameter
+	HasNeutralValue() (ok bool, outNeutralValue float32)
+	HasCameraValue() (ok bool, outCameraValue float32)
 	MaximumValue() float32
 	MinimumValue() float32
 	CurrentValue() float32
@@ -140,3 +142,5 @@ type RAWProcessingFloatParameterable interface {
 }
 
 var _ RAWProcessingFloatParameterable = (*RAWProcessingFloatParameter)(nil)
+
+var _ RAWProcessingParameterProvider = (*RAWProcessingFloatParameter)(nil)

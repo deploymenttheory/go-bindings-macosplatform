@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specifier for an object in a collection (or container) by name.
-//
 // NameSpecifier is an idiomatic wrapper over the Objective-C class NSNameSpecifier.
+//
+// It embeds [ScriptObjectSpecifier], promoting that type's methods.
+//
+// A specifier for an object in a collection (or container) by name.
 type NameSpecifier struct {
-	objref.Handle
+	ScriptObjectSpecifier
 }
 
 // NameSpecifierFromID adopts an existing Objective-C object as a NameSpecifier
@@ -25,7 +26,8 @@ func NameSpecifierFromID(id objc.ID) *NameSpecifier {
 	if id == 0 {
 		return nil
 	}
-	x := &NameSpecifier{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NameSpecifier{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func nameSpecifierAdopt(id objc.ID) *NameSpecifier {
 	if id == 0 {
 		return nil
 	}
-	x := &NameSpecifier{Handle: objref.Wrap(id)}
+	x := &NameSpecifier{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NameSpecifier) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NameSpecifier) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NameSpecifier) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNameSpecifierWithCoder creates a new NameSpecifier.
@@ -65,85 +53,68 @@ func NewNameSpecifierWithCoder(inCoder *Coder) *NameSpecifier {
 	return nameSpecifierAdopt(_id)
 }
 
-// Invokes the super class’s initWithContainerClassDescription:containerSpecifier:key: method and then sets the name instance variable to name.
-//
-// NewNameSpecifierWithContainerClassDescriptionContainerSpecifierKeyName creates a new NameSpecifier.
+// NewNameSpecifierWithContainerClassDescriptionContainerSpecifierKeyName invokes the super class’s initWithContainerClassDescription:containerSpecifier:key: method and then sets the name instance variable to name.
 func NewNameSpecifierWithContainerClassDescriptionContainerSpecifierKeyName(classDesc *ScriptClassDescription, container *ScriptObjectSpecifier, property string, name string) *NameSpecifier {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNameSpecifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:name:"), objref.IDOf(classDesc), objref.IDOf(container), purego.NSString(property), purego.NSString(name))
 	return nameSpecifierAdopt(_id)
 }
 
-// Sets the name encapsulated with the receiver for the specified object in the container.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName sets the name encapsulated with the receiver for the specified object in the container.
 func (x *NameSpecifier) WithName(name StringProvider) *NameSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 	return x
 }
 
-// Sets the receiver’s child reference.
-//
-// WithChildSpecifier sets childSpecifier and returns the receiver so calls can be chained.
+// WithChildSpecifier sets the receiver’s child reference.
 func (x *NameSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *NameSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildSpecifier:"), objref.IDOf(childSpecifier))
 	return x
 }
 
-// Sets the container specifier of the receiver.
-//
-// WithContainerSpecifier sets containerSpecifier and returns the receiver so calls can be chained.
+// WithContainerSpecifier sets the container specifier of the receiver.
 func (x *NameSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *NameSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerSpecifier:"), objref.IDOf(containerSpecifier))
 	return x
 }
 
-// Sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
-//
-// WithContainerIsObjectBeingTested sets containerIsObjectBeingTested and returns the receiver so calls can be chained.
+// WithContainerIsObjectBeingTested sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
 func (x *NameSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *NameSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerIsObjectBeingTested:"), containerIsObjectBeingTested)
 	return x
 }
 
-// Sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
-//
-// WithContainerIsRangeContainerObject sets containerIsRangeContainerObject and returns the receiver so calls can be chained.
+// WithContainerIsRangeContainerObject sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
 func (x *NameSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *NameSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerIsRangeContainerObject:"), containerIsRangeContainerObject)
 	return x
 }
 
-// Sets the key of the receiver.
-//
-// WithKey sets key and returns the receiver so calls can be chained.
+// WithKey sets the key of the receiver.
 func (x *NameSpecifier) WithKey(key StringProvider) *NameSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), objref.IDOf(key))
 	return x
 }
 
-// Sets the class description of the receiver’s container specifier to a given specifier.
-//
-// WithContainerClassDescription sets containerClassDescription and returns the receiver so calls can be chained.
+// WithContainerClassDescription sets the class description of the receiver’s container specifier to a given specifier.
 func (x *NameSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *NameSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerClassDescription:"), objref.IDOf(containerClassDescription))
 	return x
 }
 
-// Sets the value of the evaluation error.
-//
-// WithEvaluationErrorNumber sets evaluationErrorNumber and returns the receiver so calls can be chained.
+// WithEvaluationErrorNumber sets the value of the evaluation error.
 func (x *NameSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *NameSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEvaluationErrorNumber:"), evaluationErrorNumber)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *NameSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *NameSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *NameSpecifier) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -152,6 +123,7 @@ func (x *NameSpecifier) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *NameSpecifier) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
@@ -173,3 +145,5 @@ type NameSpecifierable interface {
 }
 
 var _ NameSpecifierable = (*NameSpecifier)(nil)
+
+var _ ScriptObjectSpecifierProvider = (*NameSpecifier)(nil)

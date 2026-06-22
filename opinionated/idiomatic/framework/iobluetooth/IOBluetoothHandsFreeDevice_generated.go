@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object you use to manage phone calls on a connected Bluetooth hands-free phone or headset.
-//
 // IOBluetoothHandsFreeDevice is an idiomatic wrapper over the Objective-C class IOBluetoothHandsFreeDevice.
+//
+// It embeds [IOBluetoothHandsFree], promoting that type's methods.
+//
+// An object you use to manage phone calls on a connected Bluetooth hands-free phone or headset.
 type IOBluetoothHandsFreeDevice struct {
-	objref.Handle
+	IOBluetoothHandsFree
 }
 
 // IOBluetoothHandsFreeDeviceFromID adopts an existing Objective-C object as a IOBluetoothHandsFreeDevice
@@ -25,7 +26,8 @@ func IOBluetoothHandsFreeDeviceFromID(id objc.ID) *IOBluetoothHandsFreeDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &IOBluetoothHandsFreeDevice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IOBluetoothHandsFreeDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,171 +40,145 @@ func iOBluetoothHandsFreeDeviceAdopt(id objc.ID) *IOBluetoothHandsFreeDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &IOBluetoothHandsFreeDevice{Handle: objref.Wrap(id)}
+	x := &IOBluetoothHandsFreeDevice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *IOBluetoothHandsFreeDevice) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IOBluetoothHandsFreeDevice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IOBluetoothHandsFreeDevice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates an object to manage phone calls on a hands-free Bluetooth device.
-//
-// NewIOBluetoothHandsFreeDeviceWithDeviceDelegate creates a new IOBluetoothHandsFreeDevice.
+// NewIOBluetoothHandsFreeDeviceWithDeviceDelegate creates an object to manage phone calls on a hands-free Bluetooth device.
 func NewIOBluetoothHandsFreeDeviceWithDeviceDelegate(device *IOBluetoothDevice, delegate obj.Object) *IOBluetoothHandsFreeDevice {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IOBluetoothHandsFreeDevice")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:delegate:"), objref.IDOf(device), objref.IDOf(delegate))
 	return iOBluetoothHandsFreeDeviceAdopt(_id)
 }
 
-// Set the supported features
-//
-// WithSupportedFeatures sets supportedFeatures and returns the receiver so calls can be chained.
+// WithSupportedFeatures set the supported features
 func (x *IOBluetoothHandsFreeDevice) WithSupportedFeatures(supportedFeatures uint32) *IOBluetoothHandsFreeDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedFeatures:"), supportedFeatures)
 	return x
 }
 
-// Return the input volume
-//
-// WithInputVolume sets inputVolume and returns the receiver so calls can be chained.
+// WithInputVolume return the input volume
 func (x *IOBluetoothHandsFreeDevice) WithInputVolume(inputVolume float32) *IOBluetoothHandsFreeDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputVolume:"), inputVolume)
 	return x
 }
 
-// Return the input mute state.
-//
-// WithInputMuted sets inputMuted and returns the receiver so calls can be chained.
+// WithInputMuted return the input mute state.
 func (x *IOBluetoothHandsFreeDevice) WithInputMuted(inputMuted bool) *IOBluetoothHandsFreeDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputMuted:"), inputMuted)
 	return x
 }
 
-// Return the output volume
-//
-// WithOutputVolume sets outputVolume and returns the receiver so calls can be chained.
+// WithOutputVolume return the output volume
 func (x *IOBluetoothHandsFreeDevice) WithOutputVolume(outputVolume float32) *IOBluetoothHandsFreeDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputVolume:"), outputVolume)
 	return x
 }
 
-// Return the output mute state.
-//
-// WithOutputMuted sets outputMuted and returns the receiver so calls can be chained.
+// WithOutputMuted return the output mute state.
 func (x *IOBluetoothHandsFreeDevice) WithOutputMuted(outputMuted bool) *IOBluetoothHandsFreeDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputMuted:"), outputMuted)
 	return x
 }
 
-// Calls the phone number on a hands-free phone or headset.
+// DialNumber calls the phone number on a hands-free phone or headset.
 func (x *IOBluetoothHandsFreeDevice) DialNumber(aNumber string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dialNumber:"), purego.NSString(aNumber))
 }
 
-// Calls the phone number stored in a speed dial or memory slot of the hands-free phone or headset.
+// MemoryDial calls the phone number stored in a speed dial or memory slot of the hands-free phone or headset.
 func (x *IOBluetoothHandsFreeDevice) MemoryDial(memoryLocation int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("memoryDial:"), memoryLocation)
 }
 
-// Calls the number stored on the hands-free phone or headset again.
+// Redial calls the number stored on the hands-free phone or headset again.
 func (x *IOBluetoothHandsFreeDevice) Redial() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("redial"))
 }
 
-// Ends the current call or refuses an incoming call.
+// EndCall ends the current call or refuses an incoming call.
 func (x *IOBluetoothHandsFreeDevice) EndCall() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endCall"))
 }
 
-// Accepts an incoming call.
+// AcceptCall accepts an incoming call.
 func (x *IOBluetoothHandsFreeDevice) AcceptCall() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("acceptCall"))
 }
 
-// Accepts an incoming call and transfers the audio to the managed hands-free phone or headset.
+// AcceptCallOnPhone accepts an incoming call and transfers the audio to the managed hands-free phone or headset.
 func (x *IOBluetoothHandsFreeDevice) AcceptCallOnPhone() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("acceptCallOnPhone"))
 }
 
-// Sends the tone associated with a phone key to the hands-free Bluetooth device.
+// SendDTMF sends the tone associated with a phone key to the hands-free Bluetooth device.
 func (x *IOBluetoothHandsFreeDevice) SendDTMF(character string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendDTMF:"), purego.NSString(character))
 }
 
-// Requests that the Bluetooth audio gateway send the subscriber number to the delegate.
+// SubscriberNumber requests that the Bluetooth audio gateway send the subscriber number to the delegate.
 func (x *IOBluetoothHandsFreeDevice) SubscriberNumber() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriberNumber"))
 }
 
-// Requests that the Bluetooth audio gateway send the delegate a list of calls that are active, on hold, or being set up.
+// CurrentCallList requests that the Bluetooth audio gateway send the delegate a list of calls that are active, on hold, or being set up.
 func (x *IOBluetoothHandsFreeDevice) CurrentCallList() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentCallList"))
 }
 
-// Ends all calls that are on hold or returns a busy signal for a waiting call.
+// ReleaseHeldCalls ends all calls that are on hold or returns a busy signal for a waiting call.
 func (x *IOBluetoothHandsFreeDevice) ReleaseHeldCalls() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("releaseHeldCalls"))
 }
 
-// Ends all active calls and accepts a held or waiting call.
+// ReleaseActiveCalls ends all active calls and accepts a held or waiting call.
 func (x *IOBluetoothHandsFreeDevice) ReleaseActiveCalls() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("releaseActiveCalls"))
 }
 
-// Ends the call with the specified index.
+// ReleaseCall ends the call with the specified index.
 func (x *IOBluetoothHandsFreeDevice) ReleaseCall(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("releaseCall:"), index)
 }
 
-// Places all active calls on hold and accepts a held or waiting call.
+// HoldCall places all active calls on hold and accepts a held or waiting call.
 func (x *IOBluetoothHandsFreeDevice) HoldCall() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("holdCall"))
 }
 
-// Places all calls except the call with the specified index on hold.
+// PlaceAllOthersOnHold places all calls except the call with the specified index on hold.
 func (x *IOBluetoothHandsFreeDevice) PlaceAllOthersOnHold(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeAllOthersOnHold:"), index)
 }
 
-// Adds held calls to the current conversation.
+// AddHeldCall adds held calls to the current conversation.
 func (x *IOBluetoothHandsFreeDevice) AddHeldCall() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addHeldCall"))
 }
 
-// Ends all calls that are active or on hold, and accepts any waiting calls.
+// CallTransfer ends all calls that are active or on hold, and accepts any waiting calls.
 func (x *IOBluetoothHandsFreeDevice) CallTransfer() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callTransfer"))
 }
 
-// Moves the audio for current and future calls to a Mac.
+// TransferAudioToComputer moves the audio for current and future calls to a Mac.
 func (x *IOBluetoothHandsFreeDevice) TransferAudioToComputer() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transferAudioToComputer"))
 }
 
-// Moves the audio for current or future calls to a phone.
+// TransferAudioToPhone moves the audio for current or future calls to a phone.
 func (x *IOBluetoothHandsFreeDevice) TransferAudioToPhone() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transferAudioToPhone"))
 }
 
-// Sends a text message to a phone number.
+// SendSMSMessage sends a text message to a phone number.
 func (x *IOBluetoothHandsFreeDevice) SendSMSMessage(aNumber string, aMessage string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendSMS:message:"), purego.NSString(aNumber), purego.NSString(aMessage))
 }
 
-// Sends an AT command to the Bluetooth audio gateway.
+// SendATCommand sends an AT command to the Bluetooth audio gateway.
 func (x *IOBluetoothHandsFreeDevice) SendATCommand(atCommand string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendATCommand:"), purego.NSString(atCommand))
 }
@@ -238,3 +214,5 @@ type IOBluetoothHandsFreeDeviceable interface {
 }
 
 var _ IOBluetoothHandsFreeDeviceable = (*IOBluetoothHandsFreeDevice)(nil)
+
+var _ IOBluetoothHandsFreeProvider = (*IOBluetoothHandsFreeDevice)(nil)

@@ -23,7 +23,8 @@ func QuartzFilterViewFromID(id objc.ID) *QuartzFilterView {
 	if id == 0 {
 		return nil
 	}
-	x := &QuartzFilterView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QuartzFilterView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func quartzFilterViewAdopt(id objc.ID) *QuartzFilterView {
 	if id == 0 {
 		return nil
 	}
-	x := &QuartzFilterView{Handle: objref.Wrap(id)}
+	x := &QuartzFilterView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,12 +58,19 @@ func (x *QuartzFilterView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *QuartzFilterView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewQuartzFilterView creates a new QuartzFilterView.
 func NewQuartzFilterView() *QuartzFilterView {
 	_id := objc.Send[objc.ID](objc.ID(_class("QuartzFilterView")), objc.RegisterName("new"))
 	return quartzFilterViewAdopt(_id)
 }
 
+// SizeToFit wraps the corresponding Objective-C method.
 func (x *QuartzFilterView) SizeToFit() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sizeToFit"))
 }

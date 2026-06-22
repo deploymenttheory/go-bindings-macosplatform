@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Objects that define custom content and the timing of its output.
-//
 // CustomContent is an idiomatic wrapper over the Objective-C class AXCustomContent.
+//
+// Objects that define custom content and the timing of its output.
 type CustomContent struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CustomContentFromID(id objc.ID) *CustomContent {
 	if id == 0 {
 		return nil
 	}
-	x := &CustomContent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CustomContent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func customContentAdopt(id objc.ID) *CustomContent {
 	if id == 0 {
 		return nil
 	}
-	x := &CustomContent{Handle: objref.Wrap(id)}
+	x := &CustomContent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,20 +60,25 @@ func (x *CustomContent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CustomContent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCustomContent creates a new CustomContent.
 func NewCustomContent() *CustomContent {
 	_id := objc.Send[objc.ID](objc.ID(_class("AXCustomContent")), objc.RegisterName("new"))
 	return customContentAdopt(_id)
 }
 
-// An object that determines when to output custom accessibility content.
-//
-// WithImportance sets importance and returns the receiver so calls can be chained.
+// WithImportance an object that determines when to output custom accessibility content.
 func (x *CustomContent) WithImportance(importance CustomContentImportance) *CustomContent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportance:"), importance)
 	return x
 }
 
+// Label wraps the corresponding Objective-C method.
 func (x *CustomContent) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -80,11 +87,13 @@ func (x *CustomContent) Label() string {
 	return purego.GoString(_r)
 }
 
+// AttributedLabel wraps the corresponding Objective-C method.
 func (x *CustomContent) AttributedLabel() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedLabel"))
 	return obj.Wrap(_r)
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *CustomContent) Value() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	if _r == 0 {
@@ -93,16 +102,19 @@ func (x *CustomContent) Value() string {
 	return purego.GoString(_r)
 }
 
+// AttributedValue wraps the corresponding Objective-C method.
 func (x *CustomContent) AttributedValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedValue"))
 	return obj.Wrap(_r)
 }
 
+// Importance wraps the corresponding Objective-C method.
 func (x *CustomContent) Importance() CustomContentImportance {
 	_r := objc.Send[CustomContentImportance](objref.IDOf(x), objc.RegisterName("importance"))
 	return _r
 }
 
+// SetImportance wraps the corresponding Objective-C method.
 func (x *CustomContent) SetImportance(importance CustomContentImportance) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportance:"), importance)
 }

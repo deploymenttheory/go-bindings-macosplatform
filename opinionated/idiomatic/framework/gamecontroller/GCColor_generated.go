@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The color of a device light.
-//
 // Color is an idiomatic wrapper over the Objective-C class GCColor.
+//
+// The color of a device light.
 type Color struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ColorFromID(id objc.ID) *Color {
 	if id == 0 {
 		return nil
 	}
-	x := &Color{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Color{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func colorAdopt(id objc.ID) *Color {
 	if id == 0 {
 		return nil
 	}
-	x := &Color{Handle: objref.Wrap(id)}
+	x := &Color{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,32 @@ func (x *Color) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a color with the specified red, green, and blue values.
-//
-// NewColorWithRedGreenBlue creates a new Color.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Color) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewColorWithRedGreenBlue creates a color with the specified red, green, and blue values.
 func NewColorWithRedGreenBlue(red float32, green float32, blue float32) *Color {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GCColor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRed:green:blue:"), red, green, blue)
 	return colorAdopt(_id)
 }
 
+// Red wraps the corresponding Objective-C method.
 func (x *Color) Red() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("red"))
 	return _r
 }
 
+// Green wraps the corresponding Objective-C method.
 func (x *Color) Green() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("green"))
 	return _r
 }
 
+// Blue wraps the corresponding Objective-C method.
 func (x *Color) Blue() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("blue"))
 	return _r

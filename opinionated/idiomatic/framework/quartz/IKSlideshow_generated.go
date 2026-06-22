@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The IKSlideshow class encapsulates a data source and options for a slideshow.
-//
 // IKSlideshow is an idiomatic wrapper over the Objective-C class IKSlideshow.
+//
+// The IKSlideshow class encapsulates a data source and options for a slideshow.
 type IKSlideshow struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func IKSlideshowFromID(id objc.ID) *IKSlideshow {
 	if id == 0 {
 		return nil
 	}
-	x := &IKSlideshow{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IKSlideshow{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func iKSlideshowAdopt(id objc.ID) *IKSlideshow {
 	if id == 0 {
 		return nil
 	}
-	x := &IKSlideshow{Handle: objref.Wrap(id)}
+	x := &IKSlideshow{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,52 +60,57 @@ func (x *IKSlideshow) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IKSlideshow) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewIKSlideshow creates a new IKSlideshow.
 func NewIKSlideshow() *IKSlideshow {
 	_id := objc.Send[objc.ID](objc.ID(_class("IKSlideshow")), objc.RegisterName("new"))
 	return iKSlideshowAdopt(_id)
 }
 
-// Controls the interval of time before a slideshow starts to play automatically.
-//
-// WithAutoPlayDelay sets autoPlayDelay and returns the receiver so calls can be chained.
+// WithAutoPlayDelay controls the interval of time before a slideshow starts to play automatically.
 func (x *IKSlideshow) WithAutoPlayDelay(autoPlayDelay float64) *IKSlideshow {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoPlayDelay:"), autoPlayDelay)
 	return x
 }
 
-// Runs a slideshow that contains the specified kind of items, provided from a data source.
+// RunSlideshowWithDataSourceInModeOptions runs a slideshow that contains the specified kind of items, provided from a data source.
 func (x *IKSlideshow) RunSlideshowWithDataSourceInModeOptions(dataSource obj.Object, slideshowMode string, slideshowOptions obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runSlideshowWithDataSource:inMode:options:"), objref.IDOf(dataSource), purego.NSString(slideshowMode), objref.IDOf(slideshowOptions))
 }
 
-// Stops a slideshow.
+// StopSlideshow stops a slideshow.
 func (x *IKSlideshow) StopSlideshow(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopSlideshow:"), objref.IDOf(sender))
 }
 
-// Reloads the data for a slideshow.
+// ReloadData reloads the data for a slideshow.
 func (x *IKSlideshow) ReloadData() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadData"))
 }
 
-// Reloads the data for a slideshow, starting at the specified index.
+// ReloadSlideshowItemAtIndex reloads the data for a slideshow, starting at the specified index.
 func (x *IKSlideshow) ReloadSlideshowItemAtIndex(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadSlideshowItemAtIndex:"), index)
 }
 
-// Returns the index of the current slideshow item.
+// IndexOfCurrentSlideshowItem returns the index of the current slideshow item.
 func (x *IKSlideshow) IndexOfCurrentSlideshowItem() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfCurrentSlideshowItem"))
 	return _r
 }
 
-// Array of filters reflecting the current user adjustments in the adjust or effects tab.
+// AutoPlayDelay array of filters reflecting the current user adjustments in the adjust or effects tab.
 func (x *IKSlideshow) AutoPlayDelay() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("autoPlayDelay"))
 	return _r
 }
 
+// SetAutoPlayDelay wraps the corresponding Objective-C method.
 func (x *IKSlideshow) SetAutoPlayDelay(autoPlayDelay float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoPlayDelay:"), autoPlayDelay)
 }

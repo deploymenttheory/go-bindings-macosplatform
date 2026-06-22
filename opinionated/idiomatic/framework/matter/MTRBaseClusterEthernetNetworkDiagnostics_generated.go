@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBaseClusterEthernetNetworkDiagnostics is an idiomatic wrapper over the Objective-C class MTRBaseClusterEthernetNetworkDiagnostics.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
 type MTRBaseClusterEthernetNetworkDiagnostics struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterEthernetNetworkDiagnosticsFromID adopts an existing Objective-C object as a MTRBaseClusterEthernetNetworkDiagnostics
@@ -25,7 +26,8 @@ func MTRBaseClusterEthernetNetworkDiagnosticsFromID(id objc.ID) *MTRBaseClusterE
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterEthernetNetworkDiagnostics{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterEthernetNetworkDiagnostics{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func mTRBaseClusterEthernetNetworkDiagnosticsAdopt(id objc.ID) *MTRBaseClusterEt
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterEthernetNetworkDiagnostics{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterEthernetNetworkDiagnostics{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterEthernetNetworkDiagnosticsWithDeviceEndpointIDQueue creates a new MTRBaseClusterEthernetNetworkDiagnostics.
+// NewMTRBaseClusterEthernetNetworkDiagnosticsWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterEthernetNetworkDiagnosticsWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterEthernetNetworkDiagnostics {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterEthernetNetworkDiagnostics")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -74,8 +60,10 @@ func NewMTRBaseClusterEthernetNetworkDiagnosticsWithDeviceEndpointQueue(device *
 	return mTRBaseClusterEthernetNetworkDiagnosticsAdopt(_id)
 }
 
+// ReadAttributePHYRateWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePHYRateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePHYRateWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePHYRateWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -97,8 +85,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePHYRateWithCompl
 	}
 }
 
+// SubscribeAttributePHYRateWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePHYRateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePHYRateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePHYRateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -120,8 +110,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePHYRateWith
 	}
 }
 
+// ReadAttributeFullDuplexWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFullDuplexWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeFullDuplexWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeFullDuplexWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -143,8 +135,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeFullDuplexWithCo
 	}
 }
 
+// SubscribeAttributeFullDuplexWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFullDuplexWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeFullDuplexWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeFullDuplexWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -166,8 +160,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeFullDuplexW
 	}
 }
 
+// ReadAttributePacketRxCountWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePacketRxCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePacketRxCountWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePacketRxCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -189,8 +185,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePacketRxCountWit
 	}
 }
 
+// SubscribeAttributePacketRxCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePacketRxCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePacketRxCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePacketRxCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -212,8 +210,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePacketRxCou
 	}
 }
 
+// ReadAttributePacketTxCountWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePacketTxCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePacketTxCountWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePacketTxCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -235,8 +235,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePacketTxCountWit
 	}
 }
 
+// SubscribeAttributePacketTxCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePacketTxCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePacketTxCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePacketTxCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -258,8 +260,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePacketTxCou
 	}
 }
 
+// ReadAttributeTxErrCountWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeTxErrCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeTxErrCountWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeTxErrCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -281,8 +285,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeTxErrCountWithCo
 	}
 }
 
+// SubscribeAttributeTxErrCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTxErrCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeTxErrCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeTxErrCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -304,8 +310,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeTxErrCountW
 	}
 }
 
+// ReadAttributeCollisionCountWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCollisionCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeCollisionCountWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeCollisionCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -327,8 +335,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeCollisionCountWi
 	}
 }
 
+// SubscribeAttributeCollisionCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCollisionCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeCollisionCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeCollisionCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -350,8 +360,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeCollisionCo
 	}
 }
 
+// ReadAttributeOverrunCountWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeOverrunCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeOverrunCountWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeOverrunCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -373,8 +385,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeOverrunCountWith
 	}
 }
 
+// SubscribeAttributeOverrunCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOverrunCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeOverrunCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeOverrunCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -396,8 +410,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeOverrunCoun
 	}
 }
 
+// ReadAttributeCarrierDetectWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCarrierDetectWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeCarrierDetectWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeCarrierDetectWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -419,8 +435,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeCarrierDetectWit
 	}
 }
 
+// SubscribeAttributeCarrierDetectWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCarrierDetectWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeCarrierDetectWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeCarrierDetectWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -442,8 +460,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeCarrierDete
 	}
 }
 
+// ReadAttributeTimeSinceResetWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeTimeSinceResetWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeTimeSinceResetWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeTimeSinceResetWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,8 +485,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeTimeSinceResetWi
 	}
 }
 
+// SubscribeAttributeTimeSinceResetWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTimeSinceResetWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeTimeSinceResetWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeTimeSinceResetWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -488,8 +510,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeTimeSinceRe
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -511,8 +535,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeGeneratedCommand
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -534,8 +560,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeGeneratedCo
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -557,8 +585,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeAcceptedCommandL
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -580,8 +610,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeAcceptedCom
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -603,8 +635,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeAttributeListWit
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -626,8 +660,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeAttributeLi
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -649,8 +685,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeFeatureMapWithCo
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -672,8 +710,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeFeatureMapW
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -695,8 +735,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeClusterRevisionW
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -718,8 +760,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeClusterRevi
 	}
 }
 
+// ReadAttributePHYRate wraps the corresponding Objective-C method.
+//
 // ReadAttributePHYRate blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePHYRate(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePHYRate(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -741,8 +785,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePHYRate(ctx cont
 	}
 }
 
+// SubscribeAttributePHYRateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePHYRateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePHYRateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePHYRateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -764,8 +810,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePHYRateWith
 	}
 }
 
+// ReadAttributeFullDuplex wraps the corresponding Objective-C method.
+//
 // ReadAttributeFullDuplex blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeFullDuplex(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeFullDuplex(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -787,8 +835,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeFullDuplex(ctx c
 	}
 }
 
+// SubscribeAttributeFullDuplexWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFullDuplexWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeFullDuplexWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeFullDuplexWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -810,8 +860,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeFullDuplexW
 	}
 }
 
+// ReadAttributePacketRxCount wraps the corresponding Objective-C method.
+//
 // ReadAttributePacketRxCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePacketRxCount(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePacketRxCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -833,8 +885,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePacketRxCount(ct
 	}
 }
 
+// SubscribeAttributePacketRxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePacketRxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePacketRxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePacketRxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -856,8 +910,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePacketRxCou
 	}
 }
 
+// ReadAttributePacketTxCount wraps the corresponding Objective-C method.
+//
 // ReadAttributePacketTxCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePacketTxCount(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePacketTxCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -879,8 +935,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePacketTxCount(ct
 	}
 }
 
+// SubscribeAttributePacketTxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePacketTxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePacketTxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePacketTxCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -902,8 +960,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePacketTxCou
 	}
 }
 
+// ReadAttributeTxErrCount wraps the corresponding Objective-C method.
+//
 // ReadAttributeTxErrCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeTxErrCount(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeTxErrCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -925,8 +985,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeTxErrCount(ctx c
 	}
 }
 
+// SubscribeAttributeTxErrCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTxErrCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeTxErrCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeTxErrCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -948,8 +1010,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeTxErrCountW
 	}
 }
 
+// ReadAttributeCollisionCount wraps the corresponding Objective-C method.
+//
 // ReadAttributeCollisionCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeCollisionCount(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeCollisionCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -971,8 +1035,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeCollisionCount(c
 	}
 }
 
+// SubscribeAttributeCollisionCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCollisionCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeCollisionCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeCollisionCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -994,8 +1060,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeCollisionCo
 	}
 }
 
+// ReadAttributeOverrunCount wraps the corresponding Objective-C method.
+//
 // ReadAttributeOverrunCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeOverrunCount(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeOverrunCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1017,8 +1085,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeOverrunCount(ctx
 	}
 }
 
+// SubscribeAttributeOverrunCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOverrunCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeOverrunCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeOverrunCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1040,8 +1110,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeOverrunCoun
 	}
 }
 
+// ReadAttributeCarrierDetect wraps the corresponding Objective-C method.
+//
 // ReadAttributeCarrierDetect blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeCarrierDetect(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeCarrierDetect(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1063,8 +1135,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeCarrierDetect(ct
 	}
 }
 
+// SubscribeAttributeCarrierDetectWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCarrierDetectWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeCarrierDetectWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeCarrierDetectWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1086,8 +1160,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeCarrierDete
 	}
 }
 
+// ReadAttributeTimeSinceReset wraps the corresponding Objective-C method.
+//
 // ReadAttributeTimeSinceReset blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeTimeSinceReset(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeTimeSinceReset(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1109,8 +1185,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeTimeSinceReset(c
 	}
 }
 
+// SubscribeAttributeTimeSinceResetWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTimeSinceResetWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeTimeSinceResetWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeTimeSinceResetWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1132,8 +1210,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeTimeSinceRe
 	}
 }
 
+// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1155,8 +1235,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeGeneratedCommand
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1178,8 +1260,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeGeneratedCo
 	}
 }
 
+// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1201,8 +1285,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeAcceptedCommandL
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1224,8 +1310,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeAcceptedCom
 	}
 }
 
+// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeAttributeList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1247,8 +1335,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeAttributeList(ct
 	}
 }
 
+// SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1270,8 +1360,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeAttributeLi
 	}
 }
 
+// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1293,8 +1385,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeFeatureMap(ctx c
 	}
 }
 
+// SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1316,8 +1410,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeFeatureMapW
 	}
 }
 
+// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1339,8 +1435,10 @@ func (x *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeClusterRevision(
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1424,3 +1522,7 @@ type MTRBaseClusterEthernetNetworkDiagnosticsable interface {
 }
 
 var _ MTRBaseClusterEthernetNetworkDiagnosticsable = (*MTRBaseClusterEthernetNetworkDiagnostics)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterEthernetNetworkDiagnostics)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterEthernetNetworkDiagnostics)(nil)

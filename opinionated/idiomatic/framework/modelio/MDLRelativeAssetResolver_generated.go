@@ -23,7 +23,8 @@ func RelativeAssetResolverFromID(id objc.ID) *RelativeAssetResolver {
 	if id == 0 {
 		return nil
 	}
-	x := &RelativeAssetResolver{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RelativeAssetResolver{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func relativeAssetResolverAdopt(id objc.ID) *RelativeAssetResolver {
 	if id == 0 {
 		return nil
 	}
-	x := &RelativeAssetResolver{Handle: objref.Wrap(id)}
+	x := &RelativeAssetResolver{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *RelativeAssetResolver) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RelativeAssetResolver) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRelativeAssetResolverWithAsset creates a new RelativeAssetResolver.
 func NewRelativeAssetResolverWithAsset(asset *Asset) *RelativeAssetResolver {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLRelativeAssetResolver")), objc.RegisterName("alloc"))
@@ -63,17 +71,19 @@ func NewRelativeAssetResolverWithAsset(asset *Asset) *RelativeAssetResolver {
 	return relativeAssetResolverAdopt(_id)
 }
 
-// WithAsset sets asset and returns the receiver so calls can be chained.
+// WithAsset sets the property and returns the receiver so calls can be chained.
 func (x *RelativeAssetResolver) WithAsset(asset *Asset) *RelativeAssetResolver {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAsset:"), objref.IDOf(asset))
 	return x
 }
 
+// Asset wraps the corresponding Objective-C method.
 func (x *RelativeAssetResolver) Asset() *Asset {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("asset"))
 	return AssetFromID(_r)
 }
 
+// SetAsset wraps the corresponding Objective-C method.
 func (x *RelativeAssetResolver) SetAsset(asset *Asset) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAsset:"), objref.IDOf(asset))
 }

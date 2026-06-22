@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that builds audio and video output settings dictionaries.
-//
 // OutputSettingsAssistant is an idiomatic wrapper over the Objective-C class AVOutputSettingsAssistant.
+//
+// An object that builds audio and video output settings dictionaries.
 type OutputSettingsAssistant struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func OutputSettingsAssistantFromID(id objc.ID) *OutputSettingsAssistant {
 	if id == 0 {
 		return nil
 	}
-	x := &OutputSettingsAssistant{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OutputSettingsAssistant{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func outputSettingsAssistantAdopt(id objc.ID) *OutputSettingsAssistant {
 	if id == 0 {
 		return nil
 	}
-	x := &OutputSettingsAssistant{Handle: objref.Wrap(id)}
+	x := &OutputSettingsAssistant{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *OutputSettingsAssistant) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OutputSettingsAssistant) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewOutputSettingsAssistant creates a new OutputSettingsAssistant.
 func NewOutputSettingsAssistant() *OutputSettingsAssistant {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVOutputSettingsAssistant")), objc.RegisterName("new"))
 	return outputSettingsAssistantAdopt(_id)
 }
 
-// A dictionary of key/value pairs, as specified in AVAudioSettings.h, to be used when e.g. creating an instance of AVAssetWriterInput The value of this property may change as a result of setting a new value for the sourceAudioFormat property.
+// AudioSettings a dictionary of key/value pairs, as specified in AVAudioSettings.h, to be used when e.g. creating an instance of AVAssetWriterInput The value of this property may change as a result of setting a new value for the sourceAudioFormat property.
 func (x *OutputSettingsAssistant) AudioSettings() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioSettings"))
 	return obj.Wrap(_r)
 }
 
-// A dictionary of key/value pairs, as specified in AVVideoSettings.h, to be used when e.g. creating an instance of AVAssetWriterInput The value of this property may change as a result of setting a new value for the sourceVideoFormat property.
+// VideoSettings a dictionary of key/value pairs, as specified in AVVideoSettings.h, to be used when e.g. creating an instance of AVAssetWriterInput The value of this property may change as a result of setting a new value for the sourceVideoFormat property.
 func (x *OutputSettingsAssistant) VideoSettings() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoSettings"))
 	return obj.Wrap(_r)
 }
 
-// A UTI indicating the type of file to be written, to be used when e.g. creating an instance of AVAssetWriter Use [[UTType typeWithIdentifier:outputFileType] preferredFilenameExtension] to get a suitable file extension for a given file type.
+// OutputFileType a UTI indicating the type of file to be written, to be used when e.g. creating an instance of AVAssetWriter Use [[UTType typeWithIdentifier:outputFileType] preferredFilenameExtension] to get a suitable file extension for a given file type.
 func (x *OutputSettingsAssistant) OutputFileType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputFileType"))
 	return obj.Wrap(_r)

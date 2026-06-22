@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The host app context from which an app extension is invoked.
-//
 // ExtensionContext is an idiomatic wrapper over the Objective-C class NSExtensionContext.
+//
+// The host app context from which an app extension is invoked.
 type ExtensionContext struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ExtensionContextFromID(id objc.ID) *ExtensionContext {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionContext{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExtensionContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func extensionContextAdopt(id objc.ID) *ExtensionContext {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionContext{Handle: objref.Wrap(id)}
+	x := &ExtensionContext{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,35 @@ func (x *ExtensionContext) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExtensionContext) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewExtensionContext creates a new ExtensionContext.
 func NewExtensionContext() *ExtensionContext {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSExtensionContext")), objc.RegisterName("new"))
 	return extensionContextAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *ExtensionContext) WithScriptingProperties(scriptingProperties obj.Object) *ExtensionContext {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Tells the host app to complete the app extension request with an array of result items.
+// CompleteRequestReturningItemsCompletionHandler tells the host app to complete the app extension request with an array of result items.
 func (x *ExtensionContext) CompleteRequestReturningItemsCompletionHandler(items obj.Object, completionHandler func(bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeRequestReturningItems:completionHandler:"), objref.IDOf(items), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
-// Asks the system to open a URL on behalf of the currently running app extension.
+// OpenURLCompletionHandler asks the system to open a URL on behalf of the currently running app extension.
 func (x *ExtensionContext) OpenURLCompletionHandler(uRL string, completionHandler func(bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openURL:completionHandler:"), rt.FileURL(uRL), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
+// InputItems wraps the corresponding Objective-C method.
 func (x *ExtensionContext) InputItems() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputItems"))
 	return obj.Wrap(_r)

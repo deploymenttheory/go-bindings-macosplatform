@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A node representing a MPSCNNNeuronHardSigmoid kernel For each pixel, applies the following function:
-//
 // CNNNeuronHardSigmoidNode is an idiomatic wrapper over the Objective-C class MPSCNNNeuronHardSigmoidNode.
+//
+// It embeds [CNNNeuronNode], promoting that type's methods.
+//
+// A node representing a MPSCNNNeuronHardSigmoid kernel For each pixel, applies the following function:
 type CNNNeuronHardSigmoidNode struct {
-	objref.Handle
+	CNNNeuronNode
 }
 
 // CNNNeuronHardSigmoidNodeFromID adopts an existing Objective-C object as a CNNNeuronHardSigmoidNode
@@ -25,7 +26,8 @@ func CNNNeuronHardSigmoidNodeFromID(id objc.ID) *CNNNeuronHardSigmoidNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNeuronHardSigmoidNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNNeuronHardSigmoidNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,47 +40,27 @@ func cNNNeuronHardSigmoidNodeAdopt(id objc.ID) *CNNNeuronHardSigmoidNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNeuronHardSigmoidNode{Handle: objref.Wrap(id)}
+	x := &CNNNeuronHardSigmoidNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNNeuronHardSigmoidNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNNeuronHardSigmoidNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNNeuronHardSigmoidNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Init a node representing a MPSCNNNeuronHardSigmoid kernel
-//
-// NewCNNNeuronHardSigmoidNodeWithSourceAB creates a new CNNNeuronHardSigmoidNode.
+// NewCNNNeuronHardSigmoidNodeWithSourceAB init a node representing a MPSCNNNeuronHardSigmoid kernel
 func NewCNNNeuronHardSigmoidNodeWithSourceAB(sourceNode *NNImageNode, a float32, b float32) *CNNNeuronHardSigmoidNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronHardSigmoidNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:a:b:"), objref.IDOf(sourceNode), a, b)
 	return cNNNeuronHardSigmoidNodeAdopt(_id)
 }
 
-// Init a node with default values for parameters a & b
-//
-// NewCNNNeuronHardSigmoidNodeWithSource creates a new CNNNeuronHardSigmoidNode.
+// NewCNNNeuronHardSigmoidNodeWithSource init a node with default values for parameters a & b
 func NewCNNNeuronHardSigmoidNodeWithSource(sourceNode *NNImageNode) *CNNNeuronHardSigmoidNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronHardSigmoidNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return cNNNeuronHardSigmoidNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNNeuronHardSigmoidNode) WithLabel(label string) *CNNNeuronHardSigmoidNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -91,3 +73,7 @@ type CNNNeuronHardSigmoidNodeable interface {
 }
 
 var _ CNNNeuronHardSigmoidNodeable = (*CNNNeuronHardSigmoidNode)(nil)
+
+var _ CNNNeuronNodeProvider = (*CNNNeuronHardSigmoidNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNNeuronHardSigmoidNode)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An installed file system module.
-//
 // ModuleIdentity is an idiomatic wrapper over the Objective-C class FSModuleIdentity.
+//
+// An installed file system module.
 type ModuleIdentity struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ModuleIdentityFromID(id objc.ID) *ModuleIdentity {
 	if id == 0 {
 		return nil
 	}
-	x := &ModuleIdentity{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ModuleIdentity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func moduleIdentityAdopt(id objc.ID) *ModuleIdentity {
 	if id == 0 {
 		return nil
 	}
-	x := &ModuleIdentity{Handle: objref.Wrap(id)}
+	x := &ModuleIdentity{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *ModuleIdentity) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ModuleIdentity) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewModuleIdentity creates a new ModuleIdentity.
 func NewModuleIdentity() *ModuleIdentity {
 	_id := objc.Send[objc.ID](objc.ID(_class("FSModuleIdentity")), objc.RegisterName("new"))
 	return moduleIdentityAdopt(_id)
 }
 
-// The module's bundle identifier.
+// BundleIdentifier the module's bundle identifier.
 func (x *ModuleIdentity) BundleIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {
@@ -73,12 +81,13 @@ func (x *ModuleIdentity) BundleIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// The module's URL.
+// Url the module's URL.
 func (x *ModuleIdentity) Url() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
+// IsEnabled wraps the corresponding Objective-C method.
 func (x *ModuleIdentity) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r

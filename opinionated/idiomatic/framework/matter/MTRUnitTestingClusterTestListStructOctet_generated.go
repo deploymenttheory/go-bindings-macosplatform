@@ -13,6 +13,8 @@ import (
 )
 
 // MTRUnitTestingClusterTestListStructOctet is an idiomatic wrapper over the Objective-C class MTRUnitTestingClusterTestListStructOctet.
+//
+// MTRUnitTestingClusterTestListStructOctet is an abstract base — you do not construct it directly. Construct one of [MTRTestClusterClusterTestListStructOctet] and pass it where a MTRUnitTestingClusterTestListStructOctet is accepted.
 type MTRUnitTestingClusterTestListStructOctet struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRUnitTestingClusterTestListStructOctetFromID(id objc.ID) *MTRUnitTestingC
 	if id == 0 {
 		return nil
 	}
-	x := &MTRUnitTestingClusterTestListStructOctet{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRUnitTestingClusterTestListStructOctet{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRUnitTestingClusterTestListStructOctetAdopt(id objc.ID) *MTRUnitTestingCl
 	if id == 0 {
 		return nil
 	}
-	x := &MTRUnitTestingClusterTestListStructOctet{Handle: objref.Wrap(id)}
+	x := &MTRUnitTestingClusterTestListStructOctet{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,38 +60,42 @@ func (x *MTRUnitTestingClusterTestListStructOctet) IsKind(className string) bool
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRUnitTestingClusterTestListStructOctet creates a new MTRUnitTestingClusterTestListStructOctet.
-func NewMTRUnitTestingClusterTestListStructOctet() *MTRUnitTestingClusterTestListStructOctet {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRUnitTestingClusterTestListStructOctet")), objc.RegisterName("new"))
-	return mTRUnitTestingClusterTestListStructOctetAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRUnitTestingClusterTestListStructOctet) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithMember1 sets member1 and returns the receiver so calls can be chained.
+// WithMember1 sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterTestListStructOctet) WithMember1(member1 obj.Object) *MTRUnitTestingClusterTestListStructOctet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMember1:"), objref.IDOf(member1))
 	return x
 }
 
-// WithMember2 sets member2 and returns the receiver so calls can be chained.
+// WithMember2 sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterTestListStructOctet) WithMember2(member2 obj.Object) *MTRUnitTestingClusterTestListStructOctet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMember2:"), objref.IDOf(member2))
 	return x
 }
 
+// Member1 wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestListStructOctet) Member1() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("member1"))
 	return obj.Wrap(_r)
 }
 
+// SetMember1 wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestListStructOctet) SetMember1(member1 obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMember1:"), objref.IDOf(member1))
 }
 
+// Member2 wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestListStructOctet) Member2() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("member2"))
 	return obj.Wrap(_r)
 }
 
+// SetMember2 wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestListStructOctet) SetMember2(member2 obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMember2:"), objref.IDOf(member2))
 }
@@ -104,3 +112,10 @@ type MTRUnitTestingClusterTestListStructOctetable interface {
 }
 
 var _ MTRUnitTestingClusterTestListStructOctetable = (*MTRUnitTestingClusterTestListStructOctet)(nil)
+
+// isMTRUnitTestingClusterTestListStructOctet marks MTRUnitTestingClusterTestListStructOctet — and, by embedding promotion, its
+// subclasses — as a member of the MTRUnitTestingClusterTestListStructOctet hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRUnitTestingClusterTestListStructOctet) isMTRUnitTestingClusterTestListStructOctet() {}
+
+var _ MTRUnitTestingClusterTestListStructOctetProvider = (*MTRUnitTestingClusterTestListStructOctet)(nil)

@@ -23,7 +23,8 @@ func MTRFanControlClusterStepParamsFromID(id objc.ID) *MTRFanControlClusterStepP
 	if id == 0 {
 		return nil
 	}
-	x := &MTRFanControlClusterStepParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRFanControlClusterStepParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRFanControlClusterStepParamsAdopt(id objc.ID) *MTRFanControlClusterStepPa
 	if id == 0 {
 		return nil
 	}
-	x := &MTRFanControlClusterStepParams{Handle: objref.Wrap(id)}
+	x := &MTRFanControlClusterStepParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,89 +58,99 @@ func (x *MTRFanControlClusterStepParams) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRFanControlClusterStepParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRFanControlClusterStepParams creates a new MTRFanControlClusterStepParams.
 func NewMTRFanControlClusterStepParams() *MTRFanControlClusterStepParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRFanControlClusterStepParams")), objc.RegisterName("new"))
 	return mTRFanControlClusterStepParamsAdopt(_id)
 }
 
-// WithDirection sets direction and returns the receiver so calls can be chained.
+// WithDirection sets the property and returns the receiver so calls can be chained.
 func (x *MTRFanControlClusterStepParams) WithDirection(direction obj.Object) *MTRFanControlClusterStepParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirection:"), objref.IDOf(direction))
 	return x
 }
 
-// WithWrap sets wrap and returns the receiver so calls can be chained.
+// WithWrap sets the property and returns the receiver so calls can be chained.
 func (x *MTRFanControlClusterStepParams) WithWrap(wrap obj.Object) *MTRFanControlClusterStepParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWrap:"), objref.IDOf(wrap))
 	return x
 }
 
-// WithLowestOff sets lowestOff and returns the receiver so calls can be chained.
+// WithLowestOff sets the property and returns the receiver so calls can be chained.
 func (x *MTRFanControlClusterStepParams) WithLowestOff(lowestOff obj.Object) *MTRFanControlClusterStepParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowestOff:"), objref.IDOf(lowestOff))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRFanControlClusterStepParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRFanControlClusterStepParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRFanControlClusterStepParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRFanControlClusterStepParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// Direction wraps the corresponding Objective-C method.
 func (x *MTRFanControlClusterStepParams) Direction() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("direction"))
 	return obj.Wrap(_r)
 }
 
+// SetDirection wraps the corresponding Objective-C method.
 func (x *MTRFanControlClusterStepParams) SetDirection(direction obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirection:"), objref.IDOf(direction))
 }
 
+// Wrap wraps the corresponding Objective-C method.
 func (x *MTRFanControlClusterStepParams) Wrap() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wrap"))
 	return obj.Wrap(_r)
 }
 
+// SetWrap wraps the corresponding Objective-C method.
 func (x *MTRFanControlClusterStepParams) SetWrap(wrap obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWrap:"), objref.IDOf(wrap))
 }
 
+// LowestOff wraps the corresponding Objective-C method.
 func (x *MTRFanControlClusterStepParams) LowestOff() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lowestOff"))
 	return obj.Wrap(_r)
 }
 
+// SetLowestOff wraps the corresponding Objective-C method.
 func (x *MTRFanControlClusterStepParams) SetLowestOff(lowestOff obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowestOff:"), objref.IDOf(lowestOff))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRFanControlClusterStepParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRFanControlClusterStepParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRFanControlClusterStepParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRFanControlClusterStepParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

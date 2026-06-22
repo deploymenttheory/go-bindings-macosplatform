@@ -14,11 +14,13 @@ import (
 	"unsafe"
 )
 
-// An abstract superclass that you subclass to create a Core Data atomic store.
-//
 // AtomicStore is an idiomatic wrapper over the Objective-C class NSAtomicStore.
+//
+// It embeds [PersistentStore], promoting that type's methods.
+//
+// An abstract superclass that you subclass to create a Core Data atomic store.
 type AtomicStore struct {
-	objref.Handle
+	PersistentStore
 }
 
 // AtomicStoreFromID adopts an existing Objective-C object as a AtomicStore
@@ -27,7 +29,8 @@ func AtomicStoreFromID(id objc.ID) *AtomicStore {
 	if id == 0 {
 		return nil
 	}
-	x := &AtomicStore{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AtomicStore{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,68 +43,44 @@ func atomicStoreAdopt(id objc.ID) *AtomicStore {
 	if id == 0 {
 		return nil
 	}
-	x := &AtomicStore{Handle: objref.Wrap(id)}
+	x := &AtomicStore{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *AtomicStore) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AtomicStore) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AtomicStore) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates an atomic store at the specified location.
-//
-// NewAtomicStoreWithPersistentStoreCoordinatorConfigurationNameURLOptions creates a new AtomicStore.
+// NewAtomicStoreWithPersistentStoreCoordinatorConfigurationNameURLOptions creates an atomic store at the specified location.
 func NewAtomicStoreWithPersistentStoreCoordinatorConfigurationNameURLOptions(coordinator *PersistentStoreCoordinator, configurationName string, url string, options obj.Object) *AtomicStore {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAtomicStore")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersistentStoreCoordinator:configurationName:URL:options:"), objref.IDOf(coordinator), purego.NSString(configurationName), rt.FileURL(url), objref.IDOf(options))
 	return atomicStoreAdopt(_id)
 }
 
-// The URL for the persistent store.
-//
-// WithURL sets uRL and returns the receiver so calls can be chained.
+// WithURL the URL for the persistent store.
 func (x *AtomicStore) WithURL(uRL string) *AtomicStore {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 	return x
 }
 
-// The unique identifier for the persistent store.
-//
-// WithIdentifier sets identifier and returns the receiver so calls can be chained.
+// WithIdentifier the unique identifier for the persistent store.
 func (x *AtomicStore) WithIdentifier(identifier string) *AtomicStore {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 	return x
 }
 
-// A Boolean value that indicates whether the persistent store is read-only.
-//
-// WithReadOnly sets readOnly and returns the receiver so calls can be chained.
+// WithReadOnly a Boolean value that indicates whether the persistent store is read-only.
 func (x *AtomicStore) WithReadOnly(readOnly bool) *AtomicStore {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadOnly:"), readOnly)
 	return x
 }
 
-// The metadata for the persistent store.
-//
-// WithMetadata sets metadata and returns the receiver so calls can be chained.
+// WithMetadata the metadata for the persistent store.
 func (x *AtomicStore) WithMetadata(metadata obj.Object) *AtomicStore {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), objref.IDOf(metadata))
 	return x
 }
 
-// Loads the cache nodes for the receiver.
+// Load loads the cache nodes for the receiver.
 //
 // Load returns an error if the operation did not succeed.
 func (x *AtomicStore) Load() error {
@@ -113,7 +92,7 @@ func (x *AtomicStore) Load() error {
 	return nil
 }
 
-// Saves the cache nodes.
+// Save saves the cache nodes.
 //
 // Save returns an error if the operation did not succeed.
 func (x *AtomicStore) Save() error {
@@ -125,52 +104,52 @@ func (x *AtomicStore) Save() error {
 	return nil
 }
 
-// Returns a new cache node for a given managed object.
+// NewCacheNodeForManagedObject returns a new cache node for a given managed object.
 func (x *AtomicStore) NewCacheNodeForManagedObject(managedObject *ManagedObject) *AtomicStoreCacheNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("newCacheNodeForManagedObject:"), objref.IDOf(managedObject))
 	return AtomicStoreCacheNodeFromID(_r)
 }
 
-// Updates the given cache node using the values in a given managed object.
+// UpdateCacheNodeFromManagedObject updates the given cache node using the values in a given managed object.
 func (x *AtomicStore) UpdateCacheNodeFromManagedObject(node *AtomicStoreCacheNode, managedObject *ManagedObject) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateCacheNode:fromManagedObject:"), objref.IDOf(node), objref.IDOf(managedObject))
 }
 
-// Returns the set of cache nodes registered with the receiver.
+// CacheNodes returns the set of cache nodes registered with the receiver.
 func (x *AtomicStore) CacheNodes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cacheNodes"))
 	return obj.Wrap(_r)
 }
 
-// Registers a set of cache nodes with the receiver.
+// AddCacheNodes registers a set of cache nodes with the receiver.
 func (x *AtomicStore) AddCacheNodes(cacheNodes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addCacheNodes:"), objref.IDOf(cacheNodes))
 }
 
-// Method invoked before the store removes the given collection of cache nodes.
+// WillRemoveCacheNodes method invoked before the store removes the given collection of cache nodes.
 func (x *AtomicStore) WillRemoveCacheNodes(cacheNodes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willRemoveCacheNodes:"), objref.IDOf(cacheNodes))
 }
 
-// Returns the cache node for a given managed object ID.
+// CacheNodeForObjectID returns the cache node for a given managed object ID.
 func (x *AtomicStore) CacheNodeForObjectID(objectID *ManagedObjectID) *AtomicStoreCacheNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cacheNodeForObjectID:"), objref.IDOf(objectID))
 	return AtomicStoreCacheNodeFromID(_r)
 }
 
-// Returns a managed object ID from the reference data for a specified entity.
+// ObjectIDForEntityReferenceObject returns a managed object ID from the reference data for a specified entity.
 func (x *AtomicStore) ObjectIDForEntityReferenceObject(entity *EntityDescription, data obj.Object) *ManagedObjectID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectIDForEntity:referenceObject:"), objref.IDOf(entity), objref.IDOf(data))
 	return ManagedObjectIDFromID(_r)
 }
 
-// Returns a new reference object for a given managed object.
+// NewReferenceObjectForManagedObject returns a new reference object for a given managed object.
 func (x *AtomicStore) NewReferenceObjectForManagedObject(managedObject *ManagedObject) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("newReferenceObjectForManagedObject:"), objref.IDOf(managedObject))
 	return obj.Wrap(_r)
 }
 
-// Returns the reference object for a given managed object ID.
+// ReferenceObjectForObjectID returns the reference object for a given managed object ID.
 func (x *AtomicStore) ReferenceObjectForObjectID(objectID *ManagedObjectID) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("referenceObjectForObjectID:"), objref.IDOf(objectID))
 	return obj.Wrap(_r)
@@ -197,3 +176,5 @@ type AtomicStoreable interface {
 }
 
 var _ AtomicStoreable = (*AtomicStore)(nil)
+
+var _ PersistentStoreProvider = (*AtomicStore)(nil)

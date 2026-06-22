@@ -13,9 +13,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract base class for all NetworkExtension providers.
-//
 // NEProvider is an idiomatic wrapper over the Objective-C class NEProvider.
+//
+// NEProvider is an abstract base — you do not construct it directly. Construct one of [NEDNSProxyProvider], [NEFilterProvider], [NETunnelProvider] and pass it where a NEProvider is accepted.
+//
+// An abstract base class for all NetworkExtension providers.
 type NEProvider struct {
 	objref.Handle
 }
@@ -26,7 +28,8 @@ func NEProviderFromID(id objc.ID) *NEProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &NEProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +42,8 @@ func nEProviderAdopt(id objc.ID) *NEProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &NEProvider{Handle: objref.Wrap(id)}
+	x := &NEProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,13 +63,13 @@ func (x *NEProvider) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewNEProvider creates a new NEProvider.
-func NewNEProvider() *NEProvider {
-	_id := objc.Send[objc.ID](objc.ID(_class("NEProvider")), objc.RegisterName("new"))
-	return nEProviderAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEProvider) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Handle a sleep event.
+// Sleep handle a sleep event.
 //
 // Sleep blocks until the operation completes or ctx is cancelled.
 func (x *NEProvider) Sleep(ctx context.Context) error {
@@ -82,16 +86,17 @@ func (x *NEProvider) Sleep(ctx context.Context) error {
 	}
 }
 
-// Handle a wake event.
+// Wake handle a wake event.
 func (x *NEProvider) Wake() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wake"))
 }
 
-// Call this method from your NEProvider subclass if you want to display a message to the person using the app.
+// DisplayMessageCompletionHandler call this method from your NEProvider subclass if you want to display a message to the person using the app.
 func (x *NEProvider) DisplayMessageCompletionHandler(message string, completionHandler func(bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayMessage:completionHandler:"), purego.NSString(message), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
+// DefaultPath wraps the corresponding Objective-C method.
 func (x *NEProvider) DefaultPath() *NWPath {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultPath"))
 	return NWPathFromID(_r)
@@ -107,3 +112,10 @@ type NEProviderable interface {
 }
 
 var _ NEProviderable = (*NEProvider)(nil)
+
+// isNEProvider marks NEProvider — and, by embedding promotion, its
+// subclasses — as a member of the NEProvider hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NEProvider) isNEProvider() {}
+
+var _ NEProviderProvider = (*NEProvider)(nil)

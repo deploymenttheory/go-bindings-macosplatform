@@ -13,6 +13,8 @@ import (
 )
 
 // MTRUnitTestingClusterNestedStructList is an idiomatic wrapper over the Objective-C class MTRUnitTestingClusterNestedStructList.
+//
+// MTRUnitTestingClusterNestedStructList is an abstract base — you do not construct it directly. Construct one of [MTRTestClusterClusterNestedStructList] and pass it where a MTRUnitTestingClusterNestedStructList is accepted.
 type MTRUnitTestingClusterNestedStructList struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRUnitTestingClusterNestedStructListFromID(id objc.ID) *MTRUnitTestingClus
 	if id == 0 {
 		return nil
 	}
-	x := &MTRUnitTestingClusterNestedStructList{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRUnitTestingClusterNestedStructList{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRUnitTestingClusterNestedStructListAdopt(id objc.ID) *MTRUnitTestingClust
 	if id == 0 {
 		return nil
 	}
-	x := &MTRUnitTestingClusterNestedStructList{Handle: objref.Wrap(id)}
+	x := &MTRUnitTestingClusterNestedStructList{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,89 +60,103 @@ func (x *MTRUnitTestingClusterNestedStructList) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRUnitTestingClusterNestedStructList creates a new MTRUnitTestingClusterNestedStructList.
-func NewMTRUnitTestingClusterNestedStructList() *MTRUnitTestingClusterNestedStructList {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRUnitTestingClusterNestedStructList")), objc.RegisterName("new"))
-	return mTRUnitTestingClusterNestedStructListAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRUnitTestingClusterNestedStructList) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithA sets a and returns the receiver so calls can be chained.
+// WithA sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterNestedStructList) WithA(a obj.Object) *MTRUnitTestingClusterNestedStructList {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setA:"), objref.IDOf(a))
 	return x
 }
 
-// WithB sets b and returns the receiver so calls can be chained.
+// WithB sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterNestedStructList) WithB(b obj.Object) *MTRUnitTestingClusterNestedStructList {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setB:"), objref.IDOf(b))
 	return x
 }
 
-// WithC sets c and returns the receiver so calls can be chained.
+// WithC sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterNestedStructList) WithC(c MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterNestedStructList {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setC:"), objref.IDOf(c))
 	return x
 }
 
+// A wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNestedStructList) A() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("a"))
 	return obj.Wrap(_r)
 }
 
+// SetA wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNestedStructList) SetA(a obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setA:"), objref.IDOf(a))
 }
 
+// B wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNestedStructList) B() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("b"))
 	return obj.Wrap(_r)
 }
 
+// SetB wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNestedStructList) SetB(b obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setB:"), objref.IDOf(b))
 }
 
+// C wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNestedStructList) C() *MTRUnitTestingClusterSimpleStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("c"))
 	return MTRUnitTestingClusterSimpleStructFromID(_r)
 }
 
+// SetC wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNestedStructList) SetC(c *MTRUnitTestingClusterSimpleStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setC:"), objref.IDOf(c))
 }
 
+// D wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNestedStructList) D() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("d"))
 	return obj.Wrap(_r)
 }
 
+// SetD wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNestedStructList) SetD(d obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setD:"), objref.IDOf(d))
 }
 
+// E wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNestedStructList) E() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("e"))
 	return obj.Wrap(_r)
 }
 
+// SetE wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNestedStructList) SetE(e obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setE:"), objref.IDOf(e))
 }
 
+// F wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNestedStructList) F() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("f"))
 	return obj.Wrap(_r)
 }
 
+// SetF wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNestedStructList) SetF(f obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setF:"), objref.IDOf(f))
 }
 
+// G wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNestedStructList) G() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("g"))
 	return obj.Wrap(_r)
 }
 
+// SetG wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterNestedStructList) SetG(g obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setG:"), objref.IDOf(g))
 }
@@ -166,3 +184,10 @@ type MTRUnitTestingClusterNestedStructListable interface {
 }
 
 var _ MTRUnitTestingClusterNestedStructListable = (*MTRUnitTestingClusterNestedStructList)(nil)
+
+// isMTRUnitTestingClusterNestedStructList marks MTRUnitTestingClusterNestedStructList — and, by embedding promotion, its
+// subclasses — as a member of the MTRUnitTestingClusterNestedStructList hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRUnitTestingClusterNestedStructList) isMTRUnitTestingClusterNestedStructList() {}
+
+var _ MTRUnitTestingClusterNestedStructListProvider = (*MTRUnitTestingClusterNestedStructList)(nil)

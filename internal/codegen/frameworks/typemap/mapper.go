@@ -48,6 +48,11 @@ type Mapper struct {
 	TypedefIndex map[string]string
 	// StructIndex maps struct name → owning framework.
 	StructIndex map[string]string
+	// EmittableStructs is the set of value-struct Go names (across all
+	// frameworks) the idiomatic layer actually emits a definition for, so a
+	// cross-framework reference targets only a struct that exists. Keyed by the
+	// struct's exported Go name (e.g. "CGRect").
+	EmittableStructs map[string]bool
 	// ProtocolIndex maps protocol name → owning framework.
 	ProtocolIndex map[string]string
 	// CFTypeIndex maps framework-specific CF opaque typedef names → owning framework.

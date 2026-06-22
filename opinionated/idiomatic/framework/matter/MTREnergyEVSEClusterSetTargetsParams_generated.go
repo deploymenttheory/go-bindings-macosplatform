@@ -23,7 +23,8 @@ func MTREnergyEVSEClusterSetTargetsParamsFromID(id objc.ID) *MTREnergyEVSECluste
 	if id == 0 {
 		return nil
 	}
-	x := &MTREnergyEVSEClusterSetTargetsParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTREnergyEVSEClusterSetTargetsParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTREnergyEVSEClusterSetTargetsParamsAdopt(id objc.ID) *MTREnergyEVSECluster
 	if id == 0 {
 		return nil
 	}
-	x := &MTREnergyEVSEClusterSetTargetsParams{Handle: objref.Wrap(id)}
+	x := &MTREnergyEVSEClusterSetTargetsParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,53 +58,59 @@ func (x *MTREnergyEVSEClusterSetTargetsParams) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTREnergyEVSEClusterSetTargetsParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTREnergyEVSEClusterSetTargetsParams creates a new MTREnergyEVSEClusterSetTargetsParams.
 func NewMTREnergyEVSEClusterSetTargetsParams() *MTREnergyEVSEClusterSetTargetsParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTREnergyEVSEClusterSetTargetsParams")), objc.RegisterName("new"))
 	return mTREnergyEVSEClusterSetTargetsParamsAdopt(_id)
 }
 
-// Controls whether the command is a timed command (using Timed Invoke).
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
 func (x *MTREnergyEVSEClusterSetTargetsParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTREnergyEVSEClusterSetTargetsParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
 func (x *MTREnergyEVSEClusterSetTargetsParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTREnergyEVSEClusterSetTargetsParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// ChargingTargetSchedules wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterSetTargetsParams) ChargingTargetSchedules() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("chargingTargetSchedules"))
 	return obj.Wrap(_r)
 }
 
+// SetChargingTargetSchedules wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterSetTargetsParams) SetChargingTargetSchedules(chargingTargetSchedules obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChargingTargetSchedules:"), objref.IDOf(chargingTargetSchedules))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTREnergyEVSEClusterSetTargetsParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterSetTargetsParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTREnergyEVSEClusterSetTargetsParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTREnergyEVSEClusterSetTargetsParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

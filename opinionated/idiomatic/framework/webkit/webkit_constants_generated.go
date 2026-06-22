@@ -204,7 +204,6 @@ func DOMEventException() obj.Object { return obj.Wrap(purego.CFConstant(_symbol(
 // DOMXPathException returns the string constant DOMXPathException, for use as a dictionary key or argument.
 func DOMXPathException() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DOMXPathException"))) }
 
-// The pasteboard type constant used when adding or accessing a WebArchive on the pasteboard.
 // WebArchivePboardType returns the string constant WebArchivePboardType, for use as a dictionary key or argument.
 func WebArchivePboardType() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("WebArchivePboardType")))

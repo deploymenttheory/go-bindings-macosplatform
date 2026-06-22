@@ -23,7 +23,8 @@ func CentralManagerFromID(id objc.ID) *CentralManager {
 	if id == 0 {
 		return nil
 	}
-	x := &CentralManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CentralManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func centralManagerAdopt(id objc.ID) *CentralManager {
 	if id == 0 {
 		return nil
 	}
-	x := &CentralManager{Handle: objref.Wrap(id)}
+	x := &CentralManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,28 +58,34 @@ func (x *CentralManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CentralManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCentralManager creates a new CentralManager.
 func NewCentralManager() *CentralManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVBCentralManager")), objc.RegisterName("new"))
 	return centralManagerAdopt(_id)
 }
 
-// This method triggers the IOKit matching for the network controllers. This is usually called by a subclass as the last thing in it's init method. This call is broken out of the AVBCentralManager's init method so that subclasses can finish their setup before calling it.
+// StartControllerMatching this method triggers the IOKit matching for the network controllers. This is usually called by a subclass as the last thing in it's init method. This call is broken out of the AVBCentralManager's init method so that subclasses can finish their setup before calling it.
 func (x *CentralManager) StartControllerMatching() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startControllerMatching"))
 }
 
-// This method is called when an AVBInterface object is created for a NIC, either when the central manager is first started up or when the NIC is added later. The AVBCentralManager maintains it's own internal reference to the interface object until <code>didRemoveInterface:<code> is called with the same interface object, subclasses do not need to maintain another reference to this. A subclass does not need to call the AVBCentralManager implementation. Note this method is not called on the main thread and is not safe for performing UI actions.
+// DidAddInterface this method is called when an AVBInterface object is created for a NIC, either when the central manager is first started up or when the NIC is added later. The AVBCentralManager maintains it's own internal reference to the interface object until <code>didRemoveInterface:<code> is called with the same interface object, subclasses do not need to maintain another reference to this. A subclass does not need to call the AVBCentralManager implementation. Note this method is not called on the main thread and is not safe for performing UI actions.
 func (x *CentralManager) DidAddInterface(interface_ *Interface) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didAddInterface:"), objref.IDOf(interface_))
 }
 
-// This method is called when a NIC has been removed from the system and the central manager is cleaning it up. Note this method is not called on the main thread and is not safe for performing UI actions.
+// DidRemoveInterface this method is called when a NIC has been removed from the system and the central manager is cleaning it up. Note this method is not called on the main thread and is not safe for performing UI actions.
 func (x *CentralManager) DidRemoveInterface(interface_ *Interface) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didRemoveInterface:"), objref.IDOf(interface_))
 }
 
-// This method is used to control if the central manager will create and process AVBInterface objects for non streaming interfaces. The default value returned is YES and as such didAddInterface: will be called for all AVB Enabled network interfaces only.
+// StreamingEnabledInterfacesOnly this method is used to control if the central manager will create and process AVBInterface objects for non streaming interfaces. The default value returned is YES and as such didAddInterface: will be called for all AVB Enabled network interfaces only.
 func (x *CentralManager) StreamingEnabledInterfacesOnly() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("streamingEnabledInterfacesOnly"))
 	return _r

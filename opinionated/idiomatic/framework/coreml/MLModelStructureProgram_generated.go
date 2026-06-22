@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class representing the structure of an ML Program model.
-//
 // ModelStructureProgram is an idiomatic wrapper over the Objective-C class MLModelStructureProgram.
+//
+// A class representing the structure of an ML Program model.
 type ModelStructureProgram struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ModelStructureProgramFromID(id objc.ID) *ModelStructureProgram {
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructureProgram{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ModelStructureProgram{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func modelStructureProgramAdopt(id objc.ID) *ModelStructureProgram {
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructureProgram{Handle: objref.Wrap(id)}
+	x := &ModelStructureProgram{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *ModelStructureProgram) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ModelStructureProgram) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewModelStructureProgram creates a new ModelStructureProgram.
 func NewModelStructureProgram() *ModelStructureProgram {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLModelStructureProgram")), objc.RegisterName("new"))
 	return modelStructureProgramAdopt(_id)
 }
 
+// Functions wraps the corresponding Objective-C method.
 func (x *ModelStructureProgram) Functions() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("functions"))
 	return obj.Wrap(_r)

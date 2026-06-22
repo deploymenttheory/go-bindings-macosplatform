@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An MCPeerID object represents a peer in a multipeer session.
-//
 // PeerID is an idiomatic wrapper over the Objective-C class MCPeerID.
+//
+// An MCPeerID object represents a peer in a multipeer session.
 type PeerID struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PeerIDFromID(id objc.ID) *PeerID {
 	if id == 0 {
 		return nil
 	}
-	x := &PeerID{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PeerID{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func peerIDAdopt(id objc.ID) *PeerID {
 	if id == 0 {
 		return nil
 	}
-	x := &PeerID{Handle: objref.Wrap(id)}
+	x := &PeerID{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *PeerID) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a peer.
-//
-// NewPeerIDWithDisplayName creates a new PeerID.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PeerID) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPeerIDWithDisplayName initializes a peer.
 func NewPeerIDWithDisplayName(myDisplayName string) *PeerID {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MCPeerID")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplayName:"), purego.NSString(myDisplayName))
 	return peerIDAdopt(_id)
 }
 
+// DisplayName wraps the corresponding Objective-C method.
 func (x *PeerID) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
 	if _r == 0 {

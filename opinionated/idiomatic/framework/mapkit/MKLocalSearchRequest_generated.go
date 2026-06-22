@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The parameters to use when searching for points of interest on the map.
-//
 // LocalSearchRequest is an idiomatic wrapper over the Objective-C class MKLocalSearchRequest.
+//
+// The parameters to use when searching for points of interest on the map.
 type LocalSearchRequest struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LocalSearchRequestFromID(id objc.ID) *LocalSearchRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &LocalSearchRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LocalSearchRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func localSearchRequestAdopt(id objc.ID) *LocalSearchRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &LocalSearchRequest{Handle: objref.Wrap(id)}
+	x := &LocalSearchRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *LocalSearchRequest) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *LocalSearchRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LocalSearchRequest) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewLocalSearchRequest creates a new LocalSearchRequest.
@@ -78,36 +86,37 @@ func NewLocalSearchRequestWithCompletion(completion *LocalSearchCompletion) *Loc
 	return localSearchRequestAdopt(_id)
 }
 
-// WithNaturalLanguageQuery sets naturalLanguageQuery and returns the receiver so calls can be chained.
+// WithNaturalLanguageQuery sets the property and returns the receiver so calls can be chained.
 func (x *LocalSearchRequest) WithNaturalLanguageQuery(naturalLanguageQuery string) *LocalSearchRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNaturalLanguageQuery:"), purego.NSString(naturalLanguageQuery))
 	return x
 }
 
-// WithRegionPriority sets regionPriority and returns the receiver so calls can be chained.
+// WithRegionPriority sets the property and returns the receiver so calls can be chained.
 func (x *LocalSearchRequest) WithRegionPriority(regionPriority LocalSearchRegionPriority) *LocalSearchRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionPriority:"), regionPriority)
 	return x
 }
 
-// WithResultTypes sets resultTypes and returns the receiver so calls can be chained.
+// WithResultTypes sets the property and returns the receiver so calls can be chained.
 func (x *LocalSearchRequest) WithResultTypes(resultTypes LocalSearchResultType) *LocalSearchRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultTypes:"), resultTypes)
 	return x
 }
 
-// WithPointOfInterestFilter sets pointOfInterestFilter and returns the receiver so calls can be chained.
+// WithPointOfInterestFilter sets the property and returns the receiver so calls can be chained.
 func (x *LocalSearchRequest) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalSearchRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 	return x
 }
 
-// WithAddressFilter sets addressFilter and returns the receiver so calls can be chained.
+// WithAddressFilter sets the property and returns the receiver so calls can be chained.
 func (x *LocalSearchRequest) WithAddressFilter(addressFilter *AddressFilter) *LocalSearchRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAddressFilter:"), objref.IDOf(addressFilter))
 	return x
 }
 
+// NaturalLanguageQuery wraps the corresponding Objective-C method.
 func (x *LocalSearchRequest) NaturalLanguageQuery() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("naturalLanguageQuery"))
 	if _r == 0 {
@@ -116,42 +125,51 @@ func (x *LocalSearchRequest) NaturalLanguageQuery() string {
 	return purego.GoString(_r)
 }
 
+// SetNaturalLanguageQuery wraps the corresponding Objective-C method.
 func (x *LocalSearchRequest) SetNaturalLanguageQuery(naturalLanguageQuery string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNaturalLanguageQuery:"), purego.NSString(naturalLanguageQuery))
 }
 
+// RegionPriority wraps the corresponding Objective-C method.
 func (x *LocalSearchRequest) RegionPriority() LocalSearchRegionPriority {
 	_r := objc.Send[LocalSearchRegionPriority](objref.IDOf(x), objc.RegisterName("regionPriority"))
 	return _r
 }
 
+// SetRegionPriority wraps the corresponding Objective-C method.
 func (x *LocalSearchRequest) SetRegionPriority(regionPriority LocalSearchRegionPriority) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionPriority:"), regionPriority)
 }
 
+// ResultTypes wraps the corresponding Objective-C method.
 func (x *LocalSearchRequest) ResultTypes() LocalSearchResultType {
 	_r := objc.Send[LocalSearchResultType](objref.IDOf(x), objc.RegisterName("resultTypes"))
 	return _r
 }
 
+// SetResultTypes wraps the corresponding Objective-C method.
 func (x *LocalSearchRequest) SetResultTypes(resultTypes LocalSearchResultType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultTypes:"), resultTypes)
 }
 
+// PointOfInterestFilter wraps the corresponding Objective-C method.
 func (x *LocalSearchRequest) PointOfInterestFilter() *PointOfInterestFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }
 
+// SetPointOfInterestFilter wraps the corresponding Objective-C method.
 func (x *LocalSearchRequest) SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 }
 
+// AddressFilter wraps the corresponding Objective-C method.
 func (x *LocalSearchRequest) AddressFilter() *AddressFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addressFilter"))
 	return AddressFilterFromID(_r)
 }
 
+// SetAddressFilter wraps the corresponding Objective-C method.
 func (x *LocalSearchRequest) SetAddressFilter(addressFilter *AddressFilter) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAddressFilter:"), objref.IDOf(addressFilter))
 }

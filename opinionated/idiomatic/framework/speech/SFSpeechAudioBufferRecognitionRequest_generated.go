@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request to recognize speech from captured audio content, such as audio from the device’s microphone.
-//
 // SpeechAudioBufferRecognitionRequest is an idiomatic wrapper over the Objective-C class SFSpeechAudioBufferRecognitionRequest.
+//
+// It embeds [SpeechRecognitionRequest], promoting that type's methods.
+//
+// A request to recognize speech from captured audio content, such as audio from the device’s microphone.
 type SpeechAudioBufferRecognitionRequest struct {
-	objref.Handle
+	SpeechRecognitionRequest
 }
 
 // SpeechAudioBufferRecognitionRequestFromID adopts an existing Objective-C object as a SpeechAudioBufferRecognitionRequest
@@ -25,7 +26,8 @@ func SpeechAudioBufferRecognitionRequestFromID(id objc.ID) *SpeechAudioBufferRec
 	if id == 0 {
 		return nil
 	}
-	x := &SpeechAudioBufferRecognitionRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SpeechAudioBufferRecognitionRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func speechAudioBufferRecognitionRequestAdopt(id objc.ID) *SpeechAudioBufferReco
 	if id == 0 {
 		return nil
 	}
-	x := &SpeechAudioBufferRecognitionRequest{Handle: objref.Wrap(id)}
+	x := &SpeechAudioBufferRecognitionRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SpeechAudioBufferRecognitionRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SpeechAudioBufferRecognitionRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SpeechAudioBufferRecognitionRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSpeechAudioBufferRecognitionRequest creates a new SpeechAudioBufferRecognitionRequest.
@@ -64,77 +52,65 @@ func NewSpeechAudioBufferRecognitionRequest() *SpeechAudioBufferRecognitionReque
 	return speechAudioBufferRecognitionRequestAdopt(_id)
 }
 
-// A value that indicates the type of speech recognition being performed.
-//
-// WithTaskHint sets taskHint and returns the receiver so calls can be chained.
+// WithTaskHint a value that indicates the type of speech recognition being performed.
 func (x *SpeechAudioBufferRecognitionRequest) WithTaskHint(taskHint SpeechRecognitionTaskHint) *SpeechAudioBufferRecognitionRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTaskHint:"), taskHint)
 	return x
 }
 
-// A Boolean value that indicates whether you want intermediate results returned for each utterance.
-//
-// WithShouldReportPartialResults sets shouldReportPartialResults and returns the receiver so calls can be chained.
+// WithShouldReportPartialResults a Boolean value that indicates whether you want intermediate results returned for each utterance.
 func (x *SpeechAudioBufferRecognitionRequest) WithShouldReportPartialResults(shouldReportPartialResults bool) *SpeechAudioBufferRecognitionRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldReportPartialResults:"), shouldReportPartialResults)
 	return x
 }
 
-// An array of phrases that should be recognized, even if they are not in the system vocabulary.
-//
-// WithContextualStrings sets the collection and returns the receiver so calls can be chained.
+// WithContextualStrings an array of phrases that should be recognized, even if they are not in the system vocabulary.
 func (x *SpeechAudioBufferRecognitionRequest) WithContextualStrings(items ...obj.Object) *SpeechAudioBufferRecognitionRequest {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContextualStrings:"), _arr)
 	return x
 }
 
-// An identifier string that you use to describe the type of interaction associated with the speech recognition request.
-//
-// WithInteractionIdentifier sets interactionIdentifier and returns the receiver so calls can be chained.
+// WithInteractionIdentifier an identifier string that you use to describe the type of interaction associated with the speech recognition request.
 func (x *SpeechAudioBufferRecognitionRequest) WithInteractionIdentifier(interactionIdentifier string) *SpeechAudioBufferRecognitionRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteractionIdentifier:"), purego.NSString(interactionIdentifier))
 	return x
 }
 
-// A Boolean value that determines whether a request must keep its audio data on the device.
-//
-// WithRequiresOnDeviceRecognition sets requiresOnDeviceRecognition and returns the receiver so calls can be chained.
+// WithRequiresOnDeviceRecognition a Boolean value that determines whether a request must keep its audio data on the device.
 func (x *SpeechAudioBufferRecognitionRequest) WithRequiresOnDeviceRecognition(requiresOnDeviceRecognition bool) *SpeechAudioBufferRecognitionRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresOnDeviceRecognition:"), requiresOnDeviceRecognition)
 	return x
 }
 
-// A Boolean value that indicates whether to add punctuation to speech recognition results.
-//
-// WithAddsPunctuation sets addsPunctuation and returns the receiver so calls can be chained.
+// WithAddsPunctuation a Boolean value that indicates whether to add punctuation to speech recognition results.
 func (x *SpeechAudioBufferRecognitionRequest) WithAddsPunctuation(addsPunctuation bool) *SpeechAudioBufferRecognitionRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAddsPunctuation:"), addsPunctuation)
 	return x
 }
 
-// WithCustomizedLanguageModel sets customizedLanguageModel and returns the receiver so calls can be chained.
+// WithCustomizedLanguageModel sets the property and returns the receiver so calls can be chained.
 func (x *SpeechAudioBufferRecognitionRequest) WithCustomizedLanguageModel(customizedLanguageModel *SpeechLanguageModelConfiguration) *SpeechAudioBufferRecognitionRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizedLanguageModel:"), objref.IDOf(customizedLanguageModel))
 	return x
 }
 
-// Appends audio in the PCM format to the end of the recognition request.
+// AppendAudioPCMBuffer appends audio in the PCM format to the end of the recognition request.
 func (x *SpeechAudioBufferRecognitionRequest) AppendAudioPCMBuffer(audioPCMBuffer obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendAudioPCMBuffer:"), objref.IDOf(audioPCMBuffer))
 }
 
-// Appends audio to the end of the recognition request.
+// AppendAudioSampleBuffer appends audio to the end of the recognition request.
 func (x *SpeechAudioBufferRecognitionRequest) AppendAudioSampleBuffer(sampleBuffer obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendAudioSampleBuffer:"), objref.IDOf(sampleBuffer))
 }
 
-// Marks the end of audio input for the recognition request.
+// EndAudio marks the end of audio input for the recognition request.
 func (x *SpeechAudioBufferRecognitionRequest) EndAudio() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endAudio"))
 }
 
-// The preferred audio format for optimal speech recognition. Use the audio format in this property as a hint for optimal recording, but don't depend on the value remaining unchanged.
+// NativeAudioFormat the preferred audio format for optimal speech recognition. Use the audio format in this property as a hint for optimal recording, but don't depend on the value remaining unchanged.
 func (x *SpeechAudioBufferRecognitionRequest) NativeAudioFormat() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nativeAudioFormat"))
 	return obj.Wrap(_r)
@@ -157,3 +133,5 @@ type SpeechAudioBufferRecognitionRequestable interface {
 }
 
 var _ SpeechAudioBufferRecognitionRequestable = (*SpeechAudioBufferRecognitionRequest)(nil)
+
+var _ SpeechRecognitionRequestProvider = (*SpeechAudioBufferRecognitionRequest)(nil)

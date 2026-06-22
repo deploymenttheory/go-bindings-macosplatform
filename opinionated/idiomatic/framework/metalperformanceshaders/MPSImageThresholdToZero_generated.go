@@ -6,17 +6,20 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that returns the original value for each pixel with a value greater than a specified threshold or 0 otherwise.
-//
 // ImageThresholdToZero is an idiomatic wrapper over the Objective-C class MPSImageThresholdToZero.
+//
+// It embeds [UnaryImageKernel], promoting that type's methods.
+//
+// A filter that returns the original value for each pixel with a value greater than a specified threshold or 0 otherwise.
 type ImageThresholdToZero struct {
-	objref.Handle
+	UnaryImageKernel
 }
 
 // ImageThresholdToZeroFromID adopts an existing Objective-C object as a ImageThresholdToZero
@@ -25,7 +28,8 @@ func ImageThresholdToZeroFromID(id objc.ID) *ImageThresholdToZero {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageThresholdToZero{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageThresholdToZero{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func imageThresholdToZeroAdopt(id objc.ID) *ImageThresholdToZero {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageThresholdToZero{Handle: objref.Wrap(id)}
+	x := &ImageThresholdToZero{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ImageThresholdToZero) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageThresholdToZero) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageThresholdToZero) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewImageThresholdToZero creates a new ImageThresholdToZero.
@@ -64,15 +54,25 @@ func NewImageThresholdToZero() *ImageThresholdToZero {
 	return imageThresholdToZeroAdopt(_id)
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
+func (x *ImageThresholdToZero) WithOffset(offset mpscore.MPSOffset) *ImageThresholdToZero {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (x *ImageThresholdToZero) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdToZero {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
+// WithLabel the string that identifies the kernel.
 func (x *ImageThresholdToZero) WithLabel(label string) *ImageThresholdToZero {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The threshold value used to init the threshold filter
+// ThresholdValue the threshold value used to init the threshold filter
 func (x *ImageThresholdToZero) ThresholdValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("thresholdValue"))
 	return _r
@@ -81,8 +81,14 @@ func (x *ImageThresholdToZero) ThresholdValue() float32 {
 // ImageThresholdToZeroable is the interface implemented by [ImageThresholdToZero], for mocking and DI.
 type ImageThresholdToZeroable interface {
 	obj.Object
+	WithOffset(offset mpscore.MPSOffset) *ImageThresholdToZero
+	WithClipRect(clipRect metal.MTLRegion) *ImageThresholdToZero
 	WithLabel(label string) *ImageThresholdToZero
 	ThresholdValue() float32
 }
 
 var _ ImageThresholdToZeroable = (*ImageThresholdToZero)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageThresholdToZero)(nil)
+
+var _ KernelProvider = (*ImageThresholdToZero)(nil)

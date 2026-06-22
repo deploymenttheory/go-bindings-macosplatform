@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that dissipates sound frequencies over distance.
-//
 // GeometricSpreadingDistanceModelParameters is an idiomatic wrapper over the Objective-C class PHASEGeometricSpreadingDistanceModelParameters.
+//
+// It embeds [DistanceModelParameters], promoting that type's methods.
+//
+// An object that dissipates sound frequencies over distance.
 type GeometricSpreadingDistanceModelParameters struct {
-	objref.Handle
+	DistanceModelParameters
 }
 
 // GeometricSpreadingDistanceModelParametersFromID adopts an existing Objective-C object as a GeometricSpreadingDistanceModelParameters
@@ -25,7 +26,8 @@ func GeometricSpreadingDistanceModelParametersFromID(id objc.ID) *GeometricSprea
 	if id == 0 {
 		return nil
 	}
-	x := &GeometricSpreadingDistanceModelParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GeometricSpreadingDistanceModelParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func geometricSpreadingDistanceModelParametersAdopt(id objc.ID) *GeometricSpread
 	if id == 0 {
 		return nil
 	}
-	x := &GeometricSpreadingDistanceModelParameters{Handle: objref.Wrap(id)}
+	x := &GeometricSpreadingDistanceModelParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GeometricSpreadingDistanceModelParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GeometricSpreadingDistanceModelParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GeometricSpreadingDistanceModelParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGeometricSpreadingDistanceModelParameters creates a new GeometricSpreadingDistanceModelParameters.
@@ -64,27 +52,25 @@ func NewGeometricSpreadingDistanceModelParameters() *GeometricSpreadingDistanceM
 	return geometricSpreadingDistanceModelParametersAdopt(_id)
 }
 
-// A value that fades specific frequencies over a distance.
-//
-// WithRolloffFactor sets rolloffFactor and returns the receiver so calls can be chained.
+// WithRolloffFactor a value that fades specific frequencies over a distance.
 func (x *GeometricSpreadingDistanceModelParameters) WithRolloffFactor(rolloffFactor float64) *GeometricSpreadingDistanceModelParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRolloffFactor:"), rolloffFactor)
 	return x
 }
 
-// A distance over which the framework fades out the mixer’s sound.
-//
-// WithFadeOutParameters sets fadeOutParameters and returns the receiver so calls can be chained.
+// WithFadeOutParameters a distance over which the framework fades out the mixer’s sound.
 func (x *GeometricSpreadingDistanceModelParameters) WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *GeometricSpreadingDistanceModelParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFadeOutParameters:"), objref.IDOf(fadeOutParameters))
 	return x
 }
 
+// RolloffFactor wraps the corresponding Objective-C method.
 func (x *GeometricSpreadingDistanceModelParameters) RolloffFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rolloffFactor"))
 	return _r
 }
 
+// SetRolloffFactor wraps the corresponding Objective-C method.
 func (x *GeometricSpreadingDistanceModelParameters) SetRolloffFactor(rolloffFactor float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRolloffFactor:"), rolloffFactor)
 }
@@ -99,3 +85,5 @@ type GeometricSpreadingDistanceModelParametersable interface {
 }
 
 var _ GeometricSpreadingDistanceModelParametersable = (*GeometricSpreadingDistanceModelParameters)(nil)
+
+var _ DistanceModelParametersProvider = (*GeometricSpreadingDistanceModelParameters)(nil)

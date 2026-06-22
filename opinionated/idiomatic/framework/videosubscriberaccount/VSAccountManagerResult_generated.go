@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a request made for subscriber account information.
-//
 // VSAccountManagerResult is an idiomatic wrapper over the Objective-C class VSAccountManagerResult.
+//
+// An object that represents a request made for subscriber account information.
 type VSAccountManagerResult struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VSAccountManagerResultFromID(id objc.ID) *VSAccountManagerResult {
 	if id == 0 {
 		return nil
 	}
-	x := &VSAccountManagerResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VSAccountManagerResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func vSAccountManagerResultAdopt(id objc.ID) *VSAccountManagerResult {
 	if id == 0 {
 		return nil
 	}
-	x := &VSAccountManagerResult{Handle: objref.Wrap(id)}
+	x := &VSAccountManagerResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *VSAccountManagerResult) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VSAccountManagerResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVSAccountManagerResult creates a new VSAccountManagerResult.
 func NewVSAccountManagerResult() *VSAccountManagerResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("VSAccountManagerResult")), objc.RegisterName("new"))
 	return vSAccountManagerResultAdopt(_id)
 }
 
-// Cancels an in-progress request for subscriber account information.
+// Cancel cancels an in-progress request for subscriber account information.
 func (x *VSAccountManagerResult) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }

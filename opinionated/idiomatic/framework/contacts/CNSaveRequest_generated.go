@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that collects the changes you want to save to the user’s contacts database.
-//
 // SaveRequest is an idiomatic wrapper over the Objective-C class CNSaveRequest.
+//
+// An object that collects the changes you want to save to the user’s contacts database.
 type SaveRequest struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SaveRequestFromID(id objc.ID) *SaveRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &SaveRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SaveRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func saveRequestAdopt(id objc.ID) *SaveRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &SaveRequest{Handle: objref.Wrap(id)}
+	x := &SaveRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,79 +60,81 @@ func (x *SaveRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SaveRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSaveRequest creates a new SaveRequest.
 func NewSaveRequest() *SaveRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNSaveRequest")), objc.RegisterName("new"))
 	return saveRequestAdopt(_id)
 }
 
-// A string that identifies the author of the transaction.
-//
-// WithTransactionAuthor sets transactionAuthor and returns the receiver so calls can be chained.
+// WithTransactionAuthor a string that identifies the author of the transaction.
 func (x *SaveRequest) WithTransactionAuthor(transactionAuthor string) *SaveRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransactionAuthor:"), purego.NSString(transactionAuthor))
 	return x
 }
 
-// A Boolean value that indicates whether to refetch the added and updated contacts after the save request executes.
-//
-// WithShouldRefetchContacts sets shouldRefetchContacts and returns the receiver so calls can be chained.
+// WithShouldRefetchContacts a Boolean value that indicates whether to refetch the added and updated contacts after the save request executes.
 func (x *SaveRequest) WithShouldRefetchContacts(shouldRefetchContacts bool) *SaveRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRefetchContacts:"), shouldRefetchContacts)
 	return x
 }
 
-// Adds the specified contact to the contact store.
+// AddContactToContainerWithIdentifier adds the specified contact to the contact store.
 func (x *SaveRequest) AddContactToContainerWithIdentifier(contact *MutableContact, identifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addContact:toContainerWithIdentifier:"), objref.IDOf(contact), purego.NSString(identifier))
 }
 
-// Updates an existing contact in the contact store.
+// UpdateContact updates an existing contact in the contact store.
 func (x *SaveRequest) UpdateContact(contact *MutableContact) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateContact:"), objref.IDOf(contact))
 }
 
-// Deletes a contact from the contact store.
+// DeleteContact deletes a contact from the contact store.
 func (x *SaveRequest) DeleteContact(contact *MutableContact) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteContact:"), objref.IDOf(contact))
 }
 
-// Adds a group to the contact store.
+// AddGroupToContainerWithIdentifier adds a group to the contact store.
 func (x *SaveRequest) AddGroupToContainerWithIdentifier(group *MutableGroup, identifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addGroup:toContainerWithIdentifier:"), objref.IDOf(group), purego.NSString(identifier))
 }
 
-// Updates an existing group in the contact store.
+// UpdateGroup updates an existing group in the contact store.
 func (x *SaveRequest) UpdateGroup(group *MutableGroup) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateGroup:"), objref.IDOf(group))
 }
 
-// Deletes a group from the contact store.
+// DeleteGroup deletes a group from the contact store.
 func (x *SaveRequest) DeleteGroup(group *MutableGroup) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteGroup:"), objref.IDOf(group))
 }
 
-// Add the specified group to a parent group.
+// AddSubgroupToGroup add the specified group to a parent group.
 func (x *SaveRequest) AddSubgroupToGroup(subgroup *Group, group *Group) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSubgroup:toGroup:"), objref.IDOf(subgroup), objref.IDOf(group))
 }
 
-// Remove a subgroup from the specified parent group.
+// RemoveSubgroupFromGroup remove a subgroup from the specified parent group.
 func (x *SaveRequest) RemoveSubgroupFromGroup(subgroup *Group, group *Group) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeSubgroup:fromGroup:"), objref.IDOf(subgroup), objref.IDOf(group))
 }
 
-// Adds a contact as a member of a group.
+// AddMemberToGroup adds a contact as a member of a group.
 func (x *SaveRequest) AddMemberToGroup(contact *Contact, group *Group) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addMember:toGroup:"), objref.IDOf(contact), objref.IDOf(group))
 }
 
-// Removes a contact as a member of a group.
+// RemoveMemberFromGroup removes a contact as a member of a group.
 func (x *SaveRequest) RemoveMemberFromGroup(contact *Contact, group *Group) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeMember:fromGroup:"), objref.IDOf(contact), objref.IDOf(group))
 }
 
-// The author of this transaction. Use this, in conjunction with
+// TransactionAuthor the author of this transaction. Use this, in conjunction with
 func (x *SaveRequest) TransactionAuthor() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactionAuthor"))
 	if _r == 0 {
@@ -139,16 +143,18 @@ func (x *SaveRequest) TransactionAuthor() string {
 	return purego.GoString(_r)
 }
 
+// SetTransactionAuthor wraps the corresponding Objective-C method.
 func (x *SaveRequest) SetTransactionAuthor(transactionAuthor string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransactionAuthor:"), purego.NSString(transactionAuthor))
 }
 
-// Should the contacts be refetched as part of executing the save request. Default is `YES` where added and updated contacts are refetched by the executing save request. Set to `NO` to suppress this refetch behavior and reduce the execution time of the save request.
+// ShouldRefetchContacts should the contacts be refetched as part of executing the save request. Default is `YES` where added and updated contacts are refetched by the executing save request. Set to `NO` to suppress this refetch behavior and reduce the execution time of the save request.
 func (x *SaveRequest) ShouldRefetchContacts() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldRefetchContacts"))
 	return _r
 }
 
+// SetShouldRefetchContacts wraps the corresponding Objective-C method.
 func (x *SaveRequest) SetShouldRefetchContacts(shouldRefetchContacts bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRefetchContacts:"), shouldRefetchContacts)
 }

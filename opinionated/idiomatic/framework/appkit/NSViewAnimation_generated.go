@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An animation of an app’s views, limited to changes in frame location and size, and to fade-in and fade-out effects.
-//
 // ViewAnimation is an idiomatic wrapper over the Objective-C class NSViewAnimation.
+//
+// It embeds [Animation], promoting that type's methods.
+//
+// An animation of an app’s views, limited to changes in frame location and size, and to fade-in and fade-out effects.
 type ViewAnimation struct {
-	objref.Handle
+	Animation
 }
 
 // ViewAnimationFromID adopts an existing Objective-C object as a ViewAnimation
@@ -25,7 +26,8 @@ func ViewAnimationFromID(id objc.ID) *ViewAnimation {
 	if id == 0 {
 		return nil
 	}
-	x := &ViewAnimation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ViewAnimation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,99 +40,72 @@ func viewAnimationAdopt(id objc.ID) *ViewAnimation {
 	if id == 0 {
 		return nil
 	}
-	x := &ViewAnimation{Handle: objref.Wrap(id)}
+	x := &ViewAnimation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ViewAnimation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ViewAnimation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ViewAnimation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Returns an NSViewAnimation object initialized with the supplied information.
-//
-// NewViewAnimationWithViewAnimations creates a new ViewAnimation.
+// NewViewAnimationWithViewAnimations returns an NSViewAnimation object initialized with the supplied information.
 func NewViewAnimationWithViewAnimations(viewAnimations []obj.Object) *ViewAnimation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSViewAnimation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithViewAnimations:"), purego.SliceToNSArray(viewAnimations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return viewAnimationAdopt(_id)
 }
 
-// The dictionaries defining the objects to animate.
-//
-// WithViewAnimations sets the collection and returns the receiver so calls can be chained.
+// WithViewAnimations the dictionaries defining the objects to animate.
 func (x *ViewAnimation) WithViewAnimations(items ...obj.Object) *ViewAnimation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewAnimations:"), _arr)
 	return x
 }
 
-// The current progress of the animation.
-//
-// WithCurrentProgress sets currentProgress and returns the receiver so calls can be chained.
+// WithCurrentProgress the current progress of the animation.
 func (x *ViewAnimation) WithCurrentProgress(currentProgress float32) *ViewAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentProgress:"), currentProgress)
 	return x
 }
 
-// The duration of the animation, in seconds.
-//
-// WithDuration sets duration and returns the receiver so calls can be chained.
+// WithDuration the duration of the animation, in seconds.
 func (x *ViewAnimation) WithDuration(duration float64) *ViewAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
 	return x
 }
 
-// The blocking mode of the animation.
-//
-// WithAnimationBlockingMode sets animationBlockingMode and returns the receiver so calls can be chained.
+// WithAnimationBlockingMode the blocking mode of the animation.
 func (x *ViewAnimation) WithAnimationBlockingMode(animationBlockingMode AnimationBlockingMode) *ViewAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationBlockingMode:"), animationBlockingMode)
 	return x
 }
 
-// The number of frame updates per second to generate for the animation.
-//
-// WithFrameRate sets frameRate and returns the receiver so calls can be chained.
+// WithFrameRate the number of frame updates per second to generate for the animation.
 func (x *ViewAnimation) WithFrameRate(frameRate float32) *ViewAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRate:"), frameRate)
 	return x
 }
 
-// The timing curve for the animation.
-//
-// WithAnimationCurve sets animationCurve and returns the receiver so calls can be chained.
+// WithAnimationCurve the timing curve for the animation.
 func (x *ViewAnimation) WithAnimationCurve(animationCurve AnimationCurve) *ViewAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationCurve:"), animationCurve)
 	return x
 }
 
-// An array of floating-point numbers representing current progress marks.
-//
-// WithProgressMarks sets the collection and returns the receiver so calls can be chained.
+// WithProgressMarks an array of floating-point numbers representing current progress marks.
 func (x *ViewAnimation) WithProgressMarks(items ...obj.Object) *ViewAnimation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressMarks:"), _arr)
 	return x
 }
 
+// ViewAnimations wraps the corresponding Objective-C method.
+//
 // ViewAnimations returns the collection as a Go slice.
 func (x *ViewAnimation) ViewAnimations() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewAnimations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetViewAnimations wraps the corresponding Objective-C method.
 func (x *ViewAnimation) SetViewAnimations(viewAnimations []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewAnimations:"), purego.SliceToNSArray(viewAnimations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
@@ -150,3 +125,5 @@ type ViewAnimationable interface {
 }
 
 var _ ViewAnimationable = (*ViewAnimation)(nil)
+
+var _ AnimationProvider = (*ViewAnimation)(nil)

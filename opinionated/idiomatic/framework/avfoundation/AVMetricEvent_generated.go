@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class that represents a metric event.
-//
 // MetricEvent is an idiomatic wrapper over the Objective-C class AVMetricEvent.
+//
+// MetricEvent is an abstract base — you do not construct it directly. Construct one of [MetricContentKeyRequestEvent], [MetricDownloadSummaryEvent], [MetricErrorEvent], [MetricHLSMediaSegmentRequestEvent], [MetricHLSPlaylistRequestEvent], [MetricMediaResourceRequestEvent], [MetricPlayerItemLikelyToKeepUpEvent], [MetricPlayerItemPlaybackSummaryEvent], [MetricPlayerItemRateChangeEvent], [MetricPlayerItemVariantSwitchEvent], [MetricPlayerItemVariantSwitchStartEvent] and pass it where a MetricEvent is accepted.
+//
+// A base class that represents a metric event.
 type MetricEvent struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func MetricEventFromID(id objc.ID) *MetricEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MetricEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetricEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func metricEventAdopt(id objc.ID) *MetricEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MetricEvent{Handle: objref.Wrap(id)}
+	x := &MetricEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +62,19 @@ func (x *MetricEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMetricEvent creates a new MetricEvent.
-func NewMetricEvent() *MetricEvent {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVMetricEvent")), objc.RegisterName("new"))
-	return metricEventAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetricEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns the date when the event occurred.
+// Date returns the date when the event occurred.
 func (x *MetricEvent) Date() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
 
-// A GUID that identifies the media session. If not available, value is nil.
+// SessionID a GUID that identifies the media session. If not available, value is nil.
 func (x *MetricEvent) SessionID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sessionID"))
 	if _r == 0 {
@@ -87,3 +91,10 @@ type MetricEventable interface {
 }
 
 var _ MetricEventable = (*MetricEvent)(nil)
+
+// isMetricEvent marks MetricEvent — and, by embedding promotion, its
+// subclasses — as a member of the MetricEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MetricEvent) isMetricEvent() {}
+
+var _ MetricEventProvider = (*MetricEvent)(nil)

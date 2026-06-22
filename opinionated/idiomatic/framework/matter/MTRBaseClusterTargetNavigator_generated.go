@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBaseClusterTargetNavigator is an idiomatic wrapper over the Objective-C class MTRBaseClusterTargetNavigator.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
 type MTRBaseClusterTargetNavigator struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterTargetNavigatorFromID adopts an existing Objective-C object as a MTRBaseClusterTargetNavigator
@@ -25,7 +26,8 @@ func MTRBaseClusterTargetNavigatorFromID(id objc.ID) *MTRBaseClusterTargetNaviga
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterTargetNavigator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterTargetNavigator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func mTRBaseClusterTargetNavigatorAdopt(id objc.ID) *MTRBaseClusterTargetNavigat
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterTargetNavigator{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterTargetNavigator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterTargetNavigator) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterTargetNavigator) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterTargetNavigator) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterTargetNavigatorWithDeviceEndpointIDQueue creates a new MTRBaseClusterTargetNavigator.
+// NewMTRBaseClusterTargetNavigatorWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterTargetNavigatorWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterTargetNavigator {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterTargetNavigator")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -74,10 +60,10 @@ func NewMTRBaseClusterTargetNavigatorWithDeviceEndpointQueue(device *MTRBaseDevi
 	return mTRBaseClusterTargetNavigatorAdopt(_id)
 }
 
-// Command NavigateTarget Upon receipt, this SHALL navigation the UX to the target identified.
+// NavigateTargetWithParamsCompletion command NavigateTarget Upon receipt, this SHALL navigation the UX to the target identified.
 //
 // NavigateTargetWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) NavigateTargetWithParamsCompletion(ctx context.Context, params *MTRTargetNavigatorClusterNavigateTargetParams) (*MTRTargetNavigatorClusterNavigateTargetResponseParams, error) {
+func (x *MTRBaseClusterTargetNavigator) NavigateTargetWithParamsCompletion(ctx context.Context, params *MTRTargetNavigatorClusterNavigateTargetParams) (result *MTRTargetNavigatorClusterNavigateTargetResponseParams, err error) {
 	type _result struct {
 		val *MTRTargetNavigatorClusterNavigateTargetResponseParams
 		err error
@@ -99,8 +85,10 @@ func (x *MTRBaseClusterTargetNavigator) NavigateTargetWithParamsCompletion(ctx c
 	}
 }
 
+// ReadAttributeTargetListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeTargetListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) ReadAttributeTargetListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) ReadAttributeTargetListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -122,8 +110,10 @@ func (x *MTRBaseClusterTargetNavigator) ReadAttributeTargetListWithCompletion(ct
 	}
 }
 
+// SubscribeAttributeTargetListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTargetListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeTargetListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeTargetListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -145,8 +135,10 @@ func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeTargetListWithParamsSu
 	}
 }
 
+// ReadAttributeCurrentTargetWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentTargetWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) ReadAttributeCurrentTargetWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) ReadAttributeCurrentTargetWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -168,8 +160,10 @@ func (x *MTRBaseClusterTargetNavigator) ReadAttributeCurrentTargetWithCompletion
 	}
 }
 
+// SubscribeAttributeCurrentTargetWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentTargetWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeCurrentTargetWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeCurrentTargetWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -191,8 +185,10 @@ func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeCurrentTargetWithParam
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -214,8 +210,10 @@ func (x *MTRBaseClusterTargetNavigator) ReadAttributeGeneratedCommandListWithCom
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -237,8 +235,10 @@ func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeGeneratedCommandListWi
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -260,8 +260,10 @@ func (x *MTRBaseClusterTargetNavigator) ReadAttributeAcceptedCommandListWithComp
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -283,8 +285,10 @@ func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeAcceptedCommandListWit
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -306,8 +310,10 @@ func (x *MTRBaseClusterTargetNavigator) ReadAttributeAttributeListWithCompletion
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -329,8 +335,10 @@ func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeAttributeListWithParam
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -352,8 +360,10 @@ func (x *MTRBaseClusterTargetNavigator) ReadAttributeFeatureMapWithCompletion(ct
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -375,8 +385,10 @@ func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeFeatureMapWithParamsSu
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -398,8 +410,10 @@ func (x *MTRBaseClusterTargetNavigator) ReadAttributeClusterRevisionWithCompleti
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -421,8 +435,10 @@ func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeClusterRevisionWithPar
 	}
 }
 
+// NavigateTargetWithParams wraps the corresponding Objective-C method.
+//
 // NavigateTargetWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) NavigateTargetWithParams(ctx context.Context, params *MTRTargetNavigatorClusterNavigateTargetParams) (*MTRTargetNavigatorClusterNavigateTargetResponseParams, error) {
+func (x *MTRBaseClusterTargetNavigator) NavigateTargetWithParams(ctx context.Context, params *MTRTargetNavigatorClusterNavigateTargetParams) (result *MTRTargetNavigatorClusterNavigateTargetResponseParams, err error) {
 	type _result struct {
 		val *MTRTargetNavigatorClusterNavigateTargetResponseParams
 		err error
@@ -444,8 +460,10 @@ func (x *MTRBaseClusterTargetNavigator) NavigateTargetWithParams(ctx context.Con
 	}
 }
 
+// ReadAttributeTargetList wraps the corresponding Objective-C method.
+//
 // ReadAttributeTargetList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) ReadAttributeTargetList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) ReadAttributeTargetList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -467,8 +485,10 @@ func (x *MTRBaseClusterTargetNavigator) ReadAttributeTargetList(ctx context.Cont
 	}
 }
 
+// SubscribeAttributeTargetListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTargetListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeTargetListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeTargetListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -490,8 +510,10 @@ func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeTargetListWithMinInter
 	}
 }
 
+// ReadAttributeCurrentTarget wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentTarget blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) ReadAttributeCurrentTarget(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) ReadAttributeCurrentTarget(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -513,8 +535,10 @@ func (x *MTRBaseClusterTargetNavigator) ReadAttributeCurrentTarget(ctx context.C
 	}
 }
 
+// SubscribeAttributeCurrentTargetWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentTargetWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeCurrentTargetWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeCurrentTargetWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -536,8 +560,10 @@ func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeCurrentTargetWithMinIn
 	}
 }
 
+// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -559,8 +585,10 @@ func (x *MTRBaseClusterTargetNavigator) ReadAttributeGeneratedCommandList(ctx co
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -582,8 +610,10 @@ func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeGeneratedCommandListWi
 	}
 }
 
+// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -605,8 +635,10 @@ func (x *MTRBaseClusterTargetNavigator) ReadAttributeAcceptedCommandList(ctx con
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -628,8 +660,10 @@ func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeAcceptedCommandListWit
 	}
 }
 
+// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) ReadAttributeAttributeList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -651,8 +685,10 @@ func (x *MTRBaseClusterTargetNavigator) ReadAttributeAttributeList(ctx context.C
 	}
 }
 
+// SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -674,8 +710,10 @@ func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeAttributeListWithMinIn
 	}
 }
 
+// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -697,8 +735,10 @@ func (x *MTRBaseClusterTargetNavigator) ReadAttributeFeatureMap(ctx context.Cont
 	}
 }
 
+// SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -720,8 +760,10 @@ func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeFeatureMapWithMinInter
 	}
 }
 
+// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -743,8 +785,10 @@ func (x *MTRBaseClusterTargetNavigator) ReadAttributeClusterRevision(ctx context
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterTargetNavigator) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -802,3 +846,7 @@ type MTRBaseClusterTargetNavigatorable interface {
 }
 
 var _ MTRBaseClusterTargetNavigatorable = (*MTRBaseClusterTargetNavigator)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterTargetNavigator)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterTargetNavigator)(nil)

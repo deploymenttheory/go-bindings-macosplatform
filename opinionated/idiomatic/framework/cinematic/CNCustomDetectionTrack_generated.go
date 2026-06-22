@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing a discrete detection track composed of individual detections.
-//
 // CustomDetectionTrack is an idiomatic wrapper over the Objective-C class CNCustomDetectionTrack.
+//
+// It embeds [DetectionTrack], promoting that type's methods.
+//
+// An object representing a discrete detection track composed of individual detections.
 type CustomDetectionTrack struct {
-	objref.Handle
+	DetectionTrack
 }
 
 // CustomDetectionTrackFromID adopts an existing Objective-C object as a CustomDetectionTrack
@@ -25,7 +26,8 @@ func CustomDetectionTrackFromID(id objc.ID) *CustomDetectionTrack {
 	if id == 0 {
 		return nil
 	}
-	x := &CustomDetectionTrack{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CustomDetectionTrack{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,35 +40,21 @@ func customDetectionTrackAdopt(id objc.ID) *CustomDetectionTrack {
 	if id == 0 {
 		return nil
 	}
-	x := &CustomDetectionTrack{Handle: objref.Wrap(id)}
+	x := &CustomDetectionTrack{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CustomDetectionTrack) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CustomDetectionTrack) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CustomDetectionTrack) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initialize a custom detection track with an array of detections, optionally applying smoothing. The smoothing algorithm used is the same one that is used for built-in detections during recording. It compensates for some amount of jitter in the disparity measure by smoothing out variability.
-//
-// NewCustomDetectionTrackWithDetectionsSmooth creates a new CustomDetectionTrack.
+// NewCustomDetectionTrackWithDetectionsSmooth initialize a custom detection track with an array of detections, optionally applying smoothing. The smoothing algorithm used is the same one that is used for built-in detections during recording. It compensates for some amount of jitter in the disparity measure by smoothing out variability.
 func NewCustomDetectionTrackWithDetectionsSmooth(detections []*Detection, applySmoothing bool) *CustomDetectionTrack {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CNCustomDetectionTrack")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDetections:smooth:"), purego.SliceToNSArray(detections, func(_v *Detection) objc.ID { return objref.IDOf(_v) }), applySmoothing)
 	return customDetectionTrackAdopt(_id)
 }
 
+// AllDetections wraps the corresponding Objective-C method.
+//
 // AllDetections returns the collection as a Go slice.
 func (x *CustomDetectionTrack) AllDetections() []*Detection {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allDetections"))
@@ -80,3 +68,5 @@ type CustomDetectionTrackable interface {
 }
 
 var _ CustomDetectionTrackable = (*CustomDetectionTrack)(nil)
+
+var _ DetectionTrackProvider = (*CustomDetectionTrack)(nil)

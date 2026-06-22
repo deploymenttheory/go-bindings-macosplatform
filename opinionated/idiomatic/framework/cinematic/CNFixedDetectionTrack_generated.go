@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing the fixed detection track.
-//
 // FixedDetectionTrack is an idiomatic wrapper over the Objective-C class CNFixedDetectionTrack.
+//
+// It embeds [DetectionTrack], promoting that type's methods.
+//
+// An object representing the fixed detection track.
 type FixedDetectionTrack struct {
-	objref.Handle
+	DetectionTrack
 }
 
 // FixedDetectionTrackFromID adopts an existing Objective-C object as a FixedDetectionTrack
@@ -25,7 +26,8 @@ func FixedDetectionTrackFromID(id objc.ID) *FixedDetectionTrack {
 	if id == 0 {
 		return nil
 	}
-	x := &FixedDetectionTrack{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FixedDetectionTrack{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,50 +40,33 @@ func fixedDetectionTrackAdopt(id objc.ID) *FixedDetectionTrack {
 	if id == 0 {
 		return nil
 	}
-	x := &FixedDetectionTrack{Handle: objref.Wrap(id)}
+	x := &FixedDetectionTrack{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *FixedDetectionTrack) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FixedDetectionTrack) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FixedDetectionTrack) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Create a detection track with fixed focus at the given disparity.
-//
-// NewFixedDetectionTrackWithFocusDisparity creates a new FixedDetectionTrack.
+// NewFixedDetectionTrackWithFocusDisparity create a detection track with fixed focus at the given disparity.
 func NewFixedDetectionTrackWithFocusDisparity(focusDisparity float32) *FixedDetectionTrack {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CNFixedDetectionTrack")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFocusDisparity:"), focusDisparity)
 	return fixedDetectionTrackAdopt(_id)
 }
 
-// Create a detection track with fixed focus at the disparity of an existing detection.
-//
-// NewFixedDetectionTrackWithOriginalDetection creates a new FixedDetectionTrack.
+// NewFixedDetectionTrackWithOriginalDetection create a detection track with fixed focus at the disparity of an existing detection.
 func NewFixedDetectionTrackWithOriginalDetection(originalDetection *Detection) *FixedDetectionTrack {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CNFixedDetectionTrack")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOriginalDetection:"), objref.IDOf(originalDetection))
 	return fixedDetectionTrackAdopt(_id)
 }
 
+// FocusDisparity wraps the corresponding Objective-C method.
 func (x *FixedDetectionTrack) FocusDisparity() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("focusDisparity"))
 	return _r
 }
 
-// The original detection upon which this fixed detection track was based, if any. This is the way to determine the time and rect from which fixed focus originated, if any. This detection is not part of the detection track and has a different detectionID or none. - Important: To get a detection from the fixed detection track, use detectionAtOrBeforeTime: instead, which will return a properly time-stamped detection.
+// OriginalDetection the original detection upon which this fixed detection track was based, if any. This is the way to determine the time and rect from which fixed focus originated, if any. This detection is not part of the detection track and has a different detectionID or none. - Important: To get a detection from the fixed detection track, use detectionAtOrBeforeTime: instead, which will return a properly time-stamped detection.
 func (x *FixedDetectionTrack) OriginalDetection() *Detection {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalDetection"))
 	return DetectionFromID(_r)
@@ -95,3 +80,5 @@ type FixedDetectionTrackable interface {
 }
 
 var _ FixedDetectionTrackable = (*FixedDetectionTrack)(nil)
+
+var _ DetectionTrackProvider = (*FixedDetectionTrack)(nil)

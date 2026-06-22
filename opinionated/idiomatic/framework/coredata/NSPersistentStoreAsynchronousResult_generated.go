@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A concrete class used to represent the results of an asynchronous request.
-//
 // PersistentStoreAsynchronousResult is an idiomatic wrapper over the Objective-C class NSPersistentStoreAsynchronousResult.
+//
+// PersistentStoreAsynchronousResult is an abstract base — you do not construct it directly. Construct one of [AsynchronousFetchResult] and pass it where a PersistentStoreAsynchronousResult is accepted.
+//
+// A concrete class used to represent the results of an asynchronous request.
 type PersistentStoreAsynchronousResult struct {
-	objref.Handle
+	PersistentStoreResult
 }
 
 // PersistentStoreAsynchronousResultFromID adopts an existing Objective-C object as a PersistentStoreAsynchronousResult
@@ -25,7 +26,8 @@ func PersistentStoreAsynchronousResultFromID(id objc.ID) *PersistentStoreAsynchr
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentStoreAsynchronousResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PersistentStoreAsynchronousResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,42 +40,24 @@ func persistentStoreAsynchronousResultAdopt(id objc.ID) *PersistentStoreAsynchro
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentStoreAsynchronousResult{Handle: objref.Wrap(id)}
+	x := &PersistentStoreAsynchronousResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *PersistentStoreAsynchronousResult) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PersistentStoreAsynchronousResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PersistentStoreAsynchronousResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewPersistentStoreAsynchronousResult creates a new PersistentStoreAsynchronousResult.
-func NewPersistentStoreAsynchronousResult() *PersistentStoreAsynchronousResult {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSPersistentStoreAsynchronousResult")), objc.RegisterName("new"))
-	return persistentStoreAsynchronousResultAdopt(_id)
-}
-
-// Cancels the asynchronous fetch request.
+// Cancel cancels the asynchronous fetch request.
 func (x *PersistentStoreAsynchronousResult) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
+// ManagedObjectContext wraps the corresponding Objective-C method.
 func (x *PersistentStoreAsynchronousResult) ManagedObjectContext() *ManagedObjectContext {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("managedObjectContext"))
 	return ManagedObjectContextFromID(_r)
 }
 
+// Progress wraps the corresponding Objective-C method.
 func (x *PersistentStoreAsynchronousResult) Progress() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("progress"))
 	return obj.Wrap(_r)
@@ -88,3 +72,12 @@ type PersistentStoreAsynchronousResultable interface {
 }
 
 var _ PersistentStoreAsynchronousResultable = (*PersistentStoreAsynchronousResult)(nil)
+
+// isPersistentStoreAsynchronousResult marks PersistentStoreAsynchronousResult — and, by embedding promotion, its
+// subclasses — as a member of the PersistentStoreAsynchronousResult hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *PersistentStoreAsynchronousResult) isPersistentStoreAsynchronousResult() {}
+
+var _ PersistentStoreAsynchronousResultProvider = (*PersistentStoreAsynchronousResult)(nil)
+
+var _ PersistentStoreResultProvider = (*PersistentStoreAsynchronousResult)(nil)

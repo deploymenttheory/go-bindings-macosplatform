@@ -23,7 +23,8 @@ func MTRWaterHeaterManagementClusterBoostStartedEventFromID(id objc.ID) *MTRWate
 	if id == 0 {
 		return nil
 	}
-	x := &MTRWaterHeaterManagementClusterBoostStartedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRWaterHeaterManagementClusterBoostStartedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRWaterHeaterManagementClusterBoostStartedEventAdopt(id objc.ID) *MTRWater
 	if id == 0 {
 		return nil
 	}
-	x := &MTRWaterHeaterManagementClusterBoostStartedEvent{Handle: objref.Wrap(id)}
+	x := &MTRWaterHeaterManagementClusterBoostStartedEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTRWaterHeaterManagementClusterBoostStartedEvent) IsKind(className stri
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRWaterHeaterManagementClusterBoostStartedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRWaterHeaterManagementClusterBoostStartedEvent creates a new MTRWaterHeaterManagementClusterBoostStartedEvent.
 func NewMTRWaterHeaterManagementClusterBoostStartedEvent() *MTRWaterHeaterManagementClusterBoostStartedEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRWaterHeaterManagementClusterBoostStartedEvent")), objc.RegisterName("new"))
 	return mTRWaterHeaterManagementClusterBoostStartedEventAdopt(_id)
 }
 
-// WithBoostInfo sets boostInfo and returns the receiver so calls can be chained.
+// WithBoostInfo sets the property and returns the receiver so calls can be chained.
 func (x *MTRWaterHeaterManagementClusterBoostStartedEvent) WithBoostInfo(boostInfo *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) *MTRWaterHeaterManagementClusterBoostStartedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoostInfo:"), objref.IDOf(boostInfo))
 	return x
 }
 
+// BoostInfo wraps the corresponding Objective-C method.
 func (x *MTRWaterHeaterManagementClusterBoostStartedEvent) BoostInfo() *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boostInfo"))
 	return MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructFromID(_r)
 }
 
+// SetBoostInfo wraps the corresponding Objective-C method.
 func (x *MTRWaterHeaterManagementClusterBoostStartedEvent) SetBoostInfo(boostInfo *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoostInfo:"), objref.IDOf(boostInfo))
 }

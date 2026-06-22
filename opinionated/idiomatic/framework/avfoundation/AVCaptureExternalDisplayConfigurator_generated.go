@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configurator class allowing you to configure properties of an external display to match the camera’s active video format.
-//
 // CaptureExternalDisplayConfigurator is an idiomatic wrapper over the Objective-C class AVCaptureExternalDisplayConfigurator.
+//
+// A configurator class allowing you to configure properties of an external display to match the camera’s active video format.
 type CaptureExternalDisplayConfigurator struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CaptureExternalDisplayConfiguratorFromID(id objc.ID) *CaptureExternalDispla
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureExternalDisplayConfigurator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptureExternalDisplayConfigurator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func captureExternalDisplayConfiguratorAdopt(id objc.ID) *CaptureExternalDisplay
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureExternalDisplayConfigurator{Handle: objref.Wrap(id)}
+	x := &CaptureExternalDisplayConfigurator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,39 +60,43 @@ func (x *CaptureExternalDisplayConfigurator) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// An external display configurator instance that attempts to synchronize the preview layer configuration with the device capture configuration.
-//
-// NewCaptureExternalDisplayConfiguratorWithDevicePreviewLayerConfiguration creates a new CaptureExternalDisplayConfigurator.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptureExternalDisplayConfigurator) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCaptureExternalDisplayConfiguratorWithDevicePreviewLayerConfiguration an external display configurator instance that attempts to synchronize the preview layer configuration with the device capture configuration.
 func NewCaptureExternalDisplayConfiguratorWithDevicePreviewLayerConfiguration(device *CaptureDevice, previewLayer obj.Object, configuration *CaptureExternalDisplayConfiguration) *CaptureExternalDisplayConfigurator {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptureExternalDisplayConfigurator")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:previewLayer:configuration:"), objref.IDOf(device), objref.IDOf(previewLayer), objref.IDOf(configuration))
 	return captureExternalDisplayConfiguratorAdopt(_id)
 }
 
-// Forces the external display configurator to asynchronously stop configuring the external display.
+// Stop forces the external display configurator to asynchronously stop configuring the external display.
 func (x *CaptureExternalDisplayConfigurator) Stop() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
-// The device for which the coordinator configures the preview layer. The value of this property is the “AVCaptureDevice“ instance you provided when instantiating the configurator. “AVCaptureExternalDisplayConfigurator“ holds a weak reference to the device. If the device is released, this property returns `nil`.
+// Device the device for which the coordinator configures the preview layer. The value of this property is the “AVCaptureDevice“ instance you provided when instantiating the configurator. “AVCaptureExternalDisplayConfigurator“ holds a weak reference to the device. If the device is released, this property returns `nil`.
 func (x *CaptureExternalDisplayConfigurator) Device() *CaptureDevice {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
 	return CaptureDeviceFromID(_r)
 }
 
-// The layer for which the configurator adjusts display properties to match the device's state. The value of this property is the “CALayer“ instance that you provided when instantiating the configurator. You may specify either an “AVCaptureVideoPreviewLayer“ or another “CALayer“ instance that displays a camera's video preview. “AVCaptureExternalDisplayConfigurator“holds a weak reference to the layer. If the layer is released, this property returns `nil`.
+// PreviewLayer the layer for which the configurator adjusts display properties to match the device's state. The value of this property is the “CALayer“ instance that you provided when instantiating the configurator. You may specify either an “AVCaptureVideoPreviewLayer“ or another “CALayer“ instance that displays a camera's video preview. “AVCaptureExternalDisplayConfigurator“holds a weak reference to the layer. If the layer is released, this property returns `nil`.
 func (x *CaptureExternalDisplayConfigurator) PreviewLayer() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previewLayer"))
 	return obj.Wrap(_r)
 }
 
-// This property tells you whether the configurator is actively configuring the external display. When this property returns `true`, the external display is successfully configured to match the device. If it returns`false`, the configurator is not making any configuration changes to the external display. If another “AVCaptureExternalDisplayConfigurator“ instance takes over the configuration of the external display, this property returns `false`.
+// IsActive this property tells you whether the configurator is actively configuring the external display. When this property returns `true`, the external display is successfully configured to match the device. If it returns`false`, the configurator is not making any configuration changes to the external display. If another “AVCaptureExternalDisplayConfigurator“ instance takes over the configuration of the external display, this property returns `false`.
 func (x *CaptureExternalDisplayConfigurator) IsActive() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
 	return _r
 }
 
-// The currently configured frame rate on the external display that's displaying the preview layer. Observe this property to determine if the configured frame rate matches the max frame rate (“AVCaptureDevice/activeVideoMinFrameDuration“) of the device. When the “active“ property becomes `false`, this property changes to 0.
+// ActiveExternalDisplayFrameRate the currently configured frame rate on the external display that's displaying the preview layer. Observe this property to determine if the configured frame rate matches the max frame rate (“AVCaptureDevice/activeVideoMinFrameDuration“) of the device. When the “active“ property becomes `false`, this property changes to 0.
 func (x *CaptureExternalDisplayConfigurator) ActiveExternalDisplayFrameRate() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("activeExternalDisplayFrameRate"))
 	return _r

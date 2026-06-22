@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A listener that waits for new incoming connections, configures them, and accepts or rejects them.
-//
 // XPCListener is an idiomatic wrapper over the Objective-C class NSXPCListener.
+//
+// A listener that waits for new incoming connections, configures them, and accepts or rejects them.
 type XPCListener struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func XPCListenerFromID(id objc.ID) *XPCListener {
 	if id == 0 {
 		return nil
 	}
-	x := &XPCListener{Handle: objref.Wrap(purego.Retain(id))}
+	x := &XPCListener{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func xPCListenerAdopt(id objc.ID) *XPCListener {
 	if id == 0 {
 		return nil
 	}
-	x := &XPCListener{Handle: objref.Wrap(id)}
+	x := &XPCListener{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,46 +60,51 @@ func (x *XPCListener) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a listener in a LaunchAgent or LaunchDaemon which has a name advertised in a launchd.plist file.
-//
-// NewXPCListenerWithMachServiceName creates a new XPCListener.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *XPCListener) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewXPCListenerWithMachServiceName initializes a listener in a LaunchAgent or LaunchDaemon which has a name advertised in a launchd.plist file.
 func NewXPCListenerWithMachServiceName(name string) *XPCListener {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXPCListener")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMachServiceName:"), purego.NSString(name))
 	return xPCListenerAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *XPCListener) WithScriptingProperties(scriptingProperties obj.Object) *XPCListener {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Starts processing of incoming requests.
+// Resume starts processing of incoming requests.
 func (x *XPCListener) Resume() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resume"))
 }
 
-// Suspends the listener.
+// Suspend suspends the listener.
 func (x *XPCListener) Suspend() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suspend"))
 }
 
-// Activates the listener.
+// Activate activates the listener.
 func (x *XPCListener) Activate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activate"))
 }
 
-// Invalidates the listener.
+// Invalidate invalidates the listener.
 func (x *XPCListener) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
-// Sets the code signing requirement for connections to this listener.
+// SetConnectionCodeSigningRequirement sets the code signing requirement for connections to this listener.
 func (x *XPCListener) SetConnectionCodeSigningRequirement(requirement string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionCodeSigningRequirement:"), purego.NSString(requirement))
 }
 
+// Endpoint wraps the corresponding Objective-C method.
 func (x *XPCListener) Endpoint() *XPCListenerEndpoint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
 	return XPCListenerEndpointFromID(_r)

@@ -6,17 +6,19 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a dropout filter.
-//
 // CNNDropoutNode is an idiomatic wrapper over the Objective-C class MPSCNNDropoutNode.
+//
+// It embeds [NNFilterNode], promoting that type's methods.
+//
+// A representation of a dropout filter.
 type CNNDropoutNode struct {
-	objref.Handle
+	NNFilterNode
 }
 
 // CNNDropoutNodeFromID adopts an existing Objective-C object as a CNNDropoutNode
@@ -25,7 +27,8 @@ func CNNDropoutNodeFromID(id objc.ID) *CNNDropoutNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNDropoutNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNDropoutNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func cNNDropoutNodeAdopt(id objc.ID) *CNNDropoutNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNDropoutNode{Handle: objref.Wrap(id)}
+	x := &CNNDropoutNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNDropoutNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNDropoutNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNDropoutNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNDropoutNodeWithSource creates a new CNNDropoutNode.
@@ -72,21 +61,34 @@ func NewCNNDropoutNodeWithSourceKeepProbability(source obj.Object, keepProbabili
 	return cNNDropoutNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// NewCNNDropoutNodeWithSourceKeepProbabilitySeedMaskStrideInPixels creates a new CNNDropoutNode.
+func NewCNNDropoutNodeWithSourceKeepProbabilitySeedMaskStrideInPixels(source obj.Object, keepProbability float32, seed int, maskStrideInPixels metal.MTLSize) *CNNDropoutNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNDropoutNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:keepProbability:seed:maskStrideInPixels:"), objref.IDOf(source), keepProbability, seed, maskStrideInPixels)
+	return cNNDropoutNodeAdopt(_id)
+}
+
+// WithLabel a string to help identify this object.
 func (x *CNNDropoutNode) WithLabel(label string) *CNNDropoutNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// KeepProbability wraps the corresponding Objective-C method.
 func (x *CNNDropoutNode) KeepProbability() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("keepProbability"))
 	return _r
 }
 
+// Seed wraps the corresponding Objective-C method.
 func (x *CNNDropoutNode) Seed() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("seed"))
+	return _r
+}
+
+// MaskStrideInPixels wraps the corresponding Objective-C method.
+func (x *CNNDropoutNode) MaskStrideInPixels() metal.MTLSize {
+	_r := objc.Send[metal.MTLSize](objref.IDOf(x), objc.RegisterName("maskStrideInPixels"))
 	return _r
 }
 
@@ -96,6 +98,9 @@ type CNNDropoutNodeable interface {
 	WithLabel(label string) *CNNDropoutNode
 	KeepProbability() float32
 	Seed() int
+	MaskStrideInPixels() metal.MTLSize
 }
 
 var _ CNNDropoutNodeable = (*CNNDropoutNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNDropoutNode)(nil)

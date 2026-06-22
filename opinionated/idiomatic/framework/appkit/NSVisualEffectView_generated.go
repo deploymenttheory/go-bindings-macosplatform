@@ -6,17 +6,20 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view that adds translucency and vibrancy effects to the views in your interface.
-//
 // VisualEffectView is an idiomatic wrapper over the Objective-C class NSVisualEffectView.
+//
+// It embeds [View], promoting that type's methods.
+//
+// A view that adds translucency and vibrancy effects to the views in your interface.
 type VisualEffectView struct {
-	objref.Handle
+	View
 }
 
 // VisualEffectViewFromID adopts an existing Objective-C object as a VisualEffectView
@@ -25,7 +28,8 @@ func VisualEffectViewFromID(id objc.ID) *VisualEffectView {
 	if id == 0 {
 		return nil
 	}
-	x := &VisualEffectView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VisualEffectView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func visualEffectViewAdopt(id objc.ID) *VisualEffectView {
 	if id == 0 {
 		return nil
 	}
-	x := &VisualEffectView{Handle: objref.Wrap(id)}
+	x := &VisualEffectView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *VisualEffectView) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VisualEffectView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VisualEffectView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewVisualEffectView creates a new VisualEffectView.
@@ -64,389 +54,391 @@ func NewVisualEffectView() *VisualEffectView {
 	return visualEffectViewAdopt(_id)
 }
 
-// The material shown by the visual effect view.
-//
-// WithMaterial sets material and returns the receiver so calls can be chained.
+// WithMaterial the material shown by the visual effect view.
 func (x *VisualEffectView) WithMaterial(material VisualEffectMaterial) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterial:"), material)
 	return x
 }
 
-// A value indicating how the view’s contents blend with the surrounding content.
-//
-// WithBlendingMode sets blendingMode and returns the receiver so calls can be chained.
+// WithBlendingMode a value indicating how the view’s contents blend with the surrounding content.
 func (x *VisualEffectView) WithBlendingMode(blendingMode VisualEffectBlendingMode) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendingMode:"), blendingMode)
 	return x
 }
 
-// A value that indicates whether a view has a visual effect applied.
-//
-// WithState sets state and returns the receiver so calls can be chained.
+// WithState a value that indicates whether a view has a visual effect applied.
 func (x *VisualEffectView) WithState(state VisualEffectState) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 	return x
 }
 
-// An image whose alpha channel masks the visual effect view’s material.
-//
-// WithMaskImage sets maskImage and returns the receiver so calls can be chained.
+// WithMaskImage an image whose alpha channel masks the visual effect view’s material.
 func (x *VisualEffectView) WithMaskImage(maskImage *Image) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskImage:"), objref.IDOf(maskImage))
 	return x
 }
 
-// A Boolean value indicating whether to emphasize the look of the material.
-//
-// WithEmphasized sets emphasized and returns the receiver so calls can be chained.
+// WithEmphasized a Boolean value indicating whether to emphasize the look of the material.
 func (x *VisualEffectView) WithEmphasized(emphasized bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmphasized:"), emphasized)
 	return x
 }
 
-// WithSubviews sets the collection and returns the receiver so calls can be chained.
+// WithSubviews sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithSubviews(items ...ViewProvider) *VisualEffectView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
 	return x
 }
 
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithHidden(hidden bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithPostsFrameChangedNotifications sets postsFrameChangedNotifications and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return x
 }
 
-// WithAutoresizesSubviews sets autoresizesSubviews and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithAutoresizesSubviews(autoresizesSubviews bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return x
 }
 
-// WithAutoresizingMask sets autoresizingMask and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// WithFrameRotation sets frameRotation and returns the receiver so calls can be chained.
+// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (x *VisualEffectView) WithFrame(frame corefoundation.CGRect) *VisualEffectView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
+	return x
+}
+
+// WithFrameRotation sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithFrameRotation(frameRotation float64) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return x
 }
 
-// WithFrameCenterRotation sets frameCenterRotation and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithFrameCenterRotation(frameCenterRotation float64) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return x
 }
 
-// WithBoundsRotation sets boundsRotation and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithBoundsRotation(boundsRotation float64) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return x
 }
 
-// WithCanDrawConcurrently sets canDrawConcurrently and returns the receiver so calls can be chained.
+// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (x *VisualEffectView) WithBounds(bounds corefoundation.CGRect) *VisualEffectView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithCanDrawConcurrently(canDrawConcurrently bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return x
 }
 
-// A Boolean value that determines whether the view needs to be redrawn before being displayed.
-//
-// WithNeedsDisplay sets needsDisplay and returns the receiver so calls can be chained.
+// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (x *VisualEffectView) WithNeedsDisplay(needsDisplay bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// WithAcceptsTouchEvents sets acceptsTouchEvents and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return x
 }
 
-// WithWantsRestingTouches sets wantsRestingTouches and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithWantsRestingTouches(wantsRestingTouches bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return x
 }
 
-// WithLayerContentsRedrawPolicy sets layerContentsRedrawPolicy and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return x
 }
 
-// WithLayerContentsPlacement sets layerContentsPlacement and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return x
 }
 
-// WithWantsLayer sets wantsLayer and returns the receiver so calls can be chained.
+// WithWantsLayer sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithWantsLayer(wantsLayer bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return x
 }
 
-// WithLayer sets layer and returns the receiver so calls can be chained.
+// WithLayer sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithLayer(layer obj.Object) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// WithCanDrawSubviewsIntoLayer sets canDrawSubviewsIntoLayer and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return x
 }
 
-// WithNeedsLayout sets needsLayout and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithNeedsLayout(needsLayout bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return x
 }
 
-// WithAlphaValue sets alphaValue and returns the receiver so calls can be chained.
+// WithAlphaValue sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithAlphaValue(alphaValue float64) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// WithLayerUsesCoreImageFilters sets layerUsesCoreImageFilters and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return x
 }
 
-// WithBackgroundFilters sets the collection and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithBackgroundFilters(items ...obj.Object) *VisualEffectView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return x
 }
 
-// WithCompositingFilter sets compositingFilter and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithCompositingFilter(compositingFilter obj.Object) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// WithContentFilters sets the collection and returns the receiver so calls can be chained.
+// WithContentFilters sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithContentFilters(items ...obj.Object) *VisualEffectView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
 	return x
 }
 
-// WithShadow sets shadow and returns the receiver so calls can be chained.
+// WithShadow sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithShadow(shadow *Shadow) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return x
 }
 
-// WithClipsToBounds sets clipsToBounds and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithClipsToBounds(clipsToBounds bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return x
 }
 
-// WithPostsBoundsChangedNotifications sets postsBoundsChangedNotifications and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return x
 }
 
-// WithToolTip sets toolTip and returns the receiver so calls can be chained.
+// WithToolTip sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithToolTip(toolTip string) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// WithNextKeyView sets nextKeyView and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+func (x *VisualEffectView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *VisualEffectView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithNextKeyView(nextKeyView ViewProvider) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return x
 }
 
-// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+// WithFocusRingType sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithFocusRingType(focusRingType FocusRingType) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// WithGestureRecognizers sets the collection and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithGestureRecognizers(items ...GestureRecognizerProvider) *VisualEffectView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return x
 }
 
-// WithAllowedTouchTypes sets allowedTouchTypes and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return x
 }
 
-// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-//
-// WithPrefersCompactControlSizeMetrics sets prefersCompactControlSizeMetrics and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+func (x *VisualEffectView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *VisualEffectView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (x *VisualEffectView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
 	return x
 }
 
-// WithWritingToolsCoordinator sets writingToolsCoordinator and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return x
 }
 
-// WithNeedsUpdateConstraints sets needsUpdateConstraints and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return x
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets translatesAutoresizingMaskIntoConstraints and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return x
 }
 
-// WithHorizontalContentSizeConstraintActive sets horizontalContentSizeConstraintActive and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return x
 }
 
-// WithVerticalContentSizeConstraintActive sets verticalContentSizeConstraintActive and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return x
 }
 
-// WithWantsBestResolutionOpenGLSurface sets wantsBestResolutionOpenGLSurface and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return x
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets wantsExtendedDynamicRangeOpenGLSurface and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return x
 }
 
-// WithPressureConfiguration sets pressureConfiguration and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
 func (x *VisualEffectView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *VisualEffectView) WithNextResponder(nextResponder ResponderProvider) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets menu and returns the receiver so calls can be chained.
+// WithMenu returns the responder’s menu.
 func (x *VisualEffectView) WithMenu(menu *Menu) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity an object encapsulating a user activity supported by this responder.
 func (x *VisualEffectView) WithUserActivity(userActivity obj.Object) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *VisualEffectView) WithTouchBar(touchBar *TouchBar) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// A value indicating which material is shown by the NSVisualEffectView.  See the comments on NSVisualEffectMaterial.  Defaults to NSVisualEffectMaterialAppearanceBased.  You should instead specify an appropriate semantic material value.  See the comments on NSVisualEffectMaterial.
+// Material a value indicating which material is shown by the NSVisualEffectView.  See the comments on NSVisualEffectMaterial.  Defaults to NSVisualEffectMaterialAppearanceBased.  You should instead specify an appropriate semantic material value.  See the comments on NSVisualEffectMaterial.
 func (x *VisualEffectView) Material() VisualEffectMaterial {
 	_r := objc.Send[VisualEffectMaterial](objref.IDOf(x), objc.RegisterName("material"))
 	return _r
 }
 
-// A value indicating which material is shown by the NSVisualEffectView.  See the comments on NSVisualEffectMaterial.  Defaults to NSVisualEffectMaterialAppearanceBased.  You should instead specify an appropriate semantic material value.  See the comments on NSVisualEffectMaterial.
+// SetMaterial a value indicating which material is shown by the NSVisualEffectView.  See the comments on NSVisualEffectMaterial.  Defaults to NSVisualEffectMaterialAppearanceBased.  You should instead specify an appropriate semantic material value.  See the comments on NSVisualEffectMaterial.
 func (x *VisualEffectView) SetMaterial(material VisualEffectMaterial) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterial:"), material)
 }
 
-// An NSBackgroundStyle value that most closely matches the look of the material shown by the NSVisualEffectView.
+// InteriorBackgroundStyle an NSBackgroundStyle value that most closely matches the look of the material shown by the NSVisualEffectView.
 func (x *VisualEffectView) InteriorBackgroundStyle() BackgroundStyle {
 	_r := objc.Send[BackgroundStyle](objref.IDOf(x), objc.RegisterName("interiorBackgroundStyle"))
 	return _r
 }
 
-// A value controlling how the NSVisualEffectView generates its material.  See the comments on NSVisualEffectBlendingMode.  Not all materials support both blending modes, so NSVisualEffectView may fall back to a more appropriate blending mode as needed.  Defaults to NSVisualEffectBlendingModeBehindWindow.
+// BlendingMode a value controlling how the NSVisualEffectView generates its material.  See the comments on NSVisualEffectBlendingMode.  Not all materials support both blending modes, so NSVisualEffectView may fall back to a more appropriate blending mode as needed.  Defaults to NSVisualEffectBlendingModeBehindWindow.
 func (x *VisualEffectView) BlendingMode() VisualEffectBlendingMode {
 	_r := objc.Send[VisualEffectBlendingMode](objref.IDOf(x), objc.RegisterName("blendingMode"))
 	return _r
 }
 
-// A value controlling how the NSVisualEffectView generates its material.  See the comments on NSVisualEffectBlendingMode.  Not all materials support both blending modes, so NSVisualEffectView may fall back to a more appropriate blending mode as needed.  Defaults to NSVisualEffectBlendingModeBehindWindow.
+// SetBlendingMode a value controlling how the NSVisualEffectView generates its material.  See the comments on NSVisualEffectBlendingMode.  Not all materials support both blending modes, so NSVisualEffectView may fall back to a more appropriate blending mode as needed.  Defaults to NSVisualEffectBlendingModeBehindWindow.
 func (x *VisualEffectView) SetBlendingMode(blendingMode VisualEffectBlendingMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendingMode:"), blendingMode)
 }
 
-// A value controlling when the NSVisualEffectView takes on the active look.  See the comments on NSVisualEffectState.  Defaults to NSVisualEffectStateFollowsWindowActiveState.
+// State a value controlling when the NSVisualEffectView takes on the active look.  See the comments on NSVisualEffectState.  Defaults to NSVisualEffectStateFollowsWindowActiveState.
 func (x *VisualEffectView) State() VisualEffectState {
 	_r := objc.Send[VisualEffectState](objref.IDOf(x), objc.RegisterName("state"))
 	return _r
 }
 
-// A value controlling when the NSVisualEffectView takes on the active look.  See the comments on NSVisualEffectState.  Defaults to NSVisualEffectStateFollowsWindowActiveState.
+// SetState a value controlling when the NSVisualEffectView takes on the active look.  See the comments on NSVisualEffectState.  Defaults to NSVisualEffectStateFollowsWindowActiveState.
 func (x *VisualEffectView) SetState(state VisualEffectState) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 }
 
-// An image whose alpha channel is used to mask the material generated by the NSVisualEffectView.  (It does not also mask subviews.)  Defaults to nil.  It is best to set this to the smallest mask image possible and properly set the image's capInsets property to stretch it.  Setting the maskImage on an NSVisualEffectView that is the contentView of a window will correctly influence the window's shadow.
+// MaskImage an image whose alpha channel is used to mask the material generated by the NSVisualEffectView.  (It does not also mask subviews.)  Defaults to nil.  It is best to set this to the smallest mask image possible and properly set the image's capInsets property to stretch it.  Setting the maskImage on an NSVisualEffectView that is the contentView of a window will correctly influence the window's shadow.
 func (x *VisualEffectView) MaskImage() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maskImage"))
 	return ImageFromID(_r)
 }
 
-// An image whose alpha channel is used to mask the material generated by the NSVisualEffectView.  (It does not also mask subviews.)  Defaults to nil.  It is best to set this to the smallest mask image possible and properly set the image's capInsets property to stretch it.  Setting the maskImage on an NSVisualEffectView that is the contentView of a window will correctly influence the window's shadow.
+// SetMaskImage an image whose alpha channel is used to mask the material generated by the NSVisualEffectView.  (It does not also mask subviews.)  Defaults to nil.  It is best to set this to the smallest mask image possible and properly set the image's capInsets property to stretch it.  Setting the maskImage on an NSVisualEffectView that is the contentView of a window will correctly influence the window's shadow.
 func (x *VisualEffectView) SetMaskImage(maskImage *Image) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskImage:"), objref.IDOf(maskImage))
 }
 
-// When YES, the material takes on the emphasized look.  Defaults to NO.  Some, but not all, materials change their look when emphasized.  This is used to indicate that an associated view has firstResponder status.
+// IsEmphasized when YES, the material takes on the emphasized look.  Defaults to NO.  Some, but not all, materials change their look when emphasized.  This is used to indicate that an associated view has firstResponder status.
 func (x *VisualEffectView) IsEmphasized() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEmphasized"))
 	return _r
 }
 
-// When YES, the material takes on the emphasized look.  Defaults to NO.  Some, but not all, materials change their look when emphasized.  This is used to indicate that an associated view has firstResponder status.
+// SetEmphasized when YES, the material takes on the emphasized look.  Defaults to NO.  Some, but not all, materials change their look when emphasized.  This is used to indicate that an associated view has firstResponder status.
 func (x *VisualEffectView) SetEmphasized(emphasized bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmphasized:"), emphasized)
 }
@@ -464,9 +456,11 @@ type VisualEffectViewable interface {
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *VisualEffectView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *VisualEffectView
 	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *VisualEffectView
+	WithFrame(frame corefoundation.CGRect) *VisualEffectView
 	WithFrameRotation(frameRotation float64) *VisualEffectView
 	WithFrameCenterRotation(frameCenterRotation float64) *VisualEffectView
 	WithBoundsRotation(boundsRotation float64) *VisualEffectView
+	WithBounds(bounds corefoundation.CGRect) *VisualEffectView
 	WithCanDrawConcurrently(canDrawConcurrently bool) *VisualEffectView
 	WithNeedsDisplay(needsDisplay bool) *VisualEffectView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *VisualEffectView
@@ -487,10 +481,12 @@ type VisualEffectViewable interface {
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *VisualEffectView
 	WithToolTip(toolTip string) *VisualEffectView
 	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *VisualEffectView
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *VisualEffectView
 	WithNextKeyView(nextKeyView ViewProvider) *VisualEffectView
 	WithFocusRingType(focusRingType FocusRingType) *VisualEffectView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *VisualEffectView
 	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *VisualEffectView
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *VisualEffectView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *VisualEffectView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *VisualEffectView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *VisualEffectView
@@ -518,3 +514,7 @@ type VisualEffectViewable interface {
 }
 
 var _ VisualEffectViewable = (*VisualEffectView)(nil)
+
+var _ ViewProvider = (*VisualEffectView)(nil)
+
+var _ ResponderProvider = (*VisualEffectView)(nil)

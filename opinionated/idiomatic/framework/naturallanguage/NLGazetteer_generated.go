@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// A collection of terms and their labels, which take precedence over a word tagger.
-//
 // Gazetteer is an idiomatic wrapper over the Objective-C class NLGazetteer.
+//
+// A collection of terms and their labels, which take precedence over a word tagger.
 type Gazetteer struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func GazetteerFromID(id objc.ID) *Gazetteer {
 	if id == 0 {
 		return nil
 	}
-	x := &Gazetteer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Gazetteer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func gazetteerAdopt(id objc.ID) *Gazetteer {
 	if id == 0 {
 		return nil
 	}
-	x := &Gazetteer{Handle: objref.Wrap(id)}
+	x := &Gazetteer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,10 +62,14 @@ func (x *Gazetteer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a Natural Language gazetteer from a model created with the Create ML framework.
-//
-// NewGazetteerWithContentsOfURLError creates a new Gazetteer.
-func NewGazetteerWithContentsOfURLError(url string) (*Gazetteer, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Gazetteer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewGazetteerWithContentsOfURLError creates a Natural Language gazetteer from a model created with the Create ML framework.
+func NewGazetteerWithContentsOfURLError(url string) (result *Gazetteer, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NLGazetteer")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
@@ -73,10 +79,8 @@ func NewGazetteerWithContentsOfURLError(url string) (*Gazetteer, error) {
 	return gazetteerAdopt(_id), nil
 }
 
-// Creates a gazetteer from a data instance.
-//
-// NewGazetteerWithDataError creates a new Gazetteer.
-func NewGazetteerWithDataError(data obj.Object) (*Gazetteer, error) {
+// NewGazetteerWithDataError creates a gazetteer from a data instance.
+func NewGazetteerWithDataError(data obj.Object) (result *Gazetteer, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NLGazetteer")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
@@ -86,10 +90,8 @@ func NewGazetteerWithDataError(data obj.Object) (*Gazetteer, error) {
 	return gazetteerAdopt(_id), nil
 }
 
-// Creates a gazetteer from a set of labels for terms represented by a dictionary.
-//
-// NewGazetteerWithDictionaryLanguageError creates a new Gazetteer.
-func NewGazetteerWithDictionaryLanguageError(dictionary obj.Object, language obj.Object) (*Gazetteer, error) {
+// NewGazetteerWithDictionaryLanguageError creates a gazetteer from a set of labels for terms represented by a dictionary.
+func NewGazetteerWithDictionaryLanguageError(dictionary obj.Object, language obj.Object) (result *Gazetteer, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NLGazetteer")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:language:error:"), objref.IDOf(dictionary), objref.IDOf(language), unsafe.Pointer(&_nsErr))
@@ -99,7 +101,7 @@ func NewGazetteerWithDictionaryLanguageError(dictionary obj.Object, language obj
 	return gazetteerAdopt(_id), nil
 }
 
-// Retrieves the label for the given term.
+// LabelForString retrieves the label for the given term.
 func (x *Gazetteer) LabelForString(string_ string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labelForString:"), purego.NSString(string_))
 	if _r == 0 {
@@ -108,11 +110,13 @@ func (x *Gazetteer) LabelForString(string_ string) string {
 	return purego.GoString(_r)
 }
 
+// Language wraps the corresponding Objective-C method.
 func (x *Gazetteer) Language() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
 	return obj.Wrap(_r)
 }
 
+// Data wraps the corresponding Objective-C method.
 func (x *Gazetteer) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)

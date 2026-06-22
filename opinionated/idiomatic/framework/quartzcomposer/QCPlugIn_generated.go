@@ -23,7 +23,8 @@ func PlugInFromID(id objc.ID) *PlugIn {
 	if id == 0 {
 		return nil
 	}
-	x := &PlugIn{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlugIn{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func plugInAdopt(id objc.ID) *PlugIn {
 	if id == 0 {
 		return nil
 	}
-	x := &PlugIn{Handle: objref.Wrap(id)}
+	x := &PlugIn{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,52 +58,68 @@ func (x *PlugIn) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlugIn) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPlugIn creates a new PlugIn.
 func NewPlugIn() *PlugIn {
 	_id := objc.Send[objc.ID](objc.ID(_class("QCPlugIn")), objc.RegisterName("new"))
 	return plugInAdopt(_id)
 }
 
+// SerializedValueForKey wraps the corresponding Objective-C method.
 func (x *PlugIn) SerializedValueForKey(key string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serializedValueForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
+// SetSerializedValueForKey wraps the corresponding Objective-C method.
 func (x *PlugIn) SetSerializedValueForKey(serializedValue obj.Object, key string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSerializedValue:forKey:"), objref.IDOf(serializedValue), purego.NSString(key))
 }
 
+// DidValueForInputKeyChange wraps the corresponding Objective-C method.
 func (x *PlugIn) DidValueForInputKeyChange(key string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("didValueForInputKeyChange:"), purego.NSString(key))
 	return _r
 }
 
+// ValueForInputKey wraps the corresponding Objective-C method.
 func (x *PlugIn) ValueForInputKey(key string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForInputKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
+// SetValueForOutputKey wraps the corresponding Objective-C method.
 func (x *PlugIn) SetValueForOutputKey(value obj.Object, key string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setValue:forOutputKey:"), objref.IDOf(value), purego.NSString(key))
 	return _r
 }
 
+// AddInputPortWithTypeForKeyWithAttributes wraps the corresponding Objective-C method.
 func (x *PlugIn) AddInputPortWithTypeForKeyWithAttributes(type_ string, key string, attributes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addInputPortWithType:forKey:withAttributes:"), purego.NSString(type_), purego.NSString(key), objref.IDOf(attributes))
 }
 
+// RemoveInputPortForKey wraps the corresponding Objective-C method.
 func (x *PlugIn) RemoveInputPortForKey(key string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeInputPortForKey:"), purego.NSString(key))
 }
 
+// AddOutputPortWithTypeForKeyWithAttributes wraps the corresponding Objective-C method.
 func (x *PlugIn) AddOutputPortWithTypeForKeyWithAttributes(type_ string, key string, attributes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOutputPortWithType:forKey:withAttributes:"), purego.NSString(type_), purego.NSString(key), objref.IDOf(attributes))
 }
 
+// RemoveOutputPortForKey wraps the corresponding Objective-C method.
 func (x *PlugIn) RemoveOutputPortForKey(key string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeOutputPortForKey:"), purego.NSString(key))
 }
 
+// CreateViewController wraps the corresponding Objective-C method.
 func (x *PlugIn) CreateViewController() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createViewController"))
 	return obj.Wrap(_r)

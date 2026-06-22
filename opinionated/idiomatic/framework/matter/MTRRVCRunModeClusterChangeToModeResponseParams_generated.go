@@ -25,7 +25,8 @@ func MTRRVCRunModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MTRRVCRun
 	if id == 0 {
 		return nil
 	}
-	x := &MTRRVCRunModeClusterChangeToModeResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRRVCRunModeClusterChangeToModeResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRRVCRunModeClusterChangeToModeResponseParamsAdopt(id objc.ID) *MTRRVCRunM
 	if id == 0 {
 		return nil
 	}
-	x := &MTRRVCRunModeClusterChangeToModeResponseParams{Handle: objref.Wrap(id)}
+	x := &MTRRVCRunModeClusterChangeToModeResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTRRVCRunModeClusterChangeToModeResponseParams) IsKind(className string
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRRVCRunModeClusterChangeToModeResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTRRVCRunModeClusterChangeToModeResponseParamsWithResponseValueError creates a new MTRRVCRunModeClusterChangeToModeResponseParams.
-func NewMTRRVCRunModeClusterChangeToModeResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRRVCRunModeClusterChangeToModeResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRRVCRunModeClusterChangeToModeResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRRVCRunModeClusterChangeToModeResponseParamsWithResponseValueError initialize an MTRRVCRunModeClusterChangeToModeResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRRVCRunModeClusterChangeToModeResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRRVCRunModeClusterChangeToModeResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRRVCRunModeClusterChangeToModeResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,27 +77,30 @@ func NewMTRRVCRunModeClusterChangeToModeResponseParamsWithResponseValueError(res
 	return mTRRVCRunModeClusterChangeToModeResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets status and returns the receiver so calls can be chained.
+// WithStatus sets the property and returns the receiver so calls can be chained.
 func (x *MTRRVCRunModeClusterChangeToModeResponseParams) WithStatus(status obj.Object) *MTRRVCRunModeClusterChangeToModeResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return x
 }
 
-// WithStatusText sets statusText and returns the receiver so calls can be chained.
+// WithStatusText sets the property and returns the receiver so calls can be chained.
 func (x *MTRRVCRunModeClusterChangeToModeResponseParams) WithStatusText(statusText string) *MTRRVCRunModeClusterChangeToModeResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
 	return x
 }
 
+// Status wraps the corresponding Objective-C method.
 func (x *MTRRVCRunModeClusterChangeToModeResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
+// SetStatus wraps the corresponding Objective-C method.
 func (x *MTRRVCRunModeClusterChangeToModeResponseParams) SetStatus(status obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 }
 
+// StatusText wraps the corresponding Objective-C method.
 func (x *MTRRVCRunModeClusterChangeToModeResponseParams) StatusText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statusText"))
 	if _r == 0 {
@@ -100,6 +109,7 @@ func (x *MTRRVCRunModeClusterChangeToModeResponseParams) StatusText() string {
 	return purego.GoString(_r)
 }
 
+// SetStatusText wraps the corresponding Objective-C method.
 func (x *MTRRVCRunModeClusterChangeToModeResponseParams) SetStatusText(statusText string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
 }

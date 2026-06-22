@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines a Virtio sound device configuration.
-//
 // VirtioSoundDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZVirtioSoundDeviceConfiguration.
+//
+// It embeds [AudioDeviceConfiguration], promoting that type's methods.
+//
+// An object that defines a Virtio sound device configuration.
 type VirtioSoundDeviceConfiguration struct {
-	objref.Handle
+	AudioDeviceConfiguration
 }
 
 // VirtioSoundDeviceConfigurationFromID adopts an existing Objective-C object as a VirtioSoundDeviceConfiguration
@@ -25,7 +26,8 @@ func VirtioSoundDeviceConfigurationFromID(id objc.ID) *VirtioSoundDeviceConfigur
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioSoundDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VirtioSoundDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func virtioSoundDeviceConfigurationAdopt(id objc.ID) *VirtioSoundDeviceConfigura
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioSoundDeviceConfiguration{Handle: objref.Wrap(id)}
+	x := &VirtioSoundDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *VirtioSoundDeviceConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VirtioSoundDeviceConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VirtioSoundDeviceConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewVirtioSoundDeviceConfiguration creates a new VirtioSoundDeviceConfiguration.
@@ -64,15 +52,15 @@ func NewVirtioSoundDeviceConfiguration() *VirtioSoundDeviceConfiguration {
 	return virtioSoundDeviceConfigurationAdopt(_id)
 }
 
-// List of audio streams exposed by this device.
-//
-// WithStreams sets the collection and returns the receiver so calls can be chained.
+// WithStreams list of audio streams exposed by this device.
 func (x *VirtioSoundDeviceConfiguration) WithStreams(items ...VirtioSoundDeviceStreamConfigurationProvider) *VirtioSoundDeviceConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v VirtioSoundDeviceStreamConfigurationProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStreams:"), _arr)
 	return x
 }
 
+// Streams wraps the corresponding Objective-C method.
+//
 // Streams returns the collection as a Go slice.
 func (x *VirtioSoundDeviceConfiguration) Streams() []*VirtioSoundDeviceStreamConfiguration {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("streams"))
@@ -81,6 +69,7 @@ func (x *VirtioSoundDeviceConfiguration) Streams() []*VirtioSoundDeviceStreamCon
 	})
 }
 
+// SetStreams wraps the corresponding Objective-C method.
 func (x *VirtioSoundDeviceConfiguration) SetStreams(streams []*VirtioSoundDeviceStreamConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStreams:"), purego.SliceToNSArray(streams, func(_v *VirtioSoundDeviceStreamConfiguration) objc.ID { return objref.IDOf(_v) }))
 }
@@ -94,3 +83,5 @@ type VirtioSoundDeviceConfigurationable interface {
 }
 
 var _ VirtioSoundDeviceConfigurationable = (*VirtioSoundDeviceConfiguration)(nil)
+
+var _ AudioDeviceConfigurationProvider = (*VirtioSoundDeviceConfiguration)(nil)

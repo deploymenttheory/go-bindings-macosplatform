@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract base class for controls that interact with the camera system.
-//
 // CaptureControl is an idiomatic wrapper over the Objective-C class AVCaptureControl.
+//
+// CaptureControl is an abstract base — you do not construct it directly. Construct one of [CaptureIndexPicker], [CaptureSlider], [CaptureSystemExposureBiasSlider], [CaptureSystemZoomSlider] and pass it where a CaptureControl is accepted.
+//
+// An abstract base class for controls that interact with the camera system.
 type CaptureControl struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func CaptureControlFromID(id objc.ID) *CaptureControl {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureControl{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptureControl{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func captureControlAdopt(id objc.ID) *CaptureControl {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureControl{Handle: objref.Wrap(id)}
+	x := &CaptureControl{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +62,25 @@ func (x *CaptureControl) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewCaptureControl creates a new CaptureControl.
-func NewCaptureControl() *CaptureControl {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureControl")), objc.RegisterName("new"))
-	return captureControlAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptureControl) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// A Boolean value that indicates whether this control supports user interaction.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether this control supports user interaction.
 func (x *CaptureControl) WithEnabled(enabled bool) *CaptureControl {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
+// IsEnabled wraps the corresponding Objective-C method.
 func (x *CaptureControl) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r
 }
 
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *CaptureControl) SetEnabled(enabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
@@ -90,3 +94,10 @@ type CaptureControlable interface {
 }
 
 var _ CaptureControlable = (*CaptureControl)(nil)
+
+// isCaptureControl marks CaptureControl — and, by embedding promotion, its
+// subclasses — as a member of the CaptureControl hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CaptureControl) isCaptureControl() {}
+
+var _ CaptureControlProvider = (*CaptureControl)(nil)

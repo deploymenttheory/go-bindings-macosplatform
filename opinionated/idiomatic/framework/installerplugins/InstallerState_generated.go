@@ -23,7 +23,8 @@ func InstallerStateFromID(id objc.ID) *InstallerState {
 	if id == 0 {
 		return nil
 	}
-	x := &InstallerState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &InstallerState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func installerStateAdopt(id objc.ID) *InstallerState {
 	if id == 0 {
 		return nil
 	}
-	x := &InstallerState{Handle: objref.Wrap(id)}
+	x := &InstallerState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,25 +58,31 @@ func (x *InstallerState) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *InstallerState) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewInstallerState creates a new InstallerState.
 func NewInstallerState() *InstallerState {
 	_id := objc.Send[objc.ID](objc.ID(_class("InstallerState")), objc.RegisterName("new"))
 	return installerStateAdopt(_id)
 }
 
-// Retrieves choice dictionaries by identifier. See choiceDictionaries for the values returned.
+// ChoiceDictionaryForIdentifier retrieves choice dictionaries by identifier. See choiceDictionaries for the values returned.
 func (x *InstallerState) ChoiceDictionaryForIdentifier(choiceIdentifier string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("choiceDictionaryForIdentifier:"), purego.NSString(choiceIdentifier))
 	return obj.Wrap(_r)
 }
 
-// Specifies the user agreed to the license, if there is no license, this will return NO.
+// LicenseAgreed specifies the user agreed to the license, if there is no license, this will return NO.
 func (x *InstallerState) LicenseAgreed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("licenseAgreed"))
 	return _r
 }
 
-// Specifies the language the language was last viewed or agreed with.
+// LicenseAgreedLanguage specifies the language the language was last viewed or agreed with.
 func (x *InstallerState) LicenseAgreedLanguage() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("licenseAgreedLanguage"))
 	if _r == 0 {
@@ -83,7 +91,7 @@ func (x *InstallerState) LicenseAgreedLanguage() string {
 	return purego.GoString(_r)
 }
 
-// Specifies the mount point of the selected target Only Available after target has been selected.
+// TargetVolumePath specifies the mount point of the selected target Only Available after target has been selected.
 func (x *InstallerState) TargetVolumePath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetVolumePath"))
 	if _r == 0 {
@@ -92,7 +100,7 @@ func (x *InstallerState) TargetVolumePath() string {
 	return purego.GoString(_r)
 }
 
-// Full target path selected. Specifies the full path selected by the user.  This path contains the targetVolumePath.
+// TargetPath full target path selected. Specifies the full path selected by the user.  This path contains the targetVolumePath.
 func (x *InstallerState) TargetPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetPath"))
 	if _r == 0 {
@@ -101,19 +109,19 @@ func (x *InstallerState) TargetPath() string {
 	return purego.GoString(_r)
 }
 
-// Returns an array of choice dictionaries. Each choice dictionary contains the keys InstallerState_Choice_Identifier,InstallerState_Choice_Installed, and optionally InstallerState_Choice_CustomLocation.  These keys specify a choice and whether they were installed or not.  This is only available after choice selections have been made.
+// ChoiceDictionaries returns an array of choice dictionaries. Each choice dictionary contains the keys InstallerState_Choice_Identifier,InstallerState_Choice_Installed, and optionally InstallerState_Choice_CustomLocation.  These keys specify a choice and whether they were installed or not.  This is only available after choice selections have been made.
 func (x *InstallerState) ChoiceDictionaries() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("choiceDictionaries"))
 	return obj.Wrap(_r)
 }
 
-// Specifies if the install process has started or not. Will return YES after an install has been initiated.  If YES is returned, you can assume the install has taken place.
+// InstallStarted specifies if the install process has started or not. Will return YES after an install has been initiated.  If YES is returned, you can assume the install has taken place.
 func (x *InstallerState) InstallStarted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("installStarted"))
 	return _r
 }
 
-// Specifies if the install was successfull or not. This value is only valid if installStarted returns True.
+// InstallSucceeded specifies if the install was successfull or not. This value is only valid if installStarted returns True.
 func (x *InstallerState) InstallSucceeded() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("installSucceeded"))
 	return _r

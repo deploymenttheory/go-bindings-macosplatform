@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that renders a scene into a custom Metal rendering pipeline and drives the scene update cycle.
-//
 // Renderer is an idiomatic wrapper over the Objective-C class SKRenderer.
+//
+// An object that renders a scene into a custom Metal rendering pipeline and drives the scene update cycle.
 type Renderer struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RendererFromID(id objc.ID) *Renderer {
 	if id == 0 {
 		return nil
 	}
-	x := &Renderer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Renderer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func rendererAdopt(id objc.ID) *Renderer {
 	if id == 0 {
 		return nil
 	}
-	x := &Renderer{Handle: objref.Wrap(id)}
+	x := &Renderer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,153 +60,155 @@ func (x *Renderer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Renderer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRenderer creates a new Renderer.
 func NewRenderer() *Renderer {
 	_id := objc.Send[objc.ID](objc.ID(_class("SKRenderer")), objc.RegisterName("new"))
 	return rendererAdopt(_id)
 }
 
-// The scene this renderer will draw into the Metal command buffer.
-//
-// WithScene sets scene and returns the receiver so calls can be chained.
+// WithScene the scene this renderer will draw into the Metal command buffer.
 func (x *Renderer) WithScene(scene *Scene) *Renderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScene:"), objref.IDOf(scene))
 	return x
 }
 
-// Ignores sibling and traversal order to sort the rendered contents of a scene into the most efficient batching possible. This will require zPosition to be used in the scenes to properly guarantee elements are in front or behind each other. This defaults to NO, meaning that sibling order overrides efficiency heuristics in the rendering of the scenes in the view. Setting this to YES for a complex scene may substantially increase performance, but care must be taken as only zPosition determines render order before the efficiency heuristics are used.
-//
-// WithIgnoresSiblingOrder sets ignoresSiblingOrder and returns the receiver so calls can be chained.
+// WithIgnoresSiblingOrder ignores sibling and traversal order to sort the rendered contents of a scene into the most efficient batching possible. This will require zPosition to be used in the scenes to properly guarantee elements are in front or behind each other. This defaults to NO, meaning that sibling order overrides efficiency heuristics in the rendering of the scenes in the view. Setting this to YES for a complex scene may substantially increase performance, but care must be taken as only zPosition determines render order before the efficiency heuristics are used.
 func (x *Renderer) WithIgnoresSiblingOrder(ignoresSiblingOrder bool) *Renderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresSiblingOrder:"), ignoresSiblingOrder)
 	return x
 }
 
-// A boolean that indicated whether non-visible nodes should be automatically culled when rendering.
-//
-// WithShouldCullNonVisibleNodes sets shouldCullNonVisibleNodes and returns the receiver so calls can be chained.
+// WithShouldCullNonVisibleNodes a boolean that indicated whether non-visible nodes should be automatically culled when rendering.
 func (x *Renderer) WithShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool) *Renderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldCullNonVisibleNodes:"), shouldCullNonVisibleNodes)
 	return x
 }
 
-// A Boolean value that indicates whether the view displays the number of drawing passes it needed to render the view.
-//
-// WithShowsDrawCount sets showsDrawCount and returns the receiver so calls can be chained.
+// WithShowsDrawCount a Boolean value that indicates whether the view displays the number of drawing passes it needed to render the view.
 func (x *Renderer) WithShowsDrawCount(showsDrawCount bool) *Renderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsDrawCount:"), showsDrawCount)
 	return x
 }
 
-// A Boolean value that indicates whether the view displays an overlay that shows physics bodies that are visible in the scene.
-//
-// WithShowsNodeCount sets showsNodeCount and returns the receiver so calls can be chained.
+// WithShowsNodeCount a Boolean value that indicates whether the view displays an overlay that shows physics bodies that are visible in the scene.
 func (x *Renderer) WithShowsNodeCount(showsNodeCount bool) *Renderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsNodeCount:"), showsNodeCount)
 	return x
 }
 
-// A Boolean value that indicates whether the view displays the number of rectangles used to render the scene.
-//
-// WithShowsQuadCount sets showsQuadCount and returns the receiver so calls can be chained.
+// WithShowsQuadCount a Boolean value that indicates whether the view displays the number of rectangles used to render the scene.
 func (x *Renderer) WithShowsQuadCount(showsQuadCount bool) *Renderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsQuadCount:"), showsQuadCount)
 	return x
 }
 
-// A Boolean value that indicates whether the view displays physics-related debugging information.
-//
-// WithShowsPhysics sets showsPhysics and returns the receiver so calls can be chained.
+// WithShowsPhysics a Boolean value that indicates whether the view displays physics-related debugging information.
 func (x *Renderer) WithShowsPhysics(showsPhysics bool) *Renderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsPhysics:"), showsPhysics)
 	return x
 }
 
-// A Boolean value that indicates whether the view displays information about physics fields in the scene.
-//
-// WithShowsFields sets showsFields and returns the receiver so calls can be chained.
+// WithShowsFields a Boolean value that indicates whether the view displays information about physics fields in the scene.
 func (x *Renderer) WithShowsFields(showsFields bool) *Renderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFields:"), showsFields)
 	return x
 }
 
-// Update the scene at the specified system time.
+// UpdateAtTime update the scene at the specified system time.
 func (x *Renderer) UpdateAtTime(currentTime float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateAtTime:"), currentTime)
 }
 
-// The currently presented scene, otherwise nil. If in a transition, the 'incoming' scene is returned.
+// Scene the currently presented scene, otherwise nil. If in a transition, the 'incoming' scene is returned.
 func (x *Renderer) Scene() *Scene {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scene"))
 	return SceneFromID(_r)
 }
 
+// SetScene wraps the corresponding Objective-C method.
 func (x *Renderer) SetScene(scene *Scene) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScene:"), objref.IDOf(scene))
 }
 
-// Ignores sibling and traversal order to sort the rendered contents of a scene into the most efficient batching possible. This will require zPosition to be used in the scenes to properly guarantee elements are in front or behind each other. This defaults to NO, meaning that sibling order overrides efficiency heuristics in the rendering of the scenes in the view. Setting this to YES for a complex scene may substantially increase performance, but care must be taken as only zPosition determines render order before the efficiency heuristics are used.
+// IgnoresSiblingOrder ignores sibling and traversal order to sort the rendered contents of a scene into the most efficient batching possible. This will require zPosition to be used in the scenes to properly guarantee elements are in front or behind each other. This defaults to NO, meaning that sibling order overrides efficiency heuristics in the rendering of the scenes in the view. Setting this to YES for a complex scene may substantially increase performance, but care must be taken as only zPosition determines render order before the efficiency heuristics are used.
 func (x *Renderer) IgnoresSiblingOrder() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ignoresSiblingOrder"))
 	return _r
 }
 
+// SetIgnoresSiblingOrder wraps the corresponding Objective-C method.
 func (x *Renderer) SetIgnoresSiblingOrder(ignoresSiblingOrder bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresSiblingOrder:"), ignoresSiblingOrder)
 }
 
-// A boolean that indicated whether non-visible nodes should be automatically culled when rendering.
+// ShouldCullNonVisibleNodes a boolean that indicated whether non-visible nodes should be automatically culled when rendering.
 func (x *Renderer) ShouldCullNonVisibleNodes() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldCullNonVisibleNodes"))
 	return _r
 }
 
+// SetShouldCullNonVisibleNodes wraps the corresponding Objective-C method.
 func (x *Renderer) SetShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldCullNonVisibleNodes:"), shouldCullNonVisibleNodes)
 }
 
-// Toggles display of performance stats when rendering. All default to false.
+// ShowsDrawCount toggles display of performance stats when rendering. All default to false.
 func (x *Renderer) ShowsDrawCount() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsDrawCount"))
 	return _r
 }
 
+// SetShowsDrawCount wraps the corresponding Objective-C method.
 func (x *Renderer) SetShowsDrawCount(showsDrawCount bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsDrawCount:"), showsDrawCount)
 }
 
+// ShowsNodeCount wraps the corresponding Objective-C method.
 func (x *Renderer) ShowsNodeCount() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsNodeCount"))
 	return _r
 }
 
+// SetShowsNodeCount wraps the corresponding Objective-C method.
 func (x *Renderer) SetShowsNodeCount(showsNodeCount bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsNodeCount:"), showsNodeCount)
 }
 
+// ShowsQuadCount wraps the corresponding Objective-C method.
 func (x *Renderer) ShowsQuadCount() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsQuadCount"))
 	return _r
 }
 
+// SetShowsQuadCount wraps the corresponding Objective-C method.
 func (x *Renderer) SetShowsQuadCount(showsQuadCount bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsQuadCount:"), showsQuadCount)
 }
 
+// ShowsPhysics wraps the corresponding Objective-C method.
 func (x *Renderer) ShowsPhysics() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsPhysics"))
 	return _r
 }
 
+// SetShowsPhysics wraps the corresponding Objective-C method.
 func (x *Renderer) SetShowsPhysics(showsPhysics bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsPhysics:"), showsPhysics)
 }
 
+// ShowsFields wraps the corresponding Objective-C method.
 func (x *Renderer) ShowsFields() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsFields"))
 	return _r
 }
 
+// SetShowsFields wraps the corresponding Objective-C method.
 func (x *Renderer) SetShowsFields(showsFields bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFields:"), showsFields)
 }

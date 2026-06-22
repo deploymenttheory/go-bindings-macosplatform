@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that represents a physical racing wheel controller connected to a device.
-//
 // RacingWheel is an idiomatic wrapper over the Objective-C class GCRacingWheel.
+//
+// An object that represents a physical racing wheel controller connected to a device.
 type RacingWheel struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func RacingWheelFromID(id objc.ID) *RacingWheel {
 	if id == 0 {
 		return nil
 	}
-	x := &RacingWheel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RacingWheel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func racingWheelAdopt(id objc.ID) *RacingWheel {
 	if id == 0 {
 		return nil
 	}
-	x := &RacingWheel{Handle: objref.Wrap(id)}
+	x := &RacingWheel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,13 +62,19 @@ func (x *RacingWheel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RacingWheel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRacingWheel creates a new RacingWheel.
 func NewRacingWheel() *RacingWheel {
 	_id := objc.Send[objc.ID](objc.ID(_class("GCRacingWheel")), objc.RegisterName("new"))
 	return racingWheelAdopt(_id)
 }
 
-// Starts receiving events from the racing wheel.
+// AcquireDevice starts receiving events from the racing wheel.
 //
 // AcquireDevice returns an error if the operation did not succeed.
 func (x *RacingWheel) AcquireDevice() error {
@@ -78,30 +86,30 @@ func (x *RacingWheel) AcquireDevice() error {
 	return nil
 }
 
-// Stops receiving events from the racing wheel.
+// RelinquishDevice stops receiving events from the racing wheel.
 func (x *RacingWheel) RelinquishDevice() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relinquishDevice"))
 }
 
-// Returns a snapshot of the racing wheel with its current element values.
+// Capture returns a snapshot of the racing wheel with its current element values.
 func (x *RacingWheel) Capture() *RacingWheel {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("capture"))
 	return RacingWheelFromID(_r)
 }
 
-// Checks if the racing wheel has been acquired by the application. This property is observable.
+// IsAcquired checks if the racing wheel has been acquired by the application. This property is observable.
 func (x *RacingWheel) IsAcquired() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAcquired"))
 	return _r
 }
 
-// Get the physical input profile for the racing wheel.
+// WheelInput get the physical input profile for the racing wheel.
 func (x *RacingWheel) WheelInput() *RacingWheelInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wheelInput"))
 	return RacingWheelInputFromID(_r)
 }
 
-// A GCRacingWheel may represent a real device managed by the operating system, or a snapshot created by the developer.
+// IsSnapshot a GCRacingWheel may represent a real device managed by the operating system, or a snapshot created by the developer.
 func (x *RacingWheel) IsSnapshot() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSnapshot"))
 	return _r

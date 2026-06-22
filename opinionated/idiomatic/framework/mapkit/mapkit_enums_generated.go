@@ -22,6 +22,8 @@ const (
 	AddressFilterOptionPostalCode            AddressFilterOption = 32
 )
 
+// String returns the AddressFilterOption constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AddressFilterOption) String() string {
 	var parts []string
 	if e&AddressFilterOptionCountry != 0 {
@@ -56,6 +58,8 @@ const (
 	AddressRepresentationsContextStyleFull      AddressRepresentationsContextStyle = 2
 )
 
+// String returns the AddressRepresentationsContextStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AddressRepresentationsContextStyle) String() string {
 	switch e {
 	case AddressRepresentationsContextStyleAutomatic:
@@ -78,6 +82,8 @@ const (
 	AnnotationViewCollisionModeNone      AnnotationViewCollisionMode = 2
 )
 
+// String returns the AnnotationViewCollisionMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AnnotationViewCollisionMode) String() string {
 	switch e {
 	case AnnotationViewCollisionModeRectangle:
@@ -102,6 +108,8 @@ const (
 	AnnotationViewDragStateEnding    AnnotationViewDragState = 4
 )
 
+// String returns the AnnotationViewDragState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AnnotationViewDragState) String() string {
 	switch e {
 	case AnnotationViewDragStateNone:
@@ -127,6 +135,8 @@ const (
 	DirectionsRoutePreferenceAvoid DirectionsRoutePreference = 1
 )
 
+// String returns the DirectionsRoutePreference constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DirectionsRoutePreference) String() string {
 	switch e {
 	case DirectionsRoutePreferenceAny:
@@ -155,6 +165,8 @@ const (
 	DirectionsTransportTypeAny DirectionsTransportType = 268435455
 )
 
+// String returns the DirectionsTransportType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DirectionsTransportType) String() string {
 	var parts []string
 	if e&DirectionsTransportTypeAutomobile != 0 {
@@ -187,6 +199,8 @@ const (
 	DistanceFormatterUnitStyleFull        DistanceFormatterUnitStyle = 2
 )
 
+// String returns the DistanceFormatterUnitStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DistanceFormatterUnitStyle) String() string {
 	switch e {
 	case DistanceFormatterUnitStyleDefault:
@@ -210,6 +224,8 @@ const (
 	DistanceFormatterUnitsImperialWithYards DistanceFormatterUnits = 3
 )
 
+// String returns the DistanceFormatterUnits constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DistanceFormatterUnits) String() string {
 	switch e {
 	case DistanceFormatterUnitsDefault:
@@ -237,6 +253,8 @@ const (
 	ErrorDecodingFailed     ErrorCode = 6
 )
 
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ErrorCode) String() string {
 	switch e {
 	case ErrorUnknown:
@@ -268,6 +286,8 @@ const (
 	FeatureVisibilityVisible FeatureVisibility = 2
 )
 
+// String returns the FeatureVisibility constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FeatureVisibility) String() string {
 	switch e {
 	case FeatureVisibilityAdaptive:
@@ -293,6 +313,8 @@ const (
 	LocalSearchCompleterResultTypePhysicalFeature LocalSearchCompleterResultType = 8
 )
 
+// String returns the LocalSearchCompleterResultType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LocalSearchCompleterResultType) String() string {
 	var parts []string
 	if e&LocalSearchCompleterResultTypeAddress != 0 {
@@ -323,6 +345,8 @@ const (
 	LocalSearchRegionPriorityRequired LocalSearchRegionPriority = 1
 )
 
+// String returns the LocalSearchRegionPriority constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LocalSearchRegionPriority) String() string {
 	switch e {
 	case LocalSearchRegionPriorityDefault:
@@ -344,6 +368,8 @@ const (
 	LocalSearchResultTypePhysicalFeature LocalSearchResultType = 4
 )
 
+// String returns the LocalSearchResultType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LocalSearchResultType) String() string {
 	var parts []string
 	if e&LocalSearchResultTypeAddress != 0 {
@@ -373,6 +399,8 @@ const (
 	LookAroundBadgePositionBottomTrailing LookAroundBadgePosition = 2
 )
 
+// String returns the LookAroundBadgePosition constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LookAroundBadgePosition) String() string {
 	switch e {
 	case LookAroundBadgePositionTopLeading:
@@ -394,6 +422,8 @@ const (
 	MapElevationStyleRealistic MapElevationStyle = 1
 )
 
+// String returns the MapElevationStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MapElevationStyle) String() string {
 	switch e {
 	case MapElevationStyleFlat:
@@ -414,6 +444,8 @@ const (
 	MapItemDetailSelectionAccessoryCalloutStyleCompact   MapItemDetailSelectionAccessoryCalloutStyle = 2
 )
 
+// String returns the MapItemDetailSelectionAccessoryCalloutStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MapItemDetailSelectionAccessoryCalloutStyle) String() string {
 	switch e {
 	case MapItemDetailSelectionAccessoryCalloutStyleAutomatic:
@@ -445,6 +477,8 @@ const (
 	MapTypeMutedStandard MapType = 5
 )
 
+// String returns the MapType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MapType) String() string {
 	switch e {
 	case MapTypeStandard:
@@ -474,6 +508,8 @@ const (
 	OverlayLevelAboveLabels OverlayLevel = 1
 )
 
+// String returns the OverlayLevel constant's name, or its numeric form when the
+// value is not a known constant.
 func (e OverlayLevel) String() string {
 	switch e {
 	case OverlayLevelAboveRoads:
@@ -494,6 +530,8 @@ const (
 	PinAnnotationColorPurple PinAnnotationColor = 2
 )
 
+// String returns the PinAnnotationColor constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PinAnnotationColor) String() string {
 	switch e {
 	case PinAnnotationColorRed:
@@ -517,6 +555,8 @@ const (
 	SearchCompletionFilterTypeLocationsOnly       SearchCompletionFilterType = 1
 )
 
+// String returns the SearchCompletionFilterType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SearchCompletionFilterType) String() string {
 	switch e {
 	case SearchCompletionFilterTypeLocationsAndQueries:
@@ -536,6 +576,8 @@ const (
 	StandardMapEmphasisStyleMuted   StandardMapEmphasisStyle = 1
 )
 
+// String returns the StandardMapEmphasisStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StandardMapEmphasisStyle) String() string {
 	switch e {
 	case StandardMapEmphasisStyleDefault:
@@ -557,6 +599,8 @@ const (
 	UserTrackingModeFollow UserTrackingMode = 1
 )
 
+// String returns the UserTrackingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e UserTrackingMode) String() string {
 	switch e {
 	case UserTrackingModeNone:

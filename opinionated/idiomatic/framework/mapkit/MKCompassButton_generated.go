@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specialized view that displays the compass heading for its associated map.
-//
 // CompassButton is an idiomatic wrapper over the Objective-C class MKCompassButton.
+//
+// A specialized view that displays the compass heading for its associated map.
 type CompassButton struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CompassButtonFromID(id objc.ID) *CompassButton {
 	if id == 0 {
 		return nil
 	}
-	x := &CompassButton{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CompassButton{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func compassButtonAdopt(id objc.ID) *CompassButton {
 	if id == 0 {
 		return nil
 	}
-	x := &CompassButton{Handle: objref.Wrap(id)}
+	x := &CompassButton{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,42 +60,48 @@ func (x *CompassButton) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CompassButton) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCompassButton creates a new CompassButton.
 func NewCompassButton() *CompassButton {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKCompassButton")), objc.RegisterName("new"))
 	return compassButtonAdopt(_id)
 }
 
-// The map view that provides the heading information for the compass button.
-//
-// WithMapView sets mapView and returns the receiver so calls can be chained.
+// WithMapView the map view that provides the heading information for the compass button.
 func (x *CompassButton) WithMapView(mapView *MapView) *CompassButton {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
 	return x
 }
 
-// The visibility of the compass button.
-//
-// WithCompassVisibility sets compassVisibility and returns the receiver so calls can be chained.
+// WithCompassVisibility the visibility of the compass button.
 func (x *CompassButton) WithCompassVisibility(compassVisibility FeatureVisibility) *CompassButton {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompassVisibility:"), compassVisibility)
 	return x
 }
 
+// MapView wraps the corresponding Objective-C method.
 func (x *CompassButton) MapView() *MapView {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapView"))
 	return MapViewFromID(_r)
 }
 
+// SetMapView wraps the corresponding Objective-C method.
 func (x *CompassButton) SetMapView(mapView *MapView) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
 }
 
+// CompassVisibility wraps the corresponding Objective-C method.
 func (x *CompassButton) CompassVisibility() FeatureVisibility {
 	_r := objc.Send[FeatureVisibility](objref.IDOf(x), objc.RegisterName("compassVisibility"))
 	return _r
 }
 
+// SetCompassVisibility wraps the corresponding Objective-C method.
 func (x *CompassButton) SetCompassVisibility(compassVisibility FeatureVisibility) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompassVisibility:"), compassVisibility)
 }

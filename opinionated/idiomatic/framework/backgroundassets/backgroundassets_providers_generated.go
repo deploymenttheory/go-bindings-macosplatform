@@ -11,4 +11,5 @@ import (
 // DownloadProvider is accepted wherever a BADownload (or one of its subclasses) is expected.
 type DownloadProvider interface {
 	objref.Object
+	isDownload()
 }

@@ -14,17 +14,14 @@ func CLSErrorCodeDomain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CLSErrorCodeDomain")))
 }
 
-// Any object that caused a failure will be available in - [NSError userInfo]; under this key.
 // CLSErrorObjectKey returns the string constant CLSErrorObjectKey, for use as a dictionary key or argument.
 func CLSErrorObjectKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CLSErrorObjectKey"))) }
 
-// If multiple objects cause errors we return an error with code `CLSErrorCodePartialFailure` which will contain an array of errors in - [NSError userInfo]; under this key.
 // CLSErrorUnderlyingErrorsKey returns the string constant CLSErrorUnderlyingErrorsKey, for use as a dictionary key or argument.
 func CLSErrorUnderlyingErrorsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CLSErrorUnderlyingErrorsKey")))
 }
 
-// Errors with the code `CLSErrorCodePartialFailure` may contain an array of successful entities in - [NSError userInfo]; under this key.
 // CLSErrorSuccessfulObjectsKey returns the string constant CLSErrorSuccessfulObjectsKey, for use as a dictionary key or argument.
 func CLSErrorSuccessfulObjectsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CLSErrorSuccessfulObjectsKey")))

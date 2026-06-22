@@ -23,7 +23,8 @@ func ISyncRecordSnapshotFromID(id objc.ID) *ISyncRecordSnapshot {
 	if id == 0 {
 		return nil
 	}
-	x := &ISyncRecordSnapshot{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ISyncRecordSnapshot{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func iSyncRecordSnapshotAdopt(id objc.ID) *ISyncRecordSnapshot {
 	if id == 0 {
 		return nil
 	}
-	x := &ISyncRecordSnapshot{Handle: objref.Wrap(id)}
+	x := &ISyncRecordSnapshot{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,27 +58,37 @@ func (x *ISyncRecordSnapshot) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ISyncRecordSnapshot) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewISyncRecordSnapshot creates a new ISyncRecordSnapshot.
 func NewISyncRecordSnapshot() *ISyncRecordSnapshot {
 	_id := objc.Send[objc.ID](objc.ID(_class("ISyncRecordSnapshot")), objc.RegisterName("new"))
 	return iSyncRecordSnapshotAdopt(_id)
 }
 
+// RecordsWithIdentifiers wraps the corresponding Objective-C method.
 func (x *ISyncRecordSnapshot) RecordsWithIdentifiers(recordIds obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordsWithIdentifiers:"), objref.IDOf(recordIds))
 	return obj.Wrap(_r)
 }
 
+// TargetIdentifiersForRelationshipNameWithSourceIdentifier wraps the corresponding Objective-C method.
 func (x *ISyncRecordSnapshot) TargetIdentifiersForRelationshipNameWithSourceIdentifier(relationshipName string, sourceId string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetIdentifiersForRelationshipName:withSourceIdentifier:"), purego.NSString(relationshipName), purego.NSString(sourceId))
 	return obj.Wrap(_r)
 }
 
+// SourceIdentifiersForRelationshipNameWithTargetIdentifier wraps the corresponding Objective-C method.
 func (x *ISyncRecordSnapshot) SourceIdentifiersForRelationshipNameWithTargetIdentifier(relationshipName string, sourceId string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceIdentifiersForRelationshipName:withTargetIdentifier:"), purego.NSString(relationshipName), purego.NSString(sourceId))
 	return obj.Wrap(_r)
 }
 
+// RecordsWithMatchingAttributes wraps the corresponding Objective-C method.
 func (x *ISyncRecordSnapshot) RecordsWithMatchingAttributes(attributes obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordsWithMatchingAttributes:"), objref.IDOf(attributes))
 	return obj.Wrap(_r)

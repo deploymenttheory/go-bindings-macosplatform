@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A port that represents a BSD socket.
-//
 // SocketPort is an idiomatic wrapper over the Objective-C class NSSocketPort.
+//
+// It embeds [Port], promoting that type's methods.
+//
+// A port that represents a BSD socket.
 type SocketPort struct {
-	objref.Handle
+	Port
 }
 
 // SocketPortFromID adopts an existing Objective-C object as a SocketPort
@@ -25,7 +26,8 @@ func SocketPortFromID(id objc.ID) *SocketPort {
 	if id == 0 {
 		return nil
 	}
-	x := &SocketPort{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SocketPort{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func socketPortAdopt(id objc.ID) *SocketPort {
 	if id == 0 {
 		return nil
 	}
-	x := &SocketPort{Handle: objref.Wrap(id)}
+	x := &SocketPort{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SocketPort) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SocketPort) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SocketPort) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSocketPort creates a new SocketPort.
@@ -99,32 +87,37 @@ func NewSocketPortRemoteWithProtocolFamilySocketTypeProtocolAddress(family int, 
 	return socketPortAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *SocketPort) WithScriptingProperties(scriptingProperties obj.Object) *SocketPort {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// ProtocolFamily wraps the corresponding Objective-C method.
 func (x *SocketPort) ProtocolFamily() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("protocolFamily"))
 	return _r
 }
 
+// SocketType wraps the corresponding Objective-C method.
 func (x *SocketPort) SocketType() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("socketType"))
 	return _r
 }
 
+// Protocol wraps the corresponding Objective-C method.
 func (x *SocketPort) Protocol() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("protocol"))
 	return _r
 }
 
+// Address wraps the corresponding Objective-C method.
 func (x *SocketPort) Address() *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("address"))
 	return DataFromID(_r)
 }
 
+// Socket wraps the corresponding Objective-C method.
 func (x *SocketPort) Socket() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("socket"))
 	return _r
@@ -142,3 +135,5 @@ type SocketPortable interface {
 }
 
 var _ SocketPortable = (*SocketPort)(nil)
+
+var _ PortProvider = (*SocketPort)(nil)

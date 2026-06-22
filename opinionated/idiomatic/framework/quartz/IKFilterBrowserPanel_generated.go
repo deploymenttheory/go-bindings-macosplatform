@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Presents a user interface for browsing filters.
-//
 // IKFilterBrowserPanel is an idiomatic wrapper over the Objective-C class IKFilterBrowserPanel.
+//
+// Presents a user interface for browsing filters.
 type IKFilterBrowserPanel struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func IKFilterBrowserPanelFromID(id objc.ID) *IKFilterBrowserPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &IKFilterBrowserPanel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IKFilterBrowserPanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func iKFilterBrowserPanelAdopt(id objc.ID) *IKFilterBrowserPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &IKFilterBrowserPanel{Handle: objref.Wrap(id)}
+	x := &IKFilterBrowserPanel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *IKFilterBrowserPanel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IKFilterBrowserPanel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewIKFilterBrowserPanel creates a new IKFilterBrowserPanel.
 func NewIKFilterBrowserPanel() *IKFilterBrowserPanel {
 	_id := objc.Send[objc.ID](objc.ID(_class("IKFilterBrowserPanel")), objc.RegisterName("new"))
 	return iKFilterBrowserPanelAdopt(_id)
 }
 
-// Returns the name of the filter that is currently selected in the filter browser.
+// FilterName returns the name of the filter that is currently selected in the filter browser.
 func (x *IKFilterBrowserPanel) FilterName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterName"))
 	if _r == 0 {

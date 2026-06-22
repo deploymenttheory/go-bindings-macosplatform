@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // PackedJointAnimation is an idiomatic wrapper over the Objective-C class MDLPackedJointAnimation.
+//
+// It embeds [Object], promoting that type's methods.
 type PackedJointAnimation struct {
-	objref.Handle
+	Object
 }
 
 // PackedJointAnimationFromID adopts an existing Objective-C object as a PackedJointAnimation
@@ -23,7 +24,8 @@ func PackedJointAnimationFromID(id objc.ID) *PackedJointAnimation {
 	if id == 0 {
 		return nil
 	}
-	x := &PackedJointAnimation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PackedJointAnimation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func packedJointAnimationAdopt(id objc.ID) *PackedJointAnimation {
 	if id == 0 {
 		return nil
 	}
-	x := &PackedJointAnimation{Handle: objref.Wrap(id)}
+	x := &PackedJointAnimation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PackedJointAnimation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PackedJointAnimation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PackedJointAnimation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPackedJointAnimationWithNameJointPaths creates a new PackedJointAnimation.
@@ -63,46 +51,45 @@ func NewPackedJointAnimationWithNameJointPaths(name string, jointPaths []string)
 	return packedJointAnimationAdopt(_id)
 }
 
-// The parent object that contains this object.
-//
-// WithParent sets parent and returns the receiver so calls can be chained.
+// WithParent the parent object that contains this object.
 func (x *PackedJointAnimation) WithParent(parent ObjectProvider) *PackedJointAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return x
 }
 
-// The primary object, if applicable, of which this object is an instance.
-//
-// WithInstance sets instance and returns the receiver so calls can be chained.
+// WithInstance the primary object, if applicable, of which this object is an instance.
 func (x *PackedJointAnimation) WithInstance(instance ObjectProvider) *PackedJointAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return x
 }
 
-// A Boolean value indicating whether this object should be used in rendering.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden a Boolean value indicating whether this object should be used in rendering.
 func (x *PackedJointAnimation) WithHidden(hidden bool) *PackedJointAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
+// JointPaths wraps the corresponding Objective-C method.
+//
 // JointPaths returns the collection as a Go slice.
 func (x *PackedJointAnimation) JointPaths() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jointPaths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// Translations wraps the corresponding Objective-C method.
 func (x *PackedJointAnimation) Translations() *AnimatedVector3Array {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("translations"))
 	return AnimatedVector3ArrayFromID(_r)
 }
 
+// Rotations wraps the corresponding Objective-C method.
 func (x *PackedJointAnimation) Rotations() *AnimatedQuaternionArray {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rotations"))
 	return AnimatedQuaternionArrayFromID(_r)
 }
 
+// Scales wraps the corresponding Objective-C method.
 func (x *PackedJointAnimation) Scales() *AnimatedVector3Array {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scales"))
 	return AnimatedVector3ArrayFromID(_r)
@@ -121,3 +108,5 @@ type PackedJointAnimationable interface {
 }
 
 var _ PackedJointAnimationable = (*PackedJointAnimation)(nil)
+
+var _ ObjectProvider = (*PackedJointAnimation)(nil)

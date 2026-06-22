@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // SVGF is an idiomatic wrapper over the Objective-C class MPSSVGF.
+//
+// It embeds [Kernel], promoting that type's methods.
 type SVGF struct {
-	objref.Handle
+	Kernel
 }
 
 // SVGFFromID adopts an existing Objective-C object as a SVGF
@@ -23,7 +24,8 @@ func SVGFFromID(id objc.ID) *SVGF {
 	if id == 0 {
 		return nil
 	}
-	x := &SVGF{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SVGF{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func sVGFAdopt(id objc.ID) *SVGF {
 	if id == 0 {
 		return nil
 	}
-	x := &SVGF{Handle: objref.Wrap(id)}
+	x := &SVGF{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SVGF) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SVGF) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SVGF) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSVGF creates a new SVGF.
@@ -62,266 +50,251 @@ func NewSVGF() *SVGF {
 	return sVGFAdopt(_id)
 }
 
-// Controls how samples' depths are compared during reprojection, variance estimation, and bilateral filtering. The final weight is given by exp(-abs(Z1 - Z2) / depthWeight). Must be greater than zero. Defaults to 1.0.
-//
-// WithDepthWeight sets depthWeight and returns the receiver so calls can be chained.
+// WithDepthWeight controls how samples' depths are compared during reprojection, variance estimation, and bilateral filtering. The final weight is given by exp(-abs(Z1 - Z2) / depthWeight). Must be greater than zero. Defaults to 1.0.
 func (x *SVGF) WithDepthWeight(depthWeight float32) *SVGF {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthWeight:"), depthWeight)
 	return x
 }
 
-// Controls how samples' normals are compared during reprojection, variance estimation, and bilateral filtering. The final weight is given by pow(max(dot(N1, N2)), normalWeight). Must be greater than or equal to zero. Defaults to 128.
-//
-// WithNormalWeight sets normalWeight and returns the receiver so calls can be chained.
+// WithNormalWeight controls how samples' normals are compared during reprojection, variance estimation, and bilateral filtering. The final weight is given by pow(max(dot(N1, N2)), normalWeight). Must be greater than or equal to zero. Defaults to 128.
 func (x *SVGF) WithNormalWeight(normalWeight float32) *SVGF {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNormalWeight:"), normalWeight)
 	return x
 }
 
-// Controls how samples' luminance values are compared during bilateral filtering. The final weight is given by exp(-abs(L1 - L2) / (luminanceWeight * luminanceVariance + EPSILON)). Must be greater than or equal to zero. Defaults to 4.
-//
-// WithLuminanceWeight sets luminanceWeight and returns the receiver so calls can be chained.
+// WithLuminanceWeight controls how samples' luminance values are compared during bilateral filtering. The final weight is given by exp(-abs(L1 - L2) / (luminanceWeight * luminanceVariance + EPSILON)). Must be greater than or equal to zero. Defaults to 4.
 func (x *SVGF) WithLuminanceWeight(luminanceWeight float32) *SVGF {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLuminanceWeight:"), luminanceWeight)
 	return x
 }
 
-// When using MPSTemporalWeightingExponentialMovingAverage, how much to blend the current frame with the previous frame during reprojection. The final value is given by current * temporalReprojectionBlendFactor + previous * (1 - temporalReprojectionBlendFactor). Must be between zero and one, inclusive. Defaults to 0.2.
-//
-// WithTemporalReprojectionBlendFactor sets temporalReprojectionBlendFactor and returns the receiver so calls can be chained.
+// WithTemporalReprojectionBlendFactor when using MPSTemporalWeightingExponentialMovingAverage, how much to blend the current frame with the previous frame during reprojection. The final value is given by current * temporalReprojectionBlendFactor + previous * (1 - temporalReprojectionBlendFactor). Must be between zero and one, inclusive. Defaults to 0.2.
 func (x *SVGF) WithTemporalReprojectionBlendFactor(temporalReprojectionBlendFactor float32) *SVGF {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemporalReprojectionBlendFactor:"), temporalReprojectionBlendFactor)
 	return x
 }
 
-// During reprojection, minimum combined depth and normal weight needed to consider a pixel from the previous frame consistent with a pixel from the current frame. Must be greater than or equal to zero. Defaults to 0.01.
-//
-// WithReprojectionThreshold sets reprojectionThreshold and returns the receiver so calls can be chained.
+// WithReprojectionThreshold during reprojection, minimum combined depth and normal weight needed to consider a pixel from the previous frame consistent with a pixel from the current frame. Must be greater than or equal to zero. Defaults to 0.01.
 func (x *SVGF) WithReprojectionThreshold(reprojectionThreshold float32) *SVGF {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReprojectionThreshold:"), reprojectionThreshold)
 	return x
 }
 
-// The minimum number of frames which must be accumulated before variance can be computed directly from the accumulated luminance moments. If enough frames have not been accumulated, variance will be estimated with a spatial filter instead. Defaults to 4.
-//
-// WithMinimumFramesForVarianceEstimation sets minimumFramesForVarianceEstimation and returns the receiver so calls can be chained.
+// WithMinimumFramesForVarianceEstimation the minimum number of frames which must be accumulated before variance can be computed directly from the accumulated luminance moments. If enough frames have not been accumulated, variance will be estimated with a spatial filter instead. Defaults to 4.
 func (x *SVGF) WithMinimumFramesForVarianceEstimation(minimumFramesForVarianceEstimation int) *SVGF {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumFramesForVarianceEstimation:"), minimumFramesForVarianceEstimation)
 	return x
 }
 
-// The radius of the spatial filter used when not enough frames have been accumulated to compute variance from accumulated luminance moments. Defaults to 3 resulting in a 7x7 filter.
-//
-// WithVarianceEstimationRadius sets varianceEstimationRadius and returns the receiver so calls can be chained.
+// WithVarianceEstimationRadius the radius of the spatial filter used when not enough frames have been accumulated to compute variance from accumulated luminance moments. Defaults to 3 resulting in a 7x7 filter.
 func (x *SVGF) WithVarianceEstimationRadius(varianceEstimationRadius int) *SVGF {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVarianceEstimationRadius:"), varianceEstimationRadius)
 	return x
 }
 
-// The sigma value of the Gaussian function used by the spatial filter used when not enough frames have been accumulated to compute variance from accumulated luminance moments. Must be greater than zero. Defaults to 2.0.
-//
-// WithVarianceEstimationSigma sets varianceEstimationSigma and returns the receiver so calls can be chained.
+// WithVarianceEstimationSigma the sigma value of the Gaussian function used by the spatial filter used when not enough frames have been accumulated to compute variance from accumulated luminance moments. Must be greater than zero. Defaults to 2.0.
 func (x *SVGF) WithVarianceEstimationSigma(varianceEstimationSigma float32) *SVGF {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVarianceEstimationSigma:"), varianceEstimationSigma)
 	return x
 }
 
-// The sigma value of the Gaussian function used by the variance pre-filter of the bilateral filter. Must be greater than zero. Defaults to 1.33.
-//
-// WithVariancePrefilterSigma sets variancePrefilterSigma and returns the receiver so calls can be chained.
+// WithVariancePrefilterSigma the sigma value of the Gaussian function used by the variance pre-filter of the bilateral filter. Must be greater than zero. Defaults to 1.33.
 func (x *SVGF) WithVariancePrefilterSigma(variancePrefilterSigma float32) *SVGF {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariancePrefilterSigma:"), variancePrefilterSigma)
 	return x
 }
 
-// The radius of the variance pre-filter of the bilateral filter. Defaults to 1 resulting in a 3x3 filter.
-//
-// WithVariancePrefilterRadius sets variancePrefilterRadius and returns the receiver so calls can be chained.
+// WithVariancePrefilterRadius the radius of the variance pre-filter of the bilateral filter. Defaults to 1 resulting in a 3x3 filter.
 func (x *SVGF) WithVariancePrefilterRadius(variancePrefilterRadius int) *SVGF {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariancePrefilterRadius:"), variancePrefilterRadius)
 	return x
 }
 
-// The sigma value of the Gaussian function used by the bilateral filter. Must be greater than zero. Defaults to 1.2.
-//
-// WithBilateralFilterSigma sets bilateralFilterSigma and returns the receiver so calls can be chained.
+// WithBilateralFilterSigma the sigma value of the Gaussian function used by the bilateral filter. Must be greater than zero. Defaults to 1.2.
 func (x *SVGF) WithBilateralFilterSigma(bilateralFilterSigma float32) *SVGF {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBilateralFilterSigma:"), bilateralFilterSigma)
 	return x
 }
 
-// The radius of the bilateral filter. Defaults to 2 resulting in a 5x5 filter.
-//
-// WithBilateralFilterRadius sets bilateralFilterRadius and returns the receiver so calls can be chained.
+// WithBilateralFilterRadius the radius of the bilateral filter. Defaults to 2 resulting in a 5x5 filter.
 func (x *SVGF) WithBilateralFilterRadius(bilateralFilterRadius int) *SVGF {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBilateralFilterRadius:"), bilateralFilterRadius)
 	return x
 }
 
-// The number of channels to filter in the source image. Must be at least one and at most three. Defaults to 3.
-//
-// WithChannelCount sets channelCount and returns the receiver so calls can be chained.
+// WithChannelCount the number of channels to filter in the source image. Must be at least one and at most three. Defaults to 3.
 func (x *SVGF) WithChannelCount(channelCount int) *SVGF {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannelCount:"), channelCount)
 	return x
 }
 
-// The number of channels to filter in the second source image. Must be at least one and at most three. Defaults to 3.
-//
-// WithChannelCount2 sets channelCount2 and returns the receiver so calls can be chained.
+// WithChannelCount2 the number of channels to filter in the second source image. Must be at least one and at most three. Defaults to 3.
 func (x *SVGF) WithChannelCount2(channelCount2 int) *SVGF {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannelCount2:"), channelCount2)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *SVGF) WithLabel(label string) *SVGF {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// EncodeWithCoder wraps the corresponding Objective-C method.
 func (x *SVGF) EncodeWithCoder(coder obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
 }
 
-// Controls how samples' depths are compared during reprojection, variance estimation, and bilateral filtering. The final weight is given by exp(-abs(Z1 - Z2) / depthWeight). Must be greater than zero. Defaults to 1.0.
+// DepthWeight controls how samples' depths are compared during reprojection, variance estimation, and bilateral filtering. The final weight is given by exp(-abs(Z1 - Z2) / depthWeight). Must be greater than zero. Defaults to 1.0.
 func (x *SVGF) DepthWeight() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("depthWeight"))
 	return _r
 }
 
+// SetDepthWeight wraps the corresponding Objective-C method.
 func (x *SVGF) SetDepthWeight(depthWeight float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthWeight:"), depthWeight)
 }
 
-// Controls how samples' normals are compared during reprojection, variance estimation, and bilateral filtering. The final weight is given by pow(max(dot(N1, N2)), normalWeight). Must be greater than or equal to zero. Defaults to 128.
+// NormalWeight controls how samples' normals are compared during reprojection, variance estimation, and bilateral filtering. The final weight is given by pow(max(dot(N1, N2)), normalWeight). Must be greater than or equal to zero. Defaults to 128.
 func (x *SVGF) NormalWeight() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("normalWeight"))
 	return _r
 }
 
+// SetNormalWeight wraps the corresponding Objective-C method.
 func (x *SVGF) SetNormalWeight(normalWeight float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNormalWeight:"), normalWeight)
 }
 
-// Controls how samples' luminance values are compared during bilateral filtering. The final weight is given by exp(-abs(L1 - L2) / (luminanceWeight * luminanceVariance + EPSILON)). Must be greater than or equal to zero. Defaults to 4.
+// LuminanceWeight controls how samples' luminance values are compared during bilateral filtering. The final weight is given by exp(-abs(L1 - L2) / (luminanceWeight * luminanceVariance + EPSILON)). Must be greater than or equal to zero. Defaults to 4.
 func (x *SVGF) LuminanceWeight() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("luminanceWeight"))
 	return _r
 }
 
+// SetLuminanceWeight wraps the corresponding Objective-C method.
 func (x *SVGF) SetLuminanceWeight(luminanceWeight float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLuminanceWeight:"), luminanceWeight)
 }
 
-// When using MPSTemporalWeightingExponentialMovingAverage, how much to blend the current frame with the previous frame during reprojection. The final value is given by current * temporalReprojectionBlendFactor + previous * (1 - temporalReprojectionBlendFactor). Must be between zero and one, inclusive. Defaults to 0.2.
+// TemporalReprojectionBlendFactor when using MPSTemporalWeightingExponentialMovingAverage, how much to blend the current frame with the previous frame during reprojection. The final value is given by current * temporalReprojectionBlendFactor + previous * (1 - temporalReprojectionBlendFactor). Must be between zero and one, inclusive. Defaults to 0.2.
 func (x *SVGF) TemporalReprojectionBlendFactor() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("temporalReprojectionBlendFactor"))
 	return _r
 }
 
+// SetTemporalReprojectionBlendFactor wraps the corresponding Objective-C method.
 func (x *SVGF) SetTemporalReprojectionBlendFactor(temporalReprojectionBlendFactor float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemporalReprojectionBlendFactor:"), temporalReprojectionBlendFactor)
 }
 
-// During reprojection, minimum combined depth and normal weight needed to consider a pixel from the previous frame consistent with a pixel from the current frame. Must be greater than or equal to zero. Defaults to 0.01.
+// ReprojectionThreshold during reprojection, minimum combined depth and normal weight needed to consider a pixel from the previous frame consistent with a pixel from the current frame. Must be greater than or equal to zero. Defaults to 0.01.
 func (x *SVGF) ReprojectionThreshold() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("reprojectionThreshold"))
 	return _r
 }
 
+// SetReprojectionThreshold wraps the corresponding Objective-C method.
 func (x *SVGF) SetReprojectionThreshold(reprojectionThreshold float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReprojectionThreshold:"), reprojectionThreshold)
 }
 
-// The minimum number of frames which must be accumulated before variance can be computed directly from the accumulated luminance moments. If enough frames have not been accumulated, variance will be estimated with a spatial filter instead. Defaults to 4.
+// MinimumFramesForVarianceEstimation the minimum number of frames which must be accumulated before variance can be computed directly from the accumulated luminance moments. If enough frames have not been accumulated, variance will be estimated with a spatial filter instead. Defaults to 4.
 func (x *SVGF) MinimumFramesForVarianceEstimation() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumFramesForVarianceEstimation"))
 	return _r
 }
 
+// SetMinimumFramesForVarianceEstimation wraps the corresponding Objective-C method.
 func (x *SVGF) SetMinimumFramesForVarianceEstimation(minimumFramesForVarianceEstimation int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumFramesForVarianceEstimation:"), minimumFramesForVarianceEstimation)
 }
 
-// The radius of the spatial filter used when not enough frames have been accumulated to compute variance from accumulated luminance moments. Defaults to 3 resulting in a 7x7 filter.
+// VarianceEstimationRadius the radius of the spatial filter used when not enough frames have been accumulated to compute variance from accumulated luminance moments. Defaults to 3 resulting in a 7x7 filter.
 func (x *SVGF) VarianceEstimationRadius() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("varianceEstimationRadius"))
 	return _r
 }
 
+// SetVarianceEstimationRadius wraps the corresponding Objective-C method.
 func (x *SVGF) SetVarianceEstimationRadius(varianceEstimationRadius int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVarianceEstimationRadius:"), varianceEstimationRadius)
 }
 
-// The sigma value of the Gaussian function used by the spatial filter used when not enough frames have been accumulated to compute variance from accumulated luminance moments. Must be greater than zero. Defaults to 2.0.
+// VarianceEstimationSigma the sigma value of the Gaussian function used by the spatial filter used when not enough frames have been accumulated to compute variance from accumulated luminance moments. Must be greater than zero. Defaults to 2.0.
 func (x *SVGF) VarianceEstimationSigma() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("varianceEstimationSigma"))
 	return _r
 }
 
+// SetVarianceEstimationSigma wraps the corresponding Objective-C method.
 func (x *SVGF) SetVarianceEstimationSigma(varianceEstimationSigma float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVarianceEstimationSigma:"), varianceEstimationSigma)
 }
 
-// The sigma value of the Gaussian function used by the variance pre-filter of the bilateral filter. Must be greater than zero. Defaults to 1.33.
+// VariancePrefilterSigma the sigma value of the Gaussian function used by the variance pre-filter of the bilateral filter. Must be greater than zero. Defaults to 1.33.
 func (x *SVGF) VariancePrefilterSigma() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("variancePrefilterSigma"))
 	return _r
 }
 
+// SetVariancePrefilterSigma wraps the corresponding Objective-C method.
 func (x *SVGF) SetVariancePrefilterSigma(variancePrefilterSigma float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariancePrefilterSigma:"), variancePrefilterSigma)
 }
 
-// The radius of the variance pre-filter of the bilateral filter. Defaults to 1 resulting in a 3x3 filter.
+// VariancePrefilterRadius the radius of the variance pre-filter of the bilateral filter. Defaults to 1 resulting in a 3x3 filter.
 func (x *SVGF) VariancePrefilterRadius() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("variancePrefilterRadius"))
 	return _r
 }
 
+// SetVariancePrefilterRadius wraps the corresponding Objective-C method.
 func (x *SVGF) SetVariancePrefilterRadius(variancePrefilterRadius int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariancePrefilterRadius:"), variancePrefilterRadius)
 }
 
-// The sigma value of the Gaussian function used by the bilateral filter. Must be greater than zero. Defaults to 1.2.
+// BilateralFilterSigma the sigma value of the Gaussian function used by the bilateral filter. Must be greater than zero. Defaults to 1.2.
 func (x *SVGF) BilateralFilterSigma() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("bilateralFilterSigma"))
 	return _r
 }
 
+// SetBilateralFilterSigma wraps the corresponding Objective-C method.
 func (x *SVGF) SetBilateralFilterSigma(bilateralFilterSigma float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBilateralFilterSigma:"), bilateralFilterSigma)
 }
 
-// The radius of the bilateral filter. Defaults to 2 resulting in a 5x5 filter.
+// BilateralFilterRadius the radius of the bilateral filter. Defaults to 2 resulting in a 5x5 filter.
 func (x *SVGF) BilateralFilterRadius() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bilateralFilterRadius"))
 	return _r
 }
 
+// SetBilateralFilterRadius wraps the corresponding Objective-C method.
 func (x *SVGF) SetBilateralFilterRadius(bilateralFilterRadius int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBilateralFilterRadius:"), bilateralFilterRadius)
 }
 
-// The number of channels to filter in the source image. Must be at least one and at most three. Defaults to 3.
+// ChannelCount the number of channels to filter in the source image. Must be at least one and at most three. Defaults to 3.
 func (x *SVGF) ChannelCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("channelCount"))
 	return _r
 }
 
+// SetChannelCount wraps the corresponding Objective-C method.
 func (x *SVGF) SetChannelCount(channelCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannelCount:"), channelCount)
 }
 
-// The number of channels to filter in the second source image. Must be at least one and at most three. Defaults to 3.
+// ChannelCount2 the number of channels to filter in the second source image. Must be at least one and at most three. Defaults to 3.
 func (x *SVGF) ChannelCount2() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("channelCount2"))
 	return _r
 }
 
+// SetChannelCount2 wraps the corresponding Objective-C method.
 func (x *SVGF) SetChannelCount2(channelCount2 int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannelCount2:"), channelCount2)
 }
@@ -376,3 +349,5 @@ type SVGFable interface {
 }
 
 var _ SVGFable = (*SVGF)(nil)
+
+var _ KernelProvider = (*SVGF)(nil)

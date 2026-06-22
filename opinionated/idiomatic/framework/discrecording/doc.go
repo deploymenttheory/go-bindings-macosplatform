@@ -3,4 +3,11 @@
 //go:build darwin
 
 // Package discrecording provides a fluent Go API over the macOS DiscRecording framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - FSObject: [File], [Folder]
 package discrecording

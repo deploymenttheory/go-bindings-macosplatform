@@ -23,7 +23,8 @@ func MTROTAHeaderParserFromID(id objc.ID) *MTROTAHeaderParser {
 	if id == 0 {
 		return nil
 	}
-	x := &MTROTAHeaderParser{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTROTAHeaderParser{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTROTAHeaderParserAdopt(id objc.ID) *MTROTAHeaderParser {
 	if id == 0 {
 		return nil
 	}
-	x := &MTROTAHeaderParser{Handle: objref.Wrap(id)}
+	x := &MTROTAHeaderParser{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *MTROTAHeaderParser) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MTROTAHeaderParser) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTROTAHeaderParser) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMTROTAHeaderParser creates a new MTROTAHeaderParser.

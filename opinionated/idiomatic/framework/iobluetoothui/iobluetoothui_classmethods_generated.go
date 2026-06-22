@@ -10,36 +10,37 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Method call to instantiate a new IOBluetoothDeviceSelectorController object.
+// DeviceSelector method call to instantiate a new IOBluetoothDeviceSelectorController object.
 func DeviceSelector() *BluetoothDeviceSelectorController {
 	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothDeviceSelectorController")), objc.RegisterName("deviceSelector"))
 	return BluetoothDeviceSelectorControllerFromID(_r)
 }
 
-// Method call to instantiate a new IOBluetoothPairingController object.
+// PairingController method call to instantiate a new IOBluetoothPairingController object.
 func PairingController() *BluetoothPairingController {
 	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothPairingController")), objc.RegisterName("pairingController"))
 	return BluetoothPairingControllerFromID(_r)
 }
 
+// SharedDisplayView wraps the corresponding Objective-C method.
 func SharedDisplayView() *BluetoothPasskeyDisplay {
 	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothPasskeyDisplay")), objc.RegisterName("sharedDisplayView"))
 	return BluetoothPasskeyDisplayFromID(_r)
 }
 
-// Allocator work Bluetooth Service Browser window controller.
+// ServiceBrowserController allocator work Bluetooth Service Browser window controller.
 func ServiceBrowserController(inOptions uint32) *BluetoothServiceBrowserController {
 	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothServiceBrowserController")), objc.RegisterName("serviceBrowserController:"), inOptions)
 	return BluetoothServiceBrowserControllerFromID(_r)
 }
 
-// ***WARNING*** This method has been deprecated in favor of -setOptions:, -runModal and -getResults. This method allocates and runs the browser window as a modal window waiting for the user to either select a service, or cancel the browser window.
+// BrowseDevicesOptions ***WARNING*** This method has been deprecated in favor of -setOptions:, -runModal and -getResults. This method allocates and runs the browser window as a modal window waiting for the user to either select a service, or cancel the browser window.
 func BrowseDevicesOptions(outRecord obj.Object, inOptions uint32) int {
 	_r := objc.Send[int](objc.ID(_class("IOBluetoothServiceBrowserController")), objc.RegisterName("browseDevices:options:"), objref.IDOf(outRecord), inOptions)
 	return _r
 }
 
-// ***WARNING*** This method has been deprecated in favor of - beginSheetModalForWindow:modalDelegate:didEndSelector:contextInfo:. This method will allocate and run the IOBluetoothServiceBrowserController browser window as a sheet for a window.
+// BrowseDevicesAsSheetForWindowOptionsWindow ***WARNING*** This method has been deprecated in favor of - beginSheetModalForWindow:modalDelegate:didEndSelector:contextInfo:. This method will allocate and run the IOBluetoothServiceBrowserController browser window as a sheet for a window.
 func BrowseDevicesAsSheetForWindowOptionsWindow(outRecord obj.Object, inOptions uint32, inWindow obj.Object) int {
 	_r := objc.Send[int](objc.ID(_class("IOBluetoothServiceBrowserController")), objc.RegisterName("browseDevicesAsSheetForWindow:options:window:"), objref.IDOf(outRecord), inOptions, objref.IDOf(inWindow))
 	return _r

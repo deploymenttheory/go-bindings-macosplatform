@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that connects to the system’s audio output.
-//
 // AudioOutputNode is an idiomatic wrapper over the Objective-C class AVAudioOutputNode.
+//
+// It embeds [AudioIONode], promoting that type's methods.
+//
+// An object that connects to the system’s audio output.
 type AudioOutputNode struct {
-	objref.Handle
+	AudioIONode
 }
 
 // AudioOutputNodeFromID adopts an existing Objective-C object as a AudioOutputNode
@@ -25,7 +26,8 @@ func AudioOutputNodeFromID(id objc.ID) *AudioOutputNode {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioOutputNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioOutputNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func audioOutputNodeAdopt(id objc.ID) *AudioOutputNode {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioOutputNode{Handle: objref.Wrap(id)}
+	x := &AudioOutputNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AudioOutputNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioOutputNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioOutputNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAudioOutputNode creates a new AudioOutputNode.
@@ -70,3 +58,7 @@ type AudioOutputNodeable interface {
 }
 
 var _ AudioOutputNodeable = (*AudioOutputNode)(nil)
+
+var _ AudioIONodeProvider = (*AudioOutputNode)(nil)
+
+var _ AudioNodeProvider = (*AudioOutputNode)(nil)

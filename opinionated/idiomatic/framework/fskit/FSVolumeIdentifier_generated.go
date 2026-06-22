@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // VolumeIdentifier is an idiomatic wrapper over the Objective-C class FSVolumeIdentifier.
+//
+// It embeds [EntityIdentifier], promoting that type's methods.
 type VolumeIdentifier struct {
-	objref.Handle
+	EntityIdentifier
 }
 
 // VolumeIdentifierFromID adopts an existing Objective-C object as a VolumeIdentifier
@@ -23,7 +24,8 @@ func VolumeIdentifierFromID(id objc.ID) *VolumeIdentifier {
 	if id == 0 {
 		return nil
 	}
-	x := &VolumeIdentifier{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VolumeIdentifier{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func volumeIdentifierAdopt(id objc.ID) *VolumeIdentifier {
 	if id == 0 {
 		return nil
 	}
-	x := &VolumeIdentifier{Handle: objref.Wrap(id)}
+	x := &VolumeIdentifier{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *VolumeIdentifier) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VolumeIdentifier) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VolumeIdentifier) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewVolumeIdentifier creates a new VolumeIdentifier.
@@ -62,17 +50,13 @@ func NewVolumeIdentifier() *VolumeIdentifier {
 	return volumeIdentifierAdopt(_id)
 }
 
-// A UUID to uniquely identify this entity.
-//
-// WithUuid sets uuid and returns the receiver so calls can be chained.
+// WithUuid a UUID to uniquely identify this entity.
 func (x *VolumeIdentifier) WithUuid(uuid obj.Object) *VolumeIdentifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUuid:"), objref.IDOf(uuid))
 	return x
 }
 
-// An optional piece of data to distinguish entities that otherwise share the same UUID.
-//
-// WithQualifier sets qualifier and returns the receiver so calls can be chained.
+// WithQualifier an optional piece of data to distinguish entities that otherwise share the same UUID.
 func (x *VolumeIdentifier) WithQualifier(qualifier obj.Object) *VolumeIdentifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualifier:"), objref.IDOf(qualifier))
 	return x
@@ -86,3 +70,5 @@ type VolumeIdentifierable interface {
 }
 
 var _ VolumeIdentifierable = (*VolumeIdentifier)(nil)
+
+var _ EntityIdentifierProvider = (*VolumeIdentifier)(nil)

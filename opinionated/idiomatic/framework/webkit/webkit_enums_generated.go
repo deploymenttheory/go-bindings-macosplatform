@@ -24,6 +24,8 @@ const (
 	WKAudiovisualMediaTypeAll WKAudiovisualMediaTypes = 18446744073709551615
 )
 
+// String returns the WKAudiovisualMediaTypes constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WKAudiovisualMediaTypes) String() string {
 	var parts []string
 	if e&WKAudiovisualMediaTypeAudio != 0 {
@@ -50,6 +52,8 @@ const (
 	WKContentModeDesktop     WKContentMode = 2
 )
 
+// String returns the WKContentMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WKContentMode) String() string {
 	switch e {
 	case WKContentModeRecommended:
@@ -71,6 +75,8 @@ const (
 	WKCookiePolicyDisallow WKCookiePolicy = 1
 )
 
+// String returns the WKCookiePolicy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WKCookiePolicy) String() string {
 	switch e {
 	case WKCookiePolicyAllow:
@@ -105,6 +111,8 @@ const (
 	WKErrorCredentialNotFound                  WKErrorCode = 17
 )
 
+// String returns the WKErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WKErrorCode) String() string {
 	switch e {
 	case WKErrorUnknown:
@@ -155,6 +163,8 @@ const (
 	WKFullscreenStateExitingFullscreen  WKFullscreenState = 3
 )
 
+// String returns the WKFullscreenState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WKFullscreenState) String() string {
 	switch e {
 	case WKFullscreenStateNotInFullscreen:
@@ -179,6 +189,8 @@ const (
 	WKInactiveSchedulingPolicyNone     WKInactiveSchedulingPolicy = 2
 )
 
+// String returns the WKInactiveSchedulingPolicy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WKInactiveSchedulingPolicy) String() string {
 	switch e {
 	case WKInactiveSchedulingPolicySuspend:
@@ -204,6 +216,8 @@ const (
 	WKMediaCaptureStateMuted WKMediaCaptureState = 2
 )
 
+// String returns the WKMediaCaptureState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WKMediaCaptureState) String() string {
 	switch e {
 	case WKMediaCaptureStateNone:
@@ -235,6 +249,8 @@ const (
 	WKNavigationTypeOther WKNavigationType = -1
 )
 
+// String returns the WKNavigationType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WKNavigationType) String() string {
 	switch e {
 	case WKNavigationTypeLinkActivated:
@@ -262,6 +278,8 @@ const (
 	WKSecurityRestrictionModeLockdown              WKSecurityRestrictionMode = 2
 )
 
+// String returns the WKSecurityRestrictionMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WKSecurityRestrictionMode) String() string {
 	switch e {
 	case WKSecurityRestrictionModeNone:
@@ -285,6 +303,8 @@ const (
 	WKUserInterfaceDirectionPolicySystem WKUserInterfaceDirectionPolicy = 1
 )
 
+// String returns the WKUserInterfaceDirectionPolicy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WKUserInterfaceDirectionPolicy) String() string {
 	switch e {
 	case WKUserInterfaceDirectionPolicyContent:
@@ -306,6 +326,8 @@ const (
 	WKUserScriptInjectionTimeAtDocumentEnd WKUserScriptInjectionTime = 1
 )
 
+// String returns the WKUserScriptInjectionTime constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WKUserScriptInjectionTime) String() string {
 	switch e {
 	case WKUserScriptInjectionTimeAtDocumentStart:
@@ -329,6 +351,8 @@ const (
 	WKWebExtensionContextPermissionStatusGrantedExplicitly   WKWebExtensionContextPermissionStatus = 3
 )
 
+// String returns the WKWebExtensionContextPermissionStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WKWebExtensionContextPermissionStatus) String() string {
 	switch e {
 	case WKWebExtensionContextPermissionStatusDeniedExplicitly:
@@ -362,6 +386,8 @@ const (
 	WKWebExtensionMatchPatternOptionsMatchBidirectionally WKWebExtensionMatchPatternOptions = 4
 )
 
+// String returns the WKWebExtensionMatchPatternOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WKWebExtensionMatchPatternOptions) String() string {
 	var parts []string
 	if e&WKWebExtensionMatchPatternOptionsIgnoreSchemes != 0 {
@@ -395,6 +421,8 @@ const (
 	WKWebExtensionTabChangedPropertiesZoomFactor   WKWebExtensionTabChangedProperties = 512
 )
 
+// String returns the WKWebExtensionTabChangedProperties constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WKWebExtensionTabChangedProperties) String() string {
 	var parts []string
 	if e&WKWebExtensionTabChangedPropertiesLoading != 0 {
@@ -440,6 +468,8 @@ const (
 	WKWebExtensionWindowStateFullscreen WKWebExtensionWindowState = 3
 )
 
+// String returns the WKWebExtensionWindowState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WKWebExtensionWindowState) String() string {
 	switch e {
 	case WKWebExtensionWindowStateNormal:
@@ -463,6 +493,8 @@ const (
 	WKWebExtensionWindowTypePopup  WKWebExtensionWindowType = 1
 )
 
+// String returns the WKWebExtensionWindowType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WKWebExtensionWindowType) String() string {
 	switch e {
 	case WKWebExtensionWindowTypeNormal:
@@ -481,6 +513,8 @@ const (
 	WKWebViewDataTypeSessionStorage WKWebViewDataType = 1
 )
 
+// String returns the WKWebViewDataType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WKWebViewDataType) String() string {
 	var parts []string
 	if e&WKWebViewDataTypeSessionStorage != 0 {
@@ -501,6 +535,8 @@ const (
 	WKWebpagePreferencesUpgradeToHTTPSPolicyErrorOnFailure             WKWebpagePreferencesUpgradeToHTTPSPolicy = 3
 )
 
+// String returns the WKWebpagePreferencesUpgradeToHTTPSPolicy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WKWebpagePreferencesUpgradeToHTTPSPolicy) String() string {
 	switch e {
 	case WKWebpagePreferencesUpgradeToHTTPSPolicyKeepAsRequested:
@@ -528,6 +564,8 @@ const (
 	WebCacheModelPrimaryWebBrowser WebCacheModel = 2
 )
 
+// String returns the WebCacheModel constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WebCacheModel) String() string {
 	switch e {
 	case WebCacheModelDocumentViewer:

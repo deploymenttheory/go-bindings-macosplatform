@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a real game controller, a virtual controller, or a snapshot of a controller.
-//
 // Controller is an idiomatic wrapper over the Objective-C class GCController.
+//
+// A representation of a real game controller, a virtual controller, or a snapshot of a controller.
 type Controller struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func ControllerFromID(id objc.ID) *Controller {
 	if id == 0 {
 		return nil
 	}
-	x := &Controller{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Controller{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func controllerAdopt(id objc.ID) *Controller {
 	if id == 0 {
 		return nil
 	}
-	x := &Controller{Handle: objref.Wrap(id)}
+	x := &Controller{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,30 +61,34 @@ func (x *Controller) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Controller) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewController creates a new Controller.
 func NewController() *Controller {
 	_id := objc.Send[objc.ID](objc.ID(_class("GCController")), objc.RegisterName("new"))
 	return controllerAdopt(_id)
 }
 
-// The block that the framework calls when the user presses the pause button on the controller.
-//
-// WithControllerPausedHandler sets controllerPausedHandler and returns the receiver so calls can be chained.
+// WithControllerPausedHandler the block that the framework calls when the user presses the pause button on the controller.
 func (x *Controller) WithControllerPausedHandler(controllerPausedHandler func(obj.Object)) *Controller {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControllerPausedHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { controllerPausedHandler(obj.Wrap(_b0)) }))
 	return x
 }
 
-// The player index for the controller.
-//
-// WithPlayerIndex sets playerIndex and returns the receiver so calls can be chained.
+// WithPlayerIndex the player index for the controller.
 func (x *Controller) WithPlayerIndex(playerIndex ControllerPlayerIndex) *Controller {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayerIndex:"), playerIndex)
 	return x
 }
 
+// SetControllerPausedHandler wraps the corresponding Objective-C method.
+//
 // SetControllerPausedHandler blocks until the operation completes or ctx is cancelled.
-func (x *Controller) SetControllerPausedHandler(ctx context.Context) (*Controller, error) {
+func (x *Controller) SetControllerPausedHandler(ctx context.Context) (result *Controller, err error) {
 	type _result struct {
 		val *Controller
 		err error
@@ -103,81 +109,84 @@ func (x *Controller) SetControllerPausedHandler(ctx context.Context) (*Controlle
 	}
 }
 
-// A controller may be form fitting or otherwise closely attached to the device. This closeness to other inputs on the device may suggest that interaction with the device may use other inputs easily. This is presented to developers to allow them to make informed decisions about UI and interactions to choose for their game in this situation.
+// IsAttachedToDevice a controller may be form fitting or otherwise closely attached to the device. This closeness to other inputs on the device may suggest that interaction with the device may use other inputs easily. This is presented to developers to allow them to make informed decisions about UI and interactions to choose for their game in this situation.
 func (x *Controller) IsAttachedToDevice() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAttachedToDevice"))
 	return _r
 }
 
-// A player index for the controller, defaults to GCControllerPlayerIndexUnset. This can be set both for the application to keep track of controllers and as a signal to make a controller display a player index on a set of LEDs or some other mechanism. A controller is not guaranteed to have a visual display of the playerIndex, playerIndex does not persist for a controller with regards to a system. Negative values less than GCControllerPlayerIndexUnset will just map back to GCControllerPlayerIndexUnset when read back.
+// PlayerIndex a player index for the controller, defaults to GCControllerPlayerIndexUnset. This can be set both for the application to keep track of controllers and as a signal to make a controller display a player index on a set of LEDs or some other mechanism. A controller is not guaranteed to have a visual display of the playerIndex, playerIndex does not persist for a controller with regards to a system. Negative values less than GCControllerPlayerIndexUnset will just map back to GCControllerPlayerIndexUnset when read back.
 func (x *Controller) PlayerIndex() ControllerPlayerIndex {
 	_r := objc.Send[ControllerPlayerIndex](objref.IDOf(x), objc.RegisterName("playerIndex"))
 	return _r
 }
 
+// SetPlayerIndex wraps the corresponding Objective-C method.
 func (x *Controller) SetPlayerIndex(playerIndex ControllerPlayerIndex) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayerIndex:"), playerIndex)
 }
 
-// Gets the input profile for the controller.
+// Input gets the input profile for the controller.
 func (x *Controller) Input() *ControllerLiveInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("input"))
 	return ControllerLiveInputFromID(_r)
 }
 
-// Gets the battery information if controller supports one This property is useful when you try to notify your user to change or charge controller before it runs out of battery life or simply display the current battery level and status.
+// Battery gets the battery information if controller supports one This property is useful when you try to notify your user to change or charge controller before it runs out of battery life or simply display the current battery level and status.
 func (x *Controller) Battery() *DeviceBattery {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("battery"))
 	return DeviceBatteryFromID(_r)
 }
 
-// Gets the physical input profile for the controller.
+// PhysicalInputProfile gets the physical input profile for the controller.
 func (x *Controller) PhysicalInputProfile() *PhysicalInputProfile {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("physicalInputProfile"))
 	return PhysicalInputProfileFromID(_r)
 }
 
-// Gets the profile for the controller that suits current application. There are several supported profiles, with an additional optional profile for motion as well. Each controller may be able to map its inputs into all profiles or just one kind of profile. Query for the controller profile that suits your game, the simplest kind will be supported by the broadest variety of controllers. A controller supporting the Extended Gamepad profile for example supports the Gamepad profile and more. As such it can always be used just in the Gamepad profile if that suits the game. A physical controller that supports a profile must support it completely. That means that all buttons and axis inputs must be valid inputs that a developer can utilize. If a controller does not support the given profile the returned value will be nil. Use this to filter controllers if the application requires a specific kind of profile.
+// Gamepad gets the profile for the controller that suits current application. There are several supported profiles, with an additional optional profile for motion as well. Each controller may be able to map its inputs into all profiles or just one kind of profile. Query for the controller profile that suits your game, the simplest kind will be supported by the broadest variety of controllers. A controller supporting the Extended Gamepad profile for example supports the Gamepad profile and more. As such it can always be used just in the Gamepad profile if that suits the game. A physical controller that supports a profile must support it completely. That means that all buttons and axis inputs must be valid inputs that a developer can utilize. If a controller does not support the given profile the returned value will be nil. Use this to filter controllers if the application requires a specific kind of profile.
 func (x *Controller) Gamepad() *Gamepad {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gamepad"))
 	return GamepadFromID(_r)
 }
 
+// MicroGamepad wraps the corresponding Objective-C method.
 func (x *Controller) MicroGamepad() *MicroGamepad {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("microGamepad"))
 	return MicroGamepadFromID(_r)
 }
 
+// ExtendedGamepad wraps the corresponding Objective-C method.
 func (x *Controller) ExtendedGamepad() *ExtendedGamepad {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendedGamepad"))
 	return ExtendedGamepadFromID(_r)
 }
 
-// Gets the motion input profile. This profile is optional and may be available if the controller is attached to a device that supports motion. If this is nil the controller does not support motion input and only the gamepad & extendedGamepad profiles are available.
+// Motion gets the motion input profile. This profile is optional and may be available if the controller is attached to a device that supports motion. If this is nil the controller does not support motion input and only the gamepad & extendedGamepad profiles are available.
 func (x *Controller) Motion() *Motion {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("motion"))
 	return MotionFromID(_r)
 }
 
-// Gets the light for the controller, if one exists. A controller's light can be used to signal information to the player, such as using different light colors based on the player index. It can also be used to react to in-game events and enhance user immersion.
+// Light gets the light for the controller, if one exists. A controller's light can be used to signal information to the player, such as using different light colors based on the player index. It can also be used to react to in-game events and enhance user immersion.
 func (x *Controller) Light() *DeviceLight {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("light"))
 	return DeviceLightFromID(_r)
 }
 
-// Gets the haptics for the controller, if one exists. Use this property to create CHHapticEngine instances according to your needs.
+// Haptics gets the haptics for the controller, if one exists. Use this property to create CHHapticEngine instances according to your needs.
 func (x *Controller) Haptics() *DeviceHaptics {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("haptics"))
 	return DeviceHapticsFromID(_r)
 }
 
-// Returns a snapshot of the controller with its current element values.
+// Capture returns a snapshot of the controller with its current element values.
 func (x *Controller) Capture() *Controller {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("capture"))
 	return ControllerFromID(_r)
 }
 
-// A controller may represent a real device managed by the operating system, or a virtual snapshot created by the developer.  If a controller is created by the developer, it is considered to be a snapshot, allowing direct writes to any GCControllerElement of its profiles.  If the controller is not snapshot, the system will reject any write requests to GCControllerElement.
+// IsSnapshot a controller may represent a real device managed by the operating system, or a virtual snapshot created by the developer.  If a controller is created by the developer, it is considered to be a snapshot, allowing direct writes to any GCControllerElement of its profiles.  If the controller is not snapshot, the system will reject any write requests to GCControllerElement.
 func (x *Controller) IsSnapshot() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSnapshot"))
 	return _r

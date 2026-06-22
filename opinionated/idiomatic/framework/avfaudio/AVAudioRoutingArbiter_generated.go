@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object for configuring macOS apps to participate in AirPods Automatic Switching.
-//
 // AudioRoutingArbiter is an idiomatic wrapper over the Objective-C class AVAudioRoutingArbiter.
+//
+// An object for configuring macOS apps to participate in AirPods Automatic Switching.
 type AudioRoutingArbiter struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AudioRoutingArbiterFromID(id objc.ID) *AudioRoutingArbiter {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioRoutingArbiter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioRoutingArbiter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func audioRoutingArbiterAdopt(id objc.ID) *AudioRoutingArbiter {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioRoutingArbiter{Handle: objref.Wrap(id)}
+	x := &AudioRoutingArbiter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *AudioRoutingArbiter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioRoutingArbiter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAudioRoutingArbiter creates a new AudioRoutingArbiter.
 func NewAudioRoutingArbiter() *AudioRoutingArbiter {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioRoutingArbiter")), objc.RegisterName("new"))
 	return audioRoutingArbiterAdopt(_id)
 }
 
-// Stops an app’s participation in audio routing arbitration.
+// LeaveArbitration stops an app’s participation in audio routing arbitration.
 func (x *AudioRoutingArbiter) LeaveArbitration() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leaveArbitration"))
 }

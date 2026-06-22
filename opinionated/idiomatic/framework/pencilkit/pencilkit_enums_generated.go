@@ -24,6 +24,8 @@ const (
 	ContentVersionLatest ContentVersion = 4
 )
 
+// String returns the ContentVersion constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ContentVersion) String() string {
 	switch e {
 	case ContentVersion1:
@@ -50,6 +52,8 @@ const (
 	EraserTypeFixedWidthBitmap EraserType = 2
 )
 
+// String returns the EraserType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EraserType) String() string {
 	switch e {
 	case EraserTypeVector:

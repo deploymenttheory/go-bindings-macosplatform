@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMFileList is an idiomatic wrapper over the Objective-C class DOMFileList.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMFileList struct {
-	objref.Handle
+	DOMObject
 }
 
 // DOMFileListFromID adopts an existing Objective-C object as a DOMFileList
@@ -23,7 +24,8 @@ func DOMFileListFromID(id objc.ID) *DOMFileList {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMFileList{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMFileList{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMFileListAdopt(id objc.ID) *DOMFileList {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMFileList{Handle: objref.Wrap(id)}
+	x := &DOMFileList{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMFileList) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMFileList) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMFileList) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMFileList creates a new DOMFileList.
@@ -62,11 +50,13 @@ func NewDOMFileList() *DOMFileList {
 	return dOMFileListAdopt(_id)
 }
 
+// Item wraps the corresponding Objective-C method.
 func (x *DOMFileList) Item(index int) *DOMFile {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
 	return DOMFileFromID(_r)
 }
 
+// Length wraps the corresponding Objective-C method.
 func (x *DOMFileList) Length() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
 	return _r
@@ -80,3 +70,7 @@ type DOMFileListable interface {
 }
 
 var _ DOMFileListable = (*DOMFileList)(nil)
+
+var _ DOMObjectProvider = (*DOMFileList)(nil)
+
+var _ WebScriptObjectProvider = (*DOMFileList)(nil)

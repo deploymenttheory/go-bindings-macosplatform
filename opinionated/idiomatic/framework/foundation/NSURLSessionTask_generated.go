@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A task, like downloading a specific resource, performed in a URL session.
-//
 // URLSessionTask is an idiomatic wrapper over the Objective-C class NSURLSessionTask.
+//
+// URLSessionTask is an abstract base — you do not construct it directly. Construct one of [URLSessionDataTask], [URLSessionDownloadTask], [URLSessionStreamTask], [URLSessionWebSocketTask] and pass it where a URLSessionTask is accepted.
+//
+// A task, like downloading a specific resource, performed in a URL session.
 type URLSessionTask struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func URLSessionTaskFromID(id objc.ID) *URLSessionTask {
 	if id == 0 {
 		return nil
 	}
-	x := &URLSessionTask{Handle: objref.Wrap(purego.Retain(id))}
+	x := &URLSessionTask{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func uRLSessionTaskAdopt(id objc.ID) *URLSessionTask {
 	if id == 0 {
 		return nil
 	}
-	x := &URLSessionTask{Handle: objref.Wrap(id)}
+	x := &URLSessionTask{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,138 +62,157 @@ func (x *URLSessionTask) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewURLSessionTask creates a new URLSessionTask.
-func NewURLSessionTask() *URLSessionTask {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSURLSessionTask")), objc.RegisterName("new"))
-	return uRLSessionTaskAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *URLSessionTask) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithEarliestBeginDate sets earliestBeginDate and returns the receiver so calls can be chained.
+// WithEarliestBeginDate sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
 	return x
 }
 
-// WithCountOfBytesClientExpectsToSend sets countOfBytesClientExpectsToSend and returns the receiver so calls can be chained.
+// WithCountOfBytesClientExpectsToSend sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
 	return x
 }
 
-// WithCountOfBytesClientExpectsToReceive sets countOfBytesClientExpectsToReceive and returns the receiver so calls can be chained.
+// WithCountOfBytesClientExpectsToReceive sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
 	return x
 }
 
-// WithTaskDescription sets taskDescription and returns the receiver so calls can be chained.
+// WithTaskDescription sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionTask) WithTaskDescription(taskDescription StringProvider) *URLSessionTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
 	return x
 }
 
-// WithPriority sets priority and returns the receiver so calls can be chained.
+// WithPriority sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionTask) WithPriority(priority float32) *URLSessionTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
 	return x
 }
 
-// WithPrefersIncrementalDelivery sets prefersIncrementalDelivery and returns the receiver so calls can be chained.
+// WithPrefersIncrementalDelivery sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionTask {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Cancel wraps the corresponding Objective-C method.
 func (x *URLSessionTask) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
+// Suspend wraps the corresponding Objective-C method.
 func (x *URLSessionTask) Suspend() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suspend"))
 }
 
+// Resume wraps the corresponding Objective-C method.
 func (x *URLSessionTask) Resume() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resume"))
 }
 
+// TaskIdentifier wraps the corresponding Objective-C method.
 func (x *URLSessionTask) TaskIdentifier() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("taskIdentifier"))
 	return _r
 }
 
+// OriginalRequest wraps the corresponding Objective-C method.
 func (x *URLSessionTask) OriginalRequest() *URLRequest {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalRequest"))
 	return URLRequestFromID(_r)
 }
 
+// CurrentRequest wraps the corresponding Objective-C method.
 func (x *URLSessionTask) CurrentRequest() *URLRequest {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentRequest"))
 	return URLRequestFromID(_r)
 }
 
+// Response wraps the corresponding Objective-C method.
 func (x *URLSessionTask) Response() *URLResponse {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("response"))
 	return URLResponseFromID(_r)
 }
 
+// Progress wraps the corresponding Objective-C method.
 func (x *URLSessionTask) Progress() *Progress {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("progress"))
 	return ProgressFromID(_r)
 }
 
+// EarliestBeginDate wraps the corresponding Objective-C method.
 func (x *URLSessionTask) EarliestBeginDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("earliestBeginDate"))
 	return DateFromID(_r)
 }
 
+// SetEarliestBeginDate wraps the corresponding Objective-C method.
 func (x *URLSessionTask) SetEarliestBeginDate(earliestBeginDate *Date) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
 }
 
+// CountOfBytesClientExpectsToSend wraps the corresponding Objective-C method.
 func (x *URLSessionTask) CountOfBytesClientExpectsToSend() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("countOfBytesClientExpectsToSend"))
 	return _r
 }
 
+// SetCountOfBytesClientExpectsToSend wraps the corresponding Objective-C method.
 func (x *URLSessionTask) SetCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
 }
 
+// CountOfBytesClientExpectsToReceive wraps the corresponding Objective-C method.
 func (x *URLSessionTask) CountOfBytesClientExpectsToReceive() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("countOfBytesClientExpectsToReceive"))
 	return _r
 }
 
+// SetCountOfBytesClientExpectsToReceive wraps the corresponding Objective-C method.
 func (x *URLSessionTask) SetCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
 }
 
+// CountOfBytesSent wraps the corresponding Objective-C method.
 func (x *URLSessionTask) CountOfBytesSent() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("countOfBytesSent"))
 	return _r
 }
 
+// CountOfBytesReceived wraps the corresponding Objective-C method.
 func (x *URLSessionTask) CountOfBytesReceived() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("countOfBytesReceived"))
 	return _r
 }
 
+// CountOfBytesExpectedToSend wraps the corresponding Objective-C method.
 func (x *URLSessionTask) CountOfBytesExpectedToSend() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("countOfBytesExpectedToSend"))
 	return _r
 }
 
+// CountOfBytesExpectedToReceive wraps the corresponding Objective-C method.
 func (x *URLSessionTask) CountOfBytesExpectedToReceive() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("countOfBytesExpectedToReceive"))
 	return _r
 }
 
+// TaskDescription wraps the corresponding Objective-C method.
 func (x *URLSessionTask) TaskDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("taskDescription"))
 	if _r == 0 {
@@ -198,29 +221,35 @@ func (x *URLSessionTask) TaskDescription() string {
 	return purego.GoString(_r)
 }
 
+// SetTaskDescription wraps the corresponding Objective-C method.
 func (x *URLSessionTask) SetTaskDescription(taskDescription string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTaskDescription:"), purego.NSString(taskDescription))
 }
 
+// State wraps the corresponding Objective-C method.
 func (x *URLSessionTask) State() URLSessionTaskState {
 	_r := objc.Send[URLSessionTaskState](objref.IDOf(x), objc.RegisterName("state"))
 	return _r
 }
 
+// Priority wraps the corresponding Objective-C method.
 func (x *URLSessionTask) Priority() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("priority"))
 	return _r
 }
 
+// SetPriority wraps the corresponding Objective-C method.
 func (x *URLSessionTask) SetPriority(priority float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
 }
 
+// PrefersIncrementalDelivery wraps the corresponding Objective-C method.
 func (x *URLSessionTask) PrefersIncrementalDelivery() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("prefersIncrementalDelivery"))
 	return _r
 }
 
+// SetPrefersIncrementalDelivery wraps the corresponding Objective-C method.
 func (x *URLSessionTask) SetPrefersIncrementalDelivery(prefersIncrementalDelivery bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
 }
@@ -263,3 +292,10 @@ type URLSessionTaskable interface {
 }
 
 var _ URLSessionTaskable = (*URLSessionTask)(nil)
+
+// isURLSessionTask marks URLSessionTask — and, by embedding promotion, its
+// subclasses — as a member of the URLSessionTask hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *URLSessionTask) isURLSessionTask() {}
+
+var _ URLSessionTaskProvider = (*URLSessionTask)(nil)

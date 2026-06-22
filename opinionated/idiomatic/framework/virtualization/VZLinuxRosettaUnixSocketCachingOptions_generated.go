@@ -9,16 +9,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object that represents caching options for a UNIX domain socket.
-//
 // LinuxRosettaUnixSocketCachingOptions is an idiomatic wrapper over the Objective-C class VZLinuxRosettaUnixSocketCachingOptions.
+//
+// It embeds [LinuxRosettaCachingOptions], promoting that type's methods.
+//
+// An object that represents caching options for a UNIX domain socket.
 type LinuxRosettaUnixSocketCachingOptions struct {
-	objref.Handle
+	LinuxRosettaCachingOptions
 }
 
 // LinuxRosettaUnixSocketCachingOptionsFromID adopts an existing Objective-C object as a LinuxRosettaUnixSocketCachingOptions
@@ -27,7 +28,8 @@ func LinuxRosettaUnixSocketCachingOptionsFromID(id objc.ID) *LinuxRosettaUnixSoc
 	if id == 0 {
 		return nil
 	}
-	x := &LinuxRosettaUnixSocketCachingOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LinuxRosettaUnixSocketCachingOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,24 +42,10 @@ func linuxRosettaUnixSocketCachingOptionsAdopt(id objc.ID) *LinuxRosettaUnixSock
 	if id == 0 {
 		return nil
 	}
-	x := &LinuxRosettaUnixSocketCachingOptions{Handle: objref.Wrap(id)}
+	x := &LinuxRosettaUnixSocketCachingOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *LinuxRosettaUnixSocketCachingOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LinuxRosettaUnixSocketCachingOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LinuxRosettaUnixSocketCachingOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewLinuxRosettaUnixSocketCachingOptions creates a new LinuxRosettaUnixSocketCachingOptions.
@@ -66,10 +54,8 @@ func NewLinuxRosettaUnixSocketCachingOptions() *LinuxRosettaUnixSocketCachingOpt
 	return linuxRosettaUnixSocketCachingOptionsAdopt(_id)
 }
 
-// Creates a new Rosetta caching options object for a UNIX domain socket with the path you specify.
-//
-// NewLinuxRosettaUnixSocketCachingOptionsWithPathError creates a new LinuxRosettaUnixSocketCachingOptions.
-func NewLinuxRosettaUnixSocketCachingOptionsWithPathError(path string) (*LinuxRosettaUnixSocketCachingOptions, error) {
+// NewLinuxRosettaUnixSocketCachingOptionsWithPathError creates a new Rosetta caching options object for a UNIX domain socket with the path you specify.
+func NewLinuxRosettaUnixSocketCachingOptionsWithPathError(path string) (result *LinuxRosettaUnixSocketCachingOptions, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZLinuxRosettaUnixSocketCachingOptions")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:error:"), purego.NSString(path), unsafe.Pointer(&_nsErr))
@@ -79,7 +65,7 @@ func NewLinuxRosettaUnixSocketCachingOptionsWithPathError(path string) (*LinuxRo
 	return linuxRosettaUnixSocketCachingOptionsAdopt(_id), nil
 }
 
-// Path set by initWithPath. This is the path of the Unix Domain Socket to be used by Rosetta.
+// Path path set by initWithPath. This is the path of the Unix Domain Socket to be used by Rosetta.
 func (x *LinuxRosettaUnixSocketCachingOptions) Path() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
 	if _r == 0 {
@@ -95,3 +81,5 @@ type LinuxRosettaUnixSocketCachingOptionsable interface {
 }
 
 var _ LinuxRosettaUnixSocketCachingOptionsable = (*LinuxRosettaUnixSocketCachingOptions)(nil)
+
+var _ LinuxRosettaCachingOptionsProvider = (*LinuxRosettaUnixSocketCachingOptions)(nil)

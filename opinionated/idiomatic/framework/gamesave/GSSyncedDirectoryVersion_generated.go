@@ -23,7 +23,8 @@ func SyncedDirectoryVersionFromID(id objc.ID) *SyncedDirectoryVersion {
 	if id == 0 {
 		return nil
 	}
-	x := &SyncedDirectoryVersion{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SyncedDirectoryVersion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func syncedDirectoryVersionAdopt(id objc.ID) *SyncedDirectoryVersion {
 	if id == 0 {
 		return nil
 	}
-	x := &SyncedDirectoryVersion{Handle: objref.Wrap(id)}
+	x := &SyncedDirectoryVersion{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,19 +58,25 @@ func (x *SyncedDirectoryVersion) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncedDirectoryVersion) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSyncedDirectoryVersion creates a new SyncedDirectoryVersion.
 func NewSyncedDirectoryVersion() *SyncedDirectoryVersion {
 	_id := objc.Send[objc.ID](objc.ID(_class("GSSyncedDirectoryVersion")), objc.RegisterName("new"))
 	return syncedDirectoryVersionAdopt(_id)
 }
 
-// `YES` if the directory version is local; otherwise `NO`.
+// IsLocal `YES` if the directory version is local; otherwise `NO`.
 func (x *SyncedDirectoryVersion) IsLocal() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLocal"))
 	return _r
 }
 
-// The localized name of the device that saved this version.
+// LocalizedNameOfSavingComputer the localized name of the device that saved this version.
 func (x *SyncedDirectoryVersion) LocalizedNameOfSavingComputer() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedNameOfSavingComputer"))
 	if _r == 0 {
@@ -77,13 +85,13 @@ func (x *SyncedDirectoryVersion) LocalizedNameOfSavingComputer() string {
 	return purego.GoString(_r)
 }
 
-// The date that this version was last modified.
+// ModifiedDate the date that this version was last modified.
 func (x *SyncedDirectoryVersion) ModifiedDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modifiedDate"))
 	return obj.Wrap(_r)
 }
 
-// The URL of a directory where you read and write game-save data. You define the format and structure of files you write in this directory.
+// Url the URL of a directory where you read and write game-save data. You define the format and structure of files you write in this directory.
 func (x *SyncedDirectoryVersion) Url() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
 	return obj.Wrap(_r)

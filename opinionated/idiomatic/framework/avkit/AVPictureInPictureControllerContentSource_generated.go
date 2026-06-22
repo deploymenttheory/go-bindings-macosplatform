@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the source of the content to present in Picture in Picture.
-//
 // PictureInPictureControllerContentSource is an idiomatic wrapper over the Objective-C class AVPictureInPictureControllerContentSource.
+//
+// An object that represents the source of the content to present in Picture in Picture.
 type PictureInPictureControllerContentSource struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PictureInPictureControllerContentSourceFromID(id objc.ID) *PictureInPicture
 	if id == 0 {
 		return nil
 	}
-	x := &PictureInPictureControllerContentSource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PictureInPictureControllerContentSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func pictureInPictureControllerContentSourceAdopt(id objc.ID) *PictureInPictureC
 	if id == 0 {
 		return nil
 	}
-	x := &PictureInPictureControllerContentSource{Handle: objref.Wrap(id)}
+	x := &PictureInPictureControllerContentSource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +60,26 @@ func (x *PictureInPictureControllerContentSource) IsKind(className string) bool 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Use this initializer for a content source with a player layer.
-//
-// NewPictureInPictureControllerContentSourceWithPlayerLayer creates a new PictureInPictureControllerContentSource.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PictureInPictureControllerContentSource) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPictureInPictureControllerContentSourceWithPlayerLayer use this initializer for a content source with a player layer.
 func NewPictureInPictureControllerContentSourceWithPlayerLayer(playerLayer obj.Object) *PictureInPictureControllerContentSource {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPictureInPictureControllerContentSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayerLayer:"), objref.IDOf(playerLayer))
 	return pictureInPictureControllerContentSourceAdopt(_id)
 }
 
+// PlayerLayer wraps the corresponding Objective-C method.
 func (x *PictureInPictureControllerContentSource) PlayerLayer() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerLayer"))
 	return obj.Wrap(_r)
 }
 
-// The receiver's sample buffer display layer.
+// SampleBufferDisplayLayer the receiver's sample buffer display layer.
 func (x *PictureInPictureControllerContentSource) SampleBufferDisplayLayer() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleBufferDisplayLayer"))
 	return obj.Wrap(_r)

@@ -6,15 +6,16 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object for displaying online help for an app.
-//
 // HelpManager is an idiomatic wrapper over the Objective-C class NSHelpManager.
+//
+// An object for displaying online help for an app.
 type HelpManager struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func HelpManagerFromID(id objc.ID) *HelpManager {
 	if id == 0 {
 		return nil
 	}
-	x := &HelpManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HelpManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func helpManagerAdopt(id objc.ID) *HelpManager {
 	if id == 0 {
 		return nil
 	}
-	x := &HelpManager{Handle: objref.Wrap(id)}
+	x := &HelpManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,39 +61,51 @@ func (x *HelpManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HelpManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewHelpManager creates a new HelpManager.
 func NewHelpManager() *HelpManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSHelpManager")), objc.RegisterName("new"))
 	return helpManagerAdopt(_id)
 }
 
-// Associates help content with an object.
+// SetContextHelpForObject associates help content with an object.
 func (x *HelpManager) SetContextHelpForObject(attrString obj.Object, object obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContextHelp:forObject:"), objref.IDOf(attrString), objref.IDOf(object))
 }
 
-// Removes the association between an object and its context-sensitive help.
+// RemoveContextHelpForObject removes the association between an object and its context-sensitive help.
 func (x *HelpManager) RemoveContextHelpForObject(object obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeContextHelpForObject:"), objref.IDOf(object))
 }
 
-// Returns context-sensitive help for an object.
+// ContextHelpForObject returns context-sensitive help for an object.
 func (x *HelpManager) ContextHelpForObject(object obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contextHelpForObject:"), objref.IDOf(object))
 	return obj.Wrap(_r)
 }
 
-// Finds and displays the text at the given anchor location in the given book.
+// ShowContextHelpForObjectLocationHint displays the context-sensitive help for a given object at or near the point on the screen specified by a given point.
+func (x *HelpManager) ShowContextHelpForObjectLocationHint(object obj.Object, pt corefoundation.CGPoint) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showContextHelpForObject:locationHint:"), objref.IDOf(object), pt)
+	return _r
+}
+
+// OpenHelpAnchorInBook finds and displays the text at the given anchor location in the given book.
 func (x *HelpManager) OpenHelpAnchorInBook(anchor obj.Object, book obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openHelpAnchor:inBook:"), objref.IDOf(anchor), objref.IDOf(book))
 }
 
-// Performs a search for the specified string in the specified book.
+// FindStringInBook performs a search for the specified string in the specified book.
 func (x *HelpManager) FindStringInBook(query string, book obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("findString:inBook:"), purego.NSString(query), objref.IDOf(book))
 }
 
-// Registers one or more help books in the given bundle.
+// RegisterBooksInBundle registers one or more help books in the given bundle.
 func (x *HelpManager) RegisterBooksInBundle(bundle obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("registerBooksInBundle:"), objref.IDOf(bundle))
 	return _r
@@ -102,6 +117,7 @@ type HelpManagerable interface {
 	SetContextHelpForObject(attrString obj.Object, object obj.Object)
 	RemoveContextHelpForObject(object obj.Object)
 	ContextHelpForObject(object obj.Object) obj.Object
+	ShowContextHelpForObjectLocationHint(object obj.Object, pt corefoundation.CGPoint) bool
 	OpenHelpAnchorInBook(anchor obj.Object, book obj.Object)
 	FindStringInBook(query string, book obj.Object)
 	RegisterBooksInBundle(bundle obj.Object) bool

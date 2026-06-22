@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that specifies how user interface elements resize themselves when space is constrained.
-//
 // UserInterfaceCompressionOptions is an idiomatic wrapper over the Objective-C class NSUserInterfaceCompressionOptions.
+//
+// An object that specifies how user interface elements resize themselves when space is constrained.
 type UserInterfaceCompressionOptions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func UserInterfaceCompressionOptionsFromID(id objc.ID) *UserInterfaceCompression
 	if id == 0 {
 		return nil
 	}
-	x := &UserInterfaceCompressionOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UserInterfaceCompressionOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func userInterfaceCompressionOptionsAdopt(id objc.ID) *UserInterfaceCompressionO
 	if id == 0 {
 		return nil
 	}
-	x := &UserInterfaceCompressionOptions{Handle: objref.Wrap(id)}
+	x := &UserInterfaceCompressionOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,63 +60,64 @@ func (x *UserInterfaceCompressionOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UserInterfaceCompressionOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewUserInterfaceCompressionOptions creates a new UserInterfaceCompressionOptions.
 func NewUserInterfaceCompressionOptions() *UserInterfaceCompressionOptions {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSUserInterfaceCompressionOptions")), objc.RegisterName("new"))
 	return userInterfaceCompressionOptionsAdopt(_id)
 }
 
-// Creates an option object from data in an unarchiver.
-//
-// NewUserInterfaceCompressionOptionsWithCoder creates a new UserInterfaceCompressionOptions.
+// NewUserInterfaceCompressionOptionsWithCoder creates an option object from data in an unarchiver.
 func NewUserInterfaceCompressionOptionsWithCoder(coder obj.Object) *UserInterfaceCompressionOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUserInterfaceCompressionOptions")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return userInterfaceCompressionOptionsAdopt(_id)
 }
 
-// Creates an option object with the given identifier string.
-//
-// NewUserInterfaceCompressionOptionsWithIdentifier creates a new UserInterfaceCompressionOptions.
+// NewUserInterfaceCompressionOptionsWithIdentifier creates an option object with the given identifier string.
 func NewUserInterfaceCompressionOptionsWithIdentifier(identifier string) *UserInterfaceCompressionOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUserInterfaceCompressionOptions")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), purego.NSString(identifier))
 	return userInterfaceCompressionOptionsAdopt(_id)
 }
 
-// Creates an option object that represents the union of the supplied options.
-//
-// NewUserInterfaceCompressionOptionsWithCompressionOptions creates a new UserInterfaceCompressionOptions.
+// NewUserInterfaceCompressionOptionsWithCompressionOptions creates an option object that represents the union of the supplied options.
 func NewUserInterfaceCompressionOptionsWithCompressionOptions(options obj.Object) *UserInterfaceCompressionOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUserInterfaceCompressionOptions")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompressionOptions:"), objref.IDOf(options))
 	return userInterfaceCompressionOptionsAdopt(_id)
 }
 
-// Determines whether the supplied compression options are all present in the current instance.
+// ContainsOptions determines whether the supplied compression options are all present in the current instance.
 func (x *UserInterfaceCompressionOptions) ContainsOptions(options *UserInterfaceCompressionOptions) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsOptions:"), objref.IDOf(options))
 	return _r
 }
 
-// Determines whether the supplied compression options intersect with the current instance’s options.
+// IntersectsOptions determines whether the supplied compression options intersect with the current instance’s options.
 func (x *UserInterfaceCompressionOptions) IntersectsOptions(options *UserInterfaceCompressionOptions) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("intersectsOptions:"), objref.IDOf(options))
 	return _r
 }
 
-// Creates a new compression options object representing the union with the provided options.
+// OptionsByAddingOptions creates a new compression options object representing the union with the provided options.
 func (x *UserInterfaceCompressionOptions) OptionsByAddingOptions(options *UserInterfaceCompressionOptions) *UserInterfaceCompressionOptions {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsByAddingOptions:"), objref.IDOf(options))
 	return UserInterfaceCompressionOptionsFromID(_r)
 }
 
-// Creates a new compression options object with the supplied options removed.
+// OptionsByRemovingOptions creates a new compression options object with the supplied options removed.
 func (x *UserInterfaceCompressionOptions) OptionsByRemovingOptions(options *UserInterfaceCompressionOptions) *UserInterfaceCompressionOptions {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsByRemovingOptions:"), objref.IDOf(options))
 	return UserInterfaceCompressionOptionsFromID(_r)
 }
 
+// IsEmpty wraps the corresponding Objective-C method.
 func (x *UserInterfaceCompressionOptions) IsEmpty() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEmpty"))
 	return _r

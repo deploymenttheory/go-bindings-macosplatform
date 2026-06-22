@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that modifies the content of a remote notification before it’s delivered to the user.
-//
 // NotificationServiceExtension is an idiomatic wrapper over the Objective-C class UNNotificationServiceExtension.
+//
+// An object that modifies the content of a remote notification before it’s delivered to the user.
 type NotificationServiceExtension struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func NotificationServiceExtensionFromID(id objc.ID) *NotificationServiceExtensio
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationServiceExtension{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NotificationServiceExtension{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func notificationServiceExtensionAdopt(id objc.ID) *NotificationServiceExtension
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationServiceExtension{Handle: objref.Wrap(id)}
+	x := &NotificationServiceExtension{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,16 +61,22 @@ func (x *NotificationServiceExtension) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationServiceExtension) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNotificationServiceExtension creates a new NotificationServiceExtension.
 func NewNotificationServiceExtension() *NotificationServiceExtension {
 	_id := objc.Send[objc.ID](objc.ID(_class("UNNotificationServiceExtension")), objc.RegisterName("new"))
 	return notificationServiceExtensionAdopt(_id)
 }
 
-// Asks you to make any needed changes to the notification and notify the system when you’re done.
+// DidReceiveNotificationRequestWithContentHandler asks you to make any needed changes to the notification and notify the system when you’re done.
 //
 // DidReceiveNotificationRequestWithContentHandler blocks until the operation completes or ctx is cancelled.
-func (x *NotificationServiceExtension) DidReceiveNotificationRequestWithContentHandler(ctx context.Context, request *NotificationRequest) (*NotificationContent, error) {
+func (x *NotificationServiceExtension) DidReceiveNotificationRequestWithContentHandler(ctx context.Context, request *NotificationRequest) (result *NotificationContent, err error) {
 	type _result struct {
 		val *NotificationContent
 		err error
@@ -89,7 +97,7 @@ func (x *NotificationServiceExtension) DidReceiveNotificationRequestWithContentH
 	}
 }
 
-// Tells you that the system is terminating your extension.
+// ServiceExtensionTimeWillExpire tells you that the system is terminating your extension.
 func (x *NotificationServiceExtension) ServiceExtensionTimeWillExpire() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceExtensionTimeWillExpire"))
 }

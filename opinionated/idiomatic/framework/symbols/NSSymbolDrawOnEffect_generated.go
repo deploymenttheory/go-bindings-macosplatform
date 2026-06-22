@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A symbol effect that applies the DrawOn animation to symbol images.
-//
 // SymbolDrawOnEffect is an idiomatic wrapper over the Objective-C class NSSymbolDrawOnEffect.
+//
+// It embeds [SymbolEffect], promoting that type's methods.
+//
+// A symbol effect that applies the DrawOn animation to symbol images.
 type SymbolDrawOnEffect struct {
-	objref.Handle
+	SymbolEffect
 }
 
 // SymbolDrawOnEffectFromID adopts an existing Objective-C object as a SymbolDrawOnEffect
@@ -25,7 +26,8 @@ func SymbolDrawOnEffectFromID(id objc.ID) *SymbolDrawOnEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolDrawOnEffect{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SymbolDrawOnEffect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func symbolDrawOnEffectAdopt(id objc.ID) *SymbolDrawOnEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolDrawOnEffect{Handle: objref.Wrap(id)}
+	x := &SymbolDrawOnEffect{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SymbolDrawOnEffect) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SymbolDrawOnEffect) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SymbolDrawOnEffect) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSymbolDrawOnEffect creates a new SymbolDrawOnEffect.
@@ -64,19 +52,19 @@ func NewSymbolDrawOnEffect() *SymbolDrawOnEffect {
 	return symbolDrawOnEffectAdopt(_id)
 }
 
-// Returns a copy of the effect requesting an animation that applies separately to each motion group.
+// EffectWithByLayer returns a copy of the effect requesting an animation that applies separately to each motion group.
 func (x *SymbolDrawOnEffect) EffectWithByLayer() *SymbolDrawOnEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
 	return SymbolDrawOnEffectFromID(_r)
 }
 
-// Returns a copy of the effect requesting an animation that applies to all motion groups simultaneously.
+// EffectWithWholeSymbol returns a copy of the effect requesting an animation that applies to all motion groups simultaneously.
 func (x *SymbolDrawOnEffect) EffectWithWholeSymbol() *SymbolDrawOnEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolDrawOnEffectFromID(_r)
 }
 
-// Returns a copy of the effect requesting an animation that applies separately to each motion group, where only one motion group is active at a time.
+// EffectWithIndividually returns a copy of the effect requesting an animation that applies separately to each motion group, where only one motion group is active at a time.
 func (x *SymbolDrawOnEffect) EffectWithIndividually() *SymbolDrawOnEffect {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithIndividually"))
 	return SymbolDrawOnEffectFromID(_r)
@@ -91,3 +79,5 @@ type SymbolDrawOnEffectable interface {
 }
 
 var _ SymbolDrawOnEffectable = (*SymbolDrawOnEffect)(nil)
+
+var _ SymbolEffectProvider = (*SymbolDrawOnEffect)(nil)

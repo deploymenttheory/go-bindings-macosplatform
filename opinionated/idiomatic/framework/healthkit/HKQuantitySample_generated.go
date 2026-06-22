@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A sample that represents a quantity, including the value and the units.
-//
 // QuantitySample is an idiomatic wrapper over the Objective-C class HKQuantitySample.
+//
+// QuantitySample is an abstract base — you do not construct it directly. Construct one of [CumulativeQuantitySample], [DiscreteQuantitySample] and pass it where a QuantitySample is accepted.
+//
+// A sample that represents a quantity, including the value and the units.
 type QuantitySample struct {
-	objref.Handle
+	Sample
 }
 
 // QuantitySampleFromID adopts an existing Objective-C object as a QuantitySample
@@ -25,7 +26,8 @@ func QuantitySampleFromID(id objc.ID) *QuantitySample {
 	if id == 0 {
 		return nil
 	}
-	x := &QuantitySample{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QuantitySample{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,43 +40,25 @@ func quantitySampleAdopt(id objc.ID) *QuantitySample {
 	if id == 0 {
 		return nil
 	}
-	x := &QuantitySample{Handle: objref.Wrap(id)}
+	x := &QuantitySample{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *QuantitySample) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *QuantitySample) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *QuantitySample) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewQuantitySample creates a new QuantitySample.
-func NewQuantitySample() *QuantitySample {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKQuantitySample")), objc.RegisterName("new"))
-	return quantitySampleAdopt(_id)
-}
-
+// QuantityType wraps the corresponding Objective-C method.
 func (x *QuantitySample) QuantityType() *QuantityType {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("quantityType"))
 	return QuantityTypeFromID(_r)
 }
 
+// Quantity wraps the corresponding Objective-C method.
 func (x *QuantitySample) Quantity() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("quantity"))
 	return QuantityFromID(_r)
 }
 
-// The number of individual values making up the receiver's quantity. Requests for the individual series quantities can be made using HKQuantitySeriesSampleQuery.
+// Count the number of individual values making up the receiver's quantity. Requests for the individual series quantities can be made using HKQuantitySeriesSampleQuery.
 func (x *QuantitySample) Count() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
 	return _r
@@ -89,3 +73,14 @@ type QuantitySampleable interface {
 }
 
 var _ QuantitySampleable = (*QuantitySample)(nil)
+
+// isQuantitySample marks QuantitySample — and, by embedding promotion, its
+// subclasses — as a member of the QuantitySample hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *QuantitySample) isQuantitySample() {}
+
+var _ QuantitySampleProvider = (*QuantitySample)(nil)
+
+var _ SampleProvider = (*QuantitySample)(nil)
+
+var _ ObjectProvider = (*QuantitySample)(nil)

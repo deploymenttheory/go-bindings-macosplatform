@@ -14,133 +14,110 @@ func KAXTrustedCheckOptionPrompt() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kAXTrustedCheckOptionPrompt")))
 }
 
-// A dictionary (a <code>CFDictionaryRef</code>) of two or more font keys. The dictionary associated with this attribute must contain the {
 // KAXFontTextAttribute returns the value of the constant kAXFontTextAttribute.
 func KAXFontTextAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kAXFontTextAttribute")))
 }
 
-// A <code>CGColorRef</code> value that describes the foreground color.
 // KAXForegroundColorTextAttribute returns the value of the constant kAXForegroundColorTextAttribute.
 func KAXForegroundColorTextAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kAXForegroundColorTextAttribute")))
 }
 
-// A <code>CGColorRef</code> value that describes the background color.
 // KAXBackgroundColorTextAttribute returns the value of the constant kAXBackgroundColorTextAttribute.
 func KAXBackgroundColorTextAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kAXBackgroundColorTextAttribute")))
 }
 
-// A <code>CGColorRef</code> value that describes the color of the underlining.
 // KAXUnderlineColorTextAttribute returns the value of the constant kAXUnderlineColorTextAttribute.
 func KAXUnderlineColorTextAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kAXUnderlineColorTextAttribute")))
 }
 
-// A <code>CGColorRef</code> value that describes the color of the strikethrough.
 // KAXStrikethroughColorTextAttribute returns the value of the constant kAXStrikethroughColorTextAttribute.
 func KAXStrikethroughColorTextAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kAXStrikethroughColorTextAttribute")))
 }
 
-// A <code>CFNumberRef</code> value that describes the underline style (see {
 // KAXUnderlineTextAttribute returns the value of the constant kAXUnderlineTextAttribute.
 func KAXUnderlineTextAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kAXUnderlineTextAttribute")))
 }
 
-// A <code>CFNumberRef</code> value that indicates whether the text is superscript (value > 0) or subscript (value < 0).
 // KAXSuperscriptTextAttribute returns the value of the constant kAXSuperscriptTextAttribute.
 func KAXSuperscriptTextAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kAXSuperscriptTextAttribute")))
 }
 
-// A <code>CFBooleanRef</code> value that indicates whether the text displays strikethrough.
 // KAXStrikethroughTextAttribute returns the value of the constant kAXStrikethroughTextAttribute.
 func KAXStrikethroughTextAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kAXStrikethroughTextAttribute")))
 }
 
-// A <code>CFBooleanRef</code> value that indicates whether the text displays shadow.
 // KAXShadowTextAttribute returns the value of the constant kAXShadowTextAttribute.
 func KAXShadowTextAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kAXShadowTextAttribute")))
 }
 
-// An <code>AXUIElementRef</code> value for the accessibility object representing the text attachment.
 // KAXAttachmentTextAttribute returns the value of the constant kAXAttachmentTextAttribute.
 func KAXAttachmentTextAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kAXAttachmentTextAttribute")))
 }
 
-// An <code>AXUIElementRef</code> value used to access the object to which the specified range of text links.
 // KAXLinkTextAttribute returns the value of the constant kAXLinkTextAttribute.
 func KAXLinkTextAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kAXLinkTextAttribute")))
 }
 
-// A <code>CFStringRef</code> value that indicates the language in which the text will be spoken aloud by the system.
 // KAXNaturalLanguageTextAttribute returns the value of the constant kAXNaturalLanguageTextAttribute.
 func KAXNaturalLanguageTextAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kAXNaturalLanguageTextAttribute")))
 }
 
-// A <code>CFStringRef</code> value that indicates the string that will replace the text.
 // KAXReplacementStringTextAttribute returns the value of the constant kAXReplacementStringTextAttribute.
 func KAXReplacementStringTextAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kAXReplacementStringTextAttribute")))
 }
 
-// A <code>CFBooleanRef</code> value that indicates whether the text is misspelled.
 // KAXMisspelledTextAttribute returns the value of the constant kAXMisspelledTextAttribute.
 func KAXMisspelledTextAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kAXMisspelledTextAttribute")))
 }
 
-// A <code>CFBooleanRef</code> value that indicates whether the text is visibly shown as misspelled (for example, with a squiggle underneath the text).
 // KAXMarkedMisspelledTextAttribute returns the value of the constant kAXMarkedMisspelledTextAttribute.
 func KAXMarkedMisspelledTextAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kAXMarkedMisspelledTextAttribute")))
 }
 
-// A <code>CFBooleanRef</code> value that indicates whether the text was autocorrected.
 // KAXAutocorrectedTextAttribute returns the value of the constant kAXAutocorrectedTextAttribute.
 func KAXAutocorrectedTextAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kAXAutocorrectedTextAttribute")))
 }
 
-// A <code>CFAttributedStringRef</code> value that indicates the prepended string of the list item. If the string is a common unicode character (e.g. a bullet •), return that unicode character. For lists with images before the text, return a reasonable label of the image.
 // KAXListItemPrefixTextAttribute returns the value of the constant kAXListItemPrefixTextAttribute.
 func KAXListItemPrefixTextAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kAXListItemPrefixTextAttribute")))
 }
 
-// A <code>CFNumberRef</code> value that indicates the line index. Each list item increments the index, even for unordered lists. The first item should have index 0.
 // KAXListItemIndexTextAttribute returns the value of the constant kAXListItemIndexTextAttribute.
 func KAXListItemIndexTextAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kAXListItemIndexTextAttribute")))
 }
 
-// A <code>CFNumberRef</code> value that indicates the indent level. Each sublist increments the level. The first item should have level 0.
 // KAXListItemLevelTextAttribute returns the value of the constant kAXListItemLevelTextAttribute.
 func KAXListItemLevelTextAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kAXListItemLevelTextAttribute")))
 }
 
-// Required key of the {
 // KAXFontNameKey returns the value of the constant kAXFontNameKey.
 func KAXFontNameKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kAXFontNameKey"))) }
 
-// Optional key of the {
 // KAXFontFamilyKey returns the value of the constant kAXFontFamilyKey.
 func KAXFontFamilyKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kAXFontFamilyKey"))) }
 
-// Optional key of the {
 // KAXVisibleNameKey returns the value of the constant kAXVisibleNameKey.
 func KAXVisibleNameKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kAXVisibleNameKey"))) }
 
-// Required key of the {
 // KAXFontSizeKey returns the value of the constant kAXFontSizeKey.
 func KAXFontSizeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kAXFontSizeKey"))) }
 

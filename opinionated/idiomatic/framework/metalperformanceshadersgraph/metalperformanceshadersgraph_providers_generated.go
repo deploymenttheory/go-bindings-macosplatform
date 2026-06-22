@@ -11,14 +11,17 @@ import (
 // GraphObjectProvider is accepted wherever a MPSGraphObject (or one of its subclasses) is expected.
 type GraphObjectProvider interface {
 	objref.Object
+	isGraphObject()
 }
 
 // GraphOperationProvider is accepted wherever a MPSGraphOperation (or one of its subclasses) is expected.
 type GraphOperationProvider interface {
 	objref.Object
+	isGraphOperation()
 }
 
 // GraphTypeProvider is accepted wherever a MPSGraphType (or one of its subclasses) is expected.
 type GraphTypeProvider interface {
 	objref.Object
+	isGraphType()
 }

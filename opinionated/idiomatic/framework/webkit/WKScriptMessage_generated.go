@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that encapsulates a message sent by JavaScript code from a webpage.
-//
 // WKScriptMessage is an idiomatic wrapper over the Objective-C class WKScriptMessage.
+//
+// An object that encapsulates a message sent by JavaScript code from a webpage.
 type WKScriptMessage struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKScriptMessageFromID(id objc.ID) *WKScriptMessage {
 	if id == 0 {
 		return nil
 	}
-	x := &WKScriptMessage{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKScriptMessage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKScriptMessageAdopt(id objc.ID) *WKScriptMessage {
 	if id == 0 {
 		return nil
 	}
-	x := &WKScriptMessage{Handle: objref.Wrap(id)}
+	x := &WKScriptMessage{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,37 @@ func (x *WKScriptMessage) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKScriptMessage) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKScriptMessage creates a new WKScriptMessage.
 func NewWKScriptMessage() *WKScriptMessage {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKScriptMessage")), objc.RegisterName("new"))
 	return wKScriptMessageAdopt(_id)
 }
 
-// The body of the message. Allowed types are NSNumber, NSString, NSDate, NSArray, NSDictionary, and NSNull.
+// Body the body of the message. Allowed types are NSNumber, NSString, NSDate, NSArray, NSDictionary, and NSNull.
 func (x *WKScriptMessage) Body() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("body"))
 	return obj.Wrap(_r)
 }
 
-// The web view sending the message.
+// WebView the web view sending the message.
 func (x *WKScriptMessage) WebView() *WKWebView {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webView"))
 	return WKWebViewFromID(_r)
 }
 
-// The frame sending the message.
+// FrameInfo the frame sending the message.
 func (x *WKScriptMessage) FrameInfo() *WKFrameInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frameInfo"))
 	return WKFrameInfoFromID(_r)
 }
 
-// The name of the message handler to which the message is sent.
+// Name the name of the message handler to which the message is sent.
 func (x *WKScriptMessage) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -91,7 +99,7 @@ func (x *WKScriptMessage) Name() string {
 	return purego.GoString(_r)
 }
 
-// The content world from which the message was sent.
+// World the content world from which the message was sent.
 func (x *WKScriptMessage) World() *WKContentWorld {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("world"))
 	return WKContentWorldFromID(_r)

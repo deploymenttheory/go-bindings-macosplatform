@@ -23,6 +23,8 @@ const (
 	IndexErrorCodeMismatchedClientState   IndexErrorCode = -1006
 )
 
+// String returns the IndexErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e IndexErrorCode) String() string {
 	switch e {
 	case IndexErrorCodeUnknownError:
@@ -56,6 +58,8 @@ const (
 	SearchQueryErrorCodeCancelled        SearchQueryErrorCode = -2003
 )
 
+// String returns the SearchQueryErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SearchQueryErrorCode) String() string {
 	switch e {
 	case SearchQueryErrorCodeUnknown:
@@ -81,6 +85,8 @@ const (
 	SearchQuerySourceOptionAllowMail SearchQuerySourceOptions = 1
 )
 
+// String returns the SearchQuerySourceOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SearchQuerySourceOptions) String() string {
 	var parts []string
 	if e&SearchQuerySourceOptionAllowMail != 0 {
@@ -101,6 +107,8 @@ const (
 	SearchableItemUpdateListenerOptionPriority      SearchableItemUpdateListenerOptions = 4
 )
 
+// String returns the SearchableItemUpdateListenerOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SearchableItemUpdateListenerOptions) String() string {
 	var parts []string
 	if e&SearchableItemUpdateListenerOptionSummarization != 0 {
@@ -124,6 +132,8 @@ const (
 	SuggestionKindDefault SuggestionKind = 2
 )
 
+// String returns the SuggestionKind constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SuggestionKind) String() string {
 	switch e {
 	case SuggestionKindNone:
@@ -145,6 +155,8 @@ const (
 	UserInteractionFocus   UserInteraction = 1
 )
 
+// String returns the UserInteraction constant's name, or its numeric form when the
+// value is not a known constant.
 func (e UserInteraction) String() string {
 	switch e {
 	case UserInteractionSelect:

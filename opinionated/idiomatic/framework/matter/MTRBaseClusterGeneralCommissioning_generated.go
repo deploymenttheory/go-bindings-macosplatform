@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBaseClusterGeneralCommissioning is an idiomatic wrapper over the Objective-C class MTRBaseClusterGeneralCommissioning.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
 type MTRBaseClusterGeneralCommissioning struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterGeneralCommissioningFromID adopts an existing Objective-C object as a MTRBaseClusterGeneralCommissioning
@@ -25,7 +26,8 @@ func MTRBaseClusterGeneralCommissioningFromID(id objc.ID) *MTRBaseClusterGeneral
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterGeneralCommissioning{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterGeneralCommissioning{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func mTRBaseClusterGeneralCommissioningAdopt(id objc.ID) *MTRBaseClusterGeneralC
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterGeneralCommissioning{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterGeneralCommissioning{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterGeneralCommissioning) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterGeneralCommissioning) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterGeneralCommissioning) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterGeneralCommissioningWithDeviceEndpointIDQueue creates a new MTRBaseClusterGeneralCommissioning.
+// NewMTRBaseClusterGeneralCommissioningWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterGeneralCommissioningWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterGeneralCommissioning {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterGeneralCommissioning")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -74,10 +60,10 @@ func NewMTRBaseClusterGeneralCommissioningWithDeviceEndpointQueue(device *MTRBas
 	return mTRBaseClusterGeneralCommissioningAdopt(_id)
 }
 
-// Command ArmFailSafe This command is used to arm or disarm the fail-safe timer.
+// ArmFailSafeWithParamsCompletion command ArmFailSafe This command is used to arm or disarm the fail-safe timer.
 //
 // ArmFailSafeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) ArmFailSafeWithParamsCompletion(ctx context.Context, params *MTRGeneralCommissioningClusterArmFailSafeParams) (*MTRGeneralCommissioningClusterArmFailSafeResponseParams, error) {
+func (x *MTRBaseClusterGeneralCommissioning) ArmFailSafeWithParamsCompletion(ctx context.Context, params *MTRGeneralCommissioningClusterArmFailSafeParams) (result *MTRGeneralCommissioningClusterArmFailSafeResponseParams, err error) {
 	type _result struct {
 		val *MTRGeneralCommissioningClusterArmFailSafeResponseParams
 		err error
@@ -99,10 +85,10 @@ func (x *MTRBaseClusterGeneralCommissioning) ArmFailSafeWithParamsCompletion(ctx
 	}
 }
 
-// Command SetRegulatoryConfig This command is used to set the regulatory configuration for the device.
+// SetRegulatoryConfigWithParamsCompletion command SetRegulatoryConfig This command is used to set the regulatory configuration for the device.
 //
 // SetRegulatoryConfigWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) SetRegulatoryConfigWithParamsCompletion(ctx context.Context, params *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) (*MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams, error) {
+func (x *MTRBaseClusterGeneralCommissioning) SetRegulatoryConfigWithParamsCompletion(ctx context.Context, params *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) (result *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams, err error) {
 	type _result struct {
 		val *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams
 		err error
@@ -124,10 +110,10 @@ func (x *MTRBaseClusterGeneralCommissioning) SetRegulatoryConfigWithParamsComple
 	}
 }
 
-// Command CommissioningComplete This command is used to indicate that the commissioning process is complete.
+// CommissioningCompleteWithParamsCompletion command CommissioningComplete This command is used to indicate that the commissioning process is complete.
 //
 // CommissioningCompleteWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) CommissioningCompleteWithParamsCompletion(ctx context.Context, params *MTRGeneralCommissioningClusterCommissioningCompleteParams) (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, error) {
+func (x *MTRBaseClusterGeneralCommissioning) CommissioningCompleteWithParamsCompletion(ctx context.Context, params *MTRGeneralCommissioningClusterCommissioningCompleteParams) (result *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, err error) {
 	type _result struct {
 		val *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
 		err error
@@ -149,8 +135,10 @@ func (x *MTRBaseClusterGeneralCommissioning) CommissioningCompleteWithParamsComp
 	}
 }
 
+// CommissioningCompleteWithCompletion wraps the corresponding Objective-C method.
+//
 // CommissioningCompleteWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) CommissioningCompleteWithCompletion(ctx context.Context) (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, error) {
+func (x *MTRBaseClusterGeneralCommissioning) CommissioningCompleteWithCompletion(ctx context.Context) (result *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, err error) {
 	type _result struct {
 		val *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
 		err error
@@ -172,8 +160,10 @@ func (x *MTRBaseClusterGeneralCommissioning) CommissioningCompleteWithCompletion
 	}
 }
 
+// ReadAttributeBreadcrumbWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeBreadcrumbWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeBreadcrumbWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeBreadcrumbWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -195,8 +185,10 @@ func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeBreadcrumbWithCompleti
 	}
 }
 
+// SubscribeAttributeBreadcrumbWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeBreadcrumbWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeBreadcrumbWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeBreadcrumbWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -218,8 +210,10 @@ func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeBreadcrumbWithPar
 	}
 }
 
+// ReadAttributeBasicCommissioningInfoWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeBasicCommissioningInfoWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeBasicCommissioningInfoWithCompletion(ctx context.Context) (*MTRGeneralCommissioningClusterBasicCommissioningInfo, error) {
+func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeBasicCommissioningInfoWithCompletion(ctx context.Context) (result *MTRGeneralCommissioningClusterBasicCommissioningInfo, err error) {
 	type _result struct {
 		val *MTRGeneralCommissioningClusterBasicCommissioningInfo
 		err error
@@ -241,8 +235,10 @@ func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeBasicCommissioningInfo
 	}
 }
 
+// SubscribeAttributeBasicCommissioningInfoWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeBasicCommissioningInfoWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeBasicCommissioningInfoWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRGeneralCommissioningClusterBasicCommissioningInfo, error) {
+func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeBasicCommissioningInfoWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRGeneralCommissioningClusterBasicCommissioningInfo, err error) {
 	type _result struct {
 		val *MTRGeneralCommissioningClusterBasicCommissioningInfo
 		err error
@@ -264,8 +260,10 @@ func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeBasicCommissionin
 	}
 }
 
+// ReadAttributeRegulatoryConfigWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRegulatoryConfigWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeRegulatoryConfigWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeRegulatoryConfigWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -287,8 +285,10 @@ func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeRegulatoryConfigWithCo
 	}
 }
 
+// SubscribeAttributeRegulatoryConfigWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRegulatoryConfigWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeRegulatoryConfigWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeRegulatoryConfigWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -310,8 +310,10 @@ func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeRegulatoryConfigW
 	}
 }
 
+// ReadAttributeLocationCapabilityWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeLocationCapabilityWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeLocationCapabilityWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeLocationCapabilityWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -333,8 +335,10 @@ func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeLocationCapabilityWith
 	}
 }
 
+// SubscribeAttributeLocationCapabilityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLocationCapabilityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeLocationCapabilityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeLocationCapabilityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -356,8 +360,10 @@ func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeLocationCapabilit
 	}
 }
 
+// ReadAttributeSupportsConcurrentConnectionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSupportsConcurrentConnectionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeSupportsConcurrentConnectionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeSupportsConcurrentConnectionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -379,8 +385,10 @@ func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeSupportsConcurrentConn
 	}
 }
 
+// SubscribeAttributeSupportsConcurrentConnectionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSupportsConcurrentConnectionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeSupportsConcurrentConnectionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeSupportsConcurrentConnectionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -402,8 +410,10 @@ func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeSupportsConcurren
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -425,8 +435,10 @@ func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeGeneratedCommandListWi
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -448,8 +460,10 @@ func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeGeneratedCommandL
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -471,8 +485,10 @@ func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeAcceptedCommandListWit
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -494,8 +510,10 @@ func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeAcceptedCommandLi
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -517,8 +535,10 @@ func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeAttributeListWithCompl
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -540,8 +560,10 @@ func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeAttributeListWith
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -563,8 +585,10 @@ func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeFeatureMapWithCompleti
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -586,8 +610,10 @@ func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeFeatureMapWithPar
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -609,8 +635,10 @@ func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeClusterRevisionWithCom
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -632,8 +660,10 @@ func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeClusterRevisionWi
 	}
 }
 
+// ArmFailSafeWithParams wraps the corresponding Objective-C method.
+//
 // ArmFailSafeWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) ArmFailSafeWithParams(ctx context.Context, params *MTRGeneralCommissioningClusterArmFailSafeParams) (*MTRGeneralCommissioningClusterArmFailSafeResponseParams, error) {
+func (x *MTRBaseClusterGeneralCommissioning) ArmFailSafeWithParams(ctx context.Context, params *MTRGeneralCommissioningClusterArmFailSafeParams) (result *MTRGeneralCommissioningClusterArmFailSafeResponseParams, err error) {
 	type _result struct {
 		val *MTRGeneralCommissioningClusterArmFailSafeResponseParams
 		err error
@@ -655,8 +685,10 @@ func (x *MTRBaseClusterGeneralCommissioning) ArmFailSafeWithParams(ctx context.C
 	}
 }
 
+// SetRegulatoryConfigWithParams wraps the corresponding Objective-C method.
+//
 // SetRegulatoryConfigWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) SetRegulatoryConfigWithParams(ctx context.Context, params *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) (*MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams, error) {
+func (x *MTRBaseClusterGeneralCommissioning) SetRegulatoryConfigWithParams(ctx context.Context, params *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) (result *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams, err error) {
 	type _result struct {
 		val *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams
 		err error
@@ -678,8 +710,10 @@ func (x *MTRBaseClusterGeneralCommissioning) SetRegulatoryConfigWithParams(ctx c
 	}
 }
 
+// CommissioningCompleteWithParams wraps the corresponding Objective-C method.
+//
 // CommissioningCompleteWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) CommissioningCompleteWithParams(ctx context.Context, params *MTRGeneralCommissioningClusterCommissioningCompleteParams) (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, error) {
+func (x *MTRBaseClusterGeneralCommissioning) CommissioningCompleteWithParams(ctx context.Context, params *MTRGeneralCommissioningClusterCommissioningCompleteParams) (result *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, err error) {
 	type _result struct {
 		val *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
 		err error
@@ -701,8 +735,10 @@ func (x *MTRBaseClusterGeneralCommissioning) CommissioningCompleteWithParams(ctx
 	}
 }
 
+// CommissioningComplete wraps the corresponding Objective-C method.
+//
 // CommissioningComplete blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) CommissioningComplete(ctx context.Context) (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, error) {
+func (x *MTRBaseClusterGeneralCommissioning) CommissioningComplete(ctx context.Context) (result *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, err error) {
 	type _result struct {
 		val *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
 		err error
@@ -724,8 +760,10 @@ func (x *MTRBaseClusterGeneralCommissioning) CommissioningComplete(ctx context.C
 	}
 }
 
+// ReadAttributeBreadcrumb wraps the corresponding Objective-C method.
+//
 // ReadAttributeBreadcrumb blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeBreadcrumb(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeBreadcrumb(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -747,8 +785,10 @@ func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeBreadcrumb(ctx context
 	}
 }
 
+// SubscribeAttributeBreadcrumbWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeBreadcrumbWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeBreadcrumbWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeBreadcrumbWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -770,8 +810,10 @@ func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeBreadcrumbWithMin
 	}
 }
 
+// ReadAttributeBasicCommissioningInfo wraps the corresponding Objective-C method.
+//
 // ReadAttributeBasicCommissioningInfo blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeBasicCommissioningInfo(ctx context.Context) (*MTRGeneralCommissioningClusterBasicCommissioningInfo, error) {
+func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeBasicCommissioningInfo(ctx context.Context) (result *MTRGeneralCommissioningClusterBasicCommissioningInfo, err error) {
 	type _result struct {
 		val *MTRGeneralCommissioningClusterBasicCommissioningInfo
 		err error
@@ -793,8 +835,10 @@ func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeBasicCommissioningInfo
 	}
 }
 
+// SubscribeAttributeBasicCommissioningInfoWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeBasicCommissioningInfoWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeBasicCommissioningInfoWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (*MTRGeneralCommissioningClusterBasicCommissioningInfo, error) {
+func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeBasicCommissioningInfoWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result *MTRGeneralCommissioningClusterBasicCommissioningInfo, err error) {
 	type _result struct {
 		val *MTRGeneralCommissioningClusterBasicCommissioningInfo
 		err error
@@ -816,8 +860,10 @@ func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeBasicCommissionin
 	}
 }
 
+// ReadAttributeRegulatoryConfig wraps the corresponding Objective-C method.
+//
 // ReadAttributeRegulatoryConfig blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeRegulatoryConfig(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeRegulatoryConfig(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -839,8 +885,10 @@ func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeRegulatoryConfig(ctx c
 	}
 }
 
+// SubscribeAttributeRegulatoryConfigWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRegulatoryConfigWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeRegulatoryConfigWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeRegulatoryConfigWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -862,8 +910,10 @@ func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeRegulatoryConfigW
 	}
 }
 
+// ReadAttributeLocationCapability wraps the corresponding Objective-C method.
+//
 // ReadAttributeLocationCapability blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeLocationCapability(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeLocationCapability(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -885,8 +935,10 @@ func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeLocationCapability(ctx
 	}
 }
 
+// SubscribeAttributeLocationCapabilityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeLocationCapabilityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeLocationCapabilityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeLocationCapabilityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -908,8 +960,10 @@ func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeLocationCapabilit
 	}
 }
 
+// ReadAttributeSupportsConcurrentConnection wraps the corresponding Objective-C method.
+//
 // ReadAttributeSupportsConcurrentConnection blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeSupportsConcurrentConnection(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeSupportsConcurrentConnection(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -931,8 +985,10 @@ func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeSupportsConcurrentConn
 	}
 }
 
+// SubscribeAttributeSupportsConcurrentConnectionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSupportsConcurrentConnectionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeSupportsConcurrentConnectionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeSupportsConcurrentConnectionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -954,8 +1010,10 @@ func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeSupportsConcurren
 	}
 }
 
+// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -977,8 +1035,10 @@ func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeGeneratedCommandList(c
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1000,8 +1060,10 @@ func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeGeneratedCommandL
 	}
 }
 
+// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1023,8 +1085,10 @@ func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeAcceptedCommandList(ct
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1046,8 +1110,10 @@ func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeAcceptedCommandLi
 	}
 }
 
+// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeAttributeList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1069,8 +1135,10 @@ func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeAttributeList(ctx cont
 	}
 }
 
+// SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1092,8 +1160,10 @@ func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeAttributeListWith
 	}
 }
 
+// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1115,8 +1185,10 @@ func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeFeatureMap(ctx context
 	}
 }
 
+// SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1138,8 +1210,10 @@ func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeFeatureMapWithMin
 	}
 }
 
+// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1161,8 +1235,10 @@ func (x *MTRBaseClusterGeneralCommissioning) ReadAttributeClusterRevision(ctx co
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterGeneralCommissioning) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1238,3 +1314,7 @@ type MTRBaseClusterGeneralCommissioningable interface {
 }
 
 var _ MTRBaseClusterGeneralCommissioningable = (*MTRBaseClusterGeneralCommissioning)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterGeneralCommissioning)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterGeneralCommissioning)(nil)

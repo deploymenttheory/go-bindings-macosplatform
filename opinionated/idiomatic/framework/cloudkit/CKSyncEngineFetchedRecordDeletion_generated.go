@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes the deletion of an individual record.
-//
 // SyncEngineFetchedRecordDeletion is an idiomatic wrapper over the Objective-C class CKSyncEngineFetchedRecordDeletion.
+//
+// An object that describes the deletion of an individual record.
 type SyncEngineFetchedRecordDeletion struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SyncEngineFetchedRecordDeletionFromID(id objc.ID) *SyncEngineFetchedRecordD
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineFetchedRecordDeletion{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SyncEngineFetchedRecordDeletion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func syncEngineFetchedRecordDeletionAdopt(id objc.ID) *SyncEngineFetchedRecordDe
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineFetchedRecordDeletion{Handle: objref.Wrap(id)}
+	x := &SyncEngineFetchedRecordDeletion{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *SyncEngineFetchedRecordDeletion) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncEngineFetchedRecordDeletion) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSyncEngineFetchedRecordDeletion creates a new SyncEngineFetchedRecordDeletion.
 func NewSyncEngineFetchedRecordDeletion() *SyncEngineFetchedRecordDeletion {
 	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineFetchedRecordDeletion")), objc.RegisterName("new"))
 	return syncEngineFetchedRecordDeletionAdopt(_id)
 }
 
-// The deleted record's unique identifier.
+// RecordID the deleted record's unique identifier.
 func (x *SyncEngineFetchedRecordDeletion) RecordID() *RecordID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordID"))
 	return RecordIDFromID(_r)
 }
 
-// The record type of the deleted record.
+// RecordType the record type of the deleted record.
 func (x *SyncEngineFetchedRecordDeletion) RecordType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordType"))
 	return obj.Wrap(_r)

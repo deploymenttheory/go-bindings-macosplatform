@@ -24,6 +24,8 @@ const (
 	KSCNetworkConnectionDisconnecting SCNetworkConnectionStatus = 3
 )
 
+// String returns the SCNetworkConnectionStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SCNetworkConnectionStatus) String() string {
 	switch e {
 	case KSCNetworkConnectionInvalid:

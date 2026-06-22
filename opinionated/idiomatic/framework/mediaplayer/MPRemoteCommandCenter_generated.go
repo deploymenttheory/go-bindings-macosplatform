@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that responds to remote control events sent by external accessories and system controls.
-//
 // RemoteCommandCenter is an idiomatic wrapper over the Objective-C class MPRemoteCommandCenter.
+//
+// An object that responds to remote control events sent by external accessories and system controls.
 type RemoteCommandCenter struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RemoteCommandCenterFromID(id objc.ID) *RemoteCommandCenter {
 	if id == 0 {
 		return nil
 	}
-	x := &RemoteCommandCenter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RemoteCommandCenter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func remoteCommandCenterAdopt(id objc.ID) *RemoteCommandCenter {
 	if id == 0 {
 		return nil
 	}
-	x := &RemoteCommandCenter{Handle: objref.Wrap(id)}
+	x := &RemoteCommandCenter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,107 +60,133 @@ func (x *RemoteCommandCenter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RemoteCommandCenter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRemoteCommandCenter creates a new RemoteCommandCenter.
 func NewRemoteCommandCenter() *RemoteCommandCenter {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPRemoteCommandCenter")), objc.RegisterName("new"))
 	return remoteCommandCenterAdopt(_id)
 }
 
+// PauseCommand wraps the corresponding Objective-C method.
 func (x *RemoteCommandCenter) PauseCommand() *RemoteCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseCommand"))
 	return RemoteCommandFromID(_r)
 }
 
+// PlayCommand wraps the corresponding Objective-C method.
 func (x *RemoteCommandCenter) PlayCommand() *RemoteCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playCommand"))
 	return RemoteCommandFromID(_r)
 }
 
+// StopCommand wraps the corresponding Objective-C method.
 func (x *RemoteCommandCenter) StopCommand() *RemoteCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopCommand"))
 	return RemoteCommandFromID(_r)
 }
 
+// TogglePlayPauseCommand wraps the corresponding Objective-C method.
 func (x *RemoteCommandCenter) TogglePlayPauseCommand() *RemoteCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("togglePlayPauseCommand"))
 	return RemoteCommandFromID(_r)
 }
 
+// EnableLanguageOptionCommand wraps the corresponding Objective-C method.
 func (x *RemoteCommandCenter) EnableLanguageOptionCommand() *RemoteCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enableLanguageOptionCommand"))
 	return RemoteCommandFromID(_r)
 }
 
+// DisableLanguageOptionCommand wraps the corresponding Objective-C method.
 func (x *RemoteCommandCenter) DisableLanguageOptionCommand() *RemoteCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disableLanguageOptionCommand"))
 	return RemoteCommandFromID(_r)
 }
 
+// ChangePlaybackRateCommand wraps the corresponding Objective-C method.
 func (x *RemoteCommandCenter) ChangePlaybackRateCommand() *ChangePlaybackRateCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changePlaybackRateCommand"))
 	return ChangePlaybackRateCommandFromID(_r)
 }
 
+// ChangeRepeatModeCommand wraps the corresponding Objective-C method.
 func (x *RemoteCommandCenter) ChangeRepeatModeCommand() *ChangeRepeatModeCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeRepeatModeCommand"))
 	return ChangeRepeatModeCommandFromID(_r)
 }
 
+// ChangeShuffleModeCommand wraps the corresponding Objective-C method.
 func (x *RemoteCommandCenter) ChangeShuffleModeCommand() *ChangeShuffleModeCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeShuffleModeCommand"))
 	return ChangeShuffleModeCommandFromID(_r)
 }
 
+// NextTrackCommand wraps the corresponding Objective-C method.
 func (x *RemoteCommandCenter) NextTrackCommand() *RemoteCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextTrackCommand"))
 	return RemoteCommandFromID(_r)
 }
 
+// PreviousTrackCommand wraps the corresponding Objective-C method.
 func (x *RemoteCommandCenter) PreviousTrackCommand() *RemoteCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousTrackCommand"))
 	return RemoteCommandFromID(_r)
 }
 
+// SkipForwardCommand wraps the corresponding Objective-C method.
 func (x *RemoteCommandCenter) SkipForwardCommand() *SkipIntervalCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skipForwardCommand"))
 	return SkipIntervalCommandFromID(_r)
 }
 
+// SkipBackwardCommand wraps the corresponding Objective-C method.
 func (x *RemoteCommandCenter) SkipBackwardCommand() *SkipIntervalCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skipBackwardCommand"))
 	return SkipIntervalCommandFromID(_r)
 }
 
+// SeekForwardCommand wraps the corresponding Objective-C method.
 func (x *RemoteCommandCenter) SeekForwardCommand() *RemoteCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seekForwardCommand"))
 	return RemoteCommandFromID(_r)
 }
 
+// SeekBackwardCommand wraps the corresponding Objective-C method.
 func (x *RemoteCommandCenter) SeekBackwardCommand() *RemoteCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seekBackwardCommand"))
 	return RemoteCommandFromID(_r)
 }
 
+// ChangePlaybackPositionCommand wraps the corresponding Objective-C method.
 func (x *RemoteCommandCenter) ChangePlaybackPositionCommand() *ChangePlaybackPositionCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changePlaybackPositionCommand"))
 	return ChangePlaybackPositionCommandFromID(_r)
 }
 
+// RatingCommand wraps the corresponding Objective-C method.
 func (x *RemoteCommandCenter) RatingCommand() *RatingCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ratingCommand"))
 	return RatingCommandFromID(_r)
 }
 
+// LikeCommand wraps the corresponding Objective-C method.
 func (x *RemoteCommandCenter) LikeCommand() *FeedbackCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("likeCommand"))
 	return FeedbackCommandFromID(_r)
 }
 
+// DislikeCommand wraps the corresponding Objective-C method.
 func (x *RemoteCommandCenter) DislikeCommand() *FeedbackCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dislikeCommand"))
 	return FeedbackCommandFromID(_r)
 }
 
+// BookmarkCommand wraps the corresponding Objective-C method.
 func (x *RemoteCommandCenter) BookmarkCommand() *FeedbackCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bookmarkCommand"))
 	return FeedbackCommandFromID(_r)

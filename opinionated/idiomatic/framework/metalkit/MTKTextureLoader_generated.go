@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that creates textures from existing data in common image formats.
-//
 // TextureLoader is an idiomatic wrapper over the Objective-C class MTKTextureLoader.
+//
+// An object that creates textures from existing data in common image formats.
 type TextureLoader struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func TextureLoaderFromID(id objc.ID) *TextureLoader {
 	if id == 0 {
 		return nil
 	}
-	x := &TextureLoader{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextureLoader{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func textureLoaderAdopt(id objc.ID) *TextureLoader {
 	if id == 0 {
 		return nil
 	}
-	x := &TextureLoader{Handle: objref.Wrap(id)}
+	x := &TextureLoader{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,14 +62,20 @@ func (x *TextureLoader) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextureLoader) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTextureLoader creates a new TextureLoader.
 func NewTextureLoader() *TextureLoader {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTKTextureLoader")), objc.RegisterName("new"))
 	return textureLoaderAdopt(_id)
 }
 
-// Synchronously loads image data and creates new Metal textures from the specified list of URLs.
-func (x *TextureLoader) NewTexturesWithContentsOfURLsOptionsError(uRLs []obj.Object, options obj.Object) ([]obj.Object, error) {
+// NewTexturesWithContentsOfURLsOptionsError synchronously loads image data and creates new Metal textures from the specified list of URLs.
+func (x *TextureLoader) NewTexturesWithContentsOfURLsOptionsError(uRLs []obj.Object, options obj.Object) (result []obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("newTexturesWithContentsOfURLs:options:error:"), purego.SliceToNSArray(uRLs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -79,7 +87,7 @@ func (x *TextureLoader) NewTexturesWithContentsOfURLsOptionsError(uRLs []obj.Obj
 // TextureLoaderable is the interface implemented by [TextureLoader], for mocking and DI.
 type TextureLoaderable interface {
 	obj.Object
-	NewTexturesWithContentsOfURLsOptionsError(uRLs []obj.Object, options obj.Object) ([]obj.Object, error)
+	NewTexturesWithContentsOfURLsOptionsError(uRLs []obj.Object, options obj.Object) (result []obj.Object, err error)
 }
 
 var _ TextureLoaderable = (*TextureLoader)(nil)

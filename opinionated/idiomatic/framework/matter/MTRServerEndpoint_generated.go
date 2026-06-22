@@ -23,7 +23,8 @@ func MTRServerEndpointFromID(id objc.ID) *MTRServerEndpoint {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRServerEndpoint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRServerEndpoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRServerEndpointAdopt(id objc.ID) *MTRServerEndpoint {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRServerEndpoint{Handle: objref.Wrap(id)}
+	x := &MTRServerEndpoint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,43 +58,50 @@ func (x *MTRServerEndpoint) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// The provided endpointID must be in the range 1-65535.  The list of device types provided must be nonempty (but may include vendor-specific device types).
-//
-// NewMTRServerEndpointWithEndpointIDDeviceTypes creates a new MTRServerEndpoint.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRServerEndpoint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRServerEndpointWithEndpointIDDeviceTypes the provided endpointID must be in the range 1-65535.  The list of device types provided must be nonempty (but may include vendor-specific device types).
 func NewMTRServerEndpointWithEndpointIDDeviceTypes(endpointID obj.Object, deviceTypes []*MTRDeviceTypeRevision) *MTRServerEndpoint {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRServerEndpoint")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEndpointID:deviceTypes:"), objref.IDOf(endpointID), purego.SliceToNSArray(deviceTypes, func(_v *MTRDeviceTypeRevision) objc.ID { return objref.IDOf(_v) }))
 	return mTRServerEndpointAdopt(_id)
 }
 
-// Add an access grant to the endpoint.  If the same access grant is added multiple times, it will be treated as if it were added once (and removing it once will remove it).
+// AddAccessGrant add an access grant to the endpoint.  If the same access grant is added multiple times, it will be treated as if it were added once (and removing it once will remove it).
 func (x *MTRServerEndpoint) AddAccessGrant(accessGrant *MTRAccessGrant) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAccessGrant:"), objref.IDOf(accessGrant))
 }
 
-// Remove an access grant from the endpoint.
+// RemoveAccessGrant remove an access grant from the endpoint.
 func (x *MTRServerEndpoint) RemoveAccessGrant(accessGrant *MTRAccessGrant) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAccessGrant:"), objref.IDOf(accessGrant))
 }
 
-// Add a server cluster to the endpoint.  This can only be done before the endpoint has been added to a controller. The cluster must not have the same cluster ID as another cluster on this endpoint. The cluster must not already be added to another endpoint.
+// AddServerCluster add a server cluster to the endpoint.  This can only be done before the endpoint has been added to a controller. The cluster must not have the same cluster ID as another cluster on this endpoint. The cluster must not already be added to another endpoint.
 func (x *MTRServerEndpoint) AddServerCluster(serverCluster *MTRServerCluster) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addServerCluster:"), objref.IDOf(serverCluster))
 	return _r
 }
 
+// EndpointID wraps the corresponding Objective-C method.
 func (x *MTRServerEndpoint) EndpointID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpointID"))
 	return obj.Wrap(_r)
 }
 
+// DeviceTypes wraps the corresponding Objective-C method.
+//
 // DeviceTypes returns the collection as a Go slice.
 func (x *MTRServerEndpoint) DeviceTypes() []*MTRDeviceTypeRevision {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTRDeviceTypeRevision { return MTRDeviceTypeRevisionFromID(_id) })
 }
 
-// The list of entities that are allowed to access all clusters on this endpoint.  If more fine-grained access control is desired, access grants should be defined on individual clusters. Defaults to empty list, which means no access granted.
+// AccessGrants the list of entities that are allowed to access all clusters on this endpoint.  If more fine-grained access control is desired, access grants should be defined on individual clusters. Defaults to empty list, which means no access granted.
 //
 // AccessGrants returns the collection as a Go slice.
 func (x *MTRServerEndpoint) AccessGrants() []*MTRAccessGrant {
@@ -100,7 +109,7 @@ func (x *MTRServerEndpoint) AccessGrants() []*MTRAccessGrant {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTRAccessGrant { return MTRAccessGrantFromID(_id) })
 }
 
-// A list of server clusters supported on this endpoint.  The Descriptor cluster does not need to be included unless a TagList attribute is desired on it or it has a non-empty PartsList, or it needs to have cluster-specific access grants.  If not included, the Descriptor cluster will be generated automatically.
+// ServerClusters a list of server clusters supported on this endpoint.  The Descriptor cluster does not need to be included unless a TagList attribute is desired on it or it has a non-empty PartsList, or it needs to have cluster-specific access grants.  If not included, the Descriptor cluster will be generated automatically.
 //
 // ServerClusters returns the collection as a Go slice.
 func (x *MTRServerEndpoint) ServerClusters() []*MTRServerCluster {

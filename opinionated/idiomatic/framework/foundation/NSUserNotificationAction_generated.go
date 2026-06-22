@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An action that the user can take in response to receiving a notification.
-//
 // UserNotificationAction is an idiomatic wrapper over the Objective-C class NSUserNotificationAction.
+//
+// An action that the user can take in response to receiving a notification.
 type UserNotificationAction struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func UserNotificationActionFromID(id objc.ID) *UserNotificationAction {
 	if id == 0 {
 		return nil
 	}
-	x := &UserNotificationAction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UserNotificationAction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func userNotificationActionAdopt(id objc.ID) *UserNotificationAction {
 	if id == 0 {
 		return nil
 	}
-	x := &UserNotificationAction{Handle: objref.Wrap(id)}
+	x := &UserNotificationAction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +60,25 @@ func (x *UserNotificationAction) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UserNotificationAction) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewUserNotificationAction creates a new UserNotificationAction.
 func NewUserNotificationAction() *UserNotificationAction {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSUserNotificationAction")), objc.RegisterName("new"))
 	return userNotificationActionAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UserNotificationAction) WithScriptingProperties(scriptingProperties obj.Object) *UserNotificationAction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *UserNotificationAction) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -78,6 +87,7 @@ func (x *UserNotificationAction) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *UserNotificationAction) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {

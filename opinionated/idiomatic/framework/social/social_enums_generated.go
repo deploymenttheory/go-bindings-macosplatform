@@ -22,6 +22,8 @@ const (
 	RequestMethodPUT RequestMethod = 3
 )
 
+// String returns the RequestMethod constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RequestMethod) String() string {
 	switch e {
 	case RequestMethodGET:

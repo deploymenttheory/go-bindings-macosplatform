@@ -24,6 +24,8 @@ const (
 	BarcodeCompositeTypeGS1TypeC BarcodeCompositeType = 4
 )
 
+// String returns the BarcodeCompositeType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BarcodeCompositeType) String() string {
 	switch e {
 	case BarcodeCompositeTypeNone:
@@ -53,6 +55,8 @@ const (
 	ChiralityRight Chirality = 1
 )
 
+// String returns the Chirality constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Chirality) String() string {
 	switch e {
 	case ChiralityUnknown:
@@ -78,6 +82,8 @@ const (
 	ElementTypeDouble ElementType = 2
 )
 
+// String returns the ElementType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ElementType) String() string {
 	switch e {
 	case ElementTypeUnknown:
@@ -145,6 +151,8 @@ const (
 	ErrorUnsupportedComputeDevice ErrorCode = 22
 )
 
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ErrorCode) String() string {
 	switch e {
 	case ErrorTuriCoreErrorCode:
@@ -210,6 +218,8 @@ const (
 	GenerateOpticalFlowRequestComputationAccuracyVeryHigh GenerateOpticalFlowRequestComputationAccuracy = 3
 )
 
+// String returns the GenerateOpticalFlowRequestComputationAccuracy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GenerateOpticalFlowRequestComputationAccuracy) String() string {
 	switch e {
 	case GenerateOpticalFlowRequestComputationAccuracyLow:
@@ -234,6 +244,8 @@ const (
 	GeneratePersonSegmentationRequestQualityLevelFast     GeneratePersonSegmentationRequestQualityLevel = 2
 )
 
+// String returns the GeneratePersonSegmentationRequestQualityLevel constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GeneratePersonSegmentationRequestQualityLevel) String() string {
 	switch e {
 	case GeneratePersonSegmentationRequestQualityLevelAccurate:
@@ -255,6 +267,8 @@ const (
 	HumanBodyPose3DObservationHeightEstimationMeasured  HumanBodyPose3DObservationHeightEstimation = 1
 )
 
+// String returns the HumanBodyPose3DObservationHeightEstimation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HumanBodyPose3DObservationHeightEstimation) String() string {
 	switch e {
 	case HumanBodyPose3DObservationHeightEstimationReference:
@@ -282,6 +296,8 @@ const (
 	ImageCropAndScaleOptionScaleFillRotate90CCW ImageCropAndScaleOption = 258
 )
 
+// String returns the ImageCropAndScaleOption constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ImageCropAndScaleOption) String() string {
 	switch e {
 	case ImageCropAndScaleOptionCenterCrop:
@@ -308,6 +324,8 @@ const (
 	PointsClassificationClosedPath   PointsClassification = 2
 )
 
+// String returns the PointsClassification constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PointsClassification) String() string {
 	switch e {
 	case PointsClassificationDisconnected:
@@ -333,6 +351,8 @@ const (
 	RequestFaceLandmarksConstellation76Points RequestFaceLandmarksConstellation = 2
 )
 
+// String returns the RequestFaceLandmarksConstellation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RequestFaceLandmarksConstellation) String() string {
 	switch e {
 	case RequestFaceLandmarksConstellationNotDefined:
@@ -356,6 +376,8 @@ const (
 	RequestTextRecognitionLevelFast RequestTextRecognitionLevel = 1
 )
 
+// String returns the RequestTextRecognitionLevel constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RequestTextRecognitionLevel) String() string {
 	switch e {
 	case RequestTextRecognitionLevelAccurate:
@@ -377,6 +399,8 @@ const (
 	RequestTrackingLevelFast RequestTrackingLevel = 1
 )
 
+// String returns the RequestTrackingLevel constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RequestTrackingLevel) String() string {
 	switch e {
 	case RequestTrackingLevelAccurate:
@@ -398,6 +422,8 @@ const (
 	TrackOpticalFlowRequestComputationAccuracyVeryHigh TrackOpticalFlowRequestComputationAccuracy = 3
 )
 
+// String returns the TrackOpticalFlowRequestComputationAccuracy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TrackOpticalFlowRequestComputationAccuracy) String() string {
 	switch e {
 	case TrackOpticalFlowRequestComputationAccuracyLow:

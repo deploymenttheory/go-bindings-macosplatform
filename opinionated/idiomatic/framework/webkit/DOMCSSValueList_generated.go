@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMCSSValueList is an idiomatic wrapper over the Objective-C class DOMCSSValueList.
+//
+// It embeds [DOMCSSValue], promoting that type's methods.
 type DOMCSSValueList struct {
-	objref.Handle
+	DOMCSSValue
 }
 
 // DOMCSSValueListFromID adopts an existing Objective-C object as a DOMCSSValueList
@@ -23,7 +24,8 @@ func DOMCSSValueListFromID(id objc.ID) *DOMCSSValueList {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMCSSValueList{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMCSSValueList{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMCSSValueListAdopt(id objc.ID) *DOMCSSValueList {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMCSSValueList{Handle: objref.Wrap(id)}
+	x := &DOMCSSValueList{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMCSSValueList) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMCSSValueList) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMCSSValueList) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMCSSValueList creates a new DOMCSSValueList.
@@ -62,17 +50,19 @@ func NewDOMCSSValueList() *DOMCSSValueList {
 	return dOMCSSValueListAdopt(_id)
 }
 
-// WithCssText sets cssText and returns the receiver so calls can be chained.
+// WithCssText sets the property and returns the receiver so calls can be chained.
 func (x *DOMCSSValueList) WithCssText(cssText string) *DOMCSSValueList {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
 	return x
 }
 
+// Item wraps the corresponding Objective-C method.
 func (x *DOMCSSValueList) Item(index int) *DOMCSSValue {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
 	return DOMCSSValueFromID(_r)
 }
 
+// Length wraps the corresponding Objective-C method.
 func (x *DOMCSSValueList) Length() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
 	return _r
@@ -87,3 +77,9 @@ type DOMCSSValueListable interface {
 }
 
 var _ DOMCSSValueListable = (*DOMCSSValueList)(nil)
+
+var _ DOMCSSValueProvider = (*DOMCSSValueList)(nil)
+
+var _ DOMObjectProvider = (*DOMCSSValueList)(nil)
+
+var _ WebScriptObjectProvider = (*DOMCSSValueList)(nil)

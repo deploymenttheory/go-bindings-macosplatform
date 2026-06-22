@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A finite-state machine—a collection of state objects that each define logic for a particular state of gameplay and rules for transitioning between states.
-//
 // StateMachine is an idiomatic wrapper over the Objective-C class GKStateMachine.
+//
+// A finite-state machine—a collection of state objects that each define logic for a particular state of gameplay and rules for transitioning between states.
 type StateMachine struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func StateMachineFromID(id objc.ID) *StateMachine {
 	if id == 0 {
 		return nil
 	}
-	x := &StateMachine{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StateMachine{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func stateMachineAdopt(id objc.ID) *StateMachine {
 	if id == 0 {
 		return nil
 	}
-	x := &StateMachine{Handle: objref.Wrap(id)}
+	x := &StateMachine{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +60,25 @@ func (x *StateMachine) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a state machine with the specified states.
-//
-// NewStateMachineWithStates creates a new StateMachine.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StateMachine) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewStateMachineWithStates initializes a state machine with the specified states.
 func NewStateMachineWithStates(states []*State) *StateMachine {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKStateMachine")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStates:"), purego.SliceToNSArray(states, func(_v *State) objc.ID { return objref.IDOf(_v) }))
 	return stateMachineAdopt(_id)
 }
 
-// Tells the current state object to perform per-frame updates.
+// UpdateWithDeltaTime tells the current state object to perform per-frame updates.
 func (x *StateMachine) UpdateWithDeltaTime(sec float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithDeltaTime:"), sec)
 }
 
-// The current state that the state machine is in. Prior to the first called to enterState this is equal to nil.
+// CurrentState the current state that the state machine is in. Prior to the first called to enterState this is equal to nil.
 func (x *StateMachine) CurrentState() *State {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentState"))
 	return StateFromID(_r)

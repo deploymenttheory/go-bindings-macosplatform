@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages the input parameters for mixing audio tracks.
-//
 // AudioMix is an idiomatic wrapper over the Objective-C class AVAudioMix.
+//
+// AudioMix is an abstract base — you do not construct it directly. Construct one of [MutableAudioMix] and pass it where a AudioMix is accepted.
+//
+// An object that manages the input parameters for mixing audio tracks.
 type AudioMix struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func AudioMixFromID(id objc.ID) *AudioMix {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioMix{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioMix{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func audioMixAdopt(id objc.ID) *AudioMix {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioMix{Handle: objref.Wrap(id)}
+	x := &AudioMix{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +62,14 @@ func (x *AudioMix) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewAudioMix creates a new AudioMix.
-func NewAudioMix() *AudioMix {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioMix")), objc.RegisterName("new"))
-	return audioMixAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioMix) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// InputParameters wraps the corresponding Objective-C method.
+//
 // InputParameters returns the collection as a Go slice.
 func (x *AudioMix) InputParameters() []*AudioMixInputParameters {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputParameters"))
@@ -77,3 +83,10 @@ type AudioMixable interface {
 }
 
 var _ AudioMixable = (*AudioMix)(nil)
+
+// isAudioMix marks AudioMix — and, by embedding promotion, its
+// subclasses — as a member of the AudioMix hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AudioMix) isAudioMix() {}
+
+var _ AudioMixProvider = (*AudioMix)(nil)

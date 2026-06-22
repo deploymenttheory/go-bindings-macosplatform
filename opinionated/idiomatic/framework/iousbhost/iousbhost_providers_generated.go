@@ -11,9 +11,11 @@ import (
 // HostIOSourceProvider is accepted wherever a IOUSBHostIOSource (or one of its subclasses) is expected.
 type HostIOSourceProvider interface {
 	objref.Object
+	isHostIOSource()
 }
 
 // HostObjectProvider is accepted wherever a IOUSBHostObject (or one of its subclasses) is expected.
 type HostObjectProvider interface {
 	objref.Object
+	isHostObject()
 }

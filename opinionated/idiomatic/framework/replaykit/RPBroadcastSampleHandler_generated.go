@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that processes buffer objects as received from ReplayKit.
-//
 // BroadcastSampleHandler is an idiomatic wrapper over the Objective-C class RPBroadcastSampleHandler.
+//
+// It embeds [BroadcastHandler], promoting that type's methods.
+//
+// An object that processes buffer objects as received from ReplayKit.
 type BroadcastSampleHandler struct {
-	objref.Handle
+	BroadcastHandler
 }
 
 // BroadcastSampleHandlerFromID adopts an existing Objective-C object as a BroadcastSampleHandler
@@ -25,7 +26,8 @@ func BroadcastSampleHandlerFromID(id objc.ID) *BroadcastSampleHandler {
 	if id == 0 {
 		return nil
 	}
-	x := &BroadcastSampleHandler{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BroadcastSampleHandler{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func broadcastSampleHandlerAdopt(id objc.ID) *BroadcastSampleHandler {
 	if id == 0 {
 		return nil
 	}
-	x := &BroadcastSampleHandler{Handle: objref.Wrap(id)}
+	x := &BroadcastSampleHandler{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *BroadcastSampleHandler) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BroadcastSampleHandler) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BroadcastSampleHandler) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewBroadcastSampleHandler creates a new BroadcastSampleHandler.
@@ -64,32 +52,32 @@ func NewBroadcastSampleHandler() *BroadcastSampleHandler {
 	return broadcastSampleHandlerAdopt(_id)
 }
 
-// Perform any required actions after starting a live broadcast.
+// BroadcastStartedWithSetupInfo perform any required actions after starting a live broadcast.
 func (x *BroadcastSampleHandler) BroadcastStartedWithSetupInfo(setupInfo obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("broadcastStartedWithSetupInfo:"), objref.IDOf(setupInfo))
 }
 
-// Perform any required actions after a live broadcast is paused.
+// BroadcastPaused perform any required actions after a live broadcast is paused.
 func (x *BroadcastSampleHandler) BroadcastPaused() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("broadcastPaused"))
 }
 
-// Perform any required actions after a live broadcast is resumed.
+// BroadcastResumed perform any required actions after a live broadcast is resumed.
 func (x *BroadcastSampleHandler) BroadcastResumed() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("broadcastResumed"))
 }
 
-// Perform any required actions after a live broadcast is finished.
+// BroadcastFinished perform any required actions after a live broadcast is finished.
 func (x *BroadcastSampleHandler) BroadcastFinished() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("broadcastFinished"))
 }
 
-// Perform any required actions after starting a live broadcast.
+// BroadcastAnnotatedWithApplicationInfo perform any required actions after starting a live broadcast.
 func (x *BroadcastSampleHandler) BroadcastAnnotatedWithApplicationInfo(applicationInfo obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("broadcastAnnotatedWithApplicationInfo:"), objref.IDOf(applicationInfo))
 }
 
-// Processes video and audio data as it becomes available during a live broadcast.
+// ProcessSampleBufferWithType processes video and audio data as it becomes available during a live broadcast.
 func (x *BroadcastSampleHandler) ProcessSampleBufferWithType(sampleBuffer obj.Object, sampleBufferType SampleBufferType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processSampleBuffer:withType:"), objref.IDOf(sampleBuffer), sampleBufferType)
 }
@@ -106,3 +94,5 @@ type BroadcastSampleHandlerable interface {
 }
 
 var _ BroadcastSampleHandlerable = (*BroadcastSampleHandler)(nil)
+
+var _ BroadcastHandlerProvider = (*BroadcastSampleHandler)(nil)

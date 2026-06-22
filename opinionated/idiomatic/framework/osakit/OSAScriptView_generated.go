@@ -23,7 +23,8 @@ func ScriptViewFromID(id objc.ID) *ScriptView {
 	if id == 0 {
 		return nil
 	}
-	x := &ScriptView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScriptView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func scriptViewAdopt(id objc.ID) *ScriptView {
 	if id == 0 {
 		return nil
 	}
-	x := &ScriptView{Handle: objref.Wrap(id)}
+	x := &ScriptView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,54 +58,61 @@ func (x *ScriptView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScriptView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewScriptView creates a new ScriptView.
 func NewScriptView() *ScriptView {
 	_id := objc.Send[objc.ID](objc.ID(_class("OSAScriptView")), objc.RegisterName("new"))
 	return scriptViewAdopt(_id)
 }
 
-// WithSource sets source and returns the receiver so calls can be chained.
+// WithSource sets the property and returns the receiver so calls can be chained.
 func (x *ScriptView) WithSource(source string) *ScriptView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSource:"), purego.NSString(source))
 	return x
 }
 
-// WithUsesScriptAssistant sets usesScriptAssistant and returns the receiver so calls can be chained.
+// WithUsesScriptAssistant sets the property and returns the receiver so calls can be chained.
 func (x *ScriptView) WithUsesScriptAssistant(usesScriptAssistant bool) *ScriptView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesScriptAssistant:"), usesScriptAssistant)
 	return x
 }
 
-// WithUsesTabs sets usesTabs and returns the receiver so calls can be chained.
+// WithUsesTabs sets the property and returns the receiver so calls can be chained.
 func (x *ScriptView) WithUsesTabs(usesTabs bool) *ScriptView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesTabs:"), usesTabs)
 	return x
 }
 
-// WithTabWidth sets tabWidth and returns the receiver so calls can be chained.
+// WithTabWidth sets the property and returns the receiver so calls can be chained.
 func (x *ScriptView) WithTabWidth(tabWidth int) *ScriptView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabWidth:"), tabWidth)
 	return x
 }
 
-// WithWrapsLines sets wrapsLines and returns the receiver so calls can be chained.
+// WithWrapsLines sets the property and returns the receiver so calls can be chained.
 func (x *ScriptView) WithWrapsLines(wrapsLines bool) *ScriptView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWrapsLines:"), wrapsLines)
 	return x
 }
 
-// WithIndentsWrappedLines sets indentsWrappedLines and returns the receiver so calls can be chained.
+// WithIndentsWrappedLines sets the property and returns the receiver so calls can be chained.
 func (x *ScriptView) WithIndentsWrappedLines(indentsWrappedLines bool) *ScriptView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndentsWrappedLines:"), indentsWrappedLines)
 	return x
 }
 
-// WithIndentWidth sets indentWidth and returns the receiver so calls can be chained.
+// WithIndentWidth sets the property and returns the receiver so calls can be chained.
 func (x *ScriptView) WithIndentWidth(indentWidth int) *ScriptView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndentWidth:"), indentWidth)
 	return x
 }
 
+// Source wraps the corresponding Objective-C method.
 func (x *ScriptView) Source() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
 	if _r == 0 {
@@ -112,60 +121,73 @@ func (x *ScriptView) Source() string {
 	return purego.GoString(_r)
 }
 
+// SetSource wraps the corresponding Objective-C method.
 func (x *ScriptView) SetSource(source string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSource:"), purego.NSString(source))
 }
 
+// UsesScriptAssistant wraps the corresponding Objective-C method.
 func (x *ScriptView) UsesScriptAssistant() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesScriptAssistant"))
 	return _r
 }
 
+// SetUsesScriptAssistant wraps the corresponding Objective-C method.
 func (x *ScriptView) SetUsesScriptAssistant(usesScriptAssistant bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesScriptAssistant:"), usesScriptAssistant)
 }
 
+// UsesTabs wraps the corresponding Objective-C method.
 func (x *ScriptView) UsesTabs() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesTabs"))
 	return _r
 }
 
+// SetUsesTabs wraps the corresponding Objective-C method.
 func (x *ScriptView) SetUsesTabs(usesTabs bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesTabs:"), usesTabs)
 }
 
+// TabWidth wraps the corresponding Objective-C method.
 func (x *ScriptView) TabWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("tabWidth"))
 	return _r
 }
 
+// SetTabWidth wraps the corresponding Objective-C method.
 func (x *ScriptView) SetTabWidth(tabWidth int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabWidth:"), tabWidth)
 }
 
+// WrapsLines wraps the corresponding Objective-C method.
 func (x *ScriptView) WrapsLines() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wrapsLines"))
 	return _r
 }
 
+// SetWrapsLines wraps the corresponding Objective-C method.
 func (x *ScriptView) SetWrapsLines(wrapsLines bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWrapsLines:"), wrapsLines)
 }
 
+// IndentsWrappedLines wraps the corresponding Objective-C method.
 func (x *ScriptView) IndentsWrappedLines() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("indentsWrappedLines"))
 	return _r
 }
 
+// SetIndentsWrappedLines wraps the corresponding Objective-C method.
 func (x *ScriptView) SetIndentsWrappedLines(indentsWrappedLines bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndentsWrappedLines:"), indentsWrappedLines)
 }
 
+// IndentWidth wraps the corresponding Objective-C method.
 func (x *ScriptView) IndentWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indentWidth"))
 	return _r
 }
 
+// SetIndentWidth wraps the corresponding Objective-C method.
 func (x *ScriptView) SetIndentWidth(indentWidth int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndentWidth:"), indentWidth)
 }

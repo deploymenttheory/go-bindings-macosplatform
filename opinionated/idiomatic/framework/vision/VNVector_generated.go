@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable 2D vector represented by its x-axis and y-axis projections.
-//
 // Vector is an idiomatic wrapper over the Objective-C class VNVector.
+//
+// An immutable 2D vector represented by its x-axis and y-axis projections.
 type Vector struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VectorFromID(id objc.ID) *Vector {
 	if id == 0 {
 		return nil
 	}
-	x := &Vector{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Vector{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func vectorAdopt(id objc.ID) *Vector {
 	if id == 0 {
 		return nil
 	}
-	x := &Vector{Handle: objref.Wrap(id)}
+	x := &Vector{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,64 +60,64 @@ func (x *Vector) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new vector in Cartesian coordinate space, based on its x-axis and y-axis projections.
-//
-// NewVectorWithXComponentYComponent creates a new Vector.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Vector) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVectorWithXComponentYComponent creates a new vector in Cartesian coordinate space, based on its x-axis and y-axis projections.
 func NewVectorWithXComponentYComponent(x float64, y float64) *Vector {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNVector")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithXComponent:yComponent:"), x, y)
 	return vectorAdopt(_id)
 }
 
-// Creates a new vector in polar coordinate space.
-//
-// NewVectorWithRTheta creates a new Vector.
+// NewVectorWithRTheta creates a new vector in polar coordinate space.
 func NewVectorWithRTheta(r float64, theta float64) *Vector {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNVector")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithR:theta:"), r, theta)
 	return vectorAdopt(_id)
 }
 
-// Creates a new vector in Cartesian coordinate space.
-//
-// NewVectorWithVectorHeadTail creates a new Vector.
+// NewVectorWithVectorHeadTail creates a new vector in Cartesian coordinate space.
 func NewVectorWithVectorHeadTail(head *Point, tail *Point) *Vector {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNVector")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVectorHead:tail:"), objref.IDOf(head), objref.IDOf(tail))
 	return vectorAdopt(_id)
 }
 
-// Signed projection on X-axis, or X component of the vector. Sign determines direction the vector is facing in X direction.
+// X signed projection on X-axis, or X component of the vector. Sign determines direction the vector is facing in X direction.
 func (x *Vector) X() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("x"))
 	return _r
 }
 
-// Signed projection on Y-axis, or Y component of the vector. Sign determines direction the vector is facing in Y direction.
+// Y signed projection on Y-axis, or Y component of the vector. Sign determines direction the vector is facing in Y direction.
 func (x *Vector) Y() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("y"))
 	return _r
 }
 
-// Radius, or absolute value, or length of the vector.
+// R radius, or absolute value, or length of the vector.
 func (x *Vector) R() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("r"))
 	return _r
 }
 
-// Angle between the vector direction and positive direction of X axis.
+// Theta angle between the vector direction and positive direction of X axis.
 func (x *Vector) Theta() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("theta"))
 	return _r
 }
 
-// Returns a length, or absolute value, of the vector.
+// Length returns a length, or absolute value, of the vector.
 func (x *Vector) Length() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("length"))
 	return _r
 }
 
-// Returns a length ^ 2 of a vector.
+// SquaredLength returns a length ^ 2 of a vector.
 func (x *Vector) SquaredLength() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("squaredLength"))
 	return _r

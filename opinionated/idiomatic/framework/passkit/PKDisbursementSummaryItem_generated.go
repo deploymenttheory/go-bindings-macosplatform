@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A summary item that represents a disbursement.
-//
 // DisbursementSummaryItem is an idiomatic wrapper over the Objective-C class PKDisbursementSummaryItem.
+//
+// It embeds [PaymentSummaryItem], promoting that type's methods.
+//
+// A summary item that represents a disbursement.
 type DisbursementSummaryItem struct {
-	objref.Handle
+	PaymentSummaryItem
 }
 
 // DisbursementSummaryItemFromID adopts an existing Objective-C object as a DisbursementSummaryItem
@@ -25,7 +26,8 @@ func DisbursementSummaryItemFromID(id objc.ID) *DisbursementSummaryItem {
 	if id == 0 {
 		return nil
 	}
-	x := &DisbursementSummaryItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DisbursementSummaryItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func disbursementSummaryItemAdopt(id objc.ID) *DisbursementSummaryItem {
 	if id == 0 {
 		return nil
 	}
-	x := &DisbursementSummaryItem{Handle: objref.Wrap(id)}
+	x := &DisbursementSummaryItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DisbursementSummaryItem) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DisbursementSummaryItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DisbursementSummaryItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDisbursementSummaryItem creates a new DisbursementSummaryItem.
@@ -64,25 +52,19 @@ func NewDisbursementSummaryItem() *DisbursementSummaryItem {
 	return disbursementSummaryItemAdopt(_id)
 }
 
-// A short, localized description of the item.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a short, localized description of the item.
 func (x *DisbursementSummaryItem) WithLabel(label string) *DisbursementSummaryItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The summary item’s amount.
-//
-// WithAmount sets amount and returns the receiver so calls can be chained.
+// WithAmount the summary item’s amount.
 func (x *DisbursementSummaryItem) WithAmount(amount obj.Object) *DisbursementSummaryItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 	return x
 }
 
-// The summary item’s type that indicates whether the amount is final.
-//
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithType the summary item’s type that indicates whether the amount is final.
 func (x *DisbursementSummaryItem) WithType(type_ PaymentSummaryItemType) *DisbursementSummaryItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
@@ -97,3 +79,5 @@ type DisbursementSummaryItemable interface {
 }
 
 var _ DisbursementSummaryItemable = (*DisbursementSummaryItem)(nil)
+
+var _ PaymentSummaryItemProvider = (*DisbursementSummaryItem)(nil)

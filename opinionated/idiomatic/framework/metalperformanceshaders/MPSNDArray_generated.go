@@ -10,9 +10,12 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // NDArray is an idiomatic wrapper over the Objective-C class MPSNDArray.
+//
+// NDArray is an abstract base — you do not construct it directly. Construct one of [TemporaryNDArray] and pass it where a NDArray is accepted.
 type NDArray struct {
 	objref.Handle
 }
@@ -23,7 +26,8 @@ func NDArrayFromID(id objc.ID) *NDArray {
 	if id == 0 {
 		return nil
 	}
-	x := &NDArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NDArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +40,8 @@ func nDArrayAdopt(id objc.ID) *NDArray {
 	if id == 0 {
 		return nil
 	}
-	x := &NDArray{Handle: objref.Wrap(id)}
+	x := &NDArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,45 +61,52 @@ func (x *NDArray) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewNDArray creates a new NDArray.
-func NewNDArray() *NDArray {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArray")), objc.RegisterName("new"))
-	return nDArrayAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NDArray) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// A used specified string to help identify the array during debugging. May be externally visible to tools like Instruments
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a used specified string to help identify the array during debugging. May be externally visible to tools like Instruments
 func (x *NDArray) WithLabel(label string) *NDArray {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The number of elements in the dimension at dimensionIndex The dimension length is at least as large as the existing slice length.  Views of this MPSNDArray may have differing dimension lengths.
+// LengthOfDimension the number of elements in the dimension at dimensionIndex The dimension length is at least as large as the existing slice length.  Views of this MPSNDArray may have differing dimension lengths.
 func (x *NDArray) LengthOfDimension(dimensionIndex int) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("lengthOfDimension:"), dimensionIndex)
 	return _r
 }
 
-// Create a MPSNDArrayDescriptor that describes this MPSNDArray The descriptor will describe the shape of the MPSNDArray after all deferred slicing and transposes have completed. A new descriptor is created each time to allow for further customization of the descriptor by the application.
+// Descriptor create a MPSNDArrayDescriptor that describes this MPSNDArray The descriptor will describe the shape of the MPSNDArray after all deferred slicing and transposes have completed. A new descriptor is created each time to allow for further customization of the descriptor by the application.
 func (x *NDArray) Descriptor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
 	return obj.Wrap(_r)
 }
 
-// Get the number of bytes used to allocate underyling MTLResources This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSNDArray instantiation and MTLBuffer is not included. It only measures the size of the allocation used to hold the MPSNDArray data in the MTLBuffer. This value is subject to change between different devices and operating systems. Except when -initWithBuffer:descriptor: is used, most MPSNDArrays are allocated initiallly without a backing store. The backing store is allocated lazily when it is needed, typically when the MPSNDArray is written to the first time. Consequently, in most cases, it should be inexpensive to make a MPSImage to see how much memory it will need, and release it if it is too large.
+// ResourceSize get the number of bytes used to allocate underyling MTLResources This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSNDArray instantiation and MTLBuffer is not included. It only measures the size of the allocation used to hold the MPSNDArray data in the MTLBuffer. This value is subject to change between different devices and operating systems. Except when -initWithBuffer:descriptor: is used, most MPSNDArrays are allocated initiallly without a backing store. The backing store is allocated lazily when it is needed, typically when the MPSNDArray is written to the first time. Consequently, in most cases, it should be inexpensive to make a MPSImage to see how much memory it will need, and release it if it is too large.
 func (x *NDArray) ResourceSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resourceSize"))
 	return _r
 }
 
-// Make a new representation of a MPSNDArray with a slice, transpose or other change in property, trying to alias to result. The same as `arrayViewWithCommandBuffer`, except that tries to always alias, and therefore does not require a commanbuffer. If aliasing is not possible nil is returned. This method is useful in making aliasing transposes and slices, that are guaranteed to be able to alias. For reshapes it is recommended to use the `MPSNDArrayIdentity` methods.
+// ArrayViewWithDescriptor make a new representation of a MPSNDArray with a slice, transpose or other change in property, trying to alias to result. The same as `arrayViewWithCommandBuffer`, except that tries to always alias, and therefore does not require a commanbuffer. If aliasing is not possible nil is returned. This method is useful in making aliasing transposes and slices, that are guaranteed to be able to alias. For reshapes it is recommended to use the `MPSNDArrayIdentity` methods.
 func (x *NDArray) ArrayViewWithDescriptor(descriptor obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrayViewWithDescriptor:"), objref.IDOf(descriptor))
 	return obj.Wrap(_r)
 }
 
-// A used specified string to help identify the array during debugging. May be externally visible to tools like Instruments
+// ArrayViewWithDimensionCountDimensionSizesStrides make a new representation of a MPSNDArray with given strides and a new shape. This operation always returns a new view of the same underlying MTLBuffer, but works only with contiguous buffers.
+func (x *NDArray) ArrayViewWithDimensionCountDimensionSizesStrides(numberOfDimensions int) (result obj.Object, dimensionSizes int, dimStrides int) {
+	var _out0 int
+	var _out1 int
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrayViewWithDimensionCount:dimensionSizes:strides:"), numberOfDimensions, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_v := obj.Wrap(_r)
+	return _v, _out0, _out1
+}
+
+// Label a used specified string to help identify the array during debugging. May be externally visible to tools like Instruments
 func (x *NDArray) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -103,23 +115,24 @@ func (x *NDArray) Label() string {
 	return purego.GoString(_r)
 }
 
+// SetLabel wraps the corresponding Objective-C method.
 func (x *NDArray) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// The size of one element in the MPSNDArray
+// DataTypeSize the size of one element in the MPSNDArray
 func (x *NDArray) DataTypeSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataTypeSize"))
 	return _r
 }
 
-// Number of dimensions in the NDArray
+// NumberOfDimensions number of dimensions in the NDArray
 func (x *NDArray) NumberOfDimensions() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfDimensions"))
 	return _r
 }
 
-// The parent MPSNDArray that this object aliases If the MPSNDArray was createrd as a array view of another MPSNDArray object, and aliases content in the same MTLBuffer, the original MPSNDArray will be retained as the parent here. Two MPSNDArrays alias if they share a common ancestor. Note that the parent may itself have a parent, and so forth.
+// Parent the parent MPSNDArray that this object aliases If the MPSNDArray was createrd as a array view of another MPSNDArray object, and aliases content in the same MTLBuffer, the original MPSNDArray will be retained as the parent here. Two MPSNDArrays alias if they share a common ancestor. Note that the parent may itself have a parent, and so forth.
 func (x *NDArray) Parent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parent"))
 	return obj.Wrap(_r)
@@ -133,6 +146,7 @@ type NDArrayable interface {
 	Descriptor() obj.Object
 	ResourceSize() int
 	ArrayViewWithDescriptor(descriptor obj.Object) obj.Object
+	ArrayViewWithDimensionCountDimensionSizesStrides(numberOfDimensions int) (result obj.Object, dimensionSizes int, dimStrides int)
 	Label() string
 	SetLabel(label string)
 	DataTypeSize() int
@@ -141,3 +155,10 @@ type NDArrayable interface {
 }
 
 var _ NDArrayable = (*NDArray)(nil)
+
+// isNDArray marks NDArray — and, by embedding promotion, its
+// subclasses — as a member of the NDArray hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NDArray) isNDArray() {}
+
+var _ NDArrayProvider = (*NDArray)(nil)

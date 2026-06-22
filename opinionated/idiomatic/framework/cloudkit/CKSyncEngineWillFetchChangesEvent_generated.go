@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The sync engine is about to fetch changes from the server.
-//
 // SyncEngineWillFetchChangesEvent is an idiomatic wrapper over the Objective-C class CKSyncEngineWillFetchChangesEvent.
+//
+// It embeds [SyncEngineEvent], promoting that type's methods.
+//
+// The sync engine is about to fetch changes from the server.
 type SyncEngineWillFetchChangesEvent struct {
-	objref.Handle
+	SyncEngineEvent
 }
 
 // SyncEngineWillFetchChangesEventFromID adopts an existing Objective-C object as a SyncEngineWillFetchChangesEvent
@@ -25,7 +26,8 @@ func SyncEngineWillFetchChangesEventFromID(id objc.ID) *SyncEngineWillFetchChang
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineWillFetchChangesEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SyncEngineWillFetchChangesEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func syncEngineWillFetchChangesEventAdopt(id objc.ID) *SyncEngineWillFetchChange
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineWillFetchChangesEvent{Handle: objref.Wrap(id)}
+	x := &SyncEngineWillFetchChangesEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SyncEngineWillFetchChangesEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SyncEngineWillFetchChangesEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SyncEngineWillFetchChangesEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSyncEngineWillFetchChangesEvent creates a new SyncEngineWillFetchChangesEvent.
@@ -64,6 +52,7 @@ func NewSyncEngineWillFetchChangesEvent() *SyncEngineWillFetchChangesEvent {
 	return syncEngineWillFetchChangesEventAdopt(_id)
 }
 
+// Context wraps the corresponding Objective-C method.
 func (x *SyncEngineWillFetchChangesEvent) Context() *SyncEngineFetchChangesContext {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("context"))
 	return SyncEngineFetchChangesContextFromID(_r)
@@ -76,3 +65,5 @@ type SyncEngineWillFetchChangesEventable interface {
 }
 
 var _ SyncEngineWillFetchChangesEventable = (*SyncEngineWillFetchChangesEvent)(nil)
+
+var _ SyncEngineEventProvider = (*SyncEngineWillFetchChangesEvent)(nil)

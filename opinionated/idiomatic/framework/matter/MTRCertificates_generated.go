@@ -23,7 +23,8 @@ func MTRCertificatesFromID(id objc.ID) *MTRCertificates {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRCertificates{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRCertificates{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRCertificatesAdopt(id objc.ID) *MTRCertificates {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRCertificates{Handle: objref.Wrap(id)}
+	x := &MTRCertificates{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *MTRCertificates) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MTRCertificates) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRCertificates) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMTRCertificates creates a new MTRCertificates.

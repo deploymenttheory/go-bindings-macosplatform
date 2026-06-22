@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of constant values that specialize a graphics or compute GPU function.
-//
 // FunctionConstantValues is an idiomatic wrapper over the Objective-C class MTLFunctionConstantValues.
+//
+// A set of constant values that specialize a graphics or compute GPU function.
 type FunctionConstantValues struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FunctionConstantValuesFromID(id objc.ID) *FunctionConstantValues {
 	if id == 0 {
 		return nil
 	}
-	x := &FunctionConstantValues{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FunctionConstantValues{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func functionConstantValuesAdopt(id objc.ID) *FunctionConstantValues {
 	if id == 0 {
 		return nil
 	}
-	x := &FunctionConstantValues{Handle: objref.Wrap(id)}
+	x := &FunctionConstantValues{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *FunctionConstantValues) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FunctionConstantValues) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFunctionConstantValues creates a new FunctionConstantValues.
 func NewFunctionConstantValues() *FunctionConstantValues {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLFunctionConstantValues")), objc.RegisterName("new"))
 	return functionConstantValuesAdopt(_id)
 }
 
-// Deletes all previously set constant values.
+// Reset deletes all previously set constant values.
 func (x *FunctionConstantValues) Reset() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }

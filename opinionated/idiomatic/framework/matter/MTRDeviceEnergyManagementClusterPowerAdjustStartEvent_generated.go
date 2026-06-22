@@ -23,7 +23,8 @@ func MTRDeviceEnergyManagementClusterPowerAdjustStartEventFromID(id objc.ID) *MT
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceEnergyManagementClusterPowerAdjustStartEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDeviceEnergyManagementClusterPowerAdjustStartEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDeviceEnergyManagementClusterPowerAdjustStartEventAdopt(id objc.ID) *MTR
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceEnergyManagementClusterPowerAdjustStartEvent{Handle: objref.Wrap(id)}
+	x := &MTRDeviceEnergyManagementClusterPowerAdjustStartEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *MTRDeviceEnergyManagementClusterPowerAdjustStartEvent) IsEqual(other ob
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MTRDeviceEnergyManagementClusterPowerAdjustStartEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustStartEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMTRDeviceEnergyManagementClusterPowerAdjustStartEvent creates a new MTRDeviceEnergyManagementClusterPowerAdjustStartEvent.

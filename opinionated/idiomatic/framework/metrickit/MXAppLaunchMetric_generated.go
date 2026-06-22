@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing metrics about app launch time.
-//
 // AppLaunchMetric is an idiomatic wrapper over the Objective-C class MXAppLaunchMetric.
+//
+// It embeds [Metric], promoting that type's methods.
+//
+// An object representing metrics about app launch time.
 type AppLaunchMetric struct {
-	objref.Handle
+	Metric
 }
 
 // AppLaunchMetricFromID adopts an existing Objective-C object as a AppLaunchMetric
@@ -25,7 +26,8 @@ func AppLaunchMetricFromID(id objc.ID) *AppLaunchMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &AppLaunchMetric{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AppLaunchMetric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func appLaunchMetricAdopt(id objc.ID) *AppLaunchMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &AppLaunchMetric{Handle: objref.Wrap(id)}
+	x := &AppLaunchMetric{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AppLaunchMetric) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AppLaunchMetric) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AppLaunchMetric) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAppLaunchMetric creates a new AppLaunchMetric.
@@ -64,25 +52,25 @@ func NewAppLaunchMetric() *AppLaunchMetric {
 	return appLaunchMetricAdopt(_id)
 }
 
-// Histogrammed application time-to-first-draw data. Dimensioned as NSUnitDuration. This represents the time when the first CA commit is finished.
+// HistogrammedTimeToFirstDraw histogrammed application time-to-first-draw data. Dimensioned as NSUnitDuration. This represents the time when the first CA commit is finished.
 func (x *AppLaunchMetric) HistogrammedTimeToFirstDraw() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("histogrammedTimeToFirstDraw"))
 	return obj.Wrap(_r)
 }
 
-// Histogrammed application resume time data. Dimensioned as NSUnitDuration.
+// HistogrammedApplicationResumeTime histogrammed application resume time data. Dimensioned as NSUnitDuration.
 func (x *AppLaunchMetric) HistogrammedApplicationResumeTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("histogrammedApplicationResumeTime"))
 	return obj.Wrap(_r)
 }
 
-// Histogrammed optimized application time-to-first-draw data. Dimensioned as NSUnitDuration. This represents the time when the first CA commit is finished where the application launch has been optimized by the system. In iOS 15, the system will opportunistically start applications that are not running in the background to reduce the amount of time a user may have to wait before an application is usable. These launches can occur after a system reboot and periodically as system conditions allow.
+// HistogrammedOptimizedTimeToFirstDraw histogrammed optimized application time-to-first-draw data. Dimensioned as NSUnitDuration. This represents the time when the first CA commit is finished where the application launch has been optimized by the system. In iOS 15, the system will opportunistically start applications that are not running in the background to reduce the amount of time a user may have to wait before an application is usable. These launches can occur after a system reboot and periodically as system conditions allow.
 func (x *AppLaunchMetric) HistogrammedOptimizedTimeToFirstDraw() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("histogrammedOptimizedTimeToFirstDraw"))
 	return obj.Wrap(_r)
 }
 
-// Histogrammed extended launch data. Dimensioned as NSUnitDuration. This represents the time when the app has drawn the first frame and finishes all extended launch tasks that assigned by the developer.
+// HistogrammedExtendedLaunch histogrammed extended launch data. Dimensioned as NSUnitDuration. This represents the time when the app has drawn the first frame and finishes all extended launch tasks that assigned by the developer.
 func (x *AppLaunchMetric) HistogrammedExtendedLaunch() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("histogrammedExtendedLaunch"))
 	return obj.Wrap(_r)
@@ -98,3 +86,5 @@ type AppLaunchMetricable interface {
 }
 
 var _ AppLaunchMetricable = (*AppLaunchMetric)(nil)
+
+var _ MetricProvider = (*AppLaunchMetric)(nil)

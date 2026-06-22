@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The common configuration traits for memory balloon devices.
-//
 // MemoryBalloonDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZMemoryBalloonDeviceConfiguration.
+//
+// MemoryBalloonDeviceConfiguration is an abstract base — you do not construct it directly. Construct one of [VirtioTraditionalMemoryBalloonDeviceConfiguration] and pass it where a MemoryBalloonDeviceConfiguration is accepted.
+//
+// The common configuration traits for memory balloon devices.
 type MemoryBalloonDeviceConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func MemoryBalloonDeviceConfigurationFromID(id objc.ID) *MemoryBalloonDeviceConf
 	if id == 0 {
 		return nil
 	}
-	x := &MemoryBalloonDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MemoryBalloonDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func memoryBalloonDeviceConfigurationAdopt(id objc.ID) *MemoryBalloonDeviceConfi
 	if id == 0 {
 		return nil
 	}
-	x := &MemoryBalloonDeviceConfiguration{Handle: objref.Wrap(id)}
+	x := &MemoryBalloonDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *MemoryBalloonDeviceConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMemoryBalloonDeviceConfiguration creates a new MemoryBalloonDeviceConfiguration.
-func NewMemoryBalloonDeviceConfiguration() *MemoryBalloonDeviceConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZMemoryBalloonDeviceConfiguration")), objc.RegisterName("new"))
-	return memoryBalloonDeviceConfigurationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MemoryBalloonDeviceConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // MemoryBalloonDeviceConfigurationable is the interface implemented by [MemoryBalloonDeviceConfiguration], for mocking and DI.
@@ -70,3 +74,10 @@ type MemoryBalloonDeviceConfigurationable interface {
 }
 
 var _ MemoryBalloonDeviceConfigurationable = (*MemoryBalloonDeviceConfiguration)(nil)
+
+// isMemoryBalloonDeviceConfiguration marks MemoryBalloonDeviceConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the MemoryBalloonDeviceConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MemoryBalloonDeviceConfiguration) isMemoryBalloonDeviceConfiguration() {}
+
+var _ MemoryBalloonDeviceConfigurationProvider = (*MemoryBalloonDeviceConfiguration)(nil)

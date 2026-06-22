@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A formatter that creates string representations of time intervals.
-//
 // DateIntervalFormatter is an idiomatic wrapper over the Objective-C class NSDateIntervalFormatter.
+//
+// It embeds [Formatter], promoting that type's methods.
+//
+// A formatter that creates string representations of time intervals.
 type DateIntervalFormatter struct {
-	objref.Handle
+	Formatter
 }
 
 // DateIntervalFormatterFromID adopts an existing Objective-C object as a DateIntervalFormatter
@@ -25,7 +26,8 @@ func DateIntervalFormatterFromID(id objc.ID) *DateIntervalFormatter {
 	if id == 0 {
 		return nil
 	}
-	x := &DateIntervalFormatter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DateIntervalFormatter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func dateIntervalFormatterAdopt(id objc.ID) *DateIntervalFormatter {
 	if id == 0 {
 		return nil
 	}
-	x := &DateIntervalFormatter{Handle: objref.Wrap(id)}
+	x := &DateIntervalFormatter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DateIntervalFormatter) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DateIntervalFormatter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DateIntervalFormatter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDateIntervalFormatter creates a new DateIntervalFormatter.
@@ -64,48 +52,49 @@ func NewDateIntervalFormatter() *DateIntervalFormatter {
 	return dateIntervalFormatterAdopt(_id)
 }
 
-// WithLocale sets locale and returns the receiver so calls can be chained.
+// WithLocale sets the property and returns the receiver so calls can be chained.
 func (x *DateIntervalFormatter) WithLocale(locale *Locale) *DateIntervalFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return x
 }
 
-// WithCalendar sets calendar and returns the receiver so calls can be chained.
+// WithCalendar sets the property and returns the receiver so calls can be chained.
 func (x *DateIntervalFormatter) WithCalendar(calendar *Calendar) *DateIntervalFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return x
 }
 
-// WithTimeZone sets timeZone and returns the receiver so calls can be chained.
+// WithTimeZone sets the property and returns the receiver so calls can be chained.
 func (x *DateIntervalFormatter) WithTimeZone(timeZone *TimeZone) *DateIntervalFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	return x
 }
 
-// WithDateTemplate sets dateTemplate and returns the receiver so calls can be chained.
+// WithDateTemplate sets the property and returns the receiver so calls can be chained.
 func (x *DateIntervalFormatter) WithDateTemplate(dateTemplate StringProvider) *DateIntervalFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateTemplate:"), objref.IDOf(dateTemplate))
 	return x
 }
 
-// WithDateStyle sets dateStyle and returns the receiver so calls can be chained.
+// WithDateStyle sets the property and returns the receiver so calls can be chained.
 func (x *DateIntervalFormatter) WithDateStyle(dateStyle DateIntervalFormatterStyle) *DateIntervalFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateStyle:"), dateStyle)
 	return x
 }
 
-// WithTimeStyle sets timeStyle and returns the receiver so calls can be chained.
+// WithTimeStyle sets the property and returns the receiver so calls can be chained.
 func (x *DateIntervalFormatter) WithTimeStyle(timeStyle DateIntervalFormatterStyle) *DateIntervalFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeStyle:"), timeStyle)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *DateIntervalFormatter) WithScriptingProperties(scriptingProperties obj.Object) *DateIntervalFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// StringFromDateToDate wraps the corresponding Objective-C method.
 func (x *DateIntervalFormatter) StringFromDateToDate(fromDate *Date, toDate *Date) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromDate:toDate:"), objref.IDOf(fromDate), objref.IDOf(toDate))
 	if _r == 0 {
@@ -114,6 +103,7 @@ func (x *DateIntervalFormatter) StringFromDateToDate(fromDate *Date, toDate *Dat
 	return purego.GoString(_r)
 }
 
+// StringFromDateInterval wraps the corresponding Objective-C method.
 func (x *DateIntervalFormatter) StringFromDateInterval(dateInterval *DateInterval) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromDateInterval:"), objref.IDOf(dateInterval))
 	if _r == 0 {
@@ -122,33 +112,40 @@ func (x *DateIntervalFormatter) StringFromDateInterval(dateInterval *DateInterva
 	return purego.GoString(_r)
 }
 
+// Locale wraps the corresponding Objective-C method.
 func (x *DateIntervalFormatter) Locale() *Locale {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locale"))
 	return LocaleFromID(_r)
 }
 
+// SetLocale wraps the corresponding Objective-C method.
 func (x *DateIntervalFormatter) SetLocale(locale *Locale) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 }
 
+// Calendar wraps the corresponding Objective-C method.
 func (x *DateIntervalFormatter) Calendar() *Calendar {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendar"))
 	return CalendarFromID(_r)
 }
 
+// SetCalendar wraps the corresponding Objective-C method.
 func (x *DateIntervalFormatter) SetCalendar(calendar *Calendar) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 }
 
+// TimeZone wraps the corresponding Objective-C method.
 func (x *DateIntervalFormatter) TimeZone() *TimeZone {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeZone"))
 	return TimeZoneFromID(_r)
 }
 
+// SetTimeZone wraps the corresponding Objective-C method.
 func (x *DateIntervalFormatter) SetTimeZone(timeZone *TimeZone) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 }
 
+// DateTemplate wraps the corresponding Objective-C method.
 func (x *DateIntervalFormatter) DateTemplate() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateTemplate"))
 	if _r == 0 {
@@ -157,24 +154,29 @@ func (x *DateIntervalFormatter) DateTemplate() string {
 	return purego.GoString(_r)
 }
 
+// SetDateTemplate wraps the corresponding Objective-C method.
 func (x *DateIntervalFormatter) SetDateTemplate(dateTemplate string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateTemplate:"), purego.NSString(dateTemplate))
 }
 
+// DateStyle wraps the corresponding Objective-C method.
 func (x *DateIntervalFormatter) DateStyle() DateIntervalFormatterStyle {
 	_r := objc.Send[DateIntervalFormatterStyle](objref.IDOf(x), objc.RegisterName("dateStyle"))
 	return _r
 }
 
+// SetDateStyle wraps the corresponding Objective-C method.
 func (x *DateIntervalFormatter) SetDateStyle(dateStyle DateIntervalFormatterStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateStyle:"), dateStyle)
 }
 
+// TimeStyle wraps the corresponding Objective-C method.
 func (x *DateIntervalFormatter) TimeStyle() DateIntervalFormatterStyle {
 	_r := objc.Send[DateIntervalFormatterStyle](objref.IDOf(x), objc.RegisterName("timeStyle"))
 	return _r
 }
 
+// SetTimeStyle wraps the corresponding Objective-C method.
 func (x *DateIntervalFormatter) SetTimeStyle(timeStyle DateIntervalFormatterStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeStyle:"), timeStyle)
 }
@@ -206,3 +208,5 @@ type DateIntervalFormatterable interface {
 }
 
 var _ DateIntervalFormatterable = (*DateIntervalFormatter)(nil)
+
+var _ FormatterProvider = (*DateIntervalFormatter)(nil)

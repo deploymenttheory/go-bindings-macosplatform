@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The shared infrastructure for drawing overlays on the map surface.
-//
 // OverlayRenderer is an idiomatic wrapper over the Objective-C class MKOverlayRenderer.
+//
+// OverlayRenderer is an abstract base — you do not construct it directly. Construct one of [OverlayPathRenderer], [TileOverlayRenderer] and pass it where a OverlayRenderer is accepted.
+//
+// The shared infrastructure for drawing overlays on the map surface.
 type OverlayRenderer struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func OverlayRendererFromID(id objc.ID) *OverlayRenderer {
 	if id == 0 {
 		return nil
 	}
-	x := &OverlayRenderer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OverlayRenderer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func overlayRendererAdopt(id objc.ID) *OverlayRenderer {
 	if id == 0 {
 		return nil
 	}
-	x := &OverlayRenderer{Handle: objref.Wrap(id)}
+	x := &OverlayRenderer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,34 +62,35 @@ func (x *OverlayRenderer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewOverlayRenderer creates a new OverlayRenderer.
-func NewOverlayRenderer() *OverlayRenderer {
-	_id := objc.Send[objc.ID](objc.ID(_class("MKOverlayRenderer")), objc.RegisterName("new"))
-	return overlayRendererAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OverlayRenderer) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The amount of transparency to apply to the overlay.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the amount of transparency to apply to the overlay.
 func (x *OverlayRenderer) WithAlpha(alpha float64) *OverlayRenderer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// Invalidates the entire contents of the overlay for all zoom scales.
+// SetNeedsDisplay invalidates the entire contents of the overlay for all zoom scales.
 func (x *OverlayRenderer) SetNeedsDisplay() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay"))
 }
 
+// Alpha wraps the corresponding Objective-C method.
 func (x *OverlayRenderer) Alpha() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
 	return _r
 }
 
+// SetAlpha wraps the corresponding Objective-C method.
 func (x *OverlayRenderer) SetAlpha(alpha float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }
 
+// ContentScaleFactor wraps the corresponding Objective-C method.
 func (x *OverlayRenderer) ContentScaleFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("contentScaleFactor"))
 	return _r
@@ -102,3 +107,10 @@ type OverlayRendererable interface {
 }
 
 var _ OverlayRendererable = (*OverlayRenderer)(nil)
+
+// isOverlayRenderer marks OverlayRenderer — and, by embedding promotion, its
+// subclasses — as a member of the OverlayRenderer hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *OverlayRenderer) isOverlayRenderer() {}
+
+var _ OverlayRendererProvider = (*OverlayRenderer)(nil)

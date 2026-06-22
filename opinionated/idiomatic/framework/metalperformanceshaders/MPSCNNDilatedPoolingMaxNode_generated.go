@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a dilated max pooling filter.
-//
 // CNNDilatedPoolingMaxNode is an idiomatic wrapper over the Objective-C class MPSCNNDilatedPoolingMaxNode.
+//
+// It embeds [NNFilterNode], promoting that type's methods.
+//
+// A representation of a dilated max pooling filter.
 type CNNDilatedPoolingMaxNode struct {
-	objref.Handle
+	NNFilterNode
 }
 
 // CNNDilatedPoolingMaxNodeFromID adopts an existing Objective-C object as a CNNDilatedPoolingMaxNode
@@ -25,7 +26,8 @@ func CNNDilatedPoolingMaxNodeFromID(id objc.ID) *CNNDilatedPoolingMaxNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNDilatedPoolingMaxNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNDilatedPoolingMaxNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,66 +40,46 @@ func cNNDilatedPoolingMaxNodeAdopt(id objc.ID) *CNNDilatedPoolingMaxNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNDilatedPoolingMaxNode{Handle: objref.Wrap(id)}
+	x := &CNNDilatedPoolingMaxNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNDilatedPoolingMaxNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNDilatedPoolingMaxNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNDilatedPoolingMaxNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Init a node representing a MPSCNNPooling kernel
-//
-// NewCNNDilatedPoolingMaxNodeWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY creates a new CNNDilatedPoolingMaxNode.
+// NewCNNDilatedPoolingMaxNodeWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY init a node representing a MPSCNNPooling kernel
 func NewCNNDilatedPoolingMaxNodeWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY(sourceNode obj.Object, kernelWidth int, kernelHeight int, strideInPixelsX int, strideInPixelsY int, dilationRateX int, dilationRateY int) *CNNDilatedPoolingMaxNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNDilatedPoolingMaxNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:dilationRateX:dilationRateY:"), objref.IDOf(sourceNode), kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY, dilationRateX, dilationRateY)
 	return cNNDilatedPoolingMaxNodeAdopt(_id)
 }
 
-// Convenience initializer for MPSCNNDilatedPooling nodes with square kernels and equal dilation factors
-//
-// NewCNNDilatedPoolingMaxNodeWithSourceFilterSizeStrideDilationRate creates a new CNNDilatedPoolingMaxNode.
+// NewCNNDilatedPoolingMaxNodeWithSourceFilterSizeStrideDilationRate convenience initializer for MPSCNNDilatedPooling nodes with square kernels and equal dilation factors
 func NewCNNDilatedPoolingMaxNodeWithSourceFilterSizeStrideDilationRate(sourceNode obj.Object, size int, stride int, dilationRate int) *CNNDilatedPoolingMaxNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNDilatedPoolingMaxNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:filterSize:stride:dilationRate:"), objref.IDOf(sourceNode), size, stride, dilationRate)
 	return cNNDilatedPoolingMaxNodeAdopt(_id)
 }
 
-// Convenience initializer for MPSCNNDilatedPooling nodes with square non-overlapping kernels
-//
-// NewCNNDilatedPoolingMaxNodeWithSourceFilterSize creates a new CNNDilatedPoolingMaxNode.
+// NewCNNDilatedPoolingMaxNodeWithSourceFilterSize convenience initializer for MPSCNNDilatedPooling nodes with square non-overlapping kernels
 func NewCNNDilatedPoolingMaxNodeWithSourceFilterSize(sourceNode obj.Object, size int) *CNNDilatedPoolingMaxNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNDilatedPoolingMaxNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:filterSize:"), objref.IDOf(sourceNode), size)
 	return cNNDilatedPoolingMaxNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNDilatedPoolingMaxNode) WithLabel(label string) *CNNDilatedPoolingMaxNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// DilationRateX wraps the corresponding Objective-C method.
 func (x *CNNDilatedPoolingMaxNode) DilationRateX() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateX"))
 	return _r
 }
 
+// DilationRateY wraps the corresponding Objective-C method.
 func (x *CNNDilatedPoolingMaxNode) DilationRateY() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateY"))
 	return _r
@@ -112,3 +94,5 @@ type CNNDilatedPoolingMaxNodeable interface {
 }
 
 var _ CNNDilatedPoolingMaxNodeable = (*CNNDilatedPoolingMaxNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNDilatedPoolingMaxNode)(nil)

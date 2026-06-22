@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRGenericBaseCluster is an idiomatic wrapper over the Objective-C class MTRGenericBaseCluster.
+//
+// MTRGenericBaseCluster is an abstract base — you do not construct it directly. Construct one of [MTRBaseClusterAccessControl], [MTRBaseClusterAccountLogin], [MTRBaseClusterActions], [MTRBaseClusterActivatedCarbonFilterMonitoring], [MTRBaseClusterAdministratorCommissioning], [MTRBaseClusterAirQuality], [MTRBaseClusterApplicationBasic], [MTRBaseClusterApplicationLauncher], [MTRBaseClusterAudioOutput], [MTRBaseClusterBallastConfiguration], [MTRBaseClusterBarrierControl], [MTRBaseClusterBasicInformation], [MTRBaseClusterBinaryInputBasic], [MTRBaseClusterBinding], [MTRBaseClusterBooleanStateConfiguration], [MTRBaseClusterBooleanState], [MTRBaseClusterBridgedDeviceBasicInformation], [MTRBaseClusterCarbonDioxideConcentrationMeasurement], [MTRBaseClusterCarbonMonoxideConcentrationMeasurement], [MTRBaseClusterChannel], [MTRBaseClusterColorControl], [MTRBaseClusterCommissionerControl], [MTRBaseClusterContentAppObserver], [MTRBaseClusterContentLauncher], [MTRBaseClusterDescriptor], [MTRBaseClusterDeviceEnergyManagementMode], [MTRBaseClusterDeviceEnergyManagement], [MTRBaseClusterDiagnosticLogs], [MTRBaseClusterDishwasherAlarm], [MTRBaseClusterDishwasherMode], [MTRBaseClusterDoorLock], [MTRBaseClusterElectricalEnergyMeasurement], [MTRBaseClusterElectricalMeasurement], [MTRBaseClusterElectricalPowerMeasurement], [MTRBaseClusterEnergyEVSEMode], [MTRBaseClusterEnergyEVSE], [MTRBaseClusterEthernetNetworkDiagnostics], [MTRBaseClusterFanControl], [MTRBaseClusterFixedLabel], [MTRBaseClusterFlowMeasurement], [MTRBaseClusterFormaldehydeConcentrationMeasurement], [MTRBaseClusterGeneralCommissioning], [MTRBaseClusterGeneralDiagnostics], [MTRBaseClusterGroupKeyManagement], [MTRBaseClusterGroups], [MTRBaseClusterHEPAFilterMonitoring], [MTRBaseClusterICDManagement], [MTRBaseClusterIdentify], [MTRBaseClusterIlluminanceMeasurement], [MTRBaseClusterKeypadInput], [MTRBaseClusterLaundryDryerControls], [MTRBaseClusterLaundryWasherControls], [MTRBaseClusterLaundryWasherMode], [MTRBaseClusterLevelControl], [MTRBaseClusterLocalizationConfiguration], [MTRBaseClusterLowPower], [MTRBaseClusterMediaInput], [MTRBaseClusterMediaPlayback], [MTRBaseClusterMessages], [MTRBaseClusterMicrowaveOvenControl], [MTRBaseClusterMicrowaveOvenMode], [MTRBaseClusterModeSelect], [MTRBaseClusterNetworkCommissioning], [MTRBaseClusterNitrogenDioxideConcentrationMeasurement], [MTRBaseClusterOTASoftwareUpdateProvider], [MTRBaseClusterOTASoftwareUpdateRequestor], [MTRBaseClusterOccupancySensing], [MTRBaseClusterOnOffSwitchConfiguration], [MTRBaseClusterOnOff], [MTRBaseClusterOperationalCredentials], [MTRBaseClusterOperationalState], [MTRBaseClusterOvenCavityOperationalState], [MTRBaseClusterOvenMode], [MTRBaseClusterOzoneConcentrationMeasurement], [MTRBaseClusterPM10ConcentrationMeasurement], [MTRBaseClusterPM1ConcentrationMeasurement], [MTRBaseClusterPM25ConcentrationMeasurement], [MTRBaseClusterPowerSourceConfiguration], [MTRBaseClusterPowerSource], [MTRBaseClusterPowerTopology], [MTRBaseClusterPressureMeasurement], [MTRBaseClusterPumpConfigurationAndControl], [MTRBaseClusterRVCCleanMode], [MTRBaseClusterRVCOperationalState], [MTRBaseClusterRVCRunMode], [MTRBaseClusterRadonConcentrationMeasurement], [MTRBaseClusterRefrigeratorAlarm], [MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode], [MTRBaseClusterRelativeHumidityMeasurement], [MTRBaseClusterServiceArea], [MTRBaseClusterSmokeCOAlarm], [MTRBaseClusterSoftwareDiagnostics], [MTRBaseClusterSwitch], [MTRBaseClusterTargetNavigator], [MTRBaseClusterTemperatureControl], [MTRBaseClusterTemperatureMeasurement], [MTRBaseClusterThermostatUserInterfaceConfiguration], [MTRBaseClusterThermostat], [MTRBaseClusterThreadBorderRouterManagement], [MTRBaseClusterThreadNetworkDiagnostics], [MTRBaseClusterThreadNetworkDirectory], [MTRBaseClusterTimeFormatLocalization], [MTRBaseClusterTimeSynchronization], [MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement], [MTRBaseClusterUnitLocalization], [MTRBaseClusterUnitTesting], [MTRBaseClusterUserLabel], [MTRBaseClusterValveConfigurationAndControl], [MTRBaseClusterWakeOnLAN], [MTRBaseClusterWaterHeaterManagement], [MTRBaseClusterWaterHeaterMode], [MTRBaseClusterWiFiNetworkDiagnostics], [MTRBaseClusterWiFiNetworkManagement], [MTRBaseClusterWindowCovering] and pass it where a MTRGenericBaseCluster is accepted.
 type MTRGenericBaseCluster struct {
-	objref.Handle
+	MTRCluster
 }
 
 // MTRGenericBaseClusterFromID adopts an existing Objective-C object as a MTRGenericBaseCluster
@@ -23,7 +24,8 @@ func MTRGenericBaseClusterFromID(id objc.ID) *MTRGenericBaseCluster {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGenericBaseCluster{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRGenericBaseCluster{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,30 +38,10 @@ func mTRGenericBaseClusterAdopt(id objc.ID) *MTRGenericBaseCluster {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGenericBaseCluster{Handle: objref.Wrap(id)}
+	x := &MTRGenericBaseCluster{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRGenericBaseCluster) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRGenericBaseCluster) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRGenericBaseCluster) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewMTRGenericBaseCluster creates a new MTRGenericBaseCluster.
-func NewMTRGenericBaseCluster() *MTRGenericBaseCluster {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRGenericBaseCluster")), objc.RegisterName("new"))
-	return mTRGenericBaseClusterAdopt(_id)
 }
 
 // MTRGenericBaseClusterable is the interface implemented by [MTRGenericBaseCluster], for mocking and DI.
@@ -68,3 +50,12 @@ type MTRGenericBaseClusterable interface {
 }
 
 var _ MTRGenericBaseClusterable = (*MTRGenericBaseCluster)(nil)
+
+// isMTRGenericBaseCluster marks MTRGenericBaseCluster — and, by embedding promotion, its
+// subclasses — as a member of the MTRGenericBaseCluster hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRGenericBaseCluster) isMTRGenericBaseCluster() {}
+
+var _ MTRGenericBaseClusterProvider = (*MTRGenericBaseCluster)(nil)
+
+var _ MTRClusterProvider = (*MTRGenericBaseCluster)(nil)

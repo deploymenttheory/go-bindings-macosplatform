@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that displays detailed information about a map item.
-//
 // MapItemDetailViewController is an idiomatic wrapper over the Objective-C class MKMapItemDetailViewController.
+//
+// An object that displays detailed information about a map item.
 type MapItemDetailViewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MapItemDetailViewControllerFromID(id objc.ID) *MapItemDetailViewController 
 	if id == 0 {
 		return nil
 	}
-	x := &MapItemDetailViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MapItemDetailViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mapItemDetailViewControllerAdopt(id objc.ID) *MapItemDetailViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &MapItemDetailViewController{Handle: objref.Wrap(id)}
+	x := &MapItemDetailViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,39 @@ func (x *MapItemDetailViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Create a map item detail view controller
-//
-// NewMapItemDetailViewControllerWithMapItemDisplaysMap creates a new MapItemDetailViewController.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MapItemDetailViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMapItemDetailViewControllerWithMapItemDisplaysMap create a map item detail view controller
 func NewMapItemDetailViewControllerWithMapItemDisplaysMap(mapItem *MapItem, displaysMap bool) *MapItemDetailViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailViewController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapItem:displaysMap:"), objref.IDOf(mapItem), displaysMap)
 	return mapItemDetailViewControllerAdopt(_id)
 }
 
-// Create a map item detail view controller.
-//
-// NewMapItemDetailViewControllerWithMapItem creates a new MapItemDetailViewController.
+// NewMapItemDetailViewControllerWithMapItem create a map item detail view controller.
 func NewMapItemDetailViewControllerWithMapItem(mapItem *MapItem) *MapItemDetailViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailViewController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapItem:"), objref.IDOf(mapItem))
 	return mapItemDetailViewControllerAdopt(_id)
 }
 
-// The map item to display.
-//
-// WithMapItem sets mapItem and returns the receiver so calls can be chained.
+// WithMapItem the map item to display.
 func (x *MapItemDetailViewController) WithMapItem(mapItem *MapItem) *MapItemDetailViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapItem:"), objref.IDOf(mapItem))
 	return x
 }
 
+// MapItem wraps the corresponding Objective-C method.
 func (x *MapItemDetailViewController) MapItem() *MapItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapItem"))
 	return MapItemFromID(_r)
 }
 
+// SetMapItem wraps the corresponding Objective-C method.
 func (x *MapItemDetailViewController) SetMapItem(mapItem *MapItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapItem:"), objref.IDOf(mapItem))
 }

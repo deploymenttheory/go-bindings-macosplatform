@@ -8,25 +8,25 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Creates and returns an instance of the burn progress panel.
+// ProgressPanel creates and returns an instance of the burn progress panel.
 func ProgressPanel() *BurnProgressPanel {
 	_r := objc.Send[objc.ID](objc.ID(_class("DRBurnProgressPanel")), objc.RegisterName("progressPanel"))
 	return BurnProgressPanelFromID(_r)
 }
 
-// Creates and return an instance of a burn setup panel.
+// DRBurnSetupPanelSetupPanel creates and return an instance of a burn setup panel.
 func DRBurnSetupPanelSetupPanel() *BurnSetupPanel {
 	_r := objc.Send[objc.ID](objc.ID(_class("DRBurnSetupPanel")), objc.RegisterName("setupPanel"))
 	return BurnSetupPanelFromID(_r)
 }
 
-// Creates and returns an instance of the erase progress panel.
+// DREraseProgressPanelProgressPanel creates and returns an instance of the erase progress panel.
 func DREraseProgressPanelProgressPanel() *EraseProgressPanel {
 	_r := objc.Send[objc.ID](objc.ID(_class("DREraseProgressPanel")), objc.RegisterName("progressPanel"))
 	return EraseProgressPanelFromID(_r)
 }
 
-// Returns an instance of a erase setup panel.
+// DREraseSetupPanelSetupPanel returns an instance of a erase setup panel.
 func DREraseSetupPanelSetupPanel() *EraseSetupPanel {
 	_r := objc.Send[objc.ID](objc.ID(_class("DREraseSetupPanel")), objc.RegisterName("setupPanel"))
 	return EraseSetupPanelFromID(_r)

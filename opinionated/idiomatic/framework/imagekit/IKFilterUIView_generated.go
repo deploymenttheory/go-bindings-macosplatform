@@ -6,6 +6,7 @@ package imagekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -23,7 +24,8 @@ func FilterUIViewFromID(id objc.ID) *FilterUIView {
 	if id == 0 {
 		return nil
 	}
-	x := &FilterUIView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FilterUIView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +38,8 @@ func filterUIViewAdopt(id objc.ID) *FilterUIView {
 	if id == 0 {
 		return nil
 	}
-	x := &FilterUIView{Handle: objref.Wrap(id)}
+	x := &FilterUIView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,19 +59,26 @@ func (x *FilterUIView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewFilterUIView creates a new FilterUIView.
-func NewFilterUIView() *FilterUIView {
-	_id := objc.Send[objc.ID](objc.ID(_class("IKFilterUIView")), objc.RegisterName("new"))
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FilterUIView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFilterUIViewWithFrameFilter the initWithFrame method initializes a view that retains the filter passed into it.
+func NewFilterUIViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter obj.Object) *FilterUIView {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("IKFilterUIView")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:filter:"), frameRect, objref.IDOf(inFilter))
 	return filterUIViewAdopt(_id)
 }
 
-// Accessor method to return the filter instance that the view controls.
+// Filter accessor method to return the filter instance that the view controls.
 func (x *FilterUIView) Filter() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filter"))
 	return obj.Wrap(_r)
 }
 
-// Accessor method for the object controller for all bindings between the filter and the UI representation.
+// ObjectController accessor method for the object controller for all bindings between the filter and the UI representation.
 func (x *FilterUIView) ObjectController() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectController"))
 	return obj.Wrap(_r)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that describes an interface for custom parameter settings provided by the audio unit developer.
-//
 // AudioUnitPreset is an idiomatic wrapper over the Objective-C class AUAudioUnitPreset.
+//
+// A class that describes an interface for custom parameter settings provided by the audio unit developer.
 type AudioUnitPreset struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AudioUnitPresetFromID(id objc.ID) *AudioUnitPreset {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitPreset{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioUnitPreset{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func audioUnitPresetAdopt(id objc.ID) *AudioUnitPreset {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitPreset{Handle: objref.Wrap(id)}
+	x := &AudioUnitPreset{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,39 +60,42 @@ func (x *AudioUnitPreset) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioUnitPreset) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAudioUnitPreset creates a new AudioUnitPreset.
 func NewAudioUnitPreset() *AudioUnitPreset {
 	_id := objc.Send[objc.ID](objc.ID(_class("AUAudioUnitPreset")), objc.RegisterName("new"))
 	return audioUnitPresetAdopt(_id)
 }
 
-// The preset’s unique numeric identifier.
-//
-// WithNumber sets number and returns the receiver so calls can be chained.
+// WithNumber the preset’s unique numeric identifier.
 func (x *AudioUnitPreset) WithNumber(number int) *AudioUnitPreset {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumber:"), number)
 	return x
 }
 
-// The preset’s name.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the preset’s name.
 func (x *AudioUnitPreset) WithName(name string) *AudioUnitPreset {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The preset's unique numeric identifier.
+// Number the preset's unique numeric identifier.
 func (x *AudioUnitPreset) Number() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("number"))
 	return _r
 }
 
+// SetNumber wraps the corresponding Objective-C method.
 func (x *AudioUnitPreset) SetNumber(number int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumber:"), number)
 }
 
-// The preset's name.
+// Name the preset's name.
 func (x *AudioUnitPreset) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -99,6 +104,7 @@ func (x *AudioUnitPreset) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *AudioUnitPreset) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }

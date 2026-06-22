@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A scope in which the sync engine will fetch changes from the server.
-//
 // SyncEngineFetchChangesScope is an idiomatic wrapper over the Objective-C class CKSyncEngineFetchChangesScope.
+//
+// A scope in which the sync engine will fetch changes from the server.
 type SyncEngineFetchChangesScope struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SyncEngineFetchChangesScopeFromID(id objc.ID) *SyncEngineFetchChangesScope 
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineFetchChangesScope{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SyncEngineFetchChangesScope{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func syncEngineFetchChangesScopeAdopt(id objc.ID) *SyncEngineFetchChangesScope {
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineFetchChangesScope{Handle: objref.Wrap(id)}
+	x := &SyncEngineFetchChangesScope{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,39 @@ func (x *SyncEngineFetchChangesScope) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a scope that includes only the specified set of zones.
-//
-// NewSyncEngineFetchChangesScopeWithZoneIDs creates a new SyncEngineFetchChangesScope.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncEngineFetchChangesScope) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSyncEngineFetchChangesScopeWithZoneIDs creates a scope that includes only the specified set of zones.
 func NewSyncEngineFetchChangesScopeWithZoneIDs(zoneIDs obj.Object) *SyncEngineFetchChangesScope {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineFetchChangesScope")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZoneIDs:"), objref.IDOf(zoneIDs))
 	return syncEngineFetchChangesScopeAdopt(_id)
 }
 
-// Creates a scope that includes all zones except the specified excluded zones.
-//
-// NewSyncEngineFetchChangesScopeWithExcludedZoneIDs creates a new SyncEngineFetchChangesScope.
+// NewSyncEngineFetchChangesScopeWithExcludedZoneIDs creates a scope that includes all zones except the specified excluded zones.
 func NewSyncEngineFetchChangesScopeWithExcludedZoneIDs(zoneIDs obj.Object) *SyncEngineFetchChangesScope {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineFetchChangesScope")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExcludedZoneIDs:"), objref.IDOf(zoneIDs))
 	return syncEngineFetchChangesScopeAdopt(_id)
 }
 
-// Returns true if the specified zone ID is included in this scope.
+// ContainsZoneID returns true if the specified zone ID is included in this scope.
 func (x *SyncEngineFetchChangesScope) ContainsZoneID(zoneID *RecordZoneID) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsZoneID:"), objref.IDOf(zoneID))
 	return _r
 }
 
-// A specific set of zone IDs to include in the scope. For example, if you want to fetch changes for a specific set of zones, you can specify them here. If `nil`, this scope includes all zones except those in `excludedZoneIDs`.
+// ZoneIDs a specific set of zone IDs to include in the scope. For example, if you want to fetch changes for a specific set of zones, you can specify them here. If `nil`, this scope includes all zones except those in `excludedZoneIDs`.
 func (x *SyncEngineFetchChangesScope) ZoneIDs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneIDs"))
 	return obj.Wrap(_r)
 }
 
-// A specific set of zone IDs to exclude from this scope. If you know that you don't want to fetch changes for a particular set of zones, you can set those zones here.
+// ExcludedZoneIDs a specific set of zone IDs to exclude from this scope. If you know that you don't want to fetch changes for a particular set of zones, you can set those zones here.
 func (x *SyncEngineFetchChangesScope) ExcludedZoneIDs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("excludedZoneIDs"))
 	return obj.Wrap(_r)

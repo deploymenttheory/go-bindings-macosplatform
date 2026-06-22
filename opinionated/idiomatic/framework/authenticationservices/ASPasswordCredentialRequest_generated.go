@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents a request to supply a password credential.
-//
 // PasswordCredentialRequest is an idiomatic wrapper over the Objective-C class ASPasswordCredentialRequest.
+//
+// A class that represents a request to supply a password credential.
 type PasswordCredentialRequest struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PasswordCredentialRequestFromID(id objc.ID) *PasswordCredentialRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &PasswordCredentialRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PasswordCredentialRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func passwordCredentialRequestAdopt(id objc.ID) *PasswordCredentialRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &PasswordCredentialRequest{Handle: objref.Wrap(id)}
+	x := &PasswordCredentialRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,9 +60,13 @@ func (x *PasswordCredentialRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a password credential request object.
-//
-// NewPasswordCredentialRequestWithCredentialIdentity creates a new PasswordCredentialRequest.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PasswordCredentialRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPasswordCredentialRequestWithCredentialIdentity initializes a password credential request object.
 func NewPasswordCredentialRequestWithCredentialIdentity(credentialIdentity *PasswordCredentialIdentity) *PasswordCredentialRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasswordCredentialRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialIdentity:"), objref.IDOf(credentialIdentity))

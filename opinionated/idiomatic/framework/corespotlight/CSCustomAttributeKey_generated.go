@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A key associated with a custom attribute for a searchable item.
-//
 // CustomAttributeKey is an idiomatic wrapper over the Objective-C class CSCustomAttributeKey.
+//
+// A key associated with a custom attribute for a searchable item.
 type CustomAttributeKey struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CustomAttributeKeyFromID(id objc.ID) *CustomAttributeKey {
 	if id == 0 {
 		return nil
 	}
-	x := &CustomAttributeKey{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CustomAttributeKey{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func customAttributeKeyAdopt(id objc.ID) *CustomAttributeKey {
 	if id == 0 {
 		return nil
 	}
-	x := &CustomAttributeKey{Handle: objref.Wrap(id)}
+	x := &CustomAttributeKey{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +60,27 @@ func (x *CustomAttributeKey) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns a new custom attribute key with the specified name.
-//
-// NewCustomAttributeKeyWithKeyName creates a new CustomAttributeKey.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CustomAttributeKey) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCustomAttributeKeyWithKeyName returns a new custom attribute key with the specified name.
 func NewCustomAttributeKeyWithKeyName(keyName string) *CustomAttributeKey {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CSCustomAttributeKey")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKeyName:"), purego.NSString(keyName))
 	return customAttributeKeyAdopt(_id)
 }
 
-// Returns a new custom attribute key with the specified name and properties.
-//
-// NewCustomAttributeKeyWithKeyNameSearchableSearchableByDefaultUniqueMultiValued creates a new CustomAttributeKey.
+// NewCustomAttributeKeyWithKeyNameSearchableSearchableByDefaultUniqueMultiValued returns a new custom attribute key with the specified name and properties.
 func NewCustomAttributeKeyWithKeyNameSearchableSearchableByDefaultUniqueMultiValued(keyName string, searchable bool, searchableByDefault bool, unique bool, multiValued bool) *CustomAttributeKey {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CSCustomAttributeKey")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKeyName:searchable:searchableByDefault:unique:multiValued:"), purego.NSString(keyName), searchable, searchableByDefault, unique, multiValued)
 	return customAttributeKeyAdopt(_id)
 }
 
+// KeyName wraps the corresponding Objective-C method.
 func (x *CustomAttributeKey) KeyName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyName"))
 	if _r == 0 {
@@ -84,21 +89,25 @@ func (x *CustomAttributeKey) KeyName() string {
 	return purego.GoString(_r)
 }
 
+// IsSearchable wraps the corresponding Objective-C method.
 func (x *CustomAttributeKey) IsSearchable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSearchable"))
 	return _r
 }
 
+// IsSearchableByDefault wraps the corresponding Objective-C method.
 func (x *CustomAttributeKey) IsSearchableByDefault() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSearchableByDefault"))
 	return _r
 }
 
+// IsUnique wraps the corresponding Objective-C method.
 func (x *CustomAttributeKey) IsUnique() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUnique"))
 	return _r
 }
 
+// IsMultiValued wraps the corresponding Objective-C method.
 func (x *CustomAttributeKey) IsMultiValued() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMultiValued"))
 	return _r

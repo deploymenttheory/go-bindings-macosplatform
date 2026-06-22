@@ -9,16 +9,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// The element nodes in an XML tree structure.
-//
 // XMLElement is an idiomatic wrapper over the Objective-C class NSXMLElement.
+//
+// It embeds [XMLNode], promoting that type's methods.
+//
+// The element nodes in an XML tree structure.
 type XMLElement struct {
-	objref.Handle
+	XMLNode
 }
 
 // XMLElementFromID adopts an existing Objective-C object as a XMLElement
@@ -27,7 +28,8 @@ func XMLElementFromID(id objc.ID) *XMLElement {
 	if id == 0 {
 		return nil
 	}
-	x := &XMLElement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &XMLElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,57 +42,35 @@ func xMLElementAdopt(id objc.ID) *XMLElement {
 	if id == 0 {
 		return nil
 	}
-	x := &XMLElement{Handle: objref.Wrap(id)}
+	x := &XMLElement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *XMLElement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *XMLElement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *XMLElement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Returns an element <tt>&lt;name>&lt;/name></tt>.
-//
-// NewXMLElementWithName creates a new XMLElement.
+// NewXMLElementWithName returns an element <tt>&lt;name>&lt;/name></tt>.
 func NewXMLElementWithName(name string) *XMLElement {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLElement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:"), purego.NSString(name))
 	return xMLElementAdopt(_id)
 }
 
-// Returns an element whose full QName is specified.
-//
-// NewXMLElementWithNameURI creates a new XMLElement.
+// NewXMLElementWithNameURI returns an element whose full QName is specified.
 func NewXMLElementWithNameURI(name string, uRI string) *XMLElement {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLElement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:URI:"), purego.NSString(name), purego.NSString(uRI))
 	return xMLElementAdopt(_id)
 }
 
-// Returns an element with a single text node child <tt>&lt;name>string&lt;/name></tt>.
-//
-// NewXMLElementWithNameStringValue creates a new XMLElement.
+// NewXMLElementWithNameStringValue returns an element with a single text node child <tt>&lt;name>string&lt;/name></tt>.
 func NewXMLElementWithNameStringValue(name string, string_ string) *XMLElement {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLElement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:stringValue:"), purego.NSString(name), purego.NSString(string_))
 	return xMLElementAdopt(_id)
 }
 
-// Returns an element created from a string. Parse errors are collected in <tt>error</tt>.
-//
-// NewXMLElementWithXMLStringError creates a new XMLElement.
-func NewXMLElementWithXMLStringError(string_ string) (*XMLElement, error) {
+// NewXMLElementWithXMLStringError returns an element created from a string. Parse errors are collected in <tt>error</tt>.
+func NewXMLElementWithXMLStringError(string_ string) (result *XMLElement, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLElement")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithXMLString:error:"), purego.NSString(string_), unsafe.Pointer(&_nsErr))
@@ -107,124 +87,112 @@ func NewXMLElementWithKindOptions(kind XMLNodeKind, options XMLNodeOptions) *XML
 	return xMLElementAdopt(_id)
 }
 
-// Set the attributes. In the case of duplicate names, the first attribute with the name is used.
-//
-// WithAttributes sets the collection and returns the receiver so calls can be chained.
+// WithAttributes set the attributes. In the case of duplicate names, the first attribute with the name is used.
 func (x *XMLElement) WithAttributes(items ...XMLNodeProvider) *XMLElement {
 	_arr := purego.SliceToNSArray(items, func(_v XMLNodeProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributes:"), _arr)
 	return x
 }
 
-// Set the namespaces. In the case of duplicate names, the first namespace with the name is used.
-//
-// WithNamespaces sets the collection and returns the receiver so calls can be chained.
+// WithNamespaces set the namespaces. In the case of duplicate names, the first namespace with the name is used.
 func (x *XMLElement) WithNamespaces(items ...XMLNodeProvider) *XMLElement {
 	_arr := purego.SliceToNSArray(items, func(_v XMLNodeProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNamespaces:"), _arr)
 	return x
 }
 
-// Sets the nodes name. Applicable for element, attribute, namespace, processing-instruction, document type declaration, element declaration, attribute declaration, entity declaration, and notation declaration.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName sets the nodes name. Applicable for element, attribute, namespace, processing-instruction, document type declaration, element declaration, attribute declaration, entity declaration, and notation declaration.
 func (x *XMLElement) WithName(name StringProvider) *XMLElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 	return x
 }
 
-// Sets the content of the node. Setting the objectValue removes all existing children including processing instructions and comments. Setting the object value on an element creates a single text node child.
-//
-// WithObjectValue sets objectValue and returns the receiver so calls can be chained.
+// WithObjectValue sets the content of the node. Setting the objectValue removes all existing children including processing instructions and comments. Setting the object value on an element creates a single text node child.
 func (x *XMLElement) WithObjectValue(objectValue obj.Object) *XMLElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
-// Sets the content of the node. Setting the stringValue removes all existing children including processing instructions and comments. Setting the string value on an element creates a single text node child. The getter returns the string value of the node, which may be either its content or child text nodes, depending on the type of node. Elements are recursed and text nodes concatenated in document order with no intervening spaces.
-//
-// WithStringValue sets stringValue and returns the receiver so calls can be chained.
+// WithStringValue sets the content of the node. Setting the stringValue removes all existing children including processing instructions and comments. Setting the string value on an element creates a single text node child. The getter returns the string value of the node, which may be either its content or child text nodes, depending on the type of node. Elements are recursed and text nodes concatenated in document order with no intervening spaces.
 func (x *XMLElement) WithStringValue(stringValue StringProvider) *XMLElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), objref.IDOf(stringValue))
 	return x
 }
 
-// Set the URI of this element, attribute, or document. For documents it is the URI of document origin. Getter returns the URI of this element, attribute, or document. For documents it is the URI of document origin and is automatically set when using initWithContentsOfURL.
-//
-// WithURI sets uRI and returns the receiver so calls can be chained.
+// WithURI set the URI of this element, attribute, or document. For documents it is the URI of document origin. Getter returns the URI of this element, attribute, or document. For documents it is the URI of document origin and is automatically set when using initWithContentsOfURL.
 func (x *XMLElement) WithURI(uRI StringProvider) *XMLElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURI:"), objref.IDOf(uRI))
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *XMLElement) WithScriptingProperties(scriptingProperties obj.Object) *XMLElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Returns all of the child elements that match this name.
+// ElementsForName returns all of the child elements that match this name.
 func (x *XMLElement) ElementsForName(name string) []*XMLElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementsForName:"), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *XMLElement { return XMLElementFromID(_id) })
 }
 
-// Returns all of the child elements that match this localname URI pair.
+// ElementsForLocalNameURI returns all of the child elements that match this localname URI pair.
 func (x *XMLElement) ElementsForLocalNameURI(localName string, uRI string) []*XMLElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementsForLocalName:URI:"), purego.NSString(localName), purego.NSString(uRI))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *XMLElement { return XMLElementFromID(_id) })
 }
 
-// Adds an attribute. Attributes with duplicate names are not added.
+// AddAttribute adds an attribute. Attributes with duplicate names are not added.
 func (x *XMLElement) AddAttribute(attribute *XMLNode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAttribute:"), objref.IDOf(attribute))
 }
 
-// Removes an attribute based on its name.
+// RemoveAttributeForName removes an attribute based on its name.
 func (x *XMLElement) RemoveAttributeForName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAttributeForName:"), purego.NSString(name))
 }
 
-// Set the attributes based on a name-value dictionary.
+// SetAttributesWithDictionary set the attributes based on a name-value dictionary.
 func (x *XMLElement) SetAttributesWithDictionary(attributes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributesWithDictionary:"), objref.IDOf(attributes))
 }
 
-// Returns an attribute matching this name.
+// AttributeForName returns an attribute matching this name.
 func (x *XMLElement) AttributeForName(name string) *XMLNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeForName:"), purego.NSString(name))
 	return XMLNodeFromID(_r)
 }
 
-// Returns an attribute matching this localname URI pair.
+// AttributeForLocalNameURI returns an attribute matching this localname URI pair.
 func (x *XMLElement) AttributeForLocalNameURI(localName string, uRI string) *XMLNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeForLocalName:URI:"), purego.NSString(localName), purego.NSString(uRI))
 	return XMLNodeFromID(_r)
 }
 
-// Adds a namespace. Namespaces with duplicate names are not added.
+// AddNamespace adds a namespace. Namespaces with duplicate names are not added.
 func (x *XMLElement) AddNamespace(aNamespace *XMLNode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addNamespace:"), objref.IDOf(aNamespace))
 }
 
-// Removes a namespace with a particular name.
+// RemoveNamespaceForPrefix removes a namespace with a particular name.
 func (x *XMLElement) RemoveNamespaceForPrefix(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeNamespaceForPrefix:"), purego.NSString(name))
 }
 
-// Returns the namespace matching this prefix.
+// NamespaceForPrefix returns the namespace matching this prefix.
 func (x *XMLElement) NamespaceForPrefix(name string) *XMLNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("namespaceForPrefix:"), purego.NSString(name))
 	return XMLNodeFromID(_r)
 }
 
-// Returns the namespace who matches the prefix of the name given. Looks in the entire namespace chain.
+// ResolveNamespaceForName returns the namespace who matches the prefix of the name given. Looks in the entire namespace chain.
 func (x *XMLElement) ResolveNamespaceForName(name string) *XMLNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resolveNamespaceForName:"), purego.NSString(name))
 	return XMLNodeFromID(_r)
 }
 
-// Returns the URI of this prefix. Looks in the entire namespace chain.
+// ResolvePrefixForNamespaceURI returns the URI of this prefix. Looks in the entire namespace chain.
 func (x *XMLElement) ResolvePrefixForNamespaceURI(namespaceURI string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resolvePrefixForNamespaceURI:"), purego.NSString(namespaceURI))
 	if _r == 0 {
@@ -233,42 +201,42 @@ func (x *XMLElement) ResolvePrefixForNamespaceURI(namespaceURI string) string {
 	return purego.GoString(_r)
 }
 
-// Inserts a child at a particular index.
+// InsertChildAtIndex inserts a child at a particular index.
 func (x *XMLElement) InsertChildAtIndex(child *XMLNode, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertChild:atIndex:"), objref.IDOf(child), index)
 }
 
-// Insert several children at a particular index.
+// InsertChildrenAtIndex insert several children at a particular index.
 func (x *XMLElement) InsertChildrenAtIndex(children []*XMLNode, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertChildren:atIndex:"), purego.SliceToNSArray(children, func(_v *XMLNode) objc.ID { return objref.IDOf(_v) }), index)
 }
 
-// Removes a child at a particular index.
+// RemoveChildAtIndex removes a child at a particular index.
 func (x *XMLElement) RemoveChildAtIndex(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeChildAtIndex:"), index)
 }
 
-// Removes all existing children and replaces them with the new children. Set children to nil to simply remove all children.
+// SetChildren removes all existing children and replaces them with the new children. Set children to nil to simply remove all children.
 func (x *XMLElement) SetChildren(children []*XMLNode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildren:"), purego.SliceToNSArray(children, func(_v *XMLNode) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Adds a child to the end of the existing children.
+// AddChild adds a child to the end of the existing children.
 func (x *XMLElement) AddChild(child *XMLNode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addChild:"), objref.IDOf(child))
 }
 
-// Replaces a child at a particular index with another child.
+// ReplaceChildAtIndexWithNode replaces a child at a particular index with another child.
 func (x *XMLElement) ReplaceChildAtIndexWithNode(index int, node *XMLNode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceChildAtIndex:withNode:"), index, objref.IDOf(node))
 }
 
-// Adjacent text nodes are coalesced. If the node's value is the empty string, it is removed. This should be called with a value of NO before using XQuery or XPath.
+// NormalizeAdjacentTextNodesPreservingCDATA adjacent text nodes are coalesced. If the node's value is the empty string, it is removed. This should be called with a value of NO before using XQuery or XPath.
 func (x *XMLElement) NormalizeAdjacentTextNodesPreservingCDATA(preserve bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("normalizeAdjacentTextNodesPreservingCDATA:"), preserve)
 }
 
-// Set the attributes. In the case of duplicate names, the first attribute with the name is used.
+// Attributes set the attributes. In the case of duplicate names, the first attribute with the name is used.
 //
 // Attributes returns the collection as a Go slice.
 func (x *XMLElement) Attributes() []*XMLNode {
@@ -276,11 +244,12 @@ func (x *XMLElement) Attributes() []*XMLNode {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *XMLNode { return XMLNodeFromID(_id) })
 }
 
+// SetAttributes wraps the corresponding Objective-C method.
 func (x *XMLElement) SetAttributes(attributes []*XMLNode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributes:"), purego.SliceToNSArray(attributes, func(_v *XMLNode) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Set the namespaces. In the case of duplicate names, the first namespace with the name is used.
+// Namespaces set the namespaces. In the case of duplicate names, the first namespace with the name is used.
 //
 // Namespaces returns the collection as a Go slice.
 func (x *XMLElement) Namespaces() []*XMLNode {
@@ -288,11 +257,12 @@ func (x *XMLElement) Namespaces() []*XMLNode {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *XMLNode { return XMLNodeFromID(_id) })
 }
 
+// SetNamespaces wraps the corresponding Objective-C method.
 func (x *XMLElement) SetNamespaces(namespaces []*XMLNode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNamespaces:"), purego.SliceToNSArray(namespaces, func(_v *XMLNode) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Set the attributes base on a name-value dictionary. This method is deprecated and does not function correctly. Use -setAttributesWithDictionary: instead.
+// SetAttributesAsDictionary set the attributes base on a name-value dictionary. This method is deprecated and does not function correctly. Use -setAttributesWithDictionary: instead.
 func (x *XMLElement) SetAttributesAsDictionary(attributes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributesAsDictionary:"), objref.IDOf(attributes))
 }
@@ -334,3 +304,5 @@ type XMLElementable interface {
 }
 
 var _ XMLElementable = (*XMLElement)(nil)
+
+var _ XMLNodeProvider = (*XMLElement)(nil)

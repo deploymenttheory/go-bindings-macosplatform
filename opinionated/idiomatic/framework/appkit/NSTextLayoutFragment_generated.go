@@ -6,15 +6,16 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents the layout fragment typically corresponding to a rendering surface, such as a layer or view subclass.
-//
 // TextLayoutFragment is an idiomatic wrapper over the Objective-C class NSTextLayoutFragment.
+//
+// A class that represents the layout fragment typically corresponding to a rendering surface, such as a layer or view subclass.
 type TextLayoutFragment struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func TextLayoutFragmentFromID(id objc.ID) *TextLayoutFragment {
 	if id == 0 {
 		return nil
 	}
-	x := &TextLayoutFragment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextLayoutFragment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func textLayoutFragmentAdopt(id objc.ID) *TextLayoutFragment {
 	if id == 0 {
 		return nil
 	}
-	x := &TextLayoutFragment{Handle: objref.Wrap(id)}
+	x := &TextLayoutFragment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,98 +61,129 @@ func (x *TextLayoutFragment) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Create a new layout fragment using the provided text element and range.
-//
-// NewTextLayoutFragmentWithTextElementRange creates a new TextLayoutFragment.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextLayoutFragment) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTextLayoutFragmentWithTextElementRange create a new layout fragment using the provided text element and range.
 func NewTextLayoutFragmentWithTextElementRange(textElement *TextElement, rangeInElement *TextRange) *TextLayoutFragment {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextLayoutFragment")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextElement:range:"), objref.IDOf(textElement), objref.IDOf(rangeInElement))
 	return textLayoutFragmentAdopt(_id)
 }
 
-// Creates a new layout fragment with the coder you provide.
-//
-// NewTextLayoutFragmentWithCoder creates a new TextLayoutFragment.
+// NewTextLayoutFragmentWithCoder creates a new layout fragment with the coder you provide.
 func NewTextLayoutFragmentWithCoder(coder obj.Object) *TextLayoutFragment {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextLayoutFragment")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return textLayoutFragmentAdopt(_id)
 }
 
-// The queue on which the framework dispatches layout operations.
-//
-// WithLayoutQueue sets layoutQueue and returns the receiver so calls can be chained.
+// WithLayoutQueue the queue on which the framework dispatches layout operations.
 func (x *TextLayoutFragment) WithLayoutQueue(layoutQueue obj.Object) *TextLayoutFragment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutQueue:"), objref.IDOf(layoutQueue))
 	return x
 }
 
-// Returns the text line fragment for the vertical offset you provide, or the closest text line fragment beyond the vertical offset.
+// TextLineFragmentForVerticalOffsetRequiresExactMatch returns the text line fragment for the vertical offset you provide, or the closest text line fragment beyond the vertical offset.
 func (x *TextLayoutFragment) TextLineFragmentForVerticalOffsetRequiresExactMatch(verticalOffset float64, requiresExactMatch bool) *TextLineFragment {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textLineFragmentForVerticalOffset:requiresExactMatch:"), verticalOffset, requiresExactMatch)
 	return TextLineFragmentFromID(_r)
 }
 
-// Invalidates any layout information associated with the text layout fragment.
+// InvalidateLayout invalidates any layout information associated with the text layout fragment.
 func (x *TextLayoutFragment) InvalidateLayout() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateLayout"))
 }
 
+// DrawAtPointInContext renders the visual representation of this element in the specified graphics context.
+func (x *TextLayoutFragment) DrawAtPointInContext(point corefoundation.CGPoint, context_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawAtPoint:inContext:"), point, objref.IDOf(context_))
+}
+
+// TextLayoutManager wraps the corresponding Objective-C method.
 func (x *TextLayoutFragment) TextLayoutManager() *TextLayoutManager {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
+// TextElement wraps the corresponding Objective-C method.
 func (x *TextLayoutFragment) TextElement() *TextElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textElement"))
 	return TextElementFromID(_r)
 }
 
+// RangeInElement wraps the corresponding Objective-C method.
 func (x *TextLayoutFragment) RangeInElement() *TextRange {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rangeInElement"))
 	return TextRangeFromID(_r)
 }
 
+// TextLineFragments wraps the corresponding Objective-C method.
+//
 // TextLineFragments returns the collection as a Go slice.
 func (x *TextLayoutFragment) TextLineFragments() []*TextLineFragment {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textLineFragments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextLineFragment { return TextLineFragmentFromID(_id) })
 }
 
+// LayoutQueue wraps the corresponding Objective-C method.
 func (x *TextLayoutFragment) LayoutQueue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutQueue"))
 	return obj.Wrap(_r)
 }
 
+// SetLayoutQueue wraps the corresponding Objective-C method.
 func (x *TextLayoutFragment) SetLayoutQueue(layoutQueue obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutQueue:"), objref.IDOf(layoutQueue))
 }
 
+// State wraps the corresponding Objective-C method.
 func (x *TextLayoutFragment) State() TextLayoutFragmentState {
 	_r := objc.Send[TextLayoutFragmentState](objref.IDOf(x), objc.RegisterName("state"))
 	return _r
 }
 
+// LayoutFragmentFrame wraps the corresponding Objective-C method.
+func (x *TextLayoutFragment) LayoutFragmentFrame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("layoutFragmentFrame"))
+	return _r
+}
+
+// RenderingSurfaceBounds wraps the corresponding Objective-C method.
+func (x *TextLayoutFragment) RenderingSurfaceBounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("renderingSurfaceBounds"))
+	return _r
+}
+
+// LeadingPadding wraps the corresponding Objective-C method.
 func (x *TextLayoutFragment) LeadingPadding() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("leadingPadding"))
 	return _r
 }
 
+// TrailingPadding wraps the corresponding Objective-C method.
 func (x *TextLayoutFragment) TrailingPadding() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("trailingPadding"))
 	return _r
 }
 
+// TopMargin wraps the corresponding Objective-C method.
 func (x *TextLayoutFragment) TopMargin() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("topMargin"))
 	return _r
 }
 
+// BottomMargin wraps the corresponding Objective-C method.
 func (x *TextLayoutFragment) BottomMargin() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("bottomMargin"))
 	return _r
 }
 
+// TextAttachmentViewProviders wraps the corresponding Objective-C method.
+//
 // TextAttachmentViewProviders returns the collection as a Go slice.
 func (x *TextLayoutFragment) TextAttachmentViewProviders() []*TextAttachmentViewProvider {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textAttachmentViewProviders"))
@@ -162,6 +196,7 @@ type TextLayoutFragmentable interface {
 	WithLayoutQueue(layoutQueue obj.Object) *TextLayoutFragment
 	TextLineFragmentForVerticalOffsetRequiresExactMatch(verticalOffset float64, requiresExactMatch bool) *TextLineFragment
 	InvalidateLayout()
+	DrawAtPointInContext(point corefoundation.CGPoint, context_ obj.Object)
 	TextLayoutManager() *TextLayoutManager
 	TextElement() *TextElement
 	RangeInElement() *TextRange
@@ -169,6 +204,8 @@ type TextLayoutFragmentable interface {
 	LayoutQueue() obj.Object
 	SetLayoutQueue(layoutQueue obj.Object)
 	State() TextLayoutFragmentState
+	LayoutFragmentFrame() corefoundation.CGRect
+	RenderingSurfaceBounds() corefoundation.CGRect
 	LeadingPadding() float64
 	TrailingPadding() float64
 	TopMargin() float64

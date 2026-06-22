@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The identity of an app whose traffic is to be routed through the tunnel.
-//
 // NEAppRule is an idiomatic wrapper over the Objective-C class NEAppRule.
+//
+// The identity of an app whose traffic is to be routed through the tunnel.
 type NEAppRule struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NEAppRuleFromID(id objc.ID) *NEAppRule {
 	if id == 0 {
 		return nil
 	}
-	x := &NEAppRule{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEAppRule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nEAppRuleAdopt(id objc.ID) *NEAppRule {
 	if id == 0 {
 		return nil
 	}
-	x := &NEAppRule{Handle: objref.Wrap(id)}
+	x := &NEAppRule{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,33 +60,33 @@ func (x *NEAppRule) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Create an app rule that matches an app with a given signing identifier and a given designated requirement.
-//
-// NewNEAppRuleWithSigningIdentifierDesignatedRequirement creates a new NEAppRule.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEAppRule) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNEAppRuleWithSigningIdentifierDesignatedRequirement create an app rule that matches an app with a given signing identifier and a given designated requirement.
 func NewNEAppRuleWithSigningIdentifierDesignatedRequirement(signingIdentifier string, designatedRequirement string) *NEAppRule {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NEAppRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSigningIdentifier:designatedRequirement:"), purego.NSString(signingIdentifier), purego.NSString(designatedRequirement))
 	return nEAppRuleAdopt(_id)
 }
 
-// The file system path of the app that matches the rule.
-//
-// WithMatchPath sets matchPath and returns the receiver so calls can be chained.
+// WithMatchPath the file system path of the app that matches the rule.
 func (x *NEAppRule) WithMatchPath(matchPath string) *NEAppRule {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchPath:"), purego.NSString(matchPath))
 	return x
 }
 
-// An array of app rule objects that restrict the rule so it only matches network traffic generated from helper processes.
-//
-// WithMatchTools sets the collection and returns the receiver so calls can be chained.
+// WithMatchTools an array of app rule objects that restrict the rule so it only matches network traffic generated from helper processes.
 func (x *NEAppRule) WithMatchTools(items ...*NEAppRule) *NEAppRule {
 	_arr := purego.SliceToNSArray(items, func(_v *NEAppRule) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchTools:"), _arr)
 	return x
 }
 
-// A string containing a signing identifier. If the code signature of the executable being evaluated has a signing identifier equal to this string and all other conditions of the rule match, then the rule matches.
+// MatchSigningIdentifier a string containing a signing identifier. If the code signature of the executable being evaluated has a signing identifier equal to this string and all other conditions of the rule match, then the rule matches.
 func (x *NEAppRule) MatchSigningIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchSigningIdentifier"))
 	if _r == 0 {
@@ -93,7 +95,7 @@ func (x *NEAppRule) MatchSigningIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// A string containing a designated requirement. If the code signature of the exectuable being evaluated has a designated requirement equal to this string and all other conditions of the rule match, then the rule matches. This property is required on Mac OS X.
+// MatchDesignatedRequirement a string containing a designated requirement. If the code signature of the exectuable being evaluated has a designated requirement equal to this string and all other conditions of the rule match, then the rule matches. This property is required on Mac OS X.
 func (x *NEAppRule) MatchDesignatedRequirement() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchDesignatedRequirement"))
 	if _r == 0 {
@@ -102,7 +104,7 @@ func (x *NEAppRule) MatchDesignatedRequirement() string {
 	return purego.GoString(_r)
 }
 
-// A string containing a file system path. If the file system path of the executable being evaluated is equal to this string and all other conditions of the rule match, then the rule matches. This property is optional.
+// MatchPath a string containing a file system path. If the file system path of the executable being evaluated is equal to this string and all other conditions of the rule match, then the rule matches. This property is optional.
 func (x *NEAppRule) MatchPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchPath"))
 	if _r == 0 {
@@ -111,21 +113,23 @@ func (x *NEAppRule) MatchPath() string {
 	return purego.GoString(_r)
 }
 
+// SetMatchPath wraps the corresponding Objective-C method.
 func (x *NEAppRule) SetMatchPath(matchPath string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchPath:"), purego.NSString(matchPath))
 }
 
-// An array of strings. This property is actually read-only. If the destination host of the network traffic being evaluated has a suffix equal to one of the strings in this array and all other conditions of the rule match, then the rule matches. This property is optional.
+// MatchDomains an array of strings. This property is actually read-only. If the destination host of the network traffic being evaluated has a suffix equal to one of the strings in this array and all other conditions of the rule match, then the rule matches. This property is optional.
 func (x *NEAppRule) MatchDomains() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchDomains"))
 	return obj.Wrap(_r)
 }
 
+// SetMatchDomains wraps the corresponding Objective-C method.
 func (x *NEAppRule) SetMatchDomains(matchDomains obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchDomains:"), objref.IDOf(matchDomains))
 }
 
-// An array of NEAppRule objects. Use this property to restrict this rule to only match network traffic that is generated by one or more "helper tool" processes that are spawned by the app that matches this rule. For example, to match network traffic generated by the "curl" command line tool when the tool is run from Terminal.app, create an NEAppRule for Terminal.app and set the app rule's matchTools property to an array that contains an NEAppRule for the "curl" command line tool. Set this property to nil (which is the default) to match all network traffic generated by the matching app and all helper tool processes spawned by the matching app.
+// MatchTools an array of NEAppRule objects. Use this property to restrict this rule to only match network traffic that is generated by one or more "helper tool" processes that are spawned by the app that matches this rule. For example, to match network traffic generated by the "curl" command line tool when the tool is run from Terminal.app, create an NEAppRule for Terminal.app and set the app rule's matchTools property to an array that contains an NEAppRule for the "curl" command line tool. Set this property to nil (which is the default) to match all network traffic generated by the matching app and all helper tool processes spawned by the matching app.
 //
 // MatchTools returns the collection as a Go slice.
 func (x *NEAppRule) MatchTools() []*NEAppRule {
@@ -133,6 +137,7 @@ func (x *NEAppRule) MatchTools() []*NEAppRule {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEAppRule { return NEAppRuleFromID(_id) })
 }
 
+// SetMatchTools wraps the corresponding Objective-C method.
 func (x *NEAppRule) SetMatchTools(matchTools []*NEAppRule) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchTools:"), purego.SliceToNSArray(matchTools, func(_v *NEAppRule) objc.ID { return objref.IDOf(_v) }))
 }

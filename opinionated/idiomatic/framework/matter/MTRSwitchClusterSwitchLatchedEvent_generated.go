@@ -23,7 +23,8 @@ func MTRSwitchClusterSwitchLatchedEventFromID(id objc.ID) *MTRSwitchClusterSwitc
 	if id == 0 {
 		return nil
 	}
-	x := &MTRSwitchClusterSwitchLatchedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRSwitchClusterSwitchLatchedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRSwitchClusterSwitchLatchedEventAdopt(id objc.ID) *MTRSwitchClusterSwitch
 	if id == 0 {
 		return nil
 	}
-	x := &MTRSwitchClusterSwitchLatchedEvent{Handle: objref.Wrap(id)}
+	x := &MTRSwitchClusterSwitchLatchedEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTRSwitchClusterSwitchLatchedEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRSwitchClusterSwitchLatchedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRSwitchClusterSwitchLatchedEvent creates a new MTRSwitchClusterSwitchLatchedEvent.
 func NewMTRSwitchClusterSwitchLatchedEvent() *MTRSwitchClusterSwitchLatchedEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRSwitchClusterSwitchLatchedEvent")), objc.RegisterName("new"))
 	return mTRSwitchClusterSwitchLatchedEventAdopt(_id)
 }
 
-// WithNewPosition sets newPosition and returns the receiver so calls can be chained.
+// WithNewPosition sets the property and returns the receiver so calls can be chained.
 func (x *MTRSwitchClusterSwitchLatchedEvent) WithNewPosition(newPosition obj.Object) *MTRSwitchClusterSwitchLatchedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
 	return x
 }
 
+// GetNewPosition wraps the corresponding Objective-C method.
 func (x *MTRSwitchClusterSwitchLatchedEvent) GetNewPosition() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewPosition"))
 	return obj.Wrap(_r)
 }
 
+// SetNewPosition wraps the corresponding Objective-C method.
 func (x *MTRSwitchClusterSwitchLatchedEvent) SetNewPosition(newPosition obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
 }

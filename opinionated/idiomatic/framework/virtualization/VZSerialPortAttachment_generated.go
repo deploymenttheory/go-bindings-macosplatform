@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The common behaviors for the serial attachment points of your virtual machine.
-//
 // SerialPortAttachment is an idiomatic wrapper over the Objective-C class VZSerialPortAttachment.
+//
+// SerialPortAttachment is an abstract base — you do not construct it directly. Construct one of [FileHandleSerialPortAttachment], [FileSerialPortAttachment], [SpiceAgentPortAttachment] and pass it where a SerialPortAttachment is accepted.
+//
+// The common behaviors for the serial attachment points of your virtual machine.
 type SerialPortAttachment struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func SerialPortAttachmentFromID(id objc.ID) *SerialPortAttachment {
 	if id == 0 {
 		return nil
 	}
-	x := &SerialPortAttachment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SerialPortAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func serialPortAttachmentAdopt(id objc.ID) *SerialPortAttachment {
 	if id == 0 {
 		return nil
 	}
-	x := &SerialPortAttachment{Handle: objref.Wrap(id)}
+	x := &SerialPortAttachment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *SerialPortAttachment) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewSerialPortAttachment creates a new SerialPortAttachment.
-func NewSerialPortAttachment() *SerialPortAttachment {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZSerialPortAttachment")), objc.RegisterName("new"))
-	return serialPortAttachmentAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SerialPortAttachment) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // SerialPortAttachmentable is the interface implemented by [SerialPortAttachment], for mocking and DI.
@@ -70,3 +74,10 @@ type SerialPortAttachmentable interface {
 }
 
 var _ SerialPortAttachmentable = (*SerialPortAttachment)(nil)
+
+// isSerialPortAttachment marks SerialPortAttachment — and, by embedding promotion, its
+// subclasses — as a member of the SerialPortAttachment hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SerialPortAttachment) isSerialPortAttachment() {}
+
+var _ SerialPortAttachmentProvider = (*SerialPortAttachment)(nil)

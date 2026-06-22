@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a MIDI system exclusive message.
-//
 // MIDISysexEvent is an idiomatic wrapper over the Objective-C class AVMIDISysexEvent.
+//
+// It embeds [MusicEvent], promoting that type's methods.
+//
+// An object that represents a MIDI system exclusive message.
 type MIDISysexEvent struct {
-	objref.Handle
+	MusicEvent
 }
 
 // MIDISysexEventFromID adopts an existing Objective-C object as a MIDISysexEvent
@@ -25,7 +26,8 @@ func MIDISysexEventFromID(id objc.ID) *MIDISysexEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MIDISysexEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MIDISysexEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,35 +40,20 @@ func mIDISysexEventAdopt(id objc.ID) *MIDISysexEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MIDISysexEvent{Handle: objref.Wrap(id)}
+	x := &MIDISysexEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MIDISysexEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MIDISysexEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MIDISysexEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a system event with the data you specify.
-//
-// NewMIDISysexEventWithData creates a new MIDISysexEvent.
+// NewMIDISysexEventWithData creates a system event with the data you specify.
 func NewMIDISysexEventWithData(data obj.Object) *MIDISysexEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMIDISysexEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
 	return mIDISysexEventAdopt(_id)
 }
 
+// SizeInBytes wraps the corresponding Objective-C method.
 func (x *MIDISysexEvent) SizeInBytes() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sizeInBytes"))
 	return _r
@@ -79,3 +66,5 @@ type MIDISysexEventable interface {
 }
 
 var _ MIDISysexEventable = (*MIDISysexEvent)(nil)
+
+var _ MusicEventProvider = (*MIDISysexEvent)(nil)

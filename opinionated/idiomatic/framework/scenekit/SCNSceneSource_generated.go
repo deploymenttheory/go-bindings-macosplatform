@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that manages the data-reading tasks associated with loading scene contents from a file or data.
-//
 // SceneSource is an idiomatic wrapper over the Objective-C class SCNSceneSource.
+//
+// An object that manages the data-reading tasks associated with loading scene contents from a file or data.
 type SceneSource struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func SceneSourceFromID(id objc.ID) *SceneSource {
 	if id == 0 {
 		return nil
 	}
-	x := &SceneSource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SceneSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func sceneSourceAdopt(id objc.ID) *SceneSource {
 	if id == 0 {
 		return nil
 	}
-	x := &SceneSource{Handle: objref.Wrap(id)}
+	x := &SceneSource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,26 +62,28 @@ func (x *SceneSource) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a scene source for reading the scene graph from a specified file.
-//
-// NewSceneSourceWithURLOptions creates a new SceneSource.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SceneSource) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSceneSourceWithURLOptions initializes a scene source for reading the scene graph from a specified file.
 func NewSceneSourceWithURLOptions(url string, options obj.Object) *SceneSource {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCNSceneSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), rt.FileURL(url), objref.IDOf(options))
 	return sceneSourceAdopt(_id)
 }
 
-// Initializes a scene source for reading the scene graph contained in an NSData object.
-//
-// NewSceneSourceWithDataOptions creates a new SceneSource.
+// NewSceneSourceWithDataOptions initializes a scene source for reading the scene graph contained in an NSData object.
 func NewSceneSourceWithDataOptions(data obj.Object, options obj.Object) *SceneSource {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCNSceneSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:"), objref.IDOf(data), objref.IDOf(options))
 	return sceneSourceAdopt(_id)
 }
 
-// Instantiates a scene from the scene source with the specified options.
-func (x *SceneSource) SceneWithOptionsError(options obj.Object) (*Scene, error) {
+// SceneWithOptionsError instantiates a scene from the scene source with the specified options.
+func (x *SceneSource) SceneWithOptionsError(options obj.Object) (result *Scene, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sceneWithOptions:error:"), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -88,13 +92,13 @@ func (x *SceneSource) SceneWithOptionsError(options obj.Object) (*Scene, error) 
 	return SceneFromID(_r), nil
 }
 
-// Returns metadata about the scene.
+// PropertyForKey returns metadata about the scene.
 func (x *SceneSource) PropertyForKey(key string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
-// Loads and returns all objects in the scene source that pass the test in a given block.
+// EntriesPassingTest loads and returns all objects in the scene source that pass the test in a given block.
 func (x *SceneSource) EntriesPassingTest(predicate func(obj.Object, obj.Object, *bool) bool) []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entriesPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), obj.Wrap(_b1), (*bool)(_b2))
@@ -102,13 +106,13 @@ func (x *SceneSource) EntriesPassingTest(predicate func(obj.Object, obj.Object, 
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The receiver's URL (if any).
+// Url the receiver's URL (if any).
 func (x *SceneSource) Url() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
-// The receiver's data (if any).
+// Data the receiver's data (if any).
 func (x *SceneSource) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
@@ -117,7 +121,7 @@ func (x *SceneSource) Data() obj.Object {
 // SceneSourceable is the interface implemented by [SceneSource], for mocking and DI.
 type SceneSourceable interface {
 	obj.Object
-	SceneWithOptionsError(options obj.Object) (*Scene, error)
+	SceneWithOptionsError(options obj.Object) (result *Scene, err error)
 	PropertyForKey(key string) obj.Object
 	EntriesPassingTest(predicate func(obj.Object, obj.Object, *bool) bool) []obj.Object
 	Url() obj.Object

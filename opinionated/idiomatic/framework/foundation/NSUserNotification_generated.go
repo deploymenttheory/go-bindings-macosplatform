@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A notification that can be scheduled for display in the notification center.
-//
 // UserNotification is an idiomatic wrapper over the Objective-C class NSUserNotification.
+//
+// A notification that can be scheduled for display in the notification center.
 type UserNotification struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func UserNotificationFromID(id objc.ID) *UserNotification {
 	if id == 0 {
 		return nil
 	}
-	x := &UserNotification{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UserNotification{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func userNotificationAdopt(id objc.ID) *UserNotification {
 	if id == 0 {
 		return nil
 	}
-	x := &UserNotification{Handle: objref.Wrap(id)}
+	x := &UserNotification{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,147 +60,122 @@ func (x *UserNotification) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UserNotification) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewUserNotification creates a new UserNotification.
 func NewUserNotification() *UserNotification {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSUserNotification")), objc.RegisterName("new"))
 	return userNotificationAdopt(_id)
 }
 
-// Specifies the title of the notification.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle specifies the title of the notification.
 func (x *UserNotification) WithTitle(title StringProvider) *UserNotification {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), objref.IDOf(title))
 	return x
 }
 
-// Specifies the subtitle of the notification.
-//
-// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
+// WithSubtitle specifies the subtitle of the notification.
 func (x *UserNotification) WithSubtitle(subtitle StringProvider) *UserNotification {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), objref.IDOf(subtitle))
 	return x
 }
 
-// The body text of the notification.
-//
-// WithInformativeText sets informativeText and returns the receiver so calls can be chained.
+// WithInformativeText the body text of the notification.
 func (x *UserNotification) WithInformativeText(informativeText StringProvider) *UserNotification {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInformativeText:"), objref.IDOf(informativeText))
 	return x
 }
 
-// Specifies the title of the action button displayed in the notification.
-//
-// WithActionButtonTitle sets actionButtonTitle and returns the receiver so calls can be chained.
+// WithActionButtonTitle specifies the title of the action button displayed in the notification.
 func (x *UserNotification) WithActionButtonTitle(actionButtonTitle StringProvider) *UserNotification {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionButtonTitle:"), objref.IDOf(actionButtonTitle))
 	return x
 }
 
-// Application-specific user info that can be attached to the notification.
-//
-// WithUserInfo sets userInfo and returns the receiver so calls can be chained.
+// WithUserInfo application-specific user info that can be attached to the notification.
 func (x *UserNotification) WithUserInfo(userInfo obj.Object) *UserNotification {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return x
 }
 
-// Specifies when the notification should be delivered.
-//
-// WithDeliveryDate sets deliveryDate and returns the receiver so calls can be chained.
+// WithDeliveryDate specifies when the notification should be delivered.
 func (x *UserNotification) WithDeliveryDate(deliveryDate DateProvider) *UserNotification {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeliveryDate:"), objref.IDOf(deliveryDate))
 	return x
 }
 
-// Specify the time zone to interpret the delivery date in.
-//
-// WithDeliveryTimeZone sets deliveryTimeZone and returns the receiver so calls can be chained.
+// WithDeliveryTimeZone specify the time zone to interpret the delivery date in.
 func (x *UserNotification) WithDeliveryTimeZone(deliveryTimeZone *TimeZone) *UserNotification {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeliveryTimeZone:"), objref.IDOf(deliveryTimeZone))
 	return x
 }
 
-// Specifies the date components that control how often a user notification is repeated.
-//
-// WithDeliveryRepeatInterval sets deliveryRepeatInterval and returns the receiver so calls can be chained.
+// WithDeliveryRepeatInterval specifies the date components that control how often a user notification is repeated.
 func (x *UserNotification) WithDeliveryRepeatInterval(deliveryRepeatInterval *DateComponents) *UserNotification {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeliveryRepeatInterval:"), objref.IDOf(deliveryRepeatInterval))
 	return x
 }
 
-// Specifies the name of the sound to play when the notification is delivered.
-//
-// WithSoundName sets soundName and returns the receiver so calls can be chained.
+// WithSoundName specifies the name of the sound to play when the notification is delivered.
 func (x *UserNotification) WithSoundName(soundName StringProvider) *UserNotification {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoundName:"), objref.IDOf(soundName))
 	return x
 }
 
-// A Boolean value that specifies whether the notification displays an action button.
-//
-// WithHasActionButton sets hasActionButton and returns the receiver so calls can be chained.
+// WithHasActionButton a Boolean value that specifies whether the notification displays an action button.
 func (x *UserNotification) WithHasActionButton(hasActionButton bool) *UserNotification {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasActionButton:"), hasActionButton)
 	return x
 }
 
-// Specifies a custom title for the close button in an alert-style notification.
-//
-// WithOtherButtonTitle sets otherButtonTitle and returns the receiver so calls can be chained.
+// WithOtherButtonTitle specifies a custom title for the close button in an alert-style notification.
 func (x *UserNotification) WithOtherButtonTitle(otherButtonTitle StringProvider) *UserNotification {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOtherButtonTitle:"), objref.IDOf(otherButtonTitle))
 	return x
 }
 
-// A string that uniquely identifies a notification.
-//
-// WithIdentifier sets identifier and returns the receiver so calls can be chained.
+// WithIdentifier a string that uniquely identifies a notification.
 func (x *UserNotification) WithIdentifier(identifier StringProvider) *UserNotification {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
 	return x
 }
 
-// Image shown in the content of the notification.
-//
-// WithContentImage sets contentImage and returns the receiver so calls can be chained.
+// WithContentImage image shown in the content of the notification.
 func (x *UserNotification) WithContentImage(contentImage obj.Object) *UserNotification {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentImage:"), objref.IDOf(contentImage))
 	return x
 }
 
-// A Boolean value that specifies whether the notification displays a reply button.
-//
-// WithHasReplyButton sets hasReplyButton and returns the receiver so calls can be chained.
+// WithHasReplyButton a Boolean value that specifies whether the notification displays a reply button.
 func (x *UserNotification) WithHasReplyButton(hasReplyButton bool) *UserNotification {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasReplyButton:"), hasReplyButton)
 	return x
 }
 
-// Optional placeholder string for inline reply field.
-//
-// WithResponsePlaceholder sets responsePlaceholder and returns the receiver so calls can be chained.
+// WithResponsePlaceholder optional placeholder string for inline reply field.
 func (x *UserNotification) WithResponsePlaceholder(responsePlaceholder StringProvider) *UserNotification {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResponsePlaceholder:"), objref.IDOf(responsePlaceholder))
 	return x
 }
 
-// The actions that can be taken on a notification in addition to the default action.
-//
-// WithAdditionalActions sets the collection and returns the receiver so calls can be chained.
+// WithAdditionalActions the actions that can be taken on a notification in addition to the default action.
 func (x *UserNotification) WithAdditionalActions(items ...*UserNotificationAction) *UserNotification {
 	_arr := purego.SliceToNSArray(items, func(_v *UserNotificationAction) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalActions:"), _arr)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UserNotification) WithScriptingProperties(scriptingProperties obj.Object) *UserNotification {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *UserNotification) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -207,10 +184,12 @@ func (x *UserNotification) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *UserNotification) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
+// Subtitle wraps the corresponding Objective-C method.
 func (x *UserNotification) Subtitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitle"))
 	if _r == 0 {
@@ -219,10 +198,12 @@ func (x *UserNotification) Subtitle() string {
 	return purego.GoString(_r)
 }
 
+// SetSubtitle wraps the corresponding Objective-C method.
 func (x *UserNotification) SetSubtitle(subtitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 }
 
+// InformativeText wraps the corresponding Objective-C method.
 func (x *UserNotification) InformativeText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("informativeText"))
 	if _r == 0 {
@@ -231,10 +212,12 @@ func (x *UserNotification) InformativeText() string {
 	return purego.GoString(_r)
 }
 
+// SetInformativeText wraps the corresponding Objective-C method.
 func (x *UserNotification) SetInformativeText(informativeText string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInformativeText:"), purego.NSString(informativeText))
 }
 
+// ActionButtonTitle wraps the corresponding Objective-C method.
 func (x *UserNotification) ActionButtonTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actionButtonTitle"))
 	if _r == 0 {
@@ -243,61 +226,74 @@ func (x *UserNotification) ActionButtonTitle() string {
 	return purego.GoString(_r)
 }
 
+// SetActionButtonTitle wraps the corresponding Objective-C method.
 func (x *UserNotification) SetActionButtonTitle(actionButtonTitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionButtonTitle:"), purego.NSString(actionButtonTitle))
 }
 
+// UserInfo wraps the corresponding Objective-C method.
 func (x *UserNotification) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
+// SetUserInfo wraps the corresponding Objective-C method.
 func (x *UserNotification) SetUserInfo(userInfo obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 }
 
+// DeliveryDate wraps the corresponding Objective-C method.
 func (x *UserNotification) DeliveryDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deliveryDate"))
 	return DateFromID(_r)
 }
 
+// SetDeliveryDate wraps the corresponding Objective-C method.
 func (x *UserNotification) SetDeliveryDate(deliveryDate *Date) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeliveryDate:"), objref.IDOf(deliveryDate))
 }
 
+// DeliveryTimeZone wraps the corresponding Objective-C method.
 func (x *UserNotification) DeliveryTimeZone() *TimeZone {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deliveryTimeZone"))
 	return TimeZoneFromID(_r)
 }
 
+// SetDeliveryTimeZone wraps the corresponding Objective-C method.
 func (x *UserNotification) SetDeliveryTimeZone(deliveryTimeZone *TimeZone) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeliveryTimeZone:"), objref.IDOf(deliveryTimeZone))
 }
 
+// DeliveryRepeatInterval wraps the corresponding Objective-C method.
 func (x *UserNotification) DeliveryRepeatInterval() *DateComponents {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deliveryRepeatInterval"))
 	return DateComponentsFromID(_r)
 }
 
+// SetDeliveryRepeatInterval wraps the corresponding Objective-C method.
 func (x *UserNotification) SetDeliveryRepeatInterval(deliveryRepeatInterval *DateComponents) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeliveryRepeatInterval:"), objref.IDOf(deliveryRepeatInterval))
 }
 
+// ActualDeliveryDate wraps the corresponding Objective-C method.
 func (x *UserNotification) ActualDeliveryDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actualDeliveryDate"))
 	return DateFromID(_r)
 }
 
+// IsPresented wraps the corresponding Objective-C method.
 func (x *UserNotification) IsPresented() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPresented"))
 	return _r
 }
 
+// IsRemote wraps the corresponding Objective-C method.
 func (x *UserNotification) IsRemote() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRemote"))
 	return _r
 }
 
+// SoundName wraps the corresponding Objective-C method.
 func (x *UserNotification) SoundName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("soundName"))
 	if _r == 0 {
@@ -306,24 +302,29 @@ func (x *UserNotification) SoundName() string {
 	return purego.GoString(_r)
 }
 
+// SetSoundName wraps the corresponding Objective-C method.
 func (x *UserNotification) SetSoundName(soundName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoundName:"), purego.NSString(soundName))
 }
 
+// HasActionButton wraps the corresponding Objective-C method.
 func (x *UserNotification) HasActionButton() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasActionButton"))
 	return _r
 }
 
+// SetHasActionButton wraps the corresponding Objective-C method.
 func (x *UserNotification) SetHasActionButton(hasActionButton bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasActionButton:"), hasActionButton)
 }
 
+// ActivationType wraps the corresponding Objective-C method.
 func (x *UserNotification) ActivationType() UserNotificationActivationType {
 	_r := objc.Send[UserNotificationActivationType](objref.IDOf(x), objc.RegisterName("activationType"))
 	return _r
 }
 
+// OtherButtonTitle wraps the corresponding Objective-C method.
 func (x *UserNotification) OtherButtonTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("otherButtonTitle"))
 	if _r == 0 {
@@ -332,10 +333,12 @@ func (x *UserNotification) OtherButtonTitle() string {
 	return purego.GoString(_r)
 }
 
+// SetOtherButtonTitle wraps the corresponding Objective-C method.
 func (x *UserNotification) SetOtherButtonTitle(otherButtonTitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOtherButtonTitle:"), purego.NSString(otherButtonTitle))
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *UserNotification) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -344,28 +347,34 @@ func (x *UserNotification) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// SetIdentifier wraps the corresponding Objective-C method.
 func (x *UserNotification) SetIdentifier(identifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 }
 
+// ContentImage wraps the corresponding Objective-C method.
 func (x *UserNotification) ContentImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentImage"))
 	return obj.Wrap(_r)
 }
 
+// SetContentImage wraps the corresponding Objective-C method.
 func (x *UserNotification) SetContentImage(contentImage obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentImage:"), objref.IDOf(contentImage))
 }
 
+// HasReplyButton wraps the corresponding Objective-C method.
 func (x *UserNotification) HasReplyButton() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasReplyButton"))
 	return _r
 }
 
+// SetHasReplyButton wraps the corresponding Objective-C method.
 func (x *UserNotification) SetHasReplyButton(hasReplyButton bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasReplyButton:"), hasReplyButton)
 }
 
+// ResponsePlaceholder wraps the corresponding Objective-C method.
 func (x *UserNotification) ResponsePlaceholder() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("responsePlaceholder"))
 	if _r == 0 {
@@ -374,25 +383,31 @@ func (x *UserNotification) ResponsePlaceholder() string {
 	return purego.GoString(_r)
 }
 
+// SetResponsePlaceholder wraps the corresponding Objective-C method.
 func (x *UserNotification) SetResponsePlaceholder(responsePlaceholder string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResponsePlaceholder:"), purego.NSString(responsePlaceholder))
 }
 
+// Response wraps the corresponding Objective-C method.
 func (x *UserNotification) Response() *AttributedString {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("response"))
 	return AttributedStringFromID(_r)
 }
 
+// AdditionalActions wraps the corresponding Objective-C method.
+//
 // AdditionalActions returns the collection as a Go slice.
 func (x *UserNotification) AdditionalActions() []*UserNotificationAction {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("additionalActions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UserNotificationAction { return UserNotificationActionFromID(_id) })
 }
 
+// SetAdditionalActions wraps the corresponding Objective-C method.
 func (x *UserNotification) SetAdditionalActions(additionalActions []*UserNotificationAction) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalActions:"), purego.SliceToNSArray(additionalActions, func(_v *UserNotificationAction) objc.ID { return objref.IDOf(_v) }))
 }
 
+// AdditionalActivationAction wraps the corresponding Objective-C method.
 func (x *UserNotification) AdditionalActivationAction() *UserNotificationAction {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("additionalActivationAction"))
 	return UserNotificationActionFromID(_r)

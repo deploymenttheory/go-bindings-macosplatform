@@ -11,4 +11,5 @@ import (
 // ObjectProvider is accepted wherever a SBObject (or one of its subclasses) is expected.
 type ObjectProvider interface {
 	objref.Object
+	isObject()
 }

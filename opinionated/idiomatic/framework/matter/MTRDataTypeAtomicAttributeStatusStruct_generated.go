@@ -23,7 +23,8 @@ func MTRDataTypeAtomicAttributeStatusStructFromID(id objc.ID) *MTRDataTypeAtomic
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDataTypeAtomicAttributeStatusStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDataTypeAtomicAttributeStatusStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDataTypeAtomicAttributeStatusStructAdopt(id objc.ID) *MTRDataTypeAtomicA
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDataTypeAtomicAttributeStatusStruct{Handle: objref.Wrap(id)}
+	x := &MTRDataTypeAtomicAttributeStatusStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,38 +58,48 @@ func (x *MTRDataTypeAtomicAttributeStatusStruct) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDataTypeAtomicAttributeStatusStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDataTypeAtomicAttributeStatusStruct creates a new MTRDataTypeAtomicAttributeStatusStruct.
 func NewMTRDataTypeAtomicAttributeStatusStruct() *MTRDataTypeAtomicAttributeStatusStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDataTypeAtomicAttributeStatusStruct")), objc.RegisterName("new"))
 	return mTRDataTypeAtomicAttributeStatusStructAdopt(_id)
 }
 
-// WithAttributeID sets attributeID and returns the receiver so calls can be chained.
+// WithAttributeID sets the property and returns the receiver so calls can be chained.
 func (x *MTRDataTypeAtomicAttributeStatusStruct) WithAttributeID(attributeID obj.Object) *MTRDataTypeAtomicAttributeStatusStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeID:"), objref.IDOf(attributeID))
 	return x
 }
 
-// WithStatusCode sets statusCode and returns the receiver so calls can be chained.
+// WithStatusCode sets the property and returns the receiver so calls can be chained.
 func (x *MTRDataTypeAtomicAttributeStatusStruct) WithStatusCode(statusCode obj.Object) *MTRDataTypeAtomicAttributeStatusStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusCode:"), objref.IDOf(statusCode))
 	return x
 }
 
+// AttributeID wraps the corresponding Objective-C method.
 func (x *MTRDataTypeAtomicAttributeStatusStruct) AttributeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeID"))
 	return obj.Wrap(_r)
 }
 
+// SetAttributeID wraps the corresponding Objective-C method.
 func (x *MTRDataTypeAtomicAttributeStatusStruct) SetAttributeID(attributeID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeID:"), objref.IDOf(attributeID))
 }
 
+// StatusCode wraps the corresponding Objective-C method.
 func (x *MTRDataTypeAtomicAttributeStatusStruct) StatusCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statusCode"))
 	return obj.Wrap(_r)
 }
 
+// SetStatusCode wraps the corresponding Objective-C method.
 func (x *MTRDataTypeAtomicAttributeStatusStruct) SetStatusCode(statusCode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusCode:"), objref.IDOf(statusCode))
 }

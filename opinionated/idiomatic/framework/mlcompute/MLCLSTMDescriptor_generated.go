@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The configuration object you use to create the LSTM layer.
-//
 // LSTMDescriptor is an idiomatic wrapper over the Objective-C class MLCLSTMDescriptor.
+//
+// The configuration object you use to create the LSTM layer.
 type LSTMDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LSTMDescriptorFromID(id objc.ID) *LSTMDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &LSTMDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LSTMDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func lSTMDescriptorAdopt(id objc.ID) *LSTMDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &LSTMDescriptor{Handle: objref.Wrap(id)}
+	x := &LSTMDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,61 +60,67 @@ func (x *LSTMDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LSTMDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLSTMDescriptor creates a new LSTMDescriptor.
 func NewLSTMDescriptor() *LSTMDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLCLSTMDescriptor")), objc.RegisterName("new"))
 	return lSTMDescriptorAdopt(_id)
 }
 
-// The number of expected feature channels in the input
+// InputSize the number of expected feature channels in the input
 func (x *LSTMDescriptor) InputSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputSize"))
 	return _r
 }
 
-// The number of feature channels in the hidden state
+// HiddenSize the number of feature channels in the hidden state
 func (x *LSTMDescriptor) HiddenSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("hiddenSize"))
 	return _r
 }
 
-// The number of recurrent layers.  Default is 1.
+// LayerCount the number of recurrent layers.  Default is 1.
 func (x *LSTMDescriptor) LayerCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("layerCount"))
 	return _r
 }
 
-// If NO, the layer does not use bias terms.  Default is YES.
+// UsesBiases if NO, the layer does not use bias terms.  Default is YES.
 func (x *LSTMDescriptor) UsesBiases() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesBiases"))
 	return _r
 }
 
-// LSTM only supports batchFirst=YES. This means the input and output will have shape [batch size, time steps, feature]. Default is YES.
+// BatchFirst LSTM only supports batchFirst=YES. This means the input and output will have shape [batch size, time steps, feature]. Default is YES.
 func (x *LSTMDescriptor) BatchFirst() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("batchFirst"))
 	return _r
 }
 
-// If YES, becomes a bidirectional LSTM.  Default is NO.
+// IsBidirectional if YES, becomes a bidirectional LSTM.  Default is NO.
 func (x *LSTMDescriptor) IsBidirectional() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBidirectional"))
 	return _r
 }
 
-// if YES return output for all sequences else return output only for the last sequences. Default: YES
+// ReturnsSequences if YES return output for all sequences else return output only for the last sequences. Default: YES
 func (x *LSTMDescriptor) ReturnsSequences() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("returnsSequences"))
 	return _r
 }
 
-// If non-zero, intrdouces a dropout layer on the outputs of each LSTM layer except the last layer, with dropout probablity equal to dropout.  Default is 0.0.
+// Dropout if non-zero, intrdouces a dropout layer on the outputs of each LSTM layer except the last layer, with dropout probablity equal to dropout.  Default is 0.0.
 func (x *LSTMDescriptor) Dropout() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("dropout"))
 	return _r
 }
 
-// MLCLSTMResultModeOutput returns output data. MLCLSTMResultModeOutputAndStates returns output data, last hidden state h_n, and last cell state c_n. Default MLCLSTMResultModeOutput.
+// ResultMode MLCLSTMResultModeOutput returns output data. MLCLSTMResultModeOutputAndStates returns output data, last hidden state h_n, and last cell state c_n. Default MLCLSTMResultModeOutput.
 func (x *LSTMDescriptor) ResultMode() LSTMResultMode {
 	_r := objc.Send[LSTMResultMode](objref.IDOf(x), objc.RegisterName("resultMode"))
 	return _r

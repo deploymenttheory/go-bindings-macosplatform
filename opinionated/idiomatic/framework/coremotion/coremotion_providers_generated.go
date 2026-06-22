@@ -11,9 +11,11 @@ import (
 // LogItemProvider is accepted wherever a CMLogItem (or one of its subclasses) is expected.
 type LogItemProvider interface {
 	objref.Object
+	isLogItem()
 }
 
 // RotationRateDataProvider is accepted wherever a CMRotationRateData (or one of its subclasses) is expected.
 type RotationRateDataProvider interface {
 	objref.Object
+	isRotationRateData()
 }

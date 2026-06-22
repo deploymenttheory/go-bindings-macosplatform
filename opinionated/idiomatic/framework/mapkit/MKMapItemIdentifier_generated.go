@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unique identifier for a place.
-//
 // MapItemIdentifier is an idiomatic wrapper over the Objective-C class MKMapItemIdentifier.
+//
+// A unique identifier for a place.
 type MapItemIdentifier struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MapItemIdentifierFromID(id objc.ID) *MapItemIdentifier {
 	if id == 0 {
 		return nil
 	}
-	x := &MapItemIdentifier{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MapItemIdentifier{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mapItemIdentifierAdopt(id objc.ID) *MapItemIdentifier {
 	if id == 0 {
 		return nil
 	}
-	x := &MapItemIdentifier{Handle: objref.Wrap(id)}
+	x := &MapItemIdentifier{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +60,12 @@ func (x *MapItemIdentifier) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MapItemIdentifier) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMapItemIdentifierWithIdentifierString creates a new MapItemIdentifier.
 func NewMapItemIdentifierWithIdentifierString(string_ string) *MapItemIdentifier {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItemIdentifier")), objc.RegisterName("alloc"))
@@ -65,6 +73,7 @@ func NewMapItemIdentifierWithIdentifierString(string_ string) *MapItemIdentifier
 	return mapItemIdentifierAdopt(_id)
 }
 
+// IdentifierString wraps the corresponding Objective-C method.
 func (x *MapItemIdentifier) IdentifierString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifierString"))
 	if _r == 0 {

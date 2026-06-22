@@ -23,7 +23,8 @@ func ViewFromID(id objc.ID) *View {
 	if id == 0 {
 		return nil
 	}
-	x := &View{Handle: objref.Wrap(purego.Retain(id))}
+	x := &View{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func viewAdopt(id objc.ID) *View {
 	if id == 0 {
 		return nil
 	}
-	x := &View{Handle: objref.Wrap(id)}
+	x := &View{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,131 +58,164 @@ func (x *View) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *View) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewView creates a new View.
 func NewView() *View {
 	_id := objc.Send[objc.ID](objc.ID(_class("QCView")), objc.RegisterName("new"))
 	return viewAdopt(_id)
 }
 
+// LoadCompositionFromFile wraps the corresponding Objective-C method.
 func (x *View) LoadCompositionFromFile(path string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadCompositionFromFile:"), purego.NSString(path))
 	return _r
 }
 
+// LoadComposition wraps the corresponding Objective-C method.
 func (x *View) LoadComposition(composition obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadComposition:"), objref.IDOf(composition))
 	return _r
 }
 
+// LoadedComposition wraps the corresponding Objective-C method.
 func (x *View) LoadedComposition() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadedComposition"))
 	return obj.Wrap(_r)
 }
 
+// UnloadComposition wraps the corresponding Objective-C method.
 func (x *View) UnloadComposition() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unloadComposition"))
 }
 
+// SetAutostartsRendering wraps the corresponding Objective-C method.
 func (x *View) SetAutostartsRendering(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutostartsRendering:"), flag)
 }
 
+// AutostartsRendering wraps the corresponding Objective-C method.
 func (x *View) AutostartsRendering() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autostartsRendering"))
 	return _r
 }
 
+// SetEraseColor wraps the corresponding Objective-C method.
 func (x *View) SetEraseColor(color obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEraseColor:"), objref.IDOf(color))
 }
 
+// EraseColor wraps the corresponding Objective-C method.
 func (x *View) EraseColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eraseColor"))
 	return obj.Wrap(_r)
 }
 
+// SetEventForwardingMask wraps the corresponding Objective-C method.
 func (x *View) SetEventForwardingMask(mask int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEventForwardingMask:"), mask)
 }
 
+// EventForwardingMask wraps the corresponding Objective-C method.
 func (x *View) EventForwardingMask() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("eventForwardingMask"))
 	return _r
 }
 
+// SetMaxRenderingFrameRate wraps the corresponding Objective-C method.
 func (x *View) SetMaxRenderingFrameRate(maxFPS float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxRenderingFrameRate:"), maxFPS)
 }
 
+// MaxRenderingFrameRate wraps the corresponding Objective-C method.
 func (x *View) MaxRenderingFrameRate() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maxRenderingFrameRate"))
 	return _r
 }
 
+// Erase wraps the corresponding Objective-C method.
 func (x *View) Erase() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("erase"))
 }
 
+// StartRendering wraps the corresponding Objective-C method.
 func (x *View) StartRendering() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startRendering"))
 	return _r
 }
 
+// RenderAtTimeArguments wraps the corresponding Objective-C method.
 func (x *View) RenderAtTimeArguments(time_ float64, arguments obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("renderAtTime:arguments:"), time_, objref.IDOf(arguments))
 	return _r
 }
 
+// PauseRendering wraps the corresponding Objective-C method.
 func (x *View) PauseRendering() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseRendering"))
 }
 
+// IsPausedRendering wraps the corresponding Objective-C method.
 func (x *View) IsPausedRendering() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPausedRendering"))
 	return _r
 }
 
+// ResumeRendering wraps the corresponding Objective-C method.
 func (x *View) ResumeRendering() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeRendering"))
 }
 
+// StopRendering wraps the corresponding Objective-C method.
 func (x *View) StopRendering() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopRendering"))
 }
 
+// IsRendering wraps the corresponding Objective-C method.
 func (x *View) IsRendering() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRendering"))
 	return _r
 }
 
+// SnapshotImage wraps the corresponding Objective-C method.
 func (x *View) SnapshotImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotImage"))
 	return obj.Wrap(_r)
 }
 
+// CreateSnapshotImageOfType wraps the corresponding Objective-C method.
 func (x *View) CreateSnapshotImageOfType(type_ string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createSnapshotImageOfType:"), purego.NSString(type_))
 	return obj.Wrap(_r)
 }
 
+// OpenGLContext wraps the corresponding Objective-C method.
 func (x *View) OpenGLContext() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLContext"))
 	return obj.Wrap(_r)
 }
 
+// OpenGLPixelFormat wraps the corresponding Objective-C method.
 func (x *View) OpenGLPixelFormat() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLPixelFormat"))
 	return obj.Wrap(_r)
 }
 
+// Start wraps the corresponding Objective-C method.
 func (x *View) Start(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start:"), objref.IDOf(sender))
 }
 
+// Stop wraps the corresponding Objective-C method.
 func (x *View) Stop(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop:"), objref.IDOf(sender))
 }
 
+// Play wraps the corresponding Objective-C method.
 func (x *View) Play(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("play:"), objref.IDOf(sender))
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A simple, reusable animation that changes attributes of any node you attach it to.
-//
 // Action is an idiomatic wrapper over the Objective-C class SCNAction.
+//
+// A simple, reusable animation that changes attributes of any node you attach it to.
 type Action struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ActionFromID(id objc.ID) *Action {
 	if id == 0 {
 		return nil
 	}
-	x := &Action{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Action{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func actionAdopt(id objc.ID) *Action {
 	if id == 0 {
 		return nil
 	}
-	x := &Action{Handle: objref.Wrap(id)}
+	x := &Action{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,68 +60,71 @@ func (x *Action) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Action) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAction creates a new Action.
 func NewAction() *Action {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("new"))
 	return actionAdopt(_id)
 }
 
-// The duration required to complete an action.
-//
-// WithDuration sets duration and returns the receiver so calls can be chained.
+// WithDuration the duration required to complete an action.
 func (x *Action) WithDuration(duration float64) *Action {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
 	return x
 }
 
-// The timing mode used to execute an action.
-//
-// WithTimingMode sets timingMode and returns the receiver so calls can be chained.
+// WithTimingMode the timing mode used to execute an action.
 func (x *Action) WithTimingMode(timingMode ActionTimingMode) *Action {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingMode:"), timingMode)
 	return x
 }
 
-// A speed factor that modifies how fast an action runs.
-//
-// WithSpeed sets speed and returns the receiver so calls can be chained.
+// WithSpeed a speed factor that modifies how fast an action runs.
 func (x *Action) WithSpeed(speed float64) *Action {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
-// Creates an action that reverses the behavior of another action.
+// ReversedAction creates an action that reverses the behavior of another action.
 func (x *Action) ReversedAction() *Action {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reversedAction"))
 	return ActionFromID(_r)
 }
 
-// This is the expected duration of an action’s animation. The actual time an action takes to complete is modified by the speed property of the action.
+// Duration this is the expected duration of an action’s animation. The actual time an action takes to complete is modified by the speed property of the action.
 func (x *Action) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
 	return _r
 }
 
+// SetDuration wraps the corresponding Objective-C method.
 func (x *Action) SetDuration(duration float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
 }
 
-// The timing mode used to execute an action.
+// TimingMode the timing mode used to execute an action.
 func (x *Action) TimingMode() ActionTimingMode {
 	_r := objc.Send[ActionTimingMode](objref.IDOf(x), objc.RegisterName("timingMode"))
 	return _r
 }
 
+// SetTimingMode wraps the corresponding Objective-C method.
 func (x *Action) SetTimingMode(timingMode ActionTimingMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingMode:"), timingMode)
 }
 
-// A speed factor that modifies how fast an action runs. Defaults to 1.
+// Speed a speed factor that modifies how fast an action runs. Defaults to 1.
 func (x *Action) Speed() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speed"))
 	return _r
 }
 
+// SetSpeed wraps the corresponding Objective-C method.
 func (x *Action) SetSpeed(speed float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 }

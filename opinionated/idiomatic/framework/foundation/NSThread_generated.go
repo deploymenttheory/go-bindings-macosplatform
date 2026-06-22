@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A thread of execution.
-//
 // Thread is an idiomatic wrapper over the Objective-C class NSThread.
+//
+// A thread of execution.
 type Thread struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ThreadFromID(id objc.ID) *Thread {
 	if id == 0 {
 		return nil
 	}
-	x := &Thread{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Thread{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func threadAdopt(id objc.ID) *Thread {
 	if id == 0 {
 		return nil
 	}
-	x := &Thread{Handle: objref.Wrap(id)}
+	x := &Thread{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +60,12 @@ func (x *Thread) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Thread) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewThread creates a new Thread.
 func NewThread() *Thread {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSThread")), objc.RegisterName("new"))
@@ -71,71 +79,80 @@ func NewThreadWith(block func()) *Thread {
 	return threadAdopt(_id)
 }
 
-// WithThreadPriority sets threadPriority and returns the receiver so calls can be chained.
+// WithThreadPriority sets the property and returns the receiver so calls can be chained.
 func (x *Thread) WithThreadPriority(threadPriority float64) *Thread {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadPriority:"), threadPriority)
 	return x
 }
 
-// WithQualityOfService sets qualityOfService and returns the receiver so calls can be chained.
+// WithQualityOfService sets the property and returns the receiver so calls can be chained.
 func (x *Thread) WithQualityOfService(qualityOfService QualityOfService) *Thread {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityOfService:"), qualityOfService)
 	return x
 }
 
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *Thread) WithName(name StringProvider) *Thread {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 	return x
 }
 
-// WithStackSize sets stackSize and returns the receiver so calls can be chained.
+// WithStackSize sets the property and returns the receiver so calls can be chained.
 func (x *Thread) WithStackSize(stackSize int) *Thread {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStackSize:"), stackSize)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Thread) WithScriptingProperties(scriptingProperties obj.Object) *Thread {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Cancel wraps the corresponding Objective-C method.
 func (x *Thread) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
+// Start wraps the corresponding Objective-C method.
 func (x *Thread) Start() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
 }
 
+// Main wraps the corresponding Objective-C method.
 func (x *Thread) Main() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("main"))
 }
 
+// ThreadDictionary wraps the corresponding Objective-C method.
 func (x *Thread) ThreadDictionary() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("threadDictionary"))
 	return obj.Wrap(_r)
 }
 
+// ThreadPriority wraps the corresponding Objective-C method.
 func (x *Thread) ThreadPriority() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("threadPriority"))
 	return _r
 }
 
+// SetThreadPriority wraps the corresponding Objective-C method.
 func (x *Thread) SetThreadPriority(threadPriority float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadPriority:"), threadPriority)
 }
 
+// QualityOfService wraps the corresponding Objective-C method.
 func (x *Thread) QualityOfService() QualityOfService {
 	_r := objc.Send[QualityOfService](objref.IDOf(x), objc.RegisterName("qualityOfService"))
 	return _r
 }
 
+// SetQualityOfService wraps the corresponding Objective-C method.
 func (x *Thread) SetQualityOfService(qualityOfService QualityOfService) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityOfService:"), qualityOfService)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *Thread) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -144,34 +161,41 @@ func (x *Thread) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *Thread) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
+// StackSize wraps the corresponding Objective-C method.
 func (x *Thread) StackSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stackSize"))
 	return _r
 }
 
+// SetStackSize wraps the corresponding Objective-C method.
 func (x *Thread) SetStackSize(stackSize int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStackSize:"), stackSize)
 }
 
+// IsMainThread wraps the corresponding Objective-C method.
 func (x *Thread) IsMainThread() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMainThread"))
 	return _r
 }
 
+// IsExecuting wraps the corresponding Objective-C method.
 func (x *Thread) IsExecuting() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isExecuting"))
 	return _r
 }
 
+// IsFinished wraps the corresponding Objective-C method.
 func (x *Thread) IsFinished() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFinished"))
 	return _r
 }
 
+// IsCancelled wraps the corresponding Objective-C method.
 func (x *Thread) IsCancelled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCancelled"))
 	return _r

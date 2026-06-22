@@ -6,15 +6,16 @@ package cinematic
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A structure that represents a detected subject, face, torso or pet at a particular time.
-//
 // Detection is an idiomatic wrapper over the Objective-C class CNDetection.
+//
+// A structure that represents a detected subject, face, torso or pet at a particular time.
 type Detection struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func DetectionFromID(id objc.ID) *Detection {
 	if id == 0 {
 		return nil
 	}
-	x := &Detection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Detection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func detectionAdopt(id objc.ID) *Detection {
 	if id == 0 {
 		return nil
 	}
-	x := &Detection{Handle: objref.Wrap(id)}
+	x := &Detection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +61,43 @@ func (x *Detection) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Detection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDetection creates a new Detection.
 func NewDetection() *Detection {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNDetection")), objc.RegisterName("new"))
 	return detectionAdopt(_id)
 }
 
-// The type of object that was detected (face, torso, cat, dog, etc.)
+// DetectionType the type of object that was detected (face, torso, cat, dog, etc.)
 func (x *Detection) DetectionType() DetectionType {
 	_r := objc.Send[DetectionType](objref.IDOf(x), objc.RegisterName("detectionType"))
 	return _r
 }
 
-// The disparity to use in order to focus on the object. If the disparity is unknown, use the class method to find it: `disparityInNormalizedRect:sourceDisparity:detectionType:priorDisparity:`.
+// NormalizedRect the rectangle within the image where the object occurs, normalized such that (0.0, 0.0) is the top-left and (1.0, 1.0) is the bottom-right.
+func (x *Detection) NormalizedRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("normalizedRect"))
+	return _r
+}
+
+// FocusDisparity the disparity to use in order to focus on the object. If the disparity is unknown, use the class method to find it: `disparityInNormalizedRect:sourceDisparity:detectionType:priorDisparity:`.
 func (x *Detection) FocusDisparity() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("focusDisparity"))
 	return _r
 }
 
-// An unique identifier assigned by the cinematic script to all detections of the same subject and detection type across time. If you build a custom detection track, the detectionID will be assigned when you add it to the script.
+// DetectionID an unique identifier assigned by the cinematic script to all detections of the same subject and detection type across time. If you build a custom detection track, the detectionID will be assigned when you add it to the script.
 func (x *Detection) DetectionID() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("detectionID"))
 	return _r
 }
 
-// An unique identifier assigned by the cinematic script to all detections of the same subject and related detection types across time. For example, the face/torso detections of the same person are assigned the same detectionGroupID.
+// DetectionGroupID an unique identifier assigned by the cinematic script to all detections of the same subject and related detection types across time. For example, the face/torso detections of the same person are assigned the same detectionGroupID.
 func (x *Detection) DetectionGroupID() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("detectionGroupID"))
 	return _r
@@ -92,6 +107,7 @@ func (x *Detection) DetectionGroupID() int64 {
 type Detectionable interface {
 	obj.Object
 	DetectionType() DetectionType
+	NormalizedRect() corefoundation.CGRect
 	FocusDisparity() float32
 	DetectionID() int64
 	DetectionGroupID() int64

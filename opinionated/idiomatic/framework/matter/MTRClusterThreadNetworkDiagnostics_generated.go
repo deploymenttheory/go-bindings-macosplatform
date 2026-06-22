@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterThreadNetworkDiagnostics is an idiomatic wrapper over the Objective-C class MTRClusterThreadNetworkDiagnostics.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterThreadNetworkDiagnostics struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterThreadNetworkDiagnosticsFromID adopts an existing Objective-C object as a MTRClusterThreadNetworkDiagnostics
@@ -23,7 +24,8 @@ func MTRClusterThreadNetworkDiagnosticsFromID(id objc.ID) *MTRClusterThreadNetwo
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterThreadNetworkDiagnostics{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterThreadNetworkDiagnostics{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,29 +38,13 @@ func mTRClusterThreadNetworkDiagnosticsAdopt(id objc.ID) *MTRClusterThreadNetwor
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterThreadNetworkDiagnostics{Handle: objref.Wrap(id)}
+	x := &MTRClusterThreadNetworkDiagnostics{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterThreadNetworkDiagnostics) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterThreadNetworkDiagnostics) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterThreadNetworkDiagnostics) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterThreadNetworkDiagnosticsWithDeviceEndpointIDQueue creates a new MTRClusterThreadNetworkDiagnostics.
+// NewMTRClusterThreadNetworkDiagnosticsWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterThreadNetworkDiagnosticsWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterThreadNetworkDiagnostics {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterThreadNetworkDiagnostics")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -72,351 +58,421 @@ func NewMTRClusterThreadNetworkDiagnosticsWithDeviceEndpointQueue(device *MTRDev
 	return mTRClusterThreadNetworkDiagnosticsAdopt(_id)
 }
 
+// ReadAttributeChannelWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeChannelWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChannelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRoutingRoleWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRoutingRoleWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRoutingRoleWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeNetworkNameWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeNetworkNameWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNetworkNameWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributePanIdWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributePanIdWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePanIdWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeExtendedPanIdWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanIdWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeExtendedPanIdWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMeshLocalPrefixWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPrefixWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeshLocalPrefixWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeOverrunCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeOverrunCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOverrunCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeNeighborTableWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNeighborTableWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRouteTableWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRouteTableWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRouteTableWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributePartitionIdWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributePartitionIdWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePartitionIdWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeWeightingWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeWeightingWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWeightingWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeDataVersionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeDataVersionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDataVersionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeStableDataVersionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeStableDataVersionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStableDataVersionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeLeaderRouterIdWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterIdWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLeaderRouterIdWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeDetachedRoleCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDetachedRoleCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeChildRoleCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChildRoleCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRouterRoleCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRouterRoleCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeLeaderRoleCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLeaderRoleCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttachAttemptCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeAttachAttemptCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttachAttemptCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributePartitionIdChangeCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributePartitionIdChangeCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePartitionIdChangeCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeBetterPartitionAttachAttemptCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeBetterPartitionAttachAttemptCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBetterPartitionAttachAttemptCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeParentChangeCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeParentChangeCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeParentChangeCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeTxTotalCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxTotalCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeTxUnicastCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxUnicastCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeTxBroadcastCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxBroadcastCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeTxAckRequestedCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequestedCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxAckRequestedCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeTxAckedCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxAckedCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeTxNoAckRequestedCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckRequestedCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxNoAckRequestedCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeTxDataCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxDataCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxDataCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeTxDataPollCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxDataPollCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeTxBeaconCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxBeaconCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeTxBeaconRequestCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconRequestCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxBeaconRequestCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeTxOtherCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxOtherCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeTxRetryCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxRetryCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeTxDirectMaxRetryExpiryCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRetryExpiryCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxDirectMaxRetryExpiryCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeTxIndirectMaxRetryExpiryCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMaxRetryExpiryCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxIndirectMaxRetryExpiryCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeTxErrCcaCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxErrCcaCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeTxErrAbortCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxErrAbortCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeTxErrBusyChannelCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChannelCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxErrBusyChannelCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRxTotalCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxTotalCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRxUnicastCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxUnicastCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRxBroadcastCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxBroadcastCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRxDataCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxDataCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDataCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRxDataPollCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDataPollCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRxBeaconCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxBeaconCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRxBeaconRequestCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconRequestCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxBeaconRequestCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRxOtherCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxOtherCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRxAddressFilteredCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilteredCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxAddressFilteredCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRxDestAddrFilteredCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFilteredCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDestAddrFilteredCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRxDuplicatedCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDuplicatedCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRxErrNoFrameCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrNoFrameCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRxErrUnknownNeighborCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownNeighborCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrUnknownNeighborCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRxErrInvalidSrcAddrCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidSrcAddrCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrInvalidSrcAddrCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRxErrSecCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrSecCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRxErrFcsCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrFcsCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRxErrOtherCountWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrOtherCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeActiveTimestampWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeActiveTimestampWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveTimestampWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributePendingTimestampWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributePendingTimestampWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePendingTimestampWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeDelayWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeDelayWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDelayWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeSecurityPolicyWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolicyWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSecurityPolicyWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeChannelPage0MaskWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0MaskWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChannelPage0MaskWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeOperationalDatasetComponentsWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeOperationalDatasetComponentsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOperationalDatasetComponentsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeActiveNetworkFaultsListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeActiveNetworkFaultsListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveNetworkFaultsListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeNeighborTableListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNeighborTableListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRouteTableListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRouteTableListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRouteTableListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -498,3 +554,7 @@ type MTRClusterThreadNetworkDiagnosticsable interface {
 }
 
 var _ MTRClusterThreadNetworkDiagnosticsable = (*MTRClusterThreadNetworkDiagnostics)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterThreadNetworkDiagnostics)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterThreadNetworkDiagnostics)(nil)

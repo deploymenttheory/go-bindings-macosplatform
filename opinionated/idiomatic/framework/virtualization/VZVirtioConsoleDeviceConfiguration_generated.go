@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A console device that enables communication between the host and the guest using console ports through a Virtio interface.
-//
 // VirtioConsoleDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZVirtioConsoleDeviceConfiguration.
+//
+// It embeds [ConsoleDeviceConfiguration], promoting that type's methods.
+//
+// A console device that enables communication between the host and the guest using console ports through a Virtio interface.
 type VirtioConsoleDeviceConfiguration struct {
-	objref.Handle
+	ConsoleDeviceConfiguration
 }
 
 // VirtioConsoleDeviceConfigurationFromID adopts an existing Objective-C object as a VirtioConsoleDeviceConfiguration
@@ -25,7 +26,8 @@ func VirtioConsoleDeviceConfigurationFromID(id objc.ID) *VirtioConsoleDeviceConf
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioConsoleDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VirtioConsoleDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func virtioConsoleDeviceConfigurationAdopt(id objc.ID) *VirtioConsoleDeviceConfi
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioConsoleDeviceConfiguration{Handle: objref.Wrap(id)}
+	x := &VirtioConsoleDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *VirtioConsoleDeviceConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VirtioConsoleDeviceConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VirtioConsoleDeviceConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewVirtioConsoleDeviceConfiguration creates a new VirtioConsoleDeviceConfiguration.
@@ -64,6 +52,7 @@ func NewVirtioConsoleDeviceConfiguration() *VirtioConsoleDeviceConfiguration {
 	return virtioConsoleDeviceConfigurationAdopt(_id)
 }
 
+// Ports wraps the corresponding Objective-C method.
 func (x *VirtioConsoleDeviceConfiguration) Ports() *VirtioConsolePortConfigurationArray {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ports"))
 	return VirtioConsolePortConfigurationArrayFromID(_r)
@@ -76,3 +65,5 @@ type VirtioConsoleDeviceConfigurationable interface {
 }
 
 var _ VirtioConsoleDeviceConfigurationable = (*VirtioConsoleDeviceConfiguration)(nil)
+
+var _ ConsoleDeviceConfigurationProvider = (*VirtioConsoleDeviceConfiguration)(nil)

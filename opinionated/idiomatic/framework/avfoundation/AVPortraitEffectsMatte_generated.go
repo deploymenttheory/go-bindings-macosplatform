@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An auxiliary image used to separate foreground from background with high resolution.
-//
 // PortraitEffectsMatte is an idiomatic wrapper over the Objective-C class AVPortraitEffectsMatte.
+//
+// An auxiliary image used to separate foreground from background with high resolution.
 type PortraitEffectsMatte struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PortraitEffectsMatteFromID(id objc.ID) *PortraitEffectsMatte {
 	if id == 0 {
 		return nil
 	}
-	x := &PortraitEffectsMatte{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PortraitEffectsMatte{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func portraitEffectsMatteAdopt(id objc.ID) *PortraitEffectsMatte {
 	if id == 0 {
 		return nil
 	}
-	x := &PortraitEffectsMatte{Handle: objref.Wrap(id)}
+	x := &PortraitEffectsMatte{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *PortraitEffectsMatte) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PortraitEffectsMatte) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPortraitEffectsMatte creates a new PortraitEffectsMatte.
 func NewPortraitEffectsMatte() *PortraitEffectsMatte {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVPortraitEffectsMatte")), objc.RegisterName("new"))
 	return portraitEffectsMatteAdopt(_id)
 }
 
-// A dictionary of primitive map information used for writing an image file with a portrait effects matte.
+// DictionaryRepresentationForAuxiliaryDataType a dictionary of primitive map information used for writing an image file with a portrait effects matte.
 func (x *PortraitEffectsMatte) DictionaryRepresentationForAuxiliaryDataType(outAuxDataType string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentationForAuxiliaryDataType:"), purego.NSString(outAuxDataType))
 	return obj.Wrap(_r)
 }
 
-// Specifies the pixel format type of this object's internal matting image. Currently the only supported CV pixel format type for the matting image is kCVPixelFormatType_OneComponent8.
+// PixelFormatType specifies the pixel format type of this object's internal matting image. Currently the only supported CV pixel format type for the matting image is kCVPixelFormatType_OneComponent8.
 func (x *PortraitEffectsMatte) PixelFormatType() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelFormatType"))
 	return _r

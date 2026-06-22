@@ -23,7 +23,8 @@ func MTRICDManagementClusterUnregisterClientParamsFromID(id objc.ID) *MTRICDMana
 	if id == 0 {
 		return nil
 	}
-	x := &MTRICDManagementClusterUnregisterClientParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRICDManagementClusterUnregisterClientParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRICDManagementClusterUnregisterClientParamsAdopt(id objc.ID) *MTRICDManag
 	if id == 0 {
 		return nil
 	}
-	x := &MTRICDManagementClusterUnregisterClientParams{Handle: objref.Wrap(id)}
+	x := &MTRICDManagementClusterUnregisterClientParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,74 +58,82 @@ func (x *MTRICDManagementClusterUnregisterClientParams) IsKind(className string)
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRICDManagementClusterUnregisterClientParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRICDManagementClusterUnregisterClientParams creates a new MTRICDManagementClusterUnregisterClientParams.
 func NewMTRICDManagementClusterUnregisterClientParams() *MTRICDManagementClusterUnregisterClientParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRICDManagementClusterUnregisterClientParams")), objc.RegisterName("new"))
 	return mTRICDManagementClusterUnregisterClientParamsAdopt(_id)
 }
 
-// WithCheckInNodeID sets checkInNodeID and returns the receiver so calls can be chained.
+// WithCheckInNodeID sets the property and returns the receiver so calls can be chained.
 func (x *MTRICDManagementClusterUnregisterClientParams) WithCheckInNodeID(checkInNodeID obj.Object) *MTRICDManagementClusterUnregisterClientParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCheckInNodeID:"), objref.IDOf(checkInNodeID))
 	return x
 }
 
-// WithVerificationKey sets verificationKey and returns the receiver so calls can be chained.
+// WithVerificationKey sets the property and returns the receiver so calls can be chained.
 func (x *MTRICDManagementClusterUnregisterClientParams) WithVerificationKey(verificationKey obj.Object) *MTRICDManagementClusterUnregisterClientParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerificationKey:"), objref.IDOf(verificationKey))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke).
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
 func (x *MTRICDManagementClusterUnregisterClientParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRICDManagementClusterUnregisterClientParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
 func (x *MTRICDManagementClusterUnregisterClientParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRICDManagementClusterUnregisterClientParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// CheckInNodeID wraps the corresponding Objective-C method.
 func (x *MTRICDManagementClusterUnregisterClientParams) CheckInNodeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("checkInNodeID"))
 	return obj.Wrap(_r)
 }
 
+// SetCheckInNodeID wraps the corresponding Objective-C method.
 func (x *MTRICDManagementClusterUnregisterClientParams) SetCheckInNodeID(checkInNodeID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCheckInNodeID:"), objref.IDOf(checkInNodeID))
 }
 
+// VerificationKey wraps the corresponding Objective-C method.
 func (x *MTRICDManagementClusterUnregisterClientParams) VerificationKey() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("verificationKey"))
 	return obj.Wrap(_r)
 }
 
+// SetVerificationKey wraps the corresponding Objective-C method.
 func (x *MTRICDManagementClusterUnregisterClientParams) SetVerificationKey(verificationKey obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerificationKey:"), objref.IDOf(verificationKey))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRICDManagementClusterUnregisterClientParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRICDManagementClusterUnregisterClientParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRICDManagementClusterUnregisterClientParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRICDManagementClusterUnregisterClientParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

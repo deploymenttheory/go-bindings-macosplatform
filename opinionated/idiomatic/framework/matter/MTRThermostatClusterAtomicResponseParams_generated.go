@@ -25,7 +25,8 @@ func MTRThermostatClusterAtomicResponseParamsFromID(id objc.ID) *MTRThermostatCl
 	if id == 0 {
 		return nil
 	}
-	x := &MTRThermostatClusterAtomicResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRThermostatClusterAtomicResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRThermostatClusterAtomicResponseParamsAdopt(id objc.ID) *MTRThermostatClu
 	if id == 0 {
 		return nil
 	}
-	x := &MTRThermostatClusterAtomicResponseParams{Handle: objref.Wrap(id)}
+	x := &MTRThermostatClusterAtomicResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTRThermostatClusterAtomicResponseParams) IsKind(className string) bool
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRThermostatClusterAtomicResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-//
-// NewMTRThermostatClusterAtomicResponseParamsWithResponseValueError creates a new MTRThermostatClusterAtomicResponseParams.
-func NewMTRThermostatClusterAtomicResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRThermostatClusterAtomicResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRThermostatClusterAtomicResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRThermostatClusterAtomicResponseParamsWithResponseValueError initialize an MTRThermostatClusterAtomicResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRThermostatClusterAtomicResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRThermostatClusterAtomicResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRThermostatClusterAtomicResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,41 +77,47 @@ func NewMTRThermostatClusterAtomicResponseParamsWithResponseValueError(responseV
 	return mTRThermostatClusterAtomicResponseParamsAdopt(_id), nil
 }
 
-// WithStatusCode sets statusCode and returns the receiver so calls can be chained.
+// WithStatusCode sets the property and returns the receiver so calls can be chained.
 func (x *MTRThermostatClusterAtomicResponseParams) WithStatusCode(statusCode obj.Object) *MTRThermostatClusterAtomicResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusCode:"), objref.IDOf(statusCode))
 	return x
 }
 
-// WithTimeout sets timeout and returns the receiver so calls can be chained.
+// WithTimeout sets the property and returns the receiver so calls can be chained.
 func (x *MTRThermostatClusterAtomicResponseParams) WithTimeout(timeout obj.Object) *MTRThermostatClusterAtomicResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeout:"), objref.IDOf(timeout))
 	return x
 }
 
+// StatusCode wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterAtomicResponseParams) StatusCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statusCode"))
 	return obj.Wrap(_r)
 }
 
+// SetStatusCode wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterAtomicResponseParams) SetStatusCode(statusCode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusCode:"), objref.IDOf(statusCode))
 }
 
+// AttributeStatus wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterAtomicResponseParams) AttributeStatus() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeStatus"))
 	return obj.Wrap(_r)
 }
 
+// SetAttributeStatus wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterAtomicResponseParams) SetAttributeStatus(attributeStatus obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeStatus:"), objref.IDOf(attributeStatus))
 }
 
+// Timeout wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterAtomicResponseParams) Timeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeout"))
 	return obj.Wrap(_r)
 }
 
+// SetTimeout wraps the corresponding Objective-C method.
 func (x *MTRThermostatClusterAtomicResponseParams) SetTimeout(timeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeout:"), objref.IDOf(timeout))
 }

@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A controller that acts as a bridge between your Finder Sync extension and the Finder itself.
-//
 // FinderSyncController is an idiomatic wrapper over the Objective-C class FIFinderSyncController.
+//
+// A controller that acts as a bridge between your Finder Sync extension and the Finder itself.
 type FinderSyncController struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func FinderSyncControllerFromID(id objc.ID) *FinderSyncController {
 	if id == 0 {
 		return nil
 	}
-	x := &FinderSyncController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FinderSyncController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func finderSyncControllerAdopt(id objc.ID) *FinderSyncController {
 	if id == 0 {
 		return nil
 	}
-	x := &FinderSyncController{Handle: objref.Wrap(id)}
+	x := &FinderSyncController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,37 +62,41 @@ func (x *FinderSyncController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FinderSyncController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFinderSyncController creates a new FinderSyncController.
 func NewFinderSyncController() *FinderSyncController {
 	_id := objc.Send[objc.ID](objc.ID(_class("FIFinderSyncController")), objc.RegisterName("new"))
 	return finderSyncControllerAdopt(_id)
 }
 
-// The directories managed by this extension.
-//
-// WithDirectoryURLs sets directoryURLs and returns the receiver so calls can be chained.
+// WithDirectoryURLs the directories managed by this extension.
 func (x *FinderSyncController) WithDirectoryURLs(directoryURLs obj.Object) *FinderSyncController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirectoryURLs:"), objref.IDOf(directoryURLs))
 	return x
 }
 
-// Sets the badge image and label for the given ID.
+// SetBadgeImageLabelForBadgeIdentifier sets the badge image and label for the given ID.
 func (x *FinderSyncController) SetBadgeImageLabelForBadgeIdentifier(image obj.Object, label string, badgeID string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadgeImage:label:forBadgeIdentifier:"), objref.IDOf(image), purego.NSString(label), purego.NSString(badgeID))
 }
 
-// Sets the badge for a file or directory.
+// SetBadgeIdentifierForURL sets the badge for a file or directory.
 func (x *FinderSyncController) SetBadgeIdentifierForURL(badgeID string, url string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadgeIdentifier:forURL:"), purego.NSString(badgeID), rt.FileURL(url))
 }
 
-// Returns the URL of the Finder’s current target.
+// TargetedURL returns the URL of the Finder’s current target.
 func (x *FinderSyncController) TargetedURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetedURL"))
 	return obj.Wrap(_r)
 }
 
-// Returns an array of selected items.
+// SelectedItemURLs returns an array of selected items.
 //
 // SelectedItemURLs returns the collection as a Go slice.
 func (x *FinderSyncController) SelectedItemURLs() []obj.Object {
@@ -98,11 +104,14 @@ func (x *FinderSyncController) SelectedItemURLs() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// LastUsedDateForItemWithURL wraps the corresponding Objective-C method.
 func (x *FinderSyncController) LastUsedDateForItemWithURL(itemURL string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastUsedDateForItemWithURL:"), rt.FileURL(itemURL))
 	return obj.Wrap(_r)
 }
 
+// SetLastUsedDateForItemWithURLCompletion wraps the corresponding Objective-C method.
+//
 // SetLastUsedDateForItemWithURLCompletion blocks until the operation completes or ctx is cancelled.
 func (x *FinderSyncController) SetLastUsedDateForItemWithURLCompletion(ctx context.Context, lastUsedDate obj.Object, itemURL string) error {
 	_ch := make(chan error, 1)
@@ -120,11 +129,14 @@ func (x *FinderSyncController) SetLastUsedDateForItemWithURLCompletion(ctx conte
 	}
 }
 
+// TagDataForItemWithURL wraps the corresponding Objective-C method.
 func (x *FinderSyncController) TagDataForItemWithURL(itemURL string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tagDataForItemWithURL:"), rt.FileURL(itemURL))
 	return obj.Wrap(_r)
 }
 
+// SetTagDataForItemWithURLCompletion wraps the corresponding Objective-C method.
+//
 // SetTagDataForItemWithURLCompletion blocks until the operation completes or ctx is cancelled.
 func (x *FinderSyncController) SetTagDataForItemWithURLCompletion(ctx context.Context, tagData obj.Object, itemURL string) error {
 	_ch := make(chan error, 1)
@@ -142,13 +154,13 @@ func (x *FinderSyncController) SetTagDataForItemWithURLCompletion(ctx context.Co
 	}
 }
 
-// The directories managed by this extension. The extension receives “FIFinderSync/beginObservingDirectoryAtURL:“ and “FIFinderSync/endObservingDirectoryAtURL:“ messages for every directory in this set and for all of their subdirectories. Always set `directoryURLs` when the extension starts. If there are no directories to watch, set `directoryURLs` to an empty set.
+// DirectoryURLs the directories managed by this extension. The extension receives “FIFinderSync/beginObservingDirectoryAtURL:“ and “FIFinderSync/endObservingDirectoryAtURL:“ messages for every directory in this set and for all of their subdirectories. Always set `directoryURLs` when the extension starts. If there are no directories to watch, set `directoryURLs` to an empty set.
 func (x *FinderSyncController) DirectoryURLs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("directoryURLs"))
 	return obj.Wrap(_r)
 }
 
-// The directories managed by this extension. The extension receives “FIFinderSync/beginObservingDirectoryAtURL:“ and “FIFinderSync/endObservingDirectoryAtURL:“ messages for every directory in this set and for all of their subdirectories. Always set `directoryURLs` when the extension starts. If there are no directories to watch, set `directoryURLs` to an empty set.
+// SetDirectoryURLs the directories managed by this extension. The extension receives “FIFinderSync/beginObservingDirectoryAtURL:“ and “FIFinderSync/endObservingDirectoryAtURL:“ messages for every directory in this set and for all of their subdirectories. Always set `directoryURLs` when the extension starts. If there are no directories to watch, set `directoryURLs` to an empty set.
 func (x *FinderSyncController) SetDirectoryURLs(directoryURLs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirectoryURLs:"), objref.IDOf(directoryURLs))
 }

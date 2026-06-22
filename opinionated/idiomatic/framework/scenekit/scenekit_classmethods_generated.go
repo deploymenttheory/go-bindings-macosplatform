@@ -8,6 +8,7 @@ import (
 	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -15,331 +16,332 @@ import (
 	"unsafe"
 )
 
-// Creates and returns a SCNAccelerationConstraint object.
+// SCNAccelerationConstraintAccelerationConstraint creates and returns a SCNAccelerationConstraint object.
 func SCNAccelerationConstraintAccelerationConstraint() *AccelerationConstraint {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAccelerationConstraint")), objc.RegisterName("accelerationConstraint"))
 	return AccelerationConstraintFromID(_r)
 }
 
-// Creates an action that moves a node relative to its current position.
+// MoveByXYZDuration creates an action that moves a node relative to its current position.
 func MoveByXYZDuration(deltaX float64, deltaY float64, deltaZ float64, duration float64) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("moveByX:y:z:duration:"), deltaX, deltaY, deltaZ, duration)
 	return ActionFromID(_r)
 }
 
-// Creates an action that rotates the node in each of the three principal axes by angles relative to its current orientation.
+// RotateByXYZDuration creates an action that rotates the node in each of the three principal axes by angles relative to its current orientation.
 func RotateByXYZDuration(xAngle float64, yAngle float64, zAngle float64, duration float64) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("rotateByX:y:z:duration:"), xAngle, yAngle, zAngle, duration)
 	return ActionFromID(_r)
 }
 
-// Creates an action that rotates the node to absolute angles in each of the three principal axes.
+// RotateToXYZDuration creates an action that rotates the node to absolute angles in each of the three principal axes.
 func RotateToXYZDuration(xAngle float64, yAngle float64, zAngle float64, duration float64) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("rotateToX:y:z:duration:"), xAngle, yAngle, zAngle, duration)
 	return ActionFromID(_r)
 }
 
-// Creates an action that rotates the node to absolute angles in each of the three principal axes.
+// RotateToXYZDurationShortestUnitArc creates an action that rotates the node to absolute angles in each of the three principal axes.
 func RotateToXYZDurationShortestUnitArc(xAngle float64, yAngle float64, zAngle float64, duration float64, shortestUnitArc bool) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("rotateToX:y:z:duration:shortestUnitArc:"), xAngle, yAngle, zAngle, duration, shortestUnitArc)
 	return ActionFromID(_r)
 }
 
-// Creates an action that uniformly changes the scale factor of a node by a relative value.
+// ScaleByDuration creates an action that uniformly changes the scale factor of a node by a relative value.
 func ScaleByDuration(scale float64, sec float64) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("scaleBy:duration:"), scale, sec)
 	return ActionFromID(_r)
 }
 
-// Creates an action that uniformly changes the scale factor of a node to an absolute value.
+// ScaleToDuration creates an action that uniformly changes the scale factor of a node to an absolute value.
 func ScaleToDuration(scale float64, sec float64) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("scaleTo:duration:"), scale, sec)
 	return ActionFromID(_r)
 }
 
-// Creates an action that runs a collection of actions sequentially.
+// Sequence creates an action that runs a collection of actions sequentially.
 func Sequence(actions []*Action) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("sequence:"), purego.SliceToNSArray(actions, func(_v *Action) objc.ID { return objref.IDOf(_v) }))
 	return ActionFromID(_r)
 }
 
-// Creates an action that runs a collection of actions in parallel.
+// Group creates an action that runs a collection of actions in parallel.
 func Group(actions []*Action) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("group:"), purego.SliceToNSArray(actions, func(_v *Action) objc.ID { return objref.IDOf(_v) }))
 	return ActionFromID(_r)
 }
 
-// Creates an action that repeats another action a specified number of times.
+// RepeatActionCount creates an action that repeats another action a specified number of times.
 func RepeatActionCount(action *Action, count int) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("repeatAction:count:"), objref.IDOf(action), count)
 	return ActionFromID(_r)
 }
 
-// Creates an action that repeats another action forever.
+// RepeatActionForever creates an action that repeats another action forever.
 func RepeatActionForever(action *Action) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("repeatActionForever:"), objref.IDOf(action))
 	return ActionFromID(_r)
 }
 
-// Creates an action that changes the opacity of the node to 1.0.
+// FadeInWithDuration creates an action that changes the opacity of the node to 1.0.
 func FadeInWithDuration(sec float64) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("fadeInWithDuration:"), sec)
 	return ActionFromID(_r)
 }
 
-// Creates an action that changes the opacity of the node to 0.0.
+// FadeOutWithDuration creates an action that changes the opacity of the node to 0.0.
 func FadeOutWithDuration(sec float64) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("fadeOutWithDuration:"), sec)
 	return ActionFromID(_r)
 }
 
-// Creates an action that adjusts the opacity of a node by a relative value.
+// FadeOpacityByDuration creates an action that adjusts the opacity of a node by a relative value.
 func FadeOpacityByDuration(factor float64, sec float64) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("fadeOpacityBy:duration:"), factor, sec)
 	return ActionFromID(_r)
 }
 
-// Creates an action that adjusts the opacity of a node to a new value.
+// FadeOpacityToDuration creates an action that adjusts the opacity of a node to a new value.
 func FadeOpacityToDuration(opacity float64, sec float64) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("fadeOpacityTo:duration:"), opacity, sec)
 	return ActionFromID(_r)
 }
 
-// Creates an action that hides a node.
+// Hide creates an action that hides a node.
 func Hide() *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("hide"))
 	return ActionFromID(_r)
 }
 
-// Creates an action that ensures a node is not hidden.
+// Unhide creates an action that ensures a node is not hidden.
 func Unhide() *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("unhide"))
 	return ActionFromID(_r)
 }
 
-// Creates an action that idles for a specified period of time.
+// WaitForDuration creates an action that idles for a specified period of time.
 func WaitForDuration(sec float64) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("waitForDuration:"), sec)
 	return ActionFromID(_r)
 }
 
-// Creates an action that idles for a randomized period of time.
+// WaitForDurationWithRange creates an action that idles for a randomized period of time.
 func WaitForDurationWithRange(sec float64, durationRange float64) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("waitForDuration:withRange:"), sec, durationRange)
 	return ActionFromID(_r)
 }
 
-// Creates an action that removes the node from its parent.
+// RemoveFromParentNode creates an action that removes the node from its parent.
 func RemoveFromParentNode() *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("removeFromParentNode"))
 	return ActionFromID(_r)
 }
 
-// Creates an action that executes a block.
+// RunBlock creates an action that executes a block.
 func RunBlock(block func(obj.Object)) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("runBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { block(obj.Wrap(_b0)) }))
 	return ActionFromID(_r)
 }
 
-// Creates an action that executes a block on a specific dispatch queue.
+// RunBlockQueue creates an action that executes a block on a specific dispatch queue.
 func RunBlockQueue(block func(obj.Object), queue obj.Object) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("runBlock:queue:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { block(obj.Wrap(_b0)) }), objref.IDOf(queue))
 	return ActionFromID(_r)
 }
 
-// Creates an action that executes a JavaScript script periodically over a specified duration.
+// JavaScriptActionWithScriptDuration creates an action that executes a JavaScript script periodically over a specified duration.
 func JavaScriptActionWithScriptDuration(script string, seconds float64) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("javaScriptActionWithScript:duration:"), purego.NSString(script), seconds)
 	return ActionFromID(_r)
 }
 
-// Creates an action that executes a block periodically over a specified duration.
+// CustomActionWithDurationActionBlock creates an action that executes a block periodically over a specified duration.
 func CustomActionWithDurationActionBlock(seconds float64, block func(obj.Object, float64)) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("customActionWithDuration:actionBlock:"), seconds, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float64) { block(obj.Wrap(_b0), _b1) }))
 	return ActionFromID(_r)
 }
 
-// Creates an action that plays an audio source.
+// PlayAudioSourceWaitForCompletion creates an action that plays an audio source.
 func PlayAudioSourceWaitForCompletion(source *AudioSource, wait bool) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("playAudioSource:waitForCompletion:"), objref.IDOf(source), wait)
 	return ActionFromID(_r)
 }
 
-// Loads and returns an animation loaded from the specified URL.
+// AnimationWithContentsOfURL loads and returns an animation loaded from the specified URL.
 func AnimationWithContentsOfURL(animationUrl string) *Animation {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAnimation")), objc.RegisterName("animationWithContentsOfURL:"), rt.FileURL(animationUrl))
 	return AnimationFromID(_r)
 }
 
-// Loads and returns the animation with the specified name in the current application bundle.
+// AnimationNamed loads and returns the animation with the specified name in the current application bundle.
 func AnimationNamed(animationName string) *Animation {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAnimation")), objc.RegisterName("animationNamed:"), purego.NSString(animationName))
 	return AnimationFromID(_r)
 }
 
-// Returns a SCNAnimation initialized from a CAAnimation. Only CABasicAnimation, CAKeyframeAnimation and CAAnimationGroup are currently supported.
+// AnimationWithCAAnimation returns a SCNAnimation initialized from a CAAnimation. Only CABasicAnimation, CAKeyframeAnimation and CAAnimationGroup are currently supported.
 func AnimationWithCAAnimation(caAnimation obj.Object) *Animation {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAnimation")), objc.RegisterName("animationWithCAAnimation:"), objref.IDOf(caAnimation))
 	return AnimationFromID(_r)
 }
 
-// Initialize an animation player with an animation
+// AnimationPlayerWithAnimation initialize an animation player with an animation
 func AnimationPlayerWithAnimation(animation *Animation) *AnimationPlayer {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAnimationPlayer")), objc.RegisterName("animationPlayerWithAnimation:"), objref.IDOf(animation))
 	return AnimationPlayerFromID(_r)
 }
 
-// Returns an audio player (creating one if necessary) to play a simple audio source.
+// AudioPlayerWithSource returns an audio player (creating one if necessary) to play a simple audio source.
 func AudioPlayerWithSource(source *AudioSource) *AudioPlayer {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAudioPlayer")), objc.RegisterName("audioPlayerWithSource:"), objref.IDOf(source))
 	return AudioPlayerFromID(_r)
 }
 
-// Returns an audio player (creating one if necessary) to play an audio node.
+// AudioPlayerWithAVAudioNode returns an audio player (creating one if necessary) to play an audio node.
 func AudioPlayerWithAVAudioNode(audioNode obj.Object) *AudioPlayer {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAudioPlayer")), objc.RegisterName("audioPlayerWithAVAudioNode:"), objref.IDOf(audioNode))
 	return AudioPlayerFromID(_r)
 }
 
-// Returns the audio source associated with the specified filename.
+// AudioSourceNamed returns the audio source associated with the specified filename.
 func AudioSourceNamed(fileName string) *AudioSource {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAudioSource")), objc.RegisterName("audioSourceNamed:"), purego.NSString(fileName))
 	return AudioSourceFromID(_r)
 }
 
-// Creates and returns a SCNAvoidOccluderConstraint object.
+// AvoidOccluderConstraintWithTarget creates and returns a SCNAvoidOccluderConstraint object.
 func AvoidOccluderConstraintWithTarget(target *Node) *AvoidOccluderConstraint {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNAvoidOccluderConstraint")), objc.RegisterName("avoidOccluderConstraintWithTarget:"), objref.IDOf(target))
 	return AvoidOccluderConstraintFromID(_r)
 }
 
-// Creates a new billboard constraint.
+// SCNBillboardConstraintBillboardConstraint creates a new billboard constraint.
 func SCNBillboardConstraintBillboardConstraint() *BillboardConstraint {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNBillboardConstraint")), objc.RegisterName("billboardConstraint"))
 	return BillboardConstraintFromID(_r)
 }
 
-// Creates a box geometry with the specified width, height, length, and chamfer radius.
+// BoxWithWidthHeightLengthChamferRadius creates a box geometry with the specified width, height, length, and chamfer radius.
 func BoxWithWidthHeightLengthChamferRadius(width float64, height float64, length float64, chamferRadius float64) *Box {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNBox")), objc.RegisterName("boxWithWidth:height:length:chamferRadius:"), width, height, length, chamferRadius)
 	return BoxFromID(_r)
 }
 
-// Creates a new camera object.
+// SCNCameraCamera creates a new camera object.
 func SCNCameraCamera() *Camera {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNCamera")), objc.RegisterName("camera"))
 	return CameraFromID(_r)
 }
 
-// Creates a capsule geometry with the specified radius and height.
+// CapsuleWithCapRadiusHeight creates a capsule geometry with the specified radius and height.
 func CapsuleWithCapRadiusHeight(capRadius float64, height float64) *Capsule {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNCapsule")), objc.RegisterName("capsuleWithCapRadius:height:"), capRadius, height)
 	return CapsuleFromID(_r)
 }
 
-// Creates a cone geometry with the given top radius, bottom radius, and height.
+// ConeWithTopRadiusBottomRadiusHeight creates a cone geometry with the given top radius, bottom radius, and height.
 func ConeWithTopRadiusBottomRadiusHeight(topRadius float64, bottomRadius float64, height float64) *Cone {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNCone")), objc.RegisterName("coneWithTopRadius:bottomRadius:height:"), topRadius, bottomRadius, height)
 	return ConeFromID(_r)
 }
 
-// Creates a cylinder geometry with the specified radius and height.
+// CylinderWithRadiusHeight creates a cylinder geometry with the specified radius and height.
 func CylinderWithRadiusHeight(radius float64, height float64) *Cylinder {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNCylinder")), objc.RegisterName("cylinderWithRadius:height:"), radius, height)
 	return CylinderFromID(_r)
 }
 
-// Creates and returns a SCNDistanceConstraint constraint.
+// DistanceConstraintWithTarget creates and returns a SCNDistanceConstraint constraint.
 func DistanceConstraintWithTarget(target *Node) *DistanceConstraint {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNDistanceConstraint")), objc.RegisterName("distanceConstraintWithTarget:"), objref.IDOf(target))
 	return DistanceConstraintFromID(_r)
 }
 
-// Creates a floor geometry.
+// SCNFloorFloor creates a floor geometry.
 func SCNFloorFloor() *Floor {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNFloor")), objc.RegisterName("floor"))
 	return FloorFromID(_r)
 }
 
-// Creates a new geometry object with no content (or default content).
+// SCNGeometryGeometry creates a new geometry object with no content (or default content).
 func SCNGeometryGeometry() *Geometry {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNGeometry")), objc.RegisterName("geometry"))
 	return GeometryFromID(_r)
 }
 
-// Creates a new geometry built from the specified geometry sources and elements.
+// GeometryWithSourcesElements creates a new geometry built from the specified geometry sources and elements.
 func GeometryWithSourcesElements(sources []*GeometrySource, elements []*GeometryElement) *Geometry {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNGeometry")), objc.RegisterName("geometryWithSources:elements:"), purego.SliceToNSArray(sources, func(_v *GeometrySource) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(elements, func(_v *GeometryElement) objc.ID { return objref.IDOf(_v) }))
 	return GeometryFromID(_r)
 }
 
-// Creates and returns a new geometry built from geometry sources and geometry elements, with per-source indexed geometry data. ``` Example: geometry made of 3 primitives (2 quads, 1 pentagon) using different indices to reference position and UV data (2 channels) Positions         ┆   POS0           POS3           POS4    ┆             quad   quad   pentagon    quad   quad   pentagon    ┆   SCNGeometryElement *element = [SCNGeometryElement geometryElementWithData:… 0 │ (0.0, 0.0, 0.0)   ┆        ┌───────────┬───────────┐        ┆           ┌─────┐ ┌─────┐ ┌───────┐ ┌─────┐ ┌─────┐ ┌───────┐   ┆                                                               primitiveType:SCNGeometryPrimitiveTypePolygon 1 │ (0.0, 1.0, 0.0)   ┆        │UV0     UV3│UV0     UV3│        ┆     4 4 5 0 1 2 3 5 4 3 2 7 6 5 2 1 0 1 2 3 2 3 0 1 1 2 3 4 0   ┆                                                              primitiveCount:3 2 │ (1.0, 0.0, 0.0)   ┆        │           │           │        ┆     └───┘ └───────────────────────┘ └───────────────────────┘   ┆                                                         indicesChannelCount:2 3 │ (1.0, 1.0, 0.0)   ┆        │     A     │     B     │        ┆   polygons        channel 0                 channel 1           ┆                                                  interleavedIndicesChannels:… 4 │ (2.0, 0.0, 0.0)   ┆        │           │           │        ┆                  (positions)                  (UVs)             ┆                                                               bytesPerIndex:…]; 5 │ (2.0, 1.0, 0.0)   ┆        │UV1     UV2│UV1     UV2│        ┆                                                                 ┆ 6 │ (2.0, 2.0, 0.0)   ┆   POS1 ├───────────┴───────────┤ POS5   ┆                                                                 ┆   SCNGeometry *geometry = [SCNGeometry geometryWithSources:
+// GeometryWithSourcesElementsSourceChannels creates and returns a new geometry built from geometry sources and geometry elements, with per-source indexed geometry data. ``` Example: geometry made of 3 primitives (2 quads, 1 pentagon) using different indices to reference position and UV data (2 channels) Positions         ┆   POS0           POS3           POS4    ┆             quad   quad   pentagon    quad   quad   pentagon    ┆   SCNGeometryElement *element = [SCNGeometryElement geometryElementWithData:… 0 │ (0.0, 0.0, 0.0)   ┆        ┌───────────┬───────────┐        ┆           ┌─────┐ ┌─────┐ ┌───────┐ ┌─────┐ ┌─────┐ ┌───────┐   ┆                                                               primitiveType:SCNGeometryPrimitiveTypePolygon 1 │ (0.0, 1.0, 0.0)   ┆        │UV0     UV3│UV0     UV3│        ┆     4 4 5 0 1 2 3 5 4 3 2 7 6 5 2 1 0 1 2 3 2 3 0 1 1 2 3 4 0   ┆                                                              primitiveCount:3 2 │ (1.0, 0.0, 0.0)   ┆        │           │           │        ┆     └───┘ └───────────────────────┘ └───────────────────────┘   ┆                                                         indicesChannelCount:2 3 │ (1.0, 1.0, 0.0)   ┆        │     A     │     B     │        ┆   polygons        channel 0                 channel 1           ┆                                                  interleavedIndicesChannels:… 4 │ (2.0, 0.0, 0.0)   ┆        │           │           │        ┆                  (positions)                  (UVs)             ┆                                                               bytesPerIndex:…]; 5 │ (2.0, 1.0, 0.0)   ┆        │UV1     UV2│UV1     UV2│        ┆                                                                 ┆ 6 │ (2.0, 2.0, 0.0)   ┆   POS1 ├───────────┴───────────┤ POS5   ┆                                                                 ┆   SCNGeometry *geometry = [SCNGeometry geometryWithSources:
 func GeometryWithSourcesElementsSourceChannels(sources []*GeometrySource, elements []*GeometryElement, sourceChannels []obj.Object) *Geometry {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNGeometry")), objc.RegisterName("geometryWithSources:elements:sourceChannels:"), purego.SliceToNSArray(sources, func(_v *GeometrySource) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(elements, func(_v *GeometryElement) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(sourceChannels, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return GeometryFromID(_r)
 }
 
-// Creates a geometry element from the specified data and options.
+// GeometryElementWithDataPrimitiveTypePrimitiveCountBytesPerIndex creates a geometry element from the specified data and options.
 func GeometryElementWithDataPrimitiveTypePrimitiveCountBytesPerIndex(data obj.Object, primitiveType GeometryPrimitiveType, primitiveCount int, bytesPerIndex int) *GeometryElement {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNGeometryElement")), objc.RegisterName("geometryElementWithData:primitiveType:primitiveCount:bytesPerIndex:"), objref.IDOf(data), primitiveType, primitiveCount, bytesPerIndex)
 	return GeometryElementFromID(_r)
 }
 
+// GeometryElementWithDataPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex wraps the corresponding Objective-C method.
 func GeometryElementWithDataPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex(data obj.Object, primitiveType GeometryPrimitiveType, primitiveCount int, indicesChannelCount int, interleavedIndicesChannels bool, bytesPerIndex int) *GeometryElement {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNGeometryElement")), objc.RegisterName("geometryElementWithData:primitiveType:primitiveCount:indicesChannelCount:interleavedIndicesChannels:bytesPerIndex:"), objref.IDOf(data), primitiveType, primitiveCount, indicesChannelCount, interleavedIndicesChannels, bytesPerIndex)
 	return GeometryElementFromID(_r)
 }
 
-// Creates a geometry source from the specified data and options.
+// GeometrySourceWithDataSemanticVectorCountFloatComponentsComponentsPerVectorBytesPerComponentDataOffsetDataStride creates a geometry source from the specified data and options.
 func GeometrySourceWithDataSemanticVectorCountFloatComponentsComponentsPerVectorBytesPerComponentDataOffsetDataStride(data obj.Object, semantic obj.Object, vectorCount int, floatComponents bool, componentsPerVector int, bytesPerComponent int, offset int, stride int) *GeometrySource {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNGeometrySource")), objc.RegisterName("geometrySourceWithData:semantic:vectorCount:floatComponents:componentsPerVector:bytesPerComponent:dataOffset:dataStride:"), objref.IDOf(data), objref.IDOf(semantic), vectorCount, floatComponents, componentsPerVector, bytesPerComponent, offset, stride)
 	return GeometrySourceFromID(_r)
 }
 
-// Creates an inverse kinematics constraint whose chain of nodes begins with the specified node.
+// InverseKinematicsConstraintWithChainRootNode creates an inverse kinematics constraint whose chain of nodes begins with the specified node.
 func InverseKinematicsConstraintWithChainRootNode(chainRootNode *Node) *IKConstraint {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNIKConstraint")), objc.RegisterName("inverseKinematicsConstraintWithChainRootNode:"), objref.IDOf(chainRootNode))
 	return IKConstraintFromID(_r)
 }
 
-// Creates a level of detail with the specified geometry and threshold pixel radius.
+// LevelOfDetailWithGeometryScreenSpaceRadius creates a level of detail with the specified geometry and threshold pixel radius.
 func LevelOfDetailWithGeometryScreenSpaceRadius(geometry *Geometry, radius float64) *LevelOfDetail {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNLevelOfDetail")), objc.RegisterName("levelOfDetailWithGeometry:screenSpaceRadius:"), objref.IDOf(geometry), radius)
 	return LevelOfDetailFromID(_r)
 }
 
-// Creates a level of detail with the specified geometry and threshold camera distance.
+// LevelOfDetailWithGeometryWorldSpaceDistance creates a level of detail with the specified geometry and threshold camera distance.
 func LevelOfDetailWithGeometryWorldSpaceDistance(geometry *Geometry, distance float64) *LevelOfDetail {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNLevelOfDetail")), objc.RegisterName("levelOfDetailWithGeometry:worldSpaceDistance:"), objref.IDOf(geometry), distance)
 	return LevelOfDetailFromID(_r)
 }
 
-// Creates a new light object.
+// SCNLightLight creates a new light object.
 func SCNLightLight() *Light {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNLight")), objc.RegisterName("light"))
 	return LightFromID(_r)
 }
 
-// Creates a look-at constraint for a specified target node.
+// LookAtConstraintWithTarget creates a look-at constraint for a specified target node.
 func LookAtConstraintWithTarget(target *Node) *LookAtConstraint {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNLookAtConstraint")), objc.RegisterName("lookAtConstraintWithTarget:"), objref.IDOf(target))
 	return LookAtConstraintFromID(_r)
 }
 
-// Creates a new material object.
+// SCNMaterialMaterial creates a new material object.
 func SCNMaterialMaterial() *Material {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNMaterial")), objc.RegisterName("material"))
 	return MaterialFromID(_r)
 }
 
-// Creates a new material property object with the specified contents.
+// MaterialPropertyWithContents creates a new material property object with the specified contents.
 func MaterialPropertyWithContents(contents obj.Object) *MaterialProperty {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNMaterialProperty")), objc.RegisterName("materialPropertyWithContents:"), objref.IDOf(contents))
 	return MaterialPropertyFromID(_r)
 }
 
-// Returns an object suitable for a scene's `lightingEnvironment.contents` and initialized with data that was previously created by `+precomputedLightingEnvironmentDataForContents:device:error:`.
-func PrecomputedLightingEnvironmentContentsWithURLError(url string) (obj.Object, error) {
+// PrecomputedLightingEnvironmentContentsWithURLError returns an object suitable for a scene's `lightingEnvironment.contents` and initialized with data that was previously created by `+precomputedLightingEnvironmentDataForContents:device:error:`.
+func PrecomputedLightingEnvironmentContentsWithURLError(url string) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNMaterialProperty")), objc.RegisterName("precomputedLightingEnvironmentContentsWithURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -348,8 +350,8 @@ func PrecomputedLightingEnvironmentContentsWithURLError(url string) (obj.Object,
 	return obj.Wrap(_r), nil
 }
 
-// Returns an object suitable for a scene's `lightingEnvironment.contents` and initialized with data that was previously created by `+precomputedLightingEnvironmentDataForContents:device:error:`.
-func PrecomputedLightingEnvironmentContentsWithDataError(data obj.Object) (obj.Object, error) {
+// PrecomputedLightingEnvironmentContentsWithDataError returns an object suitable for a scene's `lightingEnvironment.contents` and initialized with data that was previously created by `+precomputedLightingEnvironmentDataForContents:device:error:`.
+func PrecomputedLightingEnvironmentContentsWithDataError(data obj.Object) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNMaterialProperty")), objc.RegisterName("precomputedLightingEnvironmentContentsWithData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -358,200 +360,212 @@ func PrecomputedLightingEnvironmentContentsWithDataError(data obj.Object) (obj.O
 	return obj.Wrap(_r), nil
 }
 
-// Creates and returns a node object.
+// SCNNodeNode creates and returns a node object.
 func SCNNodeNode() *Node {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNNode")), objc.RegisterName("node"))
 	return NodeFromID(_r)
 }
 
-// Creates and returns a node object with the specified geometry attached.
+// NodeWithGeometry creates and returns a node object with the specified geometry attached.
 func NodeWithGeometry(geometry *Geometry) *Node {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNNode")), objc.RegisterName("nodeWithGeometry:"), objref.IDOf(geometry))
 	return NodeFromID(_r)
 }
 
-// Creates a particle property controller with the specified Core Animation animation.
+// ControllerWithAnimation creates a particle property controller with the specified Core Animation animation.
 func ControllerWithAnimation(animation obj.Object) *ParticlePropertyController {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNParticlePropertyController")), objc.RegisterName("controllerWithAnimation:"), objref.IDOf(animation))
 	return ParticlePropertyControllerFromID(_r)
 }
 
-// Creates a new particle system.
+// SCNParticleSystemParticleSystem creates a new particle system.
 func SCNParticleSystemParticleSystem() *ParticleSystem {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNParticleSystem")), objc.RegisterName("particleSystem"))
 	return ParticleSystemFromID(_r)
 }
 
-// Loads a particle system from a file in the app’s bundle resources.
+// ParticleSystemNamedInDirectory loads a particle system from a file in the app’s bundle resources.
 func ParticleSystemNamedInDirectory(name string, directory string) *ParticleSystem {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNParticleSystem")), objc.RegisterName("particleSystemNamed:inDirectory:"), purego.NSString(name), purego.NSString(directory))
 	return ParticleSystemFromID(_r)
 }
 
-// Creates a physics body that is unaffected by forces or collisions and that cannot move.
+// StaticBody creates a physics body that is unaffected by forces or collisions and that cannot move.
 func StaticBody() *PhysicsBody {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsBody")), objc.RegisterName("staticBody"))
 	return PhysicsBodyFromID(_r)
 }
 
-// Creates a physics body that can be affected by forces and collisions.
+// DynamicBody creates a physics body that can be affected by forces and collisions.
 func DynamicBody() *PhysicsBody {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsBody")), objc.RegisterName("dynamicBody"))
 	return PhysicsBodyFromID(_r)
 }
 
-// Creates a physics body that is unaffected by forces or collisions but that can cause collisions affecting other bodies when moved.
+// KinematicBody creates a physics body that is unaffected by forces or collisions but that can cause collisions affecting other bodies when moved.
 func KinematicBody() *PhysicsBody {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsBody")), objc.RegisterName("kinematicBody"))
 	return PhysicsBodyFromID(_r)
 }
 
-// Creates a physics body with the specified type and shape.
+// BodyWithTypeShape creates a physics body with the specified type and shape.
 func BodyWithTypeShape(type_ PhysicsBodyType, shape *PhysicsShape) *PhysicsBody {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsBody")), objc.RegisterName("bodyWithType:shape:"), type_, objref.IDOf(shape))
 	return PhysicsBodyFromID(_r)
 }
 
-// Creates a field that slows any object in its area of effect with a force proportional to the object’s velocity.
+// JointWithBodyAFrameABodyBFrameB wraps the corresponding Objective-C method.
+func JointWithBodyAFrameABodyBFrameB(bodyA *PhysicsBody, frameA quartzcore.CATransform3D, bodyB *PhysicsBody, frameB quartzcore.CATransform3D) *PhysicsConeTwistJoint {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsConeTwistJoint")), objc.RegisterName("jointWithBodyA:frameA:bodyB:frameB:"), objref.IDOf(bodyA), frameA, objref.IDOf(bodyB), frameB)
+	return PhysicsConeTwistJointFromID(_r)
+}
+
+// JointWithBodyFrame wraps the corresponding Objective-C method.
+func JointWithBodyFrame(body *PhysicsBody, frame quartzcore.CATransform3D) *PhysicsConeTwistJoint {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsConeTwistJoint")), objc.RegisterName("jointWithBody:frame:"), objref.IDOf(body), frame)
+	return PhysicsConeTwistJointFromID(_r)
+}
+
+// DragField creates a field that slows any object in its area of effect with a force proportional to the object’s velocity.
 func DragField() *PhysicsField {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsField")), objc.RegisterName("dragField"))
 	return PhysicsFieldFromID(_r)
 }
 
-// Creates a field whose forces circulate around an axis.
+// VortexField creates a field whose forces circulate around an axis.
 func VortexField() *PhysicsField {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsField")), objc.RegisterName("vortexField"))
 	return PhysicsFieldFromID(_r)
 }
 
-// Creates a field that accelerates objects toward its center.
+// RadialGravityField creates a field that accelerates objects toward its center.
 func RadialGravityField() *PhysicsField {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsField")), objc.RegisterName("radialGravityField"))
 	return PhysicsFieldFromID(_r)
 }
 
-// Creates a field that accelerates objects in a specific direction.
+// LinearGravityField creates a field that accelerates objects in a specific direction.
 func LinearGravityField() *PhysicsField {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsField")), objc.RegisterName("linearGravityField"))
 	return PhysicsFieldFromID(_r)
 }
 
-// Creates a field that applies random forces to objects in its area of effect.
+// NoiseFieldWithSmoothnessAnimationSpeed creates a field that applies random forces to objects in its area of effect.
 func NoiseFieldWithSmoothnessAnimationSpeed(smoothness float64, speed float64) *PhysicsField {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsField")), objc.RegisterName("noiseFieldWithSmoothness:animationSpeed:"), smoothness, speed)
 	return PhysicsFieldFromID(_r)
 }
 
-// Creates a field that applies random forces to objects in its area of effect, with magnitudes proportional to those objects’ velocities.
+// TurbulenceFieldWithSmoothnessAnimationSpeed creates a field that applies random forces to objects in its area of effect, with magnitudes proportional to those objects’ velocities.
 func TurbulenceFieldWithSmoothnessAnimationSpeed(smoothness float64, speed float64) *PhysicsField {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsField")), objc.RegisterName("turbulenceFieldWithSmoothness:animationSpeed:"), smoothness, speed)
 	return PhysicsFieldFromID(_r)
 }
 
-// Creates a field that pulls objects toward its center with a spring-like force.
+// SpringField creates a field that pulls objects toward its center with a spring-like force.
 func SpringField() *PhysicsField {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsField")), objc.RegisterName("springField"))
 	return PhysicsFieldFromID(_r)
 }
 
-// Creates a field that attracts or repels objects based on their electrical charge and on their distance from the field’s center.
+// ElectricField creates a field that attracts or repels objects based on their electrical charge and on their distance from the field’s center.
 func ElectricField() *PhysicsField {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsField")), objc.RegisterName("electricField"))
 	return PhysicsFieldFromID(_r)
 }
 
-// Creates a field that attracts or repels objects based on their electrical charge, velocity, and distance from the field’s axis.
+// MagneticField creates a field that attracts or repels objects based on their electrical charge, velocity, and distance from the field’s axis.
 func MagneticField() *PhysicsField {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsField")), objc.RegisterName("magneticField"))
 	return PhysicsFieldFromID(_r)
 }
 
-// Creates a physics shape based on a geometry object.
+// ShapeWithGeometryOptions creates a physics shape based on a geometry object.
 func ShapeWithGeometryOptions(geometry *Geometry, options obj.Object) *PhysicsShape {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsShape")), objc.RegisterName("shapeWithGeometry:options:"), objref.IDOf(geometry), objref.IDOf(options))
 	return PhysicsShapeFromID(_r)
 }
 
-// Creates a physics shape from a node or hierarchy of nodes.
+// ShapeWithNodeOptions creates a physics shape from a node or hierarchy of nodes.
 func ShapeWithNodeOptions(node *Node, options obj.Object) *PhysicsShape {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsShape")), objc.RegisterName("shapeWithNode:options:"), objref.IDOf(node), objref.IDOf(options))
 	return PhysicsShapeFromID(_r)
 }
 
-// Creates a new physics shape by combining others.
+// ShapeWithShapesTransforms creates a new physics shape by combining others.
 func ShapeWithShapesTransforms(shapes []*PhysicsShape, transforms []obj.Object) *PhysicsShape {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsShape")), objc.RegisterName("shapeWithShapes:transforms:"), purego.SliceToNSArray(shapes, func(_v *PhysicsShape) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(transforms, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return PhysicsShapeFromID(_r)
 }
 
-// Creates a vehicle behavior.
+// VehicleWithChassisBodyWheels creates a vehicle behavior.
 func VehicleWithChassisBodyWheels(chassisBody *PhysicsBody, wheels []*PhysicsVehicleWheel) *PhysicsVehicle {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsVehicle")), objc.RegisterName("vehicleWithChassisBody:wheels:"), objref.IDOf(chassisBody), purego.SliceToNSArray(wheels, func(_v *PhysicsVehicleWheel) objc.ID { return objref.IDOf(_v) }))
 	return PhysicsVehicleFromID(_r)
 }
 
-// Creates a wheel object.
+// WheelWithNode creates a wheel object.
 func WheelWithNode(node *Node) *PhysicsVehicleWheel {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsVehicleWheel")), objc.RegisterName("wheelWithNode:"), objref.IDOf(node))
 	return PhysicsVehicleWheelFromID(_r)
 }
 
-// Creates a plane geometry with the specified width and height.
+// PlaneWithWidthHeight creates a plane geometry with the specified width and height.
 func PlaneWithWidthHeight(width float64, height float64) *Plane {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNPlane")), objc.RegisterName("planeWithWidth:height:"), width, height)
 	return PlaneFromID(_r)
 }
 
-// Creates a new program object.
+// SCNProgramProgram creates a new program object.
 func SCNProgramProgram() *Program {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNProgram")), objc.RegisterName("program"))
 	return ProgramFromID(_r)
 }
 
-// Creates a pyramid geometry with the specified width, height, and length.
+// PyramidWithWidthHeightLength creates a pyramid geometry with the specified width, height, and length.
 func PyramidWithWidthHeightLength(width float64, height float64, length float64) *Pyramid {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNPyramid")), objc.RegisterName("pyramidWithWidth:height:length:"), width, height, length)
 	return PyramidFromID(_r)
 }
 
-// Creates a node whose content is to be loaded from the referenced URL.
+// ReferenceNodeWithURL creates a node whose content is to be loaded from the referenced URL.
 func ReferenceNodeWithURL(referenceURL string) *ReferenceNode {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNReferenceNode")), objc.RegisterName("referenceNodeWithURL:"), rt.FileURL(referenceURL))
 	return ReferenceNodeFromID(_r)
 }
 
-// Creates a renderer with the specified OpenGL context.
+// RendererWithContextOptions creates a renderer with the specified OpenGL context.
 func RendererWithContextOptions(context_ obj.Object, options obj.Object) *Renderer {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNRenderer")), objc.RegisterName("rendererWithContext:options:"), objref.IDOf(context_), objref.IDOf(options))
 	return RendererFromID(_r)
 }
 
-// Creates and returns a SCNReplicatorConstraint constraint.
+// ReplicatorConstraintWithTarget creates and returns a SCNReplicatorConstraint constraint.
 func ReplicatorConstraintWithTarget(target *Node) *ReplicatorConstraint {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNReplicatorConstraint")), objc.RegisterName("replicatorConstraintWithTarget:"), objref.IDOf(target))
 	return ReplicatorConstraintFromID(_r)
 }
 
-// Creates and returns an empty scene.
+// SCNSceneScene creates and returns an empty scene.
 func SCNSceneScene() *Scene {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNScene")), objc.RegisterName("scene"))
 	return SceneFromID(_r)
 }
 
-// Loads a scene from a file with the specified name in the app’s main bundle.
+// SceneNamed loads a scene from a file with the specified name in the app’s main bundle.
 func SceneNamed(name string) *Scene {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNScene")), objc.RegisterName("sceneNamed:"), purego.NSString(name))
 	return SceneFromID(_r)
 }
 
-// Loads a scene from a file with the specified name in a specific subdirectory of the app’s main bundle.
+// SceneNamedInDirectoryOptions loads a scene from a file with the specified name in a specific subdirectory of the app’s main bundle.
 func SceneNamedInDirectoryOptions(name string, directory string, options obj.Object) *Scene {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNScene")), objc.RegisterName("sceneNamed:inDirectory:options:"), purego.NSString(name), purego.NSString(directory), objref.IDOf(options))
 	return SceneFromID(_r)
 }
 
-// Loads a scene from the specified URL.
-func SceneWithURLOptionsError(url string, options obj.Object) (*Scene, error) {
+// SceneWithURLOptionsError loads a scene from the specified URL.
+func SceneWithURLOptionsError(url string, options obj.Object) (result *Scene, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNScene")), objc.RegisterName("sceneWithURL:options:error:"), rt.FileURL(url), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -560,139 +574,149 @@ func SceneWithURLOptionsError(url string, options obj.Object) (*Scene, error) {
 	return SceneFromID(_r), nil
 }
 
-// Creates a scene source that reads the scene graph from a specified file.
+// SceneSourceWithURLOptions creates a scene source that reads the scene graph from a specified file.
 func SceneSourceWithURLOptions(url string, options obj.Object) *SceneSource {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNSceneSource")), objc.RegisterName("sceneSourceWithURL:options:"), rt.FileURL(url), objref.IDOf(options))
 	return SceneSourceFromID(_r)
 }
 
-// Creates a scene source that reads the scene graph contained in an NSData object.
+// SceneSourceWithDataOptions creates a scene source that reads the scene graph contained in an NSData object.
 func SceneSourceWithDataOptions(data obj.Object, options obj.Object) *SceneSource {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNSceneSource")), objc.RegisterName("sceneSourceWithData:options:"), objref.IDOf(data), objref.IDOf(options))
 	return SceneSourceFromID(_r)
 }
 
-// Creates a shape geometry with the specified path and extrusion depth.
+// ShapeWithPathExtrusionDepth creates a shape geometry with the specified path and extrusion depth.
 func ShapeWithPathExtrusionDepth(path obj.Object, extrusionDepth float64) *Shape {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNShape")), objc.RegisterName("shapeWithPath:extrusionDepth:"), objref.IDOf(path), extrusionDepth)
 	return ShapeFromID(_r)
 }
 
-// Creates a skinner object with the specified visible geometry and skeleton information.
+// SkinnerWithBaseGeometryBonesBoneInverseBindTransformsBoneWeightsBoneIndices creates a skinner object with the specified visible geometry and skeleton information.
 func SkinnerWithBaseGeometryBonesBoneInverseBindTransformsBoneWeightsBoneIndices(baseGeometry *Geometry, bones []*Node, boneInverseBindTransforms []obj.Object, boneWeights *GeometrySource, boneIndices *GeometrySource) *Skinner {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNSkinner")), objc.RegisterName("skinnerWithBaseGeometry:bones:boneInverseBindTransforms:boneWeights:boneIndices:"), objref.IDOf(baseGeometry), purego.SliceToNSArray(bones, func(_v *Node) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(boneInverseBindTransforms, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(boneWeights), objref.IDOf(boneIndices))
 	return SkinnerFromID(_r)
 }
 
-// Creates and returns a SCNSliderConstraint object.
+// SCNSliderConstraintSliderConstraint creates and returns a SCNSliderConstraint object.
 func SCNSliderConstraintSliderConstraint() *SliderConstraint {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNSliderConstraint")), objc.RegisterName("sliderConstraint"))
 	return SliderConstraintFromID(_r)
 }
 
-// Creates a sphere geometry with the specified radius.
+// SphereWithRadius creates a sphere geometry with the specified radius.
 func SphereWithRadius(radius float64) *Sphere {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNSphere")), objc.RegisterName("sphereWithRadius:"), radius)
 	return SphereFromID(_r)
 }
 
-// Creates a technique from a technique definition dictionary.,
+// TechniqueWithDictionary creates a technique from a technique definition dictionary.,
 func TechniqueWithDictionary(dictionary obj.Object) *Technique {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNTechnique")), objc.RegisterName("techniqueWithDictionary:"), objref.IDOf(dictionary))
 	return TechniqueFromID(_r)
 }
 
-// Creates a new rendering technique that combines a series of techniques.
+// TechniqueBySequencingTechniques creates a new rendering technique that combines a series of techniques.
 func TechniqueBySequencingTechniques(techniques []*Technique) *Technique {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNTechnique")), objc.RegisterName("techniqueBySequencingTechniques:"), purego.SliceToNSArray(techniques, func(_v *Technique) objc.ID { return objref.IDOf(_v) }))
 	return TechniqueFromID(_r)
 }
 
-// Creates a text geometry from a specified string, extruded with a specified depth.
+// TextWithStringExtrusionDepth creates a text geometry from a specified string, extruded with a specified depth.
 func TextWithStringExtrusionDepth(string_ obj.Object, extrusionDepth float64) *Text {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNText")), objc.RegisterName("textWithString:extrusionDepth:"), objref.IDOf(string_), extrusionDepth)
 	return TextFromID(_r)
 }
 
+// FunctionWithTimingMode wraps the corresponding Objective-C method.
 func FunctionWithTimingMode(timingMode ActionTimingMode) *TimingFunction {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNTimingFunction")), objc.RegisterName("functionWithTimingMode:"), timingMode)
 	return TimingFunctionFromID(_r)
 }
 
+// FunctionWithCAMediaTimingFunction wraps the corresponding Objective-C method.
 func FunctionWithCAMediaTimingFunction(caTimingFunction obj.Object) *TimingFunction {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNTimingFunction")), objc.RegisterName("functionWithCAMediaTimingFunction:"), objref.IDOf(caTimingFunction))
 	return TimingFunctionFromID(_r)
 }
 
-// Creates a torus geometry with the specified ring radius and pipe radius.
+// TorusWithRingRadiusPipeRadius creates a torus geometry with the specified ring radius and pipe radius.
 func TorusWithRingRadiusPipeRadius(ringRadius float64, pipeRadius float64) *Torus {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNTorus")), objc.RegisterName("torusWithRingRadius:pipeRadius:"), ringRadius, pipeRadius)
 	return TorusFromID(_r)
 }
 
-// Begins a new transaction for the current thread.
+// Begin begins a new transaction for the current thread.
 func Begin() {
 	objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("begin"))
 }
 
-// Commits all changes made during the current transaction.
+// Commit commits all changes made during the current transaction.
 func Commit() {
 	objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("commit"))
 }
 
-// Applies all changes from the current automatic transaction.
+// Flush applies all changes from the current automatic transaction.
 func Flush() {
 	objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("flush"))
 }
 
-// Attempts to acquire a recursive spinlock to ensure the validity of values you retrieve during the transaction.
+// Lock attempts to acquire a recursive spinlock to ensure the validity of values you retrieve during the transaction.
 func Lock() {
 	objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("lock"))
 }
 
-// Relinquishes a previously acquired transaction lock.
+// Unlock relinquishes a previously acquired transaction lock.
 func Unlock() {
 	objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("unlock"))
 }
 
-// Returns the object previously associated with the current transaction using the specified key.
+// ValueForKey returns the object previously associated with the current transaction using the specified key.
 func ValueForKey(key string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("valueForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
-// Associates an arbitrary object with the current transaction using the specified key.
+// SetValueForKey associates an arbitrary object with the current transaction using the specified key.
 func SetValueForKey(value obj.Object, key string) {
 	objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("setValue:forKey:"), objref.IDOf(value), purego.NSString(key))
 }
 
+// AnimationDuration wraps the corresponding Objective-C method.
 func AnimationDuration() float64 {
 	_r := objc.Send[float64](objc.ID(_class("SCNTransaction")), objc.RegisterName("animationDuration"))
 	return _r
 }
 
+// SetAnimationDuration wraps the corresponding Objective-C method.
 func SetAnimationDuration(animationDuration float64) {
 	objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("setAnimationDuration:"), animationDuration)
 }
 
+// AnimationTimingFunction wraps the corresponding Objective-C method.
 func AnimationTimingFunction() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("animationTimingFunction"))
 	return obj.Wrap(_r)
 }
 
+// SetAnimationTimingFunction wraps the corresponding Objective-C method.
 func SetAnimationTimingFunction(animationTimingFunction obj.Object) {
 	objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("setAnimationTimingFunction:"), objref.IDOf(animationTimingFunction))
 }
 
+// DisableActions wraps the corresponding Objective-C method.
 func DisableActions() bool {
 	_r := objc.Send[bool](objc.ID(_class("SCNTransaction")), objc.RegisterName("disableActions"))
 	return _r
 }
 
+// SetDisableActions wraps the corresponding Objective-C method.
 func SetDisableActions(disableActions bool) {
 	objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("setDisableActions:"), disableActions)
 }
 
+// SetCompletionBlock wraps the corresponding Objective-C method.
+//
 // SetCompletionBlock blocks until the operation completes or ctx is cancelled.
 func SetCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -708,7 +732,7 @@ func SetCompletionBlock(ctx context.Context) error {
 	}
 }
 
-// Creates a tube geometry with the specified inner radius, outer radius, and height.
+// TubeWithInnerRadiusOuterRadiusHeight creates a tube geometry with the specified inner radius, outer radius, and height.
 func TubeWithInnerRadiusOuterRadiusHeight(innerRadius float64, outerRadius float64, height float64) *Tube {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNTube")), objc.RegisterName("tubeWithInnerRadius:outerRadius:height:"), innerRadius, outerRadius, height)
 	return TubeFromID(_r)

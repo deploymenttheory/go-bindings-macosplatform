@@ -29,6 +29,8 @@ const (
 	AVAudioSessionErrorCodeSessionNotActive      AVAudioSessionErrorCode = 1768841571
 )
 
+// String returns the AVAudioSessionErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AVAudioSessionErrorCode) String() string {
 	switch e {
 	case AVAudioSessionErrorCodeNone:

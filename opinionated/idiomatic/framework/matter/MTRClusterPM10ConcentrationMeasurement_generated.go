@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterPM10ConcentrationMeasurement is an idiomatic wrapper over the Objective-C class MTRClusterPM10ConcentrationMeasurement.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterPM10ConcentrationMeasurement struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterPM10ConcentrationMeasurementFromID adopts an existing Objective-C object as a MTRClusterPM10ConcentrationMeasurement
@@ -23,7 +24,8 @@ func MTRClusterPM10ConcentrationMeasurementFromID(id objc.ID) *MTRClusterPM10Con
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterPM10ConcentrationMeasurement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterPM10ConcentrationMeasurement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,110 +38,110 @@ func mTRClusterPM10ConcentrationMeasurementAdopt(id objc.ID) *MTRClusterPM10Conc
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterPM10ConcentrationMeasurement{Handle: objref.Wrap(id)}
+	x := &MTRClusterPM10ConcentrationMeasurement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterPM10ConcentrationMeasurement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterPM10ConcentrationMeasurement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterPM10ConcentrationMeasurement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
-//
-// NewMTRClusterPM10ConcentrationMeasurementWithDeviceEndpointIDQueue creates a new MTRClusterPM10ConcentrationMeasurement.
+// NewMTRClusterPM10ConcentrationMeasurementWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func NewMTRClusterPM10ConcentrationMeasurementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterPM10ConcentrationMeasurement {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterPM10ConcentrationMeasurement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterPM10ConcentrationMeasurementAdopt(_id)
 }
 
+// ReadAttributeMeasuredValueWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeMeasuredValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMinMeasuredValueWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeMinMeasuredValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMaxMeasuredValueWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeMaxMeasuredValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributePeakMeasuredValueWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributePeakMeasuredValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePeakMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributePeakMeasuredValueWindowWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributePeakMeasuredValueWindowWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePeakMeasuredValueWindowWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAverageMeasuredValueWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeAverageMeasuredValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAverageMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAverageMeasuredValueWindowWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeAverageMeasuredValueWindowWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAverageMeasuredValueWindowWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeUncertaintyWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeUncertaintyWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUncertaintyWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMeasurementUnitWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeMeasurementUnitWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasurementUnitWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMeasurementMediumWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeMeasurementMediumWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasurementMediumWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeLevelValueWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeLevelValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLevelValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -167,3 +169,7 @@ type MTRClusterPM10ConcentrationMeasurementable interface {
 }
 
 var _ MTRClusterPM10ConcentrationMeasurementable = (*MTRClusterPM10ConcentrationMeasurement)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterPM10ConcentrationMeasurement)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterPM10ConcentrationMeasurement)(nil)

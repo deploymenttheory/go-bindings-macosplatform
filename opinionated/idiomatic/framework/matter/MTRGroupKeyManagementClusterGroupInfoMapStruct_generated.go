@@ -23,7 +23,8 @@ func MTRGroupKeyManagementClusterGroupInfoMapStructFromID(id objc.ID) *MTRGroupK
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGroupKeyManagementClusterGroupInfoMapStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRGroupKeyManagementClusterGroupInfoMapStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRGroupKeyManagementClusterGroupInfoMapStructAdopt(id objc.ID) *MTRGroupKe
 	if id == 0 {
 		return nil
 	}
-	x := &MTRGroupKeyManagementClusterGroupInfoMapStruct{Handle: objref.Wrap(id)}
+	x := &MTRGroupKeyManagementClusterGroupInfoMapStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,48 +58,59 @@ func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) IsKind(className string
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRGroupKeyManagementClusterGroupInfoMapStruct creates a new MTRGroupKeyManagementClusterGroupInfoMapStruct.
 func NewMTRGroupKeyManagementClusterGroupInfoMapStruct() *MTRGroupKeyManagementClusterGroupInfoMapStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRGroupKeyManagementClusterGroupInfoMapStruct")), objc.RegisterName("new"))
 	return mTRGroupKeyManagementClusterGroupInfoMapStructAdopt(_id)
 }
 
-// WithGroupId sets groupId and returns the receiver so calls can be chained.
+// WithGroupId sets the property and returns the receiver so calls can be chained.
 func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) WithGroupId(groupId obj.Object) *MTRGroupKeyManagementClusterGroupInfoMapStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupId:"), objref.IDOf(groupId))
 	return x
 }
 
-// WithGroupName sets groupName and returns the receiver so calls can be chained.
+// WithGroupName sets the property and returns the receiver so calls can be chained.
 func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) WithGroupName(groupName string) *MTRGroupKeyManagementClusterGroupInfoMapStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupName:"), purego.NSString(groupName))
 	return x
 }
 
-// WithFabricIndex sets fabricIndex and returns the receiver so calls can be chained.
+// WithFabricIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) WithFabricIndex(fabricIndex obj.Object) *MTRGroupKeyManagementClusterGroupInfoMapStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return x
 }
 
+// GroupId wraps the corresponding Objective-C method.
 func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) GroupId() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupId"))
 	return obj.Wrap(_r)
 }
 
+// SetGroupId wraps the corresponding Objective-C method.
 func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) SetGroupId(groupId obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupId:"), objref.IDOf(groupId))
 }
 
+// Endpoints wraps the corresponding Objective-C method.
 func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) Endpoints() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoints"))
 	return obj.Wrap(_r)
 }
 
+// SetEndpoints wraps the corresponding Objective-C method.
 func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) SetEndpoints(endpoints obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoints:"), objref.IDOf(endpoints))
 }
 
+// GroupName wraps the corresponding Objective-C method.
 func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) GroupName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupName"))
 	if _r == 0 {
@@ -106,15 +119,18 @@ func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) GroupName() string {
 	return purego.GoString(_r)
 }
 
+// SetGroupName wraps the corresponding Objective-C method.
 func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) SetGroupName(groupName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupName:"), purego.NSString(groupName))
 }
 
+// FabricIndex wraps the corresponding Objective-C method.
 func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)
 }
 
+// SetFabricIndex wraps the corresponding Objective-C method.
 func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) SetFabricIndex(fabricIndex obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 }

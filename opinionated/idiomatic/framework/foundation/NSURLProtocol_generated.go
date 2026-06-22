@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that handles the loading of protocol-specific URL data.
-//
 // URLProtocol is an idiomatic wrapper over the Objective-C class NSURLProtocol.
+//
+// An abstract class that handles the loading of protocol-specific URL data.
 type URLProtocol struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func URLProtocolFromID(id objc.ID) *URLProtocol {
 	if id == 0 {
 		return nil
 	}
-	x := &URLProtocol{Handle: objref.Wrap(purego.Retain(id))}
+	x := &URLProtocol{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func uRLProtocolAdopt(id objc.ID) *URLProtocol {
 	if id == 0 {
 		return nil
 	}
-	x := &URLProtocol{Handle: objref.Wrap(id)}
+	x := &URLProtocol{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,40 +60,47 @@ func (x *URLProtocol) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *URLProtocol) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewURLProtocol creates a new URLProtocol.
 func NewURLProtocol() *URLProtocol {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSURLProtocol")), objc.RegisterName("new"))
 	return uRLProtocolAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *URLProtocol) WithScriptingProperties(scriptingProperties obj.Object) *URLProtocol {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Starts protocol-specific loading of a request. When this method is called, the protocol implementation should start loading a request.
+// StartLoading starts protocol-specific loading of a request. When this method is called, the protocol implementation should start loading a request.
 func (x *URLProtocol) StartLoading() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startLoading"))
 }
 
-// Stops protocol-specific loading of a request. When this method is called, the protocol implementation should end the work of loading a request. This could be in response to a cancel operation, so protocol implementations must be able to handle this call while a load is in progress.
+// StopLoading stops protocol-specific loading of a request. When this method is called, the protocol implementation should end the work of loading a request. This could be in response to a cancel operation, so protocol implementations must be able to handle this call while a load is in progress.
 func (x *URLProtocol) StopLoading() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopLoading"))
 }
 
-// Returns the NSURLRequest of the receiver.
+// Request returns the NSURLRequest of the receiver.
 func (x *URLProtocol) Request() *URLRequest {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("request"))
 	return URLRequestFromID(_r)
 }
 
-// Returns the NSCachedURLResponse of the receiver.
+// CachedResponse returns the NSCachedURLResponse of the receiver.
 func (x *URLProtocol) CachedResponse() *CachedURLResponse {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cachedResponse"))
 	return CachedURLResponseFromID(_r)
 }
 
+// Task wraps the corresponding Objective-C method.
 func (x *URLProtocol) Task() *URLSessionTask {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("task"))
 	return URLSessionTaskFromID(_r)

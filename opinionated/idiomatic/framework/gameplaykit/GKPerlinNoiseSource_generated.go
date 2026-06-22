@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A procedural noise generator whose output is a type of fractal coherent noise resembling natural phenomena such as clouds and terrain.
-//
 // PerlinNoiseSource is an idiomatic wrapper over the Objective-C class GKPerlinNoiseSource.
+//
+// It embeds [CoherentNoiseSource], promoting that type's methods.
+//
+// A procedural noise generator whose output is a type of fractal coherent noise resembling natural phenomena such as clouds and terrain.
 type PerlinNoiseSource struct {
-	objref.Handle
+	CoherentNoiseSource
 }
 
 // PerlinNoiseSourceFromID adopts an existing Objective-C object as a PerlinNoiseSource
@@ -25,7 +26,8 @@ func PerlinNoiseSourceFromID(id objc.ID) *PerlinNoiseSource {
 	if id == 0 {
 		return nil
 	}
-	x := &PerlinNoiseSource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PerlinNoiseSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,80 +40,56 @@ func perlinNoiseSourceAdopt(id objc.ID) *PerlinNoiseSource {
 	if id == 0 {
 		return nil
 	}
-	x := &PerlinNoiseSource{Handle: objref.Wrap(id)}
+	x := &PerlinNoiseSource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *PerlinNoiseSource) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PerlinNoiseSource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PerlinNoiseSource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a Perlin noise source with the specified parameters.
-//
-// NewPerlinNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed creates a new PerlinNoiseSource.
+// NewPerlinNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed initializes a Perlin noise source with the specified parameters.
 func NewPerlinNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed(frequency float64, octaveCount int, persistence float64, lacunarity float64, seed int32) *PerlinNoiseSource {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKPerlinNoiseSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrequency:octaveCount:persistence:lacunarity:seed:"), frequency, octaveCount, persistence, lacunarity, seed)
 	return perlinNoiseSourceAdopt(_id)
 }
 
-// The rate at which successive octaves of the noise function decrease in amplitude.
-//
-// WithPersistence sets persistence and returns the receiver so calls can be chained.
+// WithPersistence the rate at which successive octaves of the noise function decrease in amplitude.
 func (x *PerlinNoiseSource) WithPersistence(persistence float64) *PerlinNoiseSource {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPersistence:"), persistence)
 	return x
 }
 
-// A value that determines the size and spacing of features in generated noise.
-//
-// WithFrequency sets frequency and returns the receiver so calls can be chained.
+// WithFrequency a value that determines the size and spacing of features in generated noise.
 func (x *PerlinNoiseSource) WithFrequency(frequency float64) *PerlinNoiseSource {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
 	return x
 }
 
-// The number of octaves of the underlying noise function to use for generating noise.
-//
-// WithOctaveCount sets octaveCount and returns the receiver so calls can be chained.
+// WithOctaveCount the number of octaves of the underlying noise function to use for generating noise.
 func (x *PerlinNoiseSource) WithOctaveCount(octaveCount int) *PerlinNoiseSource {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOctaveCount:"), octaveCount)
 	return x
 }
 
-// The rate at which successive octaves of the noise function increase in frequency.
-//
-// WithLacunarity sets lacunarity and returns the receiver so calls can be chained.
+// WithLacunarity the rate at which successive octaves of the noise function increase in frequency.
 func (x *PerlinNoiseSource) WithLacunarity(lacunarity float64) *PerlinNoiseSource {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLacunarity:"), lacunarity)
 	return x
 }
 
-// The value that determines the specific configuration of noise produced by the noise source.
-//
-// WithSeed sets seed and returns the receiver so calls can be chained.
+// WithSeed the value that determines the specific configuration of noise produced by the noise source.
 func (x *PerlinNoiseSource) WithSeed(seed int32) *PerlinNoiseSource {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
 	return x
 }
 
+// Persistence wraps the corresponding Objective-C method.
 func (x *PerlinNoiseSource) Persistence() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("persistence"))
 	return _r
 }
 
+// SetPersistence wraps the corresponding Objective-C method.
 func (x *PerlinNoiseSource) SetPersistence(persistence float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPersistence:"), persistence)
 }
@@ -129,3 +107,7 @@ type PerlinNoiseSourceable interface {
 }
 
 var _ PerlinNoiseSourceable = (*PerlinNoiseSource)(nil)
+
+var _ CoherentNoiseSourceProvider = (*PerlinNoiseSource)(nil)
+
+var _ NoiseSourceProvider = (*PerlinNoiseSource)(nil)

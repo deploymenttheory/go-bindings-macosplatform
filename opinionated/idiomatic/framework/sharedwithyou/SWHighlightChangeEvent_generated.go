@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents change activity for a highlight.
-//
 // HighlightChangeEvent is an idiomatic wrapper over the Objective-C class SWHighlightChangeEvent.
+//
+// An object that represents change activity for a highlight.
 type HighlightChangeEvent struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func HighlightChangeEventFromID(id objc.ID) *HighlightChangeEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &HighlightChangeEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HighlightChangeEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func highlightChangeEventAdopt(id objc.ID) *HighlightChangeEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &HighlightChangeEvent{Handle: objref.Wrap(id)}
+	x := &HighlightChangeEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,20 +60,26 @@ func (x *HighlightChangeEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates and initializes a change event.
-//
-// NewHighlightChangeEventWithHighlightTrigger creates a new HighlightChangeEvent.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HighlightChangeEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewHighlightChangeEventWithHighlightTrigger creates and initializes a change event.
 func NewHighlightChangeEventWithHighlightTrigger(highlight *Highlight, trigger HighlightChangeEventTrigger) *HighlightChangeEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWHighlightChangeEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:trigger:"), objref.IDOf(highlight), trigger)
 	return highlightChangeEventAdopt(_id)
 }
 
+// ChangeEventTrigger wraps the corresponding Objective-C method.
 func (x *HighlightChangeEvent) ChangeEventTrigger() HighlightChangeEventTrigger {
 	_r := objc.Send[HighlightChangeEventTrigger](objref.IDOf(x), objc.RegisterName("changeEventTrigger"))
 	return _r
 }
 
+// HighlightURL wraps the corresponding Objective-C method.
 func (x *HighlightChangeEvent) HighlightURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("highlightURL"))
 	return obj.Wrap(_r)

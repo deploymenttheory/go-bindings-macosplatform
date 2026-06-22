@@ -21,6 +21,8 @@ const (
 	AddIdentityDocumentTypePhotoID AddIdentityDocumentType = 2
 )
 
+// String returns the AddIdentityDocumentType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AddIdentityDocumentType) String() string {
 	switch e {
 	case AddIdentityDocumentTypeIDCard:
@@ -44,6 +46,8 @@ const (
 	AddPaymentPassStyleAccess AddPaymentPassStyle = 1
 )
 
+// String returns the AddPaymentPassStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AddPaymentPassStyle) String() string {
 	switch e {
 	case AddPaymentPassStylePayment:
@@ -70,6 +74,8 @@ const (
 	AddSecureElementPassOSVersionNotSupportedError AddSecureElementPassErrorCode = 6
 )
 
+// String returns the AddSecureElementPassErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AddSecureElementPassErrorCode) String() string {
 	switch e {
 	case AddSecureElementPassGenericError:
@@ -101,6 +107,8 @@ const (
 	AddShareablePassConfigurationPrimaryActionShare AddShareablePassConfigurationPrimaryAction = 1
 )
 
+// String returns the AddShareablePassConfigurationPrimaryAction constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AddShareablePassConfigurationPrimaryAction) String() string {
 	switch e {
 	case AddShareablePassConfigurationPrimaryActionAdd:
@@ -131,6 +139,8 @@ const (
 	AddressFieldAll AddressField = 15
 )
 
+// String returns the AddressField constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AddressField) String() string {
 	var parts []string
 	if e&AddressFieldPostalAddress != 0 {
@@ -166,6 +176,8 @@ const (
 	ApplePayLaterUnavailableRecurringTransaction ApplePayLaterAvailability = 2
 )
 
+// String returns the ApplePayLaterAvailability constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ApplePayLaterAvailability) String() string {
 	switch e {
 	case ApplePayLaterAvailable:
@@ -187,6 +199,8 @@ const (
 	BarcodeEventConfigurationDataTypeSigningCertificate BarcodeEventConfigurationDataType = 2
 )
 
+// String returns the BarcodeEventConfigurationDataType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BarcodeEventConfigurationDataType) String() string {
 	switch e {
 	case BarcodeEventConfigurationDataTypeUnknown:
@@ -209,6 +223,8 @@ const (
 	DisbursementRecipientContactInvalidError DisbursementErrorCode = 2
 )
 
+// String returns the DisbursementErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DisbursementErrorCode) String() string {
 	switch e {
 	case DisbursementUnknownError:
@@ -239,6 +255,8 @@ const (
 	MerchantCapabilityInstantFundsOut MerchantCapability = 128
 )
 
+// String returns the MerchantCapability constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MerchantCapability) String() string {
 	var parts []string
 	if e&MerchantCapability3DS != 0 {
@@ -273,6 +291,8 @@ const (
 	NotEntitledError        PassKitErrorCode = 4
 )
 
+// String returns the PassKitErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PassKitErrorCode) String() string {
 	switch e {
 	case UnknownError:
@@ -299,6 +319,8 @@ const (
 	PassLibraryAuthorizationStatusRestricted    PassLibraryAuthorizationStatus = 2
 )
 
+// String returns the PassLibraryAuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PassLibraryAuthorizationStatus) String() string {
 	switch e {
 	case PassLibraryAuthorizationStatusNotDetermined:
@@ -320,6 +342,8 @@ const (
 	PassLibraryCapabilityBackgroundAddPasses PassLibraryCapability = 0
 )
 
+// String returns the PassLibraryCapability constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PassLibraryCapability) String() string {
 	switch e {
 	case PassLibraryCapabilityBackgroundAddPasses:
@@ -347,6 +371,8 @@ const (
 	PassTypeAny PassType = 18446744073709551615
 )
 
+// String returns the PassType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PassType) String() string {
 	switch e {
 	case PassTypeBarcode:
@@ -382,6 +408,8 @@ const (
 	PaymentAuthorizationStatusPINLockout PaymentAuthorizationStatus = 7
 )
 
+// String returns the PaymentAuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PaymentAuthorizationStatus) String() string {
 	switch e {
 	case PaymentAuthorizationStatusSuccess:
@@ -419,6 +447,8 @@ const (
 	PaymentButtonStyleAutomatic PaymentButtonStyle = 3
 )
 
+// String returns the PaymentButtonStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PaymentButtonStyle) String() string {
 	switch e {
 	case PaymentButtonStyleWhite:
@@ -474,6 +504,8 @@ const (
 	PaymentButtonTypeContinue PaymentButtonType = 16
 )
 
+// String returns the PaymentButtonType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PaymentButtonType) String() string {
 	switch e {
 	case PaymentButtonTypePlain:
@@ -527,6 +559,8 @@ const (
 	PaymentCouponCodeExpiredError            PaymentErrorCode = 5
 )
 
+// String returns the PaymentErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PaymentErrorCode) String() string {
 	switch e {
 	case PaymentUnknownError:
@@ -564,6 +598,8 @@ const (
 	PaymentMethodTypeEMoney PaymentMethodType = 5
 )
 
+// String returns the PaymentMethodType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PaymentMethodType) String() string {
 	switch e {
 	case PaymentMethodTypeUnknown:
@@ -601,6 +637,8 @@ const (
 	PaymentPassActivationStateDeactivated PaymentPassActivationState = 4
 )
 
+// String returns the PaymentPassActivationState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PaymentPassActivationState) String() string {
 	switch e {
 	case PaymentPassActivationStateActivated:
@@ -628,6 +666,8 @@ const (
 	PaymentSummaryItemTypePending PaymentSummaryItemType = 1
 )
 
+// String returns the PaymentSummaryItemType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PaymentSummaryItemType) String() string {
 	switch e {
 	case PaymentSummaryItemTypeFinal:
@@ -652,6 +692,8 @@ const (
 	RadioTechnologyBluetooth RadioTechnology = 2
 )
 
+// String returns the RadioTechnology constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RadioTechnology) String() string {
 	var parts []string
 	if e&RadioTechnologyNFC != 0 {
@@ -677,6 +719,8 @@ const (
 	SecureElementPassActivationStateDeactivated        SecureElementPassActivationState = 4
 )
 
+// String returns the SecureElementPassActivationState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SecureElementPassActivationState) String() string {
 	switch e {
 	case SecureElementPassActivationStateActivated:
@@ -701,6 +745,8 @@ const (
 	ShareSecureElementPassSetupError   ShareSecureElementPassErrorCode = 1
 )
 
+// String returns the ShareSecureElementPassErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ShareSecureElementPassErrorCode) String() string {
 	switch e {
 	case ShareSecureElementPassUnknownError:
@@ -724,6 +770,8 @@ const (
 	ShippingContactEditingModeEnabled ShippingContactEditingMode = 1
 )
 
+// String returns the ShippingContactEditingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ShippingContactEditingMode) String() string {
 	switch e {
 	case ShippingContactEditingModeAvailable:
@@ -749,6 +797,8 @@ const (
 	ShippingTypeServicePickup ShippingType = 3
 )
 
+// String returns the ShippingType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ShippingType) String() string {
 	switch e {
 	case ShippingTypeShipping:
@@ -772,6 +822,8 @@ const (
 	VehicleConnectionErrorCodeSessionNotActive     VehicleConnectionErrorCode = 2
 )
 
+// String returns the VehicleConnectionErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VehicleConnectionErrorCode) String() string {
 	switch e {
 	case VehicleConnectionErrorCodeUnknown:
@@ -794,6 +846,8 @@ const (
 	VehicleConnectionSessionConnectionStateFailedToConnect VehicleConnectionSessionConnectionState = 3
 )
 
+// String returns the VehicleConnectionSessionConnectionState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VehicleConnectionSessionConnectionState) String() string {
 	switch e {
 	case VehicleConnectionSessionConnectionStateDisconnected:

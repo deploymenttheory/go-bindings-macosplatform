@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resolution result for a mass associated with an intent.
-//
 // MassResolutionResult is an idiomatic wrapper over the Objective-C class INMassResolutionResult.
+//
+// It embeds [IntentResolutionResult], promoting that type's methods.
+//
+// A resolution result for a mass associated with an intent.
 type MassResolutionResult struct {
-	objref.Handle
+	IntentResolutionResult
 }
 
 // MassResolutionResultFromID adopts an existing Objective-C object as a MassResolutionResult
@@ -25,7 +26,8 @@ func MassResolutionResultFromID(id objc.ID) *MassResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	x := &MassResolutionResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MassResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func massResolutionResultAdopt(id objc.ID) *MassResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	x := &MassResolutionResult{Handle: objref.Wrap(id)}
+	x := &MassResolutionResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MassResolutionResult) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MassResolutionResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MassResolutionResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMassResolutionResult creates a new MassResolutionResult.
@@ -70,3 +58,5 @@ type MassResolutionResultable interface {
 }
 
 var _ MassResolutionResultable = (*MassResolutionResult)(nil)
+
+var _ IntentResolutionResultProvider = (*MassResolutionResult)(nil)

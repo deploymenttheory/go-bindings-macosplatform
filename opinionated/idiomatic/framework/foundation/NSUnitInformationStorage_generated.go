@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for quantities of information.
-//
 // UnitInformationStorage is an idiomatic wrapper over the Objective-C class NSUnitInformationStorage.
+//
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for quantities of information.
 type UnitInformationStorage struct {
-	objref.Handle
+	Dimension
 }
 
 // UnitInformationStorageFromID adopts an existing Objective-C object as a UnitInformationStorage
@@ -25,7 +26,8 @@ func UnitInformationStorageFromID(id objc.ID) *UnitInformationStorage {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitInformationStorage{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UnitInformationStorage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func unitInformationStorageAdopt(id objc.ID) *UnitInformationStorage {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitInformationStorage{Handle: objref.Wrap(id)}
+	x := &UnitInformationStorage{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UnitInformationStorage) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UnitInformationStorage) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UnitInformationStorage) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUnitInformationStorage creates a new UnitInformationStorage.
@@ -64,7 +52,7 @@ func NewUnitInformationStorage() *UnitInformationStorage {
 	return unitInformationStorageAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UnitInformationStorage) WithScriptingProperties(scriptingProperties obj.Object) *UnitInformationStorage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
@@ -77,3 +65,7 @@ type UnitInformationStorageable interface {
 }
 
 var _ UnitInformationStorageable = (*UnitInformationStorage)(nil)
+
+var _ DimensionProvider = (*UnitInformationStorage)(nil)
+
+var _ UnitProvider = (*UnitInformationStorage)(nil)

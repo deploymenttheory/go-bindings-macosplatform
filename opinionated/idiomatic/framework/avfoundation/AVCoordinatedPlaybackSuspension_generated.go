@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a temporary suspension of coordinated playback.
-//
 // CoordinatedPlaybackSuspension is an idiomatic wrapper over the Objective-C class AVCoordinatedPlaybackSuspension.
+//
+// An object that represents a temporary suspension of coordinated playback.
 type CoordinatedPlaybackSuspension struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CoordinatedPlaybackSuspensionFromID(id objc.ID) *CoordinatedPlaybackSuspens
 	if id == 0 {
 		return nil
 	}
-	x := &CoordinatedPlaybackSuspension{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CoordinatedPlaybackSuspension{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func coordinatedPlaybackSuspensionAdopt(id objc.ID) *CoordinatedPlaybackSuspensi
 	if id == 0 {
 		return nil
 	}
-	x := &CoordinatedPlaybackSuspension{Handle: objref.Wrap(id)}
+	x := &CoordinatedPlaybackSuspension{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +60,30 @@ func (x *CoordinatedPlaybackSuspension) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CoordinatedPlaybackSuspension) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCoordinatedPlaybackSuspension creates a new CoordinatedPlaybackSuspension.
 func NewCoordinatedPlaybackSuspension() *CoordinatedPlaybackSuspension {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVCoordinatedPlaybackSuspension")), objc.RegisterName("new"))
 	return coordinatedPlaybackSuspensionAdopt(_id)
 }
 
-// Ends a suspension.
+// End ends a suspension.
 func (x *CoordinatedPlaybackSuspension) End() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("end"))
 }
 
-// The reason for the suspension. This will be communicated to other participants while coordination is suspended.
+// Reason the reason for the suspension. This will be communicated to other participants while coordination is suspended.
 func (x *CoordinatedPlaybackSuspension) Reason() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reason"))
 	return obj.Wrap(_r)
 }
 
-// The begin time of the suspension.
+// BeginDate the begin time of the suspension.
 func (x *CoordinatedPlaybackSuspension) BeginDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginDate"))
 	return obj.Wrap(_r)

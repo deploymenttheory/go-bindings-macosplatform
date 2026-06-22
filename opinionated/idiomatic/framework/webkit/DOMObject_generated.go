@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMObject is an idiomatic wrapper over the Objective-C class DOMObject.
+//
+// DOMObject is an abstract base — you do not construct it directly. Construct one of [DOMAbstractView], [DOMBlob], [DOMCSSRuleList], [DOMCSSRule], [DOMCSSStyleDeclaration], [DOMCSSValue], [DOMCounter], [DOMEvent], [DOMFileList], [DOMHTMLCollection], [DOMHTMLOptionsCollection], [DOMImplementation], [DOMMediaList], [DOMNamedNodeMap], [DOMNodeIterator], [DOMNodeList], [DOMNode], [DOMRGBColor], [DOMRange], [DOMRect], [DOMStyleSheetList], [DOMStyleSheet], [DOMTreeWalker], [DOMXPathExpression], [DOMXPathResult] and pass it where a DOMObject is accepted.
 type DOMObject struct {
-	objref.Handle
+	WebScriptObject
 }
 
 // DOMObjectFromID adopts an existing Objective-C object as a DOMObject
@@ -23,7 +24,8 @@ func DOMObjectFromID(id objc.ID) *DOMObject {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMObject{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,32 +38,13 @@ func dOMObjectAdopt(id objc.ID) *DOMObject {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMObject{Handle: objref.Wrap(id)}
+	x := &DOMObject{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *DOMObject) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMObject) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMObject) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewDOMObject creates a new DOMObject.
-func NewDOMObject() *DOMObject {
-	_id := objc.Send[objc.ID](objc.ID(_class("DOMObject")), objc.RegisterName("new"))
-	return dOMObjectAdopt(_id)
-}
-
+// Sheet wraps the corresponding Objective-C method.
 func (x *DOMObject) Sheet() *DOMStyleSheet {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sheet"))
 	return DOMStyleSheetFromID(_r)
@@ -74,3 +57,12 @@ type DOMObjectable interface {
 }
 
 var _ DOMObjectable = (*DOMObject)(nil)
+
+// isDOMObject marks DOMObject — and, by embedding promotion, its
+// subclasses — as a member of the DOMObject hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DOMObject) isDOMObject() {}
+
+var _ DOMObjectProvider = (*DOMObject)(nil)
+
+var _ WebScriptObjectProvider = (*DOMObject)(nil)

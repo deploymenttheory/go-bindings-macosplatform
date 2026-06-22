@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides information about sample data in a track.
-//
 // AssetSegmentReportSampleInformation is an idiomatic wrapper over the Objective-C class AVAssetSegmentReportSampleInformation.
+//
+// An object that provides information about sample data in a track.
 type AssetSegmentReportSampleInformation struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetSegmentReportSampleInformationFromID(id objc.ID) *AssetSegmentReportSa
 	if id == 0 {
 		return nil
 	}
-	x := &AssetSegmentReportSampleInformation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetSegmentReportSampleInformation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetSegmentReportSampleInformationAdopt(id objc.ID) *AssetSegmentReportSam
 	if id == 0 {
 		return nil
 	}
-	x := &AssetSegmentReportSampleInformation{Handle: objref.Wrap(id)}
+	x := &AssetSegmentReportSampleInformation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *AssetSegmentReportSampleInformation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetSegmentReportSampleInformation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetSegmentReportSampleInformation creates a new AssetSegmentReportSampleInformation.
 func NewAssetSegmentReportSampleInformation() *AssetSegmentReportSampleInformation {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetSegmentReportSampleInformation")), objc.RegisterName("new"))
 	return assetSegmentReportSampleInformationAdopt(_id)
 }
 
-// The offset of the sample in the segment.
+// Offset the offset of the sample in the segment.
 func (x *AssetSegmentReportSampleInformation) Offset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
 	return _r
 }
 
-// The length of the sample.
+// Length the length of the sample.
 func (x *AssetSegmentReportSampleInformation) Length() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
 	return _r
 }
 
-// Indicates whether the sample is a sync sample.
+// IsSyncSample indicates whether the sample is a sync sample.
 func (x *AssetSegmentReportSampleInformation) IsSyncSample() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSyncSample"))
 	return _r

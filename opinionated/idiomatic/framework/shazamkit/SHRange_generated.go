@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A half-open interval from a lower bound up to, but not including, an upper bound.
-//
 // Range is an idiomatic wrapper over the Objective-C class SHRange.
+//
+// A half-open interval from a lower bound up to, but not including, an upper bound.
 type Range struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RangeFromID(id objc.ID) *Range {
 	if id == 0 {
 		return nil
 	}
-	x := &Range{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Range{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func rangeAdopt(id objc.ID) *Range {
 	if id == 0 {
 		return nil
 	}
-	x := &Range{Handle: objref.Wrap(id)}
+	x := &Range{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,26 @@ func (x *Range) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a range with the bounds you specify.
-//
-// NewRangeWithLowerBoundUpperBound creates a new Range.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Range) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRangeWithLowerBoundUpperBound creates a range with the bounds you specify.
 func NewRangeWithLowerBoundUpperBound(lowerBound float64, upperBound float64) *Range {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SHRange")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLowerBound:upperBound:"), lowerBound, upperBound)
 	return rangeAdopt(_id)
 }
 
-// The lowerBound of this time range
+// LowerBound the lowerBound of this time range
 func (x *Range) LowerBound() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lowerBound"))
 	return _r
 }
 
-// The range's upper bound.
+// UpperBound the range's upper bound.
 func (x *Range) UpperBound() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("upperBound"))
 	return _r

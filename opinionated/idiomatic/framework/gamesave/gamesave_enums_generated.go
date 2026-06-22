@@ -27,6 +27,8 @@ const (
 	SyncStateClosed SyncState = 6
 )
 
+// String returns the SyncState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SyncState) String() string {
 	switch e {
 	case SyncStateReady:

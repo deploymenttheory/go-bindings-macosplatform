@@ -6,15 +6,17 @@ package scenekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information about the result of a scene-space or view-space search for scene elements.
-//
 // HitTestResult is an idiomatic wrapper over the Objective-C class SCNHitTestResult.
+//
+// Information about the result of a scene-space or view-space search for scene elements.
 type HitTestResult struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func HitTestResultFromID(id objc.ID) *HitTestResult {
 	if id == 0 {
 		return nil
 	}
-	x := &HitTestResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HitTestResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func hitTestResultAdopt(id objc.ID) *HitTestResult {
 	if id == 0 {
 		return nil
 	}
-	x := &HitTestResult{Handle: objref.Wrap(id)}
+	x := &HitTestResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +62,49 @@ func (x *HitTestResult) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HitTestResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewHitTestResult creates a new HitTestResult.
 func NewHitTestResult() *HitTestResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCNHitTestResult")), objc.RegisterName("new"))
 	return hitTestResultAdopt(_id)
 }
 
-// The hit node.
+// TextureCoordinatesWithMappingChannel returns the texture coordinates at the point of intersection for the specified texture mapping channel.
+func (x *HitTestResult) TextureCoordinatesWithMappingChannel(channel int) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("textureCoordinatesWithMappingChannel:"), channel)
+	return _r
+}
+
+// Node the hit node.
 func (x *HitTestResult) Node() *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("node"))
 	return NodeFromID(_r)
 }
 
-// Index of the hit geometry element.
+// GeometryIndex index of the hit geometry element.
 func (x *HitTestResult) GeometryIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("geometryIndex"))
 	return _r
 }
 
-// Index of the hit primitive of the geometry element.
+// FaceIndex index of the hit primitive of the geometry element.
 func (x *HitTestResult) FaceIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("faceIndex"))
 	return _r
 }
 
-// The hit bone. Only available if the node hit has a SCNSkinner attached.
+// ModelTransform world transform of the hit node.
+func (x *HitTestResult) ModelTransform() quartzcore.CATransform3D {
+	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(x), objc.RegisterName("modelTransform"))
+	return _r
+}
+
+// BoneNode the hit bone. Only available if the node hit has a SCNSkinner attached.
 func (x *HitTestResult) BoneNode() *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boneNode"))
 	return NodeFromID(_r)
@@ -91,9 +113,11 @@ func (x *HitTestResult) BoneNode() *Node {
 // HitTestResultable is the interface implemented by [HitTestResult], for mocking and DI.
 type HitTestResultable interface {
 	obj.Object
+	TextureCoordinatesWithMappingChannel(channel int) corefoundation.CGPoint
 	Node() *Node
 	GeometryIndex() int
 	FaceIndex() int
+	ModelTransform() quartzcore.CATransform3D
 	BoneNode() *Node
 }
 

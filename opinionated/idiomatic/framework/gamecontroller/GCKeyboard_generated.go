@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a physical keyboard connected to a device.
-//
 // Keyboard is an idiomatic wrapper over the Objective-C class GCKeyboard.
+//
+// An object that represents a physical keyboard connected to a device.
 type Keyboard struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func KeyboardFromID(id objc.ID) *Keyboard {
 	if id == 0 {
 		return nil
 	}
-	x := &Keyboard{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Keyboard{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func keyboardAdopt(id objc.ID) *Keyboard {
 	if id == 0 {
 		return nil
 	}
-	x := &Keyboard{Handle: objref.Wrap(id)}
+	x := &Keyboard{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *Keyboard) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Keyboard) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewKeyboard creates a new Keyboard.
 func NewKeyboard() *Keyboard {
 	_id := objc.Send[objc.ID](objc.ID(_class("GCKeyboard")), objc.RegisterName("new"))
 	return keyboardAdopt(_id)
 }
 
-// Unlike GCController GCKeyboard only has one input profile. This profile allows you to query buttons and button state
+// KeyboardInput unlike GCController GCKeyboard only has one input profile. This profile allows you to query buttons and button state
 func (x *Keyboard) KeyboardInput() *KeyboardInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyboardInput"))
 	return KeyboardInputFromID(_r)

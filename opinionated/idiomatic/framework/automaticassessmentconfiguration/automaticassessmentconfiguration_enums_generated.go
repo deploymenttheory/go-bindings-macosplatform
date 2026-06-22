@@ -20,6 +20,8 @@ const (
 	AssessmentErrorRequiredParticipantsNotAvailable AssessmentErrorCode = 5
 )
 
+// String returns the AssessmentErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AssessmentErrorCode) String() string {
 	switch e {
 	case AssessmentErrorUnknown:
@@ -49,6 +51,8 @@ const (
 	AutocorrectModePunctuation AutocorrectMode = 2
 )
 
+// String returns the AutocorrectMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AutocorrectMode) String() string {
 	var parts []string
 	if e&AutocorrectModeSpelling != 0 {

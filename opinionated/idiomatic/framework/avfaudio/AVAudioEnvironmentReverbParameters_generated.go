@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that encapsulates the parameters that you use to control the reverb of the environment node class.
-//
 // AudioEnvironmentReverbParameters is an idiomatic wrapper over the Objective-C class AVAudioEnvironmentReverbParameters.
+//
+// A class that encapsulates the parameters that you use to control the reverb of the environment node class.
 type AudioEnvironmentReverbParameters struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AudioEnvironmentReverbParametersFromID(id objc.ID) *AudioEnvironmentReverbP
 	if id == 0 {
 		return nil
 	}
-	x := &AudioEnvironmentReverbParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioEnvironmentReverbParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func audioEnvironmentReverbParametersAdopt(id objc.ID) *AudioEnvironmentReverbPa
 	if id == 0 {
 		return nil
 	}
-	x := &AudioEnvironmentReverbParameters{Handle: objref.Wrap(id)}
+	x := &AudioEnvironmentReverbParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,54 +60,58 @@ func (x *AudioEnvironmentReverbParameters) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioEnvironmentReverbParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAudioEnvironmentReverbParameters creates a new AudioEnvironmentReverbParameters.
 func NewAudioEnvironmentReverbParameters() *AudioEnvironmentReverbParameters {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioEnvironmentReverbParameters")), objc.RegisterName("new"))
 	return audioEnvironmentReverbParametersAdopt(_id)
 }
 
-// A Boolean value that indicates whether reverberation is in an enabled state.
-//
-// WithEnable sets enable and returns the receiver so calls can be chained.
+// WithEnable a Boolean value that indicates whether reverberation is in an enabled state.
 func (x *AudioEnvironmentReverbParameters) WithEnable(enable bool) *AudioEnvironmentReverbParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnable:"), enable)
 	return x
 }
 
-// Controls the amount of reverb, in decibels.
-//
-// WithLevel sets level and returns the receiver so calls can be chained.
+// WithLevel controls the amount of reverb, in decibels.
 func (x *AudioEnvironmentReverbParameters) WithLevel(level float32) *AudioEnvironmentReverbParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevel:"), level)
 	return x
 }
 
-// Loads one of the reverbs factory presets.
+// LoadFactoryReverbPreset loads one of the reverbs factory presets.
 func (x *AudioEnvironmentReverbParameters) LoadFactoryReverbPreset(preset AudioUnitReverbPreset) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadFactoryReverbPreset:"), preset)
 }
 
-// Turns on/off the reverb Default:    NO
+// Enable turns on/off the reverb Default:    NO
 func (x *AudioEnvironmentReverbParameters) Enable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enable"))
 	return _r
 }
 
+// SetEnable wraps the corresponding Objective-C method.
 func (x *AudioEnvironmentReverbParameters) SetEnable(enable bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnable:"), enable)
 }
 
-// Controls the master level of the reverb Range:      -40 to 40 dB Default:    0.0
+// Level controls the master level of the reverb Range:      -40 to 40 dB Default:    0.0
 func (x *AudioEnvironmentReverbParameters) Level() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("level"))
 	return _r
 }
 
+// SetLevel wraps the corresponding Objective-C method.
 func (x *AudioEnvironmentReverbParameters) SetLevel(level float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevel:"), level)
 }
 
-// filter that applies to the output of the reverb
+// FilterParameters filter that applies to the output of the reverb
 func (x *AudioEnvironmentReverbParameters) FilterParameters() *AudioUnitEQFilterParameters {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterParameters"))
 	return AudioUnitEQFilterParametersFromID(_r)

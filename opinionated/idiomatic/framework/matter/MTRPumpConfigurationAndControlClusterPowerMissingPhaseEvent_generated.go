@@ -23,7 +23,8 @@ func MTRPumpConfigurationAndControlClusterPowerMissingPhaseEventFromID(id objc.I
 	if id == 0 {
 		return nil
 	}
-	x := &MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRPumpConfigurationAndControlClusterPowerMissingPhaseEventAdopt(id objc.ID
 	if id == 0 {
 		return nil
 	}
-	x := &MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent{Handle: objref.Wrap(id)}
+	x := &MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent) IsEqual(ot
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent creates a new MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent.

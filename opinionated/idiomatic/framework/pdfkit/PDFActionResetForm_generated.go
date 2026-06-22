@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// PDFActionResetForm, a subclass of PDFAction, defines methods for getting and clearing fields in a PDF form.
-//
 // ActionResetForm is an idiomatic wrapper over the Objective-C class PDFActionResetForm.
+//
+// It embeds [Action], promoting that type's methods.
+//
+// PDFActionResetForm, a subclass of PDFAction, defines methods for getting and clearing fields in a PDF form.
 type ActionResetForm struct {
-	objref.Handle
+	Action
 }
 
 // ActionResetFormFromID adopts an existing Objective-C object as a ActionResetForm
@@ -25,7 +26,8 @@ func ActionResetFormFromID(id objc.ID) *ActionResetForm {
 	if id == 0 {
 		return nil
 	}
-	x := &ActionResetForm{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ActionResetForm{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func actionResetFormAdopt(id objc.ID) *ActionResetForm {
 	if id == 0 {
 		return nil
 	}
-	x := &ActionResetForm{Handle: objref.Wrap(id)}
+	x := &ActionResetForm{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ActionResetForm) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ActionResetForm) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ActionResetForm) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewActionResetForm creates a new ActionResetForm.
@@ -64,38 +52,39 @@ func NewActionResetForm() *ActionResetForm {
 	return actionResetFormAdopt(_id)
 }
 
-// Returns an array of fields associated with the reset action.
-//
-// WithFields sets the collection and returns the receiver so calls can be chained.
+// WithFields returns an array of fields associated with the reset action.
 func (x *ActionResetForm) WithFields(items ...obj.Object) *ActionResetForm {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFields:"), _arr)
 	return x
 }
 
-// Sets whether the fields associated with the reset action are cleared when the action is performed.
-//
-// WithFieldsIncludedAreCleared sets fieldsIncludedAreCleared and returns the receiver so calls can be chained.
+// WithFieldsIncludedAreCleared sets whether the fields associated with the reset action are cleared when the action is performed.
 func (x *ActionResetForm) WithFieldsIncludedAreCleared(fieldsIncludedAreCleared bool) *ActionResetForm {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFieldsIncludedAreCleared:"), fieldsIncludedAreCleared)
 	return x
 }
 
+// Fields wraps the corresponding Objective-C method.
+//
 // Fields returns the collection as a Go slice.
 func (x *ActionResetForm) Fields() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fields"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetFields wraps the corresponding Objective-C method.
 func (x *ActionResetForm) SetFields(fields []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFields:"), purego.SliceToNSArray(fields, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// FieldsIncludedAreCleared wraps the corresponding Objective-C method.
 func (x *ActionResetForm) FieldsIncludedAreCleared() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("fieldsIncludedAreCleared"))
 	return _r
 }
 
+// SetFieldsIncludedAreCleared wraps the corresponding Objective-C method.
 func (x *ActionResetForm) SetFieldsIncludedAreCleared(fieldsIncludedAreCleared bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFieldsIncludedAreCleared:"), fieldsIncludedAreCleared)
 }
@@ -112,3 +101,5 @@ type ActionResetFormable interface {
 }
 
 var _ ActionResetFormable = (*ActionResetForm)(nil)
+
+var _ ActionProvider = (*ActionResetForm)(nil)

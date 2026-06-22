@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMComment is an idiomatic wrapper over the Objective-C class DOMComment.
+//
+// It embeds [DOMCharacterData], promoting that type's methods.
 type DOMComment struct {
-	objref.Handle
+	DOMCharacterData
 }
 
 // DOMCommentFromID adopts an existing Objective-C object as a DOMComment
@@ -23,7 +24,8 @@ func DOMCommentFromID(id objc.ID) *DOMComment {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMComment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMComment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMCommentAdopt(id objc.ID) *DOMComment {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMComment{Handle: objref.Wrap(id)}
+	x := &DOMComment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMComment) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMComment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMComment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMComment creates a new DOMComment.
@@ -62,25 +50,25 @@ func NewDOMComment() *DOMComment {
 	return dOMCommentAdopt(_id)
 }
 
-// WithData sets data and returns the receiver so calls can be chained.
+// WithData sets the property and returns the receiver so calls can be chained.
 func (x *DOMComment) WithData(data string) *DOMComment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 	return x
 }
 
-// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMComment) WithNodeValue(nodeValue string) *DOMComment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets prefix and returns the receiver so calls can be chained.
+// WithPrefix sets the property and returns the receiver so calls can be chained.
 func (x *DOMComment) WithPrefix(prefix string) *DOMComment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets textContent and returns the receiver so calls can be chained.
+// WithTextContent sets the property and returns the receiver so calls can be chained.
 func (x *DOMComment) WithTextContent(textContent string) *DOMComment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
@@ -96,3 +84,11 @@ type DOMCommentable interface {
 }
 
 var _ DOMCommentable = (*DOMComment)(nil)
+
+var _ DOMCharacterDataProvider = (*DOMComment)(nil)
+
+var _ DOMNodeProvider = (*DOMComment)(nil)
+
+var _ DOMObjectProvider = (*DOMComment)(nil)
+
+var _ WebScriptObjectProvider = (*DOMComment)(nil)

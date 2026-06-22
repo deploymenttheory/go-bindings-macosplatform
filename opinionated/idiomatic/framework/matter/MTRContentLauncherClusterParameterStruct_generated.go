@@ -13,6 +13,8 @@ import (
 )
 
 // MTRContentLauncherClusterParameterStruct is an idiomatic wrapper over the Objective-C class MTRContentLauncherClusterParameterStruct.
+//
+// MTRContentLauncherClusterParameterStruct is an abstract base — you do not construct it directly. Construct one of [MTRContentLauncherClusterParameter] and pass it where a MTRContentLauncherClusterParameterStruct is accepted.
 type MTRContentLauncherClusterParameterStruct struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRContentLauncherClusterParameterStructFromID(id objc.ID) *MTRContentLaunc
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterParameterStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRContentLauncherClusterParameterStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRContentLauncherClusterParameterStructAdopt(id objc.ID) *MTRContentLaunch
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterParameterStruct{Handle: objref.Wrap(id)}
+	x := &MTRContentLauncherClusterParameterStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,33 +60,36 @@ func (x *MTRContentLauncherClusterParameterStruct) IsKind(className string) bool
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRContentLauncherClusterParameterStruct creates a new MTRContentLauncherClusterParameterStruct.
-func NewMTRContentLauncherClusterParameterStruct() *MTRContentLauncherClusterParameterStruct {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRContentLauncherClusterParameterStruct")), objc.RegisterName("new"))
-	return mTRContentLauncherClusterParameterStructAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRContentLauncherClusterParameterStruct) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithType sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterParameterStruct) WithType(type_ obj.Object) *MTRContentLauncherClusterParameterStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return x
 }
 
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterParameterStruct) WithValue(value string) *MTRContentLauncherClusterParameterStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 	return x
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterParameterStruct) Type() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
 	return obj.Wrap(_r)
 }
 
+// SetType wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterParameterStruct) SetType(type_ obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterParameterStruct) Value() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	if _r == 0 {
@@ -91,15 +98,18 @@ func (x *MTRContentLauncherClusterParameterStruct) Value() string {
 	return purego.GoString(_r)
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterParameterStruct) SetValue(value string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 }
 
+// ExternalIDList wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterParameterStruct) ExternalIDList() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("externalIDList"))
 	return obj.Wrap(_r)
 }
 
+// SetExternalIDList wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterParameterStruct) SetExternalIDList(externalIDList obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExternalIDList:"), objref.IDOf(externalIDList))
 }
@@ -118,3 +128,10 @@ type MTRContentLauncherClusterParameterStructable interface {
 }
 
 var _ MTRContentLauncherClusterParameterStructable = (*MTRContentLauncherClusterParameterStruct)(nil)
+
+// isMTRContentLauncherClusterParameterStruct marks MTRContentLauncherClusterParameterStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRContentLauncherClusterParameterStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRContentLauncherClusterParameterStruct) isMTRContentLauncherClusterParameterStruct() {}
+
+var _ MTRContentLauncherClusterParameterStructProvider = (*MTRContentLauncherClusterParameterStruct)(nil)

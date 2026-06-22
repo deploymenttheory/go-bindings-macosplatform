@@ -6,17 +6,19 @@ package vision
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An image-analysis request that uses a Core ML model to process images.
-//
 // CoreMLRequest is an idiomatic wrapper over the Objective-C class VNCoreMLRequest.
+//
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// An image-analysis request that uses a Core ML model to process images.
 type CoreMLRequest struct {
-	objref.Handle
+	ImageBasedRequest
 }
 
 // CoreMLRequestFromID adopts an existing Objective-C object as a CoreMLRequest
@@ -25,7 +27,8 @@ func CoreMLRequestFromID(id objc.ID) *CoreMLRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &CoreMLRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CoreMLRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,78 +41,62 @@ func coreMLRequestAdopt(id objc.ID) *CoreMLRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &CoreMLRequest{Handle: objref.Wrap(id)}
+	x := &CoreMLRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CoreMLRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CoreMLRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CoreMLRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a model container to use with an image analysis request based on the model you provide.
-//
-// NewCoreMLRequestWithModel creates a new CoreMLRequest.
+// NewCoreMLRequestWithModel creates a model container to use with an image analysis request based on the model you provide.
 func NewCoreMLRequestWithModel(model *CoreMLModel) *CoreMLRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNCoreMLRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithModel:"), objref.IDOf(model))
 	return coreMLRequestAdopt(_id)
 }
 
-// An optional setting that tells the Vision algorithm how to scale an input image.
-//
-// WithImageCropAndScaleOption sets imageCropAndScaleOption and returns the receiver so calls can be chained.
+// WithImageCropAndScaleOption an optional setting that tells the Vision algorithm how to scale an input image.
 func (x *CoreMLRequest) WithImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption) *CoreMLRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageCropAndScaleOption:"), imageCropAndScaleOption)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets preferBackgroundProcessing and returns the receiver so calls can be chained.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
+func (x *CoreMLRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *CoreMLRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *CoreMLRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *CoreMLRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets usesCPUOnly and returns the receiver so calls can be chained.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *CoreMLRequest) WithUsesCPUOnly(usesCPUOnly bool) *CoreMLRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets revision and returns the receiver so calls can be chained.
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
 func (x *CoreMLRequest) WithRevision(revision int) *CoreMLRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
 }
 
-// The model from CoreML wrapped in a VNCoreMLModel.
+// Model the model from CoreML wrapped in a VNCoreMLModel.
 func (x *CoreMLRequest) Model() *CoreMLModel {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("model"))
 	return CoreMLModelFromID(_r)
 }
 
+// ImageCropAndScaleOption wraps the corresponding Objective-C method.
 func (x *CoreMLRequest) ImageCropAndScaleOption() ImageCropAndScaleOption {
 	_r := objc.Send[ImageCropAndScaleOption](objref.IDOf(x), objc.RegisterName("imageCropAndScaleOption"))
 	return _r
 }
 
+// SetImageCropAndScaleOption wraps the corresponding Objective-C method.
 func (x *CoreMLRequest) SetImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageCropAndScaleOption:"), imageCropAndScaleOption)
 }
@@ -118,6 +105,7 @@ func (x *CoreMLRequest) SetImageCropAndScaleOption(imageCropAndScaleOption Image
 type CoreMLRequestable interface {
 	obj.Object
 	WithImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption) *CoreMLRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *CoreMLRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *CoreMLRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *CoreMLRequest
 	WithRevision(revision int) *CoreMLRequest
@@ -127,3 +115,7 @@ type CoreMLRequestable interface {
 }
 
 var _ CoreMLRequestable = (*CoreMLRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*CoreMLRequest)(nil)
+
+var _ RequestProvider = (*CoreMLRequest)(nil)

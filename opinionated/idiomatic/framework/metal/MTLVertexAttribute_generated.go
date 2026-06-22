@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An instance that represents an attribute of a vertex function.
-//
 // VertexAttribute is an idiomatic wrapper over the Objective-C class MTLVertexAttribute.
+//
+// An instance that represents an attribute of a vertex function.
 type VertexAttribute struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VertexAttributeFromID(id objc.ID) *VertexAttribute {
 	if id == 0 {
 		return nil
 	}
-	x := &VertexAttribute{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VertexAttribute{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func vertexAttributeAdopt(id objc.ID) *VertexAttribute {
 	if id == 0 {
 		return nil
 	}
-	x := &VertexAttribute{Handle: objref.Wrap(id)}
+	x := &VertexAttribute{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *VertexAttribute) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VertexAttribute) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVertexAttribute creates a new VertexAttribute.
 func NewVertexAttribute() *VertexAttribute {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLVertexAttribute")), objc.RegisterName("new"))
 	return vertexAttributeAdopt(_id)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *VertexAttribute) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -72,26 +81,31 @@ func (x *VertexAttribute) Name() string {
 	return purego.GoString(_r)
 }
 
+// AttributeIndex wraps the corresponding Objective-C method.
 func (x *VertexAttribute) AttributeIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("attributeIndex"))
 	return _r
 }
 
+// AttributeType wraps the corresponding Objective-C method.
 func (x *VertexAttribute) AttributeType() DataType {
 	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("attributeType"))
 	return _r
 }
 
+// IsActive wraps the corresponding Objective-C method.
 func (x *VertexAttribute) IsActive() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
 	return _r
 }
 
+// IsPatchData wraps the corresponding Objective-C method.
 func (x *VertexAttribute) IsPatchData() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPatchData"))
 	return _r
 }
 
+// IsPatchControlPointData wraps the corresponding Objective-C method.
 func (x *VertexAttribute) IsPatchControlPointData() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPatchControlPointData"))
 	return _r

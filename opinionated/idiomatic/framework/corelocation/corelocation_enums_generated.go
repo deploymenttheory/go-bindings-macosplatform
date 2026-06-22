@@ -18,6 +18,8 @@ const (
 	AccuracyAuthorizationReducedAccuracy AccuracyAuthorization = 1
 )
 
+// String returns the AccuracyAuthorization constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AccuracyAuthorization) String() string {
 	switch e {
 	case AccuracyAuthorizationFullAccuracy:
@@ -45,6 +47,8 @@ const (
 	ActivityTypeAirborne ActivityType = 5
 )
 
+// String returns the ActivityType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ActivityType) String() string {
 	switch e {
 	case ActivityTypeOther:
@@ -78,6 +82,8 @@ const (
 	KCLAuthorizationStatusAuthorized AuthorizationStatus = 3
 )
 
+// String returns the AuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationStatus) String() string {
 	switch e {
 	case KCLAuthorizationStatusNotDetermined:
@@ -113,6 +119,8 @@ const (
 	DeviceOrientationFaceDown DeviceOrientation = 6
 )
 
+// String returns the DeviceOrientation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DeviceOrientation) String() string {
 	switch e {
 	case DeviceOrientationUnknown:
@@ -150,6 +158,8 @@ const (
 	LiveUpdateConfigurationAirborne LiveUpdateConfiguration = 4
 )
 
+// String returns the LiveUpdateConfiguration constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LiveUpdateConfiguration) String() string {
 	switch e {
 	case LiveUpdateConfigurationDefault:
@@ -181,6 +191,8 @@ const (
 	MonitoringStateUnmonitored MonitoringState = 3
 )
 
+// String returns the MonitoringState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MonitoringState) String() string {
 	switch e {
 	case MonitoringStateUnknown:
@@ -210,6 +222,8 @@ const (
 	ProximityFar Proximity = 3
 )
 
+// String returns the Proximity constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Proximity) String() string {
 	switch e {
 	case ProximityUnknown:

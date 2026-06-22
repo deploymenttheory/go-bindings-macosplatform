@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Thread Network Directory
-//
 // MTRBaseClusterThreadNetworkDirectory is an idiomatic wrapper over the Objective-C class MTRBaseClusterThreadNetworkDirectory.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
+//
+// Cluster Thread Network Directory
 type MTRBaseClusterThreadNetworkDirectory struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterThreadNetworkDirectoryFromID adopts an existing Objective-C object as a MTRBaseClusterThreadNetworkDirectory
@@ -27,7 +28,8 @@ func MTRBaseClusterThreadNetworkDirectoryFromID(id objc.ID) *MTRBaseClusterThrea
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterThreadNetworkDirectory{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterThreadNetworkDirectory{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,39 +42,23 @@ func mTRBaseClusterThreadNetworkDirectoryAdopt(id objc.ID) *MTRBaseClusterThread
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterThreadNetworkDirectory{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterThreadNetworkDirectory{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterThreadNetworkDirectory) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterThreadNetworkDirectory) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterThreadNetworkDirectory) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterThreadNetworkDirectoryWithDeviceEndpointIDQueue creates a new MTRBaseClusterThreadNetworkDirectory.
+// NewMTRBaseClusterThreadNetworkDirectoryWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterThreadNetworkDirectoryWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterThreadNetworkDirectory {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterThreadNetworkDirectory")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterThreadNetworkDirectoryAdopt(_id)
 }
 
-// Command GetOperationalDataset
+// GetOperationalDatasetWithParamsCompletion command GetOperationalDataset
 //
 // GetOperationalDatasetWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDirectory) GetOperationalDatasetWithParamsCompletion(ctx context.Context, params *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) (*MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams, error) {
+func (x *MTRBaseClusterThreadNetworkDirectory) GetOperationalDatasetWithParamsCompletion(ctx context.Context, params *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) (result *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams, err error) {
 	type _result struct {
 		val *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams
 		err error
@@ -94,8 +80,10 @@ func (x *MTRBaseClusterThreadNetworkDirectory) GetOperationalDatasetWithParamsCo
 	}
 }
 
+// ReadAttributePreferredExtendedPanIDWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePreferredExtendedPanIDWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributePreferredExtendedPanIDWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributePreferredExtendedPanIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -117,8 +105,10 @@ func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributePreferredExtendedPan
 	}
 }
 
+// SubscribeAttributePreferredExtendedPanIDWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePreferredExtendedPanIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributePreferredExtendedPanIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributePreferredExtendedPanIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -140,8 +130,10 @@ func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributePreferredExtend
 	}
 }
 
+// ReadAttributeThreadNetworksWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeThreadNetworksWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeThreadNetworksWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeThreadNetworksWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -163,8 +155,10 @@ func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeThreadNetworksWithCo
 	}
 }
 
+// SubscribeAttributeThreadNetworksWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeThreadNetworksWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeThreadNetworksWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeThreadNetworksWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -186,8 +180,10 @@ func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeThreadNetworksW
 	}
 }
 
+// ReadAttributeThreadNetworkTableSizeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeThreadNetworkTableSizeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeThreadNetworkTableSizeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeThreadNetworkTableSizeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -209,8 +205,10 @@ func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeThreadNetworkTableSi
 	}
 }
 
+// SubscribeAttributeThreadNetworkTableSizeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeThreadNetworkTableSizeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeThreadNetworkTableSizeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeThreadNetworkTableSizeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -232,8 +230,10 @@ func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeThreadNetworkTa
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -255,8 +255,10 @@ func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeGeneratedCommandList
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -278,8 +280,10 @@ func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeGeneratedComman
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -301,8 +305,10 @@ func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeAcceptedCommandListW
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -324,8 +330,10 @@ func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeAcceptedCommand
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -347,8 +355,10 @@ func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeAttributeListWithCom
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -370,8 +380,10 @@ func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeAttributeListWi
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -393,8 +405,10 @@ func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeFeatureMapWithComple
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -416,8 +430,10 @@ func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeFeatureMapWithP
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -439,8 +455,10 @@ func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeClusterRevisionWithC
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -485,3 +503,7 @@ type MTRBaseClusterThreadNetworkDirectoryable interface {
 }
 
 var _ MTRBaseClusterThreadNetworkDirectoryable = (*MTRBaseClusterThreadNetworkDirectory)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterThreadNetworkDirectory)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterThreadNetworkDirectory)(nil)

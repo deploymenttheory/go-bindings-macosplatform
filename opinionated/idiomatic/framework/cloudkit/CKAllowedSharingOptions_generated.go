@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that controls participant access and permission options.
-//
 // AllowedSharingOptions is an idiomatic wrapper over the Objective-C class CKAllowedSharingOptions.
+//
+// An object that controls participant access and permission options.
 type AllowedSharingOptions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AllowedSharingOptionsFromID(id objc.ID) *AllowedSharingOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &AllowedSharingOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AllowedSharingOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func allowedSharingOptionsAdopt(id objc.ID) *AllowedSharingOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &AllowedSharingOptions{Handle: objref.Wrap(id)}
+	x := &AllowedSharingOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,83 +60,83 @@ func (x *AllowedSharingOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates and initializes an allowed sharing options object.
-//
-// NewAllowedSharingOptionsWithAllowedParticipantPermissionOptionsAllowedParticipantAccessOptions creates a new AllowedSharingOptions.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AllowedSharingOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAllowedSharingOptionsWithAllowedParticipantPermissionOptionsAllowedParticipantAccessOptions creates and initializes an allowed sharing options object.
 func NewAllowedSharingOptionsWithAllowedParticipantPermissionOptionsAllowedParticipantAccessOptions(allowedParticipantPermissionOptions SharingParticipantPermissionOption, allowedParticipantAccessOptions SharingParticipantAccessOption) *AllowedSharingOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKAllowedSharingOptions")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAllowedParticipantPermissionOptions:allowedParticipantAccessOptions:"), allowedParticipantPermissionOptions, allowedParticipantAccessOptions)
 	return allowedSharingOptionsAdopt(_id)
 }
 
-// The permission option the system uses to control whether a user can grant read-only or write access.
-//
-// WithAllowedParticipantPermissionOptions sets allowedParticipantPermissionOptions and returns the receiver so calls can be chained.
+// WithAllowedParticipantPermissionOptions the permission option the system uses to control whether a user can grant read-only or write access.
 func (x *AllowedSharingOptions) WithAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions SharingParticipantPermissionOption) *AllowedSharingOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedParticipantPermissionOptions:"), allowedParticipantPermissionOptions)
 	return x
 }
 
-// The permission option the system uses to control whether a user can share publicly or privately.
-//
-// WithAllowedParticipantAccessOptions sets allowedParticipantAccessOptions and returns the receiver so calls can be chained.
+// WithAllowedParticipantAccessOptions the permission option the system uses to control whether a user can share publicly or privately.
 func (x *AllowedSharingOptions) WithAllowedParticipantAccessOptions(allowedParticipantAccessOptions SharingParticipantAccessOption) *AllowedSharingOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedParticipantAccessOptions:"), allowedParticipantAccessOptions)
 	return x
 }
 
-// Default value is NO. If set, the system sharing UI allows the user to choose whether added participants can invite others to the share. CloudKit returns shares with CKShareParticipantRoleAdministrator participants as read-only to devices running OS versions prior to this role being introduced. CloudKit returns administrator participants on such read-only shares as CKShareParticipantRolePrivateUser.
-//
-// WithAllowsParticipantsToInviteOthers sets allowsParticipantsToInviteOthers and returns the receiver so calls can be chained.
+// WithAllowsParticipantsToInviteOthers default value is NO. If set, the system sharing UI allows the user to choose whether added participants can invite others to the share. CloudKit returns shares with CKShareParticipantRoleAdministrator participants as read-only to devices running OS versions prior to this role being introduced. CloudKit returns administrator participants on such read-only shares as CKShareParticipantRolePrivateUser.
 func (x *AllowedSharingOptions) WithAllowsParticipantsToInviteOthers(allowsParticipantsToInviteOthers bool) *AllowedSharingOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsParticipantsToInviteOthers:"), allowsParticipantsToInviteOthers)
 	return x
 }
 
-// Default value is NO. If set, the system sharing UI allows the user to configure whether participants can request access to the share.
-//
-// WithAllowsAccessRequests sets allowsAccessRequests and returns the receiver so calls can be chained.
+// WithAllowsAccessRequests default value is NO. If set, the system sharing UI allows the user to configure whether participants can request access to the share.
 func (x *AllowedSharingOptions) WithAllowsAccessRequests(allowsAccessRequests bool) *AllowedSharingOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAccessRequests:"), allowsAccessRequests)
 	return x
 }
 
-// The permission option the system uses to control whether a user can grant read-only or write access.
+// AllowedParticipantPermissionOptions the permission option the system uses to control whether a user can grant read-only or write access.
 func (x *AllowedSharingOptions) AllowedParticipantPermissionOptions() SharingParticipantPermissionOption {
 	_r := objc.Send[SharingParticipantPermissionOption](objref.IDOf(x), objc.RegisterName("allowedParticipantPermissionOptions"))
 	return _r
 }
 
+// SetAllowedParticipantPermissionOptions wraps the corresponding Objective-C method.
 func (x *AllowedSharingOptions) SetAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions SharingParticipantPermissionOption) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedParticipantPermissionOptions:"), allowedParticipantPermissionOptions)
 }
 
-// The permission option the system uses to control whether a user can share publicly or privately.
+// AllowedParticipantAccessOptions the permission option the system uses to control whether a user can share publicly or privately.
 func (x *AllowedSharingOptions) AllowedParticipantAccessOptions() SharingParticipantAccessOption {
 	_r := objc.Send[SharingParticipantAccessOption](objref.IDOf(x), objc.RegisterName("allowedParticipantAccessOptions"))
 	return _r
 }
 
+// SetAllowedParticipantAccessOptions wraps the corresponding Objective-C method.
 func (x *AllowedSharingOptions) SetAllowedParticipantAccessOptions(allowedParticipantAccessOptions SharingParticipantAccessOption) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedParticipantAccessOptions:"), allowedParticipantAccessOptions)
 }
 
-// Default value is NO. If set, the system sharing UI allows the user to choose whether added participants can invite others to the share. CloudKit returns shares with “CKShare/ParticipantRole/administrator-enum.case“ participants as read-only to devices running OS versions prior to this role being introduced. CloudKit returns administrator participants on such read-only shares as “CKShare/ParticipantRole/privateUser-enum.case“.
+// AllowsParticipantsToInviteOthers default value is NO. If set, the system sharing UI allows the user to choose whether added participants can invite others to the share. CloudKit returns shares with “CKShare/ParticipantRole/administrator-enum.case“ participants as read-only to devices running OS versions prior to this role being introduced. CloudKit returns administrator participants on such read-only shares as “CKShare/ParticipantRole/privateUser-enum.case“.
 func (x *AllowedSharingOptions) AllowsParticipantsToInviteOthers() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsParticipantsToInviteOthers"))
 	return _r
 }
 
+// SetAllowsParticipantsToInviteOthers wraps the corresponding Objective-C method.
 func (x *AllowedSharingOptions) SetAllowsParticipantsToInviteOthers(allowsParticipantsToInviteOthers bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsParticipantsToInviteOthers:"), allowsParticipantsToInviteOthers)
 }
 
-// Default value is NO. If set, the system sharing UI allows the user to configure whether participants can request access to the share.
+// AllowsAccessRequests default value is NO. If set, the system sharing UI allows the user to configure whether participants can request access to the share.
 func (x *AllowedSharingOptions) AllowsAccessRequests() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsAccessRequests"))
 	return _r
 }
 
+// SetAllowsAccessRequests wraps the corresponding Objective-C method.
 func (x *AllowedSharingOptions) SetAllowsAccessRequests(allowsAccessRequests bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAccessRequests:"), allowsAccessRequests)
 }

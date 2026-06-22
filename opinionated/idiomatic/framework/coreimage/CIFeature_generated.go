@@ -6,15 +6,18 @@ package coreimage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for objects representing notable features detected in an image.
-//
 // Feature is an idiomatic wrapper over the Objective-C class CIFeature.
+//
+// Feature is an abstract base — you do not construct it directly. Construct one of [FaceFeature], [QRCodeFeature], [RectangleFeature], [TextFeature] and pass it where a Feature is accepted.
+//
+// The abstract superclass for objects representing notable features detected in an image.
 type Feature struct {
 	objref.Handle
 }
@@ -25,7 +28,8 @@ func FeatureFromID(id objc.ID) *Feature {
 	if id == 0 {
 		return nil
 	}
-	x := &Feature{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Feature{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +42,8 @@ func featureAdopt(id objc.ID) *Feature {
 	if id == 0 {
 		return nil
 	}
-	x := &Feature{Handle: objref.Wrap(id)}
+	x := &Feature{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +63,13 @@ func (x *Feature) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewFeature creates a new Feature.
-func NewFeature() *Feature {
-	_id := objc.Send[objc.ID](objc.ID(_class("CIFeature")), objc.RegisterName("new"))
-	return featureAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Feature) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The type of feature that was discovered. The type can be one of: * “CIFeatureTypeFace“ * “CIFeatureTypeRectangle“ * “CIFeatureTypeQRCode“ * “CIFeatureTypeText“
+// Type the type of feature that was discovered. The type can be one of: * “CIFeatureTypeFace“ * “CIFeatureTypeRectangle“ * “CIFeatureTypeQRCode“ * “CIFeatureTypeText“
 func (x *Feature) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
 	if _r == 0 {
@@ -73,10 +78,24 @@ func (x *Feature) Type() string {
 	return purego.GoString(_r)
 }
 
+// Bounds the rectangle that bounds the location of discovered feature. The rectangle is in the cartesian coordinate system of the image.
+func (x *Feature) Bounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("bounds"))
+	return _r
+}
+
 // Featureable is the interface implemented by [Feature], for mocking and DI.
 type Featureable interface {
 	obj.Object
 	Type() string
+	Bounds() corefoundation.CGRect
 }
 
 var _ Featureable = (*Feature)(nil)
+
+// isFeature marks Feature — and, by embedding promotion, its
+// subclasses — as a member of the Feature hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Feature) isFeature() {}
+
+var _ FeatureProvider = (*Feature)(nil)

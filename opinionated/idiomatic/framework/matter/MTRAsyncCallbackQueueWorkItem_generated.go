@@ -23,7 +23,8 @@ func MTRAsyncCallbackQueueWorkItemFromID(id objc.ID) *MTRAsyncCallbackQueueWorkI
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAsyncCallbackQueueWorkItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRAsyncCallbackQueueWorkItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRAsyncCallbackQueueWorkItemAdopt(id objc.ID) *MTRAsyncCallbackQueueWorkIt
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAsyncCallbackQueueWorkItem{Handle: objref.Wrap(id)}
+	x := &MTRAsyncCallbackQueueWorkItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *MTRAsyncCallbackQueueWorkItem) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRAsyncCallbackQueueWorkItem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRAsyncCallbackQueueWorkItemWithQueue creates a new MTRAsyncCallbackQueueWorkItem.
 func NewMTRAsyncCallbackQueueWorkItemWithQueue(queue obj.Object) *MTRAsyncCallbackQueueWorkItem {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRAsyncCallbackQueueWorkItem")), objc.RegisterName("alloc"))
@@ -63,20 +71,23 @@ func NewMTRAsyncCallbackQueueWorkItemWithQueue(queue obj.Object) *MTRAsyncCallba
 	return mTRAsyncCallbackQueueWorkItemAdopt(_id)
 }
 
-// WithCancelHandler sets cancelHandler and returns the receiver so calls can be chained.
+// WithCancelHandler sets the property and returns the receiver so calls can be chained.
 func (x *MTRAsyncCallbackQueueWorkItem) WithCancelHandler(cancelHandler func()) *MTRAsyncCallbackQueueWorkItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelHandler:"), cancelHandler)
 	return x
 }
 
+// EndWork wraps the corresponding Objective-C method.
 func (x *MTRAsyncCallbackQueueWorkItem) EndWork() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endWork"))
 }
 
+// RetryWork wraps the corresponding Objective-C method.
 func (x *MTRAsyncCallbackQueueWorkItem) RetryWork() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("retryWork"))
 }
 
+// SetCancelHandler wraps the corresponding Objective-C method.
 func (x *MTRAsyncCallbackQueueWorkItem) SetCancelHandler(cancelHandler func()) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelHandler:"), cancelHandler)
 }

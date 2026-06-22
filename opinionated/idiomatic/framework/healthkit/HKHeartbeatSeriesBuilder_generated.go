@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A builder object for incrementally building a heartbeat series.
-//
 // HeartbeatSeriesBuilder is an idiomatic wrapper over the Objective-C class HKHeartbeatSeriesBuilder.
+//
+// It embeds [SeriesBuilder], promoting that type's methods.
+//
+// A builder object for incrementally building a heartbeat series.
 type HeartbeatSeriesBuilder struct {
-	objref.Handle
+	SeriesBuilder
 }
 
 // HeartbeatSeriesBuilderFromID adopts an existing Objective-C object as a HeartbeatSeriesBuilder
@@ -27,7 +28,8 @@ func HeartbeatSeriesBuilderFromID(id objc.ID) *HeartbeatSeriesBuilder {
 	if id == 0 {
 		return nil
 	}
-	x := &HeartbeatSeriesBuilder{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HeartbeatSeriesBuilder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,39 +42,23 @@ func heartbeatSeriesBuilderAdopt(id objc.ID) *HeartbeatSeriesBuilder {
 	if id == 0 {
 		return nil
 	}
-	x := &HeartbeatSeriesBuilder{Handle: objref.Wrap(id)}
+	x := &HeartbeatSeriesBuilder{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *HeartbeatSeriesBuilder) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HeartbeatSeriesBuilder) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HeartbeatSeriesBuilder) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a new heartbeat series builder.
-//
-// NewHeartbeatSeriesBuilderWithHealthStoreDeviceStartDate creates a new HeartbeatSeriesBuilder.
+// NewHeartbeatSeriesBuilderWithHealthStoreDeviceStartDate creates a new heartbeat series builder.
 func NewHeartbeatSeriesBuilderWithHealthStoreDeviceStartDate(healthStore *HealthStore, device *Device, startDate obj.Object) *HeartbeatSeriesBuilder {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKHeartbeatSeriesBuilder")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:device:startDate:"), objref.IDOf(healthStore), objref.IDOf(device), objref.IDOf(startDate))
 	return heartbeatSeriesBuilderAdopt(_id)
 }
 
-// Finalizes the series and returns the resulting heartbeat series sample.
+// FinishSeriesWithCompletion finalizes the series and returns the resulting heartbeat series sample.
 //
 // FinishSeriesWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *HeartbeatSeriesBuilder) FinishSeriesWithCompletion(ctx context.Context) (*HeartbeatSeriesSample, error) {
+func (x *HeartbeatSeriesBuilder) FinishSeriesWithCompletion(ctx context.Context) (result *HeartbeatSeriesSample, err error) {
 	type _result struct {
 		val *HeartbeatSeriesSample
 		err error
@@ -101,3 +87,5 @@ type HeartbeatSeriesBuilderable interface {
 }
 
 var _ HeartbeatSeriesBuilderable = (*HeartbeatSeriesBuilder)(nil)
+
+var _ SeriesBuilderProvider = (*HeartbeatSeriesBuilder)(nil)

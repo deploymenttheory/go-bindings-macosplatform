@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration for one class of token.
-//
 // TokenDriverConfiguration is an idiomatic wrapper over the Objective-C class TKTokenDriverConfiguration.
+//
+// A configuration for one class of token.
 type TokenDriverConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TokenDriverConfigurationFromID(id objc.ID) *TokenDriverConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &TokenDriverConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TokenDriverConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func tokenDriverConfigurationAdopt(id objc.ID) *TokenDriverConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &TokenDriverConfiguration{Handle: objref.Wrap(id)}
+	x := &TokenDriverConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,30 +60,36 @@ func (x *TokenDriverConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TokenDriverConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTokenDriverConfiguration creates a new TokenDriverConfiguration.
 func NewTokenDriverConfiguration() *TokenDriverConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("TKTokenDriverConfiguration")), objc.RegisterName("new"))
 	return tokenDriverConfigurationAdopt(_id)
 }
 
-// Creates new configuration object for token with specified instanceID and adds it into tokenConfigurations dictionary. If configuration with specified instanceID already exists, it is replaced with new empty configuration.
+// AddTokenConfigurationForTokenInstanceID creates new configuration object for token with specified instanceID and adds it into tokenConfigurations dictionary. If configuration with specified instanceID already exists, it is replaced with new empty configuration.
 func (x *TokenDriverConfiguration) AddTokenConfigurationForTokenInstanceID(instanceID obj.Object) *TokenConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTokenConfigurationForTokenInstanceID:"), objref.IDOf(instanceID))
 	return TokenConfigurationFromID(_r)
 }
 
-// Removes configuration with specified tokenID. Does nothing if no such token configuration exists.
+// RemoveTokenConfigurationForTokenInstanceID removes configuration with specified tokenID. Does nothing if no such token configuration exists.
 func (x *TokenDriverConfiguration) RemoveTokenConfigurationForTokenInstanceID(instanceID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTokenConfigurationForTokenInstanceID:"), objref.IDOf(instanceID))
 }
 
-// ClassID of the token configuration. ClassID is taken from
+// ClassID classID of the token configuration. ClassID is taken from
 func (x *TokenDriverConfiguration) ClassID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("classID"))
 	return obj.Wrap(_r)
 }
 
-// Dictionary of all currently configured tokens for this token class, keyed by instanceID.
+// TokenConfigurations dictionary of all currently configured tokens for this token class, keyed by instanceID.
 func (x *TokenDriverConfiguration) TokenConfigurations() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tokenConfigurations"))
 	return obj.Wrap(_r)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of an intersection function that performs an intersection test.
-//
 // IntersectionFunctionDescriptor is an idiomatic wrapper over the Objective-C class MTLIntersectionFunctionDescriptor.
+//
+// It embeds [FunctionDescriptor], promoting that type's methods.
+//
+// A description of an intersection function that performs an intersection test.
 type IntersectionFunctionDescriptor struct {
-	objref.Handle
+	FunctionDescriptor
 }
 
 // IntersectionFunctionDescriptorFromID adopts an existing Objective-C object as a IntersectionFunctionDescriptor
@@ -25,7 +26,8 @@ func IntersectionFunctionDescriptorFromID(id objc.ID) *IntersectionFunctionDescr
 	if id == 0 {
 		return nil
 	}
-	x := &IntersectionFunctionDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IntersectionFunctionDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func intersectionFunctionDescriptorAdopt(id objc.ID) *IntersectionFunctionDescri
 	if id == 0 {
 		return nil
 	}
-	x := &IntersectionFunctionDescriptor{Handle: objref.Wrap(id)}
+	x := &IntersectionFunctionDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *IntersectionFunctionDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IntersectionFunctionDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IntersectionFunctionDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewIntersectionFunctionDescriptor creates a new IntersectionFunctionDescriptor.
@@ -64,33 +52,25 @@ func NewIntersectionFunctionDescriptor() *IntersectionFunctionDescriptor {
 	return intersectionFunctionDescriptorAdopt(_id)
 }
 
-// The name of the function to fetch from the library.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the name of the function to fetch from the library.
 func (x *IntersectionFunctionDescriptor) WithName(name string) *IntersectionFunctionDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// A new name for the created function object.
-//
-// WithSpecializedName sets specializedName and returns the receiver so calls can be chained.
+// WithSpecializedName a new name for the created function object.
 func (x *IntersectionFunctionDescriptor) WithSpecializedName(specializedName string) *IntersectionFunctionDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpecializedName:"), purego.NSString(specializedName))
 	return x
 }
 
-// The set of constant values assigned to the function constants.
-//
-// WithConstantValues sets constantValues and returns the receiver so calls can be chained.
+// WithConstantValues the set of constant values assigned to the function constants.
 func (x *IntersectionFunctionDescriptor) WithConstantValues(constantValues *FunctionConstantValues) *IntersectionFunctionDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstantValues:"), objref.IDOf(constantValues))
 	return x
 }
 
-// Flags specifying how Metal should create the new function object.
-//
-// WithOptions sets options and returns the receiver so calls can be chained.
+// WithOptions flags specifying how Metal should create the new function object.
 func (x *IntersectionFunctionDescriptor) WithOptions(options FunctionOptions) *IntersectionFunctionDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
 	return x
@@ -106,3 +86,5 @@ type IntersectionFunctionDescriptorable interface {
 }
 
 var _ IntersectionFunctionDescriptorable = (*IntersectionFunctionDescriptor)(nil)
+
+var _ FunctionDescriptorProvider = (*IntersectionFunctionDescriptor)(nil)

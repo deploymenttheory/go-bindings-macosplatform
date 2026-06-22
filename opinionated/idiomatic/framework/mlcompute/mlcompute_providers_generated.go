@@ -11,19 +11,23 @@ import (
 // GraphProvider is accepted wherever a MLCGraph (or one of its subclasses) is expected.
 type GraphProvider interface {
 	objref.Object
+	isGraph()
 }
 
 // LayerProvider is accepted wherever a MLCLayer (or one of its subclasses) is expected.
 type LayerProvider interface {
 	objref.Object
+	isLayer()
 }
 
 // LossLayerProvider is accepted wherever a MLCLossLayer (or one of its subclasses) is expected.
 type LossLayerProvider interface {
 	objref.Object
+	isLossLayer()
 }
 
 // OptimizerProvider is accepted wherever a MLCOptimizer (or one of its subclasses) is expected.
 type OptimizerProvider interface {
 	objref.Object
+	isOptimizer()
 }

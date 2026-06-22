@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that defines the basic properties for all shape-based overlay objects.
-//
 // Shape is an idiomatic wrapper over the Objective-C class MKShape.
+//
+// Shape is an abstract base — you do not construct it directly. Construct one of [Circle], [MultiPoint], [MultiPolygon], [MultiPolyline], [PointAnnotation] and pass it where a Shape is accepted.
+//
+// An abstract class that defines the basic properties for all shape-based overlay objects.
 type Shape struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ShapeFromID(id objc.ID) *Shape {
 	if id == 0 {
 		return nil
 	}
-	x := &Shape{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Shape{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func shapeAdopt(id objc.ID) *Shape {
 	if id == 0 {
 		return nil
 	}
-	x := &Shape{Handle: objref.Wrap(id)}
+	x := &Shape{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +62,25 @@ func (x *Shape) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewShape creates a new Shape.
-func NewShape() *Shape {
-	_id := objc.Send[objc.ID](objc.ID(_class("MKShape")), objc.RegisterName("new"))
-	return shapeAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Shape) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The title of the shape annotation.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the title of the shape annotation.
 func (x *Shape) WithTitle(title string) *Shape {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The subtitle of the shape annotation.
-//
-// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
+// WithSubtitle the subtitle of the shape annotation.
 func (x *Shape) WithSubtitle(subtitle string) *Shape {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *Shape) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -88,10 +89,12 @@ func (x *Shape) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *Shape) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
+// Subtitle wraps the corresponding Objective-C method.
 func (x *Shape) Subtitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitle"))
 	if _r == 0 {
@@ -100,6 +103,7 @@ func (x *Shape) Subtitle() string {
 	return purego.GoString(_r)
 }
 
+// SetSubtitle wraps the corresponding Objective-C method.
 func (x *Shape) SetSubtitle(subtitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 }
@@ -116,3 +120,10 @@ type Shapeable interface {
 }
 
 var _ Shapeable = (*Shape)(nil)
+
+// isShape marks Shape — and, by embedding promotion, its
+// subclasses — as a member of the Shape hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Shape) isShape() {}
+
+var _ ShapeProvider = (*Shape)(nil)

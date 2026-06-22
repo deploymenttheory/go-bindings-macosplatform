@@ -11,69 +11,70 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// All locales supported by existing tables.
+// SupportedLocales all locales supported by existing tables.
 func SupportedLocales() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("AXBrailleTable")), objc.RegisterName("supportedLocales"))
 	return obj.Wrap(_r)
 }
 
-// The default table that provides translations for the given locale’s language. Returns nil if there is none.
+// DefaultTableForLocale the default table that provides translations for the given locale’s language. Returns nil if there is none.
 func DefaultTableForLocale(locale obj.Object) *BrailleTable {
 	_r := objc.Send[objc.ID](objc.ID(_class("AXBrailleTable")), objc.RegisterName("defaultTableForLocale:"), objref.IDOf(locale))
 	return BrailleTableFromID(_r)
 }
 
-// All tables that provide translations for the given locale’s language.
+// TablesForLocale all tables that provide translations for the given locale’s language.
 func TablesForLocale(locale obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("AXBrailleTable")), objc.RegisterName("tablesForLocale:"), objref.IDOf(locale))
 	return obj.Wrap(_r)
 }
 
-// All tables that are not specific to any language.
+// LanguageAgnosticTables all tables that are not specific to any language.
 func LanguageAgnosticTables() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("AXBrailleTable")), objc.RegisterName("languageAgnosticTables"))
 	return obj.Wrap(_r)
 }
 
-// Creates new custom content with a label and value.
+// CustomContentWithLabelValue creates new custom content with a label and value.
 func CustomContentWithLabelValue(label string, value string) *CustomContent {
 	_r := objc.Send[objc.ID](objc.ID(_class("AXCustomContent")), objc.RegisterName("customContentWithLabel:value:"), purego.NSString(label), purego.NSString(value))
 	return CustomContentFromID(_r)
 }
 
-// Creates new custom content with an attributed string and attributed value.
+// CustomContentWithAttributedLabelAttributedValue creates new custom content with an attributed string and attributed value.
 func CustomContentWithAttributedLabelAttributedValue(label obj.Object, value obj.Object) *CustomContent {
 	_r := objc.Send[objc.ID](objc.ID(_class("AXCustomContent")), objc.RegisterName("customContentWithAttributedLabel:attributedValue:"), objref.IDOf(label), objref.IDOf(value))
 	return CustomContentFromID(_r)
 }
 
-// Creates a numeric data value with the specified number.
+// ValueWithNumber creates a numeric data value with the specified number.
 func ValueWithNumber(number float64) *DataPointValue {
 	_r := objc.Send[objc.ID](objc.ID(_class("AXDataPointValue")), objc.RegisterName("valueWithNumber:"), number)
 	return DataPointValueFromID(_r)
 }
 
-// Creates a categorical data value with the specified category string.
+// ValueWithCategory creates a categorical data value with the specified category string.
 func ValueWithCategory(category string) *DataPointValue {
 	_r := objc.Send[objc.ID](objc.ID(_class("AXDataPointValue")), objc.RegisterName("valueWithCategory:"), purego.NSString(category))
 	return DataPointValueFromID(_r)
 }
 
-// Begins the live audio graph session.
+// Start begins the live audio graph session.
 func Start() {
 	objc.Send[objc.ID](objc.ID(_class("AXLiveAudioGraph")), objc.RegisterName("start"))
 }
 
-// Sets the pitch of the audio graph’s tone.
+// UpdateValue sets the pitch of the audio graph’s tone.
 func UpdateValue(value float64) {
 	objc.Send[objc.ID](objc.ID(_class("AXLiveAudioGraph")), objc.RegisterName("updateValue:"), value)
 }
 
-// Ends the live audio graph session.
+// Stop ends the live audio graph session.
 func Stop() {
 	objc.Send[objc.ID](objc.ID(_class("AXLiveAudioGraph")), objc.RegisterName("stop"))
 }
 
+// CurrentRequest wraps the corresponding Objective-C method.
 func CurrentRequest() *Request {
 	_r := objc.Send[objc.ID](objc.ID(_class("AXRequest")), objc.RegisterName("currentRequest"))
 	return RequestFromID(_r)

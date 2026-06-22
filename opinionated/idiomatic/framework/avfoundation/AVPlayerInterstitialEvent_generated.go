@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides instructions for how a player presents interstitial content.
-//
 // PlayerInterstitialEvent is an idiomatic wrapper over the Objective-C class AVPlayerInterstitialEvent.
+//
+// An object that provides instructions for how a player presents interstitial content.
 type PlayerInterstitialEvent struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PlayerInterstitialEventFromID(id objc.ID) *PlayerInterstitialEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerInterstitialEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlayerInterstitialEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func playerInterstitialEventAdopt(id objc.ID) *PlayerInterstitialEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerInterstitialEvent{Handle: objref.Wrap(id)}
+	x := &PlayerInterstitialEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,132 +60,110 @@ func (x *PlayerInterstitialEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerInterstitialEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPlayerInterstitialEvent creates a new PlayerInterstitialEvent.
 func NewPlayerInterstitialEvent() *PlayerInterstitialEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerInterstitialEvent")), objc.RegisterName("new"))
 	return playerInterstitialEventAdopt(_id)
 }
 
-// The player item that represents the primary content.
-//
-// WithPrimaryItem sets primaryItem and returns the receiver so calls can be chained.
+// WithPrimaryItem the player item that represents the primary content.
 func (x *PlayerInterstitialEvent) WithPrimaryItem(primaryItem *PlayerItem) *PlayerInterstitialEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryItem:"), objref.IDOf(primaryItem))
 	return x
 }
 
-// An identifier for the event.
-//
-// WithIdentifier sets identifier and returns the receiver so calls can be chained.
+// WithIdentifier an identifier for the event.
 func (x *PlayerInterstitialEvent) WithIdentifier(identifier string) *PlayerInterstitialEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 	return x
 }
 
-// A date within the date range of the primary content that playback of interstitial content begins.
-//
-// WithDate sets date and returns the receiver so calls can be chained.
+// WithDate a date within the date range of the primary content that playback of interstitial content begins.
 func (x *PlayerInterstitialEvent) WithDate(date obj.Object) *PlayerInterstitialEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDate:"), objref.IDOf(date))
 	return x
 }
 
-// An array of player item configurations to use as templates for player items that play interstitial content.
-//
-// WithTemplateItems sets the collection and returns the receiver so calls can be chained.
+// WithTemplateItems an array of player item configurations to use as templates for player items that play interstitial content.
 func (x *PlayerInterstitialEvent) WithTemplateItems(items ...*PlayerItem) *PlayerInterstitialEvent {
 	_arr := purego.SliceToNSArray(items, func(_v *PlayerItem) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemplateItems:"), _arr)
 	return x
 }
 
-// The restrictions the event imposes on the playback of interstitial content.
-//
-// WithRestrictions sets restrictions and returns the receiver so calls can be chained.
+// WithRestrictions the restrictions the event imposes on the playback of interstitial content.
 func (x *PlayerInterstitialEvent) WithRestrictions(restrictions PlayerInterstitialEventRestrictions) *PlayerInterstitialEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRestrictions:"), restrictions)
 	return x
 }
 
-// A Boolean value that indicates whether the start time of interstitial playback should snap to a segment boundary of the primary asset.
-//
-// WithAlignsStartWithPrimarySegmentBoundary sets alignsStartWithPrimarySegmentBoundary and returns the receiver so calls can be chained.
+// WithAlignsStartWithPrimarySegmentBoundary a Boolean value that indicates whether the start time of interstitial playback should snap to a segment boundary of the primary asset.
 func (x *PlayerInterstitialEvent) WithAlignsStartWithPrimarySegmentBoundary(alignsStartWithPrimarySegmentBoundary bool) *PlayerInterstitialEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignsStartWithPrimarySegmentBoundary:"), alignsStartWithPrimarySegmentBoundary)
 	return x
 }
 
-// A Boolean value that indicates whether the resumption time of primary playback should snap to a segment boundary of the primary asset.
-//
-// WithAlignsResumptionWithPrimarySegmentBoundary sets alignsResumptionWithPrimarySegmentBoundary and returns the receiver so calls can be chained.
+// WithAlignsResumptionWithPrimarySegmentBoundary a Boolean value that indicates whether the resumption time of primary playback should snap to a segment boundary of the primary asset.
 func (x *PlayerInterstitialEvent) WithAlignsResumptionWithPrimarySegmentBoundary(alignsResumptionWithPrimarySegmentBoundary bool) *PlayerInterstitialEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignsResumptionWithPrimarySegmentBoundary:"), alignsResumptionWithPrimarySegmentBoundary)
 	return x
 }
 
-// A cue to schedule interstitial event playback at a predefined position during primary playback.
-//
-// WithCue sets cue and returns the receiver so calls can be chained.
+// WithCue a cue to schedule interstitial event playback at a predefined position during primary playback.
 func (x *PlayerInterstitialEvent) WithCue(cue obj.Object) *PlayerInterstitialEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCue:"), objref.IDOf(cue))
 	return x
 }
 
-// A Boolean value that indicates whether to schedule this event one time only and suppress subsequent replay.
-//
-// WithWillPlayOnce sets willPlayOnce and returns the receiver so calls can be chained.
+// WithWillPlayOnce a Boolean value that indicates whether to schedule this event one time only and suppress subsequent replay.
 func (x *PlayerInterstitialEvent) WithWillPlayOnce(willPlayOnce bool) *PlayerInterstitialEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWillPlayOnce:"), willPlayOnce)
 	return x
 }
 
-// Attributes of the event that the vendor or app defines.
-//
-// WithUserDefinedAttributes sets userDefinedAttributes and returns the receiver so calls can be chained.
+// WithUserDefinedAttributes attributes of the event that the vendor or app defines.
 func (x *PlayerInterstitialEvent) WithUserDefinedAttributes(userDefinedAttributes obj.Object) *PlayerInterstitialEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserDefinedAttributes:"), objref.IDOf(userDefinedAttributes))
 	return x
 }
 
-// An event’s occupancy on the integrated timeline.
-//
-// WithTimelineOccupancy sets timelineOccupancy and returns the receiver so calls can be chained.
+// WithTimelineOccupancy an event’s occupancy on the integrated timeline.
 func (x *PlayerInterstitialEvent) WithTimelineOccupancy(timelineOccupancy PlayerInterstitialEventTimelineOccupancy) *PlayerInterstitialEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimelineOccupancy:"), timelineOccupancy)
 	return x
 }
 
-// A Boolean value that indicates whether an event supplements the primary content and should present with the primary item.
-//
-// WithSupplementsPrimaryContent sets supplementsPrimaryContent and returns the receiver so calls can be chained.
+// WithSupplementsPrimaryContent a Boolean value that indicates whether an event supplements the primary content and should present with the primary item.
 func (x *PlayerInterstitialEvent) WithSupplementsPrimaryContent(supplementsPrimaryContent bool) *PlayerInterstitialEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupplementsPrimaryContent:"), supplementsPrimaryContent)
 	return x
 }
 
-// A Boolean value that indicates whether an event’s content is dynamic and the server may respond with different interstitial assets for other participants in a coordinated playback session.
-//
-// WithContentMayVary sets contentMayVary and returns the receiver so calls can be chained.
+// WithContentMayVary a Boolean value that indicates whether an event’s content is dynamic and the server may respond with different interstitial assets for other participants in a coordinated playback session.
 func (x *PlayerInterstitialEvent) WithContentMayVary(contentMayVary bool) *PlayerInterstitialEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentMayVary:"), contentMayVary)
 	return x
 }
 
-// The key defined in the AVPlayerInterstitialEventController’s localizedStringsBundle that points to the localized label for the skip button.
-//
-// WithSkipControlLocalizedLabelBundleKey sets skipControlLocalizedLabelBundleKey and returns the receiver so calls can be chained.
+// WithSkipControlLocalizedLabelBundleKey the key defined in the AVPlayerInterstitialEventController’s localizedStringsBundle that points to the localized label for the skip button.
 func (x *PlayerInterstitialEvent) WithSkipControlLocalizedLabelBundleKey(skipControlLocalizedLabelBundleKey string) *PlayerInterstitialEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSkipControlLocalizedLabelBundleKey:"), purego.NSString(skipControlLocalizedLabelBundleKey))
 	return x
 }
 
-// An AVPlayerItem representing the primary content during the playback of which the interstitial event should occur. The primaryItem must have an AVAsset that provides an intrinsic mapping from its timeline to real-time dates.
+// PrimaryItem an AVPlayerItem representing the primary content during the playback of which the interstitial event should occur. The primaryItem must have an AVAsset that provides an intrinsic mapping from its timeline to real-time dates.
 func (x *PlayerInterstitialEvent) PrimaryItem() *PlayerItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryItem"))
 	return PlayerItemFromID(_r)
 }
 
-// An external identifier for the event. If an event is set on an AVPlayerInterstitialEventController that already has an event with the same identifier, the old event will be replaced by the new one.
+// Identifier an external identifier for the event. If an event is set on an AVPlayerInterstitialEventController that already has an event with the same identifier, the old event will be replaced by the new one.
 func (x *PlayerInterstitialEvent) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -192,13 +172,13 @@ func (x *PlayerInterstitialEvent) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// The date within the date range of the primary item at which playback of the primary content should be temporarily suspended and the interstitial items played. Will have a value of nil if the event was initialized with a time instead of a date.
+// Date the date within the date range of the primary item at which playback of the primary content should be temporarily suspended and the interstitial items played. Will have a value of nil if the event was initialized with a time instead of a date.
 func (x *PlayerInterstitialEvent) Date() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
 
-// An array of AVPlayerItems with configurations that will be reproduced for the playback of interstitial content. If you want the instances of AVURLAsset used during interstitial playback to be identical to the ones you specify for templateItems in AVPlayerInterstitialEvents that you set on an AVPlayerInterstitialEventController, rather than equivalent AVURLAssets with the same URL, you must create them with a value for the key AVURLAssetPrimarySessionIdentifierKey that's equal to the httpSessionIdentifier of the primary AVPlayerItem's asset. See AVAsset.h. This is especially useful if you require the use of a custom AVAssetResourceLoader delegate for interstitial assets. An NSInvalidArgumentException will be raised if any of the template items employs an AVAsset that lacks a URL, such as an AVComposition.
+// TemplateItems an array of AVPlayerItems with configurations that will be reproduced for the playback of interstitial content. If you want the instances of AVURLAsset used during interstitial playback to be identical to the ones you specify for templateItems in AVPlayerInterstitialEvents that you set on an AVPlayerInterstitialEventController, rather than equivalent AVURLAssets with the same URL, you must create them with a value for the key AVURLAssetPrimarySessionIdentifierKey that's equal to the httpSessionIdentifier of the primary AVPlayerItem's asset. See AVAsset.h. This is especially useful if you require the use of a custom AVAssetResourceLoader delegate for interstitial assets. An NSInvalidArgumentException will be raised if any of the template items employs an AVAsset that lacks a URL, such as an AVComposition.
 //
 // TemplateItems returns the collection as a Go slice.
 func (x *PlayerInterstitialEvent) TemplateItems() []*PlayerItem {
@@ -206,49 +186,49 @@ func (x *PlayerInterstitialEvent) TemplateItems() []*PlayerItem {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerItem { return PlayerItemFromID(_id) })
 }
 
-// Indicates restrictions on the use of end user playback controls that are imposed by the event.
+// Restrictions indicates restrictions on the use of end user playback controls that are imposed by the event.
 func (x *PlayerInterstitialEvent) Restrictions() PlayerInterstitialEventRestrictions {
 	_r := objc.Send[PlayerInterstitialEventRestrictions](objref.IDOf(x), objc.RegisterName("restrictions"))
 	return _r
 }
 
-// Specifies that the start time of interstitial playback should be snapped to a segment boundary of the primary asset If true, the start time or date of the interstitial will be adjusted to the nearest segment boundary when the primary player is playing an HTTP Live Streaming asset.
+// AlignsStartWithPrimarySegmentBoundary specifies that the start time of interstitial playback should be snapped to a segment boundary of the primary asset If true, the start time or date of the interstitial will be adjusted to the nearest segment boundary when the primary player is playing an HTTP Live Streaming asset.
 func (x *PlayerInterstitialEvent) AlignsStartWithPrimarySegmentBoundary() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("alignsStartWithPrimarySegmentBoundary"))
 	return _r
 }
 
-// Specifies that the resumption time of primary playback should be snapped to a segment boundary of the primary asset If true, the resumption time of primary playback following an interstitial will be adjusted to the nearest segment boundary when the primary player is playing an HTTP Live Streaming asset.
+// AlignsResumptionWithPrimarySegmentBoundary specifies that the resumption time of primary playback should be snapped to a segment boundary of the primary asset If true, the resumption time of primary playback following an interstitial will be adjusted to the nearest segment boundary when the primary player is playing an HTTP Live Streaming asset.
 func (x *PlayerInterstitialEvent) AlignsResumptionWithPrimarySegmentBoundary() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("alignsResumptionWithPrimarySegmentBoundary"))
 	return _r
 }
 
-// The cue property is used to schedule event playback at a predefined position of primary playback.
+// Cue the cue property is used to schedule event playback at a predefined position of primary playback.
 func (x *PlayerInterstitialEvent) Cue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cue"))
 	return obj.Wrap(_r)
 }
 
-// Specifies that the interstitial should be scheduled for playback once only, and suppressed for subsequent replay. The "once" provision takes effect at the start of interstitial playback. The interstitial will not be scheduled again even if the first playback is canceled before completion.
+// WillPlayOnce specifies that the interstitial should be scheduled for playback once only, and suppressed for subsequent replay. The "once" provision takes effect at the start of interstitial playback. The interstitial will not be scheduled again even if the first playback is canceled before completion.
 func (x *PlayerInterstitialEvent) WillPlayOnce() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("willPlayOnce"))
 	return _r
 }
 
-// Attributes of the event defined by the content vendor or the client. Dictionary keys are attribute names. Dictionary values are attribute values.
+// UserDefinedAttributes attributes of the event defined by the content vendor or the client. Dictionary keys are attribute names. Dictionary values are attribute values.
 func (x *PlayerInterstitialEvent) UserDefinedAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userDefinedAttributes"))
 	return obj.Wrap(_r)
 }
 
-// The asset list JSON response as a dictionary, or nil if no asset list response has been loaded for the event. If the AVPlayerInterstitialEvent's templateItems is empty and the assetListResponse is nil, then an asset list read is expected. If the AVPlayerInterstitialEvent's templateItems is not empty and the assetListResponse is nil, then an asset list read is not expected.
+// AssetListResponse the asset list JSON response as a dictionary, or nil if no asset list response has been loaded for the event. If the AVPlayerInterstitialEvent's templateItems is empty and the assetListResponse is nil, then an asset list read is expected. If the AVPlayerInterstitialEvent's templateItems is not empty and the assetListResponse is nil, then an asset list read is not expected.
 func (x *PlayerInterstitialEvent) AssetListResponse() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetListResponse"))
 	return obj.Wrap(_r)
 }
 
-// The identifier of the daterange-schedule that produced this event. nil if the event was not a product of a daterange-schedule.
+// ScheduleIdentifier the identifier of the daterange-schedule that produced this event. nil if the event was not a product of a daterange-schedule.
 func (x *PlayerInterstitialEvent) ScheduleIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleIdentifier"))
 	if _r == 0 {
@@ -257,25 +237,25 @@ func (x *PlayerInterstitialEvent) ScheduleIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Indicates this event's occupancy on AVPlayerItemIntegratedTimeline. The default value is AVPlayerInterstitialEventTimelineSinglePointOccupancy.
+// TimelineOccupancy indicates this event's occupancy on AVPlayerItemIntegratedTimeline. The default value is AVPlayerInterstitialEventTimelineSinglePointOccupancy.
 func (x *PlayerInterstitialEvent) TimelineOccupancy() PlayerInterstitialEventTimelineOccupancy {
 	_r := objc.Send[PlayerInterstitialEventTimelineOccupancy](objref.IDOf(x), objc.RegisterName("timelineOccupancy"))
 	return _r
 }
 
-// Indicates this event will supplement the primary content and should be presented unified with the primary item. The default value is NO.
+// SupplementsPrimaryContent indicates this event will supplement the primary content and should be presented unified with the primary item. The default value is NO.
 func (x *PlayerInterstitialEvent) SupplementsPrimaryContent() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supplementsPrimaryContent"))
 	return _r
 }
 
-// Indicates this event's content is dynamic and server may respond with different interstitial assets for other particpants in coordinated playback. Indicates this event's content is dynamic and server may respond with different interstitial assets for other particpants in coordinated playback. If this value is set to NO and the primary asset is particpating in coordinated playback, this event will participate in coordinated playback as well. The default value is YES.
+// ContentMayVary indicates this event's content is dynamic and server may respond with different interstitial assets for other particpants in coordinated playback. Indicates this event's content is dynamic and server may respond with different interstitial assets for other particpants in coordinated playback. If this value is set to NO and the primary asset is particpating in coordinated playback, this event will participate in coordinated playback as well. The default value is YES.
 func (x *PlayerInterstitialEvent) ContentMayVary() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("contentMayVary"))
 	return _r
 }
 
-// The key defined in the AVPlayerInterstitialEventController's localizedStringsBundle that points to the localized label for the skip button. If the value of the property is nil, the skip button may contain a generic label depending on the implementation of the UI that's in use. To ensure the best available user experience in various playback configurations, including external playback, set a value for this property that provides localized translations of skip control labels.
+// SkipControlLocalizedLabelBundleKey the key defined in the AVPlayerInterstitialEventController's localizedStringsBundle that points to the localized label for the skip button. If the value of the property is nil, the skip button may contain a generic label depending on the implementation of the UI that's in use. To ensure the best available user experience in various playback configurations, including external playback, set a value for this property that provides localized translations of skip control labels.
 func (x *PlayerInterstitialEvent) SkipControlLocalizedLabelBundleKey() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skipControlLocalizedLabelBundleKey"))
 	if _r == 0 {
@@ -284,58 +264,72 @@ func (x *PlayerInterstitialEvent) SkipControlLocalizedLabelBundleKey() string {
 	return purego.GoString(_r)
 }
 
+// SetPrimaryItem wraps the corresponding Objective-C method.
 func (x *PlayerInterstitialEvent) SetPrimaryItem(primaryItem *PlayerItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryItem:"), objref.IDOf(primaryItem))
 }
 
+// SetIdentifier wraps the corresponding Objective-C method.
 func (x *PlayerInterstitialEvent) SetIdentifier(identifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 }
 
+// SetDate wraps the corresponding Objective-C method.
 func (x *PlayerInterstitialEvent) SetDate(date obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDate:"), objref.IDOf(date))
 }
 
+// SetTemplateItems wraps the corresponding Objective-C method.
 func (x *PlayerInterstitialEvent) SetTemplateItems(templateItems []*PlayerItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemplateItems:"), purego.SliceToNSArray(templateItems, func(_v *PlayerItem) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SetRestrictions wraps the corresponding Objective-C method.
 func (x *PlayerInterstitialEvent) SetRestrictions(restrictions PlayerInterstitialEventRestrictions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRestrictions:"), restrictions)
 }
 
+// SetAlignsStartWithPrimarySegmentBoundary wraps the corresponding Objective-C method.
 func (x *PlayerInterstitialEvent) SetAlignsStartWithPrimarySegmentBoundary(alignsStartWithPrimarySegmentBoundary bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignsStartWithPrimarySegmentBoundary:"), alignsStartWithPrimarySegmentBoundary)
 }
 
+// SetAlignsResumptionWithPrimarySegmentBoundary wraps the corresponding Objective-C method.
 func (x *PlayerInterstitialEvent) SetAlignsResumptionWithPrimarySegmentBoundary(alignsResumptionWithPrimarySegmentBoundary bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignsResumptionWithPrimarySegmentBoundary:"), alignsResumptionWithPrimarySegmentBoundary)
 }
 
+// SetCue wraps the corresponding Objective-C method.
 func (x *PlayerInterstitialEvent) SetCue(cue obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCue:"), objref.IDOf(cue))
 }
 
+// SetWillPlayOnce wraps the corresponding Objective-C method.
 func (x *PlayerInterstitialEvent) SetWillPlayOnce(willPlayOnce bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWillPlayOnce:"), willPlayOnce)
 }
 
+// SetUserDefinedAttributes wraps the corresponding Objective-C method.
 func (x *PlayerInterstitialEvent) SetUserDefinedAttributes(userDefinedAttributes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserDefinedAttributes:"), objref.IDOf(userDefinedAttributes))
 }
 
+// SetTimelineOccupancy wraps the corresponding Objective-C method.
 func (x *PlayerInterstitialEvent) SetTimelineOccupancy(timelineOccupancy PlayerInterstitialEventTimelineOccupancy) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimelineOccupancy:"), timelineOccupancy)
 }
 
+// SetSupplementsPrimaryContent wraps the corresponding Objective-C method.
 func (x *PlayerInterstitialEvent) SetSupplementsPrimaryContent(supplementsPrimaryContent bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupplementsPrimaryContent:"), supplementsPrimaryContent)
 }
 
+// SetContentMayVary wraps the corresponding Objective-C method.
 func (x *PlayerInterstitialEvent) SetContentMayVary(contentMayVary bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentMayVary:"), contentMayVary)
 }
 
+// SetSkipControlLocalizedLabelBundleKey wraps the corresponding Objective-C method.
 func (x *PlayerInterstitialEvent) SetSkipControlLocalizedLabelBundleKey(skipControlLocalizedLabelBundleKey string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSkipControlLocalizedLabelBundleKey:"), purego.NSString(skipControlLocalizedLabelBundleKey))
 }

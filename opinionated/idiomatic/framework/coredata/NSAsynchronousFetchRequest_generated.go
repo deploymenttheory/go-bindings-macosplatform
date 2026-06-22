@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A fetch request that retrieves results asynchronously and supports progress notification.
-//
 // AsynchronousFetchRequest is an idiomatic wrapper over the Objective-C class NSAsynchronousFetchRequest.
+//
+// It embeds [PersistentStoreRequest], promoting that type's methods.
+//
+// A fetch request that retrieves results asynchronously and supports progress notification.
 type AsynchronousFetchRequest struct {
-	objref.Handle
+	PersistentStoreRequest
 }
 
 // AsynchronousFetchRequestFromID adopts an existing Objective-C object as a AsynchronousFetchRequest
@@ -25,7 +26,8 @@ func AsynchronousFetchRequestFromID(id objc.ID) *AsynchronousFetchRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &AsynchronousFetchRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AsynchronousFetchRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,62 +40,45 @@ func asynchronousFetchRequestAdopt(id objc.ID) *AsynchronousFetchRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &AsynchronousFetchRequest{Handle: objref.Wrap(id)}
+	x := &AsynchronousFetchRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *AsynchronousFetchRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AsynchronousFetchRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AsynchronousFetchRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a new asynchronous fetch request configured with the provided fetch request and completion block.
-//
-// NewAsynchronousFetchRequestWithFetchRequestCompletionBlock creates a new AsynchronousFetchRequest.
+// NewAsynchronousFetchRequestWithFetchRequestCompletionBlock initializes a new asynchronous fetch request configured with the provided fetch request and completion block.
 func NewAsynchronousFetchRequestWithFetchRequestCompletionBlock(request obj.Object, blk func(obj.Object)) *AsynchronousFetchRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAsynchronousFetchRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFetchRequest:completionBlock:"), objref.IDOf(request), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { blk(obj.Wrap(_b0)) }))
 	return asynchronousFetchRequestAdopt(_id)
 }
 
-// A configuration parameter that assists Core Data with scheduling the asynchronous fetch request.
-//
-// WithEstimatedResultCount sets estimatedResultCount and returns the receiver so calls can be chained.
+// WithEstimatedResultCount a configuration parameter that assists Core Data with scheduling the asynchronous fetch request.
 func (x *AsynchronousFetchRequest) WithEstimatedResultCount(estimatedResultCount int) *AsynchronousFetchRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEstimatedResultCount:"), estimatedResultCount)
 	return x
 }
 
-// The stores the request should be sent to.
-//
-// WithAffectedStores sets the collection and returns the receiver so calls can be chained.
+// WithAffectedStores the stores the request should be sent to.
 func (x *AsynchronousFetchRequest) WithAffectedStores(items ...PersistentStoreProvider) *AsynchronousFetchRequest {
 	_arr := purego.SliceToNSArray(items, func(_v PersistentStoreProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), _arr)
 	return x
 }
 
+// FetchRequest wraps the corresponding Objective-C method.
 func (x *AsynchronousFetchRequest) FetchRequest() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)
 }
 
+// EstimatedResultCount wraps the corresponding Objective-C method.
 func (x *AsynchronousFetchRequest) EstimatedResultCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("estimatedResultCount"))
 	return _r
 }
 
+// SetEstimatedResultCount wraps the corresponding Objective-C method.
 func (x *AsynchronousFetchRequest) SetEstimatedResultCount(estimatedResultCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEstimatedResultCount:"), estimatedResultCount)
 }
@@ -109,3 +94,5 @@ type AsynchronousFetchRequestable interface {
 }
 
 var _ AsynchronousFetchRequestable = (*AsynchronousFetchRequest)(nil)
+
+var _ PersistentStoreRequestProvider = (*AsynchronousFetchRequest)(nil)

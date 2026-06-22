@@ -6,15 +6,16 @@ package naturallanguage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A tagger that analyzes natural language text.
-//
 // Tagger is an idiomatic wrapper over the Objective-C class NLTagger.
+//
+// A tagger that analyzes natural language text.
 type Tagger struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func TaggerFromID(id objc.ID) *Tagger {
 	if id == 0 {
 		return nil
 	}
-	x := &Tagger{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Tagger{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func taggerAdopt(id objc.ID) *Tagger {
 	if id == 0 {
 		return nil
 	}
-	x := &Tagger{Handle: objref.Wrap(id)}
+	x := &Tagger{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,63 +61,89 @@ func (x *Tagger) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a linguistic tagger instance using the specified tag schemes and options.
-//
-// NewTaggerWithTagSchemes creates a new Tagger.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Tagger) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTaggerWithTagSchemes creates a linguistic tagger instance using the specified tag schemes and options.
 func NewTaggerWithTagSchemes(tagSchemes []obj.Object) *Tagger {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NLTagger")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTagSchemes:"), purego.SliceToNSArray(tagSchemes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return taggerAdopt(_id)
 }
 
-// The string being analyzed by the linguistic tagger.
-//
-// WithString sets string_ and returns the receiver so calls can be chained.
+// WithString the string being analyzed by the linguistic tagger.
 func (x *Tagger) WithString(string_ string) *Tagger {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:"), purego.NSString(string_))
 	return x
 }
 
-// Assigns models for a tag scheme.
+// TokenRangeAtIndexUnit returns the range of the linguistic unit containing the specified character index.
+func (x *Tagger) TokenRangeAtIndexUnit(characterIndex int, unit TokenUnit) foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("tokenRangeAtIndex:unit:"), characterIndex, unit)
+	return _r
+}
+
+// TokenRangeForRangeUnit finds the entire range of all tokens of the specified linguistic unit contained completely or partially within the specified range.
+func (x *Tagger) TokenRangeForRangeUnit(range_ foundation.NSRange, unit TokenUnit) foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("tokenRangeForRange:unit:"), range_, unit)
+	return _r
+}
+
+// TagsInRangeUnitSchemeOptionsTokenRanges finds an array of linguistic tags and token ranges for a given string range and linguistic unit.
+func (x *Tagger) TagsInRangeUnitSchemeOptionsTokenRanges(range_ foundation.NSRange, unit TokenUnit, scheme obj.Object, options TaggerOptions, tokenRanges []obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tagsInRange:unit:scheme:options:tokenRanges:"), range_, unit, objref.IDOf(scheme), options, purego.SliceToNSArray(tokenRanges, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// SetLanguageRange sets the language for a range of text within the tagger’s string.
+func (x *Tagger) SetLanguageRange(language obj.Object, range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguage:range:"), objref.IDOf(language), range_)
+}
+
+// SetOrthographyRange sets the orthography for the specified range.
+func (x *Tagger) SetOrthographyRange(orthography obj.Object, range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrthography:range:"), objref.IDOf(orthography), range_)
+}
+
+// SetModelsForTagScheme assigns models for a tag scheme.
 func (x *Tagger) SetModelsForTagScheme(models []*Model, tagScheme obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModels:forTagScheme:"), purego.SliceToNSArray(models, func(_v *Model) objc.ID { return objref.IDOf(_v) }), objref.IDOf(tagScheme))
 }
 
-// Returns the models that apply to the given tag scheme.
+// ModelsForTagScheme returns the models that apply to the given tag scheme.
 func (x *Tagger) ModelsForTagScheme(tagScheme obj.Object) []*Model {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modelsForTagScheme:"), objref.IDOf(tagScheme))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Model { return ModelFromID(_id) })
 }
 
-// Attaches gazetteers to a tag scheme, typically one gazetteer per language or one language-independent gazetteer.
+// SetGazetteersForTagScheme attaches gazetteers to a tag scheme, typically one gazetteer per language or one language-independent gazetteer.
 func (x *Tagger) SetGazetteersForTagScheme(gazetteers []*Gazetteer, tagScheme obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGazetteers:forTagScheme:"), purego.SliceToNSArray(gazetteers, func(_v *Gazetteer) objc.ID { return objref.IDOf(_v) }), objref.IDOf(tagScheme))
 }
 
-// Retrieves the gazetteers attached to a tag scheme.
+// GazetteersForTagScheme retrieves the gazetteers attached to a tag scheme.
 func (x *Tagger) GazetteersForTagScheme(tagScheme obj.Object) []*Gazetteer {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gazetteersForTagScheme:"), objref.IDOf(tagScheme))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Gazetteer { return GazetteerFromID(_id) })
 }
 
+// TagSchemes wraps the corresponding Objective-C method.
+//
 // TagSchemes returns the collection as a Go slice.
 func (x *Tagger) TagSchemes() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tagSchemes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-func (x *Tagger) String() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("string"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
-}
-
+// SetString wraps the corresponding Objective-C method.
 func (x *Tagger) SetString(string_ string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:"), purego.NSString(string_))
 }
 
+// DominantLanguage wraps the corresponding Objective-C method.
 func (x *Tagger) DominantLanguage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dominantLanguage"))
 	return obj.Wrap(_r)
@@ -124,12 +153,16 @@ func (x *Tagger) DominantLanguage() obj.Object {
 type Taggerable interface {
 	obj.Object
 	WithString(string_ string) *Tagger
+	TokenRangeAtIndexUnit(characterIndex int, unit TokenUnit) foundation.NSRange
+	TokenRangeForRangeUnit(range_ foundation.NSRange, unit TokenUnit) foundation.NSRange
+	TagsInRangeUnitSchemeOptionsTokenRanges(range_ foundation.NSRange, unit TokenUnit, scheme obj.Object, options TaggerOptions, tokenRanges []obj.Object) []obj.Object
+	SetLanguageRange(language obj.Object, range_ foundation.NSRange)
+	SetOrthographyRange(orthography obj.Object, range_ foundation.NSRange)
 	SetModelsForTagScheme(models []*Model, tagScheme obj.Object)
 	ModelsForTagScheme(tagScheme obj.Object) []*Model
 	SetGazetteersForTagScheme(gazetteers []*Gazetteer, tagScheme obj.Object)
 	GazetteersForTagScheme(tagScheme obj.Object) []*Gazetteer
 	TagSchemes() []obj.Object
-	String() string
 	SetString(string_ string)
 	DominantLanguage() obj.Object
 }

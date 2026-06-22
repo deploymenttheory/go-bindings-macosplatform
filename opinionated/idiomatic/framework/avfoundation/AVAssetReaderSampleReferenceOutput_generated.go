@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that reads sample references from an asset track.
-//
 // AssetReaderSampleReferenceOutput is an idiomatic wrapper over the Objective-C class AVAssetReaderSampleReferenceOutput.
+//
+// It embeds [AssetReaderOutput], promoting that type's methods.
+//
+// An object that reads sample references from an asset track.
 type AssetReaderSampleReferenceOutput struct {
-	objref.Handle
+	AssetReaderOutput
 }
 
 // AssetReaderSampleReferenceOutputFromID adopts an existing Objective-C object as a AssetReaderSampleReferenceOutput
@@ -25,7 +26,8 @@ func AssetReaderSampleReferenceOutputFromID(id objc.ID) *AssetReaderSampleRefere
 	if id == 0 {
 		return nil
 	}
-	x := &AssetReaderSampleReferenceOutput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetReaderSampleReferenceOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,51 +40,32 @@ func assetReaderSampleReferenceOutputAdopt(id objc.ID) *AssetReaderSampleReferen
 	if id == 0 {
 		return nil
 	}
-	x := &AssetReaderSampleReferenceOutput{Handle: objref.Wrap(id)}
+	x := &AssetReaderSampleReferenceOutput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *AssetReaderSampleReferenceOutput) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetReaderSampleReferenceOutput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetReaderSampleReferenceOutput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates an object that supplies sample references.
-//
-// NewAssetReaderSampleReferenceOutputWithTrack creates a new AssetReaderSampleReferenceOutput.
+// NewAssetReaderSampleReferenceOutputWithTrack creates an object that supplies sample references.
 func NewAssetReaderSampleReferenceOutputWithTrack(track *AssetTrack) *AssetReaderSampleReferenceOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetReaderSampleReferenceOutput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTrack:"), objref.IDOf(track))
 	return assetReaderSampleReferenceOutputAdopt(_id)
 }
 
-// A Boolean value that indicates whether the output vends copied sample data.
-//
-// WithAlwaysCopiesSampleData sets alwaysCopiesSampleData and returns the receiver so calls can be chained.
+// WithAlwaysCopiesSampleData a Boolean value that indicates whether the output vends copied sample data.
 func (x *AssetReaderSampleReferenceOutput) WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderSampleReferenceOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlwaysCopiesSampleData:"), alwaysCopiesSampleData)
 	return x
 }
 
-// A Boolean value that indicates whether the output supports reconfiguring the time ranges it reads.
-//
-// WithSupportsRandomAccess sets supportsRandomAccess and returns the receiver so calls can be chained.
+// WithSupportsRandomAccess a Boolean value that indicates whether the output supports reconfiguring the time ranges it reads.
 func (x *AssetReaderSampleReferenceOutput) WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderSampleReferenceOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsRandomAccess:"), supportsRandomAccess)
 	return x
 }
 
+// Track wraps the corresponding Objective-C method.
 func (x *AssetReaderSampleReferenceOutput) Track() *AssetTrack {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("track"))
 	return AssetTrackFromID(_r)
@@ -97,3 +80,5 @@ type AssetReaderSampleReferenceOutputable interface {
 }
 
 var _ AssetReaderSampleReferenceOutputable = (*AssetReaderSampleReferenceOutput)(nil)
+
+var _ AssetReaderOutputProvider = (*AssetReaderSampleReferenceOutput)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A transition or containment relationship between two scenes in a storyboard.
-//
 // StoryboardSegue is an idiomatic wrapper over the Objective-C class NSStoryboardSegue.
+//
+// A transition or containment relationship between two scenes in a storyboard.
 type StoryboardSegue struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func StoryboardSegueFromID(id objc.ID) *StoryboardSegue {
 	if id == 0 {
 		return nil
 	}
-	x := &StoryboardSegue{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StoryboardSegue{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func storyboardSegueAdopt(id objc.ID) *StoryboardSegue {
 	if id == 0 {
 		return nil
 	}
-	x := &StoryboardSegue{Handle: objref.Wrap(id)}
+	x := &StoryboardSegue{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,30 +60,37 @@ func (x *StoryboardSegue) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// The designated initializer for a storyboard segue.
-//
-// NewStoryboardSegueWithIdentifierSourceDestination creates a new StoryboardSegue.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StoryboardSegue) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewStoryboardSegueWithIdentifierSourceDestination the designated initializer for a storyboard segue.
 func NewStoryboardSegueWithIdentifierSourceDestination(identifier obj.Object, sourceController obj.Object, destinationController obj.Object) *StoryboardSegue {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSStoryboardSegue")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:source:destination:"), objref.IDOf(identifier), objref.IDOf(sourceController), objref.IDOf(destinationController))
 	return storyboardSegueAdopt(_id)
 }
 
-// Performs a visual transition from one controller to another.
+// Perform performs a visual transition from one controller to another.
 func (x *StoryboardSegue) Perform() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("perform"))
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *StoryboardSegue) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
+// SourceController wraps the corresponding Objective-C method.
 func (x *StoryboardSegue) SourceController() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceController"))
 	return obj.Wrap(_r)
 }
 
+// DestinationController wraps the corresponding Objective-C method.
 func (x *StoryboardSegue) DestinationController() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationController"))
 	return obj.Wrap(_r)

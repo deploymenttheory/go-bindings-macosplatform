@@ -11,295 +11,295 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Creates a behavior with a single goal.
+// BehaviorWithGoalWeight creates a behavior with a single goal.
 func BehaviorWithGoalWeight(goal *Goal, weight float32) *Behavior {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKBehavior")), objc.RegisterName("behaviorWithGoal:weight:"), objref.IDOf(goal), weight)
 	return BehaviorFromID(_r)
 }
 
-// Creates a behavior with the specified goals.
+// BehaviorWithGoals creates a behavior with the specified goals.
 func BehaviorWithGoals(goals []*Goal) *Behavior {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKBehavior")), objc.RegisterName("behaviorWithGoals:"), purego.SliceToNSArray(goals, func(_v *Goal) objc.ID { return objref.IDOf(_v) }))
 	return BehaviorFromID(_r)
 }
 
-// Creates a behavior with the specified goals and weights.
+// BehaviorWithGoalsAndWeights creates a behavior with the specified goals and weights.
 func BehaviorWithGoalsAndWeights(goals []*Goal, weights []obj.Object) *Behavior {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKBehavior")), objc.RegisterName("behaviorWithGoals:andWeights:"), purego.SliceToNSArray(goals, func(_v *Goal) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(weights, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return BehaviorFromID(_r)
 }
 
-// Creates a behavior with the specified mapping of goals to their weights.
+// BehaviorWithWeightedGoals creates a behavior with the specified mapping of goals to their weights.
 func BehaviorWithWeightedGoals(weightedGoals obj.Object) *Behavior {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKBehavior")), objc.RegisterName("behaviorWithWeightedGoals:"), objref.IDOf(weightedGoals))
 	return BehaviorFromID(_r)
 }
 
-// Initializes a billow noise source with the specified parameters.
+// BillowNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed initializes a billow noise source with the specified parameters.
 func BillowNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed(frequency float64, octaveCount int, persistence float64, lacunarity float64, seed int32) *BillowNoiseSource {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKBillowNoiseSource")), objc.RegisterName("billowNoiseSourceWithFrequency:octaveCount:persistence:lacunarity:seed:"), frequency, octaveCount, persistence, lacunarity, seed)
 	return BillowNoiseSourceFromID(_r)
 }
 
-// Creates a checkerboard noise source with the specified square size.
+// CheckerboardNoiseWithSquareSize creates a checkerboard noise source with the specified square size.
 func CheckerboardNoiseWithSquareSize(squareSize float64) *CheckerboardNoiseSource {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKCheckerboardNoiseSource")), objc.RegisterName("checkerboardNoiseWithSquareSize:"), squareSize)
 	return CheckerboardNoiseSourceFromID(_r)
 }
 
-// Creates a circular obstacle with the specified radius.
+// ObstacleWithRadius creates a circular obstacle with the specified radius.
 func ObstacleWithRadius(radius float32) *CircleObstacle {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKCircleObstacle")), objc.RegisterName("obstacleWithRadius:"), radius)
 	return CircleObstacleFromID(_r)
 }
 
-// Creates a composite behavior from the specified individual behaviors.
+// BehaviorWithBehaviors creates a composite behavior from the specified individual behaviors.
 func BehaviorWithBehaviors(behaviors []*Behavior) *CompositeBehavior {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKCompositeBehavior")), objc.RegisterName("behaviorWithBehaviors:"), purego.SliceToNSArray(behaviors, func(_v *Behavior) objc.ID { return objref.IDOf(_v) }))
 	return CompositeBehaviorFromID(_r)
 }
 
-// Creates a behavior with the specified behaviors and weights.
+// BehaviorWithBehaviorsAndWeights creates a behavior with the specified behaviors and weights.
 func BehaviorWithBehaviorsAndWeights(behaviors []*Behavior, weights []obj.Object) *CompositeBehavior {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKCompositeBehavior")), objc.RegisterName("behaviorWithBehaviors:andWeights:"), purego.SliceToNSArray(behaviors, func(_v *Behavior) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(weights, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return CompositeBehaviorFromID(_r)
 }
 
-// Creates a noise source with the specified constant value.
+// ConstantNoiseWithValue creates a noise source with the specified constant value.
 func ConstantNoiseWithValue(value float64) *ConstantNoiseSource {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKConstantNoiseSource")), objc.RegisterName("constantNoiseWithValue:"), value)
 	return ConstantNoiseSourceFromID(_r)
 }
 
-// Creates a cylinder noise source with the specified frequency.
+// CylindersNoiseWithFrequency creates a cylinder noise source with the specified frequency.
 func CylindersNoiseWithFrequency(frequency float64) *CylindersNoiseSource {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKCylindersNoiseSource")), objc.RegisterName("cylindersNoiseWithFrequency:"), frequency)
 	return CylindersNoiseSourceFromID(_r)
 }
 
-// Creates a new entity object.
+// GKEntityEntity creates a new entity object.
 func GKEntityEntity() *Entity {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKEntity")), objc.RegisterName("entity"))
 	return EntityFromID(_r)
 }
 
-// Creates a goal whose effect is to move an agent toward the current position of the specified other agent.
+// GoalToSeekAgent creates a goal whose effect is to move an agent toward the current position of the specified other agent.
 func GoalToSeekAgent(agent *Agent) *Goal {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKGoal")), objc.RegisterName("goalToSeekAgent:"), objref.IDOf(agent))
 	return GoalFromID(_r)
 }
 
-// Creates a goal whose effect is to move an agent away from the current position of the specified other agent.
+// GoalToFleeAgent creates a goal whose effect is to move an agent away from the current position of the specified other agent.
 func GoalToFleeAgent(agent *Agent) *Goal {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKGoal")), objc.RegisterName("goalToFleeAgent:"), objref.IDOf(agent))
 	return GoalFromID(_r)
 }
 
-// Creates a goal whose effect is to make an agent avoid colliding with the specified static obstacles.
+// GoalToAvoidObstaclesMaxPredictionTime creates a goal whose effect is to make an agent avoid colliding with the specified static obstacles.
 func GoalToAvoidObstaclesMaxPredictionTime(obstacles []*Obstacle, maxPredictionTime float64) *Goal {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKGoal")), objc.RegisterName("goalToAvoidObstacles:maxPredictionTime:"), purego.SliceToNSArray(obstacles, func(_v *Obstacle) objc.ID { return objref.IDOf(_v) }), maxPredictionTime)
 	return GoalFromID(_r)
 }
 
-// Creates a goal whose effect is to make an agent avoid colliding with the specified other agents, taking into account the other agents’ movement.
+// GoalToAvoidAgentsMaxPredictionTime creates a goal whose effect is to make an agent avoid colliding with the specified other agents, taking into account the other agents’ movement.
 func GoalToAvoidAgentsMaxPredictionTime(agents []*Agent, maxPredictionTime float64) *Goal {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKGoal")), objc.RegisterName("goalToAvoidAgents:maxPredictionTime:"), purego.SliceToNSArray(agents, func(_v *Agent) objc.ID { return objref.IDOf(_v) }), maxPredictionTime)
 	return GoalFromID(_r)
 }
 
-// Creates a goal whose effect is to make an agent maintain the specified distance from other agents in a specified group.
+// GoalToSeparateFromAgentsMaxDistanceMaxAngle creates a goal whose effect is to make an agent maintain the specified distance from other agents in a specified group.
 func GoalToSeparateFromAgentsMaxDistanceMaxAngle(agents []*Agent, maxDistance float32, maxAngle float32) *Goal {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKGoal")), objc.RegisterName("goalToSeparateFromAgents:maxDistance:maxAngle:"), purego.SliceToNSArray(agents, func(_v *Agent) objc.ID { return objref.IDOf(_v) }), maxDistance, maxAngle)
 	return GoalFromID(_r)
 }
 
-// Creates a goal whose effect is to make an agent align its orientation with that of other agents in a specified group.
+// GoalToAlignWithAgentsMaxDistanceMaxAngle creates a goal whose effect is to make an agent align its orientation with that of other agents in a specified group.
 func GoalToAlignWithAgentsMaxDistanceMaxAngle(agents []*Agent, maxDistance float32, maxAngle float32) *Goal {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKGoal")), objc.RegisterName("goalToAlignWithAgents:maxDistance:maxAngle:"), purego.SliceToNSArray(agents, func(_v *Agent) objc.ID { return objref.IDOf(_v) }), maxDistance, maxAngle)
 	return GoalFromID(_r)
 }
 
-// Creates a goal whose effect is to make an agent stay near the other agents in a specified group.
+// GoalToCohereWithAgentsMaxDistanceMaxAngle creates a goal whose effect is to make an agent stay near the other agents in a specified group.
 func GoalToCohereWithAgentsMaxDistanceMaxAngle(agents []*Agent, maxDistance float32, maxAngle float32) *Goal {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKGoal")), objc.RegisterName("goalToCohereWithAgents:maxDistance:maxAngle:"), purego.SliceToNSArray(agents, func(_v *Agent) objc.ID { return objref.IDOf(_v) }), maxDistance, maxAngle)
 	return GoalFromID(_r)
 }
 
-// Creates a goal whose effect is to accelerate or decelerate an agent until it reaches the specified speed.
+// GoalToReachTargetSpeed creates a goal whose effect is to accelerate or decelerate an agent until it reaches the specified speed.
 func GoalToReachTargetSpeed(targetSpeed float32) *Goal {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKGoal")), objc.RegisterName("goalToReachTargetSpeed:"), targetSpeed)
 	return GoalFromID(_r)
 }
 
-// Creates a goal whose effect is to make an agent wander aimlessly, moving forward and turning at random.
+// GoalToWander creates a goal whose effect is to make an agent wander aimlessly, moving forward and turning at random.
 func GoalToWander(speed float32) *Goal {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKGoal")), objc.RegisterName("goalToWander:"), speed)
 	return GoalFromID(_r)
 }
 
-// Creates a goal whose effect is to make an agent pursue the specified other agent, taking into account the target’s movement.
+// GoalToInterceptAgentMaxPredictionTime creates a goal whose effect is to make an agent pursue the specified other agent, taking into account the target’s movement.
 func GoalToInterceptAgentMaxPredictionTime(target *Agent, maxPredictionTime float64) *Goal {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKGoal")), objc.RegisterName("goalToInterceptAgent:maxPredictionTime:"), objref.IDOf(target), maxPredictionTime)
 	return GoalFromID(_r)
 }
 
-// Creates a goal whose effect is to both maintain position on and traverse the specified path.
+// GoalToFollowPathMaxPredictionTimeForward creates a goal whose effect is to both maintain position on and traverse the specified path.
 func GoalToFollowPathMaxPredictionTimeForward(path *Path, maxPredictionTime float64, forward bool) *Goal {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKGoal")), objc.RegisterName("goalToFollowPath:maxPredictionTime:forward:"), objref.IDOf(path), maxPredictionTime, forward)
 	return GoalFromID(_r)
 }
 
-// Creates a goal whose effect is to maintain an agent’s position within the specified path.
+// GoalToStayOnPathMaxPredictionTime creates a goal whose effect is to maintain an agent’s position within the specified path.
 func GoalToStayOnPathMaxPredictionTime(path *Path, maxPredictionTime float64) *Goal {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKGoal")), objc.RegisterName("goalToStayOnPath:maxPredictionTime:"), objref.IDOf(path), maxPredictionTime)
 	return GoalFromID(_r)
 }
 
-// Creates a graph with the specified list of nodes.
+// GraphWithNodes creates a graph with the specified list of nodes.
 func GraphWithNodes(nodes []*GraphNode) *Graph {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKGraph")), objc.RegisterName("graphWithNodes:"), purego.SliceToNSArray(nodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }))
 	return GraphFromID(_r)
 }
 
-// Creates a noise object with the specified noise source.
+// NoiseWithNoiseSource creates a noise object with the specified noise source.
 func NoiseWithNoiseSource(noiseSource *NoiseSource) *Noise {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKNoise")), objc.RegisterName("noiseWithNoiseSource:"), objref.IDOf(noiseSource))
 	return NoiseFromID(_r)
 }
 
-// Creates a noise object with the specified noise source, with colors for later use in generating noise textures.
+// NoiseWithNoiseSourceGradientColors creates a noise object with the specified noise source, with colors for later use in generating noise textures.
 func NoiseWithNoiseSourceGradientColors(noiseSource *NoiseSource, gradientColors obj.Object) *Noise {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKNoise")), objc.RegisterName("noiseWithNoiseSource:gradientColors:"), objref.IDOf(noiseSource), objref.IDOf(gradientColors))
 	return NoiseFromID(_r)
 }
 
-// Creates a noise object by combining the specified noise objects, using another noise object to select which regions of the output correspond to which input noise.
+// NoiseWithComponentNoisesSelectionNoise creates a noise object by combining the specified noise objects, using another noise object to select which regions of the output correspond to which input noise.
 func NoiseWithComponentNoisesSelectionNoise(noises []*Noise, selectionNoise *Noise) *Noise {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKNoise")), objc.RegisterName("noiseWithComponentNoises:selectionNoise:"), purego.SliceToNSArray(noises, func(_v *Noise) objc.ID { return objref.IDOf(_v) }), objref.IDOf(selectionNoise))
 	return NoiseFromID(_r)
 }
 
-// Creates a noise object by combining the specified noise objects, using another noise object and the specified boundaries to select which regions of the output correspond to which input noise.
+// NoiseWithComponentNoisesSelectionNoiseComponentBoundariesBoundaryBlendDistances creates a noise object by combining the specified noise objects, using another noise object and the specified boundaries to select which regions of the output correspond to which input noise.
 func NoiseWithComponentNoisesSelectionNoiseComponentBoundariesBoundaryBlendDistances(noises []*Noise, selectionNoise *Noise, componentBoundaries []obj.Object, blendDistances []obj.Object) *Noise {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKNoise")), objc.RegisterName("noiseWithComponentNoises:selectionNoise:componentBoundaries:boundaryBlendDistances:"), purego.SliceToNSArray(noises, func(_v *Noise) objc.ID { return objref.IDOf(_v) }), objref.IDOf(selectionNoise), purego.SliceToNSArray(componentBoundaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(blendDistances, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return NoiseFromID(_r)
 }
 
-// Creates a noise map by sampling from the specified noise object.
+// NoiseMapWithNoise creates a noise map by sampling from the specified noise object.
 func NoiseMapWithNoise(noise *Noise) *NoiseMap {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKNoiseMap")), objc.RegisterName("noiseMapWithNoise:"), objref.IDOf(noise))
 	return NoiseMapFromID(_r)
 }
 
-// Creates a graph with the specified list of obstacles.
+// GraphWithObstaclesBufferRadius creates a graph with the specified list of obstacles.
 func GraphWithObstaclesBufferRadius(obstacles []*PolygonObstacle, bufferRadius float32) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKObstacleGraph")), objc.RegisterName("graphWithObstacles:bufferRadius:"), purego.SliceToNSArray(obstacles, func(_v *PolygonObstacle) objc.ID { return objref.IDOf(_v) }), bufferRadius)
 	return obj.Wrap(_r)
 }
 
-// Creates a path using the positions of the specified graph nodes.
+// PathWithGraphNodesRadius creates a path using the positions of the specified graph nodes.
 func PathWithGraphNodesRadius(graphNodes []*GraphNode, radius float32) *Path {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKPath")), objc.RegisterName("pathWithGraphNodes:radius:"), purego.SliceToNSArray(graphNodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }), radius)
 	return PathFromID(_r)
 }
 
-// Creates a Perlin noise source with the specified parameters.
+// PerlinNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed creates a Perlin noise source with the specified parameters.
 func PerlinNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed(frequency float64, octaveCount int, persistence float64, lacunarity float64, seed int32) *PerlinNoiseSource {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKPerlinNoiseSource")), objc.RegisterName("perlinNoiseSourceWithFrequency:octaveCount:persistence:lacunarity:seed:"), frequency, octaveCount, persistence, lacunarity, seed)
 	return PerlinNoiseSourceFromID(_r)
 }
 
-// Creates a new R-tree object.
+// TreeWithMaxNumberOfChildren creates a new R-tree object.
 func TreeWithMaxNumberOfChildren(maxNumberOfChildren int) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKRTree")), objc.RegisterName("treeWithMaxNumberOfChildren:"), maxNumberOfChildren)
 	return obj.Wrap(_r)
 }
 
-// Creates a random distribution with the specified lower and upper bounds, using the Arc4 randomizer.
+// DistributionWithLowestValueHighestValue creates a random distribution with the specified lower and upper bounds, using the Arc4 randomizer.
 func DistributionWithLowestValueHighestValue(lowestInclusive int, highestInclusive int) *RandomDistribution {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKRandomDistribution")), objc.RegisterName("distributionWithLowestValue:highestValue:"), lowestInclusive, highestInclusive)
 	return RandomDistributionFromID(_r)
 }
 
-// Creates a random distribution equivalent to a die with the specified number of sides.
+// DistributionForDieWithSideCount creates a random distribution equivalent to a die with the specified number of sides.
 func DistributionForDieWithSideCount(sideCount int) *RandomDistribution {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKRandomDistribution")), objc.RegisterName("distributionForDieWithSideCount:"), sideCount)
 	return RandomDistributionFromID(_r)
 }
 
-// Creates a random distribution equivalent to a six-sided die.
+// D6 creates a random distribution equivalent to a six-sided die.
 func D6() *RandomDistribution {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKRandomDistribution")), objc.RegisterName("d6"))
 	return RandomDistributionFromID(_r)
 }
 
-// Creates a random distribution equivalent to a twenty-sided die.
+// D20 creates a random distribution equivalent to a twenty-sided die.
 func D20() *RandomDistribution {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKRandomDistribution")), objc.RegisterName("d20"))
 	return RandomDistributionFromID(_r)
 }
 
-// Returns a shared instance that shares a system-wide random source.
+// SharedRandom returns a shared instance that shares a system-wide random source.
 func SharedRandom() *RandomSource {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKRandomSource")), objc.RegisterName("sharedRandom"))
 	return RandomSourceFromID(_r)
 }
 
-// Creates a ridged noise source with the specified parameters.
+// RidgedNoiseSourceWithFrequencyOctaveCountLacunaritySeed creates a ridged noise source with the specified parameters.
 func RidgedNoiseSourceWithFrequencyOctaveCountLacunaritySeed(frequency float64, octaveCount int, lacunarity float64, seed int32) *RidgedNoiseSource {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKRidgedNoiseSource")), objc.RegisterName("ridgedNoiseSourceWithFrequency:octaveCount:lacunarity:seed:"), frequency, octaveCount, lacunarity, seed)
 	return RidgedNoiseSourceFromID(_r)
 }
 
-// Creates a rule whose predicate is evaluated and action is executed through the specified blocks.
+// RuleWithBlockPredicateAction creates a rule whose predicate is evaluated and action is executed through the specified blocks.
 func RuleWithBlockPredicateAction(predicate func(obj.Object) bool, action func(obj.Object)) *Rule {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKRule")), objc.RegisterName("ruleWithBlockPredicate:action:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) bool { return predicate(obj.Wrap(_b0)) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { action(obj.Wrap(_b0)) }))
 	return RuleFromID(_r)
 }
 
-// Creates a component that encapsulate the given SceneKit node. When the component is added to an entity, the SCNNode's entity property will be set.
+// ComponentWithNode creates a component that encapsulate the given SceneKit node. When the component is added to an entity, the SCNNode's entity property will be set.
 func ComponentWithNode(node obj.Object) *SCNNodeComponent {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKSCNNodeComponent")), objc.RegisterName("componentWithNode:"), objref.IDOf(node))
 	return SCNNodeComponentFromID(_r)
 }
 
-// Creates a component to manage the specified SpriteKit node.
+// GKSKNodeComponentComponentWithNode creates a component to manage the specified SpriteKit node.
 func GKSKNodeComponentComponentWithNode(node obj.Object) *SKNodeComponent {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKSKNodeComponent")), objc.RegisterName("componentWithNode:"), objref.IDOf(node))
 	return SKNodeComponentFromID(_r)
 }
 
-// Loads the specified SpriteKit scene file, creating a GKScene object containing the SpriteKit scene and associated GameplayKit objects.
+// SceneWithFileNamed loads the specified SpriteKit scene file, creating a GKScene object containing the SpriteKit scene and associated GameplayKit objects.
 func SceneWithFileNamed(filename string) *Scene {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKScene")), objc.RegisterName("sceneWithFileNamed:"), purego.NSString(filename))
 	return SceneFromID(_r)
 }
 
-// Creates a spherical obstacle with the specified radius.
+// GKSphereObstacleObstacleWithRadius creates a spherical obstacle with the specified radius.
 func GKSphereObstacleObstacleWithRadius(radius float32) *SphereObstacle {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKSphereObstacle")), objc.RegisterName("obstacleWithRadius:"), radius)
 	return SphereObstacleFromID(_r)
 }
 
-// Creates a sphere noise source with the specified frequency.
+// SpheresNoiseWithFrequency creates a sphere noise source with the specified frequency.
 func SpheresNoiseWithFrequency(frequency float64) *SpheresNoiseSource {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKSpheresNoiseSource")), objc.RegisterName("spheresNoiseWithFrequency:"), frequency)
 	return SpheresNoiseSourceFromID(_r)
 }
 
-// Creates a state object with the specified list of valid next states.
+// GKStateState creates a state object with the specified list of valid next states.
 func GKStateState() *State {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKState")), objc.RegisterName("state"))
 	return StateFromID(_r)
 }
 
-// Creates a state machine with the specified states.
+// StateMachineWithStates creates a state machine with the specified states.
 func StateMachineWithStates(states []*State) *StateMachine {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKStateMachine")), objc.RegisterName("stateMachineWithStates:"), purego.SliceToNSArray(states, func(_v *State) objc.ID { return objref.IDOf(_v) }))
 	return StateMachineFromID(_r)
 }
 
-// Creates a Voronoi noise source with the specified parameters.
+// VoronoiNoiseWithFrequencyDisplacementDistanceEnabledSeed creates a Voronoi noise source with the specified parameters.
 func VoronoiNoiseWithFrequencyDisplacementDistanceEnabledSeed(frequency float64, displacement float64, distanceEnabled bool, seed int32) *VoronoiNoiseSource {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKVoronoiNoiseSource")), objc.RegisterName("voronoiNoiseWithFrequency:displacement:distanceEnabled:seed:"), frequency, displacement, distanceEnabled, seed)
 	return VoronoiNoiseSourceFromID(_r)

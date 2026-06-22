@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Settings for an IKEv2 VPN configuration.
-//
 // NEVPNProtocolIKEv2 is an idiomatic wrapper over the Objective-C class NEVPNProtocolIKEv2.
+//
+// It embeds [NEVPNProtocolIPSec], promoting that type's methods.
+//
+// Settings for an IKEv2 VPN configuration.
 type NEVPNProtocolIKEv2 struct {
-	objref.Handle
+	NEVPNProtocolIPSec
 }
 
 // NEVPNProtocolIKEv2FromID adopts an existing Objective-C object as a NEVPNProtocolIKEv2
@@ -25,7 +26,8 @@ func NEVPNProtocolIKEv2FromID(id objc.ID) *NEVPNProtocolIKEv2 {
 	if id == 0 {
 		return nil
 	}
-	x := &NEVPNProtocolIKEv2{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEVPNProtocolIKEv2{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func nEVPNProtocolIKEv2Adopt(id objc.ID) *NEVPNProtocolIKEv2 {
 	if id == 0 {
 		return nil
 	}
-	x := &NEVPNProtocolIKEv2{Handle: objref.Wrap(id)}
+	x := &NEVPNProtocolIKEv2{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NEVPNProtocolIKEv2) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEVPNProtocolIKEv2) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEVPNProtocolIKEv2) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNEVPNProtocolIKEv2 creates a new NEVPNProtocolIKEv2.
@@ -64,289 +52,222 @@ func NewNEVPNProtocolIKEv2() *NEVPNProtocolIKEv2 {
 	return nEVPNProtocolIKEv2Adopt(_id)
 }
 
-// The frequency at which the IKEv2 client will run the dead peer detection algorithm.
-//
-// WithDeadPeerDetectionRate sets deadPeerDetectionRate and returns the receiver so calls can be chained.
+// WithDeadPeerDetectionRate the frequency at which the IKEv2 client will run the dead peer detection algorithm.
 func (x *NEVPNProtocolIKEv2) WithDeadPeerDetectionRate(deadPeerDetectionRate NEVPNIKEv2DeadPeerDetectionRate) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeadPeerDetectionRate:"), deadPeerDetectionRate)
 	return x
 }
 
-// A string containing the value of the Subject Common Name field of the Certificate Authority certificate that issued the IKEv2 server’s certificate.
-//
-// WithServerCertificateIssuerCommonName sets serverCertificateIssuerCommonName and returns the receiver so calls can be chained.
+// WithServerCertificateIssuerCommonName a string containing the value of the Subject Common Name field of the Certificate Authority certificate that issued the IKEv2 server’s certificate.
 func (x *NEVPNProtocolIKEv2) WithServerCertificateIssuerCommonName(serverCertificateIssuerCommonName string) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerCertificateIssuerCommonName:"), purego.NSString(serverCertificateIssuerCommonName))
 	return x
 }
 
-// A string containing the value of the Subject Common Name field of the IKEv2 server’s certificate.
-//
-// WithServerCertificateCommonName sets serverCertificateCommonName and returns the receiver so calls can be chained.
+// WithServerCertificateCommonName a string containing the value of the Subject Common Name field of the IKEv2 server’s certificate.
 func (x *NEVPNProtocolIKEv2) WithServerCertificateCommonName(serverCertificateCommonName string) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerCertificateCommonName:"), purego.NSString(serverCertificateCommonName))
 	return x
 }
 
-// The type of the certificate in the identity configured in identityReference or identityData.
-//
-// WithCertificateType sets certificateType and returns the receiver so calls can be chained.
+// WithCertificateType the type of the certificate in the identity configured in identityReference or identityData.
 func (x *NEVPNProtocolIKEv2) WithCertificateType(certificateType NEVPNIKEv2CertificateType) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCertificateType:"), certificateType)
 	return x
 }
 
-// A Boolean indicating whether or not the IKEv2 client should use the INTERNAL_IP4_SUBNET and/or INTERNAL_IP6_SUBNET attributes sent by the IKEv2 server.
-//
-// WithUseConfigurationAttributeInternalIPSubnet sets useConfigurationAttributeInternalIPSubnet and returns the receiver so calls can be chained.
+// WithUseConfigurationAttributeInternalIPSubnet a Boolean indicating whether or not the IKEv2 client should use the INTERNAL_IP4_SUBNET and/or INTERNAL_IP6_SUBNET attributes sent by the IKEv2 server.
 func (x *NEVPNProtocolIKEv2) WithUseConfigurationAttributeInternalIPSubnet(useConfigurationAttributeInternalIPSubnet bool) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseConfigurationAttributeInternalIPSubnet:"), useConfigurationAttributeInternalIPSubnet)
 	return x
 }
 
-// A Boolean indicating whether or not MOBIKE should be disabled for the IKEv2 sessions.
-//
-// WithDisableMOBIKE sets disableMOBIKE and returns the receiver so calls can be chained.
+// WithDisableMOBIKE a Boolean indicating whether or not MOBIKE should be disabled for the IKEv2 sessions.
 func (x *NEVPNProtocolIKEv2) WithDisableMOBIKE(disableMOBIKE bool) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisableMOBIKE:"), disableMOBIKE)
 	return x
 }
 
-// A Boolean indicating whether or not IKEv2 server redirects are disabled.
-//
-// WithDisableRedirect sets disableRedirect and returns the receiver so calls can be chained.
+// WithDisableRedirect a Boolean indicating whether or not IKEv2 server redirects are disabled.
 func (x *NEVPNProtocolIKEv2) WithDisableRedirect(disableRedirect bool) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisableRedirect:"), disableRedirect)
 	return x
 }
 
-// A Boolean indicating whether or not Perfect Forward Secrecy is enabled.
-//
-// WithEnablePFS sets enablePFS and returns the receiver so calls can be chained.
+// WithEnablePFS a Boolean indicating whether or not Perfect Forward Secrecy is enabled.
 func (x *NEVPNProtocolIKEv2) WithEnablePFS(enablePFS bool) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnablePFS:"), enablePFS)
 	return x
 }
 
-// A Boolean value that indicates whether servers that don’t support post-quantum key exchanges can skip them.
-//
-// WithAllowPostQuantumKeyExchangeFallback sets allowPostQuantumKeyExchangeFallback and returns the receiver so calls can be chained.
+// WithAllowPostQuantumKeyExchangeFallback a Boolean value that indicates whether servers that don’t support post-quantum key exchanges can skip them.
 func (x *NEVPNProtocolIKEv2) WithAllowPostQuantumKeyExchangeFallback(allowPostQuantumKeyExchangeFallback bool) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowPostQuantumKeyExchangeFallback:"), allowPostQuantumKeyExchangeFallback)
 	return x
 }
 
-// Enable revocation checking of the IKEv2 server certificate.
-//
-// WithEnableRevocationCheck sets enableRevocationCheck and returns the receiver so calls can be chained.
+// WithEnableRevocationCheck enable revocation checking of the IKEv2 server certificate.
 func (x *NEVPNProtocolIKEv2) WithEnableRevocationCheck(enableRevocationCheck bool) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableRevocationCheck:"), enableRevocationCheck)
 	return x
 }
 
-// Require a “not revoked” result when checking if the certificate identifying the server is revoked.
-//
-// WithStrictRevocationCheck sets strictRevocationCheck and returns the receiver so calls can be chained.
+// WithStrictRevocationCheck require a “not revoked” result when checking if the certificate identifying the server is revoked.
 func (x *NEVPNProtocolIKEv2) WithStrictRevocationCheck(strictRevocationCheck bool) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrictRevocationCheck:"), strictRevocationCheck)
 	return x
 }
 
-// The minimum TLS version to allow for EAP-TLS authentication.
-//
-// WithMinimumTLSVersion sets minimumTLSVersion and returns the receiver so calls can be chained.
+// WithMinimumTLSVersion the minimum TLS version to allow for EAP-TLS authentication.
 func (x *NEVPNProtocolIKEv2) WithMinimumTLSVersion(minimumTLSVersion NEVPNIKEv2TLSVersion) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumTLSVersion:"), minimumTLSVersion)
 	return x
 }
 
-// The minimum TLS version to allow for EAP-TLS authentication.
-//
-// WithMaximumTLSVersion sets maximumTLSVersion and returns the receiver so calls can be chained.
+// WithMaximumTLSVersion the minimum TLS version to allow for EAP-TLS authentication.
 func (x *NEVPNProtocolIKEv2) WithMaximumTLSVersion(maximumTLSVersion NEVPNIKEv2TLSVersion) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumTLSVersion:"), maximumTLSVersion)
 	return x
 }
 
-// The Maximum Transmission Unit (MTU) size in bytes to assign to the tunnel interface.
-//
-// WithMtu sets mtu and returns the receiver so calls can be chained.
+// WithMtu the Maximum Transmission Unit (MTU) size in bytes to assign to the tunnel interface.
 func (x *NEVPNProtocolIKEv2) WithMtu(mtu int) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMtu:"), mtu)
 	return x
 }
 
-// The configuration for a post-quantum pre-shared key (PPK).
-//
-// WithPpkConfiguration sets ppkConfiguration and returns the receiver so calls can be chained.
+// WithPpkConfiguration the configuration for a post-quantum pre-shared key (PPK).
 func (x *NEVPNProtocolIKEv2) WithPpkConfiguration(ppkConfiguration *NEVPNIKEv2PPKConfiguration) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPpkConfiguration:"), objref.IDOf(ppkConfiguration))
 	return x
 }
 
-// The method used to authenticate the device with the IPSec server. For IKE version 2, when using extended authentication, this authentication method only affects how the client validates the authentication payload presented by the server.
-//
-// WithAuthenticationMethod sets authenticationMethod and returns the receiver so calls can be chained.
+// WithAuthenticationMethod the method used to authenticate the device with the IPSec server. For IKE version 2, when using extended authentication, this authentication method only affects how the client validates the authentication payload presented by the server.
 func (x *NEVPNProtocolIKEv2) WithAuthenticationMethod(authenticationMethod NEVPNIKEAuthenticationMethod) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthenticationMethod:"), authenticationMethod)
 	return x
 }
 
-// A flag indicating if extended authentication will be negotiated.
-//
-// WithUseExtendedAuthentication sets useExtendedAuthentication and returns the receiver so calls can be chained.
+// WithUseExtendedAuthentication a flag indicating if extended authentication will be negotiated.
 func (x *NEVPNProtocolIKEv2) WithUseExtendedAuthentication(useExtendedAuthentication bool) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseExtendedAuthentication:"), useExtendedAuthentication)
 	return x
 }
 
-// A persistent keychain reference to a keychain item containing the IKE shared secret.
-//
-// WithSharedSecretReference sets sharedSecretReference and returns the receiver so calls can be chained.
+// WithSharedSecretReference a persistent keychain reference to a keychain item containing the IKE shared secret.
 func (x *NEVPNProtocolIKEv2) WithSharedSecretReference(sharedSecretReference obj.Object) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharedSecretReference:"), objref.IDOf(sharedSecretReference))
 	return x
 }
 
-// A string identifying the iOS or macOS device for authentication purposes
-//
-// WithLocalIdentifier sets localIdentifier and returns the receiver so calls can be chained.
+// WithLocalIdentifier a string identifying the iOS or macOS device for authentication purposes
 func (x *NEVPNProtocolIKEv2) WithLocalIdentifier(localIdentifier string) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalIdentifier:"), purego.NSString(localIdentifier))
 	return x
 }
 
-// A string identifying the IPSec server for authentication purposes
-//
-// WithRemoteIdentifier sets remoteIdentifier and returns the receiver so calls can be chained.
+// WithRemoteIdentifier a string identifying the IPSec server for authentication purposes
 func (x *NEVPNProtocolIKEv2) WithRemoteIdentifier(remoteIdentifier string) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemoteIdentifier:"), purego.NSString(remoteIdentifier))
 	return x
 }
 
-// The address of the VPN server.
-//
-// WithServerAddress sets serverAddress and returns the receiver so calls can be chained.
+// WithServerAddress the address of the VPN server.
 func (x *NEVPNProtocolIKEv2) WithServerAddress(serverAddress string) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerAddress:"), purego.NSString(serverAddress))
 	return x
 }
 
-// The user name component of the tunneling protocol authentication credential.
-//
-// WithUsername sets username and returns the receiver so calls can be chained.
+// WithUsername the user name component of the tunneling protocol authentication credential.
 func (x *NEVPNProtocolIKEv2) WithUsername(username string) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsername:"), purego.NSString(username))
 	return x
 }
 
-// A persistent keychain reference to a keychain item containing the password component of the tunneling protocol authentication credential.
-//
-// WithPasswordReference sets passwordReference and returns the receiver so calls can be chained.
+// WithPasswordReference a persistent keychain reference to a keychain item containing the password component of the tunneling protocol authentication credential.
 func (x *NEVPNProtocolIKEv2) WithPasswordReference(passwordReference obj.Object) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPasswordReference:"), objref.IDOf(passwordReference))
 	return x
 }
 
-// A persistent keychain reference to a keychain item containing the certificate and private key components of the tunneling protocol authentication credential.
-//
-// WithIdentityReference sets identityReference and returns the receiver so calls can be chained.
+// WithIdentityReference a persistent keychain reference to a keychain item containing the certificate and private key components of the tunneling protocol authentication credential.
 func (x *NEVPNProtocolIKEv2) WithIdentityReference(identityReference obj.Object) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityReference:"), objref.IDOf(identityReference))
 	return x
 }
 
-// The certificate and private key components of the tunneling protocol authentication credential, in PKCS12 format.
-//
-// WithIdentityData sets identityData and returns the receiver so calls can be chained.
+// WithIdentityData the certificate and private key components of the tunneling protocol authentication credential, in PKCS12 format.
 func (x *NEVPNProtocolIKEv2) WithIdentityData(identityData obj.Object) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityData:"), objref.IDOf(identityData))
 	return x
 }
 
-// The password for the PKCS12 tunneling protocol authentication credentials.
-//
-// WithIdentityDataPassword sets identityDataPassword and returns the receiver so calls can be chained.
+// WithIdentityDataPassword the password for the PKCS12 tunneling protocol authentication credentials.
 func (x *NEVPNProtocolIKEv2) WithIdentityDataPassword(identityDataPassword string) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityDataPassword:"), purego.NSString(identityDataPassword))
 	return x
 }
 
-// A Boolean value that indicates whether the VPN disconnects when the device sleeps.
-//
-// WithDisconnectOnSleep sets disconnectOnSleep and returns the receiver so calls can be chained.
+// WithDisconnectOnSleep a Boolean value that indicates whether the VPN disconnects when the device sleeps.
 func (x *NEVPNProtocolIKEv2) WithDisconnectOnSleep(disconnectOnSleep bool) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisconnectOnSleep:"), disconnectOnSleep)
 	return x
 }
 
-// The proxy settings to use for HTTP and HTTPS connections that route through the VPN.
-//
-// WithProxySettings sets proxySettings and returns the receiver so calls can be chained.
+// WithProxySettings the proxy settings to use for HTTP and HTTPS connections that route through the VPN.
 func (x *NEVPNProtocolIKEv2) WithProxySettings(proxySettings *NEProxySettings) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProxySettings:"), objref.IDOf(proxySettings))
 	return x
 }
 
-// A Boolean value that indicates whether the system sends most network traffic over the tunnel.
-//
-// WithIncludeAllNetworks sets includeAllNetworks and returns the receiver so calls can be chained.
+// WithIncludeAllNetworks a Boolean value that indicates whether the system sends most network traffic over the tunnel.
 func (x *NEVPNProtocolIKEv2) WithIncludeAllNetworks(includeAllNetworks bool) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeAllNetworks:"), includeAllNetworks)
 	return x
 }
 
-// A Boolean value that indicates whether the system excludes all traffic destined for local networks from the tunnel.
-//
-// WithExcludeLocalNetworks sets excludeLocalNetworks and returns the receiver so calls can be chained.
+// WithExcludeLocalNetworks a Boolean value that indicates whether the system excludes all traffic destined for local networks from the tunnel.
 func (x *NEVPNProtocolIKEv2) WithExcludeLocalNetworks(excludeLocalNetworks bool) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeLocalNetworks:"), excludeLocalNetworks)
 	return x
 }
 
-// A Boolean value that indicates whether the system excludes all cellular services network traffic from the tunnel.
-//
-// WithExcludeCellularServices sets excludeCellularServices and returns the receiver so calls can be chained.
+// WithExcludeCellularServices a Boolean value that indicates whether the system excludes all cellular services network traffic from the tunnel.
 func (x *NEVPNProtocolIKEv2) WithExcludeCellularServices(excludeCellularServices bool) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeCellularServices:"), excludeCellularServices)
 	return x
 }
 
-// A Boolean value that indicates whether the system excludes all APNs network traffic from the tunnel.
-//
-// WithExcludeAPNs sets excludeAPNs and returns the receiver so calls can be chained.
+// WithExcludeAPNs a Boolean value that indicates whether the system excludes all APNs network traffic from the tunnel.
 func (x *NEVPNProtocolIKEv2) WithExcludeAPNs(excludeAPNs bool) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeAPNs:"), excludeAPNs)
 	return x
 }
 
-// If includeAllNetworks is set to YES and this property is set to YES, then network traffic used for communicating with devices connected via USB or Wi-Fi is excluded from the tunnel. For example, Xcode uses a network tunnel to communicate with connected development devices like iPhone, iPad and TV. The default value of this property is YES.
-//
-// WithExcludeDeviceCommunication sets excludeDeviceCommunication and returns the receiver so calls can be chained.
+// WithExcludeDeviceCommunication if includeAllNetworks is set to YES and this property is set to YES, then network traffic used for communicating with devices connected via USB or Wi-Fi is excluded from the tunnel. For example, Xcode uses a network tunnel to communicate with connected development devices like iPhone, iPad and TV. The default value of this property is YES.
 func (x *NEVPNProtocolIKEv2) WithExcludeDeviceCommunication(excludeDeviceCommunication bool) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeDeviceCommunication:"), excludeDeviceCommunication)
 	return x
 }
 
-// A Boolean value that indicates whether route rules for the tunnel take precedence over any locally defined routes.
-//
-// WithEnforceRoutes sets enforceRoutes and returns the receiver so calls can be chained.
+// WithEnforceRoutes a Boolean value that indicates whether route rules for the tunnel take precedence over any locally defined routes.
 func (x *NEVPNProtocolIKEv2) WithEnforceRoutes(enforceRoutes bool) *NEVPNProtocolIKEv2 {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnforceRoutes:"), enforceRoutes)
 	return x
 }
 
-// How frequently the IKEv2 client will run the dead peer detection algorithm.  Default is NEVPNIKEv2DeadPeerDetectionRateMedium.
+// DeadPeerDetectionRate how frequently the IKEv2 client will run the dead peer detection algorithm.  Default is NEVPNIKEv2DeadPeerDetectionRateMedium.
 func (x *NEVPNProtocolIKEv2) DeadPeerDetectionRate() NEVPNIKEv2DeadPeerDetectionRate {
 	_r := objc.Send[NEVPNIKEv2DeadPeerDetectionRate](objref.IDOf(x), objc.RegisterName("deadPeerDetectionRate"))
 	return _r
 }
 
+// SetDeadPeerDetectionRate wraps the corresponding Objective-C method.
 func (x *NEVPNProtocolIKEv2) SetDeadPeerDetectionRate(deadPeerDetectionRate NEVPNIKEv2DeadPeerDetectionRate) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeadPeerDetectionRate:"), deadPeerDetectionRate)
 }
 
-// A string containing the Subject Common Name field of the Certificate Authority certificate that issued the IKEv2 server's certificate.
+// ServerCertificateIssuerCommonName a string containing the Subject Common Name field of the Certificate Authority certificate that issued the IKEv2 server's certificate.
 func (x *NEVPNProtocolIKEv2) ServerCertificateIssuerCommonName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverCertificateIssuerCommonName"))
 	if _r == 0 {
@@ -355,11 +276,12 @@ func (x *NEVPNProtocolIKEv2) ServerCertificateIssuerCommonName() string {
 	return purego.GoString(_r)
 }
 
+// SetServerCertificateIssuerCommonName wraps the corresponding Objective-C method.
 func (x *NEVPNProtocolIKEv2) SetServerCertificateIssuerCommonName(serverCertificateIssuerCommonName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerCertificateIssuerCommonName:"), purego.NSString(serverCertificateIssuerCommonName))
 }
 
-// A string containing the value to verify in the IKEv2 server certificate's Subject Common Name field.
+// ServerCertificateCommonName a string containing the value to verify in the IKEv2 server certificate's Subject Common Name field.
 func (x *NEVPNProtocolIKEv2) ServerCertificateCommonName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverCertificateCommonName"))
 	if _r == 0 {
@@ -368,138 +290,151 @@ func (x *NEVPNProtocolIKEv2) ServerCertificateCommonName() string {
 	return purego.GoString(_r)
 }
 
+// SetServerCertificateCommonName wraps the corresponding Objective-C method.
 func (x *NEVPNProtocolIKEv2) SetServerCertificateCommonName(serverCertificateCommonName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerCertificateCommonName:"), purego.NSString(serverCertificateCommonName))
 }
 
-// contains the type of certificate if an certificate is configured.  Default is RSA.
+// CertificateType contains the type of certificate if an certificate is configured.  Default is RSA.
 func (x *NEVPNProtocolIKEv2) CertificateType() NEVPNIKEv2CertificateType {
 	_r := objc.Send[NEVPNIKEv2CertificateType](objref.IDOf(x), objc.RegisterName("certificateType"))
 	return _r
 }
 
+// SetCertificateType wraps the corresponding Objective-C method.
 func (x *NEVPNProtocolIKEv2) SetCertificateType(certificateType NEVPNIKEv2CertificateType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCertificateType:"), certificateType)
 }
 
-// Boolean indicating if client should use INTERNAL_IP4_SUBNET / INTERNAL_IP6_SUBNET attributes.  Default is False.
+// UseConfigurationAttributeInternalIPSubnet boolean indicating if client should use INTERNAL_IP4_SUBNET / INTERNAL_IP6_SUBNET attributes.  Default is False.
 func (x *NEVPNProtocolIKEv2) UseConfigurationAttributeInternalIPSubnet() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("useConfigurationAttributeInternalIPSubnet"))
 	return _r
 }
 
+// SetUseConfigurationAttributeInternalIPSubnet wraps the corresponding Objective-C method.
 func (x *NEVPNProtocolIKEv2) SetUseConfigurationAttributeInternalIPSubnet(useConfigurationAttributeInternalIPSubnet bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseConfigurationAttributeInternalIPSubnet:"), useConfigurationAttributeInternalIPSubnet)
 }
 
-// Parameters for the IKE SA
+// IKESecurityAssociationParameters parameters for the IKE SA
 func (x *NEVPNProtocolIKEv2) IKESecurityAssociationParameters() *NEVPNIKEv2SecurityAssociationParameters {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("IKESecurityAssociationParameters"))
 	return NEVPNIKEv2SecurityAssociationParametersFromID(_r)
 }
 
-// Parameters for the child SA
+// ChildSecurityAssociationParameters parameters for the child SA
 func (x *NEVPNProtocolIKEv2) ChildSecurityAssociationParameters() *NEVPNIKEv2SecurityAssociationParameters {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("childSecurityAssociationParameters"))
 	return NEVPNIKEv2SecurityAssociationParametersFromID(_r)
 }
 
-// Disable MOBIKE negotiation. Default is NO.
+// DisableMOBIKE disable MOBIKE negotiation. Default is NO.
 func (x *NEVPNProtocolIKEv2) DisableMOBIKE() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("disableMOBIKE"))
 	return _r
 }
 
+// SetDisableMOBIKE wraps the corresponding Objective-C method.
 func (x *NEVPNProtocolIKEv2) SetDisableMOBIKE(disableMOBIKE bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisableMOBIKE:"), disableMOBIKE)
 }
 
-// Disable Server Redirect. Default is NO.
+// DisableRedirect disable Server Redirect. Default is NO.
 func (x *NEVPNProtocolIKEv2) DisableRedirect() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("disableRedirect"))
 	return _r
 }
 
+// SetDisableRedirect wraps the corresponding Objective-C method.
 func (x *NEVPNProtocolIKEv2) SetDisableRedirect(disableRedirect bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisableRedirect:"), disableRedirect)
 }
 
-// Enable Perfect Forward Secrecy. Default is NO.
+// EnablePFS enable Perfect Forward Secrecy. Default is NO.
 func (x *NEVPNProtocolIKEv2) EnablePFS() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enablePFS"))
 	return _r
 }
 
+// SetEnablePFS wraps the corresponding Objective-C method.
 func (x *NEVPNProtocolIKEv2) SetEnablePFS(enablePFS bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnablePFS:"), enablePFS)
 }
 
-// Allow servers that do not support post-quantum key exchanges to skip them. This property has no effect if no post-quantum key exchange methods are configured for the IKE SA or Child SA (see NEVPNIKEv2SecurityAssociationParameters.postQuantumKeyExchangeMethods). Default is NO.
+// AllowPostQuantumKeyExchangeFallback allow servers that do not support post-quantum key exchanges to skip them. This property has no effect if no post-quantum key exchange methods are configured for the IKE SA or Child SA (see NEVPNIKEv2SecurityAssociationParameters.postQuantumKeyExchangeMethods). Default is NO.
 func (x *NEVPNProtocolIKEv2) AllowPostQuantumKeyExchangeFallback() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowPostQuantumKeyExchangeFallback"))
 	return _r
 }
 
+// SetAllowPostQuantumKeyExchangeFallback wraps the corresponding Objective-C method.
 func (x *NEVPNProtocolIKEv2) SetAllowPostQuantumKeyExchangeFallback(allowPostQuantumKeyExchangeFallback bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowPostQuantumKeyExchangeFallback:"), allowPostQuantumKeyExchangeFallback)
 }
 
-// Enable certificate revocation check. Default is NO.
+// EnableRevocationCheck enable certificate revocation check. Default is NO.
 func (x *NEVPNProtocolIKEv2) EnableRevocationCheck() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enableRevocationCheck"))
 	return _r
 }
 
+// SetEnableRevocationCheck wraps the corresponding Objective-C method.
 func (x *NEVPNProtocolIKEv2) SetEnableRevocationCheck(enableRevocationCheck bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableRevocationCheck:"), enableRevocationCheck)
 }
 
-// Require positive certificate revocation check response for peer certificate validation to pass. Default is NO.
+// StrictRevocationCheck require positive certificate revocation check response for peer certificate validation to pass. Default is NO.
 func (x *NEVPNProtocolIKEv2) StrictRevocationCheck() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("strictRevocationCheck"))
 	return _r
 }
 
+// SetStrictRevocationCheck wraps the corresponding Objective-C method.
 func (x *NEVPNProtocolIKEv2) SetStrictRevocationCheck(strictRevocationCheck bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrictRevocationCheck:"), strictRevocationCheck)
 }
 
-// Sets a minimum TLS version to allow for EAP-TLS authentication. Default is NEVPNIKEv2TLSVersionDefault.
+// MinimumTLSVersion sets a minimum TLS version to allow for EAP-TLS authentication. Default is NEVPNIKEv2TLSVersionDefault.
 func (x *NEVPNProtocolIKEv2) MinimumTLSVersion() NEVPNIKEv2TLSVersion {
 	_r := objc.Send[NEVPNIKEv2TLSVersion](objref.IDOf(x), objc.RegisterName("minimumTLSVersion"))
 	return _r
 }
 
+// SetMinimumTLSVersion wraps the corresponding Objective-C method.
 func (x *NEVPNProtocolIKEv2) SetMinimumTLSVersion(minimumTLSVersion NEVPNIKEv2TLSVersion) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumTLSVersion:"), minimumTLSVersion)
 }
 
-// Sets a maximum TLS version to allow for EAP-TLS authentication. Default is NEVPNIKEv2TLSVersionDefault.
+// MaximumTLSVersion sets a maximum TLS version to allow for EAP-TLS authentication. Default is NEVPNIKEv2TLSVersionDefault.
 func (x *NEVPNProtocolIKEv2) MaximumTLSVersion() NEVPNIKEv2TLSVersion {
 	_r := objc.Send[NEVPNIKEv2TLSVersion](objref.IDOf(x), objc.RegisterName("maximumTLSVersion"))
 	return _r
 }
 
+// SetMaximumTLSVersion wraps the corresponding Objective-C method.
 func (x *NEVPNProtocolIKEv2) SetMaximumTLSVersion(maximumTLSVersion NEVPNIKEv2TLSVersion) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumTLSVersion:"), maximumTLSVersion)
 }
 
-// Maximum Transmission Unit (MTU) size in bytes to assign to the tunnel interface.
+// Mtu maximum Transmission Unit (MTU) size in bytes to assign to the tunnel interface.
 func (x *NEVPNProtocolIKEv2) Mtu() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("mtu"))
 	return _r
 }
 
+// SetMtu wraps the corresponding Objective-C method.
 func (x *NEVPNProtocolIKEv2) SetMtu(mtu int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMtu:"), mtu)
 }
 
-// Configuration for the use of a Post-quantum Pre-shared Key (PPK).
+// PpkConfiguration configuration for the use of a Post-quantum Pre-shared Key (PPK).
 func (x *NEVPNProtocolIKEv2) PpkConfiguration() *NEVPNIKEv2PPKConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ppkConfiguration"))
 	return NEVPNIKEv2PPKConfigurationFromID(_r)
 }
 
+// SetPpkConfiguration wraps the corresponding Objective-C method.
 func (x *NEVPNProtocolIKEv2) SetPpkConfiguration(ppkConfiguration *NEVPNIKEv2PPKConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPpkConfiguration:"), objref.IDOf(ppkConfiguration))
 }
@@ -576,3 +511,7 @@ type NEVPNProtocolIKEv2able interface {
 }
 
 var _ NEVPNProtocolIKEv2able = (*NEVPNProtocolIKEv2)(nil)
+
+var _ NEVPNProtocolIPSecProvider = (*NEVPNProtocolIKEv2)(nil)
+
+var _ NEVPNProtocolProvider = (*NEVPNProtocolIKEv2)(nil)

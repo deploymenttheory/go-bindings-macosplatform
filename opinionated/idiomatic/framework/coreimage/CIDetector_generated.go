@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An image processor that identifies notable features, such as faces and barcodes, in a still image or video.
-//
 // Detector is an idiomatic wrapper over the Objective-C class CIDetector.
+//
+// An image processor that identifies notable features, such as faces and barcodes, in a still image or video.
 type Detector struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DetectorFromID(id objc.ID) *Detector {
 	if id == 0 {
 		return nil
 	}
-	x := &Detector{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Detector{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func detectorAdopt(id objc.ID) *Detector {
 	if id == 0 {
 		return nil
 	}
-	x := &Detector{Handle: objref.Wrap(id)}
+	x := &Detector{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *Detector) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Detector) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDetector creates a new Detector.
 func NewDetector() *Detector {
 	_id := objc.Send[objc.ID](objc.ID(_class("CIDetector")), objc.RegisterName("new"))
 	return detectorAdopt(_id)
 }
 
-// Searches for features in an image.
+// FeaturesInImage searches for features in an image.
 func (x *Detector) FeaturesInImage(image *Image) []*Feature {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("featuresInImage:"), objref.IDOf(image))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Feature { return FeatureFromID(_id) })
 }
 
-// Searches for features in an image based on the specified image orientation.
+// FeaturesInImageOptions searches for features in an image based on the specified image orientation.
 func (x *Detector) FeaturesInImageOptions(image *Image, options obj.Object) []*Feature {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("featuresInImage:options:"), objref.IDOf(image), objref.IDOf(options))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Feature { return FeatureFromID(_id) })

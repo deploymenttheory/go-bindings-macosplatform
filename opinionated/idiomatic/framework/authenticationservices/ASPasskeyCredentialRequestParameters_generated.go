@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents information about a passkey credential request.
-//
 // PasskeyCredentialRequestParameters is an idiomatic wrapper over the Objective-C class ASPasskeyCredentialRequestParameters.
+//
+// A class that represents information about a passkey credential request.
 type PasskeyCredentialRequestParameters struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PasskeyCredentialRequestParametersFromID(id objc.ID) *PasskeyCredentialRequ
 	if id == 0 {
 		return nil
 	}
-	x := &PasskeyCredentialRequestParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PasskeyCredentialRequestParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func passkeyCredentialRequestParametersAdopt(id objc.ID) *PasskeyCredentialReque
 	if id == 0 {
 		return nil
 	}
-	x := &PasskeyCredentialRequestParameters{Handle: objref.Wrap(id)}
+	x := &PasskeyCredentialRequestParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *PasskeyCredentialRequestParameters) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PasskeyCredentialRequestParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPasskeyCredentialRequestParameters creates a new PasskeyCredentialRequestParameters.
 func NewPasskeyCredentialRequestParameters() *PasskeyCredentialRequestParameters {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASPasskeyCredentialRequestParameters")), objc.RegisterName("new"))
 	return passkeyCredentialRequestParametersAdopt(_id)
 }
 
-// The relying party identifier for this request.
+// RelyingPartyIdentifier the relying party identifier for this request.
 func (x *PasskeyCredentialRequestParameters) RelyingPartyIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relyingPartyIdentifier"))
 	if _r == 0 {
@@ -73,19 +81,19 @@ func (x *PasskeyCredentialRequestParameters) RelyingPartyIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Hash of client data for credential provider to sign as part of the operation.
+// ClientDataHash hash of client data for credential provider to sign as part of the operation.
 func (x *PasskeyCredentialRequestParameters) ClientDataHash() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientDataHash"))
 	return obj.Wrap(_r)
 }
 
-// A preference for whether the authenticator should attempt to verify that it is being used by its owner, such as through a PIN or biometrics.
+// UserVerificationPreference a preference for whether the authenticator should attempt to verify that it is being used by its owner, such as through a PIN or biometrics.
 func (x *PasskeyCredentialRequestParameters) UserVerificationPreference() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userVerificationPreference"))
 	return obj.Wrap(_r)
 }
 
-// A list of allowed credential IDs for this request. An empty list means all credentials are allowed.
+// AllowedCredentials a list of allowed credential IDs for this request. An empty list means all credentials are allowed.
 //
 // AllowedCredentials returns the collection as a Go slice.
 func (x *PasskeyCredentialRequestParameters) AllowedCredentials() []obj.Object {
@@ -93,7 +101,7 @@ func (x *PasskeyCredentialRequestParameters) AllowedCredentials() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Inputs for WebAuthn extensions used for passkey assertion.
+// ExtensionInput inputs for WebAuthn extensions used for passkey assertion.
 func (x *PasskeyCredentialRequestParameters) ExtensionInput() *PasskeyAssertionCredentialExtensionInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionInput"))
 	return PasskeyAssertionCredentialExtensionInputFromID(_r)

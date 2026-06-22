@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An operation for modifying one or more subscriptions.
-//
 // ModifySubscriptionsOperation is an idiomatic wrapper over the Objective-C class CKModifySubscriptionsOperation.
+//
+// It embeds [DatabaseOperation], promoting that type's methods.
+//
+// An operation for modifying one or more subscriptions.
 type ModifySubscriptionsOperation struct {
-	objref.Handle
+	DatabaseOperation
 }
 
 // ModifySubscriptionsOperationFromID adopts an existing Objective-C object as a ModifySubscriptionsOperation
@@ -27,7 +28,8 @@ func ModifySubscriptionsOperationFromID(id objc.ID) *ModifySubscriptionsOperatio
 	if id == 0 {
 		return nil
 	}
-	x := &ModifySubscriptionsOperation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ModifySubscriptionsOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,24 +42,10 @@ func modifySubscriptionsOperationAdopt(id objc.ID) *ModifySubscriptionsOperation
 	if id == 0 {
 		return nil
 	}
-	x := &ModifySubscriptionsOperation{Handle: objref.Wrap(id)}
+	x := &ModifySubscriptionsOperation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ModifySubscriptionsOperation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ModifySubscriptionsOperation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ModifySubscriptionsOperation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewModifySubscriptionsOperation creates a new ModifySubscriptionsOperation.
@@ -66,106 +54,82 @@ func NewModifySubscriptionsOperation() *ModifySubscriptionsOperation {
 	return modifySubscriptionsOperationAdopt(_id)
 }
 
-// Creates an operation for saving and deleting the specified subscriptions.
-//
-// NewModifySubscriptionsOperationWithSubscriptionsToSaveSubscriptionIDsToDelete creates a new ModifySubscriptionsOperation.
+// NewModifySubscriptionsOperationWithSubscriptionsToSaveSubscriptionIDsToDelete creates an operation for saving and deleting the specified subscriptions.
 func NewModifySubscriptionsOperationWithSubscriptionsToSaveSubscriptionIDsToDelete(subscriptionsToSave []*Subscription, subscriptionIDsToDelete []obj.Object) *ModifySubscriptionsOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKModifySubscriptionsOperation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSubscriptionsToSave:subscriptionIDsToDelete:"), purego.SliceToNSArray(subscriptionsToSave, func(_v *Subscription) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(subscriptionIDsToDelete, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return modifySubscriptionsOperationAdopt(_id)
 }
 
-// The subscriptions to save to the database.
-//
-// WithSubscriptionsToSave sets the collection and returns the receiver so calls can be chained.
+// WithSubscriptionsToSave the subscriptions to save to the database.
 func (x *ModifySubscriptionsOperation) WithSubscriptionsToSave(items ...SubscriptionProvider) *ModifySubscriptionsOperation {
 	_arr := purego.SliceToNSArray(items, func(_v SubscriptionProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionsToSave:"), _arr)
 	return x
 }
 
-// The IDs of the subscriptions that you want to delete.
-//
-// WithSubscriptionIDsToDelete sets the collection and returns the receiver so calls can be chained.
+// WithSubscriptionIDsToDelete the IDs of the subscriptions that you want to delete.
 func (x *ModifySubscriptionsOperation) WithSubscriptionIDsToDelete(items ...obj.Object) *ModifySubscriptionsOperation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionIDsToDelete:"), _arr)
 	return x
 }
 
-// The database that the operation uses.
-//
-// WithDatabase sets database and returns the receiver so calls can be chained.
+// WithDatabase the database that the operation uses.
 func (x *ModifySubscriptionsOperation) WithDatabase(database *Database) *ModifySubscriptionsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return x
 }
 
-// The operation’s configuration.
-//
-// WithConfiguration sets configuration and returns the receiver so calls can be chained.
+// WithConfiguration the operation’s configuration.
 func (x *ModifySubscriptionsOperation) WithConfiguration(configuration *OperationConfiguration) *ModifySubscriptionsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
-// The operation’s group.
-//
-// WithGroup sets group and returns the receiver so calls can be chained.
+// WithGroup the operation’s group.
 func (x *ModifySubscriptionsOperation) WithGroup(group *OperationGroup) *ModifySubscriptionsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation.
-//
-// WithLongLivedOperationWasPersistedBlock sets longLivedOperationWasPersistedBlock and returns the receiver so calls can be chained.
+// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
 func (x *ModifySubscriptionsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifySubscriptionsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
 	return x
 }
 
-// The operation's container.
-//
-// WithContainer sets container and returns the receiver so calls can be chained.
+// WithContainer the operation's container.
 func (x *ModifySubscriptionsOperation) WithContainer(container *Container) *ModifySubscriptionsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network.
-//
-// WithAllowsCellularAccess sets allowsCellularAccess and returns the receiver so calls can be chained.
+// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
 func (x *ModifySubscriptionsOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *ModifySubscriptionsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived.
-//
-// WithLongLived sets longLived and returns the receiver so calls can be chained.
+// WithLongLived a Boolean value that indicates whether the operation is long-lived.
 func (x *ModifySubscriptionsOperation) WithLongLived(longLived bool) *ModifySubscriptionsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The timeout interval when waiting for additional data.
-//
-// WithTimeoutIntervalForRequest sets timeoutIntervalForRequest and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
 func (x *ModifySubscriptionsOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifySubscriptionsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can use.
-//
-// WithTimeoutIntervalForResource sets timeoutIntervalForResource and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
 func (x *ModifySubscriptionsOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifySubscriptionsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
-// The subscriptions to save to the database. This property contains the subscriptions that you want to save. Its initial value is the array that you pass to the “CKModifySubscriptionsOperation/init(subscriptionsToSave:subscriptionIDsToDelete:)“ method. Modify this property as necessary before you execute the operation or submit it to a queue. After CloudKit saves the subscriptions, it begins generating push notifications according to their criteria.
+// SubscriptionsToSave the subscriptions to save to the database. This property contains the subscriptions that you want to save. Its initial value is the array that you pass to the “CKModifySubscriptionsOperation/init(subscriptionsToSave:subscriptionIDsToDelete:)“ method. Modify this property as necessary before you execute the operation or submit it to a queue. After CloudKit saves the subscriptions, it begins generating push notifications according to their criteria.
 //
 // SubscriptionsToSave returns the collection as a Go slice.
 func (x *ModifySubscriptionsOperation) SubscriptionsToSave() []*Subscription {
@@ -173,11 +137,12 @@ func (x *ModifySubscriptionsOperation) SubscriptionsToSave() []*Subscription {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Subscription { return SubscriptionFromID(_id) })
 }
 
+// SetSubscriptionsToSave wraps the corresponding Objective-C method.
 func (x *ModifySubscriptionsOperation) SetSubscriptionsToSave(subscriptionsToSave []*Subscription) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionsToSave:"), purego.SliceToNSArray(subscriptionsToSave, func(_v *Subscription) objc.ID { return objref.IDOf(_v) }))
 }
 
-// The IDs of the subscriptions that you want to delete. This property contains the IDs of the subscriptions that you want to delete. Its initial value is the array that you pass to the “CKModifySubscriptionsOperation/init(subscriptionsToSave:subscriptionIDsToDelete:)“ method. Modify this property as necessary before you execute the operation or submit it to a queue.
+// SubscriptionIDsToDelete the IDs of the subscriptions that you want to delete. This property contains the IDs of the subscriptions that you want to delete. Its initial value is the array that you pass to the “CKModifySubscriptionsOperation/init(subscriptionsToSave:subscriptionIDsToDelete:)“ method. Modify this property as necessary before you execute the operation or submit it to a queue.
 //
 // SubscriptionIDsToDelete returns the collection as a Go slice.
 func (x *ModifySubscriptionsOperation) SubscriptionIDsToDelete() []obj.Object {
@@ -185,12 +150,15 @@ func (x *ModifySubscriptionsOperation) SubscriptionIDsToDelete() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetSubscriptionIDsToDelete wraps the corresponding Objective-C method.
 func (x *ModifySubscriptionsOperation) SetSubscriptionIDsToDelete(subscriptionIDsToDelete []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionIDsToDelete:"), purego.SliceToNSArray(subscriptionIDsToDelete, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SetPerSubscriptionDeleteBlock wraps the corresponding Objective-C method.
+//
 // SetPerSubscriptionDeleteBlock blocks until the operation completes or ctx is cancelled.
-func (x *ModifySubscriptionsOperation) SetPerSubscriptionDeleteBlock(ctx context.Context) (string, error) {
+func (x *ModifySubscriptionsOperation) SetPerSubscriptionDeleteBlock(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -234,3 +202,7 @@ type ModifySubscriptionsOperationable interface {
 }
 
 var _ ModifySubscriptionsOperationable = (*ModifySubscriptionsOperation)(nil)
+
+var _ DatabaseOperationProvider = (*ModifySubscriptionsOperation)(nil)
+
+var _ OperationProvider = (*ModifySubscriptionsOperation)(nil)

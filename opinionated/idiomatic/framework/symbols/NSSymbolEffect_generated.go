@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract base class for effects that you can apply to a symbol-based image.
-//
 // SymbolEffect is an idiomatic wrapper over the Objective-C class NSSymbolEffect.
+//
+// SymbolEffect is an abstract base — you do not construct it directly. Construct one of [SymbolAppearEffect], [SymbolBounceEffect], [SymbolBreatheEffect], [SymbolDisappearEffect], [SymbolDrawOffEffect], [SymbolDrawOnEffect], [SymbolPulseEffect], [SymbolRotateEffect], [SymbolScaleEffect], [SymbolVariableColorEffect], [SymbolWiggleEffect] and pass it where a SymbolEffect is accepted.
+//
+// An abstract base class for effects that you can apply to a symbol-based image.
 type SymbolEffect struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func SymbolEffectFromID(id objc.ID) *SymbolEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolEffect{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SymbolEffect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func symbolEffectAdopt(id objc.ID) *SymbolEffect {
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolEffect{Handle: objref.Wrap(id)}
+	x := &SymbolEffect{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *SymbolEffect) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewSymbolEffect creates a new SymbolEffect.
-func NewSymbolEffect() *SymbolEffect {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSSymbolEffect")), objc.RegisterName("new"))
-	return symbolEffectAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SymbolEffect) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // SymbolEffectable is the interface implemented by [SymbolEffect], for mocking and DI.
@@ -70,3 +74,10 @@ type SymbolEffectable interface {
 }
 
 var _ SymbolEffectable = (*SymbolEffect)(nil)
+
+// isSymbolEffect marks SymbolEffect — and, by embedding promotion, its
+// subclasses — as a member of the SymbolEffect hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SymbolEffect) isSymbolEffect() {}
+
+var _ SymbolEffectProvider = (*SymbolEffect)(nil)

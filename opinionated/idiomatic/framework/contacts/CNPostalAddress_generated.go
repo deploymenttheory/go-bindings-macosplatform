@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable representation of the postal address for a contact.
-//
 // PostalAddress is an idiomatic wrapper over the Objective-C class CNPostalAddress.
+//
+// PostalAddress is an abstract base — you do not construct it directly. Construct one of [MutablePostalAddress] and pass it where a PostalAddress is accepted.
+//
+// An immutable representation of the postal address for a contact.
 type PostalAddress struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func PostalAddressFromID(id objc.ID) *PostalAddress {
 	if id == 0 {
 		return nil
 	}
-	x := &PostalAddress{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PostalAddress{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func postalAddressAdopt(id objc.ID) *PostalAddress {
 	if id == 0 {
 		return nil
 	}
-	x := &PostalAddress{Handle: objref.Wrap(id)}
+	x := &PostalAddress{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +62,13 @@ func (x *PostalAddress) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewPostalAddress creates a new PostalAddress.
-func NewPostalAddress() *PostalAddress {
-	_id := objc.Send[objc.ID](objc.ID(_class("CNPostalAddress")), objc.RegisterName("new"))
-	return postalAddressAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PostalAddress) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// multi-street address is delimited with carriage returns “\n”
+// Street multi-street address is delimited with carriage returns “\n”
 func (x *PostalAddress) Street() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("street"))
 	if _r == 0 {
@@ -73,6 +77,7 @@ func (x *PostalAddress) Street() string {
 	return purego.GoString(_r)
 }
 
+// SubLocality wraps the corresponding Objective-C method.
 func (x *PostalAddress) SubLocality() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subLocality"))
 	if _r == 0 {
@@ -81,6 +86,7 @@ func (x *PostalAddress) SubLocality() string {
 	return purego.GoString(_r)
 }
 
+// City wraps the corresponding Objective-C method.
 func (x *PostalAddress) City() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("city"))
 	if _r == 0 {
@@ -89,6 +95,7 @@ func (x *PostalAddress) City() string {
 	return purego.GoString(_r)
 }
 
+// SubAdministrativeArea wraps the corresponding Objective-C method.
 func (x *PostalAddress) SubAdministrativeArea() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subAdministrativeArea"))
 	if _r == 0 {
@@ -97,6 +104,7 @@ func (x *PostalAddress) SubAdministrativeArea() string {
 	return purego.GoString(_r)
 }
 
+// State wraps the corresponding Objective-C method.
 func (x *PostalAddress) State() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
 	if _r == 0 {
@@ -105,6 +113,7 @@ func (x *PostalAddress) State() string {
 	return purego.GoString(_r)
 }
 
+// PostalCode wraps the corresponding Objective-C method.
 func (x *PostalAddress) PostalCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postalCode"))
 	if _r == 0 {
@@ -113,6 +122,7 @@ func (x *PostalAddress) PostalCode() string {
 	return purego.GoString(_r)
 }
 
+// Country wraps the corresponding Objective-C method.
 func (x *PostalAddress) Country() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("country"))
 	if _r == 0 {
@@ -121,6 +131,7 @@ func (x *PostalAddress) Country() string {
 	return purego.GoString(_r)
 }
 
+// ISOCountryCode wraps the corresponding Objective-C method.
 func (x *PostalAddress) ISOCountryCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ISOCountryCode"))
 	if _r == 0 {
@@ -143,3 +154,10 @@ type PostalAddressable interface {
 }
 
 var _ PostalAddressable = (*PostalAddress)(nil)
+
+// isPostalAddress marks PostalAddress — and, by embedding promotion, its
+// subclasses — as a member of the PostalAddress hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *PostalAddress) isPostalAddress() {}
+
+var _ PostalAddressProvider = (*PostalAddress)(nil)

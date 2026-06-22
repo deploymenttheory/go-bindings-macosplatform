@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A password credential.
-//
 // PasswordCredential is an idiomatic wrapper over the Objective-C class ASPasswordCredential.
+//
+// A password credential.
 type PasswordCredential struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PasswordCredentialFromID(id objc.ID) *PasswordCredential {
 	if id == 0 {
 		return nil
 	}
-	x := &PasswordCredential{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PasswordCredential{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func passwordCredentialAdopt(id objc.ID) *PasswordCredential {
 	if id == 0 {
 		return nil
 	}
-	x := &PasswordCredential{Handle: objref.Wrap(id)}
+	x := &PasswordCredential{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,16 +60,20 @@ func (x *PasswordCredential) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a password credential.
-//
-// NewPasswordCredentialWithUserPassword creates a new PasswordCredential.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PasswordCredential) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPasswordCredentialWithUserPassword initializes a password credential.
 func NewPasswordCredentialWithUserPassword(user string, password string) *PasswordCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasswordCredential")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUser:password:"), purego.NSString(user), purego.NSString(password))
 	return passwordCredentialAdopt(_id)
 }
 
-// The user name of this credential.
+// User the user name of this credential.
 func (x *PasswordCredential) User() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("user"))
 	if _r == 0 {
@@ -76,7 +82,7 @@ func (x *PasswordCredential) User() string {
 	return purego.GoString(_r)
 }
 
-// The password of this credential.
+// Password the password of this credential.
 func (x *PasswordCredential) Password() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("password"))
 	if _r == 0 {

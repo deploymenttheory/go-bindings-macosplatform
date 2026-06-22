@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the audio attributes for an asset variant.
-//
 // AssetVariantAudioAttributes is an idiomatic wrapper over the Objective-C class AVAssetVariantAudioAttributes.
+//
+// An object that defines the audio attributes for an asset variant.
 type AssetVariantAudioAttributes struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetVariantAudioAttributesFromID(id objc.ID) *AssetVariantAudioAttributes 
 	if id == 0 {
 		return nil
 	}
-	x := &AssetVariantAudioAttributes{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetVariantAudioAttributes{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetVariantAudioAttributesAdopt(id objc.ID) *AssetVariantAudioAttributes {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetVariantAudioAttributes{Handle: objref.Wrap(id)}
+	x := &AssetVariantAudioAttributes{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *AssetVariantAudioAttributes) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetVariantAudioAttributes) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetVariantAudioAttributes creates a new AssetVariantAudioAttributes.
 func NewAssetVariantAudioAttributes() *AssetVariantAudioAttributes {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetVariantAudioAttributes")), objc.RegisterName("new"))
 	return assetVariantAudioAttributesAdopt(_id)
 }
 
-// Provides attributes for a specific audio media selection option. If no rendition specific attributes are declared, it will be nil. - Parameter mediaSelectionOption: The option to return rendition specific information for.
+// RenditionSpecificAttributesForMediaOption provides attributes for a specific audio media selection option. If no rendition specific attributes are declared, it will be nil. - Parameter mediaSelectionOption: The option to return rendition specific information for.
 func (x *AssetVariantAudioAttributes) RenditionSpecificAttributesForMediaOption(mediaSelectionOption *MediaSelectionOption) *AssetVariantAudioRenditionSpecificAttributes {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("renditionSpecificAttributesForMediaOption:"), objref.IDOf(mediaSelectionOption))
 	return AssetVariantAudioRenditionSpecificAttributesFromID(_r)
 }
 
-// Provides an array of audio formats present in the variant's renditions if any are declared. Each value in the array is a NSNumber representation of AudioFormatID.
+// FormatIDs provides an array of audio formats present in the variant's renditions if any are declared. Each value in the array is a NSNumber representation of AudioFormatID.
 //
 // FormatIDs returns the collection as a Go slice.
 func (x *AssetVariantAudioAttributes) FormatIDs() []obj.Object {

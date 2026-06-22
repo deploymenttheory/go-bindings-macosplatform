@@ -23,7 +23,8 @@ func MTRChannelClusterProgramCategoryStructFromID(id objc.ID) *MTRChannelCluster
 	if id == 0 {
 		return nil
 	}
-	x := &MTRChannelClusterProgramCategoryStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRChannelClusterProgramCategoryStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRChannelClusterProgramCategoryStructAdopt(id objc.ID) *MTRChannelClusterP
 	if id == 0 {
 		return nil
 	}
-	x := &MTRChannelClusterProgramCategoryStruct{Handle: objref.Wrap(id)}
+	x := &MTRChannelClusterProgramCategoryStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,24 +58,31 @@ func (x *MTRChannelClusterProgramCategoryStruct) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRChannelClusterProgramCategoryStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRChannelClusterProgramCategoryStruct creates a new MTRChannelClusterProgramCategoryStruct.
 func NewMTRChannelClusterProgramCategoryStruct() *MTRChannelClusterProgramCategoryStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRChannelClusterProgramCategoryStruct")), objc.RegisterName("new"))
 	return mTRChannelClusterProgramCategoryStructAdopt(_id)
 }
 
-// WithCategory sets category and returns the receiver so calls can be chained.
+// WithCategory sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterProgramCategoryStruct) WithCategory(category string) *MTRChannelClusterProgramCategoryStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategory:"), purego.NSString(category))
 	return x
 }
 
-// WithSubCategory sets subCategory and returns the receiver so calls can be chained.
+// WithSubCategory sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterProgramCategoryStruct) WithSubCategory(subCategory string) *MTRChannelClusterProgramCategoryStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubCategory:"), purego.NSString(subCategory))
 	return x
 }
 
+// Category wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterProgramCategoryStruct) Category() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("category"))
 	if _r == 0 {
@@ -82,10 +91,12 @@ func (x *MTRChannelClusterProgramCategoryStruct) Category() string {
 	return purego.GoString(_r)
 }
 
+// SetCategory wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterProgramCategoryStruct) SetCategory(category string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategory:"), purego.NSString(category))
 }
 
+// SubCategory wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterProgramCategoryStruct) SubCategory() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subCategory"))
 	if _r == 0 {
@@ -94,6 +105,7 @@ func (x *MTRChannelClusterProgramCategoryStruct) SubCategory() string {
 	return purego.GoString(_r)
 }
 
+// SetSubCategory wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterProgramCategoryStruct) SetSubCategory(subCategory string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubCategory:"), purego.NSString(subCategory))
 }

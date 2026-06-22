@@ -6,17 +6,20 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An object that renders an image from bitmap data.
-//
 // BitmapImageRep is an idiomatic wrapper over the Objective-C class NSBitmapImageRep.
+//
+// It embeds [ImageRep], promoting that type's methods.
+//
+// An object that renders an image from bitmap data.
 type BitmapImageRep struct {
-	objref.Handle
+	ImageRep
 }
 
 // BitmapImageRepFromID adopts an existing Objective-C object as a BitmapImageRep
@@ -25,7 +28,8 @@ func BitmapImageRepFromID(id objc.ID) *BitmapImageRep {
 	if id == 0 {
 		return nil
 	}
-	x := &BitmapImageRep{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BitmapImageRep{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func bitmapImageRepAdopt(id objc.ID) *BitmapImageRep {
 	if id == 0 {
 		return nil
 	}
-	x := &BitmapImageRep{Handle: objref.Wrap(id)}
+	x := &BitmapImageRep{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *BitmapImageRep) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BitmapImageRep) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BitmapImageRep) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewBitmapImageRep creates a new BitmapImageRep.
@@ -64,202 +54,234 @@ func NewBitmapImageRep() *BitmapImageRep {
 	return bitmapImageRepAdopt(_id)
 }
 
-// Returns a bitmap image representation from a Core Graphics image object.
-//
-// NewBitmapImageRepWithCGImage creates a new BitmapImageRep.
+// NewBitmapImageRepWithFocusedViewRect initializes a newly allocated bitmap image representation with bitmap data from a rendered image.
+func NewBitmapImageRepWithFocusedViewRect(rect corefoundation.CGRect) *BitmapImageRep {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBitmapImageRep")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFocusedViewRect:"), rect)
+	return bitmapImageRepAdopt(_id)
+}
+
+// NewBitmapImageRepWithCGImage returns a bitmap image representation from a Core Graphics image object.
 func NewBitmapImageRepWithCGImage(cgImage obj.Object) *BitmapImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBitmapImageRep")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImage:"), objref.IDOf(cgImage))
 	return bitmapImageRepAdopt(_id)
 }
 
-// Returns a bitmap image representation from a Core Image object.
-//
-// NewBitmapImageRepWithCIImage creates a new BitmapImageRep.
+// NewBitmapImageRepWithCIImage returns a bitmap image representation from a Core Image object.
 func NewBitmapImageRepWithCIImage(ciImage obj.Object) *BitmapImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBitmapImageRep")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCIImage:"), objref.IDOf(ciImage))
 	return bitmapImageRepAdopt(_id)
 }
 
-// Initializes a newly allocated bitmap image representation from the specified data.
-//
-// NewBitmapImageRepWithData creates a new BitmapImageRep.
+// NewBitmapImageRepWithData initializes a newly allocated bitmap image representation from the specified data.
 func NewBitmapImageRepWithData(data obj.Object) *BitmapImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBitmapImageRep")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
 	return bitmapImageRepAdopt(_id)
 }
 
-// A Boolean value that indicates whether the image data has an alpha channel.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithSize the size of the image representation, measured in points in the user coordinate space.
+func (x *BitmapImageRep) WithSize(size corefoundation.CGSize) *BitmapImageRep {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
+	return x
+}
+
+// WithAlpha a Boolean value that indicates whether the image data has an alpha channel.
 func (x *BitmapImageRep) WithAlpha(alpha bool) *BitmapImageRep {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// A Boolean value that indicates whether the image is opaque.
-//
-// WithOpaque sets opaque and returns the receiver so calls can be chained.
+// WithOpaque a Boolean value that indicates whether the image is opaque.
 func (x *BitmapImageRep) WithOpaque(opaque bool) *BitmapImageRep {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
 	return x
 }
 
-// The name of the color space used by the image data.
-//
-// WithColorSpaceName sets colorSpaceName and returns the receiver so calls can be chained.
+// WithColorSpaceName the name of the color space used by the image data.
 func (x *BitmapImageRep) WithColorSpaceName(colorSpaceName obj.Object) *BitmapImageRep {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
 	return x
 }
 
-// The number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
-//
-// WithBitsPerSample sets bitsPerSample and returns the receiver so calls can be chained.
+// WithBitsPerSample the number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
 func (x *BitmapImageRep) WithBitsPerSample(bitsPerSample int) *BitmapImageRep {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitsPerSample:"), bitsPerSample)
 	return x
 }
 
-// The width of the image, measured in pixels.
-//
-// WithPixelsWide sets pixelsWide and returns the receiver so calls can be chained.
+// WithPixelsWide the width of the image, measured in pixels.
 func (x *BitmapImageRep) WithPixelsWide(pixelsWide int) *BitmapImageRep {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsWide:"), pixelsWide)
 	return x
 }
 
-// The height of the image, measured in pixels.
-//
-// WithPixelsHigh sets pixelsHigh and returns the receiver so calls can be chained.
+// WithPixelsHigh the height of the image, measured in pixels.
 func (x *BitmapImageRep) WithPixelsHigh(pixelsHigh int) *BitmapImageRep {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsHigh:"), pixelsHigh)
 	return x
 }
 
-// The layout direction for the image.
-//
-// WithLayoutDirection sets layoutDirection and returns the receiver so calls can be chained.
+// WithLayoutDirection the layout direction for the image.
 func (x *BitmapImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection) *BitmapImageRep {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutDirection:"), layoutDirection)
 	return x
 }
 
-// Sets the bitmap image representation’s compression type and compression factor.
+// GetBitmapDataPlanes returns by indirection bitmap data of the bitmap image representation separated into planes.
+func (x *BitmapImageRep) GetBitmapDataPlanes() (data uint8) {
+	var _out0 uint8
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getBitmapDataPlanes:"), unsafe.Pointer(&_out0))
+	return _out0
+}
+
+// GetCompressionFactor returns by indirection the bitmap image representation’s compression type and compression factor.
+func (x *BitmapImageRep) GetCompressionFactor() (compression TIFFCompression, factor float32) {
+	var _out0 TIFFCompression
+	var _out1 float32
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getCompression:factor:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _out0, _out1
+}
+
+// SetCompressionFactor sets the bitmap image representation’s compression type and compression factor.
 func (x *BitmapImageRep) SetCompressionFactor(compression TIFFCompression, factor float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompression:factor:"), compression, factor)
 }
 
-// Returns a TIFF representation of the image using the specified compression.
+// TIFFRepresentationUsingCompressionFactor returns a TIFF representation of the image using the specified compression.
 func (x *BitmapImageRep) TIFFRepresentationUsingCompressionFactor(comp TIFFCompression, factor float32) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("TIFFRepresentationUsingCompression:factor:"), comp, factor)
 	return obj.Wrap(_r)
 }
 
-// Tests whether the bitmap image representation can be compressed by the specified compression scheme.
+// CanBeCompressedUsing tests whether the bitmap image representation can be compressed by the specified compression scheme.
 func (x *BitmapImageRep) CanBeCompressedUsing(compression TIFFCompression) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canBeCompressedUsing:"), compression)
 	return _r
 }
 
-// Colorizes a grayscale image.
+// ColorizeByMappingGrayToColorBlackMappingWhiteMapping colorizes a grayscale image.
 func (x *BitmapImageRep) ColorizeByMappingGrayToColorBlackMappingWhiteMapping(midPoint float64, midPointColor *Color, shadowColor *Color, lightColor *Color) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorizeByMappingGray:toColor:blackMapping:whiteMapping:"), midPoint, objref.IDOf(midPointColor), objref.IDOf(shadowColor), objref.IDOf(lightColor))
 }
 
-// Loads the current image data into an incrementally-loaded image representation and returns the current status of the image.
+// IncrementalLoadFromDataComplete loads the current image data into an incrementally-loaded image representation and returns the current status of the image.
 func (x *BitmapImageRep) IncrementalLoadFromDataComplete(data obj.Object, complete bool) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("incrementalLoadFromData:complete:"), objref.IDOf(data), complete)
 	return _r
 }
 
-// Changes the color of the pixel at the specified coordinates.
+// SetColorAtXY changes the color of the pixel at the specified coordinates.
 func (x *BitmapImageRep) SetColorAtXY(color *Color, x_ int, y int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:atX:y:"), objref.IDOf(color), x_, y)
 }
 
-// Returns the color of the pixel at the specified coordinates.
+// ColorAtXY returns the color of the pixel at the specified coordinates.
 func (x *BitmapImageRep) ColorAtXY(x_ int, y int) *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorAtX:y:"), x_, y)
 	return ColorFromID(_r)
 }
 
-// Converts the bitmap image representation to the specified color space.
+// GetPixelAtXY returns by indirection the pixel data for the specified location in the bitmap image representation.
+func (x *BitmapImageRep) GetPixelAtXY(x_ int, y int) (p int) {
+	var _out0 int
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getPixel:atX:y:"), unsafe.Pointer(&_out0), x_, y)
+	return _out0
+}
+
+// SetPixelAtXY sets the bitmap image representation’s pixel at the specified coordinates to the specified raw pixel values.
+func (x *BitmapImageRep) SetPixelAtXY(x_ int, y int) (p int) {
+	var _out0 int
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixel:atX:y:"), unsafe.Pointer(&_out0), x_, y)
+	return _out0
+}
+
+// BitmapImageRepByConvertingToColorSpaceRenderingIntent converts the bitmap image representation to the specified color space.
 func (x *BitmapImageRep) BitmapImageRepByConvertingToColorSpaceRenderingIntent(targetSpace *ColorSpace, renderingIntent ColorRenderingIntent) *BitmapImageRep {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bitmapImageRepByConvertingToColorSpace:renderingIntent:"), objref.IDOf(targetSpace), renderingIntent)
 	return BitmapImageRepFromID(_r)
 }
 
-// Changes the color space tag of the bitmap image representation.
+// BitmapImageRepByRetaggingWithColorSpace changes the color space tag of the bitmap image representation.
 func (x *BitmapImageRep) BitmapImageRepByRetaggingWithColorSpace(newSpace *ColorSpace) *BitmapImageRep {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bitmapImageRepByRetaggingWithColorSpace:"), objref.IDOf(newSpace))
 	return BitmapImageRepFromID(_r)
 }
 
+// IsPlanar wraps the corresponding Objective-C method.
 func (x *BitmapImageRep) IsPlanar() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPlanar"))
 	return _r
 }
 
+// SamplesPerPixel wraps the corresponding Objective-C method.
 func (x *BitmapImageRep) SamplesPerPixel() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("samplesPerPixel"))
 	return _r
 }
 
+// BitsPerPixel wraps the corresponding Objective-C method.
 func (x *BitmapImageRep) BitsPerPixel() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bitsPerPixel"))
 	return _r
 }
 
+// BytesPerRow wraps the corresponding Objective-C method.
 func (x *BitmapImageRep) BytesPerRow() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bytesPerRow"))
 	return _r
 }
 
+// BytesPerPlane wraps the corresponding Objective-C method.
 func (x *BitmapImageRep) BytesPerPlane() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bytesPerPlane"))
 	return _r
 }
 
+// NumberOfPlanes wraps the corresponding Objective-C method.
 func (x *BitmapImageRep) NumberOfPlanes() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfPlanes"))
 	return _r
 }
 
+// BitmapFormat wraps the corresponding Objective-C method.
 func (x *BitmapImageRep) BitmapFormat() BitmapFormat {
 	_r := objc.Send[BitmapFormat](objref.IDOf(x), objc.RegisterName("bitmapFormat"))
 	return _r
 }
 
+// TIFFRepresentation wraps the corresponding Objective-C method.
 func (x *BitmapImageRep) TIFFRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("TIFFRepresentation"))
 	return obj.Wrap(_r)
 }
 
+// CGImage wraps the corresponding Objective-C method.
 func (x *BitmapImageRep) CGImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CGImage"))
 	return obj.Wrap(_r)
 }
 
+// ColorSpace wraps the corresponding Objective-C method.
 func (x *BitmapImageRep) ColorSpace() *ColorSpace {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorSpace"))
 	return ColorSpaceFromID(_r)
 }
 
-// Formats the bitmap representation’s image data using the specified storage type and properties and returns it in a data object.
+// RepresentationUsingTypeProperties formats the bitmap representation’s image data using the specified storage type and properties and returns it in a data object.
 func (x *BitmapImageRep) RepresentationUsingTypeProperties(storageType BitmapImageFileType, properties obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("representationUsingType:properties:"), storageType, objref.IDOf(properties))
 	return obj.Wrap(_r)
 }
 
-// Sets the specified property of the bitmap image representation to the specified value.
+// SetPropertyWithValue sets the specified property of the bitmap image representation to the specified value.
 func (x *BitmapImageRep) SetPropertyWithValue(property obj.Object, value obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperty:withValue:"), objref.IDOf(property), objref.IDOf(value))
 }
 
-// Returns the value for the specified property.
+// ValueForProperty returns the value for the specified property.
 func (x *BitmapImageRep) ValueForProperty(property obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForProperty:"), objref.IDOf(property))
 	return obj.Wrap(_r)
@@ -268,6 +290,7 @@ func (x *BitmapImageRep) ValueForProperty(property obj.Object) obj.Object {
 // BitmapImageRepable is the interface implemented by [BitmapImageRep], for mocking and DI.
 type BitmapImageRepable interface {
 	obj.Object
+	WithSize(size corefoundation.CGSize) *BitmapImageRep
 	WithAlpha(alpha bool) *BitmapImageRep
 	WithOpaque(opaque bool) *BitmapImageRep
 	WithColorSpaceName(colorSpaceName obj.Object) *BitmapImageRep
@@ -275,6 +298,8 @@ type BitmapImageRepable interface {
 	WithPixelsWide(pixelsWide int) *BitmapImageRep
 	WithPixelsHigh(pixelsHigh int) *BitmapImageRep
 	WithLayoutDirection(layoutDirection ImageLayoutDirection) *BitmapImageRep
+	GetBitmapDataPlanes() (data uint8)
+	GetCompressionFactor() (compression TIFFCompression, factor float32)
 	SetCompressionFactor(compression TIFFCompression, factor float32)
 	TIFFRepresentationUsingCompressionFactor(comp TIFFCompression, factor float32) obj.Object
 	CanBeCompressedUsing(compression TIFFCompression) bool
@@ -282,6 +307,8 @@ type BitmapImageRepable interface {
 	IncrementalLoadFromDataComplete(data obj.Object, complete bool) int
 	SetColorAtXY(color *Color, x_ int, y int)
 	ColorAtXY(x_ int, y int) *Color
+	GetPixelAtXY(x_ int, y int) (p int)
+	SetPixelAtXY(x_ int, y int) (p int)
 	BitmapImageRepByConvertingToColorSpaceRenderingIntent(targetSpace *ColorSpace, renderingIntent ColorRenderingIntent) *BitmapImageRep
 	BitmapImageRepByRetaggingWithColorSpace(newSpace *ColorSpace) *BitmapImageRep
 	IsPlanar() bool
@@ -300,3 +327,5 @@ type BitmapImageRepable interface {
 }
 
 var _ BitmapImageRepable = (*BitmapImageRep)(nil)
+
+var _ ImageRepProvider = (*BitmapImageRep)(nil)

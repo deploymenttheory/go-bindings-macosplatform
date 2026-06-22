@@ -13,6 +13,8 @@ import (
 )
 
 // MTRContentLauncherClusterDimensionStruct is an idiomatic wrapper over the Objective-C class MTRContentLauncherClusterDimensionStruct.
+//
+// MTRContentLauncherClusterDimensionStruct is an abstract base — you do not construct it directly. Construct one of [MTRContentLauncherClusterDimension] and pass it where a MTRContentLauncherClusterDimensionStruct is accepted.
 type MTRContentLauncherClusterDimensionStruct struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRContentLauncherClusterDimensionStructFromID(id objc.ID) *MTRContentLaunc
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterDimensionStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRContentLauncherClusterDimensionStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRContentLauncherClusterDimensionStructAdopt(id objc.ID) *MTRContentLaunch
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterDimensionStruct{Handle: objref.Wrap(id)}
+	x := &MTRContentLauncherClusterDimensionStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,53 +60,59 @@ func (x *MTRContentLauncherClusterDimensionStruct) IsKind(className string) bool
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRContentLauncherClusterDimensionStruct creates a new MTRContentLauncherClusterDimensionStruct.
-func NewMTRContentLauncherClusterDimensionStruct() *MTRContentLauncherClusterDimensionStruct {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRContentLauncherClusterDimensionStruct")), objc.RegisterName("new"))
-	return mTRContentLauncherClusterDimensionStructAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRContentLauncherClusterDimensionStruct) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithWidth sets width and returns the receiver so calls can be chained.
+// WithWidth sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterDimensionStruct) WithWidth(width obj.Object) *MTRContentLauncherClusterDimensionStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), objref.IDOf(width))
 	return x
 }
 
-// WithHeight sets height and returns the receiver so calls can be chained.
+// WithHeight sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterDimensionStruct) WithHeight(height obj.Object) *MTRContentLauncherClusterDimensionStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), objref.IDOf(height))
 	return x
 }
 
-// WithMetric sets metric and returns the receiver so calls can be chained.
+// WithMetric sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterDimensionStruct) WithMetric(metric obj.Object) *MTRContentLauncherClusterDimensionStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetric:"), objref.IDOf(metric))
 	return x
 }
 
+// Width wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterDimensionStruct) Width() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("width"))
 	return obj.Wrap(_r)
 }
 
+// SetWidth wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterDimensionStruct) SetWidth(width obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), objref.IDOf(width))
 }
 
+// Height wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterDimensionStruct) Height() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("height"))
 	return obj.Wrap(_r)
 }
 
+// SetHeight wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterDimensionStruct) SetHeight(height obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), objref.IDOf(height))
 }
 
+// Metric wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterDimensionStruct) Metric() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metric"))
 	return obj.Wrap(_r)
 }
 
+// SetMetric wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterDimensionStruct) SetMetric(metric obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetric:"), objref.IDOf(metric))
 }
@@ -122,3 +132,10 @@ type MTRContentLauncherClusterDimensionStructable interface {
 }
 
 var _ MTRContentLauncherClusterDimensionStructable = (*MTRContentLauncherClusterDimensionStruct)(nil)
+
+// isMTRContentLauncherClusterDimensionStruct marks MTRContentLauncherClusterDimensionStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRContentLauncherClusterDimensionStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRContentLauncherClusterDimensionStruct) isMTRContentLauncherClusterDimensionStruct() {}
+
+var _ MTRContentLauncherClusterDimensionStructProvider = (*MTRContentLauncherClusterDimensionStruct)(nil)

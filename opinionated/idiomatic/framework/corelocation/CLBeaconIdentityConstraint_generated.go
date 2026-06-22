@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Identity characteristics that can match one or more beacons.
-//
 // BeaconIdentityConstraint is an idiomatic wrapper over the Objective-C class CLBeaconIdentityConstraint.
+//
+// It embeds [BeaconIdentityCondition], promoting that type's methods.
+//
+// Identity characteristics that can match one or more beacons.
 type BeaconIdentityConstraint struct {
-	objref.Handle
+	BeaconIdentityCondition
 }
 
 // BeaconIdentityConstraintFromID adopts an existing Objective-C object as a BeaconIdentityConstraint
@@ -25,7 +26,8 @@ func BeaconIdentityConstraintFromID(id objc.ID) *BeaconIdentityConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &BeaconIdentityConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BeaconIdentityConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func beaconIdentityConstraintAdopt(id objc.ID) *BeaconIdentityConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &BeaconIdentityConstraint{Handle: objref.Wrap(id)}
+	x := &BeaconIdentityConstraint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *BeaconIdentityConstraint) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BeaconIdentityConstraint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BeaconIdentityConstraint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewBeaconIdentityConstraint creates a new BeaconIdentityConstraint.
@@ -70,3 +58,7 @@ type BeaconIdentityConstraintable interface {
 }
 
 var _ BeaconIdentityConstraintable = (*BeaconIdentityConstraint)(nil)
+
+var _ BeaconIdentityConditionProvider = (*BeaconIdentityConstraint)(nil)
+
+var _ ConditionProvider = (*BeaconIdentityConstraint)(nil)

@@ -6,15 +6,16 @@ package scenekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The global simulation of collisions, gravity, joints, and other physics effects in a scene.
-//
 // PhysicsWorld is an idiomatic wrapper over the Objective-C class SCNPhysicsWorld.
+//
+// The global simulation of collisions, gravity, joints, and other physics effects in a scene.
 type PhysicsWorld struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func PhysicsWorldFromID(id objc.ID) *PhysicsWorld {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsWorld{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PhysicsWorld{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func physicsWorldAdopt(id objc.ID) *PhysicsWorld {
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicsWorld{Handle: objref.Wrap(id)}
+	x := &PhysicsWorld{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,78 +61,92 @@ func (x *PhysicsWorld) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PhysicsWorld) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPhysicsWorld creates a new PhysicsWorld.
 func NewPhysicsWorld() *PhysicsWorld {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsWorld")), objc.RegisterName("new"))
 	return physicsWorldAdopt(_id)
 }
 
-// The rate at which the simulation executes.
-//
-// WithSpeed sets speed and returns the receiver so calls can be chained.
+// WithSpeed the rate at which the simulation executes.
 func (x *PhysicsWorld) WithSpeed(speed float64) *PhysicsWorld {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
-// The time interval between updates to the physics simulation.
-//
-// WithTimeStep sets timeStep and returns the receiver so calls can be chained.
+// WithTimeStep the time interval between updates to the physics simulation.
 func (x *PhysicsWorld) WithTimeStep(timeStep float64) *PhysicsWorld {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeStep:"), timeStep)
 	return x
 }
 
-// Adds a behavior to the physics world.
+// AddBehavior adds a behavior to the physics world.
 func (x *PhysicsWorld) AddBehavior(behavior *PhysicsBehavior) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addBehavior:"), objref.IDOf(behavior))
 }
 
-// Removes a behavior from the physics world.
+// RemoveBehavior removes a behavior from the physics world.
 func (x *PhysicsWorld) RemoveBehavior(behavior *PhysicsBehavior) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeBehavior:"), objref.IDOf(behavior))
 }
 
-// Removes all behaviors affecting bodies in the physics world.
+// RemoveAllBehaviors removes all behaviors affecting bodies in the physics world.
 func (x *PhysicsWorld) RemoveAllBehaviors() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllBehaviors"))
 }
 
-// Checks for contacts between two physics bodies.
+// ContactTestBetweenBodyAndBodyOptions checks for contacts between two physics bodies.
 func (x *PhysicsWorld) ContactTestBetweenBodyAndBodyOptions(bodyA *PhysicsBody, bodyB *PhysicsBody, options obj.Object) []*PhysicsContact {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contactTestBetweenBody:andBody:options:"), objref.IDOf(bodyA), objref.IDOf(bodyB), objref.IDOf(options))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *PhysicsContact { return PhysicsContactFromID(_id) })
 }
 
-// Checks for contacts between one physics body and any other bodies in the physics world.
+// ContactTestWithBodyOptions checks for contacts between one physics body and any other bodies in the physics world.
 func (x *PhysicsWorld) ContactTestWithBodyOptions(body *PhysicsBody, options obj.Object) []*PhysicsContact {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contactTestWithBody:options:"), objref.IDOf(body), objref.IDOf(options))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *PhysicsContact { return PhysicsContactFromID(_id) })
 }
 
-// Forces the physics engine to reevaluate possible collisions between physics bodies.
+// ConvexSweepTestWithShapeFromTransformToTransformOptions searches for physics bodies in the space formed by moving a convex shape through the physics world.
+func (x *PhysicsWorld) ConvexSweepTestWithShapeFromTransformToTransformOptions(shape *PhysicsShape, from quartzcore.CATransform3D, to quartzcore.CATransform3D, options obj.Object) []*PhysicsContact {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convexSweepTestWithShape:fromTransform:toTransform:options:"), objref.IDOf(shape), from, to, objref.IDOf(options))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *PhysicsContact { return PhysicsContactFromID(_id) })
+}
+
+// UpdateCollisionPairs forces the physics engine to reevaluate possible collisions between physics bodies.
 func (x *PhysicsWorld) UpdateCollisionPairs() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateCollisionPairs"))
 }
 
+// Speed wraps the corresponding Objective-C method.
 func (x *PhysicsWorld) Speed() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speed"))
 	return _r
 }
 
+// SetSpeed wraps the corresponding Objective-C method.
 func (x *PhysicsWorld) SetSpeed(speed float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 }
 
+// TimeStep wraps the corresponding Objective-C method.
 func (x *PhysicsWorld) TimeStep() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeStep"))
 	return _r
 }
 
+// SetTimeStep wraps the corresponding Objective-C method.
 func (x *PhysicsWorld) SetTimeStep(timeStep float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeStep:"), timeStep)
 }
 
+// AllBehaviors wraps the corresponding Objective-C method.
+//
 // AllBehaviors returns the collection as a Go slice.
 func (x *PhysicsWorld) AllBehaviors() []*PhysicsBehavior {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allBehaviors"))
@@ -146,6 +163,7 @@ type PhysicsWorldable interface {
 	RemoveAllBehaviors()
 	ContactTestBetweenBodyAndBodyOptions(bodyA *PhysicsBody, bodyB *PhysicsBody, options obj.Object) []*PhysicsContact
 	ContactTestWithBodyOptions(body *PhysicsBody, options obj.Object) []*PhysicsContact
+	ConvexSweepTestWithShapeFromTransformToTransformOptions(shape *PhysicsShape, from quartzcore.CATransform3D, to quartzcore.CATransform3D, options obj.Object) []*PhysicsContact
 	UpdateCollisionPairs()
 	Speed() float64
 	SetSpeed(speed float64)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection similar to an array, but with a broader range of available memory semantics.
-//
 // PointerArray is an idiomatic wrapper over the Objective-C class NSPointerArray.
+//
+// A collection similar to an array, but with a broader range of available memory semantics.
 type PointerArray struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PointerArrayFromID(id objc.ID) *PointerArray {
 	if id == 0 {
 		return nil
 	}
-	x := &PointerArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PointerArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func pointerArrayAdopt(id objc.ID) *PointerArray {
 	if id == 0 {
 		return nil
 	}
-	x := &PointerArray{Handle: objref.Wrap(id)}
+	x := &PointerArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,62 +60,66 @@ func (x *PointerArray) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes the receiver to use the given options.
-//
-// NewPointerArrayWithOptions creates a new PointerArray.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PointerArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPointerArrayWithOptions initializes the receiver to use the given options.
 func NewPointerArrayWithOptions(options PointerFunctionsOptions) *PointerArray {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPointerArray")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), options)
 	return pointerArrayAdopt(_id)
 }
 
-// Initializes the receiver to use the given functions.
-//
-// NewPointerArrayWithPointerFunctions creates a new PointerArray.
+// NewPointerArrayWithPointerFunctions initializes the receiver to use the given functions.
 func NewPointerArrayWithPointerFunctions(functions *PointerFunctions) *PointerArray {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPointerArray")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPointerFunctions:"), objref.IDOf(functions))
 	return pointerArrayAdopt(_id)
 }
 
-// The number of elements in the receiver.
-//
-// WithCount sets count and returns the receiver so calls can be chained.
+// WithCount the number of elements in the receiver.
 func (x *PointerArray) WithCount(count int) *PointerArray {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCount:"), count)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *PointerArray) WithScriptingProperties(scriptingProperties obj.Object) *PointerArray {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Removes the pointer at a given index.
+// RemovePointerAtIndex removes the pointer at a given index.
 func (x *PointerArray) RemovePointerAtIndex(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removePointerAtIndex:"), index)
 }
 
-// Removes NULL values from the receiver.
+// Compact removes NULL values from the receiver.
 func (x *PointerArray) Compact() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compact"))
 }
 
+// PointerFunctions wraps the corresponding Objective-C method.
 func (x *PointerArray) PointerFunctions() *PointerFunctions {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointerFunctions"))
 	return PointerFunctionsFromID(_r)
 }
 
+// Count wraps the corresponding Objective-C method.
 func (x *PointerArray) Count() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
 	return _r
 }
 
+// SetCount wraps the corresponding Objective-C method.
 func (x *PointerArray) SetCount(count int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCount:"), count)
 }
 
+// AllObjects wraps the corresponding Objective-C method.
 func (x *PointerArray) AllObjects() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allObjects"))
 	return obj.Wrap(_r)

@@ -5,16 +5,20 @@
 package appkit
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An interface to the Cocoa spell-checking service.
-//
 // SpellChecker is an idiomatic wrapper over the Objective-C class NSSpellChecker.
+//
+// An interface to the Cocoa spell-checking service.
 type SpellChecker struct {
 	objref.Handle
 }
@@ -25,7 +29,8 @@ func SpellCheckerFromID(id objc.ID) *SpellChecker {
 	if id == 0 {
 		return nil
 	}
-	x := &SpellChecker{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SpellChecker{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +43,8 @@ func spellCheckerAdopt(id objc.ID) *SpellChecker {
 	if id == 0 {
 		return nil
 	}
-	x := &SpellChecker{Handle: objref.Wrap(id)}
+	x := &SpellChecker{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,126 +64,229 @@ func (x *SpellChecker) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpellChecker) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSpellChecker creates a new SpellChecker.
 func NewSpellChecker() *SpellChecker {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSSpellChecker")), objc.RegisterName("new"))
 	return spellCheckerAdopt(_id)
 }
 
-// Makes a view an accessory of the Spelling panel by making it a subview of the panel’s content view.
-//
-// WithAccessoryView sets accessoryView and returns the receiver so calls can be chained.
+// WithAccessoryView makes a view an accessory of the Spelling panel by making it a subview of the panel’s content view.
 func (x *SpellChecker) WithAccessoryView(accessoryView ViewProvider) *SpellChecker {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 	return x
 }
 
-// Sets the substitutions panel’s accessory view.
-//
-// WithSubstitutionsPanelAccessoryViewController sets substitutionsPanelAccessoryViewController and returns the receiver so calls can be chained.
+// WithSubstitutionsPanelAccessoryViewController sets the substitutions panel’s accessory view.
 func (x *SpellChecker) WithSubstitutionsPanelAccessoryViewController(substitutionsPanelAccessoryViewController ViewControllerProvider) *SpellChecker {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubstitutionsPanelAccessoryViewController:"), objref.IDOf(substitutionsPanelAccessoryViewController))
 	return x
 }
 
-// Sets whether the spell checker will automatically identify languages.
-//
-// WithAutomaticallyIdentifiesLanguages sets automaticallyIdentifiesLanguages and returns the receiver so calls can be chained.
+// WithAutomaticallyIdentifiesLanguages sets whether the spell checker will automatically identify languages.
 func (x *SpellChecker) WithAutomaticallyIdentifiesLanguages(automaticallyIdentifiesLanguages bool) *SpellChecker {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyIdentifiesLanguages:"), automaticallyIdentifiesLanguages)
 	return x
 }
 
-// Returns the number of words in the specified string.
+// CheckSpellingOfStringStartingAtLanguageWrapInSpellDocumentWithTagWordCount starts the search for a misspelled word in a string starting at specified offset within the string.
+func (x *SpellChecker) CheckSpellingOfStringStartingAtLanguageWrapInSpellDocumentWithTagWordCount(stringToCheck string, startingOffset int, language string, wrapFlag bool, tag int) (result foundation.NSRange, wordCount int64) {
+	var _out0 int64
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("checkSpellingOfString:startingAt:language:wrap:inSpellDocumentWithTag:wordCount:"), purego.NSString(stringToCheck), startingOffset, purego.NSString(language), wrapFlag, tag, unsafe.Pointer(&_out0))
+	return _r, _out0
+}
+
+// CheckSpellingOfStringStartingAt starts the search for a misspelled word in stringToCheck starting at startingOffset within the string object.
+func (x *SpellChecker) CheckSpellingOfStringStartingAt(stringToCheck string, startingOffset int) foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("checkSpellingOfString:startingAt:"), purego.NSString(stringToCheck), startingOffset)
+	return _r
+}
+
+// CountWordsInStringLanguage returns the number of words in the specified string.
 func (x *SpellChecker) CountWordsInStringLanguage(stringToCount string, language string) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("countWordsInString:language:"), purego.NSString(stringToCount), purego.NSString(language))
 	return _r
 }
 
-// Returns the default values for quote replacement.
+// CheckGrammarOfStringStartingAtLanguageWrapInSpellDocumentWithTagDetails initiates a grammatical analysis of a given string.
+func (x *SpellChecker) CheckGrammarOfStringStartingAtLanguageWrapInSpellDocumentWithTagDetails(stringToCheck string, startingOffset int, language string, wrapFlag bool, tag int, details []obj.Object) foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("checkGrammarOfString:startingAt:language:wrap:inSpellDocumentWithTag:details:"), purego.NSString(stringToCheck), startingOffset, purego.NSString(language), wrapFlag, tag, purego.SliceToNSArray(details, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return _r
+}
+
+// CheckStringRangeTypesOptionsInSpellDocumentWithTagOrthographyWordCount requests unified text checking for the given range of the given string.
+func (x *SpellChecker) CheckStringRangeTypesOptionsInSpellDocumentWithTagOrthographyWordCount(stringToCheck string, range_ foundation.NSRange, checkingTypes uint64, options obj.Object, tag int, orthography obj.Object) (result []obj.Object, wordCount int64) {
+	var _out0 int64
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("checkString:range:types:options:inSpellDocumentWithTag:orthography:wordCount:"), purego.NSString(stringToCheck), range_, checkingTypes, objref.IDOf(options), tag, objref.IDOf(orthography), unsafe.Pointer(&_out0))
+	_v := purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return _v, _out0
+}
+
+// RequestCheckingOfStringRangeTypesOptionsInSpellDocumentWithTagCompletionHandler requests that the string be checked in the background.
+func (x *SpellChecker) RequestCheckingOfStringRangeTypesOptionsInSpellDocumentWithTagCompletionHandler(stringToCheck string, range_ foundation.NSRange, checkingTypes uint64, options obj.Object, tag int, completionHandler func(int, obj.Object, obj.Object, int)) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("requestCheckingOfString:range:types:options:inSpellDocumentWithTag:completionHandler:"), purego.NSString(stringToCheck), range_, checkingTypes, objref.IDOf(options), tag, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 objc.ID, _b2 objc.ID, _b3 int) {
+		completionHandler(_b0, obj.Wrap(_b1), obj.Wrap(_b2), _b3)
+	}))
+	return _r
+}
+
+// RequestCandidatesForSelectedRangeInStringTypesOptionsInSpellDocumentWithTagCompletionHandler wraps the corresponding Objective-C method.
+func (x *SpellChecker) RequestCandidatesForSelectedRangeInStringTypesOptionsInSpellDocumentWithTagCompletionHandler(selectedRange foundation.NSRange, stringToCheck string, checkingTypes uint64, options obj.Object, tag int, completionHandler func(int, obj.Object)) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("requestCandidatesForSelectedRange:inString:types:options:inSpellDocumentWithTag:completionHandler:"), selectedRange, purego.NSString(stringToCheck), checkingTypes, objref.IDOf(options), tag, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 objc.ID) { completionHandler(_b0, obj.Wrap(_b1)) }))
+	return _r
+}
+
+// MenuForResultStringOptionsAtLocationInView provides a menu containing contextual menu items suitable for certain kinds of detected results.
+func (x *SpellChecker) MenuForResultStringOptionsAtLocationInView(result obj.Object, checkedString string, options obj.Object, location corefoundation.CGPoint, view *View) *Menu {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuForResult:string:options:atLocation:inView:"), objref.IDOf(result), purego.NSString(checkedString), objref.IDOf(options), location, objref.IDOf(view))
+	return MenuFromID(_r)
+}
+
+// UserQuotesArrayForLanguage returns the default values for quote replacement.
 func (x *SpellChecker) UserQuotesArrayForLanguage(language string) []string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userQuotesArrayForLanguage:"), purego.NSString(language))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Causes the spell checker to update the Spelling panel’s misspelled-word field to reflect word.
+// UpdateSpellingPanelWithMisspelledWord causes the spell checker to update the Spelling panel’s misspelled-word field to reflect word.
 func (x *SpellChecker) UpdateSpellingPanelWithMisspelledWord(word string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateSpellingPanelWithMisspelledWord:"), purego.NSString(word))
 }
 
-// Specifies a grammar-analysis detail to highlight in the Spelling panel.
+// UpdateSpellingPanelWithGrammarStringDetail specifies a grammar-analysis detail to highlight in the Spelling panel.
 func (x *SpellChecker) UpdateSpellingPanelWithGrammarStringDetail(string_ string, detail obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateSpellingPanelWithGrammarString:detail:"), purego.NSString(string_), objref.IDOf(detail))
 }
 
-// Updates the available panels to account for user changes.
+// UpdatePanels updates the available panels to account for user changes.
 func (x *SpellChecker) UpdatePanels() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updatePanels"))
 }
 
-// Instructs the spell checker to ignore all future occurrences of wordToIgnore in the document identified by tag.
+// IgnoreWordInSpellDocumentWithTag instructs the spell checker to ignore all future occurrences of wordToIgnore in the document identified by tag.
 func (x *SpellChecker) IgnoreWordInSpellDocumentWithTag(wordToIgnore string, tag int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ignoreWord:inSpellDocumentWithTag:"), purego.NSString(wordToIgnore), tag)
 }
 
-// Returns the array of ignored words for a document identified by tag.
+// IgnoredWordsInSpellDocumentWithTag returns the array of ignored words for a document identified by tag.
 func (x *SpellChecker) IgnoredWordsInSpellDocumentWithTag(tag int) []string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ignoredWordsInSpellDocumentWithTag:"), tag)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Initializes the ignored-words document (a dictionary identified by tag with someWords), an array of words to ignore.
+// SetIgnoredWordsInSpellDocumentWithTag initializes the ignored-words document (a dictionary identified by tag with someWords), an array of words to ignore.
 func (x *SpellChecker) SetIgnoredWordsInSpellDocumentWithTag(words []string, tag int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoredWords:inSpellDocumentWithTag:"), purego.SliceToNSArray(words, func(_v string) objc.ID { return purego.NSString(_v) }), tag)
 }
 
-// Notifies the receiver that the user has finished with the tagged document.
+// GuessesForWordRangeInStringLanguageInSpellDocumentWithTag returns an array of possible substitutions for the specified string.
+func (x *SpellChecker) GuessesForWordRangeInStringLanguageInSpellDocumentWithTag(range_ foundation.NSRange, string_ string, language string, tag int) []string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("guessesForWordRange:inString:language:inSpellDocumentWithTag:"), range_, purego.NSString(string_), purego.NSString(language), tag)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
+}
+
+// CorrectionForWordRangeInStringLanguageInSpellDocumentWithTag returns a single proposed correction if a word is mis-spelled.
+func (x *SpellChecker) CorrectionForWordRangeInStringLanguageInSpellDocumentWithTag(range_ foundation.NSRange, string_ string, language string, tag int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("correctionForWordRange:inString:language:inSpellDocumentWithTag:"), range_, purego.NSString(string_), purego.NSString(language), tag)
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// CompletionsForPartialWordRangeInStringLanguageInSpellDocumentWithTag provides a list of complete words that the user might be trying to type based on a partial word in a given string.
+func (x *SpellChecker) CompletionsForPartialWordRangeInStringLanguageInSpellDocumentWithTag(range_ foundation.NSRange, string_ string, language string, tag int) []string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completionsForPartialWordRange:inString:language:inSpellDocumentWithTag:"), range_, purego.NSString(string_), purego.NSString(language), tag)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
+}
+
+// LanguageForWordRangeInStringOrthography wraps the corresponding Objective-C method.
+func (x *SpellChecker) LanguageForWordRangeInStringOrthography(range_ foundation.NSRange, string_ string, orthography obj.Object) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageForWordRange:inString:orthography:"), range_, purego.NSString(string_), objref.IDOf(orthography))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// CloseSpellDocumentWithTag notifies the receiver that the user has finished with the tagged document.
 func (x *SpellChecker) CloseSpellDocumentWithTag(tag int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("closeSpellDocumentWithTag:"), tag)
 }
 
-// Records the user response to the correction indicator being displayed.
+// RecordResponseToCorrectionForWordLanguageInSpellDocumentWithTag records the user response to the correction indicator being displayed.
 func (x *SpellChecker) RecordResponseToCorrectionForWordLanguageInSpellDocumentWithTag(response CorrectionResponse, correction string, word string, language string, tag int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordResponse:toCorrection:forWord:language:inSpellDocumentWithTag:"), response, purego.NSString(correction), purego.NSString(word), purego.NSString(language), tag)
 }
 
-// Dismisses the correction indicator for the specified view.
+// ShowCorrectionIndicatorOfTypePrimaryStringAlternativeStringsForStringInRectView display a suitable user interface to indicate a correction may need to be made.
+//
+// ShowCorrectionIndicatorOfTypePrimaryStringAlternativeStringsForStringInRectView blocks until the operation completes or ctx is cancelled.
+func (x *SpellChecker) ShowCorrectionIndicatorOfTypePrimaryStringAlternativeStringsForStringInRectView(ctx context.Context, type_ CorrectionIndicatorType, primaryString string, alternativeStrings []string, rectOfTypedString corefoundation.CGRect, view *View) (result string, err error) {
+	type _result struct {
+		val string
+		err error
+	}
+	_ch := make(chan _result, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
+		var _o _result
+		_o.val = purego.GoString(_p0)
+		_ch <- _o
+	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showCorrectionIndicatorOfType:primaryString:alternativeStrings:forStringInRect:view:completionHandler:"), type_, purego.NSString(primaryString), purego.SliceToNSArray(alternativeStrings, func(_v string) objc.ID { return purego.NSString(_v) }), rectOfTypedString, objref.IDOf(view), _block)
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero string
+		return _zero, ctx.Err()
+	}
+}
+
+// DismissCorrectionIndicatorForView dismisses the correction indicator for the specified view.
 func (x *SpellChecker) DismissCorrectionIndicatorForView(view *View) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dismissCorrectionIndicatorForView:"), objref.IDOf(view))
 }
 
+// PreventsAutocorrectionBeforeStringLanguage wraps the corresponding Objective-C method.
 func (x *SpellChecker) PreventsAutocorrectionBeforeStringLanguage(string_ string, language string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preventsAutocorrectionBeforeString:language:"), purego.NSString(string_), purego.NSString(language))
 	return _r
 }
 
+// DeletesAutospaceBetweenStringAndStringLanguage wraps the corresponding Objective-C method.
 func (x *SpellChecker) DeletesAutospaceBetweenStringAndStringLanguage(precedingString string, followingString string, language string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("deletesAutospaceBetweenString:andString:language:"), purego.NSString(precedingString), purego.NSString(followingString), purego.NSString(language))
 	return _r
 }
 
-// Sets the string that appears in the misspelled word field, using the string object aString.
+// SetWordFieldStringValue sets the string that appears in the misspelled word field, using the string object aString.
 func (x *SpellChecker) SetWordFieldStringValue(string_ string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWordFieldStringValue:"), purego.NSString(string_))
 }
 
-// Adds the word to the spell checker dictionary.
+// LearnWord adds the word to the spell checker dictionary.
 func (x *SpellChecker) LearnWord(word string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("learnWord:"), purego.NSString(word))
 }
 
-// Indicates whether the spell checker has learned a given word.
+// HasLearnedWord indicates whether the spell checker has learned a given word.
 func (x *SpellChecker) HasLearnedWord(word string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasLearnedWord:"), purego.NSString(word))
 	return _r
 }
 
-// Tells the spell checker to unlearn a given word.
+// UnlearnWord tells the spell checker to unlearn a given word.
 func (x *SpellChecker) UnlearnWord(word string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unlearnWord:"), purego.NSString(word))
 }
 
-// Returns the current language used in spell checking.
+// Language returns the current language used in spell checking.
 func (x *SpellChecker) Language() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
 	if _r == 0 {
@@ -186,73 +295,86 @@ func (x *SpellChecker) Language() string {
 	return purego.GoString(_r)
 }
 
-// Returns whether the specified language is in the Spelling pop-up list.
+// SetLanguage returns whether the specified language is in the Spelling pop-up list.
 func (x *SpellChecker) SetLanguage(language string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setLanguage:"), purego.NSString(language))
 	return _r
 }
 
+// UserReplacementsDictionary wraps the corresponding Objective-C method.
 func (x *SpellChecker) UserReplacementsDictionary() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userReplacementsDictionary"))
 	return obj.Wrap(_r)
 }
 
+// SpellingPanel wraps the corresponding Objective-C method.
 func (x *SpellChecker) SpellingPanel() *Panel {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("spellingPanel"))
 	return PanelFromID(_r)
 }
 
+// AccessoryView wraps the corresponding Objective-C method.
 func (x *SpellChecker) AccessoryView() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessoryView"))
 	return ViewFromID(_r)
 }
 
+// SetAccessoryView wraps the corresponding Objective-C method.
 func (x *SpellChecker) SetAccessoryView(accessoryView *View) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 }
 
+// SubstitutionsPanel wraps the corresponding Objective-C method.
 func (x *SpellChecker) SubstitutionsPanel() *Panel {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("substitutionsPanel"))
 	return PanelFromID(_r)
 }
 
+// SubstitutionsPanelAccessoryViewController wraps the corresponding Objective-C method.
 func (x *SpellChecker) SubstitutionsPanelAccessoryViewController() *ViewController {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("substitutionsPanelAccessoryViewController"))
 	return ViewControllerFromID(_r)
 }
 
+// SetSubstitutionsPanelAccessoryViewController wraps the corresponding Objective-C method.
 func (x *SpellChecker) SetSubstitutionsPanelAccessoryViewController(substitutionsPanelAccessoryViewController *ViewController) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubstitutionsPanelAccessoryViewController:"), objref.IDOf(substitutionsPanelAccessoryViewController))
 }
 
+// AvailableLanguages wraps the corresponding Objective-C method.
+//
 // AvailableLanguages returns the collection as a Go slice.
 func (x *SpellChecker) AvailableLanguages() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableLanguages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// UserPreferredLanguages wraps the corresponding Objective-C method.
+//
 // UserPreferredLanguages returns the collection as a Go slice.
 func (x *SpellChecker) UserPreferredLanguages() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userPreferredLanguages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// AutomaticallyIdentifiesLanguages wraps the corresponding Objective-C method.
 func (x *SpellChecker) AutomaticallyIdentifiesLanguages() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallyIdentifiesLanguages"))
 	return _r
 }
 
+// SetAutomaticallyIdentifiesLanguages wraps the corresponding Objective-C method.
 func (x *SpellChecker) SetAutomaticallyIdentifiesLanguages(automaticallyIdentifiesLanguages bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyIdentifiesLanguages:"), automaticallyIdentifiesLanguages)
 }
 
-// Returns an array of suggested spellings for the misspelled word.
+// GuessesForWord returns an array of suggested spellings for the misspelled word.
 func (x *SpellChecker) GuessesForWord(word string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("guessesForWord:"), purego.NSString(word))
 	return obj.Wrap(_r)
 }
 
-// Remove this word from the spelling dictionary.
+// ForgetWord remove this word from the spelling dictionary.
 func (x *SpellChecker) ForgetWord(word string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("forgetWord:"), purego.NSString(word))
 }
@@ -263,7 +385,14 @@ type SpellCheckerable interface {
 	WithAccessoryView(accessoryView ViewProvider) *SpellChecker
 	WithSubstitutionsPanelAccessoryViewController(substitutionsPanelAccessoryViewController ViewControllerProvider) *SpellChecker
 	WithAutomaticallyIdentifiesLanguages(automaticallyIdentifiesLanguages bool) *SpellChecker
+	CheckSpellingOfStringStartingAtLanguageWrapInSpellDocumentWithTagWordCount(stringToCheck string, startingOffset int, language string, wrapFlag bool, tag int) (result foundation.NSRange, wordCount int64)
+	CheckSpellingOfStringStartingAt(stringToCheck string, startingOffset int) foundation.NSRange
 	CountWordsInStringLanguage(stringToCount string, language string) int
+	CheckGrammarOfStringStartingAtLanguageWrapInSpellDocumentWithTagDetails(stringToCheck string, startingOffset int, language string, wrapFlag bool, tag int, details []obj.Object) foundation.NSRange
+	CheckStringRangeTypesOptionsInSpellDocumentWithTagOrthographyWordCount(stringToCheck string, range_ foundation.NSRange, checkingTypes uint64, options obj.Object, tag int, orthography obj.Object) (result []obj.Object, wordCount int64)
+	RequestCheckingOfStringRangeTypesOptionsInSpellDocumentWithTagCompletionHandler(stringToCheck string, range_ foundation.NSRange, checkingTypes uint64, options obj.Object, tag int, completionHandler func(int, obj.Object, obj.Object, int)) int
+	RequestCandidatesForSelectedRangeInStringTypesOptionsInSpellDocumentWithTagCompletionHandler(selectedRange foundation.NSRange, stringToCheck string, checkingTypes uint64, options obj.Object, tag int, completionHandler func(int, obj.Object)) int
+	MenuForResultStringOptionsAtLocationInView(result obj.Object, checkedString string, options obj.Object, location corefoundation.CGPoint, view *View) *Menu
 	UserQuotesArrayForLanguage(language string) []string
 	UpdateSpellingPanelWithMisspelledWord(word string)
 	UpdateSpellingPanelWithGrammarStringDetail(string_ string, detail obj.Object)
@@ -271,8 +400,13 @@ type SpellCheckerable interface {
 	IgnoreWordInSpellDocumentWithTag(wordToIgnore string, tag int)
 	IgnoredWordsInSpellDocumentWithTag(tag int) []string
 	SetIgnoredWordsInSpellDocumentWithTag(words []string, tag int)
+	GuessesForWordRangeInStringLanguageInSpellDocumentWithTag(range_ foundation.NSRange, string_ string, language string, tag int) []string
+	CorrectionForWordRangeInStringLanguageInSpellDocumentWithTag(range_ foundation.NSRange, string_ string, language string, tag int) string
+	CompletionsForPartialWordRangeInStringLanguageInSpellDocumentWithTag(range_ foundation.NSRange, string_ string, language string, tag int) []string
+	LanguageForWordRangeInStringOrthography(range_ foundation.NSRange, string_ string, orthography obj.Object) string
 	CloseSpellDocumentWithTag(tag int)
 	RecordResponseToCorrectionForWordLanguageInSpellDocumentWithTag(response CorrectionResponse, correction string, word string, language string, tag int)
+	ShowCorrectionIndicatorOfTypePrimaryStringAlternativeStringsForStringInRectView(ctx context.Context, type_ CorrectionIndicatorType, primaryString string, alternativeStrings []string, rectOfTypedString corefoundation.CGRect, view *View) (string, error)
 	DismissCorrectionIndicatorForView(view *View)
 	PreventsAutocorrectionBeforeStringLanguage(string_ string, language string) bool
 	DeletesAutospaceBetweenStringAndStringLanguage(precedingString string, followingString string, language string) bool

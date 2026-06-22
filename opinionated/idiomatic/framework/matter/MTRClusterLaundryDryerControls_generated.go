@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Laundry Dryer Controls This cluster provides a way to access options associated with the operation of a laundry dryer device type.
-//
 // MTRClusterLaundryDryerControls is an idiomatic wrapper over the Objective-C class MTRClusterLaundryDryerControls.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
+//
+// Cluster Laundry Dryer Controls This cluster provides a way to access options associated with the operation of a laundry dryer device type.
 type MTRClusterLaundryDryerControls struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterLaundryDryerControlsFromID adopts an existing Objective-C object as a MTRClusterLaundryDryerControls
@@ -25,7 +26,8 @@ func MTRClusterLaundryDryerControlsFromID(id objc.ID) *MTRClusterLaundryDryerCon
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterLaundryDryerControls{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterLaundryDryerControls{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,73 +40,66 @@ func mTRClusterLaundryDryerControlsAdopt(id objc.ID) *MTRClusterLaundryDryerCont
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterLaundryDryerControls{Handle: objref.Wrap(id)}
+	x := &MTRClusterLaundryDryerControls{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterLaundryDryerControls) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterLaundryDryerControls) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterLaundryDryerControls) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
-//
-// NewMTRClusterLaundryDryerControlsWithDeviceEndpointIDQueue creates a new MTRClusterLaundryDryerControls.
+// NewMTRClusterLaundryDryerControlsWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func NewMTRClusterLaundryDryerControlsWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterLaundryDryerControls {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterLaundryDryerControls")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterLaundryDryerControlsAdopt(_id)
 }
 
+// ReadAttributeSupportedDrynessLevelsWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterLaundryDryerControls) ReadAttributeSupportedDrynessLevelsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedDrynessLevelsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeSelectedDrynessLevelWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterLaundryDryerControls) ReadAttributeSelectedDrynessLevelWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSelectedDrynessLevelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeSelectedDrynessLevelWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterLaundryDryerControls) WriteAttributeSelectedDrynessLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeSelectedDrynessLevelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeSelectedDrynessLevelWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterLaundryDryerControls) WriteAttributeSelectedDrynessLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeSelectedDrynessLevelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterLaundryDryerControls) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterLaundryDryerControls) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterLaundryDryerControls) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterLaundryDryerControls) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterLaundryDryerControls) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -125,3 +120,7 @@ type MTRClusterLaundryDryerControlsable interface {
 }
 
 var _ MTRClusterLaundryDryerControlsable = (*MTRClusterLaundryDryerControls)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterLaundryDryerControls)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterLaundryDryerControls)(nil)

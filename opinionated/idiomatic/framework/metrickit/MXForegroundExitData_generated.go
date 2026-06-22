@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing counts for the different types of foreground app exits.
-//
 // ForegroundExitData is an idiomatic wrapper over the Objective-C class MXForegroundExitData.
+//
+// An object representing counts for the different types of foreground app exits.
 type ForegroundExitData struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ForegroundExitDataFromID(id objc.ID) *ForegroundExitData {
 	if id == 0 {
 		return nil
 	}
-	x := &ForegroundExitData{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ForegroundExitData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func foregroundExitDataAdopt(id objc.ID) *ForegroundExitData {
 	if id == 0 {
 		return nil
 	}
-	x := &ForegroundExitData{Handle: objref.Wrap(id)}
+	x := &ForegroundExitData{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,43 +60,49 @@ func (x *ForegroundExitData) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ForegroundExitData) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewForegroundExitData creates a new ForegroundExitData.
 func NewForegroundExitData() *ForegroundExitData {
 	_id := objc.Send[objc.ID](objc.ID(_class("MXForegroundExitData")), objc.RegisterName("new"))
 	return foregroundExitDataAdopt(_id)
 }
 
-// Cumulative number of times the application exited normally, or was gracefully terminated by the system.
+// CumulativeNormalAppExitCount cumulative number of times the application exited normally, or was gracefully terminated by the system.
 func (x *ForegroundExitData) CumulativeNormalAppExitCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cumulativeNormalAppExitCount"))
 	return _r
 }
 
-// Cumulative number of times the application was terminated for exceeding a memory consumption limit.
+// CumulativeMemoryResourceLimitExitCount cumulative number of times the application was terminated for exceeding a memory consumption limit.
 func (x *ForegroundExitData) CumulativeMemoryResourceLimitExitCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cumulativeMemoryResourceLimitExitCount"))
 	return _r
 }
 
-// Cumulative number of times the application was terminated for attempting to access invalid memory, or attempting to access memory in a manner not allowed by the memory's protection level (e.g. writing to read-only memory).
+// CumulativeBadAccessExitCount cumulative number of times the application was terminated for attempting to access invalid memory, or attempting to access memory in a manner not allowed by the memory's protection level (e.g. writing to read-only memory).
 func (x *ForegroundExitData) CumulativeBadAccessExitCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cumulativeBadAccessExitCount"))
 	return _r
 }
 
-// Cumulative number of times the application exited abnormally. The most common causes of crashes with this exception type are uncaught Objective-C/C++ exceptions and calls to abort().
+// CumulativeAbnormalExitCount cumulative number of times the application exited abnormally. The most common causes of crashes with this exception type are uncaught Objective-C/C++ exceptions and calls to abort().
 func (x *ForegroundExitData) CumulativeAbnormalExitCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cumulativeAbnormalExitCount"))
 	return _r
 }
 
-// Cumulative number of times the application terminated for attempting to execute an illegal or undefined instruction. The process may have attempted to jump to an invalid address via a misconfigured function pointer.
+// CumulativeIllegalInstructionExitCount cumulative number of times the application terminated for attempting to execute an illegal or undefined instruction. The process may have attempted to jump to an invalid address via a misconfigured function pointer.
 func (x *ForegroundExitData) CumulativeIllegalInstructionExitCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cumulativeIllegalInstructionExitCount"))
 	return _r
 }
 
-// Cumulative number of times the application was terminated because a watchdog timeout occured. These can occur when the application took too long to launch, terminate, or respond to system events.
+// CumulativeAppWatchdogExitCount cumulative number of times the application was terminated because a watchdog timeout occured. These can occur when the application took too long to launch, terminate, or respond to system events.
 func (x *ForegroundExitData) CumulativeAppWatchdogExitCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cumulativeAppWatchdogExitCount"))
 	return _r

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A model instance that specifies how to map a model from a source to a destination managed object model.
-//
 // MappingModel is an idiomatic wrapper over the Objective-C class NSMappingModel.
+//
+// A model instance that specifies how to map a model from a source to a destination managed object model.
 type MappingModel struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MappingModelFromID(id objc.ID) *MappingModel {
 	if id == 0 {
 		return nil
 	}
-	x := &MappingModel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MappingModel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mappingModelAdopt(id objc.ID) *MappingModel {
 	if id == 0 {
 		return nil
 	}
-	x := &MappingModel{Handle: objref.Wrap(id)}
+	x := &MappingModel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,34 +60,40 @@ func (x *MappingModel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns a mapping model initialized from a given URL.
-//
-// NewMappingModelWithContentsOfURL creates a new MappingModel.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MappingModel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMappingModelWithContentsOfURL returns a mapping model initialized from a given URL.
 func NewMappingModelWithContentsOfURL(url string) *MappingModel {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMappingModel")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), rt.FileURL(url))
 	return mappingModelAdopt(_id)
 }
 
-// The entity mappings for the mapping model.
-//
-// WithEntityMappings sets the collection and returns the receiver so calls can be chained.
+// WithEntityMappings the entity mappings for the mapping model.
 func (x *MappingModel) WithEntityMappings(items ...*EntityMapping) *MappingModel {
 	_arr := purego.SliceToNSArray(items, func(_v *EntityMapping) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntityMappings:"), _arr)
 	return x
 }
 
+// EntityMappings wraps the corresponding Objective-C method.
+//
 // EntityMappings returns the collection as a Go slice.
 func (x *MappingModel) EntityMappings() []*EntityMapping {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entityMappings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EntityMapping { return EntityMappingFromID(_id) })
 }
 
+// SetEntityMappings wraps the corresponding Objective-C method.
 func (x *MappingModel) SetEntityMappings(entityMappings []*EntityMapping) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntityMappings:"), purego.SliceToNSArray(entityMappings, func(_v *EntityMapping) objc.ID { return objref.IDOf(_v) }))
 }
 
+// EntityMappingsByName wraps the corresponding Objective-C method.
 func (x *MappingModel) EntityMappingsByName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entityMappingsByName"))
 	return obj.Wrap(_r)

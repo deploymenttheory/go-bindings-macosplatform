@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An encapsulation of the behavior and progression of a Force Touch trackpad as it responds to specific events.
-//
 // PressureConfiguration is an idiomatic wrapper over the Objective-C class NSPressureConfiguration.
+//
+// An encapsulation of the behavior and progression of a Force Touch trackpad as it responds to specific events.
 type PressureConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PressureConfigurationFromID(id objc.ID) *PressureConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &PressureConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PressureConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func pressureConfigurationAdopt(id objc.ID) *PressureConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &PressureConfiguration{Handle: objref.Wrap(id)}
+	x := &PressureConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,20 +60,25 @@ func (x *PressureConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a pressure configuration object with a specified pressure behavior.
-//
-// NewPressureConfigurationWithPressureBehavior creates a new PressureConfiguration.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PressureConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPressureConfigurationWithPressureBehavior initializes a pressure configuration object with a specified pressure behavior.
 func NewPressureConfigurationWithPressureBehavior(pressureBehavior PressureBehavior) *PressureConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPressureConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPressureBehavior:"), pressureBehavior)
 	return pressureConfigurationAdopt(_id)
 }
 
-// Changes the pressure configuration of the trackpad to the initialized pressure configuration.
+// Set changes the pressure configuration of the trackpad to the initialized pressure configuration.
 func (x *PressureConfiguration) Set() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("set"))
 }
 
+// PressureBehavior wraps the corresponding Objective-C method.
 func (x *PressureConfiguration) PressureBehavior() PressureBehavior {
 	_r := objc.Send[PressureBehavior](objref.IDOf(x), objc.RegisterName("pressureBehavior"))
 	return _r

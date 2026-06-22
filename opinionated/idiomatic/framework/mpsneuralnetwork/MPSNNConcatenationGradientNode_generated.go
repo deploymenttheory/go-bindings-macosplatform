@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A MPSNNSlice filter that operates as the conjugate computation for concatentation operators during training As concatenation is formally just a copy and not a computation, there isn't a lot of arithmetic for the slice operator to do, but we still need to extract out the relevant portion of the gradient of the input signal that went into the corresponding concatenation destination image.
-//
 // NNConcatenationGradientNode is an idiomatic wrapper over the Objective-C class MPSNNConcatenationGradientNode.
+//
+// It embeds [NNGradientFilterNode], promoting that type's methods.
+//
+// A MPSNNSlice filter that operates as the conjugate computation for concatentation operators during training As concatenation is formally just a copy and not a computation, there isn't a lot of arithmetic for the slice operator to do, but we still need to extract out the relevant portion of the gradient of the input signal that went into the corresponding concatenation destination image.
 type NNConcatenationGradientNode struct {
-	objref.Handle
+	NNGradientFilterNode
 }
 
 // NNConcatenationGradientNodeFromID adopts an existing Objective-C object as a NNConcatenationGradientNode
@@ -25,7 +26,8 @@ func NNConcatenationGradientNodeFromID(id objc.ID) *NNConcatenationGradientNode 
 	if id == 0 {
 		return nil
 	}
-	x := &NNConcatenationGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNConcatenationGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,38 +40,20 @@ func nNConcatenationGradientNodeAdopt(id objc.ID) *NNConcatenationGradientNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNConcatenationGradientNode{Handle: objref.Wrap(id)}
+	x := &NNConcatenationGradientNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NNConcatenationGradientNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNConcatenationGradientNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNConcatenationGradientNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Init a MPSNNConcatenationGradientNode Generally you should use [MPSNNConcatenationNode gradientFiltersWithSources:] instead.
-//
-// NewNNConcatenationGradientNodeWithSourceGradientSourceImageGradientState creates a new NNConcatenationGradientNode.
+// NewNNConcatenationGradientNodeWithSourceGradientSourceImageGradientState init a MPSNNConcatenationGradientNode Generally you should use [MPSNNConcatenationNode gradientFiltersWithSources:] instead.
 func NewNNConcatenationGradientNodeWithSourceGradientSourceImageGradientState(gradientSourceNode *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode) *NNConcatenationGradientNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNConcatenationGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(gradientSourceNode), objref.IDOf(sourceImage), objref.IDOf(gradientState))
 	return nNConcatenationGradientNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *NNConcatenationGradientNode) WithLabel(label string) *NNConcatenationGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -82,3 +66,7 @@ type NNConcatenationGradientNodeable interface {
 }
 
 var _ NNConcatenationGradientNodeable = (*NNConcatenationGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*NNConcatenationGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNConcatenationGradientNode)(nil)

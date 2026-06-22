@@ -23,7 +23,8 @@ func MTRDeviceEnergyManagementClusterPauseRequestParamsFromID(id objc.ID) *MTRDe
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceEnergyManagementClusterPauseRequestParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDeviceEnergyManagementClusterPauseRequestParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDeviceEnergyManagementClusterPauseRequestParamsAdopt(id objc.ID) *MTRDev
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceEnergyManagementClusterPauseRequestParams{Handle: objref.Wrap(id)}
+	x := &MTRDeviceEnergyManagementClusterPauseRequestParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,74 +58,82 @@ func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) IsKind(className st
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDeviceEnergyManagementClusterPauseRequestParams creates a new MTRDeviceEnergyManagementClusterPauseRequestParams.
 func NewMTRDeviceEnergyManagementClusterPauseRequestParams() *MTRDeviceEnergyManagementClusterPauseRequestParams {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceEnergyManagementClusterPauseRequestParams")), objc.RegisterName("new"))
 	return mTRDeviceEnergyManagementClusterPauseRequestParamsAdopt(_id)
 }
 
-// WithDuration sets duration and returns the receiver so calls can be chained.
+// WithDuration sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterPauseRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return x
 }
 
-// WithCause sets cause and returns the receiver so calls can be chained.
+// WithCause sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterPauseRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke).
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
 func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDeviceEnergyManagementClusterPauseRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command.
-//
-// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
 func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDeviceEnergyManagementClusterPauseRequestParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
+// Duration wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) Duration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("duration"))
 	return obj.Wrap(_r)
 }
 
+// SetDuration wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) SetDuration(duration obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 }
 
+// Cause wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) Cause() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cause"))
 	return obj.Wrap(_r)
 }
 
+// SetCause wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) SetCause(cause obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) ServerSideProcessingTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
 
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }

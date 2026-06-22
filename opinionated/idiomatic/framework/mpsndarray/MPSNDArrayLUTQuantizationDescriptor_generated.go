@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ArrayLUTQuantizationDescriptor is an idiomatic wrapper over the Objective-C class MPSNDArrayLUTQuantizationDescriptor.
+//
+// It embeds [ArrayQuantizationDescriptor], promoting that type's methods.
 type ArrayLUTQuantizationDescriptor struct {
-	objref.Handle
+	ArrayQuantizationDescriptor
 }
 
 // ArrayLUTQuantizationDescriptorFromID adopts an existing Objective-C object as a ArrayLUTQuantizationDescriptor
@@ -23,7 +24,8 @@ func ArrayLUTQuantizationDescriptorFromID(id objc.ID) *ArrayLUTQuantizationDescr
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayLUTQuantizationDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ArrayLUTQuantizationDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func arrayLUTQuantizationDescriptorAdopt(id objc.ID) *ArrayLUTQuantizationDescri
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayLUTQuantizationDescriptor{Handle: objref.Wrap(id)}
+	x := &ArrayLUTQuantizationDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ArrayLUTQuantizationDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ArrayLUTQuantizationDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ArrayLUTQuantizationDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewArrayLUTQuantizationDescriptor creates a new ArrayLUTQuantizationDescriptor.
@@ -68,3 +56,5 @@ type ArrayLUTQuantizationDescriptorable interface {
 }
 
 var _ ArrayLUTQuantizationDescriptorable = (*ArrayLUTQuantizationDescriptor)(nil)
+
+var _ ArrayQuantizationDescriptorProvider = (*ArrayLUTQuantizationDescriptor)(nil)

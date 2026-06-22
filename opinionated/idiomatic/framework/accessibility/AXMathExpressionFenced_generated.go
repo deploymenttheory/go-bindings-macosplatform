@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MathExpressionFenced is an idiomatic wrapper over the Objective-C class AXMathExpressionFenced.
+//
+// It embeds [MathExpression], promoting that type's methods.
 type MathExpressionFenced struct {
-	objref.Handle
+	MathExpression
 }
 
 // MathExpressionFencedFromID adopts an existing Objective-C object as a MathExpressionFenced
@@ -23,7 +24,8 @@ func MathExpressionFencedFromID(id objc.ID) *MathExpressionFenced {
 	if id == 0 {
 		return nil
 	}
-	x := &MathExpressionFenced{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MathExpressionFenced{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mathExpressionFencedAdopt(id objc.ID) *MathExpressionFenced {
 	if id == 0 {
 		return nil
 	}
-	x := &MathExpressionFenced{Handle: objref.Wrap(id)}
+	x := &MathExpressionFenced{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MathExpressionFenced) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MathExpressionFenced) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MathExpressionFenced) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMathExpressionFencedWithExpressionsOpenStringCloseString creates a new MathExpressionFenced.
@@ -63,12 +51,15 @@ func NewMathExpressionFencedWithExpressionsOpenStringCloseString(expressions []*
 	return mathExpressionFencedAdopt(_id)
 }
 
+// Expressions wraps the corresponding Objective-C method.
+//
 // Expressions returns the collection as a Go slice.
 func (x *MathExpressionFenced) Expressions() []*MathExpression {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expressions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpression { return MathExpressionFromID(_id) })
 }
 
+// OpenString wraps the corresponding Objective-C method.
 func (x *MathExpressionFenced) OpenString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openString"))
 	if _r == 0 {
@@ -77,6 +68,7 @@ func (x *MathExpressionFenced) OpenString() string {
 	return purego.GoString(_r)
 }
 
+// CloseString wraps the corresponding Objective-C method.
 func (x *MathExpressionFenced) CloseString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("closeString"))
 	if _r == 0 {
@@ -94,3 +86,5 @@ type MathExpressionFencedable interface {
 }
 
 var _ MathExpressionFencedable = (*MathExpressionFenced)(nil)
+
+var _ MathExpressionProvider = (*MathExpressionFenced)(nil)

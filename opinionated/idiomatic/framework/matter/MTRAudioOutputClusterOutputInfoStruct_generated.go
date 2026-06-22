@@ -13,6 +13,8 @@ import (
 )
 
 // MTRAudioOutputClusterOutputInfoStruct is an idiomatic wrapper over the Objective-C class MTRAudioOutputClusterOutputInfoStruct.
+//
+// MTRAudioOutputClusterOutputInfoStruct is an abstract base — you do not construct it directly. Construct one of [MTRAudioOutputClusterOutputInfo] and pass it where a MTRAudioOutputClusterOutputInfoStruct is accepted.
 type MTRAudioOutputClusterOutputInfoStruct struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRAudioOutputClusterOutputInfoStructFromID(id objc.ID) *MTRAudioOutputClus
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAudioOutputClusterOutputInfoStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRAudioOutputClusterOutputInfoStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRAudioOutputClusterOutputInfoStructAdopt(id objc.ID) *MTRAudioOutputClust
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAudioOutputClusterOutputInfoStruct{Handle: objref.Wrap(id)}
+	x := &MTRAudioOutputClusterOutputInfoStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,48 +60,53 @@ func (x *MTRAudioOutputClusterOutputInfoStruct) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRAudioOutputClusterOutputInfoStruct creates a new MTRAudioOutputClusterOutputInfoStruct.
-func NewMTRAudioOutputClusterOutputInfoStruct() *MTRAudioOutputClusterOutputInfoStruct {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRAudioOutputClusterOutputInfoStruct")), objc.RegisterName("new"))
-	return mTRAudioOutputClusterOutputInfoStructAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRAudioOutputClusterOutputInfoStruct) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithIndex sets index and returns the receiver so calls can be chained.
+// WithIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRAudioOutputClusterOutputInfoStruct) WithIndex(index obj.Object) *MTRAudioOutputClusterOutputInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), objref.IDOf(index))
 	return x
 }
 
-// WithOutputType sets outputType and returns the receiver so calls can be chained.
+// WithOutputType sets the property and returns the receiver so calls can be chained.
 func (x *MTRAudioOutputClusterOutputInfoStruct) WithOutputType(outputType obj.Object) *MTRAudioOutputClusterOutputInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputType:"), objref.IDOf(outputType))
 	return x
 }
 
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *MTRAudioOutputClusterOutputInfoStruct) WithName(name string) *MTRAudioOutputClusterOutputInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
+// Index wraps the corresponding Objective-C method.
 func (x *MTRAudioOutputClusterOutputInfoStruct) Index() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("index"))
 	return obj.Wrap(_r)
 }
 
+// SetIndex wraps the corresponding Objective-C method.
 func (x *MTRAudioOutputClusterOutputInfoStruct) SetIndex(index obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), objref.IDOf(index))
 }
 
+// OutputType wraps the corresponding Objective-C method.
 func (x *MTRAudioOutputClusterOutputInfoStruct) OutputType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputType"))
 	return obj.Wrap(_r)
 }
 
+// SetOutputType wraps the corresponding Objective-C method.
 func (x *MTRAudioOutputClusterOutputInfoStruct) SetOutputType(outputType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputType:"), objref.IDOf(outputType))
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *MTRAudioOutputClusterOutputInfoStruct) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -106,6 +115,7 @@ func (x *MTRAudioOutputClusterOutputInfoStruct) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *MTRAudioOutputClusterOutputInfoStruct) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
@@ -125,3 +135,10 @@ type MTRAudioOutputClusterOutputInfoStructable interface {
 }
 
 var _ MTRAudioOutputClusterOutputInfoStructable = (*MTRAudioOutputClusterOutputInfoStruct)(nil)
+
+// isMTRAudioOutputClusterOutputInfoStruct marks MTRAudioOutputClusterOutputInfoStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRAudioOutputClusterOutputInfoStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRAudioOutputClusterOutputInfoStruct) isMTRAudioOutputClusterOutputInfoStruct() {}
+
+var _ MTRAudioOutputClusterOutputInfoStructProvider = (*MTRAudioOutputClusterOutputInfoStruct)(nil)

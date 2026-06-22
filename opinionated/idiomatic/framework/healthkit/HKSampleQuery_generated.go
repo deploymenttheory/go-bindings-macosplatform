@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A general query that returns a snapshot of all the matching samples currently saved in the HealthKit store.
-//
 // SampleQuery is an idiomatic wrapper over the Objective-C class HKSampleQuery.
+//
+// It embeds [Query], promoting that type's methods.
+//
+// A general query that returns a snapshot of all the matching samples currently saved in the HealthKit store.
 type SampleQuery struct {
-	objref.Handle
+	Query
 }
 
 // SampleQueryFromID adopts an existing Objective-C object as a SampleQuery
@@ -25,7 +26,8 @@ func SampleQueryFromID(id objc.ID) *SampleQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &SampleQuery{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SampleQuery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func sampleQueryAdopt(id objc.ID) *SampleQuery {
 	if id == 0 {
 		return nil
 	}
-	x := &SampleQuery{Handle: objref.Wrap(id)}
+	x := &SampleQuery{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SampleQuery) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SampleQuery) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SampleQuery) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSampleQuery creates a new SampleQuery.
@@ -64,13 +52,13 @@ func NewSampleQuery() *SampleQuery {
 	return sampleQueryAdopt(_id)
 }
 
-// The maximum number of results the receiver will return upon completion.
+// Limit the maximum number of results the receiver will return upon completion.
 func (x *SampleQuery) Limit() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("limit"))
 	return _r
 }
 
-// An array of NSSortDescriptors.
+// SortDescriptors an array of NSSortDescriptors.
 //
 // SortDescriptors returns the collection as a Go slice.
 func (x *SampleQuery) SortDescriptors() []obj.Object {
@@ -86,3 +74,5 @@ type SampleQueryable interface {
 }
 
 var _ SampleQueryable = (*SampleQuery)(nil)
+
+var _ QueryProvider = (*SampleQuery)(nil)

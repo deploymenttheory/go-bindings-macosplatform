@@ -23,7 +23,8 @@ func CompositionLayerFromID(id objc.ID) *CompositionLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &CompositionLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CompositionLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func compositionLayerAdopt(id objc.ID) *CompositionLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &CompositionLayer{Handle: objref.Wrap(id)}
+	x := &CompositionLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *CompositionLayer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CompositionLayer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCompositionLayerWithFile creates a new CompositionLayer.
 func NewCompositionLayerWithFile(path string) *CompositionLayer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("QCCompositionLayer")), objc.RegisterName("alloc"))
@@ -70,6 +78,7 @@ func NewCompositionLayerWithComposition(composition obj.Object) *CompositionLaye
 	return compositionLayerAdopt(_id)
 }
 
+// Composition wraps the corresponding Objective-C method.
 func (x *CompositionLayer) Composition() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("composition"))
 	return obj.Wrap(_r)

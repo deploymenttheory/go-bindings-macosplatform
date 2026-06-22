@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that provides searchable attributes for file types that the app supports.
-//
 // ImportExtension is an idiomatic wrapper over the Objective-C class CSImportExtension.
+//
+// An object that provides searchable attributes for file types that the app supports.
 type ImportExtension struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func ImportExtensionFromID(id objc.ID) *ImportExtension {
 	if id == 0 {
 		return nil
 	}
-	x := &ImportExtension{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImportExtension{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func importExtensionAdopt(id objc.ID) *ImportExtension {
 	if id == 0 {
 		return nil
 	}
-	x := &ImportExtension{Handle: objref.Wrap(id)}
+	x := &ImportExtension{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,13 +62,19 @@ func (x *ImportExtension) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ImportExtension) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewImportExtension creates a new ImportExtension.
 func NewImportExtension() *ImportExtension {
 	_id := objc.Send[objc.ID](objc.ID(_class("CSImportExtension")), objc.RegisterName("new"))
 	return importExtensionAdopt(_id)
 }
 
-// Provides searchable attributes for a file at the specified URL.
+// UpdateAttributesForFileAtURL provides searchable attributes for a file at the specified URL.
 func (x *ImportExtension) UpdateAttributesForFileAtURL(attributes *SearchableItemAttributeSet, contentURL string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("updateAttributes:forFileAtURL:error:"), objref.IDOf(attributes), rt.FileURL(contentURL), unsafe.Pointer(&_nsErr))

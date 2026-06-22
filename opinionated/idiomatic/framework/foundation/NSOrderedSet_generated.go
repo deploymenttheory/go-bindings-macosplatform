@@ -14,9 +14,11 @@ import (
 	"unsafe"
 )
 
-// A static, ordered collection of unique objects.
-//
 // OrderedSet is an idiomatic wrapper over the Objective-C class NSOrderedSet.
+//
+// OrderedSet is an abstract base — you do not construct it directly. Construct one of [MutableOrderedSet] and pass it where a OrderedSet is accepted.
+//
+// A static, ordered collection of unique objects.
 type OrderedSet struct {
 	objref.Handle
 }
@@ -27,7 +29,8 @@ func OrderedSetFromID(id objc.ID) *OrderedSet {
 	if id == 0 {
 		return nil
 	}
-	x := &OrderedSet{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OrderedSet{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +43,8 @@ func orderedSetAdopt(id objc.ID) *OrderedSet {
 	if id == 0 {
 		return nil
 	}
-	x := &OrderedSet{Handle: objref.Wrap(id)}
+	x := &OrderedSet{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,10 +64,10 @@ func (x *OrderedSet) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewOrderedSet creates a new OrderedSet.
-func NewOrderedSet() *OrderedSet {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("new"))
-	return orderedSetAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OrderedSet) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewOrderedSetWithCoder creates a new OrderedSet.
@@ -73,179 +77,164 @@ func NewOrderedSetWithCoder(coder *Coder) *OrderedSet {
 	return orderedSetAdopt(_id)
 }
 
-// Initializes a new ordered set with the object.
-//
-// NewOrderedSetWithObject creates a new OrderedSet.
+// NewOrderedSetWithObject initializes a new ordered set with the object.
 func NewOrderedSetWithObject(object obj.Object) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObject:"), objref.IDOf(object))
 	return orderedSetAdopt(_id)
 }
 
-// Initializes a newly allocated set with members taken from the specified list of objects.
-//
-// NewOrderedSetWithObjects creates a new OrderedSet.
+// NewOrderedSetWithObjects initializes a newly allocated set with members taken from the specified list of objects.
 func NewOrderedSetWithObjects(firstObj obj.Object) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjects:"), objref.IDOf(firstObj))
 	return orderedSetAdopt(_id)
 }
 
-// Initializes a new ordered set with the contents of a set.
-//
-// NewOrderedSetWithOrderedSet creates a new OrderedSet.
+// NewOrderedSetWithOrderedSet initializes a new ordered set with the contents of a set.
 func NewOrderedSetWithOrderedSet(set obj.Object) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOrderedSet:"), objref.IDOf(set))
 	return orderedSetAdopt(_id)
 }
 
-// Initializes a new ordered set with the contents of a set, optionally copying the items.
-//
-// NewOrderedSetWithOrderedSetCopyItems creates a new OrderedSet.
+// NewOrderedSetWithOrderedSetCopyItems initializes a new ordered set with the contents of a set, optionally copying the items.
 func NewOrderedSetWithOrderedSetCopyItems(set obj.Object, flag bool) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOrderedSet:copyItems:"), objref.IDOf(set), flag)
 	return orderedSetAdopt(_id)
 }
 
-// Initializes a newly allocated set with the objects that are contained in a given array.
-//
-// NewOrderedSetWithArray creates a new OrderedSet.
+// NewOrderedSetWithArray initializes a newly allocated set with the objects that are contained in a given array.
 func NewOrderedSetWithArray(array []obj.Object) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithArray:"), purego.SliceToNSArray(array, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return orderedSetAdopt(_id)
 }
 
-// Initializes a newly allocated set with the objects that are contained in a given array, optionally copying the items.
-//
-// NewOrderedSetWithArrayCopyItems creates a new OrderedSet.
+// NewOrderedSetWithArrayCopyItems initializes a newly allocated set with the objects that are contained in a given array, optionally copying the items.
 func NewOrderedSetWithArrayCopyItems(set []obj.Object, flag bool) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithArray:copyItems:"), purego.SliceToNSArray(set, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), flag)
 	return orderedSetAdopt(_id)
 }
 
-// Initializes a new ordered set with the contents of a set.
-//
-// NewOrderedSetWithSet creates a new OrderedSet.
+// NewOrderedSetWithSet initializes a new ordered set with the contents of a set.
 func NewOrderedSetWithSet(set obj.Object) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSet:"), objref.IDOf(set))
 	return orderedSetAdopt(_id)
 }
 
-// Initializes a new ordered set with the contents of a set, optionally copying the objects in the set.
-//
-// NewOrderedSetWithSetCopyItems creates a new OrderedSet.
+// NewOrderedSetWithSetCopyItems initializes a new ordered set with the contents of a set, optionally copying the objects in the set.
 func NewOrderedSetWithSetCopyItems(set obj.Object, flag bool) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSet:copyItems:"), objref.IDOf(set), flag)
 	return orderedSetAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *OrderedSet) WithScriptingProperties(scriptingProperties obj.Object) *OrderedSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Returns the object at the specified index of the set.
+// ObjectAtIndex returns the object at the specified index of the set.
 func (x *OrderedSet) ObjectAtIndex(idx int) obj.Object {
 	errkit.CheckIndex(idx, x.Count())
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndex:"), idx)
 	return obj.Wrap(_r)
 }
 
-// Returns the index of the specified object.
+// IndexOfObject returns the index of the specified object.
 func (x *OrderedSet) IndexOfObject(object obj.Object) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfObject:"), objref.IDOf(object))
 	return _r
 }
 
+// Count wraps the corresponding Objective-C method.
 func (x *OrderedSet) Count() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
 	return _r
 }
 
-// Returns the objects in the ordered set at the specified indexes.
+// ObjectsAtIndexes returns the objects in the ordered set at the specified indexes.
 func (x *OrderedSet) ObjectsAtIndexes(indexes *IndexSet) []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectsAtIndexes:"), objref.IDOf(indexes))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Compares the receiving ordered set to another ordered set.
+// IsEqualToOrderedSet compares the receiving ordered set to another ordered set.
 func (x *OrderedSet) IsEqualToOrderedSet(other obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToOrderedSet:"), objref.IDOf(other))
 	return _r
 }
 
-// Returns a Boolean value that indicates whether a given object is present in the ordered set.
+// ContainsObject returns a Boolean value that indicates whether a given object is present in the ordered set.
 func (x *OrderedSet) ContainsObject(object obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsObject:"), objref.IDOf(object))
 	return _r
 }
 
-// Returns a Boolean value that indicates whether at least one object in the receiving ordered set is also present in another given ordered set.
+// IntersectsOrderedSet returns a Boolean value that indicates whether at least one object in the receiving ordered set is also present in another given ordered set.
 func (x *OrderedSet) IntersectsOrderedSet(other obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("intersectsOrderedSet:"), objref.IDOf(other))
 	return _r
 }
 
-// Returns a Boolean value that indicates whether at least one object in the receiving ordered set is also present in another given set.
+// IntersectsSet returns a Boolean value that indicates whether at least one object in the receiving ordered set is also present in another given set.
 func (x *OrderedSet) IntersectsSet(set obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("intersectsSet:"), objref.IDOf(set))
 	return _r
 }
 
-// Returns a Boolean value that indicates whether every object in the receiving ordered set is also present in another given ordered set.
+// IsSubsetOfOrderedSet returns a Boolean value that indicates whether every object in the receiving ordered set is also present in another given ordered set.
 func (x *OrderedSet) IsSubsetOfOrderedSet(other obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSubsetOfOrderedSet:"), objref.IDOf(other))
 	return _r
 }
 
-// Returns a Boolean value that indicates whether every object in the receiving ordered set is also present in another given set.
+// IsSubsetOfSet returns a Boolean value that indicates whether every object in the receiving ordered set is also present in another given set.
 func (x *OrderedSet) IsSubsetOfSet(set obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSubsetOfSet:"), objref.IDOf(set))
 	return _r
 }
 
-// Returns the object at the specified index of the set.
+// ObjectAtIndexedSubscript returns the object at the specified index of the set.
 func (x *OrderedSet) ObjectAtIndexedSubscript(idx int) obj.Object {
 	errkit.CheckIndex(idx, x.Count())
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), idx)
 	return obj.Wrap(_r)
 }
 
-// Returns an enumerator object that lets you access each object in the ordered set.
+// ObjectEnumerator returns an enumerator object that lets you access each object in the ordered set.
 func (x *OrderedSet) ObjectEnumerator() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectEnumerator"))
 	return obj.Wrap(_r)
 }
 
-// Returns an enumerator object that lets you access each object in the ordered set.
+// ReverseObjectEnumerator returns an enumerator object that lets you access each object in the ordered set.
 func (x *OrderedSet) ReverseObjectEnumerator() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reverseObjectEnumerator"))
 	return obj.Wrap(_r)
 }
 
-// Executes a given block using each object in the ordered set.
+// EnumerateObjectsUsing executes a given block using each object in the ordered set.
 func (x *OrderedSet) EnumerateObjectsUsing(block func(obj.Object, int, *bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateObjectsUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
 }
 
-// Executes a given block using each object in the set, using the specified enumeration options.
+// EnumerateObjectsWithOptionsUsing executes a given block using each object in the set, using the specified enumeration options.
 func (x *OrderedSet) EnumerateObjectsWithOptionsUsing(opts EnumerationOptions, block func(obj.Object, int, *bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateObjectsWithOptions:usingBlock:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
 }
 
-// Executes a given block using the objects in the ordered set at the specified indexes.
+// EnumerateObjectsAtIndexesOptionsUsing executes a given block using the objects in the ordered set at the specified indexes.
 func (x *OrderedSet) EnumerateObjectsAtIndexesOptionsUsing(s *IndexSet, opts EnumerationOptions, block func(obj.Object, int, *bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateObjectsAtIndexes:options:usingBlock:"), objref.IDOf(s), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
 }
 
-// Returns the index of the object in the ordered set that passes a test in a given block.
+// IndexOfObjectPassingTest returns the index of the object in the ordered set that passes a test in a given block.
 func (x *OrderedSet) IndexOfObjectPassingTest(predicate func(obj.Object, int, *bool) bool) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfObjectPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
@@ -253,7 +242,7 @@ func (x *OrderedSet) IndexOfObjectPassingTest(predicate func(obj.Object, int, *b
 	return _r
 }
 
-// Returns the index of an object in the ordered set that passes a test in a given block for a given set of enumeration options.
+// IndexOfObjectWithOptionsPassingTest returns the index of an object in the ordered set that passes a test in a given block for a given set of enumeration options.
 func (x *OrderedSet) IndexOfObjectWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfObjectWithOptions:passingTest:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
@@ -261,7 +250,7 @@ func (x *OrderedSet) IndexOfObjectWithOptionsPassingTest(opts EnumerationOptions
 	return _r
 }
 
-// Returns the index, from a given set of indexes, of the object in the ordered set that passes a test in a given block for a given set of enumeration options.
+// IndexOfObjectAtIndexesOptionsPassingTest returns the index, from a given set of indexes, of the object in the ordered set that passes a test in a given block for a given set of enumeration options.
 func (x *OrderedSet) IndexOfObjectAtIndexesOptionsPassingTest(s *IndexSet, opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfObjectAtIndexes:options:passingTest:"), objref.IDOf(s), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
@@ -269,7 +258,7 @@ func (x *OrderedSet) IndexOfObjectAtIndexesOptionsPassingTest(s *IndexSet, opts 
 	return _r
 }
 
-// Returns the index of the object in the ordered set that passes a test in a given block.
+// IndexesOfObjectsPassingTest returns the index of the object in the ordered set that passes a test in a given block.
 func (x *OrderedSet) IndexesOfObjectsPassingTest(predicate func(obj.Object, int, *bool) bool) *IndexSet {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexesOfObjectsPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
@@ -277,7 +266,7 @@ func (x *OrderedSet) IndexesOfObjectsPassingTest(predicate func(obj.Object, int,
 	return IndexSetFromID(_r)
 }
 
-// Returns the index of an object in the ordered set that passes a test in a given block for a given set of enumeration options.
+// IndexesOfObjectsWithOptionsPassingTest returns the index of an object in the ordered set that passes a test in a given block for a given set of enumeration options.
 func (x *OrderedSet) IndexesOfObjectsWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) *IndexSet {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexesOfObjectsWithOptions:passingTest:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
@@ -285,7 +274,7 @@ func (x *OrderedSet) IndexesOfObjectsWithOptionsPassingTest(opts EnumerationOpti
 	return IndexSetFromID(_r)
 }
 
-// Returns the index, from a given set of indexes, of the object in the ordered set that passes a test in a given block for a given set of enumeration options.
+// IndexesOfObjectsAtIndexesOptionsPassingTest returns the index, from a given set of indexes, of the object in the ordered set that passes a test in a given block for a given set of enumeration options.
 func (x *OrderedSet) IndexesOfObjectsAtIndexesOptionsPassingTest(s *IndexSet, opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) *IndexSet {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexesOfObjectsAtIndexes:options:passingTest:"), objref.IDOf(s), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
@@ -293,7 +282,7 @@ func (x *OrderedSet) IndexesOfObjectsAtIndexesOptionsPassingTest(s *IndexSet, op
 	return IndexSetFromID(_r)
 }
 
-// Returns a string that represents the contents of the ordered set, formatted as a property list.
+// DescriptionWithLocale returns a string that represents the contents of the ordered set, formatted as a property list.
 func (x *OrderedSet) DescriptionWithLocale(locale obj.Object) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionWithLocale:"), objref.IDOf(locale))
 	if _r == 0 {
@@ -302,7 +291,7 @@ func (x *OrderedSet) DescriptionWithLocale(locale obj.Object) string {
 	return purego.GoString(_r)
 }
 
-// Returns a string that represents the contents of the ordered set, formatted as a property list.
+// DescriptionWithLocaleIndent returns a string that represents the contents of the ordered set, formatted as a property list.
 func (x *OrderedSet) DescriptionWithLocaleIndent(locale obj.Object, level int) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionWithLocale:indent:"), objref.IDOf(locale), level)
 	if _r == 0 {
@@ -311,62 +300,67 @@ func (x *OrderedSet) DescriptionWithLocaleIndent(locale obj.Object, level int) s
 	return purego.GoString(_r)
 }
 
+// FirstObject wraps the corresponding Objective-C method.
 func (x *OrderedSet) FirstObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstObject"))
 	return obj.Wrap(_r)
 }
 
+// LastObject wraps the corresponding Objective-C method.
 func (x *OrderedSet) LastObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastObject"))
 	return obj.Wrap(_r)
 }
 
+// ReversedOrderedSet wraps the corresponding Objective-C method.
 func (x *OrderedSet) ReversedOrderedSet() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reversedOrderedSet"))
 	return obj.Wrap(_r)
 }
 
+// Array wraps the corresponding Objective-C method.
 func (x *OrderedSet) Array() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("array"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// Set wraps the corresponding Objective-C method.
 func (x *OrderedSet) Set() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("set"))
 	return obj.Wrap(_r)
 }
 
-// Compares two ordered sets, using the provided block and with options, to create a difference object that represents the changes between them.
+// DifferenceFromOrderedSetWithOptionsUsingEquivalenceTest compares two ordered sets, using the provided block and with options, to create a difference object that represents the changes between them.
 func (x *OrderedSet) DifferenceFromOrderedSetWithOptionsUsingEquivalenceTest(other obj.Object, options OrderedCollectionDifferenceCalculationOptions, block func(obj.Object, obj.Object) bool) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("differenceFromOrderedSet:withOptions:usingEquivalenceTest:"), objref.IDOf(other), options, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) bool { return block(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return obj.Wrap(_r)
 }
 
-// Compares two ordered sets, with options, to create a difference object that represents the changes between them.
+// DifferenceFromOrderedSetWithOptions compares two ordered sets, with options, to create a difference object that represents the changes between them.
 func (x *OrderedSet) DifferenceFromOrderedSetWithOptions(other obj.Object, options OrderedCollectionDifferenceCalculationOptions) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("differenceFromOrderedSet:withOptions:"), objref.IDOf(other), options)
 	return obj.Wrap(_r)
 }
 
-// Compares two ordered sets to create a difference object that represents the changes between them.
+// DifferenceFromOrderedSet compares two ordered sets to create a difference object that represents the changes between them.
 func (x *OrderedSet) DifferenceFromOrderedSet(other obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("differenceFromOrderedSet:"), objref.IDOf(other))
 	return obj.Wrap(_r)
 }
 
-// Creates a new ordered set by applying a difference object to an existing ordered set.
+// OrderedSetByApplyingDifference creates a new ordered set by applying a difference object to an existing ordered set.
 func (x *OrderedSet) OrderedSetByApplyingDifference(difference obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderedSetByApplyingDifference:"), objref.IDOf(difference))
 	return obj.Wrap(_r)
 }
 
-// Returns an array of the ordered set’s elements sorted as specified by a given array of sort descriptors.
+// SortedArrayUsingDescriptors returns an array of the ordered set’s elements sorted as specified by a given array of sort descriptors.
 func (x *OrderedSet) SortedArrayUsingDescriptors(sortDescriptors []*SortDescriptor) []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortedArrayUsingDescriptors:"), purego.SliceToNSArray(sortDescriptors, func(_v *SortDescriptor) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Evaluates a given predicate against each object in the receiving ordered set and returns a new ordered set containing the objects for which the predicate returns true.
+// FilteredOrderedSetUsingPredicate evaluates a given predicate against each object in the receiving ordered set and returns a new ordered set containing the objects for which the predicate returns true.
 func (x *OrderedSet) FilteredOrderedSetUsingPredicate(p *Predicate) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filteredOrderedSetUsingPredicate:"), objref.IDOf(p))
 	return obj.Wrap(_r)
@@ -414,3 +408,10 @@ type OrderedSetable interface {
 }
 
 var _ OrderedSetable = (*OrderedSet)(nil)
+
+// isOrderedSet marks OrderedSet — and, by embedding promotion, its
+// subclasses — as a member of the OrderedSet hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *OrderedSet) isOrderedSet() {}
+
+var _ OrderedSetProvider = (*OrderedSet)(nil)

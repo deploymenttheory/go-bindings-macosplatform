@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A proxy for a Safari app extension toolbar item in a Safari window.
-//
 // SafariToolbarItem is an idiomatic wrapper over the Objective-C class SFSafariToolbarItem.
+//
+// A proxy for a Safari app extension toolbar item in a Safari window.
 type SafariToolbarItem struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SafariToolbarItemFromID(id objc.ID) *SafariToolbarItem {
 	if id == 0 {
 		return nil
 	}
-	x := &SafariToolbarItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SafariToolbarItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func safariToolbarItemAdopt(id objc.ID) *SafariToolbarItem {
 	if id == 0 {
 		return nil
 	}
-	x := &SafariToolbarItem{Handle: objref.Wrap(id)}
+	x := &SafariToolbarItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,38 +60,44 @@ func (x *SafariToolbarItem) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SafariToolbarItem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSafariToolbarItem creates a new SafariToolbarItem.
 func NewSafariToolbarItem() *SafariToolbarItem {
 	_id := objc.Send[objc.ID](objc.ID(_class("SFSafariToolbarItem")), objc.RegisterName("new"))
 	return safariToolbarItemAdopt(_id)
 }
 
-// Sets the enabled state and the badge text for the toolbar item.
+// SetEnabledWithBadgeText sets the enabled state and the badge text for the toolbar item.
 func (x *SafariToolbarItem) SetEnabledWithBadgeText(enabled bool, badgeText string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:withBadgeText:"), enabled, purego.NSString(badgeText))
 }
 
-// Sets whether the toolbar item is enabled.
+// SetEnabled sets whether the toolbar item is enabled.
 func (x *SafariToolbarItem) SetEnabled(enabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
-// Sets the badge text for the toolbar item.
+// SetBadgeText sets the badge text for the toolbar item.
 func (x *SafariToolbarItem) SetBadgeText(badgeText string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadgeText:"), purego.NSString(badgeText))
 }
 
-// Sets the image displayed in the toolbar button.
+// SetImage sets the image displayed in the toolbar button.
 func (x *SafariToolbarItem) SetImage(image obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 }
 
-// Sets the label for the toolbar button. Setting the label to nil will set the default label.
+// SetLabel sets the label for the toolbar button. Setting the label to nil will set the default label.
 func (x *SafariToolbarItem) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// Shows the popover associated with this toolbar button.
+// ShowPopover shows the popover associated with this toolbar button.
 func (x *SafariToolbarItem) ShowPopover() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showPopover"))
 }

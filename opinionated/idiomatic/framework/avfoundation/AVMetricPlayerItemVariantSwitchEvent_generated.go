@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event that represents when the player completes a variant switch.
-//
 // MetricPlayerItemVariantSwitchEvent is an idiomatic wrapper over the Objective-C class AVMetricPlayerItemVariantSwitchEvent.
+//
+// It embeds [MetricEvent], promoting that type's methods.
+//
+// An event that represents when the player completes a variant switch.
 type MetricPlayerItemVariantSwitchEvent struct {
-	objref.Handle
+	MetricEvent
 }
 
 // MetricPlayerItemVariantSwitchEventFromID adopts an existing Objective-C object as a MetricPlayerItemVariantSwitchEvent
@@ -25,7 +26,8 @@ func MetricPlayerItemVariantSwitchEventFromID(id objc.ID) *MetricPlayerItemVaria
 	if id == 0 {
 		return nil
 	}
-	x := &MetricPlayerItemVariantSwitchEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetricPlayerItemVariantSwitchEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func metricPlayerItemVariantSwitchEventAdopt(id objc.ID) *MetricPlayerItemVarian
 	if id == 0 {
 		return nil
 	}
-	x := &MetricPlayerItemVariantSwitchEvent{Handle: objref.Wrap(id)}
+	x := &MetricPlayerItemVariantSwitchEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MetricPlayerItemVariantSwitchEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetricPlayerItemVariantSwitchEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetricPlayerItemVariantSwitchEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMetricPlayerItemVariantSwitchEvent creates a new MetricPlayerItemVariantSwitchEvent.
@@ -64,19 +52,19 @@ func NewMetricPlayerItemVariantSwitchEvent() *MetricPlayerItemVariantSwitchEvent
 	return metricPlayerItemVariantSwitchEventAdopt(_id)
 }
 
-// Returns the variant before the switch. If no value is available, returns nil
+// FromVariant returns the variant before the switch. If no value is available, returns nil
 func (x *MetricPlayerItemVariantSwitchEvent) FromVariant() *AssetVariant {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fromVariant"))
 	return AssetVariantFromID(_r)
 }
 
-// Returns the variant after the switch.
+// ToVariant returns the variant after the switch.
 func (x *MetricPlayerItemVariantSwitchEvent) ToVariant() *AssetVariant {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toVariant"))
 	return AssetVariantFromID(_r)
 }
 
-// This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
+// LoadedTimeRanges this property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
 //
 // LoadedTimeRanges returns the collection as a Go slice.
 func (x *MetricPlayerItemVariantSwitchEvent) LoadedTimeRanges() []obj.Object {
@@ -84,25 +72,25 @@ func (x *MetricPlayerItemVariantSwitchEvent) LoadedTimeRanges() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Represents the currently selected video rendition's identifiers. Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+// VideoRendition represents the currently selected video rendition's identifiers. Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 func (x *MetricPlayerItemVariantSwitchEvent) VideoRendition() *MetricMediaRendition {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoRendition"))
 	return MetricMediaRenditionFromID(_r)
 }
 
-// Represents the currently selected video rendition's identifiers. Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+// AudioRendition represents the currently selected video rendition's identifiers. Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 func (x *MetricPlayerItemVariantSwitchEvent) AudioRendition() *MetricMediaRendition {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioRendition"))
 	return MetricMediaRenditionFromID(_r)
 }
 
-// Represents the currently selected audio rendition's identifiers. Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+// SubtitleRendition represents the currently selected audio rendition's identifiers. Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 func (x *MetricPlayerItemVariantSwitchEvent) SubtitleRendition() *MetricMediaRendition {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitleRendition"))
 	return MetricMediaRenditionFromID(_r)
 }
 
-// Returns if the switch did succeed.
+// DidSucceed returns if the switch did succeed.
 func (x *MetricPlayerItemVariantSwitchEvent) DidSucceed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("didSucceed"))
 	return _r
@@ -121,3 +109,5 @@ type MetricPlayerItemVariantSwitchEventable interface {
 }
 
 var _ MetricPlayerItemVariantSwitchEventable = (*MetricPlayerItemVariantSwitchEvent)(nil)
+
+var _ MetricEventProvider = (*MetricPlayerItemVariantSwitchEvent)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of options affecting the delivery of Live Photo assets you request from an image manager.
-//
 // LivePhotoRequestOptions is an idiomatic wrapper over the Objective-C class PHLivePhotoRequestOptions.
+//
+// A set of options affecting the delivery of Live Photo assets you request from an image manager.
 type LivePhotoRequestOptions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LivePhotoRequestOptionsFromID(id objc.ID) *LivePhotoRequestOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &LivePhotoRequestOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LivePhotoRequestOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func livePhotoRequestOptionsAdopt(id objc.ID) *LivePhotoRequestOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &LivePhotoRequestOptions{Handle: objref.Wrap(id)}
+	x := &LivePhotoRequestOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,42 +60,48 @@ func (x *LivePhotoRequestOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LivePhotoRequestOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLivePhotoRequestOptions creates a new LivePhotoRequestOptions.
 func NewLivePhotoRequestOptions() *LivePhotoRequestOptions {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHLivePhotoRequestOptions")), objc.RegisterName("new"))
 	return livePhotoRequestOptionsAdopt(_id)
 }
 
-// The requested Live Photo quality and delivery priority.
-//
-// WithDeliveryMode sets deliveryMode and returns the receiver so calls can be chained.
+// WithDeliveryMode the requested Live Photo quality and delivery priority.
 func (x *LivePhotoRequestOptions) WithDeliveryMode(deliveryMode ImageRequestOptionsDeliveryMode) *LivePhotoRequestOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeliveryMode:"), deliveryMode)
 	return x
 }
 
-// A Boolean value that specifies whether Photos can download the requested Live Photo data from iCloud.
-//
-// WithNetworkAccessAllowed sets networkAccessAllowed and returns the receiver so calls can be chained.
+// WithNetworkAccessAllowed a Boolean value that specifies whether Photos can download the requested Live Photo data from iCloud.
 func (x *LivePhotoRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bool) *LivePhotoRequestOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
 	return x
 }
 
+// DeliveryMode wraps the corresponding Objective-C method.
 func (x *LivePhotoRequestOptions) DeliveryMode() ImageRequestOptionsDeliveryMode {
 	_r := objc.Send[ImageRequestOptionsDeliveryMode](objref.IDOf(x), objc.RegisterName("deliveryMode"))
 	return _r
 }
 
+// SetDeliveryMode wraps the corresponding Objective-C method.
 func (x *LivePhotoRequestOptions) SetDeliveryMode(deliveryMode ImageRequestOptionsDeliveryMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeliveryMode:"), deliveryMode)
 }
 
+// IsNetworkAccessAllowed wraps the corresponding Objective-C method.
 func (x *LivePhotoRequestOptions) IsNetworkAccessAllowed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNetworkAccessAllowed"))
 	return _r
 }
 
+// SetNetworkAccessAllowed wraps the corresponding Objective-C method.
 func (x *LivePhotoRequestOptions) SetNetworkAccessAllowed(networkAccessAllowed bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
 }

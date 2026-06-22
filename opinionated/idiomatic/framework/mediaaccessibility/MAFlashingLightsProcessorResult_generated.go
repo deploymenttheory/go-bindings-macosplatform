@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that reports the result of the flashing lights processor.
-//
 // FlashingLightsProcessorResult is an idiomatic wrapper over the Objective-C class MAFlashingLightsProcessorResult.
+//
+// An object that reports the result of the flashing lights processor.
 type FlashingLightsProcessorResult struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FlashingLightsProcessorResultFromID(id objc.ID) *FlashingLightsProcessorRes
 	if id == 0 {
 		return nil
 	}
-	x := &FlashingLightsProcessorResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FlashingLightsProcessorResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func flashingLightsProcessorResultAdopt(id objc.ID) *FlashingLightsProcessorResu
 	if id == 0 {
 		return nil
 	}
-	x := &FlashingLightsProcessorResult{Handle: objref.Wrap(id)}
+	x := &FlashingLightsProcessorResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,31 @@ func (x *FlashingLightsProcessorResult) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FlashingLightsProcessorResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFlashingLightsProcessorResult creates a new FlashingLightsProcessorResult.
 func NewFlashingLightsProcessorResult() *FlashingLightsProcessorResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("MAFlashingLightsProcessorResult")), objc.RegisterName("new"))
 	return flashingLightsProcessorResultAdopt(_id)
 }
 
+// SurfaceProcessed wraps the corresponding Objective-C method.
 func (x *FlashingLightsProcessorResult) SurfaceProcessed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("surfaceProcessed"))
 	return _r
 }
 
+// MitigationLevel wraps the corresponding Objective-C method.
 func (x *FlashingLightsProcessorResult) MitigationLevel() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("mitigationLevel"))
 	return _r
 }
 
+// IntensityLevel wraps the corresponding Objective-C method.
 func (x *FlashingLightsProcessorResult) IntensityLevel() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("intensityLevel"))
 	return _r

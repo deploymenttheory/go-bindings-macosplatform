@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that restricts the messages that can be sent to another object (referred to as the checker’s delegate).
-//
 // ProtocolChecker is an idiomatic wrapper over the Objective-C class NSProtocolChecker.
+//
+// An object that restricts the messages that can be sent to another object (referred to as the checker’s delegate).
 type ProtocolChecker struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ProtocolCheckerFromID(id objc.ID) *ProtocolChecker {
 	if id == 0 {
 		return nil
 	}
-	x := &ProtocolChecker{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ProtocolChecker{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func protocolCheckerAdopt(id objc.ID) *ProtocolChecker {
 	if id == 0 {
 		return nil
 	}
-	x := &ProtocolChecker{Handle: objref.Wrap(id)}
+	x := &ProtocolChecker{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *ProtocolChecker) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ProtocolChecker) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewProtocolChecker creates a new ProtocolChecker.
 func NewProtocolChecker() *ProtocolChecker {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSProtocolChecker")), objc.RegisterName("new"))
 	return protocolCheckerAdopt(_id)
 }
 
+// Target wraps the corresponding Objective-C method.
 func (x *ProtocolChecker) Target() *Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
 	return ObjectFromID(_r)

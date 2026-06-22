@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that configures new render pipeline state objects for tile shading.
-//
 // TileRenderPipelineDescriptor is an idiomatic wrapper over the Objective-C class MTLTileRenderPipelineDescriptor.
+//
+// An object that configures new render pipeline state objects for tile shading.
 type TileRenderPipelineDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TileRenderPipelineDescriptorFromID(id objc.ID) *TileRenderPipelineDescripto
 	if id == 0 {
 		return nil
 	}
-	x := &TileRenderPipelineDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TileRenderPipelineDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func tileRenderPipelineDescriptorAdopt(id objc.ID) *TileRenderPipelineDescriptor
 	if id == 0 {
 		return nil
 	}
-	x := &TileRenderPipelineDescriptor{Handle: objref.Wrap(id)}
+	x := &TileRenderPipelineDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,82 +60,72 @@ func (x *TileRenderPipelineDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TileRenderPipelineDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTileRenderPipelineDescriptor creates a new TileRenderPipelineDescriptor.
 func NewTileRenderPipelineDescriptor() *TileRenderPipelineDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLTileRenderPipelineDescriptor")), objc.RegisterName("new"))
 	return tileRenderPipelineDescriptorAdopt(_id)
 }
 
-// A string that identifies the tile pipeline descriptor.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string that identifies the tile pipeline descriptor.
 func (x *TileRenderPipelineDescriptor) WithLabel(label string) *TileRenderPipelineDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The number of samples in each fragment.
-//
-// WithRasterSampleCount sets rasterSampleCount and returns the receiver so calls can be chained.
+// WithRasterSampleCount the number of samples in each fragment.
 func (x *TileRenderPipelineDescriptor) WithRasterSampleCount(rasterSampleCount int) *TileRenderPipelineDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterSampleCount:"), rasterSampleCount)
 	return x
 }
 
-// A Boolean value that indicates whether all threadgroups for this pipeline completely cover tiles.
-//
-// WithThreadgroupSizeMatchesTileSize sets threadgroupSizeMatchesTileSize and returns the receiver so calls can be chained.
+// WithThreadgroupSizeMatchesTileSize a Boolean value that indicates whether all threadgroups for this pipeline completely cover tiles.
 func (x *TileRenderPipelineDescriptor) WithThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize bool) *TileRenderPipelineDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadgroupSizeMatchesTileSize:"), threadgroupSizeMatchesTileSize)
 	return x
 }
 
-// The maximum number of threads in a threadgroup when dispatching a command using the pipeline.
-//
-// WithMaxTotalThreadsPerThreadgroup sets maxTotalThreadsPerThreadgroup and returns the receiver so calls can be chained.
+// WithMaxTotalThreadsPerThreadgroup the maximum number of threads in a threadgroup when dispatching a command using the pipeline.
 func (x *TileRenderPipelineDescriptor) WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup int) *TileRenderPipelineDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxTotalThreadsPerThreadgroup:"), maxTotalThreadsPerThreadgroup)
 	return x
 }
 
-// Functions that you can specify as function arguments for the tile shader when encoding commands that use the pipeline.
-//
-// WithLinkedFunctions sets linkedFunctions and returns the receiver so calls can be chained.
+// WithLinkedFunctions functions that you can specify as function arguments for the tile shader when encoding commands that use the pipeline.
 func (x *TileRenderPipelineDescriptor) WithLinkedFunctions(linkedFunctions *LinkedFunctions) *TileRenderPipelineDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinkedFunctions:"), objref.IDOf(linkedFunctions))
 	return x
 }
 
-// A Boolean value that indicates whether you can use the pipeline to create new pipelines by adding binary functions to its callable functions list.
-//
-// WithSupportAddingBinaryFunctions sets supportAddingBinaryFunctions and returns the receiver so calls can be chained.
+// WithSupportAddingBinaryFunctions a Boolean value that indicates whether you can use the pipeline to create new pipelines by adding binary functions to its callable functions list.
 func (x *TileRenderPipelineDescriptor) WithSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool) *TileRenderPipelineDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportAddingBinaryFunctions:"), supportAddingBinaryFunctions)
 	return x
 }
 
-// The maximum call stack depth for indirect function calls in tile shaders.
-//
-// WithMaxCallStackDepth sets maxCallStackDepth and returns the receiver so calls can be chained.
+// WithMaxCallStackDepth the maximum call stack depth for indirect function calls in tile shaders.
 func (x *TileRenderPipelineDescriptor) WithMaxCallStackDepth(maxCallStackDepth int) *TileRenderPipelineDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCallStackDepth:"), maxCallStackDepth)
 	return x
 }
 
-// A value that enables or disables shader validation for the pipeline.
-//
-// WithShaderValidation sets shaderValidation and returns the receiver so calls can be chained.
+// WithShaderValidation a value that enables or disables shader validation for the pipeline.
 func (x *TileRenderPipelineDescriptor) WithShaderValidation(shaderValidation ShaderValidation) *TileRenderPipelineDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShaderValidation:"), shaderValidation)
 	return x
 }
 
-// Specifies the default rendering pipeline state values for the descriptor.
+// Reset specifies the default rendering pipeline state values for the descriptor.
 func (x *TileRenderPipelineDescriptor) Reset() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
-// The descriptor label.
+// Label the descriptor label.
 func (x *TileRenderPipelineDescriptor) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -142,108 +134,118 @@ func (x *TileRenderPipelineDescriptor) Label() string {
 	return purego.GoString(_r)
 }
 
+// SetLabel wraps the corresponding Objective-C method.
 func (x *TileRenderPipelineDescriptor) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
+// RasterSampleCount wraps the corresponding Objective-C method.
 func (x *TileRenderPipelineDescriptor) RasterSampleCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rasterSampleCount"))
 	return _r
 }
 
+// SetRasterSampleCount wraps the corresponding Objective-C method.
 func (x *TileRenderPipelineDescriptor) SetRasterSampleCount(rasterSampleCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterSampleCount:"), rasterSampleCount)
 }
 
+// ColorAttachments wraps the corresponding Objective-C method.
 func (x *TileRenderPipelineDescriptor) ColorAttachments() *TileRenderPipelineColorAttachmentDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorAttachments"))
 	return TileRenderPipelineColorAttachmentDescriptorArrayFromID(_r)
 }
 
-// Whether all threadgroups associated with this pipeline will cover tiles entirely. Metal can optimize code generation for this case.
+// ThreadgroupSizeMatchesTileSize whether all threadgroups associated with this pipeline will cover tiles entirely. Metal can optimize code generation for this case.
 func (x *TileRenderPipelineDescriptor) ThreadgroupSizeMatchesTileSize() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("threadgroupSizeMatchesTileSize"))
 	return _r
 }
 
+// SetThreadgroupSizeMatchesTileSize wraps the corresponding Objective-C method.
 func (x *TileRenderPipelineDescriptor) SetThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadgroupSizeMatchesTileSize:"), threadgroupSizeMatchesTileSize)
 }
 
+// TileBuffers wraps the corresponding Objective-C method.
 func (x *TileRenderPipelineDescriptor) TileBuffers() *PipelineBufferDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tileBuffers"))
 	return PipelineBufferDescriptorArrayFromID(_r)
 }
 
-// Optional property. Set the maxTotalThreadsPerThreadgroup. If it is not set, returns zero.
+// MaxTotalThreadsPerThreadgroup optional property. Set the maxTotalThreadsPerThreadgroup. If it is not set, returns zero.
 func (x *TileRenderPipelineDescriptor) MaxTotalThreadsPerThreadgroup() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxTotalThreadsPerThreadgroup"))
 	return _r
 }
 
+// SetMaxTotalThreadsPerThreadgroup wraps the corresponding Objective-C method.
 func (x *TileRenderPipelineDescriptor) SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxTotalThreadsPerThreadgroup:"), maxTotalThreadsPerThreadgroup)
 }
 
-// The set of MTLBinaryArchive to search for compiled code when creating the pipeline state. Accelerate pipeline state creation by providing archives of compiled code such that no compilation needs to happen on the fast path.
+// BinaryArchives the set of MTLBinaryArchive to search for compiled code when creating the pipeline state. Accelerate pipeline state creation by providing archives of compiled code such that no compilation needs to happen on the fast path.
 func (x *TileRenderPipelineDescriptor) BinaryArchives() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("binaryArchives"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetBinaryArchives wraps the corresponding Objective-C method.
 func (x *TileRenderPipelineDescriptor) SetBinaryArchives(binaryArchives []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBinaryArchives:"), purego.SliceToNSArray(binaryArchives, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// The set of MTLDynamicLibrary to use to resolve external symbols before considering symbols from dependent MTLDynamicLibrary. Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use preloadedLibraries. This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations. It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system.
+// PreloadedLibraries the set of MTLDynamicLibrary to use to resolve external symbols before considering symbols from dependent MTLDynamicLibrary. Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use preloadedLibraries. This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations. It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system.
 func (x *TileRenderPipelineDescriptor) PreloadedLibraries() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preloadedLibraries"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetPreloadedLibraries wraps the corresponding Objective-C method.
 func (x *TileRenderPipelineDescriptor) SetPreloadedLibraries(preloadedLibraries []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreloadedLibraries:"), purego.SliceToNSArray(preloadedLibraries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// The set of functions to be linked with the pipeline state and accessed from the tile function.
+// LinkedFunctions the set of functions to be linked with the pipeline state and accessed from the tile function.
 func (x *TileRenderPipelineDescriptor) LinkedFunctions() *LinkedFunctions {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("linkedFunctions"))
 	return LinkedFunctionsFromID(_r)
 }
 
-// The set of functions to be linked with the pipeline state and accessed from the tile function.
+// SetLinkedFunctions the set of functions to be linked with the pipeline state and accessed from the tile function.
 func (x *TileRenderPipelineDescriptor) SetLinkedFunctions(linkedFunctions *LinkedFunctions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinkedFunctions:"), objref.IDOf(linkedFunctions))
 }
 
-// This flag makes this pipeline support creating a new pipeline by adding binary functions.
+// SupportAddingBinaryFunctions this flag makes this pipeline support creating a new pipeline by adding binary functions.
 func (x *TileRenderPipelineDescriptor) SupportAddingBinaryFunctions() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportAddingBinaryFunctions"))
 	return _r
 }
 
-// This flag makes this pipeline support creating a new pipeline by adding binary functions.
+// SetSupportAddingBinaryFunctions this flag makes this pipeline support creating a new pipeline by adding binary functions.
 func (x *TileRenderPipelineDescriptor) SetSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportAddingBinaryFunctions:"), supportAddingBinaryFunctions)
 }
 
-// The maximum depth of the call stack in stack frames from the tile function. Defaults to 1 additional stack frame.
+// MaxCallStackDepth the maximum depth of the call stack in stack frames from the tile function. Defaults to 1 additional stack frame.
 func (x *TileRenderPipelineDescriptor) MaxCallStackDepth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxCallStackDepth"))
 	return _r
 }
 
-// The maximum depth of the call stack in stack frames from the tile function. Defaults to 1 additional stack frame.
+// SetMaxCallStackDepth the maximum depth of the call stack in stack frames from the tile function. Defaults to 1 additional stack frame.
 func (x *TileRenderPipelineDescriptor) SetMaxCallStackDepth(maxCallStackDepth int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCallStackDepth:"), maxCallStackDepth)
 }
 
-// Toggle that determines whether Metal Shader Validation should be enabled or disabled for the pipeline. The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
+// ShaderValidation toggle that determines whether Metal Shader Validation should be enabled or disabled for the pipeline. The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
 func (x *TileRenderPipelineDescriptor) ShaderValidation() ShaderValidation {
 	_r := objc.Send[ShaderValidation](objref.IDOf(x), objc.RegisterName("shaderValidation"))
 	return _r
 }
 
+// SetShaderValidation wraps the corresponding Objective-C method.
 func (x *TileRenderPipelineDescriptor) SetShaderValidation(shaderValidation ShaderValidation) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShaderValidation:"), shaderValidation)
 }

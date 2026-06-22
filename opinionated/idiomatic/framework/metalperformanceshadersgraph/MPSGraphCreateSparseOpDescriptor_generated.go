@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that describes the properties of a create sparse operation.
-//
 // GraphCreateSparseOpDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphCreateSparseOpDescriptor.
+//
+// It embeds [GraphObject], promoting that type's methods.
+//
+// A class that describes the properties of a create sparse operation.
 type GraphCreateSparseOpDescriptor struct {
-	objref.Handle
+	GraphObject
 }
 
 // GraphCreateSparseOpDescriptorFromID adopts an existing Objective-C object as a GraphCreateSparseOpDescriptor
@@ -25,7 +26,8 @@ func GraphCreateSparseOpDescriptorFromID(id objc.ID) *GraphCreateSparseOpDescrip
 	if id == 0 {
 		return nil
 	}
-	x := &GraphCreateSparseOpDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphCreateSparseOpDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func graphCreateSparseOpDescriptorAdopt(id objc.ID) *GraphCreateSparseOpDescript
 	if id == 0 {
 		return nil
 	}
-	x := &GraphCreateSparseOpDescriptor{Handle: objref.Wrap(id)}
+	x := &GraphCreateSparseOpDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GraphCreateSparseOpDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphCreateSparseOpDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphCreateSparseOpDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGraphCreateSparseOpDescriptor creates a new GraphCreateSparseOpDescriptor.
@@ -64,20 +52,19 @@ func NewGraphCreateSparseOpDescriptor() *GraphCreateSparseOpDescriptor {
 	return graphCreateSparseOpDescriptorAdopt(_id)
 }
 
-// Defines the storage format of the sparse tensor.
-//
-// WithSparseStorageType sets sparseStorageType and returns the receiver so calls can be chained.
+// WithSparseStorageType defines the storage format of the sparse tensor.
 func (x *GraphCreateSparseOpDescriptor) WithSparseStorageType(sparseStorageType GraphSparseStorageType) *GraphCreateSparseOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSparseStorageType:"), sparseStorageType)
 	return x
 }
 
-// Defines the storage format of the sparse tensor.
+// SparseStorageType defines the storage format of the sparse tensor.
 func (x *GraphCreateSparseOpDescriptor) SparseStorageType() GraphSparseStorageType {
 	_r := objc.Send[GraphSparseStorageType](objref.IDOf(x), objc.RegisterName("sparseStorageType"))
 	return _r
 }
 
+// SetSparseStorageType wraps the corresponding Objective-C method.
 func (x *GraphCreateSparseOpDescriptor) SetSparseStorageType(sparseStorageType GraphSparseStorageType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSparseStorageType:"), sparseStorageType)
 }
@@ -91,3 +78,5 @@ type GraphCreateSparseOpDescriptorable interface {
 }
 
 var _ GraphCreateSparseOpDescriptorable = (*GraphCreateSparseOpDescriptor)(nil)
+
+var _ GraphObjectProvider = (*GraphCreateSparseOpDescriptor)(nil)

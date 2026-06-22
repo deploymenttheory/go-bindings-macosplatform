@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A utility class that represents range components of a stroke.
-//
 // FloatRange is an idiomatic wrapper over the Objective-C class PKFloatRange.
+//
+// A utility class that represents range components of a stroke.
 type FloatRange struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FloatRangeFromID(id objc.ID) *FloatRange {
 	if id == 0 {
 		return nil
 	}
-	x := &FloatRange{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FloatRange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func floatRangeAdopt(id objc.ID) *FloatRange {
 	if id == 0 {
 		return nil
 	}
-	x := &FloatRange{Handle: objref.Wrap(id)}
+	x := &FloatRange{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,20 +60,26 @@ func (x *FloatRange) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// A utility class used to contain ranges returned by the PKStroke API.
-//
-// NewFloatRangeWithLowerBoundUpperBound creates a new FloatRange.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FloatRange) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFloatRangeWithLowerBoundUpperBound a utility class used to contain ranges returned by the PKStroke API.
 func NewFloatRangeWithLowerBoundUpperBound(lowerBound float64, upperBound float64) *FloatRange {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKFloatRange")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLowerBound:upperBound:"), lowerBound, upperBound)
 	return floatRangeAdopt(_id)
 }
 
+// LowerBound wraps the corresponding Objective-C method.
 func (x *FloatRange) LowerBound() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lowerBound"))
 	return _r
 }
 
+// UpperBound wraps the corresponding Objective-C method.
 func (x *FloatRange) UpperBound() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("upperBound"))
 	return _r

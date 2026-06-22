@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A group of properties that configures the counter sample buffers you create with it.
-//
 // CounterSampleBufferDescriptor is an idiomatic wrapper over the Objective-C class MTLCounterSampleBufferDescriptor.
+//
+// A group of properties that configures the counter sample buffers you create with it.
 type CounterSampleBufferDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CounterSampleBufferDescriptorFromID(id objc.ID) *CounterSampleBufferDescrip
 	if id == 0 {
 		return nil
 	}
-	x := &CounterSampleBufferDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CounterSampleBufferDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func counterSampleBufferDescriptorAdopt(id objc.ID) *CounterSampleBufferDescript
 	if id == 0 {
 		return nil
 	}
-	x := &CounterSampleBufferDescriptor{Handle: objref.Wrap(id)}
+	x := &CounterSampleBufferDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,36 +60,37 @@ func (x *CounterSampleBufferDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CounterSampleBufferDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCounterSampleBufferDescriptor creates a new CounterSampleBufferDescriptor.
 func NewCounterSampleBufferDescriptor() *CounterSampleBufferDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLCounterSampleBufferDescriptor")), objc.RegisterName("new"))
 	return counterSampleBufferDescriptorAdopt(_id)
 }
 
-// The name for the counter sample buffer you create with the descriptor.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the name for the counter sample buffer you create with the descriptor.
 func (x *CounterSampleBufferDescriptor) WithLabel(label string) *CounterSampleBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The memory storage mode for the counter sample buffers you create with the descriptor.
-//
-// WithStorageMode sets storageMode and returns the receiver so calls can be chained.
+// WithStorageMode the memory storage mode for the counter sample buffers you create with the descriptor.
 func (x *CounterSampleBufferDescriptor) WithStorageMode(storageMode StorageMode) *CounterSampleBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStorageMode:"), storageMode)
 	return x
 }
 
-// The number of instances of a counter set’s data that a counter sample buffer can store.
-//
-// WithSampleCount sets sampleCount and returns the receiver so calls can be chained.
+// WithSampleCount the number of instances of a counter set’s data that a counter sample buffer can store.
 func (x *CounterSampleBufferDescriptor) WithSampleCount(sampleCount int) *CounterSampleBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleCount:"), sampleCount)
 	return x
 }
 
+// Label wraps the corresponding Objective-C method.
 func (x *CounterSampleBufferDescriptor) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -96,24 +99,29 @@ func (x *CounterSampleBufferDescriptor) Label() string {
 	return purego.GoString(_r)
 }
 
+// SetLabel wraps the corresponding Objective-C method.
 func (x *CounterSampleBufferDescriptor) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
+// StorageMode wraps the corresponding Objective-C method.
 func (x *CounterSampleBufferDescriptor) StorageMode() StorageMode {
 	_r := objc.Send[StorageMode](objref.IDOf(x), objc.RegisterName("storageMode"))
 	return _r
 }
 
+// SetStorageMode wraps the corresponding Objective-C method.
 func (x *CounterSampleBufferDescriptor) SetStorageMode(storageMode StorageMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStorageMode:"), storageMode)
 }
 
+// SampleCount wraps the corresponding Objective-C method.
 func (x *CounterSampleBufferDescriptor) SampleCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sampleCount"))
 	return _r
 }
 
+// SetSampleCount wraps the corresponding Objective-C method.
 func (x *CounterSampleBufferDescriptor) SetSampleCount(sampleCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleCount:"), sampleCount)
 }

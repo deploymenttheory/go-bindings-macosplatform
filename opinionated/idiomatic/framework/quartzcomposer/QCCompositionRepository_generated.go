@@ -23,7 +23,8 @@ func CompositionRepositoryFromID(id objc.ID) *CompositionRepository {
 	if id == 0 {
 		return nil
 	}
-	x := &CompositionRepository{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CompositionRepository{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func compositionRepositoryAdopt(id objc.ID) *CompositionRepository {
 	if id == 0 {
 		return nil
 	}
-	x := &CompositionRepository{Handle: objref.Wrap(id)}
+	x := &CompositionRepository{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,22 +58,31 @@ func (x *CompositionRepository) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CompositionRepository) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCompositionRepository creates a new CompositionRepository.
 func NewCompositionRepository() *CompositionRepository {
 	_id := objc.Send[objc.ID](objc.ID(_class("QCCompositionRepository")), objc.RegisterName("new"))
 	return compositionRepositoryAdopt(_id)
 }
 
+// CompositionWithIdentifier wraps the corresponding Objective-C method.
 func (x *CompositionRepository) CompositionWithIdentifier(identifier string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositionWithIdentifier:"), purego.NSString(identifier))
 	return obj.Wrap(_r)
 }
 
+// CompositionsWithProtocolsAndAttributes wraps the corresponding Objective-C method.
 func (x *CompositionRepository) CompositionsWithProtocolsAndAttributes(protocols obj.Object, attributes obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositionsWithProtocols:andAttributes:"), objref.IDOf(protocols), objref.IDOf(attributes))
 	return obj.Wrap(_r)
 }
 
+// AllCompositions wraps the corresponding Objective-C method.
 func (x *CompositionRepository) AllCompositions() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allCompositions"))
 	return obj.Wrap(_r)

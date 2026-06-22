@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a sample that has been deleted from the HealthKit store.
-//
 // DeletedObject is an idiomatic wrapper over the Objective-C class HKDeletedObject.
+//
+// An object that represents a sample that has been deleted from the HealthKit store.
 type DeletedObject struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DeletedObjectFromID(id objc.ID) *DeletedObject {
 	if id == 0 {
 		return nil
 	}
-	x := &DeletedObject{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DeletedObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func deletedObjectAdopt(id objc.ID) *DeletedObject {
 	if id == 0 {
 		return nil
 	}
-	x := &DeletedObject{Handle: objref.Wrap(id)}
+	x := &DeletedObject{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *DeletedObject) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DeletedObject) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDeletedObject creates a new DeletedObject.
 func NewDeletedObject() *DeletedObject {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKDeletedObject")), objc.RegisterName("new"))
 	return deletedObjectAdopt(_id)
 }
 
-// The unique identifier of the HKObject that was deleted from the HealthKit database.
+// UUID the unique identifier of the HKObject that was deleted from the HealthKit database.
 func (x *DeletedObject) UUID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
 	return obj.Wrap(_r)
 }
 
-// Extra information describing properties of the receiver. Metadata retained from the deleted HKObject. Available keys: HKMetadataKeySyncIdentifier, HKMetadataKeySyncVersion
+// Metadata extra information describing properties of the receiver. Metadata retained from the deleted HKObject. Available keys: HKMetadataKeySyncIdentifier, HKMetadataKeySyncVersion
 func (x *DeletedObject) Metadata() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
 	return obj.Wrap(_r)

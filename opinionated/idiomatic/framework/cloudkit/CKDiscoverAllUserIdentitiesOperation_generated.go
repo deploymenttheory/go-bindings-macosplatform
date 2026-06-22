@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An operation that uses the device’s contacts to search for discoverable iCloud users.
-//
 // DiscoverAllUserIdentitiesOperation is an idiomatic wrapper over the Objective-C class CKDiscoverAllUserIdentitiesOperation.
+//
+// It embeds [Operation], promoting that type's methods.
+//
+// An operation that uses the device’s contacts to search for discoverable iCloud users.
 type DiscoverAllUserIdentitiesOperation struct {
-	objref.Handle
+	Operation
 }
 
 // DiscoverAllUserIdentitiesOperationFromID adopts an existing Objective-C object as a DiscoverAllUserIdentitiesOperation
@@ -27,7 +28,8 @@ func DiscoverAllUserIdentitiesOperationFromID(id objc.ID) *DiscoverAllUserIdenti
 	if id == 0 {
 		return nil
 	}
-	x := &DiscoverAllUserIdentitiesOperation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DiscoverAllUserIdentitiesOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,24 +42,10 @@ func discoverAllUserIdentitiesOperationAdopt(id objc.ID) *DiscoverAllUserIdentit
 	if id == 0 {
 		return nil
 	}
-	x := &DiscoverAllUserIdentitiesOperation{Handle: objref.Wrap(id)}
+	x := &DiscoverAllUserIdentitiesOperation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DiscoverAllUserIdentitiesOperation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DiscoverAllUserIdentitiesOperation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DiscoverAllUserIdentitiesOperation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDiscoverAllUserIdentitiesOperation creates a new DiscoverAllUserIdentitiesOperation.
@@ -66,80 +54,64 @@ func NewDiscoverAllUserIdentitiesOperation() *DiscoverAllUserIdentitiesOperation
 	return discoverAllUserIdentitiesOperationAdopt(_id)
 }
 
-// The closure to execute for each user identity.
-//
-// WithUserIdentityDiscoveredBlock sets userIdentityDiscoveredBlock and returns the receiver so calls can be chained.
+// WithUserIdentityDiscoveredBlock the closure to execute for each user identity.
 func (x *DiscoverAllUserIdentitiesOperation) WithUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(obj.Object)) *DiscoverAllUserIdentitiesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIdentityDiscoveredBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { userIdentityDiscoveredBlock(obj.Wrap(_b0)) }))
 	return x
 }
 
-// The operation’s configuration.
-//
-// WithConfiguration sets configuration and returns the receiver so calls can be chained.
+// WithConfiguration the operation’s configuration.
 func (x *DiscoverAllUserIdentitiesOperation) WithConfiguration(configuration *OperationConfiguration) *DiscoverAllUserIdentitiesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
-// The operation’s group.
-//
-// WithGroup sets group and returns the receiver so calls can be chained.
+// WithGroup the operation’s group.
 func (x *DiscoverAllUserIdentitiesOperation) WithGroup(group *OperationGroup) *DiscoverAllUserIdentitiesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation.
-//
-// WithLongLivedOperationWasPersistedBlock sets longLivedOperationWasPersistedBlock and returns the receiver so calls can be chained.
+// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
 func (x *DiscoverAllUserIdentitiesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DiscoverAllUserIdentitiesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
 	return x
 }
 
-// The operation's container.
-//
-// WithContainer sets container and returns the receiver so calls can be chained.
+// WithContainer the operation's container.
 func (x *DiscoverAllUserIdentitiesOperation) WithContainer(container *Container) *DiscoverAllUserIdentitiesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network.
-//
-// WithAllowsCellularAccess sets allowsCellularAccess and returns the receiver so calls can be chained.
+// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
 func (x *DiscoverAllUserIdentitiesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *DiscoverAllUserIdentitiesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived.
-//
-// WithLongLived sets longLived and returns the receiver so calls can be chained.
+// WithLongLived a Boolean value that indicates whether the operation is long-lived.
 func (x *DiscoverAllUserIdentitiesOperation) WithLongLived(longLived bool) *DiscoverAllUserIdentitiesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The timeout interval when waiting for additional data.
-//
-// WithTimeoutIntervalForRequest sets timeoutIntervalForRequest and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
 func (x *DiscoverAllUserIdentitiesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DiscoverAllUserIdentitiesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can use.
-//
-// WithTimeoutIntervalForResource sets timeoutIntervalForResource and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
 func (x *DiscoverAllUserIdentitiesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DiscoverAllUserIdentitiesOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
+// SetUserIdentityDiscoveredBlock wraps the corresponding Objective-C method.
+//
 // SetUserIdentityDiscoveredBlock blocks until the operation completes or ctx is cancelled.
-func (x *DiscoverAllUserIdentitiesOperation) SetUserIdentityDiscoveredBlock(ctx context.Context) (*UserIdentity, error) {
+func (x *DiscoverAllUserIdentitiesOperation) SetUserIdentityDiscoveredBlock(ctx context.Context) (result *UserIdentity, err error) {
 	type _result struct {
 		val *UserIdentity
 		err error
@@ -160,6 +132,8 @@ func (x *DiscoverAllUserIdentitiesOperation) SetUserIdentityDiscoveredBlock(ctx 
 	}
 }
 
+// SetDiscoverAllUserIdentitiesCompletionBlock wraps the corresponding Objective-C method.
+//
 // SetDiscoverAllUserIdentitiesCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (x *DiscoverAllUserIdentitiesOperation) SetDiscoverAllUserIdentitiesCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -194,3 +168,5 @@ type DiscoverAllUserIdentitiesOperationable interface {
 }
 
 var _ DiscoverAllUserIdentitiesOperationable = (*DiscoverAllUserIdentitiesOperation)(nil)
+
+var _ OperationProvider = (*DiscoverAllUserIdentitiesOperation)(nil)

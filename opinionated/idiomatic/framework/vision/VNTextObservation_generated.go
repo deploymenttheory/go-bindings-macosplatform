@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information about regions of text that an image-analysis request detects.
-//
 // TextObservation is an idiomatic wrapper over the Objective-C class VNTextObservation.
+//
+// It embeds [RectangleObservation], promoting that type's methods.
+//
+// Information about regions of text that an image-analysis request detects.
 type TextObservation struct {
-	objref.Handle
+	RectangleObservation
 }
 
 // TextObservationFromID adopts an existing Objective-C object as a TextObservation
@@ -25,7 +26,8 @@ func TextObservationFromID(id objc.ID) *TextObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &TextObservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func textObservationAdopt(id objc.ID) *TextObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &TextObservation{Handle: objref.Wrap(id)}
+	x := &TextObservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *TextObservation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextObservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextObservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewTextObservation creates a new TextObservation.
@@ -64,6 +52,8 @@ func NewTextObservation() *TextObservation {
 	return textObservationAdopt(_id)
 }
 
+// CharacterBoxes wraps the corresponding Objective-C method.
+//
 // CharacterBoxes returns the collection as a Go slice.
 func (x *TextObservation) CharacterBoxes() []*RectangleObservation {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("characterBoxes"))
@@ -77,3 +67,9 @@ type TextObservationable interface {
 }
 
 var _ TextObservationable = (*TextObservation)(nil)
+
+var _ RectangleObservationProvider = (*TextObservation)(nil)
+
+var _ DetectedObjectObservationProvider = (*TextObservation)(nil)
+
+var _ ObservationProvider = (*TextObservation)(nil)

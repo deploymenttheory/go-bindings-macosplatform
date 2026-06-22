@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A device that defines the configuration for a Mac keyboard.
-//
 // MacKeyboardConfiguration is an idiomatic wrapper over the Objective-C class VZMacKeyboardConfiguration.
+//
+// It embeds [KeyboardConfiguration], promoting that type's methods.
+//
+// A device that defines the configuration for a Mac keyboard.
 type MacKeyboardConfiguration struct {
-	objref.Handle
+	KeyboardConfiguration
 }
 
 // MacKeyboardConfigurationFromID adopts an existing Objective-C object as a MacKeyboardConfiguration
@@ -25,7 +26,8 @@ func MacKeyboardConfigurationFromID(id objc.ID) *MacKeyboardConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &MacKeyboardConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MacKeyboardConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func macKeyboardConfigurationAdopt(id objc.ID) *MacKeyboardConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &MacKeyboardConfiguration{Handle: objref.Wrap(id)}
+	x := &MacKeyboardConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MacKeyboardConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MacKeyboardConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MacKeyboardConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMacKeyboardConfiguration creates a new MacKeyboardConfiguration.
@@ -70,3 +58,5 @@ type MacKeyboardConfigurationable interface {
 }
 
 var _ MacKeyboardConfigurationable = (*MacKeyboardConfiguration)(nil)
+
+var _ KeyboardConfigurationProvider = (*MacKeyboardConfiguration)(nil)

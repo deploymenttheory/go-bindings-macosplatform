@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// Denotes the first edition of the Apple-provided sound classifier.
 // SNClassifierIdentifierVersion1 returns the string constant SNClassifierIdentifierVersion1, for use as a dictionary key or argument.
 func SNClassifierIdentifierVersion1() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SNClassifierIdentifierVersion1")))

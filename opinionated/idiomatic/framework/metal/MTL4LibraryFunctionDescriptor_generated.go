@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Describes a shader function from a Metal library.
-//
 // MTL4LibraryFunctionDescriptor is an idiomatic wrapper over the Objective-C class MTL4LibraryFunctionDescriptor.
+//
+// It embeds [MTL4FunctionDescriptor], promoting that type's methods.
+//
+// Describes a shader function from a Metal library.
 type MTL4LibraryFunctionDescriptor struct {
-	objref.Handle
+	MTL4FunctionDescriptor
 }
 
 // MTL4LibraryFunctionDescriptorFromID adopts an existing Objective-C object as a MTL4LibraryFunctionDescriptor
@@ -25,7 +26,8 @@ func MTL4LibraryFunctionDescriptorFromID(id objc.ID) *MTL4LibraryFunctionDescrip
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4LibraryFunctionDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTL4LibraryFunctionDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func mTL4LibraryFunctionDescriptorAdopt(id objc.ID) *MTL4LibraryFunctionDescript
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4LibraryFunctionDescriptor{Handle: objref.Wrap(id)}
+	x := &MTL4LibraryFunctionDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTL4LibraryFunctionDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTL4LibraryFunctionDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTL4LibraryFunctionDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTL4LibraryFunctionDescriptor creates a new MTL4LibraryFunctionDescriptor.
@@ -64,15 +52,13 @@ func NewMTL4LibraryFunctionDescriptor() *MTL4LibraryFunctionDescriptor {
 	return mTL4LibraryFunctionDescriptorAdopt(_id)
 }
 
-// Assigns a name to the function.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName assigns a name to the function.
 func (x *MTL4LibraryFunctionDescriptor) WithName(name string) *MTL4LibraryFunctionDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// Assigns a name to the function.
+// Name assigns a name to the function.
 func (x *MTL4LibraryFunctionDescriptor) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -81,6 +67,7 @@ func (x *MTL4LibraryFunctionDescriptor) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *MTL4LibraryFunctionDescriptor) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
@@ -94,3 +81,5 @@ type MTL4LibraryFunctionDescriptorable interface {
 }
 
 var _ MTL4LibraryFunctionDescriptorable = (*MTL4LibraryFunctionDescriptor)(nil)
+
+var _ MTL4FunctionDescriptorProvider = (*MTL4LibraryFunctionDescriptor)(nil)

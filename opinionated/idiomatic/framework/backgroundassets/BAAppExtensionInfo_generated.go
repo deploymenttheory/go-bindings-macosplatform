@@ -23,7 +23,8 @@ func AppExtensionInfoFromID(id objc.ID) *AppExtensionInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &AppExtensionInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AppExtensionInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func appExtensionInfoAdopt(id objc.ID) *AppExtensionInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &AppExtensionInfo{Handle: objref.Wrap(id)}
+	x := &AppExtensionInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,19 +58,25 @@ func (x *AppExtensionInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AppExtensionInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAppExtensionInfo creates a new AppExtensionInfo.
 func NewAppExtensionInfo() *AppExtensionInfo {
 	_id := objc.Send[objc.ID](objc.ID(_class("BAAppExtensionInfo")), objc.RegisterName("new"))
 	return appExtensionInfoAdopt(_id)
 }
 
-// The number of bytes remaining that can be scheduled if the total download size is restricted. When a download is restricted, your extension can only schedule up to its `BADownloadAllowance` defined in your app's `Info.plist`. This result tells you the number of bytes remaining that can be scheduled before the application is launched. Once the application is launched, this restriction is removed.
+// RestrictedDownloadSizeRemaining the number of bytes remaining that can be scheduled if the total download size is restricted. When a download is restricted, your extension can only schedule up to its `BADownloadAllowance` defined in your app's `Info.plist`. This result tells you the number of bytes remaining that can be scheduled before the application is launched. Once the application is launched, this restriction is removed.
 func (x *AppExtensionInfo) RestrictedDownloadSizeRemaining() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restrictedDownloadSizeRemaining"))
 	return obj.Wrap(_r)
 }
 
-// The number of bytes remaining that can be scheduled if the total download size of optional assets is restricted. When a download is restricted, your extension can only schedule up to its `BAEssentialDownloadAllowance` defined in your app's `Info.plist`. This result tells you the number of bytes remaining that can be scheduled before the application is launched. Once the application is launched, this restriction is removed.
+// RestrictedEssentialDownloadSizeRemaining the number of bytes remaining that can be scheduled if the total download size of optional assets is restricted. When a download is restricted, your extension can only schedule up to its `BAEssentialDownloadAllowance` defined in your app's `Info.plist`. This result tells you the number of bytes remaining that can be scheduled before the application is launched. Once the application is launched, this restriction is removed.
 func (x *AppExtensionInfo) RestrictedEssentialDownloadSizeRemaining() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restrictedEssentialDownloadSizeRemaining"))
 	return obj.Wrap(_r)

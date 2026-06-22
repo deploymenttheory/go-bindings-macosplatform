@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster ICD Management Allows servers to ensure that listed clients are notified when a server is available for communication.
-//
 // MTRClusterICDManagement is an idiomatic wrapper over the Objective-C class MTRClusterICDManagement.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
+//
+// Cluster ICD Management Allows servers to ensure that listed clients are notified when a server is available for communication.
 type MTRClusterICDManagement struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterICDManagementFromID adopts an existing Objective-C object as a MTRClusterICDManagement
@@ -27,7 +28,8 @@ func MTRClusterICDManagementFromID(id objc.ID) *MTRClusterICDManagement {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterICDManagement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterICDManagement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,37 +42,23 @@ func mTRClusterICDManagementAdopt(id objc.ID) *MTRClusterICDManagement {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterICDManagement{Handle: objref.Wrap(id)}
+	x := &MTRClusterICDManagement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterICDManagement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterICDManagement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterICDManagement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterICDManagementWithDeviceEndpointIDQueue creates a new MTRClusterICDManagement.
+// NewMTRClusterICDManagementWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterICDManagementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterICDManagement {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterICDManagement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterICDManagementAdopt(_id)
 }
 
+// RegisterClientWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // RegisterClientWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterICDManagement) RegisterClientWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRICDManagementClusterRegisterClientParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRICDManagementClusterRegisterClientResponseParams, error) {
+func (x *MTRClusterICDManagement) RegisterClientWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRICDManagementClusterRegisterClientParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRICDManagementClusterRegisterClientResponseParams, err error) {
 	type _result struct {
 		val *MTRICDManagementClusterRegisterClientResponseParams
 		err error
@@ -92,8 +80,10 @@ func (x *MTRClusterICDManagement) RegisterClientWithParamsExpectedValuesExpected
 	}
 }
 
+// StayActiveRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // StayActiveRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterICDManagement) StayActiveRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRICDManagementClusterStayActiveRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRICDManagementClusterStayActiveResponseParams, error) {
+func (x *MTRClusterICDManagement) StayActiveRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRICDManagementClusterStayActiveRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRICDManagementClusterStayActiveResponseParams, err error) {
 	type _result struct {
 		val *MTRICDManagementClusterStayActiveResponseParams
 		err error
@@ -115,76 +105,91 @@ func (x *MTRClusterICDManagement) StayActiveRequestWithParamsExpectedValuesExpec
 	}
 }
 
+// ReadAttributeIdleModeDurationWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterICDManagement) ReadAttributeIdleModeDurationWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeIdleModeDurationWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeActiveModeDurationWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterICDManagement) ReadAttributeActiveModeDurationWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveModeDurationWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeActiveModeThresholdWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterICDManagement) ReadAttributeActiveModeThresholdWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveModeThresholdWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRegisteredClientsWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterICDManagement) ReadAttributeRegisteredClientsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRegisteredClientsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeICDCounterWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterICDManagement) ReadAttributeICDCounterWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeICDCounterWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClientsSupportedPerFabricWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterICDManagement) ReadAttributeClientsSupportedPerFabricWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClientsSupportedPerFabricWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeUserActiveModeTriggerHintWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterICDManagement) ReadAttributeUserActiveModeTriggerHintWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUserActiveModeTriggerHintWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeUserActiveModeTriggerInstructionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterICDManagement) ReadAttributeUserActiveModeTriggerInstructionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUserActiveModeTriggerInstructionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeOperatingModeWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterICDManagement) ReadAttributeOperatingModeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOperatingModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMaximumCheckInBackOffWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterICDManagement) ReadAttributeMaximumCheckInBackOffWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaximumCheckInBackOffWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterICDManagement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterICDManagement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterICDManagement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterICDManagement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterICDManagement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -213,3 +218,7 @@ type MTRClusterICDManagementable interface {
 }
 
 var _ MTRClusterICDManagementable = (*MTRClusterICDManagement)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterICDManagement)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterICDManagement)(nil)

@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that creates sample buffers.
-//
 // SampleBufferGenerator is an idiomatic wrapper over the Objective-C class AVSampleBufferGenerator.
+//
+// An object that creates sample buffers.
 type SampleBufferGenerator struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func SampleBufferGeneratorFromID(id objc.ID) *SampleBufferGenerator {
 	if id == 0 {
 		return nil
 	}
-	x := &SampleBufferGenerator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SampleBufferGenerator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func sampleBufferGeneratorAdopt(id objc.ID) *SampleBufferGenerator {
 	if id == 0 {
 		return nil
 	}
-	x := &SampleBufferGenerator{Handle: objref.Wrap(id)}
+	x := &SampleBufferGenerator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,17 +62,21 @@ func (x *SampleBufferGenerator) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new sample buffer generator.
-//
-// NewSampleBufferGeneratorWithAssetTimebase creates a new SampleBufferGenerator.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SampleBufferGenerator) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSampleBufferGeneratorWithAssetTimebase creates a new sample buffer generator.
 func NewSampleBufferGeneratorWithAssetTimebase(asset *Asset, timebase obj.Object) *SampleBufferGenerator {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVSampleBufferGenerator")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:timebase:"), objref.IDOf(asset), objref.IDOf(timebase))
 	return sampleBufferGeneratorAdopt(_id)
 }
 
-// Creates a sample buffer, and attempts to load its data asynchronously if requested.
-func (x *SampleBufferGenerator) CreateSampleBufferForRequestError(request *SampleBufferRequest) (obj.Object, error) {
+// CreateSampleBufferForRequestError creates a sample buffer, and attempts to load its data asynchronously if requested.
+func (x *SampleBufferGenerator) CreateSampleBufferForRequestError(request *SampleBufferRequest) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createSampleBufferForRequest:error:"), objref.IDOf(request), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -79,20 +85,20 @@ func (x *SampleBufferGenerator) CreateSampleBufferForRequestError(request *Sampl
 	return obj.Wrap(_r), nil
 }
 
-// Creates a new sample buffer reference for the specified buffer request.
+// CreateSampleBufferForRequest creates a new sample buffer reference for the specified buffer request.
 func (x *SampleBufferGenerator) CreateSampleBufferForRequest(request *SampleBufferRequest) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createSampleBufferForRequest:"), objref.IDOf(request))
 	return obj.Wrap(_r)
 }
 
-// Creates a batch object to handle generating multiple sample buffers.
+// MakeBatch creates a batch object to handle generating multiple sample buffers.
 func (x *SampleBufferGenerator) MakeBatch() *SampleBufferGeneratorBatch {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeBatch"))
 	return SampleBufferGeneratorBatchFromID(_r)
 }
 
-// Creates a sample buffer and attempts to defer I/O for its data.
-func (x *SampleBufferGenerator) CreateSampleBufferForRequestAddingToBatchError(request *SampleBufferRequest, batch *SampleBufferGeneratorBatch) (obj.Object, error) {
+// CreateSampleBufferForRequestAddingToBatchError creates a sample buffer and attempts to defer I/O for its data.
+func (x *SampleBufferGenerator) CreateSampleBufferForRequestAddingToBatchError(request *SampleBufferRequest, batch *SampleBufferGeneratorBatch) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createSampleBufferForRequest:addingToBatch:error:"), objref.IDOf(request), objref.IDOf(batch), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -104,10 +110,10 @@ func (x *SampleBufferGenerator) CreateSampleBufferForRequestAddingToBatchError(r
 // SampleBufferGeneratorable is the interface implemented by [SampleBufferGenerator], for mocking and DI.
 type SampleBufferGeneratorable interface {
 	obj.Object
-	CreateSampleBufferForRequestError(request *SampleBufferRequest) (obj.Object, error)
+	CreateSampleBufferForRequestError(request *SampleBufferRequest) (result obj.Object, err error)
 	CreateSampleBufferForRequest(request *SampleBufferRequest) obj.Object
 	MakeBatch() *SampleBufferGeneratorBatch
-	CreateSampleBufferForRequestAddingToBatchError(request *SampleBufferRequest, batch *SampleBufferGeneratorBatch) (obj.Object, error)
+	CreateSampleBufferForRequestAddingToBatchError(request *SampleBufferRequest, batch *SampleBufferGeneratorBatch) (result obj.Object, err error)
 }
 
 var _ SampleBufferGeneratorable = (*SampleBufferGenerator)(nil)

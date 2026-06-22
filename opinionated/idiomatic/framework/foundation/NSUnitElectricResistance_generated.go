@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for electric resistance.
-//
 // UnitElectricResistance is an idiomatic wrapper over the Objective-C class NSUnitElectricResistance.
+//
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for electric resistance.
 type UnitElectricResistance struct {
-	objref.Handle
+	Dimension
 }
 
 // UnitElectricResistanceFromID adopts an existing Objective-C object as a UnitElectricResistance
@@ -25,7 +26,8 @@ func UnitElectricResistanceFromID(id objc.ID) *UnitElectricResistance {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitElectricResistance{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UnitElectricResistance{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func unitElectricResistanceAdopt(id objc.ID) *UnitElectricResistance {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitElectricResistance{Handle: objref.Wrap(id)}
+	x := &UnitElectricResistance{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UnitElectricResistance) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UnitElectricResistance) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UnitElectricResistance) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUnitElectricResistance creates a new UnitElectricResistance.
@@ -64,7 +52,7 @@ func NewUnitElectricResistance() *UnitElectricResistance {
 	return unitElectricResistanceAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UnitElectricResistance) WithScriptingProperties(scriptingProperties obj.Object) *UnitElectricResistance {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
@@ -77,3 +65,7 @@ type UnitElectricResistanceable interface {
 }
 
 var _ UnitElectricResistanceable = (*UnitElectricResistance)(nil)
+
+var _ DimensionProvider = (*UnitElectricResistance)(nil)
+
+var _ UnitProvider = (*UnitElectricResistance)(nil)

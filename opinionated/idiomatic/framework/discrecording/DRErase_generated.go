@@ -23,7 +23,8 @@ func EraseFromID(id objc.ID) *Erase {
 	if id == 0 {
 		return nil
 	}
-	x := &Erase{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Erase{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func eraseAdopt(id objc.ID) *Erase {
 	if id == 0 {
 		return nil
 	}
-	x := &Erase{Handle: objref.Wrap(id)}
+	x := &Erase{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,44 +58,48 @@ func (x *Erase) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes an erase object. An erase object created with this method is ready to erase media.
-//
-// NewEraseWithDevice creates a new Erase.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Erase) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewEraseWithDevice initializes an erase object. An erase object created with this method is ready to erase media.
 func NewEraseWithDevice(device *Device) *Erase {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DRErase")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), objref.IDOf(device))
 	return eraseAdopt(_id)
 }
 
-// Begin the process of erasing media. This method only kicks off the erase. Once the erasure starts, control returns to the caller. The caller can monitor the progress of the erase by listening for a notification or by polling
+// Start begin the process of erasing media. This method only kicks off the erase. Once the erasure starts, control returns to the caller. The caller can monitor the progress of the erase by listening for a notification or by polling
 func (x *Erase) Start() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
 }
 
-// Returns a dictionary containing the status of the erase. The same dictionary is returned through the
+// Status returns a dictionary containing the status of the erase. The same dictionary is returned through the
 func (x *Erase) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// Returns the properties dictionary of the erase.
+// Properties returns the properties dictionary of the erase.
 func (x *Erase) Properties() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("properties"))
 	return obj.Wrap(_r)
 }
 
-// Sets the properties dictionary of the erase
+// SetProperties sets the properties dictionary of the erase
 func (x *Erase) SetProperties(properties obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperties:"), objref.IDOf(properties))
 }
 
-// Returns the device being used for the erase.
+// Device returns the device being used for the erase.
 func (x *Erase) Device() *Device {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
 	return DeviceFromID(_r)
 }
 
-// Returns the type of erase to be performed.
+// EraseType returns the type of erase to be performed.
 func (x *Erase) EraseType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eraseType"))
 	if _r == 0 {
@@ -102,7 +108,7 @@ func (x *Erase) EraseType() string {
 	return purego.GoString(_r)
 }
 
-// Sets the type of erase to perform.
+// SetEraseType sets the type of erase to perform.
 func (x *Erase) SetEraseType(type_ string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEraseType:"), purego.NSString(type_))
 }

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Base type for descriptors you use for building pipeline state objects.
-//
 // MTL4PipelineDescriptor is an idiomatic wrapper over the Objective-C class MTL4PipelineDescriptor.
+//
+// MTL4PipelineDescriptor is an abstract base — you do not construct it directly. Construct one of [MTL4ComputePipelineDescriptor], [MTL4MachineLearningPipelineDescriptor], [MTL4MeshRenderPipelineDescriptor], [MTL4RenderPipelineDescriptor], [MTL4TileRenderPipelineDescriptor] and pass it where a MTL4PipelineDescriptor is accepted.
+//
+// Base type for descriptors you use for building pipeline state objects.
 type MTL4PipelineDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func MTL4PipelineDescriptorFromID(id objc.ID) *MTL4PipelineDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4PipelineDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTL4PipelineDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func mTL4PipelineDescriptorAdopt(id objc.ID) *MTL4PipelineDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4PipelineDescriptor{Handle: objref.Wrap(id)}
+	x := &MTL4PipelineDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,29 +62,25 @@ func (x *MTL4PipelineDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTL4PipelineDescriptor creates a new MTL4PipelineDescriptor.
-func NewMTL4PipelineDescriptor() *MTL4PipelineDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTL4PipelineDescriptor")), objc.RegisterName("new"))
-	return mTL4PipelineDescriptorAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTL4PipelineDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Assigns an optional string that uniquely identifies a pipeline descriptor.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel assigns an optional string that uniquely identifies a pipeline descriptor.
 func (x *MTL4PipelineDescriptor) WithLabel(label string) *MTL4PipelineDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Provides compile-time options when you build the pipeline.
-//
-// WithOptions sets options and returns the receiver so calls can be chained.
+// WithOptions provides compile-time options when you build the pipeline.
 func (x *MTL4PipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4PipelineDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), objref.IDOf(options))
 	return x
 }
 
-// Assigns an optional string that uniquely identifies a pipeline descriptor. After you provide this label, you can use it to look up a pipeline state object by name in a binary archive.
+// Label assigns an optional string that uniquely identifies a pipeline descriptor. After you provide this label, you can use it to look up a pipeline state object by name in a binary archive.
 func (x *MTL4PipelineDescriptor) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -89,16 +89,18 @@ func (x *MTL4PipelineDescriptor) Label() string {
 	return purego.GoString(_r)
 }
 
+// SetLabel wraps the corresponding Objective-C method.
 func (x *MTL4PipelineDescriptor) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// Provides compile-time options when you build the pipeline.
+// Options provides compile-time options when you build the pipeline.
 func (x *MTL4PipelineDescriptor) Options() *MTL4PipelineOptions {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
 	return MTL4PipelineOptionsFromID(_r)
 }
 
+// SetOptions wraps the corresponding Objective-C method.
 func (x *MTL4PipelineDescriptor) SetOptions(options *MTL4PipelineOptions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), objref.IDOf(options))
 }
@@ -115,3 +117,10 @@ type MTL4PipelineDescriptorable interface {
 }
 
 var _ MTL4PipelineDescriptorable = (*MTL4PipelineDescriptor)(nil)
+
+// isMTL4PipelineDescriptor marks MTL4PipelineDescriptor — and, by embedding promotion, its
+// subclasses — as a member of the MTL4PipelineDescriptor hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTL4PipelineDescriptor) isMTL4PipelineDescriptor() {}
+
+var _ MTL4PipelineDescriptorProvider = (*MTL4PipelineDescriptor)(nil)

@@ -25,7 +25,8 @@ func MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsFromID(id obj
 	if id == 0 {
 		return nil
 	}
-	x := &MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsAdopt(id objc
 	if id == 0 {
 		return nil
 	}
-	x := &MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams{Handle: objref.Wrap(id)}
+	x := &MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) IsKind(
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-//
-// NewMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsWithResponseValueError creates a new MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams.
-func NewMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsWithResponseValueError initialize an MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,17 +77,19 @@ func NewMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsWithRespon
 	return mTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsAdopt(_id), nil
 }
 
-// WithPassphrase sets passphrase and returns the receiver so calls can be chained.
+// WithPassphrase sets the property and returns the receiver so calls can be chained.
 func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) WithPassphrase(passphrase obj.Object) *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassphrase:"), objref.IDOf(passphrase))
 	return x
 }
 
+// Passphrase wraps the corresponding Objective-C method.
 func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) Passphrase() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("passphrase"))
 	return obj.Wrap(_r)
 }
 
+// SetPassphrase wraps the corresponding Objective-C method.
 func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) SetPassphrase(passphrase obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassphrase:"), objref.IDOf(passphrase))
 }

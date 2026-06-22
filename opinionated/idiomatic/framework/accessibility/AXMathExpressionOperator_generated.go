@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MathExpressionOperator is an idiomatic wrapper over the Objective-C class AXMathExpressionOperator.
+//
+// It embeds [MathExpression], promoting that type's methods.
 type MathExpressionOperator struct {
-	objref.Handle
+	MathExpression
 }
 
 // MathExpressionOperatorFromID adopts an existing Objective-C object as a MathExpressionOperator
@@ -23,7 +24,8 @@ func MathExpressionOperatorFromID(id objc.ID) *MathExpressionOperator {
 	if id == 0 {
 		return nil
 	}
-	x := &MathExpressionOperator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MathExpressionOperator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mathExpressionOperatorAdopt(id objc.ID) *MathExpressionOperator {
 	if id == 0 {
 		return nil
 	}
-	x := &MathExpressionOperator{Handle: objref.Wrap(id)}
+	x := &MathExpressionOperator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MathExpressionOperator) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MathExpressionOperator) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MathExpressionOperator) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMathExpressionOperatorWithContent creates a new MathExpressionOperator.
@@ -63,6 +51,7 @@ func NewMathExpressionOperatorWithContent(content string) *MathExpressionOperato
 	return mathExpressionOperatorAdopt(_id)
 }
 
+// Content wraps the corresponding Objective-C method.
 func (x *MathExpressionOperator) Content() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("content"))
 	if _r == 0 {
@@ -78,3 +67,5 @@ type MathExpressionOperatorable interface {
 }
 
 var _ MathExpressionOperatorable = (*MathExpressionOperator)(nil)
+
+var _ MathExpressionProvider = (*MathExpressionOperator)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A node representing a MPSCNNNeuronGeLU kernel For each pixel, applies the following function:
-//
 // CNNNeuronGeLUNode is an idiomatic wrapper over the Objective-C class MPSCNNNeuronGeLUNode.
+//
+// It embeds [CNNNeuronNode], promoting that type's methods.
+//
+// A node representing a MPSCNNNeuronGeLU kernel For each pixel, applies the following function:
 type CNNNeuronGeLUNode struct {
-	objref.Handle
+	CNNNeuronNode
 }
 
 // CNNNeuronGeLUNodeFromID adopts an existing Objective-C object as a CNNNeuronGeLUNode
@@ -25,7 +26,8 @@ func CNNNeuronGeLUNodeFromID(id objc.ID) *CNNNeuronGeLUNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNeuronGeLUNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNNeuronGeLUNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,38 +40,20 @@ func cNNNeuronGeLUNodeAdopt(id objc.ID) *CNNNeuronGeLUNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNNeuronGeLUNode{Handle: objref.Wrap(id)}
+	x := &CNNNeuronGeLUNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNNeuronGeLUNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNNeuronGeLUNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNNeuronGeLUNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Init a node representing a MPSCNNNeuronGeLU kernel For each pixel, applies the following function:
-//
-// NewCNNNeuronGeLUNodeWithSource creates a new CNNNeuronGeLUNode.
+// NewCNNNeuronGeLUNodeWithSource init a node representing a MPSCNNNeuronGeLU kernel For each pixel, applies the following function:
 func NewCNNNeuronGeLUNodeWithSource(sourceNode *NNImageNode) *CNNNeuronGeLUNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronGeLUNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return cNNNeuronGeLUNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNNeuronGeLUNode) WithLabel(label string) *CNNNeuronGeLUNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -82,3 +66,7 @@ type CNNNeuronGeLUNodeable interface {
 }
 
 var _ CNNNeuronGeLUNodeable = (*CNNNeuronGeLUNode)(nil)
+
+var _ CNNNeuronNodeProvider = (*CNNNeuronGeLUNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNNeuronGeLUNode)(nil)

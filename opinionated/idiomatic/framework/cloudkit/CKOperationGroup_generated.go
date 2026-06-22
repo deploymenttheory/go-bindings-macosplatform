@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An explicit association between two or more operations.
-//
 // OperationGroup is an idiomatic wrapper over the Objective-C class CKOperationGroup.
+//
+// An explicit association between two or more operations.
 type OperationGroup struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func OperationGroupFromID(id objc.ID) *OperationGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &OperationGroup{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OperationGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func operationGroupAdopt(id objc.ID) *OperationGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &OperationGroup{Handle: objref.Wrap(id)}
+	x := &OperationGroup{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,62 +60,56 @@ func (x *OperationGroup) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OperationGroup) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewOperationGroup creates a new OperationGroup.
 func NewOperationGroup() *OperationGroup {
 	_id := objc.Send[objc.ID](objc.ID(_class("CKOperationGroup")), objc.RegisterName("new"))
 	return operationGroupAdopt(_id)
 }
 
-// Creates an operation group from a serialized instance.
-//
-// NewOperationGroupWithCoder creates a new OperationGroup.
+// NewOperationGroupWithCoder creates an operation group from a serialized instance.
 func NewOperationGroupWithCoder(aDecoder obj.Object) *OperationGroup {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKOperationGroup")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return operationGroupAdopt(_id)
 }
 
-// The default configuration for operations in the group.
-//
-// WithDefaultConfiguration sets defaultConfiguration and returns the receiver so calls can be chained.
+// WithDefaultConfiguration the default configuration for operations in the group.
 func (x *OperationGroup) WithDefaultConfiguration(defaultConfiguration *OperationConfiguration) *OperationGroup {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultConfiguration:"), objref.IDOf(defaultConfiguration))
 	return x
 }
 
-// The operation group’s name.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the operation group’s name.
 func (x *OperationGroup) WithName(name string) *OperationGroup {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The number of operations in the operation group.
-//
-// WithQuantity sets quantity and returns the receiver so calls can be chained.
+// WithQuantity the number of operations in the operation group.
 func (x *OperationGroup) WithQuantity(quantity int) *OperationGroup {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuantity:"), quantity)
 	return x
 }
 
-// The estimated size of traffic to upload to CloudKit.
-//
-// WithExpectedSendSize sets expectedSendSize and returns the receiver so calls can be chained.
+// WithExpectedSendSize the estimated size of traffic to upload to CloudKit.
 func (x *OperationGroup) WithExpectedSendSize(expectedSendSize OperationGroupTransferSize) *OperationGroup {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpectedSendSize:"), expectedSendSize)
 	return x
 }
 
-// The estimated size of traffic to download from CloudKit.
-//
-// WithExpectedReceiveSize sets expectedReceiveSize and returns the receiver so calls can be chained.
+// WithExpectedReceiveSize the estimated size of traffic to download from CloudKit.
 func (x *OperationGroup) WithExpectedReceiveSize(expectedReceiveSize OperationGroupTransferSize) *OperationGroup {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpectedReceiveSize:"), expectedReceiveSize)
 	return x
 }
 
-// The operation group's unique identifier. The framework generates this value and it's unique to this operation group. The system sends this identifier to CloudKit, which can use it to identify server-side logs for “CKOperationGroup“.
+// OperationGroupID the operation group's unique identifier. The framework generates this value and it's unique to this operation group. The system sends this identifier to CloudKit, which can use it to identify server-side logs for “CKOperationGroup“.
 func (x *OperationGroup) OperationGroupID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationGroupID"))
 	if _r == 0 {
@@ -122,17 +118,18 @@ func (x *OperationGroup) OperationGroupID() string {
 	return purego.GoString(_r)
 }
 
-// The default configuration for operations in the group. If an operation in the group has its own configuration, that configuration's values override the default configuration's values. For more information, see “CKOperation/Configuration“.
+// DefaultConfiguration the default configuration for operations in the group. If an operation in the group has its own configuration, that configuration's values override the default configuration's values. For more information, see “CKOperation/Configuration“.
 func (x *OperationGroup) DefaultConfiguration() *OperationConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultConfiguration"))
 	return OperationConfigurationFromID(_r)
 }
 
+// SetDefaultConfiguration wraps the corresponding Objective-C method.
 func (x *OperationGroup) SetDefaultConfiguration(defaultConfiguration *OperationConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultConfiguration:"), objref.IDOf(defaultConfiguration))
 }
 
-// The operation group's name. The system sends the name of the operation group to CloudKit to provide aggregate reporting for “CKOperationGroup“. The name must not include any personal data.
+// Name the operation group's name. The system sends the name of the operation group to CloudKit to provide aggregate reporting for “CKOperationGroup“. The name must not include any personal data.
 func (x *OperationGroup) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -141,36 +138,40 @@ func (x *OperationGroup) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *OperationGroup) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// The number of operations in the operation group. This property shows the number of operations that you expect to be in this operation group. It's the developer's responsibility to set this value.
+// Quantity the number of operations in the operation group. This property shows the number of operations that you expect to be in this operation group. It's the developer's responsibility to set this value.
 func (x *OperationGroup) Quantity() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("quantity"))
 	return _r
 }
 
+// SetQuantity wraps the corresponding Objective-C method.
 func (x *OperationGroup) SetQuantity(quantity int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuantity:"), quantity)
 }
 
-// The estimated size of traffic to upload to CloudKit. This property informs the system about the amount of data your app can transfer. An order-of-magnitude estimate is better than no estimate, and accuracy helps performance. The system checks this value when it schedules discretionary network requests.
+// ExpectedSendSize the estimated size of traffic to upload to CloudKit. This property informs the system about the amount of data your app can transfer. An order-of-magnitude estimate is better than no estimate, and accuracy helps performance. The system checks this value when it schedules discretionary network requests.
 func (x *OperationGroup) ExpectedSendSize() OperationGroupTransferSize {
 	_r := objc.Send[OperationGroupTransferSize](objref.IDOf(x), objc.RegisterName("expectedSendSize"))
 	return _r
 }
 
+// SetExpectedSendSize wraps the corresponding Objective-C method.
 func (x *OperationGroup) SetExpectedSendSize(expectedSendSize OperationGroupTransferSize) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpectedSendSize:"), expectedSendSize)
 }
 
-// The estimated size of traffic to download from CloudKit. This property informs the system about the amount of data your app can transfer. An order-of-magnitude estimate is better than no estimate, and accuracy helps performance. The system checks this value when it schedules discretionary network requests.
+// ExpectedReceiveSize the estimated size of traffic to download from CloudKit. This property informs the system about the amount of data your app can transfer. An order-of-magnitude estimate is better than no estimate, and accuracy helps performance. The system checks this value when it schedules discretionary network requests.
 func (x *OperationGroup) ExpectedReceiveSize() OperationGroupTransferSize {
 	_r := objc.Send[OperationGroupTransferSize](objref.IDOf(x), objc.RegisterName("expectedReceiveSize"))
 	return _r
 }
 
+// SetExpectedReceiveSize wraps the corresponding Objective-C method.
 func (x *OperationGroup) SetExpectedReceiveSize(expectedReceiveSize OperationGroupTransferSize) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpectedReceiveSize:"), expectedReceiveSize)
 }

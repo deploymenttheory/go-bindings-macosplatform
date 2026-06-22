@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ConstantString is an idiomatic wrapper over the Objective-C class NSConstantString.
+//
+// It embeds [SimpleCString], promoting that type's methods.
 type ConstantString struct {
-	objref.Handle
+	SimpleCString
 }
 
 // ConstantStringFromID adopts an existing Objective-C object as a ConstantString
@@ -23,7 +24,8 @@ func ConstantStringFromID(id objc.ID) *ConstantString {
 	if id == 0 {
 		return nil
 	}
-	x := &ConstantString{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ConstantString{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func constantStringAdopt(id objc.ID) *ConstantString {
 	if id == 0 {
 		return nil
 	}
-	x := &ConstantString{Handle: objref.Wrap(id)}
+	x := &ConstantString{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ConstantString) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ConstantString) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ConstantString) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewConstantString creates a new ConstantString.
@@ -62,7 +50,7 @@ func NewConstantString() *ConstantString {
 	return constantStringAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *ConstantString) WithScriptingProperties(scriptingProperties obj.Object) *ConstantString {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
@@ -75,3 +63,7 @@ type ConstantStringable interface {
 }
 
 var _ ConstantStringable = (*ConstantString)(nil)
+
+var _ SimpleCStringProvider = (*ConstantString)(nil)
+
+var _ StringProvider = (*ConstantString)(nil)

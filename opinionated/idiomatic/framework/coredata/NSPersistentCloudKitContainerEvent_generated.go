@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents activity in a persistent CloudKit container.
-//
 // PersistentCloudKitContainerEvent is an idiomatic wrapper over the Objective-C class NSPersistentCloudKitContainerEvent.
+//
+// An object that represents activity in a persistent CloudKit container.
 type PersistentCloudKitContainerEvent struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PersistentCloudKitContainerEventFromID(id objc.ID) *PersistentCloudKitConta
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentCloudKitContainerEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PersistentCloudKitContainerEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func persistentCloudKitContainerEventAdopt(id objc.ID) *PersistentCloudKitContai
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentCloudKitContainerEvent{Handle: objref.Wrap(id)}
+	x := &PersistentCloudKitContainerEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,25 @@ func (x *PersistentCloudKitContainerEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PersistentCloudKitContainerEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPersistentCloudKitContainerEvent creates a new PersistentCloudKitContainerEvent.
 func NewPersistentCloudKitContainerEvent() *PersistentCloudKitContainerEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSPersistentCloudKitContainerEvent")), objc.RegisterName("new"))
 	return persistentCloudKitContainerEventAdopt(_id)
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *PersistentCloudKitContainerEvent) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
+// StoreIdentifier wraps the corresponding Objective-C method.
 func (x *PersistentCloudKitContainerEvent) StoreIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("storeIdentifier"))
 	if _r == 0 {
@@ -77,21 +87,25 @@ func (x *PersistentCloudKitContainerEvent) StoreIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *PersistentCloudKitContainerEvent) Type() PersistentCloudKitContainerEventType {
 	_r := objc.Send[PersistentCloudKitContainerEventType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
+// StartDate wraps the corresponding Objective-C method.
 func (x *PersistentCloudKitContainerEvent) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
+// EndDate wraps the corresponding Objective-C method.
 func (x *PersistentCloudKitContainerEvent) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
+// Succeeded wraps the corresponding Objective-C method.
 func (x *PersistentCloudKitContainerEvent) Succeeded() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("succeeded"))
 	return _r

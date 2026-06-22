@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// A token’s configuration.
-//
 // TokenConfiguration is an idiomatic wrapper over the Objective-C class TKTokenConfiguration.
+//
+// A token’s configuration.
 type TokenConfiguration struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func TokenConfigurationFromID(id objc.ID) *TokenConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &TokenConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TokenConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func tokenConfigurationAdopt(id objc.ID) *TokenConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &TokenConfiguration{Handle: objref.Wrap(id)}
+	x := &TokenConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,31 +62,33 @@ func (x *TokenConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TokenConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTokenConfiguration creates a new TokenConfiguration.
 func NewTokenConfiguration() *TokenConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("TKTokenConfiguration")), objc.RegisterName("new"))
 	return tokenConfigurationAdopt(_id)
 }
 
-// Additional configuration available for token instance. Token implementation and its hosting application can use this data for specifying any additional configuration for the token. System does not interpret this data in any way. For example, network-based HSM can store here (using Codable or other serialization mechanisms) target network address, access credentials and the list of identities accessible in the HSM.
-//
-// WithConfigurationData sets configurationData and returns the receiver so calls can be chained.
+// WithConfigurationData additional configuration available for token instance. Token implementation and its hosting application can use this data for specifying any additional configuration for the token. System does not interpret this data in any way. For example, network-based HSM can store here (using Codable or other serialization mechanisms) target network address, access credentials and the list of identities accessible in the HSM.
 func (x *TokenConfiguration) WithConfigurationData(configurationData obj.Object) *TokenConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfigurationData:"), objref.IDOf(configurationData))
 	return x
 }
 
-// All keychain items of this token.
-//
-// WithKeychainItems sets the collection and returns the receiver so calls can be chained.
+// WithKeychainItems all keychain items of this token.
 func (x *TokenConfiguration) WithKeychainItems(items ...TokenKeychainItemProvider) *TokenConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v TokenKeychainItemProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeychainItems:"), _arr)
 	return x
 }
 
-// Returns keychain item key with specified objectID.  Fills error with TKTokenErrorCodeObjectNotFound if no such key exists.
-func (x *TokenConfiguration) KeyForObjectIDError(objectID obj.Object) (*TokenKeychainKey, error) {
+// KeyForObjectIDError returns keychain item key with specified objectID.  Fills error with TKTokenErrorCodeObjectNotFound if no such key exists.
+func (x *TokenConfiguration) KeyForObjectIDError(objectID obj.Object) (result *TokenKeychainKey, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyForObjectID:error:"), objref.IDOf(objectID), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -93,8 +97,8 @@ func (x *TokenConfiguration) KeyForObjectIDError(objectID obj.Object) (*TokenKey
 	return TokenKeychainKeyFromID(_r), nil
 }
 
-// Returns certificate with specified objectID.  Fills error with TKTokenErrorCodeObjectNotFound if no such certificate exists.
-func (x *TokenConfiguration) CertificateForObjectIDError(objectID obj.Object) (*TokenKeychainCertificate, error) {
+// CertificateForObjectIDError returns certificate with specified objectID.  Fills error with TKTokenErrorCodeObjectNotFound if no such certificate exists.
+func (x *TokenConfiguration) CertificateForObjectIDError(objectID obj.Object) (result *TokenKeychainCertificate, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificateForObjectID:error:"), objref.IDOf(objectID), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -103,23 +107,24 @@ func (x *TokenConfiguration) CertificateForObjectIDError(objectID obj.Object) (*
 	return TokenKeychainCertificateFromID(_r), nil
 }
 
-// Unique, persistent identifier of this token, always created by specific token implementation. Typically implemented by some kind of serial number of the target hardware, for example SmartCard serial number.
+// InstanceID unique, persistent identifier of this token, always created by specific token implementation. Typically implemented by some kind of serial number of the target hardware, for example SmartCard serial number.
 func (x *TokenConfiguration) InstanceID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instanceID"))
 	return obj.Wrap(_r)
 }
 
-// Additional configuration available for token instance. Token implementation and its hosting application can use this data for specifying any additional configuration for the token. System does not interpret this data in any way. For example, network-based HSM can store here (using Codable or other serialization mechanisms) target network address, access credentials and the list of identities accessible in the HSM.
+// ConfigurationData additional configuration available for token instance. Token implementation and its hosting application can use this data for specifying any additional configuration for the token. System does not interpret this data in any way. For example, network-based HSM can store here (using Codable or other serialization mechanisms) target network address, access credentials and the list of identities accessible in the HSM.
 func (x *TokenConfiguration) ConfigurationData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configurationData"))
 	return obj.Wrap(_r)
 }
 
+// SetConfigurationData wraps the corresponding Objective-C method.
 func (x *TokenConfiguration) SetConfigurationData(configurationData obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfigurationData:"), objref.IDOf(configurationData))
 }
 
-// All keychain items of this token.
+// KeychainItems all keychain items of this token.
 //
 // KeychainItems returns the collection as a Go slice.
 func (x *TokenConfiguration) KeychainItems() []*TokenKeychainItem {
@@ -127,6 +132,7 @@ func (x *TokenConfiguration) KeychainItems() []*TokenKeychainItem {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TokenKeychainItem { return TokenKeychainItemFromID(_id) })
 }
 
+// SetKeychainItems wraps the corresponding Objective-C method.
 func (x *TokenConfiguration) SetKeychainItems(keychainItems []*TokenKeychainItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeychainItems:"), purego.SliceToNSArray(keychainItems, func(_v *TokenKeychainItem) objc.ID { return objref.IDOf(_v) }))
 }
@@ -136,8 +142,8 @@ type TokenConfigurationable interface {
 	obj.Object
 	WithConfigurationData(configurationData obj.Object) *TokenConfiguration
 	WithKeychainItems(items ...TokenKeychainItemProvider) *TokenConfiguration
-	KeyForObjectIDError(objectID obj.Object) (*TokenKeychainKey, error)
-	CertificateForObjectIDError(objectID obj.Object) (*TokenKeychainCertificate, error)
+	KeyForObjectIDError(objectID obj.Object) (result *TokenKeychainKey, err error)
+	CertificateForObjectIDError(objectID obj.Object) (result *TokenKeychainCertificate, err error)
 	InstanceID() obj.Object
 	ConfigurationData() obj.Object
 	SetConfigurationData(configurationData obj.Object)

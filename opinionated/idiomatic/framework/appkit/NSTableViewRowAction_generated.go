@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A single action to present when the user swipes horizontally on a table row.
-//
 // TableViewRowAction is an idiomatic wrapper over the Objective-C class NSTableViewRowAction.
+//
+// A single action to present when the user swipes horizontally on a table row.
 type TableViewRowAction struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TableViewRowActionFromID(id objc.ID) *TableViewRowAction {
 	if id == 0 {
 		return nil
 	}
-	x := &TableViewRowAction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TableViewRowAction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func tableViewRowActionAdopt(id objc.ID) *TableViewRowAction {
 	if id == 0 {
 		return nil
 	}
-	x := &TableViewRowAction{Handle: objref.Wrap(id)}
+	x := &TableViewRowAction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,39 +60,43 @@ func (x *TableViewRowAction) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TableViewRowAction) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTableViewRowAction creates a new TableViewRowAction.
 func NewTableViewRowAction() *TableViewRowAction {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSTableViewRowAction")), objc.RegisterName("new"))
 	return tableViewRowActionAdopt(_id)
 }
 
-// The title of the action button.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the title of the action button.
 func (x *TableViewRowAction) WithTitle(title string) *TableViewRowAction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The background color of the action button.
-//
-// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+// WithBackgroundColor the background color of the action button.
 func (x *TableViewRowAction) WithBackgroundColor(backgroundColor *Color) *TableViewRowAction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// WithImage sets image and returns the receiver so calls can be chained.
+// WithImage sets the property and returns the receiver so calls can be chained.
 func (x *TableViewRowAction) WithImage(image *Image) *TableViewRowAction {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
+// Style wraps the corresponding Objective-C method.
 func (x *TableViewRowAction) Style() TableViewRowActionStyle {
 	_r := objc.Send[TableViewRowActionStyle](objref.IDOf(x), objc.RegisterName("style"))
 	return _r
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *TableViewRowAction) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -99,24 +105,29 @@ func (x *TableViewRowAction) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *TableViewRowAction) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
+// BackgroundColor wraps the corresponding Objective-C method.
 func (x *TableViewRowAction) BackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
 }
 
+// SetBackgroundColor wraps the corresponding Objective-C method.
 func (x *TableViewRowAction) SetBackgroundColor(backgroundColor *Color) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
+// Image wraps the corresponding Objective-C method.
 func (x *TableViewRowAction) Image() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
+// SetImage wraps the corresponding Objective-C method.
 func (x *TableViewRowAction) SetImage(image *Image) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that provides decorative accessory views for selected and highlighted items within a scrubber control.
-//
 // ScrubberSelectionStyle is an idiomatic wrapper over the Objective-C class NSScrubberSelectionStyle.
+//
+// An abstract class that provides decorative accessory views for selected and highlighted items within a scrubber control.
 type ScrubberSelectionStyle struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ScrubberSelectionStyleFromID(id objc.ID) *ScrubberSelectionStyle {
 	if id == 0 {
 		return nil
 	}
-	x := &ScrubberSelectionStyle{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScrubberSelectionStyle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func scrubberSelectionStyleAdopt(id objc.ID) *ScrubberSelectionStyle {
 	if id == 0 {
 		return nil
 	}
-	x := &ScrubberSelectionStyle{Handle: objref.Wrap(id)}
+	x := &ScrubberSelectionStyle{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,26 @@ func (x *ScrubberSelectionStyle) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScrubberSelectionStyle) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewScrubberSelectionStyle creates a new ScrubberSelectionStyle.
 func NewScrubberSelectionStyle() *ScrubberSelectionStyle {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSScrubberSelectionStyle")), objc.RegisterName("new"))
 	return scrubberSelectionStyleAdopt(_id)
 }
 
-// Initializes a scrubber selection style when included from a nib or Storyboard.
-//
-// NewScrubberSelectionStyleWithCoder creates a new ScrubberSelectionStyle.
+// NewScrubberSelectionStyleWithCoder initializes a scrubber selection style when included from a nib or Storyboard.
 func NewScrubberSelectionStyleWithCoder(coder obj.Object) *ScrubberSelectionStyle {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScrubberSelectionStyle")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return scrubberSelectionStyleAdopt(_id)
 }
 
-// Provides an opportunity to create a customized scrubber selection style.
+// MakeSelectionView provides an opportunity to create a customized scrubber selection style.
 func (x *ScrubberSelectionStyle) MakeSelectionView() *ScrubberSelectionView {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeSelectionView"))
 	return ScrubberSelectionViewFromID(_r)

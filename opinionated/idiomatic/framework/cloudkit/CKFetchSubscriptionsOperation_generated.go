@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An operation for fetching subscriptions.
-//
 // FetchSubscriptionsOperation is an idiomatic wrapper over the Objective-C class CKFetchSubscriptionsOperation.
+//
+// It embeds [DatabaseOperation], promoting that type's methods.
+//
+// An operation for fetching subscriptions.
 type FetchSubscriptionsOperation struct {
-	objref.Handle
+	DatabaseOperation
 }
 
 // FetchSubscriptionsOperationFromID adopts an existing Objective-C object as a FetchSubscriptionsOperation
@@ -25,7 +26,8 @@ func FetchSubscriptionsOperationFromID(id objc.ID) *FetchSubscriptionsOperation 
 	if id == 0 {
 		return nil
 	}
-	x := &FetchSubscriptionsOperation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FetchSubscriptionsOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func fetchSubscriptionsOperationAdopt(id objc.ID) *FetchSubscriptionsOperation {
 	if id == 0 {
 		return nil
 	}
-	x := &FetchSubscriptionsOperation{Handle: objref.Wrap(id)}
+	x := &FetchSubscriptionsOperation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *FetchSubscriptionsOperation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FetchSubscriptionsOperation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FetchSubscriptionsOperation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewFetchSubscriptionsOperation creates a new FetchSubscriptionsOperation.
@@ -64,97 +52,75 @@ func NewFetchSubscriptionsOperation() *FetchSubscriptionsOperation {
 	return fetchSubscriptionsOperationAdopt(_id)
 }
 
-// Creates an operation for fetching the specified subscriptions.
-//
-// NewFetchSubscriptionsOperationWithSubscriptionIDs creates a new FetchSubscriptionsOperation.
+// NewFetchSubscriptionsOperationWithSubscriptionIDs creates an operation for fetching the specified subscriptions.
 func NewFetchSubscriptionsOperationWithSubscriptionIDs(subscriptionIDs []obj.Object) *FetchSubscriptionsOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKFetchSubscriptionsOperation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSubscriptionIDs:"), purego.SliceToNSArray(subscriptionIDs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return fetchSubscriptionsOperationAdopt(_id)
 }
 
-// The IDs of the subscriptions to fetch.
-//
-// WithSubscriptionIDs sets the collection and returns the receiver so calls can be chained.
+// WithSubscriptionIDs the IDs of the subscriptions to fetch.
 func (x *FetchSubscriptionsOperation) WithSubscriptionIDs(items ...obj.Object) *FetchSubscriptionsOperation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionIDs:"), _arr)
 	return x
 }
 
-// The database that the operation uses.
-//
-// WithDatabase sets database and returns the receiver so calls can be chained.
+// WithDatabase the database that the operation uses.
 func (x *FetchSubscriptionsOperation) WithDatabase(database *Database) *FetchSubscriptionsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return x
 }
 
-// The operation’s configuration.
-//
-// WithConfiguration sets configuration and returns the receiver so calls can be chained.
+// WithConfiguration the operation’s configuration.
 func (x *FetchSubscriptionsOperation) WithConfiguration(configuration *OperationConfiguration) *FetchSubscriptionsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
-// The operation’s group.
-//
-// WithGroup sets group and returns the receiver so calls can be chained.
+// WithGroup the operation’s group.
 func (x *FetchSubscriptionsOperation) WithGroup(group *OperationGroup) *FetchSubscriptionsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation.
-//
-// WithLongLivedOperationWasPersistedBlock sets longLivedOperationWasPersistedBlock and returns the receiver so calls can be chained.
+// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
 func (x *FetchSubscriptionsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchSubscriptionsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
 	return x
 }
 
-// The operation's container.
-//
-// WithContainer sets container and returns the receiver so calls can be chained.
+// WithContainer the operation's container.
 func (x *FetchSubscriptionsOperation) WithContainer(container *Container) *FetchSubscriptionsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network.
-//
-// WithAllowsCellularAccess sets allowsCellularAccess and returns the receiver so calls can be chained.
+// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
 func (x *FetchSubscriptionsOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchSubscriptionsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived.
-//
-// WithLongLived sets longLived and returns the receiver so calls can be chained.
+// WithLongLived a Boolean value that indicates whether the operation is long-lived.
 func (x *FetchSubscriptionsOperation) WithLongLived(longLived bool) *FetchSubscriptionsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The timeout interval when waiting for additional data.
-//
-// WithTimeoutIntervalForRequest sets timeoutIntervalForRequest and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
 func (x *FetchSubscriptionsOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchSubscriptionsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can use.
-//
-// WithTimeoutIntervalForResource sets timeoutIntervalForResource and returns the receiver so calls can be chained.
+// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
 func (x *FetchSubscriptionsOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchSubscriptionsOperation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
-// The IDs of the subscriptions to fetch. Use this property to view or change the IDs of the subscriptions to fetch. Each element of the array is a string that represents the ID of a subscription. If you intend to modify this property's value, do so before you execute the operation or submit it to a queue. If you use the “CKFetchSubscriptionsOperation/fetchAllSubscriptionsOperation()“ method to create the operation, CloudKit ignores this property's value and sets it to `nil`.
+// SubscriptionIDs the IDs of the subscriptions to fetch. Use this property to view or change the IDs of the subscriptions to fetch. Each element of the array is a string that represents the ID of a subscription. If you intend to modify this property's value, do so before you execute the operation or submit it to a queue. If you use the “CKFetchSubscriptionsOperation/fetchAllSubscriptionsOperation()“ method to create the operation, CloudKit ignores this property's value and sets it to `nil`.
 //
 // SubscriptionIDs returns the collection as a Go slice.
 func (x *FetchSubscriptionsOperation) SubscriptionIDs() []obj.Object {
@@ -162,6 +128,7 @@ func (x *FetchSubscriptionsOperation) SubscriptionIDs() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetSubscriptionIDs wraps the corresponding Objective-C method.
 func (x *FetchSubscriptionsOperation) SetSubscriptionIDs(subscriptionIDs []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionIDs:"), purego.SliceToNSArray(subscriptionIDs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
@@ -184,3 +151,7 @@ type FetchSubscriptionsOperationable interface {
 }
 
 var _ FetchSubscriptionsOperationable = (*FetchSubscriptionsOperation)(nil)
+
+var _ DatabaseOperationProvider = (*FetchSubscriptionsOperation)(nil)
+
+var _ OperationProvider = (*FetchSubscriptionsOperation)(nil)

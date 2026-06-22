@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRContentLauncherClusterDimension is an idiomatic wrapper over the Objective-C class MTRContentLauncherClusterDimension.
+//
+// It embeds [MTRContentLauncherClusterDimensionStruct], promoting that type's methods.
 type MTRContentLauncherClusterDimension struct {
-	objref.Handle
+	MTRContentLauncherClusterDimensionStruct
 }
 
 // MTRContentLauncherClusterDimensionFromID adopts an existing Objective-C object as a MTRContentLauncherClusterDimension
@@ -23,7 +24,8 @@ func MTRContentLauncherClusterDimensionFromID(id objc.ID) *MTRContentLauncherClu
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterDimension{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRContentLauncherClusterDimension{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRContentLauncherClusterDimensionAdopt(id objc.ID) *MTRContentLauncherClus
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterDimension{Handle: objref.Wrap(id)}
+	x := &MTRContentLauncherClusterDimension{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRContentLauncherClusterDimension) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRContentLauncherClusterDimension) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRContentLauncherClusterDimension) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRContentLauncherClusterDimension creates a new MTRContentLauncherClusterDimension.
@@ -62,19 +50,19 @@ func NewMTRContentLauncherClusterDimension() *MTRContentLauncherClusterDimension
 	return mTRContentLauncherClusterDimensionAdopt(_id)
 }
 
-// WithWidth sets width and returns the receiver so calls can be chained.
+// WithWidth sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterDimension) WithWidth(width obj.Object) *MTRContentLauncherClusterDimension {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), objref.IDOf(width))
 	return x
 }
 
-// WithHeight sets height and returns the receiver so calls can be chained.
+// WithHeight sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterDimension) WithHeight(height obj.Object) *MTRContentLauncherClusterDimension {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), objref.IDOf(height))
 	return x
 }
 
-// WithMetric sets metric and returns the receiver so calls can be chained.
+// WithMetric sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterDimension) WithMetric(metric obj.Object) *MTRContentLauncherClusterDimension {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetric:"), objref.IDOf(metric))
 	return x
@@ -89,3 +77,5 @@ type MTRContentLauncherClusterDimensionable interface {
 }
 
 var _ MTRContentLauncherClusterDimensionable = (*MTRContentLauncherClusterDimension)(nil)
+
+var _ MTRContentLauncherClusterDimensionStructProvider = (*MTRContentLauncherClusterDimension)(nil)

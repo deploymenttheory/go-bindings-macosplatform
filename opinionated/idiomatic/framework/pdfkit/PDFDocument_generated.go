@@ -6,15 +6,16 @@ package pdfkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents PDF data or a PDF file and defines methods for writing, searching, and selecting PDF data.
-//
 // Document is an idiomatic wrapper over the Objective-C class PDFDocument.
+//
+// An object that represents PDF data or a PDF file and defines methods for writing, searching, and selecting PDF data.
 type Document struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func DocumentFromID(id objc.ID) *Document {
 	if id == 0 {
 		return nil
 	}
-	x := &Document{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Document{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func documentAdopt(id objc.ID) *Document {
 	if id == 0 {
 		return nil
 	}
-	x := &Document{Handle: objref.Wrap(id)}
+	x := &Document{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,215 +61,256 @@ func (x *Document) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Document) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDocument creates a new Document.
 func NewDocument() *Document {
 	_id := objc.Send[objc.ID](objc.ID(_class("PDFDocument")), objc.RegisterName("new"))
 	return documentAdopt(_id)
 }
 
-// Initializes a PDFDocument object with the contents at the specified URL (if the URL is invalid, this method returns NULL).
-//
-// NewDocumentWithURL creates a new Document.
+// NewDocumentWithURL initializes a PDFDocument object with the contents at the specified URL (if the URL is invalid, this method returns NULL).
 func NewDocumentWithURL(url string) *Document {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFDocument")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
 	return documentAdopt(_id)
 }
 
-// Initializes a PDFDocument object with the passed-in data.
-//
-// NewDocumentWithData creates a new Document.
+// NewDocumentWithData initializes a PDFDocument object with the passed-in data.
 func NewDocumentWithData(data obj.Object) *Document {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFDocument")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
 	return documentAdopt(_id)
 }
 
-// WithDocumentAttributes sets documentAttributes and returns the receiver so calls can be chained.
+// WithDocumentAttributes sets the property and returns the receiver so calls can be chained.
 func (x *Document) WithDocumentAttributes(documentAttributes obj.Object) *Document {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentAttributes:"), objref.IDOf(documentAttributes))
 	return x
 }
 
-// Attempts to unlock an encrypted document.
+// UnlockWithPassword attempts to unlock an encrypted document.
 func (x *Document) UnlockWithPassword(password string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("unlockWithPassword:"), purego.NSString(password))
 	return _r
 }
 
+// DataRepresentation wraps the corresponding Objective-C method.
 func (x *Document) DataRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
 	return obj.Wrap(_r)
 }
 
+// DataRepresentationWithOptions wraps the corresponding Objective-C method.
 func (x *Document) DataRepresentationWithOptions(options obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentationWithOptions:"), objref.IDOf(options))
 	return obj.Wrap(_r)
 }
 
+// WriteToFile wraps the corresponding Objective-C method.
 func (x *Document) WriteToFile(path string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToFile:"), purego.NSString(path))
 	return _r
 }
 
+// WriteToFileWithOptions wraps the corresponding Objective-C method.
 func (x *Document) WriteToFileWithOptions(path string, options obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToFile:withOptions:"), purego.NSString(path), objref.IDOf(options))
 	return _r
 }
 
+// WriteToURL wraps the corresponding Objective-C method.
 func (x *Document) WriteToURL(url string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:"), rt.FileURL(url))
 	return _r
 }
 
+// WriteToURLWithOptions wraps the corresponding Objective-C method.
 func (x *Document) WriteToURLWithOptions(url string, options obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:withOptions:"), rt.FileURL(url), objref.IDOf(options))
 	return _r
 }
 
+// OutlineItemForSelection wraps the corresponding Objective-C method.
 func (x *Document) OutlineItemForSelection(selection *Selection) *Outline {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outlineItemForSelection:"), objref.IDOf(selection))
 	return OutlineFromID(_r)
 }
 
+// PageAtIndex wraps the corresponding Objective-C method.
 func (x *Document) PageAtIndex(index int) *Page {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pageAtIndex:"), index)
 	return PageFromID(_r)
 }
 
+// IndexForPage wraps the corresponding Objective-C method.
 func (x *Document) IndexForPage(page *Page) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexForPage:"), objref.IDOf(page))
 	return _r
 }
 
+// InsertPageAtIndex wraps the corresponding Objective-C method.
 func (x *Document) InsertPageAtIndex(page *Page, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertPage:atIndex:"), objref.IDOf(page), index)
 }
 
+// RemovePageAtIndex wraps the corresponding Objective-C method.
 func (x *Document) RemovePageAtIndex(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removePageAtIndex:"), index)
 }
 
+// ExchangePageAtIndexWithPageAtIndex wraps the corresponding Objective-C method.
 func (x *Document) ExchangePageAtIndexWithPageAtIndex(indexA int, indexB int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exchangePageAtIndex:withPageAtIndex:"), indexA, indexB)
 }
 
+// CancelFindString wraps the corresponding Objective-C method.
 func (x *Document) CancelFindString() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelFindString"))
 }
 
+// PrintOperationForPrintInfoScalingModeAutoRotate wraps the corresponding Objective-C method.
 func (x *Document) PrintOperationForPrintInfoScalingModeAutoRotate(printInfo obj.Object, scaleMode PrintScalingMode, doRotate bool) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printOperationForPrintInfo:scalingMode:autoRotate:"), objref.IDOf(printInfo), scaleMode, doRotate)
 	return obj.Wrap(_r)
 }
 
+// SelectionFromPageAtPointToPageAtPoint wraps the corresponding Objective-C method.
+func (x *Document) SelectionFromPageAtPointToPageAtPoint(startPage *Page, startPoint corefoundation.CGPoint, endPage *Page, endPoint corefoundation.CGPoint) *Selection {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionFromPage:atPoint:toPage:atPoint:"), objref.IDOf(startPage), startPoint, objref.IDOf(endPage), endPoint)
+	return SelectionFromID(_r)
+}
+
+// SelectionFromPageAtPointToPageAtPointWithGranularity wraps the corresponding Objective-C method.
+func (x *Document) SelectionFromPageAtPointToPageAtPointWithGranularity(startPage *Page, startPoint corefoundation.CGPoint, endPage *Page, endPoint corefoundation.CGPoint, granularity SelectionGranularity) *Selection {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionFromPage:atPoint:toPage:atPoint:withGranularity:"), objref.IDOf(startPage), startPoint, objref.IDOf(endPage), endPoint, granularity)
+	return SelectionFromID(_r)
+}
+
+// SelectionFromPageAtCharacterIndexToPageAtCharacterIndex wraps the corresponding Objective-C method.
 func (x *Document) SelectionFromPageAtCharacterIndexToPageAtCharacterIndex(startPage *Page, startCharacter int, endPage *Page, endCharacter int) *Selection {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionFromPage:atCharacterIndex:toPage:atCharacterIndex:"), objref.IDOf(startPage), startCharacter, objref.IDOf(endPage), endCharacter)
 	return SelectionFromID(_r)
 }
 
+// DocumentURL wraps the corresponding Objective-C method.
 func (x *Document) DocumentURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentURL"))
 	return obj.Wrap(_r)
 }
 
+// DocumentRef wraps the corresponding Objective-C method.
 func (x *Document) DocumentRef() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentRef"))
 	return obj.Wrap(_r)
 }
 
+// DocumentAttributes wraps the corresponding Objective-C method.
 func (x *Document) DocumentAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentAttributes"))
 	return obj.Wrap(_r)
 }
 
+// SetDocumentAttributes wraps the corresponding Objective-C method.
 func (x *Document) SetDocumentAttributes(documentAttributes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentAttributes:"), objref.IDOf(documentAttributes))
 }
 
+// MajorVersion wraps the corresponding Objective-C method.
 func (x *Document) MajorVersion() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("majorVersion"))
 	return _r
 }
 
+// MinorVersion wraps the corresponding Objective-C method.
 func (x *Document) MinorVersion() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minorVersion"))
 	return _r
 }
 
+// IsEncrypted wraps the corresponding Objective-C method.
 func (x *Document) IsEncrypted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEncrypted"))
 	return _r
 }
 
+// IsLocked wraps the corresponding Objective-C method.
 func (x *Document) IsLocked() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLocked"))
 	return _r
 }
 
+// AllowsPrinting wraps the corresponding Objective-C method.
 func (x *Document) AllowsPrinting() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsPrinting"))
 	return _r
 }
 
+// AllowsCopying wraps the corresponding Objective-C method.
 func (x *Document) AllowsCopying() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCopying"))
 	return _r
 }
 
+// AllowsDocumentChanges wraps the corresponding Objective-C method.
 func (x *Document) AllowsDocumentChanges() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsDocumentChanges"))
 	return _r
 }
 
+// AllowsDocumentAssembly wraps the corresponding Objective-C method.
 func (x *Document) AllowsDocumentAssembly() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsDocumentAssembly"))
 	return _r
 }
 
+// AllowsContentAccessibility wraps the corresponding Objective-C method.
 func (x *Document) AllowsContentAccessibility() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsContentAccessibility"))
 	return _r
 }
 
+// AllowsCommenting wraps the corresponding Objective-C method.
 func (x *Document) AllowsCommenting() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCommenting"))
 	return _r
 }
 
+// AllowsFormFieldEntry wraps the corresponding Objective-C method.
 func (x *Document) AllowsFormFieldEntry() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsFormFieldEntry"))
 	return _r
 }
 
+// AccessPermissions wraps the corresponding Objective-C method.
 func (x *Document) AccessPermissions() AccessPermissions {
 	_r := objc.Send[AccessPermissions](objref.IDOf(x), objc.RegisterName("accessPermissions"))
 	return _r
 }
 
+// PermissionsStatus wraps the corresponding Objective-C method.
 func (x *Document) PermissionsStatus() DocumentPermissions {
 	_r := objc.Send[DocumentPermissions](objref.IDOf(x), objc.RegisterName("permissionsStatus"))
 	return _r
 }
 
-func (x *Document) String() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("string"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
-}
-
+// PageCount wraps the corresponding Objective-C method.
 func (x *Document) PageCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pageCount"))
 	return _r
 }
 
+// IsFinding wraps the corresponding Objective-C method.
 func (x *Document) IsFinding() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFinding"))
 	return _r
 }
 
+// SelectionForEntireDocument wraps the corresponding Objective-C method.
 func (x *Document) SelectionForEntireDocument() *Selection {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionForEntireDocument"))
 	return SelectionFromID(_r)
@@ -291,6 +335,8 @@ type Documentable interface {
 	ExchangePageAtIndexWithPageAtIndex(indexA int, indexB int)
 	CancelFindString()
 	PrintOperationForPrintInfoScalingModeAutoRotate(printInfo obj.Object, scaleMode PrintScalingMode, doRotate bool) obj.Object
+	SelectionFromPageAtPointToPageAtPoint(startPage *Page, startPoint corefoundation.CGPoint, endPage *Page, endPoint corefoundation.CGPoint) *Selection
+	SelectionFromPageAtPointToPageAtPointWithGranularity(startPage *Page, startPoint corefoundation.CGPoint, endPage *Page, endPoint corefoundation.CGPoint, granularity SelectionGranularity) *Selection
 	SelectionFromPageAtCharacterIndexToPageAtCharacterIndex(startPage *Page, startCharacter int, endPage *Page, endCharacter int) *Selection
 	DocumentURL() obj.Object
 	DocumentRef() obj.Object
@@ -309,7 +355,6 @@ type Documentable interface {
 	AllowsFormFieldEntry() bool
 	AccessPermissions() AccessPermissions
 	PermissionsStatus() DocumentPermissions
-	String() string
 	PageCount() int
 	IsFinding() bool
 	SelectionForEntireDocument() *Selection

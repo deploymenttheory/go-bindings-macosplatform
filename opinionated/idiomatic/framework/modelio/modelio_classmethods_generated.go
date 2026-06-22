@@ -12,54 +12,55 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns a Boolean value that indicates whether the MDLAsset class can read asset data from files with the specified extension.
+// CanImportFileExtension returns a Boolean value that indicates whether the MDLAsset class can read asset data from files with the specified extension.
 func CanImportFileExtension(extension string) bool {
 	_r := objc.Send[bool](objc.ID(_class("MDLAsset")), objc.RegisterName("canImportFileExtension:"), purego.NSString(extension))
 	return _r
 }
 
-// Returns a Boolean value that indicates whether the MDLAsset class can write asset data as a file with the specified format extension.
+// CanExportFileExtension returns a Boolean value that indicates whether the MDLAsset class can write asset data as a file with the specified format extension.
 func CanExportFileExtension(extension string) bool {
 	_r := objc.Send[bool](objc.ID(_class("MDLAsset")), objc.RegisterName("canExportFileExtension:"), purego.NSString(extension))
 	return _r
 }
 
-// Creates a light probe representing the shading environment at a specific point in a scene.
+// LightProbeWithTextureSizeForLocationLightsToConsiderObjectsToConsiderReflectiveCubemapIrradianceCubemap creates a light probe representing the shading environment at a specific point in a scene.
 func LightProbeWithTextureSizeForLocationLightsToConsiderObjectsToConsiderReflectiveCubemapIrradianceCubemap(textureSize int, transform *Transform, lightsToConsider []*Light, objectsToConsider []*Object, reflectiveCubemap *Texture, irradianceCubemap *Texture) *LightProbe {
 	_r := objc.Send[objc.ID](objc.ID(_class("MDLLightProbe")), objc.RegisterName("lightProbeWithTextureSize:forLocation:lightsToConsider:objectsToConsider:reflectiveCubemap:irradianceCubemap:"), textureSize, objref.IDOf(transform), purego.SliceToNSArray(lightsToConsider, func(_v *Light) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(objectsToConsider, func(_v *Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(reflectiveCubemap), objref.IDOf(irradianceCubemap))
 	return LightProbeFromID(_r)
 }
 
-// Creates a new mesh by subdividing the specified mesh.
+// NewSubdividedMeshSubmeshIndexSubdivisionLevels creates a new mesh by subdividing the specified mesh.
 func NewSubdividedMeshSubmeshIndexSubdivisionLevels(mesh *Mesh, submeshIndex int, subdivisionLevels int) *Mesh {
 	_r := objc.Send[objc.ID](objc.ID(_class("MDLMesh")), objc.RegisterName("newSubdividedMesh:submeshIndex:subdivisionLevels:"), objref.IDOf(mesh), submeshIndex, subdivisionLevels)
 	return MeshFromID(_r)
 }
 
-// Loads the texture with the specified filename from the app’s main bundle.
+// TextureNamed loads the texture with the specified filename from the app’s main bundle.
 func TextureNamed(name string) *Texture {
 	_r := objc.Send[objc.ID](objc.ID(_class("MDLTexture")), objc.RegisterName("textureNamed:"), purego.NSString(name))
 	return TextureFromID(_r)
 }
 
-// Loads the texture with the specified filename from the specified bundle.
+// TextureNamedBundle loads the texture with the specified filename from the specified bundle.
 func TextureNamedBundle(name string, bundleOrNil obj.Object) *Texture {
 	_r := objc.Send[objc.ID](objc.ID(_class("MDLTexture")), objc.RegisterName("textureNamed:bundle:"), purego.NSString(name), objref.IDOf(bundleOrNil))
 	return TextureFromID(_r)
 }
 
-// Loads a cube texture from the specified image files in the app’s main bundle.
+// TextureCubeWithImagesNamed loads a cube texture from the specified image files in the app’s main bundle.
 func TextureCubeWithImagesNamed(names []string) *Texture {
 	_r := objc.Send[objc.ID](objc.ID(_class("MDLTexture")), objc.RegisterName("textureCubeWithImagesNamed:"), purego.SliceToNSArray(names, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return TextureFromID(_r)
 }
 
-// Loads a cube texture from the specified image files in the specified bundle.
+// TextureCubeWithImagesNamedBundle loads a cube texture from the specified image files in the specified bundle.
 func TextureCubeWithImagesNamedBundle(names []string, bundleOrNil obj.Object) *Texture {
 	_r := objc.Send[objc.ID](objc.ID(_class("MDLTexture")), objc.RegisterName("textureCubeWithImagesNamed:bundle:"), purego.SliceToNSArray(names, func(_v string) objc.ID { return purego.NSString(_v) }), objref.IDOf(bundleOrNil))
 	return TextureFromID(_r)
 }
 
+// ConvertToUSDZWriteToURL wraps the corresponding Objective-C method.
 func ConvertToUSDZWriteToURL(inputURL string, outputURL string) {
 	objc.Send[objc.ID](objc.ID(_class("MDLUtility")), objc.RegisterName("convertToUSDZ:writeToURL:"), rt.FileURL(inputURL), rt.FileURL(outputURL))
 }

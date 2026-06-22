@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing an important event during a workout.
-//
 // WorkoutEvent is an idiomatic wrapper over the Objective-C class HKWorkoutEvent.
+//
+// An object representing an important event during a workout.
 type WorkoutEvent struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WorkoutEventFromID(id objc.ID) *WorkoutEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &WorkoutEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WorkoutEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func workoutEventAdopt(id objc.ID) *WorkoutEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &WorkoutEvent{Handle: objref.Wrap(id)}
+	x := &WorkoutEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,30 +60,37 @@ func (x *WorkoutEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WorkoutEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWorkoutEvent creates a new WorkoutEvent.
 func NewWorkoutEvent() *WorkoutEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKWorkoutEvent")), objc.RegisterName("new"))
 	return workoutEventAdopt(_id)
 }
 
-// Represents the type of event that occurred during a workout.
+// Type represents the type of event that occurred during a workout.
 func (x *WorkoutEvent) Type() WorkoutEventType {
 	_r := objc.Send[WorkoutEventType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
+// Date wraps the corresponding Objective-C method.
 func (x *WorkoutEvent) Date() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
 
-// Date interval representing the time period for which the event is valid. Most event types only support date intervals with zero duration. Events of type HKWorkoutEventTypeLap and HKWorkoutEventTypeSegment are currently the only events that support a nonzero duration.
+// DateInterval date interval representing the time period for which the event is valid. Most event types only support date intervals with zero duration. Events of type HKWorkoutEventTypeLap and HKWorkoutEventTypeSegment are currently the only events that support a nonzero duration.
 func (x *WorkoutEvent) DateInterval() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateInterval"))
 	return obj.Wrap(_r)
 }
 
-// Extra information describing properties of the receiver. Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
+// Metadata extra information describing properties of the receiver. Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
 func (x *WorkoutEvent) Metadata() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
 	return obj.Wrap(_r)

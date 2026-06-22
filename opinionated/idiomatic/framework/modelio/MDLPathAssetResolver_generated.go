@@ -23,7 +23,8 @@ func PathAssetResolverFromID(id objc.ID) *PathAssetResolver {
 	if id == 0 {
 		return nil
 	}
-	x := &PathAssetResolver{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PathAssetResolver{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func pathAssetResolverAdopt(id objc.ID) *PathAssetResolver {
 	if id == 0 {
 		return nil
 	}
-	x := &PathAssetResolver{Handle: objref.Wrap(id)}
+	x := &PathAssetResolver{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *PathAssetResolver) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PathAssetResolver) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPathAssetResolverWithPath creates a new PathAssetResolver.
 func NewPathAssetResolverWithPath(path string) *PathAssetResolver {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLPathAssetResolver")), objc.RegisterName("alloc"))
@@ -63,12 +71,13 @@ func NewPathAssetResolverWithPath(path string) *PathAssetResolver {
 	return pathAssetResolverAdopt(_id)
 }
 
-// WithPath sets path and returns the receiver so calls can be chained.
+// WithPath sets the property and returns the receiver so calls can be chained.
 func (x *PathAssetResolver) WithPath(path string) *PathAssetResolver {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), purego.NSString(path))
 	return x
 }
 
+// Path wraps the corresponding Objective-C method.
 func (x *PathAssetResolver) Path() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
 	if _r == 0 {
@@ -77,6 +86,7 @@ func (x *PathAssetResolver) Path() string {
 	return purego.GoString(_r)
 }
 
+// SetPath wraps the corresponding Objective-C method.
 func (x *PathAssetResolver) SetPath(path string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), purego.NSString(path))
 }

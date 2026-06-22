@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents an indexed change within an ordered collection.
-//
 // OrderedCollectionChange is an idiomatic wrapper over the Objective-C class NSOrderedCollectionChange.
+//
+// An object that represents an indexed change within an ordered collection.
 type OrderedCollectionChange struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func OrderedCollectionChangeFromID(id objc.ID) *OrderedCollectionChange {
 	if id == 0 {
 		return nil
 	}
-	x := &OrderedCollectionChange{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OrderedCollectionChange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func orderedCollectionChangeAdopt(id objc.ID) *OrderedCollectionChange {
 	if id == 0 {
 		return nil
 	}
-	x := &OrderedCollectionChange{Handle: objref.Wrap(id)}
+	x := &OrderedCollectionChange{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,45 +60,51 @@ func (x *OrderedCollectionChange) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a change object that represents inserting or removing an object from an ordered collection at a specific index.
-//
-// NewOrderedCollectionChangeWithObjectTypeIndex creates a new OrderedCollectionChange.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OrderedCollectionChange) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewOrderedCollectionChangeWithObjectTypeIndex creates a change object that represents inserting or removing an object from an ordered collection at a specific index.
 func NewOrderedCollectionChangeWithObjectTypeIndex(anObject obj.Object, type_ CollectionChangeType, index int) *OrderedCollectionChange {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedCollectionChange")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObject:type:index:"), objref.IDOf(anObject), type_, index)
 	return orderedCollectionChangeAdopt(_id)
 }
 
-// Creates a change object that represents inserting, removing, or moving an object from an ordered collection at a specific index.
-//
-// NewOrderedCollectionChangeWithObjectTypeIndexAssociatedIndex creates a new OrderedCollectionChange.
+// NewOrderedCollectionChangeWithObjectTypeIndexAssociatedIndex creates a change object that represents inserting, removing, or moving an object from an ordered collection at a specific index.
 func NewOrderedCollectionChangeWithObjectTypeIndexAssociatedIndex(anObject obj.Object, type_ CollectionChangeType, index int, associatedIndex int) *OrderedCollectionChange {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedCollectionChange")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObject:type:index:associatedIndex:"), objref.IDOf(anObject), type_, index, associatedIndex)
 	return orderedCollectionChangeAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *OrderedCollectionChange) WithScriptingProperties(scriptingProperties obj.Object) *OrderedCollectionChange {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Object wraps the corresponding Objective-C method.
 func (x *OrderedCollectionChange) Object() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("object"))
 	return obj.Wrap(_r)
 }
 
+// ChangeType wraps the corresponding Objective-C method.
 func (x *OrderedCollectionChange) ChangeType() CollectionChangeType {
 	_r := objc.Send[CollectionChangeType](objref.IDOf(x), objc.RegisterName("changeType"))
 	return _r
 }
 
+// Index wraps the corresponding Objective-C method.
 func (x *OrderedCollectionChange) Index() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("index"))
 	return _r
 }
 
+// AssociatedIndex wraps the corresponding Objective-C method.
 func (x *OrderedCollectionChange) AssociatedIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("associatedIndex"))
 	return _r

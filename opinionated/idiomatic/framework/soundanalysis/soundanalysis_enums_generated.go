@@ -19,6 +19,8 @@ const (
 	ErrorCodeInvalidFile     ErrorCode = 5
 )
 
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ErrorCode) String() string {
 	switch e {
 	case ErrorCodeUnknownError:
@@ -46,6 +48,8 @@ const (
 	TimeDurationConstraintTypeRange TimeDurationConstraintType = 2
 )
 
+// String returns the TimeDurationConstraintType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TimeDurationConstraintType) String() string {
 	switch e {
 	case TimeDurationConstraintTypeEnumerated:

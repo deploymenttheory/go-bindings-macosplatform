@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The user’s preference for receiving notifications.
-//
 // FocusStatus is an idiomatic wrapper over the Objective-C class INFocusStatus.
+//
+// The user’s preference for receiving notifications.
 type FocusStatus struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FocusStatusFromID(id objc.ID) *FocusStatus {
 	if id == 0 {
 		return nil
 	}
-	x := &FocusStatus{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FocusStatus{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func focusStatusAdopt(id objc.ID) *FocusStatus {
 	if id == 0 {
 		return nil
 	}
-	x := &FocusStatus{Handle: objref.Wrap(id)}
+	x := &FocusStatus{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *FocusStatus) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an object that indicates the user’s ability to receive communication notifications.
-//
-// NewFocusStatusWithIsFocused creates a new FocusStatus.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FocusStatus) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFocusStatusWithIsFocused creates an object that indicates the user’s ability to receive communication notifications.
 func NewFocusStatusWithIsFocused(isFocused obj.Object) *FocusStatus {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INFocusStatus")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIsFocused:"), objref.IDOf(isFocused))
 	return focusStatusAdopt(_id)
 }
 
+// IsFocused wraps the corresponding Objective-C method.
 func (x *FocusStatus) IsFocused() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isFocused"))
 	return obj.Wrap(_r)

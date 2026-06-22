@@ -23,7 +23,8 @@ func MTRValveConfigurationAndControlClusterValveFaultEventFromID(id objc.ID) *MT
 	if id == 0 {
 		return nil
 	}
-	x := &MTRValveConfigurationAndControlClusterValveFaultEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRValveConfigurationAndControlClusterValveFaultEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRValveConfigurationAndControlClusterValveFaultEventAdopt(id objc.ID) *MTR
 	if id == 0 {
 		return nil
 	}
-	x := &MTRValveConfigurationAndControlClusterValveFaultEvent{Handle: objref.Wrap(id)}
+	x := &MTRValveConfigurationAndControlClusterValveFaultEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTRValveConfigurationAndControlClusterValveFaultEvent) IsKind(className
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRValveConfigurationAndControlClusterValveFaultEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRValveConfigurationAndControlClusterValveFaultEvent creates a new MTRValveConfigurationAndControlClusterValveFaultEvent.
 func NewMTRValveConfigurationAndControlClusterValveFaultEvent() *MTRValveConfigurationAndControlClusterValveFaultEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRValveConfigurationAndControlClusterValveFaultEvent")), objc.RegisterName("new"))
 	return mTRValveConfigurationAndControlClusterValveFaultEventAdopt(_id)
 }
 
-// WithValveFault sets valveFault and returns the receiver so calls can be chained.
+// WithValveFault sets the property and returns the receiver so calls can be chained.
 func (x *MTRValveConfigurationAndControlClusterValveFaultEvent) WithValveFault(valveFault obj.Object) *MTRValveConfigurationAndControlClusterValveFaultEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValveFault:"), objref.IDOf(valveFault))
 	return x
 }
 
+// ValveFault wraps the corresponding Objective-C method.
 func (x *MTRValveConfigurationAndControlClusterValveFaultEvent) ValveFault() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valveFault"))
 	return obj.Wrap(_r)
 }
 
+// SetValveFault wraps the corresponding Objective-C method.
 func (x *MTRValveConfigurationAndControlClusterValveFaultEvent) SetValveFault(valveFault obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValveFault:"), objref.IDOf(valveFault))
 }

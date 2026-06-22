@@ -42,6 +42,8 @@ const (
 	DataTypeUnorm8               DataType = 1073741832
 )
 
+// String returns the DataType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DataType) String() string {
 	switch e {
 	case DataTypeInvalid:
@@ -121,6 +123,8 @@ const (
 	ImageFeatureChannelFormatCount      ImageFeatureChannelFormat = 6
 )
 
+// String returns the ImageFeatureChannelFormat constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ImageFeatureChannelFormat) String() string {
 	switch e {
 	case ImageFeatureChannelFormatNone:
@@ -160,6 +164,8 @@ const (
 	KernelOptionsVerbose KernelOptions = 16
 )
 
+// String returns the KernelOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e KernelOptions) String() string {
 	var parts []string
 	if e&KernelOptionsSkipAPIValidation != 0 {
@@ -193,6 +199,8 @@ const (
 	PurgeableStateEmpty              PurgeableState = 4
 )
 
+// String returns the PurgeableState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PurgeableState) String() string {
 	switch e {
 	case PurgeableStateAllocationDeferred:
@@ -218,6 +226,8 @@ const (
 	StateResourceTypeTexture StateResourceType = 2
 )
 
+// String returns the StateResourceType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StateResourceType) String() string {
 	switch e {
 	case StateResourceTypeNone:

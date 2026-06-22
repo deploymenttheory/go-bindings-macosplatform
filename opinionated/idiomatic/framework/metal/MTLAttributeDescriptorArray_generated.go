@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An array of attribute descriptor objects.
-//
 // AttributeDescriptorArray is an idiomatic wrapper over the Objective-C class MTLAttributeDescriptorArray.
+//
+// An array of attribute descriptor objects.
 type AttributeDescriptorArray struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AttributeDescriptorArrayFromID(id objc.ID) *AttributeDescriptorArray {
 	if id == 0 {
 		return nil
 	}
-	x := &AttributeDescriptorArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AttributeDescriptorArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func attributeDescriptorArrayAdopt(id objc.ID) *AttributeDescriptorArray {
 	if id == 0 {
 		return nil
 	}
-	x := &AttributeDescriptorArray{Handle: objref.Wrap(id)}
+	x := &AttributeDescriptorArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *AttributeDescriptorArray) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AttributeDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAttributeDescriptorArray creates a new AttributeDescriptorArray.
 func NewAttributeDescriptorArray() *AttributeDescriptorArray {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLAttributeDescriptorArray")), objc.RegisterName("new"))
 	return attributeDescriptorArrayAdopt(_id)
 }
 
-// Returns the state of the specified attribute.
+// ObjectAtIndexedSubscript returns the state of the specified attribute.
 func (x *AttributeDescriptorArray) ObjectAtIndexedSubscript(index int) *AttributeDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), index)
 	return AttributeDescriptorFromID(_r)
 }
 
-// Sets state for the specified attribute.
+// SetObjectAtIndexedSubscript sets state for the specified attribute.
 func (x *AttributeDescriptorArray) SetObjectAtIndexedSubscript(attributeDesc *AttributeDescriptor, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attributeDesc), index)
 }

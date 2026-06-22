@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that generates sample buffers in a batch.
-//
 // SampleBufferGeneratorBatch is an idiomatic wrapper over the Objective-C class AVSampleBufferGeneratorBatch.
+//
+// An object that generates sample buffers in a batch.
 type SampleBufferGeneratorBatch struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func SampleBufferGeneratorBatchFromID(id objc.ID) *SampleBufferGeneratorBatch {
 	if id == 0 {
 		return nil
 	}
-	x := &SampleBufferGeneratorBatch{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SampleBufferGeneratorBatch{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func sampleBufferGeneratorBatchAdopt(id objc.ID) *SampleBufferGeneratorBatch {
 	if id == 0 {
 		return nil
 	}
-	x := &SampleBufferGeneratorBatch{Handle: objref.Wrap(id)}
+	x := &SampleBufferGeneratorBatch{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,13 +62,19 @@ func (x *SampleBufferGeneratorBatch) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SampleBufferGeneratorBatch) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSampleBufferGeneratorBatch creates a new SampleBufferGeneratorBatch.
 func NewSampleBufferGeneratorBatch() *SampleBufferGeneratorBatch {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVSampleBufferGeneratorBatch")), objc.RegisterName("new"))
 	return sampleBufferGeneratorBatchAdopt(_id)
 }
 
-// Loads sample data asynchronously for all sample buffers within a batch.
+// MakeDataReady loads sample data asynchronously for all sample buffers within a batch.
 //
 // MakeDataReady blocks until the operation completes or ctx is cancelled.
 func (x *SampleBufferGeneratorBatch) MakeDataReady(ctx context.Context) error {
@@ -85,7 +93,7 @@ func (x *SampleBufferGeneratorBatch) MakeDataReady(ctx context.Context) error {
 	}
 }
 
-// Cancels any I/O for this batch.
+// Cancel cancels any I/O for this batch.
 func (x *SampleBufferGeneratorBatch) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }

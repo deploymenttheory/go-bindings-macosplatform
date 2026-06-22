@@ -23,7 +23,8 @@ func PassRelevantDateFromID(id objc.ID) *PassRelevantDate {
 	if id == 0 {
 		return nil
 	}
-	x := &PassRelevantDate{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PassRelevantDate{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func passRelevantDateAdopt(id objc.ID) *PassRelevantDate {
 	if id == 0 {
 		return nil
 	}
-	x := &PassRelevantDate{Handle: objref.Wrap(id)}
+	x := &PassRelevantDate{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,17 +58,25 @@ func (x *PassRelevantDate) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PassRelevantDate) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPassRelevantDate creates a new PassRelevantDate.
 func NewPassRelevantDate() *PassRelevantDate {
 	_id := objc.Send[objc.ID](objc.ID(_class("PKPassRelevantDate")), objc.RegisterName("new"))
 	return passRelevantDateAdopt(_id)
 }
 
+// Interval wraps the corresponding Objective-C method.
 func (x *PassRelevantDate) Interval() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interval"))
 	return obj.Wrap(_r)
 }
 
+// Date wraps the corresponding Objective-C method.
 func (x *PassRelevantDate) Date() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
 	return obj.Wrap(_r)

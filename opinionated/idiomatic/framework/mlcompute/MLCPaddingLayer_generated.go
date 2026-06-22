@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that pads a tensor with the padding sizes you specify.
-//
 // PaddingLayer is an idiomatic wrapper over the Objective-C class MLCPaddingLayer.
+//
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that pads a tensor with the padding sizes you specify.
 type PaddingLayer struct {
-	objref.Handle
+	Layer
 }
 
 // PaddingLayerFromID adopts an existing Objective-C object as a PaddingLayer
@@ -25,7 +26,8 @@ func PaddingLayerFromID(id objc.ID) *PaddingLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &PaddingLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PaddingLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func paddingLayerAdopt(id objc.ID) *PaddingLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &PaddingLayer{Handle: objref.Wrap(id)}
+	x := &PaddingLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PaddingLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PaddingLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PaddingLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPaddingLayer creates a new PaddingLayer.
@@ -64,53 +52,49 @@ func NewPaddingLayer() *PaddingLayer {
 	return paddingLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string that helps identify this layer.
 func (x *PaddingLayer) WithLabel(label string) *PaddingLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *PaddingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *PaddingLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// The padding type i.e. constant, zero, reflect or symmetric
+// PaddingType the padding type i.e. constant, zero, reflect or symmetric
 func (x *PaddingLayer) PaddingType() PaddingType {
 	_r := objc.Send[PaddingType](objref.IDOf(x), objc.RegisterName("paddingType"))
 	return _r
 }
 
-// The left padding size
+// PaddingLeft the left padding size
 func (x *PaddingLayer) PaddingLeft() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingLeft"))
 	return _r
 }
 
-// The right padding size
+// PaddingRight the right padding size
 func (x *PaddingLayer) PaddingRight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingRight"))
 	return _r
 }
 
-// The top padding size
+// PaddingTop the top padding size
 func (x *PaddingLayer) PaddingTop() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingTop"))
 	return _r
 }
 
-// The bottom padding size
+// PaddingBottom the bottom padding size
 func (x *PaddingLayer) PaddingBottom() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingBottom"))
 	return _r
 }
 
-// The constant value to use if padding type is constant.
+// ConstantValue the constant value to use if padding type is constant.
 func (x *PaddingLayer) ConstantValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("constantValue"))
 	return _r
@@ -130,3 +114,5 @@ type PaddingLayerable interface {
 }
 
 var _ PaddingLayerable = (*PaddingLayer)(nil)
+
+var _ LayerProvider = (*PaddingLayer)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The result that Core Data returns when executing a batch-insertion request.
-//
 // BatchInsertResult is an idiomatic wrapper over the Objective-C class NSBatchInsertResult.
+//
+// It embeds [PersistentStoreResult], promoting that type's methods.
+//
+// The result that Core Data returns when executing a batch-insertion request.
 type BatchInsertResult struct {
-	objref.Handle
+	PersistentStoreResult
 }
 
 // BatchInsertResultFromID adopts an existing Objective-C object as a BatchInsertResult
@@ -25,7 +26,8 @@ func BatchInsertResultFromID(id objc.ID) *BatchInsertResult {
 	if id == 0 {
 		return nil
 	}
-	x := &BatchInsertResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BatchInsertResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func batchInsertResultAdopt(id objc.ID) *BatchInsertResult {
 	if id == 0 {
 		return nil
 	}
-	x := &BatchInsertResult{Handle: objref.Wrap(id)}
+	x := &BatchInsertResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *BatchInsertResult) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BatchInsertResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BatchInsertResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewBatchInsertResult creates a new BatchInsertResult.
@@ -64,11 +52,13 @@ func NewBatchInsertResult() *BatchInsertResult {
 	return batchInsertResultAdopt(_id)
 }
 
+// Result wraps the corresponding Objective-C method.
 func (x *BatchInsertResult) Result() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("result"))
 	return obj.Wrap(_r)
 }
 
+// ResultType wraps the corresponding Objective-C method.
 func (x *BatchInsertResult) ResultType() BatchInsertRequestResultType {
 	_r := objc.Send[BatchInsertRequestResultType](objref.IDOf(x), objc.RegisterName("resultType"))
 	return _r
@@ -82,3 +72,5 @@ type BatchInsertResultable interface {
 }
 
 var _ BatchInsertResultable = (*BatchInsertResult)(nil)
+
+var _ PersistentStoreResultProvider = (*BatchInsertResult)(nil)

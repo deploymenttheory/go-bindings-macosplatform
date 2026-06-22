@@ -1,0 +1,6 @@
+func (x *Array) ObjectAtIndex(index int) obj.Object {
+errkit.CheckIndex(index, x.Count())
+_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndex:"), index)
+return obj.Wrap(_r)
+}
+

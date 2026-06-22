@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that performs the initial, nominal glyph generation phase in the layout process.
-//
 // GlyphGenerator is an idiomatic wrapper over the Objective-C class NSGlyphGenerator.
+//
+// An object that performs the initial, nominal glyph generation phase in the layout process.
 type GlyphGenerator struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func GlyphGeneratorFromID(id objc.ID) *GlyphGenerator {
 	if id == 0 {
 		return nil
 	}
-	x := &GlyphGenerator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GlyphGenerator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func glyphGeneratorAdopt(id objc.ID) *GlyphGenerator {
 	if id == 0 {
 		return nil
 	}
-	x := &GlyphGenerator{Handle: objref.Wrap(id)}
+	x := &GlyphGenerator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *GlyphGenerator) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *GlyphGenerator) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GlyphGenerator) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewGlyphGenerator creates a new GlyphGenerator.

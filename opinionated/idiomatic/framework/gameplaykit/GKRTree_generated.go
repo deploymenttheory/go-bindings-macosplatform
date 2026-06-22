@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A data structure that adaptively organizes objects based on their locations in a two-dimensional space.
-//
 // RTree is an idiomatic wrapper over the Objective-C class GKRTree.
+//
+// A data structure that adaptively organizes objects based on their locations in a two-dimensional space.
 type RTree struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RTreeFromID(id objc.ID) *RTree {
 	if id == 0 {
 		return nil
 	}
-	x := &RTree{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RTree{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func rTreeAdopt(id objc.ID) *RTree {
 	if id == 0 {
 		return nil
 	}
-	x := &RTree{Handle: objref.Wrap(id)}
+	x := &RTree{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,29 +60,32 @@ func (x *RTree) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a new R-tree object.
-//
-// NewRTreeWithMaxNumberOfChildren creates a new RTree.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RTree) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRTreeWithMaxNumberOfChildren initializes a new R-tree object.
 func NewRTreeWithMaxNumberOfChildren(maxNumberOfChildren int) *RTree {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKRTree")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMaxNumberOfChildren:"), maxNumberOfChildren)
 	return rTreeAdopt(_id)
 }
 
-// The number of elements to reserve space for when searching.
-//
-// WithQueryReserve sets queryReserve and returns the receiver so calls can be chained.
+// WithQueryReserve the number of elements to reserve space for when searching.
 func (x *RTree) WithQueryReserve(queryReserve int) *RTree {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueryReserve:"), queryReserve)
 	return x
 }
 
-// Amount of array items to reserve before a query. This improves query performance at the cost of memory
+// QueryReserve amount of array items to reserve before a query. This improves query performance at the cost of memory
 func (x *RTree) QueryReserve() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("queryReserve"))
 	return _r
 }
 
+// SetQueryReserve wraps the corresponding Objective-C method.
 func (x *RTree) SetQueryReserve(queryReserve int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueryReserve:"), queryReserve)
 }

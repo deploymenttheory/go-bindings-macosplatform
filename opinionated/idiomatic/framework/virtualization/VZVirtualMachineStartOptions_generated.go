@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract class for VM start options.
-//
 // VirtualMachineStartOptions is an idiomatic wrapper over the Objective-C class VZVirtualMachineStartOptions.
+//
+// VirtualMachineStartOptions is an abstract base — you do not construct it directly. Construct one of [MacOSVirtualMachineStartOptions] and pass it where a VirtualMachineStartOptions is accepted.
+//
+// The abstract class for VM start options.
 type VirtualMachineStartOptions struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func VirtualMachineStartOptionsFromID(id objc.ID) *VirtualMachineStartOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtualMachineStartOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VirtualMachineStartOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func virtualMachineStartOptionsAdopt(id objc.ID) *VirtualMachineStartOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtualMachineStartOptions{Handle: objref.Wrap(id)}
+	x := &VirtualMachineStartOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *VirtualMachineStartOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewVirtualMachineStartOptions creates a new VirtualMachineStartOptions.
-func NewVirtualMachineStartOptions() *VirtualMachineStartOptions {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtualMachineStartOptions")), objc.RegisterName("new"))
-	return virtualMachineStartOptionsAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VirtualMachineStartOptions) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // VirtualMachineStartOptionsable is the interface implemented by [VirtualMachineStartOptions], for mocking and DI.
@@ -70,3 +74,10 @@ type VirtualMachineStartOptionsable interface {
 }
 
 var _ VirtualMachineStartOptionsable = (*VirtualMachineStartOptions)(nil)
+
+// isVirtualMachineStartOptions marks VirtualMachineStartOptions — and, by embedding promotion, its
+// subclasses — as a member of the VirtualMachineStartOptions hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *VirtualMachineStartOptions) isVirtualMachineStartOptions() {}
+
+var _ VirtualMachineStartOptionsProvider = (*VirtualMachineStartOptions)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A sample that stores an audiogram.
-//
 // AudiogramSample is an idiomatic wrapper over the Objective-C class HKAudiogramSample.
+//
+// It embeds [Sample], promoting that type's methods.
+//
+// A sample that stores an audiogram.
 type AudiogramSample struct {
-	objref.Handle
+	Sample
 }
 
 // AudiogramSampleFromID adopts an existing Objective-C object as a AudiogramSample
@@ -25,7 +26,8 @@ func AudiogramSampleFromID(id objc.ID) *AudiogramSample {
 	if id == 0 {
 		return nil
 	}
-	x := &AudiogramSample{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudiogramSample{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func audiogramSampleAdopt(id objc.ID) *AudiogramSample {
 	if id == 0 {
 		return nil
 	}
-	x := &AudiogramSample{Handle: objref.Wrap(id)}
+	x := &AudiogramSample{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AudiogramSample) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudiogramSample) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudiogramSample) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAudiogramSample creates a new AudiogramSample.
@@ -64,7 +52,7 @@ func NewAudiogramSample() *AudiogramSample {
 	return audiogramSampleAdopt(_id)
 }
 
-// The hearing sensitivity readings associated with a hearing test.
+// SensitivityPoints the hearing sensitivity readings associated with a hearing test.
 //
 // SensitivityPoints returns the collection as a Go slice.
 func (x *AudiogramSample) SensitivityPoints() []*AudiogramSensitivityPoint {
@@ -79,3 +67,7 @@ type AudiogramSampleable interface {
 }
 
 var _ AudiogramSampleable = (*AudiogramSample)(nil)
+
+var _ SampleProvider = (*AudiogramSample)(nil)
+
+var _ ObjectProvider = (*AudiogramSample)(nil)

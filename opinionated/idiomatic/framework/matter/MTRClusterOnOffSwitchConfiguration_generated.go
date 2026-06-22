@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterOnOffSwitchConfiguration is an idiomatic wrapper over the Objective-C class MTRClusterOnOffSwitchConfiguration.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterOnOffSwitchConfiguration struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterOnOffSwitchConfigurationFromID adopts an existing Objective-C object as a MTRClusterOnOffSwitchConfiguration
@@ -23,7 +24,8 @@ func MTRClusterOnOffSwitchConfigurationFromID(id objc.ID) *MTRClusterOnOffSwitch
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterOnOffSwitchConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterOnOffSwitchConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,29 +38,13 @@ func mTRClusterOnOffSwitchConfigurationAdopt(id objc.ID) *MTRClusterOnOffSwitchC
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterOnOffSwitchConfiguration{Handle: objref.Wrap(id)}
+	x := &MTRClusterOnOffSwitchConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterOnOffSwitchConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterOnOffSwitchConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterOnOffSwitchConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
-//
-// NewMTRClusterOnOffSwitchConfigurationWithDeviceEndpointIDQueue creates a new MTRClusterOnOffSwitchConfiguration.
+// NewMTRClusterOnOffSwitchConfigurationWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func NewMTRClusterOnOffSwitchConfigurationWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterOnOffSwitchConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterOnOffSwitchConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -72,44 +58,53 @@ func NewMTRClusterOnOffSwitchConfigurationWithDeviceEndpointQueue(device *MTRDev
 	return mTRClusterOnOffSwitchConfigurationAdopt(_id)
 }
 
+// ReadAttributeSwitchTypeWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeSwitchTypeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSwitchTypeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeSwitchActionsWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeSwitchActionsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSwitchActionsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeSwitchActionsWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOffSwitchConfiguration) WriteAttributeSwitchActionsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeSwitchActionsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeSwitchActionsWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOffSwitchConfiguration) WriteAttributeSwitchActionsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeSwitchActionsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -130,3 +125,7 @@ type MTRClusterOnOffSwitchConfigurationable interface {
 }
 
 var _ MTRClusterOnOffSwitchConfigurationable = (*MTRClusterOnOffSwitchConfiguration)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterOnOffSwitchConfiguration)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterOnOffSwitchConfiguration)(nil)

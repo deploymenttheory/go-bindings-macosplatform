@@ -23,7 +23,8 @@ func SymbolicatorFromID(id objc.ID) *Symbolicator {
 	if id == 0 {
 		return nil
 	}
-	x := &Symbolicator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Symbolicator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func symbolicatorAdopt(id objc.ID) *Symbolicator {
 	if id == 0 {
 		return nil
 	}
-	x := &Symbolicator{Handle: objref.Wrap(id)}
+	x := &Symbolicator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,12 +58,19 @@ func (x *Symbolicator) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Symbolicator) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSymbolicator creates a new Symbolicator.
 func NewSymbolicator() *Symbolicator {
 	_id := objc.Send[objc.ID](objc.ID(_class("JRSSymbolicator")), objc.RegisterName("new"))
 	return symbolicatorAdopt(_id)
 }
 
+// AddressForSymbol wraps the corresponding Objective-C method.
 func (x *Symbolicator) AddressForSymbol(symbolName string) uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("addressForSymbol:"), purego.NSString(symbolName))
 	return _r

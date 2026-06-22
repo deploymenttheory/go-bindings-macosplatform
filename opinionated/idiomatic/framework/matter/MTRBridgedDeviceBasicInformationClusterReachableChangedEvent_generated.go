@@ -13,6 +13,8 @@ import (
 )
 
 // MTRBridgedDeviceBasicInformationClusterReachableChangedEvent is an idiomatic wrapper over the Objective-C class MTRBridgedDeviceBasicInformationClusterReachableChangedEvent.
+//
+// MTRBridgedDeviceBasicInformationClusterReachableChangedEvent is an abstract base — you do not construct it directly. Construct one of [MTRBridgedDeviceBasicClusterReachableChangedEvent] and pass it where a MTRBridgedDeviceBasicInformationClusterReachableChangedEvent is accepted.
 type MTRBridgedDeviceBasicInformationClusterReachableChangedEvent struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRBridgedDeviceBasicInformationClusterReachableChangedEventFromID(id objc.
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBridgedDeviceBasicInformationClusterReachableChangedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBridgedDeviceBasicInformationClusterReachableChangedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRBridgedDeviceBasicInformationClusterReachableChangedEventAdopt(id objc.I
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBridgedDeviceBasicInformationClusterReachableChangedEvent{Handle: objref.Wrap(id)}
+	x := &MTRBridgedDeviceBasicInformationClusterReachableChangedEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +60,25 @@ func (x *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) IsKind(cl
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRBridgedDeviceBasicInformationClusterReachableChangedEvent creates a new MTRBridgedDeviceBasicInformationClusterReachableChangedEvent.
-func NewMTRBridgedDeviceBasicInformationClusterReachableChangedEvent() *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRBridgedDeviceBasicInformationClusterReachableChangedEvent")), objc.RegisterName("new"))
-	return mTRBridgedDeviceBasicInformationClusterReachableChangedEventAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithReachableNewValue sets reachableNewValue and returns the receiver so calls can be chained.
+// WithReachableNewValue sets the property and returns the receiver so calls can be chained.
 func (x *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) WithReachableNewValue(reachableNewValue obj.Object) *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachableNewValue:"), objref.IDOf(reachableNewValue))
 	return x
 }
 
+// ReachableNewValue wraps the corresponding Objective-C method.
 func (x *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) ReachableNewValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reachableNewValue"))
 	return obj.Wrap(_r)
 }
 
+// SetReachableNewValue wraps the corresponding Objective-C method.
 func (x *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) SetReachableNewValue(reachableNewValue obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachableNewValue:"), objref.IDOf(reachableNewValue))
 }
@@ -86,3 +92,11 @@ type MTRBridgedDeviceBasicInformationClusterReachableChangedEventable interface 
 }
 
 var _ MTRBridgedDeviceBasicInformationClusterReachableChangedEventable = (*MTRBridgedDeviceBasicInformationClusterReachableChangedEvent)(nil)
+
+// isMTRBridgedDeviceBasicInformationClusterReachableChangedEvent marks MTRBridgedDeviceBasicInformationClusterReachableChangedEvent — and, by embedding promotion, its
+// subclasses — as a member of the MTRBridgedDeviceBasicInformationClusterReachableChangedEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) isMTRBridgedDeviceBasicInformationClusterReachableChangedEvent() {
+}
+
+var _ MTRBridgedDeviceBasicInformationClusterReachableChangedEventProvider = (*MTRBridgedDeviceBasicInformationClusterReachableChangedEvent)(nil)

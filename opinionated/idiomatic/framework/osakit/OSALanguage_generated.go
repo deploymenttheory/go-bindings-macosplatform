@@ -23,7 +23,8 @@ func LanguageFromID(id objc.ID) *Language {
 	if id == 0 {
 		return nil
 	}
-	x := &Language{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Language{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func languageAdopt(id objc.ID) *Language {
 	if id == 0 {
 		return nil
 	}
-	x := &Language{Handle: objref.Wrap(id)}
+	x := &Language{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,17 +58,25 @@ func (x *Language) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Language) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLanguage creates a new Language.
 func NewLanguage() *Language {
 	_id := objc.Send[objc.ID](objc.ID(_class("OSALanguage")), objc.RegisterName("new"))
 	return languageAdopt(_id)
 }
 
+// SharedLanguageInstance wraps the corresponding Objective-C method.
 func (x *Language) SharedLanguageInstance() *LanguageInstance {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sharedLanguageInstance"))
 	return LanguageInstanceFromID(_r)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *Language) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -75,6 +85,7 @@ func (x *Language) Name() string {
 	return purego.GoString(_r)
 }
 
+// Info wraps the corresponding Objective-C method.
 func (x *Language) Info() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("info"))
 	if _r == 0 {
@@ -83,26 +94,31 @@ func (x *Language) Info() string {
 	return purego.GoString(_r)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *Language) Type() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
+// SubType wraps the corresponding Objective-C method.
 func (x *Language) SubType() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("subType"))
 	return _r
 }
 
+// Manufacturer wraps the corresponding Objective-C method.
 func (x *Language) Manufacturer() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("manufacturer"))
 	return _r
 }
 
+// Features wraps the corresponding Objective-C method.
 func (x *Language) Features() LanguageFeatures {
 	_r := objc.Send[LanguageFeatures](objref.IDOf(x), objc.RegisterName("features"))
 	return _r
 }
 
+// IsThreadSafe wraps the corresponding Objective-C method.
 func (x *Language) IsThreadSafe() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isThreadSafe"))
 	return _r

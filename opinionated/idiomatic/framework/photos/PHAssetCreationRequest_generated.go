@@ -12,11 +12,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request to create a new Photos asset from underlying data resources, for use in a photo library change block.
-//
 // AssetCreationRequest is an idiomatic wrapper over the Objective-C class PHAssetCreationRequest.
+//
+// It embeds [AssetChangeRequest], promoting that type's methods.
+//
+// A request to create a new Photos asset from underlying data resources, for use in a photo library change block.
 type AssetCreationRequest struct {
-	objref.Handle
+	AssetChangeRequest
 }
 
 // AssetCreationRequestFromID adopts an existing Objective-C object as a AssetCreationRequest
@@ -25,7 +27,8 @@ func AssetCreationRequestFromID(id objc.ID) *AssetCreationRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetCreationRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetCreationRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func assetCreationRequestAdopt(id objc.ID) *AssetCreationRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetCreationRequest{Handle: objref.Wrap(id)}
+	x := &AssetCreationRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AssetCreationRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetCreationRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetCreationRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAssetCreationRequest creates a new AssetCreationRequest.
@@ -64,44 +53,36 @@ func NewAssetCreationRequest() *AssetCreationRequest {
 	return assetCreationRequestAdopt(_id)
 }
 
-// The date and time at which the asset claims to have been originally created.
-//
-// WithCreationDate sets creationDate and returns the receiver so calls can be chained.
+// WithCreationDate the date and time at which the asset claims to have been originally created.
 func (x *AssetCreationRequest) WithCreationDate(creationDate obj.Object) *AssetCreationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCreationDate:"), objref.IDOf(creationDate))
 	return x
 }
 
-// A Boolean value that indicates whether the asset is marked as one of the user’s favorites.
-//
-// WithFavorite sets favorite and returns the receiver so calls can be chained.
+// WithFavorite a Boolean value that indicates whether the asset is marked as one of the user’s favorites.
 func (x *AssetCreationRequest) WithFavorite(favorite bool) *AssetCreationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFavorite:"), favorite)
 	return x
 }
 
-// A Boolean value that indicates whether the asset is hidden in collections.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden a Boolean value that indicates whether the asset is hidden in collections.
 func (x *AssetCreationRequest) WithHidden(hidden bool) *AssetCreationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// The output of an asset content editing session.
-//
-// WithContentEditingOutput sets contentEditingOutput and returns the receiver so calls can be chained.
+// WithContentEditingOutput the output of an asset content editing session.
 func (x *AssetCreationRequest) WithContentEditingOutput(contentEditingOutput *ContentEditingOutput) *AssetCreationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditingOutput:"), objref.IDOf(contentEditingOutput))
 	return x
 }
 
-// Adds a data resource to the asset being created, using the file at the specified URL.
+// AddResourceWithTypeFileURLOptions adds a data resource to the asset being created, using the file at the specified URL.
 func (x *AssetCreationRequest) AddResourceWithTypeFileURLOptions(type_ AssetResourceType, fileURL string, options *AssetResourceCreationOptions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addResourceWithType:fileURL:options:"), type_, rt.FileURL(fileURL), objref.IDOf(options))
 }
 
-// Adds a data resource to the asset being created, using the specified data.
+// AddResourceWithTypeDataOptions adds a data resource to the asset being created, using the specified data.
 func (x *AssetCreationRequest) AddResourceWithTypeDataOptions(type_ AssetResourceType, data obj.Object, options *AssetResourceCreationOptions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addResourceWithType:data:options:"), type_, objref.IDOf(data), objref.IDOf(options))
 }
@@ -118,3 +99,7 @@ type AssetCreationRequestable interface {
 }
 
 var _ AssetCreationRequestable = (*AssetCreationRequest)(nil)
+
+var _ AssetChangeRequestProvider = (*AssetCreationRequest)(nil)
+
+var _ ChangeRequestProvider = (*AssetCreationRequest)(nil)

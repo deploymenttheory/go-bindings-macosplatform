@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A procedural noise generator that outputs a field of a single constant value.
-//
 // ConstantNoiseSource is an idiomatic wrapper over the Objective-C class GKConstantNoiseSource.
+//
+// It embeds [NoiseSource], promoting that type's methods.
+//
+// A procedural noise generator that outputs a field of a single constant value.
 type ConstantNoiseSource struct {
-	objref.Handle
+	NoiseSource
 }
 
 // ConstantNoiseSourceFromID adopts an existing Objective-C object as a ConstantNoiseSource
@@ -25,7 +26,8 @@ func ConstantNoiseSourceFromID(id objc.ID) *ConstantNoiseSource {
 	if id == 0 {
 		return nil
 	}
-	x := &ConstantNoiseSource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ConstantNoiseSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,48 +40,32 @@ func constantNoiseSourceAdopt(id objc.ID) *ConstantNoiseSource {
 	if id == 0 {
 		return nil
 	}
-	x := &ConstantNoiseSource{Handle: objref.Wrap(id)}
+	x := &ConstantNoiseSource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ConstantNoiseSource) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ConstantNoiseSource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ConstantNoiseSource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a noise source with the specified constant value.
-//
-// NewConstantNoiseSourceWithValue creates a new ConstantNoiseSource.
+// NewConstantNoiseSourceWithValue initializes a noise source with the specified constant value.
 func NewConstantNoiseSourceWithValue(value float64) *ConstantNoiseSource {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKConstantNoiseSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:"), value)
 	return constantNoiseSourceAdopt(_id)
 }
 
-// The constant value for the generated noise.
-//
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue the constant value for the generated noise.
 func (x *ConstantNoiseSource) WithValue(value float64) *ConstantNoiseSource {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 	return x
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *ConstantNoiseSource) Value() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("value"))
 	return _r
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *ConstantNoiseSource) SetValue(value float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 }
@@ -93,3 +79,5 @@ type ConstantNoiseSourceable interface {
 }
 
 var _ ConstantNoiseSourceable = (*ConstantNoiseSource)(nil)
+
+var _ NoiseSourceProvider = (*ConstantNoiseSource)(nil)

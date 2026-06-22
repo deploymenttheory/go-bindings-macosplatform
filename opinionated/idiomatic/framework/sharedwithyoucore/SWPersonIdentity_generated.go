@@ -23,7 +23,8 @@ func PersonIdentityFromID(id objc.ID) *PersonIdentity {
 	if id == 0 {
 		return nil
 	}
-	x := &PersonIdentity{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PersonIdentity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func personIdentityAdopt(id objc.ID) *PersonIdentity {
 	if id == 0 {
 		return nil
 	}
-	x := &PersonIdentity{Handle: objref.Wrap(id)}
+	x := &PersonIdentity{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,16 +58,20 @@ func (x *PersonIdentity) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// An initializer The data contains a SHA256 hash of the user's combined public identities.
-//
-// NewPersonIdentityWithRootHash creates a new PersonIdentity.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PersonIdentity) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPersonIdentityWithRootHash an initializer The data contains a SHA256 hash of the user's combined public identities.
 func NewPersonIdentityWithRootHash(rootHash obj.Object) *PersonIdentity {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWPersonIdentity")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRootHash:"), objref.IDOf(rootHash))
 	return personIdentityAdopt(_id)
 }
 
-// The root hash of the tree that represents this individual's identity. The data contains a SHA256 hash of the user's combined public identities.
+// RootHash the root hash of the tree that represents this individual's identity. The data contains a SHA256 hash of the user's combined public identities.
 func (x *PersonIdentity) RootHash() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootHash"))
 	return obj.Wrap(_r)

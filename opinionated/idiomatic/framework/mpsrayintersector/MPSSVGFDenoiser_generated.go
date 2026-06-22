@@ -23,7 +23,8 @@ func SVGFDenoiserFromID(id objc.ID) *SVGFDenoiser {
 	if id == 0 {
 		return nil
 	}
-	x := &SVGFDenoiser{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SVGFDenoiser{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func sVGFDenoiserAdopt(id objc.ID) *SVGFDenoiser {
 	if id == 0 {
 		return nil
 	}
-	x := &SVGFDenoiser{Handle: objref.Wrap(id)}
+	x := &SVGFDenoiser{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,42 +58,47 @@ func (x *SVGFDenoiser) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SVGFDenoiser) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSVGFDenoiser creates a new SVGFDenoiser.
 func NewSVGFDenoiser() *SVGFDenoiser {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSSVGFDenoiser")), objc.RegisterName("new"))
 	return sVGFDenoiserAdopt(_id)
 }
 
-// The number of bilateral filter iterations to run. More iterations will improve quality at the cost of performance. Defaults to 5. Must be at least 1.
-//
-// WithBilateralFilterIterations sets bilateralFilterIterations and returns the receiver so calls can be chained.
+// WithBilateralFilterIterations the number of bilateral filter iterations to run. More iterations will improve quality at the cost of performance. Defaults to 5. Must be at least 1.
 func (x *SVGFDenoiser) WithBilateralFilterIterations(bilateralFilterIterations int) *SVGFDenoiser {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBilateralFilterIterations:"), bilateralFilterIterations)
 	return x
 }
 
-// Clear the temporal history. Reprojection and temporal accumulation will restart on the next call to encodeToCommandBuffer:
+// ClearTemporalHistory clear the temporal history. Reprojection and temporal accumulation will restart on the next call to encodeToCommandBuffer:
 func (x *SVGFDenoiser) ClearTemporalHistory() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearTemporalHistory"))
 }
 
-// Return any temporary textures to the texture allocator. Also clears the temporal history. This should be called before resizing the source texture(s).
+// ReleaseTemporaryTextures return any temporary textures to the texture allocator. Also clears the temporal history. This should be called before resizing the source texture(s).
 func (x *SVGFDenoiser) ReleaseTemporaryTextures() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("releaseTemporaryTextures"))
 }
 
-// The underlying MPSSVGF kernels object which will be used for denoising. Use this object to customize the denoising process.
+// Svgf the underlying MPSSVGF kernels object which will be used for denoising. Use this object to customize the denoising process.
 func (x *SVGFDenoiser) Svgf() *SVGF {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("svgf"))
 	return SVGFFromID(_r)
 }
 
-// The number of bilateral filter iterations to run. More iterations will improve quality at the cost of performance. Defaults to 5. Must be at least 1.
+// BilateralFilterIterations the number of bilateral filter iterations to run. More iterations will improve quality at the cost of performance. Defaults to 5. Must be at least 1.
 func (x *SVGFDenoiser) BilateralFilterIterations() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bilateralFilterIterations"))
 	return _r
 }
 
+// SetBilateralFilterIterations wraps the corresponding Objective-C method.
 func (x *SVGFDenoiser) SetBilateralFilterIterations(bilateralFilterIterations int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBilateralFilterIterations:"), bilateralFilterIterations)
 }

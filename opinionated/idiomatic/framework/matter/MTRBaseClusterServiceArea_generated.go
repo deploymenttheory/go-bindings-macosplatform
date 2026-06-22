@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Service Area
-//
 // MTRBaseClusterServiceArea is an idiomatic wrapper over the Objective-C class MTRBaseClusterServiceArea.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
+//
+// Cluster Service Area
 type MTRBaseClusterServiceArea struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterServiceAreaFromID adopts an existing Objective-C object as a MTRBaseClusterServiceArea
@@ -27,7 +28,8 @@ func MTRBaseClusterServiceAreaFromID(id objc.ID) *MTRBaseClusterServiceArea {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterServiceArea{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterServiceArea{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,39 +42,23 @@ func mTRBaseClusterServiceAreaAdopt(id objc.ID) *MTRBaseClusterServiceArea {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterServiceArea{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterServiceArea{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterServiceArea) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterServiceArea) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterServiceArea) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterServiceAreaWithDeviceEndpointIDQueue creates a new MTRBaseClusterServiceArea.
+// NewMTRBaseClusterServiceAreaWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterServiceAreaWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterServiceArea {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterServiceArea")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterServiceAreaAdopt(_id)
 }
 
-// Command SelectAreas
+// SelectAreasWithParamsCompletion command SelectAreas
 //
 // SelectAreasWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) SelectAreasWithParamsCompletion(ctx context.Context, params *MTRServiceAreaClusterSelectAreasParams) (*MTRServiceAreaClusterSelectAreasResponseParams, error) {
+func (x *MTRBaseClusterServiceArea) SelectAreasWithParamsCompletion(ctx context.Context, params *MTRServiceAreaClusterSelectAreasParams) (result *MTRServiceAreaClusterSelectAreasResponseParams, err error) {
 	type _result struct {
 		val *MTRServiceAreaClusterSelectAreasResponseParams
 		err error
@@ -94,10 +80,10 @@ func (x *MTRBaseClusterServiceArea) SelectAreasWithParamsCompletion(ctx context.
 	}
 }
 
-// Command SkipArea
+// SkipAreaWithParamsCompletion command SkipArea
 //
 // SkipAreaWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) SkipAreaWithParamsCompletion(ctx context.Context, params *MTRServiceAreaClusterSkipAreaParams) (*MTRServiceAreaClusterSkipAreaResponseParams, error) {
+func (x *MTRBaseClusterServiceArea) SkipAreaWithParamsCompletion(ctx context.Context, params *MTRServiceAreaClusterSkipAreaParams) (result *MTRServiceAreaClusterSkipAreaResponseParams, err error) {
 	type _result struct {
 		val *MTRServiceAreaClusterSkipAreaResponseParams
 		err error
@@ -119,8 +105,10 @@ func (x *MTRBaseClusterServiceArea) SkipAreaWithParamsCompletion(ctx context.Con
 	}
 }
 
+// ReadAttributeSupportedAreasWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSupportedAreasWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) ReadAttributeSupportedAreasWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterServiceArea) ReadAttributeSupportedAreasWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -142,8 +130,10 @@ func (x *MTRBaseClusterServiceArea) ReadAttributeSupportedAreasWithCompletion(ct
 	}
 }
 
+// SubscribeAttributeSupportedAreasWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSupportedAreasWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) SubscribeAttributeSupportedAreasWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterServiceArea) SubscribeAttributeSupportedAreasWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -165,8 +155,10 @@ func (x *MTRBaseClusterServiceArea) SubscribeAttributeSupportedAreasWithParamsSu
 	}
 }
 
+// ReadAttributeSupportedMapsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSupportedMapsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) ReadAttributeSupportedMapsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterServiceArea) ReadAttributeSupportedMapsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -188,8 +180,10 @@ func (x *MTRBaseClusterServiceArea) ReadAttributeSupportedMapsWithCompletion(ctx
 	}
 }
 
+// SubscribeAttributeSupportedMapsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSupportedMapsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) SubscribeAttributeSupportedMapsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterServiceArea) SubscribeAttributeSupportedMapsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -211,8 +205,10 @@ func (x *MTRBaseClusterServiceArea) SubscribeAttributeSupportedMapsWithParamsSub
 	}
 }
 
+// ReadAttributeSelectedAreasWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSelectedAreasWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) ReadAttributeSelectedAreasWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterServiceArea) ReadAttributeSelectedAreasWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -234,8 +230,10 @@ func (x *MTRBaseClusterServiceArea) ReadAttributeSelectedAreasWithCompletion(ctx
 	}
 }
 
+// SubscribeAttributeSelectedAreasWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSelectedAreasWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) SubscribeAttributeSelectedAreasWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterServiceArea) SubscribeAttributeSelectedAreasWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -257,8 +255,10 @@ func (x *MTRBaseClusterServiceArea) SubscribeAttributeSelectedAreasWithParamsSub
 	}
 }
 
+// ReadAttributeCurrentAreaWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentAreaWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) ReadAttributeCurrentAreaWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterServiceArea) ReadAttributeCurrentAreaWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -280,8 +280,10 @@ func (x *MTRBaseClusterServiceArea) ReadAttributeCurrentAreaWithCompletion(ctx c
 	}
 }
 
+// SubscribeAttributeCurrentAreaWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentAreaWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) SubscribeAttributeCurrentAreaWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterServiceArea) SubscribeAttributeCurrentAreaWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -303,8 +305,10 @@ func (x *MTRBaseClusterServiceArea) SubscribeAttributeCurrentAreaWithParamsSubsc
 	}
 }
 
+// ReadAttributeEstimatedEndTimeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeEstimatedEndTimeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) ReadAttributeEstimatedEndTimeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterServiceArea) ReadAttributeEstimatedEndTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -326,8 +330,10 @@ func (x *MTRBaseClusterServiceArea) ReadAttributeEstimatedEndTimeWithCompletion(
 	}
 }
 
+// SubscribeAttributeEstimatedEndTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeEstimatedEndTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) SubscribeAttributeEstimatedEndTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterServiceArea) SubscribeAttributeEstimatedEndTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -349,8 +355,10 @@ func (x *MTRBaseClusterServiceArea) SubscribeAttributeEstimatedEndTimeWithParams
 	}
 }
 
+// ReadAttributeProgressWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeProgressWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) ReadAttributeProgressWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterServiceArea) ReadAttributeProgressWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -372,8 +380,10 @@ func (x *MTRBaseClusterServiceArea) ReadAttributeProgressWithCompletion(ctx cont
 	}
 }
 
+// SubscribeAttributeProgressWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeProgressWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) SubscribeAttributeProgressWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterServiceArea) SubscribeAttributeProgressWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -395,8 +405,10 @@ func (x *MTRBaseClusterServiceArea) SubscribeAttributeProgressWithParamsSubscrip
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterServiceArea) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -418,8 +430,10 @@ func (x *MTRBaseClusterServiceArea) ReadAttributeGeneratedCommandListWithComplet
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterServiceArea) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -441,8 +455,10 @@ func (x *MTRBaseClusterServiceArea) SubscribeAttributeGeneratedCommandListWithPa
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterServiceArea) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -464,8 +480,10 @@ func (x *MTRBaseClusterServiceArea) ReadAttributeAcceptedCommandListWithCompleti
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterServiceArea) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -487,8 +505,10 @@ func (x *MTRBaseClusterServiceArea) SubscribeAttributeAcceptedCommandListWithPar
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterServiceArea) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -510,8 +530,10 @@ func (x *MTRBaseClusterServiceArea) ReadAttributeAttributeListWithCompletion(ctx
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterServiceArea) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -533,8 +555,10 @@ func (x *MTRBaseClusterServiceArea) SubscribeAttributeAttributeListWithParamsSub
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterServiceArea) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -556,8 +580,10 @@ func (x *MTRBaseClusterServiceArea) ReadAttributeFeatureMapWithCompletion(ctx co
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterServiceArea) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -579,8 +605,10 @@ func (x *MTRBaseClusterServiceArea) SubscribeAttributeFeatureMapWithParamsSubscr
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterServiceArea) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -602,8 +630,10 @@ func (x *MTRBaseClusterServiceArea) ReadAttributeClusterRevisionWithCompletion(c
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterServiceArea) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterServiceArea) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -655,3 +685,7 @@ type MTRBaseClusterServiceAreaable interface {
 }
 
 var _ MTRBaseClusterServiceAreaable = (*MTRBaseClusterServiceArea)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterServiceArea)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterServiceArea)(nil)

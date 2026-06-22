@@ -13,6 +13,8 @@ import (
 )
 
 // MTRMediaInputClusterInputInfoStruct is an idiomatic wrapper over the Objective-C class MTRMediaInputClusterInputInfoStruct.
+//
+// MTRMediaInputClusterInputInfoStruct is an abstract base — you do not construct it directly. Construct one of [MTRMediaInputClusterInputInfo] and pass it where a MTRMediaInputClusterInputInfoStruct is accepted.
 type MTRMediaInputClusterInputInfoStruct struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRMediaInputClusterInputInfoStructFromID(id objc.ID) *MTRMediaInputCluster
 	if id == 0 {
 		return nil
 	}
-	x := &MTRMediaInputClusterInputInfoStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRMediaInputClusterInputInfoStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRMediaInputClusterInputInfoStructAdopt(id objc.ID) *MTRMediaInputClusterI
 	if id == 0 {
 		return nil
 	}
-	x := &MTRMediaInputClusterInputInfoStruct{Handle: objref.Wrap(id)}
+	x := &MTRMediaInputClusterInputInfoStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,54 +60,59 @@ func (x *MTRMediaInputClusterInputInfoStruct) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRMediaInputClusterInputInfoStruct creates a new MTRMediaInputClusterInputInfoStruct.
-func NewMTRMediaInputClusterInputInfoStruct() *MTRMediaInputClusterInputInfoStruct {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRMediaInputClusterInputInfoStruct")), objc.RegisterName("new"))
-	return mTRMediaInputClusterInputInfoStructAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRMediaInputClusterInputInfoStruct) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithIndex sets index and returns the receiver so calls can be chained.
+// WithIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRMediaInputClusterInputInfoStruct) WithIndex(index obj.Object) *MTRMediaInputClusterInputInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), objref.IDOf(index))
 	return x
 }
 
-// WithInputType sets inputType and returns the receiver so calls can be chained.
+// WithInputType sets the property and returns the receiver so calls can be chained.
 func (x *MTRMediaInputClusterInputInfoStruct) WithInputType(inputType obj.Object) *MTRMediaInputClusterInputInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputType:"), objref.IDOf(inputType))
 	return x
 }
 
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *MTRMediaInputClusterInputInfoStruct) WithName(name string) *MTRMediaInputClusterInputInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// WithDescriptionString sets descriptionString and returns the receiver so calls can be chained.
+// WithDescriptionString sets the property and returns the receiver so calls can be chained.
 func (x *MTRMediaInputClusterInputInfoStruct) WithDescriptionString(descriptionString string) *MTRMediaInputClusterInputInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDescriptionString:"), purego.NSString(descriptionString))
 	return x
 }
 
+// Index wraps the corresponding Objective-C method.
 func (x *MTRMediaInputClusterInputInfoStruct) Index() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("index"))
 	return obj.Wrap(_r)
 }
 
+// SetIndex wraps the corresponding Objective-C method.
 func (x *MTRMediaInputClusterInputInfoStruct) SetIndex(index obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), objref.IDOf(index))
 }
 
+// InputType wraps the corresponding Objective-C method.
 func (x *MTRMediaInputClusterInputInfoStruct) InputType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputType"))
 	return obj.Wrap(_r)
 }
 
+// SetInputType wraps the corresponding Objective-C method.
 func (x *MTRMediaInputClusterInputInfoStruct) SetInputType(inputType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputType:"), objref.IDOf(inputType))
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *MTRMediaInputClusterInputInfoStruct) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -112,10 +121,12 @@ func (x *MTRMediaInputClusterInputInfoStruct) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *MTRMediaInputClusterInputInfoStruct) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
+// DescriptionString wraps the corresponding Objective-C method.
 func (x *MTRMediaInputClusterInputInfoStruct) DescriptionString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionString"))
 	if _r == 0 {
@@ -124,6 +135,7 @@ func (x *MTRMediaInputClusterInputInfoStruct) DescriptionString() string {
 	return purego.GoString(_r)
 }
 
+// SetDescriptionString wraps the corresponding Objective-C method.
 func (x *MTRMediaInputClusterInputInfoStruct) SetDescriptionString(descriptionString string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDescriptionString:"), purego.NSString(descriptionString))
 }
@@ -146,3 +158,10 @@ type MTRMediaInputClusterInputInfoStructable interface {
 }
 
 var _ MTRMediaInputClusterInputInfoStructable = (*MTRMediaInputClusterInputInfoStruct)(nil)
+
+// isMTRMediaInputClusterInputInfoStruct marks MTRMediaInputClusterInputInfoStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRMediaInputClusterInputInfoStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRMediaInputClusterInputInfoStruct) isMTRMediaInputClusterInputInfoStruct() {}
+
+var _ MTRMediaInputClusterInputInfoStructProvider = (*MTRMediaInputClusterInputInfoStruct)(nil)

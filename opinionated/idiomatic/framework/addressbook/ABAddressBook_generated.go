@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// The main object you use to access the Address Book database.
-//
 // AddressBook is an idiomatic wrapper over the Objective-C class ABAddressBook.
+//
+// The main object you use to access the Address Book database.
 type AddressBook struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func AddressBookFromID(id objc.ID) *AddressBook {
 	if id == 0 {
 		return nil
 	}
-	x := &AddressBook{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AddressBook{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func addressBookAdopt(id objc.ID) *AddressBook {
 	if id == 0 {
 		return nil
 	}
-	x := &AddressBook{Handle: objref.Wrap(id)}
+	x := &AddressBook{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,25 +62,31 @@ func (x *AddressBook) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AddressBook) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAddressBook creates a new AddressBook.
 func NewAddressBook() *AddressBook {
 	_id := objc.Send[objc.ID](objc.ID(_class("ABAddressBook")), objc.RegisterName("new"))
 	return addressBookAdopt(_id)
 }
 
-// Returns an array of records that match the given search element, or returns an empty array if no records match the search element.
+// RecordsMatchingSearchElement returns an array of records that match the given search element, or returns an empty array if no records match the search element.
 func (x *AddressBook) RecordsMatchingSearchElement(search *SearchElement) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordsMatchingSearchElement:"), objref.IDOf(search))
 	return obj.Wrap(_r)
 }
 
-// Saves all the changes made since the last save.
+// Save saves all the changes made since the last save.
 func (x *AddressBook) Save() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("save"))
 	return _r
 }
 
-// Saves all the changes made since the last save.
+// SaveAndReturnError saves all the changes made since the last save.
 //
 // SaveAndReturnError returns an error if the operation did not succeed.
 func (x *AddressBook) SaveAndReturnError() error {
@@ -90,30 +98,30 @@ func (x *AddressBook) SaveAndReturnError() error {
 	return nil
 }
 
-// Indicates whether an address book has changes that have not been saved to the Address Book database.
+// HasUnsavedChanges indicates whether an address book has changes that have not been saved to the Address Book database.
 func (x *AddressBook) HasUnsavedChanges() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasUnsavedChanges"))
 	return _r
 }
 
-// Returns the ABPerson record that represents the logged-in user.
+// Me returns the ABPerson record that represents the logged-in user.
 func (x *AddressBook) Me() *Person {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("me"))
 	return PersonFromID(_r)
 }
 
-// Sets the record that represents the logged-in user.
+// SetMe sets the record that represents the logged-in user.
 func (x *AddressBook) SetMe(moi *Person) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMe:"), objref.IDOf(moi))
 }
 
-// Returns the person or group record that matches the given unique ID.
+// RecordForUniqueId returns the person or group record that matches the given unique ID.
 func (x *AddressBook) RecordForUniqueId(uniqueId string) *Record {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordForUniqueId:"), purego.NSString(uniqueId))
 	return RecordFromID(_r)
 }
 
-// Adds an ABPerson or ABGroup record to the Address Book database.
+// AddRecord adds an ABPerson or ABGroup record to the Address Book database.
 func (x *AddressBook) AddRecord(record *Record) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addRecord:error:"), objref.IDOf(record), unsafe.Pointer(&_nsErr))
@@ -123,7 +131,7 @@ func (x *AddressBook) AddRecord(record *Record) error {
 	return nil
 }
 
-// Removes an ABPerson or ABGroup record from the Address Book database.
+// RemoveRecord removes an ABPerson or ABGroup record from the Address Book database.
 func (x *AddressBook) RemoveRecord(record *Record) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeRecord:error:"), objref.IDOf(record), unsafe.Pointer(&_nsErr))
@@ -133,19 +141,19 @@ func (x *AddressBook) RemoveRecord(record *Record) error {
 	return nil
 }
 
-// Returns an array of all the people in the Address Book database.
+// People returns an array of all the people in the Address Book database.
 func (x *AddressBook) People() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("people"))
 	return obj.Wrap(_r)
 }
 
-// Returns an array of all the groups in the Address Book database.
+// Groups returns an array of all the groups in the Address Book database.
 func (x *AddressBook) Groups() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groups"))
 	return obj.Wrap(_r)
 }
 
-// Returns the class name of the record that matches the given unique ID.
+// RecordClassFromUniqueId returns the class name of the record that matches the given unique ID.
 func (x *AddressBook) RecordClassFromUniqueId(uniqueId string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordClassFromUniqueId:"), purego.NSString(uniqueId))
 	if _r == 0 {
@@ -154,13 +162,13 @@ func (x *AddressBook) RecordClassFromUniqueId(uniqueId string) string {
 	return purego.GoString(_r)
 }
 
-// Returns an attributed string containing the formatted address.
+// FormattedAddressFromDictionary returns an attributed string containing the formatted address.
 func (x *AddressBook) FormattedAddressFromDictionary(address obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formattedAddressFromDictionary:"), objref.IDOf(address))
 	return obj.Wrap(_r)
 }
 
-// Returns the default country code for records with unspecified country codes.
+// DefaultCountryCode returns the default country code for records with unspecified country codes.
 func (x *AddressBook) DefaultCountryCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultCountryCode"))
 	if _r == 0 {
@@ -169,7 +177,7 @@ func (x *AddressBook) DefaultCountryCode() string {
 	return purego.GoString(_r)
 }
 
-// Returns the default name ordering defined by the user in the Address Book application’s preferences.
+// DefaultNameOrdering returns the default name ordering defined by the user in the Address Book application’s preferences.
 func (x *AddressBook) DefaultNameOrdering() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("defaultNameOrdering"))
 	return _r

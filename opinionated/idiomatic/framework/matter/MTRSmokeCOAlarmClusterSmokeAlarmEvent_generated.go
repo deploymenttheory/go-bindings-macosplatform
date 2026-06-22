@@ -23,7 +23,8 @@ func MTRSmokeCOAlarmClusterSmokeAlarmEventFromID(id objc.ID) *MTRSmokeCOAlarmClu
 	if id == 0 {
 		return nil
 	}
-	x := &MTRSmokeCOAlarmClusterSmokeAlarmEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRSmokeCOAlarmClusterSmokeAlarmEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRSmokeCOAlarmClusterSmokeAlarmEventAdopt(id objc.ID) *MTRSmokeCOAlarmClus
 	if id == 0 {
 		return nil
 	}
-	x := &MTRSmokeCOAlarmClusterSmokeAlarmEvent{Handle: objref.Wrap(id)}
+	x := &MTRSmokeCOAlarmClusterSmokeAlarmEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTRSmokeCOAlarmClusterSmokeAlarmEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRSmokeCOAlarmClusterSmokeAlarmEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRSmokeCOAlarmClusterSmokeAlarmEvent creates a new MTRSmokeCOAlarmClusterSmokeAlarmEvent.
 func NewMTRSmokeCOAlarmClusterSmokeAlarmEvent() *MTRSmokeCOAlarmClusterSmokeAlarmEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRSmokeCOAlarmClusterSmokeAlarmEvent")), objc.RegisterName("new"))
 	return mTRSmokeCOAlarmClusterSmokeAlarmEventAdopt(_id)
 }
 
-// WithAlarmSeverityLevel sets alarmSeverityLevel and returns the receiver so calls can be chained.
+// WithAlarmSeverityLevel sets the property and returns the receiver so calls can be chained.
 func (x *MTRSmokeCOAlarmClusterSmokeAlarmEvent) WithAlarmSeverityLevel(alarmSeverityLevel obj.Object) *MTRSmokeCOAlarmClusterSmokeAlarmEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarmSeverityLevel:"), objref.IDOf(alarmSeverityLevel))
 	return x
 }
 
+// AlarmSeverityLevel wraps the corresponding Objective-C method.
 func (x *MTRSmokeCOAlarmClusterSmokeAlarmEvent) AlarmSeverityLevel() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alarmSeverityLevel"))
 	return obj.Wrap(_r)
 }
 
+// SetAlarmSeverityLevel wraps the corresponding Objective-C method.
 func (x *MTRSmokeCOAlarmClusterSmokeAlarmEvent) SetAlarmSeverityLevel(alarmSeverityLevel obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarmSeverityLevel:"), objref.IDOf(alarmSeverityLevel))
 }

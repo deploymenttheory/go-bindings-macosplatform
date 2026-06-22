@@ -23,7 +23,8 @@ func MTROvenCavityOperationalStateClusterOperationalErrorEventFromID(id objc.ID)
 	if id == 0 {
 		return nil
 	}
-	x := &MTROvenCavityOperationalStateClusterOperationalErrorEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTROvenCavityOperationalStateClusterOperationalErrorEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTROvenCavityOperationalStateClusterOperationalErrorEventAdopt(id objc.ID) 
 	if id == 0 {
 		return nil
 	}
-	x := &MTROvenCavityOperationalStateClusterOperationalErrorEvent{Handle: objref.Wrap(id)}
+	x := &MTROvenCavityOperationalStateClusterOperationalErrorEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) IsKind(class
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTROvenCavityOperationalStateClusterOperationalErrorEvent creates a new MTROvenCavityOperationalStateClusterOperationalErrorEvent.
 func NewMTROvenCavityOperationalStateClusterOperationalErrorEvent() *MTROvenCavityOperationalStateClusterOperationalErrorEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTROvenCavityOperationalStateClusterOperationalErrorEvent")), objc.RegisterName("new"))
 	return mTROvenCavityOperationalStateClusterOperationalErrorEventAdopt(_id)
 }
 
-// WithErrorState sets errorState and returns the receiver so calls can be chained.
+// WithErrorState sets the property and returns the receiver so calls can be chained.
 func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) WithErrorState(errorState *MTROvenCavityOperationalStateClusterErrorStateStruct) *MTROvenCavityOperationalStateClusterOperationalErrorEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorState:"), objref.IDOf(errorState))
 	return x
 }
 
+// ErrorState wraps the corresponding Objective-C method.
 func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) ErrorState() *MTROvenCavityOperationalStateClusterErrorStateStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorState"))
 	return MTROvenCavityOperationalStateClusterErrorStateStructFromID(_r)
 }
 
+// SetErrorState wraps the corresponding Objective-C method.
 func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) SetErrorState(errorState *MTROvenCavityOperationalStateClusterErrorStateStruct) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorState:"), objref.IDOf(errorState))
 }

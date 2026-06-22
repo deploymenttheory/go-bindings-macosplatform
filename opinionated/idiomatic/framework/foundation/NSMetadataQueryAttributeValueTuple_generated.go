@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The NSMetadataQueryAttributeValueTuple class represents attribute-value tuples, which are objects that contain the attribute name and value of a metadata attribute.
-//
 // MetadataQueryAttributeValueTuple is an idiomatic wrapper over the Objective-C class NSMetadataQueryAttributeValueTuple.
+//
+// The NSMetadataQueryAttributeValueTuple class represents attribute-value tuples, which are objects that contain the attribute name and value of a metadata attribute.
 type MetadataQueryAttributeValueTuple struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MetadataQueryAttributeValueTupleFromID(id objc.ID) *MetadataQueryAttributeV
 	if id == 0 {
 		return nil
 	}
-	x := &MetadataQueryAttributeValueTuple{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetadataQueryAttributeValueTuple{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func metadataQueryAttributeValueTupleAdopt(id objc.ID) *MetadataQueryAttributeVa
 	if id == 0 {
 		return nil
 	}
-	x := &MetadataQueryAttributeValueTuple{Handle: objref.Wrap(id)}
+	x := &MetadataQueryAttributeValueTuple{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +60,25 @@ func (x *MetadataQueryAttributeValueTuple) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetadataQueryAttributeValueTuple) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMetadataQueryAttributeValueTuple creates a new MetadataQueryAttributeValueTuple.
 func NewMetadataQueryAttributeValueTuple() *MetadataQueryAttributeValueTuple {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSMetadataQueryAttributeValueTuple")), objc.RegisterName("new"))
 	return metadataQueryAttributeValueTupleAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *MetadataQueryAttributeValueTuple) WithScriptingProperties(scriptingProperties obj.Object) *MetadataQueryAttributeValueTuple {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Attribute wraps the corresponding Objective-C method.
 func (x *MetadataQueryAttributeValueTuple) Attribute() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attribute"))
 	if _r == 0 {
@@ -78,11 +87,13 @@ func (x *MetadataQueryAttributeValueTuple) Attribute() string {
 	return purego.GoString(_r)
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *MetadataQueryAttributeValueTuple) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
+// Count wraps the corresponding Objective-C method.
 func (x *MetadataQueryAttributeValueTuple) Count() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
 	return _r

@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that receives a file promise from the pasteboard.
-//
 // FilePromiseReceiver is an idiomatic wrapper over the Objective-C class NSFilePromiseReceiver.
+//
+// An object that receives a file promise from the pasteboard.
 type FilePromiseReceiver struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func FilePromiseReceiverFromID(id objc.ID) *FilePromiseReceiver {
 	if id == 0 {
 		return nil
 	}
-	x := &FilePromiseReceiver{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FilePromiseReceiver{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func filePromiseReceiverAdopt(id objc.ID) *FilePromiseReceiver {
 	if id == 0 {
 		return nil
 	}
-	x := &FilePromiseReceiver{Handle: objref.Wrap(id)}
+	x := &FilePromiseReceiver{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,22 @@ func (x *FilePromiseReceiver) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FilePromiseReceiver) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFilePromiseReceiver creates a new FilePromiseReceiver.
 func NewFilePromiseReceiver() *FilePromiseReceiver {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSFilePromiseReceiver")), objc.RegisterName("new"))
 	return filePromiseReceiverAdopt(_id)
 }
 
-// Fulfills the promises at the specified destination.
+// ReceivePromisedFilesAtDestinationOptionsOperationQueueReader fulfills the promises at the specified destination.
 //
 // ReceivePromisedFilesAtDestinationOptionsOperationQueueReader blocks until the operation completes or ctx is cancelled.
-func (x *FilePromiseReceiver) ReceivePromisedFilesAtDestinationOptionsOperationQueueReader(ctx context.Context, destinationDir string, options obj.Object, operationQueue obj.Object) (obj.Object, error) {
+func (x *FilePromiseReceiver) ReceivePromisedFilesAtDestinationOptionsOperationQueueReader(ctx context.Context, destinationDir string, options obj.Object, operationQueue obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -91,12 +99,16 @@ func (x *FilePromiseReceiver) ReceivePromisedFilesAtDestinationOptionsOperationQ
 	}
 }
 
+// FileTypes wraps the corresponding Objective-C method.
+//
 // FileTypes returns the collection as a Go slice.
 func (x *FilePromiseReceiver) FileTypes() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// FileNames wraps the corresponding Objective-C method.
+//
 // FileNames returns the collection as a Go slice.
 func (x *FilePromiseReceiver) FileNames() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileNames"))

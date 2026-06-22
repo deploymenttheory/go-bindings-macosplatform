@@ -6,15 +6,16 @@ package screencapturekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An instance that filters the content a stream captures.
-//
 // ContentFilter is an idiomatic wrapper over the Objective-C class SCContentFilter.
+//
+// An instance that filters the content a stream captures.
 type ContentFilter struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func ContentFilterFromID(id objc.ID) *ContentFilter {
 	if id == 0 {
 		return nil
 	}
-	x := &ContentFilter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContentFilter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func contentFilterAdopt(id objc.ID) *ContentFilter {
 	if id == 0 {
 		return nil
 	}
-	x := &ContentFilter{Handle: objref.Wrap(id)}
+	x := &ContentFilter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,88 +61,89 @@ func (x *ContentFilter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a filter that captures only the specified window.
-//
-// NewContentFilterWithDesktopIndependentWindow creates a new ContentFilter.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContentFilter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewContentFilterWithDesktopIndependentWindow creates a filter that captures only the specified window.
 func NewContentFilterWithDesktopIndependentWindow(window *Window) *ContentFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCContentFilter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDesktopIndependentWindow:"), objref.IDOf(window))
 	return contentFilterAdopt(_id)
 }
 
-// Creates a filter that captures the contents of a display, excluding the specified windows.
-//
-// NewContentFilterWithDisplayExcludingWindows creates a new ContentFilter.
+// NewContentFilterWithDisplayExcludingWindows creates a filter that captures the contents of a display, excluding the specified windows.
 func NewContentFilterWithDisplayExcludingWindows(display *Display, excluded []*Window) *ContentFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCContentFilter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplay:excludingWindows:"), objref.IDOf(display), purego.SliceToNSArray(excluded, func(_v *Window) objc.ID { return objref.IDOf(_v) }))
 	return contentFilterAdopt(_id)
 }
 
-// Creates a filter that captures only specific windows from a display.
-//
-// NewContentFilterWithDisplayIncludingWindows creates a new ContentFilter.
+// NewContentFilterWithDisplayIncludingWindows creates a filter that captures only specific windows from a display.
 func NewContentFilterWithDisplayIncludingWindows(display *Display, includedWindows []*Window) *ContentFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCContentFilter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplay:includingWindows:"), objref.IDOf(display), purego.SliceToNSArray(includedWindows, func(_v *Window) objc.ID { return objref.IDOf(_v) }))
 	return contentFilterAdopt(_id)
 }
 
-// Creates a filter that captures a display, including only windows of the specified apps.
-//
-// NewContentFilterWithDisplayIncludingApplicationsExceptingWindows creates a new ContentFilter.
+// NewContentFilterWithDisplayIncludingApplicationsExceptingWindows creates a filter that captures a display, including only windows of the specified apps.
 func NewContentFilterWithDisplayIncludingApplicationsExceptingWindows(display *Display, applications []*RunningApplication, exceptingWindows []*Window) *ContentFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCContentFilter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplay:includingApplications:exceptingWindows:"), objref.IDOf(display), purego.SliceToNSArray(applications, func(_v *RunningApplication) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(exceptingWindows, func(_v *Window) objc.ID { return objref.IDOf(_v) }))
 	return contentFilterAdopt(_id)
 }
 
-// Creates a filter that captures a display, excluding windows of the specified apps.
-//
-// NewContentFilterWithDisplayExcludingApplicationsExceptingWindows creates a new ContentFilter.
+// NewContentFilterWithDisplayExcludingApplicationsExceptingWindows creates a filter that captures a display, excluding windows of the specified apps.
 func NewContentFilterWithDisplayExcludingApplicationsExceptingWindows(display *Display, applications []*RunningApplication, exceptingWindows []*Window) *ContentFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCContentFilter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplay:excludingApplications:exceptingWindows:"), objref.IDOf(display), purego.SliceToNSArray(applications, func(_v *RunningApplication) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(exceptingWindows, func(_v *Window) objc.ID { return objref.IDOf(_v) }))
 	return contentFilterAdopt(_id)
 }
 
-// To include menu bar as part of the capture. This property has no effect for the desktop independent window filter. For content filters created with initWithDisplay:excluding, the default value is YES. Display excluding content filters contains the desktop and dock. For content filters created with initWithDisplay:including, the default value is NO. Display including content filters do not contain the desktop and dock
-//
-// WithIncludeMenuBar sets includeMenuBar and returns the receiver so calls can be chained.
+// WithIncludeMenuBar to include menu bar as part of the capture. This property has no effect for the desktop independent window filter. For content filters created with initWithDisplay:excluding, the default value is YES. Display excluding content filters contains the desktop and dock. For content filters created with initWithDisplay:including, the default value is NO. Display including content filters do not contain the desktop and dock
 func (x *ContentFilter) WithIncludeMenuBar(includeMenuBar bool) *ContentFilter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeMenuBar:"), includeMenuBar)
 	return x
 }
 
-// streamType type of stream
+// StreamType streamType type of stream
 func (x *ContentFilter) StreamType() StreamType {
 	_r := objc.Send[StreamType](objref.IDOf(x), objc.RegisterName("streamType"))
 	return _r
 }
 
-// style of stream
+// Style style of stream
 func (x *ContentFilter) Style() ShareableContentStyle {
 	_r := objc.Send[ShareableContentStyle](objref.IDOf(x), objc.RegisterName("style"))
 	return _r
 }
 
-// Pixel to points scaling factor
+// PointPixelScale pixel to points scaling factor
 func (x *ContentFilter) PointPixelScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("pointPixelScale"))
 	return _r
 }
 
-// To include menu bar as part of the capture. This property has no effect for the desktop independent window filter. For content filters created with initWithDisplay:excluding, the default value is YES. Display excluding content filters contains the desktop and dock. For content filters created with initWithDisplay:including, the default value is NO. Display including content filters do not contain the desktop and dock
+// ContentRect size and location of content in points
+func (x *ContentFilter) ContentRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("contentRect"))
+	return _r
+}
+
+// IncludeMenuBar to include menu bar as part of the capture. This property has no effect for the desktop independent window filter. For content filters created with initWithDisplay:excluding, the default value is YES. Display excluding content filters contains the desktop and dock. For content filters created with initWithDisplay:including, the default value is NO. Display including content filters do not contain the desktop and dock
 func (x *ContentFilter) IncludeMenuBar() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includeMenuBar"))
 	return _r
 }
 
+// SetIncludeMenuBar wraps the corresponding Objective-C method.
 func (x *ContentFilter) SetIncludeMenuBar(includeMenuBar bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeMenuBar:"), includeMenuBar)
 }
 
-// SCDisplays that are included in the content filter
+// IncludedDisplays SCDisplays that are included in the content filter
 //
 // IncludedDisplays returns the collection as a Go slice.
 func (x *ContentFilter) IncludedDisplays() []*Display {
@@ -147,7 +151,7 @@ func (x *ContentFilter) IncludedDisplays() []*Display {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Display { return DisplayFromID(_id) })
 }
 
-// Applications that are included in the content filter
+// IncludedApplications applications that are included in the content filter
 //
 // IncludedApplications returns the collection as a Go slice.
 func (x *ContentFilter) IncludedApplications() []*RunningApplication {
@@ -155,7 +159,7 @@ func (x *ContentFilter) IncludedApplications() []*RunningApplication {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RunningApplication { return RunningApplicationFromID(_id) })
 }
 
-// Windows that are included in the content filter
+// IncludedWindows windows that are included in the content filter
 //
 // IncludedWindows returns the collection as a Go slice.
 func (x *ContentFilter) IncludedWindows() []*Window {
@@ -170,6 +174,7 @@ type ContentFilterable interface {
 	StreamType() StreamType
 	Style() ShareableContentStyle
 	PointPixelScale() float32
+	ContentRect() corefoundation.CGRect
 	IncludeMenuBar() bool
 	SetIncludeMenuBar(includeMenuBar bool)
 	IncludedDisplays() []*Display

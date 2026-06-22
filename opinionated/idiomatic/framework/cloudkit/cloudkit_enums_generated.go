@@ -19,6 +19,8 @@ const (
 	ApplicationPermissionUserDiscoverability ApplicationPermissions = 1
 )
 
+// String returns the ApplicationPermissions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ApplicationPermissions) String() string {
 	var parts []string
 	if e&ApplicationPermissionUserDiscoverability != 0 {
@@ -42,6 +44,8 @@ const (
 	DatabaseScopeShared DatabaseScope = 3
 )
 
+// String returns the DatabaseScope constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DatabaseScope) String() string {
 	switch e {
 	case DatabaseScopePublic:
@@ -137,6 +141,8 @@ const (
 	ErrorParticipantAlreadyInvited ErrorCode = 37
 )
 
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ErrorCode) String() string {
 	switch e {
 	case ErrorInternalError:
@@ -232,6 +238,8 @@ const (
 	NotificationTypeDatabase NotificationType = 4
 )
 
+// String returns the NotificationType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NotificationType) String() string {
 	switch e {
 	case NotificationTypeQuery:
@@ -269,6 +277,8 @@ const (
 	OperationGroupTransferSizeHundredsOfGigabytes OperationGroupTransferSize = 7
 )
 
+// String returns the OperationGroupTransferSize constant's name, or its numeric form when the
+// value is not a known constant.
 func (e OperationGroupTransferSize) String() string {
 	switch e {
 	case OperationGroupTransferSizeUnknown:
@@ -304,6 +314,8 @@ const (
 	QueryNotificationReasonRecordDeleted QueryNotificationReason = 3
 )
 
+// String returns the QueryNotificationReason constant's name, or its numeric form when the
+// value is not a known constant.
 func (e QueryNotificationReason) String() string {
 	switch e {
 	case QueryNotificationReasonRecordCreated:
@@ -332,6 +344,8 @@ const (
 	QuerySubscriptionOptionsFiresOnce QuerySubscriptionOptions = 8
 )
 
+// String returns the QuerySubscriptionOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e QuerySubscriptionOptions) String() string {
 	var parts []string
 	if e&QuerySubscriptionOptionsFiresOnRecordCreation != 0 {
@@ -364,6 +378,8 @@ const (
 	RecordSaveAllKeys RecordSavePolicy = 2
 )
 
+// String returns the RecordSavePolicy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RecordSavePolicy) String() string {
 	switch e {
 	case RecordSaveIfServerRecordUnchanged:
@@ -392,6 +408,8 @@ const (
 	RecordZoneCapabilityZoneWideSharing RecordZoneCapabilities = 8
 )
 
+// String returns the RecordZoneCapabilities constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RecordZoneCapabilities) String() string {
 	var parts []string
 	if e&RecordZoneCapabilityFetchChanges != 0 {
@@ -421,6 +439,8 @@ const (
 	RecordZoneEncryptionScopePerZone RecordZoneEncryptionScope = 1
 )
 
+// String returns the RecordZoneEncryptionScope constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RecordZoneEncryptionScope) String() string {
 	switch e {
 	case RecordZoneEncryptionScopePerRecord:
@@ -441,6 +461,8 @@ const (
 	ReferenceActionDeleteSelf ReferenceAction = 1
 )
 
+// String returns the ReferenceAction constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ReferenceAction) String() string {
 	switch e {
 	case ReferenceActionNone:
@@ -465,6 +487,8 @@ const (
 	ShareParticipantAcceptanceStatusRemoved ShareParticipantAcceptanceStatus = 3
 )
 
+// String returns the ShareParticipantAcceptanceStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ShareParticipantAcceptanceStatus) String() string {
 	switch e {
 	case ShareParticipantAcceptanceStatusUnknown:
@@ -493,6 +517,8 @@ const (
 	ShareParticipantPermissionReadWrite ShareParticipantPermission = 3
 )
 
+// String returns the ShareParticipantPermission constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ShareParticipantPermission) String() string {
 	switch e {
 	case ShareParticipantPermissionUnknown:
@@ -524,6 +550,8 @@ const (
 	ShareParticipantRoleAdministrator ShareParticipantRole = 2
 )
 
+// String returns the ShareParticipantRole constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ShareParticipantRole) String() string {
 	switch e {
 	case ShareParticipantRoleUnknown:
@@ -554,6 +582,8 @@ const (
 	SharingParticipantAccessOptionAny SharingParticipantAccessOption = 3
 )
 
+// String returns the SharingParticipantAccessOption constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SharingParticipantAccessOption) String() string {
 	var parts []string
 	if e&SharingParticipantAccessOptionAnyoneWithLink != 0 {
@@ -584,6 +614,8 @@ const (
 	SharingParticipantPermissionOptionAny SharingParticipantPermissionOption = 3
 )
 
+// String returns the SharingParticipantPermissionOption constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SharingParticipantPermissionOption) String() string {
 	var parts []string
 	if e&SharingParticipantPermissionOptionReadOnly != 0 {
@@ -613,6 +645,8 @@ const (
 	SubscriptionTypeDatabase SubscriptionType = 3
 )
 
+// String returns the SubscriptionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SubscriptionType) String() string {
 	switch e {
 	case SubscriptionTypeQuery:
@@ -638,6 +672,8 @@ const (
 	SyncEngineAccountChangeTypeSwitchAccounts SyncEngineAccountChangeType = 2
 )
 
+// String returns the SyncEngineAccountChangeType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SyncEngineAccountChangeType) String() string {
 	switch e {
 	case SyncEngineAccountChangeTypeSignIn:
@@ -681,6 +717,8 @@ const (
 	SyncEngineEventTypeDidSendChanges SyncEngineEventType = 11
 )
 
+// String returns the SyncEngineEventType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SyncEngineEventType) String() string {
 	switch e {
 	case SyncEngineEventTypeStateUpdate:
@@ -720,6 +758,8 @@ const (
 	SyncEnginePendingDatabaseChangeTypeDeleteZone SyncEnginePendingDatabaseChangeType = 1
 )
 
+// String returns the SyncEnginePendingDatabaseChangeType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SyncEnginePendingDatabaseChangeType) String() string {
 	switch e {
 	case SyncEnginePendingDatabaseChangeTypeSaveZone:
@@ -739,6 +779,8 @@ const (
 	SyncEnginePendingRecordZoneChangeTypeDeleteRecord SyncEnginePendingRecordZoneChangeType = 1
 )
 
+// String returns the SyncEnginePendingRecordZoneChangeType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SyncEnginePendingRecordZoneChangeType) String() string {
 	switch e {
 	case SyncEnginePendingRecordZoneChangeTypeSaveRecord:
@@ -760,6 +802,8 @@ const (
 	SyncEngineSyncReasonManual SyncEngineSyncReason = 1
 )
 
+// String returns the SyncEngineSyncReason constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SyncEngineSyncReason) String() string {
 	switch e {
 	case SyncEngineSyncReasonScheduled:
@@ -783,6 +827,8 @@ const (
 	SyncEngineZoneDeletionReasonEncryptedDataReset SyncEngineZoneDeletionReason = 2
 )
 
+// String returns the SyncEngineZoneDeletionReason constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SyncEngineZoneDeletionReason) String() string {
 	switch e {
 	case SyncEngineZoneDeletionReasonDeleted:

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// returns gradient for either primary or secondary source image from the inference pass. Use the isSecondarySourceFilter property to indicate whether this filter is computing the gradient for the primary or secondary source image from the inference pass.
-//
 // NNMultiplicationGradientNode is an idiomatic wrapper over the Objective-C class MPSNNMultiplicationGradientNode.
+//
+// It embeds [NNArithmeticGradientNode], promoting that type's methods.
+//
+// returns gradient for either primary or secondary source image from the inference pass. Use the isSecondarySourceFilter property to indicate whether this filter is computing the gradient for the primary or secondary source image from the inference pass.
 type NNMultiplicationGradientNode struct {
-	objref.Handle
+	NNArithmeticGradientNode
 }
 
 // NNMultiplicationGradientNodeFromID adopts an existing Objective-C object as a NNMultiplicationGradientNode
@@ -25,7 +26,8 @@ func NNMultiplicationGradientNodeFromID(id objc.ID) *NNMultiplicationGradientNod
 	if id == 0 {
 		return nil
 	}
-	x := &NNMultiplicationGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNMultiplicationGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func nNMultiplicationGradientNodeAdopt(id objc.ID) *NNMultiplicationGradientNode
 	if id == 0 {
 		return nil
 	}
-	x := &NNMultiplicationGradientNode{Handle: objref.Wrap(id)}
+	x := &NNMultiplicationGradientNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NNMultiplicationGradientNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNMultiplicationGradientNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNMultiplicationGradientNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNNMultiplicationGradientNode creates a new NNMultiplicationGradientNode.
@@ -64,57 +52,55 @@ func NewNNMultiplicationGradientNode() *NNMultiplicationGradientNode {
 	return nNMultiplicationGradientNodeAdopt(_id)
 }
 
-// WithPrimaryScale sets primaryScale and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
 func (x *NNMultiplicationGradientNode) WithPrimaryScale(primaryScale float32) *NNMultiplicationGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return x
 }
 
-// WithSecondaryScale sets secondaryScale and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
 func (x *NNMultiplicationGradientNode) WithSecondaryScale(secondaryScale float32) *NNMultiplicationGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return x
 }
 
-// WithBias sets bias and returns the receiver so calls can be chained.
+// WithBias sets the property and returns the receiver so calls can be chained.
 func (x *NNMultiplicationGradientNode) WithBias(bias float32) *NNMultiplicationGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 	return x
 }
 
-// WithSecondaryStrideInPixelsX sets secondaryStrideInPixelsX and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
 func (x *NNMultiplicationGradientNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNMultiplicationGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 	return x
 }
 
-// WithSecondaryStrideInPixelsY sets secondaryStrideInPixelsY and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
 func (x *NNMultiplicationGradientNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNMultiplicationGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 	return x
 }
 
-// WithSecondaryStrideInFeatureChannels sets secondaryStrideInFeatureChannels and returns the receiver so calls can be chained.
+// WithSecondaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
 func (x *NNMultiplicationGradientNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNMultiplicationGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
 	return x
 }
 
-// WithMinimumValue sets minimumValue and returns the receiver so calls can be chained.
+// WithMinimumValue sets the property and returns the receiver so calls can be chained.
 func (x *NNMultiplicationGradientNode) WithMinimumValue(minimumValue float32) *NNMultiplicationGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
 	return x
 }
 
-// WithMaximumValue sets maximumValue and returns the receiver so calls can be chained.
+// WithMaximumValue sets the property and returns the receiver so calls can be chained.
 func (x *NNMultiplicationGradientNode) WithMaximumValue(maximumValue float32) *NNMultiplicationGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *NNMultiplicationGradientNode) WithLabel(label string) *NNMultiplicationGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -135,3 +121,9 @@ type NNMultiplicationGradientNodeable interface {
 }
 
 var _ NNMultiplicationGradientNodeable = (*NNMultiplicationGradientNode)(nil)
+
+var _ NNArithmeticGradientNodeProvider = (*NNMultiplicationGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*NNMultiplicationGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNMultiplicationGradientNode)(nil)

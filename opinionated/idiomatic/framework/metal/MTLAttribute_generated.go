@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes an attribute defined in the stage-in argument for a shader.
-//
 // Attribute is an idiomatic wrapper over the Objective-C class MTLAttribute.
+//
+// An object that describes an attribute defined in the stage-in argument for a shader.
 type Attribute struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AttributeFromID(id objc.ID) *Attribute {
 	if id == 0 {
 		return nil
 	}
-	x := &Attribute{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Attribute{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func attributeAdopt(id objc.ID) *Attribute {
 	if id == 0 {
 		return nil
 	}
-	x := &Attribute{Handle: objref.Wrap(id)}
+	x := &Attribute{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *Attribute) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Attribute) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAttribute creates a new Attribute.
 func NewAttribute() *Attribute {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLAttribute")), objc.RegisterName("new"))
 	return attributeAdopt(_id)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *Attribute) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -72,26 +81,31 @@ func (x *Attribute) Name() string {
 	return purego.GoString(_r)
 }
 
+// AttributeIndex wraps the corresponding Objective-C method.
 func (x *Attribute) AttributeIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("attributeIndex"))
 	return _r
 }
 
+// AttributeType wraps the corresponding Objective-C method.
 func (x *Attribute) AttributeType() DataType {
 	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("attributeType"))
 	return _r
 }
 
+// IsActive wraps the corresponding Objective-C method.
 func (x *Attribute) IsActive() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
 	return _r
 }
 
+// IsPatchData wraps the corresponding Objective-C method.
 func (x *Attribute) IsPatchData() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPatchData"))
 	return _r
 }
 
+// IsPatchControlPointData wraps the corresponding Objective-C method.
 func (x *Attribute) IsPatchControlPointData() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPatchControlPointData"))
 	return _r

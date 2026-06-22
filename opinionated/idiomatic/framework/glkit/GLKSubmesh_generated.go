@@ -23,7 +23,8 @@ func SubmeshFromID(id objc.ID) *Submesh {
 	if id == 0 {
 		return nil
 	}
-	x := &Submesh{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Submesh{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func submeshAdopt(id objc.ID) *Submesh {
 	if id == 0 {
 		return nil
 	}
-	x := &Submesh{Handle: objref.Wrap(id)}
+	x := &Submesh{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,43 +58,49 @@ func (x *Submesh) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Submesh) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSubmesh creates a new Submesh.
 func NewSubmesh() *Submesh {
 	_id := objc.Send[objc.ID](objc.ID(_class("GLKSubmesh")), objc.RegisterName("new"))
 	return submeshAdopt(_id)
 }
 
-// Type of data in the elementBuffer (aka indexBuffer) This value should be used for the type parameter of glDrawElements
+// Type type of data in the elementBuffer (aka indexBuffer) This value should be used for the type parameter of glDrawElements
 func (x *Submesh) Type() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
-// Primitive type mode value of data in the elementBuffer (aka indexBuffer) This value should be used for the mode parameter in glDrawElements
+// Mode primitive type mode value of data in the elementBuffer (aka indexBuffer) This value should be used for the mode parameter in glDrawElements
 func (x *Submesh) Mode() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("mode"))
 	return _r
 }
 
-// Number of elements (aka indicies) in the elementBuffer (aka indexBuffer) This value should be used for the count parameter in glDrawElements
+// ElementCount number of elements (aka indicies) in the elementBuffer (aka indexBuffer) This value should be used for the count parameter in glDrawElements
 func (x *Submesh) ElementCount() int32 {
 	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("elementCount"))
 	return _r
 }
 
-// Name of buffer object with index data The buffer name to be used with DrawElements
+// ElementBuffer name of buffer object with index data The buffer name to be used with DrawElements
 func (x *Submesh) ElementBuffer() *MeshBuffer {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementBuffer"))
 	return MeshBufferFromID(_r)
 }
 
-// Parent GLKit mesh containing vertex data of this object Buffer of this parent mesh should be set in the encoder before a drawIndexedPrimitives call is made
+// Mesh parent GLKit mesh containing vertex data of this object Buffer of this parent mesh should be set in the encoder before a drawIndexedPrimitives call is made
 func (x *Submesh) Mesh() *Mesh {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mesh"))
 	return MeshFromID(_r)
 }
 
-// Name from the original MDLSubmesh object. Although not directly used by this object, the application may use this to identify the submesh in it renderer/scene/world.
+// Name name from the original MDLSubmesh object. Although not directly used by this object, the application may use this to identify the submesh in it renderer/scene/world.
 func (x *Submesh) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {

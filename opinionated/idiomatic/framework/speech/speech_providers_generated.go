@@ -11,4 +11,5 @@ import (
 // SpeechRecognitionRequestProvider is accepted wherever a SFSpeechRecognitionRequest (or one of its subclasses) is expected.
 type SpeechRecognitionRequestProvider interface {
 	objref.Object
+	isSpeechRecognitionRequest()
 }

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A token session that manages the authentication state of a token.
-//
 // TokenSession is an idiomatic wrapper over the Objective-C class TKTokenSession.
+//
+// TokenSession is an abstract base — you do not construct it directly. Construct one of [SmartCardTokenSession] and pass it where a TokenSession is accepted.
+//
+// A token session that manages the authentication state of a token.
 type TokenSession struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func TokenSessionFromID(id objc.ID) *TokenSession {
 	if id == 0 {
 		return nil
 	}
-	x := &TokenSession{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TokenSession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func tokenSessionAdopt(id objc.ID) *TokenSession {
 	if id == 0 {
 		return nil
 	}
-	x := &TokenSession{Handle: objref.Wrap(id)}
+	x := &TokenSession{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +62,20 @@ func (x *TokenSession) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a token session with the specified token.
-//
-// NewTokenSessionWithToken creates a new TokenSession.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TokenSession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTokenSessionWithToken initializes a token session with the specified token.
 func NewTokenSessionWithToken(token *Token) *TokenSession {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("TKTokenSession")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithToken:"), objref.IDOf(token))
 	return tokenSessionAdopt(_id)
 }
 
+// Token wraps the corresponding Objective-C method.
 func (x *TokenSession) Token() *Token {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("token"))
 	return TokenFromID(_r)
@@ -79,3 +88,10 @@ type TokenSessionable interface {
 }
 
 var _ TokenSessionable = (*TokenSession)(nil)
+
+// isTokenSession marks TokenSession — and, by embedding promotion, its
+// subclasses — as a member of the TokenSession hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *TokenSession) isTokenSession() {}
+
+var _ TokenSessionProvider = (*TokenSession)(nil)

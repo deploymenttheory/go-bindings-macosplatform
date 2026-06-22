@@ -20,6 +20,8 @@ const (
 	SensitivityAnalysisPolicyDescriptiveInterventions SensitivityAnalysisPolicy = 2
 )
 
+// String returns the SensitivityAnalysisPolicy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SensitivityAnalysisPolicy) String() string {
 	switch e {
 	case SensitivityAnalysisPolicyDisabled:

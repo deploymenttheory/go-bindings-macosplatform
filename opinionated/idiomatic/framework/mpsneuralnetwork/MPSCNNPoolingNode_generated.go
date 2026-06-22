@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A node for a MPSCNNPooling kernel This is an abstract base class that does not correspond with any particular MPSCNNKernel. Please make one of the MPSCNNPooling subclasses instead.
-//
 // CNNPoolingNode is an idiomatic wrapper over the Objective-C class MPSCNNPoolingNode.
+//
+// CNNPoolingNode is an abstract base — you do not construct it directly. Construct one of [CNNPoolingAverageNode], [CNNPoolingL2NormNode], [CNNPoolingMaxNode] and pass it where a CNNPoolingNode is accepted.
+//
+// A node for a MPSCNNPooling kernel This is an abstract base class that does not correspond with any particular MPSCNNKernel. Please make one of the MPSCNNPooling subclasses instead.
 type CNNPoolingNode struct {
-	objref.Handle
+	NNFilterNode
 }
 
 // CNNPoolingNodeFromID adopts an existing Objective-C object as a CNNPoolingNode
@@ -25,7 +26,8 @@ func CNNPoolingNodeFromID(id objc.ID) *CNNPoolingNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNPoolingNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNPoolingNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,76 +40,58 @@ func cNNPoolingNodeAdopt(id objc.ID) *CNNPoolingNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNPoolingNode{Handle: objref.Wrap(id)}
+	x := &CNNPoolingNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNPoolingNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNPoolingNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNPoolingNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Init a node representing a MPSCNNPooling kernel
-//
-// NewCNNPoolingNodeWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY creates a new CNNPoolingNode.
+// NewCNNPoolingNodeWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY init a node representing a MPSCNNPooling kernel
 func NewCNNPoolingNodeWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY(sourceNode *NNImageNode, kernelWidth int, kernelHeight int, strideInPixelsX int, strideInPixelsY int) *CNNPoolingNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNPoolingNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:"), objref.IDOf(sourceNode), kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY)
 	return cNNPoolingNodeAdopt(_id)
 }
 
-// Convenience initializer for MPSCNNPooling nodes with square kernels
-//
-// NewCNNPoolingNodeWithSourceFilterSizeStride creates a new CNNPoolingNode.
+// NewCNNPoolingNodeWithSourceFilterSizeStride convenience initializer for MPSCNNPooling nodes with square kernels
 func NewCNNPoolingNodeWithSourceFilterSizeStride(sourceNode *NNImageNode, size int, stride int) *CNNPoolingNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNPoolingNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:filterSize:stride:"), objref.IDOf(sourceNode), size, stride)
 	return cNNPoolingNodeAdopt(_id)
 }
 
-// Convenience initializer for MPSCNNPooling nodes with square non-overlapping kernels
-//
-// NewCNNPoolingNodeWithSourceFilterSize creates a new CNNPoolingNode.
+// NewCNNPoolingNodeWithSourceFilterSize convenience initializer for MPSCNNPooling nodes with square non-overlapping kernels
 func NewCNNPoolingNodeWithSourceFilterSize(sourceNode *NNImageNode, size int) *CNNPoolingNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNPoolingNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:filterSize:"), objref.IDOf(sourceNode), size)
 	return cNNPoolingNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNPoolingNode) WithLabel(label string) *CNNPoolingNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// KernelWidth wraps the corresponding Objective-C method.
 func (x *CNNPoolingNode) KernelWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
+// KernelHeight wraps the corresponding Objective-C method.
 func (x *CNNPoolingNode) KernelHeight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
+// StrideInPixelsX wraps the corresponding Objective-C method.
 func (x *CNNPoolingNode) StrideInPixelsX() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInPixelsX"))
 	return _r
 }
 
+// StrideInPixelsY wraps the corresponding Objective-C method.
 func (x *CNNPoolingNode) StrideInPixelsY() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInPixelsY"))
 	return _r
@@ -124,3 +108,12 @@ type CNNPoolingNodeable interface {
 }
 
 var _ CNNPoolingNodeable = (*CNNPoolingNode)(nil)
+
+// isCNNPoolingNode marks CNNPoolingNode — and, by embedding promotion, its
+// subclasses — as a member of the CNNPoolingNode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CNNPoolingNode) isCNNPoolingNode() {}
+
+var _ CNNPoolingNodeProvider = (*CNNPoolingNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNPoolingNode)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The object that the framework passes to the monitor’s callback handler upon receiving an event.
-//
 // MonitoringEvent is an idiomatic wrapper over the Objective-C class CLMonitoringEvent.
+//
+// The object that the framework passes to the monitor’s callback handler upon receiving an event.
 type MonitoringEvent struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MonitoringEventFromID(id objc.ID) *MonitoringEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MonitoringEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MonitoringEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func monitoringEventAdopt(id objc.ID) *MonitoringEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &MonitoringEvent{Handle: objref.Wrap(id)}
+	x := &MonitoringEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *MonitoringEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MonitoringEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMonitoringEvent creates a new MonitoringEvent.
 func NewMonitoringEvent() *MonitoringEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("CLMonitoringEvent")), objc.RegisterName("new"))
 	return monitoringEventAdopt(_id)
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *MonitoringEvent) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -72,66 +81,79 @@ func (x *MonitoringEvent) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// Refinement wraps the corresponding Objective-C method.
 func (x *MonitoringEvent) Refinement() *Condition {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("refinement"))
 	return ConditionFromID(_r)
 }
 
+// State wraps the corresponding Objective-C method.
 func (x *MonitoringEvent) State() MonitoringState {
 	_r := objc.Send[MonitoringState](objref.IDOf(x), objc.RegisterName("state"))
 	return _r
 }
 
+// Date wraps the corresponding Objective-C method.
 func (x *MonitoringEvent) Date() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
 
+// AuthorizationDenied wraps the corresponding Objective-C method.
 func (x *MonitoringEvent) AuthorizationDenied() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationDenied"))
 	return _r
 }
 
+// AuthorizationDeniedGlobally wraps the corresponding Objective-C method.
 func (x *MonitoringEvent) AuthorizationDeniedGlobally() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationDeniedGlobally"))
 	return _r
 }
 
+// AuthorizationRestricted wraps the corresponding Objective-C method.
 func (x *MonitoringEvent) AuthorizationRestricted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationRestricted"))
 	return _r
 }
 
+// InsufficientlyInUse wraps the corresponding Objective-C method.
 func (x *MonitoringEvent) InsufficientlyInUse() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("insufficientlyInUse"))
 	return _r
 }
 
+// AccuracyLimited wraps the corresponding Objective-C method.
 func (x *MonitoringEvent) AccuracyLimited() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("accuracyLimited"))
 	return _r
 }
 
+// ConditionUnsupported wraps the corresponding Objective-C method.
 func (x *MonitoringEvent) ConditionUnsupported() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("conditionUnsupported"))
 	return _r
 }
 
+// ConditionLimitExceeded wraps the corresponding Objective-C method.
 func (x *MonitoringEvent) ConditionLimitExceeded() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("conditionLimitExceeded"))
 	return _r
 }
 
+// PersistenceUnavailable wraps the corresponding Objective-C method.
 func (x *MonitoringEvent) PersistenceUnavailable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("persistenceUnavailable"))
 	return _r
 }
 
+// ServiceSessionRequired wraps the corresponding Objective-C method.
 func (x *MonitoringEvent) ServiceSessionRequired() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("serviceSessionRequired"))
 	return _r
 }
 
+// AuthorizationRequestInProgress wraps the corresponding Objective-C method.
 func (x *MonitoringEvent) AuthorizationRequestInProgress() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationRequestInProgress"))
 	return _r

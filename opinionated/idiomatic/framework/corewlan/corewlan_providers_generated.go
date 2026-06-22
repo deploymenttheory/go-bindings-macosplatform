@@ -11,9 +11,11 @@ import (
 // ConfigurationProvider is accepted wherever a CWConfiguration (or one of its subclasses) is expected.
 type ConfigurationProvider interface {
 	objref.Object
+	isConfiguration()
 }
 
 // NetworkProfileProvider is accepted wherever a CWNetworkProfile (or one of its subclasses) is expected.
 type NetworkProfileProvider interface {
 	objref.Object
+	isNetworkProfile()
 }

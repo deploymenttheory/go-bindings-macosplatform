@@ -6,15 +6,16 @@ package photos
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A displayable representation of a Live Photo—a picture that includes motion and sound from the moments just before and after its capture.
-//
 // LivePhoto is an idiomatic wrapper over the Objective-C class PHLivePhoto.
+//
+// A displayable representation of a Live Photo—a picture that includes motion and sound from the moments just before and after its capture.
 type LivePhoto struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func LivePhotoFromID(id objc.ID) *LivePhoto {
 	if id == 0 {
 		return nil
 	}
-	x := &LivePhoto{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LivePhoto{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func livePhotoAdopt(id objc.ID) *LivePhoto {
 	if id == 0 {
 		return nil
 	}
-	x := &LivePhoto{Handle: objref.Wrap(id)}
+	x := &LivePhoto{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +61,28 @@ func (x *LivePhoto) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LivePhoto) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLivePhoto creates a new LivePhoto.
 func NewLivePhoto() *LivePhoto {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHLivePhoto")), objc.RegisterName("new"))
 	return livePhotoAdopt(_id)
 }
 
+// Size the dimensions of the live photo measured in pixels.
+func (x *LivePhoto) Size() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("size"))
+	return _r
+}
+
 // LivePhotoable is the interface implemented by [LivePhoto], for mocking and DI.
 type LivePhotoable interface {
 	obj.Object
+	Size() corefoundation.CGSize
 }
 
 var _ LivePhotoable = (*LivePhoto)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing the call stack for an exception.
-//
 // CallStackTree is an idiomatic wrapper over the Objective-C class MXCallStackTree.
+//
+// An object representing the call stack for an exception.
 type CallStackTree struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CallStackTreeFromID(id objc.ID) *CallStackTree {
 	if id == 0 {
 		return nil
 	}
-	x := &CallStackTree{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CallStackTree{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func callStackTreeAdopt(id objc.ID) *CallStackTree {
 	if id == 0 {
 		return nil
 	}
-	x := &CallStackTree{Handle: objref.Wrap(id)}
+	x := &CallStackTree{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *CallStackTree) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CallStackTree) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCallStackTree creates a new CallStackTree.
 func NewCallStackTree() *CallStackTree {
 	_id := objc.Send[objc.ID](objc.ID(_class("MXCallStackTree")), objc.RegisterName("new"))
 	return callStackTreeAdopt(_id)
 }
 
-// Returns the contents of the stack tree in JSON format.
+// JSONRepresentation returns the contents of the stack tree in JSON format.
 func (x *CallStackTree) JSONRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSONRepresentation"))
 	return obj.Wrap(_r)

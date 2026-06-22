@@ -23,7 +23,8 @@ func ISyncManagerFromID(id objc.ID) *ISyncManager {
 	if id == 0 {
 		return nil
 	}
-	x := &ISyncManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ISyncManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func iSyncManagerAdopt(id objc.ID) *ISyncManager {
 	if id == 0 {
 		return nil
 	}
-	x := &ISyncManager{Handle: objref.Wrap(id)}
+	x := &ISyncManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,57 +58,74 @@ func (x *ISyncManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ISyncManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewISyncManager creates a new ISyncManager.
 func NewISyncManager() *ISyncManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("ISyncManager")), objc.RegisterName("new"))
 	return iSyncManagerAdopt(_id)
 }
 
+// IsEnabled wraps the corresponding Objective-C method.
 func (x *ISyncManager) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r
 }
 
+// ClientWithIdentifier wraps the corresponding Objective-C method.
 func (x *ISyncManager) ClientWithIdentifier(clientId string) *ISyncClient {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientWithIdentifier:"), purego.NSString(clientId))
 	return ISyncClientFromID(_r)
 }
 
+// RegisterClientWithIdentifierDescriptionFilePath wraps the corresponding Objective-C method.
 func (x *ISyncManager) RegisterClientWithIdentifierDescriptionFilePath(clientId string, descriptionFilePath string) *ISyncClient {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerClientWithIdentifier:descriptionFilePath:"), purego.NSString(clientId), purego.NSString(descriptionFilePath))
 	return ISyncClientFromID(_r)
 }
 
+// UnregisterClient wraps the corresponding Objective-C method.
 func (x *ISyncManager) UnregisterClient(client *ISyncClient) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unregisterClient:"), objref.IDOf(client))
 }
 
+// RegisterSchemaWithBundlePath wraps the corresponding Objective-C method.
 func (x *ISyncManager) RegisterSchemaWithBundlePath(bundlePath string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("registerSchemaWithBundlePath:"), purego.NSString(bundlePath))
 	return _r
 }
 
+// UnregisterSchemaWithName wraps the corresponding Objective-C method.
 func (x *ISyncManager) UnregisterSchemaWithName(schemaName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unregisterSchemaWithName:"), purego.NSString(schemaName))
 }
 
+// ClientWithIdentifierNeedsSyncing wraps the corresponding Objective-C method.
 func (x *ISyncManager) ClientWithIdentifierNeedsSyncing(clientId string, flag bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientWithIdentifier:needsSyncing:"), purego.NSString(clientId), flag)
 }
 
+// SnapshotOfRecordsInTruthWithEntityNamesUsingIdentifiersForClient wraps the corresponding Objective-C method.
 func (x *ISyncManager) SnapshotOfRecordsInTruthWithEntityNamesUsingIdentifiersForClient(entityNames obj.Object, client *ISyncClient) *ISyncRecordSnapshot {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotOfRecordsInTruthWithEntityNames:usingIdentifiersForClient:"), objref.IDOf(entityNames), objref.IDOf(client))
 	return ISyncRecordSnapshotFromID(_r)
 }
 
+// AddRequestMode wraps the corresponding Objective-C method.
 func (x *ISyncManager) AddRequestMode(mode string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRequestMode:"), purego.NSString(mode))
 }
 
+// RemoveRequestMode wraps the corresponding Objective-C method.
 func (x *ISyncManager) RemoveRequestMode(mode string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeRequestMode:"), purego.NSString(mode))
 }
 
+// RequestModes wraps the corresponding Objective-C method.
 func (x *ISyncManager) RequestModes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestModes"))
 	return obj.Wrap(_r)

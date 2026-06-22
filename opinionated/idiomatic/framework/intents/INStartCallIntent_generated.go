@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request to start an audio or video call with one or more users.
-//
 // StartCallIntent is an idiomatic wrapper over the Objective-C class INStartCallIntent.
+//
+// It embeds [Intent], promoting that type's methods.
+//
+// A request to start an audio or video call with one or more users.
 type StartCallIntent struct {
-	objref.Handle
+	Intent
 }
 
 // StartCallIntentFromID adopts an existing Objective-C object as a StartCallIntent
@@ -25,7 +26,8 @@ func StartCallIntentFromID(id objc.ID) *StartCallIntent {
 	if id == 0 {
 		return nil
 	}
-	x := &StartCallIntent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StartCallIntent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,75 +40,64 @@ func startCallIntentAdopt(id objc.ID) *StartCallIntent {
 	if id == 0 {
 		return nil
 	}
-	x := &StartCallIntent{Handle: objref.Wrap(id)}
+	x := &StartCallIntent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *StartCallIntent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StartCallIntent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StartCallIntent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a start call intent object with the specified parameters.
-//
-// NewStartCallIntentWithCallRecordFilterCallRecordToCallBackAudioRouteDestinationTypeContactsCallCapability creates a new StartCallIntent.
+// NewStartCallIntentWithCallRecordFilterCallRecordToCallBackAudioRouteDestinationTypeContactsCallCapability creates a start call intent object with the specified parameters.
 func NewStartCallIntentWithCallRecordFilterCallRecordToCallBackAudioRouteDestinationTypeContactsCallCapability(callRecordFilter *CallRecordFilter, callRecordToCallBack *CallRecord, audioRoute CallAudioRoute, destinationType CallDestinationType, contacts []*Person, callCapability CallCapability) *StartCallIntent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INStartCallIntent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCallRecordFilter:callRecordToCallBack:audioRoute:destinationType:contacts:callCapability:"), objref.IDOf(callRecordFilter), objref.IDOf(callRecordToCallBack), audioRoute, destinationType, purego.SliceToNSArray(contacts, func(_v *Person) objc.ID { return objref.IDOf(_v) }), callCapability)
 	return startCallIntentAdopt(_id)
 }
 
-// The intent’s display name.
-//
-// WithSuggestedInvocationPhrase sets suggestedInvocationPhrase and returns the receiver so calls can be chained.
+// WithSuggestedInvocationPhrase the intent’s display name.
 func (x *StartCallIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *StartCallIntent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
 	return x
 }
 
-// WithDonationMetadata sets donationMetadata and returns the receiver so calls can be chained.
+// WithDonationMetadata sets the property and returns the receiver so calls can be chained.
 func (x *StartCallIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *StartCallIntent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return x
 }
 
+// CallRecordFilter wraps the corresponding Objective-C method.
 func (x *StartCallIntent) CallRecordFilter() *CallRecordFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callRecordFilter"))
 	return CallRecordFilterFromID(_r)
 }
 
+// CallRecordToCallBack wraps the corresponding Objective-C method.
 func (x *StartCallIntent) CallRecordToCallBack() *CallRecord {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callRecordToCallBack"))
 	return CallRecordFromID(_r)
 }
 
+// AudioRoute wraps the corresponding Objective-C method.
 func (x *StartCallIntent) AudioRoute() CallAudioRoute {
 	_r := objc.Send[CallAudioRoute](objref.IDOf(x), objc.RegisterName("audioRoute"))
 	return _r
 }
 
+// DestinationType wraps the corresponding Objective-C method.
 func (x *StartCallIntent) DestinationType() CallDestinationType {
 	_r := objc.Send[CallDestinationType](objref.IDOf(x), objc.RegisterName("destinationType"))
 	return _r
 }
 
+// Contacts wraps the corresponding Objective-C method.
+//
 // Contacts returns the collection as a Go slice.
 func (x *StartCallIntent) Contacts() []*Person {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contacts"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
+// CallCapability wraps the corresponding Objective-C method.
 func (x *StartCallIntent) CallCapability() CallCapability {
 	_r := objc.Send[CallCapability](objref.IDOf(x), objc.RegisterName("callCapability"))
 	return _r
@@ -126,3 +117,5 @@ type StartCallIntentable interface {
 }
 
 var _ StartCallIntentable = (*StartCallIntent)(nil)
+
+var _ IntentProvider = (*StartCallIntent)(nil)

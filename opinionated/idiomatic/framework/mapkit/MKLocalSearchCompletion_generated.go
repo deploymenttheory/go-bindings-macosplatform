@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A fully formed string that completes a partial string.
-//
 // LocalSearchCompletion is an idiomatic wrapper over the Objective-C class MKLocalSearchCompletion.
+//
+// A fully formed string that completes a partial string.
 type LocalSearchCompletion struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LocalSearchCompletionFromID(id objc.ID) *LocalSearchCompletion {
 	if id == 0 {
 		return nil
 	}
-	x := &LocalSearchCompletion{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LocalSearchCompletion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func localSearchCompletionAdopt(id objc.ID) *LocalSearchCompletion {
 	if id == 0 {
 		return nil
 	}
-	x := &LocalSearchCompletion{Handle: objref.Wrap(id)}
+	x := &LocalSearchCompletion{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *LocalSearchCompletion) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LocalSearchCompletion) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLocalSearchCompletion creates a new LocalSearchCompletion.
 func NewLocalSearchCompletion() *LocalSearchCompletion {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKLocalSearchCompletion")), objc.RegisterName("new"))
 	return localSearchCompletionAdopt(_id)
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *LocalSearchCompletion) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -72,12 +81,15 @@ func (x *LocalSearchCompletion) Title() string {
 	return purego.GoString(_r)
 }
 
+// TitleHighlightRanges wraps the corresponding Objective-C method.
+//
 // TitleHighlightRanges returns the collection as a Go slice.
 func (x *LocalSearchCompletion) TitleHighlightRanges() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("titleHighlightRanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// Subtitle wraps the corresponding Objective-C method.
 func (x *LocalSearchCompletion) Subtitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitle"))
 	if _r == 0 {
@@ -86,6 +98,8 @@ func (x *LocalSearchCompletion) Subtitle() string {
 	return purego.GoString(_r)
 }
 
+// SubtitleHighlightRanges wraps the corresponding Objective-C method.
+//
 // SubtitleHighlightRanges returns the collection as a Go slice.
 func (x *LocalSearchCompletion) SubtitleHighlightRanges() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitleHighlightRanges"))

@@ -3,4 +3,12 @@
 //go:build darwin
 
 // Package classkit provides a fluent Go API over the macOS ClassKit framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - ActivityItem: [BinaryItem], [QuantityItem], [ScoreItem]
+//   - Object: [Activity], [ActivityItem], [Context], [ProgressReportingCapability]
 package classkit

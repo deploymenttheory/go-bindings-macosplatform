@@ -23,7 +23,8 @@ func SystemExtensionInfoFromID(id objc.ID) *SystemExtensionInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &SystemExtensionInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SystemExtensionInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func systemExtensionInfoAdopt(id objc.ID) *SystemExtensionInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &SystemExtensionInfo{Handle: objref.Wrap(id)}
+	x := &SystemExtensionInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,13 +58,19 @@ func (x *SystemExtensionInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SystemExtensionInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSystemExtensionInfo creates a new SystemExtensionInfo.
 func NewSystemExtensionInfo() *SystemExtensionInfo {
 	_id := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionInfo")), objc.RegisterName("new"))
 	return systemExtensionInfoAdopt(_id)
 }
 
-// The bundle identifier of the extension (CFBundleIdentifier)
+// BundleIdentifier the bundle identifier of the extension (CFBundleIdentifier)
 func (x *SystemExtensionInfo) BundleIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {
@@ -71,7 +79,7 @@ func (x *SystemExtensionInfo) BundleIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// The bundle version of the extension (CFBundleVersion)
+// BundleVersion the bundle version of the extension (CFBundleVersion)
 func (x *SystemExtensionInfo) BundleVersion() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleVersion"))
 	if _r == 0 {
@@ -80,7 +88,7 @@ func (x *SystemExtensionInfo) BundleVersion() string {
 	return purego.GoString(_r)
 }
 
-// The bundle short version string of the extension (CFBundleShortVersionString)
+// BundleShortVersion the bundle short version string of the extension (CFBundleShortVersionString)
 func (x *SystemExtensionInfo) BundleShortVersion() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleShortVersion"))
 	if _r == 0 {

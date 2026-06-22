@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that enables a file system module to pass log messages and completion notifications to clients.
-//
 // Task is an idiomatic wrapper over the Objective-C class FSTask.
+//
+// A class that enables a file system module to pass log messages and completion notifications to clients.
 type Task struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TaskFromID(id objc.ID) *Task {
 	if id == 0 {
 		return nil
 	}
-	x := &Task{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Task{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func taskAdopt(id objc.ID) *Task {
 	if id == 0 {
 		return nil
 	}
-	x := &Task{Handle: objref.Wrap(id)}
+	x := &Task{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *Task) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Task) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTask creates a new Task.
 func NewTask() *Task {
 	_id := objc.Send[objc.ID](objc.ID(_class("FSTask")), objc.RegisterName("new"))
 	return taskAdopt(_id)
 }
 
-// Logs the given string to the initiating client.
+// LogMessage logs the given string to the initiating client.
 func (x *Task) LogMessage(str string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logMessage:"), purego.NSString(str))
 }

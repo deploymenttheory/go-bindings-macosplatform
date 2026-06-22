@@ -6,17 +6,20 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that returns 0 for each pixel with a value greater than a specified threshold or the original value otherwise.
-//
 // ImageThresholdToZeroInverse is an idiomatic wrapper over the Objective-C class MPSImageThresholdToZeroInverse.
+//
+// It embeds [UnaryImageKernel], promoting that type's methods.
+//
+// A filter that returns 0 for each pixel with a value greater than a specified threshold or the original value otherwise.
 type ImageThresholdToZeroInverse struct {
-	objref.Handle
+	UnaryImageKernel
 }
 
 // ImageThresholdToZeroInverseFromID adopts an existing Objective-C object as a ImageThresholdToZeroInverse
@@ -25,7 +28,8 @@ func ImageThresholdToZeroInverseFromID(id objc.ID) *ImageThresholdToZeroInverse 
 	if id == 0 {
 		return nil
 	}
-	x := &ImageThresholdToZeroInverse{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageThresholdToZeroInverse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func imageThresholdToZeroInverseAdopt(id objc.ID) *ImageThresholdToZeroInverse {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageThresholdToZeroInverse{Handle: objref.Wrap(id)}
+	x := &ImageThresholdToZeroInverse{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ImageThresholdToZeroInverse) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageThresholdToZeroInverse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageThresholdToZeroInverse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewImageThresholdToZeroInverse creates a new ImageThresholdToZeroInverse.
@@ -64,15 +54,25 @@ func NewImageThresholdToZeroInverse() *ImageThresholdToZeroInverse {
 	return imageThresholdToZeroInverseAdopt(_id)
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
+func (x *ImageThresholdToZeroInverse) WithOffset(offset mpscore.MPSOffset) *ImageThresholdToZeroInverse {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (x *ImageThresholdToZeroInverse) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdToZeroInverse {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
+// WithLabel the string that identifies the kernel.
 func (x *ImageThresholdToZeroInverse) WithLabel(label string) *ImageThresholdToZeroInverse {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The threshold value used to init the threshold filter
+// ThresholdValue the threshold value used to init the threshold filter
 func (x *ImageThresholdToZeroInverse) ThresholdValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("thresholdValue"))
 	return _r
@@ -81,8 +81,14 @@ func (x *ImageThresholdToZeroInverse) ThresholdValue() float32 {
 // ImageThresholdToZeroInverseable is the interface implemented by [ImageThresholdToZeroInverse], for mocking and DI.
 type ImageThresholdToZeroInverseable interface {
 	obj.Object
+	WithOffset(offset mpscore.MPSOffset) *ImageThresholdToZeroInverse
+	WithClipRect(clipRect metal.MTLRegion) *ImageThresholdToZeroInverse
 	WithLabel(label string) *ImageThresholdToZeroInverse
 	ThresholdValue() float32
 }
 
 var _ ImageThresholdToZeroInverseable = (*ImageThresholdToZeroInverse)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageThresholdToZeroInverse)(nil)
+
+var _ KernelProvider = (*ImageThresholdToZeroInverse)(nil)

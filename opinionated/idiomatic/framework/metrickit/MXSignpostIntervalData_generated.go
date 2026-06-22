@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A data object representing the captured data for a custom metric.
-//
 // SignpostIntervalData is an idiomatic wrapper over the Objective-C class MXSignpostIntervalData.
+//
+// A data object representing the captured data for a custom metric.
 type SignpostIntervalData struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SignpostIntervalDataFromID(id objc.ID) *SignpostIntervalData {
 	if id == 0 {
 		return nil
 	}
-	x := &SignpostIntervalData{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SignpostIntervalData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func signpostIntervalDataAdopt(id objc.ID) *SignpostIntervalData {
 	if id == 0 {
 		return nil
 	}
-	x := &SignpostIntervalData{Handle: objref.Wrap(id)}
+	x := &SignpostIntervalData{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,43 @@ func (x *SignpostIntervalData) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SignpostIntervalData) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSignpostIntervalData creates a new SignpostIntervalData.
 func NewSignpostIntervalData() *SignpostIntervalData {
 	_id := objc.Send[objc.ID](objc.ID(_class("MXSignpostIntervalData")), objc.RegisterName("new"))
 	return signpostIntervalDataAdopt(_id)
 }
 
-// A histogram of signpost intervals durations associated with the given signposts with signpostName and signpostCategory.
+// HistogrammedSignpostDuration a histogram of signpost intervals durations associated with the given signposts with signpostName and signpostCategory.
 func (x *SignpostIntervalData) HistogrammedSignpostDuration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("histogrammedSignpostDuration"))
 	return obj.Wrap(_r)
 }
 
-// Cumulative CPU time aggregated over the MXSignpost intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
+// CumulativeCPUTime cumulative CPU time aggregated over the MXSignpost intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
 func (x *SignpostIntervalData) CumulativeCPUTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeCPUTime"))
 	return obj.Wrap(_r)
 }
 
-// Average value of memory snapshots taken at beginning and end of MXSignpost intervals This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
+// AverageMemory average value of memory snapshots taken at beginning and end of MXSignpost intervals This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
 func (x *SignpostIntervalData) AverageMemory() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("averageMemory"))
 	return obj.Wrap(_r)
 }
 
-// Cumulative logical writes aggregated over the MXSignpost intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
+// CumulativeLogicalWrites cumulative logical writes aggregated over the MXSignpost intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
 func (x *SignpostIntervalData) CumulativeLogicalWrites() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeLogicalWrites"))
 	return obj.Wrap(_r)
 }
 
-// Cumulative hitch time ratio aggregated over the MXSignpostAnimation intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
+// CumulativeHitchTimeRatio cumulative hitch time ratio aggregated over the MXSignpostAnimation intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
 func (x *SignpostIntervalData) CumulativeHitchTimeRatio() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeHitchTimeRatio"))
 	return obj.Wrap(_r)

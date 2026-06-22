@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An instance that represents a set of displays, apps, and windows that your app can capture.
-//
 // ShareableContent is an idiomatic wrapper over the Objective-C class SCShareableContent.
+//
+// An instance that represents a set of displays, apps, and windows that your app can capture.
 type ShareableContent struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ShareableContentFromID(id objc.ID) *ShareableContent {
 	if id == 0 {
 		return nil
 	}
-	x := &ShareableContent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ShareableContent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func shareableContentAdopt(id objc.ID) *ShareableContent {
 	if id == 0 {
 		return nil
 	}
-	x := &ShareableContent{Handle: objref.Wrap(id)}
+	x := &ShareableContent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *ShareableContent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ShareableContent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewShareableContent creates a new ShareableContent.
 func NewShareableContent() *ShareableContent {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCShareableContent")), objc.RegisterName("new"))
 	return shareableContentAdopt(_id)
 }
 
-// windows SCShareableContent property that contains all the sharable SCWindows
+// Windows windows SCShareableContent property that contains all the sharable SCWindows
 //
 // Windows returns the collection as a Go slice.
 func (x *ShareableContent) Windows() []*Window {
@@ -72,7 +80,7 @@ func (x *ShareableContent) Windows() []*Window {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Window { return WindowFromID(_id) })
 }
 
-// displays SCShareableContent property that contains all the sharable SCDisplays
+// Displays displays SCShareableContent property that contains all the sharable SCDisplays
 //
 // Displays returns the collection as a Go slice.
 func (x *ShareableContent) Displays() []*Display {
@@ -80,7 +88,7 @@ func (x *ShareableContent) Displays() []*Display {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Display { return DisplayFromID(_id) })
 }
 
-// applications SCShareableContent property that contains all the sharable SCRunningApplications
+// Applications applications SCShareableContent property that contains all the sharable SCRunningApplications
 //
 // Applications returns the collection as a Go slice.
 func (x *ShareableContent) Applications() []*RunningApplication {

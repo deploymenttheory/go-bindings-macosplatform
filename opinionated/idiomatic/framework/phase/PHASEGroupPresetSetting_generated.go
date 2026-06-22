@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Settings for group presets.
-//
 // GroupPresetSetting is an idiomatic wrapper over the Objective-C class PHASEGroupPresetSetting.
+//
+// Settings for group presets.
 type GroupPresetSetting struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func GroupPresetSettingFromID(id objc.ID) *GroupPresetSetting {
 	if id == 0 {
 		return nil
 	}
-	x := &GroupPresetSetting{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GroupPresetSetting{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func groupPresetSettingAdopt(id objc.ID) *GroupPresetSetting {
 	if id == 0 {
 		return nil
 	}
-	x := &GroupPresetSetting{Handle: objref.Wrap(id)}
+	x := &GroupPresetSetting{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,34 +60,38 @@ func (x *GroupPresetSetting) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a group preset setting.
-//
-// NewGroupPresetSettingWithGainRateGainCurveTypeRateCurveType creates a new GroupPresetSetting.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GroupPresetSetting) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewGroupPresetSettingWithGainRateGainCurveTypeRateCurveType creates a group preset setting.
 func NewGroupPresetSettingWithGainRateGainCurveTypeRateCurveType(gain float64, rate float64, gainCurveType CurveType, rateCurveType CurveType) *GroupPresetSetting {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEGroupPresetSetting")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGain:rate:gainCurveType:rateCurveType:"), gain, rate, gainCurveType, rateCurveType)
 	return groupPresetSettingAdopt(_id)
 }
 
-// Linear gain scalar.
+// Gain linear gain scalar.
 func (x *GroupPresetSetting) Gain() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("gain"))
 	return _r
 }
 
-// Linear rate scalar.
+// Rate linear rate scalar.
 func (x *GroupPresetSetting) Rate() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rate"))
 	return _r
 }
 
-// The type of curve to apply to the gain as the preset changes to this new setting.
+// GainCurveType the type of curve to apply to the gain as the preset changes to this new setting.
 func (x *GroupPresetSetting) GainCurveType() CurveType {
 	_r := objc.Send[CurveType](objref.IDOf(x), objc.RegisterName("gainCurveType"))
 	return _r
 }
 
-// The type of curve to apply to the rate as the preset changes to this new setting.
+// RateCurveType the type of curve to apply to the rate as the preset changes to this new setting.
 func (x *GroupPresetSetting) RateCurveType() CurveType {
 	_r := objc.Send[CurveType](objref.IDOf(x), objc.RegisterName("rateCurveType"))
 	return _r

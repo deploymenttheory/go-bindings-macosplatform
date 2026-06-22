@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for acceleration.
-//
 // UnitAcceleration is an idiomatic wrapper over the Objective-C class NSUnitAcceleration.
+//
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for acceleration.
 type UnitAcceleration struct {
-	objref.Handle
+	Dimension
 }
 
 // UnitAccelerationFromID adopts an existing Objective-C object as a UnitAcceleration
@@ -25,7 +26,8 @@ func UnitAccelerationFromID(id objc.ID) *UnitAcceleration {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitAcceleration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UnitAcceleration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func unitAccelerationAdopt(id objc.ID) *UnitAcceleration {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitAcceleration{Handle: objref.Wrap(id)}
+	x := &UnitAcceleration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UnitAcceleration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UnitAcceleration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UnitAcceleration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUnitAcceleration creates a new UnitAcceleration.
@@ -64,7 +52,7 @@ func NewUnitAcceleration() *UnitAcceleration {
 	return unitAccelerationAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UnitAcceleration) WithScriptingProperties(scriptingProperties obj.Object) *UnitAcceleration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
@@ -77,3 +65,7 @@ type UnitAccelerationable interface {
 }
 
 var _ UnitAccelerationable = (*UnitAcceleration)(nil)
+
+var _ DimensionProvider = (*UnitAcceleration)(nil)
+
+var _ UnitProvider = (*UnitAcceleration)(nil)

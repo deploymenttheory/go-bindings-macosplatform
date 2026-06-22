@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a gradient dilated max pooling filter.
-//
 // CNNDilatedPoolingMaxGradientNode is an idiomatic wrapper over the Objective-C class MPSCNNDilatedPoolingMaxGradientNode.
+//
+// It embeds [CNNPoolingGradientNode], promoting that type's methods.
+//
+// A representation of a gradient dilated max pooling filter.
 type CNNDilatedPoolingMaxGradientNode struct {
-	objref.Handle
+	CNNPoolingGradientNode
 }
 
 // CNNDilatedPoolingMaxGradientNodeFromID adopts an existing Objective-C object as a CNNDilatedPoolingMaxGradientNode
@@ -25,7 +26,8 @@ func CNNDilatedPoolingMaxGradientNodeFromID(id objc.ID) *CNNDilatedPoolingMaxGra
 	if id == 0 {
 		return nil
 	}
-	x := &CNNDilatedPoolingMaxGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNDilatedPoolingMaxGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,48 +40,32 @@ func cNNDilatedPoolingMaxGradientNodeAdopt(id objc.ID) *CNNDilatedPoolingMaxGrad
 	if id == 0 {
 		return nil
 	}
-	x := &CNNDilatedPoolingMaxGradientNode{Handle: objref.Wrap(id)}
+	x := &CNNDilatedPoolingMaxGradientNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNDilatedPoolingMaxGradientNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNDilatedPoolingMaxGradientNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNDilatedPoolingMaxGradientNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// make a pooling gradient node It would be much easier to use [inferencePoolingNode gradientNodeForSourceGradient:] instead.
-//
-// NewCNNDilatedPoolingMaxGradientNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY creates a new CNNDilatedPoolingMaxGradientNode.
+// NewCNNDilatedPoolingMaxGradientNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY make a pooling gradient node It would be much easier to use [inferencePoolingNode gradientNodeForSourceGradient:] instead.
 func NewCNNDilatedPoolingMaxGradientNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object, kernelWidth int, kernelHeight int, strideInPixelsX int, strideInPixelsY int, dilationRateX int, dilationRateY int) *CNNDilatedPoolingMaxGradientNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNDilatedPoolingMaxGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:dilationRateX:dilationRateY:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY, dilationRateX, dilationRateY)
 	return cNNDilatedPoolingMaxGradientNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNDilatedPoolingMaxGradientNode) WithLabel(label string) *CNNDilatedPoolingMaxGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// DilationRateX wraps the corresponding Objective-C method.
 func (x *CNNDilatedPoolingMaxGradientNode) DilationRateX() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateX"))
 	return _r
 }
 
+// DilationRateY wraps the corresponding Objective-C method.
 func (x *CNNDilatedPoolingMaxGradientNode) DilationRateY() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateY"))
 	return _r
@@ -94,3 +80,9 @@ type CNNDilatedPoolingMaxGradientNodeable interface {
 }
 
 var _ CNNDilatedPoolingMaxGradientNodeable = (*CNNDilatedPoolingMaxGradientNode)(nil)
+
+var _ CNNPoolingGradientNodeProvider = (*CNNDilatedPoolingMaxGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*CNNDilatedPoolingMaxGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNDilatedPoolingMaxGradientNode)(nil)

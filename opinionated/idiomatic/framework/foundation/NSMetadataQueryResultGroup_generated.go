@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The NSMetadataQueryResultGroup class represents a collection of grouped attribute results returned by an NSMetadataQuery object.
-//
 // MetadataQueryResultGroup is an idiomatic wrapper over the Objective-C class NSMetadataQueryResultGroup.
+//
+// The NSMetadataQueryResultGroup class represents a collection of grouped attribute results returned by an NSMetadataQuery object.
 type MetadataQueryResultGroup struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MetadataQueryResultGroupFromID(id objc.ID) *MetadataQueryResultGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &MetadataQueryResultGroup{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetadataQueryResultGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func metadataQueryResultGroupAdopt(id objc.ID) *MetadataQueryResultGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &MetadataQueryResultGroup{Handle: objref.Wrap(id)}
+	x := &MetadataQueryResultGroup{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +60,31 @@ func (x *MetadataQueryResultGroup) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetadataQueryResultGroup) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMetadataQueryResultGroup creates a new MetadataQueryResultGroup.
 func NewMetadataQueryResultGroup() *MetadataQueryResultGroup {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSMetadataQueryResultGroup")), objc.RegisterName("new"))
 	return metadataQueryResultGroupAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *MetadataQueryResultGroup) WithScriptingProperties(scriptingProperties obj.Object) *MetadataQueryResultGroup {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Returns the query result at a specific index.
+// ResultAtIndex returns the query result at a specific index.
 func (x *MetadataQueryResultGroup) ResultAtIndex(idx int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultAtIndex:"), idx)
 	return obj.Wrap(_r)
 }
 
+// Attribute wraps the corresponding Objective-C method.
 func (x *MetadataQueryResultGroup) Attribute() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attribute"))
 	if _r == 0 {
@@ -84,22 +93,27 @@ func (x *MetadataQueryResultGroup) Attribute() string {
 	return purego.GoString(_r)
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *MetadataQueryResultGroup) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
+// Subgroups wraps the corresponding Objective-C method.
+//
 // Subgroups returns the collection as a Go slice.
 func (x *MetadataQueryResultGroup) Subgroups() []*MetadataQueryResultGroup {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subgroups"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataQueryResultGroup { return MetadataQueryResultGroupFromID(_id) })
 }
 
+// ResultCount wraps the corresponding Objective-C method.
 func (x *MetadataQueryResultGroup) ResultCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resultCount"))
 	return _r
 }
 
+// Results wraps the corresponding Objective-C method.
 func (x *MetadataQueryResultGroup) Results() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("results"))
 	return obj.Wrap(_r)

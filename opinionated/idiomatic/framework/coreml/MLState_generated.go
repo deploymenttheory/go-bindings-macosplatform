@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Handle to the state buffers.
-//
 // State is an idiomatic wrapper over the Objective-C class MLState.
+//
+// Handle to the state buffers.
 type State struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func StateFromID(id objc.ID) *State {
 	if id == 0 {
 		return nil
 	}
-	x := &State{Handle: objref.Wrap(purego.Retain(id))}
+	x := &State{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func stateAdopt(id objc.ID) *State {
 	if id == 0 {
 		return nil
 	}
-	x := &State{Handle: objref.Wrap(id)}
+	x := &State{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,16 +61,22 @@ func (x *State) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *State) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewState creates a new State.
 func NewState() *State {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLState")), objc.RegisterName("new"))
 	return stateAdopt(_id)
 }
 
-// Gets a mutable view into a state buffer.
+// GetMultiArrayForStateNamedHandler gets a mutable view into a state buffer.
 //
 // GetMultiArrayForStateNamedHandler blocks until the operation completes or ctx is cancelled.
-func (x *State) GetMultiArrayForStateNamedHandler(ctx context.Context, stateName string) (*MultiArray, error) {
+func (x *State) GetMultiArrayForStateNamedHandler(ctx context.Context, stateName string) (result *MultiArray, err error) {
 	type _result struct {
 		val *MultiArray
 		err error

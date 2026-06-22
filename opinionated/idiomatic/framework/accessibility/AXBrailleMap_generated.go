@@ -6,15 +6,16 @@ package accessibility
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a two-dimensional braille display.
-//
 // BrailleMap is an idiomatic wrapper over the Objective-C class AXBrailleMap.
+//
+// A representation of a two-dimensional braille display.
 type BrailleMap struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func BrailleMapFromID(id objc.ID) *BrailleMap {
 	if id == 0 {
 		return nil
 	}
-	x := &BrailleMap{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BrailleMap{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func brailleMapAdopt(id objc.ID) *BrailleMap {
 	if id == 0 {
 		return nil
 	}
-	x := &BrailleMap{Handle: objref.Wrap(id)}
+	x := &BrailleMap{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +61,47 @@ func (x *BrailleMap) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BrailleMap) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBrailleMap creates a new BrailleMap.
 func NewBrailleMap() *BrailleMap {
 	_id := objc.Send[objc.ID](objc.ID(_class("AXBrailleMap")), objc.RegisterName("new"))
 	return brailleMapAdopt(_id)
 }
 
-// Converts the data from the image you specify into the braille map.
+// SetHeightAtPoint sets the height of an individual pin on the braille display.
+func (x *BrailleMap) SetHeightAtPoint(status float32, point corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:atPoint:"), status, point)
+}
+
+// HeightAtPoint retrieves the height of an individual pin on the braille display.
+func (x *BrailleMap) HeightAtPoint(point corefoundation.CGPoint) float32 {
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("heightAtPoint:"), point)
+	return _r
+}
+
+// PresentImage converts the data from the image you specify into the braille map.
 func (x *BrailleMap) PresentImage(image obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentImage:"), objref.IDOf(image))
+}
+
+// Dimensions wraps the corresponding Objective-C method.
+func (x *BrailleMap) Dimensions() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("dimensions"))
+	return _r
 }
 
 // BrailleMapable is the interface implemented by [BrailleMap], for mocking and DI.
 type BrailleMapable interface {
 	obj.Object
+	SetHeightAtPoint(status float32, point corefoundation.CGPoint)
+	HeightAtPoint(point corefoundation.CGPoint) float32
 	PresentImage(image obj.Object)
+	Dimensions() corefoundation.CGSize
 }
 
 var _ BrailleMapable = (*BrailleMap)(nil)

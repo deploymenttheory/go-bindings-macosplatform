@@ -6,15 +6,17 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NNReductionRowSumNode is an idiomatic wrapper over the Objective-C class MPSNNReductionRowSumNode.
+//
+// It embeds [NNUnaryReductionNode], promoting that type's methods.
 type NNReductionRowSumNode struct {
-	objref.Handle
+	NNUnaryReductionNode
 }
 
 // NNReductionRowSumNodeFromID adopts an existing Objective-C object as a NNReductionRowSumNode
@@ -23,7 +25,8 @@ func NNReductionRowSumNodeFromID(id objc.ID) *NNReductionRowSumNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNReductionRowSumNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNReductionRowSumNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +39,10 @@ func nNReductionRowSumNodeAdopt(id objc.ID) *NNReductionRowSumNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNReductionRowSumNode{Handle: objref.Wrap(id)}
+	x := &NNReductionRowSumNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NNReductionRowSumNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNReductionRowSumNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNReductionRowSumNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNNReductionRowSumNode creates a new NNReductionRowSumNode.
@@ -62,9 +51,13 @@ func NewNNReductionRowSumNode() *NNReductionRowSumNode {
 	return nNReductionRowSumNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithClipRectSource the clip rectangle to apply to the source image.
+func (x *NNReductionRowSumNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionRowSumNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return x
+}
+
+// WithLabel a string to help identify this object.
 func (x *NNReductionRowSumNode) WithLabel(label string) *NNReductionRowSumNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -73,7 +66,12 @@ func (x *NNReductionRowSumNode) WithLabel(label string) *NNReductionRowSumNode {
 // NNReductionRowSumNodeable is the interface implemented by [NNReductionRowSumNode], for mocking and DI.
 type NNReductionRowSumNodeable interface {
 	obj.Object
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionRowSumNode
 	WithLabel(label string) *NNReductionRowSumNode
 }
 
 var _ NNReductionRowSumNodeable = (*NNReductionRowSumNode)(nil)
+
+var _ NNUnaryReductionNodeProvider = (*NNReductionRowSumNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNReductionRowSumNode)(nil)

@@ -25,7 +25,8 @@ func HostControllerInterfaceFromID(id objc.ID) *HostControllerInterface {
 	if id == 0 {
 		return nil
 	}
-	x := &HostControllerInterface{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HostControllerInterface{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func hostControllerInterfaceAdopt(id objc.ID) *HostControllerInterface {
 	if id == 0 {
 		return nil
 	}
-	x := &HostControllerInterface{Handle: objref.Wrap(id)}
+	x := &HostControllerInterface{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,26 +60,31 @@ func (x *HostControllerInterface) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HostControllerInterface) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewHostControllerInterface creates a new HostControllerInterface.
 func NewHostControllerInterface() *HostControllerInterface {
 	_id := objc.Send[objc.ID](objc.ID(_class("IOUSBHostControllerInterface")), objc.RegisterName("new"))
 	return hostControllerInterfaceAdopt(_id)
 }
 
-// The interrupt moderation rate for sending interrupt messages to the kernel driver interruptRateHz will cause submitted interrupt messages to be batched together and submitted to the kernel at the specified rate.  A value ot 0 will deliver all interrupts to the kernel driver as soon as possible.
-//
-// WithInterruptRateHz sets interruptRateHz and returns the receiver so calls can be chained.
+// WithInterruptRateHz the interrupt moderation rate for sending interrupt messages to the kernel driver interruptRateHz will cause submitted interrupt messages to be batched together and submitted to the kernel at the specified rate.  A value ot 0 will deliver all interrupts to the kernel driver as soon as possible.
 func (x *HostControllerInterface) WithInterruptRateHz(interruptRateHz int) *HostControllerInterface {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterruptRateHz:"), interruptRateHz)
 	return x
 }
 
-// Removes underlying allocations of the IOUSBHostControllerInterface object along with user client When the IOUSBHostControllerInterface is no longer needed, destroy must be called. This will destroy the connection with the user client and de-register interest on the service. If the object is freed, destroy will be called automatically. Calling destroy multiple times has no effect.
+// Destroy removes underlying allocations of the IOUSBHostControllerInterface object along with user client When the IOUSBHostControllerInterface is no longer needed, destroy must be called. This will destroy the connection with the user client and de-register interest on the service. If the object is freed, destroy will be called automatically. Calling destroy multiple times has no effect.
 func (x *HostControllerInterface) Destroy() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destroy"))
 }
 
-func (x *HostControllerInterface) GetPortStateMachineForPortError(port int) (*HostCIPortStateMachine, error) {
+// GetPortStateMachineForPortError wraps the corresponding Objective-C method.
+func (x *HostControllerInterface) GetPortStateMachineForPortError(port int) (result *HostCIPortStateMachine, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getPortStateMachineForPort:error:"), port, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -86,28 +93,30 @@ func (x *HostControllerInterface) GetPortStateMachineForPortError(port int) (*Ho
 	return HostCIPortStateMachineFromID(_r), nil
 }
 
-// The dispatch queue for asynchronous operations.
+// Queue the dispatch queue for asynchronous operations.
 func (x *HostControllerInterface) Queue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queue"))
 	return obj.Wrap(_r)
 }
 
-// The interrupt moderation rate for sending interrupt messages to the kernel driver interruptRateHz will cause submitted interrupt messages to be batched together and submitted to the kernel at the specified rate.  A value ot 0 will deliver all interrupts to the kernel driver as soon as possible.
+// InterruptRateHz the interrupt moderation rate for sending interrupt messages to the kernel driver interruptRateHz will cause submitted interrupt messages to be batched together and submitted to the kernel at the specified rate.  A value ot 0 will deliver all interrupts to the kernel driver as soon as possible.
 func (x *HostControllerInterface) InterruptRateHz() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("interruptRateHz"))
 	return _r
 }
 
+// SetInterruptRateHz wraps the corresponding Objective-C method.
 func (x *HostControllerInterface) SetInterruptRateHz(interruptRateHz int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterruptRateHz:"), interruptRateHz)
 }
 
+// ControllerStateMachine wraps the corresponding Objective-C method.
 func (x *HostControllerInterface) ControllerStateMachine() *HostCIControllerStateMachine {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controllerStateMachine"))
 	return HostCIControllerStateMachineFromID(_r)
 }
 
-// A UUID used to identify the host controller interface in this process and the kernel
+// Uuid a UUID used to identify the host controller interface in this process and the kernel
 func (x *HostControllerInterface) Uuid() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uuid"))
 	return obj.Wrap(_r)
@@ -118,7 +127,7 @@ type HostControllerInterfaceable interface {
 	obj.Object
 	WithInterruptRateHz(interruptRateHz int) *HostControllerInterface
 	Destroy()
-	GetPortStateMachineForPortError(port int) (*HostCIPortStateMachine, error)
+	GetPortStateMachineForPortError(port int) (result *HostCIPortStateMachine, err error)
 	Queue() obj.Object
 	InterruptRateHz() int
 	SetInterruptRateHz(interruptRateHz int)

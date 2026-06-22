@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Node representing a
-//
 // NNGramMatrixCalculationNode is an idiomatic wrapper over the Objective-C class MPSNNGramMatrixCalculationNode.
+//
+// It embeds [NNFilterNode], promoting that type's methods.
+//
+// Node representing a
 type NNGramMatrixCalculationNode struct {
-	objref.Handle
+	NNFilterNode
 }
 
 // NNGramMatrixCalculationNodeFromID adopts an existing Objective-C object as a NNGramMatrixCalculationNode
@@ -25,7 +26,8 @@ func NNGramMatrixCalculationNodeFromID(id objc.ID) *NNGramMatrixCalculationNode 
 	if id == 0 {
 		return nil
 	}
-	x := &NNGramMatrixCalculationNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNGramMatrixCalculationNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,53 +40,33 @@ func nNGramMatrixCalculationNodeAdopt(id objc.ID) *NNGramMatrixCalculationNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNGramMatrixCalculationNode{Handle: objref.Wrap(id)}
+	x := &NNGramMatrixCalculationNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NNGramMatrixCalculationNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNGramMatrixCalculationNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNGramMatrixCalculationNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Init a node representing a MPSNNGramMatrixCalculationNode kernel.
-//
-// NewNNGramMatrixCalculationNodeWithSource creates a new NNGramMatrixCalculationNode.
+// NewNNGramMatrixCalculationNodeWithSource init a node representing a MPSNNGramMatrixCalculationNode kernel.
 func NewNNGramMatrixCalculationNodeWithSource(sourceNode *NNImageNode) *NNGramMatrixCalculationNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNGramMatrixCalculationNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return nNGramMatrixCalculationNodeAdopt(_id)
 }
 
-// Init a node representing a MPSNNGramMatrixCalculationNode kernel.
-//
-// NewNNGramMatrixCalculationNodeWithSourceAlpha creates a new NNGramMatrixCalculationNode.
+// NewNNGramMatrixCalculationNodeWithSourceAlpha init a node representing a MPSNNGramMatrixCalculationNode kernel.
 func NewNNGramMatrixCalculationNodeWithSourceAlpha(sourceNode *NNImageNode, alpha float32) *NNGramMatrixCalculationNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNGramMatrixCalculationNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:alpha:"), objref.IDOf(sourceNode), alpha)
 	return nNGramMatrixCalculationNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *NNGramMatrixCalculationNode) WithLabel(label string) *NNGramMatrixCalculationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Scaling factor for the output. Default: 1.0f.
+// Alpha scaling factor for the output. Default: 1.0f.
 func (x *NNGramMatrixCalculationNode) Alpha() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
 	return _r
@@ -98,3 +80,5 @@ type NNGramMatrixCalculationNodeable interface {
 }
 
 var _ NNGramMatrixCalculationNodeable = (*NNGramMatrixCalculationNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNGramMatrixCalculationNode)(nil)

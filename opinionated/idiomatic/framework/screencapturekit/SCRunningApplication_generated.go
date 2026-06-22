@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An instance that represents an app running on a device.
-//
 // RunningApplication is an idiomatic wrapper over the Objective-C class SCRunningApplication.
+//
+// An instance that represents an app running on a device.
 type RunningApplication struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RunningApplicationFromID(id objc.ID) *RunningApplication {
 	if id == 0 {
 		return nil
 	}
-	x := &RunningApplication{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RunningApplication{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func runningApplicationAdopt(id objc.ID) *RunningApplication {
 	if id == 0 {
 		return nil
 	}
-	x := &RunningApplication{Handle: objref.Wrap(id)}
+	x := &RunningApplication{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *RunningApplication) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RunningApplication) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRunningApplication creates a new RunningApplication.
 func NewRunningApplication() *RunningApplication {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCRunningApplication")), objc.RegisterName("new"))
 	return runningApplicationAdopt(_id)
 }
 
-// bundleIdentifier the bundleIdentifier for the SCRunningApplication
+// BundleIdentifier bundleIdentifier the bundleIdentifier for the SCRunningApplication
 func (x *RunningApplication) BundleIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {
@@ -73,7 +81,7 @@ func (x *RunningApplication) BundleIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// applicationName the application name for the SCRunningApplication
+// ApplicationName applicationName the application name for the SCRunningApplication
 func (x *RunningApplication) ApplicationName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationName"))
 	if _r == 0 {
@@ -82,7 +90,7 @@ func (x *RunningApplication) ApplicationName() string {
 	return purego.GoString(_r)
 }
 
-// processID the SCRunningApplication
+// ProcessID processID the SCRunningApplication
 func (x *RunningApplication) ProcessID() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("processID"))
 	return _r

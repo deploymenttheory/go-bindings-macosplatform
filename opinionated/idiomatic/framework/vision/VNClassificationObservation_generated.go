@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents classification information that an image-analysis request produces.
-//
 // ClassificationObservation is an idiomatic wrapper over the Objective-C class VNClassificationObservation.
+//
+// It embeds [Observation], promoting that type's methods.
+//
+// An object that represents classification information that an image-analysis request produces.
 type ClassificationObservation struct {
-	objref.Handle
+	Observation
 }
 
 // ClassificationObservationFromID adopts an existing Objective-C object as a ClassificationObservation
@@ -25,7 +26,8 @@ func ClassificationObservationFromID(id objc.ID) *ClassificationObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &ClassificationObservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ClassificationObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func classificationObservationAdopt(id objc.ID) *ClassificationObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &ClassificationObservation{Handle: objref.Wrap(id)}
+	x := &ClassificationObservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ClassificationObservation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ClassificationObservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ClassificationObservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewClassificationObservation creates a new ClassificationObservation.
@@ -64,6 +52,7 @@ func NewClassificationObservation() *ClassificationObservation {
 	return classificationObservationAdopt(_id)
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *ClassificationObservation) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -72,19 +61,19 @@ func (x *ClassificationObservation) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Determines whether the observation for a specific precision has a minimum recall value.
+// HasMinimumRecallForPrecision determines whether the observation for a specific precision has a minimum recall value.
 func (x *ClassificationObservation) HasMinimumRecallForPrecision(minimumRecall float32, precision float32) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasMinimumRecall:forPrecision:"), minimumRecall, precision)
 	return _r
 }
 
-// Determines whether the observation for a specific recall has a minimum precision value.
+// HasMinimumPrecisionForRecall determines whether the observation for a specific recall has a minimum precision value.
 func (x *ClassificationObservation) HasMinimumPrecisionForRecall(minimumPrecision float32, recall float32) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasMinimumPrecision:forRecall:"), minimumPrecision, recall)
 	return _r
 }
 
-// Determine whether or not precision/recall curves are available with the observation. If this property is YES, then all other precision/recall related methods in this addition can be called.
+// HasPrecisionRecallCurve determine whether or not precision/recall curves are available with the observation. If this property is YES, then all other precision/recall related methods in this addition can be called.
 func (x *ClassificationObservation) HasPrecisionRecallCurve() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasPrecisionRecallCurve"))
 	return _r
@@ -100,3 +89,5 @@ type ClassificationObservationable interface {
 }
 
 var _ ClassificationObservationable = (*ClassificationObservation)(nil)
+
+var _ ObservationProvider = (*ClassificationObservation)(nil)

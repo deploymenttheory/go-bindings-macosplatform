@@ -15,6 +15,8 @@ const (
 	AnimatedValueInterpolationLinear   AnimatedValueInterpolation = 1
 )
 
+// String returns the AnimatedValueInterpolation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AnimatedValueInterpolation) String() string {
 	switch e {
 	case AnimatedValueInterpolationConstant:
@@ -36,6 +38,8 @@ const (
 	CameraProjectionOrthographic CameraProjection = 1
 )
 
+// String returns the CameraProjection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CameraProjection) String() string {
 	switch e {
 	case CameraProjectionPerspective:
@@ -55,6 +59,8 @@ const (
 	DataPrecisionDouble    DataPrecision = 2
 )
 
+// String returns the DataPrecision constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DataPrecision) String() string {
 	switch e {
 	case DataPrecisionUndefined:
@@ -86,6 +92,8 @@ const (
 	GeometryTypeVariableTopology GeometryType = 5
 )
 
+// String returns the GeometryType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GeometryType) String() string {
 	switch e {
 	case GeometryTypePoints:
@@ -122,6 +130,8 @@ const (
 	IndexBitDepthUint32 IndexBitDepth = 32
 )
 
+// String returns the IndexBitDepth constant's name, or its numeric form when the
+// value is not a known constant.
 func (e IndexBitDepth) String() string {
 	switch e {
 	case IndexBitDepthInvalid:
@@ -167,6 +177,8 @@ const (
 	LightTypeEnvironment LightType = 11
 )
 
+// String returns the LightType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LightType) String() string {
 	switch e {
 	case LightTypeUnknown:
@@ -206,6 +218,8 @@ const (
 	MaterialFaceDoubleSided MaterialFace = 2
 )
 
+// String returns the MaterialFace constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MaterialFace) String() string {
 	switch e {
 	case MaterialFaceFront:
@@ -229,6 +243,8 @@ const (
 	MaterialMipMapFilterModeLinear MaterialMipMapFilterMode = 1
 )
 
+// String returns the MaterialMipMapFilterMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MaterialMipMapFilterMode) String() string {
 	switch e {
 	case MaterialMipMapFilterModeNearest:
@@ -267,6 +283,8 @@ const (
 	MaterialPropertyTypeBuffer   MaterialPropertyType = 10
 )
 
+// String returns the MaterialPropertyType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MaterialPropertyType) String() string {
 	switch e {
 	case MaterialPropertyTypeNone:
@@ -354,6 +372,8 @@ const (
 	MaterialSemanticUserDefined MaterialSemantic = 32769
 )
 
+// String returns the MaterialSemantic constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MaterialSemantic) String() string {
 	switch e {
 	case MaterialSemanticBaseColor:
@@ -423,6 +443,8 @@ const (
 	MaterialTextureFilterModeLinear MaterialTextureFilterMode = 1
 )
 
+// String returns the MaterialTextureFilterMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MaterialTextureFilterMode) String() string {
 	switch e {
 	case MaterialTextureFilterModeNearest:
@@ -446,6 +468,8 @@ const (
 	MaterialTextureWrapModeMirror MaterialTextureWrapMode = 2
 )
 
+// String returns the MaterialTextureWrapMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MaterialTextureWrapMode) String() string {
 	switch e {
 	case MaterialTextureWrapModeClamp:
@@ -470,6 +494,8 @@ const (
 	MeshBufferTypeCustom MeshBufferType = 3
 )
 
+// String returns the MeshBufferType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MeshBufferType) String() string {
 	switch e {
 	case MeshBufferTypeVertex:
@@ -493,6 +519,8 @@ const (
 	ProbePlacementIrradianceDistribution ProbePlacement = 1
 )
 
+// String returns the ProbePlacement constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ProbePlacement) String() string {
 	switch e {
 	case ProbePlacementUniformGrid:
@@ -531,6 +559,8 @@ const (
 	TextureChannelEncodingFloat32 TextureChannelEncoding = 260
 )
 
+// String returns the TextureChannelEncoding constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextureChannelEncoding) String() string {
 	switch e {
 	case TextureChannelEncodingUInt8:
@@ -563,6 +593,8 @@ const (
 	TransformOpRotationOrderZYX TransformOpRotationOrder = 6
 )
 
+// String returns the TransformOpRotationOrder constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TransformOpRotationOrder) String() string {
 	switch e {
 	case TransformOpRotationOrderXYZ:
@@ -716,6 +748,8 @@ const (
 	VertexFormatUInt1010102Normalized VertexFormat = 593924
 )
 
+// String returns the VertexFormat constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VertexFormat) String() string {
 	switch e {
 	case VertexFormatInvalid:

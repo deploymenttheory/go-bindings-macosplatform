@@ -20,6 +20,8 @@ const (
 	KMACaptionAppearanceDisplayTypeAlwaysOn CaptionAppearanceDisplayType = 2
 )
 
+// String returns the CaptionAppearanceDisplayType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptionAppearanceDisplayType) String() string {
 	switch e {
 	case KMACaptionAppearanceDisplayTypeForcedOnly:
@@ -43,6 +45,8 @@ const (
 	KMACaptionAppearanceDomainUser CaptionAppearanceDomain = 1
 )
 
+// String returns the CaptionAppearanceDomain constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptionAppearanceDomain) String() string {
 	switch e {
 	case KMACaptionAppearanceDomainDefault:

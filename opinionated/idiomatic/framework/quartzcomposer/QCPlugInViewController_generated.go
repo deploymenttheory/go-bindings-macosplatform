@@ -23,7 +23,8 @@ func PlugInViewControllerFromID(id objc.ID) *PlugInViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &PlugInViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlugInViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func plugInViewControllerAdopt(id objc.ID) *PlugInViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &PlugInViewController{Handle: objref.Wrap(id)}
+	x := &PlugInViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *PlugInViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlugInViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPlugInViewControllerWithPlugInViewNibName creates a new PlugInViewController.
 func NewPlugInViewControllerWithPlugInViewNibName(plugIn obj.Object, name string) *PlugInViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("QCPlugInViewController")), objc.RegisterName("alloc"))
@@ -63,6 +71,7 @@ func NewPlugInViewControllerWithPlugInViewNibName(plugIn obj.Object, name string
 	return plugInViewControllerAdopt(_id)
 }
 
+// PlugIn wraps the corresponding Objective-C method.
 func (x *PlugInViewController) PlugIn() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("plugIn"))
 	return obj.Wrap(_r)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A bar item that provides a stepper control for incrementing or decrementing a value.
-//
 // StepperTouchBarItem is an idiomatic wrapper over the Objective-C class NSStepperTouchBarItem.
+//
+// It embeds [TouchBarItem], promoting that type's methods.
+//
+// A bar item that provides a stepper control for incrementing or decrementing a value.
 type StepperTouchBarItem struct {
-	objref.Handle
+	TouchBarItem
 }
 
 // StepperTouchBarItemFromID adopts an existing Objective-C object as a StepperTouchBarItem
@@ -25,7 +26,8 @@ func StepperTouchBarItemFromID(id objc.ID) *StepperTouchBarItem {
 	if id == 0 {
 		return nil
 	}
-	x := &StepperTouchBarItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StepperTouchBarItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func stepperTouchBarItemAdopt(id objc.ID) *StepperTouchBarItem {
 	if id == 0 {
 		return nil
 	}
-	x := &StepperTouchBarItem{Handle: objref.Wrap(id)}
+	x := &StepperTouchBarItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *StepperTouchBarItem) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StepperTouchBarItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StepperTouchBarItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewStepperTouchBarItem creates a new StepperTouchBarItem.
@@ -64,112 +52,104 @@ func NewStepperTouchBarItem() *StepperTouchBarItem {
 	return stepperTouchBarItemAdopt(_id)
 }
 
-// The stepper’s maximum value.
-//
-// WithMaxValue sets maxValue and returns the receiver so calls can be chained.
+// WithMaxValue the stepper’s maximum value.
 func (x *StepperTouchBarItem) WithMaxValue(maxValue float64) *StepperTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxValue:"), maxValue)
 	return x
 }
 
-// The stepper’s minimum value.
-//
-// WithMinValue sets minValue and returns the receiver so calls can be chained.
+// WithMinValue the stepper’s minimum value.
 func (x *StepperTouchBarItem) WithMinValue(minValue float64) *StepperTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinValue:"), minValue)
 	return x
 }
 
-// The stepper’s increment value.
-//
-// WithIncrement sets increment and returns the receiver so calls can be chained.
+// WithIncrement the stepper’s increment value.
 func (x *StepperTouchBarItem) WithIncrement(increment float64) *StepperTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncrement:"), increment)
 	return x
 }
 
-// The current value of the stepper.
-//
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue the current value of the stepper.
 func (x *StepperTouchBarItem) WithValue(value float64) *StepperTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 	return x
 }
 
-// The target object that receives action messages from the stepper.
-//
-// WithTarget sets target and returns the receiver so calls can be chained.
+// WithTarget the target object that receives action messages from the stepper.
 func (x *StepperTouchBarItem) WithTarget(target obj.Object) *StepperTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// The localized string labeling this item during user customization.
-//
-// WithCustomizationLabel sets customizationLabel and returns the receiver so calls can be chained.
+// WithCustomizationLabel the localized string labeling this item during user customization.
 func (x *StepperTouchBarItem) WithCustomizationLabel(customizationLabel string) *StepperTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
 	return x
 }
 
-// Determines which items are shown in a bar when space is limited.
-//
-// WithVisibilityPriority sets visibilityPriority and returns the receiver so calls can be chained.
+// WithVisibilityPriority determines which items are shown in a bar when space is limited.
 func (x *StepperTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *StepperTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
 	return x
 }
 
-// The stepper's maximum value. The default is `59.0`.
+// MaxValue the stepper's maximum value. The default is `59.0`.
 func (x *StepperTouchBarItem) MaxValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxValue"))
 	return _r
 }
 
+// SetMaxValue wraps the corresponding Objective-C method.
 func (x *StepperTouchBarItem) SetMaxValue(maxValue float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxValue:"), maxValue)
 }
 
-// The stepper's minimum value. The default is `0.0`.
+// MinValue the stepper's minimum value. The default is `0.0`.
 func (x *StepperTouchBarItem) MinValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minValue"))
 	return _r
 }
 
+// SetMinValue wraps the corresponding Objective-C method.
 func (x *StepperTouchBarItem) SetMinValue(minValue float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinValue:"), minValue)
 }
 
-// The stepper's increment value. The default value is `1.0`.
+// Increment the stepper's increment value. The default value is `1.0`.
 func (x *StepperTouchBarItem) Increment() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("increment"))
 	return _r
 }
 
+// SetIncrement wraps the corresponding Objective-C method.
 func (x *StepperTouchBarItem) SetIncrement(increment float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncrement:"), increment)
 }
 
-// The current value of the stepper.
+// Value the current value of the stepper.
 func (x *StepperTouchBarItem) Value() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("value"))
 	return _r
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *StepperTouchBarItem) SetValue(value float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 }
 
-// The target object that receives action messages from the stepper.
+// Target the target object that receives action messages from the stepper.
 func (x *StepperTouchBarItem) Target() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
 	return obj.Wrap(_r)
 }
 
+// SetTarget wraps the corresponding Objective-C method.
 func (x *StepperTouchBarItem) SetTarget(target obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 }
 
+// SetCustomizationLabel wraps the corresponding Objective-C method.
 func (x *StepperTouchBarItem) SetCustomizationLabel(customizationLabel string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
 }
@@ -198,3 +178,5 @@ type StepperTouchBarItemable interface {
 }
 
 var _ StepperTouchBarItemable = (*StepperTouchBarItem)(nil)
+
+var _ TouchBarItemProvider = (*StepperTouchBarItem)(nil)

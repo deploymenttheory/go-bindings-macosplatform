@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // EnvironmentMechanismCompanion is an idiomatic wrapper over the Objective-C class LAEnvironmentMechanismCompanion.
+//
+// It embeds [EnvironmentMechanism], promoting that type's methods.
 type EnvironmentMechanismCompanion struct {
-	objref.Handle
+	EnvironmentMechanism
 }
 
 // EnvironmentMechanismCompanionFromID adopts an existing Objective-C object as a EnvironmentMechanismCompanion
@@ -23,7 +24,8 @@ func EnvironmentMechanismCompanionFromID(id objc.ID) *EnvironmentMechanismCompan
 	if id == 0 {
 		return nil
 	}
-	x := &EnvironmentMechanismCompanion{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EnvironmentMechanismCompanion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func environmentMechanismCompanionAdopt(id objc.ID) *EnvironmentMechanismCompani
 	if id == 0 {
 		return nil
 	}
-	x := &EnvironmentMechanismCompanion{Handle: objref.Wrap(id)}
+	x := &EnvironmentMechanismCompanion{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *EnvironmentMechanismCompanion) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EnvironmentMechanismCompanion) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EnvironmentMechanismCompanion) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewEnvironmentMechanismCompanion creates a new EnvironmentMechanismCompanion.
@@ -62,13 +50,13 @@ func NewEnvironmentMechanismCompanion() *EnvironmentMechanismCompanion {
 	return environmentMechanismCompanionAdopt(_id)
 }
 
-// Type of the companion.
+// Type type of the companion.
 func (x *EnvironmentMechanismCompanion) Type() CompanionType {
 	_r := objc.Send[CompanionType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
-// Hash of the current companion pairing as returned by If no companion are paired for this companion type,
+// StateHash hash of the current companion pairing as returned by If no companion are paired for this companion type,
 func (x *EnvironmentMechanismCompanion) StateHash() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateHash"))
 	return obj.Wrap(_r)
@@ -82,3 +70,5 @@ type EnvironmentMechanismCompanionable interface {
 }
 
 var _ EnvironmentMechanismCompanionable = (*EnvironmentMechanismCompanion)(nil)
+
+var _ EnvironmentMechanismProvider = (*EnvironmentMechanismCompanion)(nil)

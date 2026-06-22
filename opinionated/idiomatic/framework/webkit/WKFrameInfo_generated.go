@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains information about a frame on a webpage.
-//
 // WKFrameInfo is an idiomatic wrapper over the Objective-C class WKFrameInfo.
+//
+// An object that contains information about a frame on a webpage.
 type WKFrameInfo struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKFrameInfoFromID(id objc.ID) *WKFrameInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &WKFrameInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKFrameInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKFrameInfoAdopt(id objc.ID) *WKFrameInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &WKFrameInfo{Handle: objref.Wrap(id)}
+	x := &WKFrameInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,37 @@ func (x *WKFrameInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKFrameInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKFrameInfo creates a new WKFrameInfo.
 func NewWKFrameInfo() *WKFrameInfo {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKFrameInfo")), objc.RegisterName("new"))
 	return wKFrameInfoAdopt(_id)
 }
 
-// A Boolean value indicating whether the frame is the main frame or a subframe.
+// IsMainFrame a Boolean value indicating whether the frame is the main frame or a subframe.
 func (x *WKFrameInfo) IsMainFrame() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMainFrame"))
 	return _r
 }
 
-// The frame's current request.
+// Request the frame's current request.
 func (x *WKFrameInfo) Request() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("request"))
 	return obj.Wrap(_r)
 }
 
-// The frame's current security origin.
+// SecurityOrigin the frame's current security origin.
 func (x *WKFrameInfo) SecurityOrigin() *WKSecurityOrigin {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("securityOrigin"))
 	return WKSecurityOriginFromID(_r)
 }
 
-// The web view of the webpage that contains this frame.
+// WebView the web view of the webpage that contains this frame.
 func (x *WKFrameInfo) WebView() *WKWebView {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webView"))
 	return WKWebViewFromID(_r)

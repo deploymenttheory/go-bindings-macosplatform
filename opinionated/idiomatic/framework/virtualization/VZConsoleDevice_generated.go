@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents a console device in a VM.
-//
 // ConsoleDevice is an idiomatic wrapper over the Objective-C class VZConsoleDevice.
+//
+// ConsoleDevice is an abstract base — you do not construct it directly. Construct one of [VirtioConsoleDevice] and pass it where a ConsoleDevice is accepted.
+//
+// A class that represents a console device in a VM.
 type ConsoleDevice struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ConsoleDeviceFromID(id objc.ID) *ConsoleDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &ConsoleDevice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ConsoleDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func consoleDeviceAdopt(id objc.ID) *ConsoleDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &ConsoleDevice{Handle: objref.Wrap(id)}
+	x := &ConsoleDevice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *ConsoleDevice) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewConsoleDevice creates a new ConsoleDevice.
-func NewConsoleDevice() *ConsoleDevice {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZConsoleDevice")), objc.RegisterName("new"))
-	return consoleDeviceAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ConsoleDevice) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // ConsoleDeviceable is the interface implemented by [ConsoleDevice], for mocking and DI.
@@ -70,3 +74,10 @@ type ConsoleDeviceable interface {
 }
 
 var _ ConsoleDeviceable = (*ConsoleDevice)(nil)
+
+// isConsoleDevice marks ConsoleDevice — and, by embedding promotion, its
+// subclasses — as a member of the ConsoleDevice hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ConsoleDevice) isConsoleDevice() {}
+
+var _ ConsoleDeviceProvider = (*ConsoleDevice)(nil)

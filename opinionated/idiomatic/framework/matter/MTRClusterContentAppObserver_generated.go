@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Content App Observer This cluster provides an interface for sending targeted commands to an Observer of a Content App on a Video Player device such as a Streaming Media Player, Smart TV or Smart Screen. The cluster server for Content App Observer is implemented by an endpoint that communicates with a Content App, such as a Casting Video Client. The cluster client for Content App Observer is implemented by a Content App endpoint. A Content App is informed of the NodeId of an Observer when a binding is set on the Content App. The Content App can then send the ContentAppMessage to the Observer (server cluster), and the Observer responds with a ContentAppMessageResponse.
-//
 // MTRClusterContentAppObserver is an idiomatic wrapper over the Objective-C class MTRClusterContentAppObserver.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
+//
+// Cluster Content App Observer This cluster provides an interface for sending targeted commands to an Observer of a Content App on a Video Player device such as a Streaming Media Player, Smart TV or Smart Screen. The cluster server for Content App Observer is implemented by an endpoint that communicates with a Content App, such as a Casting Video Client. The cluster client for Content App Observer is implemented by a Content App endpoint. A Content App is informed of the NodeId of an Observer when a binding is set on the Content App. The Content App can then send the ContentAppMessage to the Observer (server cluster), and the Observer responds with a ContentAppMessageResponse.
 type MTRClusterContentAppObserver struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterContentAppObserverFromID adopts an existing Objective-C object as a MTRClusterContentAppObserver
@@ -27,7 +28,8 @@ func MTRClusterContentAppObserverFromID(id objc.ID) *MTRClusterContentAppObserve
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterContentAppObserver{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterContentAppObserver{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,37 +42,23 @@ func mTRClusterContentAppObserverAdopt(id objc.ID) *MTRClusterContentAppObserver
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterContentAppObserver{Handle: objref.Wrap(id)}
+	x := &MTRClusterContentAppObserver{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterContentAppObserver) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterContentAppObserver) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterContentAppObserver) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterContentAppObserverWithDeviceEndpointIDQueue creates a new MTRClusterContentAppObserver.
+// NewMTRClusterContentAppObserverWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterContentAppObserverWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterContentAppObserver {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterContentAppObserver")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterContentAppObserverAdopt(_id)
 }
 
+// ContentAppMessageWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // ContentAppMessageWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterContentAppObserver) ContentAppMessageWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRContentAppObserverClusterContentAppMessageParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRContentAppObserverClusterContentAppMessageResponseParams, error) {
+func (x *MTRClusterContentAppObserver) ContentAppMessageWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRContentAppObserverClusterContentAppMessageParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRContentAppObserverClusterContentAppMessageResponseParams, err error) {
 	type _result struct {
 		val *MTRContentAppObserverClusterContentAppMessageResponseParams
 		err error
@@ -92,26 +80,31 @@ func (x *MTRClusterContentAppObserver) ContentAppMessageWithParamsExpectedValues
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterContentAppObserver) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterContentAppObserver) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterContentAppObserver) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterContentAppObserver) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterContentAppObserver) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -129,3 +122,7 @@ type MTRClusterContentAppObserverable interface {
 }
 
 var _ MTRClusterContentAppObserverable = (*MTRClusterContentAppObserver)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterContentAppObserver)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterContentAppObserver)(nil)

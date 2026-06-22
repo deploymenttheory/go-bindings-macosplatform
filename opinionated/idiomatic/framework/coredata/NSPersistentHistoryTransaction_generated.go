@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of changes in the persistent history based on a context save or batch operation.
-//
 // PersistentHistoryTransaction is an idiomatic wrapper over the Objective-C class NSPersistentHistoryTransaction.
+//
+// A set of changes in the persistent history based on a context save or batch operation.
 type PersistentHistoryTransaction struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PersistentHistoryTransactionFromID(id objc.ID) *PersistentHistoryTransactio
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentHistoryTransaction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PersistentHistoryTransaction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func persistentHistoryTransactionAdopt(id objc.ID) *PersistentHistoryTransaction
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentHistoryTransaction{Handle: objref.Wrap(id)}
+	x := &PersistentHistoryTransaction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,34 +60,45 @@ func (x *PersistentHistoryTransaction) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PersistentHistoryTransaction) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPersistentHistoryTransaction creates a new PersistentHistoryTransaction.
 func NewPersistentHistoryTransaction() *PersistentHistoryTransaction {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryTransaction")), objc.RegisterName("new"))
 	return persistentHistoryTransactionAdopt(_id)
 }
 
-// Obtains a notification for use in merging the transaction’s changes into a managed object context.
+// ObjectIDNotification obtains a notification for use in merging the transaction’s changes into a managed object context.
 func (x *PersistentHistoryTransaction) ObjectIDNotification() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectIDNotification"))
 	return obj.Wrap(_r)
 }
 
+// Timestamp wraps the corresponding Objective-C method.
 func (x *PersistentHistoryTransaction) Timestamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timestamp"))
 	return obj.Wrap(_r)
 }
 
+// Changes wraps the corresponding Objective-C method.
+//
 // Changes returns the collection as a Go slice.
 func (x *PersistentHistoryTransaction) Changes() []*PersistentHistoryChange {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersistentHistoryChange { return PersistentHistoryChangeFromID(_id) })
 }
 
+// TransactionNumber wraps the corresponding Objective-C method.
 func (x *PersistentHistoryTransaction) TransactionNumber() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("transactionNumber"))
 	return _r
 }
 
+// StoreID wraps the corresponding Objective-C method.
 func (x *PersistentHistoryTransaction) StoreID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("storeID"))
 	if _r == 0 {
@@ -94,6 +107,7 @@ func (x *PersistentHistoryTransaction) StoreID() string {
 	return purego.GoString(_r)
 }
 
+// BundleID wraps the corresponding Objective-C method.
 func (x *PersistentHistoryTransaction) BundleID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleID"))
 	if _r == 0 {
@@ -102,6 +116,7 @@ func (x *PersistentHistoryTransaction) BundleID() string {
 	return purego.GoString(_r)
 }
 
+// ProcessID wraps the corresponding Objective-C method.
 func (x *PersistentHistoryTransaction) ProcessID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processID"))
 	if _r == 0 {
@@ -110,6 +125,7 @@ func (x *PersistentHistoryTransaction) ProcessID() string {
 	return purego.GoString(_r)
 }
 
+// ContextName wraps the corresponding Objective-C method.
 func (x *PersistentHistoryTransaction) ContextName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contextName"))
 	if _r == 0 {
@@ -118,6 +134,7 @@ func (x *PersistentHistoryTransaction) ContextName() string {
 	return purego.GoString(_r)
 }
 
+// Author wraps the corresponding Objective-C method.
 func (x *PersistentHistoryTransaction) Author() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("author"))
 	if _r == 0 {
@@ -126,6 +143,7 @@ func (x *PersistentHistoryTransaction) Author() string {
 	return purego.GoString(_r)
 }
 
+// Token wraps the corresponding Objective-C method.
 func (x *PersistentHistoryTransaction) Token() *PersistentHistoryToken {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("token"))
 	return PersistentHistoryTokenFromID(_r)

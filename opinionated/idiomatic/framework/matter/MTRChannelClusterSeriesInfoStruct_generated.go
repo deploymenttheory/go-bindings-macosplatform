@@ -23,7 +23,8 @@ func MTRChannelClusterSeriesInfoStructFromID(id objc.ID) *MTRChannelClusterSerie
 	if id == 0 {
 		return nil
 	}
-	x := &MTRChannelClusterSeriesInfoStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRChannelClusterSeriesInfoStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRChannelClusterSeriesInfoStructAdopt(id objc.ID) *MTRChannelClusterSeries
 	if id == 0 {
 		return nil
 	}
-	x := &MTRChannelClusterSeriesInfoStruct{Handle: objref.Wrap(id)}
+	x := &MTRChannelClusterSeriesInfoStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,24 +58,31 @@ func (x *MTRChannelClusterSeriesInfoStruct) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRChannelClusterSeriesInfoStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRChannelClusterSeriesInfoStruct creates a new MTRChannelClusterSeriesInfoStruct.
 func NewMTRChannelClusterSeriesInfoStruct() *MTRChannelClusterSeriesInfoStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRChannelClusterSeriesInfoStruct")), objc.RegisterName("new"))
 	return mTRChannelClusterSeriesInfoStructAdopt(_id)
 }
 
-// WithSeason sets season and returns the receiver so calls can be chained.
+// WithSeason sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterSeriesInfoStruct) WithSeason(season string) *MTRChannelClusterSeriesInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeason:"), purego.NSString(season))
 	return x
 }
 
-// WithEpisode sets episode and returns the receiver so calls can be chained.
+// WithEpisode sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterSeriesInfoStruct) WithEpisode(episode string) *MTRChannelClusterSeriesInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpisode:"), purego.NSString(episode))
 	return x
 }
 
+// Season wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterSeriesInfoStruct) Season() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("season"))
 	if _r == 0 {
@@ -82,10 +91,12 @@ func (x *MTRChannelClusterSeriesInfoStruct) Season() string {
 	return purego.GoString(_r)
 }
 
+// SetSeason wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterSeriesInfoStruct) SetSeason(season string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeason:"), purego.NSString(season))
 }
 
+// Episode wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterSeriesInfoStruct) Episode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("episode"))
 	if _r == 0 {
@@ -94,6 +105,7 @@ func (x *MTRChannelClusterSeriesInfoStruct) Episode() string {
 	return purego.GoString(_r)
 }
 
+// SetEpisode wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterSeriesInfoStruct) SetEpisode(episode string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpisode:"), purego.NSString(episode))
 }

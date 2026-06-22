@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A 3D point that includes an identifier to the point.
-//
 // RecognizedPoint3D is an idiomatic wrapper over the Objective-C class VNRecognizedPoint3D.
+//
+// RecognizedPoint3D is an abstract base — you do not construct it directly. Construct one of [HumanBodyRecognizedPoint3D] and pass it where a RecognizedPoint3D is accepted.
+//
+// A 3D point that includes an identifier to the point.
 type RecognizedPoint3D struct {
-	objref.Handle
+	Point3D
 }
 
 // RecognizedPoint3DFromID adopts an existing Objective-C object as a RecognizedPoint3D
@@ -25,7 +26,8 @@ func RecognizedPoint3DFromID(id objc.ID) *RecognizedPoint3D {
 	if id == 0 {
 		return nil
 	}
-	x := &RecognizedPoint3D{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RecognizedPoint3D{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,32 +40,13 @@ func recognizedPoint3DAdopt(id objc.ID) *RecognizedPoint3D {
 	if id == 0 {
 		return nil
 	}
-	x := &RecognizedPoint3D{Handle: objref.Wrap(id)}
+	x := &RecognizedPoint3D{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *RecognizedPoint3D) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RecognizedPoint3D) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RecognizedPoint3D) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewRecognizedPoint3D creates a new RecognizedPoint3D.
-func NewRecognizedPoint3D() *RecognizedPoint3D {
-	_id := objc.Send[objc.ID](objc.ID(_class("VNRecognizedPoint3D")), objc.RegisterName("new"))
-	return recognizedPoint3DAdopt(_id)
-}
-
+// Identifier wraps the corresponding Objective-C method.
 func (x *RecognizedPoint3D) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
@@ -76,3 +59,12 @@ type RecognizedPoint3Dable interface {
 }
 
 var _ RecognizedPoint3Dable = (*RecognizedPoint3D)(nil)
+
+// isRecognizedPoint3D marks RecognizedPoint3D — and, by embedding promotion, its
+// subclasses — as a member of the RecognizedPoint3D hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *RecognizedPoint3D) isRecognizedPoint3D() {}
+
+var _ RecognizedPoint3DProvider = (*RecognizedPoint3D)(nil)
+
+var _ Point3DProvider = (*RecognizedPoint3D)(nil)

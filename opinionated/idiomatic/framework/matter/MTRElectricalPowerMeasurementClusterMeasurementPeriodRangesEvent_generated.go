@@ -23,7 +23,8 @@ func MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventFromID(id o
 	if id == 0 {
 		return nil
 	}
-	x := &MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventAdopt(id ob
 	if id == 0 {
 		return nil
 	}
-	x := &MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent{Handle: objref.Wrap(id)}
+	x := &MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,17 +58,25 @@ func (x *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) IsKin
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent creates a new MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent.
 func NewMTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent() *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent")), objc.RegisterName("new"))
 	return mTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventAdopt(_id)
 }
 
+// Ranges wraps the corresponding Objective-C method.
 func (x *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) Ranges() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ranges"))
 	return obj.Wrap(_r)
 }
 
+// SetRanges wraps the corresponding Objective-C method.
 func (x *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) SetRanges(ranges obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRanges:"), objref.IDOf(ranges))
 }

@@ -152,25 +152,21 @@ func HKFHIRResourceTypeProcedure() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKFHIRResourceTypeProcedure")))
 }
 
-// The key path you use to create predicates that query by a dose event’s log status.
 // HKPredicateKeyPathStatus returns the string constant HKPredicateKeyPathStatus, for use as a dictionary key or argument.
 func HKPredicateKeyPathStatus() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathStatus")))
 }
 
-// The key path you use to create predicates that query by the dose event's medication log origin.
 // HKPredicateKeyPathLogOrigin returns the string constant HKPredicateKeyPathLogOrigin, for use as a dictionary key or argument.
 func HKPredicateKeyPathLogOrigin() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathLogOrigin")))
 }
 
-// The key path you use to create predicates that query by the dose event's scheduled date.
 // HKPredicateKeyPathScheduledDate returns the string constant HKPredicateKeyPathScheduledDate, for use as a dictionary key or argument.
 func HKPredicateKeyPathScheduledDate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathScheduledDate")))
 }
 
-// The key path you use to create predicates that query by the dose event's medication concept identifier.
 // HKPredicateKeyPathMedicationConceptIdentifier returns the string constant HKPredicateKeyPathMedicationConceptIdentifier, for use as a dictionary key or argument.
 func HKPredicateKeyPathMedicationConceptIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathMedicationConceptIdentifier")))
@@ -1276,19 +1272,16 @@ func HKVisionPrescriptionTypeIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKVisionPrescriptionTypeIdentifier")))
 }
 
-// A state of mind type that records the user's mental health
 // HKDataTypeIdentifierStateOfMind returns the string constant HKDataTypeIdentifierStateOfMind, for use as a dictionary key or argument.
 func HKDataTypeIdentifierStateOfMind() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKDataTypeIdentifierStateOfMind")))
 }
 
-// A medication dose event type that represents a single dose administration for a medication.
 // HKMedicationDoseEventTypeIdentifierMedicationDoseEvent returns the string constant HKMedicationDoseEventTypeIdentifierMedicationDoseEvent, for use as a dictionary key or argument.
 func HKMedicationDoseEventTypeIdentifierMedicationDoseEvent() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationDoseEventTypeIdentifierMedicationDoseEvent")))
 }
 
-// The user annotated medication type that represents a medication concept.
 // HKDataTypeIdentifierUserAnnotatedMedicationConcept returns the string constant HKDataTypeIdentifierUserAnnotatedMedicationConcept, for use as a dictionary key or argument.
 func HKDataTypeIdentifierUserAnnotatedMedicationConcept() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKDataTypeIdentifierUserAnnotatedMedicationConcept")))
@@ -1324,7 +1317,6 @@ func HKPredicateKeyPathCDACustodianName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathCDACustodianName")))
 }
 
-// This may be used with the validationError parameter of CDADocumentSampleWithData:startDate:endDate:device:metadata:validationError: to obtain a detailed description of the validation errors encountered when creating a CDA document.
 // HKDetailedCDAValidationErrorKey returns the string constant HKDetailedCDAValidationErrorKey, for use as a dictionary key or argument.
 func HKDetailedCDAValidationErrorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKDetailedCDAValidationErrorKey")))
@@ -1340,55 +1332,46 @@ func HKPredicateKeyPathClinicalRecordFHIRResourceType() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathClinicalRecordFHIRResourceType")))
 }
 
-// A type identifier for records of allergies or intolerances.
 // HKClinicalTypeIdentifierAllergyRecord returns the string constant HKClinicalTypeIdentifierAllergyRecord, for use as a dictionary key or argument.
 func HKClinicalTypeIdentifierAllergyRecord() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKClinicalTypeIdentifierAllergyRecord")))
 }
 
-// A type identifier for records that represent clinical notes.
 // HKClinicalTypeIdentifierClinicalNoteRecord returns the string constant HKClinicalTypeIdentifierClinicalNoteRecord, for use as a dictionary key or argument.
 func HKClinicalTypeIdentifierClinicalNoteRecord() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKClinicalTypeIdentifierClinicalNoteRecord")))
 }
 
-// A type identifier for records of a condition, problem, or diagnosis.
 // HKClinicalTypeIdentifierConditionRecord returns the string constant HKClinicalTypeIdentifierConditionRecord, for use as a dictionary key or argument.
 func HKClinicalTypeIdentifierConditionRecord() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKClinicalTypeIdentifierConditionRecord")))
 }
 
-// A type identifier for records of vaccine administration.
 // HKClinicalTypeIdentifierImmunizationRecord returns the string constant HKClinicalTypeIdentifierImmunizationRecord, for use as a dictionary key or argument.
 func HKClinicalTypeIdentifierImmunizationRecord() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKClinicalTypeIdentifierImmunizationRecord")))
 }
 
-// A type identifier for records of lab results.
 // HKClinicalTypeIdentifierLabResultRecord returns the string constant HKClinicalTypeIdentifierLabResultRecord, for use as a dictionary key or argument.
 func HKClinicalTypeIdentifierLabResultRecord() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKClinicalTypeIdentifierLabResultRecord")))
 }
 
-// A type identifier for records of medication prescription, intake, or administration.
 // HKClinicalTypeIdentifierMedicationRecord returns the string constant HKClinicalTypeIdentifierMedicationRecord, for use as a dictionary key or argument.
 func HKClinicalTypeIdentifierMedicationRecord() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKClinicalTypeIdentifierMedicationRecord")))
 }
 
-// A type identifier for records of clinical procedures.
 // HKClinicalTypeIdentifierProcedureRecord returns the string constant HKClinicalTypeIdentifierProcedureRecord, for use as a dictionary key or argument.
 func HKClinicalTypeIdentifierProcedureRecord() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKClinicalTypeIdentifierProcedureRecord")))
 }
 
-// A type identifier for records of vital signs.
 // HKClinicalTypeIdentifierVitalSignRecord returns the string constant HKClinicalTypeIdentifierVitalSignRecord, for use as a dictionary key or argument.
 func HKClinicalTypeIdentifierVitalSignRecord() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKClinicalTypeIdentifierVitalSignRecord")))
 }
 
-// A type identifier for records containing information about the user’s insurance coverage.
 // HKClinicalTypeIdentifierCoverageRecord returns the string constant HKClinicalTypeIdentifierCoverageRecord, for use as a dictionary key or argument.
 func HKClinicalTypeIdentifierCoverageRecord() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKClinicalTypeIdentifierCoverageRecord")))
@@ -1409,49 +1392,41 @@ func HKPredicateKeyPathSum() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathSum")))
 }
 
-// Used with predicateForObjectsWithDeviceProperty to specify a device name. The expected value type is an NSString.
 // HKDevicePropertyKeyName returns the string constant HKDevicePropertyKeyName, for use as a dictionary key or argument.
 func HKDevicePropertyKeyName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKDevicePropertyKeyName")))
 }
 
-// Used with predicateForObjectsWithDeviceProperty to specify a device manufacturer. The expected value type is an NSString.
 // HKDevicePropertyKeyManufacturer returns the string constant HKDevicePropertyKeyManufacturer, for use as a dictionary key or argument.
 func HKDevicePropertyKeyManufacturer() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKDevicePropertyKeyManufacturer")))
 }
 
-// Used with predicateForObjectsWithDeviceProperty to specify a device model. The expected value type is an NSString.
 // HKDevicePropertyKeyModel returns the string constant HKDevicePropertyKeyModel, for use as a dictionary key or argument.
 func HKDevicePropertyKeyModel() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKDevicePropertyKeyModel")))
 }
 
-// Used with predicateForObjectsWithDeviceProperty to specify a hardware version. The expected value type is an NSString.
 // HKDevicePropertyKeyHardwareVersion returns the string constant HKDevicePropertyKeyHardwareVersion, for use as a dictionary key or argument.
 func HKDevicePropertyKeyHardwareVersion() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKDevicePropertyKeyHardwareVersion")))
 }
 
-// Used with predicateForObjectsWithDeviceProperty to specify a firmware version. The expected value type is an NSString.
 // HKDevicePropertyKeyFirmwareVersion returns the string constant HKDevicePropertyKeyFirmwareVersion, for use as a dictionary key or argument.
 func HKDevicePropertyKeyFirmwareVersion() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKDevicePropertyKeyFirmwareVersion")))
 }
 
-// Used with predicateForObjectsWithDeviceProperty to specify a software version. The expected value type is an NSString.
 // HKDevicePropertyKeySoftwareVersion returns the string constant HKDevicePropertyKeySoftwareVersion, for use as a dictionary key or argument.
 func HKDevicePropertyKeySoftwareVersion() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKDevicePropertyKeySoftwareVersion")))
 }
 
-// Used with predicateForObjectsWithDeviceProperty to specify a local identifier. The expected value type is an NSString.
 // HKDevicePropertyKeyLocalIdentifier returns the string constant HKDevicePropertyKeyLocalIdentifier, for use as a dictionary key or argument.
 func HKDevicePropertyKeyLocalIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKDevicePropertyKeyLocalIdentifier")))
 }
 
-// Used with predicateForObjectsWithDeviceProperty to specify a UDI device identifier. The expected value type is an NSString.
 // HKDevicePropertyKeyUDIDeviceIdentifier returns the string constant HKDevicePropertyKeyUDIDeviceIdentifier, for use as a dictionary key or argument.
 func HKDevicePropertyKeyUDIDeviceIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKDevicePropertyKeyUDIDeviceIdentifier")))
@@ -1492,563 +1467,469 @@ func HKPredicateKeyPathMostRecentDuration() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathMostRecentDuration")))
 }
 
-// The "DSTU2" release: http://hl7.org/fhir/DSTU2/
 // HKFHIRReleaseDSTU2 returns the string constant HKFHIRReleaseDSTU2, for use as a dictionary key or argument.
 func HKFHIRReleaseDSTU2() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKFHIRReleaseDSTU2")))
 }
 
-// The "R4" release: http://hl7.org/fhir/R4/
 // HKFHIRReleaseR4 returns the string constant HKFHIRReleaseR4, for use as a dictionary key or argument.
 func HKFHIRReleaseR4() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("HKFHIRReleaseR4"))) }
 
-// An unknown release
 // HKFHIRReleaseUnknown returns the string constant HKFHIRReleaseUnknown, for use as a dictionary key or argument.
 func HKFHIRReleaseUnknown() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKFHIRReleaseUnknown")))
 }
 
-// The domain that represents medication concepts. Use with identifiers for medications, such as ibuprofen or insulin.
 // HKHealthConceptDomainMedication returns the string constant HKHealthConceptDomainMedication, for use as a dictionary key or argument.
 func HKHealthConceptDomainMedication() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKHealthConceptDomainMedication")))
 }
 
-// A notification posted every time the user updates their preferred units. Each HKHealthStore posts a HKUserPreferencesDidChangeNotification notification when the preferred unit for a HKQuantityType is changed by the user. To guarantee your listener will only receive a single notification when this occurs, it is necessary to provide an HKHealthStore instance for the object parameter of NSNotificationCenter's addObserver methods.
 // HKUserPreferencesDidChangeNotification returns the string constant HKUserPreferencesDidChangeNotification, for use as a dictionary key or argument.
 func HKUserPreferencesDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKUserPreferencesDidChangeNotification")))
 }
 
-// The medication comes in capsule form, such as a hard-shell capsule or softgel.
 // HKMedicationGeneralFormCapsule returns the string constant HKMedicationGeneralFormCapsule, for use as a dictionary key or argument.
 func HKMedicationGeneralFormCapsule() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormCapsule")))
 }
 
-// The medication is applied as a cream.
 // HKMedicationGeneralFormCream returns the string constant HKMedicationGeneralFormCream, for use as a dictionary key or argument.
 func HKMedicationGeneralFormCream() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormCream")))
 }
 
-// The medication is administered through a device, such as an infusion pump for controlled fluid delivery.
 // HKMedicationGeneralFormDevice returns the string constant HKMedicationGeneralFormDevice, for use as a dictionary key or argument.
 func HKMedicationGeneralFormDevice() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormDevice")))
 }
 
-// The medication is taken as drops, for example eye drops or ear drops.
 // HKMedicationGeneralFormDrops returns the string constant HKMedicationGeneralFormDrops, for use as a dictionary key or argument.
 func HKMedicationGeneralFormDrops() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormDrops")))
 }
 
-// The medication is applied as a foam.
 // HKMedicationGeneralFormFoam returns the string constant HKMedicationGeneralFormFoam, for use as a dictionary key or argument.
 func HKMedicationGeneralFormFoam() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormFoam")))
 }
 
-// The medication is applied as a gel.
 // HKMedicationGeneralFormGel returns the string constant HKMedicationGeneralFormGel, for use as a dictionary key or argument.
 func HKMedicationGeneralFormGel() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormGel")))
 }
 
-// The medication is delivered through an inhaler.
 // HKMedicationGeneralFormInhaler returns the string constant HKMedicationGeneralFormInhaler, for use as a dictionary key or argument.
 func HKMedicationGeneralFormInhaler() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormInhaler")))
 }
 
-// The medication is given as an injection.
 // HKMedicationGeneralFormInjection returns the string constant HKMedicationGeneralFormInjection, for use as a dictionary key or argument.
 func HKMedicationGeneralFormInjection() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormInjection")))
 }
 
-// The medication is taken as a liquid, such as a syrup.
 // HKMedicationGeneralFormLiquid returns the string constant HKMedicationGeneralFormLiquid, for use as a dictionary key or argument.
 func HKMedicationGeneralFormLiquid() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormLiquid")))
 }
 
-// The medication is applied as a lotion.
 // HKMedicationGeneralFormLotion returns the string constant HKMedicationGeneralFormLotion, for use as a dictionary key or argument.
 func HKMedicationGeneralFormLotion() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormLotion")))
 }
 
-// The medication is applied as an ointment.
 // HKMedicationGeneralFormOintment returns the string constant HKMedicationGeneralFormOintment, for use as a dictionary key or argument.
 func HKMedicationGeneralFormOintment() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormOintment")))
 }
 
-// The medication is applied as a patch worn on the skin.
 // HKMedicationGeneralFormPatch returns the string constant HKMedicationGeneralFormPatch, for use as a dictionary key or argument.
 func HKMedicationGeneralFormPatch() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormPatch")))
 }
 
-// The medication is taken as a powder.
 // HKMedicationGeneralFormPowder returns the string constant HKMedicationGeneralFormPowder, for use as a dictionary key or argument.
 func HKMedicationGeneralFormPowder() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormPowder")))
 }
 
-// The medication is delivered as a spray, for example a nasal spray or throat spray.
 // HKMedicationGeneralFormSpray returns the string constant HKMedicationGeneralFormSpray, for use as a dictionary key or argument.
 func HKMedicationGeneralFormSpray() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormSpray")))
 }
 
-// The medication is delivered as a suppository.
 // HKMedicationGeneralFormSuppository returns the string constant HKMedicationGeneralFormSuppository, for use as a dictionary key or argument.
 func HKMedicationGeneralFormSuppository() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormSuppository")))
 }
 
-// The medication comes in tablet form, such as a pill or caplet.
 // HKMedicationGeneralFormTablet returns the string constant HKMedicationGeneralFormTablet, for use as a dictionary key or argument.
 func HKMedicationGeneralFormTablet() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormTablet")))
 }
 
-// The medication is applied topically in a form that wasn't specified.
 // HKMedicationGeneralFormTopical returns the string constant HKMedicationGeneralFormTopical, for use as a dictionary key or argument.
 func HKMedicationGeneralFormTopical() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormTopical")))
 }
 
-// The system doesn't know the general form of the medication.
 // HKMedicationGeneralFormUnknown returns the string constant HKMedicationGeneralFormUnknown, for use as a dictionary key or argument.
 func HKMedicationGeneralFormUnknown() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormUnknown")))
 }
 
-// Represents the serial number of the device that created the HKObject. The expected value type is NSString.
 // HKMetadataKeyDeviceSerialNumber returns the string constant HKMetadataKeyDeviceSerialNumber, for use as a dictionary key or argument.
 func HKMetadataKeyDeviceSerialNumber() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyDeviceSerialNumber")))
 }
 
-// Represents the location where a particular body temperature reading was taken. The expected value type is an NSNumber containing a HKBodyTemperatureSensorLocation value.
 // HKMetadataKeyBodyTemperatureSensorLocation returns the string constant HKMetadataKeyBodyTemperatureSensorLocation, for use as a dictionary key or argument.
 func HKMetadataKeyBodyTemperatureSensorLocation() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyBodyTemperatureSensorLocation")))
 }
 
-// Represents the location where a particular heart rate reading was taken. The expected value type is an NSNumber containing a HKHeartRateSensorLocation value.
 // HKMetadataKeyHeartRateSensorLocation returns the string constant HKMetadataKeyHeartRateSensorLocation, for use as a dictionary key or argument.
 func HKMetadataKeyHeartRateSensorLocation() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyHeartRateSensorLocation")))
 }
 
-// Represents the context in which a particular heart rate reading was taken. The expected value type is an NSNumber containing a HKHeartRateMotionContext value. The value is active (HKHeartRateMotionContextActive) if the user is in motion or working out, sedentary if the user is still (HKHeartRateMotionContextSedentary), or not set (HKHeartRateMotionContextNotSet) otherwise.
 // HKMetadataKeyHeartRateMotionContext returns the string constant HKMetadataKeyHeartRateMotionContext, for use as a dictionary key or argument.
 func HKMetadataKeyHeartRateMotionContext() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyHeartRateMotionContext")))
 }
 
-// Represents the user's motion when a particular sample was taken. The expected value type is an NSNumber containing a HKUserMotionContext value. The value is active (HKUserMotionContextActive) if the user is in motion or working out, stationary if the user is still (HKUserMotionContextStationary), or not set (HKUserMotionContextNotSet) otherwise.
 // HKMetadataKeyUserMotionContext returns the string constant HKMetadataKeyUserMotionContext, for use as a dictionary key or argument.
 func HKMetadataKeyUserMotionContext() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyUserMotionContext")))
 }
 
-// Represents a per-session estimate prior to longitudinal smoothing applied to the value stored in the associated HKQuantitySample. The expected value type is an HKQuantity object with a unit compatible with the associated HKQuantitySample.
 // HKMetadataKeySessionEstimate returns the string constant HKMetadataKeySessionEstimate, for use as a dictionary key or argument.
 func HKMetadataKeySessionEstimate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeySessionEstimate")))
 }
 
-// Represents the test used to determine a Heart Rate Recovery value The expected value type is an NSNumber containing a HKHeartRateRecoveryTestType value.
 // HKMetadataKeyHeartRateRecoveryTestType returns the string constant HKMetadataKeyHeartRateRecoveryTestType, for use as a dictionary key or argument.
 func HKMetadataKeyHeartRateRecoveryTestType() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyHeartRateRecoveryTestType")))
 }
 
-// Represents the activity which preceded a Heart Rate Recovery value The expected value type is an NSNumber containing a HKWorkoutActivityType value.
 // HKMetadataKeyHeartRateRecoveryActivityType returns the string constant HKMetadataKeyHeartRateRecoveryActivityType, for use as a dictionary key or argument.
 func HKMetadataKeyHeartRateRecoveryActivityType() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyHeartRateRecoveryActivityType")))
 }
 
-// Represents the duration of activity which preceded a Heart Rate Recovery value The expected value type is an HKQuantity object compatible with a time unit.
 // HKMetadataKeyHeartRateRecoveryActivityDuration returns the string constant HKMetadataKeyHeartRateRecoveryActivityDuration, for use as a dictionary key or argument.
 func HKMetadataKeyHeartRateRecoveryActivityDuration() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyHeartRateRecoveryActivityDuration")))
 }
 
-// Represents the maximum heart rate observed during the corresponding Heart Rate Recovery sample interval The expected value type is an HKQuantity object compatible with "count/min" unit (eg "BPM").
 // HKMetadataKeyHeartRateRecoveryMaxObservedRecoveryHeartRate returns the string constant HKMetadataKeyHeartRateRecoveryMaxObservedRecoveryHeartRate, for use as a dictionary key or argument.
 func HKMetadataKeyHeartRateRecoveryMaxObservedRecoveryHeartRate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyHeartRateRecoveryMaxObservedRecoveryHeartRate")))
 }
 
-// Represents the type of food that was consumed when creating an HKObject. This should be a short string representing the type of food, such as 'Banana'. The expected value type is NSString.
 // HKMetadataKeyFoodType returns the string constant HKMetadataKeyFoodType, for use as a dictionary key or argument.
 func HKMetadataKeyFoodType() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyFoodType")))
 }
 
-// Represents the device identifier portion of a device's UDI (Unique Device Identifier). The device identifier can be used to reference the GUDID (Globally Unique Device Identifier Database). The expected value type is NSString. * Note that the use of this key is now discouraged in favor of the HKDevice class.
 // HKMetadataKeyUDIDeviceIdentifier returns the string constant HKMetadataKeyUDIDeviceIdentifier, for use as a dictionary key or argument.
 func HKMetadataKeyUDIDeviceIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyUDIDeviceIdentifier")))
 }
 
-// Represents the production identifier portion of a device's UDI (Unique Device Identifier). While part of a device's UDI, the production identifier is not saved in the FDA's GUDID (Globally Unique Device Identifier Database) and its use in HealthKit is now discouraged for user privacy reasons. Apps should consider handling this independently of HealthKit APIs if needed. The expected value type is NSString.
 // HKMetadataKeyUDIProductionIdentifier returns the string constant HKMetadataKeyUDIProductionIdentifier, for use as a dictionary key or argument.
 func HKMetadataKeyUDIProductionIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyUDIProductionIdentifier")))
 }
 
-// Represents a digital signature validating the origin of an HKObject's value. Intended to provide data integrity for sample data produced by trusted (tamper resistant) measuring devices. The digital signature format should be CMS (Cryptographic Message Syntax specified in IETF RFC 5652). It should be a “Signed-data” type signature containing the data items to be signed (e.g., timestamp, value, etc.) using ASN.1 encoding with DER (Distinguished Encoding Rules). The entire enveloping signature should be further encoded using base64. Recommended digest is SHA256, and recommended cipher is FIPS PUB 186-4 Digital Signature Standard Elliptic Curve P-256. See documentation for details.
 // HKMetadataKeyDigitalSignature returns the string constant HKMetadataKeyDigitalSignature, for use as a dictionary key or argument.
 func HKMetadataKeyDigitalSignature() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyDigitalSignature")))
 }
 
-// Represents a unique identifier for an HKObject that is set by its source. Uniqueness of objects with the same value of this key is not enforced by HealthKit. The expected value type is NSString.
 // HKMetadataKeyExternalUUID returns the string constant HKMetadataKeyExternalUUID, for use as a dictionary key or argument.
 func HKMetadataKeyExternalUUID() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyExternalUUID")))
 }
 
-// Represents an identifier for an HKObject that is set by its source and is used by HealthKit to uniquely identify an object. Saving a HKObject with a HKMetadataKeySyncIdentifier will replace an existing HKObject with the same HKMetadataKeySyncIdentifier value if the new HKObject has a greater HKMetadataKeySyncVersion. The new sample will be added to all HKWorkouts or HKCorrelations containing the replaced sample. HKMetadataKeySyncVersion must be provided if HKMetadataKeySyncIdentifier is provided. The expected value type is NSString.
 // HKMetadataKeySyncIdentifier returns the string constant HKMetadataKeySyncIdentifier, for use as a dictionary key or argument.
 func HKMetadataKeySyncIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeySyncIdentifier")))
 }
 
-// Represents the version of the HKObject that is set by its source and is used by HealthKit to identify an object's version. HKMetadataKeySyncVersion may not be provided if HKMetadataKeySyncIdentifier is not provided. The expected value type is NSNumber.
 // HKMetadataKeySyncVersion returns the string constant HKMetadataKeySyncVersion, for use as a dictionary key or argument.
 func HKMetadataKeySyncVersion() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeySyncVersion")))
 }
 
-// Represents the time zone that the user was in when the HKObject was created. The expected value type is an NSString compatible with NSTimeZone's +timeZoneWithName:.
 // HKMetadataKeyTimeZone returns the string constant HKMetadataKeyTimeZone, for use as a dictionary key or argument.
 func HKMetadataKeyTimeZone() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyTimeZone")))
 }
 
-// Represents the name of the device that took the reading. The expected value type is NSString. * Note that the use of this key is now discouraged in favor of the HKDevice class.
 // HKMetadataKeyDeviceName returns the string constant HKMetadataKeyDeviceName, for use as a dictionary key or argument.
 func HKMetadataKeyDeviceName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyDeviceName")))
 }
 
-// Represents the name of the manufacturer of the device that took the reading. The expected value type is NSString. * Note that the use of this key is now discouraged in favor of the HKDevice class.
 // HKMetadataKeyDeviceManufacturerName returns the string constant HKMetadataKeyDeviceManufacturerName, for use as a dictionary key or argument.
 func HKMetadataKeyDeviceManufacturerName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyDeviceManufacturerName")))
 }
 
-// Represents whether or not the reading was taken in a lab. The expected value type is an NSNumber containing a BOOL value.
 // HKMetadataKeyWasTakenInLab returns the string constant HKMetadataKeyWasTakenInLab, for use as a dictionary key or argument.
 func HKMetadataKeyWasTakenInLab() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyWasTakenInLab")))
 }
 
-// Represents the lower limit of the reference range for a lab result. The expected value type is an NSNumber.
 // HKMetadataKeyReferenceRangeLowerLimit returns the string constant HKMetadataKeyReferenceRangeLowerLimit, for use as a dictionary key or argument.
 func HKMetadataKeyReferenceRangeLowerLimit() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyReferenceRangeLowerLimit")))
 }
 
-// Represents the upper limit of the reference range for a lab result. The expected value type is an NSNumber.
 // HKMetadataKeyReferenceRangeUpperLimit returns the string constant HKMetadataKeyReferenceRangeUpperLimit, for use as a dictionary key or argument.
 func HKMetadataKeyReferenceRangeUpperLimit() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyReferenceRangeUpperLimit")))
 }
 
-// Represents whether or not the reading was entered by the user. The expected value type is an NSNumber containing a BOOL value.
 // HKMetadataKeyWasUserEntered returns the string constant HKMetadataKeyWasUserEntered, for use as a dictionary key or argument.
 func HKMetadataKeyWasUserEntered() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyWasUserEntered")))
 }
 
-// Represents the brand name of a particular workout. The expected value type is NSString.
 // HKMetadataKeyWorkoutBrandName returns the string constant HKMetadataKeyWorkoutBrandName, for use as a dictionary key or argument.
 func HKMetadataKeyWorkoutBrandName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyWorkoutBrandName")))
 }
 
-// Represents whether or not a workout was performed as part of a group fitness class. The expected value type is an NSNumber containing a BOOL value.
 // HKMetadataKeyGroupFitness returns the string constant HKMetadataKeyGroupFitness, for use as a dictionary key or argument.
 func HKMetadataKeyGroupFitness() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyGroupFitness")))
 }
 
-// Contains the catalog identifier of the Fitness+ workout. This key only exists if the workout was completed in Fitness+. The expected value type is an NSString containing the Fitness+ catalog identifier.
 // HKMetadataKeyAppleFitnessPlusCatalogIdentifier returns the string constant HKMetadataKeyAppleFitnessPlusCatalogIdentifier, for use as a dictionary key or argument.
 func HKMetadataKeyAppleFitnessPlusCatalogIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyAppleFitnessPlusCatalogIdentifier")))
 }
 
-// Represents whether or not a workout is a Fitness+ workout. The expected value type is an NSNumber containing a BOOL value.
 // HKMetadataKeyAppleFitnessPlusSession returns the string constant HKMetadataKeyAppleFitnessPlusSession, for use as a dictionary key or argument.
 func HKMetadataKeyAppleFitnessPlusSession() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyAppleFitnessPlusSession")))
 }
 
-// Represents whether or not a workout was performed indoors as opposed to outdoors. The expected value type is an NSNumber containing a BOOL value.
 // HKMetadataKeyIndoorWorkout returns the string constant HKMetadataKeyIndoorWorkout, for use as a dictionary key or argument.
 func HKMetadataKeyIndoorWorkout() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyIndoorWorkout")))
 }
 
-// Represents whether or not a workout was performed with a coach or personal trainer. The expected value type is an NSNumber containing a BOOL value.
 // HKMetadataKeyCoachedWorkout returns the string constant HKMetadataKeyCoachedWorkout, for use as a dictionary key or argument.
 func HKMetadataKeyCoachedWorkout() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyCoachedWorkout")))
 }
 
-// Represents the weather condition during the sample. The expected value type is an NSNumber containing an HKWeatherCondition value. This key may be set on an HKWorkout object to represent the overall weather condition during the workout.
 // HKMetadataKeyWeatherCondition returns the string constant HKMetadataKeyWeatherCondition, for use as a dictionary key or argument.
 func HKMetadataKeyWeatherCondition() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyWeatherCondition")))
 }
 
-// Represents the weather temperature during the sample. The expected value type is an HKQuantity expressed in a temperature unit. This key may be set on an HKWorkout object to represent the overall temperature during the workout.
 // HKMetadataKeyWeatherTemperature returns the string constant HKMetadataKeyWeatherTemperature, for use as a dictionary key or argument.
 func HKMetadataKeyWeatherTemperature() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyWeatherTemperature")))
 }
 
-// Represents the weather humidity during the sample. The expected value type is an HKQuantity expressed in percent. This key may be set on an HKWorkout object to represent the overall humidity during the workout.
 // HKMetadataKeyWeatherHumidity returns the string constant HKMetadataKeyWeatherHumidity, for use as a dictionary key or argument.
 func HKMetadataKeyWeatherHumidity() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyWeatherHumidity")))
 }
 
-// Represents whether or not protection was used during sexual activity. This can be used to track either protection from STIs or protection from pregnancy. The expected value type is an NSNumber containing a BOOL value.
 // HKMetadataKeySexualActivityProtectionUsed returns the string constant HKMetadataKeySexualActivityProtectionUsed, for use as a dictionary key or argument.
 func HKMetadataKeySexualActivityProtectionUsed() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeySexualActivityProtectionUsed")))
 }
 
-// Indicates whether or not the sample represents the start of a menstrual cycle. This is a required metadata key for category samples of type HKCategoryTypeIdentifierMenstrualFlow. The expected value type is an NSNumber containing a BOOL value.
 // HKMetadataKeyMenstrualCycleStart returns the string constant HKMetadataKeyMenstrualCycleStart, for use as a dictionary key or argument.
 func HKMetadataKeyMenstrualCycleStart() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyMenstrualCycleStart")))
 }
 
-// Represents the length of a lap recorded during a workout. The expected value type is an HKQuantity object compatible with a length unit. This key may be set on an HKWorkout object to represent the length of a lap.
 // HKMetadataKeyLapLength returns the string constant HKMetadataKeyLapLength, for use as a dictionary key or argument.
 func HKMetadataKeyLapLength() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyLapLength")))
 }
 
-// Represents the location type of a swimming workout. The expected value type is an NSNumber containing an HKWorkoutSwimmingLocationType value. This key may be set on an HKWorkout object to represent the swimming location type.
 // HKMetadataKeySwimmingLocationType returns the string constant HKMetadataKeySwimmingLocationType, for use as a dictionary key or argument.
 func HKMetadataKeySwimmingLocationType() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeySwimmingLocationType")))
 }
 
-// Represents the predominant stroke style during a lap of a swimming workout. The expected value type is an NSNumber containing an HKSwimmingStrokeStyle value. This key may be set on an HKWorkoutEvent object with the type HKWorkoutEventTypeLap to represent the predominant style used during the lap.
 // HKMetadataKeySwimmingStrokeStyle returns the string constant HKMetadataKeySwimmingStrokeStyle, for use as a dictionary key or argument.
 func HKMetadataKeySwimmingStrokeStyle() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeySwimmingStrokeStyle")))
 }
 
-// Represents the medical reason for the delivery of an insulin dose. This is a required metadata key for samples of type HKQuantityTypeIdentifierInsulinDelivery. The expected value type is an NSNumber containing a HKInsulinDeliveryReason value.
 // HKMetadataKeyInsulinDeliveryReason returns the string constant HKMetadataKeyInsulinDeliveryReason, for use as a dictionary key or argument.
 func HKMetadataKeyInsulinDeliveryReason() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyInsulinDeliveryReason")))
 }
 
-// Indicates the relative timing of a blood glucose reading to a meal. This timing, as well as other factors like meal composition, can be used by medical professionals to determine the acceptable value range for a blood glucose reading. For use cases requiring the capture of precise timing and composition information, developers should record additional dietary samples, such as HKQuantityTypeIdentifierDietaryCarbohydrates. The expected value type is an NSNumber containing a HKBloodGlucoseMealTime value.
 // HKMetadataKeyBloodGlucoseMealTime returns the string constant HKMetadataKeyBloodGlucoseMealTime, for use as a dictionary key or argument.
 func HKMetadataKeyBloodGlucoseMealTime() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyBloodGlucoseMealTime")))
 }
 
-// Represents the test used to create VO2 Max Sample The expected value type is an NSNumber containing a HKVO2MaxTestType value.
 // HKMetadataKeyVO2MaxTestType returns the string constant HKMetadataKeyVO2MaxTestType, for use as a dictionary key or argument.
 func HKMetadataKeyVO2MaxTestType() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyVO2MaxTestType")))
 }
 
-// Represents the average speed for a workout segment or distance sample. This represents the average speed when moving so it may not match the value of distance/time for a distance sample. The expected value type is an HKQuantity object compatible with a speed unit (e.g. m/s). This key may be set on quantity samples of type HKQuantityTypeIdentifierDistanceDownhillSnowSports or a workout segment representing a skiing run.
 // HKMetadataKeyAverageSpeed returns the string constant HKMetadataKeyAverageSpeed, for use as a dictionary key or argument.
 func HKMetadataKeyAverageSpeed() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyAverageSpeed")))
 }
 
-// Represents the maximum speed for a workout segment or distance sample. The expected value type is an HKQuantity object compatible with a speed unit (e.g. m/s). This key may be set on quantity samples of type HKQuantityTypeIdentifierDistanceDownhillSnowSports or a workout segment representing a skiing run.
 // HKMetadataKeyMaximumSpeed returns the string constant HKMetadataKeyMaximumSpeed, for use as a dictionary key or argument.
 func HKMetadataKeyMaximumSpeed() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyMaximumSpeed")))
 }
 
-// Represents the grade of a ski run. Alpine slope grade is measured in percent where 100% grade is a 45 degree slope. The expected value type is an HKQuantity object compatible with percent unit. This key may be set on quantity samples of type HKQuantityTypeIdentifierDistanceDownhillSnowSports or a workout segment representing a skiing run.
 // HKMetadataKeyAlpineSlopeGrade returns the string constant HKMetadataKeyAlpineSlopeGrade, for use as a dictionary key or argument.
 func HKMetadataKeyAlpineSlopeGrade() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyAlpineSlopeGrade")))
 }
 
-// Represents the cumulative elevation ascent during a workout. The expected value type is an HKQuantity object compatible with length unit. This key may be set on a workout, workout segments or distance samples.
 // HKMetadataKeyElevationAscended returns the string constant HKMetadataKeyElevationAscended, for use as a dictionary key or argument.
 func HKMetadataKeyElevationAscended() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyElevationAscended")))
 }
 
-// Represents the cumulative elevation descent during a workout. The expected value type is an HKQuantity object compatible with length unit. This key may be set on a workout, workout segments or distance samples.
 // HKMetadataKeyElevationDescended returns the string constant HKMetadataKeyElevationDescended, for use as a dictionary key or argument.
 func HKMetadataKeyElevationDescended() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyElevationDescended")))
 }
 
-// Represents the workout duration as displayed by a GymKit connected fitness machine. The expected value type is an HKQuantity object compatible with a time unit. This key may be set on an HKWorkout object to represent the duration of the workout as displayed by a GymKit connected fitness machine.
 // HKMetadataKeyFitnessMachineDuration returns the string constant HKMetadataKeyFitnessMachineDuration, for use as a dictionary key or argument.
 func HKMetadataKeyFitnessMachineDuration() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyFitnessMachineDuration")))
 }
 
-// Represents the distance covered during an indoor bike workout. The expected value type is an HKQuantity object compatible with a length unit. This key may be set on an HKWorkout object to represent the distance covered during an indoor bike workout.
 // HKMetadataKeyIndoorBikeDistance returns the string constant HKMetadataKeyIndoorBikeDistance, for use as a dictionary key or argument.
 func HKMetadataKeyIndoorBikeDistance() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyIndoorBikeDistance")))
 }
 
-// Represents the distance covered during a cross trainer workout. The expected value type is an HKQuantity object compatible with a length unit. This key may be set on an HKWorkout object to represent the distance covered during a cross trainer workout.
 // HKMetadataKeyCrossTrainerDistance returns the string constant HKMetadataKeyCrossTrainerDistance, for use as a dictionary key or argument.
 func HKMetadataKeyCrossTrainerDistance() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyCrossTrainerDistance")))
 }
 
-// Represents the threshold heart rate that triggered a heart rate event. The expected value is an HKQuantity object with a compatible unit (e.g. count/min). This key will be set on heart rate event samples of type HKCategoryTypeIdentifierHighHeartRateEvent and HKCategoryTypeIdentifierLowHeartRateEvent.
 // HKMetadataKeyHeartRateEventThreshold returns the string constant HKMetadataKeyHeartRateEventThreshold, for use as a dictionary key or argument.
 func HKMetadataKeyHeartRateEventThreshold() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyHeartRateEventThreshold")))
 }
 
-// Represents the average METs, or Metabolic Equivalent of Task during a workout. The expected value type is an HKQuantity expressed in a METs (kcal/(kg*hr)) unit. This key may be set on an HKWorkout object to represent the average workout intensity represented as METs over the entire workout duration.
 // HKMetadataKeyAverageMETs returns the string constant HKMetadataKeyAverageMETs, for use as a dictionary key or argument.
 func HKMetadataKeyAverageMETs() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyAverageMETs")))
 }
 
-// Represents the audio level associated with an audio event. The expected value is an HKQuantity whose value is the audio level associated with the event measured in dBASPL units.
 // HKMetadataKeyAudioExposureLevel returns the string constant HKMetadataKeyAudioExposureLevel, for use as a dictionary key or argument.
 func HKMetadataKeyAudioExposureLevel() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyAudioExposureLevel")))
 }
 
-// Represents the duration of time that is covered by audio samples. The expected value type is an HKQuantity object compatible with a time unit. This key may be set on headphone audio exposure event samples to indicate the duration of time that the user was actually exposed to audio through their headphones.
 // HKMetadataKeyAudioExposureDuration returns the string constant HKMetadataKeyAudioExposureDuration, for use as a dictionary key or argument.
 func HKMetadataKeyAudioExposureDuration() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyAudioExposureDuration")))
 }
 
-// Represents the ECG algorithm version that was used to generate a particular HKElectrocardiogram. The expected value type is an an NSNumber containing a HKAppleECGAlgorithmVersion value.
 // HKMetadataKeyAppleECGAlgorithmVersion returns the string constant HKMetadataKeyAppleECGAlgorithmVersion, for use as a dictionary key or argument.
 func HKMetadataKeyAppleECGAlgorithmVersion() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyAppleECGAlgorithmVersion")))
 }
 
-// Represents the detected placement of the device during the bout of walking The expected value type is an NSNumber containing a HKDevicePlacementSide value.  This key is expected to be written for Walking Aymmetry Percentage.
 // HKMetadataKeyDevicePlacementSide returns the string constant HKMetadataKeyDevicePlacementSide, for use as a dictionary key or argument.
 func HKMetadataKeyDevicePlacementSide() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyDevicePlacementSide")))
 }
 
-// Represents the barometric pressure recorded at the time of a sample. The expected value type is an HKQuantity representing a value in units of pressure (atmospheres, pascals, millimeters of Mercury).
 // HKMetadataKeyBarometricPressure returns the string constant HKMetadataKeyBarometricPressure, for use as a dictionary key or argument.
 func HKMetadataKeyBarometricPressure() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyBarometricPressure")))
 }
 
-// Represents the calibration status of the devices used to generate this sample. The expected value is a boolean NSNumber indicating whether the sample value was estimated using a sufficient set of device calibration data. The calibration status of a device may vary per data type. This key is read-only.
 // HKMetadataKeyAppleDeviceCalibrated returns the string constant HKMetadataKeyAppleDeviceCalibrated, for use as a dictionary key or argument.
 func HKMetadataKeyAppleDeviceCalibrated() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyAppleDeviceCalibrated")))
 }
 
-// Represents a VO2Max value that can be associated with, for example, Cardio Fitness Events This key should be used to store an HKQuantity with a unit of `ml/kg·min`
 // HKMetadataKeyVO2MaxValue returns the string constant HKMetadataKeyVO2MaxValue, for use as a dictionary key or argument.
 func HKMetadataKeyVO2MaxValue() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyVO2MaxValue")))
 }
 
-// Can be used to store a snapshot of the threshold used to classify VO2Max values as "low" This key should be used to store an HKQuantity, with a unit of `ml/kg·min`, representing the low fitness threshold.
 // HKMetadataKeyLowCardioFitnessEventThreshold returns the string constant HKMetadataKeyLowCardioFitnessEventThreshold, for use as a dictionary key or argument.
 func HKMetadataKeyLowCardioFitnessEventThreshold() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyLowCardioFitnessEventThreshold")))
 }
 
-// Represents how far back an estimation algorithm incorporated data from. The expected value is an NSDate indicating the earliest date of data used to produce an estimated value for an HKSample.
 // HKMetadataKeyDateOfEarliestDataUsedForEstimate returns the string constant HKMetadataKeyDateOfEarliestDataUsedForEstimate, for use as a dictionary key or argument.
 func HKMetadataKeyDateOfEarliestDataUsedForEstimate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyDateOfEarliestDataUsedForEstimate")))
 }
 
-// The version of the algorithm used to generate the sample. The key for an NSNumber containing an NSInteger indicating the version of the algorithm used to generate the sample.
 // HKMetadataKeyAlgorithmVersion returns the string constant HKMetadataKeyAlgorithmVersion, for use as a dictionary key or argument.
 func HKMetadataKeyAlgorithmVersion() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyAlgorithmVersion")))
 }
 
-// Represents sum of strokes per length and time for the length. Calculated for each lap event and segment event during swimming workout. The expected value type is an NSNumber containing a score. This key may be set on an HKWorkout object to represent the SWOLF Score during the whole workout.
 // HKMetadataKeySWOLFScore returns the string constant HKMetadataKeySWOLFScore, for use as a dictionary key or argument.
 func HKMetadataKeySWOLFScore() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeySWOLFScore")))
 }
 
-// Indicates the quantity was clamped to a lower bound. Value is a BOOL indicating whether or not the quantity value in the sample has been clamped to some lower bound
 // HKMetadataKeyQuantityClampedToLowerBound returns the string constant HKMetadataKeyQuantityClampedToLowerBound, for use as a dictionary key or argument.
 func HKMetadataKeyQuantityClampedToLowerBound() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyQuantityClampedToLowerBound")))
 }
 
-// Indicates the quantity was clamped to an upper bound. Value is a BOOL indicating whether or not the quantity value in the sample has been clamped to some upper bound
 // HKMetadataKeyQuantityClampedToUpperBound returns the string constant HKMetadataKeyQuantityClampedToUpperBound, for use as a dictionary key or argument.
 func HKMetadataKeyQuantityClampedToUpperBound() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyQuantityClampedToUpperBound")))
 }
 
-// Represents the description that may be associated with a HKGlassesPrescription. Glasses are often customized for different purposes like reading or distance. Prescriptions received by an eye care professional can provide different ocular functions. Users may also customize their glasses for different scenarios. The value of the metadata is a NSString that describes the purpose of a HKGlassesPrescription.
 // HKMetadataKeyGlassesPrescriptionDescription returns the string constant HKMetadataKeyGlassesPrescriptionDescription, for use as a dictionary key or argument.
 func HKMetadataKeyGlassesPrescriptionDescription() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyGlassesPrescriptionDescription")))
 }
 
-// Represents the water salinity for an underwater depth or water temperature sample. The expected value type is an NSNumber containing a HKWaterSalinity value.
 // HKMetadataKeyWaterSalinity returns the string constant HKMetadataKeyWaterSalinity, for use as a dictionary key or argument.
 func HKMetadataKeyWaterSalinity() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyWaterSalinity")))
 }
 
-// Represents the headphone gain associated with a Headphone audio exposure event. The expected value is an HKQuantity whose value is the gain associated with the event measured in decibels in A-weighted Sound Pressure Level units.
 // HKMetadataKeyHeadphoneGain returns the string constant HKMetadataKeyHeadphoneGain, for use as a dictionary key or argument.
 func HKMetadataKeyHeadphoneGain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyHeadphoneGain")))
 }
 
-// Represents the test used to determine a Cycling Functional Threshold Power value. The expected value type is an NSNumber containing a HKCyclingFunctionalThresholdPowerTestType value.
 // HKMetadataKeyCyclingFunctionalThresholdPowerTestType returns the string constant HKMetadataKeyCyclingFunctionalThresholdPowerTestType, for use as a dictionary key or argument.
 func HKMetadataKeyCyclingFunctionalThresholdPowerTestType() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyCyclingFunctionalThresholdPowerTestType")))
 }
 
-// Represents the activity type related to the sample The expected value type is an NSNumber containing a HKWorkoutActivityType value.
 // HKMetadataKeyActivityType returns the string constant HKMetadataKeyActivityType, for use as a dictionary key or argument.
 func HKMetadataKeyActivityType() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyActivityType")))
 }
 
-// Represents the estimation type used to create the Physical Effort Sample The expected value type is an NSNumber containing a HKPhysicalEffortEstimationType value.
 // HKMetadataKeyPhysicalEffortEstimationType returns the string constant HKMetadataKeyPhysicalEffortEstimationType, for use as a dictionary key or argument.
 func HKMetadataKeyPhysicalEffortEstimationType() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyPhysicalEffortEstimationType")))
 }
 
-// Represents maximum intensity of light for an outdoor time sample. The expected value type is an HKQuantity expressed in HKUnit Lux.
 // HKMetadataKeyMaximumLightIntensity returns the string constant HKMetadataKeyMaximumLightIntensity, for use as a dictionary key or argument.
 func HKMetadataKeyMaximumLightIntensity() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyMaximumLightIntensity")))
@@ -2064,49 +1945,41 @@ func HKSourceRevisionAnyProductType() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKSourceRevisionAnyProductType")))
 }
 
-// The key path you use to create predicates for the medication's archived status. Use to predicate against the “HKUserAnnotatedMedication/isArchived“ property of a medication.
 // HKUserAnnotatedMedicationPredicateKeyPathIsArchived returns the string constant HKUserAnnotatedMedicationPredicateKeyPathIsArchived, for use as a dictionary key or argument.
 func HKUserAnnotatedMedicationPredicateKeyPathIsArchived() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKUserAnnotatedMedicationPredicateKeyPathIsArchived")))
 }
 
-// The key path you use to create predicates for whether or not a medication has a schedule. Use to predicate against the “HKUserAnnotatedMedication/hasSchedule“ property of a medication.
 // HKUserAnnotatedMedicationPredicateKeyPathHasSchedule returns the string constant HKUserAnnotatedMedicationPredicateKeyPathHasSchedule, for use as a dictionary key or argument.
 func HKUserAnnotatedMedicationPredicateKeyPathHasSchedule() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKUserAnnotatedMedicationPredicateKeyPathHasSchedule")))
 }
 
-// Represents a SMART Health Card source type for a verifiable record.
 // HKVerifiableClinicalRecordSourceTypeSMARTHealthCard returns the string constant HKVerifiableClinicalRecordSourceTypeSMARTHealthCard, for use as a dictionary key or argument.
 func HKVerifiableClinicalRecordSourceTypeSMARTHealthCard() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKVerifiableClinicalRecordSourceTypeSMARTHealthCard")))
 }
 
-// Represents a EU Digital COVID Certificate source type for a verifiable record.
 // HKVerifiableClinicalRecordSourceTypeEUDigitalCOVIDCertificate returns the string constant HKVerifiableClinicalRecordSourceTypeEUDigitalCOVIDCertificate, for use as a dictionary key or argument.
 func HKVerifiableClinicalRecordSourceTypeEUDigitalCOVIDCertificate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKVerifiableClinicalRecordSourceTypeEUDigitalCOVIDCertificate")))
 }
 
-// Represents the COVID-19 credential type for a verifiable record.
 // HKVerifiableClinicalRecordCredentialTypeCOVID19 returns the string constant HKVerifiableClinicalRecordCredentialTypeCOVID19, for use as a dictionary key or argument.
 func HKVerifiableClinicalRecordCredentialTypeCOVID19() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKVerifiableClinicalRecordCredentialTypeCOVID19")))
 }
 
-// Represents the immunization credential type for a verifiable record.
 // HKVerifiableClinicalRecordCredentialTypeImmunization returns the string constant HKVerifiableClinicalRecordCredentialTypeImmunization, for use as a dictionary key or argument.
 func HKVerifiableClinicalRecordCredentialTypeImmunization() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKVerifiableClinicalRecordCredentialTypeImmunization")))
 }
 
-// Represents the laboratory credential type for a verifiable record.
 // HKVerifiableClinicalRecordCredentialTypeLaboratory returns the string constant HKVerifiableClinicalRecordCredentialTypeLaboratory, for use as a dictionary key or argument.
 func HKVerifiableClinicalRecordCredentialTypeLaboratory() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKVerifiableClinicalRecordCredentialTypeLaboratory")))
 }
 
-// Represents the recovery credential type for a verifiable record.
 // HKVerifiableClinicalRecordCredentialTypeRecovery returns the string constant HKVerifiableClinicalRecordCredentialTypeRecovery, for use as a dictionary key or argument.
 func HKVerifiableClinicalRecordCredentialTypeRecovery() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKVerifiableClinicalRecordCredentialTypeRecovery")))

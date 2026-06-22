@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A single control point in a parameter curve.
-//
 // HapticParameterCurveControlPoint is an idiomatic wrapper over the Objective-C class CHHapticParameterCurveControlPoint.
+//
+// A single control point in a parameter curve.
 type HapticParameterCurveControlPoint struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func HapticParameterCurveControlPointFromID(id objc.ID) *HapticParameterCurveCon
 	if id == 0 {
 		return nil
 	}
-	x := &HapticParameterCurveControlPoint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HapticParameterCurveControlPoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func hapticParameterCurveControlPointAdopt(id objc.ID) *HapticParameterCurveCont
 	if id == 0 {
 		return nil
 	}
-	x := &HapticParameterCurveControlPoint{Handle: objref.Wrap(id)}
+	x := &HapticParameterCurveControlPoint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,41 +60,49 @@ func (x *HapticParameterCurveControlPoint) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize a CHHapticParameterCurveControlPoint with a relative time and value.
-//
-// NewHapticParameterCurveControlPointWithRelativeTimeValue creates a new HapticParameterCurveControlPoint.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HapticParameterCurveControlPoint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewHapticParameterCurveControlPointWithRelativeTimeValue initialize a CHHapticParameterCurveControlPoint with a relative time and value.
 func NewHapticParameterCurveControlPointWithRelativeTimeValue(time_ float64, value float32) *HapticParameterCurveControlPoint {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticParameterCurveControlPoint")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRelativeTime:value:"), time_, value)
 	return hapticParameterCurveControlPointAdopt(_id)
 }
 
-// WithRelativeTime sets relativeTime and returns the receiver so calls can be chained.
+// WithRelativeTime sets the property and returns the receiver so calls can be chained.
 func (x *HapticParameterCurveControlPoint) WithRelativeTime(relativeTime float64) *HapticParameterCurveControlPoint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativeTime:"), relativeTime)
 	return x
 }
 
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue sets the property and returns the receiver so calls can be chained.
 func (x *HapticParameterCurveControlPoint) WithValue(value float32) *HapticParameterCurveControlPoint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 	return x
 }
 
+// RelativeTime wraps the corresponding Objective-C method.
 func (x *HapticParameterCurveControlPoint) RelativeTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("relativeTime"))
 	return _r
 }
 
+// SetRelativeTime wraps the corresponding Objective-C method.
 func (x *HapticParameterCurveControlPoint) SetRelativeTime(relativeTime float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativeTime:"), relativeTime)
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *HapticParameterCurveControlPoint) Value() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("value"))
 	return _r
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *HapticParameterCurveControlPoint) SetValue(value float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 }

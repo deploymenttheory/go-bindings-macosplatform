@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The metadata that partitions sequences of other entries.
-//
 // LogEntryBoundary is an idiomatic wrapper over the Objective-C class OSLogEntryBoundary.
+//
+// It embeds [LogEntry], promoting that type's methods.
+//
+// The metadata that partitions sequences of other entries.
 type LogEntryBoundary struct {
-	objref.Handle
+	LogEntry
 }
 
 // LogEntryBoundaryFromID adopts an existing Objective-C object as a LogEntryBoundary
@@ -25,7 +26,8 @@ func LogEntryBoundaryFromID(id objc.ID) *LogEntryBoundary {
 	if id == 0 {
 		return nil
 	}
-	x := &LogEntryBoundary{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LogEntryBoundary{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func logEntryBoundaryAdopt(id objc.ID) *LogEntryBoundary {
 	if id == 0 {
 		return nil
 	}
-	x := &LogEntryBoundary{Handle: objref.Wrap(id)}
+	x := &LogEntryBoundary{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *LogEntryBoundary) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LogEntryBoundary) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LogEntryBoundary) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewLogEntryBoundary creates a new LogEntryBoundary.
@@ -70,3 +58,5 @@ type LogEntryBoundaryable interface {
 }
 
 var _ LogEntryBoundaryable = (*LogEntryBoundary)(nil)
+
+var _ LogEntryProvider = (*LogEntryBoundary)(nil)

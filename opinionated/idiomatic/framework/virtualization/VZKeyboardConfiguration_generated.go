@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for a configuring a keyboard.
-//
 // KeyboardConfiguration is an idiomatic wrapper over the Objective-C class VZKeyboardConfiguration.
+//
+// KeyboardConfiguration is an abstract base — you do not construct it directly. Construct one of [MacKeyboardConfiguration], [USBKeyboardConfiguration] and pass it where a KeyboardConfiguration is accepted.
+//
+// The base class for a configuring a keyboard.
 type KeyboardConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func KeyboardConfigurationFromID(id objc.ID) *KeyboardConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &KeyboardConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &KeyboardConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func keyboardConfigurationAdopt(id objc.ID) *KeyboardConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &KeyboardConfiguration{Handle: objref.Wrap(id)}
+	x := &KeyboardConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *KeyboardConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewKeyboardConfiguration creates a new KeyboardConfiguration.
-func NewKeyboardConfiguration() *KeyboardConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZKeyboardConfiguration")), objc.RegisterName("new"))
-	return keyboardConfigurationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *KeyboardConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // KeyboardConfigurationable is the interface implemented by [KeyboardConfiguration], for mocking and DI.
@@ -70,3 +74,10 @@ type KeyboardConfigurationable interface {
 }
 
 var _ KeyboardConfigurationable = (*KeyboardConfiguration)(nil)
+
+// isKeyboardConfiguration marks KeyboardConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the KeyboardConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *KeyboardConfiguration) isKeyboardConfiguration() {}
+
+var _ KeyboardConfigurationProvider = (*KeyboardConfiguration)(nil)

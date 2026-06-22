@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that creates a new frame processor for the configured video effect.
-//
 // FrameProcessor is an idiomatic wrapper over the Objective-C class VTFrameProcessor.
+//
+// A class that creates a new frame processor for the configured video effect.
 type FrameProcessor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FrameProcessorFromID(id objc.ID) *FrameProcessor {
 	if id == 0 {
 		return nil
 	}
-	x := &FrameProcessor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FrameProcessor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func frameProcessorAdopt(id objc.ID) *FrameProcessor {
 	if id == 0 {
 		return nil
 	}
-	x := &FrameProcessor{Handle: objref.Wrap(id)}
+	x := &FrameProcessor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *FrameProcessor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FrameProcessor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFrameProcessor creates a new FrameProcessor.
 func NewFrameProcessor() *FrameProcessor {
 	_id := objc.Send[objc.ID](objc.ID(_class("VTFrameProcessor")), objc.RegisterName("new"))
 	return frameProcessorAdopt(_id)
 }
 
-// Performs all necessary tasks to end the session.
+// EndSession performs all necessary tasks to end the session.
 func (x *FrameProcessor) EndSession() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endSession"))
 }

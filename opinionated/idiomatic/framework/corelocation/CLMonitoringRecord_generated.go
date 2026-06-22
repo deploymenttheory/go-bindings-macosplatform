@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a condition and its associated information that a location monitor is monitoring.
-//
 // MonitoringRecord is an idiomatic wrapper over the Objective-C class CLMonitoringRecord.
+//
+// An object that represents a condition and its associated information that a location monitor is monitoring.
 type MonitoringRecord struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MonitoringRecordFromID(id objc.ID) *MonitoringRecord {
 	if id == 0 {
 		return nil
 	}
-	x := &MonitoringRecord{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MonitoringRecord{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func monitoringRecordAdopt(id objc.ID) *MonitoringRecord {
 	if id == 0 {
 		return nil
 	}
-	x := &MonitoringRecord{Handle: objref.Wrap(id)}
+	x := &MonitoringRecord{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,25 @@ func (x *MonitoringRecord) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MonitoringRecord) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMonitoringRecord creates a new MonitoringRecord.
 func NewMonitoringRecord() *MonitoringRecord {
 	_id := objc.Send[objc.ID](objc.ID(_class("CLMonitoringRecord")), objc.RegisterName("new"))
 	return monitoringRecordAdopt(_id)
 }
 
+// Condition wraps the corresponding Objective-C method.
 func (x *MonitoringRecord) Condition() *Condition {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("condition"))
 	return ConditionFromID(_r)
 }
 
+// LastEvent wraps the corresponding Objective-C method.
 func (x *MonitoringRecord) LastEvent() *MonitoringEvent {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastEvent"))
 	return MonitoringEventFromID(_r)

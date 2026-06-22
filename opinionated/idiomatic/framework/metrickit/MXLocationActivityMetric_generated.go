@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing metrics about the use of location-tracking features of a device.
-//
 // LocationActivityMetric is an idiomatic wrapper over the Objective-C class MXLocationActivityMetric.
+//
+// It embeds [Metric], promoting that type's methods.
+//
+// An object representing metrics about the use of location-tracking features of a device.
 type LocationActivityMetric struct {
-	objref.Handle
+	Metric
 }
 
 // LocationActivityMetricFromID adopts an existing Objective-C object as a LocationActivityMetric
@@ -25,7 +26,8 @@ func LocationActivityMetricFromID(id objc.ID) *LocationActivityMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &LocationActivityMetric{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LocationActivityMetric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func locationActivityMetricAdopt(id objc.ID) *LocationActivityMetric {
 	if id == 0 {
 		return nil
 	}
-	x := &LocationActivityMetric{Handle: objref.Wrap(id)}
+	x := &LocationActivityMetric{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *LocationActivityMetric) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LocationActivityMetric) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LocationActivityMetric) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewLocationActivityMetric creates a new LocationActivityMetric.
@@ -64,37 +52,37 @@ func NewLocationActivityMetric() *LocationActivityMetric {
 	return locationActivityMetricAdopt(_id)
 }
 
-// Cumulative time spent acquiring location at kCLLocationAccuracyBest. Dimensioned as NSUnitDuration.
+// CumulativeBestAccuracyTime cumulative time spent acquiring location at kCLLocationAccuracyBest. Dimensioned as NSUnitDuration.
 func (x *LocationActivityMetric) CumulativeBestAccuracyTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeBestAccuracyTime"))
 	return obj.Wrap(_r)
 }
 
-// Cumulative time spent acquiring location at kCLLocationAccuracyBestForNavigation. Dimensioned as NSUnitDuration.
+// CumulativeBestAccuracyForNavigationTime cumulative time spent acquiring location at kCLLocationAccuracyBestForNavigation. Dimensioned as NSUnitDuration.
 func (x *LocationActivityMetric) CumulativeBestAccuracyForNavigationTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeBestAccuracyForNavigationTime"))
 	return obj.Wrap(_r)
 }
 
-// Cumulative time spent acquiring location at kCLLocationAccuracyNearestTenMeters. Dimensioned as NSUnitDuration.
+// CumulativeNearestTenMetersAccuracyTime cumulative time spent acquiring location at kCLLocationAccuracyNearestTenMeters. Dimensioned as NSUnitDuration.
 func (x *LocationActivityMetric) CumulativeNearestTenMetersAccuracyTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeNearestTenMetersAccuracyTime"))
 	return obj.Wrap(_r)
 }
 
-// Cumulative time spent acquiring location at kCLLocationAccuracyHundredMeters. Dimensioned as NSUnitDuration.
+// CumulativeHundredMetersAccuracyTime cumulative time spent acquiring location at kCLLocationAccuracyHundredMeters. Dimensioned as NSUnitDuration.
 func (x *LocationActivityMetric) CumulativeHundredMetersAccuracyTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeHundredMetersAccuracyTime"))
 	return obj.Wrap(_r)
 }
 
-// Cumulative time spent acquiring location at kCLLocationAccuracyKilometer. Dimensioned as NSUnitDuration.
+// CumulativeKilometerAccuracyTime cumulative time spent acquiring location at kCLLocationAccuracyKilometer. Dimensioned as NSUnitDuration.
 func (x *LocationActivityMetric) CumulativeKilometerAccuracyTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeKilometerAccuracyTime"))
 	return obj.Wrap(_r)
 }
 
-// Cumulative time spent acquiring location at kCLLocationAccuracyThreeKilometers. Dimensioned as NSUnitDuration.
+// CumulativeThreeKilometersAccuracyTime cumulative time spent acquiring location at kCLLocationAccuracyThreeKilometers. Dimensioned as NSUnitDuration.
 func (x *LocationActivityMetric) CumulativeThreeKilometersAccuracyTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeThreeKilometersAccuracyTime"))
 	return obj.Wrap(_r)
@@ -112,3 +100,5 @@ type LocationActivityMetricable interface {
 }
 
 var _ LocationActivityMetricable = (*LocationActivityMetric)(nil)
+
+var _ MetricProvider = (*LocationActivityMetric)(nil)

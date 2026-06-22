@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Exchange request information that participants send in a turn-based match.
-//
 // TurnBasedExchange is an idiomatic wrapper over the Objective-C class GKTurnBasedExchange.
+//
+// Exchange request information that participants send in a turn-based match.
 type TurnBasedExchange struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func TurnBasedExchangeFromID(id objc.ID) *TurnBasedExchange {
 	if id == 0 {
 		return nil
 	}
-	x := &TurnBasedExchange{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TurnBasedExchange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func turnBasedExchangeAdopt(id objc.ID) *TurnBasedExchange {
 	if id == 0 {
 		return nil
 	}
-	x := &TurnBasedExchange{Handle: objref.Wrap(id)}
+	x := &TurnBasedExchange{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,13 +62,19 @@ func (x *TurnBasedExchange) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TurnBasedExchange) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTurnBasedExchange creates a new TurnBasedExchange.
 func NewTurnBasedExchange() *TurnBasedExchange {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKTurnBasedExchange")), objc.RegisterName("new"))
 	return turnBasedExchangeAdopt(_id)
 }
 
-// Cancels an exchange request.
+// CancelWithLocalizableMessageKeyArguments cancels an exchange request.
 //
 // CancelWithLocalizableMessageKeyArguments blocks until the operation completes or ctx is cancelled.
 func (x *TurnBasedExchange) CancelWithLocalizableMessageKeyArguments(ctx context.Context, key string, arguments []string) error {
@@ -85,7 +93,7 @@ func (x *TurnBasedExchange) CancelWithLocalizableMessageKeyArguments(ctx context
 	}
 }
 
-// Replies to an exchange request on behalf of a recipient.
+// ReplyWithLocalizableMessageKeyArgumentsData replies to an exchange request on behalf of a recipient.
 //
 // ReplyWithLocalizableMessageKeyArgumentsData blocks until the operation completes or ctx is cancelled.
 func (x *TurnBasedExchange) ReplyWithLocalizableMessageKeyArgumentsData(ctx context.Context, key string, arguments []string, data obj.Object) error {
@@ -104,6 +112,7 @@ func (x *TurnBasedExchange) ReplyWithLocalizableMessageKeyArgumentsData(ctx cont
 	}
 }
 
+// ExchangeID wraps the corresponding Objective-C method.
 func (x *TurnBasedExchange) ExchangeID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exchangeID"))
 	if _r == 0 {
@@ -112,22 +121,27 @@ func (x *TurnBasedExchange) ExchangeID() string {
 	return purego.GoString(_r)
 }
 
+// Sender wraps the corresponding Objective-C method.
 func (x *TurnBasedExchange) Sender() *TurnBasedParticipant {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sender"))
 	return TurnBasedParticipantFromID(_r)
 }
 
+// Recipients wraps the corresponding Objective-C method.
+//
 // Recipients returns the collection as a Go slice.
 func (x *TurnBasedExchange) Recipients() []*TurnBasedParticipant {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recipients"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TurnBasedParticipant { return TurnBasedParticipantFromID(_id) })
 }
 
+// Status wraps the corresponding Objective-C method.
 func (x *TurnBasedExchange) Status() TurnBasedExchangeStatus {
 	_r := objc.Send[TurnBasedExchangeStatus](objref.IDOf(x), objc.RegisterName("status"))
 	return _r
 }
 
+// Message wraps the corresponding Objective-C method.
 func (x *TurnBasedExchange) Message() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("message"))
 	if _r == 0 {
@@ -136,26 +150,32 @@ func (x *TurnBasedExchange) Message() string {
 	return purego.GoString(_r)
 }
 
+// Data wraps the corresponding Objective-C method.
 func (x *TurnBasedExchange) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
+// SendDate wraps the corresponding Objective-C method.
 func (x *TurnBasedExchange) SendDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendDate"))
 	return obj.Wrap(_r)
 }
 
+// TimeoutDate wraps the corresponding Objective-C method.
 func (x *TurnBasedExchange) TimeoutDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeoutDate"))
 	return obj.Wrap(_r)
 }
 
+// CompletionDate wraps the corresponding Objective-C method.
 func (x *TurnBasedExchange) CompletionDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completionDate"))
 	return obj.Wrap(_r)
 }
 
+// Replies wraps the corresponding Objective-C method.
+//
 // Replies returns the collection as a Go slice.
 func (x *TurnBasedExchange) Replies() []*TurnBasedExchangeReply {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replies"))

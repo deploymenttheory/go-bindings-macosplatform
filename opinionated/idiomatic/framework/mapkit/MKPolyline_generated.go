@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An open polygon overlay consisting of one or more connected line segments.
-//
 // Polyline is an idiomatic wrapper over the Objective-C class MKPolyline.
+//
+// Polyline is an abstract base — you do not construct it directly. Construct one of [GeodesicPolyline] and pass it where a Polyline is accepted.
+//
+// An open polygon overlay consisting of one or more connected line segments.
 type Polyline struct {
-	objref.Handle
+	MultiPoint
 }
 
 // PolylineFromID adopts an existing Objective-C object as a Polyline
@@ -25,7 +26,8 @@ func PolylineFromID(id objc.ID) *Polyline {
 	if id == 0 {
 		return nil
 	}
-	x := &Polyline{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Polyline{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,43 +40,19 @@ func polylineAdopt(id objc.ID) *Polyline {
 	if id == 0 {
 		return nil
 	}
-	x := &Polyline{Handle: objref.Wrap(id)}
+	x := &Polyline{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *Polyline) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Polyline) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Polyline) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewPolyline creates a new Polyline.
-func NewPolyline() *Polyline {
-	_id := objc.Send[objc.ID](objc.ID(_class("MKPolyline")), objc.RegisterName("new"))
-	return polylineAdopt(_id)
-}
-
-// The title of the shape annotation.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the title of the shape annotation.
 func (x *Polyline) WithTitle(title string) *Polyline {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The subtitle of the shape annotation.
-//
-// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
+// WithSubtitle the subtitle of the shape annotation.
 func (x *Polyline) WithSubtitle(subtitle string) *Polyline {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
@@ -88,3 +66,14 @@ type Polylineable interface {
 }
 
 var _ Polylineable = (*Polyline)(nil)
+
+// isPolyline marks Polyline — and, by embedding promotion, its
+// subclasses — as a member of the Polyline hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Polyline) isPolyline() {}
+
+var _ PolylineProvider = (*Polyline)(nil)
+
+var _ MultiPointProvider = (*Polyline)(nil)
+
+var _ ShapeProvider = (*Polyline)(nil)

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The paragraph or ruler attributes for an attributed string.
-//
 // ParagraphStyle is an idiomatic wrapper over the Objective-C class NSParagraphStyle.
+//
+// ParagraphStyle is an abstract base — you do not construct it directly. Construct one of [MutableParagraphStyle] and pass it where a ParagraphStyle is accepted.
+//
+// The paragraph or ruler attributes for an attributed string.
 type ParagraphStyle struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ParagraphStyleFromID(id objc.ID) *ParagraphStyle {
 	if id == 0 {
 		return nil
 	}
-	x := &ParagraphStyle{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ParagraphStyle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func paragraphStyleAdopt(id objc.ID) *ParagraphStyle {
 	if id == 0 {
 		return nil
 	}
-	x := &ParagraphStyle{Handle: objref.Wrap(id)}
+	x := &ParagraphStyle{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,120 +62,145 @@ func (x *ParagraphStyle) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewParagraphStyle creates a new ParagraphStyle.
-func NewParagraphStyle() *ParagraphStyle {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSParagraphStyle")), objc.RegisterName("new"))
-	return paragraphStyleAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ParagraphStyle) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// LineSpacing wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) LineSpacing() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lineSpacing"))
 	return _r
 }
 
+// ParagraphSpacing wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) ParagraphSpacing() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("paragraphSpacing"))
 	return _r
 }
 
+// HeadIndent wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) HeadIndent() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("headIndent"))
 	return _r
 }
 
+// TailIndent wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) TailIndent() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("tailIndent"))
 	return _r
 }
 
+// FirstLineHeadIndent wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) FirstLineHeadIndent() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("firstLineHeadIndent"))
 	return _r
 }
 
+// MinimumLineHeight wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) MinimumLineHeight() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumLineHeight"))
 	return _r
 }
 
+// MaximumLineHeight wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) MaximumLineHeight() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumLineHeight"))
 	return _r
 }
 
+// LineBreakMode wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) LineBreakMode() LineBreakMode {
 	_r := objc.Send[LineBreakMode](objref.IDOf(x), objc.RegisterName("lineBreakMode"))
 	return _r
 }
 
+// BaseWritingDirection wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) BaseWritingDirection() WritingDirection {
 	_r := objc.Send[WritingDirection](objref.IDOf(x), objc.RegisterName("baseWritingDirection"))
 	return _r
 }
 
+// LineHeightMultiple wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) LineHeightMultiple() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lineHeightMultiple"))
 	return _r
 }
 
+// ParagraphSpacingBefore wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) ParagraphSpacingBefore() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("paragraphSpacingBefore"))
 	return _r
 }
 
+// HyphenationFactor wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) HyphenationFactor() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("hyphenationFactor"))
 	return _r
 }
 
+// UsesDefaultHyphenation wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) UsesDefaultHyphenation() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesDefaultHyphenation"))
 	return _r
 }
 
+// TabStops wraps the corresponding Objective-C method.
+//
 // TabStops returns the collection as a Go slice.
 func (x *ParagraphStyle) TabStops() []*TextTab {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tabStops"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextTab { return TextTabFromID(_id) })
 }
 
+// DefaultTabInterval wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) DefaultTabInterval() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("defaultTabInterval"))
 	return _r
 }
 
+// TextLists wraps the corresponding Objective-C method.
+//
 // TextLists returns the collection as a Go slice.
 func (x *ParagraphStyle) TextLists() []*TextList {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textLists"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextList { return TextListFromID(_id) })
 }
 
+// AllowsDefaultTighteningForTruncation wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) AllowsDefaultTighteningForTruncation() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsDefaultTighteningForTruncation"))
 	return _r
 }
 
+// LineBreakStrategy wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) LineBreakStrategy() LineBreakStrategy {
 	_r := objc.Send[LineBreakStrategy](objref.IDOf(x), objc.RegisterName("lineBreakStrategy"))
 	return _r
 }
 
+// Alignment wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) Alignment() TextAlignment {
 	_r := objc.Send[TextAlignment](objref.IDOf(x), objc.RegisterName("alignment"))
 	return _r
 }
 
+// TighteningFactorForTruncation wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) TighteningFactorForTruncation() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("tighteningFactorForTruncation"))
 	return _r
 }
 
+// TextBlocks wraps the corresponding Objective-C method.
+//
 // TextBlocks returns the collection as a Go slice.
 func (x *ParagraphStyle) TextBlocks() []*TextBlock {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textBlocks"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextBlock { return TextBlockFromID(_id) })
 }
 
+// HeaderLevel wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) HeaderLevel() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("headerLevel"))
 	return _r
@@ -205,3 +234,10 @@ type ParagraphStyleable interface {
 }
 
 var _ ParagraphStyleable = (*ParagraphStyle)(nil)
+
+// isParagraphStyle marks ParagraphStyle — and, by embedding promotion, its
+// subclasses — as a member of the ParagraphStyle hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ParagraphStyle) isParagraphStyle() {}
+
+var _ ParagraphStyleProvider = (*ParagraphStyle)(nil)

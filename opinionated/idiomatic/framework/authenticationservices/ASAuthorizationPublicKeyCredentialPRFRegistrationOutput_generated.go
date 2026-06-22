@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type to represent outputs of the web authentication PRF extension, when requesting them during a registration.
-//
 // AuthorizationPublicKeyCredentialPRFRegistrationOutput is an idiomatic wrapper over the Objective-C class ASAuthorizationPublicKeyCredentialPRFRegistrationOutput.
+//
+// A type to represent outputs of the web authentication PRF extension, when requesting them during a registration.
 type AuthorizationPublicKeyCredentialPRFRegistrationOutput struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationPublicKeyCredentialPRFRegistrationOutputFromID(id objc.ID) *Au
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPublicKeyCredentialPRFRegistrationOutput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationPublicKeyCredentialPRFRegistrationOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationPublicKeyCredentialPRFRegistrationOutputAdopt(id objc.ID) *Aut
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPublicKeyCredentialPRFRegistrationOutput{Handle: objref.Wrap(id)}
+	x := &AuthorizationPublicKeyCredentialPRFRegistrationOutput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,31 @@ func (x *AuthorizationPublicKeyCredentialPRFRegistrationOutput) IsKind(className
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationPublicKeyCredentialPRFRegistrationOutput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAuthorizationPublicKeyCredentialPRFRegistrationOutput creates a new AuthorizationPublicKeyCredentialPRFRegistrationOutput.
 func NewAuthorizationPublicKeyCredentialPRFRegistrationOutput() *AuthorizationPublicKeyCredentialPRFRegistrationOutput {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPublicKeyCredentialPRFRegistrationOutput")), objc.RegisterName("new"))
 	return authorizationPublicKeyCredentialPRFRegistrationOutputAdopt(_id)
 }
 
+// IsSupported wraps the corresponding Objective-C method.
 func (x *AuthorizationPublicKeyCredentialPRFRegistrationOutput) IsSupported() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSupported"))
 	return _r
 }
 
+// First wraps the corresponding Objective-C method.
 func (x *AuthorizationPublicKeyCredentialPRFRegistrationOutput) First() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("first"))
 	return obj.Wrap(_r)
 }
 
+// Second wraps the corresponding Objective-C method.
 func (x *AuthorizationPublicKeyCredentialPRFRegistrationOutput) Second() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("second"))
 	return obj.Wrap(_r)

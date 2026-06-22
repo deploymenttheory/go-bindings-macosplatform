@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The information that describes an arrival or departure gate for a flight.
-//
 // AirportGate is an idiomatic wrapper over the Objective-C class INAirportGate.
+//
+// The information that describes an arrival or departure gate for a flight.
 type AirportGate struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AirportGateFromID(id objc.ID) *AirportGate {
 	if id == 0 {
 		return nil
 	}
-	x := &AirportGate{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AirportGate{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func airportGateAdopt(id objc.ID) *AirportGate {
 	if id == 0 {
 		return nil
 	}
-	x := &AirportGate{Handle: objref.Wrap(id)}
+	x := &AirportGate{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,20 +60,26 @@ func (x *AirportGate) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new gate object for a flight.
-//
-// NewAirportGateWithAirportTerminalGate creates a new AirportGate.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AirportGate) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAirportGateWithAirportTerminalGate creates a new gate object for a flight.
 func NewAirportGateWithAirportTerminalGate(airport *Airport, terminal string, gate string) *AirportGate {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INAirportGate")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAirport:terminal:gate:"), objref.IDOf(airport), purego.NSString(terminal), purego.NSString(gate))
 	return airportGateAdopt(_id)
 }
 
+// Airport wraps the corresponding Objective-C method.
 func (x *AirportGate) Airport() *Airport {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("airport"))
 	return AirportFromID(_r)
 }
 
+// Terminal wraps the corresponding Objective-C method.
 func (x *AirportGate) Terminal() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("terminal"))
 	if _r == 0 {
@@ -80,6 +88,7 @@ func (x *AirportGate) Terminal() string {
 	return purego.GoString(_r)
 }
 
+// Gate wraps the corresponding Objective-C method.
 func (x *AirportGate) Gate() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gate"))
 	if _r == 0 {

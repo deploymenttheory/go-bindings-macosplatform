@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An instance you use to capture Metal command data in your app.
-//
 // CaptureManager is an idiomatic wrapper over the Objective-C class MTLCaptureManager.
+//
+// An instance you use to capture Metal command data in your app.
 type CaptureManager struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func CaptureManagerFromID(id objc.ID) *CaptureManager {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptureManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func captureManagerAdopt(id objc.ID) *CaptureManager {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureManager{Handle: objref.Wrap(id)}
+	x := &CaptureManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,19 +62,25 @@ func (x *CaptureManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptureManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCaptureManager creates a new CaptureManager.
 func NewCaptureManager() *CaptureManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLCaptureManager")), objc.RegisterName("new"))
 	return captureManagerAdopt(_id)
 }
 
-// Checks to see whether a particular capture destination is supported.
+// SupportsDestination checks to see whether a particular capture destination is supported.
 func (x *CaptureManager) SupportsDestination(destination CaptureDestination) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsDestination:"), destination)
 	return _r
 }
 
-// Starts capturing any of your app’s Metal commands, with the capture session defined by a descriptor object.
+// StartCaptureWithDescriptor starts capturing any of your app’s Metal commands, with the capture session defined by a descriptor object.
 func (x *CaptureManager) StartCaptureWithDescriptor(descriptor *CaptureDescriptor) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("startCaptureWithDescriptor:error:"), objref.IDOf(descriptor), unsafe.Pointer(&_nsErr))
@@ -82,11 +90,12 @@ func (x *CaptureManager) StartCaptureWithDescriptor(descriptor *CaptureDescripto
 	return nil
 }
 
-// Stops capturing Metal commands.
+// StopCapture stops capturing Metal commands.
 func (x *CaptureManager) StopCapture() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopCapture"))
 }
 
+// IsCapturing wraps the corresponding Objective-C method.
 func (x *CaptureManager) IsCapturing() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCapturing"))
 	return _r

@@ -1,0 +1,9 @@
+{{/*
+    sentinel.tmpl renders a named error value for each member of a framework's
+    error-code enum, so callers can match a returned error with errors.Is. The
+    domain, code, and comment are resolved in the gather phase.
+*/}}
+{{define "sentinels"}}{{range .}}{{template "sentinel" .}}{{end}}{{end}}
+{{define "sentinel"}}{{.CommentBlock}}var {{.GoName}} = errkit.New({{.Domain | printf "%q"}}, {{.Code}})
+
+{{end}}

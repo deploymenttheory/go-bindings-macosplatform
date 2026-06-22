@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the text styling rules to apply to a media item’s textual content.
-//
 // TextStyleRule is an idiomatic wrapper over the Objective-C class AVTextStyleRule.
+//
+// An object that represents the text styling rules to apply to a media item’s textual content.
 type TextStyleRule struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TextStyleRuleFromID(id objc.ID) *TextStyleRule {
 	if id == 0 {
 		return nil
 	}
-	x := &TextStyleRule{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextStyleRule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func textStyleRuleAdopt(id objc.ID) *TextStyleRule {
 	if id == 0 {
 		return nil
 	}
-	x := &TextStyleRule{Handle: objref.Wrap(id)}
+	x := &TextStyleRule{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,33 @@ func (x *TextStyleRule) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a text style rule object with the specified style attributes.
-//
-// NewTextStyleRuleWithTextMarkupAttributes creates a new TextStyleRule.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextStyleRule) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTextStyleRuleWithTextMarkupAttributes creates a text style rule object with the specified style attributes.
 func NewTextStyleRuleWithTextMarkupAttributes(textMarkupAttributes obj.Object) *TextStyleRule {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVTextStyleRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextMarkupAttributes:"), objref.IDOf(textMarkupAttributes))
 	return textStyleRuleAdopt(_id)
 }
 
-// Creates a text style rule object with the specified style attributes and text range information.
-//
-// NewTextStyleRuleWithTextMarkupAttributesTextSelector creates a new TextStyleRule.
+// NewTextStyleRuleWithTextMarkupAttributesTextSelector creates a text style rule object with the specified style attributes and text range information.
 func NewTextStyleRuleWithTextMarkupAttributesTextSelector(textMarkupAttributes obj.Object, textSelector string) *TextStyleRule {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVTextStyleRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextMarkupAttributes:textSelector:"), objref.IDOf(textMarkupAttributes), purego.NSString(textSelector))
 	return textStyleRuleAdopt(_id)
 }
 
-// An NSDictionary with keys representing text style attributes that are specifiable in text markup. Eligible keys and the expected types of their corresponding values are defined in <CoreMedia/CMTextMarkup.h>.
+// TextMarkupAttributes an NSDictionary with keys representing text style attributes that are specifiable in text markup. Eligible keys and the expected types of their corresponding values are defined in <CoreMedia/CMTextMarkup.h>.
 func (x *TextStyleRule) TextMarkupAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textMarkupAttributes"))
 	return obj.Wrap(_r)
 }
 
-// A string that identifies the range or ranges of text to which the attributes should be applied. A value of nil indicates that the textMarkupAttributes should be applied as default styles for all text unless overridden by content markup or other applicable text selectors.
+// TextSelector a string that identifies the range or ranges of text to which the attributes should be applied. A value of nil indicates that the textMarkupAttributes should be applied as default styles for all text unless overridden by content markup or other applicable text selectors.
 func (x *TextStyleRule) TextSelector() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textSelector"))
 	if _r == 0 {

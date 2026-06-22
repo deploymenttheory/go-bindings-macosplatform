@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// This node calculates loss information during training typically immediately after the inference portion of network evaluation is performed. The result image of the loss operations is typically the first gradient image to be comsumed by the gradient passes that work their way back up the graph. In addition, the node will update the loss image in the MPSNNLabels with the desired estimate of correctness.
-//
 // CNNLossNode is an idiomatic wrapper over the Objective-C class MPSCNNLossNode.
+//
+// It embeds [NNFilterNode], promoting that type's methods.
+//
+// This node calculates loss information during training typically immediately after the inference portion of network evaluation is performed. The result image of the loss operations is typically the first gradient image to be comsumed by the gradient passes that work their way back up the graph. In addition, the node will update the loss image in the MPSNNLabels with the desired estimate of correctness.
 type CNNLossNode struct {
-	objref.Handle
+	NNFilterNode
 }
 
 // CNNLossNodeFromID adopts an existing Objective-C object as a CNNLossNode
@@ -25,7 +26,8 @@ func CNNLossNodeFromID(id objc.ID) *CNNLossNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNLossNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNLossNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func cNNLossNodeAdopt(id objc.ID) *CNNLossNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNLossNode{Handle: objref.Wrap(id)}
+	x := &CNNLossNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNLossNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNLossNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNLossNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNLossNodeWithSourceLossDescriptor creates a new CNNLossNode.
@@ -65,15 +53,13 @@ func NewCNNLossNodeWithSourceLossDescriptor(source *NNImageNode, descriptor *CNN
 	return cNNLossNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNLossNode) WithLabel(label string) *CNNLossNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Get the input node for labes and weights, for example to set the handle
+// InputLabels get the input node for labes and weights, for example to set the handle
 func (x *CNNLossNode) InputLabels() *NNLabelsNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputLabels"))
 	return NNLabelsNodeFromID(_r)
@@ -87,3 +73,5 @@ type CNNLossNodeable interface {
 }
 
 var _ CNNLossNodeable = (*CNNLossNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNLossNode)(nil)

@@ -6,17 +6,19 @@ package coreimage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information about a text that was detected in a still or video image.
-//
 // TextFeature is an idiomatic wrapper over the Objective-C class CITextFeature.
+//
+// It embeds [Feature], promoting that type's methods.
+//
+// Information about a text that was detected in a still or video image.
 type TextFeature struct {
-	objref.Handle
+	Feature
 }
 
 // TextFeatureFromID adopts an existing Objective-C object as a TextFeature
@@ -25,7 +27,8 @@ func TextFeatureFromID(id objc.ID) *TextFeature {
 	if id == 0 {
 		return nil
 	}
-	x := &TextFeature{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextFeature{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func textFeatureAdopt(id objc.ID) *TextFeature {
 	if id == 0 {
 		return nil
 	}
-	x := &TextFeature{Handle: objref.Wrap(id)}
+	x := &TextFeature{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *TextFeature) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextFeature) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextFeature) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewTextFeature creates a new TextFeature.
@@ -64,7 +53,31 @@ func NewTextFeature() *TextFeature {
 	return textFeatureAdopt(_id)
 }
 
-// An array containing additional features detected within the feature. A text detector can identify both a major region that is likely to contain text as well as the areas within that region that likely to contain individual text features. Such features might be single characters, groups of closely-packed characters, or entire words. To detect sub-features, “/CIDetector/featuresInImage:options:“ needs to be called with the “CIDetectorReturnSubFeatures“ option set to true.
+// TopLeft the image coordinate of the upper-left corner of the detected text.
+func (x *TextFeature) TopLeft() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("topLeft"))
+	return _r
+}
+
+// TopRight the image coordinate of the upper-right corner of the detected text.
+func (x *TextFeature) TopRight() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("topRight"))
+	return _r
+}
+
+// BottomLeft the image coordinate of the lower-left corner of the detected text.
+func (x *TextFeature) BottomLeft() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("bottomLeft"))
+	return _r
+}
+
+// BottomRight the image coordinate of the lower-right corner of the detected text.
+func (x *TextFeature) BottomRight() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("bottomRight"))
+	return _r
+}
+
+// SubFeatures an array containing additional features detected within the feature. A text detector can identify both a major region that is likely to contain text as well as the areas within that region that likely to contain individual text features. Such features might be single characters, groups of closely-packed characters, or entire words. To detect sub-features, “/CIDetector/featuresInImage:options:“ needs to be called with the “CIDetectorReturnSubFeatures“ option set to true.
 func (x *TextFeature) SubFeatures() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subFeatures"))
 	return obj.Wrap(_r)
@@ -73,7 +86,13 @@ func (x *TextFeature) SubFeatures() obj.Object {
 // TextFeatureable is the interface implemented by [TextFeature], for mocking and DI.
 type TextFeatureable interface {
 	obj.Object
+	TopLeft() corefoundation.CGPoint
+	TopRight() corefoundation.CGPoint
+	BottomLeft() corefoundation.CGPoint
+	BottomRight() corefoundation.CGPoint
 	SubFeatures() obj.Object
 }
 
 var _ TextFeatureable = (*TextFeature)(nil)
+
+var _ FeatureProvider = (*TextFeature)(nil)

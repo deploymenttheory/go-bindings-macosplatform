@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view controller that a credential manager app uses to extend AutoFill.
-//
 // CredentialProviderViewController is an idiomatic wrapper over the Objective-C class ASCredentialProviderViewController.
+//
+// A view controller that a credential manager app uses to extend AutoFill.
 type CredentialProviderViewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CredentialProviderViewControllerFromID(id objc.ID) *CredentialProviderViewC
 	if id == 0 {
 		return nil
 	}
-	x := &CredentialProviderViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CredentialProviderViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func credentialProviderViewControllerAdopt(id objc.ID) *CredentialProviderViewCo
 	if id == 0 {
 		return nil
 	}
-	x := &CredentialProviderViewController{Handle: objref.Wrap(id)}
+	x := &CredentialProviderViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,63 +60,69 @@ func (x *CredentialProviderViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CredentialProviderViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCredentialProviderViewController creates a new CredentialProviderViewController.
 func NewCredentialProviderViewController() *CredentialProviderViewController {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASCredentialProviderViewController")), objc.RegisterName("new"))
 	return credentialProviderViewControllerAdopt(_id)
 }
 
-// Prepares the interface to display a list of credentials from which the user can select.
+// PrepareCredentialListForServiceIdentifiers prepares the interface to display a list of credentials from which the user can select.
 func (x *CredentialProviderViewController) PrepareCredentialListForServiceIdentifiers(serviceIdentifiers []*CredentialServiceIdentifier) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareCredentialListForServiceIdentifiers:"), purego.SliceToNSArray(serviceIdentifiers, func(_v *CredentialServiceIdentifier) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Prepares the interface to display a list of passkey and password credentials from which the user can select.
+// PrepareCredentialListForServiceIdentifiersRequestParameters prepares the interface to display a list of passkey and password credentials from which the user can select.
 func (x *CredentialProviderViewController) PrepareCredentialListForServiceIdentifiersRequestParameters(serviceIdentifiers []*CredentialServiceIdentifier, requestParameters *PasskeyCredentialRequestParameters) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareCredentialListForServiceIdentifiers:requestParameters:"), purego.SliceToNSArray(serviceIdentifiers, func(_v *CredentialServiceIdentifier) objc.ID { return objref.IDOf(_v) }), objref.IDOf(requestParameters))
 }
 
-// Prepares the interface to display a list of one-time passcodes (OTPs) that people can select from.
+// PrepareOneTimeCodeCredentialListForServiceIdentifiers prepares the interface to display a list of one-time passcodes (OTPs) that people can select from.
 func (x *CredentialProviderViewController) PrepareOneTimeCodeCredentialListForServiceIdentifiers(serviceIdentifiers []*CredentialServiceIdentifier) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareOneTimeCodeCredentialListForServiceIdentifiers:"), purego.SliceToNSArray(serviceIdentifiers, func(_v *CredentialServiceIdentifier) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Attempts to provide the user-requested credential with no further user interaction.
+// ProvideCredentialWithoutUserInteractionForIdentity attempts to provide the user-requested credential with no further user interaction.
 func (x *CredentialProviderViewController) ProvideCredentialWithoutUserInteractionForIdentity(credentialIdentity *PasswordCredentialIdentity) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("provideCredentialWithoutUserInteractionForIdentity:"), objref.IDOf(credentialIdentity))
 }
 
-// Prepares the interface for a user interaction, like a database login, that enables it to access and return the credential for the given identity.
+// PrepareInterfaceToProvideCredentialForIdentity prepares the interface for a user interaction, like a database login, that enables it to access and return the credential for the given identity.
 func (x *CredentialProviderViewController) PrepareInterfaceToProvideCredentialForIdentity(credentialIdentity *PasswordCredentialIdentity) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareInterfaceToProvideCredentialForIdentity:"), objref.IDOf(credentialIdentity))
 }
 
-// Prepares the interface to enable the user to configure the extension.
+// PrepareInterfaceForExtensionConfiguration prepares the interface to enable the user to configure the extension.
 func (x *CredentialProviderViewController) PrepareInterfaceForExtensionConfiguration() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareInterfaceForExtensionConfiguration"))
 }
 
-// Perform a conditional passkey registration, if possible.
+// PerformPasskeyRegistrationWithoutUserInteractionIfPossible perform a conditional passkey registration, if possible.
 func (x *CredentialProviderViewController) PerformPasskeyRegistrationWithoutUserInteractionIfPossible(registrationRequest *PasskeyCredentialRequest) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performPasskeyRegistrationWithoutUserInteractionIfPossible:"), objref.IDOf(registrationRequest))
 }
 
-// Receives a report from the system that a relying party indicated that a passkey’s user name updated.
+// ReportPublicKeyCredentialUpdateForRelyingPartyUserHandleNewName receives a report from the system that a relying party indicated that a passkey’s user name updated.
 func (x *CredentialProviderViewController) ReportPublicKeyCredentialUpdateForRelyingPartyUserHandleNewName(relyingParty string, userHandle obj.Object, newName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reportPublicKeyCredentialUpdateForRelyingParty:userHandle:newName:"), purego.NSString(relyingParty), objref.IDOf(userHandle), purego.NSString(newName))
 }
 
-// Receives a report from the system that a relying party indicated a passkey credential is invalid.
+// ReportUnknownPublicKeyCredentialForRelyingPartyCredentialID receives a report from the system that a relying party indicated a passkey credential is invalid.
 func (x *CredentialProviderViewController) ReportUnknownPublicKeyCredentialForRelyingPartyCredentialID(relyingParty string, credentialID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reportUnknownPublicKeyCredentialForRelyingParty:credentialID:"), purego.NSString(relyingParty), objref.IDOf(credentialID))
 }
 
-// Receives a report from the system that a relying party sent a snapshot of all accepted credentials for an account.
+// ReportAllAcceptedPublicKeyCredentialsForRelyingPartyUserHandleAcceptedCredentialIDs receives a report from the system that a relying party sent a snapshot of all accepted credentials for an account.
 func (x *CredentialProviderViewController) ReportAllAcceptedPublicKeyCredentialsForRelyingPartyUserHandleAcceptedCredentialIDs(relyingParty string, userHandle obj.Object, acceptedCredentialIDs []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reportAllAcceptedPublicKeyCredentialsForRelyingParty:userHandle:acceptedCredentialIDs:"), purego.NSString(relyingParty), objref.IDOf(userHandle), purego.SliceToNSArray(acceptedCredentialIDs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Receives a report from the system that a relying party indicatd that a password credential isn’t needed anymore for a given user name.
+// ReportUnusedPasswordCredentialForDomainUserName receives a report from the system that a relying party indicatd that a password credential isn’t needed anymore for a given user name.
 func (x *CredentialProviderViewController) ReportUnusedPasswordCredentialForDomainUserName(domain string, userName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reportUnusedPasswordCredentialForDomain:userName:"), purego.NSString(domain), purego.NSString(userName))
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Surface characteristics that determine the acoustic properties of an object.
-//
 // Material is an idiomatic wrapper over the Objective-C class PHASEMaterial.
+//
+// Surface characteristics that determine the acoustic properties of an object.
 type Material struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MaterialFromID(id objc.ID) *Material {
 	if id == 0 {
 		return nil
 	}
-	x := &Material{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Material{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func materialAdopt(id objc.ID) *Material {
 	if id == 0 {
 		return nil
 	}
-	x := &Material{Handle: objref.Wrap(id)}
+	x := &Material{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,9 +60,13 @@ func (x *Material) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a material with the given preset.
-//
-// NewMaterialWithEnginePreset creates a new Material.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Material) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMaterialWithEnginePreset creates a material with the given preset.
 func NewMaterialWithEnginePreset(engine *Engine, preset MaterialPreset) *Material {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEMaterial")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:preset:"), objref.IDOf(engine), preset)

@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that reports the status code and errors for a payment authorization request.
-//
 // PaymentAuthorizationResult is an idiomatic wrapper over the Objective-C class PKPaymentAuthorizationResult.
+//
+// An object that reports the status code and errors for a payment authorization request.
 type PaymentAuthorizationResult struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func PaymentAuthorizationResultFromID(id objc.ID) *PaymentAuthorizationResult {
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentAuthorizationResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PaymentAuthorizationResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func paymentAuthorizationResultAdopt(id objc.ID) *PaymentAuthorizationResult {
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentAuthorizationResult{Handle: objref.Wrap(id)}
+	x := &PaymentAuthorizationResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,10 +62,14 @@ func (x *PaymentAuthorizationResult) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes the result with the status code and list of errors.
-//
-// NewPaymentAuthorizationResultWithStatusErrors creates a new PaymentAuthorizationResult.
-func NewPaymentAuthorizationResultWithStatusErrors(status PaymentAuthorizationStatus) (*PaymentAuthorizationResult, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PaymentAuthorizationResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPaymentAuthorizationResultWithStatusErrors initializes the result with the status code and list of errors.
+func NewPaymentAuthorizationResultWithStatusErrors(status PaymentAuthorizationStatus) (result *PaymentAuthorizationResult, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentAuthorizationResult")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStatus:errors:"), status, unsafe.Pointer(&_nsErr))
@@ -73,36 +79,36 @@ func NewPaymentAuthorizationResultWithStatusErrors(status PaymentAuthorizationSt
 	return paymentAuthorizationResultAdopt(_id), nil
 }
 
-// Payment authorization general status.
-//
-// WithStatus sets status and returns the receiver so calls can be chained.
+// WithStatus payment authorization general status.
 func (x *PaymentAuthorizationResult) WithStatus(status PaymentAuthorizationStatus) *PaymentAuthorizationResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
 	return x
 }
 
-// Optional metadata with order details for the placed order.
-//
-// WithOrderDetails sets orderDetails and returns the receiver so calls can be chained.
+// WithOrderDetails optional metadata with order details for the placed order.
 func (x *PaymentAuthorizationResult) WithOrderDetails(orderDetails *PaymentOrderDetails) *PaymentAuthorizationResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrderDetails:"), objref.IDOf(orderDetails))
 	return x
 }
 
+// Status wraps the corresponding Objective-C method.
 func (x *PaymentAuthorizationResult) Status() PaymentAuthorizationStatus {
 	_r := objc.Send[PaymentAuthorizationStatus](objref.IDOf(x), objc.RegisterName("status"))
 	return _r
 }
 
+// SetStatus wraps the corresponding Objective-C method.
 func (x *PaymentAuthorizationResult) SetStatus(status PaymentAuthorizationStatus) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
 }
 
+// Errors wraps the corresponding Objective-C method.
 func (x *PaymentAuthorizationResult) Errors() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errors"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetErrors wraps the corresponding Objective-C method.
 func (x *PaymentAuthorizationResult) SetErrors() error {
 	var _nsErr uintptr
 	_ = objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrors:"), unsafe.Pointer(&_nsErr))
@@ -112,11 +118,13 @@ func (x *PaymentAuthorizationResult) SetErrors() error {
 	return nil
 }
 
+// OrderDetails wraps the corresponding Objective-C method.
 func (x *PaymentAuthorizationResult) OrderDetails() *PaymentOrderDetails {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderDetails"))
 	return PaymentOrderDetailsFromID(_r)
 }
 
+// SetOrderDetails wraps the corresponding Objective-C method.
 func (x *PaymentAuthorizationResult) SetOrderDetails(orderDetails *PaymentOrderDetails) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrderDetails:"), objref.IDOf(orderDetails))
 }

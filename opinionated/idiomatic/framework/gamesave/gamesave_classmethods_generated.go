@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Requests an instance of the game-save directory.
+// OpenDirectoryForContainerIdentifier requests an instance of the game-save directory.
 func OpenDirectoryForContainerIdentifier(containerIdentifier string) *SyncedDirectory {
 	_r := objc.Send[objc.ID](objc.ID(_class("GSSyncedDirectory")), objc.RegisterName("openDirectoryForContainerIdentifier:"), purego.NSString(containerIdentifier))
 	return SyncedDirectoryFromID(_r)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that manages parameters of a post-quantum pre-shared key (PPK).
-//
 // NEVPNIKEv2PPKConfiguration is an idiomatic wrapper over the Objective-C class NEVPNIKEv2PPKConfiguration.
+//
+// A class that manages parameters of a post-quantum pre-shared key (PPK).
 type NEVPNIKEv2PPKConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NEVPNIKEv2PPKConfigurationFromID(id objc.ID) *NEVPNIKEv2PPKConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &NEVPNIKEv2PPKConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEVPNIKEv2PPKConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nEVPNIKEv2PPKConfigurationAdopt(id objc.ID) *NEVPNIKEv2PPKConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &NEVPNIKEv2PPKConfiguration{Handle: objref.Wrap(id)}
+	x := &NEVPNIKEv2PPKConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +60,26 @@ func (x *NEVPNIKEv2PPKConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a quantum-secure pre-shared key (PPK) configuration.
-//
-// NewNEVPNIKEv2PPKConfigurationWithIdentifierKeychainReference creates a new NEVPNIKEv2PPKConfiguration.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEVPNIKEv2PPKConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNEVPNIKEv2PPKConfigurationWithIdentifierKeychainReference initializes a quantum-secure pre-shared key (PPK) configuration.
 func NewNEVPNIKEv2PPKConfigurationWithIdentifierKeychainReference(identifier string, keychainReference obj.Object) *NEVPNIKEv2PPKConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NEVPNIKEv2PPKConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:keychainReference:"), purego.NSString(identifier), objref.IDOf(keychainReference))
 	return nEVPNIKEv2PPKConfigurationAdopt(_id)
 }
 
-// A Boolean value that indicates whether it’s mandatory for the VPN server to use this PPK.
-//
-// WithIsMandatory sets isMandatory and returns the receiver so calls can be chained.
+// WithIsMandatory a Boolean value that indicates whether it’s mandatory for the VPN server to use this PPK.
 func (x *NEVPNIKEv2PPKConfiguration) WithIsMandatory(isMandatory bool) *NEVPNIKEv2PPKConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsMandatory:"), isMandatory)
 	return x
 }
 
-// The identifer for the PPK.
+// Identifier the identifer for the PPK.
 func (x *NEVPNIKEv2PPKConfiguration) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -84,18 +88,19 @@ func (x *NEVPNIKEv2PPKConfiguration) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// A persistent reference to a keychain item of class kSecClassGenericPassword containing the PPK.
+// KeychainReference a persistent reference to a keychain item of class kSecClassGenericPassword containing the PPK.
 func (x *NEVPNIKEv2PPKConfiguration) KeychainReference() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keychainReference"))
 	return obj.Wrap(_r)
 }
 
-// Boolean indicating whether use of the PPK is mandatory or not. Default is YES.
+// IsMandatory boolean indicating whether use of the PPK is mandatory or not. Default is YES.
 func (x *NEVPNIKEv2PPKConfiguration) IsMandatory() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMandatory"))
 	return _r
 }
 
+// SetIsMandatory wraps the corresponding Objective-C method.
 func (x *NEVPNIKEv2PPKConfiguration) SetIsMandatory(isMandatory bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsMandatory:"), isMandatory)
 }

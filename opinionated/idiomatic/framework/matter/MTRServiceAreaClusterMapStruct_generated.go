@@ -23,7 +23,8 @@ func MTRServiceAreaClusterMapStructFromID(id objc.ID) *MTRServiceAreaClusterMapS
 	if id == 0 {
 		return nil
 	}
-	x := &MTRServiceAreaClusterMapStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRServiceAreaClusterMapStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRServiceAreaClusterMapStructAdopt(id objc.ID) *MTRServiceAreaClusterMapSt
 	if id == 0 {
 		return nil
 	}
-	x := &MTRServiceAreaClusterMapStruct{Handle: objref.Wrap(id)}
+	x := &MTRServiceAreaClusterMapStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,33 +58,42 @@ func (x *MTRServiceAreaClusterMapStruct) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRServiceAreaClusterMapStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRServiceAreaClusterMapStruct creates a new MTRServiceAreaClusterMapStruct.
 func NewMTRServiceAreaClusterMapStruct() *MTRServiceAreaClusterMapStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRServiceAreaClusterMapStruct")), objc.RegisterName("new"))
 	return mTRServiceAreaClusterMapStructAdopt(_id)
 }
 
-// WithMapID sets mapID and returns the receiver so calls can be chained.
+// WithMapID sets the property and returns the receiver so calls can be chained.
 func (x *MTRServiceAreaClusterMapStruct) WithMapID(mapID obj.Object) *MTRServiceAreaClusterMapStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapID:"), objref.IDOf(mapID))
 	return x
 }
 
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *MTRServiceAreaClusterMapStruct) WithName(name string) *MTRServiceAreaClusterMapStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
+// MapID wraps the corresponding Objective-C method.
 func (x *MTRServiceAreaClusterMapStruct) MapID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapID"))
 	return obj.Wrap(_r)
 }
 
+// SetMapID wraps the corresponding Objective-C method.
 func (x *MTRServiceAreaClusterMapStruct) SetMapID(mapID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapID:"), objref.IDOf(mapID))
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *MTRServiceAreaClusterMapStruct) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -91,6 +102,7 @@ func (x *MTRServiceAreaClusterMapStruct) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *MTRServiceAreaClusterMapStruct) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }

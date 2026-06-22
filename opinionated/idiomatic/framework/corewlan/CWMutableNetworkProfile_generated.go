@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Encapsulates a mutable network profile entry.
-//
 // MutableNetworkProfile is an idiomatic wrapper over the Objective-C class CWMutableNetworkProfile.
+//
+// It embeds [NetworkProfile], promoting that type's methods.
+//
+// Encapsulates a mutable network profile entry.
 type MutableNetworkProfile struct {
-	objref.Handle
+	NetworkProfile
 }
 
 // MutableNetworkProfileFromID adopts an existing Objective-C object as a MutableNetworkProfile
@@ -25,7 +26,8 @@ func MutableNetworkProfileFromID(id objc.ID) *MutableNetworkProfile {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableNetworkProfile{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableNetworkProfile{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func mutableNetworkProfileAdopt(id objc.ID) *MutableNetworkProfile {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableNetworkProfile{Handle: objref.Wrap(id)}
+	x := &MutableNetworkProfile{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MutableNetworkProfile) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableNetworkProfile) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableNetworkProfile) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMutableNetworkProfile creates a new MutableNetworkProfile.
@@ -64,26 +52,24 @@ func NewMutableNetworkProfile() *MutableNetworkProfile {
 	return mutableNetworkProfileAdopt(_id)
 }
 
-// The service set identifier (SSID).
-//
-// WithSsidData sets ssidData and returns the receiver so calls can be chained.
+// WithSsidData the service set identifier (SSID).
 func (x *MutableNetworkProfile) WithSsidData(ssidData obj.Object) *MutableNetworkProfile {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSsidData:"), objref.IDOf(ssidData))
 	return x
 }
 
-// The security type.
-//
-// WithSecurity sets security and returns the receiver so calls can be chained.
+// WithSecurity the security type.
 func (x *MutableNetworkProfile) WithSecurity(security Security) *MutableNetworkProfile {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecurity:"), security)
 	return x
 }
 
+// SetSsidData wraps the corresponding Objective-C method.
 func (x *MutableNetworkProfile) SetSsidData(ssidData obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSsidData:"), objref.IDOf(ssidData))
 }
 
+// SetSecurity wraps the corresponding Objective-C method.
 func (x *MutableNetworkProfile) SetSecurity(security Security) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecurity:"), security)
 }
@@ -98,3 +84,5 @@ type MutableNetworkProfileable interface {
 }
 
 var _ MutableNetworkProfileable = (*MutableNetworkProfile)(nil)
+
+var _ NetworkProfileProvider = (*MutableNetworkProfile)(nil)

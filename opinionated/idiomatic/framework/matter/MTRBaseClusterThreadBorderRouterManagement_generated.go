@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Thread Border Router Management
-//
 // MTRBaseClusterThreadBorderRouterManagement is an idiomatic wrapper over the Objective-C class MTRBaseClusterThreadBorderRouterManagement.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
+//
+// Cluster Thread Border Router Management
 type MTRBaseClusterThreadBorderRouterManagement struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterThreadBorderRouterManagementFromID adopts an existing Objective-C object as a MTRBaseClusterThreadBorderRouterManagement
@@ -27,7 +28,8 @@ func MTRBaseClusterThreadBorderRouterManagementFromID(id objc.ID) *MTRBaseCluste
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterThreadBorderRouterManagement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterThreadBorderRouterManagement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,39 +42,23 @@ func mTRBaseClusterThreadBorderRouterManagementAdopt(id objc.ID) *MTRBaseCluster
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterThreadBorderRouterManagement{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterThreadBorderRouterManagement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterThreadBorderRouterManagement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterThreadBorderRouterManagement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterThreadBorderRouterManagement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterThreadBorderRouterManagementWithDeviceEndpointIDQueue creates a new MTRBaseClusterThreadBorderRouterManagement.
+// NewMTRBaseClusterThreadBorderRouterManagementWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterThreadBorderRouterManagementWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterThreadBorderRouterManagement {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterThreadBorderRouterManagement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterThreadBorderRouterManagementAdopt(_id)
 }
 
-// Command GetActiveDatasetRequest
+// GetActiveDatasetRequestWithParamsCompletion command GetActiveDatasetRequest
 //
 // GetActiveDatasetRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) GetActiveDatasetRequestWithParamsCompletion(ctx context.Context, params *MTRThreadBorderRouterManagementClusterGetActiveDatasetRequestParams) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) GetActiveDatasetRequestWithParamsCompletion(ctx context.Context, params *MTRThreadBorderRouterManagementClusterGetActiveDatasetRequestParams) (result *MTRThreadBorderRouterManagementClusterDatasetResponseParams, err error) {
 	type _result struct {
 		val *MTRThreadBorderRouterManagementClusterDatasetResponseParams
 		err error
@@ -94,8 +80,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) GetActiveDatasetRequestWith
 	}
 }
 
+// GetActiveDatasetRequestWithCompletion wraps the corresponding Objective-C method.
+//
 // GetActiveDatasetRequestWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) GetActiveDatasetRequestWithCompletion(ctx context.Context) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) GetActiveDatasetRequestWithCompletion(ctx context.Context) (result *MTRThreadBorderRouterManagementClusterDatasetResponseParams, err error) {
 	type _result struct {
 		val *MTRThreadBorderRouterManagementClusterDatasetResponseParams
 		err error
@@ -117,10 +105,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) GetActiveDatasetRequestWith
 	}
 }
 
-// Command GetPendingDatasetRequest
+// GetPendingDatasetRequestWithParamsCompletion command GetPendingDatasetRequest
 //
 // GetPendingDatasetRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) GetPendingDatasetRequestWithParamsCompletion(ctx context.Context, params *MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) GetPendingDatasetRequestWithParamsCompletion(ctx context.Context, params *MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams) (result *MTRThreadBorderRouterManagementClusterDatasetResponseParams, err error) {
 	type _result struct {
 		val *MTRThreadBorderRouterManagementClusterDatasetResponseParams
 		err error
@@ -142,8 +130,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) GetPendingDatasetRequestWit
 	}
 }
 
+// GetPendingDatasetRequestWithCompletion wraps the corresponding Objective-C method.
+//
 // GetPendingDatasetRequestWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) GetPendingDatasetRequestWithCompletion(ctx context.Context) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) GetPendingDatasetRequestWithCompletion(ctx context.Context) (result *MTRThreadBorderRouterManagementClusterDatasetResponseParams, err error) {
 	type _result struct {
 		val *MTRThreadBorderRouterManagementClusterDatasetResponseParams
 		err error
@@ -165,8 +155,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) GetPendingDatasetRequestWit
 	}
 }
 
+// ReadAttributeBorderRouterNameWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeBorderRouterNameWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeBorderRouterNameWithCompletion(ctx context.Context) (string, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeBorderRouterNameWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -188,8 +180,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeBorderRouterNa
 	}
 }
 
+// SubscribeAttributeBorderRouterNameWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeBorderRouterNameWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeBorderRouterNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeBorderRouterNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -211,8 +205,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeBorderRou
 	}
 }
 
+// ReadAttributeBorderAgentIDWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeBorderAgentIDWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeBorderAgentIDWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeBorderAgentIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -234,8 +230,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeBorderAgentIDW
 	}
 }
 
+// SubscribeAttributeBorderAgentIDWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeBorderAgentIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeBorderAgentIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeBorderAgentIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -257,8 +255,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeBorderAge
 	}
 }
 
+// ReadAttributeThreadVersionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeThreadVersionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeThreadVersionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeThreadVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -280,8 +280,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeThreadVersionW
 	}
 }
 
+// SubscribeAttributeThreadVersionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeThreadVersionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeThreadVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeThreadVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -303,8 +305,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeThreadVer
 	}
 }
 
+// ReadAttributeInterfaceEnabledWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeInterfaceEnabledWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeInterfaceEnabledWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeInterfaceEnabledWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -326,8 +330,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeInterfaceEnabl
 	}
 }
 
+// SubscribeAttributeInterfaceEnabledWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeInterfaceEnabledWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeInterfaceEnabledWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeInterfaceEnabledWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -349,8 +355,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeInterface
 	}
 }
 
+// ReadAttributeActiveDatasetTimestampWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeActiveDatasetTimestampWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeActiveDatasetTimestampWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeActiveDatasetTimestampWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -372,8 +380,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeActiveDatasetT
 	}
 }
 
+// SubscribeAttributeActiveDatasetTimestampWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeActiveDatasetTimestampWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeActiveDatasetTimestampWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeActiveDatasetTimestampWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -395,8 +405,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeActiveDat
 	}
 }
 
+// ReadAttributePendingDatasetTimestampWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePendingDatasetTimestampWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributePendingDatasetTimestampWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributePendingDatasetTimestampWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -418,8 +430,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributePendingDataset
 	}
 }
 
+// SubscribeAttributePendingDatasetTimestampWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePendingDatasetTimestampWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributePendingDatasetTimestampWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributePendingDatasetTimestampWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -441,8 +455,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributePendingDa
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -464,8 +480,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeGeneratedComma
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -487,8 +505,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeGenerated
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -510,8 +530,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeAcceptedComman
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -533,8 +555,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeAcceptedC
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -556,8 +580,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeAttributeListW
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -579,8 +605,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeAttribute
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -602,8 +630,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeFeatureMapWith
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -625,8 +655,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeFeatureMa
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -648,8 +680,10 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeClusterRevisio
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -703,3 +737,7 @@ type MTRBaseClusterThreadBorderRouterManagementable interface {
 }
 
 var _ MTRBaseClusterThreadBorderRouterManagementable = (*MTRBaseClusterThreadBorderRouterManagement)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterThreadBorderRouterManagement)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterThreadBorderRouterManagement)(nil)

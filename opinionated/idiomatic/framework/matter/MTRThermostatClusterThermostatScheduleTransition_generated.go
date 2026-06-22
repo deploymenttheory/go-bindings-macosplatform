@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRThermostatClusterThermostatScheduleTransition is an idiomatic wrapper over the Objective-C class MTRThermostatClusterThermostatScheduleTransition.
+//
+// It embeds [MTRThermostatClusterWeeklyScheduleTransitionStruct], promoting that type's methods.
 type MTRThermostatClusterThermostatScheduleTransition struct {
-	objref.Handle
+	MTRThermostatClusterWeeklyScheduleTransitionStruct
 }
 
 // MTRThermostatClusterThermostatScheduleTransitionFromID adopts an existing Objective-C object as a MTRThermostatClusterThermostatScheduleTransition
@@ -23,7 +24,8 @@ func MTRThermostatClusterThermostatScheduleTransitionFromID(id objc.ID) *MTRTher
 	if id == 0 {
 		return nil
 	}
-	x := &MTRThermostatClusterThermostatScheduleTransition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRThermostatClusterThermostatScheduleTransition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRThermostatClusterThermostatScheduleTransitionAdopt(id objc.ID) *MTRTherm
 	if id == 0 {
 		return nil
 	}
-	x := &MTRThermostatClusterThermostatScheduleTransition{Handle: objref.Wrap(id)}
+	x := &MTRThermostatClusterThermostatScheduleTransition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRThermostatClusterThermostatScheduleTransition) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRThermostatClusterThermostatScheduleTransition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRThermostatClusterThermostatScheduleTransition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRThermostatClusterThermostatScheduleTransition creates a new MTRThermostatClusterThermostatScheduleTransition.
@@ -62,19 +50,19 @@ func NewMTRThermostatClusterThermostatScheduleTransition() *MTRThermostatCluster
 	return mTRThermostatClusterThermostatScheduleTransitionAdopt(_id)
 }
 
-// WithTransitionTime sets transitionTime and returns the receiver so calls can be chained.
+// WithTransitionTime sets the property and returns the receiver so calls can be chained.
 func (x *MTRThermostatClusterThermostatScheduleTransition) WithTransitionTime(transitionTime obj.Object) *MTRThermostatClusterThermostatScheduleTransition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return x
 }
 
-// WithHeatSetpoint sets heatSetpoint and returns the receiver so calls can be chained.
+// WithHeatSetpoint sets the property and returns the receiver so calls can be chained.
 func (x *MTRThermostatClusterThermostatScheduleTransition) WithHeatSetpoint(heatSetpoint obj.Object) *MTRThermostatClusterThermostatScheduleTransition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeatSetpoint:"), objref.IDOf(heatSetpoint))
 	return x
 }
 
-// WithCoolSetpoint sets coolSetpoint and returns the receiver so calls can be chained.
+// WithCoolSetpoint sets the property and returns the receiver so calls can be chained.
 func (x *MTRThermostatClusterThermostatScheduleTransition) WithCoolSetpoint(coolSetpoint obj.Object) *MTRThermostatClusterThermostatScheduleTransition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCoolSetpoint:"), objref.IDOf(coolSetpoint))
 	return x
@@ -89,3 +77,5 @@ type MTRThermostatClusterThermostatScheduleTransitionable interface {
 }
 
 var _ MTRThermostatClusterThermostatScheduleTransitionable = (*MTRThermostatClusterThermostatScheduleTransition)(nil)
+
+var _ MTRThermostatClusterWeeklyScheduleTransitionStructProvider = (*MTRThermostatClusterThermostatScheduleTransition)(nil)

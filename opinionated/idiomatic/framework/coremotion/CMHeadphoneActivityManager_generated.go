@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that starts and manages headphone activity services.
-//
 // HeadphoneActivityManager is an idiomatic wrapper over the Objective-C class CMHeadphoneActivityManager.
+//
+// An object that starts and manages headphone activity services.
 type HeadphoneActivityManager struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func HeadphoneActivityManagerFromID(id objc.ID) *HeadphoneActivityManager {
 	if id == 0 {
 		return nil
 	}
-	x := &HeadphoneActivityManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HeadphoneActivityManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func headphoneActivityManagerAdopt(id objc.ID) *HeadphoneActivityManager {
 	if id == 0 {
 		return nil
 	}
-	x := &HeadphoneActivityManager{Handle: objref.Wrap(id)}
+	x := &HeadphoneActivityManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,47 @@ func (x *HeadphoneActivityManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HeadphoneActivityManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewHeadphoneActivityManager creates a new HeadphoneActivityManager.
 func NewHeadphoneActivityManager() *HeadphoneActivityManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("CMHeadphoneActivityManager")), objc.RegisterName("new"))
 	return headphoneActivityManagerAdopt(_id)
 }
 
-// Stops headphone activity updates.
+// StopActivityUpdates stops headphone activity updates.
 func (x *HeadphoneActivityManager) StopActivityUpdates() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopActivityUpdates"))
 }
 
-// Stops headphone status updates.
+// StopStatusUpdates stops headphone status updates.
 func (x *HeadphoneActivityManager) StopStatusUpdates() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopStatusUpdates"))
 }
 
+// IsActivityAvailable wraps the corresponding Objective-C method.
 func (x *HeadphoneActivityManager) IsActivityAvailable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActivityAvailable"))
 	return _r
 }
 
+// IsActivityActive wraps the corresponding Objective-C method.
 func (x *HeadphoneActivityManager) IsActivityActive() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActivityActive"))
 	return _r
 }
 
+// IsStatusAvailable wraps the corresponding Objective-C method.
 func (x *HeadphoneActivityManager) IsStatusAvailable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStatusAvailable"))
 	return _r
 }
 
+// IsStatusActive wraps the corresponding Objective-C method.
 func (x *HeadphoneActivityManager) IsStatusActive() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStatusActive"))
 	return _r

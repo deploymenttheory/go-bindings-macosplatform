@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that captures information about a webpage.
-//
 // SafariPageProperties is an idiomatic wrapper over the Objective-C class SFSafariPageProperties.
+//
+// An object that captures information about a webpage.
 type SafariPageProperties struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SafariPagePropertiesFromID(id objc.ID) *SafariPageProperties {
 	if id == 0 {
 		return nil
 	}
-	x := &SafariPageProperties{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SafariPageProperties{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func safariPagePropertiesAdopt(id objc.ID) *SafariPageProperties {
 	if id == 0 {
 		return nil
 	}
-	x := &SafariPageProperties{Handle: objref.Wrap(id)}
+	x := &SafariPageProperties{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,25 @@ func (x *SafariPageProperties) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SafariPageProperties) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSafariPageProperties creates a new SafariPageProperties.
 func NewSafariPageProperties() *SafariPageProperties {
 	_id := objc.Send[objc.ID](objc.ID(_class("SFSafariPageProperties")), objc.RegisterName("new"))
 	return safariPagePropertiesAdopt(_id)
 }
 
+// Url wraps the corresponding Objective-C method.
 func (x *SafariPageProperties) Url() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *SafariPageProperties) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -77,11 +87,13 @@ func (x *SafariPageProperties) Title() string {
 	return purego.GoString(_r)
 }
 
+// UsesPrivateBrowsing wraps the corresponding Objective-C method.
 func (x *SafariPageProperties) UsesPrivateBrowsing() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesPrivateBrowsing"))
 	return _r
 }
 
+// IsActive wraps the corresponding Objective-C method.
 func (x *SafariPageProperties) IsActive() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
 	return _r

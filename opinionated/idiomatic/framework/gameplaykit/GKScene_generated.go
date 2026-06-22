@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container for associating GameplayKit objects with a SpriteKit scene.
-//
 // Scene is an idiomatic wrapper over the Objective-C class GKScene.
+//
+// A container for associating GameplayKit objects with a SpriteKit scene.
 type Scene struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SceneFromID(id objc.ID) *Scene {
 	if id == 0 {
 		return nil
 	}
-	x := &Scene{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Scene{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func sceneAdopt(id objc.ID) *Scene {
 	if id == 0 {
 		return nil
 	}
-	x := &Scene{Handle: objref.Wrap(id)}
+	x := &Scene{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,33 +60,39 @@ func (x *Scene) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Scene) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewScene creates a new Scene.
 func NewScene() *Scene {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKScene")), objc.RegisterName("new"))
 	return sceneAdopt(_id)
 }
 
-// Adds a GameplayKit entity to the list of entities managed by the scene.
+// AddEntity adds a GameplayKit entity to the list of entities managed by the scene.
 func (x *Scene) AddEntity(entity *Entity) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addEntity:"), objref.IDOf(entity))
 }
 
-// Removes a GameplayKit entity from the list of entities managed by the scene.
+// RemoveEntity removes a GameplayKit entity from the list of entities managed by the scene.
 func (x *Scene) RemoveEntity(entity *Entity) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeEntity:"), objref.IDOf(entity))
 }
 
-// Adds a graph to the scene's list of graphs.
+// AddGraphName adds a graph to the scene's list of graphs.
 func (x *Scene) AddGraphName(graph *Graph, name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addGraph:name:"), objref.IDOf(graph), purego.NSString(name))
 }
 
-// Removes a pathfinding graph from the list of graphs managed by the scene.
+// RemoveGraph removes a pathfinding graph from the list of graphs managed by the scene.
 func (x *Scene) RemoveGraph(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeGraph:"), purego.NSString(name))
 }
 
-// The entities of this scene.
+// Entities the entities of this scene.
 //
 // Entities returns the collection as a Go slice.
 func (x *Scene) Entities() []*Entity {
@@ -92,7 +100,7 @@ func (x *Scene) Entities() []*Entity {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Entity { return EntityFromID(_id) })
 }
 
-// The navigational graphs of this scene.
+// Graphs the navigational graphs of this scene.
 func (x *Scene) Graphs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("graphs"))
 	return obj.Wrap(_r)

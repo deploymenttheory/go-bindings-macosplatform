@@ -9,16 +9,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// The class that sends control, bulk, interrupt, and isochronous input/output requests for function drivers, and manages stream capabilities.
-//
 // HostPipe is an idiomatic wrapper over the Objective-C class IOUSBHostPipe.
+//
+// It embeds [HostIOSource], promoting that type's methods.
+//
+// The class that sends control, bulk, interrupt, and isochronous input/output requests for function drivers, and manages stream capabilities.
 type HostPipe struct {
-	objref.Handle
+	HostIOSource
 }
 
 // HostPipeFromID adopts an existing Objective-C object as a HostPipe
@@ -27,7 +28,8 @@ func HostPipeFromID(id objc.ID) *HostPipe {
 	if id == 0 {
 		return nil
 	}
-	x := &HostPipe{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HostPipe{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,24 +42,10 @@ func hostPipeAdopt(id objc.ID) *HostPipe {
 	if id == 0 {
 		return nil
 	}
-	x := &HostPipe{Handle: objref.Wrap(id)}
+	x := &HostPipe{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *HostPipe) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HostPipe) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HostPipe) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewHostPipe creates a new HostPipe.
@@ -66,7 +54,7 @@ func NewHostPipe() *HostPipe {
 	return hostPipeAdopt(_id)
 }
 
-// Sets the desired idle suspend timeout for the interface.
+// SetIdleTimeout sets the desired idle suspend timeout for the interface.
 func (x *HostPipe) SetIdleTimeout(idleTimeout float64) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setIdleTimeout:error:"), idleTimeout, unsafe.Pointer(&_nsErr))
@@ -76,7 +64,7 @@ func (x *HostPipe) SetIdleTimeout(idleTimeout float64) error {
 	return nil
 }
 
-// Clears the halt condition of the pipe.
+// ClearStall clears the halt condition of the pipe.
 //
 // ClearStall returns an error if the operation did not succeed.
 func (x *HostPipe) ClearStall() error {
@@ -88,7 +76,7 @@ func (x *HostPipe) ClearStall() error {
 	return nil
 }
 
-// Aborts pending input/output requests.
+// AbortWithOption aborts pending input/output requests.
 func (x *HostPipe) AbortWithOption(option HostAbortOption) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("abortWithOption:error:"), option, unsafe.Pointer(&_nsErr))
@@ -98,7 +86,7 @@ func (x *HostPipe) AbortWithOption(option HostAbortOption) error {
 	return nil
 }
 
-// Aborts pending input/output requests synchronously.
+// Abort aborts pending input/output requests synchronously.
 //
 // Abort returns an error if the operation did not succeed.
 func (x *HostPipe) Abort() error {
@@ -110,7 +98,18 @@ func (x *HostPipe) Abort() error {
 	return nil
 }
 
-// Enables streams for the pipe.
+// SendIORequestWithDataBytesTransferredCompletionTimeout sends an input/output request on the pipe.
+func (x *HostPipe) SendIORequestWithDataBytesTransferredCompletionTimeout(data obj.Object, completionTimeout float64) (bytesTransferred int, err error) {
+	var _out0 int
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendIORequestWithData:bytesTransferred:completionTimeout:error:"), objref.IDOf(data), unsafe.Pointer(&_out0), completionTimeout, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _out0, nil
+}
+
+// EnableStreams enables streams for the pipe.
 //
 // EnableStreams returns an error if the operation did not succeed.
 func (x *HostPipe) EnableStreams() error {
@@ -122,7 +121,7 @@ func (x *HostPipe) EnableStreams() error {
 	return nil
 }
 
-// Disables streams for the pipe.
+// DisableStreams disables streams for the pipe.
 //
 // DisableStreams returns an error if the operation did not succeed.
 func (x *HostPipe) DisableStreams() error {
@@ -134,8 +133,8 @@ func (x *HostPipe) DisableStreams() error {
 	return nil
 }
 
-// Returns the stream for a stream ID.
-func (x *HostPipe) CopyStreamWithStreamIDError(streamID int) (*HostStream, error) {
+// CopyStreamWithStreamIDError returns the stream for a stream ID.
+func (x *HostPipe) CopyStreamWithStreamIDError(streamID int) (result *HostStream, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copyStreamWithStreamID:error:"), streamID, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -144,7 +143,7 @@ func (x *HostPipe) CopyStreamWithStreamIDError(streamID int) (*HostStream, error
 	return HostStreamFromID(_r), nil
 }
 
-// Retrieve the current idle suspend timeout. See
+// IdleTimeout retrieve the current idle suspend timeout. See
 func (x *HostPipe) IdleTimeout() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("idleTimeout"))
 	return _r
@@ -157,10 +156,13 @@ type HostPipeable interface {
 	ClearStall() error
 	AbortWithOption(option HostAbortOption) error
 	Abort() error
+	SendIORequestWithDataBytesTransferredCompletionTimeout(data obj.Object, completionTimeout float64) (bytesTransferred int, err error)
 	EnableStreams() error
 	DisableStreams() error
-	CopyStreamWithStreamIDError(streamID int) (*HostStream, error)
+	CopyStreamWithStreamIDError(streamID int) (result *HostStream, err error)
 	IdleTimeout() float64
 }
 
 var _ HostPipeable = (*HostPipe)(nil)
+
+var _ HostIOSourceProvider = (*HostPipe)(nil)

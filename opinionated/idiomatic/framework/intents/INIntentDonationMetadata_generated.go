@@ -13,6 +13,8 @@ import (
 )
 
 // IntentDonationMetadata is an idiomatic wrapper over the Objective-C class INIntentDonationMetadata.
+//
+// IntentDonationMetadata is an abstract base — you do not construct it directly. Construct one of [SendMessageIntentDonationMetadata] and pass it where a IntentDonationMetadata is accepted.
 type IntentDonationMetadata struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func IntentDonationMetadataFromID(id objc.ID) *IntentDonationMetadata {
 	if id == 0 {
 		return nil
 	}
-	x := &IntentDonationMetadata{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IntentDonationMetadata{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func intentDonationMetadataAdopt(id objc.ID) *IntentDonationMetadata {
 	if id == 0 {
 		return nil
 	}
-	x := &IntentDonationMetadata{Handle: objref.Wrap(id)}
+	x := &IntentDonationMetadata{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,10 +60,10 @@ func (x *IntentDonationMetadata) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewIntentDonationMetadata creates a new IntentDonationMetadata.
-func NewIntentDonationMetadata() *IntentDonationMetadata {
-	_id := objc.Send[objc.ID](objc.ID(_class("INIntentDonationMetadata")), objc.RegisterName("new"))
-	return intentDonationMetadataAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IntentDonationMetadata) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // IntentDonationMetadataable is the interface implemented by [IntentDonationMetadata], for mocking and DI.
@@ -68,3 +72,10 @@ type IntentDonationMetadataable interface {
 }
 
 var _ IntentDonationMetadataable = (*IntentDonationMetadata)(nil)
+
+// isIntentDonationMetadata marks IntentDonationMetadata — and, by embedding promotion, its
+// subclasses — as a member of the IntentDonationMetadata hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *IntentDonationMetadata) isIntentDonationMetadata() {}
+
+var _ IntentDonationMetadataProvider = (*IntentDonationMetadata)(nil)

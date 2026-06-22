@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that names a specific XPC listener.
-//
 // XPCListenerEndpoint is an idiomatic wrapper over the Objective-C class NSXPCListenerEndpoint.
+//
+// An object that names a specific XPC listener.
 type XPCListenerEndpoint struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func XPCListenerEndpointFromID(id objc.ID) *XPCListenerEndpoint {
 	if id == 0 {
 		return nil
 	}
-	x := &XPCListenerEndpoint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &XPCListenerEndpoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func xPCListenerEndpointAdopt(id objc.ID) *XPCListenerEndpoint {
 	if id == 0 {
 		return nil
 	}
-	x := &XPCListenerEndpoint{Handle: objref.Wrap(id)}
+	x := &XPCListenerEndpoint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *XPCListenerEndpoint) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *XPCListenerEndpoint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewXPCListenerEndpoint creates a new XPCListenerEndpoint.
 func NewXPCListenerEndpoint() *XPCListenerEndpoint {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSXPCListenerEndpoint")), objc.RegisterName("new"))
 	return xPCListenerEndpointAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *XPCListenerEndpoint) WithScriptingProperties(scriptingProperties obj.Object) *XPCListenerEndpoint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x

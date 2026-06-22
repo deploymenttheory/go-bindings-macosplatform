@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBaseClusterMediaPlayback is an idiomatic wrapper over the Objective-C class MTRBaseClusterMediaPlayback.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
 type MTRBaseClusterMediaPlayback struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterMediaPlaybackFromID adopts an existing Objective-C object as a MTRBaseClusterMediaPlayback
@@ -25,7 +26,8 @@ func MTRBaseClusterMediaPlaybackFromID(id objc.ID) *MTRBaseClusterMediaPlayback 
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterMediaPlayback{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterMediaPlayback{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func mTRBaseClusterMediaPlaybackAdopt(id objc.ID) *MTRBaseClusterMediaPlayback {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterMediaPlayback{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterMediaPlayback{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterMediaPlayback) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterMediaPlayback) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterMediaPlayback) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterMediaPlaybackWithDeviceEndpointIDQueue creates a new MTRBaseClusterMediaPlayback.
+// NewMTRBaseClusterMediaPlaybackWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterMediaPlaybackWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterMediaPlayback {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterMediaPlayback")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -74,10 +60,10 @@ func NewMTRBaseClusterMediaPlaybackWithDeviceEndpointQueue(device *MTRBaseDevice
 	return mTRBaseClusterMediaPlaybackAdopt(_id)
 }
 
-// Command Play Upon receipt, this SHALL play media.
+// PlayWithParamsCompletion command Play Upon receipt, this SHALL play media.
 //
 // PlayWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) PlayWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPlayParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) PlayWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPlayParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -99,8 +85,10 @@ func (x *MTRBaseClusterMediaPlayback) PlayWithParamsCompletion(ctx context.Conte
 	}
 }
 
+// PlayWithCompletion wraps the corresponding Objective-C method.
+//
 // PlayWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) PlayWithCompletion(ctx context.Context) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) PlayWithCompletion(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -122,10 +110,10 @@ func (x *MTRBaseClusterMediaPlayback) PlayWithCompletion(ctx context.Context) (*
 	}
 }
 
-// Command Pause Upon receipt, this SHALL pause media.
+// PauseWithParamsCompletion command Pause Upon receipt, this SHALL pause media.
 //
 // PauseWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) PauseWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPauseParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) PauseWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPauseParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -147,8 +135,10 @@ func (x *MTRBaseClusterMediaPlayback) PauseWithParamsCompletion(ctx context.Cont
 	}
 }
 
+// PauseWithCompletion wraps the corresponding Objective-C method.
+//
 // PauseWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) PauseWithCompletion(ctx context.Context) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) PauseWithCompletion(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -170,10 +160,10 @@ func (x *MTRBaseClusterMediaPlayback) PauseWithCompletion(ctx context.Context) (
 	}
 }
 
-// Command Stop Upon receipt, this SHALL stop media. User experience is context-specific. This will often navigate the user back to the location where media was originally launched.
+// StopWithParamsCompletion command Stop Upon receipt, this SHALL stop media. User experience is context-specific. This will often navigate the user back to the location where media was originally launched.
 //
 // StopWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) StopWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterStopParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) StopWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterStopParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -195,8 +185,10 @@ func (x *MTRBaseClusterMediaPlayback) StopWithParamsCompletion(ctx context.Conte
 	}
 }
 
+// StopWithCompletion wraps the corresponding Objective-C method.
+//
 // StopWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) StopWithCompletion(ctx context.Context) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) StopWithCompletion(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -218,10 +210,10 @@ func (x *MTRBaseClusterMediaPlayback) StopWithCompletion(ctx context.Context) (*
 	}
 }
 
-// Command StartOver Upon receipt, this SHALL Start Over with the current media playback item.
+// StartOverWithParamsCompletion command StartOver Upon receipt, this SHALL Start Over with the current media playback item.
 //
 // StartOverWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) StartOverWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterStartOverParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) StartOverWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterStartOverParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -243,8 +235,10 @@ func (x *MTRBaseClusterMediaPlayback) StartOverWithParamsCompletion(ctx context.
 	}
 }
 
+// StartOverWithCompletion wraps the corresponding Objective-C method.
+//
 // StartOverWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) StartOverWithCompletion(ctx context.Context) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) StartOverWithCompletion(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -266,10 +260,10 @@ func (x *MTRBaseClusterMediaPlayback) StartOverWithCompletion(ctx context.Contex
 	}
 }
 
-// Command Previous Upon receipt, this SHALL cause the handler to be invoked for "Previous". User experience is context-specific. This will often Go back to the previous media playback item.
+// PreviousWithParamsCompletion command Previous Upon receipt, this SHALL cause the handler to be invoked for "Previous". User experience is context-specific. This will often Go back to the previous media playback item.
 //
 // PreviousWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) PreviousWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPreviousParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) PreviousWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPreviousParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -291,8 +285,10 @@ func (x *MTRBaseClusterMediaPlayback) PreviousWithParamsCompletion(ctx context.C
 	}
 }
 
+// PreviousWithCompletion wraps the corresponding Objective-C method.
+//
 // PreviousWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) PreviousWithCompletion(ctx context.Context) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) PreviousWithCompletion(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -314,10 +310,10 @@ func (x *MTRBaseClusterMediaPlayback) PreviousWithCompletion(ctx context.Context
 	}
 }
 
-// Command Next Upon receipt, this SHALL cause the handler to be invoked for "Next". User experience is context-specific. This will often Go forward to the next media playback item.
+// NextWithParamsCompletion command Next Upon receipt, this SHALL cause the handler to be invoked for "Next". User experience is context-specific. This will often Go forward to the next media playback item.
 //
 // NextWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) NextWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterNextParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) NextWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterNextParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -339,8 +335,10 @@ func (x *MTRBaseClusterMediaPlayback) NextWithParamsCompletion(ctx context.Conte
 	}
 }
 
+// NextWithCompletion wraps the corresponding Objective-C method.
+//
 // NextWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) NextWithCompletion(ctx context.Context) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) NextWithCompletion(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -362,10 +360,10 @@ func (x *MTRBaseClusterMediaPlayback) NextWithCompletion(ctx context.Context) (*
 	}
 }
 
-// Command Rewind Upon receipt, this SHALL Rewind through media. Different Rewind speeds can be used on the TV based upon the number of sequential calls to this function. This is to avoid needing to define every speed now (multiple fast, slow motion, etc).
+// RewindWithParamsCompletion command Rewind Upon receipt, this SHALL Rewind through media. Different Rewind speeds can be used on the TV based upon the number of sequential calls to this function. This is to avoid needing to define every speed now (multiple fast, slow motion, etc).
 //
 // RewindWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) RewindWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterRewindParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) RewindWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterRewindParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -387,8 +385,10 @@ func (x *MTRBaseClusterMediaPlayback) RewindWithParamsCompletion(ctx context.Con
 	}
 }
 
+// RewindWithCompletion wraps the corresponding Objective-C method.
+//
 // RewindWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) RewindWithCompletion(ctx context.Context) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) RewindWithCompletion(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -410,10 +410,10 @@ func (x *MTRBaseClusterMediaPlayback) RewindWithCompletion(ctx context.Context) 
 	}
 }
 
-// Command FastForward Upon receipt, this SHALL Advance through media. Different FF speeds can be used on the TV based upon the number of sequential calls to this function. This is to avoid needing to define every speed now (multiple fast, slow motion, etc).
+// FastForwardWithParamsCompletion command FastForward Upon receipt, this SHALL Advance through media. Different FF speeds can be used on the TV based upon the number of sequential calls to this function. This is to avoid needing to define every speed now (multiple fast, slow motion, etc).
 //
 // FastForwardWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) FastForwardWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterFastForwardParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) FastForwardWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterFastForwardParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -435,8 +435,10 @@ func (x *MTRBaseClusterMediaPlayback) FastForwardWithParamsCompletion(ctx contex
 	}
 }
 
+// FastForwardWithCompletion wraps the corresponding Objective-C method.
+//
 // FastForwardWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) FastForwardWithCompletion(ctx context.Context) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) FastForwardWithCompletion(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -458,10 +460,10 @@ func (x *MTRBaseClusterMediaPlayback) FastForwardWithCompletion(ctx context.Cont
 	}
 }
 
-// Command SkipForward Upon receipt, this SHALL Skip forward in the media by the given number of seconds, using the data as follows:
+// SkipForwardWithParamsCompletion command SkipForward Upon receipt, this SHALL Skip forward in the media by the given number of seconds, using the data as follows:
 //
 // SkipForwardWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SkipForwardWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSkipForwardParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) SkipForwardWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSkipForwardParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -483,10 +485,10 @@ func (x *MTRBaseClusterMediaPlayback) SkipForwardWithParamsCompletion(ctx contex
 	}
 }
 
-// Command SkipBackward Upon receipt, this SHALL Skip backward in the media by the given number of seconds, using the data as follows:
+// SkipBackwardWithParamsCompletion command SkipBackward Upon receipt, this SHALL Skip backward in the media by the given number of seconds, using the data as follows:
 //
 // SkipBackwardWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SkipBackwardWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSkipBackwardParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) SkipBackwardWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSkipBackwardParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -508,10 +510,10 @@ func (x *MTRBaseClusterMediaPlayback) SkipBackwardWithParamsCompletion(ctx conte
 	}
 }
 
-// Command Seek Upon receipt, this SHALL Skip backward in the media by the given number of seconds, using the data as follows:
+// SeekWithParamsCompletion command Seek Upon receipt, this SHALL Skip backward in the media by the given number of seconds, using the data as follows:
 //
 // SeekWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SeekWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSeekParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) SeekWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSeekParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -533,8 +535,10 @@ func (x *MTRBaseClusterMediaPlayback) SeekWithParamsCompletion(ctx context.Conte
 	}
 }
 
+// ReadAttributeCurrentStateWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentStateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributeCurrentStateWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributeCurrentStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -556,8 +560,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributeCurrentStateWithCompletion(ct
 	}
 }
 
+// SubscribeAttributeCurrentStateWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeCurrentStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeCurrentStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -579,8 +585,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeCurrentStateWithParamsSu
 	}
 }
 
+// ReadAttributeStartTimeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeStartTimeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributeStartTimeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributeStartTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -602,8 +610,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributeStartTimeWithCompletion(ctx c
 	}
 }
 
+// SubscribeAttributeStartTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeStartTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeStartTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeStartTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -625,8 +635,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeStartTimeWithParamsSubsc
 	}
 }
 
+// ReadAttributeDurationWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDurationWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributeDurationWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributeDurationWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -648,8 +660,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributeDurationWithCompletion(ctx co
 	}
 }
 
+// SubscribeAttributeDurationWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDurationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeDurationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeDurationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -671,8 +685,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeDurationWithParamsSubscr
 	}
 }
 
+// ReadAttributeSampledPositionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSampledPositionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributeSampledPositionWithCompletion(ctx context.Context) (*MTRMediaPlaybackClusterPlaybackPositionStruct, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributeSampledPositionWithCompletion(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackPositionStruct, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackPositionStruct
 		err error
@@ -694,8 +710,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributeSampledPositionWithCompletion
 	}
 }
 
+// SubscribeAttributeSampledPositionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSampledPositionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeSampledPositionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRMediaPlaybackClusterPlaybackPositionStruct, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeSampledPositionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRMediaPlaybackClusterPlaybackPositionStruct, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackPositionStruct
 		err error
@@ -717,8 +735,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeSampledPositionWithParam
 	}
 }
 
+// ReadAttributePlaybackSpeedWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePlaybackSpeedWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributePlaybackSpeedWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributePlaybackSpeedWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -740,8 +760,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributePlaybackSpeedWithCompletion(c
 	}
 }
 
+// SubscribeAttributePlaybackSpeedWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePlaybackSpeedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributePlaybackSpeedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributePlaybackSpeedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -763,8 +785,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributePlaybackSpeedWithParamsS
 	}
 }
 
+// ReadAttributeSeekRangeEndWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSeekRangeEndWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeEndWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeEndWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -786,8 +810,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeEndWithCompletion(ct
 	}
 }
 
+// SubscribeAttributeSeekRangeEndWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSeekRangeEndWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeEndWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeEndWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -809,8 +835,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeEndWithParamsSu
 	}
 }
 
+// ReadAttributeSeekRangeStartWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSeekRangeStartWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeStartWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeStartWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -832,8 +860,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeStartWithCompletion(
 	}
 }
 
+// SubscribeAttributeSeekRangeStartWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSeekRangeStartWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeStartWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeStartWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -855,8 +885,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeStartWithParams
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -878,8 +910,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributeGeneratedCommandListWithCompl
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -901,8 +935,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeGeneratedCommandListWith
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -924,8 +960,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributeAcceptedCommandListWithComple
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -947,8 +985,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeAcceptedCommandListWithP
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -970,8 +1010,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributeAttributeListWithCompletion(c
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -993,8 +1035,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeAttributeListWithParamsS
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1016,8 +1060,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributeFeatureMapWithCompletion(ctx 
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1039,8 +1085,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeFeatureMapWithParamsSubs
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1062,8 +1110,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributeClusterRevisionWithCompletion
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1085,8 +1135,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeClusterRevisionWithParam
 	}
 }
 
+// PlayWithParams wraps the corresponding Objective-C method.
+//
 // PlayWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) PlayWithParams(ctx context.Context, params *MTRMediaPlaybackClusterPlayParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) PlayWithParams(ctx context.Context, params *MTRMediaPlaybackClusterPlayParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1108,8 +1160,10 @@ func (x *MTRBaseClusterMediaPlayback) PlayWithParams(ctx context.Context, params
 	}
 }
 
+// Play wraps the corresponding Objective-C method.
+//
 // Play blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) Play(ctx context.Context) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) Play(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1131,8 +1185,10 @@ func (x *MTRBaseClusterMediaPlayback) Play(ctx context.Context) (*MTRMediaPlayba
 	}
 }
 
+// PauseWithParams wraps the corresponding Objective-C method.
+//
 // PauseWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) PauseWithParams(ctx context.Context, params *MTRMediaPlaybackClusterPauseParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) PauseWithParams(ctx context.Context, params *MTRMediaPlaybackClusterPauseParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1154,8 +1210,10 @@ func (x *MTRBaseClusterMediaPlayback) PauseWithParams(ctx context.Context, param
 	}
 }
 
+// Pause wraps the corresponding Objective-C method.
+//
 // Pause blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) Pause(ctx context.Context) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) Pause(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1177,8 +1235,10 @@ func (x *MTRBaseClusterMediaPlayback) Pause(ctx context.Context) (*MTRMediaPlayb
 	}
 }
 
+// StopPlaybackWithParams wraps the corresponding Objective-C method.
+//
 // StopPlaybackWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) StopPlaybackWithParams(ctx context.Context, params *MTRMediaPlaybackClusterStopPlaybackParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) StopPlaybackWithParams(ctx context.Context, params *MTRMediaPlaybackClusterStopPlaybackParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1200,8 +1260,10 @@ func (x *MTRBaseClusterMediaPlayback) StopPlaybackWithParams(ctx context.Context
 	}
 }
 
+// StopPlayback wraps the corresponding Objective-C method.
+//
 // StopPlayback blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) StopPlayback(ctx context.Context) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) StopPlayback(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1223,8 +1285,10 @@ func (x *MTRBaseClusterMediaPlayback) StopPlayback(ctx context.Context) (*MTRMed
 	}
 }
 
+// StartOverWithParams wraps the corresponding Objective-C method.
+//
 // StartOverWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) StartOverWithParams(ctx context.Context, params *MTRMediaPlaybackClusterStartOverParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) StartOverWithParams(ctx context.Context, params *MTRMediaPlaybackClusterStartOverParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1246,8 +1310,10 @@ func (x *MTRBaseClusterMediaPlayback) StartOverWithParams(ctx context.Context, p
 	}
 }
 
+// StartOver wraps the corresponding Objective-C method.
+//
 // StartOver blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) StartOver(ctx context.Context) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) StartOver(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1269,8 +1335,10 @@ func (x *MTRBaseClusterMediaPlayback) StartOver(ctx context.Context) (*MTRMediaP
 	}
 }
 
+// PreviousWithParams wraps the corresponding Objective-C method.
+//
 // PreviousWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) PreviousWithParams(ctx context.Context, params *MTRMediaPlaybackClusterPreviousParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) PreviousWithParams(ctx context.Context, params *MTRMediaPlaybackClusterPreviousParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1292,8 +1360,10 @@ func (x *MTRBaseClusterMediaPlayback) PreviousWithParams(ctx context.Context, pa
 	}
 }
 
+// Previous wraps the corresponding Objective-C method.
+//
 // Previous blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) Previous(ctx context.Context) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) Previous(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1315,8 +1385,10 @@ func (x *MTRBaseClusterMediaPlayback) Previous(ctx context.Context) (*MTRMediaPl
 	}
 }
 
+// NextWithParams wraps the corresponding Objective-C method.
+//
 // NextWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) NextWithParams(ctx context.Context, params *MTRMediaPlaybackClusterNextParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) NextWithParams(ctx context.Context, params *MTRMediaPlaybackClusterNextParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1338,8 +1410,10 @@ func (x *MTRBaseClusterMediaPlayback) NextWithParams(ctx context.Context, params
 	}
 }
 
+// Next wraps the corresponding Objective-C method.
+//
 // Next blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) Next(ctx context.Context) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) Next(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1361,8 +1435,10 @@ func (x *MTRBaseClusterMediaPlayback) Next(ctx context.Context) (*MTRMediaPlayba
 	}
 }
 
+// RewindWithParams wraps the corresponding Objective-C method.
+//
 // RewindWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) RewindWithParams(ctx context.Context, params *MTRMediaPlaybackClusterRewindParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) RewindWithParams(ctx context.Context, params *MTRMediaPlaybackClusterRewindParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1384,8 +1460,10 @@ func (x *MTRBaseClusterMediaPlayback) RewindWithParams(ctx context.Context, para
 	}
 }
 
+// Rewind wraps the corresponding Objective-C method.
+//
 // Rewind blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) Rewind(ctx context.Context) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) Rewind(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1407,8 +1485,10 @@ func (x *MTRBaseClusterMediaPlayback) Rewind(ctx context.Context) (*MTRMediaPlay
 	}
 }
 
+// FastForwardWithParams wraps the corresponding Objective-C method.
+//
 // FastForwardWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) FastForwardWithParams(ctx context.Context, params *MTRMediaPlaybackClusterFastForwardParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) FastForwardWithParams(ctx context.Context, params *MTRMediaPlaybackClusterFastForwardParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1430,8 +1510,10 @@ func (x *MTRBaseClusterMediaPlayback) FastForwardWithParams(ctx context.Context,
 	}
 }
 
+// FastForward wraps the corresponding Objective-C method.
+//
 // FastForward blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) FastForward(ctx context.Context) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) FastForward(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1453,8 +1535,10 @@ func (x *MTRBaseClusterMediaPlayback) FastForward(ctx context.Context) (*MTRMedi
 	}
 }
 
+// SkipForwardWithParams wraps the corresponding Objective-C method.
+//
 // SkipForwardWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SkipForwardWithParams(ctx context.Context, params *MTRMediaPlaybackClusterSkipForwardParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) SkipForwardWithParams(ctx context.Context, params *MTRMediaPlaybackClusterSkipForwardParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1476,8 +1560,10 @@ func (x *MTRBaseClusterMediaPlayback) SkipForwardWithParams(ctx context.Context,
 	}
 }
 
+// SkipBackwardWithParams wraps the corresponding Objective-C method.
+//
 // SkipBackwardWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SkipBackwardWithParams(ctx context.Context, params *MTRMediaPlaybackClusterSkipBackwardParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) SkipBackwardWithParams(ctx context.Context, params *MTRMediaPlaybackClusterSkipBackwardParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1499,8 +1585,10 @@ func (x *MTRBaseClusterMediaPlayback) SkipBackwardWithParams(ctx context.Context
 	}
 }
 
+// SeekWithParams wraps the corresponding Objective-C method.
+//
 // SeekWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SeekWithParams(ctx context.Context, params *MTRMediaPlaybackClusterSeekParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRBaseClusterMediaPlayback) SeekWithParams(ctx context.Context, params *MTRMediaPlaybackClusterSeekParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1522,8 +1610,10 @@ func (x *MTRBaseClusterMediaPlayback) SeekWithParams(ctx context.Context, params
 	}
 }
 
+// ReadAttributeCurrentState wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentState blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributeCurrentState(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributeCurrentState(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1545,8 +1635,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributeCurrentState(ctx context.Cont
 	}
 }
 
+// SubscribeAttributeCurrentStateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentStateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeCurrentStateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeCurrentStateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1568,8 +1660,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeCurrentStateWithMinInter
 	}
 }
 
+// ReadAttributeStartTime wraps the corresponding Objective-C method.
+//
 // ReadAttributeStartTime blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributeStartTime(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributeStartTime(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1591,8 +1685,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributeStartTime(ctx context.Context
 	}
 }
 
+// SubscribeAttributeStartTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeStartTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeStartTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeStartTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1614,8 +1710,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeStartTimeWithMinInterval
 	}
 }
 
+// ReadAttributeDuration wraps the corresponding Objective-C method.
+//
 // ReadAttributeDuration blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributeDuration(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributeDuration(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1637,8 +1735,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributeDuration(ctx context.Context)
 	}
 }
 
+// SubscribeAttributeDurationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDurationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeDurationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeDurationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1660,8 +1760,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeDurationWithMinIntervalM
 	}
 }
 
+// ReadAttributeSampledPosition wraps the corresponding Objective-C method.
+//
 // ReadAttributeSampledPosition blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributeSampledPosition(ctx context.Context) (*MTRMediaPlaybackClusterPlaybackPosition, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributeSampledPosition(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackPosition, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackPosition
 		err error
@@ -1683,8 +1785,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributeSampledPosition(ctx context.C
 	}
 }
 
+// SubscribeAttributeSampledPositionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSampledPositionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeSampledPositionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (*MTRMediaPlaybackClusterPlaybackPosition, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeSampledPositionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result *MTRMediaPlaybackClusterPlaybackPosition, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackPosition
 		err error
@@ -1706,8 +1810,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeSampledPositionWithMinIn
 	}
 }
 
+// ReadAttributePlaybackSpeed wraps the corresponding Objective-C method.
+//
 // ReadAttributePlaybackSpeed blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributePlaybackSpeed(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributePlaybackSpeed(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1729,8 +1835,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributePlaybackSpeed(ctx context.Con
 	}
 }
 
+// SubscribeAttributePlaybackSpeedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePlaybackSpeedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributePlaybackSpeedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributePlaybackSpeedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1752,8 +1860,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributePlaybackSpeedWithMinInte
 	}
 }
 
+// ReadAttributeSeekRangeEnd wraps the corresponding Objective-C method.
+//
 // ReadAttributeSeekRangeEnd blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeEnd(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeEnd(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1775,8 +1885,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeEnd(ctx context.Cont
 	}
 }
 
+// SubscribeAttributeSeekRangeEndWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSeekRangeEndWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeEndWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeEndWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1798,8 +1910,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeEndWithMinInter
 	}
 }
 
+// ReadAttributeSeekRangeStart wraps the corresponding Objective-C method.
+//
 // ReadAttributeSeekRangeStart blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeStart(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeStart(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1821,8 +1935,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeStart(ctx context.Co
 	}
 }
 
+// SubscribeAttributeSeekRangeStartWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSeekRangeStartWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeStartWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeStartWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1844,8 +1960,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeStartWithMinInt
 	}
 }
 
+// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1867,8 +1985,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributeGeneratedCommandList(ctx cont
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1890,8 +2010,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeGeneratedCommandListWith
 	}
 }
 
+// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1913,8 +2035,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributeAcceptedCommandList(ctx conte
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1936,8 +2060,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeAcceptedCommandListWithM
 	}
 }
 
+// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributeAttributeList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1959,8 +2085,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributeAttributeList(ctx context.Con
 	}
 }
 
+// SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1982,8 +2110,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeAttributeListWithMinInte
 	}
 }
 
+// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2005,8 +2135,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributeFeatureMap(ctx context.Contex
 	}
 }
 
+// SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2028,8 +2160,10 @@ func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeFeatureMapWithMinInterva
 	}
 }
 
+// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2051,8 +2185,10 @@ func (x *MTRBaseClusterMediaPlayback) ReadAttributeClusterRevision(ctx context.C
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterMediaPlayback) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2166,3 +2302,7 @@ type MTRBaseClusterMediaPlaybackable interface {
 }
 
 var _ MTRBaseClusterMediaPlaybackable = (*MTRBaseClusterMediaPlayback)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterMediaPlayback)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterMediaPlayback)(nil)

@@ -19,6 +19,8 @@ const (
 	AccelerationStructureStatusBuilt AccelerationStructureStatus = 1
 )
 
+// String returns the AccelerationStructureStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AccelerationStructureStatus) String() string {
 	switch e {
 	case AccelerationStructureStatusUnbuilt:
@@ -47,6 +49,8 @@ const (
 	AccelerationStructureUsagePreferCPUBuild AccelerationStructureUsage = 8
 )
 
+// String returns the AccelerationStructureUsage constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AccelerationStructureUsage) String() string {
 	var parts []string
 	if e&AccelerationStructureUsageRefit != 0 {
@@ -79,6 +83,8 @@ const (
 	BoundingBoxIntersectionTestTypeFast BoundingBoxIntersectionTestType = 2
 )
 
+// String returns the BoundingBoxIntersectionTestType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BoundingBoxIntersectionTestType) String() string {
 	switch e {
 	case BoundingBoxIntersectionTestTypeDefault:
@@ -116,6 +122,8 @@ const (
 	IntersectionDataTypeDistancePrimitiveIndexBufferIndexInstanceIndexCoordinates IntersectionDataType = 8
 )
 
+// String returns the IntersectionDataType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e IntersectionDataType) String() string {
 	switch e {
 	case IntersectionDataTypeDistance:
@@ -150,6 +158,8 @@ const (
 	PolygonTypeQuadrilateral PolygonType = 1
 )
 
+// String returns the PolygonType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PolygonType) String() string {
 	switch e {
 	case PolygonTypeTriangle:
@@ -175,6 +185,8 @@ const (
 	RayDataTypePackedOriginDirection RayDataType = 3
 )
 
+// String returns the RayDataType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RayDataType) String() string {
 	switch e {
 	case RayDataTypeOriginDirection:
@@ -220,6 +232,8 @@ const (
 	RayMaskOperatorNotEqual RayMaskOperator = 11
 )
 
+// String returns the RayMaskOperator constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RayMaskOperator) String() string {
 	switch e {
 	case RayMaskOperatorAnd:
@@ -264,6 +278,8 @@ const (
 	RayMaskOptionInstance RayMaskOptions = 2
 )
 
+// String returns the RayMaskOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RayMaskOptions) String() string {
 	var parts []string
 	if e&RayMaskOptionPrimitive != 0 {
@@ -288,6 +304,8 @@ const (
 	TemporalWeightingExponentialMovingAverage TemporalWeighting = 1
 )
 
+// String returns the TemporalWeighting constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TemporalWeighting) String() string {
 	switch e {
 	case TemporalWeightingAverage:
@@ -309,6 +327,8 @@ const (
 	TransformTypeIdentity TransformType = 1
 )
 
+// String returns the TransformType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TransformType) String() string {
 	switch e {
 	case TransformTypeFloat4x4:
@@ -330,6 +350,8 @@ const (
 	TriangleIntersectionTestTypeWatertight TriangleIntersectionTestType = 1
 )
 
+// String returns the TriangleIntersectionTestType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TriangleIntersectionTestType) String() string {
 	switch e {
 	case TriangleIntersectionTestTypeDefault:

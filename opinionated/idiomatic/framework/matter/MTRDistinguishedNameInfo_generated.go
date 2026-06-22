@@ -23,7 +23,8 @@ func MTRDistinguishedNameInfoFromID(id objc.ID) *MTRDistinguishedNameInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDistinguishedNameInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDistinguishedNameInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDistinguishedNameInfoAdopt(id objc.ID) *MTRDistinguishedNameInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDistinguishedNameInfo{Handle: objref.Wrap(id)}
+	x := &MTRDistinguishedNameInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,37 +58,43 @@ func (x *MTRDistinguishedNameInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDistinguishedNameInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDistinguishedNameInfo creates a new MTRDistinguishedNameInfo.
 func NewMTRDistinguishedNameInfo() *MTRDistinguishedNameInfo {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDistinguishedNameInfo")), objc.RegisterName("new"))
 	return mTRDistinguishedNameInfoAdopt(_id)
 }
 
-// The Node ID contained in the DN, if any.  Will be non-nil for the subject of a valid node operational certificate.
+// NodeID the Node ID contained in the DN, if any.  Will be non-nil for the subject of a valid node operational certificate.
 func (x *MTRDistinguishedNameInfo) NodeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeID"))
 	return obj.Wrap(_r)
 }
 
-// The Fabric ID contained in the DN, if any.  Will be non-nil for the subject of a valid node operational certificate, and may be non-nil for the subject of a valid intermediate or root certificate.
+// FabricID the Fabric ID contained in the DN, if any.  Will be non-nil for the subject of a valid node operational certificate, and may be non-nil for the subject of a valid intermediate or root certificate.
 func (x *MTRDistinguishedNameInfo) FabricID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricID"))
 	return obj.Wrap(_r)
 }
 
-// The `RCAC` ID contained in the DN, if any.  Will be non-nil for the subject of a valid root certificate.
+// RootCACertificateID the `RCAC` ID contained in the DN, if any.  Will be non-nil for the subject of a valid root certificate.
 func (x *MTRDistinguishedNameInfo) RootCACertificateID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootCACertificateID"))
 	return obj.Wrap(_r)
 }
 
-// The `ICAC` ID contained in the DN, if any.  Will be non-nil for the subject of a valid intermediate certificate.
+// IntermediateCACertificateID the `ICAC` ID contained in the DN, if any.  Will be non-nil for the subject of a valid intermediate certificate.
 func (x *MTRDistinguishedNameInfo) IntermediateCACertificateID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intermediateCACertificateID"))
 	return obj.Wrap(_r)
 }
 
-// The set of CASE Authenticated Tags contained in the DN.  Maybe be non-empty for the subject of a valid node operational certificate.
+// CaseAuthenticatedTags the set of CASE Authenticated Tags contained in the DN.  Maybe be non-empty for the subject of a valid node operational certificate.
 func (x *MTRDistinguishedNameInfo) CaseAuthenticatedTags() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("caseAuthenticatedTags"))
 	return obj.Wrap(_r)

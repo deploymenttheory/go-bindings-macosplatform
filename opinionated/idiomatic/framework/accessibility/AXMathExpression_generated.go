@@ -13,6 +13,8 @@ import (
 )
 
 // MathExpression is an idiomatic wrapper over the Objective-C class AXMathExpression.
+//
+// MathExpression is an abstract base — you do not construct it directly. Construct one of [MathExpressionFenced], [MathExpressionFraction], [MathExpressionIdentifier], [MathExpressionMultiscript], [MathExpressionNumber], [MathExpressionOperator], [MathExpressionRoot], [MathExpressionRow], [MathExpressionSubSuperscript], [MathExpressionTableCell], [MathExpressionTableRow], [MathExpressionTable], [MathExpressionText], [MathExpressionUnderOver] and pass it where a MathExpression is accepted.
 type MathExpression struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MathExpressionFromID(id objc.ID) *MathExpression {
 	if id == 0 {
 		return nil
 	}
-	x := &MathExpression{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MathExpression{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mathExpressionAdopt(id objc.ID) *MathExpression {
 	if id == 0 {
 		return nil
 	}
-	x := &MathExpression{Handle: objref.Wrap(id)}
+	x := &MathExpression{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,10 +60,10 @@ func (x *MathExpression) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMathExpression creates a new MathExpression.
-func NewMathExpression() *MathExpression {
-	_id := objc.Send[objc.ID](objc.ID(_class("AXMathExpression")), objc.RegisterName("new"))
-	return mathExpressionAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MathExpression) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // MathExpressionable is the interface implemented by [MathExpression], for mocking and DI.
@@ -68,3 +72,10 @@ type MathExpressionable interface {
 }
 
 var _ MathExpressionable = (*MathExpression)(nil)
+
+// isMathExpression marks MathExpression — and, by embedding promotion, its
+// subclasses — as a member of the MathExpression hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MathExpression) isMathExpression() {}
+
+var _ MathExpressionProvider = (*MathExpression)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration for a resource state pass, used to create a resource state command encoder.
-//
 // ResourceStatePassDescriptor is an idiomatic wrapper over the Objective-C class MTLResourceStatePassDescriptor.
+//
+// A configuration for a resource state pass, used to create a resource state command encoder.
 type ResourceStatePassDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ResourceStatePassDescriptorFromID(id objc.ID) *ResourceStatePassDescriptor 
 	if id == 0 {
 		return nil
 	}
-	x := &ResourceStatePassDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ResourceStatePassDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func resourceStatePassDescriptorAdopt(id objc.ID) *ResourceStatePassDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &ResourceStatePassDescriptor{Handle: objref.Wrap(id)}
+	x := &ResourceStatePassDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *ResourceStatePassDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ResourceStatePassDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewResourceStatePassDescriptor creates a new ResourceStatePassDescriptor.
 func NewResourceStatePassDescriptor() *ResourceStatePassDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLResourceStatePassDescriptor")), objc.RegisterName("new"))
 	return resourceStatePassDescriptorAdopt(_id)
 }
 
+// SampleBufferAttachments wraps the corresponding Objective-C method.
 func (x *ResourceStatePassDescriptor) SampleBufferAttachments() *ResourceStatePassSampleBufferAttachmentDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleBufferAttachments"))
 	return ResourceStatePassSampleBufferAttachmentDescriptorArrayFromID(_r)

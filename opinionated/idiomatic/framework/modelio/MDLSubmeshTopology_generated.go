@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of how a submesh’s index buffer data is arranged and how that arrangement should be used to produce the submesh’s intended 3D shape.
-//
 // SubmeshTopology is an idiomatic wrapper over the Objective-C class MDLSubmeshTopology.
+//
+// A description of how a submesh’s index buffer data is arranged and how that arrangement should be used to produce the submesh’s intended 3D shape.
 type SubmeshTopology struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SubmeshTopologyFromID(id objc.ID) *SubmeshTopology {
 	if id == 0 {
 		return nil
 	}
-	x := &SubmeshTopology{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SubmeshTopology{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func submeshTopologyAdopt(id objc.ID) *SubmeshTopology {
 	if id == 0 {
 		return nil
 	}
-	x := &SubmeshTopology{Handle: objref.Wrap(id)}
+	x := &SubmeshTopology{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,83 +60,83 @@ func (x *SubmeshTopology) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// create a topology object corresponding to the topology in the submesh
-//
-// NewSubmeshTopologyWithSubmesh creates a new SubmeshTopology.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SubmeshTopology) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSubmeshTopologyWithSubmesh create a topology object corresponding to the topology in the submesh
 func NewSubmeshTopologyWithSubmesh(submesh *Submesh) *SubmeshTopology {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLSubmeshTopology")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSubmesh:"), objref.IDOf(submesh))
 	return submeshTopologyAdopt(_id)
 }
 
-// The number of faces in the submesh’s face topology buffer.
-//
-// WithFaceCount sets faceCount and returns the receiver so calls can be chained.
+// WithFaceCount the number of faces in the submesh’s face topology buffer.
 func (x *SubmeshTopology) WithFaceCount(faceCount int) *SubmeshTopology {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFaceCount:"), faceCount)
 	return x
 }
 
-// The number of entries in the vertex creases buffers.
-//
-// WithVertexCreaseCount sets vertexCreaseCount and returns the receiver so calls can be chained.
+// WithVertexCreaseCount the number of entries in the vertex creases buffers.
 func (x *SubmeshTopology) WithVertexCreaseCount(vertexCreaseCount int) *SubmeshTopology {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexCreaseCount:"), vertexCreaseCount)
 	return x
 }
 
-// The number of entries in the edge creases buffers.
-//
-// WithEdgeCreaseCount sets edgeCreaseCount and returns the receiver so calls can be chained.
+// WithEdgeCreaseCount the number of entries in the edge creases buffers.
 func (x *SubmeshTopology) WithEdgeCreaseCount(edgeCreaseCount int) *SubmeshTopology {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreaseCount:"), edgeCreaseCount)
 	return x
 }
 
-// The number of entries in the holes buffer.
-//
-// WithHoleCount sets holeCount and returns the receiver so calls can be chained.
+// WithHoleCount the number of entries in the holes buffer.
 func (x *SubmeshTopology) WithHoleCount(holeCount int) *SubmeshTopology {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHoleCount:"), holeCount)
 	return x
 }
 
-// The number of faces encoded in faceTopologyBuffer
+// FaceCount the number of faces encoded in faceTopologyBuffer
 func (x *SubmeshTopology) FaceCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("faceCount"))
 	return _r
 }
 
+// SetFaceCount wraps the corresponding Objective-C method.
 func (x *SubmeshTopology) SetFaceCount(faceCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFaceCount:"), faceCount)
 }
 
-// The number of vertex creases encoded in vertexCreases
+// VertexCreaseCount the number of vertex creases encoded in vertexCreases
 func (x *SubmeshTopology) VertexCreaseCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vertexCreaseCount"))
 	return _r
 }
 
+// SetVertexCreaseCount wraps the corresponding Objective-C method.
 func (x *SubmeshTopology) SetVertexCreaseCount(vertexCreaseCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexCreaseCount:"), vertexCreaseCount)
 }
 
-// The number of edge creases encoded in edgeCreases
+// EdgeCreaseCount the number of edge creases encoded in edgeCreases
 func (x *SubmeshTopology) EdgeCreaseCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("edgeCreaseCount"))
 	return _r
 }
 
+// SetEdgeCreaseCount wraps the corresponding Objective-C method.
 func (x *SubmeshTopology) SetEdgeCreaseCount(edgeCreaseCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreaseCount:"), edgeCreaseCount)
 }
 
-// The number of holes encoded in holes
+// HoleCount the number of holes encoded in holes
 func (x *SubmeshTopology) HoleCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("holeCount"))
 	return _r
 }
 
+// SetHoleCount wraps the corresponding Objective-C method.
 func (x *SubmeshTopology) SetHoleCount(holeCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHoleCount:"), holeCount)
 }

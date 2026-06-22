@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that appends tagged buffer groups to an asset writer input.
-//
 // AssetWriterInputTaggedPixelBufferGroupAdaptor is an idiomatic wrapper over the Objective-C class AVAssetWriterInputTaggedPixelBufferGroupAdaptor.
+//
+// An object that appends tagged buffer groups to an asset writer input.
 type AssetWriterInputTaggedPixelBufferGroupAdaptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetWriterInputTaggedPixelBufferGroupAdaptorFromID(id objc.ID) *AssetWrite
 	if id == 0 {
 		return nil
 	}
-	x := &AssetWriterInputTaggedPixelBufferGroupAdaptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetWriterInputTaggedPixelBufferGroupAdaptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetWriterInputTaggedPixelBufferGroupAdaptorAdopt(id objc.ID) *AssetWriter
 	if id == 0 {
 		return nil
 	}
-	x := &AssetWriterInputTaggedPixelBufferGroupAdaptor{Handle: objref.Wrap(id)}
+	x := &AssetWriterInputTaggedPixelBufferGroupAdaptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,32 @@ func (x *AssetWriterInputTaggedPixelBufferGroupAdaptor) IsKind(className string)
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an object that appends tagged buffer groups to an asset writer input.
-//
-// NewAssetWriterInputTaggedPixelBufferGroupAdaptorWithAssetWriterInputSourcePixelBufferAttributes creates a new AssetWriterInputTaggedPixelBufferGroupAdaptor.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetWriterInputTaggedPixelBufferGroupAdaptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetWriterInputTaggedPixelBufferGroupAdaptorWithAssetWriterInputSourcePixelBufferAttributes creates an object that appends tagged buffer groups to an asset writer input.
 func NewAssetWriterInputTaggedPixelBufferGroupAdaptorWithAssetWriterInputSourcePixelBufferAttributes(input *AssetWriterInput, sourcePixelBufferAttributes obj.Object) *AssetWriterInputTaggedPixelBufferGroupAdaptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInputTaggedPixelBufferGroupAdaptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetWriterInput:sourcePixelBufferAttributes:"), objref.IDOf(input), objref.IDOf(sourcePixelBufferAttributes))
 	return assetWriterInputTaggedPixelBufferGroupAdaptorAdopt(_id)
 }
 
-// The asset writer input to which the receiver should append tagged buffer groups.
+// AssetWriterInput the asset writer input to which the receiver should append tagged buffer groups.
 func (x *AssetWriterInputTaggedPixelBufferGroupAdaptor) AssetWriterInput() *AssetWriterInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetWriterInput"))
 	return AssetWriterInputFromID(_r)
 }
 
-// The pixel buffer attributes of pixel buffers that will be vended by the receiver's CVPixelBufferPool. The value of this property is a dictionary containing pixel buffer attributes keys defined in <CoreVideo/CVPixelBuffer.h>.
+// SourcePixelBufferAttributes the pixel buffer attributes of pixel buffers that will be vended by the receiver's CVPixelBufferPool. The value of this property is a dictionary containing pixel buffer attributes keys defined in <CoreVideo/CVPixelBuffer.h>.
 func (x *AssetWriterInputTaggedPixelBufferGroupAdaptor) SourcePixelBufferAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourcePixelBufferAttributes"))
 	return obj.Wrap(_r)
 }
 
-// A pixel buffer pool that will vend and efficiently recycle CVPixelBuffer objects of tagged buffer groups that can be appended to the receiver. For maximum efficiency, clients should create CVPixelBuffer objects of tagged buffer groups for appendTaggedPixelBufferGroup:withPresentationTime: by using this pool with the CVPixelBufferPoolCreatePixelBuffer() function. The value of this property will be NULL before -[AVAssetWriter startWriting] is called on the associated AVAssetWriter object. Clients should read this property after -[AVAssetWriter startWriting] calling to get a non-NULL value. This property is not key value observable.
+// PixelBufferPool a pixel buffer pool that will vend and efficiently recycle CVPixelBuffer objects of tagged buffer groups that can be appended to the receiver. For maximum efficiency, clients should create CVPixelBuffer objects of tagged buffer groups for appendTaggedPixelBufferGroup:withPresentationTime: by using this pool with the CVPixelBufferPoolCreatePixelBuffer() function. The value of this property will be NULL before -[AVAssetWriter startWriting] is called on the associated AVAssetWriter object. Clients should read this property after -[AVAssetWriter startWriting] calling to get a non-NULL value. This property is not key value observable.
 func (x *AssetWriterInputTaggedPixelBufferGroupAdaptor) PixelBufferPool() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pixelBufferPool"))
 	return obj.Wrap(_r)

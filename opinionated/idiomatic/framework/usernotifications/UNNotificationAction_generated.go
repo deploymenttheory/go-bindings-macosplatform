@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A task your app performs in response to a notification that the system delivers.
-//
 // NotificationAction is an idiomatic wrapper over the Objective-C class UNNotificationAction.
+//
+// NotificationAction is an abstract base — you do not construct it directly. Construct one of [TextInputNotificationAction] and pass it where a NotificationAction is accepted.
+//
+// A task your app performs in response to a notification that the system delivers.
 type NotificationAction struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func NotificationActionFromID(id objc.ID) *NotificationAction {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationAction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NotificationAction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func notificationActionAdopt(id objc.ID) *NotificationAction {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationAction{Handle: objref.Wrap(id)}
+	x := &NotificationAction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +62,13 @@ func (x *NotificationAction) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewNotificationAction creates a new NotificationAction.
-func NewNotificationAction() *NotificationAction {
-	_id := objc.Send[objc.ID](objc.ID(_class("UNNotificationAction")), objc.RegisterName("new"))
-	return notificationActionAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationAction) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *NotificationAction) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -72,6 +77,7 @@ func (x *NotificationAction) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *NotificationAction) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -80,11 +86,13 @@ func (x *NotificationAction) Title() string {
 	return purego.GoString(_r)
 }
 
+// Options wraps the corresponding Objective-C method.
 func (x *NotificationAction) Options() NotificationActionOptions {
 	_r := objc.Send[NotificationActionOptions](objref.IDOf(x), objc.RegisterName("options"))
 	return _r
 }
 
+// Icon wraps the corresponding Objective-C method.
 func (x *NotificationAction) Icon() *NotificationActionIcon {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("icon"))
 	return NotificationActionIconFromID(_r)
@@ -100,3 +108,10 @@ type NotificationActionable interface {
 }
 
 var _ NotificationActionable = (*NotificationAction)(nil)
+
+// isNotificationAction marks NotificationAction — and, by embedding promotion, its
+// subclasses — as a member of the NotificationAction hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NotificationAction) isNotificationAction() {}
+
+var _ NotificationActionProvider = (*NotificationAction)(nil)

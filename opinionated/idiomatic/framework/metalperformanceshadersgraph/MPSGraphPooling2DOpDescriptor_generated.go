@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The class that defines the parameters for a 2D pooling operation.
-//
 // GraphPooling2DOpDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphPooling2DOpDescriptor.
+//
+// It embeds [GraphObject], promoting that type's methods.
+//
+// The class that defines the parameters for a 2D pooling operation.
 type GraphPooling2DOpDescriptor struct {
-	objref.Handle
+	GraphObject
 }
 
 // GraphPooling2DOpDescriptorFromID adopts an existing Objective-C object as a GraphPooling2DOpDescriptor
@@ -25,7 +26,8 @@ func GraphPooling2DOpDescriptorFromID(id objc.ID) *GraphPooling2DOpDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphPooling2DOpDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphPooling2DOpDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func graphPooling2DOpDescriptorAdopt(id objc.ID) *GraphPooling2DOpDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphPooling2DOpDescriptor{Handle: objref.Wrap(id)}
+	x := &GraphPooling2DOpDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GraphPooling2DOpDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphPooling2DOpDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphPooling2DOpDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGraphPooling2DOpDescriptor creates a new GraphPooling2DOpDescriptor.
@@ -64,278 +52,262 @@ func NewGraphPooling2DOpDescriptor() *GraphPooling2DOpDescriptor {
 	return graphPooling2DOpDescriptorAdopt(_id)
 }
 
-// Defines the pooling window size for the width dimension.
-//
-// WithKernelWidth sets kernelWidth and returns the receiver so calls can be chained.
+// WithKernelWidth defines the pooling window size for the width dimension.
 func (x *GraphPooling2DOpDescriptor) WithKernelWidth(kernelWidth int) *GraphPooling2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelWidth:"), kernelWidth)
 	return x
 }
 
-// Defines the pooling window size for the height dimension.
-//
-// WithKernelHeight sets kernelHeight and returns the receiver so calls can be chained.
+// WithKernelHeight defines the pooling window size for the height dimension.
 func (x *GraphPooling2DOpDescriptor) WithKernelHeight(kernelHeight int) *GraphPooling2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelHeight:"), kernelHeight)
 	return x
 }
 
-// Defines the stride for the width dimension.
-//
-// WithStrideInX sets strideInX and returns the receiver so calls can be chained.
+// WithStrideInX defines the stride for the width dimension.
 func (x *GraphPooling2DOpDescriptor) WithStrideInX(strideInX int) *GraphPooling2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInX:"), strideInX)
 	return x
 }
 
-// Defines the stride for the height dimension.
-//
-// WithStrideInY sets strideInY and returns the receiver so calls can be chained.
+// WithStrideInY defines the stride for the height dimension.
 func (x *GraphPooling2DOpDescriptor) WithStrideInY(strideInY int) *GraphPooling2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInY:"), strideInY)
 	return x
 }
 
-// Defines the dilation rate for the width dimension.
-//
-// WithDilationRateInX sets dilationRateInX and returns the receiver so calls can be chained.
+// WithDilationRateInX defines the dilation rate for the width dimension.
 func (x *GraphPooling2DOpDescriptor) WithDilationRateInX(dilationRateInX int) *GraphPooling2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateInX:"), dilationRateInX)
 	return x
 }
 
-// Defines the dilation rate for the height dimension.
-//
-// WithDilationRateInY sets dilationRateInY and returns the receiver so calls can be chained.
+// WithDilationRateInY defines the dilation rate for the height dimension.
 func (x *GraphPooling2DOpDescriptor) WithDilationRateInY(dilationRateInY int) *GraphPooling2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateInY:"), dilationRateInY)
 	return x
 }
 
-// Defines the explicit padding value for the width dimension to add before the data.
-//
-// WithPaddingLeft sets paddingLeft and returns the receiver so calls can be chained.
+// WithPaddingLeft defines the explicit padding value for the width dimension to add before the data.
 func (x *GraphPooling2DOpDescriptor) WithPaddingLeft(paddingLeft int) *GraphPooling2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingLeft:"), paddingLeft)
 	return x
 }
 
-// Defines the explicit padding value for the width dimension to add after the data.
-//
-// WithPaddingRight sets paddingRight and returns the receiver so calls can be chained.
+// WithPaddingRight defines the explicit padding value for the width dimension to add after the data.
 func (x *GraphPooling2DOpDescriptor) WithPaddingRight(paddingRight int) *GraphPooling2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingRight:"), paddingRight)
 	return x
 }
 
-// Defines the explicit padding value for the height dimension to add before the data.
-//
-// WithPaddingTop sets paddingTop and returns the receiver so calls can be chained.
+// WithPaddingTop defines the explicit padding value for the height dimension to add before the data.
 func (x *GraphPooling2DOpDescriptor) WithPaddingTop(paddingTop int) *GraphPooling2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingTop:"), paddingTop)
 	return x
 }
 
-// Defines the explicit padding value for the height dimension to add after the data.
-//
-// WithPaddingBottom sets paddingBottom and returns the receiver so calls can be chained.
+// WithPaddingBottom defines the explicit padding value for the height dimension to add after the data.
 func (x *GraphPooling2DOpDescriptor) WithPaddingBottom(paddingBottom int) *GraphPooling2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingBottom:"), paddingBottom)
 	return x
 }
 
-// Defines what kind of padding graph applies to the operation.
-//
-// WithPaddingStyle sets paddingStyle and returns the receiver so calls can be chained.
+// WithPaddingStyle defines what kind of padding graph applies to the operation.
 func (x *GraphPooling2DOpDescriptor) WithPaddingStyle(paddingStyle GraphPaddingStyle) *GraphPooling2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingStyle:"), paddingStyle)
 	return x
 }
 
-// Defines the data layout of the input data in the forward pass. See: MPSGraphTensorNamedDataLayout.
-//
-// WithDataLayout sets dataLayout and returns the receiver so calls can be chained.
+// WithDataLayout defines the data layout of the input data in the forward pass. See: MPSGraphTensorNamedDataLayout.
 func (x *GraphPooling2DOpDescriptor) WithDataLayout(dataLayout GraphTensorNamedDataLayout) *GraphPooling2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataLayout:"), dataLayout)
 	return x
 }
 
-// Defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with maxPooling2DReturnIndicesWithSourceTensor:descriptor:name: API. If returnIndicesMode = MPSGraphPoolingReturnIndicesNone then only the first result MPSGraph returns from maxPooling2DReturnIndicesWithSourceTensor:descriptor:name: will be valid and using the second result will assert. Default value: MPSGraphPoolingReturnIndicesNone.
-//
-// WithReturnIndicesMode sets returnIndicesMode and returns the receiver so calls can be chained.
+// WithReturnIndicesMode defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with maxPooling2DReturnIndicesWithSourceTensor:descriptor:name: API. If returnIndicesMode = MPSGraphPoolingReturnIndicesNone then only the first result MPSGraph returns from maxPooling2DReturnIndicesWithSourceTensor:descriptor:name: will be valid and using the second result will assert. Default value: MPSGraphPoolingReturnIndicesNone.
 func (x *GraphPooling2DOpDescriptor) WithReturnIndicesMode(returnIndicesMode GraphPoolingReturnIndicesMode) *GraphPooling2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnIndicesMode:"), returnIndicesMode)
 	return x
 }
 
-// Affects how the graph computes the output size.
-//
-// WithCeilMode sets ceilMode and returns the receiver so calls can be chained.
+// WithCeilMode affects how the graph computes the output size.
 func (x *GraphPooling2DOpDescriptor) WithCeilMode(ceilMode bool) *GraphPooling2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCeilMode:"), ceilMode)
 	return x
 }
 
-// Defines a mode for average pooling, where samples outside the input tensor count as zeroes in the average computation.
-//
-// WithIncludeZeroPadToAverage sets includeZeroPadToAverage and returns the receiver so calls can be chained.
+// WithIncludeZeroPadToAverage defines a mode for average pooling, where samples outside the input tensor count as zeroes in the average computation.
 func (x *GraphPooling2DOpDescriptor) WithIncludeZeroPadToAverage(includeZeroPadToAverage bool) *GraphPooling2DOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeZeroPadToAverage:"), includeZeroPadToAverage)
 	return x
 }
 
-// Sets the explicit padding values and sets padding style to explicit.
+// SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom sets the explicit padding values and sets padding style to explicit.
 func (x *GraphPooling2DOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft int, paddingRight int, paddingTop int, paddingBottom int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExplicitPaddingWithPaddingLeft:paddingRight:paddingTop:paddingBottom:"), paddingLeft, paddingRight, paddingTop, paddingBottom)
 }
 
-// Defines the pooling window size for the width dimension.
+// KernelWidth defines the pooling window size for the width dimension.
 func (x *GraphPooling2DOpDescriptor) KernelWidth() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
+// SetKernelWidth wraps the corresponding Objective-C method.
 func (x *GraphPooling2DOpDescriptor) SetKernelWidth(kernelWidth int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelWidth:"), kernelWidth)
 }
 
-// Defines the pooling window size for the height dimension.
+// KernelHeight defines the pooling window size for the height dimension.
 func (x *GraphPooling2DOpDescriptor) KernelHeight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
+// SetKernelHeight wraps the corresponding Objective-C method.
 func (x *GraphPooling2DOpDescriptor) SetKernelHeight(kernelHeight int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelHeight:"), kernelHeight)
 }
 
-// Defines the stride for the width dimension. Default value: 1.
+// StrideInX defines the stride for the width dimension. Default value: 1.
 func (x *GraphPooling2DOpDescriptor) StrideInX() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInX"))
 	return _r
 }
 
+// SetStrideInX wraps the corresponding Objective-C method.
 func (x *GraphPooling2DOpDescriptor) SetStrideInX(strideInX int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInX:"), strideInX)
 }
 
-// Defines the stride for the height dimension. Default value: 1.
+// StrideInY defines the stride for the height dimension. Default value: 1.
 func (x *GraphPooling2DOpDescriptor) StrideInY() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInY"))
 	return _r
 }
 
+// SetStrideInY wraps the corresponding Objective-C method.
 func (x *GraphPooling2DOpDescriptor) SetStrideInY(strideInY int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInY:"), strideInY)
 }
 
-// Defines the dilation rate for the width dimension. Default value: 1.
+// DilationRateInX defines the dilation rate for the width dimension. Default value: 1.
 func (x *GraphPooling2DOpDescriptor) DilationRateInX() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateInX"))
 	return _r
 }
 
+// SetDilationRateInX wraps the corresponding Objective-C method.
 func (x *GraphPooling2DOpDescriptor) SetDilationRateInX(dilationRateInX int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateInX:"), dilationRateInX)
 }
 
-// Defines the dilation rate for the height dimension. Default value: 1.
+// DilationRateInY defines the dilation rate for the height dimension. Default value: 1.
 func (x *GraphPooling2DOpDescriptor) DilationRateInY() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateInY"))
 	return _r
 }
 
+// SetDilationRateInY wraps the corresponding Objective-C method.
 func (x *GraphPooling2DOpDescriptor) SetDilationRateInY(dilationRateInY int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateInY:"), dilationRateInY)
 }
 
-// Defines the explicit padding value for the width dimension to add before the data. Default value: 0.
+// PaddingLeft defines the explicit padding value for the width dimension to add before the data. Default value: 0.
 func (x *GraphPooling2DOpDescriptor) PaddingLeft() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingLeft"))
 	return _r
 }
 
+// SetPaddingLeft wraps the corresponding Objective-C method.
 func (x *GraphPooling2DOpDescriptor) SetPaddingLeft(paddingLeft int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingLeft:"), paddingLeft)
 }
 
-// Defines the explicit padding value for the width dimension to add after the data. Default value: 0.
+// PaddingRight defines the explicit padding value for the width dimension to add after the data. Default value: 0.
 func (x *GraphPooling2DOpDescriptor) PaddingRight() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingRight"))
 	return _r
 }
 
+// SetPaddingRight wraps the corresponding Objective-C method.
 func (x *GraphPooling2DOpDescriptor) SetPaddingRight(paddingRight int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingRight:"), paddingRight)
 }
 
-// Defines the explicit padding value for the height dimension to add before the data. Default value: 0.
+// PaddingTop defines the explicit padding value for the height dimension to add before the data. Default value: 0.
 func (x *GraphPooling2DOpDescriptor) PaddingTop() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingTop"))
 	return _r
 }
 
+// SetPaddingTop wraps the corresponding Objective-C method.
 func (x *GraphPooling2DOpDescriptor) SetPaddingTop(paddingTop int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingTop:"), paddingTop)
 }
 
-// Defines the explicit padding value for the height dimension to add after the data. Default value: 0.
+// PaddingBottom defines the explicit padding value for the height dimension to add after the data. Default value: 0.
 func (x *GraphPooling2DOpDescriptor) PaddingBottom() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingBottom"))
 	return _r
 }
 
+// SetPaddingBottom wraps the corresponding Objective-C method.
 func (x *GraphPooling2DOpDescriptor) SetPaddingBottom(paddingBottom int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingBottom:"), paddingBottom)
 }
 
-// Defines what kind of padding graph applies to the operation. Default value: `MPSGraphPaddingStyleExplicit`.
+// PaddingStyle defines what kind of padding graph applies to the operation. Default value: `MPSGraphPaddingStyleExplicit`.
 func (x *GraphPooling2DOpDescriptor) PaddingStyle() GraphPaddingStyle {
 	_r := objc.Send[GraphPaddingStyle](objref.IDOf(x), objc.RegisterName("paddingStyle"))
 	return _r
 }
 
+// SetPaddingStyle wraps the corresponding Objective-C method.
 func (x *GraphPooling2DOpDescriptor) SetPaddingStyle(paddingStyle GraphPaddingStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingStyle:"), paddingStyle)
 }
 
-// Defines the data layout of the input data in the forward pass. See: “MPSGraphTensorNamedDataLayout“.
+// DataLayout defines the data layout of the input data in the forward pass. See: “MPSGraphTensorNamedDataLayout“.
 func (x *GraphPooling2DOpDescriptor) DataLayout() GraphTensorNamedDataLayout {
 	_r := objc.Send[GraphTensorNamedDataLayout](objref.IDOf(x), objc.RegisterName("dataLayout"))
 	return _r
 }
 
+// SetDataLayout wraps the corresponding Objective-C method.
 func (x *GraphPooling2DOpDescriptor) SetDataLayout(dataLayout GraphTensorNamedDataLayout) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataLayout:"), dataLayout)
 }
 
-// Defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
+// ReturnIndicesMode defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
 func (x *GraphPooling2DOpDescriptor) ReturnIndicesMode() GraphPoolingReturnIndicesMode {
 	_r := objc.Send[GraphPoolingReturnIndicesMode](objref.IDOf(x), objc.RegisterName("returnIndicesMode"))
 	return _r
 }
 
-// Defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
+// SetReturnIndicesMode defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
 func (x *GraphPooling2DOpDescriptor) SetReturnIndicesMode(returnIndicesMode GraphPoolingReturnIndicesMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnIndicesMode:"), returnIndicesMode)
 }
 
-// Affects how the graph computes the output size. if set to `YES` then output size is computed by rounding up instead of down when dividing input size by stride. Default value: `NO`.
+// CeilMode affects how the graph computes the output size. if set to `YES` then output size is computed by rounding up instead of down when dividing input size by stride. Default value: `NO`.
 func (x *GraphPooling2DOpDescriptor) CeilMode() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ceilMode"))
 	return _r
 }
 
+// SetCeilMode wraps the corresponding Objective-C method.
 func (x *GraphPooling2DOpDescriptor) SetCeilMode(ceilMode bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCeilMode:"), ceilMode)
 }
 
-// Defines a mode for average pooling, where samples outside the input tensor count as zeroes in the average computation. Otherwise the result is sum over samples divided by number of samples that didn't come from padding. Default value: `NO`.
+// IncludeZeroPadToAverage defines a mode for average pooling, where samples outside the input tensor count as zeroes in the average computation. Otherwise the result is sum over samples divided by number of samples that didn't come from padding. Default value: `NO`.
 func (x *GraphPooling2DOpDescriptor) IncludeZeroPadToAverage() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includeZeroPadToAverage"))
 	return _r
 }
 
+// SetIncludeZeroPadToAverage wraps the corresponding Objective-C method.
 func (x *GraphPooling2DOpDescriptor) SetIncludeZeroPadToAverage(includeZeroPadToAverage bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeZeroPadToAverage:"), includeZeroPadToAverage)
 }
@@ -392,3 +364,5 @@ type GraphPooling2DOpDescriptorable interface {
 }
 
 var _ GraphPooling2DOpDescriptorable = (*GraphPooling2DOpDescriptor)(nil)
+
+var _ GraphObjectProvider = (*GraphPooling2DOpDescriptor)(nil)

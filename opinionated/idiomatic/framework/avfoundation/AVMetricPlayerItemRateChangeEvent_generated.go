@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event that represents when the playback rate changes.
-//
 // MetricPlayerItemRateChangeEvent is an idiomatic wrapper over the Objective-C class AVMetricPlayerItemRateChangeEvent.
+//
+// MetricPlayerItemRateChangeEvent is an abstract base — you do not construct it directly. Construct one of [MetricPlayerItemSeekDidCompleteEvent], [MetricPlayerItemSeekEvent], [MetricPlayerItemStallEvent] and pass it where a MetricPlayerItemRateChangeEvent is accepted.
+//
+// An event that represents when the playback rate changes.
 type MetricPlayerItemRateChangeEvent struct {
-	objref.Handle
+	MetricEvent
 }
 
 // MetricPlayerItemRateChangeEventFromID adopts an existing Objective-C object as a MetricPlayerItemRateChangeEvent
@@ -25,7 +26,8 @@ func MetricPlayerItemRateChangeEventFromID(id objc.ID) *MetricPlayerItemRateChan
 	if id == 0 {
 		return nil
 	}
-	x := &MetricPlayerItemRateChangeEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetricPlayerItemRateChangeEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,45 +40,25 @@ func metricPlayerItemRateChangeEventAdopt(id objc.ID) *MetricPlayerItemRateChang
 	if id == 0 {
 		return nil
 	}
-	x := &MetricPlayerItemRateChangeEvent{Handle: objref.Wrap(id)}
+	x := &MetricPlayerItemRateChangeEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MetricPlayerItemRateChangeEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetricPlayerItemRateChangeEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetricPlayerItemRateChangeEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewMetricPlayerItemRateChangeEvent creates a new MetricPlayerItemRateChangeEvent.
-func NewMetricPlayerItemRateChangeEvent() *MetricPlayerItemRateChangeEvent {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVMetricPlayerItemRateChangeEvent")), objc.RegisterName("new"))
-	return metricPlayerItemRateChangeEventAdopt(_id)
-}
-
-// Returns the playback rate after the rate change event.
+// Rate returns the playback rate after the rate change event.
 func (x *MetricPlayerItemRateChangeEvent) Rate() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rate"))
 	return _r
 }
 
-// Returns the playback rate before the rate change event.
+// PreviousRate returns the playback rate before the rate change event.
 func (x *MetricPlayerItemRateChangeEvent) PreviousRate() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("previousRate"))
 	return _r
 }
 
-// Returns the variant being played at the time of rate change. If no value is present, returns nil.
+// Variant returns the variant being played at the time of rate change. If no value is present, returns nil.
 func (x *MetricPlayerItemRateChangeEvent) Variant() *AssetVariant {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variant"))
 	return AssetVariantFromID(_r)
@@ -91,3 +73,12 @@ type MetricPlayerItemRateChangeEventable interface {
 }
 
 var _ MetricPlayerItemRateChangeEventable = (*MetricPlayerItemRateChangeEvent)(nil)
+
+// isMetricPlayerItemRateChangeEvent marks MetricPlayerItemRateChangeEvent — and, by embedding promotion, its
+// subclasses — as a member of the MetricPlayerItemRateChangeEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MetricPlayerItemRateChangeEvent) isMetricPlayerItemRateChangeEvent() {}
+
+var _ MetricPlayerItemRateChangeEventProvider = (*MetricPlayerItemRateChangeEvent)(nil)
+
+var _ MetricEventProvider = (*MetricPlayerItemRateChangeEvent)(nil)

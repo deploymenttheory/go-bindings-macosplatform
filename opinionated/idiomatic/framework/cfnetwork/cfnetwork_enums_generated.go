@@ -20,6 +20,8 @@ const (
 	KCFHostReachability CFHostInfoType = 2
 )
 
+// String returns the CFHostInfoType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFHostInfoType) String() string {
 	switch e {
 	case KCFHostAddresses:
@@ -41,6 +43,8 @@ const (
 	KCFNetServiceMonitorTXT CFNetServiceMonitorType = 1
 )
 
+// String returns the CFNetServiceMonitorType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFNetServiceMonitorType) String() string {
 	switch e {
 	case KCFNetServiceMonitorTXT:

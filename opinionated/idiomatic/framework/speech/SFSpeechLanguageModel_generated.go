@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A language model built from custom training data.
-//
 // SpeechLanguageModel is an idiomatic wrapper over the Objective-C class SFSpeechLanguageModel.
+//
+// A language model built from custom training data.
 type SpeechLanguageModel struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SpeechLanguageModelFromID(id objc.ID) *SpeechLanguageModel {
 	if id == 0 {
 		return nil
 	}
-	x := &SpeechLanguageModel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SpeechLanguageModel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func speechLanguageModelAdopt(id objc.ID) *SpeechLanguageModel {
 	if id == 0 {
 		return nil
 	}
-	x := &SpeechLanguageModel{Handle: objref.Wrap(id)}
+	x := &SpeechLanguageModel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *SpeechLanguageModel) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *SpeechLanguageModel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpeechLanguageModel) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewSpeechLanguageModel creates a new SpeechLanguageModel.

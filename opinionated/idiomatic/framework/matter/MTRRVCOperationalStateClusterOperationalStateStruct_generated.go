@@ -23,7 +23,8 @@ func MTRRVCOperationalStateClusterOperationalStateStructFromID(id objc.ID) *MTRR
 	if id == 0 {
 		return nil
 	}
-	x := &MTRRVCOperationalStateClusterOperationalStateStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRRVCOperationalStateClusterOperationalStateStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRRVCOperationalStateClusterOperationalStateStructAdopt(id objc.ID) *MTRRV
 	if id == 0 {
 		return nil
 	}
-	x := &MTRRVCOperationalStateClusterOperationalStateStruct{Handle: objref.Wrap(id)}
+	x := &MTRRVCOperationalStateClusterOperationalStateStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,33 +58,42 @@ func (x *MTRRVCOperationalStateClusterOperationalStateStruct) IsKind(className s
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRRVCOperationalStateClusterOperationalStateStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRRVCOperationalStateClusterOperationalStateStruct creates a new MTRRVCOperationalStateClusterOperationalStateStruct.
 func NewMTRRVCOperationalStateClusterOperationalStateStruct() *MTRRVCOperationalStateClusterOperationalStateStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRRVCOperationalStateClusterOperationalStateStruct")), objc.RegisterName("new"))
 	return mTRRVCOperationalStateClusterOperationalStateStructAdopt(_id)
 }
 
-// WithOperationalStateID sets operationalStateID and returns the receiver so calls can be chained.
+// WithOperationalStateID sets the property and returns the receiver so calls can be chained.
 func (x *MTRRVCOperationalStateClusterOperationalStateStruct) WithOperationalStateID(operationalStateID obj.Object) *MTRRVCOperationalStateClusterOperationalStateStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalStateID:"), objref.IDOf(operationalStateID))
 	return x
 }
 
-// WithOperationalStateLabel sets operationalStateLabel and returns the receiver so calls can be chained.
+// WithOperationalStateLabel sets the property and returns the receiver so calls can be chained.
 func (x *MTRRVCOperationalStateClusterOperationalStateStruct) WithOperationalStateLabel(operationalStateLabel string) *MTRRVCOperationalStateClusterOperationalStateStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalStateLabel:"), purego.NSString(operationalStateLabel))
 	return x
 }
 
+// OperationalStateID wraps the corresponding Objective-C method.
 func (x *MTRRVCOperationalStateClusterOperationalStateStruct) OperationalStateID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationalStateID"))
 	return obj.Wrap(_r)
 }
 
+// SetOperationalStateID wraps the corresponding Objective-C method.
 func (x *MTRRVCOperationalStateClusterOperationalStateStruct) SetOperationalStateID(operationalStateID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalStateID:"), objref.IDOf(operationalStateID))
 }
 
+// OperationalStateLabel wraps the corresponding Objective-C method.
 func (x *MTRRVCOperationalStateClusterOperationalStateStruct) OperationalStateLabel() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationalStateLabel"))
 	if _r == 0 {
@@ -91,6 +102,7 @@ func (x *MTRRVCOperationalStateClusterOperationalStateStruct) OperationalStateLa
 	return purego.GoString(_r)
 }
 
+// SetOperationalStateLabel wraps the corresponding Objective-C method.
 func (x *MTRRVCOperationalStateClusterOperationalStateStruct) SetOperationalStateLabel(operationalStateLabel string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalStateLabel:"), purego.NSString(operationalStateLabel))
 }

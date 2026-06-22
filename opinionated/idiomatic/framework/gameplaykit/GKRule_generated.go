@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A rule to be used in the context of a rule system, with a predicate to be tested and an action to be executed when the test succeeds.
-//
 // Rule is an idiomatic wrapper over the Objective-C class GKRule.
+//
+// Rule is an abstract base — you do not construct it directly. Construct one of [NSPredicateRule] and pass it where a Rule is accepted.
+//
+// A rule to be used in the context of a rule system, with a predicate to be tested and an action to be executed when the test succeeds.
 type Rule struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func RuleFromID(id objc.ID) *Rule {
 	if id == 0 {
 		return nil
 	}
-	x := &Rule{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Rule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func ruleAdopt(id objc.ID) *Rule {
 	if id == 0 {
 		return nil
 	}
-	x := &Rule{Handle: objref.Wrap(id)}
+	x := &Rule{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +62,36 @@ func (x *Rule) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewRule creates a new Rule.
-func NewRule() *Rule {
-	_id := objc.Send[objc.ID](objc.ID(_class("GKRule")), objc.RegisterName("new"))
-	return ruleAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Rule) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The importance of the rule relative to others in a rule system’s agenda.
-//
-// WithSalience sets salience and returns the receiver so calls can be chained.
+// WithSalience the importance of the rule relative to others in a rule system’s agenda.
 func (x *Rule) WithSalience(salience int) *Rule {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSalience:"), salience)
 	return x
 }
 
-// Returns a Boolean value indicating whether the rule has been satisfied in the context of the specified rule system.
+// EvaluatePredicateWithSystem returns a Boolean value indicating whether the rule has been satisfied in the context of the specified rule system.
 func (x *Rule) EvaluatePredicateWithSystem(system *RuleSystem) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("evaluatePredicateWithSystem:"), objref.IDOf(system))
 	return _r
 }
 
-// Performs actions that should result when the rule is satisfied in the context of the specified rule system.
+// PerformActionWithSystem performs actions that should result when the rule is satisfied in the context of the specified rule system.
 func (x *Rule) PerformActionWithSystem(system *RuleSystem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performActionWithSystem:"), objref.IDOf(system))
 }
 
-// Salience defines the order in the rule agenda that the system will evaluate. A rule with higher salience will be evaluated before another rule in the agenda that has a lower salience. Defaults to 0.
+// Salience salience defines the order in the rule agenda that the system will evaluate. A rule with higher salience will be evaluated before another rule in the agenda that has a lower salience. Defaults to 0.
 func (x *Rule) Salience() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("salience"))
 	return _r
 }
 
+// SetSalience wraps the corresponding Objective-C method.
 func (x *Rule) SetSalience(salience int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSalience:"), salience)
 }
@@ -104,3 +107,10 @@ type Ruleable interface {
 }
 
 var _ Ruleable = (*Rule)(nil)
+
+// isRule marks Rule — and, by embedding promotion, its
+// subclasses — as a member of the Rule hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Rule) isRule() {}
+
+var _ RuleProvider = (*Rule)(nil)

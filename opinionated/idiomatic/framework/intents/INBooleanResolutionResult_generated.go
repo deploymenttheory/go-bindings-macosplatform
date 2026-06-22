@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resolution result for a Boolean value associated with an intent.
-//
 // BooleanResolutionResult is an idiomatic wrapper over the Objective-C class INBooleanResolutionResult.
+//
+// It embeds [IntentResolutionResult], promoting that type's methods.
+//
+// A resolution result for a Boolean value associated with an intent.
 type BooleanResolutionResult struct {
-	objref.Handle
+	IntentResolutionResult
 }
 
 // BooleanResolutionResultFromID adopts an existing Objective-C object as a BooleanResolutionResult
@@ -25,7 +26,8 @@ func BooleanResolutionResultFromID(id objc.ID) *BooleanResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	x := &BooleanResolutionResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BooleanResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func booleanResolutionResultAdopt(id objc.ID) *BooleanResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	x := &BooleanResolutionResult{Handle: objref.Wrap(id)}
+	x := &BooleanResolutionResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *BooleanResolutionResult) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BooleanResolutionResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BooleanResolutionResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewBooleanResolutionResult creates a new BooleanResolutionResult.
@@ -70,3 +58,5 @@ type BooleanResolutionResultable interface {
 }
 
 var _ BooleanResolutionResultable = (*BooleanResolutionResult)(nil)
+
+var _ IntentResolutionResultProvider = (*BooleanResolutionResult)(nil)

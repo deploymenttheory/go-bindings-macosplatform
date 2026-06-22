@@ -23,7 +23,8 @@ func MTRPumpConfigurationAndControlClusterLeakageEventFromID(id objc.ID) *MTRPum
 	if id == 0 {
 		return nil
 	}
-	x := &MTRPumpConfigurationAndControlClusterLeakageEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRPumpConfigurationAndControlClusterLeakageEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRPumpConfigurationAndControlClusterLeakageEventAdopt(id objc.ID) *MTRPump
 	if id == 0 {
 		return nil
 	}
-	x := &MTRPumpConfigurationAndControlClusterLeakageEvent{Handle: objref.Wrap(id)}
+	x := &MTRPumpConfigurationAndControlClusterLeakageEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *MTRPumpConfigurationAndControlClusterLeakageEvent) IsEqual(other obj.Ob
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MTRPumpConfigurationAndControlClusterLeakageEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRPumpConfigurationAndControlClusterLeakageEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMTRPumpConfigurationAndControlClusterLeakageEvent creates a new MTRPumpConfigurationAndControlClusterLeakageEvent.

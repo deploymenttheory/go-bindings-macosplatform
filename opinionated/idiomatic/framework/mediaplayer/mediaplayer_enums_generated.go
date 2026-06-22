@@ -20,6 +20,8 @@ const (
 	ChangeLanguageOptionSettingPermanent ChangeLanguageOptionSetting = 2
 )
 
+// String returns the ChangeLanguageOptionSetting constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ChangeLanguageOptionSetting) String() string {
 	switch e {
 	case ChangeLanguageOptionSettingNone:
@@ -47,6 +49,8 @@ const (
 	ErrorRequestTimedOut               ErrorCode = 7
 )
 
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ErrorCode) String() string {
 	switch e {
 	case ErrorUnknown:
@@ -80,6 +84,8 @@ const (
 	NowPlayingInfoLanguageOptionTypeLegible NowPlayingInfoLanguageOptionType = 1
 )
 
+// String returns the NowPlayingInfoLanguageOptionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NowPlayingInfoLanguageOptionType) String() string {
 	switch e {
 	case NowPlayingInfoLanguageOptionTypeAudible:
@@ -107,6 +113,8 @@ const (
 	NowPlayingPlaybackStateInterrupted NowPlayingPlaybackState = 4
 )
 
+// String returns the NowPlayingPlaybackState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NowPlayingPlaybackState) String() string {
 	switch e {
 	case NowPlayingPlaybackStateUnknown:
@@ -136,6 +144,8 @@ const (
 	RepeatTypeAll RepeatType = 2
 )
 
+// String returns the RepeatType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RepeatType) String() string {
 	switch e {
 	case RepeatTypeOff:
@@ -159,6 +169,8 @@ const (
 	SeekCommandEventTypeEndSeeking SeekCommandEventType = 1
 )
 
+// String returns the SeekCommandEventType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SeekCommandEventType) String() string {
 	switch e {
 	case SeekCommandEventTypeBeginSeeking:
@@ -182,6 +194,8 @@ const (
 	ShuffleTypeCollections ShuffleType = 2
 )
 
+// String returns the ShuffleType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ShuffleType) String() string {
 	switch e {
 	case ShuffleTypeOff:

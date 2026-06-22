@@ -17,6 +17,8 @@ const (
 	AccessibilityCustomRotorSearchDirectionNext     AccessibilityCustomRotorSearchDirection = 1
 )
 
+// String returns the AccessibilityCustomRotorSearchDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AccessibilityCustomRotorSearchDirection) String() string {
 	switch e {
 	case AccessibilityCustomRotorSearchDirectionPrevious:
@@ -56,6 +58,8 @@ const (
 	AccessibilityCustomRotorTypeAudiograph     AccessibilityCustomRotorType = 21
 )
 
+// String returns the AccessibilityCustomRotorType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AccessibilityCustomRotorType) String() string {
 	switch e {
 	case AccessibilityCustomRotorTypeCustom:
@@ -119,6 +123,8 @@ const (
 	AlertStyleCritical AlertStyle = 2
 )
 
+// String returns the AlertStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AlertStyle) String() string {
 	switch e {
 	case AlertStyleWarning:
@@ -141,6 +147,8 @@ const (
 	AnimationNonblockingThreaded AnimationBlockingMode = 2
 )
 
+// String returns the AnimationBlockingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AnimationBlockingMode) String() string {
 	switch e {
 	case AnimationBlocking:
@@ -164,6 +172,8 @@ const (
 	AnimationLinear    AnimationCurve = 3
 )
 
+// String returns the AnimationCurve constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AnimationCurve) String() string {
 	switch e {
 	case AnimationEaseInOut:
@@ -191,6 +201,8 @@ const (
 	AnimationEffectPoof AnimationEffect = 10
 )
 
+// String returns the AnimationEffect constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AnimationEffect) String() string {
 	switch e {
 	case AnimationEffectDisappearingItemDefault:
@@ -215,6 +227,8 @@ const (
 	ApplicationActivateIgnoringOtherApps ApplicationActivationOptions = 2
 )
 
+// String returns the ApplicationActivationOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ApplicationActivationOptions) String() string {
 	var parts []string
 	if e&ApplicationActivateAllWindows != 0 {
@@ -238,6 +252,8 @@ const (
 	ApplicationActivationPolicyProhibited ApplicationActivationPolicy = 2
 )
 
+// String returns the ApplicationActivationPolicy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ApplicationActivationPolicy) String() string {
 	switch e {
 	case ApplicationActivationPolicyRegular:
@@ -260,6 +276,8 @@ const (
 	ApplicationDelegateReplyFailure ApplicationDelegateReply = 2
 )
 
+// String returns the ApplicationDelegateReply constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ApplicationDelegateReply) String() string {
 	switch e {
 	case ApplicationDelegateReplySuccess:
@@ -282,6 +300,8 @@ const (
 	ApplicationOcclusionStateVisible ApplicationOcclusionState = 2
 )
 
+// String returns the ApplicationOcclusionState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ApplicationOcclusionState) String() string {
 	var parts []string
 	if e&ApplicationOcclusionStateVisible != 0 {
@@ -328,6 +348,8 @@ const (
 	ApplicationPresentationDisableCursorLocationAssistance ApplicationPresentationOptions = 4096
 )
 
+// String returns the ApplicationPresentationOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ApplicationPresentationOptions) String() string {
 	var parts []string
 	if e&ApplicationPresentationAutoHideDock != 0 {
@@ -389,6 +411,8 @@ const (
 	ViewMaxYMargin    AutoresizingMaskOptions = 32
 )
 
+// String returns the AutoresizingMaskOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AutoresizingMaskOptions) String() string {
 	var parts []string
 	if e&ViewMinXMargin != 0 {
@@ -425,6 +449,8 @@ const (
 	BackgroundStyleLowered    BackgroundStyle = 3
 )
 
+// String returns the BackgroundStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BackgroundStyle) String() string {
 	switch e {
 	case BackgroundStyleNormal:
@@ -452,6 +478,8 @@ const (
 	BackingStoreBuffered BackingStoreType = 2
 )
 
+// String returns the BackingStoreType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BackingStoreType) String() string {
 	switch e {
 	case BackingStoreRetained:
@@ -515,6 +543,8 @@ const (
 	BezelStyleInline BezelStyle = 15
 )
 
+// String returns the BezelStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BezelStyle) String() string {
 	switch e {
 	case BezelStyleAutomatic:
@@ -565,6 +595,8 @@ const (
 	BezierPathElementCurveTo BezierPathElement = 2
 )
 
+// String returns the BezierPathElement constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BezierPathElement) String() string {
 	switch e {
 	case BezierPathElementMoveTo:
@@ -596,6 +628,8 @@ const (
 	BitmapFormatThirtyTwoBitBigEndian    BitmapFormat = 2048
 )
 
+// String returns the BitmapFormat constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BitmapFormat) String() string {
 	var parts []string
 	if e&BitmapFormatAlphaFirst != 0 {
@@ -637,6 +671,8 @@ const (
 	BitmapImageFileTypeJPEG2000 BitmapImageFileType = 5
 )
 
+// String returns the BitmapImageFileType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BitmapImageFileType) String() string {
 	switch e {
 	case BitmapImageFileTypeTIFF:
@@ -670,6 +706,8 @@ const (
 	GrooveBorder BorderType = 3
 )
 
+// String returns the BorderType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BorderType) String() string {
 	switch e {
 	case NoBorder:
@@ -694,6 +732,8 @@ const (
 	BoxCustom    BoxType = 4
 )
 
+// String returns the BoxType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BoxType) String() string {
 	switch e {
 	case BoxPrimary:
@@ -716,6 +756,8 @@ const (
 	BrowserUserColumnResizing BrowserColumnResizingType = 2
 )
 
+// String returns the BrowserColumnResizingType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BrowserColumnResizingType) String() string {
 	switch e {
 	case BrowserNoColumnResizing:
@@ -744,6 +786,8 @@ const (
 	ButtonTypeMultiLevelAccelerator ButtonType = 9
 )
 
+// String returns the ButtonType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ButtonType) String() string {
 	switch e {
 	case ButtonTypeMomentaryLight:
@@ -793,6 +837,8 @@ const (
 	CellAllowsMixedState       CellAttribute = 16
 )
 
+// String returns the CellAttribute constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CellAttribute) String() string {
 	switch e {
 	case CellDisabled:
@@ -834,6 +880,35 @@ func (e CellAttribute) String() string {
 	}
 }
 
+// Bitmask — values may be combined with |.
+type CellHitResult uint64
+
+const (
+	CellHitNone             CellHitResult = 0
+	CellHitContentArea      CellHitResult = 1
+	CellHitEditableTextArea CellHitResult = 2
+	CellHitTrackableArea    CellHitResult = 4
+)
+
+// String returns the CellHitResult constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CellHitResult) String() string {
+	var parts []string
+	if e&CellHitContentArea != 0 {
+		parts = append(parts, "CellHitContentArea")
+	}
+	if e&CellHitEditableTextArea != 0 {
+		parts = append(parts, "CellHitEditableTextArea")
+	}
+	if e&CellHitTrackableArea != 0 {
+		parts = append(parts, "CellHitTrackableArea")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // A constant for specifying the position of a button’s image relative to its title.
 type CellImagePosition uint64
 
@@ -849,6 +924,8 @@ const (
 	ImageTrailing CellImagePosition = 8
 )
 
+// String returns the CellImagePosition constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CellImagePosition) String() string {
 	switch e {
 	case NoImage:
@@ -885,6 +962,8 @@ const (
 	ChangeBackgroundCellMask CellStyleMask = 8
 )
 
+// String returns the CellStyleMask constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CellStyleMask) String() string {
 	var parts []string
 	if e&ContentsCellMask != 0 {
@@ -913,6 +992,8 @@ const (
 	ImageCellType CellType = 2
 )
 
+// String returns the CellType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CellType) String() string {
 	switch e {
 	case NullCellType:
@@ -944,6 +1025,8 @@ const (
 	AdobeKorea1CharacterCollection CharacterCollection = 5
 )
 
+// String returns the CharacterCollection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CharacterCollection) String() string {
 	switch e {
 	case IdentityMappingCharacterCollection:
@@ -977,6 +1060,8 @@ const (
 	CollectionElementCategoryInterItemGap CollectionElementCategory = 3
 )
 
+// String returns the CollectionElementCategory constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CollectionElementCategory) String() string {
 	switch e {
 	case CollectionElementCategoryItem:
@@ -1010,6 +1095,8 @@ const (
 	CollectionLayoutSectionOrthogonalScrollingBehaviorGroupPagingCentered CollectionLayoutSectionOrthogonalScrollingBehavior = 5
 )
 
+// String returns the CollectionLayoutSectionOrthogonalScrollingBehavior constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CollectionLayoutSectionOrthogonalScrollingBehavior) String() string {
 	switch e {
 	case CollectionLayoutSectionOrthogonalScrollingBehaviorNone:
@@ -1040,6 +1127,8 @@ const (
 	CollectionUpdateActionNone   CollectionUpdateAction = 4
 )
 
+// String returns the CollectionUpdateAction constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CollectionUpdateAction) String() string {
 	switch e {
 	case CollectionUpdateActionInsert:
@@ -1067,6 +1156,8 @@ const (
 	CollectionViewItemHighlightAsDropTarget   CollectionViewItemHighlightState = 3
 )
 
+// String returns the CollectionViewItemHighlightState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CollectionViewItemHighlightState) String() string {
 	switch e {
 	case CollectionViewItemHighlightNone:
@@ -1090,6 +1181,8 @@ const (
 	CollectionViewScrollDirectionHorizontal CollectionViewScrollDirection = 1
 )
 
+// String returns the CollectionViewScrollDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CollectionViewScrollDirection) String() string {
 	switch e {
 	case CollectionViewScrollDirectionVertical:
@@ -1120,6 +1213,8 @@ const (
 	CollectionViewScrollPositionNearestVerticalEdge   CollectionViewScrollPosition = 256
 )
 
+// String returns the CollectionViewScrollPosition constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CollectionViewScrollPosition) String() string {
 	var parts []string
 	if e&CollectionViewScrollPositionTop != 0 {
@@ -1173,6 +1268,8 @@ const (
 	ColorPanelModeCrayon        ColorPanelMode = 7
 )
 
+// String returns the ColorPanelMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ColorPanelMode) String() string {
 	switch e {
 	case ColorPanelModeNone:
@@ -1214,6 +1311,8 @@ const (
 	ColorPanelAllModesMask          ColorPanelOptions = 65535
 )
 
+// String returns the ColorPanelOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ColorPanelOptions) String() string {
 	var parts []string
 	if e&ColorPanelGrayModeMask != 0 {
@@ -1265,6 +1364,8 @@ const (
 	ColorRenderingIntentSaturation ColorRenderingIntent = 4
 )
 
+// String returns the ColorRenderingIntent constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ColorRenderingIntent) String() string {
 	switch e {
 	case ColorRenderingIntentDefault:
@@ -1296,6 +1397,8 @@ const (
 	ColorSpaceModelPatterned ColorSpaceModel = 6
 )
 
+// String returns the ColorSpaceModel constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ColorSpaceModel) String() string {
 	switch e {
 	case ColorSpaceModelUnknown:
@@ -1330,6 +1433,8 @@ const (
 	ColorSystemEffectRollover    ColorSystemEffect = 4
 )
 
+// String returns the ColorSystemEffect constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ColorSystemEffect) String() string {
 	switch e {
 	case ColorSystemEffectNone:
@@ -1356,6 +1461,8 @@ const (
 	ColorTypeCatalog        ColorType = 2
 )
 
+// String returns the ColorType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ColorType) String() string {
 	switch e {
 	case ColorTypeComponentBased:
@@ -1378,6 +1485,8 @@ const (
 	ColorWellStyleExpanded ColorWellStyle = 2
 )
 
+// String returns the ColorWellStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ColorWellStyle) String() string {
 	switch e {
 	case ColorWellStyleDefault:
@@ -1401,6 +1510,8 @@ const (
 	ComboButtonStyleUnified ComboButtonStyle = 1
 )
 
+// String returns the ComboButtonStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ComboButtonStyle) String() string {
 	switch e {
 	case ComboButtonStyleSplit:
@@ -1480,6 +1591,8 @@ const (
 	CompositingOperationLuminosity CompositingOperation = 28
 )
 
+// String returns the CompositingOperation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CompositingOperation) String() string {
 	switch e {
 	case CompositingOperationClear:
@@ -1555,6 +1668,8 @@ const (
 	ControlBorderShapeCircle           ControlBorderShape = 3
 )
 
+// String returns the ControlBorderShape constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ControlBorderShape) String() string {
 	switch e {
 	case ControlBorderShapeAutomatic:
@@ -1581,6 +1696,8 @@ const (
 	ControlSizeExtraLarge ControlSize = 4
 )
 
+// String returns the ControlSize constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ControlSize) String() string {
 	switch e {
 	case ControlSizeRegular:
@@ -1612,6 +1729,8 @@ const (
 	ClearControlTint ControlTint = 7
 )
 
+// String returns the ControlTint constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ControlTint) String() string {
 	switch e {
 	case DefaultControlTint:
@@ -1636,6 +1755,8 @@ const (
 	CorrectionIndicatorTypeGuesses   CorrectionIndicatorType = 2
 )
 
+// String returns the CorrectionIndicatorType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CorrectionIndicatorType) String() string {
 	switch e {
 	case CorrectionIndicatorTypeDefault:
@@ -1660,6 +1781,8 @@ const (
 	CorrectionResponseReverted CorrectionResponse = 5
 )
 
+// String returns the CorrectionResponse constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CorrectionResponse) String() string {
 	switch e {
 	case CorrectionResponseNone:
@@ -1692,6 +1815,8 @@ const (
 	CursorFrameResizeDirectionsAll CursorFrameResizeDirections = 3
 )
 
+// String returns the CursorFrameResizeDirections constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CursorFrameResizeDirections) String() string {
 	var parts []string
 	if e&CursorFrameResizeDirectionsInward != 0 {
@@ -1731,6 +1856,8 @@ const (
 	CursorFrameResizePositionBottomRight CursorFrameResizePosition = 12
 )
 
+// String returns the CursorFrameResizePosition constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CursorFrameResizePosition) String() string {
 	switch e {
 	case CursorFrameResizePositionTop:
@@ -1767,6 +1894,8 @@ const (
 	DatePickerElementFlagEra              DatePickerElementFlags = 256
 )
 
+// String returns the DatePickerElementFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DatePickerElementFlags) String() string {
 	var parts []string
 	if e&DatePickerElementFlagHourMinute != 0 {
@@ -1801,6 +1930,8 @@ const (
 	DatePickerModeRange  DatePickerMode = 1
 )
 
+// String returns the DatePickerMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DatePickerMode) String() string {
 	switch e {
 	case DatePickerModeSingle:
@@ -1821,6 +1952,8 @@ const (
 	DatePickerStyleTextField           DatePickerStyle = 2
 )
 
+// String returns the DatePickerStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DatePickerStyle) String() string {
 	switch e {
 	case DatePickerStyleTextFieldAndStepper:
@@ -1846,6 +1979,8 @@ const (
 	DirectionalRectEdgeAll      DirectionalRectEdge = 15
 )
 
+// String returns the DirectionalRectEdge constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DirectionalRectEdge) String() string {
 	var parts []string
 	if e&DirectionalRectEdgeTop != 0 {
@@ -1876,6 +2011,8 @@ const (
 	DisplayGamutP3   DisplayGamut = 2
 )
 
+// String returns the DisplayGamut constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DisplayGamut) String() string {
 	switch e {
 	case DisplayGamutSRGB:
@@ -1900,6 +2037,8 @@ const (
 	ChangeDiscardable       DocumentChangeType = 256
 )
 
+// String returns the DocumentChangeType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DocumentChangeType) String() string {
 	switch e {
 	case ChangeDone:
@@ -1952,6 +2091,8 @@ const (
 	DragOperationAll DragOperation = 15
 )
 
+// String returns the DragOperation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DragOperation) String() string {
 	var parts []string
 	if e&DragOperationCopy != 0 {
@@ -2005,6 +2146,8 @@ const (
 	DraggingFormationStack DraggingFormation = 4
 )
 
+// String returns the DraggingFormation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DraggingFormation) String() string {
 	switch e {
 	case DraggingFormationDefault:
@@ -2033,6 +2176,8 @@ const (
 	DraggingItemEnumerationClearNonenumeratedImages DraggingItemEnumerationOptions = 65536
 )
 
+// String returns the DraggingItemEnumerationOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DraggingItemEnumerationOptions) String() string {
 	var parts []string
 	if e&DraggingItemEnumerationConcurrent != 0 {
@@ -2060,6 +2205,8 @@ const (
 	EventButtonMaskPenUpperSide EventButtonMask = 4
 )
 
+// String returns the EventButtonMask constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EventButtonMask) String() string {
 	var parts []string
 	if e&EventButtonMaskPenTip != 0 {
@@ -2086,6 +2233,8 @@ const (
 	EventGestureAxisVertical   EventGestureAxis = 2
 )
 
+// String returns the EventGestureAxis constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EventGestureAxis) String() string {
 	switch e {
 	case EventGestureAxisNone:
@@ -2143,6 +2292,8 @@ const (
 	EventMaskAny                EventMask = 18446744073709551615
 )
 
+// String returns the EventMask constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EventMask) String() string {
 	var parts []string
 	if e&EventMaskLeftMouseDown != 0 {
@@ -2272,6 +2423,8 @@ const (
 	EventModifierFlagDeviceIndependentFlagsMask EventModifierFlags = 4294901760
 )
 
+// String returns the EventModifierFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EventModifierFlags) String() string {
 	var parts []string
 	if e&EventModifierFlagCapsLock != 0 {
@@ -2325,6 +2478,8 @@ const (
 	EventPhaseMayBegin   EventPhase = 32
 )
 
+// String returns the EventPhase constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EventPhase) String() string {
 	var parts []string
 	if e&EventPhaseBegan != 0 {
@@ -2367,6 +2522,8 @@ const (
 	EventSubtypeTouch                  EventSubtype = 3
 )
 
+// String returns the EventSubtype constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EventSubtype) String() string {
 	switch e {
 	case EventSubtypeWindowExposed:
@@ -2395,6 +2552,8 @@ const (
 	EventSwipeTrackingClampGestureAmount EventSwipeTrackingOptions = 2
 )
 
+// String returns the EventSwipeTrackingOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EventSwipeTrackingOptions) String() string {
 	var parts []string
 	if e&EventSwipeTrackingLockDirection != 0 {
@@ -2450,6 +2609,8 @@ const (
 	EventTypeMouseCancelled     EventType = 40
 )
 
+// String returns the EventType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EventType) String() string {
 	switch e {
 	case EventTypeLeftMouseDown:
@@ -2539,6 +2700,8 @@ const (
 	FocusRingAbove FocusRingPlacement = 2
 )
 
+// String returns the FocusRingPlacement constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FocusRingPlacement) String() string {
 	switch e {
 	case FocusRingOnly:
@@ -2564,6 +2727,8 @@ const (
 	FocusRingTypeExterior FocusRingType = 2
 )
 
+// String returns the FocusRingType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FocusRingType) String() string {
 	switch e {
 	case FocusRingTypeDefault:
@@ -2599,6 +2764,8 @@ const (
 	RemoveTraitFontAction FontAction = 7
 )
 
+// String returns the FontAction constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FontAction) String() string {
 	switch e {
 	case NoFontChangeAction:
@@ -2629,6 +2796,8 @@ const (
 	FontAssetRequestOptionUsesStandardUI FontAssetRequestOptions = 1
 )
 
+// String returns the FontAssetRequestOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FontAssetRequestOptions) String() string {
 	var parts []string
 	if e&FontAssetRequestOptionUsesStandardUI != 0 {
@@ -2649,6 +2818,8 @@ const (
 	FontCollectionApplicationOnlyMask FontCollectionOptions = 1
 )
 
+// String returns the FontCollectionOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FontCollectionOptions) String() string {
 	var parts []string
 	if e&FontCollectionApplicationOnlyMask != 0 {
@@ -2670,6 +2841,8 @@ const (
 	FontCollectionVisibilityComputer FontCollectionVisibility = 4
 )
 
+// String returns the FontCollectionVisibility constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FontCollectionVisibility) String() string {
 	var parts []string
 	if e&FontCollectionVisibilityProcess != 0 {
@@ -2713,6 +2886,8 @@ const (
 	FontDescriptorClassSymbolic           FontDescriptorSymbolicTraits = 3221225472
 )
 
+// String returns the FontDescriptorSymbolicTraits constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FontDescriptorSymbolicTraits) String() string {
 	var parts []string
 	if e&FontDescriptorTraitItalic != 0 {
@@ -2792,6 +2967,8 @@ const (
 	FontAntialiasedIntegerAdvancementsRenderingMode FontRenderingMode = 3
 )
 
+// String returns the FontRenderingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FontRenderingMode) String() string {
 	switch e {
 	case FontDefaultRenderingMode:
@@ -2838,6 +3015,8 @@ const (
 	UnitalicFontMask FontTraitMask = 16777216
 )
 
+// String returns the FontTraitMask constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FontTraitMask) String() string {
 	var parts []string
 	if e&ItalicFontMask != 0 {
@@ -2895,6 +3074,8 @@ const (
 	GestureRecognizerStateRecognized GestureRecognizerState = 3
 )
 
+// String returns the GestureRecognizerState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GestureRecognizerState) String() string {
 	switch e {
 	case GestureRecognizerStatePossible:
@@ -2923,6 +3104,8 @@ const (
 	GlassEffectViewStyleClear GlassEffectViewStyle = 1
 )
 
+// String returns the GlassEffectViewStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GlassEffectViewStyle) String() string {
 	switch e {
 	case GlassEffectViewStyleRegular:
@@ -2931,6 +3114,53 @@ func (e GlassEffectViewStyle) String() string {
 		return "GlassEffectViewStyleClear"
 	default:
 		return fmt.Sprintf("GlassEffectViewStyle(%d)", int64(e))
+	}
+}
+
+// Constants that specify how a glyph is laid out relative to the previous glyph.
+//
+// Deprecated: Use NSGlyphProperty instead
+type GlyphInscription uint64
+
+const (
+	// A base glyph; a character that the font can represent with a single glyph.
+	//
+	// Deprecated: since macOS 10.11.
+	GlyphInscribeBase GlyphInscription = 0
+	// A glyph is rendered below the previous glyph.
+	//
+	// Deprecated: since macOS 10.11.
+	GlyphInscribeBelow GlyphInscription = 1
+	// A glyph is rendered above the previous glyph.
+	//
+	// Deprecated: since macOS 10.11.
+	GlyphInscribeAbove GlyphInscription = 2
+	// A glyph is rendered on top of the previous glyph.
+	//
+	// Deprecated: since macOS 10.11.
+	GlyphInscribeOverstrike GlyphInscription = 3
+	// A glyph is rendered on top and below the previous glyph.
+	//
+	// Deprecated: since macOS 10.11.
+	GlyphInscribeOverBelow GlyphInscription = 4
+)
+
+// String returns the GlyphInscription constant's name, or its numeric form when the
+// value is not a known constant.
+func (e GlyphInscription) String() string {
+	switch e {
+	case GlyphInscribeBase:
+		return "GlyphInscribeBase"
+	case GlyphInscribeBelow:
+		return "GlyphInscribeBelow"
+	case GlyphInscribeAbove:
+		return "GlyphInscribeAbove"
+	case GlyphInscribeOverstrike:
+		return "GlyphInscribeOverstrike"
+	case GlyphInscribeOverBelow:
+		return "GlyphInscribeOverBelow"
+	default:
+		return fmt.Sprintf("GlyphInscription(%d)", int64(e))
 	}
 }
 
@@ -2945,6 +3175,8 @@ const (
 	GlyphPropertyNonBaseCharacter GlyphProperty = 8
 )
 
+// String returns the GlyphProperty constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GlyphProperty) String() string {
 	var parts []string
 	if e&GlyphPropertyNull != 0 {
@@ -2965,6 +3197,31 @@ func (e GlyphProperty) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that specify gradient drawing options.
+// Bitmask — values may be combined with |.
+type GradientDrawingOptions uint64
+
+const (
+	GradientDrawsBeforeStartingLocation GradientDrawingOptions = 1
+	GradientDrawsAfterEndingLocation    GradientDrawingOptions = 2
+)
+
+// String returns the GradientDrawingOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e GradientDrawingOptions) String() string {
+	var parts []string
+	if e&GradientDrawsBeforeStartingLocation != 0 {
+		parts = append(parts, "GradientDrawsBeforeStartingLocation")
+	}
+	if e&GradientDrawsAfterEndingLocation != 0 {
+		parts = append(parts, "GradientDrawsAfterEndingLocation")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // Deprecated: since macOS 10.12.
 type GradientType uint64
 
@@ -2976,6 +3233,8 @@ const (
 	GradientConvexStrong  GradientType = 4
 )
 
+// String returns the GradientType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GradientType) String() string {
 	switch e {
 	case GradientNone:
@@ -3006,6 +3265,8 @@ const (
 	GridCellPlacementFill      GridCellPlacement = 5
 )
 
+// String returns the GridCellPlacement constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GridCellPlacement) String() string {
 	switch e {
 	case GridCellPlacementInherited:
@@ -3034,6 +3295,8 @@ const (
 	GridRowAlignmentLastBaseline  GridRowAlignment = 3
 )
 
+// String returns the GridRowAlignment constant's name, or its numeric form when the
+// value is not a known constant.
 func (e GridRowAlignment) String() string {
 	switch e {
 	case GridRowAlignmentInherited:
@@ -3058,6 +3321,8 @@ const (
 	HapticFeedbackPerformanceTimeDrawCompleted HapticFeedbackPerformanceTime = 2
 )
 
+// String returns the HapticFeedbackPerformanceTime constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HapticFeedbackPerformanceTime) String() string {
 	switch e {
 	case HapticFeedbackPerformanceTimeDefault:
@@ -3084,6 +3349,8 @@ const (
 	HorizontalDirectionsAll HorizontalDirections = 3
 )
 
+// String returns the HorizontalDirections constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HorizontalDirections) String() string {
 	var parts []string
 	if e&HorizontalDirectionsLeft != 0 {
@@ -3116,6 +3383,8 @@ const (
 	ImageAlignRight       ImageAlignment = 8
 )
 
+// String returns the ImageAlignment constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ImageAlignment) String() string {
 	switch e {
 	case ImageAlignCenter:
@@ -3151,6 +3420,8 @@ const (
 	ImageCacheNever   ImageCacheMode = 3
 )
 
+// String returns the ImageCacheMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ImageCacheMode) String() string {
 	switch e {
 	case ImageCacheDefault:
@@ -3179,6 +3450,8 @@ const (
 	ImageDynamicRangeHigh ImageDynamicRange = 2
 )
 
+// String returns the ImageDynamicRange constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ImageDynamicRange) String() string {
 	switch e {
 	case ImageDynamicRangeUnspecified:
@@ -3205,6 +3478,8 @@ const (
 	ImageFrameButton    ImageFrameStyle = 4
 )
 
+// String returns the ImageFrameStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ImageFrameStyle) String() string {
 	switch e {
 	case ImageFrameNone:
@@ -3238,6 +3513,8 @@ const (
 	ImageInterpolationHigh ImageInterpolation = 3
 )
 
+// String returns the ImageInterpolation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ImageInterpolation) String() string {
 	switch e {
 	case ImageInterpolationDefault:
@@ -3264,6 +3541,8 @@ const (
 	ImageLayoutDirectionRightToLeft ImageLayoutDirection = 3
 )
 
+// String returns the ImageLayoutDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ImageLayoutDirection) String() string {
 	switch e {
 	case ImageLayoutDirectionUnspecified:
@@ -3285,6 +3564,8 @@ const (
 	ImageResizingModeStretch ImageResizingMode = 1
 )
 
+// String returns the ImageResizingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ImageResizingMode) String() string {
 	switch e {
 	case ImageResizingModeTile:
@@ -3316,6 +3597,8 @@ const (
 	ScaleNone ImageScaling = 2
 )
 
+// String returns the ImageScaling constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ImageScaling) String() string {
 	switch e {
 	case ImageScaleProportionallyDown:
@@ -3342,6 +3625,8 @@ const (
 	ImageSymbolColorRenderingModeGradient ImageSymbolColorRenderingMode = 2
 )
 
+// String returns the ImageSymbolColorRenderingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ImageSymbolColorRenderingMode) String() string {
 	switch e {
 	case ImageSymbolColorRenderingModeAutomatic:
@@ -3364,6 +3649,8 @@ const (
 	ImageSymbolScaleLarge  ImageSymbolScale = 3
 )
 
+// String returns the ImageSymbolScale constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ImageSymbolScale) String() string {
 	switch e {
 	case ImageSymbolScaleSmall:
@@ -3388,6 +3675,8 @@ const (
 	ImageSymbolVariableValueModeDraw ImageSymbolVariableValueMode = 2
 )
 
+// String returns the ImageSymbolVariableValueMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ImageSymbolVariableValueMode) String() string {
 	switch e {
 	case ImageSymbolVariableValueModeAutomatic:
@@ -3421,6 +3710,8 @@ const (
 	LayoutAttributeNotAnAttribute LayoutAttribute = 0
 )
 
+// String returns the LayoutAttribute constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LayoutAttribute) String() string {
 	switch e {
 	case LayoutAttributeLeft:
@@ -3462,6 +3753,8 @@ const (
 	LayoutConstraintOrientationVertical   LayoutConstraintOrientation = 1
 )
 
+// String returns the LayoutConstraintOrientation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LayoutConstraintOrientation) String() string {
 	switch e {
 	case LayoutConstraintOrientationHorizontal:
@@ -3496,6 +3789,8 @@ const (
 	LayoutFormatDirectionMask              LayoutFormatOptions = 196608
 )
 
+// String returns the LayoutFormatOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LayoutFormatOptions) String() string {
 	var parts []string
 	if e&LayoutFormatAlignAllLeft != 0 {
@@ -3558,6 +3853,8 @@ const (
 	LayoutRelationGreaterThanOrEqual LayoutRelation = 1
 )
 
+// String returns the LayoutRelation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LayoutRelation) String() string {
 	switch e {
 	case LayoutRelationLessThanOrEqual:
@@ -3579,6 +3876,8 @@ const (
 	LevelIndicatorPlaceholderVisibilityWhileEditing LevelIndicatorPlaceholderVisibility = 2
 )
 
+// String returns the LevelIndicatorPlaceholderVisibility constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LevelIndicatorPlaceholderVisibility) String() string {
 	switch e {
 	case LevelIndicatorPlaceholderVisibilityAutomatic:
@@ -3602,6 +3901,8 @@ const (
 	LevelIndicatorStyleRating             LevelIndicatorStyle = 3
 )
 
+// String returns the LevelIndicatorStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LevelIndicatorStyle) String() string {
 	switch e {
 	case LevelIndicatorStyleRelevancy:
@@ -3635,6 +3936,8 @@ const (
 	LineBreakByTruncatingMiddle LineBreakMode = 5
 )
 
+// String returns the LineBreakMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LineBreakMode) String() string {
 	switch e {
 	case LineBreakByWordWrapping:
@@ -3666,6 +3969,8 @@ const (
 	LineBreakStrategyStandard           LineBreakStrategy = 65535
 )
 
+// String returns the LineBreakStrategy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LineBreakStrategy) String() string {
 	var parts []string
 	if e&LineBreakStrategyPushOut != 0 {
@@ -3692,6 +3997,8 @@ const (
 	LineCapStyleSquare LineCapStyle = 2
 )
 
+// String returns the LineCapStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LineCapStyle) String() string {
 	switch e {
 	case LineCapStyleButt:
@@ -3714,6 +4021,8 @@ const (
 	LineJoinStyleBevel LineJoinStyle = 2
 )
 
+// String returns the LineJoinStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LineJoinStyle) String() string {
 	switch e {
 	case LineJoinStyleMiter:
@@ -3727,6 +4036,72 @@ func (e LineJoinStyle) String() string {
 	}
 }
 
+// The direction in which a line moves.
+type LineMovementDirection uint64
+
+const (
+	// Line has no movement.
+	LineDoesntMove LineMovementDirection = 0
+	// Lines move from right to left.
+	LineMovesLeft LineMovementDirection = 1
+	// Lines move from left to right.
+	LineMovesRight LineMovementDirection = 2
+	// Lines move from top to bottom.
+	LineMovesDown LineMovementDirection = 3
+	// Lines move from bottom to top.
+	LineMovesUp LineMovementDirection = 4
+)
+
+// String returns the LineMovementDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LineMovementDirection) String() string {
+	switch e {
+	case LineDoesntMove:
+		return "LineDoesntMove"
+	case LineMovesLeft:
+		return "LineMovesLeft"
+	case LineMovesRight:
+		return "LineMovesRight"
+	case LineMovesDown:
+		return "LineMovesDown"
+	case LineMovesUp:
+		return "LineMovesUp"
+	default:
+		return fmt.Sprintf("LineMovementDirection(%d)", int64(e))
+	}
+}
+
+// Values that describe the progression of text on a page.
+type LineSweepDirection uint64
+
+const (
+	// Characters move from right to left.
+	LineSweepLeft LineSweepDirection = 0
+	// Characters move from left to right.
+	LineSweepRight LineSweepDirection = 1
+	// Characters move from top to bottom.
+	LineSweepDown LineSweepDirection = 2
+	// Characters move from bottom to top.
+	LineSweepUp LineSweepDirection = 3
+)
+
+// String returns the LineSweepDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LineSweepDirection) String() string {
+	switch e {
+	case LineSweepLeft:
+		return "LineSweepLeft"
+	case LineSweepRight:
+		return "LineSweepRight"
+	case LineSweepDown:
+		return "LineSweepDown"
+	case LineSweepUp:
+		return "LineSweepUp"
+	default:
+		return fmt.Sprintf("LineSweepDirection(%d)", int64(e))
+	}
+}
+
 // These constants determine how NSCell objects behave when an NSMatrix object is tracking the mouse.
 type MatrixMode uint64
 
@@ -3737,6 +4112,8 @@ const (
 	TrackModeMatrix     MatrixMode = 3
 )
 
+// String returns the MatrixMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MatrixMode) String() string {
 	switch e {
 	case RadioModeMatrix:
@@ -3762,6 +4139,8 @@ const (
 	MediaLibraryMovie MediaLibrary = 4
 )
 
+// String returns the MediaLibrary constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MediaLibrary) String() string {
 	var parts []string
 	if e&MediaLibraryAudio != 0 {
@@ -3793,6 +4172,8 @@ const (
 	MenuItemBadgeTypeAlerts MenuItemBadgeType = 3
 )
 
+// String returns the MenuItemBadgeType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MenuItemBadgeType) String() string {
 	switch e {
 	case MenuItemBadgeTypeNone:
@@ -3818,6 +4199,8 @@ const (
 	MenuPresentationStylePalette MenuPresentationStyle = 1
 )
 
+// String returns the MenuPresentationStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MenuPresentationStyle) String() string {
 	switch e {
 	case MenuPresentationStyleRegular:
@@ -3842,6 +4225,8 @@ const (
 	MenuPropertyItemAccessibilityDescription MenuProperties = 32
 )
 
+// String returns the MenuProperties constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MenuProperties) String() string {
 	var parts []string
 	if e&MenuPropertyItemTitle != 0 {
@@ -3880,6 +4265,8 @@ const (
 	MenuSelectionModeSelectAny MenuSelectionMode = 2
 )
 
+// String returns the MenuSelectionMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MenuSelectionMode) String() string {
 	switch e {
 	case MenuSelectionModeAutomatic:
@@ -3890,6 +4277,73 @@ func (e MenuSelectionMode) String() string {
 		return "MenuSelectionModeSelectAny"
 	default:
 		return fmt.Sprintf("MenuSelectionMode(%d)", int64(e))
+	}
+}
+
+// Constants that specify context parameters.
+//
+// Deprecated: since macOS 10.14.
+type OpenGLContextParameter int64
+
+const (
+	OpenGLContextParameterSwapInterval          OpenGLContextParameter = 222
+	OpenGLContextParameterSurfaceOrder          OpenGLContextParameter = 235
+	OpenGLContextParameterSurfaceOpacity        OpenGLContextParameter = 236
+	OpenGLContextParameterSurfaceBackingSize    OpenGLContextParameter = 304
+	OpenGLContextParameterReclaimResources      OpenGLContextParameter = 308
+	OpenGLContextParameterCurrentRendererID     OpenGLContextParameter = 309
+	OpenGLContextParameterGPUVertexProcessing   OpenGLContextParameter = 310
+	OpenGLContextParameterGPUFragmentProcessing OpenGLContextParameter = 311
+	OpenGLContextParameterHasDrawable           OpenGLContextParameter = 314
+	OpenGLContextParameterMPSwapsInFlight       OpenGLContextParameter = 315
+	// Deprecated: since macOS 10.14.
+	OpenGLContextParameterSwapRectangle OpenGLContextParameter = 200
+	// Deprecated: since macOS 10.14.
+	OpenGLContextParameterSwapRectangleEnable OpenGLContextParameter = 201
+	// Deprecated: since macOS 10.14.
+	OpenGLContextParameterRasterizationEnable OpenGLContextParameter = 221
+	// Deprecated: since macOS 10.14.
+	OpenGLContextParameterStateValidation OpenGLContextParameter = 301
+	// Deprecated: since macOS 10.14.
+	OpenGLContextParameterSurfaceSurfaceVolatile OpenGLContextParameter = 306
+)
+
+// String returns the OpenGLContextParameter constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OpenGLContextParameter) String() string {
+	switch e {
+	case OpenGLContextParameterSwapInterval:
+		return "OpenGLContextParameterSwapInterval"
+	case OpenGLContextParameterSurfaceOrder:
+		return "OpenGLContextParameterSurfaceOrder"
+	case OpenGLContextParameterSurfaceOpacity:
+		return "OpenGLContextParameterSurfaceOpacity"
+	case OpenGLContextParameterSurfaceBackingSize:
+		return "OpenGLContextParameterSurfaceBackingSize"
+	case OpenGLContextParameterReclaimResources:
+		return "OpenGLContextParameterReclaimResources"
+	case OpenGLContextParameterCurrentRendererID:
+		return "OpenGLContextParameterCurrentRendererID"
+	case OpenGLContextParameterGPUVertexProcessing:
+		return "OpenGLContextParameterGPUVertexProcessing"
+	case OpenGLContextParameterGPUFragmentProcessing:
+		return "OpenGLContextParameterGPUFragmentProcessing"
+	case OpenGLContextParameterHasDrawable:
+		return "OpenGLContextParameterHasDrawable"
+	case OpenGLContextParameterMPSwapsInFlight:
+		return "OpenGLContextParameterMPSwapsInFlight"
+	case OpenGLContextParameterSwapRectangle:
+		return "OpenGLContextParameterSwapRectangle"
+	case OpenGLContextParameterSwapRectangleEnable:
+		return "OpenGLContextParameterSwapRectangleEnable"
+	case OpenGLContextParameterRasterizationEnable:
+		return "OpenGLContextParameterRasterizationEnable"
+	case OpenGLContextParameterStateValidation:
+		return "OpenGLContextParameterStateValidation"
+	case OpenGLContextParameterSurfaceSurfaceVolatile:
+		return "OpenGLContextParameterSurfaceSurfaceVolatile"
+	default:
+		return fmt.Sprintf("OpenGLContextParameter(%d)", int64(e))
 	}
 }
 
@@ -3913,6 +4367,8 @@ const (
 	OpenGLGOResetLibrary OpenGLGlobalOption = 504
 )
 
+// String returns the OpenGLGlobalOption constant's name, or its numeric form when the
+// value is not a known constant.
 func (e OpenGLGlobalOption) String() string {
 	switch e {
 	case OpenGLGOFormatCacheSize:
@@ -3940,6 +4396,8 @@ const (
 	PDFPanelRequestsParentDirectory PDFPanelOptions = 16777216
 )
 
+// String returns the PDFPanelOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PDFPanelOptions) String() string {
 	var parts []string
 	if e&PDFPanelShowsPaperSize != 0 {
@@ -3966,6 +4424,8 @@ const (
 	PageControllerTransitionStyleHorizontalStrip PageControllerTransitionStyle = 2
 )
 
+// String returns the PageControllerTransitionStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PageControllerTransitionStyle) String() string {
 	switch e {
 	case PageControllerTransitionStyleStackHistory:
@@ -3987,6 +4447,8 @@ const (
 	PaperOrientationLandscape PaperOrientation = 1
 )
 
+// String returns the PaperOrientation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PaperOrientation) String() string {
 	switch e {
 	case PaperOrientationPortrait:
@@ -4012,6 +4474,8 @@ const (
 	PasteboardAccessBehaviorAlwaysDeny PasteboardAccessBehavior = 3
 )
 
+// String returns the PasteboardAccessBehavior constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PasteboardAccessBehavior) String() string {
 	switch e {
 	case PasteboardAccessBehaviorDefault:
@@ -4035,6 +4499,8 @@ const (
 	PasteboardContentsCurrentHostOnly PasteboardContentsOptions = 1
 )
 
+// String returns the PasteboardContentsOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PasteboardContentsOptions) String() string {
 	var parts []string
 	if e&PasteboardContentsCurrentHostOnly != 0 {
@@ -4056,6 +4522,8 @@ const (
 	PathStyleNavigationBar PathStyle = 1
 )
 
+// String returns the PathStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PathStyle) String() string {
 	switch e {
 	case PathStyleStandard:
@@ -4078,6 +4546,8 @@ const (
 	PickerTouchBarItemControlRepresentationCollapsed PickerTouchBarItemControlRepresentation = 2
 )
 
+// String returns the PickerTouchBarItemControlRepresentation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PickerTouchBarItemControlRepresentation) String() string {
 	switch e {
 	case PickerTouchBarItemControlRepresentationAutomatic:
@@ -4100,6 +4570,8 @@ const (
 	PickerTouchBarItemSelectionModeMomentary PickerTouchBarItemSelectionMode = 2
 )
 
+// String returns the PickerTouchBarItemSelectionMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PickerTouchBarItemSelectionMode) String() string {
 	switch e {
 	case PickerTouchBarItemSelectionModeSelectOne:
@@ -4126,6 +4598,8 @@ const (
 	PointingDeviceTypeEraser  PointingDeviceType = 3
 )
 
+// String returns the PointingDeviceType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PointingDeviceType) String() string {
 	switch e {
 	case PointingDeviceTypeUnknown:
@@ -4150,6 +4624,8 @@ const (
 	PopUpArrowAtBottom PopUpArrowPosition = 2
 )
 
+// String returns the PopUpArrowPosition constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PopUpArrowPosition) String() string {
 	switch e {
 	case PopUpNoArrow:
@@ -4174,6 +4650,8 @@ const (
 	PopoverBehaviorSemitransient      PopoverBehavior = 2
 )
 
+// String returns the PopoverBehavior constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PopoverBehavior) String() string {
 	switch e {
 	case PopoverBehaviorApplicationDefined:
@@ -4200,6 +4678,8 @@ const (
 	PressureBehaviorPrimaryDeepDrag    PressureBehavior = 6
 )
 
+// String returns the PressureBehavior constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PressureBehavior) String() string {
 	switch e {
 	case PressureBehaviorUnknown:
@@ -4236,6 +4716,8 @@ const (
 	PrintPanelShowsPreview            PrintPanelOptions = 131072
 )
 
+// String returns the PrintPanelOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PrintPanelOptions) String() string {
 	var parts []string
 	if e&PrintPanelShowsCopies != 0 {
@@ -4276,6 +4758,8 @@ const (
 	PrintRenderingQualityResponsive PrintRenderingQuality = 1
 )
 
+// String returns the PrintRenderingQuality constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PrintRenderingQuality) String() string {
 	switch e {
 	case PrintRenderingQualityBest:
@@ -4296,6 +4780,8 @@ const (
 	PrinterTableError    PrinterTableStatus = 2
 )
 
+// String returns the PrinterTableStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PrinterTableStatus) String() string {
 	switch e {
 	case PrinterTableOK:
@@ -4319,6 +4805,8 @@ const (
 	UnknownPageOrder    PrintingPageOrder = 2
 )
 
+// String returns the PrintingPageOrder constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PrintingPageOrder) String() string {
 	switch e {
 	case DescendingPageOrder:
@@ -4343,6 +4831,8 @@ const (
 	PrintingPaginationModeClip      PrintingPaginationMode = 2
 )
 
+// String returns the PrintingPaginationMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PrintingPaginationMode) String() string {
 	switch e {
 	case PrintingPaginationModeAutomatic:
@@ -4364,6 +4854,8 @@ const (
 	ProgressIndicatorStyleSpinning ProgressIndicatorStyle = 1
 )
 
+// String returns the ProgressIndicatorStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ProgressIndicatorStyle) String() string {
 	switch e {
 	case ProgressIndicatorStyleBar:
@@ -4399,6 +4891,8 @@ const (
 	RectAlignmentTopTrailing RectAlignment = 8
 )
 
+// String returns the RectAlignment constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RectAlignment) String() string {
 	switch e {
 	case RectAlignmentNone:
@@ -4436,6 +4930,8 @@ const (
 	RemoteNotificationTypeAlert RemoteNotificationType = 4
 )
 
+// String returns the RemoteNotificationType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RemoteNotificationType) String() string {
 	var parts []string
 	if e&RemoteNotificationTypeBadge != 0 {
@@ -4460,6 +4956,8 @@ const (
 	InformationalRequest RequestUserAttentionType = 10
 )
 
+// String returns the RequestUserAttentionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RequestUserAttentionType) String() string {
 	switch e {
 	case CriticalRequest:
@@ -4481,6 +4979,8 @@ const (
 	RuleEditorNestingModeSimple   RuleEditorNestingMode = 3
 )
 
+// String returns the RuleEditorNestingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RuleEditorNestingMode) String() string {
 	switch e {
 	case RuleEditorNestingModeSingle:
@@ -4504,6 +5004,8 @@ const (
 	RuleEditorRowTypeCompound RuleEditorRowType = 1
 )
 
+// String returns the RuleEditorRowType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RuleEditorRowType) String() string {
 	switch e {
 	case RuleEditorRowTypeSimple:
@@ -4522,6 +5024,8 @@ const (
 	VerticalRuler   RulerOrientation = 1
 )
 
+// String returns the RulerOrientation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RulerOrientation) String() string {
 	switch e {
 	case HorizontalRuler:
@@ -4549,6 +5053,8 @@ const (
 	AutosaveOperation SaveOperationType = 3
 )
 
+// String returns the SaveOperationType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SaveOperationType) String() string {
 	switch e {
 	case SaveOperation:
@@ -4578,6 +5084,8 @@ const (
 	ScrollerArrowsNone           ScrollArrowPosition = 2
 )
 
+// String returns the ScrollArrowPosition constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ScrollArrowPosition) String() string {
 	switch e {
 	case ScrollerArrowsMaxEnd:
@@ -4600,6 +5108,8 @@ const (
 	ScrollElasticityAllowed   ScrollElasticity = 2
 )
 
+// String returns the ScrollElasticity constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ScrollElasticity) String() string {
 	switch e {
 	case ScrollElasticityAutomatic:
@@ -4622,6 +5132,8 @@ const (
 	ScrollViewFindBarPositionBelowContent         ScrollViewFindBarPosition = 2
 )
 
+// String returns the ScrollViewFindBarPosition constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ScrollViewFindBarPosition) String() string {
 	switch e {
 	case ScrollViewFindBarPositionAboveHorizontalRuler:
@@ -4645,6 +5157,8 @@ const (
 	ScrollerDecrementArrow ScrollerArrow = 1
 )
 
+// String returns the ScrollerArrow constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ScrollerArrow) String() string {
 	switch e {
 	case ScrollerIncrementArrow:
@@ -4665,6 +5179,8 @@ const (
 	ScrollerKnobStyleLight   ScrollerKnobStyle = 2
 )
 
+// String returns the ScrollerKnobStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ScrollerKnobStyle) String() string {
 	switch e {
 	case ScrollerKnobStyleDefault:
@@ -4696,6 +5212,8 @@ const (
 	ScrollerKnobSlot ScrollerPart = 6
 )
 
+// String returns the ScrollerPart constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ScrollerPart) String() string {
 	switch e {
 	case ScrollerNoPart:
@@ -4725,6 +5243,8 @@ const (
 	ScrollerStyleOverlay ScrollerStyle = 1
 )
 
+// String returns the ScrollerStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ScrollerStyle) String() string {
 	switch e {
 	case ScrollerStyleLegacy:
@@ -4746,6 +5266,8 @@ const (
 	ScrubberAlignmentCenter   ScrubberAlignment = 3
 )
 
+// String returns the ScrubberAlignment constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ScrubberAlignment) String() string {
 	switch e {
 	case ScrubberAlignmentNone:
@@ -4769,6 +5291,8 @@ const (
 	ScrubberModeFree  ScrubberMode = 1
 )
 
+// String returns the ScrubberMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ScrubberMode) String() string {
 	switch e {
 	case ScrubberModeFixed:
@@ -4793,6 +5317,8 @@ const (
 	SegmentDistributionFillProportionally SegmentDistribution = 3
 )
 
+// String returns the SegmentDistribution constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SegmentDistribution) String() string {
 	switch e {
 	case SegmentDistributionFit:
@@ -4821,6 +5347,8 @@ const (
 	SegmentStyleCapsule         SegmentStyle = 5
 )
 
+// String returns the SegmentStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SegmentStyle) String() string {
 	switch e {
 	case SegmentStyleAutomatic:
@@ -4853,6 +5381,8 @@ const (
 	SegmentSwitchTrackingMomentaryAccelerator SegmentSwitchTracking = 3
 )
 
+// String returns the SegmentSwitchTracking constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SegmentSwitchTracking) String() string {
 	switch e {
 	case SegmentSwitchTrackingSelectOne:
@@ -4878,6 +5408,8 @@ const (
 	SelectionAffinityDownstream SelectionAffinity = 1
 )
 
+// String returns the SelectionAffinity constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SelectionAffinity) String() string {
 	switch e {
 	case SelectionAffinityUpstream:
@@ -4898,6 +5430,8 @@ const (
 	SelectingPrevious SelectionDirection = 2
 )
 
+// String returns the SelectionDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SelectionDirection) String() string {
 	switch e {
 	case DirectSelection:
@@ -4923,6 +5457,8 @@ const (
 	SelectByParagraph SelectionGranularity = 2
 )
 
+// String returns the SelectionGranularity constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SelectionGranularity) String() string {
 	switch e {
 	case SelectByCharacter:
@@ -4944,6 +5480,8 @@ const (
 	SharingCollaborationModeCollaborate SharingCollaborationMode = 1
 )
 
+// String returns the SharingCollaborationMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SharingCollaborationMode) String() string {
 	switch e {
 	case SharingCollaborationModeSendCopy:
@@ -4963,6 +5501,8 @@ const (
 	SliderTypeCircular SliderType = 1
 )
 
+// String returns the SliderType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SliderType) String() string {
 	switch e {
 	case SliderTypeLinear:
@@ -4983,6 +5523,8 @@ const (
 	SpeechSentenceBoundary  SpeechBoundary = 2
 )
 
+// String returns the SpeechBoundary constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SpeechBoundary) String() string {
 	switch e {
 	case SpeechImmediateBoundary:
@@ -5005,6 +5547,8 @@ const (
 	SplitViewDividerStylePaneSplitter SplitViewDividerStyle = 3
 )
 
+// String returns the SplitViewDividerStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SplitViewDividerStyle) String() string {
 	switch e {
 	case SplitViewDividerStyleThick:
@@ -5028,6 +5572,8 @@ const (
 	SplitViewItemBehaviorInspector   SplitViewItemBehavior = 3
 )
 
+// String returns the SplitViewItemBehavior constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SplitViewItemBehavior) String() string {
 	switch e {
 	case SplitViewItemBehaviorDefault:
@@ -5057,6 +5603,8 @@ const (
 	SplitViewItemCollapseBehaviorUseConstraints SplitViewItemCollapseBehavior = 3
 )
 
+// String returns the SplitViewItemCollapseBehavior constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SplitViewItemCollapseBehavior) String() string {
 	switch e {
 	case SplitViewItemCollapseBehaviorDefault:
@@ -5089,6 +5637,8 @@ const (
 	StackViewDistributionEqualCentering StackViewDistribution = 4
 )
 
+// String returns the StackViewDistribution constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StackViewDistribution) String() string {
 	switch e {
 	case StackViewDistributionGravityAreas:
@@ -5119,6 +5669,8 @@ const (
 	StackViewGravityTrailing StackViewGravity = 3
 )
 
+// String returns the StackViewGravity constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StackViewGravity) String() string {
 	switch e {
 	case StackViewGravityTop:
@@ -5141,6 +5693,8 @@ const (
 	StatusItemBehaviorTerminationOnRemoval StatusItemBehavior = 4
 )
 
+// String returns the StatusItemBehavior constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StatusItemBehavior) String() string {
 	var parts []string
 	if e&StatusItemBehaviorRemovalAllowed != 0 {
@@ -5169,6 +5723,8 @@ const (
 	TIFFCompressionOldJPEG   TIFFCompression = 32865
 )
 
+// String returns the TIFFCompression constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TIFFCompression) String() string {
 	switch e {
 	case TIFFCompressionNone:
@@ -5202,6 +5758,8 @@ const (
 	TabPositionRight  TabPosition = 4
 )
 
+// String returns the TabPosition constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TabPosition) String() string {
 	switch e {
 	case TabPositionNone:
@@ -5228,6 +5786,8 @@ const (
 	PressedTab    TabState = 2
 )
 
+// String returns the TabState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TabState) String() string {
 	switch e {
 	case SelectedTab:
@@ -5249,6 +5809,8 @@ const (
 	TabViewBorderTypeBezel TabViewBorderType = 2
 )
 
+// String returns the TabViewBorderType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TabViewBorderType) String() string {
 	switch e {
 	case TabViewBorderTypeNone:
@@ -5276,6 +5838,8 @@ const (
 	TabViewControllerTabStyleUnspecified TabViewControllerTabStyle = -1
 )
 
+// String returns the TabViewControllerTabStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TabViewControllerTabStyle) String() string {
 	switch e {
 	case TabViewControllerTabStyleSegmentedControlOnTop:
@@ -5303,6 +5867,8 @@ const (
 	NoTabsNoBorder        TabViewType = 6
 )
 
+// String returns the TabViewType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TabViewType) String() string {
 	switch e {
 	case TopTabsBezelBorder:
@@ -5334,6 +5900,8 @@ const (
 	TableColumnUserResizingMask TableColumnResizingOptions = 2
 )
 
+// String returns the TableColumnResizingOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TableColumnResizingOptions) String() string {
 	var parts []string
 	if e&TableColumnAutoresizingMask != 0 {
@@ -5363,6 +5931,8 @@ const (
 	TableViewAnimationSlideRight TableViewAnimationOptions = 64
 )
 
+// String returns the TableViewAnimationOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TableViewAnimationOptions) String() string {
 	var parts []string
 	if e&TableViewAnimationEffectFade != 0 {
@@ -5400,6 +5970,8 @@ const (
 	TableViewFirstColumnOnlyAutoresizingStyle         TableViewColumnAutoresizingStyle = 5
 )
 
+// String returns the TableViewColumnAutoresizingStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TableViewColumnAutoresizingStyle) String() string {
 	switch e {
 	case TableViewNoColumnAutoresizing:
@@ -5428,6 +6000,8 @@ const (
 	TableViewDraggingDestinationFeedbackStyleGap        TableViewDraggingDestinationFeedbackStyle = 2
 )
 
+// String returns the TableViewDraggingDestinationFeedbackStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TableViewDraggingDestinationFeedbackStyle) String() string {
 	switch e {
 	case TableViewDraggingDestinationFeedbackStyleNone:
@@ -5451,6 +6025,8 @@ const (
 	TableViewDropAbove TableViewDropOperation = 1
 )
 
+// String returns the TableViewDropOperation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TableViewDropOperation) String() string {
 	switch e {
 	case TableViewDropOn:
@@ -5472,6 +6048,8 @@ const (
 	TableViewDashedHorizontalGridLineMask TableViewGridLineStyle = 8
 )
 
+// String returns the TableViewGridLineStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TableViewGridLineStyle) String() string {
 	var parts []string
 	if e&TableViewSolidVerticalGridLineMask != 0 {
@@ -5497,6 +6075,8 @@ const (
 	TableViewRowActionStyleDestructive TableViewRowActionStyle = 1
 )
 
+// String returns the TableViewRowActionStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TableViewRowActionStyle) String() string {
 	switch e {
 	case TableViewRowActionStyleRegular:
@@ -5518,6 +6098,8 @@ const (
 	TableViewRowSizeStyleLarge   TableViewRowSizeStyle = 3
 )
 
+// String returns the TableViewRowSizeStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TableViewRowSizeStyle) String() string {
 	switch e {
 	case TableViewRowSizeStyleDefault:
@@ -5544,6 +6126,8 @@ const (
 	TableViewSelectionHighlightStyleSourceList TableViewSelectionHighlightStyle = 1
 )
 
+// String returns the TableViewSelectionHighlightStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TableViewSelectionHighlightStyle) String() string {
 	switch e {
 	case TableViewSelectionHighlightStyleNone:
@@ -5568,6 +6152,8 @@ const (
 	TableViewStylePlain      TableViewStyle = 4
 )
 
+// String returns the TableViewStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TableViewStyle) String() string {
 	switch e {
 	case TableViewStyleAutomatic:
@@ -5601,6 +6187,8 @@ const (
 	TextAlignmentNatural TextAlignment = 4
 )
 
+// String returns the TextAlignment constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextAlignment) String() string {
 	switch e {
 	case TextAlignmentLeft:
@@ -5629,6 +6217,8 @@ const (
 	TextBlockMaximumHeight TextBlockDimension = 6
 )
 
+// String returns the TextBlockDimension constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextBlockDimension) String() string {
 	switch e {
 	case TextBlockWidth:
@@ -5656,6 +6246,8 @@ const (
 	TextBlockMargin  TextBlockLayer = 1
 )
 
+// String returns the TextBlockLayer constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextBlockLayer) String() string {
 	switch e {
 	case TextBlockPadding:
@@ -5676,6 +6268,8 @@ const (
 	TextBlockPercentageValueType TextBlockValueType = 1
 )
 
+// String returns the TextBlockValueType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextBlockValueType) String() string {
 	switch e {
 	case TextBlockAbsoluteValueType:
@@ -5696,6 +6290,8 @@ const (
 	TextBlockBaselineAlignment TextBlockVerticalAlignment = 3
 )
 
+// String returns the TextBlockVerticalAlignment constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextBlockVerticalAlignment) String() string {
 	switch e {
 	case TextBlockTopAlignment:
@@ -5719,6 +6315,8 @@ const (
 	TextFieldRoundedBezel TextFieldBezelStyle = 1
 )
 
+// String returns the TextFieldBezelStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextFieldBezelStyle) String() string {
 	switch e {
 	case TextFieldSquareBezel:
@@ -5748,6 +6346,8 @@ const (
 	TextFinderActionHideReplaceInterface  TextFinderAction = 13
 )
 
+// String returns the TextFinderAction constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextFinderAction) String() string {
 	switch e {
 	case TextFinderActionShowFindInterface:
@@ -5789,6 +6389,8 @@ const (
 	TextInputTraitTypeYes     TextInputTraitType = 2
 )
 
+// String returns the TextInputTraitType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextInputTraitType) String() string {
 	switch e {
 	case TextInputTraitTypeDefault:
@@ -5811,6 +6413,8 @@ const (
 	TextInsertionIndicatorAutomaticModeOptionsShowWhileTracking TextInsertionIndicatorAutomaticModeOptions = 2
 )
 
+// String returns the TextInsertionIndicatorAutomaticModeOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextInsertionIndicatorAutomaticModeOptions) String() string {
 	var parts []string
 	if e&TextInsertionIndicatorAutomaticModeOptionsShowEffectsView != 0 {
@@ -5834,6 +6438,8 @@ const (
 	TextInsertionIndicatorDisplayModeVisible   TextInsertionIndicatorDisplayMode = 2
 )
 
+// String returns the TextInsertionIndicatorDisplayMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextInsertionIndicatorDisplayMode) String() string {
 	switch e {
 	case TextInsertionIndicatorDisplayModeAutomatic:
@@ -5857,6 +6463,8 @@ const (
 	TextLayoutFragmentStateLayoutAvailable       TextLayoutFragmentState = 3
 )
 
+// String returns the TextLayoutFragmentState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextLayoutFragmentState) String() string {
 	switch e {
 	case TextLayoutFragmentStateNone:
@@ -5885,6 +6493,8 @@ const (
 	TextLayoutManagerSegmentOptionsUpstreamAffinity        TextLayoutManagerSegmentOptions = 16
 )
 
+// String returns the TextLayoutManagerSegmentOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextLayoutManagerSegmentOptions) String() string {
 	var parts []string
 	if e&TextLayoutManagerSegmentOptionsRangeNotRequired != 0 {
@@ -5917,6 +6527,8 @@ const (
 	TextLayoutManagerSegmentTypeHighlight TextLayoutManagerSegmentType = 2
 )
 
+// String returns the TextLayoutManagerSegmentType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextLayoutManagerSegmentType) String() string {
 	switch e {
 	case TextLayoutManagerSegmentTypeStandard:
@@ -5938,6 +6550,8 @@ const (
 	TextLayoutOrientationVertical   TextLayoutOrientation = 1
 )
 
+// String returns the TextLayoutOrientation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextLayoutOrientation) String() string {
 	switch e {
 	case TextLayoutOrientationHorizontal:
@@ -5957,6 +6571,8 @@ const (
 	TextListPrependEnclosingMarker TextListOptions = 1
 )
 
+// String returns the TextListOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextListOptions) String() string {
 	var parts []string
 	if e&TextListPrependEnclosingMarker != 0 {
@@ -5976,6 +6592,8 @@ const (
 	TextSelectionAffinityDownstream TextSelectionAffinity = 1
 )
 
+// String returns the TextSelectionAffinity constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextSelectionAffinity) String() string {
 	switch e {
 	case TextSelectionAffinityUpstream:
@@ -5998,6 +6616,8 @@ const (
 	TextSelectionGranularitySentence  TextSelectionGranularity = 4
 )
 
+// String returns the TextSelectionGranularity constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextSelectionGranularity) String() string {
 	switch e {
 	case TextSelectionGranularityCharacter:
@@ -6028,6 +6648,8 @@ const (
 	TextSelectionNavigationDestinationDocument  TextSelectionNavigationDestination = 6
 )
 
+// String returns the TextSelectionNavigationDestination constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextSelectionNavigationDestination) String() string {
 	switch e {
 	case TextSelectionNavigationDestinationCharacter:
@@ -6061,6 +6683,8 @@ const (
 	TextSelectionNavigationDirectionDown     TextSelectionNavigationDirection = 5
 )
 
+// String returns the TextSelectionNavigationDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextSelectionNavigationDirection) String() string {
 	switch e {
 	case TextSelectionNavigationDirectionForward:
@@ -6088,6 +6712,8 @@ const (
 	TextSelectionNavigationWritingDirectionRightToLeft TextSelectionNavigationWritingDirection = 1
 )
 
+// String returns the TextSelectionNavigationWritingDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextSelectionNavigationWritingDirection) String() string {
 	switch e {
 	case TextSelectionNavigationWritingDirectionLeftToRight:
@@ -6110,6 +6736,8 @@ const (
 	TextStorageEditedCharacters TextStorageEditActions = 2
 )
 
+// String returns the TextStorageEditActions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextStorageEditActions) String() string {
 	var parts []string
 	if e&TextStorageEditedAttributes != 0 {
@@ -6134,6 +6762,8 @@ const (
 	DecimalTabStopType TextTabType = 3
 )
 
+// String returns the TextTabType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextTabType) String() string {
 	switch e {
 	case LeftTabStopType:
@@ -6157,6 +6787,8 @@ const (
 	TextTableFixedLayoutAlgorithm     TextTableLayoutAlgorithm = 1
 )
 
+// String returns the TextTableLayoutAlgorithm constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextTableLayoutAlgorithm) String() string {
 	switch e {
 	case TextTableAutomaticLayoutAlgorithm:
@@ -6178,6 +6810,8 @@ const (
 	TickMarkPositionTrailing TickMarkPosition = 0
 )
 
+// String returns the TickMarkPosition constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TickMarkPosition) String() string {
 	switch e {
 	case TickMarkPositionBelow:
@@ -6199,6 +6833,8 @@ const (
 	TintProminenceSecondary TintProminence = 3
 )
 
+// String returns the TintProminence constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TintProminence) String() string {
 	switch e {
 	case TintProminenceAutomatic:
@@ -6227,6 +6863,8 @@ const (
 	BelowBottom TitlePosition = 6
 )
 
+// String returns the TitlePosition constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TitlePosition) String() string {
 	switch e {
 	case NoTitle:
@@ -6262,6 +6900,8 @@ const (
 	TitlebarSeparatorStyleShadow TitlebarSeparatorStyle = 3
 )
 
+// String returns the TitlebarSeparatorStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TitlebarSeparatorStyle) String() string {
 	switch e {
 	case TitlebarSeparatorStyleAutomatic:
@@ -6288,6 +6928,8 @@ const (
 	TokenStylePlainSquared TokenStyle = 4
 )
 
+// String returns the TokenStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TokenStyle) String() string {
 	switch e {
 	case TokenStyleDefault:
@@ -6315,6 +6957,8 @@ const (
 	ToolbarDisplayModeLabelOnly    ToolbarDisplayMode = 3
 )
 
+// String returns the ToolbarDisplayMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ToolbarDisplayMode) String() string {
 	switch e {
 	case ToolbarDisplayModeDefault:
@@ -6338,6 +6982,8 @@ const (
 	ToolbarItemGroupControlRepresentationCollapsed ToolbarItemGroupControlRepresentation = 2
 )
 
+// String returns the ToolbarItemGroupControlRepresentation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ToolbarItemGroupControlRepresentation) String() string {
 	switch e {
 	case ToolbarItemGroupControlRepresentationAutomatic:
@@ -6360,6 +7006,8 @@ const (
 	ToolbarItemGroupSelectionModeMomentary ToolbarItemGroupSelectionMode = 2
 )
 
+// String returns the ToolbarItemGroupSelectionMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ToolbarItemGroupSelectionMode) String() string {
 	switch e {
 	case ToolbarItemGroupSelectionModeSelectOne:
@@ -6380,6 +7028,8 @@ const (
 	ToolbarItemStyleProminent ToolbarItemStyle = 1
 )
 
+// String returns the ToolbarItemStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ToolbarItemStyle) String() string {
 	switch e {
 	case ToolbarItemStylePlain:
@@ -6402,6 +7052,8 @@ const (
 	ToolbarSizeModeSmall   ToolbarSizeMode = 2
 )
 
+// String returns the ToolbarSizeMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ToolbarSizeMode) String() string {
 	switch e {
 	case ToolbarSizeModeDefault:
@@ -6429,6 +7081,8 @@ const (
 	TouchPhaseAny        TouchPhase = 18446744073709551615
 )
 
+// String returns the TouchPhase constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TouchPhase) String() string {
 	var parts []string
 	if e&TouchPhaseBegan != 0 {
@@ -6466,6 +7120,8 @@ const (
 	TouchTypeIndirect TouchType = 1
 )
 
+// String returns the TouchType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TouchType) String() string {
 	switch e {
 	case TouchTypeDirect:
@@ -6486,6 +7142,8 @@ const (
 	TouchTypeMaskIndirect TouchTypeMask = 2
 )
 
+// String returns the TouchTypeMask constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TouchTypeMask) String() string {
 	var parts []string
 	if e&TouchTypeMaskDirect != 0 {
@@ -6517,6 +7175,8 @@ const (
 	TrackingEnabledDuringMouseDrag   TrackingAreaOptions = 1024
 )
 
+// String returns the TrackingAreaOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TrackingAreaOptions) String() string {
 	var parts []string
 	if e&TrackingMouseEnteredAndExited != 0 {
@@ -6567,6 +7227,8 @@ const (
 	TypesetterBehavior_10_4                   TypesetterBehavior = 4
 )
 
+// String returns the TypesetterBehavior constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TypesetterBehavior) String() string {
 	switch e {
 	case TypesetterLatestBehavior:
@@ -6605,6 +7267,8 @@ const (
 	TypesetterContainerBreakAction TypesetterControlCharacterAction = 32
 )
 
+// String returns the TypesetterControlCharacterAction constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TypesetterControlCharacterAction) String() string {
 	var parts []string
 	if e&TypesetterZeroAdvancementAction != 0 {
@@ -6631,6 +7295,67 @@ func (e TypesetterControlCharacterAction) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants for the underline style and strikethrough style attribute keys.
+// Bitmask — values may be combined with |.
+type UnderlineStyle int64
+
+const (
+	// Don’t draw a line.
+	UnderlineStyleNone UnderlineStyle = 0
+	// Draw a single line.
+	UnderlineStyleSingle UnderlineStyle = 1
+	// Draw a thick line.
+	UnderlineStyleThick UnderlineStyle = 2
+	// Draw a double line.
+	UnderlineStyleDouble UnderlineStyle = 9
+	// Draw a solid line.
+	UnderlineStylePatternSolid UnderlineStyle = 0
+	// Draw a line of dots.
+	UnderlineStylePatternDot UnderlineStyle = 256
+	// Draw a line of dashes.
+	UnderlineStylePatternDash UnderlineStyle = 512
+	// Draw a line of alternating dashes and dots.
+	UnderlineStylePatternDashDot UnderlineStyle = 768
+	// Draw a line of alternating dashes and two dots.
+	UnderlineStylePatternDashDotDot UnderlineStyle = 1024
+	// Draw the line only beneath or through words, not whitespace.
+	UnderlineStyleByWord UnderlineStyle = 32768
+)
+
+// String returns the UnderlineStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e UnderlineStyle) String() string {
+	var parts []string
+	if e&UnderlineStyleSingle != 0 {
+		parts = append(parts, "UnderlineStyleSingle")
+	}
+	if e&UnderlineStyleThick != 0 {
+		parts = append(parts, "UnderlineStyleThick")
+	}
+	if e&UnderlineStyleDouble != 0 {
+		parts = append(parts, "UnderlineStyleDouble")
+	}
+	if e&UnderlineStylePatternDot != 0 {
+		parts = append(parts, "UnderlineStylePatternDot")
+	}
+	if e&UnderlineStylePatternDash != 0 {
+		parts = append(parts, "UnderlineStylePatternDash")
+	}
+	if e&UnderlineStylePatternDashDot != 0 {
+		parts = append(parts, "UnderlineStylePatternDashDot")
+	}
+	if e&UnderlineStylePatternDashDotDot != 0 {
+		parts = append(parts, "UnderlineStylePatternDashDotDot")
+	}
+	if e&UnderlineStyleByWord != 0 {
+		parts = append(parts, "UnderlineStyleByWord")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // These constants specify which parts of the scroller are visible.
 type UsableScrollerParts uint64
 
@@ -6642,6 +7367,8 @@ const (
 	AllScrollerParts UsableScrollerParts = 2
 )
 
+// String returns the UsableScrollerParts constant's name, or its numeric form when the
+// value is not a known constant.
 func (e UsableScrollerParts) String() string {
 	switch e {
 	case NoScrollerParts:
@@ -6665,6 +7392,8 @@ const (
 	UserInterfaceLayoutDirectionRightToLeft UserInterfaceLayoutDirection = 1
 )
 
+// String returns the UserInterfaceLayoutDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e UserInterfaceLayoutDirection) String() string {
 	switch e {
 	case UserInterfaceLayoutDirectionLeftToRight:
@@ -6686,6 +7415,8 @@ const (
 	UserInterfaceLayoutOrientationVertical UserInterfaceLayoutOrientation = 1
 )
 
+// String returns the UserInterfaceLayoutOrientation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e UserInterfaceLayoutOrientation) String() string {
 	switch e {
 	case UserInterfaceLayoutOrientationHorizontal:
@@ -6710,6 +7441,8 @@ const (
 	VerticalDirectionsAll VerticalDirections = 3
 )
 
+// String returns the VerticalDirections constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VerticalDirections) String() string {
 	var parts []string
 	if e&VerticalDirectionsUp != 0 {
@@ -6744,6 +7477,8 @@ const (
 	ViewControllerTransitionAllowUserInteraction ViewControllerTransitionOptions = 4096
 )
 
+// String returns the ViewControllerTransitionOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ViewControllerTransitionOptions) String() string {
 	var parts []string
 	if e&ViewControllerTransitionCrossfade != 0 {
@@ -6793,6 +7528,8 @@ const (
 	ViewLayerContentsPlacementTopLeft                   ViewLayerContentsPlacement = 11
 )
 
+// String returns the ViewLayerContentsPlacement constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ViewLayerContentsPlacement) String() string {
 	switch e {
 	case ViewLayerContentsPlacementScaleAxesIndependently:
@@ -6834,6 +7571,8 @@ const (
 	ViewLayerContentsRedrawCrossfade         ViewLayerContentsRedrawPolicy = 4
 )
 
+// String returns the ViewLayerContentsRedrawPolicy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ViewLayerContentsRedrawPolicy) String() string {
 	switch e {
 	case ViewLayerContentsRedrawNever:
@@ -6859,6 +7598,8 @@ const (
 	ViewLayoutRegionAdaptivityAxisVertical   ViewLayoutRegionAdaptivityAxis = 2
 )
 
+// String returns the ViewLayoutRegionAdaptivityAxis constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ViewLayoutRegionAdaptivityAxis) String() string {
 	switch e {
 	case ViewLayoutRegionAdaptivityAxisNone:
@@ -6882,6 +7623,8 @@ const (
 	VisualEffectBlendingModeWithinWindow VisualEffectBlendingMode = 1
 )
 
+// String returns the VisualEffectBlendingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VisualEffectBlendingMode) String() string {
 	switch e {
 	case VisualEffectBlendingModeBehindWindow:
@@ -6939,6 +7682,8 @@ const (
 	VisualEffectMaterialUltraDark VisualEffectMaterial = 9
 )
 
+// String returns the VisualEffectMaterial constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VisualEffectMaterial) String() string {
 	switch e {
 	case VisualEffectMaterialTitlebar:
@@ -6996,6 +7741,8 @@ const (
 	VisualEffectStateInactive VisualEffectState = 2
 )
 
+// String returns the VisualEffectState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VisualEffectState) String() string {
 	switch e {
 	case VisualEffectStateFollowsWindowActiveState:
@@ -7017,6 +7764,8 @@ const (
 	WindingRuleEvenOdd WindingRule = 1
 )
 
+// String returns the WindingRule constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WindingRule) String() string {
 	switch e {
 	case WindingRuleNonZero:
@@ -7039,6 +7788,8 @@ const (
 	WindowAnimationBehaviorAlertPanel     WindowAnimationBehavior = 5
 )
 
+// String returns the WindowAnimationBehavior constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WindowAnimationBehavior) String() string {
 	switch e {
 	case WindowAnimationBehaviorDefault:
@@ -7069,6 +7820,8 @@ const (
 	WindowBackingLocationMainMemory  WindowBackingLocation = 2
 )
 
+// String returns the WindowBackingLocation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WindowBackingLocation) String() string {
 	switch e {
 	case WindowBackingLocationDefault:
@@ -7094,6 +7847,8 @@ const (
 	WindowDocumentVersionsButton WindowButton = 6
 )
 
+// String returns the WindowButton constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WindowButton) String() string {
 	switch e {
 	case WindowCloseButton:
@@ -7137,6 +7892,8 @@ const (
 	WindowCollectionBehaviorCanJoinAllApplications    WindowCollectionBehavior = 262144
 )
 
+// String returns the WindowCollectionBehavior constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WindowCollectionBehavior) String() string {
 	var parts []string
 	if e&WindowCollectionBehaviorCanJoinAllSpaces != 0 {
@@ -7199,6 +7956,8 @@ const (
 	WindowDepthOnehundredtwentyeightBitRGB WindowDepth = 544
 )
 
+// String returns the WindowDepth constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WindowDepth) String() string {
 	switch e {
 	case WindowDepthTwentyfourBitRGB:
@@ -7221,6 +7980,8 @@ const (
 	WindowListOrderedFrontToBack WindowListOptions = 1
 )
 
+// String returns the WindowListOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WindowListOptions) String() string {
 	var parts []string
 	if e&WindowListOrderedFrontToBack != 0 {
@@ -7241,6 +8002,8 @@ const (
 	WindowNumberListAllSpaces       WindowNumberListOptions = 16
 )
 
+// String returns the WindowNumberListOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WindowNumberListOptions) String() string {
 	var parts []string
 	if e&WindowNumberListAllApplications != 0 {
@@ -7263,6 +8026,8 @@ const (
 	WindowOcclusionStateVisible WindowOcclusionState = 2
 )
 
+// String returns the WindowOcclusionState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WindowOcclusionState) String() string {
 	var parts []string
 	if e&WindowOcclusionStateVisible != 0 {
@@ -7283,6 +8048,8 @@ const (
 	WindowOut   WindowOrderingMode = 0
 )
 
+// String returns the WindowOrderingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WindowOrderingMode) String() string {
 	switch e {
 	case WindowAbove:
@@ -7304,6 +8071,8 @@ const (
 	WindowSharingReadOnly WindowSharingType = 1
 )
 
+// String returns the WindowSharingType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WindowSharingType) String() string {
 	switch e {
 	case WindowSharingNone:
@@ -7337,6 +8106,8 @@ const (
 	WindowStyleMaskHUDWindow              WindowStyleMask = 8192
 )
 
+// String returns the WindowStyleMask constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WindowStyleMask) String() string {
 	var parts []string
 	if e&WindowStyleMaskTitled != 0 {
@@ -7390,6 +8161,8 @@ const (
 	WindowTabbingModeDisallowed WindowTabbingMode = 2
 )
 
+// String returns the WindowTabbingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WindowTabbingMode) String() string {
 	switch e {
 	case WindowTabbingModeAutomatic:
@@ -7411,6 +8184,8 @@ const (
 	WindowTitleHidden  WindowTitleVisibility = 1
 )
 
+// String returns the WindowTitleVisibility constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WindowTitleVisibility) String() string {
 	switch e {
 	case WindowTitleVisible:
@@ -7433,6 +8208,8 @@ const (
 	WindowToolbarStyleUnifiedCompact WindowToolbarStyle = 4
 )
 
+// String returns the WindowToolbarStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WindowToolbarStyle) String() string {
 	switch e {
 	case WindowToolbarStyleAutomatic:
@@ -7459,6 +8236,8 @@ const (
 	WindowUserTabbingPreferenceInFullScreen WindowUserTabbingPreference = 2
 )
 
+// String returns the WindowUserTabbingPreference constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WindowUserTabbingPreference) String() string {
 	switch e {
 	case WindowUserTabbingPreferenceManual:
@@ -7481,6 +8260,8 @@ const (
 	WorkspaceAuthorizationTypeReplaceFile        WorkspaceAuthorizationType = 2
 )
 
+// String returns the WorkspaceAuthorizationType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WorkspaceAuthorizationType) String() string {
 	switch e {
 	case WorkspaceAuthorizationTypeCreateSymbolicLink:
@@ -7503,6 +8284,8 @@ const (
 	Exclude10_4ElementsIconCreationOption      WorkspaceIconCreationOptions = 4
 )
 
+// String returns the WorkspaceIconCreationOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WorkspaceIconCreationOptions) String() string {
 	var parts []string
 	if e&ExcludeQuickDrawElementsIconCreationOption != 0 {
@@ -7550,6 +8333,8 @@ const (
 	WorkspaceLaunchPreferringClassic WorkspaceLaunchOptions = 262144
 )
 
+// String returns the WorkspaceLaunchOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WorkspaceLaunchOptions) String() string {
 	var parts []string
 	if e&WorkspaceLaunchAndPrint != 0 {
@@ -7606,6 +8391,8 @@ const (
 	WritingDirectionRightToLeft WritingDirection = 1
 )
 
+// String returns the WritingDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WritingDirection) String() string {
 	switch e {
 	case WritingDirectionNatural:
@@ -7633,6 +8420,8 @@ const (
 	WritingToolsBehaviorLimited WritingToolsBehavior = 2
 )
 
+// String returns the WritingToolsBehavior constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WritingToolsBehavior) String() string {
 	switch e {
 	case WritingToolsBehaviorNone:
@@ -7662,6 +8451,8 @@ const (
 	WritingToolsCoordinatorStateInteractiveStreaming WritingToolsCoordinatorState = 3
 )
 
+// String returns the WritingToolsCoordinatorState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WritingToolsCoordinatorState) String() string {
 	switch e {
 	case WritingToolsCoordinatorStateInactive:
@@ -7674,6 +8465,29 @@ func (e WritingToolsCoordinatorState) String() string {
 		return "WritingToolsCoordinatorStateInteractiveStreaming"
 	default:
 		return fmt.Sprintf("WritingToolsCoordinatorState(%d)", int64(e))
+	}
+}
+
+// Constants that specify the reason you updated your view’s content outside of the Writing Tools workflow. If you modify your view’s text storage while Writing Tools is active, report those changes to your “NSWritingToolsCoordinator“ object so it can track them correctly. Call the “NSWritingToolsCoordinator/updateRange(_:with:reason:forContextWithIdentifier:)“ method to report changes that occur inside one of your context objects. Call the “NSWritingToolsCoordinator/updateForReflowedTextInContextWithIdentifier(_:)“ method for changes that affect the layout of your text, such as text insertions before a context object or changes to your view’s frame rectangle.
+type WritingToolsCoordinatorTextUpdateReason int64
+
+const (
+	// An operation that involved a person editing the text in your view. Specify this option when the changes come from the text input system.
+	WritingToolsCoordinatorTextUpdateReasonTyping WritingToolsCoordinatorTextUpdateReason = 0
+	// An operation that changed the view’s text as part of an undo or redo command. Specify this option when an undo or redo command initiated the change to your view.
+	WritingToolsCoordinatorTextUpdateReasonUndoRedo WritingToolsCoordinatorTextUpdateReason = 1
+)
+
+// String returns the WritingToolsCoordinatorTextUpdateReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WritingToolsCoordinatorTextUpdateReason) String() string {
+	switch e {
+	case WritingToolsCoordinatorTextUpdateReasonTyping:
+		return "WritingToolsCoordinatorTextUpdateReasonTyping"
+	case WritingToolsCoordinatorTextUpdateReasonUndoRedo:
+		return "WritingToolsCoordinatorTextUpdateReasonUndoRedo"
+	default:
+		return fmt.Sprintf("WritingToolsCoordinatorTextUpdateReason(%d)", int64(e))
 	}
 }
 
@@ -7694,6 +8508,8 @@ const (
 	WritingToolsResultPresentationIntent WritingToolsResultOptions = 16
 )
 
+// String returns the WritingToolsResultOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e WritingToolsResultOptions) String() string {
 	var parts []string
 	if e&WritingToolsResultPlainText != 0 {

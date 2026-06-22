@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for volume.
-//
 // UnitVolume is an idiomatic wrapper over the Objective-C class NSUnitVolume.
+//
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for volume.
 type UnitVolume struct {
-	objref.Handle
+	Dimension
 }
 
 // UnitVolumeFromID adopts an existing Objective-C object as a UnitVolume
@@ -25,7 +26,8 @@ func UnitVolumeFromID(id objc.ID) *UnitVolume {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitVolume{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UnitVolume{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func unitVolumeAdopt(id objc.ID) *UnitVolume {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitVolume{Handle: objref.Wrap(id)}
+	x := &UnitVolume{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UnitVolume) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UnitVolume) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UnitVolume) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUnitVolume creates a new UnitVolume.
@@ -64,7 +52,7 @@ func NewUnitVolume() *UnitVolume {
 	return unitVolumeAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UnitVolume) WithScriptingProperties(scriptingProperties obj.Object) *UnitVolume {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
@@ -77,3 +65,7 @@ type UnitVolumeable interface {
 }
 
 var _ UnitVolumeable = (*UnitVolume)(nil)
+
+var _ DimensionProvider = (*UnitVolume)(nil)
+
+var _ UnitProvider = (*UnitVolume)(nil)

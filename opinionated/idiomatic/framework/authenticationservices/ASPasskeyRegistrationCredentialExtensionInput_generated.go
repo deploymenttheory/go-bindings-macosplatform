@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that encapsulates input for various WebAuthn extensions during passkey registration.
-//
 // PasskeyRegistrationCredentialExtensionInput is an idiomatic wrapper over the Objective-C class ASPasskeyRegistrationCredentialExtensionInput.
+//
+// A type that encapsulates input for various WebAuthn extensions during passkey registration.
 type PasskeyRegistrationCredentialExtensionInput struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PasskeyRegistrationCredentialExtensionInputFromID(id objc.ID) *PasskeyRegis
 	if id == 0 {
 		return nil
 	}
-	x := &PasskeyRegistrationCredentialExtensionInput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PasskeyRegistrationCredentialExtensionInput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func passkeyRegistrationCredentialExtensionInputAdopt(id objc.ID) *PasskeyRegist
 	if id == 0 {
 		return nil
 	}
-	x := &PasskeyRegistrationCredentialExtensionInput{Handle: objref.Wrap(id)}
+	x := &PasskeyRegistrationCredentialExtensionInput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *PasskeyRegistrationCredentialExtensionInput) IsKind(className string) b
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PasskeyRegistrationCredentialExtensionInput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPasskeyRegistrationCredentialExtensionInput creates a new PasskeyRegistrationCredentialExtensionInput.
 func NewPasskeyRegistrationCredentialExtensionInput() *PasskeyRegistrationCredentialExtensionInput {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASPasskeyRegistrationCredentialExtensionInput")), objc.RegisterName("new"))
 	return passkeyRegistrationCredentialExtensionInputAdopt(_id)
 }
 
+// LargeBlob wraps the corresponding Objective-C method.
 func (x *PasskeyRegistrationCredentialExtensionInput) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("largeBlob"))
 	return AuthorizationPublicKeyCredentialLargeBlobRegistrationInputFromID(_r)

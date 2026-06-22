@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a webpage that the web view previously visited.
-//
 // WKBackForwardListItem is an idiomatic wrapper over the Objective-C class WKBackForwardListItem.
+//
+// A representation of a webpage that the web view previously visited.
 type WKBackForwardListItem struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKBackForwardListItemFromID(id objc.ID) *WKBackForwardListItem {
 	if id == 0 {
 		return nil
 	}
-	x := &WKBackForwardListItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKBackForwardListItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKBackForwardListItemAdopt(id objc.ID) *WKBackForwardListItem {
 	if id == 0 {
 		return nil
 	}
-	x := &WKBackForwardListItem{Handle: objref.Wrap(id)}
+	x := &WKBackForwardListItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *WKBackForwardListItem) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKBackForwardListItem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKBackForwardListItem creates a new WKBackForwardListItem.
 func NewWKBackForwardListItem() *WKBackForwardListItem {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKBackForwardListItem")), objc.RegisterName("new"))
 	return wKBackForwardListItemAdopt(_id)
 }
 
-// The URL of the webpage represented by this item.
+// URL the URL of the webpage represented by this item.
 func (x *WKBackForwardListItem) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// The title of the webpage represented by this item.
+// Title the title of the webpage represented by this item.
 func (x *WKBackForwardListItem) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {

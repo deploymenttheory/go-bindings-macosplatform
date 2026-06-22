@@ -29,7 +29,6 @@ func KSecPropertyKeyValue() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecPropertyKeyValue")))
 }
 
-// Public Constants for property list values returned by SecCertificateCopyValues Note that kSecPropertyTypeTitle and kSecPropertyTypeError are defined in SecTrust.h
 // KSecPropertyTypeWarning returns the value of the constant kSecPropertyTypeWarning.
 func KSecPropertyTypeWarning() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecPropertyTypeWarning")))
@@ -85,11 +84,9 @@ func KSecIdentityDomainKerberosKDC() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecIdentityDomainKerberosKDC")))
 }
 
-// Predefined key constant used to get or set item class values in a dictionary. Its value is one of the constants defined in the Value Constants for kSecClass.
 // KSecClass returns the value of the constant kSecClass.
 func KSecClass() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecClass"))) }
 
-// Predefined item class constants used to get or set values in a dictionary. The kSecClass constant is the key and its value is one of the constants defined here. Note: on Mac OS X 10.6, only items of class kSecClassInternetPassword are supported.
 // KSecClassInternetPassword returns the value of the constant kSecClassInternetPassword.
 func KSecClassInternetPassword() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecClassInternetPassword")))
@@ -111,7 +108,6 @@ func KSecClassKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSec
 // KSecClassIdentity returns the value of the constant kSecClassIdentity.
 func KSecClassIdentity() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecClassIdentity"))) }
 
-// Predefined item attribute keys used to get or set values in a dictionary. Not all attributes apply to each item class. The table below lists the currently defined attributes for each item class: kSecClassGenericPassword item attributes: kSecAttrAccess (macOS only) kSecAttrAccessControl kSecAttrAccessGroup (iOS; also macOS if kSecAttrSynchronizable and/or kSecUseDataProtectionKeychain set) kSecAttrAccessible (iOS; also macOS if kSecAttrSynchronizable and/or kSecUseDataProtectionKeychain set) kSecAttrCreationDate kSecAttrModificationDate kSecAttrDescription kSecAttrComment kSecAttrCreator kSecAttrType kSecAttrLabel kSecAttrIsInvisible kSecAttrIsNegative kSecAttrAccount kSecAttrService kSecAttrGeneric kSecAttrSynchronizable kSecClassInternetPassword item attributes: kSecAttrAccess (macOS only) kSecAttrAccessControl kSecAttrAccessGroup (iOS; also macOS if kSecAttrSynchronizable and/or kSecUseDataProtectionKeychain set) kSecAttrAccessible (iOS; also macOS if kSecAttrSynchronizable and/or kSecUseDataProtectionKeychain set) kSecAttrCreationDate kSecAttrModificationDate kSecAttrDescription kSecAttrComment kSecAttrCreator kSecAttrType kSecAttrLabel kSecAttrIsInvisible kSecAttrIsNegative kSecAttrAccount kSecAttrSecurityDomain kSecAttrServer kSecAttrProtocol kSecAttrAuthenticationType kSecAttrPort kSecAttrPath kSecAttrSynchronizable kSecClassCertificate item attributes: kSecAttrAccessible    (iOS only) kSecAttrAccessControl (iOS only) kSecAttrAccessGroup   (iOS only) kSecAttrCertificateType kSecAttrCertificateEncoding kSecAttrLabel kSecAttrSubject kSecAttrIssuer kSecAttrSerialNumber kSecAttrSubjectKeyID kSecAttrPublicKeyHash kSecAttrSynchronizable kSecClassKey item attributes: kSecAttrAccess (macOS only) kSecAttrAccessControl kSecAttrAccessGroup (iOS; also macOS if kSecAttrSynchronizable and/or kSecUseDataProtectionKeychain set) kSecAttrAccessible (iOS; also macOS if kSecAttrSynchronizable and/or kSecUseDataProtectionKeychain set) kSecAttrKeyClass kSecAttrLabel kSecAttrApplicationLabel kSecAttrIsPermanent kSecAttrApplicationTag kSecAttrKeyType kSecAttrPRF    (macOS only) kSecAttrSalt   (macOS only) kSecAttrRounds (macOS only) kSecAttrKeySizeInBits kSecAttrEffectiveKeySize kSecAttrCanEncrypt kSecAttrCanDecrypt kSecAttrCanDerive kSecAttrCanSign kSecAttrCanVerify kSecAttrCanWrap kSecAttrCanUnwrap kSecAttrSynchronizable Note that the attributes kSecAttrCan* describe attributes of the key itself at relatively high level. Some of these attributes are mathematical -- for example, a DSA key cannot encrypt. Others are key-level policy issues -- for example, it is good cryptographic hygiene to use an RSA key either for encryption or signing but not both. Compare these to the certificate-level policy values in SecPolicy.h. kSecClassIdentity item attributes: Since an identity is the combination of a private key and a certificate, this class shares attributes of both kSecClassKey and kSecClassCertificate.
 // KSecAttrAccessible returns the value of the constant kSecAttrAccessible.
 func KSecAttrAccessible() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAccessible")))
@@ -332,7 +328,6 @@ func KSecAttrPersistentReference() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrPersistentReference")))
 }
 
-// Predefined item attribute constants used to get or set values in a dictionary. The kSecAttrAccessible constant is the key and its value is one of the constants defined here. When asking SecItemCopyMatching to return the item's data, the error errSecInteractionNotAllowed will be returned if the item's data is not available until a device unlock occurs.
 // KSecAttrAccessibleWhenUnlocked returns the value of the constant kSecAttrAccessibleWhenUnlocked.
 func KSecAttrAccessibleWhenUnlocked() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAccessibleWhenUnlocked")))
@@ -368,7 +363,6 @@ func KSecAttrAccessibleAlwaysThisDeviceOnly() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAccessibleAlwaysThisDeviceOnly")))
 }
 
-// Predefined item attribute constants used to get or set values in a dictionary. The kSecAttrProtocol constant is the key and its value is one of the constants defined here.
 // KSecAttrProtocolFTP returns the value of the constant kSecAttrProtocolFTP.
 func KSecAttrProtocolFTP() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolFTP")))
@@ -524,7 +518,6 @@ func KSecAttrProtocolPOP3S() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolPOP3S")))
 }
 
-// Predefined item attribute constants used to get or set values in a dictionary. The kSecAttrAuthenticationType constant is the key and its value is one of the constants defined here.
 // KSecAttrAuthenticationTypeNTLM returns the value of the constant kSecAttrAuthenticationTypeNTLM.
 func KSecAttrAuthenticationTypeNTLM() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAuthenticationTypeNTLM")))
@@ -565,7 +558,6 @@ func KSecAttrAuthenticationTypeDefault() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAuthenticationTypeDefault")))
 }
 
-// Predefined item attribute constants used to get or set values in a dictionary. The kSecAttrKeyClass constant is the key and its value is one of the constants defined here.
 // KSecAttrKeyClassPublic returns the value of the constant kSecAttrKeyClassPublic.
 func KSecAttrKeyClassPublic() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrKeyClassPublic")))
@@ -581,7 +573,6 @@ func KSecAttrKeyClassSymmetric() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrKeyClassSymmetric")))
 }
 
-// Predefined item attribute constants used to get or set values in a dictionary. The kSecAttrKeyType constant is the key and its value is one of the constants defined here.
 // KSecAttrKeyTypeRSA returns the value of the constant kSecAttrKeyTypeRSA.
 func KSecAttrKeyTypeRSA() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrKeyTypeRSA")))
@@ -660,7 +651,6 @@ func KSecAttrPRFHmacAlgSHA512() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrPRFHmacAlgSHA512")))
 }
 
-// Predefined search constants used to set values in a query dictionary. You can specify a combination of search attributes and item attributes when looking for matching items with the SecItemCopyMatching function.
 // KSecMatchPolicy returns the value of the constant kSecMatchPolicy.
 func KSecMatchPolicy() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecMatchPolicy"))) }
 
@@ -739,7 +729,6 @@ func KSecMatchLimitOne() obj.Object { return obj.Wrap(purego.CFConstant(_symbol(
 // KSecMatchLimitAll returns the value of the constant kSecMatchLimitAll.
 func KSecMatchLimitAll() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecMatchLimitAll"))) }
 
-// Predefined return type keys used to set values in a dictionary. You use these keys to specify the type of results which should be returned by the SecItemCopyMatching or SecItemAdd function. You can specify zero or more of these return types. If more than one of these result types is specified, the result is returned as a CFDictionaryRef whose keys are the result types and values are the requested data.
 // KSecReturnData returns the value of the constant kSecReturnData.
 func KSecReturnData() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecReturnData"))) }
 
@@ -756,7 +745,6 @@ func KSecReturnPersistentRef() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecReturnPersistentRef")))
 }
 
-// Predefined value type keys used to pass values in a dictionary. You can specify zero or more of these types depending on the function you are calling.  For SecItemCopyMatching or SecItemAdd these are used as keys in the results dictionary.
 // KSecValueData returns the value of the constant kSecValueData.
 func KSecValueData() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecValueData"))) }
 
@@ -768,7 +756,6 @@ func KSecValuePersistentRef() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecValuePersistentRef")))
 }
 
-// Predefined constants used to set values in a dictionary.
 // KSecUseItemList returns the value of the constant kSecUseItemList.
 func KSecUseItemList() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecUseItemList"))) }
 
@@ -800,7 +787,6 @@ func KSecUseDataProtectionKeychain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecUseDataProtectionKeychain")))
 }
 
-// Predefined item attribute constants used to get or set values in a dictionary. The kSecUseAuthenticationUI constant is the key and its value is one of the constants defined here. If the key kSecUseAuthenticationUI not provided then kSecUseAuthenticationUIAllow is used as default.
 // KSecUseAuthenticationUIAllow returns the value of the constant kSecUseAuthenticationUIAllow.
 func KSecUseAuthenticationUIAllow() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecUseAuthenticationUIAllow")))
@@ -816,7 +802,6 @@ func KSecUseAuthenticationUISkip() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecUseAuthenticationUISkip")))
 }
 
-// Predefined item attribute constant used to get or set values in a dictionary. The kSecAttrTokenID constant is the key and its value can be kSecAttrTokenIDSecureEnclave.
 // KSecAttrTokenIDSecureEnclave returns the value of the constant kSecAttrTokenIDSecureEnclave.
 func KSecAttrTokenIDSecureEnclave() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrTokenIDSecureEnclave")))
@@ -942,7 +927,6 @@ func KSecACLAuthorizationIntegrity() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationIntegrity")))
 }
 
-// Predefined key constants used to get or set values in a dictionary. These are used to provide explicit parameters to key generation functions when non-default values are desired. See the description of the SecKeyGeneratePair API for usage information.
 // KSecPrivateKeyAttrs returns the value of the constant kSecPrivateKeyAttrs.
 func KSecPrivateKeyAttrs() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecPrivateKeyAttrs")))
@@ -953,7 +937,6 @@ func KSecPublicKeyAttrs() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecPublicKeyAttrs")))
 }
 
-// Predefined constants used to specify a policy.
 // KSecPolicyAppleX509Basic returns the value of the constant kSecPolicyAppleX509Basic.
 func KSecPolicyAppleX509Basic() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyAppleX509Basic")))
@@ -1059,7 +1042,6 @@ func KSecPolicyAppleIPSecClient() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyAppleIPSecClient")))
 }
 
-// Predefined property key constants used to get or set values in a dictionary for a policy instance. All policies will have the following read-only value: kSecPolicyOid       (the policy object identifier) Additional policy values which your code can optionally set: kSecPolicyName      (name which must be matched) kSecPolicyClient    (evaluate for client, rather than server) kSecPolicyRevocationFlags   (only valid for a revocation policy) kSecPolicyTeamIdentifier    (only valid for a Passbook signing policy)
 // KSecPolicyOid returns the value of the constant kSecPolicyOid.
 func KSecPolicyOid() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyOid"))) }
 
@@ -1079,7 +1061,6 @@ func KSecPolicyTeamIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyTeamIdentifier")))
 }
 
-// Predefined property key constants used to get or set values in a dictionary for a policy instance. Some policy values may specify CFBooleanRef key usage constraints: kSecPolicyKU_DigitalSignature kSecPolicyKU_NonRepudiation kSecPolicyKU_KeyEncipherment kSecPolicyKU_DataEncipherment kSecPolicyKU_KeyAgreement kSecPolicyKU_KeyCertSign kSecPolicyKU_CRLSign kSecPolicyKU_EncipherOnly kSecPolicyKU_DecipherOnly kSecPolicyKU policy values define certificate-level key purposes, in contrast to the key-level definitions in SecItem.h For example, a key in a certificate might be acceptable to use for signing a CRL, but not for signing another certificate. In either case, this key would have the ability to sign (i.e. kSecAttrCanSign is true), but may only sign for specific purposes allowed by these policy constants. Similarly, a public key might have the capability to perform encryption or decryption, but the certificate in which it resides might have a decipher-only certificate policy. These constants correspond to values defined in RFC 5280, section 4.2.1.3 (Key Usage) which define the purpose of a key contained in a certificate, in contrast to section 4.1.2.7 which define the uses that a key is capable of. Note: these constants are not available on iOS. Your code should avoid direct reliance on these values for making policy decisions and use higher level policies where possible.
 // KSecPolicyKU_DigitalSignature returns the value of the constant kSecPolicyKU_DigitalSignature.
 func KSecPolicyKU_DigitalSignature() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyKU_DigitalSignature")))
@@ -1125,7 +1106,6 @@ func KSecPolicyKU_DecipherOnly() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyKU_DecipherOnly")))
 }
 
-// Predefined key constants used when passing dictionary-based arguments to import/export functions.
 // KSecImportExportPassphrase returns the value of the constant kSecImportExportPassphrase.
 func KSecImportExportPassphrase() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecImportExportPassphrase")))
@@ -1146,7 +1126,6 @@ func KSecImportToMemoryOnly() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecImportToMemoryOnly")))
 }
 
-// Predefined key constants used to pass back a CFArray with a CFDictionary per item.
 // KSecImportItemLabel returns the value of the constant kSecImportItemLabel.
 func KSecImportItemLabel() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecImportItemLabel")))
@@ -1172,7 +1151,6 @@ func KSecImportItemIdentity() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecImportItemIdentity")))
 }
 
-// Predefined key constants used to obtain values in a per-certificate dictionary of trust evaluation results, as retrieved from a call to SecTrustCopyProperties.
 // KSecPropertyTypeTitle returns the value of the constant kSecPropertyTypeTitle.
 func KSecPropertyTypeTitle() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecPropertyTypeTitle")))
@@ -1183,7 +1161,6 @@ func KSecPropertyTypeError() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecPropertyTypeError")))
 }
 
-// Predefined key constants used to obtain values in a dictionary of trust evaluation results for a certificate chain, as retrieved from a call to SecTrustCopyResult.
 // KSecTrustEvaluationDate returns the value of the constant kSecTrustEvaluationDate.
 func KSecTrustEvaluationDate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecTrustEvaluationDate")))
@@ -1234,7 +1211,6 @@ func KSecTrustQWACValidation() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecTrustQWACValidation")))
 }
 
-// Predefined key constants used to get values in a dictionary of credentials returned by SecRequestWebCredential.
 // KSecSharedPassword returns the value of the constant kSecSharedPassword.
 func KSecSharedPassword() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecSharedPassword")))
@@ -2164,7 +2140,6 @@ func KSecTransformAbortOriginatorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecTransformAbortOriginatorKey")))
 }
 
-// **************	Transform Attribute Names  ***************
 // KSecTransformInputAttributeName returns the value of the constant kSecTransformInputAttributeName.
 func KSecTransformInputAttributeName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecTransformInputAttributeName")))
@@ -2230,19 +2205,16 @@ func KSecTransformActionAttributeValidation() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecTransformActionAttributeValidation")))
 }
 
-// Specifies a base 64 encoding
 // KSecBase64Encoding returns the value of the constant kSecBase64Encoding.
 func KSecBase64Encoding() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecBase64Encoding")))
 }
 
-// Specifies a base 32 encoding
 // KSecBase32Encoding returns the value of the constant kSecBase32Encoding.
 func KSecBase32Encoding() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecBase32Encoding")))
 }
 
-// Specifies a compressed encoding.
 // KSecZLibEncoding returns the value of the constant kSecZLibEncoding.
 func KSecZLibEncoding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecZLibEncoding"))) }
 
@@ -2272,37 +2244,29 @@ func KSecDecodeTypeAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecDecodeTypeAttribute")))
 }
 
-// Specifies an MD2 digest
 // KSecDigestMD2 returns the value of the constant kSecDigestMD2.
 func KSecDigestMD2() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecDigestMD2"))) }
 
-// Specifies an MD4 digest
 // KSecDigestMD4 returns the value of the constant kSecDigestMD4.
 func KSecDigestMD4() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecDigestMD4"))) }
 
-// Specifies an MD5 digest
 // KSecDigestMD5 returns the value of the constant kSecDigestMD5.
 func KSecDigestMD5() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecDigestMD5"))) }
 
-// Specifies a SHA1 digest
 // KSecDigestSHA1 returns the value of the constant kSecDigestSHA1.
 func KSecDigestSHA1() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecDigestSHA1"))) }
 
-// Specifies a SHA2 digest.
 // KSecDigestSHA2 returns the value of the constant kSecDigestSHA2.
 func KSecDigestSHA2() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecDigestSHA2"))) }
 
-// Specifies an HMAC using the MD5 digest algorithm.
 // KSecDigestHMACMD5 returns the value of the constant kSecDigestHMACMD5.
 func KSecDigestHMACMD5() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecDigestHMACMD5"))) }
 
-// Specifies an HMAC using the SHA1 digest algorithm.
 // KSecDigestHMACSHA1 returns the value of the constant kSecDigestHMACSHA1.
 func KSecDigestHMACSHA1() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecDigestHMACSHA1")))
 }
 
-// Specifies an HMAC using one of the SHA2 digest algorithms.
 // KSecDigestHMACSHA2 returns the value of the constant kSecDigestHMACSHA2.
 func KSecDigestHMACSHA2() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecDigestHMACSHA2")))
@@ -2323,87 +2287,70 @@ func KSecDigestHMACKeyAttribute() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecDigestHMACKeyAttribute")))
 }
 
-// Indicates that no padding will be used when encrypting or decrypting.
 // KSecPaddingNoneKey returns the value of the constant kSecPaddingNoneKey.
 func KSecPaddingNoneKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecPaddingNoneKey")))
 }
 
-// Indicates that PKCS1 padding will be used when encrypting or decrypting.
 // KSecPaddingPKCS1Key returns the value of the constant kSecPaddingPKCS1Key.
 func KSecPaddingPKCS1Key() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecPaddingPKCS1Key")))
 }
 
-// Indicates that PKCS5 padding will be used when encrypting or decrypting.
 // KSecPaddingPKCS5Key returns the value of the constant kSecPaddingPKCS5Key.
 func KSecPaddingPKCS5Key() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecPaddingPKCS5Key")))
 }
 
-// Indicates that PKCS7 padding will be used when encrypting or decrypting.
 // KSecPaddingPKCS7Key returns the value of the constant kSecPaddingPKCS7Key.
 func KSecPaddingPKCS7Key() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecPaddingPKCS7Key")))
 }
 
-// Indicates that PKCS7 padding will be used when encrypting or decrypting.
 // KSecPaddingOAEPKey returns the value of the constant kSecPaddingOAEPKey.
 func KSecPaddingOAEPKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecPaddingOAEPKey")))
 }
 
-// Indicates that no mode will be used when encrypting or decrypting.
 // KSecModeNoneKey returns the value of the constant kSecModeNoneKey.
 func KSecModeNoneKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecModeNoneKey"))) }
 
-// Indicates that ECB mode will be used when encrypting or decrypting.
 // KSecModeECBKey returns the value of the constant kSecModeECBKey.
 func KSecModeECBKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecModeECBKey"))) }
 
-// Indicates that CBC mode will be used when encrypting or decrypting.
 // KSecModeCBCKey returns the value of the constant kSecModeCBCKey.
 func KSecModeCBCKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecModeCBCKey"))) }
 
-// Indicates that CFB mode will be used when encrypting or decrypting.
 // KSecModeCFBKey returns the value of the constant kSecModeCFBKey.
 func KSecModeCFBKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecModeCFBKey"))) }
 
-// Indicates that OFB mode will be used when encrypting or decrypting.
 // KSecModeOFBKey returns the value of the constant kSecModeOFBKey.
 func KSecModeOFBKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecModeOFBKey"))) }
 
-// This attribute holds the encryption key for the transform. (ReadOnly)
 // KSecEncryptKey returns the value of the constant kSecEncryptKey.
 func KSecEncryptKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecEncryptKey"))) }
 
-// Key for setting padding. This key is optional.  If you do not supply a value for this key, an appropriate value will be supplied for you.
 // KSecPaddingKey returns the value of the constant kSecPaddingKey.
 func KSecPaddingKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecPaddingKey"))) }
 
-// Key for setting an initialization vector. This key is optional.  If you do not supply a value for this key, an appropriate value will be supplied for you.
 // KSecIVKey returns the value of the constant kSecIVKey.
 func KSecIVKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecIVKey"))) }
 
-// Specifies the encryption mode. This key is optional.  If you do not supply this key, an appropriate value will be supplied for you.
 // KSecEncryptionMode returns the value of the constant kSecEncryptionMode.
 func KSecEncryptionMode() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecEncryptionMode")))
 }
 
-// Specifies the OAEP message length. This should be set to a CFNumberRef when the padding is set to OAEP, and a specific messages size is desired.   If unset the minimum padding will be added.   It is ignored when the padding mode is not OAEP.
 // KSecOAEPMessageLengthAttributeName returns the value of the constant kSecOAEPMessageLengthAttributeName.
 func KSecOAEPMessageLengthAttributeName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecOAEPMessageLengthAttributeName")))
 }
 
-// Specifies the OAEP encoding paramaters This should be set to a CFDataRef when the padding is set to OAEP. If unset a zero length CFDataRef is used.   It is ignored by non OAEP padding modes.
 // KSecOAEPEncodingParametersAttributeName returns the value of the constant kSecOAEPEncodingParametersAttributeName.
 func KSecOAEPEncodingParametersAttributeName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecOAEPEncodingParametersAttributeName")))
 }
 
-// Specifies the OAEP MGF1 digest algorithm. This should be set to a digest algorithm when the padding is set to OAEP. If unset SHA1 is used.   It is ifnored by non OAEP padding modes.
 // KSecOAEPMGF1DigestAlgorithmAttributeName returns the value of the constant kSecOAEPMGF1DigestAlgorithmAttributeName.
 func KSecOAEPMGF1DigestAlgorithmAttributeName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kSecOAEPMGF1DigestAlgorithmAttributeName")))

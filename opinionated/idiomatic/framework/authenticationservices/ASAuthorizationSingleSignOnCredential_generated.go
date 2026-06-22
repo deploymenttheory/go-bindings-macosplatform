@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A credential that results from a successful single sign-on (SSO) authentication.
-//
 // AuthorizationSingleSignOnCredential is an idiomatic wrapper over the Objective-C class ASAuthorizationSingleSignOnCredential.
+//
+// A credential that results from a successful single sign-on (SSO) authentication.
 type AuthorizationSingleSignOnCredential struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationSingleSignOnCredentialFromID(id objc.ID) *AuthorizationSingleS
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationSingleSignOnCredential{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationSingleSignOnCredential{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationSingleSignOnCredentialAdopt(id objc.ID) *AuthorizationSingleSi
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationSingleSignOnCredential{Handle: objref.Wrap(id)}
+	x := &AuthorizationSingleSignOnCredential{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *AuthorizationSingleSignOnCredential) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationSingleSignOnCredential) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAuthorizationSingleSignOnCredential creates a new AuthorizationSingleSignOnCredential.
 func NewAuthorizationSingleSignOnCredential() *AuthorizationSingleSignOnCredential {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationSingleSignOnCredential")), objc.RegisterName("new"))
 	return authorizationSingleSignOnCredentialAdopt(_id)
 }
 
-// A state returned from the AuthenticationServices extension.
+// State a state returned from the AuthenticationServices extension.
 func (x *AuthorizationSingleSignOnCredential) State() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
 	if _r == 0 {
@@ -73,19 +81,19 @@ func (x *AuthorizationSingleSignOnCredential) State() string {
 	return purego.GoString(_r)
 }
 
-// An access token used to access other systems with the authorized scopes.
+// AccessToken an access token used to access other systems with the authorized scopes.
 func (x *AuthorizationSingleSignOnCredential) AccessToken() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessToken"))
 	return obj.Wrap(_r)
 }
 
-// A JSON Web Token (JWT) used to communicate information about the identity of the user in a secure way to the app.
+// IdentityToken a JSON Web Token (JWT) used to communicate information about the identity of the user in a secure way to the app.
 func (x *AuthorizationSingleSignOnCredential) IdentityToken() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identityToken"))
 	return obj.Wrap(_r)
 }
 
-// This value will contain a list of scopes for which the user provided authorization.  These may contain a subset of the requested scopes on
+// AuthorizedScopes this value will contain a list of scopes for which the user provided authorization.  These may contain a subset of the requested scopes on
 //
 // AuthorizedScopes returns the collection as a Go slice.
 func (x *AuthorizationSingleSignOnCredential) AuthorizedScopes() []obj.Object {
@@ -93,13 +101,13 @@ func (x *AuthorizationSingleSignOnCredential) AuthorizedScopes() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The complete AuthenticationServices extension response with the additional outputs used by the specific technology used by the Authorization Server instance and AuthenticationServices Extension.
+// AuthenticatedResponse the complete AuthenticationServices extension response with the additional outputs used by the specific technology used by the Authorization Server instance and AuthenticationServices Extension.
 func (x *AuthorizationSingleSignOnCredential) AuthenticatedResponse() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authenticatedResponse"))
 	return obj.Wrap(_r)
 }
 
-// Private SecKeys returned from the AuthenticationServices extension.
+// PrivateKeys private SecKeys returned from the AuthenticationServices extension.
 func (x *AuthorizationSingleSignOnCredential) PrivateKeys() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("privateKeys"))
 	return obj.Wrap(_r)

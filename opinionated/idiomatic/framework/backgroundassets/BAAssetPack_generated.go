@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An archive of assets that the system downloads together.
-//
 // AssetPack is an idiomatic wrapper over the Objective-C class BAAssetPack.
+//
+// An archive of assets that the system downloads together.
 type AssetPack struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetPackFromID(id objc.ID) *AssetPack {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetPack{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetPack{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetPackAdopt(id objc.ID) *AssetPack {
 	if id == 0 {
 		return nil
 	}
-	x := &AssetPack{Handle: objref.Wrap(id)}
+	x := &AssetPack{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *AssetPack) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetPack) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetPack creates a new AssetPack.
 func NewAssetPack() *AssetPack {
 	_id := objc.Send[objc.ID](objc.ID(_class("BAAssetPack")), objc.RegisterName("new"))
 	return assetPackAdopt(_id)
 }
 
-// Creates a download object for the asset pack that you schedule using a download manager.
+// Download creates a download object for the asset pack that you schedule using a download manager.
 func (x *AssetPack) Download() *Download {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("download"))
 	return DownloadFromID(_r)
 }
 
-// Creates a download object for the asset pack that you schedule using a download manager.
+// DownloadForContentRequest creates a download object for the asset pack that you schedule using a download manager.
 func (x *AssetPack) DownloadForContentRequest(contentRequest ContentRequest) *Download {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadForContentRequest:"), contentRequest)
 	return DownloadFromID(_r)
 }
 
-// A unique identifier for the asset pack.
+// Identifier a unique identifier for the asset pack.
 func (x *AssetPack) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -85,13 +93,13 @@ func (x *AssetPack) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// The size of the download file containing the asset pack in bytes. This is different than the installation size, which could be larger.
+// DownloadSize the size of the download file containing the asset pack in bytes. This is different than the installation size, which could be larger.
 func (x *AssetPack) DownloadSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("downloadSize"))
 	return _r
 }
 
-// JSON-encoded custom information that’s associated with the asset pack. This property is `nil` for Apple-hosted asset packs.
+// UserInfo JSON-encoded custom information that’s associated with the asset pack. This property is `nil` for Apple-hosted asset packs.
 func (x *AssetPack) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)

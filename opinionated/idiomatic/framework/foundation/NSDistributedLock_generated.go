@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A lock that multiple applications on multiple hosts can use to restrict access to some shared resource, such as a file.
-//
 // DistributedLock is an idiomatic wrapper over the Objective-C class NSDistributedLock.
+//
+// A lock that multiple applications on multiple hosts can use to restrict access to some shared resource, such as a file.
 type DistributedLock struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DistributedLockFromID(id objc.ID) *DistributedLock {
 	if id == 0 {
 		return nil
 	}
-	x := &DistributedLock{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DistributedLock{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func distributedLockAdopt(id objc.ID) *DistributedLock {
 	if id == 0 {
 		return nil
 	}
-	x := &DistributedLock{Handle: objref.Wrap(id)}
+	x := &DistributedLock{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +60,42 @@ func (x *DistributedLock) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes an NSDistributedLock object to use as the lock the file-system entry specified by a given path.
-//
-// NewDistributedLockWithPath creates a new DistributedLock.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DistributedLock) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDistributedLockWithPath initializes an NSDistributedLock object to use as the lock the file-system entry specified by a given path.
 func NewDistributedLockWithPath(path string) *DistributedLock {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDistributedLock")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:"), purego.NSString(path))
 	return distributedLockAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *DistributedLock) WithScriptingProperties(scriptingProperties obj.Object) *DistributedLock {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Attempts to acquire the receiver and immediately returns a Boolean value that indicates whether the attempt was successful.
+// TryLock attempts to acquire the receiver and immediately returns a Boolean value that indicates whether the attempt was successful.
 func (x *DistributedLock) TryLock() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("tryLock"))
 	return _r
 }
 
-// Relinquishes the receiver.
+// Unlock relinquishes the receiver.
 func (x *DistributedLock) Unlock() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unlock"))
 }
 
-// Forces the lock to be relinquished.
+// BreakLock forces the lock to be relinquished.
 func (x *DistributedLock) BreakLock() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("breakLock"))
 }
 
+// LockDate wraps the corresponding Objective-C method.
 func (x *DistributedLock) LockDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lockDate"))
 	return DateFromID(_r)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides the ability to load, compile, and execute scripts.
-//
 // AppleScript is an idiomatic wrapper over the Objective-C class NSAppleScript.
+//
+// An object that provides the ability to load, compile, and execute scripts.
 type AppleScript struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AppleScriptFromID(id objc.ID) *AppleScript {
 	if id == 0 {
 		return nil
 	}
-	x := &AppleScript{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AppleScript{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func appleScriptAdopt(id objc.ID) *AppleScript {
 	if id == 0 {
 		return nil
 	}
-	x := &AppleScript{Handle: objref.Wrap(id)}
+	x := &AppleScript{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,48 +60,51 @@ func (x *AppleScript) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a newly allocated script instance from the source identified by the passed URL.
-//
-// NewAppleScriptWithContentsOfURLError creates a new AppleScript.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AppleScript) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAppleScriptWithContentsOfURLError initializes a newly allocated script instance from the source identified by the passed URL.
 func NewAppleScriptWithContentsOfURLError(url string, errorInfo obj.Object) *AppleScript {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAppleScript")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), rt.FileURL(url), objref.IDOf(errorInfo))
 	return appleScriptAdopt(_id)
 }
 
-// Initializes a newly allocated script instance from the passed source.
-//
-// NewAppleScriptWithSource creates a new AppleScript.
+// NewAppleScriptWithSource initializes a newly allocated script instance from the passed source.
 func NewAppleScriptWithSource(source string) *AppleScript {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAppleScript")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), purego.NSString(source))
 	return appleScriptAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *AppleScript) WithScriptingProperties(scriptingProperties obj.Object) *AppleScript {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Compiles the receiver, if it is not already compiled.
+// CompileAndReturnError compiles the receiver, if it is not already compiled.
 func (x *AppleScript) CompileAndReturnError(errorInfo obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("compileAndReturnError:"), objref.IDOf(errorInfo))
 	return _r
 }
 
-// Executes the receiver, compiling it first if it is not already compiled.
+// ExecuteAndReturnError executes the receiver, compiling it first if it is not already compiled.
 func (x *AppleScript) ExecuteAndReturnError(errorInfo obj.Object) *AppleEventDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executeAndReturnError:"), objref.IDOf(errorInfo))
 	return AppleEventDescriptorFromID(_r)
 }
 
-// Executes an Apple event in the context of the receiver, as a means of allowing the application to invoke a handler in the script.
+// ExecuteAppleEventError executes an Apple event in the context of the receiver, as a means of allowing the application to invoke a handler in the script.
 func (x *AppleScript) ExecuteAppleEventError(event *AppleEventDescriptor, errorInfo obj.Object) *AppleEventDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executeAppleEvent:error:"), objref.IDOf(event), objref.IDOf(errorInfo))
 	return AppleEventDescriptorFromID(_r)
 }
 
+// Source wraps the corresponding Objective-C method.
 func (x *AppleScript) Source() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
 	if _r == 0 {
@@ -108,6 +113,7 @@ func (x *AppleScript) Source() string {
 	return purego.GoString(_r)
 }
 
+// IsCompiled wraps the corresponding Objective-C method.
 func (x *AppleScript) IsCompiled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompiled"))
 	return _r

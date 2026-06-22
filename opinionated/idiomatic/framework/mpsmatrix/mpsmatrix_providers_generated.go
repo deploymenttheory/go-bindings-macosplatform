@@ -11,24 +11,29 @@ import (
 // MatrixBinaryKernelProvider is accepted wherever a MPSMatrixBinaryKernel (or one of its subclasses) is expected.
 type MatrixBinaryKernelProvider interface {
 	objref.Object
+	isMatrixBinaryKernel()
 }
 
 // MatrixRandomProvider is accepted wherever a MPSMatrixRandom (or one of its subclasses) is expected.
 type MatrixRandomProvider interface {
 	objref.Object
+	isMatrixRandom()
 }
 
 // MatrixSoftMaxProvider is accepted wherever a MPSMatrixSoftMax (or one of its subclasses) is expected.
 type MatrixSoftMaxProvider interface {
 	objref.Object
+	isMatrixSoftMax()
 }
 
 // MatrixSoftMaxGradientProvider is accepted wherever a MPSMatrixSoftMaxGradient (or one of its subclasses) is expected.
 type MatrixSoftMaxGradientProvider interface {
 	objref.Object
+	isMatrixSoftMaxGradient()
 }
 
 // MatrixUnaryKernelProvider is accepted wherever a MPSMatrixUnaryKernel (or one of its subclasses) is expected.
 type MatrixUnaryKernelProvider interface {
 	objref.Object
+	isMatrixUnaryKernel()
 }

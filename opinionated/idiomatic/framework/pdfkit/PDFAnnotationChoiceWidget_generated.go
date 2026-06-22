@@ -6,17 +6,20 @@ package pdfkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A PDFAnnotationChoiceWidget object provides user interactivity on a page of a PDF document, in the form of pop-up menus and lists.
-//
 // AnnotationChoiceWidget is an idiomatic wrapper over the Objective-C class PDFAnnotationChoiceWidget.
+//
+// It embeds [Annotation], promoting that type's methods.
+//
+// A PDFAnnotationChoiceWidget object provides user interactivity on a page of a PDF document, in the form of pop-up menus and lists.
 type AnnotationChoiceWidget struct {
-	objref.Handle
+	Annotation
 }
 
 // AnnotationChoiceWidgetFromID adopts an existing Objective-C object as a AnnotationChoiceWidget
@@ -25,7 +28,8 @@ func AnnotationChoiceWidgetFromID(id objc.ID) *AnnotationChoiceWidget {
 	if id == 0 {
 		return nil
 	}
-	x := &AnnotationChoiceWidget{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AnnotationChoiceWidget{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func annotationChoiceWidgetAdopt(id objc.ID) *AnnotationChoiceWidget {
 	if id == 0 {
 		return nil
 	}
-	x := &AnnotationChoiceWidget{Handle: objref.Wrap(id)}
+	x := &AnnotationChoiceWidget{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AnnotationChoiceWidget) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AnnotationChoiceWidget) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AnnotationChoiceWidget) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAnnotationChoiceWidget creates a new AnnotationChoiceWidget.
@@ -64,282 +54,232 @@ func NewAnnotationChoiceWidget() *AnnotationChoiceWidget {
 	return annotationChoiceWidgetAdopt(_id)
 }
 
-// Returns the page that the annotation is associated with.
-//
-// WithPage sets page and returns the receiver so calls can be chained.
+// WithPage returns the page that the annotation is associated with.
 func (x *AnnotationChoiceWidget) WithPage(page *Page) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPage:"), objref.IDOf(page))
 	return x
 }
 
-// Returns the type of the annotation.
-//
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithType returns the type of the annotation.
 func (x *AnnotationChoiceWidget) WithType(type_ string) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
 	return x
 }
 
-// Returns a Boolean value indicating whether the annotation should be displayed.
-//
-// WithShouldDisplay sets shouldDisplay and returns the receiver so calls can be chained.
+// WithBounds returns the bounding box for the annotation in page space.
+func (x *AnnotationChoiceWidget) WithBounds(bounds corefoundation.CGRect) *AnnotationChoiceWidget {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
+	return x
+}
+
+// WithShouldDisplay returns a Boolean value indicating whether the annotation should be displayed.
 func (x *AnnotationChoiceWidget) WithShouldDisplay(shouldDisplay bool) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldDisplay:"), shouldDisplay)
 	return x
 }
 
-// Returns a Boolean value indicating whether the annotation should appear when the document is printed.
-//
-// WithShouldPrint sets shouldPrint and returns the receiver so calls can be chained.
+// WithShouldPrint returns a Boolean value indicating whether the annotation should appear when the document is printed.
 func (x *AnnotationChoiceWidget) WithShouldPrint(shouldPrint bool) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldPrint:"), shouldPrint)
 	return x
 }
 
-// A Boolean value that indicates whether the annotation is in a highlighted state, such as when the mouse is down on a link annotation.
-//
-// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
+// WithHighlighted a Boolean value that indicates whether the annotation is in a highlighted state, such as when the mouse is down on a link annotation.
 func (x *AnnotationChoiceWidget) WithHighlighted(highlighted bool) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// The font the annotation uses to display text.
-//
-// WithFont sets font and returns the receiver so calls can be chained.
+// WithFont the font the annotation uses to display text.
 func (x *AnnotationChoiceWidget) WithFont(font obj.Object) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
-// The font color the annotation uses to display text.
-//
-// WithFontColor sets fontColor and returns the receiver so calls can be chained.
+// WithFontColor the font color the annotation uses to display text.
 func (x *AnnotationChoiceWidget) WithFontColor(fontColor obj.Object) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
 	return x
 }
 
-// The fill color for drawing a circle, line, or square annotation.
-//
-// WithInteriorColor sets interiorColor and returns the receiver so calls can be chained.
+// WithInteriorColor the fill color for drawing a circle, line, or square annotation.
 func (x *AnnotationChoiceWidget) WithInteriorColor(interiorColor obj.Object) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteriorColor:"), objref.IDOf(interiorColor))
 	return x
 }
 
-// The style of the line annotation’s starting point, such as square or filled arrowhead.
-//
-// WithStartLineStyle sets startLineStyle and returns the receiver so calls can be chained.
+// WithStartPoint the point where a line begins, in annotation-space coordinates.
+func (x *AnnotationChoiceWidget) WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationChoiceWidget {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartPoint:"), startPoint)
+	return x
+}
+
+// WithEndPoint the point where a line ends, in annotation-space coordinates.
+func (x *AnnotationChoiceWidget) WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationChoiceWidget {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndPoint:"), endPoint)
+	return x
+}
+
+// WithStartLineStyle the style of the line annotation’s starting point, such as square or filled arrowhead.
 func (x *AnnotationChoiceWidget) WithStartLineStyle(startLineStyle LineStyle) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartLineStyle:"), startLineStyle)
 	return x
 }
 
-// The style of the line annotation’s ending point, such as square or filled arrowhead.
-//
-// WithEndLineStyle sets endLineStyle and returns the receiver so calls can be chained.
+// WithEndLineStyle the style of the line annotation’s ending point, such as square or filled arrowhead.
 func (x *AnnotationChoiceWidget) WithEndLineStyle(endLineStyle LineStyle) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndLineStyle:"), endLineStyle)
 	return x
 }
 
-// The type of icon to display for a pop-up text annotation.
-//
-// WithIconType sets iconType and returns the receiver so calls can be chained.
+// WithIconType the type of icon to display for a pop-up text annotation.
 func (x *AnnotationChoiceWidget) WithIconType(iconType TextAnnotationIconType) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIconType:"), iconType)
 	return x
 }
 
-// An array of values that represents the points bounding the marked-up text.
-//
-// WithQuadrilateralPoints sets the collection and returns the receiver so calls can be chained.
+// WithQuadrilateralPoints an array of values that represents the points bounding the marked-up text.
 func (x *AnnotationChoiceWidget) WithQuadrilateralPoints(items ...obj.Object) *AnnotationChoiceWidget {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuadrilateralPoints:"), _arr)
 	return x
 }
 
-// The markup type that the annotation displays, either highlight, strikethrough, underline, or redact.
-//
-// WithMarkupType sets markupType and returns the receiver so calls can be chained.
+// WithMarkupType the markup type that the annotation displays, either highlight, strikethrough, underline, or redact.
 func (x *AnnotationChoiceWidget) WithMarkupType(markupType MarkupType) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMarkupType:"), markupType)
 	return x
 }
 
-// The type of button widget control, either radio button, push button, or checkbox.
-//
-// WithWidgetControlType sets widgetControlType and returns the receiver so calls can be chained.
+// WithWidgetControlType the type of button widget control, either radio button, push button, or checkbox.
 func (x *AnnotationChoiceWidget) WithWidgetControlType(widgetControlType WidgetControlType) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidgetControlType:"), widgetControlType)
 	return x
 }
 
-// A Boolean value that indicates whether the text widget annotation displays multiple lines.
-//
-// WithMultiline sets multiline and returns the receiver so calls can be chained.
+// WithMultiline a Boolean value that indicates whether the text widget annotation displays multiple lines.
 func (x *AnnotationChoiceWidget) WithMultiline(multiline bool) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultiline:"), multiline)
 	return x
 }
 
-// A Boolean value that indicates whether the annotation divides the text widget’s bounds into equally spaced segments, such as in a form entry field.
-//
-// WithComb sets comb and returns the receiver so calls can be chained.
+// WithComb a Boolean value that indicates whether the annotation divides the text widget’s bounds into equally spaced segments, such as in a form entry field.
 func (x *AnnotationChoiceWidget) WithComb(comb bool) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComb:"), comb)
 	return x
 }
 
-// The maximum number of characters the text widget annotation allows.
-//
-// WithMaximumLength sets maximumLength and returns the receiver so calls can be chained.
+// WithMaximumLength the maximum number of characters the text widget annotation allows.
 func (x *AnnotationChoiceWidget) WithMaximumLength(maximumLength int) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLength:"), maximumLength)
 	return x
 }
 
-// The string value of the widget annotation.
-//
-// WithWidgetStringValue sets widgetStringValue and returns the receiver so calls can be chained.
+// WithWidgetStringValue the string value of the widget annotation.
 func (x *AnnotationChoiceWidget) WithWidgetStringValue(widgetStringValue string) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidgetStringValue:"), purego.NSString(widgetStringValue))
 	return x
 }
 
-// The string value that the widget reverts to when performing a reset form action.
-//
-// WithWidgetDefaultStringValue sets widgetDefaultStringValue and returns the receiver so calls can be chained.
+// WithWidgetDefaultStringValue the string value that the widget reverts to when performing a reset form action.
 func (x *AnnotationChoiceWidget) WithWidgetDefaultStringValue(widgetDefaultStringValue string) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidgetDefaultStringValue:"), purego.NSString(widgetDefaultStringValue))
 	return x
 }
 
-// A Boolean value that indicates whether clicking or tapping a selected radio button toggles it to an unselected state.
-//
-// WithAllowsToggleToOff sets allowsToggleToOff and returns the receiver so calls can be chained.
+// WithAllowsToggleToOff a Boolean value that indicates whether clicking or tapping a selected radio button toggles it to an unselected state.
 func (x *AnnotationChoiceWidget) WithAllowsToggleToOff(allowsToggleToOff bool) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsToggleToOff:"), allowsToggleToOff)
 	return x
 }
 
-// A Boolean value that indicates whether radio buttons in a group turn on and off in unison.
-//
-// WithRadiosInUnison sets radiosInUnison and returns the receiver so calls can be chained.
+// WithRadiosInUnison a Boolean value that indicates whether radio buttons in a group turn on and off in unison.
 func (x *AnnotationChoiceWidget) WithRadiosInUnison(radiosInUnison bool) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadiosInUnison:"), radiosInUnison)
 	return x
 }
 
-// A Boolean value that determines whether the widget is editable.
-//
-// WithReadOnly sets readOnly and returns the receiver so calls can be chained.
+// WithReadOnly a Boolean value that determines whether the widget is editable.
 func (x *AnnotationChoiceWidget) WithReadOnly(readOnly bool) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadOnly:"), readOnly)
 	return x
 }
 
-// A Boolean value that indicates whether the choice widget annotation is a list or a pop-up menu.
-//
-// WithListChoice sets listChoice and returns the receiver so calls can be chained.
+// WithListChoice a Boolean value that indicates whether the choice widget annotation is a list or a pop-up menu.
 func (x *AnnotationChoiceWidget) WithListChoice(listChoice bool) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListChoice:"), listChoice)
 	return x
 }
 
-// An array of strings that specifies the options in either a list or a pop-up menu.
-//
-// WithChoices sets the collection and returns the receiver so calls can be chained.
+// WithChoices an array of strings that specifies the options in either a list or a pop-up menu.
 func (x *AnnotationChoiceWidget) WithChoices(items ...obj.Object) *AnnotationChoiceWidget {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChoices:"), _arr)
 	return x
 }
 
-// An array of strings that specifies the export values for items in a list or a pop-up menu.
-//
-// WithValues sets the collection and returns the receiver so calls can be chained.
+// WithValues an array of strings that specifies the export values for items in a list or a pop-up menu.
 func (x *AnnotationChoiceWidget) WithValues(items ...obj.Object) *AnnotationChoiceWidget {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValues:"), _arr)
 	return x
 }
 
-// The current state of the button widget annotation.
-//
-// WithButtonWidgetState sets buttonWidgetState and returns the receiver so calls can be chained.
+// WithButtonWidgetState the current state of the button widget annotation.
 func (x *AnnotationChoiceWidget) WithButtonWidgetState(buttonWidgetState WidgetCellState) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonWidgetState:"), buttonWidgetState)
 	return x
 }
 
-// A string value that differentiates button widgets in the same group, such as to identify mutually exclusive radio buttons from each other.
-//
-// WithButtonWidgetStateString sets buttonWidgetStateString and returns the receiver so calls can be chained.
+// WithButtonWidgetStateString a string value that differentiates button widgets in the same group, such as to identify mutually exclusive radio buttons from each other.
 func (x *AnnotationChoiceWidget) WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonWidgetStateString:"), purego.NSString(buttonWidgetStateString))
 	return x
 }
 
-// A Boolean value that indicates whether the pop-up annotation is in an opened state, displaying its text content, or in a closed state, displaying an icon.
-//
-// WithOpen sets open and returns the receiver so calls can be chained.
+// WithOpen a Boolean value that indicates whether the pop-up annotation is in an opened state, displaying its text content, or in a closed state, displaying an icon.
 func (x *AnnotationChoiceWidget) WithOpen(open bool) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpen:"), open)
 	return x
 }
 
-// The destination for a link annotation.
-//
-// WithDestination sets destination and returns the receiver so calls can be chained.
+// WithDestination the destination for a link annotation.
 func (x *AnnotationChoiceWidget) WithDestination(destination *Destination) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 	return x
 }
 
-// A URL for a link annotation.
-//
-// WithURL sets uRL and returns the receiver so calls can be chained.
+// WithURL a URL for a link annotation.
 func (x *AnnotationChoiceWidget) WithURL(uRL string) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 	return x
 }
 
-// The widget identifier for form annotation actions and behaviors.
-//
-// WithFieldName sets fieldName and returns the receiver so calls can be chained.
+// WithFieldName the widget identifier for form annotation actions and behaviors.
 func (x *AnnotationChoiceWidget) WithFieldName(fieldName string) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFieldName:"), purego.NSString(fieldName))
 	return x
 }
 
-// The title of push button widget annotations.
-//
-// WithCaption sets caption and returns the receiver so calls can be chained.
+// WithCaption the title of push button widget annotations.
 func (x *AnnotationChoiceWidget) WithCaption(caption string) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaption:"), purego.NSString(caption))
 	return x
 }
 
-// The color of the widget’s background.
-//
-// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+// WithBackgroundColor the color of the widget’s background.
 func (x *AnnotationChoiceWidget) WithBackgroundColor(backgroundColor obj.Object) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// The name of the stamp, a text or graphics annotation that emulates a rubber stamp effect.
-//
-// WithStampName sets stampName and returns the receiver so calls can be chained.
+// WithStampName the name of the stamp, a text or graphics annotation that emulates a rubber stamp effect.
 func (x *AnnotationChoiceWidget) WithStampName(stampName string) *AnnotationChoiceWidget {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStampName:"), purego.NSString(stampName))
 	return x
 }
 
-// Returns the selection in the widget annotation.
+// StringValue returns the selection in the widget annotation.
 func (x *AnnotationChoiceWidget) StringValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
 	if _r == 0 {
@@ -348,12 +288,12 @@ func (x *AnnotationChoiceWidget) StringValue() string {
 	return purego.GoString(_r)
 }
 
-// Sets the selection in the widget annotation.
+// SetStringValue sets the selection in the widget annotation.
 func (x *AnnotationChoiceWidget) SetStringValue(value string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(value))
 }
 
-// Sets whether the widget annotation is a list.
+// SetIsListChoice sets whether the widget annotation is a list.
 func (x *AnnotationChoiceWidget) SetIsListChoice(isList bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsListChoice:"), isList)
 }
@@ -363,12 +303,15 @@ type AnnotationChoiceWidgetable interface {
 	obj.Object
 	WithPage(page *Page) *AnnotationChoiceWidget
 	WithType(type_ string) *AnnotationChoiceWidget
+	WithBounds(bounds corefoundation.CGRect) *AnnotationChoiceWidget
 	WithShouldDisplay(shouldDisplay bool) *AnnotationChoiceWidget
 	WithShouldPrint(shouldPrint bool) *AnnotationChoiceWidget
 	WithHighlighted(highlighted bool) *AnnotationChoiceWidget
 	WithFont(font obj.Object) *AnnotationChoiceWidget
 	WithFontColor(fontColor obj.Object) *AnnotationChoiceWidget
 	WithInteriorColor(interiorColor obj.Object) *AnnotationChoiceWidget
+	WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationChoiceWidget
+	WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationChoiceWidget
 	WithStartLineStyle(startLineStyle LineStyle) *AnnotationChoiceWidget
 	WithEndLineStyle(endLineStyle LineStyle) *AnnotationChoiceWidget
 	WithIconType(iconType TextAnnotationIconType) *AnnotationChoiceWidget
@@ -401,3 +344,5 @@ type AnnotationChoiceWidgetable interface {
 }
 
 var _ AnnotationChoiceWidgetable = (*AnnotationChoiceWidget)(nil)
+
+var _ AnnotationProvider = (*AnnotationChoiceWidget)(nil)

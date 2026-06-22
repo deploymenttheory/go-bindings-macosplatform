@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that displays a button either to trigger payments through Apple Pay or to prompt the user to set up a card.
-//
 // PaymentButton is an idiomatic wrapper over the Objective-C class PKPaymentButton.
+//
+// An object that displays a button either to trigger payments through Apple Pay or to prompt the user to set up a card.
 type PaymentButton struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PaymentButtonFromID(id objc.ID) *PaymentButton {
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentButton{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PaymentButton{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func paymentButtonAdopt(id objc.ID) *PaymentButton {
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentButton{Handle: objref.Wrap(id)}
+	x := &PaymentButton{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,32 @@ func (x *PaymentButton) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new payment button with the specified type and style.
-//
-// NewPaymentButtonWithPaymentButtonTypePaymentButtonStyle creates a new PaymentButton.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PaymentButton) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPaymentButtonWithPaymentButtonTypePaymentButtonStyle creates a new payment button with the specified type and style.
 func NewPaymentButtonWithPaymentButtonTypePaymentButtonStyle(type_ PaymentButtonType, style PaymentButtonStyle) *PaymentButton {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentButton")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentButtonType:paymentButtonStyle:"), type_, style)
 	return paymentButtonAdopt(_id)
 }
 
-// The radius, in points, for the rounded corners on the button.
-//
-// WithCornerRadius sets cornerRadius and returns the receiver so calls can be chained.
+// WithCornerRadius the radius, in points, for the rounded corners on the button.
 func (x *PaymentButton) WithCornerRadius(cornerRadius float64) *PaymentButton {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
 	return x
 }
 
+// CornerRadius wraps the corresponding Objective-C method.
 func (x *PaymentButton) CornerRadius() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("cornerRadius"))
 	return _r
 }
 
+// SetCornerRadius wraps the corresponding Objective-C method.
 func (x *PaymentButton) SetCornerRadius(cornerRadius float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
 }

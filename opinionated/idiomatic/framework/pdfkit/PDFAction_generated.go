@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An action that is performed when, for example, a PDF annotation is activated or an outline item is clicked.
-//
 // Action is an idiomatic wrapper over the Objective-C class PDFAction.
+//
+// Action is an abstract base — you do not construct it directly. Construct one of [ActionGoTo], [ActionNamed], [ActionRemoteGoTo], [ActionResetForm], [ActionURL] and pass it where a Action is accepted.
+//
+// An action that is performed when, for example, a PDF annotation is activated or an outline item is clicked.
 type Action struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ActionFromID(id objc.ID) *Action {
 	if id == 0 {
 		return nil
 	}
-	x := &Action{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Action{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func actionAdopt(id objc.ID) *Action {
 	if id == 0 {
 		return nil
 	}
-	x := &Action{Handle: objref.Wrap(id)}
+	x := &Action{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +62,13 @@ func (x *Action) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewAction creates a new Action.
-func NewAction() *Action {
-	_id := objc.Send[objc.ID](objc.ID(_class("PDFAction")), objc.RegisterName("new"))
-	return actionAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Action) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *Action) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
 	if _r == 0 {
@@ -79,3 +84,10 @@ type Actionable interface {
 }
 
 var _ Actionable = (*Action)(nil)
+
+// isAction marks Action — and, by embedding promotion, its
+// subclasses — as a member of the Action hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Action) isAction() {}
+
+var _ ActionProvider = (*Action)(nil)

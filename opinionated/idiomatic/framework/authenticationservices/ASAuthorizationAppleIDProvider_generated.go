@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mechanism for generating requests to authenticate users based on their Apple ID.
-//
 // AuthorizationAppleIDProvider is an idiomatic wrapper over the Objective-C class ASAuthorizationAppleIDProvider.
+//
+// A mechanism for generating requests to authenticate users based on their Apple ID.
 type AuthorizationAppleIDProvider struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationAppleIDProviderFromID(id objc.ID) *AuthorizationAppleIDProvide
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationAppleIDProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationAppleIDProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationAppleIDProviderAdopt(id objc.ID) *AuthorizationAppleIDProvider
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationAppleIDProvider{Handle: objref.Wrap(id)}
+	x := &AuthorizationAppleIDProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *AuthorizationAppleIDProvider) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationAppleIDProvider) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAuthorizationAppleIDProvider creates a new AuthorizationAppleIDProvider.
 func NewAuthorizationAppleIDProvider() *AuthorizationAppleIDProvider {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationAppleIDProvider")), objc.RegisterName("new"))
 	return authorizationAppleIDProviderAdopt(_id)
 }
 
-// Creates a new Apple ID authorization request.
+// CreateRequest creates a new Apple ID authorization request.
 func (x *AuthorizationAppleIDProvider) CreateRequest() *AuthorizationAppleIDRequest {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createRequest"))
 	return AuthorizationAppleIDRequestFromID(_r)

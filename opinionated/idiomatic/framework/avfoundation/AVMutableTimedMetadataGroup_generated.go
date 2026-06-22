@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mutable collection of metadata items that are valid for use during a specific time range.
-//
 // MutableTimedMetadataGroup is an idiomatic wrapper over the Objective-C class AVMutableTimedMetadataGroup.
+//
+// It embeds [TimedMetadataGroup], promoting that type's methods.
+//
+// A mutable collection of metadata items that are valid for use during a specific time range.
 type MutableTimedMetadataGroup struct {
-	objref.Handle
+	TimedMetadataGroup
 }
 
 // MutableTimedMetadataGroupFromID adopts an existing Objective-C object as a MutableTimedMetadataGroup
@@ -25,7 +26,8 @@ func MutableTimedMetadataGroupFromID(id objc.ID) *MutableTimedMetadataGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableTimedMetadataGroup{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableTimedMetadataGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func mutableTimedMetadataGroupAdopt(id objc.ID) *MutableTimedMetadataGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableTimedMetadataGroup{Handle: objref.Wrap(id)}
+	x := &MutableTimedMetadataGroup{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MutableTimedMetadataGroup) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableTimedMetadataGroup) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableTimedMetadataGroup) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMutableTimedMetadataGroup creates a new MutableTimedMetadataGroup.
@@ -64,15 +52,14 @@ func NewMutableTimedMetadataGroup() *MutableTimedMetadataGroup {
 	return mutableTimedMetadataGroupAdopt(_id)
 }
 
-// An array of metadata items in the timed metadata group.
-//
-// WithItems sets the collection and returns the receiver so calls can be chained.
+// WithItems an array of metadata items in the timed metadata group.
 func (x *MutableTimedMetadataGroup) WithItems(items ...MetadataItemProvider) *MutableTimedMetadataGroup {
 	_arr := purego.SliceToNSArray(items, func(_v MetadataItemProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItems:"), _arr)
 	return x
 }
 
+// SetItems wraps the corresponding Objective-C method.
 func (x *MutableTimedMetadataGroup) SetItems(items []*MetadataItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItems:"), purego.SliceToNSArray(items, func(_v *MetadataItem) objc.ID { return objref.IDOf(_v) }))
 }
@@ -85,3 +72,7 @@ type MutableTimedMetadataGroupable interface {
 }
 
 var _ MutableTimedMetadataGroupable = (*MutableTimedMetadataGroup)(nil)
+
+var _ TimedMetadataGroupProvider = (*MutableTimedMetadataGroup)(nil)
+
+var _ MetadataGroupProvider = (*MutableTimedMetadataGroup)(nil)

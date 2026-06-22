@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that matches a specific audio recording when a segment of that recording is part of captured sound in the Shazam catalog or your custom catalog.
-//
 // Session is an idiomatic wrapper over the Objective-C class SHSession.
+//
+// An object that matches a specific audio recording when a segment of that recording is part of captured sound in the Shazam catalog or your custom catalog.
 type Session struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SessionFromID(id objc.ID) *Session {
 	if id == 0 {
 		return nil
 	}
-	x := &Session{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Session{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func sessionAdopt(id objc.ID) *Session {
 	if id == 0 {
 		return nil
 	}
-	x := &Session{Handle: objref.Wrap(id)}
+	x := &Session{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,32 +60,36 @@ func (x *Session) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Session) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSession creates a new Session.
 func NewSession() *Session {
 	_id := objc.Send[objc.ID](objc.ID(_class("SHSession")), objc.RegisterName("new"))
 	return sessionAdopt(_id)
 }
 
-// Creates a new session object for matching audio in a custom catalog.
-//
-// NewSessionWithCatalog creates a new Session.
+// NewSessionWithCatalog creates a new session object for matching audio in a custom catalog.
 func NewSessionWithCatalog(catalog *Catalog) *Session {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SHSession")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCatalog:"), objref.IDOf(catalog))
 	return sessionAdopt(_id)
 }
 
-// Converts the audio in the buffer to a signature, and searches the reference signatures in the session catalog.
+// MatchStreamingBufferAtTime converts the audio in the buffer to a signature, and searches the reference signatures in the session catalog.
 func (x *Session) MatchStreamingBufferAtTime(buffer obj.Object, time_ obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchStreamingBuffer:atTime:"), objref.IDOf(buffer), objref.IDOf(time_))
 }
 
-// Searches for the query signature in the reference signatures that the session catalog contains.
+// MatchSignature searches for the query signature in the reference signatures that the session catalog contains.
 func (x *Session) MatchSignature(signature *Signature) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchSignature:"), objref.IDOf(signature))
 }
 
-// The catalog object containing the reference signatures and their associated metadata that the session uses to perform matches.
+// Catalog the catalog object containing the reference signatures and their associated metadata that the session uses to perform matches.
 func (x *Session) Catalog() *Catalog {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("catalog"))
 	return CatalogFromID(_r)

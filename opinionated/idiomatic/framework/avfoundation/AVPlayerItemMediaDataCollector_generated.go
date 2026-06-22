@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract base for media data collectors.
-//
 // PlayerItemMediaDataCollector is an idiomatic wrapper over the Objective-C class AVPlayerItemMediaDataCollector.
+//
+// PlayerItemMediaDataCollector is an abstract base — you do not construct it directly. Construct one of [PlayerItemMetadataCollector] and pass it where a PlayerItemMediaDataCollector is accepted.
+//
+// The abstract base for media data collectors.
 type PlayerItemMediaDataCollector struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func PlayerItemMediaDataCollectorFromID(id objc.ID) *PlayerItemMediaDataCollecto
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemMediaDataCollector{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlayerItemMediaDataCollector{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func playerItemMediaDataCollectorAdopt(id objc.ID) *PlayerItemMediaDataCollector
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemMediaDataCollector{Handle: objref.Wrap(id)}
+	x := &PlayerItemMediaDataCollector{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *PlayerItemMediaDataCollector) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewPlayerItemMediaDataCollector creates a new PlayerItemMediaDataCollector.
-func NewPlayerItemMediaDataCollector() *PlayerItemMediaDataCollector {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemMediaDataCollector")), objc.RegisterName("new"))
-	return playerItemMediaDataCollectorAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerItemMediaDataCollector) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // PlayerItemMediaDataCollectorable is the interface implemented by [PlayerItemMediaDataCollector], for mocking and DI.
@@ -70,3 +74,10 @@ type PlayerItemMediaDataCollectorable interface {
 }
 
 var _ PlayerItemMediaDataCollectorable = (*PlayerItemMediaDataCollector)(nil)
+
+// isPlayerItemMediaDataCollector marks PlayerItemMediaDataCollector — and, by embedding promotion, its
+// subclasses — as a member of the PlayerItemMediaDataCollector hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *PlayerItemMediaDataCollector) isPlayerItemMediaDataCollector() {}
+
+var _ PlayerItemMediaDataCollectorProvider = (*PlayerItemMediaDataCollector)(nil)

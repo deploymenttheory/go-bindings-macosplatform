@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container that combines a set of groups into distinct visual groupings.
-//
 // CollectionLayoutSection is an idiomatic wrapper over the Objective-C class NSCollectionLayoutSection.
+//
+// A container that combines a set of groups into distinct visual groupings.
 type CollectionLayoutSection struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CollectionLayoutSectionFromID(id objc.ID) *CollectionLayoutSection {
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionLayoutSection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollectionLayoutSection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func collectionLayoutSectionAdopt(id objc.ID) *CollectionLayoutSection {
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionLayoutSection{Handle: objref.Wrap(id)}
+	x := &CollectionLayoutSection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,72 +60,74 @@ func (x *CollectionLayoutSection) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CollectionLayoutSection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCollectionLayoutSection creates a new CollectionLayoutSection.
 func NewCollectionLayoutSection() *CollectionLayoutSection {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutSection")), objc.RegisterName("new"))
 	return collectionLayoutSectionAdopt(_id)
 }
 
-// The amount of space between the groups in the section.
-//
-// WithInterGroupSpacing sets interGroupSpacing and returns the receiver so calls can be chained.
+// WithInterGroupSpacing the amount of space between the groups in the section.
 func (x *CollectionLayoutSection) WithInterGroupSpacing(interGroupSpacing float64) *CollectionLayoutSection {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterGroupSpacing:"), interGroupSpacing)
 	return x
 }
 
-// The section’s scrolling behavior in relation to the main layout axis.
-//
-// WithOrthogonalScrollingBehavior sets orthogonalScrollingBehavior and returns the receiver so calls can be chained.
+// WithOrthogonalScrollingBehavior the section’s scrolling behavior in relation to the main layout axis.
 func (x *CollectionLayoutSection) WithOrthogonalScrollingBehavior(orthogonalScrollingBehavior CollectionLayoutSectionOrthogonalScrollingBehavior) *CollectionLayoutSection {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrthogonalScrollingBehavior:"), orthogonalScrollingBehavior)
 	return x
 }
 
-// An array of the supplementary items that are associated with the boundary edges of the section, such as headers and footers.
-//
-// WithBoundarySupplementaryItems sets the collection and returns the receiver so calls can be chained.
+// WithBoundarySupplementaryItems an array of the supplementary items that are associated with the boundary edges of the section, such as headers and footers.
 func (x *CollectionLayoutSection) WithBoundarySupplementaryItems(items ...*CollectionLayoutBoundarySupplementaryItem) *CollectionLayoutSection {
 	_arr := purego.SliceToNSArray(items, func(_v *CollectionLayoutBoundarySupplementaryItem) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundarySupplementaryItems:"), _arr)
 	return x
 }
 
-// A Boolean value that indicates whether the section’s supplementary items follow the specified content insets for the section.
-//
-// WithSupplementariesFollowContentInsets sets supplementariesFollowContentInsets and returns the receiver so calls can be chained.
+// WithSupplementariesFollowContentInsets a Boolean value that indicates whether the section’s supplementary items follow the specified content insets for the section.
 func (x *CollectionLayoutSection) WithSupplementariesFollowContentInsets(supplementariesFollowContentInsets bool) *CollectionLayoutSection {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupplementariesFollowContentInsets:"), supplementariesFollowContentInsets)
 	return x
 }
 
-// An array of the decoration items that are anchored to the section, such as background decoration views.
-//
-// WithDecorationItems sets the collection and returns the receiver so calls can be chained.
+// WithDecorationItems an array of the decoration items that are anchored to the section, such as background decoration views.
 func (x *CollectionLayoutSection) WithDecorationItems(items ...*CollectionLayoutDecorationItem) *CollectionLayoutSection {
 	_arr := purego.SliceToNSArray(items, func(_v *CollectionLayoutDecorationItem) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecorationItems:"), _arr)
 	return x
 }
 
+// InterGroupSpacing wraps the corresponding Objective-C method.
 func (x *CollectionLayoutSection) InterGroupSpacing() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("interGroupSpacing"))
 	return _r
 }
 
+// SetInterGroupSpacing wraps the corresponding Objective-C method.
 func (x *CollectionLayoutSection) SetInterGroupSpacing(interGroupSpacing float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterGroupSpacing:"), interGroupSpacing)
 }
 
+// OrthogonalScrollingBehavior wraps the corresponding Objective-C method.
 func (x *CollectionLayoutSection) OrthogonalScrollingBehavior() CollectionLayoutSectionOrthogonalScrollingBehavior {
 	_r := objc.Send[CollectionLayoutSectionOrthogonalScrollingBehavior](objref.IDOf(x), objc.RegisterName("orthogonalScrollingBehavior"))
 	return _r
 }
 
+// SetOrthogonalScrollingBehavior wraps the corresponding Objective-C method.
 func (x *CollectionLayoutSection) SetOrthogonalScrollingBehavior(orthogonalScrollingBehavior CollectionLayoutSectionOrthogonalScrollingBehavior) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrthogonalScrollingBehavior:"), orthogonalScrollingBehavior)
 }
 
+// BoundarySupplementaryItems wraps the corresponding Objective-C method.
+//
 // BoundarySupplementaryItems returns the collection as a Go slice.
 func (x *CollectionLayoutSection) BoundarySupplementaryItems() []*CollectionLayoutBoundarySupplementaryItem {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boundarySupplementaryItems"))
@@ -132,25 +136,31 @@ func (x *CollectionLayoutSection) BoundarySupplementaryItems() []*CollectionLayo
 	})
 }
 
+// SetBoundarySupplementaryItems wraps the corresponding Objective-C method.
 func (x *CollectionLayoutSection) SetBoundarySupplementaryItems(boundarySupplementaryItems []*CollectionLayoutBoundarySupplementaryItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundarySupplementaryItems:"), purego.SliceToNSArray(boundarySupplementaryItems, func(_v *CollectionLayoutBoundarySupplementaryItem) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SupplementariesFollowContentInsets wraps the corresponding Objective-C method.
 func (x *CollectionLayoutSection) SupplementariesFollowContentInsets() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supplementariesFollowContentInsets"))
 	return _r
 }
 
+// SetSupplementariesFollowContentInsets wraps the corresponding Objective-C method.
 func (x *CollectionLayoutSection) SetSupplementariesFollowContentInsets(supplementariesFollowContentInsets bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupplementariesFollowContentInsets:"), supplementariesFollowContentInsets)
 }
 
+// DecorationItems wraps the corresponding Objective-C method.
+//
 // DecorationItems returns the collection as a Go slice.
 func (x *CollectionLayoutSection) DecorationItems() []*CollectionLayoutDecorationItem {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decorationItems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CollectionLayoutDecorationItem { return CollectionLayoutDecorationItemFromID(_id) })
 }
 
+// SetDecorationItems wraps the corresponding Objective-C method.
 func (x *CollectionLayoutSection) SetDecorationItems(decorationItems []*CollectionLayoutDecorationItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecorationItems:"), purego.SliceToNSArray(decorationItems, func(_v *CollectionLayoutDecorationItem) objc.ID { return objref.IDOf(_v) }))
 }

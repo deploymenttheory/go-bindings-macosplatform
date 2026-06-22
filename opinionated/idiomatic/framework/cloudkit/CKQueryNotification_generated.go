@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A notification that triggers when a record that matches the subscription’s predicate changes.
-//
 // QueryNotification is an idiomatic wrapper over the Objective-C class CKQueryNotification.
+//
+// It embeds [Notification], promoting that type's methods.
+//
+// A notification that triggers when a record that matches the subscription’s predicate changes.
 type QueryNotification struct {
-	objref.Handle
+	Notification
 }
 
 // QueryNotificationFromID adopts an existing Objective-C object as a QueryNotification
@@ -25,7 +26,8 @@ func QueryNotificationFromID(id objc.ID) *QueryNotification {
 	if id == 0 {
 		return nil
 	}
-	x := &QueryNotification{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QueryNotification{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func queryNotificationAdopt(id objc.ID) *QueryNotification {
 	if id == 0 {
 		return nil
 	}
-	x := &QueryNotification{Handle: objref.Wrap(id)}
+	x := &QueryNotification{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *QueryNotification) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *QueryNotification) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *QueryNotification) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewQueryNotification creates a new QueryNotification.
@@ -64,25 +52,25 @@ func NewQueryNotification() *QueryNotification {
 	return queryNotificationAdopt(_id)
 }
 
-// The event that triggers the push notification. Subscription notifications result from the creation, deletion, or updating of a single record. The record in question must match the subscription's predicate for an event to trigger.
+// QueryNotificationReason the event that triggers the push notification. Subscription notifications result from the creation, deletion, or updating of a single record. The record in question must match the subscription's predicate for an event to trigger.
 func (x *QueryNotification) QueryNotificationReason() QueryNotificationReason {
 	_r := objc.Send[QueryNotificationReason](objref.IDOf(x), objc.RegisterName("queryNotificationReason"))
 	return _r
 }
 
-// A dictionary of fields that have changes. For record updates and creations, this property contains the subscription's desired keys. When you configure the notification info of a subscription, you specify the names of one or more fields in the “CKSubscription/NotificationInfo/desiredKeys“ property. When a push notification triggers, CloudKit retrieves the values for each of those keys from the record and includes them in the notification's payload. For query notifications that you fetch from a container, all keys and values are present. For query notifications that you create from push notifications, one or more keys and values may be missing. Push notification payloads have a size limit, and CloudKit can exclude record fields when a payload exceeds that limit. For information about the order, see the overview of this class.
+// RecordFields a dictionary of fields that have changes. For record updates and creations, this property contains the subscription's desired keys. When you configure the notification info of a subscription, you specify the names of one or more fields in the “CKSubscription/NotificationInfo/desiredKeys“ property. When a push notification triggers, CloudKit retrieves the values for each of those keys from the record and includes them in the notification's payload. For query notifications that you fetch from a container, all keys and values are present. For query notifications that you create from push notifications, one or more keys and values may be missing. Push notification payloads have a size limit, and CloudKit can exclude record fields when a payload exceeds that limit. For information about the order, see the overview of this class.
 func (x *QueryNotification) RecordFields() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordFields"))
 	return obj.Wrap(_r)
 }
 
-// The ID of the record that CloudKit creates, updates, or deletes. Use this value to fetch the record.
+// RecordID the ID of the record that CloudKit creates, updates, or deletes. Use this value to fetch the record.
 func (x *QueryNotification) RecordID() *RecordID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordID"))
 	return RecordIDFromID(_r)
 }
 
-// The type of database for the record zone. This property's value is one of the constants that “CKDatabase/Scope“ defines.
+// DatabaseScope the type of database for the record zone. This property's value is one of the constants that “CKDatabase/Scope“ defines.
 func (x *QueryNotification) DatabaseScope() DatabaseScope {
 	_r := objc.Send[DatabaseScope](objref.IDOf(x), objc.RegisterName("databaseScope"))
 	return _r
@@ -98,3 +86,5 @@ type QueryNotificationable interface {
 }
 
 var _ QueryNotificationable = (*QueryNotification)(nil)
+
+var _ NotificationProvider = (*QueryNotification)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains details about a message’s content, such as if it’s encrypted and who digitally signed it.
-//
 // MessageSecurityInformation is an idiomatic wrapper over the Objective-C class MEMessageSecurityInformation.
+//
+// An object that contains details about a message’s content, such as if it’s encrypted and who digitally signed it.
 type MessageSecurityInformation struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MessageSecurityInformationFromID(id objc.ID) *MessageSecurityInformation {
 	if id == 0 {
 		return nil
 	}
-	x := &MessageSecurityInformation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MessageSecurityInformation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func messageSecurityInformationAdopt(id objc.ID) *MessageSecurityInformation {
 	if id == 0 {
 		return nil
 	}
-	x := &MessageSecurityInformation{Handle: objref.Wrap(id)}
+	x := &MessageSecurityInformation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *MessageSecurityInformation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MessageSecurityInformation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMessageSecurityInformation creates a new MessageSecurityInformation.
 func NewMessageSecurityInformation() *MessageSecurityInformation {
 	_id := objc.Send[objc.ID](objc.ID(_class("MEMessageSecurityInformation")), objc.RegisterName("new"))
 	return messageSecurityInformationAdopt(_id)
 }
 
-// The signers of the message
+// Signers the signers of the message
 //
 // Signers returns the collection as a Go slice.
 func (x *MessageSecurityInformation) Signers() []*MessageSigner {
@@ -72,19 +80,19 @@ func (x *MessageSecurityInformation) Signers() []*MessageSigner {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MessageSigner { return MessageSignerFromID(_id) })
 }
 
-// Whether or not the message was encrypted.
+// IsEncrypted whether or not the message was encrypted.
 func (x *MessageSecurityInformation) IsEncrypted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEncrypted"))
 	return _r
 }
 
-// Whether or not Mail should block loading remote content for the message by default. The user will have the option to load remote content manually.
+// ShouldBlockRemoteContent whether or not Mail should block loading remote content for the message by default. The user will have the option to load remote content manually.
 func (x *MessageSecurityInformation) ShouldBlockRemoteContent() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldBlockRemoteContent"))
 	return _r
 }
 
-// A localized string containing the reason for blocking remote content.
+// LocalizedRemoteContentBlockingReason a localized string containing the reason for blocking remote content.
 func (x *MessageSecurityInformation) LocalizedRemoteContentBlockingReason() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedRemoteContentBlockingReason"))
 	if _r == 0 {

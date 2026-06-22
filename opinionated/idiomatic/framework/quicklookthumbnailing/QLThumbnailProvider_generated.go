@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract base class for creating thumbnails of custom file types.
-//
 // ThumbnailProvider is an idiomatic wrapper over the Objective-C class QLThumbnailProvider.
+//
+// An abstract base class for creating thumbnails of custom file types.
 type ThumbnailProvider struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func ThumbnailProviderFromID(id objc.ID) *ThumbnailProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &ThumbnailProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ThumbnailProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func thumbnailProviderAdopt(id objc.ID) *ThumbnailProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &ThumbnailProvider{Handle: objref.Wrap(id)}
+	x := &ThumbnailProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,22 @@ func (x *ThumbnailProvider) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ThumbnailProvider) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewThumbnailProvider creates a new ThumbnailProvider.
 func NewThumbnailProvider() *ThumbnailProvider {
 	_id := objc.Send[objc.ID](objc.ID(_class("QLThumbnailProvider")), objc.RegisterName("new"))
 	return thumbnailProviderAdopt(_id)
 }
 
-// Creates a thumbnail of a custom file type for a specific request.
+// ProvideThumbnailForFileRequest creates a thumbnail of a custom file type for a specific request.
 //
 // ProvideThumbnailForFileRequest blocks until the operation completes or ctx is cancelled.
-func (x *ThumbnailProvider) ProvideThumbnailForFileRequest(ctx context.Context, request *FileThumbnailRequest) (*ThumbnailReply, error) {
+func (x *ThumbnailProvider) ProvideThumbnailForFileRequest(ctx context.Context, request *FileThumbnailRequest) (result *ThumbnailReply, err error) {
 	type _result struct {
 		val *ThumbnailReply
 		err error

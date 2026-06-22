@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a 3D point in an image.
-//
 // Point3D is an idiomatic wrapper over the Objective-C class VNPoint3D.
+//
+// Point3D is an abstract base — you do not construct it directly. Construct one of [RecognizedPoint3D] and pass it where a Point3D is accepted.
+//
+// An object that represents a 3D point in an image.
 type Point3D struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func Point3DFromID(id objc.ID) *Point3D {
 	if id == 0 {
 		return nil
 	}
-	x := &Point3D{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Point3D{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func point3DAdopt(id objc.ID) *Point3D {
 	if id == 0 {
 		return nil
 	}
-	x := &Point3D{Handle: objref.Wrap(id)}
+	x := &Point3D{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *Point3D) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewPoint3D creates a new Point3D.
-func NewPoint3D() *Point3D {
-	_id := objc.Send[objc.ID](objc.ID(_class("VNPoint3D")), objc.RegisterName("new"))
-	return point3DAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Point3D) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // Point3Dable is the interface implemented by [Point3D], for mocking and DI.
@@ -70,3 +74,10 @@ type Point3Dable interface {
 }
 
 var _ Point3Dable = (*Point3D)(nil)
+
+// isPoint3D marks Point3D — and, by embedding promotion, its
+// subclasses — as a member of the Point3D hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Point3D) isPoint3D() {}
+
+var _ Point3DProvider = (*Point3D)(nil)

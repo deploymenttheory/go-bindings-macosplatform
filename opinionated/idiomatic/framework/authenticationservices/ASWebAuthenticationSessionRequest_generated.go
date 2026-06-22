@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A login session request that a web browser receives from an app.
-//
 // WebAuthenticationSessionRequest is an idiomatic wrapper over the Objective-C class ASWebAuthenticationSessionRequest.
+//
+// A login session request that a web browser receives from an app.
 type WebAuthenticationSessionRequest struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WebAuthenticationSessionRequestFromID(id objc.ID) *WebAuthenticationSession
 	if id == 0 {
 		return nil
 	}
-	x := &WebAuthenticationSessionRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WebAuthenticationSessionRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func webAuthenticationSessionRequestAdopt(id objc.ID) *WebAuthenticationSessionR
 	if id == 0 {
 		return nil
 	}
-	x := &WebAuthenticationSessionRequest{Handle: objref.Wrap(id)}
+	x := &WebAuthenticationSessionRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,27 +60,36 @@ func (x *WebAuthenticationSessionRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WebAuthenticationSessionRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWebAuthenticationSessionRequest creates a new WebAuthenticationSessionRequest.
 func NewWebAuthenticationSessionRequest() *WebAuthenticationSessionRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASWebAuthenticationSessionRequest")), objc.RegisterName("new"))
 	return webAuthenticationSessionRequestAdopt(_id)
 }
 
-// Indicates that the browser successfully completed the authentication attempt.
+// CompleteWithCallbackURL indicates that the browser successfully completed the authentication attempt.
 func (x *WebAuthenticationSessionRequest) CompleteWithCallbackURL(url string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeWithCallbackURL:"), rt.FileURL(url))
 }
 
+// UUID wraps the corresponding Objective-C method.
 func (x *WebAuthenticationSessionRequest) UUID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
 	return obj.Wrap(_r)
 }
 
+// URL wraps the corresponding Objective-C method.
 func (x *WebAuthenticationSessionRequest) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
+// CallbackURLScheme wraps the corresponding Objective-C method.
 func (x *WebAuthenticationSessionRequest) CallbackURLScheme() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callbackURLScheme"))
 	if _r == 0 {
@@ -87,18 +98,19 @@ func (x *WebAuthenticationSessionRequest) CallbackURLScheme() string {
 	return purego.GoString(_r)
 }
 
+// ShouldUseEphemeralSession wraps the corresponding Objective-C method.
 func (x *WebAuthenticationSessionRequest) ShouldUseEphemeralSession() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldUseEphemeralSession"))
 	return _r
 }
 
-// Additional headers to be sent when loading the initial URL. These should _only_ apply to the initial page, and should not overwrite any headers normally sent by the browser. Add `AdditionalHeaderFieldsAreSupported: true` to `ASWebAuthenticationSessionWebBrowserSupportCapabilities` in your browser's Info.plist file to indicate support for this.
+// AdditionalHeaderFields additional headers to be sent when loading the initial URL. These should _only_ apply to the initial page, and should not overwrite any headers normally sent by the browser. Add `AdditionalHeaderFieldsAreSupported: true` to `ASWebAuthenticationSessionWebBrowserSupportCapabilities` in your browser's Info.plist file to indicate support for this.
 func (x *WebAuthenticationSessionRequest) AdditionalHeaderFields() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("additionalHeaderFields"))
 	return obj.Wrap(_r)
 }
 
-// The callback to listen for to complete this request. Check all main-frame navigations loaded during the request with this callback. It is used to handle all callback types, including custom schemes and HTTPS navigations. When a match is found, invoke `-completeWithCallbackURL:` with that URL. Add `CallbackURLMatchingIsSupported: true` to `ASWebAuthenticationSessionWebBrowserSupportCapabilities` in your browser's Info.plist file to indicate support for this.
+// Callback the callback to listen for to complete this request. Check all main-frame navigations loaded during the request with this callback. It is used to handle all callback types, including custom schemes and HTTPS navigations. When a match is found, invoke `-completeWithCallbackURL:` with that URL. Add `CallbackURLMatchingIsSupported: true` to `ASWebAuthenticationSessionWebBrowserSupportCapabilities` in your browser's Info.plist file to indicate support for this.
 func (x *WebAuthenticationSessionRequest) Callback() *WebAuthenticationSessionCallback {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callback"))
 	return WebAuthenticationSessionCallbackFromID(_r)

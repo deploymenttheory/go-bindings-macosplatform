@@ -6,17 +6,20 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A standard user interface for selecting color in an app.
-//
 // ColorPanel is an idiomatic wrapper over the Objective-C class NSColorPanel.
+//
+// It embeds [Panel], promoting that type's methods.
+//
+// A standard user interface for selecting color in an app.
 type ColorPanel struct {
-	objref.Handle
+	Panel
 }
 
 // ColorPanelFromID adopts an existing Objective-C object as a ColorPanel
@@ -25,7 +28,8 @@ func ColorPanelFromID(id objc.ID) *ColorPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &ColorPanel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ColorPanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func colorPanelAdopt(id objc.ID) *ColorPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &ColorPanel{Handle: objref.Wrap(id)}
+	x := &ColorPanel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ColorPanel) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ColorPanel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ColorPanel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewColorPanel creates a new ColorPanel.
@@ -64,639 +54,576 @@ func NewColorPanel() *ColorPanel {
 	return colorPanelAdopt(_id)
 }
 
-// The accessory view.
-//
-// WithAccessoryView sets accessoryView and returns the receiver so calls can be chained.
+// WithAccessoryView the accessory view.
 func (x *ColorPanel) WithAccessoryView(accessoryView ViewProvider) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 	return x
 }
 
-// A Boolean value indicating whether the receiver continuously sends the action message to the target.
-//
-// WithContinuous sets continuous and returns the receiver so calls can be chained.
+// WithContinuous a Boolean value indicating whether the receiver continuously sends the action message to the target.
 func (x *ColorPanel) WithContinuous(continuous bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver shows alpha values and an opacity slider.
-//
-// WithShowsAlpha sets showsAlpha and returns the receiver so calls can be chained.
+// WithShowsAlpha a Boolean value that indicates whether the receiver shows alpha values and an opacity slider.
 func (x *ColorPanel) WithShowsAlpha(showsAlpha bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsAlpha:"), showsAlpha)
 	return x
 }
 
-// The mode of the receiver the mode is one of the modes allowed by the color mask.
-//
-// WithMode sets mode and returns the receiver so calls can be chained.
+// WithMode the mode of the receiver the mode is one of the modes allowed by the color mask.
 func (x *ColorPanel) WithMode(mode ColorPanelMode) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 	return x
 }
 
-// The color of the receiver.
-//
-// WithColor sets color and returns the receiver so calls can be chained.
+// WithColor the color of the receiver.
 func (x *ColorPanel) WithColor(color *Color) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 	return x
 }
 
-// The maximum linear exposure that can be set on a color picked in the color panel. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked by the panel may have a linear exposure applied to it.
-//
-// WithMaximumLinearExposure sets maximumLinearExposure and returns the receiver so calls can be chained.
+// WithMaximumLinearExposure the maximum linear exposure that can be set on a color picked in the color panel. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked by the panel may have a linear exposure applied to it.
 func (x *ColorPanel) WithMaximumLinearExposure(maximumLinearExposure float64) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLinearExposure:"), maximumLinearExposure)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver is a floating panel.
-//
-// WithFloatingPanel sets floatingPanel and returns the receiver so calls can be chained.
+// WithFloatingPanel a Boolean value that indicates whether the receiver is a floating panel.
 func (x *ColorPanel) WithFloatingPanel(floatingPanel bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatingPanel:"), floatingPanel)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver becomes the key window only when needed.
-//
-// WithBecomesKeyOnlyIfNeeded sets becomesKeyOnlyIfNeeded and returns the receiver so calls can be chained.
+// WithBecomesKeyOnlyIfNeeded a Boolean value that indicates whether the receiver becomes the key window only when needed.
 func (x *ColorPanel) WithBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBecomesKeyOnlyIfNeeded:"), becomesKeyOnlyIfNeeded)
 	return x
 }
 
-// A Boolean value that indicates whether the panel receives keyboard and mouse events even when some other window is being run modally.
-//
-// WithWorksWhenModal sets worksWhenModal and returns the receiver so calls can be chained.
+// WithWorksWhenModal a Boolean value that indicates whether the panel receives keyboard and mouse events even when some other window is being run modally.
 func (x *ColorPanel) WithWorksWhenModal(worksWhenModal bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorksWhenModal:"), worksWhenModal)
 	return x
 }
 
-// The string that appears in the title bar of the window or the path to the represented file.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the string that appears in the title bar of the window or the path to the represented file.
 func (x *ColorPanel) WithTitle(title string) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A secondary line of text that appears in the title bar of the window.
-//
-// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
+// WithSubtitle a secondary line of text that appears in the title bar of the window.
 func (x *ColorPanel) WithSubtitle(subtitle string) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
-// A value that indicates the visibility of the window’s title and title bar buttons.
-//
-// WithTitleVisibility sets titleVisibility and returns the receiver so calls can be chained.
+// WithTitleVisibility a value that indicates the visibility of the window’s title and title bar buttons.
 func (x *ColorPanel) WithTitleVisibility(titleVisibility WindowTitleVisibility) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleVisibility:"), titleVisibility)
 	return x
 }
 
-// A Boolean value that indicates whether the title bar draws its background.
-//
-// WithTitlebarAppearsTransparent sets titlebarAppearsTransparent and returns the receiver so calls can be chained.
+// WithTitlebarAppearsTransparent a Boolean value that indicates whether the title bar draws its background.
 func (x *ColorPanel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlebarAppearsTransparent:"), titlebarAppearsTransparent)
 	return x
 }
 
-// The style that determines the appearance and location of the toolbar in relation to the title bar.
-//
-// WithToolbarStyle sets toolbarStyle and returns the receiver so calls can be chained.
+// WithToolbarStyle the style that determines the appearance and location of the toolbar in relation to the title bar.
 func (x *ColorPanel) WithToolbarStyle(toolbarStyle WindowToolbarStyle) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolbarStyle:"), toolbarStyle)
 	return x
 }
 
-// An array of title bar accessory view controllers that are currently added to the window.
-//
-// WithTitlebarAccessoryViewControllers sets the collection and returns the receiver so calls can be chained.
+// WithTitlebarAccessoryViewControllers an array of title bar accessory view controllers that are currently added to the window.
 func (x *ColorPanel) WithTitlebarAccessoryViewControllers(items ...*TitlebarAccessoryViewController) *ColorPanel {
 	_arr := purego.SliceToNSArray(items, func(_v *TitlebarAccessoryViewController) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlebarAccessoryViewControllers:"), _arr)
 	return x
 }
 
-// The URL of the file the window represents.
-//
-// WithRepresentedURL sets representedURL and returns the receiver so calls can be chained.
+// WithRepresentedURL the URL of the file the window represents.
 func (x *ColorPanel) WithRepresentedURL(representedURL string) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedURL:"), rt.FileURL(representedURL))
 	return x
 }
 
-// The path to the file of the window’s represented file.
-//
-// WithRepresentedFilename sets representedFilename and returns the receiver so calls can be chained.
+// WithRepresentedFilename the path to the file of the window’s represented file.
 func (x *ColorPanel) WithRepresentedFilename(representedFilename string) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedFilename:"), purego.NSString(representedFilename))
 	return x
 }
 
-// A Boolean value that indicates whether the window is excluded from the application’s Windows menu.
-//
-// WithExcludedFromWindowsMenu sets excludedFromWindowsMenu and returns the receiver so calls can be chained.
+// WithExcludedFromWindowsMenu a Boolean value that indicates whether the window is excluded from the application’s Windows menu.
 func (x *ColorPanel) WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedFromWindowsMenu:"), excludedFromWindowsMenu)
 	return x
 }
 
-// The window’s content view, the highest accessible view object in the window’s view hierarchy.
-//
-// WithContentView sets contentView and returns the receiver so calls can be chained.
+// WithContentView the window’s content view, the highest accessible view object in the window’s view hierarchy.
 func (x *ColorPanel) WithContentView(contentView ViewProvider) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	return x
 }
 
-// Flags that describe the window’s current style, such as if it’s resizable or in full-screen mode.
-//
-// WithStyleMask sets styleMask and returns the receiver so calls can be chained.
+// WithStyleMask flags that describe the window’s current style, such as if it’s resizable or in full-screen mode.
 func (x *ColorPanel) WithStyleMask(styleMask WindowStyleMask) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyleMask:"), styleMask)
 	return x
 }
 
-// A Boolean value that indicates whether any of the window’s views need to be displayed.
-//
-// WithViewsNeedDisplay sets viewsNeedDisplay and returns the receiver so calls can be chained.
+// WithResizeIncrements the window’s resizing increments.
+func (x *ColorPanel) WithResizeIncrements(resizeIncrements corefoundation.CGSize) *ColorPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResizeIncrements:"), resizeIncrements)
+	return x
+}
+
+// WithAspectRatio the window’s aspect ratio, which constrains the size of its frame rectangle to integral multiples of this ratio when the user resizes it.
+func (x *ColorPanel) WithAspectRatio(aspectRatio corefoundation.CGSize) *ColorPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAspectRatio:"), aspectRatio)
+	return x
+}
+
+// WithContentResizeIncrements the window’s content-view resizing increments.
+func (x *ColorPanel) WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *ColorPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentResizeIncrements:"), contentResizeIncrements)
+	return x
+}
+
+// WithContentAspectRatio the window’s content aspect ratio.
+func (x *ColorPanel) WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *ColorPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentAspectRatio:"), contentAspectRatio)
+	return x
+}
+
+// WithViewsNeedDisplay a Boolean value that indicates whether any of the window’s views need to be displayed.
 func (x *ColorPanel) WithViewsNeedDisplay(viewsNeedDisplay bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewsNeedDisplay:"), viewsNeedDisplay)
 	return x
 }
 
-// A Boolean value that indicates whether the window tries to optimize user-initiated resize operations by preserving the content of views that have not changed.
-//
-// WithPreservesContentDuringLiveResize sets preservesContentDuringLiveResize and returns the receiver so calls can be chained.
+// WithPreservesContentDuringLiveResize a Boolean value that indicates whether the window tries to optimize user-initiated resize operations by preserving the content of views that have not changed.
 func (x *ColorPanel) WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesContentDuringLiveResize:"), preservesContentDuringLiveResize)
 	return x
 }
 
-// A Boolean value that indicates whether the window is released when it receives the close message.
-//
-// WithReleasedWhenClosed sets releasedWhenClosed and returns the receiver so calls can be chained.
+// WithReleasedWhenClosed a Boolean value that indicates whether the window is released when it receives the close message.
 func (x *ColorPanel) WithReleasedWhenClosed(releasedWhenClosed bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReleasedWhenClosed:"), releasedWhenClosed)
 	return x
 }
 
-// The color of the window’s background.
-//
-// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+// WithBackgroundColor the color of the window’s background.
 func (x *ColorPanel) WithBackgroundColor(backgroundColor *Color) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// A Boolean value that indicates whether the window can be dragged by clicking in its title bar or background.
-//
-// WithMovable sets movable and returns the receiver so calls can be chained.
+// WithMovable a Boolean value that indicates whether the window can be dragged by clicking in its title bar or background.
 func (x *ColorPanel) WithMovable(movable bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMovable:"), movable)
 	return x
 }
 
-// A Boolean value that indicates whether the window is movable by clicking and dragging anywhere in its background.
-//
-// WithMovableByWindowBackground sets movableByWindowBackground and returns the receiver so calls can be chained.
+// WithMovableByWindowBackground a Boolean value that indicates whether the window is movable by clicking and dragging anywhere in its background.
 func (x *ColorPanel) WithMovableByWindowBackground(movableByWindowBackground bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMovableByWindowBackground:"), movableByWindowBackground)
 	return x
 }
 
-// A Boolean value that indicates whether the window is removed from the screen when its application becomes inactive.
-//
-// WithHidesOnDeactivate sets hidesOnDeactivate and returns the receiver so calls can be chained.
+// WithHidesOnDeactivate a Boolean value that indicates whether the window is removed from the screen when its application becomes inactive.
 func (x *ColorPanel) WithHidesOnDeactivate(hidesOnDeactivate bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidesOnDeactivate:"), hidesOnDeactivate)
 	return x
 }
 
-// A Boolean value that indicates whether the window can hide when its application becomes hidden.
-//
-// WithCanHide sets canHide and returns the receiver so calls can be chained.
+// WithCanHide a Boolean value that indicates whether the window can hide when its application becomes hidden.
 func (x *ColorPanel) WithCanHide(canHide bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanHide:"), canHide)
 	return x
 }
 
-// The custom miniaturized window image of the window.
-//
-// WithMiniwindowImage sets miniwindowImage and returns the receiver so calls can be chained.
+// WithMiniwindowImage the custom miniaturized window image of the window.
 func (x *ColorPanel) WithMiniwindowImage(miniwindowImage *Image) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiniwindowImage:"), objref.IDOf(miniwindowImage))
 	return x
 }
 
-// The title displayed in the window’s minimized window.
-//
-// WithMiniwindowTitle sets miniwindowTitle and returns the receiver so calls can be chained.
+// WithMiniwindowTitle the title displayed in the window’s minimized window.
 func (x *ColorPanel) WithMiniwindowTitle(miniwindowTitle string) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiniwindowTitle:"), purego.NSString(miniwindowTitle))
 	return x
 }
 
-// A Boolean value that indicates whether the window’s document has been edited.
-//
-// WithDocumentEdited sets documentEdited and returns the receiver so calls can be chained.
+// WithDocumentEdited a Boolean value that indicates whether the window’s document has been edited.
 func (x *ColorPanel) WithDocumentEdited(documentEdited bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentEdited:"), documentEdited)
 	return x
 }
 
-// A Boolean value that indicates whether the window prevents application termination when modal.
-//
-// WithPreventsApplicationTerminationWhenModal sets preventsApplicationTerminationWhenModal and returns the receiver so calls can be chained.
+// WithPreventsApplicationTerminationWhenModal a Boolean value that indicates whether the window prevents application termination when modal.
 func (x *ColorPanel) WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreventsApplicationTerminationWhenModal:"), preventsApplicationTerminationWhenModal)
 	return x
 }
 
-// A Boolean value that indicates whether the window can display tooltips even when the application is in the background.
-//
-// WithAllowsToolTipsWhenApplicationIsInactive sets allowsToolTipsWhenApplicationIsInactive and returns the receiver so calls can be chained.
+// WithAllowsToolTipsWhenApplicationIsInactive a Boolean value that indicates whether the window can display tooltips even when the application is in the background.
 func (x *ColorPanel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsToolTipsWhenApplicationIsInactive:"), allowsToolTipsWhenApplicationIsInactive)
 	return x
 }
 
-// The window’s backing store type.
-//
-// WithBackingType sets backingType and returns the receiver so calls can be chained.
+// WithBackingType the window’s backing store type.
 func (x *ColorPanel) WithBackingType(backingType BackingStoreType) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackingType:"), backingType)
 	return x
 }
 
-// The window level of the window.
-//
-// WithLevel sets level and returns the receiver so calls can be chained.
+// WithLevel the window level of the window.
 func (x *ColorPanel) WithLevel(level int) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevel:"), level)
 	return x
 }
 
-// The depth limit of the window.
-//
-// WithDepthLimit sets depthLimit and returns the receiver so calls can be chained.
+// WithDepthLimit the depth limit of the window.
 func (x *ColorPanel) WithDepthLimit(depthLimit WindowDepth) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthLimit:"), depthLimit)
 	return x
 }
 
-// A Boolean value that indicates whether the window has a shadow.
-//
-// WithHasShadow sets hasShadow and returns the receiver so calls can be chained.
+// WithHasShadow a Boolean value that indicates whether the window has a shadow.
 func (x *ColorPanel) WithHasShadow(hasShadow bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasShadow:"), hasShadow)
 	return x
 }
 
-// The window’s alpha value.
-//
-// WithAlphaValue sets alphaValue and returns the receiver so calls can be chained.
+// WithAlphaValue the window’s alpha value.
 func (x *ColorPanel) WithAlphaValue(alphaValue float64) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// A Boolean value that indicates whether the window is opaque.
-//
-// WithOpaque sets opaque and returns the receiver so calls can be chained.
+// WithOpaque a Boolean value that indicates whether the window is opaque.
 func (x *ColorPanel) WithOpaque(opaque bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
 	return x
 }
 
-// A Boolean value that indicates the level of access other processes have to the window’s content.
-//
-// WithSharingType sets sharingType and returns the receiver so calls can be chained.
+// WithSharingType a Boolean value that indicates the level of access other processes have to the window’s content.
 func (x *ColorPanel) WithSharingType(sharingType WindowSharingType) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharingType:"), sharingType)
 	return x
 }
 
-// A Boolean value that indicates whether the window allows multithreaded view drawing.
-//
-// WithAllowsConcurrentViewDrawing sets allowsConcurrentViewDrawing and returns the receiver so calls can be chained.
+// WithAllowsConcurrentViewDrawing a Boolean value that indicates whether the window allows multithreaded view drawing.
 func (x *ColorPanel) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsConcurrentViewDrawing:"), allowsConcurrentViewDrawing)
 	return x
 }
 
-// A Boolean value that indicates whether the window context should be updated when the screen profile changes or when the window moves to a different screen.
-//
-// WithDisplaysWhenScreenProfileChanges sets displaysWhenScreenProfileChanges and returns the receiver so calls can be chained.
+// WithDisplaysWhenScreenProfileChanges a Boolean value that indicates whether the window context should be updated when the screen profile changes or when the window moves to a different screen.
 func (x *ColorPanel) WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysWhenScreenProfileChanges:"), displaysWhenScreenProfileChanges)
 	return x
 }
 
-// A Boolean value that indicates whether the window can be displayed at the login window.
-//
-// WithCanBecomeVisibleWithoutLogin sets canBecomeVisibleWithoutLogin and returns the receiver so calls can be chained.
+// WithCanBecomeVisibleWithoutLogin a Boolean value that indicates whether the window can be displayed at the login window.
 func (x *ColorPanel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanBecomeVisibleWithoutLogin:"), canBecomeVisibleWithoutLogin)
 	return x
 }
 
-// A value that identifies the window’s behavior in window collections.
-//
-// WithCollectionBehavior sets collectionBehavior and returns the receiver so calls can be chained.
+// WithCollectionBehavior a value that identifies the window’s behavior in window collections.
 func (x *ColorPanel) WithCollectionBehavior(collectionBehavior WindowCollectionBehavior) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollectionBehavior:"), collectionBehavior)
 	return x
 }
 
-// The window’s automatic animation behavior.
-//
-// WithAnimationBehavior sets animationBehavior and returns the receiver so calls can be chained.
+// WithAnimationBehavior the window’s automatic animation behavior.
 func (x *ColorPanel) WithAnimationBehavior(animationBehavior WindowAnimationBehavior) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationBehavior:"), animationBehavior)
 	return x
 }
 
-// The name used to automatically save the window’s frame rectangle data in the defaults system.
-//
-// WithFrameAutosaveName sets frameAutosaveName and returns the receiver so calls can be chained.
+// WithFrameAutosaveName the name used to automatically save the window’s frame rectangle data in the defaults system.
 func (x *ColorPanel) WithFrameAutosaveName(frameAutosaveName obj.Object) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameAutosaveName:"), objref.IDOf(frameAutosaveName))
 	return x
 }
 
-// The window’s window controller.
-//
-// WithWindowController sets windowController and returns the receiver so calls can be chained.
+// WithMinSize the minimum size to which the window’s frame (including its title bar) can be sized.
+func (x *ColorPanel) WithMinSize(minSize corefoundation.CGSize) *ColorPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinSize:"), minSize)
+	return x
+}
+
+// WithMaxSize the maximum size to which the window’s frame (including its title bar) can be sized.
+func (x *ColorPanel) WithMaxSize(maxSize corefoundation.CGSize) *ColorPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSize:"), maxSize)
+	return x
+}
+
+// WithContentMinSize the minimum size of the window’s content view in the window’s base coordinate system.
+func (x *ColorPanel) WithContentMinSize(contentMinSize corefoundation.CGSize) *ColorPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentMinSize:"), contentMinSize)
+	return x
+}
+
+// WithContentMaxSize the maximum size of the window’s content view in the window’s base coordinate system.
+func (x *ColorPanel) WithContentMaxSize(contentMaxSize corefoundation.CGSize) *ColorPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentMaxSize:"), contentMaxSize)
+	return x
+}
+
+// WithMinFullScreenContentSize a minimum size that is used to determine if a window can fit when it is in full screen in a tile.
+func (x *ColorPanel) WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *ColorPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinFullScreenContentSize:"), minFullScreenContentSize)
+	return x
+}
+
+// WithMaxFullScreenContentSize a maximum size that is used to determine if a window can fit when it is in full screen in a tile.
+func (x *ColorPanel) WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *ColorPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxFullScreenContentSize:"), maxFullScreenContentSize)
+	return x
+}
+
+// WithWindowController the window’s window controller.
 func (x *ColorPanel) WithWindowController(windowController *WindowController) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindowController:"), objref.IDOf(windowController))
 	return x
 }
 
-// The parent window to which the window is attached as a child.
-//
-// WithParentWindow sets parentWindow and returns the receiver so calls can be chained.
+// WithParentWindow the parent window to which the window is attached as a child.
 func (x *ColorPanel) WithParentWindow(parentWindow WindowProvider) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
 	return x
 }
 
-// An object that the window inherits its appearance from.
-//
-// WithAppearanceSource sets appearanceSource and returns the receiver so calls can be chained.
+// WithAppearanceSource an object that the window inherits its appearance from.
 func (x *ColorPanel) WithAppearanceSource(appearanceSource obj.Object) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppearanceSource:"), objref.IDOf(appearanceSource))
 	return x
 }
 
-// The window’s color space.
-//
-// WithColorSpace sets colorSpace and returns the receiver so calls can be chained.
+// WithColorSpace the window’s color space.
 func (x *ColorPanel) WithColorSpace(colorSpace *ColorSpace) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
 	return x
 }
 
-// The type of separator that the app displays between the title bar and content of a window.
-//
-// WithTitlebarSeparatorStyle sets titlebarSeparatorStyle and returns the receiver so calls can be chained.
+// WithTitlebarSeparatorStyle the type of separator that the app displays between the title bar and content of a window.
 func (x *ColorPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle TitlebarSeparatorStyle) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlebarSeparatorStyle:"), titlebarSeparatorStyle)
 	return x
 }
 
-// The main content view controller for the window.
-//
-// WithContentViewController sets contentViewController and returns the receiver so calls can be chained.
+// WithContentViewController the main content view controller for the window.
 func (x *ColorPanel) WithContentViewController(contentViewController ViewControllerProvider) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
 	return x
 }
 
-// The view that’s made first responder (also called the key view) the first time the window is placed onscreen.
-//
-// WithInitialFirstResponder sets initialFirstResponder and returns the receiver so calls can be chained.
+// WithInitialFirstResponder the view that’s made first responder (also called the key view) the first time the window is placed onscreen.
 func (x *ColorPanel) WithInitialFirstResponder(initialFirstResponder ViewProvider) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialFirstResponder:"), objref.IDOf(initialFirstResponder))
 	return x
 }
 
-// The button cell that performs as if clicked when the window receives a Return (or Enter) key event.
-//
-// WithDefaultButtonCell sets defaultButtonCell and returns the receiver so calls can be chained.
+// WithDefaultButtonCell the button cell that performs as if clicked when the window receives a Return (or Enter) key event.
 func (x *ColorPanel) WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultButtonCell:"), objref.IDOf(defaultButtonCell))
 	return x
 }
 
-// A Boolean value that indicates whether the window automatically recalculates the key view loop when views are added.
-//
-// WithAutorecalculatesKeyViewLoop sets autorecalculatesKeyViewLoop and returns the receiver so calls can be chained.
+// WithAutorecalculatesKeyViewLoop a Boolean value that indicates whether the window automatically recalculates the key view loop when views are added.
 func (x *ColorPanel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutorecalculatesKeyViewLoop:"), autorecalculatesKeyViewLoop)
 	return x
 }
 
-// The window’s toolbar.
-//
-// WithToolbar sets toolbar and returns the receiver so calls can be chained.
+// WithToolbar the window’s toolbar.
 func (x *ColorPanel) WithToolbar(toolbar *Toolbar) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolbar:"), objref.IDOf(toolbar))
 	return x
 }
 
-// A Boolean value that indicates whether the toolbar control button is currently displayed.
-//
-// WithShowsToolbarButton sets showsToolbarButton and returns the receiver so calls can be chained.
+// WithShowsToolbarButton a Boolean value that indicates whether the toolbar control button is currently displayed.
 func (x *ColorPanel) WithShowsToolbarButton(showsToolbarButton bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsToolbarButton:"), showsToolbarButton)
 	return x
 }
 
-// A value that indicates when a window displays tabs.
-//
-// WithTabbingMode sets tabbingMode and returns the receiver so calls can be chained.
+// WithTabbingMode a value that indicates when a window displays tabs.
 func (x *ColorPanel) WithTabbingMode(tabbingMode WindowTabbingMode) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabbingMode:"), tabbingMode)
 	return x
 }
 
-// A value that allows a group of related windows.
-//
-// WithTabbingIdentifier sets tabbingIdentifier and returns the receiver so calls can be chained.
+// WithTabbingIdentifier a value that allows a group of related windows.
 func (x *ColorPanel) WithTabbingIdentifier(tabbingIdentifier obj.Object) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabbingIdentifier:"), objref.IDOf(tabbingIdentifier))
 	return x
 }
 
-// A Boolean value that indicates whether the window accepts mouse-moved events.
-//
-// WithAcceptsMouseMovedEvents sets acceptsMouseMovedEvents and returns the receiver so calls can be chained.
+// WithAcceptsMouseMovedEvents a Boolean value that indicates whether the window accepts mouse-moved events.
 func (x *ColorPanel) WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsMouseMovedEvents:"), acceptsMouseMovedEvents)
 	return x
 }
 
-// A Boolean value that indicates whether the window is transparent to mouse events.
-//
-// WithIgnoresMouseEvents sets ignoresMouseEvents and returns the receiver so calls can be chained.
+// WithIgnoresMouseEvents a Boolean value that indicates whether the window is transparent to mouse events.
 func (x *ColorPanel) WithIgnoresMouseEvents(ignoresMouseEvents bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMouseEvents:"), ignoresMouseEvents)
 	return x
 }
 
-// WithAutodisplay sets autodisplay and returns the receiver so calls can be chained.
+// WithAutodisplay sets the property and returns the receiver so calls can be chained.
 func (x *ColorPanel) WithAutodisplay(autodisplay bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutodisplay:"), autodisplay)
 	return x
 }
 
-// WithOneShot sets oneShot and returns the receiver so calls can be chained.
+// WithOneShot sets the property and returns the receiver so calls can be chained.
 func (x *ColorPanel) WithOneShot(oneShot bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOneShot:"), oneShot)
 	return x
 }
 
-// WithPreferredBackingLocation sets preferredBackingLocation and returns the receiver so calls can be chained.
+// WithPreferredBackingLocation sets the property and returns the receiver so calls can be chained.
 func (x *ColorPanel) WithPreferredBackingLocation(preferredBackingLocation WindowBackingLocation) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredBackingLocation:"), preferredBackingLocation)
 	return x
 }
 
-// WithShowsResizeIndicator sets showsResizeIndicator and returns the receiver so calls can be chained.
+// WithShowsResizeIndicator sets the property and returns the receiver so calls can be chained.
 func (x *ColorPanel) WithShowsResizeIndicator(showsResizeIndicator bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsResizeIndicator:"), showsResizeIndicator)
 	return x
 }
 
-// The zero-based position of the window, based on its order from front to back among all visible application windows.
-//
-// WithOrderedIndex sets orderedIndex and returns the receiver so calls can be chained.
+// WithOrderedIndex the zero-based position of the window, based on its order from front to back among all visible application windows.
 func (x *ColorPanel) WithOrderedIndex(orderedIndex int) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrderedIndex:"), orderedIndex)
 	return x
 }
 
-// A Boolean value indicating whether the window configuration is preserved between application launches.
-//
-// WithRestorable sets restorable and returns the receiver so calls can be chained.
+// WithRestorable a Boolean value indicating whether the window configuration is preserved between application launches.
 func (x *ColorPanel) WithRestorable(restorable bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRestorable:"), restorable)
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *ColorPanel) WithNextResponder(nextResponder ResponderProvider) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets menu and returns the receiver so calls can be chained.
+// WithMenu returns the responder’s menu.
 func (x *ColorPanel) WithMenu(menu *Menu) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity an object encapsulating a user activity supported by this responder.
 func (x *ColorPanel) WithUserActivity(userActivity obj.Object) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *ColorPanel) WithTouchBar(touchBar *TouchBar) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// Sets the target of the receiver.
+// SetTarget sets the target of the receiver.
 func (x *ColorPanel) SetTarget(target obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 }
 
-// Adds the list of NSColor objects specified to all the color pickers in the receiver that display color lists by invoking attachColorList: on all color pickers in the application.
+// AttachColorList adds the list of NSColor objects specified to all the color pickers in the receiver that display color lists by invoking attachColorList: on all color pickers in the application.
 func (x *ColorPanel) AttachColorList(colorList *ColorList) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachColorList:"), objref.IDOf(colorList))
 }
 
-// Removes the list of colors from all the color pickers in the receiver that display color lists by invoking detachColorList: on all color pickers in the application.
+// DetachColorList removes the list of colors from all the color pickers in the receiver that display color lists by invoking detachColorList: on all color pickers in the application.
 func (x *ColorPanel) DetachColorList(colorList *ColorList) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("detachColorList:"), objref.IDOf(colorList))
 }
 
+// AccessoryView wraps the corresponding Objective-C method.
 func (x *ColorPanel) AccessoryView() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessoryView"))
 	return ViewFromID(_r)
 }
 
+// SetAccessoryView wraps the corresponding Objective-C method.
 func (x *ColorPanel) SetAccessoryView(accessoryView *View) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 }
 
+// IsContinuous wraps the corresponding Objective-C method.
 func (x *ColorPanel) IsContinuous() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isContinuous"))
 	return _r
 }
 
+// SetContinuous wraps the corresponding Objective-C method.
 func (x *ColorPanel) SetContinuous(continuous bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 }
 
+// ShowsAlpha wraps the corresponding Objective-C method.
 func (x *ColorPanel) ShowsAlpha() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsAlpha"))
 	return _r
 }
 
+// SetShowsAlpha wraps the corresponding Objective-C method.
 func (x *ColorPanel) SetShowsAlpha(showsAlpha bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsAlpha:"), showsAlpha)
 }
 
+// Mode wraps the corresponding Objective-C method.
 func (x *ColorPanel) Mode() ColorPanelMode {
 	_r := objc.Send[ColorPanelMode](objref.IDOf(x), objc.RegisterName("mode"))
 	return _r
 }
 
+// SetMode wraps the corresponding Objective-C method.
 func (x *ColorPanel) SetMode(mode ColorPanelMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 }
 
+// Color wraps the corresponding Objective-C method.
 func (x *ColorPanel) Color() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
 	return ColorFromID(_r)
 }
 
+// SetColor wraps the corresponding Objective-C method.
 func (x *ColorPanel) SetColor(color *Color) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 }
 
+// Alpha wraps the corresponding Objective-C method.
 func (x *ColorPanel) Alpha() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
 	return _r
 }
 
-// The maximum linear exposure that can be set on a color picked in the color panel. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked by the panel may have a linear exposure applied to it.
+// MaximumLinearExposure the maximum linear exposure that can be set on a color picked in the color panel. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked by the panel may have a linear exposure applied to it.
 func (x *ColorPanel) MaximumLinearExposure() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumLinearExposure"))
 	return _r
 }
 
-// The maximum linear exposure that can be set on a color picked in the color panel. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked by the panel may have a linear exposure applied to it.
+// SetMaximumLinearExposure the maximum linear exposure that can be set on a color picked in the color panel. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked by the panel may have a linear exposure applied to it.
 func (x *ColorPanel) SetMaximumLinearExposure(maximumLinearExposure float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLinearExposure:"), maximumLinearExposure)
 }
@@ -724,6 +651,10 @@ type ColorPanelable interface {
 	WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *ColorPanel
 	WithContentView(contentView ViewProvider) *ColorPanel
 	WithStyleMask(styleMask WindowStyleMask) *ColorPanel
+	WithResizeIncrements(resizeIncrements corefoundation.CGSize) *ColorPanel
+	WithAspectRatio(aspectRatio corefoundation.CGSize) *ColorPanel
+	WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *ColorPanel
+	WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *ColorPanel
 	WithViewsNeedDisplay(viewsNeedDisplay bool) *ColorPanel
 	WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *ColorPanel
 	WithReleasedWhenClosed(releasedWhenClosed bool) *ColorPanel
@@ -750,6 +681,12 @@ type ColorPanelable interface {
 	WithCollectionBehavior(collectionBehavior WindowCollectionBehavior) *ColorPanel
 	WithAnimationBehavior(animationBehavior WindowAnimationBehavior) *ColorPanel
 	WithFrameAutosaveName(frameAutosaveName obj.Object) *ColorPanel
+	WithMinSize(minSize corefoundation.CGSize) *ColorPanel
+	WithMaxSize(maxSize corefoundation.CGSize) *ColorPanel
+	WithContentMinSize(contentMinSize corefoundation.CGSize) *ColorPanel
+	WithContentMaxSize(contentMaxSize corefoundation.CGSize) *ColorPanel
+	WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *ColorPanel
+	WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *ColorPanel
 	WithWindowController(windowController *WindowController) *ColorPanel
 	WithParentWindow(parentWindow WindowProvider) *ColorPanel
 	WithAppearanceSource(appearanceSource obj.Object) *ColorPanel
@@ -794,3 +731,9 @@ type ColorPanelable interface {
 }
 
 var _ ColorPanelable = (*ColorPanel)(nil)
+
+var _ PanelProvider = (*ColorPanel)(nil)
+
+var _ WindowProvider = (*ColorPanel)(nil)
+
+var _ ResponderProvider = (*ColorPanel)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A rectangular, one-sided plane geometry of specified width and height.
-//
 // Plane is an idiomatic wrapper over the Objective-C class SCNPlane.
+//
+// It embeds [Geometry], promoting that type's methods.
+//
+// A rectangular, one-sided plane geometry of specified width and height.
 type Plane struct {
-	objref.Handle
+	Geometry
 }
 
 // PlaneFromID adopts an existing Objective-C object as a Plane
@@ -25,7 +26,8 @@ func PlaneFromID(id objc.ID) *Plane {
 	if id == 0 {
 		return nil
 	}
-	x := &Plane{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Plane{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func planeAdopt(id objc.ID) *Plane {
 	if id == 0 {
 		return nil
 	}
-	x := &Plane{Handle: objref.Wrap(id)}
+	x := &Plane{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *Plane) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Plane) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Plane) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPlane creates a new Plane.
@@ -64,182 +52,160 @@ func NewPlane() *Plane {
 	return planeAdopt(_id)
 }
 
-// The extent of the plane along its horizontal axis. Animatable.
-//
-// WithWidth sets width and returns the receiver so calls can be chained.
+// WithWidth the extent of the plane along its horizontal axis. Animatable.
 func (x *Plane) WithWidth(width float64) *Plane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
 	return x
 }
 
-// The extent of the plane along its vertical axis. Animatable.
-//
-// WithHeight sets height and returns the receiver so calls can be chained.
+// WithHeight the extent of the plane along its vertical axis. Animatable.
 func (x *Plane) WithHeight(height float64) *Plane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 	return x
 }
 
-// The number of subdivisions in the plane’s surface along its horizontal axis. Animatable.
-//
-// WithWidthSegmentCount sets widthSegmentCount and returns the receiver so calls can be chained.
+// WithWidthSegmentCount the number of subdivisions in the plane’s surface along its horizontal axis. Animatable.
 func (x *Plane) WithWidthSegmentCount(widthSegmentCount int) *Plane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidthSegmentCount:"), widthSegmentCount)
 	return x
 }
 
-// The number of subdivisions in the plane’s surface along its vertical axis. Animatable.
-//
-// WithHeightSegmentCount sets heightSegmentCount and returns the receiver so calls can be chained.
+// WithHeightSegmentCount the number of subdivisions in the plane’s surface along its vertical axis. Animatable.
 func (x *Plane) WithHeightSegmentCount(heightSegmentCount int) *Plane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightSegmentCount:"), heightSegmentCount)
 	return x
 }
 
-// The radius of curvature for the plane’s corners. Animatable.
-//
-// WithCornerRadius sets cornerRadius and returns the receiver so calls can be chained.
+// WithCornerRadius the radius of curvature for the plane’s corners. Animatable.
 func (x *Plane) WithCornerRadius(cornerRadius float64) *Plane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
 	return x
 }
 
-// The number of line segments used to create each rounded corner of the plane. Animatable.
-//
-// WithCornerSegmentCount sets cornerSegmentCount and returns the receiver so calls can be chained.
+// WithCornerSegmentCount the number of line segments used to create each rounded corner of the plane. Animatable.
 func (x *Plane) WithCornerSegmentCount(cornerSegmentCount int) *Plane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerSegmentCount:"), cornerSegmentCount)
 	return x
 }
 
-// A name associated with the geometry object.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName a name associated with the geometry object.
 func (x *Plane) WithName(name string) *Plane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// An array of SCNMaterial objects that determine the geometry’s appearance when rendered.
-//
-// WithMaterials sets the collection and returns the receiver so calls can be chained.
+// WithMaterials an array of SCNMaterial objects that determine the geometry’s appearance when rendered.
 func (x *Plane) WithMaterials(items ...*Material) *Plane {
 	_arr := purego.SliceToNSArray(items, func(_v *Material) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterials:"), _arr)
 	return x
 }
 
-// The first material attached to the geometry.
-//
-// WithFirstMaterial sets firstMaterial and returns the receiver so calls can be chained.
+// WithFirstMaterial the first material attached to the geometry.
 func (x *Plane) WithFirstMaterial(firstMaterial *Material) *Plane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return x
 }
 
-// An array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
-//
-// WithLevelsOfDetail sets the collection and returns the receiver so calls can be chained.
+// WithLevelsOfDetail an array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
 func (x *Plane) WithLevelsOfDetail(items ...*LevelOfDetail) *Plane {
 	_arr := purego.SliceToNSArray(items, func(_v *LevelOfDetail) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelsOfDetail:"), _arr)
 	return x
 }
 
-// WithTessellator sets tessellator and returns the receiver so calls can be chained.
+// WithTessellator sets the property and returns the receiver so calls can be chained.
 func (x *Plane) WithTessellator(tessellator *GeometryTessellator) *Plane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return x
 }
 
-// The number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
-//
-// WithSubdivisionLevel sets subdivisionLevel and returns the receiver so calls can be chained.
+// WithSubdivisionLevel the number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
 func (x *Plane) WithSubdivisionLevel(subdivisionLevel int) *Plane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubdivisionLevel:"), subdivisionLevel)
 	return x
 }
 
-// Specifies if the subdivision is adaptive or uniform. Defaults to YES. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
-//
-// WithWantsAdaptiveSubdivision sets wantsAdaptiveSubdivision and returns the receiver so calls can be chained.
+// WithWantsAdaptiveSubdivision specifies if the subdivision is adaptive or uniform. Defaults to YES. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
 func (x *Plane) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Plane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsAdaptiveSubdivision:"), wantsAdaptiveSubdivision)
 	return x
 }
 
-// The geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
-//
-// WithEdgeCreasesElement sets edgeCreasesElement and returns the receiver so calls can be chained.
+// WithEdgeCreasesElement the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 func (x *Plane) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Plane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return x
 }
 
-// The geometry source specifying the smoothness or sharpness of edges after surface subdivision.
-//
-// WithEdgeCreasesSource sets edgeCreasesSource and returns the receiver so calls can be chained.
+// WithEdgeCreasesSource the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 func (x *Plane) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Plane {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return x
 }
 
-// The plane extent along the X axis. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+// Width the plane extent along the X axis. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
 func (x *Plane) Width() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("width"))
 	return _r
 }
 
+// SetWidth wraps the corresponding Objective-C method.
 func (x *Plane) SetWidth(width float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
 }
 
-// The plane extent along the Y axis. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+// Height the plane extent along the Y axis. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
 func (x *Plane) Height() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("height"))
 	return _r
 }
 
+// SetHeight wraps the corresponding Objective-C method.
 func (x *Plane) SetHeight(height float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 }
 
-// The number of subdivisions along the X axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
+// WidthSegmentCount the number of subdivisions along the X axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (x *Plane) WidthSegmentCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("widthSegmentCount"))
 	return _r
 }
 
+// SetWidthSegmentCount wraps the corresponding Objective-C method.
 func (x *Plane) SetWidthSegmentCount(widthSegmentCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidthSegmentCount:"), widthSegmentCount)
 }
 
-// The number of subdivisions along the Y axis. The default value is 1. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
+// HeightSegmentCount the number of subdivisions along the Y axis. The default value is 1. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (x *Plane) HeightSegmentCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("heightSegmentCount"))
 	return _r
 }
 
+// SetHeightSegmentCount wraps the corresponding Objective-C method.
 func (x *Plane) SetHeightSegmentCount(heightSegmentCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightSegmentCount:"), heightSegmentCount)
 }
 
-// The corner radius. Animatable. If the value is strictly less than 0, the geometry is empty. The default value is 0.
+// CornerRadius the corner radius. Animatable. If the value is strictly less than 0, the geometry is empty. The default value is 0.
 func (x *Plane) CornerRadius() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("cornerRadius"))
 	return _r
 }
 
+// SetCornerRadius wraps the corresponding Objective-C method.
 func (x *Plane) SetCornerRadius(cornerRadius float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
 }
 
-// The number of subdivisions for the rounded corners. Animatable. If the value is less than 1, the behavior is undefined. The default value is 10.
+// CornerSegmentCount the number of subdivisions for the rounded corners. Animatable. If the value is less than 1, the behavior is undefined. The default value is 10.
 func (x *Plane) CornerSegmentCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cornerSegmentCount"))
 	return _r
 }
 
+// SetCornerSegmentCount wraps the corresponding Objective-C method.
 func (x *Plane) SetCornerSegmentCount(cornerSegmentCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerSegmentCount:"), cornerSegmentCount)
 }
@@ -277,3 +243,5 @@ type Planeable interface {
 }
 
 var _ Planeable = (*Plane)(nil)
+
+var _ GeometryProvider = (*Plane)(nil)

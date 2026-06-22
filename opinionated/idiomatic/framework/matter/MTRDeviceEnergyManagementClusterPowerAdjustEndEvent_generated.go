@@ -23,7 +23,8 @@ func MTRDeviceEnergyManagementClusterPowerAdjustEndEventFromID(id objc.ID) *MTRD
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceEnergyManagementClusterPowerAdjustEndEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDeviceEnergyManagementClusterPowerAdjustEndEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDeviceEnergyManagementClusterPowerAdjustEndEventAdopt(id objc.ID) *MTRDe
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceEnergyManagementClusterPowerAdjustEndEvent{Handle: objref.Wrap(id)}
+	x := &MTRDeviceEnergyManagementClusterPowerAdjustEndEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,53 +58,65 @@ func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) IsKind(className s
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDeviceEnergyManagementClusterPowerAdjustEndEvent creates a new MTRDeviceEnergyManagementClusterPowerAdjustEndEvent.
 func NewMTRDeviceEnergyManagementClusterPowerAdjustEndEvent() *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceEnergyManagementClusterPowerAdjustEndEvent")), objc.RegisterName("new"))
 	return mTRDeviceEnergyManagementClusterPowerAdjustEndEventAdopt(_id)
 }
 
-// WithCause sets cause and returns the receiver so calls can be chained.
+// WithCause sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
 	return x
 }
 
-// WithDuration sets duration and returns the receiver so calls can be chained.
+// WithDuration sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return x
 }
 
-// WithEnergyUse sets energyUse and returns the receiver so calls can be chained.
+// WithEnergyUse sets the property and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) WithEnergyUse(energyUse obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnergyUse:"), objref.IDOf(energyUse))
 	return x
 }
 
+// Cause wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) Cause() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cause"))
 	return obj.Wrap(_r)
 }
 
+// SetCause wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) SetCause(cause obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
 }
 
+// Duration wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) Duration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("duration"))
 	return obj.Wrap(_r)
 }
 
+// SetDuration wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) SetDuration(duration obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 }
 
+// EnergyUse wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) EnergyUse() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("energyUse"))
 	return obj.Wrap(_r)
 }
 
+// SetEnergyUse wraps the corresponding Objective-C method.
 func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) SetEnergyUse(energyUse obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnergyUse:"), objref.IDOf(energyUse))
 }

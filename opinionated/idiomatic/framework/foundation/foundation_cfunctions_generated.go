@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -82,6 +83,17 @@ func NSCompareMapTables(table1 obj.Object, table2 obj.Object) bool {
 	return _fnNSCompareMapTables(objref.IDOf(table1), objref.IDOf(table2))
 }
 
+var _fnNSContainsRect func(corefoundation.CGRect, corefoundation.CGRect) bool
+
+// NSContainsRect calls the Foundation framework function NSContainsRect.
+func NSContainsRect(aRect corefoundation.CGRect, bRect corefoundation.CGRect) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSContainsRect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSContainsRect, _lib, "NSContainsRect")
+	}
+	return _fnNSContainsRect(aRect, bRect)
+}
+
 var _fnNSCountHashTable func(objc.ID) int
 
 // NSCountHashTable calls the Foundation framework function NSCountHashTable.
@@ -124,6 +136,39 @@ func NSDecrementExtraRefCountWasZero(object obj.Object) bool {
 		ebipurego.RegisterLibFunc(&_fnNSDecrementExtraRefCountWasZero, _lib, "NSDecrementExtraRefCountWasZero")
 	}
 	return _fnNSDecrementExtraRefCountWasZero(objref.IDOf(object))
+}
+
+var _fnNSEqualPoints func(corefoundation.CGPoint, corefoundation.CGPoint) bool
+
+// NSEqualPoints calls the Foundation framework function NSEqualPoints.
+func NSEqualPoints(aPoint corefoundation.CGPoint, bPoint corefoundation.CGPoint) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSEqualPoints == nil {
+		ebipurego.RegisterLibFunc(&_fnNSEqualPoints, _lib, "NSEqualPoints")
+	}
+	return _fnNSEqualPoints(aPoint, bPoint)
+}
+
+var _fnNSEqualRects func(corefoundation.CGRect, corefoundation.CGRect) bool
+
+// NSEqualRects calls the Foundation framework function NSEqualRects.
+func NSEqualRects(aRect corefoundation.CGRect, bRect corefoundation.CGRect) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSEqualRects == nil {
+		ebipurego.RegisterLibFunc(&_fnNSEqualRects, _lib, "NSEqualRects")
+	}
+	return _fnNSEqualRects(aRect, bRect)
+}
+
+var _fnNSEqualSizes func(corefoundation.CGSize, corefoundation.CGSize) bool
+
+// NSEqualSizes calls the Foundation framework function NSEqualSizes.
+func NSEqualSizes(aSize corefoundation.CGSize, bSize corefoundation.CGSize) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSEqualSizes == nil {
+		ebipurego.RegisterLibFunc(&_fnNSEqualSizes, _lib, "NSEqualSizes")
+	}
+	return _fnNSEqualSizes(aSize, bSize)
 }
 
 var _fnNSExtraRefCount func(objc.ID) int
@@ -215,6 +260,17 @@ func NSHFSTypeOfFile(fullFilePath string) string {
 	return purego.GoString(_ret)
 }
 
+var _fnNSHeight func(corefoundation.CGRect) float64
+
+// NSHeight calls the Foundation framework function NSHeight.
+func NSHeight(aRect corefoundation.CGRect) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSHeight == nil {
+		ebipurego.RegisterLibFunc(&_fnNSHeight, _lib, "NSHeight")
+	}
+	return _fnNSHeight(aRect)
+}
+
 var _fnNSHomeDirectory func() objc.ID
 
 // NSHomeDirectory calls the Foundation framework function NSHomeDirectory.
@@ -267,6 +323,72 @@ func NSIncrementExtraRefCount(object obj.Object) {
 	_fnNSIncrementExtraRefCount(objref.IDOf(object))
 }
 
+var _fnNSInsetRect func(corefoundation.CGRect, float64, float64) corefoundation.CGRect
+
+// NSInsetRect calls the Foundation framework function NSInsetRect.
+func NSInsetRect(aRect corefoundation.CGRect, dX float64, dY float64) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSInsetRect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSInsetRect, _lib, "NSInsetRect")
+	}
+	return _fnNSInsetRect(aRect, dX, dY)
+}
+
+var _fnNSIntegralRect func(corefoundation.CGRect) corefoundation.CGRect
+
+// NSIntegralRect calls the Foundation framework function NSIntegralRect.
+func NSIntegralRect(aRect corefoundation.CGRect) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSIntegralRect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSIntegralRect, _lib, "NSIntegralRect")
+	}
+	return _fnNSIntegralRect(aRect)
+}
+
+var _fnNSIntegralRectWithOptions func(corefoundation.CGRect, AlignmentOptions) corefoundation.CGRect
+
+// NSIntegralRectWithOptions calls the Foundation framework function NSIntegralRectWithOptions.
+func NSIntegralRectWithOptions(aRect corefoundation.CGRect, opts AlignmentOptions) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSIntegralRectWithOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnNSIntegralRectWithOptions, _lib, "NSIntegralRectWithOptions")
+	}
+	return _fnNSIntegralRectWithOptions(aRect, opts)
+}
+
+var _fnNSIntersectionRect func(corefoundation.CGRect, corefoundation.CGRect) corefoundation.CGRect
+
+// NSIntersectionRect calls the Foundation framework function NSIntersectionRect.
+func NSIntersectionRect(aRect corefoundation.CGRect, bRect corefoundation.CGRect) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSIntersectionRect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSIntersectionRect, _lib, "NSIntersectionRect")
+	}
+	return _fnNSIntersectionRect(aRect, bRect)
+}
+
+var _fnNSIntersectsRect func(corefoundation.CGRect, corefoundation.CGRect) bool
+
+// NSIntersectsRect calls the Foundation framework function NSIntersectsRect.
+func NSIntersectsRect(aRect corefoundation.CGRect, bRect corefoundation.CGRect) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSIntersectsRect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSIntersectsRect, _lib, "NSIntersectsRect")
+	}
+	return _fnNSIntersectsRect(aRect, bRect)
+}
+
+var _fnNSIsEmptyRect func(corefoundation.CGRect) bool
+
+// NSIsEmptyRect calls the Foundation framework function NSIsEmptyRect.
+func NSIsEmptyRect(aRect corefoundation.CGRect) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSIsEmptyRect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSIsEmptyRect, _lib, "NSIsEmptyRect")
+	}
+	return _fnNSIsEmptyRect(aRect)
+}
+
 var _fnNSLogPageSize func() int
 
 // NSLogPageSize calls the Foundation framework function NSLogPageSize.
@@ -287,6 +409,127 @@ func NSLogv(arg obj.Object, arg2 string) {
 		ebipurego.RegisterLibFunc(&_fnNSLogv, _lib, "NSLogv")
 	}
 	_fnNSLogv(objref.IDOf(arg), arg2)
+}
+
+var _fnNSMakePoint func(float64, float64) corefoundation.CGPoint
+
+// NSMakePoint calls the Foundation framework function NSMakePoint.
+func NSMakePoint(x float64, y float64) corefoundation.CGPoint {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSMakePoint == nil {
+		ebipurego.RegisterLibFunc(&_fnNSMakePoint, _lib, "NSMakePoint")
+	}
+	return _fnNSMakePoint(x, y)
+}
+
+var _fnNSMakeRect func(float64, float64, float64, float64) corefoundation.CGRect
+
+// NSMakeRect calls the Foundation framework function NSMakeRect.
+func NSMakeRect(x float64, y float64, w float64, h float64) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSMakeRect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSMakeRect, _lib, "NSMakeRect")
+	}
+	return _fnNSMakeRect(x, y, w, h)
+}
+
+var _fnNSMakeSize func(float64, float64) corefoundation.CGSize
+
+// NSMakeSize calls the Foundation framework function NSMakeSize.
+func NSMakeSize(w float64, h float64) corefoundation.CGSize {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSMakeSize == nil {
+		ebipurego.RegisterLibFunc(&_fnNSMakeSize, _lib, "NSMakeSize")
+	}
+	return _fnNSMakeSize(w, h)
+}
+
+var _fnNSMaxX func(corefoundation.CGRect) float64
+
+// NSMaxX calls the Foundation framework function NSMaxX.
+func NSMaxX(aRect corefoundation.CGRect) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSMaxX == nil {
+		ebipurego.RegisterLibFunc(&_fnNSMaxX, _lib, "NSMaxX")
+	}
+	return _fnNSMaxX(aRect)
+}
+
+var _fnNSMaxY func(corefoundation.CGRect) float64
+
+// NSMaxY calls the Foundation framework function NSMaxY.
+func NSMaxY(aRect corefoundation.CGRect) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSMaxY == nil {
+		ebipurego.RegisterLibFunc(&_fnNSMaxY, _lib, "NSMaxY")
+	}
+	return _fnNSMaxY(aRect)
+}
+
+var _fnNSMidX func(corefoundation.CGRect) float64
+
+// NSMidX calls the Foundation framework function NSMidX.
+func NSMidX(aRect corefoundation.CGRect) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSMidX == nil {
+		ebipurego.RegisterLibFunc(&_fnNSMidX, _lib, "NSMidX")
+	}
+	return _fnNSMidX(aRect)
+}
+
+var _fnNSMidY func(corefoundation.CGRect) float64
+
+// NSMidY calls the Foundation framework function NSMidY.
+func NSMidY(aRect corefoundation.CGRect) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSMidY == nil {
+		ebipurego.RegisterLibFunc(&_fnNSMidY, _lib, "NSMidY")
+	}
+	return _fnNSMidY(aRect)
+}
+
+var _fnNSMinX func(corefoundation.CGRect) float64
+
+// NSMinX calls the Foundation framework function NSMinX.
+func NSMinX(aRect corefoundation.CGRect) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSMinX == nil {
+		ebipurego.RegisterLibFunc(&_fnNSMinX, _lib, "NSMinX")
+	}
+	return _fnNSMinX(aRect)
+}
+
+var _fnNSMinY func(corefoundation.CGRect) float64
+
+// NSMinY calls the Foundation framework function NSMinY.
+func NSMinY(aRect corefoundation.CGRect) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSMinY == nil {
+		ebipurego.RegisterLibFunc(&_fnNSMinY, _lib, "NSMinY")
+	}
+	return _fnNSMinY(aRect)
+}
+
+var _fnNSMouseInRect func(corefoundation.CGPoint, corefoundation.CGRect, bool) bool
+
+// NSMouseInRect calls the Foundation framework function NSMouseInRect.
+func NSMouseInRect(aPoint corefoundation.CGPoint, aRect corefoundation.CGRect, flipped bool) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSMouseInRect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSMouseInRect, _lib, "NSMouseInRect")
+	}
+	return _fnNSMouseInRect(aPoint, aRect, flipped)
+}
+
+var _fnNSOffsetRect func(corefoundation.CGRect, float64, float64) corefoundation.CGRect
+
+// NSOffsetRect calls the Foundation framework function NSOffsetRect.
+func NSOffsetRect(aRect corefoundation.CGRect, dX float64, dY float64) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSOffsetRect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSOffsetRect, _lib, "NSOffsetRect")
+	}
+	return _fnNSOffsetRect(aRect, dX, dY)
 }
 
 var _fnNSOpenStepRootDirectory func() objc.ID
@@ -315,6 +558,50 @@ func NSPageSize() int {
 	return _fnNSPageSize()
 }
 
+var _fnNSPointFromCGPoint func(corefoundation.CGPoint) corefoundation.CGPoint
+
+// NSPointFromCGPoint calls the Foundation framework function NSPointFromCGPoint.
+func NSPointFromCGPoint(cgpoint corefoundation.CGPoint) corefoundation.CGPoint {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSPointFromCGPoint == nil {
+		ebipurego.RegisterLibFunc(&_fnNSPointFromCGPoint, _lib, "NSPointFromCGPoint")
+	}
+	return _fnNSPointFromCGPoint(cgpoint)
+}
+
+var _fnNSPointFromString func(objc.ID) corefoundation.CGPoint
+
+// NSPointFromString calls the Foundation framework function NSPointFromString.
+func NSPointFromString(aString string) corefoundation.CGPoint {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSPointFromString == nil {
+		ebipurego.RegisterLibFunc(&_fnNSPointFromString, _lib, "NSPointFromString")
+	}
+	return _fnNSPointFromString(purego.NSString(aString))
+}
+
+var _fnNSPointInRect func(corefoundation.CGPoint, corefoundation.CGRect) bool
+
+// NSPointInRect calls the Foundation framework function NSPointInRect.
+func NSPointInRect(aPoint corefoundation.CGPoint, aRect corefoundation.CGRect) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSPointInRect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSPointInRect, _lib, "NSPointInRect")
+	}
+	return _fnNSPointInRect(aPoint, aRect)
+}
+
+var _fnNSPointToCGPoint func(corefoundation.CGPoint) corefoundation.CGPoint
+
+// NSPointToCGPoint calls the Foundation framework function NSPointToCGPoint.
+func NSPointToCGPoint(nspoint corefoundation.CGPoint) corefoundation.CGPoint {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSPointToCGPoint == nil {
+		ebipurego.RegisterLibFunc(&_fnNSPointToCGPoint, _lib, "NSPointToCGPoint")
+	}
+	return _fnNSPointToCGPoint(nspoint)
+}
+
 var _fnNSRealMemoryAvailable func() int
 
 // NSRealMemoryAvailable calls the Foundation framework function NSRealMemoryAvailable.
@@ -324,6 +611,39 @@ func NSRealMemoryAvailable() int {
 		ebipurego.RegisterLibFunc(&_fnNSRealMemoryAvailable, _lib, "NSRealMemoryAvailable")
 	}
 	return _fnNSRealMemoryAvailable()
+}
+
+var _fnNSRectFromCGRect func(corefoundation.CGRect) corefoundation.CGRect
+
+// NSRectFromCGRect calls the Foundation framework function NSRectFromCGRect.
+func NSRectFromCGRect(cgrect corefoundation.CGRect) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRectFromCGRect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRectFromCGRect, _lib, "NSRectFromCGRect")
+	}
+	return _fnNSRectFromCGRect(cgrect)
+}
+
+var _fnNSRectFromString func(objc.ID) corefoundation.CGRect
+
+// NSRectFromString calls the Foundation framework function NSRectFromString.
+func NSRectFromString(aString string) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRectFromString == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRectFromString, _lib, "NSRectFromString")
+	}
+	return _fnNSRectFromString(purego.NSString(aString))
+}
+
+var _fnNSRectToCGRect func(corefoundation.CGRect) corefoundation.CGRect
+
+// NSRectToCGRect calls the Foundation framework function NSRectToCGRect.
+func NSRectToCGRect(nsrect corefoundation.CGRect) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRectToCGRect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRectToCGRect, _lib, "NSRectToCGRect")
+	}
+	return _fnNSRectToCGRect(nsrect)
 }
 
 var _fnNSResetHashTable func(objc.ID)
@@ -382,6 +702,39 @@ func NSSearchPathForDirectoriesInDomains(directory SearchPathDirectory, domainMa
 	return purego.NSArrayToSlice(_ret, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+var _fnNSSizeFromCGSize func(corefoundation.CGSize) corefoundation.CGSize
+
+// NSSizeFromCGSize calls the Foundation framework function NSSizeFromCGSize.
+func NSSizeFromCGSize(cgsize corefoundation.CGSize) corefoundation.CGSize {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSizeFromCGSize == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSizeFromCGSize, _lib, "NSSizeFromCGSize")
+	}
+	return _fnNSSizeFromCGSize(cgsize)
+}
+
+var _fnNSSizeFromString func(objc.ID) corefoundation.CGSize
+
+// NSSizeFromString calls the Foundation framework function NSSizeFromString.
+func NSSizeFromString(aString string) corefoundation.CGSize {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSizeFromString == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSizeFromString, _lib, "NSSizeFromString")
+	}
+	return _fnNSSizeFromString(purego.NSString(aString))
+}
+
+var _fnNSSizeToCGSize func(corefoundation.CGSize) corefoundation.CGSize
+
+// NSSizeToCGSize calls the Foundation framework function NSSizeToCGSize.
+func NSSizeToCGSize(nssize corefoundation.CGSize) corefoundation.CGSize {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSizeToCGSize == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSizeToCGSize, _lib, "NSSizeToCGSize")
+	}
+	return _fnNSSizeToCGSize(nssize)
+}
+
 var _fnNSStringFromHashTable func(objc.ID) objc.ID
 
 // NSStringFromHashTable calls the Foundation framework function NSStringFromHashTable.
@@ -406,6 +759,51 @@ func NSStringFromMapTable(table obj.Object) string {
 		ebipurego.RegisterLibFunc(&_fnNSStringFromMapTable, _lib, "NSStringFromMapTable")
 	}
 	_ret := _fnNSStringFromMapTable(objref.IDOf(table))
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
+}
+
+var _fnNSStringFromPoint func(corefoundation.CGPoint) objc.ID
+
+// NSStringFromPoint calls the Foundation framework function NSStringFromPoint.
+func NSStringFromPoint(aPoint corefoundation.CGPoint) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSStringFromPoint == nil {
+		ebipurego.RegisterLibFunc(&_fnNSStringFromPoint, _lib, "NSStringFromPoint")
+	}
+	_ret := _fnNSStringFromPoint(aPoint)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
+}
+
+var _fnNSStringFromRect func(corefoundation.CGRect) objc.ID
+
+// NSStringFromRect calls the Foundation framework function NSStringFromRect.
+func NSStringFromRect(aRect corefoundation.CGRect) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSStringFromRect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSStringFromRect, _lib, "NSStringFromRect")
+	}
+	_ret := _fnNSStringFromRect(aRect)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
+}
+
+var _fnNSStringFromSize func(corefoundation.CGSize) objc.ID
+
+// NSStringFromSize calls the Foundation framework function NSStringFromSize.
+func NSStringFromSize(aSize corefoundation.CGSize) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSStringFromSize == nil {
+		ebipurego.RegisterLibFunc(&_fnNSStringFromSize, _lib, "NSStringFromSize")
+	}
+	_ret := _fnNSStringFromSize(aSize)
 	if _ret == 0 {
 		return ""
 	}
@@ -647,6 +1045,17 @@ func NSTemporaryDirectory() string {
 	return purego.GoString(_ret)
 }
 
+var _fnNSUnionRect func(corefoundation.CGRect, corefoundation.CGRect) corefoundation.CGRect
+
+// NSUnionRect calls the Foundation framework function NSUnionRect.
+func NSUnionRect(aRect corefoundation.CGRect, bRect corefoundation.CGRect) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSUnionRect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSUnionRect, _lib, "NSUnionRect")
+	}
+	return _fnNSUnionRect(aRect, bRect)
+}
+
 var _fnNSUserName func() objc.ID
 
 // NSUserName calls the Foundation framework function NSUserName.
@@ -660,6 +1069,17 @@ func NSUserName() string {
 		return ""
 	}
 	return purego.GoString(_ret)
+}
+
+var _fnNSWidth func(corefoundation.CGRect) float64
+
+// NSWidth calls the Foundation framework function NSWidth.
+func NSWidth(aRect corefoundation.CGRect) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSWidth == nil {
+		ebipurego.RegisterLibFunc(&_fnNSWidth, _lib, "NSWidth")
+	}
+	return _fnNSWidth(aRect)
 }
 
 var _fnNXReadNSObjectFromCoder func(objc.ID) objc.ID

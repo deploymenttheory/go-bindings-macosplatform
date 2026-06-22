@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A sample that stores a prescription for glasses.
-//
 // GlassesPrescription is an idiomatic wrapper over the Objective-C class HKGlassesPrescription.
+//
+// It embeds [VisionPrescription], promoting that type's methods.
+//
+// A sample that stores a prescription for glasses.
 type GlassesPrescription struct {
-	objref.Handle
+	VisionPrescription
 }
 
 // GlassesPrescriptionFromID adopts an existing Objective-C object as a GlassesPrescription
@@ -25,7 +26,8 @@ func GlassesPrescriptionFromID(id objc.ID) *GlassesPrescription {
 	if id == 0 {
 		return nil
 	}
-	x := &GlassesPrescription{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GlassesPrescription{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func glassesPrescriptionAdopt(id objc.ID) *GlassesPrescription {
 	if id == 0 {
 		return nil
 	}
-	x := &GlassesPrescription{Handle: objref.Wrap(id)}
+	x := &GlassesPrescription{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GlassesPrescription) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GlassesPrescription) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GlassesPrescription) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGlassesPrescription creates a new GlassesPrescription.
@@ -64,13 +52,13 @@ func NewGlassesPrescription() *GlassesPrescription {
 	return glassesPrescriptionAdopt(_id)
 }
 
-// The right eye lens specification
+// RightEye the right eye lens specification
 func (x *GlassesPrescription) RightEye() *GlassesLensSpecification {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightEye"))
 	return GlassesLensSpecificationFromID(_r)
 }
 
-// The left eye lens specification
+// LeftEye the left eye lens specification
 func (x *GlassesPrescription) LeftEye() *GlassesLensSpecification {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftEye"))
 	return GlassesLensSpecificationFromID(_r)
@@ -84,3 +72,9 @@ type GlassesPrescriptionable interface {
 }
 
 var _ GlassesPrescriptionable = (*GlassesPrescription)(nil)
+
+var _ VisionPrescriptionProvider = (*GlassesPrescription)(nil)
+
+var _ SampleProvider = (*GlassesPrescription)(nil)
+
+var _ ObjectProvider = (*GlassesPrescription)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents membership activity for a highlight.
-//
 // HighlightMembershipEvent is an idiomatic wrapper over the Objective-C class SWHighlightMembershipEvent.
+//
+// An object that represents membership activity for a highlight.
 type HighlightMembershipEvent struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func HighlightMembershipEventFromID(id objc.ID) *HighlightMembershipEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &HighlightMembershipEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HighlightMembershipEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func highlightMembershipEventAdopt(id objc.ID) *HighlightMembershipEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &HighlightMembershipEvent{Handle: objref.Wrap(id)}
+	x := &HighlightMembershipEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,16 +60,20 @@ func (x *HighlightMembershipEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates and initializes a membership event.
-//
-// NewHighlightMembershipEventWithHighlightTrigger creates a new HighlightMembershipEvent.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HighlightMembershipEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewHighlightMembershipEventWithHighlightTrigger creates and initializes a membership event.
 func NewHighlightMembershipEventWithHighlightTrigger(highlight *Highlight, trigger HighlightMembershipEventTrigger) *HighlightMembershipEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWHighlightMembershipEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:trigger:"), objref.IDOf(highlight), trigger)
 	return highlightMembershipEventAdopt(_id)
 }
 
-// The type of membership event for the highlight.
+// MembershipEventTrigger the type of membership event for the highlight.
 func (x *HighlightMembershipEvent) MembershipEventTrigger() HighlightMembershipEventTrigger {
 	_r := objc.Send[HighlightMembershipEventTrigger](objref.IDOf(x), objc.RegisterName("membershipEventTrigger"))
 	return _r

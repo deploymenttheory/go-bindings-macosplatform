@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that outputs a probability distribution as attention weights.
-//
 // SoftmaxLayer is an idiomatic wrapper over the Objective-C class MLCSoftmaxLayer.
+//
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that outputs a probability distribution as attention weights.
 type SoftmaxLayer struct {
-	objref.Handle
+	Layer
 }
 
 // SoftmaxLayerFromID adopts an existing Objective-C object as a SoftmaxLayer
@@ -25,7 +26,8 @@ func SoftmaxLayerFromID(id objc.ID) *SoftmaxLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &SoftmaxLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SoftmaxLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func softmaxLayerAdopt(id objc.ID) *SoftmaxLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &SoftmaxLayer{Handle: objref.Wrap(id)}
+	x := &SoftmaxLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SoftmaxLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SoftmaxLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SoftmaxLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSoftmaxLayer creates a new SoftmaxLayer.
@@ -64,29 +52,25 @@ func NewSoftmaxLayer() *SoftmaxLayer {
 	return softmaxLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string that helps identify this layer.
 func (x *SoftmaxLayer) WithLabel(label string) *SoftmaxLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *SoftmaxLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SoftmaxLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// The softmax operation.  Supported values are softmax and log softmax.
+// Operation the softmax operation.  Supported values are softmax and log softmax.
 func (x *SoftmaxLayer) Operation() SoftmaxOperation {
 	_r := objc.Send[SoftmaxOperation](objref.IDOf(x), objc.RegisterName("operation"))
 	return _r
 }
 
-// The  dimension over which softmax operation should be performed
+// Dimension the  dimension over which softmax operation should be performed
 func (x *SoftmaxLayer) Dimension() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dimension"))
 	return _r
@@ -102,3 +86,5 @@ type SoftmaxLayerable interface {
 }
 
 var _ SoftmaxLayerable = (*SoftmaxLayer)(nil)
+
+var _ LayerProvider = (*SoftmaxLayer)(nil)

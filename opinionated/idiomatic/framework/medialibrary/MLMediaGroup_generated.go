@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The MLMediaGroup class provides groupings for media objects from a single source of media, such as iTunes or Aperture. The media objects—individual files containing a piece of media such as a photo, song, or movie—are referenced by one or more groups within each media source. These groupings serve as filters, providing hierarchical structure to the collection of objects in each source.
-//
 // MediaGroup is an idiomatic wrapper over the Objective-C class MLMediaGroup.
+//
+// The MLMediaGroup class provides groupings for media objects from a single source of media, such as iTunes or Aperture. The media objects—individual files containing a piece of media such as a photo, song, or movie—are referenced by one or more groups within each media source. These groupings serve as filters, providing hierarchical structure to the collection of objects in each source.
 type MediaGroup struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MediaGroupFromID(id objc.ID) *MediaGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaGroup{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MediaGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mediaGroupAdopt(id objc.ID) *MediaGroup {
 	if id == 0 {
 		return nil
 	}
-	x := &MediaGroup{Handle: objref.Wrap(id)}
+	x := &MediaGroup{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,31 @@ func (x *MediaGroup) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MediaGroup) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMediaGroup creates a new MediaGroup.
 func NewMediaGroup() *MediaGroup {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLMediaGroup")), objc.RegisterName("new"))
 	return mediaGroupAdopt(_id)
 }
 
+// MediaLibrary wraps the corresponding Objective-C method.
 func (x *MediaGroup) MediaLibrary() *MediaLibrary {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaLibrary"))
 	return MediaLibraryFromID(_r)
 }
 
+// Parent wraps the corresponding Objective-C method.
 func (x *MediaGroup) Parent() *MediaGroup {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parent"))
 	return MediaGroupFromID(_r)
 }
 
+// MediaSourceIdentifier wraps the corresponding Objective-C method.
 func (x *MediaGroup) MediaSourceIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSourceIdentifier"))
 	if _r == 0 {
@@ -82,6 +93,7 @@ func (x *MediaGroup) MediaSourceIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *MediaGroup) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -90,6 +102,7 @@ func (x *MediaGroup) Name() string {
 	return purego.GoString(_r)
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *MediaGroup) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -98,6 +111,7 @@ func (x *MediaGroup) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// TypeIdentifier wraps the corresponding Objective-C method.
 func (x *MediaGroup) TypeIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typeIdentifier"))
 	if _r == 0 {
@@ -106,32 +120,40 @@ func (x *MediaGroup) TypeIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// Attributes wraps the corresponding Objective-C method.
 func (x *MediaGroup) Attributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
+// ChildGroups wraps the corresponding Objective-C method.
+//
 // ChildGroups returns the collection as a Go slice.
 func (x *MediaGroup) ChildGroups() []*MediaGroup {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("childGroups"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaGroup { return MediaGroupFromID(_id) })
 }
 
+// URL wraps the corresponding Objective-C method.
 func (x *MediaGroup) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
+// ModificationDate wraps the corresponding Objective-C method.
 func (x *MediaGroup) ModificationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modificationDate"))
 	return obj.Wrap(_r)
 }
 
+// IconImage wraps the corresponding Objective-C method.
 func (x *MediaGroup) IconImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iconImage"))
 	return obj.Wrap(_r)
 }
 
+// MediaObjects wraps the corresponding Objective-C method.
+//
 // MediaObjects returns the collection as a Go slice.
 func (x *MediaGroup) MediaObjects() []*MediaObject {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaObjects"))

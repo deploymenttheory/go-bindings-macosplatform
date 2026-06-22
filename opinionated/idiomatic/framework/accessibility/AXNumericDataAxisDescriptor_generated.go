@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents an axis of numerical data.
-//
 // NumericDataAxisDescriptor is an idiomatic wrapper over the Objective-C class AXNumericDataAxisDescriptor.
+//
+// An object that represents an axis of numerical data.
 type NumericDataAxisDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NumericDataAxisDescriptorFromID(id objc.ID) *NumericDataAxisDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &NumericDataAxisDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NumericDataAxisDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func numericDataAxisDescriptorAdopt(id objc.ID) *NumericDataAxisDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &NumericDataAxisDescriptor{Handle: objref.Wrap(id)}
+	x := &NumericDataAxisDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,76 +60,77 @@ func (x *NumericDataAxisDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NumericDataAxisDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNumericDataAxisDescriptor creates a new NumericDataAxisDescriptor.
 func NewNumericDataAxisDescriptor() *NumericDataAxisDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("AXNumericDataAxisDescriptor")), objc.RegisterName("new"))
 	return numericDataAxisDescriptorAdopt(_id)
 }
 
-// The scale for the axis.
-//
-// WithScaleType sets scaleType and returns the receiver so calls can be chained.
+// WithScaleType the scale for the axis.
 func (x *NumericDataAxisDescriptor) WithScaleType(scaleType NumericDataAxisDescriptorScale) *NumericDataAxisDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleType:"), scaleType)
 	return x
 }
 
-// The minimum displayable value for the axis.
-//
-// WithLowerBound sets lowerBound and returns the receiver so calls can be chained.
+// WithLowerBound the minimum displayable value for the axis.
 func (x *NumericDataAxisDescriptor) WithLowerBound(lowerBound float64) *NumericDataAxisDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowerBound:"), lowerBound)
 	return x
 }
 
-// The maximum displayable value for the axis.
-//
-// WithUpperBound sets upperBound and returns the receiver so calls can be chained.
+// WithUpperBound the maximum displayable value for the axis.
 func (x *NumericDataAxisDescriptor) WithUpperBound(upperBound float64) *NumericDataAxisDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperBound:"), upperBound)
 	return x
 }
 
-// The positions of the gridlines along the axis.
-//
-// WithGridlinePositions sets the collection and returns the receiver so calls can be chained.
+// WithGridlinePositions the positions of the gridlines along the axis.
 func (x *NumericDataAxisDescriptor) WithGridlinePositions(items ...obj.Object) *NumericDataAxisDescriptor {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGridlinePositions:"), _arr)
 	return x
 }
 
-// The scale to use for this axis. This should match the visual representation in the chart. If not set explicitly, this will default to `linear`.
+// ScaleType the scale to use for this axis. This should match the visual representation in the chart. If not set explicitly, this will default to `linear`.
 func (x *NumericDataAxisDescriptor) ScaleType() NumericDataAxisDescriptorScale {
 	_r := objc.Send[NumericDataAxisDescriptorScale](objref.IDOf(x), objc.RegisterName("scaleType"))
 	return _r
 }
 
+// SetScaleType wraps the corresponding Objective-C method.
 func (x *NumericDataAxisDescriptor) SetScaleType(scaleType NumericDataAxisDescriptorScale) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleType:"), scaleType)
 }
 
-// The minimum displayable value for the axis.
+// LowerBound the minimum displayable value for the axis.
 func (x *NumericDataAxisDescriptor) LowerBound() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lowerBound"))
 	return _r
 }
 
+// SetLowerBound wraps the corresponding Objective-C method.
 func (x *NumericDataAxisDescriptor) SetLowerBound(lowerBound float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowerBound:"), lowerBound)
 }
 
-// The maximum displayable value for the axis.
+// UpperBound the maximum displayable value for the axis.
 func (x *NumericDataAxisDescriptor) UpperBound() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("upperBound"))
 	return _r
 }
 
+// SetUpperBound wraps the corresponding Objective-C method.
 func (x *NumericDataAxisDescriptor) SetUpperBound(upperBound float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperBound:"), upperBound)
 }
 
-// The positions of any gridlines along this axis.
+// GridlinePositions the positions of any gridlines along this axis.
 //
 // GridlinePositions returns the collection as a Go slice.
 func (x *NumericDataAxisDescriptor) GridlinePositions() []obj.Object {
@@ -135,6 +138,7 @@ func (x *NumericDataAxisDescriptor) GridlinePositions() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetGridlinePositions wraps the corresponding Objective-C method.
 func (x *NumericDataAxisDescriptor) SetGridlinePositions(gridlinePositions []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGridlinePositions:"), purego.SliceToNSArray(gridlinePositions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A MDLVertexBufferLayout object describes layout information for a vertex buffer in a MDLMesh object. A collection of vertex layer objects, vertex attribute objects, and additional information forms a MDLVertexDescriptor object, which completely describes the layout of vertex buffers for a mesh.
-//
 // VertexBufferLayout is an idiomatic wrapper over the Objective-C class MDLVertexBufferLayout.
+//
+// A MDLVertexBufferLayout object describes layout information for a vertex buffer in a MDLMesh object. A collection of vertex layer objects, vertex attribute objects, and additional information forms a MDLVertexDescriptor object, which completely describes the layout of vertex buffers for a mesh.
 type VertexBufferLayout struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VertexBufferLayoutFromID(id objc.ID) *VertexBufferLayout {
 	if id == 0 {
 		return nil
 	}
-	x := &VertexBufferLayout{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VertexBufferLayout{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func vertexBufferLayoutAdopt(id objc.ID) *VertexBufferLayout {
 	if id == 0 {
 		return nil
 	}
-	x := &VertexBufferLayout{Handle: objref.Wrap(id)}
+	x := &VertexBufferLayout{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +60,12 @@ func (x *VertexBufferLayout) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VertexBufferLayout) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVertexBufferLayoutWithStride creates a new VertexBufferLayout.
 func NewVertexBufferLayoutWithStride(stride int) *VertexBufferLayout {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLVertexBufferLayout")), objc.RegisterName("alloc"))
@@ -65,19 +73,19 @@ func NewVertexBufferLayoutWithStride(stride int) *VertexBufferLayout {
 	return vertexBufferLayoutAdopt(_id)
 }
 
-// The stride, in bytes, between data for separate vertices in a vertex buffer.
-//
-// WithStride sets stride and returns the receiver so calls can be chained.
+// WithStride the stride, in bytes, between data for separate vertices in a vertex buffer.
 func (x *VertexBufferLayout) WithStride(stride int) *VertexBufferLayout {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStride:"), stride)
 	return x
 }
 
+// Stride wraps the corresponding Objective-C method.
 func (x *VertexBufferLayout) Stride() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stride"))
 	return _r
 }
 
+// SetStride wraps the corresponding Objective-C method.
 func (x *VertexBufferLayout) SetStride(stride int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStride:"), stride)
 }

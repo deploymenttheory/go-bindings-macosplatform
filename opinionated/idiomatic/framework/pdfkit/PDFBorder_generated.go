@@ -6,15 +6,16 @@ package pdfkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An optional border for an annotation that lies completely within the annotation rectangle.
-//
 // Border is an idiomatic wrapper over the Objective-C class PDFBorder.
+//
+// An optional border for an annotation that lies completely within the annotation rectangle.
 type Border struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func BorderFromID(id objc.ID) *Border {
 	if id == 0 {
 		return nil
 	}
-	x := &Border{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Border{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func borderAdopt(id objc.ID) *Border {
 	if id == 0 {
 		return nil
 	}
-	x := &Border{Handle: objref.Wrap(id)}
+	x := &Border{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,55 +61,69 @@ func (x *Border) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Border) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBorder creates a new Border.
 func NewBorder() *Border {
 	_id := objc.Send[objc.ID](objc.ID(_class("PDFBorder")), objc.RegisterName("new"))
 	return borderAdopt(_id)
 }
 
-// Sets the border style.
-//
-// WithStyle sets style and returns the receiver so calls can be chained.
+// WithStyle sets the border style.
 func (x *Border) WithStyle(style BorderStyle) *Border {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 	return x
 }
 
-// Sets the line width (in points) for the border.
-//
-// WithLineWidth sets lineWidth and returns the receiver so calls can be chained.
+// WithLineWidth sets the line width (in points) for the border.
 func (x *Border) WithLineWidth(lineWidth float64) *Border {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
 	return x
 }
 
+// DrawInRect draws the border.
+func (x *Border) DrawInRect(rect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawInRect:"), rect)
+}
+
+// Style wraps the corresponding Objective-C method.
 func (x *Border) Style() BorderStyle {
 	_r := objc.Send[BorderStyle](objref.IDOf(x), objc.RegisterName("style"))
 	return _r
 }
 
+// SetStyle wraps the corresponding Objective-C method.
 func (x *Border) SetStyle(style BorderStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 }
 
+// LineWidth wraps the corresponding Objective-C method.
 func (x *Border) LineWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lineWidth"))
 	return _r
 }
 
+// SetLineWidth wraps the corresponding Objective-C method.
 func (x *Border) SetLineWidth(lineWidth float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
 }
 
+// DashPattern wraps the corresponding Objective-C method.
 func (x *Border) DashPattern() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dashPattern"))
 	return obj.Wrap(_r)
 }
 
+// SetDashPattern wraps the corresponding Objective-C method.
 func (x *Border) SetDashPattern(dashPattern obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDashPattern:"), objref.IDOf(dashPattern))
 }
 
+// BorderKeyValues wraps the corresponding Objective-C method.
 func (x *Border) BorderKeyValues() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderKeyValues"))
 	return obj.Wrap(_r)
@@ -117,6 +134,7 @@ type Borderable interface {
 	obj.Object
 	WithStyle(style BorderStyle) *Border
 	WithLineWidth(lineWidth float64) *Border
+	DrawInRect(rect corefoundation.CGRect)
 	Style() BorderStyle
 	SetStyle(style BorderStyle)
 	LineWidth() float64

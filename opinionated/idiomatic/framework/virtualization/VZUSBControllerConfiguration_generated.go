@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for a USB controller configuration.
-//
 // USBControllerConfiguration is an idiomatic wrapper over the Objective-C class VZUSBControllerConfiguration.
+//
+// USBControllerConfiguration is an abstract base — you do not construct it directly. Construct one of [XHCIControllerConfiguration] and pass it where a USBControllerConfiguration is accepted.
+//
+// The base class for a USB controller configuration.
 type USBControllerConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func USBControllerConfigurationFromID(id objc.ID) *USBControllerConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &USBControllerConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &USBControllerConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func uSBControllerConfigurationAdopt(id objc.ID) *USBControllerConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &USBControllerConfiguration{Handle: objref.Wrap(id)}
+	x := &USBControllerConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +62,19 @@ func (x *USBControllerConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewUSBControllerConfiguration creates a new USBControllerConfiguration.
-func NewUSBControllerConfiguration() *USBControllerConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZUSBControllerConfiguration")), objc.RegisterName("new"))
-	return uSBControllerConfigurationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *USBControllerConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// UsbDevices wraps the corresponding Objective-C method.
 func (x *USBControllerConfiguration) UsbDevices() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("usbDevices"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetUsbDevices wraps the corresponding Objective-C method.
 func (x *USBControllerConfiguration) SetUsbDevices(usbDevices []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsbDevices:"), purego.SliceToNSArray(usbDevices, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
@@ -81,3 +87,10 @@ type USBControllerConfigurationable interface {
 }
 
 var _ USBControllerConfigurationable = (*USBControllerConfiguration)(nil)
+
+// isUSBControllerConfiguration marks USBControllerConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the USBControllerConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *USBControllerConfiguration) isUSBControllerConfiguration() {}
+
+var _ USBControllerConfigurationProvider = (*USBControllerConfiguration)(nil)

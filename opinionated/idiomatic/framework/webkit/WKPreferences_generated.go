@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that encapsulates the standard behaviors to apply to websites.
-//
 // WKPreferences is an idiomatic wrapper over the Objective-C class WKPreferences.
+//
+// An object that encapsulates the standard behaviors to apply to websites.
 type WKPreferences struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKPreferencesFromID(id objc.ID) *WKPreferences {
 	if id == 0 {
 		return nil
 	}
-	x := &WKPreferences{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKPreferences{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKPreferencesAdopt(id objc.ID) *WKPreferences {
 	if id == 0 {
 		return nil
 	}
-	x := &WKPreferences{Handle: objref.Wrap(id)}
+	x := &WKPreferences{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,221 +60,218 @@ func (x *WKPreferences) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKPreferences) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKPreferences creates a new WKPreferences.
 func NewWKPreferences() *WKPreferences {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKPreferences")), objc.RegisterName("new"))
 	return wKPreferencesAdopt(_id)
 }
 
-// The minimum font size, in points.
-//
-// WithMinimumFontSize sets minimumFontSize and returns the receiver so calls can be chained.
+// WithMinimumFontSize the minimum font size, in points.
 func (x *WKPreferences) WithMinimumFontSize(minimumFontSize float64) *WKPreferences {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumFontSize:"), minimumFontSize)
 	return x
 }
 
-// A Boolean value that indicates whether JavaScript can open windows without user interaction.
-//
-// WithJavaScriptCanOpenWindowsAutomatically sets javaScriptCanOpenWindowsAutomatically and returns the receiver so calls can be chained.
+// WithJavaScriptCanOpenWindowsAutomatically a Boolean value that indicates whether JavaScript can open windows without user interaction.
 func (x *WKPreferences) WithJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically bool) *WKPreferences {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJavaScriptCanOpenWindowsAutomatically:"), javaScriptCanOpenWindowsAutomatically)
 	return x
 }
 
-// A Boolean value that indicates whether the web view shows warnings for suspected fraudulent content, such as malware or phishing attemps.
-//
-// WithFraudulentWebsiteWarningEnabled sets fraudulentWebsiteWarningEnabled and returns the receiver so calls can be chained.
+// WithFraudulentWebsiteWarningEnabled a Boolean value that indicates whether the web view shows warnings for suspected fraudulent content, such as malware or phishing attemps.
 func (x *WKPreferences) WithFraudulentWebsiteWarningEnabled(fraudulentWebsiteWarningEnabled bool) *WKPreferences {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFraudulentWebsiteWarningEnabled:"), fraudulentWebsiteWarningEnabled)
 	return x
 }
 
-// A Boolean value that indicates whether to include any background color or graphics when printing content.
-//
-// WithShouldPrintBackgrounds sets shouldPrintBackgrounds and returns the receiver so calls can be chained.
+// WithShouldPrintBackgrounds a Boolean value that indicates whether to include any background color or graphics when printing content.
 func (x *WKPreferences) WithShouldPrintBackgrounds(shouldPrintBackgrounds bool) *WKPreferences {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldPrintBackgrounds:"), shouldPrintBackgrounds)
 	return x
 }
 
-// A Boolean value that indicates whether pressing the tab key changes the focus to links and form controls.
-//
-// WithTabFocusesLinks sets tabFocusesLinks and returns the receiver so calls can be chained.
+// WithTabFocusesLinks a Boolean value that indicates whether pressing the tab key changes the focus to links and form controls.
 func (x *WKPreferences) WithTabFocusesLinks(tabFocusesLinks bool) *WKPreferences {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabFocusesLinks:"), tabFocusesLinks)
 	return x
 }
 
-// A Boolean value that indicates whether to allow people to select or otherwise interact with text.
-//
-// WithTextInteractionEnabled sets textInteractionEnabled and returns the receiver so calls can be chained.
+// WithTextInteractionEnabled a Boolean value that indicates whether to allow people to select or otherwise interact with text.
 func (x *WKPreferences) WithTextInteractionEnabled(textInteractionEnabled bool) *WKPreferences {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextInteractionEnabled:"), textInteractionEnabled)
 	return x
 }
 
-// A Boolean that indicates whether to apply site-specific compatibility workarounds.
-//
-// WithSiteSpecificQuirksModeEnabled sets siteSpecificQuirksModeEnabled and returns the receiver so calls can be chained.
+// WithSiteSpecificQuirksModeEnabled a Boolean that indicates whether to apply site-specific compatibility workarounds.
 func (x *WKPreferences) WithSiteSpecificQuirksModeEnabled(siteSpecificQuirksModeEnabled bool) *WKPreferences {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSiteSpecificQuirksModeEnabled:"), siteSpecificQuirksModeEnabled)
 	return x
 }
 
-// A Boolean value that indicates whether a web view can display content full screen.
-//
-// WithElementFullscreenEnabled sets elementFullscreenEnabled and returns the receiver so calls can be chained.
+// WithElementFullscreenEnabled a Boolean value that indicates whether a web view can display content full screen.
 func (x *WKPreferences) WithElementFullscreenEnabled(elementFullscreenEnabled bool) *WKPreferences {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElementFullscreenEnabled:"), elementFullscreenEnabled)
 	return x
 }
 
-// A policy you set to specify how a web view that’s not in a window handles tasks.
-//
-// WithInactiveSchedulingPolicy sets inactiveSchedulingPolicy and returns the receiver so calls can be chained.
+// WithInactiveSchedulingPolicy a policy you set to specify how a web view that’s not in a window handles tasks.
 func (x *WKPreferences) WithInactiveSchedulingPolicy(inactiveSchedulingPolicy WKInactiveSchedulingPolicy) *WKPreferences {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInactiveSchedulingPolicy:"), inactiveSchedulingPolicy)
 	return x
 }
 
-// A Boolean value that indicates whether Java is enabled.
-//
-// WithJavaEnabled sets javaEnabled and returns the receiver so calls can be chained.
+// WithJavaEnabled a Boolean value that indicates whether Java is enabled.
 func (x *WKPreferences) WithJavaEnabled(javaEnabled bool) *WKPreferences {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJavaEnabled:"), javaEnabled)
 	return x
 }
 
-// A Boolean value that indicates whether plug-ins are enabled.
-//
-// WithPlugInsEnabled sets plugInsEnabled and returns the receiver so calls can be chained.
+// WithPlugInsEnabled a Boolean value that indicates whether plug-ins are enabled.
 func (x *WKPreferences) WithPlugInsEnabled(plugInsEnabled bool) *WKPreferences {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlugInsEnabled:"), plugInsEnabled)
 	return x
 }
 
-// A Boolean value that indicates whether JavaScript is enabled.
-//
-// WithJavaScriptEnabled sets javaScriptEnabled and returns the receiver so calls can be chained.
+// WithJavaScriptEnabled a Boolean value that indicates whether JavaScript is enabled.
 func (x *WKPreferences) WithJavaScriptEnabled(javaScriptEnabled bool) *WKPreferences {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJavaScriptEnabled:"), javaScriptEnabled)
 	return x
 }
 
-// The minimum font size in points. The default value is 0.
+// MinimumFontSize the minimum font size in points. The default value is 0.
 func (x *WKPreferences) MinimumFontSize() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumFontSize"))
 	return _r
 }
 
+// SetMinimumFontSize wraps the corresponding Objective-C method.
 func (x *WKPreferences) SetMinimumFontSize(minimumFontSize float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumFontSize:"), minimumFontSize)
 }
 
-// A Boolean value indicating whether JavaScript can open windows without user interaction. The default value is NO in iOS and YES in OS X.
+// JavaScriptCanOpenWindowsAutomatically a Boolean value indicating whether JavaScript can open windows without user interaction. The default value is NO in iOS and YES in OS X.
 func (x *WKPreferences) JavaScriptCanOpenWindowsAutomatically() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("javaScriptCanOpenWindowsAutomatically"))
 	return _r
 }
 
+// SetJavaScriptCanOpenWindowsAutomatically wraps the corresponding Objective-C method.
 func (x *WKPreferences) SetJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJavaScriptCanOpenWindowsAutomatically:"), javaScriptCanOpenWindowsAutomatically)
 }
 
-// A Boolean value indicating whether warnings should be shown for suspected fraudulent content such as phishing or malware. The default value is YES.
+// IsFraudulentWebsiteWarningEnabled a Boolean value indicating whether warnings should be shown for suspected fraudulent content such as phishing or malware. The default value is YES.
 func (x *WKPreferences) IsFraudulentWebsiteWarningEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFraudulentWebsiteWarningEnabled"))
 	return _r
 }
 
+// SetFraudulentWebsiteWarningEnabled wraps the corresponding Objective-C method.
 func (x *WKPreferences) SetFraudulentWebsiteWarningEnabled(fraudulentWebsiteWarningEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFraudulentWebsiteWarningEnabled:"), fraudulentWebsiteWarningEnabled)
 }
 
-// A Boolean value indicating whether the web view should include backgrounds when printing. The default value is `NO`.
+// ShouldPrintBackgrounds a Boolean value indicating whether the web view should include backgrounds when printing. The default value is `NO`.
 func (x *WKPreferences) ShouldPrintBackgrounds() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldPrintBackgrounds"))
 	return _r
 }
 
+// SetShouldPrintBackgrounds wraps the corresponding Objective-C method.
 func (x *WKPreferences) SetShouldPrintBackgrounds(shouldPrintBackgrounds bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldPrintBackgrounds:"), shouldPrintBackgrounds)
 }
 
-// If tabFocusesLinks is YES, the tab key will focus links and form controls. The Option key temporarily reverses this preference.
+// TabFocusesLinks if tabFocusesLinks is YES, the tab key will focus links and form controls. The Option key temporarily reverses this preference.
 func (x *WKPreferences) TabFocusesLinks() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("tabFocusesLinks"))
 	return _r
 }
 
+// SetTabFocusesLinks wraps the corresponding Objective-C method.
 func (x *WKPreferences) SetTabFocusesLinks(tabFocusesLinks bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabFocusesLinks:"), tabFocusesLinks)
 }
 
-// A Boolean value indicating whether text interaction is disabled.
+// IsTextInteractionEnabled a Boolean value indicating whether text interaction is disabled.
 func (x *WKPreferences) IsTextInteractionEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTextInteractionEnabled"))
 	return _r
 }
 
+// SetTextInteractionEnabled wraps the corresponding Objective-C method.
 func (x *WKPreferences) SetTextInteractionEnabled(textInteractionEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextInteractionEnabled:"), textInteractionEnabled)
 }
 
-// A Boolean value indicating whether WebKit will apply built-in workarounds (quirks) to improve compatibility with certain known websites. You can disable site-specific quirks to help test your website without these workarounds. Enabled by default.
+// IsSiteSpecificQuirksModeEnabled a Boolean value indicating whether WebKit will apply built-in workarounds (quirks) to improve compatibility with certain known websites. You can disable site-specific quirks to help test your website without these workarounds. Enabled by default.
 func (x *WKPreferences) IsSiteSpecificQuirksModeEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSiteSpecificQuirksModeEnabled"))
 	return _r
 }
 
+// SetSiteSpecificQuirksModeEnabled wraps the corresponding Objective-C method.
 func (x *WKPreferences) SetSiteSpecificQuirksModeEnabled(siteSpecificQuirksModeEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSiteSpecificQuirksModeEnabled:"), siteSpecificQuirksModeEnabled)
 }
 
-// A Boolean value indicating whether Fullscreen API is enabled. The default value is NO. We can set it to YES to enable support for the fullscreen API.
+// IsElementFullscreenEnabled a Boolean value indicating whether Fullscreen API is enabled. The default value is NO. We can set it to YES to enable support for the fullscreen API.
 func (x *WKPreferences) IsElementFullscreenEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isElementFullscreenEnabled"))
 	return _r
 }
 
+// SetElementFullscreenEnabled wraps the corresponding Objective-C method.
 func (x *WKPreferences) SetElementFullscreenEnabled(elementFullscreenEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElementFullscreenEnabled:"), elementFullscreenEnabled)
 }
 
-// Specify the scheduling policy for the web view when it is inactive and detached from the view hierarchy. Web views are not considered idle when playing media or loading web pages. A suspended web view will pause JavaScript execution and page layout.
+// InactiveSchedulingPolicy specify the scheduling policy for the web view when it is inactive and detached from the view hierarchy. Web views are not considered idle when playing media or loading web pages. A suspended web view will pause JavaScript execution and page layout.
 func (x *WKPreferences) InactiveSchedulingPolicy() WKInactiveSchedulingPolicy {
 	_r := objc.Send[WKInactiveSchedulingPolicy](objref.IDOf(x), objc.RegisterName("inactiveSchedulingPolicy"))
 	return _r
 }
 
+// SetInactiveSchedulingPolicy wraps the corresponding Objective-C method.
 func (x *WKPreferences) SetInactiveSchedulingPolicy(inactiveSchedulingPolicy WKInactiveSchedulingPolicy) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInactiveSchedulingPolicy:"), inactiveSchedulingPolicy)
 }
 
+// JavaEnabled wraps the corresponding Objective-C method.
 func (x *WKPreferences) JavaEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("javaEnabled"))
 	return _r
 }
 
+// SetJavaEnabled wraps the corresponding Objective-C method.
 func (x *WKPreferences) SetJavaEnabled(javaEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJavaEnabled:"), javaEnabled)
 }
 
+// PlugInsEnabled wraps the corresponding Objective-C method.
 func (x *WKPreferences) PlugInsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("plugInsEnabled"))
 	return _r
 }
 
+// SetPlugInsEnabled wraps the corresponding Objective-C method.
 func (x *WKPreferences) SetPlugInsEnabled(plugInsEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlugInsEnabled:"), plugInsEnabled)
 }
 
+// JavaScriptEnabled wraps the corresponding Objective-C method.
 func (x *WKPreferences) JavaScriptEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("javaScriptEnabled"))
 	return _r
 }
 
+// SetJavaScriptEnabled wraps the corresponding Objective-C method.
 func (x *WKPreferences) SetJavaScriptEnabled(javaScriptEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJavaScriptEnabled:"), javaScriptEnabled)
 }

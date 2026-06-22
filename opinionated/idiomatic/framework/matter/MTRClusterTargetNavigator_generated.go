@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterTargetNavigator is an idiomatic wrapper over the Objective-C class MTRClusterTargetNavigator.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterTargetNavigator struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterTargetNavigatorFromID adopts an existing Objective-C object as a MTRClusterTargetNavigator
@@ -25,7 +26,8 @@ func MTRClusterTargetNavigatorFromID(id objc.ID) *MTRClusterTargetNavigator {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterTargetNavigator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterTargetNavigator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func mTRClusterTargetNavigatorAdopt(id objc.ID) *MTRClusterTargetNavigator {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterTargetNavigator{Handle: objref.Wrap(id)}
+	x := &MTRClusterTargetNavigator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterTargetNavigator) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterTargetNavigator) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterTargetNavigator) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterTargetNavigatorWithDeviceEndpointIDQueue creates a new MTRClusterTargetNavigator.
+// NewMTRClusterTargetNavigatorWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterTargetNavigatorWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterTargetNavigator {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterTargetNavigator")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -74,8 +60,10 @@ func NewMTRClusterTargetNavigatorWithDeviceEndpointQueue(device *MTRDevice, endp
 	return mTRClusterTargetNavigatorAdopt(_id)
 }
 
+// NavigateTargetWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // NavigateTargetWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTargetNavigator) NavigateTargetWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRTargetNavigatorClusterNavigateTargetParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTargetNavigatorClusterNavigateTargetResponseParams, error) {
+func (x *MTRClusterTargetNavigator) NavigateTargetWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRTargetNavigatorClusterNavigateTargetParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTargetNavigatorClusterNavigateTargetResponseParams, err error) {
 	type _result struct {
 		val *MTRTargetNavigatorClusterNavigateTargetResponseParams
 		err error
@@ -97,43 +85,52 @@ func (x *MTRClusterTargetNavigator) NavigateTargetWithParamsExpectedValuesExpect
 	}
 }
 
+// ReadAttributeTargetListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTargetNavigator) ReadAttributeTargetListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTargetListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeCurrentTargetWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTargetNavigator) ReadAttributeCurrentTargetWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentTargetWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTargetNavigator) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTargetNavigator) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTargetNavigator) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTargetNavigator) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterTargetNavigator) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// NavigateTargetWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // NavigateTargetWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTargetNavigator) NavigateTargetWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTargetNavigatorClusterNavigateTargetParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTargetNavigatorClusterNavigateTargetResponseParams, error) {
+func (x *MTRClusterTargetNavigator) NavigateTargetWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTargetNavigatorClusterNavigateTargetParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTargetNavigatorClusterNavigateTargetResponseParams, err error) {
 	type _result struct {
 		val *MTRTargetNavigatorClusterNavigateTargetResponseParams
 		err error
@@ -170,3 +167,7 @@ type MTRClusterTargetNavigatorable interface {
 }
 
 var _ MTRClusterTargetNavigatorable = (*MTRClusterTargetNavigator)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterTargetNavigator)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterTargetNavigator)(nil)

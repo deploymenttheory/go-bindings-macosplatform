@@ -17,6 +17,8 @@ const (
 	AssetTypeStreamed AssetType = 1
 )
 
+// String returns the AssetType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AssetType) String() string {
 	switch e {
 	case AssetTypeResident:
@@ -36,6 +38,8 @@ const (
 	AutomaticHeadTrackingFlagPosition    AutomaticHeadTrackingFlags = 2
 )
 
+// String returns the AutomaticHeadTrackingFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AutomaticHeadTrackingFlags) String() string {
 	var parts []string
 	if e&AutomaticHeadTrackingFlagOrientation != 0 {
@@ -62,6 +66,8 @@ const (
 	CalibrationModeAbsoluteSpl CalibrationMode = 2
 )
 
+// String returns the CalibrationMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CalibrationMode) String() string {
 	switch e {
 	case CalibrationModeNone:
@@ -91,6 +97,8 @@ const (
 	CullOptionDoNotCull CullOption = 4
 )
 
+// String returns the CullOption constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CullOption) String() string {
 	switch e {
 	case CullOptionTerminate:
@@ -136,6 +144,8 @@ const (
 	CurveTypeJumpToEndValue CurveType = 1668434501
 )
 
+// String returns the CurveType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CurveType) String() string {
 	switch e {
 	case CurveTypeLinear:
@@ -183,6 +193,8 @@ const (
 	MaterialPresetWood MaterialPreset = 1834448228
 )
 
+// String returns the MaterialPreset constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MaterialPreset) String() string {
 	switch e {
 	case MaterialPresetCardboard:
@@ -209,6 +221,8 @@ const (
 	MediumPresetAir MediumPreset = 1835286898
 )
 
+// String returns the MediumPreset constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MediumPreset) String() string {
 	switch e {
 	case MediumPresetAir:
@@ -228,6 +242,8 @@ const (
 	NormalizationModeDynamic NormalizationMode = 1
 )
 
+// String returns the NormalizationMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NormalizationMode) String() string {
 	switch e {
 	case NormalizationModeNone:
@@ -249,6 +265,8 @@ const (
 	PlaybackModeLooping PlaybackMode = 1
 )
 
+// String returns the PlaybackMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PlaybackMode) String() string {
 	switch e {
 	case PlaybackModeOneShot:
@@ -275,6 +293,8 @@ const (
 	PushStreamBufferInterruptsAtLoop PushStreamBufferOptions = 8
 )
 
+// String returns the PushStreamBufferOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PushStreamBufferOptions) String() string {
 	var parts []string
 	if e&PushStreamBufferDefault != 0 {
@@ -303,6 +323,8 @@ const (
 	PushStreamCompletionDataRendered PushStreamCompletionCallbackCondition = 0
 )
 
+// String returns the PushStreamCompletionCallbackCondition constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PushStreamCompletionCallbackCondition) String() string {
 	switch e {
 	case PushStreamCompletionDataRendered:
@@ -321,6 +343,8 @@ const (
 	RenderingStatePaused  RenderingState = 2
 )
 
+// String returns the RenderingState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RenderingState) String() string {
 	switch e {
 	case RenderingStateStopped:
@@ -366,6 +390,8 @@ const (
 	ReverbPresetCathedral ReverbPreset = 1917023336
 )
 
+// String returns the ReverbPreset constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ReverbPreset) String() string {
 	switch e {
 	case ReverbPresetNone:
@@ -408,6 +434,8 @@ const (
 	SoundEventPrepareStatePrepared          SoundEventPrepareState = 2
 )
 
+// String returns the SoundEventPrepareState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SoundEventPrepareState) String() string {
 	switch e {
 	case SoundEventPrepareStatePrepareNotStarted:
@@ -431,6 +459,8 @@ const (
 	SpatialPipelineFlagLateReverb             SpatialPipelineFlags = 4
 )
 
+// String returns the SpatialPipelineFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SpatialPipelineFlags) String() string {
 	var parts []string
 	if e&SpatialPipelineFlagDirectPathTransmission != 0 {
@@ -460,6 +490,8 @@ const (
 	SpatializationModeAlwaysUseChannelBased SpatializationMode = 2
 )
 
+// String returns the SpatializationMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SpatializationMode) String() string {
 	switch e {
 	case SpatializationModeAutomatic:
@@ -481,6 +513,8 @@ const (
 	UpdateModeManual    UpdateMode = 1
 )
 
+// String returns the UpdateMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e UpdateMode) String() string {
 	switch e {
 	case UpdateModeAutomatic:

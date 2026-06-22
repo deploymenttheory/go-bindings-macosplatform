@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents a contiguous range between two locations inside document contents.
-//
 // TextRange is an idiomatic wrapper over the Objective-C class NSTextRange.
+//
+// A class that represents a contiguous range between two locations inside document contents.
 type TextRange struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TextRangeFromID(id objc.ID) *TextRange {
 	if id == 0 {
 		return nil
 	}
-	x := &TextRange{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextRange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func textRangeAdopt(id objc.ID) *TextRange {
 	if id == 0 {
 		return nil
 	}
-	x := &TextRange{Handle: objref.Wrap(id)}
+	x := &TextRange{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,43 +60,49 @@ func (x *TextRange) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextRange) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTextRange creates a new TextRange.
 func NewTextRange() *TextRange {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSTextRange")), objc.RegisterName("new"))
 	return textRangeAdopt(_id)
 }
 
-// Compares two text ranges.
+// IsEqualToTextRange compares two text ranges.
 func (x *TextRange) IsEqualToTextRange(textRange *TextRange) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToTextRange:"), objref.IDOf(textRange))
 	return _r
 }
 
-// Determines if the text range you specify is in the current text range.
+// ContainsRange determines if the text range you specify is in the current text range.
 func (x *TextRange) ContainsRange(textRange *TextRange) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsRange:"), objref.IDOf(textRange))
 	return _r
 }
 
-// Determines if two ranges intersect.
+// IntersectsWithTextRange determines if two ranges intersect.
 func (x *TextRange) IntersectsWithTextRange(textRange *TextRange) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("intersectsWithTextRange:"), objref.IDOf(textRange))
 	return _r
 }
 
-// Returns the range, if any, where two text ranges intersect.
+// TextRangeByIntersectingWithTextRange returns the range, if any, where two text ranges intersect.
 func (x *TextRange) TextRangeByIntersectingWithTextRange(textRange *TextRange) *TextRange {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textRangeByIntersectingWithTextRange:"), objref.IDOf(textRange))
 	return TextRangeFromID(_r)
 }
 
-// Returns a new text range by forming the union with the text range you provide.
+// TextRangeByFormingUnionWithTextRange returns a new text range by forming the union with the text range you provide.
 func (x *TextRange) TextRangeByFormingUnionWithTextRange(textRange *TextRange) *TextRange {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textRangeByFormingUnionWithTextRange:"), objref.IDOf(textRange))
 	return TextRangeFromID(_r)
 }
 
-// Returns whether the text range is empty.
+// IsEmpty returns whether the text range is empty.
 func (x *TextRange) IsEmpty() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEmpty"))
 	return _r

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An array of render pass color attachment descriptor objects.
-//
 // RenderPassColorAttachmentDescriptorArray is an idiomatic wrapper over the Objective-C class MTLRenderPassColorAttachmentDescriptorArray.
+//
+// An array of render pass color attachment descriptor objects.
 type RenderPassColorAttachmentDescriptorArray struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func RenderPassColorAttachmentDescriptorArrayFromID(id objc.ID) *RenderPassColor
 	if id == 0 {
 		return nil
 	}
-	x := &RenderPassColorAttachmentDescriptorArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RenderPassColorAttachmentDescriptorArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func renderPassColorAttachmentDescriptorArrayAdopt(id objc.ID) *RenderPassColorA
 	if id == 0 {
 		return nil
 	}
-	x := &RenderPassColorAttachmentDescriptorArray{Handle: objref.Wrap(id)}
+	x := &RenderPassColorAttachmentDescriptorArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *RenderPassColorAttachmentDescriptorArray) IsKind(className string) bool
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RenderPassColorAttachmentDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRenderPassColorAttachmentDescriptorArray creates a new RenderPassColorAttachmentDescriptorArray.
 func NewRenderPassColorAttachmentDescriptorArray() *RenderPassColorAttachmentDescriptorArray {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLRenderPassColorAttachmentDescriptorArray")), objc.RegisterName("new"))
 	return renderPassColorAttachmentDescriptorArrayAdopt(_id)
 }
 
-// Returns the descriptor object for the specified color attachment.
+// ObjectAtIndexedSubscript returns the descriptor object for the specified color attachment.
 func (x *RenderPassColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *RenderPassColorAttachmentDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return RenderPassColorAttachmentDescriptorFromID(_r)
 }
 
-// Sets the descriptor for the specified color attachment.
+// SetObjectAtIndexedSubscript sets the descriptor for the specified color attachment.
 func (x *RenderPassColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *RenderPassColorAttachmentDescriptor, attachmentIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }

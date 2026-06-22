@@ -385,7 +385,6 @@ func KTISNotifyEnabledKeyboardInputSourcesChanged() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kTISNotifyEnabledKeyboardInputSourcesChanged")))
 }
 
-// The key used to find client's text orientation value which is part of the dictionary returned by attributesForCharacterIndex. The orientation is the orientation of the client's text.  Use this key to access the orientation value in the attributes dictionary returned by attributesForCharacterIndex. The value is an NSNumber which represents a BOOL value. A value of 1 means the client's text is laid out horizontally.  A value of 0 means that the client's text is laid out vertically.
 // IMKTextOrientationName returns the string constant IMKTextOrientationName, for use as a dictionary key or argument.
 func IMKTextOrientationName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("IMKTextOrientationName")))

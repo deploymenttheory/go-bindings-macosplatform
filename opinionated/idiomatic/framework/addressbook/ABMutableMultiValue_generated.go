@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mutable representation of a property that might have multiple values.
-//
 // MutableMultiValue is an idiomatic wrapper over the Objective-C class ABMutableMultiValue.
+//
+// It embeds [MultiValue], promoting that type's methods.
+//
+// A mutable representation of a property that might have multiple values.
 type MutableMultiValue struct {
-	objref.Handle
+	MultiValue
 }
 
 // MutableMultiValueFromID adopts an existing Objective-C object as a MutableMultiValue
@@ -25,7 +26,8 @@ func MutableMultiValueFromID(id objc.ID) *MutableMultiValue {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableMultiValue{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableMultiValue{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func mutableMultiValueAdopt(id objc.ID) *MutableMultiValue {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableMultiValue{Handle: objref.Wrap(id)}
+	x := &MutableMultiValue{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MutableMultiValue) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableMultiValue) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableMultiValue) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMutableMultiValue creates a new MutableMultiValue.
@@ -64,7 +52,7 @@ func NewMutableMultiValue() *MutableMultiValue {
 	return mutableMultiValueAdopt(_id)
 }
 
-// Adds a value and its label to a multivalue list.
+// AddValueWithLabel adds a value and its label to a multivalue list.
 func (x *MutableMultiValue) AddValueWithLabel(value obj.Object, label string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addValue:withLabel:"), objref.IDOf(value), purego.NSString(label))
 	if _r == 0 {
@@ -73,7 +61,7 @@ func (x *MutableMultiValue) AddValueWithLabel(value obj.Object, label string) st
 	return purego.GoString(_r)
 }
 
-// Inserts a value and its label at the given index in a multivalue list.
+// InsertValueWithLabelAtIndex inserts a value and its label at the given index in a multivalue list.
 func (x *MutableMultiValue) InsertValueWithLabelAtIndex(value obj.Object, label string, index int) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertValue:withLabel:atIndex:"), objref.IDOf(value), purego.NSString(label), index)
 	if _r == 0 {
@@ -82,25 +70,25 @@ func (x *MutableMultiValue) InsertValueWithLabelAtIndex(value obj.Object, label 
 	return purego.GoString(_r)
 }
 
-// Removes the value and label at the given index.
+// RemoveValueAndLabelAtIndex removes the value and label at the given index.
 func (x *MutableMultiValue) RemoveValueAndLabelAtIndex(index int) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeValueAndLabelAtIndex:"), index)
 	return _r
 }
 
-// Replaces the value at the given index.
+// ReplaceValueAtIndexWithValue replaces the value at the given index.
 func (x *MutableMultiValue) ReplaceValueAtIndexWithValue(index int, value obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("replaceValueAtIndex:withValue:"), index, objref.IDOf(value))
 	return _r
 }
 
-// Replaces the label at the given index.
+// ReplaceLabelAtIndexWithLabel replaces the label at the given index.
 func (x *MutableMultiValue) ReplaceLabelAtIndexWithLabel(index int, label string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("replaceLabelAtIndex:withLabel:"), index, purego.NSString(label))
 	return _r
 }
 
-// Sets the primary value to be the value for the given identifier.
+// SetPrimaryIdentifier sets the primary value to be the value for the given identifier.
 func (x *MutableMultiValue) SetPrimaryIdentifier(identifier string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setPrimaryIdentifier:"), purego.NSString(identifier))
 	return _r
@@ -118,3 +106,5 @@ type MutableMultiValueable interface {
 }
 
 var _ MutableMultiValueable = (*MutableMultiValue)(nil)
+
+var _ MultiValueProvider = (*MutableMultiValue)(nil)

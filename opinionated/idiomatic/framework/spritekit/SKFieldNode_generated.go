@@ -6,17 +6,19 @@ package spritekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A node that applies physics effects to nearby nodes.
-//
 // FieldNode is an idiomatic wrapper over the Objective-C class SKFieldNode.
+//
+// It embeds [Node], promoting that type's methods.
+//
+// A node that applies physics effects to nearby nodes.
 type FieldNode struct {
-	objref.Handle
+	Node
 }
 
 // FieldNodeFromID adopts an existing Objective-C object as a FieldNode
@@ -25,7 +27,8 @@ func FieldNodeFromID(id objc.ID) *FieldNode {
 	if id == 0 {
 		return nil
 	}
-	x := &FieldNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FieldNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func fieldNodeAdopt(id objc.ID) *FieldNode {
 	if id == 0 {
 		return nil
 	}
-	x := &FieldNode{Handle: objref.Wrap(id)}
+	x := &FieldNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *FieldNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FieldNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FieldNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewFieldNode creates a new FieldNode.
@@ -64,367 +53,323 @@ func NewFieldNode() *FieldNode {
 	return fieldNodeAdopt(_id)
 }
 
-// The area (relative to the node’s origin) that the field affects.
-//
-// WithRegion sets region and returns the receiver so calls can be chained.
+// WithRegion the area (relative to the node’s origin) that the field affects.
 func (x *FieldNode) WithRegion(region *Region) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegion:"), objref.IDOf(region))
 	return x
 }
 
-// The strength of the field.
-//
-// WithStrength sets strength and returns the receiver so calls can be chained.
+// WithStrength the strength of the field.
 func (x *FieldNode) WithStrength(strength float32) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrength:"), strength)
 	return x
 }
 
-// The exponent that defines the rate of decay for the strength of the field as the distance increases between the node and the physics body being affected.
-//
-// WithFalloff sets falloff and returns the receiver so calls can be chained.
+// WithFalloff the exponent that defines the rate of decay for the strength of the field as the distance increases between the node and the physics body being affected.
 func (x *FieldNode) WithFalloff(falloff float32) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFalloff:"), falloff)
 	return x
 }
 
-// The minimum value for distance-based effects.
-//
-// WithMinimumRadius sets minimumRadius and returns the receiver so calls can be chained.
+// WithMinimumRadius the minimum value for distance-based effects.
 func (x *FieldNode) WithMinimumRadius(minimumRadius float32) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumRadius:"), minimumRadius)
 	return x
 }
 
-// A Boolean value that indicates whether the field is active.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether the field is active.
 func (x *FieldNode) WithEnabled(enabled bool) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A Boolean value that indicates whether the field node should override all other field nodes that might otherwise affect physics bodies.
-//
-// WithExclusive sets exclusive and returns the receiver so calls can be chained.
+// WithExclusive a Boolean value that indicates whether the field node should override all other field nodes that might otherwise affect physics bodies.
 func (x *FieldNode) WithExclusive(exclusive bool) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExclusive:"), exclusive)
 	return x
 }
 
-// A mask that defines which categories this field belongs to.
-//
-// WithCategoryBitMask sets categoryBitMask and returns the receiver so calls can be chained.
+// WithCategoryBitMask a mask that defines which categories this field belongs to.
 func (x *FieldNode) WithCategoryBitMask(categoryBitMask uint32) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
 	return x
 }
 
-// The smoothness of the noise used to generate the forces.
-//
-// WithSmoothness sets smoothness and returns the receiver so calls can be chained.
+// WithSmoothness the smoothness of the noise used to generate the forces.
 func (x *FieldNode) WithSmoothness(smoothness float32) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSmoothness:"), smoothness)
 	return x
 }
 
-// The rate at which a noise or turbulence field node changes.
-//
-// WithAnimationSpeed sets animationSpeed and returns the receiver so calls can be chained.
+// WithAnimationSpeed the rate at which a noise or turbulence field node changes.
 func (x *FieldNode) WithAnimationSpeed(animationSpeed float32) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationSpeed:"), animationSpeed)
 	return x
 }
 
-// A normal texture that specifies the velocities at different points in a velocity field node.
-//
-// WithTexture sets texture and returns the receiver so calls can be chained.
+// WithTexture a normal texture that specifies the velocities at different points in a velocity field node.
 func (x *FieldNode) WithTexture(texture TextureProvider) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTexture:"), objref.IDOf(texture))
 	return x
 }
 
-// The height of the node relative to its parent.
-//
-// WithZPosition sets zPosition and returns the receiver so calls can be chained.
+// WithPosition the position of the node in its parent’s coordinate system.
+func (x *FieldNode) WithPosition(position corefoundation.CGPoint) *FieldNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
+	return x
+}
+
+// WithZPosition the height of the node relative to its parent.
 func (x *FieldNode) WithZPosition(zPosition float64) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
 	return x
 }
 
-// The Euler rotation about the z axis (in radians).
-//
-// WithZRotation sets zRotation and returns the receiver so calls can be chained.
+// WithZRotation the Euler rotation about the z axis (in radians).
 func (x *FieldNode) WithZRotation(zRotation float64) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
 	return x
 }
 
-// A scaling factor that multiplies the width of a node and its children.
-//
-// WithXScale sets xScale and returns the receiver so calls can be chained.
+// WithXScale a scaling factor that multiplies the width of a node and its children.
 func (x *FieldNode) WithXScale(xScale float64) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
 	return x
 }
 
-// A scaling factor that multiplies the height of a node and its children.
-//
-// WithYScale sets yScale and returns the receiver so calls can be chained.
+// WithYScale a scaling factor that multiplies the height of a node and its children.
 func (x *FieldNode) WithYScale(yScale float64) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
 	return x
 }
 
-// A speed modifier applied to all actions executed by a node and its descendants.
-//
-// WithSpeed sets speed and returns the receiver so calls can be chained.
+// WithSpeed a speed modifier applied to all actions executed by a node and its descendants.
 func (x *FieldNode) WithSpeed(speed float64) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
-// The transparency value applied to the node’s contents.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the transparency value applied to the node’s contents.
 func (x *FieldNode) WithAlpha(alpha float64) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// A Boolean value that determines whether actions on the node and its descendants are processed.
-//
-// WithPaused sets paused and returns the receiver so calls can be chained.
+// WithPaused a Boolean value that determines whether actions on the node and its descendants are processed.
 func (x *FieldNode) WithPaused(paused bool) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
-// A Boolean value that determines whether a node and its descendants are rendered.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden a Boolean value that determines whether a node and its descendants are rendered.
 func (x *FieldNode) WithHidden(hidden bool) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// A Boolean value that indicates whether the node receives touch events.
-//
-// WithUserInteractionEnabled sets userInteractionEnabled and returns the receiver so calls can be chained.
+// WithUserInteractionEnabled a Boolean value that indicates whether the node receives touch events.
 func (x *FieldNode) WithUserInteractionEnabled(userInteractionEnabled bool) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
 	return x
 }
 
-// The node’s assignable name.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the node’s assignable name.
 func (x *FieldNode) WithName(name string) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The physics body associated with the node.
-//
-// WithPhysicsBody sets physicsBody and returns the receiver so calls can be chained.
+// WithPhysicsBody the physics body associated with the node.
 func (x *FieldNode) WithPhysicsBody(physicsBody *PhysicsBody) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	return x
 }
 
-// A dictionary containing arbitrary data.
-//
-// WithUserData sets userData and returns the receiver so calls can be chained.
+// WithUserData a dictionary containing arbitrary data.
 func (x *FieldNode) WithUserData(userData obj.Object) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	return x
 }
 
-// The reach constraints to apply to the node when executing a reach action.
-//
-// WithReachConstraints sets reachConstraints and returns the receiver so calls can be chained.
+// WithReachConstraints the reach constraints to apply to the node when executing a reach action.
 func (x *FieldNode) WithReachConstraints(reachConstraints *ReachConstraints) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	return x
 }
 
-// A list of constraints to apply to the node.
-//
-// WithConstraints sets the collection and returns the receiver so calls can be chained.
+// WithConstraints a list of constraints to apply to the node.
 func (x *FieldNode) WithConstraints(items ...*Constraint) *FieldNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
-// The values of each attribute associated with the node’s attached shader.
-//
-// WithAttributeValues sets attributeValues and returns the receiver so calls can be chained.
+// WithAttributeValues the values of each attribute associated with the node’s attached shader.
 func (x *FieldNode) WithAttributeValues(attributeValues obj.Object) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
-//
-// WithAccessibilityElement sets accessibilityElement and returns the receiver so calls can be chained.
+// WithAccessibilityElement a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (x *FieldNode) WithAccessibilityElement(accessibilityElement bool) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
 	return x
 }
 
-// A string value describing the user interface element type; for example, a button.
-//
-// WithAccessibilityRole sets accessibilityRole and returns the receiver so calls can be chained.
+// WithAccessibilityRole a string value describing the user interface element type; for example, a button.
 func (x *FieldNode) WithAccessibilityRole(accessibilityRole string) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
 	return x
 }
 
-// A string value describing the user interface element name and type; for example, the Buy button.
-//
-// WithAccessibilityRoleDescription sets accessibilityRoleDescription and returns the receiver so calls can be chained.
+// WithAccessibilityRoleDescription a string value describing the user interface element name and type; for example, the Buy button.
 func (x *FieldNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
 	return x
 }
 
-// A string that defines this user interface element’s subrole; for example, a full-screen button.
-//
-// WithAccessibilitySubrole sets accessibilitySubrole and returns the receiver so calls can be chained.
+// WithAccessibilitySubrole a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (x *FieldNode) WithAccessibilitySubrole(accessibilitySubrole string) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
 	return x
 }
 
-// The user interface element that contains this element.
-//
-// WithAccessibilityParent sets accessibilityParent and returns the receiver so calls can be chained.
+// WithAccessibilityFrame the size of this user interface element, in screen points.
+func (x *FieldNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *FieldNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	return x
+}
+
+// WithAccessibilityParent the user interface element that contains this element.
 func (x *FieldNode) WithAccessibilityParent(accessibilityParent obj.Object) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	return x
 }
 
-// The help description of this user interface element; for example, the text shown in a tooltip.
-//
-// WithAccessibilityHelp sets accessibilityHelp and returns the receiver so calls can be chained.
+// WithAccessibilityHelp the help description of this user interface element; for example, the text shown in a tooltip.
 func (x *FieldNode) WithAccessibilityHelp(accessibilityHelp string) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
 	return x
 }
 
-// A short description of this user interface element.
-//
-// WithAccessibilityLabel sets accessibilityLabel and returns the receiver so calls can be chained.
+// WithAccessibilityLabel a short description of this user interface element.
 func (x *FieldNode) WithAccessibilityLabel(accessibilityLabel string) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
-//
-// WithAccessibilityEnabled sets accessibilityEnabled and returns the receiver so calls can be chained.
+// WithAccessibilityEnabled a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (x *FieldNode) WithAccessibilityEnabled(accessibilityEnabled bool) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
 	return x
 }
 
-// The region property is the domain of the field's effect. No force is applied to objects outside the region.
+// Region the region property is the domain of the field's effect. No force is applied to objects outside the region.
 func (x *FieldNode) Region() *Region {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("region"))
 	return RegionFromID(_r)
 }
 
+// SetRegion wraps the corresponding Objective-C method.
 func (x *FieldNode) SetRegion(region *Region) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegion:"), objref.IDOf(region))
 }
 
-// strength scaling value. default 1.0
+// Strength strength scaling value. default 1.0
 func (x *FieldNode) Strength() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("strength"))
 	return _r
 }
 
+// SetStrength wraps the corresponding Objective-C method.
 func (x *FieldNode) SetStrength(strength float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrength:"), strength)
 }
 
-// The falloff exponent used to calculate field strength at a distance. Falloff starts at the minimum radius. The default exponent is zero, which results in a uniform field with no falloff.
+// Falloff the falloff exponent used to calculate field strength at a distance. Falloff starts at the minimum radius. The default exponent is zero, which results in a uniform field with no falloff.
 func (x *FieldNode) Falloff() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("falloff"))
 	return _r
 }
 
+// SetFalloff wraps the corresponding Objective-C method.
 func (x *FieldNode) SetFalloff(falloff float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFalloff:"), falloff)
 }
 
-// minimum radius of effect. Default is very small.
+// MinimumRadius minimum radius of effect. Default is very small.
 func (x *FieldNode) MinimumRadius() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minimumRadius"))
 	return _r
 }
 
+// SetMinimumRadius wraps the corresponding Objective-C method.
 func (x *FieldNode) SetMinimumRadius(minimumRadius float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumRadius:"), minimumRadius)
 }
 
-// If enabled, a field has an effect. default YES
+// IsEnabled if enabled, a field has an effect. default YES
 func (x *FieldNode) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r
 }
 
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *FieldNode) SetEnabled(enabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
-// If a field is exclusive, it suppresses any other field in its region of effect. If two or more exclusive fields overlap, it is undefined which one of them will take effect
+// IsExclusive if a field is exclusive, it suppresses any other field in its region of effect. If two or more exclusive fields overlap, it is undefined which one of them will take effect
 func (x *FieldNode) IsExclusive() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isExclusive"))
 	return _r
 }
 
+// SetExclusive wraps the corresponding Objective-C method.
 func (x *FieldNode) SetExclusive(exclusive bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExclusive:"), exclusive)
 }
 
-// Logical categories the field belongs to. Default is all categories. These categories correspond to fieldBitMasks, and can be used to enforce that a particular field applies to a particular category of objects.
+// CategoryBitMask logical categories the field belongs to. Default is all categories. These categories correspond to fieldBitMasks, and can be used to enforce that a particular field applies to a particular category of objects.
 func (x *FieldNode) CategoryBitMask() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("categoryBitMask"))
 	return _r
 }
 
+// SetCategoryBitMask wraps the corresponding Objective-C method.
 func (x *FieldNode) SetCategoryBitMask(categoryBitMask uint32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
 }
 
-// fields without a smoothness component will return 0
+// Smoothness fields without a smoothness component will return 0
 func (x *FieldNode) Smoothness() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("smoothness"))
 	return _r
 }
 
+// SetSmoothness wraps the corresponding Objective-C method.
 func (x *FieldNode) SetSmoothness(smoothness float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSmoothness:"), smoothness)
 }
 
-// fields that can be animated can have non zero values. A value of 2 will animated twice as fast as a value of 1.
+// AnimationSpeed fields that can be animated can have non zero values. A value of 2 will animated twice as fast as a value of 1.
 func (x *FieldNode) AnimationSpeed() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("animationSpeed"))
 	return _r
 }
 
+// SetAnimationSpeed wraps the corresponding Objective-C method.
 func (x *FieldNode) SetAnimationSpeed(animationSpeed float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationSpeed:"), animationSpeed)
 }
 
-// fields constructed with a texture can be uppdated by assigning a new texture
+// Texture fields constructed with a texture can be uppdated by assigning a new texture
 func (x *FieldNode) Texture() *Texture {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("texture"))
 	return TextureFromID(_r)
 }
 
+// SetTexture wraps the corresponding Objective-C method.
 func (x *FieldNode) SetTexture(texture *Texture) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTexture:"), objref.IDOf(texture))
 }
@@ -442,6 +387,7 @@ type FieldNodeable interface {
 	WithSmoothness(smoothness float32) *FieldNode
 	WithAnimationSpeed(animationSpeed float32) *FieldNode
 	WithTexture(texture TextureProvider) *FieldNode
+	WithPosition(position corefoundation.CGPoint) *FieldNode
 	WithZPosition(zPosition float64) *FieldNode
 	WithZRotation(zRotation float64) *FieldNode
 	WithXScale(xScale float64) *FieldNode
@@ -461,6 +407,7 @@ type FieldNodeable interface {
 	WithAccessibilityRole(accessibilityRole string) *FieldNode
 	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *FieldNode
 	WithAccessibilitySubrole(accessibilitySubrole string) *FieldNode
+	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *FieldNode
 	WithAccessibilityParent(accessibilityParent obj.Object) *FieldNode
 	WithAccessibilityHelp(accessibilityHelp string) *FieldNode
 	WithAccessibilityLabel(accessibilityLabel string) *FieldNode
@@ -488,3 +435,5 @@ type FieldNodeable interface {
 }
 
 var _ FieldNodeable = (*FieldNode)(nil)
+
+var _ NodeProvider = (*FieldNode)(nil)

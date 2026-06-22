@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for animations in Core Animation.
-//
 // Animation is an idiomatic wrapper over the Objective-C class CAAnimation.
+//
+// Animation is an abstract base — you do not construct it directly. Construct one of [AnimationGroup], [PropertyAnimation], [Transition] and pass it where a Animation is accepted.
+//
+// The abstract superclass for animations in Core Animation.
 type Animation struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func AnimationFromID(id objc.ID) *Animation {
 	if id == 0 {
 		return nil
 	}
-	x := &Animation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Animation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func animationAdopt(id objc.ID) *Animation {
 	if id == 0 {
 		return nil
 	}
-	x := &Animation{Handle: objref.Wrap(id)}
+	x := &Animation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,48 +62,48 @@ func (x *Animation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewAnimation creates a new Animation.
-func NewAnimation() *Animation {
-	_id := objc.Send[objc.ID](objc.ID(_class("CAAnimation")), objc.RegisterName("new"))
-	return animationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Animation) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// An optional timing function defining the pacing of the animation.
-//
-// WithTimingFunction sets timingFunction and returns the receiver so calls can be chained.
+// WithTimingFunction an optional timing function defining the pacing of the animation.
 func (x *Animation) WithTimingFunction(timingFunction *MediaTimingFunction) *Animation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
 	return x
 }
 
-// Determines if the animation is removed from the target layer’s animations upon completion.
-//
-// WithRemovedOnCompletion sets removedOnCompletion and returns the receiver so calls can be chained.
+// WithRemovedOnCompletion determines if the animation is removed from the target layer’s animations upon completion.
 func (x *Animation) WithRemovedOnCompletion(removedOnCompletion bool) *Animation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
 	return x
 }
 
-// Specifies whether the value of the property for a given key is archived.
+// ShouldArchiveValueForKey specifies whether the value of the property for a given key is archived.
 func (x *Animation) ShouldArchiveValueForKey(key string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldArchiveValueForKey:"), purego.NSString(key))
 	return _r
 }
 
+// TimingFunction wraps the corresponding Objective-C method.
 func (x *Animation) TimingFunction() *MediaTimingFunction {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timingFunction"))
 	return MediaTimingFunctionFromID(_r)
 }
 
+// SetTimingFunction wraps the corresponding Objective-C method.
 func (x *Animation) SetTimingFunction(timingFunction *MediaTimingFunction) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
 }
 
+// IsRemovedOnCompletion wraps the corresponding Objective-C method.
 func (x *Animation) IsRemovedOnCompletion() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRemovedOnCompletion"))
 	return _r
 }
 
+// SetRemovedOnCompletion wraps the corresponding Objective-C method.
 func (x *Animation) SetRemovedOnCompletion(removedOnCompletion bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
 }
@@ -117,3 +121,10 @@ type Animationable interface {
 }
 
 var _ Animationable = (*Animation)(nil)
+
+// isAnimation marks Animation — and, by embedding promotion, its
+// subclasses — as a member of the Animation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Animation) isAnimation() {}
+
+var _ AnimationProvider = (*Animation)(nil)

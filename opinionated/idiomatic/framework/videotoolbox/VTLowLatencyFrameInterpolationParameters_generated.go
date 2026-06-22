@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains both input and output parameters that the low-latency frame interpolation processor needs.
-//
 // LowLatencyFrameInterpolationParameters is an idiomatic wrapper over the Objective-C class VTLowLatencyFrameInterpolationParameters.
+//
+// An object that contains both input and output parameters that the low-latency frame interpolation processor needs.
 type LowLatencyFrameInterpolationParameters struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LowLatencyFrameInterpolationParametersFromID(id objc.ID) *LowLatencyFrameIn
 	if id == 0 {
 		return nil
 	}
-	x := &LowLatencyFrameInterpolationParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LowLatencyFrameInterpolationParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func lowLatencyFrameInterpolationParametersAdopt(id objc.ID) *LowLatencyFrameInt
 	if id == 0 {
 		return nil
 	}
-	x := &LowLatencyFrameInterpolationParameters{Handle: objref.Wrap(id)}
+	x := &LowLatencyFrameInterpolationParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +60,32 @@ func (x *LowLatencyFrameInterpolationParameters) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new low-latency frame interpolation parameters object.
-//
-// NewLowLatencyFrameInterpolationParametersWithSourceFramePreviousFrameInterpolationPhaseDestinationFrames creates a new LowLatencyFrameInterpolationParameters.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LowLatencyFrameInterpolationParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLowLatencyFrameInterpolationParametersWithSourceFramePreviousFrameInterpolationPhaseDestinationFrames creates a new low-latency frame interpolation parameters object.
 func NewLowLatencyFrameInterpolationParametersWithSourceFramePreviousFrameInterpolationPhaseDestinationFrames(sourceFrame *FrameProcessorFrame, previousFrame *FrameProcessorFrame, interpolationPhase []obj.Object, destinationFrames []*FrameProcessorFrame) *LowLatencyFrameInterpolationParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VTLowLatencyFrameInterpolationParameters")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:previousFrame:interpolationPhase:destinationFrames:"), objref.IDOf(sourceFrame), objref.IDOf(previousFrame), purego.SliceToNSArray(interpolationPhase, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(destinationFrames, func(_v *FrameProcessorFrame) objc.ID { return objref.IDOf(_v) }))
 	return lowLatencyFrameInterpolationParametersAdopt(_id)
 }
 
-// Source frame that you provided when creating the low-latency frame interpolation parameters object.
+// SourceFrame source frame that you provided when creating the low-latency frame interpolation parameters object.
 func (x *LowLatencyFrameInterpolationParameters) SourceFrame() *FrameProcessorFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// Previous frame that you provided when creating the low-latency frame interpolation parameters object.
+// PreviousFrame previous frame that you provided when creating the low-latency frame interpolation parameters object.
 func (x *LowLatencyFrameInterpolationParameters) PreviousFrame() *FrameProcessorFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// Array of interpolation phases that you provided when creating the low-latency frame interpolation parameters object.
+// InterpolationPhase array of interpolation phases that you provided when creating the low-latency frame interpolation parameters object.
 //
 // InterpolationPhase returns the collection as a Go slice.
 func (x *LowLatencyFrameInterpolationParameters) InterpolationPhase() []obj.Object {
@@ -87,7 +93,7 @@ func (x *LowLatencyFrameInterpolationParameters) InterpolationPhase() []obj.Obje
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Array of destination frames that you provided when creating the low-latency frame interpolation parameters object.
+// DestinationFrames array of destination frames that you provided when creating the low-latency frame interpolation parameters object.
 //
 // DestinationFrames returns the collection as a Go slice.
 func (x *LowLatencyFrameInterpolationParameters) DestinationFrames() []*FrameProcessorFrame {

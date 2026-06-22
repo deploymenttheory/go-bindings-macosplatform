@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The class that defines the parameters for a fast Fourier transform (FFT) operation.
-//
 // GraphFFTDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphFFTDescriptor.
+//
+// It embeds [GraphObject], promoting that type's methods.
+//
+// The class that defines the parameters for a fast Fourier transform (FFT) operation.
 type GraphFFTDescriptor struct {
-	objref.Handle
+	GraphObject
 }
 
 // GraphFFTDescriptorFromID adopts an existing Objective-C object as a GraphFFTDescriptor
@@ -25,7 +26,8 @@ func GraphFFTDescriptorFromID(id objc.ID) *GraphFFTDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphFFTDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphFFTDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func graphFFTDescriptorAdopt(id objc.ID) *GraphFFTDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphFFTDescriptor{Handle: objref.Wrap(id)}
+	x := &GraphFFTDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GraphFFTDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphFFTDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphFFTDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGraphFFTDescriptor creates a new GraphFFTDescriptor.
@@ -64,56 +52,53 @@ func NewGraphFFTDescriptor() *GraphFFTDescriptor {
 	return graphFFTDescriptorAdopt(_id)
 }
 
-// A Boolean-valued parameter that defines the phase factor sign for Fourier transforms.
-//
-// WithInverse sets inverse and returns the receiver so calls can be chained.
+// WithInverse a Boolean-valued parameter that defines the phase factor sign for Fourier transforms.
 func (x *GraphFFTDescriptor) WithInverse(inverse bool) *GraphFFTDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInverse:"), inverse)
 	return x
 }
 
-// The scaling mode of the fast fourier transform (FFT) operation.
-//
-// WithScalingMode sets scalingMode and returns the receiver so calls can be chained.
+// WithScalingMode the scaling mode of the fast fourier transform (FFT) operation.
 func (x *GraphFFTDescriptor) WithScalingMode(scalingMode GraphFFTScalingMode) *GraphFFTDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScalingMode:"), scalingMode)
 	return x
 }
 
-// A parameter which controls how graph rounds the output tensor size for a Hermitean-to-real Fourier transform.
-//
-// WithRoundToOddHermitean sets roundToOddHermitean and returns the receiver so calls can be chained.
+// WithRoundToOddHermitean a parameter which controls how graph rounds the output tensor size for a Hermitean-to-real Fourier transform.
 func (x *GraphFFTDescriptor) WithRoundToOddHermitean(roundToOddHermitean bool) *GraphFFTDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRoundToOddHermitean:"), roundToOddHermitean)
 	return x
 }
 
-// A Boolean-valued parameter that defines the phase factor sign for Fourier transforms. When set to `YES` graph uses the positive phase factor: `exp(+i 2Pi mu nu / n)`, when computing the (inverse) Fourier transform. Otherwise MPSGraph uses the negative phase factor: `exp(-i 2Pi mu nu / n)`, when computing the Fourier transform. Default value: `NO`.
+// Inverse a Boolean-valued parameter that defines the phase factor sign for Fourier transforms. When set to `YES` graph uses the positive phase factor: `exp(+i 2Pi mu nu / n)`, when computing the (inverse) Fourier transform. Otherwise MPSGraph uses the negative phase factor: `exp(-i 2Pi mu nu / n)`, when computing the Fourier transform. Default value: `NO`.
 func (x *GraphFFTDescriptor) Inverse() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("inverse"))
 	return _r
 }
 
+// SetInverse wraps the corresponding Objective-C method.
 func (x *GraphFFTDescriptor) SetInverse(inverse bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInverse:"), inverse)
 }
 
-// The scaling mode of the fast fourier transform (FFT) operation. Note that the scaling mode is independent from the phase factor. Default value: `MPSGraphFFTScalingModeNone`.
+// ScalingMode the scaling mode of the fast fourier transform (FFT) operation. Note that the scaling mode is independent from the phase factor. Default value: `MPSGraphFFTScalingModeNone`.
 func (x *GraphFFTDescriptor) ScalingMode() GraphFFTScalingMode {
 	_r := objc.Send[GraphFFTScalingMode](objref.IDOf(x), objc.RegisterName("scalingMode"))
 	return _r
 }
 
+// SetScalingMode wraps the corresponding Objective-C method.
 func (x *GraphFFTDescriptor) SetScalingMode(scalingMode GraphFFTScalingMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScalingMode:"), scalingMode)
 }
 
-// A parameter which controls how graph rounds the output tensor size for a Hermitean-to-real Fourier transform. If set to `YES` then MPSGraph rounds the last output dimension of the result tensor in “MPSGraph/HermiteanToRealFFTWithTensor:axesTensor:descriptor:name:“ to an odd value. Has no effect in the other Fourier transform operations. Default value: `NO`.
+// RoundToOddHermitean a parameter which controls how graph rounds the output tensor size for a Hermitean-to-real Fourier transform. If set to `YES` then MPSGraph rounds the last output dimension of the result tensor in “MPSGraph/HermiteanToRealFFTWithTensor:axesTensor:descriptor:name:“ to an odd value. Has no effect in the other Fourier transform operations. Default value: `NO`.
 func (x *GraphFFTDescriptor) RoundToOddHermitean() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("roundToOddHermitean"))
 	return _r
 }
 
+// SetRoundToOddHermitean wraps the corresponding Objective-C method.
 func (x *GraphFFTDescriptor) SetRoundToOddHermitean(roundToOddHermitean bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRoundToOddHermitean:"), roundToOddHermitean)
 }
@@ -133,3 +118,5 @@ type GraphFFTDescriptorable interface {
 }
 
 var _ GraphFFTDescriptorable = (*GraphFFTDescriptor)(nil)
+
+var _ GraphObjectProvider = (*GraphFFTDescriptor)(nil)

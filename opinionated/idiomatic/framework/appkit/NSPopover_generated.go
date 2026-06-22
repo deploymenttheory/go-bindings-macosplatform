@@ -6,17 +6,19 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A means to display additional content related to existing content on the screen.
-//
 // Popover is an idiomatic wrapper over the Objective-C class NSPopover.
+//
+// It embeds [Responder], promoting that type's methods.
+//
+// A means to display additional content related to existing content on the screen.
 type Popover struct {
-	objref.Handle
+	Responder
 }
 
 // PopoverFromID adopts an existing Objective-C object as a Popover
@@ -25,7 +27,8 @@ func PopoverFromID(id objc.ID) *Popover {
 	if id == 0 {
 		return nil
 	}
-	x := &Popover{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Popover{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func popoverAdopt(id objc.ID) *Popover {
 	if id == 0 {
 		return nil
 	}
-	x := &Popover{Handle: objref.Wrap(id)}
+	x := &Popover{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *Popover) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Popover) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Popover) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPopover creates a new Popover.
@@ -71,152 +60,178 @@ func NewPopoverWithCoder(coder obj.Object) *Popover {
 	return popoverAdopt(_id)
 }
 
-// The appearance of the popover.
-//
-// WithAppearance sets appearance and returns the receiver so calls can be chained.
+// WithAppearance the appearance of the popover.
 func (x *Popover) WithAppearance(appearance *Appearance) *Popover {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppearance:"), objref.IDOf(appearance))
 	return x
 }
 
-// Specifies the behavior of the popover.
-//
-// WithBehavior sets behavior and returns the receiver so calls can be chained.
+// WithBehavior specifies the behavior of the popover.
 func (x *Popover) WithBehavior(behavior PopoverBehavior) *Popover {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBehavior:"), behavior)
 	return x
 }
 
-// Specifies if the popover is to be animated.
-//
-// WithAnimates sets animates and returns the receiver so calls can be chained.
+// WithAnimates specifies if the popover is to be animated.
 func (x *Popover) WithAnimates(animates bool) *Popover {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimates:"), animates)
 	return x
 }
 
-// The view controller that manages the content of the popover.
-//
-// WithContentViewController sets contentViewController and returns the receiver so calls can be chained.
+// WithContentViewController the view controller that manages the content of the popover.
 func (x *Popover) WithContentViewController(contentViewController ViewControllerProvider) *Popover {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
 	return x
 }
 
-// A Boolean value that indicates whether the content view of the popover extends into the arrow region.
-//
-// WithHasFullSizeContent sets hasFullSizeContent and returns the receiver so calls can be chained.
+// WithContentSize the content size of the popover.
+func (x *Popover) WithContentSize(contentSize corefoundation.CGSize) *Popover {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentSize:"), contentSize)
+	return x
+}
+
+// WithPositioningRect the rectangle within the positioning view relative to which the popover should be positioned.
+func (x *Popover) WithPositioningRect(positioningRect corefoundation.CGRect) *Popover {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPositioningRect:"), positioningRect)
+	return x
+}
+
+// WithHasFullSizeContent a Boolean value that indicates whether the content view of the popover extends into the arrow region.
 func (x *Popover) WithHasFullSizeContent(hasFullSizeContent bool) *Popover {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasFullSizeContent:"), hasFullSizeContent)
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *Popover) WithNextResponder(nextResponder ResponderProvider) *Popover {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets menu and returns the receiver so calls can be chained.
+// WithMenu returns the responder’s menu.
 func (x *Popover) WithMenu(menu *Menu) *Popover {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity an object encapsulating a user activity supported by this responder.
 func (x *Popover) WithUserActivity(userActivity obj.Object) *Popover {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *Popover) WithTouchBar(touchBar *TouchBar) *Popover {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// Shows the popover anchored to the specified toolbar item.
+// ShowRelativeToToolbarItem shows the popover anchored to the specified toolbar item.
 func (x *Popover) ShowRelativeToToolbarItem(toolbarItem *ToolbarItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showRelativeToToolbarItem:"), objref.IDOf(toolbarItem))
 }
 
-// Attempts to close the popover.
+// PerformClose attempts to close the popover.
 func (x *Popover) PerformClose(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performClose:"), objref.IDOf(sender))
 }
 
-// Forces the popover to close without consulting its delegate.
+// Close forces the popover to close without consulting its delegate.
 func (x *Popover) Close() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
 }
 
-// The appearance of the popover. The popover's contentView will inherit this appearance. The default effective appearance is the NSAppearanceNameVibrantLight appearance. If nil is set, nil will be returned, and the effective appearance will return to the default. To prevent conflicts with the previous appearance property, this is only available for apps that target 10.10 and higher.
+// Appearance the appearance of the popover. The popover's contentView will inherit this appearance. The default effective appearance is the NSAppearanceNameVibrantLight appearance. If nil is set, nil will be returned, and the effective appearance will return to the default. To prevent conflicts with the previous appearance property, this is only available for apps that target 10.10 and higher.
 func (x *Popover) Appearance() *Appearance {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appearance"))
 	return AppearanceFromID(_r)
 }
 
-// The appearance of the popover. The popover's contentView will inherit this appearance. The default effective appearance is the NSAppearanceNameVibrantLight appearance. If nil is set, nil will be returned, and the effective appearance will return to the default. To prevent conflicts with the previous appearance property, this is only available for apps that target 10.10 and higher.
+// SetAppearance the appearance of the popover. The popover's contentView will inherit this appearance. The default effective appearance is the NSAppearanceNameVibrantLight appearance. If nil is set, nil will be returned, and the effective appearance will return to the default. To prevent conflicts with the previous appearance property, this is only available for apps that target 10.10 and higher.
 func (x *Popover) SetAppearance(appearance *Appearance) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppearance:"), objref.IDOf(appearance))
 }
 
+// EffectiveAppearance wraps the corresponding Objective-C method.
 func (x *Popover) EffectiveAppearance() *Appearance {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectiveAppearance"))
 	return AppearanceFromID(_r)
 }
 
+// Behavior wraps the corresponding Objective-C method.
 func (x *Popover) Behavior() PopoverBehavior {
 	_r := objc.Send[PopoverBehavior](objref.IDOf(x), objc.RegisterName("behavior"))
 	return _r
 }
 
+// SetBehavior wraps the corresponding Objective-C method.
 func (x *Popover) SetBehavior(behavior PopoverBehavior) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBehavior:"), behavior)
 }
 
+// Animates wraps the corresponding Objective-C method.
 func (x *Popover) Animates() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("animates"))
 	return _r
 }
 
+// SetAnimates wraps the corresponding Objective-C method.
 func (x *Popover) SetAnimates(animates bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimates:"), animates)
 }
 
+// ContentViewController wraps the corresponding Objective-C method.
 func (x *Popover) ContentViewController() *ViewController {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentViewController"))
 	return ViewControllerFromID(_r)
 }
 
+// SetContentViewController wraps the corresponding Objective-C method.
 func (x *Popover) SetContentViewController(contentViewController *ViewController) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
 }
 
+// ContentSize wraps the corresponding Objective-C method.
+func (x *Popover) ContentSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("contentSize"))
+	return _r
+}
+
+// SetContentSize wraps the corresponding Objective-C method.
+func (x *Popover) SetContentSize(contentSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentSize:"), contentSize)
+}
+
+// IsShown wraps the corresponding Objective-C method.
 func (x *Popover) IsShown() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isShown"))
 	return _r
 }
 
-// Returns \c YES if the window is detached to an implicitly created detached window, \c NO otherwise. This method does not apply when the popover is detached to a window returned with \c -detachableWindowForPopover:.
+// IsDetached returns \c YES if the window is detached to an implicitly created detached window, \c NO otherwise. This method does not apply when the popover is detached to a window returned with \c -detachableWindowForPopover:.
 func (x *Popover) IsDetached() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDetached"))
 	return _r
 }
 
+// PositioningRect wraps the corresponding Objective-C method.
+func (x *Popover) PositioningRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("positioningRect"))
+	return _r
+}
+
+// SetPositioningRect wraps the corresponding Objective-C method.
+func (x *Popover) SetPositioningRect(positioningRect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPositioningRect:"), positioningRect)
+}
+
+// HasFullSizeContent wraps the corresponding Objective-C method.
 func (x *Popover) HasFullSizeContent() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasFullSizeContent"))
 	return _r
 }
 
+// SetHasFullSizeContent wraps the corresponding Objective-C method.
 func (x *Popover) SetHasFullSizeContent(hasFullSizeContent bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasFullSizeContent:"), hasFullSizeContent)
 }
@@ -228,6 +243,8 @@ type Popoverable interface {
 	WithBehavior(behavior PopoverBehavior) *Popover
 	WithAnimates(animates bool) *Popover
 	WithContentViewController(contentViewController ViewControllerProvider) *Popover
+	WithContentSize(contentSize corefoundation.CGSize) *Popover
+	WithPositioningRect(positioningRect corefoundation.CGRect) *Popover
 	WithHasFullSizeContent(hasFullSizeContent bool) *Popover
 	WithNextResponder(nextResponder ResponderProvider) *Popover
 	WithMenu(menu *Menu) *Popover
@@ -245,10 +262,16 @@ type Popoverable interface {
 	SetAnimates(animates bool)
 	ContentViewController() *ViewController
 	SetContentViewController(contentViewController *ViewController)
+	ContentSize() corefoundation.CGSize
+	SetContentSize(contentSize corefoundation.CGSize)
 	IsShown() bool
 	IsDetached() bool
+	PositioningRect() corefoundation.CGRect
+	SetPositioningRect(positioningRect corefoundation.CGRect)
 	HasFullSizeContent() bool
 	SetHasFullSizeContent(hasFullSizeContent bool)
 }
 
 var _ Popoverable = (*Popover)(nil)
+
+var _ ResponderProvider = (*Popover)(nil)

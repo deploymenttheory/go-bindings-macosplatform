@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The lists of shapes or ranges of shapes that constrain a multiarray feature.
-//
 // MultiArrayShapeConstraint is an idiomatic wrapper over the Objective-C class MLMultiArrayShapeConstraint.
+//
+// The lists of shapes or ranges of shapes that constrain a multiarray feature.
 type MultiArrayShapeConstraint struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MultiArrayShapeConstraintFromID(id objc.ID) *MultiArrayShapeConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &MultiArrayShapeConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MultiArrayShapeConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func multiArrayShapeConstraintAdopt(id objc.ID) *MultiArrayShapeConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &MultiArrayShapeConstraint{Handle: objref.Wrap(id)}
+	x := &MultiArrayShapeConstraint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,23 +60,34 @@ func (x *MultiArrayShapeConstraint) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MultiArrayShapeConstraint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMultiArrayShapeConstraint creates a new MultiArrayShapeConstraint.
 func NewMultiArrayShapeConstraint() *MultiArrayShapeConstraint {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLMultiArrayShapeConstraint")), objc.RegisterName("new"))
 	return multiArrayShapeConstraintAdopt(_id)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *MultiArrayShapeConstraint) Type() MultiArrayShapeConstraintType {
 	_r := objc.Send[MultiArrayShapeConstraintType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
+// SizeRangeForDimension wraps the corresponding Objective-C method.
+//
 // SizeRangeForDimension returns the collection as a Go slice.
 func (x *MultiArrayShapeConstraint) SizeRangeForDimension() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sizeRangeForDimension"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// EnumeratedShapes wraps the corresponding Objective-C method.
+//
 // EnumeratedShapes returns the collection as a Go slice.
 func (x *MultiArrayShapeConstraint) EnumeratedShapes() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumeratedShapes"))

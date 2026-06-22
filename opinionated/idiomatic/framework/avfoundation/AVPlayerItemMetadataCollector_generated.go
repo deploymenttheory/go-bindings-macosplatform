@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object used to capture the date range metadata defined for an HTTP Live Streaming asset.
-//
 // PlayerItemMetadataCollector is an idiomatic wrapper over the Objective-C class AVPlayerItemMetadataCollector.
+//
+// It embeds [PlayerItemMediaDataCollector], promoting that type's methods.
+//
+// An object used to capture the date range metadata defined for an HTTP Live Streaming asset.
 type PlayerItemMetadataCollector struct {
-	objref.Handle
+	PlayerItemMediaDataCollector
 }
 
 // PlayerItemMetadataCollectorFromID adopts an existing Objective-C object as a PlayerItemMetadataCollector
@@ -25,7 +26,8 @@ func PlayerItemMetadataCollectorFromID(id objc.ID) *PlayerItemMetadataCollector 
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemMetadataCollector{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlayerItemMetadataCollector{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,36 +40,20 @@ func playerItemMetadataCollectorAdopt(id objc.ID) *PlayerItemMetadataCollector {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemMetadataCollector{Handle: objref.Wrap(id)}
+	x := &PlayerItemMetadataCollector{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *PlayerItemMetadataCollector) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlayerItemMetadataCollector) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlayerItemMetadataCollector) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a metadata collector to access a stream’s metadata groups matching the specified array of identifiers and classifying labels.
-//
-// NewPlayerItemMetadataCollectorWithIdentifiersClassifyingLabels creates a new PlayerItemMetadataCollector.
+// NewPlayerItemMetadataCollectorWithIdentifiersClassifyingLabels creates a metadata collector to access a stream’s metadata groups matching the specified array of identifiers and classifying labels.
 func NewPlayerItemMetadataCollectorWithIdentifiersClassifyingLabels(identifiers []string, classifyingLabels []string) *PlayerItemMetadataCollector {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemMetadataCollector")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifiers:classifyingLabels:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }), purego.SliceToNSArray(classifyingLabels, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return playerItemMetadataCollectorAdopt(_id)
 }
 
-// The dispatch queue on which messages are sent to the delegate. This property is not key-value observable.
+// DelegateQueue the dispatch queue on which messages are sent to the delegate. This property is not key-value observable.
 func (x *PlayerItemMetadataCollector) DelegateQueue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegateQueue"))
 	return obj.Wrap(_r)
@@ -80,3 +66,5 @@ type PlayerItemMetadataCollectorable interface {
 }
 
 var _ PlayerItemMetadataCollectorable = (*PlayerItemMetadataCollector)(nil)
+
+var _ PlayerItemMediaDataCollectorProvider = (*PlayerItemMetadataCollector)(nil)

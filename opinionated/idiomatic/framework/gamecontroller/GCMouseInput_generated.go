@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A controller profile that tracks input from a mouse.
-//
 // MouseInput is an idiomatic wrapper over the Objective-C class GCMouseInput.
+//
+// It embeds [PhysicalInputProfile], promoting that type's methods.
+//
+// A controller profile that tracks input from a mouse.
 type MouseInput struct {
-	objref.Handle
+	PhysicalInputProfile
 }
 
 // MouseInputFromID adopts an existing Objective-C object as a MouseInput
@@ -25,7 +26,8 @@ func MouseInputFromID(id objc.ID) *MouseInput {
 	if id == 0 {
 		return nil
 	}
-	x := &MouseInput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MouseInput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func mouseInputAdopt(id objc.ID) *MouseInput {
 	if id == 0 {
 		return nil
 	}
-	x := &MouseInput{Handle: objref.Wrap(id)}
+	x := &MouseInput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MouseInput) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MouseInput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MouseInput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMouseInput creates a new MouseInput.
@@ -64,36 +52,38 @@ func NewMouseInput() *MouseInput {
 	return mouseInputAdopt(_id)
 }
 
-// The block that the profile calls when an element’s value changes.
-//
-// WithValueDidChangeHandler sets valueDidChangeHandler and returns the receiver so calls can be chained.
+// WithValueDidChangeHandler the block that the profile calls when an element’s value changes.
 func (x *MouseInput) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *MouseInput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return x
 }
 
-// Scroll is a dpad with undefined range.
+// Scroll scroll is a dpad with undefined range.
 func (x *MouseInput) Scroll() *DeviceCursor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scroll"))
 	return DeviceCursorFromID(_r)
 }
 
-// Mouse buttons that can be used only as digital inputs
+// LeftButton mouse buttons that can be used only as digital inputs
 func (x *MouseInput) LeftButton() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftButton"))
 	return ControllerButtonInputFromID(_r)
 }
 
+// RightButton wraps the corresponding Objective-C method.
 func (x *MouseInput) RightButton() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightButton"))
 	return ControllerButtonInputFromID(_r)
 }
 
+// MiddleButton wraps the corresponding Objective-C method.
 func (x *MouseInput) MiddleButton() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("middleButton"))
 	return ControllerButtonInputFromID(_r)
 }
 
+// AuxiliaryButtons wraps the corresponding Objective-C method.
+//
 // AuxiliaryButtons returns the collection as a Go slice.
 func (x *MouseInput) AuxiliaryButtons() []*ControllerButtonInput {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("auxiliaryButtons"))
@@ -112,3 +102,5 @@ type MouseInputable interface {
 }
 
 var _ MouseInputable = (*MouseInput)(nil)
+
+var _ PhysicalInputProfileProvider = (*MouseInput)(nil)

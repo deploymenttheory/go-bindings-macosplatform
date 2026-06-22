@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that indicates whether sensitive content is present and includes intervention guidance.
-//
 // SensitivityAnalysis is an idiomatic wrapper over the Objective-C class SCSensitivityAnalysis.
+//
+// An object that indicates whether sensitive content is present and includes intervention guidance.
 type SensitivityAnalysis struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SensitivityAnalysisFromID(id objc.ID) *SensitivityAnalysis {
 	if id == 0 {
 		return nil
 	}
-	x := &SensitivityAnalysis{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SensitivityAnalysis{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func sensitivityAnalysisAdopt(id objc.ID) *SensitivityAnalysis {
 	if id == 0 {
 		return nil
 	}
-	x := &SensitivityAnalysis{Handle: objref.Wrap(id)}
+	x := &SensitivityAnalysis{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +60,31 @@ func (x *SensitivityAnalysis) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SensitivityAnalysis) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSensitivityAnalysis creates a new SensitivityAnalysis.
 func NewSensitivityAnalysis() *SensitivityAnalysis {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCSensitivityAnalysis")), objc.RegisterName("new"))
 	return sensitivityAnalysisAdopt(_id)
 }
 
+// IsSensitive wraps the corresponding Objective-C method.
 func (x *SensitivityAnalysis) IsSensitive() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSensitive"))
 	return _r
 }
 
-// Intervention guidance that suggests the app indicate the presence of sensitive content.
+// ShouldIndicateSensitivity intervention guidance that suggests the app indicate the presence of sensitive content.
 func (x *SensitivityAnalysis) ShouldIndicateSensitivity() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldIndicateSensitivity"))
 	return _r
 }
 
-// Intervention guidance that suggests the app mute the audio of the current video stream.
+// ShouldMuteAudio intervention guidance that suggests the app mute the audio of the current video stream.
 func (x *SensitivityAnalysis) ShouldMuteAudio() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldMuteAudio"))
 	return _r

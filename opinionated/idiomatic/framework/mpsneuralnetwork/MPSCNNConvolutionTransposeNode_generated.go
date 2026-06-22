@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A MPSNNFilterNode representing a MPSCNNConvolutionTranspose kernel
-//
 // CNNConvolutionTransposeNode is an idiomatic wrapper over the Objective-C class MPSCNNConvolutionTransposeNode.
+//
+// It embeds [CNNConvolutionNode], promoting that type's methods.
+//
+// A MPSNNFilterNode representing a MPSCNNConvolutionTranspose kernel
 type CNNConvolutionTransposeNode struct {
-	objref.Handle
+	CNNConvolutionNode
 }
 
 // CNNConvolutionTransposeNodeFromID adopts an existing Objective-C object as a CNNConvolutionTransposeNode
@@ -25,7 +26,8 @@ func CNNConvolutionTransposeNodeFromID(id objc.ID) *CNNConvolutionTransposeNode 
 	if id == 0 {
 		return nil
 	}
-	x := &CNNConvolutionTransposeNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNConvolutionTransposeNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func cNNConvolutionTransposeNodeAdopt(id objc.ID) *CNNConvolutionTransposeNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNConvolutionTransposeNode{Handle: objref.Wrap(id)}
+	x := &CNNConvolutionTransposeNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNConvolutionTransposeNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNConvolutionTransposeNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNConvolutionTransposeNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNConvolutionTransposeNode creates a new CNNConvolutionTransposeNode.
@@ -64,25 +52,19 @@ func NewCNNConvolutionTransposeNode() *CNNConvolutionTransposeNode {
 	return cNNConvolutionTransposeNodeAdopt(_id)
 }
 
-// The training style of the forward node will be propagated to gradient nodes made from it
-//
-// WithTrainingStyle sets trainingStyle and returns the receiver so calls can be chained.
+// WithTrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
 func (x *CNNConvolutionTransposeNode) WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNConvolutionTransposeNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStyle:"), trainingStyle)
 	return x
 }
 
-// Set the floating-point precision used by the convolution accumulator Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
-//
-// WithAccumulatorPrecision sets accumulatorPrecision and returns the receiver so calls can be chained.
+// WithAccumulatorPrecision set the floating-point precision used by the convolution accumulator Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
 func (x *CNNConvolutionTransposeNode) WithAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) *CNNConvolutionTransposeNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccumulatorPrecision:"), accumulatorPrecision)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNConvolutionTransposeNode) WithLabel(label string) *CNNConvolutionTransposeNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -97,3 +79,7 @@ type CNNConvolutionTransposeNodeable interface {
 }
 
 var _ CNNConvolutionTransposeNodeable = (*CNNConvolutionTransposeNode)(nil)
+
+var _ CNNConvolutionNodeProvider = (*CNNConvolutionTransposeNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNConvolutionTransposeNode)(nil)

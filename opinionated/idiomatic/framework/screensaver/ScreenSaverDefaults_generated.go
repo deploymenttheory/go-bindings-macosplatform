@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that defines a set of methods for saving and restoring user defaults for screen savers.
-//
 // ScreenSaverDefaults is an idiomatic wrapper over the Objective-C class ScreenSaverDefaults.
+//
+// A class that defines a set of methods for saving and restoring user defaults for screen savers.
 type ScreenSaverDefaults struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ScreenSaverDefaultsFromID(id objc.ID) *ScreenSaverDefaults {
 	if id == 0 {
 		return nil
 	}
-	x := &ScreenSaverDefaults{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScreenSaverDefaults{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func screenSaverDefaultsAdopt(id objc.ID) *ScreenSaverDefaults {
 	if id == 0 {
 		return nil
 	}
-	x := &ScreenSaverDefaults{Handle: objref.Wrap(id)}
+	x := &ScreenSaverDefaults{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *ScreenSaverDefaults) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *ScreenSaverDefaults) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScreenSaverDefaults) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewScreenSaverDefaults creates a new ScreenSaverDefaults.

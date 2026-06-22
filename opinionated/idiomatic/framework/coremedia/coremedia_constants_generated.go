@@ -9,65 +9,53 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// CFDictionary key for value field of CMTime (CFNumber containing int64_t)
 // KCMTimeValueKey returns the value of the constant kCMTimeValueKey.
 func KCMTimeValueKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCMTimeValueKey"))) }
 
-// CFDictionary key for timescale field of CMTime (CFNumber containing int32_t)
 // KCMTimeScaleKey returns the value of the constant kCMTimeScaleKey.
 func KCMTimeScaleKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCMTimeScaleKey"))) }
 
-// CFDictionary key for epoch field of CMTime (CFNumber containing int64_t)
 // KCMTimeEpochKey returns the value of the constant kCMTimeEpochKey.
 func KCMTimeEpochKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCMTimeEpochKey"))) }
 
-// CFDictionary key for flags field of CMTime (CFNumber containing uint32_t)
 // KCMTimeFlagsKey returns the value of the constant kCMTimeFlagsKey.
 func KCMTimeFlagsKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCMTimeFlagsKey"))) }
 
-// CFDictionary key for start field of a CMTimeRange (CMTime)
 // KCMTimeRangeStartKey returns the value of the constant kCMTimeRangeStartKey.
 func KCMTimeRangeStartKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTimeRangeStartKey")))
 }
 
-// CFDictionary key for timescale field of a CMTimeRange (CMTime)
 // KCMTimeRangeDurationKey returns the value of the constant kCMTimeRangeDurationKey.
 func KCMTimeRangeDurationKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTimeRangeDurationKey")))
 }
 
-// CFDictionary key for source field of a CMTimeMapping (CMTimeRange)
 // KCMTimeMappingSourceKey returns the value of the constant kCMTimeMappingSourceKey.
 func KCMTimeMappingSourceKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTimeMappingSourceKey")))
 }
 
-// CFDictionary key for target field of a CMTimeMapping (CMTimeRange)
 // KCMTimeMappingTargetKey returns the value of the constant kCMTimeMappingTargetKey.
 func KCMTimeMappingTargetKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTimeMappingTargetKey")))
 }
 
-// This extension contains a media-type-specific dictionary of settings used to produce a compressed media buffer. This extension is valid for format descriptions of all media types, but the contents of the dictionary are defined in a media-specific way.  The dictionary and its contents are valid property list objects. This means that dictionary keys are all CFStrings, and the values are all either CFNumber, CFString, CFBoolean, CFArray, CFDictionary, CFDate, or CFData.
 // KCMFormatDescriptionExtension_OriginalCompressionSettings returns the value of the constant kCMFormatDescriptionExtension_OriginalCompressionSettings.
 func KCMFormatDescriptionExtension_OriginalCompressionSettings() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_OriginalCompressionSettings")))
 }
 
-// Sample description extension atoms that were not translated into other entries in the extensions dictionary. This key is used by sample description bridges to hold sample description extension atoms that they do not recognize. The extension is a CFDictionary mapping CFStrings of the four-char-code atom types to either CFDatas containing the atom payload or (to represent multiple atoms of a specific type) to CFArrays of CFData containing those payloads.
 // KCMFormatDescriptionExtension_SampleDescriptionExtensionAtoms returns the value of the constant kCMFormatDescriptionExtension_SampleDescriptionExtensionAtoms.
 func KCMFormatDescriptionExtension_SampleDescriptionExtensionAtoms() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_SampleDescriptionExtensionAtoms")))
 }
 
-// Preserves the original SampleDescription data. This extension is used to ensure that roundtrips from sample descriptions to CMFormatDescriptions back to sample descriptions preserve the exact original sample descriptions. IMPORTANT: If you make a modified clone of a CMFormatDescription, you must delete this extension from the clone, or your modifications could be lost.
 // KCMFormatDescriptionExtension_VerbatimSampleDescription returns the value of the constant kCMFormatDescriptionExtension_VerbatimSampleDescription.
 func KCMFormatDescriptionExtension_VerbatimSampleDescription() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_VerbatimSampleDescription")))
 }
 
-// Preserves the original ISOSampleEntry data. This extension is used to ensure that roundtrips from ISO Sample Entry (ie. AudioSampleEntry or VisualSampleEntry) to CMFormatDescriptions back to ISO Sample Entry preserve the exact original sample descriptions. IMPORTANT: If you make a modified clone of a CMFormatDescription, you must delete this extension from the clone, or your modifications could be lost.
 // KCMFormatDescriptionExtension_VerbatimISOSampleEntry returns the value of the constant kCMFormatDescriptionExtension_VerbatimISOSampleEntry.
 func KCMFormatDescriptionExtension_VerbatimISOSampleEntry() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_VerbatimISOSampleEntry")))
@@ -453,7 +441,6 @@ func KCMFormatDescriptionExtension_HorizontalFieldOfView() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_HorizontalFieldOfView")))
 }
 
-// The value is a CFString holding fully specified reverse DNS identifier. Content captured in Apple Log will have this key set to kCMFormatDescriptionLogTransferFunction_AppleLog. You can download the Apple Log Profile White Paper from the Apple Developer Downloads website.
 // KCMFormatDescriptionExtension_LogTransferFunction returns the value of the constant kCMFormatDescriptionExtension_LogTransferFunction.
 func KCMFormatDescriptionExtension_LogTransferFunction() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_LogTransferFunction")))
@@ -464,7 +451,6 @@ func KCMFormatDescriptionLogTransferFunction_AppleLog() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionLogTransferFunction_AppleLog")))
 }
 
-// Indicates which of the two eyes should be used as the primary when rendering in 2D. It is usually perpendicular to the target image surface. The value is a CFString holding one of the kCMFormatDescriptionHeroEye_* constants.
 // KCMFormatDescriptionExtension_HeroEye returns the value of the constant kCMFormatDescriptionExtension_HeroEye.
 func KCMFormatDescriptionExtension_HeroEye() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_HeroEye")))
@@ -480,37 +466,31 @@ func KCMFormatDescriptionHeroEye_Right() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionHeroEye_Right")))
 }
 
-// Indicates the distance between centers of the lenses of the camera system. The value is a CFNumber holding an unsigned 32-bit integer that is interpreted in micrometers or thousandths of a millimeter (e.g., 63123 is 63.123 millimeters). This property is optional and should only be specified if the distance is known.
 // KCMFormatDescriptionExtension_StereoCameraBaseline returns the value of the constant kCMFormatDescriptionExtension_StereoCameraBaseline.
 func KCMFormatDescriptionExtension_StereoCameraBaseline() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_StereoCameraBaseline")))
 }
 
-// Indicates a relative shift of the left and right images, which changes the zero parallax plane. The value encoded in normalized image space is a CFNumber holding a signed 32-bit integer measured over the range of -10000 to 10000 mapping to the uniform range [-1.0...1.0]. The interval of 0.0 to 1.0 or 0 to 10000 maps onto the stereo eye view image width. The negative interval 0.0 to -1.0 or 0 to -10000 similarly map onto the stereo eye view image width. The default value of 0 is interpreted if this property is not set. If the property is not set, NULL may be set and retrieved. The NULL value should be interpreted as meaning 0. This property is optional and should only be specified if a disparity adjustment including 0 is known.
 // KCMFormatDescriptionExtension_HorizontalDisparityAdjustment returns the value of the constant kCMFormatDescriptionExtension_HorizontalDisparityAdjustment.
 func KCMFormatDescriptionExtension_HorizontalDisparityAdjustment() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_HorizontalDisparityAdjustment")))
 }
 
-// Indicates the stereo left eye is present in video frames. The value is a CFBoolean holding presence of left eye view in the stream.
 // KCMFormatDescriptionExtension_HasLeftStereoEyeView returns the value of the constant kCMFormatDescriptionExtension_HasLeftStereoEyeView.
 func KCMFormatDescriptionExtension_HasLeftStereoEyeView() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_HasLeftStereoEyeView")))
 }
 
-// Indicates the stereo right eye is present in video frames. The value is a CFBoolean holding presence of right eye view in the stream.
 // KCMFormatDescriptionExtension_HasRightStereoEyeView returns the value of the constant kCMFormatDescriptionExtension_HasRightStereoEyeView.
 func KCMFormatDescriptionExtension_HasRightStereoEyeView() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_HasRightStereoEyeView")))
 }
 
-// Indicates that one or more additional views may be present beyond stereo left and stereo right eyes (e.g,. a “centerline” view). The value is a CFBoolean holding presence of additional eye views in the stream.
 // KCMFormatDescriptionExtension_HasAdditionalViews returns the value of the constant kCMFormatDescriptionExtension_HasAdditionalViews.
 func KCMFormatDescriptionExtension_HasAdditionalViews() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_HasAdditionalViews")))
 }
 
-// Indicates the projection that should be applied to presented decoded video frames. The value is a CFString holding one of the kCMFormatDescriptionProjectionKind_* constants.
 // KCMFormatDescriptionExtension_ProjectionKind returns the value of the constant kCMFormatDescriptionExtension_ProjectionKind.
 func KCMFormatDescriptionExtension_ProjectionKind() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_ProjectionKind")))
@@ -541,7 +521,6 @@ func KCMFormatDescriptionProjectionKind_AppleImmersiveVideo() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionProjectionKind_AppleImmersiveVideo")))
 }
 
-// Indicates the packing type of stereoscopic video frames. The value is a CFString holding one of the kCMFormatDescriptionViewPackingKind_* constants.
 // KCMFormatDescriptionExtension_ViewPackingKind returns the value of the constant kCMFormatDescriptionExtension_ViewPackingKind.
 func KCMFormatDescriptionExtension_ViewPackingKind() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_ViewPackingKind")))
@@ -557,13 +536,11 @@ func KCMFormatDescriptionViewPackingKind_OverUnder() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionViewPackingKind_OverUnder")))
 }
 
-// Specifies intrinsic and extrinsic parameters for single or multiple lenses. The property value is an array of dictionaries describing the camera calibration data for each lens. The camera calibration data includes intrinsics and extrinics with other parameters. For a stereoscopic camera system, the left and right lens signaling can be done with the kCMFormatDescriptionCameraCalibration_LensRole key and its value.
 // KCMFormatDescriptionExtension_CameraCalibrationDataLensCollection returns the value of the constant kCMFormatDescriptionExtension_CameraCalibrationDataLensCollection.
 func KCMFormatDescriptionExtension_CameraCalibrationDataLensCollection() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_CameraCalibrationDataLensCollection")))
 }
 
-// The following keys are required in each kCMFormatDescriptionExtension_CameraCalibrationDataLensCollection dictionary. Specifies the camera calibration methodology. If the algorithm kind is ParametricLens, the camera lens collection requires camera intrinsic and extrinsic parameters. Specifies the kind of lens (e.g., color). Specifies a unique number associated with a lens. Specifies the particular use of the lens in the camera system (e.g., left or right for a stereo system). For a stereoscopic camera system, one lens should have the left role and another should have the right role. Specifies the first and second radial distortion coefficients(k1 and k2) used to correct the distortion that appeared as curved lines for straight lines and the first and second tangential distortion coefficients(p1 and p2) used to correct the distortion caused by a lens's improper alignment of physical elements. The values are in a CFArray of four CFNumbers in k1, k2, p1 and p2 order. Specifies a three element polynomial for mapping x axis UV parameters with an adjustment using the equation `x' = polynomialX[0] + polynomialX[1]*x + polynomialX[2]*x^3`. The values are in a CFArray of three CFNumbers(float) in the order polynomialX[0], polynomialX[1] & polynomialX[2]. The polynomial transform origin is at the center of the frame. The default values of elements of polynomialX[] are [0.0, 1.0, 0.0]. Specifies a three element polynomial for mapping y axis UV parameters with an adjustment using the equation `y' = polynomialY[0] + polynomialY[1]*y + polynomialY[2]*y^3`. The values are in a CFArray of three CFNumbers(float) in the order polynomialY[0], polynomialY[1] & polynomialY[2]. The polynomial transform origin is at the center of the frame. The default values of elements of polynomialY[] are [0.0, 1.0, 0.0]. Specifies the outer limit of the calibration validity in degrees of angle eccentric from the optical axis. The value is linked to radial distortion corrections with k1 and k2. Specifies the 3x3 camera intrinsic matrix for camera calibration. Camera intrinsic matrix is a CFData containing a matrix_float3x3, which is column-major. Each element is in IEEE754 native-endian 32-bit floating point. It has the following contents: fx	s	cx 0	fy	cy 0	0	1 fx and fy are the focal length in pixels. For square pixels, they will have the same value. cx and cy are the coordinates of the principal point. The origin is the upper left of the frame. s is an optional skew factor. Specifies the offset of the point of perspective relative to the rectilinear projection. Specifies the image dimensions to which the camera’s intrinsic matrix values are relative. Values are width and height in a CFDictionary. Dictionary keys are compatible with CGSize dictionary, namely "Width" and "Height". Identifies how the origin of the camera system's extrinsics are determined. The 'blin' value indicates the center of transform is determined by the point mid way along the dimensions indicated by the StereoCameraSystemBaselineBox held in the StereoCameraSystemBox. Each left and right lens within a stereoscopic camera system is equidistant from this point, so the 'blin' value is halved when associated with the respective left and right lenses. Specifies a camera’s orientation to a world or scene coordinate system. The orientation value is a unit quaternion(ix, iy, and iz) instead of the classical 3x3 matrix. The values are in a CFArray of three CFNumbers in ix, iy, and iz order.
 // KCMFormatDescriptionCameraCalibration_LensAlgorithmKind returns the value of the constant kCMFormatDescriptionCameraCalibration_LensAlgorithmKind.
 func KCMFormatDescriptionCameraCalibration_LensAlgorithmKind() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionCameraCalibration_LensAlgorithmKind")))
@@ -659,7 +636,6 @@ func KCMFormatDescriptionCameraCalibration_ExtrinsicOrientationQuaternion() obj.
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionCameraCalibration_ExtrinsicOrientationQuaternion")))
 }
 
-// Indicates that the image description contains projected media data converted from an external format This format description extension is included if boxes containing external stereoscopic or spherical projection information were parsed.
 // KCMFormatDescriptionExtension_ConvertedFromExternalSphericalTags returns the value of the constant kCMFormatDescriptionExtension_ConvertedFromExternalSphericalTags.
 func KCMFormatDescriptionExtension_ConvertedFromExternalSphericalTags() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_ConvertedFromExternalSphericalTags")))
@@ -890,13 +866,11 @@ func KCMMetadataFormatDescriptionMetadataSpecificationKey_SetupData() obj.Object
 	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataFormatDescriptionMetadataSpecificationKey_SetupData")))
 }
 
-// Posted on a CMSampleBuffer by CMSampleBufferSetDataReady when the buffer becomes ready.
 // KCMSampleBufferNotification_DataBecameReady returns the value of the constant kCMSampleBufferNotification_DataBecameReady.
 func KCMSampleBufferNotification_DataBecameReady() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferNotification_DataBecameReady")))
 }
 
-// Posted on a CMSampleBuffer by CMSampleBufferSetDataFailed to report that the buffer will never become ready.
 // KCMSampleBufferNotification_DataFailed returns the value of the constant kCMSampleBufferNotification_DataFailed.
 func KCMSampleBufferNotification_DataFailed() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferNotification_DataFailed")))
@@ -907,7 +881,6 @@ func KCMSampleBufferNotificationParameter_OSStatus() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferNotificationParameter_OSStatus")))
 }
 
-// Posted on a conduit of CMSampleBuffers (eg, a CMBufferQueue) to announce a coming discontinuity and specify a tag value that will be attached to the first CMSampleBuffer following the discontinuity. The first CMSampleBuffer following the discontinuity should have a kCMSampleBufferAttachmentKey_ResumeOutput attachment with value containing the same CFNumber as this notification's payload's kCMSampleBufferConduitNotificationParameter_ResumeTag. The consumer should discard output data until it receives this CMSampleBuffer. If multiple kCMSampleBufferConduitNotification_InhibitOutputUntil notifications are received, the last one indicates the tag to trigger resuming.
 // KCMSampleBufferConduitNotification_InhibitOutputUntil returns the value of the constant kCMSampleBufferConduitNotification_InhibitOutputUntil.
 func KCMSampleBufferConduitNotification_InhibitOutputUntil() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferConduitNotification_InhibitOutputUntil")))
@@ -918,13 +891,11 @@ func KCMSampleBufferConduitNotificationParameter_ResumeTag() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferConduitNotificationParameter_ResumeTag")))
 }
 
-// Posted on a conduit of CMSampleBuffers (eg, a CMBufferQueue) to request invalidation of pending output data.
 // KCMSampleBufferConduitNotification_ResetOutput returns the value of the constant kCMSampleBufferConduitNotification_ResetOutput.
 func KCMSampleBufferConduitNotification_ResetOutput() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferConduitNotification_ResetOutput")))
 }
 
-// Posted on a conduit of video CMSampleBuffers (eg, a CMBufferQueue) to report information about the range of upcoming CMSampleBuffer output presentation timestamps.
 // KCMSampleBufferConduitNotification_UpcomingOutputPTSRangeChanged returns the value of the constant kCMSampleBufferConduitNotification_UpcomingOutputPTSRangeChanged.
 func KCMSampleBufferConduitNotification_UpcomingOutputPTSRangeChanged() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferConduitNotification_UpcomingOutputPTSRangeChanged")))
@@ -945,7 +916,6 @@ func KCMSampleBufferConduitNotificationParameter_MaxUpcomingOutputPTS() obj.Obje
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferConduitNotificationParameter_MaxUpcomingOutputPTS")))
 }
 
-// Posted when a CMSampleBuffer that has kCMSampleBufferAttachmentKey_PostNotificationWhenConsumed is consumed. After an object consumes a CMSampleBuffer that has a kCMSampleBufferAttachmentKey_PostNotificationWhenConsumed attachment, it should post kCMSampleBufferConsumerNotification_BufferConsumed with itself as the notifyingObject and the attachment value as the payload. Such an attachment value must be a CFDictionary but the contents are client-defined. Note that a NULL refcon cannot be attached to a CMSampleBuffer.
 // KCMSampleBufferConsumerNotification_BufferConsumed returns the value of the constant kCMSampleBufferConsumerNotification_BufferConsumed.
 func KCMSampleBufferConsumerNotification_BufferConsumed() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferConsumerNotification_BufferConsumed")))
@@ -1011,7 +981,6 @@ func KCMSampleBufferAttachmentKey_ResumeOutput() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_ResumeOutput")))
 }
 
-// Indicates a video frame's level within a hierarchical frame dependency structure. When present, the temporal level attachments among a group of video frames provide information about where inter-frame dependencies may and may not exist. The temporal level attachment, if present, is a positive CFNumber, and indicates that this video frame does not depend on any video frame with a greater temporal level. The attachment may be absent if no such information is available.
 // KCMSampleAttachmentKey_HEVCTemporalLevelInfo returns the value of the constant kCMSampleAttachmentKey_HEVCTemporalLevelInfo.
 func KCMSampleAttachmentKey_HEVCTemporalLevelInfo() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleAttachmentKey_HEVCTemporalLevelInfo")))
@@ -1072,199 +1041,165 @@ func KCMSampleAttachmentKey_AudioIndependentSampleDecoderRefreshCount() obj.Obje
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleAttachmentKey_AudioIndependentSampleDecoderRefreshCount")))
 }
 
-// Marks a transition from one source of buffers (eg. song) to another For example, during gapless playback of a list of songs, this attachment marks the first buffer from the next song. If this attachment is on a buffer containing no samples, the first following buffer that contains samples is the buffer that contains the first samples from the next song.  The value of this attachment is a CFTypeRef.  This transition identifier should be unique within a playlist, so each transition in a playlist is uniquely identifiable.  A CFNumberRef counter that increments with each transition is a simple example.
 // KCMSampleBufferAttachmentKey_TransitionID returns the value of the constant kCMSampleBufferAttachmentKey_TransitionID.
 func KCMSampleBufferAttachmentKey_TransitionID() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_TransitionID")))
 }
 
-// The duration that should be removed at the beginning of the sample buffer, after decoding. If this attachment is not present, the trim duration is zero (nothing removed). This is a CMTime in CFDictionary format as made by CMTimeCopyAsDictionary; use CMTimeMakeFromDictionary to convert to CMTime. In cases where all the output after decoding the sample buffer is to be discarded (eg, the samples are only being decoded to prime the decoder) the usual convention is to set kCMSampleBufferAttachmentKey_TrimDurationAtStart to the whole duration and not to set a kCMSampleBufferAttachmentKey_TrimDurationAtEnd attachment. Note that setting or removing kCMSampleBufferAttachmentKey_TrimDurationAtStart from a sample buffer will not adjust an explicitly-set OutputPresentationTimeStamp.
 // KCMSampleBufferAttachmentKey_TrimDurationAtStart returns the value of the constant kCMSampleBufferAttachmentKey_TrimDurationAtStart.
 func KCMSampleBufferAttachmentKey_TrimDurationAtStart() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_TrimDurationAtStart")))
 }
 
-// The duration that should be removed at the end of the sample buffer, after decoding. If this attachment is not present, the trim duration is zero (nothing removed). This is a CMTime in CFDictionary format as made by CMTimeCopyAsDictionary; use CMTimeMakeFromDictionary to convert to CMTime.
 // KCMSampleBufferAttachmentKey_TrimDurationAtEnd returns the value of the constant kCMSampleBufferAttachmentKey_TrimDurationAtEnd.
 func KCMSampleBufferAttachmentKey_TrimDurationAtEnd() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_TrimDurationAtEnd")))
 }
 
-// The factor by which the sample buffer's presentation should be accelerated (eg, in a scaled edit). For normal playback the speed multiplier would be 1.0 (which is used if this attachment is not present); for double-speed playback the speed multiplier would be 2.0, which would halve the output duration. Speed-multiplication factors take effect after trimming; see CMSampleBufferGetOutputDuration. Note that this attachment principally provides information about the duration-stretching effect: by default, it should be implemented by rate conversion, but other attachments may specify richer stretching operations -- for example, scaling without pitch shift, or pitch shift without changing duration. Sequences of speed-multiplied sample buffers should have explicit OutputPresentationTimeStamp attachments to clarify when each should be output.
 // KCMSampleBufferAttachmentKey_SpeedMultiplier returns the value of the constant kCMSampleBufferAttachmentKey_SpeedMultiplier.
 func KCMSampleBufferAttachmentKey_SpeedMultiplier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_SpeedMultiplier")))
 }
 
-// Indicates that the decoded contents of the sample buffer should be reversed. If this attachment is not present, the sample buffer should be played forwards as usual. Reversal occurs after trimming and speed multipliers.
 // KCMSampleBufferAttachmentKey_Reverse returns the value of the constant kCMSampleBufferAttachmentKey_Reverse.
 func KCMSampleBufferAttachmentKey_Reverse() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_Reverse")))
 }
 
-// Fill the difference between discontiguous sample buffers with silence. If a sample buffer enters a buffer queue and the presentation time stamp between the previous buffer and the buffer with this attachment are discontiguous, handle the discontinuity by generating silence for the time difference.
 // KCMSampleBufferAttachmentKey_FillDiscontinuitiesWithSilence returns the value of the constant kCMSampleBufferAttachmentKey_FillDiscontinuitiesWithSilence.
 func KCMSampleBufferAttachmentKey_FillDiscontinuitiesWithSilence() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_FillDiscontinuitiesWithSilence")))
 }
 
-// Marks an intentionally empty interval in the sequence of samples. The sample buffer's output presentation timestamp indicates when the empty interval begins. Marker sample buffers with this attachment are used to announce the arrival of empty edits.
 // KCMSampleBufferAttachmentKey_EmptyMedia returns the value of the constant kCMSampleBufferAttachmentKey_EmptyMedia.
 func KCMSampleBufferAttachmentKey_EmptyMedia() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_EmptyMedia")))
 }
 
-// Marks the end of the sequence of samples. Marker sample buffers with this attachment in addition to kCMSampleBufferAttachmentKey_EmptyMedia are used to indicate that no further samples are expected.
 // KCMSampleBufferAttachmentKey_PermanentEmptyMedia returns the value of the constant kCMSampleBufferAttachmentKey_PermanentEmptyMedia.
 func KCMSampleBufferAttachmentKey_PermanentEmptyMedia() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_PermanentEmptyMedia")))
 }
 
-// Tells that the empty marker should be dequeued immediately regardless of its timestamp. Marker sample buffers with this attachment in addition to kCMSampleBufferAttachmentKey_EmptyMedia are used to tell that the empty sample buffer should be dequeued immediately regardless of its timestamp. This attachment should only be used with sample buffers with the kCMSampleBufferAttachmentKey_EmptyMedia attachment.
 // KCMSampleBufferAttachmentKey_DisplayEmptyMediaImmediately returns the value of the constant kCMSampleBufferAttachmentKey_DisplayEmptyMediaImmediately.
 func KCMSampleBufferAttachmentKey_DisplayEmptyMediaImmediately() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_DisplayEmptyMediaImmediately")))
 }
 
-// Indicates that sample buffer's decode timestamp may be used to define the previous sample buffer's duration. Marker sample buffers with this attachment may be used in situations where sample buffers are transmitted before their duration is known. In such situations, normally the recipient may use each sample buffer's timestamp to calculate the duration of the previous sample buffer. The marker sample buffer with this attachment is sent to provide the timestamp for calculating the final sample buffer's duration.
 // KCMSampleBufferAttachmentKey_EndsPreviousSampleDuration returns the value of the constant kCMSampleBufferAttachmentKey_EndsPreviousSampleDuration.
 func KCMSampleBufferAttachmentKey_EndsPreviousSampleDuration() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_EndsPreviousSampleDuration")))
 }
 
-// Indicates the URL where the sample data is. This key is only used for CMSampleBuffers representing sample references. Such CMSampleBuffers: - have dataBuffer == NULL and imageBuffer == NULL - have dataReady == true and no makeDataReadyCallback - have a non-NULL formatDescription - have numSamples > 0 - have numSampleTimingEntries > 0 and numSampleSizeEntries > 0
 // KCMSampleBufferAttachmentKey_SampleReferenceURL returns the value of the constant kCMSampleBufferAttachmentKey_SampleReferenceURL.
 func KCMSampleBufferAttachmentKey_SampleReferenceURL() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_SampleReferenceURL")))
 }
 
-// Indicates the byte offset at which the sample data begins. This key is only used for CMSampleBuffers representing sample references. Such CMSampleBuffers: - have dataBuffer == NULL and imageBuffer == NULL - have dataReady == true and no makeDataReadyCallback - have a non-NULL formatDescription - have numSamples > 0 - have numSampleTimingEntries > 0 and numSampleSizeEntries > 0
 // KCMSampleBufferAttachmentKey_SampleReferenceByteOffset returns the value of the constant kCMSampleBufferAttachmentKey_SampleReferenceByteOffset.
 func KCMSampleBufferAttachmentKey_SampleReferenceByteOffset() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_SampleReferenceByteOffset")))
 }
 
-// Indicates the decoder refresh count. Sample buffers with this attachment may be used to identify the audio decoder refresh count.
 // KCMSampleBufferAttachmentKey_GradualDecoderRefresh returns the value of the constant kCMSampleBufferAttachmentKey_GradualDecoderRefresh.
 func KCMSampleBufferAttachmentKey_GradualDecoderRefresh() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_GradualDecoderRefresh")))
 }
 
-// Indicates the reason the current video frame was dropped. Sample buffers with this attachment contain no image or data buffer.  They mark a dropped video frame.  This attachment identifies the reason for the droppage.
 // KCMSampleBufferAttachmentKey_DroppedFrameReason returns the value of the constant kCMSampleBufferAttachmentKey_DroppedFrameReason.
 func KCMSampleBufferAttachmentKey_DroppedFrameReason() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_DroppedFrameReason")))
 }
 
-// The frame was dropped because it was late The value of kCMSampleBufferAttachmentKey_DroppedFrameReason if a video capture client has indicated that late video frames should be dropped and the current frame is late.  This condition is typically caused by the client's processing taking too long.
 // KCMSampleBufferDroppedFrameReason_FrameWasLate returns the value of the constant kCMSampleBufferDroppedFrameReason_FrameWasLate.
 func KCMSampleBufferDroppedFrameReason_FrameWasLate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferDroppedFrameReason_FrameWasLate")))
 }
 
-// The frame was dropped because the module providing frames is out of buffers The value of kCMSampleBufferAttachmentKey_DroppedFrameReason if the module providing sample buffers has run out of source buffers.  This condition is typically caused by the client holding onto buffers for too long and can be alleviated by returning buffers to the provider.
 // KCMSampleBufferDroppedFrameReason_OutOfBuffers returns the value of the constant kCMSampleBufferDroppedFrameReason_OutOfBuffers.
 func KCMSampleBufferDroppedFrameReason_OutOfBuffers() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferDroppedFrameReason_OutOfBuffers")))
 }
 
-// An unknown number of frames were dropped The value of kCMSampleBufferAttachmentKey_DroppedFrameReason if the module providing sample buffers has experienced a discontinuity, and an unknown number of frames have been lost.  This condition is typically caused by the system being too busy.
 // KCMSampleBufferDroppedFrameReason_Discontinuity returns the value of the constant kCMSampleBufferDroppedFrameReason_Discontinuity.
 func KCMSampleBufferDroppedFrameReason_Discontinuity() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferDroppedFrameReason_Discontinuity")))
 }
 
-// Indicates additional information regarding the dropped video frame. Sample buffers with this attachment contain no image or data buffer.  They mark a dropped video frame. If present, this attachment provides additional information about the kCMSampleBufferAttachmentKey_DroppedFrameReason.
 // KCMSampleBufferAttachmentKey_DroppedFrameReasonInfo returns the value of the constant kCMSampleBufferAttachmentKey_DroppedFrameReasonInfo.
 func KCMSampleBufferAttachmentKey_DroppedFrameReasonInfo() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_DroppedFrameReasonInfo")))
 }
 
-// A discontinuity was caused by a camera mode switch. The value of kCMSampleBufferAttachmentKey_DroppedFrameReasonInfo if the module providing sample buffers has experienced a discontinuity due to a camera mode switch. Short discontinuities of this type can occur when the session is configured for still image capture on some devices.
 // KCMSampleBufferDroppedFrameReasonInfo_CameraModeSwitch returns the value of the constant kCMSampleBufferDroppedFrameReasonInfo_CameraModeSwitch.
 func KCMSampleBufferDroppedFrameReasonInfo_CameraModeSwitch() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferDroppedFrameReasonInfo_CameraModeSwitch")))
 }
 
-// Indicates information about the lens stabilization applied to the current still image buffer. Sample buffers that have been captured with a lens stabilization module may have an attachment of kCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo which has information about the stabilization status during the capture.  This key will not be present in CMSampleBuffers coming from cameras without a lens stabilization module.
 // KCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo returns the value of the constant kCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo.
 func KCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo")))
 }
 
-// The lens stabilization module was active for the duration this buffer.
 // KCMSampleBufferLensStabilizationInfo_Active returns the value of the constant kCMSampleBufferLensStabilizationInfo_Active.
 func KCMSampleBufferLensStabilizationInfo_Active() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferLensStabilizationInfo_Active")))
 }
 
-// The motion of the device or duration of the capture was outside of what the stabilization mechanism could support. The value of kCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo if the module stabilizing the lens was unable to compensate for the movement.
 // KCMSampleBufferLensStabilizationInfo_OutOfRange returns the value of the constant kCMSampleBufferLensStabilizationInfo_OutOfRange.
 func KCMSampleBufferLensStabilizationInfo_OutOfRange() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferLensStabilizationInfo_OutOfRange")))
 }
 
-// The lens stabilization module was unavailable for use. The value of kCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo if the lens stabilization module is unavailable to compensate for the motion of the device.  The module may be available at a later time.
 // KCMSampleBufferLensStabilizationInfo_Unavailable returns the value of the constant kCMSampleBufferLensStabilizationInfo_Unavailable.
 func KCMSampleBufferLensStabilizationInfo_Unavailable() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferLensStabilizationInfo_Unavailable")))
 }
 
-// The lens stabilization module was not used during this capture. The value of kCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo if the lens stabilization module was not used for this capture.
 // KCMSampleBufferLensStabilizationInfo_Off returns the value of the constant kCMSampleBufferLensStabilizationInfo_Off.
 func KCMSampleBufferLensStabilizationInfo_Off() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferLensStabilizationInfo_Off")))
 }
 
-// Indicates the 3x3 camera intrinsic matrix applied to the current sample buffer. Camera intrinsic matrix is a CFData containing a matrix_float3x3, which is column-major. It has the following contents: fx	0	ox 0	fy	oy 0	0	1 fx and fy are the focal length in pixels. For square pixels, they will have the same value. ox and oy are the coordinates of the principal point. The origin is the upper left of the frame.
 // KCMSampleBufferAttachmentKey_CameraIntrinsicMatrix returns the value of the constant kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix.
 func KCMSampleBufferAttachmentKey_CameraIntrinsicMatrix() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix")))
 }
 
-// Indicates that the current or next video sample buffer should be forced to be encoded as a key frame. A value of kCFBooleanTrue for kCMSampleBufferAttachmentKey_ForceKeyFrame indicates that the current or next video sample buffer processed in the stream should be forced to be encoded as a key frame. If this attachment is present and kCFBooleanTrue on a sample buffer with a video frame, that video frame will be forced to become a key frame.  If the sample buffer for which this is present and kCFBooleanTrue does not have a valid video frame, the next sample buffer processed that contains a valid video frame will be encoded as a key frame. Usual care should be taken when setting attachments on sample buffers whose orgins and destinations are ambiguous.  For example, CMSetAttachment() is not thread-safe, and CMSampleBuffers may be used in multiple sample buffer streams in a given system.  This can lead to crashes during concurrent access and/or unexpected behavior on alternate sample buffer streams.  Therefore, unless the orgin and destination of a sample buffer is known, the general recommended practice is to synthesize an empty sample buffer with this attachment alone and insert it into the sample buffer stream ahead of the concrete sample buffer rather than setting this attachment on the concrete sample buffer itself.
 // KCMSampleBufferAttachmentKey_ForceKeyFrame returns the value of the constant kCMSampleBufferAttachmentKey_ForceKeyFrame.
 func KCMSampleBufferAttachmentKey_ForceKeyFrame() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_ForceKeyFrame")))
 }
 
-// Describes the ranges of protected and unprotected data within a protected CMSampleBuffer The attachment is CFData containing one or more "BytesOfClearData"/"BytesOfProtectedData" pairs as appears in the 'senc' box (see ISO/IEC 23001-7 section 7.2.2). The "BytesOfClearData” and the "BytesOfProtectedData” fields are 32-bit integers. Both are native endian in the CFData. This attachment is not present if the CMSampleBuffer contains unprotected content.
 // KCMSampleAttachmentKey_CryptorSubsampleAuxiliaryData returns the value of the constant kCMSampleAttachmentKey_CryptorSubsampleAuxiliaryData.
 func KCMSampleAttachmentKey_CryptorSubsampleAuxiliaryData() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleAttachmentKey_CryptorSubsampleAuxiliaryData")))
 }
 
-// HDR10+ per frame metadata The attachment is CFData containing HDR10+ metadata within an User Data Registered ITU-T T-35 SEI message (see ISO/IEC 23008-2-2020 section D.3.6) as little endian in the CFData. This attachment will override any HDR10+ metadata stored within the compressed data. The data shall start with the field itu_t_t35_country_code with the value 0xb5.
 // KCMSampleAttachmentKey_HDR10PlusPerFrameData returns the value of the constant kCMSampleAttachmentKey_HDR10PlusPerFrameData.
 func KCMSampleAttachmentKey_HDR10PlusPerFrameData() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleAttachmentKey_HDR10PlusPerFrameData")))
 }
 
-// Represents the sequence and frame level metadata for post decode processing. This attachment is used to pass sequence and frame level metadata from a format reader to a decoder or RAW processor. It should be a CFDictionary that conforms to CFPropertyList.
 // KCMSampleAttachmentKey_PostDecodeProcessingMetadata returns the value of the constant kCMSampleAttachmentKey_PostDecodeProcessingMetadata.
 func KCMSampleAttachmentKey_PostDecodeProcessingMetadata() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleAttachmentKey_PostDecodeProcessingMetadata")))
 }
 
-// CFDictionary key for value field of a CMTag.
 // KCMTagValueKey returns the value of the constant kCMTagValueKey.
 func KCMTagValueKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCMTagValueKey"))) }
 
-// CFDictionary key for category field of a CMTag.
 // KCMTagCategoryKey returns the value of the constant kCMTagCategoryKey.
 func KCMTagCategoryKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCMTagCategoryKey"))) }
 
-// CFDictionary key for dataType field of a CMTag.
 // KCMTagDataTypeKey returns the value of the constant kCMTagDataTypeKey.
 func KCMTagDataTypeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCMTagDataTypeKey"))) }
 
-// CFDictionary key for a CFArray of serialized CMTag dictionaries of a CMTagCollection as used with CMTagCollectionCopyAsDictionary
 // KCMTagCollectionTagsArrayKey returns the value of the constant kCMTagCollectionTagsArrayKey.
 func KCMTagCollectionTagsArrayKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTagCollectionTagsArrayKey")))
 }
 
-// Specifies how long memory should be allowed to hang out in the pool before being deallocated. Pass this in the options dictionary to CMMemoryPoolCreate.
 // KCMMemoryPoolOption_AgeOutPeriod returns the value of the constant kCMMemoryPoolOption_AgeOutPeriod.
 func KCMMemoryPoolOption_AgeOutPeriod() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMMemoryPoolOption_AgeOutPeriod")))
@@ -1285,61 +1220,51 @@ func KCMTimebaseNotificationKey_EventTime() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTimebaseNotificationKey_EventTime")))
 }
 
-// The foreground color for text. Value must be a CFArray of 4 CFNumbers representing alpha, red, green, and blue fields with values between 0.0 and 1.0. The red, green and blue components are interpreted in the sRGB color space. The alpha indicates the opacity from 0.0 for transparent to 1.0 for 100% opaque.
 // KCMTextMarkupAttribute_ForegroundColorARGB returns the value of the constant kCMTextMarkupAttribute_ForegroundColorARGB.
 func KCMTextMarkupAttribute_ForegroundColorARGB() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_ForegroundColorARGB")))
 }
 
-// The background color for the shape holding the text. Value must be a CFArray of 4 CFNumbers representing alpha, red, green, and blue fields with values between 0.0 and 1.0. The red, green and blue components are interpreted in the sRGB color space. The alpha indicates the opacity from 0.0 for transparent to 1.0 for 100% opaque. The color applies to the geometry (e.g., a box) containing the text. The container's background color may have an alpha of 0 so it is not displayed even though the text is displayed. The color behind individual characters is optionally controllable with the kCMTextMarkupAttribute_CharacterBackgroundColorARGB attribute. If used, this attribute must be applied to the entire attributed string (i.e., CFRangeMake(0, CFAttributedStringGetLength(...))).
 // KCMTextMarkupAttribute_BackgroundColorARGB returns the value of the constant kCMTextMarkupAttribute_BackgroundColorARGB.
 func KCMTextMarkupAttribute_BackgroundColorARGB() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_BackgroundColorARGB")))
 }
 
-// The background color behind individual text characters. Value must be a CFArray of 4 CFNumbers representing alpha, red, green, and blue fields with values between 0.0 and 1.0. The red, green and blue components are interpreted in the sRGB color space. The alpha indicates the opacity from 0.0 for transparent to 1.0 for 100% opaque.
 // KCMTextMarkupAttribute_CharacterBackgroundColorARGB returns the value of the constant kCMTextMarkupAttribute_CharacterBackgroundColorARGB.
 func KCMTextMarkupAttribute_CharacterBackgroundColorARGB() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_CharacterBackgroundColorARGB")))
 }
 
-// Allows the setting of a bold style to be applied. Value must be a CFBoolean. The default is kCFBooleanFalse. If this attribute is kCFBooleanTrue, the text will be drawn with a bold style. Other styles such as italic may or may not be used as well.
 // KCMTextMarkupAttribute_BoldStyle returns the value of the constant kCMTextMarkupAttribute_BoldStyle.
 func KCMTextMarkupAttribute_BoldStyle() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_BoldStyle")))
 }
 
-// Allows the setting of an italic style to be applied. Value must be a CFBoolean. The default is kCFBooleanFalse. If this attribute is kCFBooleanTrue, the text will be rendered with an italic style. Other styles such as bold may or may not be used as well.
 // KCMTextMarkupAttribute_ItalicStyle returns the value of the constant kCMTextMarkupAttribute_ItalicStyle.
 func KCMTextMarkupAttribute_ItalicStyle() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_ItalicStyle")))
 }
 
-// Allows the setting of an underline to be applied at render time. Value must be a CFBoolean. The default is kCFBooleanFalse. If this attribute is kCFBooleanTrue, the text will be rendered with an underline. Other styles such as bold may or may not be used as well.
 // KCMTextMarkupAttribute_UnderlineStyle returns the value of the constant kCMTextMarkupAttribute_UnderlineStyle.
 func KCMTextMarkupAttribute_UnderlineStyle() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_UnderlineStyle")))
 }
 
-// The name of the font. Value must be a CFString holding the family name of an installed font (e.g., "Helvetica") that is used to render and/or measure text. When vended by legible output, an attributed string will have at most one of kCMTextMarkupAttribute_FontFamilyName or kCMTextMarkupAttribute_GenericFontFamilyName associated with each character.
 // KCMTextMarkupAttribute_FontFamilyName returns the value of the constant kCMTextMarkupAttribute_FontFamilyName.
 func KCMTextMarkupAttribute_FontFamilyName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_FontFamilyName")))
 }
 
-// The array of font name(s) and if that name is a generic or a platform name. Value must be a CFArray holding CFDictionaries that are used to render and/or measure text. Each dictionary entry has a font family name and a font kind value. The font kind value can be either 0 for generic font family or 1 for platform font family corresponding to the font family name. The CFArray value can hold multiple font names as a fallback where the author prefers specific fonts. If the renderer does not support the first font entry, it tries the following. For example, the array includes InexistantFont and Times New Roman font names, it is expected the renderer to select the "Times New Roman" font for drawing caption.
 // KCMTextMarkupAttribute_FontFamilyNameList returns the value of the constant kCMTextMarkupAttribute_FontFamilyNameList.
 func KCMTextMarkupAttribute_FontFamilyNameList() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_FontFamilyNameList")))
 }
 
-// The attribute holding a generic font family identifier. Value must be a CFString holding a generic font family name that is one of the kCMTextMarkupGenericFontName_* constants. Generic fonts must be mapped to the family name of an installed font (e.g., kCMTextMarkupGenericFontName_SansSerif -> "Helvetica") before rendering and/or measuring text. When vended by legible output, an attributed string will have at most one of kCMTextMarkupAttribute_FontFamilyName or kCMTextMarkupAttribute_GenericFontFamilyName associated with each character. Overview of Generic Font Family Names ===================================== Some media formats allow the specification of font family names to be used to style text they carry. Sometimes, an external specification (e.g., CSS) may be used to style the text carried by the media format. In either case, the specification may be concrete, indicating an installed platform font (e.g., "Times New Roman", Helvetica). It may be abstract, indicating a category of font to use (e.g., serif, sans-serif). This abstract designation is often termed a "generic font family". CSS for example allows a 'font-family' property specification such as this: font-family: Helvetica, sans-serif; This uses both the concrete family name "Helvetica" and the generic family name "sans-serif". Generic font families may be common across media formats (e.g., both CSS and 3GPP timed text allow "sans-serif" and "serif"). Other formats may have generic font identifiers that do not align exactly (e.g., TTML allows "monospaceSerif and "monospaceSansSerif" in addition to "monospace"). Some formats might not carry names but have numeric values mapping to a generic font identifier. Simply put, different formats use different ways to express their generic fonts. The use of generic font families is also important for media accessibility. The Media Accessibility framework can map eight categories of abstract fonts to an installed font. Users may choose to override each of these categories to a different installed font. This remapping should work if the content or external styling indicates a generic font. It should not however try to remap a concrete font like "Helvetica". Consequently, it is important to distinguish between the generic and concrete fonts expressed by the author. To accommodate what is expressible in media formats and to support media accessibility overrides, generic font families can be specified with the kCMTextMarkupAttribute_GenericFontFamilyName attribute which carries the identifier for one of the various generic font specification forms supported across media formats. These generic font identifiers are the kCMTextMarkupGenericFontName_* prefixed constants also defined here. New identifers may be added in the future. Concrete fonts are specified using the kCMTextMarkupAttribute_FontFamilyName attribute also defined in this header.
 // KCMTextMarkupAttribute_GenericFontFamilyName returns the value of the constant kCMTextMarkupAttribute_GenericFontFamilyName.
 func KCMTextMarkupAttribute_GenericFontFamilyName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_GenericFontFamilyName")))
 }
 
-// Values for kCMTextMarkupAttribute_GenericFontFamilyName.
 // KCMTextMarkupGenericFontName_Default returns the value of the constant kCMTextMarkupGenericFontName_Default.
 func KCMTextMarkupGenericFontName_Default() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupGenericFontName_Default")))
@@ -1400,25 +1325,21 @@ func KCMTextMarkupGenericFontName_SmallCapital() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupGenericFontName_SmallCapital")))
 }
 
-// The base font size expressed as a percentage of the video height. Value must be a non-negative CFNumber.  This is a number holding a percentage of the height of the video frame.  For example, a value of 5 indicates that the base font size should be 5% of the height of the video.
 // KCMTextMarkupAttribute_BaseFontSizePercentageRelativeToVideoHeight returns the value of the constant kCMTextMarkupAttribute_BaseFontSizePercentageRelativeToVideoHeight.
 func KCMTextMarkupAttribute_BaseFontSizePercentageRelativeToVideoHeight() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_BaseFontSizePercentageRelativeToVideoHeight")))
 }
 
-// The font size expressed as a percentage of the current default font size. Value must be a non-negative CFNumber. This is a number holding a percentage of the size of the calculated default font size.  A value of 120 indicates 20% larger than the default font size. A value of 80 indicates 80% of the default font size.  The value 100 indicates no size difference and is the default.
 // KCMTextMarkupAttribute_RelativeFontSize returns the value of the constant kCMTextMarkupAttribute_RelativeFontSize.
 func KCMTextMarkupAttribute_RelativeFontSize() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_RelativeFontSize")))
 }
 
-// The kind of vertical layout of the text block. Value must be a CFString. A CFString holding one of several values indicating the progression direction for new vertical lines of text. If this attribute is present, it indicates the writing direction is vertical. The attribute value indicates whether new vertical text lines are added from left to right or from right to left. If this attribute is missing, the writing direction is horizontal. If used, this attribute must be applied to the entire attributed string (i.e., CFRangeMake(0, CFAttributedStringGetLength(...))).
 // KCMTextMarkupAttribute_VerticalLayout returns the value of the constant kCMTextMarkupAttribute_VerticalLayout.
 func KCMTextMarkupAttribute_VerticalLayout() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_VerticalLayout")))
 }
 
-// Values for kCMTextMarkupAttribute_VerticalLayout.
 // KCMTextVerticalLayout_LeftToRight returns the value of the constant kCMTextVerticalLayout_LeftToRight.
 func KCMTextVerticalLayout_LeftToRight() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextVerticalLayout_LeftToRight")))
@@ -1429,13 +1350,11 @@ func KCMTextVerticalLayout_RightToLeft() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextVerticalLayout_RightToLeft")))
 }
 
-// The alignment of text in the writing direction of the first line of text. Value must be a CFString. A CFString holding one of several values indicating the alignment in the writing direction of the first line of text of the cue. The writing direction is indicated by the value (or absence) of the kCMTextMarkupAttribute_VerticalLayout. If this attribute is missing, the kCMTextMarkupAlignmentType_Middle value should be used as the default. If used, this attribute must be applied to the entire attributed string (i.e., CFRangeMake(0, CFAttributedStringGetLength(...))).
 // KCMTextMarkupAttribute_Alignment returns the value of the constant kCMTextMarkupAttribute_Alignment.
 func KCMTextMarkupAttribute_Alignment() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_Alignment")))
 }
 
-// Values for kCMTextMarkupAttribute_Alignment.
 // KCMTextMarkupAlignmentType_Start returns the value of the constant kCMTextMarkupAlignmentType_Start.
 func KCMTextMarkupAlignmentType_Start() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAlignmentType_Start")))
@@ -1461,31 +1380,26 @@ func KCMTextMarkupAlignmentType_Right() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAlignmentType_Right")))
 }
 
-// The placement of the block of text specified as a percentage in the writing direction. Value must be a non-negative CFNumber. A CFNumber expressing the position of the center of the text in the writing direction as a percentage of the video dimensions in the writing direction. For horizontal cues, this is the horizontal position. For vertical, it is the vertical position. The percentage is calculated from the edge of the frame where the text begins (so for left-to-right English, it is the left edge). If used, this attribute must be applied to the entire attributed string (i.e., CFRangeMake(0, CFAttributedStringGetLength(...))).
 // KCMTextMarkupAttribute_TextPositionPercentageRelativeToWritingDirection returns the value of the constant kCMTextMarkupAttribute_TextPositionPercentageRelativeToWritingDirection.
 func KCMTextMarkupAttribute_TextPositionPercentageRelativeToWritingDirection() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_TextPositionPercentageRelativeToWritingDirection")))
 }
 
-// The placement of the block of text's first line specified as a percentage in the direction orthogonal to the writing direction. Value must be a non-negative CFNumber. A CFNumber expressing the position of the center of the cue relative to the writing direction. The line position is orthogonal (or perpendicular) to the writing direction (i.e., for a horizontal writing direction, it is vertical and for a vertical writing direction, is is horizontal). This attribute expresses the line position as a percentage of the dimensions of the video frame in the relevant direction. For example, 0% is the top of the video frame and 100% is the bottom of the video frame for horizontal writing layout. If used, this attribute must be applied to the entire attributed string (i.e., CFRangeMake(0, CFAttributedStringGetLength(...))).
 // KCMTextMarkupAttribute_OrthogonalLinePositionPercentageRelativeToWritingDirection returns the value of the constant kCMTextMarkupAttribute_OrthogonalLinePositionPercentageRelativeToWritingDirection.
 func KCMTextMarkupAttribute_OrthogonalLinePositionPercentageRelativeToWritingDirection() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_OrthogonalLinePositionPercentageRelativeToWritingDirection")))
 }
 
-// The dimension (e.g., width) of the bounding box containing the text expressed as a percentage. Value must be a non-negative CFNumber. A CFNumber expressing the width of the bounding box for text layout as a percentage of the video frame's dimension in the writing direction. For a horizontal writing direction, it is the width. For a vertical writing direction, it is the horizontal writing direction. If used, this attribute must be applied to the entire attributed string (i.e., CFRangeMake(0, CFAttributedStringGetLength(...))).
 // KCMTextMarkupAttribute_WritingDirectionSizePercentage returns the value of the constant kCMTextMarkupAttribute_WritingDirectionSizePercentage.
 func KCMTextMarkupAttribute_WritingDirectionSizePercentage() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_WritingDirectionSizePercentage")))
 }
 
-// Allows the setting of the style of character edges at render time. Value must be a CFString. This controls the shape of the edges of drawn characters. Set a value of something other than kCMTextMarkupEdgeStyle_None to draw using an alternative shape for edges of characters from the set of constants prefixed with "kCMTextMarkupEdgeStyle_". These correspond to text edge styles available with Media Accessibility preferences (see <MediaAccessibility/MACaptionAppearance.h>) although the values are not enumerated integers here. The absence of this attribute should be treated as though kCMTextMarkupCharacterEdgeStyle_None is specified.
 // KCMTextMarkupAttribute_CharacterEdgeStyle returns the value of the constant kCMTextMarkupAttribute_CharacterEdgeStyle.
 func KCMTextMarkupAttribute_CharacterEdgeStyle() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_CharacterEdgeStyle")))
 }
 
-// Values for kCMTextMarkupAttribute_CharacterEdgeStyle.
 // KCMTextMarkupCharacterEdgeStyle_None returns the value of the constant kCMTextMarkupCharacterEdgeStyle_None.
 func KCMTextMarkupCharacterEdgeStyle_None() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupCharacterEdgeStyle_None")))

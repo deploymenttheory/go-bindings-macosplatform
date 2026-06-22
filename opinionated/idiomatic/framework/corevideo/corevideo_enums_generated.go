@@ -19,6 +19,8 @@ const (
 	KCVAttachmentMode_ShouldPropagate CVAttachmentMode = 1
 )
 
+// String returns the CVAttachmentMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CVAttachmentMode) String() string {
 	switch e {
 	case KCVAttachmentMode_ShouldNotPropagate:
@@ -39,6 +41,8 @@ const (
 	KCVPixelBufferPoolFlushExcessBuffers CVPixelBufferPoolFlushFlags = 1
 )
 
+// String returns the CVPixelBufferPoolFlushFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CVPixelBufferPoolFlushFlags) String() string {
 	var parts []string
 	if e&KCVPixelBufferPoolFlushExcessBuffers != 0 {

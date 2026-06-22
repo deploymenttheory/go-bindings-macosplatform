@@ -11,9 +11,11 @@ import (
 // MultiValueProvider is accepted wherever a ABMultiValue (or one of its subclasses) is expected.
 type MultiValueProvider interface {
 	objref.Object
+	isMultiValue()
 }
 
 // RecordProvider is accepted wherever a ABRecord (or one of its subclasses) is expected.
 type RecordProvider interface {
 	objref.Object
+	isRecord()
 }

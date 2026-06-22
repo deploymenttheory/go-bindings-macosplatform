@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that represents a communication channel.
-//
 // Port is an idiomatic wrapper over the Objective-C class NSPort.
+//
+// Port is an abstract base — you do not construct it directly. Construct one of [MachPort], [MessagePort], [SocketPort] and pass it where a Port is accepted.
+//
+// An abstract class that represents a communication channel.
 type Port struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func PortFromID(id objc.ID) *Port {
 	if id == 0 {
 		return nil
 	}
-	x := &Port{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Port{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func portAdopt(id objc.ID) *Port {
 	if id == 0 {
 		return nil
 	}
-	x := &Port{Handle: objref.Wrap(id)}
+	x := &Port{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,55 +62,62 @@ func (x *Port) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewPort creates a new Port.
-func NewPort() *Port {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSPort")), objc.RegisterName("new"))
-	return portAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Port) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Port) WithScriptingProperties(scriptingProperties obj.Object) *Port {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Invalidate wraps the corresponding Objective-C method.
 func (x *Port) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
+// ScheduleInRunLoopForMode wraps the corresponding Objective-C method.
 func (x *Port) ScheduleInRunLoopForMode(runLoop *RunLoop, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
+// RemoveFromRunLoopForMode wraps the corresponding Objective-C method.
 func (x *Port) RemoveFromRunLoopForMode(runLoop *RunLoop, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
+// SendBeforeDateComponentsFromReserved wraps the corresponding Objective-C method.
 func (x *Port) SendBeforeDateComponentsFromReserved(limitDate *Date, components obj.Object, receivePort *Port, headerSpaceReserved int) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendBeforeDate:components:from:reserved:"), objref.IDOf(limitDate), objref.IDOf(components), objref.IDOf(receivePort), headerSpaceReserved)
 	return _r
 }
 
+// SendBeforeDateMsgidComponentsFromReserved wraps the corresponding Objective-C method.
 func (x *Port) SendBeforeDateMsgidComponentsFromReserved(limitDate *Date, msgID int, components obj.Object, receivePort *Port, headerSpaceReserved int) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendBeforeDate:msgid:components:from:reserved:"), objref.IDOf(limitDate), msgID, objref.IDOf(components), objref.IDOf(receivePort), headerSpaceReserved)
 	return _r
 }
 
-// Adds the receiver to the list of ports monitored by a given run loop for the given input mode.
+// AddConnectionToRunLoopForMode adds the receiver to the list of ports monitored by a given run loop for the given input mode.
 func (x *Port) AddConnectionToRunLoopForMode(conn *Connection, runLoop *RunLoop, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addConnection:toRunLoop:forMode:"), objref.IDOf(conn), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
-// Removes the receiver from the list of ports monitored by runLoop in the given input mode, mode.
+// RemoveConnectionFromRunLoopForMode removes the receiver from the list of ports monitored by runLoop in the given input mode, mode.
 func (x *Port) RemoveConnectionFromRunLoopForMode(conn *Connection, runLoop *RunLoop, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeConnection:fromRunLoop:forMode:"), objref.IDOf(conn), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
+// IsValid wraps the corresponding Objective-C method.
 func (x *Port) IsValid() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isValid"))
 	return _r
 }
 
+// ReservedSpaceLength wraps the corresponding Objective-C method.
 func (x *Port) ReservedSpaceLength() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("reservedSpaceLength"))
 	return _r
@@ -128,3 +139,10 @@ type Portable interface {
 }
 
 var _ Portable = (*Port)(nil)
+
+// isPort marks Port — and, by embedding promotion, its
+// subclasses — as a member of the Port hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Port) isPort() {}
+
+var _ PortProvider = (*Port)(nil)

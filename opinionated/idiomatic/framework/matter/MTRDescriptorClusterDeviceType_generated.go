@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRDescriptorClusterDeviceType is an idiomatic wrapper over the Objective-C class MTRDescriptorClusterDeviceType.
+//
+// It embeds [MTRDescriptorClusterDeviceTypeStruct], promoting that type's methods.
 type MTRDescriptorClusterDeviceType struct {
-	objref.Handle
+	MTRDescriptorClusterDeviceTypeStruct
 }
 
 // MTRDescriptorClusterDeviceTypeFromID adopts an existing Objective-C object as a MTRDescriptorClusterDeviceType
@@ -23,7 +24,8 @@ func MTRDescriptorClusterDeviceTypeFromID(id objc.ID) *MTRDescriptorClusterDevic
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDescriptorClusterDeviceType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDescriptorClusterDeviceType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRDescriptorClusterDeviceTypeAdopt(id objc.ID) *MTRDescriptorClusterDevice
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDescriptorClusterDeviceType{Handle: objref.Wrap(id)}
+	x := &MTRDescriptorClusterDeviceType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRDescriptorClusterDeviceType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDescriptorClusterDeviceType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDescriptorClusterDeviceType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRDescriptorClusterDeviceType creates a new MTRDescriptorClusterDeviceType.
@@ -62,19 +50,19 @@ func NewMTRDescriptorClusterDeviceType() *MTRDescriptorClusterDeviceType {
 	return mTRDescriptorClusterDeviceTypeAdopt(_id)
 }
 
-// WithDeviceType sets deviceType and returns the receiver so calls can be chained.
+// WithDeviceType sets the property and returns the receiver so calls can be chained.
 func (x *MTRDescriptorClusterDeviceType) WithDeviceType(deviceType obj.Object) *MTRDescriptorClusterDeviceType {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeviceType:"), objref.IDOf(deviceType))
 	return x
 }
 
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithType sets the property and returns the receiver so calls can be chained.
 func (x *MTRDescriptorClusterDeviceType) WithType(type_ obj.Object) *MTRDescriptorClusterDeviceType {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return x
 }
 
-// WithRevision sets revision and returns the receiver so calls can be chained.
+// WithRevision sets the property and returns the receiver so calls can be chained.
 func (x *MTRDescriptorClusterDeviceType) WithRevision(revision obj.Object) *MTRDescriptorClusterDeviceType {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), objref.IDOf(revision))
 	return x
@@ -89,3 +77,5 @@ type MTRDescriptorClusterDeviceTypeable interface {
 }
 
 var _ MTRDescriptorClusterDeviceTypeable = (*MTRDescriptorClusterDeviceType)(nil)
+
+var _ MTRDescriptorClusterDeviceTypeStructProvider = (*MTRDescriptorClusterDeviceType)(nil)

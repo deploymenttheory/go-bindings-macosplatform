@@ -23,7 +23,8 @@ func ComposeContextFromID(id objc.ID) *ComposeContext {
 	if id == 0 {
 		return nil
 	}
-	x := &ComposeContext{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ComposeContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func composeContextAdopt(id objc.ID) *ComposeContext {
 	if id == 0 {
 		return nil
 	}
-	x := &ComposeContext{Handle: objref.Wrap(id)}
+	x := &ComposeContext{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,43 +58,49 @@ func (x *ComposeContext) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ComposeContext) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewComposeContext creates a new ComposeContext.
 func NewComposeContext() *ComposeContext {
 	_id := objc.Send[objc.ID](objc.ID(_class("MEComposeContext")), objc.RegisterName("new"))
 	return composeContextAdopt(_id)
 }
 
-// The original email message on which user performed an action It is
+// OriginalMessage the original email message on which user performed an action It is
 func (x *ComposeContext) OriginalMessage() *Message {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalMessage"))
 	return MessageFromID(_r)
 }
 
-// Indicates the action performed by the user that created this compose context.
+// Action indicates the action performed by the user that created this compose context.
 func (x *ComposeContext) Action() ComposeUserAction {
 	_r := objc.Send[ComposeUserAction](objref.IDOf(x), objc.RegisterName("action"))
 	return _r
 }
 
-// Boolean that indicates the message is encrypted by a Message Security extension.
+// IsEncrypted boolean that indicates the message is encrypted by a Message Security extension.
 func (x *ComposeContext) IsEncrypted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEncrypted"))
 	return _r
 }
 
-// Boolean that indicates if the user wants to encrypt the message.
+// ShouldEncrypt boolean that indicates if the user wants to encrypt the message.
 func (x *ComposeContext) ShouldEncrypt() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldEncrypt"))
 	return _r
 }
 
-// Boolean that indicates the message is signed by a Message Security extension.
+// IsSigned boolean that indicates the message is signed by a Message Security extension.
 func (x *ComposeContext) IsSigned() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSigned"))
 	return _r
 }
 
-// A Boolean that indicates if the user wants to sign the message.
+// ShouldSign a Boolean that indicates if the user wants to sign the message.
 func (x *ComposeContext) ShouldSign() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldSign"))
 	return _r

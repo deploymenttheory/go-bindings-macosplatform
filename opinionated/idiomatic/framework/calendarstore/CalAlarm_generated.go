@@ -23,7 +23,8 @@ func CalAlarmFromID(id objc.ID) *CalAlarm {
 	if id == 0 {
 		return nil
 	}
-	x := &CalAlarm{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CalAlarm{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func calAlarmAdopt(id objc.ID) *CalAlarm {
 	if id == 0 {
 		return nil
 	}
-	x := &CalAlarm{Handle: objref.Wrap(id)}
+	x := &CalAlarm{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,61 +58,71 @@ func (x *CalAlarm) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CalAlarm) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCalAlarm creates a new CalAlarm.
 func NewCalAlarm() *CalAlarm {
 	_id := objc.Send[objc.ID](objc.ID(_class("CalAlarm")), objc.RegisterName("new"))
 	return calAlarmAdopt(_id)
 }
 
-// WithAction sets action and returns the receiver so calls can be chained.
+// WithAction sets the property and returns the receiver so calls can be chained.
 func (x *CalAlarm) WithAction(action string) *CalAlarm {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAction:"), purego.NSString(action))
 	return x
 }
 
-// WithSound sets sound and returns the receiver so calls can be chained.
+// WithSound sets the property and returns the receiver so calls can be chained.
 func (x *CalAlarm) WithSound(sound string) *CalAlarm {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSound:"), purego.NSString(sound))
 	return x
 }
 
-// WithEmailAddress sets emailAddress and returns the receiver so calls can be chained.
+// WithEmailAddress sets the property and returns the receiver so calls can be chained.
 func (x *CalAlarm) WithEmailAddress(emailAddress string) *CalAlarm {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmailAddress:"), purego.NSString(emailAddress))
 	return x
 }
 
-// WithUrl sets url and returns the receiver so calls can be chained.
+// WithUrl sets the property and returns the receiver so calls can be chained.
 func (x *CalAlarm) WithUrl(url string) *CalAlarm {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
 	return x
 }
 
-// WithRelativeTrigger sets relativeTrigger and returns the receiver so calls can be chained.
+// WithRelativeTrigger sets the property and returns the receiver so calls can be chained.
 func (x *CalAlarm) WithRelativeTrigger(relativeTrigger float64) *CalAlarm {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativeTrigger:"), relativeTrigger)
 	return x
 }
 
-// WithAbsoluteTrigger sets absoluteTrigger and returns the receiver so calls can be chained.
+// WithAbsoluteTrigger sets the property and returns the receiver so calls can be chained.
 func (x *CalAlarm) WithAbsoluteTrigger(absoluteTrigger obj.Object) *CalAlarm {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAbsoluteTrigger:"), objref.IDOf(absoluteTrigger))
 	return x
 }
 
+// SetAcknowledged wraps the corresponding Objective-C method.
 func (x *CalAlarm) SetAcknowledged(date obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcknowledged:"), objref.IDOf(date))
 }
 
+// Acknowledged wraps the corresponding Objective-C method.
 func (x *CalAlarm) Acknowledged() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("acknowledged"))
 	return obj.Wrap(_r)
 }
 
+// SetRelatedTo wraps the corresponding Objective-C method.
 func (x *CalAlarm) SetRelatedTo(relatedTo string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelatedTo:"), purego.NSString(relatedTo))
 }
 
+// RelatedTo wraps the corresponding Objective-C method.
 func (x *CalAlarm) RelatedTo() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relatedTo"))
 	if _r == 0 {
@@ -119,11 +131,13 @@ func (x *CalAlarm) RelatedTo() string {
 	return purego.GoString(_r)
 }
 
+// TriggerDateRelativeTo wraps the corresponding Objective-C method.
 func (x *CalAlarm) TriggerDateRelativeTo(date obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("triggerDateRelativeTo:"), objref.IDOf(date))
 	return obj.Wrap(_r)
 }
 
+// Action wraps the corresponding Objective-C method.
 func (x *CalAlarm) Action() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("action"))
 	if _r == 0 {
@@ -132,10 +146,12 @@ func (x *CalAlarm) Action() string {
 	return purego.GoString(_r)
 }
 
+// SetAction wraps the corresponding Objective-C method.
 func (x *CalAlarm) SetAction(action string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAction:"), purego.NSString(action))
 }
 
+// Sound wraps the corresponding Objective-C method.
 func (x *CalAlarm) Sound() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sound"))
 	if _r == 0 {
@@ -144,10 +160,12 @@ func (x *CalAlarm) Sound() string {
 	return purego.GoString(_r)
 }
 
+// SetSound wraps the corresponding Objective-C method.
 func (x *CalAlarm) SetSound(sound string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSound:"), purego.NSString(sound))
 }
 
+// EmailAddress wraps the corresponding Objective-C method.
 func (x *CalAlarm) EmailAddress() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emailAddress"))
 	if _r == 0 {
@@ -156,33 +174,40 @@ func (x *CalAlarm) EmailAddress() string {
 	return purego.GoString(_r)
 }
 
+// SetEmailAddress wraps the corresponding Objective-C method.
 func (x *CalAlarm) SetEmailAddress(emailAddress string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmailAddress:"), purego.NSString(emailAddress))
 }
 
+// Url wraps the corresponding Objective-C method.
 func (x *CalAlarm) Url() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
+// SetUrl wraps the corresponding Objective-C method.
 func (x *CalAlarm) SetUrl(url string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
 }
 
+// RelativeTrigger wraps the corresponding Objective-C method.
 func (x *CalAlarm) RelativeTrigger() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("relativeTrigger"))
 	return _r
 }
 
+// SetRelativeTrigger wraps the corresponding Objective-C method.
 func (x *CalAlarm) SetRelativeTrigger(relativeTrigger float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativeTrigger:"), relativeTrigger)
 }
 
+// AbsoluteTrigger wraps the corresponding Objective-C method.
 func (x *CalAlarm) AbsoluteTrigger() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("absoluteTrigger"))
 	return obj.Wrap(_r)
 }
 
+// SetAbsoluteTrigger wraps the corresponding Objective-C method.
 func (x *CalAlarm) SetAbsoluteTrigger(absoluteTrigger obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAbsoluteTrigger:"), objref.IDOf(absoluteTrigger))
 }

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A basic random number generator implementing the ARC4 algorithm, which is suitable for most gameplay mechanics.
-//
 // ARC4RandomSource is an idiomatic wrapper over the Objective-C class GKARC4RandomSource.
+//
+// It embeds [RandomSource], promoting that type's methods.
+//
+// A basic random number generator implementing the ARC4 algorithm, which is suitable for most gameplay mechanics.
 type ARC4RandomSource struct {
-	objref.Handle
+	RandomSource
 }
 
 // ARC4RandomSourceFromID adopts an existing Objective-C object as a ARC4RandomSource
@@ -25,7 +26,8 @@ func ARC4RandomSourceFromID(id objc.ID) *ARC4RandomSource {
 	if id == 0 {
 		return nil
 	}
-	x := &ARC4RandomSource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ARC4RandomSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func aRC4RandomSourceAdopt(id objc.ID) *ARC4RandomSource {
 	if id == 0 {
 		return nil
 	}
-	x := &ARC4RandomSource{Handle: objref.Wrap(id)}
+	x := &ARC4RandomSource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ARC4RandomSource) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ARC4RandomSource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ARC4RandomSource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewARC4RandomSource creates a new ARC4RandomSource.
@@ -64,34 +52,31 @@ func NewARC4RandomSource() *ARC4RandomSource {
 	return aRC4RandomSourceAdopt(_id)
 }
 
-// Initializes a random source with the specified seed data.
-//
-// NewARC4RandomSourceWithSeed creates a new ARC4RandomSource.
+// NewARC4RandomSourceWithSeed initializes a random source with the specified seed data.
 func NewARC4RandomSourceWithSeed(seed obj.Object) *ARC4RandomSource {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKARC4RandomSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSeed:"), objref.IDOf(seed))
 	return aRC4RandomSourceAdopt(_id)
 }
 
-// The seed data that determines the random source’s behavior.
-//
-// WithSeed sets seed and returns the receiver so calls can be chained.
+// WithSeed the seed data that determines the random source’s behavior.
 func (x *ARC4RandomSource) WithSeed(seed obj.Object) *ARC4RandomSource {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), objref.IDOf(seed))
 	return x
 }
 
-// Skips the specified number of values in the random sequence.
+// DropValuesWithCount skips the specified number of values in the random sequence.
 func (x *ARC4RandomSource) DropValuesWithCount(count int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dropValuesWithCount:"), count)
 }
 
-// The seed used to stir the arc4 random source. The seed is not encoded through archiving, but the equivalent state buffers are encoded.
+// Seed the seed used to stir the arc4 random source. The seed is not encoded through archiving, but the equivalent state buffers are encoded.
 func (x *ARC4RandomSource) Seed() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seed"))
 	return obj.Wrap(_r)
 }
 
+// SetSeed wraps the corresponding Objective-C method.
 func (x *ARC4RandomSource) SetSeed(seed obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), objref.IDOf(seed))
 }
@@ -106,3 +91,5 @@ type ARC4RandomSourceable interface {
 }
 
 var _ ARC4RandomSourceable = (*ARC4RandomSource)(nil)
+
+var _ RandomSourceProvider = (*ARC4RandomSource)(nil)

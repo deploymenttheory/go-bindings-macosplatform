@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that stores a word embedding.
-//
 // EmbeddingLayer is an idiomatic wrapper over the Objective-C class MLCEmbeddingLayer.
+//
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that stores a word embedding.
 type EmbeddingLayer struct {
-	objref.Handle
+	Layer
 }
 
 // EmbeddingLayerFromID adopts an existing Objective-C object as a EmbeddingLayer
@@ -25,7 +26,8 @@ func EmbeddingLayerFromID(id objc.ID) *EmbeddingLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &EmbeddingLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EmbeddingLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func embeddingLayerAdopt(id objc.ID) *EmbeddingLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &EmbeddingLayer{Handle: objref.Wrap(id)}
+	x := &EmbeddingLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *EmbeddingLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EmbeddingLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EmbeddingLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewEmbeddingLayer creates a new EmbeddingLayer.
@@ -64,34 +52,31 @@ func NewEmbeddingLayer() *EmbeddingLayer {
 	return embeddingLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string that helps identify this layer.
 func (x *EmbeddingLayer) WithLabel(label string) *EmbeddingLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *EmbeddingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *EmbeddingLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
+// Descriptor wraps the corresponding Objective-C method.
 func (x *EmbeddingLayer) Descriptor() *EmbeddingDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
 	return EmbeddingDescriptorFromID(_r)
 }
 
-// The array of word embeddings
+// Weights the array of word embeddings
 func (x *EmbeddingLayer) Weights() *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weights"))
 	return TensorFromID(_r)
 }
 
-// The weights tensor parameter used for optimizer update
+// WeightsParameter the weights tensor parameter used for optimizer update
 func (x *EmbeddingLayer) WeightsParameter() *TensorParameter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weightsParameter"))
 	return TensorParameterFromID(_r)
@@ -108,3 +93,5 @@ type EmbeddingLayerable interface {
 }
 
 var _ EmbeddingLayerable = (*EmbeddingLayer)(nil)
+
+var _ LayerProvider = (*EmbeddingLayer)(nil)

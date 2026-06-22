@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Node representing a MPSCNNUpsamplingNearest kernel
-//
 // CNNUpsamplingNearestNode is an idiomatic wrapper over the Objective-C class MPSCNNUpsamplingNearestNode.
+//
+// It embeds [NNFilterNode], promoting that type's methods.
+//
+// Node representing a MPSCNNUpsamplingNearest kernel
 type CNNUpsamplingNearestNode struct {
-	objref.Handle
+	NNFilterNode
 }
 
 // CNNUpsamplingNearestNodeFromID adopts an existing Objective-C object as a CNNUpsamplingNearestNode
@@ -25,7 +26,8 @@ func CNNUpsamplingNearestNodeFromID(id objc.ID) *CNNUpsamplingNearestNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNUpsamplingNearestNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNUpsamplingNearestNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,48 +40,32 @@ func cNNUpsamplingNearestNodeAdopt(id objc.ID) *CNNUpsamplingNearestNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNUpsamplingNearestNode{Handle: objref.Wrap(id)}
+	x := &CNNUpsamplingNearestNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNUpsamplingNearestNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNUpsamplingNearestNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNUpsamplingNearestNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Init a node representing a MPSCNNUpsamplingNearest kernel
-//
-// NewCNNUpsamplingNearestNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY creates a new CNNUpsamplingNearestNode.
+// NewCNNUpsamplingNearestNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY init a node representing a MPSCNNUpsamplingNearest kernel
 func NewCNNUpsamplingNearestNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY(sourceNode *NNImageNode, integerScaleFactorX int, integerScaleFactorY int) *CNNUpsamplingNearestNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNUpsamplingNearestNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:integerScaleFactorX:integerScaleFactorY:"), objref.IDOf(sourceNode), integerScaleFactorX, integerScaleFactorY)
 	return cNNUpsamplingNearestNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNUpsamplingNearestNode) WithLabel(label string) *CNNUpsamplingNearestNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// ScaleFactorX wraps the corresponding Objective-C method.
 func (x *CNNUpsamplingNearestNode) ScaleFactorX() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactorX"))
 	return _r
 }
 
+// ScaleFactorY wraps the corresponding Objective-C method.
 func (x *CNNUpsamplingNearestNode) ScaleFactorY() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactorY"))
 	return _r
@@ -94,3 +80,5 @@ type CNNUpsamplingNearestNodeable interface {
 }
 
 var _ CNNUpsamplingNearestNodeable = (*CNNUpsamplingNearestNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNUpsamplingNearestNode)(nil)

@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that you use to request access to a person’s passkeys in a web browser, and that reports on the access status.
-//
 // AuthorizationWebBrowserPublicKeyCredentialManager is an idiomatic wrapper over the Objective-C class ASAuthorizationWebBrowserPublicKeyCredentialManager.
+//
+// A class that you use to request access to a person’s passkeys in a web browser, and that reports on the access status.
 type AuthorizationWebBrowserPublicKeyCredentialManager struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func AuthorizationWebBrowserPublicKeyCredentialManagerFromID(id objc.ID) *Author
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationWebBrowserPublicKeyCredentialManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationWebBrowserPublicKeyCredentialManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func authorizationWebBrowserPublicKeyCredentialManagerAdopt(id objc.ID) *Authori
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationWebBrowserPublicKeyCredentialManager{Handle: objref.Wrap(id)}
+	x := &AuthorizationWebBrowserPublicKeyCredentialManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,16 +61,22 @@ func (x *AuthorizationWebBrowserPublicKeyCredentialManager) IsKind(className str
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationWebBrowserPublicKeyCredentialManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAuthorizationWebBrowserPublicKeyCredentialManager creates a new AuthorizationWebBrowserPublicKeyCredentialManager.
 func NewAuthorizationWebBrowserPublicKeyCredentialManager() *AuthorizationWebBrowserPublicKeyCredentialManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationWebBrowserPublicKeyCredentialManager")), objc.RegisterName("new"))
 	return authorizationWebBrowserPublicKeyCredentialManagerAdopt(_id)
 }
 
-// Gets a list of passkeys available for authenticating with the given relying party.
+// PlatformCredentialsForRelyingParty gets a list of passkeys available for authenticating with the given relying party.
 //
 // PlatformCredentialsForRelyingParty blocks until the operation completes or ctx is cancelled.
-func (x *AuthorizationWebBrowserPublicKeyCredentialManager) PlatformCredentialsForRelyingParty(ctx context.Context, relyingParty string) (obj.Object, error) {
+func (x *AuthorizationWebBrowserPublicKeyCredentialManager) PlatformCredentialsForRelyingParty(ctx context.Context, relyingParty string) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -89,6 +97,7 @@ func (x *AuthorizationWebBrowserPublicKeyCredentialManager) PlatformCredentialsF
 	}
 }
 
+// AuthorizationStateForPlatformCredentials wraps the corresponding Objective-C method.
 func (x *AuthorizationWebBrowserPublicKeyCredentialManager) AuthorizationStateForPlatformCredentials() AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState {
 	_r := objc.Send[AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState](objref.IDOf(x), objc.RegisterName("authorizationStateForPlatformCredentials"))
 	return _r

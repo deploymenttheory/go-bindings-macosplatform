@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that provides the Metal types and timing information you need to draw your content.
-//
 // _cp_layer_renderer is an idiomatic wrapper over the Objective-C class CP_OBJECT_cp_layer_renderer.
+//
+// A type that provides the Metal types and timing information you need to draw your content.
 type _cp_layer_renderer struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func _cp_layer_rendererFromID(id objc.ID) *_cp_layer_renderer {
 	if id == 0 {
 		return nil
 	}
-	x := &_cp_layer_renderer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &_cp_layer_renderer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func _cp_layer_rendererAdopt(id objc.ID) *_cp_layer_renderer {
 	if id == 0 {
 		return nil
 	}
-	x := &_cp_layer_renderer{Handle: objref.Wrap(id)}
+	x := &_cp_layer_renderer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *_cp_layer_renderer) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *_cp_layer_renderer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *_cp_layer_renderer) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // New_cp_layer_renderer creates a new _cp_layer_renderer.

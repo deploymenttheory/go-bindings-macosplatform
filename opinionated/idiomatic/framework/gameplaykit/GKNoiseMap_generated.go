@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A sample of procedural noise data from which you can read noise values directly or create noise textures.
-//
 // NoiseMap is an idiomatic wrapper over the Objective-C class GKNoiseMap.
+//
+// A sample of procedural noise data from which you can read noise values directly or create noise textures.
 type NoiseMap struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NoiseMapFromID(id objc.ID) *NoiseMap {
 	if id == 0 {
 		return nil
 	}
-	x := &NoiseMap{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NoiseMap{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func noiseMapAdopt(id objc.ID) *NoiseMap {
 	if id == 0 {
 		return nil
 	}
-	x := &NoiseMap{Handle: objref.Wrap(id)}
+	x := &NoiseMap{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,26 @@ func (x *NoiseMap) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NoiseMap) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNoiseMap creates a new NoiseMap.
 func NewNoiseMap() *NoiseMap {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKNoiseMap")), objc.RegisterName("new"))
 	return noiseMapAdopt(_id)
 }
 
-// Initializes a noise map by sampling from the specified noise object.
-//
-// NewNoiseMapWithNoise creates a new NoiseMap.
+// NewNoiseMapWithNoise initializes a noise map by sampling from the specified noise object.
 func NewNoiseMapWithNoise(noise *Noise) *NoiseMap {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKNoiseMap")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNoise:"), objref.IDOf(noise))
 	return noiseMapAdopt(_id)
 }
 
-// Whether the values at the edges of the 2D plane are modified to allow seamless tiling of the extracted noise map.
+// IsSeamless whether the values at the edges of the 2D plane are modified to allow seamless tiling of the extracted noise map.
 func (x *NoiseMap) IsSeamless() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSeamless"))
 	return _r

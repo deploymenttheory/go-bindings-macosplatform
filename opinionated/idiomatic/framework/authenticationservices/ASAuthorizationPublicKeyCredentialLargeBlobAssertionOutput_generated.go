@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type to represent the output of the requested large binary object operation, which returns in a passkey sign-in response.
-//
 // AuthorizationPublicKeyCredentialLargeBlobAssertionOutput is an idiomatic wrapper over the Objective-C class ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput.
+//
+// A type to represent the output of the requested large binary object operation, which returns in a passkey sign-in response.
 type AuthorizationPublicKeyCredentialLargeBlobAssertionOutput struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationPublicKeyCredentialLargeBlobAssertionOutputFromID(id objc.ID) 
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPublicKeyCredentialLargeBlobAssertionOutput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationPublicKeyCredentialLargeBlobAssertionOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationPublicKeyCredentialLargeBlobAssertionOutputAdopt(id objc.ID) *
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPublicKeyCredentialLargeBlobAssertionOutput{Handle: objref.Wrap(id)}
+	x := &AuthorizationPublicKeyCredentialLargeBlobAssertionOutput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,25 @@ func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) IsKind(classN
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAuthorizationPublicKeyCredentialLargeBlobAssertionOutput creates a new AuthorizationPublicKeyCredentialLargeBlobAssertionOutput.
 func NewAuthorizationPublicKeyCredentialLargeBlobAssertionOutput() *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput")), objc.RegisterName("new"))
 	return authorizationPublicKeyCredentialLargeBlobAssertionOutputAdopt(_id)
 }
 
+// ReadData wraps the corresponding Objective-C method.
 func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) ReadData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readData"))
 	return obj.Wrap(_r)
 }
 
+// DidWrite wraps the corresponding Objective-C method.
 func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) DidWrite() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("didWrite"))
 	return _r

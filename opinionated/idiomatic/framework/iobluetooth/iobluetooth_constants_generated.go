@@ -124,19 +124,16 @@ func KOBEXHeaderIDKeyUserDefined() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyUserDefined")))
 }
 
-// NSNumber integer value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
 // KFTSProgressBytesTransferredKey returns the value of the constant kFTSProgressBytesTransferredKey.
 func KFTSProgressBytesTransferredKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kFTSProgressBytesTransferredKey")))
 }
 
-// NSNumber integer value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
 // KFTSProgressBytesTotalKey returns the value of the constant kFTSProgressBytesTotalKey.
 func KFTSProgressBytesTotalKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kFTSProgressBytesTotalKey")))
 }
 
-// NSNumber float value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
 // KFTSProgressPercentageKey returns the value of the constant kFTSProgressPercentageKey.
 func KFTSProgressPercentageKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kFTSProgressPercentageKey")))
@@ -147,37 +144,31 @@ func KFTSProgressPrecentageKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kFTSProgressPrecentageKey")))
 }
 
-// NSNumber double value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
 // KFTSProgressEstimatedTimeKey returns the value of the constant kFTSProgressEstimatedTimeKey.
 func KFTSProgressEstimatedTimeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kFTSProgressEstimatedTimeKey")))
 }
 
-// NSNumber int value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
 // KFTSProgressTimeElapsedKey returns the value of the constant kFTSProgressTimeElapsedKey.
 func KFTSProgressTimeElapsedKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kFTSProgressTimeElapsedKey")))
 }
 
-// NSNumber float value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
 // KFTSProgressTransferRateKey returns the value of the constant kFTSProgressTransferRateKey.
 func KFTSProgressTransferRateKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kFTSProgressTransferRateKey")))
 }
 
-// NSString value.  This key is used with the array of NSDictionary's returned through the delegate method fileTransferServicesGetListingComplete: after calling getFolderListing.
 // KFTSListingNameKey returns the value of the constant kFTSListingNameKey.
 func KFTSListingNameKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kFTSListingNameKey")))
 }
 
-// FTSFileType value.  This key is used with the array of NSDictionary's returned through the delegate method fileTransferServicesGetListingComplete: after calling getFolderListing.
 // KFTSListingTypeKey returns the value of the constant kFTSListingTypeKey.
 func KFTSListingTypeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kFTSListingTypeKey")))
 }
 
-// Int value.  This key is used with the array of NSDictionary's returned through the delegate method fileTransferServicesGetListingComplete: after calling getFolderListing.
 // KFTSListingSizeKey returns the value of the constant kFTSListingSizeKey.
 func KFTSListingSizeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kFTSListingSizeKey")))

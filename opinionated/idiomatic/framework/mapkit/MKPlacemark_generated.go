@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A user-friendly description of a location on the map.
-//
 // Placemark is an idiomatic wrapper over the Objective-C class MKPlacemark.
+//
+// A user-friendly description of a location on the map.
 type Placemark struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PlacemarkFromID(id objc.ID) *Placemark {
 	if id == 0 {
 		return nil
 	}
-	x := &Placemark{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Placemark{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func placemarkAdopt(id objc.ID) *Placemark {
 	if id == 0 {
 		return nil
 	}
-	x := &Placemark{Handle: objref.Wrap(id)}
+	x := &Placemark{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *Placemark) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Placemark) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPlacemark creates a new Placemark.
 func NewPlacemark() *Placemark {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKPlacemark")), objc.RegisterName("new"))
 	return placemarkAdopt(_id)
 }
 
+// CountryCode wraps the corresponding Objective-C method.
 func (x *Placemark) CountryCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("countryCode"))
 	if _r == 0 {

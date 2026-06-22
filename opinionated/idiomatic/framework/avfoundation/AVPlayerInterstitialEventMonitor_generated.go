@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that monitors the scheduling and progress of interstitial events.
-//
 // PlayerInterstitialEventMonitor is an idiomatic wrapper over the Objective-C class AVPlayerInterstitialEventMonitor.
+//
+// PlayerInterstitialEventMonitor is an abstract base — you do not construct it directly. Construct one of [PlayerInterstitialEventController] and pass it where a PlayerInterstitialEventMonitor is accepted.
+//
+// An object that monitors the scheduling and progress of interstitial events.
 type PlayerInterstitialEventMonitor struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func PlayerInterstitialEventMonitorFromID(id objc.ID) *PlayerInterstitialEventMo
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerInterstitialEventMonitor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlayerInterstitialEventMonitor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func playerInterstitialEventMonitorAdopt(id objc.ID) *PlayerInterstitialEventMon
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerInterstitialEventMonitor{Handle: objref.Wrap(id)}
+	x := &PlayerInterstitialEventMonitor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +62,32 @@ func (x *PlayerInterstitialEventMonitor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an observer with a player item.
-//
-// NewPlayerInterstitialEventMonitorWithPrimaryPlayer creates a new PlayerInterstitialEventMonitor.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerInterstitialEventMonitor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPlayerInterstitialEventMonitorWithPrimaryPlayer creates an observer with a player item.
 func NewPlayerInterstitialEventMonitorWithPrimaryPlayer(primaryPlayer *Player) *PlayerInterstitialEventMonitor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerInterstitialEventMonitor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPrimaryPlayer:"), objref.IDOf(primaryPlayer))
 	return playerInterstitialEventMonitorAdopt(_id)
 }
 
-// The AVPlayer that will play the primaryItems of the receiver's interstitial events.
+// PrimaryPlayer the AVPlayer that will play the primaryItems of the receiver's interstitial events.
 func (x *PlayerInterstitialEventMonitor) PrimaryPlayer() *Player {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryPlayer"))
 	return PlayerFromID(_r)
 }
 
-// The AVQueuePlayer that will play interstitial items during suspension of playback of primary items.
+// InterstitialPlayer the AVQueuePlayer that will play interstitial items during suspension of playback of primary items.
 func (x *PlayerInterstitialEventMonitor) InterstitialPlayer() *QueuePlayer {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interstitialPlayer"))
 	return QueuePlayerFromID(_r)
 }
 
-// Provides the current schedule of interstitial events, specified either intrinsically within the content of primary items, such as via use of directives carried by HLS media playlists, or via use of an AVPlayerInterstitialEventController. When interstitial events follow a schedule specified intrinsically within the content of primary items, the value of this property will typically change whenever the currentItem of the primaryPlayer changes. For HLS content that specifies interstitials via the use of DATERANGE tags, the value of this property may also change whenever the set of DATERANGE tags in the currentItem's media playlist changes. When interstitial events follow a schedule specified via use of an AVPlayerInterstitialEventController, the value of this property changes only when a new schedule is set on the AVPlayerInterstitialEventController. The events returned in this array are immutable. Attempting to mutate them will trigger an exception. To alter an event, make a copy and mutate the copy.
+// Events provides the current schedule of interstitial events, specified either intrinsically within the content of primary items, such as via use of directives carried by HLS media playlists, or via use of an AVPlayerInterstitialEventController. When interstitial events follow a schedule specified intrinsically within the content of primary items, the value of this property will typically change whenever the currentItem of the primaryPlayer changes. For HLS content that specifies interstitials via the use of DATERANGE tags, the value of this property may also change whenever the set of DATERANGE tags in the currentItem's media playlist changes. When interstitial events follow a schedule specified via use of an AVPlayerInterstitialEventController, the value of this property changes only when a new schedule is set on the AVPlayerInterstitialEventController. The events returned in this array are immutable. Attempting to mutate them will trigger an exception. To alter an event, make a copy and mutate the copy.
 //
 // Events returns the collection as a Go slice.
 func (x *PlayerInterstitialEventMonitor) Events() []*PlayerInterstitialEvent {
@@ -87,19 +95,19 @@ func (x *PlayerInterstitialEventMonitor) Events() []*PlayerInterstitialEvent {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerInterstitialEvent { return PlayerInterstitialEventFromID(_id) })
 }
 
-// The current interstitial event. Has a value of nil during playback of primary content by the primary player.
+// CurrentEvent the current interstitial event. Has a value of nil during playback of primary content by the primary player.
 func (x *PlayerInterstitialEventMonitor) CurrentEvent() *PlayerInterstitialEvent {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentEvent"))
 	return PlayerInterstitialEventFromID(_r)
 }
 
-// The skippable event state for the currentEvent. If currentEvent is nil, then the value will be AVPlayerInterstitialEventSkippableEventStateNotSkippable.
+// CurrentEventSkippableState the skippable event state for the currentEvent. If currentEvent is nil, then the value will be AVPlayerInterstitialEventSkippableEventStateNotSkippable.
 func (x *PlayerInterstitialEventMonitor) CurrentEventSkippableState() PlayerInterstitialEventSkippableEventState {
 	_r := objc.Send[PlayerInterstitialEventSkippableEventState](objref.IDOf(x), objc.RegisterName("currentEventSkippableState"))
 	return _r
 }
 
-// The skip control label for the currentEvent. If a localizedStringsBundle has been set on the AVPlayerInterstitialEventController, and a skipControlLocalizedLabelBundleKey is set on the currentEvent, then this value will be the localized string that was matched to the event's skipControlLocalizedLabelBundleKey for the corresponding system language in the supplied Bundle, if any. If currentEvent is nil, then the value will be nil.
+// CurrentEventSkipControlLabel the skip control label for the currentEvent. If a localizedStringsBundle has been set on the AVPlayerInterstitialEventController, and a skipControlLocalizedLabelBundleKey is set on the currentEvent, then this value will be the localized string that was matched to the event's skipControlLocalizedLabelBundleKey for the corresponding system language in the supplied Bundle, if any. If currentEvent is nil, then the value will be nil.
 func (x *PlayerInterstitialEventMonitor) CurrentEventSkipControlLabel() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentEventSkipControlLabel"))
 	if _r == 0 {
@@ -120,3 +128,10 @@ type PlayerInterstitialEventMonitorable interface {
 }
 
 var _ PlayerInterstitialEventMonitorable = (*PlayerInterstitialEventMonitor)(nil)
+
+// isPlayerInterstitialEventMonitor marks PlayerInterstitialEventMonitor — and, by embedding promotion, its
+// subclasses — as a member of the PlayerInterstitialEventMonitor hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *PlayerInterstitialEventMonitor) isPlayerInterstitialEventMonitor() {}
+
+var _ PlayerInterstitialEventMonitorProvider = (*PlayerInterstitialEventMonitor)(nil)

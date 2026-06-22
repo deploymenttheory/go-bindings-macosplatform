@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains options to pass to a format reader extension.
-//
 // FormatReaderInstantiationOptions is an idiomatic wrapper over the Objective-C class MEFormatReaderInstantiationOptions.
+//
+// An object that contains options to pass to a format reader extension.
 type FormatReaderInstantiationOptions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FormatReaderInstantiationOptionsFromID(id objc.ID) *FormatReaderInstantiati
 	if id == 0 {
 		return nil
 	}
-	x := &FormatReaderInstantiationOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FormatReaderInstantiationOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func formatReaderInstantiationOptionsAdopt(id objc.ID) *FormatReaderInstantiatio
 	if id == 0 {
 		return nil
 	}
-	x := &FormatReaderInstantiationOptions{Handle: objref.Wrap(id)}
+	x := &FormatReaderInstantiationOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *FormatReaderInstantiationOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FormatReaderInstantiationOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFormatReaderInstantiationOptions creates a new FormatReaderInstantiationOptions.
 func NewFormatReaderInstantiationOptions() *FormatReaderInstantiationOptions {
 	_id := objc.Send[objc.ID](objc.ID(_class("MEFormatReaderInstantiationOptions")), objc.RegisterName("new"))
 	return formatReaderInstantiationOptionsAdopt(_id)
 }
 
+// AllowIncrementalFragmentParsing wraps the corresponding Objective-C method.
 func (x *FormatReaderInstantiationOptions) AllowIncrementalFragmentParsing() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowIncrementalFragmentParsing"))
 	return _r

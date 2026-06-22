@@ -11,4 +11,5 @@ import (
 // IdentityProvider is accepted wherever a CBIdentity (or one of its subclasses) is expected.
 type IdentityProvider interface {
 	objref.Object
+	isIdentity()
 }

@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a file containing saved game data.
-//
 // SavedGame is an idiomatic wrapper over the Objective-C class GKSavedGame.
+//
+// An object that represents a file containing saved game data.
 type SavedGame struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func SavedGameFromID(id objc.ID) *SavedGame {
 	if id == 0 {
 		return nil
 	}
-	x := &SavedGame{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SavedGame{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func savedGameAdopt(id objc.ID) *SavedGame {
 	if id == 0 {
 		return nil
 	}
-	x := &SavedGame{Handle: objref.Wrap(id)}
+	x := &SavedGame{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,22 @@ func (x *SavedGame) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SavedGame) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSavedGame creates a new SavedGame.
 func NewSavedGame() *SavedGame {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKSavedGame")), objc.RegisterName("new"))
 	return savedGameAdopt(_id)
 }
 
-// Loads the game data from the file.
+// LoadData loads the game data from the file.
 //
 // LoadData blocks until the operation completes or ctx is cancelled.
-func (x *SavedGame) LoadData(ctx context.Context) (obj.Object, error) {
+func (x *SavedGame) LoadData(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -91,6 +99,7 @@ func (x *SavedGame) LoadData(ctx context.Context) (obj.Object, error) {
 	}
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *SavedGame) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -99,6 +108,7 @@ func (x *SavedGame) Name() string {
 	return purego.GoString(_r)
 }
 
+// DeviceName wraps the corresponding Objective-C method.
 func (x *SavedGame) DeviceName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceName"))
 	if _r == 0 {
@@ -107,6 +117,7 @@ func (x *SavedGame) DeviceName() string {
 	return purego.GoString(_r)
 }
 
+// ModificationDate wraps the corresponding Objective-C method.
 func (x *SavedGame) ModificationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modificationDate"))
 	return obj.Wrap(_r)

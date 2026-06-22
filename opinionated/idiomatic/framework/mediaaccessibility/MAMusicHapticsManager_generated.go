@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that reports information about the Music Haptics feature.
-//
 // MusicHapticsManager is an idiomatic wrapper over the Objective-C class MAMusicHapticsManager.
+//
+// A class that reports information about the Music Haptics feature.
 type MusicHapticsManager struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MusicHapticsManagerFromID(id objc.ID) *MusicHapticsManager {
 	if id == 0 {
 		return nil
 	}
-	x := &MusicHapticsManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MusicHapticsManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func musicHapticsManagerAdopt(id objc.ID) *MusicHapticsManager {
 	if id == 0 {
 		return nil
 	}
-	x := &MusicHapticsManager{Handle: objref.Wrap(id)}
+	x := &MusicHapticsManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +60,24 @@ func (x *MusicHapticsManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MusicHapticsManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMusicHapticsManager creates a new MusicHapticsManager.
 func NewMusicHapticsManager() *MusicHapticsManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("MAMusicHapticsManager")), objc.RegisterName("new"))
 	return musicHapticsManagerAdopt(_id)
 }
 
-// Checks whether a haptic track is available for the song with the specified International Standard Recording Code (ISRC).
+// CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler checks whether a haptic track is available for the song with the specified International Standard Recording Code (ISRC).
 func (x *MusicHapticsManager) CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler(internationalStandardRecordingCode string, completionHandler func(bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("checkHapticTrackAvailabilityForMediaMatchingCode:completionHandler:"), purego.NSString(internationalStandardRecordingCode), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
-// Whether the user setting to indicate Music Haptics are currently active.
+// IsActive whether the user setting to indicate Music Haptics are currently active.
 func (x *MusicHapticsManager) IsActive() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
 	return _r

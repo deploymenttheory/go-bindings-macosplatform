@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An annotation that reflects the user’s location on the map.
-//
 // UserLocation is an idiomatic wrapper over the Objective-C class MKUserLocation.
+//
+// An annotation that reflects the user’s location on the map.
 type UserLocation struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func UserLocationFromID(id objc.ID) *UserLocation {
 	if id == 0 {
 		return nil
 	}
-	x := &UserLocation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UserLocation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func userLocationAdopt(id objc.ID) *UserLocation {
 	if id == 0 {
 		return nil
 	}
-	x := &UserLocation{Handle: objref.Wrap(id)}
+	x := &UserLocation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,38 +60,43 @@ func (x *UserLocation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UserLocation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewUserLocation creates a new UserLocation.
 func NewUserLocation() *UserLocation {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKUserLocation")), objc.RegisterName("new"))
 	return userLocationAdopt(_id)
 }
 
-// The title to display for the user’s location annotation.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the title to display for the user’s location annotation.
 func (x *UserLocation) WithTitle(title string) *UserLocation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The subtitle to display for the user’s location annotation.
-//
-// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
+// WithSubtitle the subtitle to display for the user’s location annotation.
 func (x *UserLocation) WithSubtitle(subtitle string) *UserLocation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
+// IsUpdating wraps the corresponding Objective-C method.
 func (x *UserLocation) IsUpdating() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUpdating"))
 	return _r
 }
 
+// Heading wraps the corresponding Objective-C method.
 func (x *UserLocation) Heading() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("heading"))
 	return obj.Wrap(_r)
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *UserLocation) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -98,10 +105,12 @@ func (x *UserLocation) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *UserLocation) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
+// Subtitle wraps the corresponding Objective-C method.
 func (x *UserLocation) Subtitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitle"))
 	if _r == 0 {
@@ -110,6 +119,7 @@ func (x *UserLocation) Subtitle() string {
 	return purego.GoString(_r)
 }
 
+// SetSubtitle wraps the corresponding Objective-C method.
 func (x *UserLocation) SetSubtitle(subtitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 }

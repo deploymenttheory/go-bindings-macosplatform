@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A pass with a credential that the device stores in a certified payment information chip.
-//
 // SecureElementPass is an idiomatic wrapper over the Objective-C class PKSecureElementPass.
+//
+// SecureElementPass is an abstract base — you do not construct it directly. Construct one of [PaymentPass] and pass it where a SecureElementPass is accepted.
+//
+// A pass with a credential that the device stores in a certified payment information chip.
 type SecureElementPass struct {
-	objref.Handle
+	Pass
 }
 
 // SecureElementPassFromID adopts an existing Objective-C object as a SecureElementPass
@@ -25,7 +26,8 @@ func SecureElementPassFromID(id objc.ID) *SecureElementPass {
 	if id == 0 {
 		return nil
 	}
-	x := &SecureElementPass{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SecureElementPass{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,32 +40,13 @@ func secureElementPassAdopt(id objc.ID) *SecureElementPass {
 	if id == 0 {
 		return nil
 	}
-	x := &SecureElementPass{Handle: objref.Wrap(id)}
+	x := &SecureElementPass{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *SecureElementPass) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SecureElementPass) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SecureElementPass) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewSecureElementPass creates a new SecureElementPass.
-func NewSecureElementPass() *SecureElementPass {
-	_id := objc.Send[objc.ID](objc.ID(_class("PKSecureElementPass")), objc.RegisterName("new"))
-	return secureElementPassAdopt(_id)
-}
-
+// PrimaryAccountIdentifier wraps the corresponding Objective-C method.
 func (x *SecureElementPass) PrimaryAccountIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryAccountIdentifier"))
 	if _r == 0 {
@@ -72,6 +55,7 @@ func (x *SecureElementPass) PrimaryAccountIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// PrimaryAccountNumberSuffix wraps the corresponding Objective-C method.
 func (x *SecureElementPass) PrimaryAccountNumberSuffix() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryAccountNumberSuffix"))
 	if _r == 0 {
@@ -80,6 +64,7 @@ func (x *SecureElementPass) PrimaryAccountNumberSuffix() string {
 	return purego.GoString(_r)
 }
 
+// DeviceAccountIdentifier wraps the corresponding Objective-C method.
 func (x *SecureElementPass) DeviceAccountIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceAccountIdentifier"))
 	if _r == 0 {
@@ -88,6 +73,7 @@ func (x *SecureElementPass) DeviceAccountIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// DeviceAccountNumberSuffix wraps the corresponding Objective-C method.
 func (x *SecureElementPass) DeviceAccountNumberSuffix() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceAccountNumberSuffix"))
 	if _r == 0 {
@@ -96,11 +82,13 @@ func (x *SecureElementPass) DeviceAccountNumberSuffix() string {
 	return purego.GoString(_r)
 }
 
+// PassActivationState wraps the corresponding Objective-C method.
 func (x *SecureElementPass) PassActivationState() SecureElementPassActivationState {
 	_r := objc.Send[SecureElementPassActivationState](objref.IDOf(x), objc.RegisterName("passActivationState"))
 	return _r
 }
 
+// DevicePassIdentifier wraps the corresponding Objective-C method.
 func (x *SecureElementPass) DevicePassIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("devicePassIdentifier"))
 	if _r == 0 {
@@ -109,6 +97,7 @@ func (x *SecureElementPass) DevicePassIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// PairedTerminalIdentifier wraps the corresponding Objective-C method.
 func (x *SecureElementPass) PairedTerminalIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pairedTerminalIdentifier"))
 	if _r == 0 {
@@ -130,3 +119,12 @@ type SecureElementPassable interface {
 }
 
 var _ SecureElementPassable = (*SecureElementPass)(nil)
+
+// isSecureElementPass marks SecureElementPass — and, by embedding promotion, its
+// subclasses — as a member of the SecureElementPass hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SecureElementPass) isSecureElementPass() {}
+
+var _ SecureElementPassProvider = (*SecureElementPass)(nil)
+
+var _ PassProvider = (*SecureElementPass)(nil)

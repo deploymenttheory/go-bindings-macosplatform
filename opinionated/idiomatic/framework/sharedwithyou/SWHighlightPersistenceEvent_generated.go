@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents persistence activity for a highlight.
-//
 // HighlightPersistenceEvent is an idiomatic wrapper over the Objective-C class SWHighlightPersistenceEvent.
+//
+// An object that represents persistence activity for a highlight.
 type HighlightPersistenceEvent struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func HighlightPersistenceEventFromID(id objc.ID) *HighlightPersistenceEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &HighlightPersistenceEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HighlightPersistenceEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func highlightPersistenceEventAdopt(id objc.ID) *HighlightPersistenceEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &HighlightPersistenceEvent{Handle: objref.Wrap(id)}
+	x := &HighlightPersistenceEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *HighlightPersistenceEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates and initializes a persistence event.
-//
-// NewHighlightPersistenceEventWithHighlightTrigger creates a new HighlightPersistenceEvent.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HighlightPersistenceEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewHighlightPersistenceEventWithHighlightTrigger creates and initializes a persistence event.
 func NewHighlightPersistenceEventWithHighlightTrigger(highlight *Highlight, trigger HighlightPersistenceEventTrigger) *HighlightPersistenceEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWHighlightPersistenceEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:trigger:"), objref.IDOf(highlight), trigger)
 	return highlightPersistenceEventAdopt(_id)
 }
 
+// PersistenceEventTrigger wraps the corresponding Objective-C method.
 func (x *HighlightPersistenceEvent) PersistenceEventTrigger() HighlightPersistenceEventTrigger {
 	_r := objc.Send[HighlightPersistenceEventTrigger](objref.IDOf(x), objc.RegisterName("persistenceEventTrigger"))
 	return _r

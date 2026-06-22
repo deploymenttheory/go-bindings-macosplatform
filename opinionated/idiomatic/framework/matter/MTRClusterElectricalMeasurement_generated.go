@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterElectricalMeasurement is an idiomatic wrapper over the Objective-C class MTRClusterElectricalMeasurement.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterElectricalMeasurement struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterElectricalMeasurementFromID adopts an existing Objective-C object as a MTRClusterElectricalMeasurement
@@ -23,7 +24,8 @@ func MTRClusterElectricalMeasurementFromID(id objc.ID) *MTRClusterElectricalMeas
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterElectricalMeasurement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterElectricalMeasurement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,29 +38,13 @@ func mTRClusterElectricalMeasurementAdopt(id objc.ID) *MTRClusterElectricalMeasu
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterElectricalMeasurement{Handle: objref.Wrap(id)}
+	x := &MTRClusterElectricalMeasurement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterElectricalMeasurement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterElectricalMeasurement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterElectricalMeasurement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterElectricalMeasurementWithDeviceEndpointIDQueue creates a new MTRClusterElectricalMeasurement.
+// NewMTRClusterElectricalMeasurementWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterElectricalMeasurementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterElectricalMeasurement {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterElectricalMeasurement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -72,730 +58,879 @@ func NewMTRClusterElectricalMeasurementWithDeviceEndpointQueue(device *MTRDevice
 	return mTRClusterElectricalMeasurementAdopt(_id)
 }
 
+// ReadAttributeMeasurementTypeWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeMeasurementTypeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasurementTypeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeDcVoltageWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeDcVoltageWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDcVoltageWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeDcVoltageMinWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeDcVoltageMinWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDcVoltageMinWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeDcVoltageMaxWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeDcVoltageMaxWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDcVoltageMaxWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeDcCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeDcCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDcCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeDcCurrentMinWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeDcCurrentMinWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDcCurrentMinWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeDcCurrentMaxWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeDcCurrentMaxWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDcCurrentMaxWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeDcPowerWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeDcPowerWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDcPowerWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeDcPowerMinWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeDcPowerMinWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDcPowerMinWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeDcPowerMaxWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeDcPowerMaxWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDcPowerMaxWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeDcVoltageMultiplierWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeDcVoltageMultiplierWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDcVoltageMultiplierWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeDcVoltageDivisorWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeDcVoltageDivisorWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDcVoltageDivisorWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeDcCurrentMultiplierWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeDcCurrentMultiplierWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDcCurrentMultiplierWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeDcCurrentDivisorWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeDcCurrentDivisorWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDcCurrentDivisorWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeDcPowerMultiplierWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeDcPowerMultiplierWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDcPowerMultiplierWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeDcPowerDivisorWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeDcPowerDivisorWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDcPowerDivisorWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcFrequencyWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAcFrequencyWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcFrequencyWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcFrequencyMinWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAcFrequencyMinWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcFrequencyMinWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcFrequencyMaxWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAcFrequencyMaxWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcFrequencyMaxWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeNeutralCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeNeutralCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNeutralCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeTotalActivePowerWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeTotalActivePowerWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTotalActivePowerWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeTotalReactivePowerWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeTotalReactivePowerWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTotalReactivePowerWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeTotalApparentPowerWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeTotalApparentPowerWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTotalApparentPowerWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMeasured1stHarmonicCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeMeasured1stHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasured1stHarmonicCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMeasured3rdHarmonicCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeMeasured3rdHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasured3rdHarmonicCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMeasured5thHarmonicCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeMeasured5thHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasured5thHarmonicCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMeasured7thHarmonicCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeMeasured7thHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasured7thHarmonicCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMeasured9thHarmonicCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeMeasured9thHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasured9thHarmonicCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMeasured11thHarmonicCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeMeasured11thHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasured11thHarmonicCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMeasuredPhase1stHarmonicCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase1stHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasuredPhase1stHarmonicCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMeasuredPhase3rdHarmonicCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase3rdHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasuredPhase3rdHarmonicCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMeasuredPhase5thHarmonicCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase5thHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasuredPhase5thHarmonicCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMeasuredPhase7thHarmonicCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase7thHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasuredPhase7thHarmonicCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMeasuredPhase9thHarmonicCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase9thHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasuredPhase9thHarmonicCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMeasuredPhase11thHarmonicCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase11thHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasuredPhase11thHarmonicCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcFrequencyMultiplierWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAcFrequencyMultiplierWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcFrequencyMultiplierWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcFrequencyDivisorWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAcFrequencyDivisorWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcFrequencyDivisorWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributePowerMultiplierWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributePowerMultiplierWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePowerMultiplierWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributePowerDivisorWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributePowerDivisorWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePowerDivisorWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeHarmonicCurrentMultiplierWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeHarmonicCurrentMultiplierWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeHarmonicCurrentMultiplierWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributePhaseHarmonicCurrentMultiplierWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributePhaseHarmonicCurrentMultiplierWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePhaseHarmonicCurrentMultiplierWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeInstantaneousVoltageWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeInstantaneousVoltageWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInstantaneousVoltageWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeInstantaneousLineCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeInstantaneousLineCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInstantaneousLineCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeInstantaneousActiveCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeInstantaneousActiveCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInstantaneousActiveCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeInstantaneousReactiveCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeInstantaneousReactiveCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInstantaneousReactiveCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeInstantaneousPowerWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeInstantaneousPowerWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInstantaneousPowerWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsVoltageWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsVoltageWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsVoltageMinWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMinWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsVoltageMinWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsVoltageMaxWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsVoltageMaxWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsCurrentMinWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMinWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsCurrentMinWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsCurrentMaxWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsCurrentMaxWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeActivePowerWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeActivePowerWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActivePowerWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeActivePowerMinWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMinWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActivePowerMinWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeActivePowerMaxWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMaxWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActivePowerMaxWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeReactivePowerWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeReactivePowerWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeReactivePowerWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeApparentPowerWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeApparentPowerWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeApparentPowerWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributePowerFactorWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributePowerFactorWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePowerFactorWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAverageRmsVoltageMeasurementPeriodWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAverageRmsVoltageMeasurementPeriodWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeAverageRmsVoltageMeasurementPeriodWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) WriteAttributeAverageRmsVoltageMeasurementPeriodWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeAverageRmsVoltageMeasurementPeriodWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeAverageRmsVoltageMeasurementPeriodWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) WriteAttributeAverageRmsVoltageMeasurementPeriodWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeAverageRmsVoltageMeasurementPeriodWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeAverageRmsUnderVoltageCounterWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAverageRmsUnderVoltageCounterWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeAverageRmsUnderVoltageCounterWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) WriteAttributeAverageRmsUnderVoltageCounterWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeAverageRmsUnderVoltageCounterWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeAverageRmsUnderVoltageCounterWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) WriteAttributeAverageRmsUnderVoltageCounterWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeAverageRmsUnderVoltageCounterWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeRmsExtremeOverVoltagePeriodWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsExtremeOverVoltagePeriodWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeRmsExtremeOverVoltagePeriodWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) WriteAttributeRmsExtremeOverVoltagePeriodWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRmsExtremeOverVoltagePeriodWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeRmsExtremeOverVoltagePeriodWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) WriteAttributeRmsExtremeOverVoltagePeriodWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRmsExtremeOverVoltagePeriodWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeRmsExtremeUnderVoltagePeriodWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsExtremeUnderVoltagePeriodWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeRmsExtremeUnderVoltagePeriodWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) WriteAttributeRmsExtremeUnderVoltagePeriodWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRmsExtremeUnderVoltagePeriodWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeRmsExtremeUnderVoltagePeriodWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) WriteAttributeRmsExtremeUnderVoltagePeriodWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRmsExtremeUnderVoltagePeriodWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeRmsVoltageSagPeriodWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsVoltageSagPeriodWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeRmsVoltageSagPeriodWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) WriteAttributeRmsVoltageSagPeriodWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRmsVoltageSagPeriodWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeRmsVoltageSagPeriodWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) WriteAttributeRmsVoltageSagPeriodWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRmsVoltageSagPeriodWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeRmsVoltageSwellPeriodWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsVoltageSwellPeriodWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeRmsVoltageSwellPeriodWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) WriteAttributeRmsVoltageSwellPeriodWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRmsVoltageSwellPeriodWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeRmsVoltageSwellPeriodWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) WriteAttributeRmsVoltageSwellPeriodWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRmsVoltageSwellPeriodWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeAcVoltageMultiplierWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAcVoltageMultiplierWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcVoltageMultiplierWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcVoltageDivisorWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAcVoltageDivisorWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcVoltageDivisorWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcCurrentMultiplierWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAcCurrentMultiplierWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcCurrentMultiplierWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcCurrentDivisorWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAcCurrentDivisorWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcCurrentDivisorWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcPowerMultiplierWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAcPowerMultiplierWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcPowerMultiplierWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcPowerDivisorWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAcPowerDivisorWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcPowerDivisorWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeOverloadAlarmsMaskWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeOverloadAlarmsMaskWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOverloadAlarmsMaskWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeOverloadAlarmsMaskWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) WriteAttributeOverloadAlarmsMaskWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOverloadAlarmsMaskWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeOverloadAlarmsMaskWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) WriteAttributeOverloadAlarmsMaskWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOverloadAlarmsMaskWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeVoltageOverloadWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeVoltageOverloadWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeVoltageOverloadWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeCurrentOverloadWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeCurrentOverloadWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentOverloadWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcOverloadAlarmsMaskWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAcOverloadAlarmsMaskWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcOverloadAlarmsMaskWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeAcOverloadAlarmsMaskWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) WriteAttributeAcOverloadAlarmsMaskWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeAcOverloadAlarmsMaskWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeAcOverloadAlarmsMaskWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) WriteAttributeAcOverloadAlarmsMaskWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeAcOverloadAlarmsMaskWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeAcVoltageOverloadWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAcVoltageOverloadWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcVoltageOverloadWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcCurrentOverloadWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAcCurrentOverloadWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcCurrentOverloadWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcActivePowerOverloadWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAcActivePowerOverloadWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcActivePowerOverloadWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcReactivePowerOverloadWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAcReactivePowerOverloadWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcReactivePowerOverloadWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAverageRmsOverVoltageWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAverageRmsOverVoltageWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAverageRmsUnderVoltageWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAverageRmsUnderVoltageWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsExtremeOverVoltageWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltageWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsExtremeOverVoltageWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsExtremeUnderVoltageWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltageWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsExtremeUnderVoltageWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsVoltageSagWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSagWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsVoltageSagWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsVoltageSwellWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsVoltageSwellWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeLineCurrentPhaseBWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseBWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLineCurrentPhaseBWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeActiveCurrentPhaseBWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseBWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveCurrentPhaseBWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeReactiveCurrentPhaseBWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseBWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeReactiveCurrentPhaseBWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsVoltagePhaseBWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseBWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsVoltagePhaseBWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsVoltageMinPhaseBWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseBWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsVoltageMinPhaseBWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsVoltageMaxPhaseBWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseBWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsVoltageMaxPhaseBWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsCurrentPhaseBWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseBWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsCurrentPhaseBWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsCurrentMinPhaseBWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseBWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsCurrentMinPhaseBWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsCurrentMaxPhaseBWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseBWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsCurrentMaxPhaseBWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeActivePowerPhaseBWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeActivePowerPhaseBWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActivePowerPhaseBWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeActivePowerMinPhaseBWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseBWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActivePowerMinPhaseBWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeActivePowerMaxPhaseBWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseBWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActivePowerMaxPhaseBWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeReactivePowerPhaseBWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseBWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeReactivePowerPhaseBWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeApparentPowerPhaseBWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseBWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeApparentPowerPhaseBWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributePowerFactorPhaseBWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributePowerFactorPhaseBWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePowerFactorPhaseBWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAverageRmsOverVoltageCounterPhaseBWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageCounterPhaseBWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAverageRmsOverVoltageCounterPhaseBWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAverageRmsUnderVoltageCounterPhaseBWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterPhaseBWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAverageRmsUnderVoltageCounterPhaseBWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsExtremeOverVoltagePeriodPhaseBWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodPhaseBWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsExtremeOverVoltagePeriodPhaseBWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsExtremeUnderVoltagePeriodPhaseBWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodPhaseBWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsExtremeUnderVoltagePeriodPhaseBWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsVoltageSagPeriodPhaseBWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPhaseBWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsVoltageSagPeriodPhaseBWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsVoltageSwellPeriodPhaseBWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodPhaseBWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsVoltageSwellPeriodPhaseBWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeLineCurrentPhaseCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLineCurrentPhaseCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeActiveCurrentPhaseCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveCurrentPhaseCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeReactiveCurrentPhaseCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeReactiveCurrentPhaseCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsVoltagePhaseCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsVoltagePhaseCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsVoltageMinPhaseCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsVoltageMinPhaseCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsVoltageMaxPhaseCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsVoltageMaxPhaseCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsCurrentPhaseCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsCurrentPhaseCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsCurrentMinPhaseCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsCurrentMinPhaseCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsCurrentMaxPhaseCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsCurrentMaxPhaseCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeActivePowerPhaseCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeActivePowerPhaseCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActivePowerPhaseCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeActivePowerMinPhaseCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActivePowerMinPhaseCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeActivePowerMaxPhaseCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActivePowerMaxPhaseCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeReactivePowerPhaseCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeReactivePowerPhaseCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeApparentPowerPhaseCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeApparentPowerPhaseCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributePowerFactorPhaseCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributePowerFactorPhaseCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePowerFactorPhaseCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAverageRmsOverVoltageCounterPhaseCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageCounterPhaseCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAverageRmsOverVoltageCounterPhaseCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAverageRmsUnderVoltageCounterPhaseCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterPhaseCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAverageRmsUnderVoltageCounterPhaseCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsExtremeOverVoltagePeriodPhaseCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodPhaseCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsExtremeOverVoltagePeriodPhaseCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsExtremeUnderVoltagePeriodPhaseCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodPhaseCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsExtremeUnderVoltagePeriodPhaseCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsVoltageSagPeriodPhaseCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPhaseCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsVoltageSagPeriodPhaseCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeRmsVoltageSwellPeriodPhaseCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodPhaseCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRmsVoltageSwellPeriodPhaseCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterElectricalMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -956,3 +1091,7 @@ type MTRClusterElectricalMeasurementable interface {
 }
 
 var _ MTRClusterElectricalMeasurementable = (*MTRClusterElectricalMeasurement)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterElectricalMeasurement)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterElectricalMeasurement)(nil)

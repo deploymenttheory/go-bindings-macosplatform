@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The result of a request to fetch persistent CloudKit container events.
-//
 // PersistentCloudKitContainerEventResult is an idiomatic wrapper over the Objective-C class NSPersistentCloudKitContainerEventResult.
+//
+// It embeds [PersistentStoreResult], promoting that type's methods.
+//
+// The result of a request to fetch persistent CloudKit container events.
 type PersistentCloudKitContainerEventResult struct {
-	objref.Handle
+	PersistentStoreResult
 }
 
 // PersistentCloudKitContainerEventResultFromID adopts an existing Objective-C object as a PersistentCloudKitContainerEventResult
@@ -25,7 +26,8 @@ func PersistentCloudKitContainerEventResultFromID(id objc.ID) *PersistentCloudKi
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentCloudKitContainerEventResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PersistentCloudKitContainerEventResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func persistentCloudKitContainerEventResultAdopt(id objc.ID) *PersistentCloudKit
 	if id == 0 {
 		return nil
 	}
-	x := &PersistentCloudKitContainerEventResult{Handle: objref.Wrap(id)}
+	x := &PersistentCloudKitContainerEventResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PersistentCloudKitContainerEventResult) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PersistentCloudKitContainerEventResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PersistentCloudKitContainerEventResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPersistentCloudKitContainerEventResult creates a new PersistentCloudKitContainerEventResult.
@@ -64,11 +52,13 @@ func NewPersistentCloudKitContainerEventResult() *PersistentCloudKitContainerEve
 	return persistentCloudKitContainerEventResultAdopt(_id)
 }
 
+// Result wraps the corresponding Objective-C method.
 func (x *PersistentCloudKitContainerEventResult) Result() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("result"))
 	return obj.Wrap(_r)
 }
 
+// ResultType wraps the corresponding Objective-C method.
 func (x *PersistentCloudKitContainerEventResult) ResultType() PersistentCloudKitContainerEventResultType {
 	_r := objc.Send[PersistentCloudKitContainerEventResultType](objref.IDOf(x), objc.RegisterName("resultType"))
 	return _r
@@ -82,3 +72,5 @@ type PersistentCloudKitContainerEventResultable interface {
 }
 
 var _ PersistentCloudKitContainerEventResultable = (*PersistentCloudKitContainerEventResult)(nil)
+
+var _ PersistentStoreResultProvider = (*PersistentCloudKitContainerEventResult)(nil)

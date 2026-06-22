@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A controller profile that supports the Xbox controller.
-//
 // XboxGamepad is an idiomatic wrapper over the Objective-C class GCXboxGamepad.
+//
+// It embeds [ExtendedGamepad], promoting that type's methods.
+//
+// A controller profile that supports the Xbox controller.
 type XboxGamepad struct {
-	objref.Handle
+	ExtendedGamepad
 }
 
 // XboxGamepadFromID adopts an existing Objective-C object as a XboxGamepad
@@ -25,7 +26,8 @@ func XboxGamepadFromID(id objc.ID) *XboxGamepad {
 	if id == 0 {
 		return nil
 	}
-	x := &XboxGamepad{Handle: objref.Wrap(purego.Retain(id))}
+	x := &XboxGamepad{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func xboxGamepadAdopt(id objc.ID) *XboxGamepad {
 	if id == 0 {
 		return nil
 	}
-	x := &XboxGamepad{Handle: objref.Wrap(id)}
+	x := &XboxGamepad{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *XboxGamepad) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *XboxGamepad) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *XboxGamepad) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewXboxGamepad creates a new XboxGamepad.
@@ -64,36 +52,37 @@ func NewXboxGamepad() *XboxGamepad {
 	return xboxGamepadAdopt(_id)
 }
 
-// The block that the profile calls when an element’s value changes.
-//
-// WithValueDidChangeHandler sets valueDidChangeHandler and returns the receiver so calls can be chained.
+// WithValueDidChangeHandler the block that the profile calls when an element’s value changes.
 func (x *XboxGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *XboxGamepad {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return x
 }
 
-// Some Xbox controller variants can support up to four additional buttons.
+// PaddleButton1 some Xbox controller variants can support up to four additional buttons.
 func (x *XboxGamepad) PaddleButton1() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paddleButton1"))
 	return ControllerButtonInputFromID(_r)
 }
 
+// PaddleButton2 wraps the corresponding Objective-C method.
 func (x *XboxGamepad) PaddleButton2() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paddleButton2"))
 	return ControllerButtonInputFromID(_r)
 }
 
+// PaddleButton3 wraps the corresponding Objective-C method.
 func (x *XboxGamepad) PaddleButton3() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paddleButton3"))
 	return ControllerButtonInputFromID(_r)
 }
 
+// PaddleButton4 wraps the corresponding Objective-C method.
 func (x *XboxGamepad) PaddleButton4() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paddleButton4"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// Some Xbox controller variants feature a Share button.
+// ButtonShare some Xbox controller variants feature a Share button.
 func (x *XboxGamepad) ButtonShare() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonShare"))
 	return ControllerButtonInputFromID(_r)
@@ -111,3 +100,7 @@ type XboxGamepadable interface {
 }
 
 var _ XboxGamepadable = (*XboxGamepad)(nil)
+
+var _ ExtendedGamepadProvider = (*XboxGamepad)(nil)
+
+var _ PhysicalInputProfileProvider = (*XboxGamepad)(nil)

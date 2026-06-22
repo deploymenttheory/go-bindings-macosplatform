@@ -12,11 +12,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The information that describes a lodging reservation.
-//
 // LodgingReservation is an idiomatic wrapper over the Objective-C class INLodgingReservation.
+//
+// It embeds [Reservation], promoting that type's methods.
+//
+// The information that describes a lodging reservation.
 type LodgingReservation struct {
-	objref.Handle
+	Reservation
 }
 
 // LodgingReservationFromID adopts an existing Objective-C object as a LodgingReservation
@@ -25,7 +27,8 @@ func LodgingReservationFromID(id objc.ID) *LodgingReservation {
 	if id == 0 {
 		return nil
 	}
-	x := &LodgingReservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LodgingReservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,59 +41,45 @@ func lodgingReservationAdopt(id objc.ID) *LodgingReservation {
 	if id == 0 {
 		return nil
 	}
-	x := &LodgingReservation{Handle: objref.Wrap(id)}
+	x := &LodgingReservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *LodgingReservation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LodgingReservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LodgingReservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a lodging reservation with the specified contents and attributes.
-//
-// NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren creates a new LodgingReservation.
+// NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren creates a lodging reservation with the specified contents and attributes.
 func NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, uRL string, lodgingBusinessLocation obj.Object, reservationDuration *DateComponentsRange, numberOfAdults obj.Object, numberOfChildren obj.Object) *LodgingReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INLodgingReservation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:lodgingBusinessLocation:reservationDuration:numberOfAdults:numberOfChildren:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(uRL), objref.IDOf(lodgingBusinessLocation), objref.IDOf(reservationDuration), objref.IDOf(numberOfAdults), objref.IDOf(numberOfChildren))
 	return lodgingReservationAdopt(_id)
 }
 
-// Creates a new lodging reservation with the provided information.
-//
-// NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren creates a new LodgingReservation.
+// NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren creates a new lodging reservation with the provided information.
 func NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, lodgingBusinessLocation obj.Object, reservationDuration *DateComponentsRange, numberOfAdults obj.Object, numberOfChildren obj.Object) *LodgingReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INLodgingReservation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:lodgingBusinessLocation:reservationDuration:numberOfAdults:numberOfChildren:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), objref.IDOf(lodgingBusinessLocation), objref.IDOf(reservationDuration), objref.IDOf(numberOfAdults), objref.IDOf(numberOfChildren))
 	return lodgingReservationAdopt(_id)
 }
 
+// LodgingBusinessLocation wraps the corresponding Objective-C method.
 func (x *LodgingReservation) LodgingBusinessLocation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lodgingBusinessLocation"))
 	return obj.Wrap(_r)
 }
 
+// ReservationDuration wraps the corresponding Objective-C method.
 func (x *LodgingReservation) ReservationDuration() *DateComponentsRange {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservationDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
+// NumberOfAdults wraps the corresponding Objective-C method.
 func (x *LodgingReservation) NumberOfAdults() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberOfAdults"))
 	return obj.Wrap(_r)
 }
 
+// NumberOfChildren wraps the corresponding Objective-C method.
 func (x *LodgingReservation) NumberOfChildren() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberOfChildren"))
 	return obj.Wrap(_r)
@@ -106,3 +95,5 @@ type LodgingReservationable interface {
 }
 
 var _ LodgingReservationable = (*LodgingReservation)(nil)
+
+var _ ReservationProvider = (*LodgingReservation)(nil)

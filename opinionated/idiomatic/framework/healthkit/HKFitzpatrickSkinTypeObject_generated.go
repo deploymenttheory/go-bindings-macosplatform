@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// This class acts as a wrapper for the HKFitzpatrickSkinType enumeration.
-//
 // FitzpatrickSkinTypeObject is an idiomatic wrapper over the Objective-C class HKFitzpatrickSkinTypeObject.
+//
+// This class acts as a wrapper for the HKFitzpatrickSkinType enumeration.
 type FitzpatrickSkinTypeObject struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FitzpatrickSkinTypeObjectFromID(id objc.ID) *FitzpatrickSkinTypeObject {
 	if id == 0 {
 		return nil
 	}
-	x := &FitzpatrickSkinTypeObject{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FitzpatrickSkinTypeObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func fitzpatrickSkinTypeObjectAdopt(id objc.ID) *FitzpatrickSkinTypeObject {
 	if id == 0 {
 		return nil
 	}
-	x := &FitzpatrickSkinTypeObject{Handle: objref.Wrap(id)}
+	x := &FitzpatrickSkinTypeObject{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *FitzpatrickSkinTypeObject) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FitzpatrickSkinTypeObject) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFitzpatrickSkinTypeObject creates a new FitzpatrickSkinTypeObject.
 func NewFitzpatrickSkinTypeObject() *FitzpatrickSkinTypeObject {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKFitzpatrickSkinTypeObject")), objc.RegisterName("new"))
 	return fitzpatrickSkinTypeObjectAdopt(_id)
 }
 
+// SkinType wraps the corresponding Objective-C method.
 func (x *FitzpatrickSkinTypeObject) SkinType() FitzpatrickSkinType {
 	_r := objc.Send[FitzpatrickSkinType](objref.IDOf(x), objc.RegisterName("skinType"))
 	return _r

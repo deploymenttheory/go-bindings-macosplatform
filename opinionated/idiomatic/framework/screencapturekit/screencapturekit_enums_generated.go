@@ -21,6 +21,8 @@ const (
 	CaptureDynamicRangeHDRCanonicalDisplay CaptureDynamicRange = 2
 )
 
+// String returns the CaptureDynamicRange constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptureDynamicRange) String() string {
 	switch e {
 	case CaptureDynamicRangeSDR:
@@ -50,6 +52,8 @@ const (
 	CaptureResolutionNominal CaptureResolutionType = 2
 )
 
+// String returns the CaptureResolutionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptureResolutionType) String() string {
 	switch e {
 	case CaptureResolutionAutomatic:
@@ -80,6 +84,8 @@ const (
 	ContentSharingPickerModeSingleDisplay ContentSharingPickerMode = 16
 )
 
+// String returns the ContentSharingPickerMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ContentSharingPickerMode) String() string {
 	var parts []string
 	if e&ContentSharingPickerModeSingleWindow != 0 {
@@ -115,6 +121,8 @@ const (
 	PresenterOverlayAlertSettingAlways PresenterOverlayAlertSetting = 2
 )
 
+// String returns the PresenterOverlayAlertSetting constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PresenterOverlayAlertSetting) String() string {
 	switch e {
 	case PresenterOverlayAlertSettingSystem:
@@ -135,6 +143,8 @@ const (
 	ScreenshotDisplayIntentLocal     ScreenshotDisplayIntent = 1
 )
 
+// String returns the ScreenshotDisplayIntent constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ScreenshotDisplayIntent) String() string {
 	switch e {
 	case ScreenshotDisplayIntentCanonical:
@@ -154,6 +164,8 @@ const (
 	ScreenshotDynamicRangeSDRAndHDR ScreenshotDynamicRange = 2
 )
 
+// String returns the ScreenshotDynamicRange constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ScreenshotDynamicRange) String() string {
 	switch e {
 	case ScreenshotDynamicRangeSDR:
@@ -181,6 +193,8 @@ const (
 	ShareableContentStyleApplication ShareableContentStyle = 3
 )
 
+// String returns the ShareableContentStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ShareableContentStyle) String() string {
 	switch e {
 	case ShareableContentStyleNone:
@@ -206,6 +220,8 @@ const (
 	StreamConfigurationPresetCaptureHDRRecordingPreservedSDRHDR10 StreamConfigurationPreset = 4
 )
 
+// String returns the StreamConfigurationPreset constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StreamConfigurationPreset) String() string {
 	switch e {
 	case StreamConfigurationPresetCaptureHDRStreamLocalDisplay:
@@ -250,6 +266,8 @@ const (
 	StreamErrorSystemStoppedStream                    StreamErrorCode = -3821
 )
 
+// String returns the StreamErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StreamErrorCode) String() string {
 	switch e {
 	case StreamErrorUserDeclined:
@@ -311,6 +329,8 @@ const (
 	StreamTypeDisplay StreamType = 1
 )
 
+// String returns the StreamType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StreamType) String() string {
 	switch e {
 	case StreamTypeWindow:

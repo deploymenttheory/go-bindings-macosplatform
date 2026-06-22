@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object for converting audio data into a signature.
-//
 // SignatureGenerator is an idiomatic wrapper over the Objective-C class SHSignatureGenerator.
+//
+// An object for converting audio data into a signature.
 type SignatureGenerator struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func SignatureGeneratorFromID(id objc.ID) *SignatureGenerator {
 	if id == 0 {
 		return nil
 	}
-	x := &SignatureGenerator{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SignatureGenerator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func signatureGeneratorAdopt(id objc.ID) *SignatureGenerator {
 	if id == 0 {
 		return nil
 	}
-	x := &SignatureGenerator{Handle: objref.Wrap(id)}
+	x := &SignatureGenerator{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,13 +62,19 @@ func (x *SignatureGenerator) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SignatureGenerator) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSignatureGenerator creates a new SignatureGenerator.
 func NewSignatureGenerator() *SignatureGenerator {
 	_id := objc.Send[objc.ID](objc.ID(_class("SHSignatureGenerator")), objc.RegisterName("new"))
 	return signatureGeneratorAdopt(_id)
 }
 
-// Adds audio to the generator.
+// AppendBufferAtTime adds audio to the generator.
 func (x *SignatureGenerator) AppendBufferAtTime(buffer obj.Object, time_ obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("appendBuffer:atTime:error:"), objref.IDOf(buffer), objref.IDOf(time_), unsafe.Pointer(&_nsErr))
@@ -76,7 +84,7 @@ func (x *SignatureGenerator) AppendBufferAtTime(buffer obj.Object, time_ obj.Obj
 	return nil
 }
 
-// Converts the audio buffer into a signature.
+// Signature converts the audio buffer into a signature.
 func (x *SignatureGenerator) Signature() *Signature {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signature"))
 	return SignatureFromID(_r)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes a user’s participation in a share.
-//
 // ShareParticipant is an idiomatic wrapper over the Objective-C class CKShareParticipant.
+//
+// An object that describes a user’s participation in a share.
 type ShareParticipant struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ShareParticipantFromID(id objc.ID) *ShareParticipant {
 	if id == 0 {
 		return nil
 	}
-	x := &ShareParticipant{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ShareParticipant{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func shareParticipantAdopt(id objc.ID) *ShareParticipant {
 	if id == 0 {
 		return nil
 	}
-	x := &ShareParticipant{Handle: objref.Wrap(id)}
+	x := &ShareParticipant{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,61 +60,65 @@ func (x *ShareParticipant) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ShareParticipant) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewShareParticipant creates a new ShareParticipant.
 func NewShareParticipant() *ShareParticipant {
 	_id := objc.Send[objc.ID](objc.ID(_class("CKShareParticipant")), objc.RegisterName("new"))
 	return shareParticipantAdopt(_id)
 }
 
-// The participant's role for the share.
-//
-// WithRole sets role and returns the receiver so calls can be chained.
+// WithRole the participant's role for the share.
 func (x *ShareParticipant) WithRole(role ShareParticipantRole) *ShareParticipant {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRole:"), role)
 	return x
 }
 
-// The participant's permission level for the share. This property controls the permissions that the participant has for the share. For a list of possible values, see “CKShare/ParticipantPermission“.
-//
-// WithPermission sets permission and returns the receiver so calls can be chained.
+// WithPermission the participant's permission level for the share. This property controls the permissions that the participant has for the share. For a list of possible values, see “CKShare/ParticipantPermission“.
 func (x *ShareParticipant) WithPermission(permission ShareParticipantPermission) *ShareParticipant {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPermission:"), permission)
 	return x
 }
 
-// The identity of the participant. This property contains a reference to the user identity for the share participant.
+// UserIdentity the identity of the participant. This property contains a reference to the user identity for the share participant.
 func (x *ShareParticipant) UserIdentity() *UserIdentity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userIdentity"))
 	return UserIdentityFromID(_r)
 }
 
-// The participant's role for the share.
+// Role the participant's role for the share.
 func (x *ShareParticipant) Role() ShareParticipantRole {
 	_r := objc.Send[ShareParticipantRole](objref.IDOf(x), objc.RegisterName("role"))
 	return _r
 }
 
+// SetRole wraps the corresponding Objective-C method.
 func (x *ShareParticipant) SetRole(role ShareParticipantRole) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRole:"), role)
 }
 
-// The current state of the user's acceptance of the share. This property contains the current state of the participant's acceptance of the share. For a list of possible values, see “CKShare/ParticipantAcceptanceStatus“.
+// AcceptanceStatus the current state of the user's acceptance of the share. This property contains the current state of the participant's acceptance of the share. For a list of possible values, see “CKShare/ParticipantAcceptanceStatus“.
 func (x *ShareParticipant) AcceptanceStatus() ShareParticipantAcceptanceStatus {
 	_r := objc.Send[ShareParticipantAcceptanceStatus](objref.IDOf(x), objc.RegisterName("acceptanceStatus"))
 	return _r
 }
 
-// The participant's permission level for the share. This property controls the permissions that the participant has for the share. For a list of possible values, see “CKShare/ParticipantPermission“.
+// Permission the participant's permission level for the share. This property controls the permissions that the participant has for the share. For a list of possible values, see “CKShare/ParticipantPermission“.
 func (x *ShareParticipant) Permission() ShareParticipantPermission {
 	_r := objc.Send[ShareParticipantPermission](objref.IDOf(x), objc.RegisterName("permission"))
 	return _r
 }
 
+// SetPermission wraps the corresponding Objective-C method.
 func (x *ShareParticipant) SetPermission(permission ShareParticipantPermission) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPermission:"), permission)
 }
 
-// A unique identifier for this participant.
+// ParticipantID a unique identifier for this participant.
 func (x *ShareParticipant) ParticipantID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("participantID"))
 	if _r == 0 {
@@ -121,13 +127,13 @@ func (x *ShareParticipant) ParticipantID() string {
 	return purego.GoString(_r)
 }
 
-// Indicates whether the participant was originally a requester that an originator or administrator approved to join the share.
+// IsApprovedRequester indicates whether the participant was originally a requester that an originator or administrator approved to join the share.
 func (x *ShareParticipant) IsApprovedRequester() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isApprovedRequester"))
 	return _r
 }
 
-// The date and time when an originator or administrator added this participant to the share. CloudKit sets this timestamp when the share is successfully saved to the server.
+// DateAddedToShare the date and time when an originator or administrator added this participant to the share. CloudKit sets this timestamp when the share is successfully saved to the server.
 func (x *ShareParticipant) DateAddedToShare() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateAddedToShare"))
 	return obj.Wrap(_r)

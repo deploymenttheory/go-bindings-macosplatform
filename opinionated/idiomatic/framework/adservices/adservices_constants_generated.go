@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// The framework attribution error domain.
 // AAAttributionErrorDomain returns the string constant AAAttributionErrorDomain, for use as a dictionary key or argument.
 func AAAttributionErrorDomain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AAAttributionErrorDomain")))

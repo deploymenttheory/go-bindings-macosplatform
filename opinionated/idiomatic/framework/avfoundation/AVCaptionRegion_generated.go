@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the region in which the system presents a caption.
-//
 // CaptionRegion is an idiomatic wrapper over the Objective-C class AVCaptionRegion.
+//
+// CaptionRegion is an abstract base — you do not construct it directly. Construct one of [MutableCaptionRegion] and pass it where a CaptionRegion is accepted.
+//
+// An object that represents the region in which the system presents a caption.
 type CaptionRegion struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func CaptionRegionFromID(id objc.ID) *CaptionRegion {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptionRegion{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptionRegion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func captionRegionAdopt(id objc.ID) *CaptionRegion {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptionRegion{Handle: objref.Wrap(id)}
+	x := &CaptionRegion{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +62,18 @@ func (x *CaptionRegion) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewCaptionRegion creates a new CaptionRegion.
-func NewCaptionRegion() *CaptionRegion {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptionRegion")), objc.RegisterName("new"))
-	return captionRegionAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptionRegion) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Encodes the region using the specified encoder.
+// EncodeWithCoder encodes the region using the specified encoder.
 func (x *CaptionRegion) EncodeWithCoder(encoder obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeWithCoder:"), objref.IDOf(encoder))
 }
 
-// Identifier for the region When regionIdentifier is nil, two regions with the same position and endPosition are considered to be same, that is captions referring these regions belong to the same region when serialized to a format like TTML.  In addition, the AVCaptionRegion cannot be mutably copied. When regionIdentifier is not nil, two regions are same if and only if the region identifier is equal. It is a client's responsibility to ensure these AVCaptionRegion objects have the same properties.
+// Identifier identifier for the region When regionIdentifier is nil, two regions with the same position and endPosition are considered to be same, that is captions referring these regions belong to the same region when serialized to a format like TTML.  In addition, the AVCaptionRegion cannot be mutably copied. When regionIdentifier is not nil, two regions are same if and only if the region identifier is equal. It is a client's responsibility to ensure these AVCaptionRegion objects have the same properties.
 func (x *CaptionRegion) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -78,19 +82,19 @@ func (x *CaptionRegion) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Scroll mode for the region See AVCaptionRegionScrollXXX enum for possible values.
+// Scroll scroll mode for the region See AVCaptionRegionScrollXXX enum for possible values.
 func (x *CaptionRegion) Scroll() CaptionRegionScroll {
 	_r := objc.Send[CaptionRegionScroll](objref.IDOf(x), objc.RegisterName("scroll"))
 	return _r
 }
 
-// Alignment of lines for the region
+// DisplayAlignment alignment of lines for the region
 func (x *CaptionRegion) DisplayAlignment() CaptionRegionDisplayAlignment {
 	_r := objc.Send[CaptionRegionDisplayAlignment](objref.IDOf(x), objc.RegisterName("displayAlignment"))
 	return _r
 }
 
-// The block and inline progression direction of the region.
+// WritingMode the block and inline progression direction of the region.
 func (x *CaptionRegion) WritingMode() CaptionRegionWritingMode {
 	_r := objc.Send[CaptionRegionWritingMode](objref.IDOf(x), objc.RegisterName("writingMode"))
 	return _r
@@ -107,3 +111,10 @@ type CaptionRegionable interface {
 }
 
 var _ CaptionRegionable = (*CaptionRegion)(nil)
+
+// isCaptionRegion marks CaptionRegion — and, by embedding promotion, its
+// subclasses — as a member of the CaptionRegion hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CaptionRegion) isCaptionRegion() {}
+
+var _ CaptionRegionProvider = (*CaptionRegion)(nil)

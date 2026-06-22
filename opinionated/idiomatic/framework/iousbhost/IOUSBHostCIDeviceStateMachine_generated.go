@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The object representing the state of a user-mode USB host controller device This class assists with tracking internal state transitions of a user-mode USB host controller device, and parses IOUSBHostCIMessage command structures to update state and generate properly formatted command responses.  Clients should create an IOUSBHostCIDeviceStateMachine in response to an IOUSBHostCIMessageTypeDeviceCreate command, and then use the provided interfaces to identify and process commands for the device.  The IOUSBHostCIDeviceStateMachine should be destroyed in response to an IOUSBHostCIMessageTypeDeviceDestroy command. IOUSBHostCIDeviceStateMachine does not provide any concurrency protection, the client is responsible for necessary serialization.
-//
 // HostCIDeviceStateMachine is an idiomatic wrapper over the Objective-C class IOUSBHostCIDeviceStateMachine.
+//
+// The object representing the state of a user-mode USB host controller device This class assists with tracking internal state transitions of a user-mode USB host controller device, and parses IOUSBHostCIMessage command structures to update state and generate properly formatted command responses.  Clients should create an IOUSBHostCIDeviceStateMachine in response to an IOUSBHostCIMessageTypeDeviceCreate command, and then use the provided interfaces to identify and process commands for the device.  The IOUSBHostCIDeviceStateMachine should be destroyed in response to an IOUSBHostCIMessageTypeDeviceDestroy command. IOUSBHostCIDeviceStateMachine does not provide any concurrency protection, the client is responsible for necessary serialization.
 type HostCIDeviceStateMachine struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func HostCIDeviceStateMachineFromID(id objc.ID) *HostCIDeviceStateMachine {
 	if id == 0 {
 		return nil
 	}
-	x := &HostCIDeviceStateMachine{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HostCIDeviceStateMachine{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func hostCIDeviceStateMachineAdopt(id objc.ID) *HostCIDeviceStateMachine {
 	if id == 0 {
 		return nil
 	}
-	x := &HostCIDeviceStateMachine{Handle: objref.Wrap(id)}
+	x := &HostCIDeviceStateMachine{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,27 +60,37 @@ func (x *HostCIDeviceStateMachine) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HostCIDeviceStateMachine) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewHostCIDeviceStateMachine creates a new HostCIDeviceStateMachine.
 func NewHostCIDeviceStateMachine() *HostCIDeviceStateMachine {
 	_id := objc.Send[objc.ID](objc.ID(_class("IOUSBHostCIDeviceStateMachine")), objc.RegisterName("new"))
 	return hostCIDeviceStateMachineAdopt(_id)
 }
 
+// DeviceState wraps the corresponding Objective-C method.
 func (x *HostCIDeviceStateMachine) DeviceState() HostCIDeviceState {
 	_r := objc.Send[HostCIDeviceState](objref.IDOf(x), objc.RegisterName("deviceState"))
 	return _r
 }
 
+// CompleteRoute wraps the corresponding Objective-C method.
 func (x *HostCIDeviceStateMachine) CompleteRoute() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("completeRoute"))
 	return _r
 }
 
+// DeviceAddress wraps the corresponding Objective-C method.
 func (x *HostCIDeviceStateMachine) DeviceAddress() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("deviceAddress"))
 	return _r
 }
 
+// ControllerInterface wraps the corresponding Objective-C method.
 func (x *HostCIDeviceStateMachine) ControllerInterface() *HostControllerInterface {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controllerInterface"))
 	return HostControllerInterfaceFromID(_r)

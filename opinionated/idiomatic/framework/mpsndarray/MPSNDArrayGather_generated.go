@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ArrayGather is an idiomatic wrapper over the Objective-C class MPSNDArrayGather.
+//
+// It embeds [ArrayBinaryKernel], promoting that type's methods.
 type ArrayGather struct {
-	objref.Handle
+	ArrayBinaryKernel
 }
 
 // ArrayGatherFromID adopts an existing Objective-C object as a ArrayGather
@@ -23,7 +24,8 @@ func ArrayGatherFromID(id objc.ID) *ArrayGather {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayGather{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ArrayGather{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func arrayGatherAdopt(id objc.ID) *ArrayGather {
 	if id == 0 {
 		return nil
 	}
-	x := &ArrayGather{Handle: objref.Wrap(id)}
+	x := &ArrayGather{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ArrayGather) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ArrayGather) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ArrayGather) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewArrayGather creates a new ArrayGather.
@@ -62,20 +50,19 @@ func NewArrayGather() *ArrayGather {
 	return arrayGatherAdopt(_id)
 }
 
-// The axis along which to apply the gather operation. Defaults to zero.
-//
-// WithAxis sets axis and returns the receiver so calls can be chained.
+// WithAxis the axis along which to apply the gather operation. Defaults to zero.
 func (x *ArrayGather) WithAxis(axis int) *ArrayGather {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAxis:"), axis)
 	return x
 }
 
-// The axis along which to apply the gather operation. Defaults to zero.
+// Axis the axis along which to apply the gather operation. Defaults to zero.
 func (x *ArrayGather) Axis() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("axis"))
 	return _r
 }
 
+// SetAxis wraps the corresponding Objective-C method.
 func (x *ArrayGather) SetAxis(axis int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAxis:"), axis)
 }
@@ -89,3 +76,9 @@ type ArrayGatherable interface {
 }
 
 var _ ArrayGatherable = (*ArrayGather)(nil)
+
+var _ ArrayBinaryKernelProvider = (*ArrayGather)(nil)
+
+var _ ArrayMultiaryKernelProvider = (*ArrayGather)(nil)
+
+var _ ArrayMultiaryBaseProvider = (*ArrayGather)(nil)

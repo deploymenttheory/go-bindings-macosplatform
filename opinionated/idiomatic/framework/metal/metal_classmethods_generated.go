@@ -8,159 +8,163 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Creates a new bounding box descriptor.
+// Descriptor creates a new bounding box descriptor.
 func Descriptor() *AccelerationStructureBoundingBoxGeometryDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLAccelerationStructureBoundingBoxGeometryDescriptor")), objc.RegisterName("descriptor"))
 	return AccelerationStructureBoundingBoxGeometryDescriptorFromID(_r)
 }
 
-// Creates a curve geometry descriptor.
+// MTLAccelerationStructureCurveGeometryDescriptorDescriptor creates a curve geometry descriptor.
 func MTLAccelerationStructureCurveGeometryDescriptorDescriptor() *AccelerationStructureCurveGeometryDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLAccelerationStructureCurveGeometryDescriptor")), objc.RegisterName("descriptor"))
 	return AccelerationStructureCurveGeometryDescriptorFromID(_r)
 }
 
-// Creates a new bounding box descriptor.
+// MTLAccelerationStructureMotionBoundingBoxGeometryDescriptorDescriptor creates a new bounding box descriptor.
 func MTLAccelerationStructureMotionBoundingBoxGeometryDescriptorDescriptor() *AccelerationStructureMotionBoundingBoxGeometryDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLAccelerationStructureMotionBoundingBoxGeometryDescriptor")), objc.RegisterName("descriptor"))
 	return AccelerationStructureMotionBoundingBoxGeometryDescriptorFromID(_r)
 }
 
+// MTLAccelerationStructureMotionCurveGeometryDescriptorDescriptor wraps the corresponding Objective-C method.
 func MTLAccelerationStructureMotionCurveGeometryDescriptorDescriptor() *AccelerationStructureMotionCurveGeometryDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLAccelerationStructureMotionCurveGeometryDescriptor")), objc.RegisterName("descriptor"))
 	return AccelerationStructureMotionCurveGeometryDescriptorFromID(_r)
 }
 
-// Creates a new triangle descriptor.
+// MTLAccelerationStructureMotionTriangleGeometryDescriptorDescriptor creates a new triangle descriptor.
 func MTLAccelerationStructureMotionTriangleGeometryDescriptorDescriptor() *AccelerationStructureMotionTriangleGeometryDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLAccelerationStructureMotionTriangleGeometryDescriptor")), objc.RegisterName("descriptor"))
 	return AccelerationStructureMotionTriangleGeometryDescriptorFromID(_r)
 }
 
-// Create an autoreleased default acceleration structure pass descriptor
+// MTLAccelerationStructurePassDescriptorAccelerationStructurePassDescriptor create an autoreleased default acceleration structure pass descriptor
 func MTLAccelerationStructurePassDescriptorAccelerationStructurePassDescriptor() *AccelerationStructurePassDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLAccelerationStructurePassDescriptor")), objc.RegisterName("accelerationStructurePassDescriptor"))
 	return AccelerationStructurePassDescriptorFromID(_r)
 }
 
-// Creates a new triangle descriptor.
+// MTLAccelerationStructureTriangleGeometryDescriptorDescriptor creates a new triangle descriptor.
 func MTLAccelerationStructureTriangleGeometryDescriptorDescriptor() *AccelerationStructureTriangleGeometryDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLAccelerationStructureTriangleGeometryDescriptor")), objc.RegisterName("descriptor"))
 	return AccelerationStructureTriangleGeometryDescriptorFromID(_r)
 }
 
-// Creates an empty argument descriptor.
+// MTLArgumentDescriptorArgumentDescriptor creates an empty argument descriptor.
 func MTLArgumentDescriptorArgumentDescriptor() *ArgumentDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLArgumentDescriptor")), objc.RegisterName("argumentDescriptor"))
 	return ArgumentDescriptorFromID(_r)
 }
 
-// Creates a new blit pass descriptor with a default configuration.
+// MTLBlitPassDescriptorBlitPassDescriptor creates a new blit pass descriptor with a default configuration.
 func MTLBlitPassDescriptorBlitPassDescriptor() *BlitPassDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLBlitPassDescriptor")), objc.RegisterName("blitPassDescriptor"))
 	return BlitPassDescriptorFromID(_r)
 }
 
-// Provides the shared capture manager for your Metal app.
+// SharedCaptureManager provides the shared capture manager for your Metal app.
 func SharedCaptureManager() *CaptureManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLCaptureManager")), objc.RegisterName("sharedCaptureManager"))
 	return CaptureManagerFromID(_r)
 }
 
-// Creates a default compute pass descriptor.
+// MTLComputePassDescriptorComputePassDescriptor creates a default compute pass descriptor.
 func MTLComputePassDescriptorComputePassDescriptor() *ComputePassDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLComputePassDescriptor")), objc.RegisterName("computePassDescriptor"))
 	return ComputePassDescriptorFromID(_r)
 }
 
-// Creates a default function descriptor.
+// MTLFunctionDescriptorFunctionDescriptor creates a default function descriptor.
 func MTLFunctionDescriptorFunctionDescriptor() *FunctionDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLFunctionDescriptor")), objc.RegisterName("functionDescriptor"))
 	return FunctionDescriptorFromID(_r)
 }
 
+// MTLIndirectInstanceAccelerationStructureDescriptorDescriptor wraps the corresponding Objective-C method.
 func MTLIndirectInstanceAccelerationStructureDescriptorDescriptor() *IndirectInstanceAccelerationStructureDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLIndirectInstanceAccelerationStructureDescriptor")), objc.RegisterName("descriptor"))
 	return IndirectInstanceAccelerationStructureDescriptorFromID(_r)
 }
 
-// Creates an instance descriptor.
+// MTLInstanceAccelerationStructureDescriptorDescriptor creates an instance descriptor.
 func MTLInstanceAccelerationStructureDescriptorDescriptor() *InstanceAccelerationStructureDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLInstanceAccelerationStructureDescriptor")), objc.RegisterName("descriptor"))
 	return InstanceAccelerationStructureDescriptorFromID(_r)
 }
 
-// Creates an intersection function table descriptor.
+// MTLIntersectionFunctionTableDescriptorIntersectionFunctionTableDescriptor creates an intersection function table descriptor.
 func MTLIntersectionFunctionTableDescriptorIntersectionFunctionTableDescriptor() *IntersectionFunctionTableDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLIntersectionFunctionTableDescriptor")), objc.RegisterName("intersectionFunctionTableDescriptor"))
 	return IntersectionFunctionTableDescriptorFromID(_r)
 }
 
-// Creates an empty linked functions object.
+// MTLLinkedFunctionsLinkedFunctions creates an empty linked functions object.
 func MTLLinkedFunctionsLinkedFunctions() *LinkedFunctions {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLLinkedFunctions")), objc.RegisterName("linkedFunctions"))
 	return LinkedFunctionsFromID(_r)
 }
 
-// Creates a new keyframe object.
+// Data creates a new keyframe object.
 func Data() *MotionKeyframeData {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLMotionKeyframeData")), objc.RegisterName("data"))
 	return MotionKeyframeDataFromID(_r)
 }
 
-// Creates a new primitive descriptor.
+// MTLPrimitiveAccelerationStructureDescriptorDescriptor creates a new primitive descriptor.
 func MTLPrimitiveAccelerationStructureDescriptorDescriptor() *PrimitiveAccelerationStructureDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLPrimitiveAccelerationStructureDescriptor")), objc.RegisterName("descriptor"))
 	return PrimitiveAccelerationStructureDescriptorFromID(_r)
 }
 
-// Creates a default render pass descriptor.
+// MTLRenderPassDescriptorRenderPassDescriptor creates a default render pass descriptor.
 func MTLRenderPassDescriptorRenderPassDescriptor() *RenderPassDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLRenderPassDescriptor")), objc.RegisterName("renderPassDescriptor"))
 	return RenderPassDescriptorFromID(_r)
 }
 
-// Creates a new resource state pass descriptor.
+// MTLResourceStatePassDescriptorResourceStatePassDescriptor creates a new resource state pass descriptor.
 func MTLResourceStatePassDescriptorResourceStatePassDescriptor() *ResourceStatePassDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLResourceStatePassDescriptor")), objc.RegisterName("resourceStatePassDescriptor"))
 	return ResourceStatePassDescriptorFromID(_r)
 }
 
+// SharedListener wraps the corresponding Objective-C method.
 func SharedListener() *SharedEventListener {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLSharedEventListener")), objc.RegisterName("sharedListener"))
 	return SharedEventListenerFromID(_r)
 }
 
+// MTLStageInputOutputDescriptorStageInputOutputDescriptor wraps the corresponding Objective-C method.
 func MTLStageInputOutputDescriptorStageInputOutputDescriptor() *StageInputOutputDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLStageInputOutputDescriptor")), objc.RegisterName("stageInputOutputDescriptor"))
 	return StageInputOutputDescriptorFromID(_r)
 }
 
-// Creates a texture descriptor object for a 2D texture.
+// Texture2DDescriptorWithPixelFormatWidthHeightMipmapped creates a texture descriptor object for a 2D texture.
 func Texture2DDescriptorWithPixelFormatWidthHeightMipmapped(pixelFormat PixelFormat, width int, height int, mipmapped bool) *TextureDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLTextureDescriptor")), objc.RegisterName("texture2DDescriptorWithPixelFormat:width:height:mipmapped:"), pixelFormat, width, height, mipmapped)
 	return TextureDescriptorFromID(_r)
 }
 
-// Creates a texture descriptor object for a cube texture.
+// TextureCubeDescriptorWithPixelFormatSizeMipmapped creates a texture descriptor object for a cube texture.
 func TextureCubeDescriptorWithPixelFormatSizeMipmapped(pixelFormat PixelFormat, size int, mipmapped bool) *TextureDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLTextureDescriptor")), objc.RegisterName("textureCubeDescriptorWithPixelFormat:size:mipmapped:"), pixelFormat, size, mipmapped)
 	return TextureDescriptorFromID(_r)
 }
 
-// Creates a texture descriptor object for a texture buffer.
+// TextureBufferDescriptorWithPixelFormatWidthResourceOptionsUsage creates a texture descriptor object for a texture buffer.
 func TextureBufferDescriptorWithPixelFormatWidthResourceOptionsUsage(pixelFormat PixelFormat, width int, resourceOptions ResourceOptions, usage TextureUsage) *TextureDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLTextureDescriptor")), objc.RegisterName("textureBufferDescriptorWithPixelFormat:width:resourceOptions:usage:"), pixelFormat, width, resourceOptions, usage)
 	return TextureDescriptorFromID(_r)
 }
 
-// Creates and returns a new vertex descriptor.
+// MTLVertexDescriptorVertexDescriptor creates and returns a new vertex descriptor.
 func MTLVertexDescriptorVertexDescriptor() *VertexDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLVertexDescriptor")), objc.RegisterName("vertexDescriptor"))
 	return VertexDescriptorFromID(_r)
 }
 
-// Creates a default visible function table descriptor.
+// MTLVisibleFunctionTableDescriptorVisibleFunctionTableDescriptor creates a default visible function table descriptor.
 func MTLVisibleFunctionTableDescriptorVisibleFunctionTableDescriptor() *VisibleFunctionTableDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLVisibleFunctionTableDescriptor")), objc.RegisterName("visibleFunctionTableDescriptor"))
 	return VisibleFunctionTableDescriptorFromID(_r)

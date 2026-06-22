@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An action the system performs on a message, such as setting a color or archiving it.
-//
 // MessageAction is an idiomatic wrapper over the Objective-C class MEMessageAction.
+//
+// An action the system performs on a message, such as setting a color or archiving it.
 type MessageAction struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MessageActionFromID(id objc.ID) *MessageAction {
 	if id == 0 {
 		return nil
 	}
-	x := &MessageAction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MessageAction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func messageActionAdopt(id objc.ID) *MessageAction {
 	if id == 0 {
 		return nil
 	}
-	x := &MessageAction{Handle: objref.Wrap(id)}
+	x := &MessageAction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *MessageAction) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MessageAction) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MessageAction) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMessageAction creates a new MessageAction.

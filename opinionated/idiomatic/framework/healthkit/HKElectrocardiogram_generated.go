@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A sample for electrocardiogram data.
-//
 // Electrocardiogram is an idiomatic wrapper over the Objective-C class HKElectrocardiogram.
+//
+// It embeds [Sample], promoting that type's methods.
+//
+// A sample for electrocardiogram data.
 type Electrocardiogram struct {
-	objref.Handle
+	Sample
 }
 
 // ElectrocardiogramFromID adopts an existing Objective-C object as a Electrocardiogram
@@ -25,7 +26,8 @@ func ElectrocardiogramFromID(id objc.ID) *Electrocardiogram {
 	if id == 0 {
 		return nil
 	}
-	x := &Electrocardiogram{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Electrocardiogram{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func electrocardiogramAdopt(id objc.ID) *Electrocardiogram {
 	if id == 0 {
 		return nil
 	}
-	x := &Electrocardiogram{Handle: objref.Wrap(id)}
+	x := &Electrocardiogram{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *Electrocardiogram) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Electrocardiogram) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Electrocardiogram) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewElectrocardiogram creates a new Electrocardiogram.
@@ -64,31 +52,31 @@ func NewElectrocardiogram() *Electrocardiogram {
 	return electrocardiogramAdopt(_id)
 }
 
-// The number of voltage measurements in the electrocardiogram.
+// NumberOfVoltageMeasurements the number of voltage measurements in the electrocardiogram.
 func (x *Electrocardiogram) NumberOfVoltageMeasurements() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfVoltageMeasurements"))
 	return _r
 }
 
-// The frequency at which the data was sampled. This is reported in [HKUnit hertzUnit].
+// SamplingFrequency the frequency at which the data was sampled. This is reported in [HKUnit hertzUnit].
 func (x *Electrocardiogram) SamplingFrequency() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("samplingFrequency"))
 	return QuantityFromID(_r)
 }
 
-// The classification of this electrocardiogram sample.
+// Classification the classification of this electrocardiogram sample.
 func (x *Electrocardiogram) Classification() ElectrocardiogramClassification {
 	_r := objc.Send[ElectrocardiogramClassification](objref.IDOf(x), objc.RegisterName("classification"))
 	return _r
 }
 
-// The average heart rate of the user while the electrocardiogram was recorded.
+// AverageHeartRate the average heart rate of the user while the electrocardiogram was recorded.
 func (x *Electrocardiogram) AverageHeartRate() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("averageHeartRate"))
 	return QuantityFromID(_r)
 }
 
-// Whether the user experienced symptoms during this electrocardiogram.
+// SymptomsStatus whether the user experienced symptoms during this electrocardiogram.
 func (x *Electrocardiogram) SymptomsStatus() ElectrocardiogramSymptomsStatus {
 	_r := objc.Send[ElectrocardiogramSymptomsStatus](objref.IDOf(x), objc.RegisterName("symptomsStatus"))
 	return _r
@@ -105,3 +93,7 @@ type Electrocardiogramable interface {
 }
 
 var _ Electrocardiogramable = (*Electrocardiogram)(nil)
+
+var _ SampleProvider = (*Electrocardiogram)(nil)
+
+var _ ObjectProvider = (*Electrocardiogram)(nil)

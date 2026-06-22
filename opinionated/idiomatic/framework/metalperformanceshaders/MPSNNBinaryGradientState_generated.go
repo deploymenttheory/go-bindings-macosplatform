@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class representing the state of a gradient binary kernel when it was encoded.
-//
 // NNBinaryGradientState is an idiomatic wrapper over the Objective-C class MPSNNBinaryGradientState.
+//
+// NNBinaryGradientState is an abstract base — you do not construct it directly. Construct one of [CNNArithmeticGradientState] and pass it where a NNBinaryGradientState is accepted.
+//
+// A class representing the state of a gradient binary kernel when it was encoded.
 type NNBinaryGradientState struct {
-	objref.Handle
+	State
 }
 
 // NNBinaryGradientStateFromID adopts an existing Objective-C object as a NNBinaryGradientState
@@ -25,7 +26,8 @@ func NNBinaryGradientStateFromID(id objc.ID) *NNBinaryGradientState {
 	if id == 0 {
 		return nil
 	}
-	x := &NNBinaryGradientState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNBinaryGradientState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,41 +40,19 @@ func nNBinaryGradientStateAdopt(id objc.ID) *NNBinaryGradientState {
 	if id == 0 {
 		return nil
 	}
-	x := &NNBinaryGradientState{Handle: objref.Wrap(id)}
+	x := &NNBinaryGradientState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NNBinaryGradientState) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNBinaryGradientState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNBinaryGradientState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewNNBinaryGradientState creates a new NNBinaryGradientState.
-func NewNNBinaryGradientState() *NNBinaryGradientState {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNBinaryGradientState")), objc.RegisterName("new"))
-	return nNBinaryGradientStateAdopt(_id)
-}
-
-// WithReadCount sets readCount and returns the receiver so calls can be chained.
+// WithReadCount sets the property and returns the receiver so calls can be chained.
 func (x *NNBinaryGradientState) WithReadCount(readCount int) *NNBinaryGradientState {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *NNBinaryGradientState) WithLabel(label string) *NNBinaryGradientState {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -86,3 +66,12 @@ type NNBinaryGradientStateable interface {
 }
 
 var _ NNBinaryGradientStateable = (*NNBinaryGradientState)(nil)
+
+// isNNBinaryGradientState marks NNBinaryGradientState — and, by embedding promotion, its
+// subclasses — as a member of the NNBinaryGradientState hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NNBinaryGradientState) isNNBinaryGradientState() {}
+
+var _ NNBinaryGradientStateProvider = (*NNBinaryGradientState)(nil)
+
+var _ StateProvider = (*NNBinaryGradientState)(nil)

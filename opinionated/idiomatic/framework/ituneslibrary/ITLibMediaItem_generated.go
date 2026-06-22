@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// This class describes a media item (a track) in the iTunes library, such as a song, a video, or a podcast.
-//
 // LibMediaItem is an idiomatic wrapper over the Objective-C class ITLibMediaItem.
+//
+// It embeds [LibMediaEntity], promoting that type's methods.
+//
+// This class describes a media item (a track) in the iTunes library, such as a song, a video, or a podcast.
 type LibMediaItem struct {
-	objref.Handle
+	LibMediaEntity
 }
 
 // LibMediaItemFromID adopts an existing Objective-C object as a LibMediaItem
@@ -25,7 +26,8 @@ func LibMediaItemFromID(id objc.ID) *LibMediaItem {
 	if id == 0 {
 		return nil
 	}
-	x := &LibMediaItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LibMediaItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func libMediaItemAdopt(id objc.ID) *LibMediaItem {
 	if id == 0 {
 		return nil
 	}
-	x := &LibMediaItem{Handle: objref.Wrap(id)}
+	x := &LibMediaItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *LibMediaItem) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LibMediaItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LibMediaItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewLibMediaItem creates a new LibMediaItem.
@@ -64,7 +52,7 @@ func NewLibMediaItem() *LibMediaItem {
 	return libMediaItemAdopt(_id)
 }
 
-// The title of this media item. May be empty.
+// Title the title of this media item. May be empty.
 func (x *LibMediaItem) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -73,7 +61,7 @@ func (x *LibMediaItem) Title() string {
 	return purego.GoString(_r)
 }
 
-// The title of this media item that should be used for sorting purposes.  If nil, use the title field.
+// SortTitle the title of this media item that should be used for sorting purposes.  If nil, use the title field.
 func (x *LibMediaItem) SortTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortTitle"))
 	if _r == 0 {
@@ -82,13 +70,13 @@ func (x *LibMediaItem) SortTitle() string {
 	return purego.GoString(_r)
 }
 
-// The artist associated with this media item.
+// Artist the artist associated with this media item.
 func (x *LibMediaItem) Artist() *LibArtist {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("artist"))
 	return LibArtistFromID(_r)
 }
 
-// The name of the composer associated with this media item.  May be empty.
+// Composer the name of the composer associated with this media item.  May be empty.
 func (x *LibMediaItem) Composer() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("composer"))
 	if _r == 0 {
@@ -97,7 +85,7 @@ func (x *LibMediaItem) Composer() string {
 	return purego.GoString(_r)
 }
 
-// The name of the composer associated with this media item that should be used for sorting purposes. If nil, use the composer field.
+// SortComposer the name of the composer associated with this media item that should be used for sorting purposes. If nil, use the composer field.
 func (x *LibMediaItem) SortComposer() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortComposer"))
 	if _r == 0 {
@@ -106,37 +94,37 @@ func (x *LibMediaItem) SortComposer() string {
 	return purego.GoString(_r)
 }
 
-// The rating of this media item.
+// Rating the rating of this media item.
 func (x *LibMediaItem) Rating() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rating"))
 	return _r
 }
 
-// Whether this media item's rating is computed.
+// IsRatingComputed whether this media item's rating is computed.
 func (x *LibMediaItem) IsRatingComputed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRatingComputed"))
 	return _r
 }
 
-// If non-zero, the actual time playback for this media item will start instead of 0:00 (in milliseconds).
+// StartTime if non-zero, the actual time playback for this media item will start instead of 0:00 (in milliseconds).
 func (x *LibMediaItem) StartTime() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("startTime"))
 	return _r
 }
 
-// If non-zero, the actual time playback for this media item will stop vs. the total time (in milliseconds).
+// StopTime if non-zero, the actual time playback for this media item will stop vs. the total time (in milliseconds).
 func (x *LibMediaItem) StopTime() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stopTime"))
 	return _r
 }
 
-// The album where this media item belongs.
+// Album the album where this media item belongs.
 func (x *LibMediaItem) Album() *LibAlbum {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("album"))
 	return LibAlbumFromID(_r)
 }
 
-// The genre associated with this media item. May be empty.
+// Genre the genre associated with this media item. May be empty.
 func (x *LibMediaItem) Genre() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("genre"))
 	if _r == 0 {
@@ -145,7 +133,7 @@ func (x *LibMediaItem) Genre() string {
 	return purego.GoString(_r)
 }
 
-// This media item's file kind (ex. MPEG audio file).
+// Kind this media item's file kind (ex. MPEG audio file).
 func (x *LibMediaItem) Kind() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("kind"))
 	if _r == 0 {
@@ -154,37 +142,37 @@ func (x *LibMediaItem) Kind() string {
 	return purego.GoString(_r)
 }
 
-// This media item's media kind.
+// MediaKind this media item's media kind.
 func (x *LibMediaItem) MediaKind() LibMediaItemMediaKind {
 	_r := objc.Send[LibMediaItemMediaKind](objref.IDOf(x), objc.RegisterName("mediaKind"))
 	return _r
 }
 
-// The size in bytes of this media item on disk.
+// FileSize the size in bytes of this media item on disk.
 func (x *LibMediaItem) FileSize() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("fileSize"))
 	return _r
 }
 
-// The size in bytes of this media item on disk. (deprecated: use fileSize instead)
+// Size the size in bytes of this media item on disk. (deprecated: use fileSize instead)
 func (x *LibMediaItem) Size() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("size"))
 	return _r
 }
 
-// The length of this media item in milliseconds.
+// TotalTime the length of this media item in milliseconds.
 func (x *LibMediaItem) TotalTime() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("totalTime"))
 	return _r
 }
 
-// The position of this media item within its album.
+// TrackNumber the position of this media item within its album.
 func (x *LibMediaItem) TrackNumber() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("trackNumber"))
 	return _r
 }
 
-// The podcast category of this media item (implies this media item is a podcast).
+// Category the podcast category of this media item (implies this media item is a podcast).
 func (x *LibMediaItem) Category() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("category"))
 	if _r == 0 {
@@ -193,13 +181,13 @@ func (x *LibMediaItem) Category() string {
 	return purego.GoString(_r)
 }
 
-// The content rating of this media item's lyrics.
+// LyricsContentRating the content rating of this media item's lyrics.
 func (x *LibMediaItem) LyricsContentRating() LibMediaItemLyricsContentRating {
 	_r := objc.Send[LibMediaItemLyricsContentRating](objref.IDOf(x), objc.RegisterName("lyricsContentRating"))
 	return _r
 }
 
-// The extended content rating of this media item.
+// ContentRating the extended content rating of this media item.
 func (x *LibMediaItem) ContentRating() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentRating"))
 	if _r == 0 {
@@ -208,73 +196,73 @@ func (x *LibMediaItem) ContentRating() string {
 	return purego.GoString(_r)
 }
 
-// The date and time this media item was last modified.
+// ModifiedDate the date and time this media item was last modified.
 func (x *LibMediaItem) ModifiedDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modifiedDate"))
 	return obj.Wrap(_r)
 }
 
-// The date and media item this media item was added to the iTunes database.
+// AddedDate the date and media item this media item was added to the iTunes database.
 func (x *LibMediaItem) AddedDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addedDate"))
 	return obj.Wrap(_r)
 }
 
-// The bitrate of this media item in kbps.
+// Bitrate the bitrate of this media item in kbps.
 func (x *LibMediaItem) Bitrate() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bitrate"))
 	return _r
 }
 
-// The sample rate of this media item in samples per second.
+// SampleRate the sample rate of this media item in samples per second.
 func (x *LibMediaItem) SampleRate() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sampleRate"))
 	return _r
 }
 
-// The BPM (beats per minute) of this media item.
+// BeatsPerMinute the BPM (beats per minute) of this media item.
 func (x *LibMediaItem) BeatsPerMinute() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("beatsPerMinute"))
 	return _r
 }
 
-// The number of times this media item has been played in iTunes.
+// PlayCount the number of times this media item has been played in iTunes.
 func (x *LibMediaItem) PlayCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("playCount"))
 	return _r
 }
 
-// The date and time this media item was last played in iTunes, or nil if this media item has not been played.
+// LastPlayedDate the date and time this media item was last played in iTunes, or nil if this media item has not been played.
 func (x *LibMediaItem) LastPlayedDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastPlayedDate"))
 	return obj.Wrap(_r)
 }
 
-// The play status for this media.  Represents partially played and unplayed states for videos and podcasts. Other media kinds always return "none".
+// PlayStatus the play status for this media.  Represents partially played and unplayed states for videos and podcasts. Other media kinds always return "none".
 func (x *LibMediaItem) PlayStatus() LibMediaItemPlayStatus {
 	_r := objc.Send[LibMediaItemPlayStatus](objref.IDOf(x), objc.RegisterName("playStatus"))
 	return _r
 }
 
-// The location of this media item on disk.
+// Location the location of this media item on disk.
 func (x *LibMediaItem) Location() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("location"))
 	return obj.Wrap(_r)
 }
 
-// Whether this media item has artwork.
+// HasArtworkAvailable whether this media item has artwork.
 func (x *LibMediaItem) HasArtworkAvailable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasArtworkAvailable"))
 	return _r
 }
 
-// Whether this media item has artwork.
+// Artwork whether this media item has artwork.
 func (x *LibMediaItem) Artwork() *LibArtwork {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("artwork"))
 	return LibArtworkFromID(_r)
 }
 
-// Any comments associated with this media item.
+// Comments any comments associated with this media item.
 func (x *LibMediaItem) Comments() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("comments"))
 	if _r == 0 {
@@ -283,85 +271,85 @@ func (x *LibMediaItem) Comments() string {
 	return purego.GoString(_r)
 }
 
-// Whether this media item was purchased.
+// IsPurchased whether this media item was purchased.
 func (x *LibMediaItem) IsPurchased() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPurchased"))
 	return _r
 }
 
-// Whether this media item is iTunes Match or iTunes in the Cloud.
+// IsCloud whether this media item is iTunes Match or iTunes in the Cloud.
 func (x *LibMediaItem) IsCloud() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCloud"))
 	return _r
 }
 
-// Whether this media item is DRM protected.
+// IsDRMProtected whether this media item is DRM protected.
 func (x *LibMediaItem) IsDRMProtected() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDRMProtected"))
 	return _r
 }
 
-// Whether this media item is a video media item (video podcast, movie, etc).
+// IsVideo whether this media item is a video media item (video podcast, movie, etc).
 func (x *LibMediaItem) IsVideo() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVideo"))
 	return _r
 }
 
-// The video information of this media item (implies this media item is a video media item).
+// VideoInfo the video information of this media item (implies this media item is a video media item).
 func (x *LibMediaItem) VideoInfo() *LibMediaItemVideoInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoInfo"))
 	return LibMediaItemVideoInfoFromID(_r)
 }
 
-// The date this media item was released.
+// ReleaseDate the date this media item was released.
 func (x *LibMediaItem) ReleaseDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("releaseDate"))
 	return obj.Wrap(_r)
 }
 
-// The year when this media item was released.
+// Year the year when this media item was released.
 func (x *LibMediaItem) Year() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("year"))
 	return _r
 }
 
-// The type of the file this media item refers to.
+// FileType the type of the file this media item refers to.
 func (x *LibMediaItem) FileType() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fileType"))
 	return _r
 }
 
-// The number of times this media item has been skiped.
+// SkipCount the number of times this media item has been skiped.
 func (x *LibMediaItem) SkipCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("skipCount"))
 	return _r
 }
 
-// The date and time when this media item was last skipped.
+// SkipDate the date and time when this media item was last skipped.
 func (x *LibMediaItem) SkipDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skipDate"))
 	return obj.Wrap(_r)
 }
 
-// The volume adjustment used for this media item if any.
+// VolumeAdjustment the volume adjustment used for this media item if any.
 func (x *LibMediaItem) VolumeAdjustment() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("volumeAdjustment"))
 	return _r
 }
 
-// The volume normalization energy applied to this media item.
+// VolumeNormalizationEnergy the volume normalization energy applied to this media item.
 func (x *LibMediaItem) VolumeNormalizationEnergy() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("volumeNormalizationEnergy"))
 	return _r
 }
 
-// Whether the user has disabled this media item.
+// IsUserDisabled whether the user has disabled this media item.
 func (x *LibMediaItem) IsUserDisabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUserDisabled"))
 	return _r
 }
 
-// The grouping of this media item.
+// Grouping the grouping of this media item.
 func (x *LibMediaItem) Grouping() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("grouping"))
 	if _r == 0 {
@@ -370,7 +358,7 @@ func (x *LibMediaItem) Grouping() string {
 	return purego.GoString(_r)
 }
 
-// The type of this media item with respect to its location.
+// LocationType the type of this media item with respect to its location.
 func (x *LibMediaItem) LocationType() LibMediaItemLocationType {
 	_r := objc.Send[LibMediaItemLocationType](objref.IDOf(x), objc.RegisterName("locationType"))
 	return _r
@@ -429,3 +417,5 @@ type LibMediaItemable interface {
 }
 
 var _ LibMediaItemable = (*LibMediaItem)(nil)
+
+var _ LibMediaEntityProvider = (*LibMediaItem)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resolution result for an integer value associated with an intent.
-//
 // IntegerResolutionResult is an idiomatic wrapper over the Objective-C class INIntegerResolutionResult.
+//
+// It embeds [IntentResolutionResult], promoting that type's methods.
+//
+// A resolution result for an integer value associated with an intent.
 type IntegerResolutionResult struct {
-	objref.Handle
+	IntentResolutionResult
 }
 
 // IntegerResolutionResultFromID adopts an existing Objective-C object as a IntegerResolutionResult
@@ -25,7 +26,8 @@ func IntegerResolutionResultFromID(id objc.ID) *IntegerResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	x := &IntegerResolutionResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IntegerResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func integerResolutionResultAdopt(id objc.ID) *IntegerResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	x := &IntegerResolutionResult{Handle: objref.Wrap(id)}
+	x := &IntegerResolutionResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *IntegerResolutionResult) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IntegerResolutionResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IntegerResolutionResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewIntegerResolutionResult creates a new IntegerResolutionResult.
@@ -70,3 +58,5 @@ type IntegerResolutionResultable interface {
 }
 
 var _ IntegerResolutionResultable = (*IntegerResolutionResult)(nil)
+
+var _ IntentResolutionResultProvider = (*IntegerResolutionResult)(nil)

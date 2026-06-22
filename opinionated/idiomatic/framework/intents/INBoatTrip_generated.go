@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The information that describes a boat trip.
-//
 // BoatTrip is an idiomatic wrapper over the Objective-C class INBoatTrip.
+//
+// The information that describes a boat trip.
 type BoatTrip struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func BoatTripFromID(id objc.ID) *BoatTrip {
 	if id == 0 {
 		return nil
 	}
-	x := &BoatTrip{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BoatTrip{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func boatTripAdopt(id objc.ID) *BoatTrip {
 	if id == 0 {
 		return nil
 	}
-	x := &BoatTrip{Handle: objref.Wrap(id)}
+	x := &BoatTrip{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *BoatTrip) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a boat trip with the specified contents and attributes.
-//
-// NewBoatTripWithProviderBoatNameBoatNumberTripDurationDepartureBoatTerminalLocationArrivalBoatTerminalLocation creates a new BoatTrip.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BoatTrip) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewBoatTripWithProviderBoatNameBoatNumberTripDurationDepartureBoatTerminalLocationArrivalBoatTerminalLocation creates a boat trip with the specified contents and attributes.
 func NewBoatTripWithProviderBoatNameBoatNumberTripDurationDepartureBoatTerminalLocationArrivalBoatTerminalLocation(provider string, boatName string, boatNumber string, tripDuration *DateComponentsRange, departureBoatTerminalLocation obj.Object, arrivalBoatTerminalLocation obj.Object) *BoatTrip {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INBoatTrip")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvider:boatName:boatNumber:tripDuration:departureBoatTerminalLocation:arrivalBoatTerminalLocation:"), purego.NSString(provider), purego.NSString(boatName), purego.NSString(boatNumber), objref.IDOf(tripDuration), objref.IDOf(departureBoatTerminalLocation), objref.IDOf(arrivalBoatTerminalLocation))
 	return boatTripAdopt(_id)
 }
 
+// Provider wraps the corresponding Objective-C method.
 func (x *BoatTrip) Provider() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("provider"))
 	if _r == 0 {
@@ -75,6 +82,7 @@ func (x *BoatTrip) Provider() string {
 	return purego.GoString(_r)
 }
 
+// BoatName wraps the corresponding Objective-C method.
 func (x *BoatTrip) BoatName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boatName"))
 	if _r == 0 {
@@ -83,6 +91,7 @@ func (x *BoatTrip) BoatName() string {
 	return purego.GoString(_r)
 }
 
+// BoatNumber wraps the corresponding Objective-C method.
 func (x *BoatTrip) BoatNumber() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boatNumber"))
 	if _r == 0 {
@@ -91,16 +100,19 @@ func (x *BoatTrip) BoatNumber() string {
 	return purego.GoString(_r)
 }
 
+// TripDuration wraps the corresponding Objective-C method.
 func (x *BoatTrip) TripDuration() *DateComponentsRange {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tripDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
+// DepartureBoatTerminalLocation wraps the corresponding Objective-C method.
 func (x *BoatTrip) DepartureBoatTerminalLocation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("departureBoatTerminalLocation"))
 	return obj.Wrap(_r)
 }
 
+// ArrivalBoatTerminalLocation wraps the corresponding Objective-C method.
 func (x *BoatTrip) ArrivalBoatTerminalLocation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrivalBoatTerminalLocation"))
 	return obj.Wrap(_r)

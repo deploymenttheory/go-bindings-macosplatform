@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing a series of detections of the same subject over time.
-//
 // DetectionTrack is an idiomatic wrapper over the Objective-C class CNDetectionTrack.
+//
+// DetectionTrack is an abstract base — you do not construct it directly. Construct one of [CustomDetectionTrack], [FixedDetectionTrack] and pass it where a DetectionTrack is accepted.
+//
+// An object representing a series of detections of the same subject over time.
 type DetectionTrack struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func DetectionTrackFromID(id objc.ID) *DetectionTrack {
 	if id == 0 {
 		return nil
 	}
-	x := &DetectionTrack{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DetectionTrack{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func detectionTrackAdopt(id objc.ID) *DetectionTrack {
 	if id == 0 {
 		return nil
 	}
-	x := &DetectionTrack{Handle: objref.Wrap(id)}
+	x := &DetectionTrack{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +62,37 @@ func (x *DetectionTrack) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewDetectionTrack creates a new DetectionTrack.
-func NewDetectionTrack() *DetectionTrack {
-	_id := objc.Send[objc.ID](objc.ID(_class("CNDetectionTrack")), objc.RegisterName("new"))
-	return detectionTrackAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DetectionTrack) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The type of subject detected by this detection track.
+// DetectionType the type of subject detected by this detection track.
 func (x *DetectionTrack) DetectionType() DetectionType {
 	_r := objc.Send[DetectionType](objref.IDOf(x), objc.RegisterName("detectionType"))
 	return _r
 }
 
-// The detectionID of the subject detected during this track; unique within a cinematic script.
+// DetectionID the detectionID of the subject detected during this track; unique within a cinematic script.
 func (x *DetectionTrack) DetectionID() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("detectionID"))
 	return _r
 }
 
-// The detectionGroupID of the subject detected by the track. The detectionGroupID can be used to associate related detections such as the face and torso of the same person.
+// DetectionGroupID the detectionGroupID of the subject detected by the track. The detectionGroupID can be used to associate related detections such as the face and torso of the same person.
 func (x *DetectionTrack) DetectionGroupID() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("detectionGroupID"))
 	return _r
 }
 
-// Whether this detection track was created by the client.
+// IsUserCreated whether this detection track was created by the client.
 func (x *DetectionTrack) IsUserCreated() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUserCreated"))
 	return _r
 }
 
-// Whether this detection track has discrete detections (otherwise continuous). A discrete detection track will return detections only at the specific times a detection occurs. A continuous detection track will return a detection for any requested time and an empty array for time ranges.
+// IsDiscrete whether this detection track has discrete detections (otherwise continuous). A discrete detection track will return detections only at the specific times a detection occurs. A continuous detection track will return a detection for any requested time and an empty array for time ranges.
 func (x *DetectionTrack) IsDiscrete() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDiscrete"))
 	return _r
@@ -105,3 +109,10 @@ type DetectionTrackable interface {
 }
 
 var _ DetectionTrackable = (*DetectionTrack)(nil)
+
+// isDetectionTrack marks DetectionTrack — and, by embedding promotion, its
+// subclasses — as a member of the DetectionTrack hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DetectionTrack) isDetectionTrack() {}
+
+var _ DetectionTrackProvider = (*DetectionTrack)(nil)

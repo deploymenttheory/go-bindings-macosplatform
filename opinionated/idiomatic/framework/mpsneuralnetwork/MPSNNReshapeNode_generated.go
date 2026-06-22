@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A node for a MPSNNReshape kernel
-//
 // NNReshapeNode is an idiomatic wrapper over the Objective-C class MPSNNReshapeNode.
+//
+// It embeds [NNFilterNode], promoting that type's methods.
+//
+// A node for a MPSNNReshape kernel
 type NNReshapeNode struct {
-	objref.Handle
+	NNFilterNode
 }
 
 // NNReshapeNodeFromID adopts an existing Objective-C object as a NNReshapeNode
@@ -25,7 +26,8 @@ func NNReshapeNodeFromID(id objc.ID) *NNReshapeNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNReshapeNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNReshapeNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,38 +40,20 @@ func nNReshapeNodeAdopt(id objc.ID) *NNReshapeNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNReshapeNode{Handle: objref.Wrap(id)}
+	x := &NNReshapeNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NNReshapeNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNReshapeNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNReshapeNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Init a node representing a MPSNNReshape kernel
-//
-// NewNNReshapeNodeWithSourceResultWidthResultHeightResultFeatureChannels creates a new NNReshapeNode.
+// NewNNReshapeNodeWithSourceResultWidthResultHeightResultFeatureChannels init a node representing a MPSNNReshape kernel
 func NewNNReshapeNodeWithSourceResultWidthResultHeightResultFeatureChannels(source *NNImageNode, resultWidth int, resultHeight int, resultFeatureChannels int) *NNReshapeNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNReshapeNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:resultWidth:resultHeight:resultFeatureChannels:"), objref.IDOf(source), resultWidth, resultHeight, resultFeatureChannels)
 	return nNReshapeNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *NNReshapeNode) WithLabel(label string) *NNReshapeNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -82,3 +66,5 @@ type NNReshapeNodeable interface {
 }
 
 var _ NNReshapeNodeable = (*NNReshapeNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNReshapeNode)(nil)

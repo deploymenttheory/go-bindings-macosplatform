@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // CNNBatchNormalizationNode is an idiomatic wrapper over the Objective-C class MPSCNNBatchNormalizationNode.
+//
+// It embeds [NNFilterNode], promoting that type's methods.
 type CNNBatchNormalizationNode struct {
-	objref.Handle
+	NNFilterNode
 }
 
 // CNNBatchNormalizationNodeFromID adopts an existing Objective-C object as a CNNBatchNormalizationNode
@@ -23,7 +24,8 @@ func CNNBatchNormalizationNodeFromID(id objc.ID) *CNNBatchNormalizationNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNBatchNormalizationNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNBatchNormalizationNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func cNNBatchNormalizationNodeAdopt(id objc.ID) *CNNBatchNormalizationNode {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNBatchNormalizationNode{Handle: objref.Wrap(id)}
+	x := &CNNBatchNormalizationNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CNNBatchNormalizationNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNBatchNormalizationNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNBatchNormalizationNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCNNBatchNormalizationNode creates a new CNNBatchNormalizationNode.
@@ -62,47 +50,42 @@ func NewCNNBatchNormalizationNode() *CNNBatchNormalizationNode {
 	return cNNBatchNormalizationNodeAdopt(_id)
 }
 
-// Options controlling how batch normalization is calculated Default: MPSCNNBatchNormalizationFlagsDefault
-//
-// WithFlags sets flags and returns the receiver so calls can be chained.
+// WithFlags options controlling how batch normalization is calculated Default: MPSCNNBatchNormalizationFlagsDefault
 func (x *CNNBatchNormalizationNode) WithFlags(flags CNNBatchNormalizationFlags) *CNNBatchNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlags:"), flags)
 	return x
 }
 
-// The training style of the forward node will be propagated to gradient nodes made from it
-//
-// WithTrainingStyle sets trainingStyle and returns the receiver so calls can be chained.
+// WithTrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
 func (x *CNNBatchNormalizationNode) WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNBatchNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStyle:"), trainingStyle)
 	return x
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *CNNBatchNormalizationNode) WithLabel(label string) *CNNBatchNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Options controlling how batch normalization is calculated Default: MPSCNNBatchNormalizationFlagsDefault
+// Flags options controlling how batch normalization is calculated Default: MPSCNNBatchNormalizationFlagsDefault
 func (x *CNNBatchNormalizationNode) Flags() CNNBatchNormalizationFlags {
 	_r := objc.Send[CNNBatchNormalizationFlags](objref.IDOf(x), objc.RegisterName("flags"))
 	return _r
 }
 
+// SetFlags wraps the corresponding Objective-C method.
 func (x *CNNBatchNormalizationNode) SetFlags(flags CNNBatchNormalizationFlags) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlags:"), flags)
 }
 
-// The training style of the forward node will be propagated to gradient nodes made from it
+// TrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
 func (x *CNNBatchNormalizationNode) TrainingStyle() NNTrainingStyle {
 	_r := objc.Send[NNTrainingStyle](objref.IDOf(x), objc.RegisterName("trainingStyle"))
 	return _r
 }
 
-// The training style of the forward node will be propagated to gradient nodes made from it
+// SetTrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
 func (x *CNNBatchNormalizationNode) SetTrainingStyle(trainingStyle NNTrainingStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStyle:"), trainingStyle)
 }
@@ -120,3 +103,5 @@ type CNNBatchNormalizationNodeable interface {
 }
 
 var _ CNNBatchNormalizationNodeable = (*CNNBatchNormalizationNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNBatchNormalizationNode)(nil)

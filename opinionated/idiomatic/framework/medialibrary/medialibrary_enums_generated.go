@@ -20,6 +20,8 @@ const (
 	MediaTypeMovie MediaType = 4
 )
 
+// String returns the MediaType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MediaType) String() string {
 	switch e {
 	case MediaTypeAudio:

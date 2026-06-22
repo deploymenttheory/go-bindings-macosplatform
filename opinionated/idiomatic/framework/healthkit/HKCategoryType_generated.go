@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that identifies samples that contain a value from a small set of possible values.
-//
 // CategoryType is an idiomatic wrapper over the Objective-C class HKCategoryType.
+//
+// It embeds [SampleType], promoting that type's methods.
+//
+// A type that identifies samples that contain a value from a small set of possible values.
 type CategoryType struct {
-	objref.Handle
+	SampleType
 }
 
 // CategoryTypeFromID adopts an existing Objective-C object as a CategoryType
@@ -25,7 +26,8 @@ func CategoryTypeFromID(id objc.ID) *CategoryType {
 	if id == 0 {
 		return nil
 	}
-	x := &CategoryType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CategoryType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func categoryTypeAdopt(id objc.ID) *CategoryType {
 	if id == 0 {
 		return nil
 	}
-	x := &CategoryType{Handle: objref.Wrap(id)}
+	x := &CategoryType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CategoryType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CategoryType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CategoryType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCategoryType creates a new CategoryType.
@@ -70,3 +58,7 @@ type CategoryTypeable interface {
 }
 
 var _ CategoryTypeable = (*CategoryType)(nil)
+
+var _ SampleTypeProvider = (*CategoryType)(nil)
+
+var _ ObjectTypeProvider = (*CategoryType)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// NEProxySettings contains HTTP proxy settings.
-//
 // NEProxySettings is an idiomatic wrapper over the Objective-C class NEProxySettings.
+//
+// NEProxySettings contains HTTP proxy settings.
 type NEProxySettings struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NEProxySettingsFromID(id objc.ID) *NEProxySettings {
 	if id == 0 {
 		return nil
 	}
-	x := &NEProxySettings{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEProxySettings{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nEProxySettingsAdopt(id objc.ID) *NEProxySettings {
 	if id == 0 {
 		return nil
 	}
-	x := &NEProxySettings{Handle: objref.Wrap(id)}
+	x := &NEProxySettings{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,115 +60,103 @@ func (x *NEProxySettings) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEProxySettings) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNEProxySettings creates a new NEProxySettings.
 func NewNEProxySettings() *NEProxySettings {
 	_id := objc.Send[objc.ID](objc.ID(_class("NEProxySettings")), objc.RegisterName("new"))
 	return nEProxySettingsAdopt(_id)
 }
 
-// A Boolean indicating if proxy auto-configuration is enabled.
-//
-// WithAutoProxyConfigurationEnabled sets autoProxyConfigurationEnabled and returns the receiver so calls can be chained.
+// WithAutoProxyConfigurationEnabled a Boolean indicating if proxy auto-configuration is enabled.
 func (x *NEProxySettings) WithAutoProxyConfigurationEnabled(autoProxyConfigurationEnabled bool) *NEProxySettings {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoProxyConfigurationEnabled:"), autoProxyConfigurationEnabled)
 	return x
 }
 
-// A URL specifying the location from where the Proxy Auto Configuration (PAC) script should be downloaded.
-//
-// WithProxyAutoConfigurationURL sets proxyAutoConfigurationURL and returns the receiver so calls can be chained.
+// WithProxyAutoConfigurationURL a URL specifying the location from where the Proxy Auto Configuration (PAC) script should be downloaded.
 func (x *NEProxySettings) WithProxyAutoConfigurationURL(proxyAutoConfigurationURL string) *NEProxySettings {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProxyAutoConfigurationURL:"), rt.FileURL(proxyAutoConfigurationURL))
 	return x
 }
 
-// A string containing the Proxy Auto Configuration (PAC) JavaScript source code.
-//
-// WithProxyAutoConfigurationJavaScript sets proxyAutoConfigurationJavaScript and returns the receiver so calls can be chained.
+// WithProxyAutoConfigurationJavaScript a string containing the Proxy Auto Configuration (PAC) JavaScript source code.
 func (x *NEProxySettings) WithProxyAutoConfigurationJavaScript(proxyAutoConfigurationJavaScript string) *NEProxySettings {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProxyAutoConfigurationJavaScript:"), purego.NSString(proxyAutoConfigurationJavaScript))
 	return x
 }
 
-// A Boolean indicating if a static HTTP proxy will be used.
-//
-// WithHTTPEnabled sets hTTPEnabled and returns the receiver so calls can be chained.
+// WithHTTPEnabled a Boolean indicating if a static HTTP proxy will be used.
 func (x *NEProxySettings) WithHTTPEnabled(hTTPEnabled bool) *NEProxySettings {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPEnabled:"), hTTPEnabled)
 	return x
 }
 
-// An NEProxyServer object containing the static HTTP proxy server settings.
-//
-// WithHTTPServer sets hTTPServer and returns the receiver so calls can be chained.
+// WithHTTPServer an NEProxyServer object containing the static HTTP proxy server settings.
 func (x *NEProxySettings) WithHTTPServer(hTTPServer *NEProxyServer) *NEProxySettings {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPServer:"), objref.IDOf(hTTPServer))
 	return x
 }
 
-// A Boolean indicating if a static HTTPS proxy will be used.
-//
-// WithHTTPSEnabled sets hTTPSEnabled and returns the receiver so calls can be chained.
+// WithHTTPSEnabled a Boolean indicating if a static HTTPS proxy will be used.
 func (x *NEProxySettings) WithHTTPSEnabled(hTTPSEnabled bool) *NEProxySettings {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPSEnabled:"), hTTPSEnabled)
 	return x
 }
 
-// An NEProxyServer object containing the static HTTPS proxy server settings.
-//
-// WithHTTPSServer sets hTTPSServer and returns the receiver so calls can be chained.
+// WithHTTPSServer an NEProxyServer object containing the static HTTPS proxy server settings.
 func (x *NEProxySettings) WithHTTPSServer(hTTPSServer *NEProxyServer) *NEProxySettings {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPSServer:"), objref.IDOf(hTTPSServer))
 	return x
 }
 
-// A Boolean indicating if HTTP requests using single-label host names should be excluded from using the proxy settings.
-//
-// WithExcludeSimpleHostnames sets excludeSimpleHostnames and returns the receiver so calls can be chained.
+// WithExcludeSimpleHostnames a Boolean indicating if HTTP requests using single-label host names should be excluded from using the proxy settings.
 func (x *NEProxySettings) WithExcludeSimpleHostnames(excludeSimpleHostnames bool) *NEProxySettings {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeSimpleHostnames:"), excludeSimpleHostnames)
 	return x
 }
 
-// An array of domain name patterns. If the destination host name of an HTTP connection matches one of these patterns then the proxy settings will not be used for the connection.
-//
-// WithExceptionList sets the collection and returns the receiver so calls can be chained.
+// WithExceptionList an array of domain name patterns. If the destination host name of an HTTP connection matches one of these patterns then the proxy settings will not be used for the connection.
 func (x *NEProxySettings) WithExceptionList(items ...obj.Object) *NEProxySettings {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExceptionList:"), _arr)
 	return x
 }
 
-// An array of domain strings.
-//
-// WithMatchDomains sets the collection and returns the receiver so calls can be chained.
+// WithMatchDomains an array of domain strings.
 func (x *NEProxySettings) WithMatchDomains(items ...obj.Object) *NEProxySettings {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchDomains:"), _arr)
 	return x
 }
 
-// A boolean indicating if proxy auto-configuration is enabled.
+// AutoProxyConfigurationEnabled a boolean indicating if proxy auto-configuration is enabled.
 func (x *NEProxySettings) AutoProxyConfigurationEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autoProxyConfigurationEnabled"))
 	return _r
 }
 
+// SetAutoProxyConfigurationEnabled wraps the corresponding Objective-C method.
 func (x *NEProxySettings) SetAutoProxyConfigurationEnabled(autoProxyConfigurationEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoProxyConfigurationEnabled:"), autoProxyConfigurationEnabled)
 }
 
-// A URL specifying where the PAC script is located.
+// ProxyAutoConfigurationURL a URL specifying where the PAC script is located.
 func (x *NEProxySettings) ProxyAutoConfigurationURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("proxyAutoConfigurationURL"))
 	return obj.Wrap(_r)
 }
 
+// SetProxyAutoConfigurationURL wraps the corresponding Objective-C method.
 func (x *NEProxySettings) SetProxyAutoConfigurationURL(proxyAutoConfigurationURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProxyAutoConfigurationURL:"), rt.FileURL(proxyAutoConfigurationURL))
 }
 
-// A string containing the PAC JavaScript source code.
+// ProxyAutoConfigurationJavaScript a string containing the PAC JavaScript source code.
 func (x *NEProxySettings) ProxyAutoConfigurationJavaScript() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("proxyAutoConfigurationJavaScript"))
 	if _r == 0 {
@@ -175,61 +165,67 @@ func (x *NEProxySettings) ProxyAutoConfigurationJavaScript() string {
 	return purego.GoString(_r)
 }
 
+// SetProxyAutoConfigurationJavaScript wraps the corresponding Objective-C method.
 func (x *NEProxySettings) SetProxyAutoConfigurationJavaScript(proxyAutoConfigurationJavaScript string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProxyAutoConfigurationJavaScript:"), purego.NSString(proxyAutoConfigurationJavaScript))
 }
 
-// A boolean indicating if the static HTTP proxy is enabled.
+// HTTPEnabled a boolean indicating if the static HTTP proxy is enabled.
 func (x *NEProxySettings) HTTPEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("HTTPEnabled"))
 	return _r
 }
 
+// SetHTTPEnabled wraps the corresponding Objective-C method.
 func (x *NEProxySettings) SetHTTPEnabled(hTTPEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPEnabled:"), hTTPEnabled)
 }
 
-// A NEProxyServer object containing the HTTP proxy server settings.
+// HTTPServer a NEProxyServer object containing the HTTP proxy server settings.
 func (x *NEProxySettings) HTTPServer() *NEProxyServer {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("HTTPServer"))
 	return NEProxyServerFromID(_r)
 }
 
+// SetHTTPServer wraps the corresponding Objective-C method.
 func (x *NEProxySettings) SetHTTPServer(hTTPServer *NEProxyServer) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPServer:"), objref.IDOf(hTTPServer))
 }
 
-// A boolean indicating if the static HTTPS proxy is enabled.
+// HTTPSEnabled a boolean indicating if the static HTTPS proxy is enabled.
 func (x *NEProxySettings) HTTPSEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("HTTPSEnabled"))
 	return _r
 }
 
+// SetHTTPSEnabled wraps the corresponding Objective-C method.
 func (x *NEProxySettings) SetHTTPSEnabled(hTTPSEnabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPSEnabled:"), hTTPSEnabled)
 }
 
-// A NEProxyServer object containing the HTTPS proxy server settings.
+// HTTPSServer a NEProxyServer object containing the HTTPS proxy server settings.
 func (x *NEProxySettings) HTTPSServer() *NEProxyServer {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("HTTPSServer"))
 	return NEProxyServerFromID(_r)
 }
 
+// SetHTTPSServer wraps the corresponding Objective-C method.
 func (x *NEProxySettings) SetHTTPSServer(hTTPSServer *NEProxyServer) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPSServer:"), objref.IDOf(hTTPSServer))
 }
 
-// A flag indicating if the proxy settings should not be used for network destinations specified using single-label host names.
+// ExcludeSimpleHostnames a flag indicating if the proxy settings should not be used for network destinations specified using single-label host names.
 func (x *NEProxySettings) ExcludeSimpleHostnames() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("excludeSimpleHostnames"))
 	return _r
 }
 
+// SetExcludeSimpleHostnames wraps the corresponding Objective-C method.
 func (x *NEProxySettings) SetExcludeSimpleHostnames(excludeSimpleHostnames bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeSimpleHostnames:"), excludeSimpleHostnames)
 }
 
-// An array of domain strings. If the destination host name of a connection shares a suffix with one of these strings then the proxy settings will not be used for the connection.
+// ExceptionList an array of domain strings. If the destination host name of a connection shares a suffix with one of these strings then the proxy settings will not be used for the connection.
 //
 // ExceptionList returns the collection as a Go slice.
 func (x *NEProxySettings) ExceptionList() []string {
@@ -237,11 +233,12 @@ func (x *NEProxySettings) ExceptionList() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetExceptionList wraps the corresponding Objective-C method.
 func (x *NEProxySettings) SetExceptionList(exceptionList []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExceptionList:"), purego.SliceToNSArray(exceptionList, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// An array of domain strings. If the destination host name of a connection shares a suffix with one of these strings then the proxy settings will be used for the connection. Otherwise the proxy settings will not be used. If this property is nil then all connections to which the Network Extension applies will use the proxy settings.
+// MatchDomains an array of domain strings. If the destination host name of a connection shares a suffix with one of these strings then the proxy settings will be used for the connection. Otherwise the proxy settings will not be used. If this property is nil then all connections to which the Network Extension applies will use the proxy settings.
 //
 // MatchDomains returns the collection as a Go slice.
 func (x *NEProxySettings) MatchDomains() []string {
@@ -249,6 +246,7 @@ func (x *NEProxySettings) MatchDomains() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetMatchDomains wraps the corresponding Objective-C method.
 func (x *NEProxySettings) SetMatchDomains(matchDomains []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchDomains:"), purego.SliceToNSArray(matchDomains, func(_v string) objc.ID { return purego.NSString(_v) }))
 }

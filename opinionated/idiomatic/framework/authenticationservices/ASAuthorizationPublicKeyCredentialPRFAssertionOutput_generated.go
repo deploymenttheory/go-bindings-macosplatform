@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type to represent outputs of the web authentication PRF extension, when requesting them during an assertion.
-//
 // AuthorizationPublicKeyCredentialPRFAssertionOutput is an idiomatic wrapper over the Objective-C class ASAuthorizationPublicKeyCredentialPRFAssertionOutput.
+//
+// A type to represent outputs of the web authentication PRF extension, when requesting them during an assertion.
 type AuthorizationPublicKeyCredentialPRFAssertionOutput struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationPublicKeyCredentialPRFAssertionOutputFromID(id objc.ID) *Autho
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPublicKeyCredentialPRFAssertionOutput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationPublicKeyCredentialPRFAssertionOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationPublicKeyCredentialPRFAssertionOutputAdopt(id objc.ID) *Author
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationPublicKeyCredentialPRFAssertionOutput{Handle: objref.Wrap(id)}
+	x := &AuthorizationPublicKeyCredentialPRFAssertionOutput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,25 @@ func (x *AuthorizationPublicKeyCredentialPRFAssertionOutput) IsKind(className st
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationPublicKeyCredentialPRFAssertionOutput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAuthorizationPublicKeyCredentialPRFAssertionOutput creates a new AuthorizationPublicKeyCredentialPRFAssertionOutput.
 func NewAuthorizationPublicKeyCredentialPRFAssertionOutput() *AuthorizationPublicKeyCredentialPRFAssertionOutput {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPublicKeyCredentialPRFAssertionOutput")), objc.RegisterName("new"))
 	return authorizationPublicKeyCredentialPRFAssertionOutputAdopt(_id)
 }
 
+// First wraps the corresponding Objective-C method.
 func (x *AuthorizationPublicKeyCredentialPRFAssertionOutput) First() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("first"))
 	return obj.Wrap(_r)
 }
 
+// Second wraps the corresponding Objective-C method.
 func (x *AuthorizationPublicKeyCredentialPRFAssertionOutput) Second() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("second"))
 	return obj.Wrap(_r)

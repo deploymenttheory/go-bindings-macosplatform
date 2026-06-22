@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterMediaPlayback is an idiomatic wrapper over the Objective-C class MTRClusterMediaPlayback.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterMediaPlayback struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterMediaPlaybackFromID adopts an existing Objective-C object as a MTRClusterMediaPlayback
@@ -25,7 +26,8 @@ func MTRClusterMediaPlaybackFromID(id objc.ID) *MTRClusterMediaPlayback {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterMediaPlayback{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterMediaPlayback{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func mTRClusterMediaPlaybackAdopt(id objc.ID) *MTRClusterMediaPlayback {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterMediaPlayback{Handle: objref.Wrap(id)}
+	x := &MTRClusterMediaPlayback{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterMediaPlayback) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterMediaPlayback) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterMediaPlayback) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterMediaPlaybackWithDeviceEndpointIDQueue creates a new MTRClusterMediaPlayback.
+// NewMTRClusterMediaPlaybackWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterMediaPlaybackWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterMediaPlayback {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterMediaPlayback")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -74,8 +60,10 @@ func NewMTRClusterMediaPlaybackWithDeviceEndpointQueue(device *MTRDevice, endpoi
 	return mTRClusterMediaPlaybackAdopt(_id)
 }
 
+// PlayWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // PlayWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PlayWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPlayParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PlayWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPlayParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -97,8 +85,10 @@ func (x *MTRClusterMediaPlayback) PlayWithParamsExpectedValuesExpectedValueInter
 	}
 }
 
+// PlayWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // PlayWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PlayWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PlayWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -120,8 +110,10 @@ func (x *MTRClusterMediaPlayback) PlayWithExpectedValuesExpectedValueIntervalCom
 	}
 }
 
+// PauseWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // PauseWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PauseWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPauseParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PauseWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPauseParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -143,8 +135,10 @@ func (x *MTRClusterMediaPlayback) PauseWithParamsExpectedValuesExpectedValueInte
 	}
 }
 
+// PauseWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // PauseWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PauseWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PauseWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -166,8 +160,10 @@ func (x *MTRClusterMediaPlayback) PauseWithExpectedValuesExpectedValueIntervalCo
 	}
 }
 
+// StopWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // StopWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) StopWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterStopParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) StopWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterStopParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -189,8 +185,10 @@ func (x *MTRClusterMediaPlayback) StopWithParamsExpectedValuesExpectedValueInter
 	}
 }
 
+// StopWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // StopWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) StopWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) StopWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -212,8 +210,10 @@ func (x *MTRClusterMediaPlayback) StopWithExpectedValuesExpectedValueIntervalCom
 	}
 }
 
+// StartOverWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // StartOverWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) StartOverWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterStartOverParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) StartOverWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterStartOverParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -235,8 +235,10 @@ func (x *MTRClusterMediaPlayback) StartOverWithParamsExpectedValuesExpectedValue
 	}
 }
 
+// StartOverWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // StartOverWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) StartOverWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) StartOverWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -258,8 +260,10 @@ func (x *MTRClusterMediaPlayback) StartOverWithExpectedValuesExpectedValueInterv
 	}
 }
 
+// PreviousWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // PreviousWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PreviousWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPreviousParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PreviousWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPreviousParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -281,8 +285,10 @@ func (x *MTRClusterMediaPlayback) PreviousWithParamsExpectedValuesExpectedValueI
 	}
 }
 
+// PreviousWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // PreviousWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PreviousWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PreviousWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -304,8 +310,10 @@ func (x *MTRClusterMediaPlayback) PreviousWithExpectedValuesExpectedValueInterva
 	}
 }
 
+// NextWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // NextWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) NextWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterNextParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) NextWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterNextParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -327,8 +335,10 @@ func (x *MTRClusterMediaPlayback) NextWithParamsExpectedValuesExpectedValueInter
 	}
 }
 
+// NextWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // NextWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) NextWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) NextWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -350,8 +360,10 @@ func (x *MTRClusterMediaPlayback) NextWithExpectedValuesExpectedValueIntervalCom
 	}
 }
 
+// RewindWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // RewindWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) RewindWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterRewindParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) RewindWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterRewindParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -373,8 +385,10 @@ func (x *MTRClusterMediaPlayback) RewindWithParamsExpectedValuesExpectedValueInt
 	}
 }
 
+// RewindWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // RewindWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) RewindWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) RewindWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -396,8 +410,10 @@ func (x *MTRClusterMediaPlayback) RewindWithExpectedValuesExpectedValueIntervalC
 	}
 }
 
+// FastForwardWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // FastForwardWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) FastForwardWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterFastForwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) FastForwardWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterFastForwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -419,8 +435,10 @@ func (x *MTRClusterMediaPlayback) FastForwardWithParamsExpectedValuesExpectedVal
 	}
 }
 
+// FastForwardWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // FastForwardWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) FastForwardWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) FastForwardWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -442,8 +460,10 @@ func (x *MTRClusterMediaPlayback) FastForwardWithExpectedValuesExpectedValueInte
 	}
 }
 
+// SkipForwardWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // SkipForwardWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) SkipForwardWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSkipForwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) SkipForwardWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSkipForwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -465,8 +485,10 @@ func (x *MTRClusterMediaPlayback) SkipForwardWithParamsExpectedValuesExpectedVal
 	}
 }
 
+// SkipBackwardWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // SkipBackwardWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) SkipBackwardWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSkipBackwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) SkipBackwardWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSkipBackwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -488,8 +510,10 @@ func (x *MTRClusterMediaPlayback) SkipBackwardWithParamsExpectedValuesExpectedVa
 	}
 }
 
+// SeekWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // SeekWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) SeekWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSeekParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) SeekWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSeekParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -511,68 +535,82 @@ func (x *MTRClusterMediaPlayback) SeekWithParamsExpectedValuesExpectedValueInter
 	}
 }
 
+// ReadAttributeCurrentStateWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterMediaPlayback) ReadAttributeCurrentStateWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeStartTimeWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterMediaPlayback) ReadAttributeStartTimeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStartTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeDurationWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterMediaPlayback) ReadAttributeDurationWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDurationWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeSampledPositionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterMediaPlayback) ReadAttributeSampledPositionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSampledPositionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributePlaybackSpeedWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterMediaPlayback) ReadAttributePlaybackSpeedWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePlaybackSpeedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeSeekRangeEndWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterMediaPlayback) ReadAttributeSeekRangeEndWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSeekRangeEndWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeSeekRangeStartWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterMediaPlayback) ReadAttributeSeekRangeStartWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSeekRangeStartWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterMediaPlayback) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterMediaPlayback) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterMediaPlayback) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterMediaPlayback) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterMediaPlayback) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// PlayWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // PlayWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PlayWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterPlayParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PlayWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterPlayParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -594,8 +632,10 @@ func (x *MTRClusterMediaPlayback) PlayWithParamsExpectedValuesExpectedValueInter
 	}
 }
 
+// PlayWithExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // PlayWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PlayWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PlayWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -617,8 +657,10 @@ func (x *MTRClusterMediaPlayback) PlayWithExpectedValuesExpectedValueInterval(ct
 	}
 }
 
+// PauseWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // PauseWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PauseWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterPauseParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PauseWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterPauseParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -640,8 +682,10 @@ func (x *MTRClusterMediaPlayback) PauseWithParamsExpectedValuesExpectedValueInte
 	}
 }
 
+// PauseWithExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // PauseWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PauseWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PauseWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -663,8 +707,10 @@ func (x *MTRClusterMediaPlayback) PauseWithExpectedValuesExpectedValueInterval(c
 	}
 }
 
+// StopPlaybackWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // StopPlaybackWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) StopPlaybackWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterStopPlaybackParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) StopPlaybackWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterStopPlaybackParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -686,8 +732,10 @@ func (x *MTRClusterMediaPlayback) StopPlaybackWithParamsExpectedValuesExpectedVa
 	}
 }
 
+// StopPlaybackWithExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // StopPlaybackWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) StopPlaybackWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) StopPlaybackWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -709,8 +757,10 @@ func (x *MTRClusterMediaPlayback) StopPlaybackWithExpectedValuesExpectedValueInt
 	}
 }
 
+// StartOverWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // StartOverWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) StartOverWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterStartOverParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) StartOverWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterStartOverParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -732,8 +782,10 @@ func (x *MTRClusterMediaPlayback) StartOverWithParamsExpectedValuesExpectedValue
 	}
 }
 
+// StartOverWithExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // StartOverWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) StartOverWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) StartOverWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -755,8 +807,10 @@ func (x *MTRClusterMediaPlayback) StartOverWithExpectedValuesExpectedValueInterv
 	}
 }
 
+// PreviousWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // PreviousWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PreviousWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterPreviousParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PreviousWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterPreviousParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -778,8 +832,10 @@ func (x *MTRClusterMediaPlayback) PreviousWithParamsExpectedValuesExpectedValueI
 	}
 }
 
+// PreviousWithExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // PreviousWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PreviousWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PreviousWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -801,8 +857,10 @@ func (x *MTRClusterMediaPlayback) PreviousWithExpectedValuesExpectedValueInterva
 	}
 }
 
+// NextWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // NextWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) NextWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterNextParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) NextWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterNextParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -824,8 +882,10 @@ func (x *MTRClusterMediaPlayback) NextWithParamsExpectedValuesExpectedValueInter
 	}
 }
 
+// NextWithExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // NextWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) NextWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) NextWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -847,8 +907,10 @@ func (x *MTRClusterMediaPlayback) NextWithExpectedValuesExpectedValueInterval(ct
 	}
 }
 
+// RewindWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // RewindWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) RewindWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterRewindParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) RewindWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterRewindParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -870,8 +932,10 @@ func (x *MTRClusterMediaPlayback) RewindWithParamsExpectedValuesExpectedValueInt
 	}
 }
 
+// RewindWithExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // RewindWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) RewindWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) RewindWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -893,8 +957,10 @@ func (x *MTRClusterMediaPlayback) RewindWithExpectedValuesExpectedValueInterval(
 	}
 }
 
+// FastForwardWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // FastForwardWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) FastForwardWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterFastForwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) FastForwardWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterFastForwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -916,8 +982,10 @@ func (x *MTRClusterMediaPlayback) FastForwardWithParamsExpectedValuesExpectedVal
 	}
 }
 
+// FastForwardWithExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // FastForwardWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) FastForwardWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) FastForwardWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -939,8 +1007,10 @@ func (x *MTRClusterMediaPlayback) FastForwardWithExpectedValuesExpectedValueInte
 	}
 }
 
+// SkipForwardWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // SkipForwardWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) SkipForwardWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterSkipForwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) SkipForwardWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterSkipForwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -962,8 +1032,10 @@ func (x *MTRClusterMediaPlayback) SkipForwardWithParamsExpectedValuesExpectedVal
 	}
 }
 
+// SkipBackwardWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // SkipBackwardWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) SkipBackwardWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterSkipBackwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) SkipBackwardWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterSkipBackwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -985,8 +1057,10 @@ func (x *MTRClusterMediaPlayback) SkipBackwardWithParamsExpectedValuesExpectedVa
 	}
 }
 
+// SeekWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // SeekWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) SeekWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterSeekParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) SeekWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterSeekParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1064,3 +1138,7 @@ type MTRClusterMediaPlaybackable interface {
 }
 
 var _ MTRClusterMediaPlaybackable = (*MTRClusterMediaPlayback)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterMediaPlayback)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterMediaPlayback)(nil)

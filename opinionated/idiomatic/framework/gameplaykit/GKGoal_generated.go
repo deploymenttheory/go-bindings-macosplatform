@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An influence that motivates the movement of one or more agents.
-//
 // Goal is an idiomatic wrapper over the Objective-C class GKGoal.
+//
+// An influence that motivates the movement of one or more agents.
 type Goal struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func GoalFromID(id objc.ID) *Goal {
 	if id == 0 {
 		return nil
 	}
-	x := &Goal{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Goal{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func goalAdopt(id objc.ID) *Goal {
 	if id == 0 {
 		return nil
 	}
-	x := &Goal{Handle: objref.Wrap(id)}
+	x := &Goal{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *Goal) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *Goal) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Goal) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewGoal creates a new Goal.

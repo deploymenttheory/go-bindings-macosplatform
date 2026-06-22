@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A generator for random numbers that are uniformly distributed across many samplings, but where short sequences of similar values are unlikely.
-//
 // ShuffledDistribution is an idiomatic wrapper over the Objective-C class GKShuffledDistribution.
+//
+// It embeds [RandomDistribution], promoting that type's methods.
+//
+// A generator for random numbers that are uniformly distributed across many samplings, but where short sequences of similar values are unlikely.
 type ShuffledDistribution struct {
-	objref.Handle
+	RandomDistribution
 }
 
 // ShuffledDistributionFromID adopts an existing Objective-C object as a ShuffledDistribution
@@ -25,7 +26,8 @@ func ShuffledDistributionFromID(id objc.ID) *ShuffledDistribution {
 	if id == 0 {
 		return nil
 	}
-	x := &ShuffledDistribution{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ShuffledDistribution{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func shuffledDistributionAdopt(id objc.ID) *ShuffledDistribution {
 	if id == 0 {
 		return nil
 	}
-	x := &ShuffledDistribution{Handle: objref.Wrap(id)}
+	x := &ShuffledDistribution{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ShuffledDistribution) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ShuffledDistribution) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ShuffledDistribution) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewShuffledDistribution creates a new ShuffledDistribution.
@@ -70,3 +58,5 @@ type ShuffledDistributionable interface {
 }
 
 var _ ShuffledDistributionable = (*ShuffledDistribution)(nil)
+
+var _ RandomDistributionProvider = (*ShuffledDistribution)(nil)

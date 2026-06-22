@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMOverflowEvent is an idiomatic wrapper over the Objective-C class DOMOverflowEvent.
+//
+// It embeds [DOMEvent], promoting that type's methods.
 type DOMOverflowEvent struct {
-	objref.Handle
+	DOMEvent
 }
 
 // DOMOverflowEventFromID adopts an existing Objective-C object as a DOMOverflowEvent
@@ -23,7 +24,8 @@ func DOMOverflowEventFromID(id objc.ID) *DOMOverflowEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMOverflowEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMOverflowEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMOverflowEventAdopt(id objc.ID) *DOMOverflowEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMOverflowEvent{Handle: objref.Wrap(id)}
+	x := &DOMOverflowEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMOverflowEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMOverflowEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMOverflowEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMOverflowEventOverflowEventHorizontalOverflowVerticalOverflow creates a new DOMOverflowEvent.
@@ -63,28 +51,31 @@ func NewDOMOverflowEventOverflowEventHorizontalOverflowVerticalOverflow(orient u
 	return dOMOverflowEventAdopt(_id)
 }
 
-// WithReturnValue sets returnValue and returns the receiver so calls can be chained.
+// WithReturnValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMOverflowEvent) WithReturnValue(returnValue bool) *DOMOverflowEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnValue:"), returnValue)
 	return x
 }
 
-// WithCancelBubble sets cancelBubble and returns the receiver so calls can be chained.
+// WithCancelBubble sets the property and returns the receiver so calls can be chained.
 func (x *DOMOverflowEvent) WithCancelBubble(cancelBubble bool) *DOMOverflowEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelBubble:"), cancelBubble)
 	return x
 }
 
+// Orient wraps the corresponding Objective-C method.
 func (x *DOMOverflowEvent) Orient() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("orient"))
 	return _r
 }
 
+// HorizontalOverflow wraps the corresponding Objective-C method.
 func (x *DOMOverflowEvent) HorizontalOverflow() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("horizontalOverflow"))
 	return _r
 }
 
+// VerticalOverflow wraps the corresponding Objective-C method.
 func (x *DOMOverflowEvent) VerticalOverflow() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("verticalOverflow"))
 	return _r
@@ -101,3 +92,9 @@ type DOMOverflowEventable interface {
 }
 
 var _ DOMOverflowEventable = (*DOMOverflowEvent)(nil)
+
+var _ DOMEventProvider = (*DOMOverflowEvent)(nil)
+
+var _ DOMObjectProvider = (*DOMOverflowEvent)(nil)
+
+var _ WebScriptObjectProvider = (*DOMOverflowEvent)(nil)

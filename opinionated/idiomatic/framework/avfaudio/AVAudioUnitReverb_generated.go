@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that implements a reverb effect.
-//
 // AudioUnitReverb is an idiomatic wrapper over the Objective-C class AVAudioUnitReverb.
+//
+// It embeds [AudioUnitEffect], promoting that type's methods.
+//
+// An object that implements a reverb effect.
 type AudioUnitReverb struct {
-	objref.Handle
+	AudioUnitEffect
 }
 
 // AudioUnitReverbFromID adopts an existing Objective-C object as a AudioUnitReverb
@@ -25,7 +26,8 @@ func AudioUnitReverbFromID(id objc.ID) *AudioUnitReverb {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitReverb{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioUnitReverb{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func audioUnitReverbAdopt(id objc.ID) *AudioUnitReverb {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioUnitReverb{Handle: objref.Wrap(id)}
+	x := &AudioUnitReverb{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AudioUnitReverb) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioUnitReverb) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioUnitReverb) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAudioUnitReverb creates a new AudioUnitReverb.
@@ -64,32 +52,30 @@ func NewAudioUnitReverb() *AudioUnitReverb {
 	return audioUnitReverbAdopt(_id)
 }
 
-// The blend of the wet and dry signals.
-//
-// WithWetDryMix sets wetDryMix and returns the receiver so calls can be chained.
+// WithWetDryMix the blend of the wet and dry signals.
 func (x *AudioUnitReverb) WithWetDryMix(wetDryMix float32) *AudioUnitReverb {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWetDryMix:"), wetDryMix)
 	return x
 }
 
-// The bypass state of the audio unit.
-//
-// WithBypass sets bypass and returns the receiver so calls can be chained.
+// WithBypass the bypass state of the audio unit.
 func (x *AudioUnitReverb) WithBypass(bypass bool) *AudioUnitReverb {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
 	return x
 }
 
-// Configures the audio unit as a reverb preset.
+// LoadFactoryPreset configures the audio unit as a reverb preset.
 func (x *AudioUnitReverb) LoadFactoryPreset(preset AudioUnitReverbPreset) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadFactoryPreset:"), preset)
 }
 
+// WetDryMix wraps the corresponding Objective-C method.
 func (x *AudioUnitReverb) WetDryMix() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("wetDryMix"))
 	return _r
 }
 
+// SetWetDryMix wraps the corresponding Objective-C method.
 func (x *AudioUnitReverb) SetWetDryMix(wetDryMix float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWetDryMix:"), wetDryMix)
 }
@@ -105,3 +91,9 @@ type AudioUnitReverbable interface {
 }
 
 var _ AudioUnitReverbable = (*AudioUnitReverb)(nil)
+
+var _ AudioUnitEffectProvider = (*AudioUnitReverb)(nil)
+
+var _ AudioUnitProvider = (*AudioUnitReverb)(nil)
+
+var _ AudioNodeProvider = (*AudioUnitReverb)(nil)

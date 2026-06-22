@@ -31,6 +31,8 @@ const (
 	KAuthorizationFlagNoData AuthorizationFlags = 1048576
 )
 
+// String returns the AuthorizationFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationFlags) String() string {
 	var parts []string
 	if e&KAuthorizationFlagInteractionAllowed != 0 {
@@ -75,6 +77,8 @@ const (
 	KCMSCertificateChainWithRootOrFail CMSCertificateChainMode = 4
 )
 
+// String returns the CMSCertificateChainMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CMSCertificateChainMode) String() string {
 	switch e {
 	case KCMSCertificateNone:
@@ -115,6 +119,8 @@ const (
 	KCMSAttrAppleExpirationTime CMSSignedAttributes = 64
 )
 
+// String returns the CMSSignedAttributes constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CMSSignedAttributes) String() string {
 	var parts []string
 	if e&KCMSAttrSmimeCapabilities != 0 {
@@ -156,6 +162,8 @@ const (
 	KTryAuthenticate SSLAuthenticate = 2
 )
 
+// String returns the SSLAuthenticate constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SSLAuthenticate) String() string {
 	switch e {
 	case KNeverAuthenticate:
@@ -179,6 +187,8 @@ const (
 	KSSLDatagramType SSLConnectionType = 1
 )
 
+// String returns the SSLConnectionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SSLConnectionType) String() string {
 	switch e {
 	case KSSLStreamType:
@@ -222,6 +232,8 @@ const (
 	KSSLProtocolAll SSLProtocol = 6
 )
 
+// String returns the SSLProtocol constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SSLProtocol) String() string {
 	switch e {
 	case KSSLProtocolUnknown:
@@ -265,6 +277,8 @@ const (
 	KSSLClientSide SSLProtocolSide = 1
 )
 
+// String returns the SSLProtocolSide constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SSLProtocolSide) String() string {
 	switch e {
 	case KSSLServerSide:
@@ -302,6 +316,8 @@ const (
 	KSSLSessionOptionEnableSessionTickets SSLSessionOption = 9
 )
 
+// String returns the SSLSessionOption constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SSLSessionOption) String() string {
 	switch e {
 	case KSSLSessionOptionBreakOnServerAuth:
@@ -365,6 +381,8 @@ const (
 	KSecAccessControlApplicationPassword SecAccessControlCreateFlags = 2147483648
 )
 
+// String returns the SecAccessControlCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SecAccessControlCreateFlags) String() string {
 	var parts []string
 	if e&KSecAccessControlUserPresence != 0 {
@@ -433,6 +451,8 @@ const (
 	KSecAuthenticationTypeAny SecAuthenticationType = 0
 )
 
+// String returns the SecAuthenticationType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SecAuthenticationType) String() string {
 	switch e {
 	case KSecAuthenticationTypeNTLM:
@@ -477,6 +497,8 @@ const (
 	KSecCSMatchGuestRequirementInKernel SecCSFlags = 8388608
 )
 
+// String returns the SecCSFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SecCSFlags) String() string {
 	var parts []string
 	if e&KSecCSConsiderExpiration != 0 {
@@ -526,6 +548,8 @@ const (
 	KSecCredentialTypeNoUI SecCredentialType = 2
 )
 
+// String returns the SecCredentialType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SecCredentialType) String() string {
 	switch e {
 	case KSecCredentialTypeDefault:
@@ -574,6 +598,8 @@ const (
 	KSecFormatSSHv2 SecExternalFormat = 14
 )
 
+// String returns the SecExternalFormat constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SecExternalFormat) String() string {
 	switch e {
 	case KSecFormatUnknown:
@@ -631,6 +657,8 @@ const (
 	KSecSymmetricKeyItemClass SecItemClass = 17
 )
 
+// String returns the SecItemClass constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SecItemClass) String() string {
 	switch e {
 	case KSecInternetPasswordItemClass:
@@ -661,6 +689,8 @@ const (
 	KSecItemPemArmour SecItemImportExportFlags = 1
 )
 
+// String returns the SecItemImportExportFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SecItemImportExportFlags) String() string {
 	var parts []string
 	if e&KSecItemPemArmour != 0 {
@@ -683,6 +713,8 @@ const (
 	KSecKeyOperationTypeKeyExchange SecKeyOperationType = 4
 )
 
+// String returns the SecKeyOperationType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SecKeyOperationType) String() string {
 	switch e {
 	case KSecKeyOperationTypeSign:
@@ -717,6 +749,8 @@ const (
 	KSecKeychainPromptInvalidAct SecKeychainPromptSelector = 128
 )
 
+// String returns the SecKeychainPromptSelector constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SecKeychainPromptSelector) String() string {
 	var parts []string
 	if e&KSecKeychainPromptRequirePassphase != 0 {
@@ -754,6 +788,8 @@ const (
 	KSecPreferencesDomainDynamic SecPreferencesDomain = 3
 )
 
+// String returns the SecPreferencesDomain constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SecPreferencesDomain) String() string {
 	switch e {
 	case KSecPreferencesDomainUser:
@@ -845,6 +881,8 @@ const (
 	KSecProtocolTypeAny SecProtocolType = 0
 )
 
+// String returns the SecProtocolType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SecProtocolType) String() string {
 	switch e {
 	case KSecProtocolTypeFTP:
@@ -943,6 +981,8 @@ const (
 	KSecTrustOptionImplicitAnchors SecTrustOptionFlags = 64
 )
 
+// String returns the SecTrustOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SecTrustOptionFlags) String() string {
 	var parts []string
 	if e&KSecTrustOptionAllowExpired != 0 {
@@ -984,6 +1024,8 @@ const (
 	KSecTrustSettingsDomainSystem SecTrustSettingsDomain = 2
 )
 
+// String returns the SecTrustSettingsDomain constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SecTrustSettingsDomain) String() string {
 	switch e {
 	case KSecTrustSettingsDomainUser:
@@ -1012,6 +1054,8 @@ const (
 	SessionIsRemote SessionAttributeBits = 4096
 )
 
+// String returns the SessionAttributeBits constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SessionAttributeBits) String() string {
 	var parts []string
 	if e&SessionIsRoot != 0 {
@@ -1041,6 +1085,8 @@ const (
 	SessionKeepCurrentBootstrap SessionCreationFlags = 32768
 )
 
+// String returns the SessionCreationFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SessionCreationFlags) String() string {
 	var parts []string
 	if e&SessionKeepCurrentBootstrap != 0 {
@@ -1082,6 +1128,8 @@ const (
 	Tls_protocol_version_DTLSv12 Tls_protocol_version_t = 65277
 )
 
+// String returns the Tls_protocol_version_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Tls_protocol_version_t) String() string {
 	switch e {
 	case Tls_protocol_version_TLSv10:

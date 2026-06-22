@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of textures optimized for storage and drawing performance.
-//
 // TextureAtlas is an idiomatic wrapper over the Objective-C class SKTextureAtlas.
+//
+// A collection of textures optimized for storage and drawing performance.
 type TextureAtlas struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func TextureAtlasFromID(id objc.ID) *TextureAtlas {
 	if id == 0 {
 		return nil
 	}
-	x := &TextureAtlas{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextureAtlas{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func textureAtlasAdopt(id objc.ID) *TextureAtlas {
 	if id == 0 {
 		return nil
 	}
-	x := &TextureAtlas{Handle: objref.Wrap(id)}
+	x := &TextureAtlas{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,19 +61,25 @@ func (x *TextureAtlas) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextureAtlas) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTextureAtlas creates a new TextureAtlas.
 func NewTextureAtlas() *TextureAtlas {
 	_id := objc.Send[objc.ID](objc.ID(_class("SKTextureAtlas")), objc.RegisterName("new"))
 	return textureAtlasAdopt(_id)
 }
 
-// Creates a texture from data stored in the texture atlas.
+// TextureNamed creates a texture from data stored in the texture atlas.
 func (x *TextureAtlas) TextureNamed(name string) *Texture {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textureNamed:"), purego.NSString(name))
 	return TextureFromID(_r)
 }
 
-// Loads an atlas object’s textures into memory, calling a completion handler after the task completes.
+// Preload loads an atlas object’s textures into memory, calling a completion handler after the task completes.
 //
 // Preload blocks until the operation completes or ctx is cancelled.
 func (x *TextureAtlas) Preload(ctx context.Context) error {
@@ -88,6 +96,8 @@ func (x *TextureAtlas) Preload(ctx context.Context) error {
 	}
 }
 
+// TextureNames wraps the corresponding Objective-C method.
+//
 // TextureNames returns the collection as a Go slice.
 func (x *TextureAtlas) TextureNames() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textureNames"))

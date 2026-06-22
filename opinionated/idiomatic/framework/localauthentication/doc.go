@@ -3,4 +3,12 @@
 //go:build darwin
 
 // Package localauthentication provides a fluent Go API over the macOS LocalAuthentication framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - EnvironmentMechanism: [EnvironmentMechanismBiometry], [EnvironmentMechanismCompanion], [EnvironmentMechanismUserPassword]
+//   - Right: [PersistedRight]
 package localauthentication

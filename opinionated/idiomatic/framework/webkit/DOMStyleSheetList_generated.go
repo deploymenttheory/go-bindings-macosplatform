@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMStyleSheetList is an idiomatic wrapper over the Objective-C class DOMStyleSheetList.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMStyleSheetList struct {
-	objref.Handle
+	DOMObject
 }
 
 // DOMStyleSheetListFromID adopts an existing Objective-C object as a DOMStyleSheetList
@@ -23,7 +24,8 @@ func DOMStyleSheetListFromID(id objc.ID) *DOMStyleSheetList {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMStyleSheetList{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMStyleSheetList{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMStyleSheetListAdopt(id objc.ID) *DOMStyleSheetList {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMStyleSheetList{Handle: objref.Wrap(id)}
+	x := &DOMStyleSheetList{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMStyleSheetList) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMStyleSheetList) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMStyleSheetList) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMStyleSheetList creates a new DOMStyleSheetList.
@@ -62,11 +50,13 @@ func NewDOMStyleSheetList() *DOMStyleSheetList {
 	return dOMStyleSheetListAdopt(_id)
 }
 
+// Item wraps the corresponding Objective-C method.
 func (x *DOMStyleSheetList) Item(index int) *DOMStyleSheet {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
 	return DOMStyleSheetFromID(_r)
 }
 
+// Length wraps the corresponding Objective-C method.
 func (x *DOMStyleSheetList) Length() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
 	return _r
@@ -80,3 +70,7 @@ type DOMStyleSheetListable interface {
 }
 
 var _ DOMStyleSheetListable = (*DOMStyleSheetList)(nil)
+
+var _ DOMObjectProvider = (*DOMStyleSheetList)(nil)
+
+var _ WebScriptObjectProvider = (*DOMStyleSheetList)(nil)

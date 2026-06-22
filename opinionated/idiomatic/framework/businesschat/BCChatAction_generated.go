@@ -23,7 +23,8 @@ func ChatActionFromID(id objc.ID) *ChatAction {
 	if id == 0 {
 		return nil
 	}
-	x := &ChatAction{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ChatAction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func chatActionAdopt(id objc.ID) *ChatAction {
 	if id == 0 {
 		return nil
 	}
-	x := &ChatAction{Handle: objref.Wrap(id)}
+	x := &ChatAction{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *ChatAction) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *ChatAction) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ChatAction) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewChatAction creates a new ChatAction.

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the aspects of a photo picker’s appearance that can change while it’s presented.
-//
 // PickerUpdateConfiguration is an idiomatic wrapper over the Objective-C class PHPickerUpdateConfiguration.
+//
+// An object that defines the aspects of a photo picker’s appearance that can change while it’s presented.
 type PickerUpdateConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PickerUpdateConfigurationFromID(id objc.ID) *PickerUpdateConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &PickerUpdateConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PickerUpdateConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func pickerUpdateConfigurationAdopt(id objc.ID) *PickerUpdateConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &PickerUpdateConfiguration{Handle: objref.Wrap(id)}
+	x := &PickerUpdateConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,27 +60,31 @@ func (x *PickerUpdateConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PickerUpdateConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPickerUpdateConfiguration creates a new PickerUpdateConfiguration.
 func NewPickerUpdateConfiguration() *PickerUpdateConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHPickerUpdateConfiguration")), objc.RegisterName("new"))
 	return pickerUpdateConfigurationAdopt(_id)
 }
 
-// The maximum number of selections the user can make.
-//
-// WithSelectionLimit sets selectionLimit and returns the receiver so calls can be chained.
+// WithSelectionLimit the maximum number of selections the user can make.
 func (x *PickerUpdateConfiguration) WithSelectionLimit(selectionLimit int) *PickerUpdateConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionLimit:"), selectionLimit)
 	return x
 }
 
-// The maximum number of assets that can be selected.
+// SelectionLimit the maximum number of assets that can be selected.
 func (x *PickerUpdateConfiguration) SelectionLimit() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectionLimit"))
 	return _r
 }
 
-// The maximum number of assets that can be selected.
+// SetSelectionLimit the maximum number of assets that can be selected.
 func (x *PickerUpdateConfiguration) SetSelectionLimit(selectionLimit int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionLimit:"), selectionLimit)
 }

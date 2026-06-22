@@ -36,6 +36,8 @@ const (
 	KCMTagCategory_StereoViewInterpretation CMTagCategory = 1702455664
 )
 
+// String returns the CMTagCategory constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CMTagCategory) String() string {
 	switch e {
 	case KCMTagCategory_Undefined:
@@ -85,6 +87,8 @@ const (
 	KCMTimeRoundingMethod_Default CMTimeRoundingMethod = 1
 )
 
+// String returns the CMTimeRoundingMethod constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CMTimeRoundingMethod) String() string {
 	switch e {
 	case KCMTimeRoundingMethod_RoundHalfAwayFromZero:

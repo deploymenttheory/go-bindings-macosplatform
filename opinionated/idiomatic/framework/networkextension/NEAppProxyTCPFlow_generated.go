@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object for reading and writing data to and from a TCP connection being proxied by the provider.
-//
 // NEAppProxyTCPFlow is an idiomatic wrapper over the Objective-C class NEAppProxyTCPFlow.
+//
+// It embeds [NEAppProxyFlow], promoting that type's methods.
+//
+// An object for reading and writing data to and from a TCP connection being proxied by the provider.
 type NEAppProxyTCPFlow struct {
-	objref.Handle
+	NEAppProxyFlow
 }
 
 // NEAppProxyTCPFlowFromID adopts an existing Objective-C object as a NEAppProxyTCPFlow
@@ -27,7 +28,8 @@ func NEAppProxyTCPFlowFromID(id objc.ID) *NEAppProxyTCPFlow {
 	if id == 0 {
 		return nil
 	}
-	x := &NEAppProxyTCPFlow{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEAppProxyTCPFlow{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,24 +42,10 @@ func nEAppProxyTCPFlowAdopt(id objc.ID) *NEAppProxyTCPFlow {
 	if id == 0 {
 		return nil
 	}
-	x := &NEAppProxyTCPFlow{Handle: objref.Wrap(id)}
+	x := &NEAppProxyTCPFlow{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NEAppProxyTCPFlow) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEAppProxyTCPFlow) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEAppProxyTCPFlow) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNEAppProxyTCPFlow creates a new NEAppProxyTCPFlow.
@@ -66,18 +54,16 @@ func NewNEAppProxyTCPFlow() *NEAppProxyTCPFlow {
 	return nEAppProxyTCPFlowAdopt(_id)
 }
 
-// The network interface, if any, used by this flow.
-//
-// WithNetworkInterface sets networkInterface and returns the receiver so calls can be chained.
+// WithNetworkInterface the network interface, if any, used by this flow.
 func (x *NEAppProxyTCPFlow) WithNetworkInterface(networkInterface obj.Object) *NEAppProxyTCPFlow {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkInterface:"), objref.IDOf(networkInterface))
 	return x
 }
 
-// Read data from the flow.
+// ReadData read data from the flow.
 //
 // ReadData blocks until the operation completes or ctx is cancelled.
-func (x *NEAppProxyTCPFlow) ReadData(ctx context.Context) (obj.Object, error) {
+func (x *NEAppProxyTCPFlow) ReadData(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -99,7 +85,7 @@ func (x *NEAppProxyTCPFlow) ReadData(ctx context.Context) (obj.Object, error) {
 	}
 }
 
-// Write data to the flow.
+// WriteData write data to the flow.
 //
 // WriteData blocks until the operation completes or ctx is cancelled.
 func (x *NEAppProxyTCPFlow) WriteData(ctx context.Context, data obj.Object) error {
@@ -118,7 +104,7 @@ func (x *NEAppProxyTCPFlow) WriteData(ctx context.Context, data obj.Object) erro
 	}
 }
 
-// An `nw_endpoint_t` object containing information about the intended remote endpoint of the flow.
+// RemoteFlowEndpoint an `nw_endpoint_t` object containing information about the intended remote endpoint of the flow.
 func (x *NEAppProxyTCPFlow) RemoteFlowEndpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remoteFlowEndpoint"))
 	return obj.Wrap(_r)
@@ -134,3 +120,5 @@ type NEAppProxyTCPFlowable interface {
 }
 
 var _ NEAppProxyTCPFlowable = (*NEAppProxyTCPFlow)(nil)
+
+var _ NEAppProxyFlowProvider = (*NEAppProxyTCPFlow)(nil)

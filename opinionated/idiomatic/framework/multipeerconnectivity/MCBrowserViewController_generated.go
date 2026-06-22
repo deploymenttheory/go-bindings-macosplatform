@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The MCBrowserViewController class presents nearby devices to the user and enables the user to invite nearby devices to a session. To use this class in iOS or tvOS, call methods from the underlying UIViewController class (prepareForSegue:sender: and performSegueWithIdentifier:sender: for storyboards or presentViewController:animated:completion: and dismissViewControllerAnimated:completion: for nib-based views) to present and dismiss the view controller. In macOS, use the comparable NSViewController methods presentViewControllerAsSheet: and dismissViewController: instead.
-//
 // BrowserViewController is an idiomatic wrapper over the Objective-C class MCBrowserViewController.
+//
+// The MCBrowserViewController class presents nearby devices to the user and enables the user to invite nearby devices to a session. To use this class in iOS or tvOS, call methods from the underlying UIViewController class (prepareForSegue:sender: and performSegueWithIdentifier:sender: for storyboards or presentViewController:animated:completion: and dismissViewControllerAnimated:completion: for nib-based views) to present and dismiss the view controller. In macOS, use the comparable NSViewController methods presentViewControllerAsSheet: and dismissViewController: instead.
 type BrowserViewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func BrowserViewControllerFromID(id objc.ID) *BrowserViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &BrowserViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BrowserViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func browserViewControllerAdopt(id objc.ID) *BrowserViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &BrowserViewController{Handle: objref.Wrap(id)}
+	x := &BrowserViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,64 +60,68 @@ func (x *BrowserViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a browser view controller using the provided service type and session.
-//
-// NewBrowserViewControllerWithServiceTypeSession creates a new BrowserViewController.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BrowserViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewBrowserViewControllerWithServiceTypeSession initializes a browser view controller using the provided service type and session.
 func NewBrowserViewControllerWithServiceTypeSession(serviceType string, session *Session) *BrowserViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MCBrowserViewController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceType:session:"), purego.NSString(serviceType), objref.IDOf(session))
 	return browserViewControllerAdopt(_id)
 }
 
-// Initializes a browser view controller with the provided browser and session.
-//
-// NewBrowserViewControllerWithBrowserSession creates a new BrowserViewController.
+// NewBrowserViewControllerWithBrowserSession initializes a browser view controller with the provided browser and session.
 func NewBrowserViewControllerWithBrowserSession(browser *NearbyServiceBrowser, session *Session) *BrowserViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MCBrowserViewController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBrowser:session:"), objref.IDOf(browser), objref.IDOf(session))
 	return browserViewControllerAdopt(_id)
 }
 
-// The minimum number of peers that need to be in a session, including the local peer.
-//
-// WithMinimumNumberOfPeers sets minimumNumberOfPeers and returns the receiver so calls can be chained.
+// WithMinimumNumberOfPeers the minimum number of peers that need to be in a session, including the local peer.
 func (x *BrowserViewController) WithMinimumNumberOfPeers(minimumNumberOfPeers int) *BrowserViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumNumberOfPeers:"), minimumNumberOfPeers)
 	return x
 }
 
-// The maximum number of peers allowed in a session, including the local peer.
-//
-// WithMaximumNumberOfPeers sets maximumNumberOfPeers and returns the receiver so calls can be chained.
+// WithMaximumNumberOfPeers the maximum number of peers allowed in a session, including the local peer.
 func (x *BrowserViewController) WithMaximumNumberOfPeers(maximumNumberOfPeers int) *BrowserViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumNumberOfPeers:"), maximumNumberOfPeers)
 	return x
 }
 
+// Browser wraps the corresponding Objective-C method.
 func (x *BrowserViewController) Browser() *NearbyServiceBrowser {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("browser"))
 	return NearbyServiceBrowserFromID(_r)
 }
 
+// Session wraps the corresponding Objective-C method.
 func (x *BrowserViewController) Session() *Session {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("session"))
 	return SessionFromID(_r)
 }
 
+// MinimumNumberOfPeers wraps the corresponding Objective-C method.
 func (x *BrowserViewController) MinimumNumberOfPeers() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumNumberOfPeers"))
 	return _r
 }
 
+// SetMinimumNumberOfPeers wraps the corresponding Objective-C method.
 func (x *BrowserViewController) SetMinimumNumberOfPeers(minimumNumberOfPeers int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumNumberOfPeers:"), minimumNumberOfPeers)
 }
 
+// MaximumNumberOfPeers wraps the corresponding Objective-C method.
 func (x *BrowserViewController) MaximumNumberOfPeers() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumNumberOfPeers"))
 	return _r
 }
 
+// SetMaximumNumberOfPeers wraps the corresponding Objective-C method.
 func (x *BrowserViewController) SetMaximumNumberOfPeers(maximumNumberOfPeers int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumNumberOfPeers:"), maximumNumberOfPeers)
 }

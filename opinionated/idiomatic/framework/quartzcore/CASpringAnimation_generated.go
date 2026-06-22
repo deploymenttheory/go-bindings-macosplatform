@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An animation that applies a spring-like force to a layer’s properties.
-//
 // SpringAnimation is an idiomatic wrapper over the Objective-C class CASpringAnimation.
+//
+// It embeds [BasicAnimation], promoting that type's methods.
+//
+// An animation that applies a spring-like force to a layer’s properties.
 type SpringAnimation struct {
-	objref.Handle
+	BasicAnimation
 }
 
 // SpringAnimationFromID adopts an existing Objective-C object as a SpringAnimation
@@ -25,7 +26,8 @@ func SpringAnimationFromID(id objc.ID) *SpringAnimation {
 	if id == 0 {
 		return nil
 	}
-	x := &SpringAnimation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SpringAnimation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func springAnimationAdopt(id objc.ID) *SpringAnimation {
 	if id == 0 {
 		return nil
 	}
-	x := &SpringAnimation{Handle: objref.Wrap(id)}
+	x := &SpringAnimation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SpringAnimation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SpringAnimation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SpringAnimation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSpringAnimation creates a new SpringAnimation.
@@ -71,166 +59,152 @@ func NewSpringAnimationWithPerceptualDurationBounce(perceptualDuration float64, 
 	return springAnimationAdopt(_id)
 }
 
-// The mass of the object attached to the end of the spring.
-//
-// WithMass sets mass and returns the receiver so calls can be chained.
+// WithMass the mass of the object attached to the end of the spring.
 func (x *SpringAnimation) WithMass(mass float64) *SpringAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMass:"), mass)
 	return x
 }
 
-// The spring stiffness coefficient.
-//
-// WithStiffness sets stiffness and returns the receiver so calls can be chained.
+// WithStiffness the spring stiffness coefficient.
 func (x *SpringAnimation) WithStiffness(stiffness float64) *SpringAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStiffness:"), stiffness)
 	return x
 }
 
-// Defines how the spring’s motion should be damped due to the forces of friction.
-//
-// WithDamping sets damping and returns the receiver so calls can be chained.
+// WithDamping defines how the spring’s motion should be damped due to the forces of friction.
 func (x *SpringAnimation) WithDamping(damping float64) *SpringAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDamping:"), damping)
 	return x
 }
 
-// The initial velocity of the object attached to the spring.
-//
-// WithInitialVelocity sets initialVelocity and returns the receiver so calls can be chained.
+// WithInitialVelocity the initial velocity of the object attached to the spring.
 func (x *SpringAnimation) WithInitialVelocity(initialVelocity float64) *SpringAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialVelocity:"), initialVelocity)
 	return x
 }
 
-// WithAllowsOverdamping sets allowsOverdamping and returns the receiver so calls can be chained.
+// WithAllowsOverdamping sets the property and returns the receiver so calls can be chained.
 func (x *SpringAnimation) WithAllowsOverdamping(allowsOverdamping bool) *SpringAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsOverdamping:"), allowsOverdamping)
 	return x
 }
 
-// Defines the value the receiver uses to start interpolation.
-//
-// WithFromValue sets fromValue and returns the receiver so calls can be chained.
+// WithFromValue defines the value the receiver uses to start interpolation.
 func (x *SpringAnimation) WithFromValue(fromValue obj.Object) *SpringAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFromValue:"), objref.IDOf(fromValue))
 	return x
 }
 
-// Defines the value the receiver uses to end interpolation.
-//
-// WithToValue sets toValue and returns the receiver so calls can be chained.
+// WithToValue defines the value the receiver uses to end interpolation.
 func (x *SpringAnimation) WithToValue(toValue obj.Object) *SpringAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToValue:"), objref.IDOf(toValue))
 	return x
 }
 
-// Defines the value the receiver uses to perform relative interpolation.
-//
-// WithByValue sets byValue and returns the receiver so calls can be chained.
+// WithByValue defines the value the receiver uses to perform relative interpolation.
 func (x *SpringAnimation) WithByValue(byValue obj.Object) *SpringAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setByValue:"), objref.IDOf(byValue))
 	return x
 }
 
-// Specifies the key path the receiver animates.
-//
-// WithKeyPath sets keyPath and returns the receiver so calls can be chained.
+// WithKeyPath specifies the key path the receiver animates.
 func (x *SpringAnimation) WithKeyPath(keyPath string) *SpringAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyPath:"), purego.NSString(keyPath))
 	return x
 }
 
-// Determines if the value specified by the animation is added to the current render tree value to produce the new render tree value.
-//
-// WithAdditive sets additive and returns the receiver so calls can be chained.
+// WithAdditive determines if the value specified by the animation is added to the current render tree value to produce the new render tree value.
 func (x *SpringAnimation) WithAdditive(additive bool) *SpringAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditive:"), additive)
 	return x
 }
 
-// Determines if the value of the property is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle.
-//
-// WithCumulative sets cumulative and returns the receiver so calls can be chained.
+// WithCumulative determines if the value of the property is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle.
 func (x *SpringAnimation) WithCumulative(cumulative bool) *SpringAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCumulative:"), cumulative)
 	return x
 }
 
-// An optional value function that is applied to interpolated values.
-//
-// WithValueFunction sets valueFunction and returns the receiver so calls can be chained.
+// WithValueFunction an optional value function that is applied to interpolated values.
 func (x *SpringAnimation) WithValueFunction(valueFunction *ValueFunction) *SpringAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueFunction:"), objref.IDOf(valueFunction))
 	return x
 }
 
-// An optional timing function defining the pacing of the animation.
-//
-// WithTimingFunction sets timingFunction and returns the receiver so calls can be chained.
+// WithTimingFunction an optional timing function defining the pacing of the animation.
 func (x *SpringAnimation) WithTimingFunction(timingFunction *MediaTimingFunction) *SpringAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
 	return x
 }
 
-// Determines if the animation is removed from the target layer’s animations upon completion.
-//
-// WithRemovedOnCompletion sets removedOnCompletion and returns the receiver so calls can be chained.
+// WithRemovedOnCompletion determines if the animation is removed from the target layer’s animations upon completion.
 func (x *SpringAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *SpringAnimation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
 	return x
 }
 
+// Mass wraps the corresponding Objective-C method.
 func (x *SpringAnimation) Mass() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("mass"))
 	return _r
 }
 
+// SetMass wraps the corresponding Objective-C method.
 func (x *SpringAnimation) SetMass(mass float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMass:"), mass)
 }
 
+// Stiffness wraps the corresponding Objective-C method.
 func (x *SpringAnimation) Stiffness() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("stiffness"))
 	return _r
 }
 
+// SetStiffness wraps the corresponding Objective-C method.
 func (x *SpringAnimation) SetStiffness(stiffness float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStiffness:"), stiffness)
 }
 
+// Damping wraps the corresponding Objective-C method.
 func (x *SpringAnimation) Damping() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("damping"))
 	return _r
 }
 
+// SetDamping wraps the corresponding Objective-C method.
 func (x *SpringAnimation) SetDamping(damping float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDamping:"), damping)
 }
 
+// SetInitialVelocity wraps the corresponding Objective-C method.
 func (x *SpringAnimation) SetInitialVelocity(initialVelocity float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialVelocity:"), initialVelocity)
 }
 
+// AllowsOverdamping wraps the corresponding Objective-C method.
 func (x *SpringAnimation) AllowsOverdamping() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsOverdamping"))
 	return _r
 }
 
+// SetAllowsOverdamping wraps the corresponding Objective-C method.
 func (x *SpringAnimation) SetAllowsOverdamping(allowsOverdamping bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsOverdamping:"), allowsOverdamping)
 }
 
+// SettlingDuration wraps the corresponding Objective-C method.
 func (x *SpringAnimation) SettlingDuration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("settlingDuration"))
 	return _r
 }
 
+// PerceptualDuration wraps the corresponding Objective-C method.
 func (x *SpringAnimation) PerceptualDuration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("perceptualDuration"))
 	return _r
 }
 
+// Bounce wraps the corresponding Objective-C method.
 func (x *SpringAnimation) Bounce() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("bounce"))
 	return _r
@@ -268,3 +242,9 @@ type SpringAnimationable interface {
 }
 
 var _ SpringAnimationable = (*SpringAnimation)(nil)
+
+var _ BasicAnimationProvider = (*SpringAnimation)(nil)
+
+var _ PropertyAnimationProvider = (*SpringAnimation)(nil)
+
+var _ AnimationProvider = (*SpringAnimation)(nil)

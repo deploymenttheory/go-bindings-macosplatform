@@ -6,17 +6,19 @@ package photos
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that facilitates retrieving or generating preview thumbnails, optimized for batch preloading large numbers of assets.
-//
 // CachingImageManager is an idiomatic wrapper over the Objective-C class PHCachingImageManager.
+//
+// It embeds [ImageManager], promoting that type's methods.
+//
+// An object that facilitates retrieving or generating preview thumbnails, optimized for batch preloading large numbers of assets.
 type CachingImageManager struct {
-	objref.Handle
+	ImageManager
 }
 
 // CachingImageManagerFromID adopts an existing Objective-C object as a CachingImageManager
@@ -25,7 +27,8 @@ func CachingImageManagerFromID(id objc.ID) *CachingImageManager {
 	if id == 0 {
 		return nil
 	}
-	x := &CachingImageManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CachingImageManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func cachingImageManagerAdopt(id objc.ID) *CachingImageManager {
 	if id == 0 {
 		return nil
 	}
-	x := &CachingImageManager{Handle: objref.Wrap(id)}
+	x := &CachingImageManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CachingImageManager) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CachingImageManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CachingImageManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCachingImageManager creates a new CachingImageManager.
@@ -64,24 +53,34 @@ func NewCachingImageManager() *CachingImageManager {
 	return cachingImageManagerAdopt(_id)
 }
 
-// A Boolean value that determines whether the image manager prepares high-quality images.
-//
-// WithAllowsCachingHighQualityImages sets allowsCachingHighQualityImages and returns the receiver so calls can be chained.
+// WithAllowsCachingHighQualityImages a Boolean value that determines whether the image manager prepares high-quality images.
 func (x *CachingImageManager) WithAllowsCachingHighQualityImages(allowsCachingHighQualityImages bool) *CachingImageManager {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCachingHighQualityImages:"), allowsCachingHighQualityImages)
 	return x
 }
 
-// Cancels all image preparation that is currently in progress.
+// StartCachingImagesForAssetsTargetSizeContentModeOptions prepares image representations of the specified assets for later use.
+func (x *CachingImageManager) StartCachingImagesForAssetsTargetSizeContentModeOptions(assets []*Asset, targetSize corefoundation.CGSize, contentMode ImageContentMode, options *ImageRequestOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startCachingImagesForAssets:targetSize:contentMode:options:"), purego.SliceToNSArray(assets, func(_v *Asset) objc.ID { return objref.IDOf(_v) }), targetSize, contentMode, objref.IDOf(options))
+}
+
+// StopCachingImagesForAssetsTargetSizeContentModeOptions cancels image preparation for the specified assets and options.
+func (x *CachingImageManager) StopCachingImagesForAssetsTargetSizeContentModeOptions(assets []*Asset, targetSize corefoundation.CGSize, contentMode ImageContentMode, options *ImageRequestOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopCachingImagesForAssets:targetSize:contentMode:options:"), purego.SliceToNSArray(assets, func(_v *Asset) objc.ID { return objref.IDOf(_v) }), targetSize, contentMode, objref.IDOf(options))
+}
+
+// StopCachingImagesForAllAssets cancels all image preparation that is currently in progress.
 func (x *CachingImageManager) StopCachingImagesForAllAssets() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopCachingImagesForAllAssets"))
 }
 
+// AllowsCachingHighQualityImages wraps the corresponding Objective-C method.
 func (x *CachingImageManager) AllowsCachingHighQualityImages() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCachingHighQualityImages"))
 	return _r
 }
 
+// SetAllowsCachingHighQualityImages wraps the corresponding Objective-C method.
 func (x *CachingImageManager) SetAllowsCachingHighQualityImages(allowsCachingHighQualityImages bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCachingHighQualityImages:"), allowsCachingHighQualityImages)
 }
@@ -90,9 +89,13 @@ func (x *CachingImageManager) SetAllowsCachingHighQualityImages(allowsCachingHig
 type CachingImageManagerable interface {
 	obj.Object
 	WithAllowsCachingHighQualityImages(allowsCachingHighQualityImages bool) *CachingImageManager
+	StartCachingImagesForAssetsTargetSizeContentModeOptions(assets []*Asset, targetSize corefoundation.CGSize, contentMode ImageContentMode, options *ImageRequestOptions)
+	StopCachingImagesForAssetsTargetSizeContentModeOptions(assets []*Asset, targetSize corefoundation.CGSize, contentMode ImageContentMode, options *ImageRequestOptions)
 	StopCachingImagesForAllAssets()
 	AllowsCachingHighQualityImages() bool
 	SetAllowsCachingHighQualityImages(allowsCachingHighQualityImages bool)
 }
 
 var _ CachingImageManagerable = (*CachingImageManager)(nil)
+
+var _ ImageManagerProvider = (*CachingImageManager)(nil)

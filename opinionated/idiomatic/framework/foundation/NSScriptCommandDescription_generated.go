@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A script command that a macOS app supports.
-//
 // ScriptCommandDescription is an idiomatic wrapper over the Objective-C class NSScriptCommandDescription.
+//
+// A script command that a macOS app supports.
 type ScriptCommandDescription struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ScriptCommandDescriptionFromID(id objc.ID) *ScriptCommandDescription {
 	if id == 0 {
 		return nil
 	}
-	x := &ScriptCommandDescription{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScriptCommandDescription{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func scriptCommandDescriptionAdopt(id objc.ID) *ScriptCommandDescription {
 	if id == 0 {
 		return nil
 	}
-	x := &ScriptCommandDescription{Handle: objref.Wrap(id)}
+	x := &ScriptCommandDescription{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,9 +60,13 @@ func (x *ScriptCommandDescription) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes and returns a newly allocated instance of NSScriptCommandDescription.
-//
-// NewScriptCommandDescriptionWithSuiteNameCommandNameDictionary creates a new ScriptCommandDescription.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScriptCommandDescription) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewScriptCommandDescriptionWithSuiteNameCommandNameDictionary initializes and returns a newly allocated instance of NSScriptCommandDescription.
 func NewScriptCommandDescriptionWithSuiteNameCommandNameDictionary(suiteName string, commandName string, commandDeclaration obj.Object) *ScriptCommandDescription {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScriptCommandDescription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSuiteName:commandName:dictionary:"), purego.NSString(suiteName), purego.NSString(commandName), objref.IDOf(commandDeclaration))
@@ -74,13 +80,13 @@ func NewScriptCommandDescriptionWithCoder(inCoder *Coder) *ScriptCommandDescript
 	return scriptCommandDescriptionAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *ScriptCommandDescription) WithScriptingProperties(scriptingProperties obj.Object) *ScriptCommandDescription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Returns the type of the command argument identified by the specified key.
+// TypeForArgumentWithName returns the type of the command argument identified by the specified key.
 func (x *ScriptCommandDescription) TypeForArgumentWithName(argumentName string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typeForArgumentWithName:"), purego.NSString(argumentName))
 	if _r == 0 {
@@ -89,24 +95,25 @@ func (x *ScriptCommandDescription) TypeForArgumentWithName(argumentName string) 
 	return purego.GoString(_r)
 }
 
-// Returns the Apple event code for the specified command argument of the receiver.
+// AppleEventCodeForArgumentWithName returns the Apple event code for the specified command argument of the receiver.
 func (x *ScriptCommandDescription) AppleEventCodeForArgumentWithName(argumentName string) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("appleEventCodeForArgumentWithName:"), purego.NSString(argumentName))
 	return _r
 }
 
-// Returns a Boolean value that indicates whether the command argument identified by the specified argument key is an optional argument.
+// IsOptionalArgumentWithName returns a Boolean value that indicates whether the command argument identified by the specified argument key is an optional argument.
 func (x *ScriptCommandDescription) IsOptionalArgumentWithName(argumentName string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOptionalArgumentWithName:"), purego.NSString(argumentName))
 	return _r
 }
 
-// Creates and returns an instance of the command object described by the receiver.
+// CreateCommandInstance creates and returns an instance of the command object described by the receiver.
 func (x *ScriptCommandDescription) CreateCommandInstance() *ScriptCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createCommandInstance"))
 	return ScriptCommandFromID(_r)
 }
 
+// SuiteName wraps the corresponding Objective-C method.
 func (x *ScriptCommandDescription) SuiteName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suiteName"))
 	if _r == 0 {
@@ -115,6 +122,7 @@ func (x *ScriptCommandDescription) SuiteName() string {
 	return purego.GoString(_r)
 }
 
+// CommandName wraps the corresponding Objective-C method.
 func (x *ScriptCommandDescription) CommandName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commandName"))
 	if _r == 0 {
@@ -123,16 +131,19 @@ func (x *ScriptCommandDescription) CommandName() string {
 	return purego.GoString(_r)
 }
 
+// AppleEventClassCode wraps the corresponding Objective-C method.
 func (x *ScriptCommandDescription) AppleEventClassCode() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("appleEventClassCode"))
 	return _r
 }
 
+// AppleEventCode wraps the corresponding Objective-C method.
 func (x *ScriptCommandDescription) AppleEventCode() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("appleEventCode"))
 	return _r
 }
 
+// CommandClassName wraps the corresponding Objective-C method.
 func (x *ScriptCommandDescription) CommandClassName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commandClassName"))
 	if _r == 0 {
@@ -141,6 +152,7 @@ func (x *ScriptCommandDescription) CommandClassName() string {
 	return purego.GoString(_r)
 }
 
+// ReturnType wraps the corresponding Objective-C method.
 func (x *ScriptCommandDescription) ReturnType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("returnType"))
 	if _r == 0 {
@@ -149,11 +161,14 @@ func (x *ScriptCommandDescription) ReturnType() string {
 	return purego.GoString(_r)
 }
 
+// AppleEventCodeForReturnType wraps the corresponding Objective-C method.
 func (x *ScriptCommandDescription) AppleEventCodeForReturnType() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("appleEventCodeForReturnType"))
 	return _r
 }
 
+// ArgumentNames wraps the corresponding Objective-C method.
+//
 // ArgumentNames returns the collection as a Go slice.
 func (x *ScriptCommandDescription) ArgumentNames() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("argumentNames"))

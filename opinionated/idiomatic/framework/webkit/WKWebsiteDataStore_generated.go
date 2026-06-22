@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages cookies, disk and memory caches, and other types of data for a web view.
-//
 // WKWebsiteDataStore is an idiomatic wrapper over the Objective-C class WKWebsiteDataStore.
+//
+// An object that manages cookies, disk and memory caches, and other types of data for a web view.
 type WKWebsiteDataStore struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKWebsiteDataStoreFromID(id objc.ID) *WKWebsiteDataStore {
 	if id == 0 {
 		return nil
 	}
-	x := &WKWebsiteDataStore{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKWebsiteDataStore{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKWebsiteDataStoreAdopt(id objc.ID) *WKWebsiteDataStore {
 	if id == 0 {
 		return nil
 	}
-	x := &WKWebsiteDataStore{Handle: objref.Wrap(id)}
+	x := &WKWebsiteDataStore{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,58 +60,67 @@ func (x *WKWebsiteDataStore) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKWebsiteDataStore) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKWebsiteDataStore creates a new WKWebsiteDataStore.
 func NewWKWebsiteDataStore() *WKWebsiteDataStore {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKWebsiteDataStore")), objc.RegisterName("new"))
 	return wKWebsiteDataStoreAdopt(_id)
 }
 
-// WithProxyConfigurations sets the collection and returns the receiver so calls can be chained.
+// WithProxyConfigurations sets the property and returns the receiver so calls can be chained.
 func (x *WKWebsiteDataStore) WithProxyConfigurations(items ...obj.Object) *WKWebsiteDataStore {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProxyConfigurations:"), _arr)
 	return x
 }
 
-// Fetches the specified types of records from the data store.
+// FetchDataRecordsOfTypesCompletionHandler fetches the specified types of records from the data store.
 func (x *WKWebsiteDataStore) FetchDataRecordsOfTypesCompletionHandler(dataTypes obj.Object, completionHandler func(obj.Object) int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchDataRecordsOfTypes:completionHandler:"), objref.IDOf(dataTypes), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
 }
 
-// Removes the specified types of website data from one or more data records.
+// RemoveDataOfTypesForDataRecordsCompletionHandler removes the specified types of website data from one or more data records.
 func (x *WKWebsiteDataStore) RemoveDataOfTypesForDataRecordsCompletionHandler(dataTypes obj.Object, dataRecords []*WKWebsiteDataRecord, completionHandler func() int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeDataOfTypes:forDataRecords:completionHandler:"), objref.IDOf(dataTypes), purego.SliceToNSArray(dataRecords, func(_v *WKWebsiteDataRecord) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
 }
 
-// Removes website data that changed after the specified date.
+// RemoveDataOfTypesModifiedSinceCompletionHandler removes website data that changed after the specified date.
 func (x *WKWebsiteDataStore) RemoveDataOfTypesModifiedSinceCompletionHandler(dataTypes obj.Object, date obj.Object, completionHandler func() int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeDataOfTypes:modifiedSince:completionHandler:"), objref.IDOf(dataTypes), objref.IDOf(date), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
 }
 
-// Whether the data store is persistent or not.
+// IsPersistent whether the data store is persistent or not.
 func (x *WKWebsiteDataStore) IsPersistent() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPersistent"))
 	return _r
 }
 
-// Returns the cookie store representing HTTP cookies in this website data store.
+// HttpCookieStore returns the cookie store representing HTTP cookies in this website data store.
 func (x *WKWebsiteDataStore) HttpCookieStore() *WKHTTPCookieStore {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("httpCookieStore"))
 	return WKHTTPCookieStoreFromID(_r)
 }
 
-// Get identifier for a data store. Returns nil for default and non-persistent data store .
+// Identifier get identifier for a data store. Returns nil for default and non-persistent data store .
 func (x *WKWebsiteDataStore) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
+// ProxyConfigurations wraps the corresponding Objective-C method.
+//
 // ProxyConfigurations returns the collection as a Go slice.
 func (x *WKWebsiteDataStore) ProxyConfigurations() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("proxyConfigurations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetProxyConfigurations wraps the corresponding Objective-C method.
 func (x *WKWebsiteDataStore) SetProxyConfigurations(proxyConfigurations []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProxyConfigurations:"), purego.SliceToNSArray(proxyConfigurations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }

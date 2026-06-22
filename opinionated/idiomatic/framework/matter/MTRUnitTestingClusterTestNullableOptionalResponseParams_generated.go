@@ -15,6 +15,8 @@ import (
 )
 
 // MTRUnitTestingClusterTestNullableOptionalResponseParams is an idiomatic wrapper over the Objective-C class MTRUnitTestingClusterTestNullableOptionalResponseParams.
+//
+// MTRUnitTestingClusterTestNullableOptionalResponseParams is an abstract base — you do not construct it directly. Construct one of [MTRTestClusterClusterTestNullableOptionalResponseParams] and pass it where a MTRUnitTestingClusterTestNullableOptionalResponseParams is accepted.
 type MTRUnitTestingClusterTestNullableOptionalResponseParams struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func MTRUnitTestingClusterTestNullableOptionalResponseParamsFromID(id objc.ID) *
 	if id == 0 {
 		return nil
 	}
-	x := &MTRUnitTestingClusterTestNullableOptionalResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRUnitTestingClusterTestNullableOptionalResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func mTRUnitTestingClusterTestNullableOptionalResponseParamsAdopt(id objc.ID) *M
 	if id == 0 {
 		return nil
 	}
-	x := &MTRUnitTestingClusterTestNullableOptionalResponseParams{Handle: objref.Wrap(id)}
+	x := &MTRUnitTestingClusterTestNullableOptionalResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,14 @@ func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) IsKind(classNa
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRUnitTestingClusterTestNullableOptionalResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTRUnitTestingClusterTestNullableOptionalResponseParamsWithResponseValueError creates a new MTRUnitTestingClusterTestNullableOptionalResponseParams.
-func NewMTRUnitTestingClusterTestNullableOptionalResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRUnitTestingClusterTestNullableOptionalResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRUnitTestingClusterTestNullableOptionalResponseParamsWithResponseValueError initialize an MTRUnitTestingClusterTestNullableOptionalResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRUnitTestingClusterTestNullableOptionalResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRUnitTestingClusterTestNullableOptionalResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRUnitTestingClusterTestNullableOptionalResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,80 +79,87 @@ func NewMTRUnitTestingClusterTestNullableOptionalResponseParamsWithResponseValue
 	return mTRUnitTestingClusterTestNullableOptionalResponseParamsAdopt(_id), nil
 }
 
-// WithWasPresent sets wasPresent and returns the receiver so calls can be chained.
+// WithWasPresent sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) WithWasPresent(wasPresent obj.Object) *MTRUnitTestingClusterTestNullableOptionalResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWasPresent:"), objref.IDOf(wasPresent))
 	return x
 }
 
-// WithWasNull sets wasNull and returns the receiver so calls can be chained.
+// WithWasNull sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) WithWasNull(wasNull obj.Object) *MTRUnitTestingClusterTestNullableOptionalResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWasNull:"), objref.IDOf(wasNull))
 	return x
 }
 
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) WithValue(value obj.Object) *MTRUnitTestingClusterTestNullableOptionalResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return x
 }
 
-// WithOriginalValue sets originalValue and returns the receiver so calls can be chained.
+// WithOriginalValue sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) WithOriginalValue(originalValue obj.Object) *MTRUnitTestingClusterTestNullableOptionalResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOriginalValue:"), objref.IDOf(originalValue))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestNullableOptionalResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
+// WasPresent wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) WasPresent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wasPresent"))
 	return obj.Wrap(_r)
 }
 
+// SetWasPresent wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) SetWasPresent(wasPresent obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWasPresent:"), objref.IDOf(wasPresent))
 }
 
+// WasNull wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) WasNull() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wasNull"))
 	return obj.Wrap(_r)
 }
 
+// SetWasNull wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) SetWasNull(wasNull obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWasNull:"), objref.IDOf(wasNull))
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) SetValue(value obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 }
 
+// OriginalValue wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) OriginalValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalValue"))
 	return obj.Wrap(_r)
 }
 
+// SetOriginalValue wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) SetOriginalValue(originalValue obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOriginalValue:"), objref.IDOf(originalValue))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
@@ -170,3 +185,11 @@ type MTRUnitTestingClusterTestNullableOptionalResponseParamsable interface {
 }
 
 var _ MTRUnitTestingClusterTestNullableOptionalResponseParamsable = (*MTRUnitTestingClusterTestNullableOptionalResponseParams)(nil)
+
+// isMTRUnitTestingClusterTestNullableOptionalResponseParams marks MTRUnitTestingClusterTestNullableOptionalResponseParams — and, by embedding promotion, its
+// subclasses — as a member of the MTRUnitTestingClusterTestNullableOptionalResponseParams hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) isMTRUnitTestingClusterTestNullableOptionalResponseParams() {
+}
+
+var _ MTRUnitTestingClusterTestNullableOptionalResponseParamsProvider = (*MTRUnitTestingClusterTestNullableOptionalResponseParams)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that parses BER-encoded data and produces DER-encoded data for TLV records.
-//
 // BERTLVRecord is an idiomatic wrapper over the Objective-C class TKBERTLVRecord.
+//
+// It embeds [TLVRecord], promoting that type's methods.
+//
+// An object that parses BER-encoded data and produces DER-encoded data for TLV records.
 type BERTLVRecord struct {
-	objref.Handle
+	TLVRecord
 }
 
 // BERTLVRecordFromID adopts an existing Objective-C object as a BERTLVRecord
@@ -25,7 +26,8 @@ func BERTLVRecordFromID(id objc.ID) *BERTLVRecord {
 	if id == 0 {
 		return nil
 	}
-	x := &BERTLVRecord{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BERTLVRecord{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,38 +40,20 @@ func bERTLVRecordAdopt(id objc.ID) *BERTLVRecord {
 	if id == 0 {
 		return nil
 	}
-	x := &BERTLVRecord{Handle: objref.Wrap(id)}
+	x := &BERTLVRecord{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *BERTLVRecord) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BERTLVRecord) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BERTLVRecord) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a BER-TLV record with the specified tag and value.
-//
-// NewBERTLVRecordWithTagValue creates a new BERTLVRecord.
+// NewBERTLVRecordWithTagValue initializes a BER-TLV record with the specified tag and value.
 func NewBERTLVRecordWithTagValue(tag uint64, value obj.Object) *BERTLVRecord {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("TKBERTLVRecord")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTag:value:"), tag, objref.IDOf(value))
 	return bERTLVRecordAdopt(_id)
 }
 
-// Initializes a BER-TLV record with the specified tag and an array of TLV subrecords.
-//
-// NewBERTLVRecordWithTagRecords creates a new BERTLVRecord.
+// NewBERTLVRecordWithTagRecords initializes a BER-TLV record with the specified tag and an array of TLV subrecords.
 func NewBERTLVRecordWithTagRecords(tag uint64, records []*TLVRecord) *BERTLVRecord {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("TKBERTLVRecord")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTag:records:"), tag, purego.SliceToNSArray(records, func(_v *TLVRecord) objc.ID { return objref.IDOf(_v) }))
@@ -82,3 +66,5 @@ type BERTLVRecordable interface {
 }
 
 var _ BERTLVRecordable = (*BERTLVRecord)(nil)
+
+var _ TLVRecordProvider = (*BERTLVRecord)(nil)

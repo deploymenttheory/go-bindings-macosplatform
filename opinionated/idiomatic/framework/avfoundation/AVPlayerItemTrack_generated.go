@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the presentation state of an asset track during playback.
-//
 // PlayerItemTrack is an idiomatic wrapper over the Objective-C class AVPlayerItemTrack.
+//
+// An object that represents the presentation state of an asset track during playback.
 type PlayerItemTrack struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PlayerItemTrackFromID(id objc.ID) *PlayerItemTrack {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemTrack{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlayerItemTrack{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func playerItemTrackAdopt(id objc.ID) *PlayerItemTrack {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemTrack{Handle: objref.Wrap(id)}
+	x := &PlayerItemTrack{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,51 +60,54 @@ func (x *PlayerItemTrack) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerItemTrack) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPlayerItemTrack creates a new PlayerItemTrack.
 func NewPlayerItemTrack() *PlayerItemTrack {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemTrack")), objc.RegisterName("new"))
 	return playerItemTrackAdopt(_id)
 }
 
-// A Boolean value that indicates whether the player item presents the track’s media during playback.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether the player item presents the track’s media during playback.
 func (x *PlayerItemTrack) WithEnabled(enabled bool) *PlayerItemTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A mode that specifies the handling of video frames that contain multiple fields.
-//
-// WithVideoFieldMode sets videoFieldMode and returns the receiver so calls can be chained.
+// WithVideoFieldMode a mode that specifies the handling of video frames that contain multiple fields.
 func (x *PlayerItemTrack) WithVideoFieldMode(videoFieldMode string) *PlayerItemTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoFieldMode:"), purego.NSString(videoFieldMode))
 	return x
 }
 
-// Indicates the AVAssetTrack for which the AVPlayerItemTrack represents presentation state. This property is not observable. Clients must serialize their access to the resulting AVAssetTrack and related objects on the associated AVPlayer's notification queue.  By default, this queue is the main queue.
+// AssetTrack indicates the AVAssetTrack for which the AVPlayerItemTrack represents presentation state. This property is not observable. Clients must serialize their access to the resulting AVAssetTrack and related objects on the associated AVPlayer's notification queue.  By default, this queue is the main queue.
 func (x *PlayerItemTrack) AssetTrack() *AssetTrack {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetTrack"))
 	return AssetTrackFromID(_r)
 }
 
-// Indicates whether the track is enabled for presentation during playback. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+// IsEnabled indicates whether the track is enabled for presentation during playback. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
 func (x *PlayerItemTrack) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r
 }
 
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *PlayerItemTrack) SetEnabled(enabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
-// If the media type of the assetTrack is AVMediaTypeVideo, indicates the current frame rate of the track as it plays, in units of frames per second. If the item is not playing, or if the media type of the track is not video, the value of this property is 0. This property is not observable. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+// CurrentVideoFrameRate if the media type of the assetTrack is AVMediaTypeVideo, indicates the current frame rate of the track as it plays, in units of frames per second. If the item is not playing, or if the media type of the track is not video, the value of this property is 0. This property is not observable. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
 func (x *PlayerItemTrack) CurrentVideoFrameRate() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("currentVideoFrameRate"))
 	return _r
 }
 
-// If the media type of the assetTrack is AVMediaTypeVideo, specifies the handling of video frames that contain multiple fields. A value of nil indicates default processing of video frames. If you want video fields to be deinterlaced, set videoFieldMode to AVPlayerItemTrackVideoFieldModeDeinterlaceFields. You can test whether video being played has multiple fields by examining the underlying AVAssetTrack's format descriptions. See -[AVAssetTrack formatDescriptions] and, for video format descriptions, kCMFormatDescriptionExtension_FieldCount. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+// VideoFieldMode if the media type of the assetTrack is AVMediaTypeVideo, specifies the handling of video frames that contain multiple fields. A value of nil indicates default processing of video frames. If you want video fields to be deinterlaced, set videoFieldMode to AVPlayerItemTrackVideoFieldModeDeinterlaceFields. You can test whether video being played has multiple fields by examining the underlying AVAssetTrack's format descriptions. See -[AVAssetTrack formatDescriptions] and, for video format descriptions, kCMFormatDescriptionExtension_FieldCount. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
 func (x *PlayerItemTrack) VideoFieldMode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoFieldMode"))
 	if _r == 0 {
@@ -111,7 +116,7 @@ func (x *PlayerItemTrack) VideoFieldMode() string {
 	return purego.GoString(_r)
 }
 
-// If the media type of the assetTrack is AVMediaTypeVideo, specifies the handling of video frames that contain multiple fields. A value of nil indicates default processing of video frames. If you want video fields to be deinterlaced, set videoFieldMode to AVPlayerItemTrackVideoFieldModeDeinterlaceFields. You can test whether video being played has multiple fields by examining the underlying AVAssetTrack's format descriptions. See -[AVAssetTrack formatDescriptions] and, for video format descriptions, kCMFormatDescriptionExtension_FieldCount. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+// SetVideoFieldMode if the media type of the assetTrack is AVMediaTypeVideo, specifies the handling of video frames that contain multiple fields. A value of nil indicates default processing of video frames. If you want video fields to be deinterlaced, set videoFieldMode to AVPlayerItemTrackVideoFieldModeDeinterlaceFields. You can test whether video being played has multiple fields by examining the underlying AVAssetTrack's format descriptions. See -[AVAssetTrack formatDescriptions] and, for video format descriptions, kCMFormatDescriptionExtension_FieldCount. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
 func (x *PlayerItemTrack) SetVideoFieldMode(videoFieldMode string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoFieldMode:"), purego.NSString(videoFieldMode))
 }

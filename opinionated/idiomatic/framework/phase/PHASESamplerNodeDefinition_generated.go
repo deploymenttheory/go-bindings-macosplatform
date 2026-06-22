@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A node that plays complete audio data.
-//
 // SamplerNodeDefinition is an idiomatic wrapper over the Objective-C class PHASESamplerNodeDefinition.
+//
+// It embeds [GeneratorNodeDefinition], promoting that type's methods.
+//
+// A node that plays complete audio data.
 type SamplerNodeDefinition struct {
-	objref.Handle
+	GeneratorNodeDefinition
 }
 
 // SamplerNodeDefinitionFromID adopts an existing Objective-C object as a SamplerNodeDefinition
@@ -25,7 +26,8 @@ func SamplerNodeDefinitionFromID(id objc.ID) *SamplerNodeDefinition {
 	if id == 0 {
 		return nil
 	}
-	x := &SamplerNodeDefinition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SamplerNodeDefinition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,93 +40,63 @@ func samplerNodeDefinitionAdopt(id objc.ID) *SamplerNodeDefinition {
 	if id == 0 {
 		return nil
 	}
-	x := &SamplerNodeDefinition{Handle: objref.Wrap(id)}
+	x := &SamplerNodeDefinition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *SamplerNodeDefinition) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SamplerNodeDefinition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SamplerNodeDefinition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a named sampler node with the given sound asset and mixer.
-//
-// NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinitionIdentifier creates a new SamplerNodeDefinition.
+// NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinitionIdentifier creates a named sampler node with the given sound asset and mixer.
 func NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinitionIdentifier(soundAssetIdentifier string, mixerDefinition *MixerDefinition, identifier string) *SamplerNodeDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESamplerNodeDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSoundAssetIdentifier:mixerDefinition:identifier:"), purego.NSString(soundAssetIdentifier), objref.IDOf(mixerDefinition), purego.NSString(identifier))
 	return samplerNodeDefinitionAdopt(_id)
 }
 
-// Creates a sampler node with the given sound asset and mixer.
-//
-// NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinition creates a new SamplerNodeDefinition.
+// NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinition creates a sampler node with the given sound asset and mixer.
 func NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinition(soundAssetIdentifier string, mixerDefinition *MixerDefinition) *SamplerNodeDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESamplerNodeDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSoundAssetIdentifier:mixerDefinition:"), purego.NSString(soundAssetIdentifier), objref.IDOf(mixerDefinition))
 	return samplerNodeDefinitionAdopt(_id)
 }
 
-// The action the engine performs after it temporarily removes the node’s sound from the audio output.
-//
-// WithCullOption sets cullOption and returns the receiver so calls can be chained.
+// WithCullOption the action the engine performs after it temporarily removes the node’s sound from the audio output.
 func (x *SamplerNodeDefinition) WithCullOption(cullOption CullOption) *SamplerNodeDefinition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCullOption:"), cullOption)
 	return x
 }
 
-// An option that determines whether the node’s audio plays in a loop.
-//
-// WithPlaybackMode sets playbackMode and returns the receiver so calls can be chained.
+// WithPlaybackMode an option that determines whether the node’s audio plays in a loop.
 func (x *SamplerNodeDefinition) WithPlaybackMode(playbackMode PlaybackMode) *SamplerNodeDefinition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaybackMode:"), playbackMode)
 	return x
 }
 
-// A playback speed for the node’s audio.
-//
-// WithRate sets rate and returns the receiver so calls can be chained.
+// WithRate a playback speed for the node’s audio.
 func (x *SamplerNodeDefinition) WithRate(rate float64) *SamplerNodeDefinition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 	return x
 }
 
-// A group this node conforms to for gain and rate control.
-//
-// WithGroup sets group and returns the receiver so calls can be chained.
+// WithGroup a group this node conforms to for gain and rate control.
 func (x *SamplerNodeDefinition) WithGroup(group *Group) *SamplerNodeDefinition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
-// A meta parameter that dynamically changes the audio’s loudness.
-//
-// WithGainMetaParameterDefinition sets gainMetaParameterDefinition and returns the receiver so calls can be chained.
+// WithGainMetaParameterDefinition a meta parameter that dynamically changes the audio’s loudness.
 func (x *SamplerNodeDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SamplerNodeDefinition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
 	return x
 }
 
-// A meta parameter that dynamically changes the audio’s rate.
-//
-// WithRateMetaParameterDefinition sets rateMetaParameterDefinition and returns the receiver so calls can be chained.
+// WithRateMetaParameterDefinition a meta parameter that dynamically changes the audio’s rate.
 func (x *SamplerNodeDefinition) WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SamplerNodeDefinition {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRateMetaParameterDefinition:"), objref.IDOf(rateMetaParameterDefinition))
 	return x
 }
 
-// The identifier that uniquely represents the registered sound asset this sampler will play.
+// AssetIdentifier the identifier that uniquely represents the registered sound asset this sampler will play.
 func (x *SamplerNodeDefinition) AssetIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetIdentifier"))
 	if _r == 0 {
@@ -133,22 +105,24 @@ func (x *SamplerNodeDefinition) AssetIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// The cull option for the sampler. The default value is PHASECullOptionTerminate.
+// CullOption the cull option for the sampler. The default value is PHASECullOptionTerminate.
 func (x *SamplerNodeDefinition) CullOption() CullOption {
 	_r := objc.Send[CullOption](objref.IDOf(x), objc.RegisterName("cullOption"))
 	return _r
 }
 
+// SetCullOption wraps the corresponding Objective-C method.
 func (x *SamplerNodeDefinition) SetCullOption(cullOption CullOption) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCullOption:"), cullOption)
 }
 
-// The playback mode for the sampler. If the playback mode is set to PHASEPlaybackModeOneShot, you need to make sure the the audio data in the registered sound asset associated with this sampler begins and ends at zero crossings. Otherwise, you'll hear a click when beginning playback and / or ending playback. If the playback mode is set to PHASEPlaybackModeLooping, you need to make sure the audio data in the registered sound asset associated with this sampler loops smoothly from the end sample to the start sample. Please verify this during authoring. Failing to do so will result in audible clicks at loop boundaries. The default value is PHASEPlaybackModeOneShot.
+// PlaybackMode the playback mode for the sampler. If the playback mode is set to PHASEPlaybackModeOneShot, you need to make sure the the audio data in the registered sound asset associated with this sampler begins and ends at zero crossings. Otherwise, you'll hear a click when beginning playback and / or ending playback. If the playback mode is set to PHASEPlaybackModeLooping, you need to make sure the audio data in the registered sound asset associated with this sampler loops smoothly from the end sample to the start sample. Please verify this during authoring. Failing to do so will result in audible clicks at loop boundaries. The default value is PHASEPlaybackModeOneShot.
 func (x *SamplerNodeDefinition) PlaybackMode() PlaybackMode {
 	_r := objc.Send[PlaybackMode](objref.IDOf(x), objc.RegisterName("playbackMode"))
 	return _r
 }
 
+// SetPlaybackMode wraps the corresponding Objective-C method.
 func (x *SamplerNodeDefinition) SetPlaybackMode(playbackMode PlaybackMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaybackMode:"), playbackMode)
 }
@@ -170,3 +144,9 @@ type SamplerNodeDefinitionable interface {
 }
 
 var _ SamplerNodeDefinitionable = (*SamplerNodeDefinition)(nil)
+
+var _ GeneratorNodeDefinitionProvider = (*SamplerNodeDefinition)(nil)
+
+var _ SoundEventNodeDefinitionProvider = (*SamplerNodeDefinition)(nil)
+
+var _ DefinitionProvider = (*SamplerNodeDefinition)(nil)

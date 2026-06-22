@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for concentration of mass.
-//
 // UnitConcentrationMass is an idiomatic wrapper over the Objective-C class NSUnitConcentrationMass.
+//
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for concentration of mass.
 type UnitConcentrationMass struct {
-	objref.Handle
+	Dimension
 }
 
 // UnitConcentrationMassFromID adopts an existing Objective-C object as a UnitConcentrationMass
@@ -25,7 +26,8 @@ func UnitConcentrationMassFromID(id objc.ID) *UnitConcentrationMass {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitConcentrationMass{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UnitConcentrationMass{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func unitConcentrationMassAdopt(id objc.ID) *UnitConcentrationMass {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitConcentrationMass{Handle: objref.Wrap(id)}
+	x := &UnitConcentrationMass{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UnitConcentrationMass) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UnitConcentrationMass) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UnitConcentrationMass) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUnitConcentrationMass creates a new UnitConcentrationMass.
@@ -64,7 +52,7 @@ func NewUnitConcentrationMass() *UnitConcentrationMass {
 	return unitConcentrationMassAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UnitConcentrationMass) WithScriptingProperties(scriptingProperties obj.Object) *UnitConcentrationMass {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
@@ -77,3 +65,7 @@ type UnitConcentrationMassable interface {
 }
 
 var _ UnitConcentrationMassable = (*UnitConcentrationMass)(nil)
+
+var _ DimensionProvider = (*UnitConcentrationMass)(nil)
+
+var _ UnitProvider = (*UnitConcentrationMass)(nil)

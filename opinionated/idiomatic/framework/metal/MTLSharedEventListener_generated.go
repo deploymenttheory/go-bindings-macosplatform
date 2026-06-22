@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A listener for shareable event notifications.
-//
 // SharedEventListener is an idiomatic wrapper over the Objective-C class MTLSharedEventListener.
+//
+// A listener for shareable event notifications.
 type SharedEventListener struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SharedEventListenerFromID(id objc.ID) *SharedEventListener {
 	if id == 0 {
 		return nil
 	}
-	x := &SharedEventListener{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SharedEventListener{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func sharedEventListenerAdopt(id objc.ID) *SharedEventListener {
 	if id == 0 {
 		return nil
 	}
-	x := &SharedEventListener{Handle: objref.Wrap(id)}
+	x := &SharedEventListener{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +60,26 @@ func (x *SharedEventListener) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SharedEventListener) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSharedEventListener creates a new SharedEventListener.
 func NewSharedEventListener() *SharedEventListener {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLSharedEventListener")), objc.RegisterName("new"))
 	return sharedEventListenerAdopt(_id)
 }
 
-// Creates a new shareable event listener with a specific dispatch queue.
-//
-// NewSharedEventListenerWithDispatchQueue creates a new SharedEventListener.
+// NewSharedEventListenerWithDispatchQueue creates a new shareable event listener with a specific dispatch queue.
 func NewSharedEventListenerWithDispatchQueue(dispatchQueue obj.Object) *SharedEventListener {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTLSharedEventListener")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDispatchQueue:"), objref.IDOf(dispatchQueue))
 	return sharedEventListenerAdopt(_id)
 }
 
+// DispatchQueue wraps the corresponding Objective-C method.
 func (x *SharedEventListener) DispatchQueue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dispatchQueue"))
 	return obj.Wrap(_r)

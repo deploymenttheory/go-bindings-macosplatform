@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An array of sample buffer attachments for a resource state pass.
-//
 // ResourceStatePassSampleBufferAttachmentDescriptorArray is an idiomatic wrapper over the Objective-C class MTLResourceStatePassSampleBufferAttachmentDescriptorArray.
+//
+// An array of sample buffer attachments for a resource state pass.
 type ResourceStatePassSampleBufferAttachmentDescriptorArray struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ResourceStatePassSampleBufferAttachmentDescriptorArrayFromID(id objc.ID) *R
 	if id == 0 {
 		return nil
 	}
-	x := &ResourceStatePassSampleBufferAttachmentDescriptorArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ResourceStatePassSampleBufferAttachmentDescriptorArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func resourceStatePassSampleBufferAttachmentDescriptorArrayAdopt(id objc.ID) *Re
 	if id == 0 {
 		return nil
 	}
-	x := &ResourceStatePassSampleBufferAttachmentDescriptorArray{Handle: objref.Wrap(id)}
+	x := &ResourceStatePassSampleBufferAttachmentDescriptorArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) IsKind(classNam
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewResourceStatePassSampleBufferAttachmentDescriptorArray creates a new ResourceStatePassSampleBufferAttachmentDescriptorArray.
 func NewResourceStatePassSampleBufferAttachmentDescriptorArray() *ResourceStatePassSampleBufferAttachmentDescriptorArray {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLResourceStatePassSampleBufferAttachmentDescriptorArray")), objc.RegisterName("new"))
 	return resourceStatePassSampleBufferAttachmentDescriptorArrayAdopt(_id)
 }
 
-// Returns the descriptor object for the specified sample buffer attachment.
+// ObjectAtIndexedSubscript returns the descriptor object for the specified sample buffer attachment.
 func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *ResourceStatePassSampleBufferAttachmentDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return ResourceStatePassSampleBufferAttachmentDescriptorFromID(_r)
 }
 
-// Sets the descriptor object for the specified sample buffer attachment.
+// SetObjectAtIndexedSubscript sets the descriptor object for the specified sample buffer attachment.
 func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *ResourceStatePassSampleBufferAttachmentDescriptor, attachmentIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }

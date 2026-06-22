@@ -25,7 +25,8 @@ func MTRNetworkCommissioningClusterScanNetworksResponseParamsFromID(id objc.ID) 
 	if id == 0 {
 		return nil
 	}
-	x := &MTRNetworkCommissioningClusterScanNetworksResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRNetworkCommissioningClusterScanNetworksResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRNetworkCommissioningClusterScanNetworksResponseParamsAdopt(id objc.ID) *
 	if id == 0 {
 		return nil
 	}
-	x := &MTRNetworkCommissioningClusterScanNetworksResponseParams{Handle: objref.Wrap(id)}
+	x := &MTRNetworkCommissioningClusterScanNetworksResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) IsKind(classN
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRNetworkCommissioningClusterScanNetworksResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTRNetworkCommissioningClusterScanNetworksResponseParamsWithResponseValueError creates a new MTRNetworkCommissioningClusterScanNetworksResponseParams.
-func NewMTRNetworkCommissioningClusterScanNetworksResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRNetworkCommissioningClusterScanNetworksResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRNetworkCommissioningClusterScanNetworksResponseParamsWithResponseValueError initialize an MTRNetworkCommissioningClusterScanNetworksResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRNetworkCommissioningClusterScanNetworksResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRNetworkCommissioningClusterScanNetworksResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRNetworkCommissioningClusterScanNetworksResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,35 +77,36 @@ func NewMTRNetworkCommissioningClusterScanNetworksResponseParamsWithResponseValu
 	return mTRNetworkCommissioningClusterScanNetworksResponseParamsAdopt(_id), nil
 }
 
-// WithNetworkingStatus sets networkingStatus and returns the receiver so calls can be chained.
+// WithNetworkingStatus sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) WithNetworkingStatus(networkingStatus obj.Object) *MTRNetworkCommissioningClusterScanNetworksResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkingStatus:"), objref.IDOf(networkingStatus))
 	return x
 }
 
-// WithDebugText sets debugText and returns the receiver so calls can be chained.
+// WithDebugText sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) WithDebugText(debugText string) *MTRNetworkCommissioningClusterScanNetworksResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDebugText:"), purego.NSString(debugText))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRNetworkCommissioningClusterScanNetworksResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
+// NetworkingStatus wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) NetworkingStatus() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkingStatus"))
 	return obj.Wrap(_r)
 }
 
+// SetNetworkingStatus wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) SetNetworkingStatus(networkingStatus obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkingStatus:"), objref.IDOf(networkingStatus))
 }
 
+// DebugText wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) DebugText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("debugText"))
 	if _r == 0 {
@@ -108,34 +115,40 @@ func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) DebugText() s
 	return purego.GoString(_r)
 }
 
+// SetDebugText wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) SetDebugText(debugText string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDebugText:"), purego.NSString(debugText))
 }
 
+// WiFiScanResults wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) WiFiScanResults() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wiFiScanResults"))
 	return obj.Wrap(_r)
 }
 
+// SetWiFiScanResults wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) SetWiFiScanResults(wiFiScanResults obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWiFiScanResults:"), objref.IDOf(wiFiScanResults))
 }
 
+// ThreadScanResults wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) ThreadScanResults() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("threadScanResults"))
 	return obj.Wrap(_r)
 }
 
+// SetThreadScanResults wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) SetThreadScanResults(threadScanResults obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadScanResults:"), objref.IDOf(threadScanResults))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) TimedInvokeTimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that takes any number of inputs and converts them into a single output.
-//
 // AudioMixerNode is an idiomatic wrapper over the Objective-C class AVAudioMixerNode.
+//
+// It embeds [AudioNode], promoting that type's methods.
+//
+// An object that takes any number of inputs and converts them into a single output.
 type AudioMixerNode struct {
-	objref.Handle
+	AudioNode
 }
 
 // AudioMixerNodeFromID adopts an existing Objective-C object as a AudioMixerNode
@@ -25,7 +26,8 @@ func AudioMixerNodeFromID(id objc.ID) *AudioMixerNode {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioMixerNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioMixerNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func audioMixerNodeAdopt(id objc.ID) *AudioMixerNode {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioMixerNode{Handle: objref.Wrap(id)}
+	x := &AudioMixerNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AudioMixerNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioMixerNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioMixerNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAudioMixerNode creates a new AudioMixerNode.
@@ -64,25 +52,24 @@ func NewAudioMixerNode() *AudioMixerNode {
 	return audioMixerNodeAdopt(_id)
 }
 
-// The mixer’s output volume.
-//
-// WithOutputVolume sets outputVolume and returns the receiver so calls can be chained.
+// WithOutputVolume the mixer’s output volume.
 func (x *AudioMixerNode) WithOutputVolume(outputVolume float32) *AudioMixerNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputVolume:"), outputVolume)
 	return x
 }
 
-// The mixer's output volume. This accesses the mixer's output volume (0.0-1.0, inclusive).
+// OutputVolume the mixer's output volume. This accesses the mixer's output volume (0.0-1.0, inclusive).
 func (x *AudioMixerNode) OutputVolume() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("outputVolume"))
 	return _r
 }
 
+// SetOutputVolume wraps the corresponding Objective-C method.
 func (x *AudioMixerNode) SetOutputVolume(outputVolume float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputVolume:"), outputVolume)
 }
 
-// Find an unused input bus. This will find and return the first input bus to which no other node is connected.
+// NextAvailableInputBus find an unused input bus. This will find and return the first input bus to which no other node is connected.
 func (x *AudioMixerNode) NextAvailableInputBus() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("nextAvailableInputBus"))
 	return _r
@@ -98,3 +85,5 @@ type AudioMixerNodeable interface {
 }
 
 var _ AudioMixerNodeable = (*AudioMixerNode)(nil)
+
+var _ AudioNodeProvider = (*AudioMixerNode)(nil)

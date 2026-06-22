@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A lock that can be associated with specific, user-defined conditions.
-//
 // ConditionLock is an idiomatic wrapper over the Objective-C class NSConditionLock.
+//
+// A lock that can be associated with specific, user-defined conditions.
 type ConditionLock struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ConditionLockFromID(id objc.ID) *ConditionLock {
 	if id == 0 {
 		return nil
 	}
-	x := &ConditionLock{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ConditionLock{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func conditionLockAdopt(id objc.ID) *ConditionLock {
 	if id == 0 {
 		return nil
 	}
-	x := &ConditionLock{Handle: objref.Wrap(id)}
+	x := &ConditionLock{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,68 +60,72 @@ func (x *ConditionLock) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a newly allocated NSConditionLock object and sets its condition.
-//
-// NewConditionLockWithCondition creates a new ConditionLock.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ConditionLock) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewConditionLockWithCondition initializes a newly allocated NSConditionLock object and sets its condition.
 func NewConditionLockWithCondition(condition int) *ConditionLock {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSConditionLock")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCondition:"), condition)
 	return conditionLockAdopt(_id)
 }
 
-// The name associated with the receiver.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the name associated with the receiver.
 func (x *ConditionLock) WithName(name StringProvider) *ConditionLock {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *ConditionLock) WithScriptingProperties(scriptingProperties obj.Object) *ConditionLock {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Attempts to acquire a lock.
+// LockWhenCondition attempts to acquire a lock.
 func (x *ConditionLock) LockWhenCondition(condition int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lockWhenCondition:"), condition)
 }
 
-// Attempts to acquire a lock without regard to the receiver’s condition.
+// TryLock attempts to acquire a lock without regard to the receiver’s condition.
 func (x *ConditionLock) TryLock() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("tryLock"))
 	return _r
 }
 
-// Attempts to acquire a lock if the receiver’s condition is equal to the specified condition.
+// TryLockWhenCondition attempts to acquire a lock if the receiver’s condition is equal to the specified condition.
 func (x *ConditionLock) TryLockWhenCondition(condition int) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("tryLockWhenCondition:"), condition)
 	return _r
 }
 
-// Relinquishes the lock and sets the receiver’s condition.
+// UnlockWithCondition relinquishes the lock and sets the receiver’s condition.
 func (x *ConditionLock) UnlockWithCondition(condition int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unlockWithCondition:"), condition)
 }
 
-// Attempts to acquire a lock before a specified moment in time.
+// LockBeforeDate attempts to acquire a lock before a specified moment in time.
 func (x *ConditionLock) LockBeforeDate(limit *Date) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("lockBeforeDate:"), objref.IDOf(limit))
 	return _r
 }
 
-// Attempts to acquire a lock before a specified moment in time.
+// LockWhenConditionBeforeDate attempts to acquire a lock before a specified moment in time.
 func (x *ConditionLock) LockWhenConditionBeforeDate(condition int, limit *Date) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("lockWhenCondition:beforeDate:"), condition, objref.IDOf(limit))
 	return _r
 }
 
+// Condition wraps the corresponding Objective-C method.
 func (x *ConditionLock) Condition() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("condition"))
 	return _r
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *ConditionLock) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -128,6 +134,7 @@ func (x *ConditionLock) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *ConditionLock) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }

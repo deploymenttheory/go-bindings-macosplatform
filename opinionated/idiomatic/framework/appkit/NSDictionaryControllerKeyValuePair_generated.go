@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of methods implemented by arranged objects to give access to information about those objects.
-//
 // DictionaryControllerKeyValuePair is an idiomatic wrapper over the Objective-C class NSDictionaryControllerKeyValuePair.
+//
+// A set of methods implemented by arranged objects to give access to information about those objects.
 type DictionaryControllerKeyValuePair struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DictionaryControllerKeyValuePairFromID(id objc.ID) *DictionaryControllerKey
 	if id == 0 {
 		return nil
 	}
-	x := &DictionaryControllerKeyValuePair{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DictionaryControllerKeyValuePair{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func dictionaryControllerKeyValuePairAdopt(id objc.ID) *DictionaryControllerKeyV
 	if id == 0 {
 		return nil
 	}
-	x := &DictionaryControllerKeyValuePair{Handle: objref.Wrap(id)}
+	x := &DictionaryControllerKeyValuePair{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,30 +60,37 @@ func (x *DictionaryControllerKeyValuePair) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DictionaryControllerKeyValuePair) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDictionaryControllerKeyValuePair creates a new DictionaryControllerKeyValuePair.
 func NewDictionaryControllerKeyValuePair() *DictionaryControllerKeyValuePair {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSDictionaryControllerKeyValuePair")), objc.RegisterName("new"))
 	return dictionaryControllerKeyValuePairAdopt(_id)
 }
 
-// WithKey sets key and returns the receiver so calls can be chained.
+// WithKey sets the property and returns the receiver so calls can be chained.
 func (x *DictionaryControllerKeyValuePair) WithKey(key string) *DictionaryControllerKeyValuePair {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), purego.NSString(key))
 	return x
 }
 
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue sets the property and returns the receiver so calls can be chained.
 func (x *DictionaryControllerKeyValuePair) WithValue(value obj.Object) *DictionaryControllerKeyValuePair {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return x
 }
 
-// WithLocalizedKey sets localizedKey and returns the receiver so calls can be chained.
+// WithLocalizedKey sets the property and returns the receiver so calls can be chained.
 func (x *DictionaryControllerKeyValuePair) WithLocalizedKey(localizedKey string) *DictionaryControllerKeyValuePair {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedKey:"), purego.NSString(localizedKey))
 	return x
 }
 
+// Key wraps the corresponding Objective-C method.
 func (x *DictionaryControllerKeyValuePair) Key() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("key"))
 	if _r == 0 {
@@ -90,19 +99,23 @@ func (x *DictionaryControllerKeyValuePair) Key() string {
 	return purego.GoString(_r)
 }
 
+// SetKey wraps the corresponding Objective-C method.
 func (x *DictionaryControllerKeyValuePair) SetKey(key string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), purego.NSString(key))
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *DictionaryControllerKeyValuePair) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *DictionaryControllerKeyValuePair) SetValue(value obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 }
 
+// LocalizedKey wraps the corresponding Objective-C method.
 func (x *DictionaryControllerKeyValuePair) LocalizedKey() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedKey"))
 	if _r == 0 {
@@ -111,10 +124,12 @@ func (x *DictionaryControllerKeyValuePair) LocalizedKey() string {
 	return purego.GoString(_r)
 }
 
+// SetLocalizedKey wraps the corresponding Objective-C method.
 func (x *DictionaryControllerKeyValuePair) SetLocalizedKey(localizedKey string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedKey:"), purego.NSString(localizedKey))
 }
 
+// IsExplicitlyIncluded wraps the corresponding Objective-C method.
 func (x *DictionaryControllerKeyValuePair) IsExplicitlyIncluded() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isExplicitlyIncluded"))
 	return _r

@@ -23,7 +23,8 @@ func QuartzFilterFromID(id objc.ID) *QuartzFilter {
 	if id == 0 {
 		return nil
 	}
-	x := &QuartzFilter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QuartzFilter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func quartzFilterAdopt(id objc.ID) *QuartzFilter {
 	if id == 0 {
 		return nil
 	}
-	x := &QuartzFilter{Handle: objref.Wrap(id)}
+	x := &QuartzFilter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,22 +58,31 @@ func (x *QuartzFilter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *QuartzFilter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewQuartzFilter creates a new QuartzFilter.
 func NewQuartzFilter() *QuartzFilter {
 	_id := objc.Send[objc.ID](objc.ID(_class("QuartzFilter")), objc.RegisterName("new"))
 	return quartzFilterAdopt(_id)
 }
 
+// Properties wraps the corresponding Objective-C method.
 func (x *QuartzFilter) Properties() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("properties"))
 	return obj.Wrap(_r)
 }
 
+// Url wraps the corresponding Objective-C method.
 func (x *QuartzFilter) Url() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
+// LocalizedName wraps the corresponding Objective-C method.
 func (x *QuartzFilter) LocalizedName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
 	if _r == 0 {
@@ -80,11 +91,13 @@ func (x *QuartzFilter) LocalizedName() string {
 	return purego.GoString(_r)
 }
 
+// ApplyToContext wraps the corresponding Objective-C method.
 func (x *QuartzFilter) ApplyToContext(aContext obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("applyToContext:"), objref.IDOf(aContext))
 	return _r
 }
 
+// RemoveFromContext wraps the corresponding Objective-C method.
 func (x *QuartzFilter) RemoveFromContext(aContext obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromContext:"), objref.IDOf(aContext))
 }

@@ -18,6 +18,8 @@ const (
 	ExtensionStreamClockTypeCustom                   ExtensionStreamClockType = 2
 )
 
+// String returns the ExtensionStreamClockType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ExtensionStreamClockType) String() string {
 	switch e {
 	case ExtensionStreamClockTypeHostTime:
@@ -39,6 +41,8 @@ const (
 	ExtensionStreamDirectionSink   ExtensionStreamDirection = 1
 )
 
+// String returns the ExtensionStreamDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ExtensionStreamDirection) String() string {
 	switch e {
 	case ExtensionStreamDirectionSource:
@@ -62,6 +66,8 @@ const (
 	ExtensionStreamDiscontinuityFlagSampleDropped ExtensionStreamDiscontinuityFlags = 64
 )
 
+// String returns the ExtensionStreamDiscontinuityFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ExtensionStreamDiscontinuityFlags) String() string {
 	var parts []string
 	if e&ExtensionStreamDiscontinuityFlagUnknown != 0 {

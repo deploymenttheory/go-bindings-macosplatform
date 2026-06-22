@@ -6,17 +6,20 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A recurrent neural network layer for inference on Metal Performance Shaders images.
-//
 // RNNImageInferenceLayer is an idiomatic wrapper over the Objective-C class MPSRNNImageInferenceLayer.
+//
+// It embeds [CNNKernel], promoting that type's methods.
+//
+// A recurrent neural network layer for inference on Metal Performance Shaders images.
 type RNNImageInferenceLayer struct {
-	objref.Handle
+	CNNKernel
 }
 
 // RNNImageInferenceLayerFromID adopts an existing Objective-C object as a RNNImageInferenceLayer
@@ -25,7 +28,8 @@ func RNNImageInferenceLayerFromID(id objc.ID) *RNNImageInferenceLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &RNNImageInferenceLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RNNImageInferenceLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func rNNImageInferenceLayerAdopt(id objc.ID) *RNNImageInferenceLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &RNNImageInferenceLayer{Handle: objref.Wrap(id)}
+	x := &RNNImageInferenceLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RNNImageInferenceLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RNNImageInferenceLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RNNImageInferenceLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRNNImageInferenceLayer creates a new RNNImageInferenceLayer.
@@ -64,88 +54,90 @@ func NewRNNImageInferenceLayer() *RNNImageInferenceLayer {
 	return rNNImageInferenceLayerAdopt(_id)
 }
 
-// How output states from
-//
-// WithRecurrentOutputIsTemporary sets recurrentOutputIsTemporary and returns the receiver so calls can be chained.
+// WithRecurrentOutputIsTemporary how output states from
 func (x *RNNImageInferenceLayer) WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNImageInferenceLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrentOutputIsTemporary:"), recurrentOutputIsTemporary)
 	return x
 }
 
-// If YES then calls to
-//
-// WithStoreAllIntermediateStates sets storeAllIntermediateStates and returns the receiver so calls can be chained.
+// WithStoreAllIntermediateStates if YES then calls to
 func (x *RNNImageInferenceLayer) WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNImageInferenceLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAllIntermediateStates:"), storeAllIntermediateStates)
 	return x
 }
 
-// The number of channels in the destination image to skip before writing output data.
-//
-// WithDestinationFeatureChannelOffset sets destinationFeatureChannelOffset and returns the receiver so calls can be chained.
+// WithOffset the position of the destination image’s clip rectangle origin, relative to the source image.
+func (x *RNNImageInferenceLayer) WithOffset(offset mpscore.MPSOffset) *RNNImageInferenceLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
+func (x *RNNImageInferenceLayer) WithClipRect(clipRect metal.MTLRegion) *RNNImageInferenceLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset the number of channels in the destination image to skip before writing output data.
 func (x *RNNImageInferenceLayer) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *RNNImageInferenceLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// The number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-//
-// WithSourceFeatureChannelOffset sets sourceFeatureChannelOffset and returns the receiver so calls can be chained.
+// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
 func (x *RNNImageInferenceLayer) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *RNNImageInferenceLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// The maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithSourceFeatureChannelMaxCount sets sourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 func (x *RNNImageInferenceLayer) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *RNNImageInferenceLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *RNNImageInferenceLayer) WithLabel(label string) *RNNImageInferenceLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The number of feature channels per pixel in the input image.
+// InputFeatureChannels the number of feature channels per pixel in the input image.
 func (x *RNNImageInferenceLayer) InputFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputFeatureChannels"))
 	return _r
 }
 
-// The number of feature channels per pixel in the output image.
+// OutputFeatureChannels the number of feature channels per pixel in the output image.
 func (x *RNNImageInferenceLayer) OutputFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputFeatureChannels"))
 	return _r
 }
 
-// Number of layers in the filter-stack. This will be one when using initWithDevice:rnnDescriptor to initialize this filter and the number of entries in the array 'rnnDescriptors' when initializing this filter with initWithDevice:rnnDescriptors.
+// NumberOfLayers number of layers in the filter-stack. This will be one when using initWithDevice:rnnDescriptor to initialize this filter and the number of entries in the array 'rnnDescriptors' when initializing this filter with initWithDevice:rnnDescriptors.
 func (x *RNNImageInferenceLayer) NumberOfLayers() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfLayers"))
 	return _r
 }
 
-// How output states from
+// RecurrentOutputIsTemporary how output states from
 func (x *RNNImageInferenceLayer) RecurrentOutputIsTemporary() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("recurrentOutputIsTemporary"))
 	return _r
 }
 
+// SetRecurrentOutputIsTemporary wraps the corresponding Objective-C method.
 func (x *RNNImageInferenceLayer) SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrentOutputIsTemporary:"), recurrentOutputIsTemporary)
 }
 
-// If YES then calls to
+// StoreAllIntermediateStates if YES then calls to
 func (x *RNNImageInferenceLayer) StoreAllIntermediateStates() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("storeAllIntermediateStates"))
 	return _r
 }
 
+// SetStoreAllIntermediateStates wraps the corresponding Objective-C method.
 func (x *RNNImageInferenceLayer) SetStoreAllIntermediateStates(storeAllIntermediateStates bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAllIntermediateStates:"), storeAllIntermediateStates)
 }
@@ -155,6 +147,8 @@ type RNNImageInferenceLayerable interface {
 	obj.Object
 	WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNImageInferenceLayer
 	WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNImageInferenceLayer
+	WithOffset(offset mpscore.MPSOffset) *RNNImageInferenceLayer
+	WithClipRect(clipRect metal.MTLRegion) *RNNImageInferenceLayer
 	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *RNNImageInferenceLayer
 	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *RNNImageInferenceLayer
 	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *RNNImageInferenceLayer
@@ -169,3 +163,7 @@ type RNNImageInferenceLayerable interface {
 }
 
 var _ RNNImageInferenceLayerable = (*RNNImageInferenceLayer)(nil)
+
+var _ CNNKernelProvider = (*RNNImageInferenceLayer)(nil)
+
+var _ KernelProvider = (*RNNImageInferenceLayer)(nil)

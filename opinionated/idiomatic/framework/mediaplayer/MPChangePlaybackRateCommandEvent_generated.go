@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event requesting a change in the playback rate.
-//
 // ChangePlaybackRateCommandEvent is an idiomatic wrapper over the Objective-C class MPChangePlaybackRateCommandEvent.
+//
+// It embeds [RemoteCommandEvent], promoting that type's methods.
+//
+// An event requesting a change in the playback rate.
 type ChangePlaybackRateCommandEvent struct {
-	objref.Handle
+	RemoteCommandEvent
 }
 
 // ChangePlaybackRateCommandEventFromID adopts an existing Objective-C object as a ChangePlaybackRateCommandEvent
@@ -25,7 +26,8 @@ func ChangePlaybackRateCommandEventFromID(id objc.ID) *ChangePlaybackRateCommand
 	if id == 0 {
 		return nil
 	}
-	x := &ChangePlaybackRateCommandEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ChangePlaybackRateCommandEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func changePlaybackRateCommandEventAdopt(id objc.ID) *ChangePlaybackRateCommandE
 	if id == 0 {
 		return nil
 	}
-	x := &ChangePlaybackRateCommandEvent{Handle: objref.Wrap(id)}
+	x := &ChangePlaybackRateCommandEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ChangePlaybackRateCommandEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ChangePlaybackRateCommandEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ChangePlaybackRateCommandEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewChangePlaybackRateCommandEvent creates a new ChangePlaybackRateCommandEvent.
@@ -64,6 +52,7 @@ func NewChangePlaybackRateCommandEvent() *ChangePlaybackRateCommandEvent {
 	return changePlaybackRateCommandEventAdopt(_id)
 }
 
+// PlaybackRate wraps the corresponding Objective-C method.
 func (x *ChangePlaybackRateCommandEvent) PlaybackRate() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("playbackRate"))
 	return _r
@@ -76,3 +65,5 @@ type ChangePlaybackRateCommandEventable interface {
 }
 
 var _ ChangePlaybackRateCommandEventable = (*ChangePlaybackRateCommandEvent)(nil)
+
+var _ RemoteCommandEventProvider = (*ChangePlaybackRateCommandEvent)(nil)

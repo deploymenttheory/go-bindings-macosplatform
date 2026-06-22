@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A device that generates data for HealthKit.
-//
 // Device is an idiomatic wrapper over the Objective-C class HKDevice.
+//
+// A device that generates data for HealthKit.
 type Device struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DeviceFromID(id objc.ID) *Device {
 	if id == 0 {
 		return nil
 	}
-	x := &Device{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Device{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func deviceAdopt(id objc.ID) *Device {
 	if id == 0 {
 		return nil
 	}
-	x := &Device{Handle: objref.Wrap(id)}
+	x := &Device{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,16 +60,20 @@ func (x *Device) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a new device object.
-//
-// NewDeviceWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVersionLocalIdentifierUDIDeviceIdentifier creates a new Device.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Device) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDeviceWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVersionLocalIdentifierUDIDeviceIdentifier initializes a new device object.
 func NewDeviceWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVersionLocalIdentifierUDIDeviceIdentifier(name string, manufacturer string, model string, hardwareVersion string, firmwareVersion string, softwareVersion string, localIdentifier string, uDIDeviceIdentifier string) *Device {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKDevice")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:manufacturer:model:hardwareVersion:firmwareVersion:softwareVersion:localIdentifier:UDIDeviceIdentifier:"), purego.NSString(name), purego.NSString(manufacturer), purego.NSString(model), purego.NSString(hardwareVersion), purego.NSString(firmwareVersion), purego.NSString(softwareVersion), purego.NSString(localIdentifier), purego.NSString(uDIDeviceIdentifier))
 	return deviceAdopt(_id)
 }
 
-// The name of the receiver. The user-facing name, such as the one displayed in the Bluetooth Settings for a BLE device.
+// Name the name of the receiver. The user-facing name, such as the one displayed in the Bluetooth Settings for a BLE device.
 func (x *Device) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -76,7 +82,7 @@ func (x *Device) Name() string {
 	return purego.GoString(_r)
 }
 
-// The manufacturer of the receiver.
+// Manufacturer the manufacturer of the receiver.
 func (x *Device) Manufacturer() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manufacturer"))
 	if _r == 0 {
@@ -85,7 +91,7 @@ func (x *Device) Manufacturer() string {
 	return purego.GoString(_r)
 }
 
-// The model of the receiver.
+// Model the model of the receiver.
 func (x *Device) Model() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("model"))
 	if _r == 0 {
@@ -94,7 +100,7 @@ func (x *Device) Model() string {
 	return purego.GoString(_r)
 }
 
-// The hardware revision of the receiver.
+// HardwareVersion the hardware revision of the receiver.
 func (x *Device) HardwareVersion() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hardwareVersion"))
 	if _r == 0 {
@@ -103,7 +109,7 @@ func (x *Device) HardwareVersion() string {
 	return purego.GoString(_r)
 }
 
-// The firmware revision of the receiver.
+// FirmwareVersion the firmware revision of the receiver.
 func (x *Device) FirmwareVersion() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firmwareVersion"))
 	if _r == 0 {
@@ -112,7 +118,7 @@ func (x *Device) FirmwareVersion() string {
 	return purego.GoString(_r)
 }
 
-// The software revision of the receiver.
+// SoftwareVersion the software revision of the receiver.
 func (x *Device) SoftwareVersion() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("softwareVersion"))
 	if _r == 0 {
@@ -121,7 +127,7 @@ func (x *Device) SoftwareVersion() string {
 	return purego.GoString(_r)
 }
 
-// A unique identifier for the receiver. This property is available to clients for a local identifier. For example, Bluetooth peripherals managed by HealthKit use this for the CoreBluetooth UUID which is valid only on the local device and thus distinguish the same Bluetooth peripheral used between multiple devices.
+// LocalIdentifier a unique identifier for the receiver. This property is available to clients for a local identifier. For example, Bluetooth peripherals managed by HealthKit use this for the CoreBluetooth UUID which is valid only on the local device and thus distinguish the same Bluetooth peripheral used between multiple devices.
 func (x *Device) LocalIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localIdentifier"))
 	if _r == 0 {
@@ -130,7 +136,7 @@ func (x *Device) LocalIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Represents the device identifier portion of a device's FDA UDI (Unique Device Identifier). The device identifier can be used to reference the FDA's GUDID (Globally Unique Device Identifier Database). Note that for user privacy concerns this field should not be used to persist the production identifier portion of the device UDI. HealthKit clients should manage the production identifier independently, if needed. See http://www.fda.gov/MedicalDevices/DeviceRegulationandGuidance/UniqueDeviceIdentification/ for more information.
+// UDIDeviceIdentifier represents the device identifier portion of a device's FDA UDI (Unique Device Identifier). The device identifier can be used to reference the FDA's GUDID (Globally Unique Device Identifier Database). Note that for user privacy concerns this field should not be used to persist the production identifier portion of the device UDI. HealthKit clients should manage the production identifier independently, if needed. See http://www.fda.gov/MedicalDevices/DeviceRegulationandGuidance/UniqueDeviceIdentification/ for more information.
 func (x *Device) UDIDeviceIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UDIDeviceIdentifier"))
 	if _r == 0 {

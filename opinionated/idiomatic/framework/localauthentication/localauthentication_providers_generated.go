@@ -11,9 +11,11 @@ import (
 // EnvironmentMechanismProvider is accepted wherever a LAEnvironmentMechanism (or one of its subclasses) is expected.
 type EnvironmentMechanismProvider interface {
 	objref.Object
+	isEnvironmentMechanism()
 }
 
 // RightProvider is accepted wherever a LARight (or one of its subclasses) is expected.
 type RightProvider interface {
 	objref.Object
+	isRight()
 }

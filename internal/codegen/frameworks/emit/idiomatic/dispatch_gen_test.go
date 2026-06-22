@@ -27,8 +27,8 @@ func TestClassifyGoType(t *testing.T) {
 		{"foundation.Object", kindObject},
 		{"ComparisonResult", kindEnum},
 		{"foundation.ComparisonResult", kindEnum},
-		{"VirtualMachine", kindObject},   // bare wrapper name via isObject
-		{"UnknownThing", kindScalar},     // unknown bare name -> scalar fallback
+		{"VirtualMachine", kindObject}, // bare wrapper name via isObject
+		{"UnknownThing", kindScalar},   // unknown bare name -> scalar fallback
 	}
 	for _, c := range cases {
 		if got := classifyGoType(c.typ, isEnum, isObject); got != c.want {

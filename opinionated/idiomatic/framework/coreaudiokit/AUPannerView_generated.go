@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view that provides a specialized user interface for a Cocoa-based panner audio unit.
-//
 // AUPannerView is an idiomatic wrapper over the Objective-C class AUPannerView.
+//
+// A view that provides a specialized user interface for a Cocoa-based panner audio unit.
 type AUPannerView struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AUPannerViewFromID(id objc.ID) *AUPannerView {
 	if id == 0 {
 		return nil
 	}
-	x := &AUPannerView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AUPannerView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func aUPannerViewAdopt(id objc.ID) *AUPannerView {
 	if id == 0 {
 		return nil
 	}
-	x := &AUPannerView{Handle: objref.Wrap(id)}
+	x := &AUPannerView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *AUPannerView) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *AUPannerView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AUPannerView) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewAUPannerView creates a new AUPannerView.

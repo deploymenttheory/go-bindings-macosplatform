@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides information about a sent batch of database changes.
-//
 // SyncEngineSentDatabaseChangesEvent is an idiomatic wrapper over the Objective-C class CKSyncEngineSentDatabaseChangesEvent.
+//
+// It embeds [SyncEngineEvent], promoting that type's methods.
+//
+// An object that provides information about a sent batch of database changes.
 type SyncEngineSentDatabaseChangesEvent struct {
-	objref.Handle
+	SyncEngineEvent
 }
 
 // SyncEngineSentDatabaseChangesEventFromID adopts an existing Objective-C object as a SyncEngineSentDatabaseChangesEvent
@@ -25,7 +26,8 @@ func SyncEngineSentDatabaseChangesEventFromID(id objc.ID) *SyncEngineSentDatabas
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineSentDatabaseChangesEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SyncEngineSentDatabaseChangesEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func syncEngineSentDatabaseChangesEventAdopt(id objc.ID) *SyncEngineSentDatabase
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineSentDatabaseChangesEvent{Handle: objref.Wrap(id)}
+	x := &SyncEngineSentDatabaseChangesEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SyncEngineSentDatabaseChangesEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SyncEngineSentDatabaseChangesEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SyncEngineSentDatabaseChangesEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSyncEngineSentDatabaseChangesEvent creates a new SyncEngineSentDatabaseChangesEvent.
@@ -64,7 +52,7 @@ func NewSyncEngineSentDatabaseChangesEvent() *SyncEngineSentDatabaseChangesEvent
 	return syncEngineSentDatabaseChangesEventAdopt(_id)
 }
 
-// The modified record zones.
+// SavedZones the modified record zones.
 //
 // SavedZones returns the collection as a Go slice.
 func (x *SyncEngineSentDatabaseChangesEvent) SavedZones() []*RecordZone {
@@ -72,7 +60,7 @@ func (x *SyncEngineSentDatabaseChangesEvent) SavedZones() []*RecordZone {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZone { return RecordZoneFromID(_id) })
 }
 
-// The record zones that CloudKit is unable to modify.
+// FailedZoneSaves the record zones that CloudKit is unable to modify.
 //
 // FailedZoneSaves returns the collection as a Go slice.
 func (x *SyncEngineSentDatabaseChangesEvent) FailedZoneSaves() []*SyncEngineFailedZoneSave {
@@ -80,7 +68,7 @@ func (x *SyncEngineSentDatabaseChangesEvent) FailedZoneSaves() []*SyncEngineFail
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SyncEngineFailedZoneSave { return SyncEngineFailedZoneSaveFromID(_id) })
 }
 
-// The unique identifiers of the deleted record zones.
+// DeletedZoneIDs the unique identifiers of the deleted record zones.
 //
 // DeletedZoneIDs returns the collection as a Go slice.
 func (x *SyncEngineSentDatabaseChangesEvent) DeletedZoneIDs() []*RecordZoneID {
@@ -88,7 +76,7 @@ func (x *SyncEngineSentDatabaseChangesEvent) DeletedZoneIDs() []*RecordZoneID {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZoneID { return RecordZoneIDFromID(_id) })
 }
 
-// The unique identifiers of the record zones CloudKit is unable to delete, and the reasons why.
+// FailedZoneDeletes the unique identifiers of the record zones CloudKit is unable to delete, and the reasons why.
 func (x *SyncEngineSentDatabaseChangesEvent) FailedZoneDeletes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("failedZoneDeletes"))
 	return obj.Wrap(_r)
@@ -104,3 +92,5 @@ type SyncEngineSentDatabaseChangesEventable interface {
 }
 
 var _ SyncEngineSentDatabaseChangesEventable = (*SyncEngineSentDatabaseChangesEvent)(nil)
+
+var _ SyncEngineEventProvider = (*SyncEngineSentDatabaseChangesEvent)(nil)

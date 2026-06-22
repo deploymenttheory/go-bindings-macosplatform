@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A utility class that simplifies loading OpenGL or OpenGL ES texture datas from a variety of image file formats.
-//
 // TextureLoader is an idiomatic wrapper over the Objective-C class GLKTextureLoader.
+//
+// A utility class that simplifies loading OpenGL or OpenGL ES texture datas from a variety of image file formats.
 type TextureLoader struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TextureLoaderFromID(id objc.ID) *TextureLoader {
 	if id == 0 {
 		return nil
 	}
-	x := &TextureLoader{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextureLoader{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func textureLoaderAdopt(id objc.ID) *TextureLoader {
 	if id == 0 {
 		return nil
 	}
-	x := &TextureLoader{Handle: objref.Wrap(id)}
+	x := &TextureLoader{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,9 +60,13 @@ func (x *TextureLoader) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a new texture loader object.
-//
-// NewTextureLoaderWithShareContext creates a new TextureLoader.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextureLoader) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTextureLoaderWithShareContext initializes a new texture loader object.
 func NewTextureLoaderWithShareContext(context_ obj.Object) *TextureLoader {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GLKTextureLoader")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShareContext:"), objref.IDOf(context_))

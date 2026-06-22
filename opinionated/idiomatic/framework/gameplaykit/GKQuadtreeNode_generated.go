@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A helper class for managing the objects you organize in a quadtree.
-//
 // QuadtreeNode is an idiomatic wrapper over the Objective-C class GKQuadtreeNode.
+//
+// A helper class for managing the objects you organize in a quadtree.
 type QuadtreeNode struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func QuadtreeNodeFromID(id objc.ID) *QuadtreeNode {
 	if id == 0 {
 		return nil
 	}
-	x := &QuadtreeNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QuadtreeNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func quadtreeNodeAdopt(id objc.ID) *QuadtreeNode {
 	if id == 0 {
 		return nil
 	}
-	x := &QuadtreeNode{Handle: objref.Wrap(id)}
+	x := &QuadtreeNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *QuadtreeNode) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *QuadtreeNode) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *QuadtreeNode) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewQuadtreeNode creates a new QuadtreeNode.

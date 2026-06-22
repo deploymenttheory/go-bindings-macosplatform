@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration that customizes the behavior for a new command buffer.
-//
 // CommandBufferDescriptor is an idiomatic wrapper over the Objective-C class MTLCommandBufferDescriptor.
+//
+// A configuration that customizes the behavior for a new command buffer.
 type CommandBufferDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CommandBufferDescriptorFromID(id objc.ID) *CommandBufferDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &CommandBufferDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CommandBufferDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func commandBufferDescriptorAdopt(id objc.ID) *CommandBufferDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &CommandBufferDescriptor{Handle: objref.Wrap(id)}
+	x := &CommandBufferDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,44 +60,48 @@ func (x *CommandBufferDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CommandBufferDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCommandBufferDescriptor creates a new CommandBufferDescriptor.
 func NewCommandBufferDescriptor() *CommandBufferDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLCommandBufferDescriptor")), objc.RegisterName("new"))
 	return commandBufferDescriptorAdopt(_id)
 }
 
-// A Boolean value that indicates whether the command buffer the descriptor creates maintains strong references to the resources it uses.
-//
-// WithRetainedReferences sets retainedReferences and returns the receiver so calls can be chained.
+// WithRetainedReferences a Boolean value that indicates whether the command buffer the descriptor creates maintains strong references to the resources it uses.
 func (x *CommandBufferDescriptor) WithRetainedReferences(retainedReferences bool) *CommandBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRetainedReferences:"), retainedReferences)
 	return x
 }
 
-// The reporting configuration that indicates which information the GPU driver stores in a command buffer’s error property.
-//
-// WithErrorOptions sets errorOptions and returns the receiver so calls can be chained.
+// WithErrorOptions the reporting configuration that indicates which information the GPU driver stores in a command buffer’s error property.
 func (x *CommandBufferDescriptor) WithErrorOptions(errorOptions CommandBufferErrorOption) *CommandBufferDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorOptions:"), errorOptions)
 	return x
 }
 
-// If YES, the created command buffer holds strong references to objects needed for it to execute. If NO, the created command buffer does not hold strong references to objects needed for it to execute.
+// RetainedReferences if YES, the created command buffer holds strong references to objects needed for it to execute. If NO, the created command buffer does not hold strong references to objects needed for it to execute.
 func (x *CommandBufferDescriptor) RetainedReferences() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("retainedReferences"))
 	return _r
 }
 
+// SetRetainedReferences wraps the corresponding Objective-C method.
 func (x *CommandBufferDescriptor) SetRetainedReferences(retainedReferences bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRetainedReferences:"), retainedReferences)
 }
 
-// A set of options to influence the error reporting of the created command buffer. See MTLCommandBufferErrorOption.
+// ErrorOptions a set of options to influence the error reporting of the created command buffer. See MTLCommandBufferErrorOption.
 func (x *CommandBufferDescriptor) ErrorOptions() CommandBufferErrorOption {
 	_r := objc.Send[CommandBufferErrorOption](objref.IDOf(x), objc.RegisterName("errorOptions"))
 	return _r
 }
 
+// SetErrorOptions wraps the corresponding Objective-C method.
 func (x *CommandBufferDescriptor) SetErrorOptions(errorOptions CommandBufferErrorOption) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorOptions:"), errorOptions)
 }

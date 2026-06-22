@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Represents the state and its associated properties of the directory
-//
 // SyncedDirectoryState is an idiomatic wrapper over the Objective-C class GSSyncedDirectoryState.
+//
+// Represents the state and its associated properties of the directory
 type SyncedDirectoryState struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SyncedDirectoryStateFromID(id objc.ID) *SyncedDirectoryState {
 	if id == 0 {
 		return nil
 	}
-	x := &SyncedDirectoryState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SyncedDirectoryState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func syncedDirectoryStateAdopt(id objc.ID) *SyncedDirectoryState {
 	if id == 0 {
 		return nil
 	}
-	x := &SyncedDirectoryState{Handle: objref.Wrap(id)}
+	x := &SyncedDirectoryState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *SyncedDirectoryState) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncedDirectoryState) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSyncedDirectoryState creates a new SyncedDirectoryState.
 func NewSyncedDirectoryState() *SyncedDirectoryState {
 	_id := objc.Send[objc.ID](objc.ID(_class("GSSyncedDirectoryState")), objc.RegisterName("new"))
 	return syncedDirectoryStateAdopt(_id)
 }
 
-// Specifies the current state of the directory
+// State specifies the current state of the directory
 func (x *SyncedDirectoryState) State() SyncState {
 	_r := objc.Send[SyncState](objref.IDOf(x), objc.RegisterName("state"))
 	return _r
 }
 
-// The URL of a directory to read and write game-save data in. This property's value is `nil` unless the state is `GSSyncStateReady`, `GSSyncStateOffline`, or `GSSyncStateLocal`.
+// Url the URL of a directory to read and write game-save data in. This property's value is `nil` unless the state is `GSSyncStateReady`, `GSSyncStateOffline`, or `GSSyncStateLocal`.
 func (x *SyncedDirectoryState) Url() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
-// The conflicting versions. If you're implementing your own conflict resolution, read all of the conflicting versions, and modify one of them to incorporate the state and changes from the others. Then call “GSSyncedDirectory/resolveConflictsWithVersion:“, passing that version. This property's value is `nil` unless the state is `GSSyncStateConflicted`.
+// ConflictedVersions the conflicting versions. If you're implementing your own conflict resolution, read all of the conflicting versions, and modify one of them to incorporate the state and changes from the others. Then call “GSSyncedDirectory/resolveConflictsWithVersion:“, passing that version. This property's value is `nil` unless the state is `GSSyncStateConflicted`.
 //
 // ConflictedVersions returns the collection as a Go slice.
 func (x *SyncedDirectoryState) ConflictedVersions() []*SyncedDirectoryVersion {

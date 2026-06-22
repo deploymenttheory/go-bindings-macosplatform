@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The anticipated compute devices to use for executing a layer or operation.
-//
 // ComputePlanDeviceUsage is an idiomatic wrapper over the Objective-C class MLComputePlanDeviceUsage.
+//
+// The anticipated compute devices to use for executing a layer or operation.
 type ComputePlanDeviceUsage struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ComputePlanDeviceUsageFromID(id objc.ID) *ComputePlanDeviceUsage {
 	if id == 0 {
 		return nil
 	}
-	x := &ComputePlanDeviceUsage{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ComputePlanDeviceUsage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func computePlanDeviceUsageAdopt(id objc.ID) *ComputePlanDeviceUsage {
 	if id == 0 {
 		return nil
 	}
-	x := &ComputePlanDeviceUsage{Handle: objref.Wrap(id)}
+	x := &ComputePlanDeviceUsage{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *ComputePlanDeviceUsage) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ComputePlanDeviceUsage) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewComputePlanDeviceUsage creates a new ComputePlanDeviceUsage.
 func NewComputePlanDeviceUsage() *ComputePlanDeviceUsage {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLComputePlanDeviceUsage")), objc.RegisterName("new"))
 	return computePlanDeviceUsageAdopt(_id)
 }
 
-// The compute devices that can execute the layer/operation.
+// SupportedComputeDevices the compute devices that can execute the layer/operation.
 func (x *ComputePlanDeviceUsage) SupportedComputeDevices() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedComputeDevices"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

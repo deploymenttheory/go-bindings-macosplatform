@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A utility object for initiating map-based searches and processing the results.
-//
 // LocalSearch is an idiomatic wrapper over the Objective-C class MKLocalSearch.
+//
+// A utility object for initiating map-based searches and processing the results.
 type LocalSearch struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LocalSearchFromID(id objc.ID) *LocalSearch {
 	if id == 0 {
 		return nil
 	}
-	x := &LocalSearch{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LocalSearch{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func localSearchAdopt(id objc.ID) *LocalSearch {
 	if id == 0 {
 		return nil
 	}
-	x := &LocalSearch{Handle: objref.Wrap(id)}
+	x := &LocalSearch{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,29 +60,32 @@ func (x *LocalSearch) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates and returns a search object with the specified parameters.
-//
-// NewLocalSearchWithRequest creates a new LocalSearch.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LocalSearch) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLocalSearchWithRequest creates and returns a search object with the specified parameters.
 func NewLocalSearchWithRequest(request *LocalSearchRequest) *LocalSearch {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKLocalSearch")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequest:"), objref.IDOf(request))
 	return localSearchAdopt(_id)
 }
 
-// Creates and returns a search object for fetching points of interest.
-//
-// NewLocalSearchWithPointsOfInterestRequest creates a new LocalSearch.
+// NewLocalSearchWithPointsOfInterestRequest creates and returns a search object for fetching points of interest.
 func NewLocalSearchWithPointsOfInterestRequest(request *LocalPointsOfInterestRequest) *LocalSearch {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKLocalSearch")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPointsOfInterestRequest:"), objref.IDOf(request))
 	return localSearchAdopt(_id)
 }
 
-// Cancels an in-progress search operation.
+// Cancel cancels an in-progress search operation.
 func (x *LocalSearch) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
+// IsSearching wraps the corresponding Objective-C method.
 func (x *LocalSearch) IsSearching() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSearching"))
 	return _r

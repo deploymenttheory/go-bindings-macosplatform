@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The shared object that registers you to receive metrics, creates logs for custom metrics, and gives access to past reports.
-//
 // MetricManager is an idiomatic wrapper over the Objective-C class MXMetricManager.
+//
+// The shared object that registers you to receive metrics, creates logs for custom metrics, and gives access to past reports.
 type MetricManager struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MetricManagerFromID(id objc.ID) *MetricManager {
 	if id == 0 {
 		return nil
 	}
-	x := &MetricManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetricManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func metricManagerAdopt(id objc.ID) *MetricManager {
 	if id == 0 {
 		return nil
 	}
-	x := &MetricManager{Handle: objref.Wrap(id)}
+	x := &MetricManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *MetricManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetricManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMetricManager creates a new MetricManager.
 func NewMetricManager() *MetricManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("MXMetricManager")), objc.RegisterName("new"))
 	return metricManagerAdopt(_id)
 }
 
-// A list of past metric payloads received.
+// PastPayloads a list of past metric payloads received.
 //
 // PastPayloads returns the collection as a Go slice.
 func (x *MetricManager) PastPayloads() []*MetricPayload {
@@ -72,7 +80,7 @@ func (x *MetricManager) PastPayloads() []*MetricPayload {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetricPayload { return MetricPayloadFromID(_id) })
 }
 
-// A list of past diagnostic payloads received.
+// PastDiagnosticPayloads a list of past diagnostic payloads received.
 //
 // PastDiagnosticPayloads returns the collection as a Go slice.
 func (x *MetricManager) PastDiagnosticPayloads() []*DiagnosticPayload {

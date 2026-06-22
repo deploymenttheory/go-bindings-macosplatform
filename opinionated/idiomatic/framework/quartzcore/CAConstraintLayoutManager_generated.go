@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides a constraint-based layout manager.
-//
 // ConstraintLayoutManager is an idiomatic wrapper over the Objective-C class CAConstraintLayoutManager.
+//
+// An object that provides a constraint-based layout manager.
 type ConstraintLayoutManager struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ConstraintLayoutManagerFromID(id objc.ID) *ConstraintLayoutManager {
 	if id == 0 {
 		return nil
 	}
-	x := &ConstraintLayoutManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ConstraintLayoutManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func constraintLayoutManagerAdopt(id objc.ID) *ConstraintLayoutManager {
 	if id == 0 {
 		return nil
 	}
-	x := &ConstraintLayoutManager{Handle: objref.Wrap(id)}
+	x := &ConstraintLayoutManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *ConstraintLayoutManager) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *ConstraintLayoutManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ConstraintLayoutManager) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewConstraintLayoutManager creates a new ConstraintLayoutManager.

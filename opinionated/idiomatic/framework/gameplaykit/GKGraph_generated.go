@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of nodes that describes the navigability of a game world and provides pathfinding methods to search for routes through that space.
-//
 // Graph is an idiomatic wrapper over the Objective-C class GKGraph.
+//
+// Graph is an abstract base — you do not construct it directly. Construct one of [GridGraph], [MeshGraph], [ObstacleGraph] and pass it where a Graph is accepted.
+//
+// A collection of nodes that describes the navigability of a game world and provides pathfinding methods to search for routes through that space.
 type Graph struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func GraphFromID(id objc.ID) *Graph {
 	if id == 0 {
 		return nil
 	}
-	x := &Graph{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Graph{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func graphAdopt(id objc.ID) *Graph {
 	if id == 0 {
 		return nil
 	}
-	x := &Graph{Handle: objref.Wrap(id)}
+	x := &Graph{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,37 +62,41 @@ func (x *Graph) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a graph with the specified list of nodes.
-//
-// NewGraphWithNodes creates a new Graph.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Graph) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewGraphWithNodes initializes a graph with the specified list of nodes.
 func NewGraphWithNodes(nodes []*GraphNode) *Graph {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKGraph")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNodes:"), purego.SliceToNSArray(nodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }))
 	return graphAdopt(_id)
 }
 
-// Adds a node to the graph, connecting it to the node already in the graph for which the connection has the lowest cost.
+// ConnectNodeToLowestCostNodeBidirectional adds a node to the graph, connecting it to the node already in the graph for which the connection has the lowest cost.
 func (x *Graph) ConnectNodeToLowestCostNodeBidirectional(node *GraphNode, bidirectional bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectNodeToLowestCostNode:bidirectional:"), objref.IDOf(node), bidirectional)
 }
 
-// Removes the specified nodes from the graph.
+// RemoveNodes removes the specified nodes from the graph.
 func (x *Graph) RemoveNodes(nodes []*GraphNode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeNodes:"), purego.SliceToNSArray(nodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Adds the specified nodes to the graph.
+// AddNodes adds the specified nodes to the graph.
 func (x *Graph) AddNodes(nodes []*GraphNode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addNodes:"), purego.SliceToNSArray(nodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Computes and returns a sequence of nodes that represents the shortest traversal of the graph between the specified nodes.
+// FindPathFromNodeToNode computes and returns a sequence of nodes that represents the shortest traversal of the graph between the specified nodes.
 func (x *Graph) FindPathFromNodeToNode(startNode *GraphNode, endNode *GraphNode) []*GraphNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("findPathFromNode:toNode:"), objref.IDOf(startNode), objref.IDOf(endNode))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphNode { return GraphNodeFromID(_id) })
 }
 
-// The list of nodes in this graph
+// Nodes the list of nodes in this graph
 //
 // Nodes returns the collection as a Go slice.
 func (x *Graph) Nodes() []*GraphNode {
@@ -107,3 +115,10 @@ type Graphable interface {
 }
 
 var _ Graphable = (*Graph)(nil)
+
+// isGraph marks Graph — and, by embedding promotion, its
+// subclasses — as a member of the Graph hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Graph) isGraph() {}
+
+var _ GraphProvider = (*Graph)(nil)

@@ -13,9 +13,11 @@ import (
 	"unsafe"
 )
 
-// This class describes a media entity, which can be a media item, such as an audio track.
-//
 // LibMediaEntity is an idiomatic wrapper over the Objective-C class ITLibMediaEntity.
+//
+// LibMediaEntity is an abstract base — you do not construct it directly. Construct one of [LibMediaItem], [LibPlaylist] and pass it where a LibMediaEntity is accepted.
+//
+// This class describes a media entity, which can be a media item, such as an audio track.
 type LibMediaEntity struct {
 	objref.Handle
 }
@@ -26,7 +28,8 @@ func LibMediaEntityFromID(id objc.ID) *LibMediaEntity {
 	if id == 0 {
 		return nil
 	}
-	x := &LibMediaEntity{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LibMediaEntity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +42,8 @@ func libMediaEntityAdopt(id objc.ID) *LibMediaEntity {
 	if id == 0 {
 		return nil
 	}
-	x := &LibMediaEntity{Handle: objref.Wrap(id)}
+	x := &LibMediaEntity{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,33 +63,33 @@ func (x *LibMediaEntity) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewLibMediaEntity creates a new LibMediaEntity.
-func NewLibMediaEntity() *LibMediaEntity {
-	_id := objc.Send[objc.ID](objc.ID(_class("ITLibMediaEntity")), objc.RegisterName("new"))
-	return libMediaEntityAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LibMediaEntity) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Gets the value for a specified media property key.
+// ValueForProperty gets the value for a specified media property key.
 func (x *LibMediaEntity) ValueForProperty(property string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForProperty:"), purego.NSString(property))
 	return obj.Wrap(_r)
 }
 
-// Executes a provided block with the fetched values for the item properties.
+// EnumerateValuesForPropertiesUsing executes a provided block with the fetched values for the item properties.
 func (x *LibMediaEntity) EnumerateValuesForPropertiesUsing(properties obj.Object, block func(obj.Object, obj.Object, *bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateValuesForProperties:usingBlock:"), objref.IDOf(properties), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
 		block(obj.Wrap(_b0), obj.Wrap(_b1), (*bool)(_b2))
 	}))
 }
 
-// Executes a provided block with the fetched values for all properties in the entity except for the provided set.
+// EnumerateValuesExceptForPropertiesUsing executes a provided block with the fetched values for all properties in the entity except for the provided set.
 func (x *LibMediaEntity) EnumerateValuesExceptForPropertiesUsing(properties obj.Object, block func(obj.Object, obj.Object, *bool)) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateValuesExceptForProperties:usingBlock:"), objref.IDOf(properties), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
 		block(obj.Wrap(_b0), obj.Wrap(_b1), (*bool)(_b2))
 	}))
 }
 
-// The unique identifier of this media entity.
+// PersistentID the unique identifier of this media entity.
 func (x *LibMediaEntity) PersistentID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentID"))
 	return obj.Wrap(_r)
@@ -101,3 +105,10 @@ type LibMediaEntityable interface {
 }
 
 var _ LibMediaEntityable = (*LibMediaEntity)(nil)
+
+// isLibMediaEntity marks LibMediaEntity — and, by embedding promotion, its
+// subclasses — as a member of the LibMediaEntity hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *LibMediaEntity) isLibMediaEntity() {}
+
+var _ LibMediaEntityProvider = (*LibMediaEntity)(nil)

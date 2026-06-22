@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that implements the client side of a custom link-layer packet tunneling protocol.
-//
 // NEEthernetTunnelProvider is an idiomatic wrapper over the Objective-C class NEEthernetTunnelProvider.
+//
+// It embeds [NEPacketTunnelProvider], promoting that type's methods.
+//
+// A type that implements the client side of a custom link-layer packet tunneling protocol.
 type NEEthernetTunnelProvider struct {
-	objref.Handle
+	NEPacketTunnelProvider
 }
 
 // NEEthernetTunnelProviderFromID adopts an existing Objective-C object as a NEEthernetTunnelProvider
@@ -25,7 +26,8 @@ func NEEthernetTunnelProviderFromID(id objc.ID) *NEEthernetTunnelProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &NEEthernetTunnelProvider{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEEthernetTunnelProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func nEEthernetTunnelProviderAdopt(id objc.ID) *NEEthernetTunnelProvider {
 	if id == 0 {
 		return nil
 	}
-	x := &NEEthernetTunnelProvider{Handle: objref.Wrap(id)}
+	x := &NEEthernetTunnelProvider{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NEEthernetTunnelProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEEthernetTunnelProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEEthernetTunnelProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNEEthernetTunnelProvider creates a new NEEthernetTunnelProvider.
@@ -64,9 +52,7 @@ func NewNEEthernetTunnelProvider() *NEEthernetTunnelProvider {
 	return nEEthernetTunnelProviderAdopt(_id)
 }
 
-// Indicate to the system that the tunnel is being re-established.
-//
-// WithReasserting sets reasserting and returns the receiver so calls can be chained.
+// WithReasserting indicate to the system that the tunnel is being re-established.
 func (x *NEEthernetTunnelProvider) WithReasserting(reasserting bool) *NEEthernetTunnelProvider {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReasserting:"), reasserting)
 	return x
@@ -79,3 +65,9 @@ type NEEthernetTunnelProviderable interface {
 }
 
 var _ NEEthernetTunnelProviderable = (*NEEthernetTunnelProvider)(nil)
+
+var _ NEPacketTunnelProviderProvider = (*NEEthernetTunnelProvider)(nil)
+
+var _ NETunnelProviderProvider = (*NEEthernetTunnelProvider)(nil)
+
+var _ NEProviderProvider = (*NEEthernetTunnelProvider)(nil)

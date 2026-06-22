@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains a snapshot image.
-//
 // LookAroundSnapshot is an idiomatic wrapper over the Objective-C class MKLookAroundSnapshot.
+//
+// An object that contains a snapshot image.
 type LookAroundSnapshot struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LookAroundSnapshotFromID(id objc.ID) *LookAroundSnapshot {
 	if id == 0 {
 		return nil
 	}
-	x := &LookAroundSnapshot{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LookAroundSnapshot{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func lookAroundSnapshotAdopt(id objc.ID) *LookAroundSnapshot {
 	if id == 0 {
 		return nil
 	}
-	x := &LookAroundSnapshot{Handle: objref.Wrap(id)}
+	x := &LookAroundSnapshot{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *LookAroundSnapshot) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LookAroundSnapshot) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLookAroundSnapshot creates a new LookAroundSnapshot.
 func NewLookAroundSnapshot() *LookAroundSnapshot {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKLookAroundSnapshot")), objc.RegisterName("new"))
 	return lookAroundSnapshotAdopt(_id)
 }
 
+// Image wraps the corresponding Objective-C method.
 func (x *LookAroundSnapshot) Image() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
 	return obj.Wrap(_r)

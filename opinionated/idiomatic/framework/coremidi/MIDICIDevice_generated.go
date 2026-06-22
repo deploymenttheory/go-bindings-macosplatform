@@ -23,7 +23,8 @@ func CIDeviceFromID(id objc.ID) *CIDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &CIDevice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CIDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func cIDeviceAdopt(id objc.ID) *CIDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &CIDevice{Handle: objref.Wrap(id)}
+	x := &CIDevice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,67 +58,73 @@ func (x *CIDevice) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CIDevice) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCIDevice creates a new CIDevice.
 func NewCIDevice() *CIDevice {
 	_id := objc.Send[objc.ID](objc.ID(_class("MIDICIDevice")), objc.RegisterName("new"))
 	return cIDeviceAdopt(_id)
 }
 
-// The basic information describing the CI device.
+// DeviceInfo the basic information describing the CI device.
 func (x *CIDevice) DeviceInfo() *MIDI2DeviceInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceInfo"))
 	return MIDI2DeviceInfoFromID(_r)
 }
 
-// The MIDI unique identifier (MUID) assigned to the CI device.
+// MUID the MIDI unique identifier (MUID) assigned to the CI device.
 func (x *CIDevice) MUID() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("MUID"))
 	return _r
 }
 
-// MIDI-CI Protocol Negotiation capability.
+// SupportsProtocolNegotiation MIDI-CI Protocol Negotiation capability.
 func (x *CIDevice) SupportsProtocolNegotiation() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsProtocolNegotiation"))
 	return _r
 }
 
-// MIDI-CI Profile Configuration capability.
+// SupportsProfileConfiguration MIDI-CI Profile Configuration capability.
 func (x *CIDevice) SupportsProfileConfiguration() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsProfileConfiguration"))
 	return _r
 }
 
-// MIDI-CI Property Exchange capability.
+// SupportsPropertyExchange MIDI-CI Property Exchange capability.
 func (x *CIDevice) SupportsPropertyExchange() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsPropertyExchange"))
 	return _r
 }
 
-// MIDI-CI Process Inquiry capability.
+// SupportsProcessInquiry MIDI-CI Process Inquiry capability.
 func (x *CIDevice) SupportsProcessInquiry() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsProcessInquiry"))
 	return _r
 }
 
-// The maximum receivable MIDI System Exclusive size for this CI device.
+// MaxSysExSize the maximum receivable MIDI System Exclusive size for this CI device.
 func (x *CIDevice) MaxSysExSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxSysExSize"))
 	return _r
 }
 
-// The maximum number of simultaneous Property Exchange requests, if supported.
+// MaxPropertyExchangeRequests the maximum number of simultaneous Property Exchange requests, if supported.
 func (x *CIDevice) MaxPropertyExchangeRequests() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxPropertyExchangeRequests"))
 	return _r
 }
 
-// The type of MIDI-CI device.
+// DeviceType the type of MIDI-CI device.
 func (x *CIDevice) DeviceType() CIDeviceType {
 	_r := objc.Send[CIDeviceType](objref.IDOf(x), objc.RegisterName("deviceType"))
 	return _r
 }
 
-// The MIDI-CI Profiles that are registered to the  Function Block.
+// Profiles the MIDI-CI Profiles that are registered to the  Function Block.
 //
 // Profiles returns the collection as a Go slice.
 func (x *CIDevice) Profiles() []*UMPCIProfile {

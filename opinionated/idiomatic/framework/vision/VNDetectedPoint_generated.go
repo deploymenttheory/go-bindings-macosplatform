@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a normalized point in an image, along with a confidence value.
-//
 // DetectedPoint is an idiomatic wrapper over the Objective-C class VNDetectedPoint.
+//
+// DetectedPoint is an abstract base — you do not construct it directly. Construct one of [RecognizedPoint] and pass it where a DetectedPoint is accepted.
+//
+// An object that represents a normalized point in an image, along with a confidence value.
 type DetectedPoint struct {
-	objref.Handle
+	Point
 }
 
 // DetectedPointFromID adopts an existing Objective-C object as a DetectedPoint
@@ -25,7 +26,8 @@ func DetectedPointFromID(id objc.ID) *DetectedPoint {
 	if id == 0 {
 		return nil
 	}
-	x := &DetectedPoint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DetectedPoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,32 +40,13 @@ func detectedPointAdopt(id objc.ID) *DetectedPoint {
 	if id == 0 {
 		return nil
 	}
-	x := &DetectedPoint{Handle: objref.Wrap(id)}
+	x := &DetectedPoint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *DetectedPoint) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DetectedPoint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DetectedPoint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewDetectedPoint creates a new DetectedPoint.
-func NewDetectedPoint() *DetectedPoint {
-	_id := objc.Send[objc.ID](objc.ID(_class("VNDetectedPoint")), objc.RegisterName("new"))
-	return detectedPointAdopt(_id)
-}
-
+// Confidence wraps the corresponding Objective-C method.
 func (x *DetectedPoint) Confidence() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("confidence"))
 	return _r
@@ -76,3 +59,12 @@ type DetectedPointable interface {
 }
 
 var _ DetectedPointable = (*DetectedPoint)(nil)
+
+// isDetectedPoint marks DetectedPoint — and, by embedding promotion, its
+// subclasses — as a member of the DetectedPoint hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DetectedPoint) isDetectedPoint() {}
+
+var _ DetectedPointProvider = (*DetectedPoint)(nil)
+
+var _ PointProvider = (*DetectedPoint)(nil)

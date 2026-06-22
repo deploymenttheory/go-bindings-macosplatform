@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specification for a metaparameter defined by a number.
-//
 // NumberMetaParameterDefinition is an idiomatic wrapper over the Objective-C class PHASENumberMetaParameterDefinition.
+//
+// NumberMetaParameterDefinition is an abstract base — you do not construct it directly. Construct one of [MappedMetaParameterDefinition] and pass it where a NumberMetaParameterDefinition is accepted.
+//
+// A specification for a metaparameter defined by a number.
 type NumberMetaParameterDefinition struct {
-	objref.Handle
+	MetaParameterDefinition
 }
 
 // NumberMetaParameterDefinitionFromID adopts an existing Objective-C object as a NumberMetaParameterDefinition
@@ -25,7 +26,8 @@ func NumberMetaParameterDefinitionFromID(id objc.ID) *NumberMetaParameterDefinit
 	if id == 0 {
 		return nil
 	}
-	x := &NumberMetaParameterDefinition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NumberMetaParameterDefinition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,69 +40,47 @@ func numberMetaParameterDefinitionAdopt(id objc.ID) *NumberMetaParameterDefiniti
 	if id == 0 {
 		return nil
 	}
-	x := &NumberMetaParameterDefinition{Handle: objref.Wrap(id)}
+	x := &NumberMetaParameterDefinition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NumberMetaParameterDefinition) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NumberMetaParameterDefinition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NumberMetaParameterDefinition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a specification for a named metaparameter with the given numeric value.
-//
-// NewNumberMetaParameterDefinitionWithValueIdentifier creates a new NumberMetaParameterDefinition.
+// NewNumberMetaParameterDefinitionWithValueIdentifier creates a specification for a named metaparameter with the given numeric value.
 func NewNumberMetaParameterDefinitionWithValueIdentifier(value float64, identifier string) *NumberMetaParameterDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASENumberMetaParameterDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:identifier:"), value, purego.NSString(identifier))
 	return numberMetaParameterDefinitionAdopt(_id)
 }
 
-// Creates a specification for a metaparameter with the given numeric value.
-//
-// NewNumberMetaParameterDefinitionWithValue creates a new NumberMetaParameterDefinition.
+// NewNumberMetaParameterDefinitionWithValue creates a specification for a metaparameter with the given numeric value.
 func NewNumberMetaParameterDefinitionWithValue(value float64) *NumberMetaParameterDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASENumberMetaParameterDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:"), value)
 	return numberMetaParameterDefinitionAdopt(_id)
 }
 
-// Creates a specification for a named metaparameter with the given numeric value and range.
-//
-// NewNumberMetaParameterDefinitionWithValueMinimumMaximumIdentifier creates a new NumberMetaParameterDefinition.
+// NewNumberMetaParameterDefinitionWithValueMinimumMaximumIdentifier creates a specification for a named metaparameter with the given numeric value and range.
 func NewNumberMetaParameterDefinitionWithValueMinimumMaximumIdentifier(value float64, minimum float64, maximum float64, identifier string) *NumberMetaParameterDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASENumberMetaParameterDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:minimum:maximum:identifier:"), value, minimum, maximum, purego.NSString(identifier))
 	return numberMetaParameterDefinitionAdopt(_id)
 }
 
-// Creates a specification for a metaparameter with the given numeric value and range.
-//
-// NewNumberMetaParameterDefinitionWithValueMinimumMaximum creates a new NumberMetaParameterDefinition.
+// NewNumberMetaParameterDefinitionWithValueMinimumMaximum creates a specification for a metaparameter with the given numeric value and range.
 func NewNumberMetaParameterDefinitionWithValueMinimumMaximum(value float64, minimum float64, maximum float64) *NumberMetaParameterDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASENumberMetaParameterDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:minimum:maximum:"), value, minimum, maximum)
 	return numberMetaParameterDefinitionAdopt(_id)
 }
 
-// The readonly minimum that this metaparameter definition was initialized with
+// Minimum the readonly minimum that this metaparameter definition was initialized with
 func (x *NumberMetaParameterDefinition) Minimum() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimum"))
 	return _r
 }
 
-// The readonly maximum that this metaparameter definition was initialized with
+// Maximum the readonly maximum that this metaparameter definition was initialized with
 func (x *NumberMetaParameterDefinition) Maximum() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximum"))
 	return _r
@@ -114,3 +94,14 @@ type NumberMetaParameterDefinitionable interface {
 }
 
 var _ NumberMetaParameterDefinitionable = (*NumberMetaParameterDefinition)(nil)
+
+// isNumberMetaParameterDefinition marks NumberMetaParameterDefinition — and, by embedding promotion, its
+// subclasses — as a member of the NumberMetaParameterDefinition hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NumberMetaParameterDefinition) isNumberMetaParameterDefinition() {}
+
+var _ NumberMetaParameterDefinitionProvider = (*NumberMetaParameterDefinition)(nil)
+
+var _ MetaParameterDefinitionProvider = (*NumberMetaParameterDefinition)(nil)
+
+var _ DefinitionProvider = (*NumberMetaParameterDefinition)(nil)

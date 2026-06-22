@@ -6,17 +6,19 @@ package metal
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Description for a machine learning pipeline state.
-//
 // MTL4MachineLearningPipelineDescriptor is an idiomatic wrapper over the Objective-C class MTL4MachineLearningPipelineDescriptor.
+//
+// It embeds [MTL4PipelineDescriptor], promoting that type's methods.
+//
+// Description for a machine learning pipeline state.
 type MTL4MachineLearningPipelineDescriptor struct {
-	objref.Handle
+	MTL4PipelineDescriptor
 }
 
 // MTL4MachineLearningPipelineDescriptorFromID adopts an existing Objective-C object as a MTL4MachineLearningPipelineDescriptor
@@ -25,7 +27,8 @@ func MTL4MachineLearningPipelineDescriptorFromID(id objc.ID) *MTL4MachineLearnin
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4MachineLearningPipelineDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTL4MachineLearningPipelineDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func mTL4MachineLearningPipelineDescriptorAdopt(id objc.ID) *MTL4MachineLearning
 	if id == 0 {
 		return nil
 	}
-	x := &MTL4MachineLearningPipelineDescriptor{Handle: objref.Wrap(id)}
+	x := &MTL4MachineLearningPipelineDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTL4MachineLearningPipelineDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTL4MachineLearningPipelineDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTL4MachineLearningPipelineDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTL4MachineLearningPipelineDescriptor creates a new MTL4MachineLearningPipelineDescriptor.
@@ -64,52 +53,52 @@ func NewMTL4MachineLearningPipelineDescriptor() *MTL4MachineLearningPipelineDesc
 	return mTL4MachineLearningPipelineDescriptorAdopt(_id)
 }
 
-// Assigns the function that the machine learning pipeline you create from this descriptor executes.
-//
-// WithMachineLearningFunctionDescriptor sets machineLearningFunctionDescriptor and returns the receiver so calls can be chained.
+// WithMachineLearningFunctionDescriptor assigns the function that the machine learning pipeline you create from this descriptor executes.
 func (x *MTL4MachineLearningPipelineDescriptor) WithMachineLearningFunctionDescriptor(machineLearningFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4MachineLearningPipelineDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMachineLearningFunctionDescriptor:"), objref.IDOf(machineLearningFunctionDescriptor))
 	return x
 }
 
-// Assigns an optional string that uniquely identifies a pipeline descriptor.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel assigns an optional string that uniquely identifies a pipeline descriptor.
 func (x *MTL4MachineLearningPipelineDescriptor) WithLabel(label string) *MTL4MachineLearningPipelineDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Provides compile-time options when you build the pipeline.
-//
-// WithOptions sets options and returns the receiver so calls can be chained.
+// WithOptions provides compile-time options when you build the pipeline.
 func (x *MTL4MachineLearningPipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4MachineLearningPipelineDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), objref.IDOf(options))
 	return x
 }
 
-// Sets the dimension of an input tensor at a buffer index.
+// SetInputDimensionsAtBufferIndex sets the dimension of an input tensor at a buffer index.
 func (x *MTL4MachineLearningPipelineDescriptor) SetInputDimensionsAtBufferIndex(dimensions *TensorExtents, bufferIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputDimensions:atBufferIndex:"), objref.IDOf(dimensions), bufferIndex)
 }
 
-// Obtains the dimensions of the input tensor at bufferIndex if set, nil otherwise.
+// SetInputDimensionsWithRange sets the dimensions of multiple input tensors on a range of buffer bindings.
+func (x *MTL4MachineLearningPipelineDescriptor) SetInputDimensionsWithRange(dimensions []*TensorExtents, range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputDimensions:withRange:"), purego.SliceToNSArray(dimensions, func(_v *TensorExtents) objc.ID { return objref.IDOf(_v) }), range_)
+}
+
+// InputDimensionsAtBufferIndex obtains the dimensions of the input tensor at bufferIndex if set, nil otherwise.
 func (x *MTL4MachineLearningPipelineDescriptor) InputDimensionsAtBufferIndex(bufferIndex int) *TensorExtents {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputDimensionsAtBufferIndex:"), bufferIndex)
 	return TensorExtentsFromID(_r)
 }
 
-// Resets the descriptor to its default values.
+// Reset resets the descriptor to its default values.
 func (x *MTL4MachineLearningPipelineDescriptor) Reset() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
-// Assigns the function that the machine learning pipeline you create from this descriptor executes.
+// MachineLearningFunctionDescriptor assigns the function that the machine learning pipeline you create from this descriptor executes.
 func (x *MTL4MachineLearningPipelineDescriptor) MachineLearningFunctionDescriptor() *MTL4FunctionDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("machineLearningFunctionDescriptor"))
 	return MTL4FunctionDescriptorFromID(_r)
 }
 
+// SetMachineLearningFunctionDescriptor wraps the corresponding Objective-C method.
 func (x *MTL4MachineLearningPipelineDescriptor) SetMachineLearningFunctionDescriptor(machineLearningFunctionDescriptor *MTL4FunctionDescriptor) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMachineLearningFunctionDescriptor:"), objref.IDOf(machineLearningFunctionDescriptor))
 }
@@ -121,6 +110,7 @@ type MTL4MachineLearningPipelineDescriptorable interface {
 	WithLabel(label string) *MTL4MachineLearningPipelineDescriptor
 	WithOptions(options *MTL4PipelineOptions) *MTL4MachineLearningPipelineDescriptor
 	SetInputDimensionsAtBufferIndex(dimensions *TensorExtents, bufferIndex int)
+	SetInputDimensionsWithRange(dimensions []*TensorExtents, range_ foundation.NSRange)
 	InputDimensionsAtBufferIndex(bufferIndex int) *TensorExtents
 	Reset()
 	MachineLearningFunctionDescriptor() *MTL4FunctionDescriptor
@@ -128,3 +118,5 @@ type MTL4MachineLearningPipelineDescriptorable interface {
 }
 
 var _ MTL4MachineLearningPipelineDescriptorable = (*MTL4MachineLearningPipelineDescriptor)(nil)
+
+var _ MTL4PipelineDescriptorProvider = (*MTL4MachineLearningPipelineDescriptor)(nil)

@@ -13,6 +13,8 @@ import (
 )
 
 // MTRDoorLockClusterCredentialStruct is an idiomatic wrapper over the Objective-C class MTRDoorLockClusterCredentialStruct.
+//
+// MTRDoorLockClusterCredentialStruct is an abstract base — you do not construct it directly. Construct one of [MTRDoorLockClusterDlCredential] and pass it where a MTRDoorLockClusterCredentialStruct is accepted.
 type MTRDoorLockClusterCredentialStruct struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRDoorLockClusterCredentialStructFromID(id objc.ID) *MTRDoorLockClusterCre
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDoorLockClusterCredentialStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDoorLockClusterCredentialStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRDoorLockClusterCredentialStructAdopt(id objc.ID) *MTRDoorLockClusterCred
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDoorLockClusterCredentialStruct{Handle: objref.Wrap(id)}
+	x := &MTRDoorLockClusterCredentialStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,38 +60,42 @@ func (x *MTRDoorLockClusterCredentialStruct) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRDoorLockClusterCredentialStruct creates a new MTRDoorLockClusterCredentialStruct.
-func NewMTRDoorLockClusterCredentialStruct() *MTRDoorLockClusterCredentialStruct {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRDoorLockClusterCredentialStruct")), objc.RegisterName("new"))
-	return mTRDoorLockClusterCredentialStructAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDoorLockClusterCredentialStruct) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithCredentialType sets credentialType and returns the receiver so calls can be chained.
+// WithCredentialType sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterCredentialStruct) WithCredentialType(credentialType obj.Object) *MTRDoorLockClusterCredentialStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentialType:"), objref.IDOf(credentialType))
 	return x
 }
 
-// WithCredentialIndex sets credentialIndex and returns the receiver so calls can be chained.
+// WithCredentialIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterCredentialStruct) WithCredentialIndex(credentialIndex obj.Object) *MTRDoorLockClusterCredentialStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentialIndex:"), objref.IDOf(credentialIndex))
 	return x
 }
 
+// CredentialType wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterCredentialStruct) CredentialType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentialType"))
 	return obj.Wrap(_r)
 }
 
+// SetCredentialType wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterCredentialStruct) SetCredentialType(credentialType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentialType:"), objref.IDOf(credentialType))
 }
 
+// CredentialIndex wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterCredentialStruct) CredentialIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentialIndex"))
 	return obj.Wrap(_r)
 }
 
+// SetCredentialIndex wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterCredentialStruct) SetCredentialIndex(credentialIndex obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentialIndex:"), objref.IDOf(credentialIndex))
 }
@@ -104,3 +112,10 @@ type MTRDoorLockClusterCredentialStructable interface {
 }
 
 var _ MTRDoorLockClusterCredentialStructable = (*MTRDoorLockClusterCredentialStruct)(nil)
+
+// isMTRDoorLockClusterCredentialStruct marks MTRDoorLockClusterCredentialStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRDoorLockClusterCredentialStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRDoorLockClusterCredentialStruct) isMTRDoorLockClusterCredentialStruct() {}
+
+var _ MTRDoorLockClusterCredentialStructProvider = (*MTRDoorLockClusterCredentialStruct)(nil)

@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstraction of a compiled Core ML model asset.
-//
 // ModelAsset is an idiomatic wrapper over the Objective-C class MLModelAsset.
+//
+// An abstraction of a compiled Core ML model asset.
 type ModelAsset struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func ModelAssetFromID(id objc.ID) *ModelAsset {
 	if id == 0 {
 		return nil
 	}
-	x := &ModelAsset{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ModelAsset{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func modelAssetAdopt(id objc.ID) *ModelAsset {
 	if id == 0 {
 		return nil
 	}
-	x := &ModelAsset{Handle: objref.Wrap(id)}
+	x := &ModelAsset{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,22 @@ func (x *ModelAsset) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ModelAsset) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewModelAsset creates a new ModelAsset.
 func NewModelAsset() *ModelAsset {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLModelAsset")), objc.RegisterName("new"))
 	return modelAssetAdopt(_id)
 }
 
-// The default model descripton.
+// ModelDescription the default model descripton.
 //
 // ModelDescription blocks until the operation completes or ctx is cancelled.
-func (x *ModelAsset) ModelDescription(ctx context.Context) (*ModelDescription, error) {
+func (x *ModelAsset) ModelDescription(ctx context.Context) (result *ModelDescription, err error) {
 	type _result struct {
 		val *ModelDescription
 		err error
@@ -91,10 +99,10 @@ func (x *ModelAsset) ModelDescription(ctx context.Context) (*ModelDescription, e
 	}
 }
 
-// The model descripton for a specified function.
+// ModelDescriptionOfFunctionNamed the model descripton for a specified function.
 //
 // ModelDescriptionOfFunctionNamed blocks until the operation completes or ctx is cancelled.
-func (x *ModelAsset) ModelDescriptionOfFunctionNamed(ctx context.Context, functionName string) (*ModelDescription, error) {
+func (x *ModelAsset) ModelDescriptionOfFunctionNamed(ctx context.Context, functionName string) (result *ModelDescription, err error) {
 	type _result struct {
 		val *ModelDescription
 		err error
@@ -116,10 +124,10 @@ func (x *ModelAsset) ModelDescriptionOfFunctionNamed(ctx context.Context, functi
 	}
 }
 
-// The list of function names in the model asset.
+// FunctionNames the list of function names in the model asset.
 //
 // FunctionNames blocks until the operation completes or ctx is cancelled.
-func (x *ModelAsset) FunctionNames(ctx context.Context) (obj.Object, error) {
+func (x *ModelAsset) FunctionNames(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error

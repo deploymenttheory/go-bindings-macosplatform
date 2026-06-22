@@ -11,4 +11,5 @@ import (
 // HighlightProvider is accepted wherever a SWHighlight (or one of its subclasses) is expected.
 type HighlightProvider interface {
 	objref.Object
+	isHighlight()
 }

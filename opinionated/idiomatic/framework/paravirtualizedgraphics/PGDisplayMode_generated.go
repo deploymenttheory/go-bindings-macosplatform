@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of a supported display mode.
-//
 // PGDisplayMode is an idiomatic wrapper over the Objective-C class PGDisplayMode.
+//
+// A description of a supported display mode.
 type PGDisplayMode struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PGDisplayModeFromID(id objc.ID) *PGDisplayMode {
 	if id == 0 {
 		return nil
 	}
-	x := &PGDisplayMode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PGDisplayMode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func pGDisplayModeAdopt(id objc.ID) *PGDisplayMode {
 	if id == 0 {
 		return nil
 	}
-	x := &PGDisplayMode{Handle: objref.Wrap(id)}
+	x := &PGDisplayMode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *PGDisplayMode) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PGDisplayMode) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPGDisplayMode creates a new PGDisplayMode.
 func NewPGDisplayMode() *PGDisplayMode {
 	_id := objc.Send[objc.ID](objc.ID(_class("PGDisplayMode")), objc.RegisterName("new"))
 	return pGDisplayModeAdopt(_id)
 }
 
-// refreshRate of supported display mode.  Consider only supplying modes using a refreshRate equal to that of host OS's physical display where representation is ultimately shown.
+// RefreshRate refreshRate of supported display mode.  Consider only supplying modes using a refreshRate equal to that of host OS's physical display where representation is ultimately shown.
 func (x *PGDisplayMode) RefreshRate() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("refreshRate"))
 	return _r

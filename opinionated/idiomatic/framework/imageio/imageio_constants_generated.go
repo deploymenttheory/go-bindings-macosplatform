@@ -114,7 +114,6 @@ func KCGImageMetadataEnumerateRecursively() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataEnumerateRecursively")))
 }
 
-// Error domain for all errors originating in ImageIO for CGImageMetadata APIs. Error codes may be interpreted using the list below.
 // KCFErrorDomainCGImageMetadata returns the value of the constant kCFErrorDomainCGImageMetadata.
 func KCFErrorDomainCGImageMetadata() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCFErrorDomainCGImageMetadata")))

@@ -12,80 +12,131 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTROtaSoftwareUpdateRequestorClusterProviderLocation is an idiomatic wrapper over the Objective-C class MTROtaSoftwareUpdateRequestorClusterProviderLocation.
-type MTROtaSoftwareUpdateRequestorClusterProviderLocation struct {
+// MTROTASoftwareUpdateRequestorClusterProviderLocation is an idiomatic wrapper over the Objective-C class MTROTASoftwareUpdateRequestorClusterProviderLocation.
+//
+// MTROTASoftwareUpdateRequestorClusterProviderLocation is an abstract base — you do not construct it directly. Construct one of [MTROtaSoftwareUpdateRequestorClusterProviderLocation] and pass it where a MTROTASoftwareUpdateRequestorClusterProviderLocation is accepted.
+type MTROTASoftwareUpdateRequestorClusterProviderLocation struct {
 	objref.Handle
 }
 
-// MTROtaSoftwareUpdateRequestorClusterProviderLocationFromID adopts an existing Objective-C object as a MTROtaSoftwareUpdateRequestorClusterProviderLocation
+// MTROTASoftwareUpdateRequestorClusterProviderLocationFromID adopts an existing Objective-C object as a MTROTASoftwareUpdateRequestorClusterProviderLocation
 // (nil for 0), retaining it and registering a release finalizer.
-func MTROtaSoftwareUpdateRequestorClusterProviderLocationFromID(id objc.ID) *MTROtaSoftwareUpdateRequestorClusterProviderLocation {
+func MTROTASoftwareUpdateRequestorClusterProviderLocationFromID(id objc.ID) *MTROTASoftwareUpdateRequestorClusterProviderLocation {
 	if id == 0 {
 		return nil
 	}
-	x := &MTROtaSoftwareUpdateRequestorClusterProviderLocation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTROTASoftwareUpdateRequestorClusterProviderLocation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
 
-// mTROtaSoftwareUpdateRequestorClusterProviderLocationAdopt wraps an Objective-C object that this code just created as a
-// MTROtaSoftwareUpdateRequestorClusterProviderLocation (nil for 0). The caller already owns the object's reference,
+// mTROTASoftwareUpdateRequestorClusterProviderLocationAdopt wraps an Objective-C object that this code just created as a
+// MTROTASoftwareUpdateRequestorClusterProviderLocation (nil for 0). The caller already owns the object's reference,
 // so this does not add another; it only arranges for the object to be released
 // once Go stops using it. Constructors use it.
-func mTROtaSoftwareUpdateRequestorClusterProviderLocationAdopt(id objc.ID) *MTROtaSoftwareUpdateRequestorClusterProviderLocation {
+func mTROTASoftwareUpdateRequestorClusterProviderLocationAdopt(id objc.ID) *MTROTASoftwareUpdateRequestorClusterProviderLocation {
 	if id == 0 {
 		return nil
 	}
-	x := &MTROtaSoftwareUpdateRequestorClusterProviderLocation{Handle: objref.Wrap(id)}
+	x := &MTROTASoftwareUpdateRequestorClusterProviderLocation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
 // Description returns the object's -description text.
-func (x *MTROtaSoftwareUpdateRequestorClusterProviderLocation) Description() string {
+func (x *MTROTASoftwareUpdateRequestorClusterProviderLocation) Description() string {
 	return rt.Description(objref.IDOf(x))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTROtaSoftwareUpdateRequestorClusterProviderLocation) IsEqual(other obj.Object) bool {
+func (x *MTROTASoftwareUpdateRequestorClusterProviderLocation) IsEqual(other obj.Object) bool {
 	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTROtaSoftwareUpdateRequestorClusterProviderLocation) IsKind(className string) bool {
+func (x *MTROTASoftwareUpdateRequestorClusterProviderLocation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTROtaSoftwareUpdateRequestorClusterProviderLocation creates a new MTROtaSoftwareUpdateRequestorClusterProviderLocation.
-func NewMTROtaSoftwareUpdateRequestorClusterProviderLocation() *MTROtaSoftwareUpdateRequestorClusterProviderLocation {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTROtaSoftwareUpdateRequestorClusterProviderLocation")), objc.RegisterName("new"))
-	return mTROtaSoftwareUpdateRequestorClusterProviderLocationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTROTASoftwareUpdateRequestorClusterProviderLocation) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithProviderNodeID sets providerNodeID and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateRequestorClusterProviderLocation) WithProviderNodeID(providerNodeID obj.Object) *MTROtaSoftwareUpdateRequestorClusterProviderLocation {
+// WithProviderNodeID sets the property and returns the receiver so calls can be chained.
+func (x *MTROTASoftwareUpdateRequestorClusterProviderLocation) WithProviderNodeID(providerNodeID obj.Object) *MTROTASoftwareUpdateRequestorClusterProviderLocation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderNodeID:"), objref.IDOf(providerNodeID))
 	return x
 }
 
-// WithEndpoint sets endpoint and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateRequestorClusterProviderLocation) WithEndpoint(endpoint obj.Object) *MTROtaSoftwareUpdateRequestorClusterProviderLocation {
+// WithEndpoint sets the property and returns the receiver so calls can be chained.
+func (x *MTROTASoftwareUpdateRequestorClusterProviderLocation) WithEndpoint(endpoint obj.Object) *MTROTASoftwareUpdateRequestorClusterProviderLocation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return x
 }
 
-// WithFabricIndex sets fabricIndex and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateRequestorClusterProviderLocation) WithFabricIndex(fabricIndex obj.Object) *MTROtaSoftwareUpdateRequestorClusterProviderLocation {
+// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+func (x *MTROTASoftwareUpdateRequestorClusterProviderLocation) WithFabricIndex(fabricIndex obj.Object) *MTROTASoftwareUpdateRequestorClusterProviderLocation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return x
 }
 
-// MTROtaSoftwareUpdateRequestorClusterProviderLocationable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterProviderLocation], for mocking and DI.
-type MTROtaSoftwareUpdateRequestorClusterProviderLocationable interface {
-	obj.Object
-	WithProviderNodeID(providerNodeID obj.Object) *MTROtaSoftwareUpdateRequestorClusterProviderLocation
-	WithEndpoint(endpoint obj.Object) *MTROtaSoftwareUpdateRequestorClusterProviderLocation
-	WithFabricIndex(fabricIndex obj.Object) *MTROtaSoftwareUpdateRequestorClusterProviderLocation
+// ProviderNodeID wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterProviderLocation) ProviderNodeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("providerNodeID"))
+	return obj.Wrap(_r)
 }
 
-var _ MTROtaSoftwareUpdateRequestorClusterProviderLocationable = (*MTROtaSoftwareUpdateRequestorClusterProviderLocation)(nil)
+// SetProviderNodeID wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterProviderLocation) SetProviderNodeID(providerNodeID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderNodeID:"), objref.IDOf(providerNodeID))
+}
+
+// Endpoint wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterProviderLocation) Endpoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
+	return obj.Wrap(_r)
+}
+
+// SetEndpoint wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterProviderLocation) SetEndpoint(endpoint obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
+}
+
+// FabricIndex wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterProviderLocation) FabricIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
+	return obj.Wrap(_r)
+}
+
+// SetFabricIndex wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterProviderLocation) SetFabricIndex(fabricIndex obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
+}
+
+// MTROTASoftwareUpdateRequestorClusterProviderLocationable is the interface implemented by [MTROTASoftwareUpdateRequestorClusterProviderLocation], for mocking and DI.
+type MTROTASoftwareUpdateRequestorClusterProviderLocationable interface {
+	obj.Object
+	WithProviderNodeID(providerNodeID obj.Object) *MTROTASoftwareUpdateRequestorClusterProviderLocation
+	WithEndpoint(endpoint obj.Object) *MTROTASoftwareUpdateRequestorClusterProviderLocation
+	WithFabricIndex(fabricIndex obj.Object) *MTROTASoftwareUpdateRequestorClusterProviderLocation
+	ProviderNodeID() obj.Object
+	SetProviderNodeID(providerNodeID obj.Object)
+	Endpoint() obj.Object
+	SetEndpoint(endpoint obj.Object)
+	FabricIndex() obj.Object
+	SetFabricIndex(fabricIndex obj.Object)
+}
+
+var _ MTROTASoftwareUpdateRequestorClusterProviderLocationable = (*MTROTASoftwareUpdateRequestorClusterProviderLocation)(nil)
+
+// isMTROTASoftwareUpdateRequestorClusterProviderLocation marks MTROTASoftwareUpdateRequestorClusterProviderLocation — and, by embedding promotion, its
+// subclasses — as a member of the MTROTASoftwareUpdateRequestorClusterProviderLocation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTROTASoftwareUpdateRequestorClusterProviderLocation) isMTROTASoftwareUpdateRequestorClusterProviderLocation() {
+}
+
+var _ MTROTASoftwareUpdateRequestorClusterProviderLocationProvider = (*MTROTASoftwareUpdateRequestorClusterProviderLocation)(nil)

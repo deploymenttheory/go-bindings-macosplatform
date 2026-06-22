@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An opaque token that you use to run multiple web views in a single process.
-//
 // WKProcessPool is an idiomatic wrapper over the Objective-C class WKProcessPool.
+//
+// An opaque token that you use to run multiple web views in a single process.
 type WKProcessPool struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WKProcessPoolFromID(id objc.ID) *WKProcessPool {
 	if id == 0 {
 		return nil
 	}
-	x := &WKProcessPool{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKProcessPool{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func wKProcessPoolAdopt(id objc.ID) *WKProcessPool {
 	if id == 0 {
 		return nil
 	}
-	x := &WKProcessPool{Handle: objref.Wrap(id)}
+	x := &WKProcessPool{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *WKProcessPool) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *WKProcessPool) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKProcessPool) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewWKProcessPool creates a new WKProcessPool.

@@ -13,15 +13,15 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Check if asset is cinematic asynchronously.
+// CheckIfCinematicCompletionHandler check if asset is cinematic asynchronously.
 func CheckIfCinematicCompletionHandler(asset obj.Object, completionHandler func(bool)) {
 	objc.Send[objc.ID](objc.ID(_class("CNAssetInfo")), objc.RegisterName("checkIfCinematic:completionHandler:"), objref.IDOf(asset), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
-// Load cinematic asset information asynchronously.
+// LoadFromAsset load cinematic asset information asynchronously.
 //
 // LoadFromAsset blocks until the operation completes or ctx is cancelled.
-func LoadFromAsset(ctx context.Context, asset obj.Object) (*AssetInfo, error) {
+func LoadFromAsset(ctx context.Context, asset obj.Object) (result *AssetInfo, err error) {
 	type _result struct {
 		val *AssetInfo
 		err error
@@ -43,15 +43,15 @@ func LoadFromAsset(ctx context.Context, asset obj.Object) (*AssetInfo, error) {
 	}
 }
 
-// Check if asset meets all the requirements to operate with Spatial Audio and its accompanying effects
+// CheckIfContainsSpatialAudioCompletionHandler check if asset meets all the requirements to operate with Spatial Audio and its accompanying effects
 func CheckIfContainsSpatialAudioCompletionHandler(asset obj.Object, completionHandler func(bool)) {
 	objc.Send[objc.ID](objc.ID(_class("CNAssetSpatialAudioInfo")), objc.RegisterName("checkIfContainsSpatialAudio:completionHandler:"), objref.IDOf(asset), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
-// Returns an instance of CNAssetAudioInfo for an AVAsset object asynchronously.
+// CNAssetSpatialAudioInfoLoadFromAsset returns an instance of CNAssetAudioInfo for an AVAsset object asynchronously.
 //
 // CNAssetSpatialAudioInfoLoadFromAsset blocks until the operation completes or ctx is cancelled.
-func CNAssetSpatialAudioInfoLoadFromAsset(ctx context.Context, asset obj.Object) (*AssetSpatialAudioInfo, error) {
+func CNAssetSpatialAudioInfoLoadFromAsset(ctx context.Context, asset obj.Object) (result *AssetSpatialAudioInfo, err error) {
 	type _result struct {
 		val *AssetSpatialAudioInfo
 		err error
@@ -73,25 +73,25 @@ func CNAssetSpatialAudioInfoLoadFromAsset(ctx context.Context, asset obj.Object)
 	}
 }
 
-// Indicates whether the current device supports Audio Mix.
+// IsSupported indicates whether the current device supports Audio Mix.
 func IsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("CNAssetSpatialAudioInfo")), objc.RegisterName("isSupported"))
 	return _r
 }
 
-// Determine whether a given detectionID is valid
+// IsValidDetectionID determine whether a given detectionID is valid
 func IsValidDetectionID(detectionID int64) bool {
 	_r := objc.Send[bool](objc.ID(_class("CNDetection")), objc.RegisterName("isValidDetectionID:"), detectionID)
 	return _r
 }
 
-// Determine whether a given detectionGroupID is valid
+// IsValidDetectionGroupID determine whether a given detectionGroupID is valid
 func IsValidDetectionGroupID(detectionGroupID int64) bool {
 	_r := objc.Send[bool](objc.ID(_class("CNDetection")), objc.RegisterName("isValidDetectionGroupID:"), detectionGroupID)
 	return _r
 }
 
-// A localized accessibility label converting a specific detection type into a broad category (person, pet, etc.).
+// AccessibilityLabelForDetectionType a localized accessibility label converting a specific detection type into a broad category (person, pet, etc.).
 func AccessibilityLabelForDetectionType(detectionType DetectionType) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("CNDetection")), objc.RegisterName("accessibilityLabelForDetectionType:"), detectionType)
 	if _r == 0 {
@@ -100,13 +100,13 @@ func AccessibilityLabelForDetectionType(detectionType DetectionType) string {
 	return purego.GoString(_r)
 }
 
-// Indicates whether the current device supports object detection and tracking.
+// CNObjectTrackerIsSupported indicates whether the current device supports object detection and tracking.
 func CNObjectTrackerIsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("CNObjectTracker")), objc.RegisterName("isSupported"))
 	return _r
 }
 
-// The pixel format types supported for the input source. Use with kCVPixelBufferPixelFormatTypeKey in the video compositor's sourcePixelBufferAttributes dictionary when implementing AVVideoCompositing.
+// SourcePixelFormatTypes the pixel format types supported for the input source. Use with kCVPixelBufferPixelFormatTypeKey in the video compositor's sourcePixelBufferAttributes dictionary when implementing AVVideoCompositing.
 //
 // SourcePixelFormatTypes returns the collection as a Go slice.
 func SourcePixelFormatTypes() []obj.Object {
@@ -114,7 +114,7 @@ func SourcePixelFormatTypes() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The pixel format types supported for the output destination. Use with kCVPixelBufferPixelFormatTypeKey in the video compositor's requiredPixelBufferAttributesForRenderContext dictionary when implementing AVVideoCompositing.
+// DestinationPixelFormatTypes the pixel format types supported for the output destination. Use with kCVPixelBufferPixelFormatTypeKey in the video compositor's requiredPixelBufferAttributesForRenderContext dictionary when implementing AVVideoCompositing.
 //
 // DestinationPixelFormatTypes returns the collection as a Go slice.
 func DestinationPixelFormatTypes() []obj.Object {
@@ -122,10 +122,10 @@ func DestinationPixelFormatTypes() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Loads the rendering session attributes from an asset asynchronously.
+// CNRenderingSessionAttributesLoadFromAsset loads the rendering session attributes from an asset asynchronously.
 //
 // CNRenderingSessionAttributesLoadFromAsset blocks until the operation completes or ctx is cancelled.
-func CNRenderingSessionAttributesLoadFromAsset(ctx context.Context, asset obj.Object) (*RenderingSessionAttributes, error) {
+func CNRenderingSessionAttributesLoadFromAsset(ctx context.Context, asset obj.Object) (result *RenderingSessionAttributes, err error) {
 	type _result struct {
 		val *RenderingSessionAttributes
 		err error
@@ -147,10 +147,10 @@ func CNRenderingSessionAttributesLoadFromAsset(ctx context.Context, asset obj.Ob
 	}
 }
 
-// Load cinematic script asynchronously from a cinematic asset. - Parameters: - asset: the cinematic asset to be loaded. - changes: optional changes since asset was recorded. Can be obtained from a previous editing session. If `nil`, the asset is loaded as originally recorded. - progress: optional progress object to track progress or cancel loading. Represents just the loading of this asset. Create with desired total unit count or use zero to have the unit count filled in automatically.  If `nil`, no progress is reported. - completionHandler: called with the loaded cinematic script when done, or with with an error if it fails. If progress is canceled before it completes, the completion handler is called with an error.
+// LoadFromAssetChangesProgress load cinematic script asynchronously from a cinematic asset. - Parameters: - asset: the cinematic asset to be loaded. - changes: optional changes since asset was recorded. Can be obtained from a previous editing session. If `nil`, the asset is loaded as originally recorded. - progress: optional progress object to track progress or cancel loading. Represents just the loading of this asset. Create with desired total unit count or use zero to have the unit count filled in automatically.  If `nil`, no progress is reported. - completionHandler: called with the loaded cinematic script when done, or with with an error if it fails. If progress is canceled before it completes, the completion handler is called with an error.
 //
 // LoadFromAssetChangesProgress blocks until the operation completes or ctx is cancelled.
-func LoadFromAssetChangesProgress(ctx context.Context, asset obj.Object, changes *ScriptChanges, progress obj.Object) (*Script, error) {
+func LoadFromAssetChangesProgress(ctx context.Context, asset obj.Object, changes *ScriptChanges, progress obj.Object) (result *Script, err error) {
 	type _result struct {
 		val *Script
 		err error

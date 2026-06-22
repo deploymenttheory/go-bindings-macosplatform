@@ -6,15 +6,16 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpsmatrix"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of multiple matrix copy operations.
-//
 // MatrixCopyDescriptor is an idiomatic wrapper over the Objective-C class MPSMatrixCopyDescriptor.
+//
+// A description of multiple matrix copy operations.
 type MatrixCopyDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func MatrixCopyDescriptorFromID(id objc.ID) *MatrixCopyDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixCopyDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MatrixCopyDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func matrixCopyDescriptorAdopt(id objc.ID) *MatrixCopyDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &MatrixCopyDescriptor{Handle: objref.Wrap(id)}
+	x := &MatrixCopyDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +61,28 @@ func (x *MatrixCopyDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize a MPSMatrixCopyDescriptor using offsets generated on the GPU Use this method when the offsets needed are coming from GPU based computation.
-//
-// NewMatrixCopyDescriptorWithSourceMatricesDestinationMatricesOffsetVectorOffset creates a new MatrixCopyDescriptor.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MatrixCopyDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMatrixCopyDescriptorWithSourceMatricesDestinationMatricesOffsetVectorOffset initialize a MPSMatrixCopyDescriptor using offsets generated on the GPU Use this method when the offsets needed are coming from GPU based computation.
 func NewMatrixCopyDescriptorWithSourceMatricesDestinationMatricesOffsetVectorOffset(sourceMatrices []obj.Object, destinationMatrices []obj.Object, offsets obj.Object, byteOffset int) *MatrixCopyDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSMatrixCopyDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceMatrices:destinationMatrices:offsetVector:offset:"), purego.SliceToNSArray(sourceMatrices, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(destinationMatrices, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(offsets), byteOffset)
 	return matrixCopyDescriptorAdopt(_id)
 }
 
+// SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets initialize a MPSMatrixCopyDescriptor using offsets generated on the CPU This is for one at a time intialization of the copy operations
+func (x *MatrixCopyDescriptor) SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets(index int, sourceMatrix obj.Object, destinationMatrix obj.Object, offsets mpsmatrix.MPSMatrixCopyOffsets) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCopyOperationAtIndex:sourceMatrix:destinationMatrix:offsets:"), index, objref.IDOf(sourceMatrix), objref.IDOf(destinationMatrix), offsets)
+}
+
 // MatrixCopyDescriptorable is the interface implemented by [MatrixCopyDescriptor], for mocking and DI.
 type MatrixCopyDescriptorable interface {
 	obj.Object
+	SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets(index int, sourceMatrix obj.Object, destinationMatrix obj.Object, offsets mpsmatrix.MPSMatrixCopyOffsets)
 }
 
 var _ MatrixCopyDescriptorable = (*MatrixCopyDescriptor)(nil)

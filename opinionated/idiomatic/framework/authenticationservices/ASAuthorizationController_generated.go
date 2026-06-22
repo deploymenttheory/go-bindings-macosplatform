@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A controller that manages authorization requests that a provider creates.
-//
 // AuthorizationController is an idiomatic wrapper over the Objective-C class ASAuthorizationController.
+//
+// A controller that manages authorization requests that a provider creates.
 type AuthorizationController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AuthorizationControllerFromID(id objc.ID) *AuthorizationController {
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AuthorizationController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func authorizationControllerAdopt(id objc.ID) *AuthorizationController {
 	if id == 0 {
 		return nil
 	}
-	x := &AuthorizationController{Handle: objref.Wrap(id)}
+	x := &AuthorizationController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,35 @@ func (x *AuthorizationController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a controller from a collection of authorization requests.
-//
-// NewAuthorizationControllerWithAuthorizationRequests creates a new AuthorizationController.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAuthorizationControllerWithAuthorizationRequests creates a controller from a collection of authorization requests.
 func NewAuthorizationControllerWithAuthorizationRequests(authorizationRequests []*AuthorizationRequest) *AuthorizationController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAuthorizationRequests:"), purego.SliceToNSArray(authorizationRequests, func(_v *AuthorizationRequest) objc.ID { return objref.IDOf(_v) }))
 	return authorizationControllerAdopt(_id)
 }
 
-// Starts the specified authorization flows during controller initialization.
+// PerformRequests starts the specified authorization flows during controller initialization.
 func (x *AuthorizationController) PerformRequests() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performRequests"))
 }
 
-// Starts the specified authorization flows during controller initialization.
+// PerformRequestsWithOptions starts the specified authorization flows during controller initialization.
 func (x *AuthorizationController) PerformRequestsWithOptions(options AuthorizationControllerRequestOptions) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performRequestsWithOptions:"), options)
 }
 
-// Cancels any active authorization requests.
+// Cancel cancels any active authorization requests.
 func (x *AuthorizationController) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// Authorization requests that are being serviced by this controller
+// AuthorizationRequests authorization requests that are being serviced by this controller
 //
 // AuthorizationRequests returns the collection as a Go slice.
 func (x *AuthorizationController) AuthorizationRequests() []*AuthorizationRequest {

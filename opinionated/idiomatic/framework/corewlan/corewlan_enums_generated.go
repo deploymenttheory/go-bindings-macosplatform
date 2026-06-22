@@ -22,6 +22,8 @@ const (
 	KCWChannelBand6GHz ChannelBand = 3
 )
 
+// String returns the ChannelBand constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ChannelBand) String() string {
 	switch e {
 	case KCWChannelBandUnknown:
@@ -53,6 +55,8 @@ const (
 	KCWChannelWidth160MHz ChannelWidth = 4
 )
 
+// String returns the ChannelWidth constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ChannelWidth) String() string {
 	switch e {
 	case KCWChannelWidthUnknown:
@@ -87,6 +91,8 @@ const (
 	KCWCipherKeyFlagsRx CipherKeyFlags = 16
 )
 
+// String returns the CipherKeyFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CipherKeyFlags) String() string {
 	var parts []string
 	if e&KCWCipherKeyFlagsUnicast != 0 {
@@ -134,6 +140,8 @@ const (
 	EventTypeUnknown EventType = 9223372036854775807
 )
 
+// String returns the EventType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EventType) String() string {
 	switch e {
 	case EventTypeNone:
@@ -175,6 +183,8 @@ const (
 	KCWIBSSModeSecurityWEP104 IBSSModeSecurity = 2
 )
 
+// String returns the IBSSModeSecurity constant's name, or its numeric form when the
+// value is not a known constant.
 func (e IBSSModeSecurity) String() string {
 	switch e {
 	case KCWIBSSModeSecurityNone:
@@ -202,6 +212,8 @@ const (
 	KCWInterfaceModeHostAP InterfaceMode = 3
 )
 
+// String returns the InterfaceMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e InterfaceMode) String() string {
 	switch e {
 	case KCWInterfaceModeNone:
@@ -229,6 +241,8 @@ const (
 	KCWKeychainDomainSystem KeychainDomain = 2
 )
 
+// String returns the KeychainDomain constant's name, or its numeric form when the
+// value is not a known constant.
 func (e KeychainDomain) String() string {
 	switch e {
 	case KCWKeychainDomainNone:
@@ -262,6 +276,8 @@ const (
 	KCWPHYMode11be PHYMode = 7
 )
 
+// String returns the PHYMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PHYMode) String() string {
 	switch e {
 	case KCWPHYModeNone:
@@ -323,6 +339,8 @@ const (
 	KCWSecurityUnknown Security = 9223372036854775807
 )
 
+// String returns the Security constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Security) String() string {
 	switch e {
 	case KCWSecurityNone:

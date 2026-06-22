@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract base class of the framework’s photo library change requests.
-//
 // ChangeRequest is an idiomatic wrapper over the Objective-C class PHChangeRequest.
+//
+// ChangeRequest is an abstract base — you do not construct it directly. Construct one of [AssetChangeRequest], [AssetCollectionChangeRequest], [CollectionListChangeRequest], [ProjectChangeRequest] and pass it where a ChangeRequest is accepted.
+//
+// The abstract base class of the framework’s photo library change requests.
 type ChangeRequest struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ChangeRequestFromID(id objc.ID) *ChangeRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &ChangeRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ChangeRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func changeRequestAdopt(id objc.ID) *ChangeRequest {
 	if id == 0 {
 		return nil
 	}
-	x := &ChangeRequest{Handle: objref.Wrap(id)}
+	x := &ChangeRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *ChangeRequest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewChangeRequest creates a new ChangeRequest.
-func NewChangeRequest() *ChangeRequest {
-	_id := objc.Send[objc.ID](objc.ID(_class("PHChangeRequest")), objc.RegisterName("new"))
-	return changeRequestAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ChangeRequest) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // ChangeRequestable is the interface implemented by [ChangeRequest], for mocking and DI.
@@ -70,3 +74,10 @@ type ChangeRequestable interface {
 }
 
 var _ ChangeRequestable = (*ChangeRequest)(nil)
+
+// isChangeRequest marks ChangeRequest — and, by embedding promotion, its
+// subclasses — as a member of the ChangeRequest hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ChangeRequest) isChangeRequest() {}
+
+var _ ChangeRequestProvider = (*ChangeRequest)(nil)

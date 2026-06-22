@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRTimeSynchronizationClusterDstOffsetType is an idiomatic wrapper over the Objective-C class MTRTimeSynchronizationClusterDstOffsetType.
+//
+// It embeds [MTRTimeSynchronizationClusterDSTOffsetStruct], promoting that type's methods.
 type MTRTimeSynchronizationClusterDstOffsetType struct {
-	objref.Handle
+	MTRTimeSynchronizationClusterDSTOffsetStruct
 }
 
 // MTRTimeSynchronizationClusterDstOffsetTypeFromID adopts an existing Objective-C object as a MTRTimeSynchronizationClusterDstOffsetType
@@ -23,7 +24,8 @@ func MTRTimeSynchronizationClusterDstOffsetTypeFromID(id objc.ID) *MTRTimeSynchr
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTimeSynchronizationClusterDstOffsetType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRTimeSynchronizationClusterDstOffsetType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRTimeSynchronizationClusterDstOffsetTypeAdopt(id objc.ID) *MTRTimeSynchro
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTimeSynchronizationClusterDstOffsetType{Handle: objref.Wrap(id)}
+	x := &MTRTimeSynchronizationClusterDstOffsetType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRTimeSynchronizationClusterDstOffsetType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRTimeSynchronizationClusterDstOffsetType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRTimeSynchronizationClusterDstOffsetType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRTimeSynchronizationClusterDstOffsetType creates a new MTRTimeSynchronizationClusterDstOffsetType.
@@ -62,19 +50,19 @@ func NewMTRTimeSynchronizationClusterDstOffsetType() *MTRTimeSynchronizationClus
 	return mTRTimeSynchronizationClusterDstOffsetTypeAdopt(_id)
 }
 
-// WithOffset sets offset and returns the receiver so calls can be chained.
+// WithOffset sets the property and returns the receiver so calls can be chained.
 func (x *MTRTimeSynchronizationClusterDstOffsetType) WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterDstOffsetType {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), objref.IDOf(offset))
 	return x
 }
 
-// WithValidStarting sets validStarting and returns the receiver so calls can be chained.
+// WithValidStarting sets the property and returns the receiver so calls can be chained.
 func (x *MTRTimeSynchronizationClusterDstOffsetType) WithValidStarting(validStarting obj.Object) *MTRTimeSynchronizationClusterDstOffsetType {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValidStarting:"), objref.IDOf(validStarting))
 	return x
 }
 
-// WithValidUntil sets validUntil and returns the receiver so calls can be chained.
+// WithValidUntil sets the property and returns the receiver so calls can be chained.
 func (x *MTRTimeSynchronizationClusterDstOffsetType) WithValidUntil(validUntil obj.Object) *MTRTimeSynchronizationClusterDstOffsetType {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValidUntil:"), objref.IDOf(validUntil))
 	return x
@@ -89,3 +77,5 @@ type MTRTimeSynchronizationClusterDstOffsetTypeable interface {
 }
 
 var _ MTRTimeSynchronizationClusterDstOffsetTypeable = (*MTRTimeSynchronizationClusterDstOffsetType)(nil)
+
+var _ MTRTimeSynchronizationClusterDSTOffsetStructProvider = (*MTRTimeSynchronizationClusterDstOffsetType)(nil)

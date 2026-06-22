@@ -15,9 +15,9 @@ import (
 	"unsafe"
 )
 
-// An object that contains a priority-ordered list of universal links to share with the current user.
-//
 // HighlightCenter is an idiomatic wrapper over the Objective-C class SWHighlightCenter.
+//
+// An object that contains a priority-ordered list of universal links to share with the current user.
 type HighlightCenter struct {
 	objref.Handle
 }
@@ -28,7 +28,8 @@ func HighlightCenterFromID(id objc.ID) *HighlightCenter {
 	if id == 0 {
 		return nil
 	}
-	x := &HighlightCenter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HighlightCenter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -41,7 +42,8 @@ func highlightCenterAdopt(id objc.ID) *HighlightCenter {
 	if id == 0 {
 		return nil
 	}
-	x := &HighlightCenter{Handle: objref.Wrap(id)}
+	x := &HighlightCenter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -61,16 +63,22 @@ func (x *HighlightCenter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HighlightCenter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewHighlightCenter creates a new HighlightCenter.
 func NewHighlightCenter() *HighlightCenter {
 	_id := objc.Send[objc.ID](objc.ID(_class("SWHighlightCenter")), objc.RegisterName("new"))
 	return highlightCenterAdopt(_id)
 }
 
-// Returns a highlight for a specified URL.
+// GetHighlightForURL returns a highlight for a specified URL.
 //
 // GetHighlightForURL blocks until the operation completes or ctx is cancelled.
-func (x *HighlightCenter) GetHighlightForURL(ctx context.Context, uRL string) (*Highlight, error) {
+func (x *HighlightCenter) GetHighlightForURL(ctx context.Context, uRL string) (result *Highlight, err error) {
 	type _result struct {
 		val *Highlight
 		err error
@@ -92,8 +100,8 @@ func (x *HighlightCenter) GetHighlightForURL(ctx context.Context, uRL string) (*
 	}
 }
 
-// Returns a collaboration highlight for a specified collaboration identifier.
-func (x *HighlightCenter) CollaborationHighlightForIdentifierError(collaborationIdentifier obj.Object) (*CollaborationHighlight, error) {
+// CollaborationHighlightForIdentifierError returns a collaboration highlight for a specified collaboration identifier.
+func (x *HighlightCenter) CollaborationHighlightForIdentifierError(collaborationIdentifier obj.Object) (result *CollaborationHighlight, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collaborationHighlightForIdentifier:error:"), objref.IDOf(collaborationIdentifier), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -102,10 +110,10 @@ func (x *HighlightCenter) CollaborationHighlightForIdentifierError(collaboration
 	return CollaborationHighlightFromID(_r), nil
 }
 
-// Returns a collaboration highlight for a specified URL.
+// GetCollaborationHighlightForURL returns a collaboration highlight for a specified URL.
 //
 // GetCollaborationHighlightForURL blocks until the operation completes or ctx is cancelled.
-func (x *HighlightCenter) GetCollaborationHighlightForURL(ctx context.Context, uRL string) (*CollaborationHighlight, error) {
+func (x *HighlightCenter) GetCollaborationHighlightForURL(ctx context.Context, uRL string) (result *CollaborationHighlight, err error) {
 	type _result struct {
 		val *CollaborationHighlight
 		err error
@@ -127,15 +135,15 @@ func (x *HighlightCenter) GetCollaborationHighlightForURL(ctx context.Context, u
 	}
 }
 
-// Clears the notices for a specified collaboration highlight.
+// ClearNoticesForHighlight clears the notices for a specified collaboration highlight.
 func (x *HighlightCenter) ClearNoticesForHighlight(highlight *CollaborationHighlight) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearNoticesForHighlight:"), objref.IDOf(highlight))
 }
 
-// Signs passed-in data with the local device’s private key.
+// GetSignedIdentityProofForCollaborationHighlightUsingData signs passed-in data with the local device’s private key.
 //
 // GetSignedIdentityProofForCollaborationHighlightUsingData blocks until the operation completes or ctx is cancelled.
-func (x *HighlightCenter) GetSignedIdentityProofForCollaborationHighlightUsingData(ctx context.Context, collaborationHighlight *CollaborationHighlight, data obj.Object) (obj.Object, error) {
+func (x *HighlightCenter) GetSignedIdentityProofForCollaborationHighlightUsingData(ctx context.Context, collaborationHighlight *CollaborationHighlight, data obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -157,6 +165,8 @@ func (x *HighlightCenter) GetSignedIdentityProofForCollaborationHighlightUsingDa
 	}
 }
 
+// Highlights wraps the corresponding Objective-C method.
+//
 // Highlights returns the collection as a Go slice.
 func (x *HighlightCenter) Highlights() []*Highlight {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("highlights"))
@@ -167,7 +177,7 @@ func (x *HighlightCenter) Highlights() []*Highlight {
 type HighlightCenterable interface {
 	obj.Object
 	GetHighlightForURL(ctx context.Context, uRL string) (*Highlight, error)
-	CollaborationHighlightForIdentifierError(collaborationIdentifier obj.Object) (*CollaborationHighlight, error)
+	CollaborationHighlightForIdentifierError(collaborationIdentifier obj.Object) (result *CollaborationHighlight, err error)
 	GetCollaborationHighlightForURL(ctx context.Context, uRL string) (*CollaborationHighlight, error)
 	ClearNoticesForHighlight(highlight *CollaborationHighlight)
 	GetSignedIdentityProofForCollaborationHighlightUsingData(ctx context.Context, collaborationHighlight *CollaborationHighlight, data obj.Object) (obj.Object, error)

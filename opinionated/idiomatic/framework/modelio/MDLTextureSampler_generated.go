@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that pairs a source of texture data with sampling parameters to be used in rendering the texture.
-//
 // TextureSampler is an idiomatic wrapper over the Objective-C class MDLTextureSampler.
+//
+// An object that pairs a source of texture data with sampling parameters to be used in rendering the texture.
 type TextureSampler struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TextureSamplerFromID(id objc.ID) *TextureSampler {
 	if id == 0 {
 		return nil
 	}
-	x := &TextureSampler{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextureSampler{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func textureSamplerAdopt(id objc.ID) *TextureSampler {
 	if id == 0 {
 		return nil
 	}
-	x := &TextureSampler{Handle: objref.Wrap(id)}
+	x := &TextureSampler{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,59 +60,65 @@ func (x *TextureSampler) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextureSampler) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTextureSampler creates a new TextureSampler.
 func NewTextureSampler() *TextureSampler {
 	_id := objc.Send[objc.ID](objc.ID(_class("MDLTextureSampler")), objc.RegisterName("new"))
 	return textureSamplerAdopt(_id)
 }
 
-// The texture object that provides image data for sampling.
-//
-// WithTexture sets texture and returns the receiver so calls can be chained.
+// WithTexture the texture object that provides image data for sampling.
 func (x *TextureSampler) WithTexture(texture TextureProvider) *TextureSampler {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTexture:"), objref.IDOf(texture))
 	return x
 }
 
-// An object that describes filtering modes for sampling from the texture.
-//
-// WithHardwareFilter sets hardwareFilter and returns the receiver so calls can be chained.
+// WithHardwareFilter an object that describes filtering modes for sampling from the texture.
 func (x *TextureSampler) WithHardwareFilter(hardwareFilter *TextureFilter) *TextureSampler {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHardwareFilter:"), objref.IDOf(hardwareFilter))
 	return x
 }
 
-// The transformation to be applied to texture coordinate data before sampling from the texture.
-//
-// WithTransform sets transform and returns the receiver so calls can be chained.
+// WithTransform the transformation to be applied to texture coordinate data before sampling from the texture.
 func (x *TextureSampler) WithTransform(transform *Transform) *TextureSampler {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransform:"), objref.IDOf(transform))
 	return x
 }
 
+// Texture wraps the corresponding Objective-C method.
 func (x *TextureSampler) Texture() *Texture {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("texture"))
 	return TextureFromID(_r)
 }
 
+// SetTexture wraps the corresponding Objective-C method.
 func (x *TextureSampler) SetTexture(texture *Texture) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTexture:"), objref.IDOf(texture))
 }
 
+// HardwareFilter wraps the corresponding Objective-C method.
 func (x *TextureSampler) HardwareFilter() *TextureFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hardwareFilter"))
 	return TextureFilterFromID(_r)
 }
 
+// SetHardwareFilter wraps the corresponding Objective-C method.
 func (x *TextureSampler) SetHardwareFilter(hardwareFilter *TextureFilter) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHardwareFilter:"), objref.IDOf(hardwareFilter))
 }
 
+// Transform wraps the corresponding Objective-C method.
 func (x *TextureSampler) Transform() *Transform {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transform"))
 	return TransformFromID(_r)
 }
 
+// SetTransform wraps the corresponding Objective-C method.
 func (x *TextureSampler) SetTransform(transform *Transform) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransform:"), objref.IDOf(transform))
 }

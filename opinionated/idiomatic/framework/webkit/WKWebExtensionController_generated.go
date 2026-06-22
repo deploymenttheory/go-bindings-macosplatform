@@ -15,9 +15,9 @@ import (
 	"unsafe"
 )
 
-// An object that manages a set of loaded extension contexts.
-//
 // WKWebExtensionController is an idiomatic wrapper over the Objective-C class WKWebExtensionController.
+//
+// An object that manages a set of loaded extension contexts.
 type WKWebExtensionController struct {
 	objref.Handle
 }
@@ -28,7 +28,8 @@ func WKWebExtensionControllerFromID(id objc.ID) *WKWebExtensionController {
 	if id == 0 {
 		return nil
 	}
-	x := &WKWebExtensionController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKWebExtensionController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -41,7 +42,8 @@ func wKWebExtensionControllerAdopt(id objc.ID) *WKWebExtensionController {
 	if id == 0 {
 		return nil
 	}
-	x := &WKWebExtensionController{Handle: objref.Wrap(id)}
+	x := &WKWebExtensionController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -61,22 +63,26 @@ func (x *WKWebExtensionController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKWebExtensionController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKWebExtensionController creates a new WKWebExtensionController.
 func NewWKWebExtensionController() *WKWebExtensionController {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionController")), objc.RegisterName("new"))
 	return wKWebExtensionControllerAdopt(_id)
 }
 
-// Returns a web extension controller initialized with the specified configuration.
-//
-// NewWKWebExtensionControllerWithConfiguration creates a new WKWebExtensionController.
+// NewWKWebExtensionControllerWithConfiguration returns a web extension controller initialized with the specified configuration.
 func NewWKWebExtensionControllerWithConfiguration(configuration *WKWebExtensionControllerConfiguration) *WKWebExtensionController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), objref.IDOf(configuration))
 	return wKWebExtensionControllerAdopt(_id)
 }
 
-// Loads the specified extension context.
+// LoadExtensionContext loads the specified extension context.
 func (x *WKWebExtensionController) LoadExtensionContext(extensionContext *WKWebExtensionContext) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadExtensionContext:error:"), objref.IDOf(extensionContext), unsafe.Pointer(&_nsErr))
@@ -86,7 +92,7 @@ func (x *WKWebExtensionController) LoadExtensionContext(extensionContext *WKWebE
 	return nil
 }
 
-// Unloads the specified extension context.
+// UnloadExtensionContext unloads the specified extension context.
 func (x *WKWebExtensionController) UnloadExtensionContext(extensionContext *WKWebExtensionContext) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("unloadExtensionContext:error:"), objref.IDOf(extensionContext), unsafe.Pointer(&_nsErr))
@@ -96,22 +102,22 @@ func (x *WKWebExtensionController) UnloadExtensionContext(extensionContext *WKWe
 	return nil
 }
 
-// Returns a loaded extension context for the specified extension.
+// ExtensionContextForExtension returns a loaded extension context for the specified extension.
 func (x *WKWebExtensionController) ExtensionContextForExtension(extension *WKWebExtension) *WKWebExtensionContext {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionContextForExtension:"), objref.IDOf(extension))
 	return WKWebExtensionContextFromID(_r)
 }
 
-// Returns a loaded extension context matching the specified URL.
+// ExtensionContextForURL returns a loaded extension context matching the specified URL.
 func (x *WKWebExtensionController) ExtensionContextForURL(uRL string) *WKWebExtensionContext {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionContextForURL:"), rt.FileURL(uRL))
 	return WKWebExtensionContextFromID(_r)
 }
 
-// Fetches data records containing the given extension data types for all known extensions.
+// FetchDataRecordsOfTypes fetches data records containing the given extension data types for all known extensions.
 //
 // FetchDataRecordsOfTypes blocks until the operation completes or ctx is cancelled.
-func (x *WKWebExtensionController) FetchDataRecordsOfTypes(ctx context.Context, dataTypes obj.Object) (obj.Object, error) {
+func (x *WKWebExtensionController) FetchDataRecordsOfTypes(ctx context.Context, dataTypes obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -132,10 +138,10 @@ func (x *WKWebExtensionController) FetchDataRecordsOfTypes(ctx context.Context, 
 	}
 }
 
-// Fetches a data record containing the given extension data types for a specific known web extension context.
+// FetchDataRecordOfTypesForExtensionContext fetches a data record containing the given extension data types for a specific known web extension context.
 //
 // FetchDataRecordOfTypesForExtensionContext blocks until the operation completes or ctx is cancelled.
-func (x *WKWebExtensionController) FetchDataRecordOfTypesForExtensionContext(ctx context.Context, dataTypes obj.Object, extensionContext *WKWebExtensionContext) (*WKWebExtensionDataRecord, error) {
+func (x *WKWebExtensionController) FetchDataRecordOfTypesForExtensionContext(ctx context.Context, dataTypes obj.Object, extensionContext *WKWebExtensionContext) (result *WKWebExtensionDataRecord, err error) {
 	type _result struct {
 		val *WKWebExtensionDataRecord
 		err error
@@ -156,7 +162,7 @@ func (x *WKWebExtensionController) FetchDataRecordOfTypesForExtensionContext(ctx
 	}
 }
 
-// Removes extension data of the given types for the given data records.
+// RemoveDataOfTypesFromDataRecords removes extension data of the given types for the given data records.
 //
 // RemoveDataOfTypesFromDataRecords blocks until the operation completes or ctx is cancelled.
 func (x *WKWebExtensionController) RemoveDataOfTypesFromDataRecords(ctx context.Context, dataTypes obj.Object, dataRecords []*WKWebExtensionDataRecord) error {
@@ -173,29 +179,29 @@ func (x *WKWebExtensionController) RemoveDataOfTypesFromDataRecords(ctx context.
 	}
 }
 
-// Should be called by the app when tabs are selected to fire appropriate events with all loaded web extensions.
+// DidSelectTabs should be called by the app when tabs are selected to fire appropriate events with all loaded web extensions.
 func (x *WKWebExtensionController) DidSelectTabs(selectedTabs []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didSelectTabs:"), purego.SliceToNSArray(selectedTabs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Should be called by the app when tabs are deselected to fire appropriate events with all loaded web extensions.
+// DidDeselectTabs should be called by the app when tabs are deselected to fire appropriate events with all loaded web extensions.
 func (x *WKWebExtensionController) DidDeselectTabs(deselectedTabs []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didDeselectTabs:"), purego.SliceToNSArray(deselectedTabs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// A copy of the configuration with which the web extension controller was initialized. Mutating the configuration has no effect on the web extension controller.
+// Configuration a copy of the configuration with which the web extension controller was initialized. Mutating the configuration has no effect on the web extension controller.
 func (x *WKWebExtensionController) Configuration() *WKWebExtensionControllerConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
 	return WKWebExtensionControllerConfigurationFromID(_r)
 }
 
-// A set of all the currently loaded extensions.
+// Extensions a set of all the currently loaded extensions.
 func (x *WKWebExtensionController) Extensions() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensions"))
 	return obj.Wrap(_r)
 }
 
-// A set of all the currently loaded extension contexts.
+// ExtensionContexts a set of all the currently loaded extension contexts.
 func (x *WKWebExtensionController) ExtensionContexts() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionContexts"))
 	return obj.Wrap(_r)

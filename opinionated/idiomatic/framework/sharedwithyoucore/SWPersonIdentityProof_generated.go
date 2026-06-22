@@ -13,6 +13,8 @@ import (
 )
 
 // PersonIdentityProof is an idiomatic wrapper over the Objective-C class SWPersonIdentityProof.
+//
+// PersonIdentityProof is an abstract base — you do not construct it directly. Construct one of [SignedPersonIdentityProof] and pass it where a PersonIdentityProof is accepted.
 type PersonIdentityProof struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func PersonIdentityProofFromID(id objc.ID) *PersonIdentityProof {
 	if id == 0 {
 		return nil
 	}
-	x := &PersonIdentityProof{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PersonIdentityProof{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func personIdentityProofAdopt(id objc.ID) *PersonIdentityProof {
 	if id == 0 {
 		return nil
 	}
-	x := &PersonIdentityProof{Handle: objref.Wrap(id)}
+	x := &PersonIdentityProof{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,13 +60,13 @@ func (x *PersonIdentityProof) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewPersonIdentityProof creates a new PersonIdentityProof.
-func NewPersonIdentityProof() *PersonIdentityProof {
-	_id := objc.Send[objc.ID](objc.ID(_class("SWPersonIdentityProof")), objc.RegisterName("new"))
-	return personIdentityProofAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PersonIdentityProof) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Hashes of missing Merkle tree nodes that can provide proof of inclusion. The data contains an array of SHA256 hash of the user's combined public identities.
+// InclusionHashes hashes of missing Merkle tree nodes that can provide proof of inclusion. The data contains an array of SHA256 hash of the user's combined public identities.
 //
 // InclusionHashes returns the collection as a Go slice.
 func (x *PersonIdentityProof) InclusionHashes() []obj.Object {
@@ -70,13 +74,13 @@ func (x *PersonIdentityProof) InclusionHashes() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Public key of local device
+// PublicKey public key of local device
 func (x *PersonIdentityProof) PublicKey() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicKey"))
 	return obj.Wrap(_r)
 }
 
-// Index of local public key in the Merkle tree This data can be used to determine if the node is the left or the right child
+// PublicKeyIndex index of local public key in the Merkle tree This data can be used to determine if the node is the left or the right child
 func (x *PersonIdentityProof) PublicKeyIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("publicKeyIndex"))
 	return _r
@@ -91,3 +95,10 @@ type PersonIdentityProofable interface {
 }
 
 var _ PersonIdentityProofable = (*PersonIdentityProof)(nil)
+
+// isPersonIdentityProof marks PersonIdentityProof — and, by embedding promotion, its
+// subclasses — as a member of the PersonIdentityProof hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *PersonIdentityProof) isPersonIdentityProof() {}
+
+var _ PersonIdentityProofProvider = (*PersonIdentityProof)(nil)

@@ -23,7 +23,8 @@ func MTRAttributeValueWaiterFromID(id objc.ID) *MTRAttributeValueWaiter {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAttributeValueWaiter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRAttributeValueWaiter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRAttributeValueWaiterAdopt(id objc.ID) *MTRAttributeValueWaiter {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAttributeValueWaiter{Handle: objref.Wrap(id)}
+	x := &MTRAttributeValueWaiter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,17 +58,24 @@ func (x *MTRAttributeValueWaiter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRAttributeValueWaiter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRAttributeValueWaiter creates a new MTRAttributeValueWaiter.
 func NewMTRAttributeValueWaiter() *MTRAttributeValueWaiter {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRAttributeValueWaiter")), objc.RegisterName("new"))
 	return mTRAttributeValueWaiterAdopt(_id)
 }
 
-// Cancel the wait for the set of attribute path/value pairs represented by this MTRAttributeValueWaiter. If the completion has not been called yet, it will becalled with MTRErrorCodeCancelled.
+// Cancel cancel the wait for the set of attribute path/value pairs represented by this MTRAttributeValueWaiter. If the completion has not been called yet, it will becalled with MTRErrorCodeCancelled.
 func (x *MTRAttributeValueWaiter) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
+// UUID wraps the corresponding Objective-C method.
 func (x *MTRAttributeValueWaiter) UUID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
 	return obj.Wrap(_r)

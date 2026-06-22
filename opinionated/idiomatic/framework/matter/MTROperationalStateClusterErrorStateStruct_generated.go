@@ -23,7 +23,8 @@ func MTROperationalStateClusterErrorStateStructFromID(id objc.ID) *MTROperationa
 	if id == 0 {
 		return nil
 	}
-	x := &MTROperationalStateClusterErrorStateStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTROperationalStateClusterErrorStateStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTROperationalStateClusterErrorStateStructAdopt(id objc.ID) *MTROperational
 	if id == 0 {
 		return nil
 	}
-	x := &MTROperationalStateClusterErrorStateStruct{Handle: objref.Wrap(id)}
+	x := &MTROperationalStateClusterErrorStateStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,39 +58,48 @@ func (x *MTROperationalStateClusterErrorStateStruct) IsKind(className string) bo
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTROperationalStateClusterErrorStateStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTROperationalStateClusterErrorStateStruct creates a new MTROperationalStateClusterErrorStateStruct.
 func NewMTROperationalStateClusterErrorStateStruct() *MTROperationalStateClusterErrorStateStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTROperationalStateClusterErrorStateStruct")), objc.RegisterName("new"))
 	return mTROperationalStateClusterErrorStateStructAdopt(_id)
 }
 
-// WithErrorStateID sets errorStateID and returns the receiver so calls can be chained.
+// WithErrorStateID sets the property and returns the receiver so calls can be chained.
 func (x *MTROperationalStateClusterErrorStateStruct) WithErrorStateID(errorStateID obj.Object) *MTROperationalStateClusterErrorStateStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorStateID:"), objref.IDOf(errorStateID))
 	return x
 }
 
-// WithErrorStateLabel sets errorStateLabel and returns the receiver so calls can be chained.
+// WithErrorStateLabel sets the property and returns the receiver so calls can be chained.
 func (x *MTROperationalStateClusterErrorStateStruct) WithErrorStateLabel(errorStateLabel string) *MTROperationalStateClusterErrorStateStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorStateLabel:"), purego.NSString(errorStateLabel))
 	return x
 }
 
-// WithErrorStateDetails sets errorStateDetails and returns the receiver so calls can be chained.
+// WithErrorStateDetails sets the property and returns the receiver so calls can be chained.
 func (x *MTROperationalStateClusterErrorStateStruct) WithErrorStateDetails(errorStateDetails string) *MTROperationalStateClusterErrorStateStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorStateDetails:"), purego.NSString(errorStateDetails))
 	return x
 }
 
+// ErrorStateID wraps the corresponding Objective-C method.
 func (x *MTROperationalStateClusterErrorStateStruct) ErrorStateID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorStateID"))
 	return obj.Wrap(_r)
 }
 
+// SetErrorStateID wraps the corresponding Objective-C method.
 func (x *MTROperationalStateClusterErrorStateStruct) SetErrorStateID(errorStateID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorStateID:"), objref.IDOf(errorStateID))
 }
 
+// ErrorStateLabel wraps the corresponding Objective-C method.
 func (x *MTROperationalStateClusterErrorStateStruct) ErrorStateLabel() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorStateLabel"))
 	if _r == 0 {
@@ -97,10 +108,12 @@ func (x *MTROperationalStateClusterErrorStateStruct) ErrorStateLabel() string {
 	return purego.GoString(_r)
 }
 
+// SetErrorStateLabel wraps the corresponding Objective-C method.
 func (x *MTROperationalStateClusterErrorStateStruct) SetErrorStateLabel(errorStateLabel string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorStateLabel:"), purego.NSString(errorStateLabel))
 }
 
+// ErrorStateDetails wraps the corresponding Objective-C method.
 func (x *MTROperationalStateClusterErrorStateStruct) ErrorStateDetails() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorStateDetails"))
 	if _r == 0 {
@@ -109,6 +122,7 @@ func (x *MTROperationalStateClusterErrorStateStruct) ErrorStateDetails() string 
 	return purego.GoString(_r)
 }
 
+// SetErrorStateDetails wraps the corresponding Objective-C method.
 func (x *MTROperationalStateClusterErrorStateStruct) SetErrorStateDetails(errorStateDetails string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorStateDetails:"), purego.NSString(errorStateDetails))
 }

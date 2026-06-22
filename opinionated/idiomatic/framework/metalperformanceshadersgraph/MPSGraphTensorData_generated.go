@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The representation of a compute data type.
-//
 // GraphTensorData is an idiomatic wrapper over the Objective-C class MPSGraphTensorData.
+//
+// It embeds [GraphObject], promoting that type's methods.
+//
+// The representation of a compute data type.
 type GraphTensorData struct {
-	objref.Handle
+	GraphObject
 }
 
 // GraphTensorDataFromID adopts an existing Objective-C object as a GraphTensorData
@@ -25,7 +26,8 @@ func GraphTensorDataFromID(id objc.ID) *GraphTensorData {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphTensorData{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphTensorData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,78 +40,54 @@ func graphTensorDataAdopt(id objc.ID) *GraphTensorData {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphTensorData{Handle: objref.Wrap(id)}
+	x := &GraphTensorData{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *GraphTensorData) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphTensorData) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphTensorData) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a tensor data with an MPS matrix.
-//
-// NewGraphTensorDataWithMPSMatrix creates a new GraphTensorData.
+// NewGraphTensorDataWithMPSMatrix initializes a tensor data with an MPS matrix.
 func NewGraphTensorDataWithMPSMatrix(matrix obj.Object) *GraphTensorData {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSGraphTensorData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMPSMatrix:"), objref.IDOf(matrix))
 	return graphTensorDataAdopt(_id)
 }
 
-// Initializes a tensor data with an MPS matrix enforcing rank of the result.
-//
-// NewGraphTensorDataWithMPSMatrixRank creates a new GraphTensorData.
+// NewGraphTensorDataWithMPSMatrixRank initializes a tensor data with an MPS matrix enforcing rank of the result.
 func NewGraphTensorDataWithMPSMatrixRank(matrix obj.Object, rank int) *GraphTensorData {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSGraphTensorData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMPSMatrix:rank:"), objref.IDOf(matrix), rank)
 	return graphTensorDataAdopt(_id)
 }
 
-// Initializes a tensor data with an MPS vector.
-//
-// NewGraphTensorDataWithMPSVector creates a new GraphTensorData.
+// NewGraphTensorDataWithMPSVector initializes a tensor data with an MPS vector.
 func NewGraphTensorDataWithMPSVector(vector obj.Object) *GraphTensorData {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSGraphTensorData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMPSVector:"), objref.IDOf(vector))
 	return graphTensorDataAdopt(_id)
 }
 
-// Initializes a tensor data with an MPS vector enforcing rank of the result.
-//
-// NewGraphTensorDataWithMPSVectorRank creates a new GraphTensorData.
+// NewGraphTensorDataWithMPSVectorRank initializes a tensor data with an MPS vector enforcing rank of the result.
 func NewGraphTensorDataWithMPSVectorRank(vector obj.Object, rank int) *GraphTensorData {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSGraphTensorData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMPSVector:rank:"), objref.IDOf(vector), rank)
 	return graphTensorDataAdopt(_id)
 }
 
-// Initializes an MPSGraphTensorData with an MPS ndarray.
-//
-// NewGraphTensorDataWithMPSNDArray creates a new GraphTensorData.
+// NewGraphTensorDataWithMPSNDArray initializes an MPSGraphTensorData with an MPS ndarray.
 func NewGraphTensorDataWithMPSNDArray(ndarray obj.Object) *GraphTensorData {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSGraphTensorData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMPSNDArray:"), objref.IDOf(ndarray))
 	return graphTensorDataAdopt(_id)
 }
 
-// Return an mpsndarray object will copy contents if the contents are not stored in an MPS ndarray.
+// Mpsndarray return an mpsndarray object will copy contents if the contents are not stored in an MPS ndarray.
 func (x *GraphTensorData) Mpsndarray() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mpsndarray"))
 	return obj.Wrap(_r)
 }
 
-// The device of the tensor data.
+// Device the device of the tensor data.
 func (x *GraphTensorData) Device() *GraphDevice {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
 	return GraphDeviceFromID(_r)
@@ -123,3 +101,5 @@ type GraphTensorDataable interface {
 }
 
 var _ GraphTensorDataable = (*GraphTensorData)(nil)
+
+var _ GraphObjectProvider = (*GraphTensorData)(nil)

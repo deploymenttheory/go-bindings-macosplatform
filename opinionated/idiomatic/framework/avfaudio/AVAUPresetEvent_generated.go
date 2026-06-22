@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a preset load and change on the music track’s destination audio unit.
-//
 // AUPresetEvent is an idiomatic wrapper over the Objective-C class AVAUPresetEvent.
+//
+// It embeds [MusicEvent], promoting that type's methods.
+//
+// An object that represents a preset load and change on the music track’s destination audio unit.
 type AUPresetEvent struct {
-	objref.Handle
+	MusicEvent
 }
 
 // AUPresetEventFromID adopts an existing Objective-C object as a AUPresetEvent
@@ -25,7 +26,8 @@ func AUPresetEventFromID(id objc.ID) *AUPresetEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &AUPresetEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AUPresetEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,69 +40,54 @@ func aUPresetEventAdopt(id objc.ID) *AUPresetEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &AUPresetEvent{Handle: objref.Wrap(id)}
+	x := &AUPresetEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *AUPresetEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AUPresetEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AUPresetEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates an event with the scope, element, and dictionary for the preset.
-//
-// NewAUPresetEventWithScopeElementDictionary creates a new AUPresetEvent.
+// NewAUPresetEventWithScopeElementDictionary creates an event with the scope, element, and dictionary for the preset.
 func NewAUPresetEventWithScopeElementDictionary(scope int, element int, presetDictionary obj.Object) *AUPresetEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAUPresetEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScope:element:dictionary:"), scope, element, objref.IDOf(presetDictionary))
 	return aUPresetEventAdopt(_id)
 }
 
-// The audio unit scope.
-//
-// WithScope sets scope and returns the receiver so calls can be chained.
+// WithScope the audio unit scope.
 func (x *AUPresetEvent) WithScope(scope int) *AUPresetEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScope:"), scope)
 	return x
 }
 
-// The element index in the scope.
-//
-// WithElement sets element and returns the receiver so calls can be chained.
+// WithElement the element index in the scope.
 func (x *AUPresetEvent) WithElement(element int) *AUPresetEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElement:"), element)
 	return x
 }
 
+// Scope wraps the corresponding Objective-C method.
 func (x *AUPresetEvent) Scope() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("scope"))
 	return _r
 }
 
+// SetScope wraps the corresponding Objective-C method.
 func (x *AUPresetEvent) SetScope(scope int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScope:"), scope)
 }
 
+// Element wraps the corresponding Objective-C method.
 func (x *AUPresetEvent) Element() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("element"))
 	return _r
 }
 
+// SetElement wraps the corresponding Objective-C method.
 func (x *AUPresetEvent) SetElement(element int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElement:"), element)
 }
 
+// PresetDictionary wraps the corresponding Objective-C method.
 func (x *AUPresetEvent) PresetDictionary() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presetDictionary"))
 	return obj.Wrap(_r)
@@ -119,3 +106,5 @@ type AUPresetEventable interface {
 }
 
 var _ AUPresetEventable = (*AUPresetEvent)(nil)
+
+var _ MusicEventProvider = (*AUPresetEvent)(nil)

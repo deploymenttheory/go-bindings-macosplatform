@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information about the user’s location during a specific period of time.
-//
 // Visit is an idiomatic wrapper over the Objective-C class CLVisit.
+//
+// Information about the user’s location during a specific period of time.
 type Visit struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VisitFromID(id objc.ID) *Visit {
 	if id == 0 {
 		return nil
 	}
-	x := &Visit{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Visit{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func visitAdopt(id objc.ID) *Visit {
 	if id == 0 {
 		return nil
 	}
-	x := &Visit{Handle: objref.Wrap(id)}
+	x := &Visit{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,25 @@ func (x *Visit) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Visit) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVisit creates a new Visit.
 func NewVisit() *Visit {
 	_id := objc.Send[objc.ID](objc.ID(_class("CLVisit")), objc.RegisterName("new"))
 	return visitAdopt(_id)
 }
 
+// ArrivalDate wraps the corresponding Objective-C method.
 func (x *Visit) ArrivalDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrivalDate"))
 	return obj.Wrap(_r)
 }
 
+// DepartureDate wraps the corresponding Objective-C method.
 func (x *Visit) DepartureDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("departureDate"))
 	return obj.Wrap(_r)

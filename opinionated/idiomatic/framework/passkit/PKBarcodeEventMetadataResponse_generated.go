@@ -23,7 +23,8 @@ func BarcodeEventMetadataResponseFromID(id objc.ID) *BarcodeEventMetadataRespons
 	if id == 0 {
 		return nil
 	}
-	x := &BarcodeEventMetadataResponse{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BarcodeEventMetadataResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func barcodeEventMetadataResponseAdopt(id objc.ID) *BarcodeEventMetadataResponse
 	if id == 0 {
 		return nil
 	}
-	x := &BarcodeEventMetadataResponse{Handle: objref.Wrap(id)}
+	x := &BarcodeEventMetadataResponse{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *BarcodeEventMetadataResponse) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BarcodeEventMetadataResponse) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBarcodeEventMetadataResponseWithPaymentInformation creates a new BarcodeEventMetadataResponse.
 func NewBarcodeEventMetadataResponseWithPaymentInformation(paymentInformation obj.Object) *BarcodeEventMetadataResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKBarcodeEventMetadataResponse")), objc.RegisterName("alloc"))
@@ -63,17 +71,19 @@ func NewBarcodeEventMetadataResponseWithPaymentInformation(paymentInformation ob
 	return barcodeEventMetadataResponseAdopt(_id)
 }
 
-// WithPaymentInformation sets paymentInformation and returns the receiver so calls can be chained.
+// WithPaymentInformation sets the property and returns the receiver so calls can be chained.
 func (x *BarcodeEventMetadataResponse) WithPaymentInformation(paymentInformation obj.Object) *BarcodeEventMetadataResponse {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentInformation:"), objref.IDOf(paymentInformation))
 	return x
 }
 
+// PaymentInformation wraps the corresponding Objective-C method.
 func (x *BarcodeEventMetadataResponse) PaymentInformation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentInformation"))
 	return obj.Wrap(_r)
 }
 
+// SetPaymentInformation wraps the corresponding Objective-C method.
 func (x *BarcodeEventMetadataResponse) SetPaymentInformation(paymentInformation obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentInformation:"), objref.IDOf(paymentInformation))
 }

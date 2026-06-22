@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a Neural Engine compute device.
-//
 // NeuralEngineComputeDevice is an idiomatic wrapper over the Objective-C class MLNeuralEngineComputeDevice.
+//
+// An object that represents a Neural Engine compute device.
 type NeuralEngineComputeDevice struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NeuralEngineComputeDeviceFromID(id objc.ID) *NeuralEngineComputeDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &NeuralEngineComputeDevice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NeuralEngineComputeDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func neuralEngineComputeDeviceAdopt(id objc.ID) *NeuralEngineComputeDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &NeuralEngineComputeDevice{Handle: objref.Wrap(id)}
+	x := &NeuralEngineComputeDevice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *NeuralEngineComputeDevice) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NeuralEngineComputeDevice) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNeuralEngineComputeDevice creates a new NeuralEngineComputeDevice.
 func NewNeuralEngineComputeDevice() *NeuralEngineComputeDevice {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLNeuralEngineComputeDevice")), objc.RegisterName("new"))
 	return neuralEngineComputeDeviceAdopt(_id)
 }
 
+// TotalCoreCount wraps the corresponding Objective-C method.
 func (x *NeuralEngineComputeDevice) TotalCoreCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("totalCoreCount"))
 	return _r

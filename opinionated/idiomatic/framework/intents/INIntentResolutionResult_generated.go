@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resolution result for a parameter of an intent object.
-//
 // IntentResolutionResult is an idiomatic wrapper over the Objective-C class INIntentResolutionResult.
+//
+// IntentResolutionResult is an abstract base — you do not construct it directly. Construct one of [BooleanResolutionResult], [CallCapabilityResolutionResult], [CallDestinationTypeResolutionResult], [CallRecordResolutionResult], [CallRecordTypeOptionsResolutionResult], [CallRecordTypeResolutionResult], [CurrencyAmountResolutionResult], [DateComponentsResolutionResult], [DoubleResolutionResult], [EnergyResolutionResult], [EnumResolutionResult], [FileResolutionResult], [IntegerResolutionResult], [LengthResolutionResult], [MassResolutionResult], [ObjectResolutionResult], [OutgoingMessageTypeResolutionResult], [PaymentMethodResolutionResult], [PersonResolutionResult], [PlacemarkResolutionResult], [SpeedResolutionResult], [StringResolutionResult], [TemperatureResolutionResult], [TimeIntervalResolutionResult], [URLResolutionResult], [VolumeResolutionResult] and pass it where a IntentResolutionResult is accepted.
+//
+// A resolution result for a parameter of an intent object.
 type IntentResolutionResult struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func IntentResolutionResultFromID(id objc.ID) *IntentResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	x := &IntentResolutionResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IntentResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func intentResolutionResultAdopt(id objc.ID) *IntentResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	x := &IntentResolutionResult{Handle: objref.Wrap(id)}
+	x := &IntentResolutionResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *IntentResolutionResult) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewIntentResolutionResult creates a new IntentResolutionResult.
-func NewIntentResolutionResult() *IntentResolutionResult {
-	_id := objc.Send[objc.ID](objc.ID(_class("INIntentResolutionResult")), objc.RegisterName("new"))
-	return intentResolutionResultAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IntentResolutionResult) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // IntentResolutionResultable is the interface implemented by [IntentResolutionResult], for mocking and DI.
@@ -70,3 +74,10 @@ type IntentResolutionResultable interface {
 }
 
 var _ IntentResolutionResultable = (*IntentResolutionResult)(nil)
+
+// isIntentResolutionResult marks IntentResolutionResult — and, by embedding promotion, its
+// subclasses — as a member of the IntentResolutionResult hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *IntentResolutionResult) isIntentResolutionResult() {}
+
+var _ IntentResolutionResultProvider = (*IntentResolutionResult)(nil)

@@ -9,67 +9,78 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// Create a MPSImageDescriptor for a single read/write cnn image.
+// ImageDescriptorWithChannelFormatWidthHeightFeatureChannels create a MPSImageDescriptor for a single read/write cnn image.
 func ImageDescriptorWithChannelFormatWidthHeightFeatureChannels(channelFormat ImageFeatureChannelFormat, width int, height int, featureChannels int) *ImageDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSImageDescriptor")), objc.RegisterName("imageDescriptorWithChannelFormat:width:height:featureChannels:"), channelFormat, width, height, featureChannels)
 	return ImageDescriptorFromID(_r)
 }
 
-// Create a MPSMatrixDescriptor with the specified dimensions and data type. For performance considerations the optimal row stride may not necessarily be equal to the number of columns in the matrix.  The MPSMatrix class provides a method which may be used to determine this value, see the rowBytesForColumns API in the MPSMatrix class. The number of matrices described is initialized to 1.
+// MatrixDescriptorWithDimensionsColumnsRowBytesDataType create a MPSMatrixDescriptor with the specified dimensions and data type. For performance considerations the optimal row stride may not necessarily be equal to the number of columns in the matrix.  The MPSMatrix class provides a method which may be used to determine this value, see the rowBytesForColumns API in the MPSMatrix class. The number of matrices described is initialized to 1.
 func MatrixDescriptorWithDimensionsColumnsRowBytesDataType(rows int, columns int, rowBytes int, dataType DataType) *MatrixDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSMatrixDescriptor")), objc.RegisterName("matrixDescriptorWithDimensions:columns:rowBytes:dataType:"), rows, columns, rowBytes, dataType)
 	return MatrixDescriptorFromID(_r)
 }
 
+// MatrixDescriptorWithRowsColumnsRowBytesDataType wraps the corresponding Objective-C method.
 func MatrixDescriptorWithRowsColumnsRowBytesDataType(rows int, columns int, rowBytes int, dataType DataType) *MatrixDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSMatrixDescriptor")), objc.RegisterName("matrixDescriptorWithRows:columns:rowBytes:dataType:"), rows, columns, rowBytes, dataType)
 	return MatrixDescriptorFromID(_r)
 }
 
-// Create a MPSMatrixDescriptor with the specified dimensions and data type. For performance considerations the optimal row stride may not necessarily be equal to the number of columns in the matrix.  The MPSMatrix class provides a method which may be used to determine this value, see the rowBytesForColumns API in the MPSMatrix class.
+// MatrixDescriptorWithRowsColumnsMatricesRowBytesMatrixBytesDataType create a MPSMatrixDescriptor with the specified dimensions and data type. For performance considerations the optimal row stride may not necessarily be equal to the number of columns in the matrix.  The MPSMatrix class provides a method which may be used to determine this value, see the rowBytesForColumns API in the MPSMatrix class.
 func MatrixDescriptorWithRowsColumnsMatricesRowBytesMatrixBytesDataType(rows int, columns int, matrices int, rowBytes int, matrixBytes int, dataType DataType) *MatrixDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSMatrixDescriptor")), objc.RegisterName("matrixDescriptorWithRows:columns:matrices:rowBytes:matrixBytes:dataType:"), rows, columns, matrices, rowBytes, matrixBytes, dataType)
 	return MatrixDescriptorFromID(_r)
 }
 
-// Return the recommended row stride, in bytes, for a given number of columns. To achieve best performance the optimal stride between rows of a matrix is not necessarily equivalent to the number of columns.  This method returns the row stride, in bytes, which gives best performance for a given number of columns.  Using this row stride to construct your array is recommended, but not required (provided that the stride used is still large enough to allocate a full row of data).
+// RowBytesFromColumnsDataType return the recommended row stride, in bytes, for a given number of columns. To achieve best performance the optimal stride between rows of a matrix is not necessarily equivalent to the number of columns.  This method returns the row stride, in bytes, which gives best performance for a given number of columns.  Using this row stride to construct your array is recommended, but not required (provided that the stride used is still large enough to allocate a full row of data).
 func RowBytesFromColumnsDataType(columns int, dataType DataType) int {
 	_r := objc.Send[int](objc.ID(_class("MPSMatrixDescriptor")), objc.RegisterName("rowBytesFromColumns:dataType:"), columns, dataType)
 	return _r
 }
 
+// RowBytesForColumnsDataType wraps the corresponding Objective-C method.
 func RowBytesForColumnsDataType(columns int, dataType DataType) int {
 	_r := objc.Send[int](objc.ID(_class("MPSMatrixDescriptor")), objc.RegisterName("rowBytesForColumns:dataType:"), columns, dataType)
 	return _r
 }
 
-// A convenience function to create an MPSNDArrayDescriptor object for a given size of dimensions. Sample code:
+// DescriptorWithDataTypeDimensionCountDimensionSizes create an MPSNDArrayDescriptor object for a given size of dimensions. Sample code:
+func DescriptorWithDataTypeDimensionCountDimensionSizes(dataType DataType, numberOfDimensions int) (result *NDArrayDescriptor, dimensionSizes int) {
+	var _out0 int
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayDescriptor")), objc.RegisterName("descriptorWithDataType:dimensionCount:dimensionSizes:"), dataType, numberOfDimensions, unsafe.Pointer(&_out0))
+	_v := NDArrayDescriptorFromID(_r)
+	return _v, _out0
+}
+
+// DescriptorWithDataTypeShape a convenience function to create an MPSNDArrayDescriptor object for a given size of dimensions. Sample code:
 func DescriptorWithDataTypeShape(dataType DataType, shape []obj.Object) *NDArrayDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayDescriptor")), objc.RegisterName("descriptorWithDataType:shape:"), dataType, purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return NDArrayDescriptorFromID(_r)
 }
 
-// Init an empty autoreleased resource list
+// ResourceList init an empty autoreleased resource list
 func ResourceList() *StateResourceList {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSStateResourceList")), objc.RegisterName("resourceList"))
 	return StateResourceListFromID(_r)
 }
 
-// Create a MPSVectorDescriptor with the specified length and data type. Use this function for creating a descriptor of a MPSVector object containing a single vector.
+// VectorDescriptorWithLengthDataType create a MPSVectorDescriptor with the specified length and data type. Use this function for creating a descriptor of a MPSVector object containing a single vector.
 func VectorDescriptorWithLengthDataType(length int, dataType DataType) *VectorDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSVectorDescriptor")), objc.RegisterName("vectorDescriptorWithLength:dataType:"), length, dataType)
 	return VectorDescriptorFromID(_r)
 }
 
-// Create a MPSVectorDescriptor with the specified length and data type. For performance considerations the optimal stride between vectors may not necessarily be equal to the vector length.  The MPSVectorDescriptor class provides a method which may be used to determine this value, see the vectorBytesForLength API.
+// VectorDescriptorWithLengthVectorsVectorBytesDataType create a MPSVectorDescriptor with the specified length and data type. For performance considerations the optimal stride between vectors may not necessarily be equal to the vector length.  The MPSVectorDescriptor class provides a method which may be used to determine this value, see the vectorBytesForLength API.
 func VectorDescriptorWithLengthVectorsVectorBytesDataType(length int, vectors int, vectorBytes int, dataType DataType) *VectorDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSVectorDescriptor")), objc.RegisterName("vectorDescriptorWithLength:vectors:vectorBytes:dataType:"), length, vectors, vectorBytes, dataType)
 	return VectorDescriptorFromID(_r)
 }
 
-// Return the recommended stride, in bytes, to be used for an array of vectors of a given length. To achieve best performance the optimal stride between vectors within an array of vectors is not necessarily equivalent to the number of elements per vector.  This method returns the stride, in bytes, which gives best performance for a given vector length. Using this stride to construct your array is recommended, but not required (provided that the stride used is still large enough to allocate a full vector of data).
+// VectorBytesForLengthDataType return the recommended stride, in bytes, to be used for an array of vectors of a given length. To achieve best performance the optimal stride between vectors within an array of vectors is not necessarily equivalent to the number of elements per vector.  This method returns the stride, in bytes, which gives best performance for a given vector length. Using this stride to construct your array is recommended, but not required (provided that the stride used is still large enough to allocate a full vector of data).
 func VectorBytesForLengthDataType(length int, dataType DataType) int {
 	_r := objc.Send[int](objc.ID(_class("MPSVectorDescriptor")), objc.RegisterName("vectorBytesForLength:dataType:"), length, dataType)
 	return _r

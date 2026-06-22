@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that supplies audio data.
-//
 // AudioSourceNode is an idiomatic wrapper over the Objective-C class AVAudioSourceNode.
+//
+// It embeds [AudioNode], promoting that type's methods.
+//
+// An object that supplies audio data.
 type AudioSourceNode struct {
-	objref.Handle
+	AudioNode
 }
 
 // AudioSourceNodeFromID adopts an existing Objective-C object as a AudioSourceNode
@@ -25,7 +26,8 @@ func AudioSourceNodeFromID(id objc.ID) *AudioSourceNode {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioSourceNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioSourceNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func audioSourceNodeAdopt(id objc.ID) *AudioSourceNode {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioSourceNode{Handle: objref.Wrap(id)}
+	x := &AudioSourceNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AudioSourceNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioSourceNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioSourceNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAudioSourceNode creates a new AudioSourceNode.
@@ -70,3 +58,5 @@ type AudioSourceNodeable interface {
 }
 
 var _ AudioSourceNodeable = (*AudioSourceNode)(nil)
+
+var _ AudioNodeProvider = (*AudioSourceNode)(nil)

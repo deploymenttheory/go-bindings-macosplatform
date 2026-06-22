@@ -9,19 +9,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// Key for accessing the choice identifier from the choiceDictionary.  The value for this key is an NSString. Use this key with dictionary retrieved from choiceDictionaries to access the identifier for a given choice. This identifier is either the package identifier attached to the choice, or the choice identifier in a distribution script.
 // InstallerState_Choice_Identifier returns the string constant InstallerState_Choice_Identifier, for use as a dictionary key or argument.
 func InstallerState_Choice_Identifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("InstallerState_Choice_Identifier")))
 }
 
-// Key for accessing if a choice was chosen to be installed.  The value for this key is an NSNumber. Use this key with the dictionary retrieved from choiceDictionaries to determine if the given choice was installed (or will be installed, if installStarted is false).
 // InstallerState_Choice_Installed returns the string constant InstallerState_Choice_Installed, for use as a dictionary key or argument.
 func InstallerState_Choice_Installed() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("InstallerState_Choice_Installed")))
 }
 
-// Key for accessing choice custom location.  The value for this key is a full path to the install location. Certain choices can be relocated to a different location than the target.  If this choice has been relocated, this value for this key when used in a choicesDictionary will be the alternate location (selected by the user).
 // InstallerState_Choice_CustomLocation returns the string constant InstallerState_Choice_CustomLocation, for use as a dictionary key or argument.
 func InstallerState_Choice_CustomLocation() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("InstallerState_Choice_CustomLocation")))

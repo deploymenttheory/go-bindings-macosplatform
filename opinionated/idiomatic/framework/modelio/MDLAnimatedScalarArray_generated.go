@@ -8,13 +8,15 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AnimatedScalarArray is an idiomatic wrapper over the Objective-C class MDLAnimatedScalarArray.
+//
+// It embeds [AnimatedValue], promoting that type's methods.
 type AnimatedScalarArray struct {
-	objref.Handle
+	AnimatedValue
 }
 
 // AnimatedScalarArrayFromID adopts an existing Objective-C object as a AnimatedScalarArray
@@ -23,7 +25,8 @@ func AnimatedScalarArrayFromID(id objc.ID) *AnimatedScalarArray {
 	if id == 0 {
 		return nil
 	}
-	x := &AnimatedScalarArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AnimatedScalarArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +39,10 @@ func animatedScalarArrayAdopt(id objc.ID) *AnimatedScalarArray {
 	if id == 0 {
 		return nil
 	}
-	x := &AnimatedScalarArray{Handle: objref.Wrap(id)}
+	x := &AnimatedScalarArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AnimatedScalarArray) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AnimatedScalarArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AnimatedScalarArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAnimatedScalarArrayWithElementCount creates a new AnimatedScalarArray.
@@ -63,12 +52,71 @@ func NewAnimatedScalarArrayWithElementCount(arrayElementCount int) *AnimatedScal
 	return animatedScalarArrayAdopt(_id)
 }
 
-// WithInterpolation sets interpolation and returns the receiver so calls can be chained.
+// WithInterpolation sets the property and returns the receiver so calls can be chained.
 func (x *AnimatedScalarArray) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedScalarArray {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
 	return x
 }
 
+// SetFloatArrayCountAtTime wraps the corresponding Objective-C method.
+func (x *AnimatedScalarArray) SetFloatArrayCountAtTime(count int, time_ float64) (array float32) {
+	var _out0 float32
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatArray:count:atTime:"), unsafe.Pointer(&_out0), count, time_)
+	return _out0
+}
+
+// SetDoubleArrayCountAtTime wraps the corresponding Objective-C method.
+func (x *AnimatedScalarArray) SetDoubleArrayCountAtTime(count int, time_ float64) (array float64) {
+	var _out0 float64
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleArray:count:atTime:"), unsafe.Pointer(&_out0), count, time_)
+	return _out0
+}
+
+// GetFloatArrayMaxCountAtTime wraps the corresponding Objective-C method.
+func (x *AnimatedScalarArray) GetFloatArrayMaxCountAtTime(maxCount int, time_ float64) (result int, array float32) {
+	var _out0 float32
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("getFloatArray:maxCount:atTime:"), unsafe.Pointer(&_out0), maxCount, time_)
+	return _r, _out0
+}
+
+// GetDoubleArrayMaxCountAtTime wraps the corresponding Objective-C method.
+func (x *AnimatedScalarArray) GetDoubleArrayMaxCountAtTime(maxCount int, time_ float64) (result int, array float64) {
+	var _out0 float64
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("getDoubleArray:maxCount:atTime:"), unsafe.Pointer(&_out0), maxCount, time_)
+	return _r, _out0
+}
+
+// ResetWithFloatArrayCountAtTimesCount wraps the corresponding Objective-C method.
+func (x *AnimatedScalarArray) ResetWithFloatArrayCountAtTimesCount(valuesCount int, timesCount int) (valuesArray float32, timesArray float64) {
+	var _out0 float32
+	var _out1 float64
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetWithFloatArray:count:atTimes:count:"), unsafe.Pointer(&_out0), valuesCount, unsafe.Pointer(&_out1), timesCount)
+	return _out0, _out1
+}
+
+// ResetWithDoubleArrayCountAtTimesCount wraps the corresponding Objective-C method.
+func (x *AnimatedScalarArray) ResetWithDoubleArrayCountAtTimesCount(valuesCount int, timesCount int) (valuesArray float64, timesArray float64) {
+	var _out0 float64
+	var _out1 float64
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetWithDoubleArray:count:atTimes:count:"), unsafe.Pointer(&_out0), valuesCount, unsafe.Pointer(&_out1), timesCount)
+	return _out0, _out1
+}
+
+// GetFloatArrayMaxCount wraps the corresponding Objective-C method.
+func (x *AnimatedScalarArray) GetFloatArrayMaxCount(maxCount int) (result int, valuesArray float32) {
+	var _out0 float32
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("getFloatArray:maxCount:"), unsafe.Pointer(&_out0), maxCount)
+	return _r, _out0
+}
+
+// GetDoubleArrayMaxCount wraps the corresponding Objective-C method.
+func (x *AnimatedScalarArray) GetDoubleArrayMaxCount(maxCount int) (result int, valuesArray float64) {
+	var _out0 float64
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("getDoubleArray:maxCount:"), unsafe.Pointer(&_out0), maxCount)
+	return _r, _out0
+}
+
+// ElementCount wraps the corresponding Objective-C method.
 func (x *AnimatedScalarArray) ElementCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("elementCount"))
 	return _r
@@ -78,7 +126,17 @@ func (x *AnimatedScalarArray) ElementCount() int {
 type AnimatedScalarArrayable interface {
 	obj.Object
 	WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedScalarArray
+	SetFloatArrayCountAtTime(count int, time_ float64) (array float32)
+	SetDoubleArrayCountAtTime(count int, time_ float64) (array float64)
+	GetFloatArrayMaxCountAtTime(maxCount int, time_ float64) (result int, array float32)
+	GetDoubleArrayMaxCountAtTime(maxCount int, time_ float64) (result int, array float64)
+	ResetWithFloatArrayCountAtTimesCount(valuesCount int, timesCount int) (valuesArray float32, timesArray float64)
+	ResetWithDoubleArrayCountAtTimesCount(valuesCount int, timesCount int) (valuesArray float64, timesArray float64)
+	GetFloatArrayMaxCount(maxCount int) (result int, valuesArray float32)
+	GetDoubleArrayMaxCount(maxCount int) (result int, valuesArray float64)
 	ElementCount() int
 }
 
 var _ AnimatedScalarArrayable = (*AnimatedScalarArray)(nil)
+
+var _ AnimatedValueProvider = (*AnimatedScalarArray)(nil)

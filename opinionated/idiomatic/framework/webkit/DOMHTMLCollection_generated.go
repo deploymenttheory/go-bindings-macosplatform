@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMHTMLCollection is an idiomatic wrapper over the Objective-C class DOMHTMLCollection.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMHTMLCollection struct {
-	objref.Handle
+	DOMObject
 }
 
 // DOMHTMLCollectionFromID adopts an existing Objective-C object as a DOMHTMLCollection
@@ -23,7 +24,8 @@ func DOMHTMLCollectionFromID(id objc.ID) *DOMHTMLCollection {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMHTMLCollection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMHTMLCollection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMHTMLCollectionAdopt(id objc.ID) *DOMHTMLCollection {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMHTMLCollection{Handle: objref.Wrap(id)}
+	x := &DOMHTMLCollection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMHTMLCollection) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMHTMLCollection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMHTMLCollection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMHTMLCollection creates a new DOMHTMLCollection.
@@ -62,21 +50,25 @@ func NewDOMHTMLCollection() *DOMHTMLCollection {
 	return dOMHTMLCollectionAdopt(_id)
 }
 
+// Item wraps the corresponding Objective-C method.
 func (x *DOMHTMLCollection) Item(index int) *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
 	return DOMNodeFromID(_r)
 }
 
+// NamedItem wraps the corresponding Objective-C method.
 func (x *DOMHTMLCollection) NamedItem(name string) *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("namedItem:"), purego.NSString(name))
 	return DOMNodeFromID(_r)
 }
 
+// Tags wraps the corresponding Objective-C method.
 func (x *DOMHTMLCollection) Tags(name string) *DOMNodeList {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tags:"), purego.NSString(name))
 	return DOMNodeListFromID(_r)
 }
 
+// Length wraps the corresponding Objective-C method.
 func (x *DOMHTMLCollection) Length() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
 	return _r
@@ -92,3 +84,7 @@ type DOMHTMLCollectionable interface {
 }
 
 var _ DOMHTMLCollectionable = (*DOMHTMLCollection)(nil)
+
+var _ DOMObjectProvider = (*DOMHTMLCollection)(nil)
+
+var _ WebScriptObjectProvider = (*DOMHTMLCollection)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A generator of texel data that computes a normal map from a supplied texture.
-//
 // NormalMapTexture is an idiomatic wrapper over the Objective-C class MDLNormalMapTexture.
+//
+// It embeds [Texture], promoting that type's methods.
+//
+// A generator of texel data that computes a normal map from a supplied texture.
 type NormalMapTexture struct {
-	objref.Handle
+	Texture
 }
 
 // NormalMapTextureFromID adopts an existing Objective-C object as a NormalMapTexture
@@ -25,7 +26,8 @@ func NormalMapTextureFromID(id objc.ID) *NormalMapTexture {
 	if id == 0 {
 		return nil
 	}
-	x := &NormalMapTexture{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NormalMapTexture{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,46 +40,26 @@ func normalMapTextureAdopt(id objc.ID) *NormalMapTexture {
 	if id == 0 {
 		return nil
 	}
-	x := &NormalMapTexture{Handle: objref.Wrap(id)}
+	x := &NormalMapTexture{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NormalMapTexture) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NormalMapTexture) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NormalMapTexture) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a normal map to be generated from the specified texture.
-//
-// NewNormalMapTextureByGeneratingNormalMapWithTextureNameSmoothnessContrast creates a new NormalMapTexture.
+// NewNormalMapTextureByGeneratingNormalMapWithTextureNameSmoothnessContrast initializes a normal map to be generated from the specified texture.
 func NewNormalMapTextureByGeneratingNormalMapWithTextureNameSmoothnessContrast(sourceTexture *Texture, name string, smoothness float32, contrast float32) *NormalMapTexture {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLNormalMapTexture")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initByGeneratingNormalMapWithTexture:name:smoothness:contrast:"), objref.IDOf(sourceTexture), purego.NSString(name), smoothness, contrast)
 	return normalMapTextureAdopt(_id)
 }
 
-// A Boolean value that indicates whether the texture is a cube textures.
-//
-// WithIsCube sets isCube and returns the receiver so calls can be chained.
+// WithIsCube a Boolean value that indicates whether the texture is a cube textures.
 func (x *NormalMapTexture) WithIsCube(isCube bool) *NormalMapTexture {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsCube:"), isCube)
 	return x
 }
 
-// hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
-//
-// WithHasAlphaValues sets hasAlphaValues and returns the receiver so calls can be chained.
+// WithHasAlphaValues hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
 func (x *NormalMapTexture) WithHasAlphaValues(hasAlphaValues bool) *NormalMapTexture {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasAlphaValues:"), hasAlphaValues)
 	return x
@@ -91,3 +73,5 @@ type NormalMapTextureable interface {
 }
 
 var _ NormalMapTextureable = (*NormalMapTexture)(nil)
+
+var _ TextureProvider = (*NormalMapTexture)(nil)

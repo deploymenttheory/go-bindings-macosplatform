@@ -23,7 +23,8 @@ func MTRWiFiNetworkDiagnosticsClusterAssociationFailureEventFromID(id objc.ID) *
 	if id == 0 {
 		return nil
 	}
-	x := &MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRWiFiNetworkDiagnosticsClusterAssociationFailureEventAdopt(id objc.ID) *M
 	if id == 0 {
 		return nil
 	}
-	x := &MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent{Handle: objref.Wrap(id)}
+	x := &MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,53 +58,65 @@ func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) IsKind(classNa
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent creates a new MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent.
 func NewMTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent() *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent")), objc.RegisterName("new"))
 	return mTRWiFiNetworkDiagnosticsClusterAssociationFailureEventAdopt(_id)
 }
 
-// WithAssociationFailureCause sets associationFailureCause and returns the receiver so calls can be chained.
+// WithAssociationFailureCause sets the property and returns the receiver so calls can be chained.
 func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) WithAssociationFailureCause(associationFailureCause obj.Object) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssociationFailureCause:"), objref.IDOf(associationFailureCause))
 	return x
 }
 
-// WithAssociationFailure sets associationFailure and returns the receiver so calls can be chained.
+// WithAssociationFailure sets the property and returns the receiver so calls can be chained.
 func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) WithAssociationFailure(associationFailure obj.Object) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssociationFailure:"), objref.IDOf(associationFailure))
 	return x
 }
 
-// WithStatus sets status and returns the receiver so calls can be chained.
+// WithStatus sets the property and returns the receiver so calls can be chained.
 func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) WithStatus(status obj.Object) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return x
 }
 
+// AssociationFailureCause wraps the corresponding Objective-C method.
 func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) AssociationFailureCause() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("associationFailureCause"))
 	return obj.Wrap(_r)
 }
 
+// SetAssociationFailureCause wraps the corresponding Objective-C method.
 func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) SetAssociationFailureCause(associationFailureCause obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssociationFailureCause:"), objref.IDOf(associationFailureCause))
 }
 
+// AssociationFailure wraps the corresponding Objective-C method.
 func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) AssociationFailure() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("associationFailure"))
 	return obj.Wrap(_r)
 }
 
+// SetAssociationFailure wraps the corresponding Objective-C method.
 func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) SetAssociationFailure(associationFailure obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssociationFailure:"), objref.IDOf(associationFailure))
 }
 
+// Status wraps the corresponding Objective-C method.
 func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
+// SetStatus wraps the corresponding Objective-C method.
 func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) SetStatus(status obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 }

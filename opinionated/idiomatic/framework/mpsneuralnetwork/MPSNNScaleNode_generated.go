@@ -6,15 +6,17 @@ package mpsneuralnetwork
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NNScaleNode is an idiomatic wrapper over the Objective-C class MPSNNScaleNode.
+//
+// NNScaleNode is an abstract base — you do not construct it directly. Construct one of [NNBilinearScaleNode], [NNLanczosScaleNode] and pass it where a NNScaleNode is accepted.
 type NNScaleNode struct {
-	objref.Handle
+	NNFilterNode
 }
 
 // NNScaleNodeFromID adopts an existing Objective-C object as a NNScaleNode
@@ -23,7 +25,8 @@ func NNScaleNodeFromID(id objc.ID) *NNScaleNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNScaleNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNScaleNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,35 +39,20 @@ func nNScaleNodeAdopt(id objc.ID) *NNScaleNode {
 	if id == 0 {
 		return nil
 	}
-	x := &NNScaleNode{Handle: objref.Wrap(id)}
+	x := &NNScaleNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NNScaleNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNScaleNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNScaleNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewNNScaleNode creates a new NNScaleNode.
-func NewNNScaleNode() *NNScaleNode {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNScaleNode")), objc.RegisterName("new"))
+// NewNNScaleNodeWithSourceOutputSize init a node to convert a MPSImage to the desired size
+func NewNNScaleNodeWithSourceOutputSize(sourceNode *NNImageNode, size metal.MTLSize) *NNScaleNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNScaleNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:outputSize:"), objref.IDOf(sourceNode), size)
 	return nNScaleNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *NNScaleNode) WithLabel(label string) *NNScaleNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -77,3 +65,12 @@ type NNScaleNodeable interface {
 }
 
 var _ NNScaleNodeable = (*NNScaleNode)(nil)
+
+// isNNScaleNode marks NNScaleNode — and, by embedding promotion, its
+// subclasses — as a member of the NNScaleNode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NNScaleNode) isNNScaleNode() {}
+
+var _ NNScaleNodeProvider = (*NNScaleNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNScaleNode)(nil)

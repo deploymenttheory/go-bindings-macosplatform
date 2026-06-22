@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that contains the architectural details of a GPU device.
-//
 // Architecture is an idiomatic wrapper over the Objective-C class MTLArchitecture.
+//
+// A class that contains the architectural details of a GPU device.
 type Architecture struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ArchitectureFromID(id objc.ID) *Architecture {
 	if id == 0 {
 		return nil
 	}
-	x := &Architecture{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Architecture{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func architectureAdopt(id objc.ID) *Architecture {
 	if id == 0 {
 		return nil
 	}
-	x := &Architecture{Handle: objref.Wrap(id)}
+	x := &Architecture{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *Architecture) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Architecture) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewArchitecture creates a new Architecture.
 func NewArchitecture() *Architecture {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLArchitecture")), objc.RegisterName("new"))
 	return architectureAdopt(_id)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *Architecture) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {

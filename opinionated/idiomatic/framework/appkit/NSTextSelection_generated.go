@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents a single logical selection context that corresponds to an insertion point.
-//
 // TextSelection is an idiomatic wrapper over the Objective-C class NSTextSelection.
+//
+// A class that represents a single logical selection context that corresponds to an insertion point.
 type TextSelection struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TextSelectionFromID(id objc.ID) *TextSelection {
 	if id == 0 {
 		return nil
 	}
-	x := &TextSelection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextSelection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func textSelectionAdopt(id objc.ID) *TextSelection {
 	if id == 0 {
 		return nil
 	}
-	x := &TextSelection{Handle: objref.Wrap(id)}
+	x := &TextSelection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,107 +60,112 @@ func (x *TextSelection) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a new text selection with the ranges, selection affinity, and granularity you provide.
-//
-// NewTextSelectionWithRangesAffinityGranularity creates a new TextSelection.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextSelection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTextSelectionWithRangesAffinityGranularity creates a new text selection with the ranges, selection affinity, and granularity you provide.
 func NewTextSelectionWithRangesAffinityGranularity(textRanges []*TextRange, affinity TextSelectionAffinity, granularity TextSelectionGranularity) *TextSelection {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextSelection")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRanges:affinity:granularity:"), purego.SliceToNSArray(textRanges, func(_v *TextRange) objc.ID { return objref.IDOf(_v) }), affinity, granularity)
 	return textSelectionAdopt(_id)
 }
 
-// Creates a test selection from data in an unarchiver.
-//
-// NewTextSelectionWithCoder creates a new TextSelection.
+// NewTextSelectionWithCoder creates a test selection from data in an unarchiver.
 func NewTextSelectionWithCoder(coder obj.Object) *TextSelection {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextSelection")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return textSelectionAdopt(_id)
 }
 
-// Creates a new text selection with the range, selection affinity, and granularity you provide.
-//
-// NewTextSelectionWithRangeAffinityGranularity creates a new TextSelection.
+// NewTextSelectionWithRangeAffinityGranularity creates a new text selection with the range, selection affinity, and granularity you provide.
 func NewTextSelectionWithRangeAffinityGranularity(range_ *TextRange, affinity TextSelectionAffinity, granularity TextSelectionGranularity) *TextSelection {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextSelection")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRange:affinity:granularity:"), objref.IDOf(range_), affinity, granularity)
 	return textSelectionAdopt(_id)
 }
 
-// Represents the anchor position offset from the beginning of a line fragment in the visual order for the initial tap or click location.
-//
-// WithAnchorPositionOffset sets anchorPositionOffset and returns the receiver so calls can be chained.
+// WithAnchorPositionOffset represents the anchor position offset from the beginning of a line fragment in the visual order for the initial tap or click location.
 func (x *TextSelection) WithAnchorPositionOffset(anchorPositionOffset float64) *TextSelection {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPositionOffset:"), anchorPositionOffset)
 	return x
 }
 
-// A Boolean value that indicates whether the framework interprets the selection as logical or visual.
-//
-// WithLogical sets logical and returns the receiver so calls can be chained.
+// WithLogical a Boolean value that indicates whether the framework interprets the selection as logical or visual.
 func (x *TextSelection) WithLogical(logical bool) *TextSelection {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLogical:"), logical)
 	return x
 }
 
-// The template attributes the framework uses for characters that replace the contents of this selection.
-//
-// WithTypingAttributes sets typingAttributes and returns the receiver so calls can be chained.
+// WithTypingAttributes the template attributes the framework uses for characters that replace the contents of this selection.
 func (x *TextSelection) WithTypingAttributes(typingAttributes obj.Object) *TextSelection {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTypingAttributes:"), objref.IDOf(typingAttributes))
 	return x
 }
 
-// Creates a subselection of the current text selection with the ranges you specify.
+// TextSelectionWithTextRanges creates a subselection of the current text selection with the ranges you specify.
 func (x *TextSelection) TextSelectionWithTextRanges(textRanges []*TextRange) *TextSelection {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textSelectionWithTextRanges:"), purego.SliceToNSArray(textRanges, func(_v *TextRange) objc.ID { return objref.IDOf(_v) }))
 	return TextSelectionFromID(_r)
 }
 
+// TextRanges wraps the corresponding Objective-C method.
+//
 // TextRanges returns the collection as a Go slice.
 func (x *TextSelection) TextRanges() []*TextRange {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textRanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextRange { return TextRangeFromID(_id) })
 }
 
+// Granularity wraps the corresponding Objective-C method.
 func (x *TextSelection) Granularity() TextSelectionGranularity {
 	_r := objc.Send[TextSelectionGranularity](objref.IDOf(x), objc.RegisterName("granularity"))
 	return _r
 }
 
+// Affinity wraps the corresponding Objective-C method.
 func (x *TextSelection) Affinity() TextSelectionAffinity {
 	_r := objc.Send[TextSelectionAffinity](objref.IDOf(x), objc.RegisterName("affinity"))
 	return _r
 }
 
+// IsTransient wraps the corresponding Objective-C method.
 func (x *TextSelection) IsTransient() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTransient"))
 	return _r
 }
 
+// AnchorPositionOffset wraps the corresponding Objective-C method.
 func (x *TextSelection) AnchorPositionOffset() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("anchorPositionOffset"))
 	return _r
 }
 
+// SetAnchorPositionOffset wraps the corresponding Objective-C method.
 func (x *TextSelection) SetAnchorPositionOffset(anchorPositionOffset float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPositionOffset:"), anchorPositionOffset)
 }
 
+// IsLogical wraps the corresponding Objective-C method.
 func (x *TextSelection) IsLogical() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLogical"))
 	return _r
 }
 
+// SetLogical wraps the corresponding Objective-C method.
 func (x *TextSelection) SetLogical(logical bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLogical:"), logical)
 }
 
+// TypingAttributes wraps the corresponding Objective-C method.
 func (x *TextSelection) TypingAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typingAttributes"))
 	return obj.Wrap(_r)
 }
 
+// SetTypingAttributes wraps the corresponding Objective-C method.
 func (x *TextSelection) SetTypingAttributes(typingAttributes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTypingAttributes:"), objref.IDOf(typingAttributes))
 }

@@ -11,9 +11,11 @@ import (
 // CatalogProvider is accepted wherever a SHCatalog (or one of its subclasses) is expected.
 type CatalogProvider interface {
 	objref.Object
+	isCatalog()
 }
 
 // MediaItemProvider is accepted wherever a SHMediaItem (or one of its subclasses) is expected.
 type MediaItemProvider interface {
 	objref.Object
+	isMediaItem()
 }

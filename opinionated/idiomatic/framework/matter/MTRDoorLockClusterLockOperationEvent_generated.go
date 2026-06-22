@@ -23,7 +23,8 @@ func MTRDoorLockClusterLockOperationEventFromID(id objc.ID) *MTRDoorLockClusterL
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDoorLockClusterLockOperationEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDoorLockClusterLockOperationEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRDoorLockClusterLockOperationEventAdopt(id objc.ID) *MTRDoorLockClusterLo
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDoorLockClusterLockOperationEvent{Handle: objref.Wrap(id)}
+	x := &MTRDoorLockClusterLockOperationEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,92 +58,110 @@ func (x *MTRDoorLockClusterLockOperationEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDoorLockClusterLockOperationEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRDoorLockClusterLockOperationEvent creates a new MTRDoorLockClusterLockOperationEvent.
 func NewMTRDoorLockClusterLockOperationEvent() *MTRDoorLockClusterLockOperationEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDoorLockClusterLockOperationEvent")), objc.RegisterName("new"))
 	return mTRDoorLockClusterLockOperationEventAdopt(_id)
 }
 
-// WithLockOperationType sets lockOperationType and returns the receiver so calls can be chained.
+// WithLockOperationType sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterLockOperationEvent) WithLockOperationType(lockOperationType obj.Object) *MTRDoorLockClusterLockOperationEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLockOperationType:"), objref.IDOf(lockOperationType))
 	return x
 }
 
-// WithOperationSource sets operationSource and returns the receiver so calls can be chained.
+// WithOperationSource sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterLockOperationEvent) WithOperationSource(operationSource obj.Object) *MTRDoorLockClusterLockOperationEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationSource:"), objref.IDOf(operationSource))
 	return x
 }
 
-// WithUserIndex sets userIndex and returns the receiver so calls can be chained.
+// WithUserIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterLockOperationEvent) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterLockOperationEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return x
 }
 
-// WithFabricIndex sets fabricIndex and returns the receiver so calls can be chained.
+// WithFabricIndex sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterLockOperationEvent) WithFabricIndex(fabricIndex obj.Object) *MTRDoorLockClusterLockOperationEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return x
 }
 
-// WithSourceNode sets sourceNode and returns the receiver so calls can be chained.
+// WithSourceNode sets the property and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterLockOperationEvent) WithSourceNode(sourceNode obj.Object) *MTRDoorLockClusterLockOperationEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNode:"), objref.IDOf(sourceNode))
 	return x
 }
 
+// LockOperationType wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterLockOperationEvent) LockOperationType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lockOperationType"))
 	return obj.Wrap(_r)
 }
 
+// SetLockOperationType wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterLockOperationEvent) SetLockOperationType(lockOperationType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLockOperationType:"), objref.IDOf(lockOperationType))
 }
 
+// OperationSource wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterLockOperationEvent) OperationSource() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationSource"))
 	return obj.Wrap(_r)
 }
 
+// SetOperationSource wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterLockOperationEvent) SetOperationSource(operationSource obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationSource:"), objref.IDOf(operationSource))
 }
 
+// UserIndex wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterLockOperationEvent) UserIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userIndex"))
 	return obj.Wrap(_r)
 }
 
+// SetUserIndex wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterLockOperationEvent) SetUserIndex(userIndex obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 }
 
+// FabricIndex wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterLockOperationEvent) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)
 }
 
+// SetFabricIndex wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterLockOperationEvent) SetFabricIndex(fabricIndex obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 }
 
+// SourceNode wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterLockOperationEvent) SourceNode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceNode"))
 	return obj.Wrap(_r)
 }
 
+// SetSourceNode wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterLockOperationEvent) SetSourceNode(sourceNode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNode:"), objref.IDOf(sourceNode))
 }
 
+// Credentials wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterLockOperationEvent) Credentials() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentials"))
 	return obj.Wrap(_r)
 }
 
+// SetCredentials wraps the corresponding Objective-C method.
 func (x *MTRDoorLockClusterLockOperationEvent) SetCredentials(credentials obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentials:"), objref.IDOf(credentials))
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Represents a registered notification.
-//
 // IOBluetoothUserNotification is an idiomatic wrapper over the Objective-C class IOBluetoothUserNotification.
+//
+// Represents a registered notification.
 type IOBluetoothUserNotification struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func IOBluetoothUserNotificationFromID(id objc.ID) *IOBluetoothUserNotification 
 	if id == 0 {
 		return nil
 	}
-	x := &IOBluetoothUserNotification{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IOBluetoothUserNotification{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func iOBluetoothUserNotificationAdopt(id objc.ID) *IOBluetoothUserNotification {
 	if id == 0 {
 		return nil
 	}
-	x := &IOBluetoothUserNotification{Handle: objref.Wrap(id)}
+	x := &IOBluetoothUserNotification{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *IOBluetoothUserNotification) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IOBluetoothUserNotification) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewIOBluetoothUserNotification creates a new IOBluetoothUserNotification.
 func NewIOBluetoothUserNotification() *IOBluetoothUserNotification {
 	_id := objc.Send[objc.ID](objc.ID(_class("IOBluetoothUserNotification")), objc.RegisterName("new"))
 	return iOBluetoothUserNotificationAdopt(_id)
 }
 
-// Called to unregister the target notification.
+// Unregister called to unregister the target notification.
 func (x *IOBluetoothUserNotification) Unregister() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unregister"))
 }

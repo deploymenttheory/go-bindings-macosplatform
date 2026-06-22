@@ -23,7 +23,8 @@ func MTRMetricsFromID(id objc.ID) *MTRMetrics {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRMetrics{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRMetrics{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRMetricsAdopt(id objc.ID) *MTRMetrics {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRMetrics{Handle: objref.Wrap(id)}
+	x := &MTRMetrics{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,25 +58,31 @@ func (x *MTRMetrics) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRMetrics) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRMetrics creates a new MTRMetrics.
 func NewMTRMetrics() *MTRMetrics {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRMetrics")), objc.RegisterName("new"))
 	return mTRMetricsAdopt(_id)
 }
 
-// Returns metric data corresponding to the metric identified by its key.
+// MetricDataForKey returns metric data corresponding to the metric identified by its key.
 func (x *MTRMetrics) MetricDataForKey(key string) *MTRMetricData {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metricDataForKey:"), purego.NSString(key))
 	return MTRMetricDataFromID(_r)
 }
 
-// Returns a unique identifier for the object
+// UniqueIdentifier returns a unique identifier for the object
 func (x *MTRMetrics) UniqueIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniqueIdentifier"))
 	return obj.Wrap(_r)
 }
 
-// Returns the names of all the metrics data items collected.
+// AllKeys returns the names of all the metrics data items collected.
 //
 // AllKeys returns the collection as a Go slice.
 func (x *MTRMetrics) AllKeys() []string {

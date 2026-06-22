@@ -21,6 +21,8 @@ const (
 	DiskImageCachingModeCached DiskImageCachingMode = 2
 )
 
+// String returns the DiskImageCachingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DiskImageCachingMode) String() string {
 	switch e {
 	case DiskImageCachingModeAutomatic:
@@ -46,6 +48,8 @@ const (
 	DiskImageSynchronizationModeNone DiskImageSynchronizationMode = 3
 )
 
+// String returns the DiskImageSynchronizationMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DiskImageSynchronizationMode) String() string {
 	switch e {
 	case DiskImageSynchronizationModeFull:
@@ -69,6 +73,8 @@ const (
 	DiskSynchronizationModeNone DiskSynchronizationMode = 1
 )
 
+// String returns the DiskSynchronizationMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DiskSynchronizationMode) String() string {
 	switch e {
 	case DiskSynchronizationModeFull:
@@ -88,6 +94,8 @@ const (
 	EFIVariableStoreInitializationOptionAllowOverwrite EFIVariableStoreInitializationOptions = 1
 )
 
+// String returns the EFIVariableStoreInitializationOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EFIVariableStoreInitializationOptions) String() string {
 	var parts []string
 	if e&EFIVariableStoreInitializationOptionAllowOverwrite != 0 {
@@ -130,6 +138,8 @@ const (
 	ErrorDeviceNotFound                       ErrorCode = 30004
 )
 
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ErrorCode) String() string {
 	switch e {
 	case ErrorInternal:
@@ -199,6 +209,8 @@ const (
 	LinuxRosettaAvailabilityInstalled LinuxRosettaAvailability = 2
 )
 
+// String returns the LinuxRosettaAvailability constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LinuxRosettaAvailability) String() string {
 	switch e {
 	case LinuxRosettaAvailabilityNotSupported:
@@ -221,6 +233,8 @@ const (
 	MacAuxiliaryStorageInitializationOptionAllowOverwrite MacAuxiliaryStorageInitializationOptions = 1
 )
 
+// String returns the MacAuxiliaryStorageInitializationOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MacAuxiliaryStorageInitializationOptions) String() string {
 	var parts []string
 	if e&MacAuxiliaryStorageInitializationOptionAllowOverwrite != 0 {
@@ -258,6 +272,8 @@ const (
 	VirtualMachineStateRestoring VirtualMachineState = 9
 )
 
+// String returns the VirtualMachineState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VirtualMachineState) String() string {
 	switch e {
 	case VirtualMachineStateStopped:

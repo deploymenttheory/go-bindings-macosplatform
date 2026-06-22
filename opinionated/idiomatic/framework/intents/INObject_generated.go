@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a custom intent parameter or response property.
-//
 // Object is an idiomatic wrapper over the Objective-C class INObject.
+//
+// A representation of a custom intent parameter or response property.
 type Object struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ObjectFromID(id objc.ID) *Object {
 	if id == 0 {
 		return nil
 	}
-	x := &Object{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Object{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func objectAdopt(id objc.ID) *Object {
 	if id == 0 {
 		return nil
 	}
-	x := &Object{Handle: objref.Wrap(id)}
+	x := &Object{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,67 +60,60 @@ func (x *Object) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a custom intent object with the specified attributes.
-//
-// NewObjectWithIdentifierDisplayStringPronunciationHint creates a new Object.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Object) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewObjectWithIdentifierDisplayStringPronunciationHint creates a custom intent object with the specified attributes.
 func NewObjectWithIdentifierDisplayStringPronunciationHint(identifier string, displayString string, pronunciationHint string) *Object {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INObject")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:displayString:pronunciationHint:"), purego.NSString(identifier), purego.NSString(displayString), purego.NSString(pronunciationHint))
 	return objectAdopt(_id)
 }
 
-// Creates a custom intent object with the specified identifier and display string.
-//
-// NewObjectWithIdentifierDisplayString creates a new Object.
+// NewObjectWithIdentifierDisplayString creates a custom intent object with the specified identifier and display string.
 func NewObjectWithIdentifierDisplayString(identifier string, displayString string) *Object {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INObject")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:displayString:"), purego.NSString(identifier), purego.NSString(displayString))
 	return objectAdopt(_id)
 }
 
-// Creates a custom intent object with full display information.
-//
-// NewObjectWithIdentifierDisplayStringSubtitleStringDisplayImage creates a new Object.
+// NewObjectWithIdentifierDisplayStringSubtitleStringDisplayImage creates a custom intent object with full display information.
 func NewObjectWithIdentifierDisplayStringSubtitleStringDisplayImage(identifier string, displayString string, subtitleString string, displayImage *Image) *Object {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INObject")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:displayString:subtitleString:displayImage:"), purego.NSString(identifier), purego.NSString(displayString), purego.NSString(subtitleString), objref.IDOf(displayImage))
 	return objectAdopt(_id)
 }
 
-// Creates a custom intent object with the specified attributes.
-//
-// NewObjectWithIdentifierDisplayStringPronunciationHintSubtitleStringDisplayImage creates a new Object.
+// NewObjectWithIdentifierDisplayStringPronunciationHintSubtitleStringDisplayImage creates a custom intent object with the specified attributes.
 func NewObjectWithIdentifierDisplayStringPronunciationHintSubtitleStringDisplayImage(identifier string, displayString string, pronunciationHint string, subtitleString string, displayImage *Image) *Object {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INObject")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:displayString:pronunciationHint:subtitleString:displayImage:"), purego.NSString(identifier), purego.NSString(displayString), purego.NSString(pronunciationHint), purego.NSString(subtitleString), objref.IDOf(displayImage))
 	return objectAdopt(_id)
 }
 
-// Additional details about the custom intent object.
-//
-// WithSubtitleString sets subtitleString and returns the receiver so calls can be chained.
+// WithSubtitleString additional details about the custom intent object.
 func (x *Object) WithSubtitleString(subtitleString string) *Object {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitleString:"), purego.NSString(subtitleString))
 	return x
 }
 
-// An image to display alongside the custom intent object’s text.
-//
-// WithDisplayImage sets displayImage and returns the receiver so calls can be chained.
+// WithDisplayImage an image to display alongside the custom intent object’s text.
 func (x *Object) WithDisplayImage(displayImage *Image) *Object {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayImage:"), objref.IDOf(displayImage))
 	return x
 }
 
-// An array of alternative speakable strings that identify the object.
-//
-// WithAlternativeSpeakableMatches sets the collection and returns the receiver so calls can be chained.
+// WithAlternativeSpeakableMatches an array of alternative speakable strings that identify the object.
 func (x *Object) WithAlternativeSpeakableMatches(items ...*SpeakableString) *Object {
 	_arr := purego.SliceToNSArray(items, func(_v *SpeakableString) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternativeSpeakableMatches:"), _arr)
 	return x
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *Object) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -127,6 +122,7 @@ func (x *Object) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// DisplayString wraps the corresponding Objective-C method.
 func (x *Object) DisplayString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayString"))
 	if _r == 0 {
@@ -135,6 +131,7 @@ func (x *Object) DisplayString() string {
 	return purego.GoString(_r)
 }
 
+// PronunciationHint wraps the corresponding Objective-C method.
 func (x *Object) PronunciationHint() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pronunciationHint"))
 	if _r == 0 {
@@ -143,6 +140,7 @@ func (x *Object) PronunciationHint() string {
 	return purego.GoString(_r)
 }
 
+// SubtitleString wraps the corresponding Objective-C method.
 func (x *Object) SubtitleString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitleString"))
 	if _r == 0 {
@@ -151,25 +149,31 @@ func (x *Object) SubtitleString() string {
 	return purego.GoString(_r)
 }
 
+// SetSubtitleString wraps the corresponding Objective-C method.
 func (x *Object) SetSubtitleString(subtitleString string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitleString:"), purego.NSString(subtitleString))
 }
 
+// DisplayImage wraps the corresponding Objective-C method.
 func (x *Object) DisplayImage() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayImage"))
 	return ImageFromID(_r)
 }
 
+// SetDisplayImage wraps the corresponding Objective-C method.
 func (x *Object) SetDisplayImage(displayImage *Image) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayImage:"), objref.IDOf(displayImage))
 }
 
+// AlternativeSpeakableMatches wraps the corresponding Objective-C method.
+//
 // AlternativeSpeakableMatches returns the collection as a Go slice.
 func (x *Object) AlternativeSpeakableMatches() []*SpeakableString {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternativeSpeakableMatches"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SpeakableString { return SpeakableStringFromID(_id) })
 }
 
+// SetAlternativeSpeakableMatches wraps the corresponding Objective-C method.
 func (x *Object) SetAlternativeSpeakableMatches(alternativeSpeakableMatches []*SpeakableString) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternativeSpeakableMatches:"), purego.SliceToNSArray(alternativeSpeakableMatches, func(_v *SpeakableString) objc.ID { return objref.IDOf(_v) }))
 }

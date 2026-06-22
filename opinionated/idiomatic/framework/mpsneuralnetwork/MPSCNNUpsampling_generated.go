@@ -6,15 +6,18 @@ package mpsneuralnetwork
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // CNNUpsampling is an idiomatic wrapper over the Objective-C class MPSCNNUpsampling.
+//
+// CNNUpsampling is an abstract base — you do not construct it directly. Construct one of [CNNUpsamplingBilinear], [CNNUpsamplingNearest] and pass it where a CNNUpsampling is accepted.
 type CNNUpsampling struct {
-	objref.Handle
+	CNNKernel
 }
 
 // CNNUpsamplingFromID adopts an existing Objective-C object as a CNNUpsampling
@@ -23,7 +26,8 @@ func CNNUpsamplingFromID(id objc.ID) *CNNUpsampling {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNUpsampling{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CNNUpsampling{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,69 +40,55 @@ func cNNUpsamplingAdopt(id objc.ID) *CNNUpsampling {
 	if id == 0 {
 		return nil
 	}
-	x := &CNNUpsampling{Handle: objref.Wrap(id)}
+	x := &CNNUpsampling{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CNNUpsampling) Description() string {
-	return rt.Description(objref.IDOf(x))
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. offset.z is the index of starting source image in batch processing mode. See Also:
+func (x *CNNUpsampling) WithOffset(offset mpscore.MPSOffset) *CNNUpsampling {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
 }
 
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNUpsampling) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
+func (x *CNNUpsampling) WithClipRect(clipRect metal.MTLRegion) *CNNUpsampling {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
 }
 
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNUpsampling) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewCNNUpsampling creates a new CNNUpsampling.
-func NewCNNUpsampling() *CNNUpsampling {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNUpsampling")), objc.RegisterName("new"))
-	return cNNUpsamplingAdopt(_id)
-}
-
-// The number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, the destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and the destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
-//
-// WithDestinationFeatureChannelOffset sets destinationFeatureChannelOffset and returns the receiver so calls can be chained.
+// WithDestinationFeatureChannelOffset the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, the destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and the destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
 func (x *CNNUpsampling) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNUpsampling {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// The number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-//
-// WithSourceFeatureChannelOffset sets sourceFeatureChannelOffset and returns the receiver so calls can be chained.
+// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
 func (x *CNNUpsampling) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNUpsampling {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// The maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithSourceFeatureChannelMaxCount sets sourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 func (x *CNNUpsampling) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNUpsampling {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
-// The upsampling scale factor for the x dimension. The default value is 1.
+// ScaleFactorX the upsampling scale factor for the x dimension. The default value is 1.
 func (x *CNNUpsampling) ScaleFactorX() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactorX"))
 	return _r
 }
 
-// The upsampling scale factor for the y dimension. The default value is 1.
+// ScaleFactorY the upsampling scale factor for the y dimension. The default value is 1.
 func (x *CNNUpsampling) ScaleFactorY() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactorY"))
 	return _r
 }
 
-// If YES, the centers of the 4 corner pixels of the input and output regions are aligned, preserving the values at the corner pixels. The default is NO.
+// AlignCorners if YES, the centers of the 4 corner pixels of the input and output regions are aligned, preserving the values at the corner pixels. The default is NO.
 func (x *CNNUpsampling) AlignCorners() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("alignCorners"))
 	return _r
@@ -107,6 +97,8 @@ func (x *CNNUpsampling) AlignCorners() bool {
 // CNNUpsamplingable is the interface implemented by [CNNUpsampling], for mocking and DI.
 type CNNUpsamplingable interface {
 	obj.Object
+	WithOffset(offset mpscore.MPSOffset) *CNNUpsampling
+	WithClipRect(clipRect metal.MTLRegion) *CNNUpsampling
 	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNUpsampling
 	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNUpsampling
 	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNUpsampling
@@ -116,3 +108,12 @@ type CNNUpsamplingable interface {
 }
 
 var _ CNNUpsamplingable = (*CNNUpsampling)(nil)
+
+// isCNNUpsampling marks CNNUpsampling — and, by embedding promotion, its
+// subclasses — as a member of the CNNUpsampling hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CNNUpsampling) isCNNUpsampling() {}
+
+var _ CNNUpsamplingProvider = (*CNNUpsampling)(nil)
+
+var _ CNNKernelProvider = (*CNNUpsampling)(nil)

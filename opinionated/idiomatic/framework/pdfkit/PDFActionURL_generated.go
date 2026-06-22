@@ -12,11 +12,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// PDFActionURL, a subclass of PDFAction, defines methods for getting and setting the URL associated with a URL action.
-//
 // ActionURL is an idiomatic wrapper over the Objective-C class PDFActionURL.
+//
+// It embeds [Action], promoting that type's methods.
+//
+// PDFActionURL, a subclass of PDFAction, defines methods for getting and setting the URL associated with a URL action.
 type ActionURL struct {
-	objref.Handle
+	Action
 }
 
 // ActionURLFromID adopts an existing Objective-C object as a ActionURL
@@ -25,7 +27,8 @@ func ActionURLFromID(id objc.ID) *ActionURL {
 	if id == 0 {
 		return nil
 	}
-	x := &ActionURL{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ActionURL{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,48 +41,32 @@ func actionURLAdopt(id objc.ID) *ActionURL {
 	if id == 0 {
 		return nil
 	}
-	x := &ActionURL{Handle: objref.Wrap(id)}
+	x := &ActionURL{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ActionURL) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ActionURL) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ActionURL) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a URL action with the specified URL.
-//
-// NewActionURLWithURL creates a new ActionURL.
+// NewActionURLWithURL initializes a URL action with the specified URL.
 func NewActionURLWithURL(url string) *ActionURL {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFActionURL")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
 	return actionURLAdopt(_id)
 }
 
-// Returns the URL associated with the URL action.
-//
-// WithURL sets uRL and returns the receiver so calls can be chained.
+// WithURL returns the URL associated with the URL action.
 func (x *ActionURL) WithURL(uRL string) *ActionURL {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 	return x
 }
 
+// URL wraps the corresponding Objective-C method.
 func (x *ActionURL) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
+// SetURL wraps the corresponding Objective-C method.
 func (x *ActionURL) SetURL(uRL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 }
@@ -93,3 +80,5 @@ type ActionURLable interface {
 }
 
 var _ ActionURLable = (*ActionURL)(nil)
+
+var _ ActionProvider = (*ActionURL)(nil)

@@ -21,6 +21,8 @@ const (
 	AlarmProximityLeave AlarmProximity = 2
 )
 
+// String returns the AlarmProximity constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AlarmProximity) String() string {
 	switch e {
 	case AlarmProximityNone:
@@ -48,6 +50,8 @@ const (
 	AlarmTypeEmail AlarmType = 3
 )
 
+// String returns the AlarmType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AlarmType) String() string {
 	switch e {
 	case AlarmTypeDisplay:
@@ -81,6 +85,8 @@ const (
 	AuthorizationStatusAuthorized AuthorizationStatus = 3
 )
 
+// String returns the AuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AuthorizationStatus) String() string {
 	switch e {
 	case AuthorizationStatusNotDetermined:
@@ -115,6 +121,8 @@ const (
 	CalendarEventAvailabilityUnavailable CalendarEventAvailabilityMask = 8
 )
 
+// String returns the CalendarEventAvailabilityMask constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CalendarEventAvailabilityMask) String() string {
 	var parts []string
 	if e&CalendarEventAvailabilityBusy != 0 {
@@ -151,6 +159,8 @@ const (
 	CalendarTypeBirthday CalendarType = 4
 )
 
+// String returns the CalendarType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CalendarType) String() string {
 	switch e {
 	case CalendarTypeLocal:
@@ -179,6 +189,8 @@ const (
 	EntityMaskReminder EntityMask = 2
 )
 
+// String returns the EntityMask constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EntityMask) String() string {
 	var parts []string
 	if e&EntityMaskEvent != 0 {
@@ -203,6 +215,8 @@ const (
 	EntityTypeReminder EntityType = 1
 )
 
+// String returns the EntityType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EntityType) String() string {
 	switch e {
 	case EntityTypeEvent:
@@ -258,6 +272,8 @@ const (
 	ErrorLast                                 ErrorCode = 37
 )
 
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ErrorCode) String() string {
 	switch e {
 	case ErrorEventNotMutable:
@@ -357,6 +373,8 @@ const (
 	EventAvailabilityUnavailable EventAvailability = 3
 )
 
+// String returns the EventAvailability constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EventAvailability) String() string {
 	switch e {
 	case EventAvailabilityNotSupported:
@@ -388,6 +406,8 @@ const (
 	EventStatusCanceled EventStatus = 3
 )
 
+// String returns the EventStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EventStatus) String() string {
 	switch e {
 	case EventStatusNone:
@@ -419,6 +439,8 @@ const (
 	ParticipantRoleNonParticipant ParticipantRole = 4
 )
 
+// String returns the ParticipantRole constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ParticipantRole) String() string {
 	switch e {
 	case ParticipantRoleUnknown:
@@ -458,6 +480,8 @@ const (
 	ParticipantStatusInProcess ParticipantStatus = 7
 )
 
+// String returns the ParticipantStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ParticipantStatus) String() string {
 	switch e {
 	case ParticipantStatusUnknown:
@@ -497,6 +521,8 @@ const (
 	ParticipantTypeGroup ParticipantType = 4
 )
 
+// String returns the ParticipantType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ParticipantType) String() string {
 	switch e {
 	case ParticipantTypeUnknown:
@@ -528,6 +554,8 @@ const (
 	RecurrenceFrequencyYearly RecurrenceFrequency = 3
 )
 
+// String returns the RecurrenceFrequency constant's name, or its numeric form when the
+// value is not a known constant.
 func (e RecurrenceFrequency) String() string {
 	switch e {
 	case RecurrenceFrequencyDaily:
@@ -561,6 +589,8 @@ const (
 	SourceTypeBirthdays SourceType = 5
 )
 
+// String returns the SourceType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SourceType) String() string {
 	switch e {
 	case SourceTypeLocal:
@@ -590,6 +620,8 @@ const (
 	SpanFutureEvents Span = 1
 )
 
+// String returns the Span constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Span) String() string {
 	switch e {
 	case SpanThisEvent:
@@ -635,6 +667,8 @@ const (
 	Saturday Weekday = 7
 )
 
+// String returns the Weekday constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Weekday) String() string {
 	switch e {
 	case WeekdaySunday:

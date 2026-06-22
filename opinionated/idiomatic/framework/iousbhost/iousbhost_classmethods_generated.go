@@ -10,13 +10,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Creates a matching dictionary to find a USB device.
+// CreateMatchingDictionaryWithVendorIDProductIDBcdDeviceDeviceClassDeviceSubclassDeviceProtocolSpeedProductIDArray creates a matching dictionary to find a USB device.
 func CreateMatchingDictionaryWithVendorIDProductIDBcdDeviceDeviceClassDeviceSubclassDeviceProtocolSpeedProductIDArray(vendorID obj.Object, productID obj.Object, bcdDevice obj.Object, deviceClass obj.Object, deviceSubclass obj.Object, deviceProtocol obj.Object, speed obj.Object, productIDArray obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("IOUSBHostDevice")), objc.RegisterName("createMatchingDictionaryWithVendorID:productID:bcdDevice:deviceClass:deviceSubclass:deviceProtocol:speed:productIDArray:"), objref.IDOf(vendorID), objref.IDOf(productID), objref.IDOf(bcdDevice), objref.IDOf(deviceClass), objref.IDOf(deviceSubclass), objref.IDOf(deviceProtocol), objref.IDOf(speed), objref.IDOf(productIDArray))
 	return obj.Wrap(_r)
 }
 
-// Creates a matching dictionary to find a USB interface.
+// CreateMatchingDictionaryWithVendorIDProductIDBcdDeviceInterfaceNumberConfigurationValueInterfaceClassInterfaceSubclassInterfaceProtocolSpeedProductIDArray creates a matching dictionary to find a USB interface.
 func CreateMatchingDictionaryWithVendorIDProductIDBcdDeviceInterfaceNumberConfigurationValueInterfaceClassInterfaceSubclassInterfaceProtocolSpeedProductIDArray(vendorID obj.Object, productID obj.Object, bcdDevice obj.Object, interfaceNumber obj.Object, configurationValue obj.Object, interfaceClass obj.Object, interfaceSubclass obj.Object, interfaceProtocol obj.Object, speed obj.Object, productIDArray obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("IOUSBHostInterface")), objc.RegisterName("createMatchingDictionaryWithVendorID:productID:bcdDevice:interfaceNumber:configurationValue:interfaceClass:interfaceSubclass:interfaceProtocol:speed:productIDArray:"), objref.IDOf(vendorID), objref.IDOf(productID), objref.IDOf(bcdDevice), objref.IDOf(interfaceNumber), objref.IDOf(configurationValue), objref.IDOf(interfaceClass), objref.IDOf(interfaceSubclass), objref.IDOf(interfaceProtocol), objref.IDOf(speed), objref.IDOf(productIDArray))
 	return obj.Wrap(_r)

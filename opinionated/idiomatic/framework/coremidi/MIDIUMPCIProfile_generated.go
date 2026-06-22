@@ -25,7 +25,8 @@ func UMPCIProfileFromID(id objc.ID) *UMPCIProfile {
 	if id == 0 {
 		return nil
 	}
-	x := &UMPCIProfile{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UMPCIProfile{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func uMPCIProfileAdopt(id objc.ID) *UMPCIProfile {
 	if id == 0 {
 		return nil
 	}
-	x := &UMPCIProfile{Handle: objref.Wrap(id)}
+	x := &UMPCIProfile{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *UMPCIProfile) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UMPCIProfile) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewUMPCIProfile creates a new UMPCIProfile.
 func NewUMPCIProfile() *UMPCIProfile {
 	_id := objc.Send[objc.ID](objc.ID(_class("MIDIUMPCIProfile")), objc.RegisterName("new"))
 	return uMPCIProfileAdopt(_id)
 }
 
-// Issue a Set Profile On or Set Profile Off request on this profile using the MIDI server's MUID. The result of this operation, if any, is received via the profile notification posted by the MIDICIDeviceManager. Returns YES if the request is valid and the request was dispatched.
+// SetProfileStateEnabledChannelCount issue a Set Profile On or Set Profile Off request on this profile using the MIDI server's MUID. The result of this operation, if any, is received via the profile notification posted by the MIDICIDeviceManager. Returns YES if the request is valid and the request was dispatched.
 func (x *UMPCIProfile) SetProfileStateEnabledChannelCount(isEnabled bool, enabledChannelCount uint16) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setProfileState:enabledChannelCount:error:"), isEnabled, enabledChannelCount, unsafe.Pointer(&_nsErr))
@@ -74,7 +82,7 @@ func (x *UMPCIProfile) SetProfileStateEnabledChannelCount(isEnabled bool, enable
 	return nil
 }
 
-// The name of the MIDI-CI proifle.
+// Name the name of the MIDI-CI proifle.
 func (x *UMPCIProfile) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -83,37 +91,37 @@ func (x *UMPCIProfile) Name() string {
 	return purego.GoString(_r)
 }
 
-// The type of MIDI-CI Profile, i.e., single-channel, multichannel, Group, or Function Block.
+// ProfileType the type of MIDI-CI Profile, i.e., single-channel, multichannel, Group, or Function Block.
 func (x *UMPCIProfile) ProfileType() CIProfileType {
 	_r := objc.Send[CIProfileType](objref.IDOf(x), objc.RegisterName("profileType"))
 	return _r
 }
 
-// For Group profiles defined on Function Blocks, the value to be added to the lowest Function Block UMP Group for messaging (e.g., a Group Profile defined on the second Group of a Function Block has a groupOffset of 1).
+// GroupOffset for Group profiles defined on Function Blocks, the value to be added to the lowest Function Block UMP Group for messaging (e.g., a Group Profile defined on the second Group of a Function Block has a groupOffset of 1).
 func (x *UMPCIProfile) GroupOffset() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("groupOffset"))
 	return _r
 }
 
-// The first channel number supported on the Profile.
+// FirstChannel the first channel number supported on the Profile.
 func (x *UMPCIProfile) FirstChannel() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("firstChannel"))
 	return _r
 }
 
-// The number of channels currently enabled on the Profile. When the profile is disabled, this value is set to 0.
+// EnabledChannelCount the number of channels currently enabled on the Profile. When the profile is disabled, this value is set to 0.
 func (x *UMPCIProfile) EnabledChannelCount() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("enabledChannelCount"))
 	return _r
 }
 
-// The total number of channels supported by the Profile.
+// TotalChannelCount the total number of channels supported by the Profile.
 func (x *UMPCIProfile) TotalChannelCount() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("totalChannelCount"))
 	return _r
 }
 
-// The enable state of the Profile.
+// IsEnabled the enable state of the Profile.
 func (x *UMPCIProfile) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r

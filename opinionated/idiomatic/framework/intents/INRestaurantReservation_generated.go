@@ -12,11 +12,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The information that describes a restaurant reservation.
-//
 // RestaurantReservation is an idiomatic wrapper over the Objective-C class INRestaurantReservation.
+//
+// It embeds [Reservation], promoting that type's methods.
+//
+// The information that describes a restaurant reservation.
 type RestaurantReservation struct {
-	objref.Handle
+	Reservation
 }
 
 // RestaurantReservationFromID adopts an existing Objective-C object as a RestaurantReservation
@@ -25,7 +27,8 @@ func RestaurantReservationFromID(id objc.ID) *RestaurantReservation {
 	if id == 0 {
 		return nil
 	}
-	x := &RestaurantReservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RestaurantReservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,54 +41,39 @@ func restaurantReservationAdopt(id objc.ID) *RestaurantReservation {
 	if id == 0 {
 		return nil
 	}
-	x := &RestaurantReservation{Handle: objref.Wrap(id)}
+	x := &RestaurantReservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *RestaurantReservation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RestaurantReservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RestaurantReservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a restaurant reservation with the provided information.
-//
-// NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservationDurationPartySizeRestaurantLocation creates a new RestaurantReservation.
+// NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservationDurationPartySizeRestaurantLocation creates a restaurant reservation with the provided information.
 func NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservationDurationPartySizeRestaurantLocation(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, uRL string, reservationDuration *DateComponentsRange, partySize obj.Object, restaurantLocation obj.Object) *RestaurantReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INRestaurantReservation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservationDuration:partySize:restaurantLocation:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(uRL), objref.IDOf(reservationDuration), objref.IDOf(partySize), objref.IDOf(restaurantLocation))
 	return restaurantReservationAdopt(_id)
 }
 
-// Creates a new restaurant reservation with the provided information.
-//
-// NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservationDurationPartySizeRestaurantLocation creates a new RestaurantReservation.
+// NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservationDurationPartySizeRestaurantLocation creates a new restaurant reservation with the provided information.
 func NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservationDurationPartySizeRestaurantLocation(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, reservationDuration *DateComponentsRange, partySize obj.Object, restaurantLocation obj.Object) *RestaurantReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INRestaurantReservation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:reservationDuration:partySize:restaurantLocation:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), objref.IDOf(reservationDuration), objref.IDOf(partySize), objref.IDOf(restaurantLocation))
 	return restaurantReservationAdopt(_id)
 }
 
+// ReservationDuration wraps the corresponding Objective-C method.
 func (x *RestaurantReservation) ReservationDuration() *DateComponentsRange {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservationDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
+// PartySize wraps the corresponding Objective-C method.
 func (x *RestaurantReservation) PartySize() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("partySize"))
 	return obj.Wrap(_r)
 }
 
+// RestaurantLocation wraps the corresponding Objective-C method.
 func (x *RestaurantReservation) RestaurantLocation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restaurantLocation"))
 	return obj.Wrap(_r)
@@ -100,3 +88,5 @@ type RestaurantReservationable interface {
 }
 
 var _ RestaurantReservationable = (*RestaurantReservation)(nil)
+
+var _ ReservationProvider = (*RestaurantReservation)(nil)

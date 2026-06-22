@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information about OpenGL textures created by the GLKTextureLoader class.
-//
 // TextureInfo is an idiomatic wrapper over the Objective-C class GLKTextureInfo.
+//
+// Information about OpenGL textures created by the GLKTextureLoader class.
 type TextureInfo struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TextureInfoFromID(id objc.ID) *TextureInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &TextureInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextureInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func textureInfoAdopt(id objc.ID) *TextureInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &TextureInfo{Handle: objref.Wrap(id)}
+	x := &TextureInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,57 +60,73 @@ func (x *TextureInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextureInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTextureInfo creates a new TextureInfo.
 func NewTextureInfo() *TextureInfo {
 	_id := objc.Send[objc.ID](objc.ID(_class("GLKTextureInfo")), objc.RegisterName("new"))
 	return textureInfoAdopt(_id)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *TextureInfo) Name() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("name"))
 	return _r
 }
 
+// Target wraps the corresponding Objective-C method.
 func (x *TextureInfo) Target() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("target"))
 	return _r
 }
 
+// Width wraps the corresponding Objective-C method.
 func (x *TextureInfo) Width() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("width"))
 	return _r
 }
 
+// Height wraps the corresponding Objective-C method.
 func (x *TextureInfo) Height() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("height"))
 	return _r
 }
 
+// Depth wraps the corresponding Objective-C method.
 func (x *TextureInfo) Depth() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("depth"))
 	return _r
 }
 
+// AlphaState wraps the corresponding Objective-C method.
 func (x *TextureInfo) AlphaState() TextureInfoAlphaState {
 	_r := objc.Send[TextureInfoAlphaState](objref.IDOf(x), objc.RegisterName("alphaState"))
 	return _r
 }
 
+// TextureOrigin wraps the corresponding Objective-C method.
 func (x *TextureInfo) TextureOrigin() TextureInfoOrigin {
 	_r := objc.Send[TextureInfoOrigin](objref.IDOf(x), objc.RegisterName("textureOrigin"))
 	return _r
 }
 
+// ContainsMipmaps wraps the corresponding Objective-C method.
 func (x *TextureInfo) ContainsMipmaps() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsMipmaps"))
 	return _r
 }
 
+// MimapLevelCount wraps the corresponding Objective-C method.
 func (x *TextureInfo) MimapLevelCount() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("mimapLevelCount"))
 	return _r
 }
 
+// ArrayLength wraps the corresponding Objective-C method.
 func (x *TextureInfo) ArrayLength() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("arrayLength"))
 	return _r

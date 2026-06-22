@@ -23,7 +23,8 @@ func QuartzFilterManagerFromID(id objc.ID) *QuartzFilterManager {
 	if id == 0 {
 		return nil
 	}
-	x := &QuartzFilterManager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QuartzFilterManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func quartzFilterManagerAdopt(id objc.ID) *QuartzFilterManager {
 	if id == 0 {
 		return nil
 	}
-	x := &QuartzFilterManager{Handle: objref.Wrap(id)}
+	x := &QuartzFilterManager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,41 +58,54 @@ func (x *QuartzFilterManager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *QuartzFilterManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewQuartzFilterManager creates a new QuartzFilterManager.
 func NewQuartzFilterManager() *QuartzFilterManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("QuartzFilterManager")), objc.RegisterName("new"))
 	return quartzFilterManagerAdopt(_id)
 }
 
+// FilterPanel wraps the corresponding Objective-C method.
 func (x *QuartzFilterManager) FilterPanel() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterPanel"))
 	return obj.Wrap(_r)
 }
 
+// FilterView wraps the corresponding Objective-C method.
 func (x *QuartzFilterManager) FilterView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterView"))
 	return obj.Wrap(_r)
 }
 
+// SelectedFilter wraps the corresponding Objective-C method.
 func (x *QuartzFilterManager) SelectedFilter() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedFilter"))
 	return obj.Wrap(_r)
 }
 
+// SelectFilter wraps the corresponding Objective-C method.
 func (x *QuartzFilterManager) SelectFilter(filter obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("selectFilter:"), objref.IDOf(filter))
 	return _r
 }
 
+// SetDelegate wraps the corresponding Objective-C method.
 func (x *QuartzFilterManager) SetDelegate(aDelegate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(aDelegate))
 }
 
+// Delegate wraps the corresponding Objective-C method.
 func (x *QuartzFilterManager) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
+// ImportFilter wraps the corresponding Objective-C method.
 func (x *QuartzFilterManager) ImportFilter(filterProperties obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("importFilter:"), objref.IDOf(filterProperties))
 	return obj.Wrap(_r)

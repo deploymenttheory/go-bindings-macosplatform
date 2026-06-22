@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The width and the height of an item in a collection view.
-//
 // CollectionLayoutSize is an idiomatic wrapper over the Objective-C class NSCollectionLayoutSize.
+//
+// The width and the height of an item in a collection view.
 type CollectionLayoutSize struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CollectionLayoutSizeFromID(id objc.ID) *CollectionLayoutSize {
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionLayoutSize{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollectionLayoutSize{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func collectionLayoutSizeAdopt(id objc.ID) *CollectionLayoutSize {
 	if id == 0 {
 		return nil
 	}
-	x := &CollectionLayoutSize{Handle: objref.Wrap(id)}
+	x := &CollectionLayoutSize{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,25 @@ func (x *CollectionLayoutSize) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CollectionLayoutSize) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCollectionLayoutSize creates a new CollectionLayoutSize.
 func NewCollectionLayoutSize() *CollectionLayoutSize {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutSize")), objc.RegisterName("new"))
 	return collectionLayoutSizeAdopt(_id)
 }
 
+// WidthDimension wraps the corresponding Objective-C method.
 func (x *CollectionLayoutSize) WidthDimension() *CollectionLayoutDimension {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("widthDimension"))
 	return CollectionLayoutDimensionFromID(_r)
 }
 
+// HeightDimension wraps the corresponding Objective-C method.
 func (x *CollectionLayoutSize) HeightDimension() *CollectionLayoutDimension {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("heightDimension"))
 	return CollectionLayoutDimensionFromID(_r)

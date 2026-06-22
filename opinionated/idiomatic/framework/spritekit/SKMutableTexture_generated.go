@@ -6,17 +6,19 @@ package spritekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A texture whose contents can be dynamically updated.
-//
 // MutableTexture is an idiomatic wrapper over the Objective-C class SKMutableTexture.
+//
+// It embeds [Texture], promoting that type's methods.
+//
+// A texture whose contents can be dynamically updated.
 type MutableTexture struct {
-	objref.Handle
+	Texture
 }
 
 // MutableTextureFromID adopts an existing Objective-C object as a MutableTexture
@@ -25,7 +27,8 @@ func MutableTextureFromID(id objc.ID) *MutableTexture {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableTexture{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableTexture{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,43 +41,33 @@ func mutableTextureAdopt(id objc.ID) *MutableTexture {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableTexture{Handle: objref.Wrap(id)}
+	x := &MutableTexture{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MutableTexture) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableTexture) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableTexture) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewMutableTexture creates a new MutableTexture.
-func NewMutableTexture() *MutableTexture {
-	_id := objc.Send[objc.ID](objc.ID(_class("SKMutableTexture")), objc.RegisterName("new"))
+// NewMutableTextureWithSize initializes an empty texture with a specific size.
+func NewMutableTextureWithSize(size corefoundation.CGSize) *MutableTexture {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKMutableTexture")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSize:"), size)
 	return mutableTextureAdopt(_id)
 }
 
-// The filtering mode used when the size of a sprite drawn with the texture is not drawn at the texture’s native size.
-//
-// WithFilteringMode sets filteringMode and returns the receiver so calls can be chained.
+// NewMutableTextureWithSizePixelFormat initializes an empty texture with a specific size and format.
+func NewMutableTextureWithSizePixelFormat(size corefoundation.CGSize, format int) *MutableTexture {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKMutableTexture")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSize:pixelFormat:"), size, format)
+	return mutableTextureAdopt(_id)
+}
+
+// WithFilteringMode the filtering mode used when the size of a sprite drawn with the texture is not drawn at the texture’s native size.
 func (x *MutableTexture) WithFilteringMode(filteringMode TextureFilteringMode) *MutableTexture {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilteringMode:"), filteringMode)
 	return x
 }
 
-// A Boolean value that indicates whether the texture attempts to generate mipmaps.
-//
-// WithUsesMipmaps sets usesMipmaps and returns the receiver so calls can be chained.
+// WithUsesMipmaps a Boolean value that indicates whether the texture attempts to generate mipmaps.
 func (x *MutableTexture) WithUsesMipmaps(usesMipmaps bool) *MutableTexture {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesMipmaps:"), usesMipmaps)
 	return x
@@ -88,3 +81,5 @@ type MutableTextureable interface {
 }
 
 var _ MutableTextureable = (*MutableTexture)(nil)
+
+var _ TextureProvider = (*MutableTexture)(nil)

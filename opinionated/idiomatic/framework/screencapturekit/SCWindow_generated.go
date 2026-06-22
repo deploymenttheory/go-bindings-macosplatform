@@ -6,15 +6,16 @@ package screencapturekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An instance that represents an onscreen window.
-//
 // Window is an idiomatic wrapper over the Objective-C class SCWindow.
+//
+// An instance that represents an onscreen window.
 type Window struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func WindowFromID(id objc.ID) *Window {
 	if id == 0 {
 		return nil
 	}
-	x := &Window{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Window{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func windowAdopt(id objc.ID) *Window {
 	if id == 0 {
 		return nil
 	}
-	x := &Window{Handle: objref.Wrap(id)}
+	x := &Window{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +61,31 @@ func (x *Window) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Window) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWindow creates a new Window.
 func NewWindow() *Window {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCWindow")), objc.RegisterName("new"))
 	return windowAdopt(_id)
 }
 
-// windowID the CGWindowID for the SCWindow
+// WindowID windowID the CGWindowID for the SCWindow
 func (x *Window) WindowID() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("windowID"))
 	return _r
 }
 
-// title the window title for the SCWindow
+// Frame frame the CGRect for the SCWindow
+func (x *Window) Frame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frame"))
+	return _r
+}
+
+// Title title the window title for the SCWindow
 func (x *Window) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -79,25 +94,25 @@ func (x *Window) Title() string {
 	return purego.GoString(_r)
 }
 
-// windowLayer the window layer for the SCWindow
+// WindowLayer windowLayer the window layer for the SCWindow
 func (x *Window) WindowLayer() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("windowLayer"))
 	return _r
 }
 
-// owningApplication is the SCRunningApplication that owns this SCWindow
+// OwningApplication owningApplication is the SCRunningApplication that owns this SCWindow
 func (x *Window) OwningApplication() *RunningApplication {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("owningApplication"))
 	return RunningApplicationFromID(_r)
 }
 
-// onScreen the bool property denoting of the SCWindow is on the screen
+// IsOnScreen onScreen the bool property denoting of the SCWindow is on the screen
 func (x *Window) IsOnScreen() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOnScreen"))
 	return _r
 }
 
-// active the bool property denoting of the SCWindow is active. with Stage Manager, SCWindow can be offScreen and active
+// IsActive active the bool property denoting of the SCWindow is active. with Stage Manager, SCWindow can be offScreen and active
 func (x *Window) IsActive() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
 	return _r
@@ -107,6 +122,7 @@ func (x *Window) IsActive() bool {
 type Windowable interface {
 	obj.Object
 	WindowID() uint32
+	Frame() corefoundation.CGRect
 	Title() string
 	WindowLayer() int
 	OwningApplication() *RunningApplication

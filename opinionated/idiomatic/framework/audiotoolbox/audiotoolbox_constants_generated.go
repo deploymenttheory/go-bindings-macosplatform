@@ -9,13 +9,11 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// Notification generated when the set of available AudioComponents changes. Register for this notification name with `[NSNotificationCenter defaultCenter]` or `CFNotificationCenterGetLocalCenter()`, using an object of NULL.
 // KAudioComponentRegistrationsChangedNotification returns the value of the constant kAudioComponentRegistrationsChangedNotification.
 func KAudioComponentRegistrationsChangedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kAudioComponentRegistrationsChangedNotification")))
 }
 
-// Notification generated when the connection to an audio unit extension process is invalidated. Register for this notification name with `[NSNotificationCenter defaultCenter]` or `CFNotificationCenterGetLocalCenter()`. The "object" refers to an AUAudioUnit instance to be observed, or can be nil to observe all instances. This notification can happen for several reasons, for instance the connection being invalidated or the process abnormally ending. There can be multiple notifications for the same event (i.e. a terminated process will also invalidate the connection). The notification's userInfo dictionary may contain the following keys, depending on the reason for the invalidation and the platform in which it's running:
 // KAudioComponentInstanceInvalidationNotification returns the value of the constant kAudioComponentInstanceInvalidationNotification.
 func KAudioComponentInstanceInvalidationNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kAudioComponentInstanceInvalidationNotification")))

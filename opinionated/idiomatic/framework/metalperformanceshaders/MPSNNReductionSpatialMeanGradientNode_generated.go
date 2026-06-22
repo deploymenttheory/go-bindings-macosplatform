@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NNReductionSpatialMeanGradientNode is an idiomatic wrapper over the Objective-C class MPSNNReductionSpatialMeanGradientNode.
+//
+// It embeds [NNGradientFilterNode], promoting that type's methods.
 type NNReductionSpatialMeanGradientNode struct {
-	objref.Handle
+	NNGradientFilterNode
 }
 
 // NNReductionSpatialMeanGradientNodeFromID adopts an existing Objective-C object as a NNReductionSpatialMeanGradientNode
@@ -23,7 +24,8 @@ func NNReductionSpatialMeanGradientNodeFromID(id objc.ID) *NNReductionSpatialMea
 	if id == 0 {
 		return nil
 	}
-	x := &NNReductionSpatialMeanGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNReductionSpatialMeanGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,38 +38,20 @@ func nNReductionSpatialMeanGradientNodeAdopt(id objc.ID) *NNReductionSpatialMean
 	if id == 0 {
 		return nil
 	}
-	x := &NNReductionSpatialMeanGradientNode{Handle: objref.Wrap(id)}
+	x := &NNReductionSpatialMeanGradientNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NNReductionSpatialMeanGradientNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNReductionSpatialMeanGradientNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNReductionSpatialMeanGradientNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// A node to represent the gradient of a spatial mean reduction node.
-//
-// NewNNReductionSpatialMeanGradientNodeWithSourceGradientSourceImageGradientState creates a new NNReductionSpatialMeanGradientNode.
+// NewNNReductionSpatialMeanGradientNodeWithSourceGradientSourceImageGradientState a node to represent the gradient of a spatial mean reduction node.
 func NewNNReductionSpatialMeanGradientNodeWithSourceGradientSourceImageGradientState(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object) *NNReductionSpatialMeanGradientNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNReductionSpatialMeanGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
 	return nNReductionSpatialMeanGradientNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string to help identify this object.
 func (x *NNReductionSpatialMeanGradientNode) WithLabel(label string) *NNReductionSpatialMeanGradientNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -80,3 +64,7 @@ type NNReductionSpatialMeanGradientNodeable interface {
 }
 
 var _ NNReductionSpatialMeanGradientNodeable = (*NNReductionSpatialMeanGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*NNReductionSpatialMeanGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNReductionSpatialMeanGradientNode)(nil)

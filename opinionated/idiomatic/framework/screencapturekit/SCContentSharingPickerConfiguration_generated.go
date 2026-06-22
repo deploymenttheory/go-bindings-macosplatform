@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An instance for configuring the system content-sharing picker.
-//
 // ContentSharingPickerConfiguration is an idiomatic wrapper over the Objective-C class SCContentSharingPickerConfiguration.
+//
+// An instance for configuring the system content-sharing picker.
 type ContentSharingPickerConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ContentSharingPickerConfigurationFromID(id objc.ID) *ContentSharingPickerCo
 	if id == 0 {
 		return nil
 	}
-	x := &ContentSharingPickerConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContentSharingPickerConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func contentSharingPickerConfigurationAdopt(id objc.ID) *ContentSharingPickerCon
 	if id == 0 {
 		return nil
 	}
-	x := &ContentSharingPickerConfiguration{Handle: objref.Wrap(id)}
+	x := &ContentSharingPickerConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,57 +60,56 @@ func (x *ContentSharingPickerConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContentSharingPickerConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewContentSharingPickerConfiguration creates a new ContentSharingPickerConfiguration.
 func NewContentSharingPickerConfiguration() *ContentSharingPickerConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCContentSharingPickerConfiguration")), objc.RegisterName("new"))
 	return contentSharingPickerConfigurationAdopt(_id)
 }
 
-// allowedPickerModes Limits the type of selections available to the user when the picker is presented. Default is 0, no excluded picking modes
-//
-// WithAllowedPickerModes sets allowedPickerModes and returns the receiver so calls can be chained.
+// WithAllowedPickerModes allowedPickerModes Limits the type of selections available to the user when the picker is presented. Default is 0, no excluded picking modes
 func (x *ContentSharingPickerConfiguration) WithAllowedPickerModes(allowedPickerModes ContentSharingPickerMode) *ContentSharingPickerConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedPickerModes:"), allowedPickerModes)
 	return x
 }
 
-// excludedWindowIDs Excludes CGWindowIDs for picking
-//
-// WithExcludedWindowIDs sets the collection and returns the receiver so calls can be chained.
+// WithExcludedWindowIDs excludedWindowIDs Excludes CGWindowIDs for picking
 func (x *ContentSharingPickerConfiguration) WithExcludedWindowIDs(items ...obj.Object) *ContentSharingPickerConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedWindowIDs:"), _arr)
 	return x
 }
 
-// excludedBundleIDs Excludes bundle IDs for picking
-//
-// WithExcludedBundleIDs sets the collection and returns the receiver so calls can be chained.
+// WithExcludedBundleIDs excludedBundleIDs Excludes bundle IDs for picking
 func (x *ContentSharingPickerConfiguration) WithExcludedBundleIDs(items ...obj.Object) *ContentSharingPickerConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedBundleIDs:"), _arr)
 	return x
 }
 
-// allowsChangingSelectedContent Controls if the user can make updates to the content filter after the initial selection. Defaults is YES.
-//
-// WithAllowsChangingSelectedContent sets allowsChangingSelectedContent and returns the receiver so calls can be chained.
+// WithAllowsChangingSelectedContent allowsChangingSelectedContent Controls if the user can make updates to the content filter after the initial selection. Defaults is YES.
 func (x *ContentSharingPickerConfiguration) WithAllowsChangingSelectedContent(allowsChangingSelectedContent bool) *ContentSharingPickerConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsChangingSelectedContent:"), allowsChangingSelectedContent)
 	return x
 }
 
-// allowedPickerModes Limits the type of selections available to the user when the picker is presented. Default is 0, no excluded picking modes
+// AllowedPickerModes allowedPickerModes Limits the type of selections available to the user when the picker is presented. Default is 0, no excluded picking modes
 func (x *ContentSharingPickerConfiguration) AllowedPickerModes() ContentSharingPickerMode {
 	_r := objc.Send[ContentSharingPickerMode](objref.IDOf(x), objc.RegisterName("allowedPickerModes"))
 	return _r
 }
 
+// SetAllowedPickerModes wraps the corresponding Objective-C method.
 func (x *ContentSharingPickerConfiguration) SetAllowedPickerModes(allowedPickerModes ContentSharingPickerMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedPickerModes:"), allowedPickerModes)
 }
 
-// excludedWindowIDs Excludes CGWindowIDs for picking
+// ExcludedWindowIDs excludedWindowIDs Excludes CGWindowIDs for picking
 //
 // ExcludedWindowIDs returns the collection as a Go slice.
 func (x *ContentSharingPickerConfiguration) ExcludedWindowIDs() []obj.Object {
@@ -116,11 +117,12 @@ func (x *ContentSharingPickerConfiguration) ExcludedWindowIDs() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetExcludedWindowIDs wraps the corresponding Objective-C method.
 func (x *ContentSharingPickerConfiguration) SetExcludedWindowIDs(excludedWindowIDs []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedWindowIDs:"), purego.SliceToNSArray(excludedWindowIDs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// excludedBundleIDs Excludes bundle IDs for picking
+// ExcludedBundleIDs excludedBundleIDs Excludes bundle IDs for picking
 //
 // ExcludedBundleIDs returns the collection as a Go slice.
 func (x *ContentSharingPickerConfiguration) ExcludedBundleIDs() []string {
@@ -128,16 +130,18 @@ func (x *ContentSharingPickerConfiguration) ExcludedBundleIDs() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetExcludedBundleIDs wraps the corresponding Objective-C method.
 func (x *ContentSharingPickerConfiguration) SetExcludedBundleIDs(excludedBundleIDs []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedBundleIDs:"), purego.SliceToNSArray(excludedBundleIDs, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// allowsChangingSelectedContent Controls if the user can make updates to the content filter after the initial selection. Defaults is YES.
+// AllowsChangingSelectedContent allowsChangingSelectedContent Controls if the user can make updates to the content filter after the initial selection. Defaults is YES.
 func (x *ContentSharingPickerConfiguration) AllowsChangingSelectedContent() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsChangingSelectedContent"))
 	return _r
 }
 
+// SetAllowsChangingSelectedContent wraps the corresponding Objective-C method.
 func (x *ContentSharingPickerConfiguration) SetAllowsChangingSelectedContent(allowsChangingSelectedContent bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsChangingSelectedContent:"), allowsChangingSelectedContent)
 }

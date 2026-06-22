@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A texture handle that can be shared across process address space boundaries.
-//
 // SharedTextureHandle is an idiomatic wrapper over the Objective-C class MTLSharedTextureHandle.
+//
+// A texture handle that can be shared across process address space boundaries.
 type SharedTextureHandle struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SharedTextureHandleFromID(id objc.ID) *SharedTextureHandle {
 	if id == 0 {
 		return nil
 	}
-	x := &SharedTextureHandle{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SharedTextureHandle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func sharedTextureHandleAdopt(id objc.ID) *SharedTextureHandle {
 	if id == 0 {
 		return nil
 	}
-	x := &SharedTextureHandle{Handle: objref.Wrap(id)}
+	x := &SharedTextureHandle{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *SharedTextureHandle) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SharedTextureHandle) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSharedTextureHandle creates a new SharedTextureHandle.
 func NewSharedTextureHandle() *SharedTextureHandle {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLSharedTextureHandle")), objc.RegisterName("new"))
 	return sharedTextureHandleAdopt(_id)
 }
 
-// A copy of the original texture's label property, if any
+// Label a copy of the original texture's label property, if any
 func (x *SharedTextureHandle) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {

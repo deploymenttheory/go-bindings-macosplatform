@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that provides the basis for testing specifiers one at a time or in groups.
-//
 // ScriptWhoseTest is an idiomatic wrapper over the Objective-C class NSScriptWhoseTest.
+//
+// ScriptWhoseTest is an abstract base — you do not construct it directly. Construct one of [LogicalTest], [SpecifierTest] and pass it where a ScriptWhoseTest is accepted.
+//
+// An abstract class that provides the basis for testing specifiers one at a time or in groups.
 type ScriptWhoseTest struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ScriptWhoseTestFromID(id objc.ID) *ScriptWhoseTest {
 	if id == 0 {
 		return nil
 	}
-	x := &ScriptWhoseTest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScriptWhoseTest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func scriptWhoseTestAdopt(id objc.ID) *ScriptWhoseTest {
 	if id == 0 {
 		return nil
 	}
-	x := &ScriptWhoseTest{Handle: objref.Wrap(id)}
+	x := &ScriptWhoseTest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *ScriptWhoseTest) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewScriptWhoseTest creates a new ScriptWhoseTest.
-func NewScriptWhoseTest() *ScriptWhoseTest {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSScriptWhoseTest")), objc.RegisterName("new"))
-	return scriptWhoseTestAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScriptWhoseTest) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewScriptWhoseTestWithCoder creates a new ScriptWhoseTest.
@@ -71,13 +75,13 @@ func NewScriptWhoseTestWithCoder(inCoder *Coder) *ScriptWhoseTest {
 	return scriptWhoseTestAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *ScriptWhoseTest) WithScriptingProperties(scriptingProperties obj.Object) *ScriptWhoseTest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Returns a Boolean value that indicates whether the test represented by the receiver evaluates to true.
+// IsTrue returns a Boolean value that indicates whether the test represented by the receiver evaluates to true.
 func (x *ScriptWhoseTest) IsTrue() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTrue"))
 	return _r
@@ -91,3 +95,10 @@ type ScriptWhoseTestable interface {
 }
 
 var _ ScriptWhoseTestable = (*ScriptWhoseTest)(nil)
+
+// isScriptWhoseTest marks ScriptWhoseTest — and, by embedding promotion, its
+// subclasses — as a member of the ScriptWhoseTest hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ScriptWhoseTest) isScriptWhoseTest() {}
+
+var _ ScriptWhoseTestProvider = (*ScriptWhoseTest)(nil)

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A definition of logical conditions for constraining a search for a fetch or for in-memory filtering.
-//
 // Predicate is an idiomatic wrapper over the Objective-C class NSPredicate.
+//
+// Predicate is an abstract base — you do not construct it directly. Construct one of [ComparisonPredicate], [CompoundPredicate] and pass it where a Predicate is accepted.
+//
+// A definition of logical conditions for constraining a search for a fetch or for in-memory filtering.
 type Predicate struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func PredicateFromID(id objc.ID) *Predicate {
 	if id == 0 {
 		return nil
 	}
-	x := &Predicate{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Predicate{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func predicateAdopt(id objc.ID) *Predicate {
 	if id == 0 {
 		return nil
 	}
-	x := &Predicate{Handle: objref.Wrap(id)}
+	x := &Predicate{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,41 +62,42 @@ func (x *Predicate) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewPredicate creates a new Predicate.
-func NewPredicate() *Predicate {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSPredicate")), objc.RegisterName("new"))
-	return predicateAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Predicate) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Predicate) WithScriptingProperties(scriptingProperties obj.Object) *Predicate {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Returns a copy of the predicate and substitutes the predicates variables with specified values from a specified substitution variables dictionary.
+// PredicateWithSubstitutionVariables returns a copy of the predicate and substitutes the predicates variables with specified values from a specified substitution variables dictionary.
 func (x *Predicate) PredicateWithSubstitutionVariables(variables obj.Object) *Predicate {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicateWithSubstitutionVariables:"), objref.IDOf(variables))
 	return PredicateFromID(_r)
 }
 
-// Returns a Boolean value that indicates whether the specified object matches the conditions that the predicate specifies.
+// EvaluateWithObject returns a Boolean value that indicates whether the specified object matches the conditions that the predicate specifies.
 func (x *Predicate) EvaluateWithObject(object obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("evaluateWithObject:"), objref.IDOf(object))
 	return _r
 }
 
-// Returns a Boolean value that indicates whether the specified object matches the conditions that the predicate specifies after substituting in the values from a specified variables dictionary.
+// EvaluateWithObjectSubstitutionVariables returns a Boolean value that indicates whether the specified object matches the conditions that the predicate specifies after substituting in the values from a specified variables dictionary.
 func (x *Predicate) EvaluateWithObjectSubstitutionVariables(object obj.Object, bindings obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("evaluateWithObject:substitutionVariables:"), objref.IDOf(object), objref.IDOf(bindings))
 	return _r
 }
 
-// Forces a securely decoded predicate to allow evaluation.
+// AllowEvaluation forces a securely decoded predicate to allow evaluation.
 func (x *Predicate) AllowEvaluation() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowEvaluation"))
 }
 
+// PredicateFormat wraps the corresponding Objective-C method.
 func (x *Predicate) PredicateFormat() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicateFormat"))
 	if _r == 0 {
@@ -113,3 +118,10 @@ type Predicateable interface {
 }
 
 var _ Predicateable = (*Predicate)(nil)
+
+// isPredicate marks Predicate — and, by embedding promotion, its
+// subclasses — as a member of the Predicate hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Predicate) isPredicate() {}
+
+var _ PredicateProvider = (*Predicate)(nil)

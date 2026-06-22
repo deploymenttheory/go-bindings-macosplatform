@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that loads and configures a boot loader for running macOS on Apple silicon as a guest system of your VM.
-//
 // MacOSBootLoader is an idiomatic wrapper over the Objective-C class VZMacOSBootLoader.
+//
+// It embeds [BootLoader], promoting that type's methods.
+//
+// An object that loads and configures a boot loader for running macOS on Apple silicon as a guest system of your VM.
 type MacOSBootLoader struct {
-	objref.Handle
+	BootLoader
 }
 
 // MacOSBootLoaderFromID adopts an existing Objective-C object as a MacOSBootLoader
@@ -25,7 +26,8 @@ func MacOSBootLoaderFromID(id objc.ID) *MacOSBootLoader {
 	if id == 0 {
 		return nil
 	}
-	x := &MacOSBootLoader{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MacOSBootLoader{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func macOSBootLoaderAdopt(id objc.ID) *MacOSBootLoader {
 	if id == 0 {
 		return nil
 	}
-	x := &MacOSBootLoader{Handle: objref.Wrap(id)}
+	x := &MacOSBootLoader{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MacOSBootLoader) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MacOSBootLoader) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MacOSBootLoader) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMacOSBootLoader creates a new MacOSBootLoader.
@@ -70,3 +58,5 @@ type MacOSBootLoaderable interface {
 }
 
 var _ MacOSBootLoaderable = (*MacOSBootLoader)(nil)
+
+var _ BootLoaderProvider = (*MacOSBootLoader)(nil)

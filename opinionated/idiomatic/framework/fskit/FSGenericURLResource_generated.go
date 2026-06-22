@@ -12,11 +12,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resource that represents an abstract URL.
-//
 // GenericURLResource is an idiomatic wrapper over the Objective-C class FSGenericURLResource.
+//
+// It embeds [Resource], promoting that type's methods.
+//
+// A resource that represents an abstract URL.
 type GenericURLResource struct {
-	objref.Handle
+	Resource
 }
 
 // GenericURLResourceFromID adopts an existing Objective-C object as a GenericURLResource
@@ -25,7 +27,8 @@ func GenericURLResourceFromID(id objc.ID) *GenericURLResource {
 	if id == 0 {
 		return nil
 	}
-	x := &GenericURLResource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GenericURLResource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,36 +41,20 @@ func genericURLResourceAdopt(id objc.ID) *GenericURLResource {
 	if id == 0 {
 		return nil
 	}
-	x := &GenericURLResource{Handle: objref.Wrap(id)}
+	x := &GenericURLResource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *GenericURLResource) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GenericURLResource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GenericURLResource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a generic URL resource with the given URL.
-//
-// NewGenericURLResourceWithURL creates a new GenericURLResource.
+// NewGenericURLResourceWithURL creates a generic URL resource with the given URL.
 func NewGenericURLResourceWithURL(url string) *GenericURLResource {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("FSGenericURLResource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
 	return genericURLResourceAdopt(_id)
 }
 
-// The URL represented by the resource.
+// Url the URL represented by the resource.
 func (x *GenericURLResource) Url() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
 	return obj.Wrap(_r)
@@ -80,3 +67,5 @@ type GenericURLResourceable interface {
 }
 
 var _ GenericURLResourceable = (*GenericURLResource)(nil)
+
+var _ ResourceProvider = (*GenericURLResource)(nil)

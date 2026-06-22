@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A track segment that maps a time from the source media track to the composition track.
-//
 // CompositionTrackSegment is an idiomatic wrapper over the Objective-C class AVCompositionTrackSegment.
+//
+// It embeds [AssetTrackSegment], promoting that type's methods.
+//
+// A track segment that maps a time from the source media track to the composition track.
 type CompositionTrackSegment struct {
-	objref.Handle
+	AssetTrackSegment
 }
 
 // CompositionTrackSegmentFromID adopts an existing Objective-C object as a CompositionTrackSegment
@@ -25,7 +26,8 @@ func CompositionTrackSegmentFromID(id objc.ID) *CompositionTrackSegment {
 	if id == 0 {
 		return nil
 	}
-	x := &CompositionTrackSegment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CompositionTrackSegment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func compositionTrackSegmentAdopt(id objc.ID) *CompositionTrackSegment {
 	if id == 0 {
 		return nil
 	}
-	x := &CompositionTrackSegment{Handle: objref.Wrap(id)}
+	x := &CompositionTrackSegment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CompositionTrackSegment) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CompositionTrackSegment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CompositionTrackSegment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCompositionTrackSegment creates a new CompositionTrackSegment.
@@ -64,11 +52,13 @@ func NewCompositionTrackSegment() *CompositionTrackSegment {
 	return compositionTrackSegmentAdopt(_id)
 }
 
+// SourceURL wraps the corresponding Objective-C method.
 func (x *CompositionTrackSegment) SourceURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceURL"))
 	return obj.Wrap(_r)
 }
 
+// SourceTrackID wraps the corresponding Objective-C method.
 func (x *CompositionTrackSegment) SourceTrackID() int32 {
 	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("sourceTrackID"))
 	return _r
@@ -82,3 +72,5 @@ type CompositionTrackSegmentable interface {
 }
 
 var _ CompositionTrackSegmentable = (*CompositionTrackSegment)(nil)
+
+var _ AssetTrackSegmentProvider = (*CompositionTrackSegment)(nil)

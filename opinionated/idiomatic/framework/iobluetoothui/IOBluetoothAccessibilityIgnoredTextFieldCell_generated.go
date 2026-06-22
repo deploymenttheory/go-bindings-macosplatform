@@ -23,7 +23,8 @@ func BluetoothAccessibilityIgnoredTextFieldCellFromID(id objc.ID) *BluetoothAcce
 	if id == 0 {
 		return nil
 	}
-	x := &BluetoothAccessibilityIgnoredTextFieldCell{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BluetoothAccessibilityIgnoredTextFieldCell{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func bluetoothAccessibilityIgnoredTextFieldCellAdopt(id objc.ID) *BluetoothAcces
 	if id == 0 {
 		return nil
 	}
-	x := &BluetoothAccessibilityIgnoredTextFieldCell{Handle: objref.Wrap(id)}
+	x := &BluetoothAccessibilityIgnoredTextFieldCell{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *BluetoothAccessibilityIgnoredTextFieldCell) IsEqual(other obj.Object) b
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *BluetoothAccessibilityIgnoredTextFieldCell) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BluetoothAccessibilityIgnoredTextFieldCell) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewBluetoothAccessibilityIgnoredTextFieldCell creates a new BluetoothAccessibilityIgnoredTextFieldCell.

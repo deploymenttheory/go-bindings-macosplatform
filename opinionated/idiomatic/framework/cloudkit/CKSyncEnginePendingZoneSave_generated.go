@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes an unsent record zone modification.
-//
 // SyncEnginePendingZoneSave is an idiomatic wrapper over the Objective-C class CKSyncEnginePendingZoneSave.
+//
+// It embeds [SyncEnginePendingDatabaseChange], promoting that type's methods.
+//
+// An object that describes an unsent record zone modification.
 type SyncEnginePendingZoneSave struct {
-	objref.Handle
+	SyncEnginePendingDatabaseChange
 }
 
 // SyncEnginePendingZoneSaveFromID adopts an existing Objective-C object as a SyncEnginePendingZoneSave
@@ -25,7 +26,8 @@ func SyncEnginePendingZoneSaveFromID(id objc.ID) *SyncEnginePendingZoneSave {
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEnginePendingZoneSave{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SyncEnginePendingZoneSave{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,35 +40,20 @@ func syncEnginePendingZoneSaveAdopt(id objc.ID) *SyncEnginePendingZoneSave {
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEnginePendingZoneSave{Handle: objref.Wrap(id)}
+	x := &SyncEnginePendingZoneSave{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *SyncEnginePendingZoneSave) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SyncEnginePendingZoneSave) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SyncEnginePendingZoneSave) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a pending zone save for the specified record zone.
-//
-// NewSyncEnginePendingZoneSaveWithZone creates a new SyncEnginePendingZoneSave.
+// NewSyncEnginePendingZoneSaveWithZone creates a pending zone save for the specified record zone.
 func NewSyncEnginePendingZoneSaveWithZone(zone *RecordZone) *SyncEnginePendingZoneSave {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEnginePendingZoneSave")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZone:"), objref.IDOf(zone))
 	return syncEnginePendingZoneSaveAdopt(_id)
 }
 
+// Zone wraps the corresponding Objective-C method.
 func (x *SyncEnginePendingZoneSave) Zone() *RecordZone {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zone"))
 	return RecordZoneFromID(_r)
@@ -79,3 +66,5 @@ type SyncEnginePendingZoneSaveable interface {
 }
 
 var _ SyncEnginePendingZoneSaveable = (*SyncEnginePendingZoneSave)(nil)
+
+var _ SyncEnginePendingDatabaseChangeProvider = (*SyncEnginePendingZoneSave)(nil)

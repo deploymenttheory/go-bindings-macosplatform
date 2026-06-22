@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the overall score of aesthetic attributes for an image.
-//
 // ImageAestheticsScoresObservation is an idiomatic wrapper over the Objective-C class VNImageAestheticsScoresObservation.
+//
+// It embeds [Observation], promoting that type's methods.
+//
+// An object that represents the overall score of aesthetic attributes for an image.
 type ImageAestheticsScoresObservation struct {
-	objref.Handle
+	Observation
 }
 
 // ImageAestheticsScoresObservationFromID adopts an existing Objective-C object as a ImageAestheticsScoresObservation
@@ -25,7 +26,8 @@ func ImageAestheticsScoresObservationFromID(id objc.ID) *ImageAestheticsScoresOb
 	if id == 0 {
 		return nil
 	}
-	x := &ImageAestheticsScoresObservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageAestheticsScoresObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func imageAestheticsScoresObservationAdopt(id objc.ID) *ImageAestheticsScoresObs
 	if id == 0 {
 		return nil
 	}
-	x := &ImageAestheticsScoresObservation{Handle: objref.Wrap(id)}
+	x := &ImageAestheticsScoresObservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ImageAestheticsScoresObservation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageAestheticsScoresObservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageAestheticsScoresObservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewImageAestheticsScoresObservation creates a new ImageAestheticsScoresObservation.
@@ -64,13 +52,13 @@ func NewImageAestheticsScoresObservation() *ImageAestheticsScoresObservation {
 	return imageAestheticsScoresObservationAdopt(_id)
 }
 
-// A Boolean value that represents images that are not necessarily of poor image quality, but may not have memorable or exciting content.
+// IsUtility a Boolean value that represents images that are not necessarily of poor image quality, but may not have memorable or exciting content.
 func (x *ImageAestheticsScoresObservation) IsUtility() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUtility"))
 	return _r
 }
 
-// A score which incorporates aesthetic score, failure score, and utility labels. This returns a value within the range of `-1` and `1`, where `-1` is least desirable and `1` is most desirable.
+// OverallScore a score which incorporates aesthetic score, failure score, and utility labels. This returns a value within the range of `-1` and `1`, where `-1` is least desirable and `1` is most desirable.
 func (x *ImageAestheticsScoresObservation) OverallScore() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("overallScore"))
 	return _r
@@ -84,3 +72,5 @@ type ImageAestheticsScoresObservationable interface {
 }
 
 var _ ImageAestheticsScoresObservationable = (*ImageAestheticsScoresObservation)(nil)
+
+var _ ObservationProvider = (*ImageAestheticsScoresObservation)(nil)

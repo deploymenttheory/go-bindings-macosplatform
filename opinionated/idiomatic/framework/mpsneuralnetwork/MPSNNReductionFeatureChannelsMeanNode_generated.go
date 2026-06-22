@@ -6,15 +6,17 @@ package mpsneuralnetwork
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NNReductionFeatureChannelsMeanNode is an idiomatic wrapper over the Objective-C class MPSNNReductionFeatureChannelsMeanNode.
+//
+// It embeds [NNUnaryReductionNode], promoting that type's methods.
 type NNReductionFeatureChannelsMeanNode struct {
-	objref.Handle
+	NNUnaryReductionNode
 }
 
 // NNReductionFeatureChannelsMeanNodeFromID adopts an existing Objective-C object as a NNReductionFeatureChannelsMeanNode
@@ -23,7 +25,8 @@ func NNReductionFeatureChannelsMeanNodeFromID(id objc.ID) *NNReductionFeatureCha
 	if id == 0 {
 		return nil
 	}
-	x := &NNReductionFeatureChannelsMeanNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NNReductionFeatureChannelsMeanNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +39,10 @@ func nNReductionFeatureChannelsMeanNodeAdopt(id objc.ID) *NNReductionFeatureChan
 	if id == 0 {
 		return nil
 	}
-	x := &NNReductionFeatureChannelsMeanNode{Handle: objref.Wrap(id)}
+	x := &NNReductionFeatureChannelsMeanNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NNReductionFeatureChannelsMeanNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNReductionFeatureChannelsMeanNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNReductionFeatureChannelsMeanNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNNReductionFeatureChannelsMeanNode creates a new NNReductionFeatureChannelsMeanNode.
@@ -62,9 +51,13 @@ func NewNNReductionFeatureChannelsMeanNode() *NNReductionFeatureChannelsMeanNode
 	return nNReductionFeatureChannelsMeanNodeAdopt(_id)
 }
 
-// A string to help identify this object.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithClipRectSource the clip rectangle to apply to the source image.
+func (x *NNReductionFeatureChannelsMeanNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsMeanNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return x
+}
+
+// WithLabel a string to help identify this object.
 func (x *NNReductionFeatureChannelsMeanNode) WithLabel(label string) *NNReductionFeatureChannelsMeanNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -73,7 +66,12 @@ func (x *NNReductionFeatureChannelsMeanNode) WithLabel(label string) *NNReductio
 // NNReductionFeatureChannelsMeanNodeable is the interface implemented by [NNReductionFeatureChannelsMeanNode], for mocking and DI.
 type NNReductionFeatureChannelsMeanNodeable interface {
 	obj.Object
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsMeanNode
 	WithLabel(label string) *NNReductionFeatureChannelsMeanNode
 }
 
 var _ NNReductionFeatureChannelsMeanNodeable = (*NNReductionFeatureChannelsMeanNode)(nil)
+
+var _ NNUnaryReductionNodeProvider = (*NNReductionFeatureChannelsMeanNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNReductionFeatureChannelsMeanNode)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A concrete subclass of Core Image Barcode Descriptor that represents a PDF417 symbol.
-//
 // PDF417CodeDescriptor is an idiomatic wrapper over the Objective-C class CIPDF417CodeDescriptor.
+//
+// It embeds [BarcodeDescriptor], promoting that type's methods.
+//
+// A concrete subclass of Core Image Barcode Descriptor that represents a PDF417 symbol.
 type PDF417CodeDescriptor struct {
-	objref.Handle
+	BarcodeDescriptor
 }
 
 // PDF417CodeDescriptorFromID adopts an existing Objective-C object as a PDF417CodeDescriptor
@@ -25,7 +26,8 @@ func PDF417CodeDescriptorFromID(id objc.ID) *PDF417CodeDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &PDF417CodeDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PDF417CodeDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,54 +40,38 @@ func pDF417CodeDescriptorAdopt(id objc.ID) *PDF417CodeDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &PDF417CodeDescriptor{Handle: objref.Wrap(id)}
+	x := &PDF417CodeDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *PDF417CodeDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PDF417CodeDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PDF417CodeDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes an PDF417 code descriptor for the given payload and parameters.
-//
-// NewPDF417CodeDescriptorWithPayloadIsCompactRowCountColumnCount creates a new PDF417CodeDescriptor.
+// NewPDF417CodeDescriptorWithPayloadIsCompactRowCountColumnCount initializes an PDF417 code descriptor for the given payload and parameters.
 func NewPDF417CodeDescriptorWithPayloadIsCompactRowCountColumnCount(errorCorrectedPayload obj.Object, isCompact bool, rowCount int, columnCount int) *PDF417CodeDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIPDF417CodeDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPayload:isCompact:rowCount:columnCount:"), objref.IDOf(errorCorrectedPayload), isCompact, rowCount, columnCount)
 	return pDF417CodeDescriptorAdopt(_id)
 }
 
-// The error-corrected payload containing the data encoded in the PDF417 code symbol. The first codeword indicates the number of data codewords in the errorCorrectedPayload. PDF417 codes are comprised of a start character on the left and a stop character on the right. Each row begins and ends with special characters indicating the current row as well as information about the dimensions of the PDF417 symbol. The errorCorrectedPayload represents the sequence of PDF417 codewords that make up the body of the message. The first codeword indicates the number of codewords in the message. This count includes the "count" codeword and any padding codewords, but does not include the error correction codewords. Each codeword is a 16-bit value in the range of 0...928. The sequence is to be interpreted as described in the PDF417 bar code symbology specification -- ISO/IEC 15438:2006(E).
+// ErrorCorrectedPayload the error-corrected payload containing the data encoded in the PDF417 code symbol. The first codeword indicates the number of data codewords in the errorCorrectedPayload. PDF417 codes are comprised of a start character on the left and a stop character on the right. Each row begins and ends with special characters indicating the current row as well as information about the dimensions of the PDF417 symbol. The errorCorrectedPayload represents the sequence of PDF417 codewords that make up the body of the message. The first codeword indicates the number of codewords in the message. This count includes the "count" codeword and any padding codewords, but does not include the error correction codewords. Each codeword is a 16-bit value in the range of 0...928. The sequence is to be interpreted as described in the PDF417 bar code symbology specification -- ISO/IEC 15438:2006(E).
 func (x *PDF417CodeDescriptor) ErrorCorrectedPayload() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorCorrectedPayload"))
 	return obj.Wrap(_r)
 }
 
-// A boolean value telling if the PDF417 code is compact. Compact PDF417 symbols have abbreviated right-side guard bars.
+// IsCompact a boolean value telling if the PDF417 code is compact. Compact PDF417 symbols have abbreviated right-side guard bars.
 func (x *PDF417CodeDescriptor) IsCompact() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompact"))
 	return _r
 }
 
-// The number of rows in the PDF417 code symbol. Valid row count values are from 3 to 90.
+// RowCount the number of rows in the PDF417 code symbol. Valid row count values are from 3 to 90.
 func (x *PDF417CodeDescriptor) RowCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowCount"))
 	return _r
 }
 
-// The number of columns in the PDF417 code symbol. Valid column count values are from 1 to 30. This count excluded the columns used to indicate the symbol structure.
+// ColumnCount the number of columns in the PDF417 code symbol. Valid column count values are from 1 to 30. This count excluded the columns used to indicate the symbol structure.
 func (x *PDF417CodeDescriptor) ColumnCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columnCount"))
 	return _r
@@ -101,3 +87,5 @@ type PDF417CodeDescriptorable interface {
 }
 
 var _ PDF417CodeDescriptorable = (*PDF417CodeDescriptor)(nil)
+
+var _ BarcodeDescriptorProvider = (*PDF417CodeDescriptor)(nil)

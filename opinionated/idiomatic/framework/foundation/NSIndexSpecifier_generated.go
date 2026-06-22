@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specifier representing an object in a collection (or container) with an index number.
-//
 // IndexSpecifier is an idiomatic wrapper over the Objective-C class NSIndexSpecifier.
+//
+// It embeds [ScriptObjectSpecifier], promoting that type's methods.
+//
+// A specifier representing an object in a collection (or container) with an index number.
 type IndexSpecifier struct {
-	objref.Handle
+	ScriptObjectSpecifier
 }
 
 // IndexSpecifierFromID adopts an existing Objective-C object as a IndexSpecifier
@@ -25,7 +26,8 @@ func IndexSpecifierFromID(id objc.ID) *IndexSpecifier {
 	if id == 0 {
 		return nil
 	}
-	x := &IndexSpecifier{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IndexSpecifier{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,110 +40,80 @@ func indexSpecifierAdopt(id objc.ID) *IndexSpecifier {
 	if id == 0 {
 		return nil
 	}
-	x := &IndexSpecifier{Handle: objref.Wrap(id)}
+	x := &IndexSpecifier{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *IndexSpecifier) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IndexSpecifier) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IndexSpecifier) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes an allocated NSIndexSpecifier object with a class description, container specifier, collection key, and object index.
-//
-// NewIndexSpecifierWithContainerClassDescriptionContainerSpecifierKeyIndex creates a new IndexSpecifier.
+// NewIndexSpecifierWithContainerClassDescriptionContainerSpecifierKeyIndex initializes an allocated NSIndexSpecifier object with a class description, container specifier, collection key, and object index.
 func NewIndexSpecifierWithContainerClassDescriptionContainerSpecifierKeyIndex(classDesc *ScriptClassDescription, container *ScriptObjectSpecifier, property string, index int) *IndexSpecifier {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSIndexSpecifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:index:"), objref.IDOf(classDesc), objref.IDOf(container), purego.NSString(property), index)
 	return indexSpecifierAdopt(_id)
 }
 
-// Sets the value of the receiver’s index property.
-//
-// WithIndex sets index and returns the receiver so calls can be chained.
+// WithIndex sets the value of the receiver’s index property.
 func (x *IndexSpecifier) WithIndex(index int) *IndexSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), index)
 	return x
 }
 
-// Sets the receiver’s child reference.
-//
-// WithChildSpecifier sets childSpecifier and returns the receiver so calls can be chained.
+// WithChildSpecifier sets the receiver’s child reference.
 func (x *IndexSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *IndexSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildSpecifier:"), objref.IDOf(childSpecifier))
 	return x
 }
 
-// Sets the container specifier of the receiver.
-//
-// WithContainerSpecifier sets containerSpecifier and returns the receiver so calls can be chained.
+// WithContainerSpecifier sets the container specifier of the receiver.
 func (x *IndexSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *IndexSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerSpecifier:"), objref.IDOf(containerSpecifier))
 	return x
 }
 
-// Sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
-//
-// WithContainerIsObjectBeingTested sets containerIsObjectBeingTested and returns the receiver so calls can be chained.
+// WithContainerIsObjectBeingTested sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
 func (x *IndexSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *IndexSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerIsObjectBeingTested:"), containerIsObjectBeingTested)
 	return x
 }
 
-// Sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
-//
-// WithContainerIsRangeContainerObject sets containerIsRangeContainerObject and returns the receiver so calls can be chained.
+// WithContainerIsRangeContainerObject sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
 func (x *IndexSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *IndexSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerIsRangeContainerObject:"), containerIsRangeContainerObject)
 	return x
 }
 
-// Sets the key of the receiver.
-//
-// WithKey sets key and returns the receiver so calls can be chained.
+// WithKey sets the key of the receiver.
 func (x *IndexSpecifier) WithKey(key StringProvider) *IndexSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), objref.IDOf(key))
 	return x
 }
 
-// Sets the class description of the receiver’s container specifier to a given specifier.
-//
-// WithContainerClassDescription sets containerClassDescription and returns the receiver so calls can be chained.
+// WithContainerClassDescription sets the class description of the receiver’s container specifier to a given specifier.
 func (x *IndexSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *IndexSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerClassDescription:"), objref.IDOf(containerClassDescription))
 	return x
 }
 
-// Sets the value of the evaluation error.
-//
-// WithEvaluationErrorNumber sets evaluationErrorNumber and returns the receiver so calls can be chained.
+// WithEvaluationErrorNumber sets the value of the evaluation error.
 func (x *IndexSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *IndexSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEvaluationErrorNumber:"), evaluationErrorNumber)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *IndexSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *IndexSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// Index wraps the corresponding Objective-C method.
 func (x *IndexSpecifier) Index() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("index"))
 	return _r
 }
 
+// SetIndex wraps the corresponding Objective-C method.
 func (x *IndexSpecifier) SetIndex(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), index)
 }
@@ -163,3 +135,5 @@ type IndexSpecifierable interface {
 }
 
 var _ IndexSpecifierable = (*IndexSpecifier)(nil)
+
+var _ ScriptObjectSpecifierProvider = (*IndexSpecifier)(nil)

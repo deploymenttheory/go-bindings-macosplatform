@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A low-level, operating system-independent type for inter-application (and inter-thread) messages.
-//
 // PortMessage is an idiomatic wrapper over the Objective-C class NSPortMessage.
+//
+// A low-level, operating system-independent type for inter-application (and inter-thread) messages.
 type PortMessage struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PortMessageFromID(id objc.ID) *PortMessage {
 	if id == 0 {
 		return nil
 	}
-	x := &PortMessage{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PortMessage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func portMessageAdopt(id objc.ID) *PortMessage {
 	if id == 0 {
 		return nil
 	}
-	x := &PortMessage{Handle: objref.Wrap(id)}
+	x := &PortMessage{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +60,12 @@ func (x *PortMessage) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PortMessage) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPortMessageWithSendPortReceivePortComponents creates a new PortMessage.
 func NewPortMessageWithSendPortReceivePortComponents(sendPort *Port, replyPort *Port, components obj.Object) *PortMessage {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPortMessage")), objc.RegisterName("alloc"))
@@ -65,43 +73,49 @@ func NewPortMessageWithSendPortReceivePortComponents(sendPort *Port, replyPort *
 	return portMessageAdopt(_id)
 }
 
-// WithMsgid sets msgid and returns the receiver so calls can be chained.
+// WithMsgid sets the property and returns the receiver so calls can be chained.
 func (x *PortMessage) WithMsgid(msgid uint32) *PortMessage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMsgid:"), msgid)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *PortMessage) WithScriptingProperties(scriptingProperties obj.Object) *PortMessage {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// SendBeforeDate wraps the corresponding Objective-C method.
 func (x *PortMessage) SendBeforeDate(date *Date) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendBeforeDate:"), objref.IDOf(date))
 	return _r
 }
 
+// Components wraps the corresponding Objective-C method.
 func (x *PortMessage) Components() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("components"))
 	return obj.Wrap(_r)
 }
 
+// ReceivePort wraps the corresponding Objective-C method.
 func (x *PortMessage) ReceivePort() *Port {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("receivePort"))
 	return PortFromID(_r)
 }
 
+// SendPort wraps the corresponding Objective-C method.
 func (x *PortMessage) SendPort() *Port {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendPort"))
 	return PortFromID(_r)
 }
 
+// Msgid wraps the corresponding Objective-C method.
 func (x *PortMessage) Msgid() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("msgid"))
 	return _r
 }
 
+// SetMsgid wraps the corresponding Objective-C method.
 func (x *PortMessage) SetMsgid(msgid uint32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMsgid:"), msgid)
 }

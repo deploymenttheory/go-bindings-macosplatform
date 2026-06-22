@@ -10,9 +10,12 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AnimatedValue is an idiomatic wrapper over the Objective-C class MDLAnimatedValue.
+//
+// AnimatedValue is an abstract base — you do not construct it directly. Construct one of [AnimatedMatrix4x4], [AnimatedQuaternionArray], [AnimatedQuaternion], [AnimatedScalarArray], [AnimatedScalar], [AnimatedVector2], [AnimatedVector3Array], [AnimatedVector3], [AnimatedVector4] and pass it where a AnimatedValue is accepted.
 type AnimatedValue struct {
 	objref.Handle
 }
@@ -23,7 +26,8 @@ func AnimatedValueFromID(id objc.ID) *AnimatedValue {
 	if id == 0 {
 		return nil
 	}
-	x := &AnimatedValue{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AnimatedValue{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +40,8 @@ func animatedValueAdopt(id objc.ID) *AnimatedValue {
 	if id == 0 {
 		return nil
 	}
-	x := &AnimatedValue{Handle: objref.Wrap(id)}
+	x := &AnimatedValue{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,56 +61,73 @@ func (x *AnimatedValue) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewAnimatedValue creates a new AnimatedValue.
-func NewAnimatedValue() *AnimatedValue {
-	_id := objc.Send[objc.ID](objc.ID(_class("MDLAnimatedValue")), objc.RegisterName("new"))
-	return animatedValueAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AnimatedValue) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WithInterpolation sets interpolation and returns the receiver so calls can be chained.
+// WithInterpolation sets the property and returns the receiver so calls can be chained.
 func (x *AnimatedValue) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedValue {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
 	return x
 }
 
+// IsAnimated wraps the corresponding Objective-C method.
 func (x *AnimatedValue) IsAnimated() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAnimated"))
 	return _r
 }
 
+// Clear wraps the corresponding Objective-C method.
 func (x *AnimatedValue) Clear() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clear"))
 }
 
+// GetTimesMaxCount wraps the corresponding Objective-C method.
+func (x *AnimatedValue) GetTimesMaxCount(maxCount int) (result int, timesArray float64) {
+	var _out0 float64
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("getTimes:maxCount:"), unsafe.Pointer(&_out0), maxCount)
+	return _r, _out0
+}
+
+// Precision wraps the corresponding Objective-C method.
 func (x *AnimatedValue) Precision() DataPrecision {
 	_r := objc.Send[DataPrecision](objref.IDOf(x), objc.RegisterName("precision"))
 	return _r
 }
 
+// TimeSampleCount wraps the corresponding Objective-C method.
 func (x *AnimatedValue) TimeSampleCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("timeSampleCount"))
 	return _r
 }
 
+// MinimumTime wraps the corresponding Objective-C method.
 func (x *AnimatedValue) MinimumTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumTime"))
 	return _r
 }
 
+// MaximumTime wraps the corresponding Objective-C method.
 func (x *AnimatedValue) MaximumTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumTime"))
 	return _r
 }
 
+// Interpolation wraps the corresponding Objective-C method.
 func (x *AnimatedValue) Interpolation() AnimatedValueInterpolation {
 	_r := objc.Send[AnimatedValueInterpolation](objref.IDOf(x), objc.RegisterName("interpolation"))
 	return _r
 }
 
+// SetInterpolation wraps the corresponding Objective-C method.
 func (x *AnimatedValue) SetInterpolation(interpolation AnimatedValueInterpolation) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
 }
 
+// KeyTimes wraps the corresponding Objective-C method.
+//
 // KeyTimes returns the collection as a Go slice.
 func (x *AnimatedValue) KeyTimes() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyTimes"))
@@ -118,6 +140,7 @@ type AnimatedValueable interface {
 	WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedValue
 	IsAnimated() bool
 	Clear()
+	GetTimesMaxCount(maxCount int) (result int, timesArray float64)
 	Precision() DataPrecision
 	TimeSampleCount() int
 	MinimumTime() float64
@@ -128,3 +151,10 @@ type AnimatedValueable interface {
 }
 
 var _ AnimatedValueable = (*AnimatedValue)(nil)
+
+// isAnimatedValue marks AnimatedValue — and, by embedding promotion, its
+// subclasses — as a member of the AnimatedValue hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AnimatedValue) isAnimatedValue() {}
+
+var _ AnimatedValueProvider = (*AnimatedValue)(nil)

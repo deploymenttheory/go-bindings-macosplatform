@@ -23,7 +23,8 @@ func MTROccupancySensingClusterOccupancyChangedEventFromID(id objc.ID) *MTROccup
 	if id == 0 {
 		return nil
 	}
-	x := &MTROccupancySensingClusterOccupancyChangedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTROccupancySensingClusterOccupancyChangedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTROccupancySensingClusterOccupancyChangedEventAdopt(id objc.ID) *MTROccupa
 	if id == 0 {
 		return nil
 	}
-	x := &MTROccupancySensingClusterOccupancyChangedEvent{Handle: objref.Wrap(id)}
+	x := &MTROccupancySensingClusterOccupancyChangedEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTROccupancySensingClusterOccupancyChangedEvent) IsKind(className strin
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTROccupancySensingClusterOccupancyChangedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTROccupancySensingClusterOccupancyChangedEvent creates a new MTROccupancySensingClusterOccupancyChangedEvent.
 func NewMTROccupancySensingClusterOccupancyChangedEvent() *MTROccupancySensingClusterOccupancyChangedEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTROccupancySensingClusterOccupancyChangedEvent")), objc.RegisterName("new"))
 	return mTROccupancySensingClusterOccupancyChangedEventAdopt(_id)
 }
 
-// WithOccupancy sets occupancy and returns the receiver so calls can be chained.
+// WithOccupancy sets the property and returns the receiver so calls can be chained.
 func (x *MTROccupancySensingClusterOccupancyChangedEvent) WithOccupancy(occupancy obj.Object) *MTROccupancySensingClusterOccupancyChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOccupancy:"), objref.IDOf(occupancy))
 	return x
 }
 
+// Occupancy wraps the corresponding Objective-C method.
 func (x *MTROccupancySensingClusterOccupancyChangedEvent) Occupancy() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("occupancy"))
 	return obj.Wrap(_r)
 }
 
+// SetOccupancy wraps the corresponding Objective-C method.
 func (x *MTROccupancySensingClusterOccupancyChangedEvent) SetOccupancy(occupancy obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOccupancy:"), objref.IDOf(occupancy))
 }

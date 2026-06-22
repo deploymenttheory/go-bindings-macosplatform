@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A self-contained environment for JavaScript execution.
-//
 // VirtualMachine is an idiomatic wrapper over the Objective-C class JSVirtualMachine.
+//
+// A self-contained environment for JavaScript execution.
 type VirtualMachine struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VirtualMachineFromID(id objc.ID) *VirtualMachine {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtualMachine{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VirtualMachine{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func virtualMachineAdopt(id objc.ID) *VirtualMachine {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtualMachine{Handle: objref.Wrap(id)}
+	x := &VirtualMachine{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +60,24 @@ func (x *VirtualMachine) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VirtualMachine) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVirtualMachine creates a new VirtualMachine.
 func NewVirtualMachine() *VirtualMachine {
 	_id := objc.Send[objc.ID](objc.ID(_class("JSVirtualMachine")), objc.RegisterName("new"))
 	return virtualMachineAdopt(_id)
 }
 
-// Notifies the JavaScriptCore virtual machine of an external object relationship.
+// AddManagedReferenceWithOwner notifies the JavaScriptCore virtual machine of an external object relationship.
 func (x *VirtualMachine) AddManagedReferenceWithOwner(object obj.Object, owner obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addManagedReference:withOwner:"), objref.IDOf(object), objref.IDOf(owner))
 }
 
-// Notifies the JavaScriptCore virtual machine that a previously registered object relationship no longer exists.
+// RemoveManagedReferenceWithOwner notifies the JavaScriptCore virtual machine that a previously registered object relationship no longer exists.
 func (x *VirtualMachine) RemoveManagedReferenceWithOwner(object obj.Object, owner obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeManagedReference:withOwner:"), objref.IDOf(object), objref.IDOf(owner))
 }

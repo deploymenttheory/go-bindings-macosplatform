@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The context in which the current script command is executed.
-//
 // ScriptExecutionContext is an idiomatic wrapper over the Objective-C class NSScriptExecutionContext.
+//
+// The context in which the current script command is executed.
 type ScriptExecutionContext struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ScriptExecutionContextFromID(id objc.ID) *ScriptExecutionContext {
 	if id == 0 {
 		return nil
 	}
-	x := &ScriptExecutionContext{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScriptExecutionContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func scriptExecutionContextAdopt(id objc.ID) *ScriptExecutionContext {
 	if id == 0 {
 		return nil
 	}
-	x := &ScriptExecutionContext{Handle: objref.Wrap(id)}
+	x := &ScriptExecutionContext{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,65 +60,71 @@ func (x *ScriptExecutionContext) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScriptExecutionContext) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewScriptExecutionContext creates a new ScriptExecutionContext.
 func NewScriptExecutionContext() *ScriptExecutionContext {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSScriptExecutionContext")), objc.RegisterName("new"))
 	return scriptExecutionContextAdopt(_id)
 }
 
-// Sets the top-level object for an object-specifier evaluation.
-//
-// WithTopLevelObject sets topLevelObject and returns the receiver so calls can be chained.
+// WithTopLevelObject sets the top-level object for an object-specifier evaluation.
 func (x *ScriptExecutionContext) WithTopLevelObject(topLevelObject obj.Object) *ScriptExecutionContext {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTopLevelObject:"), objref.IDOf(topLevelObject))
 	return x
 }
 
-// Sets the top-level container object currently being tested in a “whose” qualifier to a given object.
-//
-// WithObjectBeingTested sets objectBeingTested and returns the receiver so calls can be chained.
+// WithObjectBeingTested sets the top-level container object currently being tested in a “whose” qualifier to a given object.
 func (x *ScriptExecutionContext) WithObjectBeingTested(objectBeingTested obj.Object) *ScriptExecutionContext {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectBeingTested:"), objref.IDOf(objectBeingTested))
 	return x
 }
 
-// Sets the top-level container object for a range-specifier evaluation to a give object.
-//
-// WithRangeContainerObject sets rangeContainerObject and returns the receiver so calls can be chained.
+// WithRangeContainerObject sets the top-level container object for a range-specifier evaluation to a give object.
 func (x *ScriptExecutionContext) WithRangeContainerObject(rangeContainerObject obj.Object) *ScriptExecutionContext {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRangeContainerObject:"), objref.IDOf(rangeContainerObject))
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *ScriptExecutionContext) WithScriptingProperties(scriptingProperties obj.Object) *ScriptExecutionContext {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// TopLevelObject wraps the corresponding Objective-C method.
 func (x *ScriptExecutionContext) TopLevelObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topLevelObject"))
 	return obj.Wrap(_r)
 }
 
+// SetTopLevelObject wraps the corresponding Objective-C method.
 func (x *ScriptExecutionContext) SetTopLevelObject(topLevelObject obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTopLevelObject:"), objref.IDOf(topLevelObject))
 }
 
+// ObjectBeingTested wraps the corresponding Objective-C method.
 func (x *ScriptExecutionContext) ObjectBeingTested() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectBeingTested"))
 	return obj.Wrap(_r)
 }
 
+// SetObjectBeingTested wraps the corresponding Objective-C method.
 func (x *ScriptExecutionContext) SetObjectBeingTested(objectBeingTested obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectBeingTested:"), objref.IDOf(objectBeingTested))
 }
 
+// RangeContainerObject wraps the corresponding Objective-C method.
 func (x *ScriptExecutionContext) RangeContainerObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rangeContainerObject"))
 	return obj.Wrap(_r)
 }
 
+// SetRangeContainerObject wraps the corresponding Objective-C method.
 func (x *ScriptExecutionContext) SetRangeContainerObject(rangeContainerObject obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRangeContainerObject:"), objref.IDOf(rangeContainerObject))
 }

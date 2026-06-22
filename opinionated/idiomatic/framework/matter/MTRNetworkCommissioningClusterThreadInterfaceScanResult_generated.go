@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRNetworkCommissioningClusterThreadInterfaceScanResult is an idiomatic wrapper over the Objective-C class MTRNetworkCommissioningClusterThreadInterfaceScanResult.
+//
+// It embeds [MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct], promoting that type's methods.
 type MTRNetworkCommissioningClusterThreadInterfaceScanResult struct {
-	objref.Handle
+	MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
 }
 
 // MTRNetworkCommissioningClusterThreadInterfaceScanResultFromID adopts an existing Objective-C object as a MTRNetworkCommissioningClusterThreadInterfaceScanResult
@@ -23,7 +24,8 @@ func MTRNetworkCommissioningClusterThreadInterfaceScanResultFromID(id objc.ID) *
 	if id == 0 {
 		return nil
 	}
-	x := &MTRNetworkCommissioningClusterThreadInterfaceScanResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRNetworkCommissioningClusterThreadInterfaceScanResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRNetworkCommissioningClusterThreadInterfaceScanResultAdopt(id objc.ID) *M
 	if id == 0 {
 		return nil
 	}
-	x := &MTRNetworkCommissioningClusterThreadInterfaceScanResult{Handle: objref.Wrap(id)}
+	x := &MTRNetworkCommissioningClusterThreadInterfaceScanResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRNetworkCommissioningClusterThreadInterfaceScanResult creates a new MTRNetworkCommissioningClusterThreadInterfaceScanResult.
@@ -62,43 +50,43 @@ func NewMTRNetworkCommissioningClusterThreadInterfaceScanResult() *MTRNetworkCom
 	return mTRNetworkCommissioningClusterThreadInterfaceScanResultAdopt(_id)
 }
 
-// WithPanId sets panId and returns the receiver so calls can be chained.
+// WithPanId sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithPanId(panId obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPanId:"), objref.IDOf(panId))
 	return x
 }
 
-// WithExtendedPanId sets extendedPanId and returns the receiver so calls can be chained.
+// WithExtendedPanId sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithExtendedPanId(extendedPanId obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedPanId:"), objref.IDOf(extendedPanId))
 	return x
 }
 
-// WithNetworkName sets networkName and returns the receiver so calls can be chained.
+// WithNetworkName sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithNetworkName(networkName string) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkName:"), purego.NSString(networkName))
 	return x
 }
 
-// WithChannel sets channel and returns the receiver so calls can be chained.
+// WithChannel sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithChannel(channel obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), objref.IDOf(channel))
 	return x
 }
 
-// WithExtendedAddress sets extendedAddress and returns the receiver so calls can be chained.
+// WithExtendedAddress sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithExtendedAddress(extendedAddress obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedAddress:"), objref.IDOf(extendedAddress))
 	return x
 }
 
-// WithRssi sets rssi and returns the receiver so calls can be chained.
+// WithRssi sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithRssi(rssi obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRssi:"), objref.IDOf(rssi))
 	return x
 }
 
-// WithLqi sets lqi and returns the receiver so calls can be chained.
+// WithLqi sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithLqi(lqi obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResult {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLqi:"), objref.IDOf(lqi))
 	return x
@@ -117,3 +105,5 @@ type MTRNetworkCommissioningClusterThreadInterfaceScanResultable interface {
 }
 
 var _ MTRNetworkCommissioningClusterThreadInterfaceScanResultable = (*MTRNetworkCommissioningClusterThreadInterfaceScanResult)(nil)
+
+var _ MTRNetworkCommissioningClusterThreadInterfaceScanResultStructProvider = (*MTRNetworkCommissioningClusterThreadInterfaceScanResult)(nil)

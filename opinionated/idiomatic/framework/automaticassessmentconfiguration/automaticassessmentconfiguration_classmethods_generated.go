@@ -8,17 +8,19 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Creates a new assessment participant configuration instance.
+// New creates a new assessment participant configuration instance.
 func New() *AssessmentParticipantConfiguration {
 	_r := objc.Send[objc.ID](objc.ID(_class("AEAssessmentParticipantConfiguration")), objc.RegisterName("new"))
 	return AssessmentParticipantConfigurationFromID(_r)
 }
 
+// SupportsMultipleParticipants wraps the corresponding Objective-C method.
 func SupportsMultipleParticipants() bool {
 	_r := objc.Send[bool](objc.ID(_class("AEAssessmentSession")), objc.RegisterName("supportsMultipleParticipants"))
 	return _r
 }
 
+// SupportsConfigurationUpdates wraps the corresponding Objective-C method.
 func SupportsConfigurationUpdates() bool {
 	_r := objc.Send[bool](objc.ID(_class("AEAssessmentSession")), objc.RegisterName("supportsConfigurationUpdates"))
 	return _r

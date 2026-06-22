@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A polygonal path that can be followed by an agent.
-//
 // Path is an idiomatic wrapper over the Objective-C class GKPath.
+//
+// A polygonal path that can be followed by an agent.
 type Path struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PathFromID(id objc.ID) *Path {
 	if id == 0 {
 		return nil
 	}
-	x := &Path{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Path{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func pathAdopt(id objc.ID) *Path {
 	if id == 0 {
 		return nil
 	}
-	x := &Path{Handle: objref.Wrap(id)}
+	x := &Path{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,53 +60,55 @@ func (x *Path) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a path using the positions of the specified graph nodes.
-//
-// NewPathWithGraphNodesRadius creates a new Path.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Path) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPathWithGraphNodesRadius initializes a path using the positions of the specified graph nodes.
 func NewPathWithGraphNodesRadius(graphNodes []*GraphNode, radius float32) *Path {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKPath")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGraphNodes:radius:"), purego.SliceToNSArray(graphNodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }), radius)
 	return pathAdopt(_id)
 }
 
-// The radius of the path.
-//
-// WithRadius sets radius and returns the receiver so calls can be chained.
+// WithRadius the radius of the path.
 func (x *Path) WithRadius(radius float32) *Path {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 	return x
 }
 
-// A Boolean value that determines whether the path loops around on itself (that is, the path’s end point connects to its start point).
-//
-// WithCyclical sets cyclical and returns the receiver so calls can be chained.
+// WithCyclical a Boolean value that determines whether the path loops around on itself (that is, the path’s end point connects to its start point).
 func (x *Path) WithCyclical(cyclical bool) *Path {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCyclical:"), cyclical)
 	return x
 }
 
-// Radius of the pathway.  Defines a spatial area that the path occupies. This can be though of as the union between rectangles between all points, and circles at each point
+// Radius radius of the pathway.  Defines a spatial area that the path occupies. This can be though of as the union between rectangles between all points, and circles at each point
 func (x *Path) Radius() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("radius"))
 	return _r
 }
 
+// SetRadius wraps the corresponding Objective-C method.
 func (x *Path) SetRadius(radius float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 }
 
-// Number of points in this path
+// NumPoints number of points in this path
 func (x *Path) NumPoints() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numPoints"))
 	return _r
 }
 
-// Does this path loop back on itself, creating a cycle?
+// IsCyclical does this path loop back on itself, creating a cycle?
 func (x *Path) IsCyclical() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCyclical"))
 	return _r
 }
 
+// SetCyclical wraps the corresponding Objective-C method.
 func (x *Path) SetCyclical(cyclical bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCyclical:"), cyclical)
 }

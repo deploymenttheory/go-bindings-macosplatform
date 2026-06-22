@@ -12,11 +12,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A capture output that records video and provides access to video frames for processing.
-//
 // CaptureVideoDataOutput is an idiomatic wrapper over the Objective-C class AVCaptureVideoDataOutput.
+//
+// It embeds [CaptureOutput], promoting that type's methods.
+//
+// A capture output that records video and provides access to video frames for processing.
 type CaptureVideoDataOutput struct {
-	objref.Handle
+	CaptureOutput
 }
 
 // CaptureVideoDataOutputFromID adopts an existing Objective-C object as a CaptureVideoDataOutput
@@ -25,7 +27,8 @@ func CaptureVideoDataOutputFromID(id objc.ID) *CaptureVideoDataOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureVideoDataOutput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CaptureVideoDataOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func captureVideoDataOutputAdopt(id objc.ID) *CaptureVideoDataOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &CaptureVideoDataOutput{Handle: objref.Wrap(id)}
+	x := &CaptureVideoDataOutput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CaptureVideoDataOutput) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptureVideoDataOutput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptureVideoDataOutput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCaptureVideoDataOutput creates a new CaptureVideoDataOutput.
@@ -64,91 +53,84 @@ func NewCaptureVideoDataOutput() *CaptureVideoDataOutput {
 	return captureVideoDataOutputAdopt(_id)
 }
 
-// A dictionary that contains the compression settings for the output.
-//
-// WithVideoSettings sets videoSettings and returns the receiver so calls can be chained.
+// WithVideoSettings a dictionary that contains the compression settings for the output.
 func (x *CaptureVideoDataOutput) WithVideoSettings(videoSettings obj.Object) *CaptureVideoDataOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoSettings:"), objref.IDOf(videoSettings))
 	return x
 }
 
-// Indicates whether to drop video frames if they arrive late.
-//
-// WithAlwaysDiscardsLateVideoFrames sets alwaysDiscardsLateVideoFrames and returns the receiver so calls can be chained.
+// WithAlwaysDiscardsLateVideoFrames indicates whether to drop video frames if they arrive late.
 func (x *CaptureVideoDataOutput) WithAlwaysDiscardsLateVideoFrames(alwaysDiscardsLateVideoFrames bool) *CaptureVideoDataOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlwaysDiscardsLateVideoFrames:"), alwaysDiscardsLateVideoFrames)
 	return x
 }
 
-// Indicates whether the receiver should preserve dynamic HDR metadata as an attachment on the output sample buffer’s underlying pixel buffer.
-//
-// WithPreservesDynamicHDRMetadata sets preservesDynamicHDRMetadata and returns the receiver so calls can be chained.
+// WithPreservesDynamicHDRMetadata indicates whether the receiver should preserve dynamic HDR metadata as an attachment on the output sample buffer’s underlying pixel buffer.
 func (x *CaptureVideoDataOutput) WithPreservesDynamicHDRMetadata(preservesDynamicHDRMetadata bool) *CaptureVideoDataOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesDynamicHDRMetadata:"), preservesDynamicHDRMetadata)
 	return x
 }
 
-// A Boolean value that indicates whether to defer starting this capture output.
-//
-// WithDeferredStartEnabled sets deferredStartEnabled and returns the receiver so calls can be chained.
+// WithDeferredStartEnabled a Boolean value that indicates whether to defer starting this capture output.
 func (x *CaptureVideoDataOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureVideoDataOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
 	return x
 }
 
-// Specifies the recommended settings for use with an AVAssetWriterInput.
+// RecommendedVideoSettingsForAssetWriterWithOutputFileType specifies the recommended settings for use with an AVAssetWriterInput.
 func (x *CaptureVideoDataOutput) RecommendedVideoSettingsForAssetWriterWithOutputFileType(outputFileType obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recommendedVideoSettingsForAssetWriterWithOutputFileType:"), objref.IDOf(outputFileType))
 	return obj.Wrap(_r)
 }
 
-// The video codecs that the output supports for writing video to the output file.
+// AvailableVideoCodecTypesForAssetWriterWithOutputFileType the video codecs that the output supports for writing video to the output file.
 func (x *CaptureVideoDataOutput) AvailableVideoCodecTypesForAssetWriterWithOutputFileType(outputFileType obj.Object) []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableVideoCodecTypesForAssetWriterWithOutputFileType:"), objref.IDOf(outputFileType))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Returns a video settings dictionary appropriate for capturing video to a file with the specified codec and type.
+// RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileType returns a video settings dictionary appropriate for capturing video to a file with the specified codec and type.
 func (x *CaptureVideoDataOutput) RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileType(videoCodecType obj.Object, outputFileType obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recommendedVideoSettingsForVideoCodecType:assetWriterOutputFileType:"), objref.IDOf(videoCodecType), objref.IDOf(outputFileType))
 	return obj.Wrap(_r)
 }
 
-// Returns a dictionary of recommended output settings for writing the specified code, file type, and output URL.
+// RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileTypeOutputFileURL returns a dictionary of recommended output settings for writing the specified code, file type, and output URL.
 func (x *CaptureVideoDataOutput) RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileTypeOutputFileURL(videoCodecType obj.Object, outputFileType obj.Object, outputFileURL string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recommendedVideoSettingsForVideoCodecType:assetWriterOutputFileType:outputFileURL:"), objref.IDOf(videoCodecType), objref.IDOf(outputFileType), rt.FileURL(outputFileURL))
 	return obj.Wrap(_r)
 }
 
-// Recommends movie-level metadata for a particular video codec type and output file type, to be used with an asset writer input.
+// RecommendedMovieMetadataForVideoCodecTypeAssetWriterOutputFileType recommends movie-level metadata for a particular video codec type and output file type, to be used with an asset writer input.
 func (x *CaptureVideoDataOutput) RecommendedMovieMetadataForVideoCodecTypeAssetWriterOutputFileType(videoCodecType obj.Object, outputFileType obj.Object) []*MetadataItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recommendedMovieMetadataForVideoCodecType:assetWriterOutputFileType:"), objref.IDOf(videoCodecType), objref.IDOf(outputFileType))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
-// The dispatch queue on which all sample buffer delegate methods will be called. The value of this property is a dispatch_queue_t. The queue is set using the setSampleBufferDelegate:queue: method.
+// SampleBufferCallbackQueue the dispatch queue on which all sample buffer delegate methods will be called. The value of this property is a dispatch_queue_t. The queue is set using the setSampleBufferDelegate:queue: method.
 func (x *CaptureVideoDataOutput) SampleBufferCallbackQueue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleBufferCallbackQueue"))
 	return obj.Wrap(_r)
 }
 
-// Specifies the settings used to decode or re-encode video before it is output by the receiver. See AVVideoSettings.h for more information on how to construct a video settings dictionary. To receive samples in their device native format, set this property to an empty dictionary (i.e. [NSDictionary dictionary]). To receive samples in a default uncompressed format, set this property to nil. Note that after this property is set to nil, subsequent querying of this property will yield a non-nil dictionary reflecting the settings used by the AVCaptureSession's current sessionPreset. On iOS versions prior to iOS 16.0, the only supported key is kCVPixelBufferPixelFormatTypeKey. Use -availableVideoCVPixelFormatTypes for the list of supported pixel formats. For apps linked on or after iOS 16.0, kCVPixelBufferPixelFormatTypeKey, kCVPixelBufferWidthKey, and kCVPixelBufferHeightKey are supported. The width and height must match the videoOrientation specified on the output's AVCaptureConnection or an NSInvalidArgumentException is thrown. The aspect ratio of width and height must match the aspect ratio of the source's activeFormat (corrected for the connection's videoOrientation) or an NSInvalidArgumentException is thrown. If width or height exceeds the source's activeFormat's width or height, an NSInvalidArgumentException is thrown. Changing width and height when deliversPreviewSizedOutputBuffers is set to YES is not supported and throws an NSInvalidArgumentException.
+// VideoSettings specifies the settings used to decode or re-encode video before it is output by the receiver. See AVVideoSettings.h for more information on how to construct a video settings dictionary. To receive samples in their device native format, set this property to an empty dictionary (i.e. [NSDictionary dictionary]). To receive samples in a default uncompressed format, set this property to nil. Note that after this property is set to nil, subsequent querying of this property will yield a non-nil dictionary reflecting the settings used by the AVCaptureSession's current sessionPreset. On iOS versions prior to iOS 16.0, the only supported key is kCVPixelBufferPixelFormatTypeKey. Use -availableVideoCVPixelFormatTypes for the list of supported pixel formats. For apps linked on or after iOS 16.0, kCVPixelBufferPixelFormatTypeKey, kCVPixelBufferWidthKey, and kCVPixelBufferHeightKey are supported. The width and height must match the videoOrientation specified on the output's AVCaptureConnection or an NSInvalidArgumentException is thrown. The aspect ratio of width and height must match the aspect ratio of the source's activeFormat (corrected for the connection's videoOrientation) or an NSInvalidArgumentException is thrown. If width or height exceeds the source's activeFormat's width or height, an NSInvalidArgumentException is thrown. Changing width and height when deliversPreviewSizedOutputBuffers is set to YES is not supported and throws an NSInvalidArgumentException.
 func (x *CaptureVideoDataOutput) VideoSettings() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoSettings"))
 	return obj.Wrap(_r)
 }
 
+// SetVideoSettings wraps the corresponding Objective-C method.
 func (x *CaptureVideoDataOutput) SetVideoSettings(videoSettings obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoSettings:"), objref.IDOf(videoSettings))
 }
 
-// Indicates the recommended media timescale for the video track. - Returns: The recommended media timescale based on the active capture session's inputs. It is never less than 600. It may or may not be a multiple of 600.
+// RecommendedMediaTimeScaleForAssetWriter indicates the recommended media timescale for the video track. - Returns: The recommended media timescale based on the active capture session's inputs. It is never less than 600. It may or may not be a multiple of 600.
 func (x *CaptureVideoDataOutput) RecommendedMediaTimeScaleForAssetWriter() int32 {
 	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("recommendedMediaTimeScaleForAssetWriter"))
 	return _r
 }
 
-// Indicates the supported video pixel formats that can be specified in videoSettings. The value of this property is an NSArray of NSNumbers that can be used as values for the kCVPixelBufferPixelFormatTypeKey in the receiver's videoSettings property. The formats are listed in an unspecified order. This list can may change if the activeFormat of the AVCaptureDevice connected to the receiver changes.
+// AvailableVideoCVPixelFormatTypes indicates the supported video pixel formats that can be specified in videoSettings. The value of this property is an NSArray of NSNumbers that can be used as values for the kCVPixelBufferPixelFormatTypeKey in the receiver's videoSettings property. The formats are listed in an unspecified order. This list can may change if the activeFormat of the AVCaptureDevice connected to the receiver changes.
 //
 // AvailableVideoCVPixelFormatTypes returns the collection as a Go slice.
 func (x *CaptureVideoDataOutput) AvailableVideoCVPixelFormatTypes() []obj.Object {
@@ -156,7 +138,7 @@ func (x *CaptureVideoDataOutput) AvailableVideoCVPixelFormatTypes() []obj.Object
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Indicates the supported video codec formats that can be specified in videoSettings. The value of this property is an NSArray of AVVideoCodecTypes that can be used as values for the AVVideoCodecKey in the receiver's videoSettings property.
+// AvailableVideoCodecTypes indicates the supported video codec formats that can be specified in videoSettings. The value of this property is an NSArray of AVVideoCodecTypes that can be used as values for the AVVideoCodecKey in the receiver's videoSettings property.
 //
 // AvailableVideoCodecTypes returns the collection as a Go slice.
 func (x *CaptureVideoDataOutput) AvailableVideoCodecTypes() []obj.Object {
@@ -164,22 +146,24 @@ func (x *CaptureVideoDataOutput) AvailableVideoCodecTypes() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Specifies whether the receiver should always discard any video frame that is not processed before the next frame is captured. When the value of this property is YES, the receiver will immediately discard frames that are captured while the dispatch queue handling existing frames is blocked in the captureOutput:didOutputSampleBuffer:fromConnection: delegate method. When the value of this property is NO, delegates will be allowed more time to process old frames before new frames are discarded, but application memory usage may increase significantly as a result. The default value is YES.
+// AlwaysDiscardsLateVideoFrames specifies whether the receiver should always discard any video frame that is not processed before the next frame is captured. When the value of this property is YES, the receiver will immediately discard frames that are captured while the dispatch queue handling existing frames is blocked in the captureOutput:didOutputSampleBuffer:fromConnection: delegate method. When the value of this property is NO, delegates will be allowed more time to process old frames before new frames are discarded, but application memory usage may increase significantly as a result. The default value is YES.
 func (x *CaptureVideoDataOutput) AlwaysDiscardsLateVideoFrames() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("alwaysDiscardsLateVideoFrames"))
 	return _r
 }
 
+// SetAlwaysDiscardsLateVideoFrames wraps the corresponding Objective-C method.
 func (x *CaptureVideoDataOutput) SetAlwaysDiscardsLateVideoFrames(alwaysDiscardsLateVideoFrames bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlwaysDiscardsLateVideoFrames:"), alwaysDiscardsLateVideoFrames)
 }
 
-// Indicates whether the receiver should preserve dynamic HDR metadata as an attachment on the output sample buffer's underlying pixel buffer. Set this property to `true` if you wish to use “AVCaptureVideoDataOutput“ with “AVAssetWriter“ to record HDR movies. You must also set “kVTCompressionPropertyKey_PreserveDynamicHDRMetadata“ to `true` in the compression settings you pass to your “AVAssetWriterInput“. These compression settings are represented under the “AVVideoCompressionPropertiesKey“ sub-dictionary of your top-level AVVideoSettings (see <doc://com.apple.documentation/documentation/avfoundation/video-settings>). When you set this key to `true`, performance improves, as the encoder is able to skip HDR metadata calculation for every frame. The default value is `false`.
+// PreservesDynamicHDRMetadata indicates whether the receiver should preserve dynamic HDR metadata as an attachment on the output sample buffer's underlying pixel buffer. Set this property to `true` if you wish to use “AVCaptureVideoDataOutput“ with “AVAssetWriter“ to record HDR movies. You must also set “kVTCompressionPropertyKey_PreserveDynamicHDRMetadata“ to `true` in the compression settings you pass to your “AVAssetWriterInput“. These compression settings are represented under the “AVVideoCompressionPropertiesKey“ sub-dictionary of your top-level AVVideoSettings (see <doc://com.apple.documentation/documentation/avfoundation/video-settings>). When you set this key to `true`, performance improves, as the encoder is able to skip HDR metadata calculation for every frame. The default value is `false`.
 func (x *CaptureVideoDataOutput) PreservesDynamicHDRMetadata() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preservesDynamicHDRMetadata"))
 	return _r
 }
 
+// SetPreservesDynamicHDRMetadata wraps the corresponding Objective-C method.
 func (x *CaptureVideoDataOutput) SetPreservesDynamicHDRMetadata(preservesDynamicHDRMetadata bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesDynamicHDRMetadata:"), preservesDynamicHDRMetadata)
 }
@@ -209,3 +193,5 @@ type CaptureVideoDataOutputable interface {
 }
 
 var _ CaptureVideoDataOutputable = (*CaptureVideoDataOutput)(nil)
+
+var _ CaptureOutputProvider = (*CaptureVideoDataOutput)(nil)

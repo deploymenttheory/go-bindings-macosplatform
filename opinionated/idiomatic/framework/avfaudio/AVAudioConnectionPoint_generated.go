@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of either a source or destination connection point in the audio engine.
-//
 // AudioConnectionPoint is an idiomatic wrapper over the Objective-C class AVAudioConnectionPoint.
+//
+// A representation of either a source or destination connection point in the audio engine.
 type AudioConnectionPoint struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AudioConnectionPointFromID(id objc.ID) *AudioConnectionPoint {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioConnectionPoint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioConnectionPoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func audioConnectionPointAdopt(id objc.ID) *AudioConnectionPoint {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioConnectionPoint{Handle: objref.Wrap(id)}
+	x := &AudioConnectionPoint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,26 @@ func (x *AudioConnectionPoint) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a connection point object.
-//
-// NewAudioConnectionPointWithNodeBus creates a new AudioConnectionPoint.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioConnectionPoint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudioConnectionPointWithNodeBus creates a connection point object.
 func NewAudioConnectionPointWithNodeBus(node *AudioNode, bus int) *AudioConnectionPoint {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioConnectionPoint")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNode:bus:"), objref.IDOf(node), bus)
 	return audioConnectionPointAdopt(_id)
 }
 
-// Returns the node in the connection point.
+// Node returns the node in the connection point.
 func (x *AudioConnectionPoint) Node() *AudioNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("node"))
 	return AudioNodeFromID(_r)
 }
 
-// Returns the bus on the node in the connection point.
+// Bus returns the bus on the node in the connection point.
 func (x *AudioConnectionPoint) Bus() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bus"))
 	return _r

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A task that downloads multiple media selections for an asset.
-//
 // AggregateAssetDownloadTask is an idiomatic wrapper over the Objective-C class AVAggregateAssetDownloadTask.
+//
+// A task that downloads multiple media selections for an asset.
 type AggregateAssetDownloadTask struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AggregateAssetDownloadTaskFromID(id objc.ID) *AggregateAssetDownloadTask {
 	if id == 0 {
 		return nil
 	}
-	x := &AggregateAssetDownloadTask{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AggregateAssetDownloadTask{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func aggregateAssetDownloadTaskAdopt(id objc.ID) *AggregateAssetDownloadTask {
 	if id == 0 {
 		return nil
 	}
-	x := &AggregateAssetDownloadTask{Handle: objref.Wrap(id)}
+	x := &AggregateAssetDownloadTask{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *AggregateAssetDownloadTask) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AggregateAssetDownloadTask) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAggregateAssetDownloadTask creates a new AggregateAssetDownloadTask.
 func NewAggregateAssetDownloadTask() *AggregateAssetDownloadTask {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAggregateAssetDownloadTask")), objc.RegisterName("new"))
 	return aggregateAssetDownloadTaskAdopt(_id)
 }
 
-// The asset supplied to the download task upon initialization.
+// URLAsset the asset supplied to the download task upon initialization.
 func (x *AggregateAssetDownloadTask) URLAsset() *URLAsset {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLAsset"))
 	return URLAssetFromID(_r)

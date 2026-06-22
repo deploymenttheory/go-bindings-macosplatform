@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A span of time.
-//
 // DateComponentsRange is an idiomatic wrapper over the Objective-C class INDateComponentsRange.
+//
+// A span of time.
 type DateComponentsRange struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DateComponentsRangeFromID(id objc.ID) *DateComponentsRange {
 	if id == 0 {
 		return nil
 	}
-	x := &DateComponentsRange{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DateComponentsRange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func dateComponentsRangeAdopt(id objc.ID) *DateComponentsRange {
 	if id == 0 {
 		return nil
 	}
-	x := &DateComponentsRange{Handle: objref.Wrap(id)}
+	x := &DateComponentsRange{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,49 +60,52 @@ func (x *DateComponentsRange) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes the object using the specified start and end dates.
-//
-// NewDateComponentsRangeWithStartDateComponentsEndDateComponents creates a new DateComponentsRange.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DateComponentsRange) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDateComponentsRangeWithStartDateComponentsEndDateComponents initializes the object using the specified start and end dates.
 func NewDateComponentsRangeWithStartDateComponentsEndDateComponents(startDateComponents obj.Object, endDateComponents obj.Object) *DateComponentsRange {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INDateComponentsRange")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartDateComponents:endDateComponents:"), objref.IDOf(startDateComponents), objref.IDOf(endDateComponents))
 	return dateComponentsRangeAdopt(_id)
 }
 
-// Initializes the date range to a repeating time period.
-//
-// NewDateComponentsRangeWithStartDateComponentsEndDateComponentsRecurrenceRule creates a new DateComponentsRange.
+// NewDateComponentsRangeWithStartDateComponentsEndDateComponentsRecurrenceRule initializes the date range to a repeating time period.
 func NewDateComponentsRangeWithStartDateComponentsEndDateComponentsRecurrenceRule(startDateComponents obj.Object, endDateComponents obj.Object, recurrenceRule obj.Object) *DateComponentsRange {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INDateComponentsRange")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartDateComponents:endDateComponents:recurrenceRule:"), objref.IDOf(startDateComponents), objref.IDOf(endDateComponents), objref.IDOf(recurrenceRule))
 	return dateComponentsRangeAdopt(_id)
 }
 
-// Initializes the date range using the specified recurrence rule.
-//
-// NewDateComponentsRangeWithEKRecurrenceRule creates a new DateComponentsRange.
+// NewDateComponentsRangeWithEKRecurrenceRule initializes the date range using the specified recurrence rule.
 func NewDateComponentsRangeWithEKRecurrenceRule(recurrenceRule obj.Object) *DateComponentsRange {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INDateComponentsRange")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEKRecurrenceRule:"), objref.IDOf(recurrenceRule))
 	return dateComponentsRangeAdopt(_id)
 }
 
-// Returns an Event Kit recurrence rule that matches the available information.
+// EKRecurrenceRule returns an Event Kit recurrence rule that matches the available information.
 func (x *DateComponentsRange) EKRecurrenceRule() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("EKRecurrenceRule"))
 	return obj.Wrap(_r)
 }
 
+// StartDateComponents wraps the corresponding Objective-C method.
 func (x *DateComponentsRange) StartDateComponents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDateComponents"))
 	return obj.Wrap(_r)
 }
 
+// EndDateComponents wraps the corresponding Objective-C method.
 func (x *DateComponentsRange) EndDateComponents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDateComponents"))
 	return obj.Wrap(_r)
 }
 
+// RecurrenceRule wraps the corresponding Objective-C method.
 func (x *DateComponentsRange) RecurrenceRule() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recurrenceRule"))
 	return obj.Wrap(_r)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The IKScannerDeviceView class displays a view that allows scanning. It can be customized by specifying the display mode. The delegate receives the scanned data and must implement the IKScannerDeviceViewDelegate protocol.
-//
 // IKScannerDeviceView is an idiomatic wrapper over the Objective-C class IKScannerDeviceView.
+//
+// The IKScannerDeviceView class displays a view that allows scanning. It can be customized by specifying the display mode. The delegate receives the scanned data and must implement the IKScannerDeviceViewDelegate protocol.
 type IKScannerDeviceView struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func IKScannerDeviceViewFromID(id objc.ID) *IKScannerDeviceView {
 	if id == 0 {
 		return nil
 	}
-	x := &IKScannerDeviceView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IKScannerDeviceView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func iKScannerDeviceViewAdopt(id objc.ID) *IKScannerDeviceView {
 	if id == 0 {
 		return nil
 	}
-	x := &IKScannerDeviceView{Handle: objref.Wrap(id)}
+	x := &IKScannerDeviceView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,177 +60,163 @@ func (x *IKScannerDeviceView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IKScannerDeviceView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewIKScannerDeviceView creates a new IKScannerDeviceView.
 func NewIKScannerDeviceView() *IKScannerDeviceView {
 	_id := objc.Send[objc.ID](objc.ID(_class("IKScannerDeviceView")), objc.RegisterName("new"))
 	return iKScannerDeviceViewAdopt(_id)
 }
 
-// The scanner device delegate
-//
-// WithDelegate sets delegate and returns the receiver so calls can be chained.
+// WithDelegate the scanner device delegate
 func (x *IKScannerDeviceView) WithDelegate(delegate obj.Object) *IKScannerDeviceView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return x
 }
 
-// The device used for scanning
-//
-// WithScannerDevice sets scannerDevice and returns the receiver so calls can be chained.
+// WithScannerDevice the device used for scanning
 func (x *IKScannerDeviceView) WithScannerDevice(scannerDevice obj.Object) *IKScannerDeviceView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScannerDevice:"), objref.IDOf(scannerDevice))
 	return x
 }
 
-// The display mode used by the device view.
-//
-// WithMode sets mode and returns the receiver so calls can be chained.
+// WithMode the display mode used by the device view.
 func (x *IKScannerDeviceView) WithMode(mode obj.Object) *IKScannerDeviceView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	return x
 }
 
-// The property that determines whether the scanner view uses the simple display mode.
-//
-// WithHasDisplayModeSimple sets hasDisplayModeSimple and returns the receiver so calls can be chained.
+// WithHasDisplayModeSimple the property that determines whether the scanner view uses the simple display mode.
 func (x *IKScannerDeviceView) WithHasDisplayModeSimple(hasDisplayModeSimple bool) *IKScannerDeviceView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDisplayModeSimple:"), hasDisplayModeSimple)
 	return x
 }
 
-// The property that determines whether the scanner view uses the advanced display mode.
-//
-// WithHasDisplayModeAdvanced sets hasDisplayModeAdvanced and returns the receiver so calls can be chained.
+// WithHasDisplayModeAdvanced the property that determines whether the scanner view uses the advanced display mode.
 func (x *IKScannerDeviceView) WithHasDisplayModeAdvanced(hasDisplayModeAdvanced bool) *IKScannerDeviceView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDisplayModeAdvanced:"), hasDisplayModeAdvanced)
 	return x
 }
 
-// Determines how the scanned content is provided to the delegate.
-//
-// WithTransferMode sets transferMode and returns the receiver so calls can be chained.
+// WithTransferMode determines how the scanned content is provided to the delegate.
 func (x *IKScannerDeviceView) WithTransferMode(transferMode obj.Object) *IKScannerDeviceView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransferMode:"), objref.IDOf(transferMode))
 	return x
 }
 
-// Allows customization of the “Scan” label.
-//
-// WithScanControlLabel sets scanControlLabel and returns the receiver so calls can be chained.
+// WithScanControlLabel allows customization of the “Scan” label.
 func (x *IKScannerDeviceView) WithScanControlLabel(scanControlLabel string) *IKScannerDeviceView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanControlLabel:"), purego.NSString(scanControlLabel))
 	return x
 }
 
-// Allows customization of the “Overview” label.
-//
-// WithOverviewControlLabel sets overviewControlLabel and returns the receiver so calls can be chained.
+// WithOverviewControlLabel allows customization of the “Overview” label.
 func (x *IKScannerDeviceView) WithOverviewControlLabel(overviewControlLabel string) *IKScannerDeviceView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverviewControlLabel:"), purego.NSString(overviewControlLabel))
 	return x
 }
 
-// Determines whether the downloads directory control is displayed.
-//
-// WithDisplaysDownloadsDirectoryControl sets displaysDownloadsDirectoryControl and returns the receiver so calls can be chained.
+// WithDisplaysDownloadsDirectoryControl determines whether the downloads directory control is displayed.
 func (x *IKScannerDeviceView) WithDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) *IKScannerDeviceView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysDownloadsDirectoryControl:"), displaysDownloadsDirectoryControl)
 	return x
 }
 
-// The directory where scans are saved.
-//
-// WithDownloadsDirectory sets downloadsDirectory and returns the receiver so calls can be chained.
+// WithDownloadsDirectory the directory where scans are saved.
 func (x *IKScannerDeviceView) WithDownloadsDirectory(downloadsDirectory string) *IKScannerDeviceView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownloadsDirectory:"), rt.FileURL(downloadsDirectory))
 	return x
 }
 
-// Returns the document name.
-//
-// WithDocumentName sets documentName and returns the receiver so calls can be chained.
+// WithDocumentName returns the document name.
 func (x *IKScannerDeviceView) WithDocumentName(documentName string) *IKScannerDeviceView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentName:"), purego.NSString(documentName))
 	return x
 }
 
-// Specifies whether the post processing application control is displayed.
-//
-// WithDisplaysPostProcessApplicationControl sets displaysPostProcessApplicationControl and returns the receiver so calls can be chained.
+// WithDisplaysPostProcessApplicationControl specifies whether the post processing application control is displayed.
 func (x *IKScannerDeviceView) WithDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) *IKScannerDeviceView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysPostProcessApplicationControl:"), displaysPostProcessApplicationControl)
 	return x
 }
 
-// The URL of the application to use for post processing of the scan.
-//
-// WithPostProcessApplication sets postProcessApplication and returns the receiver so calls can be chained.
+// WithPostProcessApplication the URL of the application to use for post processing of the scan.
 func (x *IKScannerDeviceView) WithPostProcessApplication(postProcessApplication string) *IKScannerDeviceView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostProcessApplication:"), rt.FileURL(postProcessApplication))
 	return x
 }
 
-// delegate of the IKScannerDeviceView.
+// Delegate delegate of the IKScannerDeviceView.
 func (x *IKScannerDeviceView) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
+// SetDelegate wraps the corresponding Objective-C method.
 func (x *IKScannerDeviceView) SetDelegate(delegate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
-// the scanner device.
+// ScannerDevice the scanner device.
 func (x *IKScannerDeviceView) ScannerDevice() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scannerDevice"))
 	return obj.Wrap(_r)
 }
 
+// SetScannerDevice wraps the corresponding Objective-C method.
 func (x *IKScannerDeviceView) SetScannerDevice(scannerDevice obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScannerDevice:"), objref.IDOf(scannerDevice))
 }
 
-// current display mode.
+// Mode current display mode.
 func (x *IKScannerDeviceView) Mode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mode"))
 	return obj.Wrap(_r)
 }
 
+// SetMode wraps the corresponding Objective-C method.
 func (x *IKScannerDeviceView) SetMode(mode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
 }
 
-// support a simple scanning UI.
+// HasDisplayModeSimple support a simple scanning UI.
 func (x *IKScannerDeviceView) HasDisplayModeSimple() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasDisplayModeSimple"))
 	return _r
 }
 
+// SetHasDisplayModeSimple wraps the corresponding Objective-C method.
 func (x *IKScannerDeviceView) SetHasDisplayModeSimple(hasDisplayModeSimple bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDisplayModeSimple:"), hasDisplayModeSimple)
 }
 
-// support advanced scanning UI.
+// HasDisplayModeAdvanced support advanced scanning UI.
 func (x *IKScannerDeviceView) HasDisplayModeAdvanced() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasDisplayModeAdvanced"))
 	return _r
 }
 
+// SetHasDisplayModeAdvanced wraps the corresponding Objective-C method.
 func (x *IKScannerDeviceView) SetHasDisplayModeAdvanced(hasDisplayModeAdvanced bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDisplayModeAdvanced:"), hasDisplayModeAdvanced)
 }
 
-// transfer mode either file based - or - in memory.
+// TransferMode transfer mode either file based - or - in memory.
 func (x *IKScannerDeviceView) TransferMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transferMode"))
 	return obj.Wrap(_r)
 }
 
+// SetTransferMode wraps the corresponding Objective-C method.
 func (x *IKScannerDeviceView) SetTransferMode(transferMode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransferMode:"), objref.IDOf(transferMode))
 }
 
-// label for the 'Scan' control.
+// ScanControlLabel label for the 'Scan' control.
 func (x *IKScannerDeviceView) ScanControlLabel() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scanControlLabel"))
 	if _r == 0 {
@@ -237,11 +225,12 @@ func (x *IKScannerDeviceView) ScanControlLabel() string {
 	return purego.GoString(_r)
 }
 
+// SetScanControlLabel wraps the corresponding Objective-C method.
 func (x *IKScannerDeviceView) SetScanControlLabel(scanControlLabel string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanControlLabel:"), purego.NSString(scanControlLabel))
 }
 
-// label for the 'Overview' control.
+// OverviewControlLabel label for the 'Overview' control.
 func (x *IKScannerDeviceView) OverviewControlLabel() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("overviewControlLabel"))
 	if _r == 0 {
@@ -250,31 +239,34 @@ func (x *IKScannerDeviceView) OverviewControlLabel() string {
 	return purego.GoString(_r)
 }
 
+// SetOverviewControlLabel wraps the corresponding Objective-C method.
 func (x *IKScannerDeviceView) SetOverviewControlLabel(overviewControlLabel string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverviewControlLabel:"), purego.NSString(overviewControlLabel))
 }
 
-// show a downloads directory control.
+// DisplaysDownloadsDirectoryControl show a downloads directory control.
 func (x *IKScannerDeviceView) DisplaysDownloadsDirectoryControl() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysDownloadsDirectoryControl"))
 	return _r
 }
 
+// SetDisplaysDownloadsDirectoryControl wraps the corresponding Objective-C method.
 func (x *IKScannerDeviceView) SetDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysDownloadsDirectoryControl:"), displaysDownloadsDirectoryControl)
 }
 
-// downloads directory.
+// DownloadsDirectory downloads directory.
 func (x *IKScannerDeviceView) DownloadsDirectory() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadsDirectory"))
 	return obj.Wrap(_r)
 }
 
+// SetDownloadsDirectory wraps the corresponding Objective-C method.
 func (x *IKScannerDeviceView) SetDownloadsDirectory(downloadsDirectory string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownloadsDirectory:"), rt.FileURL(downloadsDirectory))
 }
 
-// document name.
+// DocumentName document name.
 func (x *IKScannerDeviceView) DocumentName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentName"))
 	if _r == 0 {
@@ -283,26 +275,29 @@ func (x *IKScannerDeviceView) DocumentName() string {
 	return purego.GoString(_r)
 }
 
+// SetDocumentName wraps the corresponding Objective-C method.
 func (x *IKScannerDeviceView) SetDocumentName(documentName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentName:"), purego.NSString(documentName))
 }
 
-// show a postprocessing application control.
+// DisplaysPostProcessApplicationControl show a postprocessing application control.
 func (x *IKScannerDeviceView) DisplaysPostProcessApplicationControl() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysPostProcessApplicationControl"))
 	return _r
 }
 
+// SetDisplaysPostProcessApplicationControl wraps the corresponding Objective-C method.
 func (x *IKScannerDeviceView) SetDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysPostProcessApplicationControl:"), displaysPostProcessApplicationControl)
 }
 
-// postprocessing application.
+// PostProcessApplication postprocessing application.
 func (x *IKScannerDeviceView) PostProcessApplication() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postProcessApplication"))
 	return obj.Wrap(_r)
 }
 
+// SetPostProcessApplication wraps the corresponding Objective-C method.
 func (x *IKScannerDeviceView) SetPostProcessApplication(postProcessApplication string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostProcessApplication:"), rt.FileURL(postProcessApplication))
 }

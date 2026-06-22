@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // UserAnnotatedMedicationType is an idiomatic wrapper over the Objective-C class HKUserAnnotatedMedicationType.
+//
+// It embeds [ObjectType], promoting that type's methods.
 type UserAnnotatedMedicationType struct {
-	objref.Handle
+	ObjectType
 }
 
 // UserAnnotatedMedicationTypeFromID adopts an existing Objective-C object as a UserAnnotatedMedicationType
@@ -23,7 +24,8 @@ func UserAnnotatedMedicationTypeFromID(id objc.ID) *UserAnnotatedMedicationType 
 	if id == 0 {
 		return nil
 	}
-	x := &UserAnnotatedMedicationType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UserAnnotatedMedicationType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func userAnnotatedMedicationTypeAdopt(id objc.ID) *UserAnnotatedMedicationType {
 	if id == 0 {
 		return nil
 	}
-	x := &UserAnnotatedMedicationType{Handle: objref.Wrap(id)}
+	x := &UserAnnotatedMedicationType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UserAnnotatedMedicationType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UserAnnotatedMedicationType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UserAnnotatedMedicationType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUserAnnotatedMedicationType creates a new UserAnnotatedMedicationType.
@@ -68,3 +56,5 @@ type UserAnnotatedMedicationTypeable interface {
 }
 
 var _ UserAnnotatedMedicationTypeable = (*UserAnnotatedMedicationType)(nil)
+
+var _ ObjectTypeProvider = (*UserAnnotatedMedicationType)(nil)

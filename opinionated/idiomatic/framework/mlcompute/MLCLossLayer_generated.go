@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that estimates the inaccuracies of the model to reduce the loss on the next evaluation.
-//
 // LossLayer is an idiomatic wrapper over the Objective-C class MLCLossLayer.
+//
+// LossLayer is an abstract base — you do not construct it directly. Construct one of [YOLOLossLayer] and pass it where a LossLayer is accepted.
+//
+// A layer that estimates the inaccuracies of the model to reduce the loss on the next evaluation.
 type LossLayer struct {
-	objref.Handle
+	Layer
 }
 
 // LossLayerFromID adopts an existing Objective-C object as a LossLayer
@@ -25,7 +26,8 @@ func LossLayerFromID(id objc.ID) *LossLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &LossLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LossLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,55 +40,31 @@ func lossLayerAdopt(id objc.ID) *LossLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &LossLayer{Handle: objref.Wrap(id)}
+	x := &LossLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *LossLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LossLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LossLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewLossLayer creates a new LossLayer.
-func NewLossLayer() *LossLayer {
-	_id := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("new"))
-	return lossLayerAdopt(_id)
-}
-
-// A string that helps identify this layer.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string that helps identify this layer.
 func (x *LossLayer) WithLabel(label string) *LossLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *LossLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *LossLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// The loss descriptor
+// Descriptor the loss descriptor
 func (x *LossLayer) Descriptor() *LossDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
 	return LossDescriptorFromID(_r)
 }
 
-// The loss label weights tensor
+// Weights the loss label weights tensor
 func (x *LossLayer) Weights() *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weights"))
 	return TensorFromID(_r)
@@ -102,3 +80,12 @@ type LossLayerable interface {
 }
 
 var _ LossLayerable = (*LossLayer)(nil)
+
+// isLossLayer marks LossLayer — and, by embedding promotion, its
+// subclasses — as a member of the LossLayer hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *LossLayer) isLossLayer() {}
+
+var _ LossLayerProvider = (*LossLayer)(nil)
+
+var _ LayerProvider = (*LossLayer)(nil)

@@ -6,6 +6,7 @@ package pdfkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -13,8 +14,10 @@ import (
 )
 
 // AnnotationInk is an idiomatic wrapper over the Objective-C class PDFAnnotationInk.
+//
+// It embeds [Annotation], promoting that type's methods.
 type AnnotationInk struct {
-	objref.Handle
+	Annotation
 }
 
 // AnnotationInkFromID adopts an existing Objective-C object as a AnnotationInk
@@ -23,7 +26,8 @@ func AnnotationInkFromID(id objc.ID) *AnnotationInk {
 	if id == 0 {
 		return nil
 	}
-	x := &AnnotationInk{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AnnotationInk{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +40,10 @@ func annotationInkAdopt(id objc.ID) *AnnotationInk {
 	if id == 0 {
 		return nil
 	}
-	x := &AnnotationInk{Handle: objref.Wrap(id)}
+	x := &AnnotationInk{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AnnotationInk) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AnnotationInk) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AnnotationInk) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAnnotationInk creates a new AnnotationInk.
@@ -62,276 +52,226 @@ func NewAnnotationInk() *AnnotationInk {
 	return annotationInkAdopt(_id)
 }
 
-// Returns the page that the annotation is associated with.
-//
-// WithPage sets page and returns the receiver so calls can be chained.
+// WithPage returns the page that the annotation is associated with.
 func (x *AnnotationInk) WithPage(page *Page) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPage:"), objref.IDOf(page))
 	return x
 }
 
-// Returns the type of the annotation.
-//
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithType returns the type of the annotation.
 func (x *AnnotationInk) WithType(type_ string) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
 	return x
 }
 
-// Returns a Boolean value indicating whether the annotation should be displayed.
-//
-// WithShouldDisplay sets shouldDisplay and returns the receiver so calls can be chained.
+// WithBounds returns the bounding box for the annotation in page space.
+func (x *AnnotationInk) WithBounds(bounds corefoundation.CGRect) *AnnotationInk {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
+	return x
+}
+
+// WithShouldDisplay returns a Boolean value indicating whether the annotation should be displayed.
 func (x *AnnotationInk) WithShouldDisplay(shouldDisplay bool) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldDisplay:"), shouldDisplay)
 	return x
 }
 
-// Returns a Boolean value indicating whether the annotation should appear when the document is printed.
-//
-// WithShouldPrint sets shouldPrint and returns the receiver so calls can be chained.
+// WithShouldPrint returns a Boolean value indicating whether the annotation should appear when the document is printed.
 func (x *AnnotationInk) WithShouldPrint(shouldPrint bool) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldPrint:"), shouldPrint)
 	return x
 }
 
-// A Boolean value that indicates whether the annotation is in a highlighted state, such as when the mouse is down on a link annotation.
-//
-// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
+// WithHighlighted a Boolean value that indicates whether the annotation is in a highlighted state, such as when the mouse is down on a link annotation.
 func (x *AnnotationInk) WithHighlighted(highlighted bool) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// The font the annotation uses to display text.
-//
-// WithFont sets font and returns the receiver so calls can be chained.
+// WithFont the font the annotation uses to display text.
 func (x *AnnotationInk) WithFont(font obj.Object) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
-// The font color the annotation uses to display text.
-//
-// WithFontColor sets fontColor and returns the receiver so calls can be chained.
+// WithFontColor the font color the annotation uses to display text.
 func (x *AnnotationInk) WithFontColor(fontColor obj.Object) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
 	return x
 }
 
-// The fill color for drawing a circle, line, or square annotation.
-//
-// WithInteriorColor sets interiorColor and returns the receiver so calls can be chained.
+// WithInteriorColor the fill color for drawing a circle, line, or square annotation.
 func (x *AnnotationInk) WithInteriorColor(interiorColor obj.Object) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteriorColor:"), objref.IDOf(interiorColor))
 	return x
 }
 
-// The style of the line annotation’s starting point, such as square or filled arrowhead.
-//
-// WithStartLineStyle sets startLineStyle and returns the receiver so calls can be chained.
+// WithStartPoint the point where a line begins, in annotation-space coordinates.
+func (x *AnnotationInk) WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationInk {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartPoint:"), startPoint)
+	return x
+}
+
+// WithEndPoint the point where a line ends, in annotation-space coordinates.
+func (x *AnnotationInk) WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationInk {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndPoint:"), endPoint)
+	return x
+}
+
+// WithStartLineStyle the style of the line annotation’s starting point, such as square or filled arrowhead.
 func (x *AnnotationInk) WithStartLineStyle(startLineStyle LineStyle) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartLineStyle:"), startLineStyle)
 	return x
 }
 
-// The style of the line annotation’s ending point, such as square or filled arrowhead.
-//
-// WithEndLineStyle sets endLineStyle and returns the receiver so calls can be chained.
+// WithEndLineStyle the style of the line annotation’s ending point, such as square or filled arrowhead.
 func (x *AnnotationInk) WithEndLineStyle(endLineStyle LineStyle) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndLineStyle:"), endLineStyle)
 	return x
 }
 
-// The type of icon to display for a pop-up text annotation.
-//
-// WithIconType sets iconType and returns the receiver so calls can be chained.
+// WithIconType the type of icon to display for a pop-up text annotation.
 func (x *AnnotationInk) WithIconType(iconType TextAnnotationIconType) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIconType:"), iconType)
 	return x
 }
 
-// An array of values that represents the points bounding the marked-up text.
-//
-// WithQuadrilateralPoints sets the collection and returns the receiver so calls can be chained.
+// WithQuadrilateralPoints an array of values that represents the points bounding the marked-up text.
 func (x *AnnotationInk) WithQuadrilateralPoints(items ...obj.Object) *AnnotationInk {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuadrilateralPoints:"), _arr)
 	return x
 }
 
-// The markup type that the annotation displays, either highlight, strikethrough, underline, or redact.
-//
-// WithMarkupType sets markupType and returns the receiver so calls can be chained.
+// WithMarkupType the markup type that the annotation displays, either highlight, strikethrough, underline, or redact.
 func (x *AnnotationInk) WithMarkupType(markupType MarkupType) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMarkupType:"), markupType)
 	return x
 }
 
-// The type of button widget control, either radio button, push button, or checkbox.
-//
-// WithWidgetControlType sets widgetControlType and returns the receiver so calls can be chained.
+// WithWidgetControlType the type of button widget control, either radio button, push button, or checkbox.
 func (x *AnnotationInk) WithWidgetControlType(widgetControlType WidgetControlType) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidgetControlType:"), widgetControlType)
 	return x
 }
 
-// A Boolean value that indicates whether the text widget annotation displays multiple lines.
-//
-// WithMultiline sets multiline and returns the receiver so calls can be chained.
+// WithMultiline a Boolean value that indicates whether the text widget annotation displays multiple lines.
 func (x *AnnotationInk) WithMultiline(multiline bool) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultiline:"), multiline)
 	return x
 }
 
-// A Boolean value that indicates whether the annotation divides the text widget’s bounds into equally spaced segments, such as in a form entry field.
-//
-// WithComb sets comb and returns the receiver so calls can be chained.
+// WithComb a Boolean value that indicates whether the annotation divides the text widget’s bounds into equally spaced segments, such as in a form entry field.
 func (x *AnnotationInk) WithComb(comb bool) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComb:"), comb)
 	return x
 }
 
-// The maximum number of characters the text widget annotation allows.
-//
-// WithMaximumLength sets maximumLength and returns the receiver so calls can be chained.
+// WithMaximumLength the maximum number of characters the text widget annotation allows.
 func (x *AnnotationInk) WithMaximumLength(maximumLength int) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLength:"), maximumLength)
 	return x
 }
 
-// The string value of the widget annotation.
-//
-// WithWidgetStringValue sets widgetStringValue and returns the receiver so calls can be chained.
+// WithWidgetStringValue the string value of the widget annotation.
 func (x *AnnotationInk) WithWidgetStringValue(widgetStringValue string) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidgetStringValue:"), purego.NSString(widgetStringValue))
 	return x
 }
 
-// The string value that the widget reverts to when performing a reset form action.
-//
-// WithWidgetDefaultStringValue sets widgetDefaultStringValue and returns the receiver so calls can be chained.
+// WithWidgetDefaultStringValue the string value that the widget reverts to when performing a reset form action.
 func (x *AnnotationInk) WithWidgetDefaultStringValue(widgetDefaultStringValue string) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidgetDefaultStringValue:"), purego.NSString(widgetDefaultStringValue))
 	return x
 }
 
-// A Boolean value that indicates whether clicking or tapping a selected radio button toggles it to an unselected state.
-//
-// WithAllowsToggleToOff sets allowsToggleToOff and returns the receiver so calls can be chained.
+// WithAllowsToggleToOff a Boolean value that indicates whether clicking or tapping a selected radio button toggles it to an unselected state.
 func (x *AnnotationInk) WithAllowsToggleToOff(allowsToggleToOff bool) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsToggleToOff:"), allowsToggleToOff)
 	return x
 }
 
-// A Boolean value that indicates whether radio buttons in a group turn on and off in unison.
-//
-// WithRadiosInUnison sets radiosInUnison and returns the receiver so calls can be chained.
+// WithRadiosInUnison a Boolean value that indicates whether radio buttons in a group turn on and off in unison.
 func (x *AnnotationInk) WithRadiosInUnison(radiosInUnison bool) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadiosInUnison:"), radiosInUnison)
 	return x
 }
 
-// A Boolean value that determines whether the widget is editable.
-//
-// WithReadOnly sets readOnly and returns the receiver so calls can be chained.
+// WithReadOnly a Boolean value that determines whether the widget is editable.
 func (x *AnnotationInk) WithReadOnly(readOnly bool) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadOnly:"), readOnly)
 	return x
 }
 
-// A Boolean value that indicates whether the choice widget annotation is a list or a pop-up menu.
-//
-// WithListChoice sets listChoice and returns the receiver so calls can be chained.
+// WithListChoice a Boolean value that indicates whether the choice widget annotation is a list or a pop-up menu.
 func (x *AnnotationInk) WithListChoice(listChoice bool) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListChoice:"), listChoice)
 	return x
 }
 
-// An array of strings that specifies the options in either a list or a pop-up menu.
-//
-// WithChoices sets the collection and returns the receiver so calls can be chained.
+// WithChoices an array of strings that specifies the options in either a list or a pop-up menu.
 func (x *AnnotationInk) WithChoices(items ...obj.Object) *AnnotationInk {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChoices:"), _arr)
 	return x
 }
 
-// An array of strings that specifies the export values for items in a list or a pop-up menu.
-//
-// WithValues sets the collection and returns the receiver so calls can be chained.
+// WithValues an array of strings that specifies the export values for items in a list or a pop-up menu.
 func (x *AnnotationInk) WithValues(items ...obj.Object) *AnnotationInk {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValues:"), _arr)
 	return x
 }
 
-// The current state of the button widget annotation.
-//
-// WithButtonWidgetState sets buttonWidgetState and returns the receiver so calls can be chained.
+// WithButtonWidgetState the current state of the button widget annotation.
 func (x *AnnotationInk) WithButtonWidgetState(buttonWidgetState WidgetCellState) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonWidgetState:"), buttonWidgetState)
 	return x
 }
 
-// A string value that differentiates button widgets in the same group, such as to identify mutually exclusive radio buttons from each other.
-//
-// WithButtonWidgetStateString sets buttonWidgetStateString and returns the receiver so calls can be chained.
+// WithButtonWidgetStateString a string value that differentiates button widgets in the same group, such as to identify mutually exclusive radio buttons from each other.
 func (x *AnnotationInk) WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonWidgetStateString:"), purego.NSString(buttonWidgetStateString))
 	return x
 }
 
-// A Boolean value that indicates whether the pop-up annotation is in an opened state, displaying its text content, or in a closed state, displaying an icon.
-//
-// WithOpen sets open and returns the receiver so calls can be chained.
+// WithOpen a Boolean value that indicates whether the pop-up annotation is in an opened state, displaying its text content, or in a closed state, displaying an icon.
 func (x *AnnotationInk) WithOpen(open bool) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpen:"), open)
 	return x
 }
 
-// The destination for a link annotation.
-//
-// WithDestination sets destination and returns the receiver so calls can be chained.
+// WithDestination the destination for a link annotation.
 func (x *AnnotationInk) WithDestination(destination *Destination) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 	return x
 }
 
-// A URL for a link annotation.
-//
-// WithURL sets uRL and returns the receiver so calls can be chained.
+// WithURL a URL for a link annotation.
 func (x *AnnotationInk) WithURL(uRL string) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 	return x
 }
 
-// The widget identifier for form annotation actions and behaviors.
-//
-// WithFieldName sets fieldName and returns the receiver so calls can be chained.
+// WithFieldName the widget identifier for form annotation actions and behaviors.
 func (x *AnnotationInk) WithFieldName(fieldName string) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFieldName:"), purego.NSString(fieldName))
 	return x
 }
 
-// The title of push button widget annotations.
-//
-// WithCaption sets caption and returns the receiver so calls can be chained.
+// WithCaption the title of push button widget annotations.
 func (x *AnnotationInk) WithCaption(caption string) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaption:"), purego.NSString(caption))
 	return x
 }
 
-// The color of the widget’s background.
-//
-// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+// WithBackgroundColor the color of the widget’s background.
 func (x *AnnotationInk) WithBackgroundColor(backgroundColor obj.Object) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// The name of the stamp, a text or graphics annotation that emulates a rubber stamp effect.
-//
-// WithStampName sets stampName and returns the receiver so calls can be chained.
+// WithStampName the name of the stamp, a text or graphics annotation that emulates a rubber stamp effect.
 func (x *AnnotationInk) WithStampName(stampName string) *AnnotationInk {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStampName:"), purego.NSString(stampName))
 	return x
@@ -342,12 +282,15 @@ type AnnotationInkable interface {
 	obj.Object
 	WithPage(page *Page) *AnnotationInk
 	WithType(type_ string) *AnnotationInk
+	WithBounds(bounds corefoundation.CGRect) *AnnotationInk
 	WithShouldDisplay(shouldDisplay bool) *AnnotationInk
 	WithShouldPrint(shouldPrint bool) *AnnotationInk
 	WithHighlighted(highlighted bool) *AnnotationInk
 	WithFont(font obj.Object) *AnnotationInk
 	WithFontColor(fontColor obj.Object) *AnnotationInk
 	WithInteriorColor(interiorColor obj.Object) *AnnotationInk
+	WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationInk
+	WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationInk
 	WithStartLineStyle(startLineStyle LineStyle) *AnnotationInk
 	WithEndLineStyle(endLineStyle LineStyle) *AnnotationInk
 	WithIconType(iconType TextAnnotationIconType) *AnnotationInk
@@ -377,3 +320,5 @@ type AnnotationInkable interface {
 }
 
 var _ AnnotationInkable = (*AnnotationInk)(nil)
+
+var _ AnnotationProvider = (*AnnotationInk)(nil)

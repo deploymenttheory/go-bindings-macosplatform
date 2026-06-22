@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mutable metadata item for an audiovisual asset or for one of its tracks.
-//
 // MutableMetadataItem is an idiomatic wrapper over the Objective-C class AVMutableMetadataItem.
+//
+// It embeds [MetadataItem], promoting that type's methods.
+//
+// A mutable metadata item for an audiovisual asset or for one of its tracks.
 type MutableMetadataItem struct {
-	objref.Handle
+	MetadataItem
 }
 
 // MutableMetadataItemFromID adopts an existing Objective-C object as a MutableMetadataItem
@@ -25,7 +26,8 @@ func MutableMetadataItemFromID(id objc.ID) *MutableMetadataItem {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableMetadataItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableMetadataItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func mutableMetadataItemAdopt(id objc.ID) *MutableMetadataItem {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableMetadataItem{Handle: objref.Wrap(id)}
+	x := &MutableMetadataItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MutableMetadataItem) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableMetadataItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableMetadataItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMutableMetadataItem creates a new MutableMetadataItem.
@@ -64,110 +52,101 @@ func NewMutableMetadataItem() *MutableMetadataItem {
 	return mutableMetadataItemAdopt(_id)
 }
 
-// Indicates the identifier of the metadata item.
-//
-// WithIdentifier sets identifier and returns the receiver so calls can be chained.
+// WithIdentifier indicates the identifier of the metadata item.
 func (x *MutableMetadataItem) WithIdentifier(identifier obj.Object) *MutableMetadataItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
 	return x
 }
 
-// The IETF BCP 47 (RFC 4646) language identifier of the metadata item.
-//
-// WithExtendedLanguageTag sets extendedLanguageTag and returns the receiver so calls can be chained.
+// WithExtendedLanguageTag the IETF BCP 47 (RFC 4646) language identifier of the metadata item.
 func (x *MutableMetadataItem) WithExtendedLanguageTag(extendedLanguageTag string) *MutableMetadataItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedLanguageTag:"), purego.NSString(extendedLanguageTag))
 	return x
 }
 
-// The locale for a mutable metadata item.
-//
-// WithLocale sets locale and returns the receiver so calls can be chained.
+// WithLocale the locale for a mutable metadata item.
 func (x *MutableMetadataItem) WithLocale(locale obj.Object) *MutableMetadataItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return x
 }
 
-// The data type of the metadata item’s value.
-//
-// WithDataType sets dataType and returns the receiver so calls can be chained.
+// WithDataType the data type of the metadata item’s value.
 func (x *MutableMetadataItem) WithDataType(dataType string) *MutableMetadataItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataType:"), purego.NSString(dataType))
 	return x
 }
 
-// The value for the mutable metadata item.
-//
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue the value for the mutable metadata item.
 func (x *MutableMetadataItem) WithValue(value obj.Object) *MutableMetadataItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return x
 }
 
-// A dictionary of additional attributes for a metadata item.
-//
-// WithExtraAttributes sets extraAttributes and returns the receiver so calls can be chained.
+// WithExtraAttributes a dictionary of additional attributes for a metadata item.
 func (x *MutableMetadataItem) WithExtraAttributes(extraAttributes obj.Object) *MutableMetadataItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtraAttributes:"), objref.IDOf(extraAttributes))
 	return x
 }
 
-// The start date of the timed metadata.
-//
-// WithStartDate sets startDate and returns the receiver so calls can be chained.
+// WithStartDate the start date of the timed metadata.
 func (x *MutableMetadataItem) WithStartDate(startDate obj.Object) *MutableMetadataItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
 	return x
 }
 
-// The key space of the metadata item’s key.
-//
-// WithKeySpace sets keySpace and returns the receiver so calls can be chained.
+// WithKeySpace the key space of the metadata item’s key.
 func (x *MutableMetadataItem) WithKeySpace(keySpace obj.Object) *MutableMetadataItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeySpace:"), objref.IDOf(keySpace))
 	return x
 }
 
-// The key for a mutable metadata item.
-//
-// WithKey sets key and returns the receiver so calls can be chained.
+// WithKey the key for a mutable metadata item.
 func (x *MutableMetadataItem) WithKey(key obj.Object) *MutableMetadataItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), objref.IDOf(key))
 	return x
 }
 
+// SetIdentifier wraps the corresponding Objective-C method.
 func (x *MutableMetadataItem) SetIdentifier(identifier obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
 }
 
+// SetExtendedLanguageTag wraps the corresponding Objective-C method.
 func (x *MutableMetadataItem) SetExtendedLanguageTag(extendedLanguageTag string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedLanguageTag:"), purego.NSString(extendedLanguageTag))
 }
 
+// SetLocale wraps the corresponding Objective-C method.
 func (x *MutableMetadataItem) SetLocale(locale obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 }
 
+// SetDataType wraps the corresponding Objective-C method.
 func (x *MutableMetadataItem) SetDataType(dataType string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataType:"), purego.NSString(dataType))
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *MutableMetadataItem) SetValue(value obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 }
 
+// SetExtraAttributes wraps the corresponding Objective-C method.
 func (x *MutableMetadataItem) SetExtraAttributes(extraAttributes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtraAttributes:"), objref.IDOf(extraAttributes))
 }
 
+// SetStartDate wraps the corresponding Objective-C method.
 func (x *MutableMetadataItem) SetStartDate(startDate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
 }
 
+// SetKeySpace wraps the corresponding Objective-C method.
 func (x *MutableMetadataItem) SetKeySpace(keySpace obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeySpace:"), objref.IDOf(keySpace))
 }
 
+// SetKey wraps the corresponding Objective-C method.
 func (x *MutableMetadataItem) SetKey(key obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), objref.IDOf(key))
 }
@@ -196,3 +175,5 @@ type MutableMetadataItemable interface {
 }
 
 var _ MutableMetadataItemable = (*MutableMetadataItem)(nil)
+
+var _ MetadataItemProvider = (*MutableMetadataItem)(nil)

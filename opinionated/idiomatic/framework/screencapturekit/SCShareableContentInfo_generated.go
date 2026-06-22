@@ -6,15 +6,16 @@ package screencapturekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An instance that provides information for the content in a given stream.
-//
 // ShareableContentInfo is an idiomatic wrapper over the Objective-C class SCShareableContentInfo.
+//
+// An instance that provides information for the content in a given stream.
 type ShareableContentInfo struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func ShareableContentInfoFromID(id objc.ID) *ShareableContentInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &ShareableContentInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ShareableContentInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func shareableContentInfoAdopt(id objc.ID) *ShareableContentInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &ShareableContentInfo{Handle: objref.Wrap(id)}
+	x := &ShareableContentInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +61,33 @@ func (x *ShareableContentInfo) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ShareableContentInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewShareableContentInfo creates a new ShareableContentInfo.
 func NewShareableContentInfo() *ShareableContentInfo {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCShareableContentInfo")), objc.RegisterName("new"))
 	return shareableContentInfoAdopt(_id)
 }
 
-// style of stream
+// Style style of stream
 func (x *ShareableContentInfo) Style() ShareableContentStyle {
 	_r := objc.Send[ShareableContentStyle](objref.IDOf(x), objc.RegisterName("style"))
 	return _r
 }
 
-// Pixel to points scaling factor
+// PointPixelScale pixel to points scaling factor
 func (x *ShareableContentInfo) PointPixelScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("pointPixelScale"))
+	return _r
+}
+
+// ContentRect size and location of content in points
+func (x *ShareableContentInfo) ContentRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("contentRect"))
 	return _r
 }
 
@@ -81,6 +96,7 @@ type ShareableContentInfoable interface {
 	obj.Object
 	Style() ShareableContentStyle
 	PointPixelScale() float32
+	ContentRect() corefoundation.CGRect
 }
 
 var _ ShareableContentInfoable = (*ShareableContentInfo)(nil)

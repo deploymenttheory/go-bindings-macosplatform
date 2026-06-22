@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A voice channel that allows players to speak with each other in a multiplayer game.
-//
 // VoiceChat is an idiomatic wrapper over the Objective-C class GKVoiceChat.
+//
+// A voice channel that allows players to speak with each other in a multiplayer game.
 type VoiceChat struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VoiceChatFromID(id objc.ID) *VoiceChat {
 	if id == 0 {
 		return nil
 	}
-	x := &VoiceChat{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VoiceChat{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func voiceChatAdopt(id objc.ID) *VoiceChat {
 	if id == 0 {
 		return nil
 	}
-	x := &VoiceChat{Handle: objref.Wrap(id)}
+	x := &VoiceChat{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,43 +60,46 @@ func (x *VoiceChat) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VoiceChat) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVoiceChat creates a new VoiceChat.
 func NewVoiceChat() *VoiceChat {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKVoiceChat")), objc.RegisterName("new"))
 	return voiceChatAdopt(_id)
 }
 
-// A Boolean value that indicates whether the channel is sampling the microphone.
-//
-// WithActive sets active and returns the receiver so calls can be chained.
+// WithActive a Boolean value that indicates whether the channel is sampling the microphone.
 func (x *VoiceChat) WithActive(active bool) *VoiceChat {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActive:"), active)
 	return x
 }
 
-// The volume level for the channel.
-//
-// WithVolume sets volume and returns the receiver so calls can be chained.
+// WithVolume the volume level for the channel.
 func (x *VoiceChat) WithVolume(volume float32) *VoiceChat {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 	return x
 }
 
-// Starts communication with other players in a channel.
+// Start starts communication with other players in a channel.
 func (x *VoiceChat) Start() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
 }
 
-// Ends communication with other players in a channel.
+// Stop ends communication with other players in a channel.
 func (x *VoiceChat) Stop() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
-// Mutes a player in the chat, including the local player.
+// SetPlayerMuted mutes a player in the chat, including the local player.
 func (x *VoiceChat) SetPlayerMuted(player *Player, isMuted bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayer:muted:"), objref.IDOf(player), isMuted)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *VoiceChat) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -103,36 +108,42 @@ func (x *VoiceChat) Name() string {
 	return purego.GoString(_r)
 }
 
+// IsActive wraps the corresponding Objective-C method.
 func (x *VoiceChat) IsActive() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
 	return _r
 }
 
+// SetActive wraps the corresponding Objective-C method.
 func (x *VoiceChat) SetActive(active bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActive:"), active)
 }
 
+// Volume wraps the corresponding Objective-C method.
 func (x *VoiceChat) Volume() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("volume"))
 	return _r
 }
 
+// SetVolume wraps the corresponding Objective-C method.
 func (x *VoiceChat) SetVolume(volume float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 }
 
+// Players wraps the corresponding Objective-C method.
+//
 // Players returns the collection as a Go slice.
 func (x *VoiceChat) Players() []*Player {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("players"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Player { return PlayerFromID(_id) })
 }
 
-// Mutes a player in a voice chat.
+// SetMuteForPlayer mutes a player in a voice chat.
 func (x *VoiceChat) SetMuteForPlayer(isMuted bool, playerID string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMute:forPlayer:"), isMuted, purego.NSString(playerID))
 }
 
-// * This property is obsolete. **
+// PlayerIDs * This property is obsolete. **
 //
 // PlayerIDs returns the collection as a Go slice.
 func (x *VoiceChat) PlayerIDs() []string {

@@ -6,15 +6,16 @@ package pencilkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A structure that represents the properties of a specific point along a stroke’s path.
-//
 // StrokePoint is an idiomatic wrapper over the Objective-C class PKStrokePoint.
+//
+// A structure that represents the properties of a specific point along a stroke’s path.
 type StrokePoint struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func StrokePointFromID(id objc.ID) *StrokePoint {
 	if id == 0 {
 		return nil
 	}
-	x := &StrokePoint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StrokePoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func strokePointAdopt(id objc.ID) *StrokePoint {
 	if id == 0 {
 		return nil
 	}
-	x := &StrokePoint{Handle: objref.Wrap(id)}
+	x := &StrokePoint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,49 +61,82 @@ func (x *StrokePoint) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewStrokePoint creates a new StrokePoint.
-func NewStrokePoint() *StrokePoint {
-	_id := objc.Send[objc.ID](objc.ID(_class("PKStrokePoint")), objc.RegisterName("new"))
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StrokePoint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitude create a new point with the provided properties.
+func NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitude(location corefoundation.CGPoint, timeOffset float64, size corefoundation.CGSize, opacity float64, force float64, azimuth float64, altitude float64) *StrokePoint {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKStrokePoint")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocation:timeOffset:size:opacity:force:azimuth:altitude:"), location, timeOffset, size, opacity, force, azimuth, altitude)
 	return strokePointAdopt(_id)
 }
 
-// Time offset since the start of the stroke path in seconds.
+// NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScale create a new point with the provided properties.
+func NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScale(location corefoundation.CGPoint, timeOffset float64, size corefoundation.CGSize, opacity float64, force float64, azimuth float64, altitude float64, secondaryScale float64) *StrokePoint {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKStrokePoint")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocation:timeOffset:size:opacity:force:azimuth:altitude:secondaryScale:"), location, timeOffset, size, opacity, force, azimuth, altitude, secondaryScale)
+	return strokePointAdopt(_id)
+}
+
+// NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScaleThreshold create a new point with the provided properties.
+func NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScaleThreshold(location corefoundation.CGPoint, timeOffset float64, size corefoundation.CGSize, opacity float64, force float64, azimuth float64, altitude float64, secondaryScale float64, threshold float64) *StrokePoint {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKStrokePoint")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocation:timeOffset:size:opacity:force:azimuth:altitude:secondaryScale:threshold:"), location, timeOffset, size, opacity, force, azimuth, altitude, secondaryScale, threshold)
+	return strokePointAdopt(_id)
+}
+
+// Location location of the point.
+func (x *StrokePoint) Location() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("location"))
+	return _r
+}
+
+// TimeOffset time offset since the start of the stroke path in seconds.
 func (x *StrokePoint) TimeOffset() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeOffset"))
 	return _r
 }
 
-// Opacity of the point 0-2.
+// Size size of the point.
+func (x *StrokePoint) Size() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("size"))
+	return _r
+}
+
+// Opacity opacity of the point 0-2.
 func (x *StrokePoint) Opacity() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("opacity"))
 	return _r
 }
 
-// Azimuth of the point in radians, 0.0-2π radians
+// Azimuth azimuth of the point in radians, 0.0-2π radians
 func (x *StrokePoint) Azimuth() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("azimuth"))
 	return _r
 }
 
-// Force used to create this point.
+// Force force used to create this point.
 func (x *StrokePoint) Force() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("force"))
 	return _r
 }
 
-// Altitude used to create this point in radians, 0.0-π/2 radians
+// Altitude altitude used to create this point in radians, 0.0-π/2 radians
 func (x *StrokePoint) Altitude() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("altitude"))
 	return _r
 }
 
-// The scaling of the point for secondary effects. For example the scaling of the pigment in the watercolor ink.
+// SecondaryScale the scaling of the point for secondary effects. For example the scaling of the pigment in the watercolor ink.
 func (x *StrokePoint) SecondaryScale() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("secondaryScale"))
 	return _r
 }
 
-// The threshold for clipping the stroke rendering. When rendering only pixels with an alpha greater than the threshold are drawn. A threshold of 0 has no affect on rendering, a threshold of 1 does not draw anything. Thresholds are only used for some inks, eg. `PKInkIdentifierReed`.
+// Threshold the threshold for clipping the stroke rendering. When rendering only pixels with an alpha greater than the threshold are drawn. A threshold of 0 has no affect on rendering, a threshold of 1 does not draw anything. Thresholds are only used for some inks, eg. `PKInkIdentifierReed`.
 func (x *StrokePoint) Threshold() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("threshold"))
 	return _r
@@ -109,7 +145,9 @@ func (x *StrokePoint) Threshold() float64 {
 // StrokePointable is the interface implemented by [StrokePoint], for mocking and DI.
 type StrokePointable interface {
 	obj.Object
+	Location() corefoundation.CGPoint
 	TimeOffset() float64
+	Size() corefoundation.CGSize
 	Opacity() float64
 	Azimuth() float64
 	Force() float64

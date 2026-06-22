@@ -6,17 +6,19 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A control that presents a menu in a window’s toolbar.
-//
 // MenuToolbarItem is an idiomatic wrapper over the Objective-C class NSMenuToolbarItem.
+//
+// It embeds [ToolbarItem], promoting that type's methods.
+//
+// A control that presents a menu in a window’s toolbar.
 type MenuToolbarItem struct {
-	objref.Handle
+	ToolbarItem
 }
 
 // MenuToolbarItemFromID adopts an existing Objective-C object as a MenuToolbarItem
@@ -25,7 +27,8 @@ func MenuToolbarItemFromID(id objc.ID) *MenuToolbarItem {
 	if id == 0 {
 		return nil
 	}
-	x := &MenuToolbarItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MenuToolbarItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func menuToolbarItemAdopt(id objc.ID) *MenuToolbarItem {
 	if id == 0 {
 		return nil
 	}
-	x := &MenuToolbarItem{Handle: objref.Wrap(id)}
+	x := &MenuToolbarItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MenuToolbarItem) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MenuToolbarItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MenuToolbarItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMenuToolbarItem creates a new MenuToolbarItem.
@@ -64,186 +53,162 @@ func NewMenuToolbarItem() *MenuToolbarItem {
 	return menuToolbarItemAdopt(_id)
 }
 
-// The menu presented from the toolbar item.
-//
-// WithMenu sets menu and returns the receiver so calls can be chained.
+// WithMenu the menu presented from the toolbar item.
 func (x *MenuToolbarItem) WithMenu(menu *Menu) *MenuToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// A Boolean value that determines whether the toolbar item displays an indicator of additional functionality.
-//
-// WithShowsIndicator sets showsIndicator and returns the receiver so calls can be chained.
+// WithShowsIndicator a Boolean value that determines whether the toolbar item displays an indicator of additional functionality.
 func (x *MenuToolbarItem) WithShowsIndicator(showsIndicator bool) *MenuToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsIndicator:"), showsIndicator)
 	return x
 }
 
-// The label that appears for this item in the toolbar.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the label that appears for this item in the toolbar.
 func (x *MenuToolbarItem) WithLabel(label string) *MenuToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The label that appears when the toolbar item is in the customization palette.
-//
-// WithPaletteLabel sets paletteLabel and returns the receiver so calls can be chained.
+// WithPaletteLabel the label that appears when the toolbar item is in the customization palette.
 func (x *MenuToolbarItem) WithPaletteLabel(paletteLabel string) *MenuToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaletteLabel:"), purego.NSString(paletteLabel))
 	return x
 }
 
-// The set of labels that the item might display.
-//
-// WithPossibleLabels sets possibleLabels and returns the receiver so calls can be chained.
+// WithPossibleLabels the set of labels that the item might display.
 func (x *MenuToolbarItem) WithPossibleLabels(possibleLabels obj.Object) *MenuToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
 	return x
 }
 
-// The tooltip to display when someone hovers over the item in the toolbar.
-//
-// WithToolTip sets toolTip and returns the receiver so calls can be chained.
+// WithToolTip the tooltip to display when someone hovers over the item in the toolbar.
 func (x *MenuToolbarItem) WithToolTip(toolTip string) *MenuToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// The menu item to use when the toolbar item is in the overflow menu.
-//
-// WithMenuFormRepresentation sets menuFormRepresentation and returns the receiver so calls can be chained.
+// WithMenuFormRepresentation the menu item to use when the toolbar item is in the overflow menu.
 func (x *MenuToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *MenuToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
 	return x
 }
 
-// An integer tag you can use to identify the toolbar item.
-//
-// WithTag sets tag and returns the receiver so calls can be chained.
+// WithTag an integer tag you can use to identify the toolbar item.
 func (x *MenuToolbarItem) WithTag(tag int) *MenuToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// The object that defines the action method the toolbar item calls when clicked.
-//
-// WithTarget sets target and returns the receiver so calls can be chained.
+// WithTarget the object that defines the action method the toolbar item calls when clicked.
 func (x *MenuToolbarItem) WithTarget(target obj.Object) *MenuToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// A Boolean value that indicates whether the item is enabled.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether the item is enabled.
 func (x *MenuToolbarItem) WithEnabled(enabled bool) *MenuToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The image to display for the toolbar item.
-//
-// WithImage sets image and returns the receiver so calls can be chained.
+// WithImage the image to display for the toolbar item.
 func (x *MenuToolbarItem) WithImage(image *Image) *MenuToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
-// The title of the toolbar item.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the title of the toolbar item.
 func (x *MenuToolbarItem) WithTitle(title string) *MenuToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A Boolean value that indicates whether the toolbar item has a bordered style.
-//
-// WithBordered sets bordered and returns the receiver so calls can be chained.
+// WithBordered a Boolean value that indicates whether the toolbar item has a bordered style.
 func (x *MenuToolbarItem) WithBordered(bordered bool) *MenuToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
-// WithBackgroundTintColor sets backgroundTintColor and returns the receiver so calls can be chained.
+// WithBackgroundTintColor sets the property and returns the receiver so calls can be chained.
 func (x *MenuToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *MenuToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
 	return x
 }
 
-// Defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items’ background.
-//
-// WithStyle sets style and returns the receiver so calls can be chained.
+// WithStyle defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items’ background.
 func (x *MenuToolbarItem) WithStyle(style ToolbarItemStyle) *MenuToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 	return x
 }
 
-// A Boolean value that indicates whether the item behaves as a navigation item in the toolbar.
-//
-// WithNavigational sets navigational and returns the receiver so calls can be chained.
+// WithNavigational a Boolean value that indicates whether the item behaves as a navigation item in the toolbar.
 func (x *MenuToolbarItem) WithNavigational(navigational bool) *MenuToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNavigational:"), navigational)
 	return x
 }
 
-// The custom view you use to draw the toolbar item.
-//
-// WithView sets view and returns the receiver so calls can be chained.
+// WithView the custom view you use to draw the toolbar item.
 func (x *MenuToolbarItem) WithView(view ViewProvider) *MenuToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 	return x
 }
 
-// Determines whether an item is visible in the toolbar.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden determines whether an item is visible in the toolbar.
 func (x *MenuToolbarItem) WithHidden(hidden bool) *MenuToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// The display priority associated with the toolbar item.
-//
-// WithVisibilityPriority sets visibilityPriority and returns the receiver so calls can be chained.
+// WithMinSize the toolbar item’s minimum size.
+func (x *MenuToolbarItem) WithMinSize(minSize corefoundation.CGSize) *MenuToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinSize:"), minSize)
+	return x
+}
+
+// WithMaxSize the toolbar item’s maximum size.
+func (x *MenuToolbarItem) WithMaxSize(maxSize corefoundation.CGSize) *MenuToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSize:"), maxSize)
+	return x
+}
+
+// WithVisibilityPriority the display priority associated with the toolbar item.
 func (x *MenuToolbarItem) WithVisibilityPriority(visibilityPriority int) *MenuToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
 	return x
 }
 
-// A badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
-//
-// WithBadge sets badge and returns the receiver so calls can be chained.
+// WithBadge a badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
 func (x *MenuToolbarItem) WithBadge(badge *ItemBadge) *MenuToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadge:"), objref.IDOf(badge))
 	return x
 }
 
-// A Boolean value that indicates whether the toolbar automatically validates the item.
-//
-// WithAutovalidates sets autovalidates and returns the receiver so calls can be chained.
+// WithAutovalidates a Boolean value that indicates whether the toolbar automatically validates the item.
 func (x *MenuToolbarItem) WithAutovalidates(autovalidates bool) *MenuToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutovalidates:"), autovalidates)
 	return x
 }
 
+// Menu wraps the corresponding Objective-C method.
 func (x *MenuToolbarItem) Menu() *Menu {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menu"))
 	return MenuFromID(_r)
 }
 
+// SetMenu wraps the corresponding Objective-C method.
 func (x *MenuToolbarItem) SetMenu(menu *Menu) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 }
 
+// ShowsIndicator wraps the corresponding Objective-C method.
 func (x *MenuToolbarItem) ShowsIndicator() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsIndicator"))
 	return _r
 }
 
+// SetShowsIndicator wraps the corresponding Objective-C method.
 func (x *MenuToolbarItem) SetShowsIndicator(showsIndicator bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsIndicator:"), showsIndicator)
 }
@@ -269,6 +234,8 @@ type MenuToolbarItemable interface {
 	WithNavigational(navigational bool) *MenuToolbarItem
 	WithView(view ViewProvider) *MenuToolbarItem
 	WithHidden(hidden bool) *MenuToolbarItem
+	WithMinSize(minSize corefoundation.CGSize) *MenuToolbarItem
+	WithMaxSize(maxSize corefoundation.CGSize) *MenuToolbarItem
 	WithVisibilityPriority(visibilityPriority int) *MenuToolbarItem
 	WithBadge(badge *ItemBadge) *MenuToolbarItem
 	WithAutovalidates(autovalidates bool) *MenuToolbarItem
@@ -279,3 +246,5 @@ type MenuToolbarItemable interface {
 }
 
 var _ MenuToolbarItemable = (*MenuToolbarItem)(nil)
+
+var _ ToolbarItemProvider = (*MenuToolbarItem)(nil)

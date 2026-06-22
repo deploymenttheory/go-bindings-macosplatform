@@ -14,9 +14,11 @@ import (
 	"unsafe"
 )
 
-// A string of text that manages data, layout, and stylistic information for ranges of characters to support rendering.
-//
 // AttributedString is an idiomatic wrapper over the Objective-C class NSAttributedString.
+//
+// AttributedString is an abstract base — you do not construct it directly. Construct one of [MutableAttributedString] and pass it where a AttributedString is accepted.
+//
+// A string of text that manages data, layout, and stylistic information for ranges of characters to support rendering.
 type AttributedString struct {
 	objref.Handle
 }
@@ -27,7 +29,8 @@ func AttributedStringFromID(id objc.ID) *AttributedString {
 	if id == 0 {
 		return nil
 	}
-	x := &AttributedString{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AttributedString{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +43,8 @@ func attributedStringAdopt(id objc.ID) *AttributedString {
 	if id == 0 {
 		return nil
 	}
-	x := &AttributedString{Handle: objref.Wrap(id)}
+	x := &AttributedString{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +62,12 @@ func (x *AttributedString) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *AttributedString) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AttributedString) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewAttributedStringWithString creates a new AttributedString.
@@ -82,7 +92,7 @@ func NewAttributedStringWithAttributedString(attrStr *AttributedString) *Attribu
 }
 
 // NewAttributedStringWithContentsOfMarkdownFileAtURLOptionsBaseURLError creates a new AttributedString.
-func NewAttributedStringWithContentsOfMarkdownFileAtURLOptionsBaseURLError(markdownFile string, options *AttributedStringMarkdownParsingOptions, baseURL string) (*AttributedString, error) {
+func NewAttributedStringWithContentsOfMarkdownFileAtURLOptionsBaseURLError(markdownFile string, options *AttributedStringMarkdownParsingOptions, baseURL string) (result *AttributedString, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfMarkdownFileAtURL:options:baseURL:error:"), rt.FileURL(markdownFile), objref.IDOf(options), rt.FileURL(baseURL), unsafe.Pointer(&_nsErr))
@@ -93,7 +103,7 @@ func NewAttributedStringWithContentsOfMarkdownFileAtURLOptionsBaseURLError(markd
 }
 
 // NewAttributedStringWithMarkdownOptionsBaseURLError creates a new AttributedString.
-func NewAttributedStringWithMarkdownOptionsBaseURLError(markdown *Data, options *AttributedStringMarkdownParsingOptions, baseURL string) (*AttributedString, error) {
+func NewAttributedStringWithMarkdownOptionsBaseURLError(markdown *Data, options *AttributedStringMarkdownParsingOptions, baseURL string) (result *AttributedString, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMarkdown:options:baseURL:error:"), objref.IDOf(markdown), objref.IDOf(options), rt.FileURL(baseURL), unsafe.Pointer(&_nsErr))
@@ -104,7 +114,7 @@ func NewAttributedStringWithMarkdownOptionsBaseURLError(markdown *Data, options 
 }
 
 // NewAttributedStringWithMarkdownStringOptionsBaseURLError creates a new AttributedString.
-func NewAttributedStringWithMarkdownStringOptionsBaseURLError(markdownString string, options *AttributedStringMarkdownParsingOptions, baseURL string) (*AttributedString, error) {
+func NewAttributedStringWithMarkdownStringOptionsBaseURLError(markdownString string, options *AttributedStringMarkdownParsingOptions, baseURL string) (result *AttributedString, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMarkdownString:options:baseURL:error:"), purego.NSString(markdownString), objref.IDOf(options), rt.FileURL(baseURL), unsafe.Pointer(&_nsErr))
@@ -114,68 +124,53 @@ func NewAttributedStringWithMarkdownStringOptionsBaseURLError(markdownString str
 	return attributedStringAdopt(_id), nil
 }
 
-// Formats the string using the specified locale (or the canonical one, if nil).
-//
-// NewAttributedStringWithFormatOptionsLocale creates a new AttributedString.
+// NewAttributedStringWithFormatOptionsLocale formats the string using the specified locale (or the canonical one, if nil).
 func NewAttributedStringWithFormatOptionsLocale(format *AttributedString, options AttributedStringFormattingOptions, locale *Locale) *AttributedString {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:"), objref.IDOf(format), options, objref.IDOf(locale))
 	return attributedStringAdopt(_id)
 }
 
-// Formats the string using the arguments list and the specified locale (or the canonical one, if nil).
-//
-// NewAttributedStringWithFormatOptionsLocaleArguments creates a new AttributedString.
+// NewAttributedStringWithFormatOptionsLocaleArguments formats the string using the arguments list and the specified locale (or the canonical one, if nil).
 func NewAttributedStringWithFormatOptionsLocaleArguments(format *AttributedString, options AttributedStringFormattingOptions, locale *Locale, arguments string) *AttributedString {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:arguments:"), objref.IDOf(format), options, objref.IDOf(locale), arguments)
 	return attributedStringAdopt(_id)
 }
 
-// Formats the string using the specified locale (or the canonical one, if nil).
-//
-// NewAttributedStringWithFormatOptionsLocaleContext creates a new AttributedString.
+// NewAttributedStringWithFormatOptionsLocaleContext formats the string using the specified locale (or the canonical one, if nil).
 func NewAttributedStringWithFormatOptionsLocaleContext(format *AttributedString, options AttributedStringFormattingOptions, locale *Locale, context_ obj.Object) *AttributedString {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:context:"), objref.IDOf(format), options, objref.IDOf(locale), objref.IDOf(context_))
 	return attributedStringAdopt(_id)
 }
 
-// Formats the string using the arguments list and the specified locale (or the canonical one, if nil).
-//
-// NewAttributedStringWithFormatOptionsLocaleContextArguments creates a new AttributedString.
+// NewAttributedStringWithFormatOptionsLocaleContextArguments formats the string using the arguments list and the specified locale (or the canonical one, if nil).
 func NewAttributedStringWithFormatOptionsLocaleContextArguments(format *AttributedString, options AttributedStringFormattingOptions, locale *Locale, context_ obj.Object, arguments string) *AttributedString {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:context:arguments:"), objref.IDOf(format), options, objref.IDOf(locale), objref.IDOf(context_), arguments)
 	return attributedStringAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *AttributedString) WithScriptingProperties(scriptingProperties obj.Object) *AttributedString {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-func (x *AttributedString) String() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("string"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
-}
-
-// Returns a Boolean value that indicates whether the attributed string is equal to the specified string.
+// IsEqualToAttributedString returns a Boolean value that indicates whether the attributed string is equal to the specified string.
 func (x *AttributedString) IsEqualToAttributedString(other *AttributedString) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToAttributedString:"), objref.IDOf(other))
 	return _r
 }
 
+// Length wraps the corresponding Objective-C method.
 func (x *AttributedString) Length() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
 	return _r
 }
 
-// If the string has portions tagged with NSInflectionRuleAttributeName that have no format specifiers, create a new string with those portions inflected by following the rule in the attribute.
+// AttributedStringByInflectingString if the string has portions tagged with NSInflectionRuleAttributeName that have no format specifiers, create a new string with those portions inflected by following the rule in the attribute.
 func (x *AttributedString) AttributedStringByInflectingString() *AttributedString {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedStringByInflectingString"))
 	return AttributedStringFromID(_r)
@@ -185,10 +180,16 @@ func (x *AttributedString) AttributedStringByInflectingString() *AttributedStrin
 type AttributedStringable interface {
 	obj.Object
 	WithScriptingProperties(scriptingProperties obj.Object) *AttributedString
-	String() string
 	IsEqualToAttributedString(other *AttributedString) bool
 	Length() int
 	AttributedStringByInflectingString() *AttributedString
 }
 
 var _ AttributedStringable = (*AttributedString)(nil)
+
+// isAttributedString marks AttributedString — and, by embedding promotion, its
+// subclasses — as a member of the AttributedString hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AttributedString) isAttributedString() {}
+
+var _ AttributedStringProvider = (*AttributedString)(nil)

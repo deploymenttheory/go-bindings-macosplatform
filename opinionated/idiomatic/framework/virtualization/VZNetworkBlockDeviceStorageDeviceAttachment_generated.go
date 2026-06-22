@@ -14,11 +14,13 @@ import (
 	"unsafe"
 )
 
-// A storage device attachment backed by a Network Block Device (NBD) client.
-//
 // NetworkBlockDeviceStorageDeviceAttachment is an idiomatic wrapper over the Objective-C class VZNetworkBlockDeviceStorageDeviceAttachment.
+//
+// It embeds [StorageDeviceAttachment], promoting that type's methods.
+//
+// A storage device attachment backed by a Network Block Device (NBD) client.
 type NetworkBlockDeviceStorageDeviceAttachment struct {
-	objref.Handle
+	StorageDeviceAttachment
 }
 
 // NetworkBlockDeviceStorageDeviceAttachmentFromID adopts an existing Objective-C object as a NetworkBlockDeviceStorageDeviceAttachment
@@ -27,7 +29,8 @@ func NetworkBlockDeviceStorageDeviceAttachmentFromID(id objc.ID) *NetworkBlockDe
 	if id == 0 {
 		return nil
 	}
-	x := &NetworkBlockDeviceStorageDeviceAttachment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NetworkBlockDeviceStorageDeviceAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,30 +43,14 @@ func networkBlockDeviceStorageDeviceAttachmentAdopt(id objc.ID) *NetworkBlockDev
 	if id == 0 {
 		return nil
 	}
-	x := &NetworkBlockDeviceStorageDeviceAttachment{Handle: objref.Wrap(id)}
+	x := &NetworkBlockDeviceStorageDeviceAttachment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *NetworkBlockDeviceStorageDeviceAttachment) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NetworkBlockDeviceStorageDeviceAttachment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NetworkBlockDeviceStorageDeviceAttachment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a new network block device storage attachment from an NBD Uniform Resource Indicator (URI) represented as a URL, timeout value, and read-only and synchronization modes that you provide.
-//
-// NewNetworkBlockDeviceStorageDeviceAttachmentWithURLTimeoutForcedReadOnlySynchronizationModeError creates a new NetworkBlockDeviceStorageDeviceAttachment.
-func NewNetworkBlockDeviceStorageDeviceAttachmentWithURLTimeoutForcedReadOnlySynchronizationModeError(uRL string, timeout float64, forcedReadOnly bool, synchronizationMode DiskSynchronizationMode) (*NetworkBlockDeviceStorageDeviceAttachment, error) {
+// NewNetworkBlockDeviceStorageDeviceAttachmentWithURLTimeoutForcedReadOnlySynchronizationModeError creates a new network block device storage attachment from an NBD Uniform Resource Indicator (URI) represented as a URL, timeout value, and read-only and synchronization modes that you provide.
+func NewNetworkBlockDeviceStorageDeviceAttachmentWithURLTimeoutForcedReadOnlySynchronizationModeError(uRL string, timeout float64, forcedReadOnly bool, synchronizationMode DiskSynchronizationMode) (result *NetworkBlockDeviceStorageDeviceAttachment, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZNetworkBlockDeviceStorageDeviceAttachment")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:timeout:forcedReadOnly:synchronizationMode:error:"), rt.FileURL(uRL), timeout, forcedReadOnly, synchronizationMode, unsafe.Pointer(&_nsErr))
@@ -73,10 +60,8 @@ func NewNetworkBlockDeviceStorageDeviceAttachmentWithURLTimeoutForcedReadOnlySyn
 	return networkBlockDeviceStorageDeviceAttachmentAdopt(_id), nil
 }
 
-// Creates a new network block device (NBD) storage attachment from an NDB Uniform Resource Indicator (URI) represented as a URL that you provide.
-//
-// NewNetworkBlockDeviceStorageDeviceAttachmentWithURLError creates a new NetworkBlockDeviceStorageDeviceAttachment.
-func NewNetworkBlockDeviceStorageDeviceAttachmentWithURLError(uRL string) (*NetworkBlockDeviceStorageDeviceAttachment, error) {
+// NewNetworkBlockDeviceStorageDeviceAttachmentWithURLError creates a new network block device (NBD) storage attachment from an NDB Uniform Resource Indicator (URI) represented as a URL that you provide.
+func NewNetworkBlockDeviceStorageDeviceAttachmentWithURLError(uRL string) (result *NetworkBlockDeviceStorageDeviceAttachment, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZNetworkBlockDeviceStorageDeviceAttachment")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:error:"), rt.FileURL(uRL), unsafe.Pointer(&_nsErr))
@@ -86,25 +71,25 @@ func NewNetworkBlockDeviceStorageDeviceAttachmentWithURLError(uRL string) (*Netw
 	return networkBlockDeviceStorageDeviceAttachmentAdopt(_id), nil
 }
 
-// URL referring to the NBD server to which the NBD client is to be connected.
+// URL URL referring to the NBD server to which the NBD client is to be connected.
 func (x *NetworkBlockDeviceStorageDeviceAttachment) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// The timeout value in seconds for the connection between the client and server. When the timeout expires, an attempt to reconnect with the server will take place.
+// Timeout the timeout value in seconds for the connection between the client and server. When the timeout expires, an attempt to reconnect with the server will take place.
 func (x *NetworkBlockDeviceStorageDeviceAttachment) Timeout() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeout"))
 	return _r
 }
 
-// Whether the underlying disk attachment is forced to be read-only. The `forcedReadOnly` parameter affects how the NBD client is exposed to the guest operating system by the storage controller. As part of the NBD protocol, whether or not the disk exposed by the NBD client is read-only is advertised by the NBD server during the handshake phase of the protocol. Setting `forcedReadOnly` to YES will force the NBD client to show up as read-only to the guest regardless of whether or not the NBD server advertises itself as read-only.
+// IsForcedReadOnly whether the underlying disk attachment is forced to be read-only. The `forcedReadOnly` parameter affects how the NBD client is exposed to the guest operating system by the storage controller. As part of the NBD protocol, whether or not the disk exposed by the NBD client is read-only is advertised by the NBD server during the handshake phase of the protocol. Setting `forcedReadOnly` to YES will force the NBD client to show up as read-only to the guest regardless of whether or not the NBD server advertises itself as read-only.
 func (x *NetworkBlockDeviceStorageDeviceAttachment) IsForcedReadOnly() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isForcedReadOnly"))
 	return _r
 }
 
-// The mode in which the NBD client synchronizes data with the NBD server.
+// SynchronizationMode the mode in which the NBD client synchronizes data with the NBD server.
 func (x *NetworkBlockDeviceStorageDeviceAttachment) SynchronizationMode() DiskSynchronizationMode {
 	_r := objc.Send[DiskSynchronizationMode](objref.IDOf(x), objc.RegisterName("synchronizationMode"))
 	return _r
@@ -120,3 +105,5 @@ type NetworkBlockDeviceStorageDeviceAttachmentable interface {
 }
 
 var _ NetworkBlockDeviceStorageDeviceAttachmentable = (*NetworkBlockDeviceStorageDeviceAttachment)(nil)
+
+var _ StorageDeviceAttachmentProvider = (*NetworkBlockDeviceStorageDeviceAttachment)(nil)

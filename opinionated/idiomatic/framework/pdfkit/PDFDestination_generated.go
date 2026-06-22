@@ -6,15 +6,16 @@ package pdfkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A PDFDestination object describes a point on a PDF page.
-//
 // Destination is an idiomatic wrapper over the Objective-C class PDFDestination.
+//
+// A PDFDestination object describes a point on a PDF page.
 type Destination struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func DestinationFromID(id objc.ID) *Destination {
 	if id == 0 {
 		return nil
 	}
-	x := &Destination{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Destination{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func destinationAdopt(id objc.ID) *Destination {
 	if id == 0 {
 		return nil
 	}
-	x := &Destination{Handle: objref.Wrap(id)}
+	x := &Destination{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +61,44 @@ func (x *Destination) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewDestination creates a new Destination.
-func NewDestination() *Destination {
-	_id := objc.Send[objc.ID](objc.ID(_class("PDFDestination")), objc.RegisterName("new"))
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Destination) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDestinationWithPageAtPoint initializes the destination.
+func NewDestinationWithPageAtPoint(page *Page, point corefoundation.CGPoint) *Destination {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFDestination")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPage:atPoint:"), objref.IDOf(page), point)
 	return destinationAdopt(_id)
 }
 
-// WithZoom sets zoom and returns the receiver so calls can be chained.
+// WithZoom sets the property and returns the receiver so calls can be chained.
 func (x *Destination) WithZoom(zoom float64) *Destination {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZoom:"), zoom)
 	return x
 }
 
+// Page wraps the corresponding Objective-C method.
 func (x *Destination) Page() *Page {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("page"))
 	return PageFromID(_r)
 }
 
+// Point wraps the corresponding Objective-C method.
+func (x *Destination) Point() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("point"))
+	return _r
+}
+
+// Zoom wraps the corresponding Objective-C method.
 func (x *Destination) Zoom() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("zoom"))
 	return _r
 }
 
+// SetZoom wraps the corresponding Objective-C method.
 func (x *Destination) SetZoom(zoom float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZoom:"), zoom)
 }
@@ -89,6 +108,7 @@ type Destinationable interface {
 	obj.Object
 	WithZoom(zoom float64) *Destination
 	Page() *Page
+	Point() corefoundation.CGPoint
 	Zoom() float64
 	SetZoom(zoom float64)
 }

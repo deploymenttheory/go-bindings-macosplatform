@@ -5,6 +5,7 @@
 package compositorservices
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -738,4 +739,15 @@ func CpViewTextureMapGetTextureIndex(view_texture_map obj.Object) int {
 		ebipurego.RegisterLibFunc(&_fnCpViewTextureMapGetTextureIndex, _lib, "cp_view_texture_map_get_texture_index")
 	}
 	return _fnCpViewTextureMapGetTextureIndex(objref.IDOf(view_texture_map))
+}
+
+var _fnCpViewTextureMapGetViewport func(objc.ID) metal.MTLViewport
+
+// CpViewTextureMapGetViewport calls the CompositorServices framework function cp_view_texture_map_get_viewport.
+func CpViewTextureMapGetViewport(view_texture_map obj.Object) metal.MTLViewport {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCpViewTextureMapGetViewport == nil {
+		ebipurego.RegisterLibFunc(&_fnCpViewTextureMapGetViewport, _lib, "cp_view_texture_map_get_viewport")
+	}
+	return _fnCpViewTextureMapGetViewport(objref.IDOf(view_texture_map))
 }

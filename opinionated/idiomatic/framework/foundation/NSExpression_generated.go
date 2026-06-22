@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An expression for use in a comparison predicate.
-//
 // Expression is an idiomatic wrapper over the Objective-C class NSExpression.
+//
+// An expression for use in a comparison predicate.
 type Expression struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ExpressionFromID(id objc.ID) *Expression {
 	if id == 0 {
 		return nil
 	}
-	x := &Expression{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Expression{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func expressionAdopt(id objc.ID) *Expression {
 	if id == 0 {
 		return nil
 	}
-	x := &Expression{Handle: objref.Wrap(id)}
+	x := &Expression{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,51 +60,56 @@ func (x *Expression) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates the expression with the specified expression type.
-//
-// NewExpressionWithExpressionType creates a new Expression.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Expression) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewExpressionWithExpressionType creates the expression with the specified expression type.
 func NewExpressionWithExpressionType(type_ ExpressionType) *Expression {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExpressionType:"), type_)
 	return expressionAdopt(_id)
 }
 
-// Creates an expression by decoding from the coder you specify.
-//
-// NewExpressionWithCoder creates a new Expression.
+// NewExpressionWithCoder creates an expression by decoding from the coder you specify.
 func NewExpressionWithCoder(coder *Coder) *Expression {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return expressionAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Expression) WithScriptingProperties(scriptingProperties obj.Object) *Expression {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Evaluates an expression using a specified object and context.
+// ExpressionValueWithObjectContext evaluates an expression using a specified object and context.
 func (x *Expression) ExpressionValueWithObjectContext(object obj.Object, context_ obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expressionValueWithObject:context:"), objref.IDOf(object), objref.IDOf(context_))
 	return obj.Wrap(_r)
 }
 
-// Forces a securely decoded expression to allow evaluation.
+// AllowEvaluation forces a securely decoded expression to allow evaluation.
 func (x *Expression) AllowEvaluation() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowEvaluation"))
 }
 
+// ExpressionType wraps the corresponding Objective-C method.
 func (x *Expression) ExpressionType() ExpressionType {
 	_r := objc.Send[ExpressionType](objref.IDOf(x), objc.RegisterName("expressionType"))
 	return _r
 }
 
+// ConstantValue wraps the corresponding Objective-C method.
 func (x *Expression) ConstantValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constantValue"))
 	return obj.Wrap(_r)
 }
 
+// KeyPath wraps the corresponding Objective-C method.
 func (x *Expression) KeyPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyPath"))
 	if _r == 0 {
@@ -111,6 +118,7 @@ func (x *Expression) KeyPath() string {
 	return purego.GoString(_r)
 }
 
+// Function wraps the corresponding Objective-C method.
 func (x *Expression) Function() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("function"))
 	if _r == 0 {
@@ -119,6 +127,7 @@ func (x *Expression) Function() string {
 	return purego.GoString(_r)
 }
 
+// Variable wraps the corresponding Objective-C method.
 func (x *Expression) Variable() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variable"))
 	if _r == 0 {
@@ -127,42 +136,51 @@ func (x *Expression) Variable() string {
 	return purego.GoString(_r)
 }
 
+// Operand wraps the corresponding Objective-C method.
 func (x *Expression) Operand() *Expression {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operand"))
 	return ExpressionFromID(_r)
 }
 
+// Arguments wraps the corresponding Objective-C method.
+//
 // Arguments returns the collection as a Go slice.
 func (x *Expression) Arguments() []*Expression {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arguments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Expression { return ExpressionFromID(_id) })
 }
 
+// Collection wraps the corresponding Objective-C method.
 func (x *Expression) Collection() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collection"))
 	return obj.Wrap(_r)
 }
 
+// Predicate wraps the corresponding Objective-C method.
 func (x *Expression) Predicate() *Predicate {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
 	return PredicateFromID(_r)
 }
 
+// LeftExpression wraps the corresponding Objective-C method.
 func (x *Expression) LeftExpression() *Expression {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftExpression"))
 	return ExpressionFromID(_r)
 }
 
+// RightExpression wraps the corresponding Objective-C method.
 func (x *Expression) RightExpression() *Expression {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightExpression"))
 	return ExpressionFromID(_r)
 }
 
+// TrueExpression wraps the corresponding Objective-C method.
 func (x *Expression) TrueExpression() *Expression {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trueExpression"))
 	return ExpressionFromID(_r)
 }
 
+// FalseExpression wraps the corresponding Objective-C method.
 func (x *Expression) FalseExpression() *Expression {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("falseExpression"))
 	return ExpressionFromID(_r)

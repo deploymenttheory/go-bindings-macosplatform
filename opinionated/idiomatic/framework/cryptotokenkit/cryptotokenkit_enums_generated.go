@@ -30,6 +30,8 @@ const (
 	ErrorTokenNotFound ErrorCode = -7
 )
 
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ErrorCode) String() string {
 	switch e {
 	case ErrorCodeNotImplemented:
@@ -67,6 +69,8 @@ const (
 	SmartCardPINCharsetUpperAlphanumeric SmartCardPINCharset = 2
 )
 
+// String returns the SmartCardPINCharset constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SmartCardPINCharset) String() string {
 	switch e {
 	case SmartCardPINCharsetNumeric:
@@ -92,6 +96,8 @@ const (
 	SmartCardPINCompletionTimeout SmartCardPINCompletion = 4
 )
 
+// String returns the SmartCardPINCompletion constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SmartCardPINCompletion) String() string {
 	var parts []string
 	if e&SmartCardPINCompletionMaxLength != 0 {
@@ -121,6 +127,8 @@ const (
 	SmartCardPINConfirmationCurrent SmartCardPINConfirmation = 2
 )
 
+// String returns the SmartCardPINConfirmation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SmartCardPINConfirmation) String() string {
 	var parts []string
 	if e&SmartCardPINConfirmationNew != 0 {
@@ -147,6 +155,8 @@ const (
 	SmartCardPINEncodingBCD SmartCardPINEncoding = 2
 )
 
+// String returns the SmartCardPINEncoding constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SmartCardPINEncoding) String() string {
 	switch e {
 	case SmartCardPINEncodingBinary:
@@ -170,6 +180,8 @@ const (
 	SmartCardPINJustificationRight SmartCardPINJustification = 1
 )
 
+// String returns the SmartCardPINJustification constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SmartCardPINJustification) String() string {
 	switch e {
 	case SmartCardPINJustificationLeft:
@@ -193,6 +205,8 @@ const (
 	SmartCardProtocolAny  SmartCardProtocol = 65535
 )
 
+// String returns the SmartCardProtocol constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SmartCardProtocol) String() string {
 	var parts []string
 	if e&SmartCardProtocolT0 != 0 {
@@ -229,6 +243,8 @@ const (
 	SmartCardSlotStateValidCard SmartCardSlotState = 4
 )
 
+// String returns the SmartCardSlotState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SmartCardSlotState) String() string {
 	switch e {
 	case SmartCardSlotStateMissing:

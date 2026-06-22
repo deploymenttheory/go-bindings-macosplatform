@@ -23,7 +23,8 @@ func AnimationBindComponentFromID(id objc.ID) *AnimationBindComponent {
 	if id == 0 {
 		return nil
 	}
-	x := &AnimationBindComponent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AnimationBindComponent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func animationBindComponentAdopt(id objc.ID) *AnimationBindComponent {
 	if id == 0 {
 		return nil
 	}
-	x := &AnimationBindComponent{Handle: objref.Wrap(id)}
+	x := &AnimationBindComponent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,40 +58,51 @@ func (x *AnimationBindComponent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AnimationBindComponent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAnimationBindComponent creates a new AnimationBindComponent.
 func NewAnimationBindComponent() *AnimationBindComponent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MDLAnimationBindComponent")), objc.RegisterName("new"))
 	return animationBindComponentAdopt(_id)
 }
 
-// WithSkeleton sets skeleton and returns the receiver so calls can be chained.
+// WithSkeleton sets the property and returns the receiver so calls can be chained.
 func (x *AnimationBindComponent) WithSkeleton(skeleton *Skeleton) *AnimationBindComponent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSkeleton:"), objref.IDOf(skeleton))
 	return x
 }
 
-// WithJointPaths sets the collection and returns the receiver so calls can be chained.
+// WithJointPaths sets the property and returns the receiver so calls can be chained.
 func (x *AnimationBindComponent) WithJointPaths(items ...obj.Object) *AnimationBindComponent {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJointPaths:"), _arr)
 	return x
 }
 
+// Skeleton wraps the corresponding Objective-C method.
 func (x *AnimationBindComponent) Skeleton() *Skeleton {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skeleton"))
 	return SkeletonFromID(_r)
 }
 
+// SetSkeleton wraps the corresponding Objective-C method.
 func (x *AnimationBindComponent) SetSkeleton(skeleton *Skeleton) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSkeleton:"), objref.IDOf(skeleton))
 }
 
+// JointPaths wraps the corresponding Objective-C method.
+//
 // JointPaths returns the collection as a Go slice.
 func (x *AnimationBindComponent) JointPaths() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jointPaths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetJointPaths wraps the corresponding Objective-C method.
 func (x *AnimationBindComponent) SetJointPaths(jointPaths []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJointPaths:"), purego.SliceToNSArray(jointPaths, func(_v string) objc.ID { return purego.NSString(_v) }))
 }

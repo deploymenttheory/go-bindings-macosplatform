@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container for data protected by a right.
-//
 // RightStore is an idiomatic wrapper over the Objective-C class LARightStore.
+//
+// A container for data protected by a right.
 type RightStore struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func RightStoreFromID(id objc.ID) *RightStore {
 	if id == 0 {
 		return nil
 	}
-	x := &RightStore{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RightStore{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func rightStoreAdopt(id objc.ID) *RightStore {
 	if id == 0 {
 		return nil
 	}
-	x := &RightStore{Handle: objref.Wrap(id)}
+	x := &RightStore{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,22 @@ func (x *RightStore) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RightStore) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRightStore creates a new RightStore.
 func NewRightStore() *RightStore {
 	_id := objc.Send[objc.ID](objc.ID(_class("LARightStore")), objc.RegisterName("new"))
 	return rightStoreAdopt(_id)
 }
 
-// Fetches a previously stored right from the shared right store.
+// RightForIdentifierCompletion fetches a previously stored right from the shared right store.
 //
 // RightForIdentifierCompletion blocks until the operation completes or ctx is cancelled.
-func (x *RightStore) RightForIdentifierCompletion(ctx context.Context, identifier string) (*PersistedRight, error) {
+func (x *RightStore) RightForIdentifierCompletion(ctx context.Context, identifier string) (result *PersistedRight, err error) {
 	type _result struct {
 		val *PersistedRight
 		err error
@@ -91,10 +99,10 @@ func (x *RightStore) RightForIdentifierCompletion(ctx context.Context, identifie
 	}
 }
 
-// Saves a right to a persistent right store.
+// SaveRightIdentifierCompletion saves a right to a persistent right store.
 //
 // SaveRightIdentifierCompletion blocks until the operation completes or ctx is cancelled.
-func (x *RightStore) SaveRightIdentifierCompletion(ctx context.Context, right *Right, identifier string) (*PersistedRight, error) {
+func (x *RightStore) SaveRightIdentifierCompletion(ctx context.Context, right *Right, identifier string) (result *PersistedRight, err error) {
 	type _result struct {
 		val *PersistedRight
 		err error
@@ -116,10 +124,10 @@ func (x *RightStore) SaveRightIdentifierCompletion(ctx context.Context, right *R
 	}
 }
 
-// Saves a right to a persistent store along with secret data you supply.
+// SaveRightIdentifierSecretCompletion saves a right to a persistent store along with secret data you supply.
 //
 // SaveRightIdentifierSecretCompletion blocks until the operation completes or ctx is cancelled.
-func (x *RightStore) SaveRightIdentifierSecretCompletion(ctx context.Context, right *Right, identifier string, secret obj.Object) (*PersistedRight, error) {
+func (x *RightStore) SaveRightIdentifierSecretCompletion(ctx context.Context, right *Right, identifier string, secret obj.Object) (result *PersistedRight, err error) {
 	type _result struct {
 		val *PersistedRight
 		err error
@@ -141,7 +149,7 @@ func (x *RightStore) SaveRightIdentifierSecretCompletion(ctx context.Context, ri
 	}
 }
 
-// Removes a right from the right store given an instance of that right.
+// RemoveRightCompletion removes a right from the right store given an instance of that right.
 //
 // RemoveRightCompletion blocks until the operation completes or ctx is cancelled.
 func (x *RightStore) RemoveRightCompletion(ctx context.Context, right *PersistedRight) error {
@@ -160,7 +168,7 @@ func (x *RightStore) RemoveRightCompletion(ctx context.Context, right *Persisted
 	}
 }
 
-// Removes a right from the right store given its unique identifier.
+// RemoveRightForIdentifierCompletion removes a right from the right store given its unique identifier.
 //
 // RemoveRightForIdentifierCompletion blocks until the operation completes or ctx is cancelled.
 func (x *RightStore) RemoveRightForIdentifierCompletion(ctx context.Context, identifier string) error {
@@ -179,7 +187,7 @@ func (x *RightStore) RemoveRightForIdentifierCompletion(ctx context.Context, ide
 	}
 }
 
-// Removes all rights associated with this client from the right store.
+// RemoveAllRightsWithCompletion removes all rights associated with this client from the right store.
 //
 // RemoveAllRightsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *RightStore) RemoveAllRightsWithCompletion(ctx context.Context) error {

@@ -6,17 +6,20 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that resizes and changes the aspect ratio of an image using Bilinear resampling.
-//
 // ImageBilinearScale is an idiomatic wrapper over the Objective-C class MPSImageBilinearScale.
+//
+// It embeds [ImageScale], promoting that type's methods.
+//
+// A filter that resizes and changes the aspect ratio of an image using Bilinear resampling.
 type ImageBilinearScale struct {
-	objref.Handle
+	ImageScale
 }
 
 // ImageBilinearScaleFromID adopts an existing Objective-C object as a ImageBilinearScale
@@ -25,7 +28,8 @@ func ImageBilinearScaleFromID(id objc.ID) *ImageBilinearScale {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageBilinearScale{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageBilinearScale{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func imageBilinearScaleAdopt(id objc.ID) *ImageBilinearScale {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageBilinearScale{Handle: objref.Wrap(id)}
+	x := &ImageBilinearScale{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ImageBilinearScale) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageBilinearScale) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageBilinearScale) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewImageBilinearScale creates a new ImageBilinearScale.
@@ -64,9 +54,19 @@ func NewImageBilinearScale() *ImageBilinearScale {
 	return imageBilinearScaleAdopt(_id)
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
+func (x *ImageBilinearScale) WithOffset(offset mpscore.MPSOffset) *ImageBilinearScale {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (x *ImageBilinearScale) WithClipRect(clipRect metal.MTLRegion) *ImageBilinearScale {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
+// WithLabel the string that identifies the kernel.
 func (x *ImageBilinearScale) WithLabel(label string) *ImageBilinearScale {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -75,7 +75,15 @@ func (x *ImageBilinearScale) WithLabel(label string) *ImageBilinearScale {
 // ImageBilinearScaleable is the interface implemented by [ImageBilinearScale], for mocking and DI.
 type ImageBilinearScaleable interface {
 	obj.Object
+	WithOffset(offset mpscore.MPSOffset) *ImageBilinearScale
+	WithClipRect(clipRect metal.MTLRegion) *ImageBilinearScale
 	WithLabel(label string) *ImageBilinearScale
 }
 
 var _ ImageBilinearScaleable = (*ImageBilinearScale)(nil)
+
+var _ ImageScaleProvider = (*ImageBilinearScale)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageBilinearScale)(nil)
+
+var _ KernelProvider = (*ImageBilinearScale)(nil)

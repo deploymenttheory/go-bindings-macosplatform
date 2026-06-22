@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a folder on a camera.
-//
 // CameraFolder is an idiomatic wrapper over the Objective-C class ICCameraFolder.
+//
+// It embeds [CameraItem], promoting that type's methods.
+//
+// An object that represents a folder on a camera.
 type CameraFolder struct {
-	objref.Handle
+	CameraItem
 }
 
 // CameraFolderFromID adopts an existing Objective-C object as a CameraFolder
@@ -25,7 +26,8 @@ func CameraFolderFromID(id objc.ID) *CameraFolder {
 	if id == 0 {
 		return nil
 	}
-	x := &CameraFolder{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CameraFolder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func cameraFolderAdopt(id objc.ID) *CameraFolder {
 	if id == 0 {
 		return nil
 	}
-	x := &CameraFolder{Handle: objref.Wrap(id)}
+	x := &CameraFolder{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CameraFolder) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CameraFolder) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CameraFolder) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCameraFolder creates a new CameraFolder.
@@ -64,6 +52,8 @@ func NewCameraFolder() *CameraFolder {
 	return cameraFolderAdopt(_id)
 }
 
+// Contents wraps the corresponding Objective-C method.
+//
 // Contents returns the collection as a Go slice.
 func (x *CameraFolder) Contents() []*CameraItem {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contents"))
@@ -77,3 +67,5 @@ type CameraFolderable interface {
 }
 
 var _ CameraFolderable = (*CameraFolder)(nil)
+
+var _ CameraItemProvider = (*CameraFolder)(nil)

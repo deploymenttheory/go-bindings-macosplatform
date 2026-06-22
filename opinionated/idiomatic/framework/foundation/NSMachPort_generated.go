@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A port that can be used as an endpoint for distributed object connections (or raw messaging).
-//
 // MachPort is an idiomatic wrapper over the Objective-C class NSMachPort.
+//
+// It embeds [Port], promoting that type's methods.
+//
+// A port that can be used as an endpoint for distributed object connections (or raw messaging).
 type MachPort struct {
-	objref.Handle
+	Port
 }
 
 // MachPortFromID adopts an existing Objective-C object as a MachPort
@@ -25,7 +26,8 @@ func MachPortFromID(id objc.ID) *MachPort {
 	if id == 0 {
 		return nil
 	}
-	x := &MachPort{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MachPort{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,50 +40,33 @@ func machPortAdopt(id objc.ID) *MachPort {
 	if id == 0 {
 		return nil
 	}
-	x := &MachPort{Handle: objref.Wrap(id)}
+	x := &MachPort{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MachPort) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MachPort) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MachPort) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a newly allocated NSMachPort object with a given Mach port.
-//
-// NewMachPortWithMachPort creates a new MachPort.
+// NewMachPortWithMachPort initializes a newly allocated NSMachPort object with a given Mach port.
 func NewMachPortWithMachPort(machPort uint32) *MachPort {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMachPort")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMachPort:"), machPort)
 	return machPortAdopt(_id)
 }
 
-// Initializes a newly allocated NSMachPort object with a given Mach port and the specified options.
-//
-// NewMachPortWithMachPortOptions creates a new MachPort.
+// NewMachPortWithMachPortOptions initializes a newly allocated NSMachPort object with a given Mach port and the specified options.
 func NewMachPortWithMachPortOptions(machPort uint32, f MachPortOptions) *MachPort {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMachPort")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMachPort:options:"), machPort, f)
 	return machPortAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *MachPort) WithScriptingProperties(scriptingProperties obj.Object) *MachPort {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// MachPort wraps the corresponding Objective-C method.
 func (x *MachPort) MachPort() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("machPort"))
 	return _r
@@ -95,3 +80,5 @@ type MachPortable interface {
 }
 
 var _ MachPortable = (*MachPort)(nil)
+
+var _ PortProvider = (*MachPort)(nil)

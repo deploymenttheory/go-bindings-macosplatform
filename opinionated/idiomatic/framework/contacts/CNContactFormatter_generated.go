@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that you use to format contact information before displaying it to the user.
-//
 // ContactFormatter is an idiomatic wrapper over the Objective-C class CNContactFormatter.
+//
+// An object that you use to format contact information before displaying it to the user.
 type ContactFormatter struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ContactFormatterFromID(id objc.ID) *ContactFormatter {
 	if id == 0 {
 		return nil
 	}
-	x := &ContactFormatter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ContactFormatter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func contactFormatterAdopt(id objc.ID) *ContactFormatter {
 	if id == 0 {
 		return nil
 	}
-	x := &ContactFormatter{Handle: objref.Wrap(id)}
+	x := &ContactFormatter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +60,25 @@ func (x *ContactFormatter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContactFormatter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewContactFormatter creates a new ContactFormatter.
 func NewContactFormatter() *ContactFormatter {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNContactFormatter")), objc.RegisterName("new"))
 	return contactFormatterAdopt(_id)
 }
 
-// The formatting style for the contact name.
-//
-// WithStyle sets style and returns the receiver so calls can be chained.
+// WithStyle the formatting style for the contact name.
 func (x *ContactFormatter) WithStyle(style ContactFormatterStyle) *ContactFormatter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 	return x
 }
 
-// Formats the contact name.
+// StringFromContact formats the contact name.
 func (x *ContactFormatter) StringFromContact(contact *Contact) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromContact:"), objref.IDOf(contact))
 	if _r == 0 {
@@ -81,18 +87,19 @@ func (x *ContactFormatter) StringFromContact(contact *Contact) string {
 	return purego.GoString(_r)
 }
 
-// Formats the contact name as an attributed string.
+// AttributedStringFromContactDefaultAttributes formats the contact name as an attributed string.
 func (x *ContactFormatter) AttributedStringFromContactDefaultAttributes(contact *Contact, attributes obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedStringFromContact:defaultAttributes:"), objref.IDOf(contact), objref.IDOf(attributes))
 	return obj.Wrap(_r)
 }
 
-// The style for a contact formatter instance. The default value is CNContactFormatterStyleFullName.
+// Style the style for a contact formatter instance. The default value is CNContactFormatterStyleFullName.
 func (x *ContactFormatter) Style() ContactFormatterStyle {
 	_r := objc.Send[ContactFormatterStyle](objref.IDOf(x), objc.RegisterName("style"))
 	return _r
 }
 
+// SetStyle wraps the corresponding Objective-C method.
 func (x *ContactFormatter) SetStyle(style ContactFormatterStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 }

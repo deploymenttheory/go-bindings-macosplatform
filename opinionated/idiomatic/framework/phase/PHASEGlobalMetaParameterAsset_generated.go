@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A reference to a registered metaparameter that the app can share with multiple sound events or sources.
-//
 // GlobalMetaParameterAsset is an idiomatic wrapper over the Objective-C class PHASEGlobalMetaParameterAsset.
+//
+// It embeds [Asset], promoting that type's methods.
+//
+// A reference to a registered metaparameter that the app can share with multiple sound events or sources.
 type GlobalMetaParameterAsset struct {
-	objref.Handle
+	Asset
 }
 
 // GlobalMetaParameterAssetFromID adopts an existing Objective-C object as a GlobalMetaParameterAsset
@@ -25,7 +26,8 @@ func GlobalMetaParameterAssetFromID(id objc.ID) *GlobalMetaParameterAsset {
 	if id == 0 {
 		return nil
 	}
-	x := &GlobalMetaParameterAsset{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GlobalMetaParameterAsset{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func globalMetaParameterAssetAdopt(id objc.ID) *GlobalMetaParameterAsset {
 	if id == 0 {
 		return nil
 	}
-	x := &GlobalMetaParameterAsset{Handle: objref.Wrap(id)}
+	x := &GlobalMetaParameterAsset{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GlobalMetaParameterAsset) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GlobalMetaParameterAsset) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GlobalMetaParameterAsset) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGlobalMetaParameterAsset creates a new GlobalMetaParameterAsset.
@@ -70,3 +58,5 @@ type GlobalMetaParameterAssetable interface {
 }
 
 var _ GlobalMetaParameterAssetable = (*GlobalMetaParameterAsset)(nil)
+
+var _ AssetProvider = (*GlobalMetaParameterAsset)(nil)

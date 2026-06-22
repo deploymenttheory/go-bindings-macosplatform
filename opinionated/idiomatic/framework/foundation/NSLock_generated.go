@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that coordinates the operation of multiple threads of execution within the same application.
-//
 // Lock is an idiomatic wrapper over the Objective-C class NSLock.
+//
+// An object that coordinates the operation of multiple threads of execution within the same application.
 type Lock struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LockFromID(id objc.ID) *Lock {
 	if id == 0 {
 		return nil
 	}
-	x := &Lock{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Lock{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func lockAdopt(id objc.ID) *Lock {
 	if id == 0 {
 		return nil
 	}
-	x := &Lock{Handle: objref.Wrap(id)}
+	x := &Lock{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,38 +60,43 @@ func (x *Lock) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Lock) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLock creates a new Lock.
 func NewLock() *Lock {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSLock")), objc.RegisterName("new"))
 	return lockAdopt(_id)
 }
 
-// The name associated with the receiver.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the name associated with the receiver.
 func (x *Lock) WithName(name StringProvider) *Lock {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *Lock) WithScriptingProperties(scriptingProperties obj.Object) *Lock {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Attempts to acquire a lock and immediately returns a Boolean value that indicates whether the attempt was successful.
+// TryLock attempts to acquire a lock and immediately returns a Boolean value that indicates whether the attempt was successful.
 func (x *Lock) TryLock() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("tryLock"))
 	return _r
 }
 
-// Attempts to acquire a lock before a given time and returns a Boolean value indicating whether the attempt was successful.
+// LockBeforeDate attempts to acquire a lock before a given time and returns a Boolean value indicating whether the attempt was successful.
 func (x *Lock) LockBeforeDate(limit *Date) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("lockBeforeDate:"), objref.IDOf(limit))
 	return _r
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *Lock) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -98,6 +105,7 @@ func (x *Lock) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *Lock) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }

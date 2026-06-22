@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The QCComposition class represents a Quartz Composer composition that either:
-//
 // QCComposition is an idiomatic wrapper over the Objective-C class QCComposition.
+//
+// The QCComposition class represents a Quartz Composer composition that either:
 type QCComposition struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func QCCompositionFromID(id objc.ID) *QCComposition {
 	if id == 0 {
 		return nil
 	}
-	x := &QCComposition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &QCComposition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func qCCompositionAdopt(id objc.ID) *QCComposition {
 	if id == 0 {
 		return nil
 	}
-	x := &QCComposition{Handle: objref.Wrap(id)}
+	x := &QCComposition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,37 @@ func (x *QCComposition) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *QCComposition) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewQCComposition creates a new QCComposition.
 func NewQCComposition() *QCComposition {
 	_id := objc.Send[objc.ID](objc.ID(_class("QCComposition")), objc.RegisterName("new"))
 	return qCCompositionAdopt(_id)
 }
 
-// Returns the list of protocols to which the composition conforms.
+// Protocols returns the list of protocols to which the composition conforms.
 func (x *QCComposition) Protocols() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocols"))
 	return obj.Wrap(_r)
 }
 
-// Returns the attributes of the composition.
+// Attributes returns the attributes of the composition.
 func (x *QCComposition) Attributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
-// Returns an array listing the keys that identify the input ports of the root patch of the composition.
+// InputKeys returns an array listing the keys that identify the input ports of the root patch of the composition.
 func (x *QCComposition) InputKeys() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputKeys"))
 	return obj.Wrap(_r)
 }
 
-// Returns an array listing the keys that identify the output ports of the root patch of the composition.
+// OutputKeys returns an array listing the keys that identify the output ports of the root patch of the composition.
 func (x *QCComposition) OutputKeys() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputKeys"))
 	return obj.Wrap(_r)

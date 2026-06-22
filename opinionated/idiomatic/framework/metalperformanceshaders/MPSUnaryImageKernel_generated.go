@@ -6,17 +6,20 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A kernel that consumes one texture and produces one texture.
-//
 // UnaryImageKernel is an idiomatic wrapper over the Objective-C class MPSUnaryImageKernel.
+//
+// UnaryImageKernel is an abstract base — you do not construct it directly. Construct one of [ImageAreaMax], [ImageBox], [ImageCanny], [ImageConversion], [ImageConvolution], [ImageDilate], [ImageEuclideanDistanceTransform], [ImageGaussianBlur], [ImageHistogramEqualization], [ImageHistogramSpecification], [ImageIntegralOfSquares], [ImageIntegral], [ImageLaplacian], [ImageMedian], [ImagePyramid], [ImageReduceUnary], [ImageScale], [ImageSobel], [ImageStatisticsMeanAndVariance], [ImageStatisticsMean], [ImageStatisticsMinAndMax], [ImageThresholdBinaryInverse], [ImageThresholdBinary], [ImageThresholdToZeroInverse], [ImageThresholdToZero], [ImageThresholdTruncate], [ImageTranspose] and pass it where a UnaryImageKernel is accepted.
+//
+// A kernel that consumes one texture and produces one texture.
 type UnaryImageKernel struct {
-	objref.Handle
+	Kernel
 }
 
 // UnaryImageKernelFromID adopts an existing Objective-C object as a UnaryImageKernel
@@ -25,7 +28,8 @@ func UnaryImageKernelFromID(id objc.ID) *UnaryImageKernel {
 	if id == 0 {
 		return nil
 	}
-	x := &UnaryImageKernel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UnaryImageKernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,44 +42,78 @@ func unaryImageKernelAdopt(id objc.ID) *UnaryImageKernel {
 	if id == 0 {
 		return nil
 	}
-	x := &UnaryImageKernel{Handle: objref.Wrap(id)}
+	x := &UnaryImageKernel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *UnaryImageKernel) Description() string {
-	return rt.Description(objref.IDOf(x))
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
+func (x *UnaryImageKernel) WithOffset(offset mpscore.MPSOffset) *UnaryImageKernel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
 }
 
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UnaryImageKernel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (x *UnaryImageKernel) WithClipRect(clipRect metal.MTLRegion) *UnaryImageKernel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
 }
 
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UnaryImageKernel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewUnaryImageKernel creates a new UnaryImageKernel.
-func NewUnaryImageKernel() *UnaryImageKernel {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSUnaryImageKernel")), objc.RegisterName("new"))
-	return unaryImageKernelAdopt(_id)
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *UnaryImageKernel) WithLabel(label string) *UnaryImageKernel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// SourceRegionForDestinationSize determines the region of the source texture that will be read for an encode operation.
+func (x *UnaryImageKernel) SourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion {
+	_r := objc.Send[mpscore.MPSRegion](objref.IDOf(x), objc.RegisterName("sourceRegionForDestinationSize:"), destinationSize)
+	return _r
+}
+
+// Offset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
+func (x *UnaryImageKernel) Offset() mpscore.MPSOffset {
+	_r := objc.Send[mpscore.MPSOffset](objref.IDOf(x), objc.RegisterName("offset"))
+	return _r
+}
+
+// SetOffset wraps the corresponding Objective-C method.
+func (x *UnaryImageKernel) SetOffset(offset mpscore.MPSOffset) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+}
+
+// ClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (x *UnaryImageKernel) ClipRect() metal.MTLRegion {
+	_r := objc.Send[metal.MTLRegion](objref.IDOf(x), objc.RegisterName("clipRect"))
+	return _r
+}
+
+// SetClipRect wraps the corresponding Objective-C method.
+func (x *UnaryImageKernel) SetClipRect(clipRect metal.MTLRegion) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+}
+
 // UnaryImageKernelable is the interface implemented by [UnaryImageKernel], for mocking and DI.
 type UnaryImageKernelable interface {
 	obj.Object
+	WithOffset(offset mpscore.MPSOffset) *UnaryImageKernel
+	WithClipRect(clipRect metal.MTLRegion) *UnaryImageKernel
 	WithLabel(label string) *UnaryImageKernel
+	SourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion
+	Offset() mpscore.MPSOffset
+	SetOffset(offset mpscore.MPSOffset)
+	ClipRect() metal.MTLRegion
+	SetClipRect(clipRect metal.MTLRegion)
 }
 
 var _ UnaryImageKernelable = (*UnaryImageKernel)(nil)
+
+// isUnaryImageKernel marks UnaryImageKernel — and, by embedding promotion, its
+// subclasses — as a member of the UnaryImageKernel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *UnaryImageKernel) isUnaryImageKernel() {}
+
+var _ UnaryImageKernelProvider = (*UnaryImageKernel)(nil)
+
+var _ KernelProvider = (*UnaryImageKernel)(nil)

@@ -12,64 +12,70 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns a Boolean value indicating whether location services are enabled on the device.
+// LocationServicesEnabled returns a Boolean value indicating whether location services are enabled on the device.
 func LocationServicesEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("CLLocationManager")), objc.RegisterName("locationServicesEnabled"))
 	return _r
 }
 
-// Returns a Boolean value indicating whether the location manager is able to generate heading-related events.
+// HeadingAvailable returns a Boolean value indicating whether the location manager is able to generate heading-related events.
 func HeadingAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("CLLocationManager")), objc.RegisterName("headingAvailable"))
 	return _r
 }
 
-// Returns a Boolean value indicating whether the significant-change location service is available on the device.
+// SignificantLocationChangeMonitoringAvailable returns a Boolean value indicating whether the significant-change location service is available on the device.
 func SignificantLocationChangeMonitoringAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("CLLocationManager")), objc.RegisterName("significantLocationChangeMonitoringAvailable"))
 	return _r
 }
 
+// RegionMonitoringAvailable wraps the corresponding Objective-C method.
 func RegionMonitoringAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("CLLocationManager")), objc.RegisterName("regionMonitoringAvailable"))
 	return _r
 }
 
+// RegionMonitoringEnabled wraps the corresponding Objective-C method.
 func RegionMonitoringEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("CLLocationManager")), objc.RegisterName("regionMonitoringEnabled"))
 	return _r
 }
 
-// Returns a Boolean value indicating whether the device supports ranging of beacons that use the iBeacon protocol.
+// IsRangingAvailable returns a Boolean value indicating whether the device supports ranging of beacons that use the iBeacon protocol.
 func IsRangingAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("CLLocationManager")), objc.RegisterName("isRangingAvailable"))
 	return _r
 }
 
+// CLLocationManagerAuthorizationStatus wraps the corresponding Objective-C method.
 func CLLocationManagerAuthorizationStatus() AuthorizationStatus {
 	_r := objc.Send[AuthorizationStatus](objc.ID(_class("CLLocationManager")), objc.RegisterName("authorizationStatus"))
 	return _r
 }
 
+// DeferredLocationUpdatesAvailable wraps the corresponding Objective-C method.
 func DeferredLocationUpdatesAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("CLLocationManager")), objc.RegisterName("deferredLocationUpdatesAvailable"))
 	return _r
 }
 
-// Creates a location updater on the queue you specify.
+// LiveUpdaterWithQueueHandler creates a location updater on the queue you specify.
 func LiveUpdaterWithQueueHandler(queue obj.Object, handler func(obj.Object)) *LocationUpdater {
 	_r := objc.Send[objc.ID](objc.ID(_class("CLLocationUpdater")), objc.RegisterName("liveUpdaterWithQueue:handler:"), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { handler(obj.Wrap(_b0)) }))
 	return LocationUpdaterFromID(_r)
 }
 
-// Creates a location updater with the configuration and queue that you specify.
+// LiveUpdaterWithConfigurationQueueHandler creates a location updater with the configuration and queue that you specify.
 func LiveUpdaterWithConfigurationQueueHandler(configuration LiveUpdateConfiguration, queue obj.Object, handler func(obj.Object)) *LocationUpdater {
 	_r := objc.Send[objc.ID](objc.ID(_class("CLLocationUpdater")), objc.RegisterName("liveUpdaterWithConfiguration:queue:handler:"), configuration, objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { handler(obj.Wrap(_b0)) }))
 	return LocationUpdaterFromID(_r)
 }
 
+// RequestMonitorWithConfigurationCompletion wraps the corresponding Objective-C method.
+//
 // RequestMonitorWithConfigurationCompletion blocks until the operation completes or ctx is cancelled.
-func RequestMonitorWithConfigurationCompletion(ctx context.Context, config *MonitorConfiguration) (*Monitor, error) {
+func RequestMonitorWithConfigurationCompletion(ctx context.Context, config *MonitorConfiguration) (result *Monitor, err error) {
 	type _result struct {
 		val *Monitor
 		err error
@@ -90,7 +96,7 @@ func RequestMonitorWithConfigurationCompletion(ctx context.Context, config *Moni
 	}
 }
 
-// Creates a location monitor instance with the name, dispatch queue, and event handler you specify.
+// ConfigWithMonitorNameQueueEventHandler creates a location monitor instance with the name, dispatch queue, and event handler you specify.
 func ConfigWithMonitorNameQueueEventHandler(name string, queue obj.Object, eventHandler func(obj.Object, obj.Object)) *MonitorConfiguration {
 	_r := objc.Send[objc.ID](objc.ID(_class("CLMonitorConfiguration")), objc.RegisterName("configWithMonitorName:queue:eventHandler:"), purego.NSString(name), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { eventHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return MonitorConfigurationFromID(_r)

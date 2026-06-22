@@ -23,7 +23,8 @@ func MTRProductIdentityFromID(id objc.ID) *MTRProductIdentity {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRProductIdentity{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRProductIdentity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRProductIdentityAdopt(id objc.ID) *MTRProductIdentity {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRProductIdentity{Handle: objref.Wrap(id)}
+	x := &MTRProductIdentity{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *MTRProductIdentity) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRProductIdentity) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRProductIdentityWithVendorIDProductID creates a new MTRProductIdentity.
 func NewMTRProductIdentityWithVendorIDProductID(vendorID obj.Object, productID obj.Object) *MTRProductIdentity {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRProductIdentity")), objc.RegisterName("alloc"))
@@ -63,11 +71,13 @@ func NewMTRProductIdentityWithVendorIDProductID(vendorID obj.Object, productID o
 	return mTRProductIdentityAdopt(_id)
 }
 
+// VendorID wraps the corresponding Objective-C method.
 func (x *MTRProductIdentity) VendorID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorID"))
 	return obj.Wrap(_r)
 }
 
+// ProductID wraps the corresponding Objective-C method.
 func (x *MTRProductIdentity) ProductID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productID"))
 	return obj.Wrap(_r)

@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that represents the Extensible Firmware Interface (EFI) variable store that contains NVRAM variables the EFI exposes.
-//
 // EFIVariableStore is an idiomatic wrapper over the Objective-C class VZEFIVariableStore.
+//
+// An object that represents the Extensible Firmware Interface (EFI) variable store that contains NVRAM variables the EFI exposes.
 type EFIVariableStore struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func EFIVariableStoreFromID(id objc.ID) *EFIVariableStore {
 	if id == 0 {
 		return nil
 	}
-	x := &EFIVariableStore{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EFIVariableStore{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func eFIVariableStoreAdopt(id objc.ID) *EFIVariableStore {
 	if id == 0 {
 		return nil
 	}
-	x := &EFIVariableStore{Handle: objref.Wrap(id)}
+	x := &EFIVariableStore{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,19 +62,21 @@ func (x *EFIVariableStore) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize the variable store from the URL of an existing file.
-//
-// NewEFIVariableStoreWithURL creates a new EFIVariableStore.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *EFIVariableStore) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewEFIVariableStoreWithURL initialize the variable store from the URL of an existing file.
 func NewEFIVariableStoreWithURL(uRL string) *EFIVariableStore {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZEFIVariableStore")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(uRL))
 	return eFIVariableStoreAdopt(_id)
 }
 
-// Creates a new EFI variable store at specified the URL on the filesystem, initialization options, and error-return variable.
-//
-// NewEFIVariableStoreCreatingVariableStoreAtURLOptionsError creates a new EFIVariableStore.
-func NewEFIVariableStoreCreatingVariableStoreAtURLOptionsError(uRL string, options EFIVariableStoreInitializationOptions) (*EFIVariableStore, error) {
+// NewEFIVariableStoreCreatingVariableStoreAtURLOptionsError creates a new EFI variable store at specified the URL on the filesystem, initialization options, and error-return variable.
+func NewEFIVariableStoreCreatingVariableStoreAtURLOptionsError(uRL string, options EFIVariableStoreInitializationOptions) (result *EFIVariableStore, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZEFIVariableStore")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCreatingVariableStoreAtURL:options:error:"), rt.FileURL(uRL), options, unsafe.Pointer(&_nsErr))
@@ -82,6 +86,7 @@ func NewEFIVariableStoreCreatingVariableStoreAtURLOptionsError(uRL string, optio
 	return eFIVariableStoreAdopt(_id), nil
 }
 
+// URL wraps the corresponding Objective-C method.
 func (x *EFIVariableStore) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)

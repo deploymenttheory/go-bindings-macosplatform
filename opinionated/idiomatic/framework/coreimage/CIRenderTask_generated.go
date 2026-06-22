@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// A single render task.
-//
 // RenderTask is an idiomatic wrapper over the Objective-C class CIRenderTask.
+//
+// A single render task.
 type RenderTask struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func RenderTaskFromID(id objc.ID) *RenderTask {
 	if id == 0 {
 		return nil
 	}
-	x := &RenderTask{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RenderTask{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func renderTaskAdopt(id objc.ID) *RenderTask {
 	if id == 0 {
 		return nil
 	}
-	x := &RenderTask{Handle: objref.Wrap(id)}
+	x := &RenderTask{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,14 +62,20 @@ func (x *RenderTask) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RenderTask) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRenderTask creates a new RenderTask.
 func NewRenderTask() *RenderTask {
 	_id := objc.Send[objc.ID](objc.ID(_class("CIRenderTask")), objc.RegisterName("new"))
 	return renderTaskAdopt(_id)
 }
 
-// Waits until the CIRenderTask finishes and returns.
-func (x *RenderTask) WaitUntilCompletedAndReturnError() (*RenderInfo, error) {
+// WaitUntilCompletedAndReturnError waits until the CIRenderTask finishes and returns.
+func (x *RenderTask) WaitUntilCompletedAndReturnError() (result *RenderInfo, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("waitUntilCompletedAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -79,7 +87,7 @@ func (x *RenderTask) WaitUntilCompletedAndReturnError() (*RenderInfo, error) {
 // RenderTaskable is the interface implemented by [RenderTask], for mocking and DI.
 type RenderTaskable interface {
 	obj.Object
-	WaitUntilCompletedAndReturnError() (*RenderInfo, error)
+	WaitUntilCompletedAndReturnError() (result *RenderInfo, err error)
 }
 
 var _ RenderTaskable = (*RenderTask)(nil)

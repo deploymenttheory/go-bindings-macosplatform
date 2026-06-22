@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// A machine learning collection type that stores numeric values in an array with multiple dimensions.
-//
 // MultiArray is an idiomatic wrapper over the Objective-C class MLMultiArray.
+//
+// A machine learning collection type that stores numeric values in an array with multiple dimensions.
 type MultiArray struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func MultiArrayFromID(id objc.ID) *MultiArray {
 	if id == 0 {
 		return nil
 	}
-	x := &MultiArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MultiArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func multiArrayAdopt(id objc.ID) *MultiArray {
 	if id == 0 {
 		return nil
 	}
-	x := &MultiArray{Handle: objref.Wrap(id)}
+	x := &MultiArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,10 +62,14 @@ func (x *MultiArray) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a multidimensional array with a shape and type.
-//
-// NewMultiArrayWithShapeDataTypeError creates a new MultiArray.
-func NewMultiArrayWithShapeDataTypeError(shape []obj.Object, dataType MultiArrayDataType) (*MultiArray, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MultiArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMultiArrayWithShapeDataTypeError creates a multidimensional array with a shape and type.
+func NewMultiArrayWithShapeDataTypeError(shape []obj.Object, dataType MultiArrayDataType) (result *MultiArray, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MLMultiArray")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShape:dataType:error:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), dataType, unsafe.Pointer(&_nsErr))
@@ -73,22 +79,20 @@ func NewMultiArrayWithShapeDataTypeError(shape []obj.Object, dataType MultiArray
 	return multiArrayAdopt(_id), nil
 }
 
-// Creates the object with specified strides.
-//
-// NewMultiArrayWithShapeDataTypeStrides creates a new MultiArray.
+// NewMultiArrayWithShapeDataTypeStrides creates the object with specified strides.
 func NewMultiArrayWithShapeDataTypeStrides(shape []obj.Object, dataType MultiArrayDataType, strides []obj.Object) *MultiArray {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MLMultiArray")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShape:dataType:strides:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), dataType, purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return multiArrayAdopt(_id)
 }
 
-// Scalar's data type.
+// DataType scalar's data type.
 func (x *MultiArray) DataType() MultiArrayDataType {
 	_r := objc.Send[MultiArrayDataType](objref.IDOf(x), objc.RegisterName("dataType"))
 	return _r
 }
 
-// Shape of the multi-dimensional space that this instance represents.
+// Shape shape of the multi-dimensional space that this instance represents.
 //
 // Shape returns the collection as a Go slice.
 func (x *MultiArray) Shape() []obj.Object {
@@ -96,7 +100,7 @@ func (x *MultiArray) Shape() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Strides. It defines the offset of the scalar of a given coordinate index in the storage, which is: ``` scalarOffset = sum_d index[d]*strides[d] ```
+// Strides strides. It defines the offset of the scalar of a given coordinate index in the storage, which is: ``` scalarOffset = sum_d index[d]*strides[d] ```
 //
 // Strides returns the collection as a Go slice.
 func (x *MultiArray) Strides() []obj.Object {
@@ -104,36 +108,36 @@ func (x *MultiArray) Strides() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Count of total number of addressable scalars. The value is same as `product_d shape[d]`.
+// Count count of total number of addressable scalars. The value is same as `product_d shape[d]`.
 func (x *MultiArray) Count() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
 	return _r
 }
 
-// Get a value by its linear index (assumes C-style index ordering)
+// ObjectAtIndexedSubscript get a value by its linear index (assumes C-style index ordering)
 func (x *MultiArray) ObjectAtIndexedSubscript(idx int) obj.Object {
 	errkit.CheckIndex(idx, x.Count())
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), idx)
 	return obj.Wrap(_r)
 }
 
-// Get a value by its multidimensional index (NSArray<NSNumber *>)
+// ObjectForKeyedSubscript get a value by its multidimensional index (NSArray<NSNumber *>)
 func (x *MultiArray) ObjectForKeyedSubscript(key []obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKeyedSubscript:"), purego.SliceToNSArray(key, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
-// Assigns a number to the multiarray’s element at the location that the linear offset defines.
+// SetObjectAtIndexedSubscript assigns a number to the multiarray’s element at the location that the linear offset defines.
 func (x *MultiArray) SetObjectAtIndexedSubscript(obj_ obj.Object, idx int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(obj_), idx)
 }
 
-// Assigns a number to the multiarray’s element at the location that the number array defines.
+// SetObjectForKeyedSubscript assigns a number to the multiarray’s element at the location that the number array defines.
 func (x *MultiArray) SetObjectForKeyedSubscript(obj_ obj.Object, key []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:forKeyedSubscript:"), objref.IDOf(obj_), purego.SliceToNSArray(key, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Transfer the contents to the destination multi-array.
+// TransferToMultiArray transfer the contents to the destination multi-array.
 func (x *MultiArray) TransferToMultiArray(destinationMultiArray *MultiArray) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transferToMultiArray:"), objref.IDOf(destinationMultiArray))
 }

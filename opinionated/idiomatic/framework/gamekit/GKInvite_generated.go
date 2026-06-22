@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An invitation to join a match sent to the local player from another player.
-//
 // Invite is an idiomatic wrapper over the Objective-C class GKInvite.
+//
+// An invitation to join a match sent to the local player from another player.
 type Invite struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func InviteFromID(id objc.ID) *Invite {
 	if id == 0 {
 		return nil
 	}
-	x := &Invite{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Invite{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func inviteAdopt(id objc.ID) *Invite {
 	if id == 0 {
 		return nil
 	}
-	x := &Invite{Handle: objref.Wrap(id)}
+	x := &Invite{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,35 +60,43 @@ func (x *Invite) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Invite) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewInvite creates a new Invite.
 func NewInvite() *Invite {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKInvite")), objc.RegisterName("new"))
 	return inviteAdopt(_id)
 }
 
+// Sender wraps the corresponding Objective-C method.
 func (x *Invite) Sender() *Player {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sender"))
 	return PlayerFromID(_r)
 }
 
+// IsHosted wraps the corresponding Objective-C method.
 func (x *Invite) IsHosted() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHosted"))
 	return _r
 }
 
-// player group from inviter's match request
+// PlayerGroup player group from inviter's match request
 func (x *Invite) PlayerGroup() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("playerGroup"))
 	return _r
 }
 
-// player attributes from inviter's match request
+// PlayerAttributes player attributes from inviter's match request
 func (x *Invite) PlayerAttributes() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("playerAttributes"))
 	return _r
 }
 
-// * This property is obsolete. **
+// Inviter * This property is obsolete. **
 func (x *Invite) Inviter() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inviter"))
 	if _r == 0 {

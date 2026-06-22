@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Your response to an intent object.
-//
 // IntentResponse is an idiomatic wrapper over the Objective-C class INIntentResponse.
+//
+// IntentResponse is an abstract base — you do not construct it directly. Construct one of [AnswerCallIntentResponse], [EditMessageIntentResponse], [GetReservationDetailsIntentResponse], [HangUpCallIntentResponse], [SendMessageIntentResponse], [ShareFocusStatusIntentResponse], [UnsendMessagesIntentResponse] and pass it where a IntentResponse is accepted.
+//
+// Your response to an intent object.
 type IntentResponse struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func IntentResponseFromID(id objc.ID) *IntentResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &IntentResponse{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IntentResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func intentResponseAdopt(id objc.ID) *IntentResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &IntentResponse{Handle: objref.Wrap(id)}
+	x := &IntentResponse{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +62,25 @@ func (x *IntentResponse) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewIntentResponse creates a new IntentResponse.
-func NewIntentResponse() *IntentResponse {
-	_id := objc.Send[objc.ID](objc.ID(_class("INIntentResponse")), objc.RegisterName("new"))
-	return intentResponseAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IntentResponse) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The user activity object to use when launching the app.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity the user activity object to use when launching the app.
 func (x *IntentResponse) WithUserActivity(userActivity obj.Object) *IntentResponse {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
+// UserActivity wraps the corresponding Objective-C method.
 func (x *IntentResponse) UserActivity() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userActivity"))
 	return obj.Wrap(_r)
 }
 
+// SetUserActivity wraps the corresponding Objective-C method.
 func (x *IntentResponse) SetUserActivity(userActivity obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 }
@@ -90,3 +94,10 @@ type IntentResponseable interface {
 }
 
 var _ IntentResponseable = (*IntentResponse)(nil)
+
+// isIntentResponse marks IntentResponse — and, by embedding promotion, its
+// subclasses — as a member of the IntentResponse hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *IntentResponse) isIntentResponse() {}
+
+var _ IntentResponseProvider = (*IntentResponse)(nil)

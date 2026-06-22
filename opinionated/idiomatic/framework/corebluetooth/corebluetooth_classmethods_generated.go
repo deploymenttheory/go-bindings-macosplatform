@@ -11,37 +11,37 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The current authorization of the manager, initially set to <code>CBManagerAuthorizationNotDetermined</code>. You can check this in your implementation of required delegate method {
+// AuthorizationClass the current authorization of the manager, initially set to <code>CBManagerAuthorizationNotDetermined</code>. You can check this in your implementation of required delegate method {
 func AuthorizationClass() ManagerAuthorization {
 	_r := objc.Send[ManagerAuthorization](objc.ID(_class("CBManager")), objc.RegisterName("authorization"))
 	return _r
 }
 
-// Returns the app’s authorization status for sharing data while in the background.
+// AuthorizationStatusClass returns the app’s authorization status for sharing data while in the background.
 func AuthorizationStatusClass() PeripheralManagerAuthorizationStatus {
 	_r := objc.Send[PeripheralManagerAuthorizationStatus](objc.ID(_class("CBPeripheralManager")), objc.RegisterName("authorizationStatus"))
 	return _r
 }
 
-// Creates a Core Bluetooth UUID object from a 16-, 32-, or 128-bit UUID string.
+// UUIDWithString creates a Core Bluetooth UUID object from a 16-, 32-, or 128-bit UUID string.
 func UUIDWithString(theString string) *UUID {
 	_r := objc.Send[objc.ID](objc.ID(_class("CBUUID")), objc.RegisterName("UUIDWithString:"), purego.NSString(theString))
 	return UUIDFromID(_r)
 }
 
-// Creates a Core Bluetooth UUID object from a 16-, 32-, or 128-bit UUID data container.
+// UUIDWithData creates a Core Bluetooth UUID object from a 16-, 32-, or 128-bit UUID data container.
 func UUIDWithData(theData obj.Object) *UUID {
 	_r := objc.Send[objc.ID](objc.ID(_class("CBUUID")), objc.RegisterName("UUIDWithData:"), objref.IDOf(theData))
 	return UUIDFromID(_r)
 }
 
-// Creates a Core Bluetooth UUID object from a Core Foundation UUID object.
+// UUIDWithCFUUID creates a Core Bluetooth UUID object from a Core Foundation UUID object.
 func UUIDWithCFUUID(theUUID obj.Object) *UUID {
 	_r := objc.Send[objc.ID](objc.ID(_class("CBUUID")), objc.RegisterName("UUIDWithCFUUID:"), objref.IDOf(theUUID))
 	return UUIDFromID(_r)
 }
 
-// Creates a Core Bluetooth UUID object from a Foundation UUID object.
+// UUIDWithNSUUID creates a Core Bluetooth UUID object from a Foundation UUID object.
 func UUIDWithNSUUID(theUUID obj.Object) *UUID {
 	_r := objc.Send[objc.ID](objc.ID(_class("CBUUID")), objc.RegisterName("UUIDWithNSUUID:"), objref.IDOf(theUUID))
 	return UUIDFromID(_r)

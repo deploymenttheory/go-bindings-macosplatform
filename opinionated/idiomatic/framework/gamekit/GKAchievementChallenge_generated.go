@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type of challenge where a player must earn another player’s achievement.
-//
 // AchievementChallenge is an idiomatic wrapper over the Objective-C class GKAchievementChallenge.
+//
+// It embeds [Challenge], promoting that type's methods.
+//
+// A type of challenge where a player must earn another player’s achievement.
 type AchievementChallenge struct {
-	objref.Handle
+	Challenge
 }
 
 // AchievementChallengeFromID adopts an existing Objective-C object as a AchievementChallenge
@@ -25,7 +26,8 @@ func AchievementChallengeFromID(id objc.ID) *AchievementChallenge {
 	if id == 0 {
 		return nil
 	}
-	x := &AchievementChallenge{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AchievementChallenge{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func achievementChallengeAdopt(id objc.ID) *AchievementChallenge {
 	if id == 0 {
 		return nil
 	}
-	x := &AchievementChallenge{Handle: objref.Wrap(id)}
+	x := &AchievementChallenge{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AchievementChallenge) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AchievementChallenge) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AchievementChallenge) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAchievementChallenge creates a new AchievementChallenge.
@@ -64,6 +52,7 @@ func NewAchievementChallenge() *AchievementChallenge {
 	return achievementChallengeAdopt(_id)
 }
 
+// Achievement wraps the corresponding Objective-C method.
 func (x *AchievementChallenge) Achievement() *Achievement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("achievement"))
 	return AchievementFromID(_r)
@@ -76,3 +65,5 @@ type AchievementChallengeable interface {
 }
 
 var _ AchievementChallengeable = (*AchievementChallenge)(nil)
+
+var _ ChallengeProvider = (*AchievementChallenge)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A dynamic plain-text Unicode string object.
-//
 // MutableString is an idiomatic wrapper over the Objective-C class NSMutableString.
+//
+// It embeds [String], promoting that type's methods.
+//
+// A dynamic plain-text Unicode string object.
 type MutableString struct {
-	objref.Handle
+	String
 }
 
 // MutableStringFromID adopts an existing Objective-C object as a MutableString
@@ -25,7 +26,8 @@ func MutableStringFromID(id objc.ID) *MutableString {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableString{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableString{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,57 +40,41 @@ func mutableStringAdopt(id objc.ID) *MutableString {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableString{Handle: objref.Wrap(id)}
+	x := &MutableString{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MutableString) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableString) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableString) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Returns an NSMutableString object initialized with initial storage for a given number of characters,
-//
-// NewMutableStringWithCapacity creates a new MutableString.
+// NewMutableStringWithCapacity returns an NSMutableString object initialized with initial storage for a given number of characters,
 func NewMutableStringWithCapacity(capacity int) *MutableString {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableString")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCapacity:"), capacity)
 	return mutableStringAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *MutableString) WithScriptingProperties(scriptingProperties obj.Object) *MutableString {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Inserts into the receiver the characters of a given string at a given location.
+// InsertStringAtIndex inserts into the receiver the characters of a given string at a given location.
 func (x *MutableString) InsertStringAtIndex(aString string, loc int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertString:atIndex:"), purego.NSString(aString), loc)
 }
 
-// Adds to the end of the receiver the characters of a given string.
+// AppendString adds to the end of the receiver the characters of a given string.
 func (x *MutableString) AppendString(aString string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendString:"), purego.NSString(aString))
 }
 
-// Adds a constructed string to the receiver.
+// AppendFormat adds a constructed string to the receiver.
 func (x *MutableString) AppendFormat(format string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendFormat:"), purego.NSString(format))
 }
 
-// Replaces the characters of the receiver with those in a given string.
+// SetString replaces the characters of the receiver with those in a given string.
 func (x *MutableString) SetString(aString string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:"), purego.NSString(aString))
 }
@@ -104,3 +90,5 @@ type MutableStringable interface {
 }
 
 var _ MutableStringable = (*MutableString)(nil)
+
+var _ StringProvider = (*MutableString)(nil)

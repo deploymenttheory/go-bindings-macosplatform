@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class representing the structure of a NeuralNetwork model.
-//
 // ModelStructureNeuralNetwork is an idiomatic wrapper over the Objective-C class MLModelStructureNeuralNetwork.
+//
+// A class representing the structure of a NeuralNetwork model.
 type ModelStructureNeuralNetwork struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ModelStructureNeuralNetworkFromID(id objc.ID) *ModelStructureNeuralNetwork 
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructureNeuralNetwork{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ModelStructureNeuralNetwork{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func modelStructureNeuralNetworkAdopt(id objc.ID) *ModelStructureNeuralNetwork {
 	if id == 0 {
 		return nil
 	}
-	x := &ModelStructureNeuralNetwork{Handle: objref.Wrap(id)}
+	x := &ModelStructureNeuralNetwork{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,20 @@ func (x *ModelStructureNeuralNetwork) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ModelStructureNeuralNetwork) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewModelStructureNeuralNetwork creates a new ModelStructureNeuralNetwork.
 func NewModelStructureNeuralNetwork() *ModelStructureNeuralNetwork {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLModelStructureNeuralNetwork")), objc.RegisterName("new"))
 	return modelStructureNeuralNetworkAdopt(_id)
 }
 
+// Layers wraps the corresponding Objective-C method.
+//
 // Layers returns the collection as a Go slice.
 func (x *ModelStructureNeuralNetwork) Layers() []*ModelStructureNeuralNetworkLayer {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layers"))

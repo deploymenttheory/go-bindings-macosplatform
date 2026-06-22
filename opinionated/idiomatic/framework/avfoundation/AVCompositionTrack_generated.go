@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A track in a composition that presents media of a uniform type.
-//
 // CompositionTrack is an idiomatic wrapper over the Objective-C class AVCompositionTrack.
+//
+// CompositionTrack is an abstract base — you do not construct it directly. Construct one of [MutableCompositionTrack] and pass it where a CompositionTrack is accepted.
+//
+// A track in a composition that presents media of a uniform type.
 type CompositionTrack struct {
-	objref.Handle
+	AssetTrack
 }
 
 // CompositionTrackFromID adopts an existing Objective-C object as a CompositionTrack
@@ -25,7 +26,8 @@ func CompositionTrackFromID(id objc.ID) *CompositionTrack {
 	if id == 0 {
 		return nil
 	}
-	x := &CompositionTrack{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CompositionTrack{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,33 +40,13 @@ func compositionTrackAdopt(id objc.ID) *CompositionTrack {
 	if id == 0 {
 		return nil
 	}
-	x := &CompositionTrack{Handle: objref.Wrap(id)}
+	x := &CompositionTrack{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CompositionTrack) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CompositionTrack) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CompositionTrack) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewCompositionTrack creates a new CompositionTrack.
-func NewCompositionTrack() *CompositionTrack {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVCompositionTrack")), objc.RegisterName("new"))
-	return compositionTrackAdopt(_id)
-}
-
-// An array of AVCompositionTrackFormatDescriptionReplacement objects indicating original format descriptions and their replacements. The value of this property is an array of AVCompositionTrackFormatDescriptionReplacement objects, each of which specifies an original format description together with its replacement format description (as specified by a previous call to -replaceFormatDescription:withFormatDescription:). Only format descriptions that are to be replaced will occur as the originalFormatDescription elements in the AVCompositionTrackFormatDescriptionReplacement objects in this array.
+// FormatDescriptionReplacements an array of AVCompositionTrackFormatDescriptionReplacement objects indicating original format descriptions and their replacements. The value of this property is an array of AVCompositionTrackFormatDescriptionReplacement objects, each of which specifies an original format description together with its replacement format description (as specified by a previous call to -replaceFormatDescription:withFormatDescription:). Only format descriptions that are to be replaced will occur as the originalFormatDescription elements in the AVCompositionTrackFormatDescriptionReplacement objects in this array.
 //
 // FormatDescriptionReplacements returns the collection as a Go slice.
 func (x *CompositionTrack) FormatDescriptionReplacements() []*CompositionTrackFormatDescriptionReplacement {
@@ -81,3 +63,12 @@ type CompositionTrackable interface {
 }
 
 var _ CompositionTrackable = (*CompositionTrack)(nil)
+
+// isCompositionTrack marks CompositionTrack — and, by embedding promotion, its
+// subclasses — as a member of the CompositionTrack hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CompositionTrack) isCompositionTrack() {}
+
+var _ CompositionTrackProvider = (*CompositionTrack)(nil)
+
+var _ AssetTrackProvider = (*CompositionTrack)(nil)

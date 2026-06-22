@@ -23,7 +23,8 @@ func MTRCommissionableBrowserResultFromID(id objc.ID) *MTRCommissionableBrowserR
 	if id == 0 {
 		return nil
 	}
-	x := &MTRCommissionableBrowserResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRCommissionableBrowserResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRCommissionableBrowserResultAdopt(id objc.ID) *MTRCommissionableBrowserRe
 	if id == 0 {
 		return nil
 	}
-	x := &MTRCommissionableBrowserResult{Handle: objref.Wrap(id)}
+	x := &MTRCommissionableBrowserResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,13 +58,19 @@ func (x *MTRCommissionableBrowserResult) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRCommissionableBrowserResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRCommissionableBrowserResult creates a new MTRCommissionableBrowserResult.
 func NewMTRCommissionableBrowserResult() *MTRCommissionableBrowserResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRCommissionableBrowserResult")), objc.RegisterName("new"))
 	return mTRCommissionableBrowserResultAdopt(_id)
 }
 
-// For a node advertising over DNS-SD, the instance name is a dynamic, pseudo-randomly selected, 64-bit temporary unique identifier, expressed as a fixed-length sixteen-character hexadecimal string, encoded as ASCII text using capital letters. For a node advertising over Bluetooth Low Energy, the instance name is always "BLE".
+// InstanceName for a node advertising over DNS-SD, the instance name is a dynamic, pseudo-randomly selected, 64-bit temporary unique identifier, expressed as a fixed-length sixteen-character hexadecimal string, encoded as ASCII text using capital letters. For a node advertising over Bluetooth Low Energy, the instance name is always "BLE".
 func (x *MTRCommissionableBrowserResult) InstanceName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instanceName"))
 	if _r == 0 {
@@ -71,25 +79,25 @@ func (x *MTRCommissionableBrowserResult) InstanceName() string {
 	return purego.GoString(_r)
 }
 
-// A 16-bit unsigned value identifying the device manufacturer.
+// VendorID a 16-bit unsigned value identifying the device manufacturer.
 func (x *MTRCommissionableBrowserResult) VendorID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorID"))
 	return obj.Wrap(_r)
 }
 
-// A 16-bit unsigned value identifying the product.
+// ProductID a 16-bit unsigned value identifying the product.
 func (x *MTRCommissionableBrowserResult) ProductID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productID"))
 	return obj.Wrap(_r)
 }
 
-// A 12-bit value matching the field of the same name in MTRSetupPayload.
+// Discriminator a 12-bit value matching the field of the same name in MTRSetupPayload.
 func (x *MTRCommissionableBrowserResult) Discriminator() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discriminator"))
 	return obj.Wrap(_r)
 }
 
-// A boolean indicating whether the device has a commissioning window open.
+// CommissioningMode a boolean indicating whether the device has a commissioning window open.
 func (x *MTRCommissionableBrowserResult) CommissioningMode() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("commissioningMode"))
 	return _r

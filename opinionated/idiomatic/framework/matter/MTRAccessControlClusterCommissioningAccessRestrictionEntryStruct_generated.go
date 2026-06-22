@@ -23,7 +23,8 @@ func MTRAccessControlClusterCommissioningAccessRestrictionEntryStructFromID(id o
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRAccessControlClusterCommissioningAccessRestrictionEntryStructAdopt(id ob
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct{Handle: objref.Wrap(id)}
+	x := &MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,47 +58,59 @@ func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) IsKin
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRAccessControlClusterCommissioningAccessRestrictionEntryStruct creates a new MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct.
 func NewMTRAccessControlClusterCommissioningAccessRestrictionEntryStruct() *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct")), objc.RegisterName("new"))
 	return mTRAccessControlClusterCommissioningAccessRestrictionEntryStructAdopt(_id)
 }
 
-// WithEndpoint sets endpoint and returns the receiver so calls can be chained.
+// WithEndpoint sets the property and returns the receiver so calls can be chained.
 func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) WithEndpoint(endpoint obj.Object) *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return x
 }
 
-// WithCluster sets cluster and returns the receiver so calls can be chained.
+// WithCluster sets the property and returns the receiver so calls can be chained.
 func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) WithCluster(cluster obj.Object) *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
 	return x
 }
 
+// Endpoint wraps the corresponding Objective-C method.
 func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Endpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)
 }
 
+// SetEndpoint wraps the corresponding Objective-C method.
 func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) SetEndpoint(endpoint obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 }
 
+// Cluster wraps the corresponding Objective-C method.
 func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Cluster() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cluster"))
 	return obj.Wrap(_r)
 }
 
+// SetCluster wraps the corresponding Objective-C method.
 func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) SetCluster(cluster obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
 }
 
+// Restrictions wraps the corresponding Objective-C method.
 func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Restrictions() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restrictions"))
 	return obj.Wrap(_r)
 }
 
+// SetRestrictions wraps the corresponding Objective-C method.
 func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) SetRestrictions(restrictions obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRestrictions:"), objref.IDOf(restrictions))
 }

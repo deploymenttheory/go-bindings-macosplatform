@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A distance over which the framework fades out sound.
-//
 // DistanceModelFadeOutParameters is an idiomatic wrapper over the Objective-C class PHASEDistanceModelFadeOutParameters.
+//
+// A distance over which the framework fades out sound.
 type DistanceModelFadeOutParameters struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func DistanceModelFadeOutParametersFromID(id objc.ID) *DistanceModelFadeOutParam
 	if id == 0 {
 		return nil
 	}
-	x := &DistanceModelFadeOutParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DistanceModelFadeOutParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func distanceModelFadeOutParametersAdopt(id objc.ID) *DistanceModelFadeOutParame
 	if id == 0 {
 		return nil
 	}
-	x := &DistanceModelFadeOutParameters{Handle: objref.Wrap(id)}
+	x := &DistanceModelFadeOutParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *DistanceModelFadeOutParameters) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a distance beyond which sound sources stop playing.
-//
-// NewDistanceModelFadeOutParametersWithCullDistance creates a new DistanceModelFadeOutParameters.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DistanceModelFadeOutParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDistanceModelFadeOutParametersWithCullDistance creates a distance beyond which sound sources stop playing.
 func NewDistanceModelFadeOutParametersWithCullDistance(cullDistance float64) *DistanceModelFadeOutParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEDistanceModelFadeOutParameters")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCullDistance:"), cullDistance)
 	return distanceModelFadeOutParametersAdopt(_id)
 }
 
+// CullDistance wraps the corresponding Objective-C method.
 func (x *DistanceModelFadeOutParameters) CullDistance() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("cullDistance"))
 	return _r

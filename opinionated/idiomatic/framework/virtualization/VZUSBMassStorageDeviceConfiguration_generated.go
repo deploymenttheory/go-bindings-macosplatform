@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The configuration object that represents a USB Mass storage device.
-//
 // USBMassStorageDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZUSBMassStorageDeviceConfiguration.
+//
+// It embeds [StorageDeviceConfiguration], promoting that type's methods.
+//
+// The configuration object that represents a USB Mass storage device.
 type USBMassStorageDeviceConfiguration struct {
-	objref.Handle
+	StorageDeviceConfiguration
 }
 
 // USBMassStorageDeviceConfigurationFromID adopts an existing Objective-C object as a USBMassStorageDeviceConfiguration
@@ -25,7 +26,8 @@ func USBMassStorageDeviceConfigurationFromID(id objc.ID) *USBMassStorageDeviceCo
 	if id == 0 {
 		return nil
 	}
-	x := &USBMassStorageDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &USBMassStorageDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func uSBMassStorageDeviceConfigurationAdopt(id objc.ID) *USBMassStorageDeviceCon
 	if id == 0 {
 		return nil
 	}
-	x := &USBMassStorageDeviceConfiguration{Handle: objref.Wrap(id)}
+	x := &USBMassStorageDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *USBMassStorageDeviceConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *USBMassStorageDeviceConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *USBMassStorageDeviceConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a new storage device configuration with the specified attachment.
-//
-// NewUSBMassStorageDeviceConfigurationWithAttachment creates a new USBMassStorageDeviceConfiguration.
+// NewUSBMassStorageDeviceConfigurationWithAttachment creates a new storage device configuration with the specified attachment.
 func NewUSBMassStorageDeviceConfigurationWithAttachment(attachment *StorageDeviceAttachment) *USBMassStorageDeviceConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZUSBMassStorageDeviceConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttachment:"), objref.IDOf(attachment))
@@ -73,3 +59,5 @@ type USBMassStorageDeviceConfigurationable interface {
 }
 
 var _ USBMassStorageDeviceConfigurationable = (*USBMassStorageDeviceConfiguration)(nil)
+
+var _ StorageDeviceConfigurationProvider = (*USBMassStorageDeviceConfiguration)(nil)

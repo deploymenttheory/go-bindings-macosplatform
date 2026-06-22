@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A network device that transmits raw network packets and frames using a datagram socket.
-//
 // FileHandleNetworkDeviceAttachment is an idiomatic wrapper over the Objective-C class VZFileHandleNetworkDeviceAttachment.
+//
+// It embeds [NetworkDeviceAttachment], promoting that type's methods.
+//
+// A network device that transmits raw network packets and frames using a datagram socket.
 type FileHandleNetworkDeviceAttachment struct {
-	objref.Handle
+	NetworkDeviceAttachment
 }
 
 // FileHandleNetworkDeviceAttachmentFromID adopts an existing Objective-C object as a FileHandleNetworkDeviceAttachment
@@ -25,7 +26,8 @@ func FileHandleNetworkDeviceAttachmentFromID(id objc.ID) *FileHandleNetworkDevic
 	if id == 0 {
 		return nil
 	}
-	x := &FileHandleNetworkDeviceAttachment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FileHandleNetworkDeviceAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,55 +40,38 @@ func fileHandleNetworkDeviceAttachmentAdopt(id objc.ID) *FileHandleNetworkDevice
 	if id == 0 {
 		return nil
 	}
-	x := &FileHandleNetworkDeviceAttachment{Handle: objref.Wrap(id)}
+	x := &FileHandleNetworkDeviceAttachment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *FileHandleNetworkDeviceAttachment) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FileHandleNetworkDeviceAttachment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FileHandleNetworkDeviceAttachment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates the attachment from a file handle that contains a connected datagram socket.
-//
-// NewFileHandleNetworkDeviceAttachmentWithFileHandle creates a new FileHandleNetworkDeviceAttachment.
+// NewFileHandleNetworkDeviceAttachmentWithFileHandle creates the attachment from a file handle that contains a connected datagram socket.
 func NewFileHandleNetworkDeviceAttachmentWithFileHandle(fileHandle obj.Object) *FileHandleNetworkDeviceAttachment {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZFileHandleNetworkDeviceAttachment")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileHandle:"), objref.IDOf(fileHandle))
 	return fileHandleNetworkDeviceAttachmentAdopt(_id)
 }
 
-// An integer value that indicates the maximum transmission unit (MTU) associated with this attachment.
-//
-// WithMaximumTransmissionUnit sets maximumTransmissionUnit and returns the receiver so calls can be chained.
+// WithMaximumTransmissionUnit an integer value that indicates the maximum transmission unit (MTU) associated with this attachment.
 func (x *FileHandleNetworkDeviceAttachment) WithMaximumTransmissionUnit(maximumTransmissionUnit int) *FileHandleNetworkDeviceAttachment {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumTransmissionUnit:"), maximumTransmissionUnit)
 	return x
 }
 
-// The file handle associated with this attachment.
+// FileHandle the file handle associated with this attachment.
 func (x *FileHandleNetworkDeviceAttachment) FileHandle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileHandle"))
 	return obj.Wrap(_r)
 }
 
-// The maximum transmission unit (MTU) associated with this attachment. The client side of the associated datagram socket must be properly configured with the appropriate values for `SO_SNDBUF`, and `SO_RCVBUF`, which can be set using the `setsockopt` system call. The value of `SO_RCVBUF` is expected to be at least double the value of `SO_SNDBUF`, and for optimal performance, the value of `SO_RCVBUF` is recommended to be four times the value of `SO_SNDBUF`. The default MTU is 1500. The maximum MTU allowed is 65535, and the minimum MTU allowed is 1500. An invalid MTU value will result in an invalid virtual machine configuration.
+// MaximumTransmissionUnit the maximum transmission unit (MTU) associated with this attachment. The client side of the associated datagram socket must be properly configured with the appropriate values for `SO_SNDBUF`, and `SO_RCVBUF`, which can be set using the `setsockopt` system call. The value of `SO_RCVBUF` is expected to be at least double the value of `SO_SNDBUF`, and for optimal performance, the value of `SO_RCVBUF` is recommended to be four times the value of `SO_SNDBUF`. The default MTU is 1500. The maximum MTU allowed is 65535, and the minimum MTU allowed is 1500. An invalid MTU value will result in an invalid virtual machine configuration.
 func (x *FileHandleNetworkDeviceAttachment) MaximumTransmissionUnit() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumTransmissionUnit"))
 	return _r
 }
 
+// SetMaximumTransmissionUnit wraps the corresponding Objective-C method.
 func (x *FileHandleNetworkDeviceAttachment) SetMaximumTransmissionUnit(maximumTransmissionUnit int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumTransmissionUnit:"), maximumTransmissionUnit)
 }
@@ -101,3 +86,5 @@ type FileHandleNetworkDeviceAttachmentable interface {
 }
 
 var _ FileHandleNetworkDeviceAttachmentable = (*FileHandleNetworkDeviceAttachment)(nil)
+
+var _ NetworkDeviceAttachmentProvider = (*FileHandleNetworkDeviceAttachment)(nil)

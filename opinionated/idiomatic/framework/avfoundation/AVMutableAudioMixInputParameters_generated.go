@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The parameters you use when adding an audio track to a mix.
-//
 // MutableAudioMixInputParameters is an idiomatic wrapper over the Objective-C class AVMutableAudioMixInputParameters.
+//
+// It embeds [AudioMixInputParameters], promoting that type's methods.
+//
+// The parameters you use when adding an audio track to a mix.
 type MutableAudioMixInputParameters struct {
-	objref.Handle
+	AudioMixInputParameters
 }
 
 // MutableAudioMixInputParametersFromID adopts an existing Objective-C object as a MutableAudioMixInputParameters
@@ -25,7 +26,8 @@ func MutableAudioMixInputParametersFromID(id objc.ID) *MutableAudioMixInputParam
 	if id == 0 {
 		return nil
 	}
-	x := &MutableAudioMixInputParameters{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableAudioMixInputParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func mutableAudioMixInputParametersAdopt(id objc.ID) *MutableAudioMixInputParame
 	if id == 0 {
 		return nil
 	}
-	x := &MutableAudioMixInputParameters{Handle: objref.Wrap(id)}
+	x := &MutableAudioMixInputParameters{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MutableAudioMixInputParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableAudioMixInputParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableAudioMixInputParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMutableAudioMixInputParameters creates a new MutableAudioMixInputParameters.
@@ -64,38 +52,35 @@ func NewMutableAudioMixInputParameters() *MutableAudioMixInputParameters {
 	return mutableAudioMixInputParametersAdopt(_id)
 }
 
-// The identifier of the audio track to which the parameters should be applied.
-//
-// WithTrackID sets trackID and returns the receiver so calls can be chained.
+// WithTrackID the identifier of the audio track to which the parameters should be applied.
 func (x *MutableAudioMixInputParameters) WithTrackID(trackID int32) *MutableAudioMixInputParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackID:"), trackID)
 	return x
 }
 
-// The processing algorithm used to manage audio pitch for scaled audio edits.
-//
-// WithAudioTimePitchAlgorithm sets audioTimePitchAlgorithm and returns the receiver so calls can be chained.
+// WithAudioTimePitchAlgorithm the processing algorithm used to manage audio pitch for scaled audio edits.
 func (x *MutableAudioMixInputParameters) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) *MutableAudioMixInputParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
 	return x
 }
 
-// The audio processing tap associated with the track.
-//
-// WithAudioTapProcessor sets audioTapProcessor and returns the receiver so calls can be chained.
+// WithAudioTapProcessor the audio processing tap associated with the track.
 func (x *MutableAudioMixInputParameters) WithAudioTapProcessor(audioTapProcessor obj.Object) *MutableAudioMixInputParameters {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTapProcessor:"), objref.IDOf(audioTapProcessor))
 	return x
 }
 
+// SetTrackID wraps the corresponding Objective-C method.
 func (x *MutableAudioMixInputParameters) SetTrackID(trackID int32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackID:"), trackID)
 }
 
+// SetAudioTimePitchAlgorithm wraps the corresponding Objective-C method.
 func (x *MutableAudioMixInputParameters) SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
 }
 
+// SetAudioTapProcessor wraps the corresponding Objective-C method.
 func (x *MutableAudioMixInputParameters) SetAudioTapProcessor(audioTapProcessor obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTapProcessor:"), objref.IDOf(audioTapProcessor))
 }
@@ -112,3 +97,5 @@ type MutableAudioMixInputParametersable interface {
 }
 
 var _ MutableAudioMixInputParametersable = (*MutableAudioMixInputParameters)(nil)
+
+var _ AudioMixInputParametersProvider = (*MutableAudioMixInputParameters)(nil)

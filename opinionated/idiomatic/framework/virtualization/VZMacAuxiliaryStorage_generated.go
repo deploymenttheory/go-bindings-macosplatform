@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object that contains information the boot loader needs for booting macOS as a guest operating system.
-//
 // MacAuxiliaryStorage is an idiomatic wrapper over the Objective-C class VZMacAuxiliaryStorage.
+//
+// An object that contains information the boot loader needs for booting macOS as a guest operating system.
 type MacAuxiliaryStorage struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func MacAuxiliaryStorageFromID(id objc.ID) *MacAuxiliaryStorage {
 	if id == 0 {
 		return nil
 	}
-	x := &MacAuxiliaryStorage{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MacAuxiliaryStorage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func macAuxiliaryStorageAdopt(id objc.ID) *MacAuxiliaryStorage {
 	if id == 0 {
 		return nil
 	}
-	x := &MacAuxiliaryStorage{Handle: objref.Wrap(id)}
+	x := &MacAuxiliaryStorage{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,19 +62,21 @@ func (x *MacAuxiliaryStorage) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes an auxiliary storage object with data from the location at the URL you provide.
-//
-// NewMacAuxiliaryStorageWithURL creates a new MacAuxiliaryStorage.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MacAuxiliaryStorage) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMacAuxiliaryStorageWithURL initializes an auxiliary storage object with data from the location at the URL you provide.
 func NewMacAuxiliaryStorageWithURL(uRL string) *MacAuxiliaryStorage {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMacAuxiliaryStorage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(uRL))
 	return macAuxiliaryStorageAdopt(_id)
 }
 
-// Creates an initialized Mac auxiliary storage instance that describes a specific hardware model at a URL you specify.
-//
-// NewMacAuxiliaryStorageCreatingStorageAtURLHardwareModelOptionsError creates a new MacAuxiliaryStorage.
-func NewMacAuxiliaryStorageCreatingStorageAtURLHardwareModelOptionsError(uRL string, hardwareModel *MacHardwareModel, options MacAuxiliaryStorageInitializationOptions) (*MacAuxiliaryStorage, error) {
+// NewMacAuxiliaryStorageCreatingStorageAtURLHardwareModelOptionsError creates an initialized Mac auxiliary storage instance that describes a specific hardware model at a URL you specify.
+func NewMacAuxiliaryStorageCreatingStorageAtURLHardwareModelOptionsError(uRL string, hardwareModel *MacHardwareModel, options MacAuxiliaryStorageInitializationOptions) (result *MacAuxiliaryStorage, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMacAuxiliaryStorage")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCreatingStorageAtURL:hardwareModel:options:error:"), rt.FileURL(uRL), objref.IDOf(hardwareModel), options, unsafe.Pointer(&_nsErr))
@@ -89,6 +93,7 @@ func NewMacAuxiliaryStorageWithContentsOfURL(uRL string) *MacAuxiliaryStorage {
 	return macAuxiliaryStorageAdopt(_id)
 }
 
+// URL wraps the corresponding Objective-C method.
 func (x *MacAuxiliaryStorage) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)

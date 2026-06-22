@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing a bucket of data in a histogram.
-//
 // HistogramBucket is an idiomatic wrapper over the Objective-C class MXHistogramBucket.
+//
+// An object representing a bucket of data in a histogram.
 type HistogramBucket struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func HistogramBucketFromID(id objc.ID) *HistogramBucket {
 	if id == 0 {
 		return nil
 	}
-	x := &HistogramBucket{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HistogramBucket{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func histogramBucketAdopt(id objc.ID) *HistogramBucket {
 	if id == 0 {
 		return nil
 	}
-	x := &HistogramBucket{Handle: objref.Wrap(id)}
+	x := &HistogramBucket{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *HistogramBucket) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HistogramBucket) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewHistogramBucket creates a new HistogramBucket.
 func NewHistogramBucket() *HistogramBucket {
 	_id := objc.Send[objc.ID](objc.ID(_class("MXHistogramBucket")), objc.RegisterName("new"))
 	return histogramBucketAdopt(_id)
 }
 
-// An NSMeasurement representing the start of a histogram bucket.
+// BucketStart an NSMeasurement representing the start of a histogram bucket.
 func (x *HistogramBucket) BucketStart() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bucketStart"))
 	return obj.Wrap(_r)
 }
 
-// An NSMeasurement representing the end of a histogram bucket.
+// BucketEnd an NSMeasurement representing the end of a histogram bucket.
 func (x *HistogramBucket) BucketEnd() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bucketEnd"))
 	return obj.Wrap(_r)
 }
 
-// An NSUInteger representing the number of samples in this histogram bucket.
+// BucketCount an NSUInteger representing the number of samples in this histogram bucket.
 func (x *HistogramBucket) BucketCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bucketCount"))
 	return _r

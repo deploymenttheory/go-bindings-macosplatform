@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the host’s network address.
-//
 // NetworkHost is an idiomatic wrapper over the Objective-C class MIDINetworkHost.
+//
+// An object that represents the host’s network address.
 type NetworkHost struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NetworkHostFromID(id objc.ID) *NetworkHost {
 	if id == 0 {
 		return nil
 	}
-	x := &NetworkHost{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NetworkHost{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func networkHostAdopt(id objc.ID) *NetworkHost {
 	if id == 0 {
 		return nil
 	}
-	x := &NetworkHost{Handle: objref.Wrap(id)}
+	x := &NetworkHost{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +60,25 @@ func (x *NetworkHost) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NetworkHost) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNetworkHost creates a new NetworkHost.
 func NewNetworkHost() *NetworkHost {
 	_id := objc.Send[objc.ID](objc.ID(_class("MIDINetworkHost")), objc.RegisterName("new"))
 	return networkHostAdopt(_id)
 }
 
-// Compares this host instance with another to see if they share the same address value.
+// HasSameAddressAs compares this host instance with another to see if they share the same address value.
 func (x *NetworkHost) HasSameAddressAs(other *NetworkHost) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasSameAddressAs:"), objref.IDOf(other))
 	return _r
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *NetworkHost) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -78,6 +87,7 @@ func (x *NetworkHost) Name() string {
 	return purego.GoString(_r)
 }
 
+// Address wraps the corresponding Objective-C method.
 func (x *NetworkHost) Address() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("address"))
 	if _r == 0 {
@@ -86,11 +96,13 @@ func (x *NetworkHost) Address() string {
 	return purego.GoString(_r)
 }
 
+// Port wraps the corresponding Objective-C method.
 func (x *NetworkHost) Port() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("port"))
 	return _r
 }
 
+// NetServiceName wraps the corresponding Objective-C method.
 func (x *NetworkHost) NetServiceName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("netServiceName"))
 	if _r == 0 {
@@ -99,6 +111,7 @@ func (x *NetworkHost) NetServiceName() string {
 	return purego.GoString(_r)
 }
 
+// NetServiceDomain wraps the corresponding Objective-C method.
 func (x *NetworkHost) NetServiceDomain() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("netServiceDomain"))
 	if _r == 0 {

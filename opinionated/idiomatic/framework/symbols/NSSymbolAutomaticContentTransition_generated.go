@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that applies the default animation to a symbol-based image in a context-sensitive manner.
-//
 // SymbolAutomaticContentTransition is an idiomatic wrapper over the Objective-C class NSSymbolAutomaticContentTransition.
+//
+// It embeds [SymbolContentTransition], promoting that type's methods.
+//
+// A type that applies the default animation to a symbol-based image in a context-sensitive manner.
 type SymbolAutomaticContentTransition struct {
-	objref.Handle
+	SymbolContentTransition
 }
 
 // SymbolAutomaticContentTransitionFromID adopts an existing Objective-C object as a SymbolAutomaticContentTransition
@@ -25,7 +26,8 @@ func SymbolAutomaticContentTransitionFromID(id objc.ID) *SymbolAutomaticContentT
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolAutomaticContentTransition{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SymbolAutomaticContentTransition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func symbolAutomaticContentTransitionAdopt(id objc.ID) *SymbolAutomaticContentTr
 	if id == 0 {
 		return nil
 	}
-	x := &SymbolAutomaticContentTransition{Handle: objref.Wrap(id)}
+	x := &SymbolAutomaticContentTransition{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SymbolAutomaticContentTransition) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SymbolAutomaticContentTransition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SymbolAutomaticContentTransition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSymbolAutomaticContentTransition creates a new SymbolAutomaticContentTransition.
@@ -70,3 +58,5 @@ type SymbolAutomaticContentTransitionable interface {
 }
 
 var _ SymbolAutomaticContentTransitionable = (*SymbolAutomaticContentTransition)(nil)
+
+var _ SymbolContentTransitionProvider = (*SymbolAutomaticContentTransition)(nil)

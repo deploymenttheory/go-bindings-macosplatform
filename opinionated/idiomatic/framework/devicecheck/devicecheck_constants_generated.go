@@ -9,6 +9,5 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// The error domain for errors associated with DeviceCheck APIs.
 // DCErrorDomain returns the string constant DCErrorDomain, for use as a dictionary key or argument.
 func DCErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DCErrorDomain"))) }

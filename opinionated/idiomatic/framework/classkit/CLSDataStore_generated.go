@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container for all the ClassKit data in your app.
-//
 // DataStore is an idiomatic wrapper over the Objective-C class CLSDataStore.
+//
+// A container for all the ClassKit data in your app.
 type DataStore struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func DataStoreFromID(id objc.ID) *DataStore {
 	if id == 0 {
 		return nil
 	}
-	x := &DataStore{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DataStore{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func dataStoreAdopt(id objc.ID) *DataStore {
 	if id == 0 {
 		return nil
 	}
-	x := &DataStore{Handle: objref.Wrap(id)}
+	x := &DataStore{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,13 +62,19 @@ func (x *DataStore) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DataStore) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDataStore creates a new DataStore.
 func NewDataStore() *DataStore {
 	_id := objc.Send[objc.ID](objc.ID(_class("CLSDataStore")), objc.RegisterName("new"))
 	return dataStoreAdopt(_id)
 }
 
-// Saves any changes you’ve made in the data store.
+// SaveWithCompletion saves any changes you’ve made in the data store.
 //
 // SaveWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *DataStore) SaveWithCompletion(ctx context.Context) error {
@@ -85,33 +93,33 @@ func (x *DataStore) SaveWithCompletion(ctx context.Context) error {
 	}
 }
 
-// Marks all of the assigned and active activities for the given context path as complete.
+// CompleteAllAssignedActivitiesMatching marks all of the assigned and active activities for the given context path as complete.
 func (x *DataStore) CompleteAllAssignedActivitiesMatching(contextPath []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeAllAssignedActivitiesMatching:"), purego.SliceToNSArray(contextPath, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// Fetch the top level context for the current app. The main context is automatically created. Add child contexts to this context to persist them in the data store.
+// MainAppContext fetch the top level context for the current app. The main context is automatically created. Add child contexts to this context to persist them in the data store.
 func (x *DataStore) MainAppContext() *Context {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainAppContext"))
 	return ContextFromID(_r)
 }
 
-// Returns the context that is currently active. If no context is active, this will return nil.
+// ActiveContext returns the context that is currently active. If no context is active, this will return nil.
 func (x *DataStore) ActiveContext() *Context {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activeContext"))
 	return ContextFromID(_r)
 }
 
-// Returns the most recently started activity that is running.
+// RunningActivity returns the most recently started activity that is running.
 func (x *DataStore) RunningActivity() *Activity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runningActivity"))
 	return ActivityFromID(_r)
 }
 
-// Fetches all the contexts matching a predicate.
+// ContextsMatchingPredicateCompletion fetches all the contexts matching a predicate.
 //
 // ContextsMatchingPredicateCompletion blocks until the operation completes or ctx is cancelled.
-func (x *DataStore) ContextsMatchingPredicateCompletion(ctx context.Context, predicate obj.Object) (obj.Object, error) {
+func (x *DataStore) ContextsMatchingPredicateCompletion(ctx context.Context, predicate obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -133,10 +141,10 @@ func (x *DataStore) ContextsMatchingPredicateCompletion(ctx context.Context, pre
 	}
 }
 
-// Fetches all the contexts along a given identifier path.
+// ContextsMatchingIdentifierPathCompletion fetches all the contexts along a given identifier path.
 //
 // ContextsMatchingIdentifierPathCompletion blocks until the operation completes or ctx is cancelled.
-func (x *DataStore) ContextsMatchingIdentifierPathCompletion(ctx context.Context, identifierPath []string) (obj.Object, error) {
+func (x *DataStore) ContextsMatchingIdentifierPathCompletion(ctx context.Context, identifierPath []string) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -158,15 +166,15 @@ func (x *DataStore) ContextsMatchingIdentifierPathCompletion(ctx context.Context
 	}
 }
 
-// Marks a context for removal.
+// RemoveContext marks a context for removal.
 func (x *DataStore) RemoveContext(context_ *Context) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeContext:"), objref.IDOf(context_))
 }
 
-// Fetches an activity for a given document so you can record progress on the associated task.
+// FetchActivityForURLCompletion fetches an activity for a given document so you can record progress on the associated task.
 //
 // FetchActivityForURLCompletion blocks until the operation completes or ctx is cancelled.
-func (x *DataStore) FetchActivityForURLCompletion(ctx context.Context, url string) (*Activity, error) {
+func (x *DataStore) FetchActivityForURLCompletion(ctx context.Context, url string) (result *Activity, err error) {
 	type _result struct {
 		val *Activity
 		err error

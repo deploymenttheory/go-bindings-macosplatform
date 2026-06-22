@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBaseClusterColorControl is an idiomatic wrapper over the Objective-C class MTRBaseClusterColorControl.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
 type MTRBaseClusterColorControl struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterColorControlFromID adopts an existing Objective-C object as a MTRBaseClusterColorControl
@@ -25,7 +26,8 @@ func MTRBaseClusterColorControlFromID(id objc.ID) *MTRBaseClusterColorControl {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterColorControl{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterColorControl{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,29 +40,13 @@ func mTRBaseClusterColorControlAdopt(id objc.ID) *MTRBaseClusterColorControl {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterColorControl{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterColorControl{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterColorControl) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterColorControl) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterColorControl) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterColorControlWithDeviceEndpointIDQueue creates a new MTRBaseClusterColorControl.
+// NewMTRBaseClusterColorControlWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterColorControlWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterColorControl {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterColorControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
@@ -74,8 +60,10 @@ func NewMTRBaseClusterColorControlWithDeviceEndpointQueue(device *MTRBaseDevice,
 	return mTRBaseClusterColorControlAdopt(_id)
 }
 
+// ReadAttributeCurrentHueWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentHueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCurrentHueWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeCurrentHueWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -97,8 +85,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentHueWithCompletion(ctx c
 	}
 }
 
+// SubscribeAttributeCurrentHueWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentHueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -120,8 +110,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentHueWithParamsSubsc
 	}
 }
 
+// ReadAttributeCurrentSaturationWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentSaturationWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCurrentSaturationWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeCurrentSaturationWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -143,8 +135,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentSaturationWithCompletio
 	}
 }
 
+// SubscribeAttributeCurrentSaturationWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentSaturationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentSaturationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentSaturationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -166,8 +160,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentSaturationWithPara
 	}
 }
 
+// ReadAttributeRemainingTimeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeRemainingTimeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeRemainingTimeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeRemainingTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -189,8 +185,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeRemainingTimeWithCompletion(ct
 	}
 }
 
+// SubscribeAttributeRemainingTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRemainingTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeRemainingTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeRemainingTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -212,8 +210,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeRemainingTimeWithParamsSu
 	}
 }
 
+// ReadAttributeCurrentXWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentXWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCurrentXWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeCurrentXWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -235,8 +235,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentXWithCompletion(ctx con
 	}
 }
 
+// SubscribeAttributeCurrentXWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentXWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -258,8 +260,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentXWithParamsSubscri
 	}
 }
 
+// ReadAttributeCurrentYWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentYWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCurrentYWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeCurrentYWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -281,8 +285,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentYWithCompletion(ctx con
 	}
 }
 
+// SubscribeAttributeCurrentYWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentYWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -304,8 +310,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentYWithParamsSubscri
 	}
 }
 
+// ReadAttributeDriftCompensationWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeDriftCompensationWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeDriftCompensationWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeDriftCompensationWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -327,8 +335,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeDriftCompensationWithCompletio
 	}
 }
 
+// SubscribeAttributeDriftCompensationWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDriftCompensationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeDriftCompensationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeDriftCompensationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -350,8 +360,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeDriftCompensationWithPara
 	}
 }
 
+// ReadAttributeCompensationTextWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCompensationTextWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCompensationTextWithCompletion(ctx context.Context) (string, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeCompensationTextWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -373,8 +385,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCompensationTextWithCompletion
 	}
 }
 
+// SubscribeAttributeCompensationTextWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCompensationTextWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCompensationTextWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeCompensationTextWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -396,8 +410,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCompensationTextWithParam
 	}
 }
 
+// ReadAttributeColorTemperatureMiredsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorTemperatureMiredsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorTemperatureMiredsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorTemperatureMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -419,8 +435,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorTemperatureMiredsWithComp
 	}
 }
 
+// SubscribeAttributeColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -442,8 +460,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTemperatureMiredsWit
 	}
 }
 
+// ReadAttributeColorModeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorModeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorModeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,8 +485,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorModeWithCompletion(ctx co
 	}
 }
 
+// SubscribeAttributeColorModeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -488,8 +510,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorModeWithParamsSubscr
 	}
 }
 
+// ReadAttributeOptionsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeOptionsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeOptionsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeOptionsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -511,8 +535,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeOptionsWithCompletion(ctx cont
 	}
 }
 
+// SubscribeAttributeOptionsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOptionsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeOptionsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeOptionsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -534,8 +560,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeOptionsWithParamsSubscrip
 	}
 }
 
+// ReadAttributeNumberOfPrimariesWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfPrimariesWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeNumberOfPrimariesWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeNumberOfPrimariesWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -557,8 +585,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeNumberOfPrimariesWithCompletio
 	}
 }
 
+// SubscribeAttributeNumberOfPrimariesWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfPrimariesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeNumberOfPrimariesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeNumberOfPrimariesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -580,8 +610,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeNumberOfPrimariesWithPara
 	}
 }
 
+// ReadAttributePrimary1XWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary1XWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary1XWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary1XWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -603,8 +635,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary1XWithCompletion(ctx co
 	}
 }
 
+// SubscribeAttributePrimary1XWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary1XWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -626,8 +660,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1XWithParamsSubscr
 	}
 }
 
+// ReadAttributePrimary1YWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary1YWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary1YWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary1YWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -649,8 +685,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary1YWithCompletion(ctx co
 	}
 }
 
+// SubscribeAttributePrimary1YWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary1YWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -672,8 +710,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1YWithParamsSubscr
 	}
 }
 
+// ReadAttributePrimary1IntensityWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary1IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary1IntensityWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary1IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -695,8 +735,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary1IntensityWithCompletio
 	}
 }
 
+// SubscribeAttributePrimary1IntensityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary1IntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -718,8 +760,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1IntensityWithPara
 	}
 }
 
+// ReadAttributePrimary2XWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary2XWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary2XWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary2XWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -741,8 +785,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary2XWithCompletion(ctx co
 	}
 }
 
+// SubscribeAttributePrimary2XWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary2XWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -764,8 +810,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2XWithParamsSubscr
 	}
 }
 
+// ReadAttributePrimary2YWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary2YWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary2YWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary2YWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -787,8 +835,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary2YWithCompletion(ctx co
 	}
 }
 
+// SubscribeAttributePrimary2YWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary2YWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -810,8 +860,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2YWithParamsSubscr
 	}
 }
 
+// ReadAttributePrimary2IntensityWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary2IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary2IntensityWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary2IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -833,8 +885,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary2IntensityWithCompletio
 	}
 }
 
+// SubscribeAttributePrimary2IntensityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary2IntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -856,8 +910,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2IntensityWithPara
 	}
 }
 
+// ReadAttributePrimary3XWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary3XWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary3XWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary3XWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -879,8 +935,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary3XWithCompletion(ctx co
 	}
 }
 
+// SubscribeAttributePrimary3XWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary3XWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -902,8 +960,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3XWithParamsSubscr
 	}
 }
 
+// ReadAttributePrimary3YWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary3YWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary3YWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary3YWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -925,8 +985,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary3YWithCompletion(ctx co
 	}
 }
 
+// SubscribeAttributePrimary3YWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary3YWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -948,8 +1010,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3YWithParamsSubscr
 	}
 }
 
+// ReadAttributePrimary3IntensityWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary3IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary3IntensityWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary3IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -971,8 +1035,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary3IntensityWithCompletio
 	}
 }
 
+// SubscribeAttributePrimary3IntensityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary3IntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -994,8 +1060,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3IntensityWithPara
 	}
 }
 
+// ReadAttributePrimary4XWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary4XWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary4XWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary4XWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1017,8 +1085,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary4XWithCompletion(ctx co
 	}
 }
 
+// SubscribeAttributePrimary4XWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary4XWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1040,8 +1110,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4XWithParamsSubscr
 	}
 }
 
+// ReadAttributePrimary4YWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary4YWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary4YWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary4YWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1063,8 +1135,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary4YWithCompletion(ctx co
 	}
 }
 
+// SubscribeAttributePrimary4YWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary4YWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1086,8 +1160,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4YWithParamsSubscr
 	}
 }
 
+// ReadAttributePrimary4IntensityWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary4IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary4IntensityWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary4IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1109,8 +1185,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary4IntensityWithCompletio
 	}
 }
 
+// SubscribeAttributePrimary4IntensityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary4IntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1132,8 +1210,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4IntensityWithPara
 	}
 }
 
+// ReadAttributePrimary5XWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary5XWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary5XWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary5XWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1155,8 +1235,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary5XWithCompletion(ctx co
 	}
 }
 
+// SubscribeAttributePrimary5XWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary5XWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1178,8 +1260,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5XWithParamsSubscr
 	}
 }
 
+// ReadAttributePrimary5YWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary5YWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary5YWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary5YWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1201,8 +1285,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary5YWithCompletion(ctx co
 	}
 }
 
+// SubscribeAttributePrimary5YWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary5YWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1224,8 +1310,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5YWithParamsSubscr
 	}
 }
 
+// ReadAttributePrimary5IntensityWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary5IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary5IntensityWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary5IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1247,8 +1335,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary5IntensityWithCompletio
 	}
 }
 
+// SubscribeAttributePrimary5IntensityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary5IntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1270,8 +1360,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5IntensityWithPara
 	}
 }
 
+// ReadAttributePrimary6XWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary6XWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary6XWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary6XWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1293,8 +1385,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary6XWithCompletion(ctx co
 	}
 }
 
+// SubscribeAttributePrimary6XWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary6XWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1316,8 +1410,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6XWithParamsSubscr
 	}
 }
 
+// ReadAttributePrimary6YWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary6YWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary6YWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary6YWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1339,8 +1435,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary6YWithCompletion(ctx co
 	}
 }
 
+// SubscribeAttributePrimary6YWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary6YWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1362,8 +1460,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6YWithParamsSubscr
 	}
 }
 
+// ReadAttributePrimary6IntensityWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary6IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary6IntensityWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary6IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1385,8 +1485,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary6IntensityWithCompletio
 	}
 }
 
+// SubscribeAttributePrimary6IntensityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary6IntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1408,8 +1510,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6IntensityWithPara
 	}
 }
 
+// ReadAttributeWhitePointXWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeWhitePointXWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointXWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointXWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1431,8 +1535,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointXWithCompletion(ctx 
 	}
 }
 
+// SubscribeAttributeWhitePointXWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeWhitePointXWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1454,8 +1560,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointXWithParamsSubs
 	}
 }
 
+// ReadAttributeWhitePointYWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeWhitePointYWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointYWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointYWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1477,8 +1585,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointYWithCompletion(ctx 
 	}
 }
 
+// SubscribeAttributeWhitePointYWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeWhitePointYWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1500,8 +1610,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointYWithParamsSubs
 	}
 }
 
+// ReadAttributeColorPointRXWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorPointRXWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRXWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRXWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1523,8 +1635,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRXWithCompletion(ctx
 	}
 }
 
+// SubscribeAttributeColorPointRXWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorPointRXWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1546,8 +1660,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRXWithParamsSub
 	}
 }
 
+// ReadAttributeColorPointRYWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorPointRYWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRYWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRYWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1569,8 +1685,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRYWithCompletion(ctx
 	}
 }
 
+// SubscribeAttributeColorPointRYWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorPointRYWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1592,8 +1710,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRYWithParamsSub
 	}
 }
 
+// ReadAttributeColorPointRIntensityWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorPointRIntensityWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRIntensityWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRIntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1615,8 +1735,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRIntensityWithComple
 	}
 }
 
+// SubscribeAttributeColorPointRIntensityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorPointRIntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRIntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRIntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1638,8 +1760,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRIntensityWithP
 	}
 }
 
+// ReadAttributeColorPointGXWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorPointGXWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGXWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGXWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1661,8 +1785,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGXWithCompletion(ctx
 	}
 }
 
+// SubscribeAttributeColorPointGXWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorPointGXWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1684,8 +1810,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGXWithParamsSub
 	}
 }
 
+// ReadAttributeColorPointGYWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorPointGYWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGYWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGYWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1707,8 +1835,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGYWithCompletion(ctx
 	}
 }
 
+// SubscribeAttributeColorPointGYWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorPointGYWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1730,8 +1860,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGYWithParamsSub
 	}
 }
 
+// ReadAttributeColorPointGIntensityWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorPointGIntensityWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGIntensityWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGIntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1753,8 +1885,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGIntensityWithComple
 	}
 }
 
+// SubscribeAttributeColorPointGIntensityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorPointGIntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGIntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGIntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1776,8 +1910,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGIntensityWithP
 	}
 }
 
+// ReadAttributeColorPointBXWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorPointBXWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBXWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBXWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1799,8 +1935,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBXWithCompletion(ctx
 	}
 }
 
+// SubscribeAttributeColorPointBXWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorPointBXWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1822,8 +1960,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBXWithParamsSub
 	}
 }
 
+// ReadAttributeColorPointBYWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorPointBYWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBYWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBYWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1845,8 +1985,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBYWithCompletion(ctx
 	}
 }
 
+// SubscribeAttributeColorPointBYWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorPointBYWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1868,8 +2010,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBYWithParamsSub
 	}
 }
 
+// ReadAttributeColorPointBIntensityWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorPointBIntensityWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBIntensityWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBIntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1891,8 +2035,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBIntensityWithComple
 	}
 }
 
+// SubscribeAttributeColorPointBIntensityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorPointBIntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBIntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBIntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1914,8 +2060,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBIntensityWithP
 	}
 }
 
+// ReadAttributeEnhancedCurrentHueWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeEnhancedCurrentHueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedCurrentHueWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedCurrentHueWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1937,8 +2085,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedCurrentHueWithCompleti
 	}
 }
 
+// SubscribeAttributeEnhancedCurrentHueWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeEnhancedCurrentHueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedCurrentHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedCurrentHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1960,8 +2110,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedCurrentHueWithPar
 	}
 }
 
+// ReadAttributeEnhancedColorModeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeEnhancedColorModeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedColorModeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedColorModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1983,8 +2135,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedColorModeWithCompletio
 	}
 }
 
+// SubscribeAttributeEnhancedColorModeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeEnhancedColorModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedColorModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedColorModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2006,8 +2160,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedColorModeWithPara
 	}
 }
 
+// ReadAttributeColorLoopActiveWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorLoopActiveWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopActiveWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopActiveWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2029,8 +2185,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopActiveWithCompletion(
 	}
 }
 
+// SubscribeAttributeColorLoopActiveWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorLoopActiveWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopActiveWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopActiveWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2052,8 +2210,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopActiveWithParams
 	}
 }
 
+// ReadAttributeColorLoopDirectionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorLoopDirectionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopDirectionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopDirectionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2075,8 +2235,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopDirectionWithCompleti
 	}
 }
 
+// SubscribeAttributeColorLoopDirectionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorLoopDirectionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopDirectionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopDirectionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2098,8 +2260,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopDirectionWithPar
 	}
 }
 
+// ReadAttributeColorLoopTimeWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorLoopTimeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopTimeWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2121,8 +2285,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopTimeWithCompletion(ct
 	}
 }
 
+// SubscribeAttributeColorLoopTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorLoopTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2144,8 +2310,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopTimeWithParamsSu
 	}
 }
 
+// ReadAttributeColorLoopStartEnhancedHueWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorLoopStartEnhancedHueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStartEnhancedHueWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStartEnhancedHueWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2167,8 +2335,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStartEnhancedHueWithC
 	}
 }
 
+// SubscribeAttributeColorLoopStartEnhancedHueWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorLoopStartEnhancedHueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStartEnhancedHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStartEnhancedHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2190,8 +2360,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStartEnhancedHue
 	}
 }
 
+// ReadAttributeColorLoopStoredEnhancedHueWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorLoopStoredEnhancedHueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStoredEnhancedHueWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStoredEnhancedHueWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2213,8 +2385,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStoredEnhancedHueWith
 	}
 }
 
+// SubscribeAttributeColorLoopStoredEnhancedHueWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorLoopStoredEnhancedHueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStoredEnhancedHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStoredEnhancedHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2236,8 +2410,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStoredEnhancedHu
 	}
 }
 
+// ReadAttributeColorCapabilitiesWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorCapabilitiesWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorCapabilitiesWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorCapabilitiesWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2259,8 +2435,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorCapabilitiesWithCompletio
 	}
 }
 
+// SubscribeAttributeColorCapabilitiesWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorCapabilitiesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorCapabilitiesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorCapabilitiesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2282,8 +2460,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorCapabilitiesWithPara
 	}
 }
 
+// ReadAttributeColorTempPhysicalMinMiredsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorTempPhysicalMinMiredsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMinMiredsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMinMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2305,8 +2485,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMinMiredsWith
 	}
 }
 
+// SubscribeAttributeColorTempPhysicalMinMiredsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorTempPhysicalMinMiredsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMinMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMinMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2328,8 +2510,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMinMired
 	}
 }
 
+// ReadAttributeColorTempPhysicalMaxMiredsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorTempPhysicalMaxMiredsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMaxMiredsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMaxMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2351,8 +2535,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMaxMiredsWith
 	}
 }
 
+// SubscribeAttributeColorTempPhysicalMaxMiredsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorTempPhysicalMaxMiredsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMaxMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMaxMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2374,8 +2560,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMaxMired
 	}
 }
 
+// ReadAttributeCoupleColorTempToLevelMinMiredsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCoupleColorTempToLevelMinMiredsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCoupleColorTempToLevelMinMiredsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeCoupleColorTempToLevelMinMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2397,8 +2585,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCoupleColorTempToLevelMinMired
 	}
 }
 
+// SubscribeAttributeCoupleColorTempToLevelMinMiredsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCoupleColorTempToLevelMinMiredsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCoupleColorTempToLevelMinMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeCoupleColorTempToLevelMinMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2420,8 +2610,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCoupleColorTempToLevelMin
 	}
 }
 
+// ReadAttributeStartUpColorTemperatureMiredsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeStartUpColorTemperatureMiredsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeStartUpColorTemperatureMiredsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeStartUpColorTemperatureMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2443,8 +2635,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeStartUpColorTemperatureMiredsW
 	}
 }
 
+// SubscribeAttributeStartUpColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeStartUpColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeStartUpColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeStartUpColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2466,8 +2660,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeStartUpColorTemperatureMi
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2489,8 +2685,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeGeneratedCommandListWithComple
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2512,8 +2710,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeGeneratedCommandListWithP
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2535,8 +2735,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeAcceptedCommandListWithComplet
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2558,8 +2760,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeAcceptedCommandListWithPa
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2581,8 +2785,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeAttributeListWithCompletion(ct
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2604,8 +2810,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeAttributeListWithParamsSu
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2627,8 +2835,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeFeatureMapWithCompletion(ctx c
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2650,8 +2860,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeFeatureMapWithParamsSubsc
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2673,8 +2885,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeClusterRevisionWithCompletion(
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2696,8 +2910,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeClusterRevisionWithParams
 	}
 }
 
+// ReadAttributeCurrentHue wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentHue blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCurrentHue(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeCurrentHue(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2719,8 +2935,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentHue(ctx context.Context
 	}
 }
 
+// SubscribeAttributeCurrentHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2742,8 +2960,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentHueWithMinInterval
 	}
 }
 
+// ReadAttributeCurrentSaturation wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentSaturation blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCurrentSaturation(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeCurrentSaturation(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2765,8 +2985,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentSaturation(ctx context.
 	}
 }
 
+// SubscribeAttributeCurrentSaturationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentSaturationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentSaturationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentSaturationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2788,8 +3010,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentSaturationWithMinI
 	}
 }
 
+// ReadAttributeRemainingTime wraps the corresponding Objective-C method.
+//
 // ReadAttributeRemainingTime blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeRemainingTime(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeRemainingTime(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2811,8 +3035,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeRemainingTime(ctx context.Cont
 	}
 }
 
+// SubscribeAttributeRemainingTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeRemainingTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeRemainingTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeRemainingTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2834,8 +3060,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeRemainingTimeWithMinInter
 	}
 }
 
+// ReadAttributeCurrentX wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentX blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCurrentX(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeCurrentX(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2857,8 +3085,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentX(ctx context.Context) 
 	}
 }
 
+// SubscribeAttributeCurrentXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2880,8 +3110,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentXWithMinIntervalMa
 	}
 }
 
+// ReadAttributeCurrentY wraps the corresponding Objective-C method.
+//
 // ReadAttributeCurrentY blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCurrentY(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeCurrentY(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2903,8 +3135,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCurrentY(ctx context.Context) 
 	}
 }
 
+// SubscribeAttributeCurrentYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCurrentYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2926,8 +3160,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCurrentYWithMinIntervalMa
 	}
 }
 
+// ReadAttributeDriftCompensation wraps the corresponding Objective-C method.
+//
 // ReadAttributeDriftCompensation blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeDriftCompensation(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeDriftCompensation(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2949,8 +3185,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeDriftCompensation(ctx context.
 	}
 }
 
+// SubscribeAttributeDriftCompensationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeDriftCompensationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeDriftCompensationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeDriftCompensationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2972,8 +3210,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeDriftCompensationWithMinI
 	}
 }
 
+// ReadAttributeCompensationText wraps the corresponding Objective-C method.
+//
 // ReadAttributeCompensationText blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCompensationText(ctx context.Context) (string, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeCompensationText(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -2995,8 +3235,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCompensationText(ctx context.C
 	}
 }
 
+// SubscribeAttributeCompensationTextWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCompensationTextWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCompensationTextWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (string, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeCompensationTextWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -3018,8 +3260,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCompensationTextWithMinIn
 	}
 }
 
+// ReadAttributeColorTemperatureMireds wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorTemperatureMireds blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorTemperatureMireds(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorTemperatureMireds(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3041,8 +3285,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorTemperatureMireds(ctx con
 	}
 }
 
+// SubscribeAttributeColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3064,8 +3310,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTemperatureMiredsWit
 	}
 }
 
+// ReadAttributeColorMode wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorMode blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorMode(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorMode(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3087,8 +3335,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorMode(ctx context.Context)
 	}
 }
 
+// SubscribeAttributeColorModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3110,8 +3360,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorModeWithMinIntervalM
 	}
 }
 
+// ReadAttributeOptions wraps the corresponding Objective-C method.
+//
 // ReadAttributeOptions blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeOptions(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeOptions(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3133,8 +3385,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeOptions(ctx context.Context) (
 	}
 }
 
+// SubscribeAttributeOptionsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeOptionsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeOptionsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeOptionsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3156,8 +3410,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeOptionsWithMinIntervalMax
 	}
 }
 
+// ReadAttributeNumberOfPrimaries wraps the corresponding Objective-C method.
+//
 // ReadAttributeNumberOfPrimaries blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeNumberOfPrimaries(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeNumberOfPrimaries(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3179,8 +3435,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeNumberOfPrimaries(ctx context.
 	}
 }
 
+// SubscribeAttributeNumberOfPrimariesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeNumberOfPrimariesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeNumberOfPrimariesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeNumberOfPrimariesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3202,8 +3460,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeNumberOfPrimariesWithMinI
 	}
 }
 
+// ReadAttributePrimary1X wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary1X blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary1X(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary1X(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3225,8 +3485,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary1X(ctx context.Context)
 	}
 }
 
+// SubscribeAttributePrimary1XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary1XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3248,8 +3510,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1XWithMinIntervalM
 	}
 }
 
+// ReadAttributePrimary1Y wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary1Y blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary1Y(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary1Y(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3271,8 +3535,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary1Y(ctx context.Context)
 	}
 }
 
+// SubscribeAttributePrimary1YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary1YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3294,8 +3560,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1YWithMinIntervalM
 	}
 }
 
+// ReadAttributePrimary1Intensity wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary1Intensity blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary1Intensity(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary1Intensity(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3317,8 +3585,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary1Intensity(ctx context.
 	}
 }
 
+// SubscribeAttributePrimary1IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary1IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3340,8 +3610,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary1IntensityWithMinI
 	}
 }
 
+// ReadAttributePrimary2X wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary2X blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary2X(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary2X(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3363,8 +3635,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary2X(ctx context.Context)
 	}
 }
 
+// SubscribeAttributePrimary2XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary2XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3386,8 +3660,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2XWithMinIntervalM
 	}
 }
 
+// ReadAttributePrimary2Y wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary2Y blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary2Y(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary2Y(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3409,8 +3685,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary2Y(ctx context.Context)
 	}
 }
 
+// SubscribeAttributePrimary2YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary2YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3432,8 +3710,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2YWithMinIntervalM
 	}
 }
 
+// ReadAttributePrimary2Intensity wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary2Intensity blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary2Intensity(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary2Intensity(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3455,8 +3735,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary2Intensity(ctx context.
 	}
 }
 
+// SubscribeAttributePrimary2IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary2IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3478,8 +3760,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary2IntensityWithMinI
 	}
 }
 
+// ReadAttributePrimary3X wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary3X blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary3X(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary3X(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3501,8 +3785,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary3X(ctx context.Context)
 	}
 }
 
+// SubscribeAttributePrimary3XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary3XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3524,8 +3810,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3XWithMinIntervalM
 	}
 }
 
+// ReadAttributePrimary3Y wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary3Y blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary3Y(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary3Y(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3547,8 +3835,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary3Y(ctx context.Context)
 	}
 }
 
+// SubscribeAttributePrimary3YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary3YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3570,8 +3860,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3YWithMinIntervalM
 	}
 }
 
+// ReadAttributePrimary3Intensity wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary3Intensity blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary3Intensity(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary3Intensity(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3593,8 +3885,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary3Intensity(ctx context.
 	}
 }
 
+// SubscribeAttributePrimary3IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary3IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3616,8 +3910,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary3IntensityWithMinI
 	}
 }
 
+// ReadAttributePrimary4X wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary4X blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary4X(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary4X(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3639,8 +3935,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary4X(ctx context.Context)
 	}
 }
 
+// SubscribeAttributePrimary4XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary4XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3662,8 +3960,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4XWithMinIntervalM
 	}
 }
 
+// ReadAttributePrimary4Y wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary4Y blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary4Y(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary4Y(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3685,8 +3985,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary4Y(ctx context.Context)
 	}
 }
 
+// SubscribeAttributePrimary4YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary4YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3708,8 +4010,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4YWithMinIntervalM
 	}
 }
 
+// ReadAttributePrimary4Intensity wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary4Intensity blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary4Intensity(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary4Intensity(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3731,8 +4035,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary4Intensity(ctx context.
 	}
 }
 
+// SubscribeAttributePrimary4IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary4IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3754,8 +4060,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary4IntensityWithMinI
 	}
 }
 
+// ReadAttributePrimary5X wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary5X blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary5X(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary5X(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3777,8 +4085,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary5X(ctx context.Context)
 	}
 }
 
+// SubscribeAttributePrimary5XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary5XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3800,8 +4110,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5XWithMinIntervalM
 	}
 }
 
+// ReadAttributePrimary5Y wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary5Y blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary5Y(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary5Y(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3823,8 +4135,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary5Y(ctx context.Context)
 	}
 }
 
+// SubscribeAttributePrimary5YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary5YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3846,8 +4160,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5YWithMinIntervalM
 	}
 }
 
+// ReadAttributePrimary5Intensity wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary5Intensity blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary5Intensity(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary5Intensity(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3869,8 +4185,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary5Intensity(ctx context.
 	}
 }
 
+// SubscribeAttributePrimary5IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary5IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3892,8 +4210,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary5IntensityWithMinI
 	}
 }
 
+// ReadAttributePrimary6X wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary6X blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary6X(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary6X(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3915,8 +4235,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary6X(ctx context.Context)
 	}
 }
 
+// SubscribeAttributePrimary6XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary6XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3938,8 +4260,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6XWithMinIntervalM
 	}
 }
 
+// ReadAttributePrimary6Y wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary6Y blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary6Y(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary6Y(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3961,8 +4285,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary6Y(ctx context.Context)
 	}
 }
 
+// SubscribeAttributePrimary6YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary6YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3984,8 +4310,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6YWithMinIntervalM
 	}
 }
 
+// ReadAttributePrimary6Intensity wraps the corresponding Objective-C method.
+//
 // ReadAttributePrimary6Intensity blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributePrimary6Intensity(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributePrimary6Intensity(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4007,8 +4335,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributePrimary6Intensity(ctx context.
 	}
 }
 
+// SubscribeAttributePrimary6IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePrimary6IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4030,8 +4360,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributePrimary6IntensityWithMinI
 	}
 }
 
+// ReadAttributeWhitePointX wraps the corresponding Objective-C method.
+//
 // ReadAttributeWhitePointX blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointX(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointX(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4053,8 +4385,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointX(ctx context.Contex
 	}
 }
 
+// SubscribeAttributeWhitePointXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeWhitePointXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4076,8 +4410,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointXWithMinInterva
 	}
 }
 
+// ReadAttributeWhitePointY wraps the corresponding Objective-C method.
+//
 // ReadAttributeWhitePointY blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointY(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointY(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4099,8 +4435,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeWhitePointY(ctx context.Contex
 	}
 }
 
+// SubscribeAttributeWhitePointYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeWhitePointYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4122,8 +4460,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeWhitePointYWithMinInterva
 	}
 }
 
+// ReadAttributeColorPointRX wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorPointRX blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRX(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRX(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4145,8 +4485,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRX(ctx context.Conte
 	}
 }
 
+// SubscribeAttributeColorPointRXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorPointRXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4168,8 +4510,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRXWithMinInterv
 	}
 }
 
+// ReadAttributeColorPointRY wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorPointRY blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRY(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRY(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4191,8 +4535,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRY(ctx context.Conte
 	}
 }
 
+// SubscribeAttributeColorPointRYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorPointRYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4214,8 +4560,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRYWithMinInterv
 	}
 }
 
+// ReadAttributeColorPointRIntensity wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorPointRIntensity blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRIntensity(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRIntensity(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4237,8 +4585,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointRIntensity(ctx conte
 	}
 }
 
+// SubscribeAttributeColorPointRIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorPointRIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4260,8 +4610,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointRIntensityWithM
 	}
 }
 
+// ReadAttributeColorPointGX wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorPointGX blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGX(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGX(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4283,8 +4635,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGX(ctx context.Conte
 	}
 }
 
+// SubscribeAttributeColorPointGXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorPointGXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4306,8 +4660,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGXWithMinInterv
 	}
 }
 
+// ReadAttributeColorPointGY wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorPointGY blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGY(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGY(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4329,8 +4685,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGY(ctx context.Conte
 	}
 }
 
+// SubscribeAttributeColorPointGYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorPointGYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4352,8 +4710,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGYWithMinInterv
 	}
 }
 
+// ReadAttributeColorPointGIntensity wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorPointGIntensity blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGIntensity(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGIntensity(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4375,8 +4735,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointGIntensity(ctx conte
 	}
 }
 
+// SubscribeAttributeColorPointGIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorPointGIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4398,8 +4760,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointGIntensityWithM
 	}
 }
 
+// ReadAttributeColorPointBX wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorPointBX blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBX(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBX(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4421,8 +4785,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBX(ctx context.Conte
 	}
 }
 
+// SubscribeAttributeColorPointBXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorPointBXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4444,8 +4810,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBXWithMinInterv
 	}
 }
 
+// ReadAttributeColorPointBY wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorPointBY blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBY(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBY(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4467,8 +4835,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBY(ctx context.Conte
 	}
 }
 
+// SubscribeAttributeColorPointBYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorPointBYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4490,8 +4860,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBYWithMinInterv
 	}
 }
 
+// ReadAttributeColorPointBIntensity wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorPointBIntensity blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBIntensity(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBIntensity(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4513,8 +4885,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorPointBIntensity(ctx conte
 	}
 }
 
+// SubscribeAttributeColorPointBIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorPointBIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4536,8 +4910,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorPointBIntensityWithM
 	}
 }
 
+// ReadAttributeEnhancedCurrentHue wraps the corresponding Objective-C method.
+//
 // ReadAttributeEnhancedCurrentHue blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedCurrentHue(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedCurrentHue(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4559,8 +4935,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedCurrentHue(ctx context
 	}
 }
 
+// SubscribeAttributeEnhancedCurrentHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeEnhancedCurrentHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedCurrentHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedCurrentHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4582,8 +4960,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedCurrentHueWithMin
 	}
 }
 
+// ReadAttributeEnhancedColorMode wraps the corresponding Objective-C method.
+//
 // ReadAttributeEnhancedColorMode blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedColorMode(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedColorMode(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4605,8 +4985,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeEnhancedColorMode(ctx context.
 	}
 }
 
+// SubscribeAttributeEnhancedColorModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeEnhancedColorModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedColorModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedColorModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4628,8 +5010,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeEnhancedColorModeWithMinI
 	}
 }
 
+// ReadAttributeColorLoopActive wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorLoopActive blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopActive(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopActive(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4651,8 +5035,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopActive(ctx context.Co
 	}
 }
 
+// SubscribeAttributeColorLoopActiveWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorLoopActiveWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopActiveWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopActiveWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4674,8 +5060,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopActiveWithMinInt
 	}
 }
 
+// ReadAttributeColorLoopDirection wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorLoopDirection blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopDirection(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopDirection(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4697,8 +5085,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopDirection(ctx context
 	}
 }
 
+// SubscribeAttributeColorLoopDirectionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorLoopDirectionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopDirectionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopDirectionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4720,8 +5110,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopDirectionWithMin
 	}
 }
 
+// ReadAttributeColorLoopTime wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorLoopTime blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopTime(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopTime(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4743,8 +5135,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopTime(ctx context.Cont
 	}
 }
 
+// SubscribeAttributeColorLoopTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorLoopTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4766,8 +5160,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopTimeWithMinInter
 	}
 }
 
+// ReadAttributeColorLoopStartEnhancedHue wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorLoopStartEnhancedHue blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStartEnhancedHue(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStartEnhancedHue(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4789,8 +5185,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStartEnhancedHue(ctx 
 	}
 }
 
+// SubscribeAttributeColorLoopStartEnhancedHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorLoopStartEnhancedHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStartEnhancedHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStartEnhancedHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4812,8 +5210,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStartEnhancedHue
 	}
 }
 
+// ReadAttributeColorLoopStoredEnhancedHue wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorLoopStoredEnhancedHue blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStoredEnhancedHue(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStoredEnhancedHue(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4835,8 +5235,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorLoopStoredEnhancedHue(ctx
 	}
 }
 
+// SubscribeAttributeColorLoopStoredEnhancedHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorLoopStoredEnhancedHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStoredEnhancedHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStoredEnhancedHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4858,8 +5260,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStoredEnhancedHu
 	}
 }
 
+// ReadAttributeColorCapabilities wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorCapabilities blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorCapabilities(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorCapabilities(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4881,8 +5285,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorCapabilities(ctx context.
 	}
 }
 
+// SubscribeAttributeColorCapabilitiesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorCapabilitiesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorCapabilitiesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorCapabilitiesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4904,8 +5310,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorCapabilitiesWithMinI
 	}
 }
 
+// ReadAttributeColorTempPhysicalMinMireds wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorTempPhysicalMinMireds blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMinMireds(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMinMireds(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4927,8 +5335,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMinMireds(ctx
 	}
 }
 
+// SubscribeAttributeColorTempPhysicalMinMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorTempPhysicalMinMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMinMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMinMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4950,8 +5360,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMinMired
 	}
 }
 
+// ReadAttributeColorTempPhysicalMaxMireds wraps the corresponding Objective-C method.
+//
 // ReadAttributeColorTempPhysicalMaxMireds blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMaxMireds(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMaxMireds(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4973,8 +5385,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMaxMireds(ctx
 	}
 }
 
+// SubscribeAttributeColorTempPhysicalMaxMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeColorTempPhysicalMaxMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMaxMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMaxMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4996,8 +5410,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMaxMired
 	}
 }
 
+// ReadAttributeCoupleColorTempToLevelMinMireds wraps the corresponding Objective-C method.
+//
 // ReadAttributeCoupleColorTempToLevelMinMireds blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeCoupleColorTempToLevelMinMireds(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeCoupleColorTempToLevelMinMireds(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5019,8 +5435,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeCoupleColorTempToLevelMinMired
 	}
 }
 
+// SubscribeAttributeCoupleColorTempToLevelMinMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCoupleColorTempToLevelMinMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeCoupleColorTempToLevelMinMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeCoupleColorTempToLevelMinMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5042,8 +5460,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeCoupleColorTempToLevelMin
 	}
 }
 
+// ReadAttributeStartUpColorTemperatureMireds wraps the corresponding Objective-C method.
+//
 // ReadAttributeStartUpColorTemperatureMireds blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeStartUpColorTemperatureMireds(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeStartUpColorTemperatureMireds(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5065,8 +5485,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeStartUpColorTemperatureMireds(
 	}
 }
 
+// SubscribeAttributeStartUpColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeStartUpColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeStartUpColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeStartUpColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5088,8 +5510,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeStartUpColorTemperatureMi
 	}
 }
 
+// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5111,8 +5535,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeGeneratedCommandList(ctx conte
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5134,8 +5560,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeGeneratedCommandListWithM
 	}
 }
 
+// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5157,8 +5585,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeAcceptedCommandList(ctx contex
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5180,8 +5610,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeAcceptedCommandListWithMi
 	}
 }
 
+// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeAttributeList(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5203,8 +5635,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeAttributeList(ctx context.Cont
 	}
 }
 
+// SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5226,8 +5660,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeAttributeListWithMinInter
 	}
 }
 
+// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5249,8 +5685,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeFeatureMap(ctx context.Context
 	}
 }
 
+// SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5272,8 +5710,10 @@ func (x *MTRBaseClusterColorControl) SubscribeAttributeFeatureMapWithMinInterval
 	}
 }
 
+// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5295,8 +5735,10 @@ func (x *MTRBaseClusterColorControl) ReadAttributeClusterRevision(ctx context.Co
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterColorControl) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
+func (x *MTRBaseClusterColorControl) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5552,3 +5994,7 @@ type MTRBaseClusterColorControlable interface {
 }
 
 var _ MTRBaseClusterColorControlable = (*MTRBaseClusterColorControl)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterColorControl)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterColorControl)(nil)

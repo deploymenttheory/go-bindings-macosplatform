@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A task scheduler suitable for low priority operations that can run in the background.
-//
 // BackgroundActivityScheduler is an idiomatic wrapper over the Objective-C class NSBackgroundActivityScheduler.
+//
+// A task scheduler suitable for low priority operations that can run in the background.
 type BackgroundActivityScheduler struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func BackgroundActivitySchedulerFromID(id objc.ID) *BackgroundActivityScheduler 
 	if id == 0 {
 		return nil
 	}
-	x := &BackgroundActivityScheduler{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BackgroundActivityScheduler{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func backgroundActivitySchedulerAdopt(id objc.ID) *BackgroundActivityScheduler {
 	if id == 0 {
 		return nil
 	}
-	x := &BackgroundActivityScheduler{Handle: objref.Wrap(id)}
+	x := &BackgroundActivityScheduler{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,58 +60,55 @@ func (x *BackgroundActivityScheduler) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a background activity scheduler object with a specified unique identifier.
-//
-// NewBackgroundActivitySchedulerWithIdentifier creates a new BackgroundActivityScheduler.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BackgroundActivityScheduler) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewBackgroundActivitySchedulerWithIdentifier initializes a background activity scheduler object with a specified unique identifier.
 func NewBackgroundActivitySchedulerWithIdentifier(identifier string) *BackgroundActivityScheduler {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBackgroundActivityScheduler")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), purego.NSString(identifier))
 	return backgroundActivitySchedulerAdopt(_id)
 }
 
-// A value of type NSQualityOfService, which controls how aggressively the system schedules the activity.
-//
-// WithQualityOfService sets qualityOfService and returns the receiver so calls can be chained.
+// WithQualityOfService a value of type NSQualityOfService, which controls how aggressively the system schedules the activity.
 func (x *BackgroundActivityScheduler) WithQualityOfService(qualityOfService QualityOfService) *BackgroundActivityScheduler {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityOfService:"), qualityOfService)
 	return x
 }
 
-// A Boolean value indicating whether the activity should be rescheduled after it completes.
-//
-// WithRepeats sets repeats and returns the receiver so calls can be chained.
+// WithRepeats a Boolean value indicating whether the activity should be rescheduled after it completes.
 func (x *BackgroundActivityScheduler) WithRepeats(repeats bool) *BackgroundActivityScheduler {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepeats:"), repeats)
 	return x
 }
 
-// An integer providing a suggested interval between scheduling and invoking the activity.
-//
-// WithInterval sets interval and returns the receiver so calls can be chained.
+// WithInterval an integer providing a suggested interval between scheduling and invoking the activity.
 func (x *BackgroundActivityScheduler) WithInterval(interval float64) *BackgroundActivityScheduler {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterval:"), interval)
 	return x
 }
 
-// A value of type NSTimeInterval, which specifies a range of time during which the background activity may occur.
-//
-// WithTolerance sets tolerance and returns the receiver so calls can be chained.
+// WithTolerance a value of type NSTimeInterval, which specifies a range of time during which the background activity may occur.
 func (x *BackgroundActivityScheduler) WithTolerance(tolerance float64) *BackgroundActivityScheduler {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTolerance:"), tolerance)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *BackgroundActivityScheduler) WithScriptingProperties(scriptingProperties obj.Object) *BackgroundActivityScheduler {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Prevents the background activity from being scheduled again.
+// Invalidate prevents the background activity from being scheduled again.
 func (x *BackgroundActivityScheduler) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *BackgroundActivityScheduler) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -118,42 +117,51 @@ func (x *BackgroundActivityScheduler) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// QualityOfService wraps the corresponding Objective-C method.
 func (x *BackgroundActivityScheduler) QualityOfService() QualityOfService {
 	_r := objc.Send[QualityOfService](objref.IDOf(x), objc.RegisterName("qualityOfService"))
 	return _r
 }
 
+// SetQualityOfService wraps the corresponding Objective-C method.
 func (x *BackgroundActivityScheduler) SetQualityOfService(qualityOfService QualityOfService) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityOfService:"), qualityOfService)
 }
 
+// Repeats wraps the corresponding Objective-C method.
 func (x *BackgroundActivityScheduler) Repeats() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("repeats"))
 	return _r
 }
 
+// SetRepeats wraps the corresponding Objective-C method.
 func (x *BackgroundActivityScheduler) SetRepeats(repeats bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepeats:"), repeats)
 }
 
+// Interval wraps the corresponding Objective-C method.
 func (x *BackgroundActivityScheduler) Interval() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("interval"))
 	return _r
 }
 
+// SetInterval wraps the corresponding Objective-C method.
 func (x *BackgroundActivityScheduler) SetInterval(interval float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterval:"), interval)
 }
 
+// Tolerance wraps the corresponding Objective-C method.
 func (x *BackgroundActivityScheduler) Tolerance() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("tolerance"))
 	return _r
 }
 
+// SetTolerance wraps the corresponding Objective-C method.
 func (x *BackgroundActivityScheduler) SetTolerance(tolerance float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTolerance:"), tolerance)
 }
 
+// ShouldDefer wraps the corresponding Objective-C method.
 func (x *BackgroundActivityScheduler) ShouldDefer() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldDefer"))
 	return _r

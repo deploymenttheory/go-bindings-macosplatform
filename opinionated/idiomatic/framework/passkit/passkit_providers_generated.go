@@ -11,49 +11,59 @@ import (
 // AddPassMetadataPreviewProvider is accepted wherever a PKAddPassMetadataPreview (or one of its subclasses) is expected.
 type AddPassMetadataPreviewProvider interface {
 	objref.Object
+	isAddPassMetadataPreview()
 }
 
 // AddSecureElementPassConfigurationProvider is accepted wherever a PKAddSecureElementPassConfiguration (or one of its subclasses) is expected.
 type AddSecureElementPassConfigurationProvider interface {
 	objref.Object
+	isAddSecureElementPassConfiguration()
 }
 
 // IdentityDocumentMetadataProvider is accepted wherever a PKIdentityDocumentMetadata (or one of its subclasses) is expected.
 type IdentityDocumentMetadataProvider interface {
 	objref.Object
+	isIdentityDocumentMetadata()
 }
 
 // IssuerProvisioningExtensionPassEntryProvider is accepted wherever a PKIssuerProvisioningExtensionPassEntry (or one of its subclasses) is expected.
 type IssuerProvisioningExtensionPassEntryProvider interface {
 	objref.Object
+	isIssuerProvisioningExtensionPassEntry()
 }
 
 // PassProvider is accepted wherever a PKPass (or one of its subclasses) is expected.
 type PassProvider interface {
 	objref.Object
+	isPass()
 }
 
 // PaymentRequestUpdateProvider is accepted wherever a PKPaymentRequestUpdate (or one of its subclasses) is expected.
 type PaymentRequestUpdateProvider interface {
 	objref.Object
+	isPaymentRequestUpdate()
 }
 
 // PaymentSummaryItemProvider is accepted wherever a PKPaymentSummaryItem (or one of its subclasses) is expected.
 type PaymentSummaryItemProvider interface {
 	objref.Object
+	isPaymentSummaryItem()
 }
 
 // SecureElementPassProvider is accepted wherever a PKSecureElementPass (or one of its subclasses) is expected.
 type SecureElementPassProvider interface {
 	objref.Object
+	isSecureElementPass()
 }
 
 // StoredValuePassPropertiesProvider is accepted wherever a PKStoredValuePassProperties (or one of its subclasses) is expected.
 type StoredValuePassPropertiesProvider interface {
 	objref.Object
+	isStoredValuePassProperties()
 }
 
 // TransitPassPropertiesProvider is accepted wherever a PKTransitPassProperties (or one of its subclasses) is expected.
 type TransitPassPropertiesProvider interface {
 	objref.Object
+	isTransitPassProperties()
 }

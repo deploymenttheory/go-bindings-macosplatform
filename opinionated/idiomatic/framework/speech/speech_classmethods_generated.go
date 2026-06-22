@@ -14,6 +14,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// PrepareCustomLanguageModelForUrlClientIdentifierConfigurationCompletion wraps the corresponding Objective-C method.
+//
 // PrepareCustomLanguageModelForUrlClientIdentifierConfigurationCompletion blocks until the operation completes or ctx is cancelled.
 func PrepareCustomLanguageModelForUrlClientIdentifierConfigurationCompletion(ctx context.Context, asset string, clientIdentifier string, configuration *SpeechLanguageModelConfiguration) error {
 	_ch := make(chan error, 1)
@@ -31,6 +33,8 @@ func PrepareCustomLanguageModelForUrlClientIdentifierConfigurationCompletion(ctx
 	}
 }
 
+// PrepareCustomLanguageModelForUrlClientIdentifierConfigurationIgnoresCacheCompletion wraps the corresponding Objective-C method.
+//
 // PrepareCustomLanguageModelForUrlClientIdentifierConfigurationIgnoresCacheCompletion blocks until the operation completes or ctx is cancelled.
 func PrepareCustomLanguageModelForUrlClientIdentifierConfigurationIgnoresCacheCompletion(ctx context.Context, asset string, clientIdentifier string, configuration *SpeechLanguageModelConfiguration, ignoresCache bool) error {
 	_ch := make(chan error, 1)
@@ -48,7 +52,7 @@ func PrepareCustomLanguageModelForUrlClientIdentifierConfigurationIgnoresCacheCo
 	}
 }
 
-// Creates a language model from custom training data.
+// PrepareCustomLanguageModelForUrlConfigurationCompletion creates a language model from custom training data.
 //
 // PrepareCustomLanguageModelForUrlConfigurationCompletion blocks until the operation completes or ctx is cancelled.
 func PrepareCustomLanguageModelForUrlConfigurationCompletion(ctx context.Context, asset string, configuration *SpeechLanguageModelConfiguration) error {
@@ -67,7 +71,7 @@ func PrepareCustomLanguageModelForUrlConfigurationCompletion(ctx context.Context
 	}
 }
 
-// Creates a language model from custom training data.
+// PrepareCustomLanguageModelForUrlConfigurationIgnoresCacheCompletion creates a language model from custom training data.
 //
 // PrepareCustomLanguageModelForUrlConfigurationIgnoresCacheCompletion blocks until the operation completes or ctx is cancelled.
 func PrepareCustomLanguageModelForUrlConfigurationIgnoresCacheCompletion(ctx context.Context, asset string, configuration *SpeechLanguageModelConfiguration, ignoresCache bool) error {
@@ -86,13 +90,13 @@ func PrepareCustomLanguageModelForUrlConfigurationIgnoresCacheCompletion(ctx con
 	}
 }
 
-// Returns the set of locales that are supported by the speech recognizer.
+// SupportedLocales returns the set of locales that are supported by the speech recognizer.
 func SupportedLocales() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("SFSpeechRecognizer")), objc.RegisterName("supportedLocales"))
 	return obj.Wrap(_r)
 }
 
-// Returns your app’s current authorization to perform speech recognition.
+// AuthorizationStatusClass returns your app’s current authorization to perform speech recognition.
 func AuthorizationStatusClass() SpeechRecognizerAuthorizationStatus {
 	_r := objc.Send[SpeechRecognizerAuthorizationStatus](objc.ID(_class("SFSpeechRecognizer")), objc.RegisterName("authorizationStatus"))
 	return _r

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for electric potential difference.
-//
 // UnitElectricPotentialDifference is an idiomatic wrapper over the Objective-C class NSUnitElectricPotentialDifference.
+//
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for electric potential difference.
 type UnitElectricPotentialDifference struct {
-	objref.Handle
+	Dimension
 }
 
 // UnitElectricPotentialDifferenceFromID adopts an existing Objective-C object as a UnitElectricPotentialDifference
@@ -25,7 +26,8 @@ func UnitElectricPotentialDifferenceFromID(id objc.ID) *UnitElectricPotentialDif
 	if id == 0 {
 		return nil
 	}
-	x := &UnitElectricPotentialDifference{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UnitElectricPotentialDifference{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func unitElectricPotentialDifferenceAdopt(id objc.ID) *UnitElectricPotentialDiff
 	if id == 0 {
 		return nil
 	}
-	x := &UnitElectricPotentialDifference{Handle: objref.Wrap(id)}
+	x := &UnitElectricPotentialDifference{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UnitElectricPotentialDifference) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UnitElectricPotentialDifference) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UnitElectricPotentialDifference) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUnitElectricPotentialDifference creates a new UnitElectricPotentialDifference.
@@ -64,7 +52,7 @@ func NewUnitElectricPotentialDifference() *UnitElectricPotentialDifference {
 	return unitElectricPotentialDifferenceAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UnitElectricPotentialDifference) WithScriptingProperties(scriptingProperties obj.Object) *UnitElectricPotentialDifference {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
@@ -77,3 +65,7 @@ type UnitElectricPotentialDifferenceable interface {
 }
 
 var _ UnitElectricPotentialDifferenceable = (*UnitElectricPotentialDifference)(nil)
+
+var _ DimensionProvider = (*UnitElectricPotentialDifference)(nil)
+
+var _ UnitProvider = (*UnitElectricPotentialDifference)(nil)

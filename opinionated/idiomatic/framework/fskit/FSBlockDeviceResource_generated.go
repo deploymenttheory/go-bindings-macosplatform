@@ -9,16 +9,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// A resource that represents a block storage disk partition.
-//
 // BlockDeviceResource is an idiomatic wrapper over the Objective-C class FSBlockDeviceResource.
+//
+// It embeds [Resource], promoting that type's methods.
+//
+// A resource that represents a block storage disk partition.
 type BlockDeviceResource struct {
-	objref.Handle
+	Resource
 }
 
 // BlockDeviceResourceFromID adopts an existing Objective-C object as a BlockDeviceResource
@@ -27,7 +28,8 @@ func BlockDeviceResourceFromID(id objc.ID) *BlockDeviceResource {
 	if id == 0 {
 		return nil
 	}
-	x := &BlockDeviceResource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BlockDeviceResource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,24 +42,10 @@ func blockDeviceResourceAdopt(id objc.ID) *BlockDeviceResource {
 	if id == 0 {
 		return nil
 	}
-	x := &BlockDeviceResource{Handle: objref.Wrap(id)}
+	x := &BlockDeviceResource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *BlockDeviceResource) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BlockDeviceResource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BlockDeviceResource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewBlockDeviceResource creates a new BlockDeviceResource.
@@ -66,7 +54,7 @@ func NewBlockDeviceResource() *BlockDeviceResource {
 	return blockDeviceResourceAdopt(_id)
 }
 
-// Synchronously flushes the resource’s buffer cache.
+// MetadataFlush synchronously flushes the resource’s buffer cache.
 //
 // MetadataFlush returns an error if the operation did not succeed.
 func (x *BlockDeviceResource) MetadataFlush() error {
@@ -78,7 +66,7 @@ func (x *BlockDeviceResource) MetadataFlush() error {
 	return nil
 }
 
-// Asynchronously flushes the resource’s buffer cache.
+// AsynchronousMetadataFlush asynchronously flushes the resource’s buffer cache.
 //
 // AsynchronousMetadataFlush returns an error if the operation did not succeed.
 func (x *BlockDeviceResource) AsynchronousMetadataFlush() error {
@@ -90,7 +78,7 @@ func (x *BlockDeviceResource) AsynchronousMetadataFlush() error {
 	return nil
 }
 
-// Clears the given ranges within the buffer cache.
+// MetadataClearWithDelayedWrites clears the given ranges within the buffer cache.
 func (x *BlockDeviceResource) MetadataClearWithDelayedWrites(rangesToClear []*MetadataRange, withDelayedWrites bool) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("metadataClear:withDelayedWrites:error:"), purego.SliceToNSArray(rangesToClear, func(_v *MetadataRange) objc.ID { return objref.IDOf(_v) }), withDelayedWrites, unsafe.Pointer(&_nsErr))
@@ -100,7 +88,7 @@ func (x *BlockDeviceResource) MetadataClearWithDelayedWrites(rangesToClear []*Me
 	return nil
 }
 
-// Synchronously purges the given ranges from the buffer cache.
+// MetadataPurge synchronously purges the given ranges from the buffer cache.
 func (x *BlockDeviceResource) MetadataPurge(rangesToPurge []*MetadataRange) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("metadataPurge:error:"), purego.SliceToNSArray(rangesToPurge, func(_v *MetadataRange) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
@@ -110,7 +98,7 @@ func (x *BlockDeviceResource) MetadataPurge(rangesToPurge []*MetadataRange) erro
 	return nil
 }
 
-// The device name of the resource.
+// BSDName the device name of the resource.
 func (x *BlockDeviceResource) BSDName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("BSDName"))
 	if _r == 0 {
@@ -119,24 +107,25 @@ func (x *BlockDeviceResource) BSDName() string {
 	return purego.GoString(_r)
 }
 
+// IsWritable wraps the corresponding Objective-C method.
 func (x *BlockDeviceResource) IsWritable() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isWritable"))
 	return _r
 }
 
-// The logical block size, the size of data blocks used by the file system. This is equivalent to the `DKIOCGETBLOCKSIZE` device parameter.
+// BlockSize the logical block size, the size of data blocks used by the file system. This is equivalent to the `DKIOCGETBLOCKSIZE` device parameter.
 func (x *BlockDeviceResource) BlockSize() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("blockSize"))
 	return _r
 }
 
-// The block count on this resource.
+// BlockCount the block count on this resource.
 func (x *BlockDeviceResource) BlockCount() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("blockCount"))
 	return _r
 }
 
-// The sector size of the device. This is equivalent to the `DKIOCGETPHYSICALBLOCKSIZE` device parameter.
+// PhysicalBlockSize the sector size of the device. This is equivalent to the `DKIOCGETPHYSICALBLOCKSIZE` device parameter.
 func (x *BlockDeviceResource) PhysicalBlockSize() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("physicalBlockSize"))
 	return _r
@@ -157,3 +146,5 @@ type BlockDeviceResourceable interface {
 }
 
 var _ BlockDeviceResourceable = (*BlockDeviceResource)(nil)
+
+var _ ResourceProvider = (*BlockDeviceResource)(nil)

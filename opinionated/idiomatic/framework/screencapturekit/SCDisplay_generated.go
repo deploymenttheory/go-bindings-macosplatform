@@ -6,15 +6,16 @@ package screencapturekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An instance that represents a display device.
-//
 // Display is an idiomatic wrapper over the Objective-C class SCDisplay.
+//
+// An instance that represents a display device.
 type Display struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func DisplayFromID(id objc.ID) *Display {
 	if id == 0 {
 		return nil
 	}
-	x := &Display{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Display{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func displayAdopt(id objc.ID) *Display {
 	if id == 0 {
 		return nil
 	}
-	x := &Display{Handle: objref.Wrap(id)}
+	x := &Display{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,27 +61,39 @@ func (x *Display) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Display) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewDisplay creates a new Display.
 func NewDisplay() *Display {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCDisplay")), objc.RegisterName("new"))
 	return displayAdopt(_id)
 }
 
-// displayId the CGDirectDisplayID for the SCDisplay
+// DisplayID displayId the CGDirectDisplayID for the SCDisplay
 func (x *Display) DisplayID() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("displayID"))
 	return _r
 }
 
-// width the width, in points, for the SCDisplay
+// Width width the width, in points, for the SCDisplay
 func (x *Display) Width() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("width"))
 	return _r
 }
 
-// height the height, in points, for the SCDisplay
+// Height height the height, in points, for the SCDisplay
 func (x *Display) Height() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("height"))
+	return _r
+}
+
+// Frame frame the CGRect frame for the SCDisplay
+func (x *Display) Frame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frame"))
 	return _r
 }
 
@@ -88,6 +103,7 @@ type Displayable interface {
 	DisplayID() uint32
 	Width() int
 	Height() int
+	Frame() corefoundation.CGRect
 }
 
 var _ Displayable = (*Display)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A template that describes available predicates and how to display them.
-//
 // PredicateEditorRowTemplate is an idiomatic wrapper over the Objective-C class NSPredicateEditorRowTemplate.
+//
+// A template that describes available predicates and how to display them.
 type PredicateEditorRowTemplate struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PredicateEditorRowTemplateFromID(id objc.ID) *PredicateEditorRowTemplate {
 	if id == 0 {
 		return nil
 	}
-	x := &PredicateEditorRowTemplate{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PredicateEditorRowTemplate{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func predicateEditorRowTemplateAdopt(id objc.ID) *PredicateEditorRowTemplate {
 	if id == 0 {
 		return nil
 	}
-	x := &PredicateEditorRowTemplate{Handle: objref.Wrap(id)}
+	x := &PredicateEditorRowTemplate{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,67 +60,82 @@ func (x *PredicateEditorRowTemplate) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes and returns a row template suitable for displaying compound predicates.
-//
-// NewPredicateEditorRowTemplateWithCompoundTypes creates a new PredicateEditorRowTemplate.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PredicateEditorRowTemplate) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPredicateEditorRowTemplateWithCompoundTypes initializes and returns a row template suitable for displaying compound predicates.
 func NewPredicateEditorRowTemplateWithCompoundTypes(compoundTypes []obj.Object) *PredicateEditorRowTemplate {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPredicateEditorRowTemplate")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompoundTypes:"), purego.SliceToNSArray(compoundTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return predicateEditorRowTemplateAdopt(_id)
 }
 
-// Returns a positive number if the receiver can represent a given predicate, and 0 if it cannot.
+// MatchForPredicate returns a positive number if the receiver can represent a given predicate, and 0 if it cannot.
 func (x *PredicateEditorRowTemplate) MatchForPredicate(predicate obj.Object) float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("matchForPredicate:"), objref.IDOf(predicate))
 	return _r
 }
 
-// Sets the value of the views according to the given predicate.
+// SetPredicate sets the value of the views according to the given predicate.
 func (x *PredicateEditorRowTemplate) SetPredicate(predicate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
 }
 
-// Returns the predicate represented by the receiver’s views’ values and the given sub-predicates.
+// PredicateWithSubpredicates returns the predicate represented by the receiver’s views’ values and the given sub-predicates.
 func (x *PredicateEditorRowTemplate) PredicateWithSubpredicates(subpredicates []obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicateWithSubpredicates:"), purego.SliceToNSArray(subpredicates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
-// Returns the subpredicates that should be made sub-rows of a given predicate.
+// DisplayableSubpredicatesOfPredicate returns the subpredicates that should be made sub-rows of a given predicate.
 func (x *PredicateEditorRowTemplate) DisplayableSubpredicatesOfPredicate(predicate obj.Object) []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayableSubpredicatesOfPredicate:"), objref.IDOf(predicate))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// TemplateViews wraps the corresponding Objective-C method.
+//
 // TemplateViews returns the collection as a Go slice.
 func (x *PredicateEditorRowTemplate) TemplateViews() []*View {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("templateViews"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *View { return ViewFromID(_id) })
 }
 
+// LeftExpressions wraps the corresponding Objective-C method.
+//
 // LeftExpressions returns the collection as a Go slice.
 func (x *PredicateEditorRowTemplate) LeftExpressions() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftExpressions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// RightExpressions wraps the corresponding Objective-C method.
+//
 // RightExpressions returns the collection as a Go slice.
 func (x *PredicateEditorRowTemplate) RightExpressions() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightExpressions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// Operators wraps the corresponding Objective-C method.
+//
 // Operators returns the collection as a Go slice.
 func (x *PredicateEditorRowTemplate) Operators() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operators"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// Options wraps the corresponding Objective-C method.
 func (x *PredicateEditorRowTemplate) Options() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("options"))
 	return _r
 }
 
+// CompoundTypes wraps the corresponding Objective-C method.
+//
 // CompoundTypes returns the collection as a Go slice.
 func (x *PredicateEditorRowTemplate) CompoundTypes() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compoundTypes"))

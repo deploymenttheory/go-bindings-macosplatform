@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing the difference between two ordered collections.
-//
 // OrderedCollectionDifference is an idiomatic wrapper over the Objective-C class NSOrderedCollectionDifference.
+//
+// An object representing the difference between two ordered collections.
 type OrderedCollectionDifference struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func OrderedCollectionDifferenceFromID(id objc.ID) *OrderedCollectionDifference 
 	if id == 0 {
 		return nil
 	}
-	x := &OrderedCollectionDifference{Handle: objref.Wrap(purego.Retain(id))}
+	x := &OrderedCollectionDifference{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func orderedCollectionDifferenceAdopt(id objc.ID) *OrderedCollectionDifference {
 	if id == 0 {
 		return nil
 	}
-	x := &OrderedCollectionDifference{Handle: objref.Wrap(id)}
+	x := &OrderedCollectionDifference{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,57 +60,62 @@ func (x *OrderedCollectionDifference) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an ordered collection difference using an array of ordered collection changes.
-//
-// NewOrderedCollectionDifferenceWithChanges creates a new OrderedCollectionDifference.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OrderedCollectionDifference) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewOrderedCollectionDifferenceWithChanges creates an ordered collection difference using an array of ordered collection changes.
 func NewOrderedCollectionDifferenceWithChanges(changes []obj.Object) *OrderedCollectionDifference {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedCollectionDifference")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChanges:"), purego.SliceToNSArray(changes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return orderedCollectionDifferenceAdopt(_id)
 }
 
-// Creates an ordered collection difference from arrays of inserted and removed objects with corresponding sets of indices, in addition to an array of ordered collection changes.
-//
-// NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjectsAdditionalChanges creates a new OrderedCollectionDifference.
+// NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjectsAdditionalChanges creates an ordered collection difference from arrays of inserted and removed objects with corresponding sets of indices, in addition to an array of ordered collection changes.
 func NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjectsAdditionalChanges(inserts *IndexSet, insertedObjects []obj.Object, removes *IndexSet, removedObjects []obj.Object, changes []obj.Object) *OrderedCollectionDifference {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedCollectionDifference")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInsertIndexes:insertedObjects:removeIndexes:removedObjects:additionalChanges:"), objref.IDOf(inserts), purego.SliceToNSArray(insertedObjects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(removes), purego.SliceToNSArray(removedObjects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(changes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return orderedCollectionDifferenceAdopt(_id)
 }
 
-// Creates an ordered collection difference from arrays of inserted and removed objects with corresponding sets of indices.
-//
-// NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjects creates a new OrderedCollectionDifference.
+// NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjects creates an ordered collection difference from arrays of inserted and removed objects with corresponding sets of indices.
 func NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjects(inserts *IndexSet, insertedObjects []obj.Object, removes *IndexSet, removedObjects []obj.Object) *OrderedCollectionDifference {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedCollectionDifference")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInsertIndexes:insertedObjects:removeIndexes:removedObjects:"), objref.IDOf(inserts), purego.SliceToNSArray(insertedObjects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(removes), purego.SliceToNSArray(removedObjects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return orderedCollectionDifferenceAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *OrderedCollectionDifference) WithScriptingProperties(scriptingProperties obj.Object) *OrderedCollectionDifference {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Calculate the difference between two objects in the reverse direction of comparison.
+// InverseDifference calculate the difference between two objects in the reverse direction of comparison.
 func (x *OrderedCollectionDifference) InverseDifference() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inverseDifference"))
 	return obj.Wrap(_r)
 }
 
+// Insertions wraps the corresponding Objective-C method.
+//
 // Insertions returns the collection as a Go slice.
 func (x *OrderedCollectionDifference) Insertions() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// Removals wraps the corresponding Objective-C method.
+//
 // Removals returns the collection as a Go slice.
 func (x *OrderedCollectionDifference) Removals() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removals"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// HasChanges wraps the corresponding Objective-C method.
 func (x *OrderedCollectionDifference) HasChanges() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasChanges"))
 	return _r

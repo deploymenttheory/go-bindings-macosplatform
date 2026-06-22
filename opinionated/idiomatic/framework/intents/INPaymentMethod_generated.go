@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information about a form of payment supported by your app.
-//
 // PaymentMethod is an idiomatic wrapper over the Objective-C class INPaymentMethod.
+//
+// Information about a form of payment supported by your app.
 type PaymentMethod struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PaymentMethodFromID(id objc.ID) *PaymentMethod {
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentMethod{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PaymentMethod{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func paymentMethodAdopt(id objc.ID) *PaymentMethod {
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentMethod{Handle: objref.Wrap(id)}
+	x := &PaymentMethod{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,20 +60,26 @@ func (x *PaymentMethod) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes the payment method object with the specified type and descriptive information.
-//
-// NewPaymentMethodWithTypeNameIdentificationHintIcon creates a new PaymentMethod.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PaymentMethod) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPaymentMethodWithTypeNameIdentificationHintIcon initializes the payment method object with the specified type and descriptive information.
 func NewPaymentMethodWithTypeNameIdentificationHintIcon(type_ PaymentMethodType, name string, identificationHint string, icon *Image) *PaymentMethod {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INPaymentMethod")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:name:identificationHint:icon:"), type_, purego.NSString(name), purego.NSString(identificationHint), objref.IDOf(icon))
 	return paymentMethodAdopt(_id)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *PaymentMethod) Type() PaymentMethodType {
 	_r := objc.Send[PaymentMethodType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *PaymentMethod) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -80,11 +88,13 @@ func (x *PaymentMethod) Name() string {
 	return purego.GoString(_r)
 }
 
+// Icon wraps the corresponding Objective-C method.
 func (x *PaymentMethod) Icon() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("icon"))
 	return ImageFromID(_r)
 }
 
+// IdentificationHint wraps the corresponding Objective-C method.
 func (x *PaymentMethod) IdentificationHint() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identificationHint"))
 	if _r == 0 {

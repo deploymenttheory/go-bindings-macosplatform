@@ -5,11 +5,155 @@
 package coregraphics
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
+
+var _fnCGAffineTransformConcat func(corefoundation.CGAffineTransform, corefoundation.CGAffineTransform) corefoundation.CGAffineTransform
+
+// CGAffineTransformConcat calls the CoreGraphics framework function CGAffineTransformConcat.
+func CGAffineTransformConcat(t1 corefoundation.CGAffineTransform, t2 corefoundation.CGAffineTransform) corefoundation.CGAffineTransform {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGAffineTransformConcat == nil {
+		ebipurego.RegisterLibFunc(&_fnCGAffineTransformConcat, _lib, "CGAffineTransformConcat")
+	}
+	return _fnCGAffineTransformConcat(t1, t2)
+}
+
+var _fnCGAffineTransformDecompose func(corefoundation.CGAffineTransform) corefoundation.CGAffineTransformComponents
+
+// CGAffineTransformDecompose calls the CoreGraphics framework function CGAffineTransformDecompose.
+func CGAffineTransformDecompose(transform corefoundation.CGAffineTransform) corefoundation.CGAffineTransformComponents {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGAffineTransformDecompose == nil {
+		ebipurego.RegisterLibFunc(&_fnCGAffineTransformDecompose, _lib, "CGAffineTransformDecompose")
+	}
+	return _fnCGAffineTransformDecompose(transform)
+}
+
+var _fnCGAffineTransformEqualToTransform func(corefoundation.CGAffineTransform, corefoundation.CGAffineTransform) bool
+
+// CGAffineTransformEqualToTransform calls the CoreGraphics framework function CGAffineTransformEqualToTransform.
+func CGAffineTransformEqualToTransform(t1 corefoundation.CGAffineTransform, t2 corefoundation.CGAffineTransform) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGAffineTransformEqualToTransform == nil {
+		ebipurego.RegisterLibFunc(&_fnCGAffineTransformEqualToTransform, _lib, "CGAffineTransformEqualToTransform")
+	}
+	return _fnCGAffineTransformEqualToTransform(t1, t2)
+}
+
+var _fnCGAffineTransformInvert func(corefoundation.CGAffineTransform) corefoundation.CGAffineTransform
+
+// CGAffineTransformInvert calls the CoreGraphics framework function CGAffineTransformInvert.
+func CGAffineTransformInvert(t corefoundation.CGAffineTransform) corefoundation.CGAffineTransform {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGAffineTransformInvert == nil {
+		ebipurego.RegisterLibFunc(&_fnCGAffineTransformInvert, _lib, "CGAffineTransformInvert")
+	}
+	return _fnCGAffineTransformInvert(t)
+}
+
+var _fnCGAffineTransformIsIdentity func(corefoundation.CGAffineTransform) bool
+
+// CGAffineTransformIsIdentity calls the CoreGraphics framework function CGAffineTransformIsIdentity.
+func CGAffineTransformIsIdentity(t corefoundation.CGAffineTransform) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGAffineTransformIsIdentity == nil {
+		ebipurego.RegisterLibFunc(&_fnCGAffineTransformIsIdentity, _lib, "CGAffineTransformIsIdentity")
+	}
+	return _fnCGAffineTransformIsIdentity(t)
+}
+
+var _fnCGAffineTransformMake func(float64, float64, float64, float64, float64, float64) corefoundation.CGAffineTransform
+
+// CGAffineTransformMake calls the CoreGraphics framework function CGAffineTransformMake.
+func CGAffineTransformMake(a float64, b float64, c float64, d float64, tx float64, ty float64) corefoundation.CGAffineTransform {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGAffineTransformMake == nil {
+		ebipurego.RegisterLibFunc(&_fnCGAffineTransformMake, _lib, "CGAffineTransformMake")
+	}
+	return _fnCGAffineTransformMake(a, b, c, d, tx, ty)
+}
+
+var _fnCGAffineTransformMakeRotation func(float64) corefoundation.CGAffineTransform
+
+// CGAffineTransformMakeRotation calls the CoreGraphics framework function CGAffineTransformMakeRotation.
+func CGAffineTransformMakeRotation(angle float64) corefoundation.CGAffineTransform {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGAffineTransformMakeRotation == nil {
+		ebipurego.RegisterLibFunc(&_fnCGAffineTransformMakeRotation, _lib, "CGAffineTransformMakeRotation")
+	}
+	return _fnCGAffineTransformMakeRotation(angle)
+}
+
+var _fnCGAffineTransformMakeScale func(float64, float64) corefoundation.CGAffineTransform
+
+// CGAffineTransformMakeScale calls the CoreGraphics framework function CGAffineTransformMakeScale.
+func CGAffineTransformMakeScale(sx float64, sy float64) corefoundation.CGAffineTransform {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGAffineTransformMakeScale == nil {
+		ebipurego.RegisterLibFunc(&_fnCGAffineTransformMakeScale, _lib, "CGAffineTransformMakeScale")
+	}
+	return _fnCGAffineTransformMakeScale(sx, sy)
+}
+
+var _fnCGAffineTransformMakeTranslation func(float64, float64) corefoundation.CGAffineTransform
+
+// CGAffineTransformMakeTranslation calls the CoreGraphics framework function CGAffineTransformMakeTranslation.
+func CGAffineTransformMakeTranslation(tx float64, ty float64) corefoundation.CGAffineTransform {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGAffineTransformMakeTranslation == nil {
+		ebipurego.RegisterLibFunc(&_fnCGAffineTransformMakeTranslation, _lib, "CGAffineTransformMakeTranslation")
+	}
+	return _fnCGAffineTransformMakeTranslation(tx, ty)
+}
+
+var _fnCGAffineTransformMakeWithComponents func(corefoundation.CGAffineTransformComponents) corefoundation.CGAffineTransform
+
+// CGAffineTransformMakeWithComponents calls the CoreGraphics framework function CGAffineTransformMakeWithComponents.
+func CGAffineTransformMakeWithComponents(components corefoundation.CGAffineTransformComponents) corefoundation.CGAffineTransform {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGAffineTransformMakeWithComponents == nil {
+		ebipurego.RegisterLibFunc(&_fnCGAffineTransformMakeWithComponents, _lib, "CGAffineTransformMakeWithComponents")
+	}
+	return _fnCGAffineTransformMakeWithComponents(components)
+}
+
+var _fnCGAffineTransformRotate func(corefoundation.CGAffineTransform, float64) corefoundation.CGAffineTransform
+
+// CGAffineTransformRotate calls the CoreGraphics framework function CGAffineTransformRotate.
+func CGAffineTransformRotate(t corefoundation.CGAffineTransform, angle float64) corefoundation.CGAffineTransform {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGAffineTransformRotate == nil {
+		ebipurego.RegisterLibFunc(&_fnCGAffineTransformRotate, _lib, "CGAffineTransformRotate")
+	}
+	return _fnCGAffineTransformRotate(t, angle)
+}
+
+var _fnCGAffineTransformScale func(corefoundation.CGAffineTransform, float64, float64) corefoundation.CGAffineTransform
+
+// CGAffineTransformScale calls the CoreGraphics framework function CGAffineTransformScale.
+func CGAffineTransformScale(t corefoundation.CGAffineTransform, sx float64, sy float64) corefoundation.CGAffineTransform {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGAffineTransformScale == nil {
+		ebipurego.RegisterLibFunc(&_fnCGAffineTransformScale, _lib, "CGAffineTransformScale")
+	}
+	return _fnCGAffineTransformScale(t, sx, sy)
+}
+
+var _fnCGAffineTransformTranslate func(corefoundation.CGAffineTransform, float64, float64) corefoundation.CGAffineTransform
+
+// CGAffineTransformTranslate calls the CoreGraphics framework function CGAffineTransformTranslate.
+func CGAffineTransformTranslate(t corefoundation.CGAffineTransform, tx float64, ty float64) corefoundation.CGAffineTransform {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGAffineTransformTranslate == nil {
+		ebipurego.RegisterLibFunc(&_fnCGAffineTransformTranslate, _lib, "CGAffineTransformTranslate")
+	}
+	return _fnCGAffineTransformTranslate(t, tx, ty)
+}
 
 var _fnCGAssociateMouseAndMouseCursorPosition func(int) CGError
 
@@ -930,6 +1074,17 @@ func CGContextAddCurveToPoint(c obj.Object, cp1x float64, cp1y float64, cp2x flo
 	_fnCGContextAddCurveToPoint(objref.IDOf(c), cp1x, cp1y, cp2x, cp2y, x, y)
 }
 
+var _fnCGContextAddEllipseInRect func(objc.ID, corefoundation.CGRect)
+
+// CGContextAddEllipseInRect calls the CoreGraphics framework function CGContextAddEllipseInRect.
+func CGContextAddEllipseInRect(c obj.Object, rect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextAddEllipseInRect == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextAddEllipseInRect, _lib, "CGContextAddEllipseInRect")
+	}
+	_fnCGContextAddEllipseInRect(objref.IDOf(c), rect)
+}
+
 var _fnCGContextAddLineToPoint func(objc.ID, float64, float64)
 
 // CGContextAddLineToPoint calls the CoreGraphics framework function CGContextAddLineToPoint.
@@ -963,6 +1118,17 @@ func CGContextAddQuadCurveToPoint(c obj.Object, cpx float64, cpy float64, x floa
 	_fnCGContextAddQuadCurveToPoint(objref.IDOf(c), cpx, cpy, x, y)
 }
 
+var _fnCGContextAddRect func(objc.ID, corefoundation.CGRect)
+
+// CGContextAddRect calls the CoreGraphics framework function CGContextAddRect.
+func CGContextAddRect(c obj.Object, rect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextAddRect == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextAddRect, _lib, "CGContextAddRect")
+	}
+	_fnCGContextAddRect(objref.IDOf(c), rect)
+}
+
 var _fnCGContextBeginPath func(objc.ID)
 
 // CGContextBeginPath calls the CoreGraphics framework function CGContextBeginPath.
@@ -985,6 +1151,28 @@ func CGContextBeginTransparencyLayer(c obj.Object, auxiliaryInfo obj.Object) {
 	_fnCGContextBeginTransparencyLayer(objref.IDOf(c), objref.IDOf(auxiliaryInfo))
 }
 
+var _fnCGContextBeginTransparencyLayerWithRect func(objc.ID, corefoundation.CGRect, objc.ID)
+
+// CGContextBeginTransparencyLayerWithRect calls the CoreGraphics framework function CGContextBeginTransparencyLayerWithRect.
+func CGContextBeginTransparencyLayerWithRect(c obj.Object, rect corefoundation.CGRect, auxInfo obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextBeginTransparencyLayerWithRect == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextBeginTransparencyLayerWithRect, _lib, "CGContextBeginTransparencyLayerWithRect")
+	}
+	_fnCGContextBeginTransparencyLayerWithRect(objref.IDOf(c), rect, objref.IDOf(auxInfo))
+}
+
+var _fnCGContextClearRect func(objc.ID, corefoundation.CGRect)
+
+// CGContextClearRect calls the CoreGraphics framework function CGContextClearRect.
+func CGContextClearRect(c obj.Object, rect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextClearRect == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextClearRect, _lib, "CGContextClearRect")
+	}
+	_fnCGContextClearRect(objref.IDOf(c), rect)
+}
+
 var _fnCGContextClip func(objc.ID)
 
 // CGContextClip calls the CoreGraphics framework function CGContextClip.
@@ -994,6 +1182,28 @@ func CGContextClip(c obj.Object) {
 		ebipurego.RegisterLibFunc(&_fnCGContextClip, _lib, "CGContextClip")
 	}
 	_fnCGContextClip(objref.IDOf(c))
+}
+
+var _fnCGContextClipToMask func(objc.ID, corefoundation.CGRect, objc.ID)
+
+// CGContextClipToMask calls the CoreGraphics framework function CGContextClipToMask.
+func CGContextClipToMask(c obj.Object, rect corefoundation.CGRect, mask obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextClipToMask == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextClipToMask, _lib, "CGContextClipToMask")
+	}
+	_fnCGContextClipToMask(objref.IDOf(c), rect, objref.IDOf(mask))
+}
+
+var _fnCGContextClipToRect func(objc.ID, corefoundation.CGRect)
+
+// CGContextClipToRect calls the CoreGraphics framework function CGContextClipToRect.
+func CGContextClipToRect(c obj.Object, rect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextClipToRect == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextClipToRect, _lib, "CGContextClipToRect")
+	}
+	_fnCGContextClipToRect(objref.IDOf(c), rect)
 }
 
 var _fnCGContextClosePath func(objc.ID)
@@ -1007,6 +1217,83 @@ func CGContextClosePath(c obj.Object) {
 	_fnCGContextClosePath(objref.IDOf(c))
 }
 
+var _fnCGContextConcatCTM func(objc.ID, corefoundation.CGAffineTransform)
+
+// CGContextConcatCTM calls the CoreGraphics framework function CGContextConcatCTM.
+func CGContextConcatCTM(c obj.Object, transform corefoundation.CGAffineTransform) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextConcatCTM == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextConcatCTM, _lib, "CGContextConcatCTM")
+	}
+	_fnCGContextConcatCTM(objref.IDOf(c), transform)
+}
+
+var _fnCGContextConvertPointToDeviceSpace func(objc.ID, corefoundation.CGPoint) corefoundation.CGPoint
+
+// CGContextConvertPointToDeviceSpace calls the CoreGraphics framework function CGContextConvertPointToDeviceSpace.
+func CGContextConvertPointToDeviceSpace(c obj.Object, point corefoundation.CGPoint) corefoundation.CGPoint {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextConvertPointToDeviceSpace == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextConvertPointToDeviceSpace, _lib, "CGContextConvertPointToDeviceSpace")
+	}
+	return _fnCGContextConvertPointToDeviceSpace(objref.IDOf(c), point)
+}
+
+var _fnCGContextConvertPointToUserSpace func(objc.ID, corefoundation.CGPoint) corefoundation.CGPoint
+
+// CGContextConvertPointToUserSpace calls the CoreGraphics framework function CGContextConvertPointToUserSpace.
+func CGContextConvertPointToUserSpace(c obj.Object, point corefoundation.CGPoint) corefoundation.CGPoint {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextConvertPointToUserSpace == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextConvertPointToUserSpace, _lib, "CGContextConvertPointToUserSpace")
+	}
+	return _fnCGContextConvertPointToUserSpace(objref.IDOf(c), point)
+}
+
+var _fnCGContextConvertRectToDeviceSpace func(objc.ID, corefoundation.CGRect) corefoundation.CGRect
+
+// CGContextConvertRectToDeviceSpace calls the CoreGraphics framework function CGContextConvertRectToDeviceSpace.
+func CGContextConvertRectToDeviceSpace(c obj.Object, rect corefoundation.CGRect) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextConvertRectToDeviceSpace == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextConvertRectToDeviceSpace, _lib, "CGContextConvertRectToDeviceSpace")
+	}
+	return _fnCGContextConvertRectToDeviceSpace(objref.IDOf(c), rect)
+}
+
+var _fnCGContextConvertRectToUserSpace func(objc.ID, corefoundation.CGRect) corefoundation.CGRect
+
+// CGContextConvertRectToUserSpace calls the CoreGraphics framework function CGContextConvertRectToUserSpace.
+func CGContextConvertRectToUserSpace(c obj.Object, rect corefoundation.CGRect) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextConvertRectToUserSpace == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextConvertRectToUserSpace, _lib, "CGContextConvertRectToUserSpace")
+	}
+	return _fnCGContextConvertRectToUserSpace(objref.IDOf(c), rect)
+}
+
+var _fnCGContextConvertSizeToDeviceSpace func(objc.ID, corefoundation.CGSize) corefoundation.CGSize
+
+// CGContextConvertSizeToDeviceSpace calls the CoreGraphics framework function CGContextConvertSizeToDeviceSpace.
+func CGContextConvertSizeToDeviceSpace(c obj.Object, size corefoundation.CGSize) corefoundation.CGSize {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextConvertSizeToDeviceSpace == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextConvertSizeToDeviceSpace, _lib, "CGContextConvertSizeToDeviceSpace")
+	}
+	return _fnCGContextConvertSizeToDeviceSpace(objref.IDOf(c), size)
+}
+
+var _fnCGContextConvertSizeToUserSpace func(objc.ID, corefoundation.CGSize) corefoundation.CGSize
+
+// CGContextConvertSizeToUserSpace calls the CoreGraphics framework function CGContextConvertSizeToUserSpace.
+func CGContextConvertSizeToUserSpace(c obj.Object, size corefoundation.CGSize) corefoundation.CGSize {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextConvertSizeToUserSpace == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextConvertSizeToUserSpace, _lib, "CGContextConvertSizeToUserSpace")
+	}
+	return _fnCGContextConvertSizeToUserSpace(objref.IDOf(c), size)
+}
+
 var _fnCGContextCopyPath func(objc.ID) objc.ID
 
 // CGContextCopyPath calls the CoreGraphics framework function CGContextCopyPath.
@@ -1017,6 +1304,83 @@ func CGContextCopyPath(c obj.Object) obj.Object {
 	}
 	_ret := _fnCGContextCopyPath(objref.IDOf(c))
 	return obj.Wrap(_ret)
+}
+
+var _fnCGContextDrawConicGradient func(objc.ID, objc.ID, corefoundation.CGPoint, float64)
+
+// CGContextDrawConicGradient calls the CoreGraphics framework function CGContextDrawConicGradient.
+func CGContextDrawConicGradient(c obj.Object, gradient obj.Object, center corefoundation.CGPoint, angle float64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextDrawConicGradient == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextDrawConicGradient, _lib, "CGContextDrawConicGradient")
+	}
+	_fnCGContextDrawConicGradient(objref.IDOf(c), objref.IDOf(gradient), center, angle)
+}
+
+var _fnCGContextDrawImage func(objc.ID, corefoundation.CGRect, objc.ID)
+
+// CGContextDrawImage calls the CoreGraphics framework function CGContextDrawImage.
+func CGContextDrawImage(c obj.Object, rect corefoundation.CGRect, image obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextDrawImage == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextDrawImage, _lib, "CGContextDrawImage")
+	}
+	_fnCGContextDrawImage(objref.IDOf(c), rect, objref.IDOf(image))
+}
+
+var _fnCGContextDrawImageApplyingToneMapping func(objc.ID, corefoundation.CGRect, objc.ID, CGToneMapping, objc.ID) bool
+
+// CGContextDrawImageApplyingToneMapping calls the CoreGraphics framework function CGContextDrawImageApplyingToneMapping.
+func CGContextDrawImageApplyingToneMapping(c obj.Object, r corefoundation.CGRect, image obj.Object, method CGToneMapping, options obj.Object) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextDrawImageApplyingToneMapping == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextDrawImageApplyingToneMapping, _lib, "CGContextDrawImageApplyingToneMapping")
+	}
+	return _fnCGContextDrawImageApplyingToneMapping(objref.IDOf(c), r, objref.IDOf(image), method, objref.IDOf(options))
+}
+
+var _fnCGContextDrawLayerAtPoint func(objc.ID, corefoundation.CGPoint, objc.ID)
+
+// CGContextDrawLayerAtPoint calls the CoreGraphics framework function CGContextDrawLayerAtPoint.
+func CGContextDrawLayerAtPoint(context_ obj.Object, point corefoundation.CGPoint, layer obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextDrawLayerAtPoint == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextDrawLayerAtPoint, _lib, "CGContextDrawLayerAtPoint")
+	}
+	_fnCGContextDrawLayerAtPoint(objref.IDOf(context_), point, objref.IDOf(layer))
+}
+
+var _fnCGContextDrawLayerInRect func(objc.ID, corefoundation.CGRect, objc.ID)
+
+// CGContextDrawLayerInRect calls the CoreGraphics framework function CGContextDrawLayerInRect.
+func CGContextDrawLayerInRect(context_ obj.Object, rect corefoundation.CGRect, layer obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextDrawLayerInRect == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextDrawLayerInRect, _lib, "CGContextDrawLayerInRect")
+	}
+	_fnCGContextDrawLayerInRect(objref.IDOf(context_), rect, objref.IDOf(layer))
+}
+
+var _fnCGContextDrawLinearGradient func(objc.ID, objc.ID, corefoundation.CGPoint, corefoundation.CGPoint, CGGradientDrawingOptions)
+
+// CGContextDrawLinearGradient calls the CoreGraphics framework function CGContextDrawLinearGradient.
+func CGContextDrawLinearGradient(c obj.Object, gradient obj.Object, startPoint corefoundation.CGPoint, endPoint corefoundation.CGPoint, options CGGradientDrawingOptions) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextDrawLinearGradient == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextDrawLinearGradient, _lib, "CGContextDrawLinearGradient")
+	}
+	_fnCGContextDrawLinearGradient(objref.IDOf(c), objref.IDOf(gradient), startPoint, endPoint, options)
+}
+
+var _fnCGContextDrawPDFDocument func(objc.ID, corefoundation.CGRect, objc.ID, int)
+
+// CGContextDrawPDFDocument calls the CoreGraphics framework function CGContextDrawPDFDocument.
+func CGContextDrawPDFDocument(c obj.Object, rect corefoundation.CGRect, document obj.Object, page int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextDrawPDFDocument == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextDrawPDFDocument, _lib, "CGContextDrawPDFDocument")
+	}
+	_fnCGContextDrawPDFDocument(objref.IDOf(c), rect, objref.IDOf(document), page)
 }
 
 var _fnCGContextDrawPDFPage func(objc.ID, objc.ID)
@@ -1041,6 +1405,17 @@ func CGContextDrawPath(c obj.Object, mode CGPathDrawingMode) {
 	_fnCGContextDrawPath(objref.IDOf(c), mode)
 }
 
+var _fnCGContextDrawRadialGradient func(objc.ID, objc.ID, corefoundation.CGPoint, float64, corefoundation.CGPoint, float64, CGGradientDrawingOptions)
+
+// CGContextDrawRadialGradient calls the CoreGraphics framework function CGContextDrawRadialGradient.
+func CGContextDrawRadialGradient(c obj.Object, gradient obj.Object, startCenter corefoundation.CGPoint, startRadius float64, endCenter corefoundation.CGPoint, endRadius float64, options CGGradientDrawingOptions) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextDrawRadialGradient == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextDrawRadialGradient, _lib, "CGContextDrawRadialGradient")
+	}
+	_fnCGContextDrawRadialGradient(objref.IDOf(c), objref.IDOf(gradient), startCenter, startRadius, endCenter, endRadius, options)
+}
+
 var _fnCGContextDrawShading func(objc.ID, objc.ID)
 
 // CGContextDrawShading calls the CoreGraphics framework function CGContextDrawShading.
@@ -1050,6 +1425,17 @@ func CGContextDrawShading(c obj.Object, shading obj.Object) {
 		ebipurego.RegisterLibFunc(&_fnCGContextDrawShading, _lib, "CGContextDrawShading")
 	}
 	_fnCGContextDrawShading(objref.IDOf(c), objref.IDOf(shading))
+}
+
+var _fnCGContextDrawTiledImage func(objc.ID, corefoundation.CGRect, objc.ID)
+
+// CGContextDrawTiledImage calls the CoreGraphics framework function CGContextDrawTiledImage.
+func CGContextDrawTiledImage(c obj.Object, rect corefoundation.CGRect, image obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextDrawTiledImage == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextDrawTiledImage, _lib, "CGContextDrawTiledImage")
+	}
+	_fnCGContextDrawTiledImage(objref.IDOf(c), rect, objref.IDOf(image))
 }
 
 var _fnCGContextEOClip func(objc.ID)
@@ -1096,6 +1482,17 @@ func CGContextEndTransparencyLayer(c obj.Object) {
 	_fnCGContextEndTransparencyLayer(objref.IDOf(c))
 }
 
+var _fnCGContextFillEllipseInRect func(objc.ID, corefoundation.CGRect)
+
+// CGContextFillEllipseInRect calls the CoreGraphics framework function CGContextFillEllipseInRect.
+func CGContextFillEllipseInRect(c obj.Object, rect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextFillEllipseInRect == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextFillEllipseInRect, _lib, "CGContextFillEllipseInRect")
+	}
+	_fnCGContextFillEllipseInRect(objref.IDOf(c), rect)
+}
+
 var _fnCGContextFillPath func(objc.ID)
 
 // CGContextFillPath calls the CoreGraphics framework function CGContextFillPath.
@@ -1107,6 +1504,17 @@ func CGContextFillPath(c obj.Object) {
 	_fnCGContextFillPath(objref.IDOf(c))
 }
 
+var _fnCGContextFillRect func(objc.ID, corefoundation.CGRect)
+
+// CGContextFillRect calls the CoreGraphics framework function CGContextFillRect.
+func CGContextFillRect(c obj.Object, rect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextFillRect == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextFillRect, _lib, "CGContextFillRect")
+	}
+	_fnCGContextFillRect(objref.IDOf(c), rect)
+}
+
 var _fnCGContextFlush func(objc.ID)
 
 // CGContextFlush calls the CoreGraphics framework function CGContextFlush.
@@ -1116,6 +1524,28 @@ func CGContextFlush(c obj.Object) {
 		ebipurego.RegisterLibFunc(&_fnCGContextFlush, _lib, "CGContextFlush")
 	}
 	_fnCGContextFlush(objref.IDOf(c))
+}
+
+var _fnCGContextGetCTM func(objc.ID) corefoundation.CGAffineTransform
+
+// CGContextGetCTM calls the CoreGraphics framework function CGContextGetCTM.
+func CGContextGetCTM(c obj.Object) corefoundation.CGAffineTransform {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextGetCTM == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextGetCTM, _lib, "CGContextGetCTM")
+	}
+	return _fnCGContextGetCTM(objref.IDOf(c))
+}
+
+var _fnCGContextGetClipBoundingBox func(objc.ID) corefoundation.CGRect
+
+// CGContextGetClipBoundingBox calls the CoreGraphics framework function CGContextGetClipBoundingBox.
+func CGContextGetClipBoundingBox(c obj.Object) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextGetClipBoundingBox == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextGetClipBoundingBox, _lib, "CGContextGetClipBoundingBox")
+	}
+	return _fnCGContextGetClipBoundingBox(objref.IDOf(c))
 }
 
 var _fnCGContextGetEDRTargetHeadroom func(objc.ID) float32
@@ -1140,6 +1570,50 @@ func CGContextGetInterpolationQuality(c obj.Object) CGInterpolationQuality {
 	return _fnCGContextGetInterpolationQuality(objref.IDOf(c))
 }
 
+var _fnCGContextGetPathBoundingBox func(objc.ID) corefoundation.CGRect
+
+// CGContextGetPathBoundingBox calls the CoreGraphics framework function CGContextGetPathBoundingBox.
+func CGContextGetPathBoundingBox(c obj.Object) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextGetPathBoundingBox == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextGetPathBoundingBox, _lib, "CGContextGetPathBoundingBox")
+	}
+	return _fnCGContextGetPathBoundingBox(objref.IDOf(c))
+}
+
+var _fnCGContextGetPathCurrentPoint func(objc.ID) corefoundation.CGPoint
+
+// CGContextGetPathCurrentPoint calls the CoreGraphics framework function CGContextGetPathCurrentPoint.
+func CGContextGetPathCurrentPoint(c obj.Object) corefoundation.CGPoint {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextGetPathCurrentPoint == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextGetPathCurrentPoint, _lib, "CGContextGetPathCurrentPoint")
+	}
+	return _fnCGContextGetPathCurrentPoint(objref.IDOf(c))
+}
+
+var _fnCGContextGetTextMatrix func(objc.ID) corefoundation.CGAffineTransform
+
+// CGContextGetTextMatrix calls the CoreGraphics framework function CGContextGetTextMatrix.
+func CGContextGetTextMatrix(c obj.Object) corefoundation.CGAffineTransform {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextGetTextMatrix == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextGetTextMatrix, _lib, "CGContextGetTextMatrix")
+	}
+	return _fnCGContextGetTextMatrix(objref.IDOf(c))
+}
+
+var _fnCGContextGetTextPosition func(objc.ID) corefoundation.CGPoint
+
+// CGContextGetTextPosition calls the CoreGraphics framework function CGContextGetTextPosition.
+func CGContextGetTextPosition(c obj.Object) corefoundation.CGPoint {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextGetTextPosition == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextGetTextPosition, _lib, "CGContextGetTextPosition")
+	}
+	return _fnCGContextGetTextPosition(objref.IDOf(c))
+}
+
 var _fnCGContextGetTypeID func() int
 
 // CGContextGetTypeID calls the CoreGraphics framework function CGContextGetTypeID.
@@ -1149,6 +1623,17 @@ func CGContextGetTypeID() int {
 		ebipurego.RegisterLibFunc(&_fnCGContextGetTypeID, _lib, "CGContextGetTypeID")
 	}
 	return _fnCGContextGetTypeID()
+}
+
+var _fnCGContextGetUserSpaceToDeviceSpaceTransform func(objc.ID) corefoundation.CGAffineTransform
+
+// CGContextGetUserSpaceToDeviceSpaceTransform calls the CoreGraphics framework function CGContextGetUserSpaceToDeviceSpaceTransform.
+func CGContextGetUserSpaceToDeviceSpaceTransform(c obj.Object) corefoundation.CGAffineTransform {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextGetUserSpaceToDeviceSpaceTransform == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextGetUserSpaceToDeviceSpaceTransform, _lib, "CGContextGetUserSpaceToDeviceSpaceTransform")
+	}
+	return _fnCGContextGetUserSpaceToDeviceSpaceTransform(objref.IDOf(c))
 }
 
 var _fnCGContextIsPathEmpty func(objc.ID) bool
@@ -1171,6 +1656,17 @@ func CGContextMoveToPoint(c obj.Object, x float64, y float64) {
 		ebipurego.RegisterLibFunc(&_fnCGContextMoveToPoint, _lib, "CGContextMoveToPoint")
 	}
 	_fnCGContextMoveToPoint(objref.IDOf(c), x, y)
+}
+
+var _fnCGContextPathContainsPoint func(objc.ID, corefoundation.CGPoint, CGPathDrawingMode) bool
+
+// CGContextPathContainsPoint calls the CoreGraphics framework function CGContextPathContainsPoint.
+func CGContextPathContainsPoint(c obj.Object, point corefoundation.CGPoint, mode CGPathDrawingMode) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextPathContainsPoint == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextPathContainsPoint, _lib, "CGContextPathContainsPoint")
+	}
+	return _fnCGContextPathContainsPoint(objref.IDOf(c), point, mode)
 }
 
 var _fnCGContextRelease func(objc.ID)
@@ -1515,6 +2011,17 @@ func CGContextSetMiterLimit(c obj.Object, limit float64) {
 	_fnCGContextSetMiterLimit(objref.IDOf(c), limit)
 }
 
+var _fnCGContextSetPatternPhase func(objc.ID, corefoundation.CGSize)
+
+// CGContextSetPatternPhase calls the CoreGraphics framework function CGContextSetPatternPhase.
+func CGContextSetPatternPhase(c obj.Object, phase corefoundation.CGSize) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextSetPatternPhase == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextSetPatternPhase, _lib, "CGContextSetPatternPhase")
+	}
+	_fnCGContextSetPatternPhase(objref.IDOf(c), phase)
+}
+
 var _fnCGContextSetRGBFillColor func(objc.ID, float64, float64, float64, float64)
 
 // CGContextSetRGBFillColor calls the CoreGraphics framework function CGContextSetRGBFillColor.
@@ -1546,6 +2053,28 @@ func CGContextSetRenderingIntent(c obj.Object, intent CGColorRenderingIntent) {
 		ebipurego.RegisterLibFunc(&_fnCGContextSetRenderingIntent, _lib, "CGContextSetRenderingIntent")
 	}
 	_fnCGContextSetRenderingIntent(objref.IDOf(c), intent)
+}
+
+var _fnCGContextSetShadow func(objc.ID, corefoundation.CGSize, float64)
+
+// CGContextSetShadow calls the CoreGraphics framework function CGContextSetShadow.
+func CGContextSetShadow(c obj.Object, offset corefoundation.CGSize, blur float64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextSetShadow == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextSetShadow, _lib, "CGContextSetShadow")
+	}
+	_fnCGContextSetShadow(objref.IDOf(c), offset, blur)
+}
+
+var _fnCGContextSetShadowWithColor func(objc.ID, corefoundation.CGSize, float64, objc.ID)
+
+// CGContextSetShadowWithColor calls the CoreGraphics framework function CGContextSetShadowWithColor.
+func CGContextSetShadowWithColor(c obj.Object, offset corefoundation.CGSize, blur float64, color obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextSetShadowWithColor == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextSetShadowWithColor, _lib, "CGContextSetShadowWithColor")
+	}
+	_fnCGContextSetShadowWithColor(objref.IDOf(c), offset, blur, objref.IDOf(color))
 }
 
 var _fnCGContextSetShouldAntialias func(objc.ID, bool)
@@ -1625,6 +2154,17 @@ func CGContextSetTextDrawingMode(c obj.Object, mode CGTextDrawingMode) {
 	_fnCGContextSetTextDrawingMode(objref.IDOf(c), mode)
 }
 
+var _fnCGContextSetTextMatrix func(objc.ID, corefoundation.CGAffineTransform)
+
+// CGContextSetTextMatrix calls the CoreGraphics framework function CGContextSetTextMatrix.
+func CGContextSetTextMatrix(c obj.Object, t corefoundation.CGAffineTransform) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextSetTextMatrix == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextSetTextMatrix, _lib, "CGContextSetTextMatrix")
+	}
+	_fnCGContextSetTextMatrix(objref.IDOf(c), t)
+}
+
 var _fnCGContextSetTextPosition func(objc.ID, float64, float64)
 
 // CGContextSetTextPosition calls the CoreGraphics framework function CGContextSetTextPosition.
@@ -1658,6 +2198,17 @@ func CGContextShowTextAtPoint(c obj.Object, x float64, y float64, string_ string
 	_fnCGContextShowTextAtPoint(objref.IDOf(c), x, y, string_, length)
 }
 
+var _fnCGContextStrokeEllipseInRect func(objc.ID, corefoundation.CGRect)
+
+// CGContextStrokeEllipseInRect calls the CoreGraphics framework function CGContextStrokeEllipseInRect.
+func CGContextStrokeEllipseInRect(c obj.Object, rect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextStrokeEllipseInRect == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextStrokeEllipseInRect, _lib, "CGContextStrokeEllipseInRect")
+	}
+	_fnCGContextStrokeEllipseInRect(objref.IDOf(c), rect)
+}
+
 var _fnCGContextStrokePath func(objc.ID)
 
 // CGContextStrokePath calls the CoreGraphics framework function CGContextStrokePath.
@@ -1667,6 +2218,28 @@ func CGContextStrokePath(c obj.Object) {
 		ebipurego.RegisterLibFunc(&_fnCGContextStrokePath, _lib, "CGContextStrokePath")
 	}
 	_fnCGContextStrokePath(objref.IDOf(c))
+}
+
+var _fnCGContextStrokeRect func(objc.ID, corefoundation.CGRect)
+
+// CGContextStrokeRect calls the CoreGraphics framework function CGContextStrokeRect.
+func CGContextStrokeRect(c obj.Object, rect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextStrokeRect == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextStrokeRect, _lib, "CGContextStrokeRect")
+	}
+	_fnCGContextStrokeRect(objref.IDOf(c), rect)
+}
+
+var _fnCGContextStrokeRectWithWidth func(objc.ID, corefoundation.CGRect, float64)
+
+// CGContextStrokeRectWithWidth calls the CoreGraphics framework function CGContextStrokeRectWithWidth.
+func CGContextStrokeRectWithWidth(c obj.Object, rect corefoundation.CGRect, width float64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGContextStrokeRectWithWidth == nil {
+		ebipurego.RegisterLibFunc(&_fnCGContextStrokeRectWithWidth, _lib, "CGContextStrokeRectWithWidth")
+	}
+	_fnCGContextStrokeRectWithWidth(objref.IDOf(c), rect, width)
 }
 
 var _fnCGContextSynchronize func(objc.ID)
@@ -1874,6 +2447,17 @@ func CGDisplayAvailableModes(dsp uint32) obj.Object {
 	}
 	_ret := _fnCGDisplayAvailableModes(dsp)
 	return obj.Wrap(_ret)
+}
+
+var _fnCGDisplayBounds func(uint32) corefoundation.CGRect
+
+// CGDisplayBounds calls the CoreGraphics framework function CGDisplayBounds.
+func CGDisplayBounds(display uint32) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGDisplayBounds == nil {
+		ebipurego.RegisterLibFunc(&_fnCGDisplayBounds, _lib, "CGDisplayBounds")
+	}
+	return _fnCGDisplayBounds(display)
 }
 
 var _fnCGDisplayCapture func(uint32) CGError
@@ -2290,6 +2874,17 @@ func CGDisplayModelNumber(display uint32) uint32 {
 	return _fnCGDisplayModelNumber(display)
 }
 
+var _fnCGDisplayMoveCursorToPoint func(uint32, corefoundation.CGPoint) CGError
+
+// CGDisplayMoveCursorToPoint calls the CoreGraphics framework function CGDisplayMoveCursorToPoint.
+func CGDisplayMoveCursorToPoint(display uint32, point corefoundation.CGPoint) CGError {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGDisplayMoveCursorToPoint == nil {
+		ebipurego.RegisterLibFunc(&_fnCGDisplayMoveCursorToPoint, _lib, "CGDisplayMoveCursorToPoint")
+	}
+	return _fnCGDisplayMoveCursorToPoint(display, point)
+}
+
 var _fnCGDisplayPixelsHigh func(uint32) int
 
 // CGDisplayPixelsHigh calls the CoreGraphics framework function CGDisplayPixelsHigh.
@@ -2354,6 +2949,17 @@ func CGDisplayRotation(display uint32) float64 {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayRotation, _lib, "CGDisplayRotation")
 	}
 	return _fnCGDisplayRotation(display)
+}
+
+var _fnCGDisplayScreenSize func(uint32) corefoundation.CGSize
+
+// CGDisplayScreenSize calls the CoreGraphics framework function CGDisplayScreenSize.
+func CGDisplayScreenSize(display uint32) corefoundation.CGSize {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGDisplayScreenSize == nil {
+		ebipurego.RegisterLibFunc(&_fnCGDisplayScreenSize, _lib, "CGDisplayScreenSize")
+	}
+	return _fnCGDisplayScreenSize(display)
 }
 
 var _fnCGDisplaySerialNumber func(uint32) uint32
@@ -2527,6 +3133,18 @@ func CGEventCreateKeyboardEvent(source obj.Object, virtualKey uint16, keyDown bo
 	return obj.Wrap(_ret)
 }
 
+var _fnCGEventCreateMouseEvent func(objc.ID, CGEventType, corefoundation.CGPoint, CGMouseButton) objc.ID
+
+// CGEventCreateMouseEvent calls the CoreGraphics framework function CGEventCreateMouseEvent.
+func CGEventCreateMouseEvent(source obj.Object, mouseType CGEventType, mouseCursorPosition corefoundation.CGPoint, mouseButton CGMouseButton) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGEventCreateMouseEvent == nil {
+		ebipurego.RegisterLibFunc(&_fnCGEventCreateMouseEvent, _lib, "CGEventCreateMouseEvent")
+	}
+	_ret := _fnCGEventCreateMouseEvent(objref.IDOf(source), mouseType, mouseCursorPosition, mouseButton)
+	return obj.Wrap(_ret)
+}
+
 var _fnCGEventCreateScrollWheelEvent2 func(objc.ID, CGScrollEventUnit, uint32, int32, int32, int32) objc.ID
 
 // CGEventCreateScrollWheelEvent2 calls the CoreGraphics framework function CGEventCreateScrollWheelEvent2.
@@ -2584,6 +3202,17 @@ func CGEventGetIntegerValueField(event obj.Object, field CGEventField) int64 {
 	return _fnCGEventGetIntegerValueField(objref.IDOf(event), field)
 }
 
+var _fnCGEventGetLocation func(objc.ID) corefoundation.CGPoint
+
+// CGEventGetLocation calls the CoreGraphics framework function CGEventGetLocation.
+func CGEventGetLocation(event obj.Object) corefoundation.CGPoint {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGEventGetLocation == nil {
+		ebipurego.RegisterLibFunc(&_fnCGEventGetLocation, _lib, "CGEventGetLocation")
+	}
+	return _fnCGEventGetLocation(objref.IDOf(event))
+}
+
 var _fnCGEventGetTimestamp func(objc.ID) uint64
 
 // CGEventGetTimestamp calls the CoreGraphics framework function CGEventGetTimestamp.
@@ -2615,6 +3244,17 @@ func CGEventGetTypeID() int {
 		ebipurego.RegisterLibFunc(&_fnCGEventGetTypeID, _lib, "CGEventGetTypeID")
 	}
 	return _fnCGEventGetTypeID()
+}
+
+var _fnCGEventGetUnflippedLocation func(objc.ID) corefoundation.CGPoint
+
+// CGEventGetUnflippedLocation calls the CoreGraphics framework function CGEventGetUnflippedLocation.
+func CGEventGetUnflippedLocation(event obj.Object) corefoundation.CGPoint {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGEventGetUnflippedLocation == nil {
+		ebipurego.RegisterLibFunc(&_fnCGEventGetUnflippedLocation, _lib, "CGEventGetUnflippedLocation")
+	}
+	return _fnCGEventGetUnflippedLocation(objref.IDOf(event))
 }
 
 var _fnCGEventPost func(CGEventTapLocation, objc.ID)
@@ -2670,6 +3310,17 @@ func CGEventSetIntegerValueField(event obj.Object, field CGEventField, value int
 		ebipurego.RegisterLibFunc(&_fnCGEventSetIntegerValueField, _lib, "CGEventSetIntegerValueField")
 	}
 	_fnCGEventSetIntegerValueField(objref.IDOf(event), field, value)
+}
+
+var _fnCGEventSetLocation func(objc.ID, corefoundation.CGPoint)
+
+// CGEventSetLocation calls the CoreGraphics framework function CGEventSetLocation.
+func CGEventSetLocation(event obj.Object, location corefoundation.CGPoint) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGEventSetLocation == nil {
+		ebipurego.RegisterLibFunc(&_fnCGEventSetLocation, _lib, "CGEventSetLocation")
+	}
+	_fnCGEventSetLocation(objref.IDOf(event), location)
 }
 
 var _fnCGEventSetSource func(objc.ID, objc.ID)
@@ -3101,6 +3752,17 @@ func CGFontGetDescent(font obj.Object) int {
 	return _fnCGFontGetDescent(objref.IDOf(font))
 }
 
+var _fnCGFontGetFontBBox func(objc.ID) corefoundation.CGRect
+
+// CGFontGetFontBBox calls the CoreGraphics framework function CGFontGetFontBBox.
+func CGFontGetFontBBox(font obj.Object) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGFontGetFontBBox == nil {
+		ebipurego.RegisterLibFunc(&_fnCGFontGetFontBBox, _lib, "CGFontGetFontBBox")
+	}
+	return _fnCGFontGetFontBBox(objref.IDOf(font))
+}
+
 var _fnCGFontGetGlyphWithGlyphName func(objc.ID, objc.ID) uint16
 
 // CGFontGetGlyphWithGlyphName calls the CoreGraphics framework function CGFontGetGlyphWithGlyphName.
@@ -3384,6 +4046,18 @@ func CGImageCreateCopyWithContentHeadroom(headroom float32, image obj.Object) ob
 	return obj.Wrap(_ret)
 }
 
+var _fnCGImageCreateWithImageInRect func(objc.ID, corefoundation.CGRect) objc.ID
+
+// CGImageCreateWithImageInRect calls the CoreGraphics framework function CGImageCreateWithImageInRect.
+func CGImageCreateWithImageInRect(image obj.Object, rect corefoundation.CGRect) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGImageCreateWithImageInRect == nil {
+		ebipurego.RegisterLibFunc(&_fnCGImageCreateWithImageInRect, _lib, "CGImageCreateWithImageInRect")
+	}
+	_ret := _fnCGImageCreateWithImageInRect(objref.IDOf(image), rect)
+	return obj.Wrap(_ret)
+}
+
 var _fnCGImageCreateWithMask func(objc.ID, objc.ID) objc.ID
 
 // CGImageCreateWithMask calls the CoreGraphics framework function CGImageCreateWithMask.
@@ -3642,6 +4316,18 @@ func CGInhibitLocalEvents(inhibit int) CGError {
 	return _fnCGInhibitLocalEvents(inhibit)
 }
 
+var _fnCGLayerCreateWithContext func(objc.ID, corefoundation.CGSize, objc.ID) objc.ID
+
+// CGLayerCreateWithContext calls the CoreGraphics framework function CGLayerCreateWithContext.
+func CGLayerCreateWithContext(context_ obj.Object, size corefoundation.CGSize, auxiliaryInfo obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGLayerCreateWithContext == nil {
+		ebipurego.RegisterLibFunc(&_fnCGLayerCreateWithContext, _lib, "CGLayerCreateWithContext")
+	}
+	_ret := _fnCGLayerCreateWithContext(objref.IDOf(context_), size, objref.IDOf(auxiliaryInfo))
+	return obj.Wrap(_ret)
+}
+
 var _fnCGLayerGetContext func(objc.ID) objc.ID
 
 // CGLayerGetContext calls the CoreGraphics framework function CGLayerGetContext.
@@ -3652,6 +4338,17 @@ func CGLayerGetContext(layer obj.Object) obj.Object {
 	}
 	_ret := _fnCGLayerGetContext(objref.IDOf(layer))
 	return obj.Wrap(_ret)
+}
+
+var _fnCGLayerGetSize func(objc.ID) corefoundation.CGSize
+
+// CGLayerGetSize calls the CoreGraphics framework function CGLayerGetSize.
+func CGLayerGetSize(layer obj.Object) corefoundation.CGSize {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGLayerGetSize == nil {
+		ebipurego.RegisterLibFunc(&_fnCGLayerGetSize, _lib, "CGLayerGetSize")
+	}
+	return _fnCGLayerGetSize(objref.IDOf(layer))
 }
 
 var _fnCGLayerGetTypeID func() int
@@ -3814,6 +4511,17 @@ func CGPDFContentStreamRetain(cs obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnCGPDFContextAddDestinationAtPoint func(objc.ID, objc.ID, corefoundation.CGPoint)
+
+// CGPDFContextAddDestinationAtPoint calls the CoreGraphics framework function CGPDFContextAddDestinationAtPoint.
+func CGPDFContextAddDestinationAtPoint(context_ obj.Object, name obj.Object, point corefoundation.CGPoint) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFContextAddDestinationAtPoint == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFContextAddDestinationAtPoint, _lib, "CGPDFContextAddDestinationAtPoint")
+	}
+	_fnCGPDFContextAddDestinationAtPoint(objref.IDOf(context_), objref.IDOf(name), point)
+}
+
 var _fnCGPDFContextAddDocumentMetadata func(objc.ID, objc.ID)
 
 // CGPDFContextAddDocumentMetadata calls the CoreGraphics framework function CGPDFContextAddDocumentMetadata.
@@ -3880,6 +4588,17 @@ func CGPDFContextEndTag(context_ obj.Object) {
 	_fnCGPDFContextEndTag(objref.IDOf(context_))
 }
 
+var _fnCGPDFContextSetDestinationForRect func(objc.ID, objc.ID, corefoundation.CGRect)
+
+// CGPDFContextSetDestinationForRect calls the CoreGraphics framework function CGPDFContextSetDestinationForRect.
+func CGPDFContextSetDestinationForRect(context_ obj.Object, name obj.Object, rect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFContextSetDestinationForRect == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFContextSetDestinationForRect, _lib, "CGPDFContextSetDestinationForRect")
+	}
+	_fnCGPDFContextSetDestinationForRect(objref.IDOf(context_), objref.IDOf(name), rect)
+}
+
 var _fnCGPDFContextSetIDTree func(objc.ID, objc.ID)
 
 // CGPDFContextSetIDTree calls the CoreGraphics framework function CGPDFContextSetIDTree.
@@ -3922,6 +4641,17 @@ func CGPDFContextSetParentTree(context_ obj.Object, parentTreeDictionary obj.Obj
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextSetParentTree, _lib, "CGPDFContextSetParentTree")
 	}
 	_fnCGPDFContextSetParentTree(objref.IDOf(context_), objref.IDOf(parentTreeDictionary))
+}
+
+var _fnCGPDFContextSetURLForRect func(objc.ID, objc.ID, corefoundation.CGRect)
+
+// CGPDFContextSetURLForRect calls the CoreGraphics framework function CGPDFContextSetURLForRect.
+func CGPDFContextSetURLForRect(context_ obj.Object, url obj.Object, rect corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFContextSetURLForRect == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFContextSetURLForRect, _lib, "CGPDFContextSetURLForRect")
+	}
+	_fnCGPDFContextSetURLForRect(objref.IDOf(context_), objref.IDOf(url), rect)
 }
 
 var _fnCGPDFDictionaryGetCount func(objc.ID) int
@@ -4003,6 +4733,28 @@ func CGPDFDocumentGetAccessPermissions(document obj.Object) CGPDFAccessPermissio
 	return _fnCGPDFDocumentGetAccessPermissions(objref.IDOf(document))
 }
 
+var _fnCGPDFDocumentGetArtBox func(objc.ID, int) corefoundation.CGRect
+
+// CGPDFDocumentGetArtBox calls the CoreGraphics framework function CGPDFDocumentGetArtBox.
+func CGPDFDocumentGetArtBox(document obj.Object, page int) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFDocumentGetArtBox == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetArtBox, _lib, "CGPDFDocumentGetArtBox")
+	}
+	return _fnCGPDFDocumentGetArtBox(objref.IDOf(document), page)
+}
+
+var _fnCGPDFDocumentGetBleedBox func(objc.ID, int) corefoundation.CGRect
+
+// CGPDFDocumentGetBleedBox calls the CoreGraphics framework function CGPDFDocumentGetBleedBox.
+func CGPDFDocumentGetBleedBox(document obj.Object, page int) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFDocumentGetBleedBox == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetBleedBox, _lib, "CGPDFDocumentGetBleedBox")
+	}
+	return _fnCGPDFDocumentGetBleedBox(objref.IDOf(document), page)
+}
+
 var _fnCGPDFDocumentGetCatalog func(objc.ID) objc.ID
 
 // CGPDFDocumentGetCatalog calls the CoreGraphics framework function CGPDFDocumentGetCatalog.
@@ -4013,6 +4765,17 @@ func CGPDFDocumentGetCatalog(document obj.Object) obj.Object {
 	}
 	_ret := _fnCGPDFDocumentGetCatalog(objref.IDOf(document))
 	return obj.Wrap(_ret)
+}
+
+var _fnCGPDFDocumentGetCropBox func(objc.ID, int) corefoundation.CGRect
+
+// CGPDFDocumentGetCropBox calls the CoreGraphics framework function CGPDFDocumentGetCropBox.
+func CGPDFDocumentGetCropBox(document obj.Object, page int) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFDocumentGetCropBox == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetCropBox, _lib, "CGPDFDocumentGetCropBox")
+	}
+	return _fnCGPDFDocumentGetCropBox(objref.IDOf(document), page)
 }
 
 var _fnCGPDFDocumentGetID func(objc.ID) objc.ID
@@ -4037,6 +4800,17 @@ func CGPDFDocumentGetInfo(document obj.Object) obj.Object {
 	}
 	_ret := _fnCGPDFDocumentGetInfo(objref.IDOf(document))
 	return obj.Wrap(_ret)
+}
+
+var _fnCGPDFDocumentGetMediaBox func(objc.ID, int) corefoundation.CGRect
+
+// CGPDFDocumentGetMediaBox calls the CoreGraphics framework function CGPDFDocumentGetMediaBox.
+func CGPDFDocumentGetMediaBox(document obj.Object, page int) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFDocumentGetMediaBox == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetMediaBox, _lib, "CGPDFDocumentGetMediaBox")
+	}
+	return _fnCGPDFDocumentGetMediaBox(objref.IDOf(document), page)
 }
 
 var _fnCGPDFDocumentGetNumberOfPages func(objc.ID) int
@@ -4083,6 +4857,17 @@ func CGPDFDocumentGetRotationAngle(document obj.Object, page int) int {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetRotationAngle, _lib, "CGPDFDocumentGetRotationAngle")
 	}
 	return _fnCGPDFDocumentGetRotationAngle(objref.IDOf(document), page)
+}
+
+var _fnCGPDFDocumentGetTrimBox func(objc.ID, int) corefoundation.CGRect
+
+// CGPDFDocumentGetTrimBox calls the CoreGraphics framework function CGPDFDocumentGetTrimBox.
+func CGPDFDocumentGetTrimBox(document obj.Object, page int) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFDocumentGetTrimBox == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetTrimBox, _lib, "CGPDFDocumentGetTrimBox")
+	}
+	return _fnCGPDFDocumentGetTrimBox(objref.IDOf(document), page)
 }
 
 var _fnCGPDFDocumentGetTypeID func() int
@@ -4198,6 +4983,17 @@ func CGPDFOperatorTableRetain(table obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnCGPDFPageGetBoxRect func(objc.ID, CGPDFBox) corefoundation.CGRect
+
+// CGPDFPageGetBoxRect calls the CoreGraphics framework function CGPDFPageGetBoxRect.
+func CGPDFPageGetBoxRect(page obj.Object, box CGPDFBox) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFPageGetBoxRect == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFPageGetBoxRect, _lib, "CGPDFPageGetBoxRect")
+	}
+	return _fnCGPDFPageGetBoxRect(objref.IDOf(page), box)
+}
+
 var _fnCGPDFPageGetDictionary func(objc.ID) objc.ID
 
 // CGPDFPageGetDictionary calls the CoreGraphics framework function CGPDFPageGetDictionary.
@@ -4220,6 +5016,17 @@ func CGPDFPageGetDocument(page obj.Object) obj.Object {
 	}
 	_ret := _fnCGPDFPageGetDocument(objref.IDOf(page))
 	return obj.Wrap(_ret)
+}
+
+var _fnCGPDFPageGetDrawingTransform func(objc.ID, CGPDFBox, corefoundation.CGRect, int, bool) corefoundation.CGAffineTransform
+
+// CGPDFPageGetDrawingTransform calls the CoreGraphics framework function CGPDFPageGetDrawingTransform.
+func CGPDFPageGetDrawingTransform(page obj.Object, box CGPDFBox, rect corefoundation.CGRect, rotate int, preserveAspectRatio bool) corefoundation.CGAffineTransform {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPDFPageGetDrawingTransform == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPDFPageGetDrawingTransform, _lib, "CGPDFPageGetDrawingTransform")
+	}
+	return _fnCGPDFPageGetDrawingTransform(objref.IDOf(page), box, rect, rotate, preserveAspectRatio)
 }
 
 var _fnCGPDFPageGetPageNumber func(objc.ID) int
@@ -4614,6 +5421,39 @@ func CGPathEqualToPath(path1 obj.Object, path2 obj.Object) bool {
 	return _fnCGPathEqualToPath(objref.IDOf(path1), objref.IDOf(path2))
 }
 
+var _fnCGPathGetBoundingBox func(objc.ID) corefoundation.CGRect
+
+// CGPathGetBoundingBox calls the CoreGraphics framework function CGPathGetBoundingBox.
+func CGPathGetBoundingBox(path obj.Object) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPathGetBoundingBox == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPathGetBoundingBox, _lib, "CGPathGetBoundingBox")
+	}
+	return _fnCGPathGetBoundingBox(objref.IDOf(path))
+}
+
+var _fnCGPathGetCurrentPoint func(objc.ID) corefoundation.CGPoint
+
+// CGPathGetCurrentPoint calls the CoreGraphics framework function CGPathGetCurrentPoint.
+func CGPathGetCurrentPoint(path obj.Object) corefoundation.CGPoint {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPathGetCurrentPoint == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPathGetCurrentPoint, _lib, "CGPathGetCurrentPoint")
+	}
+	return _fnCGPathGetCurrentPoint(objref.IDOf(path))
+}
+
+var _fnCGPathGetPathBoundingBox func(objc.ID) corefoundation.CGRect
+
+// CGPathGetPathBoundingBox calls the CoreGraphics framework function CGPathGetPathBoundingBox.
+func CGPathGetPathBoundingBox(path obj.Object) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPathGetPathBoundingBox == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPathGetPathBoundingBox, _lib, "CGPathGetPathBoundingBox")
+	}
+	return _fnCGPathGetPathBoundingBox(objref.IDOf(path))
+}
+
 var _fnCGPathGetTypeID func() int
 
 // CGPathGetTypeID calls the CoreGraphics framework function CGPathGetTypeID.
@@ -4704,6 +5544,51 @@ func CGPatternRetain(pattern obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnCGPointApplyAffineTransform func(corefoundation.CGPoint, corefoundation.CGAffineTransform) corefoundation.CGPoint
+
+// CGPointApplyAffineTransform calls the CoreGraphics framework function CGPointApplyAffineTransform.
+func CGPointApplyAffineTransform(point corefoundation.CGPoint, t corefoundation.CGAffineTransform) corefoundation.CGPoint {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPointApplyAffineTransform == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPointApplyAffineTransform, _lib, "CGPointApplyAffineTransform")
+	}
+	return _fnCGPointApplyAffineTransform(point, t)
+}
+
+var _fnCGPointCreateDictionaryRepresentation func(corefoundation.CGPoint) objc.ID
+
+// CGPointCreateDictionaryRepresentation calls the CoreGraphics framework function CGPointCreateDictionaryRepresentation.
+func CGPointCreateDictionaryRepresentation(point corefoundation.CGPoint) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPointCreateDictionaryRepresentation == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPointCreateDictionaryRepresentation, _lib, "CGPointCreateDictionaryRepresentation")
+	}
+	_ret := _fnCGPointCreateDictionaryRepresentation(point)
+	return obj.Wrap(_ret)
+}
+
+var _fnCGPointEqualToPoint func(corefoundation.CGPoint, corefoundation.CGPoint) bool
+
+// CGPointEqualToPoint calls the CoreGraphics framework function CGPointEqualToPoint.
+func CGPointEqualToPoint(point1 corefoundation.CGPoint, point2 corefoundation.CGPoint) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPointEqualToPoint == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPointEqualToPoint, _lib, "CGPointEqualToPoint")
+	}
+	return _fnCGPointEqualToPoint(point1, point2)
+}
+
+var _fnCGPointMake func(float64, float64) corefoundation.CGPoint
+
+// CGPointMake calls the CoreGraphics framework function CGPointMake.
+func CGPointMake(x float64, y float64) corefoundation.CGPoint {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGPointMake == nil {
+		ebipurego.RegisterLibFunc(&_fnCGPointMake, _lib, "CGPointMake")
+	}
+	return _fnCGPointMake(x, y)
+}
+
 var _fnCGPostKeyboardEvent func(uint16, uint16, int) CGError
 
 // CGPostKeyboardEvent calls the CoreGraphics framework function CGPostKeyboardEvent.
@@ -4746,6 +5631,271 @@ func CGPreflightScreenCaptureAccess() bool {
 		ebipurego.RegisterLibFunc(&_fnCGPreflightScreenCaptureAccess, _lib, "CGPreflightScreenCaptureAccess")
 	}
 	return _fnCGPreflightScreenCaptureAccess()
+}
+
+var _fnCGRectApplyAffineTransform func(corefoundation.CGRect, corefoundation.CGAffineTransform) corefoundation.CGRect
+
+// CGRectApplyAffineTransform calls the CoreGraphics framework function CGRectApplyAffineTransform.
+func CGRectApplyAffineTransform(rect corefoundation.CGRect, t corefoundation.CGAffineTransform) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectApplyAffineTransform == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectApplyAffineTransform, _lib, "CGRectApplyAffineTransform")
+	}
+	return _fnCGRectApplyAffineTransform(rect, t)
+}
+
+var _fnCGRectContainsPoint func(corefoundation.CGRect, corefoundation.CGPoint) bool
+
+// CGRectContainsPoint calls the CoreGraphics framework function CGRectContainsPoint.
+func CGRectContainsPoint(rect corefoundation.CGRect, point corefoundation.CGPoint) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectContainsPoint == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectContainsPoint, _lib, "CGRectContainsPoint")
+	}
+	return _fnCGRectContainsPoint(rect, point)
+}
+
+var _fnCGRectContainsRect func(corefoundation.CGRect, corefoundation.CGRect) bool
+
+// CGRectContainsRect calls the CoreGraphics framework function CGRectContainsRect.
+func CGRectContainsRect(rect1 corefoundation.CGRect, rect2 corefoundation.CGRect) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectContainsRect == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectContainsRect, _lib, "CGRectContainsRect")
+	}
+	return _fnCGRectContainsRect(rect1, rect2)
+}
+
+var _fnCGRectCreateDictionaryRepresentation func(corefoundation.CGRect) objc.ID
+
+// CGRectCreateDictionaryRepresentation calls the CoreGraphics framework function CGRectCreateDictionaryRepresentation.
+func CGRectCreateDictionaryRepresentation(arg corefoundation.CGRect) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectCreateDictionaryRepresentation == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectCreateDictionaryRepresentation, _lib, "CGRectCreateDictionaryRepresentation")
+	}
+	_ret := _fnCGRectCreateDictionaryRepresentation(arg)
+	return obj.Wrap(_ret)
+}
+
+var _fnCGRectEqualToRect func(corefoundation.CGRect, corefoundation.CGRect) bool
+
+// CGRectEqualToRect calls the CoreGraphics framework function CGRectEqualToRect.
+func CGRectEqualToRect(rect1 corefoundation.CGRect, rect2 corefoundation.CGRect) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectEqualToRect == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectEqualToRect, _lib, "CGRectEqualToRect")
+	}
+	return _fnCGRectEqualToRect(rect1, rect2)
+}
+
+var _fnCGRectGetHeight func(corefoundation.CGRect) float64
+
+// CGRectGetHeight calls the CoreGraphics framework function CGRectGetHeight.
+func CGRectGetHeight(rect corefoundation.CGRect) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectGetHeight == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectGetHeight, _lib, "CGRectGetHeight")
+	}
+	return _fnCGRectGetHeight(rect)
+}
+
+var _fnCGRectGetMaxX func(corefoundation.CGRect) float64
+
+// CGRectGetMaxX calls the CoreGraphics framework function CGRectGetMaxX.
+func CGRectGetMaxX(rect corefoundation.CGRect) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectGetMaxX == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectGetMaxX, _lib, "CGRectGetMaxX")
+	}
+	return _fnCGRectGetMaxX(rect)
+}
+
+var _fnCGRectGetMaxY func(corefoundation.CGRect) float64
+
+// CGRectGetMaxY calls the CoreGraphics framework function CGRectGetMaxY.
+func CGRectGetMaxY(rect corefoundation.CGRect) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectGetMaxY == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectGetMaxY, _lib, "CGRectGetMaxY")
+	}
+	return _fnCGRectGetMaxY(rect)
+}
+
+var _fnCGRectGetMidX func(corefoundation.CGRect) float64
+
+// CGRectGetMidX calls the CoreGraphics framework function CGRectGetMidX.
+func CGRectGetMidX(rect corefoundation.CGRect) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectGetMidX == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectGetMidX, _lib, "CGRectGetMidX")
+	}
+	return _fnCGRectGetMidX(rect)
+}
+
+var _fnCGRectGetMidY func(corefoundation.CGRect) float64
+
+// CGRectGetMidY calls the CoreGraphics framework function CGRectGetMidY.
+func CGRectGetMidY(rect corefoundation.CGRect) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectGetMidY == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectGetMidY, _lib, "CGRectGetMidY")
+	}
+	return _fnCGRectGetMidY(rect)
+}
+
+var _fnCGRectGetMinX func(corefoundation.CGRect) float64
+
+// CGRectGetMinX calls the CoreGraphics framework function CGRectGetMinX.
+func CGRectGetMinX(rect corefoundation.CGRect) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectGetMinX == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectGetMinX, _lib, "CGRectGetMinX")
+	}
+	return _fnCGRectGetMinX(rect)
+}
+
+var _fnCGRectGetMinY func(corefoundation.CGRect) float64
+
+// CGRectGetMinY calls the CoreGraphics framework function CGRectGetMinY.
+func CGRectGetMinY(rect corefoundation.CGRect) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectGetMinY == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectGetMinY, _lib, "CGRectGetMinY")
+	}
+	return _fnCGRectGetMinY(rect)
+}
+
+var _fnCGRectGetWidth func(corefoundation.CGRect) float64
+
+// CGRectGetWidth calls the CoreGraphics framework function CGRectGetWidth.
+func CGRectGetWidth(rect corefoundation.CGRect) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectGetWidth == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectGetWidth, _lib, "CGRectGetWidth")
+	}
+	return _fnCGRectGetWidth(rect)
+}
+
+var _fnCGRectInset func(corefoundation.CGRect, float64, float64) corefoundation.CGRect
+
+// CGRectInset calls the CoreGraphics framework function CGRectInset.
+func CGRectInset(rect corefoundation.CGRect, dx float64, dy float64) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectInset == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectInset, _lib, "CGRectInset")
+	}
+	return _fnCGRectInset(rect, dx, dy)
+}
+
+var _fnCGRectIntegral func(corefoundation.CGRect) corefoundation.CGRect
+
+// CGRectIntegral calls the CoreGraphics framework function CGRectIntegral.
+func CGRectIntegral(rect corefoundation.CGRect) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectIntegral == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectIntegral, _lib, "CGRectIntegral")
+	}
+	return _fnCGRectIntegral(rect)
+}
+
+var _fnCGRectIntersection func(corefoundation.CGRect, corefoundation.CGRect) corefoundation.CGRect
+
+// CGRectIntersection calls the CoreGraphics framework function CGRectIntersection.
+func CGRectIntersection(r1 corefoundation.CGRect, r2 corefoundation.CGRect) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectIntersection == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectIntersection, _lib, "CGRectIntersection")
+	}
+	return _fnCGRectIntersection(r1, r2)
+}
+
+var _fnCGRectIntersectsRect func(corefoundation.CGRect, corefoundation.CGRect) bool
+
+// CGRectIntersectsRect calls the CoreGraphics framework function CGRectIntersectsRect.
+func CGRectIntersectsRect(rect1 corefoundation.CGRect, rect2 corefoundation.CGRect) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectIntersectsRect == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectIntersectsRect, _lib, "CGRectIntersectsRect")
+	}
+	return _fnCGRectIntersectsRect(rect1, rect2)
+}
+
+var _fnCGRectIsEmpty func(corefoundation.CGRect) bool
+
+// CGRectIsEmpty calls the CoreGraphics framework function CGRectIsEmpty.
+func CGRectIsEmpty(rect corefoundation.CGRect) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectIsEmpty == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectIsEmpty, _lib, "CGRectIsEmpty")
+	}
+	return _fnCGRectIsEmpty(rect)
+}
+
+var _fnCGRectIsInfinite func(corefoundation.CGRect) bool
+
+// CGRectIsInfinite calls the CoreGraphics framework function CGRectIsInfinite.
+func CGRectIsInfinite(rect corefoundation.CGRect) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectIsInfinite == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectIsInfinite, _lib, "CGRectIsInfinite")
+	}
+	return _fnCGRectIsInfinite(rect)
+}
+
+var _fnCGRectIsNull func(corefoundation.CGRect) bool
+
+// CGRectIsNull calls the CoreGraphics framework function CGRectIsNull.
+func CGRectIsNull(rect corefoundation.CGRect) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectIsNull == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectIsNull, _lib, "CGRectIsNull")
+	}
+	return _fnCGRectIsNull(rect)
+}
+
+var _fnCGRectMake func(float64, float64, float64, float64) corefoundation.CGRect
+
+// CGRectMake calls the CoreGraphics framework function CGRectMake.
+func CGRectMake(x float64, y float64, width float64, height float64) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectMake == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectMake, _lib, "CGRectMake")
+	}
+	return _fnCGRectMake(x, y, width, height)
+}
+
+var _fnCGRectOffset func(corefoundation.CGRect, float64, float64) corefoundation.CGRect
+
+// CGRectOffset calls the CoreGraphics framework function CGRectOffset.
+func CGRectOffset(rect corefoundation.CGRect, dx float64, dy float64) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectOffset == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectOffset, _lib, "CGRectOffset")
+	}
+	return _fnCGRectOffset(rect, dx, dy)
+}
+
+var _fnCGRectStandardize func(corefoundation.CGRect) corefoundation.CGRect
+
+// CGRectStandardize calls the CoreGraphics framework function CGRectStandardize.
+func CGRectStandardize(rect corefoundation.CGRect) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectStandardize == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectStandardize, _lib, "CGRectStandardize")
+	}
+	return _fnCGRectStandardize(rect)
+}
+
+var _fnCGRectUnion func(corefoundation.CGRect, corefoundation.CGRect) corefoundation.CGRect
+
+// CGRectUnion calls the CoreGraphics framework function CGRectUnion.
+func CGRectUnion(r1 corefoundation.CGRect, r2 corefoundation.CGRect) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGRectUnion == nil {
+		ebipurego.RegisterLibFunc(&_fnCGRectUnion, _lib, "CGRectUnion")
+	}
+	return _fnCGRectUnion(r1, r2)
 }
 
 var _fnCGReleaseAllDisplays func() CGError
@@ -4904,6 +6054,54 @@ func CGSetLocalEventsSuppressionInterval(seconds float64) CGError {
 	return _fnCGSetLocalEventsSuppressionInterval(seconds)
 }
 
+var _fnCGShadingCreateAxial func(objc.ID, corefoundation.CGPoint, corefoundation.CGPoint, objc.ID, bool, bool) objc.ID
+
+// CGShadingCreateAxial calls the CoreGraphics framework function CGShadingCreateAxial.
+func CGShadingCreateAxial(space obj.Object, start corefoundation.CGPoint, end corefoundation.CGPoint, function obj.Object, extendStart bool, extendEnd bool) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGShadingCreateAxial == nil {
+		ebipurego.RegisterLibFunc(&_fnCGShadingCreateAxial, _lib, "CGShadingCreateAxial")
+	}
+	_ret := _fnCGShadingCreateAxial(objref.IDOf(space), start, end, objref.IDOf(function), extendStart, extendEnd)
+	return obj.Wrap(_ret)
+}
+
+var _fnCGShadingCreateAxialWithContentHeadroom func(float32, objc.ID, corefoundation.CGPoint, corefoundation.CGPoint, objc.ID, bool, bool) objc.ID
+
+// CGShadingCreateAxialWithContentHeadroom calls the CoreGraphics framework function CGShadingCreateAxialWithContentHeadroom.
+func CGShadingCreateAxialWithContentHeadroom(headroom float32, space obj.Object, start corefoundation.CGPoint, end corefoundation.CGPoint, function obj.Object, extendStart bool, extendEnd bool) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGShadingCreateAxialWithContentHeadroom == nil {
+		ebipurego.RegisterLibFunc(&_fnCGShadingCreateAxialWithContentHeadroom, _lib, "CGShadingCreateAxialWithContentHeadroom")
+	}
+	_ret := _fnCGShadingCreateAxialWithContentHeadroom(headroom, objref.IDOf(space), start, end, objref.IDOf(function), extendStart, extendEnd)
+	return obj.Wrap(_ret)
+}
+
+var _fnCGShadingCreateRadial func(objc.ID, corefoundation.CGPoint, float64, corefoundation.CGPoint, float64, objc.ID, bool, bool) objc.ID
+
+// CGShadingCreateRadial calls the CoreGraphics framework function CGShadingCreateRadial.
+func CGShadingCreateRadial(space obj.Object, start corefoundation.CGPoint, startRadius float64, end corefoundation.CGPoint, endRadius float64, function obj.Object, extendStart bool, extendEnd bool) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGShadingCreateRadial == nil {
+		ebipurego.RegisterLibFunc(&_fnCGShadingCreateRadial, _lib, "CGShadingCreateRadial")
+	}
+	_ret := _fnCGShadingCreateRadial(objref.IDOf(space), start, startRadius, end, endRadius, objref.IDOf(function), extendStart, extendEnd)
+	return obj.Wrap(_ret)
+}
+
+var _fnCGShadingCreateRadialWithContentHeadroom func(float32, objc.ID, corefoundation.CGPoint, float64, corefoundation.CGPoint, float64, objc.ID, bool, bool) objc.ID
+
+// CGShadingCreateRadialWithContentHeadroom calls the CoreGraphics framework function CGShadingCreateRadialWithContentHeadroom.
+func CGShadingCreateRadialWithContentHeadroom(headroom float32, space obj.Object, start corefoundation.CGPoint, startRadius float64, end corefoundation.CGPoint, endRadius float64, function obj.Object, extendStart bool, extendEnd bool) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGShadingCreateRadialWithContentHeadroom == nil {
+		ebipurego.RegisterLibFunc(&_fnCGShadingCreateRadialWithContentHeadroom, _lib, "CGShadingCreateRadialWithContentHeadroom")
+	}
+	_ret := _fnCGShadingCreateRadialWithContentHeadroom(headroom, objref.IDOf(space), start, startRadius, end, endRadius, objref.IDOf(function), extendStart, extendEnd)
+	return obj.Wrap(_ret)
+}
+
 var _fnCGShadingGetContentHeadroom func(objc.ID) float32
 
 // CGShadingGetContentHeadroom calls the CoreGraphics framework function CGShadingGetContentHeadroom.
@@ -4971,6 +6169,73 @@ func CGShieldingWindowLevel() int32 {
 	return _fnCGShieldingWindowLevel()
 }
 
+var _fnCGSizeApplyAffineTransform func(corefoundation.CGSize, corefoundation.CGAffineTransform) corefoundation.CGSize
+
+// CGSizeApplyAffineTransform calls the CoreGraphics framework function CGSizeApplyAffineTransform.
+func CGSizeApplyAffineTransform(size corefoundation.CGSize, t corefoundation.CGAffineTransform) corefoundation.CGSize {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGSizeApplyAffineTransform == nil {
+		ebipurego.RegisterLibFunc(&_fnCGSizeApplyAffineTransform, _lib, "CGSizeApplyAffineTransform")
+	}
+	return _fnCGSizeApplyAffineTransform(size, t)
+}
+
+var _fnCGSizeCreateDictionaryRepresentation func(corefoundation.CGSize) objc.ID
+
+// CGSizeCreateDictionaryRepresentation calls the CoreGraphics framework function CGSizeCreateDictionaryRepresentation.
+func CGSizeCreateDictionaryRepresentation(size corefoundation.CGSize) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGSizeCreateDictionaryRepresentation == nil {
+		ebipurego.RegisterLibFunc(&_fnCGSizeCreateDictionaryRepresentation, _lib, "CGSizeCreateDictionaryRepresentation")
+	}
+	_ret := _fnCGSizeCreateDictionaryRepresentation(size)
+	return obj.Wrap(_ret)
+}
+
+var _fnCGSizeEqualToSize func(corefoundation.CGSize, corefoundation.CGSize) bool
+
+// CGSizeEqualToSize calls the CoreGraphics framework function CGSizeEqualToSize.
+func CGSizeEqualToSize(size1 corefoundation.CGSize, size2 corefoundation.CGSize) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGSizeEqualToSize == nil {
+		ebipurego.RegisterLibFunc(&_fnCGSizeEqualToSize, _lib, "CGSizeEqualToSize")
+	}
+	return _fnCGSizeEqualToSize(size1, size2)
+}
+
+var _fnCGSizeMake func(float64, float64) corefoundation.CGSize
+
+// CGSizeMake calls the CoreGraphics framework function CGSizeMake.
+func CGSizeMake(width float64, height float64) corefoundation.CGSize {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGSizeMake == nil {
+		ebipurego.RegisterLibFunc(&_fnCGSizeMake, _lib, "CGSizeMake")
+	}
+	return _fnCGSizeMake(width, height)
+}
+
+var _fnCGVectorMake func(float64, float64) corefoundation.CGVector
+
+// CGVectorMake calls the CoreGraphics framework function CGVectorMake.
+func CGVectorMake(dx float64, dy float64) corefoundation.CGVector {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGVectorMake == nil {
+		ebipurego.RegisterLibFunc(&_fnCGVectorMake, _lib, "CGVectorMake")
+	}
+	return _fnCGVectorMake(dx, dy)
+}
+
+var _fnCGWarpMouseCursorPosition func(corefoundation.CGPoint) CGError
+
+// CGWarpMouseCursorPosition calls the CoreGraphics framework function CGWarpMouseCursorPosition.
+func CGWarpMouseCursorPosition(newCursorPosition corefoundation.CGPoint) CGError {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGWarpMouseCursorPosition == nil {
+		ebipurego.RegisterLibFunc(&_fnCGWarpMouseCursorPosition, _lib, "CGWarpMouseCursorPosition")
+	}
+	return _fnCGWarpMouseCursorPosition(newCursorPosition)
+}
+
 var _fnCGWindowLevelForKey func(CGWindowLevelKey) int32
 
 // CGWindowLevelForKey calls the CoreGraphics framework function CGWindowLevelForKey.
@@ -5015,6 +6280,30 @@ func CGWindowListCreateDescriptionFromArray(windowArray obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCGWindowListCreateDescriptionFromArray, _lib, "CGWindowListCreateDescriptionFromArray")
 	}
 	_ret := _fnCGWindowListCreateDescriptionFromArray(objref.IDOf(windowArray))
+	return obj.Wrap(_ret)
+}
+
+var _fnCGWindowListCreateImage func(corefoundation.CGRect, CGWindowListOption, uint32, CGWindowImageOption) objc.ID
+
+// CGWindowListCreateImage calls the CoreGraphics framework function CGWindowListCreateImage.
+func CGWindowListCreateImage(screenBounds corefoundation.CGRect, listOption CGWindowListOption, windowID uint32, imageOption CGWindowImageOption) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGWindowListCreateImage == nil {
+		ebipurego.RegisterLibFunc(&_fnCGWindowListCreateImage, _lib, "CGWindowListCreateImage")
+	}
+	_ret := _fnCGWindowListCreateImage(screenBounds, listOption, windowID, imageOption)
+	return obj.Wrap(_ret)
+}
+
+var _fnCGWindowListCreateImageFromArray func(corefoundation.CGRect, objc.ID, CGWindowImageOption) objc.ID
+
+// CGWindowListCreateImageFromArray calls the CoreGraphics framework function CGWindowListCreateImageFromArray.
+func CGWindowListCreateImageFromArray(screenBounds corefoundation.CGRect, windowArray obj.Object, imageOption CGWindowImageOption) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGWindowListCreateImageFromArray == nil {
+		ebipurego.RegisterLibFunc(&_fnCGWindowListCreateImageFromArray, _lib, "CGWindowListCreateImageFromArray")
+	}
+	_ret := _fnCGWindowListCreateImageFromArray(screenBounds, objref.IDOf(windowArray), imageOption)
 	return obj.Wrap(_ret)
 }
 

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Measurements of the Earth’s magnetic field relative to the device.
-//
 // MagnetometerData is an idiomatic wrapper over the Objective-C class CMMagnetometerData.
+//
+// It embeds [LogItem], promoting that type's methods.
+//
+// Measurements of the Earth’s magnetic field relative to the device.
 type MagnetometerData struct {
-	objref.Handle
+	LogItem
 }
 
 // MagnetometerDataFromID adopts an existing Objective-C object as a MagnetometerData
@@ -25,7 +26,8 @@ func MagnetometerDataFromID(id objc.ID) *MagnetometerData {
 	if id == 0 {
 		return nil
 	}
-	x := &MagnetometerData{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MagnetometerData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func magnetometerDataAdopt(id objc.ID) *MagnetometerData {
 	if id == 0 {
 		return nil
 	}
-	x := &MagnetometerData{Handle: objref.Wrap(id)}
+	x := &MagnetometerData{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MagnetometerData) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MagnetometerData) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MagnetometerData) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMagnetometerData creates a new MagnetometerData.
@@ -70,3 +58,5 @@ type MagnetometerDataable interface {
 }
 
 var _ MagnetometerDataable = (*MagnetometerData)(nil)
+
+var _ LogItemProvider = (*MagnetometerData)(nil)

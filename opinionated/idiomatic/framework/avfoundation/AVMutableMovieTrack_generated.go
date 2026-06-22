@@ -6,17 +6,20 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mutable track that conforms to the QuickTime or ISO base media file format.
-//
 // MutableMovieTrack is an idiomatic wrapper over the Objective-C class AVMutableMovieTrack.
+//
+// It embeds [MovieTrack], promoting that type's methods.
+//
+// A mutable track that conforms to the QuickTime or ISO base media file format.
 type MutableMovieTrack struct {
-	objref.Handle
+	MovieTrack
 }
 
 // MutableMovieTrackFromID adopts an existing Objective-C object as a MutableMovieTrack
@@ -25,7 +28,8 @@ func MutableMovieTrackFromID(id objc.ID) *MutableMovieTrack {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableMovieTrack{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MutableMovieTrack{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func mutableMovieTrackAdopt(id objc.ID) *MutableMovieTrack {
 	if id == 0 {
 		return nil
 	}
-	x := &MutableMovieTrack{Handle: objref.Wrap(id)}
+	x := &MutableMovieTrack{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MutableMovieTrack) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MutableMovieTrack) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MutableMovieTrack) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMutableMovieTrack creates a new MutableMovieTrack.
@@ -64,216 +54,276 @@ func NewMutableMovieTrack() *MutableMovieTrack {
 	return mutableMovieTrackAdopt(_id)
 }
 
-// A storage container for the media data to be added to a track.
-//
-// WithMediaDataStorage sets mediaDataStorage and returns the receiver so calls can be chained.
+// WithMediaDataStorage a storage container for the media data to be added to a track.
 func (x *MutableMovieTrack) WithMediaDataStorage(mediaDataStorage *MediaDataStorage) *MutableMovieTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaDataStorage:"), objref.IDOf(mediaDataStorage))
 	return x
 }
 
-// The base URL for sample references.
-//
-// WithSampleReferenceBaseURL sets sampleReferenceBaseURL and returns the receiver so calls can be chained.
+// WithSampleReferenceBaseURL the base URL for sample references.
 func (x *MutableMovieTrack) WithSampleReferenceBaseURL(sampleReferenceBaseURL string) *MutableMovieTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleReferenceBaseURL:"), rt.FileURL(sampleReferenceBaseURL))
 	return x
 }
 
-// A Boolean value that indicates whether the track’s container enables it.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether the track’s container enables it.
 func (x *MutableMovieTrack) WithEnabled(enabled bool) *MutableMovieTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A number that identifies the track as a member of a particular alternate group.
-//
-// WithAlternateGroupID sets alternateGroupID and returns the receiver so calls can be chained.
+// WithAlternateGroupID a number that identifies the track as a member of a particular alternate group.
 func (x *MutableMovieTrack) WithAlternateGroupID(alternateGroupID int) *MutableMovieTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateGroupID:"), alternateGroupID)
 	return x
 }
 
-// A Boolean value that indicates whether a track is in a modified state.
-//
-// WithModified sets modified and returns the receiver so calls can be chained.
+// WithModified a Boolean value that indicates whether a track is in a modified state.
 func (x *MutableMovieTrack) WithModified(modified bool) *MutableMovieTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModified:"), modified)
 	return x
 }
 
-// The time scale for tracks that contain the moov atom.
-//
-// WithTimescale sets timescale and returns the receiver so calls can be chained.
+// WithTimescale the time scale for tracks that contain the moov atom.
 func (x *MutableMovieTrack) WithTimescale(timescale int32) *MutableMovieTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimescale:"), timescale)
 	return x
 }
 
-// The language code of the track.
-//
-// WithLanguageCode sets languageCode and returns the receiver so calls can be chained.
+// WithLanguageCode the language code of the track.
 func (x *MutableMovieTrack) WithLanguageCode(languageCode string) *MutableMovieTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguageCode:"), purego.NSString(languageCode))
 	return x
 }
 
-// The language tag of the track.
-//
-// WithExtendedLanguageTag sets extendedLanguageTag and returns the receiver so calls can be chained.
+// WithExtendedLanguageTag the language tag of the track.
 func (x *MutableMovieTrack) WithExtendedLanguageTag(extendedLanguageTag string) *MutableMovieTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedLanguageTag:"), purego.NSString(extendedLanguageTag))
 	return x
 }
 
-// The layer level for the visual media of the track.
-//
-// WithLayer sets layer and returns the receiver so calls can be chained.
+// WithNaturalSize the dimensions used to display the visual media data for the track.
+func (x *MutableMovieTrack) WithNaturalSize(naturalSize corefoundation.CGSize) *MutableMovieTrack {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNaturalSize:"), naturalSize)
+	return x
+}
+
+// WithPreferredTransform the transform performed on the visual media data of the track for display purposes.
+func (x *MutableMovieTrack) WithPreferredTransform(preferredTransform corefoundation.CGAffineTransform) *MutableMovieTrack {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredTransform:"), preferredTransform)
+	return x
+}
+
+// WithLayer the layer level for the visual media of the track.
 func (x *MutableMovieTrack) WithLayer(layer int) *MutableMovieTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), layer)
 	return x
 }
 
-// The preferred volume for the audible medata data of the track.
-//
-// WithPreferredVolume sets preferredVolume and returns the receiver so calls can be chained.
+// WithCleanApertureDimensions the clean aperture dimension of the track.
+func (x *MutableMovieTrack) WithCleanApertureDimensions(cleanApertureDimensions corefoundation.CGSize) *MutableMovieTrack {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCleanApertureDimensions:"), cleanApertureDimensions)
+	return x
+}
+
+// WithProductionApertureDimensions the production aperture dimensions of the track.
+func (x *MutableMovieTrack) WithProductionApertureDimensions(productionApertureDimensions corefoundation.CGSize) *MutableMovieTrack {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductionApertureDimensions:"), productionApertureDimensions)
+	return x
+}
+
+// WithEncodedPixelsDimensions the encoded pixels dimensions of the track.
+func (x *MutableMovieTrack) WithEncodedPixelsDimensions(encodedPixelsDimensions corefoundation.CGSize) *MutableMovieTrack {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncodedPixelsDimensions:"), encodedPixelsDimensions)
+	return x
+}
+
+// WithPreferredVolume the preferred volume for the audible medata data of the track.
 func (x *MutableMovieTrack) WithPreferredVolume(preferredVolume float32) *MutableMovieTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredVolume:"), preferredVolume)
 	return x
 }
 
-// The maximum size to use for each chunk of sample data written to the file for file types that support media chunk duration.
-//
-// WithPreferredMediaChunkSize sets preferredMediaChunkSize and returns the receiver so calls can be chained.
+// WithPreferredMediaChunkSize the maximum size to use for each chunk of sample data written to the file for file types that support media chunk duration.
 func (x *MutableMovieTrack) WithPreferredMediaChunkSize(preferredMediaChunkSize int) *MutableMovieTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMediaChunkSize:"), preferredMediaChunkSize)
 	return x
 }
 
-// The boundary for media chunk alignment for file types that support media chunk alignment.
-//
-// WithPreferredMediaChunkAlignment sets preferredMediaChunkAlignment and returns the receiver so calls can be chained.
+// WithPreferredMediaChunkAlignment the boundary for media chunk alignment for file types that support media chunk alignment.
 func (x *MutableMovieTrack) WithPreferredMediaChunkAlignment(preferredMediaChunkAlignment int) *MutableMovieTrack {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMediaChunkAlignment:"), preferredMediaChunkAlignment)
 	return x
 }
 
-// An array of metadata stored by the track.
-//
-// WithMetadata sets the collection and returns the receiver so calls can be chained.
+// WithMetadata an array of metadata stored by the track.
 func (x *MutableMovieTrack) WithMetadata(items ...MetadataItemProvider) *MutableMovieTrack {
 	_arr := purego.SliceToNSArray(items, func(_v MetadataItemProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), _arr)
 	return x
 }
 
+// SetMediaDataStorage wraps the corresponding Objective-C method.
 func (x *MutableMovieTrack) SetMediaDataStorage(mediaDataStorage *MediaDataStorage) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaDataStorage:"), objref.IDOf(mediaDataStorage))
 }
 
-// For file types that support writing sample references, such as QuickTime Movie files, specifies the base URL that sample references are relative to; may be nil. If the value of this property can be resolved as an absolute URL, the sample locations written to the file when appending sample references to this track will be relative to this URL. The URL must point to a location contained by any common parent directory of the locations that will be referenced. For example, setting the sampleReferenceBaseURL property to "file:///Users/johnappleseed/Movies/" and appending sample buffers that refer to "file:///Users/johnappleseed/Movies/data/movie1.mov" will cause the sample reference "data/movie1.mov" to be written to the movie file. If the value of the property cannot be resolved as an absolute URL or if it points to a location that is not contained by any common parent directory of the locations that will be referenced, the location will be written unmodified. The default value is nil, which means that the location will be written unmodified.
+// SampleReferenceBaseURL for file types that support writing sample references, such as QuickTime Movie files, specifies the base URL that sample references are relative to; may be nil. If the value of this property can be resolved as an absolute URL, the sample locations written to the file when appending sample references to this track will be relative to this URL. The URL must point to a location contained by any common parent directory of the locations that will be referenced. For example, setting the sampleReferenceBaseURL property to "file:///Users/johnappleseed/Movies/" and appending sample buffers that refer to "file:///Users/johnappleseed/Movies/data/movie1.mov" will cause the sample reference "data/movie1.mov" to be written to the movie file. If the value of the property cannot be resolved as an absolute URL or if it points to a location that is not contained by any common parent directory of the locations that will be referenced, the location will be written unmodified. The default value is nil, which means that the location will be written unmodified.
 func (x *MutableMovieTrack) SampleReferenceBaseURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleReferenceBaseURL"))
 	return obj.Wrap(_r)
 }
 
+// SetSampleReferenceBaseURL wraps the corresponding Objective-C method.
 func (x *MutableMovieTrack) SetSampleReferenceBaseURL(sampleReferenceBaseURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleReferenceBaseURL:"), rt.FileURL(sampleReferenceBaseURL))
 }
 
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *MutableMovieTrack) SetEnabled(enabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
+// SetAlternateGroupID wraps the corresponding Objective-C method.
 func (x *MutableMovieTrack) SetAlternateGroupID(alternateGroupID int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateGroupID:"), alternateGroupID)
 }
 
-// Whether a track has been modified. The value of this property is a BOOL that indicates whether the AVMutableMovieTrack object has been modified since it was created, was last written, or had its modified state cleared via a call to setModified:NO.
+// IsModified whether a track has been modified. The value of this property is a BOOL that indicates whether the AVMutableMovieTrack object has been modified since it was created, was last written, or had its modified state cleared via a call to setModified:NO.
 func (x *MutableMovieTrack) IsModified() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isModified"))
 	return _r
 }
 
+// SetModified wraps the corresponding Objective-C method.
 func (x *MutableMovieTrack) SetModified(modified bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModified:"), modified)
 }
 
-// Whether a track contains protected content. The value of this property is a BOOL that indicates whether the track contains protected content.
+// HasProtectedContent whether a track contains protected content. The value of this property is a BOOL that indicates whether the track contains protected content.
 func (x *MutableMovieTrack) HasProtectedContent() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasProtectedContent"))
 	return _r
 }
 
-// For file types that contain a 'moov' atom, such as QuickTime Movie files, specifies the time scale of the track's media. The default media time scale is 0. This property should be set on a new empty track before any edits are performed on the track.
+// Timescale for file types that contain a 'moov' atom, such as QuickTime Movie files, specifies the time scale of the track's media. The default media time scale is 0. This property should be set on a new empty track before any edits are performed on the track.
 func (x *MutableMovieTrack) Timescale() int32 {
 	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("timescale"))
 	return _r
 }
 
+// SetTimescale wraps the corresponding Objective-C method.
 func (x *MutableMovieTrack) SetTimescale(timescale int32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimescale:"), timescale)
 }
 
+// SetLanguageCode wraps the corresponding Objective-C method.
 func (x *MutableMovieTrack) SetLanguageCode(languageCode string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguageCode:"), purego.NSString(languageCode))
 }
 
+// SetExtendedLanguageTag wraps the corresponding Objective-C method.
 func (x *MutableMovieTrack) SetExtendedLanguageTag(extendedLanguageTag string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedLanguageTag:"), purego.NSString(extendedLanguageTag))
 }
 
-// The layer level of the visual media data of the track.
+// SetNaturalSize wraps the corresponding Objective-C method.
+func (x *MutableMovieTrack) SetNaturalSize(naturalSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNaturalSize:"), naturalSize)
+}
+
+// SetPreferredTransform wraps the corresponding Objective-C method.
+func (x *MutableMovieTrack) SetPreferredTransform(preferredTransform corefoundation.CGAffineTransform) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredTransform:"), preferredTransform)
+}
+
+// Layer the layer level of the visual media data of the track.
 func (x *MutableMovieTrack) Layer() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("layer"))
 	return _r
 }
 
+// SetLayer wraps the corresponding Objective-C method.
 func (x *MutableMovieTrack) SetLayer(layer int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), layer)
 }
 
+// CleanApertureDimensions a CGSize indicating the clean aperture dimensions of the track.
+func (x *MutableMovieTrack) CleanApertureDimensions() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("cleanApertureDimensions"))
+	return _r
+}
+
+// SetCleanApertureDimensions wraps the corresponding Objective-C method.
+func (x *MutableMovieTrack) SetCleanApertureDimensions(cleanApertureDimensions corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCleanApertureDimensions:"), cleanApertureDimensions)
+}
+
+// ProductionApertureDimensions a CGSize indicating the production aperture dimensions of the track.
+func (x *MutableMovieTrack) ProductionApertureDimensions() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("productionApertureDimensions"))
+	return _r
+}
+
+// SetProductionApertureDimensions wraps the corresponding Objective-C method.
+func (x *MutableMovieTrack) SetProductionApertureDimensions(productionApertureDimensions corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductionApertureDimensions:"), productionApertureDimensions)
+}
+
+// EncodedPixelsDimensions a CGSize indicating the dimensions encoded pixels dimensions of the track.
+func (x *MutableMovieTrack) EncodedPixelsDimensions() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("encodedPixelsDimensions"))
+	return _r
+}
+
+// SetEncodedPixelsDimensions wraps the corresponding Objective-C method.
+func (x *MutableMovieTrack) SetEncodedPixelsDimensions(encodedPixelsDimensions corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncodedPixelsDimensions:"), encodedPixelsDimensions)
+}
+
+// SetPreferredVolume wraps the corresponding Objective-C method.
 func (x *MutableMovieTrack) SetPreferredVolume(preferredVolume float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredVolume:"), preferredVolume)
 }
 
-// For file types that support media chunk sizes, the maximum size (in bytes) to be used for each chunk of sample data written to the file. The total size of the samples in a chunk will be no larger than this preferred chunk size, or the size of a single sample if the sample is larger than this preferred chunk size. The default media chunk size is 1024 * 1024 bytes. It is an error to set a negative chunk size.
+// PreferredMediaChunkSize for file types that support media chunk sizes, the maximum size (in bytes) to be used for each chunk of sample data written to the file. The total size of the samples in a chunk will be no larger than this preferred chunk size, or the size of a single sample if the sample is larger than this preferred chunk size. The default media chunk size is 1024 * 1024 bytes. It is an error to set a negative chunk size.
 func (x *MutableMovieTrack) PreferredMediaChunkSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("preferredMediaChunkSize"))
 	return _r
 }
 
+// SetPreferredMediaChunkSize wraps the corresponding Objective-C method.
 func (x *MutableMovieTrack) SetPreferredMediaChunkSize(preferredMediaChunkSize int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMediaChunkSize:"), preferredMediaChunkSize)
 }
 
-// For file types that support media chunk alignment, the boundary for media chunk alignment (in bytes). The default value is 0, which means that no padding should be used to achieve chunk alignment. It is an error to set a negative value for chunk alignment.
+// PreferredMediaChunkAlignment for file types that support media chunk alignment, the boundary for media chunk alignment (in bytes). The default value is 0, which means that no padding should be used to achieve chunk alignment. It is an error to set a negative value for chunk alignment.
 func (x *MutableMovieTrack) PreferredMediaChunkAlignment() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("preferredMediaChunkAlignment"))
 	return _r
 }
 
+// SetPreferredMediaChunkAlignment wraps the corresponding Objective-C method.
 func (x *MutableMovieTrack) SetPreferredMediaChunkAlignment(preferredMediaChunkAlignment int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMediaChunkAlignment:"), preferredMediaChunkAlignment)
 }
 
+// SetMetadata wraps the corresponding Objective-C method.
 func (x *MutableMovieTrack) SetMetadata(metadata []*MetadataItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), purego.SliceToNSArray(metadata, func(_v *MetadataItem) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Creates a specific type of track association between two tracks.
+// AddTrackAssociationToTrackType creates a specific type of track association between two tracks.
 func (x *MutableMovieTrack) AddTrackAssociationToTrackType(movieTrack *MovieTrack, trackAssociationType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTrackAssociationToTrack:type:"), objref.IDOf(movieTrack), objref.IDOf(trackAssociationType))
 }
 
-// Removes a specific type of track association between two tracks.
+// RemoveTrackAssociationToTrackType removes a specific type of track association between two tracks.
 func (x *MutableMovieTrack) RemoveTrackAssociationToTrackType(movieTrack *MovieTrack, trackAssociationType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTrackAssociationToTrack:type:"), objref.IDOf(movieTrack), objref.IDOf(trackAssociationType))
 }
 
-// Replaces the track’s format description with a new format description.
+// ReplaceFormatDescriptionWithFormatDescription replaces the track’s format description with a new format description.
 func (x *MutableMovieTrack) ReplaceFormatDescriptionWithFormatDescription(formatDescription obj.Object, newFormatDescription obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceFormatDescription:withFormatDescription:"), objref.IDOf(formatDescription), objref.IDOf(newFormatDescription))
 }
@@ -289,7 +339,12 @@ type MutableMovieTrackable interface {
 	WithTimescale(timescale int32) *MutableMovieTrack
 	WithLanguageCode(languageCode string) *MutableMovieTrack
 	WithExtendedLanguageTag(extendedLanguageTag string) *MutableMovieTrack
+	WithNaturalSize(naturalSize corefoundation.CGSize) *MutableMovieTrack
+	WithPreferredTransform(preferredTransform corefoundation.CGAffineTransform) *MutableMovieTrack
 	WithLayer(layer int) *MutableMovieTrack
+	WithCleanApertureDimensions(cleanApertureDimensions corefoundation.CGSize) *MutableMovieTrack
+	WithProductionApertureDimensions(productionApertureDimensions corefoundation.CGSize) *MutableMovieTrack
+	WithEncodedPixelsDimensions(encodedPixelsDimensions corefoundation.CGSize) *MutableMovieTrack
 	WithPreferredVolume(preferredVolume float32) *MutableMovieTrack
 	WithPreferredMediaChunkSize(preferredMediaChunkSize int) *MutableMovieTrack
 	WithPreferredMediaChunkAlignment(preferredMediaChunkAlignment int) *MutableMovieTrack
@@ -306,8 +361,16 @@ type MutableMovieTrackable interface {
 	SetTimescale(timescale int32)
 	SetLanguageCode(languageCode string)
 	SetExtendedLanguageTag(extendedLanguageTag string)
+	SetNaturalSize(naturalSize corefoundation.CGSize)
+	SetPreferredTransform(preferredTransform corefoundation.CGAffineTransform)
 	Layer() int
 	SetLayer(layer int)
+	CleanApertureDimensions() corefoundation.CGSize
+	SetCleanApertureDimensions(cleanApertureDimensions corefoundation.CGSize)
+	ProductionApertureDimensions() corefoundation.CGSize
+	SetProductionApertureDimensions(productionApertureDimensions corefoundation.CGSize)
+	EncodedPixelsDimensions() corefoundation.CGSize
+	SetEncodedPixelsDimensions(encodedPixelsDimensions corefoundation.CGSize)
 	SetPreferredVolume(preferredVolume float32)
 	PreferredMediaChunkSize() int
 	SetPreferredMediaChunkSize(preferredMediaChunkSize int)
@@ -320,3 +383,7 @@ type MutableMovieTrackable interface {
 }
 
 var _ MutableMovieTrackable = (*MutableMovieTrack)(nil)
+
+var _ MovieTrackProvider = (*MutableMovieTrack)(nil)
+
+var _ AssetTrackProvider = (*MutableMovieTrack)(nil)

@@ -23,7 +23,8 @@ func InputMethodControllerFromID(id objc.ID) *InputMethodController {
 	if id == 0 {
 		return nil
 	}
-	x := &InputMethodController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &InputMethodController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func inputMethodControllerAdopt(id objc.ID) *InputMethodController {
 	if id == 0 {
 		return nil
 	}
-	x := &InputMethodController{Handle: objref.Wrap(id)}
+	x := &InputMethodController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,17 +58,25 @@ func (x *InputMethodController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *InputMethodController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewInputMethodController creates a new InputMethodController.
 func NewInputMethodController() *InputMethodController {
 	_id := objc.Send[objc.ID](objc.ID(_class("JRSInputMethodController")), objc.RegisterName("new"))
 	return inputMethodControllerAdopt(_id)
 }
 
+// AvailableInputMethodLocales wraps the corresponding Objective-C method.
 func (x *InputMethodController) AvailableInputMethodLocales() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableInputMethodLocales"))
 	return obj.Wrap(_r)
 }
 
+// CurrentInputMethodName wraps the corresponding Objective-C method.
 func (x *InputMethodController) CurrentInputMethodName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentInputMethodName"))
 	if _r == 0 {
@@ -75,6 +85,7 @@ func (x *InputMethodController) CurrentInputMethodName() string {
 	return purego.GoString(_r)
 }
 
+// CurrentInputMethodLocale wraps the corresponding Objective-C method.
 func (x *InputMethodController) CurrentInputMethodLocale() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentInputMethodLocale"))
 	if _r == 0 {
@@ -83,6 +94,7 @@ func (x *InputMethodController) CurrentInputMethodLocale() string {
 	return purego.GoString(_r)
 }
 
+// SetCurrentInputMethodForLocale wraps the corresponding Objective-C method.
 func (x *InputMethodController) SetCurrentInputMethodForLocale(theLocale string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentInputMethodForLocale:"), purego.NSString(theLocale))
 }

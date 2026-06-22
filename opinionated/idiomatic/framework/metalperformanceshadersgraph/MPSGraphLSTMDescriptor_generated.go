@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The class that defines the parameters for a long short-term memory (LSTM) operation.
-//
 // GraphLSTMDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphLSTMDescriptor.
+//
+// It embeds [GraphObject], promoting that type's methods.
+//
+// The class that defines the parameters for a long short-term memory (LSTM) operation.
 type GraphLSTMDescriptor struct {
-	objref.Handle
+	GraphObject
 }
 
 // GraphLSTMDescriptorFromID adopts an existing Objective-C object as a GraphLSTMDescriptor
@@ -25,7 +26,8 @@ func GraphLSTMDescriptorFromID(id objc.ID) *GraphLSTMDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphLSTMDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphLSTMDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func graphLSTMDescriptorAdopt(id objc.ID) *GraphLSTMDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphLSTMDescriptor{Handle: objref.Wrap(id)}
+	x := &GraphLSTMDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GraphLSTMDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphLSTMDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphLSTMDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGraphLSTMDescriptor creates a new GraphLSTMDescriptor.
@@ -64,182 +52,172 @@ func NewGraphLSTMDescriptor() *GraphLSTMDescriptor {
 	return graphLSTMDescriptorAdopt(_id)
 }
 
-// A parameter that defines time direction of the input sequence.
-//
-// WithReverse sets reverse and returns the receiver so calls can be chained.
+// WithReverse a parameter that defines time direction of the input sequence.
 func (x *GraphLSTMDescriptor) WithReverse(reverse bool) *GraphLSTMDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReverse:"), reverse)
 	return x
 }
 
-// A parameter that defines a bidirectional LSTM layer.
-//
-// WithBidirectional sets bidirectional and returns the receiver so calls can be chained.
+// WithBidirectional a parameter that defines a bidirectional LSTM layer.
 func (x *GraphLSTMDescriptor) WithBidirectional(bidirectional bool) *GraphLSTMDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBidirectional:"), bidirectional)
 	return x
 }
 
-// A parameter that controls whether or not to return the output cell from the LSTM layer.
-//
-// WithProduceCell sets produceCell and returns the receiver so calls can be chained.
+// WithProduceCell a parameter that controls whether or not to return the output cell from the LSTM layer.
 func (x *GraphLSTMDescriptor) WithProduceCell(produceCell bool) *GraphLSTMDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProduceCell:"), produceCell)
 	return x
 }
 
-// A parameter that enables the LSTM layer to support training.
-//
-// WithTraining sets training and returns the receiver so calls can be chained.
+// WithTraining a parameter that enables the LSTM layer to support training.
 func (x *GraphLSTMDescriptor) WithTraining(training bool) *GraphLSTMDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTraining:"), training)
 	return x
 }
 
-// A parameter that controls the internal order of the LSTM gates.
-//
-// WithForgetGateLast sets forgetGateLast and returns the receiver so calls can be chained.
+// WithForgetGateLast a parameter that controls the internal order of the LSTM gates.
 func (x *GraphLSTMDescriptor) WithForgetGateLast(forgetGateLast bool) *GraphLSTMDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForgetGateLast:"), forgetGateLast)
 	return x
 }
 
-// A parameter that defines the activation function used with the input gate of the LSTM operation.
-//
-// WithInputGateActivation sets inputGateActivation and returns the receiver so calls can be chained.
+// WithInputGateActivation a parameter that defines the activation function used with the input gate of the LSTM operation.
 func (x *GraphLSTMDescriptor) WithInputGateActivation(inputGateActivation GraphRNNActivation) *GraphLSTMDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputGateActivation:"), inputGateActivation)
 	return x
 }
 
-// A parameter that defines the activation function used with the forget gate of the LSTM operation.
-//
-// WithForgetGateActivation sets forgetGateActivation and returns the receiver so calls can be chained.
+// WithForgetGateActivation a parameter that defines the activation function used with the forget gate of the LSTM operation.
 func (x *GraphLSTMDescriptor) WithForgetGateActivation(forgetGateActivation GraphRNNActivation) *GraphLSTMDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForgetGateActivation:"), forgetGateActivation)
 	return x
 }
 
-// A parameter that defines the activation function used with the cell gate of the LSTM operation.
-//
-// WithCellGateActivation sets cellGateActivation and returns the receiver so calls can be chained.
+// WithCellGateActivation a parameter that defines the activation function used with the cell gate of the LSTM operation.
 func (x *GraphLSTMDescriptor) WithCellGateActivation(cellGateActivation GraphRNNActivation) *GraphLSTMDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCellGateActivation:"), cellGateActivation)
 	return x
 }
 
-// A parameter that defines the activation function used with the output gate of the LSTM operation.
-//
-// WithOutputGateActivation sets outputGateActivation and returns the receiver so calls can be chained.
+// WithOutputGateActivation a parameter that defines the activation function used with the output gate of the LSTM operation.
 func (x *GraphLSTMDescriptor) WithOutputGateActivation(outputGateActivation GraphRNNActivation) *GraphLSTMDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputGateActivation:"), outputGateActivation)
 	return x
 }
 
-// A parameter that defines the activation function used with the current cell value of the LSTM operation.
-//
-// WithActivation sets activation and returns the receiver so calls can be chained.
+// WithActivation a parameter that defines the activation function used with the current cell value of the LSTM operation.
 func (x *GraphLSTMDescriptor) WithActivation(activation GraphRNNActivation) *GraphLSTMDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivation:"), activation)
 	return x
 }
 
-// A parameter that defines time direction of the input sequence. If set to `YES` then the input sequence is passed in reverse time order to the layer. Note: Ignored when `bidirectional = YES`. Default value: `NO`.
+// Reverse a parameter that defines time direction of the input sequence. If set to `YES` then the input sequence is passed in reverse time order to the layer. Note: Ignored when `bidirectional = YES`. Default value: `NO`.
 func (x *GraphLSTMDescriptor) Reverse() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reverse"))
 	return _r
 }
 
+// SetReverse wraps the corresponding Objective-C method.
 func (x *GraphLSTMDescriptor) SetReverse(reverse bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReverse:"), reverse)
 }
 
-// A parameter that defines a bidirectional LSTM layer. If set to `YES` then the input sequence is traversed in both directions and the two results are concatenated together on the channel-axis. Default value: `NO`.
+// Bidirectional a parameter that defines a bidirectional LSTM layer. If set to `YES` then the input sequence is traversed in both directions and the two results are concatenated together on the channel-axis. Default value: `NO`.
 func (x *GraphLSTMDescriptor) Bidirectional() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bidirectional"))
 	return _r
 }
 
+// SetBidirectional wraps the corresponding Objective-C method.
 func (x *GraphLSTMDescriptor) SetBidirectional(bidirectional bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBidirectional:"), bidirectional)
 }
 
-// A parameter that controls whether or not to return the output cell from the LSTM layer. If set to `YES` then this layer will produce the internal cell of the LSTM unit as secondary output. Default value: `NO`.
+// ProduceCell a parameter that controls whether or not to return the output cell from the LSTM layer. If set to `YES` then this layer will produce the internal cell of the LSTM unit as secondary output. Default value: `NO`.
 func (x *GraphLSTMDescriptor) ProduceCell() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("produceCell"))
 	return _r
 }
 
+// SetProduceCell wraps the corresponding Objective-C method.
 func (x *GraphLSTMDescriptor) SetProduceCell(produceCell bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProduceCell:"), produceCell)
 }
 
-// A parameter that enables the LSTM layer to support training. If set to `YES` then the layer will produce training state tensor as a secondary output. Default value: `NO`.
+// Training a parameter that enables the LSTM layer to support training. If set to `YES` then the layer will produce training state tensor as a secondary output. Default value: `NO`.
 func (x *GraphLSTMDescriptor) Training() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("training"))
 	return _r
 }
 
+// SetTraining wraps the corresponding Objective-C method.
 func (x *GraphLSTMDescriptor) SetTraining(training bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTraining:"), training)
 }
 
-// A parameter that controls the internal order of the LSTM gates. If set to `YES` then the layer will use the gate-ordering `[ i, z, f, o ]` instead of default `[ i, f, z, o ]`. Default value: `NO`
+// ForgetGateLast a parameter that controls the internal order of the LSTM gates. If set to `YES` then the layer will use the gate-ordering `[ i, z, f, o ]` instead of default `[ i, f, z, o ]`. Default value: `NO`
 func (x *GraphLSTMDescriptor) ForgetGateLast() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("forgetGateLast"))
 	return _r
 }
 
+// SetForgetGateLast wraps the corresponding Objective-C method.
 func (x *GraphLSTMDescriptor) SetForgetGateLast(forgetGateLast bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForgetGateLast:"), forgetGateLast)
 }
 
-// A parameter that defines the activation function used with the input gate of the LSTM operation. Default value: `MPSGraphRNNActivationSigmoid`.
+// InputGateActivation a parameter that defines the activation function used with the input gate of the LSTM operation. Default value: `MPSGraphRNNActivationSigmoid`.
 func (x *GraphLSTMDescriptor) InputGateActivation() GraphRNNActivation {
 	_r := objc.Send[GraphRNNActivation](objref.IDOf(x), objc.RegisterName("inputGateActivation"))
 	return _r
 }
 
+// SetInputGateActivation wraps the corresponding Objective-C method.
 func (x *GraphLSTMDescriptor) SetInputGateActivation(inputGateActivation GraphRNNActivation) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputGateActivation:"), inputGateActivation)
 }
 
-// A parameter that defines the activation function used with the forget gate of the LSTM operation. Default value: `MPSGraphRNNActivationSigmoid`.
+// ForgetGateActivation a parameter that defines the activation function used with the forget gate of the LSTM operation. Default value: `MPSGraphRNNActivationSigmoid`.
 func (x *GraphLSTMDescriptor) ForgetGateActivation() GraphRNNActivation {
 	_r := objc.Send[GraphRNNActivation](objref.IDOf(x), objc.RegisterName("forgetGateActivation"))
 	return _r
 }
 
+// SetForgetGateActivation wraps the corresponding Objective-C method.
 func (x *GraphLSTMDescriptor) SetForgetGateActivation(forgetGateActivation GraphRNNActivation) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForgetGateActivation:"), forgetGateActivation)
 }
 
-// A parameter that defines the activation function used with the cell gate of the LSTM operation. Default value: `MPSGraphRNNActivationTanh`.
+// CellGateActivation a parameter that defines the activation function used with the cell gate of the LSTM operation. Default value: `MPSGraphRNNActivationTanh`.
 func (x *GraphLSTMDescriptor) CellGateActivation() GraphRNNActivation {
 	_r := objc.Send[GraphRNNActivation](objref.IDOf(x), objc.RegisterName("cellGateActivation"))
 	return _r
 }
 
+// SetCellGateActivation wraps the corresponding Objective-C method.
 func (x *GraphLSTMDescriptor) SetCellGateActivation(cellGateActivation GraphRNNActivation) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCellGateActivation:"), cellGateActivation)
 }
 
-// A parameter that defines the activation function used with the output gate of the LSTM operation. Default value: `MPSGraphRNNActivationSigmoid`.
+// OutputGateActivation a parameter that defines the activation function used with the output gate of the LSTM operation. Default value: `MPSGraphRNNActivationSigmoid`.
 func (x *GraphLSTMDescriptor) OutputGateActivation() GraphRNNActivation {
 	_r := objc.Send[GraphRNNActivation](objref.IDOf(x), objc.RegisterName("outputGateActivation"))
 	return _r
 }
 
+// SetOutputGateActivation wraps the corresponding Objective-C method.
 func (x *GraphLSTMDescriptor) SetOutputGateActivation(outputGateActivation GraphRNNActivation) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputGateActivation:"), outputGateActivation)
 }
 
-// A parameter that defines the activation function used with the current cell value of the LSTM operation. Default value: `MPSGraphRNNActivationTanh`.
+// Activation a parameter that defines the activation function used with the current cell value of the LSTM operation. Default value: `MPSGraphRNNActivationTanh`.
 func (x *GraphLSTMDescriptor) Activation() GraphRNNActivation {
 	_r := objc.Send[GraphRNNActivation](objref.IDOf(x), objc.RegisterName("activation"))
 	return _r
 }
 
+// SetActivation wraps the corresponding Objective-C method.
 func (x *GraphLSTMDescriptor) SetActivation(activation GraphRNNActivation) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivation:"), activation)
 }
@@ -280,3 +258,5 @@ type GraphLSTMDescriptorable interface {
 }
 
 var _ GraphLSTMDescriptorable = (*GraphLSTMDescriptor)(nil)
+
+var _ GraphObjectProvider = (*GraphLSTMDescriptor)(nil)

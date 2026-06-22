@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object describing the location of a custom language model and specialized vocabulary.
-//
 // SpeechLanguageModelConfiguration is an idiomatic wrapper over the Objective-C class SFSpeechLanguageModelConfiguration.
+//
+// An object describing the location of a custom language model and specialized vocabulary.
 type SpeechLanguageModelConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SpeechLanguageModelConfigurationFromID(id objc.ID) *SpeechLanguageModelConf
 	if id == 0 {
 		return nil
 	}
-	x := &SpeechLanguageModelConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SpeechLanguageModelConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func speechLanguageModelConfigurationAdopt(id objc.ID) *SpeechLanguageModelConfi
 	if id == 0 {
 		return nil
 	}
-	x := &SpeechLanguageModelConfiguration{Handle: objref.Wrap(id)}
+	x := &SpeechLanguageModelConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,46 +60,46 @@ func (x *SpeechLanguageModelConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a configuration with the location of a language model file.
-//
-// NewSpeechLanguageModelConfigurationWithLanguageModel creates a new SpeechLanguageModelConfiguration.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpeechLanguageModelConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSpeechLanguageModelConfigurationWithLanguageModel creates a configuration with the location of a language model file.
 func NewSpeechLanguageModelConfigurationWithLanguageModel(languageModel string) *SpeechLanguageModelConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SFSpeechLanguageModelConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLanguageModel:"), rt.FileURL(languageModel))
 	return speechLanguageModelConfigurationAdopt(_id)
 }
 
-// Creates a configuration with the locations of language model and vocabulary files.
-//
-// NewSpeechLanguageModelConfigurationWithLanguageModelVocabulary creates a new SpeechLanguageModelConfiguration.
+// NewSpeechLanguageModelConfigurationWithLanguageModelVocabulary creates a configuration with the locations of language model and vocabulary files.
 func NewSpeechLanguageModelConfigurationWithLanguageModelVocabulary(languageModel string, vocabulary string) *SpeechLanguageModelConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SFSpeechLanguageModelConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLanguageModel:vocabulary:"), rt.FileURL(languageModel), rt.FileURL(vocabulary))
 	return speechLanguageModelConfigurationAdopt(_id)
 }
 
-// Creates a configuration with the locations of language model and vocabulary files, and custom weight.
-//
-// NewSpeechLanguageModelConfigurationWithLanguageModelVocabularyWeight creates a new SpeechLanguageModelConfiguration.
+// NewSpeechLanguageModelConfigurationWithLanguageModelVocabularyWeight creates a configuration with the locations of language model and vocabulary files, and custom weight.
 func NewSpeechLanguageModelConfigurationWithLanguageModelVocabularyWeight(languageModel string, vocabulary string, weight obj.Object) *SpeechLanguageModelConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SFSpeechLanguageModelConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLanguageModel:vocabulary:weight:"), rt.FileURL(languageModel), rt.FileURL(vocabulary), objref.IDOf(weight))
 	return speechLanguageModelConfigurationAdopt(_id)
 }
 
-// The location of a compiled language model file.
+// LanguageModel the location of a compiled language model file.
 func (x *SpeechLanguageModelConfiguration) LanguageModel() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageModel"))
 	return obj.Wrap(_r)
 }
 
-// The location of a compiled vocabulary file.
+// Vocabulary the location of a compiled vocabulary file.
 func (x *SpeechLanguageModelConfiguration) Vocabulary() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vocabulary"))
 	return obj.Wrap(_r)
 }
 
-// The relative weight of the language model customization. Value must be between 0.0 and 1.0 inclusive.
+// Weight the relative weight of the language model customization. Value must be between 0.0 and 1.0 inclusive.
 func (x *SpeechLanguageModelConfiguration) Weight() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weight"))
 	return obj.Wrap(_r)

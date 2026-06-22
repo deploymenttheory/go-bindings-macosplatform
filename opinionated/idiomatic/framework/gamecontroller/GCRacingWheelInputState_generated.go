@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The input for the wheel of a racing wheel controller.
-//
 // RacingWheelInputState is an idiomatic wrapper over the Objective-C class GCRacingWheelInputState.
+//
+// RacingWheelInputState is an abstract base — you do not construct it directly. Construct one of [RacingWheelInput] and pass it where a RacingWheelInputState is accepted.
+//
+// The input for the wheel of a racing wheel controller.
 type RacingWheelInputState struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func RacingWheelInputStateFromID(id objc.ID) *RacingWheelInputState {
 	if id == 0 {
 		return nil
 	}
-	x := &RacingWheelInputState{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RacingWheelInputState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func racingWheelInputStateAdopt(id objc.ID) *RacingWheelInputState {
 	if id == 0 {
 		return nil
 	}
-	x := &RacingWheelInputState{Handle: objref.Wrap(id)}
+	x := &RacingWheelInputState{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +62,19 @@ func (x *RacingWheelInputState) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewRacingWheelInputState creates a new RacingWheelInputState.
-func NewRacingWheelInputState() *RacingWheelInputState {
-	_id := objc.Send[objc.ID](objc.ID(_class("GCRacingWheelInputState")), objc.RegisterName("new"))
-	return racingWheelInputStateAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RacingWheelInputState) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The steering wheel element.
+// Wheel the steering wheel element.
 func (x *RacingWheelInputState) Wheel() *SteeringWheelElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wheel"))
 	return SteeringWheelElementFromID(_r)
 }
 
-// The element representing an attached gear shifter accessory. Note that this element only represents an external gear shifter accessory. Many racing wheels have a pair of built in paddle buttons that can be used for sequential gear shifting.  Those buttons are can be looked up with the \c GCInputLeftPaddle and \c GCInputRightPaddle input names.
+// Shifter the element representing an attached gear shifter accessory. Note that this element only represents an external gear shifter accessory. Many racing wheels have a pair of built in paddle buttons that can be used for sequential gear shifting.  Those buttons are can be looked up with the \c GCInputLeftPaddle and \c GCInputRightPaddle input names.
 func (x *RacingWheelInputState) Shifter() *GearShifterElement {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shifter"))
 	return GearShifterElementFromID(_r)
@@ -84,3 +88,10 @@ type RacingWheelInputStateable interface {
 }
 
 var _ RacingWheelInputStateable = (*RacingWheelInputState)(nil)
+
+// isRacingWheelInputState marks RacingWheelInputState — and, by embedding promotion, its
+// subclasses — as a member of the RacingWheelInputState hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *RacingWheelInputState) isRacingWheelInputState() {}
+
+var _ RacingWheelInputStateProvider = (*RacingWheelInputState)(nil)

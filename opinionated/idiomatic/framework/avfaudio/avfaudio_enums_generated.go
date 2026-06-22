@@ -18,6 +18,8 @@ const (
 	AudioApplicationRecordPermissionGranted      AudioApplicationRecordPermission = 1735552628
 )
 
+// String returns the AudioApplicationRecordPermission constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudioApplicationRecordPermission) String() string {
 	switch e {
 	case AudioApplicationRecordPermissionUndetermined:
@@ -47,6 +49,8 @@ const (
 	AudioPCMFormatInt32 AudioCommonFormat = 4
 )
 
+// String returns the AudioCommonFormat constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudioCommonFormat) String() string {
 	switch e {
 	case AudioOtherFormat:
@@ -91,6 +95,8 @@ const (
 	AudioContentSource_Passthrough                   AudioContentSource = 42
 )
 
+// String returns the AudioContentSource constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudioContentSource) String() string {
 	switch e {
 	case AudioContentSource_Unspecified:
@@ -154,6 +160,8 @@ const (
 	AudioConverterPrimeMethod_None AudioConverterPrimeMethod = 2
 )
 
+// String returns the AudioConverterPrimeMethod constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudioConverterPrimeMethod) String() string {
 	switch e {
 	case AudioConverterPrimeMethod_Pre:
@@ -177,6 +185,8 @@ const (
 	AudioDynamicRangeControlConfiguration_Capture AudioDynamicRangeControlConfiguration = 4
 )
 
+// String returns the AudioDynamicRangeControlConfiguration constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudioDynamicRangeControlConfiguration) String() string {
 	switch e {
 	case AudioDynamicRangeControlConfiguration_None:
@@ -204,6 +214,8 @@ const (
 	AudioEngineManualRenderingModeRealtime AudioEngineManualRenderingMode = 1
 )
 
+// String returns the AudioEngineManualRenderingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudioEngineManualRenderingMode) String() string {
 	switch e {
 	case AudioEngineManualRenderingModeOffline:
@@ -229,6 +241,8 @@ const (
 	AudioEngineManualRenderingStatusCannotDoInCurrentContext AudioEngineManualRenderingStatus = 2
 )
 
+// String returns the AudioEngineManualRenderingStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudioEngineManualRenderingStatus) String() string {
 	switch e {
 	case AudioEngineManualRenderingStatusError:
@@ -256,6 +270,8 @@ const (
 	AudioEnvironmentDistanceAttenuationModelLinear AudioEnvironmentDistanceAttenuationModel = 3
 )
 
+// String returns the AudioEnvironmentDistanceAttenuationModel constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudioEnvironmentDistanceAttenuationModel) String() string {
 	switch e {
 	case AudioEnvironmentDistanceAttenuationModelExponential:
@@ -283,6 +299,8 @@ const (
 	AudioEnvironmentOutputTypeExternalSpeakers AudioEnvironmentOutputType = 3
 )
 
+// String returns the AudioEnvironmentOutputType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudioEnvironmentOutputType) String() string {
 	switch e {
 	case AudioEnvironmentOutputTypeAuto:
@@ -311,6 +329,8 @@ const (
 	AudioPlayerNodeBufferInterruptsAtLoop AudioPlayerNodeBufferOptions = 4
 )
 
+// String returns the AudioPlayerNodeBufferOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudioPlayerNodeBufferOptions) String() string {
 	var parts []string
 	if e&AudioPlayerNodeBufferLoops != 0 {
@@ -340,6 +360,8 @@ const (
 	AudioPlayerNodeCompletionDataPlayedBack AudioPlayerNodeCompletionCallbackType = 2
 )
 
+// String returns the AudioPlayerNodeCompletionCallbackType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudioPlayerNodeCompletionCallbackType) String() string {
 	switch e {
 	case AudioPlayerNodeCompletionDataConsumed:
@@ -362,6 +384,8 @@ const (
 	AudioRoutingArbitrationCategoryPlayAndRecordVoice AudioRoutingArbitrationCategory = 2
 )
 
+// String returns the AudioRoutingArbitrationCategory constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudioRoutingArbitrationCategory) String() string {
 	switch e {
 	case AudioRoutingArbitrationCategoryPlayback:
@@ -425,6 +449,8 @@ const (
 	AudioUnitDistortionPresetSpeechWaves AudioUnitDistortionPreset = 21
 )
 
+// String returns the AudioUnitDistortionPreset constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudioUnitDistortionPreset) String() string {
 	switch e {
 	case AudioUnitDistortionPresetDrumsBitBrush:
@@ -504,6 +530,8 @@ const (
 	AudioUnitEQFilterTypeResonantHighShelf AudioUnitEQFilterType = 10
 )
 
+// String returns the AudioUnitEQFilterType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudioUnitEQFilterType) String() string {
 	switch e {
 	case AudioUnitEQFilterTypeParametric:
@@ -565,6 +593,8 @@ const (
 	AudioUnitReverbPresetLargeHall2 AudioUnitReverbPreset = 12
 )
 
+// String returns the AudioUnitReverbPreset constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AudioUnitReverbPreset) String() string {
 	switch e {
 	case AudioUnitReverbPresetSmallRoom:
@@ -639,6 +669,8 @@ const (
 	MIDIControlChangeMessageTypeMonoModeOff         MIDIControlChangeMessageType = 127
 )
 
+// String returns the MIDIControlChangeMessageType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MIDIControlChangeMessageType) String() string {
 	switch e {
 	case MIDIControlChangeMessageTypeBankSelect:
@@ -738,6 +770,8 @@ const (
 	MIDIMetaEventTypeProprietaryEvent MIDIMetaEventType = 127
 )
 
+// String returns the MIDIMetaEventType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MIDIMetaEventType) String() string {
 	switch e {
 	case MIDIMetaEventTypeSequenceNumber:
@@ -788,6 +822,8 @@ const (
 	MusicSequenceLoadSMF_ChannelsToTracks MusicSequenceLoadOptions = 1
 )
 
+// String returns the MusicSequenceLoadOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MusicSequenceLoadOptions) String() string {
 	var parts []string
 	if e&MusicSequenceLoadSMF_ChannelsToTracks != 0 {
@@ -809,6 +845,8 @@ const (
 	SpeechBoundaryWord SpeechBoundary = 1
 )
 
+// String returns the SpeechBoundary constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SpeechBoundary) String() string {
 	switch e {
 	case SpeechBoundaryImmediate:
@@ -831,6 +869,8 @@ const (
 	SpeechSynthesisMarkerMarkBookmark  SpeechSynthesisMarkerMark = 4
 )
 
+// String returns the SpeechSynthesisMarkerMark constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SpeechSynthesisMarkerMark) String() string {
 	switch e {
 	case SpeechSynthesisMarkerMarkPhoneme:
@@ -862,6 +902,8 @@ const (
 	SpeechSynthesisPersonalVoiceAuthorizationStatusAuthorized SpeechSynthesisPersonalVoiceAuthorizationStatus = 3
 )
 
+// String returns the SpeechSynthesisPersonalVoiceAuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SpeechSynthesisPersonalVoiceAuthorizationStatus) String() string {
 	switch e {
 	case SpeechSynthesisPersonalVoiceAuthorizationStatusNotDetermined:
@@ -889,6 +931,8 @@ const (
 	SpeechSynthesisVoiceGenderFemale SpeechSynthesisVoiceGender = 2
 )
 
+// String returns the SpeechSynthesisVoiceGender constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SpeechSynthesisVoiceGender) String() string {
 	switch e {
 	case SpeechSynthesisVoiceGenderUnspecified:
@@ -914,6 +958,8 @@ const (
 	SpeechSynthesisVoiceQualityPremium SpeechSynthesisVoiceQuality = 3
 )
 
+// String returns the SpeechSynthesisVoiceQuality constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SpeechSynthesisVoiceQuality) String() string {
 	switch e {
 	case SpeechSynthesisVoiceQualityDefault:
@@ -940,6 +986,8 @@ const (
 	SpeechSynthesisVoiceTraitIsPersonalVoice SpeechSynthesisVoiceTraits = 2
 )
 
+// String returns the SpeechSynthesisVoiceTraits constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SpeechSynthesisVoiceTraits) String() string {
 	var parts []string
 	if e&SpeechSynthesisVoiceTraitIsNoveltyVoice != 0 {

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents an image that an image-analysis request produces.
-//
 // PixelBufferObservation is an idiomatic wrapper over the Objective-C class VNPixelBufferObservation.
+//
+// PixelBufferObservation is an abstract base — you do not construct it directly. Construct one of [SaliencyImageObservation] and pass it where a PixelBufferObservation is accepted.
+//
+// An object that represents an image that an image-analysis request produces.
 type PixelBufferObservation struct {
-	objref.Handle
+	Observation
 }
 
 // PixelBufferObservationFromID adopts an existing Objective-C object as a PixelBufferObservation
@@ -25,7 +26,8 @@ func PixelBufferObservationFromID(id objc.ID) *PixelBufferObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &PixelBufferObservation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PixelBufferObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,33 +40,13 @@ func pixelBufferObservationAdopt(id objc.ID) *PixelBufferObservation {
 	if id == 0 {
 		return nil
 	}
-	x := &PixelBufferObservation{Handle: objref.Wrap(id)}
+	x := &PixelBufferObservation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *PixelBufferObservation) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PixelBufferObservation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PixelBufferObservation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewPixelBufferObservation creates a new PixelBufferObservation.
-func NewPixelBufferObservation() *PixelBufferObservation {
-	_id := objc.Send[objc.ID](objc.ID(_class("VNPixelBufferObservation")), objc.RegisterName("new"))
-	return pixelBufferObservationAdopt(_id)
-}
-
-// The name used in the model description of the CoreML model that produced this observation allowing to correlate the observation back to the output of the model. This can be nil if the observation is not the result of a VNCoreMLRequest operation.
+// FeatureName the name used in the model description of the CoreML model that produced this observation allowing to correlate the observation back to the output of the model. This can be nil if the observation is not the result of a VNCoreMLRequest operation.
 func (x *PixelBufferObservation) FeatureName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("featureName"))
 	if _r == 0 {
@@ -80,3 +62,12 @@ type PixelBufferObservationable interface {
 }
 
 var _ PixelBufferObservationable = (*PixelBufferObservation)(nil)
+
+// isPixelBufferObservation marks PixelBufferObservation — and, by embedding promotion, its
+// subclasses — as a member of the PixelBufferObservation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *PixelBufferObservation) isPixelBufferObservation() {}
+
+var _ PixelBufferObservationProvider = (*PixelBufferObservation)(nil)
+
+var _ ObservationProvider = (*PixelBufferObservation)(nil)

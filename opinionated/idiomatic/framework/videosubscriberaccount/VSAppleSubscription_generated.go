@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An Apple streaming service customer and their subscriptions.
-//
 // VSAppleSubscription is an idiomatic wrapper over the Objective-C class VSAppleSubscription.
+//
+// An Apple streaming service customer and their subscriptions.
 type VSAppleSubscription struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func VSAppleSubscriptionFromID(id objc.ID) *VSAppleSubscription {
 	if id == 0 {
 		return nil
 	}
-	x := &VSAppleSubscription{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VSAppleSubscription{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func vSAppleSubscriptionAdopt(id objc.ID) *VSAppleSubscription {
 	if id == 0 {
 		return nil
 	}
-	x := &VSAppleSubscription{Handle: objref.Wrap(id)}
+	x := &VSAppleSubscription{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,6 +60,12 @@ func (x *VSAppleSubscription) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VSAppleSubscription) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewVSAppleSubscriptionWithCustomerIDProductCodes creates a new VSAppleSubscription.
 func NewVSAppleSubscriptionWithCustomerIDProductCodes(customerID string, productCodes []string) *VSAppleSubscription {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VSAppleSubscription")), objc.RegisterName("alloc"))
@@ -65,19 +73,20 @@ func NewVSAppleSubscriptionWithCustomerIDProductCodes(customerID string, product
 	return vSAppleSubscriptionAdopt(_id)
 }
 
-// WithCustomerID sets customerID and returns the receiver so calls can be chained.
+// WithCustomerID sets the property and returns the receiver so calls can be chained.
 func (x *VSAppleSubscription) WithCustomerID(customerID string) *VSAppleSubscription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomerID:"), purego.NSString(customerID))
 	return x
 }
 
-// WithProductCodes sets the collection and returns the receiver so calls can be chained.
+// WithProductCodes sets the property and returns the receiver so calls can be chained.
 func (x *VSAppleSubscription) WithProductCodes(items ...obj.Object) *VSAppleSubscription {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductCodes:"), _arr)
 	return x
 }
 
+// CustomerID wraps the corresponding Objective-C method.
 func (x *VSAppleSubscription) CustomerID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customerID"))
 	if _r == 0 {
@@ -86,16 +95,20 @@ func (x *VSAppleSubscription) CustomerID() string {
 	return purego.GoString(_r)
 }
 
+// SetCustomerID wraps the corresponding Objective-C method.
 func (x *VSAppleSubscription) SetCustomerID(customerID string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomerID:"), purego.NSString(customerID))
 }
 
+// ProductCodes wraps the corresponding Objective-C method.
+//
 // ProductCodes returns the collection as a Go slice.
 func (x *VSAppleSubscription) ProductCodes() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productCodes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetProductCodes wraps the corresponding Objective-C method.
 func (x *VSAppleSubscription) SetProductCodes(productCodes []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductCodes:"), purego.SliceToNSArray(productCodes, func(_v string) objc.ID { return purego.NSString(_v) }))
 }

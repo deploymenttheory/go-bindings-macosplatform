@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view controller that provides a page where customers can purchase media from the App Store.
-//
 // StoreProductViewController is an idiomatic wrapper over the Objective-C class SKStoreProductViewController.
+//
+// A view controller that provides a page where customers can purchase media from the App Store.
 type StoreProductViewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func StoreProductViewControllerFromID(id objc.ID) *StoreProductViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &StoreProductViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StoreProductViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func storeProductViewControllerAdopt(id objc.ID) *StoreProductViewController {
 	if id == 0 {
 		return nil
 	}
-	x := &StoreProductViewController{Handle: objref.Wrap(id)}
+	x := &StoreProductViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *StoreProductViewController) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *StoreProductViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StoreProductViewController) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewStoreProductViewController creates a new StoreProductViewController.

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A constraint that orients a node to always point toward the current camera.
-//
 // BillboardConstraint is an idiomatic wrapper over the Objective-C class SCNBillboardConstraint.
+//
+// It embeds [Constraint], promoting that type's methods.
+//
+// A constraint that orients a node to always point toward the current camera.
 type BillboardConstraint struct {
-	objref.Handle
+	Constraint
 }
 
 // BillboardConstraintFromID adopts an existing Objective-C object as a BillboardConstraint
@@ -25,7 +26,8 @@ func BillboardConstraintFromID(id objc.ID) *BillboardConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &BillboardConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BillboardConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func billboardConstraintAdopt(id objc.ID) *BillboardConstraint {
 	if id == 0 {
 		return nil
 	}
-	x := &BillboardConstraint{Handle: objref.Wrap(id)}
+	x := &BillboardConstraint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *BillboardConstraint) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BillboardConstraint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BillboardConstraint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewBillboardConstraint creates a new BillboardConstraint.
@@ -64,43 +52,37 @@ func NewBillboardConstraint() *BillboardConstraint {
 	return billboardConstraintAdopt(_id)
 }
 
-// An option that specifies which degrees of freedom the constraint affects.
-//
-// WithFreeAxes sets freeAxes and returns the receiver so calls can be chained.
+// WithFreeAxes an option that specifies which degrees of freedom the constraint affects.
 func (x *BillboardConstraint) WithFreeAxes(freeAxes BillboardAxis) *BillboardConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFreeAxes:"), freeAxes)
 	return x
 }
 
-// Determines whether the constraint is enabled or not. Defaults to YES.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled determines whether the constraint is enabled or not. Defaults to YES.
 func (x *BillboardConstraint) WithEnabled(enabled bool) *BillboardConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The influence of the constraint on the node’s transformation.
-//
-// WithInfluenceFactor sets influenceFactor and returns the receiver so calls can be chained.
+// WithInfluenceFactor the influence of the constraint on the node’s transformation.
 func (x *BillboardConstraint) WithInfluenceFactor(influenceFactor float64) *BillboardConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
 	return x
 }
 
-// Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
-//
-// WithIncremental sets incremental and returns the receiver so calls can be chained.
+// WithIncremental specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
 func (x *BillboardConstraint) WithIncremental(incremental bool) *BillboardConstraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
 	return x
 }
 
+// FreeAxes wraps the corresponding Objective-C method.
 func (x *BillboardConstraint) FreeAxes() BillboardAxis {
 	_r := objc.Send[BillboardAxis](objref.IDOf(x), objc.RegisterName("freeAxes"))
 	return _r
 }
 
+// SetFreeAxes wraps the corresponding Objective-C method.
 func (x *BillboardConstraint) SetFreeAxes(freeAxes BillboardAxis) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFreeAxes:"), freeAxes)
 }
@@ -117,3 +99,5 @@ type BillboardConstraintable interface {
 }
 
 var _ BillboardConstraintable = (*BillboardConstraint)(nil)
+
+var _ ConstraintProvider = (*BillboardConstraint)(nil)

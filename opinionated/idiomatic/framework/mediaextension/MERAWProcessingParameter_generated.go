@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object for the RAW processor to describe each processing parameter the processor exposes.
-//
 // RAWProcessingParameter is an idiomatic wrapper over the Objective-C class MERAWProcessingParameter.
+//
+// RAWProcessingParameter is an abstract base — you do not construct it directly. Construct one of [RAWProcessingBooleanParameter], [RAWProcessingFloatParameter], [RAWProcessingIntegerParameter], [RAWProcessingListElementParameter], [RAWProcessingListParameter], [RAWProcessingSubGroupParameter] and pass it where a RAWProcessingParameter is accepted.
+//
+// An object for the RAW processor to describe each processing parameter the processor exposes.
 type RAWProcessingParameter struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func RAWProcessingParameterFromID(id objc.ID) *RAWProcessingParameter {
 	if id == 0 {
 		return nil
 	}
-	x := &RAWProcessingParameter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RAWProcessingParameter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func rAWProcessingParameterAdopt(id objc.ID) *RAWProcessingParameter {
 	if id == 0 {
 		return nil
 	}
-	x := &RAWProcessingParameter{Handle: objref.Wrap(id)}
+	x := &RAWProcessingParameter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +62,19 @@ func (x *RAWProcessingParameter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewRAWProcessingParameter creates a new RAWProcessingParameter.
-func NewRAWProcessingParameter() *RAWProcessingParameter {
-	_id := objc.Send[objc.ID](objc.ID(_class("MERAWProcessingParameter")), objc.RegisterName("new"))
-	return rAWProcessingParameterAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RAWProcessingParameter) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// A Boolean value that indicates whether the extension enables the parameter.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value that indicates whether the extension enables the parameter.
 func (x *RAWProcessingParameter) WithEnabled(enabled bool) *RAWProcessingParameter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A localized human-readable name for the parameter, suitable for displaying in application UI.
+// Name a localized human-readable name for the parameter, suitable for displaying in application UI.
 func (x *RAWProcessingParameter) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -81,7 +83,7 @@ func (x *RAWProcessingParameter) Name() string {
 	return purego.GoString(_r)
 }
 
-// A unique key string identifying this parameter.
+// Key a unique key string identifying this parameter.
 func (x *RAWProcessingParameter) Key() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("key"))
 	if _r == 0 {
@@ -90,7 +92,7 @@ func (x *RAWProcessingParameter) Key() string {
 	return purego.GoString(_r)
 }
 
-// A localized description of the parameter, suitable for displaying in a tool tip or similar explanatory UI.
+// LongDescription a localized description of the parameter, suitable for displaying in a tool tip or similar explanatory UI.
 func (x *RAWProcessingParameter) LongDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("longDescription"))
 	if _r == 0 {
@@ -99,12 +101,13 @@ func (x *RAWProcessingParameter) LongDescription() string {
 	return purego.GoString(_r)
 }
 
-// Indicates whether the parameter is enabled or disabled by the extension. This parameter can only be modified by the extension.  From the application-facing interface, VTRAWProcessingSession, this is a read-only value which indicates whether the parameter should be greyed out and disabled in any UI being generated.
+// Enabled indicates whether the parameter is enabled or disabled by the extension. This parameter can only be modified by the extension.  From the application-facing interface, VTRAWProcessingSession, this is a read-only value which indicates whether the parameter should be greyed out and disabled in any UI being generated.
 func (x *RAWProcessingParameter) Enabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enabled"))
 	return _r
 }
 
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *RAWProcessingParameter) SetEnabled(enabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
@@ -121,3 +124,10 @@ type RAWProcessingParameterable interface {
 }
 
 var _ RAWProcessingParameterable = (*RAWProcessingParameter)(nil)
+
+// isRAWProcessingParameter marks RAWProcessingParameter — and, by embedding promotion, its
+// subclasses — as a member of the RAWProcessingParameter hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *RAWProcessingParameter) isRAWProcessingParameter() {}
+
+var _ RAWProcessingParameterProvider = (*RAWProcessingParameter)(nil)

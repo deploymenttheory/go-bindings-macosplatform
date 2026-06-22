@@ -25,7 +25,8 @@ func MTRDeviceControllerFromID(id objc.ID) *MTRDeviceController {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRDeviceController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRDeviceControllerAdopt(id objc.ID) *MTRDeviceController {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRDeviceController{Handle: objref.Wrap(id)}
+	x := &MTRDeviceController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTRDeviceController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize a device controller with the provided parameters.  This will: 1) Auto-start the MTRDeviceControllerFactory in storage-per-controller mode if it has not already been started. 2) Return nil or a running controller. Once this returns non-nil, it's the caller's responsibility to call shutdown on the controller to avoid leaking it.
-//
-// NewMTRDeviceControllerWithParametersError creates a new MTRDeviceController.
-func NewMTRDeviceControllerWithParametersError(parameters *MTRDeviceControllerAbstractParameters) (*MTRDeviceController, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRDeviceControllerWithParametersError initialize a device controller with the provided parameters.  This will: 1) Auto-start the MTRDeviceControllerFactory in storage-per-controller mode if it has not already been started. 2) Return nil or a running controller. Once this returns non-nil, it's the caller's responsibility to call shutdown on the controller to avoid leaking it.
+func NewMTRDeviceControllerWithParametersError(parameters *MTRDeviceControllerAbstractParameters) (result *MTRDeviceController, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRDeviceController")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParameters:error:"), objref.IDOf(parameters), unsafe.Pointer(&_nsErr))
@@ -71,7 +77,7 @@ func NewMTRDeviceControllerWithParametersError(parameters *MTRDeviceControllerAb
 	return mTRDeviceControllerAdopt(_id), nil
 }
 
-// Set up a commissioning session for a device, using the provided setup payload to discover it and connect to it.
+// SetupCommissioningSessionWithPayloadNewNodeID set up a commissioning session for a device, using the provided setup payload to discover it and connect to it.
 func (x *MTRDeviceController) SetupCommissioningSessionWithPayloadNewNodeID(payload *MTRSetupPayload, newNodeID obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setupCommissioningSessionWithPayload:newNodeID:error:"), objref.IDOf(payload), objref.IDOf(newNodeID), unsafe.Pointer(&_nsErr))
@@ -81,7 +87,7 @@ func (x *MTRDeviceController) SetupCommissioningSessionWithPayloadNewNodeID(payl
 	return nil
 }
 
-// Set up a commissioning session for a device, using the provided discovered result to connect to it.
+// SetupCommissioningSessionWithDiscoveredDevicePayloadNewNodeID set up a commissioning session for a device, using the provided discovered result to connect to it.
 func (x *MTRDeviceController) SetupCommissioningSessionWithDiscoveredDevicePayloadNewNodeID(discoveredDevice *MTRCommissionableBrowserResult, payload *MTRSetupPayload, newNodeID obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setupCommissioningSessionWithDiscoveredDevice:payload:newNodeID:error:"), objref.IDOf(discoveredDevice), objref.IDOf(payload), objref.IDOf(newNodeID), unsafe.Pointer(&_nsErr))
@@ -91,7 +97,7 @@ func (x *MTRDeviceController) SetupCommissioningSessionWithDiscoveredDevicePaylo
 	return nil
 }
 
-// Commission the node with the given node ID.  The node ID must match the node ID that was used to set up the commissioning session. NOTE: The forceWiFiScan and forceThreadScan properties of MTRCommissioningParameters are ignored by this API.
+// CommissionNodeWithIDCommissioningParams commission the node with the given node ID.  The node ID must match the node ID that was used to set up the commissioning session. NOTE: The forceWiFiScan and forceThreadScan properties of MTRCommissioningParameters are ignored by this API.
 func (x *MTRDeviceController) CommissionNodeWithIDCommissioningParams(nodeID obj.Object, commissioningParams *MTRCommissioningParameters) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("commissionNodeWithID:commissioningParams:error:"), objref.IDOf(nodeID), objref.IDOf(commissioningParams), unsafe.Pointer(&_nsErr))
@@ -101,7 +107,7 @@ func (x *MTRDeviceController) CommissionNodeWithIDCommissioningParams(nodeID obj
 	return nil
 }
 
-// Cancel commissioning for the given node id.  This will shut down any existing commissioning session for that node id.
+// CancelCommissioningForNodeID cancel commissioning for the given node id.  This will shut down any existing commissioning session for that node id.
 func (x *MTRDeviceController) CancelCommissioningForNodeID(nodeID obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("cancelCommissioningForNodeID:error:"), objref.IDOf(nodeID), unsafe.Pointer(&_nsErr))
@@ -111,8 +117,8 @@ func (x *MTRDeviceController) CancelCommissioningForNodeID(nodeID obj.Object) er
 	return nil
 }
 
-// Get an MTRBaseDevice for a commissioning session that was set up for the given node ID.  Returns nil if no such commissioning session is available.
-func (x *MTRDeviceController) DeviceBeingCommissionedWithNodeIDError(nodeID obj.Object) (*MTRBaseDevice, error) {
+// DeviceBeingCommissionedWithNodeIDError get an MTRBaseDevice for a commissioning session that was set up for the given node ID.  Returns nil if no such commissioning session is available.
+func (x *MTRDeviceController) DeviceBeingCommissionedWithNodeIDError(nodeID obj.Object) (result *MTRBaseDevice, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceBeingCommissionedWithNodeID:error:"), objref.IDOf(nodeID), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -121,82 +127,84 @@ func (x *MTRDeviceController) DeviceBeingCommissionedWithNodeIDError(nodeID obj.
 	return MTRBaseDeviceFromID(_r), nil
 }
 
+// PreWarmCommissioningSession wraps the corresponding Objective-C method.
 func (x *MTRDeviceController) PreWarmCommissioningSession() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preWarmCommissioningSession"))
 }
 
-// Stop scanning for commissionable devices. This method will fail if the controller factory is not running or the browse has not been started.
+// StopBrowseForCommissionables stop scanning for commissionable devices. This method will fail if the controller factory is not running or the browse has not been started.
 func (x *MTRDeviceController) StopBrowseForCommissionables() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("stopBrowseForCommissionables"))
 	return _r
 }
 
-// Return the attestation challenge for the secure session of the device being commissioned. Attempts to retrieve the attestation challenge for a commissionee with the given Device ID. Returns nil if given Device ID does not match an active commissionee, or if a Secure Session is not availale.
+// AttestationChallengeForDeviceID return the attestation challenge for the secure session of the device being commissioned. Attempts to retrieve the attestation challenge for a commissionee with the given Device ID. Returns nil if given Device ID does not match an active commissionee, or if a Secure Session is not availale.
 func (x *MTRDeviceController) AttestationChallengeForDeviceID(deviceID obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attestationChallengeForDeviceID:"), objref.IDOf(deviceID))
 	return obj.Wrap(_r)
 }
 
-// Add a server endpoint for this controller.  The endpoint starts off enabled. Will fail in the following cases: 1) There is already an endpoint defined with the given endpoint id. 2) There are too many endpoints defined already.
+// AddServerEndpoint add a server endpoint for this controller.  The endpoint starts off enabled. Will fail in the following cases: 1) There is already an endpoint defined with the given endpoint id. 2) There are too many endpoints defined already.
 func (x *MTRDeviceController) AddServerEndpoint(endpoint *MTRServerEndpoint) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addServerEndpoint:"), objref.IDOf(endpoint))
 	return _r
 }
 
-// Remove the given server endpoint from this controller.  If the endpoint is not attached to this controller, will just call the completion and do nothing else.
+// RemoveServerEndpointQueueCompletion remove the given server endpoint from this controller.  If the endpoint is not attached to this controller, will just call the completion and do nothing else.
 func (x *MTRDeviceController) RemoveServerEndpointQueueCompletion(endpoint *MTRServerEndpoint, queue obj.Object, completion func()) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeServerEndpoint:queue:completion:"), objref.IDOf(endpoint), objref.IDOf(queue), completion)
 }
 
-// Remove the given server endpoint without being notified when the removal completes.
+// RemoveServerEndpoint remove the given server endpoint without being notified when the removal completes.
 func (x *MTRDeviceController) RemoveServerEndpoint(endpoint *MTRServerEndpoint) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeServerEndpoint:"), objref.IDOf(endpoint))
 }
 
-// Forget any information we have about the device with the given node ID. That includes clearing any information we have stored about it.
+// ForgetDeviceWithNodeID forget any information we have about the device with the given node ID. That includes clearing any information we have stored about it.
 func (x *MTRDeviceController) ForgetDeviceWithNodeID(nodeID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("forgetDeviceWithNodeID:"), objref.IDOf(nodeID))
 }
 
-// Suspend the controller. This will attempt to stop all network traffic associated with the controller. The controller will remain suspended until it is resumed.
+// Suspend suspend the controller. This will attempt to stop all network traffic associated with the controller. The controller will remain suspended until it is resumed.
 func (x *MTRDeviceController) Suspend() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suspend"))
 }
 
-// Resume the controller. This has no effect if the controller is not suspended.
+// Resume resume the controller. This has no effect if the controller is not suspended.
 func (x *MTRDeviceController) Resume() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resume"))
 }
 
-// Shut down the controller. Calls to shutdown after the first one are NO-OPs. This must be called, either directly or via shutting down the MTRDeviceControllerFactory, to avoid leaking the controller.
+// Shutdown shut down the controller. Calls to shutdown after the first one are NO-OPs. This must be called, either directly or via shutting down the MTRDeviceControllerFactory, to avoid leaking the controller.
 func (x *MTRDeviceController) Shutdown() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shutdown"))
 }
 
-// If true, the controller has not been shut down yet.
+// IsRunning if true, the controller has not been shut down yet.
 func (x *MTRDeviceController) IsRunning() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRunning"))
 	return _r
 }
 
-// If true, the controller has been suspended via `suspend` and not resumed yet.
+// IsSuspended if true, the controller has been suspended via `suspend` and not resumed yet.
 func (x *MTRDeviceController) IsSuspended() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSuspended"))
 	return _r
 }
 
-// The ID assigned to this controller at creation time.
+// UniqueIdentifier the ID assigned to this controller at creation time.
 func (x *MTRDeviceController) UniqueIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniqueIdentifier"))
 	return obj.Wrap(_r)
 }
 
+// ControllerNodeID wraps the corresponding Objective-C method.
 func (x *MTRDeviceController) ControllerNodeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controllerNodeID"))
 	return obj.Wrap(_r)
 }
 
-// Returns the list of MTRDevice instances that this controller has loaded into memory. Returns an empty array if no devices are in memory.
+// Devices returns the list of MTRDevice instances that this controller has loaded into memory. Returns an empty array if no devices are in memory.
 //
 // Devices returns the collection as a Go slice.
 func (x *MTRDeviceController) Devices() []*MTRDevice {
@@ -204,7 +212,7 @@ func (x *MTRDeviceController) Devices() []*MTRDevice {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTRDevice { return MTRDeviceFromID(_id) })
 }
 
-// Returns the list of node IDs for which this controller has stored information.  Returns empty list if the controller does not have any information stored.
+// NodesWithStoredData returns the list of node IDs for which this controller has stored information.  Returns empty list if the controller does not have any information stored.
 //
 // NodesWithStoredData returns the collection as a Go slice.
 func (x *MTRDeviceController) NodesWithStoredData() []obj.Object {
@@ -212,11 +220,13 @@ func (x *MTRDeviceController) NodesWithStoredData() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// FetchAttestationChallengeForDeviceId wraps the corresponding Objective-C method.
 func (x *MTRDeviceController) FetchAttestationChallengeForDeviceId(deviceId uint64) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchAttestationChallengeForDeviceId:"), deviceId)
 	return obj.Wrap(_r)
 }
 
+// PairDeviceDiscriminatorSetupPINCode wraps the corresponding Objective-C method.
 func (x *MTRDeviceController) PairDeviceDiscriminatorSetupPINCode(deviceID uint64, discriminator uint16, setupPINCode uint32) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("pairDevice:discriminator:setupPINCode:error:"), deviceID, discriminator, setupPINCode, unsafe.Pointer(&_nsErr))
@@ -226,6 +236,7 @@ func (x *MTRDeviceController) PairDeviceDiscriminatorSetupPINCode(deviceID uint6
 	return nil
 }
 
+// PairDeviceAddressPortSetupPINCode wraps the corresponding Objective-C method.
 func (x *MTRDeviceController) PairDeviceAddressPortSetupPINCode(deviceID uint64, address string, port uint16, setupPINCode uint32) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("pairDevice:address:port:setupPINCode:error:"), deviceID, purego.NSString(address), port, setupPINCode, unsafe.Pointer(&_nsErr))
@@ -235,6 +246,7 @@ func (x *MTRDeviceController) PairDeviceAddressPortSetupPINCode(deviceID uint64,
 	return nil
 }
 
+// PairDeviceOnboardingPayload wraps the corresponding Objective-C method.
 func (x *MTRDeviceController) PairDeviceOnboardingPayload(deviceID uint64, onboardingPayload string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("pairDevice:onboardingPayload:error:"), deviceID, purego.NSString(onboardingPayload), unsafe.Pointer(&_nsErr))
@@ -244,6 +256,7 @@ func (x *MTRDeviceController) PairDeviceOnboardingPayload(deviceID uint64, onboa
 	return nil
 }
 
+// CommissionDeviceCommissioningParams wraps the corresponding Objective-C method.
 func (x *MTRDeviceController) CommissionDeviceCommissioningParams(deviceId uint64, commissioningParams *MTRCommissioningParameters) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("commissionDevice:commissioningParams:error:"), deviceId, objref.IDOf(commissioningParams), unsafe.Pointer(&_nsErr))
@@ -253,6 +266,7 @@ func (x *MTRDeviceController) CommissionDeviceCommissioningParams(deviceId uint6
 	return nil
 }
 
+// StopDevicePairing wraps the corresponding Objective-C method.
 func (x *MTRDeviceController) StopDevicePairing(deviceID uint64) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("stopDevicePairing:error:"), deviceID, unsafe.Pointer(&_nsErr))
@@ -262,7 +276,8 @@ func (x *MTRDeviceController) StopDevicePairing(deviceID uint64) error {
 	return nil
 }
 
-func (x *MTRDeviceController) GetDeviceBeingCommissionedError(deviceId uint64) (*MTRBaseDevice, error) {
+// GetDeviceBeingCommissionedError wraps the corresponding Objective-C method.
+func (x *MTRDeviceController) GetDeviceBeingCommissionedError(deviceId uint64) (result *MTRBaseDevice, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getDeviceBeingCommissioned:error:"), deviceId, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -271,6 +286,7 @@ func (x *MTRDeviceController) GetDeviceBeingCommissionedError(deviceId uint64) (
 	return MTRBaseDeviceFromID(_r), nil
 }
 
+// OpenPairingWindowDuration wraps the corresponding Objective-C method.
 func (x *MTRDeviceController) OpenPairingWindowDuration(deviceID uint64, duration int) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("openPairingWindow:duration:error:"), deviceID, duration, unsafe.Pointer(&_nsErr))
@@ -280,7 +296,8 @@ func (x *MTRDeviceController) OpenPairingWindowDuration(deviceID uint64, duratio
 	return nil
 }
 
-func (x *MTRDeviceController) OpenPairingWindowWithPINDurationDiscriminatorSetupPINError(deviceID uint64, duration int, discriminator int, setupPIN int) (string, error) {
+// OpenPairingWindowWithPINDurationDiscriminatorSetupPINError wraps the corresponding Objective-C method.
+func (x *MTRDeviceController) OpenPairingWindowWithPINDurationDiscriminatorSetupPINError(deviceID uint64, duration int, discriminator int, setupPIN int) (result string, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openPairingWindowWithPIN:duration:discriminator:setupPIN:error:"), deviceID, duration, discriminator, setupPIN, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -292,11 +309,13 @@ func (x *MTRDeviceController) OpenPairingWindowWithPINDurationDiscriminatorSetup
 	return purego.GoString(_r), nil
 }
 
+// ComputePaseVerifierIterationsSalt wraps the corresponding Objective-C method.
 func (x *MTRDeviceController) ComputePaseVerifierIterationsSalt(setupPincode uint32, iterations uint32, salt obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("computePaseVerifier:iterations:salt:"), setupPincode, iterations, objref.IDOf(salt))
 	return obj.Wrap(_r)
 }
 
+// ControllerNodeId wraps the corresponding Objective-C method.
 func (x *MTRDeviceController) ControllerNodeId() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controllerNodeId"))
 	return obj.Wrap(_r)
@@ -309,7 +328,7 @@ type MTRDeviceControllerable interface {
 	SetupCommissioningSessionWithDiscoveredDevicePayloadNewNodeID(discoveredDevice *MTRCommissionableBrowserResult, payload *MTRSetupPayload, newNodeID obj.Object) error
 	CommissionNodeWithIDCommissioningParams(nodeID obj.Object, commissioningParams *MTRCommissioningParameters) error
 	CancelCommissioningForNodeID(nodeID obj.Object) error
-	DeviceBeingCommissionedWithNodeIDError(nodeID obj.Object) (*MTRBaseDevice, error)
+	DeviceBeingCommissionedWithNodeIDError(nodeID obj.Object) (result *MTRBaseDevice, err error)
 	PreWarmCommissioningSession()
 	StopBrowseForCommissionables() bool
 	AttestationChallengeForDeviceID(deviceID obj.Object) obj.Object
@@ -332,9 +351,9 @@ type MTRDeviceControllerable interface {
 	PairDeviceOnboardingPayload(deviceID uint64, onboardingPayload string) error
 	CommissionDeviceCommissioningParams(deviceId uint64, commissioningParams *MTRCommissioningParameters) error
 	StopDevicePairing(deviceID uint64) error
-	GetDeviceBeingCommissionedError(deviceId uint64) (*MTRBaseDevice, error)
+	GetDeviceBeingCommissionedError(deviceId uint64) (result *MTRBaseDevice, err error)
 	OpenPairingWindowDuration(deviceID uint64, duration int) error
-	OpenPairingWindowWithPINDurationDiscriminatorSetupPINError(deviceID uint64, duration int, discriminator int, setupPIN int) (string, error)
+	OpenPairingWindowWithPINDurationDiscriminatorSetupPINError(deviceID uint64, duration int, discriminator int, setupPIN int) (result string, err error)
 	ComputePaseVerifierIterationsSalt(setupPincode uint32, iterations uint32, salt obj.Object) obj.Object
 	ControllerNodeId() obj.Object
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the result of a change-history fetch request.
-//
 // FetchResult is an idiomatic wrapper over the Objective-C class CNFetchResult.
+//
+// An object that represents the result of a change-history fetch request.
 type FetchResult struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FetchResultFromID(id objc.ID) *FetchResult {
 	if id == 0 {
 		return nil
 	}
-	x := &FetchResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FetchResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func fetchResultAdopt(id objc.ID) *FetchResult {
 	if id == 0 {
 		return nil
 	}
-	x := &FetchResult{Handle: objref.Wrap(id)}
+	x := &FetchResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,25 @@ func (x *FetchResult) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FetchResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFetchResult creates a new FetchResult.
 func NewFetchResult() *FetchResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNFetchResult")), objc.RegisterName("new"))
 	return fetchResultAdopt(_id)
 }
 
+// Value wraps the corresponding Objective-C method.
 func (x *FetchResult) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
+// CurrentHistoryToken wraps the corresponding Objective-C method.
 func (x *FetchResult) CurrentHistoryToken() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentHistoryToken"))
 	return obj.Wrap(_r)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The IKPictureTaker class represents a panel that allows users to choose images by browsing the file system. The picture taker panel provides an Open Recent menu, supports image cropping, and supports taking snapshots from an iSight or other digital camera.
-//
 // IKPictureTaker is an idiomatic wrapper over the Objective-C class IKPictureTaker.
+//
+// The IKPictureTaker class represents a panel that allows users to choose images by browsing the file system. The picture taker panel provides an Open Recent menu, supports image cropping, and supports taking snapshots from an iSight or other digital camera.
 type IKPictureTaker struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func IKPictureTakerFromID(id objc.ID) *IKPictureTaker {
 	if id == 0 {
 		return nil
 	}
-	x := &IKPictureTaker{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IKPictureTaker{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func iKPictureTakerAdopt(id objc.ID) *IKPictureTaker {
 	if id == 0 {
 		return nil
 	}
-	x := &IKPictureTaker{Handle: objref.Wrap(id)}
+	x := &IKPictureTaker{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,41 +60,47 @@ func (x *IKPictureTaker) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IKPictureTaker) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewIKPictureTaker creates a new IKPictureTaker.
 func NewIKPictureTaker() *IKPictureTaker {
 	_id := objc.Send[objc.ID](objc.ID(_class("IKPictureTaker")), objc.RegisterName("new"))
 	return iKPictureTakerAdopt(_id)
 }
 
-// Opens a modal picture taker dialog.
+// RunModal opens a modal picture taker dialog.
 func (x *IKPictureTaker) RunModal() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModal"))
 	return _r
 }
 
-// Set the image input for the picture taker.
+// SetInputImage set the image input for the picture taker.
 func (x *IKPictureTaker) SetInputImage(image obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputImage:"), objref.IDOf(image))
 }
 
-// Returns the input image associated with the picture taker.
+// InputImage returns the input image associated with the picture taker.
 func (x *IKPictureTaker) InputImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputImage"))
 	return obj.Wrap(_r)
 }
 
-// Returns the edited image.
+// OutputImage returns the edited image.
 func (x *IKPictureTaker) OutputImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputImage"))
 	return obj.Wrap(_r)
 }
 
-// Controls whether the receiver enables video mirroring during snapshots.
+// SetMirroring controls whether the receiver enables video mirroring during snapshots.
 func (x *IKPictureTaker) SetMirroring(b bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMirroring:"), b)
 }
 
-// Returns whether video mirroring is enabled during snapshots.
+// Mirroring returns whether video mirroring is enabled during snapshots.
 func (x *IKPictureTaker) Mirroring() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mirroring"))
 	return _r

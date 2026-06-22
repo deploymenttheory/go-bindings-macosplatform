@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of behaviors, each of which is a set of goals, that together influence the movement of an agent.
-//
 // CompositeBehavior is an idiomatic wrapper over the Objective-C class GKCompositeBehavior.
+//
+// It embeds [Behavior], promoting that type's methods.
+//
+// A set of behaviors, each of which is a set of goals, that together influence the movement of an agent.
 type CompositeBehavior struct {
-	objref.Handle
+	Behavior
 }
 
 // CompositeBehaviorFromID adopts an existing Objective-C object as a CompositeBehavior
@@ -25,7 +26,8 @@ func CompositeBehaviorFromID(id objc.ID) *CompositeBehavior {
 	if id == 0 {
 		return nil
 	}
-	x := &CompositeBehavior{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CompositeBehavior{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func compositeBehaviorAdopt(id objc.ID) *CompositeBehavior {
 	if id == 0 {
 		return nil
 	}
-	x := &CompositeBehavior{Handle: objref.Wrap(id)}
+	x := &CompositeBehavior{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CompositeBehavior) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CompositeBehavior) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CompositeBehavior) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCompositeBehavior creates a new CompositeBehavior.
@@ -64,28 +52,28 @@ func NewCompositeBehavior() *CompositeBehavior {
 	return compositeBehaviorAdopt(_id)
 }
 
-// Sets the weight for the specified individual behavior’s influence on agents, adding that behavior to the composite behavior if it is not already present.
+// SetWeightForBehavior sets the weight for the specified individual behavior’s influence on agents, adding that behavior to the composite behavior if it is not already present.
 func (x *CompositeBehavior) SetWeightForBehavior(weight float32, behavior *Behavior) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeight:forBehavior:"), weight, objref.IDOf(behavior))
 }
 
-// Returns the weight for the specified individual behavior’s influence on agents.
+// WeightForBehavior returns the weight for the specified individual behavior’s influence on agents.
 func (x *CompositeBehavior) WeightForBehavior(behavior *Behavior) float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("weightForBehavior:"), objref.IDOf(behavior))
 	return _r
 }
 
-// Removes the specified individual behavior from the composite behavior.
+// RemoveBehavior removes the specified individual behavior from the composite behavior.
 func (x *CompositeBehavior) RemoveBehavior(behavior *Behavior) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeBehavior:"), objref.IDOf(behavior))
 }
 
-// Removes all individual behaviors from the composite behavior.
+// RemoveAllBehaviors removes all individual behaviors from the composite behavior.
 func (x *CompositeBehavior) RemoveAllBehaviors() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllBehaviors"))
 }
 
-// Number of sub-behaviors in this behavior
+// BehaviorCount number of sub-behaviors in this behavior
 func (x *CompositeBehavior) BehaviorCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("behaviorCount"))
 	return _r
@@ -102,3 +90,5 @@ type CompositeBehaviorable interface {
 }
 
 var _ CompositeBehaviorable = (*CompositeBehavior)(nil)
+
+var _ BehaviorProvider = (*CompositeBehavior)(nil)

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The class you create when providing a data-based Quick Look preview extension.
-//
 // PreviewReply is an idiomatic wrapper over the Objective-C class QLPreviewReply.
+//
+// The class you create when providing a data-based Quick Look preview extension.
 type PreviewReply struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PreviewReplyFromID(id objc.ID) *PreviewReply {
 	if id == 0 {
 		return nil
 	}
-	x := &PreviewReply{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PreviewReply{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func previewReplyAdopt(id objc.ID) *PreviewReply {
 	if id == 0 {
 		return nil
 	}
-	x := &PreviewReply{Handle: objref.Wrap(id)}
+	x := &PreviewReply{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,60 +60,60 @@ func (x *PreviewReply) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a preview reply from an existing file URL.
-//
-// NewPreviewReplyWithFileURL creates a new PreviewReply.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PreviewReply) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPreviewReplyWithFileURL creates a preview reply from an existing file URL.
 func NewPreviewReplyWithFileURL(fileURL string) *PreviewReply {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("QLPreviewReply")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileURL:"), rt.FileURL(fileURL))
 	return previewReplyAdopt(_id)
 }
 
-// String encoding for text or html based previews. Defaults to NSUTF8StringEncoding.
-//
-// WithStringEncoding sets stringEncoding and returns the receiver so calls can be chained.
+// WithStringEncoding string encoding for text or html based previews. Defaults to NSUTF8StringEncoding.
 func (x *PreviewReply) WithStringEncoding(stringEncoding int) *PreviewReply {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringEncoding:"), stringEncoding)
 	return x
 }
 
-// The attachments for a preview reply that provide additional data for the system to display the preview.
-//
-// WithAttachments sets attachments and returns the receiver so calls can be chained.
+// WithAttachments the attachments for a preview reply that provide additional data for the system to display the preview.
 func (x *PreviewReply) WithAttachments(attachments obj.Object) *PreviewReply {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachments:"), objref.IDOf(attachments))
 	return x
 }
 
-// The title for the system to display with the preview.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the title for the system to display with the preview.
 func (x *PreviewReply) WithTitle(title string) *PreviewReply {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// String encoding for text or html based previews. Defaults to NSUTF8StringEncoding.
+// StringEncoding string encoding for text or html based previews. Defaults to NSUTF8StringEncoding.
 func (x *PreviewReply) StringEncoding() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stringEncoding"))
 	return _r
 }
 
+// SetStringEncoding wraps the corresponding Objective-C method.
 func (x *PreviewReply) SetStringEncoding(stringEncoding int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringEncoding:"), stringEncoding)
 }
 
-// Attachments for HTML data previews. The keys of the dictionary are the attachment identifiers (eg foo) that can be referenced with the cid:id URL (eg cid:foo).
+// Attachments attachments for HTML data previews. The keys of the dictionary are the attachment identifiers (eg foo) that can be referenced with the cid:id URL (eg cid:foo).
 func (x *PreviewReply) Attachments() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachments"))
 	return obj.Wrap(_r)
 }
 
+// SetAttachments wraps the corresponding Objective-C method.
 func (x *PreviewReply) SetAttachments(attachments obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachments:"), objref.IDOf(attachments))
 }
 
-// Custom display title for the preview. If left as the empty string, QuickLook will use the file name.
+// Title custom display title for the preview. If left as the empty string, QuickLook will use the file name.
 func (x *PreviewReply) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -120,6 +122,7 @@ func (x *PreviewReply) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *PreviewReply) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }

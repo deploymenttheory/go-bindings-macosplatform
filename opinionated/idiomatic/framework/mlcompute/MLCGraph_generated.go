@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A graph of layers you use to build a training or inference graph.
-//
 // Graph is an idiomatic wrapper over the Objective-C class MLCGraph.
+//
+// Graph is an abstract base — you do not construct it directly. Construct one of [InferenceGraph], [TrainingGraph] and pass it where a Graph is accepted.
+//
+// A graph of layers you use to build a training or inference graph.
 type Graph struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func GraphFromID(id objc.ID) *Graph {
 	if id == 0 {
 		return nil
 	}
-	x := &Graph{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Graph{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func graphAdopt(id objc.ID) *Graph {
 	if id == 0 {
 		return nil
 	}
-	x := &Graph{Handle: objref.Wrap(id)}
+	x := &Graph{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,115 +62,115 @@ func (x *Graph) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewGraph creates a new Graph.
-func NewGraph() *Graph {
-	_id := objc.Send[objc.ID](objc.ID(_class("MLCGraph")), objc.RegisterName("new"))
-	return graphAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Graph) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Adds the layer and source tensor that you specify to the graph.
+// NodeWithLayerSource adds the layer and source tensor that you specify to the graph.
 func (x *Graph) NodeWithLayerSource(layer *Layer, source *Tensor) *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeWithLayer:source:"), objref.IDOf(layer), objref.IDOf(source))
 	return TensorFromID(_r)
 }
 
-// Adds the layer and source tensors that you specify to the graph.
+// NodeWithLayerSources adds the layer and source tensors that you specify to the graph.
 func (x *Graph) NodeWithLayerSources(layer *Layer, sources []*Tensor) *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeWithLayer:sources:"), objref.IDOf(layer), purego.SliceToNSArray(sources, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }))
 	return TensorFromID(_r)
 }
 
-// Adds the layer, source tensors, and option to disable optimizer updates that you specify to the graph.
+// NodeWithLayerSourcesDisableUpdate adds the layer, source tensors, and option to disable optimizer updates that you specify to the graph.
 func (x *Graph) NodeWithLayerSourcesDisableUpdate(layer *Layer, sources []*Tensor, disableUpdate bool) *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeWithLayer:sources:disableUpdate:"), objref.IDOf(layer), purego.SliceToNSArray(sources, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), disableUpdate)
 	return TensorFromID(_r)
 }
 
-// Adds the layer, sources, and loss labels tensors that you specify to the graph.
+// NodeWithLayerSourcesLossLabels adds the layer, sources, and loss labels tensors that you specify to the graph.
 func (x *Graph) NodeWithLayerSourcesLossLabels(layer *Layer, sources []*Tensor, lossLabels []*Tensor) *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeWithLayer:sources:lossLabels:"), objref.IDOf(layer), purego.SliceToNSArray(sources, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(lossLabels, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }))
 	return TensorFromID(_r)
 }
 
-// Adds a new split layer to the graph using the source tensor, number of splits, and dimension to split the source tensor that you specify.
+// SplitWithSourceSplitCountDimension adds a new split layer to the graph using the source tensor, number of splits, and dimension to split the source tensor that you specify.
 func (x *Graph) SplitWithSourceSplitCountDimension(source *Tensor, splitCount int, dimension int) []*Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("splitWithSource:splitCount:dimension:"), objref.IDOf(source), splitCount, dimension)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
-// Adds a new split layer to the graph using the source tensor, lengths of each split section, and dimension to split the source tensor that you specify.
+// SplitWithSourceSplitSectionLengthsDimension adds a new split layer to the graph using the source tensor, lengths of each split section, and dimension to split the source tensor that you specify.
 func (x *Graph) SplitWithSourceSplitSectionLengthsDimension(source *Tensor, splitSectionLengths []obj.Object, dimension int) []*Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("splitWithSource:splitSectionLengths:dimension:"), objref.IDOf(source), purego.SliceToNSArray(splitSectionLengths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), dimension)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
-// Adds a new concatenation layer to the graph using the source tensors and concatenation dimension you specify.
+// ConcatenateWithSourcesDimension adds a new concatenation layer to the graph using the source tensors and concatenation dimension you specify.
 func (x *Graph) ConcatenateWithSourcesDimension(sources []*Tensor, dimension int) *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("concatenateWithSources:dimension:"), purego.SliceToNSArray(sources, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), dimension)
 	return TensorFromID(_r)
 }
 
-// Adds a new reshape layer to the graph using the shape and source tensor you specify.
+// ReshapeWithShapeSource adds a new reshape layer to the graph using the shape and source tensor you specify.
 func (x *Graph) ReshapeWithShapeSource(shape []obj.Object, source *Tensor) *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reshapeWithShape:source:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(source))
 	return TensorFromID(_r)
 }
 
-// Adds a new transpose layer to the graph using the dimensions and source tensor you specify.
+// TransposeWithDimensionsSource adds a new transpose layer to the graph using the dimensions and source tensor you specify.
 func (x *Graph) TransposeWithDimensionsSource(dimensions []obj.Object, source *Tensor) *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transposeWithDimensions:source:"), purego.SliceToNSArray(dimensions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(source))
 	return TensorFromID(_r)
 }
 
-// Adds a select layer to the graph using the condition mask and source tensors you specify.
+// SelectWithSourcesCondition adds a select layer to the graph using the condition mask and source tensors you specify.
 func (x *Graph) SelectWithSourcesCondition(sources []*Tensor, condition *Tensor) *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectWithSources:condition:"), purego.SliceToNSArray(sources, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), objref.IDOf(condition))
 	return TensorFromID(_r)
 }
 
-// Adds a scatter layer to the graph.
+// ScatterWithDimensionSourceIndicesCopyFromReductionType adds a scatter layer to the graph.
 func (x *Graph) ScatterWithDimensionSourceIndicesCopyFromReductionType(dimension int, source *Tensor, indices *Tensor, copyFrom *Tensor, reductionType ReductionType) *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scatterWithDimension:source:indices:copyFrom:reductionType:"), dimension, objref.IDOf(source), objref.IDOf(indices), objref.IDOf(copyFrom), reductionType)
 	return TensorFromID(_r)
 }
 
-// Adds a gather layer to the graph using the source tensor, dimension along which to index, and the indices you specify.
+// GatherWithDimensionSourceIndices adds a gather layer to the graph using the source tensor, dimension along which to index, and the indices you specify.
 func (x *Graph) GatherWithDimensionSourceIndices(dimension int, source *Tensor, indices *Tensor) *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gatherWithDimension:source:indices:"), dimension, objref.IDOf(source), objref.IDOf(indices))
 	return TensorFromID(_r)
 }
 
-// Associates the given data with the input tensors, and if the device is a GPU, also copies the data to the device memory.
+// BindAndWriteDataForInputsToDeviceBatchSizeSynchronous associates the given data with the input tensors, and if the device is a GPU, also copies the data to the device memory.
 func (x *Graph) BindAndWriteDataForInputsToDeviceBatchSizeSynchronous(inputsData obj.Object, inputTensors obj.Object, device *Device, batchSize int, synchronous bool) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bindAndWriteData:forInputs:toDevice:batchSize:synchronous:"), objref.IDOf(inputsData), objref.IDOf(inputTensors), objref.IDOf(device), batchSize, synchronous)
 	return _r
 }
 
-// Associates the given data with the input tensors, and if the device is a GPU, also copies the data to the device memory.
+// BindAndWriteDataForInputsToDeviceSynchronous associates the given data with the input tensors, and if the device is a GPU, also copies the data to the device memory.
 func (x *Graph) BindAndWriteDataForInputsToDeviceSynchronous(inputsData obj.Object, inputTensors obj.Object, device *Device, synchronous bool) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bindAndWriteData:forInputs:toDevice:synchronous:"), objref.IDOf(inputsData), objref.IDOf(inputTensors), objref.IDOf(device), synchronous)
 	return _r
 }
 
-// Gets the source tensors for a layer in the training graph.
+// SourceTensorsForLayer gets the source tensors for a layer in the training graph.
 func (x *Graph) SourceTensorsForLayer(layer *Layer) []*Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceTensorsForLayer:"), objref.IDOf(layer))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
-// Gets the result tensors for a layer in the training graph.
+// ResultTensorsForLayer gets the result tensors for a layer in the training graph.
 func (x *Graph) ResultTensorsForLayer(layer *Layer) []*Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultTensorsForLayer:"), objref.IDOf(layer))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
-// The device to be used when compiling and executing a graph
+// Device the device to be used when compiling and executing a graph
 func (x *Graph) Device() *Device {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
 	return DeviceFromID(_r)
 }
 
-// Layers in the graph
+// Layers layers in the graph
 //
 // Layers returns the collection as a Go slice.
 func (x *Graph) Layers() []*Layer {
@@ -174,7 +178,7 @@ func (x *Graph) Layers() []*Layer {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Layer { return LayerFromID(_id) })
 }
 
-// A DOT representation of the graph. For more info on the DOT language, refer to https://en.wikipedia.org/wiki/DOT_(graph_description_language). Edges that have a dashed lines are those that have stop gradients, while those with solid lines don't.
+// SummarizedDOTDescription a DOT representation of the graph. For more info on the DOT language, refer to https://en.wikipedia.org/wiki/DOT_(graph_description_language). Edges that have a dashed lines are those that have stop gradients, while those with solid lines don't.
 func (x *Graph) SummarizedDOTDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("summarizedDOTDescription"))
 	if _r == 0 {
@@ -208,3 +212,10 @@ type Graphable interface {
 }
 
 var _ Graphable = (*Graph)(nil)
+
+// isGraph marks Graph — and, by embedding promotion, its
+// subclasses — as a member of the Graph hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Graph) isGraph() {}
+
+var _ GraphProvider = (*Graph)(nil)

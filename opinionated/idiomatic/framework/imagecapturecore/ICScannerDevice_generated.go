@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a scanner.
-//
 // ScannerDevice is an idiomatic wrapper over the Objective-C class ICScannerDevice.
+//
+// It embeds [Device], promoting that type's methods.
+//
+// An object that represents a scanner.
 type ScannerDevice struct {
-	objref.Handle
+	Device
 }
 
 // ScannerDeviceFromID adopts an existing Objective-C object as a ScannerDevice
@@ -25,7 +26,8 @@ func ScannerDeviceFromID(id objc.ID) *ScannerDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &ScannerDevice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScannerDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func scannerDeviceAdopt(id objc.ID) *ScannerDevice {
 	if id == 0 {
 		return nil
 	}
-	x := &ScannerDevice{Handle: objref.Wrap(id)}
+	x := &ScannerDevice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ScannerDevice) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ScannerDevice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ScannerDevice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewScannerDevice creates a new ScannerDevice.
@@ -64,63 +52,61 @@ func NewScannerDevice() *ScannerDevice {
 	return scannerDeviceAdopt(_id)
 }
 
-// The transfer mode for the scanned document.
-//
-// WithTransferMode sets transferMode and returns the receiver so calls can be chained.
+// WithTransferMode the transfer mode for the scanned document.
 func (x *ScannerDevice) WithTransferMode(transferMode ScannerTransferMode) *ScannerDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransferMode:"), transferMode)
 	return x
 }
 
-// The total maximum band size requested when performing a memory-based transfer.
-//
-// WithMaxMemoryBandSize sets maxMemoryBandSize and returns the receiver so calls can be chained.
+// WithMaxMemoryBandSize the total maximum band size requested when performing a memory-based transfer.
 func (x *ScannerDevice) WithMaxMemoryBandSize(maxMemoryBandSize int) *ScannerDevice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxMemoryBandSize:"), maxMemoryBandSize)
 	return x
 }
 
-// Opens a session on the protected device with the authorized username and passcode.
+// RequestOpenSessionWithCredentialsPassword opens a session on the protected device with the authorized username and passcode.
 func (x *ScannerDevice) RequestOpenSessionWithCredentialsPassword(username string, password string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestOpenSessionWithCredentials:password:"), purego.NSString(username), purego.NSString(password))
 }
 
-// Requests to select a functional unit on the scanner.
+// RequestSelectFunctionalUnit requests to select a functional unit on the scanner.
 func (x *ScannerDevice) RequestSelectFunctionalUnit(type_ ScannerFunctionalUnitType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestSelectFunctionalUnit:"), type_)
 }
 
-// Starts an overview scan on the selected functional unit.
+// RequestOverviewScan starts an overview scan on the selected functional unit.
 func (x *ScannerDevice) RequestOverviewScan() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestOverviewScan"))
 }
 
-// Starts a scan on the selected functional unit.
+// RequestScan starts a scan on the selected functional unit.
 func (x *ScannerDevice) RequestScan() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestScan"))
 }
 
-// Cancels the current scan.
+// CancelScan cancels the current scan.
 func (x *ScannerDevice) CancelScan() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelScan"))
 }
 
-// ￼The transfer mode for scanned document.
+// TransferMode ￼The transfer mode for scanned document.
 func (x *ScannerDevice) TransferMode() ScannerTransferMode {
 	_r := objc.Send[ScannerTransferMode](objref.IDOf(x), objc.RegisterName("transferMode"))
 	return _r
 }
 
+// SetTransferMode wraps the corresponding Objective-C method.
 func (x *ScannerDevice) SetTransferMode(transferMode ScannerTransferMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransferMode:"), transferMode)
 }
 
-// ￼The total maximum band size requested when performing a ICScannerTransferModeMemoryBased.
+// MaxMemoryBandSize ￼The total maximum band size requested when performing a ICScannerTransferModeMemoryBased.
 func (x *ScannerDevice) MaxMemoryBandSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxMemoryBandSize"))
 	return _r
 }
 
+// SetMaxMemoryBandSize wraps the corresponding Objective-C method.
 func (x *ScannerDevice) SetMaxMemoryBandSize(maxMemoryBandSize int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxMemoryBandSize:"), maxMemoryBandSize)
 }
@@ -142,3 +128,5 @@ type ScannerDeviceable interface {
 }
 
 var _ ScannerDeviceable = (*ScannerDevice)(nil)
+
+var _ DeviceProvider = (*ScannerDevice)(nil)

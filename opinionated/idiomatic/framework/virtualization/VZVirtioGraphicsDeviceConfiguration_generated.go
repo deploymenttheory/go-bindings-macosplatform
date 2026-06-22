@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Configuration that represents the configuration of a Virtio graphics device for a Linux VM.
-//
 // VirtioGraphicsDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZVirtioGraphicsDeviceConfiguration.
+//
+// It embeds [GraphicsDeviceConfiguration], promoting that type's methods.
+//
+// Configuration that represents the configuration of a Virtio graphics device for a Linux VM.
 type VirtioGraphicsDeviceConfiguration struct {
-	objref.Handle
+	GraphicsDeviceConfiguration
 }
 
 // VirtioGraphicsDeviceConfigurationFromID adopts an existing Objective-C object as a VirtioGraphicsDeviceConfiguration
@@ -25,7 +26,8 @@ func VirtioGraphicsDeviceConfigurationFromID(id objc.ID) *VirtioGraphicsDeviceCo
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioGraphicsDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VirtioGraphicsDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func virtioGraphicsDeviceConfigurationAdopt(id objc.ID) *VirtioGraphicsDeviceCon
 	if id == 0 {
 		return nil
 	}
-	x := &VirtioGraphicsDeviceConfiguration{Handle: objref.Wrap(id)}
+	x := &VirtioGraphicsDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *VirtioGraphicsDeviceConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VirtioGraphicsDeviceConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VirtioGraphicsDeviceConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewVirtioGraphicsDeviceConfiguration creates a new VirtioGraphicsDeviceConfiguration.
@@ -64,15 +52,15 @@ func NewVirtioGraphicsDeviceConfiguration() *VirtioGraphicsDeviceConfiguration {
 	return virtioGraphicsDeviceConfigurationAdopt(_id)
 }
 
-// The array of output devices.
-//
-// WithScanouts sets the collection and returns the receiver so calls can be chained.
+// WithScanouts the array of output devices.
 func (x *VirtioGraphicsDeviceConfiguration) WithScanouts(items ...*VirtioGraphicsScanoutConfiguration) *VirtioGraphicsDeviceConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v *VirtioGraphicsScanoutConfiguration) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanouts:"), _arr)
 	return x
 }
 
+// Scanouts wraps the corresponding Objective-C method.
+//
 // Scanouts returns the collection as a Go slice.
 func (x *VirtioGraphicsDeviceConfiguration) Scanouts() []*VirtioGraphicsScanoutConfiguration {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scanouts"))
@@ -81,6 +69,7 @@ func (x *VirtioGraphicsDeviceConfiguration) Scanouts() []*VirtioGraphicsScanoutC
 	})
 }
 
+// SetScanouts wraps the corresponding Objective-C method.
 func (x *VirtioGraphicsDeviceConfiguration) SetScanouts(scanouts []*VirtioGraphicsScanoutConfiguration) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanouts:"), purego.SliceToNSArray(scanouts, func(_v *VirtioGraphicsScanoutConfiguration) objc.ID { return objref.IDOf(_v) }))
 }
@@ -94,3 +83,5 @@ type VirtioGraphicsDeviceConfigurationable interface {
 }
 
 var _ VirtioGraphicsDeviceConfigurationable = (*VirtioGraphicsDeviceConfiguration)(nil)
+
+var _ GraphicsDeviceConfigurationProvider = (*VirtioGraphicsDeviceConfiguration)(nil)

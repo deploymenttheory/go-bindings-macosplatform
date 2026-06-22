@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The user’s response to an actionable notification.
-//
 // NotificationResponse is an idiomatic wrapper over the Objective-C class UNNotificationResponse.
+//
+// NotificationResponse is an abstract base — you do not construct it directly. Construct one of [TextInputNotificationResponse] and pass it where a NotificationResponse is accepted.
+//
+// The user’s response to an actionable notification.
 type NotificationResponse struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func NotificationResponseFromID(id objc.ID) *NotificationResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationResponse{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NotificationResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func notificationResponseAdopt(id objc.ID) *NotificationResponse {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationResponse{Handle: objref.Wrap(id)}
+	x := &NotificationResponse{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +62,19 @@ func (x *NotificationResponse) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewNotificationResponse creates a new NotificationResponse.
-func NewNotificationResponse() *NotificationResponse {
-	_id := objc.Send[objc.ID](objc.ID(_class("UNNotificationResponse")), objc.RegisterName("new"))
-	return notificationResponseAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationResponse) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// Notification wraps the corresponding Objective-C method.
 func (x *NotificationResponse) Notification() *Notification {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notification"))
 	return NotificationFromID(_r)
 }
 
+// ActionIdentifier wraps the corresponding Objective-C method.
 func (x *NotificationResponse) ActionIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actionIdentifier"))
 	if _r == 0 {
@@ -85,3 +91,10 @@ type NotificationResponseable interface {
 }
 
 var _ NotificationResponseable = (*NotificationResponse)(nil)
+
+// isNotificationResponse marks NotificationResponse — and, by embedding promotion, its
+// subclasses — as a member of the NotificationResponse hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NotificationResponse) isNotificationResponse() {}
+
+var _ NotificationResponseProvider = (*NotificationResponse)(nil)

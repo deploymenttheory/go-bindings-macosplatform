@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for objects that automatically adjust the position, rotation, or scale of a node based on specified rules.
-//
 // Constraint is an idiomatic wrapper over the Objective-C class SCNConstraint.
+//
+// Constraint is an abstract base — you do not construct it directly. Construct one of [AccelerationConstraint], [AvoidOccluderConstraint], [BillboardConstraint], [DistanceConstraint], [IKConstraint], [LookAtConstraint], [ReplicatorConstraint], [SliderConstraint], [TransformConstraint] and pass it where a Constraint is accepted.
+//
+// The abstract superclass for objects that automatically adjust the position, rotation, or scale of a node based on specified rules.
 type Constraint struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ConstraintFromID(id objc.ID) *Constraint {
 	if id == 0 {
 		return nil
 	}
-	x := &Constraint{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Constraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func constraintAdopt(id objc.ID) *Constraint {
 	if id == 0 {
 		return nil
 	}
-	x := &Constraint{Handle: objref.Wrap(id)}
+	x := &Constraint{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,62 +62,59 @@ func (x *Constraint) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewConstraint creates a new Constraint.
-func NewConstraint() *Constraint {
-	_id := objc.Send[objc.ID](objc.ID(_class("SCNConstraint")), objc.RegisterName("new"))
-	return constraintAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Constraint) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Determines whether the constraint is enabled or not. Defaults to YES.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled determines whether the constraint is enabled or not. Defaults to YES.
 func (x *Constraint) WithEnabled(enabled bool) *Constraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The influence of the constraint on the node’s transformation.
-//
-// WithInfluenceFactor sets influenceFactor and returns the receiver so calls can be chained.
+// WithInfluenceFactor the influence of the constraint on the node’s transformation.
 func (x *Constraint) WithInfluenceFactor(influenceFactor float64) *Constraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
 	return x
 }
 
-// Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
-//
-// WithIncremental sets incremental and returns the receiver so calls can be chained.
+// WithIncremental specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
 func (x *Constraint) WithIncremental(incremental bool) *Constraint {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
 	return x
 }
 
-// Determines whether the constraint is enabled or not. Defaults to YES.
+// IsEnabled determines whether the constraint is enabled or not. Defaults to YES.
 func (x *Constraint) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r
 }
 
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *Constraint) SetEnabled(enabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
-// Specifies the inflence factor of the receiver. Defaults to 1. Animatable
+// InfluenceFactor specifies the inflence factor of the receiver. Defaults to 1. Animatable
 func (x *Constraint) InfluenceFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("influenceFactor"))
 	return _r
 }
 
+// SetInfluenceFactor wraps the corresponding Objective-C method.
 func (x *Constraint) SetInfluenceFactor(influenceFactor float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
 }
 
-// Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+// IsIncremental specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
 func (x *Constraint) IsIncremental() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isIncremental"))
 	return _r
 }
 
+// SetIncremental wraps the corresponding Objective-C method.
 func (x *Constraint) SetIncremental(incremental bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
 }
@@ -133,3 +134,10 @@ type Constraintable interface {
 }
 
 var _ Constraintable = (*Constraint)(nil)
+
+// isConstraint marks Constraint — and, by embedding promotion, its
+// subclasses — as a member of the Constraint hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Constraint) isConstraint() {}
+
+var _ ConstraintProvider = (*Constraint)(nil)

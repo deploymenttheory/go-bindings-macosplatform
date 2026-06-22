@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specifier for a range of objects in a container.
-//
 // RangeSpecifier is an idiomatic wrapper over the Objective-C class NSRangeSpecifier.
+//
+// It embeds [ScriptObjectSpecifier], promoting that type's methods.
+//
+// A specifier for a range of objects in a container.
 type RangeSpecifier struct {
-	objref.Handle
+	ScriptObjectSpecifier
 }
 
 // RangeSpecifierFromID adopts an existing Objective-C object as a RangeSpecifier
@@ -25,7 +26,8 @@ func RangeSpecifierFromID(id objc.ID) *RangeSpecifier {
 	if id == 0 {
 		return nil
 	}
-	x := &RangeSpecifier{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RangeSpecifier{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func rangeSpecifierAdopt(id objc.ID) *RangeSpecifier {
 	if id == 0 {
 		return nil
 	}
-	x := &RangeSpecifier{Handle: objref.Wrap(id)}
+	x := &RangeSpecifier{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RangeSpecifier) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RangeSpecifier) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RangeSpecifier) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRangeSpecifierWithCoder creates a new RangeSpecifier.
@@ -65,107 +53,91 @@ func NewRangeSpecifierWithCoder(inCoder *Coder) *RangeSpecifier {
 	return rangeSpecifierAdopt(_id)
 }
 
-// Returns a range specifier initialized with the given properties.
-//
-// NewRangeSpecifierWithContainerClassDescriptionContainerSpecifierKeyStartSpecifierEndSpecifier creates a new RangeSpecifier.
+// NewRangeSpecifierWithContainerClassDescriptionContainerSpecifierKeyStartSpecifierEndSpecifier returns a range specifier initialized with the given properties.
 func NewRangeSpecifierWithContainerClassDescriptionContainerSpecifierKeyStartSpecifierEndSpecifier(classDesc *ScriptClassDescription, container *ScriptObjectSpecifier, property string, startSpec *ScriptObjectSpecifier, endSpec *ScriptObjectSpecifier) *RangeSpecifier {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSRangeSpecifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:startSpecifier:endSpecifier:"), objref.IDOf(classDesc), objref.IDOf(container), purego.NSString(property), objref.IDOf(startSpec), objref.IDOf(endSpec))
 	return rangeSpecifierAdopt(_id)
 }
 
-// Returns the object specifier representing the first object of the range.
-//
-// WithStartSpecifier sets startSpecifier and returns the receiver so calls can be chained.
+// WithStartSpecifier returns the object specifier representing the first object of the range.
 func (x *RangeSpecifier) WithStartSpecifier(startSpecifier ScriptObjectSpecifierProvider) *RangeSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartSpecifier:"), objref.IDOf(startSpecifier))
 	return x
 }
 
-// Sets the object specifier representing the last object of the range to a given object.
-//
-// WithEndSpecifier sets endSpecifier and returns the receiver so calls can be chained.
+// WithEndSpecifier sets the object specifier representing the last object of the range to a given object.
 func (x *RangeSpecifier) WithEndSpecifier(endSpecifier ScriptObjectSpecifierProvider) *RangeSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndSpecifier:"), objref.IDOf(endSpecifier))
 	return x
 }
 
-// Sets the receiver’s child reference.
-//
-// WithChildSpecifier sets childSpecifier and returns the receiver so calls can be chained.
+// WithChildSpecifier sets the receiver’s child reference.
 func (x *RangeSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *RangeSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildSpecifier:"), objref.IDOf(childSpecifier))
 	return x
 }
 
-// Sets the container specifier of the receiver.
-//
-// WithContainerSpecifier sets containerSpecifier and returns the receiver so calls can be chained.
+// WithContainerSpecifier sets the container specifier of the receiver.
 func (x *RangeSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *RangeSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerSpecifier:"), objref.IDOf(containerSpecifier))
 	return x
 }
 
-// Sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
-//
-// WithContainerIsObjectBeingTested sets containerIsObjectBeingTested and returns the receiver so calls can be chained.
+// WithContainerIsObjectBeingTested sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
 func (x *RangeSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *RangeSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerIsObjectBeingTested:"), containerIsObjectBeingTested)
 	return x
 }
 
-// Sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
-//
-// WithContainerIsRangeContainerObject sets containerIsRangeContainerObject and returns the receiver so calls can be chained.
+// WithContainerIsRangeContainerObject sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
 func (x *RangeSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *RangeSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerIsRangeContainerObject:"), containerIsRangeContainerObject)
 	return x
 }
 
-// Sets the key of the receiver.
-//
-// WithKey sets key and returns the receiver so calls can be chained.
+// WithKey sets the key of the receiver.
 func (x *RangeSpecifier) WithKey(key StringProvider) *RangeSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), objref.IDOf(key))
 	return x
 }
 
-// Sets the class description of the receiver’s container specifier to a given specifier.
-//
-// WithContainerClassDescription sets containerClassDescription and returns the receiver so calls can be chained.
+// WithContainerClassDescription sets the class description of the receiver’s container specifier to a given specifier.
 func (x *RangeSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *RangeSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerClassDescription:"), objref.IDOf(containerClassDescription))
 	return x
 }
 
-// Sets the value of the evaluation error.
-//
-// WithEvaluationErrorNumber sets evaluationErrorNumber and returns the receiver so calls can be chained.
+// WithEvaluationErrorNumber sets the value of the evaluation error.
 func (x *RangeSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *RangeSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEvaluationErrorNumber:"), evaluationErrorNumber)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *RangeSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *RangeSpecifier {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// StartSpecifier wraps the corresponding Objective-C method.
 func (x *RangeSpecifier) StartSpecifier() *ScriptObjectSpecifier {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }
 
+// SetStartSpecifier wraps the corresponding Objective-C method.
 func (x *RangeSpecifier) SetStartSpecifier(startSpecifier *ScriptObjectSpecifier) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartSpecifier:"), objref.IDOf(startSpecifier))
 }
 
+// EndSpecifier wraps the corresponding Objective-C method.
 func (x *RangeSpecifier) EndSpecifier() *ScriptObjectSpecifier {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }
 
+// SetEndSpecifier wraps the corresponding Objective-C method.
 func (x *RangeSpecifier) SetEndSpecifier(endSpecifier *ScriptObjectSpecifier) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndSpecifier:"), objref.IDOf(endSpecifier))
 }
@@ -190,3 +162,5 @@ type RangeSpecifierable interface {
 }
 
 var _ RangeSpecifierable = (*RangeSpecifier)(nil)
+
+var _ ScriptObjectSpecifierProvider = (*RangeSpecifier)(nil)

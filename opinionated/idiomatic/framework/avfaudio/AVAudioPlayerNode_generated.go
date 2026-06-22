@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object for scheduling the playback of buffers or segments of audio files.
-//
 // AudioPlayerNode is an idiomatic wrapper over the Objective-C class AVAudioPlayerNode.
+//
+// It embeds [AudioNode], promoting that type's methods.
+//
+// An object for scheduling the playback of buffers or segments of audio files.
 type AudioPlayerNode struct {
-	objref.Handle
+	AudioNode
 }
 
 // AudioPlayerNodeFromID adopts an existing Objective-C object as a AudioPlayerNode
@@ -25,7 +26,8 @@ func AudioPlayerNodeFromID(id objc.ID) *AudioPlayerNode {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioPlayerNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioPlayerNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func audioPlayerNodeAdopt(id objc.ID) *AudioPlayerNode {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioPlayerNode{Handle: objref.Wrap(id)}
+	x := &AudioPlayerNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AudioPlayerNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioPlayerNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioPlayerNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAudioPlayerNode creates a new AudioPlayerNode.
@@ -64,63 +52,64 @@ func NewAudioPlayerNode() *AudioPlayerNode {
 	return audioPlayerNodeAdopt(_id)
 }
 
-// Schedules the playing samples from an audio buffer.
+// ScheduleBufferCompletionHandler schedules the playing samples from an audio buffer.
 func (x *AudioPlayerNode) ScheduleBufferCompletionHandler(buffer *AudioPCMBuffer, completionHandler func()) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleBuffer:completionHandler:"), objref.IDOf(buffer), completionHandler)
 }
 
-// Schedules the playing samples from an audio buffer at the time and playback options you specify.
+// ScheduleBufferAtTimeOptionsCompletionHandler schedules the playing samples from an audio buffer at the time and playback options you specify.
 func (x *AudioPlayerNode) ScheduleBufferAtTimeOptionsCompletionHandler(buffer *AudioPCMBuffer, when *AudioTime, options AudioPlayerNodeBufferOptions, completionHandler func()) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleBuffer:atTime:options:completionHandler:"), objref.IDOf(buffer), objref.IDOf(when), options, completionHandler)
 }
 
-// Schedules the playing of an entire audio file.
+// ScheduleFileAtTimeCompletionHandler schedules the playing of an entire audio file.
 func (x *AudioPlayerNode) ScheduleFileAtTimeCompletionHandler(file *AudioFile, when *AudioTime, completionHandler func()) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleFile:atTime:completionHandler:"), objref.IDOf(file), objref.IDOf(when), completionHandler)
 }
 
-// Schedules the playing of an audio file segment.
+// ScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler schedules the playing of an audio file segment.
 func (x *AudioPlayerNode) ScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler(file *AudioFile, startFrame int64, numberFrames uint32, when *AudioTime, completionHandler func()) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleSegment:startingFrame:frameCount:atTime:completionHandler:"), objref.IDOf(file), startFrame, numberFrames, objref.IDOf(when), completionHandler)
 }
 
-// Clears all of the node’s events you schedule and stops playback.
+// Stop clears all of the node’s events you schedule and stops playback.
 func (x *AudioPlayerNode) Stop() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
-// Prepares the file regions or buffers you schedule for playback.
+// PrepareWithFrameCount prepares the file regions or buffers you schedule for playback.
 func (x *AudioPlayerNode) PrepareWithFrameCount(frameCount uint32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareWithFrameCount:"), frameCount)
 }
 
-// Starts or resumes playback immediately.
+// Play starts or resumes playback immediately.
 func (x *AudioPlayerNode) Play() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("play"))
 }
 
-// Starts or resumes playback at a time you specify.
+// PlayAtTime starts or resumes playback at a time you specify.
 func (x *AudioPlayerNode) PlayAtTime(when *AudioTime) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playAtTime:"), objref.IDOf(when))
 }
 
-// Pauses the node’s playback.
+// Pause pauses the node’s playback.
 func (x *AudioPlayerNode) Pause() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pause"))
 }
 
-// Converts from player time to node time.
+// NodeTimeForPlayerTime converts from player time to node time.
 func (x *AudioPlayerNode) NodeTimeForPlayerTime(playerTime *AudioTime) *AudioTime {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeTimeForPlayerTime:"), objref.IDOf(playerTime))
 	return AudioTimeFromID(_r)
 }
 
-// Converts from node time to player time.
+// PlayerTimeForNodeTime converts from node time to player time.
 func (x *AudioPlayerNode) PlayerTimeForNodeTime(nodeTime *AudioTime) *AudioTime {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerTimeForNodeTime:"), objref.IDOf(nodeTime))
 	return AudioTimeFromID(_r)
 }
 
+// IsPlaying wraps the corresponding Objective-C method.
 func (x *AudioPlayerNode) IsPlaying() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPlaying"))
 	return _r
@@ -144,3 +133,5 @@ type AudioPlayerNodeable interface {
 }
 
 var _ AudioPlayerNodeable = (*AudioPlayerNode)(nil)
+
+var _ AudioNodeProvider = (*AudioPlayerNode)(nil)

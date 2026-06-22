@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMRange is an idiomatic wrapper over the Objective-C class DOMRange.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMRange struct {
-	objref.Handle
+	DOMObject
 }
 
 // DOMRangeFromID adopts an existing Objective-C object as a DOMRange
@@ -23,7 +24,8 @@ func DOMRangeFromID(id objc.ID) *DOMRange {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMRange{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMRange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMRangeAdopt(id objc.ID) *DOMRange {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMRange{Handle: objref.Wrap(id)}
+	x := &DOMRange{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMRange) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMRange) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMRange) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMRange creates a new DOMRange.
@@ -62,74 +50,91 @@ func NewDOMRange() *DOMRange {
 	return dOMRangeAdopt(_id)
 }
 
+// SetStartOffset wraps the corresponding Objective-C method.
 func (x *DOMRange) SetStartOffset(refNode *DOMNode, offset int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStart:offset:"), objref.IDOf(refNode), offset)
 }
 
+// SetEndOffset wraps the corresponding Objective-C method.
 func (x *DOMRange) SetEndOffset(refNode *DOMNode, offset int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnd:offset:"), objref.IDOf(refNode), offset)
 }
 
+// SetStartBefore wraps the corresponding Objective-C method.
 func (x *DOMRange) SetStartBefore(refNode *DOMNode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartBefore:"), objref.IDOf(refNode))
 }
 
+// SetStartAfter wraps the corresponding Objective-C method.
 func (x *DOMRange) SetStartAfter(refNode *DOMNode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartAfter:"), objref.IDOf(refNode))
 }
 
+// SetEndBefore wraps the corresponding Objective-C method.
 func (x *DOMRange) SetEndBefore(refNode *DOMNode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndBefore:"), objref.IDOf(refNode))
 }
 
+// SetEndAfter wraps the corresponding Objective-C method.
 func (x *DOMRange) SetEndAfter(refNode *DOMNode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndAfter:"), objref.IDOf(refNode))
 }
 
+// Collapse wraps the corresponding Objective-C method.
 func (x *DOMRange) Collapse(toStart bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collapse:"), toStart)
 }
 
+// SelectNode wraps the corresponding Objective-C method.
 func (x *DOMRange) SelectNode(refNode *DOMNode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectNode:"), objref.IDOf(refNode))
 }
 
+// SelectNodeContents wraps the corresponding Objective-C method.
 func (x *DOMRange) SelectNodeContents(refNode *DOMNode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectNodeContents:"), objref.IDOf(refNode))
 }
 
+// CompareBoundaryPointsSourceRange wraps the corresponding Objective-C method.
 func (x *DOMRange) CompareBoundaryPointsSourceRange(how uint16, sourceRange *DOMRange) int16 {
 	_r := objc.Send[int16](objref.IDOf(x), objc.RegisterName("compareBoundaryPoints:sourceRange:"), how, objref.IDOf(sourceRange))
 	return _r
 }
 
+// DeleteContents wraps the corresponding Objective-C method.
 func (x *DOMRange) DeleteContents() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteContents"))
 }
 
+// ExtractContents wraps the corresponding Objective-C method.
 func (x *DOMRange) ExtractContents() *DOMDocumentFragment {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extractContents"))
 	return DOMDocumentFragmentFromID(_r)
 }
 
+// CloneContents wraps the corresponding Objective-C method.
 func (x *DOMRange) CloneContents() *DOMDocumentFragment {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cloneContents"))
 	return DOMDocumentFragmentFromID(_r)
 }
 
+// InsertNode wraps the corresponding Objective-C method.
 func (x *DOMRange) InsertNode(newNode *DOMNode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertNode:"), objref.IDOf(newNode))
 }
 
+// SurroundContents wraps the corresponding Objective-C method.
 func (x *DOMRange) SurroundContents(newParent *DOMNode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("surroundContents:"), objref.IDOf(newParent))
 }
 
+// CloneRange wraps the corresponding Objective-C method.
 func (x *DOMRange) CloneRange() *DOMRange {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cloneRange"))
 	return DOMRangeFromID(_r)
 }
 
+// ToString wraps the corresponding Objective-C method.
 func (x *DOMRange) ToString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toString"))
 	if _r == 0 {
@@ -138,65 +143,78 @@ func (x *DOMRange) ToString() string {
 	return purego.GoString(_r)
 }
 
+// Detach wraps the corresponding Objective-C method.
 func (x *DOMRange) Detach() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("detach"))
 }
 
+// CreateContextualFragment wraps the corresponding Objective-C method.
 func (x *DOMRange) CreateContextualFragment(html string) *DOMDocumentFragment {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createContextualFragment:"), purego.NSString(html))
 	return DOMDocumentFragmentFromID(_r)
 }
 
+// CompareNode wraps the corresponding Objective-C method.
 func (x *DOMRange) CompareNode(refNode *DOMNode) int16 {
 	_r := objc.Send[int16](objref.IDOf(x), objc.RegisterName("compareNode:"), objref.IDOf(refNode))
 	return _r
 }
 
+// IntersectsNode wraps the corresponding Objective-C method.
 func (x *DOMRange) IntersectsNode(refNode *DOMNode) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("intersectsNode:"), objref.IDOf(refNode))
 	return _r
 }
 
+// ComparePointOffset wraps the corresponding Objective-C method.
 func (x *DOMRange) ComparePointOffset(refNode *DOMNode, offset int) int16 {
 	_r := objc.Send[int16](objref.IDOf(x), objc.RegisterName("comparePoint:offset:"), objref.IDOf(refNode), offset)
 	return _r
 }
 
+// IsPointInRangeOffset wraps the corresponding Objective-C method.
 func (x *DOMRange) IsPointInRangeOffset(refNode *DOMNode, offset int) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPointInRange:offset:"), objref.IDOf(refNode), offset)
 	return _r
 }
 
+// StartContainer wraps the corresponding Objective-C method.
 func (x *DOMRange) StartContainer() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startContainer"))
 	return DOMNodeFromID(_r)
 }
 
+// StartOffset wraps the corresponding Objective-C method.
 func (x *DOMRange) StartOffset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("startOffset"))
 	return _r
 }
 
+// EndContainer wraps the corresponding Objective-C method.
 func (x *DOMRange) EndContainer() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endContainer"))
 	return DOMNodeFromID(_r)
 }
 
+// EndOffset wraps the corresponding Objective-C method.
 func (x *DOMRange) EndOffset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("endOffset"))
 	return _r
 }
 
+// Collapsed wraps the corresponding Objective-C method.
 func (x *DOMRange) Collapsed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("collapsed"))
 	return _r
 }
 
+// CommonAncestorContainer wraps the corresponding Objective-C method.
 func (x *DOMRange) CommonAncestorContainer() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commonAncestorContainer"))
 	return DOMNodeFromID(_r)
 }
 
+// Text wraps the corresponding Objective-C method.
 func (x *DOMRange) Text() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("text"))
 	if _r == 0 {
@@ -205,26 +223,29 @@ func (x *DOMRange) Text() string {
 	return purego.GoString(_r)
 }
 
+// SetStart wraps the corresponding Objective-C method.
 func (x *DOMRange) SetStart(refNode *DOMNode, offset int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStart::"), objref.IDOf(refNode), offset)
 }
 
+// SetEnd wraps the corresponding Objective-C method.
 func (x *DOMRange) SetEnd(refNode *DOMNode, offset int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnd::"), objref.IDOf(refNode), offset)
 }
 
+// CompareBoundaryPoints wraps the corresponding Objective-C method.
 func (x *DOMRange) CompareBoundaryPoints(how uint16, sourceRange *DOMRange) int16 {
 	_r := objc.Send[int16](objref.IDOf(x), objc.RegisterName("compareBoundaryPoints::"), how, objref.IDOf(sourceRange))
 	return _r
 }
 
-// A WebArchive representing the range.
+// WebArchive a WebArchive representing the range.
 func (x *DOMRange) WebArchive() *WebArchive {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webArchive"))
 	return WebArchiveFromID(_r)
 }
 
-// A markup string representing the range.
+// MarkupString a markup string representing the range.
 func (x *DOMRange) MarkupString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markupString"))
 	if _r == 0 {
@@ -274,3 +295,7 @@ type DOMRangeable interface {
 }
 
 var _ DOMRangeable = (*DOMRange)(nil)
+
+var _ DOMObjectProvider = (*DOMRange)(nil)
+
+var _ WebScriptObjectProvider = (*DOMRange)(nil)

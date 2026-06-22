@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A subscription that generates push notifications when CloudKit modifies records in a database.
-//
 // DatabaseSubscription is an idiomatic wrapper over the Objective-C class CKDatabaseSubscription.
+//
+// It embeds [Subscription], promoting that type's methods.
+//
+// A subscription that generates push notifications when CloudKit modifies records in a database.
 type DatabaseSubscription struct {
-	objref.Handle
+	Subscription
 }
 
 // DatabaseSubscriptionFromID adopts an existing Objective-C object as a DatabaseSubscription
@@ -25,7 +26,8 @@ func DatabaseSubscriptionFromID(id objc.ID) *DatabaseSubscription {
 	if id == 0 {
 		return nil
 	}
-	x := &DatabaseSubscription{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DatabaseSubscription{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func databaseSubscriptionAdopt(id objc.ID) *DatabaseSubscription {
 	if id == 0 {
 		return nil
 	}
-	x := &DatabaseSubscription{Handle: objref.Wrap(id)}
+	x := &DatabaseSubscription{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DatabaseSubscription) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DatabaseSubscription) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DatabaseSubscription) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDatabaseSubscription creates a new DatabaseSubscription.
@@ -64,45 +52,39 @@ func NewDatabaseSubscription() *DatabaseSubscription {
 	return databaseSubscriptionAdopt(_id)
 }
 
-// Creates a named subscription for all records in a database.
-//
-// NewDatabaseSubscriptionWithSubscriptionID creates a new DatabaseSubscription.
+// NewDatabaseSubscriptionWithSubscriptionID creates a named subscription for all records in a database.
 func NewDatabaseSubscriptionWithSubscriptionID(subscriptionID obj.Object) *DatabaseSubscription {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKDatabaseSubscription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSubscriptionID:"), objref.IDOf(subscriptionID))
 	return databaseSubscriptionAdopt(_id)
 }
 
-// Creates a database subscription from a serialized instance.
-//
-// NewDatabaseSubscriptionWithCoder creates a new DatabaseSubscription.
+// NewDatabaseSubscriptionWithCoder creates a database subscription from a serialized instance.
 func NewDatabaseSubscriptionWithCoder(aDecoder obj.Object) *DatabaseSubscription {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKDatabaseSubscription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return databaseSubscriptionAdopt(_id)
 }
 
-// The type of record that the subscription queries.
-//
-// WithRecordType sets recordType and returns the receiver so calls can be chained.
+// WithRecordType the type of record that the subscription queries.
 func (x *DatabaseSubscription) WithRecordType(recordType obj.Object) *DatabaseSubscription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordType:"), objref.IDOf(recordType))
 	return x
 }
 
-// The configuration for a subscription’s push notifications.
-//
-// WithNotificationInfo sets notificationInfo and returns the receiver so calls can be chained.
+// WithNotificationInfo the configuration for a subscription’s push notifications.
 func (x *DatabaseSubscription) WithNotificationInfo(notificationInfo *NotificationInfo) *DatabaseSubscription {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotificationInfo:"), objref.IDOf(notificationInfo))
 	return x
 }
 
+// RecordType wraps the corresponding Objective-C method.
 func (x *DatabaseSubscription) RecordType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordType"))
 	return obj.Wrap(_r)
 }
 
+// SetRecordType wraps the corresponding Objective-C method.
 func (x *DatabaseSubscription) SetRecordType(recordType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordType:"), objref.IDOf(recordType))
 }
@@ -117,3 +99,5 @@ type DatabaseSubscriptionable interface {
 }
 
 var _ DatabaseSubscriptionable = (*DatabaseSubscription)(nil)
+
+var _ SubscriptionProvider = (*DatabaseSubscription)(nil)

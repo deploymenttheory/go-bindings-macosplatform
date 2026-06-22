@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A tab in a paragraph.
-//
 // TextTab is an idiomatic wrapper over the Objective-C class NSTextTab.
+//
+// A tab in a paragraph.
 type TextTab struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TextTabFromID(id objc.ID) *TextTab {
 	if id == 0 {
 		return nil
 	}
-	x := &TextTab{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TextTab{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func textTabAdopt(id objc.ID) *TextTab {
 	if id == 0 {
 		return nil
 	}
-	x := &TextTab{Handle: objref.Wrap(id)}
+	x := &TextTab{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,39 +60,45 @@ func (x *TextTab) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initializes a text tab with the specified text alignment, location, and options.
-//
-// NewTextTabWithTextAlignmentLocationOptions creates a new TextTab.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextTab) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTextTabWithTextAlignmentLocationOptions initializes a text tab with the specified text alignment, location, and options.
 func NewTextTabWithTextAlignmentLocationOptions(alignment TextAlignment, loc float64, options obj.Object) *TextTab {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextTab")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextAlignment:location:options:"), alignment, loc, objref.IDOf(options))
 	return textTabAdopt(_id)
 }
 
-// Initializes a newly allocated text tab with the specified alignment and location.
-//
-// NewTextTabWithTypeLocation creates a new TextTab.
+// NewTextTabWithTypeLocation initializes a newly allocated text tab with the specified alignment and location.
 func NewTextTabWithTypeLocation(type_ TextTabType, loc float64) *TextTab {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextTab")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:location:"), type_, loc)
 	return textTabAdopt(_id)
 }
 
+// Location wraps the corresponding Objective-C method.
 func (x *TextTab) Location() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("location"))
 	return _r
 }
 
+// Options wraps the corresponding Objective-C method.
 func (x *TextTab) Options() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
 	return obj.Wrap(_r)
 }
 
+// Alignment wraps the corresponding Objective-C method.
 func (x *TextTab) Alignment() TextAlignment {
 	_r := objc.Send[TextAlignment](objref.IDOf(x), objc.RegisterName("alignment"))
 	return _r
 }
 
+// TabStopType wraps the corresponding Objective-C method.
 func (x *TextTab) TabStopType() TextTabType {
 	_r := objc.Send[TextTabType](objref.IDOf(x), objc.RegisterName("tabStopType"))
 	return _r

@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBasicClusterCapabilityMinimaStruct is an idiomatic wrapper over the Objective-C class MTRBasicClusterCapabilityMinimaStruct.
+//
+// It embeds [MTRBasicInformationClusterCapabilityMinimaStruct], promoting that type's methods.
 type MTRBasicClusterCapabilityMinimaStruct struct {
-	objref.Handle
+	MTRBasicInformationClusterCapabilityMinimaStruct
 }
 
 // MTRBasicClusterCapabilityMinimaStructFromID adopts an existing Objective-C object as a MTRBasicClusterCapabilityMinimaStruct
@@ -23,7 +24,8 @@ func MTRBasicClusterCapabilityMinimaStructFromID(id objc.ID) *MTRBasicClusterCap
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBasicClusterCapabilityMinimaStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBasicClusterCapabilityMinimaStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRBasicClusterCapabilityMinimaStructAdopt(id objc.ID) *MTRBasicClusterCapa
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBasicClusterCapabilityMinimaStruct{Handle: objref.Wrap(id)}
+	x := &MTRBasicClusterCapabilityMinimaStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRBasicClusterCapabilityMinimaStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBasicClusterCapabilityMinimaStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBasicClusterCapabilityMinimaStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRBasicClusterCapabilityMinimaStruct creates a new MTRBasicClusterCapabilityMinimaStruct.
@@ -62,13 +50,13 @@ func NewMTRBasicClusterCapabilityMinimaStruct() *MTRBasicClusterCapabilityMinima
 	return mTRBasicClusterCapabilityMinimaStructAdopt(_id)
 }
 
-// WithCaseSessionsPerFabric sets caseSessionsPerFabric and returns the receiver so calls can be chained.
+// WithCaseSessionsPerFabric sets the property and returns the receiver so calls can be chained.
 func (x *MTRBasicClusterCapabilityMinimaStruct) WithCaseSessionsPerFabric(caseSessionsPerFabric obj.Object) *MTRBasicClusterCapabilityMinimaStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaseSessionsPerFabric:"), objref.IDOf(caseSessionsPerFabric))
 	return x
 }
 
-// WithSubscriptionsPerFabric sets subscriptionsPerFabric and returns the receiver so calls can be chained.
+// WithSubscriptionsPerFabric sets the property and returns the receiver so calls can be chained.
 func (x *MTRBasicClusterCapabilityMinimaStruct) WithSubscriptionsPerFabric(subscriptionsPerFabric obj.Object) *MTRBasicClusterCapabilityMinimaStruct {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionsPerFabric:"), objref.IDOf(subscriptionsPerFabric))
 	return x
@@ -82,3 +70,5 @@ type MTRBasicClusterCapabilityMinimaStructable interface {
 }
 
 var _ MTRBasicClusterCapabilityMinimaStructable = (*MTRBasicClusterCapabilityMinimaStruct)(nil)
+
+var _ MTRBasicInformationClusterCapabilityMinimaStructProvider = (*MTRBasicClusterCapabilityMinimaStruct)(nil)

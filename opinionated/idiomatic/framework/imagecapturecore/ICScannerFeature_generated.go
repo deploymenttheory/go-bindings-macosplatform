@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that describes a scanner feature.
-//
 // ScannerFeature is an idiomatic wrapper over the Objective-C class ICScannerFeature.
+//
+// ScannerFeature is an abstract base — you do not construct it directly. Construct one of [ScannerFeatureBoolean], [ScannerFeatureEnumeration], [ScannerFeatureRange], [ScannerFeatureTemplate] and pass it where a ScannerFeature is accepted.
+//
+// An abstract class that describes a scanner feature.
 type ScannerFeature struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ScannerFeatureFromID(id objc.ID) *ScannerFeature {
 	if id == 0 {
 		return nil
 	}
-	x := &ScannerFeature{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ScannerFeature{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func scannerFeatureAdopt(id objc.ID) *ScannerFeature {
 	if id == 0 {
 		return nil
 	}
-	x := &ScannerFeature{Handle: objref.Wrap(id)}
+	x := &ScannerFeature{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +62,19 @@ func (x *ScannerFeature) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewScannerFeature creates a new ScannerFeature.
-func NewScannerFeature() *ScannerFeature {
-	_id := objc.Send[objc.ID](objc.ID(_class("ICScannerFeature")), objc.RegisterName("new"))
-	return scannerFeatureAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScannerFeature) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// ￼Scanner feature type.
+// Type ￼Scanner feature type.
 func (x *ScannerFeature) Type() ScannerFeatureType {
 	_r := objc.Send[ScannerFeatureType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
-// ￼The internal name of this feature.
+// InternalName ￼The internal name of this feature.
 func (x *ScannerFeature) InternalName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("internalName"))
 	if _r == 0 {
@@ -79,7 +83,7 @@ func (x *ScannerFeature) InternalName() string {
 	return purego.GoString(_r)
 }
 
-// The human readable name of this feature.
+// HumanReadableName the human readable name of this feature.
 func (x *ScannerFeature) HumanReadableName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("humanReadableName"))
 	if _r == 0 {
@@ -88,7 +92,7 @@ func (x *ScannerFeature) HumanReadableName() string {
 	return purego.GoString(_r)
 }
 
-// ￼Tooltip text describing the feature.
+// Tooltip ￼Tooltip text describing the feature.
 func (x *ScannerFeature) Tooltip() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tooltip"))
 	if _r == 0 {
@@ -107,3 +111,10 @@ type ScannerFeatureable interface {
 }
 
 var _ ScannerFeatureable = (*ScannerFeature)(nil)
+
+// isScannerFeature marks ScannerFeature — and, by embedding promotion, its
+// subclasses — as a member of the ScannerFeature hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ScannerFeature) isScannerFeature() {}
+
+var _ ScannerFeatureProvider = (*ScannerFeature)(nil)

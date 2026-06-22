@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes the format of a media stream.
-//
 // ExtensionStreamFormat is an idiomatic wrapper over the Objective-C class CMIOExtensionStreamFormat.
+//
+// An object that describes the format of a media stream.
 type ExtensionStreamFormat struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ExtensionStreamFormatFromID(id objc.ID) *ExtensionStreamFormat {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionStreamFormat{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ExtensionStreamFormat{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func extensionStreamFormatAdopt(id objc.ID) *ExtensionStreamFormat {
 	if id == 0 {
 		return nil
 	}
-	x := &ExtensionStreamFormat{Handle: objref.Wrap(id)}
+	x := &ExtensionStreamFormat{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *ExtensionStreamFormat) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExtensionStreamFormat) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewExtensionStreamFormat creates a new ExtensionStreamFormat.
 func NewExtensionStreamFormat() *ExtensionStreamFormat {
 	_id := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionStreamFormat")), objc.RegisterName("new"))
 	return extensionStreamFormatAdopt(_id)
 }
 
-// The format description of the samples delivered by the stream.
+// FormatDescription the format description of the samples delivered by the stream.
 func (x *ExtensionStreamFormat) FormatDescription() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formatDescription"))
 	return obj.Wrap(_r)
 }
 
-// The valid frame durations as an array of CMTime as dictionaries. The CMTime in dictionary format are made with CMTimeCopyAsDictionary.
+// ValidFrameDurations the valid frame durations as an array of CMTime as dictionaries. The CMTime in dictionary format are made with CMTimeCopyAsDictionary.
 //
 // ValidFrameDurations returns the collection as a Go slice.
 func (x *ExtensionStreamFormat) ValidFrameDurations() []obj.Object {

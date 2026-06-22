@@ -25,7 +25,8 @@ func MTRAccessControlClusterReviewFabricRestrictionsResponseParamsFromID(id objc
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAccessControlClusterReviewFabricRestrictionsResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRAccessControlClusterReviewFabricRestrictionsResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRAccessControlClusterReviewFabricRestrictionsResponseParamsAdopt(id objc.
 	if id == 0 {
 		return nil
 	}
-	x := &MTRAccessControlClusterReviewFabricRestrictionsResponseParams{Handle: objref.Wrap(id)}
+	x := &MTRAccessControlClusterReviewFabricRestrictionsResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) IsKind(c
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRAccessControlClusterReviewFabricRestrictionsResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-//
-// NewMTRAccessControlClusterReviewFabricRestrictionsResponseParamsWithResponseValueError creates a new MTRAccessControlClusterReviewFabricRestrictionsResponseParams.
-func NewMTRAccessControlClusterReviewFabricRestrictionsResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRAccessControlClusterReviewFabricRestrictionsResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRAccessControlClusterReviewFabricRestrictionsResponseParamsWithResponseValueError initialize an MTRAccessControlClusterReviewFabricRestrictionsResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRAccessControlClusterReviewFabricRestrictionsResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRAccessControlClusterReviewFabricRestrictionsResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRAccessControlClusterReviewFabricRestrictionsResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,17 +77,19 @@ func NewMTRAccessControlClusterReviewFabricRestrictionsResponseParamsWithRespons
 	return mTRAccessControlClusterReviewFabricRestrictionsResponseParamsAdopt(_id), nil
 }
 
-// WithToken sets token and returns the receiver so calls can be chained.
+// WithToken sets the property and returns the receiver so calls can be chained.
 func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) WithToken(token obj.Object) *MTRAccessControlClusterReviewFabricRestrictionsResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToken:"), objref.IDOf(token))
 	return x
 }
 
+// Token wraps the corresponding Objective-C method.
 func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) Token() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("token"))
 	return obj.Wrap(_r)
 }
 
+// SetToken wraps the corresponding Objective-C method.
 func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) SetToken(token obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToken:"), objref.IDOf(token))
 }

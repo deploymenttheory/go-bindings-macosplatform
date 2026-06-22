@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of physical input elements.
-//
 // PhysicalInputElementCollection is an idiomatic wrapper over the Objective-C class GCPhysicalInputElementCollection.
+//
+// A collection of physical input elements.
 type PhysicalInputElementCollection struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PhysicalInputElementCollectionFromID(id objc.ID) *PhysicalInputElementColle
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicalInputElementCollection{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PhysicalInputElementCollection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func physicalInputElementCollectionAdopt(id objc.ID) *PhysicalInputElementCollec
 	if id == 0 {
 		return nil
 	}
-	x := &PhysicalInputElementCollection{Handle: objref.Wrap(id)}
+	x := &PhysicalInputElementCollection{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,29 +60,37 @@ func (x *PhysicalInputElementCollection) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PhysicalInputElementCollection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPhysicalInputElementCollection creates a new PhysicalInputElementCollection.
 func NewPhysicalInputElementCollection() *PhysicalInputElementCollection {
 	_id := objc.Send[objc.ID](objc.ID(_class("GCPhysicalInputElementCollection")), objc.RegisterName("new"))
 	return physicalInputElementCollectionAdopt(_id)
 }
 
-// Returns the element associated with a given alias.
+// ElementForAlias returns the element associated with a given alias.
 func (x *PhysicalInputElementCollection) ElementForAlias(alias obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementForAlias:"), objref.IDOf(alias))
 	return obj.Wrap(_r)
 }
 
+// ObjectForKeyedSubscript wraps the corresponding Objective-C method.
 func (x *PhysicalInputElementCollection) ObjectForKeyedSubscript(key obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(key))
 	return obj.Wrap(_r)
 }
 
+// ElementEnumerator wraps the corresponding Objective-C method.
 func (x *PhysicalInputElementCollection) ElementEnumerator() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementEnumerator"))
 	return obj.Wrap(_r)
 }
 
-// The number of elements in the collection.
+// Count the number of elements in the collection.
 func (x *PhysicalInputElementCollection) Count() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
 	return _r

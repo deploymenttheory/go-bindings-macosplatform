@@ -11,9 +11,11 @@ import (
 // PaymentProvider is accepted wherever a SKPayment (or one of its subclasses) is expected.
 type PaymentProvider interface {
 	objref.Object
+	isPayment()
 }
 
 // RequestProvider is accepted wherever a SKRequest (or one of its subclasses) is expected.
 type RequestProvider interface {
 	objref.Object
+	isRequest()
 }

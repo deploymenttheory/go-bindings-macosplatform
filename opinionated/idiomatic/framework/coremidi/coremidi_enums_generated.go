@@ -18,6 +18,8 @@ const (
 	KMIDICIDeviceTypeUSBMIDI     CIDeviceType = 3
 )
 
+// String returns the CIDeviceType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CIDeviceType) String() string {
 	switch e {
 	case KMIDICIDeviceTypeUnknown:
@@ -42,6 +44,8 @@ const (
 	KMIDICIProfileTypeMultichannel  CIProfileType = 4
 )
 
+// String returns the CIProfileType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CIProfileType) String() string {
 	switch e {
 	case KMIDICIProfileTypeSingleChannel:
@@ -73,6 +77,8 @@ const (
 	KMIDIMessageTypeInvalid       MessageType = 255
 )
 
+// String returns the MessageType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MessageType) String() string {
 	switch e {
 	case KMIDIMessageTypeUtility:
@@ -106,6 +112,8 @@ const (
 	NetworkConnectionPolicy_Anyone             NetworkConnectionPolicy = 2
 )
 
+// String returns the NetworkConnectionPolicy constant's name, or its numeric form when the
+// value is not a known constant.
 func (e NetworkConnectionPolicy) String() string {
 	switch e {
 	case NetworkConnectionPolicy_NoOne:
@@ -127,6 +135,8 @@ const (
 	KMIDIProtocol_2_0 ProtocolID = 2
 )
 
+// String returns the ProtocolID constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ProtocolID) String() string {
 	switch e {
 	case KMIDIProtocol_1_0:
@@ -147,6 +157,8 @@ const (
 	KMIDIUMPCIObjectBackingTypeUSBMIDI      UMPCIObjectBackingType = 3
 )
 
+// String returns the UMPCIObjectBackingType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e UMPCIObjectBackingType) String() string {
 	switch e {
 	case KMIDIUMPCIObjectBackingTypeUnknown:
@@ -171,6 +183,8 @@ const (
 	KMIDIUMPFunctionBlockDirectionBidirectional UMPFunctionBlockDirection = 3
 )
 
+// String returns the UMPFunctionBlockDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e UMPFunctionBlockDirection) String() string {
 	switch e {
 	case KMIDIUMPFunctionBlockDirectionUnknown:
@@ -194,6 +208,8 @@ const (
 	KMIDIUMPFunctionBlockMIDI1InfoRestrictedBandwidth   UMPFunctionBlockMIDI1Info = 2
 )
 
+// String returns the UMPFunctionBlockMIDI1Info constant's name, or its numeric form when the
+// value is not a known constant.
 func (e UMPFunctionBlockMIDI1Info) String() string {
 	switch e {
 	case KMIDIUMPFunctionBlockMIDI1InfoNotMIDI1:
@@ -216,6 +232,8 @@ const (
 	KMIDIUMPFunctionBlockUIHintSenderReceiver UMPFunctionBlockUIHint = 3
 )
 
+// String returns the UMPFunctionBlockUIHint constant's name, or its numeric form when the
+// value is not a known constant.
 func (e UMPFunctionBlockUIHint) String() string {
 	switch e {
 	case KMIDIUMPFunctionBlockUIHintUnknown:
@@ -239,6 +257,8 @@ const (
 	KMIDIUMPProtocolOptionsMIDI2 UMPProtocolOptions = 2
 )
 
+// String returns the UMPProtocolOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e UMPProtocolOptions) String() string {
 	var parts []string
 	if e&KMIDIUMPProtocolOptionsMIDI1 != 0 {
@@ -262,6 +282,8 @@ const (
 	KUMPStreamMessageFormatEnd        UMPStreamMessageFormat = 3
 )
 
+// String returns the UMPStreamMessageFormat constant's name, or its numeric form when the
+// value is not a known constant.
 func (e UMPStreamMessageFormat) String() string {
 	switch e {
 	case KUMPStreamMessageFormatComplete:
@@ -294,6 +316,8 @@ const (
 	KUMPStreamMessageStatusEndOfClip                       UMPStreamMessageStatus = 33
 )
 
+// String returns the UMPStreamMessageStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e UMPStreamMessageStatus) String() string {
 	switch e {
 	case KUMPStreamMessageStatusEndpointDiscovery:

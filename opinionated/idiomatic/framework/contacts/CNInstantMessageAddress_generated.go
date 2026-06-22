@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable object representing an instant message address for the contact.
-//
 // InstantMessageAddress is an idiomatic wrapper over the Objective-C class CNInstantMessageAddress.
+//
+// An immutable object representing an instant message address for the contact.
 type InstantMessageAddress struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func InstantMessageAddressFromID(id objc.ID) *InstantMessageAddress {
 	if id == 0 {
 		return nil
 	}
-	x := &InstantMessageAddress{Handle: objref.Wrap(purego.Retain(id))}
+	x := &InstantMessageAddress{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func instantMessageAddressAdopt(id objc.ID) *InstantMessageAddress {
 	if id == 0 {
 		return nil
 	}
-	x := &InstantMessageAddress{Handle: objref.Wrap(id)}
+	x := &InstantMessageAddress{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,15 +60,20 @@ func (x *InstantMessageAddress) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns a CNInstantMessageAddress object initialized with the specified user name and service.
-//
-// NewInstantMessageAddressWithUsernameService creates a new InstantMessageAddress.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *InstantMessageAddress) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewInstantMessageAddressWithUsernameService returns a CNInstantMessageAddress object initialized with the specified user name and service.
 func NewInstantMessageAddressWithUsernameService(username string, service string) *InstantMessageAddress {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CNInstantMessageAddress")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUsername:service:"), purego.NSString(username), purego.NSString(service))
 	return instantMessageAddressAdopt(_id)
 }
 
+// Username wraps the corresponding Objective-C method.
 func (x *InstantMessageAddress) Username() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("username"))
 	if _r == 0 {
@@ -75,6 +82,7 @@ func (x *InstantMessageAddress) Username() string {
 	return purego.GoString(_r)
 }
 
+// Service wraps the corresponding Objective-C method.
 func (x *InstantMessageAddress) Service() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("service"))
 	if _r == 0 {

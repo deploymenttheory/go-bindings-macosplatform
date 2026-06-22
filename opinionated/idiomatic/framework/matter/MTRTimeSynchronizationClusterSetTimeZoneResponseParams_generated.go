@@ -25,7 +25,8 @@ func MTRTimeSynchronizationClusterSetTimeZoneResponseParamsFromID(id objc.ID) *M
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTimeSynchronizationClusterSetTimeZoneResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRTimeSynchronizationClusterSetTimeZoneResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRTimeSynchronizationClusterSetTimeZoneResponseParamsAdopt(id objc.ID) *MT
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTimeSynchronizationClusterSetTimeZoneResponseParams{Handle: objref.Wrap(id)}
+	x := &MTRTimeSynchronizationClusterSetTimeZoneResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) IsKind(classNam
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRTimeSynchronizationClusterSetTimeZoneResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-//
-// NewMTRTimeSynchronizationClusterSetTimeZoneResponseParamsWithResponseValueError creates a new MTRTimeSynchronizationClusterSetTimeZoneResponseParams.
-func NewMTRTimeSynchronizationClusterSetTimeZoneResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRTimeSynchronizationClusterSetTimeZoneResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRTimeSynchronizationClusterSetTimeZoneResponseParamsWithResponseValueError initialize an MTRTimeSynchronizationClusterSetTimeZoneResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRTimeSynchronizationClusterSetTimeZoneResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRTimeSynchronizationClusterSetTimeZoneResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRTimeSynchronizationClusterSetTimeZoneResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,17 +77,19 @@ func NewMTRTimeSynchronizationClusterSetTimeZoneResponseParamsWithResponseValueE
 	return mTRTimeSynchronizationClusterSetTimeZoneResponseParamsAdopt(_id), nil
 }
 
-// WithDstOffsetRequired sets dstOffsetRequired and returns the receiver so calls can be chained.
+// WithDstOffsetRequired sets the property and returns the receiver so calls can be chained.
 func (x *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) WithDstOffsetRequired(dstOffsetRequired obj.Object) *MTRTimeSynchronizationClusterSetTimeZoneResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDstOffsetRequired:"), objref.IDOf(dstOffsetRequired))
 	return x
 }
 
+// DstOffsetRequired wraps the corresponding Objective-C method.
 func (x *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) DstOffsetRequired() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dstOffsetRequired"))
 	return obj.Wrap(_r)
 }
 
+// SetDstOffsetRequired wraps the corresponding Objective-C method.
 func (x *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) SetDstOffsetRequired(dstOffsetRequired obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDstOffsetRequired:"), objref.IDOf(dstOffsetRequired))
 }

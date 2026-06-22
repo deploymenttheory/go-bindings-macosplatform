@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRCommandPath is an idiomatic wrapper over the Objective-C class MTRCommandPath.
+//
+// It embeds [MTRClusterPath], promoting that type's methods.
 type MTRCommandPath struct {
-	objref.Handle
+	MTRClusterPath
 }
 
 // MTRCommandPathFromID adopts an existing Objective-C object as a MTRCommandPath
@@ -23,7 +24,8 @@ func MTRCommandPathFromID(id objc.ID) *MTRCommandPath {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRCommandPath{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRCommandPath{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRCommandPathAdopt(id objc.ID) *MTRCommandPath {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRCommandPath{Handle: objref.Wrap(id)}
+	x := &MTRCommandPath{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRCommandPath) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRCommandPath) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRCommandPath) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRCommandPath creates a new MTRCommandPath.
@@ -62,6 +50,7 @@ func NewMTRCommandPath() *MTRCommandPath {
 	return mTRCommandPathAdopt(_id)
 }
 
+// Command wraps the corresponding Objective-C method.
 func (x *MTRCommandPath) Command() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("command"))
 	return obj.Wrap(_r)
@@ -74,3 +63,5 @@ type MTRCommandPathable interface {
 }
 
 var _ MTRCommandPathable = (*MTRCommandPath)(nil)
+
+var _ MTRClusterPathProvider = (*MTRCommandPath)(nil)

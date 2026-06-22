@@ -20,6 +20,8 @@ const (
 	ThumbnailGenerationRequestRepresentationTypeAll                 ThumbnailGenerationRequestRepresentationTypes = 18446744073709551615
 )
 
+// String returns the ThumbnailGenerationRequestRepresentationTypes constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ThumbnailGenerationRequestRepresentationTypes) String() string {
 	var parts []string
 	if e&ThumbnailGenerationRequestRepresentationTypeIcon != 0 {
@@ -49,6 +51,8 @@ const (
 	ThumbnailRepresentationTypeThumbnail           ThumbnailRepresentationType = 2
 )
 
+// String returns the ThumbnailRepresentationType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ThumbnailRepresentationType) String() string {
 	switch e {
 	case ThumbnailRepresentationTypeIcon:

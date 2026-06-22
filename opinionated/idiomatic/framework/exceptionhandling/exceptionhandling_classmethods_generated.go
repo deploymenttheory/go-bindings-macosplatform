@@ -8,7 +8,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns the singleton NSExceptionHandler instance.
+// DefaultExceptionHandler returns the singleton NSExceptionHandler instance.
 func DefaultExceptionHandler() *ExceptionHandler {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSExceptionHandler")), objc.RegisterName("defaultExceptionHandler"))
 	return ExceptionHandlerFromID(_r)

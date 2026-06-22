@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Energy EVSE Electric Vehicle Supply Equipment (EVSE) is equipment used to charge an Electric Vehicle (EV) or Plug-In Hybrid Electric Vehicle. This cluster provides an interface to the functionality of Electric Vehicle Supply Equipment (EVSE) management.
-//
 // MTRClusterEnergyEVSE is an idiomatic wrapper over the Objective-C class MTRClusterEnergyEVSE.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
+//
+// Cluster Energy EVSE Electric Vehicle Supply Equipment (EVSE) is equipment used to charge an Electric Vehicle (EV) or Plug-In Hybrid Electric Vehicle. This cluster provides an interface to the functionality of Electric Vehicle Supply Equipment (EVSE) management.
 type MTRClusterEnergyEVSE struct {
-	objref.Handle
+	MTRGenericCluster
 }
 
 // MTRClusterEnergyEVSEFromID adopts an existing Objective-C object as a MTRClusterEnergyEVSE
@@ -27,7 +28,8 @@ func MTRClusterEnergyEVSEFromID(id objc.ID) *MTRClusterEnergyEVSE {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterEnergyEVSE{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterEnergyEVSE{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,37 +42,23 @@ func mTRClusterEnergyEVSEAdopt(id objc.ID) *MTRClusterEnergyEVSE {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterEnergyEVSE{Handle: objref.Wrap(id)}
+	x := &MTRClusterEnergyEVSE{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRClusterEnergyEVSE) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterEnergyEVSE) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterEnergyEVSE) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterEnergyEVSEWithDeviceEndpointIDQueue creates a new MTRClusterEnergyEVSE.
+// NewMTRClusterEnergyEVSEWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterEnergyEVSEWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterEnergyEVSE {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterEnergyEVSE")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterEnergyEVSEAdopt(_id)
 }
 
+// GetTargetsWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // GetTargetsWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterEnergyEVSE) GetTargetsWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTREnergyEVSEClusterGetTargetsParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTREnergyEVSEClusterGetTargetsResponseParams, error) {
+func (x *MTRClusterEnergyEVSE) GetTargetsWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTREnergyEVSEClusterGetTargetsParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTREnergyEVSEClusterGetTargetsResponseParams, err error) {
 	type _result struct {
 		val *MTREnergyEVSEClusterGetTargetsResponseParams
 		err error
@@ -92,8 +80,10 @@ func (x *MTRClusterEnergyEVSE) GetTargetsWithParamsExpectedValuesExpectedValueIn
 	}
 }
 
+// GetTargetsWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // GetTargetsWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterEnergyEVSE) GetTargetsWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTREnergyEVSEClusterGetTargetsResponseParams, error) {
+func (x *MTRClusterEnergyEVSE) GetTargetsWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTREnergyEVSEClusterGetTargetsResponseParams, err error) {
 	type _result struct {
 		val *MTREnergyEVSEClusterGetTargetsResponseParams
 		err error
@@ -115,135 +105,163 @@ func (x *MTRClusterEnergyEVSE) GetTargetsWithExpectedValuesExpectedValueInterval
 	}
 }
 
+// ReadAttributeStateWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) ReadAttributeStateWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeSupplyStateWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) ReadAttributeSupplyStateWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupplyStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFaultStateWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) ReadAttributeFaultStateWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFaultStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeChargingEnabledUntilWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) ReadAttributeChargingEnabledUntilWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChargingEnabledUntilWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeCircuitCapacityWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) ReadAttributeCircuitCapacityWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCircuitCapacityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMinimumChargeCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) ReadAttributeMinimumChargeCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinimumChargeCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeMaximumChargeCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) ReadAttributeMaximumChargeCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaximumChargeCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeUserMaximumChargeCurrentWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) ReadAttributeUserMaximumChargeCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUserMaximumChargeCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeUserMaximumChargeCurrentWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) WriteAttributeUserMaximumChargeCurrentWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeUserMaximumChargeCurrentWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeUserMaximumChargeCurrentWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) WriteAttributeUserMaximumChargeCurrentWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeUserMaximumChargeCurrentWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeRandomizationDelayWindowWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) ReadAttributeRandomizationDelayWindowWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRandomizationDelayWindowWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeRandomizationDelayWindowWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) WriteAttributeRandomizationDelayWindowWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRandomizationDelayWindowWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeRandomizationDelayWindowWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) WriteAttributeRandomizationDelayWindowWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRandomizationDelayWindowWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeNextChargeStartTimeWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) ReadAttributeNextChargeStartTimeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNextChargeStartTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeNextChargeTargetTimeWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) ReadAttributeNextChargeTargetTimeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNextChargeTargetTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeNextChargeRequiredEnergyWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) ReadAttributeNextChargeRequiredEnergyWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNextChargeRequiredEnergyWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeNextChargeTargetSoCWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) ReadAttributeNextChargeTargetSoCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNextChargeTargetSoCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeApproximateEVEfficiencyWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) ReadAttributeApproximateEVEfficiencyWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeApproximateEVEfficiencyWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// WriteAttributeApproximateEVEfficiencyWithValueExpectedValueInterval wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) WriteAttributeApproximateEVEfficiencyWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeApproximateEVEfficiencyWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
+// WriteAttributeApproximateEVEfficiencyWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) WriteAttributeApproximateEVEfficiencyWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeApproximateEVEfficiencyWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
+// ReadAttributeSessionIDWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) ReadAttributeSessionIDWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSessionIDWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeSessionDurationWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) ReadAttributeSessionDurationWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSessionDurationWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeSessionEnergyChargedWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) ReadAttributeSessionEnergyChargedWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSessionEnergyChargedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
 func (x *MTRClusterEnergyEVSE) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -285,3 +303,7 @@ type MTRClusterEnergyEVSEable interface {
 }
 
 var _ MTRClusterEnergyEVSEable = (*MTRClusterEnergyEVSE)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterEnergyEVSE)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterEnergyEVSE)(nil)

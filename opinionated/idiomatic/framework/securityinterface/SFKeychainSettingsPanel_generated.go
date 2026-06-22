@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A panel or sheet that allows users to change their keychain settings.
-//
 // KeychainSettingsPanel is an idiomatic wrapper over the Objective-C class SFKeychainSettingsPanel.
+//
+// A panel or sheet that allows users to change their keychain settings.
 type KeychainSettingsPanel struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func KeychainSettingsPanelFromID(id objc.ID) *KeychainSettingsPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &KeychainSettingsPanel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &KeychainSettingsPanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func keychainSettingsPanelAdopt(id objc.ID) *KeychainSettingsPanel {
 	if id == 0 {
 		return nil
 	}
-	x := &KeychainSettingsPanel{Handle: objref.Wrap(id)}
+	x := &KeychainSettingsPanel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *KeychainSettingsPanel) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *KeychainSettingsPanel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *KeychainSettingsPanel) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewKeychainSettingsPanel creates a new KeychainSettingsPanel.

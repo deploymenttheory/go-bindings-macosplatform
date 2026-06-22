@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract base class that manages central and peripheral objects.
-//
 // Manager is an idiomatic wrapper over the Objective-C class CBManager.
+//
+// Manager is an abstract base — you do not construct it directly. Construct one of [CentralManager], [PeripheralManager] and pass it where a Manager is accepted.
+//
+// The abstract base class that manages central and peripheral objects.
 type Manager struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ManagerFromID(id objc.ID) *Manager {
 	if id == 0 {
 		return nil
 	}
-	x := &Manager{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Manager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func managerAdopt(id objc.ID) *Manager {
 	if id == 0 {
 		return nil
 	}
-	x := &Manager{Handle: objref.Wrap(id)}
+	x := &Manager{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +62,19 @@ func (x *Manager) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewManager creates a new Manager.
-func NewManager() *Manager {
-	_id := objc.Send[objc.ID](objc.ID(_class("CBManager")), objc.RegisterName("new"))
-	return managerAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Manager) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The current state of the manager, initially set to <code>CBManagerStateUnknown</code>. Updates are provided by required delegate method {
+// State the current state of the manager, initially set to <code>CBManagerStateUnknown</code>. Updates are provided by required delegate method {
 func (x *Manager) State() ManagerState {
 	_r := objc.Send[ManagerState](objref.IDOf(x), objc.RegisterName("state"))
 	return _r
 }
 
-// The current authorization of the manager, initially set to <code>CBManagerAuthorizationNotDetermined</code>. Updates are provided by required delegate method {
+// Authorization the current authorization of the manager, initially set to <code>CBManagerAuthorizationNotDetermined</code>. Updates are provided by required delegate method {
 func (x *Manager) Authorization() ManagerAuthorization {
 	_r := objc.Send[ManagerAuthorization](objref.IDOf(x), objc.RegisterName("authorization"))
 	return _r
@@ -84,3 +88,10 @@ type Managerable interface {
 }
 
 var _ Managerable = (*Manager)(nil)
+
+// isManager marks Manager — and, by embedding promotion, its
+// subclasses — as a member of the Manager hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Manager) isManager() {}
+
+var _ ManagerProvider = (*Manager)(nil)

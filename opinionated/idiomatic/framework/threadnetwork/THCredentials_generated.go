@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that contains credentials for a Thread network.
-//
 // THCredentials is an idiomatic wrapper over the Objective-C class THCredentials.
+//
+// A class that contains credentials for a Thread network.
 type THCredentials struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func THCredentialsFromID(id objc.ID) *THCredentials {
 	if id == 0 {
 		return nil
 	}
-	x := &THCredentials{Handle: objref.Wrap(purego.Retain(id))}
+	x := &THCredentials{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func tHCredentialsAdopt(id objc.ID) *THCredentials {
 	if id == 0 {
 		return nil
 	}
-	x := &THCredentials{Handle: objref.Wrap(id)}
+	x := &THCredentials{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +60,25 @@ func (x *THCredentials) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *THCredentials) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTHCredentials creates a new THCredentials.
 func NewTHCredentials() *THCredentials {
 	_id := objc.Send[objc.ID](objc.ID(_class("THCredentials")), objc.RegisterName("new"))
 	return tHCredentialsAdopt(_id)
 }
 
-// The Thread network radio channel.
-//
-// WithChannel sets channel and returns the receiver so calls can be chained.
+// WithChannel the Thread network radio channel.
 func (x *THCredentials) WithChannel(channel uint8) *THCredentials {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
 	return x
 }
 
-// The Thread network name.
+// NetworkName the Thread network name.
 func (x *THCredentials) NetworkName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkName"))
 	if _r == 0 {
@@ -81,59 +87,60 @@ func (x *THCredentials) NetworkName() string {
 	return purego.GoString(_r)
 }
 
-// The Thread network extended PAN identifier.
+// ExtendedPANID the Thread network extended PAN identifier.
 func (x *THCredentials) ExtendedPANID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendedPANID"))
 	return obj.Wrap(_r)
 }
 
-// The identifer of an active Thread network Border Agent. This property’s value is the MAC Extended Address, a random identifier that the active Thread network border router generates.
+// BorderAgentID the identifer of an active Thread network Border Agent. This property’s value is the MAC Extended Address, a random identifier that the active Thread network border router generates.
 func (x *THCredentials) BorderAgentID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderAgentID"))
 	return obj.Wrap(_r)
 }
 
-// The essential operational parameters for the Thread network. The framework parses this property, then extracts and sets “THCredentials/channel“, “THCredentials/extendedPANID“, “THCredentials/networkKey“, “THCredentials/networkName“, “THCredentials/panID“, and “THCredentials/PSKC“ when you call “THClient/storeCredentialsForBorderAgent:activeOperationalDataSet:completion:“.
+// ActiveOperationalDataSet the essential operational parameters for the Thread network. The framework parses this property, then extracts and sets “THCredentials/channel“, “THCredentials/extendedPANID“, “THCredentials/networkKey“, “THCredentials/networkName“, “THCredentials/panID“, and “THCredentials/PSKC“ when you call “THClient/storeCredentialsForBorderAgent:activeOperationalDataSet:completion:“.
 func (x *THCredentials) ActiveOperationalDataSet() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activeOperationalDataSet"))
 	return obj.Wrap(_r)
 }
 
-// The sixteen byte Thread network key.
+// NetworkKey the sixteen byte Thread network key.
 func (x *THCredentials) NetworkKey() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkKey"))
 	return obj.Wrap(_r)
 }
 
-// The sixteen byte Thread network pre-shared key for the Commissioner.
+// PSKC the sixteen byte Thread network pre-shared key for the Commissioner.
 func (x *THCredentials) PSKC() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("PSKC"))
 	return obj.Wrap(_r)
 }
 
-// The Thread network radio channel.
+// Channel the Thread network radio channel.
 func (x *THCredentials) Channel() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("channel"))
 	return _r
 }
 
+// SetChannel wraps the corresponding Objective-C method.
 func (x *THCredentials) SetChannel(channel uint8) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
 }
 
-// The two byte Thead network PAN identifier.
+// PanID the two byte Thead network PAN identifier.
 func (x *THCredentials) PanID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("panID"))
 	return obj.Wrap(_r)
 }
 
-// The date and time that the framework stored the credential in the database.
+// CreationDate the date and time that the framework stored the credential in the database.
 func (x *THCredentials) CreationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creationDate"))
 	return obj.Wrap(_r)
 }
 
-// The date and time that the framework updated the credential in the database.
+// LastModificationDate the date and time that the framework updated the credential in the database.
 func (x *THCredentials) LastModificationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastModificationDate"))
 	return obj.Wrap(_r)

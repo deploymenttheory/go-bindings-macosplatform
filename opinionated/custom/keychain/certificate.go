@@ -7,8 +7,6 @@ import (
 
 	foundation "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	security "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/security"
-
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 // ── Certificate (kSecClassCertificate) ───────────────────────────────────────
@@ -27,11 +25,11 @@ type Certificate struct {
 // CreateCertificate adds c. It fails if the certificate (by content) is already
 // present, or if c.DER is not a valid DER-encoded certificate.
 func CreateCertificate(c Certificate) error {
-	certRef := security.SecCertificateCreateWithData(nil, purego.CFRef(newData(c.DER)))
+	certRef := security.SecCertificateCreateWithData(nil, newData(c.DER))
 	if certRef == nil {
 		return errors.New("keychain: invalid DER certificate")
 	}
-	attrs := []attr{ref(security.KSecValueRef(), purego.ID(uintptr(certRef)))}
+	attrs := []attr{ref(security.KSecValueRef(), certRef)}
 	if c.Label != "" {
 		attrs = append(attrs, str(security.KSecAttrLabel(), c.Label))
 	}

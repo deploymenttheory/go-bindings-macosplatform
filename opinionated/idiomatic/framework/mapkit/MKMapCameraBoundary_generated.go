@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A boundary of an area within which the map’s center needs to remain.
-//
 // MapCameraBoundary is an idiomatic wrapper over the Objective-C class MKMapCameraBoundary.
+//
+// A boundary of an area within which the map’s center needs to remain.
 type MapCameraBoundary struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func MapCameraBoundaryFromID(id objc.ID) *MapCameraBoundary {
 	if id == 0 {
 		return nil
 	}
-	x := &MapCameraBoundary{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MapCameraBoundary{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mapCameraBoundaryAdopt(id objc.ID) *MapCameraBoundary {
 	if id == 0 {
 		return nil
 	}
-	x := &MapCameraBoundary{Handle: objref.Wrap(id)}
+	x := &MapCameraBoundary{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *MapCameraBoundary) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MapCameraBoundary) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MapCameraBoundary) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMapCameraBoundaryWithCoder creates a new MapCameraBoundary.

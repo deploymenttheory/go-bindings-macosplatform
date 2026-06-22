@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An array of pipeline buffer descriptors.
-//
 // PipelineBufferDescriptorArray is an idiomatic wrapper over the Objective-C class MTLPipelineBufferDescriptorArray.
+//
+// An array of pipeline buffer descriptors.
 type PipelineBufferDescriptorArray struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PipelineBufferDescriptorArrayFromID(id objc.ID) *PipelineBufferDescriptorAr
 	if id == 0 {
 		return nil
 	}
-	x := &PipelineBufferDescriptorArray{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PipelineBufferDescriptorArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func pipelineBufferDescriptorArrayAdopt(id objc.ID) *PipelineBufferDescriptorArr
 	if id == 0 {
 		return nil
 	}
-	x := &PipelineBufferDescriptorArray{Handle: objref.Wrap(id)}
+	x := &PipelineBufferDescriptorArray{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *PipelineBufferDescriptorArray) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PipelineBufferDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPipelineBufferDescriptorArray creates a new PipelineBufferDescriptorArray.
 func NewPipelineBufferDescriptorArray() *PipelineBufferDescriptorArray {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLPipelineBufferDescriptorArray")), objc.RegisterName("new"))
 	return pipelineBufferDescriptorArrayAdopt(_id)
 }
 
-// Returns the pipeline buffer descriptor at the specified array index.
+// ObjectAtIndexedSubscript returns the pipeline buffer descriptor at the specified array index.
 func (x *PipelineBufferDescriptorArray) ObjectAtIndexedSubscript(bufferIndex int) *PipelineBufferDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), bufferIndex)
 	return PipelineBufferDescriptorFromID(_r)
 }
 
-// Sets a pipeline buffer descriptor at the specified array index.
+// SetObjectAtIndexedSubscript sets a pipeline buffer descriptor at the specified array index.
 func (x *PipelineBufferDescriptorArray) SetObjectAtIndexedSubscript(buffer *PipelineBufferDescriptor, bufferIndex int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(buffer), bufferIndex)
 }

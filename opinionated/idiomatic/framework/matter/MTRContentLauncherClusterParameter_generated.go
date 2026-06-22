@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRContentLauncherClusterParameter is an idiomatic wrapper over the Objective-C class MTRContentLauncherClusterParameter.
+//
+// It embeds [MTRContentLauncherClusterParameterStruct], promoting that type's methods.
 type MTRContentLauncherClusterParameter struct {
-	objref.Handle
+	MTRContentLauncherClusterParameterStruct
 }
 
 // MTRContentLauncherClusterParameterFromID adopts an existing Objective-C object as a MTRContentLauncherClusterParameter
@@ -23,7 +24,8 @@ func MTRContentLauncherClusterParameterFromID(id objc.ID) *MTRContentLauncherClu
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterParameter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRContentLauncherClusterParameter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func mTRContentLauncherClusterParameterAdopt(id objc.ID) *MTRContentLauncherClus
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterParameter{Handle: objref.Wrap(id)}
+	x := &MTRContentLauncherClusterParameter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRContentLauncherClusterParameter) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRContentLauncherClusterParameter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRContentLauncherClusterParameter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRContentLauncherClusterParameter creates a new MTRContentLauncherClusterParameter.
@@ -62,13 +50,13 @@ func NewMTRContentLauncherClusterParameter() *MTRContentLauncherClusterParameter
 	return mTRContentLauncherClusterParameterAdopt(_id)
 }
 
-// WithType sets type_ and returns the receiver so calls can be chained.
+// WithType sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterParameter) WithType(type_ obj.Object) *MTRContentLauncherClusterParameter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return x
 }
 
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterParameter) WithValue(value string) *MTRContentLauncherClusterParameter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 	return x
@@ -82,3 +70,5 @@ type MTRContentLauncherClusterParameterable interface {
 }
 
 var _ MTRContentLauncherClusterParameterable = (*MTRContentLauncherClusterParameter)(nil)
+
+var _ MTRContentLauncherClusterParameterStructProvider = (*MTRContentLauncherClusterParameter)(nil)

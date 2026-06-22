@@ -6,17 +6,20 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that convolves an image with a Laplacian filter.
-//
 // ImageLaplacianPyramid is an idiomatic wrapper over the Objective-C class MPSImageLaplacianPyramid.
+//
+// ImageLaplacianPyramid is an abstract base — you do not construct it directly. Construct one of [ImageLaplacianPyramidAdd], [ImageLaplacianPyramidSubtract] and pass it where a ImageLaplacianPyramid is accepted.
+//
+// A filter that convolves an image with a Laplacian filter.
 type ImageLaplacianPyramid struct {
-	objref.Handle
+	ImagePyramid
 }
 
 // ImageLaplacianPyramidFromID adopts an existing Objective-C object as a ImageLaplacianPyramid
@@ -25,7 +28,8 @@ func ImageLaplacianPyramidFromID(id objc.ID) *ImageLaplacianPyramid {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageLaplacianPyramid{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageLaplacianPyramid{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,66 +42,60 @@ func imageLaplacianPyramidAdopt(id objc.ID) *ImageLaplacianPyramid {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageLaplacianPyramid{Handle: objref.Wrap(id)}
+	x := &ImageLaplacianPyramid{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ImageLaplacianPyramid) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageLaplacianPyramid) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageLaplacianPyramid) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewImageLaplacianPyramid creates a new ImageLaplacianPyramid.
-func NewImageLaplacianPyramid() *ImageLaplacianPyramid {
-	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageLaplacianPyramid")), objc.RegisterName("new"))
-	return imageLaplacianPyramidAdopt(_id)
-}
-
-// WithLaplacianBias sets laplacianBias and returns the receiver so calls can be chained.
+// WithLaplacianBias sets the property and returns the receiver so calls can be chained.
 func (x *ImageLaplacianPyramid) WithLaplacianBias(laplacianBias float32) *ImageLaplacianPyramid {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLaplacianBias:"), laplacianBias)
 	return x
 }
 
-// WithLaplacianScale sets laplacianScale and returns the receiver so calls can be chained.
+// WithLaplacianScale sets the property and returns the receiver so calls can be chained.
 func (x *ImageLaplacianPyramid) WithLaplacianScale(laplacianScale float32) *ImageLaplacianPyramid {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLaplacianScale:"), laplacianScale)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
+func (x *ImageLaplacianPyramid) WithOffset(offset mpscore.MPSOffset) *ImageLaplacianPyramid {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (x *ImageLaplacianPyramid) WithClipRect(clipRect metal.MTLRegion) *ImageLaplacianPyramid {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
+// WithLabel the string that identifies the kernel.
 func (x *ImageLaplacianPyramid) WithLabel(label string) *ImageLaplacianPyramid {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
+// GetLaplacianBias wraps the corresponding Objective-C method.
 func (x *ImageLaplacianPyramid) GetLaplacianBias() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("getLaplacianBias"))
 	return _r
 }
 
+// SetLaplacianBias wraps the corresponding Objective-C method.
 func (x *ImageLaplacianPyramid) SetLaplacianBias(laplacianBias float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLaplacianBias:"), laplacianBias)
 }
 
+// GetLaplacianScale wraps the corresponding Objective-C method.
 func (x *ImageLaplacianPyramid) GetLaplacianScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("getLaplacianScale"))
 	return _r
 }
 
+// SetLaplacianScale wraps the corresponding Objective-C method.
 func (x *ImageLaplacianPyramid) SetLaplacianScale(laplacianScale float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLaplacianScale:"), laplacianScale)
 }
@@ -107,6 +105,8 @@ type ImageLaplacianPyramidable interface {
 	obj.Object
 	WithLaplacianBias(laplacianBias float32) *ImageLaplacianPyramid
 	WithLaplacianScale(laplacianScale float32) *ImageLaplacianPyramid
+	WithOffset(offset mpscore.MPSOffset) *ImageLaplacianPyramid
+	WithClipRect(clipRect metal.MTLRegion) *ImageLaplacianPyramid
 	WithLabel(label string) *ImageLaplacianPyramid
 	GetLaplacianBias() float32
 	SetLaplacianBias(laplacianBias float32)
@@ -115,3 +115,16 @@ type ImageLaplacianPyramidable interface {
 }
 
 var _ ImageLaplacianPyramidable = (*ImageLaplacianPyramid)(nil)
+
+// isImageLaplacianPyramid marks ImageLaplacianPyramid — and, by embedding promotion, its
+// subclasses — as a member of the ImageLaplacianPyramid hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ImageLaplacianPyramid) isImageLaplacianPyramid() {}
+
+var _ ImageLaplacianPyramidProvider = (*ImageLaplacianPyramid)(nil)
+
+var _ ImagePyramidProvider = (*ImageLaplacianPyramid)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageLaplacianPyramid)(nil)
+
+var _ KernelProvider = (*ImageLaplacianPyramid)(nil)

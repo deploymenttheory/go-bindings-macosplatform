@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The class that represents an imagery-based map presentation, such as one using satellite imagery.
-//
 // ImageryMapConfiguration is an idiomatic wrapper over the Objective-C class MKImageryMapConfiguration.
+//
+// It embeds [MapConfiguration], promoting that type's methods.
+//
+// The class that represents an imagery-based map presentation, such as one using satellite imagery.
 type ImageryMapConfiguration struct {
-	objref.Handle
+	MapConfiguration
 }
 
 // ImageryMapConfigurationFromID adopts an existing Objective-C object as a ImageryMapConfiguration
@@ -25,7 +26,8 @@ func ImageryMapConfigurationFromID(id objc.ID) *ImageryMapConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageryMapConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageryMapConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func imageryMapConfigurationAdopt(id objc.ID) *ImageryMapConfiguration {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageryMapConfiguration{Handle: objref.Wrap(id)}
+	x := &ImageryMapConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ImageryMapConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageryMapConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageryMapConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewImageryMapConfiguration creates a new ImageryMapConfiguration.
@@ -64,18 +52,14 @@ func NewImageryMapConfiguration() *ImageryMapConfiguration {
 	return imageryMapConfigurationAdopt(_id)
 }
 
-// Creates a new imagery based map configuration with the specified elevation style.
-//
-// NewImageryMapConfigurationWithElevationStyle creates a new ImageryMapConfiguration.
+// NewImageryMapConfigurationWithElevationStyle creates a new imagery based map configuration with the specified elevation style.
 func NewImageryMapConfigurationWithElevationStyle(elevationStyle MapElevationStyle) *ImageryMapConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKImageryMapConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElevationStyle:"), elevationStyle)
 	return imageryMapConfigurationAdopt(_id)
 }
 
-// The value that indicates the map’s elevation style.
-//
-// WithElevationStyle sets elevationStyle and returns the receiver so calls can be chained.
+// WithElevationStyle the value that indicates the map’s elevation style.
 func (x *ImageryMapConfiguration) WithElevationStyle(elevationStyle MapElevationStyle) *ImageryMapConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElevationStyle:"), elevationStyle)
 	return x
@@ -88,3 +72,5 @@ type ImageryMapConfigurationable interface {
 }
 
 var _ ImageryMapConfigurationable = (*ImageryMapConfiguration)(nil)
+
+var _ MapConfigurationProvider = (*ImageryMapConfiguration)(nil)

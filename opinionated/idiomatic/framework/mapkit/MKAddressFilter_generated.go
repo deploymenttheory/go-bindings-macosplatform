@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that filters which address options to include or exclude in search results.
-//
 // AddressFilter is an idiomatic wrapper over the Objective-C class MKAddressFilter.
+//
+// An object that filters which address options to include or exclude in search results.
 type AddressFilter struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AddressFilterFromID(id objc.ID) *AddressFilter {
 	if id == 0 {
 		return nil
 	}
-	x := &AddressFilter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AddressFilter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func addressFilterAdopt(id objc.ID) *AddressFilter {
 	if id == 0 {
 		return nil
 	}
-	x := &AddressFilter{Handle: objref.Wrap(id)}
+	x := &AddressFilter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,33 @@ func (x *AddressFilter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an address filter with options for including results in a search.
-//
-// NewAddressFilterIncludingOptions creates a new AddressFilter.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AddressFilter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAddressFilterIncludingOptions creates an address filter with options for including results in a search.
 func NewAddressFilterIncludingOptions(options AddressFilterOption) *AddressFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKAddressFilter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initIncludingOptions:"), options)
 	return addressFilterAdopt(_id)
 }
 
-// Creates an address filter with options for excluding results in a search.
-//
-// NewAddressFilterExcludingOptions creates a new AddressFilter.
+// NewAddressFilterExcludingOptions creates an address filter with options for excluding results in a search.
 func NewAddressFilterExcludingOptions(options AddressFilterOption) *AddressFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKAddressFilter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initExcludingOptions:"), options)
 	return addressFilterAdopt(_id)
 }
 
-// Indicates whether options are included for filtering.
+// IncludesOptions indicates whether options are included for filtering.
 func (x *AddressFilter) IncludesOptions(options AddressFilterOption) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesOptions:"), options)
 	return _r
 }
 
-// Indicates whether options are excluded from filtering.
+// ExcludesOptions indicates whether options are excluded from filtering.
 func (x *AddressFilter) ExcludesOptions(options AddressFilterOption) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("excludesOptions:"), options)
 	return _r

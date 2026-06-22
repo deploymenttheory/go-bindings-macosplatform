@@ -6,15 +6,16 @@ package mediaextension
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides information about the chunk of media at the location of a sample.
-//
 // SampleCursorChunk is an idiomatic wrapper over the Objective-C class MESampleCursorChunk.
+//
+// An object that provides information about the chunk of media at the location of a sample.
 type SampleCursorChunk struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func SampleCursorChunkFromID(id objc.ID) *SampleCursorChunk {
 	if id == 0 {
 		return nil
 	}
-	x := &SampleCursorChunk{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SampleCursorChunk{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func sampleCursorChunkAdopt(id objc.ID) *SampleCursorChunk {
 	if id == 0 {
 		return nil
 	}
-	x := &SampleCursorChunk{Handle: objref.Wrap(id)}
+	x := &SampleCursorChunk{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +61,38 @@ func (x *SampleCursorChunk) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewSampleCursorChunk creates a new SampleCursorChunk.
-func NewSampleCursorChunk() *SampleCursorChunk {
-	_id := objc.Send[objc.ID](objc.ID(_class("MESampleCursorChunk")), objc.RegisterName("new"))
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SampleCursorChunk) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSampleCursorChunkWithByteSourceChunkStorageRangeChunkInfoSampleIndexWithinChunk creates a new sample cursor chunk with byte source and chunk data that you provide.
+func NewSampleCursorChunkWithByteSourceChunkStorageRangeChunkInfoSampleIndexWithinChunk(byteSource *ByteSource, chunkStorageRange avfoundation.AVSampleCursorStorageRange, chunkInfo avfoundation.AVSampleCursorChunkInfo, sampleIndexWithinChunk int) *SampleCursorChunk {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MESampleCursorChunk")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithByteSource:chunkStorageRange:chunkInfo:sampleIndexWithinChunk:"), objref.IDOf(byteSource), chunkStorageRange, chunkInfo, sampleIndexWithinChunk)
 	return sampleCursorChunkAdopt(_id)
 }
 
-// The MEByteSource to be used to read the data for the sample.
+// ByteSource the MEByteSource to be used to read the data for the sample.
 func (x *SampleCursorChunk) ByteSource() *ByteSource {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("byteSource"))
 	return ByteSourceFromID(_r)
 }
 
-// The offset of the sample within the chunk, in samples. Index value 0 corresponds to the start of the chunk. You would step back this many samples to position the cursor at the start of the chunk. Subtract from the chunkInfo.chunkSampleCount field to obtain the number of samples to the end of the chunk.
+// ChunkStorageRange the offset location and length of the sample's chunk, in bytes, within the MEByteSource. The length should be set to 0 if there is no chunk associated with the sample.
+func (x *SampleCursorChunk) ChunkStorageRange() avfoundation.AVSampleCursorStorageRange {
+	_r := objc.Send[avfoundation.AVSampleCursorStorageRange](objref.IDOf(x), objc.RegisterName("chunkStorageRange"))
+	return _r
+}
+
+// ChunkInfo provides information about the chunk of media samples.
+func (x *SampleCursorChunk) ChunkInfo() avfoundation.AVSampleCursorChunkInfo {
+	_r := objc.Send[avfoundation.AVSampleCursorChunkInfo](objref.IDOf(x), objc.RegisterName("chunkInfo"))
+	return _r
+}
+
+// SampleIndexWithinChunk the offset of the sample within the chunk, in samples. Index value 0 corresponds to the start of the chunk. You would step back this many samples to position the cursor at the start of the chunk. Subtract from the chunkInfo.chunkSampleCount field to obtain the number of samples to the end of the chunk.
 func (x *SampleCursorChunk) SampleIndexWithinChunk() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sampleIndexWithinChunk"))
 	return _r
@@ -80,6 +102,8 @@ func (x *SampleCursorChunk) SampleIndexWithinChunk() int {
 type SampleCursorChunkable interface {
 	obj.Object
 	ByteSource() *ByteSource
+	ChunkStorageRange() avfoundation.AVSampleCursorStorageRange
+	ChunkInfo() avfoundation.AVSampleCursorChunkInfo
 	SampleIndexWithinChunk() int
 }
 

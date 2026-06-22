@@ -6,17 +6,19 @@ package vision
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An image-analysis request, as a stateful request you track over time, that determines the affine transform necessary to align the content of two images.
-//
 // TrackTranslationalImageRegistrationRequest is an idiomatic wrapper over the Objective-C class VNTrackTranslationalImageRegistrationRequest.
+//
+// It embeds [StatefulRequest], promoting that type's methods.
+//
+// An image-analysis request, as a stateful request you track over time, that determines the affine transform necessary to align the content of two images.
 type TrackTranslationalImageRegistrationRequest struct {
-	objref.Handle
+	StatefulRequest
 }
 
 // TrackTranslationalImageRegistrationRequestFromID adopts an existing Objective-C object as a TrackTranslationalImageRegistrationRequest
@@ -25,7 +27,8 @@ func TrackTranslationalImageRegistrationRequestFromID(id objc.ID) *TrackTranslat
 	if id == 0 {
 		return nil
 	}
-	x := &TrackTranslationalImageRegistrationRequest{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TrackTranslationalImageRegistrationRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func trackTranslationalImageRegistrationRequestAdopt(id objc.ID) *TrackTranslati
 	if id == 0 {
 		return nil
 	}
-	x := &TrackTranslationalImageRegistrationRequest{Handle: objref.Wrap(id)}
+	x := &TrackTranslationalImageRegistrationRequest{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *TrackTranslationalImageRegistrationRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TrackTranslationalImageRegistrationRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TrackTranslationalImageRegistrationRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewTrackTranslationalImageRegistrationRequest creates a new TrackTranslationalImageRegistrationRequest.
@@ -64,25 +53,25 @@ func NewTrackTranslationalImageRegistrationRequest() *TrackTranslationalImageReg
 	return trackTranslationalImageRegistrationRequestAdopt(_id)
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets preferBackgroundProcessing and returns the receiver so calls can be chained.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
+func (x *TrackTranslationalImageRegistrationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackTranslationalImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *TrackTranslationalImageRegistrationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackTranslationalImageRegistrationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets usesCPUOnly and returns the receiver so calls can be chained.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *TrackTranslationalImageRegistrationRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackTranslationalImageRegistrationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets revision and returns the receiver so calls can be chained.
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
 func (x *TrackTranslationalImageRegistrationRequest) WithRevision(revision int) *TrackTranslationalImageRegistrationRequest {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
@@ -91,9 +80,16 @@ func (x *TrackTranslationalImageRegistrationRequest) WithRevision(revision int) 
 // TrackTranslationalImageRegistrationRequestable is the interface implemented by [TrackTranslationalImageRegistrationRequest], for mocking and DI.
 type TrackTranslationalImageRegistrationRequestable interface {
 	obj.Object
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackTranslationalImageRegistrationRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackTranslationalImageRegistrationRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *TrackTranslationalImageRegistrationRequest
 	WithRevision(revision int) *TrackTranslationalImageRegistrationRequest
 }
 
 var _ TrackTranslationalImageRegistrationRequestable = (*TrackTranslationalImageRegistrationRequest)(nil)
+
+var _ StatefulRequestProvider = (*TrackTranslationalImageRegistrationRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*TrackTranslationalImageRegistrationRequest)(nil)
+
+var _ RequestProvider = (*TrackTranslationalImageRegistrationRequest)(nil)

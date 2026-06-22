@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object containing the location and unique identifier of an Apple App Store storefront.
-//
 // Storefront is an idiomatic wrapper over the Objective-C class SKStorefront.
+//
+// An object containing the location and unique identifier of an Apple App Store storefront.
 type Storefront struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func StorefrontFromID(id objc.ID) *Storefront {
 	if id == 0 {
 		return nil
 	}
-	x := &Storefront{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Storefront{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func storefrontAdopt(id objc.ID) *Storefront {
 	if id == 0 {
 		return nil
 	}
-	x := &Storefront{Handle: objref.Wrap(id)}
+	x := &Storefront{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *Storefront) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Storefront) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewStorefront creates a new Storefront.
 func NewStorefront() *Storefront {
 	_id := objc.Send[objc.ID](objc.ID(_class("SKStorefront")), objc.RegisterName("new"))
 	return storefrontAdopt(_id)
 }
 
+// CountryCode wraps the corresponding Objective-C method.
 func (x *Storefront) CountryCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("countryCode"))
 	if _r == 0 {
@@ -72,6 +81,7 @@ func (x *Storefront) CountryCode() string {
 	return purego.GoString(_r)
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *Storefront) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {

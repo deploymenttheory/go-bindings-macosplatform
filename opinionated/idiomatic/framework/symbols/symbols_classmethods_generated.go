@@ -9,295 +9,295 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An animation that makes the layers of a symbol-based image appear separately or as a whole.
+// Effect an animation that makes the layers of a symbol-based image appear separately or as a whole.
 func Effect() *SymbolAppearEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolAppearEffect")), objc.RegisterName("effect"))
 	return SymbolAppearEffectFromID(_r)
 }
 
-// An effect that makes the symbol scale up as it appears.
+// AppearUpEffect an effect that makes the symbol scale up as it appears.
 func AppearUpEffect() *SymbolAppearEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolAppearEffect")), objc.RegisterName("appearUpEffect"))
 	return SymbolAppearEffectFromID(_r)
 }
 
-// An effect that makes the symbol scale down as it appears.
+// AppearDownEffect an effect that makes the symbol scale down as it appears.
 func AppearDownEffect() *SymbolAppearEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolAppearEffect")), objc.RegisterName("appearDownEffect"))
 	return SymbolAppearEffectFromID(_r)
 }
 
-// A transition that applies the default animation to a symbol-based image in a context-sensitive manner.
+// Transition a transition that applies the default animation to a symbol-based image in a context-sensitive manner.
 func Transition() *SymbolAutomaticContentTransition {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolAutomaticContentTransition")), objc.RegisterName("transition"))
 	return SymbolAutomaticContentTransitionFromID(_r)
 }
 
-// An animation that applies a transitory scaling effect, or bounce, to the layers in a symbol-based image separately or as a whole.
+// NSSymbolBounceEffectEffect an animation that applies a transitory scaling effect, or bounce, to the layers in a symbol-based image separately or as a whole.
 func NSSymbolBounceEffectEffect() *SymbolBounceEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolBounceEffect")), objc.RegisterName("effect"))
 	return SymbolBounceEffectFromID(_r)
 }
 
-// An effect that bounces the symbol upward.
+// BounceUpEffect an effect that bounces the symbol upward.
 func BounceUpEffect() *SymbolBounceEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolBounceEffect")), objc.RegisterName("bounceUpEffect"))
 	return SymbolBounceEffectFromID(_r)
 }
 
-// An effect that bounces the symbol downward.
+// BounceDownEffect an effect that bounces the symbol downward.
 func BounceDownEffect() *SymbolBounceEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolBounceEffect")), objc.RegisterName("bounceDownEffect"))
 	return SymbolBounceEffectFromID(_r)
 }
 
-// The default breathe effect, determined by the system.
+// NSSymbolBreatheEffectEffect the default breathe effect, determined by the system.
 func NSSymbolBreatheEffectEffect() *SymbolBreatheEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolBreatheEffect")), objc.RegisterName("effect"))
 	return SymbolBreatheEffectFromID(_r)
 }
 
-// Convenience initializer for a breathe effect that pulses layers as they breathe.
+// BreathePulseEffect convenience initializer for a breathe effect that pulses layers as they breathe.
 func BreathePulseEffect() *SymbolBreatheEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolBreatheEffect")), objc.RegisterName("breathePulseEffect"))
 	return SymbolBreatheEffectFromID(_r)
 }
 
-// Convenience initializer for a breathe effect that makes the symbol breathe with no other styling.
+// BreathePlainEffect convenience initializer for a breathe effect that makes the symbol breathe with no other styling.
 func BreathePlainEffect() *SymbolBreatheEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolBreatheEffect")), objc.RegisterName("breathePlainEffect"))
 	return SymbolBreatheEffectFromID(_r)
 }
 
-// An animation that makes the layers of a symbol-based image disappear separately or as a whole.
+// NSSymbolDisappearEffectEffect an animation that makes the layers of a symbol-based image disappear separately or as a whole.
 func NSSymbolDisappearEffectEffect() *SymbolDisappearEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolDisappearEffect")), objc.RegisterName("effect"))
 	return SymbolDisappearEffectFromID(_r)
 }
 
-// An effect that scales the symbol up as it disappears.
+// DisappearUpEffect an effect that scales the symbol up as it disappears.
 func DisappearUpEffect() *SymbolDisappearEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolDisappearEffect")), objc.RegisterName("disappearUpEffect"))
 	return SymbolDisappearEffectFromID(_r)
 }
 
-// An effect that scales the symbol down as it disappears.
+// DisappearDownEffect an effect that scales the symbol down as it disappears.
 func DisappearDownEffect() *SymbolDisappearEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolDisappearEffect")), objc.RegisterName("disappearDownEffect"))
 	return SymbolDisappearEffectFromID(_r)
 }
 
-// The default draw off effect, determined by the system.
+// NSSymbolDrawOffEffectEffect the default draw off effect, determined by the system.
 func NSSymbolDrawOffEffectEffect() *SymbolDrawOffEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolDrawOffEffect")), objc.RegisterName("effect"))
 	return SymbolDrawOffEffectFromID(_r)
 }
 
-// The default draw on effect, determined by the system.
+// NSSymbolDrawOnEffectEffect the default draw on effect, determined by the system.
 func NSSymbolDrawOnEffectEffect() *SymbolDrawOnEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolDrawOnEffect")), objc.RegisterName("effect"))
 	return SymbolDrawOnEffectFromID(_r)
 }
 
-// The default set of effect options.
+// Options the default set of effect options.
 func Options() *SymbolEffectOptions {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolEffectOptions")), objc.RegisterName("options"))
 	return SymbolEffectOptionsFromID(_r)
 }
 
-// A default set of effect options that prefers to repeat indefinitely.
+// OptionsWithRepeating a default set of effect options that prefers to repeat indefinitely.
 func OptionsWithRepeating() *SymbolEffectOptions {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolEffectOptions")), objc.RegisterName("optionsWithRepeating"))
 	return SymbolEffectOptionsFromID(_r)
 }
 
-// A default set of effect options that prefers to not repeat.
+// OptionsWithNonRepeating a default set of effect options that prefers to not repeat.
 func OptionsWithNonRepeating() *SymbolEffectOptions {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolEffectOptions")), objc.RegisterName("optionsWithNonRepeating"))
 	return SymbolEffectOptionsFromID(_r)
 }
 
-// A default set of effect options with a preferred repeat count.
+// OptionsWithRepeatCount a default set of effect options with a preferred repeat count.
 func OptionsWithRepeatCount(count int) *SymbolEffectOptions {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolEffectOptions")), objc.RegisterName("optionsWithRepeatCount:"), count)
 	return SymbolEffectOptionsFromID(_r)
 }
 
-// A default set of effect options with a preferred speed multiplier.
+// OptionsWithSpeed a default set of effect options with a preferred speed multiplier.
 func OptionsWithSpeed(speed float64) *SymbolEffectOptions {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolEffectOptions")), objc.RegisterName("optionsWithSpeed:"), speed)
 	return SymbolEffectOptionsFromID(_r)
 }
 
-// Convenience initializer setting a preferred repeat behavior.
+// OptionsWithRepeatBehavior convenience initializer setting a preferred repeat behavior.
 func OptionsWithRepeatBehavior(behavior *SymbolEffectOptionsRepeatBehavior) *SymbolEffectOptions {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolEffectOptions")), objc.RegisterName("optionsWithRepeatBehavior:"), objref.IDOf(behavior))
 	return SymbolEffectOptionsFromID(_r)
 }
 
-// Creates and returns a repeat behavior that prefers to repeat indefinitely using periodic animations. Periodic animations play the effect at regular intervals starting and stopping each time.
+// BehaviorPeriodic creates and returns a repeat behavior that prefers to repeat indefinitely using periodic animations. Periodic animations play the effect at regular intervals starting and stopping each time.
 func BehaviorPeriodic() *SymbolEffectOptionsRepeatBehavior {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolEffectOptionsRepeatBehavior")), objc.RegisterName("behaviorPeriodic"))
 	return SymbolEffectOptionsRepeatBehaviorFromID(_r)
 }
 
-// Creates and returns a repeat behavior with a preferred play count using periodic animations. Periodic animations play the effect at regular intervals starting and stopping each time.
+// BehaviorPeriodicWithCount creates and returns a repeat behavior with a preferred play count using periodic animations. Periodic animations play the effect at regular intervals starting and stopping each time.
 func BehaviorPeriodicWithCount(count int) *SymbolEffectOptionsRepeatBehavior {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolEffectOptionsRepeatBehavior")), objc.RegisterName("behaviorPeriodicWithCount:"), count)
 	return SymbolEffectOptionsRepeatBehaviorFromID(_r)
 }
 
-// Creates and returns a repeat behavior with a preferred repeat delay using periodic animations. Periodic animations play the effect at regular intervals starting and stopping each time.
+// BehaviorPeriodicWithDelay creates and returns a repeat behavior with a preferred repeat delay using periodic animations. Periodic animations play the effect at regular intervals starting and stopping each time.
 func BehaviorPeriodicWithDelay(delay float64) *SymbolEffectOptionsRepeatBehavior {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolEffectOptionsRepeatBehavior")), objc.RegisterName("behaviorPeriodicWithDelay:"), delay)
 	return SymbolEffectOptionsRepeatBehaviorFromID(_r)
 }
 
-// Creates and returns a repeat behavior with a preferred play count and delay using periodic animations. Periodic animations play the effect at regular intervals starting and stopping each time.
+// BehaviorPeriodicWithCountDelay creates and returns a repeat behavior with a preferred play count and delay using periodic animations. Periodic animations play the effect at regular intervals starting and stopping each time.
 func BehaviorPeriodicWithCountDelay(count int, delay float64) *SymbolEffectOptionsRepeatBehavior {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolEffectOptionsRepeatBehavior")), objc.RegisterName("behaviorPeriodicWithCount:delay:"), count, delay)
 	return SymbolEffectOptionsRepeatBehaviorFromID(_r)
 }
 
-// Creates and returns a repeat behavior that prefers to repeat indefinitely, using continuous animations if available. Continuous animations have an intro, a body that runs as long as the effect is enabled, and an outro. If available these animations provide a smoother animation when an effect repeats indefinitely.
+// BehaviorContinuous creates and returns a repeat behavior that prefers to repeat indefinitely, using continuous animations if available. Continuous animations have an intro, a body that runs as long as the effect is enabled, and an outro. If available these animations provide a smoother animation when an effect repeats indefinitely.
 func BehaviorContinuous() *SymbolEffectOptionsRepeatBehavior {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolEffectOptionsRepeatBehavior")), objc.RegisterName("behaviorContinuous"))
 	return SymbolEffectOptionsRepeatBehaviorFromID(_r)
 }
 
-// The default pulse effect, determined by the system.
+// NSSymbolPulseEffectEffect the default pulse effect, determined by the system.
 func NSSymbolPulseEffectEffect() *SymbolPulseEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolPulseEffect")), objc.RegisterName("effect"))
 	return SymbolPulseEffectFromID(_r)
 }
 
-// An effect that replaces the layers of one symbol-based image with those of another.
+// NSSymbolReplaceContentTransitionTransition an effect that replaces the layers of one symbol-based image with those of another.
 func NSSymbolReplaceContentTransitionTransition() *SymbolReplaceContentTransition {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolReplaceContentTransition")), objc.RegisterName("transition"))
 	return SymbolReplaceContentTransitionFromID(_r)
 }
 
-// An effect that replaces a symbol by scaling it down, and scaling a different symbol up.
+// ReplaceDownUpTransition an effect that replaces a symbol by scaling it down, and scaling a different symbol up.
 func ReplaceDownUpTransition() *SymbolReplaceContentTransition {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolReplaceContentTransition")), objc.RegisterName("replaceDownUpTransition"))
 	return SymbolReplaceContentTransitionFromID(_r)
 }
 
-// An effect that replaces a symbol by scaling it up, and scaling a different symbol up.
+// ReplaceUpUpTransition an effect that replaces a symbol by scaling it up, and scaling a different symbol up.
 func ReplaceUpUpTransition() *SymbolReplaceContentTransition {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolReplaceContentTransition")), objc.RegisterName("replaceUpUpTransition"))
 	return SymbolReplaceContentTransitionFromID(_r)
 }
 
-// An effect that replaces a symbol by removing it, and scaling a different symbol up.
+// ReplaceOffUpTransition an effect that replaces a symbol by removing it, and scaling a different symbol up.
 func ReplaceOffUpTransition() *SymbolReplaceContentTransition {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolReplaceContentTransition")), objc.RegisterName("replaceOffUpTransition"))
 	return SymbolReplaceContentTransitionFromID(_r)
 }
 
-// Convenience initializer for a MagicReplace content transition with a configured Replace fallback.
+// MagicTransitionWithFallback convenience initializer for a MagicReplace content transition with a configured Replace fallback.
 func MagicTransitionWithFallback(fallback *SymbolReplaceContentTransition) *SymbolMagicReplaceContentTransition {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolReplaceContentTransition")), objc.RegisterName("magicTransitionWithFallback:"), objref.IDOf(fallback))
 	return SymbolMagicReplaceContentTransitionFromID(_r)
 }
 
-// The default rotate effect, determined by the system.
+// NSSymbolRotateEffectEffect the default rotate effect, determined by the system.
 func NSSymbolRotateEffectEffect() *SymbolRotateEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolRotateEffect")), objc.RegisterName("effect"))
 	return SymbolRotateEffectFromID(_r)
 }
 
-// Convenience initializer for a rotate effect that rotates clockwise.
+// RotateClockwiseEffect convenience initializer for a rotate effect that rotates clockwise.
 func RotateClockwiseEffect() *SymbolRotateEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolRotateEffect")), objc.RegisterName("rotateClockwiseEffect"))
 	return SymbolRotateEffectFromID(_r)
 }
 
-// Convenience initializer for a rotate effect that rotates counter-clockwise.
+// RotateCounterClockwiseEffect convenience initializer for a rotate effect that rotates counter-clockwise.
 func RotateCounterClockwiseEffect() *SymbolRotateEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolRotateEffect")), objc.RegisterName("rotateCounterClockwiseEffect"))
 	return SymbolRotateEffectFromID(_r)
 }
 
-// An animation that scales the layers in a symbol-based image separately or as a whole.
+// NSSymbolScaleEffectEffect an animation that scales the layers in a symbol-based image separately or as a whole.
 func NSSymbolScaleEffectEffect() *SymbolScaleEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolScaleEffect")), objc.RegisterName("effect"))
 	return SymbolScaleEffectFromID(_r)
 }
 
-// An effect that scales the symbol up.
+// ScaleUpEffect an effect that scales the symbol up.
 func ScaleUpEffect() *SymbolScaleEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolScaleEffect")), objc.RegisterName("scaleUpEffect"))
 	return SymbolScaleEffectFromID(_r)
 }
 
-// An effect that scales the symbol down.
+// ScaleDownEffect an effect that scales the symbol down.
 func ScaleDownEffect() *SymbolScaleEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolScaleEffect")), objc.RegisterName("scaleDownEffect"))
 	return SymbolScaleEffectFromID(_r)
 }
 
-// An animation that replaces the opacity of variable layers in a symbol-based image in a repeatable sequence.
+// NSSymbolVariableColorEffectEffect an animation that replaces the opacity of variable layers in a symbol-based image in a repeatable sequence.
 func NSSymbolVariableColorEffectEffect() *SymbolVariableColorEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolVariableColorEffect")), objc.RegisterName("effect"))
 	return SymbolVariableColorEffectFromID(_r)
 }
 
-// The default wiggle effect, determined by the system.
+// NSSymbolWiggleEffectEffect the default wiggle effect, determined by the system.
 func NSSymbolWiggleEffectEffect() *SymbolWiggleEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolWiggleEffect")), objc.RegisterName("effect"))
 	return SymbolWiggleEffectFromID(_r)
 }
 
-// Convenience initializer for a wiggle effect that rotates back and forth, starting by rotating clockwise.
+// WiggleClockwiseEffect convenience initializer for a wiggle effect that rotates back and forth, starting by rotating clockwise.
 func WiggleClockwiseEffect() *SymbolWiggleEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolWiggleEffect")), objc.RegisterName("wiggleClockwiseEffect"))
 	return SymbolWiggleEffectFromID(_r)
 }
 
-// Convenience initializer for a wiggle effect that rotates back and forth, starting by rotating counter-clockwise.
+// WiggleCounterClockwiseEffect convenience initializer for a wiggle effect that rotates back and forth, starting by rotating counter-clockwise.
 func WiggleCounterClockwiseEffect() *SymbolWiggleEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolWiggleEffect")), objc.RegisterName("wiggleCounterClockwiseEffect"))
 	return SymbolWiggleEffectFromID(_r)
 }
 
-// Convenience initializer for a wiggle effect that moves back and forth horizontally, starting by moving left.
+// WiggleLeftEffect convenience initializer for a wiggle effect that moves back and forth horizontally, starting by moving left.
 func WiggleLeftEffect() *SymbolWiggleEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolWiggleEffect")), objc.RegisterName("wiggleLeftEffect"))
 	return SymbolWiggleEffectFromID(_r)
 }
 
-// Convenience initializer for a wiggle effect that moves back and forth horizontally, starting by moving right.
+// WiggleRightEffect convenience initializer for a wiggle effect that moves back and forth horizontally, starting by moving right.
 func WiggleRightEffect() *SymbolWiggleEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolWiggleEffect")), objc.RegisterName("wiggleRightEffect"))
 	return SymbolWiggleEffectFromID(_r)
 }
 
-// Convenience initializer for a wiggle effect that moves back and forth vertically, starting by moving up.
+// WiggleUpEffect convenience initializer for a wiggle effect that moves back and forth vertically, starting by moving up.
 func WiggleUpEffect() *SymbolWiggleEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolWiggleEffect")), objc.RegisterName("wiggleUpEffect"))
 	return SymbolWiggleEffectFromID(_r)
 }
 
-// Convenience initializer for a wiggle effect that moves back and forth vertically, starting by moving down.
+// WiggleDownEffect convenience initializer for a wiggle effect that moves back and forth vertically, starting by moving down.
 func WiggleDownEffect() *SymbolWiggleEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolWiggleEffect")), objc.RegisterName("wiggleDownEffect"))
 	return SymbolWiggleEffectFromID(_r)
 }
 
-// Convenience initializer for a wiggle effect that moves back and forth horizontally based on the current locale, starting by moving forward.
+// WiggleForwardEffect convenience initializer for a wiggle effect that moves back and forth horizontally based on the current locale, starting by moving forward.
 func WiggleForwardEffect() *SymbolWiggleEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolWiggleEffect")), objc.RegisterName("wiggleForwardEffect"))
 	return SymbolWiggleEffectFromID(_r)
 }
 
-// Convenience initializer for a wiggle effect that moves back and forth horizontally based on the current locale, starting by moving backward.
+// WiggleBackwardEffect convenience initializer for a wiggle effect that moves back and forth horizontally based on the current locale, starting by moving backward.
 func WiggleBackwardEffect() *SymbolWiggleEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolWiggleEffect")), objc.RegisterName("wiggleBackwardEffect"))
 	return SymbolWiggleEffectFromID(_r)
 }
 
-// Convenience initializer for a wiggle effect that moves back and forth along an axis, starting by moving toward a custom angle.
+// WiggleCustomAngleEffect convenience initializer for a wiggle effect that moves back and forth along an axis, starting by moving toward a custom angle.
 func WiggleCustomAngleEffect(angle float64) *SymbolWiggleEffect {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolWiggleEffect")), objc.RegisterName("wiggleCustomAngleEffect:"), angle)
 	return SymbolWiggleEffectFromID(_r)

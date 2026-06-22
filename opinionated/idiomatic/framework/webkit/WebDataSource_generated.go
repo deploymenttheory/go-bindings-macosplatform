@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// WebDataSource encapsulates the web content to be displayed in a web frame view. A WebDataSource object has a representation object, conforming to the WebDocumentRepresentation protocol, that holds the data in an appropriate format depending on the MIME type. You can extend WebKit to support new MIME types by implementing your own view and representation classes, and specifying the mapping between them using the registerViewClass:representationClass:forMIMEType: WebView class method.
-//
 // WebDataSource is an idiomatic wrapper over the Objective-C class WebDataSource.
+//
+// WebDataSource encapsulates the web content to be displayed in a web frame view. A WebDataSource object has a representation object, conforming to the WebDocumentRepresentation protocol, that holds the data in an appropriate format depending on the MIME type. You can extend WebKit to support new MIME types by implementing your own view and representation classes, and specifying the mapping between them using the registerViewClass:representationClass:forMIMEType: WebView class method.
 type WebDataSource struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func WebDataSourceFromID(id objc.ID) *WebDataSource {
 	if id == 0 {
 		return nil
 	}
-	x := &WebDataSource{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WebDataSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func webDataSourceAdopt(id objc.ID) *WebDataSource {
 	if id == 0 {
 		return nil
 	}
-	x := &WebDataSource{Handle: objref.Wrap(id)}
+	x := &WebDataSource{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,57 +60,61 @@ func (x *WebDataSource) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WebDataSource) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWebDataSource creates a new WebDataSource.
 func NewWebDataSource() *WebDataSource {
 	_id := objc.Send[objc.ID](objc.ID(_class("WebDataSource")), objc.RegisterName("new"))
 	return webDataSourceAdopt(_id)
 }
 
-// initializes a data source with a URL request.
-//
-// NewWebDataSourceWithRequest creates a new WebDataSource.
+// NewWebDataSourceWithRequest initializes a data source with a URL request.
 func NewWebDataSourceWithRequest(request obj.Object) *WebDataSource {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("WebDataSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequest:"), objref.IDOf(request))
 	return webDataSourceAdopt(_id)
 }
 
-// Returns a subresource for the given URL.
+// SubresourceForURL returns a subresource for the given URL.
 func (x *WebDataSource) SubresourceForURL(uRL string) *WebResource {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subresourceForURL:"), rt.FileURL(uRL))
 	return WebResourceFromID(_r)
 }
 
-// Adds a resource to the data source’s list of subresources.
+// AddSubresource adds a resource to the data source’s list of subresources.
 func (x *WebDataSource) AddSubresource(subresource *WebResource) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSubresource:"), objref.IDOf(subresource))
 }
 
-// Returns the raw data associated with the datasource.  Returns nil if the datasource hasn't loaded any data. The data will be incomplete until the datasource has completely loaded.
+// Data returns the raw data associated with the datasource.  Returns nil if the datasource hasn't loaded any data. The data will be incomplete until the datasource has completely loaded.
 func (x *WebDataSource) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// The frame that represents this data source.
+// WebFrame the frame that represents this data source.
 func (x *WebDataSource) WebFrame() *WebFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webFrame"))
 	return WebFrameFromID(_r)
 }
 
-// The request that was used to create this datasource.
+// Request the request that was used to create this datasource.
 func (x *WebDataSource) Request() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("request"))
 	return obj.Wrap(_r)
 }
 
-// The NSURLResponse for the data source.
+// Response the NSURLResponse for the data source.
 func (x *WebDataSource) Response() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("response"))
 	return obj.Wrap(_r)
 }
 
-// Returns either the override encoding, as set on the WebView for this dataSource or the encoding from the response.
+// TextEncodingName returns either the override encoding, as set on the WebView for this dataSource or the encoding from the response.
 func (x *WebDataSource) TextEncodingName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textEncodingName"))
 	if _r == 0 {
@@ -117,13 +123,13 @@ func (x *WebDataSource) TextEncodingName() string {
 	return purego.GoString(_r)
 }
 
-// Returns YES if there are any pending loads.
+// IsLoading returns YES if there are any pending loads.
 func (x *WebDataSource) IsLoading() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLoading"))
 	return _r
 }
 
-// The page title or nil.
+// PageTitle the page title or nil.
 func (x *WebDataSource) PageTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pageTitle"))
 	if _r == 0 {
@@ -132,25 +138,25 @@ func (x *WebDataSource) PageTitle() string {
 	return purego.GoString(_r)
 }
 
-// The unreachableURL for which this dataSource is showing alternate content, or nil. This will be non-nil only for dataSources created by calls to the WebFrame method loadAlternateHTMLString:baseURL:forUnreachableURL:.
+// UnreachableURL the unreachableURL for which this dataSource is showing alternate content, or nil. This will be non-nil only for dataSources created by calls to the WebFrame method loadAlternateHTMLString:baseURL:forUnreachableURL:.
 func (x *WebDataSource) UnreachableURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unreachableURL"))
 	return obj.Wrap(_r)
 }
 
-// A WebArchive representing the data source, its subresources and child frames.
+// WebArchive a WebArchive representing the data source, its subresources and child frames.
 func (x *WebDataSource) WebArchive() *WebArchive {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webArchive"))
 	return WebArchiveFromID(_r)
 }
 
-// A WebResource representing the data source.
+// MainResource a WebResource representing the data source.
 func (x *WebDataSource) MainResource() *WebResource {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainResource"))
 	return WebResourceFromID(_r)
 }
 
-// All the subresources associated with the data source.
+// Subresources all the subresources associated with the data source.
 func (x *WebDataSource) Subresources() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subresources"))
 	return obj.Wrap(_r)

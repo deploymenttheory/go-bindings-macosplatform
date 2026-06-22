@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // EnvironmentMechanismBiometry is an idiomatic wrapper over the Objective-C class LAEnvironmentMechanismBiometry.
+//
+// It embeds [EnvironmentMechanism], promoting that type's methods.
 type EnvironmentMechanismBiometry struct {
-	objref.Handle
+	EnvironmentMechanism
 }
 
 // EnvironmentMechanismBiometryFromID adopts an existing Objective-C object as a EnvironmentMechanismBiometry
@@ -23,7 +24,8 @@ func EnvironmentMechanismBiometryFromID(id objc.ID) *EnvironmentMechanismBiometr
 	if id == 0 {
 		return nil
 	}
-	x := &EnvironmentMechanismBiometry{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EnvironmentMechanismBiometry{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func environmentMechanismBiometryAdopt(id objc.ID) *EnvironmentMechanismBiometry
 	if id == 0 {
 		return nil
 	}
-	x := &EnvironmentMechanismBiometry{Handle: objref.Wrap(id)}
+	x := &EnvironmentMechanismBiometry{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *EnvironmentMechanismBiometry) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EnvironmentMechanismBiometry) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EnvironmentMechanismBiometry) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewEnvironmentMechanismBiometry creates a new EnvironmentMechanismBiometry.
@@ -62,31 +50,31 @@ func NewEnvironmentMechanismBiometry() *EnvironmentMechanismBiometry {
 	return environmentMechanismBiometryAdopt(_id)
 }
 
-// Type of biometry supported by the device. This property does not indicate whether biometry is available or not. It always reads the type of biometry supported by device hardware. You should check
+// BiometryType type of biometry supported by the device. This property does not indicate whether biometry is available or not. It always reads the type of biometry supported by device hardware. You should check
 func (x *EnvironmentMechanismBiometry) BiometryType() BiometryType {
 	_r := objc.Send[BiometryType](objref.IDOf(x), objc.RegisterName("biometryType"))
 	return _r
 }
 
-// Whether the user has enrolled this biometry. Even if biometry is enrolled, it does not necessarily mean that it can be used. You should check
+// IsEnrolled whether the user has enrolled this biometry. Even if biometry is enrolled, it does not necessarily mean that it can be used. You should check
 func (x *EnvironmentMechanismBiometry) IsEnrolled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnrolled"))
 	return _r
 }
 
-// Whether biometry is locked out. The system might lock the user out of biometry for various reasons. For example, with Face ID, the user is locked out after 5 failed match attempts in row. To recover from bio lockout, users need to enter their passcode (e.g. during device ulock).
+// IsLockedOut whether biometry is locked out. The system might lock the user out of biometry for various reasons. For example, with Face ID, the user is locked out after 5 failed match attempts in row. To recover from bio lockout, users need to enter their passcode (e.g. during device ulock).
 func (x *EnvironmentMechanismBiometry) IsLockedOut() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLockedOut"))
 	return _r
 }
 
-// The application specific state of the biometric enrollment as returned by This value represents the state of the enrollment and changes whenever the biometric enrollment is changed. It does not directly map to the enrolled templates, e.g. if a finger is added to Touch ID enrollment and then removed, the final state would be different. It also returns different values to different apps to prevent tracking of user identity.
+// StateHash the application specific state of the biometric enrollment as returned by This value represents the state of the enrollment and changes whenever the biometric enrollment is changed. It does not directly map to the enrolled templates, e.g. if a finger is added to Touch ID enrollment and then removed, the final state would be different. It also returns different values to different apps to prevent tracking of user identity.
 func (x *EnvironmentMechanismBiometry) StateHash() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateHash"))
 	return obj.Wrap(_r)
 }
 
-// Whether the built in biometric sensor is inaccessible in the current configuration, preventing the use of biometry. Currently, the only example of this is a Clamshell Mode on macOS. The user will be not able to use Touch ID if the MacBook lid is closed while connected to external monitor and keyboard, unless the external keyboard has Touch ID.
+// BuiltInSensorInaccessible whether the built in biometric sensor is inaccessible in the current configuration, preventing the use of biometry. Currently, the only example of this is a Clamshell Mode on macOS. The user will be not able to use Touch ID if the MacBook lid is closed while connected to external monitor and keyboard, unless the external keyboard has Touch ID.
 func (x *EnvironmentMechanismBiometry) BuiltInSensorInaccessible() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("builtInSensorInaccessible"))
 	return _r
@@ -103,3 +91,5 @@ type EnvironmentMechanismBiometryable interface {
 }
 
 var _ EnvironmentMechanismBiometryable = (*EnvironmentMechanismBiometry)(nil)
+
+var _ EnvironmentMechanismProvider = (*EnvironmentMechanismBiometry)(nil)

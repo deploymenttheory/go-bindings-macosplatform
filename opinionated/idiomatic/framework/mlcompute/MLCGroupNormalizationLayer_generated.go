@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that divides the channels into groups for normalization.
-//
 // GroupNormalizationLayer is an idiomatic wrapper over the Objective-C class MLCGroupNormalizationLayer.
+//
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that divides the channels into groups for normalization.
 type GroupNormalizationLayer struct {
-	objref.Handle
+	Layer
 }
 
 // GroupNormalizationLayerFromID adopts an existing Objective-C object as a GroupNormalizationLayer
@@ -25,7 +26,8 @@ func GroupNormalizationLayerFromID(id objc.ID) *GroupNormalizationLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &GroupNormalizationLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GroupNormalizationLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func groupNormalizationLayerAdopt(id objc.ID) *GroupNormalizationLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &GroupNormalizationLayer{Handle: objref.Wrap(id)}
+	x := &GroupNormalizationLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GroupNormalizationLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GroupNormalizationLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GroupNormalizationLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGroupNormalizationLayer creates a new GroupNormalizationLayer.
@@ -64,59 +52,55 @@ func NewGroupNormalizationLayer() *GroupNormalizationLayer {
 	return groupNormalizationLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel a string that helps identify this layer.
 func (x *GroupNormalizationLayer) WithLabel(label string) *GroupNormalizationLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *GroupNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *GroupNormalizationLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// The number of feature channels
+// FeatureChannelCount the number of feature channels
 func (x *GroupNormalizationLayer) FeatureChannelCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("featureChannelCount"))
 	return _r
 }
 
-// The number of groups to separate the channels into
+// GroupCount the number of groups to separate the channels into
 func (x *GroupNormalizationLayer) GroupCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("groupCount"))
 	return _r
 }
 
-// The beta tensor
+// Beta the beta tensor
 func (x *GroupNormalizationLayer) Beta() *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beta"))
 	return TensorFromID(_r)
 }
 
-// The gamma tensor
+// Gamma the gamma tensor
 func (x *GroupNormalizationLayer) Gamma() *Tensor {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gamma"))
 	return TensorFromID(_r)
 }
 
-// The beta tensor parameter used for optimizer update
+// BetaParameter the beta tensor parameter used for optimizer update
 func (x *GroupNormalizationLayer) BetaParameter() *TensorParameter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("betaParameter"))
 	return TensorParameterFromID(_r)
 }
 
-// The gamma tensor parameter used for optimizer update
+// GammaParameter the gamma tensor parameter used for optimizer update
 func (x *GroupNormalizationLayer) GammaParameter() *TensorParameter {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gammaParameter"))
 	return TensorParameterFromID(_r)
 }
 
-// A value used for numerical stability
+// VarianceEpsilon a value used for numerical stability
 func (x *GroupNormalizationLayer) VarianceEpsilon() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("varianceEpsilon"))
 	return _r
@@ -137,3 +121,5 @@ type GroupNormalizationLayerable interface {
 }
 
 var _ GroupNormalizationLayerable = (*GroupNormalizationLayer)(nil)
+
+var _ LayerProvider = (*GroupNormalizationLayer)(nil)

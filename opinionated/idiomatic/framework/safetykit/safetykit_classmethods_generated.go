@@ -8,7 +8,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// available Returns a  value indicating whether the current device supports Crash Detection.
+// IsAvailable available Returns a  value indicating whether the current device supports Crash Detection.
 func IsAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("SACrashDetectionManager")), objc.RegisterName("isAvailable"))
 	return _r

@@ -6,17 +6,19 @@ package mapkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configurable annotation that shows the user’s location using the default MapKit style.
-//
 // UserLocationView is an idiomatic wrapper over the Objective-C class MKUserLocationView.
+//
+// It embeds [AnnotationView], promoting that type's methods.
+//
+// A configurable annotation that shows the user’s location using the default MapKit style.
 type UserLocationView struct {
-	objref.Handle
+	AnnotationView
 }
 
 // UserLocationViewFromID adopts an existing Objective-C object as a UserLocationView
@@ -25,7 +27,8 @@ func UserLocationViewFromID(id objc.ID) *UserLocationView {
 	if id == 0 {
 		return nil
 	}
-	x := &UserLocationView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UserLocationView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func userLocationViewAdopt(id objc.ID) *UserLocationView {
 	if id == 0 {
 		return nil
 	}
-	x := &UserLocationView{Handle: objref.Wrap(id)}
+	x := &UserLocationView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UserLocationView) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UserLocationView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UserLocationView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUserLocationView creates a new UserLocationView.
@@ -64,121 +53,121 @@ func NewUserLocationView() *UserLocationView {
 	return userLocationViewAdopt(_id)
 }
 
-// The image the annotation view displays.
-//
-// WithImage sets image and returns the receiver so calls can be chained.
+// WithImage the image the annotation view displays.
 func (x *UserLocationView) WithImage(image obj.Object) *UserLocationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
-// A Boolean value that indicates whether the annotation is in an enabled state.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithCenterOffset the offset (in points) at which to display the view.
+func (x *UserLocationView) WithCenterOffset(centerOffset corefoundation.CGPoint) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCenterOffset:"), centerOffset)
+	return x
+}
+
+// WithAccessoryOffset an offset that changes the accessory’s default anchor point.
+func (x *UserLocationView) WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryOffset:"), accessoryOffset)
+	return x
+}
+
+// WithCalloutOffset the offset (in points) at which to place the callout.
+func (x *UserLocationView) WithCalloutOffset(calloutOffset corefoundation.CGPoint) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalloutOffset:"), calloutOffset)
+	return x
+}
+
+// WithLeftCalloutOffset the offset in points from the middle-left of the annotation view.
+func (x *UserLocationView) WithLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeftCalloutOffset:"), leftCalloutOffset)
+	return x
+}
+
+// WithRightCalloutOffset the offset in points from the middle-right of the annotation view.
+func (x *UserLocationView) WithRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRightCalloutOffset:"), rightCalloutOffset)
+	return x
+}
+
+// WithEnabled a Boolean value that indicates whether the annotation is in an enabled state.
 func (x *UserLocationView) WithEnabled(enabled bool) *UserLocationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A Boolean value that indicates whether the map view highlights the annotation view.
-//
-// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
+// WithHighlighted a Boolean value that indicates whether the map view highlights the annotation view.
 func (x *UserLocationView) WithHighlighted(highlighted bool) *UserLocationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// A Boolean value that indicates whether the annotation view is in a selected state.
-//
-// WithSelected sets selected and returns the receiver so calls can be chained.
+// WithSelected a Boolean value that indicates whether the annotation view is in a selected state.
 func (x *UserLocationView) WithSelected(selected bool) *UserLocationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelected:"), selected)
 	return x
 }
 
-// A Boolean value that indicates whether the annotation view is able to display extra information in a callout.
-//
-// WithCanShowCallout sets canShowCallout and returns the receiver so calls can be chained.
+// WithCanShowCallout a Boolean value that indicates whether the annotation view is able to display extra information in a callout.
 func (x *UserLocationView) WithCanShowCallout(canShowCallout bool) *UserLocationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanShowCallout:"), canShowCallout)
 	return x
 }
 
-// The view to display on the left side of the standard callout.
-//
-// WithLeftCalloutAccessoryView sets leftCalloutAccessoryView and returns the receiver so calls can be chained.
+// WithLeftCalloutAccessoryView the view to display on the left side of the standard callout.
 func (x *UserLocationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView obj.Object) *UserLocationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeftCalloutAccessoryView:"), objref.IDOf(leftCalloutAccessoryView))
 	return x
 }
 
-// The view to display on the right side of the standard callout.
-//
-// WithRightCalloutAccessoryView sets rightCalloutAccessoryView and returns the receiver so calls can be chained.
+// WithRightCalloutAccessoryView the view to display on the right side of the standard callout.
 func (x *UserLocationView) WithRightCalloutAccessoryView(rightCalloutAccessoryView obj.Object) *UserLocationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRightCalloutAccessoryView:"), objref.IDOf(rightCalloutAccessoryView))
 	return x
 }
 
-// The detail accessory view to use in the standard callout.
-//
-// WithDetailCalloutAccessoryView sets detailCalloutAccessoryView and returns the receiver so calls can be chained.
+// WithDetailCalloutAccessoryView the detail accessory view to use in the standard callout.
 func (x *UserLocationView) WithDetailCalloutAccessoryView(detailCalloutAccessoryView obj.Object) *UserLocationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetailCalloutAccessoryView:"), objref.IDOf(detailCalloutAccessoryView))
 	return x
 }
 
-// A Boolean value that indicates whether the annotation view is draggable.
-//
-// WithDraggable sets draggable and returns the receiver so calls can be chained.
+// WithDraggable a Boolean value that indicates whether the annotation view is draggable.
 func (x *UserLocationView) WithDraggable(draggable bool) *UserLocationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDraggable:"), draggable)
 	return x
 }
 
-// The drag state of the annotation view.
-//
-// WithDragState sets dragState and returns the receiver so calls can be chained.
+// WithDragState the drag state of the annotation view.
 func (x *UserLocationView) WithDragState(dragState AnnotationViewDragState) *UserLocationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDragState:"), dragState)
 	return x
 }
 
-// An identifier that determines whether the annotation view participates in clustering.
-//
-// WithClusteringIdentifier sets clusteringIdentifier and returns the receiver so calls can be chained.
+// WithClusteringIdentifier an identifier that determines whether the annotation view participates in clustering.
 func (x *UserLocationView) WithClusteringIdentifier(clusteringIdentifier string) *UserLocationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClusteringIdentifier:"), purego.NSString(clusteringIdentifier))
 	return x
 }
 
-// The display priority of the annotation view.
-//
-// WithDisplayPriority sets displayPriority and returns the receiver so calls can be chained.
+// WithDisplayPriority the display priority of the annotation view.
 func (x *UserLocationView) WithDisplayPriority(displayPriority float32) *UserLocationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayPriority:"), displayPriority)
 	return x
 }
 
-// The relative importance of the annotation view when in an unselected state with respect to its ordering along the z-axis.
-//
-// WithZPriority sets zPriority and returns the receiver so calls can be chained.
+// WithZPriority the relative importance of the annotation view when in an unselected state with respect to its ordering along the z-axis.
 func (x *UserLocationView) WithZPriority(zPriority float32) *UserLocationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPriority:"), zPriority)
 	return x
 }
 
-// The relative importance of the annotation view when in a selected state with respect to its ordering along the z-axis.
-//
-// WithSelectedZPriority sets selectedZPriority and returns the receiver so calls can be chained.
+// WithSelectedZPriority the relative importance of the annotation view when in a selected state with respect to its ordering along the z-axis.
 func (x *UserLocationView) WithSelectedZPriority(selectedZPriority float32) *UserLocationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedZPriority:"), selectedZPriority)
 	return x
 }
 
-// The collision mode to use when interpreting the collision frame rectangle.
-//
-// WithCollisionMode sets collisionMode and returns the receiver so calls can be chained.
+// WithCollisionMode the collision mode to use when interpreting the collision frame rectangle.
 func (x *UserLocationView) WithCollisionMode(collisionMode AnnotationViewCollisionMode) *UserLocationView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollisionMode:"), collisionMode)
 	return x
@@ -188,6 +177,11 @@ func (x *UserLocationView) WithCollisionMode(collisionMode AnnotationViewCollisi
 type UserLocationViewable interface {
 	obj.Object
 	WithImage(image obj.Object) *UserLocationView
+	WithCenterOffset(centerOffset corefoundation.CGPoint) *UserLocationView
+	WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *UserLocationView
+	WithCalloutOffset(calloutOffset corefoundation.CGPoint) *UserLocationView
+	WithLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) *UserLocationView
+	WithRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) *UserLocationView
 	WithEnabled(enabled bool) *UserLocationView
 	WithHighlighted(highlighted bool) *UserLocationView
 	WithSelected(selected bool) *UserLocationView
@@ -205,3 +199,5 @@ type UserLocationViewable interface {
 }
 
 var _ UserLocationViewable = (*UserLocationView)(nil)
+
+var _ AnnotationViewProvider = (*UserLocationView)(nil)

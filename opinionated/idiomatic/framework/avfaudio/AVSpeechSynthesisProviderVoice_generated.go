@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a voice that an audio unit provides to its host.
-//
 // SpeechSynthesisProviderVoice is an idiomatic wrapper over the Objective-C class AVSpeechSynthesisProviderVoice.
+//
+// An object that represents a voice that an audio unit provides to its host.
 type SpeechSynthesisProviderVoice struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SpeechSynthesisProviderVoiceFromID(id objc.ID) *SpeechSynthesisProviderVoic
 	if id == 0 {
 		return nil
 	}
-	x := &SpeechSynthesisProviderVoice{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SpeechSynthesisProviderVoice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func speechSynthesisProviderVoiceAdopt(id objc.ID) *SpeechSynthesisProviderVoice
 	if id == 0 {
 		return nil
 	}
-	x := &SpeechSynthesisProviderVoice{Handle: objref.Wrap(id)}
+	x := &SpeechSynthesisProviderVoice{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,40 +60,38 @@ func (x *SpeechSynthesisProviderVoice) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a voice with a name, an identifier, and language information.
-//
-// NewSpeechSynthesisProviderVoiceWithNameIdentifierPrimaryLanguagesSupportedLanguages creates a new SpeechSynthesisProviderVoice.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpeechSynthesisProviderVoice) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSpeechSynthesisProviderVoiceWithNameIdentifierPrimaryLanguagesSupportedLanguages creates a voice with a name, an identifier, and language information.
 func NewSpeechSynthesisProviderVoiceWithNameIdentifierPrimaryLanguagesSupportedLanguages(name string, identifier string, primaryLanguages []string, supportedLanguages []string) *SpeechSynthesisProviderVoice {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVSpeechSynthesisProviderVoice")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:identifier:primaryLanguages:supportedLanguages:"), purego.NSString(name), purego.NSString(identifier), purego.SliceToNSArray(primaryLanguages, func(_v string) objc.ID { return purego.NSString(_v) }), purego.SliceToNSArray(supportedLanguages, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return speechSynthesisProviderVoiceAdopt(_id)
 }
 
-// The size of the voice package on disk, in bytes.
-//
-// WithVoiceSize sets voiceSize and returns the receiver so calls can be chained.
+// WithVoiceSize the size of the voice package on disk, in bytes.
 func (x *SpeechSynthesisProviderVoice) WithVoiceSize(voiceSize int64) *SpeechSynthesisProviderVoice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoiceSize:"), voiceSize)
 	return x
 }
 
-// The gender of the voice.
-//
-// WithGender sets gender and returns the receiver so calls can be chained.
+// WithGender the gender of the voice.
 func (x *SpeechSynthesisProviderVoice) WithGender(gender SpeechSynthesisVoiceGender) *SpeechSynthesisProviderVoice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGender:"), gender)
 	return x
 }
 
-// The age of the voice, in years.
-//
-// WithAge sets age and returns the receiver so calls can be chained.
+// WithAge the age of the voice, in years.
 func (x *SpeechSynthesisProviderVoice) WithAge(age int) *SpeechSynthesisProviderVoice {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAge:"), age)
 	return x
 }
 
-// The localized name of the voice
+// Name the localized name of the voice
 func (x *SpeechSynthesisProviderVoice) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -100,7 +100,7 @@ func (x *SpeechSynthesisProviderVoice) Name() string {
 	return purego.GoString(_r)
 }
 
-// A unique identifier for the voice The recommended format is reverse domain notation. Behavior is undefined if identifiers are not unique for all voices within a given extension.
+// Identifier a unique identifier for the voice The recommended format is reverse domain notation. Behavior is undefined if identifiers are not unique for all voices within a given extension.
 func (x *SpeechSynthesisProviderVoice) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -109,7 +109,7 @@ func (x *SpeechSynthesisProviderVoice) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// A set of BCP 47 codes identifying the languages this synthesizer is primarily used for. These languages are what a user would expect a synthesizer to fully support and be primarily used for.
+// PrimaryLanguages a set of BCP 47 codes identifying the languages this synthesizer is primarily used for. These languages are what a user would expect a synthesizer to fully support and be primarily used for.
 //
 // PrimaryLanguages returns the collection as a Go slice.
 func (x *SpeechSynthesisProviderVoice) PrimaryLanguages() []string {
@@ -117,7 +117,7 @@ func (x *SpeechSynthesisProviderVoice) PrimaryLanguages() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// A superset of BCP 47 codes identifying the voice’s supported languages. These languages are what a user would expect a voice to be able to speak such that if the voice is given a multi-lingual phrase, it would be able to speak the entire phrase without a need to to switch voices. For example, a zh-CN voice could have
+// SupportedLanguages a superset of BCP 47 codes identifying the voice’s supported languages. These languages are what a user would expect a voice to be able to speak such that if the voice is given a multi-lingual phrase, it would be able to speak the entire phrase without a need to to switch voices. For example, a zh-CN voice could have
 //
 // SupportedLanguages returns the collection as a Go slice.
 func (x *SpeechSynthesisProviderVoice) SupportedLanguages() []string {
@@ -125,32 +125,35 @@ func (x *SpeechSynthesisProviderVoice) SupportedLanguages() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// The size of the voice (optional) This reported size of the voice package on disk, in bytes. Defaults to 0.
+// VoiceSize the size of the voice (optional) This reported size of the voice package on disk, in bytes. Defaults to 0.
 func (x *SpeechSynthesisProviderVoice) VoiceSize() int64 {
 	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("voiceSize"))
 	return _r
 }
 
+// SetVoiceSize wraps the corresponding Objective-C method.
 func (x *SpeechSynthesisProviderVoice) SetVoiceSize(voiceSize int64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoiceSize:"), voiceSize)
 }
 
-// The gender of the voice (optional)
+// Gender the gender of the voice (optional)
 func (x *SpeechSynthesisProviderVoice) Gender() SpeechSynthesisVoiceGender {
 	_r := objc.Send[SpeechSynthesisVoiceGender](objref.IDOf(x), objc.RegisterName("gender"))
 	return _r
 }
 
+// SetGender wraps the corresponding Objective-C method.
 func (x *SpeechSynthesisProviderVoice) SetGender(gender SpeechSynthesisVoiceGender) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGender:"), gender)
 }
 
-// The age of the voice in years (optional) This is an optional property that indicates the age of this voice, to be treated as a personality trait. Defaults to 0.
+// Age the age of the voice in years (optional) This is an optional property that indicates the age of this voice, to be treated as a personality trait. Defaults to 0.
 func (x *SpeechSynthesisProviderVoice) Age() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("age"))
 	return _r
 }
 
+// SetAge wraps the corresponding Objective-C method.
 func (x *SpeechSynthesisProviderVoice) SetAge(age int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAge:"), age)
 }

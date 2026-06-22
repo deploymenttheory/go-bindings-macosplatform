@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A rule to match attributes of network traffic.
-//
 // NENetworkRule is an idiomatic wrapper over the Objective-C class NENetworkRule.
+//
+// A rule to match attributes of network traffic.
 type NENetworkRule struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NENetworkRuleFromID(id objc.ID) *NENetworkRule {
 	if id == 0 {
 		return nil
 	}
-	x := &NENetworkRule{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NENetworkRule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func nENetworkRuleAdopt(id objc.ID) *NENetworkRule {
 	if id == 0 {
 		return nil
 	}
-	x := &NENetworkRule{Handle: objref.Wrap(id)}
+	x := &NENetworkRule{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,91 +60,85 @@ func (x *NENetworkRule) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize a newly-allocated NENetworkRule object that matches network traffic destined for a host within a specific network.
-//
-// NewNENetworkRuleWithDestinationNetworkEndpointPrefixProtocol creates a new NENetworkRule.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NENetworkRule) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNENetworkRuleWithDestinationNetworkEndpointPrefixProtocol initialize a newly-allocated NENetworkRule object that matches network traffic destined for a host within a specific network.
 func NewNENetworkRuleWithDestinationNetworkEndpointPrefixProtocol(networkEndpoint obj.Object, destinationPrefix int, protocol NENetworkRuleProtocol) *NENetworkRule {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NENetworkRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestinationNetworkEndpoint:prefix:protocol:"), objref.IDOf(networkEndpoint), destinationPrefix, protocol)
 	return nENetworkRuleAdopt(_id)
 }
 
-// Creates a rule that matches network traffic destined for a host within a specific network.
-//
-// NewNENetworkRuleWithDestinationNetworkPrefixProtocol creates a new NENetworkRule.
+// NewNENetworkRuleWithDestinationNetworkPrefixProtocol creates a rule that matches network traffic destined for a host within a specific network.
 func NewNENetworkRuleWithDestinationNetworkPrefixProtocol(networkEndpoint *NWHostEndpoint, destinationPrefix int, protocol NENetworkRuleProtocol) *NENetworkRule {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NENetworkRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestinationNetwork:prefix:protocol:"), objref.IDOf(networkEndpoint), destinationPrefix, protocol)
 	return nENetworkRuleAdopt(_id)
 }
 
-// Initialize a newly-allocated NENetworkRule object that matches network traffic destined for a host within a specific DNS domain.
-//
-// NewNENetworkRuleWithDestinationHostEndpointProtocol creates a new NENetworkRule.
+// NewNENetworkRuleWithDestinationHostEndpointProtocol initialize a newly-allocated NENetworkRule object that matches network traffic destined for a host within a specific DNS domain.
 func NewNENetworkRuleWithDestinationHostEndpointProtocol(hostEndpoint obj.Object, protocol NENetworkRuleProtocol) *NENetworkRule {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NENetworkRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestinationHostEndpoint:protocol:"), objref.IDOf(hostEndpoint), protocol)
 	return nENetworkRuleAdopt(_id)
 }
 
-// Creates a rule that matches network traffic destined for a host within a specific DNS domain.
-//
-// NewNENetworkRuleWithDestinationHostProtocol creates a new NENetworkRule.
+// NewNENetworkRuleWithDestinationHostProtocol creates a rule that matches network traffic destined for a host within a specific DNS domain.
 func NewNENetworkRuleWithDestinationHostProtocol(hostEndpoint *NWHostEndpoint, protocol NENetworkRuleProtocol) *NENetworkRule {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NENetworkRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestinationHost:protocol:"), objref.IDOf(hostEndpoint), protocol)
 	return nENetworkRuleAdopt(_id)
 }
 
-// Initialize a newly-allocated NENetworkRule object that matches traffic by remote network, local network, protocol, and direction. If both remoteNetwork and localNetwork are nil then the rule will match all traffic of the given protocol and direction, except for loopback traffic. To match loopback traffic create a NENetworkRule with remoteNetwork and/or localNetwork properties that explicitly match traffic to the loopback address (127.0.0.1 or ::1).
-//
-// NewNENetworkRuleWithRemoteNetworkEndpointRemotePrefixLocalNetworkEndpointLocalPrefixProtocolDirection creates a new NENetworkRule.
+// NewNENetworkRuleWithRemoteNetworkEndpointRemotePrefixLocalNetworkEndpointLocalPrefixProtocolDirection initialize a newly-allocated NENetworkRule object that matches traffic by remote network, local network, protocol, and direction. If both remoteNetwork and localNetwork are nil then the rule will match all traffic of the given protocol and direction, except for loopback traffic. To match loopback traffic create a NENetworkRule with remoteNetwork and/or localNetwork properties that explicitly match traffic to the loopback address (127.0.0.1 or ::1).
 func NewNENetworkRuleWithRemoteNetworkEndpointRemotePrefixLocalNetworkEndpointLocalPrefixProtocolDirection(remoteNetwork obj.Object, remotePrefix int, localNetwork obj.Object, localPrefix int, protocol NENetworkRuleProtocol, direction NETrafficDirection) *NENetworkRule {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NENetworkRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRemoteNetworkEndpoint:remotePrefix:localNetworkEndpoint:localPrefix:protocol:direction:"), objref.IDOf(remoteNetwork), remotePrefix, objref.IDOf(localNetwork), localPrefix, protocol, direction)
 	return nENetworkRuleAdopt(_id)
 }
 
-// Creates a rule that matches traffic by remote network, local network, protocol, and direction.
-//
-// NewNENetworkRuleWithRemoteNetworkRemotePrefixLocalNetworkLocalPrefixProtocolDirection creates a new NENetworkRule.
+// NewNENetworkRuleWithRemoteNetworkRemotePrefixLocalNetworkLocalPrefixProtocolDirection creates a rule that matches traffic by remote network, local network, protocol, and direction.
 func NewNENetworkRuleWithRemoteNetworkRemotePrefixLocalNetworkLocalPrefixProtocolDirection(remoteNetwork *NWHostEndpoint, remotePrefix int, localNetwork *NWHostEndpoint, localPrefix int, protocol NENetworkRuleProtocol, direction NETrafficDirection) *NENetworkRule {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NENetworkRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRemoteNetwork:remotePrefix:localNetwork:localPrefix:protocol:direction:"), objref.IDOf(remoteNetwork), remotePrefix, objref.IDOf(localNetwork), localPrefix, protocol, direction)
 	return nENetworkRuleAdopt(_id)
 }
 
-// The remote endpoint that the rule matches.
+// MatchRemoteHostOrNetworkEndpoint the remote endpoint that the rule matches.
 func (x *NENetworkRule) MatchRemoteHostOrNetworkEndpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchRemoteHostOrNetworkEndpoint"))
 	return obj.Wrap(_r)
 }
 
-// A number that specifies the remote sub-network that the rule matches. This property is set to NSNotFound for rules where matchRemoteEndpoint does not contain an IP address.
+// MatchRemotePrefix a number that specifies the remote sub-network that the rule matches. This property is set to NSNotFound for rules where matchRemoteEndpoint does not contain an IP address.
 func (x *NENetworkRule) MatchRemotePrefix() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("matchRemotePrefix"))
 	return _r
 }
 
-// The local network that the rule matches.
+// MatchLocalNetworkEndpoint the local network that the rule matches.
 func (x *NENetworkRule) MatchLocalNetworkEndpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchLocalNetworkEndpoint"))
 	return obj.Wrap(_r)
 }
 
-// A number that specifies the local sub-network that the rule matches. This property is set to NSNotFound for rules with a nil matchLocalNetwork property.
+// MatchLocalPrefix a number that specifies the local sub-network that the rule matches. This property is set to NSNotFound for rules with a nil matchLocalNetwork property.
 func (x *NENetworkRule) MatchLocalPrefix() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("matchLocalPrefix"))
 	return _r
 }
 
-// A NENetworkRuleProtocol value containing the protocol that the rule matches.
+// MatchProtocol a NENetworkRuleProtocol value containing the protocol that the rule matches.
 func (x *NENetworkRule) MatchProtocol() NENetworkRuleProtocol {
 	_r := objc.Send[NENetworkRuleProtocol](objref.IDOf(x), objc.RegisterName("matchProtocol"))
 	return _r
 }
 
-// A NETrafficDirection value indicating the network traffic direction that the rule matches.
+// MatchDirection a NETrafficDirection value indicating the network traffic direction that the rule matches.
 func (x *NENetworkRule) MatchDirection() NETrafficDirection {
 	_r := objc.Send[NETrafficDirection](objref.IDOf(x), objc.RegisterName("matchDirection"))
 	return _r

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes the configuration of a secure element payment pass.
-//
 // AddSecureElementPassConfiguration is an idiomatic wrapper over the Objective-C class PKAddSecureElementPassConfiguration.
+//
+// AddSecureElementPassConfiguration is an abstract base — you do not construct it directly. Construct one of [AddCarKeyPassConfiguration], [AddIdentityDocumentConfiguration], [AddShareablePassConfiguration] and pass it where a AddSecureElementPassConfiguration is accepted.
+//
+// An object that describes the configuration of a secure element payment pass.
 type AddSecureElementPassConfiguration struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func AddSecureElementPassConfigurationFromID(id objc.ID) *AddSecureElementPassCo
 	if id == 0 {
 		return nil
 	}
-	x := &AddSecureElementPassConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AddSecureElementPassConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func addSecureElementPassConfigurationAdopt(id objc.ID) *AddSecureElementPassCon
 	if id == 0 {
 		return nil
 	}
-	x := &AddSecureElementPassConfiguration{Handle: objref.Wrap(id)}
+	x := &AddSecureElementPassConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,28 +62,25 @@ func (x *AddSecureElementPassConfiguration) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewAddSecureElementPassConfiguration creates a new AddSecureElementPassConfiguration.
-func NewAddSecureElementPassConfiguration() *AddSecureElementPassConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(_class("PKAddSecureElementPassConfiguration")), objc.RegisterName("new"))
-	return addSecureElementPassConfigurationAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AddSecureElementPassConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// An opaque value for the configuration.
-//
-// WithIssuerIdentifier sets issuerIdentifier and returns the receiver so calls can be chained.
+// WithIssuerIdentifier an opaque value for the configuration.
 func (x *AddSecureElementPassConfiguration) WithIssuerIdentifier(issuerIdentifier string) *AddSecureElementPassConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIssuerIdentifier:"), purego.NSString(issuerIdentifier))
 	return x
 }
 
-// The configuration’s localized description.
-//
-// WithLocalizedDescription sets localizedDescription and returns the receiver so calls can be chained.
+// WithLocalizedDescription the configuration’s localized description.
 func (x *AddSecureElementPassConfiguration) WithLocalizedDescription(localizedDescription string) *AddSecureElementPassConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
 	return x
 }
 
+// IssuerIdentifier wraps the corresponding Objective-C method.
 func (x *AddSecureElementPassConfiguration) IssuerIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issuerIdentifier"))
 	if _r == 0 {
@@ -88,10 +89,12 @@ func (x *AddSecureElementPassConfiguration) IssuerIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// SetIssuerIdentifier wraps the corresponding Objective-C method.
 func (x *AddSecureElementPassConfiguration) SetIssuerIdentifier(issuerIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIssuerIdentifier:"), purego.NSString(issuerIdentifier))
 }
 
+// LocalizedDescription wraps the corresponding Objective-C method.
 func (x *AddSecureElementPassConfiguration) LocalizedDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
@@ -100,6 +103,7 @@ func (x *AddSecureElementPassConfiguration) LocalizedDescription() string {
 	return purego.GoString(_r)
 }
 
+// SetLocalizedDescription wraps the corresponding Objective-C method.
 func (x *AddSecureElementPassConfiguration) SetLocalizedDescription(localizedDescription string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
 }
@@ -116,3 +120,10 @@ type AddSecureElementPassConfigurationable interface {
 }
 
 var _ AddSecureElementPassConfigurationable = (*AddSecureElementPassConfiguration)(nil)
+
+// isAddSecureElementPassConfiguration marks AddSecureElementPassConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the AddSecureElementPassConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AddSecureElementPassConfiguration) isAddSecureElementPassConfiguration() {}
+
+var _ AddSecureElementPassConfigurationProvider = (*AddSecureElementPassConfiguration)(nil)

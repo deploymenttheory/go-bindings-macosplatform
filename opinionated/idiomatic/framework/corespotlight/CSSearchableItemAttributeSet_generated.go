@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The detailed metadata for a searchable item.
-//
 // SearchableItemAttributeSet is an idiomatic wrapper over the Objective-C class CSSearchableItemAttributeSet.
+//
+// The detailed metadata for a searchable item.
 type SearchableItemAttributeSet struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SearchableItemAttributeSetFromID(id objc.ID) *SearchableItemAttributeSet {
 	if id == 0 {
 		return nil
 	}
-	x := &SearchableItemAttributeSet{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SearchableItemAttributeSet{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func searchableItemAttributeSetAdopt(id objc.ID) *SearchableItemAttributeSet {
 	if id == 0 {
 		return nil
 	}
-	x := &SearchableItemAttributeSet{Handle: objref.Wrap(id)}
+	x := &SearchableItemAttributeSet{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,1468 +60,1119 @@ func (x *SearchableItemAttributeSet) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an attribute set for the specified content type.
-//
-// NewSearchableItemAttributeSetWithItemContentType creates a new SearchableItemAttributeSet.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SearchableItemAttributeSet) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSearchableItemAttributeSetWithItemContentType creates an attribute set for the specified content type.
 func NewSearchableItemAttributeSetWithItemContentType(itemContentType string) *SearchableItemAttributeSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CSSearchableItemAttributeSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemContentType:"), purego.NSString(itemContentType))
 	return searchableItemAttributeSetAdopt(_id)
 }
 
-// Creates an attribute set for the specified content type.
-//
-// NewSearchableItemAttributeSetWithContentType creates a new SearchableItemAttributeSet.
+// NewSearchableItemAttributeSetWithContentType creates an attribute set for the specified content type.
 func NewSearchableItemAttributeSetWithContentType(contentType obj.Object) *SearchableItemAttributeSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CSSearchableItemAttributeSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentType:"), objref.IDOf(contentType))
 	return searchableItemAttributeSetAdopt(_id)
 }
 
-// A localized string that contains the name of the item, suitable to display in the user interface.
-//
-// WithDisplayName sets displayName and returns the receiver so calls can be chained.
+// WithDisplayName a localized string that contains the name of the item, suitable to display in the user interface.
 func (x *SearchableItemAttributeSet) WithDisplayName(displayName string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayName:"), purego.NSString(displayName))
 	return x
 }
 
-// An array of localized strings that represent alternate display names for the item.
-//
-// WithAlternateNames sets the collection and returns the receiver so calls can be chained.
+// WithAlternateNames an array of localized strings that represent alternate display names for the item.
 func (x *SearchableItemAttributeSet) WithAlternateNames(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateNames:"), _arr)
 	return x
 }
 
-// The complete path to the item.
-//
-// WithPath sets path and returns the receiver so calls can be chained.
+// WithPath the complete path to the item.
 func (x *SearchableItemAttributeSet) WithPath(path string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), purego.NSString(path))
 	return x
 }
 
-// The file URL of the content to index.
-//
-// WithContentURL sets contentURL and returns the receiver so calls can be chained.
+// WithContentURL the file URL of the content to index.
 func (x *SearchableItemAttributeSet) WithContentURL(contentURL string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentURL:"), rt.FileURL(contentURL))
 	return x
 }
 
-// The local file URL of the thumbnail image for the item.
-//
-// WithThumbnailURL sets thumbnailURL and returns the receiver so calls can be chained.
+// WithThumbnailURL the local file URL of the thumbnail image for the item.
 func (x *SearchableItemAttributeSet) WithThumbnailURL(thumbnailURL string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThumbnailURL:"), rt.FileURL(thumbnailURL))
 	return x
 }
 
-// Image data that represents the thumbnail of the item.
-//
-// WithThumbnailData sets thumbnailData and returns the receiver so calls can be chained.
+// WithThumbnailData image data that represents the thumbnail of the item.
 func (x *SearchableItemAttributeSet) WithThumbnailData(thumbnailData obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThumbnailData:"), objref.IDOf(thumbnailData))
 	return x
 }
 
-// The local file URL of the thumbnail image for the item when Dark Mode is active.
-//
-// WithDarkThumbnailURL sets darkThumbnailURL and returns the receiver so calls can be chained.
+// WithDarkThumbnailURL the local file URL of the thumbnail image for the item when Dark Mode is active.
 func (x *SearchableItemAttributeSet) WithDarkThumbnailURL(darkThumbnailURL string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDarkThumbnailURL:"), rt.FileURL(darkThumbnailURL))
 	return x
 }
 
-// The unique identifier for the item to which the activity is related.
-//
-// WithRelatedUniqueIdentifier sets relatedUniqueIdentifier and returns the receiver so calls can be chained.
+// WithRelatedUniqueIdentifier the unique identifier for the item to which the activity is related.
 func (x *SearchableItemAttributeSet) WithRelatedUniqueIdentifier(relatedUniqueIdentifier string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelatedUniqueIdentifier:"), purego.NSString(relatedUniqueIdentifier))
 	return x
 }
 
-// The date on which the last metadata attribute was changed.
-//
-// WithMetadataModificationDate sets metadataModificationDate and returns the receiver so calls can be chained.
+// WithMetadataModificationDate the date on which the last metadata attribute was changed.
 func (x *SearchableItemAttributeSet) WithMetadataModificationDate(metadataModificationDate obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadataModificationDate:"), objref.IDOf(metadataModificationDate))
 	return x
 }
 
-// The uniform type identifier (UTI) of the item.
-//
-// WithContentType sets contentType and returns the receiver so calls can be chained.
+// WithContentType the uniform type identifier (UTI) of the item.
 func (x *SearchableItemAttributeSet) WithContentType(contentType string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentType:"), purego.NSString(contentType))
 	return x
 }
 
-// An attribute type that identifies a custom hierarchy of types to describe the attributes of your item.
-//
-// WithContentTypeTree sets the collection and returns the receiver so calls can be chained.
+// WithContentTypeTree an attribute type that identifies a custom hierarchy of types to describe the attributes of your item.
 func (x *SearchableItemAttributeSet) WithContentTypeTree(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentTypeTree:"), _arr)
 	return x
 }
 
-// An array of keywords associated with the item, such as work, birthday, important, and so on.
-//
-// WithKeywords sets the collection and returns the receiver so calls can be chained.
+// WithKeywords an array of keywords associated with the item, such as work, birthday, important, and so on.
 func (x *SearchableItemAttributeSet) WithKeywords(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeywords:"), _arr)
 	return x
 }
 
-// The title of the item.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the title of the item.
 func (x *SearchableItemAttributeSet) WithTitle(title string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A string that represents the text the system transcribed.
-//
-// WithTranscribedTextContent sets transcribedTextContent and returns the receiver so calls can be chained.
+// WithTranscribedTextContent a string that represents the text the system transcribed.
 func (x *SearchableItemAttributeSet) WithTranscribedTextContent(transcribedTextContent string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranscribedTextContent:"), purego.NSString(transcribedTextContent))
 	return x
 }
 
-// A value that indicates whether the item contains information sufficient to allow a phone call to a number associated with the item.
-//
-// WithSupportsPhoneCall sets supportsPhoneCall and returns the receiver so calls can be chained.
+// WithSupportsPhoneCall a value that indicates whether the item contains information sufficient to allow a phone call to a number associated with the item.
 func (x *SearchableItemAttributeSet) WithSupportsPhoneCall(supportsPhoneCall obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsPhoneCall:"), objref.IDOf(supportsPhoneCall))
 	return x
 }
 
-// A value that indicates whether the item contains information sufficient to provide navigation to the location it represents.
-//
-// WithSupportsNavigation sets supportsNavigation and returns the receiver so calls can be chained.
+// WithSupportsNavigation a value that indicates whether the item contains information sufficient to provide navigation to the location it represents.
 func (x *SearchableItemAttributeSet) WithSupportsNavigation(supportsNavigation obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsNavigation:"), objref.IDOf(supportsNavigation))
 	return x
 }
 
-// The title of the container to which the item belongs.
-//
-// WithContainerTitle sets containerTitle and returns the receiver so calls can be chained.
+// WithContainerTitle the title of the container to which the item belongs.
 func (x *SearchableItemAttributeSet) WithContainerTitle(containerTitle string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerTitle:"), purego.NSString(containerTitle))
 	return x
 }
 
-// A localized string that specifies the name of a container to which the item belongs, suitable to display in the user interface.
-//
-// WithContainerDisplayName sets containerDisplayName and returns the receiver so calls can be chained.
+// WithContainerDisplayName a localized string that specifies the name of a container to which the item belongs, suitable to display in the user interface.
 func (x *SearchableItemAttributeSet) WithContainerDisplayName(containerDisplayName string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerDisplayName:"), purego.NSString(containerDisplayName))
 	return x
 }
 
-// The identifier of the container to which the item belongs.
-//
-// WithContainerIdentifier sets containerIdentifier and returns the receiver so calls can be chained.
+// WithContainerIdentifier the identifier of the container to which the item belongs.
 func (x *SearchableItemAttributeSet) WithContainerIdentifier(containerIdentifier string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerIdentifier:"), purego.NSString(containerIdentifier))
 	return x
 }
 
-// The order of the item within the container.
-//
-// WithContainerOrder sets containerOrder and returns the receiver so calls can be chained.
+// WithContainerOrder the order of the item within the container.
 func (x *SearchableItemAttributeSet) WithContainerOrder(containerOrder obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerOrder:"), objref.IDOf(containerOrder))
 	return x
 }
 
-// The subject of the document.
-//
-// WithSubject sets subject and returns the receiver so calls can be chained.
+// WithSubject the subject of the document.
 func (x *SearchableItemAttributeSet) WithSubject(subject string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubject:"), purego.NSString(subject))
 	return x
 }
 
-// The theme of the document.
-//
-// WithTheme sets theme and returns the receiver so calls can be chained.
+// WithTheme the theme of the document.
 func (x *SearchableItemAttributeSet) WithTheme(theme string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTheme:"), purego.NSString(theme))
 	return x
 }
 
-// A description of the item’s content.
-//
-// WithContentDescription sets contentDescription and returns the receiver so calls can be chained.
+// WithContentDescription a description of the item’s content.
 func (x *SearchableItemAttributeSet) WithContentDescription(contentDescription string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentDescription:"), purego.NSString(contentDescription))
 	return x
 }
 
-// A formal identifier that references the document the item represents.
-//
-// WithIdentifier sets identifier and returns the receiver so calls can be chained.
+// WithIdentifier a formal identifier that references the document the item represents.
 func (x *SearchableItemAttributeSet) WithIdentifier(identifier string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 	return x
 }
 
-// A class of entity for which the item is intended or useful.
-//
-// WithAudiences sets the collection and returns the receiver so calls can be chained.
+// WithAudiences a class of entity for which the item is intended or useful.
 func (x *SearchableItemAttributeSet) WithAudiences(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudiences:"), _arr)
 	return x
 }
 
-// The size of the document file.
-//
-// WithFileSize sets fileSize and returns the receiver so calls can be chained.
+// WithFileSize the size of the document file.
 func (x *SearchableItemAttributeSet) WithFileSize(fileSize obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileSize:"), objref.IDOf(fileSize))
 	return x
 }
 
-// The number of pages in the document.
-//
-// WithPageCount sets pageCount and returns the receiver so calls can be chained.
+// WithPageCount the number of pages in the document.
 func (x *SearchableItemAttributeSet) WithPageCount(pageCount obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageCount:"), objref.IDOf(pageCount))
 	return x
 }
 
-// The width of the document page, in points (72 points per inch).
-//
-// WithPageWidth sets pageWidth and returns the receiver so calls can be chained.
+// WithPageWidth the width of the document page, in points (72 points per inch).
 func (x *SearchableItemAttributeSet) WithPageWidth(pageWidth obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageWidth:"), objref.IDOf(pageWidth))
 	return x
 }
 
-// The height of the document page, in points (72 points per inch).
-//
-// WithPageHeight sets pageHeight and returns the receiver so calls can be chained.
+// WithPageHeight the height of the document page, in points (72 points per inch).
 func (x *SearchableItemAttributeSet) WithPageHeight(pageHeight obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageHeight:"), objref.IDOf(pageHeight))
 	return x
 }
 
-// The security method (a type of encryption) that protects the document file.
-//
-// WithSecurityMethod sets securityMethod and returns the receiver so calls can be chained.
+// WithSecurityMethod the security method (a type of encryption) that protects the document file.
 func (x *SearchableItemAttributeSet) WithSecurityMethod(securityMethod string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecurityMethod:"), purego.NSString(securityMethod))
 	return x
 }
 
-// The name of the app that created the content.
-//
-// WithCreator sets creator and returns the receiver so calls can be chained.
+// WithCreator the name of the app that created the content.
 func (x *SearchableItemAttributeSet) WithCreator(creator string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCreator:"), purego.NSString(creator))
 	return x
 }
 
-// The name of the apps that converted the original content into a PDF stream.
-//
-// WithEncodingApplications sets the collection and returns the receiver so calls can be chained.
+// WithEncodingApplications the name of the apps that converted the original content into a PDF stream.
 func (x *SearchableItemAttributeSet) WithEncodingApplications(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncodingApplications:"), _arr)
 	return x
 }
 
-// A description of the kind of document the item represents.
-//
-// WithKind sets kind and returns the receiver so calls can be chained.
+// WithKind a description of the kind of document the item represents.
 func (x *SearchableItemAttributeSet) WithKind(kind string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKind:"), purego.NSString(kind))
 	return x
 }
 
-// An array of font names the document uses.
-//
-// WithFontNames sets the collection and returns the receiver so calls can be chained.
+// WithFontNames an array of font names the document uses.
 func (x *SearchableItemAttributeSet) WithFontNames(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontNames:"), _arr)
 	return x
 }
 
-// The date on which the item is due.
-//
-// WithDueDate sets dueDate and returns the receiver so calls can be chained.
+// WithDueDate the date on which the item is due.
 func (x *SearchableItemAttributeSet) WithDueDate(dueDate obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDueDate:"), objref.IDOf(dueDate))
 	return x
 }
 
-// The date on which the item was completed.
-//
-// WithCompletionDate sets completionDate and returns the receiver so calls can be chained.
+// WithCompletionDate the date on which the item was completed.
 func (x *SearchableItemAttributeSet) WithCompletionDate(completionDate obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionDate:"), objref.IDOf(completionDate))
 	return x
 }
 
-// The start date for the item.
-//
-// WithStartDate sets startDate and returns the receiver so calls can be chained.
+// WithStartDate the start date for the item.
 func (x *SearchableItemAttributeSet) WithStartDate(startDate obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
 	return x
 }
 
-// The end date for the item.
-//
-// WithEndDate sets endDate and returns the receiver so calls can be chained.
+// WithEndDate the end date for the item.
 func (x *SearchableItemAttributeSet) WithEndDate(endDate obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndDate:"), objref.IDOf(endDate))
 	return x
 }
 
-// An array of important dates associated with the item.
-//
-// WithImportantDates sets the collection and returns the receiver so calls can be chained.
+// WithImportantDates an array of important dates associated with the item.
 func (x *SearchableItemAttributeSet) WithImportantDates(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportantDates:"), _arr)
 	return x
 }
 
-// A value that indicates if the event covers an entire day.
-//
-// WithAllDay sets allDay and returns the receiver so calls can be chained.
+// WithAllDay a value that indicates if the event covers an entire day.
 func (x *SearchableItemAttributeSet) WithAllDay(allDay obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllDay:"), objref.IDOf(allDay))
 	return x
 }
 
-// The unique identifier for the account with which the message is associated, if any.
-//
-// WithAccountIdentifier sets accountIdentifier and returns the receiver so calls can be chained.
+// WithAccountIdentifier the unique identifier for the account with which the message is associated, if any.
 func (x *SearchableItemAttributeSet) WithAccountIdentifier(accountIdentifier string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccountIdentifier:"), purego.NSString(accountIdentifier))
 	return x
 }
 
-// An array of the canonical handles for the account with which the message is associated.
-//
-// WithAccountHandles sets the collection and returns the receiver so calls can be chained.
+// WithAccountHandles an array of the canonical handles for the account with which the message is associated.
 func (x *SearchableItemAttributeSet) WithAccountHandles(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccountHandles:"), _arr)
 	return x
 }
 
-// The HTML content of the document encoded as an NSData object representing a UTF-8 encoded string.
-//
-// WithHTMLContentData sets hTMLContentData and returns the receiver so calls can be chained.
+// WithHTMLContentData the HTML content of the document encoded as an NSData object representing a UTF-8 encoded string.
 func (x *SearchableItemAttributeSet) WithHTMLContentData(hTMLContentData obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTMLContentData:"), objref.IDOf(hTMLContentData))
 	return x
 }
 
-// The textual content of the message.
-//
-// WithTextContent sets textContent and returns the receiver so calls can be chained.
+// WithTextContent the textual content of the message.
 func (x *SearchableItemAttributeSet) WithTextContent(textContent string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
-// An array of CSPerson objects representing the content of the From: field in an item.
-//
-// WithAuthors sets the collection and returns the receiver so calls can be chained.
+// WithAuthors an array of CSPerson objects representing the content of the From: field in an item.
 func (x *SearchableItemAttributeSet) WithAuthors(items ...*Person) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v *Person) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthors:"), _arr)
 	return x
 }
 
-// An array of CSPerson objects representing the content of the To: field in an email message.
-//
-// WithPrimaryRecipients sets the collection and returns the receiver so calls can be chained.
+// WithPrimaryRecipients an array of CSPerson objects representing the content of the To: field in an email message.
 func (x *SearchableItemAttributeSet) WithPrimaryRecipients(items ...*Person) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v *Person) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryRecipients:"), _arr)
 	return x
 }
 
-// An array of CSPerson objects representing the content of the Cc: field in an email message.
-//
-// WithAdditionalRecipients sets the collection and returns the receiver so calls can be chained.
+// WithAdditionalRecipients an array of CSPerson objects representing the content of the Cc: field in an email message.
 func (x *SearchableItemAttributeSet) WithAdditionalRecipients(items ...*Person) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v *Person) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalRecipients:"), _arr)
 	return x
 }
 
-// An array of CSPerson objects representing the content of the Bcc: field in an email message.
-//
-// WithHiddenAdditionalRecipients sets the collection and returns the receiver so calls can be chained.
+// WithHiddenAdditionalRecipients an array of CSPerson objects representing the content of the Bcc: field in an email message.
 func (x *SearchableItemAttributeSet) WithHiddenAdditionalRecipients(items ...*Person) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v *Person) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHiddenAdditionalRecipients:"), _arr)
 	return x
 }
 
-// A dictionary that contains all the headers of the message.
-//
-// WithEmailHeaders sets emailHeaders and returns the receiver so calls can be chained.
+// WithEmailHeaders a dictionary that contains all the headers of the message.
 func (x *SearchableItemAttributeSet) WithEmailHeaders(emailHeaders obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmailHeaders:"), objref.IDOf(emailHeaders))
 	return x
 }
 
-// An array of mailbox identifiers associated with the message.
-//
-// WithMailboxIdentifiers sets the collection and returns the receiver so calls can be chained.
+// WithMailboxIdentifiers an array of mailbox identifiers associated with the message.
 func (x *SearchableItemAttributeSet) WithMailboxIdentifiers(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMailboxIdentifiers:"), _arr)
 	return x
 }
 
-// An array of names representing the authors who have worked on the message.
-//
-// WithAuthorNames sets the collection and returns the receiver so calls can be chained.
+// WithAuthorNames an array of names representing the authors who have worked on the message.
 func (x *SearchableItemAttributeSet) WithAuthorNames(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthorNames:"), _arr)
 	return x
 }
 
-// An array of names representing the recipients of this message.
-//
-// WithRecipientNames sets the collection and returns the receiver so calls can be chained.
+// WithRecipientNames an array of names representing the recipients of this message.
 func (x *SearchableItemAttributeSet) WithRecipientNames(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecipientNames:"), _arr)
 	return x
 }
 
-// An array of email addresses associated with the author of the message.
-//
-// WithAuthorEmailAddresses sets the collection and returns the receiver so calls can be chained.
+// WithAuthorEmailAddresses an array of email addresses associated with the author of the message.
 func (x *SearchableItemAttributeSet) WithAuthorEmailAddresses(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthorEmailAddresses:"), _arr)
 	return x
 }
 
-// An array of email addresses associated with the recipient.
-//
-// WithRecipientEmailAddresses sets the collection and returns the receiver so calls can be chained.
+// WithRecipientEmailAddresses an array of email addresses associated with the recipient.
 func (x *SearchableItemAttributeSet) WithRecipientEmailAddresses(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecipientEmailAddresses:"), _arr)
 	return x
 }
 
-// An array of addresses associated with the author of the message.
-//
-// WithAuthorAddresses sets the collection and returns the receiver so calls can be chained.
+// WithAuthorAddresses an array of addresses associated with the author of the message.
 func (x *SearchableItemAttributeSet) WithAuthorAddresses(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthorAddresses:"), _arr)
 	return x
 }
 
-// An array of addresses associated with the recipients of the message.
-//
-// WithRecipientAddresses sets the collection and returns the receiver so calls can be chained.
+// WithRecipientAddresses an array of addresses associated with the recipients of the message.
 func (x *SearchableItemAttributeSet) WithRecipientAddresses(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecipientAddresses:"), _arr)
 	return x
 }
 
-// An array of phone numbers associated with the message.
-//
-// WithPhoneNumbers sets the collection and returns the receiver so calls can be chained.
+// WithPhoneNumbers an array of phone numbers associated with the message.
 func (x *SearchableItemAttributeSet) WithPhoneNumbers(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneNumbers:"), _arr)
 	return x
 }
 
-// An array of email addresses associated with the message.
-//
-// WithEmailAddresses sets the collection and returns the receiver so calls can be chained.
+// WithEmailAddresses an array of email addresses associated with the message.
 func (x *SearchableItemAttributeSet) WithEmailAddresses(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmailAddresses:"), _arr)
 	return x
 }
 
-// An array of instant message addresses for the message.
-//
-// WithInstantMessageAddresses sets the collection and returns the receiver so calls can be chained.
+// WithInstantMessageAddresses an array of instant message addresses for the message.
 func (x *SearchableItemAttributeSet) WithInstantMessageAddresses(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstantMessageAddresses:"), _arr)
 	return x
 }
 
-// A value that indicates if the message is likely to be considered junk.
-//
-// WithLikelyJunk sets likelyJunk and returns the receiver so calls can be chained.
+// WithLikelyJunk a value that indicates if the message is likely to be considered junk.
 func (x *SearchableItemAttributeSet) WithLikelyJunk(likelyJunk obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLikelyJunk:"), objref.IDOf(likelyJunk))
 	return x
 }
 
-// A list of editors who have worked on the file.
-//
-// WithEditors sets the collection and returns the receiver so calls can be chained.
+// WithEditors a list of editors who have worked on the file.
 func (x *SearchableItemAttributeSet) WithEditors(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditors:"), _arr)
 	return x
 }
 
-// A list of people who are visible in an image or movie or written about in a document.
-//
-// WithParticipants sets the collection and returns the receiver so calls can be chained.
+// WithParticipants a list of people who are visible in an image or movie or written about in a document.
 func (x *SearchableItemAttributeSet) WithParticipants(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticipants:"), _arr)
 	return x
 }
 
-// A list of projects of which this file is a part.
-//
-// WithProjects sets the collection and returns the receiver so calls can be chained.
+// WithProjects a list of projects of which this file is a part.
 func (x *SearchableItemAttributeSet) WithProjects(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProjects:"), _arr)
 	return x
 }
 
-// An array of sources from which the media was obtained.
-//
-// WithContentSources sets the collection and returns the receiver so calls can be chained.
+// WithContentSources an array of sources from which the media was obtained.
 func (x *SearchableItemAttributeSet) WithContentSources(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentSources:"), _arr)
 	return x
 }
 
-// A comment related to the media file.
-//
-// WithComment sets comment and returns the receiver so calls can be chained.
+// WithComment a comment related to the media file.
 func (x *SearchableItemAttributeSet) WithComment(comment string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComment:"), purego.NSString(comment))
 	return x
 }
 
-// The copyright date of the content.
-//
-// WithCopyright sets copyright and returns the receiver so calls can be chained.
+// WithCopyright the copyright date of the content.
 func (x *SearchableItemAttributeSet) WithCopyright(copyright string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCopyright:"), purego.NSString(copyright))
 	return x
 }
 
-// The date on which the file was last used.
-//
-// WithLastUsedDate sets lastUsedDate and returns the receiver so calls can be chained.
+// WithLastUsedDate the date on which the file was last used.
 func (x *SearchableItemAttributeSet) WithLastUsedDate(lastUsedDate obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLastUsedDate:"), objref.IDOf(lastUsedDate))
 	return x
 }
 
-// The creation date of an edited or optimized version of the song or composition.
-//
-// WithContentCreationDate sets contentCreationDate and returns the receiver so calls can be chained.
+// WithContentCreationDate the creation date of an edited or optimized version of the song or composition.
 func (x *SearchableItemAttributeSet) WithContentCreationDate(contentCreationDate obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentCreationDate:"), objref.IDOf(contentCreationDate))
 	return x
 }
 
-// The date on which the contents of the file was last modified.
-//
-// WithContentModificationDate sets contentModificationDate and returns the receiver so calls can be chained.
+// WithContentModificationDate the date on which the contents of the file was last modified.
 func (x *SearchableItemAttributeSet) WithContentModificationDate(contentModificationDate obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentModificationDate:"), objref.IDOf(contentModificationDate))
 	return x
 }
 
-// The date on which the item was moved into its current location.
-//
-// WithAddedDate sets addedDate and returns the receiver so calls can be chained.
+// WithAddedDate the date on which the item was moved into its current location.
 func (x *SearchableItemAttributeSet) WithAddedDate(addedDate obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAddedDate:"), objref.IDOf(addedDate))
 	return x
 }
 
-// The most recent date on which the file was downloaded or received.
-//
-// WithDownloadedDate sets downloadedDate and returns the receiver so calls can be chained.
+// WithDownloadedDate the most recent date on which the file was downloaded or received.
 func (x *SearchableItemAttributeSet) WithDownloadedDate(downloadedDate obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownloadedDate:"), objref.IDOf(downloadedDate))
 	return x
 }
 
-// The duration (if appropriate) of the content of the file, in seconds.
-//
-// WithDuration sets duration and returns the receiver so calls can be chained.
+// WithDuration the duration (if appropriate) of the content of the file, in seconds.
 func (x *SearchableItemAttributeSet) WithDuration(duration obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return x
 }
 
-// A list of contacts who are associated with the content in some way, not including the author.
-//
-// WithContactKeywords sets the collection and returns the receiver so calls can be chained.
+// WithContactKeywords a list of contacts who are associated with the content in some way, not including the author.
 func (x *SearchableItemAttributeSet) WithContactKeywords(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContactKeywords:"), _arr)
 	return x
 }
 
-// The codecs used to encode/decode the media.
-//
-// WithCodecs sets the collection and returns the receiver so calls can be chained.
+// WithCodecs the codecs used to encode/decode the media.
 func (x *SearchableItemAttributeSet) WithCodecs(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCodecs:"), _arr)
 	return x
 }
 
-// The media types present in the content.
-//
-// WithMediaTypes sets the collection and returns the receiver so calls can be chained.
+// WithMediaTypes the media types present in the content.
 func (x *SearchableItemAttributeSet) WithMediaTypes(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaTypes:"), _arr)
 	return x
 }
 
-// A value that indicates if the content is prepared for streaming.
-//
-// WithStreamable sets streamable and returns the receiver so calls can be chained.
+// WithStreamable a value that indicates if the content is prepared for streaming.
 func (x *SearchableItemAttributeSet) WithStreamable(streamable obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStreamable:"), objref.IDOf(streamable))
 	return x
 }
 
-// The total bit rate of the media, combining audio and video.
-//
-// WithTotalBitRate sets totalBitRate and returns the receiver so calls can be chained.
+// WithTotalBitRate the total bit rate of the media, combining audio and video.
 func (x *SearchableItemAttributeSet) WithTotalBitRate(totalBitRate obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTotalBitRate:"), objref.IDOf(totalBitRate))
 	return x
 }
 
-// The video bit rate of the media.
-//
-// WithVideoBitRate sets videoBitRate and returns the receiver so calls can be chained.
+// WithVideoBitRate the video bit rate of the media.
 func (x *SearchableItemAttributeSet) WithVideoBitRate(videoBitRate obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoBitRate:"), objref.IDOf(videoBitRate))
 	return x
 }
 
-// The audio bit rate of the media.
-//
-// WithAudioBitRate sets audioBitRate and returns the receiver so calls can be chained.
+// WithAudioBitRate the audio bit rate of the media.
 func (x *SearchableItemAttributeSet) WithAudioBitRate(audioBitRate obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioBitRate:"), objref.IDOf(audioBitRate))
 	return x
 }
 
-// The delivery type of the file.
-//
-// WithDeliveryType sets deliveryType and returns the receiver so calls can be chained.
+// WithDeliveryType the delivery type of the file.
 func (x *SearchableItemAttributeSet) WithDeliveryType(deliveryType obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeliveryType:"), objref.IDOf(deliveryType))
 	return x
 }
 
-// A list of companies or organizations that created the content.
-//
-// WithOrganizations sets the collection and returns the receiver so calls can be chained.
+// WithOrganizations a list of companies or organizations that created the content.
 func (x *SearchableItemAttributeSet) WithOrganizations(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrganizations:"), _arr)
 	return x
 }
 
-// Indicates the role of the content creator.
-//
-// WithRole sets role and returns the receiver so calls can be chained.
+// WithRole indicates the role of the content creator.
 func (x *SearchableItemAttributeSet) WithRole(role string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRole:"), purego.NSString(role))
 	return x
 }
 
-// A list of the included languages for the intellectual content of the media.
-//
-// WithLanguages sets the collection and returns the receiver so calls can be chained.
+// WithLanguages a list of the included languages for the intellectual content of the media.
 func (x *SearchableItemAttributeSet) WithLanguages(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguages:"), _arr)
 	return x
 }
 
-// A link to information about the rights held in and over the media.
-//
-// WithRights sets rights and returns the receiver so calls can be chained.
+// WithRights a link to information about the rights held in and over the media.
 func (x *SearchableItemAttributeSet) WithRights(rights string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRights:"), purego.NSString(rights))
 	return x
 }
 
-// A list of people, organizations, services, or other entities responsible for making the media available.
-//
-// WithPublishers sets the collection and returns the receiver so calls can be chained.
+// WithPublishers a list of people, organizations, services, or other entities responsible for making the media available.
 func (x *SearchableItemAttributeSet) WithPublishers(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPublishers:"), _arr)
 	return x
 }
 
-// A list of people, organizations, or services that made contributions to the media content.
-//
-// WithContributors sets the collection and returns the receiver so calls can be chained.
+// WithContributors a list of people, organizations, or services that made contributions to the media content.
 func (x *SearchableItemAttributeSet) WithContributors(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContributors:"), _arr)
 	return x
 }
 
-// A list of descriptors that specify the extent or scope of the media.
-//
-// WithCoverage sets the collection and returns the receiver so calls can be chained.
+// WithCoverage a list of descriptors that specify the extent or scope of the media.
 func (x *SearchableItemAttributeSet) WithCoverage(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCoverage:"), _arr)
 	return x
 }
 
-// The user-supplied rating of the media.
-//
-// WithRating sets rating and returns the receiver so calls can be chained.
+// WithRating the user-supplied rating of the media.
 func (x *SearchableItemAttributeSet) WithRating(rating obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRating:"), objref.IDOf(rating))
 	return x
 }
 
-// A description of the rating.
-//
-// WithRatingDescription sets ratingDescription and returns the receiver so calls can be chained.
+// WithRatingDescription a description of the rating.
 func (x *SearchableItemAttributeSet) WithRatingDescription(ratingDescription string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRatingDescription:"), purego.NSString(ratingDescription))
 	return x
 }
 
-// A user-supplied play count for the media.
-//
-// WithPlayCount sets playCount and returns the receiver so calls can be chained.
+// WithPlayCount a user-supplied play count for the media.
 func (x *SearchableItemAttributeSet) WithPlayCount(playCount obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayCount:"), objref.IDOf(playCount))
 	return x
 }
 
-// Information about the media.
-//
-// WithInformation sets information and returns the receiver so calls can be chained.
+// WithInformation information about the media.
 func (x *SearchableItemAttributeSet) WithInformation(information string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInformation:"), purego.NSString(information))
 	return x
 }
 
-// The name of the director of the media (for example, a movie director).
-//
-// WithDirector sets director and returns the receiver so calls can be chained.
+// WithDirector the name of the director of the media (for example, a movie director).
 func (x *SearchableItemAttributeSet) WithDirector(director string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirector:"), purego.NSString(director))
 	return x
 }
 
-// The producer of the content.
-//
-// WithProducer sets producer and returns the receiver so calls can be chained.
+// WithProducer the producer of the content.
 func (x *SearchableItemAttributeSet) WithProducer(producer string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProducer:"), purego.NSString(producer))
 	return x
 }
 
-// The genre of the media.
-//
-// WithGenre sets genre and returns the receiver so calls can be chained.
+// WithGenre the genre of the media.
 func (x *SearchableItemAttributeSet) WithGenre(genre string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGenre:"), purego.NSString(genre))
 	return x
 }
 
-// A list of performers in the media.
-//
-// WithPerformers sets the collection and returns the receiver so calls can be chained.
+// WithPerformers a list of performers in the media.
 func (x *SearchableItemAttributeSet) WithPerformers(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerformers:"), _arr)
 	return x
 }
 
-// The original format of the media.
-//
-// WithOriginalFormat sets originalFormat and returns the receiver so calls can be chained.
+// WithOriginalFormat the original format of the media.
 func (x *SearchableItemAttributeSet) WithOriginalFormat(originalFormat string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOriginalFormat:"), purego.NSString(originalFormat))
 	return x
 }
 
-// The original source of the media.
-//
-// WithOriginalSource sets originalSource and returns the receiver so calls can be chained.
+// WithOriginalSource the original source of the media.
 func (x *SearchableItemAttributeSet) WithOriginalSource(originalSource string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOriginalSource:"), purego.NSString(originalSource))
 	return x
 }
 
-// A value that indicates if the media is local.
-//
-// WithLocal sets local and returns the receiver so calls can be chained.
+// WithLocal a value that indicates if the media is local.
 func (x *SearchableItemAttributeSet) WithLocal(local obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocal:"), objref.IDOf(local))
 	return x
 }
 
-// A value that indicates if the media contains explicit content.
-//
-// WithContentRating sets contentRating and returns the receiver so calls can be chained.
+// WithContentRating a value that indicates if the media contains explicit content.
 func (x *SearchableItemAttributeSet) WithContentRating(contentRating obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentRating:"), objref.IDOf(contentRating))
 	return x
 }
 
-// The URL associated with the media.
-//
-// WithURL sets uRL and returns the receiver so calls can be chained.
+// WithURL the URL associated with the media.
 func (x *SearchableItemAttributeSet) WithURL(uRL string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 	return x
 }
 
-// The sample rate of the audio data the file contains, as a float value representing Hz (audio frames per second), such as 44100.0 or 22254.54.
-//
-// WithAudioSampleRate sets audioSampleRate and returns the receiver so calls can be chained.
+// WithAudioSampleRate the sample rate of the audio data the file contains, as a float value representing Hz (audio frames per second), such as 44100.0 or 22254.54.
 func (x *SearchableItemAttributeSet) WithAudioSampleRate(audioSampleRate obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioSampleRate:"), objref.IDOf(audioSampleRate))
 	return x
 }
 
-// The number of channels in the audio data that the file contains.
-//
-// WithAudioChannelCount sets audioChannelCount and returns the receiver so calls can be chained.
+// WithAudioChannelCount the number of channels in the audio data that the file contains.
 func (x *SearchableItemAttributeSet) WithAudioChannelCount(audioChannelCount obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioChannelCount:"), objref.IDOf(audioChannelCount))
 	return x
 }
 
-// The tempo of the music that the audio file contains, in beats per minute.
-//
-// WithTempo sets tempo and returns the receiver so calls can be chained.
+// WithTempo the tempo of the music that the audio file contains, in beats per minute.
 func (x *SearchableItemAttributeSet) WithTempo(tempo obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTempo:"), objref.IDOf(tempo))
 	return x
 }
 
-// The musical key of the song or audio composition that the file contains, such as C, Dm, or F#m.
-//
-// WithKeySignature sets keySignature and returns the receiver so calls can be chained.
+// WithKeySignature the musical key of the song or audio composition that the file contains, such as C, Dm, or F#m.
 func (x *SearchableItemAttributeSet) WithKeySignature(keySignature string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeySignature:"), purego.NSString(keySignature))
 	return x
 }
 
-// The time signature of the musical composition that the audio or MIDI file contains, in a string, such as “4/4” or “7/8”.
-//
-// WithTimeSignature sets timeSignature and returns the receiver so calls can be chained.
+// WithTimeSignature the time signature of the musical composition that the audio or MIDI file contains, in a string, such as “4/4” or “7/8”.
 func (x *SearchableItemAttributeSet) WithTimeSignature(timeSignature string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeSignature:"), purego.NSString(timeSignature))
 	return x
 }
 
-// The name of the application that encoded the data the audio file contains.
-//
-// WithAudioEncodingApplication sets audioEncodingApplication and returns the receiver so calls can be chained.
+// WithAudioEncodingApplication the name of the application that encoded the data the audio file contains.
 func (x *SearchableItemAttributeSet) WithAudioEncodingApplication(audioEncodingApplication string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioEncodingApplication:"), purego.NSString(audioEncodingApplication))
 	return x
 }
 
-// The composer of the song or audio composition that the audio file contains.
-//
-// WithComposer sets composer and returns the receiver so calls can be chained.
+// WithComposer the composer of the song or audio composition that the audio file contains.
 func (x *SearchableItemAttributeSet) WithComposer(composer string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComposer:"), purego.NSString(composer))
 	return x
 }
 
-// The lyricist or text writer for the song or audio composition that the file contains.
-//
-// WithLyricist sets lyricist and returns the receiver so calls can be chained.
+// WithLyricist the lyricist or text writer for the song or audio composition that the file contains.
 func (x *SearchableItemAttributeSet) WithLyricist(lyricist string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLyricist:"), purego.NSString(lyricist))
 	return x
 }
 
-// The title for a collection of audio media.
-//
-// WithAlbum sets album and returns the receiver so calls can be chained.
+// WithAlbum the title for a collection of audio media.
 func (x *SearchableItemAttributeSet) WithAlbum(album string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlbum:"), purego.NSString(album))
 	return x
 }
 
-// The artist associated with the media.
-//
-// WithArtist sets artist and returns the receiver so calls can be chained.
+// WithArtist the artist associated with the media.
 func (x *SearchableItemAttributeSet) WithArtist(artist string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArtist:"), purego.NSString(artist))
 	return x
 }
 
-// The track number of a song or audio composition when part of an album.
-//
-// WithAudioTrackNumber sets audioTrackNumber and returns the receiver so calls can be chained.
+// WithAudioTrackNumber the track number of a song or audio composition when part of an album.
 func (x *SearchableItemAttributeSet) WithAudioTrackNumber(audioTrackNumber obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTrackNumber:"), objref.IDOf(audioTrackNumber))
 	return x
 }
 
-// The recording date of the song or composition.
-//
-// WithRecordingDate sets recordingDate and returns the receiver so calls can be chained.
+// WithRecordingDate the recording date of the song or composition.
 func (x *SearchableItemAttributeSet) WithRecordingDate(recordingDate obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordingDate:"), objref.IDOf(recordingDate))
 	return x
 }
 
-// The musical genre of the song or audio composition that the file contains, such as jazz, pop, rock, or classical.
-//
-// WithMusicalGenre sets musicalGenre and returns the receiver so calls can be chained.
+// WithMusicalGenre the musical genre of the song or audio composition that the file contains, such as jazz, pop, rock, or classical.
 func (x *SearchableItemAttributeSet) WithMusicalGenre(musicalGenre string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMusicalGenre:"), purego.NSString(musicalGenre))
 	return x
 }
 
-// A value that indicates whether the MIDI sequence the file contains is set up for use with a general MIDI device.
-//
-// WithGeneralMIDISequence sets generalMIDISequence and returns the receiver so calls can be chained.
+// WithGeneralMIDISequence a value that indicates whether the MIDI sequence the file contains is set up for use with a general MIDI device.
 func (x *SearchableItemAttributeSet) WithGeneralMIDISequence(generalMIDISequence obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeneralMIDISequence:"), objref.IDOf(generalMIDISequence))
 	return x
 }
 
-// The category of the instrument associated with the audio file.
-//
-// WithMusicalInstrumentCategory sets musicalInstrumentCategory and returns the receiver so calls can be chained.
+// WithMusicalInstrumentCategory the category of the instrument associated with the audio file.
 func (x *SearchableItemAttributeSet) WithMusicalInstrumentCategory(musicalInstrumentCategory string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMusicalInstrumentCategory:"), purego.NSString(musicalInstrumentCategory))
 	return x
 }
 
-// The name of an instrument within the context of an instrument category.
-//
-// WithMusicalInstrumentName sets musicalInstrumentName and returns the receiver so calls can be chained.
+// WithMusicalInstrumentName the name of an instrument within the context of an instrument category.
 func (x *SearchableItemAttributeSet) WithMusicalInstrumentName(musicalInstrumentName string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMusicalInstrumentName:"), purego.NSString(musicalInstrumentName))
 	return x
 }
 
-// The height of the item, such as image or video frame height, in pixels.
-//
-// WithPixelHeight sets pixelHeight and returns the receiver so calls can be chained.
+// WithPixelHeight the height of the item, such as image or video frame height, in pixels.
 func (x *SearchableItemAttributeSet) WithPixelHeight(pixelHeight obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelHeight:"), objref.IDOf(pixelHeight))
 	return x
 }
 
-// The width of the item, such as image or video frame width, in pixels.
-//
-// WithPixelWidth sets pixelWidth and returns the receiver so calls can be chained.
+// WithPixelWidth the width of the item, such as image or video frame width, in pixels.
 func (x *SearchableItemAttributeSet) WithPixelWidth(pixelWidth obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelWidth:"), objref.IDOf(pixelWidth))
 	return x
 }
 
-// The total number of pixels in the image.
-//
-// WithPixelCount sets pixelCount and returns the receiver so calls can be chained.
+// WithPixelCount the total number of pixels in the image.
 func (x *SearchableItemAttributeSet) WithPixelCount(pixelCount obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelCount:"), objref.IDOf(pixelCount))
 	return x
 }
 
-// The color space model the image uses, such as RGB, CMYK, YUV, or YCbCr.
-//
-// WithColorSpace sets colorSpace and returns the receiver so calls can be chained.
+// WithColorSpace the color space model the image uses, such as RGB, CMYK, YUV, or YCbCr.
 func (x *SearchableItemAttributeSet) WithColorSpace(colorSpace string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), purego.NSString(colorSpace))
 	return x
 }
 
-// The number of bits per sample.
-//
-// WithBitsPerSample sets bitsPerSample and returns the receiver so calls can be chained.
+// WithBitsPerSample the number of bits per sample.
 func (x *SearchableItemAttributeSet) WithBitsPerSample(bitsPerSample obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitsPerSample:"), objref.IDOf(bitsPerSample))
 	return x
 }
 
-// A value that indicates if the camera used a flash to capture the image.
-//
-// WithFlashOn sets flashOn and returns the receiver so calls can be chained.
+// WithFlashOn a value that indicates if the camera used a flash to capture the image.
 func (x *SearchableItemAttributeSet) WithFlashOn(flashOn obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlashOn:"), objref.IDOf(flashOn))
 	return x
 }
 
-// The actual focal length of the lens, in millimeters.
-//
-// WithFocalLength sets focalLength and returns the receiver so calls can be chained.
+// WithFocalLength the actual focal length of the lens, in millimeters.
 func (x *SearchableItemAttributeSet) WithFocalLength(focalLength obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocalLength:"), objref.IDOf(focalLength))
 	return x
 }
 
-// A value that indicates if the focal length is 35mm.
-//
-// WithFocalLength35mm sets focalLength35mm and returns the receiver so calls can be chained.
+// WithFocalLength35mm a value that indicates if the focal length is 35mm.
 func (x *SearchableItemAttributeSet) WithFocalLength35mm(focalLength35mm obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocalLength35mm:"), objref.IDOf(focalLength35mm))
 	return x
 }
 
-// The manufacturer of the device that captured the image.
-//
-// WithAcquisitionMake sets acquisitionMake and returns the receiver so calls can be chained.
+// WithAcquisitionMake the manufacturer of the device that captured the image.
 func (x *SearchableItemAttributeSet) WithAcquisitionMake(acquisitionMake string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcquisitionMake:"), purego.NSString(acquisitionMake))
 	return x
 }
 
-// The model of the device that captured the image.
-//
-// WithAcquisitionModel sets acquisitionModel and returns the receiver so calls can be chained.
+// WithAcquisitionModel the model of the device that captured the image.
 func (x *SearchableItemAttributeSet) WithAcquisitionModel(acquisitionModel string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcquisitionModel:"), purego.NSString(acquisitionModel))
 	return x
 }
 
-// The owner of the camera that captured the image.
-//
-// WithCameraOwner sets cameraOwner and returns the receiver so calls can be chained.
+// WithCameraOwner the owner of the camera that captured the image.
 func (x *SearchableItemAttributeSet) WithCameraOwner(cameraOwner string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCameraOwner:"), purego.NSString(cameraOwner))
 	return x
 }
 
-// The model of the lens that captured the image.
-//
-// WithLensModel sets lensModel and returns the receiver so calls can be chained.
+// WithLensModel the model of the lens that captured the image.
 func (x *SearchableItemAttributeSet) WithLensModel(lensModel string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLensModel:"), purego.NSString(lensModel))
 	return x
 }
 
-// The ISO speed setting at the time the camera captured the image.
-//
-// WithISOSpeed sets iSOSpeed and returns the receiver so calls can be chained.
+// WithISOSpeed the ISO speed setting at the time the camera captured the image.
 func (x *SearchableItemAttributeSet) WithISOSpeed(iSOSpeed obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setISOSpeed:"), objref.IDOf(iSOSpeed))
 	return x
 }
 
-// The orientation of the data.
-//
-// WithOrientation sets orientation and returns the receiver so calls can be chained.
+// WithOrientation the orientation of the data.
 func (x *SearchableItemAttributeSet) WithOrientation(orientation obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrientation:"), objref.IDOf(orientation))
 	return x
 }
 
-// An array that contains the names of the various layers in the file.
-//
-// WithLayerNames sets the collection and returns the receiver so calls can be chained.
+// WithLayerNames an array that contains the names of the various layers in the file.
 func (x *SearchableItemAttributeSet) WithLayerNames(items ...obj.Object) *SearchableItemAttributeSet {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerNames:"), _arr)
 	return x
 }
 
-// The white balance setting when the camera captured the image.
-//
-// WithWhiteBalance sets whiteBalance and returns the receiver so calls can be chained.
+// WithWhiteBalance the white balance setting when the camera captured the image.
 func (x *SearchableItemAttributeSet) WithWhiteBalance(whiteBalance obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWhiteBalance:"), objref.IDOf(whiteBalance))
 	return x
 }
 
-// The size of the lens aperture at the time the camera captured the image, as a log-scale APEX value.
-//
-// WithAperture sets aperture and returns the receiver so calls can be chained.
+// WithAperture the size of the lens aperture at the time the camera captured the image, as a log-scale APEX value.
 func (x *SearchableItemAttributeSet) WithAperture(aperture obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAperture:"), objref.IDOf(aperture))
 	return x
 }
 
-// The name of the color profile the camera used for the image.
-//
-// WithProfileName sets profileName and returns the receiver so calls can be chained.
+// WithProfileName the name of the color profile the camera used for the image.
 func (x *SearchableItemAttributeSet) WithProfileName(profileName string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProfileName:"), purego.NSString(profileName))
 	return x
 }
 
-// The resolution width of the image, in DPI.
-//
-// WithResolutionWidthDPI sets resolutionWidthDPI and returns the receiver so calls can be chained.
+// WithResolutionWidthDPI the resolution width of the image, in DPI.
 func (x *SearchableItemAttributeSet) WithResolutionWidthDPI(resolutionWidthDPI obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolutionWidthDPI:"), objref.IDOf(resolutionWidthDPI))
 	return x
 }
 
-// The resolution height of the image, in DPI.
-//
-// WithResolutionHeightDPI sets resolutionHeightDPI and returns the receiver so calls can be chained.
+// WithResolutionHeightDPI the resolution height of the image, in DPI.
 func (x *SearchableItemAttributeSet) WithResolutionHeightDPI(resolutionHeightDPI obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolutionHeightDPI:"), objref.IDOf(resolutionHeightDPI))
 	return x
 }
 
-// The mode the camera used for the exposure of the image.
-//
-// WithExposureMode sets exposureMode and returns the receiver so calls can be chained.
+// WithExposureMode the mode the camera used for the exposure of the image.
 func (x *SearchableItemAttributeSet) WithExposureMode(exposureMode obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExposureMode:"), objref.IDOf(exposureMode))
 	return x
 }
 
-// The time that the lens was open during exposure, in seconds.
-//
-// WithExposureTime sets exposureTime and returns the receiver so calls can be chained.
+// WithExposureTime the time that the lens was open during exposure, in seconds.
 func (x *SearchableItemAttributeSet) WithExposureTime(exposureTime obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExposureTime:"), objref.IDOf(exposureTime))
 	return x
 }
 
-// The version of the EXIF header that was used to generate the metadata for the image.
-//
-// WithEXIFVersion sets eXIFVersion and returns the receiver so calls can be chained.
+// WithEXIFVersion the version of the EXIF header that was used to generate the metadata for the image.
 func (x *SearchableItemAttributeSet) WithEXIFVersion(eXIFVersion string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEXIFVersion:"), purego.NSString(eXIFVersion))
 	return x
 }
 
-// The version of GPS Info IFD header that was used to generate the metadata for the image.
-//
-// WithEXIFGPSVersion sets eXIFGPSVersion and returns the receiver so calls can be chained.
+// WithEXIFGPSVersion the version of GPS Info IFD header that was used to generate the metadata for the image.
 func (x *SearchableItemAttributeSet) WithEXIFGPSVersion(eXIFGPSVersion string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEXIFGPSVersion:"), purego.NSString(eXIFGPSVersion))
 	return x
 }
 
-// Indicates if the image file has an alpha channel.
-//
-// WithHasAlphaChannel sets hasAlphaChannel and returns the receiver so calls can be chained.
+// WithHasAlphaChannel indicates if the image file has an alpha channel.
 func (x *SearchableItemAttributeSet) WithHasAlphaChannel(hasAlphaChannel obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasAlphaChannel:"), objref.IDOf(hasAlphaChannel))
 	return x
 }
 
-// A value that indicates if the camera used red-eye reduction when capturing the image.
-//
-// WithRedEyeOn sets redEyeOn and returns the receiver so calls can be chained.
+// WithRedEyeOn a value that indicates if the camera used red-eye reduction when capturing the image.
 func (x *SearchableItemAttributeSet) WithRedEyeOn(redEyeOn obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRedEyeOn:"), objref.IDOf(redEyeOn))
 	return x
 }
 
-// The metering mode.
-//
-// WithMeteringMode sets meteringMode and returns the receiver so calls can be chained.
+// WithMeteringMode the metering mode.
 func (x *SearchableItemAttributeSet) WithMeteringMode(meteringMode string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeteringMode:"), purego.NSString(meteringMode))
 	return x
 }
 
-// The smallest F number of the lens.
-//
-// WithMaxAperture sets maxAperture and returns the receiver so calls can be chained.
+// WithMaxAperture the smallest F number of the lens.
 func (x *SearchableItemAttributeSet) WithMaxAperture(maxAperture obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxAperture:"), objref.IDOf(maxAperture))
 	return x
 }
 
-// The focal length of the lens, divided by the diameter of the aperture when the camera captured the image.
-//
-// WithFNumber sets fNumber and returns the receiver so calls can be chained.
+// WithFNumber the focal length of the lens, divided by the diameter of the aperture when the camera captured the image.
 func (x *SearchableItemAttributeSet) WithFNumber(fNumber obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFNumber:"), objref.IDOf(fNumber))
 	return x
 }
 
-// The class of the program the camera used to set exposure when capturing the image.
-//
-// WithExposureProgram sets exposureProgram and returns the receiver so calls can be chained.
+// WithExposureProgram the class of the program the camera used to set exposure when capturing the image.
 func (x *SearchableItemAttributeSet) WithExposureProgram(exposureProgram string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExposureProgram:"), purego.NSString(exposureProgram))
 	return x
 }
 
-// The time that the lens was open during exposure, in a string, such as “1/250 seconds”.
-//
-// WithExposureTimeString sets exposureTimeString and returns the receiver so calls can be chained.
+// WithExposureTimeString the time that the lens was open during exposure, in a string, such as “1/250 seconds”.
 func (x *SearchableItemAttributeSet) WithExposureTimeString(exposureTimeString string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExposureTimeString:"), purego.NSString(exposureTimeString))
 	return x
 }
 
-// A publishable string that provides a synopsis of the contents of the item.
-//
-// WithHeadline sets headline and returns the receiver so calls can be chained.
+// WithHeadline a publishable string that provides a synopsis of the contents of the item.
 func (x *SearchableItemAttributeSet) WithHeadline(headline string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeadline:"), purego.NSString(headline))
 	return x
 }
 
-// Instructions that concern the use of the item, such as an embargo or warning.
-//
-// WithInstructions sets instructions and returns the receiver so calls can be chained.
+// WithInstructions instructions that concern the use of the item, such as an embargo or warning.
 func (x *SearchableItemAttributeSet) WithInstructions(instructions string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstructions:"), purego.NSString(instructions))
 	return x
 }
 
-// The thoroughfare, such as a street name, associated with the location for the item according to guidelines the provider establishes.
-//
-// WithThoroughfare sets thoroughfare and returns the receiver so calls can be chained.
+// WithThoroughfare the thoroughfare, such as a street name, associated with the location for the item according to guidelines the provider establishes.
 func (x *SearchableItemAttributeSet) WithThoroughfare(thoroughfare string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThoroughfare:"), purego.NSString(thoroughfare))
 	return x
 }
 
-// The sublocation, such as a street number, for the item according to guidelines the provider establishes.
-//
-// WithSubThoroughfare sets subThoroughfare and returns the receiver so calls can be chained.
+// WithSubThoroughfare the sublocation, such as a street number, for the item according to guidelines the provider establishes.
 func (x *SearchableItemAttributeSet) WithSubThoroughfare(subThoroughfare string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubThoroughfare:"), purego.NSString(subThoroughfare))
 	return x
 }
 
-// The postal code for the item according to guidelines the provider establishes.
-//
-// WithPostalCode sets postalCode and returns the receiver so calls can be chained.
+// WithPostalCode the postal code for the item according to guidelines the provider establishes.
 func (x *SearchableItemAttributeSet) WithPostalCode(postalCode string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostalCode:"), purego.NSString(postalCode))
 	return x
 }
 
-// The city of the item’s origin according to guidelines that the provider establishes.
-//
-// WithCity sets city and returns the receiver so calls can be chained.
+// WithCity the city of the item’s origin according to guidelines that the provider establishes.
 func (x *SearchableItemAttributeSet) WithCity(city string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCity:"), purego.NSString(city))
 	return x
 }
 
-// The province or state of origin according to guidelines the provider establishes.
-//
-// WithStateOrProvince sets stateOrProvince and returns the receiver so calls can be chained.
+// WithStateOrProvince the province or state of origin according to guidelines the provider establishes.
 func (x *SearchableItemAttributeSet) WithStateOrProvince(stateOrProvince string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStateOrProvince:"), purego.NSString(stateOrProvince))
 	return x
 }
 
-// The full, publishable name of the country or region in which the intellectual property of the item was created, according to guidelines the provider establishes.
-//
-// WithCountry sets country and returns the receiver so calls can be chained.
+// WithCountry the full, publishable name of the country or region in which the intellectual property of the item was created, according to guidelines the provider establishes.
 func (x *SearchableItemAttributeSet) WithCountry(country string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountry:"), purego.NSString(country))
 	return x
 }
 
-// The fully formatted address of the item, received from MapKit.
-//
-// WithFullyFormattedAddress sets fullyFormattedAddress and returns the receiver so calls can be chained.
+// WithFullyFormattedAddress the fully formatted address of the item, received from MapKit.
 func (x *SearchableItemAttributeSet) WithFullyFormattedAddress(fullyFormattedAddress string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFullyFormattedAddress:"), purego.NSString(fullyFormattedAddress))
 	return x
 }
 
-// The altitude of the item in meters above sea level, expressed using the WGS84 datum.
-//
-// WithAltitude sets altitude and returns the receiver so calls can be chained.
+// WithAltitude the altitude of the item in meters above sea level, expressed using the WGS84 datum.
 func (x *SearchableItemAttributeSet) WithAltitude(altitude obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAltitude:"), objref.IDOf(altitude))
 	return x
 }
 
-// The latitude of the item, in degrees north of the equator, expressed using the WGS84 datum.
-//
-// WithLatitude sets latitude and returns the receiver so calls can be chained.
+// WithLatitude the latitude of the item, in degrees north of the equator, expressed using the WGS84 datum.
 func (x *SearchableItemAttributeSet) WithLatitude(latitude obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLatitude:"), objref.IDOf(latitude))
 	return x
 }
 
-// The longitude of the item, in degrees east of the prime meridian, expressed using the WGS84 datum.
-//
-// WithLongitude sets longitude and returns the receiver so calls can be chained.
+// WithLongitude the longitude of the item, in degrees east of the prime meridian, expressed using the WGS84 datum.
 func (x *SearchableItemAttributeSet) WithLongitude(longitude obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongitude:"), objref.IDOf(longitude))
 	return x
 }
 
-// The speed of the item, in kilometers per hour.
-//
-// WithSpeed sets speed and returns the receiver so calls can be chained.
+// WithSpeed the speed of the item, in kilometers per hour.
 func (x *SearchableItemAttributeSet) WithSpeed(speed obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), objref.IDOf(speed))
 	return x
 }
 
-// The timestamp on the item.
-//
-// WithTimestamp sets timestamp and returns the receiver so calls can be chained.
+// WithTimestamp the timestamp on the item.
 func (x *SearchableItemAttributeSet) WithTimestamp(timestamp obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimestamp:"), objref.IDOf(timestamp))
 	return x
 }
 
-// The direction of the item’s image in degrees from true north.
-//
-// WithImageDirection sets imageDirection and returns the receiver so calls can be chained.
+// WithImageDirection the direction of the item’s image in degrees from true north.
 func (x *SearchableItemAttributeSet) WithImageDirection(imageDirection obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageDirection:"), objref.IDOf(imageDirection))
 	return x
 }
 
-// The name of the location or point of interest associated with the item.
-//
-// WithNamedLocation sets namedLocation and returns the receiver so calls can be chained.
+// WithNamedLocation the name of the location or point of interest associated with the item.
 func (x *SearchableItemAttributeSet) WithNamedLocation(namedLocation string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNamedLocation:"), purego.NSString(namedLocation))
 	return x
 }
 
-// The direction of travel of the item in degrees from true north.
-//
-// WithGPSTrack sets gPSTrack and returns the receiver so calls can be chained.
+// WithGPSTrack the direction of travel of the item in degrees from true north.
 func (x *SearchableItemAttributeSet) WithGPSTrack(gPSTrack obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSTrack:"), objref.IDOf(gPSTrack))
 	return x
 }
 
-// The status of the GPS receiver.
-//
-// WithGPSStatus sets gPSStatus and returns the receiver so calls can be chained.
+// WithGPSStatus the status of the GPS receiver.
 func (x *SearchableItemAttributeSet) WithGPSStatus(gPSStatus string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSStatus:"), purego.NSString(gPSStatus))
 	return x
 }
 
-// The measurement precision mode in use by the GPS receiver.
-//
-// WithGPSMeasureMode sets gPSMeasureMode and returns the receiver so calls can be chained.
+// WithGPSMeasureMode the measurement precision mode in use by the GPS receiver.
 func (x *SearchableItemAttributeSet) WithGPSMeasureMode(gPSMeasureMode string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSMeasureMode:"), purego.NSString(gPSMeasureMode))
 	return x
 }
 
-// The GPS dilution of precision value.
-//
-// WithGPSDOP sets gPSDOP and returns the receiver so calls can be chained.
+// WithGPSDOP the GPS dilution of precision value.
 func (x *SearchableItemAttributeSet) WithGPSDOP(gPSDOP obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSDOP:"), objref.IDOf(gPSDOP))
 	return x
 }
 
-// The geodetic data that the GPS receiver uses.
-//
-// WithGPSMapDatum sets gPSMapDatum and returns the receiver so calls can be chained.
+// WithGPSMapDatum the geodetic data that the GPS receiver uses.
 func (x *SearchableItemAttributeSet) WithGPSMapDatum(gPSMapDatum string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSMapDatum:"), purego.NSString(gPSMapDatum))
 	return x
 }
 
-// The latitude of the destination point.
-//
-// WithGPSDestLatitude sets gPSDestLatitude and returns the receiver so calls can be chained.
+// WithGPSDestLatitude the latitude of the destination point.
 func (x *SearchableItemAttributeSet) WithGPSDestLatitude(gPSDestLatitude obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSDestLatitude:"), objref.IDOf(gPSDestLatitude))
 	return x
 }
 
-// The longitude of the destination point.
-//
-// WithGPSDestLongitude sets gPSDestLongitude and returns the receiver so calls can be chained.
+// WithGPSDestLongitude the longitude of the destination point.
 func (x *SearchableItemAttributeSet) WithGPSDestLongitude(gPSDestLongitude obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSDestLongitude:"), objref.IDOf(gPSDestLongitude))
 	return x
 }
 
-// The bearing to the destination point.
-//
-// WithGPSDestBearing sets gPSDestBearing and returns the receiver so calls can be chained.
+// WithGPSDestBearing the bearing to the destination point.
 func (x *SearchableItemAttributeSet) WithGPSDestBearing(gPSDestBearing obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSDestBearing:"), objref.IDOf(gPSDestBearing))
 	return x
 }
 
-// The distance to the destination point.
-//
-// WithGPSDestDistance sets gPSDestDistance and returns the receiver so calls can be chained.
+// WithGPSDestDistance the distance to the destination point.
 func (x *SearchableItemAttributeSet) WithGPSDestDistance(gPSDestDistance obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSDestDistance:"), objref.IDOf(gPSDestDistance))
 	return x
 }
 
-// The location finding method that the GPS receiver uses.
-//
-// WithGPSProcessingMethod sets gPSProcessingMethod and returns the receiver so calls can be chained.
+// WithGPSProcessingMethod the location finding method that the GPS receiver uses.
 func (x *SearchableItemAttributeSet) WithGPSProcessingMethod(gPSProcessingMethod string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSProcessingMethod:"), purego.NSString(gPSProcessingMethod))
 	return x
 }
 
-// Information about the GPS area.
-//
-// WithGPSAreaInformation sets gPSAreaInformation and returns the receiver so calls can be chained.
+// WithGPSAreaInformation information about the GPS area.
 func (x *SearchableItemAttributeSet) WithGPSAreaInformation(gPSAreaInformation string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSAreaInformation:"), purego.NSString(gPSAreaInformation))
 	return x
 }
 
-// The date and time related to the GPS value.
-//
-// WithGPSDateStamp sets gPSDateStamp and returns the receiver so calls can be chained.
+// WithGPSDateStamp the date and time related to the GPS value.
 func (x *SearchableItemAttributeSet) WithGPSDateStamp(gPSDateStamp obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSDateStamp:"), objref.IDOf(gPSDateStamp))
 	return x
 }
 
-// The differential correction applied to the GPS receiver.
-//
-// WithGPSDifferental sets gPSDifferental and returns the receiver so calls can be chained.
+// WithGPSDifferental the differential correction applied to the GPS receiver.
 func (x *SearchableItemAttributeSet) WithGPSDifferental(gPSDifferental obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSDifferental:"), objref.IDOf(gPSDifferental))
 	return x
 }
 
+// DisplayName wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
 	if _r == 0 {
@@ -1528,20 +1181,25 @@ func (x *SearchableItemAttributeSet) DisplayName() string {
 	return purego.GoString(_r)
 }
 
+// SetDisplayName wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetDisplayName(displayName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayName:"), purego.NSString(displayName))
 }
 
+// AlternateNames wraps the corresponding Objective-C method.
+//
 // AlternateNames returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) AlternateNames() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternateNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetAlternateNames wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetAlternateNames(alternateNames []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateNames:"), purego.SliceToNSArray(alternateNames, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// Path wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Path() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
 	if _r == 0 {
@@ -1550,46 +1208,56 @@ func (x *SearchableItemAttributeSet) Path() string {
 	return purego.GoString(_r)
 }
 
+// SetPath wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetPath(path string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), purego.NSString(path))
 }
 
+// ContentURL wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) ContentURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentURL"))
 	return obj.Wrap(_r)
 }
 
+// SetContentURL wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetContentURL(contentURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentURL:"), rt.FileURL(contentURL))
 }
 
+// ThumbnailURL wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) ThumbnailURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("thumbnailURL"))
 	return obj.Wrap(_r)
 }
 
+// SetThumbnailURL wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetThumbnailURL(thumbnailURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThumbnailURL:"), rt.FileURL(thumbnailURL))
 }
 
+// ThumbnailData wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) ThumbnailData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("thumbnailData"))
 	return obj.Wrap(_r)
 }
 
+// SetThumbnailData wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetThumbnailData(thumbnailData obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThumbnailData:"), objref.IDOf(thumbnailData))
 }
 
+// DarkThumbnailURL wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) DarkThumbnailURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("darkThumbnailURL"))
 	return obj.Wrap(_r)
 }
 
+// SetDarkThumbnailURL wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetDarkThumbnailURL(darkThumbnailURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDarkThumbnailURL:"), rt.FileURL(darkThumbnailURL))
 }
 
+// RelatedUniqueIdentifier wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) RelatedUniqueIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relatedUniqueIdentifier"))
 	if _r == 0 {
@@ -1598,19 +1266,23 @@ func (x *SearchableItemAttributeSet) RelatedUniqueIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// SetRelatedUniqueIdentifier wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetRelatedUniqueIdentifier(relatedUniqueIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelatedUniqueIdentifier:"), purego.NSString(relatedUniqueIdentifier))
 }
 
+// MetadataModificationDate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) MetadataModificationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadataModificationDate"))
 	return obj.Wrap(_r)
 }
 
+// SetMetadataModificationDate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetMetadataModificationDate(metadataModificationDate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadataModificationDate:"), objref.IDOf(metadataModificationDate))
 }
 
+// ContentType wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) ContentType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
 	if _r == 0 {
@@ -1619,30 +1291,38 @@ func (x *SearchableItemAttributeSet) ContentType() string {
 	return purego.GoString(_r)
 }
 
+// SetContentType wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetContentType(contentType string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentType:"), purego.NSString(contentType))
 }
 
+// ContentTypeTree wraps the corresponding Objective-C method.
+//
 // ContentTypeTree returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) ContentTypeTree() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentTypeTree"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetContentTypeTree wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetContentTypeTree(contentTypeTree []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentTypeTree:"), purego.SliceToNSArray(contentTypeTree, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// Keywords wraps the corresponding Objective-C method.
+//
 // Keywords returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) Keywords() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keywords"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetKeywords wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetKeywords(keywords []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeywords:"), purego.SliceToNSArray(keywords, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -1651,10 +1331,12 @@ func (x *SearchableItemAttributeSet) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
+// TextContentSummary wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) TextContentSummary() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textContentSummary"))
 	if _r == 0 {
@@ -1663,6 +1345,7 @@ func (x *SearchableItemAttributeSet) TextContentSummary() string {
 	return purego.GoString(_r)
 }
 
+// TranscribedTextContent wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) TranscribedTextContent() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transcribedTextContent"))
 	if _r == 0 {
@@ -1671,28 +1354,34 @@ func (x *SearchableItemAttributeSet) TranscribedTextContent() string {
 	return purego.GoString(_r)
 }
 
+// SetTranscribedTextContent wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetTranscribedTextContent(transcribedTextContent string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranscribedTextContent:"), purego.NSString(transcribedTextContent))
 }
 
+// SupportsPhoneCall wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SupportsPhoneCall() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportsPhoneCall"))
 	return obj.Wrap(_r)
 }
 
+// SetSupportsPhoneCall wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetSupportsPhoneCall(supportsPhoneCall obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsPhoneCall:"), objref.IDOf(supportsPhoneCall))
 }
 
+// SupportsNavigation wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SupportsNavigation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportsNavigation"))
 	return obj.Wrap(_r)
 }
 
+// SetSupportsNavigation wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetSupportsNavigation(supportsNavigation obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsNavigation:"), objref.IDOf(supportsNavigation))
 }
 
+// ContainerTitle wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) ContainerTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containerTitle"))
 	if _r == 0 {
@@ -1701,10 +1390,12 @@ func (x *SearchableItemAttributeSet) ContainerTitle() string {
 	return purego.GoString(_r)
 }
 
+// SetContainerTitle wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetContainerTitle(containerTitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerTitle:"), purego.NSString(containerTitle))
 }
 
+// ContainerDisplayName wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) ContainerDisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containerDisplayName"))
 	if _r == 0 {
@@ -1713,10 +1404,12 @@ func (x *SearchableItemAttributeSet) ContainerDisplayName() string {
 	return purego.GoString(_r)
 }
 
+// SetContainerDisplayName wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetContainerDisplayName(containerDisplayName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerDisplayName:"), purego.NSString(containerDisplayName))
 }
 
+// ContainerIdentifier wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) ContainerIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containerIdentifier"))
 	if _r == 0 {
@@ -1725,20 +1418,23 @@ func (x *SearchableItemAttributeSet) ContainerIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// SetContainerIdentifier wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetContainerIdentifier(containerIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerIdentifier:"), purego.NSString(containerIdentifier))
 }
 
+// ContainerOrder wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) ContainerOrder() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containerOrder"))
 	return obj.Wrap(_r)
 }
 
+// SetContainerOrder wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetContainerOrder(containerOrder obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerOrder:"), objref.IDOf(containerOrder))
 }
 
-// Subject of the this item.
+// Subject subject of the this item.
 func (x *SearchableItemAttributeSet) Subject() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subject"))
 	if _r == 0 {
@@ -1747,10 +1443,12 @@ func (x *SearchableItemAttributeSet) Subject() string {
 	return purego.GoString(_r)
 }
 
+// SetSubject wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetSubject(subject string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubject:"), purego.NSString(subject))
 }
 
+// Theme wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Theme() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("theme"))
 	if _r == 0 {
@@ -1759,10 +1457,12 @@ func (x *SearchableItemAttributeSet) Theme() string {
 	return purego.GoString(_r)
 }
 
+// SetTheme wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetTheme(theme string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTheme:"), purego.NSString(theme))
 }
 
+// ContentDescription wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) ContentDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentDescription"))
 	if _r == 0 {
@@ -1771,10 +1471,12 @@ func (x *SearchableItemAttributeSet) ContentDescription() string {
 	return purego.GoString(_r)
 }
 
+// SetContentDescription wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetContentDescription(contentDescription string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentDescription:"), purego.NSString(contentDescription))
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -1783,56 +1485,69 @@ func (x *SearchableItemAttributeSet) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// SetIdentifier wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetIdentifier(identifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 }
 
+// Audiences wraps the corresponding Objective-C method.
+//
 // Audiences returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) Audiences() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audiences"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetAudiences wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetAudiences(audiences []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudiences:"), purego.SliceToNSArray(audiences, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// FileSize wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) FileSize() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileSize"))
 	return obj.Wrap(_r)
 }
 
+// SetFileSize wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetFileSize(fileSize obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileSize:"), objref.IDOf(fileSize))
 }
 
+// PageCount wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) PageCount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pageCount"))
 	return obj.Wrap(_r)
 }
 
+// SetPageCount wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetPageCount(pageCount obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageCount:"), objref.IDOf(pageCount))
 }
 
+// PageWidth wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) PageWidth() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pageWidth"))
 	return obj.Wrap(_r)
 }
 
+// SetPageWidth wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetPageWidth(pageWidth obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageWidth:"), objref.IDOf(pageWidth))
 }
 
+// PageHeight wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) PageHeight() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pageHeight"))
 	return obj.Wrap(_r)
 }
 
+// SetPageHeight wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetPageHeight(pageHeight obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageHeight:"), objref.IDOf(pageHeight))
 }
 
+// SecurityMethod wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SecurityMethod() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("securityMethod"))
 	if _r == 0 {
@@ -1841,10 +1556,12 @@ func (x *SearchableItemAttributeSet) SecurityMethod() string {
 	return purego.GoString(_r)
 }
 
+// SetSecurityMethod wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetSecurityMethod(securityMethod string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecurityMethod:"), purego.NSString(securityMethod))
 }
 
+// Creator wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Creator() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creator"))
 	if _r == 0 {
@@ -1853,20 +1570,25 @@ func (x *SearchableItemAttributeSet) Creator() string {
 	return purego.GoString(_r)
 }
 
+// SetCreator wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetCreator(creator string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCreator:"), purego.NSString(creator))
 }
 
+// EncodingApplications wraps the corresponding Objective-C method.
+//
 // EncodingApplications returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) EncodingApplications() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodingApplications"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetEncodingApplications wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetEncodingApplications(encodingApplications []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncodingApplications:"), purego.SliceToNSArray(encodingApplications, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// Kind wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Kind() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("kind"))
 	if _r == 0 {
@@ -1875,75 +1597,93 @@ func (x *SearchableItemAttributeSet) Kind() string {
 	return purego.GoString(_r)
 }
 
+// SetKind wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetKind(kind string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKind:"), purego.NSString(kind))
 }
 
+// FontNames wraps the corresponding Objective-C method.
+//
 // FontNames returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) FontNames() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetFontNames wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetFontNames(fontNames []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontNames:"), purego.SliceToNSArray(fontNames, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// DueDate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) DueDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dueDate"))
 	return obj.Wrap(_r)
 }
 
+// SetDueDate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetDueDate(dueDate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDueDate:"), objref.IDOf(dueDate))
 }
 
+// CompletionDate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) CompletionDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completionDate"))
 	return obj.Wrap(_r)
 }
 
+// SetCompletionDate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetCompletionDate(completionDate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionDate:"), objref.IDOf(completionDate))
 }
 
+// StartDate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
+// SetStartDate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetStartDate(startDate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
 }
 
+// EndDate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
+// SetEndDate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetEndDate(endDate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndDate:"), objref.IDOf(endDate))
 }
 
+// ImportantDates wraps the corresponding Objective-C method.
+//
 // ImportantDates returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) ImportantDates() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("importantDates"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetImportantDates wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetImportantDates(importantDates []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportantDates:"), purego.SliceToNSArray(importantDates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// AllDay wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) AllDay() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allDay"))
 	return obj.Wrap(_r)
 }
 
+// SetAllDay wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetAllDay(allDay obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllDay:"), objref.IDOf(allDay))
 }
 
+// AccountIdentifier wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) AccountIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountIdentifier"))
 	if _r == 0 {
@@ -1952,29 +1692,36 @@ func (x *SearchableItemAttributeSet) AccountIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// SetAccountIdentifier wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetAccountIdentifier(accountIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccountIdentifier:"), purego.NSString(accountIdentifier))
 }
 
+// AccountHandles wraps the corresponding Objective-C method.
+//
 // AccountHandles returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) AccountHandles() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountHandles"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetAccountHandles wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetAccountHandles(accountHandles []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccountHandles:"), purego.SliceToNSArray(accountHandles, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// HTMLContentData wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) HTMLContentData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("HTMLContentData"))
 	return obj.Wrap(_r)
 }
 
+// SetHTMLContentData wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetHTMLContentData(hTMLContentData obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTMLContentData:"), objref.IDOf(hTMLContentData))
 }
 
+// TextContent wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) TextContent() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textContent"))
 	if _r == 0 {
@@ -1983,213 +1730,274 @@ func (x *SearchableItemAttributeSet) TextContent() string {
 	return purego.GoString(_r)
 }
 
+// SetTextContent wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetTextContent(textContent string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 }
 
+// Authors wraps the corresponding Objective-C method.
+//
 // Authors returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) Authors() []*Person {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
+// SetAuthors wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetAuthors(authors []*Person) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthors:"), purego.SliceToNSArray(authors, func(_v *Person) objc.ID { return objref.IDOf(_v) }))
 }
 
+// PrimaryRecipients wraps the corresponding Objective-C method.
+//
 // PrimaryRecipients returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) PrimaryRecipients() []*Person {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryRecipients"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
+// SetPrimaryRecipients wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetPrimaryRecipients(primaryRecipients []*Person) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryRecipients:"), purego.SliceToNSArray(primaryRecipients, func(_v *Person) objc.ID { return objref.IDOf(_v) }))
 }
 
+// AdditionalRecipients wraps the corresponding Objective-C method.
+//
 // AdditionalRecipients returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) AdditionalRecipients() []*Person {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("additionalRecipients"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
+// SetAdditionalRecipients wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetAdditionalRecipients(additionalRecipients []*Person) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalRecipients:"), purego.SliceToNSArray(additionalRecipients, func(_v *Person) objc.ID { return objref.IDOf(_v) }))
 }
 
+// HiddenAdditionalRecipients wraps the corresponding Objective-C method.
+//
 // HiddenAdditionalRecipients returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) HiddenAdditionalRecipients() []*Person {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hiddenAdditionalRecipients"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
+// SetHiddenAdditionalRecipients wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetHiddenAdditionalRecipients(hiddenAdditionalRecipients []*Person) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHiddenAdditionalRecipients:"), purego.SliceToNSArray(hiddenAdditionalRecipients, func(_v *Person) objc.ID { return objref.IDOf(_v) }))
 }
 
+// EmailHeaders wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) EmailHeaders() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emailHeaders"))
 	return obj.Wrap(_r)
 }
 
+// SetEmailHeaders wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetEmailHeaders(emailHeaders obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmailHeaders:"), objref.IDOf(emailHeaders))
 }
 
+// MailboxIdentifiers wraps the corresponding Objective-C method.
+//
 // MailboxIdentifiers returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) MailboxIdentifiers() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mailboxIdentifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetMailboxIdentifiers wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetMailboxIdentifiers(mailboxIdentifiers []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMailboxIdentifiers:"), purego.SliceToNSArray(mailboxIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// AuthorNames wraps the corresponding Objective-C method.
+//
 // AuthorNames returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) AuthorNames() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authorNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetAuthorNames wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetAuthorNames(authorNames []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthorNames:"), purego.SliceToNSArray(authorNames, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// RecipientNames wraps the corresponding Objective-C method.
+//
 // RecipientNames returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) RecipientNames() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recipientNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetRecipientNames wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetRecipientNames(recipientNames []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecipientNames:"), purego.SliceToNSArray(recipientNames, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// AuthorEmailAddresses wraps the corresponding Objective-C method.
+//
 // AuthorEmailAddresses returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) AuthorEmailAddresses() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authorEmailAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetAuthorEmailAddresses wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetAuthorEmailAddresses(authorEmailAddresses []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthorEmailAddresses:"), purego.SliceToNSArray(authorEmailAddresses, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// RecipientEmailAddresses wraps the corresponding Objective-C method.
+//
 // RecipientEmailAddresses returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) RecipientEmailAddresses() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recipientEmailAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetRecipientEmailAddresses wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetRecipientEmailAddresses(recipientEmailAddresses []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecipientEmailAddresses:"), purego.SliceToNSArray(recipientEmailAddresses, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// AuthorAddresses wraps the corresponding Objective-C method.
+//
 // AuthorAddresses returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) AuthorAddresses() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authorAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetAuthorAddresses wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetAuthorAddresses(authorAddresses []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthorAddresses:"), purego.SliceToNSArray(authorAddresses, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// RecipientAddresses wraps the corresponding Objective-C method.
+//
 // RecipientAddresses returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) RecipientAddresses() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recipientAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetRecipientAddresses wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetRecipientAddresses(recipientAddresses []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecipientAddresses:"), purego.SliceToNSArray(recipientAddresses, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// PhoneNumbers wraps the corresponding Objective-C method.
+//
 // PhoneNumbers returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) PhoneNumbers() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("phoneNumbers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetPhoneNumbers wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetPhoneNumbers(phoneNumbers []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneNumbers:"), purego.SliceToNSArray(phoneNumbers, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// EmailAddresses wraps the corresponding Objective-C method.
+//
 // EmailAddresses returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) EmailAddresses() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emailAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetEmailAddresses wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetEmailAddresses(emailAddresses []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmailAddresses:"), purego.SliceToNSArray(emailAddresses, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// InstantMessageAddresses wraps the corresponding Objective-C method.
+//
 // InstantMessageAddresses returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) InstantMessageAddresses() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instantMessageAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetInstantMessageAddresses wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetInstantMessageAddresses(instantMessageAddresses []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstantMessageAddresses:"), purego.SliceToNSArray(instantMessageAddresses, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// IsLikelyJunk wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) IsLikelyJunk() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isLikelyJunk"))
 	return obj.Wrap(_r)
 }
 
+// SetLikelyJunk wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetLikelyJunk(likelyJunk obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLikelyJunk:"), objref.IDOf(likelyJunk))
 }
 
+// IsPriority wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) IsPriority() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isPriority"))
 	return obj.Wrap(_r)
 }
 
+// Editors wraps the corresponding Objective-C method.
+//
 // Editors returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) Editors() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("editors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetEditors wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetEditors(editors []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditors:"), purego.SliceToNSArray(editors, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// Participants wraps the corresponding Objective-C method.
+//
 // Participants returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) Participants() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("participants"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetParticipants wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetParticipants(participants []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticipants:"), purego.SliceToNSArray(participants, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// Projects wraps the corresponding Objective-C method.
+//
 // Projects returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) Projects() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("projects"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetProjects wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetProjects(projects []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProjects:"), purego.SliceToNSArray(projects, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// ContentSources wraps the corresponding Objective-C method.
+//
 // ContentSources returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) ContentSources() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentSources"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetContentSources wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetContentSources(contentSources []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentSources:"), purego.SliceToNSArray(contentSources, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// Comment wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Comment() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("comment"))
 	if _r == 0 {
@@ -2198,10 +2006,12 @@ func (x *SearchableItemAttributeSet) Comment() string {
 	return purego.GoString(_r)
 }
 
+// SetComment wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetComment(comment string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComment:"), purego.NSString(comment))
 }
 
+// Copyright wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Copyright() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copyright"))
 	if _r == 0 {
@@ -2210,149 +2020,185 @@ func (x *SearchableItemAttributeSet) Copyright() string {
 	return purego.GoString(_r)
 }
 
+// SetCopyright wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetCopyright(copyright string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCopyright:"), purego.NSString(copyright))
 }
 
+// LastUsedDate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) LastUsedDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastUsedDate"))
 	return obj.Wrap(_r)
 }
 
+// SetLastUsedDate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetLastUsedDate(lastUsedDate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLastUsedDate:"), objref.IDOf(lastUsedDate))
 }
 
+// ContentCreationDate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) ContentCreationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentCreationDate"))
 	return obj.Wrap(_r)
 }
 
+// SetContentCreationDate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetContentCreationDate(contentCreationDate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentCreationDate:"), objref.IDOf(contentCreationDate))
 }
 
+// ContentModificationDate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) ContentModificationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentModificationDate"))
 	return obj.Wrap(_r)
 }
 
+// SetContentModificationDate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetContentModificationDate(contentModificationDate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentModificationDate:"), objref.IDOf(contentModificationDate))
 }
 
+// AddedDate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) AddedDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addedDate"))
 	return obj.Wrap(_r)
 }
 
+// SetAddedDate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetAddedDate(addedDate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAddedDate:"), objref.IDOf(addedDate))
 }
 
+// DownloadedDate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) DownloadedDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadedDate"))
 	return obj.Wrap(_r)
 }
 
+// SetDownloadedDate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetDownloadedDate(downloadedDate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownloadedDate:"), objref.IDOf(downloadedDate))
 }
 
+// Duration wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Duration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("duration"))
 	return obj.Wrap(_r)
 }
 
+// SetDuration wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetDuration(duration obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 }
 
+// ContactKeywords wraps the corresponding Objective-C method.
+//
 // ContactKeywords returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) ContactKeywords() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contactKeywords"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetContactKeywords wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetContactKeywords(contactKeywords []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContactKeywords:"), purego.SliceToNSArray(contactKeywords, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// Codecs wraps the corresponding Objective-C method.
+//
 // Codecs returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) Codecs() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("codecs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetCodecs wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetCodecs(codecs []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCodecs:"), purego.SliceToNSArray(codecs, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// MediaTypes wraps the corresponding Objective-C method.
+//
 // MediaTypes returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) MediaTypes() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetMediaTypes wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetMediaTypes(mediaTypes []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaTypes:"), purego.SliceToNSArray(mediaTypes, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// IsStreamable wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) IsStreamable() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isStreamable"))
 	return obj.Wrap(_r)
 }
 
+// SetStreamable wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetStreamable(streamable obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStreamable:"), objref.IDOf(streamable))
 }
 
+// TotalBitRate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) TotalBitRate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalBitRate"))
 	return obj.Wrap(_r)
 }
 
+// SetTotalBitRate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetTotalBitRate(totalBitRate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTotalBitRate:"), objref.IDOf(totalBitRate))
 }
 
+// VideoBitRate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) VideoBitRate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoBitRate"))
 	return obj.Wrap(_r)
 }
 
+// SetVideoBitRate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetVideoBitRate(videoBitRate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoBitRate:"), objref.IDOf(videoBitRate))
 }
 
+// AudioBitRate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) AudioBitRate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioBitRate"))
 	return obj.Wrap(_r)
 }
 
+// SetAudioBitRate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetAudioBitRate(audioBitRate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioBitRate:"), objref.IDOf(audioBitRate))
 }
 
+// DeliveryType wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) DeliveryType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deliveryType"))
 	return obj.Wrap(_r)
 }
 
+// SetDeliveryType wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetDeliveryType(deliveryType obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeliveryType:"), objref.IDOf(deliveryType))
 }
 
+// Organizations wraps the corresponding Objective-C method.
+//
 // Organizations returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) Organizations() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("organizations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetOrganizations wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetOrganizations(organizations []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrganizations:"), purego.SliceToNSArray(organizations, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// Role wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Role() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("role"))
 	if _r == 0 {
@@ -2361,20 +2207,25 @@ func (x *SearchableItemAttributeSet) Role() string {
 	return purego.GoString(_r)
 }
 
+// SetRole wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetRole(role string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRole:"), purego.NSString(role))
 }
 
+// Languages wraps the corresponding Objective-C method.
+//
 // Languages returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) Languages() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetLanguages wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetLanguages(languages []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguages:"), purego.SliceToNSArray(languages, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// Rights wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Rights() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rights"))
 	if _r == 0 {
@@ -2383,49 +2234,62 @@ func (x *SearchableItemAttributeSet) Rights() string {
 	return purego.GoString(_r)
 }
 
+// SetRights wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetRights(rights string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRights:"), purego.NSString(rights))
 }
 
+// Publishers wraps the corresponding Objective-C method.
+//
 // Publishers returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) Publishers() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publishers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetPublishers wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetPublishers(publishers []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPublishers:"), purego.SliceToNSArray(publishers, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// Contributors wraps the corresponding Objective-C method.
+//
 // Contributors returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) Contributors() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contributors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetContributors wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetContributors(contributors []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContributors:"), purego.SliceToNSArray(contributors, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// Coverage wraps the corresponding Objective-C method.
+//
 // Coverage returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) Coverage() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coverage"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetCoverage wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetCoverage(coverage []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCoverage:"), purego.SliceToNSArray(coverage, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// Rating wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Rating() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rating"))
 	return obj.Wrap(_r)
 }
 
+// SetRating wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetRating(rating obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRating:"), objref.IDOf(rating))
 }
 
+// RatingDescription wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) RatingDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ratingDescription"))
 	if _r == 0 {
@@ -2434,19 +2298,23 @@ func (x *SearchableItemAttributeSet) RatingDescription() string {
 	return purego.GoString(_r)
 }
 
+// SetRatingDescription wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetRatingDescription(ratingDescription string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRatingDescription:"), purego.NSString(ratingDescription))
 }
 
+// PlayCount wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) PlayCount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playCount"))
 	return obj.Wrap(_r)
 }
 
+// SetPlayCount wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetPlayCount(playCount obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayCount:"), objref.IDOf(playCount))
 }
 
+// Information wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Information() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("information"))
 	if _r == 0 {
@@ -2455,10 +2323,12 @@ func (x *SearchableItemAttributeSet) Information() string {
 	return purego.GoString(_r)
 }
 
+// SetInformation wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetInformation(information string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInformation:"), purego.NSString(information))
 }
 
+// Director wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Director() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("director"))
 	if _r == 0 {
@@ -2467,10 +2337,12 @@ func (x *SearchableItemAttributeSet) Director() string {
 	return purego.GoString(_r)
 }
 
+// SetDirector wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetDirector(director string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirector:"), purego.NSString(director))
 }
 
+// Producer wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Producer() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("producer"))
 	if _r == 0 {
@@ -2479,10 +2351,12 @@ func (x *SearchableItemAttributeSet) Producer() string {
 	return purego.GoString(_r)
 }
 
+// SetProducer wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetProducer(producer string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProducer:"), purego.NSString(producer))
 }
 
+// Genre wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Genre() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("genre"))
 	if _r == 0 {
@@ -2491,20 +2365,25 @@ func (x *SearchableItemAttributeSet) Genre() string {
 	return purego.GoString(_r)
 }
 
+// SetGenre wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetGenre(genre string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGenre:"), purego.NSString(genre))
 }
 
+// Performers wraps the corresponding Objective-C method.
+//
 // Performers returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) Performers() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetPerformers wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetPerformers(performers []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerformers:"), purego.SliceToNSArray(performers, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// OriginalFormat wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) OriginalFormat() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalFormat"))
 	if _r == 0 {
@@ -2513,10 +2392,12 @@ func (x *SearchableItemAttributeSet) OriginalFormat() string {
 	return purego.GoString(_r)
 }
 
+// SetOriginalFormat wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetOriginalFormat(originalFormat string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOriginalFormat:"), purego.NSString(originalFormat))
 }
 
+// OriginalSource wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) OriginalSource() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalSource"))
 	if _r == 0 {
@@ -2525,64 +2406,78 @@ func (x *SearchableItemAttributeSet) OriginalSource() string {
 	return purego.GoString(_r)
 }
 
+// SetOriginalSource wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetOriginalSource(originalSource string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOriginalSource:"), purego.NSString(originalSource))
 }
 
+// IsLocal wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) IsLocal() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isLocal"))
 	return obj.Wrap(_r)
 }
 
+// SetLocal wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetLocal(local obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocal:"), objref.IDOf(local))
 }
 
+// ContentRating wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) ContentRating() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentRating"))
 	return obj.Wrap(_r)
 }
 
+// SetContentRating wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetContentRating(contentRating obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentRating:"), objref.IDOf(contentRating))
 }
 
+// URL wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
+// SetURL wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetURL(uRL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 }
 
+// AudioSampleRate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) AudioSampleRate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioSampleRate"))
 	return obj.Wrap(_r)
 }
 
+// SetAudioSampleRate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetAudioSampleRate(audioSampleRate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioSampleRate:"), objref.IDOf(audioSampleRate))
 }
 
+// AudioChannelCount wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) AudioChannelCount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioChannelCount"))
 	return obj.Wrap(_r)
 }
 
+// SetAudioChannelCount wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetAudioChannelCount(audioChannelCount obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioChannelCount:"), objref.IDOf(audioChannelCount))
 }
 
+// Tempo wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Tempo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tempo"))
 	return obj.Wrap(_r)
 }
 
+// SetTempo wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetTempo(tempo obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTempo:"), objref.IDOf(tempo))
 }
 
+// KeySignature wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) KeySignature() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keySignature"))
 	if _r == 0 {
@@ -2591,10 +2486,12 @@ func (x *SearchableItemAttributeSet) KeySignature() string {
 	return purego.GoString(_r)
 }
 
+// SetKeySignature wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetKeySignature(keySignature string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeySignature:"), purego.NSString(keySignature))
 }
 
+// TimeSignature wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) TimeSignature() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeSignature"))
 	if _r == 0 {
@@ -2603,10 +2500,12 @@ func (x *SearchableItemAttributeSet) TimeSignature() string {
 	return purego.GoString(_r)
 }
 
+// SetTimeSignature wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetTimeSignature(timeSignature string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeSignature:"), purego.NSString(timeSignature))
 }
 
+// AudioEncodingApplication wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) AudioEncodingApplication() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioEncodingApplication"))
 	if _r == 0 {
@@ -2615,10 +2514,12 @@ func (x *SearchableItemAttributeSet) AudioEncodingApplication() string {
 	return purego.GoString(_r)
 }
 
+// SetAudioEncodingApplication wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetAudioEncodingApplication(audioEncodingApplication string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioEncodingApplication:"), purego.NSString(audioEncodingApplication))
 }
 
+// Composer wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Composer() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("composer"))
 	if _r == 0 {
@@ -2627,10 +2528,12 @@ func (x *SearchableItemAttributeSet) Composer() string {
 	return purego.GoString(_r)
 }
 
+// SetComposer wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetComposer(composer string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComposer:"), purego.NSString(composer))
 }
 
+// Lyricist wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Lyricist() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lyricist"))
 	if _r == 0 {
@@ -2639,10 +2542,12 @@ func (x *SearchableItemAttributeSet) Lyricist() string {
 	return purego.GoString(_r)
 }
 
+// SetLyricist wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetLyricist(lyricist string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLyricist:"), purego.NSString(lyricist))
 }
 
+// Album wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Album() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("album"))
 	if _r == 0 {
@@ -2651,10 +2556,12 @@ func (x *SearchableItemAttributeSet) Album() string {
 	return purego.GoString(_r)
 }
 
+// SetAlbum wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetAlbum(album string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlbum:"), purego.NSString(album))
 }
 
+// Artist wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Artist() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("artist"))
 	if _r == 0 {
@@ -2663,28 +2570,34 @@ func (x *SearchableItemAttributeSet) Artist() string {
 	return purego.GoString(_r)
 }
 
+// SetArtist wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetArtist(artist string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArtist:"), purego.NSString(artist))
 }
 
+// AudioTrackNumber wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) AudioTrackNumber() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioTrackNumber"))
 	return obj.Wrap(_r)
 }
 
+// SetAudioTrackNumber wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetAudioTrackNumber(audioTrackNumber obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTrackNumber:"), objref.IDOf(audioTrackNumber))
 }
 
+// RecordingDate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) RecordingDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordingDate"))
 	return obj.Wrap(_r)
 }
 
+// SetRecordingDate wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetRecordingDate(recordingDate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordingDate:"), objref.IDOf(recordingDate))
 }
 
+// MusicalGenre wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) MusicalGenre() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("musicalGenre"))
 	if _r == 0 {
@@ -2693,19 +2606,23 @@ func (x *SearchableItemAttributeSet) MusicalGenre() string {
 	return purego.GoString(_r)
 }
 
+// SetMusicalGenre wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetMusicalGenre(musicalGenre string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMusicalGenre:"), purego.NSString(musicalGenre))
 }
 
+// IsGeneralMIDISequence wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) IsGeneralMIDISequence() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isGeneralMIDISequence"))
 	return obj.Wrap(_r)
 }
 
+// SetGeneralMIDISequence wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetGeneralMIDISequence(generalMIDISequence obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeneralMIDISequence:"), objref.IDOf(generalMIDISequence))
 }
 
+// MusicalInstrumentCategory wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) MusicalInstrumentCategory() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("musicalInstrumentCategory"))
 	if _r == 0 {
@@ -2714,10 +2631,12 @@ func (x *SearchableItemAttributeSet) MusicalInstrumentCategory() string {
 	return purego.GoString(_r)
 }
 
+// SetMusicalInstrumentCategory wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetMusicalInstrumentCategory(musicalInstrumentCategory string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMusicalInstrumentCategory:"), purego.NSString(musicalInstrumentCategory))
 }
 
+// MusicalInstrumentName wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) MusicalInstrumentName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("musicalInstrumentName"))
 	if _r == 0 {
@@ -2726,37 +2645,45 @@ func (x *SearchableItemAttributeSet) MusicalInstrumentName() string {
 	return purego.GoString(_r)
 }
 
+// SetMusicalInstrumentName wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetMusicalInstrumentName(musicalInstrumentName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMusicalInstrumentName:"), purego.NSString(musicalInstrumentName))
 }
 
+// PixelHeight wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) PixelHeight() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pixelHeight"))
 	return obj.Wrap(_r)
 }
 
+// SetPixelHeight wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetPixelHeight(pixelHeight obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelHeight:"), objref.IDOf(pixelHeight))
 }
 
+// PixelWidth wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) PixelWidth() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pixelWidth"))
 	return obj.Wrap(_r)
 }
 
+// SetPixelWidth wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetPixelWidth(pixelWidth obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelWidth:"), objref.IDOf(pixelWidth))
 }
 
+// PixelCount wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) PixelCount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pixelCount"))
 	return obj.Wrap(_r)
 }
 
+// SetPixelCount wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetPixelCount(pixelCount obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelCount:"), objref.IDOf(pixelCount))
 }
 
+// ColorSpace wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) ColorSpace() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorSpace"))
 	if _r == 0 {
@@ -2765,46 +2692,56 @@ func (x *SearchableItemAttributeSet) ColorSpace() string {
 	return purego.GoString(_r)
 }
 
+// SetColorSpace wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetColorSpace(colorSpace string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), purego.NSString(colorSpace))
 }
 
+// BitsPerSample wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) BitsPerSample() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bitsPerSample"))
 	return obj.Wrap(_r)
 }
 
+// SetBitsPerSample wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetBitsPerSample(bitsPerSample obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitsPerSample:"), objref.IDOf(bitsPerSample))
 }
 
+// IsFlashOn wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) IsFlashOn() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isFlashOn"))
 	return obj.Wrap(_r)
 }
 
+// SetFlashOn wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetFlashOn(flashOn obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlashOn:"), objref.IDOf(flashOn))
 }
 
+// FocalLength wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) FocalLength() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("focalLength"))
 	return obj.Wrap(_r)
 }
 
+// SetFocalLength wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetFocalLength(focalLength obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocalLength:"), objref.IDOf(focalLength))
 }
 
+// IsFocalLength35mm wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) IsFocalLength35mm() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isFocalLength35mm"))
 	return obj.Wrap(_r)
 }
 
+// SetFocalLength35mm wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetFocalLength35mm(focalLength35mm obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocalLength35mm:"), objref.IDOf(focalLength35mm))
 }
 
+// AcquisitionMake wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) AcquisitionMake() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("acquisitionMake"))
 	if _r == 0 {
@@ -2813,10 +2750,12 @@ func (x *SearchableItemAttributeSet) AcquisitionMake() string {
 	return purego.GoString(_r)
 }
 
+// SetAcquisitionMake wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetAcquisitionMake(acquisitionMake string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcquisitionMake:"), purego.NSString(acquisitionMake))
 }
 
+// AcquisitionModel wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) AcquisitionModel() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("acquisitionModel"))
 	if _r == 0 {
@@ -2825,10 +2764,12 @@ func (x *SearchableItemAttributeSet) AcquisitionModel() string {
 	return purego.GoString(_r)
 }
 
+// SetAcquisitionModel wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetAcquisitionModel(acquisitionModel string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcquisitionModel:"), purego.NSString(acquisitionModel))
 }
 
+// CameraOwner wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) CameraOwner() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cameraOwner"))
 	if _r == 0 {
@@ -2837,10 +2778,12 @@ func (x *SearchableItemAttributeSet) CameraOwner() string {
 	return purego.GoString(_r)
 }
 
+// SetCameraOwner wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetCameraOwner(cameraOwner string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCameraOwner:"), purego.NSString(cameraOwner))
 }
 
+// LensModel wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) LensModel() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lensModel"))
 	if _r == 0 {
@@ -2849,56 +2792,69 @@ func (x *SearchableItemAttributeSet) LensModel() string {
 	return purego.GoString(_r)
 }
 
+// SetLensModel wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetLensModel(lensModel string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLensModel:"), purego.NSString(lensModel))
 }
 
+// ISOSpeed wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) ISOSpeed() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ISOSpeed"))
 	return obj.Wrap(_r)
 }
 
+// SetISOSpeed wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetISOSpeed(iSOSpeed obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setISOSpeed:"), objref.IDOf(iSOSpeed))
 }
 
+// Orientation wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Orientation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orientation"))
 	return obj.Wrap(_r)
 }
 
+// SetOrientation wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetOrientation(orientation obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrientation:"), objref.IDOf(orientation))
 }
 
+// LayerNames wraps the corresponding Objective-C method.
+//
 // LayerNames returns the collection as a Go slice.
 func (x *SearchableItemAttributeSet) LayerNames() []string {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layerNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SetLayerNames wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetLayerNames(layerNames []string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerNames:"), purego.SliceToNSArray(layerNames, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// WhiteBalance wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) WhiteBalance() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("whiteBalance"))
 	return obj.Wrap(_r)
 }
 
+// SetWhiteBalance wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetWhiteBalance(whiteBalance obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWhiteBalance:"), objref.IDOf(whiteBalance))
 }
 
+// Aperture wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Aperture() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("aperture"))
 	return obj.Wrap(_r)
 }
 
+// SetAperture wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetAperture(aperture obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAperture:"), objref.IDOf(aperture))
 }
 
+// ProfileName wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) ProfileName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("profileName"))
 	if _r == 0 {
@@ -2907,46 +2863,56 @@ func (x *SearchableItemAttributeSet) ProfileName() string {
 	return purego.GoString(_r)
 }
 
+// SetProfileName wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetProfileName(profileName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProfileName:"), purego.NSString(profileName))
 }
 
+// ResolutionWidthDPI wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) ResolutionWidthDPI() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resolutionWidthDPI"))
 	return obj.Wrap(_r)
 }
 
+// SetResolutionWidthDPI wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetResolutionWidthDPI(resolutionWidthDPI obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolutionWidthDPI:"), objref.IDOf(resolutionWidthDPI))
 }
 
+// ResolutionHeightDPI wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) ResolutionHeightDPI() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resolutionHeightDPI"))
 	return obj.Wrap(_r)
 }
 
+// SetResolutionHeightDPI wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetResolutionHeightDPI(resolutionHeightDPI obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolutionHeightDPI:"), objref.IDOf(resolutionHeightDPI))
 }
 
+// ExposureMode wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) ExposureMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exposureMode"))
 	return obj.Wrap(_r)
 }
 
+// SetExposureMode wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetExposureMode(exposureMode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExposureMode:"), objref.IDOf(exposureMode))
 }
 
+// ExposureTime wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) ExposureTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exposureTime"))
 	return obj.Wrap(_r)
 }
 
+// SetExposureTime wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetExposureTime(exposureTime obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExposureTime:"), objref.IDOf(exposureTime))
 }
 
+// EXIFVersion wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) EXIFVersion() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("EXIFVersion"))
 	if _r == 0 {
@@ -2955,10 +2921,12 @@ func (x *SearchableItemAttributeSet) EXIFVersion() string {
 	return purego.GoString(_r)
 }
 
+// SetEXIFVersion wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetEXIFVersion(eXIFVersion string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEXIFVersion:"), purego.NSString(eXIFVersion))
 }
 
+// EXIFGPSVersion wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) EXIFGPSVersion() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("EXIFGPSVersion"))
 	if _r == 0 {
@@ -2967,28 +2935,34 @@ func (x *SearchableItemAttributeSet) EXIFGPSVersion() string {
 	return purego.GoString(_r)
 }
 
+// SetEXIFGPSVersion wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetEXIFGPSVersion(eXIFGPSVersion string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEXIFGPSVersion:"), purego.NSString(eXIFGPSVersion))
 }
 
+// HasAlphaChannel wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) HasAlphaChannel() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hasAlphaChannel"))
 	return obj.Wrap(_r)
 }
 
+// SetHasAlphaChannel wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetHasAlphaChannel(hasAlphaChannel obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasAlphaChannel:"), objref.IDOf(hasAlphaChannel))
 }
 
+// IsRedEyeOn wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) IsRedEyeOn() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isRedEyeOn"))
 	return obj.Wrap(_r)
 }
 
+// SetRedEyeOn wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetRedEyeOn(redEyeOn obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRedEyeOn:"), objref.IDOf(redEyeOn))
 }
 
+// MeteringMode wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) MeteringMode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("meteringMode"))
 	if _r == 0 {
@@ -2997,28 +2971,34 @@ func (x *SearchableItemAttributeSet) MeteringMode() string {
 	return purego.GoString(_r)
 }
 
+// SetMeteringMode wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetMeteringMode(meteringMode string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeteringMode:"), purego.NSString(meteringMode))
 }
 
+// MaxAperture wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) MaxAperture() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxAperture"))
 	return obj.Wrap(_r)
 }
 
+// SetMaxAperture wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetMaxAperture(maxAperture obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxAperture:"), objref.IDOf(maxAperture))
 }
 
+// FNumber wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) FNumber() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fNumber"))
 	return obj.Wrap(_r)
 }
 
+// SetFNumber wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetFNumber(fNumber obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFNumber:"), objref.IDOf(fNumber))
 }
 
+// ExposureProgram wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) ExposureProgram() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exposureProgram"))
 	if _r == 0 {
@@ -3027,10 +3007,12 @@ func (x *SearchableItemAttributeSet) ExposureProgram() string {
 	return purego.GoString(_r)
 }
 
+// SetExposureProgram wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetExposureProgram(exposureProgram string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExposureProgram:"), purego.NSString(exposureProgram))
 }
 
+// ExposureTimeString wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) ExposureTimeString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exposureTimeString"))
 	if _r == 0 {
@@ -3039,10 +3021,12 @@ func (x *SearchableItemAttributeSet) ExposureTimeString() string {
 	return purego.GoString(_r)
 }
 
+// SetExposureTimeString wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetExposureTimeString(exposureTimeString string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExposureTimeString:"), purego.NSString(exposureTimeString))
 }
 
+// Headline wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Headline() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("headline"))
 	if _r == 0 {
@@ -3051,10 +3035,12 @@ func (x *SearchableItemAttributeSet) Headline() string {
 	return purego.GoString(_r)
 }
 
+// SetHeadline wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetHeadline(headline string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeadline:"), purego.NSString(headline))
 }
 
+// Instructions wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Instructions() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instructions"))
 	if _r == 0 {
@@ -3063,10 +3049,12 @@ func (x *SearchableItemAttributeSet) Instructions() string {
 	return purego.GoString(_r)
 }
 
+// SetInstructions wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetInstructions(instructions string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstructions:"), purego.NSString(instructions))
 }
 
+// Thoroughfare wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Thoroughfare() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("thoroughfare"))
 	if _r == 0 {
@@ -3075,10 +3063,12 @@ func (x *SearchableItemAttributeSet) Thoroughfare() string {
 	return purego.GoString(_r)
 }
 
+// SetThoroughfare wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetThoroughfare(thoroughfare string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThoroughfare:"), purego.NSString(thoroughfare))
 }
 
+// SubThoroughfare wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SubThoroughfare() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subThoroughfare"))
 	if _r == 0 {
@@ -3087,10 +3077,12 @@ func (x *SearchableItemAttributeSet) SubThoroughfare() string {
 	return purego.GoString(_r)
 }
 
+// SetSubThoroughfare wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetSubThoroughfare(subThoroughfare string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubThoroughfare:"), purego.NSString(subThoroughfare))
 }
 
+// PostalCode wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) PostalCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postalCode"))
 	if _r == 0 {
@@ -3099,10 +3091,12 @@ func (x *SearchableItemAttributeSet) PostalCode() string {
 	return purego.GoString(_r)
 }
 
+// SetPostalCode wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetPostalCode(postalCode string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostalCode:"), purego.NSString(postalCode))
 }
 
+// City wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) City() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("city"))
 	if _r == 0 {
@@ -3111,10 +3105,12 @@ func (x *SearchableItemAttributeSet) City() string {
 	return purego.GoString(_r)
 }
 
+// SetCity wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetCity(city string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCity:"), purego.NSString(city))
 }
 
+// StateOrProvince wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) StateOrProvince() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateOrProvince"))
 	if _r == 0 {
@@ -3123,10 +3119,12 @@ func (x *SearchableItemAttributeSet) StateOrProvince() string {
 	return purego.GoString(_r)
 }
 
+// SetStateOrProvince wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetStateOrProvince(stateOrProvince string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStateOrProvince:"), purego.NSString(stateOrProvince))
 }
 
+// Country wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Country() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("country"))
 	if _r == 0 {
@@ -3135,10 +3133,12 @@ func (x *SearchableItemAttributeSet) Country() string {
 	return purego.GoString(_r)
 }
 
+// SetCountry wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetCountry(country string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountry:"), purego.NSString(country))
 }
 
+// FullyFormattedAddress wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) FullyFormattedAddress() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullyFormattedAddress"))
 	if _r == 0 {
@@ -3147,64 +3147,78 @@ func (x *SearchableItemAttributeSet) FullyFormattedAddress() string {
 	return purego.GoString(_r)
 }
 
+// SetFullyFormattedAddress wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetFullyFormattedAddress(fullyFormattedAddress string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFullyFormattedAddress:"), purego.NSString(fullyFormattedAddress))
 }
 
+// Altitude wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Altitude() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("altitude"))
 	return obj.Wrap(_r)
 }
 
+// SetAltitude wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetAltitude(altitude obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAltitude:"), objref.IDOf(altitude))
 }
 
+// Latitude wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Latitude() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("latitude"))
 	return obj.Wrap(_r)
 }
 
+// SetLatitude wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetLatitude(latitude obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLatitude:"), objref.IDOf(latitude))
 }
 
+// Longitude wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Longitude() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("longitude"))
 	return obj.Wrap(_r)
 }
 
+// SetLongitude wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetLongitude(longitude obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongitude:"), objref.IDOf(longitude))
 }
 
+// Speed wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Speed() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("speed"))
 	return obj.Wrap(_r)
 }
 
+// SetSpeed wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetSpeed(speed obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), objref.IDOf(speed))
 }
 
+// Timestamp wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) Timestamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timestamp"))
 	return obj.Wrap(_r)
 }
 
+// SetTimestamp wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetTimestamp(timestamp obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimestamp:"), objref.IDOf(timestamp))
 }
 
+// ImageDirection wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) ImageDirection() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageDirection"))
 	return obj.Wrap(_r)
 }
 
+// SetImageDirection wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetImageDirection(imageDirection obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageDirection:"), objref.IDOf(imageDirection))
 }
 
+// NamedLocation wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) NamedLocation() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("namedLocation"))
 	if _r == 0 {
@@ -3213,19 +3227,23 @@ func (x *SearchableItemAttributeSet) NamedLocation() string {
 	return purego.GoString(_r)
 }
 
+// SetNamedLocation wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetNamedLocation(namedLocation string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNamedLocation:"), purego.NSString(namedLocation))
 }
 
+// GPSTrack wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) GPSTrack() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GPSTrack"))
 	return obj.Wrap(_r)
 }
 
+// SetGPSTrack wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetGPSTrack(gPSTrack obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSTrack:"), objref.IDOf(gPSTrack))
 }
 
+// GPSStatus wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) GPSStatus() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GPSStatus"))
 	if _r == 0 {
@@ -3234,10 +3252,12 @@ func (x *SearchableItemAttributeSet) GPSStatus() string {
 	return purego.GoString(_r)
 }
 
+// SetGPSStatus wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetGPSStatus(gPSStatus string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSStatus:"), purego.NSString(gPSStatus))
 }
 
+// GPSMeasureMode wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) GPSMeasureMode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GPSMeasureMode"))
 	if _r == 0 {
@@ -3246,19 +3266,23 @@ func (x *SearchableItemAttributeSet) GPSMeasureMode() string {
 	return purego.GoString(_r)
 }
 
+// SetGPSMeasureMode wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetGPSMeasureMode(gPSMeasureMode string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSMeasureMode:"), purego.NSString(gPSMeasureMode))
 }
 
+// GPSDOP wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) GPSDOP() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GPSDOP"))
 	return obj.Wrap(_r)
 }
 
+// SetGPSDOP wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetGPSDOP(gPSDOP obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSDOP:"), objref.IDOf(gPSDOP))
 }
 
+// GPSMapDatum wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) GPSMapDatum() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GPSMapDatum"))
 	if _r == 0 {
@@ -3267,46 +3291,56 @@ func (x *SearchableItemAttributeSet) GPSMapDatum() string {
 	return purego.GoString(_r)
 }
 
+// SetGPSMapDatum wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetGPSMapDatum(gPSMapDatum string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSMapDatum:"), purego.NSString(gPSMapDatum))
 }
 
+// GPSDestLatitude wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) GPSDestLatitude() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GPSDestLatitude"))
 	return obj.Wrap(_r)
 }
 
+// SetGPSDestLatitude wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetGPSDestLatitude(gPSDestLatitude obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSDestLatitude:"), objref.IDOf(gPSDestLatitude))
 }
 
+// GPSDestLongitude wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) GPSDestLongitude() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GPSDestLongitude"))
 	return obj.Wrap(_r)
 }
 
+// SetGPSDestLongitude wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetGPSDestLongitude(gPSDestLongitude obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSDestLongitude:"), objref.IDOf(gPSDestLongitude))
 }
 
+// GPSDestBearing wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) GPSDestBearing() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GPSDestBearing"))
 	return obj.Wrap(_r)
 }
 
+// SetGPSDestBearing wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetGPSDestBearing(gPSDestBearing obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSDestBearing:"), objref.IDOf(gPSDestBearing))
 }
 
+// GPSDestDistance wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) GPSDestDistance() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GPSDestDistance"))
 	return obj.Wrap(_r)
 }
 
+// SetGPSDestDistance wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetGPSDestDistance(gPSDestDistance obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSDestDistance:"), objref.IDOf(gPSDestDistance))
 }
 
+// GPSProcessingMethod wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) GPSProcessingMethod() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GPSProcessingMethod"))
 	if _r == 0 {
@@ -3315,10 +3349,12 @@ func (x *SearchableItemAttributeSet) GPSProcessingMethod() string {
 	return purego.GoString(_r)
 }
 
+// SetGPSProcessingMethod wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetGPSProcessingMethod(gPSProcessingMethod string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSProcessingMethod:"), purego.NSString(gPSProcessingMethod))
 }
 
+// GPSAreaInformation wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) GPSAreaInformation() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GPSAreaInformation"))
 	if _r == 0 {
@@ -3327,24 +3363,29 @@ func (x *SearchableItemAttributeSet) GPSAreaInformation() string {
 	return purego.GoString(_r)
 }
 
+// SetGPSAreaInformation wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetGPSAreaInformation(gPSAreaInformation string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSAreaInformation:"), purego.NSString(gPSAreaInformation))
 }
 
+// GPSDateStamp wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) GPSDateStamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GPSDateStamp"))
 	return obj.Wrap(_r)
 }
 
+// SetGPSDateStamp wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetGPSDateStamp(gPSDateStamp obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSDateStamp:"), objref.IDOf(gPSDateStamp))
 }
 
+// GPSDifferental wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) GPSDifferental() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GPSDifferental"))
 	return obj.Wrap(_r)
 }
 
+// SetGPSDifferental wraps the corresponding Objective-C method.
 func (x *SearchableItemAttributeSet) SetGPSDifferental(gPSDifferental obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPSDifferental:"), objref.IDOf(gPSDifferental))
 }

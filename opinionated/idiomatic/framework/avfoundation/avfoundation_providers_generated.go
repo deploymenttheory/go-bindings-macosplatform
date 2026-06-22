@@ -11,209 +11,251 @@ import (
 // AssetProvider is accepted wherever a AVAsset (or one of its subclasses) is expected.
 type AssetProvider interface {
 	objref.Object
+	isAsset()
 }
 
 // AssetDownloadStorageManagementPolicyProvider is accepted wherever a AVAssetDownloadStorageManagementPolicy (or one of its subclasses) is expected.
 type AssetDownloadStorageManagementPolicyProvider interface {
 	objref.Object
+	isAssetDownloadStorageManagementPolicy()
 }
 
 // AssetReaderOutputProvider is accepted wherever a AVAssetReaderOutput (or one of its subclasses) is expected.
 type AssetReaderOutputProvider interface {
 	objref.Object
+	isAssetReaderOutput()
 }
 
 // AssetResourceLoadingRequestProvider is accepted wherever a AVAssetResourceLoadingRequest (or one of its subclasses) is expected.
 type AssetResourceLoadingRequestProvider interface {
 	objref.Object
+	isAssetResourceLoadingRequest()
 }
 
 // AssetTrackProvider is accepted wherever a AVAssetTrack (or one of its subclasses) is expected.
 type AssetTrackProvider interface {
 	objref.Object
+	isAssetTrack()
 }
 
 // AssetTrackSegmentProvider is accepted wherever a AVAssetTrackSegment (or one of its subclasses) is expected.
 type AssetTrackSegmentProvider interface {
 	objref.Object
+	isAssetTrackSegment()
 }
 
 // AudioMixProvider is accepted wherever a AVAudioMix (or one of its subclasses) is expected.
 type AudioMixProvider interface {
 	objref.Object
+	isAudioMix()
 }
 
 // AudioMixInputParametersProvider is accepted wherever a AVAudioMixInputParameters (or one of its subclasses) is expected.
 type AudioMixInputParametersProvider interface {
 	objref.Object
+	isAudioMixInputParameters()
 }
 
 // CaptionProvider is accepted wherever a AVCaption (or one of its subclasses) is expected.
 type CaptionProvider interface {
 	objref.Object
+	isCaption()
 }
 
 // CaptionConversionAdjustmentProvider is accepted wherever a AVCaptionConversionAdjustment (or one of its subclasses) is expected.
 type CaptionConversionAdjustmentProvider interface {
 	objref.Object
+	isCaptionConversionAdjustment()
 }
 
 // CaptionRegionProvider is accepted wherever a AVCaptionRegion (or one of its subclasses) is expected.
 type CaptionRegionProvider interface {
 	objref.Object
+	isCaptionRegion()
 }
 
 // CaptureControlProvider is accepted wherever a AVCaptureControl (or one of its subclasses) is expected.
 type CaptureControlProvider interface {
 	objref.Object
+	isCaptureControl()
 }
 
 // CaptureFileOutputProvider is accepted wherever a AVCaptureFileOutput (or one of its subclasses) is expected.
 type CaptureFileOutputProvider interface {
 	objref.Object
+	isCaptureFileOutput()
 }
 
 // CaptureInputProvider is accepted wherever a AVCaptureInput (or one of its subclasses) is expected.
 type CaptureInputProvider interface {
 	objref.Object
+	isCaptureInput()
 }
 
 // CaptureOutputProvider is accepted wherever a AVCaptureOutput (or one of its subclasses) is expected.
 type CaptureOutputProvider interface {
 	objref.Object
+	isCaptureOutput()
 }
 
 // CompositionProvider is accepted wherever a AVComposition (or one of its subclasses) is expected.
 type CompositionProvider interface {
 	objref.Object
+	isComposition()
 }
 
 // CompositionTrackProvider is accepted wherever a AVCompositionTrack (or one of its subclasses) is expected.
 type CompositionTrackProvider interface {
 	objref.Object
+	isCompositionTrack()
 }
 
 // ContentKeyRequestProvider is accepted wherever a AVContentKeyRequest (or one of its subclasses) is expected.
 type ContentKeyRequestProvider interface {
 	objref.Object
+	isContentKeyRequest()
 }
 
 // DateRangeMetadataGroupProvider is accepted wherever a AVDateRangeMetadataGroup (or one of its subclasses) is expected.
 type DateRangeMetadataGroupProvider interface {
 	objref.Object
+	isDateRangeMetadataGroup()
 }
 
 // DelegatingPlaybackCoordinatorPlaybackControlCommandProvider is accepted wherever a AVDelegatingPlaybackCoordinatorPlaybackControlCommand (or one of its subclasses) is expected.
 type DelegatingPlaybackCoordinatorPlaybackControlCommandProvider interface {
 	objref.Object
+	isDelegatingPlaybackCoordinatorPlaybackControlCommand()
 }
 
 // FragmentedAssetMinderProvider is accepted wherever a AVFragmentedAssetMinder (or one of its subclasses) is expected.
 type FragmentedAssetMinderProvider interface {
 	objref.Object
+	isFragmentedAssetMinder()
 }
 
 // MediaSelectionProvider is accepted wherever a AVMediaSelection (or one of its subclasses) is expected.
 type MediaSelectionProvider interface {
 	objref.Object
+	isMediaSelection()
 }
 
 // MediaSelectionGroupProvider is accepted wherever a AVMediaSelectionGroup (or one of its subclasses) is expected.
 type MediaSelectionGroupProvider interface {
 	objref.Object
+	isMediaSelectionGroup()
 }
 
 // MetadataBodyObjectProvider is accepted wherever a AVMetadataBodyObject (or one of its subclasses) is expected.
 type MetadataBodyObjectProvider interface {
 	objref.Object
+	isMetadataBodyObject()
 }
 
 // MetadataGroupProvider is accepted wherever a AVMetadataGroup (or one of its subclasses) is expected.
 type MetadataGroupProvider interface {
 	objref.Object
+	isMetadataGroup()
 }
 
 // MetadataItemProvider is accepted wherever a AVMetadataItem (or one of its subclasses) is expected.
 type MetadataItemProvider interface {
 	objref.Object
+	isMetadataItem()
 }
 
 // MetadataObjectProvider is accepted wherever a AVMetadataObject (or one of its subclasses) is expected.
 type MetadataObjectProvider interface {
 	objref.Object
+	isMetadataObject()
 }
 
 // MetricEventProvider is accepted wherever a AVMetricEvent (or one of its subclasses) is expected.
 type MetricEventProvider interface {
 	objref.Object
+	isMetricEvent()
 }
 
 // MetricPlayerItemLikelyToKeepUpEventProvider is accepted wherever a AVMetricPlayerItemLikelyToKeepUpEvent (or one of its subclasses) is expected.
 type MetricPlayerItemLikelyToKeepUpEventProvider interface {
 	objref.Object
+	isMetricPlayerItemLikelyToKeepUpEvent()
 }
 
 // MetricPlayerItemRateChangeEventProvider is accepted wherever a AVMetricPlayerItemRateChangeEvent (or one of its subclasses) is expected.
 type MetricPlayerItemRateChangeEventProvider interface {
 	objref.Object
+	isMetricPlayerItemRateChangeEvent()
 }
 
 // MovieProvider is accepted wherever a AVMovie (or one of its subclasses) is expected.
 type MovieProvider interface {
 	objref.Object
+	isMovie()
 }
 
 // MovieTrackProvider is accepted wherever a AVMovieTrack (or one of its subclasses) is expected.
 type MovieTrackProvider interface {
 	objref.Object
+	isMovieTrack()
 }
 
 // PlaybackCoordinatorProvider is accepted wherever a AVPlaybackCoordinator (or one of its subclasses) is expected.
 type PlaybackCoordinatorProvider interface {
 	objref.Object
+	isPlaybackCoordinator()
 }
 
 // PlayerProvider is accepted wherever a AVPlayer (or one of its subclasses) is expected.
 type PlayerProvider interface {
 	objref.Object
+	isPlayer()
 }
 
 // PlayerInterstitialEventMonitorProvider is accepted wherever a AVPlayerInterstitialEventMonitor (or one of its subclasses) is expected.
 type PlayerInterstitialEventMonitorProvider interface {
 	objref.Object
+	isPlayerInterstitialEventMonitor()
 }
 
 // PlayerItemMediaDataCollectorProvider is accepted wherever a AVPlayerItemMediaDataCollector (or one of its subclasses) is expected.
 type PlayerItemMediaDataCollectorProvider interface {
 	objref.Object
+	isPlayerItemMediaDataCollector()
 }
 
 // PlayerItemOutputProvider is accepted wherever a AVPlayerItemOutput (or one of its subclasses) is expected.
 type PlayerItemOutputProvider interface {
 	objref.Object
+	isPlayerItemOutput()
 }
 
 // TimedMetadataGroupProvider is accepted wherever a AVTimedMetadataGroup (or one of its subclasses) is expected.
 type TimedMetadataGroupProvider interface {
 	objref.Object
+	isTimedMetadataGroup()
 }
 
 // URLAssetProvider is accepted wherever a AVURLAsset (or one of its subclasses) is expected.
 type URLAssetProvider interface {
 	objref.Object
+	isURLAsset()
 }
 
 // VideoCompositionProvider is accepted wherever a AVVideoComposition (or one of its subclasses) is expected.
 type VideoCompositionProvider interface {
 	objref.Object
+	isVideoComposition()
 }
 
 // VideoCompositionInstructionProvider is accepted wherever a AVVideoCompositionInstruction (or one of its subclasses) is expected.
 type VideoCompositionInstructionProvider interface {
 	objref.Object
+	isVideoCompositionInstruction()
 }
 
 // VideoCompositionLayerInstructionProvider is accepted wherever a AVVideoCompositionLayerInstruction (or one of its subclasses) is expected.
 type VideoCompositionLayerInstructionProvider interface {
 	objref.Object
+	isVideoCompositionLayerInstruction()
 }

@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a user-selectable playback speed in a playback user interface.
-//
 // PlaybackSpeed is an idiomatic wrapper over the Objective-C class AVPlaybackSpeed.
+//
+// An object that represents a user-selectable playback speed in a playback user interface.
 type PlaybackSpeed struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PlaybackSpeedFromID(id objc.ID) *PlaybackSpeed {
 	if id == 0 {
 		return nil
 	}
-	x := &PlaybackSpeed{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlaybackSpeed{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func playbackSpeedAdopt(id objc.ID) *PlaybackSpeed {
 	if id == 0 {
 		return nil
 	}
-	x := &PlaybackSpeed{Handle: objref.Wrap(id)}
+	x := &PlaybackSpeed{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +60,26 @@ func (x *PlaybackSpeed) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a playback speed with a rate and localized name.
-//
-// NewPlaybackSpeedWithRateLocalizedName creates a new PlaybackSpeed.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlaybackSpeed) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPlaybackSpeedWithRateLocalizedName creates a playback speed with a rate and localized name.
 func NewPlaybackSpeedWithRateLocalizedName(rate float32, localizedName string) *PlaybackSpeed {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlaybackSpeed")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRate:localizedName:"), rate, purego.NSString(localizedName))
 	return playbackSpeedAdopt(_id)
 }
 
-// The rate associated with this object. When this playback speed is selected this rate will be set in response to the play button being pressed.
+// Rate the rate associated with this object. When this playback speed is selected this rate will be set in response to the play button being pressed.
 func (x *PlaybackSpeed) Rate() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rate"))
 	return _r
 }
 
-// A localized name for this playback speed. This name will be used to represent this playback speed in playback UIs where more space is available.
+// LocalizedName a localized name for this playback speed. This name will be used to represent this playback speed in playback UIs where more space is available.
 func (x *PlaybackSpeed) LocalizedName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
 	if _r == 0 {
@@ -82,7 +88,7 @@ func (x *PlaybackSpeed) LocalizedName() string {
 	return purego.GoString(_r)
 }
 
-// A localized name for this playback speed used when space is limited. This name will be used to represent this playback speed in playback UIs where limited space is available.
+// LocalizedNumericName a localized name for this playback speed used when space is limited. This name will be used to represent this playback speed in playback UIs where limited space is available.
 func (x *PlaybackSpeed) LocalizedNumericName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedNumericName"))
 	if _r == 0 {

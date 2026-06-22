@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request to the App Store to process payment for additional functionality that your app offers.
-//
 // Payment is an idiomatic wrapper over the Objective-C class SKPayment.
+//
+// Payment is an abstract base — you do not construct it directly. Construct one of [MutablePayment] and pass it where a Payment is accepted.
+//
+// A request to the App Store to process payment for additional functionality that your app offers.
 type Payment struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func PaymentFromID(id objc.ID) *Payment {
 	if id == 0 {
 		return nil
 	}
-	x := &Payment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Payment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func paymentAdopt(id objc.ID) *Payment {
 	if id == 0 {
 		return nil
 	}
-	x := &Payment{Handle: objref.Wrap(id)}
+	x := &Payment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,22 +62,25 @@ func (x *Payment) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewPayment creates a new Payment.
-func NewPayment() *Payment {
-	_id := objc.Send[objc.ID](objc.ID(_class("SKPayment")), objc.RegisterName("new"))
-	return paymentAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Payment) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// RequestData wraps the corresponding Objective-C method.
 func (x *Payment) RequestData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestData"))
 	return obj.Wrap(_r)
 }
 
+// Quantity wraps the corresponding Objective-C method.
 func (x *Payment) Quantity() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("quantity"))
 	return _r
 }
 
+// ApplicationUsername wraps the corresponding Objective-C method.
 func (x *Payment) ApplicationUsername() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationUsername"))
 	if _r == 0 {
@@ -82,11 +89,13 @@ func (x *Payment) ApplicationUsername() string {
 	return purego.GoString(_r)
 }
 
+// SimulatesAskToBuyInSandbox wraps the corresponding Objective-C method.
 func (x *Payment) SimulatesAskToBuyInSandbox() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("simulatesAskToBuyInSandbox"))
 	return _r
 }
 
+// PaymentDiscount wraps the corresponding Objective-C method.
 func (x *Payment) PaymentDiscount() *PaymentDiscount {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentDiscount"))
 	return PaymentDiscountFromID(_r)
@@ -103,3 +112,10 @@ type Paymentable interface {
 }
 
 var _ Paymentable = (*Payment)(nil)
+
+// isPayment marks Payment — and, by embedding promotion, its
+// subclasses — as a member of the Payment hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Payment) isPayment() {}
+
+var _ PaymentProvider = (*Payment)(nil)

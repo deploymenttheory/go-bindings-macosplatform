@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The IKDeviceBrowserView allows you to select a camera or scanner from a list of the available devices.
-//
 // IKDeviceBrowserView is an idiomatic wrapper over the Objective-C class IKDeviceBrowserView.
+//
+// The IKDeviceBrowserView allows you to select a camera or scanner from a list of the available devices.
 type IKDeviceBrowserView struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func IKDeviceBrowserViewFromID(id objc.ID) *IKDeviceBrowserView {
 	if id == 0 {
 		return nil
 	}
-	x := &IKDeviceBrowserView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &IKDeviceBrowserView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func iKDeviceBrowserViewAdopt(id objc.ID) *IKDeviceBrowserView {
 	if id == 0 {
 		return nil
 	}
-	x := &IKDeviceBrowserView{Handle: objref.Wrap(id)}
+	x := &IKDeviceBrowserView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,121 +60,121 @@ func (x *IKDeviceBrowserView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IKDeviceBrowserView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewIKDeviceBrowserView creates a new IKDeviceBrowserView.
 func NewIKDeviceBrowserView() *IKDeviceBrowserView {
 	_id := objc.Send[objc.ID](objc.ID(_class("IKDeviceBrowserView")), objc.RegisterName("new"))
 	return iKDeviceBrowserViewAdopt(_id)
 }
 
-// Specifies the delegate object.
-//
-// WithDelegate sets delegate and returns the receiver so calls can be chained.
+// WithDelegate specifies the delegate object.
 func (x *IKDeviceBrowserView) WithDelegate(delegate obj.Object) *IKDeviceBrowserView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return x
 }
 
-// Specifies whether local cameras are displayed by the browser.
-//
-// WithDisplaysLocalCameras sets displaysLocalCameras and returns the receiver so calls can be chained.
+// WithDisplaysLocalCameras specifies whether local cameras are displayed by the browser.
 func (x *IKDeviceBrowserView) WithDisplaysLocalCameras(displaysLocalCameras bool) *IKDeviceBrowserView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysLocalCameras:"), displaysLocalCameras)
 	return x
 }
 
-// Specifies whether network cameras are displayed by the browser.
-//
-// WithDisplaysNetworkCameras sets displaysNetworkCameras and returns the receiver so calls can be chained.
+// WithDisplaysNetworkCameras specifies whether network cameras are displayed by the browser.
 func (x *IKDeviceBrowserView) WithDisplaysNetworkCameras(displaysNetworkCameras bool) *IKDeviceBrowserView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysNetworkCameras:"), displaysNetworkCameras)
 	return x
 }
 
-// Specifies whether local scanners are displayed by the browser.
-//
-// WithDisplaysLocalScanners sets displaysLocalScanners and returns the receiver so calls can be chained.
+// WithDisplaysLocalScanners specifies whether local scanners are displayed by the browser.
 func (x *IKDeviceBrowserView) WithDisplaysLocalScanners(displaysLocalScanners bool) *IKDeviceBrowserView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysLocalScanners:"), displaysLocalScanners)
 	return x
 }
 
-// Specifies whether network scanners are displayed by the browser.
-//
-// WithDisplaysNetworkScanners sets displaysNetworkScanners and returns the receiver so calls can be chained.
+// WithDisplaysNetworkScanners specifies whether network scanners are displayed by the browser.
 func (x *IKDeviceBrowserView) WithDisplaysNetworkScanners(displaysNetworkScanners bool) *IKDeviceBrowserView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysNetworkScanners:"), displaysNetworkScanners)
 	return x
 }
 
-// Specifies the browser display mode.
-//
-// WithMode sets mode and returns the receiver so calls can be chained.
+// WithMode specifies the browser display mode.
 func (x *IKDeviceBrowserView) WithMode(mode obj.Object) *IKDeviceBrowserView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	return x
 }
 
-// delegate of the IKDeviceBrowserView.
+// Delegate delegate of the IKDeviceBrowserView.
 func (x *IKDeviceBrowserView) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
+// SetDelegate wraps the corresponding Objective-C method.
 func (x *IKDeviceBrowserView) SetDelegate(delegate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
-// for device filtering - indicates that the IKDeviceBrowserView should include local cameras.
+// DisplaysLocalCameras for device filtering - indicates that the IKDeviceBrowserView should include local cameras.
 func (x *IKDeviceBrowserView) DisplaysLocalCameras() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysLocalCameras"))
 	return _r
 }
 
+// SetDisplaysLocalCameras wraps the corresponding Objective-C method.
 func (x *IKDeviceBrowserView) SetDisplaysLocalCameras(displaysLocalCameras bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysLocalCameras:"), displaysLocalCameras)
 }
 
-// for device filtering - indicates that the IKDeviceBrowserView should include network/shared cameras.
+// DisplaysNetworkCameras for device filtering - indicates that the IKDeviceBrowserView should include network/shared cameras.
 func (x *IKDeviceBrowserView) DisplaysNetworkCameras() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysNetworkCameras"))
 	return _r
 }
 
+// SetDisplaysNetworkCameras wraps the corresponding Objective-C method.
 func (x *IKDeviceBrowserView) SetDisplaysNetworkCameras(displaysNetworkCameras bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysNetworkCameras:"), displaysNetworkCameras)
 }
 
-// for device filtering - indicates that the IKDeviceBrowserView should include local scanners.
+// DisplaysLocalScanners for device filtering - indicates that the IKDeviceBrowserView should include local scanners.
 func (x *IKDeviceBrowserView) DisplaysLocalScanners() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysLocalScanners"))
 	return _r
 }
 
+// SetDisplaysLocalScanners wraps the corresponding Objective-C method.
 func (x *IKDeviceBrowserView) SetDisplaysLocalScanners(displaysLocalScanners bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysLocalScanners:"), displaysLocalScanners)
 }
 
-// for device filtering - indicates that the IKDeviceBrowserView should include network/shared scanners.
+// DisplaysNetworkScanners for device filtering - indicates that the IKDeviceBrowserView should include network/shared scanners.
 func (x *IKDeviceBrowserView) DisplaysNetworkScanners() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysNetworkScanners"))
 	return _r
 }
 
+// SetDisplaysNetworkScanners wraps the corresponding Objective-C method.
 func (x *IKDeviceBrowserView) SetDisplaysNetworkScanners(displaysNetworkScanners bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysNetworkScanners:"), displaysNetworkScanners)
 }
 
-// one of the supported display modes (table, outline, or icon mode).
+// Mode one of the supported display modes (table, outline, or icon mode).
 func (x *IKDeviceBrowserView) Mode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mode"))
 	return obj.Wrap(_r)
 }
 
+// SetMode wraps the corresponding Objective-C method.
 func (x *IKDeviceBrowserView) SetMode(mode obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
 }
 
-// user selected device (ICCameraDevice or ICScannerDevice).
+// SelectedDevice user selected device (ICCameraDevice or ICScannerDevice).
 func (x *IKDeviceBrowserView) SelectedDevice() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedDevice"))
 	return obj.Wrap(_r)

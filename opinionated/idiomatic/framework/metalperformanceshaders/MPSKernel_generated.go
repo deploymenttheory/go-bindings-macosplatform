@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A standard interface for Metal Performance Shaders kernels.
-//
 // Kernel is an idiomatic wrapper over the Objective-C class MPSKernel.
+//
+// Kernel is an abstract base — you do not construct it directly. Construct one of [AccelerationStructure], [BinaryImageKernel], [CNNBinaryKernel], [CNNKernel], [CNNMultiaryKernel], [ImageCopyToMatrix], [ImageEDLines], [ImageFindKeypoints], [ImageGuidedFilter], [ImageHistogram], [ImageNormalizedHistogram], [MatrixBinaryKernel], [MatrixCopyToImage], [MatrixCopy], [MatrixMultiplication], [MatrixRandom], [MatrixSum], [MatrixUnaryKernel], [NDArrayMultiaryBase], [NNGraph], [NNOptimizer], [RNNMatrixInferenceLayer], [RNNMatrixTrainingLayer], [RayIntersector], [SVGF], [TemporalAA], [UnaryImageKernel] and pass it where a Kernel is accepted.
+//
+// A standard interface for Metal Performance Shaders kernels.
 type Kernel struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func KernelFromID(id objc.ID) *Kernel {
 	if id == 0 {
 		return nil
 	}
-	x := &Kernel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Kernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func kernelAdopt(id objc.ID) *Kernel {
 	if id == 0 {
 		return nil
 	}
-	x := &Kernel{Handle: objref.Wrap(id)}
+	x := &Kernel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +62,26 @@ func (x *Kernel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Called by NSCoder to decode MPSKernels This isn't the right interface to decode a MPSKernel, but it is the one that NSCoder uses. To enable your NSCoder (e.g. NSKeyedUnarchiver) to set which device to use extend the object to adopt the MPSDeviceProvider protocol. Otherwise, the Metal system default device will be used.
-//
-// NewKernelWithCoder creates a new Kernel.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Kernel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewKernelWithCoder called by NSCoder to decode MPSKernels This isn't the right interface to decode a MPSKernel, but it is the one that NSCoder uses. To enable your NSCoder (e.g. NSKeyedUnarchiver) to set which device to use extend the object to adopt the MPSDeviceProvider protocol. Otherwise, the Metal system default device will be used.
 func NewKernelWithCoder(aDecoder obj.Object) *Kernel {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSKernel")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return kernelAdopt(_id)
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *Kernel) WithLabel(label string) *Kernel {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A string to help identify this object.
+// Label a string to help identify this object.
 func (x *Kernel) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
 	if _r == 0 {
@@ -84,6 +90,7 @@ func (x *Kernel) Label() string {
 	return purego.GoString(_r)
 }
 
+// SetLabel wraps the corresponding Objective-C method.
 func (x *Kernel) SetLabel(label string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
@@ -97,3 +104,10 @@ type Kernelable interface {
 }
 
 var _ Kernelable = (*Kernel)(nil)
+
+// isKernel marks Kernel — and, by embedding promotion, its
+// subclasses — as a member of the Kernel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Kernel) isKernel() {}
+
+var _ KernelProvider = (*Kernel)(nil)

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that sends messages to the broadcasting app.
-//
 // BroadcastHandler is an idiomatic wrapper over the Objective-C class RPBroadcastHandler.
+//
+// BroadcastHandler is an abstract base — you do not construct it directly. Construct one of [BroadcastSampleHandler] and pass it where a BroadcastHandler is accepted.
+//
+// An object that sends messages to the broadcasting app.
 type BroadcastHandler struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func BroadcastHandlerFromID(id objc.ID) *BroadcastHandler {
 	if id == 0 {
 		return nil
 	}
-	x := &BroadcastHandler{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BroadcastHandler{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func broadcastHandlerAdopt(id objc.ID) *BroadcastHandler {
 	if id == 0 {
 		return nil
 	}
-	x := &BroadcastHandler{Handle: objref.Wrap(id)}
+	x := &BroadcastHandler{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +62,18 @@ func (x *BroadcastHandler) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewBroadcastHandler creates a new BroadcastHandler.
-func NewBroadcastHandler() *BroadcastHandler {
-	_id := objc.Send[objc.ID](objc.ID(_class("RPBroadcastHandler")), objc.RegisterName("new"))
-	return broadcastHandlerAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BroadcastHandler) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Sends information about the current broadcast to the broadcasting app.
+// UpdateServiceInfo sends information about the current broadcast to the broadcasting app.
 func (x *BroadcastHandler) UpdateServiceInfo(serviceInfo obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateServiceInfo:"), objref.IDOf(serviceInfo))
 }
 
-// Sends the current broadcast URL to the broadcast controller.
+// UpdateBroadcastURL sends the current broadcast URL to the broadcast controller.
 func (x *BroadcastHandler) UpdateBroadcastURL(broadcastURL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateBroadcastURL:"), rt.FileURL(broadcastURL))
 }
@@ -82,3 +86,10 @@ type BroadcastHandlerable interface {
 }
 
 var _ BroadcastHandlerable = (*BroadcastHandler)(nil)
+
+// isBroadcastHandler marks BroadcastHandler — and, by embedding promotion, its
+// subclasses — as a member of the BroadcastHandler hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *BroadcastHandler) isBroadcastHandler() {}
+
+var _ BroadcastHandlerProvider = (*BroadcastHandler)(nil)

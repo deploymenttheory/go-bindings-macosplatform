@@ -25,7 +25,8 @@ func MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsFromID(id o
 	if id == 0 {
 		return nil
 	}
-	x := &MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func mTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsAdopt(id ob
 	if id == 0 {
 		return nil
 	}
-	x := &MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams{Handle: objref.Wrap(id)}
+	x := &MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) IsKin
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize an MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-//
-// NewMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsWithResponseValueError creates a new MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams.
-func NewMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsWithResponseValueError initialize an MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
@@ -71,17 +77,19 @@ func NewMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsWithResp
 	return mTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsAdopt(_id), nil
 }
 
-// WithOperationalDataset sets operationalDataset and returns the receiver so calls can be chained.
+// WithOperationalDataset sets the property and returns the receiver so calls can be chained.
 func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) WithOperationalDataset(operationalDataset obj.Object) *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalDataset:"), objref.IDOf(operationalDataset))
 	return x
 }
 
+// OperationalDataset wraps the corresponding Objective-C method.
 func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) OperationalDataset() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationalDataset"))
 	return obj.Wrap(_r)
 }
 
+// SetOperationalDataset wraps the corresponding Objective-C method.
 func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) SetOperationalDataset(operationalDataset obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalDataset:"), objref.IDOf(operationalDataset))
 }

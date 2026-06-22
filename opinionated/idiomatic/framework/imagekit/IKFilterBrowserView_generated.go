@@ -23,7 +23,8 @@ func FilterBrowserViewFromID(id objc.ID) *FilterBrowserView {
 	if id == 0 {
 		return nil
 	}
-	x := &FilterBrowserView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FilterBrowserView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func filterBrowserViewAdopt(id objc.ID) *FilterBrowserView {
 	if id == 0 {
 		return nil
 	}
-	x := &FilterBrowserView{Handle: objref.Wrap(id)}
+	x := &FilterBrowserView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,18 +58,24 @@ func (x *FilterBrowserView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FilterBrowserView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFilterBrowserView creates a new FilterBrowserView.
 func NewFilterBrowserView() *FilterBrowserView {
 	_id := objc.Send[objc.ID](objc.ID(_class("IKFilterBrowserView")), objc.RegisterName("new"))
 	return filterBrowserViewAdopt(_id)
 }
 
-// Use this method to show and hide the Preview Use this method to show and hide the Preview from the program.
+// SetPreviewState use this method to show and hide the Preview Use this method to show and hide the Preview from the program.
 func (x *FilterBrowserView) SetPreviewState(inState bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviewState:"), inState)
 }
 
-// Returns the name of the currently selected filter. Use this method in response to a IKFilterBrowserFilterSelectedNotification or IKFilterBrowserFilterDoubleClickNotification or afer returning from a modal session.
+// FilterName returns the name of the currently selected filter. Use this method in response to a IKFilterBrowserFilterSelectedNotification or IKFilterBrowserFilterDoubleClickNotification or afer returning from a modal session.
 func (x *FilterBrowserView) FilterName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterName"))
 	if _r == 0 {

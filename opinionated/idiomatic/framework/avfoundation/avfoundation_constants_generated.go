@@ -9,91 +9,76 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// Preserve aspect ratio; fit within layer bounds. AVLayerVideoGravityResizeAspect may be used when setting the videoGravity property of an AVPlayerLayer or AVCaptureVideoPreviewLayer instance.
 // AVLayerVideoGravityResizeAspect returns the string constant AVLayerVideoGravityResizeAspect, for use as a dictionary key or argument.
 func AVLayerVideoGravityResizeAspect() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVLayerVideoGravityResizeAspect")))
 }
 
-// Preserve aspect ratio; fill layer bounds. AVLayerVideoGravityResizeAspectFill may be used when setting the videoGravity property of an AVPlayerLayer or AVCaptureVideoPreviewLayer instance.
 // AVLayerVideoGravityResizeAspectFill returns the string constant AVLayerVideoGravityResizeAspectFill, for use as a dictionary key or argument.
 func AVLayerVideoGravityResizeAspectFill() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVLayerVideoGravityResizeAspectFill")))
 }
 
-// Stretch to fill layer bounds. AVLayerVideoGravityResize may be used when setting the videoGravity property of an AVPlayerLayer or AVCaptureVideoPreviewLayer instance.
 // AVLayerVideoGravityResize returns the string constant AVLayerVideoGravityResize, for use as a dictionary key or argument.
 func AVLayerVideoGravityResize() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVLayerVideoGravityResize")))
 }
 
-// Used to specify FairPlay Streaming (FPS) as the method of key delivery.
 // AVContentKeySystemFairPlayStreaming returns the string constant AVContentKeySystemFairPlayStreaming, for use as a dictionary key or argument.
 func AVContentKeySystemFairPlayStreaming() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeySystemFairPlayStreaming")))
 }
 
-// Used to specify clear key as the method of key delivery.
 // AVContentKeySystemClearKey returns the string constant AVContentKeySystemClearKey, for use as a dictionary key or argument.
 func AVContentKeySystemClearKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeySystemClearKey")))
 }
 
-// Used to specify a token that could be used to authorize playback of associated content key recipients.
 // AVContentKeySystemAuthorizationToken returns the string constant AVContentKeySystemAuthorizationToken, for use as a dictionary key or argument.
 func AVContentKeySystemAuthorizationToken() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeySystemAuthorizationToken")))
 }
 
-// Specifies the versions of the content protection protocol supported by the application; as an NSArray of one or more NSNumber objects. If this option is not set, an appropriate protocol version will be selected based on sideband information such as an associated HLS playlist. If such information is not available, a protocol version of 1 is assumed
 // AVContentKeySessionServerPlaybackContextOptionProtocolVersions returns the string constant AVContentKeySessionServerPlaybackContextOptionProtocolVersions, for use as a dictionary key or argument.
 func AVContentKeySessionServerPlaybackContextOptionProtocolVersions() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeySessionServerPlaybackContextOptionProtocolVersions")))
 }
 
-// Specifies a nonce as a 8-byte NSData object to be included in the secure server playback context (SPC) in order to prevent replay attacks. If not specified default server challenge of 0 is assumed.
 // AVContentKeySessionServerPlaybackContextOptionServerChallenge returns the string constant AVContentKeySessionServerPlaybackContextOptionServerChallenge, for use as a dictionary key or argument.
 func AVContentKeySessionServerPlaybackContextOptionServerChallenge() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeySessionServerPlaybackContextOptionServerChallenge")))
 }
 
-// Indicates that the content key request should be retried because the key response was not set soon enough either due the initial request/response was taking too long, or a lease was expiring in the meantime.
 // AVContentKeyRequestRetryReasonTimedOut returns the string constant AVContentKeyRequestRetryReasonTimedOut, for use as a dictionary key or argument.
 func AVContentKeyRequestRetryReasonTimedOut() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeyRequestRetryReasonTimedOut")))
 }
 
-// Indicates that the content key request should be retried because a key response with expired lease was set on the previous content key request.
 // AVContentKeyRequestRetryReasonReceivedResponseWithExpiredLease returns the string constant AVContentKeyRequestRetryReasonReceivedResponseWithExpiredLease, for use as a dictionary key or argument.
 func AVContentKeyRequestRetryReasonReceivedResponseWithExpiredLease() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeyRequestRetryReasonReceivedResponseWithExpiredLease")))
 }
 
-// Indicates that the content key request should be retried because an obsolete key response was set on the previous content key request.
 // AVContentKeyRequestRetryReasonReceivedObsoleteContentKey returns the string constant AVContentKeyRequestRetryReasonReceivedObsoleteContentKey, for use as a dictionary key or argument.
 func AVContentKeyRequestRetryReasonReceivedObsoleteContentKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeyRequestRetryReasonReceivedObsoleteContentKey")))
 }
 
-// Request secure token to have extended validation data. The value for the key should be previously created offline key using -[AVContentKeyRequest persistableContentKeyFromKeyVendorResponse:options:error:].
 // AVContentKeyRequestRequiresValidationDataInSecureTokenKey returns the string constant AVContentKeyRequestRequiresValidationDataInSecureTokenKey, for use as a dictionary key or argument.
 func AVContentKeyRequestRequiresValidationDataInSecureTokenKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeyRequestRequiresValidationDataInSecureTokenKey")))
 }
 
-// Specifies the versions of the content protection protocol supported by the application as an NSArray of one or more NSNumber objects.
 // AVContentKeyRequestProtocolVersionsKey returns the string constant AVContentKeyRequestProtocolVersionsKey, for use as a dictionary key or argument.
 func AVContentKeyRequestProtocolVersionsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeyRequestProtocolVersionsKey")))
 }
 
-// Value is an Boolean indicating whether the user's deviceID contained in the SPC blob during FairPlay key exchange should be randomized using a system generated seed Content providers use the SPC to distinguish the playback device from other devices, typically to enforce per-screen business rule limits. If the app developer, in cooperation with the content vendor, does not require to distinguish the playback device, they can further enhance user privacy by making this identifier non-constant, using this option. In either case, apps are not allowed to store or use the FairPlay anonymized device ID for anything other than to enforce business rule limits. App developers must use the AppTrackingTransparency framework to disclose to users if the application or the related FairPlay Key Server collect data about end users and share it with other companies for purposes of tracking across apps and web sites. When true, the system generates a random seed with which the device id will be randomized. To override the seed used; use this property in conjunction with AVContentKeyRequestRandomDeviceIdentifierSeedKey to provide a seed generated by your application.
 // AVContentKeyRequestShouldRandomizeDeviceIdentifierKey returns the string constant AVContentKeyRequestShouldRandomizeDeviceIdentifierKey, for use as a dictionary key or argument.
 func AVContentKeyRequestShouldRandomizeDeviceIdentifierKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeyRequestShouldRandomizeDeviceIdentifierKey")))
 }
 
-// Value is an NSData containing a 16-byte seed to randomize the user's deviceID contained in the SPC blob during FairPlay key exchange This property must be used in conjunction with AVContentKeyRequestShouldRandomizeDeviceIdentifierKey. Use a RND function to generate a 16 byte seed. This seed will be used to randomize the user's anonymized device ID if AVContentKeyRequestShouldRandomizeDeviceIdentifierKey is true. Content providers use the SPC to distinguish the playback device from other devices, typically to enforce per-screen business rule limits. If the app developer, in cooperation with the content vendor, does not require to distinguish the playback device, they can further enhance user privacy by making this identifier non-constant, using this option. In either case, apps are not allowed to store or use the FairPlay anonymized device ID for anything other than to enforce business rule limits. App developers must use the AppTrackingTransparency framework to disclose to users if the application or the related FairPlay Key Server collect data about end users and share it with other companies for purposes of tracking across apps and web sites.
 // AVContentKeyRequestRandomDeviceIdentifierSeedKey returns the string constant AVContentKeyRequestRandomDeviceIdentifierSeedKey, for use as a dictionary key or argument.
 func AVContentKeyRequestRandomDeviceIdentifierSeedKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeyRequestRandomDeviceIdentifierSeedKey")))
@@ -134,15 +119,12 @@ func AVMediaTypeMuxed() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("
 // AVMediaTypeHaptic returns the string constant AVMediaTypeHaptic, for use as a dictionary key or argument.
 func AVMediaTypeHaptic() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVMediaTypeHaptic"))) }
 
-// Indicates that the video range as SDR
 // AVVideoRangeSDR returns the string constant AVVideoRangeSDR, for use as a dictionary key or argument.
 func AVVideoRangeSDR() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVVideoRangeSDR"))) }
 
-// Indicates that the video range as HLG
 // AVVideoRangeHLG returns the string constant AVVideoRangeHLG, for use as a dictionary key or argument.
 func AVVideoRangeHLG() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVVideoRangeHLG"))) }
 
-// Indicates that the video range as PQ
 // AVVideoRangePQ returns the string constant AVVideoRangePQ, for use as a dictionary key or argument.
 func AVVideoRangePQ() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVVideoRangePQ"))) }
 
@@ -151,301 +133,245 @@ func AVMediaTypeDepthData() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaTypeDepthData")))
 }
 
-// This media type is used only to identify the track type. An Auxiliary Picture track is not intended to be displayed; as such, the track_in_movie flag in TrackHeaderBox of these tracks will be 0. A track with this media type contain video samples the media type of the format description of which is AVMediaTypeVideo.
 // AVMediaTypeAuxiliaryPicture returns the string constant AVMediaTypeAuxiliaryPicture, for use as a dictionary key or argument.
 func AVMediaTypeAuxiliaryPicture() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaTypeAuxiliaryPicture")))
 }
 
-// A media characteristic that indicates that a track or media selection option includes visual content. AVMediaTypeVideo, AVMediaTypeSubtitle, AVMediaTypeClosedCaption are examples of media types with the characteristic AVMediaCharacteristicVisual. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 // AVMediaCharacteristicVisual returns the string constant AVMediaCharacteristicVisual, for use as a dictionary key or argument.
 func AVMediaCharacteristicVisual() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicVisual")))
 }
 
-// A media characteristic that indicates that a track or media selection option includes audible content. AVMediaTypeAudio is a media type with the characteristic AVMediaCharacteristicAudible. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 // AVMediaCharacteristicAudible returns the string constant AVMediaCharacteristicAudible, for use as a dictionary key or argument.
 func AVMediaCharacteristicAudible() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicAudible")))
 }
 
-// A media characteristic that indicates that a track or media selection option includes legible content. AVMediaTypeSubtitle and AVMediaTypeClosedCaption are examples of media types with the characteristic AVMediaCharacteristicLegible. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 // AVMediaCharacteristicLegible returns the string constant AVMediaCharacteristicLegible, for use as a dictionary key or argument.
 func AVMediaCharacteristicLegible() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicLegible")))
 }
 
-// A media characteristic that indicates that a track or media selection option includes content that's frame-based. Frame-based content typically comprises discrete media samples that, once rendered, can remain current for indefinite periods of time without additional processing in support of "time-stretching". Further, any dependencies between samples are always explicitly signalled, so that the operations required to render any single sample can readily be performed on demand. AVMediaTypeVideo is the most common type of frame-based media. AVMediaTypeAudio is the most common counterexample. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 // AVMediaCharacteristicFrameBased returns the string constant AVMediaCharacteristicFrameBased, for use as a dictionary key or argument.
 func AVMediaCharacteristicFrameBased() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicFrameBased")))
 }
 
-// A media characteristic that indicates that a track uses a wide gamut color space and therefore may make use of colors that cannot be accurately represented otherwise. A wide color space such as AVVideo*_P3_D65 contains additional dynamic range that may benefit from special treatment when compositing. Care should be taken to avoid clamping. Non-wide spaces include AVVideo*_ITU_R_709_2 and AVVideo*_SMPTE_C.
 // AVMediaCharacteristicUsesWideGamutColorSpace returns the string constant AVMediaCharacteristicUsesWideGamutColorSpace, for use as a dictionary key or argument.
 func AVMediaCharacteristicUsesWideGamutColorSpace() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicUsesWideGamutColorSpace")))
 }
 
-// A media characteristic that indicates that a track contains HDR video. HDR video contains extended dynamic range that requires explicit support when compositing. The value of this characteristic is
 // AVMediaCharacteristicContainsHDRVideo returns the string constant AVMediaCharacteristicContainsHDRVideo, for use as a dictionary key or argument.
 func AVMediaCharacteristicContainsHDRVideo() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicContainsHDRVideo")))
 }
 
-// A media characteristic that indicates that a track contains an alpha channel. To determine whether alpha is straight or pre-multiplied, look for the format description extension with key kCMFormatDescriptionExtension_AlphaChannelMode.
 // AVMediaCharacteristicContainsAlphaChannel returns the string constant AVMediaCharacteristicContainsAlphaChannel, for use as a dictionary key or argument.
 func AVMediaCharacteristicContainsAlphaChannel() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicContainsAlphaChannel")))
 }
 
-// A media characteristic that indicates that a track or media selection option includes content that's marked by the content author as intrinsic to the presentation of the asset. Example: an option that presents the main program audio for the presentation, regardless of locale, would typically have this characteristic. The value of this characteristic is
 // AVMediaCharacteristicIsMainProgramContent returns the string constant AVMediaCharacteristicIsMainProgramContent, for use as a dictionary key or argument.
 func AVMediaCharacteristicIsMainProgramContent() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicIsMainProgramContent")))
 }
 
-// A media characteristic that indicates that a track or media selection option includes content that's marked by the content author as auxiliary to the presentation of the asset. The value of this characteristic is
 // AVMediaCharacteristicIsAuxiliaryContent returns the string constant AVMediaCharacteristicIsAuxiliaryContent, for use as a dictionary key or argument.
 func AVMediaCharacteristicIsAuxiliaryContent() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicIsAuxiliaryContent")))
 }
 
-// A media characteristic that indicates that a track or media selection option includes content that's marked by the content author as original to the principal production of the media, as opposed to supplementary or derivative content created by means of language translation or by other means. The value of this characteristic is
 // AVMediaCharacteristicIsOriginalContent returns the string constant AVMediaCharacteristicIsOriginalContent, for use as a dictionary key or argument.
 func AVMediaCharacteristicIsOriginalContent() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicIsOriginalContent")))
 }
 
-// A media characteristic that indicates that a track or media selection option presents only forced subtitles. Media options with forced-only subtitles are typically selected when 1) the user has not selected a legible option with an accessibility characteristic or an auxiliary purpose and 2) its locale matches the locale of the selected audible media selection option. The value of this characteristic is
 // AVMediaCharacteristicContainsOnlyForcedSubtitles returns the string constant AVMediaCharacteristicContainsOnlyForcedSubtitles, for use as a dictionary key or argument.
 func AVMediaCharacteristicContainsOnlyForcedSubtitles() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicContainsOnlyForcedSubtitles")))
 }
 
-// A media characteristic that indicates that a track or media selection option includes legible content in the language of its specified locale that: - transcribes spoken dialog and - identifies speakers whenever other visual cues are insufficient for a viewer to determine who is speaking. Legible tracks provided for accessibility purposes are typically tagged both with this characteristic as well as with AVMediaCharacteristicDescribesMusicAndSoundForAccessibility. A legible track provided for accessibility purposes that's associated with an audio track that has no spoken dialog can be tagged with this characteristic, because it trivially meets these requirements. The value of this characteristic is
 // AVMediaCharacteristicTranscribesSpokenDialogForAccessibility returns the string constant AVMediaCharacteristicTranscribesSpokenDialogForAccessibility, for use as a dictionary key or argument.
 func AVMediaCharacteristicTranscribesSpokenDialogForAccessibility() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicTranscribesSpokenDialogForAccessibility")))
 }
 
-// A media characteristic that indicates that a track or media selection option includes legible content in the language of its specified locale that: - describes music and - describes sound other than spoken dialog, such as sound effects and significant silences, occurring in program audio. Legible tracks provided for accessibility purposes are typically tagged both with this characteristic as well as with AVMediaCharacteristicTranscribesSpokenDialogForAccessibility. A legible track provided for accessibility purposes that's associated with an audio track without music and without sound other than spoken dialog -- lacking even significant silences -- can be tagged with this characteristic, because it trivially meets these requirements. The value of this characteristic is
 // AVMediaCharacteristicDescribesMusicAndSoundForAccessibility returns the string constant AVMediaCharacteristicDescribesMusicAndSoundForAccessibility, for use as a dictionary key or argument.
 func AVMediaCharacteristicDescribesMusicAndSoundForAccessibility() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicDescribesMusicAndSoundForAccessibility")))
 }
 
-// A media characteristic that indicates that a track or media selection option includes audio that has been prepared or otherwise processed to heighten the intelligibility of speech. The value of this characteristic is
 // AVMediaCharacteristicEnhancesSpeechIntelligibility returns the string constant AVMediaCharacteristicEnhancesSpeechIntelligibility, for use as a dictionary key or argument.
 func AVMediaCharacteristicEnhancesSpeechIntelligibility() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicEnhancesSpeechIntelligibility")))
 }
 
-// A media characteristic that indicates that a track or media selection option provides legible content in the language of its specified locale that has been edited for ease of reading. The value of this characteristic is
 // AVMediaCharacteristicEasyToRead returns the string constant AVMediaCharacteristicEasyToRead, for use as a dictionary key or argument.
 func AVMediaCharacteristicEasyToRead() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicEasyToRead")))
 }
 
-// A media characteristic that indicates that a track or media selection option provides descriptions of the visual portion of the presentation that are sufficient to comprehend essential information that it depicts, such as action and setting. See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:]. The value of this characteristic is
 // AVMediaCharacteristicDescribesVideoForAccessibility returns the string constant AVMediaCharacteristicDescribesVideoForAccessibility, for use as a dictionary key or argument.
 func AVMediaCharacteristicDescribesVideoForAccessibility() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicDescribesVideoForAccessibility")))
 }
 
-// A media characteristic that indicates that a track or media selection option contains a language or dialect translation of originally or previously produced content, intended to be used as a substitute for that content by users who prefer its designated language. See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:]. The value of this characteristic is
 // AVMediaCharacteristicLanguageTranslation returns the string constant AVMediaCharacteristicLanguageTranslation, for use as a dictionary key or argument.
 func AVMediaCharacteristicLanguageTranslation() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicLanguageTranslation")))
 }
 
-// A media characteristic that indicates that a track or media selection option contains a language or dialect translation of originally or previously produced content, created by substituting most or all of the dialog in a previous mix of audio content with dialog spoken in its designated language. Tracks to which this characteristic is assigned should typically also be assigned the characteristic AVMediaCharacteristicLanguageTranslation. See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:]. The value of this characteristic is
 // AVMediaCharacteristicDubbedTranslation returns the string constant AVMediaCharacteristicDubbedTranslation, for use as a dictionary key or argument.
 func AVMediaCharacteristicDubbedTranslation() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicDubbedTranslation")))
 }
 
-// A media characteristic that indicates that a track or media selection option contains a language translation of originally or previously produced content, created by adding, in its designated language, a verbal interpretation of dialog and translations of other important information to a new mix of the audio content. Tracks to which this characteristic is assigned should typically also be assigned the characteristic AVMediaCharacteristicLanguageTranslation. See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:]. The value of this characteristic is
 // AVMediaCharacteristicVoiceOverTranslation returns the string constant AVMediaCharacteristicVoiceOverTranslation, for use as a dictionary key or argument.
 func AVMediaCharacteristicVoiceOverTranslation() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicVoiceOverTranslation")))
 }
 
-// A media characteristic that indicates that a track or media selection option includes haptic content that's marked by the content author as providing minimal tactile stimulation. Example: an option that presents low strength haptics feedback when user is actively attending the device, would typically have this characteristic. See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:]. The value of this characteristic is
 // AVMediaCharacteristicTactileMinimal returns the string constant AVMediaCharacteristicTactileMinimal, for use as a dictionary key or argument.
 func AVMediaCharacteristicTactileMinimal() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicTactileMinimal")))
 }
 
-// A media characteristic that indicates that a track contains stereoscopic video captured in a multiview compression format. Stereoscopic video contains two views with one view for the left eye and one view for the right eye. Multiview video contains more than one view (not necessarily stereoscopic) in the same compressed video sample. The combination of stereoscopic and multiview indicates that multiview carriage is used to carry at least two stereoscopic views. It does not imply that there might not be more than two views. Access to the two stereo views may require opt-in to retrieve both views. Accessing only one of the left or right stereoscopic views as a fallback for playback or compositing where stereoscopic rendering is not supported may itself not be supported. The value of this characteristic is
 // AVMediaCharacteristicContainsStereoMultiviewVideo returns the string constant AVMediaCharacteristicContainsStereoMultiviewVideo, for use as a dictionary key or argument.
 func AVMediaCharacteristicContainsStereoMultiviewVideo() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicContainsStereoMultiviewVideo")))
 }
 
-// A media characteristic that indicates that the stereoscopic video track carries additional information related to the stereoscopic video. This is not an indication that the encoded video carries stereoscopic views. It instead indicates that it carries additional information that may influence the interpretation of those views and contribute to a better experience. The value of this characteristic is
 // AVMediaCharacteristicCarriesVideoStereoMetadata returns the string constant AVMediaCharacteristicCarriesVideoStereoMetadata, for use as a dictionary key or argument.
 func AVMediaCharacteristicCarriesVideoStereoMetadata() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicCarriesVideoStereoMetadata")))
 }
 
-// A media characteristic that indicates the video track carries information related to the horizontal field of view. This media characteristic is currently synthesized if the CMVideoFormatDescription includes a kCMFormatDescriptionExtension_HorizontalFieldOfView extension. This is not an indication that the field of view is expanded beyond or more narrow than typical horizontal fields of view. The value of this characteristic is
 // AVMediaCharacteristicIndicatesHorizontalFieldOfView returns the string constant AVMediaCharacteristicIndicatesHorizontalFieldOfView, for use as a dictionary key or argument.
 func AVMediaCharacteristicIndicatesHorizontalFieldOfView() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicIndicatesHorizontalFieldOfView")))
 }
 
-// A media characteristic that indicates the video track carries information related to how it should be projected for display. This media characteristic is currently synthesized if the CMVideoFormatDescription specifies a non-rectilinear projection. To determine which kind of projection is indicated, look for the format description extension with key kCMFormatDescriptionExtension_ProjectionKind. The value of this characteristic is
 // AVMediaCharacteristicIndicatesNonRectilinearProjection returns the string constant AVMediaCharacteristicIndicatesNonRectilinearProjection, for use as a dictionary key or argument.
 func AVMediaCharacteristicIndicatesNonRectilinearProjection() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicIndicatesNonRectilinearProjection")))
 }
 
-// A media characteristic that indicates that a track was generated in an automated fashion by a machine. This media characteristic can be used to distinguish machine generated content from human authored content. The value of this characteristic is
 // AVMediaCharacteristicMachineGenerated returns the string constant AVMediaCharacteristicMachineGenerated, for use as a dictionary key or argument.
 func AVMediaCharacteristicMachineGenerated() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicMachineGenerated")))
 }
 
-// A UTI for the QuickTime movie file format. The value of this UTI is
 // AVFileTypeQuickTimeMovie returns the string constant AVFileTypeQuickTimeMovie, for use as a dictionary key or argument.
 func AVFileTypeQuickTimeMovie() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeQuickTimeMovie")))
 }
 
-// A UTI for the QuickTime audio file format The value of this UTI is
 // AVFileTypeQuickTimeAudio returns the string constant AVFileTypeQuickTimeAudio, for use as a dictionary key or argument.
 func AVFileTypeQuickTimeAudio() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeQuickTimeAudio")))
 }
 
-// A UTI for the MPEG-4 file format. The value of this UTI is
 // AVFileTypeMPEG4 returns the string constant AVFileTypeMPEG4, for use as a dictionary key or argument.
 func AVFileTypeMPEG4() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeMPEG4"))) }
 
-// The value of this UTI is
 // AVFileTypeAppleM4V returns the string constant AVFileTypeAppleM4V, for use as a dictionary key or argument.
 func AVFileTypeAppleM4V() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeAppleM4V")))
 }
 
-// The value of this UTI is
 // AVFileTypeAppleM4A returns the string constant AVFileTypeAppleM4A, for use as a dictionary key or argument.
 func AVFileTypeAppleM4A() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeAppleM4A")))
 }
 
-// A UTI for the 3GPP file format. The value of this UTI is
 // AVFileType3GPP returns the string constant AVFileType3GPP, for use as a dictionary key or argument.
 func AVFileType3GPP() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileType3GPP"))) }
 
-// A UTI for the 3GPP file format. The value of this UTI is
 // AVFileType3GPP2 returns the string constant AVFileType3GPP2, for use as a dictionary key or argument.
 func AVFileType3GPP2() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileType3GPP2"))) }
 
-// A UTI for the CoreAudio file format. The value of this UTI is
 // AVFileTypeCoreAudioFormat returns the string constant AVFileTypeCoreAudioFormat, for use as a dictionary key or argument.
 func AVFileTypeCoreAudioFormat() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeCoreAudioFormat")))
 }
 
-// A UTI for the WAVE audio file format. The value of this UTI is
 // AVFileTypeWAVE returns the string constant AVFileTypeWAVE, for use as a dictionary key or argument.
 func AVFileTypeWAVE() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeWAVE"))) }
 
-// A UTI for the AIFF audio file format. The value of this UTI is
 // AVFileTypeAIFF returns the string constant AVFileTypeAIFF, for use as a dictionary key or argument.
 func AVFileTypeAIFF() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeAIFF"))) }
 
-// A UTI for the AIFC audio file format. The value of this UTI is
 // AVFileTypeAIFC returns the string constant AVFileTypeAIFC, for use as a dictionary key or argument.
 func AVFileTypeAIFC() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeAIFC"))) }
 
-// A UTI for the adaptive multi-rate audio file format. The value of this UTI is
 // AVFileTypeAMR returns the string constant AVFileTypeAMR, for use as a dictionary key or argument.
 func AVFileTypeAMR() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeAMR"))) }
 
-// A UTI for the MPEG layer 3 audio file format. The value of this UTI is
 // AVFileTypeMPEGLayer3 returns the string constant AVFileTypeMPEGLayer3, for use as a dictionary key or argument.
 func AVFileTypeMPEGLayer3() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeMPEGLayer3")))
 }
 
-// A UTI for the Sun/NeXT audio file format. The value of this UTI is
 // AVFileTypeSunAU returns the string constant AVFileTypeSunAU, for use as a dictionary key or argument.
 func AVFileTypeSunAU() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeSunAU"))) }
 
-// A UTI for the AC-3 audio file format. The value of this UTI is
 // AVFileTypeAC3 returns the string constant AVFileTypeAC3, for use as a dictionary key or argument.
 func AVFileTypeAC3() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeAC3"))) }
 
-// A UTI for the enhanced AC-3 audio file format. The value of this UTI is
 // AVFileTypeEnhancedAC3 returns the string constant AVFileTypeEnhancedAC3, for use as a dictionary key or argument.
 func AVFileTypeEnhancedAC3() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeEnhancedAC3")))
 }
 
-// A UTI for the JPEG (JFIF) format. The value of this UTI is
 // AVFileTypeJPEG returns the string constant AVFileTypeJPEG, for use as a dictionary key or argument.
 func AVFileTypeJPEG() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeJPEG"))) }
 
-// A UTI for the Adobe digital negative file format. The value of this UTI is
 // AVFileTypeDNG returns the string constant AVFileTypeDNG, for use as a dictionary key or argument.
 func AVFileTypeDNG() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeDNG"))) }
 
-// A UTI for the high efficiency image file format containing HEVC compressed images. The value of this UTI is
 // AVFileTypeHEIC returns the string constant AVFileTypeHEIC, for use as a dictionary key or argument.
 func AVFileTypeHEIC() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeHEIC"))) }
 
-// A UTI for the high efficiency image file format containing H.264 compressed images. The value of this UTI is
 // AVFileTypeAVCI returns the string constant AVFileTypeAVCI, for use as a dictionary key or argument.
 func AVFileTypeAVCI() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeAVCI"))) }
 
-// A UTI for the high efficiency image file format containing images compressed with any codec. The value of this UTI is
 // AVFileTypeHEIF returns the string constant AVFileTypeHEIF, for use as a dictionary key or argument.
 func AVFileTypeHEIF() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeHEIF"))) }
 
-// A UTI for the tagged image file format. The value of this UTI is
 // AVFileTypeTIFF returns the string constant AVFileTypeTIFF, for use as a dictionary key or argument.
 func AVFileTypeTIFF() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeTIFF"))) }
 
-// A UTI for the Apple iTT caption file format The value of this UTI is
 // AVFileTypeAppleiTT returns the string constant AVFileTypeAppleiTT, for use as a dictionary key or argument.
 func AVFileTypeAppleiTT() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeAppleiTT")))
 }
 
-// A UTI for the Scenarist closed caption file format The value of this UTI is
 // AVFileTypeSCC returns the string constant AVFileTypeSCC, for use as a dictionary key or argument.
 func AVFileTypeSCC() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeSCC"))) }
 
-// A UTI for the Apple Haptics Audio Pattern file format. The value of this UTI is
 // AVFileTypeAHAP returns the string constant AVFileTypeAHAP, for use as a dictionary key or argument.
 func AVFileTypeAHAP() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeAHAP"))) }
 
-// A UTI for the Digital Imaging and Communications in Medicine (DICOM) file format. The value of this UTI is
 // AVFileTypeDICOM returns the string constant AVFileTypeDICOM, for use as a dictionary key or argument.
 func AVFileTypeDICOM() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeDICOM"))) }
 
-// A UTI for streaming key delivery content keys The value of this UTI is
 // AVStreamingKeyDeliveryContentKeyType returns the string constant AVStreamingKeyDeliveryContentKeyType, for use as a dictionary key or argument.
 func AVStreamingKeyDeliveryContentKeyType() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVStreamingKeyDeliveryContentKeyType")))
 }
 
-// A UTI for persistent streaming key delivery content keys The value of this UTI is
 // AVStreamingKeyDeliveryPersistentContentKeyType returns the string constant AVStreamingKeyDeliveryPersistentContentKeyType, for use as a dictionary key or argument.
 func AVStreamingKeyDeliveryPersistentContentKeyType() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVStreamingKeyDeliveryPersistentContentKeyType")))
 }
 
-// Apple HTTP Live Streaming profile The profile that is suitable for Apple HTTP Live Streaming.
 // AVFileTypeProfileMPEG4AppleHLS returns the string constant AVFileTypeProfileMPEG4AppleHLS, for use as a dictionary key or argument.
 func AVFileTypeProfileMPEG4AppleHLS() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeProfileMPEG4AppleHLS")))
 }
 
-// CMAF compliant profile The profile that is compliance with CMAF format.
 // AVFileTypeProfileMPEG4CMAFCompliant returns the string constant AVFileTypeProfileMPEG4CMAFCompliant, for use as a dictionary key or argument.
 func AVFileTypeProfileMPEG4CMAFCompliant() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeProfileMPEG4CMAFCompliant")))
@@ -801,7 +727,6 @@ func AVMetadataISOUserDataKeyTaggedCharacteristic() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataISOUserDataKeyTaggedCharacteristic")))
 }
 
-// ISO User data key for the content creation date/time. The value is date and time, formatted according to ISO 8601, when the content was created. For clips captured by recording devices, this is typically the date and time when the clip’s recording started. When stored in AV(Mutable)MetadataItem, the value type must be either NSDate or NSString. When NSString is used, the value uses one of ISO 8601 formats such as "2016-01-11T17:31:10Z".
 // AVMetadataISOUserDataKeyDate returns the string constant AVMetadataISOUserDataKeyDate, for use as a dictionary key or argument.
 func AVMetadataISOUserDataKeyDate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataISOUserDataKeyDate")))
@@ -1112,67 +1037,56 @@ func AVMetadataQuickTimeMetadataKeyIsMontage() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyIsMontage")))
 }
 
-// A value of type kCMMetadataBaseDataType_UInt8 indicating whether this movie is intended to be played back at the full frame rate (1), or at a slow motion rate (0). Historically, some apps have played movies recorded at frame rates of 120fps or higher in slow motion by default. With the introduction of this metadata, apps that record high-frame-rate movies may add this movie-level metadata to indicate whether the movie is intended to be played at the full frame rate (1) or at a slow motion rate (0). Apps that play movies may use this metadata, when present, to guide their behavior.
 // AVMetadataQuickTimeMetadataKeyFullFrameRatePlaybackIntent returns the string constant AVMetadataQuickTimeMetadataKeyFullFrameRatePlaybackIntent, for use as a dictionary key or argument.
 func AVMetadataQuickTimeMetadataKeyFullFrameRatePlaybackIntent() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyFullFrameRatePlaybackIntent")))
 }
 
-// A value of type `kCMMetadataBaseDataType_UInt8` indicating whether this movie is intended as a Cinematic Video (1) or not (0). This movie-level metadata is automatically added (with a value of 1) to a movie recorded using the Cinematic Video API. Clients can override it with a value of 0 to signal that this movie is not to be treated as a Cinematic Video by Apple's software like Photos.
 // AVMetadataQuickTimeMetadataKeyCinematicVideoIntent returns the string constant AVMetadataQuickTimeMetadataKeyCinematicVideoIntent, for use as a dictionary key or argument.
 func AVMetadataQuickTimeMetadataKeyCinematicVideoIntent() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyCinematicVideoIntent")))
 }
 
-// A value of type kCMMetadataBaseDataType_UTF8 indicating the sensitivity of the camera to light in terms of ISO exposure index (e.g. "800"). See SMPTE RDD 18.
 // AVMetadataQuickTimeMetadataKeyCameraISOSensitivity returns the string constant AVMetadataQuickTimeMetadataKeyCameraISOSensitivity, for use as a dictionary key or argument.
 func AVMetadataQuickTimeMetadataKeyCameraISOSensitivity() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyCameraISOSensitivity")))
 }
 
-// A value of type kCMMetadataBaseDataType_UTF8 indicating the white balance value defined by the temperature in Kelvin units (e.g. "5500K" or "5500"). See SMPTE RDD 18.
 // AVMetadataQuickTimeMetadataKeyCameraWhiteBalance returns the string constant AVMetadataQuickTimeMetadataKeyCameraWhiteBalance, for use as a dictionary key or argument.
 func AVMetadataQuickTimeMetadataKeyCameraWhiteBalance() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyCameraWhiteBalance")))
 }
 
-// A value of type kCMMetadataBaseDataType_RawData indicating the reference white balance multiplication factor data for ProRes RAW.
 // AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTWhiteBalanceFactors returns the string constant AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTWhiteBalanceFactors, for use as a dictionary key or argument.
 func AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTWhiteBalanceFactors() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTWhiteBalanceFactors")))
 }
 
-// A value of type kCMMetadataBaseDataType_RawData indicating the reference color translation matrix data for ProRes RAW.
 // AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTColorMatrices returns the string constant AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTColorMatrices, for use as a dictionary key or argument.
 func AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTColorMatrices() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTColorMatrices")))
 }
 
-// A value of type kCMMetadataBaseDataType_UTF8 indicating the exposure period expressed as an angle in minutes (1/60 degree) (e.g. "21600" or "360.00deg"").
 // AVMetadataQuickTimeMetadataKeyCameraShutterSpeedAngle returns the string constant AVMetadataQuickTimeMetadataKeyCameraShutterSpeedAngle, for use as a dictionary key or argument.
 func AVMetadataQuickTimeMetadataKeyCameraShutterSpeedAngle() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyCameraShutterSpeedAngle")))
 }
 
-// A value of type kCMMetadataBaseDataType_UTF8 indicating the exposure period expressed as a time per one frame/field period in seconds.
 // AVMetadataQuickTimeMetadataKeyCameraShutterSpeedTime returns the string constant AVMetadataQuickTimeMetadataKeyCameraShutterSpeedTime, for use as a dictionary key or argument.
 func AVMetadataQuickTimeMetadataKeyCameraShutterSpeedTime() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyCameraShutterSpeedTime")))
 }
 
-// A value of type kCMMetadataBaseDataType_UTF8 indicating measure of the amount of light transmitted through the lens. It is the focal length divided by the effective lens aperture diameter (e.g. "F2.8" or "2.8"). This is track-level metadata for video track that is associated with the camera.
 // AVMetadataQuickTimeMetadataKeyCameraLensIrisFNumber returns the string constant AVMetadataQuickTimeMetadataKeyCameraLensIrisFNumber, for use as a dictionary key or argument.
 func AVMetadataQuickTimeMetadataKeyCameraLensIrisFNumber() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyCameraLensIrisFNumber")))
 }
 
-// A value of type kCMMetadataBaseDataType_UTF8 indicating the lens model (e.g. "iPhone 16 Pro back camera 6.765mm f/1.78"). This is track-level metadata for video track that is associated with the camera.
 // AVMetadataQuickTimeMetadataKeyCameraLensModel returns the string constant AVMetadataQuickTimeMetadataKeyCameraLensModel, for use as a dictionary key or argument.
 func AVMetadataQuickTimeMetadataKeyCameraLensModel() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyCameraLensModel")))
 }
 
-// A value of type kCMMetadataBaseDataType_UTF8 indicating focal length normalized to the 35mm film equivalent value (e.g. "50.00mm"). This is track-level metadata for video track that is associated with the camera.
 // AVMetadataQuickTimeMetadataKeyCameraFocalLength35mmEquivalent returns the string constant AVMetadataQuickTimeMetadataKeyCameraFocalLength35mmEquivalent, for use as a dictionary key or argument.
 func AVMetadataQuickTimeMetadataKeyCameraFocalLength35mmEquivalent() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyCameraFocalLength35mmEquivalent")))
@@ -1903,7 +1817,6 @@ func AVMetadataID3MetadataKeyUserURL() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyUserURL")))
 }
 
-// Icecast/ShoutCAST streaming metadata
 // AVMetadataKeySpaceIcy returns the string constant AVMetadataKeySpaceIcy, for use as a dictionary key or argument.
 func AVMetadataKeySpaceIcy() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataKeySpaceIcy")))
@@ -1919,43 +1832,36 @@ func AVMetadataIcyMetadataKeyStreamURL() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIcyMetadataKeyStreamURL")))
 }
 
-// HTTP Live Streaming metadata
 // AVMetadataFormatHLSMetadata returns the string constant AVMetadataFormatHLSMetadata, for use as a dictionary key or argument.
 func AVMetadataFormatHLSMetadata() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataFormatHLSMetadata")))
 }
 
-// HLS Metadata does not define its own keySpace or keys. Use of the keySpace AVMetadataKeySpaceQuickTimeMetadata and its keys is recommended.
 // AVMetadataKeySpaceHLSDateRange returns the string constant AVMetadataKeySpaceHLSDateRange, for use as a dictionary key or argument.
 func AVMetadataKeySpaceHLSDateRange() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataKeySpaceHLSDateRange")))
 }
 
-// Keys for metadata provided by AudioToolbox's AudioFile interface. See <AudioToolbox/AudioFile.h>
 // AVMetadataKeySpaceAudioFile returns the string constant AVMetadataKeySpaceAudioFile, for use as a dictionary key or argument.
 func AVMetadataKeySpaceAudioFile() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataKeySpaceAudioFile")))
 }
 
-// Metadata format for AVMetadataItems of unknown provenance. This can occur when metadata is provided generically by an intermediate interface, such as AudioToolbox's AudioFile interface.
 // AVMetadataFormatUnknown returns the string constant AVMetadataFormatUnknown, for use as a dictionary key or argument.
 func AVMetadataFormatUnknown() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataFormatUnknown")))
 }
 
-// When present in an item's extraAttributes dictionary, identifies the resource to be used as the item's value. Values for this key are of type NSString.
 // AVMetadataExtraAttributeValueURIKey returns the string constant AVMetadataExtraAttributeValueURIKey, for use as a dictionary key or argument.
 func AVMetadataExtraAttributeValueURIKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataExtraAttributeValueURIKey")))
 }
 
-// When present in an item's extraAttributes dictionary, identifies the base URI against which other URIs related to the item are to be resolved, e.g. AVMetadataExtraAttributeValueURIKey. Values for this key are of type NSString.
 // AVMetadataExtraAttributeBaseURIKey returns the string constant AVMetadataExtraAttributeBaseURIKey, for use as a dictionary key or argument.
 func AVMetadataExtraAttributeBaseURIKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataExtraAttributeBaseURIKey")))
 }
 
-// More information about the item; specific to the item keySpace & key. For example, this key is used with the following ID3 tags: TXXX, WXXX, APIC, GEOB: carries the Description PRIV: carries the Owner Identifier
 // AVMetadataExtraAttributeInfoKey returns the string constant AVMetadataExtraAttributeInfoKey, for use as a dictionary key or argument.
 func AVMetadataExtraAttributeInfoKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataExtraAttributeInfoKey")))
@@ -2054,7 +1960,6 @@ func AVVideoWidthKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("A
 // AVVideoHeightKey returns the string constant AVVideoHeightKey, for use as a dictionary key or argument.
 func AVVideoHeightKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVVideoHeightKey"))) }
 
-// The aspect ratio of the pixels in the video frame The value for this key is an NSDictionary containing AVVideoPixelAspectRatio*Key keys.  If no value is specified for this key, the default value for the codec is used.  Usually this is 1:1, meaning square pixels. Note that prior to macOS 10.9 and iOS 7.0, this key could only be specified as part of the dictionary given for AVVideoCompressionPropertiesKey.  As of macOS 10.9 and iOS 7.0, the top level of an AVVideoSettings dictionary is the preferred place to specify this key.
 // AVVideoPixelAspectRatioKey returns the string constant AVVideoPixelAspectRatioKey, for use as a dictionary key or argument.
 func AVVideoPixelAspectRatioKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVVideoPixelAspectRatioKey")))
@@ -2070,7 +1975,6 @@ func AVVideoPixelAspectRatioVerticalSpacingKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVVideoPixelAspectRatioVerticalSpacingKey")))
 }
 
-// Defines the region within the video dimensions that will be displayed during playback The value for this key is an NSDictionary containing AVVideoCleanAperture*Key keys.  AVVideoCleanApertureWidthKey and AVVideoCleanApertureHeightKey define a clean rectangle which is centered on the video frame.  To offset this rectangle from center, use AVVideoCleanApertureHorizontalOffsetKey and AVVideoCleanApertureVerticalOffsetKey.  A positive value for AVVideoCleanApertureHorizontalOffsetKey moves the clean aperture region to the right, and a positive value for AVVideoCleanApertureVerticalOffsetKey moves the clean aperture region down. If no clean aperture region is specified, the entire frame will be displayed during playback. Note that prior to macOS 10.9 and iOS 7.0, this key could only be specified as part of the dictionary given for AVVideoCompressionPropertiesKey.  As of macOS 10.9 and iOS 7.0, the top level of an AVVideoSettings dictionary is the preferred place to specify this key.
 // AVVideoCleanApertureKey returns the string constant AVVideoCleanApertureKey, for use as a dictionary key or argument.
 func AVVideoCleanApertureKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCleanApertureKey")))
@@ -2216,13 +2120,11 @@ func AVVideoYCbCrMatrix_ITU_R_2020() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVVideoYCbCrMatrix_ITU_R_2020")))
 }
 
-// Indicates whether the client can process wide color Clients who wish to process wide color content should set the value of this key to
 // AVVideoAllowWideColorKey returns the string constant AVVideoAllowWideColorKey, for use as a dictionary key or argument.
 func AVVideoAllowWideColorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVVideoAllowWideColorKey")))
 }
 
-// The value for this key is an instance of NSDictionary, containing properties to be passed down to the video encoder. Package the below keys in an instance of NSDictionary and use it as the value for AVVideoCompressionPropertiesKey in the top-level AVVideoSettings dictionary.  In addition to the keys listed below, you can also include keys from VideoToolbox/VTCompressionProperties.h. Most keys can only be used for certain encoders.  Look at individual keys for details.
 // AVVideoCompressionPropertiesKey returns the string constant AVVideoCompressionPropertiesKey, for use as a dictionary key or argument.
 func AVVideoCompressionPropertiesKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCompressionPropertiesKey")))
@@ -2251,7 +2153,6 @@ func AVVideoAppleProRAWBitDepthKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVVideoAppleProRAWBitDepthKey")))
 }
 
-// Enables or disables frame reordering. In order to achieve the best compression while maintaining image quality, some video encoders can reorder frames.  This means that the order in which the frames will be emitted and stored (the decode order) will be different from the order in which they are presented to the video encoder (the display order). Encoding using frame reordering requires more system resources than encoding without frame reordering, so encoding performance should be taken into account when deciding whether to enable frame reordering.  This is especially important when encoding video data from a real-time source, such as AVCaptureVideoDataOutput.  In this situation, using a value of
 // AVVideoAllowFrameReorderingKey returns the string constant AVVideoAllowFrameReorderingKey, for use as a dictionary key or argument.
 func AVVideoAllowFrameReorderingKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVVideoAllowFrameReorderingKey")))
@@ -2322,7 +2223,6 @@ func AVVideoProfileLevelH264HighAutoLevel() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVVideoProfileLevelH264HighAutoLevel")))
 }
 
-// The entropy encoding mode for H.264 compression. If supported by an H.264 encoder, this property controls whether the encoder should use Context-based Adaptive Variable Length Coding (CAVLC) or Context-based Adaptive Binary Arithmetic Coding (CABAC).  CABAC generally gives better compression at the expense of higher computational overhead.  The default value is encoder-specific and may change depending on other encoder settings.  Care should be taken when using this property -- changes may result in a configuration which is not compatible with a requested Profile and Level.  Results in this case are undefined, and could include encode errors or a non-compliant output stream.
 // AVVideoH264EntropyModeKey returns the string constant AVVideoH264EntropyModeKey, for use as a dictionary key or argument.
 func AVVideoH264EntropyModeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVVideoH264EntropyModeKey")))
@@ -2338,145 +2238,121 @@ func AVVideoH264EntropyModeCABAC() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVVideoH264EntropyModeCABAC")))
 }
 
-// Indicates the expected source frame rate, if known. The frame rate is measured in frames per second. This is not used to control the frame rate; it is provided as a hint to the video encoder so that it can set up internal configuration before compression begins. The actual frame rate will depend on frame durations and may vary. This should be set if an AutoLevel AVVideoProfileLevelKey is used, or if the source content has a high frame rate (higher than 30 fps). The encoder might have to drop frames to satisfy bit stream requirements if this key is not specified.
 // AVVideoExpectedSourceFrameRateKey returns the string constant AVVideoExpectedSourceFrameRateKey, for use as a dictionary key or argument.
 func AVVideoExpectedSourceFrameRateKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVVideoExpectedSourceFrameRateKey")))
 }
 
-// The desired average number of non-droppable frames to be encoded for each second of video. Some video encoders can produce a flexible mixture of non-droppable frames and droppable frames.  The difference between these types is that it is necessary for a video decoder to decode a non-droppable frame in order to successfully decode subsequent frames, whereas droppable frames are optional and can be skipped without impact on decode of subsequent frames.  Having a proportion of droppable frames in a sequence has advantages for temporal scalability: at playback time more or fewer frames may be decoded depending on the play rate.  This property requests that the encoder emit an overall proportion of non-droppable and droppable frames so that there are the specified number of non-droppable frames per second. For example, to specify that the encoder should include an average of 30 non-droppable frames for each second of video: [myVideoSettings setObject:
 // AVVideoAverageNonDroppableFrameRateKey returns the string constant AVVideoAverageNonDroppableFrameRateKey, for use as a dictionary key or argument.
 func AVVideoAverageNonDroppableFrameRateKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVVideoAverageNonDroppableFrameRateKey")))
 }
 
-// The value for this key is an instance of NSDictionary, containing properties to be passed down to the video decoder. Package the below keys in an instance of NSDictionary and use it as the value for AVVideoDecompressionPropertiesKey in the top-level AVVideoSettings dictionary.  In addition to the keys listed below, you can also include keys from VideoToolbox/VTDecompressionProperties.h. Most keys can only be used for certain decoders.  Look at individual keys for details.
 // AVVideoDecompressionPropertiesKey returns the string constant AVVideoDecompressionPropertiesKey, for use as a dictionary key or argument.
 func AVVideoDecompressionPropertiesKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVVideoDecompressionPropertiesKey")))
 }
 
-// The video encoder specification includes options for choosing a specific video encoder. The value for this key is a dictionary containing kVTVideoEncoderSpecification_* keys specified in the VideoToolbox framework.  This key should be specified at the top level of an AVVideoSettings dictionary.
 // AVVideoEncoderSpecificationKey returns the string constant AVVideoEncoderSpecificationKey, for use as a dictionary key or argument.
 func AVVideoEncoderSpecificationKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVVideoEncoderSpecificationKey")))
 }
 
-// Both pixel aspect ratio and clean aperture will be applied. An image's clean aperture is a region of video free from transition artifacts caused by the encoding of the signal.
 // AVVideoApertureModeCleanAperture returns the string constant AVVideoApertureModeCleanAperture, for use as a dictionary key or argument.
 func AVVideoApertureModeCleanAperture() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVVideoApertureModeCleanAperture")))
 }
 
-// Only pixel aspect ratio will be applied. The image is not cropped to the clean aperture region, but it is scaled according to the pixel aspect ratio. Use this option when you want to see all the pixels in your video, including the edges.
 // AVVideoApertureModeProductionAperture returns the string constant AVVideoApertureModeProductionAperture, for use as a dictionary key or argument.
 func AVVideoApertureModeProductionAperture() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVVideoApertureModeProductionAperture")))
 }
 
-// Neither pixel aspect ratio nor clean aperture will be applied. The image is not cropped to the clean aperture region and is not scaled according to the pixel aspect ratio. The encoded dimensions of the image description are displayed.
 // AVVideoApertureModeEncodedPixels returns the string constant AVVideoApertureModeEncodedPixels, for use as a dictionary key or argument.
 func AVVideoApertureModeEncodedPixels() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVVideoApertureModeEncodedPixels")))
 }
 
-// Indicates whether the asset should be prepared to indicate a precise duration and provide precise random access by time. The value for this key is a boolean NSNumber. If nil is passed as the value of the options parameter to -[AVURLAsset initWithURL:options:], or if a dictionary that lacks a value for the key AVURLAssetPreferPreciseDurationAndTimingKey is passed instead, a default value of NO is assumed. If the asset is intended to be played only, because AVPlayer will support approximate random access by time when full precision isn't available, the default value of NO will suffice. Pass YES if longer loading times are acceptable in cases in which precise timing is required. If the asset is intended to be inserted into an AVMutableComposition, precise random access is typically desirable and the value of YES is recommended. Note that such precision may require additional parsing of the resource in advance of operations that make use of any portion of it, depending on the specifics of its container format. Many container formats provide sufficient summary information for precise timing and do not require additional parsing to prepare for it; QuickTime movie files and MPEG-4 files are examples of such formats. Other formats do not provide sufficient summary information, and precise random access for them is possible only after a preliminary examination of a file's contents. If you pass YES for an asset that you intend to play via an instance of AVPlayerItem and you are prepared for playback to commence before the value of -[AVPlayerItem duration] becomes available, you can omit the key
 // AVURLAssetPreferPreciseDurationAndTimingKey returns the string constant AVURLAssetPreferPreciseDurationAndTimingKey, for use as a dictionary key or argument.
 func AVURLAssetPreferPreciseDurationAndTimingKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetPreferPreciseDurationAndTimingKey")))
 }
 
-// Indicates the MIME type that should be used to identify the format of the media resource. When a value for this key is provided, only the specified MIME type is considered in determining how to handle or parse the media resource. Any other information that may be available, such as the URL path extension or a server-provided MIME type, is ignored.
 // AVURLAssetOverrideMIMETypeKey returns the string constant AVURLAssetOverrideMIMETypeKey, for use as a dictionary key or argument.
 func AVURLAssetOverrideMIMETypeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetOverrideMIMETypeKey")))
 }
 
-// Indicates the restrictions used by the asset when resolving references to external media data. The value of this key is an NSNumber wrapping an AVAssetReferenceRestrictions enum value or the logical combination of multiple such values. Some assets can contain references to media data stored outside the asset's container file, for example in another file. This key can be used to specify a policy to use when these references are encountered. If an asset contains one or more references of a type that is forbidden by the reference restrictions, loading of asset properties will fail. In addition, such an asset cannot be used with other AVFoundation modules, such as AVPlayerItem or AVAssetExportSession.
 // AVURLAssetReferenceRestrictionsKey returns the string constant AVURLAssetReferenceRestrictionsKey, for use as a dictionary key or argument.
 func AVURLAssetReferenceRestrictionsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetReferenceRestrictionsKey")))
 }
 
-// HTTP cookies that the AVURLAsset may send with HTTP requests Standard cross-site policy still applies: cookies will only be sent to domains to which they apply. By default, an AVURLAsset will only have access to cookies in the client's default cookie storage that apply to the AVURLAsset's URL. You can supplement the cookies available to the asset via use of this initialization option HTTP cookies do not apply to non-HTTP(S) URLS. In HLS, many HTTP requests (e.g., media, crypt key, variant index) might be issued to different paths or hosts. In both of these cases, HTTP requests will be missing any cookies that do not apply to the AVURLAsset's URL. This init option allows the AVURLAsset to use additional HTTP cookies for those HTTP(S) requests.
 // AVURLAssetHTTPCookiesKey returns the string constant AVURLAssetHTTPCookiesKey, for use as a dictionary key or argument.
 func AVURLAssetHTTPCookiesKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetHTTPCookiesKey")))
 }
 
-// Indicates whether network requests on behalf of this asset are allowed to use the cellular interface. Default is YES.
 // AVURLAssetAllowsCellularAccessKey returns the string constant AVURLAssetAllowsCellularAccessKey, for use as a dictionary key or argument.
 func AVURLAssetAllowsCellularAccessKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetAllowsCellularAccessKey")))
 }
 
-// Indicates whether network requests on behalf of this asset are allowed to use the expensive interface (e.g. cellular, tethered, constrained). Default is YES.
 // AVURLAssetAllowsExpensiveNetworkAccessKey returns the string constant AVURLAssetAllowsExpensiveNetworkAccessKey, for use as a dictionary key or argument.
 func AVURLAssetAllowsExpensiveNetworkAccessKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetAllowsExpensiveNetworkAccessKey")))
 }
 
-// Indicates whether network requests on behalf of this asset are allowed to use the constrained interface (e.g. interfaces marked as being in data saver mode). Default is YES.
 // AVURLAssetAllowsConstrainedNetworkAccessKey returns the string constant AVURLAssetAllowsConstrainedNetworkAccessKey, for use as a dictionary key or argument.
 func AVURLAssetAllowsConstrainedNetworkAccessKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetAllowsConstrainedNetworkAccessKey")))
 }
 
-// Indicates whether alias data references in the asset should be parsed and resolved. Default is NO. Although the majority of QuickTime movie files contain all of the media data they require, some contain references to media stored in other files. While AVFoundation and CoreMedia typically employ a URL reference for this purpose, older implementations such as QuickTime 7 have commonly employed a Macintosh alias instead, as documented in the QuickTime File Format specification. If your application must work with legacy QuickTime movie files containing alias-based references to media data stored in other files, the use of this AVURLAsset initialization option is appropriate. If you provide a value for AVURLAssetReferenceRestrictionsKey, restrictions will be observed for resolved alias references just as they are for URL references. For more details about alias resolution, consult documentation of the bookmark-related interfaces of NSURL.
 // AVURLAssetShouldSupportAliasDataReferencesKey returns the string constant AVURLAssetShouldSupportAliasDataReferencesKey, for use as a dictionary key or argument.
 func AVURLAssetShouldSupportAliasDataReferencesKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetShouldSupportAliasDataReferencesKey")))
 }
 
-// Specifies the attribution of the URLs requested by this asset. Value is an NSNumber whose value is an NSURLRequestAttribution (see NSURLRequest.h). Default value is NSURLRequestAttributionDeveloper. All NSURLRequests issed on behalf of this AVURLAsset will be attributed with this value and follow the App Privacy Policy accordingly.
 // AVURLAssetURLRequestAttributionKey returns the string constant AVURLAssetURLRequestAttributionKey, for use as a dictionary key or argument.
 func AVURLAssetURLRequestAttributionKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetURLRequestAttributionKey")))
 }
 
-// Specifies the value of the User-Agent header to add to HTTP requests made by this asset. Value is an NSString Default value is the systems's default User-Agent.
 // AVURLAssetHTTPUserAgentKey returns the string constant AVURLAssetHTTPUserAgentKey, for use as a dictionary key or argument.
 func AVURLAssetHTTPUserAgentKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetHTTPUserAgentKey")))
 }
 
-// Specifies a UUID to append as the value of the query parameter "_HLS_primary_id" to selected HTTP requests issued on behalf of the asset. Supported for HLS assets only. Value is an NSUUID. Its UUID string value will be used as the query parameter. If you create AVURLAssets for the templateItems of AVPlayerInterstitialEvents and you want the instances of AVURLAsset that you create to be used during interstitial playback rather than equivalent AVURLAssets with the same URL, you must provide a value for this key that's equal to the httpSessionIdentifier of the primary AVPlayerItem's asset. See AVPlayerInterstitialEventController.h. This is especially useful if you require the use of a custom AVAssetResourceLoader delegate for interstitial assets.
 // AVURLAssetPrimarySessionIdentifierKey returns the string constant AVURLAssetPrimarySessionIdentifierKey, for use as a dictionary key or argument.
 func AVURLAssetPrimarySessionIdentifierKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetPrimarySessionIdentifierKey")))
 }
 
-// Indicates whether additional projected media signaling in the asset should be parsed and resolved as format description extensions. Default is NO.
 // AVURLAssetShouldParseExternalSphericalTagsKey returns the string constant AVURLAssetShouldParseExternalSphericalTagsKey, for use as a dictionary key or argument.
 func AVURLAssetShouldParseExternalSphericalTagsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetShouldParseExternalSphericalTagsKey")))
 }
 
-// Posted when the duration of an AVFragmentedAsset changes while it's being minded by an AVFragmentedAssetMinder, but only for changes that occur after the status of the value of
 // AVAssetDurationDidChangeNotification returns the string constant AVAssetDurationDidChangeNotification, for use as a dictionary key or argument.
 func AVAssetDurationDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetDurationDidChangeNotification")))
 }
 
-// Posted after the value of
 // AVAssetContainsFragmentsDidChangeNotification returns the string constant AVAssetContainsFragmentsDidChangeNotification, for use as a dictionary key or argument.
 func AVAssetContainsFragmentsDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetContainsFragmentsDidChangeNotification")))
 }
 
-// Posted when the asset on disk is defragmented while an AVFragmentedAsset is being minded by an AVFragmentedAssetMinder, but only if the defragmentation occurs after the status of the value of
 // AVAssetWasDefragmentedNotification returns the string constant AVAssetWasDefragmentedNotification, for use as a dictionary key or argument.
 func AVAssetWasDefragmentedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetWasDefragmentedNotification")))
 }
 
-// Posted when the collection of arrays of timed metadata groups representing chapters of an AVAsset change and when any of the contents of the timed metadata groups change, but only for changes that occur after the status of the value of
 // AVAssetChapterMetadataGroupsDidChangeNotification returns the string constant AVAssetChapterMetadataGroupsDidChangeNotification, for use as a dictionary key or argument.
 func AVAssetChapterMetadataGroupsDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetChapterMetadataGroupsDidChangeNotification")))
 }
 
-// Posted when the collection of media selection groups provided by an AVAsset changes and when any of the contents of its media selection groups change, but only for changes that occur after the status of the value of
 // AVAssetMediaSelectionGroupsDidChangeNotification returns the string constant AVAssetMediaSelectionGroupsDidChangeNotification, for use as a dictionary key or argument.
 func AVAssetMediaSelectionGroupsDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetMediaSelectionGroupsDidChangeNotification")))
@@ -2652,19 +2528,16 @@ func AVAssetExportPresetAppleM4V1080pHD() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetAppleM4V1080pHD")))
 }
 
-// Both pixel aspect ratio and clean aperture will be applied. An image's clean aperture is a region of video free from transition artifacts caused by the encoding of the signal.
 // AVAssetImageGeneratorApertureModeCleanAperture returns the string constant AVAssetImageGeneratorApertureModeCleanAperture, for use as a dictionary key or argument.
 func AVAssetImageGeneratorApertureModeCleanAperture() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetImageGeneratorApertureModeCleanAperture")))
 }
 
-// Only pixel aspect ratio will be applied. The image is not cropped to the clean aperture region, but it is scaled according to the pixel aspect ratio. Use this option when you want to see all the pixels in your video, including the edges.
 // AVAssetImageGeneratorApertureModeProductionAperture returns the string constant AVAssetImageGeneratorApertureModeProductionAperture, for use as a dictionary key or argument.
 func AVAssetImageGeneratorApertureModeProductionAperture() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetImageGeneratorApertureModeProductionAperture")))
 }
 
-// Neither pixel aspect ratio nor clean aperture will be applied. The image is not cropped to the clean aperture region and is not scaled according to the pixel aspect ratio. The encoded dimensions of the image description are displayed.
 // AVAssetImageGeneratorApertureModeEncodedPixels returns the string constant AVAssetImageGeneratorApertureModeEncodedPixels, for use as a dictionary key or argument.
 func AVAssetImageGeneratorApertureModeEncodedPixels() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetImageGeneratorApertureModeEncodedPixels")))
@@ -2680,211 +2553,176 @@ func AVAssetImageGeneratorDynamicRangePolicyMatchSource() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetImageGeneratorDynamicRangePolicyMatchSource")))
 }
 
-// Default. Pass the HDR metadata through, if present on the composed frame.
 // AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate returns the string constant AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate, for use as a dictionary key or argument.
 func AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate")))
 }
 
-// AVVideoComposition may generate HDR metadata and attach it to the rendered frame. HDR metadata generation is influenced by the color space of the rendered frame, device, and HDR metadata format platform support. Any previously attached HDR metadata of the same metadata format will be overwritten.
 // AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate returns the string constant AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate, for use as a dictionary key or argument.
 func AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate")))
 }
 
-// Specifies whether the content key request should require a persistable key to be returned from the key vendor. Value should be a NSNumber created with +[NSNumber numberWithBool:].
 // AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey returns the string constant AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey, for use as a dictionary key or argument.
 func AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey")))
 }
 
-// Indicates an association between an audio track with another audio track that contains the same content but is typically encoded in a different format that's more widely supported, used to nominate a track that should be used in place of an unsupported track. Associations of type AVTrackAssociationTypeAudioFallback are supported only between audio tracks. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding track that has content that's less widely supported, and the input parameter should be an instance of AVAssetWriterInput with a corresponding track that has content that's more widely supported. Example: Using AVTrackAssociationTypeAudioFallback, a stereo audio track with media subtype kAudioFormatMPEG4AAC could be nominated as the "fallback" for an audio track encoding the same source material but with media subtype kAudioFormatAC3 and a 5.1 channel layout. This would ensure that all clients are capable of playing back some form of the audio.
 // AVTrackAssociationTypeAudioFallback returns the string constant AVTrackAssociationTypeAudioFallback, for use as a dictionary key or argument.
 func AVTrackAssociationTypeAudioFallback() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVTrackAssociationTypeAudioFallback")))
 }
 
-// Indicates an association between a track with another track that contains chapter information. The track containing chapter information may be a text track, a video track, or a timed metadata track. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding track that has renderable content while the input parameter should be an instance of AVAssetWriterInput with a corresponding track that contains chapter metadata.
 // AVTrackAssociationTypeChapterList returns the string constant AVTrackAssociationTypeChapterList, for use as a dictionary key or argument.
 func AVTrackAssociationTypeChapterList() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVTrackAssociationTypeChapterList")))
 }
 
-// Indicates an association between a subtitle track typically containing both forced and non-forced subtitles with another subtitle track that contains only forced subtitles, for use when the user indicates that only essential subtitles should be displayed. When such an association is established, the forced subtitles in both tracks are expected to present the same content in the same language but may have different timing. Associations of type AVTrackAssociationTypeForcedSubtitlesOnly are supported only between subtitle tracks. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding subtitle track that contains non-forced subtitles, and the input parameter should be an instance of AVAssetWriterInput with a corresponding subtitle track that contains forced subtitles only.
 // AVTrackAssociationTypeForcedSubtitlesOnly returns the string constant AVTrackAssociationTypeForcedSubtitlesOnly, for use as a dictionary key or argument.
 func AVTrackAssociationTypeForcedSubtitlesOnly() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVTrackAssociationTypeForcedSubtitlesOnly")))
 }
 
-// Indicates an association between a pair of tracks that specifies that, when the first of the pair is selected, the second of the pair should be considered an appropriate default for selection also. Example: a subtitle track in the same language as an audio track may be associated with that audio track using AVTrackAssociationTypeSelectionFollower, to indicate that selection of the subtitle track, in the absence of a directive for subtitle selection from the user, can "follow" the selection of the audio track. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the input parameter should be an instance of AVAssetWriterInput whose selection may depend on the selection of the receiver. In the example above, the receiver would be the instance of AVAssetWriterInput corresponding with the audio track and the input parameter would be the instance of AVAssetWriterInput corresponding with the subtitle track.
 // AVTrackAssociationTypeSelectionFollower returns the string constant AVTrackAssociationTypeSelectionFollower, for use as a dictionary key or argument.
 func AVTrackAssociationTypeSelectionFollower() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVTrackAssociationTypeSelectionFollower")))
 }
 
-// Indicates an association between a track with another track that contains timecode information. The track containing timecode information should be a timecode track. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding track that may be a video track or an audio track while the input parameter should be an instance of AVAssetWriterInput with a corresponding timecode track.
 // AVTrackAssociationTypeTimecode returns the string constant AVTrackAssociationTypeTimecode, for use as a dictionary key or argument.
 func AVTrackAssociationTypeTimecode() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVTrackAssociationTypeTimecode")))
 }
 
-// Indicates an association between a metadata track and the track that's described or annotated via the contents of the metadata track. This track association is optional for AVAssetTracks with the mediaType AVMediaTypeMetadata. When a metadata track lacks this track association, its contents are assumed to describe or annotate the asset as a whole. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with mediaType AVMediaTypeMetadata while the input parameter should be an instance of AVAssetWriterInput that's used to create the track to which the contents of the receiver's corresponding metadata track refer.
 // AVTrackAssociationTypeMetadataReferent returns the string constant AVTrackAssociationTypeMetadataReferent, for use as a dictionary key or argument.
 func AVTrackAssociationTypeMetadataReferent() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVTrackAssociationTypeMetadataReferent")))
 }
 
-// Indicates an association between a metadata track and another track where the metadata provides additional information for rendering of that track. This track association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with mediaType, AVMediaTypeMetadata, while the input parameter should be an instance of AVAssetWriterInput for the target track that would be rendered (for example, a video track).
 // AVTrackAssociationTypeRenderMetadataSource returns the string constant AVTrackAssociationTypeRenderMetadataSource, for use as a dictionary key or argument.
 func AVTrackAssociationTypeRenderMetadataSource() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVTrackAssociationTypeRenderMetadataSource")))
 }
 
-// Posted when the timeRange of an AVFragmentedAssetTrack changes while the associated instance of AVFragmentedAsset is being minded by an AVFragmentedAssetMinder, but only for changes that occur after the status of the value of
 // AVAssetTrackTimeRangeDidChangeNotification returns the string constant AVAssetTrackTimeRangeDidChangeNotification, for use as a dictionary key or argument.
 func AVAssetTrackTimeRangeDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetTrackTimeRangeDidChangeNotification")))
 }
 
-// Posted when the array of segments of an AVFragmentedAssetTrack changes while the associated instance of AVFragmentedAsset is being minded by an AVFragmentedAssetMinder, but only for changes that occur after the status of the value of
 // AVAssetTrackSegmentsDidChangeNotification returns the string constant AVAssetTrackSegmentsDidChangeNotification, for use as a dictionary key or argument.
 func AVAssetTrackSegmentsDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetTrackSegmentsDidChangeNotification")))
 }
 
-// Posted when the collection of track associations of an AVAssetTrack changes, but only for changes that occur after the status of the value of
 // AVAssetTrackTrackAssociationsDidChangeNotification returns the string constant AVAssetTrackTrackAssociationsDidChangeNotification, for use as a dictionary key or argument.
 func AVAssetTrackTrackAssociationsDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetTrackTrackAssociationsDidChangeNotification")))
 }
 
-// Indicates that the media data should be interleaved with all other media data with this constant.
 // AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData returns the string constant AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData, for use as a dictionary key or argument.
 func AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData")))
 }
 
-// Indicates that the media data should be laid out before all the media data with AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData and not be interleaved.
 // AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved returns the string constant AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved, for use as a dictionary key or argument.
 func AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved")))
 }
 
-// Indicates that there may be large segments of time without any media data from this track. When mediaDataLocation is set to this value, AVAssetWriter will interleave the media data, but will not wait for media data from this track to achieve tight interleaving with other tracks.
 // AVAssetWriterInputMediaDataLocationSparselyInterleavedWithMainMediaData returns the string constant AVAssetWriterInputMediaDataLocationSparselyInterleavedWithMainMediaData, for use as a dictionary key or argument.
 func AVAssetWriterInputMediaDataLocationSparselyInterleavedWithMainMediaData() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetWriterInputMediaDataLocationSparselyInterleavedWithMainMediaData")))
 }
 
-// Indicates whether or not the asset can be rendered as stereo video. Clients may use this property to determine whether to configure stereo video rendering.
 // AVAssetPlaybackConfigurationOptionStereoVideo returns the string constant AVAssetPlaybackConfigurationOptionStereoVideo, for use as a dictionary key or argument.
 func AVAssetPlaybackConfigurationOptionStereoVideo() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetPlaybackConfigurationOptionStereoVideo")))
 }
 
-// Indicates whether or not the asset can rendered as stereo video and is also in a multiview compression format. Clients may use this property to determine whether to configure stereo video rendering.
 // AVAssetPlaybackConfigurationOptionStereoMultiviewVideo returns the string constant AVAssetPlaybackConfigurationOptionStereoMultiviewVideo, for use as a dictionary key or argument.
 func AVAssetPlaybackConfigurationOptionStereoMultiviewVideo() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetPlaybackConfigurationOptionStereoMultiviewVideo")))
 }
 
-// Indicates whether or not the asset can be rendered as spatial video. Clients may use this property to determine whether to configure spatial video rendering.
 // AVAssetPlaybackConfigurationOptionSpatialVideo returns the string constant AVAssetPlaybackConfigurationOptionSpatialVideo, for use as a dictionary key or argument.
 func AVAssetPlaybackConfigurationOptionSpatialVideo() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetPlaybackConfigurationOptionSpatialVideo")))
 }
 
-// Indicates whether the asset calls for the use of a non-rectilinear projection for rendering video. Clients may use this property to determine whether to configure a non-rectilinear projection when displaying video.
 // AVAssetPlaybackConfigurationOptionNonRectilinearProjection returns the string constant AVAssetPlaybackConfigurationOptionNonRectilinearProjection, for use as a dictionary key or argument.
 func AVAssetPlaybackConfigurationOptionNonRectilinearProjection() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetPlaybackConfigurationOptionNonRectilinearProjection")))
 }
 
-// Indicates whether the asset is Apple Immersive Video. Clients may use this property to switch into specific display and control modes for Apple Immersive Video playback.
 // AVAssetPlaybackConfigurationOptionAppleImmersiveVideo returns the string constant AVAssetPlaybackConfigurationOptionAppleImmersiveVideo, for use as a dictionary key or argument.
 func AVAssetPlaybackConfigurationOptionAppleImmersiveVideo() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetPlaybackConfigurationOptionAppleImmersiveVideo")))
 }
 
-// The lowest media bitrate greater than or equal to this value will be selected. Value should be a NSNumber in bps. If no suitable media bitrate is found, the highest media bitrate will be selected. The value for this key should be a NSNumber. By default, the highest media bitrate will be selected for download.
 // AVAssetDownloadTaskMinimumRequiredMediaBitrateKey returns the string constant AVAssetDownloadTaskMinimumRequiredMediaBitrateKey, for use as a dictionary key or argument.
 func AVAssetDownloadTaskMinimumRequiredMediaBitrateKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetDownloadTaskMinimumRequiredMediaBitrateKey")))
 }
 
-// The lowest media presentation size greater than or equal to this value will be selected. If no suitable media presentation size is found, the highest media presentation size will be selected. The value for this key should be a NSValue of CGSize. By default, the highest media presentation size will be selected for download.
 // AVAssetDownloadTaskMinimumRequiredPresentationSizeKey returns the string constant AVAssetDownloadTaskMinimumRequiredPresentationSizeKey, for use as a dictionary key or argument.
 func AVAssetDownloadTaskMinimumRequiredPresentationSizeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetDownloadTaskMinimumRequiredPresentationSizeKey")))
 }
 
-// The media selection for this download. The value for this key should be an AVMediaSelection. By default, media selections for AVAssetDownloadTask will be automatically selected.
 // AVAssetDownloadTaskMediaSelectionKey returns the string constant AVAssetDownloadTaskMediaSelectionKey, for use as a dictionary key or argument.
 func AVAssetDownloadTaskMediaSelectionKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetDownloadTaskMediaSelectionKey")))
 }
 
-// Download the specified media selections with or without support for multichannel playback. The value for this key should be an NSNumber representing a BOOL. By default AVAssetDownloadTask will prefer multichannel by downloading the most capable multichannel rendition available in additon to stereo.
 // AVAssetDownloadTaskMediaSelectionPrefersMultichannelKey returns the string constant AVAssetDownloadTaskMediaSelectionPrefersMultichannelKey, for use as a dictionary key or argument.
 func AVAssetDownloadTaskMediaSelectionPrefersMultichannelKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetDownloadTaskMediaSelectionPrefersMultichannelKey")))
 }
 
-// Download the specified media selections in lossless audio representation. The value for this key should be an NSNumber representing a BOOL. By default AVAssetDownloadTask will prefer lossy audio representation.
 // AVAssetDownloadTaskPrefersLosslessAudioKey returns the string constant AVAssetDownloadTaskPrefersLosslessAudioKey, for use as a dictionary key or argument.
 func AVAssetDownloadTaskPrefersLosslessAudioKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetDownloadTaskPrefersLosslessAudioKey")))
 }
 
-// Download the specified media selections with or without HDR content. The value for this key should be an NSNumber representing a BOOL. By default AVAssetDownloadTask will prefer HDR content.
 // AVAssetDownloadTaskPrefersHDRKey returns the string constant AVAssetDownloadTaskPrefersHDRKey, for use as a dictionary key or argument.
 func AVAssetDownloadTaskPrefersHDRKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetDownloadTaskPrefersHDRKey")))
 }
 
-// Used to mark assets with the highest priority. They will be the last to be purged.
 // AVAssetDownloadedAssetEvictionPriorityImportant returns the string constant AVAssetDownloadedAssetEvictionPriorityImportant, for use as a dictionary key or argument.
 func AVAssetDownloadedAssetEvictionPriorityImportant() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetDownloadedAssetEvictionPriorityImportant")))
 }
 
-// Used to mark assets have the default priority. They will be the first to be purged.
 // AVAssetDownloadedAssetEvictionPriorityDefault returns the string constant AVAssetDownloadedAssetEvictionPriorityDefault, for use as a dictionary key or argument.
 func AVAssetDownloadedAssetEvictionPriorityDefault() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAssetDownloadedAssetEvictionPriorityDefault")))
 }
 
-// Indicates the output media type of a caption conversion operation. For example, AVMediaTypeClosedCaption.
 // AVCaptionMediaTypeKey returns the string constant AVCaptionMediaTypeKey, for use as a dictionary key or argument.
 func AVCaptionMediaTypeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptionMediaTypeKey")))
 }
 
-// Indicates the output media subtype of a caption conversion operation. For example, [NSNumber numberWithInt:kCMClosedCaptionFormatType_CEA608]. Both numeric and string forms of media subtypes are accepted for caption conversions, so you could, for example, use
 // AVCaptionMediaSubTypeKey returns the string constant AVCaptionMediaSubTypeKey, for use as a dictionary key or argument.
 func AVCaptionMediaSubTypeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptionMediaSubTypeKey")))
 }
 
-// Frame duration used for the time code. Some formats, such as TTML, use time code notation to indicate the timing of a caption. Use the property to specify the frame rate of the time code. For example, if the time code steps for every 1001 / 30000 seconds, the value should be CMTime(value: 1001, scale: 30000).
 // AVCaptionTimeCodeFrameDurationKey returns the string constant AVCaptionTimeCodeFrameDurationKey, for use as a dictionary key or argument.
 func AVCaptionTimeCodeFrameDurationKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptionTimeCodeFrameDurationKey")))
 }
 
-// Indicates whether to use drop frame time code. Some formats, such as SCC, use time code notation to indicate the timing of a caption. Use the property to specify whether to use the drop frame time code or non-drop frame time code. When the value for this key is a NSNumber indicating the BOOL YES, the receiver will use the drop frame time code. When the value for this key is a NSNumber indicating the BOOL NO, the receiver will use the non-drop frame time code. The default is NO.
 // AVCaptionUseDropFrameTimeCodeKey returns the string constant AVCaptionUseDropFrameTimeCodeKey, for use as a dictionary key or argument.
 func AVCaptionUseDropFrameTimeCodeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptionUseDropFrameTimeCodeKey")))
 }
 
-// Indicates that one or more captions in the validator's captions array exceed the capacity for media data of the media type and subtype specified by the conversion settings.
 // AVCaptionConversionWarningTypeExcessMediaData returns the string constant AVCaptionConversionWarningTypeExcessMediaData, for use as a dictionary key or argument.
 func AVCaptionConversionWarningTypeExcessMediaData() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptionConversionWarningTypeExcessMediaData")))
 }
 
-// Indicates a timing adjustment.
 // AVCaptionConversionAdjustmentTypeTimeRange returns the string constant AVCaptionConversionAdjustmentTypeTimeRange, for use as a dictionary key or argument.
 func AVCaptionConversionAdjustmentTypeTimeRange() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptionConversionAdjustmentTypeTimeRange")))
@@ -3604,115 +3442,96 @@ func AVMetadataIdentifierQuickTimeMetadataIsMontage() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataIsMontage")))
 }
 
-// A value of type kCMMetadataBaseDataType_UInt8 indicating whether this movie is intended to be played back at the full frame rate (1), or at a slow motion rate (0). Historically, some apps have played movies recorded at frame rates of 120fps or higher in slow motion by default. With the introduction of this metadata, apps that record high-frame-rate movies may add this movie-level metadata to indicate whether the movie is intended to be played at the full frame rate (1) or at a slow motion rate (0). Apps that play movies may use this metadata, when present, to guide their behavior.
 // AVMetadataIdentifierQuickTimeMetadataFullFrameRatePlaybackIntent returns the string constant AVMetadataIdentifierQuickTimeMetadataFullFrameRatePlaybackIntent, for use as a dictionary key or argument.
 func AVMetadataIdentifierQuickTimeMetadataFullFrameRatePlaybackIntent() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataFullFrameRatePlaybackIntent")))
 }
 
-// A value of type `kCMMetadataBaseDataType_UInt8` indicating whether this movie is intended as a Cinematic Video (1) or not (0). This movie-level metadata is automatically added (with a value of 1) to a movie recorded using the Cinematic Video API. Clients can override it with a value of 0 to signal that this movie is not to be treated as a Cinematic Video by Apple's software like Photos.
 // AVMetadataIdentifierQuickTimeMetadataCinematicVideoIntent returns the string constant AVMetadataIdentifierQuickTimeMetadataCinematicVideoIntent, for use as a dictionary key or argument.
 func AVMetadataIdentifierQuickTimeMetadataCinematicVideoIntent() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataCinematicVideoIntent")))
 }
 
-// A value of type kCMMetadataBaseDataType_UTF8 indicating the sensitivity of the camera to light in terms of ISO exposure index (e.g. "800"). See SMPTE RDD 18.
 // AVMetadataIdentifierQuickTimeMetadataCameraISOSensitivity returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraISOSensitivity, for use as a dictionary key or argument.
 func AVMetadataIdentifierQuickTimeMetadataCameraISOSensitivity() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataCameraISOSensitivity")))
 }
 
-// A value of type kCMMetadataBaseDataType_UTF8 indicating the white balance value defined by the temperature in Kelvin units (e.g. "5500K" or "5500"). See SMPTE RDD 18.
 // AVMetadataIdentifierQuickTimeMetadataCameraWhiteBalance returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraWhiteBalance, for use as a dictionary key or argument.
 func AVMetadataIdentifierQuickTimeMetadataCameraWhiteBalance() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataCameraWhiteBalance")))
 }
 
-// A value of type kCMMetadataBaseDataType_RawData indicating the reference white balance multiplication factor data for ProRes RAW.
 // AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTWhiteBalanceFactors returns the string constant AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTWhiteBalanceFactors, for use as a dictionary key or argument.
 func AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTWhiteBalanceFactors() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTWhiteBalanceFactors")))
 }
 
-// A value of type kCMMetadataBaseDataType_RawData indicating the reference color translation matrix data for ProRes RAW.
 // AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTColorMatrices returns the string constant AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTColorMatrices, for use as a dictionary key or argument.
 func AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTColorMatrices() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTColorMatrices")))
 }
 
-// A value of type kCMMetadataBaseDataType_UTF8 indicating the exposure period expressed as an angle in minutes (1/60 degree) (e.g. "21600" or "360.00deg"").
 // AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedAngle returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedAngle, for use as a dictionary key or argument.
 func AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedAngle() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedAngle")))
 }
 
-// A value of type kCMMetadataBaseDataType_UTF8 indicating the exposure period expressed as a time per one frame/field period in seconds.
 // AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedTime returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedTime, for use as a dictionary key or argument.
 func AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedTime() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedTime")))
 }
 
-// A value of type kCMMetadataBaseDataType_UTF8 indicating measure of the amount of light transmitted through the lens. It is the focal length divided by the effective lens aperture diameter (e.g. "F2.8" or "2.8"). This is track-level metadata for video track that is associated with the camera.
 // AVMetadataIdentifierQuickTimeMetadataCameraLensIrisFNumber returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraLensIrisFNumber, for use as a dictionary key or argument.
 func AVMetadataIdentifierQuickTimeMetadataCameraLensIrisFNumber() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataCameraLensIrisFNumber")))
 }
 
-// A value of type kCMMetadataBaseDataType_UTF8 indicating the lens model (e.g. "iPhone 16 Pro back camera 6.765mm f/1.78"). This is track-level metadata for video track that is associated with the camera.
 // AVMetadataIdentifierQuickTimeMetadataCameraLensModel returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraLensModel, for use as a dictionary key or argument.
 func AVMetadataIdentifierQuickTimeMetadataCameraLensModel() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataCameraLensModel")))
 }
 
-// A value of type kCMMetadataBaseDataType_UTF8 indicating focal length normalized to the 35mm film equivalent value (e.g. "50.00mm"). This is track-level metadata for video track that is associated with the camera.
 // AVMetadataIdentifierQuickTimeMetadataCameraFocalLength35mmEquivalent returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraFocalLength35mmEquivalent, for use as a dictionary key or argument.
 func AVMetadataIdentifierQuickTimeMetadataCameraFocalLength35mmEquivalent() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataCameraFocalLength35mmEquivalent")))
 }
 
-// A value of type kCMMetadataBaseDataType_UInt8 indicating whether this Live Photo movie was captured in "Auto" mode. Clients capturing LivePhoto content may add this movie-level metadata to signify that the movie content should only be used (when swiping between photos, or force-touching a photo) if it's sufficiently dynamic. For instance, photos of static scenes or documents are to be excluded from the Live Photo experience.
 // AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto returns the string constant AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto, for use as a dictionary key or argument.
 func AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto")))
 }
 
-// A value of type kCMMetadataBaseDataType_Float32. Live Photo movies may be algorithmically scored from 0. to 1. on their level of vitality. A Live Photo movie with a low vitality score offers little dynamism to the still photo it accompanies. The vitality score is normalized and independent of the vitality scoring version of the algorithm (see AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion). If a Live Photo movie contains the AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto key and its value is non-zero, apps should read the AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore value and only display the movie's content if the score is 0.5 or higher. If the capture session includes a metadata output configured to provide face, dog, or cat metadata objects, their presence will greatly increase the vitality score.
 // AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore returns the string constant AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore, for use as a dictionary key or argument.
 func AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore")))
 }
 
-// A value of type kCMMetadataBaseDataType_UInt32. The version of the algorithm that scored the Live Photo movie for vitality.
 // AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion returns the string constant AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion, for use as a dictionary key or argument.
 func AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion")))
 }
 
-// A value of type kCMMetadataBaseDataType_Float32. The video may be scored by a heuristic which considers factors such as exposure and focus. The value ranges from 0-1, where a score below 0.5 indicates the asset has serious flaws.
 // AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScore returns the string constant AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScore, for use as a dictionary key or argument.
 func AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScore() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScore")))
 }
 
-// A value of type kCMMetadataBaseDataType_UInt32. The version of the algorithm that provided the spatial over capture quality score.
 // AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScoringVersion returns the string constant AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScoringVersion, for use as a dictionary key or argument.
 func AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScoringVersion() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScoringVersion")))
 }
 
-// A value of type kCMMetadataBaseDataType_Float32. The horizontal accuracy of the provided location data (usually specified by AVMetadataIdentifierQuickTimeMetadataLocationISO6709).
 // AVMetadataIdentifierQuickTimeMetadataLocationHorizontalAccuracyInMeters returns the string constant AVMetadataIdentifierQuickTimeMetadataLocationHorizontalAccuracyInMeters, for use as a dictionary key or argument.
 func AVMetadataIdentifierQuickTimeMetadataLocationHorizontalAccuracyInMeters() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataLocationHorizontalAccuracyInMeters")))
 }
 
-// A value of type kCMMetadataBaseDataType_RawData The static presentation metadata, Apple Immersive Media Embedded (AIME), for Apple Immersive Video that originates from ImmersiveMediaSupport framework's VenueDescriptor.aimeData.
 // AVMetadataIdentifierQuickTimeMetadataAIMEData returns the string constant AVMetadataIdentifierQuickTimeMetadataAIMEData, for use as a dictionary key or argument.
 func AVMetadataIdentifierQuickTimeMetadataAIMEData() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataAIMEData")))
 }
 
-// A value of type kCMMetadataBaseDataType_RawData The presentation timed metadata for Apple Immerisve Video. Value is a JSON-encoding of ImmersiveMediaSupport framework's PresentationDescriptor object.
 // AVMetadataIdentifierQuickTimeMetadataPresentationImmersiveMedia returns the string constant AVMetadataIdentifierQuickTimeMetadataPresentationImmersiveMedia, for use as a dictionary key or argument.
 func AVMetadataIdentifierQuickTimeMetadataPresentationImmersiveMedia() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataPresentationImmersiveMedia")))
@@ -4433,49 +4252,41 @@ func AVMetadataIdentifierIcyMetadataStreamURL() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierIcyMetadataStreamURL")))
 }
 
-// Posted when the timeRange of an AVFragmentedMovieTrack changes while the associated instance of AVFragmentedMovie is being minded by an AVFragmentedMovieMinder, but only for changes that occur after the status of the value of
 // AVFragmentedMovieTrackTimeRangeDidChangeNotification returns the string constant AVFragmentedMovieTrackTimeRangeDidChangeNotification, for use as a dictionary key or argument.
 func AVFragmentedMovieTrackTimeRangeDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVFragmentedMovieTrackTimeRangeDidChangeNotification")))
 }
 
-// Posted when the array of segments of an AVFragmentedMovieTrack changes while the associated instance of AVFragmentedMovie is being minded by an AVFragmentedMovieMinder, but only for changes that occur after the status of the value of
 // AVFragmentedMovieTrackSegmentsDidChangeNotification returns the string constant AVFragmentedMovieTrackSegmentsDidChangeNotification, for use as a dictionary key or argument.
 func AVFragmentedMovieTrackSegmentsDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVFragmentedMovieTrackSegmentsDidChangeNotification")))
 }
 
-// This notification name has been deprecated. Use either AVFragmentedMovieTrackTimeRangeDidChangeNotification or AVFragmentedMovieTrackSegmentsDidChangeNotification instead; in either case, you can assume that timing changes to fragmented tracks result in changes to the total length of the sample data used by the track.
 // AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification returns the string constant AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification, for use as a dictionary key or argument.
 func AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification")))
 }
 
-// Indicates the restrictions used by the movie when resolving references to external media data. The value of this key is an NSNumber wrapping an AVAssetReferenceRestrictions enum value or the logical combination of multiple such values. See AVAsset.h for the declaration of the AVAssetReferenceRestrictions enum. Some movies can contain references to media data stored outside the movie's container, for example in another file. This key can be used to specify a policy to use when these references are encountered. If a movie contains one or more references of a type that is forbidden by the reference restrictions, loading of movie properties will fail. In addition, such a movie cannot be used with other AVFoundation modules, such as AVPlayerItem or AVAssetExportSession.
 // AVMovieReferenceRestrictionsKey returns the string constant AVMovieReferenceRestrictionsKey, for use as a dictionary key or argument.
 func AVMovieReferenceRestrictionsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMovieReferenceRestrictionsKey")))
 }
 
-// Indicates whether alias data references in the movie should be parsed and resolved. Default is NO. Although the majority of QuickTime movie files contain all of the media data they require, some contain references to media stored in other files. While AVFoundation and CoreMedia typically employ a URL reference for this purpose, older implementations such as QuickTime 7 have commonly employed a Macintosh alias instead, as documented in the QuickTime File Format specification. If your application must work with legacy QuickTime movie files containing alias-based references to media data stored in other files, the use of this AVMovie initialization option is appropriate. AVMovie and AVMutableMovie do not create movies using alias data references to external media files. If you provide a value for AVMovieReferenceRestrictionsKey, restrictions will be observed for resolved alias references just as they are for URL references. For more details about alias resolution, consult documentation of the bookmark-related interfaces of NSURL.
 // AVMovieShouldSupportAliasDataReferencesKey returns the string constant AVMovieShouldSupportAliasDataReferencesKey, for use as a dictionary key or argument.
 func AVMovieShouldSupportAliasDataReferencesKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMovieShouldSupportAliasDataReferencesKey")))
 }
 
-// Posted after the value of
 // AVFragmentedMovieContainsMovieFragmentsDidChangeNotification returns the string constant AVFragmentedMovieContainsMovieFragmentsDidChangeNotification, for use as a dictionary key or argument.
 func AVFragmentedMovieContainsMovieFragmentsDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVFragmentedMovieContainsMovieFragmentsDidChangeNotification")))
 }
 
-// Posted when the duration of an AVFragmentedMovie changes while it's being minded by an AVFragmentedMovieMinder, but only for changes that occur after the status of the value of
 // AVFragmentedMovieDurationDidChangeNotification returns the string constant AVFragmentedMovieDurationDidChangeNotification, for use as a dictionary key or argument.
 func AVFragmentedMovieDurationDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVFragmentedMovieDurationDidChangeNotification")))
 }
 
-// Posted when the movie file on disk is defragmented while an AVFragmentedMovie is being minded by an AVFragmentedMovieMinder, but only if the defragmentation occurs after the status of the value of
 // AVFragmentedMovieWasDefragmentedNotification returns the string constant AVFragmentedMovieWasDefragmentedNotification, for use as a dictionary key or argument.
 func AVFragmentedMovieWasDefragmentedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVFragmentedMovieWasDefragmentedNotification")))
@@ -4556,19 +4367,16 @@ func AVOutputSettingsPresetMVHEVC7680x7680() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVOutputSettingsPresetMVHEVC7680x7680")))
 }
 
-// Indicates a player rate change. Posted by the player when its rate changes. Similar to KVO of AVPlayer.rate, but providing additional information about the rate change in the userInfo. See keys below.
 // AVPlayerRateDidChangeNotification returns the string constant AVPlayerRateDidChangeNotification, for use as a dictionary key or argument.
 func AVPlayerRateDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerRateDidChangeNotification")))
 }
 
-// Indicates a reason for the rate change notification. The value corresponding to this key is of type AVPlayerRateDidChangeReason.
 // AVPlayerRateDidChangeReasonKey returns the string constant AVPlayerRateDidChangeReasonKey, for use as a dictionary key or argument.
 func AVPlayerRateDidChangeReasonKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerRateDidChangeReasonKey")))
 }
 
-// Indicates a rate change was caused by another participant connected through AVPlayerPlaybackCoordinator. Informs the receiver of an AVPlayerRateDidChangeNotification about a rate change originated from another AVCoordinatedPlaybackParticipant connected through AVPlayerPlaybackCoordinator. This can be used to inform UI showing why the playback rate changed. The type of the value for this key is an AVCoordinatedPlaybackParticipant, which is part of the AVPlayerPlaybackCoordinator.otherParticipants array.
 // AVPlayerRateDidChangeOriginatingParticipantKey returns the string constant AVPlayerRateDidChangeOriginatingParticipantKey, for use as a dictionary key or argument.
 func AVPlayerRateDidChangeOriginatingParticipantKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerRateDidChangeOriginatingParticipantKey")))
@@ -4604,25 +4412,21 @@ func AVPlayerRateDidChangeReasonReversePlaybackReachedStartOfSeekableRange() obj
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerRateDidChangeReasonReversePlaybackReachedStartOfSeekableRange")))
 }
 
-// Indicates that the player is waiting for appropriate playback buffer conditions before starting playback The player is waiting for playback because automaticallyWaitToMinimizeStalling is YES and playback at the specified rate would likely cause the playback buffer to become empty before playback completes. Playback will resume when 1) playback at the specified rate will likely complete without a stall or 2) the playback buffer becomes full, meaning no forther buffering of media data is possible. When the value of automaticallyWaitsToMinimizeStalling is NO, timeControlStatus cannot become AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate for this reason.
 // AVPlayerWaitingToMinimizeStallsReason returns the string constant AVPlayerWaitingToMinimizeStallsReason, for use as a dictionary key or argument.
 func AVPlayerWaitingToMinimizeStallsReason() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerWaitingToMinimizeStallsReason")))
 }
 
-// Indicates that the player is monitoring the playback buffer fill rate to determine if playback is likely to complete without interruptions. The player is waiting for playback because automaticallyWaitToMinimizeStalling is YES and it has not yet determined if starting playback at the specified rate would likely cause the buffer to become empty. When the brief initial monitoring period is over, either playback will begin or the value of reasonForWaitingToPlayAtSpecifiedRate will switch to AVPlayerWaitingToMinimizeStallsReason. Recommended practice is not to show UI indicating the waiting state to the user while the value of reasonForWaitingToPlayAtSpecifiedRate is AVPlayerWaitingWhileEvaluatingBufferingRateReason.
 // AVPlayerWaitingWhileEvaluatingBufferingRateReason returns the string constant AVPlayerWaitingWhileEvaluatingBufferingRateReason, for use as a dictionary key or argument.
 func AVPlayerWaitingWhileEvaluatingBufferingRateReason() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerWaitingWhileEvaluatingBufferingRateReason")))
 }
 
-// Indicates that the AVPlayer is waiting because its currentItem is nil The player is waiting for playback because automaticallyWaitToMinimizeStalling is YES and the value of currentItem is nil. When an item becomes available, either because of a call to -replaceCurrentItemWithPlayerItem: or -insertItem: afterItem:, playback will begin or the value of reasonForWaitingToPlay will change.
 // AVPlayerWaitingWithNoItemToPlayReason returns the string constant AVPlayerWaitingWithNoItemToPlayReason, for use as a dictionary key or argument.
 func AVPlayerWaitingWithNoItemToPlayReason() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerWaitingWithNoItemToPlayReason")))
 }
 
-// Indicates that the player is waiting for another participant connected through its AVPlayerPlaybackCoordinator. The player is waiting for playback because its connected AVPlayerPlaybackCoordinator requires information from one of the other participants before playback can start.
 // AVPlayerWaitingForCoordinatedPlaybackReason returns the string constant AVPlayerWaitingForCoordinatedPlaybackReason, for use as a dictionary key or argument.
 func AVPlayerWaitingForCoordinatedPlaybackReason() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerWaitingForCoordinatedPlaybackReason")))
@@ -4633,37 +4437,31 @@ func AVPlayerEligibleForHDRPlaybackDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerEligibleForHDRPlaybackDidChangeNotification")))
 }
 
-// The participant's audio session was interrupted.
 // AVCoordinatedPlaybackSuspensionReasonAudioSessionInterrupted returns the string constant AVCoordinatedPlaybackSuspensionReasonAudioSessionInterrupted, for use as a dictionary key or argument.
 func AVCoordinatedPlaybackSuspensionReasonAudioSessionInterrupted() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCoordinatedPlaybackSuspensionReasonAudioSessionInterrupted")))
 }
 
-// The player is buffering data after a stall.
 // AVCoordinatedPlaybackSuspensionReasonStallRecovery returns the string constant AVCoordinatedPlaybackSuspensionReasonStallRecovery, for use as a dictionary key or argument.
 func AVCoordinatedPlaybackSuspensionReasonStallRecovery() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCoordinatedPlaybackSuspensionReasonStallRecovery")))
 }
 
-// The participant is presented with interstitial content instead of the main player.
 // AVCoordinatedPlaybackSuspensionReasonPlayingInterstitial returns the string constant AVCoordinatedPlaybackSuspensionReasonPlayingInterstitial, for use as a dictionary key or argument.
 func AVCoordinatedPlaybackSuspensionReasonPlayingInterstitial() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCoordinatedPlaybackSuspensionReasonPlayingInterstitial")))
 }
 
-// The participant cannot participate in coordinated playback.
 // AVCoordinatedPlaybackSuspensionReasonCoordinatedPlaybackNotPossible returns the string constant AVCoordinatedPlaybackSuspensionReasonCoordinatedPlaybackNotPossible, for use as a dictionary key or argument.
 func AVCoordinatedPlaybackSuspensionReasonCoordinatedPlaybackNotPossible() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCoordinatedPlaybackSuspensionReasonCoordinatedPlaybackNotPossible")))
 }
 
-// The participant's playback object is in a state that requires manual intervention by the user to resume playback.
 // AVCoordinatedPlaybackSuspensionReasonUserActionRequired returns the string constant AVCoordinatedPlaybackSuspensionReasonUserActionRequired, for use as a dictionary key or argument.
 func AVCoordinatedPlaybackSuspensionReasonUserActionRequired() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCoordinatedPlaybackSuspensionReasonUserActionRequired")))
 }
 
-// The participant is actively changing current time.
 // AVCoordinatedPlaybackSuspensionReasonUserIsChangingCurrentTime returns the string constant AVCoordinatedPlaybackSuspensionReasonUserIsChangingCurrentTime, for use as a dictionary key or argument.
 func AVCoordinatedPlaybackSuspensionReasonUserIsChangingCurrentTime() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCoordinatedPlaybackSuspensionReasonUserIsChangingCurrentTime")))
@@ -4714,199 +4512,166 @@ func AVPlayerItemFailedToPlayToEndTimeErrorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerItemFailedToPlayToEndTimeErrorKey")))
 }
 
-// Indicates a time jump was caused by another participant connected through AVPlayerPlaybackCoordinator. Informs the receiver of an AVPlayerItemTimeJumpedNotification that a time jump originated from another AVCoordinatedPlaybackParticipant connected through AVPlayerPlaybackCoordinator. This can be used to inform UI showing why the current time changed. The type of the value for this key is an AVCoordinatedPlaybackParticipant, which is part of the AVPlayerPlaybackCoordinator.otherParticipants array.
 // AVPlayerItemTimeJumpedOriginatingParticipantKey returns the string constant AVPlayerItemTimeJumpedOriginatingParticipantKey, for use as a dictionary key or argument.
 func AVPlayerItemTimeJumpedOriginatingParticipantKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerItemTimeJumpedOriginatingParticipantKey")))
 }
 
-// Specify this level of text styling resolution to receive attributed strings from an AVPlayerItemLegibleOutput that include the same level of styling information that AVFoundation would use itself to render text within an AVPlayerLayer. The text styling will accommodate user-level Media Accessibility settings.
 // AVPlayerItemLegibleOutputTextStylingResolutionDefault returns the string constant AVPlayerItemLegibleOutputTextStylingResolutionDefault, for use as a dictionary key or argument.
 func AVPlayerItemLegibleOutputTextStylingResolutionDefault() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerItemLegibleOutputTextStylingResolutionDefault")))
 }
 
-// Specify this level of text styling resolution to receive only the styling present in the source media and the styling provided via AVPlayerItem.textStyleRules. This level of resolution excludes styling provided by the user-level Media Accessibility settings. You would typically use it if you wish to override the styling specified in source media. If you do this, you are strongly encouraged to allow your custom styling in turn to be overriden by user preferences for text styling that are available as Media Accessibility settings.
 // AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly returns the string constant AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly, for use as a dictionary key or argument.
 func AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly")))
 }
 
-// Use with videoFieldMode property to request deinterlacing of video fields.
 // AVPlayerItemTrackVideoFieldModeDeinterlaceFields returns the string constant AVPlayerItemTrackVideoFieldModeDeinterlaceFields, for use as a dictionary key or argument.
 func AVPlayerItemTrackVideoFieldModeDeinterlaceFields() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerItemTrackVideoFieldModeDeinterlaceFields")))
 }
 
-// No cue specified; event playback should start at event time (or date).
 // AVPlayerInterstitialEventNoCue returns the string constant AVPlayerInterstitialEventNoCue, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventNoCue() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventNoCue")))
 }
 
-// Event playback should occur before starting primary playback, regardless of initial primary playback position.
 // AVPlayerInterstitialEventJoinCue returns the string constant AVPlayerInterstitialEventJoinCue, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventJoinCue() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventJoinCue")))
 }
 
-// Event playback should occur after primary playback ends without error, either at the end of the primary asset or at the client-specified forward playback end time.
 // AVPlayerInterstitialEventLeaveCue returns the string constant AVPlayerInterstitialEventLeaveCue, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventLeaveCue() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventLeaveCue")))
 }
 
-// A notification that's posted whenever the value of events of an AVPlayerInterstitialEventMonitor is changed.
 // AVPlayerInterstitialEventMonitorEventsDidChangeNotification returns the string constant AVPlayerInterstitialEventMonitorEventsDidChangeNotification, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorEventsDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorEventsDidChangeNotification")))
 }
 
-// A notification that's posted whenever the currentEvent of an AVPlayerInterstitialEventMonitor changes.
 // AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification returns the string constant AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification")))
 }
 
-// A notification that is posted whenever an AVPlayerInterstitialEvent's asset list response status changes. Carries a userInfo dictionary that can contain the following keys and values: 1. AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey, with a value that indicates the AVPlayerInterstitialEvent for which the asset response status has changed. 2. AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey, with a value of type AVPlayerInterstitialEventAssetListResponseStatus, indicating the changed asset response status. 3. AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey, with a value of type NSError that carries additional information about the failure to read the asset list. This key is only present when the new AVPlayerInterstitialEventAssetListResponseStatus is AVPlayerInterstitialEventAssetListResponseStatusUnavailable.
 // AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification returns the string constant AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification")))
 }
 
-// The dictionary key for the AVPlayerInterstitial event that had its asset list response status changed in the payload of the AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification. The value corresponding to this key is of type AVPlayerInterstitialEvent.
 // AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey returns the string constant AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey")))
 }
 
-// The dictionary key for the asset list response status in the payload of the AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification. The value corresponding to this key is of type AVPlayerInterstitialEventAssetListResponseStatus.
 // AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey returns the string constant AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey")))
 }
 
-// The dictionary key for the NSError in the payload of the AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification. The value corresponding to this key is of type NSError. This key only exists in the payload of AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification if AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey in the same payload points to a value of AVPlayerInterstitialEventAssetListResponseStatusUnavailable.
 // AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey returns the string constant AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey")))
 }
 
-// A notification that's posted whenever the currentEventSkippableState of an AVPlayerInterstitialEventMonitor changes.
 // AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification returns the string constant AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification")))
 }
 
-// The dictionary key for the AVPlayerInterstitial event that had its skippable event state changed in the payload of the AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification. The value corresponding to this key is of type AVPlayerInterstitialEvent.
 // AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeEventKey returns the string constant AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeEventKey, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeEventKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeEventKey")))
 }
 
-// The dictionary key for the skippable event state in the payload of the AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification. The value corresponding to this key is an NSNumber containing type AVPlayerInterstitialEventSkippableEventState.
 // AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeStateKey returns the string constant AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeStateKey, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeStateKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeStateKey")))
 }
 
-// The dictionary key for the skip label of the event in the payload of the AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification. The value corresponding to this key is an NSString that's the localized skip label if a localizedStringsBundle is set on the AVPlayerInterstitialEventController and a skipControlLocalizedLabelBundleKey on the AVPlayerInterstitialEvent whose skippable event state changed. Note that this key will not be present if there is no localizedStringsBundle set, or if the currentEventSkippableState changed to AVPlayerInterstitialEventSkippableEventStateNotSkippable.
 // AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeSkipControlLabelKey returns the string constant AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeSkipControlLabelKey, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeSkipControlLabelKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeSkipControlLabelKey")))
 }
 
-// A notification that's posted whenever an event was skipped via skip control.
 // AVPlayerInterstitialEventMonitorCurrentEventSkippedNotification returns the string constant AVPlayerInterstitialEventMonitorCurrentEventSkippedNotification, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorCurrentEventSkippedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorCurrentEventSkippedNotification")))
 }
 
-// The dictionary key for the AVPlayerInterstitialEvent that was skipped in the payload of the AVPlayerInterstitialEventMonitorCurrentEventSkippedNotification. The value corresponding to this key is of type AVPlayerInterstitialEvent.
 // AVPlayerInterstitialEventMonitorCurrentEventSkippedEventKey returns the string constant AVPlayerInterstitialEventMonitorCurrentEventSkippedEventKey, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorCurrentEventSkippedEventKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorCurrentEventSkippedEventKey")))
 }
 
-// A notification that is posted whenever an AVPlayerInterstitialEvent with loaded assets was unscheduled prior to playing. Carries a userInfo dictionary that can contain the following keys and values: 1. AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey, with a value that indicates which AVPlayerInterstitialEvent was unscheduled. 2. AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledErrorKey, with an NSError value. This key will only be present if the AVPlayerInterstitialEvent was unscheduled due to an error.
 // AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification returns the string constant AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification")))
 }
 
-// The dictionary key for the AVPlayerInterstitialEvent that was unscheduled in the payload of the AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification. The value corresponding to this key is of type AVPlayerInterstitialEvent.
 // AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey returns the string constant AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey")))
 }
 
-// The dictionary key to indicate whether the event that was unscheduled was due to an error. The value corresponding to this key is of type NSError. This key only exists in the payload of AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification if the interstitial event was unscheduled due to an error.
 // AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledErrorKey returns the string constant AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledErrorKey, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledErrorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledErrorKey")))
 }
 
-// A notification that is posted whenever an AVPlayerInterstitialEvent finished playing. Carries a userInfo dictionary that can contain the following keys and values: 1. AVPlayerInterstitialEventMonitorInterstitialEventDidFinishEventKey, with a value that indicates the AVPlayerInterstitialEvent that finished playing. 2. AVPlayerInterstitialEventMonitorInterstitialEventDidFinishPlayoutTimeKey, with a value that indicates how long that AVPlayerInterstitialEvent played out for. 3. AVPlayerInterstitialEventMonitorInterstitialEventDidFinishDidPlayEntireEventKey, with a value that indicates whether the AVPlayerInterstitialEvent was fully played out. Note that cancelling an AVPlayerInterstitialEvent after playback started but prior to playback finishing will also trigger this event.
 // AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification returns the string constant AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification")))
 }
 
-// The dictionary key for the AVPlayerInterstitialEvent that finished playing in the payload of the AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification. The value corresponding to this key is of type AVPlayerInterstitialEvent.
 // AVPlayerInterstitialEventMonitorInterstitialEventDidFinishEventKey returns the string constant AVPlayerInterstitialEventMonitorInterstitialEventDidFinishEventKey, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorInterstitialEventDidFinishEventKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorInterstitialEventDidFinishEventKey")))
 }
 
-// The dictionary key for the playout time of the event that finished playing in the payload of the AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification. The value corresponding to this key is of type CMTime as a NSDictionary.
 // AVPlayerInterstitialEventMonitorInterstitialEventDidFinishPlayoutTimeKey returns the string constant AVPlayerInterstitialEventMonitorInterstitialEventDidFinishPlayoutTimeKey, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorInterstitialEventDidFinishPlayoutTimeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorInterstitialEventDidFinishPlayoutTimeKey")))
 }
 
-// The dictionary key to indicate whether the event that finished playing was fully played out in the payload of the AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification. The value corresponding to this key is of type NSNumber with a BOOL value.
 // AVPlayerInterstitialEventMonitorInterstitialEventDidFinishDidPlayEntireEventKey returns the string constant AVPlayerInterstitialEventMonitorInterstitialEventDidFinishDidPlayEntireEventKey, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorInterstitialEventDidFinishDidPlayEntireEventKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorInterstitialEventDidFinishDidPlayEntireEventKey")))
 }
 
-// A notification that is posted whenever a daterange-schedule request completes. The userInfo dictionary can contain the following keys and values: 1. AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey, whose value is an NSString identifying the schedule. 2. AVPlayerInterstitialEventMonitorScheduleRequestResponseKey, whose value is an NSData carrying the JSON response. Absent if request failed. 3. AVPlayerInterstitialEventMonitorScheduleRequestErrorKey, whose value is an NSError.
 // AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification returns the string constant AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification")))
 }
 
-// userInfo dictionary key for the AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification. Value is NSString.
 // AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey returns the string constant AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey")))
 }
 
-// userInfo dictionary key for the AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification. Value is NSData. Absent if the request failed.
 // AVPlayerInterstitialEventMonitorScheduleRequestResponseKey returns the string constant AVPlayerInterstitialEventMonitorScheduleRequestResponseKey, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorScheduleRequestResponseKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorScheduleRequestResponseKey")))
 }
 
-// userInfo dictionary key for the AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification. Value is NSError. Absent if the request succeeded
 // AVPlayerInterstitialEventMonitorScheduleRequestErrorKey returns the string constant AVPlayerInterstitialEventMonitorScheduleRequestErrorKey, for use as a dictionary key or argument.
 func AVPlayerInterstitialEventMonitorScheduleRequestErrorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorScheduleRequestErrorKey")))
 }
 
-// Indicates that the player is waiting for the completion of an interstitial event. The player is waiting for playback because an interstitial event is currently in progress. Interstitial events can be monitored via use of an AVPlayerInterstitialEventMonitor.
 // AVPlayerWaitingDuringInterstitialEventReason returns the string constant AVPlayerWaitingDuringInterstitialEventReason, for use as a dictionary key or argument.
 func AVPlayerWaitingDuringInterstitialEventReason() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerWaitingDuringInterstitialEventReason")))
 }
 
-// A notification which is posted when the snapshot objects provided by this timeline would be out of sync with the current timeline state. See keys below.
 // AVPlayerIntegratedTimelineSnapshotsOutOfSyncNotification returns the string constant AVPlayerIntegratedTimelineSnapshotsOutOfSyncNotification, for use as a dictionary key or argument.
 func AVPlayerIntegratedTimelineSnapshotsOutOfSyncNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerIntegratedTimelineSnapshotsOutOfSyncNotification")))
 }
 
-// Indicates the reason for the snapshot out of sync notification.
 // AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonKey returns the string constant AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonKey, for use as a dictionary key or argument.
 func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonKey")))
@@ -4927,19 +4692,16 @@ func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonLoadedTimeRangesChanged()
 	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonLoadedTimeRangesChanged")))
 }
 
-// A notification that fires whenever the receiver's enqueued media data has been flushed for a reason other than a call to the -flush method. The renderer may flush enqueued media data when the user routes playback to a new destination.  The renderer may also flush enqueued media data when the playback rate of the attached AVSampleBufferRenderSynchronizer is changed (e.g. 1.0 -> 2.0 or 1.0 -> 0.0 -> 2.0), however no flush will occur for normal pauses (non-zero -> 0.0) and resumes (0.0 -> same non-zero rate as before). When an automatic flush occurs, the attached render synchronizer's timebase will remain running at its current rate.  It is typically best to respond to this notification by enqueueing media data with timestamps starting at the timebase's current time.  To the listener, this will sound similar to muting the audio for a short period of time.  If it is more desirable to ensure that all audio is played than to keep the timeline moving, you may also stop the synchronizer, set the synchronizer's current time to the value of AVSampleBufferAudioRendererFlushTimeKey, start reenqueueing sample buffers with timestamps starting at that time, and restart the synchronizer.  To the listener, this will sound similar to pausing the audio for a short period of time. This notification is delivered on an arbitrary thread.  If sample buffers are being enqueued with the renderer concurrently with the receipt of this notification, it is possible that one or more sample buffers will remain enqueued in the renderer.  This is generally undesirable, because the sample buffers that remain will likely have timestamps far ahead of the timebase's current time and so won't be rendered for some time.  The best practice is to invoke the -flush method, in a manner that is serialized with enqueueing sample buffers, after receiving this notification and before resuming the enqueueing of sample buffers.
 // AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification returns the string constant AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification, for use as a dictionary key or argument.
 func AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification")))
 }
 
-// A notification that indicates the hardware configuration does not match the enqueued data format. The output configuration of the playback hardware might change during the playback session if other clients play content with different format. In such cases, if the media content format does not match the hardware configuration it would produce suboptimal rendering of the enqueued media data. When the framework detects such mismatch it will issue this notification, so the client can flush the renderer and re-enqueue the sample buffers from the current media playhead, which will configure the hardware based on the format of newly enqueued sample buffers.
 // AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification returns the string constant AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification, for use as a dictionary key or argument.
 func AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification")))
 }
 
-// The presentation timestamp of the first enqueued sample that was flushed. The value of this key is an NSValue wrapping a CMTime.
 // AVSampleBufferAudioRendererFlushTimeKey returns the string constant AVSampleBufferAudioRendererFlushTimeKey, for use as a dictionary key or argument.
 func AVSampleBufferAudioRendererFlushTimeKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferAudioRendererFlushTimeKey")))
@@ -4960,7 +4722,6 @@ func AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtection
 	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtectionDidChangeNotification")))
 }
 
-// A notification that fires whenever the value of the "rate" property changes. The rate can change as a result of setting the rate property, either by directly setting the property or calling -setRate:time:. The rate can also change at any time, without any action by the client of the render synchronizer. For example, on iOS if the app's playback is interrupted (e.g. by a phone call or another non-mixable app starting playback), the rate will automatically be set to zero. This notification will be sent in all of those cases.
 // AVSampleBufferRenderSynchronizerRateDidChangeNotification returns the string constant AVSampleBufferRenderSynchronizerRateDidChangeNotification, for use as a dictionary key or argument.
 func AVSampleBufferRenderSynchronizerRateDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferRenderSynchronizerRateDidChangeNotification")))
@@ -4971,133 +4732,111 @@ func AVSampleBufferVideoRendererDidFailToDecodeNotificationErrorKey() obj.Object
 	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferVideoRendererDidFailToDecodeNotificationErrorKey")))
 }
 
-// An AVCaptureSession preset suitable for high resolution photo quality output. Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPresetPhoto for full resolution photo quality output.
 // AVCaptureSessionPresetPhoto returns the string constant AVCaptureSessionPresetPhoto, for use as a dictionary key or argument.
 func AVCaptureSessionPresetPhoto() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPresetPhoto")))
 }
 
-// An AVCaptureSession preset suitable for high quality video and audio output. Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPresetHigh to achieve high quality video and audio output. AVCaptureSessionPresetHigh is the default sessionPreset value.
 // AVCaptureSessionPresetHigh returns the string constant AVCaptureSessionPresetHigh, for use as a dictionary key or argument.
 func AVCaptureSessionPresetHigh() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPresetHigh")))
 }
 
-// An AVCaptureSession preset suitable for medium quality output. Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPresetMedium to achieve output video and audio bitrates suitable for sharing over WiFi.
 // AVCaptureSessionPresetMedium returns the string constant AVCaptureSessionPresetMedium, for use as a dictionary key or argument.
 func AVCaptureSessionPresetMedium() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPresetMedium")))
 }
 
-// An AVCaptureSession preset suitable for low quality output. Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPresetLow to achieve output video and audio bitrates suitable for sharing over 3G.
 // AVCaptureSessionPresetLow returns the string constant AVCaptureSessionPresetLow, for use as a dictionary key or argument.
 func AVCaptureSessionPresetLow() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPresetLow")))
 }
 
-// An AVCaptureSession preset suitable for 320x240 video output. Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset320x240 to achieve 320x240 output.
 // AVCaptureSessionPreset320x240 returns the string constant AVCaptureSessionPreset320x240, for use as a dictionary key or argument.
 func AVCaptureSessionPreset320x240() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPreset320x240")))
 }
 
-// An AVCaptureSession preset suitable for 352x288 video output. Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset352x288 to achieve CIF quality (352x288) output.
 // AVCaptureSessionPreset352x288 returns the string constant AVCaptureSessionPreset352x288, for use as a dictionary key or argument.
 func AVCaptureSessionPreset352x288() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPreset352x288")))
 }
 
-// An AVCaptureSession preset suitable for 640x480 video output. Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset640x480 to achieve VGA quality (640x480) output.
 // AVCaptureSessionPreset640x480 returns the string constant AVCaptureSessionPreset640x480, for use as a dictionary key or argument.
 func AVCaptureSessionPreset640x480() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPreset640x480")))
 }
 
-// An AVCaptureSession preset suitable for 960x540 video output. Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset960x540 to achieve quarter HD quality (960x540) output.
 // AVCaptureSessionPreset960x540 returns the string constant AVCaptureSessionPreset960x540, for use as a dictionary key or argument.
 func AVCaptureSessionPreset960x540() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPreset960x540")))
 }
 
-// An AVCaptureSession preset suitable for 1280x720 video output. Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset1280x720 to achieve 1280x720 output.
 // AVCaptureSessionPreset1280x720 returns the string constant AVCaptureSessionPreset1280x720, for use as a dictionary key or argument.
 func AVCaptureSessionPreset1280x720() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPreset1280x720")))
 }
 
-// An AVCaptureSession preset suitable for 1920x1080 video output. Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset1920x1080 to achieve 1920x1080 output.
 // AVCaptureSessionPreset1920x1080 returns the string constant AVCaptureSessionPreset1920x1080, for use as a dictionary key or argument.
 func AVCaptureSessionPreset1920x1080() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPreset1920x1080")))
 }
 
-// An AVCaptureSession preset suitable for 3840x2160 (UHD 4K) video output. Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset3840x2160 to achieve 3840x2160 output.
 // AVCaptureSessionPreset3840x2160 returns the string constant AVCaptureSessionPreset3840x2160, for use as a dictionary key or argument.
 func AVCaptureSessionPreset3840x2160() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPreset3840x2160")))
 }
 
-// An AVCaptureSession preset producing 960x540 Apple iFrame video and audio content. Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPresetiFrame960x540 to achieve 960x540 quality iFrame H.264 video at ~30 Mbits/sec with AAC audio. QuickTime movies captured in iFrame format are optimal for editing applications.
 // AVCaptureSessionPresetiFrame960x540 returns the string constant AVCaptureSessionPresetiFrame960x540, for use as a dictionary key or argument.
 func AVCaptureSessionPresetiFrame960x540() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPresetiFrame960x540")))
 }
 
-// An AVCaptureSession preset producing 1280x720 Apple iFrame video and audio content. Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPresetiFrame1280x720 to achieve 1280x720 quality iFrame H.264 video at ~40 Mbits/sec with AAC audio. QuickTime movies captured in iFrame format are optimal for editing applications.
 // AVCaptureSessionPresetiFrame1280x720 returns the string constant AVCaptureSessionPresetiFrame1280x720, for use as a dictionary key or argument.
 func AVCaptureSessionPresetiFrame1280x720() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPresetiFrame1280x720")))
 }
 
-// Indicates a reaction which features a thumbs-up symbol.
 // AVCaptureReactionTypeThumbsUp returns the string constant AVCaptureReactionTypeThumbsUp, for use as a dictionary key or argument.
 func AVCaptureReactionTypeThumbsUp() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureReactionTypeThumbsUp")))
 }
 
-// Indicates a reaction which features a thumbs-down symbol.
 // AVCaptureReactionTypeThumbsDown returns the string constant AVCaptureReactionTypeThumbsDown, for use as a dictionary key or argument.
 func AVCaptureReactionTypeThumbsDown() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureReactionTypeThumbsDown")))
 }
 
-// Indicates a reaction which features balloons rising through the scene.
 // AVCaptureReactionTypeBalloons returns the string constant AVCaptureReactionTypeBalloons, for use as a dictionary key or argument.
 func AVCaptureReactionTypeBalloons() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureReactionTypeBalloons")))
 }
 
-// Indicates a reaction which features one or more heart symbols.
 // AVCaptureReactionTypeHeart returns the string constant AVCaptureReactionTypeHeart, for use as a dictionary key or argument.
 func AVCaptureReactionTypeHeart() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureReactionTypeHeart")))
 }
 
-// Indicates a reaction which features fireworks bursting in the background.
 // AVCaptureReactionTypeFireworks returns the string constant AVCaptureReactionTypeFireworks, for use as a dictionary key or argument.
 func AVCaptureReactionTypeFireworks() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureReactionTypeFireworks")))
 }
 
-// Indicates a reaction which features a dark and stormy night.
 // AVCaptureReactionTypeRain returns the string constant AVCaptureReactionTypeRain, for use as a dictionary key or argument.
 func AVCaptureReactionTypeRain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureReactionTypeRain")))
 }
 
-// Indicates a reaction which features festive spots of color falling through the scene.
 // AVCaptureReactionTypeConfetti returns the string constant AVCaptureReactionTypeConfetti, for use as a dictionary key or argument.
 func AVCaptureReactionTypeConfetti() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureReactionTypeConfetti")))
 }
 
-// Indicates a reaction which features a bright laser display projecting into the scene.
 // AVCaptureReactionTypeLasers returns the string constant AVCaptureReactionTypeLasers, for use as a dictionary key or argument.
 func AVCaptureReactionTypeLasers() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureReactionTypeLasers")))
 }
 
-// Starting in Mac Catalyst 17.0, apps may opt in for using AVCaptureDeviceTypeExternal by adding the following key to their Info.plist: <key>NSCameraUseExternalDeviceType</key> <true/> Otherwise, external cameras on Mac Catalyst report that their device type is AVCaptureDeviceTypeBuiltInWideAngleCamera. Prior to visionOS 3.0, your app must have the `com.apple.developer.avfoundation.uvc-device-access` entitlement in order to discover and use devices of type `AVCaptureDeviceTypeExternal` on visionOS.
 // AVCaptureDeviceTypeExternal returns the string constant AVCaptureDeviceTypeExternal, for use as a dictionary key or argument.
 func AVCaptureDeviceTypeExternal() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureDeviceTypeExternal")))
@@ -5113,7 +4852,6 @@ func AVCaptureDeviceTypeBuiltInWideAngleCamera() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureDeviceTypeBuiltInWideAngleCamera")))
 }
 
-// Starting in macOS 14.0 and Mac Catalyst 17.0, apps may opt in for using AVCaptureDeviceTypeContinuityCamera by adding the following key to their Info.plist: <key>NSCameraUseContinuityCameraDeviceType</key> <true/> Otherwise, continuity cameras on macOS and Mac Catalyst report that their device type is AVCaptureDeviceTypeBuiltInWideAngleCamera.
 // AVCaptureDeviceTypeContinuityCamera returns the string constant AVCaptureDeviceTypeContinuityCamera, for use as a dictionary key or argument.
 func AVCaptureDeviceTypeContinuityCamera() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureDeviceTypeContinuityCamera")))
@@ -5144,175 +4882,146 @@ func AVSpatialCaptureDiscomfortReasonSubjectTooClose() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVSpatialCaptureDiscomfortReasonSubjectTooClose")))
 }
 
-// The light level of the current scene is insufficient for the current set of features to function optimally.
 // AVCaptureSceneMonitoringStatusNotEnoughLight returns the string constant AVCaptureSceneMonitoringStatusNotEnoughLight, for use as a dictionary key or argument.
 func AVCaptureSceneMonitoringStatusNotEnoughLight() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSceneMonitoringStatusNotEnoughLight")))
 }
 
-// The key used to provide an NSError describing the failure condition in an AVCaptureSessionRuntimeErrorNotification. AVCaptureSessionErrorKey may be found in the userInfo dictionary provided with an AVCaptureSessionRuntimeErrorNotification. The NSError associated with the notification gives greater detail on the nature of the error, and in some cases recovery suggestions.
 // AVCaptureSessionErrorKey returns the string constant AVCaptureSessionErrorKey, for use as a dictionary key or argument.
 func AVCaptureSessionErrorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionErrorKey")))
 }
 
-// An identifier for an instance of AVMetadataHumanBodyObject. AVMetadataHumanBodyObject objects return this constant as their type.
 // AVMetadataObjectTypeHumanBody returns the string constant AVMetadataObjectTypeHumanBody, for use as a dictionary key or argument.
 func AVMetadataObjectTypeHumanBody() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeHumanBody")))
 }
 
-// An identifier for an instance of AVMetadataHumanFullBodyObject. AVMetadataHumanFullBodyObject objects return this constant as their type.
 // AVMetadataObjectTypeHumanFullBody returns the string constant AVMetadataObjectTypeHumanFullBody, for use as a dictionary key or argument.
 func AVMetadataObjectTypeHumanFullBody() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeHumanFullBody")))
 }
 
-// An identifier for an instance of a cat head object. “AVMetadataCatHeadObject“ objects return this constant as their type.
 // AVMetadataObjectTypeCatHead returns the string constant AVMetadataObjectTypeCatHead, for use as a dictionary key or argument.
 func AVMetadataObjectTypeCatHead() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeCatHead")))
 }
 
-// An identifier for an instance of AVMetadataCatBodyObject. AVMetadataCatBodyObject objects return this constant as their type.
 // AVMetadataObjectTypeCatBody returns the string constant AVMetadataObjectTypeCatBody, for use as a dictionary key or argument.
 func AVMetadataObjectTypeCatBody() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeCatBody")))
 }
 
-// An identifier for an instance of a dog head object. “AVMetadataDogHeadObject“ objects return this constant as their type.
 // AVMetadataObjectTypeDogHead returns the string constant AVMetadataObjectTypeDogHead, for use as a dictionary key or argument.
 func AVMetadataObjectTypeDogHead() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeDogHead")))
 }
 
-// An identifier for an instance of AVMetadataDogBodyObject. AVMetadataDogBodyObject objects return this constant as their type.
 // AVMetadataObjectTypeDogBody returns the string constant AVMetadataObjectTypeDogBody, for use as a dictionary key or argument.
 func AVMetadataObjectTypeDogBody() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeDogBody")))
 }
 
-// An identifier for an instance of AVMetadataSalientObject. AVMetadataSalientObject objects return this constant as their type.
 // AVMetadataObjectTypeSalientObject returns the string constant AVMetadataObjectTypeSalientObject, for use as a dictionary key or argument.
 func AVMetadataObjectTypeSalientObject() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeSalientObject")))
 }
 
-// An identifier for an instance of AVMetadataFaceObject. AVMetadataFaceObject objects return this constant as their type.
 // AVMetadataObjectTypeFace returns the string constant AVMetadataObjectTypeFace, for use as a dictionary key or argument.
 func AVMetadataObjectTypeFace() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeFace")))
 }
 
-// An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeUPCECode. AVMetadataMachineReadableCodeObject objects generated from UPC-E codes return this constant as their type.
 // AVMetadataObjectTypeUPCECode returns the string constant AVMetadataObjectTypeUPCECode, for use as a dictionary key or argument.
 func AVMetadataObjectTypeUPCECode() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeUPCECode")))
 }
 
-// An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeCode39Code. AVMetadataMachineReadableCodeObject objects generated from Code 39 codes return this constant as their type.
 // AVMetadataObjectTypeCode39Code returns the string constant AVMetadataObjectTypeCode39Code, for use as a dictionary key or argument.
 func AVMetadataObjectTypeCode39Code() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeCode39Code")))
 }
 
-// An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeCode39Mod43Code. AVMetadataMachineReadableCodeObject objects generated from Code 39 mod 43 codes return this constant as their type.
 // AVMetadataObjectTypeCode39Mod43Code returns the string constant AVMetadataObjectTypeCode39Mod43Code, for use as a dictionary key or argument.
 func AVMetadataObjectTypeCode39Mod43Code() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeCode39Mod43Code")))
 }
 
-// An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeEAN13Code. AVMetadataMachineReadableCodeObject objects generated from EAN-13 (including UPC-A) codes return this constant as their type.
 // AVMetadataObjectTypeEAN13Code returns the string constant AVMetadataObjectTypeEAN13Code, for use as a dictionary key or argument.
 func AVMetadataObjectTypeEAN13Code() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeEAN13Code")))
 }
 
-// An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeEAN8Code. AVMetadataMachineReadableCodeObject objects generated from EAN-8 codes return this constant as their type.
 // AVMetadataObjectTypeEAN8Code returns the string constant AVMetadataObjectTypeEAN8Code, for use as a dictionary key or argument.
 func AVMetadataObjectTypeEAN8Code() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeEAN8Code")))
 }
 
-// An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeCode93Code. AVMetadataMachineReadableCodeObject objects generated from Code 93 codes return this constant as their type.
 // AVMetadataObjectTypeCode93Code returns the string constant AVMetadataObjectTypeCode93Code, for use as a dictionary key or argument.
 func AVMetadataObjectTypeCode93Code() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeCode93Code")))
 }
 
-// An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeCode128Code. AVMetadataMachineReadableCodeObject objects generated from Code 128 codes return this constant as their type.
 // AVMetadataObjectTypeCode128Code returns the string constant AVMetadataObjectTypeCode128Code, for use as a dictionary key or argument.
 func AVMetadataObjectTypeCode128Code() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeCode128Code")))
 }
 
-// An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypePDF417Code. AVMetadataMachineReadableCodeObject objects generated from PDF417 codes return this constant as their type.
 // AVMetadataObjectTypePDF417Code returns the string constant AVMetadataObjectTypePDF417Code, for use as a dictionary key or argument.
 func AVMetadataObjectTypePDF417Code() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypePDF417Code")))
 }
 
-// An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeQRCode. AVMetadataMachineReadableCodeObject objects generated from QR codes return this constant as their type.
 // AVMetadataObjectTypeQRCode returns the string constant AVMetadataObjectTypeQRCode, for use as a dictionary key or argument.
 func AVMetadataObjectTypeQRCode() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeQRCode")))
 }
 
-// An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeAztecCode. AVMetadataMachineReadableCodeObject objects generated from Aztec codes return this constant as their type.
 // AVMetadataObjectTypeAztecCode returns the string constant AVMetadataObjectTypeAztecCode, for use as a dictionary key or argument.
 func AVMetadataObjectTypeAztecCode() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeAztecCode")))
 }
 
-// An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeInterleaved2of5Code. AVMetadataMachineReadableCodeObject objects generated from Interleaved 2 of 5 codes return this constant as their type.
 // AVMetadataObjectTypeInterleaved2of5Code returns the string constant AVMetadataObjectTypeInterleaved2of5Code, for use as a dictionary key or argument.
 func AVMetadataObjectTypeInterleaved2of5Code() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeInterleaved2of5Code")))
 }
 
-// An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeITF14Code. AVMetadataMachineReadableCodeObject objects generated from ITF14 codes return this constant as their type.
 // AVMetadataObjectTypeITF14Code returns the string constant AVMetadataObjectTypeITF14Code, for use as a dictionary key or argument.
 func AVMetadataObjectTypeITF14Code() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeITF14Code")))
 }
 
-// An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeDataMatrixCode. AVMetadataMachineReadableCodeObject objects generated from DataMatrix codes return this constant as their type.
 // AVMetadataObjectTypeDataMatrixCode returns the string constant AVMetadataObjectTypeDataMatrixCode, for use as a dictionary key or argument.
 func AVMetadataObjectTypeDataMatrixCode() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeDataMatrixCode")))
 }
 
-// An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeCodabarCode. AVMetadataMachineReadableCodeObject objects generated from Codabar codes return this constant as their type.
 // AVMetadataObjectTypeCodabarCode returns the string constant AVMetadataObjectTypeCodabarCode, for use as a dictionary key or argument.
 func AVMetadataObjectTypeCodabarCode() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeCodabarCode")))
 }
 
-// An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeGS1DataBarCode. AVMetadataMachineReadableCodeObject objects generated from GS1DataBar codes return this constant as their type.
 // AVMetadataObjectTypeGS1DataBarCode returns the string constant AVMetadataObjectTypeGS1DataBarCode, for use as a dictionary key or argument.
 func AVMetadataObjectTypeGS1DataBarCode() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeGS1DataBarCode")))
 }
 
-// An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeGS1DataBarExpandedCode. AVMetadataMachineReadableCodeObject objects generated from GS1DataBarExpanded codes return this constant as their type.
 // AVMetadataObjectTypeGS1DataBarExpandedCode returns the string constant AVMetadataObjectTypeGS1DataBarExpandedCode, for use as a dictionary key or argument.
 func AVMetadataObjectTypeGS1DataBarExpandedCode() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeGS1DataBarExpandedCode")))
 }
 
-// An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeGS1DataBarLimitedCode. AVMetadataMachineReadableCodeObject objects generated from GS1DataBarLimited codes return this constant as their type.
 // AVMetadataObjectTypeGS1DataBarLimitedCode returns the string constant AVMetadataObjectTypeGS1DataBarLimitedCode, for use as a dictionary key or argument.
 func AVMetadataObjectTypeGS1DataBarLimitedCode() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeGS1DataBarLimitedCode")))
 }
 
-// An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeMicroQRCode. AVMetadataMachineReadableCodeObject objects generated from MicroQR codes return this constant as their type.
 // AVMetadataObjectTypeMicroQRCode returns the string constant AVMetadataObjectTypeMicroQRCode, for use as a dictionary key or argument.
 func AVMetadataObjectTypeMicroQRCode() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeMicroQRCode")))
 }
 
-// An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeMicroPDF417Code. AVMetadataMachineReadableCodeObject objects generated from MicroPDF417 codes return this constant as their type.
 // AVMetadataObjectTypeMicroPDF417Code returns the string constant AVMetadataObjectTypeMicroPDF417Code, for use as a dictionary key or argument.
 func AVMetadataObjectTypeMicroPDF417Code() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeMicroPDF417Code")))

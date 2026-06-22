@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRBaseClusterElectricalEnergyMeasurement is an idiomatic wrapper over the Objective-C class MTRBaseClusterElectricalEnergyMeasurement.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
 type MTRBaseClusterElectricalEnergyMeasurement struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterElectricalEnergyMeasurementFromID adopts an existing Objective-C object as a MTRBaseClusterElectricalEnergyMeasurement
@@ -25,7 +26,8 @@ func MTRBaseClusterElectricalEnergyMeasurementFromID(id objc.ID) *MTRBaseCluster
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterElectricalEnergyMeasurement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterElectricalEnergyMeasurement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,37 +40,23 @@ func mTRBaseClusterElectricalEnergyMeasurementAdopt(id objc.ID) *MTRBaseClusterE
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterElectricalEnergyMeasurement{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterElectricalEnergyMeasurement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterElectricalEnergyMeasurementWithDeviceEndpointIDQueue creates a new MTRBaseClusterElectricalEnergyMeasurement.
+// NewMTRBaseClusterElectricalEnergyMeasurementWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterElectricalEnergyMeasurementWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterElectricalEnergyMeasurement {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterElectricalEnergyMeasurement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterElectricalEnergyMeasurementAdopt(_id)
 }
 
+// ReadAttributeAccuracyWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAccuracyWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeAccuracyWithCompletion(ctx context.Context) (*MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct, error) {
+func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeAccuracyWithCompletion(ctx context.Context) (result *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct, err error) {
 	type _result struct {
 		val *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct
 		err error
@@ -90,8 +78,10 @@ func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeAccuracyWithCom
 	}
 }
 
+// SubscribeAttributeAccuracyWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAccuracyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeAccuracyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct, error) {
+func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeAccuracyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct, err error) {
 	type _result struct {
 		val *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct
 		err error
@@ -113,8 +103,10 @@ func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeAccuracyWi
 	}
 }
 
+// ReadAttributeCumulativeEnergyImportedWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCumulativeEnergyImportedWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyImportedWithCompletion(ctx context.Context) (*MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct, error) {
+func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyImportedWithCompletion(ctx context.Context) (result *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct, err error) {
 	type _result struct {
 		val *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
 		err error
@@ -136,8 +128,10 @@ func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnerg
 	}
 }
 
+// SubscribeAttributeCumulativeEnergyImportedWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCumulativeEnergyImportedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeCumulativeEnergyImportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct, error) {
+func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeCumulativeEnergyImportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct, err error) {
 	type _result struct {
 		val *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
 		err error
@@ -159,8 +153,10 @@ func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeCumulative
 	}
 }
 
+// ReadAttributeCumulativeEnergyExportedWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCumulativeEnergyExportedWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyExportedWithCompletion(ctx context.Context) (*MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct, error) {
+func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyExportedWithCompletion(ctx context.Context) (result *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct, err error) {
 	type _result struct {
 		val *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
 		err error
@@ -182,8 +178,10 @@ func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnerg
 	}
 }
 
+// SubscribeAttributeCumulativeEnergyExportedWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCumulativeEnergyExportedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeCumulativeEnergyExportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct, error) {
+func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeCumulativeEnergyExportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct, err error) {
 	type _result struct {
 		val *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
 		err error
@@ -205,8 +203,10 @@ func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeCumulative
 	}
 }
 
+// ReadAttributePeriodicEnergyImportedWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePeriodicEnergyImportedWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributePeriodicEnergyImportedWithCompletion(ctx context.Context) (*MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct, error) {
+func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributePeriodicEnergyImportedWithCompletion(ctx context.Context) (result *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct, err error) {
 	type _result struct {
 		val *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
 		err error
@@ -228,8 +228,10 @@ func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributePeriodicEnergyI
 	}
 }
 
+// SubscribeAttributePeriodicEnergyImportedWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePeriodicEnergyImportedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributePeriodicEnergyImportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct, error) {
+func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributePeriodicEnergyImportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct, err error) {
 	type _result struct {
 		val *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
 		err error
@@ -251,8 +253,10 @@ func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributePeriodicEn
 	}
 }
 
+// ReadAttributePeriodicEnergyExportedWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributePeriodicEnergyExportedWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributePeriodicEnergyExportedWithCompletion(ctx context.Context) (*MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct, error) {
+func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributePeriodicEnergyExportedWithCompletion(ctx context.Context) (result *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct, err error) {
 	type _result struct {
 		val *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
 		err error
@@ -274,8 +278,10 @@ func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributePeriodicEnergyE
 	}
 }
 
+// SubscribeAttributePeriodicEnergyExportedWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributePeriodicEnergyExportedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributePeriodicEnergyExportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct, error) {
+func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributePeriodicEnergyExportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct, err error) {
 	type _result struct {
 		val *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
 		err error
@@ -297,8 +303,10 @@ func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributePeriodicEn
 	}
 }
 
+// ReadAttributeCumulativeEnergyResetWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeCumulativeEnergyResetWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyResetWithCompletion(ctx context.Context) (*MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct, error) {
+func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyResetWithCompletion(ctx context.Context) (result *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct, err error) {
 	type _result struct {
 		val *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct
 		err error
@@ -320,8 +328,10 @@ func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnerg
 	}
 }
 
+// SubscribeAttributeCumulativeEnergyResetWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeCumulativeEnergyResetWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeCumulativeEnergyResetWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct, error) {
+func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeCumulativeEnergyResetWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct, err error) {
 	type _result struct {
 		val *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct
 		err error
@@ -343,8 +353,10 @@ func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeCumulative
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -366,8 +378,10 @@ func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeGeneratedComman
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -389,8 +403,10 @@ func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeGeneratedC
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -412,8 +428,10 @@ func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeAcceptedCommand
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -435,8 +453,10 @@ func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeAcceptedCo
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -458,8 +478,10 @@ func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeAttributeListWi
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -481,8 +503,10 @@ func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeAttributeL
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -504,8 +528,10 @@ func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeFeatureMapWithC
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -527,8 +553,10 @@ func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeFeatureMap
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -550,8 +578,10 @@ func (x *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeClusterRevision
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -601,3 +631,7 @@ type MTRBaseClusterElectricalEnergyMeasurementable interface {
 }
 
 var _ MTRBaseClusterElectricalEnergyMeasurementable = (*MTRBaseClusterElectricalEnergyMeasurement)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterElectricalEnergyMeasurement)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterElectricalEnergyMeasurement)(nil)

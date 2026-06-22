@@ -11,73 +11,73 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Creates and returns an alarm with an absolute date.
+// AlarmWithAbsoluteDate creates and returns an alarm with an absolute date.
 func AlarmWithAbsoluteDate(date obj.Object) *Alarm {
 	_r := objc.Send[objc.ID](objc.ID(_class("EKAlarm")), objc.RegisterName("alarmWithAbsoluteDate:"), objref.IDOf(date))
 	return AlarmFromID(_r)
 }
 
-// Creates and returns an alarm with a relative offset.
+// AlarmWithRelativeOffset creates and returns an alarm with a relative offset.
 func AlarmWithRelativeOffset(offset float64) *Alarm {
 	_r := objc.Send[objc.ID](objc.ID(_class("EKAlarm")), objc.RegisterName("alarmWithRelativeOffset:"), offset)
 	return AlarmFromID(_r)
 }
 
-// Creates a new calendar that can contain the given entity type.
+// CalendarForEntityTypeEventStore creates a new calendar that can contain the given entity type.
 func CalendarForEntityTypeEventStore(entityType EntityType, eventStore *EventStore) *Calendar {
 	_r := objc.Send[objc.ID](objc.ID(_class("EKCalendar")), objc.RegisterName("calendarForEntityType:eventStore:"), entityType, objref.IDOf(eventStore))
 	return CalendarFromID(_r)
 }
 
-// Creates and returns a new event belonging to a specified event store.
+// EventWithEventStore creates and returns a new event belonging to a specified event store.
 func EventWithEventStore(eventStore *EventStore) *Event {
 	_r := objc.Send[objc.ID](objc.ID(_class("EKEvent")), objc.RegisterName("eventWithEventStore:"), objref.IDOf(eventStore))
 	return EventFromID(_r)
 }
 
-// Determines the authorization status for the given entity type.
+// AuthorizationStatusForEntityType determines the authorization status for the given entity type.
 func AuthorizationStatusForEntityType(entityType EntityType) AuthorizationStatus {
 	_r := objc.Send[AuthorizationStatus](objc.ID(_class("EKEventStore")), objc.RegisterName("authorizationStatusForEntityType:"), entityType)
 	return _r
 }
 
-// Creates and returns a day of the week with a given day.
+// DayOfWeek creates and returns a day of the week with a given day.
 func DayOfWeek(dayOfTheWeek Weekday) *RecurrenceDayOfWeek {
 	_r := objc.Send[objc.ID](objc.ID(_class("EKRecurrenceDayOfWeek")), objc.RegisterName("dayOfWeek:"), dayOfTheWeek)
 	return RecurrenceDayOfWeekFromID(_r)
 }
 
-// Creates and returns an autoreleased day of the week with a given day and week number.
+// DayOfWeekWeekNumber creates and returns an autoreleased day of the week with a given day and week number.
 func DayOfWeekWeekNumber(dayOfTheWeek Weekday, weekNumber int) *RecurrenceDayOfWeek {
 	_r := objc.Send[objc.ID](objc.ID(_class("EKRecurrenceDayOfWeek")), objc.RegisterName("dayOfWeek:weekNumber:"), dayOfTheWeek, weekNumber)
 	return RecurrenceDayOfWeekFromID(_r)
 }
 
-// Initializes and returns a date-based recurrence end with a given end date.
+// RecurrenceEndWithEndDate initializes and returns a date-based recurrence end with a given end date.
 func RecurrenceEndWithEndDate(endDate obj.Object) *RecurrenceEnd {
 	_r := objc.Send[objc.ID](objc.ID(_class("EKRecurrenceEnd")), objc.RegisterName("recurrenceEndWithEndDate:"), objref.IDOf(endDate))
 	return RecurrenceEndFromID(_r)
 }
 
-// Initializes and returns a count-based recurrence end with a given maximum occurrence count.
+// RecurrenceEndWithOccurrenceCount initializes and returns a count-based recurrence end with a given maximum occurrence count.
 func RecurrenceEndWithOccurrenceCount(occurrenceCount int) *RecurrenceEnd {
 	_r := objc.Send[objc.ID](objc.ID(_class("EKRecurrenceEnd")), objc.RegisterName("recurrenceEndWithOccurrenceCount:"), occurrenceCount)
 	return RecurrenceEndFromID(_r)
 }
 
-// Creates and returns a new reminder in the given event store.
+// ReminderWithEventStore creates and returns a new reminder in the given event store.
 func ReminderWithEventStore(eventStore *EventStore) *Reminder {
 	_r := objc.Send[objc.ID](objc.ID(_class("EKReminder")), objc.RegisterName("reminderWithEventStore:"), objref.IDOf(eventStore))
 	return ReminderFromID(_r)
 }
 
-// Creates a new structured location with the specified title.
+// LocationWithTitle creates a new structured location with the specified title.
 func LocationWithTitle(title string) *StructuredLocation {
 	_r := objc.Send[objc.ID](objc.ID(_class("EKStructuredLocation")), objc.RegisterName("locationWithTitle:"), purego.NSString(title))
 	return StructuredLocationFromID(_r)
 }
 
-// Creates a new structured location with the specified map item.
+// LocationWithMapItem creates a new structured location with the specified map item.
 func LocationWithMapItem(mapItem obj.Object) *StructuredLocation {
 	_r := objc.Send[objc.ID](objc.ID(_class("EKStructuredLocation")), objc.RegisterName("locationWithMapItem:"), objref.IDOf(mapItem))
 	return StructuredLocationFromID(_r)

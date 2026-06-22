@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A DRNotificationCenter object (or simply, notification center) is essentially a notification dispatch table. It notifies all observers of notifications meeting specific criteria. This information is encapsulated in NSNotification objects, also known as notifications. Client objects register themselves with the notification center as observers of specific notifications posted by DiscRecording. When an event occurs, DiscRecording posts an appropriate notification to the notification center. The notification center dispatches a message to each registered observer, passing the notification as the sole argument. There are two main differences between a DRNotificationCenter and the NSNotificationCenter from Foundation. First is that only Disc Recording posts notifications received through this mechanism. You use this to obtain device plug/unplug events, burn status, etc. Second, there can be multple notification centers active at once. Each run loop of your application will have it's own notification center and notifications from that notification center will be posted to the runloop it was created on.
-//
 // NotificationCenter is an idiomatic wrapper over the Objective-C class DRNotificationCenter.
+//
+// A DRNotificationCenter object (or simply, notification center) is essentially a notification dispatch table. It notifies all observers of notifications meeting specific criteria. This information is encapsulated in NSNotification objects, also known as notifications. Client objects register themselves with the notification center as observers of specific notifications posted by DiscRecording. When an event occurs, DiscRecording posts an appropriate notification to the notification center. The notification center dispatches a message to each registered observer, passing the notification as the sole argument. There are two main differences between a DRNotificationCenter and the NSNotificationCenter from Foundation. First is that only Disc Recording posts notifications received through this mechanism. You use this to obtain device plug/unplug events, burn status, etc. Second, there can be multple notification centers active at once. Each run loop of your application will have it's own notification center and notifications from that notification center will be posted to the runloop it was created on.
 type NotificationCenter struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func NotificationCenterFromID(id objc.ID) *NotificationCenter {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationCenter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NotificationCenter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func notificationCenterAdopt(id objc.ID) *NotificationCenter {
 	if id == 0 {
 		return nil
 	}
-	x := &NotificationCenter{Handle: objref.Wrap(id)}
+	x := &NotificationCenter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,13 +60,19 @@ func (x *NotificationCenter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationCenter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewNotificationCenter creates a new NotificationCenter.
 func NewNotificationCenter() *NotificationCenter {
 	_id := objc.Send[objc.ID](objc.ID(_class("DRNotificationCenter")), objc.RegisterName("new"))
 	return notificationCenterAdopt(_id)
 }
 
-// Removes anObserver from receiving notifications. Removes anObserver as the observer of notifications with the name notificationName and object anObject from the receiver. Be sure to invoke this method before deallocating the observer object or any object specified in
+// RemoveObserverNameObject removes anObserver from receiving notifications. Removes anObserver as the observer of notifications with the name notificationName and object anObject from the receiver. Be sure to invoke this method before deallocating the observer object or any object specified in
 func (x *NotificationCenter) RemoveObserverNameObject(observer obj.Object, aName string, anObject obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObserver:name:object:"), objref.IDOf(observer), purego.NSString(aName), objref.IDOf(anObject))
 }

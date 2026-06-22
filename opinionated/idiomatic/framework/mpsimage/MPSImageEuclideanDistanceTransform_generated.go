@@ -6,15 +6,18 @@ package mpsimage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ImageEuclideanDistanceTransform is an idiomatic wrapper over the Objective-C class MPSImageEuclideanDistanceTransform.
+//
+// It embeds [UnaryImageKernel], promoting that type's methods.
 type ImageEuclideanDistanceTransform struct {
-	objref.Handle
+	UnaryImageKernel
 }
 
 // ImageEuclideanDistanceTransformFromID adopts an existing Objective-C object as a ImageEuclideanDistanceTransform
@@ -23,7 +26,8 @@ func ImageEuclideanDistanceTransformFromID(id objc.ID) *ImageEuclideanDistanceTr
 	if id == 0 {
 		return nil
 	}
-	x := &ImageEuclideanDistanceTransform{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageEuclideanDistanceTransform{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +40,10 @@ func imageEuclideanDistanceTransformAdopt(id objc.ID) *ImageEuclideanDistanceTra
 	if id == 0 {
 		return nil
 	}
-	x := &ImageEuclideanDistanceTransform{Handle: objref.Wrap(id)}
+	x := &ImageEuclideanDistanceTransform{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ImageEuclideanDistanceTransform) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageEuclideanDistanceTransform) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageEuclideanDistanceTransform) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewImageEuclideanDistanceTransform creates a new ImageEuclideanDistanceTransform.
@@ -62,20 +52,31 @@ func NewImageEuclideanDistanceTransform() *ImageEuclideanDistanceTransform {
 	return imageEuclideanDistanceTransformAdopt(_id)
 }
 
-// Defines a search scope size around output pixel to limit closest non-zero pixel search. Optional variable. When the non-zeroes in the input image are on average very far away from each other (ie. the distances are large), the distance calculation algorithm has to work harder to find the closest pixel. If you don't care about getting exact results beyond a certain distance you can use this property to limit the search space and speed up the kernels. In case there are no non-zero pixels within this search scope around the output pixel, then the output value will be some number that is larger than this search limit. Normally you should be fine with the default value of FLT_MAX, which results in the exact EDT, so use this only if you need additional performance. Typical good values are: 32, 64, 96, 128. Default: FLT_MAX
-//
-// WithSearchLimitRadius sets searchLimitRadius and returns the receiver so calls can be chained.
+// WithSearchLimitRadius defines a search scope size around output pixel to limit closest non-zero pixel search. Optional variable. When the non-zeroes in the input image are on average very far away from each other (ie. the distances are large), the distance calculation algorithm has to work harder to find the closest pixel. If you don't care about getting exact results beyond a certain distance you can use this property to limit the search space and speed up the kernels. In case there are no non-zero pixels within this search scope around the output pixel, then the output value will be some number that is larger than this search limit. Normally you should be fine with the default value of FLT_MAX, which results in the exact EDT, so use this only if you need additional performance. Typical good values are: 32, 64, 96, 128. Default: FLT_MAX
 func (x *ImageEuclideanDistanceTransform) WithSearchLimitRadius(searchLimitRadius float32) *ImageEuclideanDistanceTransform {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchLimitRadius:"), searchLimitRadius)
 	return x
 }
 
-// Defines a search scope size around output pixel to limit closest non-zero pixel search. Optional variable. When the non-zeroes in the input image are on average very far away from each other (ie. the distances are large), the distance calculation algorithm has to work harder to find the closest pixel. If you don't care about getting exact results beyond a certain distance you can use this property to limit the search space and speed up the kernels. In case there are no non-zero pixels within this search scope around the output pixel, then the output value will be some number that is larger than this search limit. Normally you should be fine with the default value of FLT_MAX, which results in the exact EDT, so use this only if you need additional performance. Typical good values are: 32, 64, 96, 128. Default: FLT_MAX
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
+func (x *ImageEuclideanDistanceTransform) WithOffset(offset mpscore.MPSOffset) *ImageEuclideanDistanceTransform {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (x *ImageEuclideanDistanceTransform) WithClipRect(clipRect metal.MTLRegion) *ImageEuclideanDistanceTransform {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
+// SearchLimitRadius defines a search scope size around output pixel to limit closest non-zero pixel search. Optional variable. When the non-zeroes in the input image are on average very far away from each other (ie. the distances are large), the distance calculation algorithm has to work harder to find the closest pixel. If you don't care about getting exact results beyond a certain distance you can use this property to limit the search space and speed up the kernels. In case there are no non-zero pixels within this search scope around the output pixel, then the output value will be some number that is larger than this search limit. Normally you should be fine with the default value of FLT_MAX, which results in the exact EDT, so use this only if you need additional performance. Typical good values are: 32, 64, 96, 128. Default: FLT_MAX
 func (x *ImageEuclideanDistanceTransform) SearchLimitRadius() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("searchLimitRadius"))
 	return _r
 }
 
+// SetSearchLimitRadius wraps the corresponding Objective-C method.
 func (x *ImageEuclideanDistanceTransform) SetSearchLimitRadius(searchLimitRadius float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchLimitRadius:"), searchLimitRadius)
 }
@@ -84,8 +85,12 @@ func (x *ImageEuclideanDistanceTransform) SetSearchLimitRadius(searchLimitRadius
 type ImageEuclideanDistanceTransformable interface {
 	obj.Object
 	WithSearchLimitRadius(searchLimitRadius float32) *ImageEuclideanDistanceTransform
+	WithOffset(offset mpscore.MPSOffset) *ImageEuclideanDistanceTransform
+	WithClipRect(clipRect metal.MTLRegion) *ImageEuclideanDistanceTransform
 	SearchLimitRadius() float32
 	SetSearchLimitRadius(searchLimitRadius float32)
 }
 
 var _ ImageEuclideanDistanceTransformable = (*ImageEuclideanDistanceTransform)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageEuclideanDistanceTransform)(nil)

@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents an audio buffer that you use for compressed audio formats.
-//
 // AudioCompressedBuffer is an idiomatic wrapper over the Objective-C class AVAudioCompressedBuffer.
+//
+// It embeds [AudioBuffer], promoting that type's methods.
+//
+// An object that represents an audio buffer that you use for compressed audio formats.
 type AudioCompressedBuffer struct {
-	objref.Handle
+	AudioBuffer
 }
 
 // AudioCompressedBufferFromID adopts an existing Objective-C object as a AudioCompressedBuffer
@@ -25,7 +26,8 @@ func AudioCompressedBufferFromID(id objc.ID) *AudioCompressedBuffer {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioCompressedBuffer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AudioCompressedBuffer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,94 +40,74 @@ func audioCompressedBufferAdopt(id objc.ID) *AudioCompressedBuffer {
 	if id == 0 {
 		return nil
 	}
-	x := &AudioCompressedBuffer{Handle: objref.Wrap(id)}
+	x := &AudioCompressedBuffer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *AudioCompressedBuffer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioCompressedBuffer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioCompressedBuffer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Creates a buffer that contains audio data in a compressed state.
-//
-// NewAudioCompressedBufferWithFormatPacketCapacityMaximumPacketSize creates a new AudioCompressedBuffer.
+// NewAudioCompressedBufferWithFormatPacketCapacityMaximumPacketSize creates a buffer that contains audio data in a compressed state.
 func NewAudioCompressedBufferWithFormatPacketCapacityMaximumPacketSize(format *AudioFormat, packetCapacity uint32, maximumPacketSize int) *AudioCompressedBuffer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioCompressedBuffer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:packetCapacity:maximumPacketSize:"), objref.IDOf(format), packetCapacity, maximumPacketSize)
 	return audioCompressedBufferAdopt(_id)
 }
 
-// Creates a buffer that contains constant bytes per packet of audio data in a compressed state.
-//
-// NewAudioCompressedBufferWithFormatPacketCapacity creates a new AudioCompressedBuffer.
+// NewAudioCompressedBufferWithFormatPacketCapacity creates a buffer that contains constant bytes per packet of audio data in a compressed state.
 func NewAudioCompressedBufferWithFormatPacketCapacity(format *AudioFormat, packetCapacity uint32) *AudioCompressedBuffer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioCompressedBuffer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:packetCapacity:"), objref.IDOf(format), packetCapacity)
 	return audioCompressedBufferAdopt(_id)
 }
 
-// The number of packets currently in the buffer.
-//
-// WithPacketCount sets packetCount and returns the receiver so calls can be chained.
+// WithPacketCount the number of packets currently in the buffer.
 func (x *AudioCompressedBuffer) WithPacketCount(packetCount uint32) *AudioCompressedBuffer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPacketCount:"), packetCount)
 	return x
 }
 
-// The number of valid bytes in the buffer.
-//
-// WithByteLength sets byteLength and returns the receiver so calls can be chained.
+// WithByteLength the number of valid bytes in the buffer.
 func (x *AudioCompressedBuffer) WithByteLength(byteLength uint32) *AudioCompressedBuffer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setByteLength:"), byteLength)
 	return x
 }
 
-// The number of compressed packets the buffer can contain.
+// PacketCapacity the number of compressed packets the buffer can contain.
 func (x *AudioCompressedBuffer) PacketCapacity() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("packetCapacity"))
 	return _r
 }
 
-// The current number of compressed packets in the buffer. You may modify the packetCount as part of an operation that modifies its contents. The packetCount must be less than or equal to the packetCapacity.
+// PacketCount the current number of compressed packets in the buffer. You may modify the packetCount as part of an operation that modifies its contents. The packetCount must be less than or equal to the packetCapacity.
 func (x *AudioCompressedBuffer) PacketCount() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("packetCount"))
 	return _r
 }
 
+// SetPacketCount wraps the corresponding Objective-C method.
 func (x *AudioCompressedBuffer) SetPacketCount(packetCount uint32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPacketCount:"), packetCount)
 }
 
-// The maximum size of a compressed packet in bytes.
+// MaximumPacketSize the maximum size of a compressed packet in bytes.
 func (x *AudioCompressedBuffer) MaximumPacketSize() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumPacketSize"))
 	return _r
 }
 
-// The buffer's capacity in bytes
+// ByteCapacity the buffer's capacity in bytes
 func (x *AudioCompressedBuffer) ByteCapacity() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("byteCapacity"))
 	return _r
 }
 
-// The current number of valid bytes in the buffer. Can be changed as part of an operation that modifies the contents.
+// ByteLength the current number of valid bytes in the buffer. Can be changed as part of an operation that modifies the contents.
 func (x *AudioCompressedBuffer) ByteLength() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("byteLength"))
 	return _r
 }
 
+// SetByteLength wraps the corresponding Objective-C method.
 func (x *AudioCompressedBuffer) SetByteLength(byteLength uint32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setByteLength:"), byteLength)
 }
@@ -145,3 +127,5 @@ type AudioCompressedBufferable interface {
 }
 
 var _ AudioCompressedBufferable = (*AudioCompressedBuffer)(nil)
+
+var _ AudioBufferProvider = (*AudioCompressedBuffer)(nil)

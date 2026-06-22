@@ -9,16 +9,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// The class for accessing USB-related services.
-//
 // HostInterface is an idiomatic wrapper over the Objective-C class IOUSBHostInterface.
+//
+// It embeds [HostObject], promoting that type's methods.
+//
+// The class for accessing USB-related services.
 type HostInterface struct {
-	objref.Handle
+	HostObject
 }
 
 // HostInterfaceFromID adopts an existing Objective-C object as a HostInterface
@@ -27,7 +28,8 @@ func HostInterfaceFromID(id objc.ID) *HostInterface {
 	if id == 0 {
 		return nil
 	}
-	x := &HostInterface{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HostInterface{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,24 +42,10 @@ func hostInterfaceAdopt(id objc.ID) *HostInterface {
 	if id == 0 {
 		return nil
 	}
-	x := &HostInterface{Handle: objref.Wrap(id)}
+	x := &HostInterface{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *HostInterface) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HostInterface) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HostInterface) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewHostInterface creates a new HostInterface.
@@ -66,7 +54,7 @@ func NewHostInterface() *HostInterface {
 	return hostInterfaceAdopt(_id)
 }
 
-// Sets the desired idle suspend timeout for the interface.
+// SetIdleTimeout sets the desired idle suspend timeout for the interface.
 func (x *HostInterface) SetIdleTimeout(idleTimeout float64) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setIdleTimeout:error:"), idleTimeout, unsafe.Pointer(&_nsErr))
@@ -76,7 +64,7 @@ func (x *HostInterface) SetIdleTimeout(idleTimeout float64) error {
 	return nil
 }
 
-// Selects an alternative setting for the interface.
+// SelectAlternateSetting selects an alternative setting for the interface.
 func (x *HostInterface) SelectAlternateSetting(alternateSetting int) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("selectAlternateSetting:error:"), alternateSetting, unsafe.Pointer(&_nsErr))
@@ -86,8 +74,8 @@ func (x *HostInterface) SelectAlternateSetting(alternateSetting int) error {
 	return nil
 }
 
-// Copies a pipe for a specific endpoint address.
-func (x *HostInterface) CopyPipeWithAddressError(address int) (*HostPipe, error) {
+// CopyPipeWithAddressError copies a pipe for a specific endpoint address.
+func (x *HostInterface) CopyPipeWithAddressError(address int) (result *HostPipe, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copyPipeWithAddress:error:"), address, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -96,7 +84,7 @@ func (x *HostInterface) CopyPipeWithAddressError(address int) (*HostPipe, error)
 	return HostPipeFromID(_r), nil
 }
 
-// Retrieve the current idle suspend timeout. See
+// IdleTimeout retrieve the current idle suspend timeout. See
 func (x *HostInterface) IdleTimeout() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("idleTimeout"))
 	return _r
@@ -107,8 +95,10 @@ type HostInterfaceable interface {
 	obj.Object
 	SetIdleTimeout(idleTimeout float64) error
 	SelectAlternateSetting(alternateSetting int) error
-	CopyPipeWithAddressError(address int) (*HostPipe, error)
+	CopyPipeWithAddressError(address int) (result *HostPipe, err error)
 	IdleTimeout() float64
 }
 
 var _ HostInterfaceable = (*HostInterface)(nil)
+
+var _ HostObjectProvider = (*HostInterface)(nil)

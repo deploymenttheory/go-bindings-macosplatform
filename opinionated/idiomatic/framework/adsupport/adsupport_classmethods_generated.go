@@ -8,7 +8,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The shared instance of the identifier manager class.
+// SharedManager the shared instance of the identifier manager class.
 func SharedManager() *IdentifierManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("ASIdentifierManager")), objc.RegisterName("sharedManager"))
 	return IdentifierManagerFromID(_r)

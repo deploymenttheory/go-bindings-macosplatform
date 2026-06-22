@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event requesting a change in the rating.
-//
 // RatingCommandEvent is an idiomatic wrapper over the Objective-C class MPRatingCommandEvent.
+//
+// It embeds [RemoteCommandEvent], promoting that type's methods.
+//
+// An event requesting a change in the rating.
 type RatingCommandEvent struct {
-	objref.Handle
+	RemoteCommandEvent
 }
 
 // RatingCommandEventFromID adopts an existing Objective-C object as a RatingCommandEvent
@@ -25,7 +26,8 @@ func RatingCommandEventFromID(id objc.ID) *RatingCommandEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &RatingCommandEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RatingCommandEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func ratingCommandEventAdopt(id objc.ID) *RatingCommandEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &RatingCommandEvent{Handle: objref.Wrap(id)}
+	x := &RatingCommandEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RatingCommandEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RatingCommandEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RatingCommandEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRatingCommandEvent creates a new RatingCommandEvent.
@@ -64,6 +52,7 @@ func NewRatingCommandEvent() *RatingCommandEvent {
 	return ratingCommandEventAdopt(_id)
 }
 
+// Rating wraps the corresponding Objective-C method.
 func (x *RatingCommandEvent) Rating() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rating"))
 	return _r
@@ -76,3 +65,5 @@ type RatingCommandEventable interface {
 }
 
 var _ RatingCommandEventable = (*RatingCommandEvent)(nil)
+
+var _ RemoteCommandEventProvider = (*RatingCommandEvent)(nil)

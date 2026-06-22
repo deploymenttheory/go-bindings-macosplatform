@@ -10,23 +10,25 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns a log handle used for writing custom metric events.
+// MakeLogHandleWithCategory returns a log handle used for writing custom metric events.
 func MakeLogHandleWithCategory(category string) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("MXMetricManager")), objc.RegisterName("makeLogHandleWithCategory:"), purego.NSString(category))
 	return obj.Wrap(_r)
 }
 
-// Singleton instance of MXMetricManager.
+// SharedManager singleton instance of MXMetricManager.
 func SharedManager() *MetricManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("MXMetricManager")), objc.RegisterName("sharedManager"))
 	return MetricManagerFromID(_r)
 }
 
+// Apl wraps the corresponding Objective-C method.
 func Apl() *UnitAveragePixelLuminance {
 	_r := objc.Send[objc.ID](objc.ID(_class("MXUnitAveragePixelLuminance")), objc.RegisterName("apl"))
 	return UnitAveragePixelLuminanceFromID(_r)
 }
 
+// Bars wraps the corresponding Objective-C method.
 func Bars() *UnitSignalBars {
 	_r := objc.Send[objc.ID](objc.ID(_class("MXUnitSignalBars")), objc.RegisterName("bars"))
 	return UnitSignalBarsFromID(_r)

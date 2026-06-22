@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// This class acts as a wrapper for the HKBiologicalSex enumeration.
-//
 // BiologicalSexObject is an idiomatic wrapper over the Objective-C class HKBiologicalSexObject.
+//
+// This class acts as a wrapper for the HKBiologicalSex enumeration.
 type BiologicalSexObject struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func BiologicalSexObjectFromID(id objc.ID) *BiologicalSexObject {
 	if id == 0 {
 		return nil
 	}
-	x := &BiologicalSexObject{Handle: objref.Wrap(purego.Retain(id))}
+	x := &BiologicalSexObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func biologicalSexObjectAdopt(id objc.ID) *BiologicalSexObject {
 	if id == 0 {
 		return nil
 	}
-	x := &BiologicalSexObject{Handle: objref.Wrap(id)}
+	x := &BiologicalSexObject{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,12 +60,19 @@ func (x *BiologicalSexObject) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BiologicalSexObject) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewBiologicalSexObject creates a new BiologicalSexObject.
 func NewBiologicalSexObject() *BiologicalSexObject {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKBiologicalSexObject")), objc.RegisterName("new"))
 	return biologicalSexObjectAdopt(_id)
 }
 
+// BiologicalSex wraps the corresponding Objective-C method.
 func (x *BiologicalSexObject) BiologicalSex() BiologicalSex {
 	_r := objc.Send[BiologicalSex](objref.IDOf(x), objc.RegisterName("biologicalSex"))
 	return _r

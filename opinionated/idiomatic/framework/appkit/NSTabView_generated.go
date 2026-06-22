@@ -6,17 +6,20 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A multipage interface that displays one page at a time.
-//
 // TabView is an idiomatic wrapper over the Objective-C class NSTabView.
+//
+// It embeds [View], promoting that type's methods.
+//
+// A multipage interface that displays one page at a time.
 type TabView struct {
-	objref.Handle
+	View
 }
 
 // TabViewFromID adopts an existing Objective-C object as a TabView
@@ -25,7 +28,8 @@ func TabViewFromID(id objc.ID) *TabView {
 	if id == 0 {
 		return nil
 	}
-	x := &TabView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TabView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func tabViewAdopt(id objc.ID) *TabView {
 	if id == 0 {
 		return nil
 	}
-	x := &TabView{Handle: objref.Wrap(id)}
+	x := &TabView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *TabView) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TabView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TabView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewTabView creates a new TabView.
@@ -64,522 +54,559 @@ func NewTabView() *TabView {
 	return tabViewAdopt(_id)
 }
 
-// The font used for the tab view’s label text.
-//
-// WithFont sets font and returns the receiver so calls can be chained.
+// WithFont the font used for the tab view’s label text.
 func (x *TabView) WithFont(font *Font) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
-// The tab type to display the tabs.
-//
-// WithTabViewType sets tabViewType and returns the receiver so calls can be chained.
+// WithTabViewType the tab type to display the tabs.
 func (x *TabView) WithTabViewType(tabViewType TabViewType) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabViewType:"), tabViewType)
 	return x
 }
 
-// WithTabPosition sets tabPosition and returns the receiver so calls can be chained.
+// WithTabPosition sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithTabPosition(tabPosition TabPosition) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabPosition:"), tabPosition)
 	return x
 }
 
-// WithTabViewBorderType sets tabViewBorderType and returns the receiver so calls can be chained.
+// WithTabViewBorderType sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithTabViewBorderType(tabViewBorderType TabViewBorderType) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabViewBorderType:"), tabViewBorderType)
 	return x
 }
 
-// The tab view’s array of tab view items.
-//
-// WithTabViewItems sets the collection and returns the receiver so calls can be chained.
+// WithTabViewItems the tab view’s array of tab view items.
 func (x *TabView) WithTabViewItems(items ...*TabViewItem) *TabView {
 	_arr := purego.SliceToNSArray(items, func(_v *TabViewItem) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabViewItems:"), _arr)
 	return x
 }
 
-// A Boolean value that indicates if the tab view allows truncating for labels that don’t fit on a tab.
-//
-// WithAllowsTruncatedLabels sets allowsTruncatedLabels and returns the receiver so calls can be chained.
+// WithAllowsTruncatedLabels a Boolean value that indicates if the tab view allows truncating for labels that don’t fit on a tab.
 func (x *TabView) WithAllowsTruncatedLabels(allowsTruncatedLabels bool) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsTruncatedLabels:"), allowsTruncatedLabels)
 	return x
 }
 
-// A Boolean value that indicates if the tab view draws a background color when its type is NSNoTabsNoBorder.
-//
-// WithDrawsBackground sets drawsBackground and returns the receiver so calls can be chained.
+// WithDrawsBackground a Boolean value that indicates if the tab view draws a background color when its type is NSNoTabsNoBorder.
 func (x *TabView) WithDrawsBackground(drawsBackground bool) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
 	return x
 }
 
-// The size of the tab view.
-//
-// WithControlSize sets controlSize and returns the receiver so calls can be chained.
+// WithControlSize the size of the tab view.
 func (x *TabView) WithControlSize(controlSize ControlSize) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
-// The tab view’s control tint.
-//
-// WithControlTint sets controlTint and returns the receiver so calls can be chained.
+// WithControlTint the tab view’s control tint.
 func (x *TabView) WithControlTint(controlTint ControlTint) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
 	return x
 }
 
-// WithSubviews sets the collection and returns the receiver so calls can be chained.
+// WithSubviews sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithSubviews(items ...ViewProvider) *TabView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
 	return x
 }
 
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithHidden(hidden bool) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithPostsFrameChangedNotifications sets postsFrameChangedNotifications and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return x
 }
 
-// WithAutoresizesSubviews sets autoresizesSubviews and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithAutoresizesSubviews(autoresizesSubviews bool) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return x
 }
 
-// WithAutoresizingMask sets autoresizingMask and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// WithFrameRotation sets frameRotation and returns the receiver so calls can be chained.
+// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (x *TabView) WithFrame(frame corefoundation.CGRect) *TabView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
+	return x
+}
+
+// WithFrameRotation sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithFrameRotation(frameRotation float64) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return x
 }
 
-// WithFrameCenterRotation sets frameCenterRotation and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithFrameCenterRotation(frameCenterRotation float64) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return x
 }
 
-// WithBoundsRotation sets boundsRotation and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithBoundsRotation(boundsRotation float64) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return x
 }
 
-// WithCanDrawConcurrently sets canDrawConcurrently and returns the receiver so calls can be chained.
+// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (x *TabView) WithBounds(bounds corefoundation.CGRect) *TabView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithCanDrawConcurrently(canDrawConcurrently bool) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return x
 }
 
-// A Boolean value that determines whether the view needs to be redrawn before being displayed.
-//
-// WithNeedsDisplay sets needsDisplay and returns the receiver so calls can be chained.
+// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (x *TabView) WithNeedsDisplay(needsDisplay bool) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// WithAcceptsTouchEvents sets acceptsTouchEvents and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return x
 }
 
-// WithWantsRestingTouches sets wantsRestingTouches and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithWantsRestingTouches(wantsRestingTouches bool) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return x
 }
 
-// WithLayerContentsRedrawPolicy sets layerContentsRedrawPolicy and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return x
 }
 
-// WithLayerContentsPlacement sets layerContentsPlacement and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return x
 }
 
-// WithWantsLayer sets wantsLayer and returns the receiver so calls can be chained.
+// WithWantsLayer sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithWantsLayer(wantsLayer bool) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return x
 }
 
-// WithLayer sets layer and returns the receiver so calls can be chained.
+// WithLayer sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithLayer(layer obj.Object) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// WithCanDrawSubviewsIntoLayer sets canDrawSubviewsIntoLayer and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return x
 }
 
-// WithNeedsLayout sets needsLayout and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithNeedsLayout(needsLayout bool) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return x
 }
 
-// WithAlphaValue sets alphaValue and returns the receiver so calls can be chained.
+// WithAlphaValue sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithAlphaValue(alphaValue float64) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// WithLayerUsesCoreImageFilters sets layerUsesCoreImageFilters and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return x
 }
 
-// WithBackgroundFilters sets the collection and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithBackgroundFilters(items ...obj.Object) *TabView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return x
 }
 
-// WithCompositingFilter sets compositingFilter and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithCompositingFilter(compositingFilter obj.Object) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// WithContentFilters sets the collection and returns the receiver so calls can be chained.
+// WithContentFilters sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithContentFilters(items ...obj.Object) *TabView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
 	return x
 }
 
-// WithShadow sets shadow and returns the receiver so calls can be chained.
+// WithShadow sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithShadow(shadow *Shadow) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return x
 }
 
-// WithClipsToBounds sets clipsToBounds and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithClipsToBounds(clipsToBounds bool) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return x
 }
 
-// WithPostsBoundsChangedNotifications sets postsBoundsChangedNotifications and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return x
 }
 
-// WithToolTip sets toolTip and returns the receiver so calls can be chained.
+// WithToolTip sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithToolTip(toolTip string) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// WithNextKeyView sets nextKeyView and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+func (x *TabView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TabView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithNextKeyView(nextKeyView ViewProvider) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return x
 }
 
-// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+// WithFocusRingType sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithFocusRingType(focusRingType FocusRingType) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// WithGestureRecognizers sets the collection and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithGestureRecognizers(items ...GestureRecognizerProvider) *TabView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return x
 }
 
-// WithAllowedTouchTypes sets allowedTouchTypes and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return x
 }
 
-// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-//
-// WithPrefersCompactControlSizeMetrics sets prefersCompactControlSizeMetrics and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+func (x *TabView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TabView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (x *TabView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
 	return x
 }
 
-// WithWritingToolsCoordinator sets writingToolsCoordinator and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return x
 }
 
-// WithNeedsUpdateConstraints sets needsUpdateConstraints and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return x
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets translatesAutoresizingMaskIntoConstraints and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return x
 }
 
-// WithHorizontalContentSizeConstraintActive sets horizontalContentSizeConstraintActive and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return x
 }
 
-// WithVerticalContentSizeConstraintActive sets verticalContentSizeConstraintActive and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return x
 }
 
-// WithWantsBestResolutionOpenGLSurface sets wantsBestResolutionOpenGLSurface and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return x
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets wantsExtendedDynamicRangeOpenGLSurface and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return x
 }
 
-// WithPressureConfiguration sets pressureConfiguration and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
 func (x *TabView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *TabView) WithNextResponder(nextResponder ResponderProvider) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets menu and returns the receiver so calls can be chained.
+// WithMenu returns the responder’s menu.
 func (x *TabView) WithMenu(menu *Menu) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity an object encapsulating a user activity supported by this responder.
 func (x *TabView) WithUserActivity(userActivity obj.Object) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *TabView) WithTouchBar(touchBar *TouchBar) *TabView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// Selects the specified tab view item.
+// SelectTabViewItem selects the specified tab view item.
 func (x *TabView) SelectTabViewItem(tabViewItem *TabViewItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectTabViewItem:"), objref.IDOf(tabViewItem))
 }
 
-// Selects the tab view item specified by index.
+// SelectTabViewItemAtIndex selects the tab view item specified by index.
 func (x *TabView) SelectTabViewItemAtIndex(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectTabViewItemAtIndex:"), index)
 }
 
-// Selects the tab view item specified by identifier.
+// SelectTabViewItemWithIdentifier selects the tab view item specified by identifier.
 func (x *TabView) SelectTabViewItemWithIdentifier(identifier obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectTabViewItemWithIdentifier:"), objref.IDOf(identifier))
 }
 
-// Sets the selected tab view item to the selected item obtained from the sender.
+// TakeSelectedTabViewItemFromSender sets the selected tab view item to the selected item obtained from the sender.
 func (x *TabView) TakeSelectedTabViewItemFromSender(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeSelectedTabViewItemFromSender:"), objref.IDOf(sender))
 }
 
-// This action method selects the first tab view item.
+// SelectFirstTabViewItem this action method selects the first tab view item.
 func (x *TabView) SelectFirstTabViewItem(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectFirstTabViewItem:"), objref.IDOf(sender))
 }
 
-// This action method selects the last tab view item.
+// SelectLastTabViewItem this action method selects the last tab view item.
 func (x *TabView) SelectLastTabViewItem(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectLastTabViewItem:"), objref.IDOf(sender))
 }
 
-// This action method selects the next tab view item in the sequence.
+// SelectNextTabViewItem this action method selects the next tab view item in the sequence.
 func (x *TabView) SelectNextTabViewItem(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectNextTabViewItem:"), objref.IDOf(sender))
 }
 
-// This action method selects the previous tab view item in the sequence.
+// SelectPreviousTabViewItem this action method selects the previous tab view item in the sequence.
 func (x *TabView) SelectPreviousTabViewItem(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectPreviousTabViewItem:"), objref.IDOf(sender))
 }
 
-// Adds the specified tab item.
+// AddTabViewItem adds the specified tab item.
 func (x *TabView) AddTabViewItem(tabViewItem *TabViewItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTabViewItem:"), objref.IDOf(tabViewItem))
 }
 
-// Inserts the specified item into the tab view’s array of tab view items at the specified index.
+// InsertTabViewItemAtIndex inserts the specified item into the tab view’s array of tab view items at the specified index.
 func (x *TabView) InsertTabViewItemAtIndex(tabViewItem *TabViewItem, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertTabViewItem:atIndex:"), objref.IDOf(tabViewItem), index)
 }
 
-// Removes the specified item from the tab view’s array of tab view items.
+// RemoveTabViewItem removes the specified item from the tab view’s array of tab view items.
 func (x *TabView) RemoveTabViewItem(tabViewItem *TabViewItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTabViewItem:"), objref.IDOf(tabViewItem))
 }
 
-// Returns the index of the specified item in the tab view.
+// TabViewItemAtPoint returns the tab view item at the specified point.
+func (x *TabView) TabViewItemAtPoint(point corefoundation.CGPoint) *TabViewItem {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tabViewItemAtPoint:"), point)
+	return TabViewItemFromID(_r)
+}
+
+// IndexOfTabViewItem returns the index of the specified item in the tab view.
 func (x *TabView) IndexOfTabViewItem(tabViewItem *TabViewItem) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfTabViewItem:"), objref.IDOf(tabViewItem))
 	return _r
 }
 
-// Returns the tab view item at index in the tab view’s array of items.
+// TabViewItemAtIndex returns the tab view item at index in the tab view’s array of items.
 func (x *TabView) TabViewItemAtIndex(index int) *TabViewItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tabViewItemAtIndex:"), index)
 	return TabViewItemFromID(_r)
 }
 
-// Returns the index of the item that matches the specified identifier or NSNotFound if the item is not found.
+// IndexOfTabViewItemWithIdentifier returns the index of the item that matches the specified identifier or NSNotFound if the item is not found.
 func (x *TabView) IndexOfTabViewItemWithIdentifier(identifier obj.Object) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfTabViewItemWithIdentifier:"), objref.IDOf(identifier))
 	return _r
 }
 
+// SelectedTabViewItem wraps the corresponding Objective-C method.
 func (x *TabView) SelectedTabViewItem() *TabViewItem {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedTabViewItem"))
 	return TabViewItemFromID(_r)
 }
 
+// Font wraps the corresponding Objective-C method.
 func (x *TabView) Font() *Font {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("font"))
 	return FontFromID(_r)
 }
 
+// SetFont wraps the corresponding Objective-C method.
 func (x *TabView) SetFont(font *Font) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 }
 
+// TabViewType wraps the corresponding Objective-C method.
 func (x *TabView) TabViewType() TabViewType {
 	_r := objc.Send[TabViewType](objref.IDOf(x), objc.RegisterName("tabViewType"))
 	return _r
 }
 
+// SetTabViewType wraps the corresponding Objective-C method.
 func (x *TabView) SetTabViewType(tabViewType TabViewType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabViewType:"), tabViewType)
 }
 
+// TabPosition wraps the corresponding Objective-C method.
 func (x *TabView) TabPosition() TabPosition {
 	_r := objc.Send[TabPosition](objref.IDOf(x), objc.RegisterName("tabPosition"))
 	return _r
 }
 
+// SetTabPosition wraps the corresponding Objective-C method.
 func (x *TabView) SetTabPosition(tabPosition TabPosition) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabPosition:"), tabPosition)
 }
 
+// TabViewBorderType wraps the corresponding Objective-C method.
 func (x *TabView) TabViewBorderType() TabViewBorderType {
 	_r := objc.Send[TabViewBorderType](objref.IDOf(x), objc.RegisterName("tabViewBorderType"))
 	return _r
 }
 
+// SetTabViewBorderType wraps the corresponding Objective-C method.
 func (x *TabView) SetTabViewBorderType(tabViewBorderType TabViewBorderType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabViewBorderType:"), tabViewBorderType)
 }
 
+// TabViewItems wraps the corresponding Objective-C method.
+//
 // TabViewItems returns the collection as a Go slice.
 func (x *TabView) TabViewItems() []*TabViewItem {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tabViewItems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TabViewItem { return TabViewItemFromID(_id) })
 }
 
+// SetTabViewItems wraps the corresponding Objective-C method.
 func (x *TabView) SetTabViewItems(tabViewItems []*TabViewItem) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabViewItems:"), purego.SliceToNSArray(tabViewItems, func(_v *TabViewItem) objc.ID { return objref.IDOf(_v) }))
 }
 
+// AllowsTruncatedLabels wraps the corresponding Objective-C method.
 func (x *TabView) AllowsTruncatedLabels() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsTruncatedLabels"))
 	return _r
 }
 
+// SetAllowsTruncatedLabels wraps the corresponding Objective-C method.
 func (x *TabView) SetAllowsTruncatedLabels(allowsTruncatedLabels bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsTruncatedLabels:"), allowsTruncatedLabels)
 }
 
+// MinimumSize wraps the corresponding Objective-C method.
+func (x *TabView) MinimumSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("minimumSize"))
+	return _r
+}
+
+// DrawsBackground wraps the corresponding Objective-C method.
 func (x *TabView) DrawsBackground() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawsBackground"))
 	return _r
 }
 
+// SetDrawsBackground wraps the corresponding Objective-C method.
 func (x *TabView) SetDrawsBackground(drawsBackground bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
 }
 
+// ControlSize wraps the corresponding Objective-C method.
 func (x *TabView) ControlSize() ControlSize {
 	_r := objc.Send[ControlSize](objref.IDOf(x), objc.RegisterName("controlSize"))
 	return _r
 }
 
+// SetControlSize wraps the corresponding Objective-C method.
 func (x *TabView) SetControlSize(controlSize ControlSize) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 }
 
+// ContentRect wraps the corresponding Objective-C method.
+func (x *TabView) ContentRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("contentRect"))
+	return _r
+}
+
+// NumberOfTabViewItems wraps the corresponding Objective-C method.
 func (x *TabView) NumberOfTabViewItems() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfTabViewItems"))
 	return _r
 }
 
+// ControlTint wraps the corresponding Objective-C method.
 func (x *TabView) ControlTint() ControlTint {
 	_r := objc.Send[ControlTint](objref.IDOf(x), objc.RegisterName("controlTint"))
 	return _r
 }
 
+// SetControlTint wraps the corresponding Objective-C method.
 func (x *TabView) SetControlTint(controlTint ControlTint) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
 }
@@ -601,9 +628,11 @@ type TabViewable interface {
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TabView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *TabView
 	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *TabView
+	WithFrame(frame corefoundation.CGRect) *TabView
 	WithFrameRotation(frameRotation float64) *TabView
 	WithFrameCenterRotation(frameCenterRotation float64) *TabView
 	WithBoundsRotation(boundsRotation float64) *TabView
+	WithBounds(bounds corefoundation.CGRect) *TabView
 	WithCanDrawConcurrently(canDrawConcurrently bool) *TabView
 	WithNeedsDisplay(needsDisplay bool) *TabView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *TabView
@@ -624,10 +653,12 @@ type TabViewable interface {
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TabView
 	WithToolTip(toolTip string) *TabView
 	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TabView
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TabView
 	WithNextKeyView(nextKeyView ViewProvider) *TabView
 	WithFocusRingType(focusRingType FocusRingType) *TabView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *TabView
 	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TabView
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TabView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TabView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TabView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TabView
@@ -652,6 +683,7 @@ type TabViewable interface {
 	AddTabViewItem(tabViewItem *TabViewItem)
 	InsertTabViewItemAtIndex(tabViewItem *TabViewItem, index int)
 	RemoveTabViewItem(tabViewItem *TabViewItem)
+	TabViewItemAtPoint(point corefoundation.CGPoint) *TabViewItem
 	IndexOfTabViewItem(tabViewItem *TabViewItem) int
 	TabViewItemAtIndex(index int) *TabViewItem
 	IndexOfTabViewItemWithIdentifier(identifier obj.Object) int
@@ -668,13 +700,19 @@ type TabViewable interface {
 	SetTabViewItems(tabViewItems []*TabViewItem)
 	AllowsTruncatedLabels() bool
 	SetAllowsTruncatedLabels(allowsTruncatedLabels bool)
+	MinimumSize() corefoundation.CGSize
 	DrawsBackground() bool
 	SetDrawsBackground(drawsBackground bool)
 	ControlSize() ControlSize
 	SetControlSize(controlSize ControlSize)
+	ContentRect() corefoundation.CGRect
 	NumberOfTabViewItems() int
 	ControlTint() ControlTint
 	SetControlTint(controlTint ControlTint)
 }
 
 var _ TabViewable = (*TabView)(nil)
+
+var _ ViewProvider = (*TabView)(nil)
+
+var _ ResponderProvider = (*TabView)(nil)

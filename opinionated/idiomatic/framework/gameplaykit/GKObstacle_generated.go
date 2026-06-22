@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract base class for objects representing impassable areas in a game world.
-//
 // Obstacle is an idiomatic wrapper over the Objective-C class GKObstacle.
+//
+// Obstacle is an abstract base — you do not construct it directly. Construct one of [CircleObstacle], [PolygonObstacle], [SphereObstacle] and pass it where a Obstacle is accepted.
+//
+// The abstract base class for objects representing impassable areas in a game world.
 type Obstacle struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func ObstacleFromID(id objc.ID) *Obstacle {
 	if id == 0 {
 		return nil
 	}
-	x := &Obstacle{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Obstacle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func obstacleAdopt(id objc.ID) *Obstacle {
 	if id == 0 {
 		return nil
 	}
-	x := &Obstacle{Handle: objref.Wrap(id)}
+	x := &Obstacle{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *Obstacle) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewObstacle creates a new Obstacle.
-func NewObstacle() *Obstacle {
-	_id := objc.Send[objc.ID](objc.ID(_class("GKObstacle")), objc.RegisterName("new"))
-	return obstacleAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Obstacle) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // Obstacleable is the interface implemented by [Obstacle], for mocking and DI.
@@ -70,3 +74,10 @@ type Obstacleable interface {
 }
 
 var _ Obstacleable = (*Obstacle)(nil)
+
+// isObstacle marks Obstacle — and, by embedding promotion, its
+// subclasses — as a member of the Obstacle hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Obstacle) isObstacle() {}
+
+var _ ObstacleProvider = (*Obstacle)(nil)

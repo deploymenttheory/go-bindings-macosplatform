@@ -9,13 +9,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns the singleton Now Playing info center.
+// DefaultCenter returns the singleton Now Playing info center.
 func DefaultCenter() *NowPlayingInfoCenter {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPNowPlayingInfoCenter")), objc.RegisterName("defaultCenter"))
 	return NowPlayingInfoCenterFromID(_r)
 }
 
-// Keys related to animated artwork that are supported by the current platform. If you specify an instance of animated artwork (an `MPMediaItemAnimatedArtwork`) to `nowPlayingInfo` using any key not in this collection it will be ignored.
+// SupportedAnimatedArtworkKeys keys related to animated artwork that are supported by the current platform. If you specify an instance of animated artwork (an `MPMediaItemAnimatedArtwork`) to `nowPlayingInfo` using any key not in this collection it will be ignored.
 //
 // SupportedAnimatedArtworkKeys returns the collection as a Go slice.
 func SupportedAnimatedArtworkKeys() []string {
@@ -23,7 +23,7 @@ func SupportedAnimatedArtworkKeys() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Returns the shared object you use to access the system’s remote command objects.
+// SharedCommandCenter returns the shared object you use to access the system’s remote command objects.
 func SharedCommandCenter() *RemoteCommandCenter {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPRemoteCommandCenter")), objc.RegisterName("sharedCommandCenter"))
 	return RemoteCommandCenterFromID(_r)

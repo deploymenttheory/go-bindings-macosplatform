@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that encapsulates the device token you use to deliver push notifications to your app.
-//
 // PushCredentials is an idiomatic wrapper over the Objective-C class PKPushCredentials.
+//
+// An object that encapsulates the device token you use to deliver push notifications to your app.
 type PushCredentials struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PushCredentialsFromID(id objc.ID) *PushCredentials {
 	if id == 0 {
 		return nil
 	}
-	x := &PushCredentials{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PushCredentials{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func pushCredentialsAdopt(id objc.ID) *PushCredentials {
 	if id == 0 {
 		return nil
 	}
-	x := &PushCredentials{Handle: objref.Wrap(id)}
+	x := &PushCredentials{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *PushCredentials) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PushCredentials) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewPushCredentials creates a new PushCredentials.
 func NewPushCredentials() *PushCredentials {
 	_id := objc.Send[objc.ID](objc.ID(_class("PKPushCredentials")), objc.RegisterName("new"))
 	return pushCredentialsAdopt(_id)
 }
 
-// The push type constant associated with the token. For possible values, see “PushKit/PKPushType“.
+// Type the push type constant associated with the token. For possible values, see “PushKit/PKPushType“.
 func (x *PushCredentials) Type() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
 	return obj.Wrap(_r)
 }
 
-// A unique device token to use when sending push notifications to the current device. Forward this token to the server you use to generate push notifications. When preparing to deliver a push notification to the current device, include the token in the HTTP request you send to Apple Push Notification service (APNs).
+// Token a unique device token to use when sending push notifications to the current device. Forward this token to the server you use to generate push notifications. When preparing to deliver a push notification to the current device, include the token in the HTTP request you send to Apple Push Notification service (APNs).
 func (x *PushCredentials) Token() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("token"))
 	return obj.Wrap(_r)

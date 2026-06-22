@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that updates a payment request with a merchant validation.
-//
 // PaymentRequestMerchantSessionUpdate is an idiomatic wrapper over the Objective-C class PKPaymentRequestMerchantSessionUpdate.
+//
+// An object that updates a payment request with a merchant validation.
 type PaymentRequestMerchantSessionUpdate struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func PaymentRequestMerchantSessionUpdateFromID(id objc.ID) *PaymentRequestMercha
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentRequestMerchantSessionUpdate{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PaymentRequestMerchantSessionUpdate{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func paymentRequestMerchantSessionUpdateAdopt(id objc.ID) *PaymentRequestMerchan
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentRequestMerchantSessionUpdate{Handle: objref.Wrap(id)}
+	x := &PaymentRequestMerchantSessionUpdate{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,45 +60,49 @@ func (x *PaymentRequestMerchantSessionUpdate) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a payment method update with the specified status and merchant session.
-//
-// NewPaymentRequestMerchantSessionUpdateWithStatusMerchantSession creates a new PaymentRequestMerchantSessionUpdate.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PaymentRequestMerchantSessionUpdate) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPaymentRequestMerchantSessionUpdateWithStatusMerchantSession creates a payment method update with the specified status and merchant session.
 func NewPaymentRequestMerchantSessionUpdateWithStatusMerchantSession(status PaymentAuthorizationStatus, session *PaymentMerchantSession) *PaymentRequestMerchantSessionUpdate {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentRequestMerchantSessionUpdate")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStatus:merchantSession:"), status, objref.IDOf(session))
 	return paymentRequestMerchantSessionUpdateAdopt(_id)
 }
 
-// The current authorization status for the payment.
-//
-// WithStatus sets status and returns the receiver so calls can be chained.
+// WithStatus the current authorization status for the payment.
 func (x *PaymentRequestMerchantSessionUpdate) WithStatus(status PaymentAuthorizationStatus) *PaymentRequestMerchantSessionUpdate {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
 	return x
 }
 
-// An object that validates the identity of a merchant for the payment request.
-//
-// WithSession sets session and returns the receiver so calls can be chained.
+// WithSession an object that validates the identity of a merchant for the payment request.
 func (x *PaymentRequestMerchantSessionUpdate) WithSession(session *PaymentMerchantSession) *PaymentRequestMerchantSessionUpdate {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSession:"), objref.IDOf(session))
 	return x
 }
 
+// Status wraps the corresponding Objective-C method.
 func (x *PaymentRequestMerchantSessionUpdate) Status() PaymentAuthorizationStatus {
 	_r := objc.Send[PaymentAuthorizationStatus](objref.IDOf(x), objc.RegisterName("status"))
 	return _r
 }
 
+// SetStatus wraps the corresponding Objective-C method.
 func (x *PaymentRequestMerchantSessionUpdate) SetStatus(status PaymentAuthorizationStatus) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
 }
 
+// Session wraps the corresponding Objective-C method.
 func (x *PaymentRequestMerchantSessionUpdate) Session() *PaymentMerchantSession {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("session"))
 	return PaymentMerchantSessionFromID(_r)
 }
 
+// SetSession wraps the corresponding Objective-C method.
 func (x *PaymentRequestMerchantSessionUpdate) SetSession(session *PaymentMerchantSession) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSession:"), objref.IDOf(session))
 }

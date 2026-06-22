@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents appearance characteristics of a widget annotation.
-//
 // AppearanceCharacteristics is an idiomatic wrapper over the Objective-C class PDFAppearanceCharacteristics.
+//
+// An object that represents appearance characteristics of a widget annotation.
 type AppearanceCharacteristics struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AppearanceCharacteristicsFromID(id objc.ID) *AppearanceCharacteristics {
 	if id == 0 {
 		return nil
 	}
-	x := &AppearanceCharacteristics{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AppearanceCharacteristics{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func appearanceCharacteristicsAdopt(id objc.ID) *AppearanceCharacteristics {
 	if id == 0 {
 		return nil
 	}
-	x := &AppearanceCharacteristics{Handle: objref.Wrap(id)}
+	x := &AppearanceCharacteristics{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,104 +60,105 @@ func (x *AppearanceCharacteristics) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AppearanceCharacteristics) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAppearanceCharacteristics creates a new AppearanceCharacteristics.
 func NewAppearanceCharacteristics() *AppearanceCharacteristics {
 	_id := objc.Send[objc.ID](objc.ID(_class("PDFAppearanceCharacteristics")), objc.RegisterName("new"))
 	return appearanceCharacteristicsAdopt(_id)
 }
 
-// The type of button widget annotation.
-//
-// WithControlType sets controlType and returns the receiver so calls can be chained.
+// WithControlType the type of button widget annotation.
 func (x *AppearanceCharacteristics) WithControlType(controlType WidgetControlType) *AppearanceCharacteristics {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlType:"), controlType)
 	return x
 }
 
-// The background color of the widget annotation.
-//
-// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+// WithBackgroundColor the background color of the widget annotation.
 func (x *AppearanceCharacteristics) WithBackgroundColor(backgroundColor obj.Object) *AppearanceCharacteristics {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// The border color of the widget annotation.
-//
-// WithBorderColor sets borderColor and returns the receiver so calls can be chained.
+// WithBorderColor the border color of the widget annotation.
 func (x *AppearanceCharacteristics) WithBorderColor(borderColor obj.Object) *AppearanceCharacteristics {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 	return x
 }
 
-// The number of degrees, in multiples of 90, that the widget annotation rotates counterclockwise relative to the page.
-//
-// WithRotation sets rotation and returns the receiver so calls can be chained.
+// WithRotation the number of degrees, in multiples of 90, that the widget annotation rotates counterclockwise relative to the page.
 func (x *AppearanceCharacteristics) WithRotation(rotation int) *AppearanceCharacteristics {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotation:"), rotation)
 	return x
 }
 
-// The text that the button widget annotation displays when the user isn’t interacting with it.
-//
-// WithCaption sets caption and returns the receiver so calls can be chained.
+// WithCaption the text that the button widget annotation displays when the user isn’t interacting with it.
 func (x *AppearanceCharacteristics) WithCaption(caption string) *AppearanceCharacteristics {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaption:"), purego.NSString(caption))
 	return x
 }
 
-// The text that the widget annotation displays when the user hovers the pointer over it.
-//
-// WithRolloverCaption sets rolloverCaption and returns the receiver so calls can be chained.
+// WithRolloverCaption the text that the widget annotation displays when the user hovers the pointer over it.
 func (x *AppearanceCharacteristics) WithRolloverCaption(rolloverCaption string) *AppearanceCharacteristics {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRolloverCaption:"), purego.NSString(rolloverCaption))
 	return x
 }
 
-// The text that the button widget annotation displays when the user holds down on it.
-//
-// WithDownCaption sets downCaption and returns the receiver so calls can be chained.
+// WithDownCaption the text that the button widget annotation displays when the user holds down on it.
 func (x *AppearanceCharacteristics) WithDownCaption(downCaption string) *AppearanceCharacteristics {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownCaption:"), purego.NSString(downCaption))
 	return x
 }
 
+// ControlType wraps the corresponding Objective-C method.
 func (x *AppearanceCharacteristics) ControlType() WidgetControlType {
 	_r := objc.Send[WidgetControlType](objref.IDOf(x), objc.RegisterName("controlType"))
 	return _r
 }
 
+// SetControlType wraps the corresponding Objective-C method.
 func (x *AppearanceCharacteristics) SetControlType(controlType WidgetControlType) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlType:"), controlType)
 }
 
+// BackgroundColor wraps the corresponding Objective-C method.
 func (x *AppearanceCharacteristics) BackgroundColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
 }
 
+// SetBackgroundColor wraps the corresponding Objective-C method.
 func (x *AppearanceCharacteristics) SetBackgroundColor(backgroundColor obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
+// BorderColor wraps the corresponding Objective-C method.
 func (x *AppearanceCharacteristics) BorderColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderColor"))
 	return obj.Wrap(_r)
 }
 
+// SetBorderColor wraps the corresponding Objective-C method.
 func (x *AppearanceCharacteristics) SetBorderColor(borderColor obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 }
 
+// Rotation wraps the corresponding Objective-C method.
 func (x *AppearanceCharacteristics) Rotation() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rotation"))
 	return _r
 }
 
+// SetRotation wraps the corresponding Objective-C method.
 func (x *AppearanceCharacteristics) SetRotation(rotation int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotation:"), rotation)
 }
 
+// Caption wraps the corresponding Objective-C method.
 func (x *AppearanceCharacteristics) Caption() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("caption"))
 	if _r == 0 {
@@ -164,10 +167,12 @@ func (x *AppearanceCharacteristics) Caption() string {
 	return purego.GoString(_r)
 }
 
+// SetCaption wraps the corresponding Objective-C method.
 func (x *AppearanceCharacteristics) SetCaption(caption string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaption:"), purego.NSString(caption))
 }
 
+// RolloverCaption wraps the corresponding Objective-C method.
 func (x *AppearanceCharacteristics) RolloverCaption() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rolloverCaption"))
 	if _r == 0 {
@@ -176,10 +181,12 @@ func (x *AppearanceCharacteristics) RolloverCaption() string {
 	return purego.GoString(_r)
 }
 
+// SetRolloverCaption wraps the corresponding Objective-C method.
 func (x *AppearanceCharacteristics) SetRolloverCaption(rolloverCaption string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRolloverCaption:"), purego.NSString(rolloverCaption))
 }
 
+// DownCaption wraps the corresponding Objective-C method.
 func (x *AppearanceCharacteristics) DownCaption() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downCaption"))
 	if _r == 0 {
@@ -188,10 +195,12 @@ func (x *AppearanceCharacteristics) DownCaption() string {
 	return purego.GoString(_r)
 }
 
+// SetDownCaption wraps the corresponding Objective-C method.
 func (x *AppearanceCharacteristics) SetDownCaption(downCaption string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownCaption:"), purego.NSString(downCaption))
 }
 
+// AppearanceCharacteristicsKeyValues wraps the corresponding Objective-C method.
 func (x *AppearanceCharacteristics) AppearanceCharacteristicsKeyValues() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appearanceCharacteristicsKeyValues"))
 	return obj.Wrap(_r)

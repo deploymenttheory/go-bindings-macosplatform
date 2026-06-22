@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract base class for storing reference signatures and their associated metadata.
-//
 // Catalog is an idiomatic wrapper over the Objective-C class SHCatalog.
+//
+// Catalog is an abstract base — you do not construct it directly. Construct one of [CustomCatalog] and pass it where a Catalog is accepted.
+//
+// An abstract base class for storing reference signatures and their associated metadata.
 type Catalog struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func CatalogFromID(id objc.ID) *Catalog {
 	if id == 0 {
 		return nil
 	}
-	x := &Catalog{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Catalog{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func catalogAdopt(id objc.ID) *Catalog {
 	if id == 0 {
 		return nil
 	}
-	x := &Catalog{Handle: objref.Wrap(id)}
+	x := &Catalog{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +62,19 @@ func (x *Catalog) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewCatalog creates a new Catalog.
-func NewCatalog() *Catalog {
-	_id := objc.Send[objc.ID](objc.ID(_class("SHCatalog")), objc.RegisterName("new"))
-	return catalogAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Catalog) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The minimum duration of a query signature that you use to match reference signatures in the catalog.
+// MinimumQuerySignatureDuration the minimum duration of a query signature that you use to match reference signatures in the catalog.
 func (x *Catalog) MinimumQuerySignatureDuration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumQuerySignatureDuration"))
 	return _r
 }
 
-// The maximum duration of a query signature that you use to match reference signatures in the catalog.
+// MaximumQuerySignatureDuration the maximum duration of a query signature that you use to match reference signatures in the catalog.
 func (x *Catalog) MaximumQuerySignatureDuration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumQuerySignatureDuration"))
 	return _r
@@ -84,3 +88,10 @@ type Catalogable interface {
 }
 
 var _ Catalogable = (*Catalog)(nil)
+
+// isCatalog marks Catalog — and, by embedding promotion, its
+// subclasses — as a member of the Catalog hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Catalog) isCatalog() {}
+
+var _ CatalogProvider = (*Catalog)(nil)

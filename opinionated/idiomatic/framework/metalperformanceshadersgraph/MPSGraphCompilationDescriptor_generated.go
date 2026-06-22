@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that consists of all the levers for compiling graphs.
-//
 // GraphCompilationDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphCompilationDescriptor.
+//
+// It embeds [GraphObject], promoting that type's methods.
+//
+// A class that consists of all the levers for compiling graphs.
 type GraphCompilationDescriptor struct {
-	objref.Handle
+	GraphObject
 }
 
 // GraphCompilationDescriptorFromID adopts an existing Objective-C object as a GraphCompilationDescriptor
@@ -25,7 +26,8 @@ func GraphCompilationDescriptorFromID(id objc.ID) *GraphCompilationDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphCompilationDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GraphCompilationDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func graphCompilationDescriptorAdopt(id objc.ID) *GraphCompilationDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &GraphCompilationDescriptor{Handle: objref.Wrap(id)}
+	x := &GraphCompilationDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *GraphCompilationDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphCompilationDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphCompilationDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewGraphCompilationDescriptor creates a new GraphCompilationDescriptor.
@@ -64,103 +52,97 @@ func NewGraphCompilationDescriptor() *GraphCompilationDescriptor {
 	return graphCompilationDescriptorAdopt(_id)
 }
 
-// The optimization level for the graph execution, default is MPSGraphOptimizationLevel1.
-//
-// WithOptimizationLevel sets optimizationLevel and returns the receiver so calls can be chained.
+// WithOptimizationLevel the optimization level for the graph execution, default is MPSGraphOptimizationLevel1.
 func (x *GraphCompilationDescriptor) WithOptimizationLevel(optimizationLevel GraphOptimization) *GraphCompilationDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptimizationLevel:"), optimizationLevel)
 	return x
 }
 
-// Flag that makes the compile or specialize call blocking till the entire compilation is complete, defaults to NO.
-//
-// WithWaitForCompilationCompletion sets waitForCompilationCompletion and returns the receiver so calls can be chained.
+// WithWaitForCompilationCompletion flag that makes the compile or specialize call blocking till the entire compilation is complete, defaults to NO.
 func (x *GraphCompilationDescriptor) WithWaitForCompilationCompletion(waitForCompilationCompletion bool) *GraphCompilationDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWaitForCompilationCompletion:"), waitForCompilationCompletion)
 	return x
 }
 
-// The dispatch queue used for the compilation.
-//
-// WithDispatchQueue sets dispatchQueue and returns the receiver so calls can be chained.
+// WithDispatchQueue the dispatch queue used for the compilation.
 func (x *GraphCompilationDescriptor) WithDispatchQueue(dispatchQueue obj.Object) *GraphCompilationDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDispatchQueue:"), objref.IDOf(dispatchQueue))
 	return x
 }
 
-// The optimization profile for the graph optimization.
-//
-// WithOptimizationProfile sets optimizationProfile and returns the receiver so calls can be chained.
+// WithOptimizationProfile the optimization profile for the graph optimization.
 func (x *GraphCompilationDescriptor) WithOptimizationProfile(optimizationProfile GraphOptimizationProfile) *GraphCompilationDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptimizationProfile:"), optimizationProfile)
 	return x
 }
 
-// Across the executable allow reduced precision fast math optimizations.
-//
-// WithReducedPrecisionFastMath sets reducedPrecisionFastMath and returns the receiver so calls can be chained.
+// WithReducedPrecisionFastMath across the executable allow reduced precision fast math optimizations.
 func (x *GraphCompilationDescriptor) WithReducedPrecisionFastMath(reducedPrecisionFastMath GraphReducedPrecisionFastMath) *GraphCompilationDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReducedPrecisionFastMath:"), reducedPrecisionFastMath)
 	return x
 }
 
-// Turns off type inference and relies on type inference during runtime.
+// DisableTypeInference turns off type inference and relies on type inference during runtime.
 func (x *GraphCompilationDescriptor) DisableTypeInference() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disableTypeInference"))
 }
 
-// Turns on Automatic Layout Conversion (for conv like operations) for GPU. DEPRECATED: Layout conversion is now default, so this function is a no-op.
+// ConvertLayoutToNHWC turns on Automatic Layout Conversion (for conv like operations) for GPU. DEPRECATED: Layout conversion is now default, so this function is a no-op.
 func (x *GraphCompilationDescriptor) ConvertLayoutToNHWC() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convertLayoutToNHWC"))
 }
 
-// The optimization level for the graph execution, default is MPSGraphOptimizationLevel1.
+// OptimizationLevel the optimization level for the graph execution, default is MPSGraphOptimizationLevel1.
 func (x *GraphCompilationDescriptor) OptimizationLevel() GraphOptimization {
 	_r := objc.Send[GraphOptimization](objref.IDOf(x), objc.RegisterName("optimizationLevel"))
 	return _r
 }
 
+// SetOptimizationLevel wraps the corresponding Objective-C method.
 func (x *GraphCompilationDescriptor) SetOptimizationLevel(optimizationLevel GraphOptimization) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptimizationLevel:"), optimizationLevel)
 }
 
-// Flag that makes the compile or specialize call blocking till the entire compilation is complete, defaults to NO.
+// WaitForCompilationCompletion flag that makes the compile or specialize call blocking till the entire compilation is complete, defaults to NO.
 func (x *GraphCompilationDescriptor) WaitForCompilationCompletion() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("waitForCompilationCompletion"))
 	return _r
 }
 
+// SetWaitForCompilationCompletion wraps the corresponding Objective-C method.
 func (x *GraphCompilationDescriptor) SetWaitForCompilationCompletion(waitForCompilationCompletion bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWaitForCompilationCompletion:"), waitForCompilationCompletion)
 }
 
-// The dispatch queue used for the compilation. Default value is nil.
+// DispatchQueue the dispatch queue used for the compilation. Default value is nil.
 func (x *GraphCompilationDescriptor) DispatchQueue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dispatchQueue"))
 	return obj.Wrap(_r)
 }
 
+// SetDispatchQueue wraps the corresponding Objective-C method.
 func (x *GraphCompilationDescriptor) SetDispatchQueue(dispatchQueue obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDispatchQueue:"), objref.IDOf(dispatchQueue))
 }
 
-// The optimization profile for the graph optimization. Default is MPSGraphOptimizationProfilePerformance.
+// OptimizationProfile the optimization profile for the graph optimization. Default is MPSGraphOptimizationProfilePerformance.
 func (x *GraphCompilationDescriptor) OptimizationProfile() GraphOptimizationProfile {
 	_r := objc.Send[GraphOptimizationProfile](objref.IDOf(x), objc.RegisterName("optimizationProfile"))
 	return _r
 }
 
-// The optimization profile for the graph optimization. Default is MPSGraphOptimizationProfilePerformance.
+// SetOptimizationProfile the optimization profile for the graph optimization. Default is MPSGraphOptimizationProfilePerformance.
 func (x *GraphCompilationDescriptor) SetOptimizationProfile(optimizationProfile GraphOptimizationProfile) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptimizationProfile:"), optimizationProfile)
 }
 
-// Across the executable allow reduced precision fast math optimizations.
+// ReducedPrecisionFastMath across the executable allow reduced precision fast math optimizations.
 func (x *GraphCompilationDescriptor) ReducedPrecisionFastMath() GraphReducedPrecisionFastMath {
 	_r := objc.Send[GraphReducedPrecisionFastMath](objref.IDOf(x), objc.RegisterName("reducedPrecisionFastMath"))
 	return _r
 }
 
+// SetReducedPrecisionFastMath wraps the corresponding Objective-C method.
 func (x *GraphCompilationDescriptor) SetReducedPrecisionFastMath(reducedPrecisionFastMath GraphReducedPrecisionFastMath) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReducedPrecisionFastMath:"), reducedPrecisionFastMath)
 }
@@ -188,3 +170,5 @@ type GraphCompilationDescriptorable interface {
 }
 
 var _ GraphCompilationDescriptorable = (*GraphCompilationDescriptor)(nil)
+
+var _ GraphObjectProvider = (*GraphCompilationDescriptor)(nil)

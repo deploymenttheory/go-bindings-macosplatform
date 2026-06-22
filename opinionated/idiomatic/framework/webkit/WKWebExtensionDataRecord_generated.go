@@ -23,7 +23,8 @@ func WKWebExtensionDataRecordFromID(id objc.ID) *WKWebExtensionDataRecord {
 	if id == 0 {
 		return nil
 	}
-	x := &WKWebExtensionDataRecord{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WKWebExtensionDataRecord{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func wKWebExtensionDataRecordAdopt(id objc.ID) *WKWebExtensionDataRecord {
 	if id == 0 {
 		return nil
 	}
-	x := &WKWebExtensionDataRecord{Handle: objref.Wrap(id)}
+	x := &WKWebExtensionDataRecord{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,19 +58,25 @@ func (x *WKWebExtensionDataRecord) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKWebExtensionDataRecord) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWKWebExtensionDataRecord creates a new WKWebExtensionDataRecord.
 func NewWKWebExtensionDataRecord() *WKWebExtensionDataRecord {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionDataRecord")), objc.RegisterName("new"))
 	return wKWebExtensionDataRecordAdopt(_id)
 }
 
-// Retrieves the size in bytes of the specific data types in this data record.
+// SizeInBytesOfTypes retrieves the size in bytes of the specific data types in this data record.
 func (x *WKWebExtensionDataRecord) SizeInBytesOfTypes(dataTypes obj.Object) int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sizeInBytesOfTypes:"), objref.IDOf(dataTypes))
 	return _r
 }
 
-// The display name for the web extension to which this data record belongs.
+// DisplayName the display name for the web extension to which this data record belongs.
 func (x *WKWebExtensionDataRecord) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
 	if _r == 0 {
@@ -77,7 +85,7 @@ func (x *WKWebExtensionDataRecord) DisplayName() string {
 	return purego.GoString(_r)
 }
 
-// Unique identifier for the web extension context to which this data record belongs.
+// UniqueIdentifier unique identifier for the web extension context to which this data record belongs.
 func (x *WKWebExtensionDataRecord) UniqueIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniqueIdentifier"))
 	if _r == 0 {
@@ -86,19 +94,19 @@ func (x *WKWebExtensionDataRecord) UniqueIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// The set of data types contained in this data record.
+// ContainedDataTypes the set of data types contained in this data record.
 func (x *WKWebExtensionDataRecord) ContainedDataTypes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containedDataTypes"))
 	return obj.Wrap(_r)
 }
 
-// An array of errors that may have occurred when either calculating or deleting storage.
+// Errors an array of errors that may have occurred when either calculating or deleting storage.
 func (x *WKWebExtensionDataRecord) Errors() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errors"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The total size in bytes of all data types contained in this data record.
+// TotalSizeInBytes the total size in bytes of all data types contained in this data record.
 func (x *WKWebExtensionDataRecord) TotalSizeInBytes() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("totalSizeInBytes"))
 	return _r

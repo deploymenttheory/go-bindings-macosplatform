@@ -12,11 +12,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A VPN On Demand rule that disconnects the VPN.
-//
 // NEOnDemandRuleDisconnect is an idiomatic wrapper over the Objective-C class NEOnDemandRuleDisconnect.
+//
+// It embeds [NEOnDemandRule], promoting that type's methods.
+//
+// A VPN On Demand rule that disconnects the VPN.
 type NEOnDemandRuleDisconnect struct {
-	objref.Handle
+	NEOnDemandRule
 }
 
 // NEOnDemandRuleDisconnectFromID adopts an existing Objective-C object as a NEOnDemandRuleDisconnect
@@ -25,7 +27,8 @@ func NEOnDemandRuleDisconnectFromID(id objc.ID) *NEOnDemandRuleDisconnect {
 	if id == 0 {
 		return nil
 	}
-	x := &NEOnDemandRuleDisconnect{Handle: objref.Wrap(purego.Retain(id))}
+	x := &NEOnDemandRuleDisconnect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +41,10 @@ func nEOnDemandRuleDisconnectAdopt(id objc.ID) *NEOnDemandRuleDisconnect {
 	if id == 0 {
 		return nil
 	}
-	x := &NEOnDemandRuleDisconnect{Handle: objref.Wrap(id)}
+	x := &NEOnDemandRuleDisconnect{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *NEOnDemandRuleDisconnect) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEOnDemandRuleDisconnect) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEOnDemandRuleDisconnect) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewNEOnDemandRuleDisconnect creates a new NEOnDemandRuleDisconnect.
@@ -64,44 +53,34 @@ func NewNEOnDemandRuleDisconnect() *NEOnDemandRuleDisconnect {
 	return nEOnDemandRuleDisconnectAdopt(_id)
 }
 
-// DNS search domains that identify a network.
-//
-// WithDNSSearchDomainMatch sets the collection and returns the receiver so calls can be chained.
+// WithDNSSearchDomainMatch DNS search domains that identify a network.
 func (x *NEOnDemandRuleDisconnect) WithDNSSearchDomainMatch(items ...obj.Object) *NEOnDemandRuleDisconnect {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSSearchDomainMatch:"), _arr)
 	return x
 }
 
-// DNS server addresses that identify a network.
-//
-// WithDNSServerAddressMatch sets the collection and returns the receiver so calls can be chained.
+// WithDNSServerAddressMatch DNS server addresses that identify a network.
 func (x *NEOnDemandRuleDisconnect) WithDNSServerAddressMatch(items ...obj.Object) *NEOnDemandRuleDisconnect {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSServerAddressMatch:"), _arr)
 	return x
 }
 
-// An interface type to identify a network.
-//
-// WithInterfaceTypeMatch sets interfaceTypeMatch and returns the receiver so calls can be chained.
+// WithInterfaceTypeMatch an interface type to identify a network.
 func (x *NEOnDemandRuleDisconnect) WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleDisconnect {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterfaceTypeMatch:"), interfaceTypeMatch)
 	return x
 }
 
-// SSIDs that identify a network.
-//
-// WithSSIDMatch sets the collection and returns the receiver so calls can be chained.
+// WithSSIDMatch SSIDs that identify a network.
 func (x *NEOnDemandRuleDisconnect) WithSSIDMatch(items ...obj.Object) *NEOnDemandRuleDisconnect {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSSIDMatch:"), _arr)
 	return x
 }
 
-// A URL to probe when all other network identifiers match to validate that an expected resource is available.
-//
-// WithProbeURL sets probeURL and returns the receiver so calls can be chained.
+// WithProbeURL a URL to probe when all other network identifiers match to validate that an expected resource is available.
 func (x *NEOnDemandRuleDisconnect) WithProbeURL(probeURL string) *NEOnDemandRuleDisconnect {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProbeURL:"), rt.FileURL(probeURL))
 	return x
@@ -118,3 +97,5 @@ type NEOnDemandRuleDisconnectable interface {
 }
 
 var _ NEOnDemandRuleDisconnectable = (*NEOnDemandRuleDisconnect)(nil)
+
+var _ NEOnDemandRuleProvider = (*NEOnDemandRuleDisconnect)(nil)

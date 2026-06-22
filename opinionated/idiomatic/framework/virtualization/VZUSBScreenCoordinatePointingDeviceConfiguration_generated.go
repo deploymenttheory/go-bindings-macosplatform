@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the configuration for a USB pointing device that reports absolute coordinates.
-//
 // USBScreenCoordinatePointingDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZUSBScreenCoordinatePointingDeviceConfiguration.
+//
+// It embeds [PointingDeviceConfiguration], promoting that type's methods.
+//
+// An object that defines the configuration for a USB pointing device that reports absolute coordinates.
 type USBScreenCoordinatePointingDeviceConfiguration struct {
-	objref.Handle
+	PointingDeviceConfiguration
 }
 
 // USBScreenCoordinatePointingDeviceConfigurationFromID adopts an existing Objective-C object as a USBScreenCoordinatePointingDeviceConfiguration
@@ -25,7 +26,8 @@ func USBScreenCoordinatePointingDeviceConfigurationFromID(id objc.ID) *USBScreen
 	if id == 0 {
 		return nil
 	}
-	x := &USBScreenCoordinatePointingDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &USBScreenCoordinatePointingDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func uSBScreenCoordinatePointingDeviceConfigurationAdopt(id objc.ID) *USBScreenC
 	if id == 0 {
 		return nil
 	}
-	x := &USBScreenCoordinatePointingDeviceConfiguration{Handle: objref.Wrap(id)}
+	x := &USBScreenCoordinatePointingDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *USBScreenCoordinatePointingDeviceConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *USBScreenCoordinatePointingDeviceConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *USBScreenCoordinatePointingDeviceConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUSBScreenCoordinatePointingDeviceConfiguration creates a new USBScreenCoordinatePointingDeviceConfiguration.
@@ -70,3 +58,5 @@ type USBScreenCoordinatePointingDeviceConfigurationable interface {
 }
 
 var _ USBScreenCoordinatePointingDeviceConfigurationable = (*USBScreenCoordinatePointingDeviceConfiguration)(nil)
+
+var _ PointingDeviceConfigurationProvider = (*USBScreenCoordinatePointingDeviceConfiguration)(nil)

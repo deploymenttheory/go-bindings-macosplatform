@@ -6,15 +6,17 @@ package appkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // SplitViewItemAccessoryViewController is an idiomatic wrapper over the Objective-C class NSSplitViewItemAccessoryViewController.
+//
+// It embeds [ViewController], promoting that type's methods.
 type SplitViewItemAccessoryViewController struct {
-	objref.Handle
+	ViewController
 }
 
 // SplitViewItemAccessoryViewControllerFromID adopts an existing Objective-C object as a SplitViewItemAccessoryViewController
@@ -23,7 +25,8 @@ func SplitViewItemAccessoryViewControllerFromID(id objc.ID) *SplitViewItemAccess
 	if id == 0 {
 		return nil
 	}
-	x := &SplitViewItemAccessoryViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SplitViewItemAccessoryViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +39,10 @@ func splitViewItemAccessoryViewControllerAdopt(id objc.ID) *SplitViewItemAccesso
 	if id == 0 {
 		return nil
 	}
-	x := &SplitViewItemAccessoryViewController{Handle: objref.Wrap(id)}
+	x := &SplitViewItemAccessoryViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SplitViewItemAccessoryViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SplitViewItemAccessoryViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SplitViewItemAccessoryViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSplitViewItemAccessoryViewController creates a new SplitViewItemAccessoryViewController.
@@ -62,130 +51,120 @@ func NewSplitViewItemAccessoryViewController() *SplitViewItemAccessoryViewContro
 	return splitViewItemAccessoryViewControllerAdopt(_id)
 }
 
-// When set, this property will collapse the accessory view to 0 height (animatable) but not remove it from the window. Set through the animator object to animate it.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden when set, this property will collapse the accessory view to 0 height (animatable) but not remove it from the window. Set through the animator object to animate it.
 func (x *SplitViewItemAccessoryViewController) WithHidden(hidden bool) *SplitViewItemAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// Whether or not standard content insets should be applied to the view. Defaults to YES.
-//
-// WithAutomaticallyAppliesContentInsets sets automaticallyAppliesContentInsets and returns the receiver so calls can be chained.
+// WithAutomaticallyAppliesContentInsets whether or not standard content insets should be applied to the view. Defaults to YES.
 func (x *SplitViewItemAccessoryViewController) WithAutomaticallyAppliesContentInsets(automaticallyAppliesContentInsets bool) *SplitViewItemAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyAppliesContentInsets:"), automaticallyAppliesContentInsets)
 	return x
 }
 
-// The split view item accessory’s preferred effect for content scrolling behind it.
-//
-// WithPreferredScrollEdgeEffectStyle sets preferredScrollEdgeEffectStyle and returns the receiver so calls can be chained.
+// WithPreferredScrollEdgeEffectStyle the split view item accessory’s preferred effect for content scrolling behind it.
 func (x *SplitViewItemAccessoryViewController) WithPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *ScrollEdgeEffectStyle) *SplitViewItemAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredScrollEdgeEffectStyle:"), objref.IDOf(preferredScrollEdgeEffectStyle))
 	return x
 }
 
-// The object whose value is presented in the receiver’s primary view.
-//
-// WithRepresentedObject sets representedObject and returns the receiver so calls can be chained.
+// WithRepresentedObject the object whose value is presented in the receiver’s primary view.
 func (x *SplitViewItemAccessoryViewController) WithRepresentedObject(representedObject obj.Object) *SplitViewItemAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return x
 }
 
-// The localized title of the receiver’s primary view.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the localized title of the receiver’s primary view.
 func (x *SplitViewItemAccessoryViewController) WithTitle(title string) *SplitViewItemAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The view controller’s primary view.
-//
-// WithView sets view and returns the receiver so calls can be chained.
+// WithView the view controller’s primary view.
 func (x *SplitViewItemAccessoryViewController) WithView(view ViewProvider) *SplitViewItemAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 	return x
 }
 
-// An array of view controllers that are hierarchical children of the view controller.
-//
-// WithChildViewControllers sets the collection and returns the receiver so calls can be chained.
+// WithPreferredContentSize the desired size of the view controller’s view, in screen units.
+func (x *SplitViewItemAccessoryViewController) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *SplitViewItemAccessoryViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredContentSize:"), preferredContentSize)
+	return x
+}
+
+// WithChildViewControllers an array of view controllers that are hierarchical children of the view controller.
 func (x *SplitViewItemAccessoryViewController) WithChildViewControllers(items ...ViewControllerProvider) *SplitViewItemAccessoryViewController {
 	_arr := purego.SliceToNSArray(items, func(_v ViewControllerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildViewControllers:"), _arr)
 	return x
 }
 
-// WithSourceItemView sets sourceItemView and returns the receiver so calls can be chained.
+// WithSourceItemView sets the property and returns the receiver so calls can be chained.
 func (x *SplitViewItemAccessoryViewController) WithSourceItemView(sourceItemView ViewProvider) *SplitViewItemAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
+// WithPreferredScreenOrigin for a view controller that is part of an app extension, the preferred screen origin.
+func (x *SplitViewItemAccessoryViewController) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *SplitViewItemAccessoryViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredScreenOrigin:"), preferredScreenOrigin)
+	return x
+}
+
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *SplitViewItemAccessoryViewController) WithNextResponder(nextResponder ResponderProvider) *SplitViewItemAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets menu and returns the receiver so calls can be chained.
+// WithMenu returns the responder’s menu.
 func (x *SplitViewItemAccessoryViewController) WithMenu(menu *Menu) *SplitViewItemAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+// WithUserActivity an object encapsulating a user activity supported by this responder.
 func (x *SplitViewItemAccessoryViewController) WithUserActivity(userActivity obj.Object) *SplitViewItemAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *SplitViewItemAccessoryViewController) WithTouchBar(touchBar *TouchBar) *SplitViewItemAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// When set, this property will collapse the accessory view to 0 height (animatable) but not remove it from the window. Set through the animator object to animate it.
+// IsHidden when set, this property will collapse the accessory view to 0 height (animatable) but not remove it from the window. Set through the animator object to animate it.
 func (x *SplitViewItemAccessoryViewController) IsHidden() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
 	return _r
 }
 
-// When set, this property will collapse the accessory view to 0 height (animatable) but not remove it from the window. Set through the animator object to animate it.
+// SetHidden when set, this property will collapse the accessory view to 0 height (animatable) but not remove it from the window. Set through the animator object to animate it.
 func (x *SplitViewItemAccessoryViewController) SetHidden(hidden bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 }
 
-// Whether or not standard content insets should be applied to the view. Defaults to YES.
+// AutomaticallyAppliesContentInsets whether or not standard content insets should be applied to the view. Defaults to YES.
 func (x *SplitViewItemAccessoryViewController) AutomaticallyAppliesContentInsets() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallyAppliesContentInsets"))
 	return _r
 }
 
-// Whether or not standard content insets should be applied to the view. Defaults to YES.
+// SetAutomaticallyAppliesContentInsets whether or not standard content insets should be applied to the view. Defaults to YES.
 func (x *SplitViewItemAccessoryViewController) SetAutomaticallyAppliesContentInsets(automaticallyAppliesContentInsets bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyAppliesContentInsets:"), automaticallyAppliesContentInsets)
 }
 
-// The split view item accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the interior edge of a titlebar accessory: splitViewItemAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
+// PreferredScrollEdgeEffectStyle the split view item accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the interior edge of a titlebar accessory: splitViewItemAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
 func (x *SplitViewItemAccessoryViewController) PreferredScrollEdgeEffectStyle() *ScrollEdgeEffectStyle {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredScrollEdgeEffectStyle"))
 	return ScrollEdgeEffectStyleFromID(_r)
 }
 
-// The split view item accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the interior edge of a titlebar accessory: splitViewItemAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
+// SetPreferredScrollEdgeEffectStyle the split view item accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the interior edge of a titlebar accessory: splitViewItemAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
 func (x *SplitViewItemAccessoryViewController) SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *ScrollEdgeEffectStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredScrollEdgeEffectStyle:"), objref.IDOf(preferredScrollEdgeEffectStyle))
 }
@@ -199,8 +178,10 @@ type SplitViewItemAccessoryViewControllerable interface {
 	WithRepresentedObject(representedObject obj.Object) *SplitViewItemAccessoryViewController
 	WithTitle(title string) *SplitViewItemAccessoryViewController
 	WithView(view ViewProvider) *SplitViewItemAccessoryViewController
+	WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *SplitViewItemAccessoryViewController
 	WithChildViewControllers(items ...ViewControllerProvider) *SplitViewItemAccessoryViewController
 	WithSourceItemView(sourceItemView ViewProvider) *SplitViewItemAccessoryViewController
+	WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *SplitViewItemAccessoryViewController
 	WithNextResponder(nextResponder ResponderProvider) *SplitViewItemAccessoryViewController
 	WithMenu(menu *Menu) *SplitViewItemAccessoryViewController
 	WithUserActivity(userActivity obj.Object) *SplitViewItemAccessoryViewController
@@ -214,3 +195,7 @@ type SplitViewItemAccessoryViewControllerable interface {
 }
 
 var _ SplitViewItemAccessoryViewControllerable = (*SplitViewItemAccessoryViewController)(nil)
+
+var _ ViewControllerProvider = (*SplitViewItemAccessoryViewController)(nil)
+
+var _ ResponderProvider = (*SplitViewItemAccessoryViewController)(nil)

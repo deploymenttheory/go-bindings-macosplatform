@@ -11,69 +11,83 @@ import (
 // CumulativeQuantitySampleProvider is accepted wherever a HKCumulativeQuantitySample (or one of its subclasses) is expected.
 type CumulativeQuantitySampleProvider interface {
 	objref.Object
+	isCumulativeQuantitySample()
 }
 
 // DocumentSampleProvider is accepted wherever a HKDocumentSample (or one of its subclasses) is expected.
 type DocumentSampleProvider interface {
 	objref.Object
+	isDocumentSample()
 }
 
 // LensSpecificationProvider is accepted wherever a HKLensSpecification (or one of its subclasses) is expected.
 type LensSpecificationProvider interface {
 	objref.Object
+	isLensSpecification()
 }
 
 // ObjectProvider is accepted wherever a HKObject (or one of its subclasses) is expected.
 type ObjectProvider interface {
 	objref.Object
+	isObject()
 }
 
 // ObjectTypeProvider is accepted wherever a HKObjectType (or one of its subclasses) is expected.
 type ObjectTypeProvider interface {
 	objref.Object
+	isObjectType()
 }
 
 // QuantitySampleProvider is accepted wherever a HKQuantitySample (or one of its subclasses) is expected.
 type QuantitySampleProvider interface {
 	objref.Object
+	isQuantitySample()
 }
 
 // QueryProvider is accepted wherever a HKQuery (or one of its subclasses) is expected.
 type QueryProvider interface {
 	objref.Object
+	isQuery()
 }
 
 // SampleProvider is accepted wherever a HKSample (or one of its subclasses) is expected.
 type SampleProvider interface {
 	objref.Object
+	isSample()
 }
 
 // SampleTypeProvider is accepted wherever a HKSampleType (or one of its subclasses) is expected.
 type SampleTypeProvider interface {
 	objref.Object
+	isSampleType()
 }
 
 // ScoredAssessmentProvider is accepted wherever a HKScoredAssessment (or one of its subclasses) is expected.
 type ScoredAssessmentProvider interface {
 	objref.Object
+	isScoredAssessment()
 }
 
 // SeriesBuilderProvider is accepted wherever a HKSeriesBuilder (or one of its subclasses) is expected.
 type SeriesBuilderProvider interface {
 	objref.Object
+	isSeriesBuilder()
 }
 
 // SeriesSampleProvider is accepted wherever a HKSeriesSample (or one of its subclasses) is expected.
 type SeriesSampleProvider interface {
 	objref.Object
+	isSeriesSample()
 }
 
 // VisionPrescriptionProvider is accepted wherever a HKVisionPrescription (or one of its subclasses) is expected.
 type VisionPrescriptionProvider interface {
 	objref.Object
+	isVisionPrescription()
 }
 
 // WorkoutBuilderProvider is accepted wherever a HKWorkoutBuilder (or one of its subclasses) is expected.
 type WorkoutBuilderProvider interface {
 	objref.Object
+	isWorkoutBuilder()
 }

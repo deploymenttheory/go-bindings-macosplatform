@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes a file.
-//
 // File is an idiomatic wrapper over the Objective-C class INFile.
+//
+// An object that describes a file.
 type File struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FileFromID(id objc.ID) *File {
 	if id == 0 {
 		return nil
 	}
-	x := &File{Handle: objref.Wrap(purego.Retain(id))}
+	x := &File{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func fileAdopt(id objc.ID) *File {
 	if id == 0 {
 		return nil
 	}
-	x := &File{Handle: objref.Wrap(id)}
+	x := &File{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,35 +60,37 @@ func (x *File) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *File) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewFile creates a new File.
 func NewFile() *File {
 	_id := objc.Send[objc.ID](objc.ID(_class("INFile")), objc.RegisterName("new"))
 	return fileAdopt(_id)
 }
 
-// The name of the file.
-//
-// WithFilename sets filename and returns the receiver so calls can be chained.
+// WithFilename the name of the file.
 func (x *File) WithFilename(filename string) *File {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilename:"), purego.NSString(filename))
 	return x
 }
 
-// Indicates whether the file should be automatically deleted from disk when the Shortcut is done running. `false` by default.
-//
-// WithRemovedOnCompletion sets removedOnCompletion and returns the receiver so calls can be chained.
+// WithRemovedOnCompletion indicates whether the file should be automatically deleted from disk when the Shortcut is done running. `false` by default.
 func (x *File) WithRemovedOnCompletion(removedOnCompletion bool) *File {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
 	return x
 }
 
-// The contents of the file. If the file was created with a URL, accessing this property will memory map the file contents.
+// Data the contents of the file. If the file was created with a URL, accessing this property will memory map the file contents.
 func (x *File) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// The human-readable name of the file, which will be displayed to the user.
+// Filename the human-readable name of the file, which will be displayed to the user.
 func (x *File) Filename() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filename"))
 	if _r == 0 {
@@ -95,11 +99,12 @@ func (x *File) Filename() string {
 	return purego.GoString(_r)
 }
 
+// SetFilename wraps the corresponding Objective-C method.
 func (x *File) SetFilename(filename string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilename:"), purego.NSString(filename))
 }
 
-// The uniform type identifier of the file. (i.e. "public.json", "public.png", or any custom type) More information about uniform type identifiers can be found in <CoreServices/UTCoreTypes.h>
+// TypeIdentifier the uniform type identifier of the file. (i.e. "public.json", "public.png", or any custom type) More information about uniform type identifiers can be found in <CoreServices/UTCoreTypes.h>
 func (x *File) TypeIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typeIdentifier"))
 	if _r == 0 {
@@ -108,18 +113,19 @@ func (x *File) TypeIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// URL to the file on disk, if any. If the file isn't stored on disk, access the contents using the `data` property. If the file was created elsewhere on the system, make sure to surround access to file contents with `-[NSURL startAccessingSecurityScopedResource]` and `-[NSURL stopAccessingSecurityScopedResource]`.
+// FileURL URL to the file on disk, if any. If the file isn't stored on disk, access the contents using the `data` property. If the file was created elsewhere on the system, make sure to surround access to file contents with `-[NSURL startAccessingSecurityScopedResource]` and `-[NSURL stopAccessingSecurityScopedResource]`.
 func (x *File) FileURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileURL"))
 	return obj.Wrap(_r)
 }
 
-// Indicates whether the file should be automatically deleted from disk when the Shortcut is done running. `false` by default.
+// RemovedOnCompletion indicates whether the file should be automatically deleted from disk when the Shortcut is done running. `false` by default.
 func (x *File) RemovedOnCompletion() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removedOnCompletion"))
 	return _r
 }
 
+// SetRemovedOnCompletion wraps the corresponding Objective-C method.
 func (x *File) SetRemovedOnCompletion(removedOnCompletion bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
 }

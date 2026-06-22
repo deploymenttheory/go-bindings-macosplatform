@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of a tile-shading render pipeline’s color render target.
-//
 // TileRenderPipelineColorAttachmentDescriptor is an idiomatic wrapper over the Objective-C class MTLTileRenderPipelineColorAttachmentDescriptor.
+//
+// A description of a tile-shading render pipeline’s color render target.
 type TileRenderPipelineColorAttachmentDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func TileRenderPipelineColorAttachmentDescriptorFromID(id objc.ID) *TileRenderPi
 	if id == 0 {
 		return nil
 	}
-	x := &TileRenderPipelineColorAttachmentDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TileRenderPipelineColorAttachmentDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func tileRenderPipelineColorAttachmentDescriptorAdopt(id objc.ID) *TileRenderPip
 	if id == 0 {
 		return nil
 	}
-	x := &TileRenderPipelineColorAttachmentDescriptor{Handle: objref.Wrap(id)}
+	x := &TileRenderPipelineColorAttachmentDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *TileRenderPipelineColorAttachmentDescriptor) IsKind(className string) b
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TileRenderPipelineColorAttachmentDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewTileRenderPipelineColorAttachmentDescriptor creates a new TileRenderPipelineColorAttachmentDescriptor.
 func NewTileRenderPipelineColorAttachmentDescriptor() *TileRenderPipelineColorAttachmentDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLTileRenderPipelineColorAttachmentDescriptor")), objc.RegisterName("new"))
 	return tileRenderPipelineColorAttachmentDescriptorAdopt(_id)
 }
 
-// The pixel format associated with the tile shading render pipeline.
-//
-// WithPixelFormat sets pixelFormat and returns the receiver so calls can be chained.
+// WithPixelFormat the pixel format associated with the tile shading render pipeline.
 func (x *TileRenderPipelineColorAttachmentDescriptor) WithPixelFormat(pixelFormat PixelFormat) *TileRenderPipelineColorAttachmentDescriptor {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelFormat:"), pixelFormat)
 	return x
 }
 
+// PixelFormat wraps the corresponding Objective-C method.
 func (x *TileRenderPipelineColorAttachmentDescriptor) PixelFormat() PixelFormat {
 	_r := objc.Send[PixelFormat](objref.IDOf(x), objc.RegisterName("pixelFormat"))
 	return _r
 }
 
+// SetPixelFormat wraps the corresponding Objective-C method.
 func (x *TileRenderPipelineColorAttachmentDescriptor) SetPixelFormat(pixelFormat PixelFormat) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelFormat:"), pixelFormat)
 }

@@ -30,6 +30,8 @@ const (
 	KCALayerMaxYMargin AutoresizingMask = 32
 )
 
+// String returns the AutoresizingMask constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AutoresizingMask) String() string {
 	var parts []string
 	if e&KCALayerMinXMargin != 0 {
@@ -78,6 +80,8 @@ const (
 	KCAConstraintHeight ConstraintAttribute = 7
 )
 
+// String returns the ConstraintAttribute constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ConstraintAttribute) String() string {
 	switch e {
 	case KCAConstraintMinX:
@@ -111,6 +115,8 @@ const (
 	KCALayerMaxXMaxYCorner CornerMask = 8
 )
 
+// String returns the CornerMask constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CornerMask) String() string {
 	var parts []string
 	if e&KCALayerMinXMinYCorner != 0 {
@@ -142,6 +148,8 @@ const (
 	KCALayerTopEdge    EdgeAntialiasingMask = 8
 )
 
+// String returns the EdgeAntialiasingMask constant's name, or its numeric form when the
+// value is not a known constant.
 func (e EdgeAntialiasingMask) String() string {
 	var parts []string
 	if e&KCALayerLeftEdge != 0 {

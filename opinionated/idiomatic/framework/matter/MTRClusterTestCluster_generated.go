@@ -10,13 +10,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MTRClusterTestCluster is an idiomatic wrapper over the Objective-C class MTRClusterTestCluster.
+//
+// It embeds [MTRClusterUnitTesting], promoting that type's methods.
 type MTRClusterTestCluster struct {
-	objref.Handle
+	MTRClusterUnitTesting
 }
 
 // MTRClusterTestClusterFromID adopts an existing Objective-C object as a MTRClusterTestCluster
@@ -25,7 +26,8 @@ func MTRClusterTestClusterFromID(id objc.ID) *MTRClusterTestCluster {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterTestCluster{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRClusterTestCluster{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func mTRClusterTestClusterAdopt(id objc.ID) *MTRClusterTestCluster {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRClusterTestCluster{Handle: objref.Wrap(id)}
+	x := &MTRClusterTestCluster{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *MTRClusterTestCluster) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterTestCluster) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterTestCluster) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewMTRClusterTestClusterWithDeviceEndpointQueue creates a new MTRClusterTestCluster.
@@ -65,8 +53,10 @@ func NewMTRClusterTestClusterWithDeviceEndpointQueue(device *MTRDevice, endpoint
 	return mTRClusterTestClusterAdopt(_id)
 }
 
+// TestSpecificWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // TestSpecificWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestSpecificWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestSpecificParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestSpecificResponseParams, error) {
+func (x *MTRClusterTestCluster) TestSpecificWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestSpecificParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestSpecificResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestSpecificResponseParams
 		err error
@@ -88,8 +78,10 @@ func (x *MTRClusterTestCluster) TestSpecificWithParamsExpectedValuesExpectedValu
 	}
 }
 
+// TestSpecificWithExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // TestSpecificWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestSpecificWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestSpecificResponseParams, error) {
+func (x *MTRClusterTestCluster) TestSpecificWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestSpecificResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestSpecificResponseParams
 		err error
@@ -111,8 +103,10 @@ func (x *MTRClusterTestCluster) TestSpecificWithExpectedValuesExpectedValueInter
 	}
 }
 
+// TestAddArgumentsWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // TestAddArgumentsWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestAddArgumentsWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestAddArgumentsParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestAddArgumentsResponseParams, error) {
+func (x *MTRClusterTestCluster) TestAddArgumentsWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestAddArgumentsParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestAddArgumentsResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestAddArgumentsResponseParams
 		err error
@@ -134,8 +128,10 @@ func (x *MTRClusterTestCluster) TestAddArgumentsWithParamsExpectedValuesExpected
 	}
 }
 
+// TestSimpleArgumentRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // TestSimpleArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestSimpleArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestSimpleArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestSimpleArgumentResponseParams, error) {
+func (x *MTRClusterTestCluster) TestSimpleArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestSimpleArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestSimpleArgumentResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestSimpleArgumentResponseParams
 		err error
@@ -157,8 +153,10 @@ func (x *MTRClusterTestCluster) TestSimpleArgumentRequestWithParamsExpectedValue
 	}
 }
 
+// TestStructArrayArgumentRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // TestStructArrayArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestStructArrayArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestStructArrayArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestStructArrayArgumentResponseParams, error) {
+func (x *MTRClusterTestCluster) TestStructArrayArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestStructArrayArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestStructArrayArgumentResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestStructArrayArgumentResponseParams
 		err error
@@ -180,8 +178,10 @@ func (x *MTRClusterTestCluster) TestStructArrayArgumentRequestWithParamsExpected
 	}
 }
 
+// TestStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // TestStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterBooleanResponseParams, error) {
+func (x *MTRClusterTestCluster) TestStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -203,8 +203,10 @@ func (x *MTRClusterTestCluster) TestStructArgumentRequestWithParamsExpectedValue
 	}
 }
 
+// TestNestedStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // TestNestedStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestNestedStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestNestedStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterBooleanResponseParams, error) {
+func (x *MTRClusterTestCluster) TestNestedStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestNestedStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -226,8 +228,10 @@ func (x *MTRClusterTestCluster) TestNestedStructArgumentRequestWithParamsExpecte
 	}
 }
 
+// TestListStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // TestListStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestListStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterBooleanResponseParams, error) {
+func (x *MTRClusterTestCluster) TestListStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -249,8 +253,10 @@ func (x *MTRClusterTestCluster) TestListStructArgumentRequestWithParamsExpectedV
 	}
 }
 
+// TestListInt8UArgumentRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // TestListInt8UArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestListInt8UArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListInt8UArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterBooleanResponseParams, error) {
+func (x *MTRClusterTestCluster) TestListInt8UArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListInt8UArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -272,8 +278,10 @@ func (x *MTRClusterTestCluster) TestListInt8UArgumentRequestWithParamsExpectedVa
 	}
 }
 
+// TestNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // TestNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestNestedStructListArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterBooleanResponseParams, error) {
+func (x *MTRClusterTestCluster) TestNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestNestedStructListArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -295,8 +303,10 @@ func (x *MTRClusterTestCluster) TestNestedStructListArgumentRequestWithParamsExp
 	}
 }
 
+// TestListNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // TestListNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestListNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListNestedStructListArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterBooleanResponseParams, error) {
+func (x *MTRClusterTestCluster) TestListNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListNestedStructListArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -318,8 +328,10 @@ func (x *MTRClusterTestCluster) TestListNestedStructListArgumentRequestWithParam
 	}
 }
 
+// TestListInt8UReverseRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // TestListInt8UReverseRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestListInt8UReverseRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListInt8UReverseRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestListInt8UReverseResponseParams, error) {
+func (x *MTRClusterTestCluster) TestListInt8UReverseRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListInt8UReverseRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestListInt8UReverseResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestListInt8UReverseResponseParams
 		err error
@@ -341,8 +353,10 @@ func (x *MTRClusterTestCluster) TestListInt8UReverseRequestWithParamsExpectedVal
 	}
 }
 
+// TestEnumsRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // TestEnumsRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestEnumsRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestEnumsRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestEnumsResponseParams, error) {
+func (x *MTRClusterTestCluster) TestEnumsRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestEnumsRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestEnumsResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestEnumsResponseParams
 		err error
@@ -364,8 +378,10 @@ func (x *MTRClusterTestCluster) TestEnumsRequestWithParamsExpectedValuesExpected
 	}
 }
 
+// TestNullableOptionalRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // TestNullableOptionalRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestNullableOptionalRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestNullableOptionalRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestNullableOptionalResponseParams, error) {
+func (x *MTRClusterTestCluster) TestNullableOptionalRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestNullableOptionalRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestNullableOptionalResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestNullableOptionalResponseParams
 		err error
@@ -387,8 +403,10 @@ func (x *MTRClusterTestCluster) TestNullableOptionalRequestWithParamsExpectedVal
 	}
 }
 
+// TestNullableOptionalRequestWithExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // TestNullableOptionalRequestWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestNullableOptionalRequestWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestNullableOptionalResponseParams, error) {
+func (x *MTRClusterTestCluster) TestNullableOptionalRequestWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestNullableOptionalResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestNullableOptionalResponseParams
 		err error
@@ -410,8 +428,10 @@ func (x *MTRClusterTestCluster) TestNullableOptionalRequestWithExpectedValuesExp
 	}
 }
 
+// TestComplexNullableOptionalRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // TestComplexNullableOptionalRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestComplexNullableOptionalRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestComplexNullableOptionalRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestComplexNullableOptionalResponseParams, error) {
+func (x *MTRClusterTestCluster) TestComplexNullableOptionalRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestComplexNullableOptionalRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestComplexNullableOptionalResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestComplexNullableOptionalResponseParams
 		err error
@@ -433,8 +453,10 @@ func (x *MTRClusterTestCluster) TestComplexNullableOptionalRequestWithParamsExpe
 	}
 }
 
+// SimpleStructEchoRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // SimpleStructEchoRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) SimpleStructEchoRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterSimpleStructEchoRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterSimpleStructResponseParams, error) {
+func (x *MTRClusterTestCluster) SimpleStructEchoRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterSimpleStructEchoRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterSimpleStructResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterSimpleStructResponseParams
 		err error
@@ -456,8 +478,10 @@ func (x *MTRClusterTestCluster) SimpleStructEchoRequestWithParamsExpectedValuesE
 	}
 }
 
+// TestEmitTestEventRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // TestEmitTestEventRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestEmitTestEventRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestEmitTestEventRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestEmitTestEventResponseParams, error) {
+func (x *MTRClusterTestCluster) TestEmitTestEventRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestEmitTestEventRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestEmitTestEventResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestEmitTestEventResponseParams
 		err error
@@ -479,8 +503,10 @@ func (x *MTRClusterTestCluster) TestEmitTestEventRequestWithParamsExpectedValues
 	}
 }
 
+// TestEmitTestFabricScopedEventRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // TestEmitTestFabricScopedEventRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestEmitTestFabricScopedEventRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams, error) {
+func (x *MTRClusterTestCluster) TestEmitTestFabricScopedEventRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams
 		err error
@@ -527,3 +553,9 @@ type MTRClusterTestClusterable interface {
 }
 
 var _ MTRClusterTestClusterable = (*MTRClusterTestCluster)(nil)
+
+var _ MTRClusterUnitTestingProvider = (*MTRClusterTestCluster)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterTestCluster)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterTestCluster)(nil)

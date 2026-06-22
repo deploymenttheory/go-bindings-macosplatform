@@ -19,6 +19,8 @@ const (
 	MTL4AlphaToCoverageStateEnabled MTL4AlphaToCoverageState = 1
 )
 
+// String returns the MTL4AlphaToCoverageState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTL4AlphaToCoverageState) String() string {
 	switch e {
 	case MTL4AlphaToCoverageStateDisabled:
@@ -40,6 +42,8 @@ const (
 	MTL4AlphaToOneStateEnabled MTL4AlphaToOneState = 1
 )
 
+// String returns the MTL4AlphaToOneState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTL4AlphaToOneState) String() string {
 	switch e {
 	case MTL4AlphaToOneStateDisabled:
@@ -62,6 +66,8 @@ const (
 	MTL4BinaryFunctionOptionPipelineIndependent MTL4BinaryFunctionOptions = 2
 )
 
+// String returns the MTL4BinaryFunctionOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTL4BinaryFunctionOptions) String() string {
 	var parts []string
 	if e&MTL4BinaryFunctionOptionPipelineIndependent != 0 {
@@ -85,6 +91,8 @@ const (
 	MTL4BlendStateUnspecialized MTL4BlendState = 2
 )
 
+// String returns the MTL4BlendState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTL4BlendState) String() string {
 	switch e {
 	case MTL4BlendStateDisabled:
@@ -108,6 +116,8 @@ const (
 	MTL4CounterHeapTypeTimestamp MTL4CounterHeapType = 1
 )
 
+// String returns the MTL4CounterHeapType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTL4CounterHeapType) String() string {
 	switch e {
 	case MTL4CounterHeapTypeInvalid:
@@ -129,6 +139,8 @@ const (
 	MTL4IndirectCommandBufferSupportStateEnabled MTL4IndirectCommandBufferSupportState = 1
 )
 
+// String returns the MTL4IndirectCommandBufferSupportState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTL4IndirectCommandBufferSupportState) String() string {
 	switch e {
 	case MTL4IndirectCommandBufferSupportStateDisabled:
@@ -150,6 +162,8 @@ const (
 	MTL4LogicalToPhysicalColorAttachmentMappingStateInherited MTL4LogicalToPhysicalColorAttachmentMappingState = 1
 )
 
+// String returns the MTL4LogicalToPhysicalColorAttachmentMappingState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTL4LogicalToPhysicalColorAttachmentMappingState) String() string {
 	switch e {
 	case MTL4LogicalToPhysicalColorAttachmentMappingStateIdentity:
@@ -172,6 +186,8 @@ const (
 	MTL4PipelineDataSetSerializerConfigurationCaptureBinaries MTL4PipelineDataSetSerializerConfiguration = 2
 )
 
+// String returns the MTL4PipelineDataSetSerializerConfiguration constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTL4PipelineDataSetSerializerConfiguration) String() string {
 	var parts []string
 	if e&MTL4PipelineDataSetSerializerConfigurationCaptureDescriptors != 0 {
@@ -199,6 +215,8 @@ const (
 	MTL4ShaderReflectionBufferTypeInfo MTL4ShaderReflection = 2
 )
 
+// String returns the MTL4ShaderReflection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MTL4ShaderReflection) String() string {
 	var parts []string
 	if e&MTL4ShaderReflectionBindingInfo != 0 {
@@ -229,6 +247,8 @@ const (
 	AccelerationStructureInstanceDescriptorTypeIndirectMotion AccelerationStructureInstanceDescriptorType = 4
 )
 
+// String returns the AccelerationStructureInstanceDescriptorType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AccelerationStructureInstanceDescriptorType) String() string {
 	switch e {
 	case AccelerationStructureInstanceDescriptorTypeDefault:
@@ -265,6 +285,8 @@ const (
 	AccelerationStructureUsageMinimizeMemory AccelerationStructureUsage = 32
 )
 
+// String returns the AccelerationStructureUsage constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AccelerationStructureUsage) String() string {
 	var parts []string
 	if e&AccelerationStructureUsageRefit != 0 {
@@ -316,6 +338,8 @@ const (
 	ArgumentTypeIntersectionFunctionTable ArgumentType = 27
 )
 
+// String returns the ArgumentType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ArgumentType) String() string {
 	switch e {
 	case ArgumentTypeBuffer:
@@ -457,6 +481,8 @@ const (
 	AttributeFormatFloatRGB9E5 AttributeFormat = 55
 )
 
+// String returns the AttributeFormat constant's name, or its numeric form when the
+// value is not a known constant.
 func (e AttributeFormat) String() string {
 	switch e {
 	case AttributeFormatInvalid:
@@ -593,6 +619,8 @@ const (
 	ArgumentAccessWriteOnly BindingAccess = 2
 )
 
+// String returns the BindingAccess constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BindingAccess) String() string {
 	switch e {
 	case BindingAccessReadOnly:
@@ -652,6 +680,8 @@ const (
 	BlendFactorUnspecialized BlendFactor = 19
 )
 
+// String returns the BlendFactor constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BlendFactor) String() string {
 	switch e {
 	case BlendFactorZero:
@@ -717,6 +747,8 @@ const (
 	BlendOperationUnspecialized BlendOperation = 5
 )
 
+// String returns the BlendOperation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BlendOperation) String() string {
 	switch e {
 	case BlendOperationAdd:
@@ -746,6 +778,8 @@ const (
 	CPUCacheModeWriteCombined CPUCacheMode = 1
 )
 
+// String returns the CPUCacheMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CPUCacheMode) String() string {
 	switch e {
 	case CPUCacheModeDefaultCache:
@@ -767,6 +801,8 @@ const (
 	CaptureDestinationGPUTraceDocument CaptureDestination = 2
 )
 
+// String returns the CaptureDestination constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CaptureDestination) String() string {
 	switch e {
 	case CaptureDestinationDeveloperTools:
@@ -799,6 +835,8 @@ const (
 	ColorWriteMaskUnspecialized ColorWriteMask = 16
 )
 
+// String returns the ColorWriteMask constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ColorWriteMask) String() string {
 	var parts []string
 	if e&ColorWriteMaskRed != 0 {
@@ -836,6 +874,8 @@ const (
 	CommandBufferErrorOptionEncoderExecutionStatus CommandBufferErrorOption = 1
 )
 
+// String returns the CommandBufferErrorOption constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CommandBufferErrorOption) String() string {
 	var parts []string
 	if e&CommandBufferErrorOptionEncoderExecutionStatus != 0 {
@@ -869,6 +909,8 @@ const (
 	CompareFunctionAlways CompareFunction = 7
 )
 
+// String returns the CompareFunction constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CompareFunction) String() string {
 	switch e {
 	case CompareFunctionNever:
@@ -899,6 +941,8 @@ const (
 	CompileSymbolVisibilityHidden  CompileSymbolVisibility = 1
 )
 
+// String returns the CompileSymbolVisibility constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CompileSymbolVisibility) String() string {
 	switch e {
 	case CompileSymbolVisibilityDefault:
@@ -923,6 +967,8 @@ const (
 	CurveBasisBezier CurveBasis = 3
 )
 
+// String returns the CurveBasis constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CurveBasis) String() string {
 	switch e {
 	case CurveBasisBSpline:
@@ -949,6 +995,8 @@ const (
 	CurveEndCapsSphere CurveEndCaps = 2
 )
 
+// String returns the CurveEndCaps constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CurveEndCaps) String() string {
 	switch e {
 	case CurveEndCapsNone:
@@ -971,6 +1019,8 @@ const (
 	CurveTypeFlat CurveType = 1
 )
 
+// String returns the CurveType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CurveType) String() string {
 	switch e {
 	case CurveTypeRound:
@@ -1182,6 +1232,8 @@ const (
 	DataTypeTensor DataType = 140
 )
 
+// String returns the DataType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DataType) String() string {
 	switch e {
 	case DataTypeNone:
@@ -1393,6 +1445,8 @@ const (
 	DispatchTypeConcurrent DispatchType = 1
 )
 
+// String returns the DispatchType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DispatchType) String() string {
 	switch e {
 	case DispatchTypeSerial:
@@ -1425,6 +1479,8 @@ const (
 	FunctionOptionPipelineIndependent FunctionOptions = 8
 )
 
+// String returns the FunctionOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e FunctionOptions) String() string {
 	var parts []string
 	if e&FunctionOptionCompileToBinary != 0 {
@@ -1460,6 +1516,8 @@ const (
 	HazardTrackingModeTracked HazardTrackingMode = 2
 )
 
+// String returns the HazardTrackingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HazardTrackingMode) String() string {
 	switch e {
 	case HazardTrackingModeDefault:
@@ -1485,6 +1543,8 @@ const (
 	HeapTypeSparse HeapType = 2
 )
 
+// String returns the HeapType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e HeapType) String() string {
 	switch e {
 	case HeapTypeAutomatic:
@@ -1508,6 +1568,8 @@ const (
 	IOCommandQueueTypeSerial IOCommandQueueType = 1
 )
 
+// String returns the IOCommandQueueType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e IOCommandQueueType) String() string {
 	switch e {
 	case IOCommandQueueTypeConcurrent:
@@ -1535,6 +1597,8 @@ const (
 	IOCompressionMethodLZBitmap IOCompressionMethod = 4
 )
 
+// String returns the IOCompressionMethod constant's name, or its numeric form when the
+// value is not a known constant.
 func (e IOCompressionMethod) String() string {
 	switch e {
 	case IOCompressionMethodZlib:
@@ -1564,6 +1628,8 @@ const (
 	IOPriorityLow IOPriority = 2
 )
 
+// String returns the IOPriority constant's name, or its numeric form when the
+// value is not a known constant.
 func (e IOPriority) String() string {
 	switch e {
 	case IOPriorityHigh:
@@ -1587,6 +1653,8 @@ const (
 	IndexTypeUInt32 IndexType = 1
 )
 
+// String returns the IndexType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e IndexType) String() string {
 	switch e {
 	case IndexTypeUInt16:
@@ -1619,6 +1687,8 @@ const (
 	IndirectCommandTypeDrawMeshThreads           IndirectCommandType = 256
 )
 
+// String returns the IndirectCommandType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e IndirectCommandType) String() string {
 	var parts []string
 	if e&IndirectCommandTypeDraw != 0 {
@@ -1678,6 +1748,8 @@ const (
 	LanguageVersion4_0 LanguageVersion = 262144
 )
 
+// String returns the LanguageVersion constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LanguageVersion) String() string {
 	switch e {
 	case LanguageVersion1_1:
@@ -1717,6 +1789,8 @@ const (
 	LibraryOptimizationLevelSize LibraryOptimizationLevel = 1
 )
 
+// String returns the LibraryOptimizationLevel constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LibraryOptimizationLevel) String() string {
 	switch e {
 	case LibraryOptimizationLevelDefault:
@@ -1738,6 +1812,8 @@ const (
 	LibraryTypeDynamic LibraryType = 1
 )
 
+// String returns the LibraryType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LibraryType) String() string {
 	switch e {
 	case LibraryTypeExecutable:
@@ -1761,6 +1837,8 @@ const (
 	LoadActionClear LoadAction = 2
 )
 
+// String returns the LoadAction constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LoadAction) String() string {
 	switch e {
 	case LoadActionDontCare:
@@ -1792,6 +1870,8 @@ const (
 	LogLevelFault LogLevel = 5
 )
 
+// String returns the LogLevel constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LogLevel) String() string {
 	switch e {
 	case LogLevelUndefined:
@@ -1821,6 +1901,8 @@ const (
 	MathFloatingPointFunctionsPrecise MathFloatingPointFunctions = 1
 )
 
+// String returns the MathFloatingPointFunctions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MathFloatingPointFunctions) String() string {
 	switch e {
 	case MathFloatingPointFunctionsFast:
@@ -1844,6 +1926,8 @@ const (
 	MathModeFast MathMode = 2
 )
 
+// String returns the MathMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MathMode) String() string {
 	switch e {
 	case MathModeSafe:
@@ -1866,6 +1950,8 @@ const (
 	MatrixLayoutRowMajor MatrixLayout = 1
 )
 
+// String returns the MatrixLayout constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MatrixLayout) String() string {
 	switch e {
 	case MatrixLayoutColumnMajor:
@@ -1887,6 +1973,8 @@ const (
 	MotionBorderModeVanish MotionBorderMode = 1
 )
 
+// String returns the MotionBorderMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MotionBorderMode) String() string {
 	switch e {
 	case MotionBorderModeClamp:
@@ -1910,6 +1998,8 @@ const (
 	MultisampleDepthResolveFilterMax MultisampleDepthResolveFilter = 2
 )
 
+// String returns the MultisampleDepthResolveFilter constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MultisampleDepthResolveFilter) String() string {
 	switch e {
 	case MultisampleDepthResolveFilterSample0:
@@ -1933,6 +2023,8 @@ const (
 	MultisampleStencilResolveFilterDepthResolvedSample MultisampleStencilResolveFilter = 1
 )
 
+// String returns the MultisampleStencilResolveFilter constant's name, or its numeric form when the
+// value is not a known constant.
 func (e MultisampleStencilResolveFilter) String() string {
 	switch e {
 	case MultisampleStencilResolveFilterSample0:
@@ -1956,6 +2048,8 @@ const (
 	MutabilityImmutable Mutability = 2
 )
 
+// String returns the Mutability constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Mutability) String() string {
 	switch e {
 	case MutabilityDefault:
@@ -2270,6 +2364,8 @@ const (
 	PixelFormatUnspecialized PixelFormat = 263
 )
 
+// String returns the PixelFormat constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PixelFormat) String() string {
 	switch e {
 	case PixelFormatInvalid:
@@ -2571,6 +2667,8 @@ const (
 	PrimitiveTopologyClassTriangle PrimitiveTopologyClass = 3
 )
 
+// String returns the PrimitiveTopologyClass constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PrimitiveTopologyClass) String() string {
 	switch e {
 	case PrimitiveTopologyClassUnspecified:
@@ -2619,6 +2717,8 @@ const (
 	ResourceOptionCPUCacheModeWriteCombined ResourceOptions = 1
 )
 
+// String returns the ResourceOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ResourceOptions) String() string {
 	var parts []string
 	if e&ResourceCPUCacheModeWriteCombined != 0 {
@@ -2666,6 +2766,8 @@ const (
 	SamplerAddressModeClampToBorderColor SamplerAddressMode = 5
 )
 
+// String returns the SamplerAddressMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SamplerAddressMode) String() string {
 	switch e {
 	case SamplerAddressModeClampToEdge:
@@ -2697,6 +2799,8 @@ const (
 	SamplerBorderColorOpaqueWhite SamplerBorderColor = 2
 )
 
+// String returns the SamplerBorderColor constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SamplerBorderColor) String() string {
 	switch e {
 	case SamplerBorderColorTransparentBlack:
@@ -2720,6 +2824,8 @@ const (
 	SamplerMinMagFilterLinear SamplerMinMagFilter = 1
 )
 
+// String returns the SamplerMinMagFilter constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SamplerMinMagFilter) String() string {
 	switch e {
 	case SamplerMinMagFilterNearest:
@@ -2743,6 +2849,8 @@ const (
 	SamplerMipFilterLinear SamplerMipFilter = 2
 )
 
+// String returns the SamplerMipFilter constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SamplerMipFilter) String() string {
 	switch e {
 	case SamplerMipFilterNotMipmapped:
@@ -2768,6 +2876,8 @@ const (
 	SamplerReductionModeMaximum SamplerReductionMode = 2
 )
 
+// String returns the SamplerReductionMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SamplerReductionMode) String() string {
 	switch e {
 	case SamplerReductionModeWeightedAverage:
@@ -2793,6 +2903,8 @@ const (
 	ShaderValidationDisabled ShaderValidation = 2
 )
 
+// String returns the ShaderValidation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ShaderValidation) String() string {
 	switch e {
 	case ShaderValidationDefault:
@@ -2818,6 +2930,8 @@ const (
 	SparsePageSize256 SparsePageSize = 103
 )
 
+// String returns the SparsePageSize constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SparsePageSize) String() string {
 	switch e {
 	case SparsePageSize16:
@@ -2853,6 +2967,8 @@ const (
 	StencilOperationDecrementWrap StencilOperation = 7
 )
 
+// String returns the StencilOperation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StencilOperation) String() string {
 	switch e {
 	case StencilOperationKeep:
@@ -2900,6 +3016,8 @@ const (
 	StepFunctionThreadPositionInGridYIndexed StepFunction = 8
 )
 
+// String returns the StepFunction constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StepFunction) String() string {
 	switch e {
 	case StepFunctionConstant:
@@ -2936,6 +3054,8 @@ const (
 	StitchedLibraryOptionStoreLibraryInMetalPipelinesScript StitchedLibraryOptions = 2
 )
 
+// String returns the StitchedLibraryOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StitchedLibraryOptions) String() string {
 	var parts []string
 	if e&StitchedLibraryOptionFailOnBinaryArchiveMiss != 0 {
@@ -2964,6 +3084,8 @@ const (
 	StorageModeMemoryless StorageMode = 3
 )
 
+// String returns the StorageMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StorageMode) String() string {
 	switch e {
 	case StorageModeShared:
@@ -2997,6 +3119,8 @@ const (
 	StoreActionCustomSampleDepthStore StoreAction = 5
 )
 
+// String returns the StoreAction constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StoreAction) String() string {
 	switch e {
 	case StoreActionDontCare:
@@ -3027,6 +3151,8 @@ const (
 	StoreActionOptionCustomSamplePositions StoreActionOptions = 1
 )
 
+// String returns the StoreActionOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e StoreActionOptions) String() string {
 	var parts []string
 	if e&StoreActionOptionCustomSamplePositions != 0 {
@@ -3068,6 +3194,8 @@ const (
 	TensorDataTypeUInt4 TensorDataType = 144
 )
 
+// String returns the TensorDataType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TensorDataType) String() string {
 	switch e {
 	case TensorDataTypeNone:
@@ -3112,6 +3240,8 @@ const (
 	TensorUsageMachineLearning TensorUsage = 4
 )
 
+// String returns the TensorUsage constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TensorUsage) String() string {
 	var parts []string
 	if e&TensorUsageCompute != 0 {
@@ -3141,6 +3271,8 @@ const (
 	TessellationControlPointIndexTypeUInt32 TessellationControlPointIndexType = 2
 )
 
+// String returns the TessellationControlPointIndexType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TessellationControlPointIndexType) String() string {
 	switch e {
 	case TessellationControlPointIndexTypeNone:
@@ -3162,6 +3294,8 @@ const (
 	TessellationFactorFormatHalf TessellationFactorFormat = 0
 )
 
+// String returns the TessellationFactorFormat constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TessellationFactorFormat) String() string {
 	switch e {
 	case TessellationFactorFormatHalf:
@@ -3185,6 +3319,8 @@ const (
 	TessellationFactorStepFunctionPerPatchAndPerInstance TessellationFactorStepFunction = 3
 )
 
+// String returns the TessellationFactorStepFunction constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TessellationFactorStepFunction) String() string {
 	switch e {
 	case TessellationFactorStepFunctionConstant:
@@ -3214,6 +3350,8 @@ const (
 	TessellationPartitionModeFractionalEven TessellationPartitionMode = 3
 )
 
+// String returns the TessellationPartitionMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TessellationPartitionMode) String() string {
 	switch e {
 	case TessellationPartitionModePow2:
@@ -3236,6 +3374,8 @@ const (
 	TextureCompressionTypeLossy    TextureCompressionType = 1
 )
 
+// String returns the TextureCompressionType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextureCompressionType) String() string {
 	switch e {
 	case TextureCompressionTypeLossless:
@@ -3265,6 +3405,8 @@ const (
 	TextureSwizzleAlpha TextureSwizzle = 5
 )
 
+// String returns the TextureSwizzle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextureSwizzle) String() string {
 	switch e {
 	case TextureSwizzleZero:
@@ -3310,6 +3452,8 @@ const (
 	TextureTypeTextureBuffer TextureType = 9
 )
 
+// String returns the TextureType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextureType) String() string {
 	switch e {
 	case TextureType1D:
@@ -3356,6 +3500,8 @@ const (
 	TextureUsageShaderAtomic TextureUsage = 32
 )
 
+// String returns the TextureUsage constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TextureUsage) String() string {
 	var parts []string
 	if e&TextureUsageShaderRead != 0 {
@@ -3388,6 +3534,8 @@ const (
 	TransformTypeComponent TransformType = 1
 )
 
+// String returns the TransformType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TransformType) String() string {
 	switch e {
 	case TransformTypePackedFloat4x3:
@@ -3513,6 +3661,8 @@ const (
 	VertexFormatFloatRGB9E5 VertexFormat = 55
 )
 
+// String returns the VertexFormat constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VertexFormat) String() string {
 	switch e {
 	case VertexFormatInvalid:
@@ -3644,6 +3794,8 @@ const (
 	VertexStepFunctionPerPatchControlPoint VertexStepFunction = 4
 )
 
+// String returns the VertexStepFunction constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VertexStepFunction) String() string {
 	switch e {
 	case VertexStepFunctionConstant:
@@ -3671,6 +3823,8 @@ const (
 	VisibilityResultTypeAccumulate VisibilityResultType = 1
 )
 
+// String returns the VisibilityResultType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e VisibilityResultType) String() string {
 	switch e {
 	case VisibilityResultTypeReset:
@@ -3692,6 +3846,8 @@ const (
 	WindingCounterClockwise Winding = 1
 )
 
+// String returns the Winding constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Winding) String() string {
 	switch e {
 	case WindingClockwise:

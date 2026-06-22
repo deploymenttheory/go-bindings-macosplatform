@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the state of the collaboration options for the document.
-//
 // CollaborationShareOptions is an idiomatic wrapper over the Objective-C class SWCollaborationShareOptions.
+//
+// An object that represents the state of the collaboration options for the document.
 type CollaborationShareOptions struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CollaborationShareOptionsFromID(id objc.ID) *CollaborationShareOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &CollaborationShareOptions{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CollaborationShareOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func collaborationShareOptionsAdopt(id objc.ID) *CollaborationShareOptions {
 	if id == 0 {
 		return nil
 	}
-	x := &CollaborationShareOptions{Handle: objref.Wrap(id)}
+	x := &CollaborationShareOptions{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,51 +60,47 @@ func (x *CollaborationShareOptions) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates and initializes a collaboration share options object the array of groups and a summary string.
-//
-// NewCollaborationShareOptionsWithOptionsGroupsSummary creates a new CollaborationShareOptions.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CollaborationShareOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCollaborationShareOptionsWithOptionsGroupsSummary creates and initializes a collaboration share options object the array of groups and a summary string.
 func NewCollaborationShareOptionsWithOptionsGroupsSummary(optionsGroups []*CollaborationOptionsGroup, summary string) *CollaborationShareOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWCollaborationShareOptions")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptionsGroups:summary:"), purego.SliceToNSArray(optionsGroups, func(_v *CollaborationOptionsGroup) objc.ID { return objref.IDOf(_v) }), purego.NSString(summary))
 	return collaborationShareOptionsAdopt(_id)
 }
 
-// Creates and initializes a collaboration share options object with the array of groups.
-//
-// NewCollaborationShareOptionsWithOptionsGroups creates a new CollaborationShareOptions.
+// NewCollaborationShareOptionsWithOptionsGroups creates and initializes a collaboration share options object with the array of groups.
 func NewCollaborationShareOptionsWithOptionsGroups(optionsGroups []*CollaborationOptionsGroup) *CollaborationShareOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWCollaborationShareOptions")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptionsGroups:"), purego.SliceToNSArray(optionsGroups, func(_v *CollaborationOptionsGroup) objc.ID { return objref.IDOf(_v) }))
 	return collaborationShareOptionsAdopt(_id)
 }
 
-// Creates and initializes a collaboration share options object.
-//
-// NewCollaborationShareOptionsWithCoder creates a new CollaborationShareOptions.
+// NewCollaborationShareOptionsWithCoder creates and initializes a collaboration share options object.
 func NewCollaborationShareOptionsWithCoder(coder obj.Object) *CollaborationShareOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWCollaborationShareOptions")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return collaborationShareOptionsAdopt(_id)
 }
 
-// An array of options group objects to customize how the system shares the collaboration.
-//
-// WithOptionsGroups sets the collection and returns the receiver so calls can be chained.
+// WithOptionsGroups an array of options group objects to customize how the system shares the collaboration.
 func (x *CollaborationShareOptions) WithOptionsGroups(items ...CollaborationOptionsGroupProvider) *CollaborationShareOptions {
 	_arr := purego.SliceToNSArray(items, func(_v CollaborationOptionsGroupProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsGroups:"), _arr)
 	return x
 }
 
-// A localized string to summarize the collaboration options.
-//
-// WithSummary sets summary and returns the receiver so calls can be chained.
+// WithSummary a localized string to summarize the collaboration options.
 func (x *CollaborationShareOptions) WithSummary(summary string) *CollaborationShareOptions {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSummary:"), purego.NSString(summary))
 	return x
 }
 
-// SWCollaborationOptionsGroups to customize how the collaboration will be shared
+// OptionsGroups SWCollaborationOptionsGroups to customize how the collaboration will be shared
 //
 // OptionsGroups returns the collection as a Go slice.
 func (x *CollaborationShareOptions) OptionsGroups() []*CollaborationOptionsGroup {
@@ -110,11 +108,12 @@ func (x *CollaborationShareOptions) OptionsGroups() []*CollaborationOptionsGroup
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CollaborationOptionsGroup { return CollaborationOptionsGroupFromID(_id) })
 }
 
+// SetOptionsGroups wraps the corresponding Objective-C method.
 func (x *CollaborationShareOptions) SetOptionsGroups(optionsGroups []*CollaborationOptionsGroup) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsGroups:"), purego.SliceToNSArray(optionsGroups, func(_v *CollaborationOptionsGroup) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Localized string to summarize the selected collaboration options. If nil, "Share Options" will be displayed by default.
+// Summary localized string to summarize the selected collaboration options. If nil, "Share Options" will be displayed by default.
 func (x *CollaborationShareOptions) Summary() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("summary"))
 	if _r == 0 {
@@ -123,6 +122,7 @@ func (x *CollaborationShareOptions) Summary() string {
 	return purego.GoString(_r)
 }
 
+// SetSummary wraps the corresponding Objective-C method.
 func (x *CollaborationShareOptions) SetSummary(summary string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSummary:"), purego.NSString(summary))
 }

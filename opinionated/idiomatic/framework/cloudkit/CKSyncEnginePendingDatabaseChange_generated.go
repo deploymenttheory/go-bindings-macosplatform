@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes an unsent database modification.
-//
 // SyncEnginePendingDatabaseChange is an idiomatic wrapper over the Objective-C class CKSyncEnginePendingDatabaseChange.
+//
+// SyncEnginePendingDatabaseChange is an abstract base — you do not construct it directly. Construct one of [SyncEnginePendingZoneDelete], [SyncEnginePendingZoneSave] and pass it where a SyncEnginePendingDatabaseChange is accepted.
+//
+// An object that describes an unsent database modification.
 type SyncEnginePendingDatabaseChange struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func SyncEnginePendingDatabaseChangeFromID(id objc.ID) *SyncEnginePendingDatabas
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEnginePendingDatabaseChange{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SyncEnginePendingDatabaseChange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func syncEnginePendingDatabaseChangeAdopt(id objc.ID) *SyncEnginePendingDatabase
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEnginePendingDatabaseChange{Handle: objref.Wrap(id)}
+	x := &SyncEnginePendingDatabaseChange{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +62,19 @@ func (x *SyncEnginePendingDatabaseChange) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewSyncEnginePendingDatabaseChange creates a new SyncEnginePendingDatabaseChange.
-func NewSyncEnginePendingDatabaseChange() *SyncEnginePendingDatabaseChange {
-	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEnginePendingDatabaseChange")), objc.RegisterName("new"))
-	return syncEnginePendingDatabaseChangeAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncEnginePendingDatabaseChange) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The identifier of the record zone to change.
+// ZoneID the identifier of the record zone to change.
 func (x *SyncEnginePendingDatabaseChange) ZoneID() *RecordZoneID {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneID"))
 	return RecordZoneIDFromID(_r)
 }
 
-// The type of database change.
+// Type the type of database change.
 func (x *SyncEnginePendingDatabaseChange) Type() SyncEnginePendingDatabaseChangeType {
 	_r := objc.Send[SyncEnginePendingDatabaseChangeType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
@@ -84,3 +88,10 @@ type SyncEnginePendingDatabaseChangeable interface {
 }
 
 var _ SyncEnginePendingDatabaseChangeable = (*SyncEnginePendingDatabaseChange)(nil)
+
+// isSyncEnginePendingDatabaseChange marks SyncEnginePendingDatabaseChange — and, by embedding promotion, its
+// subclasses — as a member of the SyncEnginePendingDatabaseChange hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SyncEnginePendingDatabaseChange) isSyncEnginePendingDatabaseChange() {}
+
+var _ SyncEnginePendingDatabaseChangeProvider = (*SyncEnginePendingDatabaseChange)(nil)

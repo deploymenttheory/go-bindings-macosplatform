@@ -364,7 +364,6 @@ func ITLibMediaItemPropertyArtwork() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyArtwork")))
 }
 
-// Retrieves the name or title of the playlist. See
 // ITLibPlaylistPropertyName returns the string constant ITLibPlaylistPropertyName, for use as a dictionary key or argument.
 func ITLibPlaylistPropertyName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("ITLibPlaylistPropertyName")))

@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A factory class for creating layout constraint objects using a fluent API.
-//
 // LayoutAnchor is an idiomatic wrapper over the Objective-C class NSLayoutAnchor.
+//
+// LayoutAnchor is an abstract base — you do not construct it directly. Construct one of [LayoutDimension], [LayoutXAxisAnchor], [LayoutYAxisAnchor] and pass it where a LayoutAnchor is accepted.
+//
+// A factory class for creating layout constraint objects using a fluent API.
 type LayoutAnchor struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func LayoutAnchorFromID(id objc.ID) *LayoutAnchor {
 	if id == 0 {
 		return nil
 	}
-	x := &LayoutAnchor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LayoutAnchor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func layoutAnchorAdopt(id objc.ID) *LayoutAnchor {
 	if id == 0 {
 		return nil
 	}
-	x := &LayoutAnchor{Handle: objref.Wrap(id)}
+	x := &LayoutAnchor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,48 +62,49 @@ func (x *LayoutAnchor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewLayoutAnchor creates a new LayoutAnchor.
-func NewLayoutAnchor() *LayoutAnchor {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSLayoutAnchor")), objc.RegisterName("new"))
-	return layoutAnchorAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LayoutAnchor) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns a constraint that defines one item’s attribute as equal to another.
+// ConstraintEqualToAnchor returns a constraint that defines one item’s attribute as equal to another.
 func (x *LayoutAnchor) ConstraintEqualToAnchor(anchor obj.Object) *LayoutConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintEqualToAnchor:"), objref.IDOf(anchor))
 	return LayoutConstraintFromID(_r)
 }
 
-// Returns a constraint that defines one item’s attribute as greater than or equal to another.
+// ConstraintGreaterThanOrEqualToAnchor returns a constraint that defines one item’s attribute as greater than or equal to another.
 func (x *LayoutAnchor) ConstraintGreaterThanOrEqualToAnchor(anchor obj.Object) *LayoutConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintGreaterThanOrEqualToAnchor:"), objref.IDOf(anchor))
 	return LayoutConstraintFromID(_r)
 }
 
-// Returns a constraint that defines one item’s attribute as less than or equal to another.
+// ConstraintLessThanOrEqualToAnchor returns a constraint that defines one item’s attribute as less than or equal to another.
 func (x *LayoutAnchor) ConstraintLessThanOrEqualToAnchor(anchor obj.Object) *LayoutConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintLessThanOrEqualToAnchor:"), objref.IDOf(anchor))
 	return LayoutConstraintFromID(_r)
 }
 
-// Returns a constraint that defines one item’s attribute as equal to another item’s attribute plus a constant offset.
+// ConstraintEqualToAnchorConstant returns a constraint that defines one item’s attribute as equal to another item’s attribute plus a constant offset.
 func (x *LayoutAnchor) ConstraintEqualToAnchorConstant(anchor obj.Object, c float64) *LayoutConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintEqualToAnchor:constant:"), objref.IDOf(anchor), c)
 	return LayoutConstraintFromID(_r)
 }
 
-// Returns a constraint that defines one item’s attribute as greater than or equal to another item’s attribute plus a constant offset.
+// ConstraintGreaterThanOrEqualToAnchorConstant returns a constraint that defines one item’s attribute as greater than or equal to another item’s attribute plus a constant offset.
 func (x *LayoutAnchor) ConstraintGreaterThanOrEqualToAnchorConstant(anchor obj.Object, c float64) *LayoutConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintGreaterThanOrEqualToAnchor:constant:"), objref.IDOf(anchor), c)
 	return LayoutConstraintFromID(_r)
 }
 
-// Returns a constraint that defines one item’s attribute as less than or equal to another item’s attribute plus a constant offset.
+// ConstraintLessThanOrEqualToAnchorConstant returns a constraint that defines one item’s attribute as less than or equal to another item’s attribute plus a constant offset.
 func (x *LayoutAnchor) ConstraintLessThanOrEqualToAnchorConstant(anchor obj.Object, c float64) *LayoutConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintLessThanOrEqualToAnchor:constant:"), objref.IDOf(anchor), c)
 	return LayoutConstraintFromID(_r)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *LayoutAnchor) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -108,16 +113,20 @@ func (x *LayoutAnchor) Name() string {
 	return purego.GoString(_r)
 }
 
+// Item wraps the corresponding Objective-C method.
 func (x *LayoutAnchor) Item() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item"))
 	return obj.Wrap(_r)
 }
 
+// HasAmbiguousLayout wraps the corresponding Objective-C method.
 func (x *LayoutAnchor) HasAmbiguousLayout() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasAmbiguousLayout"))
 	return _r
 }
 
+// ConstraintsAffectingLayout wraps the corresponding Objective-C method.
+//
 // ConstraintsAffectingLayout returns the collection as a Go slice.
 func (x *LayoutAnchor) ConstraintsAffectingLayout() []*LayoutConstraint {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintsAffectingLayout"))
@@ -140,3 +149,10 @@ type LayoutAnchorable interface {
 }
 
 var _ LayoutAnchorable = (*LayoutAnchor)(nil)
+
+// isLayoutAnchor marks LayoutAnchor — and, by embedding promotion, its
+// subclasses — as a member of the LayoutAnchor hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *LayoutAnchor) isLayoutAnchor() {}
+
+var _ LayoutAnchorProvider = (*LayoutAnchor)(nil)

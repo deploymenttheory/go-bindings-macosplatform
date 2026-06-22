@@ -6,17 +6,19 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A player item output that vends media with a legible characteristic as rendered pixel buffers.
-//
 // PlayerItemRenderedLegibleOutput is an idiomatic wrapper over the Objective-C class AVPlayerItemRenderedLegibleOutput.
+//
+// It embeds [PlayerItemOutput], promoting that type's methods.
+//
+// A player item output that vends media with a legible characteristic as rendered pixel buffers.
 type PlayerItemRenderedLegibleOutput struct {
-	objref.Handle
+	PlayerItemOutput
 }
 
 // PlayerItemRenderedLegibleOutputFromID adopts an existing Objective-C object as a PlayerItemRenderedLegibleOutput
@@ -25,7 +27,8 @@ func PlayerItemRenderedLegibleOutputFromID(id objc.ID) *PlayerItemRenderedLegibl
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemRenderedLegibleOutput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlayerItemRenderedLegibleOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,72 +41,78 @@ func playerItemRenderedLegibleOutputAdopt(id objc.ID) *PlayerItemRenderedLegible
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemRenderedLegibleOutput{Handle: objref.Wrap(id)}
+	x := &PlayerItemRenderedLegibleOutput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *PlayerItemRenderedLegibleOutput) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlayerItemRenderedLegibleOutput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlayerItemRenderedLegibleOutput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewPlayerItemRenderedLegibleOutput creates a new PlayerItemRenderedLegibleOutput.
-func NewPlayerItemRenderedLegibleOutput() *PlayerItemRenderedLegibleOutput {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemRenderedLegibleOutput")), objc.RegisterName("new"))
+// NewPlayerItemRenderedLegibleOutputWithVideoDisplaySize creates a rendered legible output object.
+func NewPlayerItemRenderedLegibleOutputWithVideoDisplaySize(videoDisplaySize corefoundation.CGSize) *PlayerItemRenderedLegibleOutput {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemRenderedLegibleOutput")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVideoDisplaySize:"), videoDisplaySize)
 	return playerItemRenderedLegibleOutputAdopt(_id)
 }
 
-// Permits advance invocation of the associated delegate, if any.
-//
-// WithAdvanceIntervalForDelegateInvocation sets advanceIntervalForDelegateInvocation and returns the receiver so calls can be chained.
+// WithAdvanceIntervalForDelegateInvocation permits advance invocation of the associated delegate, if any.
 func (x *PlayerItemRenderedLegibleOutput) WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemRenderedLegibleOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdvanceIntervalForDelegateInvocation:"), advanceIntervalForDelegateInvocation)
 	return x
 }
 
-// A Boolean value that indicates whether the player object renders the receiver’s output.
-//
-// WithSuppressesPlayerRendering sets suppressesPlayerRendering and returns the receiver so calls can be chained.
+// WithVideoDisplaySize set the video display size to use for rendering of pixel buffers.
+func (x *PlayerItemRenderedLegibleOutput) WithVideoDisplaySize(videoDisplaySize corefoundation.CGSize) *PlayerItemRenderedLegibleOutput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoDisplaySize:"), videoDisplaySize)
+	return x
+}
+
+// WithSuppressesPlayerRendering a Boolean value that indicates whether the player object renders the receiver’s output.
 func (x *PlayerItemRenderedLegibleOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemRenderedLegibleOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
 	return x
 }
 
-// The dispatch queue where the delegate is messaged. This property is not key-value observable.
+// DelegateQueue the dispatch queue where the delegate is messaged. This property is not key-value observable.
 func (x *PlayerItemRenderedLegibleOutput) DelegateQueue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegateQueue"))
 	return obj.Wrap(_r)
 }
 
-// Permits advance invocation of the associated delegate, if any. If it is possible, an AVPlayerItemRenderedLegibleOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemRenderedLegibleOutput is prepared to act on them, the delegate will be invoked as soon as possible.
+// AdvanceIntervalForDelegateInvocation permits advance invocation of the associated delegate, if any. If it is possible, an AVPlayerItemRenderedLegibleOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemRenderedLegibleOutput is prepared to act on them, the delegate will be invoked as soon as possible.
 func (x *PlayerItemRenderedLegibleOutput) AdvanceIntervalForDelegateInvocation() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("advanceIntervalForDelegateInvocation"))
 	return _r
 }
 
+// SetAdvanceIntervalForDelegateInvocation wraps the corresponding Objective-C method.
 func (x *PlayerItemRenderedLegibleOutput) SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdvanceIntervalForDelegateInvocation:"), advanceIntervalForDelegateInvocation)
+}
+
+// VideoDisplaySize permits rendering of pixel buffers according to the set width and height The client is expected to set videodisplay size during init and may also set it again during playback. The pixel buffers will be rendered according to the set width and height of display area. If this property is set during the presentation time of a vended caption image, a new caption image rendered according to new videoDisplaySize, will be vended out. Setting this property with a zero height or width will result in an exception being thrown and it is client's responsibility to handle it using appropriate catch block.
+func (x *PlayerItemRenderedLegibleOutput) VideoDisplaySize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("videoDisplaySize"))
+	return _r
+}
+
+// SetVideoDisplaySize wraps the corresponding Objective-C method.
+func (x *PlayerItemRenderedLegibleOutput) SetVideoDisplaySize(videoDisplaySize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoDisplaySize:"), videoDisplaySize)
 }
 
 // PlayerItemRenderedLegibleOutputable is the interface implemented by [PlayerItemRenderedLegibleOutput], for mocking and DI.
 type PlayerItemRenderedLegibleOutputable interface {
 	obj.Object
 	WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemRenderedLegibleOutput
+	WithVideoDisplaySize(videoDisplaySize corefoundation.CGSize) *PlayerItemRenderedLegibleOutput
 	WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemRenderedLegibleOutput
 	DelegateQueue() obj.Object
 	AdvanceIntervalForDelegateInvocation() float64
 	SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64)
+	VideoDisplaySize() corefoundation.CGSize
+	SetVideoDisplaySize(videoDisplaySize corefoundation.CGSize)
 }
 
 var _ PlayerItemRenderedLegibleOutputable = (*PlayerItemRenderedLegibleOutput)(nil)
+
+var _ PlayerItemOutputProvider = (*PlayerItemRenderedLegibleOutput)(nil)

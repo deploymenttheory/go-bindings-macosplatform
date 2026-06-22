@@ -23,7 +23,8 @@ func WorkoutEffortRelationshipFromID(id objc.ID) *WorkoutEffortRelationship {
 	if id == 0 {
 		return nil
 	}
-	x := &WorkoutEffortRelationship{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WorkoutEffortRelationship{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func workoutEffortRelationshipAdopt(id objc.ID) *WorkoutEffortRelationship {
 	if id == 0 {
 		return nil
 	}
-	x := &WorkoutEffortRelationship{Handle: objref.Wrap(id)}
+	x := &WorkoutEffortRelationship{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *WorkoutEffortRelationship) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WorkoutEffortRelationship) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWorkoutEffortRelationship creates a new WorkoutEffortRelationship.
 func NewWorkoutEffortRelationship() *WorkoutEffortRelationship {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKWorkoutEffortRelationship")), objc.RegisterName("new"))
 	return workoutEffortRelationshipAdopt(_id)
 }
 
+// Workout wraps the corresponding Objective-C method.
 func (x *WorkoutEffortRelationship) Workout() *Workout {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workout"))
 	return WorkoutFromID(_r)
 }
 
+// Activity wraps the corresponding Objective-C method.
 func (x *WorkoutEffortRelationship) Activity() *WorkoutActivity {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activity"))
 	return WorkoutActivityFromID(_r)
 }
 
-// The samples related to the workout but not any sub-activities
+// Samples the samples related to the workout but not any sub-activities
 //
 // Samples returns the collection as a Go slice.
 func (x *WorkoutEffortRelationship) Samples() []*Sample {

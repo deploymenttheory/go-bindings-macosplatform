@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An acceleration structure built over instances of other acceleration structures.
-//
 // InstanceAccelerationStructure is an idiomatic wrapper over the Objective-C class MPSInstanceAccelerationStructure.
+//
+// It embeds [AccelerationStructure], promoting that type's methods.
+//
+// An acceleration structure built over instances of other acceleration structures.
 type InstanceAccelerationStructure struct {
-	objref.Handle
+	AccelerationStructure
 }
 
 // InstanceAccelerationStructureFromID adopts an existing Objective-C object as a InstanceAccelerationStructure
@@ -25,7 +26,8 @@ func InstanceAccelerationStructureFromID(id objc.ID) *InstanceAccelerationStruct
 	if id == 0 {
 		return nil
 	}
-	x := &InstanceAccelerationStructure{Handle: objref.Wrap(purego.Retain(id))}
+	x := &InstanceAccelerationStructure{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func instanceAccelerationStructureAdopt(id objc.ID) *InstanceAccelerationStructu
 	if id == 0 {
 		return nil
 	}
-	x := &InstanceAccelerationStructure{Handle: objref.Wrap(id)}
+	x := &InstanceAccelerationStructure{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *InstanceAccelerationStructure) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *InstanceAccelerationStructure) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *InstanceAccelerationStructure) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewInstanceAccelerationStructure creates a new InstanceAccelerationStructure.
@@ -64,56 +52,44 @@ func NewInstanceAccelerationStructure() *InstanceAccelerationStructure {
 	return instanceAccelerationStructureAdopt(_id)
 }
 
-// Acceleration structures available for use in this instance acceleration structure. Each instance must provide an index into this array in the instance buffer as well as a transformation matrix in the transform buffer. All acceleration structures must share a single vertex buffer, optional index buffer, and optional mask buffer, though they may have different offsets within each buffer, and all acceleration structures must share the same acceleration structure group. If a polygon acceleration structure is rebuilt or refit, the instance acceleration structure must subsequently be rebuilt or refit.
-//
-// WithAccelerationStructures sets the collection and returns the receiver so calls can be chained.
+// WithAccelerationStructures acceleration structures available for use in this instance acceleration structure. Each instance must provide an index into this array in the instance buffer as well as a transformation matrix in the transform buffer. All acceleration structures must share a single vertex buffer, optional index buffer, and optional mask buffer, though they may have different offsets within each buffer, and all acceleration structures must share the same acceleration structure group. If a polygon acceleration structure is rebuilt or refit, the instance acceleration structure must subsequently be rebuilt or refit.
 func (x *InstanceAccelerationStructure) WithAccelerationStructures(items ...obj.Object) *InstanceAccelerationStructure {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccelerationStructures:"), _arr)
 	return x
 }
 
-// Offset, in bytes, into the instance buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
-//
-// WithInstanceBufferOffset sets instanceBufferOffset and returns the receiver so calls can be chained.
+// WithInstanceBufferOffset offset, in bytes, into the instance buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
 func (x *InstanceAccelerationStructure) WithInstanceBufferOffset(instanceBufferOffset int) *InstanceAccelerationStructure {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceBufferOffset:"), instanceBufferOffset)
 	return x
 }
 
-// Offset, in bytes, into the transform buffer. Defaults to 0 bytes. Must be aligned to the stride of the transform type.
-//
-// WithTransformBufferOffset sets transformBufferOffset and returns the receiver so calls can be chained.
+// WithTransformBufferOffset offset, in bytes, into the transform buffer. Defaults to 0 bytes. Must be aligned to the stride of the transform type.
 func (x *InstanceAccelerationStructure) WithTransformBufferOffset(transformBufferOffset int) *InstanceAccelerationStructure {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransformBufferOffset:"), transformBufferOffset)
 	return x
 }
 
-// Offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
-//
-// WithMaskBufferOffset sets maskBufferOffset and returns the receiver so calls can be chained.
+// WithMaskBufferOffset offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
 func (x *InstanceAccelerationStructure) WithMaskBufferOffset(maskBufferOffset int) *InstanceAccelerationStructure {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskBufferOffset:"), maskBufferOffset)
 	return x
 }
 
-// Number of instances. Changes to this property require rebuilding the acceleration structure.
-//
-// WithInstanceCount sets instanceCount and returns the receiver so calls can be chained.
+// WithInstanceCount number of instances. Changes to this property require rebuilding the acceleration structure.
 func (x *InstanceAccelerationStructure) WithInstanceCount(instanceCount int) *InstanceAccelerationStructure {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceCount:"), instanceCount)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithLabel the string that identifies the kernel.
 func (x *InstanceAccelerationStructure) WithLabel(label string) *InstanceAccelerationStructure {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Acceleration structures available for use in this instance acceleration structure. Each instance must provide an index into this array in the instance buffer as well as a transformation matrix in the transform buffer. All acceleration structures must share a single vertex buffer, optional index buffer, and optional mask buffer, though they may have different offsets within each buffer, and all acceleration structures must share the same acceleration structure group. If a polygon acceleration structure is rebuilt or refit, the instance acceleration structure must subsequently be rebuilt or refit.
+// AccelerationStructures acceleration structures available for use in this instance acceleration structure. Each instance must provide an index into this array in the instance buffer as well as a transformation matrix in the transform buffer. All acceleration structures must share a single vertex buffer, optional index buffer, and optional mask buffer, though they may have different offsets within each buffer, and all acceleration structures must share the same acceleration structure group. If a polygon acceleration structure is rebuilt or refit, the instance acceleration structure must subsequently be rebuilt or refit.
 //
 // AccelerationStructures returns the collection as a Go slice.
 func (x *InstanceAccelerationStructure) AccelerationStructures() []obj.Object {
@@ -121,46 +97,51 @@ func (x *InstanceAccelerationStructure) AccelerationStructures() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetAccelerationStructures wraps the corresponding Objective-C method.
 func (x *InstanceAccelerationStructure) SetAccelerationStructures(accelerationStructures []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccelerationStructures:"), purego.SliceToNSArray(accelerationStructures, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Offset, in bytes, into the instance buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
+// InstanceBufferOffset offset, in bytes, into the instance buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
 func (x *InstanceAccelerationStructure) InstanceBufferOffset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("instanceBufferOffset"))
 	return _r
 }
 
+// SetInstanceBufferOffset wraps the corresponding Objective-C method.
 func (x *InstanceAccelerationStructure) SetInstanceBufferOffset(instanceBufferOffset int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceBufferOffset:"), instanceBufferOffset)
 }
 
-// Offset, in bytes, into the transform buffer. Defaults to 0 bytes. Must be aligned to the stride of the transform type.
+// TransformBufferOffset offset, in bytes, into the transform buffer. Defaults to 0 bytes. Must be aligned to the stride of the transform type.
 func (x *InstanceAccelerationStructure) TransformBufferOffset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("transformBufferOffset"))
 	return _r
 }
 
+// SetTransformBufferOffset wraps the corresponding Objective-C method.
 func (x *InstanceAccelerationStructure) SetTransformBufferOffset(transformBufferOffset int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransformBufferOffset:"), transformBufferOffset)
 }
 
-// Offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
+// MaskBufferOffset offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
 func (x *InstanceAccelerationStructure) MaskBufferOffset() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maskBufferOffset"))
 	return _r
 }
 
+// SetMaskBufferOffset wraps the corresponding Objective-C method.
 func (x *InstanceAccelerationStructure) SetMaskBufferOffset(maskBufferOffset int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskBufferOffset:"), maskBufferOffset)
 }
 
-// Number of instances. Changes to this property require rebuilding the acceleration structure.
+// InstanceCount number of instances. Changes to this property require rebuilding the acceleration structure.
 func (x *InstanceAccelerationStructure) InstanceCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("instanceCount"))
 	return _r
 }
 
+// SetInstanceCount wraps the corresponding Objective-C method.
 func (x *InstanceAccelerationStructure) SetInstanceCount(instanceCount int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceCount:"), instanceCount)
 }
@@ -187,3 +168,7 @@ type InstanceAccelerationStructureable interface {
 }
 
 var _ InstanceAccelerationStructureable = (*InstanceAccelerationStructure)(nil)
+
+var _ AccelerationStructureProvider = (*InstanceAccelerationStructure)(nil)
+
+var _ KernelProvider = (*InstanceAccelerationStructure)(nil)

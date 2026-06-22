@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that delivers notifications from apps to the user.
-//
 // UserNotificationCenter is an idiomatic wrapper over the Objective-C class NSUserNotificationCenter.
+//
+// An object that delivers notifications from apps to the user.
 type UserNotificationCenter struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func UserNotificationCenterFromID(id objc.ID) *UserNotificationCenter {
 	if id == 0 {
 		return nil
 	}
-	x := &UserNotificationCenter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UserNotificationCenter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func userNotificationCenterAdopt(id objc.ID) *UserNotificationCenter {
 	if id == 0 {
 		return nil
 	}
-	x := &UserNotificationCenter{Handle: objref.Wrap(id)}
+	x := &UserNotificationCenter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,62 +60,71 @@ func (x *UserNotificationCenter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UserNotificationCenter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewUserNotificationCenter creates a new UserNotificationCenter.
 func NewUserNotificationCenter() *UserNotificationCenter {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSUserNotificationCenter")), objc.RegisterName("new"))
 	return userNotificationCenterAdopt(_id)
 }
 
-// Specifies an array of scheduled user notifications that have not yet been delivered.
-//
-// WithScheduledNotifications sets the collection and returns the receiver so calls can be chained.
+// WithScheduledNotifications specifies an array of scheduled user notifications that have not yet been delivered.
 func (x *UserNotificationCenter) WithScheduledNotifications(items ...*UserNotification) *UserNotificationCenter {
 	_arr := purego.SliceToNSArray(items, func(_v *UserNotification) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScheduledNotifications:"), _arr)
 	return x
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UserNotificationCenter) WithScriptingProperties(scriptingProperties obj.Object) *UserNotificationCenter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Schedules the specified user notification.
+// ScheduleNotification schedules the specified user notification.
 func (x *UserNotificationCenter) ScheduleNotification(notification *UserNotification) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleNotification:"), objref.IDOf(notification))
 }
 
-// Removes the specified user notification for the scheduled notifications.
+// RemoveScheduledNotification removes the specified user notification for the scheduled notifications.
 func (x *UserNotificationCenter) RemoveScheduledNotification(notification *UserNotification) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeScheduledNotification:"), objref.IDOf(notification))
 }
 
-// Deliver the specified user notification.
+// DeliverNotification deliver the specified user notification.
 func (x *UserNotificationCenter) DeliverNotification(notification *UserNotification) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deliverNotification:"), objref.IDOf(notification))
 }
 
-// Remove a delivered user notification from the user notification center.
+// RemoveDeliveredNotification remove a delivered user notification from the user notification center.
 func (x *UserNotificationCenter) RemoveDeliveredNotification(notification *UserNotification) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeDeliveredNotification:"), objref.IDOf(notification))
 }
 
-// Remove all delivered user notifications from the user notification center.
+// RemoveAllDeliveredNotifications remove all delivered user notifications from the user notification center.
 func (x *UserNotificationCenter) RemoveAllDeliveredNotifications() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllDeliveredNotifications"))
 }
 
+// ScheduledNotifications wraps the corresponding Objective-C method.
+//
 // ScheduledNotifications returns the collection as a Go slice.
 func (x *UserNotificationCenter) ScheduledNotifications() []*UserNotification {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduledNotifications"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UserNotification { return UserNotificationFromID(_id) })
 }
 
+// SetScheduledNotifications wraps the corresponding Objective-C method.
 func (x *UserNotificationCenter) SetScheduledNotifications(scheduledNotifications []*UserNotification) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScheduledNotifications:"), purego.SliceToNSArray(scheduledNotifications, func(_v *UserNotification) objc.ID { return objref.IDOf(_v) }))
 }
 
+// DeliveredNotifications wraps the corresponding Objective-C method.
+//
 // DeliveredNotifications returns the collection as a Go slice.
 func (x *UserNotificationCenter) DeliveredNotifications() []*UserNotification {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deliveredNotifications"))

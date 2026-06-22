@@ -25,7 +25,8 @@ func MeshFromID(id objc.ID) *Mesh {
 	if id == 0 {
 		return nil
 	}
-	x := &Mesh{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Mesh{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func meshAdopt(id objc.ID) *Mesh {
 	if id == 0 {
 		return nil
 	}
-	x := &Mesh{Handle: objref.Wrap(id)}
+	x := &Mesh{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +60,14 @@ func (x *Mesh) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Initialize the mesh and the mesh's submeshes This does NOT initialize any meshes that are children of the Model I/O mesh
-//
-// NewMeshWithMeshError creates a new Mesh.
-func NewMeshWithMeshError(mesh obj.Object) (*Mesh, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Mesh) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMeshWithMeshError initialize the mesh and the mesh's submeshes This does NOT initialize any meshes that are children of the Model I/O mesh
+func NewMeshWithMeshError(mesh obj.Object) (result *Mesh, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GLKMesh")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMesh:error:"), objref.IDOf(mesh), unsafe.Pointer(&_nsErr))
@@ -71,13 +77,13 @@ func NewMeshWithMeshError(mesh obj.Object) (*Mesh, error) {
 	return meshAdopt(_id), nil
 }
 
-// Number of verticies in the vertexBuffers
+// VertexCount number of verticies in the vertexBuffers
 func (x *Mesh) VertexCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vertexCount"))
 	return _r
 }
 
-// Array of buffers in which mesh vertex data resides
+// VertexBuffers array of buffers in which mesh vertex data resides
 //
 // VertexBuffers returns the collection as a Go slice.
 func (x *Mesh) VertexBuffers() []*MeshBuffer {
@@ -85,13 +91,13 @@ func (x *Mesh) VertexBuffers() []*MeshBuffer {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MeshBuffer { return MeshBufferFromID(_id) })
 }
 
-// Model I/O vertex descriptor specifying the layout of data in vertexBuffers This is not directly used by this object, but the application can use this information to determine rendering state or setup a vertex attribute object.
+// VertexDescriptor model I/O vertex descriptor specifying the layout of data in vertexBuffers This is not directly used by this object, but the application can use this information to determine rendering state or setup a vertex attribute object.
 func (x *Mesh) VertexDescriptor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexDescriptor"))
 	return obj.Wrap(_r)
 }
 
-// Submeshes containing index buffers to rendering mesh verticies. Submeshes may also contain texture materials to apply when rendering this object
+// Submeshes submeshes containing index buffers to rendering mesh verticies. Submeshes may also contain texture materials to apply when rendering this object
 //
 // Submeshes returns the collection as a Go slice.
 func (x *Mesh) Submeshes() []*Submesh {
@@ -99,7 +105,7 @@ func (x *Mesh) Submeshes() []*Submesh {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Submesh { return SubmeshFromID(_id) })
 }
 
-// Name of the mesh copies from the originating Model I/O mesh Can be used by the app to identiry the mesh in it's scene/world/renderer etc.
+// Name name of the mesh copies from the originating Model I/O mesh Can be used by the app to identiry the mesh in it's scene/world/renderer etc.
 func (x *Mesh) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {

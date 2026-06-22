@@ -15,9 +15,9 @@ import (
 	"unsafe"
 )
 
-// An object that manages the overall state and configuration of your VM.
-//
 // VirtualMachine is an idiomatic wrapper over the Objective-C class VZVirtualMachine.
+//
+// An object that manages the overall state and configuration of your VM.
 type VirtualMachine struct {
 	objref.Handle
 }
@@ -28,7 +28,8 @@ func VirtualMachineFromID(id objc.ID) *VirtualMachine {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtualMachine{Handle: objref.Wrap(purego.Retain(id))}
+	x := &VirtualMachine{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -41,7 +42,8 @@ func virtualMachineAdopt(id objc.ID) *VirtualMachine {
 	if id == 0 {
 		return nil
 	}
-	x := &VirtualMachine{Handle: objref.Wrap(id)}
+	x := &VirtualMachine{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -61,25 +63,27 @@ func (x *VirtualMachine) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates the VM and configures it with the specified data.
-//
-// NewVirtualMachineWithConfiguration creates a new VirtualMachine.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VirtualMachine) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVirtualMachineWithConfiguration creates the VM and configures it with the specified data.
 func NewVirtualMachineWithConfiguration(configuration *VirtualMachineConfiguration) *VirtualMachine {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZVirtualMachine")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), objref.IDOf(configuration))
 	return virtualMachineAdopt(_id)
 }
 
-// Creates and configures the VM with the specified data and dispatch queue.
-//
-// NewVirtualMachineWithConfigurationQueue creates a new VirtualMachine.
+// NewVirtualMachineWithConfigurationQueue creates and configures the VM with the specified data and dispatch queue.
 func NewVirtualMachineWithConfigurationQueue(configuration *VirtualMachineConfiguration, queue obj.Object) *VirtualMachine {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZVirtualMachine")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:queue:"), objref.IDOf(configuration), objref.IDOf(queue))
 	return virtualMachineAdopt(_id)
 }
 
-// Starts the VM and notifies the specified completion handler if startup was successful.
+// Start starts the VM and notifies the specified completion handler if startup was successful.
 //
 // Start blocks until the operation completes or ctx is cancelled.
 func (x *VirtualMachine) Start(ctx context.Context) error {
@@ -98,7 +102,7 @@ func (x *VirtualMachine) Start(ctx context.Context) error {
 	}
 }
 
-// Starts the VM with the options and a completion handler you provide.
+// StartWithOptions starts the VM with the options and a completion handler you provide.
 //
 // StartWithOptions blocks until the operation completes or ctx is cancelled.
 func (x *VirtualMachine) StartWithOptions(ctx context.Context, options *VirtualMachineStartOptions) error {
@@ -117,7 +121,7 @@ func (x *VirtualMachine) StartWithOptions(ctx context.Context, options *VirtualM
 	}
 }
 
-// Stops a VM that’s in either a running or paused state.
+// Stop stops a VM that’s in either a running or paused state.
 //
 // Stop blocks until the operation completes or ctx is cancelled.
 func (x *VirtualMachine) Stop(ctx context.Context) error {
@@ -136,7 +140,7 @@ func (x *VirtualMachine) Stop(ctx context.Context) error {
 	}
 }
 
-// Pauses a running VM and notifies the specified completion handler of the results.
+// Pause pauses a running VM and notifies the specified completion handler of the results.
 //
 // Pause blocks until the operation completes or ctx is cancelled.
 func (x *VirtualMachine) Pause(ctx context.Context) error {
@@ -155,7 +159,7 @@ func (x *VirtualMachine) Pause(ctx context.Context) error {
 	}
 }
 
-// Resumes a paused VM and notifies the specified completion handler of the results.
+// Resume resumes a paused VM and notifies the specified completion handler of the results.
 //
 // Resume blocks until the operation completes or ctx is cancelled.
 func (x *VirtualMachine) Resume(ctx context.Context) error {
@@ -174,7 +178,7 @@ func (x *VirtualMachine) Resume(ctx context.Context) error {
 	}
 }
 
-// Restores a VM from a previously saved state.
+// RestoreMachineStateFromURL restores a VM from a previously saved state.
 //
 // RestoreMachineStateFromURL blocks until the operation completes or ctx is cancelled.
 func (x *VirtualMachine) RestoreMachineStateFromURL(ctx context.Context, saveFileURL string) error {
@@ -193,7 +197,7 @@ func (x *VirtualMachine) RestoreMachineStateFromURL(ctx context.Context, saveFil
 	}
 }
 
-// Saves the state of a VM.
+// SaveMachineStateToURL saves the state of a VM.
 //
 // SaveMachineStateToURL blocks until the operation completes or ctx is cancelled.
 func (x *VirtualMachine) SaveMachineStateToURL(ctx context.Context, saveFileURL string) error {
@@ -212,7 +216,7 @@ func (x *VirtualMachine) SaveMachineStateToURL(ctx context.Context, saveFileURL 
 	}
 }
 
-// Asks the guest operating system to stop running.
+// RequestStop asks the guest operating system to stop running.
 //
 // RequestStop returns an error if the operation did not succeed.
 func (x *VirtualMachine) RequestStop() error {
@@ -224,49 +228,49 @@ func (x *VirtualMachine) RequestStop() error {
 	return nil
 }
 
-// The queue associated with this virtual machine. This property is a reference to the queue used to create the virtual machine. If no queue was passed, the default queue is the main queue. The property can be accessed from any queue or actor. Other properties or function calls on the VZVirtualMachine must happen on this queue. The completion handlers from the asynchronous functions are also invoked on this queue.
+// Queue the queue associated with this virtual machine. This property is a reference to the queue used to create the virtual machine. If no queue was passed, the default queue is the main queue. The property can be accessed from any queue or actor. Other properties or function calls on the VZVirtualMachine must happen on this queue. The completion handlers from the asynchronous functions are also invoked on this queue.
 func (x *VirtualMachine) Queue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queue"))
 	return obj.Wrap(_r)
 }
 
-// Execution state of the virtual machine.
+// State execution state of the virtual machine.
 func (x *VirtualMachine) State() VirtualMachineState {
 	_r := objc.Send[VirtualMachineState](objref.IDOf(x), objc.RegisterName("state"))
 	return _r
 }
 
-// Return YES if the machine is in a state that can be started.
+// CanStart return YES if the machine is in a state that can be started.
 func (x *VirtualMachine) CanStart() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canStart"))
 	return _r
 }
 
-// Return YES if the machine is in a state that can be stopped.
+// CanStop return YES if the machine is in a state that can be stopped.
 func (x *VirtualMachine) CanStop() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canStop"))
 	return _r
 }
 
-// Return YES if the machine is in a state that can be paused.
+// CanPause return YES if the machine is in a state that can be paused.
 func (x *VirtualMachine) CanPause() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPause"))
 	return _r
 }
 
-// Return YES if the machine is in a state that can be resumed.
+// CanResume return YES if the machine is in a state that can be resumed.
 func (x *VirtualMachine) CanResume() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canResume"))
 	return _r
 }
 
-// Returns whether the machine is in a state where the guest can be asked to stop.
+// CanRequestStop returns whether the machine is in a state where the guest can be asked to stop.
 func (x *VirtualMachine) CanRequestStop() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canRequestStop"))
 	return _r
 }
 
-// Return the list of console devices configured on this virtual machine. Return an empty array if no console device is configured.
+// ConsoleDevices return the list of console devices configured on this virtual machine. Return an empty array if no console device is configured.
 //
 // ConsoleDevices returns the collection as a Go slice.
 func (x *VirtualMachine) ConsoleDevices() []*ConsoleDevice {
@@ -274,7 +278,7 @@ func (x *VirtualMachine) ConsoleDevices() []*ConsoleDevice {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ConsoleDevice { return ConsoleDeviceFromID(_id) })
 }
 
-// Return the list of directory sharing devices configured on this virtual machine. Return an empty array if no directory sharing device is configured.
+// DirectorySharingDevices return the list of directory sharing devices configured on this virtual machine. Return an empty array if no directory sharing device is configured.
 //
 // DirectorySharingDevices returns the collection as a Go slice.
 func (x *VirtualMachine) DirectorySharingDevices() []*DirectorySharingDevice {
@@ -282,7 +286,7 @@ func (x *VirtualMachine) DirectorySharingDevices() []*DirectorySharingDevice {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DirectorySharingDevice { return DirectorySharingDeviceFromID(_id) })
 }
 
-// Return the list of graphics devices configured on this virtual machine. Return an empty array if no graphics device is configured.
+// GraphicsDevices return the list of graphics devices configured on this virtual machine. Return an empty array if no graphics device is configured.
 //
 // GraphicsDevices returns the collection as a Go slice.
 func (x *VirtualMachine) GraphicsDevices() []*GraphicsDevice {
@@ -290,7 +294,7 @@ func (x *VirtualMachine) GraphicsDevices() []*GraphicsDevice {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphicsDevice { return GraphicsDeviceFromID(_id) })
 }
 
-// Return the list of memory balloon devices configured on this virtual machine. Return an empty array if no memory balloon device is configured.
+// MemoryBalloonDevices return the list of memory balloon devices configured on this virtual machine. Return an empty array if no memory balloon device is configured.
 //
 // MemoryBalloonDevices returns the collection as a Go slice.
 func (x *VirtualMachine) MemoryBalloonDevices() []*MemoryBalloonDevice {
@@ -298,7 +302,7 @@ func (x *VirtualMachine) MemoryBalloonDevices() []*MemoryBalloonDevice {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MemoryBalloonDevice { return MemoryBalloonDeviceFromID(_id) })
 }
 
-// Return the list of network devices configured on this virtual machine. Return an empty array if no network device is configured.
+// NetworkDevices return the list of network devices configured on this virtual machine. Return an empty array if no network device is configured.
 //
 // NetworkDevices returns the collection as a Go slice.
 func (x *VirtualMachine) NetworkDevices() []*NetworkDevice {
@@ -306,7 +310,7 @@ func (x *VirtualMachine) NetworkDevices() []*NetworkDevice {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NetworkDevice { return NetworkDeviceFromID(_id) })
 }
 
-// Return the list of socket devices configured on this virtual machine. Return an empty array if no socket device is configured.
+// SocketDevices return the list of socket devices configured on this virtual machine. Return an empty array if no socket device is configured.
 //
 // SocketDevices returns the collection as a Go slice.
 func (x *VirtualMachine) SocketDevices() []*SocketDevice {
@@ -314,7 +318,7 @@ func (x *VirtualMachine) SocketDevices() []*SocketDevice {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SocketDevice { return SocketDeviceFromID(_id) })
 }
 
-// Return the list of USB controllers configured on this virtual machine. Return an empty array if no USB controller is configured.
+// UsbControllers return the list of USB controllers configured on this virtual machine. Return an empty array if no USB controller is configured.
 //
 // UsbControllers returns the collection as a Go slice.
 func (x *VirtualMachine) UsbControllers() []*USBController {

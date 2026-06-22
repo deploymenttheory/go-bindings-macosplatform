@@ -23,7 +23,8 @@ func StickerFromID(id objc.ID) *Sticker {
 	if id == 0 {
 		return nil
 	}
-	x := &Sticker{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Sticker{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func stickerAdopt(id objc.ID) *Sticker {
 	if id == 0 {
 		return nil
 	}
-	x := &Sticker{Handle: objref.Wrap(id)}
+	x := &Sticker{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,20 +58,26 @@ func (x *Sticker) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an object that represents a sticker a person sends in a message. - Parameters: - type: The type of the sticker. - emoji: The single emoji character that the sticker represents.
-//
-// NewStickerWithTypeEmoji creates a new Sticker.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Sticker) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewStickerWithTypeEmoji creates an object that represents a sticker a person sends in a message. - Parameters: - type: The type of the sticker. - emoji: The single emoji character that the sticker represents.
 func NewStickerWithTypeEmoji(type_ StickerType, emoji string) *Sticker {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INSticker")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:emoji:"), type_, purego.NSString(emoji))
 	return stickerAdopt(_id)
 }
 
+// Type wraps the corresponding Objective-C method.
 func (x *Sticker) Type() StickerType {
 	_r := objc.Send[StickerType](objref.IDOf(x), objc.RegisterName("type"))
 	return _r
 }
 
+// Emoji wraps the corresponding Objective-C method.
 func (x *Sticker) Emoji() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emoji"))
 	if _r == 0 {

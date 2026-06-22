@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view controller that guides the user through the steps for adding a shortcut to Siri.
-//
 // AddVoiceShortcutViewController is an idiomatic wrapper over the Objective-C class INUIAddVoiceShortcutViewController.
+//
+// A view controller that guides the user through the steps for adding a shortcut to Siri.
 type AddVoiceShortcutViewController struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AddVoiceShortcutViewControllerFromID(id objc.ID) *AddVoiceShortcutViewContr
 	if id == 0 {
 		return nil
 	}
-	x := &AddVoiceShortcutViewController{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AddVoiceShortcutViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func addVoiceShortcutViewControllerAdopt(id objc.ID) *AddVoiceShortcutViewContro
 	if id == 0 {
 		return nil
 	}
-	x := &AddVoiceShortcutViewController{Handle: objref.Wrap(id)}
+	x := &AddVoiceShortcutViewController{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,9 +60,13 @@ func (x *AddVoiceShortcutViewController) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a view controller with a shortcut the user can add to Siri.
-//
-// NewAddVoiceShortcutViewControllerWithShortcut creates a new AddVoiceShortcutViewController.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AddVoiceShortcutViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAddVoiceShortcutViewControllerWithShortcut creates a view controller with a shortcut the user can add to Siri.
 func NewAddVoiceShortcutViewControllerWithShortcut(shortcut obj.Object) *AddVoiceShortcutViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INUIAddVoiceShortcutViewController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShortcut:"), objref.IDOf(shortcut))

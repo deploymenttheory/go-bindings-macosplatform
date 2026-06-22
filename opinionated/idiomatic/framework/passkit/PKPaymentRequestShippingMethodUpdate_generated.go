@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that updates the payment request after the shipping method changed.
-//
 // PaymentRequestShippingMethodUpdate is an idiomatic wrapper over the Objective-C class PKPaymentRequestShippingMethodUpdate.
+//
+// It embeds [PaymentRequestUpdate], promoting that type's methods.
+//
+// An object that updates the payment request after the shipping method changed.
 type PaymentRequestShippingMethodUpdate struct {
-	objref.Handle
+	PaymentRequestUpdate
 }
 
 // PaymentRequestShippingMethodUpdateFromID adopts an existing Objective-C object as a PaymentRequestShippingMethodUpdate
@@ -25,7 +26,8 @@ func PaymentRequestShippingMethodUpdateFromID(id objc.ID) *PaymentRequestShippin
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentRequestShippingMethodUpdate{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PaymentRequestShippingMethodUpdate{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func paymentRequestShippingMethodUpdateAdopt(id objc.ID) *PaymentRequestShipping
 	if id == 0 {
 		return nil
 	}
-	x := &PaymentRequestShippingMethodUpdate{Handle: objref.Wrap(id)}
+	x := &PaymentRequestShippingMethodUpdate{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PaymentRequestShippingMethodUpdate) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PaymentRequestShippingMethodUpdate) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PaymentRequestShippingMethodUpdate) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPaymentRequestShippingMethodUpdate creates a new PaymentRequestShippingMethodUpdate.
@@ -64,60 +52,46 @@ func NewPaymentRequestShippingMethodUpdate() *PaymentRequestShippingMethodUpdate
 	return paymentRequestShippingMethodUpdateAdopt(_id)
 }
 
-// The status of the payment request that indicates whether authorization succeeds or fails.
-//
-// WithStatus sets status and returns the receiver so calls can be chained.
+// WithStatus the status of the payment request that indicates whether authorization succeeds or fails.
 func (x *PaymentRequestShippingMethodUpdate) WithStatus(status PaymentAuthorizationStatus) *PaymentRequestShippingMethodUpdate {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
 	return x
 }
 
-// The list of payment summary items for the instance.
-//
-// WithPaymentSummaryItems sets the collection and returns the receiver so calls can be chained.
+// WithPaymentSummaryItems the list of payment summary items for the instance.
 func (x *PaymentRequestShippingMethodUpdate) WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestShippingMethodUpdate {
 	_arr := purego.SliceToNSArray(items, func(_v PaymentSummaryItemProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentSummaryItems:"), _arr)
 	return x
 }
 
-// The list of shipping methods available for a payment request.
-//
-// WithShippingMethods sets the collection and returns the receiver so calls can be chained.
+// WithShippingMethods the list of shipping methods available for a payment request.
 func (x *PaymentRequestShippingMethodUpdate) WithShippingMethods(items ...*ShippingMethod) *PaymentRequestShippingMethodUpdate {
 	_arr := purego.SliceToNSArray(items, func(_v *ShippingMethod) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShippingMethods:"), _arr)
 	return x
 }
 
-// An optional array of payment token contexts to request multiple payment tokens with one payment token per context.
-//
-// WithMultiTokenContexts sets the collection and returns the receiver so calls can be chained.
+// WithMultiTokenContexts an optional array of payment token contexts to request multiple payment tokens with one payment token per context.
 func (x *PaymentRequestShippingMethodUpdate) WithMultiTokenContexts(items ...*PaymentTokenContext) *PaymentRequestShippingMethodUpdate {
 	_arr := purego.SliceToNSArray(items, func(_v *PaymentTokenContext) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultiTokenContexts:"), _arr)
 	return x
 }
 
-// The recurring payment request to update the payment request with.
-//
-// WithRecurringPaymentRequest sets recurringPaymentRequest and returns the receiver so calls can be chained.
+// WithRecurringPaymentRequest the recurring payment request to update the payment request with.
 func (x *PaymentRequestShippingMethodUpdate) WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestShippingMethodUpdate {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurringPaymentRequest:"), objref.IDOf(recurringPaymentRequest))
 	return x
 }
 
-// The automatic reload payment request to update the payment request with.
-//
-// WithAutomaticReloadPaymentRequest sets automaticReloadPaymentRequest and returns the receiver so calls can be chained.
+// WithAutomaticReloadPaymentRequest the automatic reload payment request to update the payment request with.
 func (x *PaymentRequestShippingMethodUpdate) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestShippingMethodUpdate {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticReloadPaymentRequest:"), objref.IDOf(automaticReloadPaymentRequest))
 	return x
 }
 
-// The deferred payment request to update the payment request with.
-//
-// WithDeferredPaymentRequest sets deferredPaymentRequest and returns the receiver so calls can be chained.
+// WithDeferredPaymentRequest the deferred payment request to update the payment request with.
 func (x *PaymentRequestShippingMethodUpdate) WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestShippingMethodUpdate {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredPaymentRequest:"), objref.IDOf(deferredPaymentRequest))
 	return x
@@ -136,3 +110,5 @@ type PaymentRequestShippingMethodUpdateable interface {
 }
 
 var _ PaymentRequestShippingMethodUpdateable = (*PaymentRequestShippingMethodUpdate)(nil)
+
+var _ PaymentRequestUpdateProvider = (*PaymentRequestShippingMethodUpdate)(nil)

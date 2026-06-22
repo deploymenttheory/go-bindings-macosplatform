@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that defines the common interface to output media data from a player item.
-//
 // PlayerItemOutput is an idiomatic wrapper over the Objective-C class AVPlayerItemOutput.
+//
+// PlayerItemOutput is an abstract base — you do not construct it directly. Construct one of [PlayerItemLegibleOutput], [PlayerItemMetadataOutput], [PlayerItemRenderedLegibleOutput], [PlayerItemVideoOutput] and pass it where a PlayerItemOutput is accepted.
+//
+// An abstract class that defines the common interface to output media data from a player item.
 type PlayerItemOutput struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func PlayerItemOutputFromID(id objc.ID) *PlayerItemOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemOutput{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PlayerItemOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func playerItemOutputAdopt(id objc.ID) *PlayerItemOutput {
 	if id == 0 {
 		return nil
 	}
-	x := &PlayerItemOutput{Handle: objref.Wrap(id)}
+	x := &PlayerItemOutput{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +62,25 @@ func (x *PlayerItemOutput) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewPlayerItemOutput creates a new PlayerItemOutput.
-func NewPlayerItemOutput() *PlayerItemOutput {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemOutput")), objc.RegisterName("new"))
-	return playerItemOutputAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerItemOutput) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// A Boolean value that indicates whether the player object renders the receiver’s output.
-//
-// WithSuppressesPlayerRendering sets suppressesPlayerRendering and returns the receiver so calls can be chained.
+// WithSuppressesPlayerRendering a Boolean value that indicates whether the player object renders the receiver’s output.
 func (x *PlayerItemOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemOutput {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
 	return x
 }
 
+// SuppressesPlayerRendering wraps the corresponding Objective-C method.
 func (x *PlayerItemOutput) SuppressesPlayerRendering() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("suppressesPlayerRendering"))
 	return _r
 }
 
+// SetSuppressesPlayerRendering wraps the corresponding Objective-C method.
 func (x *PlayerItemOutput) SetSuppressesPlayerRendering(suppressesPlayerRendering bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
 }
@@ -90,3 +94,10 @@ type PlayerItemOutputable interface {
 }
 
 var _ PlayerItemOutputable = (*PlayerItemOutput)(nil)
+
+// isPlayerItemOutput marks PlayerItemOutput — and, by embedding promotion, its
+// subclasses — as a member of the PlayerItemOutput hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *PlayerItemOutput) isPlayerItemOutput() {}
+
+var _ PlayerItemOutputProvider = (*PlayerItemOutput)(nil)

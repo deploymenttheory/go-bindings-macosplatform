@@ -6,17 +6,20 @@ package metalperformanceshaders
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that returns the element-wise difference of its two input images.
-//
 // ImageSubtract is an idiomatic wrapper over the Objective-C class MPSImageSubtract.
+//
+// It embeds [ImageArithmetic], promoting that type's methods.
+//
+// A filter that returns the element-wise difference of its two input images.
 type ImageSubtract struct {
-	objref.Handle
+	ImageArithmetic
 }
 
 // ImageSubtractFromID adopts an existing Objective-C object as a ImageSubtract
@@ -25,7 +28,8 @@ func ImageSubtractFromID(id objc.ID) *ImageSubtract {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageSubtract{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageSubtract{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +42,10 @@ func imageSubtractAdopt(id objc.ID) *ImageSubtract {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageSubtract{Handle: objref.Wrap(id)}
+	x := &ImageSubtract{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *ImageSubtract) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageSubtract) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageSubtract) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewImageSubtract creates a new ImageSubtract.
@@ -64,43 +54,67 @@ func NewImageSubtract() *ImageSubtract {
 	return imageSubtractAdopt(_id)
 }
 
-// WithPrimaryScale sets primaryScale and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
 func (x *ImageSubtract) WithPrimaryScale(primaryScale float32) *ImageSubtract {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return x
 }
 
-// WithSecondaryScale sets secondaryScale and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
 func (x *ImageSubtract) WithSecondaryScale(secondaryScale float32) *ImageSubtract {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return x
 }
 
-// WithBias sets bias and returns the receiver so calls can be chained.
+// WithBias sets the property and returns the receiver so calls can be chained.
 func (x *ImageSubtract) WithBias(bias float32) *ImageSubtract {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 	return x
 }
 
-// minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
-//
-// WithMinimumValue sets minimumValue and returns the receiver so calls can be chained.
+// WithPrimaryStrideInPixels the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (x *ImageSubtract) WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageSubtract {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixels:"), primaryStrideInPixels)
+	return x
+}
+
+// WithSecondaryStrideInPixels the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (x *ImageSubtract) WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageSubtract {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixels:"), secondaryStrideInPixels)
+	return x
+}
+
+// WithMinimumValue minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
 func (x *ImageSubtract) WithMinimumValue(minimumValue float32) *ImageSubtract {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
 	return x
 }
 
-// maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
-//
-// WithMaximumValue sets maximumValue and returns the receiver so calls can be chained.
+// WithMaximumValue maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
 func (x *ImageSubtract) WithMaximumValue(maximumValue float32) *ImageSubtract {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets label and returns the receiver so calls can be chained.
+// WithPrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer.
+func (x *ImageSubtract) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageSubtract {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer.
+func (x *ImageSubtract) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageSubtract {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (x *ImageSubtract) WithClipRect(clipRect metal.MTLRegion) *ImageSubtract {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
+// WithLabel the string that identifies the kernel.
 func (x *ImageSubtract) WithLabel(label string) *ImageSubtract {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
@@ -112,9 +126,20 @@ type ImageSubtractable interface {
 	WithPrimaryScale(primaryScale float32) *ImageSubtract
 	WithSecondaryScale(secondaryScale float32) *ImageSubtract
 	WithBias(bias float32) *ImageSubtract
+	WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageSubtract
+	WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageSubtract
 	WithMinimumValue(minimumValue float32) *ImageSubtract
 	WithMaximumValue(maximumValue float32) *ImageSubtract
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageSubtract
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageSubtract
+	WithClipRect(clipRect metal.MTLRegion) *ImageSubtract
 	WithLabel(label string) *ImageSubtract
 }
 
 var _ ImageSubtractable = (*ImageSubtract)(nil)
+
+var _ ImageArithmeticProvider = (*ImageSubtract)(nil)
+
+var _ BinaryImageKernelProvider = (*ImageSubtract)(nil)
+
+var _ KernelProvider = (*ImageSubtract)(nil)

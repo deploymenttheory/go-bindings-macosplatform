@@ -12,11 +12,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract superclass for calendar events and reminders.
-//
 // CalendarItem is an idiomatic wrapper over the Objective-C class EKCalendarItem.
+//
+// CalendarItem is an abstract base — you do not construct it directly. Construct one of [Event], [Reminder] and pass it where a CalendarItem is accepted.
+//
+// An abstract superclass for calendar events and reminders.
 type CalendarItem struct {
-	objref.Handle
+	Object
 }
 
 // CalendarItemFromID adopts an existing Objective-C object as a CalendarItem
@@ -25,7 +27,8 @@ func CalendarItemFromID(id objc.ID) *CalendarItem {
 	if id == 0 {
 		return nil
 	}
-	x := &CalendarItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CalendarItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,129 +41,94 @@ func calendarItemAdopt(id objc.ID) *CalendarItem {
 	if id == 0 {
 		return nil
 	}
-	x := &CalendarItem{Handle: objref.Wrap(id)}
+	x := &CalendarItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *CalendarItem) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CalendarItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CalendarItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// NewCalendarItem creates a new CalendarItem.
-func NewCalendarItem() *CalendarItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("EKCalendarItem")), objc.RegisterName("new"))
-	return calendarItemAdopt(_id)
-}
-
-// The calendar for the calendar item.
-//
-// WithCalendar sets calendar and returns the receiver so calls can be chained.
+// WithCalendar the calendar for the calendar item.
 func (x *CalendarItem) WithCalendar(calendar *Calendar) *CalendarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return x
 }
 
-// The title for the calendar item.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the title for the calendar item.
 func (x *CalendarItem) WithTitle(title string) *CalendarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The location associated with the calendar item.
-//
-// WithLocation sets location and returns the receiver so calls can be chained.
+// WithLocation the location associated with the calendar item.
 func (x *CalendarItem) WithLocation(location string) *CalendarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocation:"), purego.NSString(location))
 	return x
 }
 
-// The notes associated with the calendar item.
-//
-// WithNotes sets notes and returns the receiver so calls can be chained.
+// WithNotes the notes associated with the calendar item.
 func (x *CalendarItem) WithNotes(notes string) *CalendarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotes:"), purego.NSString(notes))
 	return x
 }
 
-// The URL for the calendar item.
-//
-// WithURL sets uRL and returns the receiver so calls can be chained.
+// WithURL the URL for the calendar item.
 func (x *CalendarItem) WithURL(uRL string) *CalendarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 	return x
 }
 
-// The time zone for the calendar item.
-//
-// WithTimeZone sets timeZone and returns the receiver so calls can be chained.
+// WithTimeZone the time zone for the calendar item.
 func (x *CalendarItem) WithTimeZone(timeZone obj.Object) *CalendarItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	return x
 }
 
-// The alarms associated with the calendar item, as an array of EKAlarm objects.
-//
-// WithAlarms sets the collection and returns the receiver so calls can be chained.
+// WithAlarms the alarms associated with the calendar item, as an array of EKAlarm objects.
 func (x *CalendarItem) WithAlarms(items ...*Alarm) *CalendarItem {
 	_arr := purego.SliceToNSArray(items, func(_v *Alarm) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarms:"), _arr)
 	return x
 }
 
-// The recurrence rules for the calendar item.
-//
-// WithRecurrenceRules sets the collection and returns the receiver so calls can be chained.
+// WithRecurrenceRules the recurrence rules for the calendar item.
 func (x *CalendarItem) WithRecurrenceRules(items ...*RecurrenceRule) *CalendarItem {
 	_arr := purego.SliceToNSArray(items, func(_v *RecurrenceRule) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrenceRules:"), _arr)
 	return x
 }
 
-// Adds an alarm to the receiver.
+// AddAlarm adds an alarm to the receiver.
 func (x *CalendarItem) AddAlarm(alarm *Alarm) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAlarm:"), objref.IDOf(alarm))
 }
 
-// Removes an alarm from the calendar item.
+// RemoveAlarm removes an alarm from the calendar item.
 func (x *CalendarItem) RemoveAlarm(alarm *Alarm) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAlarm:"), objref.IDOf(alarm))
 }
 
-// Adds a recurrence rule to the recurrence rule array.
+// AddRecurrenceRule adds a recurrence rule to the recurrence rule array.
 func (x *CalendarItem) AddRecurrenceRule(rule *RecurrenceRule) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRecurrenceRule:"), objref.IDOf(rule))
 }
 
-// Removes a recurrence rule from the recurrence rule array.
+// RemoveRecurrenceRule removes a recurrence rule from the recurrence rule array.
 func (x *CalendarItem) RemoveRecurrenceRule(rule *RecurrenceRule) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeRecurrenceRule:"), objref.IDOf(rule))
 }
 
-// The calendar that this calendar item belongs to. This will be nil for new calendar items until you set it.
+// Calendar the calendar that this calendar item belongs to. This will be nil for new calendar items until you set it.
 func (x *CalendarItem) Calendar() *Calendar {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendar"))
 	return CalendarFromID(_r)
 }
 
+// SetCalendar wraps the corresponding Objective-C method.
 func (x *CalendarItem) SetCalendar(calendar *Calendar) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 }
 
-// A unique identifier for a calendar item. Item identifiers are not sync-proof in that a full sync will lose this identifier, so you should always have a back up plan for dealing with a reminder that is no longer fetchable by this property, e.g. by title, etc. Use [EKEventStore calendarItemWithIdentifier:] to look up the item by this value.
+// CalendarItemIdentifier a unique identifier for a calendar item. Item identifiers are not sync-proof in that a full sync will lose this identifier, so you should always have a back up plan for dealing with a reminder that is no longer fetchable by this property, e.g. by title, etc. Use [EKEventStore calendarItemWithIdentifier:] to look up the item by this value.
 func (x *CalendarItem) CalendarItemIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendarItemIdentifier"))
 	if _r == 0 {
@@ -169,7 +137,7 @@ func (x *CalendarItem) CalendarItemIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// A server-provided identifier for this calendar item This identifier, provided by the server, allows you to reference the same event or reminder across multiple devices. For calendars stored locally on the device, including the birthday calendar, it simply passes through to calendarItemIdentifier. This identifier is unique as of creation for every calendar item.  However, there are some cases where duplicate copies of a calendar item can exist in the same database, including: - A calendar item was imported from an ICS file into multiple calendars - An event was created in a calendar shared with the user and the user was also invited to the event - The user is a delegate of a calendar that also has this event - A subscribed calendar was added to multiple accounts In such cases, you should choose between calendar items based on other factors, such as the calendar or source. This identifier is the same for all occurrences of a recurring event. If you wish to differentiate between occurrences, you may want to use the start date. This may be nil for new calendar items that do not yet belong to a calendar. In addition, there are two caveats for Exchange-based calendars: - This identifier will be different between EventKit on iOS versus OS X - This identifier will be different between devices for EKReminders
+// CalendarItemExternalIdentifier a server-provided identifier for this calendar item This identifier, provided by the server, allows you to reference the same event or reminder across multiple devices. For calendars stored locally on the device, including the birthday calendar, it simply passes through to calendarItemIdentifier. This identifier is unique as of creation for every calendar item.  However, there are some cases where duplicate copies of a calendar item can exist in the same database, including: - A calendar item was imported from an ICS file into multiple calendars - An event was created in a calendar shared with the user and the user was also invited to the event - The user is a delegate of a calendar that also has this event - A subscribed calendar was added to multiple accounts In such cases, you should choose between calendar items based on other factors, such as the calendar or source. This identifier is the same for all occurrences of a recurring event. If you wish to differentiate between occurrences, you may want to use the start date. This may be nil for new calendar items that do not yet belong to a calendar. In addition, there are two caveats for Exchange-based calendars: - This identifier will be different between EventKit on iOS versus OS X - This identifier will be different between devices for EKReminders
 func (x *CalendarItem) CalendarItemExternalIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendarItemExternalIdentifier"))
 	if _r == 0 {
@@ -178,7 +146,7 @@ func (x *CalendarItem) CalendarItemExternalIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// The title of this calendar item. This will be an empty string for new calendar items until you set it.
+// Title the title of this calendar item. This will be an empty string for new calendar items until you set it.
 func (x *CalendarItem) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -187,10 +155,12 @@ func (x *CalendarItem) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *CalendarItem) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
+// Location wraps the corresponding Objective-C method.
 func (x *CalendarItem) Location() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("location"))
 	if _r == 0 {
@@ -199,10 +169,12 @@ func (x *CalendarItem) Location() string {
 	return purego.GoString(_r)
 }
 
+// SetLocation wraps the corresponding Objective-C method.
 func (x *CalendarItem) SetLocation(location string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocation:"), purego.NSString(location))
 }
 
+// Notes wraps the corresponding Objective-C method.
 func (x *CalendarItem) Notes() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notes"))
 	if _r == 0 {
@@ -211,75 +183,91 @@ func (x *CalendarItem) Notes() string {
 	return purego.GoString(_r)
 }
 
+// SetNotes wraps the corresponding Objective-C method.
 func (x *CalendarItem) SetNotes(notes string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotes:"), purego.NSString(notes))
 }
 
+// URL wraps the corresponding Objective-C method.
 func (x *CalendarItem) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
+// SetURL wraps the corresponding Objective-C method.
 func (x *CalendarItem) SetURL(uRL string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 }
 
+// LastModifiedDate wraps the corresponding Objective-C method.
 func (x *CalendarItem) LastModifiedDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastModifiedDate"))
 	return obj.Wrap(_r)
 }
 
+// CreationDate wraps the corresponding Objective-C method.
 func (x *CalendarItem) CreationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creationDate"))
 	return obj.Wrap(_r)
 }
 
+// TimeZone wraps the corresponding Objective-C method.
 func (x *CalendarItem) TimeZone() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeZone"))
 	return obj.Wrap(_r)
 }
 
+// SetTimeZone wraps the corresponding Objective-C method.
 func (x *CalendarItem) SetTimeZone(timeZone obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 }
 
+// HasAlarms wraps the corresponding Objective-C method.
 func (x *CalendarItem) HasAlarms() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasAlarms"))
 	return _r
 }
 
+// HasRecurrenceRules wraps the corresponding Objective-C method.
 func (x *CalendarItem) HasRecurrenceRules() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasRecurrenceRules"))
 	return _r
 }
 
+// HasAttendees wraps the corresponding Objective-C method.
 func (x *CalendarItem) HasAttendees() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasAttendees"))
 	return _r
 }
 
+// HasNotes wraps the corresponding Objective-C method.
 func (x *CalendarItem) HasNotes() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasNotes"))
 	return _r
 }
 
+// Attendees wraps the corresponding Objective-C method.
+//
 // Attendees returns the collection as a Go slice.
 func (x *CalendarItem) Attendees() []*Participant {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attendees"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Participant { return ParticipantFromID(_id) })
 }
 
+// Alarms wraps the corresponding Objective-C method.
+//
 // Alarms returns the collection as a Go slice.
 func (x *CalendarItem) Alarms() []*Alarm {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alarms"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Alarm { return AlarmFromID(_id) })
 }
 
+// SetAlarms wraps the corresponding Objective-C method.
 func (x *CalendarItem) SetAlarms(alarms []*Alarm) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarms:"), purego.SliceToNSArray(alarms, func(_v *Alarm) objc.ID { return objref.IDOf(_v) }))
 }
 
-// An array of EKRecurrenceRules, or nil if none.
+// RecurrenceRules an array of EKRecurrenceRules, or nil if none.
 //
 // RecurrenceRules returns the collection as a Go slice.
 func (x *CalendarItem) RecurrenceRules() []*RecurrenceRule {
@@ -287,6 +275,7 @@ func (x *CalendarItem) RecurrenceRules() []*RecurrenceRule {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecurrenceRule { return RecurrenceRuleFromID(_id) })
 }
 
+// SetRecurrenceRules wraps the corresponding Objective-C method.
 func (x *CalendarItem) SetRecurrenceRules(recurrenceRules []*RecurrenceRule) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrenceRules:"), purego.SliceToNSArray(recurrenceRules, func(_v *RecurrenceRule) objc.ID { return objref.IDOf(_v) }))
 }
@@ -334,3 +323,12 @@ type CalendarItemable interface {
 }
 
 var _ CalendarItemable = (*CalendarItem)(nil)
+
+// isCalendarItem marks CalendarItem — and, by embedding promotion, its
+// subclasses — as a member of the CalendarItem hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CalendarItem) isCalendarItem() {}
+
+var _ CalendarItemProvider = (*CalendarItem)(nil)
+
+var _ ObjectProvider = (*CalendarItem)(nil)

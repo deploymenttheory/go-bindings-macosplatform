@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A panel or sheet that allows the user to create a keychain.
-//
 // KeychainSavePanel is an idiomatic wrapper over the Objective-C class SFKeychainSavePanel.
+//
+// A panel or sheet that allows the user to create a keychain.
 type KeychainSavePanel struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func KeychainSavePanelFromID(id objc.ID) *KeychainSavePanel {
 	if id == 0 {
 		return nil
 	}
-	x := &KeychainSavePanel{Handle: objref.Wrap(purego.Retain(id))}
+	x := &KeychainSavePanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func keychainSavePanelAdopt(id objc.ID) *KeychainSavePanel {
 	if id == 0 {
 		return nil
 	}
-	x := &KeychainSavePanel{Handle: objref.Wrap(id)}
+	x := &KeychainSavePanel{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,18 +60,24 @@ func (x *KeychainSavePanel) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *KeychainSavePanel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewKeychainSavePanel creates a new KeychainSavePanel.
 func NewKeychainSavePanel() *KeychainSavePanel {
 	_id := objc.Send[objc.ID](objc.ID(_class("SFKeychainSavePanel")), objc.RegisterName("new"))
 	return keychainSavePanelAdopt(_id)
 }
 
-// Specifies the password for the keychain that will be created.
+// SetPassword specifies the password for the keychain that will be created.
 func (x *KeychainSavePanel) SetPassword(password string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassword:"), purego.NSString(password))
 }
 
-// Returns the keychain created by the keychain save panel.
+// Keychain returns the keychain created by the keychain save panel.
 func (x *KeychainSavePanel) Keychain() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keychain"))
 	return obj.Wrap(_r)

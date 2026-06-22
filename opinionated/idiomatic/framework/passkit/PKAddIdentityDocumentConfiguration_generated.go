@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Configuration to define the identity document.
-//
 // AddIdentityDocumentConfiguration is an idiomatic wrapper over the Objective-C class PKAddIdentityDocumentConfiguration.
+//
+// It embeds [AddSecureElementPassConfiguration], promoting that type's methods.
+//
+// Configuration to define the identity document.
 type AddIdentityDocumentConfiguration struct {
-	objref.Handle
+	AddSecureElementPassConfiguration
 }
 
 // AddIdentityDocumentConfigurationFromID adopts an existing Objective-C object as a AddIdentityDocumentConfiguration
@@ -25,7 +26,8 @@ func AddIdentityDocumentConfigurationFromID(id objc.ID) *AddIdentityDocumentConf
 	if id == 0 {
 		return nil
 	}
-	x := &AddIdentityDocumentConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AddIdentityDocumentConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func addIdentityDocumentConfigurationAdopt(id objc.ID) *AddIdentityDocumentConfi
 	if id == 0 {
 		return nil
 	}
-	x := &AddIdentityDocumentConfiguration{Handle: objref.Wrap(id)}
+	x := &AddIdentityDocumentConfiguration{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *AddIdentityDocumentConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AddIdentityDocumentConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AddIdentityDocumentConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewAddIdentityDocumentConfiguration creates a new AddIdentityDocumentConfiguration.
@@ -64,22 +52,19 @@ func NewAddIdentityDocumentConfiguration() *AddIdentityDocumentConfiguration {
 	return addIdentityDocumentConfigurationAdopt(_id)
 }
 
-// An opaque value for the configuration.
-//
-// WithIssuerIdentifier sets issuerIdentifier and returns the receiver so calls can be chained.
+// WithIssuerIdentifier an opaque value for the configuration.
 func (x *AddIdentityDocumentConfiguration) WithIssuerIdentifier(issuerIdentifier string) *AddIdentityDocumentConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIssuerIdentifier:"), purego.NSString(issuerIdentifier))
 	return x
 }
 
-// The configuration’s localized description.
-//
-// WithLocalizedDescription sets localizedDescription and returns the receiver so calls can be chained.
+// WithLocalizedDescription the configuration’s localized description.
 func (x *AddIdentityDocumentConfiguration) WithLocalizedDescription(localizedDescription string) *AddIdentityDocumentConfiguration {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
 	return x
 }
 
+// Metadata wraps the corresponding Objective-C method.
 func (x *AddIdentityDocumentConfiguration) Metadata() *IdentityDocumentMetadata {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
 	return IdentityDocumentMetadataFromID(_r)
@@ -94,3 +79,5 @@ type AddIdentityDocumentConfigurationable interface {
 }
 
 var _ AddIdentityDocumentConfigurationable = (*AddIdentityDocumentConfiguration)(nil)
+
+var _ AddSecureElementPassConfigurationProvider = (*AddIdentityDocumentConfiguration)(nil)

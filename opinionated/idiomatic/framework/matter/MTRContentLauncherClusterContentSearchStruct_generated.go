@@ -13,6 +13,8 @@ import (
 )
 
 // MTRContentLauncherClusterContentSearchStruct is an idiomatic wrapper over the Objective-C class MTRContentLauncherClusterContentSearchStruct.
+//
+// MTRContentLauncherClusterContentSearchStruct is an abstract base — you do not construct it directly. Construct one of [MTRContentLauncherClusterContentSearch] and pass it where a MTRContentLauncherClusterContentSearchStruct is accepted.
 type MTRContentLauncherClusterContentSearchStruct struct {
 	objref.Handle
 }
@@ -23,7 +25,8 @@ func MTRContentLauncherClusterContentSearchStructFromID(id objc.ID) *MTRContentL
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterContentSearchStruct{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRContentLauncherClusterContentSearchStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +39,8 @@ func mTRContentLauncherClusterContentSearchStructAdopt(id objc.ID) *MTRContentLa
 	if id == 0 {
 		return nil
 	}
-	x := &MTRContentLauncherClusterContentSearchStruct{Handle: objref.Wrap(id)}
+	x := &MTRContentLauncherClusterContentSearchStruct{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,17 +60,19 @@ func (x *MTRContentLauncherClusterContentSearchStruct) IsKind(className string) 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMTRContentLauncherClusterContentSearchStruct creates a new MTRContentLauncherClusterContentSearchStruct.
-func NewMTRContentLauncherClusterContentSearchStruct() *MTRContentLauncherClusterContentSearchStruct {
-	_id := objc.Send[objc.ID](objc.ID(_class("MTRContentLauncherClusterContentSearchStruct")), objc.RegisterName("new"))
-	return mTRContentLauncherClusterContentSearchStructAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRContentLauncherClusterContentSearchStruct) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// ParameterList wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterContentSearchStruct) ParameterList() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameterList"))
 	return obj.Wrap(_r)
 }
 
+// SetParameterList wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterContentSearchStruct) SetParameterList(parameterList obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParameterList:"), objref.IDOf(parameterList))
 }
@@ -79,3 +85,11 @@ type MTRContentLauncherClusterContentSearchStructable interface {
 }
 
 var _ MTRContentLauncherClusterContentSearchStructable = (*MTRContentLauncherClusterContentSearchStruct)(nil)
+
+// isMTRContentLauncherClusterContentSearchStruct marks MTRContentLauncherClusterContentSearchStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRContentLauncherClusterContentSearchStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRContentLauncherClusterContentSearchStruct) isMTRContentLauncherClusterContentSearchStruct() {
+}
+
+var _ MTRContentLauncherClusterContentSearchStructProvider = (*MTRContentLauncherClusterContentSearchStruct)(nil)

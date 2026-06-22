@@ -6,15 +6,16 @@ package quartzcore
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The definition of a particle emitted by a particle layer.
-//
 // EmitterCell is an idiomatic wrapper over the Objective-C class CAEmitterCell.
+//
+// The definition of a particle emitted by a particle layer.
 type EmitterCell struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func EmitterCellFromID(id objc.ID) *EmitterCell {
 	if id == 0 {
 		return nil
 	}
-	x := &EmitterCell{Handle: objref.Wrap(purego.Retain(id))}
+	x := &EmitterCell{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func emitterCellAdopt(id objc.ID) *EmitterCell {
 	if id == 0 {
 		return nil
 	}
-	x := &EmitterCell{Handle: objref.Wrap(id)}
+	x := &EmitterCell{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,291 +61,236 @@ func (x *EmitterCell) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *EmitterCell) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewEmitterCell creates a new EmitterCell.
 func NewEmitterCell() *EmitterCell {
 	_id := objc.Send[objc.ID](objc.ID(_class("CAEmitterCell")), objc.RegisterName("new"))
 	return emitterCellAdopt(_id)
 }
 
-// The name of the cell.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the name of the cell.
 func (x *EmitterCell) WithName(name string) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// A Boolean value indicating whether or not cells from this emitter are rendered.
-//
-// WithEnabled sets enabled and returns the receiver so calls can be chained.
+// WithEnabled a Boolean value indicating whether or not cells from this emitter are rendered.
 func (x *EmitterCell) WithEnabled(enabled bool) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The number of emitted objects created every second. Animatable.
-//
-// WithBirthRate sets birthRate and returns the receiver so calls can be chained.
+// WithBirthRate the number of emitted objects created every second. Animatable.
 func (x *EmitterCell) WithBirthRate(birthRate float32) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBirthRate:"), birthRate)
 	return x
 }
 
-// The lifetime of the cell, in seconds. Animatable.
-//
-// WithLifetime sets lifetime and returns the receiver so calls can be chained.
+// WithLifetime the lifetime of the cell, in seconds. Animatable.
 func (x *EmitterCell) WithLifetime(lifetime float32) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLifetime:"), lifetime)
 	return x
 }
 
-// The mean value by which the lifetime of the cell can vary. Animatable.
-//
-// WithLifetimeRange sets lifetimeRange and returns the receiver so calls can be chained.
+// WithLifetimeRange the mean value by which the lifetime of the cell can vary. Animatable.
 func (x *EmitterCell) WithLifetimeRange(lifetimeRange float32) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLifetimeRange:"), lifetimeRange)
 	return x
 }
 
-// The latitudinal orientation of the emission angle. Animatable.
-//
-// WithEmissionLatitude sets emissionLatitude and returns the receiver so calls can be chained.
+// WithEmissionLatitude the latitudinal orientation of the emission angle. Animatable.
 func (x *EmitterCell) WithEmissionLatitude(emissionLatitude float64) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmissionLatitude:"), emissionLatitude)
 	return x
 }
 
-// The longitudinal orientation of the emission angle. Animatable.
-//
-// WithEmissionLongitude sets emissionLongitude and returns the receiver so calls can be chained.
+// WithEmissionLongitude the longitudinal orientation of the emission angle. Animatable.
 func (x *EmitterCell) WithEmissionLongitude(emissionLongitude float64) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmissionLongitude:"), emissionLongitude)
 	return x
 }
 
-// The angle, in radians, defining a cone around the emission angle. Animatable.
-//
-// WithEmissionRange sets emissionRange and returns the receiver so calls can be chained.
+// WithEmissionRange the angle, in radians, defining a cone around the emission angle. Animatable.
 func (x *EmitterCell) WithEmissionRange(emissionRange float64) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmissionRange:"), emissionRange)
 	return x
 }
 
-// The initial velocity of the cell. Animatable.
-//
-// WithVelocity sets velocity and returns the receiver so calls can be chained.
+// WithVelocity the initial velocity of the cell. Animatable.
 func (x *EmitterCell) WithVelocity(velocity float64) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVelocity:"), velocity)
 	return x
 }
 
-// The amount by which the velocity of the cell can vary. Animatable.
-//
-// WithVelocityRange sets velocityRange and returns the receiver so calls can be chained.
+// WithVelocityRange the amount by which the velocity of the cell can vary. Animatable.
 func (x *EmitterCell) WithVelocityRange(velocityRange float64) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVelocityRange:"), velocityRange)
 	return x
 }
 
-// The x component of an acceleration vector applied to cell.
-//
-// WithXAcceleration sets xAcceleration and returns the receiver so calls can be chained.
+// WithXAcceleration the x component of an acceleration vector applied to cell.
 func (x *EmitterCell) WithXAcceleration(xAcceleration float64) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXAcceleration:"), xAcceleration)
 	return x
 }
 
-// The y component of an acceleration vector applied to cell.
-//
-// WithYAcceleration sets yAcceleration and returns the receiver so calls can be chained.
+// WithYAcceleration the y component of an acceleration vector applied to cell.
 func (x *EmitterCell) WithYAcceleration(yAcceleration float64) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYAcceleration:"), yAcceleration)
 	return x
 }
 
-// The z component of an acceleration vector applied to cell.
-//
-// WithZAcceleration sets zAcceleration and returns the receiver so calls can be chained.
+// WithZAcceleration the z component of an acceleration vector applied to cell.
 func (x *EmitterCell) WithZAcceleration(zAcceleration float64) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZAcceleration:"), zAcceleration)
 	return x
 }
 
-// Specifies the scale factor applied to the cell. Animatable.
-//
-// WithScale sets scale and returns the receiver so calls can be chained.
+// WithScale specifies the scale factor applied to the cell. Animatable.
 func (x *EmitterCell) WithScale(scale float64) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScale:"), scale)
 	return x
 }
 
-// Specifies the range over which the scale value can vary. Animatable.
-//
-// WithScaleRange sets scaleRange and returns the receiver so calls can be chained.
+// WithScaleRange specifies the range over which the scale value can vary. Animatable.
 func (x *EmitterCell) WithScaleRange(scaleRange float64) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleRange:"), scaleRange)
 	return x
 }
 
-// The speed at which the scale changes over the lifetime of the cell. Animatable.
-//
-// WithScaleSpeed sets scaleSpeed and returns the receiver so calls can be chained.
+// WithScaleSpeed the speed at which the scale changes over the lifetime of the cell. Animatable.
 func (x *EmitterCell) WithScaleSpeed(scaleSpeed float64) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleSpeed:"), scaleSpeed)
 	return x
 }
 
-// The rotational velocity, measured in radians per second, to apply to the cell. Animatable.
-//
-// WithSpin sets spin and returns the receiver so calls can be chained.
+// WithSpin the rotational velocity, measured in radians per second, to apply to the cell. Animatable.
 func (x *EmitterCell) WithSpin(spin float64) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpin:"), spin)
 	return x
 }
 
-// The amount by which the spin of the cell can vary over its lifetime. Animatable.
-//
-// WithSpinRange sets spinRange and returns the receiver so calls can be chained.
+// WithSpinRange the amount by which the spin of the cell can vary over its lifetime. Animatable.
 func (x *EmitterCell) WithSpinRange(spinRange float64) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpinRange:"), spinRange)
 	return x
 }
 
-// The color of each emitted object. Animatable.
-//
-// WithColor sets color and returns the receiver so calls can be chained.
+// WithColor the color of each emitted object. Animatable.
 func (x *EmitterCell) WithColor(color obj.Object) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 	return x
 }
 
-// The amount by which the red color component of the cell can vary. Animatable.
-//
-// WithRedRange sets redRange and returns the receiver so calls can be chained.
+// WithRedRange the amount by which the red color component of the cell can vary. Animatable.
 func (x *EmitterCell) WithRedRange(redRange float32) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRedRange:"), redRange)
 	return x
 }
 
-// The amount by which the green color component of the cell can vary. Animatable.
-//
-// WithGreenRange sets greenRange and returns the receiver so calls can be chained.
+// WithGreenRange the amount by which the green color component of the cell can vary. Animatable.
 func (x *EmitterCell) WithGreenRange(greenRange float32) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGreenRange:"), greenRange)
 	return x
 }
 
-// The amount by which the blue color component of the cell can vary. Animatable.
-//
-// WithBlueRange sets blueRange and returns the receiver so calls can be chained.
+// WithBlueRange the amount by which the blue color component of the cell can vary. Animatable.
 func (x *EmitterCell) WithBlueRange(blueRange float32) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlueRange:"), blueRange)
 	return x
 }
 
-// The amount by which the alpha component of the cell can vary. Animatable.
-//
-// WithAlphaRange sets alphaRange and returns the receiver so calls can be chained.
+// WithAlphaRange the amount by which the alpha component of the cell can vary. Animatable.
 func (x *EmitterCell) WithAlphaRange(alphaRange float32) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaRange:"), alphaRange)
 	return x
 }
 
-// The speed, in seconds, at which the red color component changes over the lifetime of the cell. Animatable.
-//
-// WithRedSpeed sets redSpeed and returns the receiver so calls can be chained.
+// WithRedSpeed the speed, in seconds, at which the red color component changes over the lifetime of the cell. Animatable.
 func (x *EmitterCell) WithRedSpeed(redSpeed float32) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRedSpeed:"), redSpeed)
 	return x
 }
 
-// The speed, in seconds, at which the green color component changes over the lifetime of the cell. Animatable.
-//
-// WithGreenSpeed sets greenSpeed and returns the receiver so calls can be chained.
+// WithGreenSpeed the speed, in seconds, at which the green color component changes over the lifetime of the cell. Animatable.
 func (x *EmitterCell) WithGreenSpeed(greenSpeed float32) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGreenSpeed:"), greenSpeed)
 	return x
 }
 
-// The speed, in seconds, at which the blue color component changes over the lifetime of the cell. Animatable.
-//
-// WithBlueSpeed sets blueSpeed and returns the receiver so calls can be chained.
+// WithBlueSpeed the speed, in seconds, at which the blue color component changes over the lifetime of the cell. Animatable.
 func (x *EmitterCell) WithBlueSpeed(blueSpeed float32) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlueSpeed:"), blueSpeed)
 	return x
 }
 
-// The speed, in seconds, at which the alpha component changes over the lifetime of the cell. Animatable.
-//
-// WithAlphaSpeed sets alphaSpeed and returns the receiver so calls can be chained.
+// WithAlphaSpeed the speed, in seconds, at which the alpha component changes over the lifetime of the cell. Animatable.
 func (x *EmitterCell) WithAlphaSpeed(alphaSpeed float32) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaSpeed:"), alphaSpeed)
 	return x
 }
 
-// An object that provides the contents of the layer. Animatable.
-//
-// WithContents sets contents and returns the receiver so calls can be chained.
+// WithContents an object that provides the contents of the layer. Animatable.
 func (x *EmitterCell) WithContents(contents obj.Object) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), objref.IDOf(contents))
 	return x
 }
 
-// The scale factor of the cell contents.
-//
-// WithContentsScale sets contentsScale and returns the receiver so calls can be chained.
+// WithContentsRect a rectangle (in the unit coordinate space) that specifies the portion of contents that the receiver should draw. Animatable.
+func (x *EmitterCell) WithContentsRect(contentsRect corefoundation.CGRect) *EmitterCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsRect:"), contentsRect)
+	return x
+}
+
+// WithContentsScale the scale factor of the cell contents.
 func (x *EmitterCell) WithContentsScale(contentsScale float64) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsScale:"), contentsScale)
 	return x
 }
 
-// The filter used when reducing the size of the content.
-//
-// WithMinificationFilter sets minificationFilter and returns the receiver so calls can be chained.
+// WithMinificationFilter the filter used when reducing the size of the content.
 func (x *EmitterCell) WithMinificationFilter(minificationFilter string) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilter:"), purego.NSString(minificationFilter))
 	return x
 }
 
-// The filter used when increasing the size of the content.
-//
-// WithMagnificationFilter sets magnificationFilter and returns the receiver so calls can be chained.
+// WithMagnificationFilter the filter used when increasing the size of the content.
 func (x *EmitterCell) WithMagnificationFilter(magnificationFilter string) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnificationFilter:"), purego.NSString(magnificationFilter))
 	return x
 }
 
-// The bias factor used by the minification filter to determine the levels of detail.
-//
-// WithMinificationFilterBias sets minificationFilterBias and returns the receiver so calls can be chained.
+// WithMinificationFilterBias the bias factor used by the minification filter to determine the levels of detail.
 func (x *EmitterCell) WithMinificationFilterBias(minificationFilterBias float32) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilterBias:"), minificationFilterBias)
 	return x
 }
 
-// An optional array containing the sub-cells of this cell.
-//
-// WithEmitterCells sets the collection and returns the receiver so calls can be chained.
+// WithEmitterCells an optional array containing the sub-cells of this cell.
 func (x *EmitterCell) WithEmitterCells(items ...*EmitterCell) *EmitterCell {
 	_arr := purego.SliceToNSArray(items, func(_v *EmitterCell) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmitterCells:"), _arr)
 	return x
 }
 
-// An optional dictionary containing additional style values that are not explicitly defined by the receiver.
-//
-// WithStyle sets style and returns the receiver so calls can be chained.
+// WithStyle an optional dictionary containing additional style values that are not explicitly defined by the receiver.
 func (x *EmitterCell) WithStyle(style obj.Object) *EmitterCell {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), objref.IDOf(style))
 	return x
 }
 
-// Returns a Boolean value indicating whether the value for a given key should be archived.
+// ShouldArchiveValueForKey returns a Boolean value indicating whether the value for a given key should be archived.
 func (x *EmitterCell) ShouldArchiveValueForKey(key string) bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldArchiveValueForKey:"), purego.NSString(key))
 	return _r
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *EmitterCell) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	if _r == 0 {
@@ -351,262 +299,331 @@ func (x *EmitterCell) Name() string {
 	return purego.GoString(_r)
 }
 
+// SetName wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetName(name string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
+// IsEnabled wraps the corresponding Objective-C method.
 func (x *EmitterCell) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
 	return _r
 }
 
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetEnabled(enabled bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
+// BirthRate wraps the corresponding Objective-C method.
 func (x *EmitterCell) BirthRate() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("birthRate"))
 	return _r
 }
 
+// SetBirthRate wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetBirthRate(birthRate float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBirthRate:"), birthRate)
 }
 
+// Lifetime wraps the corresponding Objective-C method.
 func (x *EmitterCell) Lifetime() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("lifetime"))
 	return _r
 }
 
+// SetLifetime wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetLifetime(lifetime float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLifetime:"), lifetime)
 }
 
+// LifetimeRange wraps the corresponding Objective-C method.
 func (x *EmitterCell) LifetimeRange() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("lifetimeRange"))
 	return _r
 }
 
+// SetLifetimeRange wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetLifetimeRange(lifetimeRange float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLifetimeRange:"), lifetimeRange)
 }
 
+// EmissionLatitude wraps the corresponding Objective-C method.
 func (x *EmitterCell) EmissionLatitude() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("emissionLatitude"))
 	return _r
 }
 
+// SetEmissionLatitude wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetEmissionLatitude(emissionLatitude float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmissionLatitude:"), emissionLatitude)
 }
 
+// EmissionLongitude wraps the corresponding Objective-C method.
 func (x *EmitterCell) EmissionLongitude() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("emissionLongitude"))
 	return _r
 }
 
+// SetEmissionLongitude wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetEmissionLongitude(emissionLongitude float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmissionLongitude:"), emissionLongitude)
 }
 
+// EmissionRange wraps the corresponding Objective-C method.
 func (x *EmitterCell) EmissionRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("emissionRange"))
 	return _r
 }
 
+// SetEmissionRange wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetEmissionRange(emissionRange float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmissionRange:"), emissionRange)
 }
 
+// Velocity wraps the corresponding Objective-C method.
 func (x *EmitterCell) Velocity() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("velocity"))
 	return _r
 }
 
+// SetVelocity wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetVelocity(velocity float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVelocity:"), velocity)
 }
 
+// VelocityRange wraps the corresponding Objective-C method.
 func (x *EmitterCell) VelocityRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("velocityRange"))
 	return _r
 }
 
+// SetVelocityRange wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetVelocityRange(velocityRange float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVelocityRange:"), velocityRange)
 }
 
+// XAcceleration wraps the corresponding Objective-C method.
 func (x *EmitterCell) XAcceleration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("xAcceleration"))
 	return _r
 }
 
+// SetXAcceleration wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetXAcceleration(xAcceleration float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXAcceleration:"), xAcceleration)
 }
 
+// YAcceleration wraps the corresponding Objective-C method.
 func (x *EmitterCell) YAcceleration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("yAcceleration"))
 	return _r
 }
 
+// SetYAcceleration wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetYAcceleration(yAcceleration float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYAcceleration:"), yAcceleration)
 }
 
+// ZAcceleration wraps the corresponding Objective-C method.
 func (x *EmitterCell) ZAcceleration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("zAcceleration"))
 	return _r
 }
 
+// SetZAcceleration wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetZAcceleration(zAcceleration float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZAcceleration:"), zAcceleration)
 }
 
+// Scale wraps the corresponding Objective-C method.
 func (x *EmitterCell) Scale() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scale"))
 	return _r
 }
 
+// SetScale wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetScale(scale float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScale:"), scale)
 }
 
+// ScaleRange wraps the corresponding Objective-C method.
 func (x *EmitterCell) ScaleRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleRange"))
 	return _r
 }
 
+// SetScaleRange wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetScaleRange(scaleRange float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleRange:"), scaleRange)
 }
 
+// ScaleSpeed wraps the corresponding Objective-C method.
 func (x *EmitterCell) ScaleSpeed() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleSpeed"))
 	return _r
 }
 
+// SetScaleSpeed wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetScaleSpeed(scaleSpeed float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleSpeed:"), scaleSpeed)
 }
 
+// Spin wraps the corresponding Objective-C method.
 func (x *EmitterCell) Spin() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("spin"))
 	return _r
 }
 
+// SetSpin wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetSpin(spin float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpin:"), spin)
 }
 
+// SpinRange wraps the corresponding Objective-C method.
 func (x *EmitterCell) SpinRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("spinRange"))
 	return _r
 }
 
+// SetSpinRange wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetSpinRange(spinRange float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpinRange:"), spinRange)
 }
 
+// Color wraps the corresponding Objective-C method.
 func (x *EmitterCell) Color() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }
 
+// SetColor wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetColor(color obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 }
 
+// RedRange wraps the corresponding Objective-C method.
 func (x *EmitterCell) RedRange() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("redRange"))
 	return _r
 }
 
+// SetRedRange wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetRedRange(redRange float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRedRange:"), redRange)
 }
 
+// GreenRange wraps the corresponding Objective-C method.
 func (x *EmitterCell) GreenRange() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("greenRange"))
 	return _r
 }
 
+// SetGreenRange wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetGreenRange(greenRange float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGreenRange:"), greenRange)
 }
 
+// BlueRange wraps the corresponding Objective-C method.
 func (x *EmitterCell) BlueRange() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("blueRange"))
 	return _r
 }
 
+// SetBlueRange wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetBlueRange(blueRange float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlueRange:"), blueRange)
 }
 
+// AlphaRange wraps the corresponding Objective-C method.
 func (x *EmitterCell) AlphaRange() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alphaRange"))
 	return _r
 }
 
+// SetAlphaRange wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetAlphaRange(alphaRange float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaRange:"), alphaRange)
 }
 
+// RedSpeed wraps the corresponding Objective-C method.
 func (x *EmitterCell) RedSpeed() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("redSpeed"))
 	return _r
 }
 
+// SetRedSpeed wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetRedSpeed(redSpeed float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRedSpeed:"), redSpeed)
 }
 
+// GreenSpeed wraps the corresponding Objective-C method.
 func (x *EmitterCell) GreenSpeed() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("greenSpeed"))
 	return _r
 }
 
+// SetGreenSpeed wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetGreenSpeed(greenSpeed float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGreenSpeed:"), greenSpeed)
 }
 
+// BlueSpeed wraps the corresponding Objective-C method.
 func (x *EmitterCell) BlueSpeed() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("blueSpeed"))
 	return _r
 }
 
+// SetBlueSpeed wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetBlueSpeed(blueSpeed float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlueSpeed:"), blueSpeed)
 }
 
+// AlphaSpeed wraps the corresponding Objective-C method.
 func (x *EmitterCell) AlphaSpeed() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alphaSpeed"))
 	return _r
 }
 
+// SetAlphaSpeed wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetAlphaSpeed(alphaSpeed float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaSpeed:"), alphaSpeed)
 }
 
+// Contents wraps the corresponding Objective-C method.
 func (x *EmitterCell) Contents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contents"))
 	return obj.Wrap(_r)
 }
 
+// SetContents wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetContents(contents obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), objref.IDOf(contents))
 }
 
+// ContentsRect wraps the corresponding Objective-C method.
+func (x *EmitterCell) ContentsRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("contentsRect"))
+	return _r
+}
+
+// SetContentsRect wraps the corresponding Objective-C method.
+func (x *EmitterCell) SetContentsRect(contentsRect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsRect:"), contentsRect)
+}
+
+// ContentsScale wraps the corresponding Objective-C method.
 func (x *EmitterCell) ContentsScale() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("contentsScale"))
 	return _r
 }
 
+// SetContentsScale wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetContentsScale(contentsScale float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsScale:"), contentsScale)
 }
 
+// MinificationFilter wraps the corresponding Objective-C method.
 func (x *EmitterCell) MinificationFilter() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minificationFilter"))
 	if _r == 0 {
@@ -615,10 +632,12 @@ func (x *EmitterCell) MinificationFilter() string {
 	return purego.GoString(_r)
 }
 
+// SetMinificationFilter wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetMinificationFilter(minificationFilter string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilter:"), purego.NSString(minificationFilter))
 }
 
+// MagnificationFilter wraps the corresponding Objective-C method.
 func (x *EmitterCell) MagnificationFilter() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("magnificationFilter"))
 	if _r == 0 {
@@ -627,34 +646,42 @@ func (x *EmitterCell) MagnificationFilter() string {
 	return purego.GoString(_r)
 }
 
+// SetMagnificationFilter wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetMagnificationFilter(magnificationFilter string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnificationFilter:"), purego.NSString(magnificationFilter))
 }
 
+// MinificationFilterBias wraps the corresponding Objective-C method.
 func (x *EmitterCell) MinificationFilterBias() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minificationFilterBias"))
 	return _r
 }
 
+// SetMinificationFilterBias wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetMinificationFilterBias(minificationFilterBias float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilterBias:"), minificationFilterBias)
 }
 
+// EmitterCells wraps the corresponding Objective-C method.
+//
 // EmitterCells returns the collection as a Go slice.
 func (x *EmitterCell) EmitterCells() []*EmitterCell {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emitterCells"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmitterCell { return EmitterCellFromID(_id) })
 }
 
+// SetEmitterCells wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetEmitterCells(emitterCells []*EmitterCell) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmitterCells:"), purego.SliceToNSArray(emitterCells, func(_v *EmitterCell) objc.ID { return objref.IDOf(_v) }))
 }
 
+// Style wraps the corresponding Objective-C method.
 func (x *EmitterCell) Style() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("style"))
 	return obj.Wrap(_r)
 }
 
+// SetStyle wraps the corresponding Objective-C method.
 func (x *EmitterCell) SetStyle(style obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), objref.IDOf(style))
 }
@@ -690,6 +717,7 @@ type EmitterCellable interface {
 	WithBlueSpeed(blueSpeed float32) *EmitterCell
 	WithAlphaSpeed(alphaSpeed float32) *EmitterCell
 	WithContents(contents obj.Object) *EmitterCell
+	WithContentsRect(contentsRect corefoundation.CGRect) *EmitterCell
 	WithContentsScale(contentsScale float64) *EmitterCell
 	WithMinificationFilter(minificationFilter string) *EmitterCell
 	WithMagnificationFilter(magnificationFilter string) *EmitterCell
@@ -753,6 +781,8 @@ type EmitterCellable interface {
 	SetAlphaSpeed(alphaSpeed float32)
 	Contents() obj.Object
 	SetContents(contents obj.Object)
+	ContentsRect() corefoundation.CGRect
+	SetContentsRect(contentsRect corefoundation.CGRect)
 	ContentsScale() float64
 	SetContentsScale(contentsScale float64)
 	MinificationFilter() string

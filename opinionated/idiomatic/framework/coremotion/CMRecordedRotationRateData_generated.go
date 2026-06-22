@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A data object that contains a single rotation-rate measurement at a specific time.
-//
 // RecordedRotationRateData is an idiomatic wrapper over the Objective-C class CMRecordedRotationRateData.
+//
+// It embeds [RotationRateData], promoting that type's methods.
+//
+// A data object that contains a single rotation-rate measurement at a specific time.
 type RecordedRotationRateData struct {
-	objref.Handle
+	RotationRateData
 }
 
 // RecordedRotationRateDataFromID adopts an existing Objective-C object as a RecordedRotationRateData
@@ -25,7 +26,8 @@ func RecordedRotationRateDataFromID(id objc.ID) *RecordedRotationRateData {
 	if id == 0 {
 		return nil
 	}
-	x := &RecordedRotationRateData{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RecordedRotationRateData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func recordedRotationRateDataAdopt(id objc.ID) *RecordedRotationRateData {
 	if id == 0 {
 		return nil
 	}
-	x := &RecordedRotationRateData{Handle: objref.Wrap(id)}
+	x := &RecordedRotationRateData{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *RecordedRotationRateData) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RecordedRotationRateData) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RecordedRotationRateData) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewRecordedRotationRateData creates a new RecordedRotationRateData.
@@ -64,6 +52,7 @@ func NewRecordedRotationRateData() *RecordedRotationRateData {
 	return recordedRotationRateDataAdopt(_id)
 }
 
+// StartDate wraps the corresponding Objective-C method.
 func (x *RecordedRotationRateData) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
@@ -76,3 +65,7 @@ type RecordedRotationRateDataable interface {
 }
 
 var _ RecordedRotationRateDataable = (*RecordedRotationRateData)(nil)
+
+var _ RotationRateDataProvider = (*RecordedRotationRateData)(nil)
+
+var _ LogItemProvider = (*RecordedRotationRateData)(nil)

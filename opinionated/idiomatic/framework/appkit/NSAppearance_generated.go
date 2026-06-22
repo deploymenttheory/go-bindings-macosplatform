@@ -13,9 +13,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages standard appearance attributes for UI elements in an app.
-//
 // Appearance is an idiomatic wrapper over the Objective-C class NSAppearance.
+//
+// An object that manages standard appearance attributes for UI elements in an app.
 type Appearance struct {
 	objref.Handle
 }
@@ -26,7 +26,8 @@ func AppearanceFromID(id objc.ID) *Appearance {
 	if id == 0 {
 		return nil
 	}
-	x := &Appearance{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Appearance{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -39,7 +40,8 @@ func appearanceAdopt(id objc.ID) *Appearance {
 	if id == 0 {
 		return nil
 	}
-	x := &Appearance{Handle: objref.Wrap(id)}
+	x := &Appearance{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -59,9 +61,13 @@ func (x *Appearance) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates an appearance object from the named appearance file located in the specified bundle.
-//
-// NewAppearanceWithAppearanceNamedBundle creates a new Appearance.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Appearance) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAppearanceWithAppearanceNamedBundle creates an appearance object from the named appearance file located in the specified bundle.
 func NewAppearanceWithAppearanceNamedBundle(name obj.Object, bundle obj.Object) *Appearance {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAppearance")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAppearanceNamed:bundle:"), objref.IDOf(name), objref.IDOf(bundle))
@@ -75,7 +81,7 @@ func NewAppearanceWithCoder(coder obj.Object) *Appearance {
 	return appearanceAdopt(_id)
 }
 
-// Sets the appearance to be the active drawing appearance and perform the specified block.
+// PerformAsCurrentDrawingAppearance sets the appearance to be the active drawing appearance and perform the specified block.
 //
 // PerformAsCurrentDrawingAppearance blocks until the operation completes or ctx is cancelled.
 func (x *Appearance) PerformAsCurrentDrawingAppearance(ctx context.Context) error {
@@ -92,17 +98,19 @@ func (x *Appearance) PerformAsCurrentDrawingAppearance(ctx context.Context) erro
 	}
 }
 
-// Returns the appearance name that most closely matches the current appearance object.
+// BestMatchFromAppearancesWithNames returns the appearance name that most closely matches the current appearance object.
 func (x *Appearance) BestMatchFromAppearancesWithNames(appearances []obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bestMatchFromAppearancesWithNames:"), purego.SliceToNSArray(appearances, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
+// Name wraps the corresponding Objective-C method.
 func (x *Appearance) Name() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
 	return obj.Wrap(_r)
 }
 
+// AllowsVibrancy wraps the corresponding Objective-C method.
 func (x *Appearance) AllowsVibrancy() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsVibrancy"))
 	return _r

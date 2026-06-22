@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// An object representing a haptic waveform.
-//
 // HapticPattern is an idiomatic wrapper over the Objective-C class CHHapticPattern.
+//
+// An object representing a haptic waveform.
 type HapticPattern struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func HapticPatternFromID(id objc.ID) *HapticPattern {
 	if id == 0 {
 		return nil
 	}
-	x := &HapticPattern{Handle: objref.Wrap(purego.Retain(id))}
+	x := &HapticPattern{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func hapticPatternAdopt(id objc.ID) *HapticPattern {
 	if id == 0 {
 		return nil
 	}
-	x := &HapticPattern{Handle: objref.Wrap(id)}
+	x := &HapticPattern{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,10 +62,14 @@ func (x *HapticPattern) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Constructs a haptic pattern from a series of events and parameters.
-//
-// NewHapticPatternWithEventsParametersError creates a new HapticPattern.
-func NewHapticPatternWithEventsParametersError(events []*HapticEvent, parameters []*HapticDynamicParameter) (*HapticPattern, error) {
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HapticPattern) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewHapticPatternWithEventsParametersError constructs a haptic pattern from a series of events and parameters.
+func NewHapticPatternWithEventsParametersError(events []*HapticEvent, parameters []*HapticDynamicParameter) (result *HapticPattern, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticPattern")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEvents:parameters:error:"), purego.SliceToNSArray(events, func(_v *HapticEvent) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(parameters, func(_v *HapticDynamicParameter) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
@@ -73,10 +79,8 @@ func NewHapticPatternWithEventsParametersError(events []*HapticEvent, parameters
 	return hapticPatternAdopt(_id), nil
 }
 
-// Constructs a haptic pattern from a series of events and parameter curves.
-//
-// NewHapticPatternWithEventsParameterCurvesError creates a new HapticPattern.
-func NewHapticPatternWithEventsParameterCurvesError(events []*HapticEvent, parameterCurves []*HapticParameterCurve) (*HapticPattern, error) {
+// NewHapticPatternWithEventsParameterCurvesError constructs a haptic pattern from a series of events and parameter curves.
+func NewHapticPatternWithEventsParameterCurvesError(events []*HapticEvent, parameterCurves []*HapticParameterCurve) (result *HapticPattern, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticPattern")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEvents:parameterCurves:error:"), purego.SliceToNSArray(events, func(_v *HapticEvent) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(parameterCurves, func(_v *HapticParameterCurve) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
@@ -86,10 +90,8 @@ func NewHapticPatternWithEventsParameterCurvesError(events []*HapticEvent, param
 	return hapticPatternAdopt(_id), nil
 }
 
-// Creates a haptic pattern from a property list dictionary.
-//
-// NewHapticPatternWithDictionaryError creates a new HapticPattern.
-func NewHapticPatternWithDictionaryError(patternDict obj.Object) (*HapticPattern, error) {
+// NewHapticPatternWithDictionaryError creates a haptic pattern from a property list dictionary.
+func NewHapticPatternWithDictionaryError(patternDict obj.Object) (result *HapticPattern, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticPattern")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:error:"), objref.IDOf(patternDict), unsafe.Pointer(&_nsErr))
@@ -99,10 +101,8 @@ func NewHapticPatternWithDictionaryError(patternDict obj.Object) (*HapticPattern
 	return hapticPatternAdopt(_id), nil
 }
 
-// Creates a haptic pattern with the contents of an AHAP file.
-//
-// NewHapticPatternWithContentsOfURLError creates a new HapticPattern.
-func NewHapticPatternWithContentsOfURLError(ahapURL string) (*HapticPattern, error) {
+// NewHapticPatternWithContentsOfURLError creates a haptic pattern with the contents of an AHAP file.
+func NewHapticPatternWithContentsOfURLError(ahapURL string) (result *HapticPattern, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticPattern")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), rt.FileURL(ahapURL), unsafe.Pointer(&_nsErr))
@@ -112,8 +112,8 @@ func NewHapticPatternWithContentsOfURLError(ahapURL string) (*HapticPattern, err
 	return hapticPatternAdopt(_id), nil
 }
 
-// Returns the dictionary representation of the haptic pattern.
-func (x *HapticPattern) ExportDictionaryAndReturnError() (obj.Object, error) {
+// ExportDictionaryAndReturnError returns the dictionary representation of the haptic pattern.
+func (x *HapticPattern) ExportDictionaryAndReturnError() (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exportDictionaryAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -122,6 +122,7 @@ func (x *HapticPattern) ExportDictionaryAndReturnError() (obj.Object, error) {
 	return obj.Wrap(_r), nil
 }
 
+// Duration wraps the corresponding Objective-C method.
 func (x *HapticPattern) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
 	return _r
@@ -130,7 +131,7 @@ func (x *HapticPattern) Duration() float64 {
 // HapticPatternable is the interface implemented by [HapticPattern], for mocking and DI.
 type HapticPatternable interface {
 	obj.Object
-	ExportDictionaryAndReturnError() (obj.Object, error)
+	ExportDictionaryAndReturnError() (result obj.Object, err error)
 	Duration() float64
 }
 

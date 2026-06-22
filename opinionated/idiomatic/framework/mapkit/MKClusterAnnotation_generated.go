@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An annotation that groups two or more distinct annotations into a single entity.
-//
 // ClusterAnnotation is an idiomatic wrapper over the Objective-C class MKClusterAnnotation.
+//
+// An annotation that groups two or more distinct annotations into a single entity.
 type ClusterAnnotation struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ClusterAnnotationFromID(id objc.ID) *ClusterAnnotation {
 	if id == 0 {
 		return nil
 	}
-	x := &ClusterAnnotation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ClusterAnnotation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func clusterAnnotationAdopt(id objc.ID) *ClusterAnnotation {
 	if id == 0 {
 		return nil
 	}
-	x := &ClusterAnnotation{Handle: objref.Wrap(id)}
+	x := &ClusterAnnotation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,32 @@ func (x *ClusterAnnotation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a cluster annotation with the specified individual annotations.
-//
-// NewClusterAnnotationWithMemberAnnotations creates a new ClusterAnnotation.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ClusterAnnotation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewClusterAnnotationWithMemberAnnotations creates a cluster annotation with the specified individual annotations.
 func NewClusterAnnotationWithMemberAnnotations(memberAnnotations []obj.Object) *ClusterAnnotation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKClusterAnnotation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMemberAnnotations:"), purego.SliceToNSArray(memberAnnotations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return clusterAnnotationAdopt(_id)
 }
 
-// The title string to display for the group of annotations.
-//
-// WithTitle sets title and returns the receiver so calls can be chained.
+// WithTitle the title string to display for the group of annotations.
 func (x *ClusterAnnotation) WithTitle(title string) *ClusterAnnotation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The subtitle string to display for the group of annotations.
-//
-// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
+// WithSubtitle the subtitle string to display for the group of annotations.
 func (x *ClusterAnnotation) WithSubtitle(subtitle string) *ClusterAnnotation {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *ClusterAnnotation) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -91,10 +94,12 @@ func (x *ClusterAnnotation) Title() string {
 	return purego.GoString(_r)
 }
 
+// SetTitle wraps the corresponding Objective-C method.
 func (x *ClusterAnnotation) SetTitle(title string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
+// Subtitle wraps the corresponding Objective-C method.
 func (x *ClusterAnnotation) Subtitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitle"))
 	if _r == 0 {
@@ -103,10 +108,12 @@ func (x *ClusterAnnotation) Subtitle() string {
 	return purego.GoString(_r)
 }
 
+// SetSubtitle wraps the corresponding Objective-C method.
 func (x *ClusterAnnotation) SetSubtitle(subtitle string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 }
 
+// MemberAnnotations wraps the corresponding Objective-C method.
 func (x *ClusterAnnotation) MemberAnnotations() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("memberAnnotations"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

@@ -23,7 +23,8 @@ func MTRCommissioningOperationFromID(id objc.ID) *MTRCommissioningOperation {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRCommissioningOperation{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRCommissioningOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRCommissioningOperationAdopt(id objc.ID) *MTRCommissioningOperation {
 	if id == 0 {
 		return nil
 	}
-	x := &MTRCommissioningOperation{Handle: objref.Wrap(id)}
+	x := &MTRCommissioningOperation{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,30 @@ func (x *MTRCommissioningOperation) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRCommissioningOperation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRCommissioningOperation creates a new MTRCommissioningOperation.
 func NewMTRCommissioningOperation() *MTRCommissioningOperation {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRCommissioningOperation")), objc.RegisterName("new"))
 	return mTRCommissioningOperationAdopt(_id)
 }
 
-// Start commissioning with the given controller (which identifies the fabric the commissionee should be commissioned into). The delegate will be notified if there are any failures.
+// StartWithController start commissioning with the given controller (which identifies the fabric the commissionee should be commissioned into). The delegate will be notified if there are any failures.
 func (x *MTRCommissioningOperation) StartWithController(controller *MTRDeviceController) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startWithController:"), objref.IDOf(controller))
 }
 
-// Stop commissioning. This will typically result in commissioning:failedWithError: callbacks to delegates.
+// Stop stop commissioning. This will typically result in commissioning:failedWithError: callbacks to delegates.
 func (x *MTRCommissioningOperation) Stop() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("stop"))
 	return _r
 }
 
+// MatchedPayload wraps the corresponding Objective-C method.
 func (x *MTRCommissioningOperation) MatchedPayload() *MTRSetupPayload {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchedPayload"))
 	return MTRSetupPayloadFromID(_r)

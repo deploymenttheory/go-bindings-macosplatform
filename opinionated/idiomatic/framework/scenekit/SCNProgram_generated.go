@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A complete Metal or OpenGL shader program that replaces SceneKit’s rendering of a geometry or material.
-//
 // Program is an idiomatic wrapper over the Objective-C class SCNProgram.
+//
+// A complete Metal or OpenGL shader program that replaces SceneKit’s rendering of a geometry or material.
 type Program struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ProgramFromID(id objc.ID) *Program {
 	if id == 0 {
 		return nil
 	}
-	x := &Program{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Program{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func programAdopt(id objc.ID) *Program {
 	if id == 0 {
 		return nil
 	}
-	x := &Program{Handle: objref.Wrap(id)}
+	x := &Program{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,82 +60,72 @@ func (x *Program) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Program) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewProgram creates a new Program.
 func NewProgram() *Program {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCNProgram")), objc.RegisterName("new"))
 	return programAdopt(_id)
 }
 
-// GLSL source code for the program’s vertex shader.
-//
-// WithVertexShader sets vertexShader and returns the receiver so calls can be chained.
+// WithVertexShader GLSL source code for the program’s vertex shader.
 func (x *Program) WithVertexShader(vertexShader string) *Program {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexShader:"), purego.NSString(vertexShader))
 	return x
 }
 
-// GLSL source code for the program’s fragment shader.
-//
-// WithFragmentShader sets fragmentShader and returns the receiver so calls can be chained.
+// WithFragmentShader GLSL source code for the program’s fragment shader.
 func (x *Program) WithFragmentShader(fragmentShader string) *Program {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFragmentShader:"), purego.NSString(fragmentShader))
 	return x
 }
 
-// GLSL source code for the program’s optional tessellation control shader.
-//
-// WithTessellationControlShader sets tessellationControlShader and returns the receiver so calls can be chained.
+// WithTessellationControlShader GLSL source code for the program’s optional tessellation control shader.
 func (x *Program) WithTessellationControlShader(tessellationControlShader string) *Program {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellationControlShader:"), purego.NSString(tessellationControlShader))
 	return x
 }
 
-// GLSL source code for the program’s optional tessellation evaluation shader.
-//
-// WithTessellationEvaluationShader sets tessellationEvaluationShader and returns the receiver so calls can be chained.
+// WithTessellationEvaluationShader GLSL source code for the program’s optional tessellation evaluation shader.
 func (x *Program) WithTessellationEvaluationShader(tessellationEvaluationShader string) *Program {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellationEvaluationShader:"), purego.NSString(tessellationEvaluationShader))
 	return x
 }
 
-// GLSL source code for the program’s optional geometry shader.
-//
-// WithGeometryShader sets geometryShader and returns the receiver so calls can be chained.
+// WithGeometryShader GLSL source code for the program’s optional geometry shader.
 func (x *Program) WithGeometryShader(geometryShader string) *Program {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeometryShader:"), purego.NSString(geometryShader))
 	return x
 }
 
-// The name of the vertex shader function to load from a Metal shader library.
-//
-// WithVertexFunctionName sets vertexFunctionName and returns the receiver so calls can be chained.
+// WithVertexFunctionName the name of the vertex shader function to load from a Metal shader library.
 func (x *Program) WithVertexFunctionName(vertexFunctionName string) *Program {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexFunctionName:"), purego.NSString(vertexFunctionName))
 	return x
 }
 
-// The name of the fragment shader function to load from a Metal shader library.
-//
-// WithFragmentFunctionName sets fragmentFunctionName and returns the receiver so calls can be chained.
+// WithFragmentFunctionName the name of the fragment shader function to load from a Metal shader library.
 func (x *Program) WithFragmentFunctionName(fragmentFunctionName string) *Program {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFragmentFunctionName:"), purego.NSString(fragmentFunctionName))
 	return x
 }
 
-// A Boolean value that indicates whether fragments rendered by the program are fully opaque.
-//
-// WithOpaque sets opaque and returns the receiver so calls can be chained.
+// WithOpaque a Boolean value that indicates whether fragments rendered by the program are fully opaque.
 func (x *Program) WithOpaque(opaque bool) *Program {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
 	return x
 }
 
-// Associates a SceneKit semantic identifier with the specified GLSL vertex attribute or uniform variable.
+// SetSemanticForSymbolOptions associates a SceneKit semantic identifier with the specified GLSL vertex attribute or uniform variable.
 func (x *Program) SetSemanticForSymbolOptions(semantic string, symbol string, options obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSemantic:forSymbol:options:"), purego.NSString(semantic), purego.NSString(symbol), objref.IDOf(options))
 }
 
-// Returns the SceneKit semantic identifiers associated with the specified GLSL vertex attribute or uniform variable.
+// SemanticForSymbol returns the SceneKit semantic identifiers associated with the specified GLSL vertex attribute or uniform variable.
 func (x *Program) SemanticForSymbol(symbol string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("semanticForSymbol:"), purego.NSString(symbol))
 	if _r == 0 {
@@ -142,7 +134,7 @@ func (x *Program) SemanticForSymbol(symbol string) string {
 	return purego.GoString(_r)
 }
 
-// Determines the receiver's vertex shader.
+// VertexShader determines the receiver's vertex shader.
 func (x *Program) VertexShader() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexShader"))
 	if _r == 0 {
@@ -151,11 +143,12 @@ func (x *Program) VertexShader() string {
 	return purego.GoString(_r)
 }
 
+// SetVertexShader wraps the corresponding Objective-C method.
 func (x *Program) SetVertexShader(vertexShader string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexShader:"), purego.NSString(vertexShader))
 }
 
-// Determines the receiver's fragment shader.
+// FragmentShader determines the receiver's fragment shader.
 func (x *Program) FragmentShader() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fragmentShader"))
 	if _r == 0 {
@@ -164,11 +157,12 @@ func (x *Program) FragmentShader() string {
 	return purego.GoString(_r)
 }
 
+// SetFragmentShader wraps the corresponding Objective-C method.
 func (x *Program) SetFragmentShader(fragmentShader string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFragmentShader:"), purego.NSString(fragmentShader))
 }
 
-// Determines the receiver's tessellation control shader. Tessellation shaders require OpenGL Core Profile.
+// TessellationControlShader determines the receiver's tessellation control shader. Tessellation shaders require OpenGL Core Profile.
 func (x *Program) TessellationControlShader() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tessellationControlShader"))
 	if _r == 0 {
@@ -177,11 +171,12 @@ func (x *Program) TessellationControlShader() string {
 	return purego.GoString(_r)
 }
 
+// SetTessellationControlShader wraps the corresponding Objective-C method.
 func (x *Program) SetTessellationControlShader(tessellationControlShader string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellationControlShader:"), purego.NSString(tessellationControlShader))
 }
 
-// Determines the receiver's tessellation evaluation shader. Tessellation shaders require OpenGL Core Profile.
+// TessellationEvaluationShader determines the receiver's tessellation evaluation shader. Tessellation shaders require OpenGL Core Profile.
 func (x *Program) TessellationEvaluationShader() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tessellationEvaluationShader"))
 	if _r == 0 {
@@ -190,11 +185,12 @@ func (x *Program) TessellationEvaluationShader() string {
 	return purego.GoString(_r)
 }
 
+// SetTessellationEvaluationShader wraps the corresponding Objective-C method.
 func (x *Program) SetTessellationEvaluationShader(tessellationEvaluationShader string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellationEvaluationShader:"), purego.NSString(tessellationEvaluationShader))
 }
 
-// Determines the receiver's geometry shader. Geometry shaders require OpenGL Core Profile.
+// GeometryShader determines the receiver's geometry shader. Geometry shaders require OpenGL Core Profile.
 func (x *Program) GeometryShader() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("geometryShader"))
 	if _r == 0 {
@@ -203,11 +199,12 @@ func (x *Program) GeometryShader() string {
 	return purego.GoString(_r)
 }
 
+// SetGeometryShader wraps the corresponding Objective-C method.
 func (x *Program) SetGeometryShader(geometryShader string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeometryShader:"), purego.NSString(geometryShader))
 }
 
-// Determines the receiver's vertex function name. The name of the vertex function (for Metal programs).
+// VertexFunctionName determines the receiver's vertex function name. The name of the vertex function (for Metal programs).
 func (x *Program) VertexFunctionName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexFunctionName"))
 	if _r == 0 {
@@ -216,11 +213,12 @@ func (x *Program) VertexFunctionName() string {
 	return purego.GoString(_r)
 }
 
+// SetVertexFunctionName wraps the corresponding Objective-C method.
 func (x *Program) SetVertexFunctionName(vertexFunctionName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexFunctionName:"), purego.NSString(vertexFunctionName))
 }
 
-// Determines the receiver's fragment function name. The name of the fragment function (for Metal programs).
+// FragmentFunctionName determines the receiver's fragment function name. The name of the fragment function (for Metal programs).
 func (x *Program) FragmentFunctionName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fragmentFunctionName"))
 	if _r == 0 {
@@ -229,16 +227,18 @@ func (x *Program) FragmentFunctionName() string {
 	return purego.GoString(_r)
 }
 
+// SetFragmentFunctionName wraps the corresponding Objective-C method.
 func (x *Program) SetFragmentFunctionName(fragmentFunctionName string) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFragmentFunctionName:"), purego.NSString(fragmentFunctionName))
 }
 
-// Determines the receiver's fragment are opaque or not. Defaults to YES.
+// IsOpaque determines the receiver's fragment are opaque or not. Defaults to YES.
 func (x *Program) IsOpaque() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOpaque"))
 	return _r
 }
 
+// SetOpaque wraps the corresponding Objective-C method.
 func (x *Program) SetOpaque(opaque bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
 }

@@ -23,7 +23,8 @@ func MTRTimeSynchronizationClusterDSTTableEmptyEventFromID(id objc.ID) *MTRTimeS
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTimeSynchronizationClusterDSTTableEmptyEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRTimeSynchronizationClusterDSTTableEmptyEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRTimeSynchronizationClusterDSTTableEmptyEventAdopt(id objc.ID) *MTRTimeSy
 	if id == 0 {
 		return nil
 	}
-	x := &MTRTimeSynchronizationClusterDSTTableEmptyEvent{Handle: objref.Wrap(id)}
+	x := &MTRTimeSynchronizationClusterDSTTableEmptyEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -54,6 +56,12 @@ func (x *MTRTimeSynchronizationClusterDSTTableEmptyEvent) IsEqual(other obj.Obje
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *MTRTimeSynchronizationClusterDSTTableEmptyEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRTimeSynchronizationClusterDSTTableEmptyEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewMTRTimeSynchronizationClusterDSTTableEmptyEvent creates a new MTRTimeSynchronizationClusterDSTTableEmptyEvent.

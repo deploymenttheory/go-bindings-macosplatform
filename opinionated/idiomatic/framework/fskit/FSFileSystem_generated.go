@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract base class for implementing a full-featured file system.
-//
 // FileSystem is an idiomatic wrapper over the Objective-C class FSFileSystem.
+//
+// An abstract base class for implementing a full-featured file system.
 type FileSystem struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func FileSystemFromID(id objc.ID) *FileSystem {
 	if id == 0 {
 		return nil
 	}
-	x := &FileSystem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &FileSystem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func fileSystemAdopt(id objc.ID) *FileSystem {
 	if id == 0 {
 		return nil
 	}
-	x := &FileSystem{Handle: objref.Wrap(id)}
+	x := &FileSystem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,6 +58,12 @@ func (x *FileSystem) IsEqual(other obj.Object) bool {
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (x *FileSystem) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FileSystem) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NewFileSystem creates a new FileSystem.

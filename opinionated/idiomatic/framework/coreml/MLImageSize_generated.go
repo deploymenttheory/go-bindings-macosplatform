@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The width and height of an image feature size.
-//
 // ImageSize is an idiomatic wrapper over the Objective-C class MLImageSize.
+//
+// The width and height of an image feature size.
 type ImageSize struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ImageSizeFromID(id objc.ID) *ImageSize {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageSize{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ImageSize{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func imageSizeAdopt(id objc.ID) *ImageSize {
 	if id == 0 {
 		return nil
 	}
-	x := &ImageSize{Handle: objref.Wrap(id)}
+	x := &ImageSize{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,17 +60,25 @@ func (x *ImageSize) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ImageSize) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewImageSize creates a new ImageSize.
 func NewImageSize() *ImageSize {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLImageSize")), objc.RegisterName("new"))
 	return imageSizeAdopt(_id)
 }
 
+// PixelsWide wraps the corresponding Objective-C method.
 func (x *ImageSize) PixelsWide() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelsWide"))
 	return _r
 }
 
+// PixelsHigh wraps the corresponding Objective-C method.
 func (x *ImageSize) PixelsHigh() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelsHigh"))
 	return _r

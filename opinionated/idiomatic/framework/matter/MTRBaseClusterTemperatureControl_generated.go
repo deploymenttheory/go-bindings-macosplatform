@@ -10,15 +10,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Temperature Control
-//
 // MTRBaseClusterTemperatureControl is an idiomatic wrapper over the Objective-C class MTRBaseClusterTemperatureControl.
+//
+// It embeds [MTRGenericBaseCluster], promoting that type's methods.
+//
+// Cluster Temperature Control
 type MTRBaseClusterTemperatureControl struct {
-	objref.Handle
+	MTRGenericBaseCluster
 }
 
 // MTRBaseClusterTemperatureControlFromID adopts an existing Objective-C object as a MTRBaseClusterTemperatureControl
@@ -27,7 +28,8 @@ func MTRBaseClusterTemperatureControlFromID(id objc.ID) *MTRBaseClusterTemperatu
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterTemperatureControl{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBaseClusterTemperatureControl{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,37 +42,23 @@ func mTRBaseClusterTemperatureControlAdopt(id objc.ID) *MTRBaseClusterTemperatur
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBaseClusterTemperatureControl{Handle: objref.Wrap(id)}
+	x := &MTRBaseClusterTemperatureControl{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *MTRBaseClusterTemperatureControl) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseClusterTemperatureControl) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseClusterTemperatureControl) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-//
-// NewMTRBaseClusterTemperatureControlWithDeviceEndpointIDQueue creates a new MTRBaseClusterTemperatureControl.
+// NewMTRBaseClusterTemperatureControlWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterTemperatureControlWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterTemperatureControl {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterTemperatureControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterTemperatureControlAdopt(_id)
 }
 
+// ReadAttributeTemperatureSetpointWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeTemperatureSetpointWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTemperatureControl) ReadAttributeTemperatureSetpointWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTemperatureControl) ReadAttributeTemperatureSetpointWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -92,8 +80,10 @@ func (x *MTRBaseClusterTemperatureControl) ReadAttributeTemperatureSetpointWithC
 	}
 }
 
+// SubscribeAttributeTemperatureSetpointWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeTemperatureSetpointWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeTemperatureSetpointWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeTemperatureSetpointWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -115,8 +105,10 @@ func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeTemperatureSetpoint
 	}
 }
 
+// ReadAttributeMinTemperatureWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMinTemperatureWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTemperatureControl) ReadAttributeMinTemperatureWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTemperatureControl) ReadAttributeMinTemperatureWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -138,8 +130,10 @@ func (x *MTRBaseClusterTemperatureControl) ReadAttributeMinTemperatureWithComple
 	}
 }
 
+// SubscribeAttributeMinTemperatureWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMinTemperatureWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeMinTemperatureWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeMinTemperatureWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -161,8 +155,10 @@ func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeMinTemperatureWithP
 	}
 }
 
+// ReadAttributeMaxTemperatureWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeMaxTemperatureWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTemperatureControl) ReadAttributeMaxTemperatureWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTemperatureControl) ReadAttributeMaxTemperatureWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -184,8 +180,10 @@ func (x *MTRBaseClusterTemperatureControl) ReadAttributeMaxTemperatureWithComple
 	}
 }
 
+// SubscribeAttributeMaxTemperatureWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeMaxTemperatureWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeMaxTemperatureWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeMaxTemperatureWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -207,8 +205,10 @@ func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeMaxTemperatureWithP
 	}
 }
 
+// ReadAttributeStepWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeStepWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTemperatureControl) ReadAttributeStepWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTemperatureControl) ReadAttributeStepWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -230,8 +230,10 @@ func (x *MTRBaseClusterTemperatureControl) ReadAttributeStepWithCompletion(ctx c
 	}
 }
 
+// SubscribeAttributeStepWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeStepWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeStepWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeStepWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -253,8 +255,10 @@ func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeStepWithParamsSubsc
 	}
 }
 
+// ReadAttributeSelectedTemperatureLevelWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSelectedTemperatureLevelWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTemperatureControl) ReadAttributeSelectedTemperatureLevelWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTemperatureControl) ReadAttributeSelectedTemperatureLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -276,8 +280,10 @@ func (x *MTRBaseClusterTemperatureControl) ReadAttributeSelectedTemperatureLevel
 	}
 }
 
+// SubscribeAttributeSelectedTemperatureLevelWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSelectedTemperatureLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeSelectedTemperatureLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeSelectedTemperatureLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -299,8 +305,10 @@ func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeSelectedTemperature
 	}
 }
 
+// ReadAttributeSupportedTemperatureLevelsWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeSupportedTemperatureLevelsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTemperatureControl) ReadAttributeSupportedTemperatureLevelsWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTemperatureControl) ReadAttributeSupportedTemperatureLevelsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -322,8 +330,10 @@ func (x *MTRBaseClusterTemperatureControl) ReadAttributeSupportedTemperatureLeve
 	}
 }
 
+// SubscribeAttributeSupportedTemperatureLevelsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeSupportedTemperatureLevelsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeSupportedTemperatureLevelsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeSupportedTemperatureLevelsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -345,8 +355,10 @@ func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeSupportedTemperatur
 	}
 }
 
+// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTemperatureControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTemperatureControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -368,8 +380,10 @@ func (x *MTRBaseClusterTemperatureControl) ReadAttributeGeneratedCommandListWith
 	}
 }
 
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -391,8 +405,10 @@ func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeGeneratedCommandLis
 	}
 }
 
+// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTemperatureControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTemperatureControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -414,8 +430,10 @@ func (x *MTRBaseClusterTemperatureControl) ReadAttributeAcceptedCommandListWithC
 	}
 }
 
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -437,8 +455,10 @@ func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeAcceptedCommandList
 	}
 }
 
+// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTemperatureControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTemperatureControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -460,8 +480,10 @@ func (x *MTRBaseClusterTemperatureControl) ReadAttributeAttributeListWithComplet
 	}
 }
 
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -483,8 +505,10 @@ func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeAttributeListWithPa
 	}
 }
 
+// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTemperatureControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTemperatureControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -506,8 +530,10 @@ func (x *MTRBaseClusterTemperatureControl) ReadAttributeFeatureMapWithCompletion
 	}
 }
 
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -529,8 +555,10 @@ func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeFeatureMapWithParam
 	}
 }
 
+// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+//
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTemperatureControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
+func (x *MTRBaseClusterTemperatureControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -552,8 +580,10 @@ func (x *MTRBaseClusterTemperatureControl) ReadAttributeClusterRevisionWithCompl
 	}
 }
 
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+//
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
+func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -603,3 +633,7 @@ type MTRBaseClusterTemperatureControlable interface {
 }
 
 var _ MTRBaseClusterTemperatureControlable = (*MTRBaseClusterTemperatureControl)(nil)
+
+var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterTemperatureControl)(nil)
+
+var _ MTRClusterProvider = (*MTRBaseClusterTemperatureControl)(nil)

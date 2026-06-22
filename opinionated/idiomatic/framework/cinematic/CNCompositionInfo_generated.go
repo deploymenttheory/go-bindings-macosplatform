@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that enables you to add the appropriate number of tracks for a Cinematic asset.
-//
 // CompositionInfo is an idiomatic wrapper over the Objective-C class CNCompositionInfo.
+//
+// It embeds [AssetInfo], promoting that type's methods.
+//
+// An object that enables you to add the appropriate number of tracks for a Cinematic asset.
 type CompositionInfo struct {
-	objref.Handle
+	AssetInfo
 }
 
 // CompositionInfoFromID adopts an existing Objective-C object as a CompositionInfo
@@ -25,7 +26,8 @@ func CompositionInfoFromID(id objc.ID) *CompositionInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &CompositionInfo{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CompositionInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func compositionInfoAdopt(id objc.ID) *CompositionInfo {
 	if id == 0 {
 		return nil
 	}
-	x := &CompositionInfo{Handle: objref.Wrap(id)}
+	x := &CompositionInfo{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *CompositionInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CompositionInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CompositionInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCompositionInfo creates a new CompositionInfo.
@@ -70,3 +58,5 @@ type CompositionInfoable interface {
 }
 
 var _ CompositionInfoable = (*CompositionInfo)(nil)
+
+var _ AssetInfoProvider = (*CompositionInfo)(nil)

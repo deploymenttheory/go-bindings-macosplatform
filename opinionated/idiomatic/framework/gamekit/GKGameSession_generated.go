@@ -14,9 +14,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A game session you can use to save game data, invite other players, and create turn-based and real-time game apps.
-//
 // GameSession is an idiomatic wrapper over the Objective-C class GKGameSession.
+//
+// A game session you can use to save game data, invite other players, and create turn-based and real-time game apps.
 type GameSession struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func GameSessionFromID(id objc.ID) *GameSession {
 	if id == 0 {
 		return nil
 	}
-	x := &GameSession{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GameSession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func gameSessionAdopt(id objc.ID) *GameSession {
 	if id == 0 {
 		return nil
 	}
-	x := &GameSession{Handle: objref.Wrap(id)}
+	x := &GameSession{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,16 +62,22 @@ func (x *GameSession) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GameSession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewGameSession creates a new GameSession.
 func NewGameSession() *GameSession {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKGameSession")), objc.RegisterName("new"))
 	return gameSessionAdopt(_id)
 }
 
-// Retrieves the URL used to share a game session.
+// GetShareURL retrieves the URL used to share a game session.
 //
 // GetShareURL blocks until the operation completes or ctx is cancelled.
-func (x *GameSession) GetShareURL(ctx context.Context) (obj.Object, error) {
+func (x *GameSession) GetShareURL(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -91,10 +99,10 @@ func (x *GameSession) GetShareURL(ctx context.Context) (obj.Object, error) {
 	}
 }
 
-// Retrieves the game data from the current game session.
+// LoadData retrieves the game data from the current game session.
 //
 // LoadData blocks until the operation completes or ctx is cancelled.
-func (x *GameSession) LoadData(ctx context.Context) (obj.Object, error) {
+func (x *GameSession) LoadData(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -116,10 +124,10 @@ func (x *GameSession) LoadData(ctx context.Context) (obj.Object, error) {
 	}
 }
 
-// Saves the current game session data.
+// SaveData saves the current game session data.
 //
 // SaveData blocks until the operation completes or ctx is cancelled.
-func (x *GameSession) SaveData(ctx context.Context, data obj.Object) (obj.Object, error) {
+func (x *GameSession) SaveData(ctx context.Context, data obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -141,7 +149,7 @@ func (x *GameSession) SaveData(ctx context.Context, data obj.Object) (obj.Object
 	}
 }
 
-// Sets the connection state for the player.
+// SetConnectionState sets the connection state for the player.
 //
 // SetConnectionState blocks until the operation completes or ctx is cancelled.
 func (x *GameSession) SetConnectionState(ctx context.Context, state ConnectionState) error {
@@ -160,13 +168,13 @@ func (x *GameSession) SetConnectionState(ctx context.Context, state ConnectionSt
 	}
 }
 
-// Retrieves a list of players with the specified connection state.
+// PlayersWithConnectionState retrieves a list of players with the specified connection state.
 func (x *GameSession) PlayersWithConnectionState(state ConnectionState) []*CloudPlayer {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playersWithConnectionState:"), state)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *CloudPlayer { return CloudPlayerFromID(_id) })
 }
 
-// Sends the indicated data to all connected players.
+// SendDataWithTransportType sends the indicated data to all connected players.
 //
 // SendDataWithTransportType blocks until the operation completes or ctx is cancelled.
 func (x *GameSession) SendDataWithTransportType(ctx context.Context, data obj.Object, transport TransportType) error {
@@ -185,7 +193,7 @@ func (x *GameSession) SendDataWithTransportType(ctx context.Context, data obj.Ob
 	}
 }
 
-// Sends a message to players in a game session.
+// SendMessageWithLocalizedFormatKeyArgumentsDataToPlayersBadgePlayers sends a message to players in a game session.
 //
 // SendMessageWithLocalizedFormatKeyArgumentsDataToPlayersBadgePlayers blocks until the operation completes or ctx is cancelled.
 func (x *GameSession) SendMessageWithLocalizedFormatKeyArgumentsDataToPlayersBadgePlayers(ctx context.Context, key string, arguments []string, data obj.Object, players []*CloudPlayer, badgePlayers bool) error {
@@ -204,7 +212,7 @@ func (x *GameSession) SendMessageWithLocalizedFormatKeyArgumentsDataToPlayersBad
 	}
 }
 
-// Clears the badge from the designated players.
+// ClearBadgeForPlayers clears the badge from the designated players.
 //
 // ClearBadgeForPlayers blocks until the operation completes or ctx is cancelled.
 func (x *GameSession) ClearBadgeForPlayers(ctx context.Context, players []*CloudPlayer) error {
@@ -223,6 +231,7 @@ func (x *GameSession) ClearBadgeForPlayers(ctx context.Context, players []*Cloud
 	}
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *GameSession) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -231,6 +240,7 @@ func (x *GameSession) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// Title wraps the corresponding Objective-C method.
 func (x *GameSession) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
 	if _r == 0 {
@@ -239,32 +249,40 @@ func (x *GameSession) Title() string {
 	return purego.GoString(_r)
 }
 
+// Owner wraps the corresponding Objective-C method.
 func (x *GameSession) Owner() *CloudPlayer {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("owner"))
 	return CloudPlayerFromID(_r)
 }
 
+// Players wraps the corresponding Objective-C method.
+//
 // Players returns the collection as a Go slice.
 func (x *GameSession) Players() []*CloudPlayer {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("players"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CloudPlayer { return CloudPlayerFromID(_id) })
 }
 
+// LastModifiedDate wraps the corresponding Objective-C method.
 func (x *GameSession) LastModifiedDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastModifiedDate"))
 	return obj.Wrap(_r)
 }
 
+// LastModifiedPlayer wraps the corresponding Objective-C method.
 func (x *GameSession) LastModifiedPlayer() *CloudPlayer {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastModifiedPlayer"))
 	return CloudPlayerFromID(_r)
 }
 
+// MaxNumberOfConnectedPlayers wraps the corresponding Objective-C method.
 func (x *GameSession) MaxNumberOfConnectedPlayers() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxNumberOfConnectedPlayers"))
 	return _r
 }
 
+// BadgedPlayers wraps the corresponding Objective-C method.
+//
 // BadgedPlayers returns the collection as a Go slice.
 func (x *GameSession) BadgedPlayers() []*CloudPlayer {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("badgedPlayers"))

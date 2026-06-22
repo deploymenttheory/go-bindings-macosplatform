@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An item in a split view controller.
-//
 // SplitViewItem is an idiomatic wrapper over the Objective-C class NSSplitViewItem.
+//
+// An item in a split view controller.
 type SplitViewItem struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SplitViewItemFromID(id objc.ID) *SplitViewItem {
 	if id == 0 {
 		return nil
 	}
-	x := &SplitViewItem{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SplitViewItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func splitViewItemAdopt(id objc.ID) *SplitViewItem {
 	if id == 0 {
 		return nil
 	}
-	x := &SplitViewItem{Handle: objref.Wrap(id)}
+	x := &SplitViewItem{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,327 +60,307 @@ func (x *SplitViewItem) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SplitViewItem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewSplitViewItem creates a new SplitViewItem.
 func NewSplitViewItem() *SplitViewItem {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSSplitViewItem")), objc.RegisterName("new"))
 	return splitViewItemAdopt(_id)
 }
 
-// The view controller that the split view item represents.
-//
-// WithViewController sets viewController and returns the receiver so calls can be chained.
+// WithViewController the view controller that the split view item represents.
 func (x *SplitViewItem) WithViewController(viewController ViewControllerProvider) *SplitViewItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewController:"), objref.IDOf(viewController))
 	return x
 }
 
-// A Boolean value that determines whether the child view controller that corresponds to the split view item is in a collapsed state in the split view controller.
-//
-// WithCollapsed sets collapsed and returns the receiver so calls can be chained.
+// WithCollapsed a Boolean value that determines whether the child view controller that corresponds to the split view item is in a collapsed state in the split view controller.
 func (x *SplitViewItem) WithCollapsed(collapsed bool) *SplitViewItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapsed:"), collapsed)
 	return x
 }
 
-// A Boolean value that determines whether a user interaction can collapse the child view controller that corresponds to the split view item.
-//
-// WithCanCollapse sets canCollapse and returns the receiver so calls can be chained.
+// WithCanCollapse a Boolean value that determines whether a user interaction can collapse the child view controller that corresponds to the split view item.
 func (x *SplitViewItem) WithCanCollapse(canCollapse bool) *SplitViewItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanCollapse:"), canCollapse)
 	return x
 }
 
-// The resizing behavior when the split view item toggles its collapsed state.
-//
-// WithCollapseBehavior sets collapseBehavior and returns the receiver so calls can be chained.
+// WithCollapseBehavior the resizing behavior when the split view item toggles its collapsed state.
 func (x *SplitViewItem) WithCollapseBehavior(collapseBehavior SplitViewItemCollapseBehavior) *SplitViewItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapseBehavior:"), collapseBehavior)
 	return x
 }
 
-// The minimum thickness of the split view item.
-//
-// WithMinimumThickness sets minimumThickness and returns the receiver so calls can be chained.
+// WithMinimumThickness the minimum thickness of the split view item.
 func (x *SplitViewItem) WithMinimumThickness(minimumThickness float64) *SplitViewItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumThickness:"), minimumThickness)
 	return x
 }
 
-// The maximum thickness of the split view item.
-//
-// WithMaximumThickness sets maximumThickness and returns the receiver so calls can be chained.
+// WithMaximumThickness the maximum thickness of the split view item.
 func (x *SplitViewItem) WithMaximumThickness(maximumThickness float64) *SplitViewItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumThickness:"), maximumThickness)
 	return x
 }
 
-// The preferred thickness of the split view item relative to the split view.
-//
-// WithPreferredThicknessFraction sets preferredThicknessFraction and returns the receiver so calls can be chained.
+// WithPreferredThicknessFraction the preferred thickness of the split view item relative to the split view.
 func (x *SplitViewItem) WithPreferredThicknessFraction(preferredThicknessFraction float64) *SplitViewItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredThicknessFraction:"), preferredThicknessFraction)
 	return x
 }
 
-// The priority for a split view item to hold its size.
-//
-// WithHoldingPriority sets holdingPriority and returns the receiver so calls can be chained.
+// WithHoldingPriority the priority for a split view item to hold its size.
 func (x *SplitViewItem) WithHoldingPriority(holdingPriority float32) *SplitViewItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHoldingPriority:"), holdingPriority)
 	return x
 }
 
-// The maximum thickness of the split view item when it resizes due to automatic sizing.
-//
-// WithAutomaticMaximumThickness sets automaticMaximumThickness and returns the receiver so calls can be chained.
+// WithAutomaticMaximumThickness the maximum thickness of the split view item when it resizes due to automatic sizing.
 func (x *SplitViewItem) WithAutomaticMaximumThickness(automaticMaximumThickness float64) *SplitViewItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticMaximumThickness:"), automaticMaximumThickness)
 	return x
 }
 
-// A Boolean value that determines whether the split view item can temporarily expand during a drag.
-//
-// WithSpringLoaded sets springLoaded and returns the receiver so calls can be chained.
+// WithSpringLoaded a Boolean value that determines whether the split view item can temporarily expand during a drag.
 func (x *SplitViewItem) WithSpringLoaded(springLoaded bool) *SplitViewItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpringLoaded:"), springLoaded)
 	return x
 }
 
-// A Boolean value that determines whether a window resize can collapse the child view controller that corresponds to the split view item.
-//
-// WithCanCollapseFromWindowResize sets canCollapseFromWindowResize and returns the receiver so calls can be chained.
+// WithCanCollapseFromWindowResize a Boolean value that determines whether a window resize can collapse the child view controller that corresponds to the split view item.
 func (x *SplitViewItem) WithCanCollapseFromWindowResize(canCollapseFromWindowResize bool) *SplitViewItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanCollapseFromWindowResize:"), canCollapseFromWindowResize)
 	return x
 }
 
-// A Boolean value that indicates whether full-height sidebars appear in the window after you set a style mask.
-//
-// WithAllowsFullHeightLayout sets allowsFullHeightLayout and returns the receiver so calls can be chained.
+// WithAllowsFullHeightLayout a Boolean value that indicates whether full-height sidebars appear in the window after you set a style mask.
 func (x *SplitViewItem) WithAllowsFullHeightLayout(allowsFullHeightLayout bool) *SplitViewItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsFullHeightLayout:"), allowsFullHeightLayout)
 	return x
 }
 
-// The type of separator that the app displays between the title bar and content of a window.
-//
-// WithTitlebarSeparatorStyle sets titlebarSeparatorStyle and returns the receiver so calls can be chained.
+// WithTitlebarSeparatorStyle the type of separator that the app displays between the title bar and content of a window.
 func (x *SplitViewItem) WithTitlebarSeparatorStyle(titlebarSeparatorStyle TitlebarSeparatorStyle) *SplitViewItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlebarSeparatorStyle:"), titlebarSeparatorStyle)
 	return x
 }
 
-// When YES, other items such as sidebars or inspectors may appear overlaid on top of this item’s viewController and this item’s safeAreaInsets will be adjusted with respect to overlaid content. Defaults to NO.
-//
-// WithAutomaticallyAdjustsSafeAreaInsets sets automaticallyAdjustsSafeAreaInsets and returns the receiver so calls can be chained.
+// WithAutomaticallyAdjustsSafeAreaInsets when YES, other items such as sidebars or inspectors may appear overlaid on top of this item’s viewController and this item’s safeAreaInsets will be adjusted with respect to overlaid content. Defaults to NO.
 func (x *SplitViewItem) WithAutomaticallyAdjustsSafeAreaInsets(automaticallyAdjustsSafeAreaInsets bool) *SplitViewItem {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyAdjustsSafeAreaInsets:"), automaticallyAdjustsSafeAreaInsets)
 	return x
 }
 
-// The following methods allow you to add accessory views to the top/bottom of this splitViewItem. See NSSplitViewItemAccessoryViewController for more details.
-//
-// WithTopAlignedAccessoryViewControllers sets the collection and returns the receiver so calls can be chained.
+// WithTopAlignedAccessoryViewControllers the following methods allow you to add accessory views to the top/bottom of this splitViewItem. See NSSplitViewItemAccessoryViewController for more details.
 func (x *SplitViewItem) WithTopAlignedAccessoryViewControllers(items ...*SplitViewItemAccessoryViewController) *SplitViewItem {
 	_arr := purego.SliceToNSArray(items, func(_v *SplitViewItemAccessoryViewController) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTopAlignedAccessoryViewControllers:"), _arr)
 	return x
 }
 
-// WithBottomAlignedAccessoryViewControllers sets the collection and returns the receiver so calls can be chained.
+// WithBottomAlignedAccessoryViewControllers sets the property and returns the receiver so calls can be chained.
 func (x *SplitViewItem) WithBottomAlignedAccessoryViewControllers(items ...*SplitViewItemAccessoryViewController) *SplitViewItem {
 	_arr := purego.SliceToNSArray(items, func(_v *SplitViewItemAccessoryViewController) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBottomAlignedAccessoryViewControllers:"), _arr)
 	return x
 }
 
+// AddTopAlignedAccessoryViewController wraps the corresponding Objective-C method.
 func (x *SplitViewItem) AddTopAlignedAccessoryViewController(childViewController *SplitViewItemAccessoryViewController) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTopAlignedAccessoryViewController:"), objref.IDOf(childViewController))
 }
 
+// InsertTopAlignedAccessoryViewControllerAtIndex wraps the corresponding Objective-C method.
 func (x *SplitViewItem) InsertTopAlignedAccessoryViewControllerAtIndex(childViewController *SplitViewItemAccessoryViewController, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertTopAlignedAccessoryViewController:atIndex:"), objref.IDOf(childViewController), index)
 }
 
-// NOTE: you can use this method, or -removeFromParentViewController:, whichever is easier.
+// RemoveTopAlignedAccessoryViewControllerAtIndex NOTE: you can use this method, or -removeFromParentViewController:, whichever is easier.
 func (x *SplitViewItem) RemoveTopAlignedAccessoryViewControllerAtIndex(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTopAlignedAccessoryViewControllerAtIndex:"), index)
 }
 
+// AddBottomAlignedAccessoryViewController wraps the corresponding Objective-C method.
 func (x *SplitViewItem) AddBottomAlignedAccessoryViewController(childViewController *SplitViewItemAccessoryViewController) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addBottomAlignedAccessoryViewController:"), objref.IDOf(childViewController))
 }
 
+// InsertBottomAlignedAccessoryViewControllerAtIndex wraps the corresponding Objective-C method.
 func (x *SplitViewItem) InsertBottomAlignedAccessoryViewControllerAtIndex(childViewController *SplitViewItemAccessoryViewController, index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertBottomAlignedAccessoryViewController:atIndex:"), objref.IDOf(childViewController), index)
 }
 
-// NOTE: you can use this method, or -removeFromParentViewController:, whichever is easier.
+// RemoveBottomAlignedAccessoryViewControllerAtIndex NOTE: you can use this method, or -removeFromParentViewController:, whichever is easier.
 func (x *SplitViewItem) RemoveBottomAlignedAccessoryViewControllerAtIndex(index int) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeBottomAlignedAccessoryViewControllerAtIndex:"), index)
 }
 
-// The standard behavior type of the receiver. See initializers for descriptions of each behavior.
+// Behavior the standard behavior type of the receiver. See initializers for descriptions of each behavior.
 func (x *SplitViewItem) Behavior() SplitViewItemBehavior {
 	_r := objc.Send[SplitViewItemBehavior](objref.IDOf(x), objc.RegisterName("behavior"))
 	return _r
 }
 
-// The view controller represented by the SplitViewItem. An exception will be thrown if a new viewController is set while the receiving SplitViewItem is added to a SplitViewController.
+// ViewController the view controller represented by the SplitViewItem. An exception will be thrown if a new viewController is set while the receiving SplitViewItem is added to a SplitViewController.
 func (x *SplitViewItem) ViewController() *ViewController {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewController"))
 	return ViewControllerFromID(_r)
 }
 
-// The view controller represented by the SplitViewItem. An exception will be thrown if a new viewController is set while the receiving SplitViewItem is added to a SplitViewController.
+// SetViewController the view controller represented by the SplitViewItem. An exception will be thrown if a new viewController is set while the receiving SplitViewItem is added to a SplitViewController.
 func (x *SplitViewItem) SetViewController(viewController *ViewController) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewController:"), objref.IDOf(viewController))
 }
 
-// Whether or not the child ViewController corresponding to the SplitViewItem is collapsed in the SplitViewController. The default is \c NO. This can be set with the animator proxy to animate the collapse or uncollapse. The exact animation used can be customized by setting it in the -animations dictionary with a key of "collapsed". If this is set to YES before it is added to the SplitViewController, it will be initially collapsed and the SplitViewController will not cause the view to be loaded until it is uncollapsed. This is KVC/KVO compliant and will be updated if the value changes from user interaction.
+// IsCollapsed whether or not the child ViewController corresponding to the SplitViewItem is collapsed in the SplitViewController. The default is \c NO. This can be set with the animator proxy to animate the collapse or uncollapse. The exact animation used can be customized by setting it in the -animations dictionary with a key of "collapsed". If this is set to YES before it is added to the SplitViewController, it will be initially collapsed and the SplitViewController will not cause the view to be loaded until it is uncollapsed. This is KVC/KVO compliant and will be updated if the value changes from user interaction.
 func (x *SplitViewItem) IsCollapsed() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCollapsed"))
 	return _r
 }
 
-// Whether or not the child ViewController corresponding to the SplitViewItem is collapsed in the SplitViewController. The default is \c NO. This can be set with the animator proxy to animate the collapse or uncollapse. The exact animation used can be customized by setting it in the -animations dictionary with a key of "collapsed". If this is set to YES before it is added to the SplitViewController, it will be initially collapsed and the SplitViewController will not cause the view to be loaded until it is uncollapsed. This is KVC/KVO compliant and will be updated if the value changes from user interaction.
+// SetCollapsed whether or not the child ViewController corresponding to the SplitViewItem is collapsed in the SplitViewController. The default is \c NO. This can be set with the animator proxy to animate the collapse or uncollapse. The exact animation used can be customized by setting it in the -animations dictionary with a key of "collapsed". If this is set to YES before it is added to the SplitViewController, it will be initially collapsed and the SplitViewController will not cause the view to be loaded until it is uncollapsed. This is KVC/KVO compliant and will be updated if the value changes from user interaction.
 func (x *SplitViewItem) SetCollapsed(collapsed bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapsed:"), collapsed)
 }
 
-// Whether or not the child view controller is collapsible from user interaction - whether by dragging or double clicking a divider. The default is \c NO.
+// CanCollapse whether or not the child view controller is collapsible from user interaction - whether by dragging or double clicking a divider. The default is \c NO.
 func (x *SplitViewItem) CanCollapse() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canCollapse"))
 	return _r
 }
 
-// Whether or not the child view controller is collapsible from user interaction - whether by dragging or double clicking a divider. The default is \c NO.
+// SetCanCollapse whether or not the child view controller is collapsible from user interaction - whether by dragging or double clicking a divider. The default is \c NO.
 func (x *SplitViewItem) SetCanCollapse(canCollapse bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanCollapse:"), canCollapse)
 }
 
-// The resize behavior when the receiver toggles its `collapsed` state programmatically, both animatedly and not. Defaults to `.Default`.
+// CollapseBehavior the resize behavior when the receiver toggles its `collapsed` state programmatically, both animatedly and not. Defaults to `.Default`.
 func (x *SplitViewItem) CollapseBehavior() SplitViewItemCollapseBehavior {
 	_r := objc.Send[SplitViewItemCollapseBehavior](objref.IDOf(x), objc.RegisterName("collapseBehavior"))
 	return _r
 }
 
-// The resize behavior when the receiver toggles its `collapsed` state programmatically, both animatedly and not. Defaults to `.Default`.
+// SetCollapseBehavior the resize behavior when the receiver toggles its `collapsed` state programmatically, both animatedly and not. Defaults to `.Default`.
 func (x *SplitViewItem) SetCollapseBehavior(collapseBehavior SplitViewItemCollapseBehavior) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapseBehavior:"), collapseBehavior)
 }
 
-// A convenience to set the minimum thickness of the split view item -- width for "vertical" split views, height otherwise. If NSSplitViewItemUnspecifiedDimension, no minimum size is enforced by the SplitViewItem, although constraints in the contained view hierarchy might have constraints specify some minimum size on their own. Defaults to NSSplitViewItemUnspecifiedDimension.
+// MinimumThickness a convenience to set the minimum thickness of the split view item -- width for "vertical" split views, height otherwise. If NSSplitViewItemUnspecifiedDimension, no minimum size is enforced by the SplitViewItem, although constraints in the contained view hierarchy might have constraints specify some minimum size on their own. Defaults to NSSplitViewItemUnspecifiedDimension.
 func (x *SplitViewItem) MinimumThickness() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumThickness"))
 	return _r
 }
 
-// A convenience to set the minimum thickness of the split view item -- width for "vertical" split views, height otherwise. If NSSplitViewItemUnspecifiedDimension, no minimum size is enforced by the SplitViewItem, although constraints in the contained view hierarchy might have constraints specify some minimum size on their own. Defaults to NSSplitViewItemUnspecifiedDimension.
+// SetMinimumThickness a convenience to set the minimum thickness of the split view item -- width for "vertical" split views, height otherwise. If NSSplitViewItemUnspecifiedDimension, no minimum size is enforced by the SplitViewItem, although constraints in the contained view hierarchy might have constraints specify some minimum size on their own. Defaults to NSSplitViewItemUnspecifiedDimension.
 func (x *SplitViewItem) SetMinimumThickness(minimumThickness float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumThickness:"), minimumThickness)
 }
 
-// A convenience to set the maximum thickness of the split view item -- width for "vertical" split views, height otherwise. If NSSplitViewItemUnspecifiedDimension, no maximum size is enforced by the SplitViewItem, although constraints in the contained view hierarchy might have constraints specify some maximum size on their own. Defaults to NSSplitViewItemUnspecifiedDimension.
+// MaximumThickness a convenience to set the maximum thickness of the split view item -- width for "vertical" split views, height otherwise. If NSSplitViewItemUnspecifiedDimension, no maximum size is enforced by the SplitViewItem, although constraints in the contained view hierarchy might have constraints specify some maximum size on their own. Defaults to NSSplitViewItemUnspecifiedDimension.
 func (x *SplitViewItem) MaximumThickness() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumThickness"))
 	return _r
 }
 
-// A convenience to set the maximum thickness of the split view item -- width for "vertical" split views, height otherwise. If NSSplitViewItemUnspecifiedDimension, no maximum size is enforced by the SplitViewItem, although constraints in the contained view hierarchy might have constraints specify some maximum size on their own. Defaults to NSSplitViewItemUnspecifiedDimension.
+// SetMaximumThickness a convenience to set the maximum thickness of the split view item -- width for "vertical" split views, height otherwise. If NSSplitViewItemUnspecifiedDimension, no maximum size is enforced by the SplitViewItem, although constraints in the contained view hierarchy might have constraints specify some maximum size on their own. Defaults to NSSplitViewItemUnspecifiedDimension.
 func (x *SplitViewItem) SetMaximumThickness(maximumThickness float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumThickness:"), maximumThickness)
 }
 
-// The percentage of the contained NSSplitView that the NSSplitViewItem prefers to encompass. This is used when double-clicking on a neighbor divider to return to that standard ratio. As well as after entering fullscreen to determine the initial size of the receiver. Defaults to NSSplitViewItemUnspecifiedDimension, which means no resize will occur on double-clicks, and the absolute size is preserved when entering fullscreen.
+// PreferredThicknessFraction the percentage of the contained NSSplitView that the NSSplitViewItem prefers to encompass. This is used when double-clicking on a neighbor divider to return to that standard ratio. As well as after entering fullscreen to determine the initial size of the receiver. Defaults to NSSplitViewItemUnspecifiedDimension, which means no resize will occur on double-clicks, and the absolute size is preserved when entering fullscreen.
 func (x *SplitViewItem) PreferredThicknessFraction() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("preferredThicknessFraction"))
 	return _r
 }
 
-// The percentage of the contained NSSplitView that the NSSplitViewItem prefers to encompass. This is used when double-clicking on a neighbor divider to return to that standard ratio. As well as after entering fullscreen to determine the initial size of the receiver. Defaults to NSSplitViewItemUnspecifiedDimension, which means no resize will occur on double-clicks, and the absolute size is preserved when entering fullscreen.
+// SetPreferredThicknessFraction the percentage of the contained NSSplitView that the NSSplitViewItem prefers to encompass. This is used when double-clicking on a neighbor divider to return to that standard ratio. As well as after entering fullscreen to determine the initial size of the receiver. Defaults to NSSplitViewItemUnspecifiedDimension, which means no resize will occur on double-clicks, and the absolute size is preserved when entering fullscreen.
 func (x *SplitViewItem) SetPreferredThicknessFraction(preferredThicknessFraction float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredThicknessFraction:"), preferredThicknessFraction)
 }
 
-// Sets the priority under which a SplitViewItem will hold its width (for a vertical split view) or height (for a horizontal split view). The view with the lowest priority will be the first to take on additional width if the split view grows or shrinks. The default is \c NSLayoutPriorityDefaultLow.
+// HoldingPriority sets the priority under which a SplitViewItem will hold its width (for a vertical split view) or height (for a horizontal split view). The view with the lowest priority will be the first to take on additional width if the split view grows or shrinks. The default is \c NSLayoutPriorityDefaultLow.
 func (x *SplitViewItem) HoldingPriority() float32 {
 	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("holdingPriority"))
 	return _r
 }
 
-// Sets the priority under which a SplitViewItem will hold its width (for a vertical split view) or height (for a horizontal split view). The view with the lowest priority will be the first to take on additional width if the split view grows or shrinks. The default is \c NSLayoutPriorityDefaultLow.
+// SetHoldingPriority sets the priority under which a SplitViewItem will hold its width (for a vertical split view) or height (for a horizontal split view). The view with the lowest priority will be the first to take on additional width if the split view grows or shrinks. The default is \c NSLayoutPriorityDefaultLow.
 func (x *SplitViewItem) SetHoldingPriority(holdingPriority float32) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHoldingPriority:"), holdingPriority)
 }
 
-// The maximum thickness of the split view item when resizing due to automatic sizing, such as entering fullscreen with a set preferredThicknessFraction or proportional sizing. The user can still resize up to the absolute maximum size by dragging the divider or otherwise. If NSSplitViewItemUnspecifiedDimension, no automatic maximum is enforced. Defaults to NSSplitViewItemUnspecifiedDimension.
+// AutomaticMaximumThickness the maximum thickness of the split view item when resizing due to automatic sizing, such as entering fullscreen with a set preferredThicknessFraction or proportional sizing. The user can still resize up to the absolute maximum size by dragging the divider or otherwise. If NSSplitViewItemUnspecifiedDimension, no automatic maximum is enforced. Defaults to NSSplitViewItemUnspecifiedDimension.
 func (x *SplitViewItem) AutomaticMaximumThickness() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("automaticMaximumThickness"))
 	return _r
 }
 
-// The maximum thickness of the split view item when resizing due to automatic sizing, such as entering fullscreen with a set preferredThicknessFraction or proportional sizing. The user can still resize up to the absolute maximum size by dragging the divider or otherwise. If NSSplitViewItemUnspecifiedDimension, no automatic maximum is enforced. Defaults to NSSplitViewItemUnspecifiedDimension.
+// SetAutomaticMaximumThickness the maximum thickness of the split view item when resizing due to automatic sizing, such as entering fullscreen with a set preferredThicknessFraction or proportional sizing. The user can still resize up to the absolute maximum size by dragging the divider or otherwise. If NSSplitViewItemUnspecifiedDimension, no automatic maximum is enforced. Defaults to NSSplitViewItemUnspecifiedDimension.
 func (x *SplitViewItem) SetAutomaticMaximumThickness(automaticMaximumThickness float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticMaximumThickness:"), automaticMaximumThickness)
 }
 
-// If YES, the split view item can be temporarily uncollapsed during a drag by hovering or deep clicking on its neighboring divider. Defaults to NO.
+// IsSpringLoaded if YES, the split view item can be temporarily uncollapsed during a drag by hovering or deep clicking on its neighboring divider. Defaults to NO.
 func (x *SplitViewItem) IsSpringLoaded() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSpringLoaded"))
 	return _r
 }
 
-// If YES, the split view item can be temporarily uncollapsed during a drag by hovering or deep clicking on its neighboring divider. Defaults to NO.
+// SetSpringLoaded if YES, the split view item can be temporarily uncollapsed during a drag by hovering or deep clicking on its neighboring divider. Defaults to NO.
 func (x *SplitViewItem) SetSpringLoaded(springLoaded bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpringLoaded:"), springLoaded)
 }
 
-// If YES, the item can be collapsed from a window resize. This can differ from `canCollapse`, to allow divider collapsing but not window resize collapsing or vice versa. Defaults to YES for Sidebars and NO for Inspectors. - Note: Setting `canCollapse` for sidebars will reset this value to that new value.
+// CanCollapseFromWindowResize if YES, the item can be collapsed from a window resize. This can differ from `canCollapse`, to allow divider collapsing but not window resize collapsing or vice versa. Defaults to YES for Sidebars and NO for Inspectors. - Note: Setting `canCollapse` for sidebars will reset this value to that new value.
 func (x *SplitViewItem) CanCollapseFromWindowResize() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canCollapseFromWindowResize"))
 	return _r
 }
 
-// If YES, the item can be collapsed from a window resize. This can differ from `canCollapse`, to allow divider collapsing but not window resize collapsing or vice versa. Defaults to YES for Sidebars and NO for Inspectors. - Note: Setting `canCollapse` for sidebars will reset this value to that new value.
+// SetCanCollapseFromWindowResize if YES, the item can be collapsed from a window resize. This can differ from `canCollapse`, to allow divider collapsing but not window resize collapsing or vice versa. Defaults to YES for Sidebars and NO for Inspectors. - Note: Setting `canCollapse` for sidebars will reset this value to that new value.
 func (x *SplitViewItem) SetCanCollapseFromWindowResize(canCollapseFromWindowResize bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanCollapseFromWindowResize:"), canCollapseFromWindowResize)
 }
 
-// Whether or not a sidebar or inspector is allowed to be full height in the window when the `NSFullSizeContentViewWindowMask` style mask is also set. Only applies to NSSplitViewItemBehaviorSidebar and NSSplitViewItemBehaviorInspector. Defaults to YES.
+// AllowsFullHeightLayout whether or not a sidebar or inspector is allowed to be full height in the window when the `NSFullSizeContentViewWindowMask` style mask is also set. Only applies to NSSplitViewItemBehaviorSidebar and NSSplitViewItemBehaviorInspector. Defaults to YES.
 func (x *SplitViewItem) AllowsFullHeightLayout() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsFullHeightLayout"))
 	return _r
 }
 
-// Whether or not a sidebar or inspector is allowed to be full height in the window when the `NSFullSizeContentViewWindowMask` style mask is also set. Only applies to NSSplitViewItemBehaviorSidebar and NSSplitViewItemBehaviorInspector. Defaults to YES.
+// SetAllowsFullHeightLayout whether or not a sidebar or inspector is allowed to be full height in the window when the `NSFullSizeContentViewWindowMask` style mask is also set. Only applies to NSSplitViewItemBehaviorSidebar and NSSplitViewItemBehaviorInspector. Defaults to YES.
 func (x *SplitViewItem) SetAllowsFullHeightLayout(allowsFullHeightLayout bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsFullHeightLayout:"), allowsFullHeightLayout)
 }
 
-// Specifies a preference for the style of separator displayed between the titlebar and the content of the split view item. For this value to be applicable, the item's view must be associated with its own titlebar section (see `NSTrackingSeparatorToolbarItem` for more info). The default value is NSTitlebarSeparatorStyleAutomatic. This value is subject to the containing window's preference and can be overridden.
+// TitlebarSeparatorStyle specifies a preference for the style of separator displayed between the titlebar and the content of the split view item. For this value to be applicable, the item's view must be associated with its own titlebar section (see `NSTrackingSeparatorToolbarItem` for more info). The default value is NSTitlebarSeparatorStyleAutomatic. This value is subject to the containing window's preference and can be overridden.
 func (x *SplitViewItem) TitlebarSeparatorStyle() TitlebarSeparatorStyle {
 	_r := objc.Send[TitlebarSeparatorStyle](objref.IDOf(x), objc.RegisterName("titlebarSeparatorStyle"))
 	return _r
 }
 
-// Specifies a preference for the style of separator displayed between the titlebar and the content of the split view item. For this value to be applicable, the item's view must be associated with its own titlebar section (see `NSTrackingSeparatorToolbarItem` for more info). The default value is NSTitlebarSeparatorStyleAutomatic. This value is subject to the containing window's preference and can be overridden.
+// SetTitlebarSeparatorStyle specifies a preference for the style of separator displayed between the titlebar and the content of the split view item. For this value to be applicable, the item's view must be associated with its own titlebar section (see `NSTrackingSeparatorToolbarItem` for more info). The default value is NSTitlebarSeparatorStyleAutomatic. This value is subject to the containing window's preference and can be overridden.
 func (x *SplitViewItem) SetTitlebarSeparatorStyle(titlebarSeparatorStyle TitlebarSeparatorStyle) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlebarSeparatorStyle:"), titlebarSeparatorStyle)
 }
 
-// When YES, other items such as sidebars or inspectors may appear overlaid on top of this item's `viewController` and this item's `safeAreaInsets` will be adjusted with respect to overlaid content. Defaults to `NO`.
+// AutomaticallyAdjustsSafeAreaInsets when YES, other items such as sidebars or inspectors may appear overlaid on top of this item's `viewController` and this item's `safeAreaInsets` will be adjusted with respect to overlaid content. Defaults to `NO`.
 func (x *SplitViewItem) AutomaticallyAdjustsSafeAreaInsets() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallyAdjustsSafeAreaInsets"))
 	return _r
 }
 
-// When YES, other items such as sidebars or inspectors may appear overlaid on top of this item's `viewController` and this item's `safeAreaInsets` will be adjusted with respect to overlaid content. Defaults to `NO`.
+// SetAutomaticallyAdjustsSafeAreaInsets when YES, other items such as sidebars or inspectors may appear overlaid on top of this item's `viewController` and this item's `safeAreaInsets` will be adjusted with respect to overlaid content. Defaults to `NO`.
 func (x *SplitViewItem) SetAutomaticallyAdjustsSafeAreaInsets(automaticallyAdjustsSafeAreaInsets bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyAdjustsSafeAreaInsets:"), automaticallyAdjustsSafeAreaInsets)
 }
 
-// The following methods allow you to add accessory views to the top/bottom of this splitViewItem. See `NSSplitViewItemAccessoryViewController` for more details.
+// TopAlignedAccessoryViewControllers the following methods allow you to add accessory views to the top/bottom of this splitViewItem. See `NSSplitViewItemAccessoryViewController` for more details.
 //
 // TopAlignedAccessoryViewControllers returns the collection as a Go slice.
 func (x *SplitViewItem) TopAlignedAccessoryViewControllers() []*SplitViewItemAccessoryViewController {
@@ -388,11 +370,13 @@ func (x *SplitViewItem) TopAlignedAccessoryViewControllers() []*SplitViewItemAcc
 	})
 }
 
-// The following methods allow you to add accessory views to the top/bottom of this splitViewItem. See `NSSplitViewItemAccessoryViewController` for more details.
+// SetTopAlignedAccessoryViewControllers the following methods allow you to add accessory views to the top/bottom of this splitViewItem. See `NSSplitViewItemAccessoryViewController` for more details.
 func (x *SplitViewItem) SetTopAlignedAccessoryViewControllers(topAlignedAccessoryViewControllers []*SplitViewItemAccessoryViewController) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTopAlignedAccessoryViewControllers:"), purego.SliceToNSArray(topAlignedAccessoryViewControllers, func(_v *SplitViewItemAccessoryViewController) objc.ID { return objref.IDOf(_v) }))
 }
 
+// BottomAlignedAccessoryViewControllers wraps the corresponding Objective-C method.
+//
 // BottomAlignedAccessoryViewControllers returns the collection as a Go slice.
 func (x *SplitViewItem) BottomAlignedAccessoryViewControllers() []*SplitViewItemAccessoryViewController {
 	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bottomAlignedAccessoryViewControllers"))
@@ -401,6 +385,7 @@ func (x *SplitViewItem) BottomAlignedAccessoryViewControllers() []*SplitViewItem
 	})
 }
 
+// SetBottomAlignedAccessoryViewControllers wraps the corresponding Objective-C method.
 func (x *SplitViewItem) SetBottomAlignedAccessoryViewControllers(bottomAlignedAccessoryViewControllers []*SplitViewItemAccessoryViewController) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBottomAlignedAccessoryViewControllers:"), purego.SliceToNSArray(bottomAlignedAccessoryViewControllers, func(_v *SplitViewItemAccessoryViewController) objc.ID { return objref.IDOf(_v) }))
 }

@@ -23,7 +23,8 @@ func MTREventRequestPathFromID(id objc.ID) *MTREventRequestPath {
 	if id == 0 {
 		return nil
 	}
-	x := &MTREventRequestPath{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTREventRequestPath{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTREventRequestPathAdopt(id objc.ID) *MTREventRequestPath {
 	if id == 0 {
 		return nil
 	}
-	x := &MTREventRequestPath{Handle: objref.Wrap(id)}
+	x := &MTREventRequestPath{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,22 +58,31 @@ func (x *MTREventRequestPath) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTREventRequestPath) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTREventRequestPath creates a new MTREventRequestPath.
 func NewMTREventRequestPath() *MTREventRequestPath {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTREventRequestPath")), objc.RegisterName("new"))
 	return mTREventRequestPathAdopt(_id)
 }
 
+// Endpoint wraps the corresponding Objective-C method.
 func (x *MTREventRequestPath) Endpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)
 }
 
+// Cluster wraps the corresponding Objective-C method.
 func (x *MTREventRequestPath) Cluster() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cluster"))
 	return obj.Wrap(_r)
 }
 
+// Event wraps the corresponding Objective-C method.
 func (x *MTREventRequestPath) Event() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("event"))
 	return obj.Wrap(_r)

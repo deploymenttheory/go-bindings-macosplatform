@@ -23,7 +23,8 @@ func RNNMatrixInferenceLayerFromID(id objc.ID) *RNNMatrixInferenceLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &RNNMatrixInferenceLayer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &RNNMatrixInferenceLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func rNNMatrixInferenceLayerAdopt(id objc.ID) *RNNMatrixInferenceLayer {
 	if id == 0 {
 		return nil
 	}
-	x := &RNNMatrixInferenceLayer{Handle: objref.Wrap(id)}
+	x := &RNNMatrixInferenceLayer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,80 +58,83 @@ func (x *RNNMatrixInferenceLayer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RNNMatrixInferenceLayer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewRNNMatrixInferenceLayer creates a new RNNMatrixInferenceLayer.
 func NewRNNMatrixInferenceLayer() *RNNMatrixInferenceLayer {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSRNNMatrixInferenceLayer")), objc.RegisterName("new"))
 	return rNNMatrixInferenceLayerAdopt(_id)
 }
 
-// How output states from
-//
-// WithRecurrentOutputIsTemporary sets recurrentOutputIsTemporary and returns the receiver so calls can be chained.
+// WithRecurrentOutputIsTemporary how output states from
 func (x *RNNMatrixInferenceLayer) WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNMatrixInferenceLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrentOutputIsTemporary:"), recurrentOutputIsTemporary)
 	return x
 }
 
-// If YES then calls to
-//
-// WithStoreAllIntermediateStates sets storeAllIntermediateStates and returns the receiver so calls can be chained.
+// WithStoreAllIntermediateStates if YES then calls to
 func (x *RNNMatrixInferenceLayer) WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNMatrixInferenceLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAllIntermediateStates:"), storeAllIntermediateStates)
 	return x
 }
 
-// Defines how to combine the output-results, when encoding bidirectional layers using
-//
-// WithBidirectionalCombineMode sets bidirectionalCombineMode and returns the receiver so calls can be chained.
+// WithBidirectionalCombineMode defines how to combine the output-results, when encoding bidirectional layers using
 func (x *RNNMatrixInferenceLayer) WithBidirectionalCombineMode(bidirectionalCombineMode RNNBidirectionalCombineMode) *RNNMatrixInferenceLayer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBidirectionalCombineMode:"), bidirectionalCombineMode)
 	return x
 }
 
-// The number of feature channels input vector/matrix.
+// InputFeatureChannels the number of feature channels input vector/matrix.
 func (x *RNNMatrixInferenceLayer) InputFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputFeatureChannels"))
 	return _r
 }
 
-// The number of feature channels in the output vector/matrix.
+// OutputFeatureChannels the number of feature channels in the output vector/matrix.
 func (x *RNNMatrixInferenceLayer) OutputFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputFeatureChannels"))
 	return _r
 }
 
-// Number of layers in the filter-stack. This will be one when using initWithDevice:rnnDescriptor to initialize this filter and the number of entries in the array 'rnnDescriptors' when initializing this filter with initWithDevice:rnnDescriptors.
+// NumberOfLayers number of layers in the filter-stack. This will be one when using initWithDevice:rnnDescriptor to initialize this filter and the number of entries in the array 'rnnDescriptors' when initializing this filter with initWithDevice:rnnDescriptors.
 func (x *RNNMatrixInferenceLayer) NumberOfLayers() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfLayers"))
 	return _r
 }
 
-// How output states from
+// RecurrentOutputIsTemporary how output states from
 func (x *RNNMatrixInferenceLayer) RecurrentOutputIsTemporary() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("recurrentOutputIsTemporary"))
 	return _r
 }
 
+// SetRecurrentOutputIsTemporary wraps the corresponding Objective-C method.
 func (x *RNNMatrixInferenceLayer) SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrentOutputIsTemporary:"), recurrentOutputIsTemporary)
 }
 
-// If YES then calls to
+// StoreAllIntermediateStates if YES then calls to
 func (x *RNNMatrixInferenceLayer) StoreAllIntermediateStates() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("storeAllIntermediateStates"))
 	return _r
 }
 
+// SetStoreAllIntermediateStates wraps the corresponding Objective-C method.
 func (x *RNNMatrixInferenceLayer) SetStoreAllIntermediateStates(storeAllIntermediateStates bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAllIntermediateStates:"), storeAllIntermediateStates)
 }
 
-// Defines how to combine the output-results, when encoding bidirectional layers using
+// BidirectionalCombineMode defines how to combine the output-results, when encoding bidirectional layers using
 func (x *RNNMatrixInferenceLayer) BidirectionalCombineMode() RNNBidirectionalCombineMode {
 	_r := objc.Send[RNNBidirectionalCombineMode](objref.IDOf(x), objc.RegisterName("bidirectionalCombineMode"))
 	return _r
 }
 
+// SetBidirectionalCombineMode wraps the corresponding Objective-C method.
 func (x *RNNMatrixInferenceLayer) SetBidirectionalCombineMode(bidirectionalCombineMode RNNBidirectionalCombineMode) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBidirectionalCombineMode:"), bidirectionalCombineMode)
 }

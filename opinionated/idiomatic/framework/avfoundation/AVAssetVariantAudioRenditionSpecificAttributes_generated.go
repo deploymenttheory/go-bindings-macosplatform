@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents attributes specific to a particular rendition.
-//
 // AssetVariantAudioRenditionSpecificAttributes is an idiomatic wrapper over the Objective-C class AVAssetVariantAudioRenditionSpecificAttributes.
+//
+// An object that represents attributes specific to a particular rendition.
 type AssetVariantAudioRenditionSpecificAttributes struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AssetVariantAudioRenditionSpecificAttributesFromID(id objc.ID) *AssetVarian
 	if id == 0 {
 		return nil
 	}
-	x := &AssetVariantAudioRenditionSpecificAttributes{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AssetVariantAudioRenditionSpecificAttributes{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func assetVariantAudioRenditionSpecificAttributesAdopt(id objc.ID) *AssetVariant
 	if id == 0 {
 		return nil
 	}
-	x := &AssetVariantAudioRenditionSpecificAttributes{Handle: objref.Wrap(id)}
+	x := &AssetVariantAudioRenditionSpecificAttributes{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,31 +60,37 @@ func (x *AssetVariantAudioRenditionSpecificAttributes) IsKind(className string) 
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetVariantAudioRenditionSpecificAttributes) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAssetVariantAudioRenditionSpecificAttributes creates a new AssetVariantAudioRenditionSpecificAttributes.
 func NewAssetVariantAudioRenditionSpecificAttributes() *AssetVariantAudioRenditionSpecificAttributes {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetVariantAudioRenditionSpecificAttributes")), objc.RegisterName("new"))
 	return assetVariantAudioRenditionSpecificAttributesAdopt(_id)
 }
 
-// If it is not declared, the value will be negative. A channel count greater than two indicates that the variant offers a rich multichannel authoring.
+// ChannelCount if it is not declared, the value will be negative. A channel count greater than two indicates that the variant offers a rich multichannel authoring.
 func (x *AssetVariantAudioRenditionSpecificAttributes) ChannelCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("channelCount"))
 	return _r
 }
 
-// Indicates that the variant is best suited for delivery to headphones. A binaural variant may originate from a direct binaural recording or from the processing of a multichannel audio source.
+// IsBinaural indicates that the variant is best suited for delivery to headphones. A binaural variant may originate from a direct binaural recording or from the processing of a multichannel audio source.
 func (x *AssetVariantAudioRenditionSpecificAttributes) IsBinaural() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBinaural"))
 	return _r
 }
 
-// Indicates that this variant contains virtualized or otherwise pre-processed audio content that is suitable for a variety of purposes. If a variant audio redition is immersive it is eligible for rendering either to headphones or speakers.
+// IsImmersive indicates that this variant contains virtualized or otherwise pre-processed audio content that is suitable for a variety of purposes. If a variant audio redition is immersive it is eligible for rendering either to headphones or speakers.
 func (x *AssetVariantAudioRenditionSpecificAttributes) IsImmersive() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isImmersive"))
 	return _r
 }
 
-// Indicates that this variant is declared as a downmix derivative of other media of greater channel count. If one or more multichannel variants are also provided, the dowmix is assumed to be compatible in its internal timing and other attributes with those variants. Typically this is because it has been derived from the same source. A downmix can be used as a suitable substitute for a multichannel variant under some conditions.
+// IsDownmix indicates that this variant is declared as a downmix derivative of other media of greater channel count. If one or more multichannel variants are also provided, the dowmix is assumed to be compatible in its internal timing and other attributes with those variants. Typically this is because it has been derived from the same source. A downmix can be used as a suitable substitute for a multichannel variant under some conditions.
 func (x *AssetVariantAudioRenditionSpecificAttributes) IsDownmix() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDownmix"))
 	return _r

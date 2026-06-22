@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Generates a fingerprint given a URL date, or nil.
+// FingerprintForFileAtURL generates a fingerprint given a URL date, or nil.
 func FingerprintForFileAtURL(url string) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("ICCameraFile")), objc.RegisterName("fingerprintForFileAtURL:"), rt.FileURL(url))
 	if _r == 0 {

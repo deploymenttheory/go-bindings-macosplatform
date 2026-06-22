@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The common behaviors for storage devices in the guest system.
-//
 // StorageDeviceAttachment is an idiomatic wrapper over the Objective-C class VZStorageDeviceAttachment.
+//
+// StorageDeviceAttachment is an abstract base — you do not construct it directly. Construct one of [DiskBlockDeviceStorageDeviceAttachment], [DiskImageStorageDeviceAttachment], [NetworkBlockDeviceStorageDeviceAttachment] and pass it where a StorageDeviceAttachment is accepted.
+//
+// The common behaviors for storage devices in the guest system.
 type StorageDeviceAttachment struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func StorageDeviceAttachmentFromID(id objc.ID) *StorageDeviceAttachment {
 	if id == 0 {
 		return nil
 	}
-	x := &StorageDeviceAttachment{Handle: objref.Wrap(purego.Retain(id))}
+	x := &StorageDeviceAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func storageDeviceAttachmentAdopt(id objc.ID) *StorageDeviceAttachment {
 	if id == 0 {
 		return nil
 	}
-	x := &StorageDeviceAttachment{Handle: objref.Wrap(id)}
+	x := &StorageDeviceAttachment{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,10 +62,10 @@ func (x *StorageDeviceAttachment) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewStorageDeviceAttachment creates a new StorageDeviceAttachment.
-func NewStorageDeviceAttachment() *StorageDeviceAttachment {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZStorageDeviceAttachment")), objc.RegisterName("new"))
-	return storageDeviceAttachmentAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StorageDeviceAttachment) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // StorageDeviceAttachmentable is the interface implemented by [StorageDeviceAttachment], for mocking and DI.
@@ -70,3 +74,10 @@ type StorageDeviceAttachmentable interface {
 }
 
 var _ StorageDeviceAttachmentable = (*StorageDeviceAttachment)(nil)
+
+// isStorageDeviceAttachment marks StorageDeviceAttachment — and, by embedding promotion, its
+// subclasses — as a member of the StorageDeviceAttachment hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *StorageDeviceAttachment) isStorageDeviceAttachment() {}
+
+var _ StorageDeviceAttachmentProvider = (*StorageDeviceAttachment)(nil)

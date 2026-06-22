@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specialized view that displays and controls the zoom level of the map view.
-//
 // ZoomControl is an idiomatic wrapper over the Objective-C class MKZoomControl.
+//
+// A specialized view that displays and controls the zoom level of the map view.
 type ZoomControl struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func ZoomControlFromID(id objc.ID) *ZoomControl {
 	if id == 0 {
 		return nil
 	}
-	x := &ZoomControl{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ZoomControl{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func zoomControlAdopt(id objc.ID) *ZoomControl {
 	if id == 0 {
 		return nil
 	}
-	x := &ZoomControl{Handle: objref.Wrap(id)}
+	x := &ZoomControl{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *ZoomControl) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ZoomControl) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewZoomControl creates a new ZoomControl.
 func NewZoomControl() *ZoomControl {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKZoomControl")), objc.RegisterName("new"))
 	return zoomControlAdopt(_id)
 }
 
-// The map view associated with this control.
-//
-// WithMapView sets mapView and returns the receiver so calls can be chained.
+// WithMapView the map view associated with this control.
 func (x *ZoomControl) WithMapView(mapView *MapView) *ZoomControl {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
 	return x
 }
 
+// MapView wraps the corresponding Objective-C method.
 func (x *ZoomControl) MapView() *MapView {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapView"))
 	return MapViewFromID(_r)
 }
 
+// SetMapView wraps the corresponding Objective-C method.
 func (x *ZoomControl) SetMapView(mapView *MapView) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
 }

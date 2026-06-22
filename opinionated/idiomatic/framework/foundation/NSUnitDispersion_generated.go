@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for specific quantities of dispersion.
-//
 // UnitDispersion is an idiomatic wrapper over the Objective-C class NSUnitDispersion.
+//
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for specific quantities of dispersion.
 type UnitDispersion struct {
-	objref.Handle
+	Dimension
 }
 
 // UnitDispersionFromID adopts an existing Objective-C object as a UnitDispersion
@@ -25,7 +26,8 @@ func UnitDispersionFromID(id objc.ID) *UnitDispersion {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitDispersion{Handle: objref.Wrap(purego.Retain(id))}
+	x := &UnitDispersion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func unitDispersionAdopt(id objc.ID) *UnitDispersion {
 	if id == 0 {
 		return nil
 	}
-	x := &UnitDispersion{Handle: objref.Wrap(id)}
+	x := &UnitDispersion{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *UnitDispersion) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UnitDispersion) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UnitDispersion) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewUnitDispersion creates a new UnitDispersion.
@@ -64,7 +52,7 @@ func NewUnitDispersion() *UnitDispersion {
 	return unitDispersionAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *UnitDispersion) WithScriptingProperties(scriptingProperties obj.Object) *UnitDispersion {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
@@ -77,3 +65,7 @@ type UnitDispersionable interface {
 }
 
 var _ UnitDispersionable = (*UnitDispersion)(nil)
+
+var _ DimensionProvider = (*UnitDispersion)(nil)
+
+var _ UnitProvider = (*UnitDispersion)(nil)

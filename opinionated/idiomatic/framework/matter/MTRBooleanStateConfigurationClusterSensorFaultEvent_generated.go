@@ -23,7 +23,8 @@ func MTRBooleanStateConfigurationClusterSensorFaultEventFromID(id objc.ID) *MTRB
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBooleanStateConfigurationClusterSensorFaultEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MTRBooleanStateConfigurationClusterSensorFaultEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,7 +37,8 @@ func mTRBooleanStateConfigurationClusterSensorFaultEventAdopt(id objc.ID) *MTRBo
 	if id == 0 {
 		return nil
 	}
-	x := &MTRBooleanStateConfigurationClusterSensorFaultEvent{Handle: objref.Wrap(id)}
+	x := &MTRBooleanStateConfigurationClusterSensorFaultEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -56,23 +58,31 @@ func (x *MTRBooleanStateConfigurationClusterSensorFaultEvent) IsKind(className s
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRBooleanStateConfigurationClusterSensorFaultEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewMTRBooleanStateConfigurationClusterSensorFaultEvent creates a new MTRBooleanStateConfigurationClusterSensorFaultEvent.
 func NewMTRBooleanStateConfigurationClusterSensorFaultEvent() *MTRBooleanStateConfigurationClusterSensorFaultEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRBooleanStateConfigurationClusterSensorFaultEvent")), objc.RegisterName("new"))
 	return mTRBooleanStateConfigurationClusterSensorFaultEventAdopt(_id)
 }
 
-// WithSensorFault sets sensorFault and returns the receiver so calls can be chained.
+// WithSensorFault sets the property and returns the receiver so calls can be chained.
 func (x *MTRBooleanStateConfigurationClusterSensorFaultEvent) WithSensorFault(sensorFault obj.Object) *MTRBooleanStateConfigurationClusterSensorFaultEvent {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSensorFault:"), objref.IDOf(sensorFault))
 	return x
 }
 
+// SensorFault wraps the corresponding Objective-C method.
 func (x *MTRBooleanStateConfigurationClusterSensorFaultEvent) SensorFault() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sensorFault"))
 	return obj.Wrap(_r)
 }
 
+// SetSensorFault wraps the corresponding Objective-C method.
 func (x *MTRBooleanStateConfigurationClusterSensorFaultEvent) SetSensorFault(sensorFault obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSensorFault:"), objref.IDOf(sensorFault))
 }

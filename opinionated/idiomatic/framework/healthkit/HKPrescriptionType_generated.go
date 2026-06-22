@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that identifies samples that store a prescription.
-//
 // PrescriptionType is an idiomatic wrapper over the Objective-C class HKPrescriptionType.
+//
+// It embeds [SampleType], promoting that type's methods.
+//
+// A type that identifies samples that store a prescription.
 type PrescriptionType struct {
-	objref.Handle
+	SampleType
 }
 
 // PrescriptionTypeFromID adopts an existing Objective-C object as a PrescriptionType
@@ -25,7 +26,8 @@ func PrescriptionTypeFromID(id objc.ID) *PrescriptionType {
 	if id == 0 {
 		return nil
 	}
-	x := &PrescriptionType{Handle: objref.Wrap(purego.Retain(id))}
+	x := &PrescriptionType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func prescriptionTypeAdopt(id objc.ID) *PrescriptionType {
 	if id == 0 {
 		return nil
 	}
-	x := &PrescriptionType{Handle: objref.Wrap(id)}
+	x := &PrescriptionType{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *PrescriptionType) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PrescriptionType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PrescriptionType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewPrescriptionType creates a new PrescriptionType.
@@ -70,3 +58,7 @@ type PrescriptionTypeable interface {
 }
 
 var _ PrescriptionTypeable = (*PrescriptionType)(nil)
+
+var _ SampleTypeProvider = (*PrescriptionType)(nil)
+
+var _ ObjectTypeProvider = (*PrescriptionType)(nil)

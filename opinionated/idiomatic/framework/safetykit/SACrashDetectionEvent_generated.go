@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Describes the information about a vehicular crash.
-//
 // CrashDetectionEvent is an idiomatic wrapper over the Objective-C class SACrashDetectionEvent.
+//
+// Describes the information about a vehicular crash.
 type CrashDetectionEvent struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func CrashDetectionEventFromID(id objc.ID) *CrashDetectionEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &CrashDetectionEvent{Handle: objref.Wrap(purego.Retain(id))}
+	x := &CrashDetectionEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func crashDetectionEventAdopt(id objc.ID) *CrashDetectionEvent {
 	if id == 0 {
 		return nil
 	}
-	x := &CrashDetectionEvent{Handle: objref.Wrap(id)}
+	x := &CrashDetectionEvent{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,19 +60,25 @@ func (x *CrashDetectionEvent) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CrashDetectionEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewCrashDetectionEvent creates a new CrashDetectionEvent.
 func NewCrashDetectionEvent() *CrashDetectionEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("SACrashDetectionEvent")), objc.RegisterName("new"))
 	return crashDetectionEventAdopt(_id)
 }
 
-// date The time a crash was detected
+// Date date The time a crash was detected
 func (x *CrashDetectionEvent) Date() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
 
-// response enum value representing the emergency response to the Crash Detection event
+// Response response enum value representing the emergency response to the Crash Detection event
 func (x *CrashDetectionEvent) Response() CrashDetectionEventResponse {
 	_r := objc.Send[CrashDetectionEventResponse](objref.IDOf(x), objc.RegisterName("response"))
 	return _r

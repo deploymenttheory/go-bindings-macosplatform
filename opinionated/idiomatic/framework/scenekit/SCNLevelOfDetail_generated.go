@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An alternate resolution for a geometry that SceneKit automatically substitutes to improve rendering performance.
-//
 // LevelOfDetail is an idiomatic wrapper over the Objective-C class SCNLevelOfDetail.
+//
+// An alternate resolution for a geometry that SceneKit automatically substitutes to improve rendering performance.
 type LevelOfDetail struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LevelOfDetailFromID(id objc.ID) *LevelOfDetail {
 	if id == 0 {
 		return nil
 	}
-	x := &LevelOfDetail{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LevelOfDetail{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func levelOfDetailAdopt(id objc.ID) *LevelOfDetail {
 	if id == 0 {
 		return nil
 	}
-	x := &LevelOfDetail{Handle: objref.Wrap(id)}
+	x := &LevelOfDetail{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *LevelOfDetail) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LevelOfDetail) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewLevelOfDetail creates a new LevelOfDetail.
 func NewLevelOfDetail() *LevelOfDetail {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCNLevelOfDetail")), objc.RegisterName("new"))
 	return levelOfDetailAdopt(_id)
 }
 
-// Returns the geometry of the receiver.
+// Geometry returns the geometry of the receiver.
 func (x *LevelOfDetail) Geometry() *Geometry {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("geometry"))
 	return GeometryFromID(_r)
 }
 
-// Returns the screen space radius of the receiver if any, 0 otherwise.
+// ScreenSpaceRadius returns the screen space radius of the receiver if any, 0 otherwise.
 func (x *LevelOfDetail) ScreenSpaceRadius() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("screenSpaceRadius"))
 	return _r
 }
 
-// Returns the world space distance of the receiver if any, 0 otherwise.
+// WorldSpaceDistance returns the world space distance of the receiver if any, 0 otherwise.
 func (x *LevelOfDetail) WorldSpaceDistance() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("worldSpaceDistance"))
 	return _r

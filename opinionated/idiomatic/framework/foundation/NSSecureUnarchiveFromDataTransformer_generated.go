@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A value transformer that converts data to and from classes that support secure coding.
-//
 // SecureUnarchiveFromDataTransformer is an idiomatic wrapper over the Objective-C class NSSecureUnarchiveFromDataTransformer.
+//
+// It embeds [ValueTransformer], promoting that type's methods.
+//
+// A value transformer that converts data to and from classes that support secure coding.
 type SecureUnarchiveFromDataTransformer struct {
-	objref.Handle
+	ValueTransformer
 }
 
 // SecureUnarchiveFromDataTransformerFromID adopts an existing Objective-C object as a SecureUnarchiveFromDataTransformer
@@ -25,7 +26,8 @@ func SecureUnarchiveFromDataTransformerFromID(id objc.ID) *SecureUnarchiveFromDa
 	if id == 0 {
 		return nil
 	}
-	x := &SecureUnarchiveFromDataTransformer{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SecureUnarchiveFromDataTransformer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func secureUnarchiveFromDataTransformerAdopt(id objc.ID) *SecureUnarchiveFromDat
 	if id == 0 {
 		return nil
 	}
-	x := &SecureUnarchiveFromDataTransformer{Handle: objref.Wrap(id)}
+	x := &SecureUnarchiveFromDataTransformer{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *SecureUnarchiveFromDataTransformer) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SecureUnarchiveFromDataTransformer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SecureUnarchiveFromDataTransformer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewSecureUnarchiveFromDataTransformer creates a new SecureUnarchiveFromDataTransformer.
@@ -64,7 +52,7 @@ func NewSecureUnarchiveFromDataTransformer() *SecureUnarchiveFromDataTransformer
 	return secureUnarchiveFromDataTransformerAdopt(_id)
 }
 
-// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
 func (x *SecureUnarchiveFromDataTransformer) WithScriptingProperties(scriptingProperties obj.Object) *SecureUnarchiveFromDataTransformer {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
@@ -77,3 +65,5 @@ type SecureUnarchiveFromDataTransformerable interface {
 }
 
 var _ SecureUnarchiveFromDataTransformerable = (*SecureUnarchiveFromDataTransformer)(nil)
+
+var _ ValueTransformerProvider = (*SecureUnarchiveFromDataTransformer)(nil)

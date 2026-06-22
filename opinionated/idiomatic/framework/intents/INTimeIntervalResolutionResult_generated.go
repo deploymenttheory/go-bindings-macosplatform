@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resolution result for a time interval associated with an intent.
-//
 // TimeIntervalResolutionResult is an idiomatic wrapper over the Objective-C class INTimeIntervalResolutionResult.
+//
+// It embeds [IntentResolutionResult], promoting that type's methods.
+//
+// A resolution result for a time interval associated with an intent.
 type TimeIntervalResolutionResult struct {
-	objref.Handle
+	IntentResolutionResult
 }
 
 // TimeIntervalResolutionResultFromID adopts an existing Objective-C object as a TimeIntervalResolutionResult
@@ -25,7 +26,8 @@ func TimeIntervalResolutionResultFromID(id objc.ID) *TimeIntervalResolutionResul
 	if id == 0 {
 		return nil
 	}
-	x := &TimeIntervalResolutionResult{Handle: objref.Wrap(purego.Retain(id))}
+	x := &TimeIntervalResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func timeIntervalResolutionResultAdopt(id objc.ID) *TimeIntervalResolutionResult
 	if id == 0 {
 		return nil
 	}
-	x := &TimeIntervalResolutionResult{Handle: objref.Wrap(id)}
+	x := &TimeIntervalResolutionResult{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *TimeIntervalResolutionResult) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TimeIntervalResolutionResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TimeIntervalResolutionResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewTimeIntervalResolutionResult creates a new TimeIntervalResolutionResult.
@@ -70,3 +58,5 @@ type TimeIntervalResolutionResultable interface {
 }
 
 var _ TimeIntervalResolutionResultable = (*TimeIntervalResolutionResult)(nil)
+
+var _ IntentResolutionResultProvider = (*TimeIntervalResolutionResult)(nil)

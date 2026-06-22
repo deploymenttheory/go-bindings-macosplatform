@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object for sorting records that contain location data.
-//
 // LocationSortDescriptor is an idiomatic wrapper over the Objective-C class CKLocationSortDescriptor.
+//
+// An object for sorting records that contain location data.
 type LocationSortDescriptor struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func LocationSortDescriptorFromID(id objc.ID) *LocationSortDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &LocationSortDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	x := &LocationSortDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func locationSortDescriptorAdopt(id objc.ID) *LocationSortDescriptor {
 	if id == 0 {
 		return nil
 	}
-	x := &LocationSortDescriptor{Handle: objref.Wrap(id)}
+	x := &LocationSortDescriptor{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,9 +60,13 @@ func (x *LocationSortDescriptor) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a location sort descriptor from a serialized instance.
-//
-// NewLocationSortDescriptorWithCoder creates a new LocationSortDescriptor.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LocationSortDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLocationSortDescriptorWithCoder creates a location sort descriptor from a serialized instance.
 func NewLocationSortDescriptorWithCoder(aDecoder obj.Object) *LocationSortDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKLocationSortDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))

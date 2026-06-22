@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view that provides a generic user interface for a Cocoa audio unit.
-//
 // AUGenericView is an idiomatic wrapper over the Objective-C class AUGenericView.
+//
+// A view that provides a generic user interface for a Cocoa audio unit.
 type AUGenericView struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func AUGenericViewFromID(id objc.ID) *AUGenericView {
 	if id == 0 {
 		return nil
 	}
-	x := &AUGenericView{Handle: objref.Wrap(purego.Retain(id))}
+	x := &AUGenericView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func aUGenericViewAdopt(id objc.ID) *AUGenericView {
 	if id == 0 {
 		return nil
 	}
-	x := &AUGenericView{Handle: objref.Wrap(id)}
+	x := &AUGenericView{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,25 +60,31 @@ func (x *AUGenericView) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AUGenericView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewAUGenericView creates a new AUGenericView.
 func NewAUGenericView() *AUGenericView {
 	_id := objc.Send[objc.ID](objc.ID(_class("AUGenericView")), objc.RegisterName("new"))
 	return aUGenericViewAdopt(_id)
 }
 
-// Indicates whether or not controls for expert audio unit parameters are displayed in the generic view.
-//
-// WithShowsExpertParameters sets showsExpertParameters and returns the receiver so calls can be chained.
+// WithShowsExpertParameters indicates whether or not controls for expert audio unit parameters are displayed in the generic view.
 func (x *AUGenericView) WithShowsExpertParameters(showsExpertParameters bool) *AUGenericView {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsExpertParameters:"), showsExpertParameters)
 	return x
 }
 
+// ShowsExpertParameters wraps the corresponding Objective-C method.
 func (x *AUGenericView) ShowsExpertParameters() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsExpertParameters"))
 	return _r
 }
 
+// SetShowsExpertParameters wraps the corresponding Objective-C method.
 func (x *AUGenericView) SetShowsExpertParameters(showsExpertParameters bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsExpertParameters:"), showsExpertParameters)
 }

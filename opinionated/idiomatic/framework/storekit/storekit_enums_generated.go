@@ -24,6 +24,8 @@ const (
 	CloudServiceAuthorizationStatusAuthorized CloudServiceAuthorizationStatus = 3
 )
 
+// String returns the CloudServiceAuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CloudServiceAuthorizationStatus) String() string {
 	switch e {
 	case CloudServiceAuthorizationStatusNotDetermined:
@@ -59,6 +61,8 @@ const (
 	DownloadStateCancelled DownloadState = 5
 )
 
+// String returns the DownloadState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DownloadState) String() string {
 	switch e {
 	case DownloadStateWaiting:
@@ -103,6 +107,8 @@ const (
 	ErrorPaymentMethodBindingConfigurationRequired ErrorCode = 21
 )
 
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ErrorCode) String() string {
 	switch e {
 	case ErrorUnknown:
@@ -159,6 +165,8 @@ const (
 	ProductDiscountPaymentModeFreeTrial  ProductDiscountPaymentMode = 2
 )
 
+// String returns the ProductDiscountPaymentMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ProductDiscountPaymentMode) String() string {
 	switch e {
 	case ProductDiscountPaymentModePayAsYouGo:
@@ -184,6 +192,8 @@ const (
 	ProductDiscountTypeSubscription ProductDiscountType = 1
 )
 
+// String returns the ProductDiscountType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ProductDiscountType) String() string {
 	switch e {
 	case ProductDiscountTypeIntroductory:
@@ -207,6 +217,8 @@ const (
 	ProductPeriodUnitYear  ProductPeriodUnit = 3
 )
 
+// String returns the ProductPeriodUnit constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ProductPeriodUnit) String() string {
 	switch e {
 	case ProductPeriodUnitDay:
@@ -236,6 +248,8 @@ const (
 	ProductStorePromotionVisibilityHide ProductStorePromotionVisibility = 2
 )
 
+// String returns the ProductStorePromotionVisibility constant's name, or its numeric form when the
+// value is not a known constant.
 func (e ProductStorePromotionVisibility) String() string {
 	switch e {
 	case ProductStorePromotionVisibilityDefault:

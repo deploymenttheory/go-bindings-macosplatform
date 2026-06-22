@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-// A class that processes webpage content in an app extension.
-//
 // WebContentProcess is an idiomatic wrapper over the Objective-C class BEWebContentProcess.
+//
+// A class that processes webpage content in an app extension.
 type WebContentProcess struct {
 	objref.Handle
 }
@@ -27,7 +27,8 @@ func WebContentProcessFromID(id objc.ID) *WebContentProcess {
 	if id == 0 {
 		return nil
 	}
-	x := &WebContentProcess{Handle: objref.Wrap(purego.Retain(id))}
+	x := &WebContentProcess{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -40,7 +41,8 @@ func webContentProcessAdopt(id objc.ID) *WebContentProcess {
 	if id == 0 {
 		return nil
 	}
-	x := &WebContentProcess{Handle: objref.Wrap(id)}
+	x := &WebContentProcess{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -60,19 +62,25 @@ func (x *WebContentProcess) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WebContentProcess) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewWebContentProcess creates a new WebContentProcess.
 func NewWebContentProcess() *WebContentProcess {
 	_id := objc.Send[objc.ID](objc.ID(_class("BEWebContentProcess")), objc.RegisterName("new"))
 	return webContentProcessAdopt(_id)
 }
 
-// Stops the web content process.
+// Invalidate stops the web content process.
 func (x *WebContentProcess) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
-// Creates a new XPC connection to the extension process.
-func (x *WebContentProcess) MakeLibXPCConnectionError() (obj.Object, error) {
+// MakeLibXPCConnectionError creates a new XPC connection to the extension process.
+func (x *WebContentProcess) MakeLibXPCConnectionError() (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeLibXPCConnectionError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -85,7 +93,7 @@ func (x *WebContentProcess) MakeLibXPCConnectionError() (obj.Object, error) {
 type WebContentProcessable interface {
 	obj.Object
 	Invalidate()
-	MakeLibXPCConnectionError() (obj.Object, error)
+	MakeLibXPCConnectionError() (result obj.Object, err error)
 }
 
 var _ WebContentProcessable = (*WebContentProcess)(nil)

@@ -8,13 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DOMCounter is an idiomatic wrapper over the Objective-C class DOMCounter.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMCounter struct {
-	objref.Handle
+	DOMObject
 }
 
 // DOMCounterFromID adopts an existing Objective-C object as a DOMCounter
@@ -23,7 +24,8 @@ func DOMCounterFromID(id objc.ID) *DOMCounter {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMCounter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &DOMCounter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -36,24 +38,10 @@ func dOMCounterAdopt(id objc.ID) *DOMCounter {
 	if id == 0 {
 		return nil
 	}
-	x := &DOMCounter{Handle: objref.Wrap(id)}
+	x := &DOMCounter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *DOMCounter) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DOMCounter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DOMCounter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewDOMCounter creates a new DOMCounter.
@@ -62,6 +50,7 @@ func NewDOMCounter() *DOMCounter {
 	return dOMCounterAdopt(_id)
 }
 
+// Identifier wraps the corresponding Objective-C method.
 func (x *DOMCounter) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -70,6 +59,7 @@ func (x *DOMCounter) Identifier() string {
 	return purego.GoString(_r)
 }
 
+// ListStyle wraps the corresponding Objective-C method.
 func (x *DOMCounter) ListStyle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("listStyle"))
 	if _r == 0 {
@@ -78,6 +68,7 @@ func (x *DOMCounter) ListStyle() string {
 	return purego.GoString(_r)
 }
 
+// Separator wraps the corresponding Objective-C method.
 func (x *DOMCounter) Separator() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("separator"))
 	if _r == 0 {
@@ -95,3 +86,7 @@ type DOMCounterable interface {
 }
 
 var _ DOMCounterable = (*DOMCounter)(nil)
+
+var _ DOMObjectProvider = (*DOMCounter)(nil)
+
+var _ WebScriptObjectProvider = (*DOMCounter)(nil)

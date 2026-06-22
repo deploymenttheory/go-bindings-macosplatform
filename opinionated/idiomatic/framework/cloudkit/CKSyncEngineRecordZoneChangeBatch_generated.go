@@ -12,9 +12,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains the record changes for a single send operation.
-//
 // SyncEngineRecordZoneChangeBatch is an idiomatic wrapper over the Objective-C class CKSyncEngineRecordZoneChangeBatch.
+//
+// An object that contains the record changes for a single send operation.
 type SyncEngineRecordZoneChangeBatch struct {
 	objref.Handle
 }
@@ -25,7 +25,8 @@ func SyncEngineRecordZoneChangeBatchFromID(id objc.ID) *SyncEngineRecordZoneChan
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineRecordZoneChangeBatch{Handle: objref.Wrap(purego.Retain(id))}
+	x := &SyncEngineRecordZoneChangeBatch{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +39,8 @@ func syncEngineRecordZoneChangeBatchAdopt(id objc.ID) *SyncEngineRecordZoneChang
 	if id == 0 {
 		return nil
 	}
-	x := &SyncEngineRecordZoneChangeBatch{Handle: objref.Wrap(id)}
+	x := &SyncEngineRecordZoneChangeBatch{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,24 +60,26 @@ func (x *SyncEngineRecordZoneChangeBatch) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Creates a batch of records to modify.
-//
-// NewSyncEngineRecordZoneChangeBatchWithRecordsToSaveRecordIDsToDeleteAtomicByZone creates a new SyncEngineRecordZoneChangeBatch.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncEngineRecordZoneChangeBatch) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSyncEngineRecordZoneChangeBatchWithRecordsToSaveRecordIDsToDeleteAtomicByZone creates a batch of records to modify.
 func NewSyncEngineRecordZoneChangeBatchWithRecordsToSaveRecordIDsToDeleteAtomicByZone(recordsToSave []*Record, recordIDsToDelete []*RecordID, atomicByZone bool) *SyncEngineRecordZoneChangeBatch {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineRecordZoneChangeBatch")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordsToSave:recordIDsToDelete:atomicByZone:"), purego.SliceToNSArray(recordsToSave, func(_v *Record) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(recordIDsToDelete, func(_v *RecordID) objc.ID { return objref.IDOf(_v) }), atomicByZone)
 	return syncEngineRecordZoneChangeBatchAdopt(_id)
 }
 
-// A Boolean value that determines whether CloudKit modifies records atomically by record zone.
-//
-// WithAtomicByZone sets atomicByZone and returns the receiver so calls can be chained.
+// WithAtomicByZone a Boolean value that determines whether CloudKit modifies records atomically by record zone.
 func (x *SyncEngineRecordZoneChangeBatch) WithAtomicByZone(atomicByZone bool) *SyncEngineRecordZoneChangeBatch {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAtomicByZone:"), atomicByZone)
 	return x
 }
 
-// The records to save.
+// RecordsToSave the records to save.
 //
 // RecordsToSave returns the collection as a Go slice.
 func (x *SyncEngineRecordZoneChangeBatch) RecordsToSave() []*Record {
@@ -83,7 +87,7 @@ func (x *SyncEngineRecordZoneChangeBatch) RecordsToSave() []*Record {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Record { return RecordFromID(_id) })
 }
 
-// The unique identifiers of the records to delete.
+// RecordIDsToDelete the unique identifiers of the records to delete.
 //
 // RecordIDsToDelete returns the collection as a Go slice.
 func (x *SyncEngineRecordZoneChangeBatch) RecordIDsToDelete() []*RecordID {
@@ -91,12 +95,13 @@ func (x *SyncEngineRecordZoneChangeBatch) RecordIDsToDelete() []*RecordID {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordID { return RecordIDFromID(_id) })
 }
 
-// A Boolean value that determines whether CloudKit modifies records atomically by record zone. When <doc://com.apple.documentation/documentation/swift/true>, CloudKit processes record changes atomically by record zone, and if any individual change fails, all other changes in that record's record zone fail and return an error of type “CKError/Code/batchRequestFailed“. The default value is <doc://com.apple.documentation/documentation/swift/false>.
+// AtomicByZone a Boolean value that determines whether CloudKit modifies records atomically by record zone. When <doc://com.apple.documentation/documentation/swift/true>, CloudKit processes record changes atomically by record zone, and if any individual change fails, all other changes in that record's record zone fail and return an error of type “CKError/Code/batchRequestFailed“. The default value is <doc://com.apple.documentation/documentation/swift/false>.
 func (x *SyncEngineRecordZoneChangeBatch) AtomicByZone() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("atomicByZone"))
 	return _r
 }
 
+// SetAtomicByZone wraps the corresponding Objective-C method.
 func (x *SyncEngineRecordZoneChangeBatch) SetAtomicByZone(atomicByZone bool) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAtomicByZone:"), atomicByZone)
 }

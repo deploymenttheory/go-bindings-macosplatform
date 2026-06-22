@@ -6,17 +6,20 @@ package spritekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A node that’s defined in an archived .sks file.
-//
 // ReferenceNode is an idiomatic wrapper over the Objective-C class SKReferenceNode.
+//
+// It embeds [Node], promoting that type's methods.
+//
+// A node that’s defined in an archived .sks file.
 type ReferenceNode struct {
-	objref.Handle
+	Node
 }
 
 // ReferenceNodeFromID adopts an existing Objective-C object as a ReferenceNode
@@ -25,7 +28,8 @@ func ReferenceNodeFromID(id objc.ID) *ReferenceNode {
 	if id == 0 {
 		return nil
 	}
-	x := &ReferenceNode{Handle: objref.Wrap(purego.Retain(id))}
+	x := &ReferenceNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,244 +42,190 @@ func referenceNodeAdopt(id objc.ID) *ReferenceNode {
 	if id == 0 {
 		return nil
 	}
-	x := &ReferenceNode{Handle: objref.Wrap(id)}
+	x := &ReferenceNode{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
 
-// Description returns the object's -description text.
-func (x *ReferenceNode) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ReferenceNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ReferenceNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
-}
-
-// Initializes a reference node from a URL.
-//
-// NewReferenceNodeWithURL creates a new ReferenceNode.
+// NewReferenceNodeWithURL initializes a reference node from a URL.
 func NewReferenceNodeWithURL(url string) *ReferenceNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKReferenceNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
 	return referenceNodeAdopt(_id)
 }
 
-// Initializes a reference node from a file in the app’s main bundle.
-//
-// NewReferenceNodeWithFileNamed creates a new ReferenceNode.
+// NewReferenceNodeWithFileNamed initializes a reference node from a file in the app’s main bundle.
 func NewReferenceNodeWithFileNamed(fileName string) *ReferenceNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKReferenceNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileNamed:"), purego.NSString(fileName))
 	return referenceNodeAdopt(_id)
 }
 
-// A method that initializes a reference node from an archive.
-//
-// NewReferenceNodeWithCoder creates a new ReferenceNode.
+// NewReferenceNodeWithCoder a method that initializes a reference node from an archive.
 func NewReferenceNodeWithCoder(aDecoder obj.Object) *ReferenceNode {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKReferenceNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return referenceNodeAdopt(_id)
 }
 
-// The height of the node relative to its parent.
-//
-// WithZPosition sets zPosition and returns the receiver so calls can be chained.
+// WithPosition the position of the node in its parent’s coordinate system.
+func (x *ReferenceNode) WithPosition(position corefoundation.CGPoint) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
+	return x
+}
+
+// WithZPosition the height of the node relative to its parent.
 func (x *ReferenceNode) WithZPosition(zPosition float64) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
 	return x
 }
 
-// The Euler rotation about the z axis (in radians).
-//
-// WithZRotation sets zRotation and returns the receiver so calls can be chained.
+// WithZRotation the Euler rotation about the z axis (in radians).
 func (x *ReferenceNode) WithZRotation(zRotation float64) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
 	return x
 }
 
-// A scaling factor that multiplies the width of a node and its children.
-//
-// WithXScale sets xScale and returns the receiver so calls can be chained.
+// WithXScale a scaling factor that multiplies the width of a node and its children.
 func (x *ReferenceNode) WithXScale(xScale float64) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
 	return x
 }
 
-// A scaling factor that multiplies the height of a node and its children.
-//
-// WithYScale sets yScale and returns the receiver so calls can be chained.
+// WithYScale a scaling factor that multiplies the height of a node and its children.
 func (x *ReferenceNode) WithYScale(yScale float64) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
 	return x
 }
 
-// A speed modifier applied to all actions executed by a node and its descendants.
-//
-// WithSpeed sets speed and returns the receiver so calls can be chained.
+// WithSpeed a speed modifier applied to all actions executed by a node and its descendants.
 func (x *ReferenceNode) WithSpeed(speed float64) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
-// The transparency value applied to the node’s contents.
-//
-// WithAlpha sets alpha and returns the receiver so calls can be chained.
+// WithAlpha the transparency value applied to the node’s contents.
 func (x *ReferenceNode) WithAlpha(alpha float64) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// A Boolean value that determines whether actions on the node and its descendants are processed.
-//
-// WithPaused sets paused and returns the receiver so calls can be chained.
+// WithPaused a Boolean value that determines whether actions on the node and its descendants are processed.
 func (x *ReferenceNode) WithPaused(paused bool) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
-// A Boolean value that determines whether a node and its descendants are rendered.
-//
-// WithHidden sets hidden and returns the receiver so calls can be chained.
+// WithHidden a Boolean value that determines whether a node and its descendants are rendered.
 func (x *ReferenceNode) WithHidden(hidden bool) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// A Boolean value that indicates whether the node receives touch events.
-//
-// WithUserInteractionEnabled sets userInteractionEnabled and returns the receiver so calls can be chained.
+// WithUserInteractionEnabled a Boolean value that indicates whether the node receives touch events.
 func (x *ReferenceNode) WithUserInteractionEnabled(userInteractionEnabled bool) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
 	return x
 }
 
-// The node’s assignable name.
-//
-// WithName sets name and returns the receiver so calls can be chained.
+// WithName the node’s assignable name.
 func (x *ReferenceNode) WithName(name string) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The physics body associated with the node.
-//
-// WithPhysicsBody sets physicsBody and returns the receiver so calls can be chained.
+// WithPhysicsBody the physics body associated with the node.
 func (x *ReferenceNode) WithPhysicsBody(physicsBody *PhysicsBody) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	return x
 }
 
-// A dictionary containing arbitrary data.
-//
-// WithUserData sets userData and returns the receiver so calls can be chained.
+// WithUserData a dictionary containing arbitrary data.
 func (x *ReferenceNode) WithUserData(userData obj.Object) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	return x
 }
 
-// The reach constraints to apply to the node when executing a reach action.
-//
-// WithReachConstraints sets reachConstraints and returns the receiver so calls can be chained.
+// WithReachConstraints the reach constraints to apply to the node when executing a reach action.
 func (x *ReferenceNode) WithReachConstraints(reachConstraints *ReachConstraints) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	return x
 }
 
-// A list of constraints to apply to the node.
-//
-// WithConstraints sets the collection and returns the receiver so calls can be chained.
+// WithConstraints a list of constraints to apply to the node.
 func (x *ReferenceNode) WithConstraints(items ...*Constraint) *ReferenceNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
-// The values of each attribute associated with the node’s attached shader.
-//
-// WithAttributeValues sets attributeValues and returns the receiver so calls can be chained.
+// WithAttributeValues the values of each attribute associated with the node’s attached shader.
 func (x *ReferenceNode) WithAttributeValues(attributeValues obj.Object) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
-//
-// WithAccessibilityElement sets accessibilityElement and returns the receiver so calls can be chained.
+// WithAccessibilityElement a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (x *ReferenceNode) WithAccessibilityElement(accessibilityElement bool) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
 	return x
 }
 
-// A string value describing the user interface element type; for example, a button.
-//
-// WithAccessibilityRole sets accessibilityRole and returns the receiver so calls can be chained.
+// WithAccessibilityRole a string value describing the user interface element type; for example, a button.
 func (x *ReferenceNode) WithAccessibilityRole(accessibilityRole string) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
 	return x
 }
 
-// A string value describing the user interface element name and type; for example, the Buy button.
-//
-// WithAccessibilityRoleDescription sets accessibilityRoleDescription and returns the receiver so calls can be chained.
+// WithAccessibilityRoleDescription a string value describing the user interface element name and type; for example, the Buy button.
 func (x *ReferenceNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
 	return x
 }
 
-// A string that defines this user interface element’s subrole; for example, a full-screen button.
-//
-// WithAccessibilitySubrole sets accessibilitySubrole and returns the receiver so calls can be chained.
+// WithAccessibilitySubrole a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (x *ReferenceNode) WithAccessibilitySubrole(accessibilitySubrole string) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
 	return x
 }
 
-// The user interface element that contains this element.
-//
-// WithAccessibilityParent sets accessibilityParent and returns the receiver so calls can be chained.
+// WithAccessibilityFrame the size of this user interface element, in screen points.
+func (x *ReferenceNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	return x
+}
+
+// WithAccessibilityParent the user interface element that contains this element.
 func (x *ReferenceNode) WithAccessibilityParent(accessibilityParent obj.Object) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	return x
 }
 
-// The help description of this user interface element; for example, the text shown in a tooltip.
-//
-// WithAccessibilityHelp sets accessibilityHelp and returns the receiver so calls can be chained.
+// WithAccessibilityHelp the help description of this user interface element; for example, the text shown in a tooltip.
 func (x *ReferenceNode) WithAccessibilityHelp(accessibilityHelp string) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
 	return x
 }
 
-// A short description of this user interface element.
-//
-// WithAccessibilityLabel sets accessibilityLabel and returns the receiver so calls can be chained.
+// WithAccessibilityLabel a short description of this user interface element.
 func (x *ReferenceNode) WithAccessibilityLabel(accessibilityLabel string) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
-//
-// WithAccessibilityEnabled sets accessibilityEnabled and returns the receiver so calls can be chained.
+// WithAccessibilityEnabled a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (x *ReferenceNode) WithAccessibilityEnabled(accessibilityEnabled bool) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
 	return x
 }
 
-// A method called by SpriteKit after the reference node’s contents are loaded.
+// DidLoadReferenceNode a method called by SpriteKit after the reference node’s contents are loaded.
 func (x *ReferenceNode) DidLoadReferenceNode(node *Node) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didLoadReferenceNode:"), objref.IDOf(node))
 }
 
-// Loads the reference node’s content and adds it as a new child node.
+// ResolveReferenceNode loads the reference node’s content and adds it as a new child node.
 func (x *ReferenceNode) ResolveReferenceNode() {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resolveReferenceNode"))
 }
@@ -283,6 +233,7 @@ func (x *ReferenceNode) ResolveReferenceNode() {
 // ReferenceNodeable is the interface implemented by [ReferenceNode], for mocking and DI.
 type ReferenceNodeable interface {
 	obj.Object
+	WithPosition(position corefoundation.CGPoint) *ReferenceNode
 	WithZPosition(zPosition float64) *ReferenceNode
 	WithZRotation(zRotation float64) *ReferenceNode
 	WithXScale(xScale float64) *ReferenceNode
@@ -302,6 +253,7 @@ type ReferenceNodeable interface {
 	WithAccessibilityRole(accessibilityRole string) *ReferenceNode
 	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *ReferenceNode
 	WithAccessibilitySubrole(accessibilitySubrole string) *ReferenceNode
+	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *ReferenceNode
 	WithAccessibilityParent(accessibilityParent obj.Object) *ReferenceNode
 	WithAccessibilityHelp(accessibilityHelp string) *ReferenceNode
 	WithAccessibilityLabel(accessibilityLabel string) *ReferenceNode
@@ -311,3 +263,5 @@ type ReferenceNodeable interface {
 }
 
 var _ ReferenceNodeable = (*ReferenceNode)(nil)
+
+var _ NodeProvider = (*ReferenceNode)(nil)

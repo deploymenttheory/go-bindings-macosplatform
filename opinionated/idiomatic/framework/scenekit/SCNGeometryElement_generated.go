@@ -6,15 +6,16 @@ package scenekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container for index data describing how vertices connect to define a three-dimensional object, or geometry.
-//
 // GeometryElement is an idiomatic wrapper over the Objective-C class SCNGeometryElement.
+//
+// A container for index data describing how vertices connect to define a three-dimensional object, or geometry.
 type GeometryElement struct {
 	objref.Handle
 }
@@ -25,7 +26,8 @@ func GeometryElementFromID(id objc.ID) *GeometryElement {
 	if id == 0 {
 		return nil
 	}
-	x := &GeometryElement{Handle: objref.Wrap(purego.Retain(id))}
+	x := &GeometryElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +40,8 @@ func geometryElementAdopt(id objc.ID) *GeometryElement {
 	if id == 0 {
 		return nil
 	}
-	x := &GeometryElement{Handle: objref.Wrap(id)}
+	x := &GeometryElement{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,98 +61,118 @@ func (x *GeometryElement) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GeometryElement) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
 // NewGeometryElement creates a new GeometryElement.
 func NewGeometryElement() *GeometryElement {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCNGeometryElement")), objc.RegisterName("new"))
 	return geometryElementAdopt(_id)
 }
 
-// The width of each point in the geometry element, as measured in the geometry’s local 3D coordinate space.
-//
-// WithPointSize sets pointSize and returns the receiver so calls can be chained.
+// WithPrimitiveRange the range of primitives from the geometry element to render.
+func (x *GeometryElement) WithPrimitiveRange(primitiveRange foundation.NSRange) *GeometryElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveRange:"), primitiveRange)
+	return x
+}
+
+// WithPointSize the width of each point in the geometry element, as measured in the geometry’s local 3D coordinate space.
 func (x *GeometryElement) WithPointSize(pointSize float64) *GeometryElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointSize:"), pointSize)
 	return x
 }
 
-// The smallest radius, measured in screen points, at which to render any point in the geometry element.
-//
-// WithMinimumPointScreenSpaceRadius sets minimumPointScreenSpaceRadius and returns the receiver so calls can be chained.
+// WithMinimumPointScreenSpaceRadius the smallest radius, measured in screen points, at which to render any point in the geometry element.
 func (x *GeometryElement) WithMinimumPointScreenSpaceRadius(minimumPointScreenSpaceRadius float64) *GeometryElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumPointScreenSpaceRadius:"), minimumPointScreenSpaceRadius)
 	return x
 }
 
-// The largest radius, measured in screen points, at which to render any point in the geometry element.
-//
-// WithMaximumPointScreenSpaceRadius sets maximumPointScreenSpaceRadius and returns the receiver so calls can be chained.
+// WithMaximumPointScreenSpaceRadius the largest radius, measured in screen points, at which to render any point in the geometry element.
 func (x *GeometryElement) WithMaximumPointScreenSpaceRadius(maximumPointScreenSpaceRadius float64) *GeometryElement {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumPointScreenSpaceRadius:"), maximumPointScreenSpaceRadius)
 	return x
 }
 
-// The data for the geometry element
+// Data the data for the geometry element
 func (x *GeometryElement) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// The type of the geometry element. Possible values are listed in the SCNGeometryPrimitiveType enumeration.
+// PrimitiveType the type of the geometry element. Possible values are listed in the SCNGeometryPrimitiveType enumeration.
 func (x *GeometryElement) PrimitiveType() GeometryPrimitiveType {
 	_r := objc.Send[GeometryPrimitiveType](objref.IDOf(x), objc.RegisterName("primitiveType"))
 	return _r
 }
 
-// The number of primitives in the data.
+// PrimitiveCount the number of primitives in the data.
 func (x *GeometryElement) PrimitiveCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("primitiveCount"))
 	return _r
 }
 
-// Determines whether the channels are interleaved.
+// HasInterleavedIndicesChannels determines whether the channels are interleaved.
 func (x *GeometryElement) HasInterleavedIndicesChannels() bool {
 	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasInterleavedIndicesChannels"))
 	return _r
 }
 
-// The number of channels in the geometry element.
+// IndicesChannelCount the number of channels in the geometry element.
 func (x *GeometryElement) IndicesChannelCount() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indicesChannelCount"))
 	return _r
 }
 
-// The number of bytes that represent an index value
+// BytesPerIndex the number of bytes that represent an index value
 func (x *GeometryElement) BytesPerIndex() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bytesPerIndex"))
 	return _r
 }
 
-// Specifies the size of the point in local space. Defaults to 1
+// PrimitiveRange specifies the subrange of primitives to render within NSMakeRange(0, primitiveCount). Defaults to NSMakeRange(NSNotFound, 0). When the location of the range is set to NSNotFound, the entire geometry element is rendered.
+func (x *GeometryElement) PrimitiveRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("primitiveRange"))
+	return _r
+}
+
+// SetPrimitiveRange wraps the corresponding Objective-C method.
+func (x *GeometryElement) SetPrimitiveRange(primitiveRange foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveRange:"), primitiveRange)
+}
+
+// PointSize specifies the size of the point in local space. Defaults to 1
 func (x *GeometryElement) PointSize() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("pointSize"))
 	return _r
 }
 
+// SetPointSize wraps the corresponding Objective-C method.
 func (x *GeometryElement) SetPointSize(pointSize float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointSize:"), pointSize)
 }
 
-// Specifies the minimum size in screen-space (in pixel). Defaults to 1
+// MinimumPointScreenSpaceRadius specifies the minimum size in screen-space (in pixel). Defaults to 1
 func (x *GeometryElement) MinimumPointScreenSpaceRadius() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumPointScreenSpaceRadius"))
 	return _r
 }
 
+// SetMinimumPointScreenSpaceRadius wraps the corresponding Objective-C method.
 func (x *GeometryElement) SetMinimumPointScreenSpaceRadius(minimumPointScreenSpaceRadius float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumPointScreenSpaceRadius:"), minimumPointScreenSpaceRadius)
 }
 
-// Specifies the maximum size in screen-space (in pixel). Defaults to 1
+// MaximumPointScreenSpaceRadius specifies the maximum size in screen-space (in pixel). Defaults to 1
 func (x *GeometryElement) MaximumPointScreenSpaceRadius() float64 {
 	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumPointScreenSpaceRadius"))
 	return _r
 }
 
+// SetMaximumPointScreenSpaceRadius wraps the corresponding Objective-C method.
 func (x *GeometryElement) SetMaximumPointScreenSpaceRadius(maximumPointScreenSpaceRadius float64) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumPointScreenSpaceRadius:"), maximumPointScreenSpaceRadius)
 }
@@ -157,6 +180,7 @@ func (x *GeometryElement) SetMaximumPointScreenSpaceRadius(maximumPointScreenSpa
 // GeometryElementable is the interface implemented by [GeometryElement], for mocking and DI.
 type GeometryElementable interface {
 	obj.Object
+	WithPrimitiveRange(primitiveRange foundation.NSRange) *GeometryElement
 	WithPointSize(pointSize float64) *GeometryElement
 	WithMinimumPointScreenSpaceRadius(minimumPointScreenSpaceRadius float64) *GeometryElement
 	WithMaximumPointScreenSpaceRadius(maximumPointScreenSpaceRadius float64) *GeometryElement
@@ -166,6 +190,8 @@ type GeometryElementable interface {
 	HasInterleavedIndicesChannels() bool
 	IndicesChannelCount() int
 	BytesPerIndex() int
+	PrimitiveRange() foundation.NSRange
+	SetPrimitiveRange(primitiveRange foundation.NSRange)
 	PointSize() float64
 	SetPointSize(pointSize float64)
 	MinimumPointScreenSpaceRadius() float64

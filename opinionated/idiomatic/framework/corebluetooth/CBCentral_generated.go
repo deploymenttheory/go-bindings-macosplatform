@@ -8,15 +8,16 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A remote device connected to a local app, which is acting as a peripheral.
-//
 // Central is an idiomatic wrapper over the Objective-C class CBCentral.
+//
+// It embeds [Peer], promoting that type's methods.
+//
+// A remote device connected to a local app, which is acting as a peripheral.
 type Central struct {
-	objref.Handle
+	Peer
 }
 
 // CentralFromID adopts an existing Objective-C object as a Central
@@ -25,7 +26,8 @@ func CentralFromID(id objc.ID) *Central {
 	if id == 0 {
 		return nil
 	}
-	x := &Central{Handle: objref.Wrap(purego.Retain(id))}
+	x := &Central{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,24 +40,10 @@ func centralAdopt(id objc.ID) *Central {
 	if id == 0 {
 		return nil
 	}
-	x := &Central{Handle: objref.Wrap(id)}
+	x := &Central{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
-}
-
-// Description returns the object's -description text.
-func (x *Central) Description() string {
-	return rt.Description(objref.IDOf(x))
-}
-
-// IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Central) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
-}
-
-// IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Central) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // NewCentral creates a new Central.
@@ -64,6 +52,7 @@ func NewCentral() *Central {
 	return centralAdopt(_id)
 }
 
+// MaximumUpdateValueLength wraps the corresponding Objective-C method.
 func (x *Central) MaximumUpdateValueLength() int {
 	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumUpdateValueLength"))
 	return _r
@@ -76,3 +65,5 @@ type Centralable interface {
 }
 
 var _ Centralable = (*Central)(nil)
+
+var _ PeerProvider = (*Central)(nil)

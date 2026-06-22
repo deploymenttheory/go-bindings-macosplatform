@@ -12,9 +12,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A named parameter with a value that the app can change over time.
-//
 // MetaParameter is an idiomatic wrapper over the Objective-C class PHASEMetaParameter.
+//
+// MetaParameter is an abstract base — you do not construct it directly. Construct one of [NumberMetaParameter], [StringMetaParameter] and pass it where a MetaParameter is accepted.
+//
+// A named parameter with a value that the app can change over time.
 type MetaParameter struct {
 	objref.Handle
 }
@@ -25,7 +27,8 @@ func MetaParameterFromID(id objc.ID) *MetaParameter {
 	if id == 0 {
 		return nil
 	}
-	x := &MetaParameter{Handle: objref.Wrap(purego.Retain(id))}
+	x := &MetaParameter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
 	objref.Track(x)
 	return x
 }
@@ -38,7 +41,8 @@ func metaParameterAdopt(id objc.ID) *MetaParameter {
 	if id == 0 {
 		return nil
 	}
-	x := &MetaParameter{Handle: objref.Wrap(id)}
+	x := &MetaParameter{}
+	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
 }
@@ -58,21 +62,19 @@ func (x *MetaParameter) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// NewMetaParameter creates a new MetaParameter.
-func NewMetaParameter() *MetaParameter {
-	_id := objc.Send[objc.ID](objc.ID(_class("PHASEMetaParameter")), objc.RegisterName("new"))
-	return metaParameterAdopt(_id)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetaParameter) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// A value for the metaparameter.
-//
-// WithValue sets value and returns the receiver so calls can be chained.
+// WithValue a value for the metaparameter.
 func (x *MetaParameter) WithValue(value obj.Object) *MetaParameter {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return x
 }
 
-// The identifier that uniquely represents this metaparameter.
+// Identifier the identifier that uniquely represents this metaparameter.
 func (x *MetaParameter) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -81,12 +83,13 @@ func (x *MetaParameter) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// The value of this metaparameter
+// Value the value of this metaparameter
 func (x *MetaParameter) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
+// SetValue wraps the corresponding Objective-C method.
 func (x *MetaParameter) SetValue(value obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 }
@@ -101,3 +104,10 @@ type MetaParameterable interface {
 }
 
 var _ MetaParameterable = (*MetaParameter)(nil)
+
+// isMetaParameter marks MetaParameter — and, by embedding promotion, its
+// subclasses — as a member of the MetaParameter hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MetaParameter) isMetaParameter() {}
+
+var _ MetaParameterProvider = (*MetaParameter)(nil)
